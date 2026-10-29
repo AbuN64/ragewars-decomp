@@ -4,12 +4,12 @@
 #include "COMMON/LEVEL_TRACK.H"
 #include "COMMON/LEVEL_PLACEMENT.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
-#include "COMMON/SHAREDRECAT1B92C.H"
+#include "COMMON/SCENE_RESOURCE_STATE.H"
 #include "COMMON/LEVEL_INPUT.H"
 typedef struct LevelNode {
     s32 size;
     s32 count;
-    InputRecAt27 records[1];
+    LevelPlacedActorRecord records[1];
 } LevelNode;
-extern SharedPlayer *D_80140F84;
+extern SharedPlayer *g_gamePlayerAndMenuState;
 #endif

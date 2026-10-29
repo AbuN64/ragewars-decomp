@@ -1,6 +1,6 @@
 #include "COMMON/SCREEN.H"
 #include "include_asm.h"
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -10,14 +10,14 @@
 #include "FRONTEND/FRONTEND_HANDLETABOPTIONSSHORTCUT.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
-/* Releases the object D_800E4514 holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears
-   D_800E4514 and returns zero. */
+/* Releases the object g_gameOptionsScreenState holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears
+   g_gameOptionsScreenState and returns zero. */
 
 
 
 extern void Tsmos_ActivateControllerState(void);
 
-/* Sets the word at offset 0xC of the object D_800E4514 points to and calls Tsmos_ActivateControllerState, once:
+/* Sets the word at offset 0xC of the object g_gameOptionsScreenState points to and calls Tsmos_ActivateControllerState, once:
    nothing happens when the word is already set. Returns zero. */
 
 
@@ -37,20 +37,20 @@ extern void Menu_ReturnToPreviousScreen(void);
 
 typedef s32 (*Handler80423930)(void *, s32, s32, s32, s32);
 
-extern FieldRow D_800E4564[];
+extern FieldRow g_compactOptionsEventKinds[];
 
-extern FieldRow D_800E4568[];
+extern FieldRow g_compactOptionsActorKinds[];
 
-extern Handler80423930 D_800E456C;
+extern Handler80423930 g_compactOptionsEventHandlers;
 
-/* Releases the object D_800E4518 holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears D_800E4518, calls
+/* Releases the object g_optionsShortcutScreen holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears g_optionsShortcutScreen, calls
    func_80245B28_de and returns zero. */
 
 
 extern void Cinema_ReleaseSequenceContext(void);
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
-   FIRST_MESSAGE (0x377 to 0x380 on us) through jtbl_800E1668: one reopens screen D_800E4518 (marking it shown with timer -1 and
+   FIRST_MESSAGE (0x377 to 0x380 on us) through jtbl_800E1668: one reopens screen g_optionsShortcutScreen (marking it shown with timer -1 and
    refreshing its two windows at 0x44 and 0x4C) and calls func_80245B28_de; one tries ScenarioSetup_StartRandomCupStage
    and on failure sets the screen's modes 5 and 4 with timer 20, else reopens it with timer 0; the
    others pass codes 0x17, 13, 12 and 14 to Random_SetMenuChoiceResult. Any handled message then runs
@@ -61,9 +61,9 @@ extern void Cinema_ReleaseSequenceContext(void);
 
 extern void Tsmos_DeactivateControllerState(void);
 
-/* The message screen D_800E4514; its word at 0xC marks the message handled. */
-extern struct func_80205628_S3 *D_800E4514;
-extern struct MessageScreen *D_800E4518;
+/* The message screen g_gameOptionsScreenState; its word at 0xC marks the message handled. */
+extern struct CompactOptionsPageView *g_gameOptionsScreenState;
+extern struct MessageScreen *g_optionsShortcutScreen;
 extern void Frontend_StartMenuImageTransition(struct MessageScreen *);
 
 extern void Widget_SetWidgetFlag08(void *object, int enabled);
@@ -72,25 +72,25 @@ extern void Cinema_ReleaseSequenceContext(void);
 
 extern s32 ScenarioSetup_StartRandomCupStage(void);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E45AC, an actor kind at D_800E45B0 and a handler at D_800E45B4: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_tabOptionsEventKinds, an actor kind at g_tabOptionsActorKinds and a handler at g_tabOptionsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler80423B88)(void *, s32, s32, s32, s32);
 
-extern FieldRow D_800E45AC[];
+extern FieldRow g_tabOptionsEventKinds[];
 
-extern FieldRow D_800E45B0[];
+extern FieldRow g_tabOptionsActorKinds[];
 
-extern Handler80423B88 D_800E45B4;
+extern Handler80423B88 g_tabOptionsEventHandlers;
 
 s32 Frontend_DestroyCompactOptionsPage(void) {
-    Cache_FreeMemory(D_800E4514);
+    Cache_FreeMemory(g_gameOptionsScreenState);
     Tsmos_ActivateControllerState();
-    D_800E4514 = 0;
+    g_gameOptionsScreenState = 0;
     return 0;
 }
 
 s32 Frontend_ActivateCompactOptionsPage(void) {
-    struct func_80205628_S3 *state = D_800E4514;
+    struct CompactOptionsPageView *state = g_gameOptionsScreenState;
 
     if (state->unkC == 0) {
         state->unkC = 1;
@@ -159,25 +159,25 @@ s32 Frontend_CloseCompactOptionsPage(void) {
     return 0;
 }
 
-s32 Frontend_DispatchCompactOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchCompactOptionsEvent(void *menuActor, s32 eventKind, s32 eventDataOne, s32 eventDataTwo, s32 eventDataThree) {
     Handler80423930 *entry;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E456C != 0) {
+    if (g_compactOptionsEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E456C;
+        entry = &g_compactOptionsEventHandlers;
         index = 0;
         do {
-            if (D_800E4564[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E4568[index].value;
+            if (g_compactOptionsEventKinds[index].value == eventKind) {
+                actor = menuActor;
+                actor_kind = actor->input;
+                table_kind = g_compactOptionsActorKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(menuActor, eventKind, eventDataOne, eventDataTwo, eventDataThree);
                 }
             }
             entry += 3;
@@ -188,9 +188,9 @@ s32 Frontend_DispatchCompactOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg
 }
 
 s32 Frontend_DestroyTabOptionsPage(void) {
-    Cache_FreeMemory(D_800E4518);
+    Cache_FreeMemory(g_optionsShortcutScreen);
     Tsmos_ActivateControllerState();
-    D_800E4518 = 0;
+    g_optionsShortcutScreen = 0;
     Cinema_ReleaseSequenceContext();
     return 0;
 }
@@ -242,11 +242,11 @@ s32 Frontend_HandleTabOptionsShortcut(void) {
         }
 reopen:
     Tsmos_DeactivateControllerState();
-    Frontend_StartMenuImageTransition(D_800E4518);
-    D_800E4518->shown = 1;
-    D_800E4518->timer = -1;
-    Widget_SetWidgetFlag08(D_800E4518->window, 1);
-    Widget_SetWidgetFlag08(D_800E4518->second_window, 1);
+    Frontend_StartMenuImageTransition(g_optionsShortcutScreen);
+    g_optionsShortcutScreen->shown = 1;
+    g_optionsShortcutScreen->timer = -1;
+    Widget_SetWidgetFlag08(g_optionsShortcutScreen->window, 1);
+    Widget_SetWidgetFlag08(g_optionsShortcutScreen->second_window, 1);
     Cinema_ReleaseSequenceContext();
     goto done;
 code_17:
@@ -255,13 +255,13 @@ code_17:
 retry:
     Tsmos_DeactivateControllerState();
     if (ScenarioSetup_StartRandomCupStage() == 0) {
-        D_800E4518->mode = 5;
-        D_800E4518->next_mode = 4;
-        D_800E4518->timer = 20;
+        g_optionsShortcutScreen->mode = 5;
+        g_optionsShortcutScreen->next_mode = 4;
+        g_optionsShortcutScreen->timer = 20;
     } else {
-        Frontend_StartMenuImageTransition(D_800E4518);
-        D_800E4518->shown = 1;
-        D_800E4518->timer = 0;
+        Frontend_StartMenuImageTransition(g_optionsShortcutScreen);
+        g_optionsShortcutScreen->shown = 1;
+        g_optionsShortcutScreen->timer = 0;
     }
     goto done;
 code_13:
@@ -287,25 +287,25 @@ s32 Frontend_ConsumeTabOptionsEvent(void) {
     return 0;
 }
 
-s32 Frontend_DispatchTabOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchTabOptionsEvent(void *menuActor, s32 eventKind, s32 eventDataOne, s32 eventDataTwo, s32 eventDataThree) {
     Handler80423B88 *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E45B4 != 0) {
+    if (g_tabOptionsEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E45B4;
+        entry = &g_tabOptionsEventHandlers;
         index = 0;
         do {
-            if (D_800E45AC[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E45B0[index].value;
+            if (g_tabOptionsEventKinds[index].value == eventKind) {
+                actor = menuActor;
+                actor_kind = actor->input;
+                table_kind = g_tabOptionsActorKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(menuActor, eventKind, eventDataOne, eventDataTwo, eventDataThree);
                 }
             }
             entry += 3;
@@ -316,7 +316,7 @@ s32 Frontend_DispatchTabOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s
 }
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DD658[2] = {
+unsigned int k_FrontendHandletaboptionsshortcutEncodedWords[2] = {
     0x00424034, 0x0042405C,
 };
 #endif

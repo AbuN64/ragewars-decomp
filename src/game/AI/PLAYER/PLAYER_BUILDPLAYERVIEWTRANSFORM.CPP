@@ -1,11 +1,11 @@
 #include "include_asm.h"
 #include "COMMON/OBJ.H"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/GROUP.H"
-#include "COMMON/S1_6.H"
+#include "COMMON/RESERVED_SHARED_DECLARATIONS.H"
 #include "TYPES.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "FRONTEND/FRONTEND_OPENGAMEPLAYFRONTEND.H"
@@ -15,7 +15,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/S2.H"
-#include "COMMON/SHAPE_TYPEMAP_14.H"
+#include "COMMON/PLAYER_ACTION_AND_POSE_VIEWS.H"
 
 /* 800C7C6C.CPP */
 
@@ -42,30 +42,30 @@ void Player_AllocPlayerList(PlayerList *list, int count) {
     }
 }
 
-/* Updates every player in a world for one frame unless the game state D_8014687C is 8 or 11: turns
+/* Updates every player in a world for one frame unless the game state g_gameplayRoundState is 8 or 11: turns
    the world's spin at 0x40 by 5 degrees, then for each player in the list from 0x20 runs its body
-   through ContPad_BuildControllerState (restoring the frame time D_800D2988 it may change), its team logic through
-   func_8022C490_de when either team rule is set, its controls through func_80220ED4_de unless input is
-   frozen by D_80146894, and its camera through func_80220A80_de; a second pass opens the pause menu
+   through ContPad_BuildControllerState (restoring the frame time g_frameElapsedTime it may change), its team logic through
+   Playerai_BuildEyeMarkerTransform when either team rule is set, its controls through Player_UpdateBodyMovementAndActions unless input is
+   frozen by g_simpleObjectPauseState, and its camera through func_80220A80_de; a second pass opens the pause menu
    through Cinema_RequestSequenceFade for a paused player or one whose controller at 0x698 asks while a menu is
    possible, or otherwise starts the in-game menu for a live player with a view not already showing
-   one (unless the match forbids it), before the match end check func_802283B8_de and the world updates
+   one (unless the match forbids it), before the match end check Playerai_UpdateRoundLimits and the world updates
    Player_UpdateFragTagSelection and Player_ReleaseWaitingPlayer run and the frame time is restored. */
 
-extern f32 D_800D2988;
-extern MenuWeaponsUpdateWorldPlayers D_8014561C;
-extern Game D_8014687C;
-extern void func_8022C490_de(SharedPlayer *);
-extern void func_80220ED4_de(SharedPlayer *);
+extern f32 g_frameElapsedTime;
+extern MenuWeaponsUpdateWorldPlayers g_matchEndingTeamWheelClose;
+extern Game g_gameplayRoundState;
+extern void Playerai_BuildEyeMarkerTransform(SharedPlayer *);
+extern void Player_UpdateBodyMovementAndActions(SharedPlayer *);
 extern void Player_UpdatePlayerCamera(SharedPlayer *, SharedPlayer *);
 
 extern s32 Control_IsStartPressed(Shared_Effect *);
 
 extern s32 Tsmos_IsFrontendActive(void);
 extern s32 Menu_CountLiveNodes(MenuWeaponsUpdateWorldPlayers *);
-extern void func_80218464_de(char *);
+extern void TeamSelect_EmptyWeaponWheelHook(char *);
 
-extern void func_802283B8_de(WorldWeaponsUpdateWorldPlayers *);
+extern void Playerai_UpdateRoundLimits(WorldWeaponsUpdateWorldPlayers *);
 extern void Player_UpdateFragTagSelection(WorldWeaponsUpdateWorldPlayers *);
 extern void Player_ReleaseWaitingPlayer(WorldWeaponsUpdateWorldPlayers *);
 
@@ -74,21 +74,21 @@ void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
     SharedPlayer *player;
     Rules *rules;
 
-    if (D_8014687C.state != 0xB && D_8014687C.state != 8) {
-        frameTime = D_800D2988;
+    if (g_gameplayRoundState.state != 0xB && g_gameplayRoundState.state != 8) {
+        frameTime = g_frameElapsedTime;
         world->spin += 5;
         if (world->spin >= 360) {
             world->spin = 0;
         }
-        rules = &D_8014687C.rules;
+        rules = &g_gameplayRoundState.rules;
         for (player = world->players; player != 0; player = player->views16E0.view16E0_2.next) {
             ContPad_BuildControllerState((struct ControllerInput *)player->views5E8.view688_33.body, (Player *)player);
-            D_800D2988 = frameTime;
+            g_frameElapsedTime = frameTime;
             if (rules->teams != 0 || rules->teamRule != 0) {
-                func_8022C490_de(player);
+                Playerai_BuildEyeMarkerTransform(player);
             }
-            if (D_8011FAC0.clockPaused == 0) {
-                func_80220ED4_de(player);
+            if (g_gameSession.clockPaused == 0) {
+                Player_UpdateBodyMovementAndActions(player);
             }
             Player_UpdatePlayerCamera(player, player);
         }
@@ -98,23 +98,23 @@ void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
             } else if (Control_IsStartPressed(player->views5E8.view698_36.controller) != 0) {
                 if (Cinema_IsSequenceActive() != 0 || Cinema_HasSequenceResource() != 0) {
                     Cinema_RequestSequenceFade();
-                } else if (Tsmos_IsFrontendActive() == 0 && Menu_CountLiveNodes(&D_8014561C) == 0 && player->views5E4.view5E4_3.alive != 0
+                } else if (Tsmos_IsFrontendActive() == 0 && Menu_CountLiveNodes(&g_matchEndingTeamWheelClose) == 0 && player->views5E4.view5E4_3.alive != 0
                            && player->views5DC.view5DC_2.view != 0 && player->views5DC.view5DC_2.view->unk564 == 0
-                           && ((&D_8014561C.rules)->locked == 0 || D_8014561C.allowed == 0)) {
-                    D_8014561C.open = 1;
+                           && ((&g_matchEndingTeamWheelClose.rules)->locked == 0 || g_matchEndingTeamWheelClose.allowed == 0)) {
+                    g_matchEndingTeamWheelClose.open = 1;
                     SoundElement_EnableMusicGainOverride();
                     SoundElement_DisablePeriodicSound();
-                    func_80218464_de(player->views5E8.view938_130.strokes);
+                    TeamSelect_EmptyWeaponWheelHook(player->views5E8.view938_130.strokes);
                     player->views5E8.viewF54_132.selection = -1;
                     player->views5E8.viewF90_134.choice = -1;
                     Frontend_OpenGameplayFrontend();
                 }
             }
         }
-        func_802283B8_de(world);
+        Playerai_UpdateRoundLimits(world);
         Player_UpdateFragTagSelection(world);
         Player_ReleaseWaitingPlayer(world);
-        D_800D2988 = frameTime;
+        g_frameElapsedTime = frameTime;
     }
 }
 
@@ -137,21 +137,21 @@ void Player_BuildPlayerOrientation(Player *player, CQuatern *output)
     scale = 0.5f;
     rollAngle = roll * scale;
     orientation = player->orientation;
-    D_80115DEC = Gu_Sinf(rollAngle);
+    g_turretAimSine = Gu_Sinf(rollAngle);
     rollRotation.x = 0.0f;
     rollRotation.y = 0.0f;
-    rollRotation.z = D_80115DEC;
+    rollRotation.z = g_turretAimSine;
     rollRotation.w = Math_Cosf(rollAngle);
     pitchAngle = pitch * scale;
-    D_80115DEC = Gu_Sinf(pitchAngle);
-    pitchRotation.x = D_80115DEC;
+    g_turretAimSine = Gu_Sinf(pitchAngle);
+    pitchRotation.x = g_turretAimSine;
     pitchRotation.y = 0.0f;
     pitchRotation.z = 0.0f;
     pitchRotation.w = Math_Cosf(pitchAngle);
     yawAngle = (heading + yaw) * scale;
-    D_80115DEC = Gu_Sinf(yawAngle);
+    g_turretAimSine = Gu_Sinf(yawAngle);
     yawRotation.x = 0.0f;
-    yawRotation.y = D_80115DEC;
+    yawRotation.y = g_turretAimSine;
     yawRotation.z = 0.0f;
     yawRotation.w = Math_Cosf(yawAngle);
     MultiplyQuaternions(&pitchYaw, &pitchRotation, &yawRotation);
@@ -195,21 +195,21 @@ void Player_BuildPlayerViewTransform(Player *player, f32 out[4][4])
     scale = 0.5f;
     rollAngle = roll * scale;
     orientation = player->orientation;
-    D_80115DEC = Gu_Sinf(rollAngle);
+    g_turretAimSine = Gu_Sinf(rollAngle);
     rollRotation.x = 0.0f;
     rollRotation.y = 0.0f;
-    rollRotation.z = D_80115DEC;
+    rollRotation.z = g_turretAimSine;
     rollRotation.w = Math_Cosf(rollAngle);
     pitchAngle = pitch * scale;
-    D_80115DEC = Gu_Sinf(pitchAngle);
-    pitchRotation.x = D_80115DEC;
+    g_turretAimSine = Gu_Sinf(pitchAngle);
+    pitchRotation.x = g_turretAimSine;
     pitchRotation.y = 0.0f;
     pitchRotation.z = 0.0f;
     pitchRotation.w = Math_Cosf(pitchAngle);
     yawAngle = (heading + yaw) * scale;
-    D_80115DEC = Gu_Sinf(yawAngle);
+    g_turretAimSine = Gu_Sinf(yawAngle);
     yawRotation.x = 0.0f;
-    yawRotation.y = D_80115DEC;
+    yawRotation.y = g_turretAimSine;
     yawRotation.z = 0.0f;
     yawRotation.w = Math_Cosf(yawAngle);
     MultiplyQuaternions(&pitchYaw, &pitchRotation, &yawRotation);

@@ -3,7 +3,7 @@
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/PAK_MENU.H"
 #include "TYPES.H"
 #include "MENU/PAK/SNAPSHOT_HANDLEMENUACTION.H"
@@ -11,10 +11,10 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-extern char *D_800E27B4[];
+extern char *g_pakDefaultNoteNamesLocalized[];
 extern char *D_800E27C4_eu[];
 extern u8 *D_800E2804_eu[];
-extern char *D_800E25B4[];
+extern char *g_pakSnapshotGameNames[];
 extern char D_004501C4[];
 #define ENTRY_TEXT(e) ((e)->text[g_languageIndex])
 #define PAK_HEADER_376C D_800E2804_eu
@@ -22,9 +22,9 @@ extern char D_004501C4[];
 #define ENTRY_TEXT(e) (*(e)->text)
 #define PAK_HEADER_376C (&D_800D376C)
 #endif
-extern s32 D_8015375C;
+extern s32 g_pakUseScannedChannel;
 
-extern char *D_800D3758;
+extern char *g_pakDefaultNoteNameFixed;
 
 extern char *D_800D375C;
 
@@ -44,7 +44,7 @@ extern void XPlus_CopyString(u8 *dst, char *src);
 
 #endif
 
-extern s32 D_8011FECC;
+extern s32 g_worldSnapshotNoteBytes;
 
 extern Digits D_800DCD78;
 
@@ -52,7 +52,7 @@ extern u8 *D_800D3754;
 
 extern u8 *D_800D376C;
 
-extern u8 *D_800D7E14;
+extern u8 *g_unlockedLevelResultLabel;
 
 extern s32 Note_GetFreePages(s32 ch, s32 *freeSpace);
 
@@ -60,7 +60,7 @@ extern u32 Note_BytesToPakPages(u32 size);
 
 static inline int space_required(int size) {size += 0x610; return Note_BytesToPakPages(size);}
 
-extern char D_8014561C[];
+extern char g_matchEndingTeamWheelClose[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #define PAK_D0044EEF4 D_004501C4
 #else
@@ -73,14 +73,14 @@ extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *menu, s32 ch, s32 mode);
 
 extern s32 Snapshot_SaveControllerRecord(s32 unused, Shared_PakMenu *menu, s32 unusedEvent);
 
-extern void Snapshot_SaveSnapshotAndClose(s32 arg0, Shared_PakMenu *menu, s32 arg2);
+extern void Snapshot_SaveSnapshotAndClose(s32 unusedEventSource, Shared_PakMenu *menu, s32 unusedEventPayload);
 
 extern void Note_GetNoteGameName(s32 ch, s32 note, s32 *state);
 
 extern void Note_DecodeNoteText(s32 state, char *name, s32 size);
 
 
-extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
+extern void Menu_OpenDialog(char *, char *, ActorOwnerView *, PakMenuSlot *, char *);
 
 extern void Note_ProbeStatus(s32 ch);
 
@@ -88,10 +88,10 @@ extern s32 Note_GetStatus(s32 ch);
 
 static inline void pickChannel(Shared_PakMenu *menu, s32 *ch)
 {
-    if (D_8015375C != 0) {
-        *ch = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        *ch = g_introSelectedItem;
     } else {
-        *ch = menu->owner->unk4;
+        *ch = menu->owner->controllerPort;
     }
 }
 
@@ -100,13 +100,13 @@ static inline s32 findNote(s32 ch, s32 *found)
     char name[16];
     s32 state;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    char *game = D_800E25B4[g_languageIndex];
+    char *game = g_pakSnapshotGameNames[g_languageIndex];
 #else
-    char *game = D_800D36D8;
+    char *game = g_pakSnapshotGameNameFixed;
 #endif
     s32 i;
 
-    D_8014D4FC = -1;
+    g_controllerPakOverwriteNoteIndex = -1;
     for (i = 0; i < 16; i++) {
         Note_GetNoteGameName(ch, i, &state);
         Note_DecodeNoteText(state, name, 16);
@@ -144,23 +144,23 @@ s32 Snapshot_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     if (D_80153784 != 0) {
         return 0;
     }
-    if (D_8015375C != 0) {
-        ch = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        ch = g_introSelectedItem;
     } else {
-        ch = menu->owner->unk4;
+        ch = menu->owner->controllerPort;
     }
     result = Note_ReadNoteInfo(ch, index, &exists, name, ext, &size, companyCode, gameCode);
     if (exists != 0 && result == 0) {
         if (Note_ContainsInvalidNameByte(name, 16) != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-            XPlus_CopyString(name, D_800E27B4[g_languageIndex]);
+            XPlus_CopyString(name, g_pakDefaultNoteNamesLocalized[g_languageIndex]);
 #else
-            XPlus_CopyString(name, D_800D3758);
+            XPlus_CopyString(name, g_pakDefaultNoteNameFixed);
 #endif
         }
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        game = &D_801462C8;
+        game = &g_gameSettings;
         XPlus_CopyString(name, D_800E27C4_eu[game->language]);
         XPlus_CopyString(ext, D_800E27C4_eu[game->language]);
 #else
@@ -211,17 +211,17 @@ s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *men
     char *format;
     Digits *buffer;
 
-    if (D_8015375C != 0) {
-        ch = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        ch = g_introSelectedItem;
     } else {
-        ch = menu->slot->unk4;
+        ch = menu->slot->controllerPort;
     }
     digits = D_800DCD78;
     buffer = &digits;
     if (D_8014D4C0_de != 0) {
         entry->text = &D_800D3754;
         if (Note_GetFreePages(ch, &freeSpace) == 0) {
-            if (D_8014D4EC_de) need=Note_BytesToPakPages(0x18); else need=space_required(D_8011FECC);
+            if (D_8014D4EC_de) need=Note_BytesToPakPages(0x18); else need=space_required(g_worldSnapshotNoteBytes);
             text = ENTRY_TEXT(entry);
             Defs_FormatIntegerValue(digits.c, g_pakFormatInt3, freeSpace);
             text += 14;
@@ -234,7 +234,7 @@ s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *men
             *text = digits.c[1];
             text[1] = digits.c[2];
         }
-    } else if (D_8015375C != 0) {
+    } else if (g_pakUseScannedChannel != 0) {
         header = PAK_HEADER_376C;
         goto fill;
     } else if (D_80153760 != 0) {
@@ -242,7 +242,7 @@ s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *men
     fill:
         entry->text = header;
         result = Note_GetFreePages(ch, &freeSpace);
-        need = Note_BytesToPakPages(D_8011FECC + 0x610);
+        need = Note_BytesToPakPages(g_worldSnapshotNoteBytes + 0x610);
         text = ENTRY_TEXT(entry);
         if (result == 0) {
             text += 14;
@@ -258,7 +258,7 @@ s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *men
             text[1] = digits.c[2];
         }
     } else {
-        entry->text = &D_800D7E14;
+        entry->text = &g_unlockedLevelResultLabel;
     }
     return 0;
 }
@@ -275,8 +275,8 @@ s32 Snapshot_HandleMenuAction(s32 unused, Shared_PakMenu *menu, s32 unusedEvent)
     if (D_8014D4C0_de != 0) {
         pickChannel(menu, &ch);
     }
-    if (D_8015375C != 0) {
-        use = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        use = g_introSelectedItem;
     } else {
         use = ch;
     }
@@ -290,18 +290,18 @@ s32 Snapshot_HandleMenuAction(s32 unused, Shared_PakMenu *menu, s32 unusedEvent)
             return 1;
         }
     } else if (D_8014D4C0_de != 0) {
-        hasNote = findNote(use, &D_8014D4FC);
-        if (hasNote != 0 && D_8014D4FC >= 0 && D_8014D4FC < 16) {
-            Menu_OpenDialog(D_8014561C, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
+        hasNote = findNote(use, &g_controllerPakOverwriteNoteIndex);
+        if (hasNote != 0 && g_controllerPakOverwriteNoteIndex >= 0 && g_controllerPakOverwriteNoteIndex < 16) {
+            Menu_OpenDialog(g_matchEndingTeamWheelClose, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
             return 1;
         }
         Snapshot_SaveSnapshotAndClose(unused, menu, unusedEvent);
         return 1;
     }
-    if (D_8015375C != 0) {
+    if (g_pakUseScannedChannel != 0) {
         next = 0;
-        if (D_800E28C8 != -1) {
-            next = D_800E28C8 + 1;
+        if (g_introSelectedItem != -1) {
+            next = g_introSelectedItem + 1;
             if (next >= 4) {
                 next = 0;
             }
@@ -319,15 +319,15 @@ s32 Snapshot_HandleMenuAction(s32 unused, Shared_PakMenu *menu, s32 unusedEvent)
         if (tries == 4) {
             next = -1;
         }
-        D_800E28C8 = next;
+        g_introSelectedItem = next;
         if (next == -1) {
             D_8014ADA0 = D_80153784 = 1;
             return 1;
         }
-        if (D_8015375C != 0) {
-            c = D_800E28C8;
+        if (g_pakUseScannedChannel != 0) {
+            c = g_introSelectedItem;
         } else {
-            c = menu->owner->unk4;
+            c = menu->owner->controllerPort;
         }
         ch = c;
         if (Snapshot_CheckStatusPrompt(menu, c, 0) != 0) {

@@ -1,79 +1,79 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/WORLD.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/TRIPLE.H"
 #include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 #include "CINEMA/CINEMA.H"
 
-extern f32 D_800C73E4;
+extern f32 g_respawnPlayerInitialPartScale;
 /* ROM offsets of the actor part tables: each version names its own copies. */
 #if defined(VERSION_US_REV1)
-extern u8 D_0024B52C_us_rev1[];
-#define ACTORPART_T28C D_0024B52C_us_rev1
-extern u8 D_0022E0A0_us_rev1[];
-#define ACTORPART_T290 D_0022E0A0_us_rev1
-extern u8 D_00219A40_us_rev1[];
-#define ACTORPART_T280 D_00219A40_us_rev1
-extern u8 D_0022E250_us_rev1[];
-#define ACTORPART_T288 D_0022E250_us_rev1
-extern u8 D_0021A2D4_us_rev1[];
-#define ACTORPART_ACTION D_0021A2D4_us_rev1
-extern u8 D_0022F5D0_us_rev1[];
-#define ACTORPART_PART1_T28C D_0022F5D0_us_rev1
+extern u8 g_Gobjinst_BuildActorTransformAddressUsRev1[];
+#define ACTORPART_T28C g_Gobjinst_BuildActorTransformAddressUsRev1
+extern u8 g_Playerai_ApplyRangedPitchToMatrixAddressUsRev1[];
+#define ACTORPART_T290 g_Playerai_ApplyRangedPitchToMatrixAddressUsRev1
+extern u8 g_playerDamageReactionCallbackAddressUsRev1[];
+#define ACTORPART_T280 g_playerDamageReactionCallbackAddressUsRev1
+extern u8 g_Playerai_ApplyLinkedProjectileStatusAddressUsRev1[];
+#define ACTORPART_T288 g_Playerai_ApplyLinkedProjectileStatusAddressUsRev1
+extern u8 g_Player_DrawPlayerBodyAndWeaponAddressUsRev1[];
+#define ACTORPART_ACTION g_Player_DrawPlayerBodyAndWeaponAddressUsRev1
+extern u8 g_Player_BuildWeaponHandTransformAddressUsRev1[];
+#define ACTORPART_PART1_T28C g_Player_BuildWeaponHandTransformAddressUsRev1
 #elif defined(VERSION_US)
-extern u8 D_0024B51C_us[];
-#define ACTORPART_T28C D_0024B51C_us
-extern u8 D_0022E084_us[];
-#define ACTORPART_T290 D_0022E084_us
-extern u8 D_00219A40_us[];
-#define ACTORPART_T280 D_00219A40_us
-extern u8 D_0022E234_us[];
-#define ACTORPART_T288 D_0022E234_us
-extern u8 D_0021A2D4_us[];
-#define ACTORPART_ACTION D_0021A2D4_us
-extern u8 D_0022F5C0_us[];
-#define ACTORPART_PART1_T28C D_0022F5C0_us
+extern u8 g_Gobjinst_BuildActorTransformAddressUs[];
+#define ACTORPART_T28C g_Gobjinst_BuildActorTransformAddressUs
+extern u8 g_Playerai_ApplyRangedPitchToMatrixAddressUs[];
+#define ACTORPART_T290 g_Playerai_ApplyRangedPitchToMatrixAddressUs
+extern u8 g_playerDamageReactionCallbackAddressUs[];
+#define ACTORPART_T280 g_playerDamageReactionCallbackAddressUs
+extern u8 g_Playerai_ApplyLinkedProjectileStatusAddressUs[];
+#define ACTORPART_T288 g_Playerai_ApplyLinkedProjectileStatusAddressUs
+extern u8 g_Player_DrawPlayerBodyAndWeaponAddressUs[];
+#define ACTORPART_ACTION g_Player_DrawPlayerBodyAndWeaponAddressUs
+extern u8 g_Player_BuildWeaponHandTransformAddressUs[];
+#define ACTORPART_PART1_T28C g_Player_BuildWeaponHandTransformAddressUs
 #elif defined(VERSION_DE)
-extern u8 D_0024B53C_de[];
-#define ACTORPART_T28C D_0024B53C_de
-extern u8 D_0022E0B0_de[];
-#define ACTORPART_T290 D_0022E0B0_de
-extern u8 D_00219A40_de[];
-#define ACTORPART_T280 D_00219A40_de
-extern u8 D_0022E260_de[];
-#define ACTORPART_T288 D_0022E260_de
-extern u8 D_0021A2D4_de[];
-#define ACTORPART_ACTION D_0021A2D4_de
-extern u8 D_0022F5E0_de[];
-#define ACTORPART_PART1_T28C D_0022F5E0_de
+extern u8 g_Gobjinst_BuildActorTransformAddressDe[];
+#define ACTORPART_T28C g_Gobjinst_BuildActorTransformAddressDe
+extern u8 g_Playerai_ApplyRangedPitchToMatrixAddressDe[];
+#define ACTORPART_T290 g_Playerai_ApplyRangedPitchToMatrixAddressDe
+extern u8 g_playerDamageReactionCallbackAddressDe[];
+#define ACTORPART_T280 g_playerDamageReactionCallbackAddressDe
+extern u8 g_Playerai_ApplyLinkedProjectileStatusAddressDe[];
+#define ACTORPART_T288 g_Playerai_ApplyLinkedProjectileStatusAddressDe
+extern u8 g_Player_DrawPlayerBodyAndWeaponAddressDe[];
+#define ACTORPART_ACTION g_Player_DrawPlayerBodyAndWeaponAddressDe
+extern u8 g_Player_BuildWeaponHandTransformAddressDe[];
+#define ACTORPART_PART1_T28C g_Player_BuildWeaponHandTransformAddressDe
 #elif defined(VERSION_EU)
-extern u8 D_0024B54C_eu[];
-#define ACTORPART_T28C D_0024B54C_eu
-extern u8 D_0022E1A8_eu[];
-#define ACTORPART_T290 D_0022E1A8_eu
-extern u8 D_00219AD8_eu[];
-#define ACTORPART_T280 D_00219AD8_eu
-extern u8 D_0022E358_eu[];
-#define ACTORPART_T288 D_0022E358_eu
-extern u8 D_0021A36C_eu[];
-#define ACTORPART_ACTION D_0021A36C_eu
-extern u8 D_0022F6E0_eu[];
-#define ACTORPART_PART1_T28C D_0022F6E0_eu
+extern u8 g_Gobjinst_BuildActorTransformAddressEu[];
+#define ACTORPART_T28C g_Gobjinst_BuildActorTransformAddressEu
+extern u8 g_Playerai_ApplyRangedPitchToMatrixAddressEu[];
+#define ACTORPART_T290 g_Playerai_ApplyRangedPitchToMatrixAddressEu
+extern u8 g_playerDamageReactionCallbackAddressEu[];
+#define ACTORPART_T280 g_playerDamageReactionCallbackAddressEu
+extern u8 g_Playerai_ApplyLinkedProjectileStatusAddressEu[];
+#define ACTORPART_T288 g_Playerai_ApplyLinkedProjectileStatusAddressEu
+extern u8 g_Player_DrawPlayerBodyAndWeaponAddressEu[];
+#define ACTORPART_ACTION g_Player_DrawPlayerBodyAndWeaponAddressEu
+extern u8 g_Player_BuildWeaponHandTransformAddressEu[];
+#define ACTORPART_PART1_T28C g_Player_BuildWeaponHandTransformAddressEu
 #elif defined(VERSION_EU_X)
-extern u8 D_0024B57C_eu_x[];
-#define ACTORPART_T28C D_0024B57C_eu_x
-extern u8 D_0022E1D4_eu_x[];
-#define ACTORPART_T290 D_0022E1D4_eu_x
-extern u8 D_00219AD8_eu_x[];
-#define ACTORPART_T280 D_00219AD8_eu_x
-extern u8 D_0022E384_eu_x[];
-#define ACTORPART_T288 D_0022E384_eu_x
-extern u8 D_0021A36C_eu_x[];
-#define ACTORPART_ACTION D_0021A36C_eu_x
-extern u8 D_0022F710_eu_x[];
-#define ACTORPART_PART1_T28C D_0022F710_eu_x
+extern u8 g_Gobjinst_BuildActorTransformAddressEuX[];
+#define ACTORPART_T28C g_Gobjinst_BuildActorTransformAddressEuX
+extern u8 g_Playerai_ApplyRangedPitchToMatrixAddressEuX[];
+#define ACTORPART_T290 g_Playerai_ApplyRangedPitchToMatrixAddressEuX
+extern u8 g_playerDamageReactionCallbackAddressEuX[];
+#define ACTORPART_T280 g_playerDamageReactionCallbackAddressEuX
+extern u8 g_Playerai_ApplyLinkedProjectileStatusAddressEuX[];
+#define ACTORPART_T288 g_Playerai_ApplyLinkedProjectileStatusAddressEuX
+extern u8 g_Player_DrawPlayerBodyAndWeaponAddressEuX[];
+#define ACTORPART_ACTION g_Player_DrawPlayerBodyAndWeaponAddressEuX
+extern u8 g_Player_BuildWeaponHandTransformAddressEuX[];
+#define ACTORPART_PART1_T28C g_Player_BuildWeaponHandTransformAddressEuX
 #endif
 extern void Gobjinst_InitializePlacedActor(void *, void *, void *, s32);
 extern void Actor_RequestActorState(void *, void *, s32);
@@ -82,7 +82,7 @@ extern void Player_UpdatePlayerCamera(void *, void *);
 #include "MENU/INITVIEW.H"
 #include "ACHIEVE/ACHIEVE.H"
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
- * depends on D_80145088.settings.local), runs the part setup calls, then copies the view's position into the actor. */
+ * depends on g_frontendScreenStatus.settings.local), runs the part setup calls, then copies the view's position into the actor. */
 typedef struct ActorInitPart {
     u8 pad0[0x18]; InitView *view;
     u8 pad1C[0x34]; f32 x, y, z;
@@ -98,7 +98,7 @@ typedef struct ActorInitRecord {
     u8 pad5D0[0xC]; void *auxiliary;
     u8 pad5E0[0x4E]; s16 selection;
 } ActorInitRecord;
-void Player_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index) {
+void Player_InitActorParts(SharedPlayer *player, LevelPlacedActorRecord *rec, s32 mode, s32 index) {
     char *actor = (char *)player;
     ActorInitRecord *record = (ActorInitRecord *)player;
     u32 flags;
@@ -112,14 +112,14 @@ void Player_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s3
     t3 = t2 | 0x1000000;
     flags = t3 | 0x2000000;
     record->part[0].flags = flags;
-    if (D_80145088.settings.local == 0) {
+    if (g_frontendScreenStatus.settings.local == 0) {
         record->part[0].flags = flags | 0x10000000;
     }
     record->part[0].table28C = ACTORPART_T28C;
     record->part[0].table290 = ACTORPART_T290;
     record->part[0].table280 = ACTORPART_T280;
     record->part[0].table288 = ACTORPART_T288;
-    if (D_80145088.settings.local != 0) {
+    if (g_frontendScreenStatus.settings.local != 0) {
         record->part[0].action = ACTORPART_ACTION;
     }
     record->part[1].owner = actor;
@@ -127,9 +127,9 @@ void Player_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s3
     record->part[1].table28C = ACTORPART_PART1_T28C;
     record->part[1].marker = -1;
     record->part[1].flags |= 0x200000;
-    record->part[1].x = D_800C73E4;
-    record->part[1].y = D_800C73E4;
-    record->part[1].z = D_800C73E4;
+    record->part[1].x = g_respawnPlayerInitialPartScale;
+    record->part[1].y = g_respawnPlayerInitialPartScale;
+    record->part[1].z = g_respawnPlayerInitialPartScale;
     record->part[1].owner = actor;
     record->part[1].table280 = ACTORPART_T280;
     record->part[1].table288 = ACTORPART_T288;
@@ -150,14 +150,14 @@ void Player_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s3
 
 #if defined(NON_MATCHING) || defined(VERSION_US_REV1) || defined(VERSION_US) || defined(VERSION_DE)
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-extern char D_80102B00[];
+extern char g_localPlayerProfiles[];
 extern void *D_800E4680;
-extern char D_0044FC04[], D_0044FB2C[], D_0044FF80[];
+extern char g_roundStartModeSpecificDialogTable[], D_0044FB2C[], g_roundStartDefaultDialogTable[];
 struct RespawnPlayer;
 extern s32 Control_IsSnapshotActive(void);
 extern void *Pools_RecycleModel(void *);
-extern void func_8021836C_de(void *);
-extern void func_80218E98_de(void *);
+extern void TeamSelect_ResetWeaponWheel(void *);
+extern void TeamSelect_ResetTeamWheel(void *);
 extern u32 Player_GetLevelProgress(void *, s32);
 extern void Player_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void Player_ResetRespawnedPlayer(struct RespawnPlayer *);
@@ -187,15 +187,15 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     FIELD(s32, actor, 0x5D0) = 1;
     FIELD(s32, actor, 0x5E0) = character;
     if (FIELD(s32, actor, 0x1450) == 0) {
-        FIELD(void *, actor, 0x5DC) = Pools_RecycleModel(&D_80145088);
-        if (FIELD(s32, &D_80145088, 0x18C4) != 0) {
+        FIELD(void *, actor, 0x5DC) = Pools_RecycleModel(&g_frontendScreenStatus);
+        if (FIELD(s32, &g_frontendScreenStatus, 0x18C4) != 0) {
             FIELD(s32, actor, 0x1450) = 1;
         }
     } else {
         FIELD(s32, actor, 0x5DC) = 0;
     }
-    func_8021836C_de((char *)actor + 0x938);
-    func_80218E98_de((char *)actor + 0xCCC);
+    TeamSelect_ResetWeaponWheel((char *)actor + 0x938);
+    TeamSelect_ResetTeamWheel((char *)actor + 0xCCC);
     FIELD(s16, actor, 0x5E8) = 0;
     i = 5;
     counterAddress = (unsigned long)actor + i;
@@ -209,9 +209,9 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
         *(u8 *)(counterAddress + 0x64A) = 0;
         counterAddress--;
     } while (--i >= 0);
-    if (D_80145088.settings.local != 0) {
+    if (g_frontendScreenStatus.settings.local != 0) {
         if (D_801462D5 == 1 && FIELD(s32, actor, 0x1450) == 0) {
-            u32 value = Player_GetLevelProgress(D_80102B00 + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
+            u32 value = Player_GetLevelProgress(g_localPlayerProfiles + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
             FIELD(s32, actor, 0x133C) = ((value & 0xFF) >> 1) + 1;
         }
         if (D_801462D5 == 4 && FIELD(s32, actor, 0x1450) == 0 && D_800E4680 != 0) {
@@ -248,7 +248,7 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     FIELD(s32, actor, 0x640) = 0;
     FIELD(s32, actor, 0x868) = 1;
     Player_ResetRespawnedPlayer((struct RespawnPlayer *)actor);
-    globals = (char *)&D_801462C8;
+    globals = (char *)&g_gameSettings;
     if (FIELD(u8, globals, 0x1D) != 0) {
         FIELD(s32, actor, 0x13E8) = 0;
     }
@@ -258,17 +258,17 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
             FIELD(u8, FIELD(void *, actor, 0x5D8), 0x80) = 0;
             FIELD(s32, actor, 0x5E0) = 0;
             FIELD(s32, actor, 0x85C) = 1;
-            table = D_0044FC04;
+            table = g_roundStartModeSpecificDialogTable;
             if (FIELD(s32, globals, 0x5FC) == 0) {
                 table = D_0044FB2C;
             }
         } else {
-            table = D_0044FF80;
+            table = g_roundStartDefaultDialogTable;
         }
         Menu_OpenDialog((char *)FIELD(void *, actor, 0x5DC) + 0x554, table, actor, FIELD(s32, actor, 0x698), FIELD(s32, actor, 0x5D4));
     }
-    D_800FEAE0[FIELD(s32, actor, 0x5D4)] = 0;
-    D_800FF140_de[FIELD(s32, actor, 0x5D4)] = 0;
+    g_playerHitCounts[FIELD(s32, actor, 0x5D4)] = 0;
+    g_playerCountedShots[FIELD(s32, actor, 0x5D4)] = 0;
 
 }
 #else
@@ -278,11 +278,11 @@ INCLUDE_ASM("ovl_80400000", Player_ResetPlayerForRound);
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
-extern char D_800C9278_de[], D_800C92E8_de[], D_800C9358[], D_auto_800CE480[], D_800C93C8_de[];
-extern char D_auto_rodata_unresolved_800CE410_unclaimed_CF230[], D_800C942C_de[], D_800C9458[], D_800C9494_de[];
-extern u32 D_8013B2BC;
+extern char g_hudStatusWidgetMoverScriptOne[], g_hudStatusWidgetMoverScriptTwo[], g_hudStatusWidgetMoverScriptThree[], g_hudStatusWidgetMoverScriptFour[], g_hudLivesInitialMoverScript[];
+extern char k_PlaceplayerlightEncodedWords[], g_hudScoreInitialMoverScript[], g_hudCountInitialMoverScript[], g_hudSquadInitialMoverScript[];
+extern u32 g_activeActorKind;
 extern void Playerai_LoadActorModel(void *actor);
-extern void func_8022BB80_de(void *);
+extern void Playerai_UpdateCharacterModel(void *);
 extern void OnScreen_InitMover(void *, s32, s32);
 extern void Link_DispatchObjectLinks(void *, s32, void *);
 /* Prepares an actor's per-run HUD state: runs the mode-specific setup when the session byte is set, resets
@@ -290,13 +290,13 @@ extern void Link_DispatchObjectLinks(void *, s32, void *);
  * their string tables), the two score fields and the 0x10FC panel, and copies the parent's four-word block. */
 typedef struct { s32 a, b, c, d; } HudQuad;
 void Player_InitActorHudState(void *actor) {
-    char *session = (char *)&D_801462C8;
+    char *session = (char *)&g_gameSettings;
     char *hud;
     char *widget;
     s32 enabled;
     if (FIELD(u8, session, 0x1D) != 0) {
         Playerai_LoadActorModel(actor);
-        func_8022BB80_de(actor);
+        Playerai_UpdateCharacterModel(actor);
         if (FIELD(u8, FIELD(void *, actor, 0x5D8), 0x91) == 0 && FIELD(u8, session, 0xD) == 1) {
             Achieve_ApplyProfileWeaponUnlocks(actor);
         }
@@ -324,34 +324,34 @@ void Player_InitActorHudState(void *actor) {
     FIELD(s32, actor, 0x684) = 0;
     widget = (char *)actor + 0xE2C;
     OnScreen_InitMover(widget, 0x78, 0x60);
-    OnScreen_StartMoverScript(widget, D_800C9278_de);
+    OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptOne);
     widget = (char *)actor + 0xE68;
     OnScreen_InitMover(widget, 0xBE, 0x60);
-    OnScreen_StartMoverScript(widget, D_800C92E8_de);
+    OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptTwo);
     widget = (char *)actor + 0xEA4;
     OnScreen_InitMover(widget, 0x104, 0x60);
-    OnScreen_StartMoverScript(widget, D_800C9358);
+    OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptThree);
     widget = (char *)actor + 0xEE0;
     OnScreen_InitMover(widget, 0x1C, 0x60);
-    OnScreen_StartMoverScript(widget, D_auto_800CE480);
+    OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptFour);
     widget = (char *)actor + 0xF1C;
     OnScreen_InitMover(widget, -0x40, 0x10);
-    OnScreen_StartMoverScript(widget, D_800C93C8_de);
+    OnScreen_StartMoverScript(widget, g_hudLivesInitialMoverScript);
     widget = (char *)actor + 0xF58;
     OnScreen_InitMover(widget, 0x28, 0x10);
-    OnScreen_StartMoverScript(widget, D_auto_rodata_unresolved_800CE410_unclaimed_CF230);
+    OnScreen_StartMoverScript(widget, k_PlaceplayerlightEncodedWords);
     widget = (char *)actor + 0x1048;
     OnScreen_InitMover(widget, -0x52, 0x10);
-    OnScreen_StartMoverScript(widget, D_800C942C_de);
+    OnScreen_StartMoverScript(widget, g_hudScoreInitialMoverScript);
     widget = (char *)actor + 0x1084;
     FIELD(f32, actor, 0x107C) = 255.0f;
     OnScreen_InitMover(widget, -0x52, 0x44);
-    OnScreen_StartMoverScript(widget, D_800C9458);
+    OnScreen_StartMoverScript(widget, g_hudCountInitialMoverScript);
     widget = (char *)actor + 0x10C0;
     OnScreen_InitMover(widget, -0x52, 0x44);
-    OnScreen_StartMoverScript(widget, D_800C9494_de);
-    OnScreen_InitMover((char *)actor + 0xFD0, 0x18, (s16)((u16)D_800E28D4 + 0x60));
-    OnScreen_InitMover((char *)actor + 0x100C, 0x18, (s16)((u16)D_800E28D4 + 0x60));
+    OnScreen_StartMoverScript(widget, g_hudSquadInitialMoverScript);
+    OnScreen_InitMover((char *)actor + 0xFD0, 0x18, (s16)((u16)g_hudReferenceViewportHeight + 0x60));
+    OnScreen_InitMover((char *)actor + 0x100C, 0x18, (s16)((u16)g_hudReferenceViewportHeight + 0x60));
     OnScreen_InitMover((char *)actor + 0x10FC, 0x64, 0x64);
     FIELD(s32, actor, 0x11C4) = 0;
     FIELD(s32, actor, 0x7BC) = 0;
@@ -359,16 +359,16 @@ void Player_InitActorHudState(void *actor) {
     if (FIELD(void *, actor, 0x5DC) != 0) {
         *(HudQuad *)((char *)actor + 0x760) = *(HudQuad *)((char *)FIELD(void *, actor, 0x5DC) + 0x140);
     }
-    func_8021A78C_de(actor);
+    Playerai_InitializeMovementAndAim(actor);
     enabled = 0;
     if (Cinema_IsSequenceActive() == 0) {
-        enabled = enabled < (u32)(D_8013B2BC ^ 0x3E7);
+        enabled = enabled < (u32)(g_activeActorKind ^ 0x3E7);
     }
     if (g_world.visibilityEnabled != 0) {
         enabled = 1;
     }
     if (enabled != 0) {
-        FIELD(s32, actor, 0x5EC) = D_8013B2BC;
+        FIELD(s32, actor, 0x5EC) = g_activeActorKind;
     }
     FIELD(s32, actor, 0x1228) = 0;
     FIELD(s32, actor, 0x1224) = 0;
@@ -381,7 +381,7 @@ void Player_InitActorHudState(void *actor) {
 
 /* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */
 #include "TYPES.H"
-#include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "COMMON/LEVEL_ACTOR.H"
 /** Reset a player for a new life: restore health, clear status timers and effects, and drop any carried object. */
 
@@ -413,9 +413,9 @@ typedef struct RespawnPlayer {
     void *anim;
     char pad69C[0x11B4 - 0x69C];
     int field11B4;
-    int field11B8;
+    int movementBlocked;
     char pad11BC[0x11D8 - 0x11BC];
-    int field11D8;
+    int recoil;
     char pad11DC[0x11E4 - 0x11DC];
     int field11E4;
     LevelActor *carried;
@@ -427,10 +427,10 @@ typedef struct RespawnPlayer {
     char pad1214[0x12C0 - 0x1214];
     float fade;
     char pad12C4[0x13C8 - 0x12C4];
-    int field13C8;
+    int sequenceRunEndActive;
     char pad13CC[0x13D4 - 0x13CC];
     int field13D4;
-    int field13D8;
+    int heldActor;
     int field13DC;
     int field13E0;
     int field13E4;
@@ -442,12 +442,12 @@ typedef struct RespawnPlayer {
 
 
 static inline int isOnline(void) {
-    return D_80145088.settings.local;
+    return g_frontendScreenStatus.settings.local;
 }
-extern unsigned int D_800CD730;
+extern unsigned int g_gameLoopFrameCount;
 
 
-extern void func_8022B510_de(struct RespawnPlayer *);
+extern void Playerai_ClearDamageTimers(struct RespawnPlayer *);
 extern void Control_SetProfileMode(void *, int);
 extern void Playerai_InitializePlayerHealth(struct RespawnPlayer *);
 extern int SetN64_IsModeThirteen(void);
@@ -467,41 +467,41 @@ void Player_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     int i;
     LevelActor *carried;
 
-    func_8022B510_de(player);
+    Playerai_ClearDamageTimers(player);
     player->moving = 0;
-    player->fade = D_800C2338_de;
+    player->fade = g_respawnPlayerInitialFade;
     Control_SetProfileMode(player->anim, 1);
-    if (D_80145088.settings.local != 0) {
+    if (g_frontendScreenStatus.settings.local != 0) {
         Playerai_InitializePlayerHealth(player);
     } else {
         if (player->isBot == 0) {
-            player->health = D_800FEB10[player->character].value + 0x6400;
+            player->health = g_characterHealthBonuses[player->character].value + 0x6400;
         } else {
             player->health = 0x6400;
         }
         player->maxHealth = player->health;
     }
-    player->bob = D_800C233C_de;
-    func_8021A78C_de(player);
-    player->field11D8 = 0;
+    player->bob = g_respawnPlayerInitialBob;
+    Playerai_InitializeMovementAndAim(player);
+    player->recoil = 0;
     player->field11FC = 0;
     player->field13E0 = 0;
     player->field1210 = 0;
     player->field11EC = 0;
     player->field11E4 = 0;
-    player->field13D8 = 0;
+    player->heldActor = 0;
     player->field13DC = 0;
     player->field13E4 = 0;
     player->field13D4 = 0;
-    if (SetN64_IsModeThirteen() != 0 && D_80145088.settings.local == 0 && D_800CD730 > 10 && player->state < 11) {
-        SoundElement_PlayDialogGroup(D_800CF198[player->state]);
+    if (SetN64_IsModeThirteen() != 0 && g_frontendScreenStatus.settings.local == 0 && g_gameLoopFrameCount > 10 && player->state < 11) {
+        SoundElement_PlayDialogGroup(g_playerStateDialogGroups[player->state]);
     }
     if (isOnline()) {
         Player_ResetPlayerWeapons(player);
     }
     player->field11B4 = 0;
-    player->field11B8 = 0;
-    player->field13C8 = 0;
+    player->movementBlocked = 0;
+    player->sequenceRunEndActive = 0;
     if (player->isBot != 0) {
         Nav_ResetPlayerState(player->brain);
     }

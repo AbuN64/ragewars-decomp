@@ -5,7 +5,7 @@
 
 /* 802BFD80.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802BAC58_de_padding_BB858[8] = { 0xAC, 0x82, 0x00, 0x00, 0xAC, 0x82, 0x00, 0x04 };
+unsigned char g_AudioAssertTrailingBytes[8] = { 0xAC, 0x82, 0x00, 0x00, 0xAC, 0x82, 0x00, 0x04 };
 #endif
 
 /* 802BFD40.CPP */
@@ -13,6 +13,6 @@ void Audio_Assert(const char *unused0, const char *unused1, s32 unused2) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BAB88[8] =
+char s_AudioAssertRlayTMText[8] =
     "rlay_t\022m";
 #endif

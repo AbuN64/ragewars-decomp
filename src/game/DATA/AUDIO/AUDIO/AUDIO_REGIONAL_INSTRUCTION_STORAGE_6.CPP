@@ -1,0 +1,4 @@
+
+#if defined(VERSION_DE)
+unsigned char g_AudioRegionalInstructionStorageTrailingBytesBlock2[8] = { 0x00, 0x00, 0x00, 0x00, 0x26, 0xB2, 0x00, 0x08 };
+#endif

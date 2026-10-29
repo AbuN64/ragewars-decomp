@@ -5,7 +5,7 @@
 #include "COMMON/FORMAT.H"
 struct MenuWidget;
 
-extern s32 Node_DispatchTypedWidgetEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Node_DispatchTypedWidgetEvent(void *element, s32 event, s32 source, s32 parameter, s32 value);
 
 
 
@@ -56,13 +56,13 @@ struct MenuWidget;
 
 struct OwnedImage;
 struct OwnedImage {
-    u8 unk0;
+    u8 stream;
     u8 flags;
     char pad2[0xE];
     s32 paletteCount;
     void *palette;
     void *pixels;
-    s32 unk1C;
+    s32 resourceId;
 };
 
 struct OwnedImage;
@@ -138,17 +138,17 @@ extern void (*g_writeDestinationColor)(void);
 extern void (*g_readSourceColor)(void);
 extern void (*g_writeDestinationIndex)(void);
 extern void (*g_readSourceIndex)(void);
-extern void D_0041406C(void);
-extern void D_004140BC(void);
-extern void D_00414094(void);
-extern void D_00414244(void);
-extern void D_00414220(void);
-extern void D_00413FCC(void);
-extern void D_00414024(void);
-extern void D_00413FF8(void);
-extern void D_00414168(void);
-extern void D_00414138(void);
-extern void D_004141C0(void);
-extern void D_004141E0(void);
-extern void D_00414200(void);
+extern void g_Frontend_WriteDestinationHalfwordPixelAddress(void);
+extern void g_Frontend_WriteDestinationThreeBytePixelAddress(void);
+extern void g_Frontend_WriteDestinationWordPixelAddress(void);
+extern void g_Frontend_WriteDestinationNibbleIndexAddress(void);
+extern void g_Frontend_WriteDestinationByteIndexAddress(void);
+extern void g_Frontend_ReadSourceHalfwordPixelAddress(void);
+extern void g_Frontend_ReadSourceThreeBytePixelAddress(void);
+extern void g_Frontend_ReadSourceWordPixelAddress(void);
+extern void g_Frontend_ReadSourceNibbleIndexAddress(void);
+extern void g_Frontend_ReadSourceByteIndexAddress(void);
+extern void g_Frontend_UseHalfwordPixelOffsetAddress(void);
+extern void g_Frontend_UseThreeBytePixelOffsetAddress(void);
+extern void g_Frontend_UseWordPixelOffsetAddress(void);
 #endif

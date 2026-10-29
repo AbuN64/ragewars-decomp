@@ -4,7 +4,7 @@
 
 /* 800CC744.CPP */
 #if defined(VERSION_EU)
-unsigned int D_auto_rodata_unresolved_800CC744[3] = {
+unsigned int k_GControllerbuttonremapEncodedWords[3] = {
     0x5545592C, 0x204A522E, 0x2C20442E,
 };
 ButtonRemap g_controllerButtonRemap[19] = {
@@ -28,7 +28,7 @@ ButtonRemap g_controllerButtonRemap[19] = {
     { 0x80000, 0x80000 },
     { 0, 0 },
 };
-unsigned int D_auto_rodata_unresolved_800CC7E8[2] = {
+unsigned int k_GControllerbuttonremapEncodedWordsBlock1[2] = {
     0x454E2054, 0x4F555445,
 };
 #endif

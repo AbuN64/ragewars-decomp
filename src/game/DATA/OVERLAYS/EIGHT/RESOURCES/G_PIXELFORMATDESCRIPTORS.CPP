@@ -4,9 +4,9 @@
 
 /* 800E2AD0.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_event_handlers_E36D0_us_rev1[18] = {
-    0x00000005, 0x00007530, (unsigned int)D_00412BF8, 0x00000006, 0x00007530, (unsigned int)D_00412C40, 0x00000007, 0x00007530,
-    (unsigned int)D_00412C8C, 0x00000008, 0x00007530, (unsigned int)D_00412CD4, 0x00000E03, 0x00007530, (unsigned int)D_00412D20, 0x00000000,
+unsigned int g_EventHandlersPointerWords1[18] = {
+    0x00000005, 0x00007530, (unsigned int)g_packedCodeAddress24_00412BF8, 0x00000006, 0x00007530, (unsigned int)g_packedCodeAddress24_00412C40, 0x00000007, 0x00007530,
+    (unsigned int)g_packedCodeAddress24_00412C8C, 0x00000008, 0x00007530, (unsigned int)g_packedCodeAddress24_00412CD4, 0x00000E03, 0x00007530, (unsigned int)g_packedCodeAddress24_00412D20, 0x00000000,
     0x00000000, 0x00000000,
 };
 #endif
@@ -14,7 +14,7 @@ unsigned int D_auto_src_ragewars_event_handlers_E36D0_us_rev1[18] = {
 /* 800E2B18.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E2AD0_unclaimed_E3718 */
-unsigned int D_blob_2679d55fce8b917bbd2b[2] = {
+unsigned int g_GPixelformatdescriptorsWords1[2] = {
     0xC2A00000, 0x00000000,
 };
 #endif
@@ -85,14 +85,14 @@ unsigned int g_pixelFormatDescriptors[468] = {
 #endif
 
 #if defined(VERSION_US)
-char rodata_unresolved_800DD730_0DEAD0[16] =
+char s_GPixelformatdescriptorsALBOWTText[16] =
     "\000A\\\240\000\000\000\000L_BOWT\000\000";
 #endif
 
 /* 800E3270.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E2AD0_unclaimed_E3718_unclaimed_E3E70 */
-unsigned int D_blob_a42de4c3e34d42b213df[4] = {
-    (unsigned int)D_00415CA0, 0x00000000, 0x00000089, 0x0000008A,
+unsigned int g_GPixelformatdescriptorsPointerWords1[4] = {
+    (unsigned int)g_packedCodeAddress24_00415CA0, 0x00000000, 0x00000089, 0x0000008A,
 };
 #endif

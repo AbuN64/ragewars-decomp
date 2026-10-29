@@ -1,10 +1,10 @@
 #include "COMMON/ACTORRESOURCEHEADER.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "TYPES.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "ENGINE/INSTANCE/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.H"
@@ -15,7 +15,7 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* GOBJINST_12.CPP */
-/* Draws an actor's attached model: when the actor has one, allocates a matrix from the pool D_8011FFB0,
+/* Draws an actor's attached model: when the actor has one, allocates a matrix from the pool g_actorMatrixPool,
  * fills it with the given transform multiplied by the camera matrix (Graphu64_MultiplyMatrices, Graphu64_ClampMatrixToFixedRange,
  * GraphU64_PackFixedMatrix), loads it into the display list, draws the model through Geometry_DrawResourceModel with the
  * actor's per-frame state for the current frame, then reloads the camera's per-frame matrix. */
@@ -30,7 +30,7 @@ extern void GraphU64_PackFixedMatrix(f32 *, s32);
 
 extern void Graphu64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void InstHdr_CopyActorPositionAndModel(void *actor, CVector3 target, void *arg4, s32 *arg5, s32 unused6, s32 unused7);
+extern void InstHdr_CopyActorPositionAndModel(void *actor, CVector3 target, void *positionOut, s32 *modelOut, s32 unused6, s32 unused7);
 
 void Gobjinst_DrawModelWithProjection(void *actor, Camera *camera, f32 *transform, u8 layer) {
     struct LevelActor *object = actor;
@@ -41,71 +41,71 @@ void Gobjinst_DrawModelWithProjection(void *actor, Camera *camera, f32 *transfor
     Gfx *load;
     s32 offset;
 
-    if (object->fieldB4 != 0) {
-        mtx = Map_ReserveEntries(&D_8011FFB0, 1);
+    if (object->animationMatrices != 0) {
+        mtx = Map_ReserveEntries(&g_actorMatrixPool, 1);
         if (mtx != 0) {
             matrices = camera->matrices;
             Graphu64_MultiplyMatrices(mf, transform, (f32 *)(matrices + 0x1E0));
             Graphu64_ClampMatrixToFixedRange(mf);
             GraphU64_PackFixedMatrix(mf, mtx);
             gSPMatrix(g_displayListCursor++, mtx, G_MTX_LOAD | G_MTX_PROJECTION);
-            Geometry_DrawResourceModel(layer, camera->style, object->fieldB4, 1,
-                          &object->lighting[D_800D297C], 0, object->field3);
+            Geometry_DrawResourceModel(layer, camera->style, object->animationMatrices, 1,
+                          &object->lighting[g_lightingBufferIndex], 0, object->renderPass);
             restore = g_displayListCursor++;
-            offset = (D_800D297C << 6) + 0x380;
+            offset = (g_lightingBufferIndex << 6) + 0x380;
             gSPMatrix(restore, matrices + offset, G_MTX_LOAD | G_MTX_PROJECTION);
         }
     }
 }
 
-void Gobjinst_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void *arg4, s32 *arg5)
+void Gobjinst_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void *positionOut, s32 *modelOut)
 {
     CVector3 turned;
     CVector3 target;
 
-    if (((ObjectLinks1DC_3 *)(actor))->unk_100 & 0x300000) {
+    if (((ActorAnimationResourceView *)(actor))->unk_100 & 0x300000) {
         char *parent;
 
         offset.x = -offset.x;
         offset.z = -offset.z;
-        parent = ((struct ObjRecAt5DC *) ((ObjectLinks1DC_3 *) actor)->unk_1D8)->unk5DC;
+        parent = ((struct ActorOwnerView *) ((ActorAnimationResourceView *) actor)->unk_1D8)->owner;
         if (parent != 0) {
             Graphu64_TransformPoint(parent + 0x160, &offset, &target);
         } else {
-            func_8024BC94_de(&turned, actor, offset);
-            Graphu64_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
+            Gobjinst_TransformVectorByActorAim(&turned, actor, offset);
+            Graphu64_AddVec3(&target, &((ActorAnimationResourceView *)(actor))->unk_8, &turned);
         }
     } else {
-        func_8024BC94_de(&turned, actor, offset);
-        Graphu64_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
+        Gobjinst_TransformVectorByActorAim(&turned, actor, offset);
+        Graphu64_AddVec3(&target, &((ActorAnimationResourceView *)(actor))->unk_8, &turned);
     }
-    InstHdr_CopyActorPositionAndModel(actor, target, arg4, arg5, 1, 1);
+    InstHdr_CopyActorPositionAndModel(actor, target, positionOut, modelOut, 1, 1);
 }
 
 /* GOBJINST_13.CPP */
-extern CQuatern func_8024796C_de(void *actor);
+extern CQuatern Gobjinst_BuildActorAimQuaternion(void *actor);
 
-extern void MatrixFromQuaternion(void *arg0, void *arg1);
+extern void MatrixFromQuaternion(void *quaternion, void *matrixOut);
 
 extern void Barrel_UpdateActorController(void *a, void *b);
 
 extern void **Gobjinst_RequestAnimatedModelVariant(void *actor, s32 variantIndex);
 
-extern void Cache_UnlockResource(void *arg0, void *resource);
+extern void Cache_UnlockResource(void *cache, void *resource);
 
-CVector3 *func_8024BC94_de(CVector3 *outVector, void *actor, CVector3 localVector) {
+CVector3 *Gobjinst_TransformVectorByActorAim(CVector3 *outVector, void *actor, CVector3 localVector) {
     CQuatern aimOrientation;
     s32 aimMatrix[16];
     CVector3 transformedVector;
 
-    aimOrientation = func_8024796C_de(actor);
+    aimOrientation = Gobjinst_BuildActorAimQuaternion(actor);
     MatrixFromQuaternion(&aimOrientation, aimMatrix);
     Graphu64_TransformPoint(aimMatrix, &localVector, &transformedVector);
     *outVector = transformedVector;
     return outVector;
 }
 
-s32 func_8024BD08_de(Shared_Func80243A80Actor *actor) {
+s32 Gobjinst_TestActorTriangleVerticalClearance(Shared_Func80243A80Actor *actor) {
     CVector3 direction;
     Node75 *node;
     f32 upper;
@@ -153,21 +153,21 @@ s32 func_8024BD08_de(Shared_Func80243A80Actor *actor) {
     return 0;
 }
 
-/** Return the global float at D_800C8C44. */
+/** Return the global float at g_actorDefaultOffsetValue. */
 
-float func_8024BE2C_de(void) {
-    return D_800C8C44;
+float Gobjinst_GetActorOffsetDefault(void) {
+    return g_actorDefaultOffsetValue;
 }
 
 /** Thin wrapper forwarding arg0 and an offset of it to Barrel_UpdateActorController. */
-void func_8024BE3C_de(void *base) {
+void Gobjinst_UpdateActorController(void *base) {
     Barrel_UpdateActorController(base, (char *)base + 0x170);
 }
 
 /** Set or clear status bit two according to the supplied boolean. */
-void func_8024BE58_de(void *object, int enabled) {
-    ObjRecAt2E0 *object_record = object;
-    unsigned int *flags = &object_record->unk2E0;
+void Gobjinst_SetAttachmentEffectBitTwo(void *object, int enabled) {
+    ActorEffectFlagsView *object_record = object;
+    unsigned int *flags = &object_record->effectFlags;
     if (enabled) {
         *flags |= 2;
     } else {
@@ -175,7 +175,7 @@ void func_8024BE58_de(void *object, int enabled) {
     }
 }
 
-s32 func_8024BE80_de(void *typedActor) {
+s32 Gobjinst_GetModelRenderMode(void *typedActor) {
     void **modelResource;
     char *modelMetadata;
     s32 result;

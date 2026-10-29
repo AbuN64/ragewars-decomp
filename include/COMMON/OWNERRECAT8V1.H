@@ -3,13 +3,13 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-struct OwnerRecAt8V1;
-typedef struct OwnerRecAt8V1 OwnerRecAt8V1;
+struct MenuMultiUserOwnerView;
+typedef struct MenuMultiUserOwnerView MenuMultiUserOwnerView;
 
 struct NodeMenuCreateOverlayNode;
 typedef struct NodeMenuCreateOverlayNode NodeMenuCreateOverlayNode;
 
-extern s32 SmpOverlay_DispatchSlotEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 SmpOverlay_DispatchSlotEvent(void *actor, s32 event, s32 itemId, s32 value, s32 context);
 
 struct RecordSmpButtonEnsureButtonWrapper;
 struct RecordSmpButtonEnsureButtonWrapper {
@@ -18,10 +18,10 @@ struct RecordSmpButtonEnsureButtonWrapper {
     u16 field_0E;
     s32 words_10[2];
     s16 field_18;
-    s16 field_1A;
+    s16 reservedWord;
     s32 words_1C[4];
     s32 fields_2C[5];
-    s32 field_40;
+    s32 reservedWord1;
 };
 
 struct Mixer;
@@ -31,7 +31,7 @@ struct sm_dlmultiuser_t;
 typedef struct sm_dlmultiuser_t sm_dlmultiuser;
 
 struct NodeMenuCreateOverlayNode;
-struct OwnerRecAt44;
+struct MenuOverlayOwnerView;
 struct NodeMenuCreateOverlayNode {
     s32 words_00[3];
     s16 tag;
@@ -40,41 +40,41 @@ struct NodeMenuCreateOverlayNode {
     u8 reserved11;
     s16 flags;
     s32 words_14[12];
-    struct OwnerRecAt44 *owner;
+    struct MenuOverlayOwnerView *owner;
     s32 value;
     s32 words_4C[8];
     s32 field_6C;
 };
 
-struct OwnerRecAt44 {
+struct MenuOverlayOwnerView {
     s32 words_00[2];
     struct NodeMenuCreateOverlayNode *root;
     s32 words_0C[14];
     struct NodeMenuCreateOverlayNode *overlay;
 };
 
-struct SlotsRecAt5CV2;
-struct SlotsRecAt5CV2 {
+struct MenuCountedSlotValueArrayView;
+struct MenuCountedSlotValueArrayView {
     char pad0[0x48];
     s32 count;
     char pad4C[0x5C - 0x4C];
     s32 values[1];
 };
 
-struct ChildRecAt38;
-struct ChildRecAt38 {
+struct MenuOverlayTargetView;
+struct MenuOverlayTargetView {
     char pad[0x12];
     u16 flags;
     char pad14[0x38 - 0x14];
     void *target;
 };
 
-struct ChildRecAt38;
+struct MenuOverlayTargetView;
 
-extern void SmpButton_WrapButtonWidget(s32 arg0);
+extern void SmpButton_WrapButtonWidget(s32 widgetId);
 
-struct SlotsRecAt5CV1;
-struct SlotsRecAt5CV1 {
+struct MenuSlotValueArrayView;
+struct MenuSlotValueArrayView {
     char pad[0x5C];
     s32 values[1];
 };
@@ -92,21 +92,21 @@ struct Child {
     void *target;
 };
 
-struct SlotsRecAt5CV2;
-extern s32 SmpOverlay_CountUsedSlots(struct SlotsRecAt5CV2 *object);
+struct MenuCountedSlotValueArrayView;
+extern s32 SmpOverlay_CountUsedSlots(struct MenuCountedSlotValueArrayView *object);
 
-struct OwnerRecAt44;
-typedef struct OwnerRecAt44 OwnerRecAt44;
+struct MenuOverlayOwnerView;
+typedef struct MenuOverlayOwnerView MenuOverlayOwnerView;
 
-struct SlotsRecAt4C;
-struct ObjRecAtCV1;
-struct SlotsRecAt4C {
+struct MenuObjectSlotArrayView;
+struct MenuActorInputView;
+struct MenuObjectSlotArrayView {
     char pad[0x4C];
-    struct ObjRecAtCV1 *entries[1];
+    struct MenuActorInputView *entries[1];
 };
 
-struct ChildRecAt2C;
-struct ChildRecAt2C {
+struct MenuListTargetView;
+struct MenuListTargetView {
     char pad[0x12];
     u16 flags;
     char pad14[0x2C - 0x14];
@@ -130,8 +130,8 @@ struct sm_dlmultiuser_t {
 };
 
 struct sm_dlmultiuser_t;
-struct OwnerRecAt8V1;
-struct OwnerRecAt8V1 {
+struct MenuMultiUserOwnerView;
+struct MenuMultiUserOwnerView {
     s32 words_00[2];
     struct sm_dlmultiuser_t *context;
 };
@@ -143,15 +143,15 @@ struct RecordSmpButtonWrapButtonWidget {
     s16 field_0E;
     s32 words_10[2];
     s16 field_18;
-    s16 field_1A;
+    s16 reservedWord2;
     s32 words_1C[4];
     s32 fields_2C[5];
-    s32 field_40;
+    s32 reservedWord3;
 };
 
-extern s32 SmpButton_DispatchButtonEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 SmpButton_DispatchButtonEvent(void *actor, s32 event, s32 itemId, s32 value, s32 context);
 
-struct ChildRecAt2C;
+struct MenuListTargetView;
 
 struct RecordSmpButtonWrapButtonWidget;
 typedef struct RecordSmpButtonWrapButtonWidget RecordSmpButtonWrapButtonWidget;
@@ -161,7 +161,7 @@ extern void SmpOverlay_RegisterOverlayClass(void);
 struct Mixer;
 struct Mixer {
     char pad[0x4C];
-    ObjRecAtCV1 *handlers[4];
+    MenuActorInputView *handlers[4];
     int muted[4];
 };
 
@@ -171,25 +171,25 @@ struct RecordSmpButtonEnsureButtonWrapper;
 typedef struct RecordSmpButtonEnsureButtonWrapper RecordSmpButtonEnsureButtonWrapper;
 
 struct Key;
-struct MenuRecAt114;
-struct OwnerRecAt38;
-struct MenuRecAt114 {
+struct MenuKeyListView;
+struct SmpButtonOwnerView;
+struct MenuKeyListView {
     char pad0[0x44];
-    struct OwnerRecAt38 *owner;
+    struct SmpButtonOwnerView *owner;
     struct Key entries[(0x110 - 0x48) / 20];
     s32 index;
     s32 count;
 };
 
-struct ChildRecAt30;
-struct ChildRecAt30 {
+struct MenuTextTargetView;
+struct MenuTextTargetView {
     char pad[0x12];
     u16 flags;
     char pad14[0x30 - 0x14];
     void *target;
 };
 
-struct ChildRecAt30;
+struct MenuTextTargetView;
 
 struct Child;
 #endif

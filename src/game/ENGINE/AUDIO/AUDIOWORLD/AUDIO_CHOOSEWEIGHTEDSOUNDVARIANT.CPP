@@ -4,7 +4,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/SELF.H"
@@ -12,7 +12,7 @@
 #include "COMMON/LISTNODE.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "COMMON/STATERECAT34.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "AUDIO/VOICE.H"
 #include "AUDIO/AUDIO_CHOOSEWEIGHTEDSOUNDVARIANT.H"
 #include "AUDIO/RAXPLAYER.H"
@@ -23,12 +23,12 @@
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 
 /* ROM-grounded data: src/rw_pool_80258B94_C9BD8_us_rev1.c */
-const unsigned int D_blob_5ba0e1e9862d81f4542d[2] = {
+const unsigned int k_AudioChooseweightedsoundvariantEncodedWords[2] = {
     0x41F00000, 0x00000000,
 };
 
 /* ROM-grounded data: src/rw_pool_80258E5C_C9BE0_us_rev1.c */
-const unsigned int D_blob_a66da9ca903522cb6da3[2] = {
+const unsigned int k_AudioChooseweightedsoundvariantEncodedWordsBlock1[2] = {
     0x3F800000, 0x42200000,
 };
 
@@ -40,7 +40,7 @@ extern void Audio_StopVoicesByFlags(void *record, s32 value);
 
 extern void AudioWorld_RecyclePendingSoundsByFlags(void *lists, s32 matchingFlags);
 
-extern f32 D_800C3EE0_de[];
+extern f32 g_audioContextGainScaleConstants[];
 
 extern s32 SetN64_IsModeThirteen(void);
 
@@ -62,7 +62,7 @@ extern void Audio_DisableMusicGainOverride(Track *a);
  * scene's last pick at 0x130 it steps to the next entry (or back from the last). Adapted from
  * Audio_ChooseSequenceVariant with the table weights and the stored last pick. */
 
-void Audio_StopAudioByKey(ContextRecAt2BC0 *context, s32 matchValue) {
+void Audio_StopAudioByKey(GameAudioContext *context, s32 matchValue) {
     {
         s32 *contextLock;
         s32 lockClaimCount;
@@ -99,7 +99,7 @@ void Audio_StopAudioByKey(ContextRecAt2BC0 *context, s32 matchValue) {
     }
 }
 
-void Audio_StopAudioBySecondaryValue(ContextRecAt2BC0 *context, s32 matchValue) {
+void Audio_StopAudioBySecondaryValue(GameAudioContext *context, s32 matchValue) {
     void *contextLock;
     void *record;
     s32 lockClaimCount;
@@ -132,7 +132,7 @@ void Audio_StopAudioBySecondaryValue(ContextRecAt2BC0 *context, s32 matchValue) 
     __osRestoreInt(releaseInterruptMask);
 }
 
-void Audio_StopAudioByMask(ContextRecAt2BC0 *context, s32 matchMask) {
+void Audio_StopAudioByMask(GameAudioContext *context, s32 matchMask) {
     void *contextLock;
     void *record;
     s32 lockClaimCount;
@@ -165,22 +165,22 @@ void Audio_StopAudioByMask(ContextRecAt2BC0 *context, s32 matchMask) {
     __osRestoreInt(releaseInterruptMask);
 }
 
-s32 Audio_PlayPositionedSoundWithScale(ContextRecAt2BC0 *context, s32 track, CVector3 position, s32 spatialMode, s32 owner, f32 arg5) {
+s32 Audio_PlayPositionedSoundWithScale(GameAudioContext *context, s32 track, CVector3 position, s32 spatialMode, s32 owner, f32 volumeScale) {
     s32 handle;
 
-    context->alpha = arg5;
+    context->alpha = volumeScale;
     handle = Sound_PlaySoundAtPosition(context, track, position, spatialMode, owner);
-    context->alpha = D_800C3EE0_de[1];
+    context->alpha = g_audioContextGainScaleConstants[1];
     return handle;
 }
 
-void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *context) {
+void Audio_PlayPeriodicTrackSound(GameAudioContext *context) {
     CVector3 zero;
     void *result;
     CVector3 *vec;
 
     if (D_800CB720 != 0 &&
-        context->field2BB4 != 0 &&
+        context->spatialAudioEnabled != 0 &&
         SetN64_IsModeThirteen() != 0 &&
         context->track > 0) {
         {
@@ -190,43 +190,43 @@ void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *context) {
             zero.y = value;
             zero.x = value;
         }
-        result = Gsky_FindNearestCamera(&D_80145088, &zero);
-        vec = &((struct SharedRecAt564V1 *)(result))->position;
+        result = Gsky_FindNearestCamera(&g_frontendScreenStatus, &zero);
+        vec = &((struct PlayerCameraTargetView *)(result))->position;
         if ((context->frame & 3) == 0) {
             Sound_PlaySoundAtPosition(context, context->track, *vec, 0, -1);
         }
     }
 }
 
-void Audio_SetVolumeSettingOne(ContextRecAt2BC0 *arg0, float arg1) {
-    arg0->red = arg1;
+void Audio_SetVolumeSettingOne(GameAudioContext *audioContext, float volume) {
+    audioContext->red = volume;
 }
 
-void Audio_SetVolumeSettingZero(ContextRecAt2BC0 *arg0, int arg1) {
-    double d = (double)arg1;
-    if (arg1 < 0) {
-        d = d + D_800C3EE8_de;
+void Audio_SetVolumeSettingZero(GameAudioContext *audioContext, int volume) {
+    double d = (double)volume;
+    if (volume < 0) {
+        d = d + g_audioContextUnsignedValueCorrection;
     }
-    arg0->green = (float)d;
+    audioContext->green = (float)d;
 }
 
 /** Store the second argument at byte offset 0x2BA8 in the first argument. */
-void Audio_SetDialogVolume(ContextRecAt2BC0 *object, float value) {
+void Audio_SetDialogVolume(GameAudioContext *object, float value) {
     object->blue = value;
 }
 
 /** Return the indexed twelve-byte record from the table at offset 0x2B70. */
 char *Audio_GetMetadataSectionThreeEntry(char *object, int index) {
-    return ((ContextRecAt2BC0 *)(object))->table2B70 + index * 12;
+    return ((GameAudioContext *)(object))->table2B70 + index * 12;
 }
 
-void *Audio_GetMetadataSectionFourEntry(ContextRecAt2BC0 *arg0, int arg1) {
-    return (char *)arg0->table2B74 + arg1 * 12;
+void *Audio_GetMetadataSectionFourEntry(GameAudioContext *audioContext, int entryIndex) {
+    return (char *)audioContext->table2B74 + entryIndex * 12;
 }
 
 /** Return the indexed 12-byte entry under object offset 0x2B78. */
-void *Audio_GetMetadataSectionFiveEntry(ContextRecAt2BC0 *arg0, int arg1) {
-    return (char *)arg0->table2B78 + arg1 * 12;
+void *Audio_GetMetadataSectionFiveEntry(GameAudioContext *audioContext, int entryIndex) {
+    return (char *)audioContext->table2B78 + entryIndex * 12;
 }
 
 void Audio_StopAudioExceptKey(void *context, s32 matchValue) {
@@ -235,7 +235,7 @@ void Audio_StopAudioExceptKey(void *context, s32 matchValue) {
         s32 lockClaimCount;
         u32 mask;
 
-        contextLock = &((ContextRecAt2BC0 *)(context))->lock;
+        contextLock = &((GameAudioContext *)(context))->lock;
         mask = __osDisableInt();
         lockClaimCount = ((MenuRules *)(contextLock))->locked + 1;
         ((MenuRules *)(contextLock))->locked = lockClaimCount;
@@ -246,15 +246,15 @@ void Audio_StopAudioExceptKey(void *context, s32 matchValue) {
             __osRestoreInt(mask);
         }
     }
-    Audio_StopVoicesExceptKey(&((ContextRecAt2BC0 *)(context))->menu[0], matchValue);
-    AudioWorld_RecyclePendingSoundsExceptKey(&((ContextRecAt2BC0 *)(context))->view[0], matchValue);
+    Audio_StopVoicesExceptKey(&((GameAudioContext *)(context))->menu[0], matchValue);
+    AudioWorld_RecyclePendingSoundsExceptKey(&((GameAudioContext *)(context))->view[0], matchValue);
     {
         s32 *contextLock;
         s32 lockClaimCount;
         u32 releaseInterruptMask;
 
-        contextLock = &((ContextRecAt2BC0 *)(context))->lock;
-        ((ContextRecAt2BC0 *)(context))->field2B9C = 0;
+        contextLock = &((GameAudioContext *)(context))->lock;
+        ((GameAudioContext *)(context))->effectMixOffset = 0;
         releaseInterruptMask = __osDisableInt();
         lockClaimCount = ((MenuRules *)(contextLock))->locked - 1;
         ((MenuRules *)(contextLock))->locked = lockClaimCount;
@@ -274,41 +274,41 @@ void Audio_FadeOutContextMusic(int contextAddress) {
 }
 
 /** Store the second argument at offset 0x2BAC. */
-void Audio_SetVoiceMixValue(ContextRecAt2BC0 *context, int arg1) {
-    context->field2BAC = arg1;
+void Audio_SetVoiceMixValue(GameAudioContext *context, int mixValue) {
+    context->voiceMixValue = mixValue;
 }
 
-int Audio_GetVoiceMixValue(ContextRecAt2BC0 *context) {
-    return context->field2BAC;
+int Audio_GetVoiceMixValue(GameAudioContext *context) {
+    return context->voiceMixValue;
 }
 
 /** Store a value in the field at offset 0x2BB4. */
 void Audio_SetPeriodicSoundEnabled(char *object, int value) {
-    ((ContextRecAt2BC0 *)(object))->field2BB4 = value;
+    ((GameAudioContext *)(object))->spatialAudioEnabled = value;
 }
 
 /** Store a value in the field at offset 0x2B98. */
-void Audio_SetListenerCamera(ContextRecAt2BC0 *object, int value) {
-    object->field2B98 = value;
+void Audio_SetListenerCamera(GameAudioContext *object, int value) {
+    object->listenerCamera = value;
 }
 
 /** Read the object word at offset 0x2BB0. */
 int Audio_GetSpatialPanMode(void *object) {
-    return ((ContextRecAt2BC0 *)(object))->field2BB0;
+    return ((GameAudioContext *)(object))->spatialPanMode;
 }
 
 /** Store the supplied word at object offset 0x2BB0. */
-void Audio_SetSpatialPanMode(ContextRecAt2BC0 *arg0, int arg1) {
-    arg0->field2BB0 = arg1;
+void Audio_SetSpatialPanMode(GameAudioContext *audioContext, int panMode) {
+    audioContext->spatialPanMode = panMode;
 }
 
-void *Audio_GetSoundPlayer(void *arg0) {
-    return &((ContextRecAt2BC0 *)(arg0))->list[0];
+void *Audio_GetSoundPlayer(void *audioContext) {
+    return &((GameAudioContext *)(audioContext))->list[0];
 }
 
 /** Store a word in the object field at offset 0x2BB8. */
-void Audio_SetMusicGainScalingEnabled(ContextRecAt2BC0 *object, int value) {
-    object->field2BB8 = value;
+void Audio_SetMusicGainScalingEnabled(GameAudioContext *object, int value) {
+    object->dialogEnabled = value;
 }
 
 s32 Audio_CountSoundVoices(char *obj, s32 owner)
@@ -318,40 +318,40 @@ s32 Audio_CountSoundVoices(char *obj, s32 owner)
 
     count = 0;
     {
-        s32 *temp_s0;
-        s32 temp_v1;
-        u32 temp_a0;
+        s32 *contextLock;
+        s32 lockDepth;
+        u32 savedInterruptMask;
 
-        temp_s0 = &((ContextRecAt2BC0 *)(obj))->lock;
-        temp_a0 = __osDisableInt();
-        temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
-        ((MenuRules *)(temp_s0))->locked = temp_v1;
-        if (temp_v1 != 1) {
-            __osRestoreInt(temp_a0);
-            osRecvMesg(temp_s0, 0, 1);
+        contextLock = &((GameAudioContext *)(obj))->lock;
+        savedInterruptMask = __osDisableInt();
+        lockDepth = ((MenuRules *)(contextLock))->locked + 1;
+        ((MenuRules *)(contextLock))->locked = lockDepth;
+        if (lockDepth != 1) {
+            __osRestoreInt(savedInterruptMask);
+            osRecvMesg(contextLock, 0, 1);
         } else {
-            __osRestoreInt(temp_a0);
+            __osRestoreInt(savedInterruptMask);
         }
     }
     for (i = 0; i < 17; i++) {
-        if (((ContextRecAt2BC0 *)obj)->voices[i].sound == owner) {
+        if (((GameAudioContext *)obj)->voices[i].sound == owner) {
             count++;
         }
     }
     {
-        s32 *temp_s0;
-        s32 temp_v1;
-        u32 temp_v0;
+        s32 *contextLock;
+        s32 lockDepth;
+        u32 savedInterruptMask;
 
-        temp_s0 = &((ContextRecAt2BC0 *)(obj))->lock;
-        temp_v0 = __osDisableInt();
-        temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
-        ((MenuRules *)(temp_s0))->locked = temp_v1;
-        if (temp_v1 != 0) {
-            __osRestoreInt(temp_v0);
-            osSendMesg(temp_s0, 0, 1);
+        contextLock = &((GameAudioContext *)(obj))->lock;
+        savedInterruptMask = __osDisableInt();
+        lockDepth = ((MenuRules *)(contextLock))->locked - 1;
+        ((MenuRules *)(contextLock))->locked = lockDepth;
+        if (lockDepth != 0) {
+            __osRestoreInt(savedInterruptMask);
+            osSendMesg(contextLock, 0, 1);
         } else {
-            __osRestoreInt(temp_v0);
+            __osRestoreInt(savedInterruptMask);
         }
     }
     return count;
@@ -362,12 +362,12 @@ void Audio_StopContextMusic(int contextAddress) {
     Audio_StopMusic(contextAddress + 0x1D64);
 }
 
-/* Clamps a level to between zero and D_800C8FE0, scales it by D_800C8FE4 and stores it as an integer
+/* Clamps a level to between zero and g_audioLevelMaximum, scales it by g_audioLevelIntegerScale and stores it as an integer
    at 0x2B9C of the object. */
 
-void Audio_SetClampedAudioLevel(ObjRecAt2B9C *obj, float value) {
+void Audio_SetClampedAudioLevel(AudioLevelSettingView *obj, float value) {
     float v;
-    float max = D_800C8FE0;
+    float max = g_audioLevelMaximum;
     if (value > max || !(value < 0.0f)) {
         v = value;
         if (v > max) {
@@ -376,7 +376,7 @@ void Audio_SetClampedAudioLevel(ObjRecAt2B9C *obj, float value) {
     } else {
         v = 0.0f;
     }
-    obj->level = v * D_800C8FE4;
+    obj->level = v * g_audioLevelIntegerScale;
 }
 
 /** Thin wrapper forwarding an offset argument to Audio_EnableMusicGainOverride. */
@@ -394,13 +394,13 @@ void Audio_ClearContextVoiceFlags(int contextAddress) {
     Audio_ClearVoiceFlags(contextAddress + 0x1DB8);
 }
 
-int Audio_PlayDialogGroup(ContextRecAt2BC0 *arg0, int group) {
+int Audio_PlayDialogGroup(GameAudioContext *audioContext, int group) {
     float scale = (1.0f);
-    float blue = arg0->blue;
+    float blue = audioContext->blue;
     if (!(scale < blue)) {
         scale = blue;
     }
-    return Audio_StartDialogGroup(&arg0->dialog[0], group, scale, 0x40);
+    return Audio_StartDialogGroup(&audioContext->dialog[0], group, scale, 0x40);
 }
 
 /** Thin wrapper forwarding an offset argument to Audio_StopDialogPlayer. */
@@ -433,19 +433,19 @@ void Audio_SortTableEntries(SortTable *table) {
 int Audio_FindVoiceSlotById(char *context, int id) {
     Voice *slot;
     int i;
-    slot = ((ContextRecAt2BC0 *)context)->voices;
+    slot = ((GameAudioContext *)context)->voices;
     if (id == -1) {
         return -1;
     }
     for (i = 0; i < 17; i++, slot++) {
-        if (slot->unkC == id) {
+        if (slot->secondaryKey == id) {
             return i;
         }
     }
     return -1;
 }
 
-s32 Audio_ChooseWeightedSoundVariant(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
+s32 Audio_ChooseWeightedSoundVariant(AudioWeightedVariantView *scene, s16 id, s16 avoid) {
     s32 first;
     s32 last;
     s32 total;
@@ -484,18 +484,18 @@ s32 Audio_ChooseWeightedSoundVariant(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
     return -1;
 }
 
-void Audio_ResolveInstrumentSectionZero(void *arg0, s16 index) {
-    SetN64_GetPackSection(SetN64_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 0);
+void Audio_ResolveInstrumentSectionZero(void *audioContext, s16 index) {
+    SetN64_GetPackSection(SetN64_GetPackSection((((struct AudioInstrumentPackView *) ((s8 *) audioContext))->unk_2B4C), (s32) index), 0);
 }
 
-void Audio_ResolveInstrumentSectionOne(void *arg0, s16 index) {
-    SetN64_GetPackSection(SetN64_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 1);
+void Audio_ResolveInstrumentSectionOne(void *audioContext, s16 index) {
+    SetN64_GetPackSection(SetN64_GetPackSection((((struct AudioInstrumentPackView *) ((s8 *) audioContext))->unk_2B4C), (s32) index), 1);
 }
 
 /* Returns 1 when the object's owner at 0x102 is set, or when the id is below 256 and at least six of
    its seventeen 0xCC-byte slots at 0x1E64 already carry that id; otherwise 0. */
 
-int Audio_IsSoundInstanceLimitReached(ObjRecAt1E64 *obj, int id) {
+int Audio_IsSoundInstanceLimitReached(AudioInstanceLimitOwner *obj, int id) {
     int count;
     int i;
 

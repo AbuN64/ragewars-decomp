@@ -5,7 +5,7 @@
 #include "COMMON/MEASUREDRECAT14V4.H"
 #include "COMMON/MEASUREDRECAT14V2.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ARGB_COLOR.H"
 #include "COMMON/GFX.H"
 #include "COMMON/EXTERNS_5.H"
@@ -13,15 +13,15 @@
 #include "COMMON/LOADOUT.H"
 #include "COMMON/OWNERRECAT8V2.H"
 #include "COMMON/GROUP.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "COMMON/LIGHTDATA.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/MTX.H"
-#include "COMMON/OBJECTLINKS1E8.H"
+#include "COMMON/PARTICLE_ATTACHMENT_AND_OWNER_VIEWS.H"
 #include "COMMON/COLORENTRY.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/RESULTS.H"
@@ -34,10 +34,10 @@
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
-#include "COMMON/ARG.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/CTX.H"
 #include "COMMON/EXTERNS_19.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
@@ -56,15 +56,15 @@
 #include "COMMON/OBJECTRECAT28.H"
 #include "COMMON/PLAYERRECAT64E.H"
 #include "COMMON/OBJB.H"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "sdk/libultra/io/pirawread.H"
 #include "AUDIO/SIRAW.H"
 #include "AUDIO/SIRAWWRITE.H"
 #include "ENGINE/VIRTUAL/VIRTUAL_REGION_AND_PAGER_OPERATIONS.H"
 #include "sdk/libgultra/libasm_802BBC68_14.h"
-#include "sdk/libgultra/libasm_802BBC68_21.h"
-#include "sdk/libgultra/libasm_802BBC68_6.h"
-#include "sdk/libgultra/libasm_802BBC68_7.h"
+#include "sdk/libgultra/status_register_write.h"
+#include "sdk/libgultra/CPU_STATUS_REGISTER_US.h"
+#include "sdk/libgultra/OS_GET_STATUS_REGISTER.h"
 #include "sdk/libgultra/libasm_802BBC68_8.h"
 #include "RESMGR/X_PLUS.H"
 #include "AUDIO/AUDIO_ASSERT.H"
@@ -75,8 +75,8 @@
 
 
 
-extern void func_802BD280_de(void *addr, s32 size);
-extern void func_802BD010_de(void *addr, s32 size);
+extern void osWritebackDCache(void *addr, s32 size);
+extern void osInvalICache(void *addr, s32 size);
 
 
 void Audio_InitializeOperatingSystem(void)
@@ -85,62 +85,62 @@ void Audio_InitializeOperatingSystem(void)
     u32 clock = 0;
     u64 *rate;
 
-    D_80149B08 = 1;
-    func_802BD220_de(
+    g_osInitializationStarted = 1;
+    __osSetSR(
 
 #if defined(VERSION_DE)
-func_802BCF20_de
+__osGetSRDe
 #elif defined(VERSION_EU)
-func_802BD1C0_eu
+__osGetSREu
 #elif defined(VERSION_US)
-func_802BCE50_us
+__osGetSRUs
 #else
-func_802BD200_eu_x
+__osGetSREuX
 #endif
 
 () | 0x20000000);
-    func_802BD160_de(0x01000800);
+    __osSetFpcCsr(0x01000800);
     while (Audio_ReadSerialInterfaceWord(0x1FC007FC, &pifdata)) {
         ;
     }
     while (Audio_WriteSerialInterfaceWord(0x1FC007FC, pifdata | 8)) {
         ;
     }
-    *(QuadN64EngDrawNumericWidgetChildren *)0x80000000 = *D_002BBC70;
-    *(QuadN64EngDrawNumericWidgetChildren *)0x80000080 = *D_002BBC70;
-    *(QuadN64EngDrawNumericWidgetChildren *)0x80000100 = *D_002BBC70;
-    *(QuadN64EngDrawNumericWidgetChildren *)0x80000180 = *D_002BBC70;
-    func_802BD280_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
-    func_802BD010_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000000 = *g_packedCodeAddress24_002BBC70;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000080 = *g_packedCodeAddress24_002BBC70;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000100 = *g_packedCodeAddress24_002BBC70;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000180 = *g_packedCodeAddress24_002BBC70;
+    osWritebackDCache((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
+    osInvalICache((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
     Vhandler_MapBootstrapAddressRange();
     osPiRawReadIo(4, &clock);
     clock &= ~0xf;
     if (clock != 0) {
-        D_80149B00 = clock;
+        g_systemClockFrequency = clock;
     } else {
-        D_80149B00 = 62500000;
+        g_systemClockFrequency = 62500000;
     }
-    rate = &D_80149B00;
+    rate = &g_systemClockFrequency;
     *rate = *rate * 3 / 4;
-    if (D_8000030C == 0) {
-        XPlus_FillMemory(D_8000031C, 0, 0x40);
+    if (osResetType == 0) {
+        XPlus_FillMemory(osAppNMIBuffer, 0, 0x40);
     }
-    if (D_80000300 == 0) {
-        D_800D5250 = 0x2F5B2D2;
-    } else if (D_80000300 == 2) {
-        D_800D5250 = 0x2E6025C;
+    if (g_consoleTvType == 0) {
+        g_audioClockRate = 0x2F5B2D2;
+    } else if (g_consoleTvType == 2) {
+        g_audioClockRate = 0x2E6025C;
     } else {
-        D_800D5250 = 0x2E6D354;
+        g_audioClockRate = 0x2E6D354;
     }
 }
 
 
 int Audio_ReadSerialInterfaceWord(u32 deviceAddress, u32 *data) {
     if (deviceAddress & 3) {
-        Audio_Assert(D_800CCC30, &s_sirawreadText, 0x33);
+        Audio_Assert(g_serialDmaAssertionCondition, &s_sirawreadText, 0x33);
     }
     if (data == 0) {
-        Audio_Assert(D_800CCC30, &s_sirawreadText, 0x34);
+        Audio_Assert(g_serialDmaAssertionCondition, &s_sirawreadText, 0x34);
     }
     if (Audio_IsSerialInterfaceBusy() != 0) {
         return -1;
@@ -151,7 +151,7 @@ int Audio_ReadSerialInterfaceWord(u32 deviceAddress, u32 *data) {
 
 int Audio_WriteSerialInterfaceWord(u32 deviceAddress, u32 data) {
     if (deviceAddress & 3) {
-        Audio_Assert(&D_800C7A00_de, &D_800C7A04_de, 0x34);
+        Audio_Assert(&g_audioAssertionConditionText, &g_audioAssertionSourceText, 0x34);
     }
     if (Audio_IsSerialInterfaceBusy() != 0) {
         return -1;
@@ -161,7 +161,7 @@ int Audio_WriteSerialInterfaceWord(u32 deviceAddress, u32 data) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BB08C[1] = {
+unsigned int k_SirawwriteEncodedWords[1] = {
     0x7265656E,
 };
 #endif

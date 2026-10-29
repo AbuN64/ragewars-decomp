@@ -7,5 +7,5 @@ typedef struct LevelGoal {
     s32 kind;
     s32 goal;
 } LevelGoal;
-extern LevelGoal D_8014DD98;
+extern LevelGoal g_currentResultMode;
 #endif

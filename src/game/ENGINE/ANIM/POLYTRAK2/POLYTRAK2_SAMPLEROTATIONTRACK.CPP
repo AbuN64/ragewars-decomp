@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_8010AC80.H"
+#include "COMMON/LONE/MOTION_TRACK_DECODE_RANGE_END.H"
 #include "COMMON/STREAM.H"
 #include "GAME/SOUNDINFO.H"
 #include "COMMON/VECTOR4F.H"
@@ -65,28 +65,28 @@ void Polytrak2_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *o
         }
         first = position >= 0.0f ? (s32)position : (s32)position - ((f32)(s32)position != position);
         if (length <= (f32)first) {
-            if (unsignedFloat(span,&D_800C4040_de)*rate <= 0.0f) {
-            first = (s32)(unsignedFloat(span,&D_800C4048_de)*rate);
+            if (unsignedFloat(span,&g_rotationTrackFirstSpanTestBias)*rate <= 0.0f) {
+            first = (s32)(unsignedFloat(span,&g_rotationTrackFirstSpanIndexBias)*rate);
         } else {
             f32 integer = (f32)(s32)(unsignedFloat(span,&D_800C4050_de)*rate);
             f32 value = unsignedFloat(span,&D_800C4058_de)*rate;
             first = (integer != value);
-            first += (s32)(unsignedFloat(span,&D_800C4060_de)*rate);
+            first += (s32)(unsignedFloat(span,&g_rotationTrackFirstWrappedSpanBias)*rate);
         }
             }
         second=first+1;
         if (length <= (f32)second) {
-            if (unsignedFloat(span,&D_800C4068_de)*rate <= 0.0f) {
-            second = (s32)(unsignedFloat(span,&D_800C4070_de)*rate);
+            if (unsignedFloat(span,&g_rotationTrackSecondSpanTestBias)*rate <= 0.0f) {
+            second = (s32)(unsignedFloat(span,&g_rotationTrackSecondSpanIndexBias)*rate);
         } else {
             f32 integer = (f32)(s32)(unsignedFloat(span,&D_800C4078_de)*rate);
             f32 value = unsignedFloat(span,&D_800C4080_de)*rate;
             second = (integer != value);
-            second += (s32)(unsignedFloat(span,&D_800C4088_de)*rate);
+            second += (s32)(unsignedFloat(span,&g_rotationTrackSecondWrappedSpanBias)*rate);
         }
         }
         for (i = 0; i < 3; i++) {
-            dest[i] = (D_800C4090_de - frac) * frames[first * 4 + i] + frac * frames[second * 4 + i];
+            dest[i] = (g_rotationTrackInterpolationUnit - frac) * frames[first * 4 + i] + frac * frames[second * 4 + i];
         }
     }
 }
@@ -145,23 +145,23 @@ void Polytrak2_SampleRotationTrack(AnimRef *anim, s32 index, f32 time, CQuatern 
             }
         } else {
             first = (time >= 0.0f ? (s32)time : (s32)time - ((f32)(s32)time != time));
-            if (length - D_800C4098_de <= (f32)first) {
-                if ((unsignedFloat(anim->span,&D_800C40A0_de)*rate) <= 0.0f) first = (s32)(unsignedFloat(anim->span,&D_800C40A8_de)*rate);
+            if (length - g_rotationTrackFirstFrameEndBias <= (f32)first) {
+                if ((unsignedFloat(anim->span,&g_rotationTrackFirstEndSpanTestBias)*rate) <= 0.0f) first = (s32)(unsignedFloat(anim->span,&g_rotationTrackFirstEndSpanIndexBias)*rate);
                 else {
                     f32 integer = (f32)(s32)(unsignedFloat(anim->span,&D_800C40B0_de)*rate);
                     f32 value = unsignedFloat(anim->span,&D_800C40B8_de)*rate;
                     first = (integer != value);
-                    first += (s32)(unsignedFloat(anim->span,&D_800C40C0_de)*rate);
+                    first += (s32)(unsignedFloat(anim->span,&g_rotationTrackFirstEndWrappedSpanBias)*rate);
                 }
             }
             second = first + 1;
-            if (length - D_800C40C8_de <= (f32)second) {
-                if ((unsignedFloat(anim->span,&D_800C40D0_de)*rate) <= 0.0f) second = (s32)(unsignedFloat(anim->span,&D_800C40D8_de)*rate);
+            if (length - g_rotationTrackSecondFrameEndBias <= (f32)second) {
+                if ((unsignedFloat(anim->span,&g_rotationTrackSecondEndSpanTestBias)*rate) <= 0.0f) second = (s32)(unsignedFloat(anim->span,&g_rotationTrackSecondEndSpanIndexBias)*rate);
                 else {
                     f32 integer = (f32)(s32)(unsignedFloat(anim->span,&D_800C40E0_de)*rate);
                     f32 value = unsignedFloat(anim->span,&D_800C40E8_de)*rate;
                     second = (integer != value);
-                    second += (s32)(unsignedFloat(anim->span,&D_800C40F0_de)*rate);
+                    second += (s32)(unsignedFloat(anim->span,&g_rotationTrackSecondEndWrappedSpanBias)*rate);
                 }
             }
         }
@@ -177,7 +177,7 @@ void Polytrak2_DecodeScalarSamples(u32 *stream, Output8025EF54 *out, s32 count) 
     f64 converted;
 
     decode.stream = *stream;
-    if (D_8010AC78 != 0) {
+    if (g_motionTrackDecodeTranslation != 0) {
         decode.first_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 0x20);
         decode.second_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 0x20);
         first = *(f32 *)&decode.first_bits;
@@ -187,16 +187,16 @@ void Polytrak2_DecodeScalarSamples(u32 *stream, Output8025EF54 *out, s32 count) 
         decode.second_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 6);
         converted = (f64)decode.first_bits;
         if (decode.first_bits < 0) {
-            converted += D_800C40F8_de;
+            converted += g_sampleTrackUnsignedConversionBias;
         }
         first = Polytrak2_UnpackUnitValue((f32)converted, 6);
         converted = (f64)decode.second_bits;
         if (decode.second_bits < 0) {
-            converted += D_800C4100_de;
+            converted += g_trackSectionUnsignedConversionBias;
         }
         second = Polytrak2_UnpackUnitValue((f32)converted, 6);
-        first = Polytrak2_ScaleToRange(first, D_8010AC7C, D_8010AC80);
-        second = Polytrak2_ScaleToRange(second, D_8010AC7C, D_8010AC80);
+        first = Polytrak2_ScaleToRange(first, g_motionTrackDecodeRangeStart, g_motionTrackDecodeRangeEnd);
+        second = Polytrak2_ScaleToRange(second, g_motionTrackDecodeRangeStart, g_motionTrackDecodeRangeEnd);
     }
     decode.base = first;
     decode.range = second - first;
@@ -215,9 +215,9 @@ void Polytrak2_DecodeScalarSamples(u32 *stream, Output8025EF54 *out, s32 count) 
 
 #if defined(VERSION_US)
 #ifdef NON_MATCHING
-extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
+extern char Bitarray_ExpandCurveSamples_Address[], Polytrak2_DecodeScalarSamples_Address[], Bitarray_ReadStridedFloatSamples_Address[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
-void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *table, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *table, s32 trackCount, s32 componentCount, s32 smoothingRadius, s32 sampleEncoding) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
     s32 state[2];
@@ -225,46 +225,46 @@ void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *table, s32 arg2, s3
     f32 sum, count;
     s32 *p;
     slot = 1;
-    switch (arg5) {
+    switch (sampleEncoding) {
     case 0:
-        callback = (void (*)(void *, void *, s32))D_00261180_de;
+        callback = (void (*)(void *, void *, s32))Bitarray_ExpandCurveSamples_Address;
         break;
     case 1:
-        callback = (void (*)(void *, void *, s32))D_0025EF34_de;
+        callback = (void (*)(void *, void *, s32))Polytrak2_DecodeScalarSamples_Address;
         break;
     case 2:
-        callback = (void (*)(void *, void *, s32))D_00261238_de;
+        callback = (void (*)(void *, void *, s32))Bitarray_ReadStridedFloatSamples_Address;
         break;
     }
-    table[0] = arg2;
-    table[1] = (arg2 * 4 + 15) & ~7;
-    for (i = 1; i <= arg2; i++) {
+    table[0] = trackCount;
+    table[1] = (trackCount * 4 + 15) & ~7;
+    for (i = 1; i <= trackCount; i++) {
         table[i + 1] = 0xDEADBEEF;
     }
-    for (i = 0; i < arg2; i++) {
+    for (i = 0; i < trackCount; i++) {
         for (a = 0; a <= table[0] && (u32)table[a + 1] != 0xDEADBEEF; a++) {
         }
         a--;
-        table[a + 2] = table[a + 1] + D_8010AC88 * 16;
+        table[a + 2] = table[a + 1] + g_motionTrackRotationFrameCount * 16;
     }
     state[0] = Polytrak2_ByteAddressToBitAddress(0);
-    for (i = 0; i < arg2; i++) {
+    for (i = 0; i < trackCount; i++) {
         row = (f32 *)SetN64_GetPackSection(table, i);
-        for (j = 0; j < arg3; j++) {
+        for (j = 0; j < componentCount; j++) {
             Polytrak2_ReadBitsAndAdvance((u32 *)state, 0x1F);
-            callback(state, row, D_8010AC84);
+            callback(state, row, g_motionTrackSourceFrameCount);
             row += 1;
         }
     }
-    for (i = 0; i < arg2; i++) {
+    for (i = 0; i < trackCount; i++) {
         row = (f32 *)SetN64_GetPackSection(table, i);
-        if (arg3 == 4 && arg4 != 0) {
-            for (j = 0; j < arg3; j++) {
-                for (k = 0; k < D_8010AC88; k++) {
+        if (componentCount == 4 && smoothingRadius != 0) {
+            for (j = 0; j < componentCount; j++) {
+                for (k = 0; k < g_motionTrackRotationFrameCount; k++) {
                     sum = 0;
                     count = 0;
-                    for (a = -arg4; a <= arg4; a++) {
-                        sum += row[((k + a + D_8010AC88) % D_8010AC88) * 4 + j];
+                    for (a = -smoothingRadius; a <= smoothingRadius; a++) {
+                        sum += row[((k + a + g_motionTrackRotationFrameCount) % g_motionTrackRotationFrameCount) * 4 + j];
                         count += 1.0f;
                     }
                     row[k * 4 + j] = sum / count;
@@ -272,10 +272,10 @@ void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *table, s32 arg2, s3
             }
         }
     }
-    if (arg3 == 4) {
-        for (i = 0; i < arg2; i++) {
+    if (componentCount == 4) {
+        for (i = 0; i < trackCount; i++) {
             row = (f32 *)SetN64_GetPackSection(table, i);
-            for (k = 0; k < D_8010AC88; k++) {
+            for (k = 0; k < g_motionTrackRotationFrameCount; k++) {
                 Graphu64_NormalizeQuaternion(row);
                 row += 4;
             }
@@ -293,7 +293,7 @@ INCLUDE_ASM("span_1000", Polytrak2_DecodeAndSmoothSampleTracks);
 #ifdef NON_MATCHING
 /* Drafted from the other version's body in its unit. */
 #else
-INCLUDE_ASM("span_1000", func_8025F0C4_eu_x);
+INCLUDE_ASM("span_1000", Polytrak2_DecodeTrackSectionsEuX);
 #endif
 #endif
 
@@ -301,15 +301,15 @@ INCLUDE_ASM("span_1000", func_8025F0C4_eu_x);
 #ifdef NON_MATCHING
 /* Drafted from the other version's body in its unit. */
 #else
-INCLUDE_ASM("span_1000", func_8025F094_eu);
+INCLUDE_ASM("span_1000", Polytrak2_DecodeTrackSectionsEu);
 #endif
 #endif
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
-extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
+extern char Bitarray_ExpandCurveSamples_Address[], Polytrak2_DecodeScalarSamples_Address[], Bitarray_ReadStridedFloatSamples_Address[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
-void Polytrak2_DecodeTrackSections(s32 unused0, s32 *table, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+void Polytrak2_DecodeTrackSections(s32 unused0, s32 *table, s32 trackCount, s32 componentCount, s32 smoothingRadius, s32 sampleEncoding) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
     s32 state[2];
@@ -317,46 +317,46 @@ void Polytrak2_DecodeTrackSections(s32 unused0, s32 *table, s32 arg2, s32 arg3, 
     f32 sum, count;
     s32 *p;
     slot = 1;
-    switch (arg5) {
+    switch (sampleEncoding) {
     case 0:
-        callback = (void (*)(void *, void *, s32))D_00261180_de;
+        callback = (void (*)(void *, void *, s32))Bitarray_ExpandCurveSamples_Address;
         break;
     case 1:
-        callback = (void (*)(void *, void *, s32))D_0025EF34_de;
+        callback = (void (*)(void *, void *, s32))Polytrak2_DecodeScalarSamples_Address;
         break;
     case 2:
-        callback = (void (*)(void *, void *, s32))D_00261238_de;
+        callback = (void (*)(void *, void *, s32))Bitarray_ReadStridedFloatSamples_Address;
         break;
     }
-    table[0] = arg2;
-    table[1] = (arg2 * 4 + 15) & ~7;
-    for (i = 1; i <= arg2; i++) {
+    table[0] = trackCount;
+    table[1] = (trackCount * 4 + 15) & ~7;
+    for (i = 1; i <= trackCount; i++) {
         table[i + 1] = 0xDEADBEEF;
     }
-    for (i = 0; i < arg2; i++) {
+    for (i = 0; i < trackCount; i++) {
         for (a = 0; a <= table[0] && (u32)table[a + 1] != 0xDEADBEEF; a++) {
         }
         a--;
-        table[a + 2] = table[a + 1] + D_8010AC88 * 16;
+        table[a + 2] = table[a + 1] + g_motionTrackRotationFrameCount * 16;
     }
     state[0] = Polytrak2_ByteAddressToBitAddress(0);
-    for (i = 0; i < arg2; i++) {
+    for (i = 0; i < trackCount; i++) {
         row = (f32 *)SetN64_GetPackSection(table, i);
-        for (j = 0; j < arg3; j++) {
+        for (j = 0; j < componentCount; j++) {
             Polytrak2_ReadBitsAndAdvance((u32 *)state, 0x1F);
-            callback(state, row, D_8010AC84);
+            callback(state, row, g_motionTrackSourceFrameCount);
             row += 1;
         }
     }
-    for (i = 0; i < arg2; i++) {
+    for (i = 0; i < trackCount; i++) {
         row = (f32 *)SetN64_GetPackSection(table, i);
-        if (arg3 == 4 && arg4 != 0) {
-            for (j = 0; j < arg3; j++) {
-                for (k = 0; k < D_8010AC88; k++) {
+        if (componentCount == 4 && smoothingRadius != 0) {
+            for (j = 0; j < componentCount; j++) {
+                for (k = 0; k < g_motionTrackRotationFrameCount; k++) {
                     sum = 0;
                     count = 0;
-                    for (a = -arg4; a <= arg4; a++) {
-                        sum += row[((k + a + D_8010AC88) % D_8010AC88) * 4 + j];
+                    for (a = -smoothingRadius; a <= smoothingRadius; a++) {
+                        sum += row[((k + a + g_motionTrackRotationFrameCount) % g_motionTrackRotationFrameCount) * 4 + j];
                         count += 1.0f;
                     }
                     row[k * 4 + j] = sum / count;
@@ -364,10 +364,10 @@ void Polytrak2_DecodeTrackSections(s32 unused0, s32 *table, s32 arg2, s32 arg3, 
             }
         }
     }
-    if (arg3 == 4) {
-        for (i = 0; i < arg2; i++) {
+    if (componentCount == 4) {
+        for (i = 0; i < trackCount; i++) {
             row = (f32 *)SetN64_GetPackSection(table, i);
-            for (k = 0; k < D_8010AC88; k++) {
+            for (k = 0; k < g_motionTrackRotationFrameCount; k++) {
                 Graphu64_NormalizeQuaternion(row);
                 row += 4;
             }
@@ -387,7 +387,7 @@ INCLUDE_ASM("span_1000", Polytrak2_DecodeTrackSections);
 
 /* Expand each encoded track, optionally smooth its four channels in place,
  * then normalize quaternion samples. */
-extern char D_002611A0_us_rev1[], D_0025EF54_us_rev1[], D_00261258_us_rev1[];
+extern char Bitarray_ExpandCurveSamples_AddressUsRev1[], Polytrak2_DecodeScalarSamples_AddressUsRev1[], Bitarray_ReadStridedFloatSamples_AddressUsRev1[];
 typedef struct {
     s32 count;
     s32 offsets[1];
@@ -402,13 +402,13 @@ s32 Polytrak2_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s3
     f32 total, weight;
     switch (encoding) {
     case 0:
-        decode = (void (*)(void *, void *, s32))D_002611A0_us_rev1;
+        decode = (void (*)(void *, void *, s32))Bitarray_ExpandCurveSamples_AddressUsRev1;
         break;
     case 1:
-        decode = (void (*)(void *, void *, s32))D_0025EF54_us_rev1;
+        decode = (void (*)(void *, void *, s32))Polytrak2_DecodeScalarSamples_AddressUsRev1;
         break;
     case 2:
-        decode = (void (*)(void *, void *, s32))D_00261258_us_rev1;
+        decode = (void (*)(void *, void *, s32))Bitarray_ReadStridedFloatSamples_AddressUsRev1;
         break;
     }
     buffer->count = tracks;
@@ -420,7 +420,7 @@ s32 Polytrak2_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s3
         for (index = 0; index <= buffer->count && (u32)buffer->offsets[index] != 0xDEADBEEF; index++) {
         }
         index--;
-        buffer->offsets[index + 1] = buffer->offsets[index] + D_8010AC88 * 16;
+        buffer->offsets[index + 1] = buffer->offsets[index] + g_motionTrackRotationFrameCount * 16;
     }
     stream[0] = Polytrak2_ByteAddressToBitAddress(source);
     i = 0;
@@ -433,7 +433,7 @@ s32 Polytrak2_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s3
                 out = values;
                 do {
                     Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 0x1F);
-                    decode(cursor, out, D_8010AC84);
+                    decode(cursor, out, g_motionTrackSourceFrameCount);
                     out += 1;
                     j++;
                 } while (j < channels);
@@ -447,7 +447,7 @@ s32 Polytrak2_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s3
         values = (f32 *)SetN64_GetPackSection(buffer, i);
         if (channels == 4 && radius != 0) {
             for (component = 0; component < channels; component++) {
-                frames = D_8010AC88;
+                frames = g_motionTrackRotationFrameCount;
                 for (j = 0; j < frames; j++) {
                     total = 0;
                     weight = 0;
@@ -464,12 +464,12 @@ s32 Polytrak2_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s3
         for (j = 0; j < tracks; j++) {
             f32 *values = (f32 *)SetN64_GetPackSection(buffer, j);
             i = 0;
-            if (D_8010AC88 > 0) {
+            if (g_motionTrackRotationFrameCount > 0) {
                 out = values;
                 do {
                     Graphu64_NormalizeQuaternion(out);
                     out += 4;
-                } while (++i < D_8010AC88);
+                } while (++i < g_motionTrackRotationFrameCount);
             }
         }
     }

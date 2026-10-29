@@ -1,7 +1,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MOTION_STEP.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RENDERSORTRECORD.H"
@@ -241,18 +241,18 @@ void CInstanceCollision_TraceInteractiveActors(char *obj) {
 
 void CInstanceCollision_BuildSweepQuery(ActorMotion *motion, f32 *queryStorage)
 {
-  f32 *new_var;
-  f32 temp;
+  f32 *height;
+  f32 bottomOffset;
   f32 value;
-  u32 *new_var2;
+  u32 *surfaceFlags;
   f32 bound;
-  new_var2 = &motion->surface->dwFlags;
+  surfaceFlags = &motion->surface->dwFlags;
   ((Query *)queryStorage)->radius = motion->radius;
-  ((Query *)queryStorage)->flag = (*new_var2) & 0x400;
-  temp = motion->bottom;
-  ((Query *)queryStorage)->bottom = temp;
-  new_var = &motion->height;
-  ((Query *)queryStorage)->top = temp + (*new_var);
+  ((Query *)queryStorage)->flag = (*surfaceFlags) & 0x400;
+  bottomOffset = motion->bottom;
+  ((Query *)queryStorage)->bottom = bottomOffset;
+  height = &motion->height;
+  ((Query *)queryStorage)->top = bottomOffset + (*height);
   ((Query *)queryStorage)->bottom1 = (motion->start.y) + ((Query *)queryStorage)->bottom;
   ((Query *)queryStorage)->top1 = (motion->start.y) + ((Query *)queryStorage)->top;
   ((Query *)queryStorage)->bottom2 = (motion->end.y) + ((Query *)queryStorage)->bottom;
@@ -288,30 +288,30 @@ void CInstanceCollision_BuildSweepQuery(ActorMotion *motion, f32 *queryStorage)
 }
 
 #if defined(VERSION_EU)
-const unsigned int D_8023EF00_C93D0[2] = {
+const unsigned int k_InstcolEncodedWords[2] = {
     0xBF800000, 0x3F800000,
 };
 #endif
 
 #if defined(VERSION_US)
-const char rodata_unresolved_800C3618[8] =
+const char s_InstcolTEosTText[8] =
     "_t\004.eosT";
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-const unsigned int rodata_unresolved_800C87D8[2] = {
+const unsigned int k_InstcolEncodedWordsBlock3[2] = {
     0x3F800000, 0x3F800000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C3998[2] = {
+unsigned int k_InstcolEncodedWordsBlock2[2] = {
     0x3463FFFF, 0x02A61021,
 };
 #endif
 
 #if defined(VERSION_DE)
-const unsigned int rodata_unresolved_800C36E8[2] = {
+const unsigned int k_InstcolEncodedWordsBlock1[2] = {
     0x0023F858, 0x0023F880,
 };
 #endif

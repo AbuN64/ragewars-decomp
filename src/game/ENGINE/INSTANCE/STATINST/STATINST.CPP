@@ -4,7 +4,7 @@
 #include "WORLD/STATIC_MODEL_INSTANCE_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
@@ -14,10 +14,10 @@
 #include "include_asm.h"
 
 /* STATINST.CPP */
-extern s32 D_800D2978;
+extern s32 g_gameFrameCounter;
 
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-extern f32 D_800C3E50_de[];
+extern f32 g_staticObjectFadeThresholdAndAlpha[];
 
 /* Draws an owner model with timed descriptor selection and fade setup/reset; a named descriptor-slot reference preserves reload scheduling. */
 
@@ -27,7 +27,7 @@ extern void Link_AnimateVertexColors(void *object, void *colors);
 
 extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s32);
 
-static inline int select_key(DescriptorRecAt24 *descriptor, u32 timer) {
+static inline int select_key(StaticModelAnimationDescriptor *descriptor, u32 timer) {
  int key;
     if (timer >= (u32)(descriptor->period * 2)) {
         key = descriptor->key2;
@@ -46,51 +46,51 @@ extern char g_statObjectIndexText;
 
 #if defined(VERSION_DE)
 #elif defined(VERSION_EU)
-extern char D_800C4120[];
+extern char s_staticInstanceResourceTag[];
 #elif defined(VERSION_EU_X)
-extern char D_800C4160[];
+extern char s_staticModelResourceTag[];
 #elif defined(VERSION_US)
-extern char D_800C3DA0[];
+extern char s_staticGeometryResourceTag[];
 #else
-extern char D_800C8F60[];
+extern char s_staticPropResourceTag[];
 #endif
 
 extern s32 SetN64_LocatePackSection(s32 *, s32, s32, s32 *);
 
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, ResourceManagerState);
 
-s32 Statinst_UpdateDistanceFade(void *prop, s32 arg1) {
+s32 Statinst_UpdateDistanceFade(void *prop, s32 cameraAddress) {
     OwnerStaticInstanceDrawDistanceFadedModel *owner = prop;
-    GameplayCamera *camera = (void *)arg1;
+    GameplayCamera *camera = (void *)cameraAddress;
     CVector3 sp10;
-    f32 temp_f0;
+    f32 distanceSquared;
     f32 threshold;
-    s32 var_v1;
-    s8 temp_v0;
-    s32 var_v1_2;
+    s32 unsignedDistanceSquared;
+    s8 nextFade;
+    s32 selectedResourceKey;
     u16 flagsD8Value;
-    u16 var_v0;
+    u16 updatedRenderFlags;
     u8 next_timer;
-    DescriptorRecAt24 *descriptor;
+    StaticModelAnimationDescriptor *descriptor;
 
     Graphu64_SubtractVectors(&sp10, &camera->position,
                   &owner->position);
-    temp_f0 = sp10.x * sp10.x + sp10.y * sp10.y + sp10.z * sp10.z;
-    threshold = D_800C3E50_de[0];
-    if (!(threshold <= temp_f0)) {
-        var_v1 = (s32)temp_f0;
+    distanceSquared = sp10.x * sp10.x + sp10.y * sp10.y + sp10.z * sp10.z;
+    threshold = g_staticObjectFadeThresholdAndAlpha[0];
+    if (!(threshold <= distanceSquared)) {
+        unsignedDistanceSquared = (s32)distanceSquared;
     } else {
-        var_v1 = (s32)(temp_f0 - threshold) | 0x80000000;
+        unsignedDistanceSquared = (s32)(distanceSquared - threshold) | 0x80000000;
     }
     descriptor = owner->descriptor;
-    owner->timer = var_v1;
-    if ((u32)var_v1 >= (u32)(descriptor->period * 2)) {
-        var_v1_2 = descriptor->key2;
+    owner->timer = unsignedDistanceSquared;
+    if ((u32)unsignedDistanceSquared >= (u32)(descriptor->period * 2)) {
+        selectedResourceKey = descriptor->key2;
     } else {
-        var_v1_2 = descriptor->key;
+        selectedResourceKey = descriptor->key;
     }
 
-    if (var_v1_2 == -1) {
+    if (selectedResourceKey == -1) {
         if (owner->fade <= 0) {
             owner->fade = 0;
             owner->flagsD8 =
@@ -103,12 +103,12 @@ s32 Statinst_UpdateDistanceFade(void *prop, s32 arg1) {
             owner->fade = 0;
             return 0;
         }
-        temp_v0 = (u8)owner->fade - 1;
-        owner->fade = temp_v0;
-        if (temp_v0 < 0) {
+        nextFade = (u8)owner->fade - 1;
+        owner->fade = nextFade;
+        if (nextFade < 0) {
             owner->fade = 0;
         }
-        var_v0 = owner->flagsD8 | 4;
+        updatedRenderFlags = owner->flagsD8 | 4;
         goto block_20;
     } else if (owner->fade < 8) {
         next_timer = (u8)owner->fade + 1;
@@ -119,9 +119,9 @@ s32 Statinst_UpdateDistanceFade(void *prop, s32 arg1) {
         } else {
             owner->fade =
                 next_timer;
-            var_v0 = owner->flagsD8 | 4;
+            updatedRenderFlags = owner->flagsD8 | 4;
 block_20:
-            owner->flagsD8 = var_v0;
+            owner->flagsD8 = updatedRenderFlags;
         }
     } else {
         owner->fade = 8;
@@ -130,7 +130,7 @@ block_20:
 }
 
 void Statinst_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedModel *owner) {
-    DescriptorRecAt24 *descriptor;
+    StaticModelAnimationDescriptor *descriptor;
     s32 remaining;
     s32 key;
     void *instance;
@@ -149,23 +149,23 @@ void Statinst_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedModel *
         if (owner->fade <= 0) {
             return;
         }
-        D_800D15E0 = 1;
-        D_800D15E4[3] = owner->fade << 5;
-        { DescriptorRecAt24 **slot = &owner->descriptor; key = (*slot)->key; }
+        g_menuModelFillEnabled = 1;
+        g_menuModelFillColor[3] = owner->fade << 5;
+        { StaticModelAnimationDescriptor **slot = &owner->descriptor; key = (*slot)->key; }
     } else {
         if (owner->fade < 8) {
-            D_800D15E0 = 1;
+            g_menuModelFillEnabled = 1;
             alpha = owner->fade << 5;
         } else {
-            alpha = D_800C3E50_de[1];
-            D_800D15E0 = 0;
+            alpha = g_staticObjectFadeThresholdAndAlpha[1];
+            g_menuModelFillEnabled = 0;
         }
-        D_800D15E4[3] = alpha;
+        g_menuModelFillColor[3] = alpha;
     }
     instance = Statinst_AcquireGeometry(owner, key);
     if (instance != 0) {
-        resource = Cache_RequestPairedResource(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
-                                 D_800C3E40_de, 0);
+        resource = Cache_RequestPairedResource(0, owner->flagsD0 | g_litGeometryResourceKeyFlags, instance, (CachedResource *)owner->pairedResource, 8, owner, &g_Statinst_BuildLitGeometryResourceAddress,
+                                 s_staticLitGeometryResourceTag, 0);
         if (resource != 0) {
             Cache_MarkResourceInUse(0, resource);
             header = (s32 *)resource->data;
@@ -173,14 +173,14 @@ void Statinst_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedModel *
                 char *object = (char *)header + header[1];
                 char *colors = (char *)header + header[2];
 
-                if (owner->colorFrame != (u8)D_800D2978) {
+                if (owner->colorFrame != (u8)g_gameFrameCounter) {
                     Link_AnimateVertexColors(object, colors);
                 }
                 data = object;
             } else {
                 data = (char *)(header + 2);
             }
-            if (D_800D15E0 != 0) {
+            if (g_menuModelFillEnabled != 0) {
                 Geometry_DrawModelResource(instance, owner->transform, 0, 0, data, remaining);
             } else {
                 Geometry_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
@@ -188,10 +188,10 @@ void Statinst_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedModel *
             Cache_UnlockResource(0, resource);
         }
         Cache_UnlockResource(0, instance);
-        owner->colorFrame = (u8)D_800D2978;
+        owner->colorFrame = (u8)g_gameFrameCounter;
     }
-    D_800D15E0 = 0;
-    D_800D15E4[3] = D_800C3E58_de;
+    g_menuModelFillEnabled = 0;
+    g_menuModelFillColor[3] = g_staticObjectOpaqueAlpha;
 }
 
 void Statinst_DrawModel(ModelOwner *owner) {
@@ -209,8 +209,8 @@ void Statinst_DrawModel(ModelOwner *owner) {
     if (instance == 0) {
         return;
     }
-    resource = Cache_RequestPairedResource(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
-                             D_800C3E40_de, 0);
+    resource = Cache_RequestPairedResource(0, owner->flagsD0 | g_litGeometryResourceKeyFlags, instance, (CachedResource *)owner->pairedResource, 8, owner, &g_Statinst_BuildLitGeometryResourceAddress,
+                             s_staticLitGeometryResourceTag, 0);
     if (resource != 0) {
         Cache_MarkResourceInUse(0, resource);
         header = (s32 *)resource->data;
@@ -218,14 +218,14 @@ void Statinst_DrawModel(ModelOwner *owner) {
             char *object = (char *)header + header[1];
             char *colors = (char *)header + header[2];
 
-            if (owner->colorFrame != (u8)D_800D2978) {
+            if (owner->colorFrame != (u8)g_gameFrameCounter) {
                 Link_AnimateVertexColors(object, colors);
             }
             data = object;
         } else {
             data = (char *)&header[2];
         }
-        if (D_800D15E0 != 0) {
+        if (g_menuModelFillEnabled != 0) {
             Geometry_DrawModelResource(instance, owner->transform, 0, 0, data, remaining);
         } else {
             Geometry_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
@@ -233,7 +233,7 @@ void Statinst_DrawModel(ModelOwner *owner) {
         Cache_UnlockResource(0, resource);
     }
     Cache_UnlockResource(0, instance);
-    owner->colorFrame = (u8)D_800D2978;
+    owner->colorFrame = (u8)g_gameFrameCounter;
 }
 
 void Statinst_DispatchAttachmentEvents(void *object, s32 all) {
@@ -255,15 +255,15 @@ void Statinst_DispatchAttachmentEvents(void *object, s32 all) {
     }
     name = SetN64_LocatePackSection(*model, ((PlacedProp *)object)->owner, 3, &size);
 #if defined(VERSION_DE)
-    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C3E70, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, s_staticObjectResourceTag, 0);
 #elif defined(VERSION_EU)
-    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C4120, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, s_staticInstanceResourceTag, 0);
 #elif defined(VERSION_EU_X)
-    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C4160, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, s_staticModelResourceTag, 0);
 #elif defined(VERSION_US)
-    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C3DA0, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, s_staticGeometryResourceTag, 0);
 #else
-    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C8F60, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, s_staticPropResourceTag, 0);
 #endif
     if (table != 0) {
         header = *table;
@@ -282,6 +282,6 @@ void Statinst_DispatchAttachmentEvents(void *object, s32 all) {
 }
 
 /* 800C8F30.CPP */
-const unsigned char D_d0_0ba355c47669e01e[13] = {
+const unsigned char s_staticInstanceLitVerticesTag[13] = {
     0x6C, 0x69, 0x74, 0x20, 0x76, 0x65, 0x72, 0x74, 0x69, 0x63, 0x65, 0x73, 0x00,
 };

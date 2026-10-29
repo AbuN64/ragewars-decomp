@@ -7,40 +7,40 @@
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
-struct ItemRecAt20V1;
-struct ItemRecAt20V1 {
+struct MenuLocalizedTextItemView;
+struct MenuLocalizedTextItemView {
     char pad0[0x14];
     s32 x;
     char pad18[8];
     s32 y;
 };
 
-struct ObjRecAtE;
-struct ObjRecAtE {
+struct FontGlyphCountView;
+struct FontGlyphCountView {
     char pad0[0xE];
-    s16 unkE;
+    s16 glyphCount;
 };
 
-struct ObjRecAtE;
-typedef struct ObjRecAtE ObjRecAtE;
+struct FontGlyphCountView;
+typedef struct FontGlyphCountView FontGlyphCountView;
 
-struct ObjRecAt1454V2;
-struct ObjRecAt1454V2 {
+struct NavigationActorBrainView;
+struct NavigationActorBrainView {
     char pad0[0x1454];
-    void * unk1454;
+    void * brain;
 };
 
 /* Resource node pool: word 0 is the free-node count, word 0x11 the frame stamp;
-   the cache record D_80100570 sits 0xBCC bytes below. */
+   the cache record g_resourceRecencyList sits 0xBCC bytes below. */
 struct Pool {
     s32 count;
     char pad[0x40];
-    s32 field44;
+    s32 useCounter;
 };
-extern s32 D_8010513C;
+extern s32 g_resourceFreeNodeCount;
 
-struct Actor_func_8024A1D0_de;
-typedef struct Actor_func_8024A1D0_de Actor_func_8024A1D0_de;
+struct FadedActorRenderView;
+typedef struct FadedActorRenderView FadedActorRenderView;
 
 struct StridedTable;
 struct StridedTable {
@@ -60,41 +60,41 @@ struct FftTables {
     s32 size;
 };
 
-struct ObjRecAt2CV2;
-struct ObjRecAt2CV2 {
+struct FrontendArchiveHandleView;
+struct FrontendArchiveHandleView {
     char pad0[0x2C];
-    int unk2C;
+    int archiveHandle;
 };
 
-extern int D_80142CA8;
+extern int g_gameModeTransitionFrames;
 
 
-struct ObjRecAt4V1;
-struct ObjRecAt4V1 {
+struct PortalLinkAvailabilityView;
+struct PortalLinkAvailabilityView {
     char pad0[0x4];
-    u8 unk4;
+    u8 available;
 };
 
-struct ObjectState1E;
-struct ObjectState1E {
+struct BreakableDamageScaleView;
+struct BreakableDamageScaleView {
     unsigned char padding_0[29];
     s8 unk_1D;
 };
 
-struct ObjRecAt14V3;
-struct ObjRecAt14V3 {
-    s32 unk0;
+struct ActorDefinitionFlagsView;
+struct ActorDefinitionFlagsView {
+    s32 kind;
     char pad0[0x10];
-    s32 unk14;
+    s32 flags;
 };
 
-struct CellRecAt1A;
+struct ChoiceMenuCellView;
 
-struct CellRecAt1A;
+struct ChoiceMenuCellView;
 struct MenuFrontendUpdatePlayModeMenu;
 struct MenuFrontendUpdatePlayModeMenu {
     char pad[0x44];
-    struct CellRecAt1A *list;
+    struct ChoiceMenuCellView *list;
 };
 
 struct FieldRow;
@@ -134,7 +134,7 @@ struct NodeCode8028469C {
 };
 
 /* Shared free/active node pool initialized by func_80285AC4_de. */
-struct PoolRecAt28V1 {
+struct RumbleNodePoolView {
     IntrusiveList free;
     IntrusiveList active;
     s32 baseLevel;
@@ -164,10 +164,10 @@ struct Block70 {
 struct Block70;
 typedef struct Block70 Block70;
 
-struct func_8025E5B0_S1;
-struct func_8025E5B0_S1 {
+struct MenuCreationOwnerView;
+struct MenuCreationOwnerView {
     char pad0[0x14];
-    short unk14;
+    short menuFlags;
 };
 
 struct EntryPakCreateMenuFromParameters;
@@ -237,25 +237,25 @@ struct Node802A697C {
     s32 matrixIndex; /* 0x0C */
 };
 
-struct ObjRecAt1CV3;
-struct ObjRecAt1CV3 {
+struct PreviewRotationView;
+struct PreviewRotationView {
     char pad0[0x1C];
-    Triple unk1C;
+    Triple rotation;
 };
 
-struct Shape_typemap_6;
-struct Shape_typemap_6 {
-    int field_0;
-    int field_4;
-    int field_8;
-    int field_C;
+struct MenuPlayerScissorRect;
+struct MenuPlayerScissorRect {
+    int left;
+    int top;
+    int right;
+    int bottom;
 };
 
-struct func_8024C5C4_S2;
-typedef struct func_8024C5C4_S2 func_8024C5C4_S2;
+struct AttachmentEventTableView;
+typedef struct AttachmentEventTableView AttachmentEventTableView;
 
-struct Brain_func_80212D78_eu_x;
-struct Brain_func_80212D78_eu_x {
+struct NavigationBrainView;
+struct NavigationBrainView {
     struct Shared_ActorView *player;
     s32 node;
     char pad8[4];
@@ -332,12 +332,12 @@ struct MenuWidget {
 struct MenuWidget;
 typedef struct MenuWidget MenuWidget;
 
-struct func_8020CA10_G1;
-typedef struct func_8020CA10_G1 func_8020CA10_G1;
+struct ScalarFloatView;
+typedef struct ScalarFloatView ScalarFloatView;
 
-struct func_8020CA10_G1;
-struct func_8020CA10_G1 {
-    f32 unk0;
+struct ScalarFloatView;
+struct ScalarFloatView {
+    f32 value;
 };
 
 
@@ -367,8 +367,8 @@ typedef signed int ( *Handler802A2B50)(void *, signed int, signed int, signed in
 struct Field_f32_10;
 typedef struct Field_f32_10 Field_f32_10;
 
-struct Actor_func_8024A1D0_de;
-struct Actor_func_8024A1D0_de {
+struct FadedActorRenderView;
+struct FadedActorRenderView {
     char pad0[3];
     s8 pass;
     u32 pad4;
@@ -405,26 +405,26 @@ struct Entry802AB8DC {
 struct Inner8043E56C;
 struct Inner8043E56C {
     u8 pad0[4];
-    s8 unk4;
+    s8 controllerPort;
 };
 
 struct Inner8043E56C;
 struct Outer8043E56C;
 struct Outer8043E56C {
     u8 pad0[0x20];
-    struct Inner8043E56C *unk20;
+    struct Inner8043E56C *controller;
 };
 
 struct Outer8043E56C;
 typedef struct Outer8043E56C Outer8043E56C;
 
-struct ObjRecAtCV3;
-typedef struct ObjRecAtCV3 ObjRecAtCV3;
+struct MapBlockAllocatorView;
+typedef struct MapBlockAllocatorView MapBlockAllocatorView;
 
 struct OwnerCode8043DF84;
 struct OwnerCode8043DF84 {
     char pad0[0x85C];
-    s32 unk85C;
+    s32 playerStateDirty;
 };
 
 
@@ -460,26 +460,26 @@ struct __OSInode {
 struct TextLayerRect;
 typedef struct TextLayerRect TextLayerRect;
 
-struct ObjRecAt2V1;
-typedef struct ObjRecAt2V1 ObjRecAt2V1;
+struct BoneRotationIndexPair;
+typedef struct BoneRotationIndexPair BoneRotationIndexPair;
 
 
 struct Node75;
 typedef struct Node75 Node75;
 
-struct ObjRecAt8V2;
-struct ObjRecAt8V2 {
+struct TrackAngleKindView;
+struct TrackAngleKindView {
     char pad0[0x8];
-    char unk8;
+    char kind;
 };
 
 struct ALMIDIEvent;
 typedef struct ALMIDIEvent ALMIDIEvent;
 
-struct ObjRecAt80;
-struct ObjRecAt80 {
+struct PlayerCharacterKindView;
+struct PlayerCharacterKindView {
     char pad0[0x80];
-    s8 unk80;
+    s8 characterKind;
 };
 
 struct ResourceManagerState;
@@ -494,9 +494,9 @@ typedef struct Arg1Struct Arg1Struct;
 struct Arg1Struct;
 struct Arg1Struct {
     char pad0[0x1C];
-    s32 unk1C;
+    s32 player;
     char pad1[0x20 - 0x1C - 4];
-    s32 unk20;
+    s32 controller;
 };
 
 
@@ -518,10 +518,10 @@ struct AudioVoicePhysicalLinkView {
 struct ALHeap;
 typedef struct ALHeap ALHeap;
 
-struct ObjRecAtB0;
-struct ObjRecAtB0 {
+struct ControllerButtonFlagsView;
+struct ControllerButtonFlagsView {
     char pad0[0xB0];
-    s32 unkB0;
+    s32 buttons;
 };
 
 
@@ -530,14 +530,14 @@ typedef struct ResourceSmpFlickerCreateFlickerWidget ResourceSmpFlickerCreateFli
 
 struct IntPair;
 struct IntPair {
-    int field_0;
-    int field_4;
+    int first;
+    int second;
 };
 
-struct ObjRecAt130;
-struct ObjRecAt130 {
+struct ViewPositionZView;
+struct ViewPositionZView {
     char pad0[0x130];
-    f32 unk130;
+    f32 positionZ;
 };
 
 
@@ -555,8 +555,8 @@ struct Handler {
     s32 (*handle14)(void *actor, struct Handler *entry);
 };
 
-struct Shape_typemap_110;
-struct Shape_typemap_110 {
+struct DialogPlayerState;
+struct DialogPlayerState {
     int field_0;
     int field_4;
     int field_8;
@@ -582,7 +582,7 @@ struct ALFilter_s14 {
 };
 
 
-extern int D_801005A8;
+extern int g_resourceSlotLockState;
 
 struct Key;
 struct Key {
@@ -590,30 +590,30 @@ struct Key {
 };
 
 struct Key;
-struct OwnerRecAt38;
-struct OwnerRecAt38 {
+struct SmpButtonOwnerView;
+struct SmpButtonOwnerView {
     char pad[0x38];
     struct Key *selected;
 };
 
-struct EntryRecAt3;
-struct EntryRecAt3 {
+struct ControllerInitStatusBytes;
+struct ControllerInitStatusBytes {
     u16 id;
     u8 team;
     u8 slot;
 };
 
-struct EntryRecAt3;
-typedef struct EntryRecAt3 EntryRecAt3;
+struct ControllerInitStatusBytes;
+typedef struct ControllerInitStatusBytes ControllerInitStatusBytes;
 
-struct Shape_typemap_21;
-struct Shape_typemap_21 {
+struct WidgetFlagsView;
+struct WidgetFlagsView {
     unsigned char padding_0[16];
     unsigned char field_10;
 };
 
-struct ObjRecAt1454V2;
-typedef struct ObjRecAt1454V2 ObjRecAt1454V2;
+struct NavigationActorBrainView;
+typedef struct NavigationActorBrainView NavigationActorBrainView;
 
 
 struct Field_u16_14;
@@ -622,10 +622,10 @@ struct Field_u16_14 {
     u16 value;
 };
 
-struct func_8028469C_S2;
-struct func_8028469C_S2 {
+struct WidgetLabelTextView;
+struct WidgetLabelTextView {
     char pad0[0x38];
-    void * unk38;
+    void * text;
 };
 
 struct Block24;
@@ -658,7 +658,7 @@ struct Block {
 struct Block;
 typedef struct Block Block;
 
-struct func_80250BD4_S1;
+struct MenuControllerSelectionView;
 
 struct Vec3Words;
 struct Vec3Words {
@@ -667,10 +667,10 @@ struct Vec3Words {
 
 
 
-struct func_80207B5C_S2;
-typedef struct func_80207B5C_S2 func_80207B5C_S2;
+struct PlayerViewModeView;
+typedef struct PlayerViewModeView PlayerViewModeView;
 
-extern int D_8010515C;
+extern int g_resourceHeapLockUsers;
 
 
 struct StateFlags;
@@ -691,9 +691,9 @@ struct Desc {
     s32 caps[4];
 };
 
-struct OwnerRecAt5D8V2;
+struct PlayerSettingsOwnerView;
 struct PlayerOptions;
-struct OwnerRecAt5D8V2 {
+struct PlayerSettingsOwnerView {
     char pad[0x5D8];
     struct PlayerOptions *settings; /* its name text comes first */
 };
@@ -701,8 +701,8 @@ struct OwnerRecAt5D8V2 {
 
 
 
-struct func_8022BC04_S3;
-typedef struct func_8022BC04_S3 func_8022BC04_S3;
+struct AnimationResourceHandleView;
+typedef struct AnimationResourceHandleView AnimationResourceHandleView;
 
 struct RecGobjinstSampleBoneTranslation;
 typedef struct RecGobjinstSampleBoneTranslation RecGobjinstSampleBoneTranslation;
@@ -727,7 +727,7 @@ struct StateFrontendUpdateOptionsPageExit {
 struct HudStatusShared_MatchRules;
 typedef struct HudStatusShared_MatchRules HudStatusShared_MatchRules;
 
-struct func_8022CA04_S3;
+struct PlayerMovementScalarView;
 
 struct ParamsRecAt8V1;
 typedef struct ParamsRecAt8V1 ParamsRecAt8V1;
@@ -763,17 +763,17 @@ typedef struct func_8024DED0_S2 func_8024DED0_S2;
 struct func_8024DED0_S2;
 struct func_8024DED0_S2 {
     char pad0[0x4C];
-    int unk4C;
+    int reservedWord;
 };
 
 struct ObjRecAt40V1;
 typedef struct ObjRecAt40V1 ObjRecAt40V1;
 
 
-struct func_8023945C_S1;
-struct func_8023945C_S1 {
+struct PlayerEyePositionView;
+struct PlayerEyePositionView {
     char pad0[0x128];
-    CVector3 unk128;
+    CVector3 eyePosition;
 };
 
 
@@ -794,22 +794,22 @@ struct ListScreenRecord {
 };
 
 
-struct ObjRecAt14V1;
-typedef struct ObjRecAt14V1 ObjRecAt14V1;
+struct MenuLabelPointerView;
+typedef struct MenuLabelPointerView MenuLabelPointerView;
 
 
-extern IntrusiveList D_80137064;
+extern IntrusiveList g_spawnedActorList;
 
 
-extern float D_8010AC7C;
+extern float g_motionTrackDecodeRangeStart;
 
 
-struct ObjRecAt1CV1;
-struct ObjRecAt1CV1 {
+struct PulsingMenuSpriteView;
+struct PulsingMenuSpriteView {
     char pad0[0x14];
-    int unk14;
+    int spriteResource;
     char pad14[0x1C - 0x14 - sizeof(int)];
-    int unk1C;
+    int pulsePhase;
 };
 
 struct CROMInitialOrientation_t;
@@ -863,8 +863,8 @@ struct ALHeap {
     s32 count;
 };
 
-struct ItemRecAt20V1;
-typedef struct ItemRecAt20V1 ItemRecAt20V1;
+struct MenuLocalizedTextItemView;
+typedef struct MenuLocalizedTextItemView MenuLocalizedTextItemView;
 
 struct StateBlock;
 typedef struct StateBlock StateBlock;
@@ -873,7 +873,7 @@ struct TextBoundsText;
 struct MenuStyle;
 /* The draw style menu item callbacks receive last: alpha and fade scale the item's intensity. */
 struct MenuStyle {
-    /* The same record Menu_DrawStyledMenuText draws through as its fourth argument (func_8043FFAC_S2), and
+    /* The same record Menu_DrawStyledMenuText draws through as its fourth argument (StyledMenuTextPanel), and
        Setup_DrawNameCursor reads its id at +0x1C. */
     s16 state;
     s16 x; /* 0x02 */
@@ -890,17 +890,17 @@ struct MenuStyle {
     s32 unk3C;
 };
 
-struct OwnerRecAt5D0;
-struct OwnerRecAt5D0 {
+struct MusicPreviewOwnerView;
+struct MusicPreviewOwnerView {
     char pad[0x5D0];
     s32 value;
 };
 
 struct Holder;
-struct OwnerRecAt5D0;
+struct MusicPreviewOwnerView;
 struct Holder {
     char pad[0x1C];
-    struct OwnerRecAt5D0 *owner;
+    struct MusicPreviewOwnerView *owner;
 };
 
 struct CallbackStateC_4;
@@ -912,10 +912,10 @@ struct Field_void_4 {
     void * value;
 };
 
-struct ObjRecAt18V1;
-struct ObjRecAt18V1 {
+struct SequenceTicksPerQuarterView;
+struct SequenceTicksPerQuarterView {
     char pad18[0x18];
-    s16 field18;
+    s16 ticksPerQuarter;
 };
 
 
@@ -928,8 +928,8 @@ struct MenuMarker {
     s16 x;
 };
 
-struct ObjRecAt2V2;
-typedef struct ObjRecAt2V2 ObjRecAt2V2;
+struct PackedMaterialHalfwordView;
+typedef struct PackedMaterialHalfwordView PackedMaterialHalfwordView;
 
 struct Draw;
 typedef struct Draw Draw;
@@ -974,33 +974,33 @@ struct AudioSynthVoiceAllocatorView {
 
 struct OSThread_s;
 
-struct ObjRecAt18V2;
-typedef struct ObjRecAt18V2 ObjRecAt18V2;
+struct ActorKindDefinitionPointerView;
+typedef struct ActorKindDefinitionPointerView ActorKindDefinitionPointerView;
 
-struct func_80254D70_S2;
-typedef struct func_80254D70_S2 func_80254D70_S2;
-
-
-
-extern int D_80145048;
+struct MenuTextOwnerView;
+typedef struct MenuTextOwnerView MenuTextOwnerView;
 
 
-struct EntryRecAt0V1;
-struct EntryRecAt0V1 {
+
+extern int g_playerCount;
+
+
+struct ProfileWeaponRowEntry;
+struct ProfileWeaponRowEntry {
     s32 value;
     char pad[28 - 4];
 };
 
-struct ObjRecAt80;
-typedef struct ObjRecAt80 ObjRecAt80;
+struct PlayerCharacterKindView;
+typedef struct PlayerCharacterKindView PlayerCharacterKindView;
 
 
-struct ObjectLinks24_2;
-typedef struct ObjectLinks24_2 ObjectLinks24_2;
+struct BoneRotationTrackView;
+typedef struct BoneRotationTrackView BoneRotationTrackView;
 
 
-struct ResourceRecAt6;
-struct ResourceRecAt6 {
+struct FrontendTextureTimerEntry;
+struct FrontendTextureTimerEntry {
     s32 id;
     s16 retained;
     s16 unused;
@@ -1012,8 +1012,8 @@ struct Field_Vec_18 {
     CVector3 value;
 };
 
-struct ObjRecAt2V2;
-struct ObjRecAt2V2 {
+struct PackedMaterialHalfwordView;
+struct PackedMaterialHalfwordView {
     char pad0[0x2];
     u16 unk2;
 };
@@ -1051,36 +1051,36 @@ struct MenuCMenuProfileUpdateProfileModeLabel;
 struct OwnerCMenuProfileUpdateProfileModeLabel;
 
 
-struct CellRecAt1A;
-struct CellRecAt1A {
+struct ChoiceMenuCellView;
+struct ChoiceMenuCellView {
     char pad[0x16];
-    s16 unk16;
+    s16 transitionTimer;
     s16 unk18;
-    s16 unk1A;
+    s16 transitionDuration;
 };
 
-struct CellRecAt1A;
+struct ChoiceMenuCellView;
 struct ObjMenuUpdateSixChoiceMenu;
 struct ObjMenuUpdateSixChoiceMenu {
     char pad[0x44];
-    struct CellRecAt1A *unk44;
+    struct ChoiceMenuCellView *transitionCell;
 };
-struct CellRecAt1A;
+struct ChoiceMenuCellView;
 struct ObjMenuUpdateSixChoiceMenu;
 struct StateCode80420E90;
 struct StateCode80420E90 {
-    struct ObjMenuUpdateSixChoiceMenu *unk0;
-    s32 unk4;
-    struct CellRecAt1A *unk8;
-    s32 unkC;
+    struct ObjMenuUpdateSixChoiceMenu *slider;
+    s32 labelFlicker;
+    struct ChoiceMenuCellView *transitionCell;
+    s32 transitionTimer;
     s32 unk10;
 };
 
-struct ObjRecAt1D8V3;
-typedef struct ObjRecAt1D8V3 ObjRecAt1D8V3;
+struct CachedPlayerModelView;
+typedef struct CachedPlayerModelView CachedPlayerModelView;
 
-struct func_802165F8_S1;
-typedef struct func_802165F8_S1 func_802165F8_S1;
+struct PlayerBodyPositionYawView;
+typedef struct PlayerBodyPositionYawView PlayerBodyPositionYawView;
 
 struct Access_s32_5C;
 struct Access_s32_5C {
@@ -1088,23 +1088,23 @@ struct Access_s32_5C {
     s32 field;
 };
 
-struct ObjectState1E_2;
-struct ObjectState1E_2 {
+struct GameModeEnableView;
+struct GameModeEnableView {
     char pad0[0x1D];
     u8 unk_1D;
 };
 
 
-struct func_80255BEC_S1;
-typedef struct func_80255BEC_S1 func_80255BEC_S1;
+struct FrontendResourceScreenEntryView;
+typedef struct FrontendResourceScreenEntryView FrontendResourceScreenEntryView;
 
 
 
 struct __OSDir;
 typedef struct __OSDir __OSDir;
 
-struct func_80255BEC_S1;
-struct func_80255BEC_S1 {
+struct FrontendResourceScreenEntryView;
+struct FrontendResourceScreenEntryView {
     char pad0[0x8];
     void * unk8;
 };
@@ -1112,8 +1112,8 @@ struct func_80255BEC_S1 {
 struct BufferPool;
 struct BufferPool {
     s16 count;
-    func_80255BEC_S1 *primary;
-    func_80255BEC_S1 *secondary;
+    FrontendResourceScreenEntryView *primary;
+    FrontendResourceScreenEntryView *secondary;
     u16 *flags;
     s16 *refs;
     s32 dirty;
@@ -1130,8 +1130,8 @@ struct NodeGskyActivateMessagePool {
 struct ShapeCode802B54A0;
 typedef struct ShapeCode802B54A0 ShapeCode802B54A0;
 
-struct ControllerRecAtC7;
-struct ControllerRecAtC7 {
+struct ControllerAxesView;
+struct ControllerAxesView {
     char pad0[0xC6];
     s8 x;
     s8 y;
@@ -1148,8 +1148,8 @@ struct CROMEventEntry_t {
     struct IntPair params;
 };
 
-struct RecordRecAt94;
-struct RecordRecAt94 {
+struct PlayerProfileStatusView;
+struct PlayerProfileStatusView {
     char pad0[0x80];
     s8 kind;
     char pad81[0x13];
@@ -1190,20 +1190,20 @@ struct WeaponInfo {
     s32 animationCount;
 };
 
-struct func_8022E694_S1;
-typedef struct func_8022E694_S1 func_8022E694_S1;
+struct SynthOutputRateView;
+typedef struct SynthOutputRateView SynthOutputRateView;
 
 struct Slot;
 typedef struct Slot Slot;
 
-struct ObjRecAt2V1;
-struct ObjRecAt2V1 {
+struct BoneRotationIndexPair;
+struct BoneRotationIndexPair {
     s16 translation;
-    short unk2;
+    short rotationIndex;
 };
 
-struct EffectRecAt154;
-typedef struct EffectRecAt154 EffectRecAt154;
+struct SpawnedEffectMotionView;
+typedef struct SpawnedEffectMotionView SpawnedEffectMotionView;
 
 struct Field_Vec_18;
 typedef struct Field_Vec_18 Field_Vec_18;
@@ -1267,14 +1267,14 @@ struct Label {
     char *text;
 };
 
-struct ObjRecAt128;
-typedef struct ObjRecAt128 ObjRecAt128;
+struct ViewPositionXView;
+typedef struct ViewPositionXView ViewPositionXView;
 
-struct EffectRecAt154;
-struct EffectRecAt154 {
+struct SpawnedEffectMotionView;
+struct SpawnedEffectMotionView {
     unsigned char pad0[0x150];
-    f32 field150;
-    f32 field154;
+    f32 radius;
+    f32 height;
 };
 
 struct Shape;
@@ -1344,10 +1344,10 @@ struct PackedMatrixWords {
 
 
 
-struct ObjRecAt128;
-struct ObjRecAt128 {
+struct ViewPositionXView;
+struct ViewPositionXView {
     char pad0[0x128];
-    f32 unk128;
+    f32 positionX;
 };
 
 struct OSPifRam;
@@ -1356,8 +1356,8 @@ struct OSPifRam {
     u32 pifstatus;
 };
 
-struct ObjRecAt3CV1;
-typedef struct ObjRecAt3CV1 ObjRecAt3CV1;
+struct EffectColorContribution;
+typedef struct EffectColorContribution EffectColorContribution;
 
 struct EntryPakCreateMenuFromParameters;
 struct Dialog;
@@ -1404,15 +1404,15 @@ struct MatchMenuObjects {
 };
 
 
-struct Shape_typemap_13;
-struct Shape_typemap_13 {
+struct ActorAnimationEventTable;
+struct ActorAnimationEventTable {
     int field_0;
     int field_4;
 };
 
 
-struct ObjRecAt4V1;
-typedef struct ObjRecAt4V1 ObjRecAt4V1;
+struct PortalLinkAvailabilityView;
+typedef struct PortalLinkAvailabilityView PortalLinkAvailabilityView;
 
 struct ALPlayer_s;
 typedef struct ALPlayer_s ALPlayer_s;
@@ -1426,8 +1426,8 @@ struct ALPlayer_s {
     s32 samplesLeft;
 };
 
-struct func_8028469C_S2;
-typedef struct func_8028469C_S2 func_8028469C_S2;
+struct WidgetLabelTextView;
+typedef struct WidgetLabelTextView WidgetLabelTextView;
 
 struct Queue;
 struct Queue {
@@ -1439,7 +1439,7 @@ struct HashNode;
 struct HashNode {
     s32 key;
     void *value;
-    s32 unk08;
+    s32 reservedWord1;
     struct HashNode *next;
 };
 
@@ -1448,8 +1448,8 @@ typedef struct InstanceHdr InstanceHdr;
 
 
 
-struct func_80245A10_S1;
-typedef struct func_80245A10_S1 func_80245A10_S1;
+struct VoiceMatchingKeyView;
+typedef struct VoiceMatchingKeyView VoiceMatchingKeyView;
 
 
 struct Params;
@@ -1466,10 +1466,10 @@ struct MenuRules {
     s32 locked;
 };
 
-struct func_80207B5C_S2;
-struct func_80207B5C_S2 {
+struct PlayerViewModeView;
+struct PlayerViewModeView {
     char pad0[0x24];
-    s32 unk24;
+    s32 viewMode;
 };
 
 struct TextEntry;
@@ -1502,24 +1502,24 @@ struct Node80253610;
 typedef struct Node80253610 Node80253610;
 
 
-struct ObjRecAt14V3;
-typedef struct ObjRecAt14V3 ObjRecAt14V3;
+struct ActorDefinitionFlagsView;
+typedef struct ActorDefinitionFlagsView ActorDefinitionFlagsView;
 
 
 struct Instance8020CD74;
 typedef struct Instance8020CD74 Instance8020CD74;
 
-struct ObjRecAt10V2;
-struct ObjRecAt10V2 {
-    s32 unk0;
+struct DamagePacketWords;
+struct DamagePacketWords {
+    s32 source;
     char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
+    s32 damage;
     char pad4[0x8 - 0x4 - sizeof(s32)];
-    s32 unk8;
+    s32 radiusBits;
     char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unkC;
+    s32 damageFlags;
     char padC[0x10 - 0xC - sizeof(s32)];
-    s32 unk10;
+    s32 shield;
 };
 
 struct UnitVtx;
@@ -1536,7 +1536,7 @@ struct UnitVtx {
     u8 a;
 };
 
-extern int D_800D0910;
+extern int g_staticObjectResourceSerial;
 
 
 
@@ -1557,15 +1557,15 @@ typedef struct SequencePromptRequestView SequencePromptRequestView;
 struct SequencePromptRequestView;
 
 
-struct func_802A2BE0_S1;
-typedef struct func_802A2BE0_S1 func_802A2BE0_S1;
+struct NumericWidgetChildView;
+typedef struct NumericWidgetChildView NumericWidgetChildView;
 
-extern int D_800CD8B8_de;
+extern int g_resourceLoadBusyPriority;
 
-struct ObjRecAt1454V1;
-struct ObjRecAt1454V1 {
+struct NavigationActorWordBrainView;
+struct NavigationActorWordBrainView {
     char pad0[0x1454];
-    s32 * unk1454;
+    s32 * brainWords;
 };
 
 struct Limit;
@@ -1593,22 +1593,22 @@ struct World {
     s32 state;
     s32 unk100;
     char pad104[0x34];
-    void *unk138;
-    signed int unk13C;
-    signed int unk140;
+    void *placedActors;
+    signed int createdActorCount;
+    signed int actorCapacity;
     char pad144[0xE14];
-    signed int unkF58;
+    signed int kind1Cursor;
     char padF5C[0x1A4B0];
-    signed int unk1B40C;
+    signed int placedObjectGroup;
     char pad1B410[0xC];
-    signed int unk1B41C;
+    signed int placementInitialized;
     char pad1B420[20];
-    signed int unk1B434;
+    signed int nearestPlacedObjectKey;
     char pad1B438[0x1DC];
-    float unk1B614;
-    float unk1B618;
-    float unk1B61C;
-    struct EntryRecAt18V4 *list[16];
+    float spawnOffsetX;
+    float spawnOffsetY;
+    float spawnOffsetZ;
+    struct SceneDefinitionActorView *list[16];
     signed int count;
 };
 typedef struct World World;
@@ -1622,43 +1622,43 @@ struct Field {
     signed int value;
 };
 
-struct func_802165F8_S1;
-struct func_802165F8_S1 {
+struct PlayerBodyPositionYawView;
+struct PlayerBodyPositionYawView {
     char pad0[0x8];
-    CVector3 unk8;
+    CVector3 position;
     char pad14[4];
     struct Model *model; /* +0x18: actor definition */
     char pad1C[0x1C];
     u32 flags; /* +0x38 */
     char pad3C[0x30];
-    f32 unk6C;
+    f32 yaw;
 };
 
 struct Field_void_80;
 
 
-struct ObjectState1E_2;
-typedef struct ObjectState1E_2 ObjectState1E_2;
+struct GameModeEnableView;
+typedef struct GameModeEnableView GameModeEnableView;
 
 struct MatrixF;
 typedef struct MatrixF MatrixF;
 
-struct func_8023945C_S1;
-typedef struct func_8023945C_S1 func_8023945C_S1;
+struct PlayerEyePositionView;
+typedef struct PlayerEyePositionView PlayerEyePositionView;
 
 struct Access_s32_50;
 typedef struct Access_s32_50 Access_s32_50;
 
-struct ObjRecAtCV3;
+struct MapBlockAllocatorView;
 
 struct TargetPakSelectPromptKindEight;
 struct TargetPakSelectPromptKindEight {
     char pad[0x120];
     s32 flags;
 };
-struct RecordRecAtCV3;
+struct MenuPromptKindView;
 struct TargetPakSelectPromptKindEight;
-struct RecordRecAtCV3 {
+struct MenuPromptKindView {
     char pad[0xC];
     struct TargetPakSelectPromptKindEight *target;
 };
@@ -1666,7 +1666,7 @@ struct RecordRecAtCV3 {
 struct ShapeCode802B54A0;
 struct ShapeCode802B54A0 {
     char pad0[0x8];
-    short unk8;
+    short width;
 };
 
 struct Header;
@@ -1709,10 +1709,10 @@ struct HudStatusShared_MatchRules {
 struct Shield;
 typedef struct Shield Shield;
 
-struct ItemRecAt10;
-struct ItemRecAt10 {
+struct SmpControlItemView;
+struct SmpControlItemView {
     s32 pad0;
-    struct ItemRecAt10 *next;
+    struct SmpControlItemView *next;
     char pad8[0xE - 8];
     u16 kind;
     u8 alpha;
@@ -1731,20 +1731,20 @@ typedef void ( *VoidCallback)(void);
 struct __OSContRequesFormat;
 typedef struct __OSContRequesFormat __OSContRequesFormat;
 
-struct func_80205494_S3;
-typedef struct func_80205494_S3 func_80205494_S3;
+struct ThreadIdentifierView;
+typedef struct ThreadIdentifierView ThreadIdentifierView;
 
 struct ReadWord;
 typedef struct ReadWord ReadWord;
 
-extern int D_800D3650;
+extern int g_debugLinkRetryLimit;
 
 struct Buf16;
 typedef struct Buf16 Buf16;
 
 
-struct func_8020D0CC_S2;
-typedef struct func_8020D0CC_S2 func_8020D0CC_S2;
+struct ResourceHandleLinkView;
+typedef struct ResourceHandleLinkView ResourceHandleLinkView;
 
 struct Buf16;
 struct Buf16 {
@@ -1755,8 +1755,8 @@ struct Buf16 {
     s32 _padC;
 };
 
-struct ObjRecAt7528;
-typedef struct ObjRecAt7528 ObjRecAt7528;
+struct ParticleRibbonStorageView;
+typedef struct ParticleRibbonStorageView ParticleRibbonStorageView;
 
 struct Table;
 struct Table {
@@ -1771,8 +1771,8 @@ struct Request {
 };
 
 
-struct ControllerRecAtC7;
-typedef struct ControllerRecAtC7 ControllerRecAtC7;
+struct ControllerAxesView;
+typedef struct ControllerAxesView ControllerAxesView;
 
 struct AudioVoiceChannelFilterView;
 struct AudioVoiceChannelFilterView {
@@ -1797,8 +1797,8 @@ struct AudioAllocatedPhysicalVoiceView {
 };
 
 
-struct FieldRecAt14;
-struct FieldRecAt14 {
+struct PakActionLabelView;
+struct PakActionLabelView {
     char pad[0x14];
     char *text;
 };
@@ -1826,26 +1826,26 @@ struct ImageHeader;
 struct Image {
     char pad0[8];
     struct ImageHeader *header;
-    s32 fieldC;
-    s32 field10;
+    s32 primaryData;
+    s32 secondaryData;
     char pad14[0x3C - 0x14];
     s32 flags;
 };
 
-extern float D_800C4458_de;
+extern float k_eventEmitterAngleConstants;
 
-struct ObjRecAt6V1;
-typedef struct ObjRecAt6V1 ObjRecAt6V1;
-
-
-extern int D_800D5258;
+struct ResourceShortIdView;
+typedef struct ResourceShortIdView ResourceShortIdView;
 
 
-struct ObjRecAtDC;
+extern int g_globalInterruptMask;
 
 
-struct func_80284AF4_G2;
-typedef struct func_80284AF4_G2 func_80284AF4_G2;
+struct SoundSlotHandleView;
+
+
+struct ListPreviousLinkView;
+typedef struct ListPreviousLinkView ListPreviousLinkView;
 
 struct ObjalAuxBusParam;
 struct ObjalAuxBusParam {
@@ -1855,27 +1855,27 @@ struct ObjalAuxBusParam {
     s32 *base;
 };
 
-struct Brain_func_80212D78_eu_x;
-typedef struct Brain_func_80212D78_eu_x Brain_func_80212D78_eu_x;
+struct NavigationBrainView;
+typedef struct NavigationBrainView NavigationBrainView;
 
-struct ObjRecAt1D8V3;
-struct ObjRecAt1D8V3 {
+struct CachedPlayerModelView;
+struct CachedPlayerModelView {
     char pad0[0x8];
-    f32 unk8;
+    f32 positionX;
     char pad8[0x10 - 0x8 - sizeof(f32)];
-    f32 unk10;
+    f32 positionZ;
     char pad10[0xC4 - 0x10 - sizeof(f32)];
-    s32 unkC4;
+    s32 resourceKey;
     char padC4[0xD0 - 0xC4 - sizeof(s32)];
-    s32 unkD0;
+    s32 resourceFlags;
     char padD0[0x100 - 0xD0 - sizeof(s32)];
-    s32 unk100;
+    s32 renderFlags;
     char pad100[0x1D8 - 0x100 - sizeof(s32)];
-    void * unk1D8;
+    void * player;
 };
 
-struct func_8020478C_S1;
-typedef struct func_8020478C_S1 func_8020478C_S1;
+struct TrackRequestIds;
+typedef struct TrackRequestIds TrackRequestIds;
 
 struct Access_s32_50;
 
@@ -1885,8 +1885,8 @@ struct Access_s32_50;
 
 
 
-struct ObjRecAt1CV3;
-typedef struct ObjRecAt1CV3 ObjRecAt1CV3;
+struct PreviewRotationView;
+typedef struct PreviewRotationView PreviewRotationView;
 
 struct Work56EC8;
 struct Work56EC8 {
@@ -1905,37 +1905,37 @@ typedef struct MenuSettings MenuSettings;
 struct PackedMatrixWords;
 typedef struct PackedMatrixWords PackedMatrixWords;
 
-struct ObjRecAt2CV2;
-typedef struct ObjRecAt2CV2 ObjRecAt2CV2;
+struct FrontendArchiveHandleView;
+typedef struct FrontendArchiveHandleView FrontendArchiveHandleView;
 
 
-struct func_80254D70_S2;
-struct func_80254D70_S2 {
+struct MenuTextOwnerView;
+struct MenuTextOwnerView {
     char pad0[0x8];
-    s32 unk8;
+    s32 flags;
 };
 
 
-struct func_8020D0CC_S2;
-struct func_8020D0CC_S2 {
+struct ResourceHandleLinkView;
+struct ResourceHandleLinkView {
     char pad0[0x10];
-    void * unk10;
+    void * resourceHandle;
 };
 
-struct ObjRecAt1CV1;
-typedef struct ObjRecAt1CV1 ObjRecAt1CV1;
+struct PulsingMenuSpriteView;
+typedef struct PulsingMenuSpriteView PulsingMenuSpriteView;
 
 struct Header;
 typedef struct Header Header;
 
-extern int D_800CC370;
+extern int g_geometryAntialiasingEnabled;
 
-struct StateRecAt14;
-struct StateRecAt14 {
+struct MenuOptionLabelView;
+struct MenuOptionLabelView {
     char a[8];
-    s32 unk8;
+    s32 flags;
     char b[8];
-    char *unk14;
+    char *label;
 };
 
 struct StateBlock;
@@ -1947,9 +1947,9 @@ struct StateBlock {
 struct Shared_GameMode;
 typedef struct Shared_GameMode Shared_GameMode;
 
-extern int D_800E63AC;
+extern int g_modelEditorApplyToAllRecords;
 
-struct func_80245A10_S1;
+struct VoiceMatchingKeyView;
 
 struct Args;
 struct Args {
@@ -1977,7 +1977,7 @@ typedef struct HashNode HashNode;
 struct Record;
 typedef struct Record Record;
 
-extern float D_80146CB8;
+extern float g_creditsScrollPosition;
 
 
 struct AudioSynthParamSamplesView;
@@ -1993,9 +1993,9 @@ typedef struct BufferPool BufferPool;
 struct Request;
 typedef struct Request Request;
 
-struct func_80284AF4_G2;
-struct func_80284AF4_G2 {
-    void * unk0;
+struct ListPreviousLinkView;
+struct ListPreviousLinkView {
+    void * previous;
 };
 struct ALEndEvent {
     s32 ticks;
@@ -2035,8 +2035,8 @@ struct ALEvent {
         ALVolumeEvent vol;
         Request spvol;
         InventorySlot sppriority;
-        func_80284AF4_G2 spseq;
-        func_80284AF4_G2 spbank;
+        ListPreviousLinkView spseq;
+        ListPreviousLinkView spbank;
         ALOscEvent osc;
     } msg;
 };
@@ -2046,19 +2046,19 @@ struct ALEventListItem {
     ALEvent evt;
 };
 
-struct ObjRecAt10V2;
-typedef struct ObjRecAt10V2 ObjRecAt10V2;
+struct DamagePacketWords;
+typedef struct DamagePacketWords DamagePacketWords;
 
-struct ObjRecAt18V2;
-struct ObjRecAt18V2 {
+struct ActorKindDefinitionPointerView;
+struct ActorKindDefinitionPointerView {
     char pad0[0x18];
-    s32 * unk18;
+    s32 * definition;
 };
 
-struct ObjRecAt6V1;
-struct ObjRecAt6V1 {
+struct ResourceShortIdView;
+struct ResourceShortIdView {
     char pad0[0x6];
-    unsigned short unk6;
+    unsigned short resourceId;
 };
 
 
@@ -2067,11 +2067,11 @@ struct Shared_HudView;
 typedef struct Shared_HudView Shared_HudView;
 
 
-struct StateRecAt14;
-typedef struct StateRecAt14 StateRecAt14;
+struct MenuOptionLabelView;
+typedef struct MenuOptionLabelView MenuOptionLabelView;
 
-struct ObjectLinks24_2;
-struct ObjectLinks24_2 {
+struct BoneRotationTrackView;
+struct BoneRotationTrackView {
     char * unk_0;
     char pad0[0x4 - 0x0 - sizeof(char*)];
     char * unk_4;
@@ -2100,18 +2100,18 @@ struct CollisionInfo {
     s32 w[8];
 };
 
-struct ObjRecAt14V1;
-struct ObjRecAt14V1 {
+struct MenuLabelPointerView;
+struct MenuLabelPointerView {
     char pad0[0x14];
-    void * unk14;
+    void * label;
 };
 
 struct OSPifRam;
 typedef struct OSPifRam OSPifRam;
 
 
-struct ObjRecAt1454V1;
-typedef struct ObjRecAt1454V1 ObjRecAt1454V1;
+struct NavigationActorWordBrainView;
+typedef struct NavigationActorWordBrainView NavigationActorWordBrainView;
 
 
 
@@ -2121,11 +2121,11 @@ struct SlotsCode804196C0 {
     struct WidgetNode *values[1];
 };
 
-struct CellRecAt1A;
-typedef struct CellRecAt1A CellRecAt1A;
+struct ChoiceMenuCellView;
+typedef struct ChoiceMenuCellView ChoiceMenuCellView;
 
-struct D_800C7470_Pair;
-struct D_800C7470_Pair {
+struct ScalarPair;
+struct ScalarPair {
     f32 first;
     f32 second;
 };
@@ -2148,8 +2148,8 @@ struct ObjRecAt40V1 {
 
 
 
-struct SlotRecAt0V1;
-struct SlotRecAt0V1 {
+struct FrontendKeySlotEntry;
+struct FrontendKeySlotEntry {
     s32 key;
     char pad[0x70 - 4];
 };
@@ -2186,10 +2186,10 @@ struct List {
     u8 minY;
 };
 
-struct ObjRecAt7528;
-struct ObjRecAt7528 {
+struct ParticleRibbonStorageView;
+struct ParticleRibbonStorageView {
     char pad0[0x7528];
-    void * unk7528;
+    void * ribbonStorage;
 };
 
 
@@ -2232,7 +2232,7 @@ struct ControllerProfile {
     f32 pakAmount; /* 0xD0 */
     f32 pakTimer; /* 0xD4 */
     OSPfs pak; /* 0xD8 */
-    struct PoolRecAt28V1 effectPool; /* 0x140 */
+    struct RumbleNodePoolView effectPool; /* 0x140 */
     struct NodeCode8028469C effectNodes[3]; /* 0x16C */
     s32 reset; /* 0x220 */
 };
@@ -2240,8 +2240,8 @@ struct ControllerProfile {
 struct Args;
 typedef struct Args Args;
 
-struct ObjRecAt8V2;
-typedef struct ObjRecAt8V2 ObjRecAt8V2;
+struct TrackAngleKindView;
+typedef struct TrackAngleKindView TrackAngleKindView;
 
 
 struct ActorBarrelIsTargetInViewCone;
@@ -2255,13 +2255,13 @@ struct ActorBarrelIsTargetInViewCone {
 struct WorldSceneDispatchEnabledEntityTrigger;
 typedef struct WorldSceneDispatchEnabledEntityTrigger WorldSceneDispatchEnabledEntityTrigger;
 
-struct ObjectState1E;
-typedef struct ObjectState1E ObjectState1E;
+struct BreakableDamageScaleView;
+typedef struct BreakableDamageScaleView BreakableDamageScaleView;
 
-extern int D_800CC38C;
+extern int g_geometryTranslucentRenderMode;
 
-struct func_80203908_S4;
-typedef struct func_80203908_S4 func_80203908_S4;
+struct ActorYawView;
+typedef struct ActorYawView ActorYawView;
 
 struct Link;
 typedef struct Link Link;
@@ -2280,29 +2280,29 @@ struct Field_void_4;
 typedef struct Field_void_4 Field_void_4;
 
 
-struct func_80250BD4_S1;
-typedef struct func_80250BD4_S1 func_80250BD4_S1;
+struct MenuControllerSelectionView;
+typedef struct MenuControllerSelectionView MenuControllerSelectionView;
 
 struct ALEvent;
 
-struct func_8022E694_S1;
-struct func_8022E694_S1 {
+struct SynthOutputRateView;
+struct SynthOutputRateView {
     char pad0[0x44];
-    s32 unk44;
+    s32 outputRate;
 };
 
-struct ObjRecAt14V2;
-struct ObjRecAt14V2 {
+struct TextEntryBufferView;
+struct TextEntryBufferView {
     char pad[0x14];
-    u8 **unk14;
+    u8 **textBuffer;
 };
 
-struct func_8020478C_S1;
-struct func_8020478C_S1 {
+struct TrackRequestIds;
+struct TrackRequestIds {
     char pad0[0x4];
-    unsigned short unk4;
+    unsigned short trackId;
     char pad4[0xA - 0x4 - sizeof(unsigned short)];
-    unsigned short unkA;
+    unsigned short variantId;
 };
 
 struct WorldSceneDispatchEnabledEntityTrigger;
@@ -2320,14 +2320,14 @@ typedef struct Field_void_80 Field_void_80;
 
 struct Node80253610;
 struct Node80253610 {
-    s32 field0;
+    s32 data;
     s32 field4;
     s32 references;
     u32 flags;
 };
 
-struct ObjRecAt14V2;
-typedef struct ObjRecAt14V2 ObjRecAt14V2;
+struct TextEntryBufferView;
+typedef struct TextEntryBufferView TextEntryBufferView;
 
 
 struct HudStatusShared_Settings;
@@ -2337,8 +2337,8 @@ typedef struct HudStatusShared_Settings HudStatusShared_Settings;
 
 
 
-struct func_8022CA04_S3;
-typedef struct func_8022CA04_S3 func_8022CA04_S3;
+struct PlayerMovementScalarView;
+typedef struct PlayerMovementScalarView PlayerMovementScalarView;
 
 
 struct MenuStyle;
@@ -2347,8 +2347,8 @@ typedef struct MenuStyle MenuStyle;
 struct Access_s32_5C;
 typedef struct Access_s32_5C Access_s32_5C;
 
-struct ObjRecAt130;
-typedef struct ObjRecAt130 ObjRecAt130;
+struct ViewPositionZView;
+typedef struct ViewPositionZView ViewPositionZView;
 
 
 struct Work56EC8;
@@ -2360,8 +2360,8 @@ typedef struct Table Table;
 extern int g_controllerPakChannelStatuses[];
 
 
-struct RecordRecAt14;
-struct RecordRecAt14 {
+struct MenuTextResultView;
+struct MenuTextResultView {
     char pad[8];
     s32 flags;
     char padC[0x14 - 0xC];
@@ -2374,18 +2374,18 @@ typedef struct ResourceManagerState ResourceManagerState;
 struct StridedTable;
 typedef struct StridedTable StridedTable;
 
-struct D_800C7470_Pair;
-typedef struct D_800C7470_Pair D_800C7470_Pair;
+struct ScalarPair;
+typedef struct ScalarPair ScalarPair;
 
 
-struct ObjRecAtB0;
-typedef struct ObjRecAtB0 ObjRecAtB0;
+struct ControllerButtonFlagsView;
+typedef struct ControllerButtonFlagsView ControllerButtonFlagsView;
 
 struct ControllerProfile;
 typedef struct ControllerProfile ControllerProfile;
 
 
-struct func_80205494_S3;
+struct ThreadIdentifierView;
 
 struct TextLayerRect;
 struct TextLayerRect {
@@ -2419,29 +2419,29 @@ struct Query {
     s32 flag;
 };
 
-struct ItemRecAt10;
-struct MenuRecAt54;
-struct MenuRecAt54 {
+struct SmpControlItemView;
+struct SmpControlItemListView;
+struct SmpControlItemListView {
     char pad0[8];
-    struct ItemRecAt10 *items;
+    struct SmpControlItemView *items;
     char padC[0x54 - 0xC];
     s32 state;
 };
 
-extern int D_80100598[];
+extern int g_resourceSlotProtected[];
 
-struct ObjRecAt3CV1;
+struct EffectColorContribution;
 
 
-struct func_80203908_S4;
-struct func_80203908_S4 {
+struct ActorYawView;
+struct ActorYawView {
     char pad0[0x6C];
-    f32 unk6C;
+    f32 yaw;
 };
 
 
-struct ObjRecAtDC;
-typedef struct ObjRecAtDC ObjRecAtDC;
+struct SoundSlotHandleView;
+typedef struct SoundSlotHandleView SoundSlotHandleView;
 
 
 
@@ -2470,8 +2470,8 @@ struct CallbackStateC_4 {
 struct StateCode80420E90;
 typedef struct StateCode80420E90 StateCode80420E90;
 
-struct RecordRecAt20V1;
-struct ObjRecAtB0;
+struct PakControllerRequestView;
+struct ControllerButtonFlagsView;
 
 struct Status;
 struct Status {
@@ -2489,8 +2489,8 @@ typedef struct Model Model;
 
 
 
-struct EntryRecAt8V1;
-struct EntryRecAt8V1 {
+struct ArchiveTextureDataEntryView;
+struct ArchiveTextureDataEntryView {
     s32 unused;
     s32 flags;
     char rest[0x14];
@@ -2519,14 +2519,14 @@ struct HudStatusShared_Settings {
 };
 
 
-extern int D_8010BBF0[];
+extern int g_controllerPakState[];
 
 struct WeaponInfo;
 typedef struct WeaponInfo WeaponInfo;
 
 
 
-extern int D_800CC388;
+extern int g_geometryOpaqueRenderMode;
 
 struct ObjRecAt28V2;
 struct ObjRecAt28V2 {
@@ -2537,18 +2537,18 @@ struct ObjRecAt28V2 {
 struct CROMEventEntry_t;
 typedef struct CROMEventEntry_t CROMEventEntry;
 
-struct func_8022BC04_S3;
-struct func_8022BC04_S3 {
+struct AnimationResourceHandleView;
+struct AnimationResourceHandleView {
     char pad0[0x10];
-    s32 unk10;
+    s32 resourceHandle;
 };
 
-struct func_802A2BE0_S1;
-struct func_802A2BE0_S1 {
+struct NumericWidgetChildView;
+struct NumericWidgetChildView {
     char pad0[0x8];
-    void * unk8;
+    void * firstChild;
     char pad8[0x12 - 0x8 - sizeof(void*)];
-    u16 unk12;
+    u16 flags;
 };
 
 
@@ -2556,9 +2556,9 @@ struct MenuSettings;
 struct MenuSettings {
     u32 flags;
     s32 optionFlags; /* +4: toggled menu option bits */
-    u8 unknown8[0x1D - 8];
+    u8 reservedBytes[0x1D - 8];
     u8 local; /* +0x1D: local-player input flag */
-    u8 unknown1E[0x581 - 0x1E];
+    u8 reservedBytes1[0x581 - 0x1E];
     u8 language;
 };
 
@@ -2575,12 +2575,12 @@ struct AudioPhysicalVoiceOffsetView {
 struct NodeCode8028469C;
 typedef struct NodeCode8028469C NodeCode8028469C;
 
-struct func_8024C5C4_S2;
-struct func_8024C5C4_S2 {
+struct AttachmentEventTableView;
+struct AttachmentEventTableView {
     char pad0[0x4];
-    s32 unk4;
+    s32 entryCount;
     char pad4[0x8 - 0x4 - sizeof(s32)];
-    char unk8;
+    char entries;
 };
 
 
@@ -2596,7 +2596,7 @@ struct ParamsRecAt8V1 {
 };
 
 
-extern int D_80145070;
+extern int g_sessionOptionResetMode;
 
 struct PlayerRecord;
 struct PlayerRecord {
@@ -2604,6 +2604,6 @@ struct PlayerRecord {
 };
 
 
-struct func_8025E5B0_S1;
-typedef struct func_8025E5B0_S1 func_8025E5B0_S1;
+struct MenuCreationOwnerView;
+typedef struct MenuCreationOwnerView MenuCreationOwnerView;
 #endif

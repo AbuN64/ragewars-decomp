@@ -1,16 +1,16 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_8011B1D8.H"
+#include "COMMON/LONE/SCHEDULER_ACCUMULATED_GRAPHICS_RSP_DURATION.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "sdk/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "sdk/SCHED/osscremoveclient.H"
 #include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
@@ -43,18 +43,18 @@ void Sched_StartSelectedTasks(OSSched *view, OSScTask_s *current, OSScTask_s *ne
     s64 now;
 
     if (next != 0 && (next->flags & 0x20) && !(next->state & 0x10)) {
-        D_8011B1E8 = Audio_ReadSystemTime();
+        g_schedulerRdpTaskStartTime = Audio_ReadSystemTime();
     }
     if (current != 0) {
         if (current->list.type == 2) {
             osWritebackDCacheAll();
-            D_8011B1D0 = Audio_ReadSystemTime();
+            g_schedulerAudioTaskStartTime = Audio_ReadSystemTime();
         } else if (current->flags & 0x20) {
             now = Audio_ReadSystemTime();
-            D_8011B1E0 = now;
+            g_schedulerGraphicsTaskStartTime = now;
             if (!(current->state & 0x10)) {
-                D_8011B1F0 = now;
-                D_8011B1D8 = 0;
+                g_schedulerGraphicsFirstStartTime = now;
+                g_schedulerAccumulatedGraphicsRspDuration = 0;
             }
         }
         current->state &= ~0x30;

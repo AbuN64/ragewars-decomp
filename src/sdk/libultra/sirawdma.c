@@ -6,7 +6,7 @@ const char g_sirawdmaText[14] =
 #endif
 
 #if defined(VERSION_US)
-char rodata_unresolved_800C78C2[14] =
+char s_SirawdmaSMHUDEXPANDText[14] =
     "\000\015SMHUD_EXPAND";
 #endif
 
@@ -15,7 +15,7 @@ char rodata_unresolved_800C78C2[14] =
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned short rodata_unresolved_800C8F62[7] = {
+unsigned short k_SirawdmaEncodedHalfwords[7] = {
     0xED70, 0x0020, 0xEB00, 0x0021, 0x0250, 0x0020, 0xF6E0,
 };
 #endif
@@ -25,7 +25,7 @@ unsigned short rodata_unresolved_800C8F62[7] = {
 #endif
 
 #if defined(VERSION_EU)
-char rodata_unresolved_800C8592[14] =
+char s_SirawdmaTextsText[14] =
     " Texts\000\000\000\000\077\200\000\000";
 #endif
 
@@ -34,7 +34,7 @@ char rodata_unresolved_800C8592[14] =
 #endif
 
 #if defined(VERSION_DE)
-char rodata_unresolved_800C79A2[14] =
+char s_SirawdmaIoSprawdmaText[14] =
     "\000\000io/sprawdma.";
 #endif
 

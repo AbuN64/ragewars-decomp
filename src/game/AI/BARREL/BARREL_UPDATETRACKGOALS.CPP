@@ -2,7 +2,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 
 extern void Cbarrel_ResolveTrackGoal(void *, void *, s32, void *);
 extern void Barrel_FillAnchorTargetInfo(void *, void *, s32, void *);
@@ -21,7 +21,7 @@ void Barrel_UpdateTrackGoals(Input80216D3C *actor, void *trackerState, Output802
 
     targetTimer = tracker->targetTimer;
     if (targetTimer > 0.0f) {
-        lockTimeLeft = targetTimer - D_800D2988;
+        lockTimeLeft = targetTimer - g_frameElapsedTime;
         tracker->targetTimer = lockTimeLeft;
         if (lockTimeLeft <= 0.0f) {
             tracker->lockedTarget = 0;

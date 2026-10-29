@@ -1,4 +1,4 @@
 #ifndef DATA_OVLDAT8_G_PIXELFORMATDESCRIPTORS_H
 #define DATA_OVLDAT8_G_PIXELFORMATDESCRIPTORS_H
-extern char D_00415CA0[];
+extern char g_packedCodeAddress24_00415CA0[];
 #endif

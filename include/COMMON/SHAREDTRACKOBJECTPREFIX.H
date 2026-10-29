@@ -1,7 +1,7 @@
 #ifndef COMMON_SHAREDTRACKOBJECTPREFIX_H
 #define COMMON_SHAREDTRACKOBJECTPREFIX_H
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
@@ -27,10 +27,10 @@ struct SharedTrackObject;
 #include "COMMON/GROUP.H"
 
 
-extern s32 D_800E28D0;
-extern s32 D_800DE7E8;
+extern s32 g_hudReferenceViewportWidth;
+extern s32 g_cinemaPlaybackFlag;
 
 void OnScreen_SetupTextRendering(void);
 
-void Onscrn_DrawText(void * text, s32 arg1, s32 arg2, s32 alpha, s32 centred, s32 shadow, f32 scaleX, f32 scaleY);
+void Onscrn_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shadow, f32 scaleX, f32 scaleY);
 #endif

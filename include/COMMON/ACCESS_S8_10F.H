@@ -5,7 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern float D_800C37E0_de;
+extern float g_cinemaTimeScale;
 
 
 
@@ -43,7 +43,7 @@ extern float D_800C37D8_de;
 extern float Cinema_GetScaledSequenceValue(void);
 
 
-extern float D_800C3828_de;
+extern float g_actorVisibilityProbeHeightScale;
 
 
 
@@ -58,8 +58,8 @@ extern void Cinema_ReleaseSequenceContext(void);
 
 
 
-struct Actor_func_80245D30_de;
-typedef struct Actor_func_80245D30_de Actor_func_80245D30_de;
+struct ActorHorizontalMovementView;
+typedef struct ActorHorizontalMovementView ActorHorizontalMovementView;
 
 
 
@@ -67,7 +67,7 @@ typedef struct Actor_func_80245D30_de Actor_func_80245D30_de;
 
 
 
-extern void * D_800DE7F4_de;
+extern void * g_cinemaLetterboxEnabled;
 
 extern void Cinema_ResetViewport(void);
 
@@ -86,7 +86,7 @@ typedef struct Access_s32_D0 Access_s32_D0;
 
 
 
-struct Material_func_80245D30_de;
+struct HorizontalMovementSurfaceView;
 
 
 
@@ -100,18 +100,18 @@ struct CollisionState;
 typedef struct CollisionState CollisionState;
 
 
-struct Actor_func_80245D30_de;
+struct ActorHorizontalMovementView;
 
-struct Material_func_80245D30_de;
-typedef struct Material_func_80245D30_de Material_func_80245D30_de;
-
-
+struct HorizontalMovementSurfaceView;
+typedef struct HorizontalMovementSurfaceView HorizontalMovementSurfaceView;
 
 
-extern float D_800C88CC;
 
 
-extern float D_800C8914;
+extern float g_cinemaTrackScalarScale;
+
+
+extern float g_resetActorFloorDirectionY;
 
 
 

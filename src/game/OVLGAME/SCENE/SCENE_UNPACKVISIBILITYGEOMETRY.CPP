@@ -3,7 +3,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/SOUNDINFO.H"
 #include "COMMON/OBJB.H"
-#include "MENU/8044ACCC.H"
+#include "MENU/SCENE_RESOURCE_PREVIEW_AND_COLLISION_VIEWS.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "stddef.h"
@@ -12,16 +12,16 @@
 #include "SYSTEM/LIST.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-extern void Cache_ReleaseResource(void *arg0, void *resource);
+extern void Cache_ReleaseResource(void *cache, void *resource);
 
-/* Loads a scene's light into the global light D_800CBC90: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to D_800CA1F0 in length through func_802B72B0_de and Graphu64_ScaleVector and stores it as shorts at 0x1B2B4 of the scene. */
-extern u8 D_800CBC90[];
-extern u8 D_800CBC94[];
-extern u8 D_800CBC9C[];
-extern u8 D_800CBCA0[];
+/* Loads a scene's light into the global light g_playerModelLighting: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to D_800CA1F0 in length through func_802B72B0_de and Graphu64_ScaleVector and stores it as shorts at 0x1B2B4 of the scene. */
+extern u8 g_playerModelLighting[];
+extern u8 g_savedPlayerModelLighting[];
+extern u8 g_savedSecondaryMenuByteOptions[];
+extern u8 g_sceneLightDirection[];
 extern f32 Gu_Sqrtf(f32);
 extern void Graphu64_ScaleVector(f32 *, f32 *, f32);
-void Scene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
+void Scene_LoadSceneLight(SceneLightLoadView *scene) {
     s32 i;
     u8 c;
     f32 v[3];
@@ -29,13 +29,13 @@ void Scene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
     u8 *light;
     for (i = 0; i < 3; i++) {
         c = scene->light->m_AmbientLight[i];
-        light = D_800CBC90;
+        light = g_playerModelLighting;
         light[i] = c;
-        D_800CBC94[i] = c;
+        g_savedPlayerModelLighting[i] = c;
         c = scene->light->m_DirectionalLight[i];
         light[i + 8] = c;
-        D_800CBC9C[i] = c;
-        D_800CBCA0[i] = scene->light->m_Direction[i];
+        g_savedSecondaryMenuByteOptions[i] = c;
+        g_sceneLightDirection[i] = scene->light->m_Direction[i];
     }
     v[0] = scene->light->m_Direction[0];
     v[1] = scene->light->m_Direction[1];
@@ -49,24 +49,24 @@ void Scene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
     }
 }
 int Playerai_GetFirstPlayer(void *);
-void func_8025CBEC_de(void *);
-s32 * func_8025CC6C_de(void);
+void SoundVoicePool_StopAll(void *);
+s32 * SoundVoicePool_GetGlobalState(void);
 void Scene_ReleaseCachedGeometry(void *);
 void Player_ReleaseObjectHandles(void *);
 /* Shut down the subsystem, free its owned resources, and unlink its list. */
-void Scene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
+void Scene_FreeSceneResources(SceneResourceOwnerView *sceneToFree) {
     s32 firstPlayer;
     void *firstOptionalResource;
     void *secondOptionalResource;
     void *thirdOptionalResource;
     void *nextAllocationNode;
     void *allocationBase;
-    func_8020D0CC_S2 *allocationNode;
-    firstPlayer = Playerai_GetFirstPlayer(&D_80145040);
+    ResourceHandleLinkView *allocationNode;
+    firstPlayer = Playerai_GetFirstPlayer(&g_playerViewRenderContext);
     if (firstPlayer != 0) {
         Player_ReleaseObjectHandles((void *) firstPlayer);
     }
-    func_8025CBEC_de(func_8025CC6C_de());
+    SoundVoicePool_StopAll(SoundVoicePool_GetGlobalState());
     SoundElement_ClearVoiceFlags();
     SoundElement_StopAudioByMask(0x1000);
     Cache_ReleaseResource(NULL, sceneToFree->unk100);
@@ -80,25 +80,25 @@ void Scene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
     Cache_ReleaseResource(NULL, sceneToFree->unkEC);
     Cache_ReleaseResource(NULL, sceneToFree->unkCC);
     Cache_ReleaseResource(NULL, sceneToFree->unkE8);
-    firstOptionalResource = sceneToFree->unkF0;
+    firstOptionalResource = sceneToFree->firstOptionalResource;
     if (firstOptionalResource != NULL) {
         Cache_ReleaseResource(NULL, firstOptionalResource);
     }
-    secondOptionalResource = sceneToFree->unkF4;
+    secondOptionalResource = sceneToFree->secondOptionalResource;
     if (secondOptionalResource != NULL) {
         Cache_ReleaseResource(NULL, secondOptionalResource);
     }
-    thirdOptionalResource = sceneToFree->unkFC;
+    thirdOptionalResource = sceneToFree->thirdOptionalResource;
     if (thirdOptionalResource != NULL) {
         Cache_ReleaseResource(NULL, thirdOptionalResource);
     }
     Scene_ReleaseCachedGeometry(sceneToFree);
-    allocationBase = sceneToFree->unk1B500.head;
+    allocationBase = sceneToFree->allocations.head;
     allocationNode = allocationBase;
     if (allocationBase != NULL) {
         do {
-            nextAllocationNode = allocationNode->unk10;
-            func_80255ED8_de(&sceneToFree->unk1B500, allocationNode);
+            nextAllocationNode = allocationNode->resourceHandle;
+            List_RemoveIntrusive(&sceneToFree->allocations, allocationNode);
             allocationNode = nextAllocationNode;
         } while (allocationNode != NULL);
     }
@@ -110,7 +110,7 @@ void Scene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
    0xF0 when its group bit is set in the current group's bitmap. */
 extern s32 Ppdecom_UnpackResource(void ***handle, s32 retainUncompressed);
 extern void SetN64_GetPackSectionSize(void *node, s32 index);
-static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
+static inline s32 groupHas(SceneVisibilityGeometryView *world, s32 n) {
     s32 index;
     void *g;
     u8 *bits;
@@ -123,7 +123,7 @@ static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     mask = 1 << (n & 7);
     return bits[n / 8] & mask;
 }
-void Scene_UnpackVisibilityGeometry(WorldRecAt1B40C *world, void ***handle) {
+void Scene_UnpackVisibilityGeometry(SceneVisibilityGeometryView *world, void ***handle) {
     void *node;
     struct IntPair *l0;
     struct IntPair *l1;
@@ -140,18 +140,18 @@ void Scene_UnpackVisibilityGeometry(WorldRecAt1B40C *world, void ***handle) {
         l1 = SetN64_GetPackSection(node, 1);
         l2 = SetN64_GetPackSection(node, 2);
         l3 = SetN64_GetPackSection(node, 3);
-        count = l0->field_4;
+        count = l0->second;
         world->verts = &((ResidentDataChunk *)(l0))->data[0];
         world->faces = (Face *)&((ResidentDataChunk *)(l1))->data[0];
         world->nfaces = count;
-        count = l2->field_4;
+        count = l2->second;
         world->edgeData = &((ResidentDataChunk *)(l2))->data[0];
         world->edges = (Face *)&((ResidentDataChunk *)(l3))->data[0];
         world->nedges = count;
-        func_80255CA0_de(&world->listA, 0, 4);
-        func_80255CA0_de(&world->listB, 0, 4);
+        List_InitializeIntrusive(&world->listA, 0, 4);
+        List_InitializeIntrusive(&world->listB, 0, 4);
         for (k = 0; k < 0x30; k++) {
-            func_80255D14_de(&world->listB, &world->buckets[k]);
+            List_AppendIntrusive(&world->listB, &world->buckets[k]);
         }
         n = world->nfaces;
         for (i = 0; i < n; i++) {

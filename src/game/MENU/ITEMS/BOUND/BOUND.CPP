@@ -1,14 +1,14 @@
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MENU/BOUND.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "include_asm.h"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 
-f32 Bound_ReadBoundValue(ItemRecAt14 *arg0) {
- Binding *v = arg0->binding;
+f32 Bound_ReadBoundValue(MenuBindingItemView *item) {
+ Binding *v = item->binding;
  void *p = v->storage();
  switch(v->type) {
  default: return 0.0f;
@@ -24,7 +24,7 @@ f32 Bound_ReadBoundValue(ItemRecAt14 *arg0) {
 
 /* Writes a numeric menu value through its bound storage callback using the selected scalar type. */
 
-void Bound_WriteBoundValue(ItemRecAt14 *item,float value) {
+void Bound_WriteBoundValue(MenuBindingItemView *item,float value) {
  float *storage;
  struct Binding *binding;
  unsigned int *word;
@@ -42,46 +42,46 @@ void Bound_WriteBoundValue(ItemRecAt14 *item,float value) {
  }
 }
 
-/* Calls Gobjinst_DrawMaskedModelWithLighting with its three arguments and the table D_800D0EF8 as the fourth. */
+/* Calls Gobjinst_DrawMaskedModelWithLighting with its three arguments and the table g_defaultParticleLighting as the fourth. */
 extern void Gobjinst_DrawMaskedModelWithLighting(void *, void *, void *, void *);
 
 void Bound_DrawActorWithMenuLighting(void *first, void *second, void *third) {
-    Gobjinst_DrawMaskedModelWithLighting(first, second, third, &D_800D0EF8);
+    Gobjinst_DrawMaskedModelWithLighting(first, second, third, &g_defaultParticleLighting);
 }
 
-extern void func_8024A1D0_de(ObjectItemsDrawActorWithRedMenuEffect *, void *, void *);
+extern void Gobjinst_DrawActorModelWithViewEffects(ObjectItemsDrawActorWithRedMenuEffect *, void *, void *);
 void Bound_DrawActorWithRedMenuEffect(ObjectItemsDrawActorWithRedMenuEffect *object, void *context, void *lookup) {
- D_800D15E0=3;
- object->view[D_800D297C]=D_800D0EF8;
- D_800D15E4[0]=(255.0f);
- D_800D15E4[1]=0;
- D_800D15E4[2]=0;
- D_800D15E4[4]=0;
- D_800D15E4[3]=(float)(D_8014DE50/2);
- func_8024A1D0_de(object,context,lookup);
- D_800D15E0=0;
+ g_menuModelFillEnabled=3;
+ object->view[g_lightingBufferIndex]=g_defaultParticleLighting;
+ g_menuModelFillColor[0]=(255.0f);
+ g_menuModelFillColor[1]=0;
+ g_menuModelFillColor[2]=0;
+ g_menuModelFillColor[4]=0;
+ g_menuModelFillColor[3]=(float)(g_menuTintAlpha/2);
+ Gobjinst_DrawActorModelWithViewEffects(object,context,lookup);
+ g_menuModelFillEnabled=0;
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800DD3AC[1] = {
+unsigned int k_BoundEncodedWords[1] = {
     0x71755200,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E9F3C[1] = {
+unsigned int k_BoundEncodedWordsBlock2[1] = {
     0x0041D280,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EED7C[1] = {
+unsigned int k_BoundEncodedWordsBlock3[1] = {
     0x4BBE0F47,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DE6FC[1] = {
+unsigned int k_BoundEncodedWordsBlock1[1] = {
     0x00443518,
 };
 #endif

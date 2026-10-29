@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SCREEN.H"
 #include "COMMON/WORLD.H"
 #include "FRONTEND/EQUIP_LOADEQUIPMENTSELECTIONS.H"
@@ -14,7 +14,7 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
-extern FourPlayerResultsScreen *D_800E59E0;
+extern FourPlayerResultsScreen *g_equipmentAndResultsScreen;
 
 /* Clears the 22 owned bytes at 0x4C of each of the 4 player records (150 bytes apart) in
    D_80146398; for each active player (byte 0x78 == 1) it looks up the player's model kind (byte
@@ -28,15 +28,15 @@ extern u8 g_playerSettings[];
 
 extern struct Model *Scene_FindActorDefinition(Shared_World *, s32, s32);
 
-/* Counts how many of the four 0x4D0-byte entries D_800E59E0 points to have the word at offset
+/* Counts how many of the four 0x4D0-byte entries g_equipmentAndResultsScreen points to have the word at offset
    0x4B0 equal to one. */
 
 
 
 
-/* Moves the cursor of player p's 0x4D0-byte entry of D_800E59E0 to column c: unless c is 5 it
-   hides the item whose id D_800E5A06[p * 19 + c] names in the screen window, shows the item
-   D_800E5A1A[p * 19 + c] names with alpha 0x96, stores c as the entry's selection and redraws that
+/* Moves the cursor of player p's 0x4D0-byte entry of g_equipmentAndResultsScreen to column c: unless c is 5 it
+   hides the item whose id g_equipmentPrimaryWidgetIds[p * 19 + c] names in the screen window, shows the item
+   g_equipmentSecondaryWidgetIds[p * 19 + c] names with alpha 0x96, stores c as the entry's selection and redraws that
    column through Equip_ShowEquipChoice with the entry's value for it. */
 
 
@@ -49,21 +49,21 @@ extern struct Model *Scene_FindActorDefinition(Shared_World *, s32, s32);
 
 
 
-extern struct StateFlags D_800E5A06[];
+extern struct StateFlags g_equipmentPrimaryWidgetIds[];
 
 extern struct ResourceSmpFlickerCreateFlickerWidget *Node_FindWidgetByResourceId(void *, s32);
 
 extern void Widget_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
 
 
-/* Releases the object D_800E59E0 holds through Cache_FreeMemory, clears D_800E59E0, calls
+/* Releases the object g_equipmentAndResultsScreen holds through Cache_FreeMemory, clears g_equipmentAndResultsScreen, calls
    Tsmos_ActivateControllerState and Tsmos_SetModeOneFlag with 2, and returns zero. */
 
 
 
 extern void Tsmos_ActivateControllerState(void);
 
-/* Handles an input event for the 0x4D0-byte entry of D_800E59E0 the low half of the third argument
+/* Handles an input event for the 0x4D0-byte entry of g_equipmentAndResultsScreen the low half of the third argument
    selects: when that entry is active, the high half is 3 and the fourth argument is zero, it calls
    MarkMenuEventHandled, resets the entry through Equip_LoadEquipmentSelections, redraws its six columns and then its
    selected column through Equip_ShowEquipChoice, and plays sound 0xE7C; it always returns zero. Written
@@ -78,25 +78,25 @@ extern void Tsmos_ActivateControllerState(void);
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_MoveEquipmentColumn with the entry index and 1, returning zero. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of g_equipmentAndResultsScreen the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_MoveEquipmentColumn with the entry index and 1, returning zero. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_MoveEquipmentColumn with the entry index and -1, returning zero. Adapted from Frontend_SelectPreviousEquipmentColumn with the second Equip_MoveEquipmentColumn argument changed from 1 to -1. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of g_equipmentAndResultsScreen the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_MoveEquipmentColumn with the entry index and -1, returning zero. Adapted from Frontend_SelectPreviousEquipmentColumn with the second Equip_MoveEquipmentColumn argument changed from 1 to -1. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_CycleEquipmentChoice with the entry index and -1, returning zero. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of g_equipmentAndResultsScreen the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_CycleEquipmentChoice with the entry index and -1, returning zero. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_CycleEquipmentChoice with the entry index and 1, returning zero. Adapted from Frontend_SelectPreviousEquipmentChoice with the second Equip_CycleEquipmentChoice argument changed from -1 to 1. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of g_equipmentAndResultsScreen the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_CycleEquipmentChoice with the entry index and 1, returning zero. Adapted from Frontend_SelectPreviousEquipmentChoice with the second Equip_CycleEquipmentChoice argument changed from -1 to 1. */
 
 
 
@@ -111,11 +111,11 @@ extern void SmpOverlay_SetSlotValue(void *, int, int);
 
 extern void Preview_SetPreviewTransformUpdate(void *, int);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5C04, an actor kind at D_800E5C08 and a handler at D_800E5C0C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_equipmentEventIds, an actor kind at g_equipmentEventActorKinds and a handler at g_equipmentEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8043C1D0)(void *, s32, s32, s32, s32);
 
-extern Handler8043C1D0 D_800E5C0C;
+extern Handler8043C1D0 g_equipmentEventHandlers;
 
 void Frontend_ResetEquipmentFromCharacter(void) {
     u8 *record;
@@ -152,7 +152,7 @@ s32 Frontend_CountActiveEquipmentPanels(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (D_800E59E0->panels[i].state == 1) {
+        if (g_equipmentAndResultsScreen->panels[i].state == 1) {
             count++;
         }
     }
@@ -163,19 +163,19 @@ void Frontend_SelectEquipmentColumn(s32 player, s32 column) {
     struct ResourceSmpFlickerCreateFlickerWidget *item;
 
     if (column != 5) {
-        item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player * 19 + column].value);
+        item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentPrimaryWidgetIds[player * 19 + column].value);
         Widget_SetWidgetFlag08(item, 1);
     }
-    item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][column].value);
+    item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentSecondaryWidgetIds[player][column].value);
     Widget_SetWidgetFlag40(item, 1);
     item->value = 0x96;
-    D_800E59E0->panels[player].selection = column;
-    Equip_ShowEquipChoice(player, column, D_800E59E0->panels[player].values[column]);
+    g_equipmentAndResultsScreen->panels[player].selection = column;
+    Equip_ShowEquipChoice(player, column, g_equipmentAndResultsScreen->panels[player].values[column]);
 }
 
 s32 Frontend_FreeEquipmentScreen(void) {
-    Cache_FreeMemory(D_800E59E0);
-    D_800E59E0 = 0;
+    Cache_FreeMemory(g_equipmentAndResultsScreen);
+    g_equipmentAndResultsScreen = 0;
     Tsmos_ActivateControllerState();
     Tsmos_SetModeOneFlag(2);
     return 0;
@@ -186,7 +186,7 @@ s32 Frontend_RestoreEquipmentSelections(void *first, void *second, u32 event, s3
     s32 i;
 
     index = event & 0xFFFF;
-    if (D_800E59E0->panels[index].state != 1) {
+    if (g_equipmentAndResultsScreen->panels[index].state != 1) {
         return 0;
     }
     if ((event >> 16) != 3) {
@@ -198,10 +198,10 @@ s32 Frontend_RestoreEquipmentSelections(void *first, void *second, u32 event, s3
     MarkMenuEventHandled();
     Equip_LoadEquipmentSelections(index);
     for (i = 0; i < 6; i++) {
-        Equip_ShowEquipChoice(index, i, D_800E59E0->panels[index].values[i]);
+        Equip_ShowEquipChoice(index, i, g_equipmentAndResultsScreen->panels[index].values[i]);
     }
-    Equip_ShowEquipChoice(index, D_800E59E0->panels[index].selection,
-                  D_800E59E0->panels[index].values[D_800E59E0->panels[index].selection]);
+    Equip_ShowEquipChoice(index, g_equipmentAndResultsScreen->panels[index].selection,
+                  g_equipmentAndResultsScreen->panels[index].values[g_equipmentAndResultsScreen->panels[index].selection]);
     SoundElement_PlayFlatSound(0xE7C);
     return 0;
 }
@@ -212,7 +212,7 @@ s32 Frontend_SelectPreviousEquipmentColumn(void *first, void *second, s32 slot, 
     MarkMenuEventHandled();
     if (active == 1) {
         index = slot;
-        if (D_800E59E0->panels[index].mode != 0 && D_800E59E0->panels[index].state == active) {
+        if (g_equipmentAndResultsScreen->panels[index].mode != 0 && g_equipmentAndResultsScreen->panels[index].state == active) {
             SoundElement_PlayFlatSound(0xE7B);
             Equip_MoveEquipmentColumn(index, 1);
             return 0;
@@ -227,7 +227,7 @@ s32 Frontend_SelectNextEquipmentColumn(void *first, void *second, s32 slot, s32 
     MarkMenuEventHandled();
     if (active == 1) {
         index = slot;
-        if (D_800E59E0->panels[index].mode != 0 && D_800E59E0->panels[index].state == active) {
+        if (g_equipmentAndResultsScreen->panels[index].mode != 0 && g_equipmentAndResultsScreen->panels[index].state == active) {
             SoundElement_PlayFlatSound(0xE7B);
             Equip_MoveEquipmentColumn(index, -1);
             return 0;
@@ -242,7 +242,7 @@ s32 Frontend_SelectPreviousEquipmentChoice(void *first, void *second, s32 slot, 
     MarkMenuEventHandled();
     if (active == 1) {
         index = slot;
-        if (D_800E59E0->panels[index].mode == 2 && D_800E59E0->panels[index].state == active) {
+        if (g_equipmentAndResultsScreen->panels[index].mode == 2 && g_equipmentAndResultsScreen->panels[index].state == active) {
             SoundElement_PlayFlatSound(0xE7B);
             Equip_CycleEquipmentChoice(index, -1);
             return 0;
@@ -257,7 +257,7 @@ s32 Frontend_SelectNextEquipmentChoice(void *first, void *second, s32 slot, s32 
     MarkMenuEventHandled();
     if (active == 1) {
         index = slot;
-        if (D_800E59E0->panels[index].mode == 2 && D_800E59E0->panels[index].state == active) {
+        if (g_equipmentAndResultsScreen->panels[index].mode == 2 && g_equipmentAndResultsScreen->panels[index].state == active) {
             SoundElement_PlayFlatSound(0xE7B);
             Equip_CycleEquipmentChoice(index, 1);
             return 0;
@@ -268,32 +268,32 @@ s32 Frontend_SelectNextEquipmentChoice(void *first, void *second, s32 slot, s32 
 
 int Frontend_CancelEquipmentSelection(int a,int b,unsigned int player) {
  MarkMenuEventHandled();player &= 0xFFFF;
- switch(D_800E59E0->panels[player].state) {
- case 1:D_800E59E0->state=5;D_800E59E0->timer=4;D_800E59E0->next=7;break;
- case 2:D_800E59E0->panels[player].state=0;SmpOverlay_SetSlotValue(D_800E59E0->menu,player,0);Preview_SetPreviewTransformUpdate(D_800E59E0->panels[player].pad0,1);Equip_ActivateEquipmentPanel(player);break;
+ switch(g_equipmentAndResultsScreen->panels[player].state) {
+ case 1:g_equipmentAndResultsScreen->state=5;g_equipmentAndResultsScreen->timer=4;g_equipmentAndResultsScreen->next=7;break;
+ case 2:g_equipmentAndResultsScreen->panels[player].state=0;SmpOverlay_SetSlotValue(g_equipmentAndResultsScreen->menu,player,0);Preview_SetPreviewTransformUpdate(g_equipmentAndResultsScreen->panels[player].pad0,1);Equip_ActivateEquipmentPanel(player);break;
  }
  return 0;
 }
 
-s32 Frontend_DispatchEquipmentEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchEquipmentEvent(void *eventTarget, s32 eventId, s32 eventCode, s32 eventValue, s32 repeatCount) {
     Handler8043C1D0 *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E5C0C != 0) {
+    if (g_equipmentEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E5C0C;
+        entry = &g_equipmentEventHandlers;
         index = 0;
         do {
-            if (D_800E5C04[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E5C08[index].value;
+            if (g_equipmentEventIds[index].value == eventId) {
+                actor = eventTarget;
+                actor_kind = actor->input;
+                table_kind = g_equipmentEventActorKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(eventTarget, eventId, eventCode, eventValue, repeatCount);
                 }
             }
             entry += 3;
@@ -307,9 +307,9 @@ s32 Frontend_DispatchEquipmentEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s3
 #include "COMMON/GFX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
-extern float D_80141008[];
+extern float g_fallbackScreenMessageEmitter[];
 /* A menu's title image: image id, RGB tint words, animation frame and a shown flag. */
 typedef struct MenuImage {
     s32 image;
@@ -326,12 +326,12 @@ void Frontend_DrawMenuImage(MenuImage *menu) {
     float *screen;
     if (menu->shown == 1) {
         frame = menu->frame;
-        screen = D_80141008;
+        screen = g_fallbackScreenMessageEmitter;
         OnScreen_SetupTextRendering();
         Geometry_SetModePreset(0x15);
         b = 1.0f;
         a = b;
-        switch (D_800E28D8) {
+        switch (g_frontendCurrentVideoModeIndex) {
         case 0:
             a = b;
             break;
@@ -352,13 +352,13 @@ void Frontend_DrawMenuImage(MenuImage *menu) {
 }
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E9864[3] = {
+unsigned int k_MenuImageEncodedWordsBlock1[3] = {
     0x000000FF, 0x00000000, 0x00000010,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DE024[3] = {
+unsigned int k_MenuImageEncodedWords[3] = {
     0x3FD85689, 0x3FCF914C, 0x3FD85689,
 };
 #endif

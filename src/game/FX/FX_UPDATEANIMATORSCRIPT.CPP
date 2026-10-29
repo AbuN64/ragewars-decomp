@@ -1,10 +1,10 @@
 #include "include_asm.h"
 #include "COMMON/EFFECTCONTRIBUTION.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "RENDER/ANIMATION_FRAME_AND_RIBBON_VIEWS.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 
-/* Animator exists in COMMON/UNUSED.H; active owning contract is pending. */
+/* Animator exists in COMMON/RUNTIME_DECLARATIONS.H; active owning contract is pending. */
 
 
 
@@ -26,13 +26,13 @@ void Fx_UpdateAnimatorScript(Animator *a) {
         }
         break;
     case 1:
-        a->time -= D_800D2988;
+        a->time -= g_frameElapsedTime;
         if (a->time < 0.0f) {
             next = 1;
         }
         break;
     case 4:
-        a->time += D_800D2988;
+        a->time += g_frameElapsedTime;
         if (a->valueDuration <= a->time) {
             a->time = a->valueDuration;
             next = 1;
@@ -42,7 +42,7 @@ void Fx_UpdateAnimatorScript(Animator *a) {
         a->value = op0 * a->valueFrom + op1 * a->valueTo;
         break;
     case 6:
-        a->time += D_800D2988;
+        a->time += g_frameElapsedTime;
         if (a->colourDuration <= a->time) {
             a->time = a->colourDuration;
             next = 1;
@@ -126,46 +126,46 @@ void Fx_UpdateAnimatorScript(Animator *a) {
     }
 }
 
-/* Fill colour state (RENDER_4/8026AC38.H names it f32 D_800D15E4[5]). This unit's original declared the five floats as
+/* Fill colour state (RENDER_4/8026AC38.H names it f32 g_menuModelFillColor[5]). This unit's original declared the five floats as
  * separate globals: the ROM gives every clamp access its own lui, which only a scalar declaration produces (an array
  * element, struct member or pointer view keeps the address in a register). Q042 MIXED by unit. */
-extern s32 D_800D15E0;
-extern f32 D_800D15E4; /* MIXED D_800D15E4 red */
-extern f32 D_800CC398; /* MIXED D_800CC398 green */
-extern f32 D_800D15EC; /* MIXED D_800D15EC blue */
-extern f32 D_800D15F0; /* MIXED D_800D15F0 alpha */
-extern f32 D_800D15F4; /* MIXED D_800D15F4 fade target alpha */
+extern s32 g_menuModelFillEnabled;
+extern f32 g_menuModelFillColor; /* MIXED g_menuModelFillColor red */
+extern f32 g_menuModelFillGreen; /* MIXED g_menuModelFillGreen green */
+extern f32 g_menuModelFillBlue; /* MIXED g_menuModelFillBlue blue */
+extern f32 g_menuModelFillAlpha; /* MIXED g_menuModelFillAlpha alpha */
+extern f32 g_menuModelFillTargetAlpha; /* MIXED g_menuModelFillTargetAlpha fade target alpha */
 typedef struct FillFade {
     f32 alpha;
     f32 target;
 } FillFade;
-#define FILL_FADE ((FillFade *)&D_800D15F0)
+#define FILL_FADE ((FillFade *)&g_menuModelFillAlpha)
 
 void Fx_UpdateFillMode(void) {
     f32 target;
     f32 alpha;
 
-    if (D_800D15E4 < 0.0f) D_800D15E4 = 0.0f; else if (D_800D15E4 > 255.0f) D_800D15E4 = 255.0f;
-    if (D_800CC398 < 0.0f) D_800CC398 = 0.0f; else if (D_800CC398 > 255.0f) D_800CC398 = 255.0f;
-    if (D_800D15EC < 0.0f) D_800D15EC = 0.0f; else if (D_800D15EC > 255.0f) D_800D15EC = 255.0f;
-    if (D_800D15F0 < 0.0f) D_800D15F0 = 0.0f; else if (D_800D15F0 > 255.0f) D_800D15F0 = 255.0f;
-    if (D_800D15F4 < 0.0f) D_800D15F4 = 0.0f; else if (D_800D15F4 > 255.0f) D_800D15F4 = 255.0f;
+    if (g_menuModelFillColor < 0.0f) g_menuModelFillColor = 0.0f; else if (g_menuModelFillColor > 255.0f) g_menuModelFillColor = 255.0f;
+    if (g_menuModelFillGreen < 0.0f) g_menuModelFillGreen = 0.0f; else if (g_menuModelFillGreen > 255.0f) g_menuModelFillGreen = 255.0f;
+    if (g_menuModelFillBlue < 0.0f) g_menuModelFillBlue = 0.0f; else if (g_menuModelFillBlue > 255.0f) g_menuModelFillBlue = 255.0f;
+    if (g_menuModelFillAlpha < 0.0f) g_menuModelFillAlpha = 0.0f; else if (g_menuModelFillAlpha > 255.0f) g_menuModelFillAlpha = 255.0f;
+    if (g_menuModelFillTargetAlpha < 0.0f) g_menuModelFillTargetAlpha = 0.0f; else if (g_menuModelFillTargetAlpha > 255.0f) g_menuModelFillTargetAlpha = 255.0f;
     target = FILL_FADE->target;
     alpha = FILL_FADE->alpha;
     if (target == 255.0f && alpha == 0.0f) {
-        D_800D15E0 = 0;
+        g_menuModelFillEnabled = 0;
         return;
     }
     if (target != 255.0f && alpha == 0.0f) {
-        D_800D15E0 = 1;
+        g_menuModelFillEnabled = 1;
         FILL_FADE->alpha = FILL_FADE->target;
         return;
     }
     if (target == 255.0f && alpha != 0.0f) {
-        D_800D15E0 = 3;
+        g_menuModelFillEnabled = 3;
         return;
     }
     if (target != 255.0f && alpha != 0.0f) {
-        D_800D15E0 = 6;
+        g_menuModelFillEnabled = 6;
     }
 }

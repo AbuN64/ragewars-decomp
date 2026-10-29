@@ -3,5 +3,5 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-extern void func_802BC850_eu_x();
+extern void __osDispatchThread();
 #endif

@@ -4,7 +4,7 @@
 
 extern void SmpFlicker_RegisterFlickerClass(void);
 
-extern s32 SmpFlicker_DispatchEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 SmpFlicker_DispatchEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra);
 extern void SmpFlicker_IgnoreEvent(s32 unused0, struct Triple unused1);
-extern void SmpFlicker_InitFlicker(func_80419D04_S1*flicker, s32 sampleCount);
+extern void SmpFlicker_InitFlicker(FlickerUpdateState*flicker, s32 sampleCount);
 #endif

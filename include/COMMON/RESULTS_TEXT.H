@@ -7,23 +7,23 @@
 #include "COMMON/MENU_TEXT.H"
 /* The game settings record. */
 static inline Shared_Game *currentGame(void) {
-    return &D_801462C8;
+    return &g_gameSettings;
 }
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 /* PAL builds keep one text per language, chosen by the game settings. */
 #define RESULTS_LANGUAGE (currentGame()->language)
-extern ResultsHeadingCharacter D_800F00DC[];
-extern char D_800C5594[];
-extern char *D_800E1664_eu[], *D_800E1724[], *D_800E1734_eu[], *D_800E1744[], *D_800E1754[], *D_800E1784[],
-    *D_800E1794_eu[], *D_800E17A4[], *D_800E17B4[], *D_800E17C4[], *D_800E17D4[], *D_800E17E4_eu[],
-    *D_800E17F4[], *D_800E1804[], *D_800E1814[], *D_800E1824[], *D_800E1834[], *D_800E1844[],
-    *D_800E1854_eu[], *D_800E1864[], *D_800E1874[], *D_800E1884[], *D_800E1894[], *D_800E18A4[],
-    *D_800E18B4_eu[];
-#define RESULTS_CHARACTERS D_800F00DC
-#define RESULTS_NAME_FORMAT D_800C5594
+extern ResultsHeadingCharacter g_resultCharacterHeadingTranslations[];
+extern char g_resultsHeadingText[];
+extern char *g_characterPreviewTextReferenceEu1[], *g_characterPreviewTextReferenceShared6[], *g_characterPreviewTextReferenceEu3[], *g_characterPreviewTextReferenceShared7[], *g_characterPreviewTextReferenceShared8[], *g_resultsRoundsOneFormatLocalized[],
+    *g_resultsRoundsTwoFormatLocalized[], *g_resultsRoundsThreeFormatLocalized[], *g_resultsLapsOneFormatLocalized[], *g_resultsLapsTwoFormatLocalized[], *g_resultsLapsThreeFormatLocalized[], *g_resultsLapsFourFormatLocalized[],
+    *g_resultsLapsFiveFormatLocalized[], *g_resultsGoalOneFormatLocalized[], *g_resultsGoalTwoFormatLocalized[], *g_resultsTimeLimitFormatLocalized[], *g_resultsMinutesSecondsOneFormatLocalized[], *g_resultsMinutesSecondsTwoFormatLocalized[],
+    *g_resultsMinutesOneFormatLocalized[], *g_resultsMinutesTwoFormatLocalized[], *g_resultsPlayerOrLivesOneFormatLocalized[], *g_resultsPlayerOrLivesTwoFormatLocalized[], *g_resultsGoalLabelFormatLocalized[], *g_resultsGoalValueFormatLocalized[],
+    *g_slotSelectionTextReferenceEu7[];
+#define RESULTS_CHARACTERS g_resultCharacterHeadingTranslations
+#define RESULTS_NAME_FORMAT g_resultsHeadingText
 #else
 #define RESULTS_LANGUAGE 0
-#define RESULTS_CHARACTERS D_800DFA6C
+#define RESULTS_CHARACTERS g_resultCharacterHeadings
 #define RESULTS_NAME_FORMAT D_800C52E4_de
 #endif
 /* A results text in the language the game settings select. */

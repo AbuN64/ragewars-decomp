@@ -3,10 +3,10 @@
 #include "TYPES.H"
 #include "COMMON/MTX.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 struct Player1680 {
     char pad0[0x5DC];
-    func_8023945C_S1 *mount;
+    PlayerEyePositionView *mount;
     char pad5E0[0x1640 - 0x5E0];
     Mtx views[1];
 };

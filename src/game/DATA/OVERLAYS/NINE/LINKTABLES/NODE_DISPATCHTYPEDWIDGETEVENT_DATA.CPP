@@ -1,16 +1,16 @@
 #include "TYPES.H"
 
 #if defined(VERSION_EU_X)
-extern char D_00412FB8[];
-extern char D_00413000[];
-extern char D_0041304C[];
-extern char D_00413094[];
-extern char D_004130E0[];
-extern char D_00416060[];
+extern char g_Node_SelectPreviousGridRowPackedAddress24[];
+extern char g_Node_SelectNextGridRowPackedAddress24[];
+extern char g_Node_SelectPreviousGridColumnPackedAddress24[];
+extern char g_Node_SelectNextGridColumnPackedAddress24[];
+extern char g_Node_DestroyGridListPackedAddress24[];
+extern char g_Gfx_BlinkVideoUnlessBypassedPackedAddress24[];
 u32 data_unresolved_800EA2B0[492] = {
-    0x00000005, 0x00007530, (unsigned int)D_00412FB8, 0x00000006, 0x00007530, (unsigned int)D_00413000,
-    0x00000007, 0x00007530, (unsigned int)D_0041304C, 0x00000008, 0x00007530, (unsigned int)D_00413094,
-    0x00000E03, 0x00007530, (unsigned int)D_004130E0, 0x00000000, 0x00000000, 0x00000000,
+    0x00000005, 0x00007530, (unsigned int)g_Node_SelectPreviousGridRowPackedAddress24, 0x00000006, 0x00007530, (unsigned int)g_Node_SelectNextGridRowPackedAddress24,
+    0x00000007, 0x00007530, (unsigned int)g_Node_SelectPreviousGridColumnPackedAddress24, 0x00000008, 0x00007530, (unsigned int)g_Node_SelectNextGridColumnPackedAddress24,
+    0x00000E03, 0x00007530, (unsigned int)g_Node_DestroyGridListPackedAddress24, 0x00000000, 0x00000000, 0x00000000,
     0xC2A00000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFF8,
     0xFFFFFFF8, 0xFFFFFFF8, 0xFFFFFFF8, 0x00000001, 0x00000000, 0x00000010,
@@ -89,6 +89,6 @@ u32 data_unresolved_800EA2B0[492] = {
     0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFC, 0xFFFFFFF8, 0xFFFFFFF8,
     0xFFFFFFF8, 0x00000023, 0x00000000, 0x00000008, 0x00000008, 0x00000008,
     0x000000FF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFF8,
-    0xFFFFFFF8, 0xFFFFFFF8, (unsigned int)D_00416060, 0x00000000, 0x00000089, 0x0000008A,
+    0xFFFFFFF8, 0xFFFFFFF8, (unsigned int)g_Gfx_BlinkVideoUnlessBypassedPackedAddress24, 0x00000000, 0x00000089, 0x0000008A,
 };
 #endif

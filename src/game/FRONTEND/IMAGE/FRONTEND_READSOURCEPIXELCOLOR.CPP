@@ -3,7 +3,7 @@
 #include "COMMON/FORMAT.H"
 #include "TYPES.H"
 #include "FRONTEND/FRONTEND_READSOURCEPIXELCOLOR.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
 /* Reads the pixel at (x, y) of the current image g_conversionSourceImage as a 0xAARRGGBB colour: seeks to
    x + y * width through the format's seek hook g_readSourceIndex, fetches through g_readSourceColor and converts
@@ -144,7 +144,7 @@ u32 Frontend_ReadSourcePixelColor(s32 x, s32 y) {
     u32 b;
     u32 a;
 
-    g_sourcePixelOffset = x + y * g_conversionSourceImage->unk8;
+    g_sourcePixelOffset = x + y * g_conversionSourceImage->width;
     g_readSourceIndex(g_sourcePixelOffset);
     g_readSourceColor();
     if (g_sourceRedShift < 0) {
@@ -175,7 +175,7 @@ u32 Frontend_ReadSourcePixelColor(s32 x, s32 y) {
 
 s32 Frontend_ReadSourcePixelIndex(s32 x, s32 y) {
     extern struct ShapeCode802B54A0 *g_conversionSourceImage;
-    g_sourcePixelOffset = x + y * g_conversionSourceImage->unk8;
+    g_sourcePixelOffset = x + y * g_conversionSourceImage->width;
     g_readSourceIndex();
     return g_sourcePixelIndex;
 }
@@ -249,14 +249,14 @@ void Frontend_WriteDestinationPixelColor(s32 x, s32 y, u32 color) {
         a = (a << g_destinationAlphaShift) & g_destinationAlphaMask;
     }
     g_destinationEncodedColor = r | g | b | a;
-    g_destinationColorIndex = x + y * g_conversionDestinationImage->unk8;
+    g_destinationColorIndex = x + y * g_conversionDestinationImage->width;
     g_writeDestinationColor();
 }
 
 void Frontend_WriteDestinationPixelIndex(s32 x, s32 y, s32 value) {
     extern struct ShapeCode802B54A0 *g_conversionDestinationImage;
     g_destinationPixelIndex = value;
-    g_destinationPixelOffset = x + y * g_conversionDestinationImage->unk8;
+    g_destinationPixelOffset = x + y * g_conversionDestinationImage->width;
     g_writeDestinationIndex();
 }
 

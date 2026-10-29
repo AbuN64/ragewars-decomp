@@ -1,6 +1,6 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/OSINT/osyieldthread.H"
 
 /* osPiRawStartDma, drafted from ultralib src/io/pirawdma.c (2.0I, where __osPiRawStartDma is osPiRawStartDma). */
@@ -15,7 +15,7 @@ s32 Gamecore_StartRawPeripheralDma(s32 direction, u32 devAddr, void *dramAddr, u
         stat = *(volatile u32 *)0xA4600010;
 
     *(volatile u32 *)0xA4600000 = osVirtualToPhysical(dramAddr);
-    *(volatile u32 *)0xA4600004 = (D_80000308 | devAddr) & 0x1FFFFFFF;
+    *(volatile u32 *)0xA4600004 = (g_cartridgeRomBaseAddress | devAddr) & 0x1FFFFFFF;
 
     switch (direction) {
         case 0:

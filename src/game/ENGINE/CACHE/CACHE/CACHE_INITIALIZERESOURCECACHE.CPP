@@ -6,10 +6,10 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "COMMON/S1.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
 #include "sdk/os.h"
@@ -20,17 +20,17 @@
 
 /* One declaration per symbol for the whole unit; the functions below used to redeclare them locally with
  * conflicting types, which only the MIPS compiler accepted. */
-extern struct Shape_func_8021A2D4_de_2 D_80105180;
-extern OSMesgQueue D_80101140;
-extern CMemEntry **D_80100564;
-extern s32 func_80255B2C_de(void *, s32);
-extern s32 D_801051A0[3];
-extern char D_80100570;
-extern CMemEntry *D_80100568;
+extern struct MemoryUsageStats g_resourceCacheFrameStamp;
+extern OSMesgQueue g_resourceHeapLockQueue;
+extern CMemEntry **g_resourceFreeNodeStack;
+extern s32 Heap_FreeAllocation(void *, s32);
+extern s32 g_runtimeHeap[3];
+extern char g_resourceRecencyList;
+extern CMemEntry *g_resourceAllocationCandidate;
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 
 #include "COMMON/ENTRYRECAT18V3.H"
-/* The resource manager record at D_80100560: node array, free-slot stack, link records, lists and its lock queue.
+/* The resource manager record at g_resourceCacheManager: node array, free-slot stack, link records, lists and its lock queue.
  * count (0xBDC) and stamp (0xC20) are the Pool fields used by Cache_AcquirePendingResourceEntry. */
 struct ResLink {
     s32 unk0;
@@ -70,84 +70,84 @@ struct ResMgr {
     s32 unkC1C;
     s32 stamp;
 };
-extern s32 func_80255920_de(void *, s32);
-extern s32 func_802567A4_de(OSMesgQueue *);
+extern s32 Heap_AllocateFromFront(void *, s32);
+extern s32 Mutex_InitializeQueueLock(OSMesgQueue *);
 extern u32 Defs_GetMemorySize(void);
 extern s32 osCreateThread(void *, s32, void *, s32, void *, s32);
 extern void HashTable_InitializeResourceTable(s32);
-extern s32 D_002524B0;
-extern s32 D_800CD8BC;
-extern s32 D_801008F8;
-extern int D_800CB6E0;
-extern Manager D_801047E0;
-extern struct ResMgr D_80100560;
+extern s32 g_packedCodeAddress24_002524B0;
+extern s32 g_resourceCompletionWorkerPriority;
+extern s32 g_resourceCompletionWorkerStack;
+extern int g_resourceCacheNodeCapacity;
+extern Manager g_resourceRequestManager;
+extern struct ResMgr g_resourceCacheManager;
 
 void Cache_InitializeResourceCache(s32 unused, s32 count) {
     u32 mask;
     u32 unlockMask;
     u32 i;
     void *thread;
-    func_802567A4_de(&D_80101140);
+    Mutex_InitializeQueueLock(&g_resourceHeapLockQueue);
     mask = __osDisableInt();
-    D_8010515C += 1;
-    if (D_8010515C != 1) {
+    g_resourceHeapLockUsers += 1;
+    if (g_resourceHeapLockUsers != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(&D_80101140, 0, 1);
+        osRecvMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    D_800CB6E0 = 0x400;
+    g_resourceCacheNodeCapacity = 0x400;
     if (Defs_GetMemorySize() > 0x400000) {
-        D_800CB6E0 *= 2;
+        g_resourceCacheNodeCapacity *= 2;
     }
-    D_80100560.nodes = (struct CMemEntry *)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(struct CMemEntry));
-    D_80100560.slots = (struct CMemEntry **)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(void *));
-    D_80100560.links = (struct ResLink *)func_80255920_de(&D_801051A0, D_800CB6E0 * 0x2C);
-    osCreateMesgQueue(&D_80100560.lock, D_80100560.lockSlot, 1);
-    D_80100560.unk44 = 0;
-    D_80100560.unk40 = 0;
-    func_80255CA0_de(&D_80100560.entries, 0x18, 0x1C);
-    func_80255CA0_de(&D_80100560.recent, 0x20, 0x24);
-    D_80100560.count = 0;
-    for (i = 0; i < D_800CB6E0; i++) {
-        struct CMemEntry *node = &D_80100560.nodes[i];
+    g_resourceCacheManager.nodes = (struct CMemEntry *)Heap_AllocateFromFront(&g_runtimeHeap, g_resourceCacheNodeCapacity * sizeof(struct CMemEntry));
+    g_resourceCacheManager.slots = (struct CMemEntry **)Heap_AllocateFromFront(&g_runtimeHeap, g_resourceCacheNodeCapacity * sizeof(void *));
+    g_resourceCacheManager.links = (struct ResLink *)Heap_AllocateFromFront(&g_runtimeHeap, g_resourceCacheNodeCapacity * 0x2C);
+    osCreateMesgQueue(&g_resourceCacheManager.lock, g_resourceCacheManager.lockSlot, 1);
+    g_resourceCacheManager.unk44 = 0;
+    g_resourceCacheManager.unk40 = 0;
+    List_InitializeIntrusive(&g_resourceCacheManager.entries, 0x18, 0x1C);
+    List_InitializeIntrusive(&g_resourceCacheManager.recent, 0x20, 0x24);
+    g_resourceCacheManager.count = 0;
+    for (i = 0; i < g_resourceCacheNodeCapacity; i++) {
+        struct CMemEntry *node = &g_resourceCacheManager.nodes[i];
         node->flags = 0;
-        D_80100560.slots[i] = node;
-        D_80100560.count += 1;
+        g_resourceCacheManager.slots[i] = node;
+        g_resourceCacheManager.count += 1;
     }
-    D_80100560.enabled0 = D_80100560.enabled1 = 1;
-    D_80100560.selected = -1;
-    D_80100560.unkBD4 = 0;
-    D_80100560.unkBD8 = 0;
-    D_80100560.unk8 = 0;
+    g_resourceCacheManager.enabled0 = g_resourceCacheManager.enabled1 = 1;
+    g_resourceCacheManager.selected = -1;
+    g_resourceCacheManager.unkBD4 = 0;
+    g_resourceCacheManager.unkBD8 = 0;
+    g_resourceCacheManager.unk8 = 0;
 #if defined(VERSION_US)
-    D_80100560.unkC1C = 0;
+    g_resourceCacheManager.unkC1C = 0;
 #else
-    D_80100560.unkC1C = 1;
+    g_resourceCacheManager.unkC1C = 1;
 #endif
-    D_80100560.stamp = 0;
-    func_80255CA0_de(&D_80100560.freeLinks, 0x28, 0x24);
-    func_80255CA0_de(&D_80100560.listBAC, 0x28, 0x24);
-    func_80255CA0_de(&D_80100560.listBC0, 0x28, 0x24);
-    for (i = 0; i < D_800CB6E0; i++) {
-        struct ResLink *link = &D_80100560.links[i];
+    g_resourceCacheManager.stamp = 0;
+    List_InitializeIntrusive(&g_resourceCacheManager.freeLinks, 0x28, 0x24);
+    List_InitializeIntrusive(&g_resourceCacheManager.listBAC, 0x28, 0x24);
+    List_InitializeIntrusive(&g_resourceCacheManager.listBC0, 0x28, 0x24);
+    for (i = 0; i < g_resourceCacheNodeCapacity; i++) {
+        struct ResLink *link = &g_resourceCacheManager.links[i];
         link->owner = 0;
-        func_80255D14_de(&D_80100560.freeLinks, link);
+        List_AppendIntrusive(&g_resourceCacheManager.freeLinks, link);
     }
-    HashTable_InitializeResourceTable(D_800CB6E0);
-    osCreateMesgQueue((OSMesgQueue *)D_801047E0.queue, (OSMesg *)(D_801047E0.queue + 0x18), 0x40);
+    HashTable_InitializeResourceTable(g_resourceCacheNodeCapacity);
+    osCreateMesgQueue((OSMesgQueue *)g_resourceRequestManager.queue, (OSMesg *)(g_resourceRequestManager.queue + 0x18), 0x40);
     unlockMask = __osDisableInt();
-    D_8010515C -= 1;
-    if (D_8010515C != 0) {
+    g_resourceHeapLockUsers -= 1;
+    if (g_resourceHeapLockUsers != 0) {
         __osRestoreInt(unlockMask);
-        osSendMesg((OSMesgQueue *)D_801047E0.lock, 0, 1);
+        osSendMesg((OSMesgQueue *)g_resourceRequestManager.lock, 0, 1);
     } else {
         __osRestoreInt(unlockMask);
     }
-    /* thread block D_801008F8 - 0x348 followed by its 0x800-byte stack at D_801008F8 */
-    XPlus_FillMemory(&D_801008F8, count, 0x800);
-    thread = (char *)&D_801008F8 - 0x348;
-    osCreateThread(thread, count, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
+    /* thread block g_resourceCompletionWorkerStack - 0x348 followed by its 0x800-byte stack at g_resourceCompletionWorkerStack */
+    XPlus_FillMemory(&g_resourceCompletionWorkerStack, count, 0x800);
+    thread = (char *)&g_resourceCompletionWorkerStack - 0x348;
+    osCreateThread(thread, count, &g_packedCodeAddress24_002524B0, 0, (char *)&g_resourceCompletionWorkerStack + 0x800, g_resourceCompletionWorkerPriority);
     osStartThread(thread);
 }
 
@@ -155,10 +155,10 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
 
 
 
-/* Reclaims one pool node: finds the first unlocked node (none of flags 0x702) in the D_80104574 list that
+/* Reclaims one pool node: finds the first unlocked node (none of flags 0x702) in the g_resourceCompactionEntries list that
  * was last used five or more frames ago, falling back unless keep_recent is set to the first unlocked node
- * even if recent; the node's resource is released through Cache_DetachResourceRequest and func_80255B2C_de, it is unlinked
- * from its lists, cleared, and pushed back on the free stack, returning func_80255B2C_de's result (0 when no
+ * even if recent; the node's resource is released through Cache_DetachResourceRequest and Heap_FreeAllocation, it is unlinked
+ * from its lists, cleared, and pushed back on the free stack, returning Heap_FreeAllocation's result (0 when no
  * node could be reclaimed). */
 
 
@@ -169,9 +169,9 @@ extern void Cache_DetachResourceRequest(void *, CMemEntry *);
 static inline CMemEntry *find_stale(CMemEntry **recent) {
     CMemEntry *node;
 
-    for (node = D_80104574; node != 0; node = node->next) {
+    for (node = g_resourceCompactionEntries; node != 0; node = node->next) {
         if (!(node->flags & 0x702)) {
-            if ((u32)(D_80105180.field_0 - node->lastUsed) >= 5) {
+            if ((u32)(g_resourceCacheFrameStamp.value - node->lastUsed) >= 5) {
                 return node;
             }
             *recent = node;
@@ -179,15 +179,15 @@ static inline CMemEntry *find_stale(CMemEntry **recent) {
         }
     }
     for (; node != 0; node = node->next) {
-        if (!(node->flags & 0x702) && (u32)(D_80105180.field_0 - node->lastUsed) >= 5) {
+        if (!(node->flags & 0x702) && (u32)(g_resourceCacheFrameStamp.value - node->lastUsed) >= 5) {
             return node;
         }
     }
     return 0;
 }
 
-/* Allocates a node from the free pool D_8010513C (as Cache_AcquirePendingResourceEntry does: pops it, resets its fields,
- * stamps the current frame and links it through func_80255CB8_de with the caller's 0xC flags); when the pool
+/* Allocates a node from the free pool g_resourceFreeNodeCount (as Cache_AcquirePendingResourceEntry does: pops it, resets its fields,
+ * stamps the current frame and links it through List_PrependIntrusive with the caller's 0xC flags); when the pool
  * is empty it runs the collector Cache_EvictResource (keeping the 0x10-flagged kind) and retries once, returning
  * 0 when nothing could be freed. Adapted by inlining Cache_AcquirePendingResourceEntry as a static helper. */
 
@@ -196,43 +196,43 @@ static inline CMemEntry *find_stale(CMemEntry **recent) {
 
 
 
-static inline void *pool_alloc(s32 arg1) {
+static inline void *pool_alloc(s32 byteCount) {
     struct CMemEntry *cacheEntry;
 
-    if (((struct Pool *)&D_8010513C)->count == 0) {
+    if (((struct Pool *)&g_resourceFreeNodeCount)->count == 0) {
         return 0;
     }
-    ((struct Pool *)&D_8010513C)->count -= 1;
-    cacheEntry = D_80100564[((struct Pool *)&D_8010513C)->count];
+    ((struct Pool *)&g_resourceFreeNodeCount)->count -= 1;
+    cacheEntry = g_resourceFreeNodeStack[((struct Pool *)&g_resourceFreeNodeCount)->count];
     cacheEntry->flags = 0x800;
     cacheEntry->references = 0;
     cacheEntry->resource = 0;
     cacheEntry->callback = 0;
     cacheEntry->pending = 0;
     cacheEntry->owner = 0;
-    cacheEntry->lastUsed = ((struct Pool *)&D_8010513C)->field44;
-    func_80255CB8_de((char *)&D_8010513C - 0xBCC, cacheEntry);
-    cacheEntry->flags |= (arg1 & 0xC);
+    cacheEntry->lastUsed = ((struct Pool *)&g_resourceFreeNodeCount)->useCounter;
+    List_PrependIntrusive((char *)&g_resourceFreeNodeCount - 0xBCC, cacheEntry);
+    cacheEntry->flags |= (byteCount & 0xC);
     return cacheEntry;
 }
 
 
 extern void Defs_MoveMemory(u32, u32, s32);
 
-extern void func_80255D70_de(void *, s32, s32);
+extern void List_InsertBeforeIntrusive(void *, s32, s32);
 
-/* Looks up a key in the hash table under the queue lock and, if found, bumps the object's reference count, flags it, stamps it and passes it to func_80255FB8_de, returning the object. Adapted from Cache_TouchResourceByKey, with the count/flag updates added and the object returned. */
-
-
+/* Looks up a key in the hash table under the queue lock and, if found, bumps the object's reference count, flags it, stamps it and passes it to List_MoveIntrusiveToHead, returning the object. Adapted from Cache_TouchResourceByKey, with the count/flag updates added and the object returned. */
 
 
 
 
 
-extern struct Shape_func_8021A2D4_de_2 D_80101190;
 
 
-extern void func_80255FB8_de(void *, s32);
+extern struct MemoryUsageStats g_resourceHashEvenIndexMask;
+
+
+extern void List_MoveIntrusiveToHead(void *, s32);
 
 void Cache_WaitForResourceSlotRelease(void) {
     s32 lockReleaseCount;
@@ -246,13 +246,13 @@ void Cache_WaitForResourceSlotRelease(void) {
     pendingReleaseCount = 0;
     slotCursor = 0;
     do {
-        if (D_80101134[slotCursor] != 0) {
-            if (D_801005A8 != slotCursor) {
+        if (g_resourceSlotActivity[slotCursor] != 0) {
+            if (g_resourceSlotLockState != slotCursor) {
                 pendingReleaseCount += 1;
-                D_801005A0[slotCursor] = 1;
+                g_resourceSlotOwners[slotCursor] = 1;
                 goto block_7;
             }
-            D_80100598[slotCursor] = 0;
+            g_resourceSlotProtected[slotCursor] = 0;
             Cache_ClearResourceSlotProtection(0, slotCursor);
             slotCursor += 1;
         } else {
@@ -262,11 +262,11 @@ block_7:
     } while (slotCursor < 2);
     if (pendingReleaseCount != 0) {
         mask = __osDisableInt();
-        lockReleaseCount = D_8010515C - 1;
-        D_8010515C = lockReleaseCount;
+        lockReleaseCount = g_resourceHeapLockUsers - 1;
+        g_resourceHeapLockUsers = lockReleaseCount;
         if (lockReleaseCount != 0) {
             __osRestoreInt(mask);
-            osSendMesg(&D_80101140, 0, 1);
+            osSendMesg(&g_resourceHeapLockQueue, 0, 1);
             i = 0;
         } else {
             __osRestoreInt(mask);
@@ -274,16 +274,16 @@ block_7:
         }
         if (pendingReleaseCount > 0) {
             do {
-                osRecvMesg(&D_80101160, 0, 1);
+                osRecvMesg(&g_resourceCompletionWakeQueue, 0, 1);
                 i += 1;
             } while (i < pendingReleaseCount);
         }
         reacquireInterruptMask = __osDisableInt();
-        lockClaimCount = D_8010515C + 1;
-        D_8010515C = lockClaimCount;
+        lockClaimCount = g_resourceHeapLockUsers + 1;
+        g_resourceHeapLockUsers = lockClaimCount;
         if (lockClaimCount != 1) {
             __osRestoreInt(reacquireInterruptMask);
-            osRecvMesg(&D_80101140, 0, 1);
+            osRecvMesg(&g_resourceHeapLockQueue, 0, 1);
             return;
         }
         __osRestoreInt(reacquireInterruptMask);
@@ -304,19 +304,19 @@ s32 Cache_EvictResource(s32 unused0, s32 unused1, s32 keep_recent) {
     }
     if (node != 0) {
         Cache_DetachResourceRequest(0, node);
-        result = func_80255B2C_de(&D_801051A0, node->resource);
-        func_80255ED8_de(&D_80100570, node);
+        result = Heap_FreeAllocation(&g_runtimeHeap, node->resource);
+        List_RemoveIntrusive(&g_resourceRecencyList, node);
         if (node->flags & 0x1000) {
-            func_80255ED8_de(&D_80100584, node);
+            List_RemoveIntrusive(&g_resourcesByAddress, node);
         }
-        if (D_80100568 == node) {
-            D_80100568 = 0;
+        if (g_resourceAllocationCandidate == node) {
+            g_resourceAllocationCandidate = 0;
             node->flags = 0;
         } else {
             node->flags = 0;
         }
-        *(CMemEntry **)(D_8010513C * 4 + (char *)D_80100564) = node;
-        D_8010513C++;
+        *(CMemEntry **)(g_resourceFreeNodeCount * 4 + (char *)g_resourceFreeNodeStack) = node;
+        g_resourceFreeNodeCount++;
         return result;
     }
     return 0;
@@ -346,57 +346,57 @@ void Cache_CompactResourceHeap(s32 unused, s32 compactAll) {
     s32 *arena;
     s32 *pool;
 
-    func_80255CA0_de(&queue, 0x20, 0x24);
-    if (compactAll != 0 || ((s32 *)&D_80100568)[0] == 0) {
-        ((s32 *)&D_80100568)[0] = ((s32 *)&D_80100568)[7];
-        if (((s32 *)&D_80100568)[7] == 0) {
+    List_InitializeIntrusive(&queue, 0x20, 0x24);
+    if (compactAll != 0 || ((s32 *)&g_resourceAllocationCandidate)[0] == 0) {
+        ((s32 *)&g_resourceAllocationCandidate)[0] = ((s32 *)&g_resourceAllocationCandidate)[7];
+        if (((s32 *)&g_resourceAllocationCandidate)[7] == 0) {
             goto drain;
         }
     }
 
-    pool = (s32 *)&D_80100568;
-    arena_end = &D_801051A0[2];
+    pool = (s32 *)&g_resourceAllocationCandidate;
+    arena_end = &g_runtimeHeap[2];
     arena = arena_end - 2;
     do {
         node = (Node80254C10 *)pool[0];
         pool[0] = *(s32 *)&node->next;
         if (!(*(s32 *)&node->flags & 0x701) && (u32)(*arena_end + 0x20) < node->start) {
-            func_80255B2C_de(arena, node->start);
-            split = func_80255920_de(arena, node->end);
+            Heap_FreeAllocation(arena, node->start);
+            split = Heap_AllocateFromFront(arena, node->end);
             if (split < node->start) {
                 Defs_MoveMemory(split, node->start, node->end);
                 node->start = split;
-                func_80255ED8_de(&pool[7], node);
-                func_80255D14_de(&queue, node);
+                List_RemoveIntrusive(&pool[7], node);
+                List_AppendIntrusive(&queue, node);
             }
             if (compactAll == 0) {
                 break;
             }
         }
-    } while (((s32 *)&D_80100568)[0] != 0);
+    } while (((s32 *)&g_resourceAllocationCandidate)[0] != 0);
 
 drain:
     node = queue.head;
     while (node != 0) {
         next = node->next;
-        func_80255F70_de(&queue);
-        scan = D_80100584.head;
+        List_DropIntrusiveHead(&queue);
+        scan = g_resourcesByAddress.head;
         while (scan != 0) {
             if (scan->start > node->start) {
-                func_80255D70_de(&D_80100584, (s32)scan, (s32)node);
+                List_InsertBeforeIntrusive(&g_resourcesByAddress, (s32)scan, (s32)node);
                 break;
             }
             scan = scan->next;
         }
         if (scan == 0) {
-            func_80255D14_de(&D_80100584, node);
+            List_AppendIntrusive(&g_resourcesByAddress, node);
         }
         node->flags |= 0x1000;
         node = next;
     }
 }
 
-void *Cache_RetainResourceByKey(s32 arg0, s32 resourceKey) {
+void *Cache_RetainResourceByKey(s32 unusedCache, s32 resourceKey) {
     s32 lockClaimCount;
     s32 lockReleaseCount;
     u32 mask;
@@ -407,19 +407,19 @@ void *Cache_RetainResourceByKey(s32 arg0, s32 resourceKey) {
     struct IntrusiveList *object;
 
     mask = __osDisableInt();
-    lockClaimCount = D_8010515C + 1;
-    D_8010515C = lockClaimCount;
+    lockClaimCount = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = lockClaimCount;
     if (lockClaimCount != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(&D_80101140, 0, 1);
+        osRecvMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
 
     out = &value;
-    node = (HashNode *)((s32)D_80101194 +
+    node = (HashNode *)((s32)g_resourceHashBuckets +
         ((((resourceKey << 5) ^ ((u32)resourceKey >> 1) ^ ((u32)resourceKey >> 9) ^
-           ((u32)resourceKey >> 17)) & D_80101190.field_0) * 0x10));
+           ((u32)resourceKey >> 17)) & g_resourceHashEvenIndexMask.value) * 0x10));
     if (node->key != resourceKey) {
         goto not_initial;
     }
@@ -448,16 +448,16 @@ found:
         object = *(void **)value;
         object->prevOffset += 1;
         object->nextOffset |= 0x100;
-        object->count = D_80105180.field_0;
-        func_80255FB8_de(&D_80100570, object);
+        object->count = g_resourceCacheFrameStamp.value;
+        List_MoveIntrusiveToHead(&g_resourceRecencyList, object);
     }
 
     releaseInterruptMask = __osDisableInt();
-    lockReleaseCount = D_8010515C - 1;
-    D_8010515C = lockReleaseCount;
+    lockReleaseCount = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = lockReleaseCount;
     if (lockReleaseCount != 0) {
         __osRestoreInt(releaseInterruptMask);
-        osSendMesg(&D_80101140, 0, 1);
+        osSendMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(releaseInterruptMask);
     }

@@ -7,7 +7,7 @@
 #include "COMMON/SCENERECAT10C0.H"
 #include "SCENE/CODE.H"
 #include "COMMON/WORLD.H"
-#include "COMMON/OBJECTLINKS150C.H"
+#include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
@@ -18,12 +18,12 @@
 
 /* Collects up to 10 light volumes holding a point from the world sector whose x/z extent holds it, returning their
  * count through total (0 outside every sector). */
-void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC **volumes, s32 *total) {
+void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, SceneLightVolume **volumes, s32 *total) {
     WorldSector *sector;
     s32 i, found, sectorCount, volumeCount;
     f32 x, z;
     LightVolumeList *list;
-    ObjectRecAtBC *volume, *base;
+    SceneLightVolume *volume, *base;
     sector = 0;
     i = 0;
     found = 0;
@@ -57,14 +57,14 @@ void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC 
 }
 
 #include "stddef.h"
-#include "COMMON/OBJECTLINKS150C.H"
+#include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-extern s32 Lighting_EvaluateLocalVolume(ObjectRecAtBC *, f32, f32, f32, CVector3 *, f32 *);
+extern s32 Lighting_EvaluateLocalVolume(SceneLightVolume *, f32, f32, f32, CVector3 *, f32 *);
 extern void Graphu64_ProjectPoint(void *, CVector3 *, CVector3 *);
 extern f32 Link_GetLightAnimationOffset(void *);
 static inline f32 sampleDot(CVector3 *a, f32 *b, s32 index) { f32 *d=b+index+128; return a->x*d[0] + a->y*d[1] + a->z*d[2]; }
-void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
+void Scene_SampleVolumeLighting(SceneLightVolume **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
     Shared_Game *settings;
     /* The first 128 floats are weights; the remaining 384 hold XYZ directions. */
     f32 samples[512];
@@ -82,7 +82,7 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
     CVector3 translatedDirection;
     CVector3 animationColor;
     CVector3 animatedContribution;
-    ObjectRecAtBC *animatedVolume;
+    SceneLightVolume *animatedVolume;
     f32 zero;
     f32 one;
     f32 scale;
@@ -102,10 +102,10 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
     f32 diffuseGreen;
     f32 diffuseBlue;
     s32 sampleIndex;
-    ObjectRecAtBC *volume;
+    SceneLightVolume *volume;
 
-    settings = &D_801462C8;
-    brightness = (f32)(u32)settings->buttons * 0.003921568859368563f;
+    settings = &g_gameSettings;
+    brightness = (f32)(u32)settings->lightingGamma * 0.003921568859368563f;
     animatedVolume = NULL;
     if (settings->flags & 0x4000) {
         lighting->ambientCopy[0] = 0;
@@ -132,7 +132,7 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
     diffuse.x = diffuse.y = diffuse.z = 0.0f;
     if (sampleIndex < count) {
 
-        
+
         weights = samples;
         directions = samples + 128;
         do {
@@ -181,7 +181,7 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
                 weights[sampleIndex] = 0.0f;
             }
 
-            
+
             sampleIndex += 1;
 
         } while (sampleIndex < count);
@@ -269,7 +269,7 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
 s32 Action_ShowTriggerMessage(void *, void *, void *);
@@ -443,7 +443,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
 #include "TYPES.H"
 #include "COMMON/COLORENTRY.H"
 #include "COMMON/WORLD.H"
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
@@ -452,7 +452,7 @@ extern u8 *D_800D3A9C[];
 #else
 extern u8 *D_800D3A9C;
 #endif
-extern void func_804037D4_de(void), Track_RequestTrackByKey(s32);
+extern void Track_RequestCameraRefresh(void), Track_RequestTrackByKey(s32);
 extern s32 SetN64_IsModeThirteen(void);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern struct CCameraText_t *Gsky_PostScaledScreenMessage(void *, void *, u8 *, f32);
@@ -470,7 +470,7 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
         break;
     case 1:
         if (scene->selectionTimer == entry->value) {
-            if (scene->selectionValues[1] == 999) { func_804037D4_de(); Track_RequestTrackByKey(400); }
+            if (scene->selectionValues[1] == 999) { Track_RequestCameraRefresh(); Track_RequestTrackByKey(400); }
             if (scene->selectionState == 0) scene->frozen = 0;
             else scene->frozen = 2;
             if (scene->selectionValues[1] < 0) { scene->selectionValues[1] = ~scene->selectionValues[1]; scene->selectionFlags = 0; }
@@ -478,24 +478,24 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
             scene->selectionValues[0] = scene->selectionValues[1];
             id = transitionId(scene);
             Scene_LoadLevelResources(scene, id, scene->selectionFlags);
-            settings = &D_80145088.settings;
+            settings = &g_frontendScreenStatus.settings;
             if (scene->previewStart != settings->optionFlags && SetN64_IsModeThirteen()) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                Gsky_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
+                Gsky_PostScaledScreenMessage(&g_frontendScreenStatus, &g_frontendScreenStatus.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
 #else
-                Gsky_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C, 4.0f);
+                Gsky_PostScaledScreenMessage(&g_frontendScreenStatus, &g_frontendScreenStatus.fallbackCamera, D_800D3A9C, 4.0f);
 #endif
                 scene->previewStart = settings->optionFlags;
             }
         } else {
-            scene->selectionTimer += D_800D2988;
+            scene->selectionTimer += g_frameElapsedTime;
             if (entry->value < scene->selectionTimer) scene->selectionTimer = entry->value;
         }
         break;
     case 2:
         if (scene->selectionTimer == 0.0f) scene->frozen = 0;
         else {
-            scene->selectionTimer -= D_800D2988;
+            scene->selectionTimer -= g_frameElapsedTime;
             if (scene->selectionTimer < 0.0f) scene->selectionTimer = 0.0f;
         }
         break;
@@ -513,27 +513,27 @@ typedef struct ResultsText {
     s32 length;
 } ResultsText;
 typedef struct ResultsCourse {
-    u8 unknown0[0x21];
+    u8 reservedBytes[0x21];
     u8 laps;          /* 0x21 */
     u8 targetCount;   /* 0x22 */
     u8 rounds;        /* 0x23 */
     u8 timeLimit;     /* 0x24: seconds */
-    u8 unknown25[3];
+    u8 reservedBytes1[3];
     u8 lives;         /* 0x28 */
 } ResultsCourse;
 typedef struct LevelChallenge {
-    u8 unknown0[4];
+    u8 reservedBytes2[4];
     u8 character;     /* 0x4: the opponent's character key */
-    u8 unknown5;
+    u8 reservedWord;
     u16 weapons[8];   /* 0x6: starting weapon item ids (read by the achieve loadout) */
 } LevelChallenge;
 extern ResultsCourse *D_800E4680;
-extern ResultsHeadingCharacter D_800DFA6C[];
-extern char g_levelNameText[], D_800C52E4_de[], D_00285160[];
-extern char *D_800D3304, *D_800D3334, *D_800D3338, *D_800D333C, *D_800D3340, *D_800D334C_de, *D_800D3350,
-    *D_800D3354, *D_800D3358, *D_800D335C, *D_800D3360, *D_800D3364, *D_800D3368_de, *D_800D336C,
-    *D_800D3370, *D_800D3374, *D_800D3378, *D_800D337C, *D_800D3380, *D_800D3384, *D_800D3388,
-    *D_800D338C, *D_800D3390_de, *D_800D3394, *D_800D3398;
+extern ResultsHeadingCharacter g_resultCharacterHeadings[];
+extern char g_levelNameText[], D_800C52E4_de[], g_cResource_UnpackRequestEntry[];
+extern char *g_characterPreviewTextReferenceShared1, *g_characterPreviewTextReferenceShared2, *g_characterPreviewTextReferenceShared3, *g_characterPreviewTextReferenceShared4, *g_characterPreviewTextReferenceShared5, *g_resultsRoundsOneFormat, *g_resultsRoundsTwoFormat,
+    *g_resultsRoundsThreeFormat, *g_resultsLapsOneFormat, *g_resultsLapsTwoFormat, *g_resultsLapsThreeFormat, *g_resultsLapsFourFormat, *g_resultsLapsFiveFormat, *g_resultsGoalOneFormat,
+    *g_resultsGoalTwoFormat, *g_resultsTimeLimitFormat, *g_resultsMinutesSecondsOneFormat, *g_resultsMinutesSecondsTwoFormat, *g_resultsMinutesOneFormat, *g_resultsMinutesTwoFormat, *g_resultsPlayerOrLivesOneFormat,
+    *g_pakDialogTextReferenceShared1, *g_resultsGoalLabelFormat, *g_resultsGoalValueFormat, *g_slotSelectionTextReferenceShared4;
 extern void Cinema_AddMessage(char *);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern void *Cache_RequestWordCountedResourcePinned(s32, void **, s32, void *);
@@ -559,7 +559,7 @@ static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 
     if (limit < length) {
         length = limit;
     }
-    func_802BD3A0_de(out, name->text, length);
+    Libc_CopyBytes(out, name->text, length);
     Cache_ReleaseResource(0, name);
     if (world->level != level) {
         Cache_ReleaseResource(0, bank);
@@ -583,7 +583,7 @@ static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level)
                 file = SetN64_LocatePackSection((s32)*index, world->challengeFile, level, &size);
                 Cache_ReleaseResource(0, index);
                 if ((world->resourceHandle =
-                         Cache_RequestResource(0, file, file, size, mode, 0, D_00285160, D_800C52BC, direct)) == 0) {
+                         Cache_RequestResource(0, file, file, size, mode, 0, g_cResource_UnpackRequestEntry, D_800C52BC, direct)) == 0) {
                     goto missing;
                 }
                 world->resourceKey = level;
@@ -610,59 +610,59 @@ void Scene_ShowResultsGoal(void) {
     ResultsHeadingCharacter *character;
 
     Cinema_ClearMessageCount();
-    copyLevelName(&g_world, D_8015402C, name, 63);
+    copyLevelName(&g_world, g_selectedLevelId, name, 63);
     Cinema_AddMessage(name);
     if (currentGame()->controllerMode == 0) {
         return;
     }
-    levelGoal = &D_8014DD98; /* kind (0 rounds, 1 laps, 2 single laps, 3 targets), then the target goal */
+    levelGoal = &g_currentResultMode; /* kind (0 rounds, 1 laps, 2 single laps, 3 targets), then the target goal */
     switch (levelGoal->kind) {
     case 0:
         if (currentGame()->controllerMode == 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3354, D_800E17A4), D_800E4680->rounds);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsRoundsThreeFormat, g_resultsRoundsThreeFormatLocalized), D_800E4680->rounds);
         } else if (D_800E4680->rounds < 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D334C_de, D_800E1784), D_800E4680->rounds);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsRoundsOneFormat, g_resultsRoundsOneFormatLocalized), D_800E4680->rounds);
         } else {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3350, D_800E1794_eu), D_800E4680->rounds);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsRoundsTwoFormat, g_resultsRoundsTwoFormatLocalized), D_800E4680->rounds);
         }
         break;
     case 1:
         if (currentGame()->controllerMode == 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3360, D_800E17D4), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsThreeFormat, g_resultsLapsThreeFormatLocalized), D_800E4680->laps);
         } else if (D_800E4680->laps < 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3358, D_800E17B4), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsOneFormat, g_resultsLapsOneFormatLocalized), D_800E4680->laps);
         } else {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D335C, D_800E17C4), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsTwoFormat, g_resultsLapsTwoFormatLocalized), D_800E4680->laps);
         }
         break;
     case 2:
         if (D_800E4680->laps < 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3364, D_800E17E4_eu), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsFourFormat, g_resultsLapsFourFormatLocalized), D_800E4680->laps);
         } else {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3368_de, D_800E17F4), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsFiveFormat, g_resultsLapsFiveFormatLocalized), D_800E4680->laps);
         }
         break;
     case 3:
         switch (levelGoal->goal) {
         case 4:
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D3334, D_800E1724));
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsGoalLabelFormat, g_resultsGoalLabelFormatLocalized), RESULTS_TEXT(g_characterPreviewTextReferenceShared2, g_characterPreviewTextReferenceShared6));
             break;
         case 9:
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3394, D_800E18A4), RESULTS_TEXT(D_800D3338, D_800E1734_eu),
-                             RESULTS_TEXT(D_800D3304, D_800E1664_eu));
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsGoalValueFormat, g_resultsGoalValueFormatLocalized), RESULTS_TEXT(g_characterPreviewTextReferenceShared3, g_characterPreviewTextReferenceEu3),
+                             RESULTS_TEXT(g_characterPreviewTextReferenceShared1, g_characterPreviewTextReferenceEu1));
             break;
         case 22:
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D333C, D_800E1744));
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsGoalLabelFormat, g_resultsGoalLabelFormatLocalized), RESULTS_TEXT(g_characterPreviewTextReferenceShared4, g_characterPreviewTextReferenceShared7));
             break;
         case 35:
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D3340, D_800E1754));
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsGoalLabelFormat, g_resultsGoalLabelFormatLocalized), RESULTS_TEXT(g_characterPreviewTextReferenceShared5, g_characterPreviewTextReferenceShared8));
             break;
         default:
             if (D_800E4680->targetCount < 2) {
-                XStdio_FormatBuffer(goal, RW_LOCALIZED_TEXT(D_800D336C, D_800E1804, D_800E1804, g_languageIndex),
+                XStdio_FormatBuffer(goal, RW_LOCALIZED_TEXT(g_resultsGoalOneFormat, g_resultsGoalOneFormatLocalized, g_resultsGoalOneFormatLocalized, g_languageIndex),
                                  D_800E4680->targetCount);
             } else {
-                XStdio_FormatBuffer(goal, RW_LOCALIZED_TEXT(D_800D3370, D_800E1814, D_800E1814, g_languageIndex),
+                XStdio_FormatBuffer(goal, RW_LOCALIZED_TEXT(g_resultsGoalTwoFormat, g_resultsGoalTwoFormatLocalized, g_resultsGoalTwoFormatLocalized, g_languageIndex),
                                  D_800E4680->targetCount);
             }
             break;
@@ -673,61 +673,61 @@ void Scene_ShowResultsGoal(void) {
     switch (mode) {
     case 1:
         Cinema_AddMessage(goal);
-        players = (Player_GetLevelProgress(D_80102B00, D_80102B00[0].slot) >> 1) + 1;
+        players = (Player_GetLevelProgress(g_localPlayerProfiles, g_localPlayerProfiles[0].slot) >> 1) + 1;
         if (players < 2) {
-            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3388, D_800E1874), players);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsPlayerOrLivesOneFormat, g_resultsPlayerOrLivesOneFormatLocalized), players);
         } else {
-            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D338C, D_800E1884), players);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(g_pakDialogTextReferenceShared1, g_resultsPlayerOrLivesTwoFormatLocalized), players);
         }
         Cinema_AddMessage(name);
         break;
     case 3:
         Cinema_AddMessage(goal);
         if (D_800E4680->timeLimit <= 60) {
-            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3374, D_800E1824), D_800E4680->timeLimit);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsTimeLimitFormat, g_resultsTimeLimitFormatLocalized), D_800E4680->timeLimit);
         } else {
             minutes = D_800E4680->timeLimit / 60;
             if (minutes < 2) {
                 seconds = D_800E4680->timeLimit % 60;
                 if (seconds == 0) {
-                    XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3380, D_800E1854_eu), minutes);
+                    XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsMinutesOneFormat, g_resultsMinutesOneFormatLocalized), minutes);
                 } else {
-                    XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3378, D_800E1834), minutes, seconds);
+                    XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsMinutesSecondsOneFormat, g_resultsMinutesSecondsOneFormatLocalized), minutes, seconds);
                 }
             } else {
                 seconds = D_800E4680->timeLimit % 60;
                 if (seconds == 0) {
-                    XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3384, D_800E1864), minutes);
+                    XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsMinutesTwoFormat, g_resultsMinutesTwoFormatLocalized), minutes);
                 } else {
-                    XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D337C, D_800E1844), minutes, seconds);
+                    XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsMinutesSecondsTwoFormat, g_resultsMinutesSecondsTwoFormatLocalized), minutes, seconds);
                 }
             }
         }
         Cinema_AddMessage(name);
         break;
     case 4:
-        challenge = findLevelChallenge(&g_world, D_8015402C);
+        challenge = findLevelChallenge(&g_world, g_selectedLevelId);
         character = &RESULTS_CHARACTERS[Key_FindKeyIndex(challenge->character)];
         XStdio_FormatBuffer(name, RESULTS_NAME_FORMAT, character->name[RESULTS_LANGUAGE].text);
         Cinema_AddMessage(name);
         Cinema_AddMessage(goal);
         if (D_800E4680->lives < 2) {
-            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3388, D_800E1874), D_800E4680->lives);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsPlayerOrLivesOneFormat, g_resultsPlayerOrLivesOneFormatLocalized), D_800E4680->lives);
         } else {
-            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D338C, D_800E1884), D_800E4680->lives);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(g_pakDialogTextReferenceShared1, g_resultsPlayerOrLivesTwoFormatLocalized), D_800E4680->lives);
         }
         Cinema_AddMessage(name);
         break;
     case 2:
         Cinema_AddMessage(goal);
-        switch (D_8014DD98.kind) {
+        switch (g_currentResultMode.kind) {
         case 0:
             break;
         case 1:
-            Cinema_AddMessage(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
+            Cinema_AddMessage(RESULTS_TEXT(g_slotSelectionTextReferenceShared4, g_slotSelectionTextReferenceEu7));
             break;
         case 2:
-            Cinema_AddMessage(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
+            Cinema_AddMessage(RESULTS_TEXT(g_slotSelectionTextReferenceShared4, g_slotSelectionTextReferenceEu7));
             break;
         }
         break;

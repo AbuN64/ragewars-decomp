@@ -2,7 +2,7 @@
 #include "COMMON/ALPARAM_S.H"
 #include "abi.h"
 #include "COMMON/AUDIO_CALLBACKS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "sdk/OSINT/osyieldthread.H"
 #include "AUDIO/AUDIO_ASSERT.H"
@@ -13,16 +13,16 @@
 #include "sdk/libultra/audio/synthesizer.h"
 
 /* libultra audio/env.c, built with -fforce-addr (config.toml): the eqpower base stays in a register. */
-extern s16 D_800D4210[128]; /* eqpower */
-extern char D_800CC850[]; /* Resident "EX" assertion expression. */
+extern s16 g_audioEqualPowerPanTable[128]; /* eqpower */
+extern char g_audioEnvelopeSourceAssertText[]; /* Resident "EX" assertion expression. */
 extern char s_audioEnvText[]; /* "audio/env.c" */
-#define eqpower D_800D4210
+#define eqpower g_audioEqualPowerPanTable
 #define EQPOWER_LENGTH 128
 #define AL_RESAMPLER_OUT 0
 #define AL_MAX_RSP_SAMPLES 160
 
 /* The SDK's traditional-cpp assert: the expression string is the literal "EX". */
-#define assert_at(EX, line) ((EX) ? ((void)0) : Audio_Assert(D_800CC850, s_audioEnvText, line))
+#define assert_at(EX, line) ((EX) ? ((void)0) : Audio_Assert(g_audioEnvelopeSourceAssertText, s_audioEnvText, line))
 
 Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p);
 
@@ -152,7 +152,7 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
         } break;
 
         case AL_FILTER_FREE_VOICE: {
-            ALSynth4C *drvr = &D_800D4070->drvr;
+            ALSynth4C *drvr = &g_audioGlobals->drvr;
             ALFreeParam *param = (ALFreeParam *)e->ctrlList;
             param->pvoice->offset = 0;
             _freePVoice(drvr, param->pvoice);
@@ -202,7 +202,7 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
     if (e->motion != 1 || !outCount)
         return ptr;
 
-    ((source) ? ((void)0) : Audio_Assert(D_800CC850, s_audioEnvText, 366));
+    ((source) ? ((void)0) : Audio_Assert(g_audioEnvelopeSourceAssertText, s_audioEnvText, 366));
 
     ptr = (*source->handler)(source, inp, outCount, sampleOffset, p);
 
@@ -212,9 +212,9 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
     if (e->first) {
         e->first = 0;
 
-        e->ltgt = (e->volume * D_800D4210[e->pan]) >> 15;
+        e->ltgt = (e->volume * g_audioEqualPowerPanTable[e->pan]) >> 15;
         e->lratm = _getRate((f64)e->cvolL, (f64)e->ltgt, e->segEnd, &(e->lratl));
-        e->rtgt = (e->volume * D_800D4210[128 - e->pan - 1]) >> 15;
+        e->rtgt = (e->volume * g_audioEqualPowerPanTable[128 - e->pan - 1]) >> 15;
         e->rratm = _getRate((f64)e->cvolR, (f64)e->rtgt, e->segEnd, &(e->rratl));
 
         aSetVolume(ptr++, 0x02 | 0x04, e->cvolL, 0, 0);
@@ -242,7 +242,7 @@ s16 _getRate(f64 vol, f64 tgt, s32 count, u16 *ratel)
   f64 eps;
   f64 a;
   f64 fs;
-  f64 new_var;
+  f64 logMantissaSample;
   f64 mant;
   s32 i_invn;
   s32 ex;
@@ -309,7 +309,7 @@ s16 _getRate(f64 vol, f64 tgt, s32 count, u16 *ratel)
     }
     indx = (s32) (vol * (16.0));
     absvalue = (0.69314718246459961);
-    eps = ((new_var = logtab.v[indx - 8]) + ex) * absvalue;
+    eps = ((logMantissaSample = logtab.v[indx - 8]) + ex) * absvalue;
     mant = (1073741824.0); eps /= mant; fs = eps + (1.0); a = (1.0);
     while (i_invn)
     {
@@ -399,8 +399,8 @@ f32 Audio_GetEnvelopeVolume(f32 initialVolume, s32 sampleCount, s32 rateInteger,
 
     base = (f32)(rateInteger << 16);
     base += (f32)(rateFraction & 0xFFFF);
-    base *= D_800C7708_de;
-    result = D_800C770C_de;
+    base *= g_audioEnvelopeRateScale;
+    result = g_audioEnvelopeFallbackRate;
     do {
         if (n & 1) {
             result *= base;
@@ -417,27 +417,27 @@ f32 Audio_GetEnvelopeVolume(f32 initialVolume, s32 sampleCount, s32 rateInteger,
 }
 
 
-f64 frexp(f64 arg0, s32 *arg2) {
+f64 frexp(f64 inputValue, s32 *exponentOut) {
     f64 value;
 
-    *arg2 = 0;
-    if (arg0 == D_800C7710_de) {
-        return arg0;
+    *exponentOut = 0;
+    if (inputValue == g_audioFrexpZero) {
+        return inputValue;
     }
-    value = __builtin_fabs(arg0);
-    if (D_800C7718_de <= value) {
+    value = __builtin_fabs(inputValue);
+    if (g_audioFrexpUpperLimit <= value) {
         do {
-            value *= D_800C7720_de;
-            *arg2 += 1;
-        } while (D_800C7718_de <= value);
+            value *= g_audioFrexpHalvingScale;
+            *exponentOut += 1;
+        } while (g_audioFrexpUpperLimit <= value);
     }
-    if (value < D_800C7728_de) {
+    if (value < g_audioFrexpLowerLimit) {
         do {
             value += value;
-            *arg2 -= 1;
-        } while (value < D_800C7728_de);
+            *exponentOut -= 1;
+        } while (value < g_audioFrexpLowerLimit);
     }
-    if (!(D_800C7730_de < arg0)) {
+    if (!(g_audioFrexpRestoreSignThreshold < inputValue)) {
         value = -value;
     }
     return value;
@@ -457,6 +457,6 @@ unsigned int func_802B53B4_de_padding_B5F04[1] = {
 #endif
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B5308[8] =
+char s_EnvTargetText[8] =
     "\000\013Target";
 #endif

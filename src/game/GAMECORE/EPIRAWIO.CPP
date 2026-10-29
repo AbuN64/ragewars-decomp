@@ -2,13 +2,13 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "sdk/os.h"
 #include "RESMGR/X_PLUS.H"
 
-extern OSPiHandle_s *D_800D4380[];
+extern OSPiHandle_s *g_peripheralDomainHandles[];
 
 /** Update changed PI timing registers, then write through the uncached transfer address. */
 s32 Gamecore_WritePeripheralHandleWord(OSPiHandle_s *handle, u32 deviceOffset, u32 wordValue) {
@@ -18,7 +18,7 @@ s32 Gamecore_WritePeripheralHandleWord(OSPiHandle_s *handle, u32 deviceOffset, u
     while (*(volatile u32 *)0xA4600010 & 3) {
     }
     index = handle->domain;
-    previous = D_800D4380[index];
+    previous = g_peripheralDomainHandles[index];
     if (previous != handle) {
         if (index == 0) {
             if (previous->latency != handle->latency) {
@@ -47,7 +47,7 @@ s32 Gamecore_WritePeripheralHandleWord(OSPiHandle_s *handle, u32 deviceOffset, u
                 *(volatile u32 *)0xA4600028 = handle->pulse;
             }
         }
-        D_800D4380[index] = handle;
+        g_peripheralDomainHandles[index] = handle;
     }
     *(volatile u32 *)(handle->baseAddress | deviceOffset | 0xA0000000) = wordValue;
     return 0;
@@ -65,7 +65,7 @@ OSPiHandle_s *Gamecore_InitializeDiskHandle(void) {
     OSPiHandle_s *previous;
     OSPiHandle_s **slot;
 
-    state = &D_80148740;
+    state = &g_diskPeripheralHandle;
     state->type = 2;
     state->baseAddress = 0xA5000000;
     state->latency = 3;
@@ -81,16 +81,16 @@ OSPiHandle_s *Gamecore_InitializeDiskHandle(void) {
     handle = (void *)state;
     XPlus_FillMemory(handle->transferInfo.bytes, 0, 0x60);
     lock = __osDisableInt();
-    slot = &D_800D437C;
+    slot = &g_peripheralHandleList;
     previous = *slot;
     *slot = state;
-    D_801487B4 = state;
+    g_currentDiskPeripheralHandle = state;
     state->next = previous;
     __osRestoreInt(lock);
     return state;
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B9874[12] =
+char k_EpirawioEncodedBytes[12] =
     "ponT\000\000P\000\000\000\010\000";
 #endif

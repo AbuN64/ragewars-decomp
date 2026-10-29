@@ -27,7 +27,7 @@ typedef struct WorldSector {
 } WorldSector;
 typedef struct Shared_World {
     s32 mode;
-    u8 unknown4[8];
+    u8 reservedBytes[8];
     s32 challengeFile; /* 0xC: file id of the per-level challenge table index */
     s32 challengeFileSize; /* 0x10 */
     void **resourceHandle; /* 0x14 */
@@ -37,9 +37,9 @@ typedef struct Shared_World {
     s32 indexedBank; /* 0x24 */
     s32 lookupBank; /* 0x28 */
     s32 resourceKindBank; /* +0x2C: Scene_StartWorldEffect */
-    u8 unknown30[4];
+    u8 reservedBytes1[4];
     s32 trackLookup; /* 0x34 */
-    u8 unknown38[0xC];
+    u8 reservedBytes2[0xC];
     s32 noteCount; /* 0x44: MENU/PAK 80409AC0, 80408870 */
     u8 unknown48[4];
     s32 *resourceDirectory; /* 0x4C */
@@ -47,35 +47,35 @@ typedef struct Shared_World {
     s32 *indexedDirectory; /* 0x54 */
     s32 *lookupDirectory; /* 0x58 */
     s32 *resourceKindDirectory; /* +0x5C: Scene_StartWorldEffect */
-    u8 unknown60[0xC];
+    u8 reservedBytes3[0xC];
     s32 *modelSections; /* 0x6C */
     s32 *objectSections; /* 0x70 */
-    s32 *trackBundle; /* 0x74: D_8011FEFC */
+    s32 *trackBundle; /* 0x74: g_trackResourceDirectory */
     s32 *actorDefinitions; /* 0x78: count followed by record offsets */
     s32 *routeCount; /* +0x7C: PatrolRouteSet */
     void *bitSections; /* 0x80 */
     void *secondaryLevels; /* 0x84 */
-    u8 unknown88[8];
+    u8 reservedBytes4[8];
     void *placedObjectTable; /* 0x90: keys and 20-byte placed track objects */
-    struct TableRecAt8 *modelIds; /* 0x94 */
+    struct SceneModelIdTable *modelIds; /* 0x94 */
     StridedTable *lookupTable; /* 0x98 */
-    struct TableRecAt8 *resourceKindTable; /* +0x9C */
+    struct SceneModelIdTable *resourceKindTable; /* +0x9C */
     StridedTable *records; /* 0xA0 */
     StridedTable *stridedRecords; /* 0xA4 */
-    u8 unknownA8[4];
+    u8 reservedBytes5[4];
     StridedTable *actorRecords; /* 0xAC */
-    u8 unknownB0[0x38];
+    u8 reservedBytes6[0x38];
     s32 resource;
-    u8 unknownEC[0x34];
+    u8 reservedBytes7[0x34];
     s32 counter120;
     s32 counter124;
     u8 system128[0x10];
     struct LevelActor *actors; /* 0x138 */
     s32 actorCapacity; /* 0x13C */
     s32 actorCount; /* 0x140 */
-    struct LevelActor *interactive[512]; /* 0x144: func_8024D160_de accepts */
+    struct LevelActor *interactive[512]; /* 0x144: InstHdr_CanActorReceiveInteraction accepts */
     s32 interactiveCount; /* 0x944 */
-    struct LevelActor *movers[128]; /* 0x948: func_8024E1B4_de accepts */
+    struct LevelActor *movers[128]; /* 0x948: InstHdr_HasEnabledMotionHooks accepts */
     s32 moverCount; /* 0xB48 */
     struct LevelActor *queued[64]; /* 0xB4C */
     s32 queuedCount; /* 0xC4C */
@@ -100,18 +100,18 @@ typedef struct Shared_World {
     s32 * alternateRecordIndex; /* 0x11CC */
     struct Record14 * recordArray; /* 0x11D0 */
     struct Record14 * alternateRecordArray; /* 0x11D4 */
-    u8 unknown11D8[0x328];
+    u8 reservedBytes8[0x328];
     s32 sectorEntryCount; /* 0x1500: Link_SumWorldSectionCounts */
     s32 sectorCount; /* 0x1504 */
     WorldSector sectors[128]; /* 0x1508 */
     u8 system1B08[0x11778 - 0x1B08];
-    WorldRecAt3C08 system11778;
-    u8 unknown15384[4];
+    EffectSlotPool system11778;
+    u8 reservedBytes9[4];
     u8 effectPool[0x1B2B0 - 0x15388]; /* 0x15388: CAnimPool */
     struct CROMLevel_t *levelInfo; /* 0x1B2B0 */
-    u8 unknown1B2B4[0x1B308 - 0x1B2B4];
+    u8 reservedBytes10[0x1B308 - 0x1B2B4];
     f32 elapsed;
-    u8 unknown1B30C[0xFC];
+    u8 reservedBytes11[0xFC];
     s32 visibilityEnabled; /* 0x1B408 */
     s32 level; /* 0x1B40C */
     s32 selectionState; /* 0x1B410 */
@@ -123,7 +123,7 @@ typedef struct Shared_World {
     s32 previewState; /* 0x1B444 */
     s32 previewTimer; /* 0x1B448 */
     s32 previewStart; /* 0x1B44C */
-    u8 unknown1B450[0x1C4];
+    u8 reservedBytes12[0x1C4];
     CVector3 offset;
     struct Shared_Pickup *objects[16];
     s32 count;
@@ -132,5 +132,5 @@ typedef struct Shared_World {
 } Shared_World;
 extern Shared_World g_world;
 /* The actor count (D_8011FE88 + 0x140) read as its own object: each access has its own lui. */
-extern s32 D_8011BF08;
+extern s32 g_navigationPlatformActorCount;
 #endif

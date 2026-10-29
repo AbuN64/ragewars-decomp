@@ -2,29 +2,29 @@
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "RENDER/ANIMATION_FRAME_AND_RIBBON_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "RENDER/FX_APPLYEFFECTCONTRIBUTION.H"
 
 
 
-void Fx_SetAnimatorScript(void *animator, int arg1) {
+void Fx_SetAnimatorScript(void *animator, int scriptAddress) {
     Animator *animation = animator;
     animation->mode = 0;
-    animation->loop = (f32 *)arg1;
-    animation->script = (f32 *)arg1;
+    animation->loop = (f32 *)scriptAddress;
+    animation->script = (f32 *)scriptAddress;
 }
 
 void Fx_ApplyEffectContribution(EffectContribution *effectContribution) {
     if (effectContribution->weight != 0.0f) {
-        D_800D15E4[0] = effectContribution->x;
-        D_800D15E4[1] = effectContribution->y;
-        D_800D15E4[2] = effectContribution->z;
+        g_menuModelFillColor[0] = effectContribution->x;
+        g_menuModelFillColor[1] = effectContribution->y;
+        g_menuModelFillColor[2] = effectContribution->z;
     } else {
-        D_800D15E4[0] = 0.0f;
-        D_800D15E4[1] = 0.0f;
-        D_800D15E4[2] = 0.0f;
+        g_menuModelFillColor[0] = 0.0f;
+        g_menuModelFillColor[1] = 0.0f;
+        g_menuModelFillColor[2] = 0.0f;
     }
-    D_800D15E4[3] = effectContribution->weight;
-    D_800D15E4[4] = effectContribution->scale;
+    g_menuModelFillColor[3] = effectContribution->weight;
+    g_menuModelFillColor[4] = effectContribution->scale;
 }

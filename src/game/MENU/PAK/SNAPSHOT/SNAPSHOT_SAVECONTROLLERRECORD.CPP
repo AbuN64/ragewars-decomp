@@ -18,63 +18,63 @@
 
 
 
-extern s32 D_8015375C;
+extern s32 g_pakUseScannedChannel;
 extern s32 D_800E28C0;
-extern char D_8014561C[];
+extern char g_matchEndingTeamWheelClose[];
 extern char D_0044FFA4[];
-extern unsigned char D_0044E4B0[];
+extern unsigned char g_controllerPakReadyDialogResource[];
 extern char D_0044EA2C[];
 extern char D_0044E9C0[];
 extern void Note_ProbeStatus(s32 ch);
 extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
 extern s32 Note_NeedsIdRepair(s32 ch);
-extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
+extern void Menu_OpenDialog(char *, char *, ActorOwnerView *, PakMenuSlot *, char *);
 void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
 {
-  Shared_PakMenu *new_var3;
-  int new_var;
-  char *new_var2;
+  Shared_PakMenu *activeMenu;
+  int statusValue;
+  char *channelUnavailableDialog;
   s32 ch;
-  new_var = 1;
+  statusValue = 1;
   D_800DE874 = 2;
   D_8014D4C0_de = 0;
   D_8014D4DC = 0;
-  D_80153760 = new_var;
+  D_80153760 = statusValue;
   D_8014D4EC_de = 0;
   D_80153784 = 0;
-  D_8015375C = 0;
-  ch = menu->slot->unk4;
+  g_pakUseScannedChannel = 0;
+  ch = menu->slot->controllerPort;
   if (D_800E28C0 != 0)
   {
     D_80153784 = 1;
-    Menu_OpenDialog(D_8014561C, D_0044FFA4, menu->player, menu->slot, 0);
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044FFA4, menu->player, menu->slot, 0);
     return;
   }
   menu->items[20].flags &= ~0x01000000;
-  Note_ProbeStatus(menu->slot->unk4);
-  new_var = 0;
-  if (Note_GetStatus(ch) == new_var)
+  Note_ProbeStatus(menu->slot->controllerPort);
+  statusValue = 0;
+  if (Note_GetStatus(ch) == statusValue)
   {
     Snapshot_MarkSaveNotes(menu);
     return;
   }
   D_80153784 = 1;
-  if (Note_IsChannelReady(ch) != new_var)
+  if (Note_IsChannelReady(ch) != statusValue)
   {
-    new_var2 = D_0044EA2C;
-    Menu_OpenDialog(D_8014561C, new_var2, menu->player, menu->slot, (char *) 1);
+    channelUnavailableDialog = D_0044EA2C;
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, channelUnavailableDialog, menu->player, menu->slot, (char *) 1);
   }
   else
   {
-    new_var3 = menu;
+    activeMenu = menu;
     if (Note_NeedsIdRepair(ch) != 0)
     {
-      Menu_OpenDialog(D_8014561C, D_0044ED44, new_var3->player, menu->slot, D_0044E4B0);
+      Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044ED44, activeMenu->player, menu->slot, g_controllerPakReadyDialogResource);
     }
     else
     {
-      Menu_OpenDialog(D_8014561C, D_0044E9C0, new_var3->player, new_var3->slot, D_0044FFA4);
+      Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044E9C0, activeMenu->player, activeMenu->slot, D_0044FFA4);
     }
   }
 }
@@ -83,11 +83,11 @@ void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
 #include "COMMON/PAK_SAVE_TEXT.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
 extern void Cache_ReleaseResource(s32, void *);
-extern void *D_800DE860_de;
-extern struct Shape_typemap_165 *D_800DE864_de;
-extern s32 D_800E28BC;
-extern char D_80153738[];
-extern char D_8014561C[];
+extern void *g_pakSnapshotResourceHandle;
+extern struct CacheResourceBlockView *g_pakLoadedNoteResourceHandle;
+extern s32 g_controllerPakSnapshotPayload;
+extern char g_pakControllerRecord[];
+extern char g_matchEndingTeamWheelClose[];
 extern char D_00450BF0_de[];
 extern char D_00450C14_de[];
 extern char D_00450C38_de[];
@@ -100,12 +100,12 @@ extern s32 Note_SaveNote(s32, s32, void *, char *, char *, char *);
 extern void Cache_DrainAndCompactResources(s32);
 /* Save the small controller-pak record when capacity allows, release the
  * pending resources, and show the channel-specific success/error dialog. */
-static inline ObjRecAt5DC *pakRecordChannel(Shared_PakMenu *menu, s32 *channel) {
-    if (D_8015375C != 0) {
-        *channel = D_800E28C8;
+static inline ActorOwnerView *pakRecordChannel(Shared_PakMenu *menu, s32 *channel) {
+    if (g_pakUseScannedChannel != 0) {
+        *channel = g_introSelectedItem;
         return 0;
     }
-    *channel = menu->owner->unk4;
+    *channel = menu->owner->controllerPort;
     return menu->player;
 }
 
@@ -121,7 +121,7 @@ static inline char *pakRecordChannelLabel(s32 channel) {
 
 s32 Snapshot_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unusedEvent)
 {
-    ObjRecAt5DC *player, *selectedPlayer;
+    ActorOwnerView *player, *selectedPlayer;
     char extension[8];
     s32 channel, freeBytes, slots, required, status = 0;
     s32 insufficient = 1;
@@ -139,64 +139,64 @@ s32 Snapshot_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 u
                     status = Note_FindFreeNoteExtension(channel, extension);
                     if (status == 0) {
                         attempted = 1;
-                        status = Note_SaveNote(channel, 0x18, D_80153738,
+                        status = Note_SaveNote(channel, 0x18, g_pakControllerRecord,
                                               RW_PAK_RECORD_TITLE, extension, RW_PAK_GAME_CODE);
                     }
                 }
             }
             if (insufficient != 0) {
-                Menu_OpenDialog(D_8014561C, rw_pak_no_space_dialog(), player,
+                Menu_OpenDialog(g_matchEndingTeamWheelClose, rw_pak_no_space_dialog(), player,
                                 (PakMenuSlot *)player->controller, menu->dialogData);
                 return 0;
             }
         }
     }
-    if (D_800DE860_de != 0 || D_800DE864_de != 0) Cache_DrainAndCompactResources(0);
-    if (D_800DE860_de != 0) Cache_ReleaseResource(0, D_800DE860_de);
-    if (D_800DE864_de != 0) Cache_ReleaseResource(0, D_800DE864_de);
-    D_800DE860_de = 0;
-    D_800DE864_de = 0;
-    D_800DE868 = 0;
-    D_800E28BC = 0;
+    if (g_pakSnapshotResourceHandle != 0 || g_pakLoadedNoteResourceHandle != 0) Cache_DrainAndCompactResources(0);
+    if (g_pakSnapshotResourceHandle != 0) Cache_ReleaseResource(0, g_pakSnapshotResourceHandle);
+    if (g_pakLoadedNoteResourceHandle != 0) Cache_ReleaseResource(0, g_pakLoadedNoteResourceHandle);
+    g_pakSnapshotResourceHandle = 0;
+    g_pakLoadedNoteResourceHandle = 0;
+    g_pakSaveSnapshot = 0;
+    g_controllerPakSnapshotPayload = 0;
     if (!attempted) return 1;
     if (status == 0) {
-        Menu_OpenDialog(D_8014561C, rw_pak_save_success_dialog(), player,
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, rw_pak_save_success_dialog(), player,
                         (PakMenuSlot *)player->controller, pakRecordChannelLabel(channel));
     } else {
-        Menu_OpenDialog(D_8014561C, rw_pak_save_error_dialog(), player,
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, rw_pak_save_error_dialog(), player,
                         (PakMenuSlot *)player->controller, pakRecordChannelLabel(channel));
     }
     return 1;
 }
 
-extern u32 D_8011FECC;
-extern char D_0044FAFC[];
+extern u32 g_worldSnapshotNoteBytes;
+extern char g_pakSnapshotCapacityPromptEuX[];
 /* The capacity prompt is per release. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_0045017C[];
-static inline char *pakSnapshotCapacityPrompt(void) { return D_0045017C; }
+extern char g_pakSnapshotCapacityPromptEu[];
+static inline char *pakSnapshotCapacityPrompt(void) { return g_pakSnapshotCapacityPromptEu; }
 #else
 #if defined(VERSION_US_REV1)
-static inline char *pakSnapshotCapacityPrompt(void) { return D_0044FAFC; }
+static inline char *pakSnapshotCapacityPrompt(void) { return g_pakSnapshotCapacityPromptEuX; }
 #elif defined(VERSION_US)
-extern char D_0044F01C[];
-static inline char *pakSnapshotCapacityPrompt(void) { return D_0044F01C; }
+extern char g_pakSnapshotCapacityPromptUsRev1[];
+static inline char *pakSnapshotCapacityPrompt(void) { return g_pakSnapshotCapacityPromptUsRev1; }
 #else
-extern char D_0044EEAC[];
-static inline char *pakSnapshotCapacityPrompt(void) { return D_0044EEAC; }
+extern char g_pakSnapshotCapacityPromptDe[];
+static inline char *pakSnapshotCapacityPrompt(void) { return g_pakSnapshotCapacityPromptDe; }
 #endif
 #endif
 /* Save the snapshot only when both page and note capacity are available;
  * retain pending resources while showing the insufficient-capacity prompt. */
 s32 Snapshot_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
-    ObjRecAt5DC *player, *selectedPlayer;
+    ActorOwnerView *player, *selectedPlayer;
     char extension[8];
     s32 channel, freePages, freeNotes;
     s32 snapshotBytes, required, status;
     s32 showPrompt = 1;
     selectedPlayer = pakRecordChannel(menu, &channel);
     player = selectedPlayer;
-    snapshotBytes = D_8011FECC + sizeof(SaveSnapshot);
+    snapshotBytes = g_worldSnapshotNoteBytes + sizeof(SaveSnapshot);
     if (D_8014D4C0_de != 0) {
         required = Note_BytesToPakPages(snapshotBytes);
         status = Note_GetFreePages(channel, &freePages);
@@ -205,24 +205,24 @@ s32 Snapshot_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
                 if (Note_CountFreeNotes(channel, &freeNotes) == 0 && freeNotes != 0) {
                     showPrompt = 0;
                     if (Note_FindFreeNoteExtension(channel, extension) == 0) {
-                        Note_SaveNote(channel, snapshotBytes, D_800DE868,
+                        Note_SaveNote(channel, snapshotBytes, g_pakSaveSnapshot,
                                      RW_PAK_SNAPSHOT_TITLE, extension, RW_PAK_GAME_CODE);
                     }
                 }
             }
             if (showPrompt != 0) {
-                Menu_OpenDialog(D_8014561C, pakSnapshotCapacityPrompt(), player,
+                Menu_OpenDialog(g_matchEndingTeamWheelClose, pakSnapshotCapacityPrompt(), player,
                                 (PakMenuSlot *)player->controller, menu->dialogData);
                 return 0;
             }
         }
     }
-    if (D_800DE860_de != 0 || D_800DE864_de != 0) Cache_DrainAndCompactResources(0);
-    if (D_800DE860_de != 0) Cache_ReleaseResource(0, D_800DE860_de);
-    if (D_800DE864_de != 0) Cache_ReleaseResource(0, D_800DE864_de);
-    D_800DE860_de = 0;
-    D_800DE864_de = 0;
-    D_800DE868 = 0;
-    D_800E28BC = 0;
+    if (g_pakSnapshotResourceHandle != 0 || g_pakLoadedNoteResourceHandle != 0) Cache_DrainAndCompactResources(0);
+    if (g_pakSnapshotResourceHandle != 0) Cache_ReleaseResource(0, g_pakSnapshotResourceHandle);
+    if (g_pakLoadedNoteResourceHandle != 0) Cache_ReleaseResource(0, g_pakLoadedNoteResourceHandle);
+    g_pakSnapshotResourceHandle = 0;
+    g_pakLoadedNoteResourceHandle = 0;
+    g_pakSaveSnapshot = 0;
+    g_controllerPakSnapshotPayload = 0;
     return 1;
 }

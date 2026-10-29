@@ -4,22 +4,22 @@
 #if !(defined(VERSION_US))
 /* ROM-grounded data: rodata/writable/800D9360 */
 #ifdef VERSION_DE
-unsigned int D_blob_phase2_f6265a8e97a895ead798[4] = {
+unsigned int g_audioLoaddecodedsamplesDataAddressWords[4] = {
     0x00000000, 0x8014B938, 0x8014C8F0, 0x00000000,
 };
 #endif
 #ifdef VERSION_EU
-unsigned int D_blob_phase2_f6265a8e97a895ead798[4] = {
+unsigned int g_audioLoaddecodedsamplesDataAddressWords[4] = {
     0x00000000, 0x800C6A70, 0x800C6A60, 0x800C6A50,
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned int D_blob_phase2_f6265a8e97a895ead798[4] = {
+unsigned int g_audioLoaddecodedsamplesDataAddressWords[4] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_f6265a8e97a895ead798[4] = {
+unsigned int g_audioLoaddecodedsamplesDataAddressWords[4] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
@@ -91,7 +91,7 @@ unsigned short D_src_1a91a118[188] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int D_blob_70e6e8ff7793301112e1[3] = {
+unsigned int g_audioLoaddecodedsamplesDataAddressWordsBlock1[3] = {
     0x80151AC8, 0x80151BC8, 0x80152B80,
 };
 #endif

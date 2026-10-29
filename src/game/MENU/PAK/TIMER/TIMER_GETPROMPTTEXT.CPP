@@ -9,7 +9,7 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GLOBALS.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/PAK/TIMER_GETPROMPTTEXT.H"
@@ -22,15 +22,15 @@
 
 
 
-extern s32 D_8015375C;
+extern s32 g_pakUseScannedChannel;
 
 
 
 static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
-    if (D_8015375C != 0) {
-        return D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        return g_introSelectedItem;
     }
-    return record->owner->unk4;
+    return record->owner->controllerPort;
 }
 extern s32 Snapshot_CheckStatusPrompt(void *menu, s32 channel, s32 quiet);
 
@@ -66,7 +66,7 @@ extern void Note_GetNoteGameName(s32,s32,s32 *),Note_DecodeNoteText(s32,void *,s
 
 
 
-/* Picks the pak menu prompt text: in pak mode, when a prompt is due, the text for the channel (D_800E28C8 when D_8015375C is set, else the widget's channel) from four channel texts; otherwise one of two texts in the other mode, or a third text when D_8015375C alone is set, and 0 when none applies. */
+/* Picks the pak menu prompt text: in pak mode, when a prompt is due, the text for the channel (g_introSelectedItem when g_pakUseScannedChannel is set, else the widget's channel) from four channel texts; otherwise one of two texts in the other mode, or a third text when g_pakUseScannedChannel alone is set, and 0 when none applies. */
 
 
 
@@ -95,8 +95,8 @@ s32 Timer_CheckChangedMenuChannel(struct Shared_PakMenu *record) {
     return D_80153784;
 }
 
-s32 Timer_LatchControllerRequest(struct RecordRecAt20V1 *record) {
-    if ((record->inner->unkB0 & 0x1000) && D_800E28CC == 0) {
+s32 Timer_LatchControllerRequest(struct PakControllerRequestView *record) {
+    if ((record->inner->buttons & 0x1000) && D_800E28CC == 0) {
         D_80146D60 = 1;
         D_800E28CC = 1;
     }
@@ -105,7 +105,7 @@ s32 Timer_LatchControllerRequest(struct RecordRecAt20V1 *record) {
 
 s32 Timer_UpdateManagerStatus(void *menu) {
     if (D_80146D60 == 0) {
-        SetN64_CommitSessionInputs(&D_8011FAC0);
+        SetN64_CommitSessionInputs(&g_gameSession);
         Control_TrackControllerPakChanges();
         if (D_80146D60 == 0) {
             if (D_8014AD9C != 0) {
@@ -116,7 +116,7 @@ s32 Timer_UpdateManagerStatus(void *menu) {
         }
     }
     if (D_80153784 == 0) {
-        if ((D_800E28C8 != -1) && (Control_PeekPakChange(D_800E28C8) != 0) && (Snapshot_CheckStatusPrompt(menu, D_800E28C8, 0) != 0)) {
+        if ((g_introSelectedItem != -1) && (Control_PeekPakChange(g_introSelectedItem) != 0) && (Snapshot_CheckStatusPrompt(menu, g_introSelectedItem, 0) != 0)) {
             D_8014AD94 = 0;
             D_80153784 = 1;
         }
@@ -124,15 +124,15 @@ s32 Timer_UpdateManagerStatus(void *menu) {
     return D_80153784;
 }
 
-s32 Timer_GetChannelAndResult(struct RecordRecAt20V2 *record, s32 *out) {
+s32 Timer_GetChannelAndResult(struct PakChannelResultView *record, s32 *out) {
     s32 value;
     s32 result;
 
-    if (D_8015375C != 0) {
-        value = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        value = g_introSelectedItem;
         result = 0;
     } else {
-        value = record->inner->unk4;
+        value = record->inner->controllerPort;
         result = record->result;
     }
     *out = value;
@@ -142,10 +142,10 @@ s32 Timer_GetChannelAndResult(struct RecordRecAt20V2 *record, s32 *out) {
 void Timer_ProbeMenuChannel(struct Shared_PakMenu *record) {
     s32 value;
 
-    if (D_8015375C != 0) {
-        value = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        value = g_introSelectedItem;
     } else {
-        value = record->owner->unk4;
+        value = record->owner->controllerPort;
     }
     Note_ProbeStatus(value);
 }
@@ -155,7 +155,7 @@ void Timer_ReturnToWorldMenu(void *unused, void *object) {
     Scene_SetSelection(&g_world, g_world.selectionValues[3], 2);
 }
 
-s32 Timer_FindNoteByGameName(void *unused, void *rightString, s32 index, s32 *arg3) {
+s32 Timer_FindNoteByGameName(void *unused, void *rightString, s32 index, s32 *noteIndexOut) {
     char game_name[16];
     s32 game_ref;
     s32 note_index;
@@ -163,7 +163,7 @@ s32 Timer_FindNoteByGameName(void *unused, void *rightString, s32 index, s32 *ar
         Note_GetNoteGameName(index,note_index,&game_ref);
         Note_DecodeNoteText(game_ref,&game_name,16);
         if(XPlus_CompareStrings(&game_name,rightString)==0) {
-            if(arg3) *arg3=note_index;
+            if(noteIndexOut) *noteIndexOut=note_index;
             return 1;
         }
     }
@@ -185,10 +185,10 @@ char *Timer_GetPromptByKind(int unused, int kind) {
 }
 
 static inline void Pak_GetPromptChannel(struct Shared_PakMenu *menu, s32 *channel) {
-    if (D_8015375C != 0) {
-        *channel = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        *channel = g_introSelectedItem;
     } else {
-        *channel = menu->owner->unk4;
+        *channel = menu->owner->controllerPort;
     }
 }
 
@@ -228,7 +228,7 @@ char *Timer_GetPromptText(struct Shared_PakMenu *menu) {
         if (D_8014D4EC_de != 0) {
             text = D_0044FB50;
         }
-    } else if (D_8015375C != 0) {
+    } else if (g_pakUseScannedChannel != 0) {
         text = D_0044E4F8;
     }
     return text;
@@ -265,7 +265,7 @@ s32 Timer_FindNextAvailableChannel(s32 currentChannel) {
 
 /* The EU builds compile a different original body for Timer_UpdateManagerChannelLabel; each version keeps its own. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-/* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when D_8015375C is set, points the field at D_800D3764 and formats D_800E28C8 plus one into it with D_800DCD7C one byte before the length Menu_CountLineChars reports, returning zero.
+/* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when g_pakUseScannedChannel is set, points the field at D_800D3764 and formats g_introSelectedItem plus one into it with D_800DCD7C one byte before the length Menu_CountLineChars reports, returning zero.
    Adapted from Items_FormatPackedGameOption with the three flag tests, the texts, the format, the offset and the incremented value changed. */
 
 
@@ -279,8 +279,8 @@ s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
         field->text = D_800D3728;
     } else if (D_8014D4EC_de == 0 && D_8014D4C0_de != 0) {
         field->text = D_800D372C;
-    } else if (D_8015375C != 0) {
-        value = D_800E28C8;
+    } else if (g_pakUseScannedChannel != 0) {
+        value = g_introSelectedItem;
         field->text = D_800D3764;
         text = D_800D3764[0];
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 1), g_pakFormatInt1, value + 1);
@@ -291,7 +291,7 @@ s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-/* Points an option field at its text: when D_8014D4C0_de is set, D_800D3728 if D_8014D4EC_de is set and D_800D372C if not; otherwise, when D_8015375C is set, the table D_800E27E4, formatting its entry for the byte D_80152789 with D_800ED3FC and D_800E28C8 plus one from one byte before the length Menu_CountLineChars reports; returns zero. */
+/* Points an option field at its text: when D_8014D4C0_de is set, D_800D3728 if D_8014D4EC_de is set and D_800D372C if not; otherwise, when g_pakUseScannedChannel is set, the table D_800E27E4, formatting its entry for the byte D_80152789 with g_pakChannelNumberFormat and g_introSelectedItem plus one from one byte before the length Menu_CountLineChars reports; returns zero. */
 
 
 
@@ -311,14 +311,14 @@ s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
         field->text = D_800D372C;
         goto done;
     }
-    if (D_8015375C != 0) {
+    if (g_pakUseScannedChannel != 0) {
         do {
             table = D_800E27E4;
         } while (0);
         field->text = table;
-        value = D_800E28C8;
+        value = g_introSelectedItem;
         text = table[g_languageIndex];
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 1), D_800ED3FC, value + 1);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 1), g_pakChannelNumberFormat, value + 1);
     }
 done:
     return 0;

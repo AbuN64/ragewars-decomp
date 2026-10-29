@@ -1,39 +1,39 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
-#include "MENU/80408CB0_10.H"
+#include "MENU/MENU_ACTION_TEXT_TABLES.H"
 #include "MENU/PAK/PROFILE_PREVIEW_AND_LINE_TEXT.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #include "TYPES.H"
-extern s8 D_8014D490;
-extern char *D_800E2994[];
-extern char *D_800E3234[];
-extern char *D_800E3244[];
-extern char *D_800E3294[];
-extern char *D_800E32B4_eu[];
-extern char *D_800E32C4_eu[];
-/* Pak status line: picks the 11-character status text for the state D_8014D490 in the current language and copies it into
-   the entry's line; with D_80153774 set it only selects the heading table. */
+extern s8 g_pakPreviewNoteType;
+extern char *g_localizedPakStatusHeading[];
+extern char *g_pakStatusDefaultText[];
+extern char *g_pakStatusStateOneText[];
+extern char *g_pakStatusStateTwoText[];
+extern char *g_pakStatusStateThreeText[];
+extern char *g_pakStatusStateFourText[];
+/* Pak status line: picks the 11-character status text for the state g_pakPreviewNoteType in the current language and copies it into
+   the entry's line; with g_pakUseDefaultPreviewLabels set it only selects the heading table. */
 s32 Menu_FormatLocalizedPakStatus(struct Field *entry) {
     char **table;
     char *src;
     char *dst;
     s32 i;
 
-    if (D_80153774 != 0) {
-        entry->text = D_800E2994;
+    if (g_pakUseDefaultPreviewLabels != 0) {
+        entry->text = g_localizedPakStatusHeading;
         return 0;
     }
-    entry->text = D_800E29B4;
-    switch (D_8014D490) {
-    case 1: table = D_800E3244; break;
-    case 2: table = D_800E3294; break;
-    case 3: table = D_800E32B4_eu; break;
-    case 4: table = D_800E32C4_eu; break;
-    default: table = D_800E3234; break;
+    entry->text = g_localizedPakStatusLines;
+    switch (g_pakPreviewNoteType) {
+    case 1: table = g_pakStatusStateOneText; break;
+    case 2: table = g_pakStatusStateTwoText; break;
+    case 3: table = g_pakStatusStateThreeText; break;
+    case 4: table = g_pakStatusStateFourText; break;
+    default: table = g_pakStatusDefaultText; break;
     }
     src = table[g_languageIndex];
     dst = entry->text[g_languageIndex];
@@ -49,7 +49,7 @@ INCLUDE_ASM("ovl_80400000", Menu_FormatLocalizedPakStatus);
 #endif
 
 #if defined(VERSION_EU_X)
-const unsigned int D_auto_rodata_func_8040AC68_eu_800E8618[15] = {
+const unsigned int g_noteTypeLabelJumpTableEuropean[15] = {
     0x0040ACC8, 0x0040ACC8, 0x0040AD28, 0x0040AD08, 0x0040ACC8, 0x0040ACE8, 0x0040ACC8, 0x0040ACC8,
     0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040AD48,
 };

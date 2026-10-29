@@ -8,50 +8,50 @@
 
 
 
-void Ovlgame_InitializeDynamicLightPool(struct CGameDynamicLight_t *arg0) {
-    f32 temp_f20;
-    s32 var_s1;
+void Ovlgame_InitializeDynamicLightPool(struct CGameDynamicLight_t *lightPool) {
+    f32 initialFade;
+    s32 lightByteOffset;
     s32 i;
-    CDLight *temp_s0;
+    CDLight *light;
     void *base;
 
-    func_80255CA0_de(&arg0->m_ActiveList, 0, 4);
-    func_80255CA0_de(&arg0->m_FreeList, 0, 4);
+    List_InitializeIntrusive(&lightPool->m_ActiveList, 0, 4);
+    List_InitializeIntrusive(&lightPool->m_FreeList, 0, 4);
     i = 0;
-    var_s1 = 0x28;
-    temp_f20 = 1.0f;
+    lightByteOffset = 0x28;
+    initialFade = 1.0f;
     do {
-        base = arg0;
-        temp_s0 = base + var_s1;
-        func_80255D14_de(&arg0->m_FreeList, temp_s0);
-        var_s1 += 0x18;
+        base = lightPool;
+        light = base + lightByteOffset;
+        List_AppendIntrusive(&lightPool->m_FreeList, light);
+        lightByteOffset += 0x18;
         i += 1;
-        temp_s0->m_pROMLight = 0;
-        temp_s0->m_ColorFade = temp_f20;
-        temp_s0->m_bEnabled = 0;
+        light->m_pROMLight = 0;
+        light->m_ColorFade = initialFade;
+        light->m_bEnabled = 0;
     } while (i < 8);
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C43CC[1] = {
+unsigned int k_DynlightEncodedWords[1] = {
     0x4E657874,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C478C[1] = {
+unsigned int k_DynlightOneWords[1] = {
     0x3F800000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C474C[1] = {
+unsigned int k_DynlightEncodedWordsBlock2[1] = {
     0x00031C00,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C449C[1] = {
+unsigned int k_DynlightEncodedWordsBlock1[1] = {
     0x00268D74,
 };
 #endif

@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
@@ -17,7 +17,7 @@
 
 
 
-/* The hub spells D_800E3590 as the padded menu block; this unit reaches the model name at +0x08
+/* The hub spells g_profileStatisticsScreen as the padded menu block; this unit reaches the model name at +0x08
  * through its own view, so each use casts back to it. */
 extern void Frontend_InitModelPreviewTransform(char *model, s32 modelId, CVector3 scale, CVector3 position);
 extern void Frontend_SetPreviewRotation(char *model, CVector3 rotation);
@@ -42,9 +42,9 @@ s32 Menu_PositionSelectionMenuModel(void) {
     position.x = 17.0f;
     position.y = -10.0f;
     position.z = -50.0f;
-    Frontend_InitModelPreviewTransform(((MenuRecAt8 *) D_800E3590)->model, 0, scale, position);
-    Frontend_SetPreviewRotation(((MenuRecAt8 *) D_800E3590)->model, rotation);
-    Frontend_SetPreviewRotationSpeed(((MenuRecAt8 *) D_800E3590)->model, offset);
+    Frontend_InitModelPreviewTransform(((FrontendPreviewMenuView *) g_profileStatisticsScreen)->model, 0, scale, position);
+    Frontend_SetPreviewRotation(((FrontendPreviewMenuView *) g_profileStatisticsScreen)->model, rotation);
+    Frontend_SetPreviewRotationSpeed(((FrontendPreviewMenuView *) g_profileStatisticsScreen)->model, offset);
     SoundElement_PlayFlatSound(0xE78);
     return 0;
 }
@@ -52,33 +52,33 @@ s32 Menu_PositionSelectionMenuModel(void) {
 #include "gbi.h"
 #include "COMMON/VIDEO_DIMENSIONS.H"
 extern s32 Model_GetModelRecordCount(struct RecordFrontendSetPreviewModel *record);
-extern void func_804399D0(struct RecordFrontendSetPreviewModel *record);
+extern void Preview_DrawMenuModelItem(struct RecordFrontendSetPreviewModel *record);
 extern Gfx *g_displayListCursor;
-extern s32 D_800E28D0;
-/* Draw callback of the menu block: on draw event 1 in state 3 it clears the fill mode D_800D15E0, sets the fill
- * colour D_800D15E4 to opaque white, scissors the display list to the full screen and, when the block record at
+extern s32 g_hudReferenceViewportWidth;
+/* Draw callback of the menu block: on draw event 1 in state 3 it clears the fill mode g_menuModelFillEnabled, sets the fill
+ * colour g_menuModelFillColor to opaque white, scissors the display list to the full screen and, when the block record at
  * +0x08 holds a model, draws it once in fill mode 1 at alpha 210, then restores the fill state. Returns zero. */
 s32 Menu_DrawMenuBlockModel(void *window, void *item, s32 event) {
-    if (event == 1 && D_800E3590->unk216 == 3) {
-        D_800D15E0 = 0;
-        D_800D15E4[0] = 255.0f;
-        D_800D15E4[1] = 255.0f;
-        D_800D15E4[2] = 255.0f;
-        D_800D15E4[3] = 255.0f;
+    if (event == 1 && g_profileStatisticsScreen->unk216 == 3) {
+        g_menuModelFillEnabled = 0;
+        g_menuModelFillColor[0] = 255.0f;
+        g_menuModelFillColor[1] = 255.0f;
+        g_menuModelFillColor[2] = 255.0f;
+        g_menuModelFillColor[3] = 255.0f;
         gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
-        if (Model_GetModelRecordCount(&D_800E3590->record) != 0) {
-            D_800D15E0 = 1;
-            D_800D15E4[3] = 210.0f;
-            func_804399D0(&D_800E3590->record);
-            D_800D15E0 = 0;
-            D_800D15E4[3] = 255.0f;
+        if (Model_GetModelRecordCount(&g_profileStatisticsScreen->record) != 0) {
+            g_menuModelFillEnabled = 1;
+            g_menuModelFillColor[3] = 210.0f;
+            Preview_DrawMenuModelItem(&g_profileStatisticsScreen->record);
+            g_menuModelFillEnabled = 0;
+            g_menuModelFillColor[3] = 255.0f;
         }
     }
     return 0;
 }
 
 /* On event 3 with value 0, calls MarkMenuEventHandled, hands func_8041DB30_de the cursor word the hub
-   names unk268 at +0x10C of the menu block D_800E3590 points to, calls Focus_ShowUnlockedEntries with 0x6E,
+   names unk268 at +0x10C of the menu block g_profileStatisticsScreen points to, calls Focus_ShowUnlockedEntries with 0x6E,
    Focus_RefreshProfileStatistics and Focus_RefreshUnlockedFocusLabel, and clears the hub's focus word at +0x0EC. Returns zero. */
 
 extern void MarkMenuEventHandled();
@@ -87,19 +87,19 @@ extern void MarkMenuEventHandled();
 s32 Menu_HandleNextProfileEvent(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3 && value == 0) {
         MarkMenuEventHandled();
-        Focus_AdvanceActiveSlot(&D_800E3590->unk268);
+        Focus_AdvanceActiveSlot(&g_profileStatisticsScreen->unk268);
         Focus_ShowUnlockedEntries(0x6E);
         Focus_RefreshProfileStatistics();
         Focus_RefreshUnlockedFocusLabel();
-        D_800E3590->focus = 0;
+        g_profileStatisticsScreen->focus = 0;
     }
     return 0;
 }
 
 s32 Menu_BeginSelectionMenuExit(void) {
     MarkMenuEventHandled();
-    D_800E3590->unk216 = 5;
-    D_800E3590->unk220 = 4;
+    g_profileStatisticsScreen->unk216 = 5;
+    g_profileStatisticsScreen->unk220 = 4;
     return 0;
 }
 
@@ -110,31 +110,31 @@ s32 Menu_ConsumeSelectionMenuEvent(void) {
     return 0;
 }
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3724, an actor kind at D_800E3728 and a handler at D_800E372C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_selectionMenuHandlerEvents, an actor kind at g_selectionMenuHandlerKinds and a handler at g_selectionMenuHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
-extern s32 D_800E3724;
-extern s32 D_800E3728;
-extern Handler802A2B50 D_800E372C;
+extern s32 g_selectionMenuHandlerEvents;
+extern s32 g_selectionMenuHandlerKinds;
+extern Handler802A2B50 g_selectionMenuHandlers;
 
-s32 Menu_DispatchSelectionMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchSelectionMenuEvent(void *actor, s32 event, s32 eventValue, s32 eventData, s32 eventContext) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E372C != 0) {
+    if (g_selectionMenuHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E372C;
+        entry = (char *)&g_selectionMenuHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E3724)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3728)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_selectionMenuHandlerEvents)) + offset))->value == event) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) actor))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_selectionMenuHandlerKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(actor, event, eventValue, eventData, eventContext);
                 }
             }
             entry += 0xC;

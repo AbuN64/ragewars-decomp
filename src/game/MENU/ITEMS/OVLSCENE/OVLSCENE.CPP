@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8044D054_CADA0[26] =
+const char k_ovlsceneTextBytes[26] =
     "load save persistent data\000";
 #endif
 

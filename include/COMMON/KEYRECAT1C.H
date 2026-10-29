@@ -2,11 +2,11 @@
 #define COMMON_KEYRECAT1C_H
 #include "TYPES.H"
 
-struct KeyRecAt1C;
-typedef struct KeyRecAt1C KeyRecAt1C;
+struct TrackTransformKey;
+typedef struct TrackTransformKey TrackTransformKey;
 
-struct KeyRecAt1C;
-struct KeyRecAt1C {
+struct TrackTransformKey;
+struct TrackTransformKey {
     char pad0[0x1C];
     f32 time;
     char pad20[4];
@@ -24,11 +24,11 @@ struct PositionKey {
     f32 time;
 };
 
-struct EntryRecAt48;
-typedef struct EntryRecAt48 EntryRecAt48;
+struct TrackResourceEntry;
+typedef struct TrackResourceEntry TrackResourceEntry;
 
-struct EntryRecAt48;
-struct EntryRecAt48 {
+struct TrackResourceEntry;
+struct TrackResourceEntry {
     s32 id0;
     s32 id4;
     s32 id8;

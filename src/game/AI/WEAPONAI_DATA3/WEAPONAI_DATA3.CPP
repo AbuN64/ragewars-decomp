@@ -2,66 +2,66 @@
 
 /* 800CF5BC.CPP */
 /* ROM-grounded data: src/rw_pool_802312C8_D01BC_us_rev1.c */
-const unsigned int D_blob_d40b53b1de71ccef39c2[1] = {
+const unsigned int k_WeaponaiData3EncodedWordsBlock4[1] = {
     0x00000008,
 };
 
 /* 800CA1EC.CPP */
 #if defined(VERSION_US)
-extern char D_00230BA8[];
-extern char D_00232C48[];
-extern char D_00232FD8[];
-extern char D_0023308C[];
-unsigned int D_auto_rodata_unresolved_800CA1EC[40] = {
+extern char addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant1[];
+extern char addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant1[];
+extern char addrLow_Weapon_UpdateNormalFireActionEntryVariant1[];
+extern char addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant1[];
+unsigned int k_WeaponaiData3EncodedWords[40] = {
     0x800C9F68, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, (unsigned int)D_00232C48, (unsigned int)D_00232FD8, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000003, 0x00000000, (unsigned int)D_00232FD8, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000004, (unsigned int)D_0023308C, (unsigned int)D_00230BA8, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
+    0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant1, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant1, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000003, 0x00000000, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant1, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000004, (unsigned int)addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant1, (unsigned int)addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant1, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
 /* 800CAEBC.CPP */
 #if defined(VERSION_EU)
-extern char D_00230BC8[];
+extern char addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant2[];
 extern char D_00232C78[];
-extern char D_00233008[];
-extern char D_002330BC[];
-unsigned int D_auto_rodata_unresolved_800CAEBC[40] = {
+extern char addrLow_Weapon_UpdateNormalFireActionEntryVariant3[];
+extern char addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant3[];
+unsigned int k_WeaponaiData3EncodedWordsBlock2[40] = {
     0x800CAC38, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, (unsigned int)D_00232C78, (unsigned int)D_00233008, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000003, 0x00000000, (unsigned int)D_00233008, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000004, (unsigned int)D_002330BC, (unsigned int)D_00230BC8, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
+    0x00000002, (unsigned int)D_00232C78, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant3, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000003, 0x00000000, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant3, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000004, (unsigned int)addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant3, (unsigned int)addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant2, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
 /* 800CB88C.CPP */
 #if defined(VERSION_EU_X)
-extern char D_00230BF8[];
-extern char D_00232CA8[];
-extern char D_00233038[];
-extern char D_002330EC[];
-unsigned int D_auto_rodata_unresolved_800CB88C[40] = {
+extern char addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant3[];
+extern char addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant3[];
+extern char addrLow_Weapon_UpdateNormalFireActionEntryVariant4[];
+extern char addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant4[];
+unsigned int k_WeaponaiData3EncodedWordsBlock3[40] = {
     0x800CB608, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, (unsigned int)D_00232CA8, (unsigned int)D_00233038, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000003, 0x00000000, (unsigned int)D_00233038, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000004, (unsigned int)D_002330EC, (unsigned int)D_00230BF8, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
+    0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant3, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant4, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000003, 0x00000000, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant4, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000004, (unsigned int)addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant4, (unsigned int)addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant3, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
 /* 800CA2DC.CPP */
 #if defined(VERSION_DE)
-extern char D_00230BC8[];
+extern char addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant2[];
 extern char D_00232C68[];
-extern char D_00232FF8[];
-extern char D_002330AC[];
-unsigned int D_auto_rodata_unresolved_800CA2DC[40] = {
+extern char addrLow_Weapon_UpdateNormalFireActionEntryVariant2[];
+extern char addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant2[];
+unsigned int k_WeaponaiData3EncodedWordsBlock1[40] = {
     0x800CA058, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, (unsigned int)D_00232C68, (unsigned int)D_00232FF8, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000003, 0x00000000, (unsigned int)D_00232FF8, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000004, (unsigned int)D_002330AC, (unsigned int)D_00230BC8, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
+    0x00000002, (unsigned int)D_00232C68, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant2, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000003, 0x00000000, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant2, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000004, (unsigned int)addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant2, (unsigned int)addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant2, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif

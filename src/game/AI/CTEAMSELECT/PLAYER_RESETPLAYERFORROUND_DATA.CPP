@@ -5,12 +5,12 @@
 #include "MENU/TEAM/PLAYER_RESETPLAYERFORROUND_DATA.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 
 /* 80217388_10.CPP */
 /** Reset the team menu: closed, no cursor or hover, and its four team slots fanned 30 degrees apart. */
-void func_80218E98_de(TeamMenu *menu) {
+void TeamSelect_ResetTeamWheel(TeamMenu *menu) {
     s32 i;
 
     menu->state = 0;
@@ -22,16 +22,16 @@ void func_80218E98_de(TeamMenu *menu) {
     menu->count = 4;
     menu->hover = -1;
     for (i = 0; i < 4; i++) {
-        menu->slots[i].angle = -(i * D_800C22AC_de);
+        menu->slots[i].angle = -(i * g_teamWheelResetAngleStep);
         menu->slots[i].unused2 = 0;
-        menu->slots[i].scale = D_800C917C;
+        menu->slots[i].scale = g_teamWheelInitialSlotScale;
     }
 }
 
 /* 80217388_11.CPP */
 extern void Cteamselect_DrawTeamWheel(s32 menu, s32 unused1, s32 player);
 
-void func_80218F08_de(s32 menu, s32 unused1, s32 player) {
+void TeamSelect_DrawTeamWheelSprites(s32 menu, s32 unused1, s32 player) {
     Gfx *cmd;
 
     Onscrn_SetupSpriteMode(0xFF);
@@ -40,7 +40,7 @@ void func_80218F08_de(s32 menu, s32 unused1, s32 player) {
 }
 
 /** Reset a record and mark its word at offset 0x6C as invalid. */
-void func_80218F84_de(void *record) {
+void TeamSelect_CloseTeamWheel(void *record) {
     TeamMenu *menu = record;
     menu->state = 0;
     menu->unused = 0;

@@ -4,7 +4,7 @@
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/RECTANGLE_DRAW.H"
 #include "FRONTEND/TEXT_RENDER.H"
@@ -21,8 +21,8 @@
 #include "FRONTEND/NODE_GETIMAGETEXTURE.H"
 
 extern BatchRec g_textBatches[];
-extern struct Shape_typemap_165 D_8014D580;
-extern s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *widget, sm_dldc *);
+extern struct CacheResourceBlockView g_frontendClipBounds;
+extern s32 Widget_ComputeWidgetBounds(struct CacheResourceBlockView *, struct CacheResourceBlockView *, WidgetLayout *widget, sm_dldc *);
 /* Flushes the queued text sprite batches: when any are queued it selects render mode 0x53333 if
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture
    pages from the lowest first page to the highest last page among the batches, loading each page
@@ -47,21 +47,21 @@ extern s32 Node_GetBankTileTexture(s32 page, s32 a, s32 b);
 
 extern void Combine_BindImageTexture(s32 texture);
 
-static inline void func_8040CB30_restore(struct Shape_typemap_165 *clip) {
-    N64Eng_SetClipBounds(clip->field_0, clip->field_8, clip->field_4, clip->field_C);
+static inline void Widget_RestoreClipBounds(struct CacheResourceBlockView *clip) {
+    N64Eng_SetClipBounds(clip->first, clip->third, clip->second, clip->fourth);
 }
 
-extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct CacheResourceBlockView *clip);
 
 
-static inline s32 func_8040CDD0_overlaps(struct Shape_typemap_165 *area) {
+static inline s32 Widget_OverlapsTextBatchForClear(struct CacheResourceBlockView *area) {
     BatchRec *batch;
     s32 i;
 
     for (i = 0; i < g_textBatchCount; i++) {
         batch = &g_textBatches[i];
-        if (area->field_4 < batch->area.field_0 || batch->area.field_4 < area->field_0 || area->field_C < batch->area.field_8 ||
-            batch->area.field_C < area->field_8) {
+        if (area->second < batch->area.first || batch->area.second < area->first || area->fourth < batch->area.third ||
+            batch->area.fourth < area->third) {
             continue;
         }
         return 1;
@@ -71,14 +71,14 @@ static inline s32 func_8040CDD0_overlaps(struct Shape_typemap_165 *area) {
 
 extern void Rect_DrawGradientRectangle(f32 x, f32 y, s32 z, f32 width, f32 height, s32 c0, s32 c1, s32 c2, s32 c3);
 
-static inline s32 func_8040D00C_overlaps(struct Shape_typemap_165 *area) {
+static inline s32 Widget_OverlapsTextBatchForDraw(struct CacheResourceBlockView *area) {
     BatchRec *batch;
     s32 i;
 
     for (i = 0; i < g_textBatchCount; i++) {
         batch = &g_textBatches[i];
-        if (area->field_4 < batch->area.field_0 || batch->area.field_4 < area->field_0 || area->field_C < batch->area.field_8 ||
-            batch->area.field_C < area->field_8) {
+        if (area->second < batch->area.first || batch->area.second < area->first || area->fourth < batch->area.third ||
+            batch->area.fourth < area->third) {
             continue;
         }
         return 1;
@@ -93,8 +93,8 @@ GlyphBuffer *Node_GetGlyphBuffer(s32);
 void XPlus_SortArray(char *, s32, s32, s32 (*)(char *, char *));
 
 static inline void textBegin(u8 font, u8 style) {
-    N64Eng_GetClipBounds(&D_8014D580.field_0, &D_8014D580.field_8,
-                   &D_8014D580.field_4, &D_8014D580.field_C);
+    N64Eng_GetClipBounds(&g_frontendClipBounds.first, &g_frontendClipBounds.third,
+                   &g_frontendClipBounds.second, &g_frontendClipBounds.fourth);
     g_textBatchFontId = (s8)font;
     g_textBatchStyle = (s8)style;
     g_textGlyphBuffer = Node_GetGlyphBuffer((s8)font);
@@ -115,11 +115,11 @@ static inline s32 textOverlaps(BatchRec *next) {
     return 0;
 }
 
-static inline s32 textClipChanged(struct Shape_typemap_165 *current) {
-    if (current->field_0 != D_8014D580.field_0) return 1;
-    if (current->field_8 != g_textClipTop) return 1;
-    if (current->field_4 != g_textClipRight) return 1;
-    return current->field_C != g_textClipBottom;
+static inline s32 textClipChanged(struct CacheResourceBlockView *current) {
+    if (current->first != g_frontendClipBounds.first) return 1;
+    if (current->third != g_textClipTop) return 1;
+    if (current->second != g_textClipRight) return 1;
+    return current->fourth != g_textClipBottom;
 }
 
 void Widget_FlushTextBatches(void) {
@@ -130,7 +130,7 @@ void Widget_FlushTextBatches(void) {
     s32 current;
     s32 loaded;
     s32 texture;
-    struct Shape_typemap_165 clip;
+    struct CacheResourceBlockView clip;
     BatchRec *batch;
     TextSprite *sprite;
 
@@ -139,13 +139,13 @@ void Widget_FlushTextBatches(void) {
     }
     first = 0x60;
     last = 0;
-    if (D_800DEA6C != 0x53333 || D_800E2AB8 == 0) {
-        D_800DEA6C = 0x53333;
+    if (g_widgetTextBatchMode != 0x53333 || g_frontendRenderStateInitialized == 0) {
+        g_widgetTextBatchMode = 0x53333;
         Combine_ConfigurePrimitiveRenderFlags(0x53333);
-        D_800E2AB8 = 1;
+        g_frontendRenderStateInitialized = 1;
     }
-    N64Eng_GetClipBounds(&clip.field_0, &clip.field_8, &clip.field_4, &clip.field_C);
-    N64Eng_SetClipBounds(D_8014D580.field_0, g_textClipTop, g_textClipRight, g_textClipBottom);
+    N64Eng_GetClipBounds(&clip.first, &clip.third, &clip.second, &clip.fourth);
+    N64Eng_SetClipBounds(g_frontendClipBounds.first, g_textClipTop, g_textClipRight, g_textClipBottom);
     for (current = 0; current < g_textBatchCount; current++) {
         sprite = g_textBatches[current].cursor;
         page = sprite->glyph;
@@ -180,15 +180,15 @@ void Widget_FlushTextBatches(void) {
             }
         }
     }
-    func_8040CB30_restore(&clip);
+    Widget_RestoreClipBounds(&clip);
     g_textBatchCount = 0;
 }
 
 void Widget_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc args) {
-    struct Shape_typemap_165 box;
-    struct Shape_typemap_165 area;
-    struct Shape_typemap_165 saved;
-    struct Shape_typemap_165 clip;
+    struct CacheResourceBlockView box;
+    struct CacheResourceBlockView area;
+    struct CacheResourceBlockView saved;
+    struct CacheResourceBlockView clip;
     s32 clipped;
     s32 texture;
     s32 color;
@@ -198,36 +198,36 @@ void Widget_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc args)
         return;
     }
     if (widget->flags & 0x200) {
-        N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+        N64Eng_GetClipBounds(&saved.first, &saved.third, &saved.second, &saved.fourth);
         clip = saved;
         if (Node_ClampRectToClip(&clip, &box) == 0) {
             return;
         }
         clipped = 1;
-        N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+        N64Eng_SetClipBounds(clip.first, clip.third, clip.second, clip.fourth);
     }
-    if (func_8040CDD0_overlaps(&area)) {
+    if (Widget_OverlapsTextBatchForClear(&area)) {
         Widget_FlushTextBatches();
     }
     texture = Node_GetImageTexture(widget->image, 1);
     color = (args.alpha << 24) | 0xFFFFFF;
-    if (D_800DEA6C != 0x53333 || D_800E2AB8 == 0) {
-        D_800DEA6C = 0x53333;
+    if (g_widgetTextBatchMode != 0x53333 || g_frontendRenderStateInitialized == 0) {
+        g_widgetTextBatchMode = 0x53333;
         Combine_ConfigurePrimitiveRenderFlags(0x53333);
-        D_800E2AB8 = 1;
+        g_frontendRenderStateInitialized = 1;
     }
     Combine_BindImageTexture(texture);
-    Rect_DrawRect(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1, color);
+    Rect_DrawRect(area.first, area.third, 0.0f, area.second - area.first + 1, area.fourth - area.third + 1, color);
     if (clipped) {
-        N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+        N64Eng_SetClipBounds(saved.first, saved.third, saved.second, saved.fourth);
     }
 }
 
 void Widget_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
-    struct Shape_typemap_165 box;
-    struct Shape_typemap_165 area;
-    struct Shape_typemap_165 saved;
-    struct Shape_typemap_165 clip;
+    struct CacheResourceBlockView box;
+    struct CacheResourceBlockView area;
+    struct CacheResourceBlockView saved;
+    struct CacheResourceBlockView clip;
     s32 clipped;
 
     clipped = 0;
@@ -239,35 +239,35 @@ void Widget_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
         return;
     }
     if (widget->flags & 0x200) {
-        N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+        N64Eng_GetClipBounds(&saved.first, &saved.third, &saved.second, &saved.fourth);
         clip = saved;
         if (Node_ClampRectToClip(&clip, &box) == 0) {
             return;
         }
         clipped = 1;
-        N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+        N64Eng_SetClipBounds(clip.first, clip.third, clip.second, clip.fourth);
     }
-    if (func_8040D00C_overlaps(&area)) {
+    if (Widget_OverlapsTextBatchForDraw(&area)) {
         Widget_FlushTextBatches();
     }
-    if (D_800DEA6C != 0x53533 || D_800E2AB8 == 0) {
-        D_800DEA6C = 0x53533;
+    if (g_widgetTextBatchMode != 0x53533 || g_frontendRenderStateInitialized == 0) {
+        g_widgetTextBatchMode = 0x53533;
         Combine_ConfigurePrimitiveRenderFlags(0x53533);
-        D_800E2AB8 = 1;
+        g_frontendRenderStateInitialized = 1;
     }
     Combine_BindImageTexture(0);
-    Rect_DrawGradientRectangle(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1,
+    Rect_DrawGradientRectangle(area.first, area.third, 0.0f, area.second - area.first + 1, area.fourth - area.third + 1,
                   (widget->colors[0] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[0] >> 24) / 255) << 24),
                   (widget->colors[1] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[1] >> 24) / 255) << 24),
                   (widget->colors[2] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[2] >> 24) / 255) << 24),
                   (widget->colors[3] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[3] >> 24) / 255) << 24));
     if (clipped) {
-        N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+        N64Eng_SetClipBounds(saved.first, saved.third, saved.second, saved.fourth);
     }
 }
 
 void Widget_DrawTextWidget(TextWidget *widget, sm_dldc args) {
-    struct Shape_typemap_165 box, saved, clip, area, current;
+    struct CacheResourceBlockView box, saved, clip, area, current;
     s32 clipped, length, width, mismatch, count, i, tempX, tempY;
     u8 font, style;
     u8 *text;
@@ -344,13 +344,13 @@ void Widget_DrawTextWidget(TextWidget *widget, sm_dldc args) {
         sprite->width=glyph->width*args.XScale;
         sprite->height=glyph->height*args.YScale;
         text++;
-        if (sprite->x<D_800DEA60 && sprite->x+sprite->width>0.0f) { sprite++; count++; }
+        if (sprite->x<g_frontendViewportWidth && sprite->x+sprite->width>0.0f) { sprite++; count++; }
         x+=glyph->width*args.XScale; x+=g_textGlyphSpacing*args.XScale;
     }
     if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     if (count>0) {
         g_textBatches[g_textBatchCount].count=count;
-        XPlus_SortArray((char *)g_textBatches[g_textBatchCount].cursor, count, sizeof(TextSprite), D_0040F570);
+        XPlus_SortArray((char *)g_textBatches[g_textBatchCount].cursor, count, sizeof(TextSprite), Node_CompareRecordShortValuesRomEntry);
         g_textBatchCount++;
         if (g_textBatchCount>=16) Widget_FlushTextBatches();
     }
@@ -383,8 +383,8 @@ extern s32 Menu_GetElementHandlerFlags(s32);
 
 void Widget_DrawWidget(DraftWidget *, sm_dldc);
 static inline void drawWidgetChoice(DraftWidget *widget, sm_dldc args) {
-        struct Shape_typemap_165 area;
-        struct Shape_typemap_165 box;
+        struct CacheResourceBlockView area;
+        struct CacheResourceBlockView box;
         DraftWidget *child;
         if (Widget_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (args.flags & 0x100) child = widget->disabled;
@@ -399,43 +399,43 @@ static inline void drawWidgetChoice(DraftWidget *widget, sm_dldc args) {
 }
 
 static inline void drawWidgetResetGroup(DraftWidget *widget, sm_dldc args) {
-        struct Shape_typemap_165 box;
-        struct Shape_typemap_165 saved;
-        struct Shape_typemap_165 clip;
-        struct Shape_typemap_165 area;
+        struct CacheResourceBlockView box;
+        struct CacheResourceBlockView saved;
+        struct CacheResourceBlockView clip;
+        struct CacheResourceBlockView area;
         s32 clipped;
         clipped = 0;
-        D_800E2AB8 = 0;
+        g_frontendRenderStateInitialized = 0;
         if (Widget_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (widget->flags & 0x200) {
-                N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+                N64Eng_GetClipBounds(&saved.first, &saved.third, &saved.second, &saved.fourth);
                 clip = saved;
                 if (!Node_ClampRectToClip(&clip, &box)) return;
                 clipped = 1;
-                N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+                N64Eng_SetClipBounds(clip.first, clip.third, clip.second, clip.fourth);
             }
             Widget_DrawVisibleSiblings(widget->child, args);
-            if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+            if (clipped) N64Eng_SetClipBounds(saved.first, saved.third, saved.second, saved.fourth);
         }
 }
 
 static inline void drawWidgetGroup(DraftWidget *widget, sm_dldc args) {
-        struct Shape_typemap_165 box;
-        struct Shape_typemap_165 area;
-        struct Shape_typemap_165 saved;
-        struct Shape_typemap_165 clip;
+        struct CacheResourceBlockView box;
+        struct CacheResourceBlockView area;
+        struct CacheResourceBlockView saved;
+        struct CacheResourceBlockView clip;
         s32 clipped;
         clipped = 0;
         if (Widget_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (widget->flags & 0x200) {
-                N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+                N64Eng_GetClipBounds(&saved.first, &saved.third, &saved.second, &saved.fourth);
                 clip = saved;
                 if (!Node_ClampRectToClip(&clip, &box)) return;
                 clipped = 1;
-                N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+                N64Eng_SetClipBounds(clip.first, clip.third, clip.second, clip.fourth);
             }
             Widget_DrawVisibleSiblings(widget->child, args);
-            if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+            if (clipped) N64Eng_SetClipBounds(saved.first, saved.third, saved.second, saved.fourth);
         }
 }
 
@@ -464,11 +464,11 @@ void Widget_DrawWidget(DraftWidget *widget, sm_dldc args) {
         flags = Menu_GetElementHandlerFlags(widget->type);
         if (!(flags & 1)) {
             N64Eng_ResetRenderState();
-            D_800E2AB8 = 0;
+            g_frontendRenderStateInitialized = 0;
         }
         if (Smos_InvokeWidgetCallback((void *)widget, args) && !(flags & 1)) {
             N64Eng_RenderNoop();
-            D_800E2AB8 = 0;
+            g_frontendRenderStateInitialized = 0;
         }
         break;
     }
@@ -479,7 +479,7 @@ void Widget_DrawWidget(DraftWidget *widget, sm_dldc args) {
    (scaled about its centre when any scale is not 1) and its hit box, and clips the hit box to the
    screen. Returns 1 when the widget is visible, and then moves the context origin and clip to the
    draw rectangle. */
-s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_typemap_165 *hit, WidgetLayout *widget, sm_dldc *ctx) {
+s32 Widget_ComputeWidgetBounds(struct CacheResourceBlockView *draw, struct CacheResourceBlockView *hit, WidgetLayout *widget, sm_dldc *ctx) {
     u16 flags = widget->flags;
     s32 parentFlags = ctx->flags;
     f32 parentScaleX = ctx->XScale;
@@ -516,15 +516,15 @@ s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_type
         ctx->YScale *= widget->scaleY;
         drawHalfW = widget->width * ctx->XScale * 0.5f;
         drawHalfH = widget->height * ctx->YScale * 0.5f;
-        draw->field_0 = centreX - drawHalfW + ctx->x;
-        draw->field_4 = centreX + drawHalfW + ctx->x;
-        draw->field_8 = centreY - drawHalfH + ctx->y;
-        draw->field_C = centreY + drawHalfH + ctx->y;
+        draw->first = centreX - drawHalfW + ctx->x;
+        draw->second = centreX + drawHalfW + ctx->x;
+        draw->third = centreY - drawHalfH + ctx->y;
+        draw->fourth = centreY + drawHalfH + ctx->y;
     } else {
-        draw->field_0 = ctx->x + widget->x + widget->offsetX;
-        draw->field_8 = ctx->y + widget->y + widget->offsetY;
-        draw->field_4 = draw->field_0 + widget->width - 1;
-        draw->field_C = draw->field_8 + widget->height - 1;
+        draw->first = ctx->x + widget->x + widget->offsetX;
+        draw->third = ctx->y + widget->y + widget->offsetY;
+        draw->second = draw->first + widget->width - 1;
+        draw->fourth = draw->third + widget->height - 1;
         drawHalfW = widget->width >> 1;
         drawHalfH = widget->height >> 1;
     }
@@ -534,58 +534,58 @@ s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_type
         *hit = *draw;
     } else if (!centred && !useDraw) {
         if (parentScaleX != 1.0f) {
-            hit->field_0 = (s32)(widget->x * parentScaleX) + ctx->x;
+            hit->first = (s32)(widget->x * parentScaleX) + ctx->x;
         } else {
-            hit->field_0 = widget->x + ctx->x;
+            hit->first = widget->x + ctx->x;
         }
-        hit->field_4 = hit->field_0 + widget->width;
+        hit->second = hit->first + widget->width;
         if (parentScaleY != 1.0f) {
-            hit->field_8 = (s32)(widget->y * parentScaleY) + ctx->y;
+            hit->third = (s32)(widget->y * parentScaleY) + ctx->y;
         } else {
-            hit->field_8 = widget->y + ctx->y;
+            hit->third = widget->y + ctx->y;
         }
-        hit->field_C = hit->field_8 + widget->height;
+        hit->fourth = hit->third + widget->height;
     } else if (centred) {
-        hit->field_0 = centreX - drawHalfW + ctx->x;
-        hit->field_8 = centreY - drawHalfH + ctx->y;
-        hit->field_4 = centreX + drawHalfW + ctx->x;
-        hit->field_C = centreY + drawHalfH + ctx->y;
+        hit->first = centreX - drawHalfW + ctx->x;
+        hit->third = centreY - drawHalfH + ctx->y;
+        hit->second = centreX + drawHalfW + ctx->x;
+        hit->fourth = centreY + drawHalfH + ctx->y;
     } else {
-        hit->field_0 = centreX - halfW + widget->offsetX + ctx->x;
-        hit->field_8 = centreY - halfH + widget->offsetY + ctx->y;
-        hit->field_4 = centreX + halfW + widget->offsetX + ctx->x;
-        hit->field_C = centreY + halfH + widget->offsetY + ctx->y;
+        hit->first = centreX - halfW + widget->offsetX + ctx->x;
+        hit->third = centreY - halfH + widget->offsetY + ctx->y;
+        hit->second = centreX + halfW + widget->offsetX + ctx->x;
+        hit->fourth = centreY + halfH + widget->offsetY + ctx->y;
     }
-    if (hit->field_0 < 0) {
-        hit->field_0 = 0;
-    } else if (hit->field_0 > D_800DEA60) {
+    if (hit->first < 0) {
+        hit->first = 0;
+    } else if (hit->first > g_frontendViewportWidth) {
         return 0;
     }
-    if (hit->field_4 < 0) {
+    if (hit->second < 0) {
         return 0;
     }
-    if (hit->field_4 > D_800DEA60) {
-        hit->field_4 = D_800DEA60;
+    if (hit->second > g_frontendViewportWidth) {
+        hit->second = g_frontendViewportWidth;
     }
-    if (hit->field_8 < 0) {
-        hit->field_8 = 0;
-    } else if (hit->field_8 > D_800E2AB4_de) {
+    if (hit->third < 0) {
+        hit->third = 0;
+    } else if (hit->third > g_frontendViewportHeight) {
         return 0;
     }
-    if (hit->field_C < 0) {
+    if (hit->fourth < 0) {
         return 0;
     }
-    if (hit->field_C > D_800E2AB4_de) {
-        hit->field_C = D_800E2AB4_de;
+    if (hit->fourth > g_frontendViewportHeight) {
+        hit->fourth = g_frontendViewportHeight;
     }
-    if (hit->field_4 <= hit->field_0) {
-        hit->field_4 = hit->field_0 + 1;
+    if (hit->second <= hit->first) {
+        hit->second = hit->first + 1;
     }
-    if (hit->field_C <= hit->field_8) {
-        hit->field_C = hit->field_8 + 1;
+    if (hit->fourth <= hit->third) {
+        hit->fourth = hit->third + 1;
     }
-    ctx->x = draw->field_0;
-    ctx->y = draw->field_8;
+    ctx->x = draw->first;
+    ctx->y = draw->third;
     ctx->Rgn = *draw;
     return 1;
 }

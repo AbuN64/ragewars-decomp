@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "AI/NAV/NAV_UPDATERANGEDCOMBAT.H"
 #include "AI/NAV/NAV_UPDATECLOSECOMBAT.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "AI/NAV/NAV_UPDATEVISIBLEPURSUIT.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -22,7 +22,7 @@ extern void Portal_DispatchActorBehavior(void *);
 /* 802106E0_11.CPP */
 /* Drives combat pursuit, retreat and strafing while refreshing target visibility, routes and fire timing. */
 
-extern char D_8013B364[];
+extern char g_navigationGraph[];
 
 extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
 extern s32 Wheel_GetDirectionSector(f32);
@@ -34,74 +34,74 @@ extern struct {char pad[0xC];unsigned short flags;} *Portal_GetGraphPoint(char *
 void Nav_UpdateRangedCombat(CloseAttackActor *actor) {
  char *routes;int mine,theirs,dir; CloseAttackActor *player;
     CloseAttackActor *target;
-    CloseAttackActor *temp_s0;
+    CloseAttackActor *targetActor;
     CloseAttackActor *playerValue;
     CloseAttackBrain *brain;
-    CVector3 *temp_s0_2;
-    f32 temp_f0;
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f20;
-    f32 temp_f21;
+    CVector3 *targetPosition;
+    f32 squaredDistance;
+    f32 approachThreshold;
+    f32 retreatThreshold;
+    f32 strafeSpeed;
+    f32 difficultySetting;
     f32 distance;
-    f32 temp_f2_2;
+    f32 desiredSquaredDistance;
     s32 route;
-    s32 temp_v0;
-    s32 temp_v0_6;
-    s32 temp_v1;
+    s32 movementTimer;
+    s32 fireTimer;
+    s32 unusedValue;
     s32 pattern;
-    s32 var_a1;
-    s32 var_v0;
-    s32 var_v0_2;
-    s32 var_v0_3;
-    s32 var_v0_4;
-    s32 var_v0_5;
+    s32 unusedValue1;
+    s32 unusedValue2;
+    s32 unusedValue3;
+    s32 unusedValue4;
+    s32 unusedValue5;
+    s32 unusedValue6;
 
     brain = actor->self->brain;
     Nav_RunBehaviorHandler(brain);
-    target = brain->target;routes=D_8013B364;
+    target = brain->target;routes=g_navigationGraph;
     if (target != 0) {
         if (!(brain->frames & 3)) {
             brain->visible = Scaled_HasLineOfSight(brain, target);
         }
         brain->frames += 1;
-        temp_s0 = brain->target->self;
-        mine=brain->player->flags&0x3000;theirs=(temp_s0->flags&0x3000)!=0;
+        targetActor = brain->target->self;
+        mine=brain->player->flags&0x3000;theirs=(targetActor->flags&0x3000)!=0;
         if (mine && !theirs) {
             Scaled_SetBehaviourState(brain,12);return;
         }
-        route = temp_s0->brain->route;
+        route = targetActor->brain->route;
         if (Portal_GetGraphPoint(routes, route)->flags & 0x400) {
             brain->target = 0;
             Nav_SelectPlayerState(brain);
             return;
         }
         if (brain->visible != 0) {
-            temp_f21 = Scaled_ScaleCharacterSettingByDifficulty(brain);
-            temp_v0 = brain->timer - 1;
-            temp_f20 = temp_f21 * 0.6f;
-            brain->timer = temp_v0;
-            if (temp_v0 <= 0) {
+            difficultySetting = Scaled_ScaleCharacterSettingByDifficulty(brain);
+            movementTimer = brain->timer - 1;
+            strafeSpeed = difficultySetting * 0.6f;
+            brain->timer = movementTimer;
+            if (movementTimer <= 0) {
                 brain->timer=Graphu64_NextRandom()%4+12;
                 brain->pattern = Graphu64_NextRandom() % 2;
                 brain->distance = (Graphu64_NextRandom() % 250000) + 0x57E40;
             }
-            temp_s0_2 = &temp_s0->pos;
-            Nav_SteerTowardPoint(brain, temp_s0_2, 2.0f, Scaled_UpdateDifficultyAimJitter(brain));
-            temp_f0 = Graphu64_GetSquaredDistance(temp_s0_2, &brain->player->pos);
-            temp_f1 = temp_f0 + 10000.0f;
+            targetPosition = &targetActor->pos;
+            Nav_SteerTowardPoint(brain, targetPosition, 2.0f, Scaled_UpdateDifficultyAimJitter(brain));
+            squaredDistance = Graphu64_GetSquaredDistance(targetPosition, &brain->player->pos);
+            approachThreshold = squaredDistance + 10000.0f;
             distance = (f32) brain->distance;
-            if (temp_f1 < 0.0f) {
-                if (distance < -temp_f1) {
+            if (approachThreshold < 0.0f) {
+                if (distance < -approachThreshold) {
                     goto block_19;
                 }
                 goto block_23;
             }
-            if (distance < temp_f1) {
+            if (distance < approachThreshold) {
 block_19:
                 dir = Wheel_GetDirectionSector(brain->player->yaw - 3.1415927f);
                 player = brain->player;
-                if ((player->slot % 2) == D_800D297C) {
+                if ((player->slot % 2) == g_lightingBufferIndex) {
                     Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->clearance[dir] < 100.0f)) {
@@ -111,19 +111,19 @@ block_19:
                 }
             } else {
 block_23:
-                temp_f1_2 = temp_f0 - 10000.0f;
-                temp_f2_2 = (f32) brain->distance;
-                if (temp_f1_2 < 0.0f) {
-                    if (-temp_f1_2 < temp_f2_2) {
+                retreatThreshold = squaredDistance - 10000.0f;
+                desiredSquaredDistance = (f32) brain->distance;
+                if (retreatThreshold < 0.0f) {
+                    if (-retreatThreshold < desiredSquaredDistance) {
                         goto block_27;
                     }
                     goto block_31;
                 }
-                if (temp_f1_2 < temp_f2_2) {
+                if (retreatThreshold < desiredSquaredDistance) {
 block_27:
                     dir = Wheel_GetDirectionSector(brain->player->yaw);
                     player = brain->player;
-                    if ((player->slot % 2) == D_800D297C) {
+                    if ((player->slot % 2) == g_lightingBufferIndex) {
                         Wheel_MeasureWheelClearance(player, dir);
                     }
                     if (!(brain->clearance[dir] < 100.0f)) {
@@ -140,18 +140,18 @@ block_31:
             if (pattern == 0) {
                 dir = Wheel_GetDirectionSector((brain->player->yaw - 3.1415927f) - 1.5707964f);
                 player = brain->player;
-                if ((player->slot % 2) == D_800D297C) {
+                if ((player->slot % 2) == g_lightingBufferIndex) {
                     Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->clearance[dir] < 100.0f)) {
-                    brain->player->strafe = -temp_f20;
+                    brain->player->strafe = -strafeSpeed;
                 } else {
                     goto block_41;
                 }
             } else if (pattern == 1) {
                 dir = Wheel_GetDirectionSector((brain->player->yaw - 3.1415927f) + 1.5707964f);
                 player = brain->player;
-                if ((player->slot % 2) == D_800D297C) {
+                if ((player->slot % 2) == g_lightingBufferIndex) {
                     Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (brain->clearance[dir] < 100.0f) {
@@ -159,15 +159,15 @@ block_41:
                     brain->player->strafe = 0.0f;
                     brain->pattern = 2;
                 } else {
-                    brain->player->strafe = temp_f20;
+                    brain->player->strafe = strafeSpeed;
                 }
             } else {
                 brain->player->strafe = 0.0f;
             }
             brain->routeNodes[0] = -1;
-            temp_v0_6 = brain->fireTimer - 1;
-            brain->fireTimer = temp_v0_6;
-            if ((temp_v0_6 == 0) && ((Graphu64_NextRandom() % 100) < (s32) temp_f21)) {
+            fireTimer = brain->fireTimer - 1;
+            brain->fireTimer = fireTimer;
+            if ((fireTimer == 0) && ((Graphu64_NextRandom() % 100) < (s32) difficultySetting)) {
                 playerValue = brain->player;
                 playerValue->buttons |= 0x10;
             }
@@ -205,7 +205,7 @@ void Nav_UpdateCloseCombat(CloseAttackActor *actor) {
     brain = actor->self->brain;
     Nav_RunBehaviorHandler(brain);
     player = brain->target;
-    routes = D_8013B364;
+    routes = g_navigationGraph;
     if (player != 0) {
         if (!(brain->frames & 3)) {
             brain->visible = Scaled_HasLineOfSight(brain, player);
@@ -252,7 +252,7 @@ void Nav_UpdateCloseCombat(CloseAttackActor *actor) {
 fwd:
                 dir = Wheel_GetDirectionSector(brain->player->yaw - 3.1415927f);
                 player = brain->player;
-                if ((player->slot % 2) == D_800D297C) {
+                if ((player->slot % 2) == g_lightingBufferIndex) {
                     Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->clearance[dir] < 100.0f)) {
@@ -274,7 +274,7 @@ back_test:
 back:
                     dir = Wheel_GetDirectionSector(brain->player->yaw);
                     player = brain->player;
-                    if ((player->slot % 2) == D_800D297C) {
+                    if ((player->slot % 2) == g_lightingBufferIndex) {
                         Wheel_MeasureWheelClearance(player, dir);
                     }
                     if (!(brain->clearance[dir] < 100.0f)) {
@@ -291,7 +291,7 @@ stop:
             if (pattern == 0) {
                 dir = Wheel_GetDirectionSector((brain->player->yaw - 3.1415927f) - 1.5707964f);
                 player = brain->player;
-                if ((player->slot % 2) == D_800D297C) {
+                if ((player->slot % 2) == g_lightingBufferIndex) {
                     Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->clearance[dir] < 100.0f)) {
@@ -302,7 +302,7 @@ stop:
             } else if (pattern == 1) {
                 dir = Wheel_GetDirectionSector((brain->player->yaw - 3.1415927f) + 1.5707964f);
                 player = brain->player;
-                if ((player->slot % 2) == D_800D297C) {
+                if ((player->slot % 2) == g_lightingBufferIndex) {
                     Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (brain->clearance[dir] < 100.0f) {
@@ -388,7 +388,7 @@ void Nav_UpdateVisiblePursuit(Self *actor) {
         Nav_SteerTowardPoint(brain, &target->pos, 2.0f, Scaled_UpdateDifficultyAimJitter(brain));
         if (brain->pattern == 0) {
             dir = Wheel_GetDirectionSector(brain->player->yaw - 3.1415927f - 1.5707964f);
-            if (brain->player->slot % 2 == D_800D297C) {
+            if (brain->player->slot % 2 == g_lightingBufferIndex) {
                 Wheel_MeasureWheelClearance(brain->player, dir);
             }
             if (brain->clearance[dir] < 100.0f) {
@@ -397,7 +397,7 @@ void Nav_UpdateVisiblePursuit(Self *actor) {
             brain->player->strafe = -speed;
         } else if (brain->pattern == 1) {
             dir = Wheel_GetDirectionSector(brain->player->yaw - 3.1415927f + 1.5707964f);
-            if (brain->player->slot % 2 == D_800D297C) {
+            if (brain->player->slot % 2 == g_lightingBufferIndex) {
                 Wheel_MeasureWheelClearance(brain->player, dir);
             }
             if (brain->clearance[dir] < 100.0f) {
@@ -418,7 +418,7 @@ void Nav_UpdateVisiblePursuit(Self *actor) {
     }
     if (node != brain->node) {
         brain->node = node;
-        if (Route_GetRouteRelation(D_8013B364, brain->route, node) == 0) {
+        if (Route_GetRouteRelation(g_navigationGraph, brain->route, node) == 0) {
             brain->target = 0;
             Scaled_SetBehaviourState(brain, 2);
         }

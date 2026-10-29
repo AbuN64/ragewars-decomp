@@ -41,7 +41,7 @@ f32 CCollision_DistanceToSegment(CVector3 *a, CVector3 *b, CVector3 *p) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8024192C[1] = {
+unsigned int k_CcollisionDistancetosegmentEncodedWords[1] = {
     0x49546172,
 };
 #endif

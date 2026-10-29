@@ -12,20 +12,20 @@ void Util_HandleTimerInterrupt(void)
     u32 elapsed_cycles;
     u32 *counter;
 
-    if (((OSTimer_s *)D_800D5280)->next == D_800D5280) {
+    if (((OSTimer_s *)g_timerListSentinel)->next == g_timerListSentinel) {
         return;
     }
-    counter = &D_8014FE30;
+    counter = &g_timerLastProcessorCount;
     for (;;) {
-        t = ((OSTimer_s *)D_800D5280)->next;
+        t = ((OSTimer_s *)g_timerListSentinel)->next;
 
-        if (t == D_800D5280) {
-            func_802BD150_de(0);
-            D_8014FE30 = 0;
+        if (t == g_timerListSentinel) {
+            Util_WriteProcessorCompare(0);
+            g_timerLastProcessorCount = 0;
             break;
         }
 
-        count = func_802BCF00_de();
+        count = Util_ReadProcessorCount();
         elapsed_cycles = count - *counter;
         *counter = count;
 
@@ -55,29 +55,29 @@ void Util_HandleTimerInterrupt(void)
 
 
 void Util_InitializeTimerServices(void) {
-    NodeRecAt1C *node = (NodeRecAt1C *)D_800D5280;
+    TimerInterruptNode *node = (TimerInterruptNode *)g_timerListSentinel;
 
-    D_80149B98 = 0;
-    D_80149B90 = 0;
-    D_80149B94 = 0;
-    node->field10 = 0;
-    node->field8 = 0;
+    __osCurrentTime = 0;
+    __osBaseCounter = 0;
+    g_timerServiceCounter = 0;
+    node->value = 0;
+    node->interval = 0;
     node->prev = node;
     node->next = node;
-    node->field18 = 0;
-    node->field1C = 0;
+    node->messageQueue = 0;
+    node->message = 0;
 }
 
 /* Arms the CP0 timer interrupt: with interrupts disabled through func_802BCF30_de, reads the Count
-   register through func_802BCF00_de into D_8014FE30, sets the Compare register through
-   func_802BD150_de to that count plus the requested interval, then restores interrupts. */
+   register through Util_ReadProcessorCount into g_timerLastProcessorCount, sets the Compare register through
+   Util_WriteProcessorCompare to that count plus the requested interval, then restores interrupts. */
 
 void Util_SetTimerInterrupt(u64 interval) {
     u64 compare;
     u32 saved = __osDisableInt();
 
-    D_8014FE30 = func_802BCF00_de();
-    compare = D_8014FE30 + interval;
-    func_802BD150_de(compare);
+    g_timerLastProcessorCount = Util_ReadProcessorCount();
+    compare = g_timerLastProcessorCount + interval;
+    Util_WriteProcessorCompare(compare);
     __osRestoreInt(saved);
 }

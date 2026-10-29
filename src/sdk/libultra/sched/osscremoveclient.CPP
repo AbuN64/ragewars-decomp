@@ -2,41 +2,41 @@
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "sdk/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "sdk/SCHED/osscremoveclient.H"
 #include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "sdk/libgultra/sptaskyield.h"
 #include "sdk/os.h"
 
-s32 func_802BD170_de(s32);
+s32 osSetIntMask(s32);
 
 void osScAddClient(OSSched *scheduler, OSScClientWork *client, OSMesgQueue *messageQueue) {
     s32 savedInterruptMask;
-    savedInterruptMask = func_802BD170_de(1);
+    savedInterruptMask = osSetIntMask(1);
     client->queue = messageQueue;
     client->next = scheduler->clientList;
     scheduler->clientList = client;
-    func_802BD170_de(savedInterruptMask);
+    osSetIntMask(savedInterruptMask);
 }
 
-void osScRemoveClient(OSSched *scheduler, void *arg1) {
+void osScRemoveClient(OSSched *scheduler, void *client) {
     s32 saved;
     OSScClientWork *cur;
     OSScClientWork *prev;
 
     prev = 0;
     cur = scheduler->clientList;
-    saved = func_802BD170_de(1);
+    saved = osSetIntMask(1);
     while (cur != 0) {
-        if (cur == arg1) {
+        if (cur == client) {
             if (prev != 0) {
                 prev->next = cur->next;
             } else {
@@ -47,5 +47,5 @@ void osScRemoveClient(OSSched *scheduler, void *arg1) {
         prev = cur;
         cur = cur->next;
     }
-    func_802BD170_de(saved);
+    osSetIntMask(saved);
 }

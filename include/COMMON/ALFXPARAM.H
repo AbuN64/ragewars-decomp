@@ -5,21 +5,21 @@
 #include "COMMON/OSTHREAD_S.H"
 
 #if defined(VERSION_US_REV1)
-extern const unsigned char D_800C7784_de[];
+extern const unsigned char g_audioResamplerSourceText[];
 #else
-extern const char D_800C7784_de[];
+extern const char g_audioResamplerSourceText[];
 #endif
 
 extern int alFxParam(int *filter, int paramId, int param);
 
 extern s32 s_sirawreadText;
-extern s32 D_800C7A00_de;
-extern s32 D_800C7A04_de;
+extern s32 g_audioAssertionConditionText;
+extern s32 g_audioAssertionSourceText;
 
-extern s32 D_800C7970_de;
+extern s32 g_peripheralReadAssertText;
 extern s32 s_pirawreadText;
 
 
-extern s32 D_800C79B0_de;
+extern s32 g_signalProcessorDmaAssertText;
 extern s32 s_sprawdmaText;
 #endif

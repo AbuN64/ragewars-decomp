@@ -4,9 +4,9 @@
 #include "COMMON/SHAREDPLAYER.H"
 /* XYZ minimum and maximum bounds, copied as a single record. */
 typedef struct ViewFlags { s32 flags; } ViewFlags;
-struct ObjRecAt260 {
+struct CameraObjectPositionView {
     char pad0[0x260];
-    struct Triple unk260;
+    struct Triple position;
 };
 /* Color keyframe payload in a 0x64-byte model-section record. */
 typedef struct ColorBlendRecord {
@@ -14,9 +14,9 @@ typedef struct ColorBlendRecord {
     u8 heldColor[4];
     u32 n, heldN;
     f32 a, b, heldA, heldB;
-    u8 unknown20[4];
+    u8 reservedBytes[4];
     f32 period;
-    u8 unknown28[0x64 - 0x28];
+    u8 reservedBytes1[0x64 - 0x28];
 } ColorBlendRecord;
 struct Overlay {
     char pad0[0x538];
@@ -31,40 +31,40 @@ struct Overlay {
     char pad54E[3];
     u8 alpha;
 };
-struct ObjRecAtE4V1 {
+struct ShakeEmitterChannelView {
     char pad0[0xA8];
-    CVector3 unkA8;
+    CVector3 position;
     char padA8[0xB4 - 0xA8 - sizeof(CVector3)];
-    f32 unkB4;
+    f32 scale;
     char padB4[0xB8 - 0xB4 - sizeof(f32)];
-    s32 unkB8;
+    s32 firstValue;
     char padB8[0xBC - 0xB8 - sizeof(s32)];
-    f32 unkBC;
+    f32 firstRate;
     char padBC[0xCC - 0xBC - sizeof(f32)];
-    s32 unkCC;
+    s32 secondValue;
     char padCC[0xD0 - 0xCC - sizeof(s32)];
-    f32 unkD0;
+    f32 secondRate;
     char padD0[0xE0 - 0xD0 - sizeof(f32)];
-    s32 unkE0;
+    s32 thirdValue;
     char padE0[0xE4 - 0xE0 - sizeof(s32)];
-    f32 unkE4;
+    f32 thirdRate;
 };
-struct State44 {
-    s32 unk_0;
-    s32 unk_4;
-    s32 unk_8;
-    s32 unk_C;
-    s32 unk_10;
-    s32 unk_14;
-    s32 unk_18;
-    s32 unk_1C;
-    union {s32 i; f32 f;} unk_20;
+struct LensFlareEffectState {
+    s32 enabled;
+    s32 stateWordOne;
+    s32 stateWordTwo;
+    s32 stateWordThree;
+    s32 stateWordFour;
+    s32 stateWordFive;
+    s32 stateWordSix;
+    s32 stateWordSeven;
+    union {s32 i; f32 f;} initialScalar;
     CVector3 v;
-    f32 unk_30;
-    s32 unk_34;
-    f32 unk_38;
-    f32 unk_3C;
-    s32 unk_40;
+    f32 scale;
+    s32 stateWordEight;
+    f32 scalarOffset;
+    f32 defaultAngle;
+    s32 defaultStateValue;
 };
 struct ThreeChannels {
     char pad0[0x520];

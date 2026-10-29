@@ -2,7 +2,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "include_asm.h"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
@@ -13,7 +13,7 @@
 #include "COMMON/CHANNEL.H"
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-extern s32 D_800CD730;
+extern s32 g_gameLoopFrameCount;
 
 
 
@@ -36,12 +36,12 @@ void Weaponai_InitializeSwitchAndRequestIdle(void *actor, void *weaponFireState)
             ((Shared_ActorView *)state)->specialChanged = 1;
         }
         ((Shared_ActorView *)state)->selectedAction = unsigned_index;
-        ((WeaponFireState *)weaponFireState)->animation = ((WeaponInfo *)D_800D052C[(s16)unsigned_index])->animation;
-        ((WeaponFireState *)weaponFireState)->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)state)->selectedAction]))->animationCount;
+        ((WeaponFireState *)weaponFireState)->animation = ((WeaponInfo *)g_weaponInfoByType[(s16)unsigned_index])->animation;
+        ((WeaponFireState *)weaponFireState)->animationCount = ((WeaponInfo *)(g_weaponInfoByType[((Shared_ActorView *)state)->selectedAction]))->animationCount;
         owner = ((Shared_ActorView *)state)->message;
-        if ((owner != 0) && ((u32)D_800CD730 >= 5U)) {
-            Camera_PostScreenMessage(&D_80145088, owner,
-                *(void **)*(void **)D_800D052C[((Shared_ActorView *)state)->selectedAction]);
+        if ((owner != 0) && ((u32)g_gameLoopFrameCount >= 5U)) {
+            Camera_PostScreenMessage(&g_frontendScreenStatus, owner,
+                *(void **)*(void **)g_weaponInfoByType[((Shared_ActorView *)state)->selectedAction]);
         }
         ((WeaponFireState *)weaponFireState)->spinStep = 0;
         ((WeaponFireState *)weaponFireState)->spin = 0;
@@ -51,34 +51,34 @@ void Weaponai_InitializeSwitchAndRequestIdle(void *actor, void *weaponFireState)
     Actor_RequestActorState(actor, weaponFireState, 0);
 }
 
-void Weaponai_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *fireState) {
-    s16 temp_s0;
-    u16 temp_s2;
-    void *temp_a1;
-    char *temp_s1;
+void Weaponai_InitializeSwitchForSingleRound(void *actor, WeaponFireState *fireState) {
+    s16 nextWeapon;
+    u16 nextWeaponUnsigned;
+    void *messageOwner;
+    char *player;
 
-    temp_s1 = ((Shared_ActorView *)arg0)->self;
-    temp_s0 = ((Shared_ActorView *)temp_s1)->nextWeapon;
-    temp_s2 = (u16)((Shared_ActorView *)temp_s1)->nextWeapon;
-    if ((((Shared_ActorView *)temp_s1)->selectedAction != temp_s0) || (g_world.mode != 4)) {
-        if (Weapon_IsPrimarySwitchGroup(temp_s0) != 0) {
-            ((Shared_ActorView *)temp_s1)->weaponChanged = 1;
-        } else if (Weapon_IsSecondarySwitchGroup(temp_s0) != 0) {
-            ((Shared_ActorView *)temp_s1)->secondaryChanged = 1;
-        } else if (Weapon_IsSpecialSwitchGroup(temp_s0) != 0) {
-            ((Shared_ActorView *)temp_s1)->specialChanged = 1;
+    player = ((Shared_ActorView *)actor)->self;
+    nextWeapon = ((Shared_ActorView *)player)->nextWeapon;
+    nextWeaponUnsigned = (u16)((Shared_ActorView *)player)->nextWeapon;
+    if ((((Shared_ActorView *)player)->selectedAction != nextWeapon) || (g_world.mode != 4)) {
+        if (Weapon_IsPrimarySwitchGroup(nextWeapon) != 0) {
+            ((Shared_ActorView *)player)->weaponChanged = 1;
+        } else if (Weapon_IsSecondarySwitchGroup(nextWeapon) != 0) {
+            ((Shared_ActorView *)player)->secondaryChanged = 1;
+        } else if (Weapon_IsSpecialSwitchGroup(nextWeapon) != 0) {
+            ((Shared_ActorView *)player)->specialChanged = 1;
         }
-        ((Shared_ActorView *)temp_s1)->selectedAction = temp_s2;
-        fireState->animation = ((WeaponInfo *)(D_800D052C[(s16)temp_s2]))->animation;
-        fireState->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]))->animationCount;
-        temp_a1 = ((Shared_ActorView *)temp_s1)->message;
-        if ((temp_a1 != 0) && ((u32)D_800CD730 >= 5U)) {
-            Camera_PostScreenMessage(&D_80145088, temp_a1,
-                          **(void ***)D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]);
+        ((Shared_ActorView *)player)->selectedAction = nextWeaponUnsigned;
+        fireState->animation = ((WeaponInfo *)(g_weaponInfoByType[(s16)nextWeaponUnsigned]))->animation;
+        fireState->animationCount = ((WeaponInfo *)(g_weaponInfoByType[((Shared_ActorView *)player)->selectedAction]))->animationCount;
+        messageOwner = ((Shared_ActorView *)player)->message;
+        if ((messageOwner != 0) && ((u32)g_gameLoopFrameCount >= 5U)) {
+            Camera_PostScreenMessage(&g_frontendScreenStatus, messageOwner,
+                          **(void ***)g_weaponInfoByType[((Shared_ActorView *)player)->selectedAction]);
         }
         fireState->spinStep = 0;
         fireState->spin = 0;
-        ((Shared_Actor *)arg0)->color = 0;
+        ((Shared_Actor *)actor)->color = 0;
         fireState->charge = 0;
     }
     fireState->mode = 1;
@@ -101,13 +101,13 @@ typedef struct WeaponSlot {
     f32 timer148;
 } WeaponSlot;
 s32 Particle_CountOwnerListOneEffects(s32 *, void *);
-extern s32 D_8011D8D0;
-s32 func_80230058_de(void *owner, void *slot) {
+extern s32 g_actorParticleEffectSystem;
+s32 Weaponai_CanStartFiring(void *owner, void *slot) {
     WeaponOwner *weaponOwner = (WeaponOwner *)owner;
     WeaponSlot *weaponSlot = (WeaponSlot *)slot;
     WeaponPlayer *player = weaponOwner->player;
     if (weaponSlot->delay > 0.0f || !Player_HasAmmoForMode(player, player->mode)) return 0;
-    if ((player->status->flag8F == 1 && D_801462C8.counters.m_bFragTagOn != 0) || player->recoil > 0.0f || player->busy != 0) return 0;
+    if ((player->status->flag8F == 1 && g_gameSettings.counters.m_bFragTagOn != 0) || player->recoil > 0.0f || player->busy != 0) return 0;
     switch ((s16)(player->mode - 1)) {
     case 10:
         if (player->flags6AC & 0x4000) return 0;
@@ -123,7 +123,7 @@ s32 func_80230058_de(void *owner, void *slot) {
         }
         break;
     case 11:
-        if (Particle_CountOwnerListOneEffects(&D_8011D8D0, player) >= 3) return 0;
+        if (Particle_CountOwnerListOneEffects(&g_actorParticleEffectSystem, player) >= 3) return 0;
         break;
     case 0:
         if (weaponSlot->flag144 == 0) return 0;
@@ -132,5 +132,5 @@ s32 func_80230058_de(void *owner, void *slot) {
     return 1;
 }
 #else
-INCLUDE_ASM("span_1000", func_80230058_de);
+INCLUDE_ASM("span_1000", Weaponai_CanStartFiring);
 #endif

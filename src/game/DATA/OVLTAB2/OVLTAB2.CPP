@@ -13,7 +13,7 @@ const char g_levelNavVisionText[20] =
 
 /* 800CA780.CPP */
 #if defined(VERSION_EU_X)
-unsigned int D_auto_rodata_unresolved_800CA780[210] = {
+unsigned int g_playerEffectLightPatternWords[210] = {
     0x03FF0040, 0xFFFF80FF, 0x01FF0080, 0xFFFF80FF, 0x03FF0040, 0x0FFAFFFF, 0x03FF0040, 0x000000FF,
     0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460,
     0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460,
@@ -46,14 +46,14 @@ unsigned int D_auto_rodata_unresolved_800CA780[210] = {
 
 /* 800CAB6C.CPP */
 #if defined(VERSION_EU)
-unsigned int D_auto_rodata_unresolved_800CAB6C[6] = {
+unsigned int k_Ovltab2EncodedWords[6] = {
     0xC3040000, 0x42800000, 0x42800000, 0x41C00000, 0xC1400000, 0xC2400000,
 };
 #endif
 
 /* 8044ACCC_11.CPP */
 #if defined(VERSION_US_REV1)
-const unsigned char D_d0_5a2c6f41918d67e9[13] = {
+const unsigned char k_Ovltab2EncodedBytes[13] = {
     0x6C, 0x65, 0x76, 0x65, 0x6C, 0x73, 0x20, 0x69, 0x6E, 0x64, 0x65, 0x78, 0x00,
 };
 #endif

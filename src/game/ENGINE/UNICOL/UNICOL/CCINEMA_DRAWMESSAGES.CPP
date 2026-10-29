@@ -1,6 +1,6 @@
 #include "COMMON/GROUP.H"
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/TRACK_REQUESTTRACKBYKEY.H"
 #include "COMMON/OBJRECAT4V6.H"
@@ -9,7 +9,7 @@ void CCinema_DrawMessages(void)
 {
   f32 messageScaleY;
   f32 screenScaleX;
-  int new_var2;
+  int unusedMessageIndex;
   f32 messageLineAdvance;
   f32 followingMessageScale;
   f32 messageDrawScale;
@@ -17,55 +17,55 @@ void CCinema_DrawMessages(void)
   f32 messageScaleX;
   s32 messageIndex;
   s32 messageY;
-  s32 new_var;
+  s32 firstMessageIndex;
   s32 screenHeight;
   void *sequenceContext;
-  if ((D_800E2830->messageCount) > 0)
+  if ((g_cinemaSequenceState->messageCount) > 0)
   {
     s32 messageLineHeight;
     s32 messageCenterX;
     messageLineHeight = 0x1A;
-    messageCenterX = D_800E28D0 / 2;
+    messageCenterX = g_hudReferenceViewportWidth / 2;
     OnScreen_SetupTextRendering();
-    screenScaleX = (f32) (D_800E28D0 / 284);
-    messageScaleY = (f32) (D_800E28D4 / 222);
-    screenHeight = D_800E28D4;
+    screenScaleX = (f32) (g_hudReferenceViewportWidth / 284);
+    messageScaleY = (f32) (g_hudReferenceViewportHeight / 222);
+    screenHeight = g_hudReferenceViewportHeight;
     if (screenHeight >= 0xDF)
     {
       messageY = 0xB4;
-      resolutionScale = D_800C37C0_de;
+      resolutionScale = g_cinemaHighResolutionMessageScale;
       messageScaleX = screenScaleX * resolutionScale;
       messageScaleY *= resolutionScale;
     }
     else
     {
       messageY = 0x6E;
-      resolutionScale = D_800C37C4_de;
+      resolutionScale = g_cinemaLowResolutionMessageScale;
       messageScaleX = screenScaleX * resolutionScale;
       messageScaleY *= resolutionScale;
     }
-    new_var = 0;
+    firstMessageIndex = 0;
     OnScreen_SetTextScale(messageScaleX, messageScaleY);
-    sequenceContext = D_800E2830;
-    D_801376F8.shadowX = 1;
-    D_801376F8.shadowY = 1;
-    messageIndex = new_var;
-    if ((((Shared_MenuContext *)(sequenceContext))->messageCount) > new_var)
+    sequenceContext = g_cinemaSequenceState;
+    g_tutorialStatusBars.shadowX = 1;
+    g_tutorialStatusBars.shadowY = 1;
+    messageIndex = firstMessageIndex;
+    if ((((Shared_MenuContext *)(sequenceContext))->messageCount) > firstMessageIndex)
     {
-      new_var2 = 0;
-      messageDrawScale = D_800C37C8_de;
-      followingMessageScale = D_800C37CC_de;
+      unusedMessageIndex = 0;
+      messageDrawScale = g_cinemaFirstMessageScale;
+      followingMessageScale = g_cinemaFollowingMessageScale;
       do
       {
         Onscrn_DrawText(((Shared_MenuContext *)sequenceContext)->messages[messageIndex], messageCenterX, messageY, 0xFF, 1, 1, messageDrawScale, messageDrawScale);
         messageLineAdvance = ((f32) messageLineHeight) * messageScaleY;
-        screenScaleX = (f32) (D_800E28D0 / 284);
-        messageScaleY = ((f32) (D_800E28D4 / 222)) * followingMessageScale;
+        screenScaleX = (f32) (g_hudReferenceViewportWidth / 284);
+        messageScaleY = ((f32) (g_hudReferenceViewportHeight / 222)) * followingMessageScale;
         messageY = (s32) (((f32) messageY) + messageLineAdvance);
         OnScreen_SetTextScale(screenScaleX * followingMessageScale, messageScaleY);
         messageIndex += 1;
       }
-      while (messageIndex < ((Shared_MenuContext *)(sequenceContext = D_800E2830))->messageCount);
+      while (messageIndex < ((Shared_MenuContext *)(sequenceContext = g_cinemaSequenceState))->messageCount);
     }
   }
 }
@@ -74,12 +74,12 @@ s32 CCinema_RequestTrackWithCallbacks(s32 requestId, ContextCallback requestCont
     s32 result;
 
     result = Track_RequestTrackByKey(requestId);
-    if (D_800E2830->requestE0 == requestId) {
-        D_800E2830->callbackE4 = requestContextCallback;
-        D_800E2830->callbackE8 = completionCallback;
+    if (g_cinemaSequenceState->requestE0 == requestId) {
+        g_cinemaSequenceState->callbackE4 = requestContextCallback;
+        g_cinemaSequenceState->callbackE8 = completionCallback;
     } else {
         if (requestContextCallback != 0) {
-            requestContextCallback(D_800E2830);
+            requestContextCallback(g_cinemaSequenceState);
         }
         if (completionCallback != 0) {
             completionCallback();

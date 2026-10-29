@@ -1,19 +1,19 @@
 #include "DATA/OVLTAB7/WEAPONAI_INITIALIZESWITCHANDREQUESTIDLE_DATA.H"
 
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_unresolved_800CF5C0_unclaimed_D1110[7] = {
+unsigned int g_WeaponaiInitializeswitchandrequestidleWords1[7] = {
     0x00000000, 0x00000000, 0x3F800000, 0x3F800000, 0x800CF298, 0x00000000, 0x00000000,
 };
 
-unsigned int D_auto_src_ragewars_weapon_resource_directory_us_rev1[22] = {
+unsigned int g_WeaponResourceDirectoryWords1[22] = {
     0x800CFCEC, 0x800CFE0C, 0x800CFE6C, 0x800CFECC, 0x800CFF2C, 0x800CFF8C, 0x800CFFEC, 0x800D004C,
     0x800D00AC, 0x800D010C, 0x800D016C, 0x800D01CC, 0x800D022C, 0x800D028C, 0x800D02EC, 0x800D034C,
     0x800CFD4C, 0x800CFDAC, 0x800D03AC, 0x800D040C, 0x800D046C, 0x800D04CC,
 };
 
-unsigned int D_auto_rodata_unresolved_800CF5C0_unclaimed_D1184[17] = {
+unsigned int g_WeaponaiInitializeswitchandrequestidlePointerWords1[17] = {
     0x00000000, 0x0BEA0BEB, 0x0BECFFFF, 0x0BED0BEE, 0x0BEF0BF0, 0x800D720C, 0x800D7210, 0x800D7214,
     0x800D7218, 0x800D721C, 0x800D7220, 0x800D7224, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000000,
-    (unsigned int)D_00239FBC,
+    (unsigned int)g_packedCodeAddress24_00239FBC,
 };
 #endif

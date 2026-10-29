@@ -3,7 +3,7 @@
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
 #include "stddef.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/AUDIO/sprintf.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/SOUNDINFO.H"
@@ -18,67 +18,67 @@ s32 Menu_CountLineChars(void *); /* extern */
 s32 Menu_TryCreateMenu(void *, void *, s32); /* extern */
 s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32); /* extern */
 
-s32 Pak_AdjustModelField(OptionEditState *arg0, OptionEditState *arg1, s32 third, s32 wrap, s32 arg4, s32 step, s32 maximum, f32 arg7) {
-    s32 temp_a1_2;
+s32 Pak_AdjustModelField(OptionEditState *label, OptionEditState *menu, s32 third, s32 wrap, s32 fieldOffset, s32 step, s32 maximum, f32 displayDivisor) {
+    s32 modelIndex;
     s32 countValue;
-    s32 temp_s0_2;
-    s32 var_v1;
+    s32 textAddress;
+    s32 modelRecordIndexOrLimit;
     s32 length;
-    u8 *temp_s0;
-    s32 var_s1;
-    OptionEditState *temp_a1;
-    OptionEditState *temp_v0;
+    u8 *fieldAddress;
+    s32 fieldValue;
+    OptionEditState *modelOwner;
+    OptionEditState *selectedObject;
     ResourceManagerState *resourceManager;
-    char *var_a0;
-    var_s1 = 0;
-    if (Control_IsStartPressed(arg1->unk_20) != 0) {
-        return Menu_TryCreateMenu(arg0, arg1, third);
+    char *modelRecord;
+    fieldValue = 0;
+    if (Control_IsStartPressed(menu->unk_20) != 0) {
+        return Menu_TryCreateMenu(label, menu, third);
     }
-    temp_v0 = arg1->unk_1C;
-    if (temp_v0 != NULL) {
-        temp_a1 = temp_v0->unk_5DC;
-        if (temp_a1 != NULL) {
-            temp_a1_2 = temp_a1->unk_58;
-            if (temp_a1_2 != 0) {
-                temp_s0 = Scene_GetModelRecordByIndexPointer(&g_world, temp_a1_2) + arg4;
+    selectedObject = menu->unk_1C;
+    if (selectedObject != NULL) {
+        modelOwner = selectedObject->unk_5DC;
+        if (modelOwner != NULL) {
+            modelIndex = modelOwner->unk_58;
+            if (modelIndex != 0) {
+                fieldAddress = Scene_GetModelRecordByIndexPointer(&g_world, modelIndex) + fieldOffset;
                 switch (wrap) { /* irregular */
                 case 0:
-                    var_s1 = *temp_s0;
-                    var_s1 = Menu_AdjustValue(arg1, var_s1, step, 0, maximum, 1);
-                    *temp_s0 = var_s1;
+                    fieldValue = *fieldAddress;
+                    fieldValue = Menu_AdjustValue(menu, fieldValue, step, 0, maximum, 1);
+                    *fieldAddress = fieldValue;
                     break;
                 case 1:
-                    var_s1 = *(s32 *)temp_s0;
-                    var_s1 = Menu_AdjustValue(arg1, var_s1, step, 0, maximum, wrap);
-                    *(s32 *)temp_s0 = var_s1;
+                    fieldValue = *(s32 *)fieldAddress;
+                    fieldValue = Menu_AdjustValue(menu, fieldValue, step, 0, maximum, wrap);
+                    *(s32 *)fieldAddress = fieldValue;
                     break;
                 case 2:
-                    var_s1 = (s32)*(f32 *)temp_s0;
-                    var_v1 = maximum;
-                    var_s1 = Menu_AdjustValue(arg1, var_s1, step, 0, var_v1, 1);
-                    *(f32 *)temp_s0 = var_s1;
+                    fieldValue = (s32)*(f32 *)fieldAddress;
+                    modelRecordIndexOrLimit = maximum;
+                    fieldValue = Menu_AdjustValue(menu, fieldValue, step, 0, modelRecordIndexOrLimit, 1);
+                    *(f32 *)fieldAddress = fieldValue;
                     break;
                 }
-                temp_s0_2 = *arg0->unk_14;
-                length=Menu_CountLineChars(arg0);
+                textAddress = *label->unk_14;
+                length=Menu_CountLineChars(label);
                 length-=6;
-                func_802BD320_de(temp_s0_2 + length, &g_pakFormatInt06, (s32) ((f32) var_s1 / arg7));
-                if (D_800E63AC != 0) {
+                Libc_FormatString(textAddress + length, &g_pakFormatInt06, (s32) ((f32) fieldValue / displayDivisor));
+                if (g_modelEditorApplyToAllRecords != 0) {
                     resourceManager = SetN64_GetPackSection(g_modelEditPack, 0);
-                    var_v1 = 0;
+                    modelRecordIndexOrLimit = 0;
                     countValue = resourceManager->count;
                     resourceManager=&((OptionEditContext *)(resourceManager))->unk_8;
                     if (countValue > 0) {
                         do {
-                            var_a0 = (char *)resourceManager + var_v1 * 100;
-                            temp_s0 = var_a0 + arg4;
+                            modelRecord = (char *)resourceManager + modelRecordIndexOrLimit * 100;
+                            fieldAddress = modelRecord + fieldOffset;
                             switch(wrap) {
-                            case 0: *temp_s0=var_s1;break;
-                            case 1: *(s32 *)temp_s0=var_s1;break;
-                            case 2: *(f32 *)temp_s0=var_s1;break;
+                            case 0: *fieldAddress=fieldValue;break;
+                            case 1: *(s32 *)fieldAddress=fieldValue;break;
+                            case 2: *(f32 *)fieldAddress=fieldValue;break;
                             }
-                            var_v1 += 1;
-                        } while (var_v1 < countValue);
+                            modelRecordIndexOrLimit += 1;
+                        } while (modelRecordIndexOrLimit < countValue);
                     }
                 }
             }
@@ -89,17 +89,17 @@ s32 Pak_AdjustModelField(OptionEditState *arg0, OptionEditState *arg1, s32 third
 #endif
 
 #if !(defined(VERSION_US))
-/* Calls func_8025E2D4_de with -1, SoundElement_DisableMusicGainOverride, SoundElement_StopMusic and Match_ResetMatchControllerState on D_8011FAC0, and
+/* Calls SoundElement_SetMusicPlaybackEnabled with -1, SoundElement_DisableMusicGainOverride, SoundElement_StopMusic and Match_ResetMatchControllerState on g_gameSession, and
    returns one. */
 #include "COMMON/GAME_SESSION.H"
 
 extern void Match_ResetMatchControllerState(void *);
 
 s32 Pak_StopMusicAndResetMatch(void) {
-    func_8025E2D4_de(-1);
+    SoundElement_SetMusicPlaybackEnabled(-1);
     SoundElement_DisableMusicGainOverride();
     SoundElement_StopMusic();
-    Match_ResetMatchControllerState(&D_8011FAC0);
+    Match_ResetMatchControllerState(&g_gameSession);
     return 1;
 }
 

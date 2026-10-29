@@ -1,33 +1,33 @@
 #include "COMMON/ACTORRESOURCEHEADER.H"
-#include "COMMON/LONE/D_800CA8C4_de.H"
+#include "COMMON/LONE/ACTOR_DEFINITION_TABLE.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PROPGEOMETRY.H"
-#include "FX/80246E34_10.H"
+#include "FX/ACTOR_POSE_ANGLE_TABLE.H"
 #include "particle/GOBJINST_PACKAFFINEMATRIXWORDS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 
-extern f32 Gobjinst_GetActorHeight(Actor_func_8024A1D0_de *actor);
+extern f32 Gobjinst_GetActorHeight(FadedActorRenderView *actor);
 
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 
-extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
+extern SpawnedEffectMotionView *Particle_GetLastSpawnedEffect(void *system);
 
-extern f32 Gobjinst_GetActorRadius(Actor_func_8024A1D0_de *actor);
+extern f32 Gobjinst_GetActorRadius(FadedActorRenderView *actor);
 
 extern void Ghot_DispatchAttachmentEffects(void *effectAttachments, s32 attachmentsRemaining, s32 attachmentMatrices, void *actor, void *attachmentNodes);
 
 
-extern void *D_800CB440_de[];
+extern void *g_actorTypeOperations[];
 
 
 /* Applies a blast from a source to a body when an owner is given: the strength comes from the falloff table
- * D_800D06C0 indexed by the source's remaining charges, times 0.5 and 0.3 and the kind (-2 for kind 5);
+ * g_boneTwistImpulseCurve indexed by the source's remaining charges, times 0.5 and 0.3 and the kind (-2 for kind 5);
  * the body's reversed velocity is placed in its offset transform, an impulse at the source position is
  * built by Graphu64_BuildAxisAngleMatrix and applied through Graphu64_MultiplyAffineMatrices, the velocity is restored onto the body, and
  * the source spends a charge when its owner matches. */
@@ -49,11 +49,11 @@ extern void Graphu64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
 extern void Graphu64_MultiplyAffineMatrices(BodyGobjinstApplyBoneTwistImpulse *, f32 *, f32 *);
 
-extern void Graphu64_InterpolateQuaternionArc(void *out, s32 amount, void *arg2, void *arg3);
+extern void Graphu64_InterpolateQuaternionArc(void *out, s32 amount, void *firstQuaternion, void *secondQuaternion);
 
-void Gobjinst_SpawnAnimatedModelViewEffect(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
+void Gobjinst_SpawnAnimatedModelViewEffect(FadedActorRenderView *actor, ResourceLookupPointerView *lookup) {
     CVector3 position;
-    EffectRecAt154 *effect;
+    SpawnedEffectMotionView *effect;
     f32 scale;
     s32 *node;
 
@@ -62,14 +62,14 @@ void Gobjinst_SpawnAnimatedModelViewEffect(Actor_func_8024A1D0_de *actor, Lookup
         if ((*node != 0) &&
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
-            position.y += Gobjinst_GetActorHeight(actor) * D_800C3B60_de;
-            Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+            position.y += Gobjinst_GetActorHeight(actor) * g_maskedModelViewEffectTuning;
+            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, actor->rotation, position, 0, -1, 0);
-            effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
+            effect = Particle_GetLastSpawnedEffect(&g_actorParticleEffectSystem);
             if (effect != 0) {
-                scale = *(&D_800C3B60_de + 1);
-                effect->field150 = Gobjinst_GetActorRadius(actor) * scale;
-                effect->field154 = Gobjinst_GetActorHeight(actor) * scale;
+                scale = *(&g_maskedModelViewEffectTuning + 1);
+                effect->radius = Gobjinst_GetActorRadius(actor) * scale;
+                effect->height = Gobjinst_GetActorHeight(actor) * scale;
             }
         }
     }
@@ -77,19 +77,19 @@ void Gobjinst_SpawnAnimatedModelViewEffect(Actor_func_8024A1D0_de *actor, Lookup
 
 void Gobjinst_DispatchAttachmentEffects(void *actor, void *modelPack, s32 attachmentMaskIndex, s32 boneMatrices)
 {
-    ObjRecAt17C *object = actor;
-  func_8024C5C4_S2 *attachmentTable;
+    ActorMatrixPackFlagsView *object = actor;
+  AttachmentEventTableView *attachmentTable;
   s32 attachmentCount;
   s32 mask = 1 << attachmentMaskIndex;
-  char *new_var;
-  if ((object->unk17C) & mask)
+  char *attachmentEntries;
+  if ((object->matrixPackFlags) & mask)
   {
     attachmentTable = SetN64_GetPackSection(modelPack, 3);
-    attachmentCount = attachmentTable->unk4;
+    attachmentCount = attachmentTable->entryCount;
     if (attachmentCount != 0)
     {
-      new_var = &attachmentTable->unk8;
-      Ghot_DispatchAttachmentEffects(new_var, attachmentCount, boneMatrices, actor, SetN64_GetPackSection(modelPack, 5));
+      attachmentEntries = &attachmentTable->entries;
+      Ghot_DispatchAttachmentEffects(attachmentEntries, attachmentCount, boneMatrices, actor, SetN64_GetPackSection(modelPack, 5));
     }
   }
 }
@@ -103,14 +103,14 @@ void *Gobjinst_GetActorTypeEntry(char *actorStorage)
     char *object;
     ObjectList *list;
 
-    ObjRecAt18V2 *actor = (void *)actorStorage;
+    ActorKindDefinitionPointerView *actor = (void *)actorStorage;
 
-    type = *actor->unk18;
+    type = *actor->definition;
     if ((unsigned int)type >= 15) {
         return 0;
     }
     if (type == 11) {
-        list = (ObjectList *)&D_80145040;
+        list = (ObjectList *)&g_playerViewRenderContext;
         count = list->count;
         i = 0;
         if (count > 0) {
@@ -121,17 +121,17 @@ void *Gobjinst_GetActorTypeEntry(char *actorStorage)
                     return 0;
                 }
                 if (object + 0x2E8 == actorStorage) {
-                    return D_800CA8C4_de;
+                    return g_actorDefinitionTable;
                 }
                 i++;
                 object += 0x16E8;
             } while (i < limit);
         }
     }
-    return D_800CB440_de[type];
+    return g_actorTypeOperations[type];
 }
 
-void Gobjinst_ApplyBoneTwistImpulse(s32 unused, SourceRecAt18 *source, BodyGobjinstApplyBoneTwistImpulse *body, s32 owner, s32 kind) {
+void Gobjinst_ApplyBoneTwistImpulse(s32 unused, BoneTwistSourceView *source, BodyGobjinstApplyBoneTwistImpulse *body, s32 owner, s32 kind) {
     CVector3 velocity;
     CVector3 position;
     f32 impulse[16];
@@ -147,7 +147,7 @@ void Gobjinst_ApplyBoneTwistImpulse(s32 unused, SourceRecAt18 *source, BodyGobji
     velocity.y = body->velocity.y;
     velocity.z = body->velocity.z;
     position = source->position;
-    strength = D_800D06C0[25 - source->charges] * 0.5f;
+    strength = g_boneTwistImpulseCurve[25 - source->charges] * 0.5f;
     strength *= 0.3f;
     if (kind == 5) {
         strength *= -2.0f;
@@ -192,7 +192,7 @@ void Gobjinst_InterpolatePoseRotation(void *cQuatern, f32 t, void *a, void *b) {
 void Gobjinst_SampleBoneTranslation(void *poseTrack, s32 boneIndex, void *outTranslation) {
     AnimInfo *o = poseTrack;
     CVector3 *out = outTranslation;
-    ObjRecAt2V1 *indices = (void *)o->unk_0;
+    BoneRotationIndexPair *indices = (void *)o->unk_0;
     s16 idx;
     CROMInitialOrientation_t *recs;
     f32 *base;
@@ -223,7 +223,7 @@ void Gobjinst_SampleBoneRotation(void *poseTrack, s32 boneIndex, CQuatern *outRo
     void *base;
     char *a;
 
-    idx = ((struct ObjRecAt2V1 *) (((AnimInfo *) o)->unk_0 + (boneIndex * 4)))->unk2;
+    idx = ((struct BoneRotationIndexPair *) (((AnimInfo *) o)->unk_0 + (boneIndex * 4)))->rotationIndex;
     if (idx == -1) {
         f32 scale;
         rec = ((AnimInfo *)(o))->unk_4 + boneIndex * 0x14;
@@ -247,77 +247,77 @@ void Gobjinst_SampleBoneRotation(void *poseTrack, s32 boneIndex, CQuatern *outRo
     }
 }
 
-void Gobjinst_SampleInterpolatedBoneRotation(ObjectLinks24_2 *arg0, s32 arg1, CQuatern *arg2) {
-    ObjectLinks24_2 *o = arg0;
-    ObjRecAt2V1 *indices;
+void Gobjinst_SampleInterpolatedBoneRotation(BoneRotationTrackView *animation, s32 boneIndex, CQuatern *rotationOut) {
+    BoneRotationTrackView *o = animation;
+    BoneRotationIndexPair *indices;
     s16 idx;
     CROMInitialOrientation_t *rec;
     void *base;
     f32 scale;
 
     indices = (void *)o->unk_0;
-    idx = indices[arg1].unk2;
+    idx = indices[boneIndex].rotationIndex;
     if (idx == -1) {
-        rec = (void *)(o->unk_4 + arg1 * 0x14);
-        scale = D_800C3B7C;
-        arg2->x = (f32)rec->unk_C * scale;
-        arg2->y = (f32)rec->m_RotY * scale;
-        arg2->z = (f32)rec->unk_10 * scale;
-        arg2->w = (f32)rec->unk_12 * scale;
+        rec = (void *)(o->unk_4 + boneIndex * 0x14);
+        scale = g_maskedModelViewEffectScale;
+        rotationOut->x = (f32)rec->unk_C * scale;
+        rotationOut->y = (f32)rec->m_RotY * scale;
+        rotationOut->z = (f32)rec->unk_10 * scale;
+        rotationOut->w = (f32)rec->unk_12 * scale;
         return;
     }
     base = SetN64_GetPackSection(o->unk_C, (s32)idx);
-    Graphu64_InterpolateQuaternionArc(arg2, o->unk_20,
+    Graphu64_InterpolateQuaternionArc(rotationOut, o->unk_20,
                     (char *)base + o->unk_10 * 4,
                     (char *)base + o->unk_14 * 4);
 }
 
-/* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from Graphu64_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the D_800C8C70 thresholds changed. */
+/* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from Graphu64_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the g_affinePackUnsignedThresholdsRowZero thresholds changed. */
 void Gobjinst_PackAffineMatrixWords(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     s32 a;
     s32 b;
-    { f32 value = (src[0]); if (!((D_800C8C70) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (D_800C8C70)); (a) |= 0x80000000; } };
-    { f32 value = (src[1]); if (!((*(&D_800C8C70 + 1)) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - (*(&D_800C8C70 + 1))); (b) |= 0x80000000; } };
+    { f32 value = (src[0]); if (!((g_affinePackUnsignedThresholdsRowZero) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (g_affinePackUnsignedThresholdsRowZero)); (a) |= 0x80000000; } };
+    { f32 value = (src[1]); if (!((*(&g_affinePackUnsignedThresholdsRowZero + 1)) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - (*(&g_affinePackUnsignedThresholdsRowZero + 1))); (b) |= 0x80000000; } };
     *upper = (a & 0xFFFF0000) | ((u32)b >> 16);
     *lower = (a << 16) | (b & 0xFFFF);
     upper++;
     lower++;
-    { f32 value = (src[2]); if (!((D_800C3B88) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (D_800C3B88)); (a) |= 0x80000000; } };
+    { f32 value = (src[2]); if (!((g_affinePackUnsignedThresholdsRowOne) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (g_affinePackUnsignedThresholdsRowOne)); (a) |= 0x80000000; } };
     *upper = a & 0xFFFF0000;
     *lower = a << 16;
     upper++;
     lower++;
-    { f32 value = (src[4]); if (!((*(&D_800C3B88 + 1)) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (*(&D_800C3B88 + 1))); (a) |= 0x80000000; } };
-    { f32 value = (src[5]); if (!((D_800C3B90) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - (D_800C3B90)); (b) |= 0x80000000; } };
+    { f32 value = (src[4]); if (!((*(&g_affinePackUnsignedThresholdsRowOne + 1)) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (*(&g_affinePackUnsignedThresholdsRowOne + 1))); (a) |= 0x80000000; } };
+    { f32 value = (src[5]); if (!((g_affinePackUnsignedThresholdsRowTwo) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - (g_affinePackUnsignedThresholdsRowTwo)); (b) |= 0x80000000; } };
     *upper = (a & 0xFFFF0000) | ((u32)b >> 16);
     *lower = (a << 16) | (b & 0xFFFF);
     upper++;
     lower++;
-    { f32 value = (src[6]); if (!((*(&D_800C3B90 + 1)) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (*(&D_800C3B90 + 1))); (a) |= 0x80000000; } };
+    { f32 value = (src[6]); if (!((*(&g_affinePackUnsignedThresholdsRowTwo + 1)) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (*(&g_affinePackUnsignedThresholdsRowTwo + 1))); (a) |= 0x80000000; } };
     *upper = a & 0xFFFF0000;
     *lower = a << 16;
     upper++;
     lower++;
-    { f32 value = (src[8]); if (!((D_800C3B98) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (D_800C3B98)); (a) |= 0x80000000; } };
-    { f32 value = (src[9]); if (!((*(&D_800C3B98 + 1)) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - (*(&D_800C3B98 + 1))); (b) |= 0x80000000; } };
+    { f32 value = (src[8]); if (!((g_affinePackUnsignedThresholdsRowThree) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (g_affinePackUnsignedThresholdsRowThree)); (a) |= 0x80000000; } };
+    { f32 value = (src[9]); if (!((*(&g_affinePackUnsignedThresholdsRowThree + 1)) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - (*(&g_affinePackUnsignedThresholdsRowThree + 1))); (b) |= 0x80000000; } };
     *upper = (a & 0xFFFF0000) | ((u32)b >> 16);
     *lower = (a << 16) | (b & 0xFFFF);
     upper++;
     lower++;
-    { f32 value = (src[10]); if (!((D_800C3BA0_de) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (D_800C3BA0_de)); (a) |= 0x80000000; } };
+    { f32 value = (src[10]); if (!((g_affinePackUnsignedThresholdsTranslationXY) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (g_affinePackUnsignedThresholdsTranslationXY)); (a) |= 0x80000000; } };
     *upper = a & 0xFFFF0000;
     *lower = a << 16;
     upper++;
     lower++;
-    { f32 value = (src[12]); if (!((*(&D_800C3BA0_de + 1)) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (*(&D_800C3BA0_de + 1))); (a) |= 0x80000000; } };
-    { f32 value = (src[13]); if (!((D_800C3BA8) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - (D_800C3BA8)); (b) |= 0x80000000; } };
+    { f32 value = (src[12]); if (!((*(&g_affinePackUnsignedThresholdsTranslationXY + 1)) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (*(&g_affinePackUnsignedThresholdsTranslationXY + 1))); (a) |= 0x80000000; } };
+    { f32 value = (src[13]); if (!((g_affinePackUnsignedThresholdsTranslationZ) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - (g_affinePackUnsignedThresholdsTranslationZ)); (b) |= 0x80000000; } };
     *upper = (a & 0xFFFF0000) | ((u32)b >> 16);
     *lower = (a << 16) | (b & 0xFFFF);
     upper++;
     lower++;
-    { f32 value = (src[14]); if (!((*(&D_800C3BA8 + 1)) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (*(&D_800C3BA8 + 1))); (a) |= 0x80000000; } };
+    { f32 value = (src[14]); if (!((*(&g_affinePackUnsignedThresholdsTranslationZ + 1)) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - (*(&g_affinePackUnsignedThresholdsTranslationZ + 1))); (a) |= 0x80000000; } };
     *upper = (a & 0xFFFF0000) | 1;
     *lower = a << 16;
 }

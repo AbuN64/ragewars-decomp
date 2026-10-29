@@ -11,14 +11,14 @@
 extern void Menu_ReturnToPreviousScreen(void);
 
 
-typedef s32 (*MenuElementHandler)(void *element, s32 event, s32 arg2, s32 arg3, s32 arg4);
+typedef s32 (*MenuElementHandler)(void *element, s32 event, s32 eventPayload, s32 eventValue, s32 eventExtra);
 
 struct Element;
-struct NodeRecAt12;
+struct ScreenEventTreeNode;
 struct Element {
     char pad0[4];
-    struct NodeRecAt12 *left; /* 0x4 */
-    struct NodeRecAt12 *right; /* 0x8 */
+    struct ScreenEventTreeNode *left; /* 0x4 */
+    struct ScreenEventTreeNode *right; /* 0x8 */
     s16 id;
     u16 kind;
     u16 field10;
@@ -60,13 +60,13 @@ extern void Menu_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handle
 
 extern int g_dispatchingScreenOwner;
 
-struct Entry_func_80298170_de;
-struct Entry_func_80298170_de {
+struct MenuObjectContextEntry;
+struct MenuObjectContextEntry {
     s32 id;
     struct Element *object;
     s32 context;
 };
-struct Entry_func_80298170_de;
+struct MenuObjectContextEntry;
 
 extern void Menu_DestroyScreenManager(void);
 
@@ -99,7 +99,7 @@ extern int g_screenDrawWidth;
 
 
 
-extern double D_800C5680_de;
+extern double g_menuTimeTickScale;
 
 
 struct ScreenManager;
@@ -108,7 +108,7 @@ struct ScreenManager;
 
 struct ScreenManager;
 
-extern s32 Menu_InvokeKindEventHandler(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Menu_InvokeKindEventHandler(void *widget, s32 event, s32 itemId, s32 value, s32 context);
 
 extern unsigned int Menu_GetScreenStackDepth(void);
 
@@ -116,13 +116,13 @@ extern int g_screenDrawHeight;
 
 
 
-extern void Menu_SetPagingEnabled(s32 arg0);
+extern void Menu_SetPagingEnabled(s32 enabled);
 
 struct ScreenManager;
 
-extern double D_800C5668_de;
+extern double g_screenManagerFrameScale;
 
-extern float D_800C5678_de;
+extern float g_menuDefaultEventWord;
 
 
 struct ObjRecAt40V1;
@@ -151,7 +151,7 @@ struct ScreenManager;
 
 extern int g_menuElementLoadPeak;
 
-extern void Menu_SetKindHandlerFlags(s32 arg0, s32 arg1);
+extern void Menu_SetKindHandlerFlags(s32 kind, s32 flags);
 
 
 extern void Menu_DrawScreenStack(void);
@@ -171,13 +171,13 @@ struct ScreenManager {
     s32 frames;
     s32 focus;
     s32 paging;
-    s32 field530;
-    s32 field534;
-    s32 field538;
-    struct Entry_func_80298170_de *cache;
+    s32 screenChangePending;
+    s32 eventArgument0;
+    s32 eventArgument1;
+    struct MenuObjectContextEntry *cache;
     s32 cacheCount;
 };
-extern ScreenManager *D_8014D080;
+extern ScreenManager *g_screenManager;
 
 struct ArgsCode80296014;
 typedef struct ArgsCode80296014 ArgsCode80296014;
@@ -190,46 +190,46 @@ typedef struct Widget Widget;
 
 /* Callable low-address aliases of the native code providers. The cartridge
  * registers these entry addresses, not overlay file ranges or data objects. */
-/* D_002A1B50: N64Eng_DispatchNumericWidgetEvent */
-extern s32 D_002A1B50(void *, s32, s32, s32, s32);
-/* D_002A1BE0: N64Eng_DrawNumericWidgetChildren */
-extern void D_002A1BE0();
-/* D_0040C5C0: second return stub in func_8040C5B8_de (+8) */
-extern s32 D_0040C5C0(void *, s32, s32, s32, s32);
-/* D_0040C5C8: Menu_DrawClippedWidgetSiblings */
-extern void D_0040C5C8();
-/* D_004125A4: Node_DispatchTypedWidgetEvent */
-extern s32 D_004125A4(void *, s32, s32, s32, s32);
-/* D_00412634: Node_DrawGridListCells */
-extern void D_00412634();
-/* D_00419A4C: SmpFrameAnim_DispatchEvent */
-extern s32 D_00419A4C(void *, s32, s32, s32, s32);
-/* D_00419ADC: SmpFrameAnim_IgnoreEvent */
-extern void D_00419ADC();
-/* D_00419F9C: SmpFlicker_DispatchEvent */
-extern s32 D_00419F9C(void *, s32, s32, s32, s32);
-/* D_0041A02C: SmpFlicker_IgnoreEvent */
-extern void D_0041A02C();
-/* D_0041A490: SmpSlider_DispatchTransitionEvent */
-extern s32 D_0041A490(void *, s32, s32, s32, s32);
-/* D_0041A520: SmpSlider_IgnoreFormattedMessage */
-extern void D_0041A520();
-/* D_0041A724: SmpSlider_DispatchSliderEvent */
-extern s32 D_0041A724(void *, s32, s32, s32, s32);
-/* D_0041A7B4: func_8041A7B4_de */
-extern void D_0041A7B4();
-/* D_0041AD7C: SmpButton_DispatchListEvent */
-extern s32 D_0041AD7C(void *, s32, s32, s32, s32);
-/* D_0041AE0C: func_8041AE0C_de */
-extern void D_0041AE0C();
-/* D_0041B340: SmpButton_DispatchButtonEvent */
-extern s32 D_0041B340(void *, s32, s32, s32, s32);
-/* D_0041B3D0: func_8041B3D0_de */
-extern void D_0041B3D0();
-/* D_0041B970: SmpOverlay_DispatchSlotEvent */
-extern s32 D_0041B970(void *, s32, s32, s32, s32);
-/* D_0041BA00: func_8041BA00_de */
-extern void D_0041BA00();
+/* N64Eng_DispatchNumericWidgetEvent_Address: N64Eng_DispatchNumericWidgetEvent */
+extern s32 N64Eng_DispatchNumericWidgetEvent_Address(void *, s32, s32, s32, s32);
+/* N64Eng_DrawNumericWidgetChildren_Address: N64Eng_DrawNumericWidgetChildren */
+extern void N64Eng_DrawNumericWidgetChildren_Address();
+/* Menu_KindNineDrawHandlerAddress: second return stub in func_8040C5B8_de (+8) */
+extern s32 Menu_KindNineDrawHandlerAddress(void *, s32, s32, s32, s32);
+/* Menu_KindNineEventHandlerAddress: Menu_DrawClippedWidgetSiblings */
+extern void Menu_KindNineEventHandlerAddress();
+/* Menu_KindElevenDrawHandlerAddress: Node_DispatchTypedWidgetEvent */
+extern s32 Menu_KindElevenDrawHandlerAddress(void *, s32, s32, s32, s32);
+/* Menu_KindElevenEventHandlerAddress: Node_DrawGridListCells */
+extern void Menu_KindElevenEventHandlerAddress();
+/* g_SmpFrameAnim_DispatchEventAddress: SmpFrameAnim_DispatchEvent */
+extern s32 g_SmpFrameAnim_DispatchEventAddress(void *, s32, s32, s32, s32);
+/* g_SmpFrameAnim_IgnoreEventAddress: SmpFrameAnim_IgnoreEvent */
+extern void g_SmpFrameAnim_IgnoreEventAddress();
+/* g_SmpFlicker_DispatchEventAddress: SmpFlicker_DispatchEvent */
+extern s32 g_SmpFlicker_DispatchEventAddress(void *, s32, s32, s32, s32);
+/* g_SmpFlicker_IgnoreEventAddress: SmpFlicker_IgnoreEvent */
+extern void g_SmpFlicker_IgnoreEventAddress();
+/* g_SmpSlider_DispatchTransitionEventAddress: SmpSlider_DispatchTransitionEvent */
+extern s32 g_SmpSlider_DispatchTransitionEventAddress(void *, s32, s32, s32, s32);
+/* g_SmpSlider_IgnoreFormattedMessageAddress: SmpSlider_IgnoreFormattedMessage */
+extern void g_SmpSlider_IgnoreFormattedMessageAddress();
+/* g_SmpSlider_DispatchSliderEventAddress: SmpSlider_DispatchSliderEvent */
+extern s32 g_SmpSlider_DispatchSliderEventAddress(void *, s32, s32, s32, s32);
+/* g_SmpSlider_DrawSliderWidgetAddress: func_8041A7B4_de */
+extern void g_SmpSlider_DrawSliderWidgetAddress();
+/* g_SmpButton_DispatchListEventAddress: SmpButton_DispatchListEvent */
+extern s32 g_SmpButton_DispatchListEventAddress(void *, s32, s32, s32, s32);
+/* g_SmpButton_DrawListWidgetAddress: func_8041AE0C_de */
+extern void g_SmpButton_DrawListWidgetAddress();
+/* g_SmpButton_DispatchButtonEventAddress: SmpButton_DispatchButtonEvent */
+extern s32 g_SmpButton_DispatchButtonEventAddress(void *, s32, s32, s32, s32);
+/* g_SmpButton_DrawButtonWidgetAddress: func_8041B3D0_de */
+extern void g_SmpButton_DrawButtonWidgetAddress();
+/* g_SmpOverlay_DispatchSlotEventAddress: SmpOverlay_DispatchSlotEvent */
+extern s32 g_SmpOverlay_DispatchSlotEventAddress(void *, s32, s32, s32, s32);
+/* g_SmpOverlay_DrawOverlayWidgetAddress: func_8041BA00_de */
+extern void g_SmpOverlay_DrawOverlayWidgetAddress();
 
 extern s32 GetMenuScreenOwner(void);
 #endif

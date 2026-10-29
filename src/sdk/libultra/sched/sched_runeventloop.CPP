@@ -1,27 +1,27 @@
 #include "sdk/libgultra/viblack.h"
-#include "COMMON/EXTERNS_18.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SOUNDINFO.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "TYPES.H"
 #include "sdk/libgultra.h"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "FRONTEND/SCREEN_VIDEO_MODE.H"
 #include "sdk/AUDIO/visetmode.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "sdk/os.h"
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
-extern void Sched_HandleRetrace(void *arg0);
+extern void Sched_HandleRetrace(void *scheduler);
 
-extern void Sched_HandleRdpCompletion(void *arg0);
+extern void Sched_HandleRdpCompletion(void *scheduler);
 extern void Sched_HandleTaskCommands(void *scheduler);
 
 
-extern void *func_8025CC6C_de(void);
-extern void func_8025CBEC_de(void *soundVoicePool);
+extern void *SoundVoicePool_GetGlobalState(void);
+extern void SoundVoicePool_StopAll(void *soundVoicePool);
 
 extern void osViSetMode(void *modep);
 
@@ -33,8 +33,8 @@ extern void osViSetMode(void *modep);
 
 
 
-void Sched_RunEventLoop(void *arg0) {
-    OSSched *scheduler = arg0;
+void Sched_RunEventLoop(void *schedulerStorage) {
+    OSSched *scheduler = schedulerStorage;
     s32 event;
     OSScClientWork *node;
     void *resource;
@@ -63,13 +63,13 @@ loop_2:
     goto loop_2;
 
 event_29a:
-    if (D_800CD708 != 0) {
-        D_800CD70C--;
-        if (D_800CD70C <= 0) {
-            osViSetYScale(D_800C5350_de);
-            resource = &D_800D47B0;
-            if (D_800E28D8 == 0) {
-                resource = &D_800D4530;
+    if (g_schedulerShutdownPending != 0) {
+        g_schedulerFrameCountdown--;
+        if (g_schedulerFrameCountdown <= 0) {
+            osViSetYScale(g_schedulerVideoYScale);
+            resource = &g_schedulerAlternateVideoMode;
+            if (g_frontendCurrentVideoModeIndex == 0) {
+                resource = &g_videoModeLabels;
             }
             osViSetMode(resource);
             osViBlack(1);
@@ -93,10 +93,10 @@ event_29c:
 event_29d:
     SoundElement_FadeOutMusic();
     SoundElement_StopAudioExceptKey(-1);
-    func_8025CBEC_de(func_8025CC6C_de());
+    SoundVoicePool_StopAll(SoundVoicePool_GetGlobalState());
     node = scheduler->clientList;
-    D_800CD708 = 1;
-    D_800CD70C = 0x14;
+    g_schedulerShutdownPending = 1;
+    g_schedulerFrameCountdown = 0x14;
     if (node != 0) {
         do {
             osSendMesg(node->queue, &scheduler->retraceMessage, 0);

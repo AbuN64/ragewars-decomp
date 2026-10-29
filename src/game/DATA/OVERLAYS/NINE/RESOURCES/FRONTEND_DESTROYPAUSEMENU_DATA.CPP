@@ -2,7 +2,7 @@
 
 /* 800E5550.CPP */
 /* ROM-grounded data: rodata/writable/800E5550 */
-unsigned int D_blob_phase2_b9244dfa9e33039adae0[3] = {
+unsigned int g_FrontendDestroypausemenuWords1[3] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
@@ -54,18 +54,18 @@ unsigned int D_src_2527d91d[77] = {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-extern char D_00435D14[];
-extern char D_00435DE0[];
-extern char D_00435E20[];
-extern char D_00435E40[];
-extern char D_00435E48[];
-extern char D_00435E50[];
-extern char D_00435E98[];
-extern char D_00435EB8[];
-unsigned int D_blob_e5d3a98b99e95fa6a111[27] = {
-    0x00000E07, 0x00000001, (unsigned int)D_00435E20, 0x00000E08, 0x00000001, (unsigned int)D_00435E48, 0x00000E0A, 0x00000001,
-    (unsigned int)D_00435E40, 0x00000E06, 0x00000001, (unsigned int)D_00435D14, 0x00000E03, 0x00000001, (unsigned int)D_00435DE0, 0x00000001,
-    0x00000001, (unsigned int)D_00435EB8, 0x00000002, 0x00000001, (unsigned int)D_00435E98, 0x0000000A, 0x00000001, (unsigned int)D_00435E50,
+extern char g_Frontend_CreatePauseMenuPackedAddress242[];
+extern char g_Frontend_DestroyPauseMenuPackedAddress242[];
+extern char g_Frontend_SetPauseMenuInputModePackedAddress242[];
+extern char g_Frontend_ReturnPauseEventZeroPackedAddress242[];
+extern char g_Frontend_ReturnPauseEventZeroAltPackedAddress242[];
+extern char g_Frontend_ResumeMatchOnInputPackedAddress242[];
+extern char g_Frontend_ConsumePauseMenuEventPackedAddress242[];
+extern char g_Frontend_ActivatePauseMenuActionPackedAddress242[];
+unsigned int g_FrontendDestroypausemenuPointerWords1[27] = {
+    0x00000E07, 0x00000001, (unsigned int)g_Frontend_SetPauseMenuInputModePackedAddress242, 0x00000E08, 0x00000001, (unsigned int)g_Frontend_ReturnPauseEventZeroAltPackedAddress242, 0x00000E0A, 0x00000001,
+    (unsigned int)g_Frontend_ReturnPauseEventZeroPackedAddress242, 0x00000E06, 0x00000001, (unsigned int)g_Frontend_CreatePauseMenuPackedAddress242, 0x00000E03, 0x00000001, (unsigned int)g_Frontend_DestroyPauseMenuPackedAddress242, 0x00000001,
+    0x00000001, (unsigned int)g_Frontend_ActivatePauseMenuActionPackedAddress242, 0x00000002, 0x00000001, (unsigned int)g_Frontend_ConsumePauseMenuEventPackedAddress242, 0x0000000A, 0x00000001, (unsigned int)g_Frontend_ResumeMatchOnInputPackedAddress242,
     0x00000000, 0x00000000, 0x00000000,
 };
 #endif

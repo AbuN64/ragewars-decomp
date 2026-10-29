@@ -4,21 +4,21 @@
 #include "TYPES.H"
 #include "sdk/os.h"
 
-/** Returns D_800D8440. */
-extern void *D_800D8440;
+/** Returns g_currentVideoInterfaceContext. */
+extern void *g_currentVideoInterfaceContext;
 
 void *System_GetCurrentVideoContext(void) {
-    return D_800D8440;
+    return g_currentVideoInterfaceContext;
 }
 
-extern void *D_800D4414;
+extern void *g_nextVideoInterfaceContext;
 
 void System_SetVideoEvent(s32 messageQueue, s32 retraceMessage, s16 retraceInterval) {
     u32 savedInterruptMask;
     RecCode802BA23C *rec;
 
     savedInterruptMask = __osDisableInt();
-    rec = D_800D4414;
+    rec = g_nextVideoInterfaceContext;
     rec->f10 = messageQueue;
     rec->f14 = retraceMessage;
     rec->f2 = retraceInterval;
@@ -26,6 +26,6 @@ void System_SetVideoEvent(s32 messageQueue, s32 retraceMessage, s16 retraceInter
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BA5D8[8] =
+char s_onEnemyMemberNameFragment[8] =
     "m_OnEnem";
 #endif

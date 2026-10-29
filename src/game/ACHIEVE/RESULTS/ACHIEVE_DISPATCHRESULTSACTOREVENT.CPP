@@ -5,7 +5,7 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/MENUSELECTIONMESSAGE.H"
 #include "TYPES.H"
@@ -19,33 +19,33 @@ s32 Achieve_AcknowledgeResultsEvent(void) {
     return 0;
 }
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5834, an actor kind at D_800E5838 and a handler at D_800E583C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_resultsActorEventIds, an actor kind at g_resultsActorEventKinds and a handler at g_resultsActorEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8043905C)(void *, s32, s32, s32, s32);
 
 
-extern Handler8043905C D_800E583C;
+extern Handler8043905C g_resultsActorEventHandlers;
 
 
 
 
-s32 Achieve_DispatchResultsActorEvent(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Achieve_DispatchResultsActorEvent(ActorDefinitionHeader *actor, s32 event, s32 itemId, s32 value, s32 context) {
     Handler8043905C *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E583C != 0) {
+    if (g_resultsActorEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E583C;
+        entry = &g_resultsActorEventHandlers;
         index = 0;
         do {
-            if (D_800E5834[index].value == event) {
+            if (g_resultsActorEventIds[index].value == event) {
                 actor_kind = actor->character;
-                table_kind = D_800E5838[index].value;
+                table_kind = g_resultsActorEventKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(actor, event, arg2, arg3, arg4);
+                    return (*entry)(actor, event, itemId, value, context);
                 }
             }
             entry += 3;

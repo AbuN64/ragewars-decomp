@@ -1,7 +1,7 @@
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -13,7 +13,7 @@
 #include "sdk/os.h"
 #include "TEXTURE/SOUND_UPDATEAUDIOCONTEXT.H"
 
-extern f32 D_800C3EE0_de;
+extern f32 g_audioContextGainScaleConstants;
 
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "AUDIO/VOICE.H"
@@ -39,16 +39,16 @@ extern void *Gsky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3
 
 s32 Sound_UpdateAudioContext(void *context) {
     char *object = context;
-    u8 *bytes = &D_801462C8.volume[1];
+    u8 *bytes = &g_gameSettings.volume[1];
     char *queue;
     u32 mask;
     s32 count;
 
-    ((struct ContextRecAt2BC0 *)(object))->red = (f32)bytes[0] * D_800C3EE0_de;
-    ((struct ContextRecAt2BC0 *)(object))->green = (f32)bytes[-1] * D_800C3EE0_de;
-    ((struct ContextRecAt2BC0 *)(object))->blue = (f32)bytes[1] * D_800C3EE0_de;
+    ((struct GameAudioContext *)(object))->red = (f32)bytes[0] * g_audioContextGainScaleConstants;
+    ((struct GameAudioContext *)(object))->green = (f32)bytes[-1] * g_audioContextGainScaleConstants;
+    ((struct GameAudioContext *)(object))->blue = (f32)bytes[1] * g_audioContextGainScaleConstants;
     queue = object + 0x110;
-    ((struct ContextRecAt2BC0 *)(object))->field2BB0 = bytes[-2];
+    ((struct GameAudioContext *)(object))->spatialPanMode = bytes[-2];
     mask = __osDisableInt();
     count = ((MenuRules *)(queue))->locked + 1;
     ((MenuRules *)(queue))->locked = count;
@@ -59,7 +59,7 @@ s32 Sound_UpdateAudioContext(void *context) {
         __osRestoreInt(mask);
     }
 
-    Audio_UpdateVoicePool(&((struct ContextRecAt2BC0 *)(object))->menu[0]);
+    Audio_UpdateVoicePool(&((struct GameAudioContext *)(object))->menu[0]);
     {
         char *queue2 = object + 0x110;
         u32 mask2 = __osDisableInt();
@@ -81,9 +81,9 @@ s32 Sound_UpdateAudioContext(void *context) {
     Audio_UpdateMusicPlayback(queue);
 
     if (D_800CB720 != 0 &&
-        ((struct ContextRecAt2BC0 *)(object))->field2BB4 != 0 &&
+        ((struct GameAudioContext *)(object))->spatialAudioEnabled != 0 &&
         SetN64_IsModeThirteen() != 0 &&
-        ((struct ContextRecAt2BC0 *)(object))->track > 0) {
+        ((struct GameAudioContext *)(object))->track > 0) {
         CVector3 zero;
         void *result;
         CVector3 *vec;
@@ -91,13 +91,13 @@ s32 Sound_UpdateAudioContext(void *context) {
         zero.z = 0.0f;
         zero.y = 0.0f;
         zero.x = 0.0f;
-        result = Gsky_FindNearestCamera(&D_80145088, &zero);
-        vec = &((struct SharedRecAt564V1 *)(result))->position;
-        if ((((struct ContextRecAt2BC0 *)(object))->frame & 3) == 0) {
-            Sound_PlaySoundAtPosition(object, ((struct ContextRecAt2BC0 *)(object))->track, *vec, 0, -1);
+        result = Gsky_FindNearestCamera(&g_frontendScreenStatus, &zero);
+        vec = &((struct PlayerCameraTargetView *)(result))->position;
+        if ((((struct GameAudioContext *)(object))->frame & 3) == 0) {
+            Sound_PlaySoundAtPosition(object, ((struct GameAudioContext *)(object))->track, *vec, 0, -1);
         }
     }
-    return ++((struct ContextRecAt2BC0 *)(object))->frame;
+    return ++((struct GameAudioContext *)(object))->frame;
 }
 
 extern s32 Audio_HasVoiceOrReservedSlotWithKey(void *record, s32 value);
@@ -108,7 +108,7 @@ extern s32 AudioWorld_HasPendingSoundWithKey(void *channelOwner, s32 wantedKey);
 
 
 
-s32 Sound_HasActiveOrPendingSound(struct ContextRecAt2BC0 *context, s32 queryValue) {
+s32 Sound_HasActiveOrPendingSound(struct GameAudioContext *context, s32 queryValue) {
     {
         MenuRules *contextLock;
         s32 lockClaimCount;
@@ -189,7 +189,7 @@ void Sound_AcquireContextLock(s32 *engine) {
     s32 claimCount;
     u32 mask;
 
-    menuRules = &((struct ContextRecAt2BC0 *)(engine))->lock;
+    menuRules = &((struct GameAudioContext *)(engine))->lock;
     mask = __osDisableInt();
     claimCount = menuRules->locked + 1;
     menuRules->locked = claimCount;
@@ -212,7 +212,7 @@ void Sound_ReleaseContextLock(s32 *engine) {
     s32 remainingClaims;
     u32 mask;
 
-    menuRules = &((struct ContextRecAt2BC0 *)(engine))->lock;
+    menuRules = &((struct GameAudioContext *)(engine))->lock;
     mask = __osDisableInt();
     remainingClaims = menuRules->locked - 1;
     menuRules->locked = remainingClaims;

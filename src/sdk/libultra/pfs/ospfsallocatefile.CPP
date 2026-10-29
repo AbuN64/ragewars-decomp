@@ -1,6 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
-#include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "TYPES.H"
 #include "sdk/PFS/ospfsallocatefile.H"
 #include "sdk/PFS/ospfsfreeblocks.H"

@@ -1,0 +1,3 @@
+#if defined(VERSION_DE)
+unsigned char g_AudioGermanInstructionTailTrailingBytes[8] = { 0xAF, 0xB0, 0x00, 0x10, 0x3C, 0x10, 0x80, 0x15 };
+#endif

@@ -1,6 +1,6 @@
 #include "COMMON/TRIPLE.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 
 /* Advance the two measured oscillator phases and apply their velocity deltas. */
 
@@ -12,61 +12,61 @@
 extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-void Particle_UpdateSineMotion(void *particle, f32 arg1) {
+void Particle_UpdateSineMotion(void *particle, f32 amplitudeScale) {
     CVector3 sp10;
     CVector3 sp20;
     Triple sp30;
     CVector3 sp40;
     CVector3 sp50;
     CVector3 sp60;
-    f32 temp_f0;
-    f32 temp_f12;
-    f32 temp_f12_2;
-    f32 temp_f1;
-    f32 var_f20;
-    s8 temp_v0;
+    f32 fadeInDuration;
+    f32 nextSineAngleX;
+    f32 nextSineAngleY;
+    f32 particleAge;
+    f32 motionAmplitude;
+    s8 fadeInFrames;
 
-    temp_v0 = ((Shared_Particle *)particle)->desc->sineWave->fadeInFrames;
-    var_f20 = D_800C4B40_de;
-    if (temp_v0 != 0) {
-        temp_f1 = ((Shared_Particle *)particle)->time;
-        temp_f0 = (f32) temp_v0;
-        if (temp_f1 < temp_f0) {
-            var_f20 = temp_f1 / temp_f0;
+    fadeInFrames = ((Shared_Particle *)particle)->desc->sineWave->fadeInFrames;
+    motionAmplitude = g_particleSineMotionAmplitude;
+    if (fadeInFrames != 0) {
+        particleAge = ((Shared_Particle *)particle)->time;
+        fadeInDuration = (f32) fadeInFrames;
+        if (particleAge < fadeInDuration) {
+            motionAmplitude = particleAge / fadeInDuration;
         }
     }
-    var_f20 *= arg1;
+    motionAmplitude *= amplitudeScale;
     sp30 = *(Triple *)&((Shared_Particle *)particle)->direction;
     if (((Shared_Particle *)particle)->sineAmplitudeX > 0.0f) {
-        CVector3 *temp_s0;
+        CVector3 *velocity;
 
         sp10.x = 0.0f;
         sp10.z = 0.0f;
-        sp10.y = D_800C4B44_de;
+        sp10.y = g_particleSineMotionOffsetY;
         Graphu64_CrossVectors(&sp20, &sp10, (CVector3 *)&sp30);
-        Graphu64_ScaleVector(&sp40, &sp20, Gu_Sinf(((Shared_Particle *)particle)->sineAngleX) * ((Shared_Particle *)particle)->sineAmplitudeX * var_f20);
-        temp_f12 = ((Shared_Particle *)particle)->sineAngleX + (((Shared_Particle *)particle)->sineAngleSpeedX * var_f20 * D_800D2988);
-        ((Shared_Particle *)particle)->sineAngleX = temp_f12;
-        Graphu64_ScaleVector(&sp50, &sp20, Gu_Sinf(temp_f12) * ((Shared_Particle *)particle)->sineAmplitudeX * var_f20);
-        temp_s0 = &((Shared_Particle *)particle)->inst.velocity;
-        Graphu64_SubtractVectors(temp_s0, temp_s0, &sp40);
-        Graphu64_AddVec3((CVector3 *) temp_s0, (CVector3 *) temp_s0, (CVector3 *) &sp50);
+        Graphu64_ScaleVector(&sp40, &sp20, Gu_Sinf(((Shared_Particle *)particle)->sineAngleX) * ((Shared_Particle *)particle)->sineAmplitudeX * motionAmplitude);
+        nextSineAngleX = ((Shared_Particle *)particle)->sineAngleX + (((Shared_Particle *)particle)->sineAngleSpeedX * motionAmplitude * g_frameElapsedTime);
+        ((Shared_Particle *)particle)->sineAngleX = nextSineAngleX;
+        Graphu64_ScaleVector(&sp50, &sp20, Gu_Sinf(nextSineAngleX) * ((Shared_Particle *)particle)->sineAmplitudeX * motionAmplitude);
+        velocity = &((Shared_Particle *)particle)->inst.velocity;
+        Graphu64_SubtractVectors(velocity, velocity, &sp40);
+        Graphu64_AddVec3((CVector3 *) velocity, (CVector3 *) velocity, (CVector3 *) &sp50);
     } else {
-        ((Shared_Particle *)particle)->sineAngleX = (f32) (((Shared_Particle *)particle)->sineAngleX + (((Shared_Particle *)particle)->sineAngleSpeedX * var_f20 * D_800D2988));
+        ((Shared_Particle *)particle)->sineAngleX = (f32) (((Shared_Particle *)particle)->sineAngleX + (((Shared_Particle *)particle)->sineAngleSpeedX * motionAmplitude * g_frameElapsedTime));
     }
     if (((Shared_Particle *)particle)->sineAmplitudeY > 0.0f) {
         sp10.x = 0.0f;
         sp10.z = 0.0f;
-        sp10.y = D_800C4B48_de;
+        sp10.y = g_particleSineMotionTargetY;
         Graphu64_CrossVectors(&sp60, &sp10, (CVector3 *)&sp30);
         Graphu64_CrossVectors(&sp20, &sp60, (CVector3 *)&sp30);
-        Graphu64_ScaleVector(&sp40, &sp20, Gu_Sinf(((Shared_Particle *)particle)->sineAngleY) * ((Shared_Particle *)particle)->sineAmplitudeY * var_f20);
-        temp_f12_2 = ((Shared_Particle *)particle)->sineAngleY + (((Shared_Particle *)particle)->sineAngleSpeedY * var_f20 * D_800D2988);
-        ((Shared_Particle *)particle)->sineAngleY = temp_f12_2;
-        Graphu64_ScaleVector(&sp50, &sp20, Gu_Sinf(temp_f12_2) * ((Shared_Particle *)particle)->sineAmplitudeY * var_f20);
+        Graphu64_ScaleVector(&sp40, &sp20, Gu_Sinf(((Shared_Particle *)particle)->sineAngleY) * ((Shared_Particle *)particle)->sineAmplitudeY * motionAmplitude);
+        nextSineAngleY = ((Shared_Particle *)particle)->sineAngleY + (((Shared_Particle *)particle)->sineAngleSpeedY * motionAmplitude * g_frameElapsedTime);
+        ((Shared_Particle *)particle)->sineAngleY = nextSineAngleY;
+        Graphu64_ScaleVector(&sp50, &sp20, Gu_Sinf(nextSineAngleY) * ((Shared_Particle *)particle)->sineAmplitudeY * motionAmplitude);
         Graphu64_SubtractVectors(&((Shared_Particle *)particle)->inst.velocity, &((Shared_Particle *)particle)->inst.velocity, &sp40);
         Graphu64_AddVec3(&((Shared_Particle *)particle)->inst.velocity, &((Shared_Particle *)particle)->inst.velocity, &sp50);
         return;
     }
-    ((Shared_Particle *)particle)->sineAngleY = (f32) (((Shared_Particle *)particle)->sineAngleY + (((Shared_Particle *)particle)->sineAngleSpeedY * var_f20 * D_800D2988));
+    ((Shared_Particle *)particle)->sineAngleY = (f32) (((Shared_Particle *)particle)->sineAngleY + (((Shared_Particle *)particle)->sineAngleSpeedY * motionAmplitude * g_frameElapsedTime));
 }

@@ -1,8 +1,8 @@
 #ifndef MENU_IMAGE_AND_DISPLAY_COMMAND_VIEWS_H
 #define MENU_IMAGE_AND_DISPLAY_COMMAND_VIEWS_H
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
-struct Image_func_80419490_de {
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+struct SwizzledImageView {
     char pad0[8];
     s16 width;
     s16 height;

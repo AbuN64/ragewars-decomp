@@ -4,12 +4,12 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/TRIPLE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "stddef.h"
 s32 Scaled_SetBehaviourState(void *, s32);
 s32 Scaled_MatchesBehaviorStateFilter(void *);
-s32 func_80209AD8_de(void *);
+s32 Scaled_IsBehaviorStateEight(void *);
 f32 Scaled_GetScaledAggression(void *);
 s32 Nav_ShouldSeekUnclaimedTeamMarker(void *);
 s32 Nav_GetWeaponPickupGoalClass(void *);
@@ -17,7 +17,7 @@ s32 Playerai_GetWeaponClassId(void *, s16);
 s32 Playerai_GetWeaponAmmo(void *, s16);
 s32 Player_GetMaxHealth(void *);
 s32 Player_GetAmmoCapacity(void *, s32, s32);
-extern CGameStatus D_801468A0;
+extern CGameStatus g_matchRoundCounters;
 
 /* Choose the next AI state from game objectives, supplies and the current target. */
 s32 Nav_SelectPlayerState(AiController *controller) {
@@ -51,8 +51,8 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     ammo0 = controller->player->ammo[0];
     ammo1 = controller->player->ammo[1];
     ammo2 = controller->player->ammo[2];
-    carrier = Playerai_FindPlayerWithMarker((char *)&D_80145040);
-    if (carrier != 0 && D_80145040.game.counters.m_bCTFOn != 0) {
+    carrier = Playerai_FindPlayerWithMarker((char *)&g_playerViewRenderContext);
+    if (carrier != 0 && g_playerViewRenderContext.game.counters.m_bCTFOn != 0) {
         if (carrier == controller->player) {
             nextState = 10;
             Scaled_SetBehaviourState(controller, nextState);
@@ -64,7 +64,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
             return 1;
         }
     }
-    gameStatus = &D_801468A0;
+    gameStatus = &g_matchRoundCounters;
     if (gameStatus->m_bFragTagOn != 0 && controller->player->profile->bonus != 0) {
         if (gameStatus->m_FragTagFlipTimer > 0) {
             if (controller->state != 2) {
@@ -78,16 +78,16 @@ s32 Nav_SelectPlayerState(AiController *controller) {
         return 1;
     }
     healthThreshold = (s32)((1.0f - Scaled_GetScaledAggression(controller)) * 80.0f);
-    if (D_801462C8.counters.enabled != 0 && controller->player->profile->enabled != 0) {
+    if (g_gameSettings.counters.enabled != 0 && controller->player->profile->enabled != 0) {
         healthThreshold = 0;
     }
-    if (func_80209AD8_de(controller) == 0 && healthPercent < (f32)healthThreshold) {
+    if (Scaled_IsBehaviorStateEight(controller) == 0 && healthPercent < (f32)healthThreshold) {
         controller->routeState = 1;
         nextState = 8;
         Scaled_SetBehaviourState(controller, nextState);
         return 1;
     }
-    if (func_80209AD8_de(controller) == 0 && ammoPercent < 10.0f) {
+    if (Scaled_IsBehaviorStateEight(controller) == 0 && ammoPercent < 10.0f) {
         controller->routeState = Nav_GetWeaponPickupGoalClass(controller);
         nextState = 8;
         Scaled_SetBehaviourState(controller, nextState);
@@ -111,11 +111,11 @@ s32 Nav_SelectPlayerState(AiController *controller) {
             Scaled_SetBehaviourState(controller, nextState);
             return 1;
         }
-    } else if (func_80209AD8_de(controller) != 0 && (f32)healthThreshold < healthPercent && 10.0f < ammoPercent) {
+    } else if (Scaled_IsBehaviorStateEight(controller) != 0 && (f32)healthThreshold < healthPercent && 10.0f < ammoPercent) {
         nextState = 2;
         Scaled_SetBehaviourState(controller, nextState);
         return 1;
-    } else if (Scaled_MatchesBehaviorStateFilter(controller) == 0 && func_80209AD8_de(controller) == 0 && controller->target != 0) {
+    } else if (Scaled_MatchesBehaviorStateFilter(controller) == 0 && Scaled_IsBehaviorStateEight(controller) == 0 && controller->target != 0) {
         if (controller->player->profile->enabled != 0) {
             if (controller->player->profile->character == 12) {
                 Scaled_SetBehaviourState(controller, 13);

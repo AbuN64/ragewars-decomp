@@ -7,19 +7,19 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 
-extern float D_800C1C88_de;
+extern float g_difficultyAimAmountScale;
 
 
-struct Player_func_80209308_de;
-typedef struct Player_func_80209308_de Player_func_80209308_de;
-
-
-
+struct PlayerAimActorView;
+typedef struct PlayerAimActorView PlayerAimActorView;
 
 
 
-struct Player_func_80209308_de;
-struct Player_func_80209308_de {
+
+
+
+struct PlayerAimActorView;
+struct PlayerAimActorView {
     char pad0[0x594];
     s32 gear;
     char pad598[0x104];
@@ -31,13 +31,13 @@ struct Player_func_80209308_de {
 
 
 
-struct Brain_func_80209308_de;
-typedef struct Brain_func_80209308_de Brain_func_80209308_de;
+struct PlayerAimBrainView;
+typedef struct PlayerAimBrainView PlayerAimBrainView;
 
-struct Brain_func_80209308_de;
-struct Player_func_80209308_de;
-struct Brain_func_80209308_de {
-    struct Player_func_80209308_de *player;
+struct PlayerAimBrainView;
+struct PlayerAimActorView;
+struct PlayerAimBrainView {
+    struct PlayerAimActorView *player;
     char pad4[0x244];
     f32 speed[4];
 };
@@ -60,7 +60,7 @@ struct Mode;
 struct Model;
 struct Mount;
 struct Profile;
-struct RecordRecAt94;
+struct PlayerProfileStatusView;
 struct Rider;
 struct Settings;
 struct Shared_Body;
@@ -84,7 +84,7 @@ struct Behaviour;
 
 
 
-extern float D_800C1C8C_de;
+extern float g_difficultyAimHeightOffset;
 
 typedef struct PitchProfile { char pad00[0x8F]; u8 scaled; } PitchProfile;
 typedef struct PitchModel { char pad00[0x12C]; f32 height; } PitchModel;
@@ -99,8 +99,8 @@ typedef struct PitchBrain {
     char pad68[0x1E0]; f32 angle, previousAngle; char pad250[8];
     CVector3 targetPosition; f32 distance;
 } PitchBrain;
-extern f32 D_800C1C7C_de;
-extern f32 D_800C1C80_de;
+extern f32 g_targetPitchDownAngle;
+extern f32 g_targetPitchUpAngle;
 
 
 #include "COMMON/AIPROFILE.H"
@@ -142,8 +142,8 @@ typedef struct AiController {
     s32 state; /* 0x21C */
     s32 handlerIndex; /* 0x220 */
     u8 pad224[0x18];
-    s32 unk23C; /* 0x23C */
-    s32 unk240; /* 0x240 */
+    s32 fireRequested; /* 0x23C */
+    s32 actionFlagFrames; /* 0x240 */
     f32 aim; /* 0x244 */
     f32 speed[4]; /* 0x248 */
     CVector3 targetPosition; /* 0x258 */
@@ -151,25 +151,25 @@ typedef struct AiController {
     u8 pad268[0x24];
     AiTarget * preferred; /* 0x28C */
     u8 pad290[0x54];
-    s32 unk2E4; /* 0x2E4 */
-    s32 unk2E8; /* 0x2E8 */
-    s32 unk2EC; /* 0x2EC */
+    s32 actionDelay; /* 0x2E4 */
+    s32 actionDuration; /* 0x2E8 */
+    s32 alternateCountdown; /* 0x2EC */
     u8 pad2F0[0x4];
     s32 unk2F4; /* 0x2F4 */
     s32 unk2F8; /* 0x2F8 */
-    s32 unk2FC; /* 0x2FC */
-    s32 unk300; /* 0x300 */
-    s32 unk304; /* 0x304 */
-    s32 unk308; /* 0x308 */
-    s32 unk30C; /* 0x30C */
-    s32 unk310; /* 0x310 */
-    s32 unk314; /* 0x314 */
-    s32 unk318; /* 0x318 */
-    s32 unk31C; /* 0x31C */
-    s32 unk320; /* 0x320 */
+    s32 behaviorResetFlag; /* 0x2FC */
+    s32 routeComplete; /* 0x300 */
+    s32 airPitchNode; /* 0x304 */
+    s32 jumpLinkActive; /* 0x308 */
+    s32 kindFourLinkActive; /* 0x30C */
+    s32 holdMovement; /* 0x310 */
+    s32 linkTraversalPhase; /* 0x314 */
+    s32 reservedWord; /* 0x318 */
+    s32 reservedWord1; /* 0x31C */
+    s32 reservedWord2; /* 0x320 */
     s32 attackedTimer; /* 0x324: set to 500 when hit, counts down */
     Player * lastAttacker; /* 0x328 */
-    s32 unk32C; /* 0x32C */
+    s32 previousPortalLink; /* 0x32C */
 } AiController;
 
 extern void OnScreen_SetFirstBarTarget(char *, s32);

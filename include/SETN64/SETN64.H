@@ -9,9 +9,9 @@ extern int SetN64_GetRecordBlockSize(int *recordHeader);
 extern void SetN64_GetChunkStorage(void *, void * *, s32 *);
 extern void *SetN64_GetChunkPayload(int *, int *);
 extern void SetN64_TransposeRecords(void *sourceBlock, void *destinationBlock, s32 copyBack);
-extern void SetN64_UpdateEffectPool(WorldRecAt3C08 *world);
+extern void SetN64_UpdateEffectPool(EffectSlotPool *world);
 extern void SetN64_InitializeEffectSlot(struct EffectSlot *effectSlot);
 extern void SetN64_UpdateEffectMotionAndBounds(SceneEffect *effect);
 extern void SetN64_DrawVisibleEffects(char *effectPool, char *view);
-extern void *SetN64_AllocateActorFromPool(ObjectLinks3C0C *);
+extern void *SetN64_AllocateActorFromPool(ActorPoolFreeListView *);
 #endif

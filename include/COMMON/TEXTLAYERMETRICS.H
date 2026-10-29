@@ -4,7 +4,7 @@
 #include "COMMON/SESSION_STATE.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800EED80[];
+extern char g_playerMenuValueFormat[];
 #endif
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -13,16 +13,16 @@ typedef struct CMenu_t CMenu;
 
 struct EntryPakCreateMenuFromParameters;
 
-struct func_8043FFAC_S2;
-typedef struct func_8043FFAC_S2 func_8043FFAC_S2;
+struct StyledMenuTextPanel;
+typedef struct StyledMenuTextPanel StyledMenuTextPanel;
 
 struct TextLayerMetrics;
 
 struct TextLayerMetrics;
 typedef struct TextLayerMetrics TextLayerMetrics;
 
-struct StateRecAt47C;
-typedef struct StateRecAt47C StateRecAt47C;
+struct MenuCharacterPreviewState;
+typedef struct MenuCharacterPreviewState MenuCharacterPreviewState;
 
 struct LayeredText;
 typedef struct LayeredText LayeredText;
@@ -42,8 +42,8 @@ struct LayeredText {
     int field24;
 };
 
-struct func_8043FFAC_S2;
-struct func_8043FFAC_S2 {
+struct StyledMenuTextPanel;
+struct StyledMenuTextPanel {
     s16 unk0;
     s16 x; /* 0x02 */
     s16 y; /* 0x04 */
@@ -58,8 +58,8 @@ struct func_8043FFAC_S2 {
     struct TextBoundsData *data; /* 0x40 */
 };
 
-struct StateRecAtBCV1;
-struct StateRecAtBCV1 {
+struct PakMenuInputStateView;
+struct PakMenuInputStateView {
     char pad00[0xB0];
     s32 field_B0;
     s32 field_B4;
@@ -69,7 +69,7 @@ struct StateRecAtBCV1 {
 
 
 struct CMenu_t;
-struct StateRecAtBCV1;
+struct PakMenuInputStateView;
 struct TablePakUpdateDialogList;
 struct CMenu_t {
     char pad00[0x8];
@@ -77,7 +77,7 @@ struct CMenu_t {
     char pad0C[0x14 - 0xC];
     struct TablePakUpdateDialogList *table;
     char pad18[0x20 - 0x18];
-    struct StateRecAtBCV1 *state;
+    struct PakMenuInputStateView *state;
     char pad24[0x28 - 0x24];
     s16 kind;
     char pad2A[0x1D4 - 0x2A];
@@ -93,10 +93,10 @@ struct TablePakUpdateDialogList {
 
 struct ParamsPakAllocateMenu;
 
-struct StateRecAtBCV1;
-typedef struct StateRecAtBCV1 StateRecAtBCV1;
+struct PakMenuInputStateView;
+typedef struct PakMenuInputStateView PakMenuInputStateView;
 
-struct ParamsRecAt24V2;
+struct MenuTemplateParameters;
 
 struct CMenuFontInfo_t;
 
@@ -105,9 +105,9 @@ struct Outer;
 
 struct Outer;
 
-struct EntryRecAt18V2;
+struct PakMenuChoiceEntry;
 struct MenuRules;
-struct EntryRecAt18V2 {
+struct PakMenuChoiceEntry {
     char pad0[8];
     s32 flags;
     char pad0C[4];
@@ -117,8 +117,8 @@ struct EntryRecAt18V2 {
     char pad1C[0xC];
 };
 
-struct EntryRecAt18V2;
-struct MenuRecAt10;
+struct PakMenuChoiceEntry;
+struct MenuCursorNavigationView;
 
 struct PreviewWidget;
 typedef struct PreviewWidget PreviewWidget;
@@ -137,8 +137,8 @@ struct PreviewWidget {
     char padf8[0x90];
 };
 
-struct StateRecAt47C;
-struct StateRecAt47C {
+struct MenuCharacterPreviewState;
+struct MenuCharacterPreviewState {
     int selection;
     PreviewWidget model;
     s32 reserved18C;
@@ -147,26 +147,26 @@ struct StateRecAt47C {
     float size;
 };
 
-struct StateRecAt47C;
-struct WidgetRecAt20;
+struct MenuCharacterPreviewState;
+struct MenuPreviewSelectionView;
 
-struct NodeRecAt1D0;
-struct NodeRecAt1D0 {
+struct PakMenuVirtualNode;
+struct PakMenuVirtualNode {
     char pad0[0x14];
     void **vtable;
     char pad18[0x1B8];
-    struct NodeRecAt1D0 *next;
+    struct PakMenuVirtualNode *next;
 };
 
-struct WidgetRecAt20;
-typedef struct WidgetRecAt20 WidgetRecAt20;
+struct MenuPreviewSelectionView;
+typedef struct MenuPreviewSelectionView MenuPreviewSelectionView;
 
 
-struct NodeRecAt1D0;
-struct OwnerRecAt4;
+struct PakMenuVirtualNode;
+struct MenuCallbackListOwner;
 
-struct func_8043FFAC_S5;
-typedef struct func_8043FFAC_S5 func_8043FFAC_S5;
+struct StyledMenuTextEntryView;
+typedef struct StyledMenuTextEntryView StyledMenuTextEntryView;
 
 struct ObjectPakDrawMenuCharacter;
 
@@ -177,9 +177,9 @@ struct CMenuFontInfo_t;
 typedef struct CMenuFontInfo_t CMenuFontInfo;
 
 
-struct ParamsRecAt24V1;
+struct MenuCreationParameters;
 
-struct func_8043FFAC_S5;
+struct StyledMenuTextEntryView;
 
-struct ObjRecAt20V2;
+struct GamePlayerListView;
 #endif

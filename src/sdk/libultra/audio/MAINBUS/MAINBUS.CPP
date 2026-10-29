@@ -4,7 +4,7 @@
 #include "acmd.h"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ALPARAM_S.H"

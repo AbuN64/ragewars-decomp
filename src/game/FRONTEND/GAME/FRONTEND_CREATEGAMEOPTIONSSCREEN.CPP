@@ -1,40 +1,40 @@
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "TYPES.H"
 #include "FRONTEND/FRONTEND_DISPATCHOPTIONSPAGEEVENT.H"
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E451C, an actor kind at D_800E4520 and a handler at D_800E4524: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_gameOptionsEventKinds, an actor kind at g_gameOptionsActorKinds and a handler at g_gameOptionsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8042359C)(void *, s32, s32, s32, s32);
 
 
-extern Handler8042359C D_800E4524;
+extern Handler8042359C g_gameOptionsEventHandlers;
 
 
 
 
-s32 Frontend_DispatchOptionsPageEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchOptionsPageEvent(void *menuActor, s32 eventKind, s32 eventDataOne, s32 eventDataTwo, s32 eventDataThree) {
     Handler8042359C *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E4524 != 0) {
+    if (g_gameOptionsEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E4524;
+        entry = &g_gameOptionsEventHandlers;
         index = 0;
         do {
-            if (D_800E451C[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E4520[index].value;
+            if (g_gameOptionsEventKinds[index].value == eventKind) {
+                actor = menuActor;
+                actor_kind = actor->input;
+                table_kind = g_gameOptionsActorKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(menuActor, eventKind, eventDataOne, eventDataTwo, eventDataThree);
                 }
             }
             entry += 3;
@@ -48,9 +48,9 @@ s32 Frontend_DispatchOptionsPageEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, 
 #include "FRONTEND/GAME_OPTIONS_LABELS.H"
 #include "TYPES.H"
 
-/* Builds screen state D_800E4514: allocates its 0x10 bytes, registers resources (0x1BD - OPTIONS_RESOURCE_SHIFT) and (0x1C2 - OPTIONS_RESOURCE_SHIFT),
+/* Builds screen state g_gameOptionsScreenState: allocates its 0x10 bytes, registers resources (0x1BD - OPTIONS_RESOURCE_SHIFT) and (0x1C2 - OPTIONS_RESOURCE_SHIFT),
    creates list 0x1BB/0x1BC at 0x4 with the three texts gameOptionsLabel(0), gameOptionsLabel(1) and gameOptionsLabel(2) and
-   selects byte 0x1B of the settings D_801462C8, creates list (0x1BE - OPTIONS_RESOURCE_SHIFT)/(0x1BF - OPTIONS_RESOURCE_SHIFT) at 0x8 with gameOptionsLabel(3),
+   selects byte 0x1B of the settings g_gameSettings, creates list (0x1BE - OPTIONS_RESOURCE_SHIFT)/(0x1BF - OPTIONS_RESOURCE_SHIFT) at 0x8 with gameOptionsLabel(3),
    plus gameOptionsLabel(4) and gameOptionsLabel(5) unless Defs_GetMemorySize reports 0x400000, and selects settings byte
    0x580, creates the 0x80-step slider (0x1C0 - OPTIONS_RESOURCE_SHIFT)/(0x1C1 - OPTIONS_RESOURCE_SHIFT) at 0x0 set to the settings word at 0x10,
    registers (0x1C3 - OPTIONS_RESOURCE_SHIFT) and (0x1C4 - OPTIONS_RESOURCE_SHIFT), clears the word at 0xC, resets through Tsmos_DeactivateControllerState and returns
@@ -62,9 +62,9 @@ struct SliderScreen {
     s32 state;
 };
 
-extern struct SliderScreen *D_800E4514;
+extern struct SliderScreen *g_gameOptionsScreenState;
 typedef struct SliderSettings { char pad0[0x10]; s32 value; char pad14[7]; u8 first; char pad1C[0x564]; u8 second; } SliderSettings;
-extern SliderSettings D_801462C8;
+extern SliderSettings g_gameSettings;
 extern struct SliderScreen *Cache_AllocateMemory(s32);
 extern void SmpButton_WrapButtonWidget(s32);
 extern s32 SmpButton_CreateListWidget(s32, s32);
@@ -82,34 +82,34 @@ s32 Frontend_CreateGameOptionsScreen(void) {
     s32 list;
     s32 slider;
 
-    D_800E4514 = Cache_AllocateMemory(0x10);
+    g_gameOptionsScreenState = Cache_AllocateMemory(0x10);
     SmpButton_WrapButtonWidget((0x1BD - OPTIONS_RESOURCE_SHIFT));
     SmpButton_WrapButtonWidget((0x1C2 - OPTIONS_RESOURCE_SHIFT));
     if (OPTIONS_HAS_FIRST_LIST) {
     list = SmpButton_CreateListWidget(0x1BB, 0x1BC);
-    {s32 *handle = &D_800E4514->first_list; *handle = list;}
-    SmpButton_AppendListText(D_800E4514->first_list, gameOptionsLabel(0));
-    SmpButton_AppendListText(D_800E4514->first_list, gameOptionsLabel(1));
-    SmpButton_AppendListText(D_800E4514->first_list, gameOptionsLabel(2));
-    settings = &D_801462C8;
-    SmpButton_SelectListEntry(D_800E4514->first_list, settings->first);
+    {s32 *handle = &g_gameOptionsScreenState->first_list; *handle = list;}
+    SmpButton_AppendListText(g_gameOptionsScreenState->first_list, gameOptionsLabel(0));
+    SmpButton_AppendListText(g_gameOptionsScreenState->first_list, gameOptionsLabel(1));
+    SmpButton_AppendListText(g_gameOptionsScreenState->first_list, gameOptionsLabel(2));
+    settings = &g_gameSettings;
+    SmpButton_SelectListEntry(g_gameOptionsScreenState->first_list, settings->first);
     }
     list = SmpButton_CreateListWidget((0x1BE - OPTIONS_RESOURCE_SHIFT), (0x1BF - OPTIONS_RESOURCE_SHIFT));
-    {s32 *handle = &D_800E4514->second_list; *handle = list;}
-    SmpButton_AppendListText(D_800E4514->second_list, gameOptionsLabel(3));
+    {s32 *handle = &g_gameOptionsScreenState->second_list; *handle = list;}
+    SmpButton_AppendListText(g_gameOptionsScreenState->second_list, gameOptionsLabel(3));
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(D_800E4514->second_list, gameOptionsLabel(4));
-        SmpButton_AppendListText(D_800E4514->second_list, gameOptionsLabel(5));
+        SmpButton_AppendListText(g_gameOptionsScreenState->second_list, gameOptionsLabel(4));
+        SmpButton_AppendListText(g_gameOptionsScreenState->second_list, gameOptionsLabel(5));
     }
-    if (!OPTIONS_HAS_FIRST_LIST) settings = &D_801462C8;
-    SmpButton_SelectListEntry(D_800E4514->second_list, settings->second);
+    if (!OPTIONS_HAS_FIRST_LIST) settings = &g_gameSettings;
+    SmpButton_SelectListEntry(g_gameOptionsScreenState->second_list, settings->second);
     slider = SmpSlider_CreateSliderWidget((0x1C0 - OPTIONS_RESOURCE_SHIFT), (0x1C1 - OPTIONS_RESOURCE_SHIFT), 0x80);
-    D_800E4514->slider = slider;
+    g_gameOptionsScreenState->slider = slider;
 
     SmpSlider_SetSliderItem(slider, settings->value);
     SmpButton_WrapButtonWidget((0x1C3 - OPTIONS_RESOURCE_SHIFT));
     SmpButton_WrapButtonWidget((0x1C4 - OPTIONS_RESOURCE_SHIFT));
-    D_800E4514->state = 0;
+    g_gameOptionsScreenState->state = 0;
     Tsmos_DeactivateControllerState();
     return 0;
 }

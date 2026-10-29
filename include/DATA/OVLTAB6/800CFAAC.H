@@ -1,4 +1,0 @@
-#ifndef DATA_OVLTAB6_800CFAAC_H
-#define DATA_OVLTAB6_800CFAAC_H
-extern char D_002321B8[];
-#endif

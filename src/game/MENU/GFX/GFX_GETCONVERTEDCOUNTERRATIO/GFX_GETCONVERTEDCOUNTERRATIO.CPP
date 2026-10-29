@@ -3,7 +3,7 @@
 /* 80414430_16.CPP */
 /* 80414430_16.CPP */
 #if defined(VERSION_US_REV1)
-unsigned char D_auto_func_804147F0_eu_x_padding_18247C[4] = { 0x24, 0x42, 0x00, 0x04 };
+unsigned char g_GfxGetconvertedcounterratioTrailingBytesBlock1[4] = { 0x24, 0x42, 0x00, 0x04 };
 #endif
 
 /* 80420E90_6.CPP */
@@ -13,7 +13,7 @@ unsigned char s_wateText[4] = { 0x57, 0x41, 0x54, 0x45 };
 
 /* DATA_8044C448.CPP */
 #if defined(VERSION_EU)
-unsigned int D_auto_rodata_unresolved_8044C448[130] = {
+unsigned int k_GfxGetconvertedcounterratioEncodedWords[130] = {
     0x322200FF, 0x0043102B, 0x11000354, 0x68757737, 0x65545532, 0x34589668, 0x11122588, 0x88876788,
     0x65667632, 0x6876668C, 0x11475676, 0x56676666, 0x54664676, 0x7876579B, 0x14787421, 0x34455542,
     0x23531378, 0x54543679, 0x18987521, 0x46433332, 0x13420157, 0x65520458, 0x03766765, 0x54323455,
@@ -36,5 +36,5 @@ unsigned int D_auto_rodata_unresolved_8044C448[130] = {
 
 /* 80414430_8.CPP */
 #if defined(VERSION_EU_X)
-unsigned char D_auto_func_804147F0_eu_x_padding_10483C[4] = { 0x24, 0x42, 0x00, 0x04 };
+unsigned char g_GfxGetconvertedcounterratioTrailingBytes[4] = { 0x24, 0x42, 0x00, 0x04 };
 #endif

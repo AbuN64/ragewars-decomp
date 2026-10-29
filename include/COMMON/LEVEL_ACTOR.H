@@ -9,7 +9,7 @@ struct LevelActor {
     u8 kind;
     s8 team;
     char pad2;
-    s8 field3;
+    s8 renderPass;
     s16 modelIndex;
     u16 pad6;
     CVector3 position0;
@@ -27,8 +27,8 @@ struct LevelActor {
     f32 yaw; /* 0x6C */
     f32 eyeHeight; /* 0x70 */
     f32 transform[16]; /* 0x74 */
-    void *fieldB4; /* animation matrix buffer */
-    s32 fieldB8;
+    void *animationMatrices; /* animation matrix buffer */
+    s32 alternateAnimationMatrices;
     void *shadow; /* 0xBC */
     u8 padC0[4];
     s32 resource; /* 0xC4 */

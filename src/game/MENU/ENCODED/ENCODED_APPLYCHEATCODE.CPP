@@ -4,19 +4,19 @@
 #include "TYPES.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
-/* Checks the entered code D_800E5CAC against the twelve cheat codes of D_0044FB90 (each stored with
-   every character xored with its index): for each one that matches, ors its flags into the cheat word of D_801462C8,
-   copies them to D_8013B2D4, records its index in D_80154030 (-1 when none) and plays its sound. */
+/* Checks the entered code g_encodedCheatCode against the twelve cheat codes of g_encodedCheatDefinitions (each stored with
+   every character xored with its index): for each one that matches, ors its flags into the cheat word of g_gameSettings,
+   copies them to g_persistedOptionUnlockFlags, records its index in g_encodedCheatCharacterIndex (-1 when none) and plays its sound. */
 
 
 
-extern CheatCode D_0044FB90[];
-extern u8 D_800E5CAC[];
+extern CheatCode g_encodedCheatDefinitions[];
+extern u8 g_encodedCheatCode[];
 
 
-extern struct IntPair D_801462C8;
+extern struct IntPair g_gameSettings;
 
-extern s32 D_80154030;
+extern s32 g_encodedCheatCharacterIndex;
 
 
 
@@ -29,16 +29,16 @@ s32 Encoded_ApplyCheatCode(void)
     struct IntPair *settings;
     u8 *code;
 
-    D_80154030 = -1;
+    g_encodedCheatCharacterIndex = -1;
     for (i = 0; i < 12; i++) {
-        code = D_0044FB90[i].code;
+        code = g_encodedCheatDefinitions[i].code;
         j = 0;
-        if ((s32)func_802BD400_de((const char *)code) != (s32)func_802BD400_de((const char *)D_800E5CAC)) {
+        if ((s32)Libc_StringLength((const char *)code) != (s32)Libc_StringLength((const char *)g_encodedCheatCode)) {
             match = 0;
         } else {
             for (;;) {
-                if (j < (s32)func_802BD400_de((const char *)code)) {
-                    if ((code[j] ^ j) != D_800E5CAC[j]) {
+                if (j < (s32)Libc_StringLength((const char *)code)) {
+                    if ((code[j] ^ j) != g_encodedCheatCode[j]) {
                         match = 0;
                         break;
                     }
@@ -50,15 +50,15 @@ s32 Encoded_ApplyCheatCode(void)
             }
         }
         if (match) {
-            D_801462C8.field_4 |= D_0044FB90[i].flags;
-            settings = &D_801462C8;
+            g_gameSettings.second |= g_encodedCheatDefinitions[i].flags;
+            settings = &g_gameSettings;
             do {
-                D_8013B2D4 = settings->field_4;
+                g_persistedOptionUnlockFlags = settings->second;
             } while (0);
-            hasSound = D_0044FB90[i].sound != 0;
-            D_80154030 = i;
+            hasSound = g_encodedCheatDefinitions[i].sound != 0;
+            g_encodedCheatCharacterIndex = i;
             if (hasSound) {
-                SoundElement_PlayFlatSound((s16)D_0044FB90[i].sound);
+                SoundElement_PlayFlatSound((s16)g_encodedCheatDefinitions[i].sound);
             }
         }
     }

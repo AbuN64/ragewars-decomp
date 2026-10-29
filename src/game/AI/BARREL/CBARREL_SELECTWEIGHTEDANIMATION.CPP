@@ -23,13 +23,13 @@ s32 Cbarrel_SelectWeightedAnimation(s32 owner, s32 unused, struct IntPair *table
     s16 pick;
 
     Lists_ClearWeightedTable(&picker);
-    first = table->field_4;
-    while (table->field_0 != -1) {
-        if (table->field_0 == 0 && picker.count != 0) {
+    first = table->second;
+    while (table->first != -1) {
+        if (table->first == 0 && picker.count != 0) {
             goto choose;
         }
-        if ((flags & table->field_0) && Gobjinst_ChooseAnimationVariant(owner, table->field_4, -1) != -1) {
-            Lists_AppendWeightedEntry(&picker, (s16) table->field_4, 10);
+        if ((flags & table->first) && Gobjinst_ChooseAnimationVariant(owner, table->second, -1) != -1) {
+            Lists_AppendWeightedEntry(&picker, (s16) table->second, 10);
         }
         table++;
     }

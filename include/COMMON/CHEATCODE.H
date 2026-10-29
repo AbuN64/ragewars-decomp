@@ -9,8 +9,8 @@ struct CheatCode {
     s32 sound;
 };
 
-struct EntryRecAt0V2;
-struct EntryRecAt0V2 {
+struct MenuPointerEntry;
+struct MenuPointerEntry {
     void *ptr;
     s32 pad[3];
 };
@@ -21,14 +21,14 @@ typedef signed int ( *Handler80437868)(void *, signed int, signed int, signed in
 struct Shared_Entry;
 typedef struct Shared_Entry Shared_Entry;
 
-struct MenuRecAt20V4;
-struct MenuRecAt20V4 {
+struct CheatMenuInputView;
+struct CheatMenuInputView {
     s16 state;
     char pad2[0x1E];
     s32 input;
 };
 
-extern int D_8013B2D4;
+extern int g_persistedOptionUnlockFlags;
 
 
 struct Shared_Entry;
@@ -39,8 +39,8 @@ struct Shared_Entry {
     u8 text[24];
 };
 
-struct EntryRecAt0V2;
-typedef struct EntryRecAt0V2 EntryRecAt0V2;
+struct MenuPointerEntry;
+typedef struct MenuPointerEntry MenuPointerEntry;
 
 
 
@@ -49,6 +49,6 @@ typedef struct CheatCode CheatCode;
 
 extern void func_804397E8_de(char *);
 
-struct MenuRecAt20V4;
-typedef struct MenuRecAt20V4 MenuRecAt20V4;
+struct CheatMenuInputView;
+typedef struct CheatMenuInputView CheatMenuInputView;
 #endif

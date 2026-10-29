@@ -1,9 +1,9 @@
 #include "include_asm.h"
 #include "COMMON/MENU_SCREEN_SETUP.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
-/* Opens the screen D_800E4F60: allocates its 0x470-byte state for the window, sets up the list,
+/* Opens the screen g_setupScreen: allocates its 0x470-byte state for the window, sets up the list,
    the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and
    items of the window with their alpha and visibility, resets the selection and the counters at
    D_80154024, clears the pending flag at 0x91 of the eight D_80146398 records, places the four
@@ -79,73 +79,73 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
     s32 x;
     s32 id;
 
-    D_800E4F60 = Cache_AllocateMemory(sizeof(SetupScreen));
-    D_800E4F60->window = window;
-    D_800E4F60->list = SmpOverlay_CreateOverlayNode(window, 4);
+    g_setupScreen = Cache_AllocateMemory(sizeof(SetupScreen));
+    g_setupScreen->window = window;
+    g_setupScreen->list = SmpOverlay_CreateOverlayNode(window, 4);
     SmpOverlay_ShowSlotById(window, 0, ID_2FF);
     SmpOverlay_ShowSlotById(window, 1, ID_2FF);
     SmpOverlay_ShowSlotById(window, 2, ID_2FF);
     SmpOverlay_ShowSlotById(window, 3, ID_2FF);
-    D_800E4F60->unk3DC = 1;
-    D_800E4F60->unk45C = 0;
-    D_800E4F60->unk3E0 = 4;
+    g_setupScreen->unk3DC = 1;
+    g_setupScreen->unk45C = 0;
+    g_setupScreen->unk3E0 = 4;
 
     item1 = Node_FindWidgetByResourceId(window, ID_306);
-    D_800E4F60->left = item1;
+    g_setupScreen->left = item1;
     item1->x -= item1->width;
-    D_800E4F60->leftCount = D_800E4F60->left->width / 4;
-    x = D_800E4F60->left->width - D_800E4F60->leftCount * 4;
-    D_800E4F60->left->x += x;
+    g_setupScreen->leftCount = g_setupScreen->left->width / 4;
+    x = g_setupScreen->left->width - g_setupScreen->leftCount * 4;
+    g_setupScreen->left->x += x;
 
     item2 = Node_FindWidgetByResourceId(window, ID_30F);
-    D_800E4F60->right = item2;
+    g_setupScreen->right = item2;
     item2->x += item2->width;
-    D_800E4F60->rightCount = D_800E4F60->right->width / 4;
-    x = D_800E4F60->right->width - D_800E4F60->rightCount * 4;
-    D_800E4F60->right->x -= x;
+    g_setupScreen->rightCount = g_setupScreen->right->width / 4;
+    x = g_setupScreen->right->width - g_setupScreen->rightCount * 4;
+    g_setupScreen->right->x -= x;
 
     opacityItem = Node_FindWidgetByResourceId(window, ID_30A);
     opacityItem->alpha = 0x6E;
     item3 = Node_FindWidgetByResourceId(window, ID_35D);
-    D_800E4F60->unk448 = item3;
+    g_setupScreen->widget35D = item3;
     item3->alpha = 0x41;
-    Widget_SetWidgetFlag08(D_800E4F60->unk448, 0);
-    D_800E4F60->text3E4 = SmpFlicker_CreateFlickerWidget(ID_303, 0x6E);
+    Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
+    g_setupScreen->text3E4 = SmpFlicker_CreateFlickerWidget(ID_303, 0x6E);
     item4 = Node_FindWidgetByResourceId(window, ID_301);
-    D_800E4F60->unk3E8 = item4;
+    g_setupScreen->widget301 = item4;
     Widget_SetWidgetFlag08(item4, 0);
-    D_800E4F60->label = Node_FindWidgetByResourceId(window, ID_30E);
-    D_800E4F60->unk3F0 = Node_FindWidgetByResourceId(window, ID_310);
+    g_setupScreen->label = Node_FindWidgetByResourceId(window, ID_30E);
+    g_setupScreen->widget310 = Node_FindWidgetByResourceId(window, ID_310);
     ScenarioSetup_HideSetupCatalogue();
-    D_800E4F60->selection = 0;
-    D_800E4F60->category = 0;
+    g_setupScreen->selection = 0;
+    g_setupScreen->category = 0;
     ScenarioSetup_RefreshSelectedArenaLabel();
     ScenarioSetup_LoadSetupArenaLabel();
-    D_80154020.ready = 0;
-    D_80154020.value = -1;
-    D_800E4F60->unk454 = Node_FindWidgetByResourceId(window, ID_308);
+    g_selectionMessageReply.ready = 0;
+    g_selectionMessageReply.value = -1;
+    g_setupScreen->widget308 = Node_FindWidgetByResourceId(window, ID_308);
     opacityItem = Node_FindWidgetByResourceId(window, ID_309);
     opacityItem->alpha = 0x6E;
-    D_800E4F60->unk46C = 0;
+    g_setupScreen->unk46C = 0;
     item5 = Node_FindWidgetByResourceId(window, ID_30B);
-    D_800E4F60->unk440 = item5;
+    g_setupScreen->widget30B = item5;
     item5->alpha = 0x8C;
-    Widget_SetWidgetFlag08(D_800E4F60->unk440, 1);
+    Widget_SetWidgetFlag08(g_setupScreen->widget30B, 1);
     item6 = Node_FindWidgetByResourceId(window, ID_30D);
-    D_800E4F60->unk444 = item6;
+    g_setupScreen->widget30D = item6;
     item6->alpha = 0x8C;
-    Widget_SetWidgetFlag08(D_800E4F60->unk444, 0);
+    Widget_SetWidgetFlag08(g_setupScreen->widget30D, 0);
     item7 = Node_FindWidgetByResourceId(window, ID_30C);
-    D_800E4F60->unk44C = item7;
+    g_setupScreen->widget30C = item7;
     item7->alpha = 0xFF;
-    D_800E4F60->unk450 = Node_FindWidgetByResourceId(window, ID_2FE);
+    g_setupScreen->widget2FE = Node_FindWidgetByResourceId(window, ID_2FE);
     item8 = Node_FindWidgetByResourceId(window, ID_300);
-    D_800E4F60->unk458 = item8;
+    g_setupScreen->widget300 = item8;
     Widget_SetWidgetFlag08(item8, 1);
     Tsmos_DeactivateControllerState();
-    D_800E4F60->unk460 = 0;
-    D_800E4F60->unk464 = 0;
-    D_800E4F60->unk468 = -1;
+    g_setupScreen->unk460 = 0;
+    g_setupScreen->unk464 = 0;
+    g_setupScreen->unk468 = -1;
 
     for (i = 0; i < 8; i++) {
         record = &g_playerSettings[i];
@@ -158,14 +158,14 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
 
     x = 0;
     id = 0;
-    scale.value.x = D_800E1AA0;
-    scale.value.y = D_800E1AA0;
-    scale.value.z = D_800E1AA0;
+    scale.value.x = g_setupFirstPreviewScale;
+    scale.value.y = g_setupFirstPreviewScale;
+    scale.value.z = g_setupFirstPreviewScale;
     rotation.value.x = 0.0f;
     rotation.value.y = 0.0f;
     rotation.value.z = 0.0f;
     offset.value.x = 0.0f;
-    offset.value.y = D_800E1AA4;
+    offset.value.y = g_setupFirstPreviewYOffset;
     offset.value.z = 0.0f;
     for (i = 0; i < 4; i++) {
         switch (i) {
@@ -187,29 +187,29 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
             break;
         }
         position.value.x = x;
-        position.value.y = D_800E1AA8;
-        z = D_800E1AAC;
+        position.value.y = g_setupFirstPreviewY;
+        z = g_setupPreviewDepth;
         position.value.z = z;
-        Frontend_InitModelPreviewTransform(&D_800E4F60->models[i].initial, id, scale.words, position.words);
-        Frontend_SetPreviewRotation(&D_800E4F60->models[i].rotation, rotation.words);
-        Frontend_SetPreviewRotationSpeed(&D_800E4F60->models[i].offset, offset.words);
+        Frontend_InitModelPreviewTransform(&g_setupScreen->models[i].initial, id, scale.words, position.words);
+        Frontend_SetPreviewRotation(&g_setupScreen->models[i].rotation, rotation.words);
+        Frontend_SetPreviewRotationSpeed(&g_setupScreen->models[i].offset, offset.words);
     }
-    scale.value.x = D_800E1AB0;
-    scale.value.y = D_800E1AB0;
-    scale.value.z = D_800E1AB0;
+    scale.value.x = g_setupSecondPreviewScale;
+    scale.value.y = g_setupSecondPreviewScale;
+    scale.value.z = g_setupSecondPreviewScale;
     position.value.z = z;
-    position.value.x = D_800E1AB4;
-    position.value.y = D_800E1AB8;
-    Frontend_InitModelPreviewTransform(&D_800E4F60->models[4].initial, 0xEA6, scale.words, position.words);
-    Frontend_SetPreviewRotation(&D_800E4F60->models[4].rotation, rotation.words);
-    Frontend_SetPreviewRotationSpeed(&D_800E4F60->models[4].offset, offset.words);
+    position.value.x = g_setupSecondPreviewX;
+    position.value.y = g_setupSecondPreviewY;
+    Frontend_InitModelPreviewTransform(&g_setupScreen->models[4].initial, 0xEA6, scale.words, position.words);
+    Frontend_SetPreviewRotation(&g_setupScreen->models[4].rotation, rotation.words);
+    Frontend_SetPreviewRotationSpeed(&g_setupScreen->models[4].offset, offset.words);
     SoundElement_PlayFlatSound(0xE78);
     Menu_InitializeOptionsScene();
     return 0;
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-const unsigned int D_auto_src_rw_pool_80429A24_E26A0_us_rev1[7] = {
+const unsigned int k_SetupEncodedWords[7] = {
     0x3C9374BC, 0x40A00000, 0x41500000, 0xC2480000, 0x3D23D70A, 0x41880000, 0xC1200000,
 };
 #endif

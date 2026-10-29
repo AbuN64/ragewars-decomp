@@ -3,7 +3,7 @@
 #include "TYPES.H"
 struct ActorList {
     s32 pad0;
-    struct ActorRecAt5E0 *actors;
+    struct SnapshotActorView *actors;
     s32 count;
 };
 /* Type 1 curves choose a new random value each period. */

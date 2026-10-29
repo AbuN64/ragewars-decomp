@@ -30,7 +30,7 @@ struct Chunk;
 
 
 
-extern int D_800CB708;
+extern int g_audioCommandBufferIndex;
 
 
 extern int D_800CB714;
@@ -49,7 +49,7 @@ struct Window;
 typedef struct Window Window;
 
 
-extern int D_801076A0;
+extern int g_audioSampleRomBase;
 
 struct Chunk;
 typedef struct Chunk Chunk;
@@ -65,26 +65,26 @@ struct Window {
     s32 buffer;
 };
 
-struct ContextRecAt2BC0;
+struct GameAudioContext;
 struct Voice;
 typedef struct Voice Voice;
 
 
 
-extern int D_800CD8C4_de;
+extern int g_cartridgeReadWorkerPriority;
 
 struct Voice;
 struct Voice {
-    s32 unk0;
+    s32 soundHandleIndex;
     s32 sound;
-    s32 unk8;
-    s32 unkC;
+    s32 primaryKey;
+    s32 secondaryKey;
     u8 reserved10[8];
     s32 left; /* +0x18 */
     s32 right; /* +0x1C */
     u8 reserved20[0xC];
-    f32 field2C; /* probe 20261019T020116365530Z */
-    f32 field30;
+    f32 attenuation; /* probe 20261019T020116365530Z */
+    f32 baseAttenuation;
     f32 field34;
     s16 priority;
     s16 channel;
@@ -101,11 +101,11 @@ struct Voice {
     s32 pending;
     s32 flags;
     s32 soundId;
-    s32 fieldAC;
-    struct ContextRecAt2BC0 *context; /* +0xB0; probe 20261019T012703451174Z */
+    s32 releasePending;
+    struct GameAudioContext *context; /* +0xB0; probe 20261019T012703451174Z */
     s32 fieldB4;
-    f32 fieldB8;
-    s32 fieldBC, fieldC0, fieldC4;
+    f32 reservedFloat;
+    s32 fieldBC, fixedPosition, musicGainScalingEnabled;
     f32 volumeScale;
 };
 
@@ -113,12 +113,12 @@ struct Voice {
 struct CartridgeReadWorker;
 typedef struct CartridgeReadWorker CartridgeReadWorker;
 
-extern Window *D_80107DF4[];
-extern u32 D_800CB700_de;
+extern Window *g_audioDmaUsedWindowHead[];
+extern u32 g_audioTaskFrameIndex;
 extern u32 D_800CB704_de;
 
 
-struct ObjectLinksC;
+struct AudioDmaState;
 
 struct CacheEntry;
 struct CacheEntry {
@@ -131,8 +131,8 @@ struct CacheEntry {
 };
 
 
-struct ObjectLinksC;
-typedef struct ObjectLinksC ObjectLinksC;
+struct AudioDmaState;
+typedef struct AudioDmaState AudioDmaState;
 
 struct CartridgeReadRequest;
 typedef struct CartridgeReadRequest CartridgeReadRequest;
@@ -145,5 +145,5 @@ typedef struct CacheEntry CacheEntry;
 
 #include "COMMON/AUDIO_QUEUES.H"
 #include "COMMON/AUDIO_SYNTH.H"
-extern u32 D_800CB70C_de;
+extern u32 g_audioWorkerEventCount;
 #endif

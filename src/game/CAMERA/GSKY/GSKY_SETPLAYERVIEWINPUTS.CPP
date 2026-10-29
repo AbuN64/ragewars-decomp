@@ -1,18 +1,18 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
-#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 
-/* Stores its parameters into the object at arg0 offsets 0x24 through 0x60, then refreshes the object's ground reference and picks its surface value at 0x64 from the ground under it. Adapted from Gsky_UpdateFloorSurface with the parameter block stores added and the D_800C8610 thresholds changed. */
+/* Stores its parameters into the object at arg0 offsets 0x24 through 0x60, then refreshes the object's ground reference and picks its surface value at 0x64 from the ground under it. Adapted from Gsky_UpdateFloorSurface with the parameter block stores added and the k_cameraInputSurfaceDistanceScale thresholds changed. */
 
 
 
 extern s32 Cinema_IsSequenceInWindow(void);
 
-extern f32 Region_GetPolygonHeight(s32 node, f32 arg1, f32 arg2);
+extern f32 Region_GetPolygonHeight(s32 node, f32 positionX, f32 positionZ);
 
 
 
@@ -23,8 +23,8 @@ extern f32 Region_GetPolygonHeight(s32 node, f32 arg1, f32 arg2);
 
 
 
-void Gsky_SetPlayerViewInputs(GameplayCamera *camera, s32 bobSuppression, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 floorSampleX,
-                   f32 floorSampleY, f32 floorSampleZ, f32 floorHeightOffset, Shared_Quad arg10, s32 floorPolygon, f32 requestedZoomBlend,
+void Gsky_SetPlayerViewInputs(GameplayCamera *camera, s32 bobSuppression, f32 lensFlareInputOne, f32 lensFlareInputTwo, f32 lensFlareInputThree, f32 lensFlareInputFour, f32 floorSampleX,
+                   f32 floorSampleY, f32 floorSampleZ, f32 floorHeightOffset, Shared_Quad floorSampleData, s32 floorPolygon, f32 requestedZoomBlend,
                    f32 requestedZoomFov) {
     s32 object;
     f32 value;
@@ -33,38 +33,38 @@ void Gsky_SetPlayerViewInputs(GameplayCamera *camera, s32 bobSuppression, f32 ar
     f32 z;
     f32 w;
 
-    camera->unk24 = bobSuppression;
-    camera->unk28 = arg2;
-    camera->unk2C = arg3;
-    camera->unk30 = arg4;
-    camera->unk34 = arg5;
-    camera->unk38 = floorSampleX;
-    camera->unk3C = floorSampleY;
-    camera->unk40 = floorSampleZ;
-    camera->unk44 = floorHeightOffset;
-    camera->unk48 = arg10;
+    camera->bobSuppressed = bobSuppression;
+    camera->lensFlareInputOne = lensFlareInputOne;
+    camera->lensFlareInputTwo = lensFlareInputTwo;
+    camera->lensFlareInputThree = lensFlareInputThree;
+    camera->lensFlareInputFour = lensFlareInputFour;
+    camera->floorSampleX = floorSampleX;
+    camera->floorSampleY = floorSampleY;
+    camera->floorSampleZ = floorSampleZ;
+    camera->floorHeightOffset = floorHeightOffset;
+    camera->floorSampleData = floorSampleData;
     camera->floorPoly = (void *)floorPolygon;
     camera->zoomBlend = requestedZoomBlend;
     camera->zoomFov = requestedZoomFov;
     if (Cinema_IsSequenceInWindow() != 0) {
-        camera->floorPoly = (void *)Scene_FindFloorPolygon(&g_world, &camera->unk38);
+        camera->floorPoly = (void *)Scene_FindFloorPolygon(&g_world, &camera->floorSampleX);
     }
     object = (s32)camera->floorPoly;
-    x = camera->unk38;
-    y = camera->unk3C;
-    z = camera->unk40;
-    w = camera->unk44;
-    camera->floorSurface = D_800CD8D0;
+    x = camera->floorSampleX;
+    y = camera->floorSampleY;
+    z = camera->floorSampleZ;
+    w = camera->floorHeightOffset;
+    camera->floorSurface = g_defaultCameraSurfaceType;
     if (object != 0 && Cinema_IsSequenceInWindow() == 0) {
-        value = ((y + w) - Region_GetPolygonHeight(object, x, z)) * D_800C8610;
-        if (value < D_800C3524_de && D_800C3528_de < value) {
+        value = ((y + w) - Region_GetPolygonHeight(object, x, z)) * k_cameraInputSurfaceDistanceScale;
+        if (value < k_cameraInputSurfaceUpperDistance && k_cameraInputSurfaceLowerDistance < value) {
             camera->floorSurface = ((MenuRules *)(object))->locked;
         }
     }
     if (Cinema_IsSequenceInWindow() != 0) {
-        camera->floorSurface = D_800CD8D0;
+        camera->floorSurface = g_defaultCameraSurfaceType;
     }
     if (camera->zoomBlend > 0.0f) {
-        camera->floorSurface = D_800CD8D0;
+        camera->floorSurface = g_defaultCameraSurfaceType;
     }
 }

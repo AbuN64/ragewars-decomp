@@ -16,36 +16,36 @@ typedef struct RangeNode RangeNode;
 struct Blast;
 typedef struct Blast Blast;
 
-extern float D_800C4468_de;
+extern float k_teamClipFlagFortyScale;
 
-struct OwnerRecAt16D4;
-struct OwnerRecAt16D4 {
+struct EventCounterPlayerView;
+struct EventCounterPlayerView {
     char pad0[8];
     CVector3 pos;
     char pad14[0x16D4 - 0x14];
     s32 alive;
 };
 
-struct ActorRecAt1D8V3;
-struct OwnerRecAt16D4;
-struct ActorRecAt1D8V3 {
+struct EventCounterActorView;
+struct EventCounterPlayerView;
+struct EventCounterActorView {
     u8 kind;
     char pad1[0x100 - 1];
     s32 flags;
     char pad104[0x1D8 - 0x104];
-    struct OwnerRecAt16D4 *owner;
+    struct EventCounterPlayerView *owner;
 };
 
 struct Limit;
 typedef struct Limit Limit;
 
-extern void Events_IgnoreEvent(int arg0, int arg1, int arg2, int arg3, ...);
+extern void Events_IgnoreEvent(int unusedActor, int unusedEvent, int unusedValue, int unusedContext, ...);
 
-struct ParamsRecAt4;
-typedef struct ParamsRecAt4 ParamsRecAt4;
+struct EventCounterParameters;
+typedef struct EventCounterParameters EventCounterParameters;
 
-struct ActorRecAt1D8V3;
-typedef struct ActorRecAt1D8V3 ActorRecAt1D8V3;
+struct EventCounterActorView;
+typedef struct EventCounterActorView EventCounterActorView;
 
 struct Blast;
 struct Blast {
@@ -54,7 +54,7 @@ struct Blast {
     s32 damage;
 };
 
-extern void Events_IncrementNearbyPlayerCounter(ActorRecAt1D8V3 *arg0, Player *player, s32 arg2, Blast blast);
+extern void Events_IncrementNearbyPlayerCounter(EventCounterActorView *actor, Player *player, s32 event, Blast blast);
 
 struct ParamsEventsStartActorEmitter;
 struct ParamsEventsStartActorEmitter {
@@ -64,17 +64,17 @@ struct ParamsEventsStartActorEmitter {
     u8 pad;
 };
 
-struct ObjectRecAt17C;
-typedef struct ObjectRecAt17C ObjectRecAt17C;
+struct EventMaskActorView;
+typedef struct EventMaskActorView EventMaskActorView;
 
-struct OwnerRecAt16D4;
-typedef struct OwnerRecAt16D4 OwnerRecAt16D4;
+struct EventCounterPlayerView;
+typedef struct EventCounterPlayerView EventCounterPlayerView;
 
-extern float D_800C9564;
+extern float k_eventUpperHeightRange;
 
-extern float D_800C9560;
+extern float k_eventLowerHeightRange;
 
-extern float D_800C446C_de;
+extern float k_teamClipFlagTwentyScale;
 
 struct RangeNode;
 struct RangeNode {
@@ -91,8 +91,8 @@ struct RangeNode {
 struct ContextEventsStartActorEmitter;
 typedef struct ContextEventsStartActorEmitter ContextEventsStartActorEmitter;
 
-struct ParamsRecAt4;
-struct ParamsRecAt4 {
+struct EventCounterParameters;
+struct EventCounterParameters {
     s16 unk0;
     s16 value;
     s32 team;
@@ -107,8 +107,8 @@ struct Kind {
     s8 team;
 };
 struct Kind;
-struct ObjectRecAt17C;
-struct ObjectRecAt17C {
+struct EventMaskActorView;
+struct EventMaskActorView {
     u8 type;
     u8 pad1[0x17];
     struct Kind *kind;
@@ -125,7 +125,7 @@ struct Filter {
     s32 mask;
 };
 
-extern float D_800C4490_de;
+extern float g_dynamicLightFalloffUnit;
 
 struct ParamsEventsStartActorEmitter;
 typedef struct ParamsEventsStartActorEmitter ParamsEventsStartActorEmitter;
@@ -145,11 +145,11 @@ struct ContextEventsStartActorEmitter {
     struct Inner *inner;
 };
 
-extern float D_800C4494_de;
+extern float g_dynamicLightDirectionScale;
 
-extern void Events_ClearActorEventBit(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6);
+extern void Events_ClearActorEventBit(void *actor, s32 unused1, s32 unused2, s32 context, s32 unused4, s32 unused5, s32 unused6);
 
-extern void Events_SetActorEffectMode(LevelActor *actor, int arg1, int arg2, Blast blast);
+extern void Events_SetActorEffectMode(LevelActor *actor, int unusedTarget, int unusedKind, Blast blast);
 
 typedef CVector3 Vec3f;
 extern struct SceneEffect *Animpool_SpawnAnimationObject(struct CAnimPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,

@@ -8,7 +8,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ARGB_COLOR.H"
 #include "COMMON/GFX.H"
 #include "COMMON/MENU_TEXT.H"
@@ -19,15 +19,15 @@
 #include "COMMON/LOADOUT.H"
 #include "COMMON/OWNERRECAT8V2.H"
 #include "COMMON/GROUP.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "COMMON/LIGHTDATA.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/MTX.H"
-#include "COMMON/OBJECTLINKS1E8.H"
+#include "COMMON/PARTICLE_ATTACHMENT_AND_OWNER_VIEWS.H"
 #include "COMMON/COLORENTRY.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/RESULTS.H"
@@ -60,17 +60,17 @@
 #include "COMMON/PLAYERRECAT64E.H"
 #include "COMMON/OBJB.H"
 #include "TYPES.H"
-extern StyleNextState *D_800E5694;
+extern StyleNextState *g_alternatePlayerSettingsScreen;
 #include "MENU/PLAYER_STOREALTERNATEPLAYERSETTINGSENTRY.H"
 #include "MENU/PLAYER_SELECTNEXTALTERNATEPLAYERSETTINGSENTRY.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
-/* Releases the object D_800E5694 holds through Cache_FreeMemory, clears D_800E5694 and returns zero. */
+/* Releases the object g_alternatePlayerSettingsScreen holds through Cache_FreeMemory, clears g_alternatePlayerSettingsScreen and returns zero. */
 
 
 
 /* Calls MarkMenuEventHandled; when Menu_GetFocusedElementId reports 0x1C8, passes the word at offset 0x14 of the
-   object D_800E5694 points to to Player_StoreAlternatePlayerSettingsEntry, then passes -1 to Random_SetMenuChoiceResult if Menu_GetPreviousScreenOwner
+   object g_alternatePlayerSettingsScreen points to to Player_StoreAlternatePlayerSettingsEntry, then passes -1 to Random_SetMenuChoiceResult if Menu_GetPreviousScreenOwner
    reports 0x16 for zero and 0xB otherwise, and calls Menu_ReturnToPreviousScreen. Returns zero. */
 
 
@@ -92,33 +92,33 @@ s32 XStdio_FormatBuffer(void *, s32, ...);
 
                                /* extern */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern s32 D_800E1D54[];
+extern s32 g_playerSettingsSlotNumberTranslations[];
 #else
 #endif
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5710, an actor kind at D_800E5714 and a handler at D_800E5718: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_alternatePlayerSettingsEventIds, an actor kind at g_alternatePlayerSettingsEventActorKinds and a handler at g_alternatePlayerSettingsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler80437454)(void *, s32, s32, s32, s32);
 
 
 
-extern Handler80437454 D_800E5718;
+extern Handler80437454 g_alternatePlayerSettingsEventHandlers;
 
 s32 Player_FreeAlternatePlayerSettingsScreen(void) {
-    Cache_FreeMemory(D_800E5694);
-    D_800E5694 = 0;
+    Cache_FreeMemory(g_alternatePlayerSettingsScreen);
+    g_alternatePlayerSettingsScreen = 0;
     return 0;
 }
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_8043704C_de(void) {
+s32 Player_EmptyAlternateSettingsEntryHook(void) {
     return 0;
 }
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_80437054_de(void) {
+s32 Player_EmptyAlternateSettingsExitHook(void) {
     return 0;
 }
 
@@ -131,7 +131,7 @@ s32 Player_ConfirmAlternatePlayerSettingsEntry(void) {
 #elif defined(VERSION_EU_X)
     if (Menu_GetFocusedElementId() == 0x1CC) {
 #endif
-        Player_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
+        Player_StoreAlternatePlayerSettingsEntry(g_alternatePlayerSettingsScreen->item);
         Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
         Menu_ReturnToPreviousScreen();
     }
@@ -145,63 +145,63 @@ s32 Player_CancelAlternatePlayerSettingsEntry(void) {
     return 0;
 }
 
-s32 Player_SelectNextAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
-    s32 temp_v0;
+s32 Player_SelectNextAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 selectionPressed) {
+    s32 selectedEntry;
 
     MarkMenuEventHandled();
-    if (arg3 == 1) {
-        Player_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
-        temp_v0 = D_800E5694->item + 1;
-        D_800E5694->item = temp_v0;
-        if (temp_v0 >= 4) {
-            D_800E5694->item = 0;
+    if (selectionPressed == 1) {
+        Player_StoreAlternatePlayerSettingsEntry(g_alternatePlayerSettingsScreen->item);
+        selectedEntry = g_alternatePlayerSettingsScreen->item + 1;
+        g_alternatePlayerSettingsScreen->item = selectedEntry;
+        if (selectedEntry >= 4) {
+            g_alternatePlayerSettingsScreen->item = 0;
         }
-        Player_SelectAlternatePlayerSettingsEntry(D_800E5694->item);
-        XStdio_FormatBuffer(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5694->item + 1);
-        D_800E5694->label->text = (void *) (D_800E5694->text);
+        Player_SelectAlternatePlayerSettingsEntry(g_alternatePlayerSettingsScreen->item);
+        XStdio_FormatBuffer(g_alternatePlayerSettingsScreen->text, RW_LOCALIZED_TEXT(g_playerSettingsSlotNumberFormat, g_playerSettingsSlotNumberTranslations, g_playerSettingsSlotNumberTranslations, g_languageIndex), g_alternatePlayerSettingsScreen->item + 1);
+        g_alternatePlayerSettingsScreen->label->text = (void *) (g_alternatePlayerSettingsScreen->text);
         return 0;
     }
     return 0;
 }
 
-s32 Player_SelectPreviousAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
-    s32 temp_v0;
+s32 Player_SelectPreviousAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 selectionPressed) {
+    s32 selectedEntry;
 
     MarkMenuEventHandled();
-    if (arg3 == 1) {
-        Player_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
-        temp_v0 = D_800E5694->item - 1;
-        D_800E5694->item = temp_v0;
-        if (temp_v0 < 0) {
-            D_800E5694->item = 3;
+    if (selectionPressed == 1) {
+        Player_StoreAlternatePlayerSettingsEntry(g_alternatePlayerSettingsScreen->item);
+        selectedEntry = g_alternatePlayerSettingsScreen->item - 1;
+        g_alternatePlayerSettingsScreen->item = selectedEntry;
+        if (selectedEntry < 0) {
+            g_alternatePlayerSettingsScreen->item = 3;
         }
-        Player_SelectAlternatePlayerSettingsEntry(D_800E5694->item);
-        XStdio_FormatBuffer(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5694->item + 1);
-        D_800E5694->label->text = (void *) (D_800E5694->text);
+        Player_SelectAlternatePlayerSettingsEntry(g_alternatePlayerSettingsScreen->item);
+        XStdio_FormatBuffer(g_alternatePlayerSettingsScreen->text, RW_LOCALIZED_TEXT(g_playerSettingsSlotNumberFormat, g_playerSettingsSlotNumberTranslations, g_playerSettingsSlotNumberTranslations, g_languageIndex), g_alternatePlayerSettingsScreen->item + 1);
+        g_alternatePlayerSettingsScreen->label->text = (void *) (g_alternatePlayerSettingsScreen->text);
         return 0;
     }
     return 0;
 }
 
-s32 Player_DispatchAlternatePlayerSettingsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Player_DispatchAlternatePlayerSettingsEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
     Handler80437454 *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E5718 != 0) {
+    if (g_alternatePlayerSettingsEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E5718;
+        entry = &g_alternatePlayerSettingsEventHandlers;
         index = 0;
         do {
-            if (D_800E5710[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E5714[index].value;
+            if (g_alternatePlayerSettingsEventIds[index].value == eventId) {
+                actor = eventObject;
+                actor_kind = actor->input;
+                table_kind = g_alternatePlayerSettingsEventActorKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(eventObject, eventId, eventPayload, eventValue, eventExtra);
                 }
             }
             entry += 3;

@@ -5,11 +5,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/REC.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "COMMON/LISTHEADER.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
@@ -17,22 +17,22 @@
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "COMMON/OBJECTLINKS14.H"
+#include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
 
 /* 8020402C.CPP */
 #if defined(VERSION_EU_X) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_80204030_eu_x);
+INCLUDE_ASM("span_1000", Action_UpdateBreakableProximityEuropeanExtended);
 #endif
 
 #if defined(VERSION_EU) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_80204030_eu);
+INCLUDE_ASM("span_1000", Action_UpdateBreakableProximityEuropean);
 #endif
 
 #if defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_US)
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
-extern s32 D_auto_800D70DC;
+extern s32 g_breakableNotificationText;
 extern u8 *Playerai_FindTransientPlayer(u8 *);
-extern void func_8022E17C_de(void *, void *, s32);
+extern void Playerai_UpdateTeamScore(void *, void *, s32);
 extern void Camera_PostScreenMessage(u8 *, void *, s32);
 /* 182/182 words in us-rev1 and de (local j targets aside); not exact on the ROM path only because the switch jump table (D_auto_rodata_func_8020402C_us_rev1_800C6B48) still lives in a separate rodata file; us/eu/eu-x differ in prologue size */
 typedef struct LvDelta {
@@ -51,9 +51,9 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
     u32 t1;
     switch (kind) {
     case 0x64E:
-        player = Playerai_FindTransientPlayer((u8 *)&D_80145040);
+        player = Playerai_FindTransientPlayer((u8 *)&g_playerViewRenderContext);
         if (player != 0 && LV_FIELD(player, s32, 0x5E4) != 0 && LV_FIELD(hit, s8, 0x36) != LV_FIELD(hit, s8, 0x34)) {
-            table = (u8 *)&D_80145040 + 0x1860;
+            table = (u8 *)&g_playerViewRenderContext + 0x1860;
             if (LV_FIELD(table, s32, 0x68) == 0 && LV_FIELD(hit, s32, 0x12C) == 0) {
                 if (LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) == 1) {
                     LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) = 0;
@@ -72,7 +72,7 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
         if (LV_FIELD(hit, s8, 0x36) == LV_FIELD(hit, s8, 0x34)) {
             return;
         }
-        player = Playerai_FindTransientPlayer((u8 *)&D_80145040);
+        player = Playerai_FindTransientPlayer((u8 *)&g_playerViewRenderContext);
         if (player == 0 || LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) == 0) {
             return;
         }
@@ -84,8 +84,8 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) = 0;
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u16, 8) += 1;
-            func_8022E17C_de(player, player, 3);
-            table2 = (u8 *)&D_80145040 + 0x1860;
+            Playerai_UpdateTeamScore(player, player, 3);
+            table2 = (u8 *)&g_playerViewRenderContext + 0x1860;
             LV_FIELD(table2, s32, 0x84) = 0;
             LV_FIELD(table2, s32, 0x80) = 0;
             switch (LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x92)) {
@@ -105,9 +105,9 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
                 SoundElement_PlayFlatSound(0x2EA);
                 break;
             }
-            for (node = *(u8 **)&D_80145060; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
+            for (node = *(u8 **)&g_transientPlayerList; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
                 if (LV_FIELD(node, void *, 0x5DC) != 0) {
-                    Camera_PostScreenMessage((u8 *)&D_80145088, LV_FIELD(node, void *, 0x5DC), D_auto_800D70DC);
+                    Camera_PostScreenMessage((u8 *)&g_frontendScreenStatus, LV_FIELD(node, void *, 0x5DC), g_breakableNotificationText);
                 }
             }
         } else {
@@ -135,7 +135,7 @@ typedef struct SoundActor {
     u8 kind; char pad1[0xFF]; s32 flags;
     char pad104[0x1D8 - 0x104]; SoundParent *parent;
 } SoundActor;
-extern char D_80141008;
+extern char g_fallbackScreenMessageEmitter;
 extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
 /* EU/EU-X: this body is 56/57 words; reorg picks beqz (target beql) for the flags check, so those versions
  * keep their asm. */
@@ -155,9 +155,9 @@ s32 Action_ShowTriggerMessage(struct NavigationPlatform *object, ActorMotionStat
     parent = ((SoundActor *)player)->parent;
     if (index == 0) return 0;
     emitter = parent->emitter;
-    fallback = &D_80141008;
+    fallback = &g_fallbackScreenMessageEmitter;
     if (emitter != 0) fallback = emitter;
-    Gsky_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
+    Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
     index = record->soundIndex;
     callback = gameplaySoundHook(index);
     if (callback != 0) SoundElement_PlayDialogGroup(callback);
@@ -173,29 +173,29 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
-extern void Link_DispatchActorLinks(void *actor, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *actor, s32 eventMask, void *eventSource);
 
-struct SceneRecAt95A8;
-extern void Fx_RecycleOwnerParticles(struct SceneRecAt95A8 *, s32);
+struct ParticleQuadPoolScene;
+extern void Fx_RecycleOwnerParticles(struct ParticleQuadPoolScene *, s32);
 
 extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
 /* Supplies the nonnegative blend remaining after the incoming strength is
  * scaled, then applies the actor animation using the original lookup. */
-struct InputRecAt40 {
+struct ActionFadeInput {
     char pad0[0x40];
     f32 strength;
 };
 
-extern void func_8024A1D0_de(Actor_func_8024A1D0_de *, void *, Lookup *);
+extern void Gobjinst_DrawActorModelWithViewEffects(FadedActorRenderView *, void *, Lookup *);
 
 /** Run the object's optional update hook, then copy one of two byte pairs into the record header. */
 
 void Actionai_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
     Owner *owner = (void *)ownerRecord;
-    ObjRecAt30 *event = (void *)eventRecord;
+    ActionTrackCallbackRecord *event = (void *)eventRecord;
     char *base = owner->track + 0x14;
-    Hook *hook = event->unk30;
+    Hook *hook = event->callbackHook;
 
     if (hook != 0 && hook->fn != 0) {
         hook->fn(ownerRecord, eventRecord);
@@ -210,10 +210,10 @@ void Actionai_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
 }
 
 void Actionai_InitBreakableMotion(LevelActor *actor, ActorMotionState *motionState) {
-    motionState->table = &D_800C8274;
-    motionState->update = &D_002043E0;
-    motionState->unk124 = 0;
-    motionState->unk128 = 0;
+    motionState->table = &g_actionMotionDispatchTable;
+    motionState->update = &g_actionUpdateRomEntry;
+    motionState->animation = 0;
+    motionState->remainingCount = 0;
     motionState->unk12C = 0;
     if (((BreakableDefinition *)actor->definition)->flags & 1) {
         actor->flags = actor->flags | 0x10000;
@@ -239,9 +239,9 @@ void Action_ActivateBreakableState(SharedPlayer *actor, void *state) {
             break;
         }
     } else {
-        D_800C8270_de = 1;
+        g_actionStateTransitionPending = 1;
         Actor_RequestActorState(actor, state, 0);
-        D_800C8270_de = 0;
+        g_actionStateTransitionPending = 0;
     }
 }
 
@@ -290,10 +290,10 @@ void Action_SetBreakableState(void *actor) {
     breakableDefinition = (BreakableDefinition *)((LevelActor *)actor)->definition;
     pFlag = &g_world;
     Rumble_SetActorStateBit(pFlag, actor, 1);
-    if (D_800C8270_de == 0) {
+    if (g_actionStateTransitionPending == 0) {
         Link_DispatchActorLinks(actor, 0x80000, actor);
     }
-    Fx_RecycleOwnerParticles(&D_801379C0, actor);
+    Fx_RecycleOwnerParticles(&g_actorParticleScene, actor);
     if (pFlag->mode != 4) {
         hitFlags = ((LevelActor *)actor)->flags | 0x08000000;
         ((LevelActor *)actor)->flags = hitFlags;
@@ -310,12 +310,12 @@ void Action_SetBreakableState(void *actor) {
 
 void Actionai_SetDrawHandler(void *unused0, void *motionState) {
     Dest *state = motionState;
-    state->draw = &D_00204808;
+    state->draw = &g_actionDrawRomEntry;
 }
 
 /** Clear two flag groups when the object's 0x1B0 field exceeds a tunable. */
 void Actionai_ClearMotionFlags(LevelActor *object) {
-    if (object->motionThreshold > D_800C1A70_de) {
+    if (object->motionThreshold > k_actionMotionThreshold) {
         int flags = object->flags;
         flags &= ~0x2000;
         flags &= ~0x100;
@@ -337,14 +337,14 @@ void Actionai_DisableTrigger(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
-void Actionai_DrawFadedActor(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {
-    f32 remaining = D_800C1A78_de - input->strength * D_800C1A74_de;
-    D_800D15E0 = 1;
+void Actionai_DrawFadedActor(FadedActorRenderView *actor, struct ActionFadeInput *input, Lookup *lookup) {
+    f32 remaining = k_actionFadeMaximum - input->strength * k_actionFadeStrengthScale;
+    g_menuModelFillEnabled = 1;
     if (remaining < 0.0f) {
         remaining = 0.0f;
     }
-    D_800D15E4[3] = remaining;
-    func_8024A1D0_de(actor, input, lookup);
+    g_menuModelFillColor[3] = remaining;
+    Gobjinst_DrawActorModelWithViewEffects(actor, input, lookup);
 }
 
 #if defined(VERSION_EU)
@@ -368,7 +368,7 @@ char func_80204868_de_padding_5468[8] =
 /* 800C6B5C.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80204308_C775C_us_rev1.c */
-const unsigned int D_blob_890ee42bad58efda4265[1] = {
+const unsigned int k_ActionUpdatebreakableproximityFourWords[1] = {
     0x40800000,
 };
 #endif

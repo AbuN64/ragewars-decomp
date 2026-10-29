@@ -2,13 +2,13 @@
 #include "TEXTURE/CARTRIDGE_DMA_AND_AUDIO_TIMING_VIEWS.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/ARG.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/SOUNDINFO.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/GUMTXL2F.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
@@ -22,7 +22,7 @@
 #include "sdk/os.h"
 
 
-extern u32 D_800CB710;
+extern u32 g_audioWorkerElapsedTicks;
 
 
 
@@ -32,14 +32,14 @@ extern u32 D_800CB710;
 
 
 
-extern void Sound_RetireCompletedSampleWindows(Work56EC8 *arg0);
+extern void Sound_RetireCompletedSampleWindows(Work56EC8 *audioTask);
 
 
-extern void *alAudioFrame(void *arg0, s32 *arg1, s32 arg2, s16 arg3);
+extern void *alAudioFrame(void *commandList, s32 *commandCount, s32 outputBufferAddress, s16 sampleCount);
 
-extern void Sched_SendSchedulerTask(void *arg0, void *arg1);
+extern void Sched_SendSchedulerTask(void *scheduler, void *task);
 
-extern void osAiSetNextBuffer(void *arg0, s32 arg1);
+extern void osAiSetNextBuffer(void *sampleBuffer, s32 byteCount);
 
 void Audiomgr_RunAudioWorker(void) {
     u32 stop, argument, frame;
@@ -52,10 +52,10 @@ void Audiomgr_RunAudioWorker(void) {
     argument = stop;
     frame = stop;
     previous = 0;
-    osScAddClient(&D_80142928, &client, &D_80107E00);
+    osScAddClient(&g_systemScheduler, &client, &g_audioWorkerEventQueue);
     do {
-        D_800CB710 = ((Audio_ReadSystemTime() - previous) << 6) / 3000ULL;
-        osRecvMesg(&D_80107E00, &event.message, 1);
+        g_audioWorkerElapsedTicks = ((Audio_ReadSystemTime() - previous) << 6) / 3000ULL;
+        osRecvMesg(&g_audioWorkerEventQueue, &event.message, 1);
         previous = Audio_ReadSystemTime();
         switch (event.words[0]) {
         case 1:
@@ -63,11 +63,11 @@ void Audiomgr_RunAudioWorker(void) {
             if (frame < 21) break;
             frame = 0;
         case 7:
-            D_800CB70C_de++;
+            g_audioWorkerEventCount++;
             while (!(osAiGetStatus() & 0x80000000)) {
-                Audiomgr_RenderAudioFrame(D_80107E28[D_800CB700_de % 3], argument);
+                Audiomgr_RenderAudioFrame(g_audioFrameTasks[g_audioTaskFrameIndex % 3], argument);
             }
-            entryObject = D_80107DFC;
+            entryObject = g_audioCacheCountdownHead;
             for (entry = entryObject; entry; entry = entry->next) {
                 if (entry->state) entry->state--;
             }
@@ -76,17 +76,17 @@ void Audiomgr_RunAudioWorker(void) {
             break;
         }
     } while (stop == 0);
-    alClose(&D_80107E34);
+    alClose(&g_audioSynthGlobals);
 }
 
-s32 *Audiomgr_InitializeDmaState(s32 **arg0) {
-    if (D_80107DF0.initialized == 0) {
-        D_80107DF0.firstFree = (struct Window *)&D_80107928;
-        D_80107DF0.firstUsed = 0;
-        D_80107DF0.initialized = 1U;
+s32 *Audiomgr_InitializeDmaState(s32 **dmaStateOutput) {
+    if (g_audioDmaState.initialized == 0) {
+        g_audioDmaState.firstFree = (struct Window *)&g_audioDmaCacheEntries;
+        g_audioDmaState.firstUsed = 0;
+        g_audioDmaState.initialized = 1U;
     }
-    *arg0 = (s32 *)&D_80107DF0;
-    return &D_002571F0;
+    *dmaStateOutput = (s32 *)&g_audioDmaState;
+    return &g_sound_GetSampleDmaWindowAddressEntry;
 }
 
 s32 Audiomgr_RenderAudioFrame(Work56EC8 *audioTask, u32 unused)
@@ -97,19 +97,19 @@ s32 Audiomgr_RenderAudioFrame(Work56EC8 *audioTask, u32 unused)
   void *item;
   Sound_RetireCompletedSampleWindows(audioTask);
   value = osVirtualToPhysical(audioTask->owner);
-  audioTask->id = (u16)D_80107E98;
+  audioTask->id = (u16)g_audioSamplesPerFrame;
   SoundElement_AcquireContextLock();
-  item = alAudioFrame(D_80107E20[D_800CB708], &completed, value, audioTask->id);
+  item = alAudioFrame(g_audioCommandBuffers[g_audioCommandBufferIndex], &completed, value, audioTask->id);
   SoundElement_ReleaseContextLock();
   if (completed != 0)
   {
-    audioTask->base = D_80107E20[D_800CB708];
-    audioTask->offset = ((((s32) item) - ((s32) D_80107E20[D_800CB708])) >> 3) << 3;
+    audioTask->base = g_audioCommandBuffers[g_audioCommandBufferIndex];
+    audioTask->offset = ((((s32) item) - ((s32) g_audioCommandBuffers[g_audioCommandBufferIndex])) >> 3) << 3;
     osWritebackDCacheAll();
-    Sched_SendSchedulerTask(&D_80142928, audioTask->payload);
-    D_800CB708 ^= 1;
+    Sched_SendSchedulerTask(&g_systemScheduler, audioTask->payload);
+    g_audioCommandBufferIndex ^= 1;
     SoundElement_UpdateContext();
-    osRecvMesg(&D_80107E80, &event, 1);
+    osRecvMesg(&g_audioTaskCompletionQueue, &event, 1);
     osAiSetNextBuffer(audioTask->owner, audioTask->id << 2);
     return 1;
   }

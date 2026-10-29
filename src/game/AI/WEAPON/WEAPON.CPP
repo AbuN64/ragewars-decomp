@@ -3,7 +3,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/PLAYERPROFILES.H"
@@ -15,7 +15,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/INTEGERSTATE244.H"
 #include "COMMON/SELF.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
@@ -23,7 +23,7 @@
 #include "WEAPONS/CHARGE_AND_LINKED_ACTOR_HANDLES.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "WEAPONS/MEASUREDRECAT1D8V2.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "WEAPONS/STARTUP_CUES_AND_SIDE_YAW.H"
 #include "COMMON/OBJB.H"
 #include "WEAPONS/MEASUREDRECAT1D8V3.H"
@@ -37,22 +37,22 @@
 #include "WEAPONS/PITCH_TRANSLATION_AND_SPIN_ACTIONS.H"
 
 extern void Player_ReleaseObjectHandles(void *);
-extern struct Shape_func_8020AF9C_de_2 D_80140FF8;
+extern struct WeaponGlobalRuntimeView g_playerWeaponClassMode;
 
 /* 80231F5C_5.CPP */
 void Weapon_SpawnTargetPlayerFireEffect(void *aiTarget, s32 unused1, s32 effect) {
     AiTarget *target = aiTarget;
-    func_8021A9A4_de(target->player, effect);
+    Playerai_DispatchWeaponFireEffect(target->player, effect);
 }
 
 /** Return the value pointed to by the indexed pointer table entry. */
-int Weapon_GetIndexedTableValue(int arg0) {
-    return *D_800CB358_de[arg0];
+int Weapon_GetIndexedTableValue(int tableIndex) {
+    return *g_weaponIndexedValueTable[tableIndex];
 }
 
-s32 Weapon_IsPrimarySwitchGroup(s32 arg0) {
-    if (arg0 < 7) {
-        if (arg0 >= 3) {
+s32 Weapon_IsPrimarySwitchGroup(s32 weaponType) {
+    if (weaponType < 7) {
+        if (weaponType >= 3) {
             return 1;
         }
     }
@@ -60,13 +60,13 @@ s32 Weapon_IsPrimarySwitchGroup(s32 arg0) {
 }
 
 /** Return whether the encoded type belongs to this caller's accepted set. */
-s32 Weapon_IsSecondarySwitchGroup(s32 arg0) {
+s32 Weapon_IsSecondarySwitchGroup(s32 weaponType) {
     {
-        arg0 -= 2;
-        if ((unsigned int)arg0 >= 14) {
+        weaponType -= 2;
+        if ((unsigned int)weaponType >= 14) {
             goto case_default;
         }
-        switch (arg0) {
+        switch (weaponType) {
         case 0: goto case_2;
         case 1: goto case_default;
         case 2: goto case_default;
@@ -95,9 +95,9 @@ case_default:
     return 0;
 }
 
-s32 Weapon_IsSpecialSwitchGroup(s32 arg0) {
-    if (arg0 < 0xD) {
-        if (arg0 >= 0xA) {
+s32 Weapon_IsSpecialSwitchGroup(s32 weaponType) {
+    if (weaponType < 0xD) {
+        if (weaponType >= 0xA) {
             return 1;
         }
     }
@@ -106,13 +106,13 @@ s32 Weapon_IsSpecialSwitchGroup(s32 arg0) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_WORLDFUNC.H"
-extern char *D_800E0D44[];
-extern char *D_800DCC68[];
+extern char *g_weaponLockedNoticeTextEu[];
+extern char *g_weaponLockedNoticeTextEuX[];
 extern s32 Player_GetProfileAchievementFlag(Profile *, s32);
-extern s32 Player_GetPlayerIndex(Shared_MenuData *, PlayerRecAt1450V1 *);
+extern s32 Player_GetPlayerIndex(Shared_MenuData *, WeaponPlayerPermissionView *);
 extern void Gsky_PostTargetedScreenMessage(Shared_MenuObject *, void *, char *, s32, f32);
 
-s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
+s32 Weapon_CheckProfileFirePermission(WeaponPlayerPermissionView *pThis) {
     s32 result;
     Shared_Game *settings;
     if (pThis->shield > 0.0f) {
@@ -121,23 +121,23 @@ s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
     if (pThis->isBot != 0) {
         return 1;
     }
-    settings = &D_80145040.game;
+    settings = &g_playerViewRenderContext.game;
     if (settings->controllerMode != 1) {
         return 1;
     }
-    result = Player_GetProfileAchievementFlag(&D_80102B00[pThis->character], pThis->weapon);
+    result = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[pThis->character], pThis->weapon);
     if (result == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (pThis->hud != 0) {
-            s32 player = Player_GetPlayerIndex(&D_80145040, pThis);
-            Gsky_PostTargetedScreenMessage(&D_80145040.object, pThis->hud,
+            s32 player = Player_GetPlayerIndex(&g_playerViewRenderContext, pThis);
+            Gsky_PostTargetedScreenMessage(&g_playerViewRenderContext.object, pThis->hud,
 
 #if defined(VERSION_EU_X)
-                            D_800DCC68[settings->language],
+                            g_weaponLockedNoticeTextEuX[settings->language],
 #else
-                            D_800E0D44[settings->language],
+                            g_weaponLockedNoticeTextEu[settings->language],
 #endif
-                            player, D_800C8100);
+                            player, g_weaponPermissionNoticeDuration);
         }
     }
     return result;
@@ -146,9 +146,9 @@ s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 
-void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1) {
-    Weaponai_ApplyWeaponSwitch(arg0, arg1);
-    Actor_RequestActorState(arg0, arg1, 0);
+void Weapon_ApplySwitchAndRequestIdle(void *actor, void *fireState) {
+    Weaponai_ApplyWeaponSwitch(actor, fireState);
+    Actor_RequestActorState(actor, fireState, 0);
 }
 #endif
 
@@ -156,12 +156,12 @@ void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1) {
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 /** Check whether a human player in mode 1 may select a weapon; when refused play the refusal sound and post a notice. */
 
-extern int D_800D30BC;
+extern int g_weaponLockedNoticeText;
 extern int Player_GetProfileAchievementFlag(char *, int);
-extern int Player_GetPlayerIndex(void *, PlayerRecAt1450V1 *);
+extern int Player_GetPlayerIndex(void *, WeaponPlayerPermissionView *);
 extern void Gsky_PostTargetedScreenMessage(void *, void *, int, int, float);
 
-int Weapon_CheckSinglePlayerFirePermission(PlayerRecAt1450V1 *player) {
+int Weapon_CheckSinglePlayerFirePermission(WeaponPlayerPermissionView *player) {
     SettingsE *rules;
     int result;
 
@@ -171,16 +171,16 @@ int Weapon_CheckSinglePlayerFirePermission(PlayerRecAt1450V1 *player) {
     if (player->isBot != 0) {
         return 1;
     }
-    rules = &D_801462C8;
+    rules = &g_gameSettings;
     if (rules->players != 1) {
         return 1;
     }
-    result = Player_GetProfileAchievementFlag((char *)&D_80102B00[player->character], player->weapon);
+    result = Player_GetProfileAchievementFlag((char *)&g_localPlayerProfiles[player->character], player->weapon);
     if (result == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (player->hud != 0) {
-            Gsky_PostTargetedScreenMessage((char *)rules - 0x1240, player->hud, D_800D30BC,
-                          Player_GetPlayerIndex((char *)rules - 0x1288, player), D_800C8100);
+            Gsky_PostTargetedScreenMessage((char *)rules - 0x1240, player->hud, g_weaponLockedNoticeText,
+                          Player_GetPlayerIndex((char *)rules - 0x1288, player), g_weaponPermissionNoticeDuration);
         }
     }
     return result;
@@ -188,17 +188,17 @@ int Weapon_CheckSinglePlayerFirePermission(PlayerRecAt1450V1 *player) {
 #endif
 
 /* 80231F5C_7.CPP */
-extern void func_8022AF74_de(Shared_ActorView *actor, s32 soundId);
+extern void Playerai_StartSecondaryAttachedSound(Shared_ActorView *actor, s32 soundId);
 
-void Weapon_InitializeChargeForWeaponFive(Shared_ActorView *arg0, WeaponFireState *fireState) {
-    Shared_ActorView *temp_a0;
+void Weapon_InitializeChargeForWeaponFive(Shared_ActorView *actorView, WeaponFireState *fireState) {
+    Shared_ActorView *weaponOwner;
     s16 idx;
 
-    temp_a0 = arg0->self;
-    idx = temp_a0->selectedAction;
-    fireState->charge = ((WeaponInfo *)D_800D052C[idx])->chargeRate * D_800C3014_de;
-    if ((temp_a0->selectedAction == 5) && (temp_a0->field11C0 == 0)) {
-        func_8022AF74_de(temp_a0, 0x46A);
+    weaponOwner = actorView->self;
+    idx = weaponOwner->selectedAction;
+    fireState->charge = ((WeaponInfo *)g_weaponInfoByType[idx])->chargeRate * g_weaponFiveChargeRateScale;
+    if ((weaponOwner->selectedAction == 5) && (weaponOwner->weaponLoopSoundHandle == 0)) {
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 0x46A);
     }
 }
 
@@ -206,27 +206,27 @@ void Weapon_InitializeChargeForWeaponFive(Shared_ActorView *arg0, WeaponFireStat
 extern s32 Menu_CountLiveNodes(void *head);
 extern s32 Playerai_GetWeaponAmmo(void *actor, s16 weaponId);
 
-void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
+void Weapon_DrawWeaponLookupModel(void *actorStorage, Dest *weaponState, Lookup *lookup) {
     void *actor;
     void *resource;
     s32 result;
     s32 one;
     s16 state;
 
-    actor = ((LevelActor *)arg0)->controller;
+    actor = ((LevelActor *)actorStorage)->controller;
     resource = ((Shared_ActorView *)actor)->message;
     result = -1;
     if (resource == 0) {
         return;
     }
-    if (D_801462C8.local != 0) {
+    if (g_gameSettings.local != 0) {
         if (Menu_CountLiveNodes((char *)resource + 0x554) != 0) {
             return;
         }
     }
     state = ((Shared_ActorView *)actor)->selectedAction;
     one = 1;
-    if ((state == one) && (arg1->field144 == 0)) {
+    if ((state == one) && (weaponState->field144 == 0)) {
         return;
     }
     if ((state >= 0x12) && (Playerai_GetWeaponAmmo(actor, state) <= 0)) {
@@ -237,39 +237,39 @@ void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
         result = ((Shared_ActorView *)actor)->unk_0x11F8;
     }
     Geometry_DrawModelResource(lookup->value,
-                  ((LevelActor *)arg0)->fieldB4, 1,
-                  (char *)arg0 + (D_800D297C * 0x18 + 0x140), 0, result);
+                  ((LevelActor *)actorStorage)->animationMatrices, 1,
+                  (char *)actorStorage + (g_lightingBufferIndex * 0x18 + 0x140), 0, result);
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1);
+extern void Weapon_ApplySwitchAndRequestIdle(void *actor, void *fireState);
 #else
 #endif
 
-void Weapon_InitializeFireStateCallbacks(void *arg0, void *arg1) {
-    f32 k = D_800C3018_de;
+void Weapon_InitializeFireStateCallbacks(void *actor, void *fireState) {
+    f32 k = g_weaponFireInitialValue;
 
-    ((Dest *)arg1)->table = &D_800CA058;
-    ((Dest *)arg1)->enter = &D_0022FC20;
-    ((Dest *)arg1)->draw = &D_0023293C;
-    ((Dest *)arg1)->field124 = 0;
-    ((Dest *)arg1)->charge = 0;
-    ((Dest *)arg1)->field130 = 0;
-    ((Dest *)arg1)->field138 = 0;
-    ((Dest *)arg1)->field13C = 1;
-    ((Dest *)arg1)->field12C = k;
-    ((LevelActor *)arg0)->team = 0;
-    ((Dest *)arg1)->field148 = 0;
-    ((Dest *)arg1)->field144 = 1;
-    ((Dest *)arg1)->field14C = 0;
-    ((Dest *)arg1)->field150 = 0;
+    ((Dest *)fireState)->table = &g_weaponFireStateCallbackTable;
+    ((Dest *)fireState)->enter = &Weapon_FireStateEnterCallbackEntry;
+    ((Dest *)fireState)->draw = &Weapon_FireStateDrawCallbackEntry;
+    ((Dest *)fireState)->definitionHealth = 0;
+    ((Dest *)fireState)->charge = 0;
+    ((Dest *)fireState)->field130 = 0;
+    ((Dest *)fireState)->fireCounter = 0;
+    ((Dest *)fireState)->fireMode = 1;
+    ((Dest *)fireState)->field12C = k;
+    ((LevelActor *)actor)->team = 0;
+    ((Dest *)fireState)->field148 = 0;
+    ((Dest *)fireState)->field144 = 1;
+    ((Dest *)fireState)->field14C = 0;
+    ((Dest *)fireState)->field150 = 0;
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 Weapon_ApplySwitchAndRequestIdle
 #else
 Weaponai_InitializeSwitchAndRequestIdle
 #endif
-(arg0, arg1);
+(actor, fireState);
 }
 
 extern s32 Playerai_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType);
@@ -296,7 +296,7 @@ s32 Weapon_PickRandomArmedWeapon(void *player) {
 
 /* 80231F5C_9.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-void Weapon_ApplySwitchAndSetSingleRound(void *part, func_80232A38_S1 *body) {
+void Weapon_ApplySwitchAndSetSingleRound(void *part, WeaponSwitchActionView *body) {
     Weaponai_ApplyWeaponSwitch(part, body);
     body->unk13C = 1;
     body->unk144 = 1;
@@ -304,7 +304,7 @@ void Weapon_ApplySwitchAndSetSingleRound(void *part, func_80232A38_S1 *body) {
 #endif
 
 /* 80231F5C_10.CPP */
-extern s32 func_802301F4_de(void *, void *);
+extern s32 Weaponai_TryRequestFiringState(void *, void *);
 
 void Weapon_ResetControllerAndSpin(LevelActor *actor, WeaponFireState *fireState) {
     void *controller;
@@ -315,26 +315,26 @@ void Weapon_ResetControllerAndSpin(LevelActor *actor, WeaponFireState *fireState
     ((Player *)controller)->controllerTimer = 0;
     fireState->spinStep = 0;
     fireState->spin = 0;
-    if ((fireState->triggerMode != 0) && (func_802301F4_de(actor, fireState) == 0)) {
+    if ((fireState->triggerMode != 0) && (Weaponai_TryRequestFiringState(actor, fireState) == 0)) {
         Actor_RequestActorState(actor, fireState, 2);
     }
 }
 
-s32 Weapon_IsTriggerReleasedOrBlocked(LevelActor *actor, void *arg1, Shared_ActorView *actorView) {
-    s32 temp_v0;
+s32 Weapon_IsTriggerReleasedOrBlocked(LevelActor *actor, void *unusedFireState, Shared_ActorView *actorView) {
+    s32 wasActionReady;
     void *owner;
 
     {
         f32 field = actorView->stun;
-        if (D_800C301C_de < field) {
+        if (g_weaponTriggerStunThreshold < field) {
             return 1;
         }
     }
     if ((actor->flags & 0x300000) && (actorView->remote != 0)) {
         owner = actorView->owner;
-        temp_v0 = ((LevelActor *)owner)->actionReady;
+        wasActionReady = ((LevelActor *)owner)->actionReady;
         ((LevelActor *)owner)->actionReady = 0;
-        return temp_v0 == 0;
+        return wasActionReady == 0;
     }
     if (actorView->actionFlags & 0x2000) {
         if (actorView->actionState != 0) {
@@ -345,19 +345,19 @@ s32 Weapon_IsTriggerReleasedOrBlocked(LevelActor *actor, void *arg1, Shared_Acto
     return 1;
 }
 
-void Weapon_ReleaseLinkedActorHandles(void *arg0) {
-    Player_ReleaseObjectHandles((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
+void Weapon_ReleaseLinkedActorHandles(void *weaponActor) {
+    Player_ReleaseObjectHandles((((struct ActorLinkedControllerView *) ((s8 *) weaponActor))->link));
 }
 
 void Weapon_InitializeChargeForWeaponEight(Shared_ActorView *actorView, WeaponFireState *fireState) {
-    void *temp_a0;
+    void *weaponOwner;
     s16 idx;
 
-    temp_a0 = actorView->self;
-    idx = ((Shared_ActorView *)temp_a0)->selectedAction;
-    fireState->charge = ((WeaponInfo *)D_800D052C[idx])->chargeRate * D_800C3020_de;
-    if ((((Shared_ActorView *)temp_a0)->selectedAction == 8) && (((Shared_ActorView *)temp_a0)->field11C0 == 0)) {
-        func_8022AF74_de(temp_a0, 0xA3C);
+    weaponOwner = actorView->self;
+    idx = ((Shared_ActorView *)weaponOwner)->selectedAction;
+    fireState->charge = ((WeaponInfo *)g_weaponInfoByType[idx])->chargeRate * g_weaponEightChargeRateScale;
+    if ((((Shared_ActorView *)weaponOwner)->selectedAction == 8) && (((Shared_ActorView *)weaponOwner)->weaponLoopSoundHandle == 0)) {
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 0xA3C);
     }
 }
 
@@ -366,7 +366,7 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
 
     state = ((Shared_Actor *)actor)->entity;
     if (((WeaponFireState *)attack)->triggerMode != 0) {
-        if (func_802301F4_de(actor, attack) != 0) {
+        if (Weaponai_TryRequestFiringState(actor, attack) != 0) {
             ((WeaponFireState *)attack)->triggerMode = 0;
             ((WeaponFireState *)attack)->queuedAction = -1;
         } else {
@@ -376,7 +376,7 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
                               (s32)&state->pos, -1);
             case 0:
             case 14:
-                func_8022B00C_de(state);
+                Playerai_StopSecondaryAttachedSound(state);
                 Actor_RequestActorState(actor, attack, 2);
                 break;
             default:
@@ -394,67 +394,67 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
 
 /* 80231F5C_11.CPP */
 
-/* Applies the negated, scaled speed of the event's source (float at 0x294, scaled by D_800C8130) to an
+/* Applies the negated, scaled speed of the event's source (float at 0x294, scaled by g_weaponSideYawSpeedScale) to an
    object through YawMatrixLocal when the event side at 0x4 matches the mode: side 2 in mode 1, side 0
    otherwise. */
 
-extern s16 Weaponai_FindNextUsableWeapon(void *arg0);
+extern s16 Weaponai_FindNextUsableWeapon(void *player);
 
-extern WeaponActionRecord D_800CE8DC[];
+extern WeaponActionRecord g_weaponActionRecords[];
 
-void Weapon_ReleaseHandlesAndExitState39(void *arg0) {
-    s32 temp_s0;
-    temp_s0 = (((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link);
-    Player_ReleaseObjectHandles(temp_s0);
-    if ((((struct ObjRecAt650 *) ((s8 *) temp_s0))->unk650) == 0x27) {
-        Player_SetPlayerState((void *) temp_s0, (void *) temp_s0, 2);
+void Weapon_ReleaseHandlesAndExitState39(void *weaponActor) {
+    s32 weaponOwner;
+    weaponOwner = (((struct ActorLinkedControllerView *) ((s8 *) weaponActor))->link);
+    Player_ReleaseObjectHandles(weaponOwner);
+    if ((((struct PlayerWeaponStateView *) ((s8 *) weaponOwner))->action) == 0x27) {
+        Player_SetPlayerState((void *) weaponOwner, (void *) weaponOwner, 2);
     }
 }
 
-void Weapon_PlayStartupCue9E2(void *arg0) {
-    void *temp_a0;
-    temp_a0 = (((struct ObjRecAt1D8V1 *) ((s8 *) arg0))->unk1D8);
-    if ((((struct IntegerState11C4 *) ((s8 *) temp_a0))->unk_11C0) == 0) {
-        func_8022AF74_de(temp_a0, 0x9E2);
+void Weapon_PlayStartupCue9E2(void *weaponActor) {
+    void *weaponOwner;
+    weaponOwner = (((struct ActorPlayerControllerView *) ((s8 *) weaponActor))->player);
+    if ((((struct PlayerStartupSoundView *) ((s8 *) weaponOwner))->unk_11C0) == 0) {
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 0x9E2);
     }
 }
 
-void Weapon_AdvanceSpinAndTriggerMode(struct MeasuredRecAt1D8V2 *actor, void *attack) {
-    f32 temp_f1;
-    f32 temp_f2;
+void Weapon_AdvanceSpinAndTriggerMode(struct WeaponActorStateView *actor, void *attack) {
+    f32 spinStep;
+    f32 feedbackSpinStep;
     void *value;
-    void *temp_v0;
+    void *controller;
 
     value = actor->value;
-    ((struct MeasuredRecAt124 *)(attack))->value += (((struct MeasuredRecAt128 *)(attack))->value * D_800D2988) * 2.0f;
-    temp_f1 = ((struct MeasuredRecAt128 *)(attack))->value;
-    temp_v0 = ((struct MeasuredRecAt698V2 *)(value))->value;
-    if (!(temp_f1 < 0.0f
-              ? D_800C3028_de < (-temp_f1 * *(&D_800C3020_de + 1))
-              : D_800C3030_de[0] < (temp_f1 * D_800C302C_de))) {
-        temp_f2 = ((struct MeasuredRecAt128 *)(attack))->value;
-        if (temp_f2 < 0.0f) {
-            ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) (-temp_f2 * D_800C3030_de[1]);
+    ((struct WeaponChargeAccumulatorView *)(attack))->value += (((struct WeaponOriginScalarView *)(attack))->value * g_frameElapsedTime) * 2.0f;
+    spinStep = ((struct WeaponOriginScalarView *)(attack))->value;
+    controller = ((struct PlayerHeldWeaponView *)(value))->value;
+    if (!(spinStep < 0.0f
+              ? g_weaponSpinNegativeFeedbackLimit < (-spinStep * *(&g_weaponEightChargeRateScale + 1))
+              : g_weaponSpinFeedbackConstants[0] < (spinStep * g_weaponSpinPositiveFeedbackScale))) {
+        feedbackSpinStep = ((struct WeaponOriginScalarView *)(attack))->value;
+        if (feedbackSpinStep < 0.0f) {
+            ((struct WeaponSpinRateView *)(controller))->value = (f32) (-feedbackSpinStep * g_weaponSpinFeedbackConstants[1]);
         } else {
-            ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) (temp_f2 * D_800C3038_de);
+            ((struct WeaponSpinRateView *)(controller))->value = (f32) (feedbackSpinStep * g_weaponSpinPositiveOutputScale);
         }
     } else {
-        ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) D_800C303C_de;
+        ((struct WeaponSpinRateView *)(controller))->value = (f32) g_weaponSpinClampedFeedback;
     }
 
-    if (((struct MeasuredRecAtCB *)(attack))->value != 0) {
-        ((struct MeasuredRecAt13CV1 *)(attack))->value = 2;
-        if (func_802301F4_de(actor, attack) != 0) {
-            ((struct MeasuredRecAt13CV1 *)(attack))->value = 1;
-            func_8022B00C_de(value);
+    if (((struct WeaponFireLatchView *)(attack))->value != 0) {
+        ((struct WeaponAttackPhaseView *)(attack))->value = 2;
+        if (Weaponai_TryRequestFiringState(actor, attack) != 0) {
+            ((struct WeaponAttackPhaseView *)(attack))->value = 1;
+            Playerai_StopSecondaryAttachedSound(value);
         }
     }
 }
 
 void Weapon_ApplyScaledSideYaw(void *obj, Event *event) {
-    float v = event->source->speed * D_800C8130;
+    float v = event->source->speed * g_weaponSideYawSpeedScale;
 
-    if (D_80140FF8.field_0 == 1) {
+    if (g_playerWeaponClassMode.first == 1) {
         if (event->side == 2) {
             YawMatrixLocal(obj, -v);
         }
@@ -463,50 +463,50 @@ void Weapon_ApplyScaledSideYaw(void *obj, Event *event) {
     }
 }
 
-void Weapon_UpdateNormalFireAction(void *actor, ObjectState140 *attack) {
+void Weapon_UpdateNormalFireAction(void *actor, WeaponNormalFireActionView *attack) {
     char *o = (char *) actor;
-    void *temp_s0;
+    void *weaponOwner;
     s16 idx;
     s32 action;
 
-    temp_s0 = (void *)((Shared_ActorView *)o)->self;
-    idx = ((Shared_ActorView *)temp_s0)->action;
-    action = D_800CE8DC[idx].action;
+    weaponOwner = (void *)((Shared_ActorView *)o)->self;
+    idx = ((Shared_ActorView *)weaponOwner)->action;
+    action = g_weaponActionRecords[idx].action;
 
-    if (Player_HasAmmoForMode(temp_s0, ((Shared_ActorView *)temp_s0)->selectedAction) == 0) {
-        ((Shared_ActorView *)temp_s0)->nextWeapon = Weaponai_FindNextUsableWeapon(temp_s0);
+    if (Player_HasAmmoForMode(weaponOwner, ((Shared_ActorView *)weaponOwner)->selectedAction) == 0) {
+        ((Shared_ActorView *)weaponOwner)->nextWeapon = Weaponai_FindNextUsableWeapon(weaponOwner);
     } else {
         attack->unk_13C = 1;
-        if (func_802301F4_de(actor, attack) == 0 && !(((Shared_ActorView *)o)->flags & 0x400)) {
+        if (Weaponai_TryRequestFiringState(actor, attack) == 0 && !(((Shared_ActorView *)o)->flags & 0x400)) {
             Actor_RequestActorState(actor, attack, action);
         }
     }
 }
 
-void Weapon_InitializeChargeAndStartupCues(Shared_ActorView *arg0, WeaponFireState *fireState) {
-    Shared_ActorView *temp_s0;
-    Shared_ActorView *temp_a0;
+void Weapon_InitializeChargeAndStartupCues(Shared_ActorView *actorView, WeaponFireState *fireState) {
+    Shared_ActorView *cueOwner;
+    Shared_ActorView *weaponOwner;
     s16 index;
 
-    temp_s0 = arg0->self;
+    cueOwner = actorView->self;
     fireState->cueTimer = 0;
-    if ((temp_s0->remote == 0) &&
-        (D_80140FF8.field_0 == 1)) {
-        func_8021A9A4_de(arg0->self, 0x3F9);
+    if ((cueOwner->remote == 0) &&
+        (g_playerWeaponClassMode.first == 1)) {
+        Playerai_DispatchWeaponFireEffect(actorView->self, 0x3F9);
     } else {
-        func_8021A9A4_de(arg0->self, 0x4CB);
+        Playerai_DispatchWeaponFireEffect(actorView->self, 0x4CB);
     }
-    func_8022AEA0_de(temp_s0, 0x78A);
-    func_8022AF74_de(temp_s0, 0x780);
+    Playerai_StartPrimaryAttachedSound(cueOwner, 0x78A);
+    Playerai_StartSecondaryAttachedSound(cueOwner, 0x780);
 
-    temp_a0 = arg0->self;
-    index = temp_a0->selectedAction;
+    weaponOwner = actorView->self;
+    index = weaponOwner->selectedAction;
     fireState->charge =
-        ((WeaponInfo *)D_800D052C[index])->chargeRate *
-        D_800C3044_de;
-    if ((temp_a0->selectedAction == 8) &&
-        (temp_a0->field11C0 == 0)) {
-        func_8022AF74_de(temp_a0, 0xA3C);
+        ((WeaponInfo *)g_weaponInfoByType[index])->chargeRate *
+        g_weaponStartupChargeRateScale;
+    if ((weaponOwner->selectedAction == 8) &&
+        (weaponOwner->weaponLoopSoundHandle == 0)) {
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 0xA3C);
     }
 }
 
@@ -515,7 +515,7 @@ void Weapon_ApplySideDependentYaw(void *object, Event *event) {
     s32 mode;
 
     speed = event->source->speed;
-    mode = D_80140FF8.field_0;
+    mode = g_playerWeaponClassMode.first;
     if (mode == 1) {
         switch (event->side) {
         case 1:
@@ -532,112 +532,112 @@ void Weapon_ApplySideDependentYaw(void *object, Event *event) {
 
 /* 80231F5C_12.CPP */
 
-extern s32 func_8022B184_de(void *object);
+extern s32 Playerai_IsAlternateFireHeld(void *object);
 
-extern void func_8022B984_de(void *actor);
+extern void Playerai_BeginHeldAlternateFire(void *actor);
 
 extern s32 Particle_CountOwnerListOneEffects(void *, s32);
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 
 extern f32 Graphu64_ApproachValue(f32, f32, s32);
 
 void Weapon_EnterChargeStateWithCues(Shared_ActorView *actor, WeaponFireState *fireState) {
     void *player;
-    void *temp_a0;
+    void *weaponOwner;
     s16 index;
 
     player = actor->self;
     if (fireState->mode == 2) {
         Player_SetPlayerState(player, player, 2);
     } else {
-        fireState->cueTimer = D_800C3048_de[0];
+        fireState->cueTimer = g_weaponChargeEntryCueAndRate[0];
         if ((((Shared_ActorView *)player)->remote == 0) &&
-            (D_80140FF8.field_0 == 1)) {
-            func_8021A9A4_de(actor->self, 0x3FB);
+            (g_playerWeaponClassMode.first == 1)) {
+            Playerai_DispatchWeaponFireEffect(actor->self, 0x3FB);
         } else {
-            func_8021A9A4_de(actor->self, 0x4CD);
+            Playerai_DispatchWeaponFireEffect(actor->self, 0x4CD);
         }
         Actor_RequestActorState(actor, fireState, 4);
-        func_8022AEA0_de(player, 0x977);
-        func_8022AF74_de(player, 0x974);
+        Playerai_StartPrimaryAttachedSound(player, 0x977);
+        Playerai_StartSecondaryAttachedSound(player, 0x974);
 
-        temp_a0 = actor->self;
-        index = ((Shared_ActorView *)temp_a0)->selectedAction;
+        weaponOwner = actor->self;
+        index = ((Shared_ActorView *)weaponOwner)->selectedAction;
         fireState->charge =
-            ((WeaponInfo *)D_800D052C[index])->chargeRate *
-            D_800C3048_de[1];
-        if ((((Shared_ActorView *)temp_a0)->selectedAction == 8) &&
-            (((Shared_ActorView *)temp_a0)->field11C0 == 0)) {
-            func_8022AF74_de(temp_a0, 0xA3C);
+            ((WeaponInfo *)g_weaponInfoByType[index])->chargeRate *
+            g_weaponChargeEntryCueAndRate[1];
+        if ((((Shared_ActorView *)weaponOwner)->selectedAction == 8) &&
+            (((Shared_ActorView *)weaponOwner)->weaponLoopSoundHandle == 0)) {
+            Playerai_StartSecondaryAttachedSound(weaponOwner, 0xA3C);
         }
     }
 }
 
-void func_80233314_de(void) {
+void Weapon_EmptyChargeStateHook(void) {
 }
 
 void Weapon_SetDelayAndRequestStateEight(void *actor, struct Shared_Particle *particle) {
-    particle->unk148 = D_800C3050_de;
+    particle->lifetime = g_weaponStateEightDelay;
     Actor_RequestActorState(actor, particle, 8);
 }
 
 /** Perform the no-op callback at VRAM 0x80233334. */
-void func_80233344_de(void) {
+void Weapon_EmptyAlternateFireHook(void) {
 }
 
-void Weapon_UpdateHeldAlternateFire(void *arg0, void *attack) {
+void Weapon_UpdateHeldAlternateFire(void *weaponActor, void *attack) {
     void *actor;
 
-    actor = ((LevelActor *)arg0)->controller;
+    actor = ((LevelActor *)weaponActor)->controller;
     ((WeaponFireState *)attack)->mode = 2;
     if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
         ((Shared_ActorView *)actor)->nextWeapon = Weaponai_FindNextUsableWeapon(actor);
         return;
     }
 
-    if (((LevelActor *)arg0)->animationTime >= D_800C3054_de) {
-        if (func_8022B184_de(actor) == 0) {
-            func_8022B984_de(actor);
+    if (((LevelActor *)weaponActor)->animationTime >= g_weaponAlternateFireAnimationThreshold) {
+        if (Playerai_IsAlternateFireHeld(actor) == 0) {
+            Playerai_BeginHeldAlternateFire(actor);
         }
     }
 
     if (!((((Shared_ActorView *)actor)->actionFlags & 0x4000) &&
           (((Shared_ActorView *)actor)->health != 0))) {
-        Actor_RequestActorState(arg0, attack, 2);
-        func_8022B9C4_de(actor);
+        Actor_RequestActorState(weaponActor, attack, 2);
+        Playerai_EndHeldAlternateFire(actor);
         ((WeaponFireState *)attack)->mode = 1;
     }
 
-    if (func_802301F4_de(arg0, attack) != 0) {
-        func_8022B9C4_de(actor);
+    if (Weaponai_TryRequestFiringState(weaponActor, attack) != 0) {
+        Playerai_EndHeldAlternateFire(actor);
     }
 }
 
-void Weapon_UpdateSpecialFireAndAmmo(void *arg0, void *attack) {
+void Weapon_UpdateSpecialFireAndAmmo(void *weaponActor, void *attack) {
     void *actor;
     s16 idx;
     s32 value;
 
-    actor = ((ObjectLinks1DC_3 *)arg0)->unk_1D8;
-    idx = ((ObjectLinks11DC *)(actor))->unk_650;
-    value = D_800CE8DC[idx].action;
+    actor = ((ActorAnimationResourceView *)weaponActor)->unk_1D8;
+    idx = ((WeaponSpecialFirePlayerView *)(actor))->unk_650;
+    value = g_weaponActionRecords[idx].action;
 
-    if (((ObjectLinks11DC *)(actor))->unk_11D8 <= 0.0f) {
-        if ((((struct Ctrl *) ((ObjectLinks11DC *) actor)->unk_5D8)->flag == 0 ||
-             D_801462C8.counters.m_bFragTagOn == 0) &&
-            (((ObjectLinks11DC *)(actor))->unk_6AC & 0x4000)) {
+    if (((WeaponSpecialFirePlayerView *)(actor))->unk_11D8 <= 0.0f) {
+        if ((((struct Ctrl *) ((WeaponSpecialFirePlayerView *) actor)->unk_5D8)->flag == 0 ||
+             g_gameSettings.counters.m_bFragTagOn == 0) &&
+            (((WeaponSpecialFirePlayerView *)(actor))->unk_6AC & 0x4000)) {
             Player_ReleasePlayerParticleEmitters(actor);
         }
     }
 
-    if (Player_HasAmmoForMode(actor, ((ObjectLinks11DC *)(actor))->unk_62E) == 0) {
-        if (Particle_CountOwnerListOneEffects(&D_8011D8D0, actor) == 0) {
-            ((ObjectLinks11DC *)(actor))->unk_770 = Weaponai_FindNextUsableWeapon(actor);
+    if (Player_HasAmmoForMode(actor, ((WeaponSpecialFirePlayerView *)(actor))->unk_62E) == 0) {
+        if (Particle_CountOwnerListOneEffects(&g_actorParticleEffectSystem, actor) == 0) {
+            ((WeaponSpecialFirePlayerView *)(actor))->unk_770 = Weaponai_FindNextUsableWeapon(actor);
         }
-    } else if (func_802301F4_de(arg0, attack) == 0 &&
-               !(((ObjectLinks1DC_3 *)arg0)->unk_100 & 0x400)) {
-        Actor_RequestActorState(arg0, attack, value);
+    } else if (Weaponai_TryRequestFiringState(weaponActor, attack) == 0 &&
+               !(((ActorAnimationResourceView *)weaponActor)->unk_100 & 0x400)) {
+        Actor_RequestActorState(weaponActor, attack, value);
     }
 }
 
@@ -647,11 +647,11 @@ void Weapon_RequestReleaseOnEnabledEvent(void *a, struct WeaponEventSource *b) {
     }
 }
 
-void Weapon_PlayStartupCue80C(void *arg0) {
-    void *temp_a0;
-    temp_a0 = (((struct ObjRecAt1D8V1 *) ((s8 *) arg0))->unk1D8);
-    if ((((struct IntegerState11C4 *) ((s8 *) temp_a0))->unk_11C0) == 0) {
-        func_8022AF74_de(temp_a0, 0x80C);
+void Weapon_PlayStartupCue80C(void *weaponActor) {
+    void *weaponOwner;
+    weaponOwner = (((struct ActorPlayerControllerView *) ((s8 *) weaponActor))->player);
+    if ((((struct PlayerStartupSoundView *) ((s8 *) weaponOwner))->unk_11C0) == 0) {
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 0x80C);
     }
 }
 
@@ -661,191 +661,191 @@ void Weapon_UpdateAlternateTriggerCompletion(LevelActor *actor, WeaponFireState 
     controller = actor->controller;
     if (fireState->triggerMode != 0) {
         fireState->mode = 2;
-        if (func_802301F4_de(actor, fireState) != 0) {
+        if (Weaponai_TryRequestFiringState(actor, fireState) != 0) {
             fireState->mode = 1;
-            func_8022B00C_de(controller);
+            Playerai_StopSecondaryAttachedSound(controller);
         }
     }
 }
 
-void Weapon_EaseSpinForActionFive(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
-    f32 temp_f1;
-    f32 temp_f2;
+void Weapon_EaseSpinForActionFive(struct WeaponActorStateView *actor, void *fireState) {
+    f32 spinStep;
+    f32 feedbackSpinStep;
     void *value;
-    void *temp_v0;
+    void *controller;
 
-    value = arg0->value;
-    if (((struct MeasuredRecAt34 *)(arg1))->value == 5) {
-        Graphu64_EaseValueToward(arg1 + 0x128, (f32) D_800CA2D8_de * D_800C3058_de, 0.4f);
+    value = actor->value;
+    if (((struct WeaponModeByteView *)(fireState))->value == 5) {
+        Graphu64_EaseValueToward(fireState + 0x128, (f32) g_weaponActionFiveSpinTarget * g_weaponActionFiveSpinTargetScale, 0.4f);
     } else {
-        Graphu64_EaseValueToward(arg1 + 0x128, 0.0f, 0.4f);
+        Graphu64_EaseValueToward(fireState + 0x128, 0.0f, 0.4f);
     }
-    temp_f1 = ((struct MeasuredRecAt128 *)(arg1))->value;
-    temp_v0 = ((struct MeasuredRecAt698V2 *)(value))->value;
-    if (!(temp_f1 < 0.0f
-              ? D_800C3060_de < (-temp_f1 * D_800C305C_de)
-              : D_800C3068_de[0] < (temp_f1 * D_800C3064_de))) {
-        temp_f2 = ((struct MeasuredRecAt128 *)(arg1))->value;
-        if (temp_f2 < 0.0f) {
-            ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) (-temp_f2 * D_800C3068_de[1]);
+    spinStep = ((struct WeaponOriginScalarView *)(fireState))->value;
+    controller = ((struct PlayerHeldWeaponView *)(value))->value;
+    if (!(spinStep < 0.0f
+              ? g_weaponActionFiveNegativeFeedbackLimit < (-spinStep * g_weaponActionFiveNegativeFeedbackScale)
+              : g_weaponActionFiveFeedbackConstants[0] < (spinStep * g_weaponActionFivePositiveFeedbackScale))) {
+        feedbackSpinStep = ((struct WeaponOriginScalarView *)(fireState))->value;
+        if (feedbackSpinStep < 0.0f) {
+            ((struct WeaponSpinRateView *)(controller))->value = (f32) (-feedbackSpinStep * g_weaponActionFiveFeedbackConstants[1]);
             return;
         }
-        ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) (temp_f2 * D_800C3070_de);
+        ((struct WeaponSpinRateView *)(controller))->value = (f32) (feedbackSpinStep * g_weaponActionFivePositiveOutputScale);
         return;
     }
-    ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) D_800C3074_de;
+    ((struct WeaponSpinRateView *)(controller))->value = (f32) g_weaponActionFiveClampedFeedback;
 }
 
 void Weapon_ApproachSpinPhaseAndRelease(void *actor, struct WeaponFireState *fireState) {
-    f32 temp_f0;
+    f32 nextSpinStep;
     f32 target;
 
-    target = D_800C3078_de;
-    temp_f0 = Graphu64_ApproachValue(fireState->spinStep, target, D_800CA7A0_de);
-    fireState->spinStep = temp_f0;
-    if (target <= temp_f0) {
+    target = g_weaponReleaseSpinTarget;
+    nextSpinStep = Graphu64_ApproachValue(fireState->spinStep, target, g_weaponReleaseSpinApproachRate);
+    fireState->spinStep = nextSpinStep;
+    if (target <= nextSpinStep) {
         Actor_RequestActorState(actor, fireState, 2);
     }
 }
 
-void Weapon_TranslateEventSixByPitch(void *matrix, void *arg1) {
-    ObjRecAt8V1 *event = arg1;
-    if (event->unk4 == 6) {
-        LevelActor *actor = event->unk8;
+void Weapon_TranslateEventSixByPitch(void *matrix, void *eventStorage) {
+    ActorEffectEventView *event = eventStorage;
+    if (event->eventIndex == 6) {
+        LevelActor *actor = event->actor;
         TranslateMatrixLocal(matrix, 0.0f, actor->pitch, 0.0f);
     }
 }
 
 /* 800C8100.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_802327F4_C8D00[1] = {
+const unsigned int g_weaponPermissionNoticeDuration_StorageWords[1] = {
     0x3F800000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802327F4_C8D00_us_rev1.c */
-const unsigned int D_blob_623dc1480292e3a80b8a[1] = {
+const unsigned int g_Weapon_CheckSinglePlayerFirePermissionConstantWords[1] = {
     0x3F800000,
 };
 #endif
 
 /* 800C8104.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_802328D8_C8D04[1] = {
+const unsigned int g_weaponFiveChargeRateScale_StorageWords[1] = {
     0x41700000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802328D8_C8D04_us_rev1.c */
-const unsigned int D_blob_2389a648aef16664c94d[1] = {
+const unsigned int g_Weapon_InitializeChargeForWeaponFiveConstantWords[1] = {
     0x41700000,
 };
 #endif
 
 /* 800C8108.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80232A48_C8D08[1] = {
+const unsigned int g_weaponFireInitialValue_StorageWords[1] = {
     0x3F800000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80232A48_C8D08_us_rev1.c */
-const unsigned int D_blob_ee0e31e93888967ca263[1] = {
+const unsigned int g_Weapon_InitializeFireStateCallbacksConstantWords[1] = {
     0x3F800000,
 };
 #endif
 
 /* 800C810C.CPP */
 /* ROM-grounded data: src/rw_pool_80232BD0_C8D0C_us_rev1.c */
-const unsigned int D_blob_f7f44b23f073277f33ae[1] = {
+const unsigned int g_weaponTriggerStunThreshold_StorageWords[1] = {
     0x3DCCCCCD,
 };
 
 /* 800C8110.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80232C88_C8D10[1] = {
+const unsigned int g_weaponEightChargeRateScale_StorageWords[1] = {
     0x41700000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80232C88_C8D10_us_rev1.c */
-const unsigned int D_blob_8ff3ca9afe35ca23c56e[1] = {
+const unsigned int k_WeaponEncodedWords[1] = {
     0x41700000,
 };
 #endif
 
 /* 800C8114.CPP */
-const unsigned int D_auto_src_rw_pool_80232E64_C8D14_us_rev1[7] = {
+const unsigned int g_Weapon_InitializeChargeForWeaponEightConstantWords[7] = {
     0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3FE52EDF, 0x3F800000,
 };
 
 /* 800C8130.CPP */
 /* ROM-grounded data: src/rw_pool_80232F8C_C8D30_us_rev1.c */
-const unsigned int D_blob_0fd23d14ffff3a7a287e[1] = {
+const unsigned int g_weaponSideYawSpeedScale_StorageWords[1] = {
     0x3FC00000,
 };
 
 /* 800C8134.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_802330AC_C8D34[1] = {
+const unsigned int g_weaponStartupChargeRateScale_StorageWords[1] = {
     0x41700000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802330AC_C8D34_us_rev1.c */
-const unsigned int D_blob_8cabd7ec07ecd852f532[1] = {
+const unsigned int g_Weapon_InitializeChargeAndStartupCuesConstantWords[1] = {
     0x41700000,
 };
 #endif
 
 /* 800C8138.CPP */
 /* ROM-grounded data: src/rw_pool_802331FC_C8D38_us_rev1.c */
-const unsigned int D_blob_3c990c36019f9d2fdf72[2] = {
+const unsigned int g_weaponChargeEntryCueAndRate_StorageWords[2] = {
     0x40200000, 0x41700000,
 };
 
 /* 800C8140.CPP */
 /* ROM-grounded data: src/rw_pool_8023331C_C8D40_us_rev1.c */
-const unsigned int D_blob_820ef7fd0a7ce277e362[1] = {
+const unsigned int g_weaponStateEightDelay_StorageWords[1] = {
     0x43960000,
 };
 
 /* 800C8144.CPP */
 /* ROM-grounded data: src/rw_pool_8023334C_C8D44_us_rev1.c */
-const unsigned int D_blob_5a75d5298ddd3c892ea1[1] = {
+const unsigned int g_weaponAlternateFireAnimationThreshold_StorageWords[1] = {
     0x40800000,
 };
 
 /* 800C8148.CPP */
-const unsigned int D_auto_src_rw_pool_802335EC_C8D48_us_rev1[8] = {
+const unsigned int g_weaponActionFiveSpinTargetScale_StorageWords[8] = {
     0x3C8EFA36, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3FE52EDF, 0x3F800000,
 };
 
 /* 800C8168.CPP */
 /* ROM-grounded data: src/rw_pool_8023371C_C8D68_us_rev1.c */
-const unsigned int D_blob_9c143aa5516c0958c802[1] = {
+const unsigned int g_weaponReleaseSpinTarget_StorageWords[1] = {
     0x44160000,
 };
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C2FAC[1] = {
+unsigned int k_WeaponEncodedWordsBlock1[1] = {
     0x000B0000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C332C[1] = {
+unsigned int k_WeaponEncodedWordsBlock3[1] = {
     0x02603821,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C307C[1] = {
+unsigned int k_WeaponEncodedWordsBlock2[1] = {
     0x40C00000,
 };
 #endif

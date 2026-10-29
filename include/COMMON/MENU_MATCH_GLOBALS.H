@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 /* The retained match-state consumers identify the same resident root:
- * US-rev1 D_80145088, input byte +0x125D, status word +0x180C.
+ * US-rev1 g_frontendScreenStatus, input byte +0x125D, status word +0x180C.
  * These are persistent state fields, with the actual root storage between. */
 /* Match game-mode switches: the reaction messages pick their text from these. */
 typedef struct MatchModes {
@@ -28,5 +28,5 @@ typedef struct MenuMatchGlobals {
     u8 unobserved1810[0x1818 - 0x1810];
     MatchModes modes; /* 0x1818 */
 } MenuMatchGlobals;
-extern MenuMatchGlobals D_80145088;
+extern MenuMatchGlobals g_frontendScreenStatus;
 #endif

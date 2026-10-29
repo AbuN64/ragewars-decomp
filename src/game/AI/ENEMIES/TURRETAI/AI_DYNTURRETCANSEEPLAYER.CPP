@@ -3,10 +3,10 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 #include "COMMON/WORLD.H"
-#include "COMMON/EXTERNS_15.H"
+#include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
 #include "COMMON/OBJ.H"
 #include "COMMON/OBJRECAT30.H"
 #include "AI/ENEMIES/TURRETAI.H"
@@ -14,7 +14,7 @@
 
 extern s32 Rumble_TestActorStateBit(void *worldState, void *actorPointer);
 
-extern void Turret_LinkEffect_MakeVisible(void *arg0, void *arg1, s32 arg2);
+extern void Turret_LinkEffect_MakeVisible(void *turretActor, void *effectActor, s32 unusedEvent);
 
 extern void MatrixFromQuaternion(f32 *, f32 *);
 
@@ -38,14 +38,14 @@ static inline void build_rotation(struct RotationObject *object, f32 *matrix) {
 extern void RollMatrix(void *matrixStorage, f32 rollAngle);
 
 /* Returns whether a player may act on a target: never on its own linked object or an inactive
-   target, always when the team rule D_801468C4 is off, otherwise only across different teams. */
+   target, always when the team rule g_teamScoringEnabled is off, otherwise only across different teams. */
 
 
 
 
 
 /* Tests whether a viewer can see a target: raises both positions by their heights scaled by one half and casts
-   a ray between them through CCollision_SweepPoint into D_80103FD0, returning 1 when nothing or the target itself
+   a ray between them through CCollision_SweepPoint into g_particleCollisionProbeResult, returning 1 when nothing or the target itself
    blocks it. */
 
 
@@ -54,9 +54,9 @@ extern void RollMatrix(void *matrixStorage, f32 rollAngle);
 
 
 
-extern Player **D_80103FCC;
+extern Player **g_collisionCurrentActor;
 
-extern char D_80103FD0[];
+extern char g_particleCollisionProbeResult[];
 
 extern f32 Gobjinst_GetActorHeight(Player *);
 
@@ -91,21 +91,21 @@ void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *objec
     Graphu64_AddVec3(point, point, pivot);
 }
 
-void Turret_SpecialEffects(void *actor, ObjRecAt8V1 *event) {
-    ObjRecAt294 *eventOwner;
+void Turret_SpecialEffects(void *actor, ActorEffectEventView *event) {
+    TurretAimOwnerView *eventOwner;
     CTurretIntelligence *turretInfo;
-    ObjRecAt294 *headingOwner;
+    TurretAimOwnerView *headingOwner;
 
     struct NavigationTrack *track;
 
-    eventOwner = event->unk8;
-    track = (void *)eventOwner->unk18;
+    eventOwner = event->actor;
+    track = (void *)eventOwner->definition;
     turretInfo = &track->segment;
-    if (event->unk4 == turretInfo->m_GunNode) {
-        PitchMatrix(actor, eventOwner->unk294);
+    if (event->eventIndex == turretInfo->m_GunNode) {
+        PitchMatrix(actor, eventOwner->pitch);
     }
-    if (event->unk4 == turretInfo->m_RotNode) {
-        headingOwner = event->unk8;
+    if (event->eventIndex == turretInfo->m_RotNode) {
+        headingOwner = event->actor;
         RollMatrix(actor,
                       headingOwner->targetHeading -
                           headingOwner->heading);
@@ -130,10 +130,10 @@ int AI_DynTurretOpposingPlayer(TurretPlayerRelation *self, int unused, TurretPla
     if (linked == target || target->active == 0) {
         return 0;
     }
-    if (D_801462C8.counters.teams != 0) { if (linked->info->team == target->info->team) { return 0; } } return 1;
+    if (g_gameSettings.counters.teams != 0) { if (linked->info->team == target->info->team) { return 0; } } return 1;
 }
 
-s32 AI_DynTurretCanSeePlayer(Player *player, RiderRecAt130V2 *rider, Player *other) {
+s32 AI_DynTurretCanSeePlayer(Player *player, TurretTargetVisibilityView *rider, Player *other) {
     CVector3 from;
     CVector3 to;
     f32 lift;
@@ -148,8 +148,8 @@ s32 AI_DynTurretCanSeePlayer(Player *player, RiderRecAt130V2 *rider, Player *oth
     from.y += Gobjinst_GetActorHeight(player) * lift;
     to = other->pos;
     to.y += Gobjinst_GetActorHeight(other) * lift;
-    blocked = CCollision_SweepPoint(player, from, to, D_80103FD0);
-    if (blocked != 0 && *D_80103FCC != other) {
+    blocked = CCollision_SweepPoint(player, from, to, g_particleCollisionProbeResult);
+    if (blocked != 0 && *g_collisionCurrentActor != other) {
         return 0;
     }
     return 1;

@@ -1,18 +1,18 @@
 #ifndef AUDIO_AUDIO_LOADMUSICSEQUENCE_H
 #define AUDIO_AUDIO_LOADMUSICSEQUENCE_H
 #include "TYPES.H"
-struct StateRecAt34 {
+struct MusicFadeState {
     char pad[0x18];
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-    f32 unk2C;
-    f32 unk30;
-    f32 unk34;
+    s32 playbackState;
+    s32 fadeMode;
+    s32 currentMidiVolume;
+    s32 baseVolume;
+    s32 requestedSequence;
+    f32 volume;
+    f32 fadeDuration;
+    f32 fadeStep;
 };
-struct IntegerState2C_2 {
+struct MusicStopState {
     unsigned char padding_0[20];
     s32 unk_14;
     unsigned char padding_18[16];

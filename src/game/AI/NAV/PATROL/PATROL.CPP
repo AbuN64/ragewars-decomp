@@ -1,15 +1,15 @@
 #include "COMMON/ROUTE_CHASE_RECORDS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TRIPLE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 #include "include_asm.h"
 
 /* Runs a computer player's patrol step: starts its route at 0x224 on the first route of D_8011FE88,
-   or random roaming (-2) when there are none; once within D_800C23B0_eu_x of its goal node it advances the
+   or random roaming (-2) when there are none; once within g_patrolGoalArrivalDistance of its goal node it advances the
    route position at 0x228 (wrapping at the route length) and drops the goal; a dropped goal is then
-   taken from the route through Scene_GetPlatformRoutePoint and func_8020CB3C_de, or a random node of D_8013B364 when
+   taken from the route through Scene_GetPlatformRoutePoint and func_8020CB3C_de, or a random node of g_navigationGraph when
    roaming; finally runs Nav_SteerAlongRoute, Nav_RunBehaviorHandler and Nav_UpdatePlayerSteering. */
 
 
@@ -24,7 +24,7 @@
 
 
 
-extern RoutePatrolNodes D_8013B364;
+extern RoutePatrolNodes g_navigationGraph;
 
 
 
@@ -41,7 +41,7 @@ extern void Nav_UpdatePlayerSteering(PatrolBot *bot);
 void Nav_UpdatePatrolRoute(PatrolActor *actor)
 {
     PatrolBot *bot = actor->player->bot;
-    RoutePatrolNodes *nodes = &D_8013B364;
+    RoutePatrolNodes *nodes = &g_navigationGraph;
     void *pos;
     Clip *route;
 
@@ -60,7 +60,7 @@ void Nav_UpdatePatrolRoute(PatrolActor *actor)
     }
     if (bot->node == bot->goal) {
         pos = Scaled_GetControllerPosition(bot);
-        if (Graphu64_GetPointDistance(pos, Portal_GetGraphPoint(nodes, bot->goal)) < D_800C23B0_eu_x) {
+        if (Graphu64_GetPointDistance(pos, Portal_GetGraphPoint(nodes, bot->goal)) < g_patrolGoalArrivalDistance) {
             if (bot->route >= 0) {
                 route = Scene_GetPlatformRoute(&g_world, bot->route);
                 bot->routePos++;

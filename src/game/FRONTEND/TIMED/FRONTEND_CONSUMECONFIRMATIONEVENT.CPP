@@ -1,4 +1,4 @@
-#include "COMMON/S1_6.H"
+#include "COMMON/RESERVED_SHARED_DECLARATIONS.H"
 #include "TYPES.H"
 
 /* 8042E080_84.CPP */

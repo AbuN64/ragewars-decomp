@@ -3,7 +3,7 @@
 /* DATA_800C90E0.CPP */
 /* DATA_800C90E0.CPP */
 #if defined(VERSION_EU) || defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800C90E0[210] = {
+unsigned int g_playerEffectLightPatternUs[210] = {
     0x03FF0040, 0xFFFF80FF, 0x01FF0080, 0xFFFF80FF, 0x03FF0040, 0x0FFAFFFF, 0x03FF0040, 0x000000FF,
     0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460,
     0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460,
@@ -38,7 +38,7 @@ unsigned int D_auto_rodata_unresolved_800C90E0[210] = {
 
 /* DATA_800C91C0.CPP */
 #if defined(VERSION_DE)
-unsigned int D_auto_rodata_unresolved_800C91C0[213] = {
+unsigned int g_playerEffectLightPatternGerman[213] = {
     0x03FF0040, 0xFFFF80FF, 0x01FF0080, 0xFFFF80FF, 0x03FF0040, 0x0FFAFFFF, 0x03FF0040, 0x000000FF,
     0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460,
     0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460,
@@ -72,7 +72,7 @@ unsigned int D_auto_rodata_unresolved_800C91C0[213] = {
 /* DATA_800CE410.CPP */
 /* DATA_800CE410.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_unresolved_800CE410[131] = {
+unsigned int g_playerEffectLightPatternUsRev1[131] = {
     0x03FF0040, 0xFFFF80FF, 0x01FF0080, 0xFFFF80FF, 0x03FF0040, 0x0FFAFFFF, 0x03FF0040, 0x000000FF,
     0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460,
     0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460, 0x00000460,
@@ -95,14 +95,14 @@ unsigned int D_auto_rodata_unresolved_800CE410[131] = {
 
 /* DATA_800CE61C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_rw_hud_lives_motion_script_us_rev1[5] = {
+unsigned int g_HudLivesMotionScriptUsRev1[5] = {
     0x00000003, 0x00000010, 0x00000010, 0x00000002, 0x00000000,
 };
 #endif
 
 /* DATA_800CE630.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_unresolved_800CE410_unclaimed_CF230[20] = {
+unsigned int k_PlaceplayerlightEncodedWords[20] = {
     0x00000001, 0x00000028, 0x00000010, 0x00000000, 0x00000003, 0xFFFFFFD8, 0x00000010, 0x00000002,
     0x00000002, 0x00000060, 0x00000003, 0x00000028, 0x00000010, 0x00000004, 0x00000006, 0x00000000,
     0x00000001, 0xFFFFFFAE, 0x00000010, 0x00000000,
@@ -111,7 +111,7 @@ unsigned int D_auto_rodata_unresolved_800CE410_unclaimed_CF230[20] = {
 
 /* DATA_800CE680.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_rw_hud_score_motion_script_us_rev1[7] = {
+unsigned int g_HudScoreMotionScriptUsRev1[7] = {
     0x00000003, 0xFFFFFFAE, 0x00000010, 0x00000001, 0x00000002, 0x00000060, 0x00000000,
 };
 #endif
@@ -119,11 +119,11 @@ unsigned int D_auto_src_rw_hud_score_motion_script_us_rev1[7] = {
 /* DATA_800CE69C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE410_unclaimed_CF230_unclaimed_CF29C */
-unsigned int D_blob_a93f56c3509653e374f0[4] = {
+unsigned int g_PlaceplayerlightEncodedWords[4] = {
     0x00000001, 0xFFFFFFAE, 0x00000044, 0x00000000,
 };
 
-unsigned int D_auto_src_rw_hud_count_motion_script_us_rev1[11] = {
+unsigned int g_HudCountMotionScriptUsRev1[11] = {
     0x00000003, 0xFFFFFFAE, 0x00000044, 0x00000001, 0x00000002, 0x00000060, 0x00000003, 0xFFFFFFAE,
     0x00000044, 0x00000001, 0x00000000,
 };
@@ -131,11 +131,11 @@ unsigned int D_auto_src_rw_hud_count_motion_script_us_rev1[11] = {
 
 /* DATA_800CE6D8.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_d0_039b5e354452fae9[4] = {
+unsigned int g_PlaceplayerlightEncodedWordsBlock1[4] = {
     0x00000001, 0xFFFFFFAE, 0x00000044, 0x00000000,
 };
 
-unsigned int D_auto_src_rw_hud_squad_motion_script_us_rev1[11] = {
+unsigned int g_HudSquadMotionScriptUsRev1[11] = {
     0x00000003, 0xFFFFFFAE, 0x00000044, 0x00000001, 0x00000002, 0x00000060, 0x00000003, 0xFFFFFFAE,
     0x00000044, 0x00000001, 0x00000000,
 };
@@ -147,7 +147,7 @@ struct {
     unsigned int w0[3];
     unsigned char b1[16];
     unsigned int w2[10];
-} D_auto_rodata_unresolved_800CE410_unclaimed_CF230_unclaimed_CF29C_unclaimed_CF2D8_unclaimed_CF314 = {
+} g_playerLightAndMotionTailWordsUsRev1 = {
     {
         0x00000000, 0x41800000, 0x00000000,
     },

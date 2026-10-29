@@ -1,14 +1,14 @@
 #ifndef MENU_ITEMRECAT24_H
 #define MENU_ITEMRECAT24_H
 #include "COMMON/ITEMRECAT20V1.H"
-struct ItemRecAt24;
-typedef struct ItemRecAt24 ItemRecAt24;
+struct PakActionPromptItemView;
+typedef struct PakActionPromptItemView PakActionPromptItemView;
 
 
 
 
-struct ItemRecAt24;
-struct ItemRecAt24 {
+struct PakActionPromptItemView;
+struct PakActionPromptItemView {
     char pad[0x1C];
     int x;
     int y;
@@ -21,12 +21,12 @@ struct ItemRecAt24 {
 
 
 
-extern unsigned char D_8014B49B;
+extern unsigned char g_controllerPakPreviewNameLastCharacter;
 
 
 
 
 
 
-struct RecordRecAtCV3;
+struct MenuPromptKindView;
 #endif

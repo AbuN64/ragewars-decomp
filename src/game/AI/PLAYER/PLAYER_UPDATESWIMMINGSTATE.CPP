@@ -5,10 +5,10 @@
 #include "COMMON/GAMEPLAY_MOVEMENT.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
-#include "DATA/OVLTAB2/800C9FA8.H"
+#include "DATA/OVLTAB2/PLAYER_SWIMMING_SOUND_IDS.H"
 #include "WEAPONS/G_PLAYERSWIMCONSTANTS.H"
 
-extern char D_800CED30;
+extern char g_playerSpecialAnimationTable;
 s32 InstHdr_GetActorMotionState(void *);
 extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
 /* Updates swimming turn, pitch, stride motion, sounds, and animation. */
@@ -51,132 +51,132 @@ void Player_UpdateSwimmingState(SharedPlayer *player, SharedPlayer *body) {
         player->turnAccumulator = 0.0f;
         if (InstHdr_GetActorMotionState(body) == 0) {
             detachDistance = g_playerSwimConstants;
-            player->views5E8.view6E8_79.unk6E8.x -= Gu_Sinf(body->views1C.view6C_5.heading) * detachDistance;
-            player->views5E8.view6E8_79.unk6E8.z -= Math_Cosf(body->views1C.view6C_5.heading) * detachDistance;
+            player->views5E8.view6E8_79.movementPosition.x -= Gu_Sinf(body->views1C.view6C_5.heading) * detachDistance;
+            player->views5E8.view6E8_79.movementPosition.z -= Math_Cosf(body->views1C.view6C_5.heading) * detachDistance;
         }
         Player_SetPlayerState(player, body, 5);
         return;
     }
-    motionIntermediate = player->views5E8.view69C_39.unk69C;
-    if ((D_800C2A5C_de < motionIntermediate) || (motionIntermediate < D_800C2A5C_de)) {
-        player->turnAccumulator += motionIntermediate * D_800C2A60_de;
+    motionIntermediate = player->views5E8.view69C_39.stick;
+    if ((g_playerClimbTurnZero < motionIntermediate) || (motionIntermediate < g_playerClimbTurnZero)) {
+        player->turnAccumulator += motionIntermediate * g_playerClimbTurnInputScale;
     }
     motionIntermediate = player->turnAccumulator;
-    turnLimit = D_800C2A64_de;
+    turnLimit = g_playerClimbTurnMaximum;
     if (turnLimit < motionIntermediate) player->turnAccumulator = turnLimit;
-    else if (motionIntermediate < D_800C2A68_de) player->turnAccumulator=D_800C2A68_de;
-    Graphu64_EaseValueToward(&player->views5E8.view728_73.unk728, player->turnAccumulator * D_800C2A6C_de, 0.5f);
-    targetPitch = -player->views5E8.view69C_39.pitchInput * D_800C2A70_de;
-    pitchLimit = D_800C2A74_de;
-    if ((targetPitch < pitchLimit) || (pitchLimit = D_800C2A78_de, (pitchLimit < targetPitch))) {
+    else if (motionIntermediate < g_playerClimbTurnMinimum) player->turnAccumulator=g_playerClimbTurnMinimum;
+    Graphu64_EaseValueToward(&player->views5E8.view728_73.kickPitch, player->turnAccumulator * g_playerClimbYawSwayScale, 0.5f);
+    targetPitch = -player->views5E8.view69C_39.pitchInput * g_playerClimbPitchInputScale;
+    pitchLimit = g_playerClimbPitchMinimum;
+    if ((targetPitch < pitchLimit) || (pitchLimit = g_playerClimbPitchMaximum, (pitchLimit < targetPitch))) {
         targetPitch = pitchLimit;
     }
-    Graphu64_EaseValueToward(&player->views5E8.view724_72.pitch, targetPitch * D_800C2A7C_de, 0.0625f);
-    if ((player->views5E8.view7E8_105.unk7E8 == 0) && !(player->views5E8.view6E4_61.unk6E4 > D_800C2A80_de) && !(body->views1C.view38_3.flags & 0xC0000) && (body->views18.view18_2.model->flags & 2) && (player->views5E8.view6B0_46.unk6B0 & 0x10) && (player->views5E8.view11D8_147.unk11D8 <= 0.0f)) { Player_SetPlayerState(player, body, 5); jumpStarted = 1; } else jumpStarted = 0;
+    Graphu64_EaseValueToward(&player->views5E8.view724_72.pitch, targetPitch * g_playerClimbPitchScale, 0.0625f);
+    if ((player->views5E8.view7E8_105.zoomed == 0) && !(player->views5E8.view6E4_61.jumpDelay > g_playerClimbJumpDelayLimit) && !(body->views1C.view38_3.flags & 0xC0000) && (body->views18.view18_2.model->flags & 2) && (player->views5E8.view6B0_46.actionFlags & 0x10) && (player->views5E8.view11D8_147.jumpCooldown <= 0.0f)) { Player_SetPlayerState(player, body, 5); jumpStarted = 1; } else jumpStarted = 0;
     if (jumpStarted != 0) {
-        jumpedHeading = body->views1C.view6C_5.heading + player->views5E8.view728_73.unk728;
+        jumpedHeading = body->views1C.view6C_5.heading + player->views5E8.view728_73.kickPitch;
         body->views1C.view6C_5.heading = jumpedHeading;
-        jumpTurn = player->views5E8.view728_73.unk728;
-        if (D_800C2A84_de <= jumpTurn) {
-            adjustedJumpHeading = jumpedHeading + D_800C2A88_de;
+        jumpTurn = player->views5E8.view728_73.kickPitch;
+        if (g_playerClimbJumpPositiveWrapThreshold <= jumpTurn) {
+            adjustedJumpHeading = jumpedHeading + g_playerClimbJumpPositiveYawPeriod;
             goto block_25;
         }
-        if (jumpTurn <= D_800C2A8C_de) {
-            adjustedJumpHeading = jumpedHeading - D_800C2A90_de;
+        if (jumpTurn <= g_playerClimbJumpNegativeWrapThreshold) {
+            adjustedJumpHeading = jumpedHeading - g_playerClimbJumpNegativeYawPeriod;
 block_25:
             body->views1C.view6C_5.heading = adjustedJumpHeading;
         }
         movementHeading = body->views1C.view6C_5.heading;
-        jumpHeadingOffset = D_800C2A94_de;
+        jumpHeadingOffset = g_playerClimbJumpHeadingOffset;
         motionSine = Gu_Sinf(movementHeading + jumpHeadingOffset);
         motionIntermediate = Math_Cosf(body->views1C.view6C_5.heading + jumpHeadingOffset);
-        body->views1C.view1C_0.localDisplacement.x += motionSine * D_800C2A98_de;
-        body->views1C.view1C_0.localDisplacement.z += motionIntermediate * D_800C2A98_de;
-        releaseTurn = player->views5E8.view728_73.unk728;
-        if (D_800C2A9C_de <= releaseTurn) {
-            body->views1C.view6C_5.heading += D_800C2AA0_de;
-        } else if (releaseTurn <= D_800C2AA4_de) {
-            body->views1C.view6C_5.heading -= D_800C2AA8_de;
+        body->views1C.view1C_0.localDisplacement.x += motionSine * g_playerClimbJumpDisplacementScale;
+        body->views1C.view1C_0.localDisplacement.z += motionIntermediate * g_playerClimbJumpDisplacementScale;
+        releaseTurn = player->views5E8.view728_73.kickPitch;
+        if (g_playerClimbReleasePositiveWrapThreshold <= releaseTurn) {
+            body->views1C.view6C_5.heading += g_playerClimbReleasePositiveYawPeriod;
+        } else if (releaseTurn <= g_playerClimbReleaseNegativeWrapThreshold) {
+            body->views1C.view6C_5.heading -= g_playerClimbReleaseNegativeYawPeriod;
         }
-        player->views5E8.view728_73.unk728 = 0.0f;
+        player->views5E8.view728_73.kickPitch = 0.0f;
         player->turnAccumulator = 0.0f;
         return;
     }
-    strideRoll = player->views5E8.view6DC_60.strideSign * player->views5E8.view6C0_51.unk6C0 * Gu_Sinf(player->views5E8.view658_23.stride * D_800C2AAC_de);
+    strideRoll = player->views5E8.view6DC_60.strideSign * player->views5E8.view6C0_51.movementSpeed * Gu_Sinf(player->views5E8.view658_23.stride * g_playerClimbStrideFrequency);
     rollInput = player->views5E8.view6A8_44.lift;
     if (rollInput > 0.0f || rollInput < 0.0f)
-        Graphu64_EaseValueToward(&player->views5E8.view72C_75.unk72C, strideRoll, 0.25f);
-    else Graphu64_EaseValueToward(&player->views5E8.view72C_75.unk72C, 0.0f, 0.9f);
+        Graphu64_EaseValueToward(&player->views5E8.view72C_75.strideRoll, strideRoll, 0.25f);
+    else Graphu64_EaseValueToward(&player->views5E8.view72C_75.strideRoll, 0.0f, 0.9f);
     climbInput = player->views5E8.view6A8_44.lift;
     ascending = climbInput > 0.0f;
     descending = climbInput < 0.0f;
-    previousClimbSpeed = player->views5E8.view6C0_51.unk6C0;
+    previousClimbSpeed = player->views5E8.view6C0_51.movementSpeed;
     if ((ascending != 0) || (descending != 0)) {
-        climbAcceleration = climbInput * D_800C2AB0_de;
+        climbAcceleration = climbInput * g_playerClimbAcceleration;
         if (climbInput < 0.0f) {
-            climbSpeedLimit = -climbInput * D_800C2AB4_de;
+            climbSpeedLimit = -climbInput * g_playerClimbReverseSpeedScale;
         } else {
-            climbSpeedLimit = climbInput * D_800C2AB8_de;
+            climbSpeedLimit = climbInput * g_playerClimbForwardSpeedScale;
         }
-        player->views5E8.view6C0_51.unk6C0 = Graphu64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0, climbAcceleration, climbSpeedLimit);
+        player->views5E8.view6C0_51.movementSpeed = Graphu64_IntegrateBoundedValue(player->views5E8.view6C0_51.movementSpeed, climbAcceleration, climbSpeedLimit);
     } else {
-        player->views5E8.view6C0_51.unk6C0 = Graphu64_DecayToZero(previousClimbSpeed, D_800C2ABC_de);
+        player->views5E8.view6C0_51.movementSpeed = Graphu64_DecayToZero(previousClimbSpeed, g_playerClimbForwardSpeedDecay);
     }
     strafeInput = player->views5E8.view6A4_42.strafe;
     if (strafeInput != 0.0f) {
-        strafeAcceleration = strafeInput * D_800C2AC0_de;
+        strafeAcceleration = strafeInput * g_playerClimbStrafeAcceleration;
         if (strafeInput < 0.0f) {
-            strafeSpeedLimit = -strafeInput * D_800C2AC4_de;
+            strafeSpeedLimit = -strafeInput * g_playerClimbLeftSpeedScale;
         } else {
-            strafeSpeedLimit = strafeInput * D_800C2AC8_de;
+            strafeSpeedLimit = strafeInput * g_playerClimbRightSpeedScale;
         }
-        player->views5E8.view6C4_54.unk6C4 = Graphu64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4, strafeAcceleration, strafeSpeedLimit);
+        player->views5E8.view6C4_54.sideSpeed = Graphu64_IntegrateBoundedValue(player->views5E8.view6C4_54.sideSpeed, strafeAcceleration, strafeSpeedLimit);
     } else {
-        player->views5E8.view6C4_54.unk6C4 = Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4, D_800C2ACC_de);
+        player->views5E8.view6C4_54.sideSpeed = Graphu64_DecayToZero(player->views5E8.view6C4_54.sideSpeed, g_playerClimbStrafeSpeedDecay);
     }
-    if ((player->views5E8.view6C0_51.unk6C0 == 0.0f) && (player->views5E8.view6C4_54.unk6C4 == 0.0f)) {
+    if ((player->views5E8.view6C0_51.movementSpeed == 0.0f) && (player->views5E8.view6C4_54.sideSpeed == 0.0f)) {
         player->views5E8.view658_23.stride = 0.0f;
         if (previousClimbSpeed != 0.0f) {
             player->views5E8.view6DC_60.strideSign = -player->views5E8.view6DC_60.strideSign;
         }
     } else {
         strideTime = player->views5E8.view658_23.stride;
-        if (D_800C2AD0_de < strideTime) {
+        if (g_playerClimbStridePeriod < strideTime) {
             player->views5E8.view6DC_60.strideSign = -player->views5E8.view6DC_60.strideSign;
-            player->views5E8.view658_23.stride = strideTime - D_800C2AD0_de;
-            player->views5E8.view6C0_51.unk6C0 *= D_800C2AD4_de;
-            player->views5E8.view6C4_54.unk6C4 *= D_800C2AD4_de;
-            game = &D_801462C8;
-            if ((game->local != 0) && ((player->views5D8.view5D8_9.profile->remote != 1) || (game->unk62C == 0))) {
+            player->views5E8.view658_23.stride = strideTime - g_playerClimbStridePeriod;
+            player->views5E8.view6C0_51.movementSpeed *= g_playerClimbSpeedDamping;
+            player->views5E8.view6C4_54.sideSpeed *= g_playerClimbSpeedDamping;
+            game = &g_gameSettings;
+            if ((game->local != 0) && ((player->views5D8.view5D8_9.profile->remote != 1) || (game->fragTagEnabled == 0))) {
                 surfaceFlagsOrActorKind = player->views1C.view38_3.flags;
                 if (surfaceFlagsOrActorKind & 0x200) {
-                    SoundElement_PlaySoundAtPosition(D_800C9FD6, body->views0.view8_4.position, 0, -1);
+                    SoundElement_PlaySoundAtPosition(g_playerClimbStepSound, body->views0.view8_4.position, 0, -1);
                 } else if (surfaceFlagsOrActorKind & 0x400) {
-                    SoundElement_PlaySoundAtPosition(D_800C9FDA, body->views0.view8_4.position, 0, -1);
+                    SoundElement_PlaySoundAtPosition(g_playerClimbReleaseSound, body->views0.view8_4.position, 0, -1);
                 } else if (surfaceFlagsOrActorKind & 0x800) {
-                    SoundElement_PlaySoundAtPosition(D_800C9FDE, body->views0.view8_4.position, 0, -1);
+                    SoundElement_PlaySoundAtPosition(g_playerClimbJumpSound, body->views0.view8_4.position, 0, -1);
                 } else {
                     SoundElement_PlaySoundAtPosition(strideSound(player->views5DC.view5E0_10.slot), body->views0.view8_4.position, 0, -1);
                 }
             }
         }
     }
-    eyex = &player->views5E8.view6E8_79.unk6E8.x;
-    eyey = &player->views5E8.view6E8_79.unk6E8.y;
-    eyez = &player->views5E8.view6E8_79.unk6E8.z;
+    eyex = &player->views5E8.view6E8_79.movementPosition.x;
+    eyey = &player->views5E8.view6E8_79.movementPosition.y;
+    eyez = &player->views5E8.view6E8_79.movementPosition.z;
     movementHeading = body->views1C.view6C_5.heading;
-    strafeHeadingOffset = D_800C2AD8_de;
+    strafeHeadingOffset = g_playerClimbStrafeHeadingOffset;
     motionSine = Gu_Sinf(movementHeading - strafeHeadingOffset);
     motionIntermediate = Math_Cosf(body->views1C.view6C_5.heading - strafeHeadingOffset);
     {
-    f32 horizontal = *eyex + motionSine * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;
-    f32 coefficient = D_800C2ADC_de;
-    f32 frameDelta = D_800D2988;
+    f32 horizontal = *eyex + motionSine * player->views5E8.view6C4_54.sideSpeed * player->views5E8.view66C_29.movementTimeScale;
+    f32 coefficient = k_playerSwimmingVerticalMotionScale;
+    f32 frameDelta = g_frameElapsedTime;
     *eyex = horizontal;
-    *eyez += motionIntermediate * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;
-    motionIntermediate = *eyey + player->views5E8.view6C0_51.unk6C0 * (frameDelta * coefficient);
+    *eyez += motionIntermediate * player->views5E8.view6C4_54.sideSpeed * player->views5E8.view66C_29.movementTimeScale;
+    motionIntermediate = *eyey + player->views5E8.view6C0_51.movementSpeed * (frameDelta * coefficient);
     *eyey = motionIntermediate;
-    actorKindOrAnimation = D_800CE47C;
+    actorKindOrAnimation = g_fragTagModelId;
     surfaceFlagsOrActorKind = player->views1C.viewE4_7.kind;
-    if (surfaceFlagsOrActorKind != actorKindOrAnimation) { if (player->views5E8.view6C0_51.unk6C0 > 0.0f) { if (player->views13B4.view13B4_3.character != &D_800CED30) player->views5E8.view86C_125.unk86C = 0xA46; else player->views5E8.view86C_125.unk86C = 0x5E28; } else { if (player->views13B4.view13B4_3.character != &D_800CED30) player->views5E8.view86C_125.unk86C = 0xA3C; else player->views5E8.view86C_125.unk86C = 0x5E27; } } else { actorKindOrAnimation = 0xA46; player->views5E8.view86C_125.unk86C = actorKindOrAnimation; }
+    if (surfaceFlagsOrActorKind != actorKindOrAnimation) { if (player->views5E8.view6C0_51.movementSpeed > 0.0f) { if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) player->views5E8.view86C_125.animationId = 0xA46; else player->views5E8.view86C_125.animationId = 0x5E28; } else { if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) player->views5E8.view86C_125.animationId = 0xA3C; else player->views5E8.view86C_125.animationId = 0x5E27; } } else { actorKindOrAnimation = 0xA46; player->views5E8.view86C_125.animationId = actorKindOrAnimation; }
 }}

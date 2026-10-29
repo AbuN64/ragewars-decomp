@@ -4,9 +4,9 @@
 /* Measured 4-byte access at 0x1D8; storage view, complete object unknown. */
 
 /* Measured 1-byte access at 0x34; storage view, complete object unknown. */
-struct MeasuredRecAt34 { unsigned char padding[52]; s8 value; };
+struct WeaponModeByteView { unsigned char padding[52]; s8 value; };
 /* Measured 4-byte access at 0x128; storage view, complete object unknown. */
-struct MeasuredRecAt128 { unsigned char padding[296]; f32 value; };
+struct WeaponOriginScalarView { unsigned char padding[296]; f32 value; };
 /* Measured 4-byte access at 0x698; storage view, complete object unknown. */
 
 /* Measured 4-byte access at 0x168; storage view, complete object unknown. */

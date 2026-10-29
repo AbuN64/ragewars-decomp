@@ -33,8 +33,8 @@ struct PanelRecord {
 struct RosterSlot;
 typedef struct RosterSlot RosterSlot;
 
-struct EntryRecAt14V1;
-struct EntryRecAt14V1 {
+struct CharacterVariantSelectionEntry;
+struct CharacterVariantSelectionEntry {
     char pad[0x10];
     int target;
     int active;
@@ -73,8 +73,8 @@ struct CharacterData_t {
     char pad6C[4];
 };
 
-struct EntryRecAt14V1;
-typedef struct EntryRecAt14V1 EntryRecAt14V1;
+struct CharacterVariantSelectionEntry;
+typedef struct CharacterVariantSelectionEntry CharacterVariantSelectionEntry;
 
 struct CharacterScreenCell;
 struct CharacterScreenCell {
@@ -122,12 +122,12 @@ struct StateMenuCancelCharacterConfirmation {
     s32 unk4;
     char p0[8];
     s32 unk10;
-    s32 unk14;
+    s32 confirmationState;
     char p1[0x1320];
-    s32 unk1338;
-    s32 unk133C;
+    s32 reservedWord;
+    s32 reservedWord1;
     char p2[0x14];
-    s32 unk1354;
+    s32 reservedWord2;
 };
 
 

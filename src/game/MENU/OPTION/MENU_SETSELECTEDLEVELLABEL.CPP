@@ -1,79 +1,79 @@
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/EFFECTRENDER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 
-extern s32 D_801462C8[];
+extern s32 g_gameSettings[];
 
-extern s32 D_800D3B8C;
+extern s32 g_selectedLevel0Label;
 
-extern s32 D_800D3B90;
+extern s32 g_selectedLevel1Label;
 
-extern s32 D_800D3B94;
+extern s32 g_selectedLevel2Label;
 
-extern s32 D_800D3B98;
+extern s32 g_selectedLevel3Label;
 
-extern s32 D_800D3B9C;
+extern s32 g_selectedLevel4Label;
 
-extern s32 D_800D3BA0;
+extern s32 g_selectedLevel5Label;
 
-extern s32 D_800D3BA4;
+extern s32 g_selectedLevel7Label;
 
-extern s32 D_800D3BA8;
+extern s32 g_selectedLevel6Label;
 
-extern s32 D_800D3BAC;
+extern s32 g_selectedLevel8Label;
 
-extern s32 D_800D3BB0;
+extern s32 g_selectedLevel9Label;
 
-extern s32 D_800D3BB4;
+extern s32 g_selectedLevel10Label;
 
-extern s32 D_800D7E14;
+extern s32 g_unlockedLevelResultLabel;
 
-/* Toggles the bits arg1 names in the settings flag word D_801462C8 and returns 0. */
-s32 Menu_ToggleGameOptionBits(s32 unused0, s32 arg1) {
-    s32 *flags = D_801462C8;
+/* Toggles the bits arg1 names in the settings flag word g_gameSettings and returns 0. */
+s32 Menu_ToggleGameOptionBits(s32 unused0, s32 optionMask) {
+    s32 *flags = g_gameSettings;
 
-    *flags ^= arg1;
+    *flags ^= optionMask;
     return 0;
 }
 
-s32 Menu_SetSelectedLevelLabel(func_8043D2D0_S *arg0) {
-    switch (D_80154034) {
+s32 Menu_SetSelectedLevelLabel(SelectedLevelLabelItem *label) {
+    switch (g_encodedSelectedLevelIndex) {
     default:
-        arg0->value = &D_800D7E14;
+        label->value = &g_unlockedLevelResultLabel;
         break;
     case 0:
-        arg0->value = &D_800D3B8C;
+        label->value = &g_selectedLevel0Label;
         break;
     case 1:
-        arg0->value = &D_800D3B90;
+        label->value = &g_selectedLevel1Label;
         break;
     case 2:
-        arg0->value = &D_800D3B94;
+        label->value = &g_selectedLevel2Label;
         break;
     case 3:
-        arg0->value = &D_800D3B98;
+        label->value = &g_selectedLevel3Label;
         break;
     case 4:
-        arg0->value = &D_800D3B9C;
+        label->value = &g_selectedLevel4Label;
         break;
     case 5:
-        arg0->value = &D_800D3BA0;
+        label->value = &g_selectedLevel5Label;
         break;
     case 6:
-        arg0->value = &D_800D3BA8;
+        label->value = &g_selectedLevel6Label;
         break;
     case 7:
-        arg0->value = &D_800D3BA4;
+        label->value = &g_selectedLevel7Label;
         break;
     case 8:
-        arg0->value = &D_800D3BAC;
+        label->value = &g_selectedLevel8Label;
         break;
     case 9:
-        arg0->value = &D_800D3BB0;
+        label->value = &g_selectedLevel9Label;
         break;
     case 10:
-        arg0->value = &D_800D3BB4;
+        label->value = &g_selectedLevel10Label;
         break;
     }
     return 0;

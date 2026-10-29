@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-#include "COMMON/ARG.H"
-#include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
+#include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "TYPES.H"
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
 #include "sdk/PFS/PFS_READWRITEINODE.H"
@@ -178,7 +178,7 @@ s32 osPfsChecker(OSPfs *pfs)
                     }
                 }
 
-                if ((cc = 
+                if ((cc =
 Pfs_CountPageReferences
 (pfs, next_page, &cache) - cl) != 0) {
                     break;

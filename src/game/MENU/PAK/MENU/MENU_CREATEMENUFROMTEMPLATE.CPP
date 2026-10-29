@@ -8,16 +8,16 @@
 #include "SYSTEM/LIST.H"
 #include "SYSTEM/LIST.H"
 #include "MENU/PAK/MENU_INITIALIZEMENU.H"
-extern void Cache_ReleaseResource(void *arg0, void *resource);
+extern void Cache_ReleaseResource(void *cache, void *resource);
 
 /* Returns the address 0x190 bytes into the block at offset 0x20 of an object, or null when the
    object has no block. */
 
-char *Menu_GetObjectDetailData(struct ObjRecAt20V2 *object) {
+char *Menu_GetObjectDetailData(struct GamePlayerListView *object) {
     char *result = 0;
 
-    if (object->unk20 != 0) {
-        result = object->unk20 + 0x190;
+    if (object->players != 0) {
+        result = object->players + 0x190;
     }
     return result;
 }
@@ -89,7 +89,7 @@ s32 Menu_TryCreateMenu(void *first, void *second, void *third) {
 }
 
 /* Returns zero. */
-s32 func_804423A4_de(void) {
+s32 Menu_ReturnZeroTemplateHook(void) {
     return 0;
 }
 
@@ -105,9 +105,9 @@ s32 Control_IsAButtonPressed(s32); /* extern */
  /* extern */
  /* extern */
 
-s32 Menu_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 maximum,s32 wrap) {
- if(((s32 (*)(s32))Control_IsLeftPressed)(menu->unk20))value-=step;
- if(((s32 (*)(s32))Control_IsRightPressed)(menu->unk20)||Control_IsAButtonPressed(menu->unk20))value+=step;
+s32 Menu_AdjustValue(MenuValueStepView *menu,s32 value,s32 step,s32 minimum,s32 maximum,s32 wrap) {
+ if(((s32 (*)(s32))Control_IsLeftPressed)(menu->flags))value-=step;
+ if(((s32 (*)(s32))Control_IsRightPressed)(menu->flags)||Control_IsAButtonPressed(menu->flags))value+=step;
  if(value<minimum) {
   value=minimum;if(wrap)value=maximum;
  } else if(value>maximum) {
@@ -121,13 +121,13 @@ s32 Menu_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 m
  /* extern */
  /* extern */
 
-s32 Menu_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 maximum, s32 wrap) {
+s32 Menu_StepValue(MenuValueStepView *menu, s32 value, s32 step, s32 minimum, s32 maximum, s32 wrap) {
     s32 stepped;
     s32 current;
     s32 result;
 
     current = value;
-    if (((s32 (*)(s32))Control_IsLeftPressed)(menu->unk20) != 0) {
+    if (((s32 (*)(s32))Control_IsLeftPressed)(menu->flags) != 0) {
         current -= step;
         if (current < minimum) {
             current = minimum;
@@ -137,7 +137,7 @@ s32 Menu_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32
         }
     }
     result = current;
-    if (((s32 (*)(s32))Control_IsRightPressed)(menu->unk20) != 0) {
+    if (((s32 (*)(s32))Control_IsRightPressed)(menu->flags) != 0) {
         stepped = current + step;
         result = stepped;
         if (maximum < stepped) {
@@ -153,17 +153,17 @@ s32 Menu_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32
 
 
 void Menu_InitMenuMessageList(void *object) {
-    func_80255CA0_de(object, 0x1D0, 0x1D4);
+    List_InitializeIntrusive(object, 0x1D0, 0x1D4);
     ((MessageList *)object)->rotation = 0;
 }
 
-/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from a zero and three arguments, registers it with List_PrependIntrusive and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
 
 extern char g_menuText[];
 extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 void *Menu_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controller, s32 d) {
-    struct func_8025E5B0_S1 *owner;
+    struct MenuCreationOwnerView *owner;
     s32 size = list->count * 40 + 0x1D8;
     s32 i;
     void **block;
@@ -185,17 +185,17 @@ void *Menu_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 control
         return 0;
     }
     Menu_InitializeMenu(first, block, list, 0, player, controller, d, parent);
-    func_80255CB8_de(parent, first);
+    List_PrependIntrusive(parent, first);
     owner = parent;
-    if (++owner->unk14 >= 4) {
-        owner->unk14 = 0;
+    if (++owner->menuFlags >= 4) {
+        owner->menuFlags = 0;
     }
     return first;
 }
 
-/* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through Cache_AllocateResource, builds it with Menu_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
+/* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through Cache_AllocateResource, builds it with Menu_InitializeMenu from four parameters, registers it with List_PrependIntrusive and advances the owner's rotating counter below four, returning the block or zero. */
 
-void *Menu_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
+void *Menu_CreateMenuFromTemplate(struct MenuCreationOwnerView *owner, struct MenuTemplateParameters *params, struct Dialog *list) {
     s32 a = params->a;
     s32 b = params->b;
     s32 c = params->c;
@@ -221,16 +221,16 @@ void *Menu_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsR
         return 0;
     }
     Menu_InitializeMenu(first, block, list, a, b, c, d, owner);
-    func_80255CB8_de(owner, first);
-    if (++owner->unk14 >= 4) {
-        owner->unk14 = 0;
+    List_PrependIntrusive(owner, first);
+    if (++owner->menuFlags >= 4) {
+        owner->menuFlags = 0;
     }
     return first;
 }
 
-/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_CreateMenuFromTemplate with the first parameter read from offset 0x14 instead of 0x18. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from four parameters, registers it with List_PrependIntrusive and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_CreateMenuFromTemplate with the first parameter read from offset 0x14 instead of 0x18. */
 
-void *Menu_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list) {
+void *Menu_AllocateMenu(struct MenuCreationOwnerView *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list) {
     s32 a = params->a;
     s32 b = params->b;
     s32 c = params->c;
@@ -256,31 +256,31 @@ void *Menu_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocate
         return 0;
     }
     Menu_InitializeMenu(first, block, list, a, b, c, d, owner);
-    func_80255CB8_de(owner, first);
-    if (++owner->unk14 >= 4) {
-        owner->unk14 = 0;
+    List_PrependIntrusive(owner, first);
+    if (++owner->menuFlags >= 4) {
+        owner->menuFlags = 0;
     }
     return first;
 }
 
 /* Tears down every node of one list: walks it from the head, saving the successor at 0x1D4 first,
-   skips nodes of kind 2 while the list is not the global one at D_8014561C and that list's flag at
+   skips nodes of kind 2 while the list is not the global one at g_matchEndingTeamWheelClose and that list's flag at
    0x10 is set, and for each remaining node asks Menu_UpdateMenuEntries whether it may go; when it may, calls
    the node's optional handler at 0xC of its table at 0x14, clears the three words at 0xB0, 0xB4 and
-   0xBC of the state it owns at 0x20, unlinks it with func_80255ED8_de and releases its handle at 0x8
+   0xBC of the state it owns at 0x20, unlinks it with List_RemoveIntrusive and releases its handle at 0x8
    through Cache_ReleaseResource. */
-extern MessageList D_8014561C;
+extern MessageList g_matchEndingTeamWheelClose;
 extern s32 Menu_UpdateMenuEntries(CMenu *, MessageList *);
 
 void Menu_UpdateDialogList(MessageList *list) {
     CMenu *node;
     CMenu *next;
-    StateRecAtBCV1 *state;
+    PakMenuInputStateView *state;
 
     node = list->head;
     while (node != 0) {
         next = node->next;
-        if (!((node->kind == 2) && (list != &D_8014561C) && (D_8014561C.flag != 0))) {
+        if (!((node->kind == 2) && (list != &g_matchEndingTeamWheelClose) && (g_matchEndingTeamWheelClose.flag != 0))) {
             if (Menu_UpdateMenuEntries(node, list) != 0) {
                 if (node->table->handler != 0) {
                     node->table->handler(node, list);
@@ -289,7 +289,7 @@ void Menu_UpdateDialogList(MessageList *list) {
                 state->field_B0 = 0;
                 state->field_B4 = 0;
                 state->field_BC = 0;
-                func_80255ED8_de(list, node);
+                List_RemoveIntrusive(list, node);
                 Cache_ReleaseResource(0, node->handle);
             }
         }
@@ -297,11 +297,11 @@ void Menu_UpdateDialogList(MessageList *list) {
     }
 }
 
-void Menu_DispatchMenuListCallback(struct OwnerRecAt4 *owner) {
-    struct NodeRecAt1D0 *node = owner->head;
+void Menu_DispatchMenuListCallback(struct MenuCallbackListOwner *owner) {
+    struct PakMenuVirtualNode *node = owner->head;
 
     while (node != 0) {
-        ((void (*)(struct NodeRecAt1D0 *, struct OwnerRecAt4 *))node->vtable[4])(node, owner);
+        ((void (*)(struct PakMenuVirtualNode *, struct MenuCallbackListOwner *))node->vtable[4])(node, owner);
         node = node->next;
     }
 }

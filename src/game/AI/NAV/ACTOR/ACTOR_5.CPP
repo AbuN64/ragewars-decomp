@@ -2,12 +2,12 @@
 
 #if defined(VERSION_EU) || defined(VERSION_US)
 #if defined(VERSION_EU)
-const unsigned int rodata_unresolved_800C205C[1] = {
+const unsigned int k_ActorZeroWords[1] = {
     0x00000000,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C205C[1] = {
+unsigned int k_ActorZeroWords[1] = {
     0x00000000,
 };
 #endif

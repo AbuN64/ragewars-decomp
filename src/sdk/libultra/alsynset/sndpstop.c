@@ -10,17 +10,17 @@ extern void alEvtqPostEvent(ALEventQueue *, void *, s32);
 
 
 
-void alSndpStop(ObjRecAt40V2 *soundPlayer) {
-    s32 new_var;
+void alSndpStop(SoundPlayerEventStateView *soundPlayer) {
+    s32 soundStateBase;
     Buf16 stopEvent;
 
-    new_var = soundPlayer->field40;
+    soundStateBase = soundPlayer->eventTime;
     stopEvent.count = 1;
-    stopEvent.value = new_var + (soundPlayer->field3C * 0x30);
+    stopEvent.value = soundStateBase + (soundPlayer->frameSampleCount * 0x30);
     alEvtqPostEvent(&soundPlayer->events, &stopEvent, 0);
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B2ED8[8] =
+char s_SndpstopRientTText[8] =
     "rientT\000\000";
 #endif

@@ -7,14 +7,14 @@ extern void Hud_EmptyCallback(void);
 extern void Lists_InitFromPool(void *lists, void *pool, s32 stride, s32 count);
 extern void Lists_ClearHeader(void *list);
 extern s32 Lists_Append(void *list, void *node);
-extern void func_80255CA0_de(void *list, s32 nextOffset, s32 prevOffset);
-extern void func_80255D14_de(void *list, void *node);
+extern void List_InitializeIntrusive(void *list, s32 nextOffset, s32 prevOffset);
+extern void List_AppendIntrusive(void *list, void *node);
 extern void Fx_UpdateEffectLists(void *world);
 extern void OnScreen_InitMover(void *mover, s16 x, s16 y);
-extern unsigned char D_800D3080[];
-extern unsigned char D_800D2F94[];
-extern s32 D_800CDE94;
-extern s32 D_800CDEA4;
+extern unsigned char g_hudPrimaryByteLookupSource[];
+extern unsigned char g_hudSecondaryByteLookupSource[];
+extern s32 g_hudFirstPanelMoverScript;
+extern s32 g_hudSecondPanelMoverScript;
 
 
 typedef struct ActorWorld {
@@ -61,12 +61,12 @@ void Hud_InitializeWorldActorPools(ActorWorld *world) {
     for (i = 0; i < 0x60; i++) {
         Lists_Append(world->actorList, world->actors[i]);
     }
-    func_80255CA0_de(world->recordList, 0, 4);
+    List_InitializeIntrusive(world->recordList, 0, 4);
     for (i = 0; i < 10; i++) {
-        func_80255CA0_de(world->cells[i], 0, 4);
+        List_InitializeIntrusive(world->cells[i], 0, 4);
     }
     for (i = 0; i < 0x64; i++) {
-        func_80255D14_de(world->recordList, world->records[i]);
+        List_AppendIntrusive(world->recordList, world->records[i]);
     }
     world->mode = 0;
     world->cursor = 0;
@@ -74,7 +74,7 @@ void Hud_InitializeWorldActorPools(ActorWorld *world) {
 }
 
 /* Resets the hud: clears the four words at 0x90, runs Hud_EmptyCallback and OnScreen_LoadFontTexture, then fills the two
- * 0x100-byte tables at 0xC8 and 0x1C8 from the pair lists D_800D3080 and D_800D2F94 (0x75 pairs each, 0x5C in de). */
+ * 0x100-byte tables at 0xC8 and 0x1C8 from the pair lists g_hudPrimaryByteLookupSource and g_hudSecondaryByteLookupSource (0x75 pairs each, 0x5C in de). */
 void Hud_ResetHudCharTables(HudTables *hud) {
 #if defined(VERSION_DE)
     s32 pairs = 0x5C;
@@ -87,19 +87,19 @@ void Hud_ResetHudCharTables(HudTables *hud) {
     hud->words[3] = 0;
     Hud_EmptyCallback();
     OnScreen_LoadFontTexture();
-    Pickup_BuildByteLookup((int)hud, D_800D3080, pairs, hud->tableA);
-    Pickup_BuildByteLookup((int)hud, D_800D2F94, pairs, hud->tableB);
+    Pickup_BuildByteLookup((int)hud, g_hudPrimaryByteLookupSource, pairs, hud->tableA);
+    Pickup_BuildByteLookup((int)hud, g_hudSecondaryByteLookupSource, pairs, hud->tableB);
 }
 
 void Hud_EmptyCallback(void) {
 }
 /* Starts the panel's two movers: each is reset to (0, -0x28) and (0, -0x14) with its target word cleared, and
- * given its frame table (D_800CDE94, D_800CDEA4) through OnScreen_StartMoverScript. */
+ * given its frame table (g_hudFirstPanelMoverScript, g_hudSecondPanelMoverScript) through OnScreen_StartMoverScript. */
 void Hud_StartPanelMovers(PanelMovers *panel) {
     panel->firstTarget = 0;
     OnScreen_InitMover(panel->first, 0, -0x28);
-    OnScreen_StartMoverScript(panel->first, &D_800CDE94);
+    OnScreen_StartMoverScript(panel->first, &g_hudFirstPanelMoverScript);
     panel->secondTarget = 0;
     OnScreen_InitMover(panel->second, 0, -0x14);
-    OnScreen_StartMoverScript(panel->second, &D_800CDEA4);
+    OnScreen_StartMoverScript(panel->second, &g_hudSecondPanelMoverScript);
 }

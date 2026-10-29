@@ -2,8 +2,8 @@
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/EXTERNS_18.H"
-#include "COMMON/ARG.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/MANAGER.H"
 #include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
@@ -16,52 +16,52 @@ INCLUDE_ASM("span_1000", Cache_RunCompactionPasses);
 
 #if !(defined(VERSION_US)) || defined(NON_MATCHING)
 /* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
-extern OSMesgQueue D_80101140;
-extern ResourceManagerState D_8010117C;
+extern OSMesgQueue g_resourceHeapLockQueue;
+extern ResourceManagerState g_resourceActivityState;
 
 
 void Cache_RunCompactionPasses(s32 unused) {
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 pendingPasses;
+    s32 remainingPasses;
     u32 mask;
-    u32 temp_v0;
-    s32 var_s0;
+    u32 interruptMask;
+    s32 passIndex;
     ResourceManagerState *resourceManager;
     void *queueAddress;
     OSMesgQueue *receive;
     OSMesgQueue *send;
 
-    resourceManager = &D_8010117C;
-    var_s0 = 1;
-    resourceManager->active = var_s0;
-    resourceManager->count += var_s0;
+    resourceManager = &g_resourceActivityState;
+    passIndex = 1;
+    resourceManager->active = passIndex;
+    resourceManager->count += passIndex;
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + var_s0;
-    D_8010515C = temp_v1;
-    if (temp_v1 != var_s0) {
+    pendingPasses = g_resourceHeapLockUsers + passIndex;
+    g_resourceHeapLockUsers = pendingPasses;
+    if (pendingPasses != passIndex) {
         __osRestoreInt(mask);
         queueAddress = (char *)resourceManager - 0x3C;
         receive = queueAddress;
-        osRecvMesg(receive, 0, var_s0);
-        var_s0 = 0;
+        osRecvMesg(receive, 0, passIndex);
+        passIndex = 0;
     } else {
         __osRestoreInt(mask);
-        var_s0 = 0;
+        passIndex = 0;
     }
     do {
         Cache_CompactResourceHeap(0, 0);
-        var_s0++;
-    } while (var_s0 < 10);
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
-        queueAddress = &D_80101140;
+        passIndex++;
+    } while (passIndex < 10);
+    interruptMask = __osDisableInt();
+    remainingPasses = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = remainingPasses;
+    if (remainingPasses != 0) {
+        __osRestoreInt(interruptMask);
+        queueAddress = &g_resourceHeapLockQueue;
         send = queueAddress;
         osSendMesg(send, 0, 1);
     } else {
-        __osRestoreInt(temp_v0);
+        __osRestoreInt(interruptMask);
     }
 }
 #endif

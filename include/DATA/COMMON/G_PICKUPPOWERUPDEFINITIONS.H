@@ -1,4 +1,4 @@
 #ifndef DATA_COMMON_G_PICKUPPOWERUPDEFINITIONS_H
 #define DATA_COMMON_G_PICKUPPOWERUPDEFINITIONS_H
-extern char D_002AD65C[];
+extern char Pickup_HandlePowerWeaponPickup_Address[];
 #endif

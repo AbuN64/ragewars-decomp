@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -7,28 +7,28 @@
 #include "TYPES.H"
 #include "MENU/MENU_DISPATCHEXTRAOPTIONSEVENT.H"
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4404, an actor kind at D_800E4408 and a handler at D_800E440C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_extraOptionsEventCodes, an actor kind at g_extraOptionsActorKinds and a handler at g_extraOptionsEventCallbacks: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
 
-s32 Menu_DispatchExtraOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchExtraOptionsEvent(void *object, s32 event, s32 eventData, s32 eventValue, s32 eventContext) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E440C != 0) {
+    if (g_extraOptionsEventCallbacks != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E440C;
+        entry = (char *)&g_extraOptionsEventCallbacks;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E4404)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E4408)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_extraOptionsEventCodes)) + offset))->value == event) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) object))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_extraOptionsActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(object, event, eventData, eventValue, eventContext);
                 }
             }
             entry += 0xC;

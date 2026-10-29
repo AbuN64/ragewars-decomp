@@ -6,27 +6,27 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 /* 8022AE90_10.CPP */
-void func_8022B984_de(struct SharedPlayer *actor) {
-    if (actor->views5E8.view1210_152.unk1210 == 0) {
+void Playerai_BeginHeldAlternateFire(struct SharedPlayer *actor) {
+    if (actor->views5E8.view1210_152.marker == 0) {
         Player_SetPlayerState(actor, actor, 0x27);
-        actor->views5E8.view1210_152.unk1210 = 1;
-        actor->views5E8.view1214_154.unk1214 = 0;
+        actor->views5E8.view1210_152.marker = 1;
+        actor->views5E8.view1214_154.markerState = 0;
     }
 }
 
 /* 8022AE90_11.CPP */
-void func_8022B9C4_de(void *actor) {
-    if ((((struct IntegerState1218 *) ((s8 *) actor))->unk_1210) != 0) {
-        if ((((struct IntegerState1218 *) ((s8 *) actor))->unk_5E4) != 0) {
+void Playerai_EndHeldAlternateFire(void *actor) {
+    if ((((struct PlayerAlternateFireStateView *) ((s8 *) actor))->unk_1210) != 0) {
+        if ((((struct PlayerAlternateFireStateView *) ((s8 *) actor))->unk_5E4) != 0) {
             Player_SetPlayerState(actor, actor, 2);
         }
-        (((struct IntegerState1218 *) ((s8 *) actor))->unk_1210) = 0;
-        (((struct IntegerState1218 *) ((s8 *) actor))->unk_1214) = 0;
+        (((struct PlayerAlternateFireStateView *) ((s8 *) actor))->unk_1210) = 0;
+        (((struct PlayerAlternateFireStateView *) ((s8 *) actor))->unk_1214) = 0;
     }
 }
 
 /** Return the linked record with the greatest eight-slot score excluding itself. */
-void *func_8022BA0C_de(Context *context) {
+void *Playerai_FindHighestScoringOtherPlayer(Context *context) {
     RecordCode8022AE90 *node;
     RecordCode8022AE90 *base;
     RecordCode8022AE90 *bestNode = 0;
@@ -57,6 +57,6 @@ void *func_8022BA0C_de(Context *context) {
 
 /** Read the global word at VRAM 0x80145048. */
 
-int func_8022BA90_de(void) {
-    return D_80145048;
+int Playerai_GetPlayerCount(void) {
+    return g_playerCount;
 }

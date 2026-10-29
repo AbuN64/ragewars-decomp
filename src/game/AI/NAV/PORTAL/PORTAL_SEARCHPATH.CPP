@@ -2,7 +2,7 @@
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAVIGATION_GRAPH.H"
-#include "COMMON/OBJECTLINKS14.H"
+#include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
 #include "stddef.h"
 #include "TYPES.H"
 #include "AI/NAV/NAV_SETPICKUPGOALWEIGHTS.H"
@@ -17,131 +17,131 @@ extern void Nav_AddGoalNode(void *, s32);
 
 extern void Portal_SearchPath(CNavData *, NavigationSearchNode *);
 
-s32 Portal_CollectDirectedNeighbors(CNavData *graph, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
+s32 Portal_CollectDirectedNeighbors(CNavData *graph, s32 nodeKey, s32 preferredNodeKey, s32 *neighborsOut, s32 reverseDirection) {
     NavigationPoint *point;
     NavigationBuffer *points;
     NavigationBuffer *m_pusNavLinksValue;
-    s32 *var_a3;
+    s32 *neighborCursor;
     s32 i;
-    s32 var_s4;
+    s32 neighborCount;
     s32 j;
     s32 k;
-    s32 var_v0;
-    s32 var_v0_2;
+    s32 reverseIsBidirectional;
+    s32 forwardIsBidirectional;
     s32 kind;
-    s32 temp_a0_2;
-    NavigationPortal *temp_v1_3;
+    s32 reverseKind;
+    NavigationPortal *portal;
 
-    if (arg2 != -1) {
+    if (preferredNodeKey != -1) {
         points = graph->points;
-        point = navigationRecord(points, arg2);
+        point = navigationRecord(points, preferredNodeKey);
     } else {
         point = NULL;
     }
     k = 0;
-    var_s4 = 0;
+    neighborCount = 0;
     if (graph->m_nNavLinks > 0) {
         s32 reversibleKind4 = 4;
         s32 reversibleKind1 = 1;
         s32 reversibleKind7 = 7;
         s32 noRoom = -1;
         s32 forwardExcludedKind = 6;
-        var_a3 = arg3;
+        neighborCursor = neighborsOut;
         do {
             m_pusNavLinksValue = graph->m_pusNavLinks;
-            temp_v1_3 = navigationRecord(m_pusNavLinksValue, k);
-            if (arg4 != 0) {
-                if (temp_v1_3->second == arg1) {
-                    var_s4 += 1;
-                    *var_a3 = (s32) temp_v1_3->first;
-                    var_a3 += 1;
+            portal = navigationRecord(m_pusNavLinksValue, k);
+            if (reverseDirection != 0) {
+                if (portal->second == nodeKey) {
+                    neighborCount += 1;
+                    *neighborCursor = (s32) portal->first;
+                    neighborCursor += 1;
                 }
-                if (temp_v1_3->first == arg1) {
-                    kind = temp_v1_3->kind;
+                if (portal->first == nodeKey) {
+                    kind = portal->kind;
                     if (kind != reversibleKind4) {
                         if ((s32) kind < 5) {
-                            var_v0 = 0;
+                            reverseIsBidirectional = 0;
                             if (kind != reversibleKind1) {
 
                             } else {
                                 goto block_14;
                             }
                         } else {
-                            var_v0 = 0;
+                            reverseIsBidirectional = 0;
                             if (kind == reversibleKind7) {
                                 goto block_14;
                             }
                         }
                     } else {
 block_14:
-                        var_v0 = 1;
+                        reverseIsBidirectional = 1;
                     }
-                    if (var_v0 != 0) {
-                        var_s4 += 1;
-                        *var_a3 = (s32) temp_v1_3->second;
-                        var_a3 += 1;
+                    if (reverseIsBidirectional != 0) {
+                        neighborCount += 1;
+                        *neighborCursor = (s32) portal->second;
+                        neighborCursor += 1;
                     }
                 }
-                if ((arg2 != noRoom) && (temp_v1_3->first == arg1) && (temp_v1_3->second == arg2) && (point != NULL) && (navigation_point_flags(point) & 2)) {
-                    *var_a3 = arg2;
-                    var_a3 += 1;
-                    var_s4 += 1;
+                if ((preferredNodeKey != noRoom) && (portal->first == nodeKey) && (portal->second == preferredNodeKey) && (point != NULL) && (navigation_point_flags(point) & 2)) {
+                    *neighborCursor = preferredNodeKey;
+                    neighborCursor += 1;
+                    neighborCount += 1;
                 }
             } else {
-                if ((temp_v1_3->first == arg1) && (temp_v1_3->kind != forwardExcludedKind)) {
-                    var_s4 += 1;
-                    *var_a3 = (s32) temp_v1_3->second;
-                    var_a3 += 1;
+                if ((portal->first == nodeKey) && (portal->kind != forwardExcludedKind)) {
+                    neighborCount += 1;
+                    *neighborCursor = (s32) portal->second;
+                    neighborCursor += 1;
                 }
-                if (temp_v1_3->second == arg1) {
-                    temp_a0_2 = temp_v1_3->kind;
-                    if (temp_a0_2 != reversibleKind4) {
-                        if ((s32) temp_a0_2 < 5) {
-                            var_v0_2 = 0;
-                            if (temp_a0_2 != reversibleKind1) {
+                if (portal->second == nodeKey) {
+                    reverseKind = portal->kind;
+                    if (reverseKind != reversibleKind4) {
+                        if ((s32) reverseKind < 5) {
+                            forwardIsBidirectional = 0;
+                            if (reverseKind != reversibleKind1) {
 
                             } else {
                                 goto block_32;
                             }
                         } else {
-                            var_v0_2 = 0;
-                            if (temp_a0_2 == reversibleKind7) {
+                            forwardIsBidirectional = 0;
+                            if (reverseKind == reversibleKind7) {
                                 goto block_32;
                             }
                         }
                     } else {
 block_32:
-                        var_v0_2 = 1;
+                        forwardIsBidirectional = 1;
                     }
-                    if (var_v0_2 != 0) {
-                        var_s4 += 1;
-                        *var_a3 = (s32) temp_v1_3->first;
-                        var_a3 += 1;
+                    if (forwardIsBidirectional != 0) {
+                        neighborCount += 1;
+                        *neighborCursor = (s32) portal->first;
+                        neighborCursor += 1;
                     }
                 }
             }
             k += 1;
         } while (k < graph->m_nNavLinks);
     }
-    if (arg2 == -1) return var_s4;
+    if (preferredNodeKey == -1) return neighborCount;
     if (point != 0) {
-            for (j = 0; j < var_s4 - 1; j++) {
-                for (i = j + 1; i < var_s4; i++) {
+            for (j = 0; j < neighborCount - 1; j++) {
+                for (i = j + 1; i < neighborCount; i++) {
                     NavigationBuffer *table = graph->points;
-                    s32 firstIndex = arg3[j] * table->stride;
-                    s32 secondIndex = arg3[i] * table->stride;
+                    s32 firstIndex = neighborsOut[j] * table->stride;
+                    s32 secondIndex = neighborsOut[i] * table->stride;
                     void *first = table->data + firstIndex;
                     void *other = table->data + secondIndex;
                     f32 distance = Graphu64_GetSquaredDistance(&point->position.x, first);
                     if (Graphu64_GetSquaredDistance(&point->position.x, other) < distance) {
-                        s32 saved = arg3[j];
-                        arg3[j] = arg3[i];
-                        arg3[i] = saved;
+                        s32 saved = neighborsOut[j];
+                        neighborsOut[j] = neighborsOut[i];
+                        neighborsOut[i] = saved;
                     }
                 }
             }
     }
-    return var_s4;
+    return neighborCount;
 }
 
 s32 Portal_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
@@ -153,7 +153,7 @@ s32 Portal_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void 
 
         reset = obj->nodes;
         while (reset != 0) {
-            reset->value = D_800C1D68_de;
+            reset->value = g_portalResetSearchValue;
             reset->state = -1;
             reset->field18 = 0;
             reset->field1C = 0;
@@ -167,7 +167,7 @@ s32 Portal_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void 
     }
 
     obj->selected = -1;
-    obj->value = D_800C1D6C_de;
+    obj->value = g_portalRelatedGoalDefaultValue;
     Route_ClearGoalList(obj);
     found = 0;
     Nav_SetPickupGoalWeights(owner);
@@ -188,10 +188,10 @@ s32 Portal_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void 
 
             product = i * count;
             if (i != requested) {
-                if (((struct ObjRecAt4V1 *) (obj->links->data + ((product + requested) * obj->links->stride)))->unk4 != 0) {
+                if (((struct PortalLinkAvailabilityView *) (obj->links->data + ((product + requested) * obj->links->stride)))->available != 0) {
                     record = (char *)obj->records +
                              (i * obj->records->stride + 8);
-                    if (record != 0 && (((ObjectState10 *)(record))->unk_C.v0 & mask) == 0) {
+                    if (record != 0 && (((NavigationNodeFlagsView *)(record))->flags.v0 & mask) == 0) {
                         Nav_AddGoalNode(obj, i);
                         found++;
                     }
@@ -209,10 +209,10 @@ s32 Portal_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void 
 
                 product = i * obj->count;
                 if (i != requested) {
-                    if (((struct ObjRecAt4V1 *) (obj->links->data + ((product + requested) * obj->links->stride)))->unk4 != 0) {
+                    if (((struct PortalLinkAvailabilityView *) (obj->links->data + ((product + requested) * obj->links->stride)))->available != 0) {
                         record = (char *)obj->records +
                                  (i * obj->records->stride + 8);
-                        if (record != 0 && (((ObjectState10 *)(record))->unk_C.v1 & 0x400) == 0) {
+                        if (record != 0 && (((NavigationNodeFlagsView *)(record))->flags.v1 & 0x400) == 0) {
                             Nav_AddGoalNode(obj, i);
                         }
                     }
@@ -238,7 +238,7 @@ search_done:
     return obj->selected = obj->result;
 }
 
-extern f32 D_800C1D70_de;
+extern f32 g_portalFirstGoalEmptyDistance;
 s32 Portal_SearchPortalRoute(CNavData *, s32, s32, u8, s32, f32 *, f32);
 /* Collects the nodes linked to key, with the link index of each, into out/edges; returns how many. */
 static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s32 *edges) {
@@ -274,7 +274,7 @@ s32 Portal_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 ma
     NavigationPortal *portal;
 
     result = -1;
-    bestDistance = D_800C1D70_de;
+    bestDistance = g_portalFirstGoalEmptyDistance;
     for (index = 0; index < graph->m_nNavLinks; index++) {
         portal = navigationRecord(graph->m_pusNavLinks, index);
         if (portal->first == startNode && portal->kind == portalKind) return startNode;
@@ -292,7 +292,7 @@ s32 Portal_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 ma
     return result;
 }
 
-extern f32 D_800C1D74_de;
+extern f32 g_portalRelatedGoalEmptyDistance;
 /* Depth-limited search from currentNode (entered from previousNode): returns currentNode when one of its links
  * has portalKind, else the portal node of the shortest route under distanceLimit (-1 when none); stores that
  * route's length in *routeDistance. */
@@ -308,7 +308,7 @@ s32 Portal_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode,
     s32 portalNode;
     NavigationPortal *portal;
 
-    bestDistance = D_800C1D74_de;
+    bestDistance = g_portalRelatedGoalEmptyDistance;
     result = -1;
     for (index = 0; index < graph->m_nNavLinks; index++) {
         portal = navigationRecord(graph->m_pusNavLinks, index);
@@ -338,8 +338,8 @@ s32 Portal_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode,
     return result;
 }
 
-extern f32 D_800C1D78_de;
-extern const f32 D_800C1D7C_de;
+extern f32 g_portalEstimateEmptyDistance;
+extern const f32 g_portalExitEstimateEmptyDistance;
 extern f32 Graphu64_GetPointDistance(f32 *, f32 *);
 
 f32 Portal_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
@@ -362,7 +362,7 @@ f32 Portal_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
     NavigationPortal *portal;
     NavigationPoint *origin;
     NavigationPoint *exitPoint;
-    best = D_800C1D78_de;
+    best = g_portalEstimateEmptyDistance;
     empty = best;
     origin = navigationRecord(graph->points, node->key);
     for (goalIndex = 0; goalIndex < 64; goalIndex++)
@@ -444,7 +444,7 @@ f32 Portal_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
                     }
                     exitGoalPoints = graph->points;
                     exitDistance = Graphu64_GetPointDistance(&exitPoint->position.x, navigationRecord(exitGoalPoints, exitGoal));
-                    if ((exitDistance < best) || (best == D_800C1D7C_de))
+                    if ((exitDistance < best) || (best == g_portalExitEstimateEmptyDistance))
                     {
                         best = exitDistance;
                     }
@@ -457,9 +457,9 @@ f32 Portal_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
     return best;
 }
 
-extern const f32 D_800C1D80_de;
-extern f32 D_800C1D84_de;
-extern f32 D_800C1D88_de;
+extern const f32 g_portalSearchEmptyTotal;
+extern f32 g_portalSearchInitialMinimum;
+extern f32 g_portalFlaggedNodeCost;
 
 static inline s32 navHasOpenNode(CNavData *graph, s32 status) {
     NavigationSearchNode *node = graph->nodes;
@@ -512,13 +512,13 @@ void Portal_SearchPath(CNavData *graph, NavigationSearchNode *start) {
     while (navHasOpenNode(graph, open)) {
         node = graph->nodes;
         best = 0;
-        minimum = D_800C1D84_de;
+        minimum = g_portalSearchInitialMinimum;
         while (node) {
             if (node->open == open) {
                 if (node->total < minimum) {
                     best = node;
                     minimum = node->total;
-                } else if (minimum == D_800C1D80_de) {
+                } else if (minimum == g_portalSearchEmptyTotal) {
                     best = node;
                     minimum = node->total;
                 }
@@ -564,7 +564,7 @@ void Portal_SearchPath(CNavData *graph, NavigationSearchNode *start) {
             }
             edgeCost = distance + next->extra;
             if (navigation_point_flags(destination) & 0x400) {
-                edgeCost += D_800C1D88_de;
+                edgeCost += g_portalFlaggedNodeCost;
             }
             if (edgeCost < minimumCost) {
                 edgeCost = minimumCost;

@@ -12,7 +12,7 @@
 #include "SYSTEM/LIST.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
-/* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through func_80255ED8_de and releasing its resource through Cache_ReleaseResource. Adapted from func_8044334C_de with its body wrapped as an inline helper called in a loop over the list head changed. */
+/* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through List_RemoveIntrusive and releasing its resource through Cache_ReleaseResource. Adapted from func_8044334C_de with its body wrapped as an inline helper called in a loop over the list head changed. */
 
 
 
@@ -23,8 +23,8 @@
 
 
 
-static inline void remove_item(struct ListPakClearMenuItemList *list, struct ItemRecAt20V2 *item) {
-    struct StateRecAtBCV2 *state;
+static inline void remove_item(struct ListPakClearMenuItemList *list, struct MenuResourceItemView *item) {
+    struct MenuItemInputStateView *state;
 
     if (item->handlers->callback != 0) {
         item->handlers->callback(item, list);
@@ -33,35 +33,35 @@ static inline void remove_item(struct ListPakClearMenuItemList *list, struct Ite
     state->a = 0;
     state->b = 0;
     state->c = 0;
-    func_80255ED8_de(list, item);
+    List_RemoveIntrusive(list, item);
     Cache_ReleaseResource(0, item->resource);
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-/* Hands Menu_MeasureLine a target and the scale twice: the target is what func_8043F290 returns for
+/* Hands Menu_MeasureLine a target and the scale twice: the target is what Menu_GetDynamicItemText returns for
    an object of kind 5, otherwise the word the pointer at offset 0x14 addresses. */
 
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void * func_8043F290(struct ObjectRecAt14 *);
+extern void * Menu_GetDynamicItemText(struct MenuItemTargetView *);
 #else
-extern void * func_8043F114_de(struct ObjectRecAt14 *);
+extern void * Menu_GetGermanDynamicItemText(struct MenuItemTargetView *);
 #endif
 
 extern void Menu_MeasureLine(void *, f32, f32);
 
-/* Draws a pulsing sprite for an active menu element: when the word at 0x1CC is set, it takes the frame at 0x1C8 folded back after 23, sets up drawing through OnScreen_SetupTextRendering and Geometry_SetModePreset, emits a yellow environment and primitive colour to the display list and draws sprite 0x67 at the owner's rectangle scaled to the screen through OnScreen_DrawSpriteResource. Adapted from func_8022C2B4_de. */
+/* Draws a pulsing sprite for an active menu element: when the word at 0x1CC is set, it takes the frame at 0x1C8 folded back after 23, sets up drawing through OnScreen_SetupTextRendering and Geometry_SetModePreset, emits a yellow environment and primitive colour to the display list and draws sprite 0x67 at the owner's rectangle scaled to the screen through OnScreen_DrawSpriteResource. Adapted from Playerai_DrawHudSprite1FB. */
 
 
 
 extern s32 Geometry_SetModePreset(s32);
 
 /* Selects the descriptor for a single masked category bit; on eu and eu-x the slot is
-   additionally offset by nine descriptors per local player, read from the byte after D_80146848. */
+   additionally offset by nine descriptors per local player, read from the byte after g_frontendSavedVideoModeIndex. */
 
-extern char D_800E1E24_de[];
+extern char g_menuFontStyles[];
 
 
 /* Steps a pointer back 0x554 bytes: callers pass the pointer held at offset 0x44 of an object and
@@ -71,7 +71,7 @@ void *Menu_GetListContext(s8 *member) {
 }
 
 void Menu_ClearMenuItemList(struct ListPakClearMenuItemList *list) {
-    struct ItemRecAt20V2 *item;
+    struct MenuResourceItemView *item;
 
 loop:
     item = list->head;
@@ -81,19 +81,19 @@ loop:
     }
 }
 
-void Menu_MeasureMenuItemText(struct ObjectRecAt14 *object, f32 scale) {
+void Menu_MeasureMenuItemText(struct MenuItemTargetView *object, f32 scale) {
     void *target;
 
     if (object->kind == 5) {
-        target = 
+        target =
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-func_8043F290
+Menu_GetDynamicItemText
 #else
-func_8043F114_de
+Menu_GetGermanDynamicItemText
 #endif
 (object);
     } else {
-        
+
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         target = object->target[g_languageIndex];
 #else
@@ -139,7 +139,7 @@ void Menu_StepSpriteFrame(struct Object1C8 *object) {
    returned as they are and the rest as 0x2F less the value. */
 
 
-s32 Menu_GetMirroredMenuFrame(struct ObjectRecAt1C8 *object) {
+s32 Menu_GetMirroredMenuFrame(struct MenuItemCountView *object) {
     s32 count = object->count;
 
     if (count < 0x18) {
@@ -171,7 +171,7 @@ void Menu_DrawAnimatedMenuSprite(MenuSpriteElement *e) {
         gfx = g_displayListCursor++;
         gDPSetPrimColor(gfx, 0, 0, 224, 0, 0, 255);
         OnScreen_DrawSpriteResource(0x67, frame, e->owner->x, e->owner->y,
-                      w / (f32)D_800E28D0 * 5.0f, h / (f32)D_800E28D4 * 4.0f, 1);
+                      w / (f32)g_hudReferenceViewportWidth * 5.0f, h / (f32)g_hudReferenceViewportHeight * 4.0f, 1);
     }
 }
 
@@ -187,7 +187,7 @@ s32 Menu_GetMenuItemExtraSize(s16 *record) {
    is 3. */
 
 
-void Menu_EnableMenuItemExtra(s16 *record, struct ObjectRecAt478 *object) {
+void Menu_EnableMenuItemExtra(s16 *record, struct MenuItemVisibilityFlagView *object) {
     if (*record == 3) {
         object->flag = 1;
     }
@@ -207,13 +207,13 @@ void Menu_InitMenuItemFromDescriptor(CMenuItem *w, WidgetDescriptor *d, char **a
  size=0; if(d->type==3) size=0x480;
  if(size) {
  w->extra=*arena;
- extra=*arena; if(d->type==3) ((struct ObjectRecAt478 *)(extra))->flag=1;
+ extra=*arena; if(d->type==3) ((struct MenuItemVisibilityFlagView *)(extra))->flag=1;
  { int step=0; if(d->type==3) step=0x480;
  *arena+=step; }
  }
 }
 
-void *Menu_GetWidgetStyle(ObjRecAt8V4 *widget) {
+void *Menu_GetWidgetStyle(MenuItemFlagsView *widget) {
  s32 index=0;
  switch(widget->flags & 0x3fe0) {
  case 0x20: break;
@@ -228,7 +228,7 @@ void *Menu_GetWidgetStyle(ObjRecAt8V4 *widget) {
  default: index=0; break;
  }
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
- index += (&D_80146848)[1] * 9;
+ index += (&g_frontendSavedVideoModeIndex)[1] * 9;
 #endif
- return D_800E1E24_de+index*28;
+ return g_menuFontStyles+index*28;
 }

@@ -1,7 +1,7 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/OBJECTSTATE90.H"
+#include "COMMON/PLAYER_RECORD_AND_FRAGTAG_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -14,9 +14,9 @@
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/ACTORRESOURCEHEADER.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "ENGINE/SCENE_DRAWOPAQUEACTORS.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
@@ -27,7 +27,7 @@
 extern void *Scene_FindActorDefinition(Shared_World *world, s32 selection, s32 modelKind);
 
 
-extern s32 D_80140FF8;
+extern s32 g_playerWeaponClassMode;
 
 
 
@@ -39,12 +39,12 @@ extern void GameObject_DrawBlobShadow(void *actor, CVector3 *offset, s32 raised)
 
 
 
-extern void func_8022C060_de(void *player, void *unused);
+extern void Playerai_ApplyPeriodicHazardDamage(void *player, void *unused);
 
 /** Report whether the nested pointer's word at 0x564 is nonzero. */
-int func_8022BAA0_de(void *object) {
-    func_80228774_S5 *object_record = object;
-    View *nested = object_record->unk5DC;
+int Playerai_HasActiveView(void *object) {
+    LinkedActorOwnerView *object_record = object;
+    View *nested = object_record->owner;
     if (nested != 0) {
         return nested->unk564 != 0;
     }
@@ -53,7 +53,7 @@ int func_8022BAA0_de(void *object) {
 
 /** Report whether the global state word is nonzero. */
 int Player_IsClockPaused(void) {
-    return D_8011FAC0.clockPaused != 0;
+    return g_gameSession.clockPaused != 0;
 }
 
 void Playerai_LoadActorModel(void *actor) {
@@ -61,7 +61,7 @@ void Playerai_LoadActorModel(void *actor) {
     void *result;
 
     modelKind = ((Shared_ActorView *)actor)->state;
-    if (D_801462C8.counters.m_bFragTagOn != 0 && ((Shared_ActorView *)actor)->controls->transientFlag == 1) {
+    if (g_gameSettings.counters.m_bFragTagOn != 0 && ((Shared_ActorView *)actor)->controls->transientFlag == 1) {
         modelKind = 0x13;
     }
     result = Scene_FindActorDefinition(&g_world, 0xB, modelKind);
@@ -76,52 +76,52 @@ void Playerai_LoadActorModel(void *actor) {
             ((Shared_ActorView *)actor)->model = result;
         }
     }
-    ((LevelActor *)actor)->scale.x = ((ObjectState108 *)result)->unk_FC;
-    ((LevelActor *)actor)->scale.y = ((ObjectState108 *)result)->unk_100;
-    ((LevelActor *)actor)->scale.z = ((ObjectState108 *)result)->unk_104;
+    ((LevelActor *)actor)->scale.x = ((PlayerSequenceResourceView *)result)->unk_FC;
+    ((LevelActor *)actor)->scale.y = ((PlayerSequenceResourceView *)result)->unk_100;
+    ((LevelActor *)actor)->scale.z = ((PlayerSequenceResourceView *)result)->unk_104;
 }
 
-void func_8022BB80_de(void *actor) {
+void Playerai_UpdateCharacterModel(void *actor) {
     s32 modelKind;
     Shared_Game *base;
 
-    base = &D_801462C8;
+    base = &g_gameSettings;
     if (base->local == 0) {
         modelKind = 0x66;
-    } else if (base->unk62C != 0 && ((Shared_ActorView *)actor)->controls->transientFlag != 0) {
-        modelKind = D_800CE47C;
+    } else if (base->fragTagEnabled != 0 && ((Shared_ActorView *)actor)->controls->transientFlag != 0) {
+        modelKind = g_fragTagModelId;
     } else {
-        modelKind = D_800CE430[((LevelActor *)actor)->definition->character];
+        modelKind = g_characterModelIds[((LevelActor *)actor)->definition->character];
         ((Shared_ActorView *)actor)->id = ((Shared_ActorView *)actor)->controls->playerId;
     }
     ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, actor, modelKind, ((Shared_ActorView *)actor)->effectId);
 }
 
-void func_8022BC14_de(Player *actor) {
+void Playerai_UpdateHeldWeaponModel(Player *actor) {
     s32 modelOffset;
 
     if (actor->computer != 0) {
-        if (D_801462C8.counters.transitionActive == 0) {
+        if (g_gameSettings.counters.transitionActive == 0) {
             modelOffset = 0x17;
             goto after;
         }
     }
-    modelOffset = (D_80140FF8 == 1) ? 0 : 0x17;
+    modelOffset = (g_playerWeaponClassMode == 1) ? 0 : 0x17;
 after:
     ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, &actor->weaponModel,
-        ((WeaponInfo *)D_800D052C[actor->selectedAction])->model + modelOffset,
+        ((WeaponInfo *)g_weaponInfoByType[actor->selectedAction])->model + modelOffset,
         actor->weaponAnimationTable->defaultAnimation);
 }
 
-void func_8022BC94_de(void *actorIn, s32 shadowMode) {
+void Playerai_DrawCachedModelAndShadow(void *actorIn, s32 shadowMode) {
     CVector3 viewOffset;
     void *animationResource;
     Shared_ActorView *actor;
-    SharedRecAt564V1 *message;
-    ObjectLinks1DC_3 *object = actorIn;
+    PlayerCameraTargetView *message;
+    ActorAnimationResourceView *object = actorIn;
 
     if (object->unk_100 & 0x40000) {
-        animationResource = Cache_RequestResource(0, object->resource, object->resource, object->resourceFlags, 4, 0, 0, D_800C2BC0_de, 1);
+        animationResource = Cache_RequestResource(0, object->resource, object->resource, object->resourceFlags, 4, 0, 0, g_playerModelResourceTag, 1);
         if (animationResource != 0) {
             actor = object->unk_1D8;
             Gobjinst_UpdateModelBounds(actorIn, (s32)SetN64_GetPackSection(*(void **)animationResource, 0));
@@ -130,7 +130,7 @@ void func_8022BC94_de(void *actorIn, s32 shadowMode) {
                 if (message != 0) {
                     viewOffset.x = message->position.x - object->unk_8.x;
                     viewOffset.y = 0.0f;
-                    viewOffset.z = ((SharedRecAt564V1 *)actor->message)->position.z - object->unk_8.z;
+                    viewOffset.z = ((PlayerCameraTargetView *)actor->message)->position.z - object->unk_8.z;
                     GameObject_DrawBlobShadow(actorIn, &viewOffset, shadowMode);
                 }
             }
@@ -139,16 +139,16 @@ void func_8022BC94_de(void *actorIn, s32 shadowMode) {
     }
 }
 
-void func_8022BD94_de(void *player, void *source, s32 enabled) {
-    func_8022BD84_S2 *object = player;
-    func_8020D1FC_S1 *argument = source;
+void Playerai_SetInheritedMotionFlags(void *player, void *source, s32 enabled) {
+    PlayerDamageOverTimeView *object = player;
+    ActorFlagsWordView *argument = source;
     s32 flags;
     s32 flag_1000;
     s32 flag_8000;
     s32 flag_10000;
 
     if (enabled != 0) {
-        flags = argument->unk38;
+        flags = argument->flags;
         flag_1000 = flags & 0x1000;
         flag_8000 = flags & 0x8000;
         flag_10000 = flags & 0x10000;
@@ -161,13 +161,13 @@ void func_8022BD94_de(void *player, void *source, s32 enabled) {
             func_8022BEFC_de(player, source);
         }
         if (flag_10000) {
-            func_8022C060_de(player, source);
+            Playerai_ApplyPeriodicHazardDamage(player, source);
         }
     }
 }
 
 extern void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 damageFlags, s32 kind);
-/* Damage over time while the source's effect flag 0x1000 is set (func_8022BD94_de): advances the player's
+/* Damage over time while the source's effect flag 0x1000 is set (Playerai_SetInheritedMotionFlags): advances the player's
  * effect timer by the frame step; past 300 it marks the player and deals max(1, (150 - health / 256) / 15)
  * points (8.8 fixed) of kind 0x1F, then winds the timer back by 22.5 so the next tick follows sooner.
  * HONEST-FORM-OPEN: the step check stores the same value in both arms. jump2 cross-jumps the arms and
@@ -180,7 +180,7 @@ void Playerai_ApplyDamageOverTime(Shared_ActorView *player, void *source) {
     f32 previous;
     f32 step;
     previous = player->recoveryTime;
-    step = D_800D2988;
+    step = g_frameElapsedTime;
     elapsed = previous + step;
     if (elapsed - previous != step) {
         player->recoveryTime = elapsed;

@@ -7,7 +7,7 @@ struct Shared_Actor;
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 struct NavigationPlatform;
-extern struct NavigationPlatform *D_8011BF00;
+extern struct NavigationPlatform *g_navigationPlatformActors;
 
 struct List802795C0;
 struct List802795C0 {
@@ -26,24 +26,24 @@ struct ListHeader {
     s32 count;
 };
 
-extern s16 Lists_ChooseWeightedEntry(s16 *arg0);
+extern s16 Lists_ChooseWeightedEntry(s16 *weightedEntries);
 
 struct Lists18;
 typedef struct Lists18 Lists18;
 
-struct IntegerState5AC;
-typedef struct IntegerState5AC IntegerState5AC;
+struct ParticleAmmoRewardView;
+typedef struct ParticleAmmoRewardView ParticleAmmoRewardView;
 
-struct func_80279490_S1;
-struct func_80279490_S1 {
+struct LinkTriggerMessageView;
+struct LinkTriggerMessageView {
     char pad0[0x4];
-    u16 unk4;
+    u16 platformIndex;
     char pad4[0xA - 0x4 - sizeof(u16)];
-    u16 unkA;
+    u16 sequenceId;
     char padA[0x11 - 0xA - sizeof(u16)];
-    u8 unk11;
+    u8 messageKind;
     char pad11[0x12 - 0x11 - sizeof(u8)];
-    u8 unk12;
+    u8 messageState;
 };
 
 extern void Link_SetActorStateBit(void *object);
@@ -61,7 +61,7 @@ struct Lists18 {
     List802795C0 inactive;
 };
 
-extern void Link_SetTriggerTrackCallback(int unused0, int unused1, void *arg2);
+extern void Link_SetTriggerTrackCallback(int unused0, int unused1, void *trigger);
 
 extern void Link_ClearActorStateBit(struct Shared_Actor *actor);
 
@@ -72,11 +72,11 @@ struct WeightedTable {
     s16 reserved; /* Complete 0x68-byte caller storage. */
 };
 
-struct ObjectLinks1BC;
-typedef struct ObjectLinks1BC ObjectLinks1BC;
+struct ParticleOwnerActorView;
+typedef struct ParticleOwnerActorView ParticleOwnerActorView;
 
-struct ObjectLinks1BC;
-struct ObjectLinks1BC {
+struct ParticleOwnerActorView;
+struct ParticleOwnerActorView {
     char pad0[0x4];
     u16 unk_4;
     char pad4[0x118 - 0x4 - sizeof(u16)];
@@ -91,11 +91,11 @@ struct ObjectLinks1BC {
     s8 unk_1BA;
 };
 
-struct ObjectStateC4;
-typedef struct ObjectStateC4 ObjectStateC4;
+struct ParticleFinishSoundView;
+typedef struct ParticleFinishSoundView ParticleFinishSoundView;
 
-struct Actor_func_80279B40_de;
-struct Actor_func_80279B40_de {
+struct ParticleChildEffectActorView;
+struct ParticleChildEffectActorView {
     char pad0[8];
     CVector3 position;
     char pad14[8];
@@ -103,11 +103,11 @@ struct Actor_func_80279B40_de {
     char pad28[0x34];
     s32 flags;
     char pad60[0xB8];
-    ObjRecAt14V3 *def;
+    ActorDefinitionFlagsView *def;
     char pad11C[0x10];
     void *owner;
-    s32 unk130;
-    s32 unk134;
+    s32 effectEntries;
+    s32 effectEntryCount;
     char pad138[0x48];
     f32 offsetX;
     f32 offsetY;
@@ -116,8 +116,8 @@ struct Actor_func_80279B40_de {
 
 extern void Lists_InitFromPool(ListHeader *lists, void *pool, s32 stride, s32 count);
 
-struct ObjectStateC4;
-struct ObjectStateC4 {
+struct ParticleFinishSoundView;
+struct ParticleFinishSoundView {
     unsigned char padding_0[190];
     u16 unk_BE;
     unsigned char padding_C0[2];
@@ -126,25 +126,25 @@ struct ObjectStateC4 {
 
 
 
-extern void Link_SetTriggerTrack(void *arg0);
+extern void Link_SetTriggerTrack(void *trigger);
 
-struct func_80279490_S1;
-typedef struct func_80279490_S1 func_80279490_S1;
+struct LinkTriggerMessageView;
+typedef struct LinkTriggerMessageView LinkTriggerMessageView;
 
-struct Actor_func_80279B40_de;
-typedef struct Actor_func_80279B40_de Actor_func_80279B40_de;
+struct ParticleChildEffectActorView;
+typedef struct ParticleChildEffectActorView ParticleChildEffectActorView;
 
 struct Trigger;
 struct Trigger {
     s32 mask;
     u16 actor;
-    u16 unk6;
+    u16 trackArgument;
     u16 action;
     u16 owner;
     union {
         s32 word;
         struct {
-            u16 unkC;
+            u16 messageArgument;
             u8 state;
             u8 id;
         } bytes;
@@ -158,8 +158,8 @@ struct Trigger {
 struct WeightedTable;
 typedef struct WeightedTable WeightedTable;
 
-struct IntegerState5AC;
-struct IntegerState5AC {
+struct ParticleAmmoRewardView;
+struct ParticleAmmoRewardView {
     char pad0[0x59C];
     s32 unk_59C;
     char pad59C[0x5A4 - 0x59C - sizeof(s32)];
@@ -174,7 +174,7 @@ struct Player;
 extern s32 Action_ShowTriggerMessage(struct NavigationPlatform *object, struct ActorMotionState *guard, struct Player *actor);
 
 extern void SoundElement_StopAudioBySecondaryValue(s32);
-extern CVector3 D_801042C8;
+extern CVector3 g_particleZeroVector;
 
 #endif
 #endif

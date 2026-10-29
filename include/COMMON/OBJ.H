@@ -4,14 +4,14 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 struct Obj;
 typedef struct Obj Obj;
 
 
-struct RecordRecAt13C;
-struct RecordRecAt13C {
+struct TurretSetupState;
+struct TurretSetupState {
     char pad0[0x2C];
     void *table;
     char pad30[7];
@@ -34,9 +34,9 @@ struct RecordRecAt13C {
     s32 c;
 };
 
-extern float D_800C6B2C;
+extern float k_turretInitialRange;
 
-extern float D_800C1A04_de;
+extern float k_turretVerticalAimLowerLimit;
 
 struct CTurretIntelligence_t;
 typedef struct CTurretIntelligence_t CTurretIntelligence;
@@ -44,7 +44,7 @@ typedef struct CTurretIntelligence_t CTurretIntelligence;
 
 
 
-extern float D_800C1A00_de;
+extern float k_turretIdentityQuaternionW;
 
 
 struct Result;
@@ -55,7 +55,7 @@ typedef struct Result Result;
 
 
 
-extern float D_800C19FC_de;
+extern float k_turretVerticalAimUpperLimit;
 
 struct TurretPlayerRelation;
 typedef struct TurretPlayerRelation TurretPlayerRelation;
@@ -71,8 +71,8 @@ struct Obj {
     float timer;
 };
 
-struct RiderRecAt130V1;
-typedef struct RiderRecAt130V1 RiderRecAt130V1;
+struct TurretRiderTargetView;
+typedef struct TurretRiderTargetView TurretRiderTargetView;
 
 struct TurretPlayerRelation;
 struct TurretPlayerRelation {
@@ -126,41 +126,41 @@ struct NavigationTrack {
 };
 
 
-extern float D_800C1A48_de;
+extern float k_turretStateTimeout;
 
-extern f32 D_80115DEC;
+extern f32 g_turretAimSine;
 
-struct ObjRecAt294;
-struct ObjRecAt294 {
+struct TurretAimOwnerView;
+struct TurretAimOwnerView {
     char pad0[0x18];
-    char * unk18;
+    char * definition;
     char pad18[0x6C - 0x18 - sizeof(char*)];
     f32 heading; /* 0x6C */
     char pad70[0x20C - 0x70];
     f32 targetHeading; /* 0x20C */
     char pad210[0x294 - 0x210];
-    f32 unk294;
+    f32 pitch;
 };
 
-extern float D_800C1A0C;
+extern float k_turretTurnAngleScale;
 
 struct Segment;
 typedef struct Segment Segment;
 
-struct OwnerRecAtE4;
-struct RecordRecAt13C;
+struct ItemMenuSelectionView;
+struct TurretSetupState;
 
-struct ObjRecAt294;
-typedef struct ObjRecAt294 ObjRecAt294;
+struct TurretAimOwnerView;
+typedef struct TurretAimOwnerView TurretAimOwnerView;
 
 struct Rider;
 typedef struct Rider Rider;
 
-extern void func_802022E0_de();
+extern void Libsn_InstallDebuggerExceptionHooks();
 extern int Libgultra_TrwGetSr();
-extern void Libgultra_TrwSetSr(int arg0);
+extern void Libgultra_TrwSetSr(int sampleRate);
 
-typedef union NavActor { SharedPlayer player; Input80216D3C input; Actor_func_80214624_de actor; struct Owner owner; } NavActor;
+typedef union NavActor { SharedPlayer player; Input80216D3C input; TrackerAimActorView actor; struct Owner owner; } NavActor;
 typedef struct NavVec { CVector3 v; f32 fourth; } NavVec;
 
 

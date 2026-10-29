@@ -6,15 +6,15 @@
 
 #include "TYPES.H"
 typedef struct AchieveRecord { u8 pad0[0x78]; u8 active; u8 pad79[0x18]; u8 team; u8 pad92[4]; } AchieveRecord;
-extern u8 D_80142369[][0x96];
-extern s32 D_800FEB70[][100];
-extern u8 D_800FEB26[];
-extern s8 D_8014222C;
-extern s8 D_8014222D;
+extern u8 g_profileAchievementProgressRows[][0x96];
+extern s32 g_profileAchievementCountRows[][100];
+extern u8 g_profileAchievementCounters[];
+extern s8 g_matchAchievementQualificationFlagA;
+extern s8 g_matchAchievementQualificationFlagB;
 extern AchieveRecord g_playerSettings[];
-extern s32 D_800FF140_de[];
+extern s32 g_playerCountedShots[];
 typedef struct { s8 pad[0x24]; s8 a; s8 b; } Settings;
-extern Settings D_801462C8;
+extern Settings g_gameSettings;
 /* Increment the capped player match count and eligible level count. */
 void Match_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
     s32 count;
@@ -24,16 +24,16 @@ void Match_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
     s32 result;
     AchieveRecord *rec;
     Settings *cfg;
-    if (D_80142369[playerIndex][0] == 1) {
+    if (g_profileAchievementProgressRows[playerIndex][0] == 1) {
         return;
     }
-    value = D_800FEB70[playerIndex][0] + 1;
+    value = g_profileAchievementCountRows[playerIndex][0] + 1;
     if (value > 99999) {
-        D_800FEB70[playerIndex][0] = 99999;
+        g_profileAchievementCountRows[playerIndex][0] = 99999;
     } else {
-        D_800FEB70[playerIndex][0] = value;
+        g_profileAchievementCountRows[playerIndex][0] = value;
     }
-    if (D_8014222C <= 0 && D_8014222D <= 0) {
+    if (g_matchAchievementQualificationFlagA <= 0 && g_matchAchievementQualificationFlagB <= 0) {
         result = 0;
     } else {
         eligible = 1;
@@ -42,7 +42,7 @@ void Match_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
             rec = &g_playerSettings[i];
             if (rec->active == 1) {
                 if (rec->team != rec->active) {
-                    if (D_800FF140_de[i] >= 0x4C) {
+                    if (g_playerCountedShots[i] >= 0x4C) {
                         count++;
                     }
                 }
@@ -54,13 +54,13 @@ void Match_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
         result = eligible;
     }
     if (result == 1) {
-        cfg = &D_801462C8;
+        cfg = &g_gameSettings;
         if (cfg->a >= 10 || cfg->b >= 10) {
-            value = D_800FEB26[counterIndex + playerIndex * 400] + 1;
+            value = g_profileAchievementCounters[counterIndex + playerIndex * 400] + 1;
             if (value >= 6) {
-                D_800FEB26[counterIndex + playerIndex * 400] = 5;
+                g_profileAchievementCounters[counterIndex + playerIndex * 400] = 5;
             } else {
-                D_800FEB26[counterIndex + playerIndex * 400] = value;
+                g_profileAchievementCounters[counterIndex + playerIndex * 400] = value;
             }
         }
     }
@@ -72,28 +72,28 @@ void Match_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
 extern s32 Defs_TestBit(s32 bits, s32 index);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern char *D_800D3200[];
+extern char *g_profileRankTitles[];
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char *D_800E1254[];
-extern char *D_800E1264[];
-extern char *D_800E1274[];
-extern char *D_800E1284[];
-extern char *D_800E1294[];
-extern char *D_800E12A4[];
-extern char *D_800E12B4[];
-extern char *D_800E12C4[];
-extern char *D_800E12D4[];
-extern char *D_800E12E4[];
-extern char *D_800E12F4[];
-extern char *D_800E1304[];
-extern char *D_800E1314[];
-extern char *D_800E1324[];
-extern char *D_800E1334[];
-extern char *D_800E1344[];
-extern char *D_800E1354[];
-extern char *D_800E1364[];
-extern char *D_800E1374_eu[];
-extern char *D_800E1384[];
+extern char *g_profileRank0LocalizedTitles[];
+extern char *g_profileRank1LocalizedTitles[];
+extern char *g_profileRank2LocalizedTitles[];
+extern char *g_profileRank3LocalizedTitles[];
+extern char *g_profileRank4LocalizedTitles[];
+extern char *g_profileRank5LocalizedTitles[];
+extern char *g_profileRank6LocalizedTitles[];
+extern char *g_profileRank7LocalizedTitles[];
+extern char *g_profileRank8LocalizedTitles[];
+extern char *g_profileRank9LocalizedTitles[];
+extern char *g_profileRank10LocalizedTitles[];
+extern char *g_profileRank11LocalizedTitles[];
+extern char *g_profileRank12LocalizedTitles[];
+extern char *g_profileRank13LocalizedTitles[];
+extern char *g_profileRank14LocalizedTitles[];
+extern char *g_profileRank15LocalizedTitles[];
+extern char *g_profileRank16LocalizedTitles[];
+extern char *g_profileRank17LocalizedTitles[];
+extern char *g_profileRank18LocalizedTitles[];
+extern char *g_profileRank19LocalizedTitles[];
 #endif
 
 char *Match_UpdateRankText(s32 index) {
@@ -103,15 +103,15 @@ char *Match_UpdateRankText(s32 index) {
     s32 rank;
     if (index >= 4) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        return (D_800D3200[0]);
+        return (g_profileRankTitles[0]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        return ((D_800E1254)[g_languageIndex]);
+        return ((g_profileRank0LocalizedTitles)[g_languageIndex]);
 #endif
     }
     count = 0;
     i = 0;
     do {
-        if (Defs_TestBit((s32)D_80102B00[index].achievementFlags, i) == 1) {
+        if (Defs_TestBit((s32)g_localPlayerProfiles[index].achievementFlags, i) == 1) {
             count++;
         }
         i++;
@@ -121,99 +121,99 @@ char *Match_UpdateRankText(s32 index) {
     case 1:
         rank = 0;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[0]);
+        text = (g_profileRankTitles[0]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1254)[g_languageIndex]);
+        text = ((g_profileRank0LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 2:
     case 3:
         rank = 1;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[1]);
+        text = (g_profileRankTitles[1]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1264)[g_languageIndex]);
+        text = ((g_profileRank1LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 4:
     case 5:
         rank = 2;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[2]);
+        text = (g_profileRankTitles[2]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1274)[g_languageIndex]);
+        text = ((g_profileRank2LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 6:
     case 7:
         rank = 3;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[3]);
+        text = (g_profileRankTitles[3]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1284)[g_languageIndex]);
+        text = ((g_profileRank3LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 8:
     case 9:
         rank = 4;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[4]);
+        text = (g_profileRankTitles[4]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1294)[g_languageIndex]);
+        text = ((g_profileRank4LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 10:
     case 11:
         rank = 5;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[5]);
+        text = (g_profileRankTitles[5]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12A4)[g_languageIndex]);
+        text = ((g_profileRank5LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 12:
     case 13:
         rank = 6;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[6]);
+        text = (g_profileRankTitles[6]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12B4)[g_languageIndex]);
+        text = ((g_profileRank6LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 14:
     case 15:
         rank = 7;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[7]);
+        text = (g_profileRankTitles[7]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12C4)[g_languageIndex]);
+        text = ((g_profileRank7LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 16:
     case 17:
         rank = 8;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[8]);
+        text = (g_profileRankTitles[8]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12D4)[g_languageIndex]);
+        text = ((g_profileRank8LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 18:
     case 19:
         rank = 9;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[9]);
+        text = (g_profileRankTitles[9]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12E4)[g_languageIndex]);
+        text = ((g_profileRank9LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 20:
     case 21:
         rank = 10;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[10]);
+        text = (g_profileRankTitles[10]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12F4)[g_languageIndex]);
+        text = ((g_profileRank10LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 22:
@@ -221,9 +221,9 @@ char *Match_UpdateRankText(s32 index) {
     case 24:
         rank = 11;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[11]);
+        text = (g_profileRankTitles[11]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1304)[g_languageIndex]);
+        text = ((g_profileRank11LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 25:
@@ -231,9 +231,9 @@ char *Match_UpdateRankText(s32 index) {
     case 27:
         rank = 12;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[12]);
+        text = (g_profileRankTitles[12]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1314)[g_languageIndex]);
+        text = ((g_profileRank12LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 28:
@@ -241,9 +241,9 @@ char *Match_UpdateRankText(s32 index) {
     case 30:
         rank = 13;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[13]);
+        text = (g_profileRankTitles[13]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1324)[g_languageIndex]);
+        text = ((g_profileRank13LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 31:
@@ -251,9 +251,9 @@ char *Match_UpdateRankText(s32 index) {
     case 33:
         rank = 14;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[14]);
+        text = (g_profileRankTitles[14]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1334)[g_languageIndex]);
+        text = ((g_profileRank14LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 34:
@@ -261,9 +261,9 @@ char *Match_UpdateRankText(s32 index) {
     case 36:
         rank = 15;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[15]);
+        text = (g_profileRankTitles[15]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1344)[g_languageIndex]);
+        text = ((g_profileRank15LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 37:
@@ -271,9 +271,9 @@ char *Match_UpdateRankText(s32 index) {
     case 39:
         rank = 16;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[16]);
+        text = (g_profileRankTitles[16]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1354)[g_languageIndex]);
+        text = ((g_profileRank16LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 40:
@@ -283,9 +283,9 @@ char *Match_UpdateRankText(s32 index) {
     case 44:
         rank = 17;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[17]);
+        text = (g_profileRankTitles[17]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1364)[g_languageIndex]);
+        text = ((g_profileRank17LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     case 45:
@@ -295,20 +295,20 @@ char *Match_UpdateRankText(s32 index) {
     case 49:
         rank = 18;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[18]);
+        text = (g_profileRankTitles[18]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1374_eu)[g_languageIndex]);
+        text = ((g_profileRank18LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     default:
         rank = 19;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        text = (D_800D3200[19]);
+        text = (g_profileRankTitles[19]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1384)[g_languageIndex]);
+        text = ((g_profileRank19LocalizedTitles)[g_languageIndex]);
 #endif
         break;
     }
-    D_80102B00[index].rank = rank;
+    g_localPlayerProfiles[index].rank = rank;
     return text;
 }

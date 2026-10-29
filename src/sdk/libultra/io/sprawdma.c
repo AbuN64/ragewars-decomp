@@ -1,4 +1,4 @@
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/HARDWARE_IO.H"
 #include "COMMON/OSTASK_T.H"
 #include "COMMON/ALFXPARAM.H"
@@ -11,13 +11,13 @@
 
 s32 __osSpRawStartDma(s32 direction, s32 deviceAddress, s32 dramAddress, s32 size) {
     if (deviceAddress & 7) {
-        Audio_Assert(&D_800C79B0_de, &s_sprawdmaText, 0x3A);
+        Audio_Assert(&g_signalProcessorDmaAssertText, &s_sprawdmaText, 0x3A);
     }
     if (dramAddress & 7) {
-        Audio_Assert(&D_800C79B0_de, &s_sprawdmaText, 0x3B);
+        Audio_Assert(&g_signalProcessorDmaAssertText, &s_sprawdmaText, 0x3B);
     }
     if (size & 7) {
-        Audio_Assert(&D_800C79B0_de, &s_sprawdmaText, 0x3C);
+        Audio_Assert(&g_signalProcessorDmaAssertText, &s_sprawdmaText, 0x3C);
     }
     if (__osSpDeviceBusy() != 0) {
         return -1;

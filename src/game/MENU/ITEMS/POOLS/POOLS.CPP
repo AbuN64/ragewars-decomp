@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -7,15 +7,15 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "RESMGR/X_PLUS.H"
-#include "MENU/8044ACCC.H"
+#include "MENU/SCENE_RESOURCE_PREVIEW_AND_COLLISION_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "SYSTEM/LIST.H"
 #include "SYSTEM/LIST.H"
 
 /* Initializes camera transforms, viewport state, clipping records, and resource lists. */
 
- 
-void func_80238EB8_de(void *);                               /* extern */
+
+void Sky_InitializeLensFlareState(void *);                               /* extern */
 void Gsky_SetGameplayMode(void *, s32);                         /* extern */
 void Gsky_ResetFadeState(void *);                            /* extern */
 void Gsky_InitializeMessageEntryPool(void *);                            /* extern */
@@ -23,7 +23,7 @@ void Graphu64_IdentityMatrix(void *);                            /* extern */
 void Menu_InitMenuMessageList(void *);                    /* extern */
 
 
-extern s32 D_800E28D0;
+extern s32 g_hudReferenceViewportWidth;
 
 
 
@@ -32,97 +32,97 @@ extern s32 D_800E28D0;
 
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x10, 0x14, 0x20, 0x24], gap at: 0x18. */
-void Pools_InitializeGameplayCamera(GameplayCamera *arg0) {
-    f32 temp_f21;
+void Pools_InitializeGameplayCamera(GameplayCamera *camera) {
+    f32 unitValue;
     f32 zero;
-    s16 temp_a0;
-    s32 var_a1;
-    Floats *temp_v0;
-    Floats *temp_v0_2;
-    Floats *temp_v0_3;
-    Floats *temp_v0_4;
-    Floats *temp_v0_5;
+    s16 viewportExtent;
+    s32 viewportIndex;
+    Floats *orientationValues;
+    Floats *transformDefaults;
+    Floats *firstEffectDefaults;
+    Floats *secondEffectDefaults;
+    Floats *thirdEffectDefaults;
 
-    func_80238EB8_de(((void *)&((GameplayCamera *)arg0)->unk24));
-    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->viewOrient);
-    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->viewProjection);
+    Sky_InitializeLensFlareState(((void *)&((GameplayCamera *)camera)->bobSuppressed));
+    Graphu64_IdentityMatrix(((GameplayCamera *)camera)->viewOrient);
+    Graphu64_IdentityMatrix(((GameplayCamera *)camera)->viewProjection);
     zero = 0.0f;
-    temp_f21 = 1.0f;
-    temp_v0 = ((void *)&((GameplayCamera *)arg0)->orientation);
-    temp_v0->unk8 = zero;
-    temp_v0->unk4 = zero;
-    arg0->orientation.x = zero;
-    arg0->orientation.w = temp_f21;
-    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->inverseViewOrient);
-    arg0->viewWidth = (f32) D_800E28D0;
-    arg0->viewHeight = (f32) D_800E28D4;
-    arg0->unk518 = -1;
-    arg0->viewLeft = zero;
-    arg0->viewTop = zero;
-    arg0->unk520 = 0;
-    arg0->unk524 = 0;
-    arg0->unk521 = 0;
-    arg0->unk525 = 0;
-    arg0->unk522 = 0;
-    arg0->unk526 = 0;
-    arg0->unk523 = 0;
-    arg0->unk527 = 0;
-    arg0->unk51C = temp_f21;
-    arg0->fogNear = 0x3E3;
-    arg0->unk540 = 0x3E3;
-    arg0->unk548 = 0;
-    arg0->dirty = 0;
-    arg0->pixelXScale = temp_f21;
-    arg0->pixelYScale = temp_f21;
-    arg0->farPlane = (f32) 1024.0f;
-    arg0->unk52C = (f32) 1024.0f;
-    arg0->unk530 = (f32) 47.5f;
-    arg0->unk534 = (f32) 47.5f;
-    Gsky_ResetFadeState(arg0);
-    temp_v0_2 = ((void *)&((GameplayCamera *)arg0)->padA0);
-    arg0->shakeHorizontal = zero;
-    arg0->shakeVertical = zero;
-    temp_v0_2->unk8 = zero;
-    temp_v0_2->unkC = zero;
-    temp_v0_2->unk10 = zero;
-    temp_v0_2->unk14 = temp_f21;
-    temp_v0_3 = ((void *)&((GameplayCamera *)arg0)->unkB8);
-    temp_v0_3->unk4 = zero;
-    temp_v0_3->unk8 = zero;
-    temp_v0_3->unkC = zero;
-    temp_v0_3->unk10 = zero;
-    temp_v0_4 = ((void *)&((GameplayCamera *)arg0)->unkCC);
-    temp_v0_4->unk4 = zero;
-    temp_v0_4->unk8 = zero;
-    temp_v0_4->unkC = zero;
-    temp_v0_4->unk10 = zero;
-    temp_v0_5 = ((void *)&((GameplayCamera *)arg0)->unkE0);
-    temp_v0_5->unk4 = zero;
-    temp_v0_5->unk8 = zero;
-    temp_v0_5->unkC = zero;
-    temp_v0_5->unk10 = zero;
-    Gsky_SetGameplayMode(arg0, 0);
-    temp_a0 = D_800E28D0 * 2;
-    for (var_a1 = 0; var_a1 < 2; var_a1++) {
-        ((RacerViewport *)arg0)->viewports[var_a1].vscale[0] = temp_a0;
-        ((RacerViewport *)arg0)->viewports[var_a1].vscale[1] = temp_a0;
-        ((RacerViewport *)arg0)->viewports[var_a1].vscale[2] = 0x3FF;
-        ((RacerViewport *)arg0)->viewports[var_a1].vscale[3] = 0;
-        ((RacerViewport *)arg0)->viewports[var_a1].vtrans[0] = temp_a0;
-        ((RacerViewport *)arg0)->viewports[var_a1].vtrans[1] = temp_a0;
-        ((RacerViewport *)arg0)->viewports[var_a1].vtrans[2] = 0;
-        ((RacerViewport *)arg0)->viewports[var_a1].vtrans[3] = 0;
+    unitValue = 1.0f;
+    orientationValues = ((void *)&((GameplayCamera *)camera)->orientation);
+    orientationValues->unk8 = zero;
+    orientationValues->unk4 = zero;
+    camera->orientation.x = zero;
+    camera->orientation.w = unitValue;
+    Graphu64_IdentityMatrix(((GameplayCamera *)camera)->inverseViewOrient);
+    camera->viewWidth = (f32) g_hudReferenceViewportWidth;
+    camera->viewHeight = (f32) g_hudReferenceViewportHeight;
+    camera->unk518 = -1;
+    camera->viewLeft = zero;
+    camera->viewTop = zero;
+    camera->unk520 = 0;
+    camera->unk524 = 0;
+    camera->unk521 = 0;
+    camera->unk525 = 0;
+    camera->unk522 = 0;
+    camera->unk526 = 0;
+    camera->unk523 = 0;
+    camera->unk527 = 0;
+    camera->unk51C = unitValue;
+    camera->fogNear = 0x3E3;
+    camera->unk540 = 0x3E3;
+    camera->unk548 = 0;
+    camera->dirty = 0;
+    camera->pixelXScale = unitValue;
+    camera->pixelYScale = unitValue;
+    camera->farPlane = (f32) 1024.0f;
+    camera->unk52C = (f32) 1024.0f;
+    camera->unk530 = (f32) 47.5f;
+    camera->unk534 = (f32) 47.5f;
+    Gsky_ResetFadeState(camera);
+    transformDefaults = ((void *)&((GameplayCamera *)camera)->padA0);
+    camera->shakeHorizontal = zero;
+    camera->shakeVertical = zero;
+    transformDefaults->unk8 = zero;
+    transformDefaults->unkC = zero;
+    transformDefaults->unk10 = zero;
+    transformDefaults->unk14 = unitValue;
+    firstEffectDefaults = ((void *)&((GameplayCamera *)camera)->shakeAxisX);
+    firstEffectDefaults->unk4 = zero;
+    firstEffectDefaults->unk8 = zero;
+    firstEffectDefaults->unkC = zero;
+    firstEffectDefaults->unk10 = zero;
+    secondEffectDefaults = ((void *)&((GameplayCamera *)camera)->shakeAxisY);
+    secondEffectDefaults->unk4 = zero;
+    secondEffectDefaults->unk8 = zero;
+    secondEffectDefaults->unkC = zero;
+    secondEffectDefaults->unk10 = zero;
+    thirdEffectDefaults = ((void *)&((GameplayCamera *)camera)->shakeAxisZ);
+    thirdEffectDefaults->unk4 = zero;
+    thirdEffectDefaults->unk8 = zero;
+    thirdEffectDefaults->unkC = zero;
+    thirdEffectDefaults->unk10 = zero;
+    Gsky_SetGameplayMode(camera, 0);
+    viewportExtent = g_hudReferenceViewportWidth * 2;
+    for (viewportIndex = 0; viewportIndex < 2; viewportIndex++) {
+        ((RacerViewport *)camera)->viewports[viewportIndex].vscale[0] = viewportExtent;
+        ((RacerViewport *)camera)->viewports[viewportIndex].vscale[1] = viewportExtent;
+        ((RacerViewport *)camera)->viewports[viewportIndex].vscale[2] = 0x3FF;
+        ((RacerViewport *)camera)->viewports[viewportIndex].vscale[3] = 0;
+        ((RacerViewport *)camera)->viewports[viewportIndex].vtrans[0] = viewportExtent;
+        ((RacerViewport *)camera)->viewports[viewportIndex].vtrans[1] = viewportExtent;
+        ((RacerViewport *)camera)->viewports[viewportIndex].vtrans[2] = 0;
+        ((RacerViewport *)camera)->viewports[viewportIndex].vtrans[3] = 0;
     }
-    Menu_InitMenuMessageList(((void *)&((GameplayCamera *)arg0)->messageList));
-    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreen);
-    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreenUpright);
-    arg0->fadeEnabled = 0;
-    arg0->monochrome = 0;
-    arg0->kickStep = 0x32;
-    arg0->unk126 = 0;
-    D_800FF224_de = 0;
-    func_80255CA0_de(&((GameplayCamera *)arg0)->objects, 0, 4);
-    Gsky_InitializeMessageEntryPool(arg0);
+    Menu_InitMenuMessageList(((void *)&((GameplayCamera *)camera)->messageList));
+    Graphu64_IdentityMatrix(((GameplayCamera *)camera)->faceScreen);
+    Graphu64_IdentityMatrix(((GameplayCamera *)camera)->faceScreenUpright);
+    camera->fadeEnabled = 0;
+    camera->monochrome = 0;
+    camera->kickStep = 0x32;
+    camera->unk126 = 0;
+    g_cameraFramingTransitionTimer = 0;
+    List_InitializeIntrusive(&((GameplayCamera *)camera)->objects, 0, 4);
+    Gsky_InitializeMessageEntryPool(camera);
 }
 
 #include "TYPES.H"
@@ -141,9 +141,9 @@ typedef struct DraftOwnerA370 {
     DraftListA370 entryList, spareList;
     s32 empty;
 } DraftOwnerA370;
-extern f32 D_800C32EC_de;
+extern f32 k_menuInitialCounterValue;
 extern char g_camerasText[];
-extern char D_800C32DC_de[];
+extern char g_screenMessageAllocationLabel[];
 extern void SoundElement_SetListenerCamera(void *);
 extern void Cache_DrainAndCompactResources(s32);
 extern void Cache_ReleaseResource(s32, void *);
@@ -173,16 +173,16 @@ void Pools_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     owner->word48 = 0;
     Pools_InitializeGameplayCamera(owner->parts);
     owner->word38 = 2;
-    func_80255CA0_de(&owner->entryList, 0, 4);
-    func_80255CA0_de(&owner->spareList, 0, 4);
-    initialValue = D_800C32EC_de;
+    List_InitializeIntrusive(&owner->entryList, 0, 4);
+    List_InitializeIntrusive(&owner->spareList, 0, 4);
+    initialValue = k_menuInitialCounterValue;
     for (i = 0; i < 8; i++) {
         resetDraftEntry(&owner->entries[i], initialValue);
-        func_80255D14_de(&owner->entryList, &owner->entries[i]);
+        List_AppendIntrusive(&owner->entryList, &owner->entries[i]);
     }
-    func_80255CA0_de(&owner->active, 0, 4);
-    func_80255CA0_de(&owner->free, 0, 4);
-    func_80255CA0_de(&owner->smallList, 0, 4);
+    List_InitializeIntrusive(&owner->active, 0, 4);
+    List_InitializeIntrusive(&owner->free, 0, 4);
+    List_InitializeIntrusive(&owner->smallList, 0, 4);
     owner->empty = 1;
     SoundElement_SetListenerCamera(owner->parts);
     Cache_DrainAndCompactResources(0);
@@ -202,26 +202,26 @@ void Pools_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
         XPlus_FillMemory(owner->actors, 0, actorCount * 0xED8);
         for (i = 0; i < owner->count; i++) {
             owner->actors[i].index = i;
-            func_80255D14_de(&owner->active, &owner->actors[i]);
+            List_AppendIntrusive(&owner->active, &owner->actors[i]);
         }
         SoundElement_SetListenerCamera(owner->actors);
         owner->empty = 0;
     }
     owner->smallCount = 16;
-    owner->smallHandle = Cache_AllocateResource(0, 0x400, 0x23, D_800C32DC_de);
+    owner->smallHandle = Cache_AllocateResource(0, 0x400, 0x23, g_screenMessageAllocationLabel);
     owner->small = *owner->smallHandle;
     XPlus_FillMemory(owner->small, 0, 0x400);
     for (i = 0; i < owner->smallCount; i++) {
-        func_80255D14_de(&owner->smallList, &owner->small[i]);
+        List_AppendIntrusive(&owner->smallList, &owner->small[i]);
     }
 }
 
 /* Resets a 0x1208-byte actor: clears it through XPlus_FillMemory, initialises its three lists at 0xC,
-   0x20 and 0xF24 through func_80255CA0_de, sets its words at 0x1200 and 0x38 to 1 and 2, clears those at
+   0x20 and 0xF24 through List_InitializeIntrusive, sets its words at 0x1200 and 0x38 to 1 and 2, clears those at
    0 to 8 and 0xF18 to 0xF20, and resets the parts at offset 0x40 through Pools_InitializeGameplayCamera and
    Camera_UpdateViewProjectionAndEffects. */
 
-void Pools_InitializeGameplayCamera(GameplayCamera *arg0);
+void Pools_InitializeGameplayCamera(GameplayCamera *camera);
 
 extern void Camera_UpdateViewProjectionAndEffects(void *);
 
@@ -231,18 +231,18 @@ extern void Camera_UpdateViewProjectionAndEffects(void *);
 
 extern void Pool_InitEntryPool(char *);
 
-void Pools_ResetPlayers(func_8044B27C_S1 *actor) {
+void Pools_ResetPlayers(MenuPlayerPoolView *actor) {
     char *parts;
 
     XPlus_FillMemory(actor, 0, 0x1208);
-    func_80255CA0_de(&actor->unkC, 0, 4);
-    func_80255CA0_de(&actor->unk20, 0, 4);
-    func_80255CA0_de(&actor->unkF24, 0, 4);
-    parts = &actor->unk40;
+    List_InitializeIntrusive(&actor->active, 0, 4);
+    List_InitializeIntrusive(&actor->available, 0, 4);
+    List_InitializeIntrusive(&actor->auxiliaryEntries, 0, 4);
+    parts = &actor->cameraStorage;
     actor->unk1200 = 1;
-    actor->unk0 = 0;
-    actor->unk4 = 0;
-    actor->unk8 = 0;
+    actor->actorHandle = 0;
+    actor->actors = 0;
+    actor->actorCount = 0;
     actor->unkF18 = 0;
     actor->unkF1C = 0;
     actor->unkF20 = 0;
@@ -261,12 +261,12 @@ void Pools_InitGroupPools(Triple *group) {
 }
 
 /* Detaches the object at offset 0xC of an owner: when there is one, finalises it through
-   Pools_InitializeGameplayCamera and removes it from the lists at offsets 0xC and 0x20 through func_80255ED8_de and
-   func_80255D14_de. Returns the object. */
+   Pools_InitializeGameplayCamera and removes it from the lists at offsets 0xC and 0x20 through List_RemoveIntrusive and
+   List_AppendIntrusive. Returns the object. */
 
 
 
-/* Calls func_80255ED8_de on offset 0x20 of an object and func_80255CB8_de on offset 0xC with the second
+/* Calls List_RemoveIntrusive on offset 0x20 of an object and List_PrependIntrusive on offset 0xC with the second
    argument. */
 
 
@@ -276,13 +276,13 @@ void *Pools_RecycleModel(struct Draw *owner) {
 
     if (object != 0) {
         Pools_InitializeGameplayCamera(object);
-        func_80255ED8_de(&owner->model, object);
-        func_80255D14_de(&owner->recycled, object);
+        List_RemoveIntrusive(&owner->model, object);
+        List_AppendIntrusive(&owner->recycled, object);
     }
     return object;
 }
 
 void Pools_TransferPoolEntry(char *object, void *value) {
-    func_80255ED8_de(object + 0x20, value);
-    func_80255CB8_de(object + 0xC, value);
+    List_RemoveIntrusive(object + 0x20, value);
+    List_PrependIntrusive(object + 0xC, value);
 }

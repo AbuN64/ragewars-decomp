@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "acmd.h"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
@@ -13,13 +13,13 @@
 
 
 
-extern __OSViContext_func_802BA6B0_de *D_800D4414;
+extern ViModeContextView *g_nextVideoInterfaceContext;
 
 void osViSetMode(OSViMode *modep) {
     register u32 saveMask = __osDisableInt();
 
-    D_800D4414->modep = modep;
-    D_800D4414->state = 1;
-    D_800D4414->control = D_800D4414->modep->comRegs.w0;
+    g_nextVideoInterfaceContext->modep = modep;
+    g_nextVideoInterfaceContext->state = 1;
+    g_nextVideoInterfaceContext->control = g_nextVideoInterfaceContext->modep->comRegs.w0;
     __osRestoreInt(saveMask);
 }

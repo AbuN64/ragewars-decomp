@@ -3,17 +3,17 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-struct EntryRecAt18V3;
-struct EntryRecAt18V3 {
+struct CacheEvictionEntry;
+struct CacheEvictionEntry {
     char pad0[0xC];
     s32 flags;
     s32 stamp;
     s32 pad14;
-    struct EntryRecAt18V3 *next;
+    struct CacheEvictionEntry *next;
 };
 
 struct EntryList;
-struct EntryRecAt18V3;
+struct CacheEvictionEntry;
 
 struct Pool80255720;
 typedef struct Pool80255720 Pool80255720;
@@ -22,8 +22,8 @@ struct EntryList;
 typedef struct EntryList EntryList;
 
 
-struct EntryRecAtCV1;
-typedef struct EntryRecAtCV1 EntryRecAtCV1;
+struct CacheHashEntry;
+typedef struct CacheHashEntry CacheHashEntry;
 
 struct Block80255720;
 struct Block80255720 {
@@ -46,35 +46,35 @@ struct Pool80255ACC {
     Block80255720 *tail;
 };
 
-struct EntryRecAtCV1;
-struct EntryRecAtCV1 {
+struct CacheHashEntry;
+struct CacheHashEntry {
     u32 key;
     struct ResourceLoadRequest *value;
     s32 index;
-    struct EntryRecAtCV1 *next;
+    struct CacheHashEntry *next;
 };
 
 
 
 
-struct HeapRecAtC;
-typedef struct HeapRecAtC HeapRecAtC;
+struct HeapFreeBlockList;
+typedef struct HeapFreeBlockList HeapFreeBlockList;
 
 
-struct BlockRecAt20;
-struct BlockRecAt20 {
-    struct BlockRecAt20 *prevFree;
-    struct BlockRecAt20 *nextFree;
-    struct BlockRecAt20 *prev;
-    struct BlockRecAt20 *next;
+struct HeapAllocationBlock;
+struct HeapAllocationBlock {
+    struct HeapAllocationBlock *prevFree;
+    struct HeapAllocationBlock *nextFree;
+    struct HeapAllocationBlock *prev;
+    struct HeapAllocationBlock *next;
     u32 size;
     u32 free;
     u8 reserved18[8];
     u8 data[1]; /* +0x20: allocation payload */
 };
 
-struct EntryRecAt18V3;
-typedef struct EntryRecAt18V3 EntryRecAt18V3;
+struct CacheEvictionEntry;
+typedef struct CacheEvictionEntry CacheEvictionEntry;
 
 
 struct Block80255720;
@@ -87,8 +87,8 @@ struct Pool80255720;
 struct Heap;
 
 
-struct BlockRecAt20;
-struct HeapRecAtC;
+struct HeapAllocationBlock;
+struct HeapFreeBlockList;
 
 
 struct Pool80255ACC;
@@ -96,8 +96,8 @@ typedef struct Pool80255ACC Pool80255ACC;
 
 
 
-struct BlockRecAt20;
-typedef struct BlockRecAt20 BlockRecAt20;
+struct HeapAllocationBlock;
+typedef struct HeapAllocationBlock HeapAllocationBlock;
 
 
 
@@ -106,11 +106,11 @@ typedef struct BlockRecAt20 BlockRecAt20;
 
 
 
-extern s32 D_800CD8AC_de;
-extern s32 D_800CD704;
-extern s32 D_800CD8AC_de;
+extern s32 g_resourceLoadIdlePriority;
+extern s32 g_resourceLoadPriorityBoost;
+extern s32 g_resourceLoadIdlePriority;
 
-extern s32 D_80101198;
-extern EntryRecAtCV1 *D_80101194;
-extern s32 D_800CB6F8;
+extern s32 g_resourceHashIndexMask;
+extern CacheHashEntry *g_resourceHashBuckets;
+extern s32 g_resourceHashInitialized;
 #endif

@@ -48,20 +48,20 @@ Sched_BootGermanRom:
     jal rw_boot_entry+0x88
     sw $t0, 0x14($sp)
 .if VERSION_EU
-    lui $a0, %hi(D_002A72D0_eu)
-    addiu $a0, $a0, %lo(D_002A72D0_eu)
+    lui $a0, %hi(Sched_RestoreBootMemoryAddressEu)
+    addiu $a0, $a0, %lo(Sched_RestoreBootMemoryAddressEu)
 .elseif VERSION_EU_X
-    lui $a0, %hi(D_002A7310_eu_x)
-    addiu $a0, $a0, %lo(D_002A7310_eu_x)
+    lui $a0, %hi(Sched_RestoreBootMemoryAddressEuX)
+    addiu $a0, $a0, %lo(Sched_RestoreBootMemoryAddressEuX)
 .elseif VERSION_US
-    lui $a0, %hi(D_002A70F0_us)
-    addiu $a0, $a0, %lo(D_002A70F0_us)
+    lui $a0, %hi(ItemMenu_RestoreBootMemory_Address)
+    addiu $a0, $a0, %lo(ItemMenu_RestoreBootMemory_Address)
 .elseif VERSION_US_REV1
-    lui $a0, %hi(D_002A81B0_us_rev1)
-    addiu $a0, $a0, %lo(D_002A81B0_us_rev1)
+    lui $a0, %hi(Sched_RestoreBootMemoryAddressUsRev1)
+    addiu $a0, $a0, %lo(Sched_RestoreBootMemoryAddressUsRev1)
 .else
-    lui $a0, %hi(D_002A71C0_de)
-    addiu $a0, $a0, %lo(D_002A71C0_de)
+    lui $a0, %hi(Sched_RestoreBootMemoryAddressDe)
+    addiu $a0, $a0, %lo(Sched_RestoreBootMemoryAddressDe)
 .endif
     jalr $a0
     nop

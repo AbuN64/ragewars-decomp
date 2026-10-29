@@ -12,8 +12,8 @@ typedef struct RenderSortRecord {
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/BOX_CONTACT.H"
 
-struct ObjRecAtCC;
-struct ObjRecAtCC {
+struct PlaneContactStorageView;
+struct PlaneContactStorageView {
     s32 unk0;
     char pad0[0x54 - 0x0 - sizeof(s32)];
     s32 unk54;
@@ -35,11 +35,11 @@ struct Shape;
 
 
 
-extern float D_800C373C_de;
+extern float g_planeInitialContactDistance;
 
 
-struct ObjRecAtCC;
-typedef struct ObjRecAtCC ObjRecAtCC;
+struct PlaneContactStorageView;
+typedef struct PlaneContactStorageView PlaneContactStorageView;
 
 
 
@@ -65,5 +65,5 @@ struct Plane {
 
 
 
-s32 func_8024E2C4_de(void *);
+s32 InstHdr_UsesDefaultDefinitionHandling(void *);
 #endif

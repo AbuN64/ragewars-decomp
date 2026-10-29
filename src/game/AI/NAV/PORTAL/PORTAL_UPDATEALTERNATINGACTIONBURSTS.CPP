@@ -5,18 +5,18 @@
 #include "COMMON/INTEGERSTATE2C.H"
 #include "COMMON/INTEGERSTATE244.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "AI/NAV/PORTAL_LOADCOLLISIONTABLE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern f32 Barrel_GetSignedAngleToPoint(Player *, CVector3);
 
 /* Runs a computer player's engagement timer: while the countdown at 0x2E4 is positive it rerolls the
-   wait at 0x2E8 as the config's base at 8 plus a random share (scale D_800C6E00) of its spread at 0xC
+   wait at 0x2E8 as the config's base at 8 plus a random share (scale g_timedActionWaitRandomScale) of its spread at 0xC
    and counts down; at zero it counts the opponents in range through Particle_CountOwnerListOneEffects (three counting as
    the whole wait) and either flags waiting at 0x23C while fewer than the wait or starts pursuit with
-   the countdown at -1 and a wait from the config's 0x24 and 0x28 (scale D_800C6E04); during pursuit
-   the wait runs down, ends early once the player is within D_800C6E08 of its target on the target's
+   the countdown at -1 and a wait from the config's 0x24 and 0x28 (scale g_alternatingActionWaitRandomScale); during pursuit
+   the wait runs down, ends early once the player is within g_alternatingActionTargetRange of its target on the target's
    height, and when it reaches zero flags 0x240 and acts through Portal_InitializeRandomActionSettings. Written in the style of
    Portal_UpdateMeterGatedActionBurst with the random scale loaded into a local first. */
 
@@ -25,7 +25,7 @@ extern f32 Barrel_GetSignedAngleToPoint(Player *, CVector3);
 
 
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 
 extern s32 Particle_CountOwnerListOneEffects(char *, void *);
 
@@ -35,14 +35,14 @@ extern void Particle_AverageOwnerEffectPositions(struct EffectSystem *, void *, 
 extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
 
 struct LevelActor;
-extern void Particle_FindNearestForeignEffectDistance(struct EffectSystem *effectSystem, struct LevelActor *actor, f32 *arg2);
+extern void Particle_FindNearestForeignEffectDistance(struct EffectSystem *effectSystem, struct LevelActor *actor, f32 *distanceOut);
 
 extern f32 Portal_GetEngagementDistance(void *controller);
 
 
 extern f32 Barrel_GetSignedAngleToPoint(Player *actor, CVector3 point);
 
-void Portal_DispatchActorBehavior(void *arg0)
+void Portal_DispatchActorBehavior(void *controller)
 {
     /* Dispatch the current actor mode through its per-type behavior table. */
     void *state;
@@ -50,7 +50,7 @@ void Portal_DispatchActorBehavior(void *arg0)
     s32 type;
     Shared_ActorView *actor;
 
-    state = arg0;
+    state = controller;
     if (state == 0) {
         return;
     }
@@ -63,7 +63,7 @@ void Portal_DispatchActorBehavior(void *arg0)
     type = actor->selectedAction;
     mode -= 1;
     {
-        u32 dispatch = *(&D_800C87F0 + mode + type * 2);
+        u32 dispatch = *(&g_actorBehaviorDispatchModes + mode + type * 2);
         if (dispatch >= 9) {
             return;
         }
@@ -80,31 +80,31 @@ void Portal_DispatchActorBehavior(void *arg0)
         }
     }
 case_0:
-        Portal_UpdateTimedActionBurst(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
+        Portal_UpdateTimedActionBurst(state, &g_actorBehaviorActionConfigs + type * 0x38 + mode * 0x1C);
         goto dispatched;
 case_1:
-        Portal_UpdateHeldActionBurst(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
+        Portal_UpdateHeldActionBurst(state, &g_actorBehaviorActionConfigs + type * 0x38 + mode * 0x1C);
         goto dispatched;
 case_2:
-        ((ObjectLinks2EC *)state)->unk_240 = 1;
+        ((CountedEffectActionState *)state)->unk_240 = 1;
         goto dispatched;
 case_3:
-        Portal_UpdateAlternatingActionBursts(state, &D_800F3D20 + type * 0x38);
+        Portal_UpdateAlternatingActionBursts(state, &g_actorBehaviorActionConfigs + type * 0x38);
         goto dispatched;
 case_4:
-        Portal_UpdateCountedEffectAction(state, &D_800F3D20 + type * 0x38);
+        Portal_UpdateCountedEffectAction(state, &g_actorBehaviorActionConfigs + type * 0x38);
         goto dispatched;
 case_5:
-        Portal_UpdateMeterGatedActionBurst(state, &D_800F3D20 + type * 0x38);
+        Portal_UpdateMeterGatedActionBurst(state, &g_actorBehaviorActionConfigs + type * 0x38);
 case_6:
 case_7:
 case_8:
 dispatched:
 
-    if (((ObjectLinks2EC *)state)->unk_240 > 0) {
+    if (((CountedEffectActionState *)state)->unk_240 > 0) {
         ((Shared_ActorView *)(*(void **)state))->unk_0x06B0 |= 0x4000;
         ((Shared_ActorView *)(*(void **)state))->actionFlags |= 0x4000;
-        ((ObjectLinks2EC *)state)->unk_240 -= 1;
+        ((CountedEffectActionState *)state)->unk_240 -= 1;
     }
 }
 
@@ -113,122 +113,122 @@ void Portal_UpdateAlternatingActionBursts(AiController *controller, AiConfig *ai
     s32 v0;
     f32 f20;
     f32 f1;
-    f32 new_var;
+    f32 randomBurstScale;
     s32 s1;
 
-    v0 = controller->unk2EC;
+    v0 = controller->alternateCountdown;
     if (v0 > 0) {
         v0 = v0 - 1;
-        controller->unk2EC = v0;
+        controller->alternateCountdown = v0;
         if (v0 == 0) {
-            f20 = D_800C1CF4_de;
-            if (Graphu64_RandomFloat(f20) < D_800C1CF8_de) {
-                controller->unk2EC = -1;
-                controller->unk2E4 = aiConfig->unk1C;
-                controller->unk2E4 = (s32) ((f32) controller->unk2E4
-                    + (Graphu64_RandomFloat(f20) * (f32) aiConfig->unk20));
-                controller->unk2E8 = aiConfig->unk24;
-                controller->unk2E8 = (s32) ((f32) controller->unk2E8
-                    + (Graphu64_RandomFloat(f20) * (f32) aiConfig->unk28));
+            f20 = g_actionBurstRandomRange;
+            if (Graphu64_RandomFloat(f20) < g_actionBurstAlternateChance) {
+                controller->alternateCountdown = -1;
+                controller->actionDelay = aiConfig->alternateDelayBase;
+                controller->actionDelay = (s32) ((f32) controller->actionDelay
+                    + (Graphu64_RandomFloat(f20) * (f32) aiConfig->alternateDelaySpread));
+                controller->actionDuration = aiConfig->alternateDurationBase;
+                controller->actionDuration = (s32) ((f32) controller->actionDuration
+                    + (Graphu64_RandomFloat(f20) * (f32) aiConfig->alternateDurationSpread));
             } else {
-                controller->unk2EC = aiConfig->unk10;
-                controller->unk2EC = (s32) ((f32) controller->unk2EC
-                    + (Graphu64_RandomFloat(f20) * (f32) aiConfig->unk14));
+                controller->alternateCountdown = aiConfig->alternateCountdownBase;
+                controller->alternateCountdown = (s32) ((f32) controller->alternateCountdown
+                    + (Graphu64_RandomFloat(f20) * (f32) aiConfig->alternateCountdownSpread));
             }
         }
     }
-    if (controller->unk2EC == -1) {
-        v0 = controller->unk2E8 - 1;
-        controller->unk2E8 = v0;
+    if (controller->alternateCountdown == -1) {
+        v0 = controller->actionDuration - 1;
+        controller->actionDuration = v0;
         if (v0 == 0) {
-            f20 = D_800C1CFC_de;
-            controller->unk2EC = aiConfig->unk10;
-            controller->unk2EC = (s32) ((f32) controller->unk2EC
-                + (Graphu64_RandomFloat(f20) * (f32) aiConfig->unk14));
-            controller->unk2E4 = aiConfig->unk0;
-            controller->unk2E4 = (s32) ((f32) controller->unk2E4
-                + (Graphu64_RandomFloat(f20) * (f32) aiConfig->unk4));
-            controller->unk2E8 = aiConfig->unk8;
-            f1 = (f32) controller->unk2E8
-                + (Graphu64_RandomFloat(f20) * (f32) aiConfig->unkC);
-            controller->unk240 = 0;
-            controller->unk2E8 = (s32) f1;
+            f20 = g_actionBurstRestartRandomRange;
+            controller->alternateCountdown = aiConfig->alternateCountdownBase;
+            controller->alternateCountdown = (s32) ((f32) controller->alternateCountdown
+                + (Graphu64_RandomFloat(f20) * (f32) aiConfig->alternateCountdownSpread));
+            controller->actionDelay = aiConfig->primaryDelayBase;
+            controller->actionDelay = (s32) ((f32) controller->actionDelay
+                + (Graphu64_RandomFloat(f20) * (f32) aiConfig->primaryDelaySpread));
+            controller->actionDuration = aiConfig->primaryDurationBase;
+            f1 = (f32) controller->actionDuration
+                + (Graphu64_RandomFloat(f20) * (f32) aiConfig->primaryDurationSpread);
+            controller->actionFlagFrames = 0;
+            controller->actionDuration = (s32) f1;
         } else {
-            controller->unk240 = 1;
+            controller->actionFlagFrames = 1;
         }
     }
-    v0 = controller->unk2E4;
+    v0 = controller->actionDelay;
     if (v0 > 0) {
-        controller->unk2E4 = v0 - 1;
+        controller->actionDelay = v0 - 1;
         return;
     }
-    if (controller->unk240 > 0) {
-        s1 = aiConfig->unk1C;
-        new_var = Graphu64_RandomFloat(D_800C1D00_de);
+    if (controller->actionFlagFrames > 0) {
+        s1 = aiConfig->alternateDelayBase;
+        randomBurstScale = Graphu64_RandomFloat(g_actionBurstAlternateDelayRandomRange);
         if (1) {
-            f20 = D_800C1D04_de;
-            s1 = (s32) ((f32) s1 + (new_var * (f32) aiConfig->unk20));
+            f20 = g_actionBurstAlternateAngleLimit;
+            s1 = (s32) ((f32) s1 + (randomBurstScale * (f32) aiConfig->alternateDelaySpread));
         }
     } else {
-        s1 = aiConfig->unk0;
-        s1 = (s32) ((f32) s1 + (Graphu64_RandomFloat(D_800C1D08_de) * (f32) aiConfig->unk4));
-        f20 = D_800C1D0C_de;
+        s1 = aiConfig->primaryDelayBase;
+        s1 = (s32) ((f32) s1 + (Graphu64_RandomFloat(g_actionBurstPrimaryDelayRandomRange) * (f32) aiConfig->primaryDelaySpread));
+        f20 = g_actionBurstPrimaryAngleLimit;
     }
     {
         AiTarget *p = controller->target;
         Player *q = p->player;
         if (!(f20 < Barrel_GetSignedAngleToPoint(controller->player,
                                     q->pos))) {
-            controller->unk23C = 1;
-            controller->unk2E4 = s1;
+            controller->fireRequested = 1;
+            controller->actionDelay = s1;
         }
     }
 }
 
-void Portal_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *config) {
+void Portal_UpdateCountedEffectAction(CountedEffectActionState *controller, CountedEffectActionConfig *config) {
     s32 count;
     char *target;
     CVector3 pos;
     f32 range;
     f32 scale;
 
-    if (arg0->unk_2E4 > 0) {
-        scale = D_800C6E00;
-        arg0->unk_2E8 = config->unk_8;
-        arg0->unk_2E8 =
-            (f32) arg0->unk_2E8
+    if (controller->unk_2E4 > 0) {
+        scale = g_timedActionWaitRandomScale;
+        controller->unk_2E8 = config->unk_8;
+        controller->unk_2E8 =
+            (f32) controller->unk_2E8
             + Graphu64_RandomFloat(scale) * (f32) config->unk_C;
-        arg0->unk_2E4 -= 1;
+        controller->unk_2E4 -= 1;
         return;
     }
-    if (arg0->unk_2E4 == 0) {
-        count = Particle_CountOwnerListOneEffects(&D_8011D8D0, *(void **) arg0);
+    if (controller->unk_2E4 == 0) {
+        count = Particle_CountOwnerListOneEffects(&g_actorParticleEffectSystem, *(void **) controller);
         if (count == 3) {
-            arg0->unk_2E8 = count;
+            controller->unk_2E8 = count;
         }
-        if (count < arg0->unk_2E8) {
-            arg0->unk_23C = 1;
+        if (count < controller->unk_2E8) {
+            controller->unk_23C = 1;
             return;
         }
-        arg0->unk_2E4 = -1;
-        scale = D_800C6E04;
-        arg0->unk_2E8 = config->unk_24;
-        arg0->unk_2E8 =
-            (f32) arg0->unk_2E8
+        controller->unk_2E4 = -1;
+        scale = g_alternatingActionWaitRandomScale;
+        controller->unk_2E8 = config->unk_24;
+        controller->unk_2E8 =
+            (f32) controller->unk_2E8
             + Graphu64_RandomFloat(scale) * (f32) config->unk_28;
         return;
     }
-    arg0->unk_2E8 -= 1;
-    target = ((struct ObjRecAt1D8V2 *) arg0->unk_64)->unk1D8;
-    Particle_AverageOwnerEffectPositions(&D_8011D8D0, *(void **) arg0, &pos);
-    range = D_800C6E08;
+    controller->unk_2E8 -= 1;
+    target = ((struct ActionTargetPlayerView *) controller->unk_64)->player;
+    Particle_AverageOwnerEffectPositions(&g_actorParticleEffectSystem, *(void **) controller, &pos);
+    range = g_alternatingActionTargetRange;
     pos.y = ((Player *)target)->pos.y;
     if (Graphu64_GetSquaredDistance(&pos, &((Player *)(target))->pos) < range) {
-        arg0->unk_2E8 = 0;
+        controller->unk_2E8 = 0;
     }
-    if (arg0->unk_2E8 == 0) {
-        arg0->unk_240 = 1;
-        Portal_InitializeRandomActionSettings(arg0, config);
+    if (controller->unk_2E8 == 0) {
+        controller->unk_240 = 1;
+        Portal_InitializeRandomActionSettings(controller, config);
     }
 }
 
@@ -244,39 +244,39 @@ void Portal_UpdateMeterGatedActionBurst(void *object, void *settings) {
         return;
     }
 
-    timer = controller->unk2EC;
+    timer = controller->alternateCountdown;
     if (timer == 0) {
         f32 value;
 
-        Particle_FindNearestForeignEffectDistance(&D_8011D8D0, controller->player, &value);
-        if (value < D_800C1D1C_de) {
-            f32 k = D_800C1D24_de;
-            f32 threshold = Graphu64_RandomFloat(D_800C1D20_de) + k;
+        Particle_FindNearestForeignEffectDistance(&g_actorParticleEffectSystem, controller->player, &value);
+        if (value < g_meterActionEffectDistanceLimit) {
+            f32 k = g_meterActionChanceBase;
+            f32 threshold = Graphu64_RandomFloat(g_meterActionChanceRandomRange) + k;
 
-            if ((f32) aiConfig->unk34 < threshold) {
-                s32 base = aiConfig->unk24;
-                controller->unk240 =
-                    (s32) ((f32) base + Graphu64_RandomFloat(k) * (f32) aiConfig->unk28);
+            if ((f32) aiConfig->meterThreshold < threshold) {
+                s32 base = aiConfig->alternateDurationBase;
+                controller->actionFlagFrames =
+                    (s32) ((f32) base + Graphu64_RandomFloat(k) * (f32) aiConfig->alternateDurationSpread);
             }
-            controller->unk2EC = aiConfig->unk2C;
-            controller->unk2EC =
-                (s32) ((f32) controller->unk2EC +
-                       Graphu64_RandomFloat(k) * (f32) aiConfig->unk30);
-            controller->unk2EC += controller->unk240;
+            controller->alternateCountdown = aiConfig->meterCooldownBase;
+            controller->alternateCountdown =
+                (s32) ((f32) controller->alternateCountdown +
+                       Graphu64_RandomFloat(k) * (f32) aiConfig->meterCooldownSpread);
+            controller->alternateCountdown += controller->actionFlagFrames;
         }
     } else {
-        controller->unk2EC = timer - 1;
+        controller->alternateCountdown = timer - 1;
     }
 
-    timer = controller->unk2E4;
+    timer = controller->actionDelay;
     if (timer > 0) {
-        controller->unk2E4 = timer - 1;
+        controller->actionDelay = timer - 1;
         return;
     }
     minus_one = -1;
     if (timer == minus_one) {
-        controller->unk23C = 1;
-        controller->unk2E8 += minus_one;
+        controller->fireRequested = 1;
+        controller->actionDuration += minus_one;
     } else {
         record = controller->target->player;
         distance = Barrel_GetSignedAngleToPoint(controller->player,
@@ -284,11 +284,11 @@ void Portal_UpdateMeterGatedActionBurst(void *object, void *settings) {
         if (Portal_GetEngagementDistance(controller) < distance) {
             return;
         }
-        controller->unk23C = 1;
-        controller->unk2E4 = minus_one;
+        controller->fireRequested = 1;
+        controller->actionDelay = minus_one;
     }
-    if (controller->unk2E8 == 0) {
-        controller->unk23C = 0;
+    if (controller->actionDuration == 0) {
+        controller->fireRequested = 0;
         Portal_InitializeRandomActionSettings(controller, aiConfig);
     }
 }
@@ -304,7 +304,7 @@ void Portal_LoadCollisionTable(void *resourcePack) {
     char *dst;
 
     s2 = 0;
-    tbl = &D_800F3D20;
+    tbl = &g_actorBehaviorActionConfigs;
     s4 = 0;
     do {
         s0 = 0;
@@ -332,26 +332,26 @@ void Portal_UpdateTimedActionBurst(void *controller, void *settings) {
         return;
     }
     Portal_UpdateRandomActionPulse(controller, settings);
-    timer = ((AiController *)controller)->unk2E4;
+    timer = ((AiController *)controller)->actionDelay;
     if (timer > 0) {
-        ((AiController *)controller)->unk2E4 = timer - 1;
+        ((AiController *)controller)->actionDelay = timer - 1;
         return;
     }
     minus_one = -1;
     if (timer == minus_one) {
-        ((AiController *)controller)->unk23C = 1;
-        ((AiController *)controller)->unk2E8 += minus_one;
+        ((AiController *)controller)->fireRequested = 1;
+        ((AiController *)controller)->actionDuration += minus_one;
     } else {
         record = ((AiController *)controller)->target->player;
         distance = Barrel_GetSignedAngleToPoint(((AiController *)controller)->player, record->pos);
         if (Portal_GetEngagementDistance(controller) < distance) {
             return;
         }
-        ((AiController *)controller)->unk23C = 1;
-        ((AiController *)controller)->unk2E4 = minus_one;
+        ((AiController *)controller)->fireRequested = 1;
+        ((AiController *)controller)->actionDelay = minus_one;
     }
-    if (((AiController *)controller)->unk2E8 == 0) {
-        ((AiController *)controller)->unk23C = 0;
+    if (((AiController *)controller)->actionDuration == 0) {
+        ((AiController *)controller)->fireRequested = 0;
         Portal_InitializeRandomActionSettings(controller, settings);
     }
 }
@@ -366,63 +366,63 @@ void Portal_UpdateHeldActionBurst(void *controller, void *settings) {
         return;
     }
     Portal_UpdateRandomActionPulse(controller, settings);
-    timer = brain->unk2E4;
+    timer = brain->actionDelay;
     if (timer > 0) {
-        brain->unk2E4 = timer - 1;
+        brain->actionDelay = timer - 1;
         return;
     }
     if (timer == 0) {
-        brain->unk23C = 1;
-        brain->unk2E8 -= 1;
+        brain->fireRequested = 1;
+        brain->actionDuration -= 1;
     }
-    if (brain->unk2E8 != 0) {
+    if (brain->actionDuration != 0) {
         return;
     }
-    brain->unk2E4 = -1;
+    brain->actionDelay = -1;
     record = brain->target->player;
     distance = Barrel_GetSignedAngleToPoint(brain->player, record->pos);
     if (Portal_GetEngagementDistance(controller) < distance) {
-        brain->unk23C = 1;
+        brain->fireRequested = 1;
         return;
     }
-    brain->unk23C = 0;
+    brain->fireRequested = 0;
     Portal_InitializeRandomActionSettings(controller, settings);
 }
 
-void Portal_UpdateRandomActionPulse(void *arg0, void *settings) {
-    AiController *o = arg0;
+void Portal_UpdateRandomActionPulse(void *controller, void *settings) {
+    AiController *o = controller;
     AiConfig *i = settings;
-    s32 timer = o->unk2EC;
+    s32 timer = o->alternateCountdown;
 
     if (timer == 0) {
-        if (o->unk23C == 0 && o->unk240 <= 0) {
-            f32 k = D_800C1D2C_de;
-            f32 threshold = Graphu64_RandomFloat(D_800C1D28_de) + k;
+        if (o->fireRequested == 0 && o->actionFlagFrames <= 0) {
+            f32 k = g_actionPulseChanceBase;
+            f32 threshold = Graphu64_RandomFloat(g_actionPulseChanceRandomRange) + k;
 
-            if ((f32) i->unk18 < threshold) {
-                o->unk240 = 1;
-                Portal_InitializeRandomActionSettings(arg0, settings);
+            if ((f32) i->pulseChancePercent < threshold) {
+                o->actionFlagFrames = 1;
+                Portal_InitializeRandomActionSettings(controller, settings);
             }
-            o->unk2EC = i->unk10;
-            o->unk2EC =
-                (s32) ((f32) o->unk2EC +
-                       Graphu64_RandomFloat(k) * (f32) i->unk14);
+            o->alternateCountdown = i->alternateCountdownBase;
+            o->alternateCountdown =
+                (s32) ((f32) o->alternateCountdown +
+                       Graphu64_RandomFloat(k) * (f32) i->alternateCountdownSpread);
         }
     } else {
-        o->unk2EC = timer - 1;
+        o->alternateCountdown = timer - 1;
     }
 }
 
 void Portal_InitializeRandomActionSettings(void *object, void *settings) {
     AiController *controller = object;
     AiConfig *aiConfig = settings;
-    f32 k = D_800C6E20;
+    f32 k = g_actionSettingsRandomRange;
 
-    controller->unk2E4 = aiConfig->unk0;
-    controller->unk2E4 = (s32) ((f32) controller->unk2E4 + (Graphu64_RandomFloat(k) * (f32) aiConfig->unk4));
-    controller->unk2E8 = aiConfig->unk8;
-    controller->unk2E8 = (s32) ((f32) controller->unk2E8 + (Graphu64_RandomFloat(k) * (f32) aiConfig->unkC));
-    if (aiConfig->unk18 == 0x64) {
-        controller->unk240 = 1;
+    controller->actionDelay = aiConfig->primaryDelayBase;
+    controller->actionDelay = (s32) ((f32) controller->actionDelay + (Graphu64_RandomFloat(k) * (f32) aiConfig->primaryDelaySpread));
+    controller->actionDuration = aiConfig->primaryDurationBase;
+    controller->actionDuration = (s32) ((f32) controller->actionDuration + (Graphu64_RandomFloat(k) * (f32) aiConfig->primaryDurationSpread));
+    if (aiConfig->pulseChancePercent == 0x64) {
+        controller->actionFlagFrames = 1;
     }
 }

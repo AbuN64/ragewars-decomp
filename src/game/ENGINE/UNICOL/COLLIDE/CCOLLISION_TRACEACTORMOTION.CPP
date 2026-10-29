@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/MOTION_STEP.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OWNERRECAT8V2.H"
@@ -21,12 +21,12 @@ void CCollision_IntegrateGravityAndDrag(ActorMotion *motion) {
     CCollisionInfo2_t *surface;
 
     if (motion->orientationActive != 0) {
-        dt = D_800D2988 * D_800C3620_de;
+        dt = g_frameElapsedTime * g_collisionMotionTimeScale;
         surface = motion->surface;
         if (dt != 0.0f) {
             drag = surface->AirFriction;
-            drag *= D_800C3624_de;
-            limit = D_800C3628_de / dt;
+            drag *= g_collisionMotionDragScale;
+            limit = g_collisionMotionMaximumDrag / dt;
             if (!(drag <= limit)) {
                 drag = limit;
             }
@@ -43,7 +43,7 @@ void CCollision_IntegrateGravityAndDrag(ActorMotion *motion) {
                 acceleration.y = -motion->orientation.y * drag + gravity;
                 acceleration.z = -motion->orientation.z * drag;
             }
-            halfDt = dt * D_800C362C_de;
+            halfDt = dt * g_collisionMotionHalfStepScale;
             motion->end.x += (motion->orientation.x + acceleration.x * halfDt) * dt;
             motion->end.y += (motion->orientation.y + acceleration.y * halfDt) * dt;
             motion->end.z += (motion->orientation.z + acceleration.z * halfDt) * dt;
@@ -56,7 +56,7 @@ void CCollision_IntegrateGravityAndDrag(ActorMotion *motion) {
 
 /* 8023CFD0.CPP */
 extern void CInstanceCollision_TraceInteractiveActors(void *obj);
-extern void func_80242BF0_de(void *ray);
+extern void CPolyCollision_TraceWorldElements(void *ray);
 extern void CPolyCollision_TraceCeilingTriangle(void *actor);
 
 s32 CCollision_TraceActorMotion(ActorMotion *object) {
@@ -85,7 +85,7 @@ s32 CCollision_TraceActorMotion(ActorMotion *object) {
     if (object->distance != 0.0f) {
         Graphu64_ScaleVector(&object->direction,
                       &object->velocity,
-                      D_800C3630_de / object->distance);
+                      g_collisionMotionRetreatDistance / object->distance);
     } else {
         object->direction = object->velocity;
     }
@@ -136,7 +136,7 @@ s32 CCollision_TraceActorMotion(ActorMotion *object) {
             InstCol_ProcessEntityContacts(object);
         }
         if (*flags & 0x4000) {
-            func_80242BF0_de(object);
+            CPolyCollision_TraceWorldElements(object);
         }
         if (*flags & 0x80000) {
             CPolyCollision_TraceCeilingTriangle(object);

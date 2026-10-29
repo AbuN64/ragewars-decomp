@@ -1,15 +1,15 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/LONE/D_8010EC90.H"
+#include "COMMON/LONE/CONTROLLER_RUMBLE_POOL.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ACTORRECAT5E0.H"
-#include "COMMON/EXTERNS_18.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "AUDIO/GETTHREADID.H"
 #include "sdk/os.h"
 
@@ -18,11 +18,11 @@ extern void Rumble_FreeAllPoolNodes(s32 *);
 
 #if defined(VERSION_EU)
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-extern unsigned int func_802B80F4_eu_x(void *motorContext);
+extern unsigned int Control_StartMotorEuX(void *motorContext);
 #elif defined(VERSION_US)
-extern unsigned int osMotorStart(void *arg0);
+extern unsigned int osMotorStart(void *motorContext);
 #else
-extern unsigned int osMotorStart(void *arg0);
+extern unsigned int osMotorStart(void *motorContext);
 #endif
 #if defined(VERSION_EU)
 
@@ -34,57 +34,57 @@ extern unsigned int osMotorStart(void *arg0);
 
 #endif
 
-void Control_UpdateControllerRumble(Obj80264124 *arg0) {
+void Control_UpdateControllerRumble(Obj80264124 *profile) {
     Triple zero;
     void *object;
     s32 *global;
     f32 first;
 
-    if (arg0->active != 0) {
+    if (profile->active != 0) {
         zero.x = 0;
         zero.y = 0;
         zero.z = 0;
-        if (arg0->state == 0) {
+        if (profile->state == 0) {
             goto reset;
         }
-        global = &D_8011FAC0.clockPaused;
+        global = &g_gameSession.clockPaused;
         if ((*global != 0) || (g_world.frozen != 0) || (global[-6] != 13)) {
 reset:
-            arg0->amount = 0.0f;
-            Rumble_FreeAllPoolNodes(arg0->object);
+            profile->amount = 0.0f;
+            Rumble_FreeAllPoolNodes(profile->object);
         } else {
-            object = arg0->object;
+            object = profile->object;
             Rumble_RecycleFinishedEffectNodes(object);
-            first = Rumble_GetSpatialEffectLevel(&D_8010EC90, arg0->x, arg0->y, arg0->z);
-            arg0->amount = first + Rumble_GetSpatialEffectLevel(object, zero.x, zero.y, zero.z);
+            first = Rumble_GetSpatialEffectLevel(&g_controllerRumblePool, profile->x, profile->y, profile->z);
+            profile->amount = first + Rumble_GetSpatialEffectLevel(object, zero.x, zero.y, zero.z);
         }
-        if (arg0->active != 0) {
-            if (arg0->amount != 0.0f) {
-                arg0->timer += arg0->amount;
-                if (arg0->timer >= D_800C4308_de) {
-                    arg0->timer -= D_800C4308_de;
-                    
+        if (profile->active != 0) {
+            if (profile->amount != 0.0f) {
+                profile->timer += profile->amount;
+                if (profile->timer >= g_controllerRumbleUpdateInterval) {
+                    profile->timer -= g_controllerRumbleUpdateInterval;
+
 #if defined(VERSION_EU)
-func_802B80B4_eu
+Control_StartMotorEu
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-func_802B80F4_eu_x
+Control_StartMotorEuX
 #elif defined(VERSION_US)
 osMotorStart
 #else
 osMotorStart
 #endif
-((void *)arg0->status);
+((void *)profile->status);
                     return;
                 }
             }
-            
+
 #if defined(VERSION_EU)
-func_802B7EF0_eu
+Control_StopMotorEu
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 #if defined(VERSION_EU) || defined(VERSION_US)
-func_802B7F30_eu_x
+Control_StopMotorEuX
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-((unsigned int (*)(void *))func_802B7F30_eu_x)
+((unsigned int (*)(void *))Control_StopMotorEuX)
 #endif
 #elif defined(VERSION_US)
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
@@ -94,12 +94,12 @@ osMotorStop
 #endif
 #else
 #if defined(VERSION_DE)
-((unsigned int (*)(void *))func_802B7C50_de)
+((unsigned int (*)(void *))Control_StopMotorDe)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-func_802B7C50_de
+Control_StopMotorDe
 #endif
 #endif
-((void *)arg0->status);
+((void *)profile->status);
         }
     }
 }
@@ -109,9 +109,9 @@ func_802B7C50_de
 
 extern u8 D_800CBC10;
 
-extern s8 D_8010BBB8;
+extern s8 g_controllerPakFrontendState;
 
-extern char D_8010FC00;
+extern char g_controllerSiMessageQueue;
 
 extern s32 Rumble_InitPoolNodes(void *, void *, s32);
 
@@ -135,24 +135,24 @@ void Control_ResetControllerPak(ControllerProfile *pakProfile) {
     char *o=(char *)address;
 
     if (D_800CBC10 != 0 && ((Obj80264124 *)address)->flags != 0) {
-        if (osRecvMesg(&D_8010FBC0, 0, 1) == 0) {
-            D_800CBC1C = Audio_GetThreadIdentifier(0);
+        if (osRecvMesg(&g_controllerReadMessageQueue, 0, 1) == 0) {
+            g_controllerAudioThreadId = Audio_GetThreadIdentifier(0);
         }
         Control_ReadControllerStates();
-        D_8010BBB8 = 2;
+        g_controllerPakFrontendState = 2;
         ((Obj80264124 *)o)->state = 0;
         ((Obj80264124 *)o)->amount = 0;
         ((Obj80264124 *)o)->timer = 0;
         Rumble_InitPoolNodes(o + 0x140, o + 0x16C, 3);
-        osMotorInit(&D_8010FC00, o + 0xD8, pakProfile->port);
-        
+        osMotorInit(&g_controllerSiMessageQueue, o + 0xD8, pakProfile->port);
+
 #if defined(VERSION_EU)
-func_802B7EF0_eu
+Control_StopMotorEu
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 #if defined(VERSION_EU) || defined(VERSION_US)
-func_802B7F30_eu_x
+Control_StopMotorEuX
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-((u32 (*)(void *))func_802B7F30_eu_x)
+((u32 (*)(void *))Control_StopMotorEuX)
 #endif
 #elif defined(VERSION_US)
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
@@ -162,20 +162,20 @@ osMotorStop
 #endif
 #else
 #if defined(VERSION_DE)
-((u32 (*)(void *))func_802B7C50_de)
+((u32 (*)(void *))Control_StopMotorDe)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-func_802B7C50_de
+Control_StopMotorDe
 #endif
 #endif
 (((Obj80264124 *)o)->status);
-        
+
 #if defined(VERSION_EU)
-func_802B7EF0_eu
+Control_StopMotorEu
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 #if defined(VERSION_EU) || defined(VERSION_US)
-func_802B7F30_eu_x
+Control_StopMotorEuX
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-((u32 (*)(void *))func_802B7F30_eu_x)
+((u32 (*)(void *))Control_StopMotorEuX)
 #endif
 #elif defined(VERSION_US)
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
@@ -185,18 +185,18 @@ osMotorStop
 #endif
 #else
 #if defined(VERSION_DE)
-((u32 (*)(void *))func_802B7C50_de)
+((u32 (*)(void *))Control_StopMotorDe)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-func_802B7C50_de
+Control_StopMotorDe
 #endif
 #endif
 (((Obj80264124 *)o)->status);
-        if (osMotorInit(&D_8010FC00, o + 0xD8, pakProfile->port) == 0) {
+        if (osMotorInit(&g_controllerSiMessageQueue, o + 0xD8, pakProfile->port) == 0) {
             ((Obj80264124 *)o)->active = 1;
         }
-        D_8010BBB8 = 2;
-        D_800CBC1C = -1;
-        osSendMesg(&((PakQueueState *)&D_8010BBB8)->queue, 0, 1);
+        g_controllerPakFrontendState = 2;
+        g_controllerAudioThreadId = -1;
+        osSendMesg(&((PakQueueState *)&g_controllerPakFrontendState)->queue, 0, 1);
     }
 }
 
@@ -250,25 +250,25 @@ int Control_IsButtonAPressed(struct ControllerProfile *controllerProfile) {
 void Control_CommitControllerInputs(void) {
     s32 i;
     ControllerProfile *p;
-    s32 temp;
+    s32 frontendActive;
     s32 one;
 
     if (D_800CBC10 != 0) {
         i = 0;
         one = 1;
-        p = D_8010F328;
+        p = g_controllerProfiles;
         for (; i < 4; i++, p += 1) {
             Control_CommitProfileInput(p);
-            temp = Tsmos_IsFrontendActive();
-            if (temp != one) {
+            frontendActive = Tsmos_IsFrontendActive();
+            if (frontendActive != one) {
                 continue;
             }
-            if (Tsmos_IsControllerStateActive() != temp) {
+            if (Tsmos_IsControllerStateActive() != frontendActive) {
                 continue;
             }
             Controller_DispatchControllerProfileChanges(p);
         }
-        Control_CommitProfileInput(&D_8010B0E0);
+        Control_CommitProfileInput(&g_combinedControllerProfile);
     }
 }
 
@@ -310,17 +310,17 @@ s32 Control_AcquireControllerLock(s32 block) {
 
     s32 result;
 
-    result = osRecvMesg(&D_8010FBC0, 0, block) == 0;
+    result = osRecvMesg(&g_controllerReadMessageQueue, 0, block) == 0;
     if (result != 0) {
-        D_800CBC1C = Audio_GetThreadIdentifier(0);
+        g_controllerAudioThreadId = Audio_GetThreadIdentifier(0);
     }
     return result;
 }
 
 void Control_ReleasePakLock(void) {
 
-    D_800CBC1C = -1;
-    osSendMesg(&D_8010FBC0, 0, 1);
+    g_controllerAudioThreadId = -1;
+    osSendMesg(&g_controllerReadMessageQueue, 0, 1);
 }
 
 /** Fetch-and-clear: return the old slot value, then zero it. */
@@ -330,8 +330,8 @@ s32 Control_TakePakChange(s32 controllerPort) {
     if (Control_IsControllerPakEnabled(controllerPort) == 0) {
         return 0;
     }
-    old = D_8010BBF0[controllerPort];
-    D_8010BBF0[controllerPort] = 0;
+    old = g_controllerPakState[controllerPort];
+    g_controllerPakState[controllerPort] = 0;
     return old;
 }
 
@@ -339,21 +339,21 @@ s32 Control_PeekPakChange(s32 controllerPort) {
     if (Control_IsControllerPakEnabled(controllerPort) == 0) {
         return 0;
     }
-    return D_8010BBF0[controllerPort];
+    return g_controllerPakState[controllerPort];
 }
 
-int Control_IsControllerConnected(int arg0) {
-    return ((D_8010FBE3[arg0 * 4] >> 3) ^ 1) & 1;
+int Control_IsControllerConnected(int controllerPort) {
+    return ((g_controllerReadStatusBytes[controllerPort * 4] >> 3) ^ 1) & 1;
 }
 
-int Control_IsControllerPakPresent(int arg0) {
-    return D_8010BBE2[arg0 * 4] & 1;
+int Control_IsControllerPakPresent(int controllerPort) {
+    return g_controllerPakStatusBytes[controllerPort * 4] & 1;
 }
 
 s32 Control_AnyControllerConnected(void) {
     s32 i = 0;
     while (1) {
-        if (!(((D_8010FBE3[i * 4] >> 3) ^ 1) & 1)) {
+        if (!(((g_controllerReadStatusBytes[i * 4] >> 3) ^ 1) & 1)) {
             i += 1;
             if (i >= 4) {
                 return 0;
@@ -371,7 +371,7 @@ s32 Control_CountConnectedControllers(void) {
     count = 0;
     i = 0;
     do {
-        if (((D_8010FBE3[i * 4] >> 3) ^ 1) & 1) {
+        if (((g_controllerReadStatusBytes[i * 4] >> 3) ^ 1) & 1) {
             count += 1;
         }
         i += 1;
@@ -379,30 +379,30 @@ s32 Control_CountConnectedControllers(void) {
     return count;
 }
 
-s32 Control_FindConnectedControllerPort(s32 arg0) {
-    s32 var_a1;
-    s32 var_v1;
+s32 Control_FindConnectedControllerPort(s32 connectedOrdinal) {
+    s32 connectedCount;
+    s32 controllerPort;
 
-    var_a1 = 0;
-    var_v1 = 0;
+    connectedCount = 0;
+    controllerPort = 0;
 loop_1:
-    if (((D_8010FBE3[var_v1 * 4] >> 3) ^ 1) & 1) {
-        var_a1 += 1;
+    if (((g_controllerReadStatusBytes[controllerPort * 4] >> 3) ^ 1) & 1) {
+        connectedCount += 1;
     }
-    if ((var_a1 - 1) != arg0) {
-        var_v1 += 1;
-        if (var_v1 >= 4) {
+    if ((connectedCount - 1) != connectedOrdinal) {
+        controllerPort += 1;
+        if (controllerPort >= 4) {
             return -1;
         }
         goto loop_1;
     }
-    return var_v1;
+    return controllerPort;
 }
 
 s32 Control_IsAnyControllerPakEnabled(void) {
     s32 i = 0;
     while (1) {
-        if (D_8010B308[i] == 0) {
+        if (g_controllerPakEnabledBytes[i] == 0) {
             i += 1;
             if (i >= 4) {
                 return 0;
@@ -413,45 +413,45 @@ s32 Control_IsAnyControllerPakEnabled(void) {
     }
 }
 
-int Control_IsControllerPakEnabled(int arg0) {
-    return D_8010B308[arg0];
+int Control_IsControllerPakEnabled(int controllerPort) {
+    return g_controllerPakEnabledBytes[controllerPort];
 }
 
 void Control_EnableControllerPak(int controllerPort) {
-    D_8010B308[controllerPort] = 1;
+    g_controllerPakEnabledBytes[controllerPort] = 1;
 }
 
 void Control_DisableControllerPak(int controllerPort) {
-    D_8010B308[controllerPort] = 0;
+    g_controllerPakEnabledBytes[controllerPort] = 0;
 }
 
 void Control_EnableAllControllerPaks(void)
 {
-  int new_var2;
-  s8 *new_var;
-  s32 var_v1;
-  s8 *var_v0;
-  new_var2 = 1;
-  var_v1 = 3;
-  new_var = &D_8010B30B;
-  var_v0 = new_var;
+  int pakEnabled;
+  s8 *lastEnabledByte;
+  s32 controllerIndex;
+  s8 *enabledByte;
+  pakEnabled = 1;
+  controllerIndex = 3;
+  lastEnabledByte = &g_controllerPakEnabledLastByte;
+  enabledByte = lastEnabledByte;
   do
   {
-    *var_v0 = new_var2;
-    var_v1 -= 1;
-    var_v0 -= 1;
+    *enabledByte = pakEnabled;
+    controllerIndex -= 1;
+    enabledByte -= 1;
   }
-  while (var_v1 >= 0);
+  while (controllerIndex >= 0);
 }
 
 void Control_DisableAllControllerPaks(void) {
-    s32 var_v1;
-    s8 *var_v0;
-    var_v1 = 3;
-    var_v0 = &D_8010B30B;
+    s32 controllerIndex;
+    s8 *enabledByte;
+    controllerIndex = 3;
+    enabledByte = &g_controllerPakEnabledLastByte;
     do {
-        *var_v0 = 0;
-        var_v1 -= 1;
-        var_v0 -= 1;
-    } while (var_v1 >= 0);
+        *enabledByte = 0;
+        controllerIndex -= 1;
+        enabledByte -= 1;
+    } while (controllerIndex >= 0);
 }

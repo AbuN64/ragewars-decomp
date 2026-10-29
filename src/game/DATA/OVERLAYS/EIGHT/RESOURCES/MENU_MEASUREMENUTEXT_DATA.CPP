@@ -3,7 +3,7 @@
 /* 800E28D0.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_video_buffer_width_E34D0_us_rev1.c */
-unsigned int D_blob_aff63b1f2f55a676be9d[1] = {
+unsigned int g_MenuMeasuremenutextWords3[1] = {
     0x00000140,
 };
 #endif
@@ -11,7 +11,7 @@ unsigned int D_blob_aff63b1f2f55a676be9d[1] = {
 /* 800E28D4.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_video_buffer_height_E34D4_us_rev1.c */
-unsigned int D_blob_52c4eb419c3a55bae59d[1] = {
+unsigned int g_MenuMeasuremenutextWords2[1] = {
     0x000000F0,
 };
 #endif
@@ -19,23 +19,23 @@ unsigned int D_blob_52c4eb419c3a55bae59d[1] = {
 /* 800E28D8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_video_selected_mode_E34D8_us_rev1.c */
-unsigned int D_blob_db386647316d60e073de[1] = {
+unsigned int g_MenuMeasuremenutextWords4[1] = {
     0xFFFFFFFF,
 };
 #endif
 
 /* 800E2AAC_4.CPP */
 #if defined(VERSION_EU)
-extern char D_00412FB8[];
-extern char D_00413000[];
-extern char D_0041304C[];
-extern char D_00413094[];
-extern char D_004130E0[];
-extern char D_00416060[];
+extern char g_Node_SelectPreviousGridRowPackedAddress24[];
+extern char g_Node_SelectNextGridRowPackedAddress24[];
+extern char g_Node_SelectPreviousGridColumnPackedAddress24[];
+extern char g_Node_SelectNextGridColumnPackedAddress24[];
+extern char g_Node_DestroyGridListPackedAddress24[];
+extern char g_Gfx_BlinkVideoUnlessBypassedPackedAddress24[];
 u32 data_unresolved_800EF0F0[492] = {
-    0x00000005, 0x00007530, (unsigned int)D_00412FB8, 0x00000006, 0x00007530, (unsigned int)D_00413000,
-    0x00000007, 0x00007530, (unsigned int)D_0041304C, 0x00000008, 0x00007530, (unsigned int)D_00413094,
-    0x00000E03, 0x00007530, (unsigned int)D_004130E0, 0x00000000, 0x00000000, 0x00000000,
+    0x00000005, 0x00007530, (unsigned int)g_Node_SelectPreviousGridRowPackedAddress24, 0x00000006, 0x00007530, (unsigned int)g_Node_SelectNextGridRowPackedAddress24,
+    0x00000007, 0x00007530, (unsigned int)g_Node_SelectPreviousGridColumnPackedAddress24, 0x00000008, 0x00007530, (unsigned int)g_Node_SelectNextGridColumnPackedAddress24,
+    0x00000E03, 0x00007530, (unsigned int)g_Node_DestroyGridListPackedAddress24, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFF8,
     0xFFFFFFF8, 0xFFFFFFF8, 0xFFFFFFF8, 0x00000001, 0x00000000, 0x00000010,
@@ -114,6 +114,6 @@ u32 data_unresolved_800EF0F0[492] = {
     0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFC, 0xFFFFFFF8, 0xFFFFFFF8,
     0xFFFFFFF8, 0x00000023, 0x00000000, 0x00000008, 0x00000008, 0x00000008,
     0x000000FF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFF8,
-    0xFFFFFFF8, 0xFFFFFFF8, (unsigned int)D_00416060, 0x00000000, 0x316B003C, 0x8D6B00F8,
+    0xFFFFFFF8, 0xFFFFFFF8, (unsigned int)g_Gfx_BlinkVideoUnlessBypassedPackedAddress24, 0x00000000, 0x316B003C, 0x8D6B00F8,
 };
 #endif

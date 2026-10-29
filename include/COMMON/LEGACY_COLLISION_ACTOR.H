@@ -128,6 +128,6 @@ struct Shared_Func80243A80Frame {
 typedef Shared_Func80243A80Actor Func80243A80Actor;
 typedef Shared_Func80243A80Global Func80243A80Global;
 typedef Shared_Func80243A80State Func80243A80State;
-extern Func80243A80State D_801000F0;
+extern Func80243A80State g_playerCollisionProbe;
 typedef Shared_Func80243A80Collision Func80243A80Collision;
 #endif

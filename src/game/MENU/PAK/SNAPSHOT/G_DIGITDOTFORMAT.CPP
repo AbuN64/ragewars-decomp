@@ -2,7 +2,7 @@
 
 /* 800E0DCC.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
-const unsigned char D_8040B444_E19CC[5] = {
+const unsigned char k_GDigitdotformatEncodedBytes[5] = {
     0x25, 0x31, 0x64, 0x2E, 0x00,
 };
 #endif

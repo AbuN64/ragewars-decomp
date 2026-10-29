@@ -10,18 +10,18 @@ extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, Qua
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct CacheResourceBlockView *clip);
 
 
 extern void Widget_DrawVisibleSiblings(void *, Args);
 
-s32 func_8040C638_us(s32 arg0) {
-    arg0 << 0;
+s32 Event_IgnoreWidgetValueUs(s32 unusedValue) {
+    unusedValue << 0;
     return 0;
 }
 
 void Event_DrawClippedWidgetChildren(void *widget, Args args) {
-    func_802A2BE0_S1 *record = widget;
+    NumericWidgetChildView *record = widget;
     QuadN64EngDrawNumericWidgetChildren first;
     QuadN64EngDrawNumericWidgetChildren basis;
     QuadN64EngDrawNumericWidgetChildren value;
@@ -30,7 +30,7 @@ void Event_DrawClippedWidgetChildren(void *widget, Args args) {
 
     changed = 0;
     if (Widget_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
-        if ((record->unk12 & 0x200) != 0) {
+        if ((record->flags & 0x200) != 0) {
             N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             Node_ClampRectToClip(&transformed, &basis);
@@ -38,7 +38,7 @@ void Event_DrawClippedWidgetChildren(void *widget, Args args) {
                           transformed.y, transformed.w);
             changed = 1;
         }
-        Widget_DrawVisibleSiblings(record->unk8, args);
+        Widget_DrawVisibleSiblings(record->firstChild, args);
         if (changed != 0) {
             N64Eng_SetClipBounds(value.x, value.z, value.y, value.w);
         }

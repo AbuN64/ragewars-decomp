@@ -12,13 +12,13 @@
 #include "gbi.h"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "AI/PLAYER_DRAWTINTEDPLAYER.H"
 #include "COMMON/PLAYERPROFILES.H"
 
-const unsigned int D_auto_src_rw_pool_80228AF4_C88CC_us_rev1[14] = {
+const unsigned int k_PlayerDrawtintedplayerEncodedWords[14] = {
     0x3D888889, 0x3C888889, 0x42700000, 0x3F800000, 0x41F00000, 0x3F000000, 0x3F4CCCCD, 0x41200000,
     0x3F000000, 0x41A00000, 0x3F000000, 0x40E00000, 0x40C00000, 0x41400000,
 };
@@ -29,23 +29,23 @@ const unsigned int rodata_func_80228E60_eu_800C2EB4[1] = {
 };
 #endif
 
-const unsigned int D_auto_src_rw_pool_80228DC4_C8904_us_rev1[4] = {
+const unsigned int k_PlayerDrawtintedplayerEncodedWordsBlock1[4] = {
     0x3F800000, 0x3727C5AC, 0x4CBEBC20, 0x3F000000,
 };
 
 /* Draws an actor's player model with its status tint: sets the other-mode lighting command and render
-   mode 2, gives the model the team colour byte (the match rule D_801468A0's colour at 0x73 when team
+   mode 2, gives the model the team colour byte (the match rule g_matchRoundCounters's colour at 0x73 when team
    colours apply to the player, else the model's own at 0xE), and by the player's tint mode at 0x1238
-   sets a colour override (flag D_800D15E0, colour D_800D15E4) that fades with the tint time at 0x1230:
-   mode 0 draws through func_8024A3B0_de in yellow fading from full alpha and then draws the second pass
+   sets a colour override (flag g_menuModelFillEnabled, colour g_menuModelFillColor) that fades with the tint time at 0x1230:
+   mode 0 draws through Gobjinst_DrawActorPartsWithViewEffects in yellow fading from full alpha and then draws the second pass
    through Geometry_DrawOwnerFilteredPass with 255 less twice that alpha, mode 1 draws only the second pass in fading
-   yellow starting at alpha 128, and mode 3 draws through func_8024A3B0_de with an alpha rising with the
+   yellow starting at alpha 128, and mode 3 draws through Gobjinst_DrawActorPartsWithViewEffects with an alpha rising with the
    time; the override is switched off afterwards. */
 extern Gfx *g_displayListCursor;
-extern RulesWeaponsDrawTintedPlayer D_801468A0[];
-extern s32 D_800D297C;
+extern RulesWeaponsDrawTintedPlayer g_matchRoundCounters[];
+extern s32 g_lightingBufferIndex;
 extern void Geometry_SetCombineMode(u32);
-extern void func_8024A3B0_de(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
+extern void Gobjinst_DrawActorPartsWithViewEffects(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
 
 void Player_DrawTintedPlayer(LevelActor *actor, s32 animationContext, Draw *draw) {
     PlayerCode80225D10 *player;
@@ -56,50 +56,50 @@ void Player_DrawTintedPlayer(LevelActor *actor, s32 animationContext, Draw *draw
         if (player != 0) {
             gDPSetRenderMode(g_displayListCursor++, 0xC4404B50, 0);
             Geometry_SetCombineMode(2);
-            if (D_801468A0->teams != 0 && player->controls->unk8F != 0) {
-                actor->team = D_801468A0->colour;
+            if (g_matchRoundCounters->teams != 0 && player->controls->fragTagEnabled != 0) {
+                actor->team = g_matchRoundCounters->colour;
             } else {
                 actor->team = (u8)actor->definition->first;
             }
             if (player->tintMode == 0) {
                 CQuatern *colour;
 
-                D_800D15E0 = 1;
-                colour = (CQuatern *)D_800D15E4;
+                g_menuModelFillEnabled = 1;
+                colour = (CQuatern *)g_menuModelFillColor;
                 colour->x = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->y = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->z = 0.0f;
                 colour->w = ((255.0f - player->tintTime * 8.533334f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 8.533334f));
-                func_8024A3B0_de(actor, player, animationContext, draw);
+                Gobjinst_DrawActorPartsWithViewEffects(actor, player, animationContext, draw);
                 colour->w = ((255.0f - colour->w * 2.0f) < 0.0f ? 0.0f : (255.0f - colour->w * 2.0f));
-                Geometry_DrawOwnerFilteredPass(draw->model, player, actor->fieldB4, 1,
-                              &actor->lighting[D_800D297C], 0, -1);
+                Geometry_DrawOwnerFilteredPass(draw->model, player, actor->animationMatrices, 1,
+                              &actor->lighting[g_lightingBufferIndex], 0, -1);
             } else if (player->tintMode == 1) {
                 CQuatern *colour;
 
-                D_800D15E0 = 1;
-                colour = (CQuatern *)D_800D15E4;
+                g_menuModelFillEnabled = 1;
+                colour = (CQuatern *)g_menuModelFillColor;
                 colour->x = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->y = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->z = 0.0f;
                 colour->w = ((128.0f - player->tintTime * 8.533334f) < 0.0f ? 0.0f : (128.0f - player->tintTime * 8.533334f));
-                Geometry_DrawOwnerFilteredPass(draw->model, player, actor->fieldB4, 1,
-                              &actor->lighting[D_800D297C], 0, -1);
+                Geometry_DrawOwnerFilteredPass(draw->model, player, actor->animationMatrices, 1,
+                              &actor->lighting[g_lightingBufferIndex], 0, -1);
             } else if (player->tintMode == 3) {
-                D_800D15E0 = 1;
-                D_800D15E4[3] = ((player->tintTime * 0.425f) < 0.0f ? 0.0f : (player->tintTime * 0.425f));
-                func_8024A3B0_de(actor, player, animationContext, draw);
+                g_menuModelFillEnabled = 1;
+                g_menuModelFillColor[3] = ((player->tintTime * 0.425f) < 0.0f ? 0.0f : (player->tintTime * 0.425f));
+                Gobjinst_DrawActorPartsWithViewEffects(actor, player, animationContext, draw);
             }
-            D_800D15E0 = 0;
+            g_menuModelFillEnabled = 0;
         }
     }
 }
 
 extern void Barrel_FillDamagePacket(void *packet, s32 damageSource, s32 damage, f32 radius, s32 damageFlags, s32 shield);
-extern void func_80219A40_de(void *attacker, void *arg1, void *packet);
+extern void Playerai_ApplyDamagePacket(void *attacker, void *damageState, void *packet);
 
-extern func_8020CA10_G1 D_800D2988;
-void func_802292B8_de(void *actor) {
+extern ScalarFloatView g_frameElapsedTime;
+void Playerai_UpdateDamageTimers(void *actor) {
     Slot damage;
     f32 scaledTotalDamage;
     f32 damageProgressValue;
@@ -113,14 +113,14 @@ void func_802292B8_de(void *actor) {
     void *damageEffect;
 
     zero = 0.0f;
-    damageUnitScale = D_800C2C40_de[1];
+    damageUnitScale = g_playerDamageTimerConstants[1];
     i = 0;
     damageEffectOffset = 0x1248;
     do {
         damageEffect = (char *)actor + damageEffectOffset;
         remainingFrames = ((CPlayerDamageOverTime *)(damageEffect))->m_FramesRemaining;
         if (remainingFrames > zero) {
-            damageProgressValue = D_800D2988.unk0;
+            damageProgressValue = g_frameElapsedTime.value;
             frameDamage = *(f32 *)damageEffect * damageProgressValue;
             damageProgressValue = remainingFrames - damageProgressValue;
             frameDamage *= damageUnitScale;
@@ -135,19 +135,19 @@ void func_802292B8_de(void *actor) {
             }
             damageSource = ((CPlayerDamageOverTime *)(damageEffect))->m_pDamageSource;
             if (damageSource != 0 && *(u8 *)damageSource == 1 &&
-                (((IntegerState1230 *)(damageSource))->unk_100 & 0x300000) &&
-                (((IntegerState1230 *)(damageSource))->unk_122C & 0x200)) {
-                frameDamage *= D_800C2C48_de.unk0;
+                (((DamageSourceFlagsView *)(damageSource))->unk_100 & 0x300000) &&
+                (((DamageSourceFlagsView *)(damageSource))->unk_122C & 0x200)) {
+                frameDamage *= g_playerDamageTimerFrameScale.value;
             }
             if (((CPlayerDamageOverTime *)(damageEffect))->m_bIsInflator != 0) {
-                func_8022B60C_de(actor, 0.0933333337f, ((CPlayerDamageOverTime *)(damageEffect))->m_pDamageSource);
-                if ((f32)((ObjectState5E8 *)(actor))->unk_5E4 <= frameDamage) {
-                    frameDamage = D_800C2C4C_de.unk0;
+                Playerai_AddReactionReserve(actor, 0.0933333337f, ((CPlayerDamageOverTime *)(damageEffect))->m_pDamageSource);
+                if ((f32)((PlayerDamageVisualState *)(actor))->unk_5E4 <= frameDamage) {
+                    frameDamage = g_playerDamageTimerFrameDefault.value;
                 }
             }
             Barrel_FillDamagePacket((void *)&damage, (s32)((CPlayerDamageOverTime *)(damageEffect))->m_pDamageSource,
                           (s32)frameDamage, 25.599998f, 0x100080, 0);
-            func_80219A40_de(actor, &((ObjectState5E8 *)(actor))->unk_170, (void *)&damage);
+            Playerai_ApplyDamagePacket(actor, &((PlayerDamageVisualState *)(actor))->unk_170, (void *)&damage);
         }
         i++;
         damageEffectOffset += 0x18;
@@ -187,14 +187,14 @@ void Player_TransferRandomInventoryItems(Inventory *inventory, Receiver *receive
 
 /* Gives a player an amount of one ammunition type and announces it: the count at 0x5F4 of that type
    rises by the amount up to the type's maximum (none for type -1, the character's table at 0x108 in
-   multiplayer, otherwise D_800CE3E8 plus the profile's bonus bytes in D_80102B00 unless ammunition is
+   multiplayer, otherwise g_baseAmmoCapacities plus the profile's bonus bytes in g_localPlayerProfiles unless ammunition is
    unlimited at 0x1450), and the message "<amount> <type name>" with a plural suffix for more than one
-   is built and shown through func_8022B75C_de. */
+   is built and shown through Playerai_PostMessageHistoryEntry. */
 
 extern void XPlus_CopyString(char *, char *);
 extern void XPlus_AppendString(char *, char *);
 extern char *Weapon_GetIndexedTableValue(s32);
-extern void func_8022B75C_de(SharedPlayer *, char *, f32);
+extern void Playerai_PostMessageHistoryEntry(SharedPlayer *, char *, f32);
 
 static inline s32 max_ammo(SharedPlayer *player, s32 type) {
     s32 max;
@@ -202,17 +202,17 @@ static inline s32 max_ammo(SharedPlayer *player, s32 type) {
     if (type == -1) {
         return 0;
     }
-    if (D_801462C8.controllerMode != 1) {
+    if (g_gameSettings.controllerMode != 1) {
         max = player->views18.view18_4.character->caps[type];
     } else {
-        max = D_800CE3E8[type];
+        max = g_baseAmmoCapacities[type];
         if (player->views1450.view1450_3.unlimited == 0) {
             if (type == 0) {
-                max += D_80102B00[player->views1C.view5D4_47.profile].bonus0;
+                max += g_localPlayerProfiles[player->views1C.view5D4_47.profile].bonus0;
             } else if (type == 1) {
-                max += D_80102B00[player->views1C.view5D4_47.profile].bonus1;
+                max += g_localPlayerProfiles[player->views1C.view5D4_47.profile].bonus1;
             } else if (type == 2) {
-                max += D_80102B00[player->views1C.view5D4_47.profile].bonus2;
+                max += g_localPlayerProfiles[player->views1C.view5D4_47.profile].bonus2;
             }
         }
     }
@@ -227,16 +227,16 @@ void Player_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
         player->views5E8.view5F4_12.ammo[type] = ((player->views5E8.view5F4_12.ammo[type] + amount) < (max_ammo(player, type)) ? (player->views5E8.view5F4_12.ammo[type] + amount) : (max_ammo(player, type)));
         XPlus_FormatDecimalInteger(amount, number);
         XPlus_CopyString(message, number);
-        XPlus_AppendString(message, D_800C2C50_de);
+        XPlus_AppendString(message, s_ammoPickupMessageSeparator);
         XPlus_AppendString(message, Weapon_GetIndexedTableValue(type));
         if (amount >= 2) {
-            XPlus_AppendString(message, D_800C2C54_de);
+            XPlus_AppendString(message, s_ammoPickupPluralSuffix);
         }
-        func_8022B75C_de(player, message, 1.0f);
+        Playerai_PostMessageHistoryEntry(player, message, 1.0f);
     }
 }
 
 /* ROM-grounded data: src/rw_pool_802292B8_C8934_us_rev1.c */
-const unsigned int D_blob_149b9788bb56a6447838[3] = {
+const unsigned int k_PlayerDrawtintedplayerEncodedWordsBlock2[3] = {
     0x43800000, 0x41300000, 0x4879C000,
 };

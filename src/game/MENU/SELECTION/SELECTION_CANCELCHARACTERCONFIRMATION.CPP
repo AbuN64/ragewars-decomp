@@ -9,13 +9,13 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Handles a packed message whose high half is type 3 with no extra argument: when the entry named by
-   its low half in the 0x4C8-byte table D_800E42D0 is active and has a target, runs Menu_CyclePlayerCharacterVariant on it
+   its low half in the 0x4C8-byte table g_characterSelectionMenu is active and has a target, runs Menu_CyclePlayerCharacterVariant on it
    and plays sound 0xE7C; always returns 0. */
 
 
 
 
-extern void Menu_CyclePlayerCharacterVariant(int, EntryRecAt14V1 *);
+extern void Menu_CyclePlayerCharacterVariant(int, CharacterVariantSelectionEntry *);
 
 
 /* Advances a player panel from its ready state and starts its selection. */
@@ -62,22 +62,22 @@ enum { SPECIAL_CHAR = 133 };
 enum { SPECIAL_CHAR = 129 };
 #endif
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4364, an actor kind at D_800E4368 and a handler at D_800E436C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_characterSelectionEventIds, an actor kind at g_characterSelectionEventActorKinds and a handler at g_characterSelectionEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
-extern s32 D_800E4364;
+extern s32 g_characterSelectionEventIds;
 
-extern s32 D_800E4368;
+extern s32 g_characterSelectionEventActorKinds;
 
-extern Handler802A2B50 D_800E436C;
+extern Handler802A2B50 g_characterSelectionEventHandlers;
 
 int Selection_HandleCharacterVariantCycle(int unused0, int unused1, unsigned int message, int extra) {
     int index = message & 0xFFFF;
-    EntryRecAt14V1 *e;
+    CharacterVariantSelectionEntry *e;
 
     if ((message >> 16) == 3 && extra == 0) {
-        e = &((EntryRecAt14V1 *)D_800E42D0)[index];
+        e = &((CharacterVariantSelectionEntry *)g_characterSelectionMenu)[index];
         if (e->active == 1 && e->target != -1) {
             Menu_CyclePlayerCharacterVariant(index, e);
             SoundElement_PlayFlatSound(0xE7C);
@@ -110,34 +110,34 @@ s32 Selection_ReturnCharacterEventZeroD(void) {
     return 0;
 }
 
-                            
+
 
 
 /* extern */
 
-s32 Selection_CancelCharacterConfirmation(s32 unused0, s32 unused1, s32 arg2) {
-    s32 temp_a0;
+s32 Selection_CancelCharacterConfirmation(s32 unused0, s32 unused1, s32 entryId) {
+    s32 confirmationState;
     s32 entryIndex;
-    s32 temp_s1;
-    StateMenuCancelCharacterConfirmation *temp_a3;
+    s32 entryOffset;
+    StateMenuCancelCharacterConfirmation *selectionEntry;
 
     MarkMenuEventHandled();
-    entryIndex = arg2 & 0xFFFF;
-    temp_s1 = entryIndex * 0x4C8;
-    temp_a3 = (StateMenuCancelCharacterConfirmation *)&((PanelRecord *)D_800E42D0)[entryIndex];
-    temp_a0 = temp_a3->unk14;
-    switch (temp_a0) {
+    entryIndex = entryId & 0xFFFF;
+    entryOffset = entryIndex * 0x4C8;
+    selectionEntry = (StateMenuCancelCharacterConfirmation *)&((PanelRecord *)g_characterSelectionMenu)[entryIndex];
+    confirmationState = selectionEntry->confirmationState;
+    switch (confirmationState) {
     case 1:
-        if (D_801462C8.controllerMode != 1) {
-            D_800E42D0->phase = 5;
-            D_800E42D0->timer = 4;
-            D_800E42D0->result = 3;
+        if (g_gameSettings.controllerMode != 1) {
+            g_characterSelectionMenu->phase = 5;
+            g_characterSelectionMenu->timer = 4;
+            g_characterSelectionMenu->result = 3;
         }
         break;
     case 3:
-        temp_a3->unk14 = 1;
-        SmpOverlay_SetSlotValue(D_800E42D0->unk4, entryIndex, 0, temp_a3);
-        Preview_SetPreviewTransformUpdate(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
+        selectionEntry->confirmationState = 1;
+        SmpOverlay_SetSlotValue(g_characterSelectionMenu->unk4, entryIndex, 0, selectionEntry);
+        Preview_SetPreviewTransformUpdate(&((PanelRecord *)(entryOffset + (s32)g_characterSelectionMenu))->target, 1);
         Menu_RefreshPlayerCharacterVariants(entryIndex);
         break;
     }
@@ -151,33 +151,33 @@ s32 Selection_ReadSelectionSlot(s32 unusedFirst, s32 unusedSecond, s32 packedPla
     CharacterSelectionRoot *characterSelectionRoot;
 
     entryIndex = packedPlayer & 0xFFFF;
-    choice = SmpOverlay_GetSlotNodeId(D_800E42D0->unk4, entryIndex);
+    choice = SmpOverlay_GetSlotNodeId(g_characterSelectionMenu->unk4, entryIndex);
     MarkMenuEventHandled();
-    characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (entryIndex * 0x4C8));
+    characterSelectionRoot = (CharacterSelectionRoot *)((char *)g_characterSelectionMenu + (entryIndex * 0x4C8));
     if (characterSelectionRoot->phase == 1) {
         if (choice == SPECIAL_CHAR) Menu_ApplySlotValueGfx(entryIndex,characterSelectionRoot->choice);
-        else if (Widget_ListHasFlag100(SmpOverlay_GetSlotValue(D_800E42D0->unk4,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);
+        else if (Widget_ListHasFlag100(SmpOverlay_GetSlotValue(g_characterSelectionMenu->unk4,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);
     }
     return 0;
 }
 
-s32 Selection_DispatchCharacterSelectionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Selection_DispatchCharacterSelectionEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E436C != 0) {
+    if (g_characterSelectionEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E436C;
+        entry = (char *)&g_characterSelectionEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E4364)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E4368)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_characterSelectionEventIds)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_characterSelectionEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;

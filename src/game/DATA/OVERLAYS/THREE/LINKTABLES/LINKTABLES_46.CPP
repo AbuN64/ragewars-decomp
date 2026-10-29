@@ -1,8 +1,8 @@
-#include "DATA/OVLDAT2/800C87B0.H"
+#include "DATA/OVLDAT2/ACTOR_STATE_CALLBACK_LABELS.H"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CE944 */
-unsigned int D_blob_682e953bcce11159e669[1] = {
-    (unsigned int)D_0020DDE0,
+unsigned int g_LinktablesEncodedWordsBlock12[1] = {
+    (unsigned int)addrLow_Nav_RefineBallisticAim,
 };
 #endif

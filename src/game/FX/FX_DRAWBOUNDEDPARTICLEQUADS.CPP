@@ -9,7 +9,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "gbi.h"
 #include "COMMON/S1.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/OBJRECAT18V6.H"
@@ -25,7 +25,7 @@ extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through g_particleQuadRenderSetup), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through Geometry_InvalidateMaterialKeys and TextLoad_ResetTextureCache. */
+/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture g_materialIntensityMaskTexture (a 16x16 texture drawn in grey at alpha 200 through g_particleQuadRenderSetup), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (List_RemoveIntrusive) and returned to the free list (List_AppendIntrusive); finally restores the render state through Geometry_InvalidateMaterialKeys and TextLoad_ResetTextureCache. */
 
 
 
@@ -39,23 +39,23 @@ extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 extern f32 D_801031F8;
 
-extern char D_800D14B0;
+extern char g_materialIntensityMaskTexture;
 
 extern char g_particleQuadRenderSetup;
 
 
 
 
-extern char D_800CDCA8;
+extern char g_particleQuadRenderRestoreList;
 
 void Fx_UpdateAttachedEffects(void *);
 
 s32 Fx_UpdateTimedCallbacks(s32);
 
-extern s32 D_800CDBE8;
+extern s32 g_particleQuadDisplayListState;
 
 
-extern u32 D_800D297C;
+extern u32 g_lightingBufferIndex;
 
 extern void CopyMatrix(f32 *destinationMatrix, f32 *sourceMatrix);
 
@@ -63,11 +63,11 @@ extern void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 
 extern void Graphu64_ClampMatrixToFixedRange(f32 *matrixComponents);
 
-extern void Linked_AppendRibbonSegment(void *arg0, void *arg1, f32 *local);
+extern void Linked_AppendRibbonSegment(void *effectSystem, void *ribbon, f32 *local);
 
 extern void Graphu64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 
-extern f32 D_800C5EA0_de;
+extern f32 g_effectContributionInitialScale;
 
 CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
     CVector3 axis;
@@ -78,7 +78,7 @@ CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
     f32 angle;
     f32 trig;
 
-    one = D_800C5E88_de;
+    one = g_effectUpQuaternionConstants;
     axis.x = 0.0f;
     axis.y = one;
     axis.z = 0.0f;
@@ -97,19 +97,19 @@ CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
         angle = Graphu64_ArcCos((axis.x * *(f32 *)&bx) +
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));
-        angle *= ((struct func_802077F4_S2 *) ((f32 *) (&D_800C5E88_de)))->unk4;
+        angle *= ((struct func_802077F4_S2 *) ((f32 *) (&g_effectUpQuaternionConstants)))->unk4;
         trig = Gu_Sinf(angle);
         result.x = cross.x * trig;
         result.y = cross.y * trig;
         result.z = cross.z * trig;
-        D_80115DEC = trig;
+        g_turretAimSine = trig;
         result.w = Math_Cosf(angle);
     }
     *out = result;
     return out;
 }
 
-void Fx_DrawBoundedParticleQuads(SceneRecAt95A8 *scene) {
+void Fx_DrawBoundedParticleQuads(ParticleQuadPoolScene *scene) {
     Particle *particle;
     Particle *next;
     f32 *max;
@@ -122,7 +122,7 @@ void Fx_DrawBoundedParticleQuads(SceneRecAt95A8 *scene) {
     }
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
-    gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)&D_800D14B0);
+    gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)&g_materialIntensityMaskTexture);
     gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
     gDPLoadSync(g_displayListCursor++);
     gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, 127, 1024);
@@ -144,8 +144,8 @@ void Fx_DrawBoundedParticleQuads(SceneRecAt95A8 *scene) {
             pos[2] = transform->position[2];
             if (!(pos[0] < max[0] && pos[1] < max[1] && pos[2] < max[2] && max[-3] <= pos[0] &&
                   max[-2] <= pos[1] && max[-1] <= pos[2])) {
-                func_80255ED8_de(list, particle);
-                func_80255D14_de(&scene->free, particle);
+                List_RemoveIntrusive(list, particle);
+                List_AppendIntrusive(&scene->free, particle);
             } else {
                 gSPMatrix(g_displayListCursor++, (u32)transform, G_MTX_LOAD);
                 gSPVertex(g_displayListCursor++, (u32)&g_particleQuadVertices, 4, 0);
@@ -167,14 +167,14 @@ void Fx_DrawRedParticleQuad(u32 matrixAddress) {
     local.matrix[2] = 0.0f;
     local.matrix[4] = 0.0f;
     local.matrix[6] = 0.0f;
-    local.matrix[5] = D_800C5E90_de;
+    local.matrix[5] = g_particleQuadMatrixAxisScale;
 
     cmd = g_displayListCursor++;
     gDPPipeSync(cmd);
     cmd = g_displayListCursor++;
     gDPSetCycleType(cmd, G_CYC_2CYCLE);
     cmd = g_displayListCursor++;
-    gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &D_800D14B0);
+    gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &g_materialIntensityMaskTexture);
     cmd = g_displayListCursor++;
     gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
     cmd = g_displayListCursor++;
@@ -190,7 +190,7 @@ void Fx_DrawRedParticleQuad(u32 matrixAddress) {
     cmd = g_displayListCursor++;
     gDPSetPrimColor(cmd, 255, 255, 200, 0, 0, 150);
     cmd = g_displayListCursor++;
-    gSPDisplayList(cmd, &D_800CDCA8);
+    gSPDisplayList(cmd, &g_particleQuadRenderRestoreList);
     cmd = g_displayListCursor++;
     gSPMatrix(cmd, matrixAddress, G_MTX_LOAD);
     cmd = g_displayListCursor++;
@@ -203,110 +203,110 @@ void Fx_DrawRedParticleQuad(u32 matrixAddress) {
 }
 
 void Fx_UpdateEffectLists(s32 owner) {
-    D_800CDBE8 = 0;
-    if (D_8011FAC0.clockPaused == 0) {
+    g_particleQuadDisplayListState = 0;
+    if (g_gameSession.clockPaused == 0) {
         Fx_UpdateAttachedEffects((void *)owner);
         Fx_UpdateTimedCallbacks(owner);
     }
 }
 
-s32 Fx_AllocateRibbonVertices(void *arg0, s32 arg1)
+s32 Fx_AllocateRibbonVertices(void *vertexPool, s32 vertexCount)
 {
-    struct RibbonVertexPool *pool = arg0;
+    struct RibbonVertexPool *pool = vertexPool;
     s32 avail;
     s32 head;
 
     avail = pool->remaining;
-    if (avail < arg1) {
+    if (avail < vertexCount) {
         return 0;
     }
     head = (s32)pool->next;
-    pool->remaining = avail - arg1;
-    pool->next += arg1;
+    pool->remaining = avail - vertexCount;
+    pool->next += vertexCount;
     return head;
 }
 
 /** Reset the object and compute its trailing-data end pointer. */
 void Fx_ResetRibbonVertexPool(void *object) {
     struct RibbonVertexPool *pool = object;
-    u32 index = D_800D297C;
+    u32 index = g_lightingBufferIndex;
     pool->state = 0;
     pool->remaining = 0x12C;
     pool->next = pool->vertices[index];
 }
 
-s32 Fx_AllocateRibbonSegment(void *arg0, s32 arg1) {
+s32 Fx_AllocateRibbonSegment(void *ribbonWorld, s32 ribbon) {
     s32 actors;
-    actors = (((struct IntegerState6A94 *) ((s8 *) arg0))->unk_6A90);
+    actors = (((struct ParticleActorListView *) ((s8 *) ribbonWorld))->particleActors);
     if (actors != 0) {
-        Lists_Remove(arg0 + 0x6A90, (ListLink *)actors);
-        Lists_Append(arg1 + 0x40, actors);
+        Lists_Remove(ribbonWorld + 0x6A90, (ListLink *)actors);
+        Lists_Append(ribbon + 0x40, actors);
     }
     return actors;
 }
 
-void Fx_FreeRibbonSegment(s32 arg0, void *arg1, void *actors) {
-    (((struct FloatState50 *) ((s8 *) arg1))->unk_4C) = (f32) ((((struct FloatState50 *) ((s8 *) arg1))->unk_4C) - (((struct FloatStateB0 *) ((s8 *) actors))->unk_AC));
-    Lists_Remove(arg1 + 0x40, actors);
-    Lists_Append(arg0 + 0x6A90, actors);
+void Fx_FreeRibbonSegment(s32 ribbonWorld, void *ribbon, void *actors) {
+    (((struct ParticleRibbonLifetimeView *) ((s8 *) ribbon))->length) = (f32) ((((struct ParticleRibbonLifetimeView *) ((s8 *) ribbon))->length) - (((struct FloatStateB0 *) ((s8 *) actors))->segmentLength));
+    Lists_Remove(ribbon + 0x40, actors);
+    Lists_Append(ribbonWorld + 0x6A90, actors);
 }
 
 void Fx_RibbonNoop(void) {
 }
 
-void Fx_AddActorRibbonSamples(Owner802A6DF8 *arg0, s32 actor, char *arg2) {
-    f32 sp10[16];
-    f32 temp;
+void Fx_AddActorRibbonSamples(Owner802A6DF8 *ribbonWorld, s32 actor, char *boneMatrices) {
+    f32 quadMatrix[16];
+    f32 quadScale;
     f32 zero;
-    State802A6DF8 *node;
+    ItemMenuRenderNode *node;
 
-    node = arg0->lists.inactive.head;
+    node = ribbonWorld->lists.inactive.head;
     if (node != 0) {
         zero = 0.0f;
-        temp = D_800C5E94_de;
+        quadScale = g_particleQuadMatrixScale;
         do {
             if ((s32)node->object == actor && node->value > zero) {
-                CopyMatrix(sp10, (f32 *)(arg2 + (node->node->matrixIndex << 6)));
-                ScaleMatrixLocal(sp10, temp, temp, temp);
-                Graphu64_ClampMatrixToFixedRange(sp10);
-                Linked_AppendRibbonSegment(arg0, node, sp10);
+                CopyMatrix(quadMatrix, (f32 *)(boneMatrices + (node->node->matrixIndex << 6)));
+                ScaleMatrixLocal(quadMatrix, quadScale, quadScale, quadScale);
+                Graphu64_ClampMatrixToFixedRange(quadMatrix);
+                Linked_AppendRibbonSegment(ribbonWorld, node, quadMatrix);
             }
             node = node->next;
         } while (node != 0);
     }
 }
 
-void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *particle, PackedMatrixWords *packedMatrixWords) {
+void Fx_AddParticleRibbonSamples(ParticleRibbonStorageView *ribbonWorld, Shared_Particle *particle, PackedMatrixWords *packedMatrixWords) {
     f32 local[16];
     f32 scale;
     f32 zero;
-    func_802A68A0_S2 *node;
+    ParticleRibbonNodeView *node;
 
-    node = arg0->unk7528;
+    node = ribbonWorld->ribbonStorage;
     if (node != 0) {
         zero = 0.0f;
         do {
-            if (node->unk1C == particle &&
-                node->unk24 > zero &&
-                node->unk24 > zero) {
+            if (node->samples == particle &&
+                node->time > zero &&
+                node->time > zero) {
                 Graphu64_ConvertMatrixToFloat(local, packedMatrixWords);
-                scale = D_800C5E98_de;
+                scale = g_particleRibbonActorScale;
                 if (particle->desc->renderModel != 0) {
-                    scale = D_800C5E9C_de;
+                    scale = g_particleRibbonSpecialActorScale;
                 }
                 ScaleMatrixLocal(local, scale, scale, scale);
                 Graphu64_ClampMatrixToFixedRange(local);
-                Linked_AppendRibbonSegment(arg0, node, local);
+                Linked_AppendRibbonSegment(ribbonWorld, node, local);
             }
-            node = node->unk4;
+            node = node->next;
         } while (node != 0);
     }
 }
 
 void Fx_DetachEffectOwner(Owner802A697C *owner, int object) {
     float minimumValue;
-    u8 temp_v0;
-    u8 temp_v0_2;
+    u8 effectReferenceCount;
+    u8 ribbonReferenceCount;
     void *attachedObject;
     void *secondaryObject;
     void *effect;
@@ -314,43 +314,43 @@ void Fx_DetachEffectOwner(Owner802A697C *owner, int object) {
     effect = owner->head;
     if (effect != 0) {
         do {
-            attachedObject = ((struct State802A697C *)effect)->object;
+            attachedObject = ((struct ParticleSwooshAttachment *)effect)->object;
             if ((int)attachedObject == object) {
                 if (attachedObject != 0) {
-                    if (((struct State802A697C *)effect)->flags & 1) {
-                        temp_v0 = ((Entity1DC *)attachedObject)->unk_13B;
-                        if (temp_v0 != 0) {
-                            ((Entity1DC *)attachedObject)->unk_13B = (u8)(temp_v0 - 1);
+                    if (((struct ParticleSwooshAttachment *)effect)->flags & 1) {
+                        effectReferenceCount = ((Entity1DC *)attachedObject)->effectReferenceCount;
+                        if (effectReferenceCount != 0) {
+                            ((Entity1DC *)attachedObject)->effectReferenceCount = (u8)(effectReferenceCount - 1);
                         }
                     }
-                    if (((struct State802A697C *)effect)->flags & 2) {
-                        secondaryObject = ((struct State802A697C *)effect)->object;
-                        temp_v0_2 = ((Entity1DC *)secondaryObject)->unk_1D9;
-                        if (temp_v0_2 != 0) {
-                            ((Entity1DC *)secondaryObject)->unk_1D9 = (u8)(temp_v0_2 - 1);
+                    if (((struct ParticleSwooshAttachment *)effect)->flags & 2) {
+                        secondaryObject = ((struct ParticleSwooshAttachment *)effect)->object;
+                        ribbonReferenceCount = ((Entity1DC *)secondaryObject)->ribbonReferenceCount;
+                        if (ribbonReferenceCount != 0) {
+                            ((Entity1DC *)secondaryObject)->ribbonReferenceCount = (u8)(ribbonReferenceCount - 1);
                         }
                     }
                 }
-                ((struct State802A697C *)effect)->object = 0;
-                minimumValue = ((struct State802A697C *)effect)->node->value;
-                if (((struct State802A697C *)effect)->value < minimumValue) {
-                    ((struct State802A697C *)effect)->value = minimumValue;
+                ((struct ParticleSwooshAttachment *)effect)->object = 0;
+                minimumValue = ((struct ParticleSwooshAttachment *)effect)->node->value;
+                if (((struct ParticleSwooshAttachment *)effect)->value < minimumValue) {
+                    ((struct ParticleSwooshAttachment *)effect)->value = minimumValue;
                 }
             }
-            effect = ((struct State802A697C *)effect)->next;
+            effect = ((struct ParticleSwooshAttachment *)effect)->next;
         } while (effect != 0);
     }
 }
 
-void Fx_ResetEffectContribution(EffectContribution *arg0, s32 effectId)
+void Fx_ResetEffectContribution(EffectContribution *contribution, s32 effectId)
 {
-  arg0->scale = (f32) D_800C5EA0_de;
-  arg0->id = effectId;
-  arg0->state = 0;
-  arg0->stateC = 0;
-  arg0->state10 = 0;
-  arg0->weight = 0;
-  arg0->x = 0;
-  arg0->y = 0;
-  arg0->z = 0;
+  contribution->scale = (f32) g_effectContributionInitialScale;
+  contribution->id = effectId;
+  contribution->state = 0;
+  contribution->stateC = 0;
+  contribution->state10 = 0;
+  contribution->weight = 0;
+  contribution->x = 0;
+  contribution->y = 0;
+  contribution->z = 0;
 }

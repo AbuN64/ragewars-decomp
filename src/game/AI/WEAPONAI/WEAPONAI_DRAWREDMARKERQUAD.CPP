@@ -1,16 +1,16 @@
 #include "include_asm.h"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
-#include "COMMON/OBJECTSTATE90.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/PLAYER_RECORD_AND_FRAGTAG_VIEWS.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "WEAPONS/WEAPONAI_DRAWREDMARKERQUAD.H"
@@ -21,7 +21,7 @@ extern s32 Playerai_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType
 
 
 
-extern WeaponActionRecord D_800CE8DC[];
+extern WeaponActionRecord g_weaponActionRecords[];
 
 
 
@@ -31,7 +31,7 @@ void Weaponai_DrawRedMarkerQuad(void *object, void *unused) {
     s32 red, alpha;
     node=actor->node;
     if(node->active) {
-        gSPMatrix(g_displayListCursor++, (u32)&node->matrices[D_800D297C], G_MTX_LOAD);
+        gSPMatrix(g_displayListCursor++, (u32)&node->matrices[g_lightingBufferIndex], G_MTX_LOAD);
         gDPPipeSync(g_displayListCursor++);
         Geometry_InvalidateMaterialKeys();
         Geometry_SetModePreset(0xE);
@@ -39,54 +39,54 @@ void Weaponai_DrawRedMarkerQuad(void *object, void *unused) {
         red=200; alpha=150;
         gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
         gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_SHADING_SMOOTH);
-        D_800FF1B0_de[0].x=1;
-        D_800FF1B0_de[0].y=1;
-        D_800FF1B0_de[0].z=0;
-        D_800FF1B0_de[0].flag=0;
-        D_800FF1B0_de[0].s=0;
-        D_800FF1B0_de[0].t=0;
-        D_800FF1B0_de[0].r=red;
-        D_800FF1B0_de[0].g=0;
-        D_800FF1B0_de[0].b=0;
-        D_800FF1B0_de[0].a=red;
-        D_800FF1B0_de[1].x=-1;
-        D_800FF1B0_de[1].y=1;
-        D_800FF1B0_de[1].z=0;
-        D_800FF1B0_de[1].flag=0;
-        D_800FF1B0_de[1].s=0;
-        D_800FF1B0_de[1].t=0;
-        D_800FF1B0_de[1].r=red;
-        D_800FF1B0_de[1].g=0;
-        D_800FF1B0_de[1].b=0;
-        D_800FF1B0_de[1].a=red;
-        D_800FF1B0_de[2].x=15;
-        D_800FF1B0_de[2].y=1;
-        D_800FF1B0_de[2].z=-1;
-        D_800FF1B0_de[2].flag=0;
-        D_800FF1B0_de[2].s=0;
-        D_800FF1B0_de[2].t=0;
-        D_800FF1B0_de[2].r=red;
-        D_800FF1B0_de[2].g=0;
-        D_800FF1B0_de[2].b=0;
-        D_800FF1B0_de[2].a=alpha;
-        D_800FF1B0_de[3].x=-15;
-        D_800FF1B0_de[3].y=1;
-        D_800FF1B0_de[3].z=-1;
-        D_800FF1B0_de[3].flag=0;
-        D_800FF1B0_de[3].s=0;
-        D_800FF1B0_de[3].t=0;
-        D_800FF1B0_de[3].r=red;
-        D_800FF1B0_de[3].g=0;
-        D_800FF1B0_de[3].b=0;
-        D_800FF1B0_de[3].a=alpha;
-        gSPVertex(g_displayListCursor++, (u32)D_800FF1B0_de, 4, 0);
+        g_weaponRedMarkerVertices[0].x=1;
+        g_weaponRedMarkerVertices[0].y=1;
+        g_weaponRedMarkerVertices[0].z=0;
+        g_weaponRedMarkerVertices[0].flag=0;
+        g_weaponRedMarkerVertices[0].s=0;
+        g_weaponRedMarkerVertices[0].t=0;
+        g_weaponRedMarkerVertices[0].r=red;
+        g_weaponRedMarkerVertices[0].g=0;
+        g_weaponRedMarkerVertices[0].b=0;
+        g_weaponRedMarkerVertices[0].a=red;
+        g_weaponRedMarkerVertices[1].x=-1;
+        g_weaponRedMarkerVertices[1].y=1;
+        g_weaponRedMarkerVertices[1].z=0;
+        g_weaponRedMarkerVertices[1].flag=0;
+        g_weaponRedMarkerVertices[1].s=0;
+        g_weaponRedMarkerVertices[1].t=0;
+        g_weaponRedMarkerVertices[1].r=red;
+        g_weaponRedMarkerVertices[1].g=0;
+        g_weaponRedMarkerVertices[1].b=0;
+        g_weaponRedMarkerVertices[1].a=red;
+        g_weaponRedMarkerVertices[2].x=15;
+        g_weaponRedMarkerVertices[2].y=1;
+        g_weaponRedMarkerVertices[2].z=-1;
+        g_weaponRedMarkerVertices[2].flag=0;
+        g_weaponRedMarkerVertices[2].s=0;
+        g_weaponRedMarkerVertices[2].t=0;
+        g_weaponRedMarkerVertices[2].r=red;
+        g_weaponRedMarkerVertices[2].g=0;
+        g_weaponRedMarkerVertices[2].b=0;
+        g_weaponRedMarkerVertices[2].a=alpha;
+        g_weaponRedMarkerVertices[3].x=-15;
+        g_weaponRedMarkerVertices[3].y=1;
+        g_weaponRedMarkerVertices[3].z=-1;
+        g_weaponRedMarkerVertices[3].flag=0;
+        g_weaponRedMarkerVertices[3].s=0;
+        g_weaponRedMarkerVertices[3].t=0;
+        g_weaponRedMarkerVertices[3].r=red;
+        g_weaponRedMarkerVertices[3].g=0;
+        g_weaponRedMarkerVertices[3].b=0;
+        g_weaponRedMarkerVertices[3].a=alpha;
+        gSPVertex(g_displayListCursor++, (u32)g_weaponRedMarkerVertices, 4, 0);
         gSP1Triangle(g_displayListCursor++, 0, 1, 2, 0);
         gSP1Triangle(g_displayListCursor++, 1, 2, 3, 0);
-        if(node->extra) Fx_DrawRedParticleQuad((u32)&node->extraMatrices[D_800D297C]);
+        if(node->extra) Fx_DrawRedParticleQuad((u32)&node->extraMatrices[g_lightingBufferIndex]);
     }
 }
 
-s32 Weaponai_FindNextUsableWeapon(void *arg0)
+s32 Weaponai_FindNextUsableWeapon(void *player)
 {
     s32 slot;
     s32 category;
@@ -95,7 +95,7 @@ s32 Weaponai_FindNextUsableWeapon(void *arg0)
     char *indexed;
     char *scan;
 
-    actor = arg0;
+    actor = player;
     category = actor->actions[actor->selectedAction].category;
     if (category < 0) {
         category = 0;
@@ -195,7 +195,7 @@ s32 Weaponai_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
     return result;
 }
 
-void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *stateController) {
+void Weaponai_UpdateCallbacksAndTimers(void *actorStorage, void *stateController) {
     void *actor;
     s16 index;
     s32 value;
@@ -206,57 +206,57 @@ void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *stateController) {
     void *callback_owner;
     void (*callback)(void *, void *);
 
-    actor = ((ObjectLinks1DC_2 *)(arg0))->unk_1D8;
-    index = ((ObjectState1230 *)(actor))->unk_650;
-    value = D_800CE8DC[index].action;
+    actor = ((WeaponMarkerActorContext *)(actorStorage))->unk_1D8;
+    index = ((WeaponMarkerActorView *)(actor))->unk_650;
+    value = g_weaponActionRecords[index].action;
 
-    if (0.0f < ((ObjectState1230 *)(actor))->unk_11D8) {
+    if (0.0f < ((WeaponMarkerActorView *)(actor))->unk_11D8) {
         return;
     }
 
-    old_delta = D_800D2988;
-    scaled_delta = old_delta * D_800C2E90_de;
-    if (actor != 0 && (((ObjectState1230 *)(actor))->unk_122C & 0x2000)) {
-        D_800D2988 = scaled_delta;
+    old_delta = g_frameElapsedTime;
+    scaled_delta = old_delta * g_weaponMarkerDeltaScale;
+    if (actor != 0 && (((WeaponMarkerActorView *)(actor))->unk_122C & 0x2000)) {
+        g_frameElapsedTime = scaled_delta;
     } else {
-        D_800D2988 = old_delta;
+        g_frameElapsedTime = old_delta;
     }
 
-    timer = ((ObjectLinks14C *)(stateController))->unk_148;
+    timer = ((WeaponMarkerControllerView *)(stateController))->unk_148;
     zero = 0.0f;
     if (zero < timer) {
-        ((ObjectLinks14C *)(stateController))->unk_148 = timer - D_800D2988;
-        ((ObjectLinks1DC_2 *)(arg0))->unk_1 = 0;
+        ((WeaponMarkerControllerView *)(stateController))->unk_148 = timer - g_frameElapsedTime;
+        ((WeaponMarkerActorContext *)(actorStorage))->unk_1 = 0;
     } else {
-        ((ObjectLinks1DC_2 *)(arg0))->unk_1 = 0;
+        ((WeaponMarkerActorContext *)(actorStorage))->unk_1 = 0;
     }
 
-    if (zero < ((ObjectLinks14C *)(stateController))->unk_130) {
-        ((ObjectLinks14C *)(stateController))->unk_130 -= D_800D2988;
+    if (zero < ((WeaponMarkerControllerView *)(stateController))->unk_130) {
+        ((WeaponMarkerControllerView *)(stateController))->unk_130 -= g_frameElapsedTime;
     }
 
     if (value == 1) {
-        Actor_RequestActorState(arg0, stateController, 1);
+        Actor_RequestActorState(actorStorage, stateController, 1);
     }
-    if (((ObjectState1230 *)(actor))->unk_770 != ((ObjectState1230 *)(actor))->unk_62E) {
-        ((ObjectState1230 *)(actor))->unk_7E8 = 0;
-        Actor_RequestActorState(arg0, stateController, 1);
+    if (((WeaponMarkerActorView *)(actor))->unk_770 != ((WeaponMarkerActorView *)(actor))->unk_62E) {
+        ((WeaponMarkerActorView *)(actor))->unk_7E8 = 0;
+        Actor_RequestActorState(actorStorage, stateController, 1);
     }
 
-    callback_owner = ((ObjectLinks14C *)(stateController))->callback_owner;
+    callback_owner = ((WeaponMarkerControllerView *)(stateController))->callback_owner;
     if (callback_owner != 0) {
         callback = ((struct Hook *) ((char *) callback_owner))->fn;
         if (callback != 0) {
-            callback(arg0, stateController);
+            callback(actorStorage, stateController);
         }
     }
 
-    callback = ((struct CallbackState60 *) ((char *) D_800D052C[((ObjectState1230 *) actor)->unk_62E]))->callback;
+    callback = ((struct WeaponMarkerCallbackView *) ((char *) g_weaponInfoByType[((WeaponMarkerActorView *) actor)->unk_62E]))->callback;
     if (callback != 0) {
-        callback(arg0, stateController);
+        callback(actorStorage, stateController);
     }
-    func_8022BC14_de(actor);
-    D_800D2988 = old_delta;
+    Playerai_UpdateHeldWeaponModel(actor);
+    g_frameElapsedTime = old_delta;
 }
 
 
@@ -267,9 +267,9 @@ void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *stateController) {
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 #include "TYPES.H"
 #include "COMMON/RESOURCELOADSTATE.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 
-extern s32 D_800CD730;
+extern s32 g_gameLoopFrameCount;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/CHANNEL.H"
 
@@ -304,15 +304,15 @@ void Weaponai_ApplyWeaponSwitch(void *part, void *body) {
             ((Shared_ActorView *)state)->specialChanged = 1;
         }
         ((Shared_ActorView *)state)->selectedAction = unsigned_index;
-        ((WeaponFireState *)body)->animation = ((WeaponInfo *)D_800D052C[(s16)unsigned_index])->animation;
-        ((WeaponFireState *)body)->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)state)->selectedAction]))->animationCount;
+        ((WeaponFireState *)body)->animation = ((WeaponInfo *)g_weaponInfoByType[(s16)unsigned_index])->animation;
+        ((WeaponFireState *)body)->animationCount = ((WeaponInfo *)(g_weaponInfoByType[((Shared_ActorView *)state)->selectedAction]))->animationCount;
         owner = ((Shared_ActorView *)state)->message;
-        if ((owner != 0) && ((u32)D_800CD730 >= 5U)) {
-            Camera_PostScreenMessage(&D_80145088, owner,
+        if ((owner != 0) && ((u32)g_gameLoopFrameCount >= 5U)) {
+            Camera_PostScreenMessage(&g_frontendScreenStatus, owner,
                 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                (*(void ***)D_800D052C[((Shared_ActorView *)state)->selectedAction])[D_80145088.settings.language]);
+                (*(void ***)g_weaponInfoByType[((Shared_ActorView *)state)->selectedAction])[g_frontendScreenStatus.settings.language]);
 #else
-                *(void **)*(void **)D_800D052C[((Shared_ActorView *)state)->selectedAction]);
+                *(void **)*(void **)g_weaponInfoByType[((Shared_ActorView *)state)->selectedAction]);
 #endif
         }
         ((WeaponFireState *)body)->spinStep = 0;

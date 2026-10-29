@@ -68,8 +68,8 @@ s32 Join_SelectPreviousUsJoinModel(void *sender, void *context, void *argument, 
     if (event != 1) return 0;
     MarkMenuEventHandled();
     if (Menu_GetPreviousScreenOwner(0) == 0x16) return 0;
-    variant = D_80153F80[D_800E39C0->selection].variant;
-    model = Join_FindJoinModelIndex(variant, D_80153F80[D_800E39C0->selection].id);
+    variant = g_joinRequestEntries[D_800E39C0->selection].variant;
+    model = Join_FindJoinModelIndex(variant, g_joinRequestEntries[D_800E39C0->selection].id);
     do {
         variant--;
         if (variant < 0) {
@@ -79,11 +79,11 @@ s32 Join_SelectPreviousUsJoinModel(void *sender, void *context, void *argument, 
         }
         id = g_rewardItemTiers[variant][model].id;
     } while (id == -1);
-    D_80153F80[D_800E39C0->selection].variant = variant;
-    D_80153F80[D_800E39C0->selection].id = id;
-    XPlus_CopyString(D_80153F80[D_800E39C0->selection].name,
+    g_joinRequestEntries[D_800E39C0->selection].variant = variant;
+    g_joinRequestEntries[D_800E39C0->selection].id = id;
+    XPlus_CopyString(g_joinRequestEntries[D_800E39C0->selection].name,
                     *g_rewardItemTiers[variant][id].text);
-    D_80153F80[D_800E39C0->selection].variantC = variant;
+    g_joinRequestEntries[D_800E39C0->selection].variantC = variant;
     Join_UpdateJoinRequestDisplay(D_800E39C0->selection);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
@@ -118,9 +118,9 @@ void CJoinCharacter_CycleModelSelection(void) {
         "lui        $at, %hi(D_8014DCF4)\n"
         "addu       $at, $at, $v0\n"
         "lw         $s0, %lo(D_8014DCF4)($at)\n"
-        "lui        $at, %hi(D_80153F80)\n"
+        "lui        $at, %hi(g_joinRequestEntries)\n"
         "addu       $at, $at, $v0\n"
-        "lw         $a1, %lo(D_80153F80)($at)\n"
+        "lw         $a1, %lo(g_joinRequestEntries)($at)\n"
         "jal        Join_FindJoinModelIndex\n"
         "addu      $a0, $s0, $zero\n"
         "addu       $a2, $v0, $zero\n"
@@ -161,15 +161,15 @@ void CJoinCharacter_CycleModelSelection(void) {
         "sll        $v0, $v1, 3\n"
         "subu       $v0, $v0, $v1\n"
         "sll        $v0, $v0, 2\n"
-        "lui        $at, %hi(D_80153F80)\n"
+        "lui        $at, %hi(g_joinRequestEntries)\n"
         "addu       $at, $at, $v0\n"
-        "sw         $a1, %lo(D_80153F80)($at)\n"
+        "sw         $a1, %lo(g_joinRequestEntries)($at)\n"
         "addu       $v0, $a3, $a1\n"
         "sll        $v0, $v0, 3\n"
         "lw         $v1, 0x14($a0)\n"
-        "lui        $at, %hi(D_800DF7D0)\n"
+        "lui        $at, %hi(g_joinPlayerNamesDefault)\n"
         "addu       $at, $at, $v0\n"
-        "lw         $v0, %lo(D_800DF7D0)($at)\n"
+        "lw         $v0, %lo(g_joinPlayerNamesDefault)($at)\n"
         "sll        $a0, $v1, 3\n"
         "subu       $a0, $a0, $v1\n"
         "sll        $a0, $a0, 2\n"

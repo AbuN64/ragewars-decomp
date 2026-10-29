@@ -6,7 +6,7 @@
 
 /* Sets the RSP program counter: returns -1 unless the RSP status register shows the processor
    halted, otherwise writes the address to the program counter register and returns zero. */
-s32 func_802BA0D0_de(u32 pc) {
+s32 __osSpSetPc(u32 pc) {
     u32 status = *(volatile u32 *) 0xA4040010;
 
     if (!(status & 1)) {
@@ -17,7 +17,7 @@ s32 func_802BA0D0_de(u32 pc) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BA02C[1] = {
+unsigned int k_SpsetpcEncodedWords[1] = {
     0x5F4A756D,
 };
 #endif

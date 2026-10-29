@@ -28,5 +28,5 @@ struct Shared_DebugWidget {
 
 
 
-extern Shared_DebugField *D_800E1CC0[];
+extern Shared_DebugField *g_profileSelectionResources[];
 #endif

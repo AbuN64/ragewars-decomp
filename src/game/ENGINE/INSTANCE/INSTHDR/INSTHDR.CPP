@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "COMMON/ACTOR_HEADER.H"
 #include "COMMON/LEVEL_ACTOR.H"
@@ -18,7 +18,7 @@
  * three eighths of its slope (at most 25 degrees), which the body tilt from Gobjinst_BuildActorDirectionTilt then replaces,
  * and leans along its heading by three quarters of the ground slope ahead from CPlane_GetSlopeAngle (at most 25),
  * blending lean and tilt halfway through Graphu64_InterpolateQuaternionWithLinearFallback; other players take Gobjinst_BuildActorDirectionTilt's tilt, and
- * objects without a floor or held players get the identity. The sine is kept in D_80115DEC. */
+ * objects without a floor or held players get the identity. The sine is kept in g_turretAimSine. */
 
 
 extern s32 Region_TestPolygonSlopeFlag(s32);
@@ -39,8 +39,8 @@ static inline s32 is_held(char *obj) {
 }
 
 /* Plays a sound effect for an actor at a position: snaps the position to the nearest registered emitter
- * in D_8013B364 when there is one, draws a random direction and (except for sound 0xBD7) scales it to a
- * velocity of 409.6, then starts the sound through SetN64_SpawnModelEffect on D_80131600 with the actor's id and
+ * in g_navigationGraph when there is one, draws a random direction and (except for sound 0xBD7) scales it to a
+ * velocity of 409.6, then starts the sound through SetN64_SpawnModelEffect on g_modelEffectPool with the actor's id and
  * the given volume. */
 
 
@@ -50,7 +50,7 @@ static inline s32 is_held(char *obj) {
 
 
 
-extern char D_8013B364;
+extern char g_navigationGraph;
 
 
 extern s32 Portal_FindNearestPointIndex(void *, void *);
@@ -96,10 +96,10 @@ CQuatern Insthdr_BuildActorGroundRotation(char *obj) {
                 Graphu64_CrossVectors(&axis, &up, &normal);
                 Graphu64_NormalizeVec3(&axis);
                 slope = Graphu64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
-                D_80115DEC = Gu_Sinf(RW_MIN(slope, 0.43633235f) * 0.375f);
-                tilt.x = axis.x * D_80115DEC;
-                tilt.y = axis.y * D_80115DEC;
-                tilt.z = axis.z * D_80115DEC;
+                g_turretAimSine = Gu_Sinf(RW_MIN(slope, 0.43633235f) * 0.375f);
+                tilt.x = axis.x * g_turretAimSine;
+                tilt.y = axis.y * g_turretAimSine;
+                tilt.z = axis.z * g_turretAimSine;
                 tilt.w = Math_Cosf(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt = Gobjinst_BuildActorDirectionTilt(obj);
                 sine = Gu_Sinf(((LevelActor *)(self))->yaw);
@@ -113,10 +113,10 @@ CQuatern Insthdr_BuildActorGroundRotation(char *obj) {
                 slope = RW_MIN(slope, 25.0f) * 0.75f;
                 half = 0.5f;
                 angle = slope * half;
-                D_80115DEC = Gu_Sinf(angle);
+                g_turretAimSine = Gu_Sinf(angle);
                 lean.y = 0.0f;
-                lean.x = cosine * D_80115DEC;
-                lean.z = -sine * D_80115DEC;
+                lean.x = cosine * g_turretAimSine;
+                lean.z = -sine * g_turretAimSine;
                 lean.w = Math_Cosf(angle);
                 Graphu64_InterpolateQuaternionWithLinearFallback(&result, half, &lean, &tilt);
                 return result;
@@ -138,22 +138,22 @@ void Insthdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volum
     SoundRequest request;
     CVector3 *emitter;
 
-    emitter = Portal_GetGraphPoint(&D_8013B364, Portal_FindNearestPointIndex(&D_8013B364, &pos));
+    emitter = Portal_GetGraphPoint(&g_navigationGraph, Portal_FindNearestPointIndex(&g_navigationGraph, &pos));
     request.position = pos;
     at = request.position;
-    request.owner = ((struct Actor_func_80214DD4_de *)actor)->room;
+    request.owner = ((struct BarrelAnchorActorView *)actor)->room;
     if (emitter != 0) {
         at = *emitter;
     }
     up.x = 0.0f;
-    up.y = D_800C3CD0_de[1];
+    up.y = g_actorAimBasisConstants[1];
     up.z = 0.0f;
     dir.x = dir.y = dir.z = up.x;
     Graphu64_NormalizeVec3(&dir);
     if (sound != 0xBD7) {
         Graphu64_ScaleVector(&velocity, &dir, 409.59998f);
     }
-    SetN64_SpawnModelEffect((s32)&D_80131600, 0, sound, velocity, at, request.owner, volume);
+    SetN64_SpawnModelEffect((s32)&g_modelEffectPool, 0, sound, velocity, at, request.owner, volume);
 }
 
 /** Reset three byte-sized fields. */
@@ -198,11 +198,11 @@ s32 Insthdr_GetSharedModelFlag40(void *actorStorage)
 int Insthdr_GetModelPropertyFlag1(void *other) {
     Actor_u1 *actor = other;
     Resource_u1 *resource = actor->resource;
-    unsigned int new_var = 0;
+    unsigned int defaultResult = 0;
     if (resource->kind != 1) {
-        return new_var;
+        return defaultResult;
     }
-    if (new_var) {
+    if (defaultResult) {
         return resource->flags14 & 1;
     } else {
         return resource->flags14 & 1;
@@ -212,11 +212,11 @@ int Insthdr_GetModelPropertyFlag1(void *other) {
 int Insthdr_GetModelPropertyFlag2(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
-    unsigned int new_var = 0;
+    unsigned int defaultResult = 0;
     if (resource->kind != 1) {
-        return new_var;
+        return defaultResult;
     }
-    if (new_var) {
+    if (defaultResult) {
         return resource->flags14 & 2;
     } else {
         return resource->flags14 & 2;
@@ -258,11 +258,11 @@ s32 Insthdr_GetSharedModelFlag100(void *actorStorage)
 int Insthdr_GetModelPropertyFlag200(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
-    unsigned int new_var = 0;
+    unsigned int defaultResult = 0;
     if (resource->kind != 1) {
-        return new_var;
+        return defaultResult;
     }
-    if (new_var) {
+    if (defaultResult) {
         return resource->flags14 & 0x200;
     } else {
         return resource->flags14 & 0x200;
@@ -289,10 +289,10 @@ s32 Insthdr_HasActorTerritory(void *actorStorage)
 
 s32 Insthdr_IsKindElevenEnabledForLocalMode(void *actorStorage) {
     void *actorDefinition;
-    actorDefinition = (((struct ObjRecAt18V5 *) ((s8 *) actorStorage))->unk18);
-    if ((((struct ObjRecAt14V3 *) ((s8 *) actorDefinition))->unk0) == 0xB) {
-        if (D_801462C8.local != 0) {
-            return (((struct ObjRecAt14V3 *) ((s8 *) actorDefinition))->unk14) & 1;
+    actorDefinition = (((struct ActorDefinitionPointerView *) ((s8 *) actorStorage))->definition);
+    if ((((struct ActorDefinitionFlagsView *) ((s8 *) actorDefinition))->kind) == 0xB) {
+        if (g_gameSettings.local != 0) {
+            return (((struct ActorDefinitionFlagsView *) ((s8 *) actorDefinition))->flags) & 1;
         }
         return 1;
     }
@@ -302,11 +302,11 @@ s32 Insthdr_IsKindElevenEnabledForLocalMode(void *actorStorage) {
 int Insthdr_GetModelCollisionFlag1(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
-    unsigned int new_var = 0;
+    unsigned int defaultResult = 0;
     if (resource->kind != 1) {
-        return new_var;
+        return defaultResult;
     }
-    if (new_var) {
+    if (defaultResult) {
         return resource->flags4C & 1;
     } else {
         return resource->flags4C & 1;
@@ -352,11 +352,11 @@ s32 Insthdr_IsInactiveOrCollisionOption4(void *actor) {
 int Insthdr_GetModelCollisionFlag8(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
-    unsigned int new_var = 0;
+    unsigned int defaultResult = 0;
     if (resource->kind != 1) {
-        return new_var;
+        return defaultResult;
     }
-    if (new_var) {
+    if (defaultResult) {
         return resource->flags4C & 8;
     } else {
         return resource->flags4C & 8;
@@ -381,15 +381,15 @@ s32 Insthdr_IsInactiveOrCollisionOption800(LevelActor *actor) {
 s32 Insthdr_GetModelCollisionFlag1000(void *actorStorage)
 {
     Actor_u1 *actor = actorStorage;
-  unsigned int new_var;
+  unsigned int defaultResult;
   Resource_u1 *actorDefinition;
   actorDefinition = actor->resource;
-  new_var = 0;
+  defaultResult = 0;
   if ((actorDefinition->kind) != 1)
   {
-    return new_var;
+    return defaultResult;
   }
-  if (new_var)
+  if (defaultResult)
   {
     return (actorDefinition->flags4C) & 0x1000;
   }
@@ -417,11 +417,11 @@ s32 Insthdr_IsInactiveOrCollisionOption10(LevelActor *actor) {
 int Insthdr_GetModelCollisionFlag20(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
-    unsigned int new_var = 0;
+    unsigned int defaultResult = 0;
     if (resource->kind != 1) {
-        return new_var;
+        return defaultResult;
     }
-    if (new_var) {
+    if (defaultResult) {
         return resource->flags4C & 0x20;
     } else {
         return resource->flags4C & 0x20;
@@ -432,14 +432,14 @@ s32 Insthdr_GetModelCollisionFlag200(void *actorStorage)
 {
     Actor_u1 *actor = actorStorage;
   Resource_u1 *actorDefinition;
-  int new_var;
+  int typeOne;
   actorDefinition = actor->resource;
-  new_var = 1;
-  if ((actorDefinition->kind) != new_var)
+  typeOne = 1;
+  if ((actorDefinition->kind) != typeOne)
   {
     return 0;
   }
-  if (new_var)
+  if (typeOne)
   {
     return (actorDefinition->flags4C) & 0x200;
   }
@@ -448,11 +448,11 @@ s32 Insthdr_GetModelCollisionFlag200(void *actorStorage)
 int Insthdr_GetModelCollisionFlag400(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
-    unsigned int new_var = 0;
+    unsigned int defaultResult = 0;
     if (resource->kind != 1) {
-        return new_var;
+        return defaultResult;
     }
-    if (new_var) {
+    if (defaultResult) {
         return resource->flags4C & 0x400;
     } else {
         return resource->flags4C & 0x400;
@@ -462,14 +462,14 @@ int Insthdr_GetModelCollisionFlag400(void *actorStorage) {
 s32 Insthdr_GetModelCollisionFlag2000(void *actorStorage)
 {
     Actor_u1 *actor = actorStorage;
-  Resource_u1 *new_var2;
-  int new_var;
+  Resource_u1 *modelDefinition;
+  int propertyByteOffset;
   Resource_u1 *actorDefinition;
   actorDefinition = actor->resource;
-  new_var2 = actorDefinition;
-  if ((new_var2->kind) != 1)
+  modelDefinition = actorDefinition;
+  if ((modelDefinition->kind) != 1)
   {
-    if (actorDefinition || new_var)
+    if (actorDefinition || propertyByteOffset)
     {
       return 0;
     }
@@ -478,18 +478,18 @@ s32 Insthdr_GetModelCollisionFlag2000(void *actorStorage)
       return 0;
     }
   }
-  new_var = 0x4C;
+  propertyByteOffset = 0x4C;
   return (actorDefinition->flags4C) & 0x2000;
 }
 
 int Insthdr_GetModelCollisionFlag4000(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
-    unsigned int new_var = 0;
+    unsigned int defaultResult = 0;
     if (resource->kind != 1) {
-        return new_var;
+        return defaultResult;
     }
-    if (new_var) {
+    if (defaultResult) {
         return resource->flags4C & 0x4000;
     } else {
         return resource->flags4C & 0x4000;

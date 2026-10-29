@@ -1,8 +1,8 @@
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/PFS/pfs_decodechannelstatus.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
@@ -27,7 +27,7 @@
 
 
 
-/* Decodes the six-byte short controller status reply found one byte per preceding channel into D_80154110 for the given channel, recording its error bits and, without error, its type and status.
+/* Decodes the six-byte short controller status reply found one byte per preceding channel into g_controllerStatusPifBuffer for the given channel, recording its error bits and, without error, its type and status.
    Adapted from Items_DecodeControllerStatusReplies with the per-channel loop over eight-byte replies changed to a single six-byte reply reached by skipping one byte per preceding channel. */
 
 
@@ -40,14 +40,14 @@ s32 __osPfsGetStatus(void *queue, int channel)
 {
     s32 ret = 0;
     void *dummy;
-    EntryRecAt3 data;
+    ControllerInitStatusBytes data;
 
     __osPfsRequestOneChannel(channel);
 
-    ret = __osSiRawStartDma(1, &D_80154110);
+    ret = __osSiRawStartDma(1, &g_controllerStatusPifBuffer);
     osRecvMesg(queue, &dummy, 1);
 
-    ret = __osSiRawStartDma(0, &D_80154110);
+    ret = __osSiRawStartDma(0, &g_controllerStatusPifBuffer);
     osRecvMesg(queue, &dummy, 1);
 
     Pfs_DecodeChannelStatus(channel, &data);
@@ -70,9 +70,9 @@ void __osPfsRequestOneChannel(int channel)
     __OSContRequesFormatShort requestformat;
     int i;
 
-    D_8014D4B0 = 0;
-    base = (u8 *)&D_80154110;
-    D_80154110.pifstatus = 1;
+    g_controllerLastCommand = 0;
+    base = (u8 *)&g_controllerStatusPifBuffer;
+    g_controllerStatusPifBuffer.pifstatus = 1;
     ptr = base;
 
     requestformat.txsize = 1;
@@ -91,12 +91,12 @@ void __osPfsRequestOneChannel(int channel)
     *ptr = 0xFE;
 }
 
-void Pfs_DecodeChannelStatus(s32 channel, EntryRecAt3 *data) {
+void Pfs_DecodeChannelStatus(s32 channel, ControllerInitStatusBytes *data) {
     u8 *ptr;
     __OSContRequesFormatShort requestformat;
     s32 i;
 
-    ptr = (u8 *)&D_80154110;
+    ptr = (u8 *)&g_controllerStatusPifBuffer;
     for (i = 0; i < channel; i++) {
         ptr++;
     }

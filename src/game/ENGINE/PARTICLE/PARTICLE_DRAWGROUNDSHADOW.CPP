@@ -1,5 +1,5 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "abi.h"
 #include "COMMON/VECTOR4F.H"
@@ -13,14 +13,14 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
-extern void Cache_ReleaseResource(void *arg0, void *resource);
+extern void Cache_ReleaseResource(void *cache, void *resource);
 
-/* Draws an actor's ground shadow: probes the ground under the actor through func_80243A90_de into D_801041F0, and when ground is found tilts the shadow model from D_8011FFB0 to the ground normal, scales it by the actor's size shrinking with height above the ground, fades it with height (and with lost health for actors flagged 1), places it on the ground and draws it through Geometry_DrawIntensityMask between render-mode commands. */
-extern char D_8011FFB0;
+/* Draws an actor's ground shadow: probes the ground under the actor through func_80243A90_de into g_currentActorInstance, and when ground is found tilts the shadow model from g_actorMatrixPool to the ground normal, scales it by the actor's size shrinking with height above the ground, fades it with height (and with lost health for actors flagged 1), places it on the ground and draws it through Geometry_DrawIntensityMask between render-mode commands. */
+extern char g_actorMatrixPool;
 
-extern char D_80100030;
+extern char g_defaultProbeMotionSettings;
 
-extern Ground D_801041F0;
+extern Ground g_currentActorInstance;
 
 
 extern Gfx *g_displayListCursor;
@@ -43,16 +43,16 @@ extern void Graphu64_ConvertMatrixToFixed(f32 *, void *);
 
 extern void Geometry_DrawIntensityMask(void *model, s32 pass, u8 alpha);
 
-extern s32 D_80140FF8;
+extern s32 g_playerWeaponClassMode;
 
 
-extern char D_800C4D38_de;
+extern char s_particleModelResourceTag;
 
 extern char g_simpPartModelsIndexText;
 
 extern char s_simpPartModelText;
 
-extern char D_0026D7F4;
+extern char g_simpleModelResourceCallbackAddress;
 
 
 
@@ -86,7 +86,7 @@ void Particle_DrawGroundShadow(Shared_Particle *actor, GameplayCamera *view) {
     f32 floor;
     f32 shrink;
 
-    model = Map_ReserveEntries(&D_8011FFB0, 1);
+    model = Map_ReserveEntries(&g_actorMatrixPool, 1);
     if (model == 0) {
         return;
     }
@@ -98,14 +98,14 @@ void Particle_DrawGroundShadow(Shared_Particle *actor, GameplayCamera *view) {
     point.x = probe.pos.x;
     point.y = probe.pos.y - 102400.0f;
     point.z = probe.pos.z;
-    Unicol_MoveActorWithCollision(&probe, point, &D_80100030);
-    ground = &D_801041F0;
+    Unicol_MoveActorWithCollision(&probe, point, &g_defaultProbeMotionSettings);
+    ground = &g_currentActorInstance;
     if (ground->found == 0) {
         return;
     }
     angle = 0.78539824f;
     tilt = Graphu64_BuildDirectionQuaternion(&ground->normal);
-    roll.x = D_80115DEC = Gu_Sinf(angle);
+    roll.x = g_turretAimSine = Gu_Sinf(angle);
     roll.y = 0.0f;
     roll.z = 0.0f;
     roll.w = Math_Cosf(angle);
@@ -160,10 +160,10 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
     f32 amount;
 
     index = 0;
-    if (D_80140FF8 == 1) {
-        matrix = &particle->mtx[D_800D297C];
+    if (g_playerWeaponClassMode == 1) {
+        matrix = &particle->mtx[g_lightingBufferIndex];
     } else {
-        matrix = Map_ReserveEntries(&D_8011FFB0, 1);
+        matrix = Map_ReserveEntries(&g_actorMatrixPool, 1);
         if (matrix == 0) {
             return;
         }
@@ -178,7 +178,7 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
     if (particle->resource == 0) {
         resource = Cache_RequestResource(0, particle->desc->renderModel,
                                 particle->desc->renderModel, 0x18,
-                                0, 0, 0, &D_800C4D38_de, 1);
+                                0, 0, 0, &s_particleModelResourceTag, 1);
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource,
                                 particle->desc->renderModel, 1);
@@ -198,10 +198,10 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
 
     resource = Cache_RequestResource(0, particle->resource,
                             particle->resource, particle->resourceSize,
-                            0, 0, &D_0026D7F4, &s_simpPartModelText, 1);
+                            0, 0, &g_simpleModelResourceCallbackAddress, &s_simpPartModelText, 1);
     if (resource != 0) {
         Geometry_QueueModelInstance(resource, matrix, 0,
-                      (char *)particle + (((D_800D297C * 3) << 3) + 0xE0), 0, -1);
+                      (char *)particle + (((g_lightingBufferIndex * 3) << 3) + 0xE0), 0, -1);
         Cache_UnlockResource(0, resource);
     }
 }

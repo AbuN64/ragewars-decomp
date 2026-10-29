@@ -2,8 +2,8 @@
 #define SCENE_SHAREDRECAT14_H
 #include "TYPES.H"
 
-typedef struct SharedRecAt14 SharedRecAt14;
-struct SharedRecAt14 {
+typedef struct SceneResourceSixWordRecord SceneResourceSixWordRecord;
+struct SceneResourceSixWordRecord {
     s32 unk0; /* +0x0: src/func_80286A78.c */
     s32 unk4; /* +0x4: src/func_80286A78.c */
     s32 unk8; /* +0x8: src/func_80286A78.c */
@@ -11,5 +11,5 @@ struct SharedRecAt14 {
     s32 unk10; /* +0x10: src/func_80286A78.c */
     s32 unk14; /* +0x14: src/func_80286A78.c */
 };
-typedef char Shared_func_80286A78_S7_size_check[(sizeof(SharedRecAt14) == 0x18) ? 1 : -1];
+typedef char SceneResourceSixWordRecordSizeCheck[(sizeof(SceneResourceSixWordRecord) == 0x18) ? 1 : -1];
 #endif

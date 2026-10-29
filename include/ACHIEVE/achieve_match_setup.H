@@ -16,7 +16,7 @@ struct MatchMenuApplySlotValueGfx {
     char pad26[0xAA];
     RosterSlot slots[8];
 };
-struct PlayerRecAt602 {
+struct PlayerLoadoutSelectionView {
     char pad[0x5D8];
     struct InfoCode80423280 *info;
     char pad5DC[0x26];

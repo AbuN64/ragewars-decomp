@@ -2,7 +2,7 @@
 #define CAMERA_GAMEOBJECT_MOVETOXZKEEPHEIGHT_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-struct Material_func_80245D30_de {
+struct HorizontalMovementSurfaceView {
     char pad0[0x52];
     u16 flags;
     char pad54[9];
@@ -12,7 +12,7 @@ struct Material_func_80245D30_de {
     s8 y;
     s8 z;
 };
-struct Actor_func_80245D30_de {
+struct ActorHorizontalMovementView {
     u8 kind;
     char pad1[0x1f];
     f32 vertical;

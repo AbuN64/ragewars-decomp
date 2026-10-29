@@ -5,18 +5,18 @@
 #include "RESMGR/STREAM.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/OBJRECAT3CV2.H"
-#include "COMMON/LONE/D_80106248.H"
+#include "COMMON/LONE/RESOURCE_REQUEST_QUEUE.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
 /** Copy the same global float to two destinations. */
-void Stream_SetFloatPairToNegativeOne(float *arg0, float *arg1) {
-    float value = D_800C5688_de;
-    *arg0 = value;
-    *arg1 = value;
+void Stream_SetFloatPairToNegativeOne(float *first, float *second) {
+    float value = g_streamFloatPairInitialValue;
+    *first = value;
+    *second = value;
 }
 
 struct Record;
-extern struct Record *Cache_AllocateMemory(s32 arg0);
+extern struct Record *Cache_AllocateMemory(s32 byteCount);
 
 
 void StreamBufferAppend(StreamBuffer *streamBuffer, const void *sourceData, s32 byteCount) {
@@ -39,17 +39,17 @@ extern struct Record *Cache_AllocateMemory(s32 size);
 
 void Cache_DrainAndCompactResources(s32);
 
-s32 func_80255228_de(s32 *);
+s32 Cache_WaitForResourceLoads(s32 *);
 
 
 void StreamBufferRead(StreamBuffer *readStream, void *destination, s32 byteCount)
 {
-  const u8 *new_var;
-  const u8 *new_var2;
-  new_var2 = readStream->data;
-  new_var2 = new_var2 + readStream->readPosition;
-  new_var = new_var2;
-  XPlus_CopyBytes(destination, new_var, byteCount);
+  const u8 *sourceBytes;
+  const u8 *readCursor;
+  readCursor = readStream->data;
+  readCursor = readCursor + readStream->readPosition;
+  sourceBytes = readCursor;
+  XPlus_CopyBytes(destination, sourceBytes, byteCount);
   readStream->readPosition = readStream->readPosition + byteCount;
 }
 
@@ -75,6 +75,6 @@ void StreamBufferFree(StreamBuffer *streamBuffer) {
 }
 
 void Stream_DrainResourceWork(void) {
-    func_80255228_de(&D_80106248);
+    Cache_WaitForResourceLoads(&g_resourceCacheWorker);
     Cache_DrainAndCompactResources(0);
 }

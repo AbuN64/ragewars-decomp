@@ -51,31 +51,31 @@ s32 __alCSeqGetTrackEvent(ALCSeq_s *state, u32 index, DecodeResult *result) {
             void *next;
 
             base = (u8 *)state + (index * 4);
-            p = ((struct MeasuredRecAt18 *)(base))->value;
-            lead = ((struct MeasuredRecAt0V3 *)(p))->value;
+            p = ((struct CompressedSequenceCursorView *)(base))->value;
+            lead = ((struct CompressedSequenceByteView *)(p))->value;
             p = (u8 *)p + 1;
-            count_byte = ((struct MeasuredRecAt0V3 *)(p))->value;
+            count_byte = ((struct CompressedSequenceByteView *)(p))->value;
             count = count_byte & 0xFF;
             if (count == 0) {
                 next = (u8 *)p + 5;
-                ((struct MeasuredRecAt0V3 *)(p))->value = lead;
+                ((struct CompressedSequenceByteView *)(p))->value = lead;
             } else {
                 if (count != first_value) {
-                    ((struct MeasuredRecAt0V3 *)(p))->value = count_byte - 1;
+                    ((struct CompressedSequenceByteView *)(p))->value = count_byte - 1;
                 }
                 p = (u8 *)p + 1;
-                byte0 = ((struct MeasuredRecAt0V3 *)(p))->value;
+                byte0 = ((struct CompressedSequenceByteView *)(p))->value;
                 p = (u8 *)p + 1;
-                byte1 = ((struct MeasuredRecAt0V3 *)(p))->value;
+                byte1 = ((struct CompressedSequenceByteView *)(p))->value;
                 p = (u8 *)p + 1;
-                byte2 = ((struct MeasuredRecAt0V3 *)(p))->value;
+                byte2 = ((struct CompressedSequenceByteView *)(p))->value;
                 p = (u8 *)p + 1;
-                byte3 = ((struct MeasuredRecAt0V3 *)(p))->value;
+                byte3 = ((struct CompressedSequenceByteView *)(p))->value;
                 p = (u8 *)p + 1;
                 next = (u8 *)p - ((byte0 << 24) + (byte1 << 16) +
                                    (byte2 << 8) + byte3);
             }
-            ((struct MeasuredRecAt18 *)(base))->value = next;
+            ((struct CompressedSequenceCursorView *)(base))->value = next;
             state->lastStatus[index] = 0;
             result->type = 0x14;
         }

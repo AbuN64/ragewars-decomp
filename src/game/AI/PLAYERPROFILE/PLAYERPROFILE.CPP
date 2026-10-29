@@ -5,19 +5,19 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "WORLD/PLAYERPROFILE.H"
 #include "include_asm.h"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "WEAPONS/PLAYER_BUILDWEAPONHANDTRANSFORM.H"
 
-void Player_SetProfileValue14(void *arg0, unsigned char arg1);
+void Player_SetProfileValue14(void *profileStorage, unsigned char value);
 void Player_SetProfileValue15(void *object, unsigned char value);
 void Player_SetProfileValue16(void *object, unsigned char value);
-void Player_SetProfileProgress(void *arg0, int arg1);
+void Player_SetProfileProgress(void *profileStorage, int progress);
 void Player_SetProfileSlotValue(ObjCode8022E938 *obj, int index, char value);
 void Player_SetAchievementFlag7(Profile *record, s32 achievementIndex);
 void Player_SetAchievementFlag2F(Profile *player, s32 achievementIndex);
@@ -27,8 +27,8 @@ void Player_SetAchievementFlag2F(Profile *player, s32 achievementIndex);
 
 
 
-void Player_InitializeProfile(void *arg0) {
-    u8 *object = (u8 *)arg0;
+void Player_InitializeProfile(void *profileStorage) {
+    u8 *object = (u8 *)profileStorage;
     s32 i;
     u8 *cursor;
 
@@ -96,45 +96,45 @@ void Player_InitializeProfile(void *arg0) {
     object[0x18D] = 0;
 }
 
-extern u8 D_80102B00[];
-extern u8 D_80102B08[];
-extern s8 D_800FEB0C[];
-extern s8 D_80102B0D[];
-extern s8 D_800FEB0E[];
-extern s8 D_80102C89[];
-extern s8 D_800FEC8A[];
-extern s8 D_800FEC8B[];
-extern s8 D_800FEC8C[];
-extern s8 D_800FEC8D[];
+extern u8 g_localPlayerProfiles[];
+extern u8 g_profileSlotResetWord[];
+extern s8 g_profileSlotResetFlags[];
+extern s8 g_profileSlotIndices[];
+extern s8 g_profileSlotEnabledFlags[];
+extern s8 g_profileSlotSettingsByte7B[];
+extern s8 g_profileSlotSettingsByte7D[];
+extern s8 g_profileSlotSettingsByte79[];
+extern s8 g_profileSlotSettingsByte7A[];
+extern s8 g_profileSlotSettingsByte82[];
 extern u8 g_playerSettings[];
-extern s32 D_800D34E0;
+extern s32 g_profileSlotNameFormat;
 
-void Player_InitializeProfile(void *arg0);
-extern void XStdio_FormatBuffer(void *arg0, s32 arg1, s32 arg2);
+void Player_InitializeProfile(void *profileStorage);
+extern void XStdio_FormatBuffer(void *destination, s32 format, s32 value);
 
-void Player_InitializeProfileSlot(s32 arg0) {
+void Player_InitializeProfileSlot(s32 profileSlot) {
     s32 offset;
     u8 *entry;
     u8 *config;
 
-    offset = arg0 * 0x190;
-    entry = D_80102B00 + offset;
+    offset = profileSlot * 0x190;
+    entry = g_localPlayerProfiles + offset;
     Player_InitializeProfile(entry);
-    *(s32 *)(D_80102B08 + offset) = 0;
-    D_80102B0D[offset] = arg0;
-    D_800FEB0C[offset] = 0;
-    D_800FEB0E[offset] = 1;
-    XStdio_FormatBuffer(entry, D_800D34E0, arg0 + 1);
-    config = g_playerSettings + arg0 * 0x96;
-    D_80102C89[offset] = config[0x7B];
-    D_800FEC8A[offset] = config[0x7D];
-    D_800FEC8B[offset] = config[0x79];
-    D_800FEC8C[offset] = config[0x7A];
-    D_800FEC8D[offset] = config[0x82];
+    *(s32 *)(g_profileSlotResetWord + offset) = 0;
+    g_profileSlotIndices[offset] = profileSlot;
+    g_profileSlotResetFlags[offset] = 0;
+    g_profileSlotEnabledFlags[offset] = 1;
+    XStdio_FormatBuffer(entry, g_profileSlotNameFormat, profileSlot + 1);
+    config = g_playerSettings + profileSlot * 0x96;
+    g_profileSlotSettingsByte7B[offset] = config[0x7B];
+    g_profileSlotSettingsByte7D[offset] = config[0x7D];
+    g_profileSlotSettingsByte79[offset] = config[0x79];
+    g_profileSlotSettingsByte7A[offset] = config[0x7A];
+    g_profileSlotSettingsByte82[offset] = config[0x82];
 }
 
-void Player_SetProfileValue14(void *arg0, unsigned char arg1) {
-    ((ObjCode8022E938 *)arg0)->value14 = arg1;
+void Player_SetProfileValue14(void *profileStorage, unsigned char value) {
+    ((ObjCode8022E938 *)profileStorage)->value14 = value;
 }
 
 /** Advance the byte at offset 0x14 by ten. */
@@ -143,8 +143,8 @@ void Player_AddTenToProfileValue14(void *object) {
 }
 
 /** Read the byte at object offset 0x14. */
-unsigned char Player_GetProfileValue14(ObjCode8022E938 *arg0) {
-    return arg0->value14;
+unsigned char Player_GetProfileValue14(ObjCode8022E938 *profileStorage) {
+    return profileStorage->value14;
 }
 
 /** Store a byte in the object field at offset 0x15. */
@@ -158,8 +158,8 @@ int Player_AddFiftyToProfileValue15(void *player) {
     return v;
 }
 
-unsigned char Player_GetProfileValue15(ObjCode8022E938 *arg0) {
-    return arg0->value15;
+unsigned char Player_GetProfileValue15(ObjCode8022E938 *profileStorage) {
+    return profileStorage->value15;
 }
 
 /** Store the supplied byte at offset 0x16. */
@@ -178,8 +178,8 @@ unsigned char Player_GetProfileValue16(ObjCode8022E938 *object) {
     return object->value16;
 }
 
-void Player_SetProfileProgress(void *arg0, int arg1) {
-    ((ObjCode8022E938 *)arg0)->progress = arg1;
+void Player_SetProfileProgress(void *profileStorage, int progress) {
+    ((ObjCode8022E938 *)profileStorage)->progress = progress;
 }
 
 /** Advance the word at offset 0x10 by 0x500. */
@@ -309,15 +309,15 @@ void Player_SetAchievementFlag2F(Profile *player, s32 achievementIndex) {
     Defs_SetBitValue(&player->achievementFlags[0x2F], achievementIndex, 1);
 }
 
-s32 Player_HasProfileUnlockFlag(u8 *arg0, s32 arg1)
+s32 Player_HasProfileUnlockFlag(u8 *profileBytes, s32 unlockIndex)
 {
-  if (arg1 == 0x10)
+  if (unlockIndex == 0x10)
   {
     return 1;
   }
-  if (arg1 == 0x11)
+  if (unlockIndex == 0x11)
   {
-    if (arg1 || arg0)
+    if (unlockIndex || profileBytes)
     {
       return 1;
     }
@@ -326,7 +326,7 @@ s32 Player_HasProfileUnlockFlag(u8 *arg0, s32 arg1)
       return 1;
     }
   }
-  return Defs_TestBit(arg0 + 0x79, arg1);
+  return Defs_TestBit(profileBytes + 0x79, unlockIndex);
 }
 
 void Player_SetAchievementFlagByIndex(Profile *player, s32 achievementIndex) {
@@ -349,24 +349,24 @@ void Player_SetAchievementFlagByIndex(Profile *player, s32 achievementIndex) {
     Defs_SetBitValue(achievementBits, mappedAchievementIndex, 1);
 }
 
-s32 Player_GetProfileAchievementFlag(Profile *profile, s32 arg1) {
-    u8 *var_a0;
-    s32 index = arg1;
+s32 Player_GetProfileAchievementFlag(Profile *profile, s32 achievementIndex) {
+    u8 *achievementBits;
+    s32 index = achievementIndex;
 
     switch (index) {
     case 16:
-        var_a0 = &profile->achievementFlags[0x2E];
+        achievementBits = &profile->achievementFlags[0x2E];
         index = 0;
         break;
     case 17:
-        var_a0 = &profile->achievementFlags[0x2E];
+        achievementBits = &profile->achievementFlags[0x2E];
         index = 1;
         break;
     default:
-        var_a0 = &profile->achievementFlags[0x31];
+        achievementBits = &profile->achievementFlags[0x31];
         break;
     }
-    return Defs_TestBit(var_a0, index);
+    return Defs_TestBit(achievementBits, index);
 }
 
 void Player_SetAchievementFlag7(Profile *record, s32 achievementIndex) {
@@ -378,7 +378,7 @@ s32 Player_TestAchievementFlag7(Profile *record, s32 index) {
     return Defs_TestBit(&record->achievementFlags[7], index);
 }
 
-void Player_BuildWeaponHandTransform(char *arg0) {
+void Player_BuildWeaponHandTransform(char *weaponActor) {
     CVector3 position;
     Matrix worldMatrix;
     CVector3 scaledOffset;
@@ -389,23 +389,23 @@ void Player_BuildWeaponHandTransform(char *arg0) {
     char *object;
     char *orientation;
 
-    object = ((ObjectLinks1DC *)(arg0))->unk_1D8;
-    handOffset = ((struct ObjectState44 *) D_800D052C[((ObjectState630 *) object)->unk_62E])->unk_38;
-    if (D_800CA040_de != 0) {
+    object = ((PlayerProfileAttachmentView *)(weaponActor))->unk_1D8;
+    handOffset = ((struct WeaponHandOffsetView *) g_weaponInfoByType[((PlayerProfileWeaponView *) object)->unk_62E])->unk_38;
+    if (g_weaponHandMirrorX != 0) {
         handOffset.x = -handOffset.x;
     }
-    if (D_800CA044 != 0) {
+    if (g_weaponHandMirrorY != 0) {
         handOffset.y = -handOffset.y;
     }
-    if (D_800CA048 != 0) {
+    if (g_weaponHandMirrorZ != 0) {
         handOffset.z = -handOffset.z;
     }
-    Graphu64_ScaleVector(&scaledOffset, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
+    Graphu64_ScaleVector(&scaledOffset, &((PlayerProfileAttachmentView *)(weaponActor))->unk_50, 0.1f);
     Graphu64_BuildScaleMatrix(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
     Graphu64_ScaleVector(&handOffset, &handOffset, -10.24f);
-    if (((ObjectState630 *)(object))->unk_5DC.v0 != 0) {
-        Graphu64_GetMatrixTranslation(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
-        MatrixFromQuaternion((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),
+    if (((PlayerProfileWeaponView *)(object))->unk_5DC.v0 != 0) {
+        Graphu64_GetMatrixTranslation(((PlayerProfileWeaponView *)(object))->unk_5DC.v1 + 0x160, &position);
+        MatrixFromQuaternion((CQuatern *)(((PlayerProfileWeaponView *)(object))->unk_5DC.v1 + 0x140),
                       &worldMatrix);
     } else {
         Player_BuildPlayerViewTransform(object, &viewMatrix);
@@ -413,7 +413,7 @@ void Player_BuildWeaponHandTransform(char *arg0) {
         Graphu64_GetMatrixTranslation((char *)&viewMatrix, &position);
         MatrixFromQuaternion(&viewOrientation, &worldMatrix);
     }
-    orientation = arg0 + 0x74;
+    orientation = weaponActor + 0x74;
     TranslateMatrix(&offsetMatrix, handOffset.x, handOffset.y, handOffset.z);
     SwapMatrixUpForward(&offsetMatrix);
     Graphu64_MultiplyAffineMatrices((Matrix *)orientation, &offsetMatrix, &worldMatrix);

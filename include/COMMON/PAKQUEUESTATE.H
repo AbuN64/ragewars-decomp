@@ -14,18 +14,18 @@ typedef struct PakQueueState {
 } PakQueueState;
 
 /* The controller-pak message queue: the queue member of the PakQueueState that starts 8 bytes lower. */
-extern OSMesgQueue D_8010FBC0;
+extern OSMesgQueue g_controllerReadMessageQueue;
 
 /* The four controller profiles, one per port. */
-extern struct ControllerProfile D_8010F328[4];
+extern struct ControllerProfile g_controllerProfiles[4];
 /* The combined input record of all four controllers (Control_ReadControllerStates). */
-extern struct ControllerProfile D_8010B0E0;
+extern struct ControllerProfile g_combinedControllerProfile;
 
 
 
 
-struct ObjectState30;
-typedef struct ObjectState30 ObjectState30;
+struct ControllerInputByteStateView;
+typedef struct ControllerInputByteStateView ControllerInputByteStateView;
 
 
 struct Obj80264124;
@@ -45,15 +45,15 @@ struct Obj80264124 {
     char object[1];
 };
 
-extern void Control_RefreshControllerConnection(void *arg0);
+extern void Control_RefreshControllerConnection(void *controllerProfile);
 
 extern int Control_IsStartButtonSet(Shared_Effect *effect);
 
 
 
 
-struct ObjectState224;
-typedef struct ObjectState224 ObjectState224;
+struct ControllerInputRenderView;
+typedef struct ControllerInputRenderView ControllerInputRenderView;
 
 extern int Control_CountConnectedControllers(void);
 
@@ -66,11 +66,11 @@ extern void Control_ReleasePakLock(void);
 
 extern int Control_IsButtonBSet(Shared_Effect *effect);
 
-extern float D_800C4308_de;
+extern float g_controllerRumbleUpdateInterval;
 
 
-struct ObjectState30;
-struct ObjectState30 {
+struct ControllerInputByteStateView;
+struct ControllerInputByteStateView {
     unsigned char padding_0[44];
     s8 unk_2C;
     s8 unk_2D;
@@ -92,13 +92,13 @@ extern void Control_PollControllerPaks(void);
 extern int Control_IsButtonAPressed(struct ControllerProfile *controllerProfile);
 extern void Control_ResetControllerPak(struct ControllerProfile *pakProfile);
 
-extern int Control_IsControllerPakPresent(int arg0);
+extern int Control_IsControllerPakPresent(int controllerPort);
 
 struct Obj80264124;
 typedef struct Obj80264124 Obj80264124;
 
-struct ObjectState224;
-struct ObjectState224 {
+struct ControllerInputRenderView;
+struct ControllerInputRenderView {
     s32 unk_0;
     char pad0[0x4 - 0x0 - sizeof(s32)];
     s8 unk_4;
@@ -142,7 +142,7 @@ struct ObjectState224 {
 
 extern void Control_CommitControllerInputs(void);
 
-extern f32 Rumble_GetSpatialEffectLevel(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+extern f32 Rumble_GetSpatialEffectLevel(void *effectPool, s32 positionXBits, s32 positionYBits, s32 positionZBits);
 
 extern void Control_ReadControllerStates(void);
 extern void Control_CommitProfileInput(void *controllerProfile);

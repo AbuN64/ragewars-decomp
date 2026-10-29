@@ -8,7 +8,7 @@ unsigned int func_802BD010_de_padding_BDBA8[1] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BCFAC[1] = {
+unsigned int k_LibultraEncodedWordsBlock6[1] = {
     0x00080008,
 };
 #endif

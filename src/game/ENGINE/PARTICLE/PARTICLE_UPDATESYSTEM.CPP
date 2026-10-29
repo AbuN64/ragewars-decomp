@@ -10,18 +10,18 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "SYSTEM/EVENTS_DELIVERCONTACTEFFECT.H"
-extern char D_801379C0, D_8013B1A8;
+extern char g_actorParticleScene, g_dynamicLightPool;
 
-/* Sets an actor's field 0x14C to 1 when something is near it: a world object from D_8011FE88 whose field 0x174 is positive within 256 units, a player from the D_80145060 list other than the actor's owner whose field 0x5E4 is positive within 256 units, or another actor of type 0xC or 0x22 from the given list within 512 units (all compared as squared distances). */
-
-
+/* Sets an actor's field 0x14C to 1 when something is near it: a world object from D_8011FE88 whose field 0x174 is positive within 256 units, a player from the g_transientPlayerList list other than the actor's owner whose field 0x5E4 is positive within 256 units, or another actor of type 0xC or 0x22 from the given list within 512 units (all compared as squared distances). */
 
 
 
 
 
 
-extern SharedPlayer *D_80145060;
+
+
+extern SharedPlayer *g_transientPlayerList;
 extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 void Particle_MarkCrowdedActor(s32 unused, ActorParticleMarkCrowdedActor *actor, ActorParticleMarkCrowdedActor **others, s32 count) {
@@ -42,7 +42,7 @@ void Particle_MarkCrowdedActor(s32 unused, ActorParticleMarkCrowdedActor *actor,
             }
         }
     }
-    for (player = D_80145060; player != 0; player = player->views16E0.view16E0_1.next) {
+    for (player = g_transientPlayerList; player != 0; player = player->views16E0.view16E0_1.next) {
         if (actor->owner != player && player->views5E4.view5E4_2.health > 0) {
             Graphu64_SubtractVectors(&delta, &player->views0.view8_4.position, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 65536.0f) {
@@ -63,7 +63,7 @@ void Particle_MarkCrowdedActor(s32 unused, ActorParticleMarkCrowdedActor *actor,
 }
 
 #include "TYPES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 /* Views of the SN debug records this pass reads, with their original member names: CParticle_t (0x1F8 bytes),
@@ -119,34 +119,34 @@ typedef struct CParticleSystem_t {
     void *m_pParticleData;
     CParticle_t *m_pLastCreatedParticle;
 } CParticleSystem_t;
-extern const f32 D_800C4E4C_de,D_800C4E50_de;
+extern const f32 g_particleLightColorFadeScale,g_particleLightMovementDistanceSquared;
 extern void Particle_Update(void *),Particle_FinishActorEffects(void *),Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *,void *);
 extern void Particle_SpawnChildEffect(void *,s32,s32,s32);
 extern void SoundElement_PlaySoundAtPosition(s16,CVector3,s32,s32);
 extern void Graphu64_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
 /* Frees a particle: runs its end hook (and its swoosh teardown when it has swooshes), hands its dynamic light back to
- * D_8013B1A8, drops one owner count, unlinks it from its active list onto the free list and, when flagged, from the
+ * g_dynamicLightPool, drops one owner count, unlinks it from its active list onto the free list and, when flagged, from the
  * draw list. */
 static __inline__ void Particle_Free(CParticleSystem_t *world, CParticle_t *p) {
     Particle_FinishActorEffects(p);
     if (p->m_ActiveSwooshes) {
         Particle_UpdateMatrix(p);
-        Fx_DetachParticleSwooshes(&D_801379C0, p);
+        Fx_DetachParticleSwooshes(&g_actorParticleScene, p);
     }
     if (p->m_pDLight) {
-        Gdynlight_ReleaseLight(&D_8013B1A8, (s32)p->m_pDLight);
+        Gdynlight_ReleaseLight(&g_dynamicLightPool, (s32)p->m_pDLight);
         p->m_pDLight = 0;
     }
     if (p->m_pOwnerCount) {
         --*p->m_pOwnerCount;
     }
     p->m_dwFlags &= 0xFDFFFEFF;
-    func_80255ED8_de(p->m_pActiveList, p);
+    List_RemoveIntrusive(p->m_pActiveList, p);
     p->m_pActiveList = 0;
-    func_80255CB8_de(&world->m_FreeList, p);
+    List_PrependIntrusive(&world->m_FreeList, p);
     if (p->m_dwFlags & 0x01000000) {
-        func_80255ED8_de(&world->m_DrawList, p);
+        List_RemoveIntrusive(&world->m_DrawList, p);
     }
 }
 /* Steps the particle system once: marks every particle on the three active lists, then (outside a pause) advances the
@@ -174,18 +174,18 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
     u32 soundType;
     f32 savedStep;
     count = 0;
-    savedStep = D_800D2988;
+    savedStep = g_frameElapsedTime;
     for (idx = 0; idx < 3; idx++) {
         for (node = (world->m_ActiveList + idx)->head; node != 0; node = node->m_pNext) {
             node->m_dwFlags = (node->m_dwFlags & 0xFFEFFFFF) | 0x02000000;
             stepped[count++] = node;
         }
     }
-    if (D_80145088.status[7] != 0 || g_world.frozen != 0) {
+    if (g_frontendScreenStatus.status[7] != 0 || g_world.frozen != 0) {
         return;
     }
-    D_800D2988 = savedStep;
-    D_800D2988 = savedStep * D_800CD740_de;
+    g_frameElapsedTime = savedStep;
+    g_frameElapsedTime = savedStep * g_particleSimulationTimeScale;
     pairCount = 0;
     for (idx = 0; idx < count; idx++) {
         p = stepped[idx];
@@ -197,8 +197,8 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
             p->m_pDLight->m_bEnabled = 0;
         }
         if (p->m_cFrame < (f32)p->m_nFrames && p->m_nFrames != 1 && !(p->m_dwFlags & 0x1000)) {
-            if ((D_801031F0.max.x > p->m_vPos.x && D_801031F0.max.y > p->m_vPos.y && D_801031F0.max.z > p->m_vPos.z &&
-                 D_801031F0.min.x <= p->m_vPos.x && D_801031F0.min.y <= p->m_vPos.y && D_801031F0.min.z <= p->m_vPos.z) ||
+            if ((g_cameraVolumeBounds.max.x > p->m_vPos.x && g_cameraVolumeBounds.max.y > p->m_vPos.y && g_cameraVolumeBounds.max.z > p->m_vPos.z &&
+                 g_cameraVolumeBounds.min.x <= p->m_vPos.x && g_cameraVolumeBounds.min.y <= p->m_vPos.y && g_cameraVolumeBounds.min.z <= p->m_vPos.z) ||
                 p->m_nObjType == 0x41E) {
                 Particle_Update(p);
                 light = p->m_pDLight;
@@ -207,9 +207,9 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
                     light->x = p->m_vPos.x;
                     light->y = p->m_vPos.y;
                     light->z = p->m_vPos.z;
-                    light->m_ColorFade = p->m_Alpha * D_800C4E4C_de;
+                    light->m_ColorFade = p->m_Alpha * g_particleLightColorFadeScale;
                 }
-                p->m_cFrame += D_800D2988;
+                p->m_cFrame += g_frameElapsedTime;
             } else {
                 if (!(p->m_dwFlags & 0x100)) {
                     continue;
@@ -264,7 +264,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
                     p = begin[j];
                     if (p->m_nObjType != 87) {
                         Graphu64_SubtractVectors(&delta, &p->m_vPos, &focus->m_vPos);
-                        if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= D_800C4E50_de) {
+                        if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= g_particleLightMovementDistanceSquared) {
                             p->m_nFrames = 1;
                         }
                     }
@@ -275,11 +275,11 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
             }
         }
     }
-    D_800D2988 = savedStep;
+    g_frameElapsedTime = savedStep;
 }
 
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "gbi.h"
 #include "COMMON/GAMEPLAY_CAMERA.H"
@@ -297,13 +297,13 @@ typedef struct ParticleDrawWorld {
     IntrusiveList render;
 } ParticleDrawWorld;
 extern Gfx *g_displayListCursor;
-extern GlobalsMenuSetOptionsSceneSelection D_80140FE8_de;
-extern s32 D_80140FF8, D_800D297C;
-extern float D_800C4E54_de;
+extern GlobalsMenuSetOptionsSceneSelection g_gameplayCameraList;
+extern s32 g_playerWeaponClassMode, g_lightingBufferIndex;
+extern float g_particleRibbonHeightScale;
 extern void Geometry_SetColorDither(s32 ditherMode);
 extern s32 Visdata_TestBoxAgainstFrustum(CQuatern *planes, Box *box);
 extern void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view);
-extern void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *particle, PackedMatrixWords *matrix);
+extern void Fx_AddParticleRibbonSamples(ParticleRibbonStorageView *effectWorld, Shared_Particle *particle, PackedMatrixWords *matrix);
 void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
     Box box;
     CVector3 transformed;
@@ -331,8 +331,8 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     if (!(xScale <= xyScale)) xyScale = xScale;
                     maximum = zScale;
                     if (!(xyScale <= maximum)) maximum = xyScale;
-                    height = maximum * D_800C4E54_de;
-                    radius = height * D_800C4E58_de[0];
+                    height = maximum * g_particleRibbonHeightScale;
+                    radius = height * g_particleOwnerImpactRadiusAndStrength[0];
                     minX = node->particle.inst.pos.x - radius;
                     box.min.x = minX;
                     maxX = node->particle.inst.pos.x + radius;
@@ -356,14 +356,14 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
             do {
                 if (visible) {
                     if (!built) {
-                        if (D_80140FF8 == 1) {
-                            camera = D_80140FE8_de.camera;
+                        if (g_playerWeaponClassMode == 1) {
+                            camera = g_gameplayCameraList.camera;
                             Graphu64_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
                             depth = transformed.z;
                             if (depth < 0.0f) depth = -depth;
-                            Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);
+                            Particle_BuildMatrix(&node->particle, &node->particle.mtx[g_lightingBufferIndex], camera, depth);
                         } else {
-                            Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], 0, 0.0f);
+                            Particle_BuildMatrix(&node->particle, &node->particle.mtx[g_lightingBufferIndex], 0, 0.0f);
                         }
                         node->particle.flags |= 0x100000;
                     }
@@ -376,20 +376,20 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     skipAttached = node->particle.desc->flags & 0x10000;
                 } else {
                     if (!node->particle.drawWhenHidden || built) break;
-                    if (D_80140FF8 == 1) {
-                        camera = D_80140FE8_de.camera;
+                    if (g_playerWeaponClassMode == 1) {
+                        camera = g_gameplayCameraList.camera;
                         Graphu64_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
                         depth = transformed.z;
                         if (depth < 0.0f) depth = -depth;
-                        Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);
+                        Particle_BuildMatrix(&node->particle, &node->particle.mtx[g_lightingBufferIndex], camera, depth);
                     } else {
-                        Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], 0, 0.0f);
+                        Particle_BuildMatrix(&node->particle, &node->particle.mtx[g_lightingBufferIndex], 0, 0.0f);
                     }
                     node->particle.flags |= 0x100000;
                     skipAttached = node->particle.desc->flags & 0x10000;
                 }
                 if (!skipAttached) {
-                    Fx_AddParticleRibbonSamples(&D_801379C0, &node->particle, &node->particle.mtx[D_800D297C]);
+                    Fx_AddParticleRibbonSamples(&g_actorParticleScene, &node->particle, &node->particle.mtx[g_lightingBufferIndex]);
                 }
             } while (0);
         }
@@ -463,11 +463,11 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
         if (actor->linked)
         {
           Particle_UpdateMatrix(actor);
-          Fx_DetachParticleSwooshes(&D_801379C0, actor);
+          Fx_DetachParticleSwooshes(&g_actorParticleScene, actor);
         }
         if (actor->effect)
         {
-          Gdynlight_ReleaseLight(&D_8013B1A8, actor->effect);
+          Gdynlight_ReleaseLight(&g_dynamicLightPool, actor->effect);
           actor->effect = 0;
         }
         if (actor->refs)
@@ -475,12 +475,12 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
           --(*actor->refs);
         }
         actor->flags &= 0xFDFFFEFF;
-        func_80255ED8_de(actor->list, actor);
+        List_RemoveIntrusive(actor->list, actor);
         actor->list = 0;
-        func_80255CB8_de(world->freeList, actor);
+        List_PrependIntrusive(world->freeList, actor);
         if (actor->flags & 0x1000000)
         {
-          func_80255ED8_de(world->activeList, actor);
+          List_RemoveIntrusive(world->activeList, actor);
         }
       }
       }
@@ -553,19 +553,19 @@ void Particle_RetireOwnedActors(ActorWorld *world, void *owner) {
                     Particle_FinishActorEffects(actor);
                     if (actor->linked) {
                         Particle_UpdateMatrix(actor);
-                        Fx_DetachParticleSwooshes(&D_801379C0, actor);
+                        Fx_DetachParticleSwooshes(&g_actorParticleScene, actor);
                     }
                     if (actor->handle) {
-                        Gdynlight_ReleaseLight(&D_8013B1A8, actor->handle);
+                        Gdynlight_ReleaseLight(&g_dynamicLightPool, actor->handle);
                         actor->handle = 0;
                     }
                     if (actor->counter) --*actor->counter;
                     actor->flags &= 0xFDFFFEFF;
-                    func_80255ED8_de(actor->list, actor);
+                    List_RemoveIntrusive(actor->list, actor);
                     actor->list = 0;
-                    func_80255CB8_de(&world->active, actor);
+                    List_PrependIntrusive(&world->active, actor);
                     if (actor->flags & 0x1000000)
-                        func_80255ED8_de(&world->secondary, actor);
+                        List_RemoveIntrusive(&world->secondary, actor);
                 }
             }
         }

@@ -1,11 +1,11 @@
 #include "sdk/thread_queue.h"
 #include "include_asm.h"
-#include "COMMON/LONE/D_800D5268_de.H"
+#include "COMMON/LONE/OS_RUNNABLE_THREAD_QUEUE.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CTX.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "AUDIO/LEOINTERRUPT.H"
 
 void Audio_AbortDiskTransfer(void) {
@@ -13,7 +13,7 @@ void Audio_AbortDiskTransfer(void) {
     u32 status;
 
     status = *(volatile u32 *)0xA4600010;
-    diskTransferInfo = (DiskTransferInfo *)(D_801487B4 + 0x14);
+    diskTransferInfo = (DiskTransferInfo *)(g_currentDiskPeripheralHandle + 0x14);
     while (status & 3) {
         status = *(volatile u32 *)0xA4600010;
     }
@@ -27,7 +27,7 @@ void Audio_AbortDiskTransfer(void) {
     {
         volatile u32 *statusAddr = (volatile u32 *)0xA4600010;
         s32 mask = 0x100401;
-        s32 *flagsAddr = &D_800D5258;
+        s32 *flagsAddr = &g_globalInterruptMask;
         s32 flags = *flagsAddr;
 
         *statusAddr = 2;
@@ -43,24 +43,24 @@ void Audio_PostDiskEventMessage(void) {
     s32 v0;
     s32 rem;
 
-    node = D_80149B50.cur;
+    node = g_piInterruptManager.cur;
     if (node != 0) {
         validCountValue = node->validCount;
         v1 = node->msgCount;
         if (validCountValue < v1) {
             v0 = node->first + validCountValue;
             rem = v0 % v1;
-            node->msg[rem] = D_80149B50.f4;
+            node->msg[rem] = g_piInterruptManager.f4;
             node->validCount = node->validCount + 1;
             if (*node->mtqueue != 0) {
-                __osEnqueueThread(&D_800D5268_de, __osPopThread(&node->mtqueue));
+                __osEnqueueThread(&g_osRunnableThreadQueue, __osPopThread(&node->mtqueue));
             }
         }
     }
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BCD4C[1] = {
+unsigned int k_bitsLabelWord[1] = {
     0x42697473,
 };
 #endif

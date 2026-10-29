@@ -3,31 +3,31 @@
 /* DATA_800D299C.CPP */
 /* ROM-grounded data: rodata/writable/800D299C */
 #ifdef VERSION_DE
-unsigned int D_blob_phase2_6d7b285986a0b2aeb81a[15] = {
+unsigned int g_SchedHandlerspcompletionEncodedWordsBlock1[15] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x48800000, 0x00000001, 0x00000000, 0x800E4C00,
     0x00000800, 0x00000000, 0x00000000, 0x00000001, 0x00000001, 0x00000000, 0x00000000,
 };
 #endif
 #ifdef VERSION_EU
-unsigned int D_blob_phase2_6d7b285986a0b2aeb81a[15] = {
+unsigned int g_SchedHandlerspcompletionEncodedWordsBlock1[15] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x48800000, 0x00000001, 0x00000000, 0x800F4C00,
     0x00000800, 0x00000000, 0x00000000, 0x00000001, 0x00000001, 0x00000000, 0x00000000,
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned int D_blob_phase2_6d7b285986a0b2aeb81a[15] = {
+unsigned int g_SchedHandlerspcompletionEncodedWordsBlock1[15] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x48800000, 0x00000001, 0x00000000, 0x800EEC00,
     0x00000800, 0x00000000, 0x00000000, 0x00000001, 0x00000001, 0x00000000, 0x00000000,
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_blob_phase2_6d7b285986a0b2aeb81a[15] = {
+unsigned int g_SchedHandlerspcompletionEncodedWordsBlock1[15] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x48800000, 0x00000001, 0x00000000, 0x800E2C00,
     0x00000800, 0x00000000, 0x00000000, 0x00000001, 0x00000001, 0x00000000, 0x00000000,
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_6d7b285986a0b2aeb81a[15] = {
+unsigned int g_SchedHandlerspcompletionEncodedWordsBlock1[15] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x48800000, 0x00000001, 0x00000000, 0x800E8C00,
     0x00000800, 0x00000000, 0x00000000, 0x00000001, 0x00000001, 0x00000000, 0x00000000,
 };
@@ -75,17 +75,17 @@ unsigned int D_src_55fe5453[63] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
-extern char D_00293DE4[];
-extern char D_00293E60[];
-extern char D_00293E90[];
-extern char D_00293EAC[];
-extern char D_00293F38[];
+extern char g_setN64_InitializeFrontendScreenStateEntry[];
+extern char g_setN64_ExitSessionAndDisablePaksEntry[];
+extern char g_setN64_DrawRoundTimeoutSessionEntry[];
+extern char g_setN64_ResetSceneForIntroEntry[];
+extern char g_setN64_AdvanceIntroForMemorySizeEntry[];
 extern char D_00293FE4[];
-extern char D_00294120[];
-extern char D_00294128[];
-extern char D_0029414C[];
-unsigned int D_blob_53acc8abeee6cf9b8269[9] = {
-    (unsigned int)D_00293DE4, (unsigned int)D_00293E60, (unsigned int)D_00293E90, (unsigned int)D_00293EAC, (unsigned int)D_00293F38, (unsigned int)D_00293FE4, (unsigned int)D_00294120, (unsigned int)D_00294128,
-    (unsigned int)D_0029414C,
+extern char g_setN64_InitializeMode2Entry[];
+extern char g_setN64_AdvanceToModeFiveEntry[];
+extern char g_setN64_DrawCenteredIntroTextEntry[];
+unsigned int g_SchedHandlerspcompletionEncodedWords[9] = {
+    (unsigned int)g_setN64_InitializeFrontendScreenStateEntry, (unsigned int)g_setN64_ExitSessionAndDisablePaksEntry, (unsigned int)g_setN64_DrawRoundTimeoutSessionEntry, (unsigned int)g_setN64_ResetSceneForIntroEntry, (unsigned int)g_setN64_AdvanceIntroForMemorySizeEntry, (unsigned int)D_00293FE4, (unsigned int)g_setN64_InitializeMode2Entry, (unsigned int)g_setN64_AdvanceToModeFiveEntry,
+    (unsigned int)g_setN64_DrawCenteredIntroTextEntry,
 };
 #endif

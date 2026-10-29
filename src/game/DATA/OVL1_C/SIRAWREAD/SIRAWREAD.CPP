@@ -6,7 +6,7 @@ const char g_sirawreadText[15] =
 #endif
 
 #if defined(VERSION_US)
-unsigned char rodata_unresolved_800C7913[13] = {
+unsigned char k_SirawreadEncodedBytes[13] = {
     0x00, 0x10, 0x00, 0x0B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0x53, 0x4D, 0x48,
 };
 #endif
@@ -16,7 +16,7 @@ unsigned char rodata_unresolved_800C7913[13] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C8FB3[13] = {
+unsigned char k_SirawreadEncodedBytesBlock2[13] = {
     0x00, 0x00, 0x21, 0x02, 0x50, 0x00, 0x20, 0xF6, 0xE0, 0x00, 0x20, 0xFA, 0x30,
 };
 #endif
@@ -26,7 +26,7 @@ unsigned char rodata_unresolved_800C8FB3[13] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C85E3[13] = {
+unsigned char k_SirawreadEncodedBytesBlock1[13] = {
     0x00, 0x40, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00,
 };
 #endif
@@ -36,7 +36,7 @@ unsigned char rodata_unresolved_800C85E3[13] = {
 #endif
 
 #if defined(VERSION_DE)
-char rodata_unresolved_800C79F3[13] =
+char s_SirawreadIoSirawwritText[13] =
     "\000io/sirawwrit";
 #endif
 
@@ -52,7 +52,7 @@ const unsigned char s_sirawreadText[15] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800CCC43[1] = {
+unsigned char k_SirawreadEncodedBytesBlock3[1] = {
     0xE0,
 };
 #endif

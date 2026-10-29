@@ -4,9 +4,9 @@
 #include "TYPES.H"
 #include "SYSTEM/POLYTRAK2_CHOOSEQUANTIZEDTRACKRATE.H"
 
-/* Converts an amount over a period into a whole rate: returns D_800C410C_de for an amount
- * equal to it or a period not above D_800C9200; otherwise the ratio scaled by D_800C9200 + 4 and rounded up
- * when that stays below the limit D_800D0DA0, else the ratio scaled by D_800C9208 rounded up when that
+/* Converts an amount over a period into a whole rate: returns g_motionQuantizedRateZero for an amount
+ * equal to it or a period not above g_motionQuantizedRatePeriodThreshold; otherwise the ratio scaled by g_motionQuantizedRatePeriodThreshold + 4 and rounded up
+ * when that stays below the limit g_motionMinimumQuantizedRate, else the ratio scaled by g_motionQuantizedRateFallbackScale rounded up when that
  * stays below the limit, else the amount itself. Rounding up is a static helper. */
 
 
@@ -36,18 +36,18 @@ f32 Polytrak2_ChooseQuantizedTrackRate(f32 amount, f32 period) {
     f32 rate;
 
     rate = 0.0f;
-    if (amount == D_800C410C_de) {
-        return D_800C410C_de;
+    if (amount == g_motionQuantizedRateZero) {
+        return g_motionQuantizedRateZero;
     }
-    if (period <= D_800C9200) {
-        return D_800C410C_de;
+    if (period <= g_motionQuantizedRatePeriodThreshold) {
+        return g_motionQuantizedRateZero;
     }
-    rate = round_up(amount / period * D_800C4114_de, rate);
-    if (rate < D_800D0DA0) {
+    rate = round_up(amount / period * g_motionQuantizedRateScale, rate);
+    if (rate < g_motionMinimumQuantizedRate) {
         return rate;
     }
-    rate = round_up(amount / period * D_800C9208, 0.0f);
-    if (rate < D_800D0DA0) {
+    rate = round_up(amount / period * g_motionQuantizedRateFallbackScale, 0.0f);
+    if (rate < g_motionMinimumQuantizedRate) {
         return rate;
     }
     return amount;

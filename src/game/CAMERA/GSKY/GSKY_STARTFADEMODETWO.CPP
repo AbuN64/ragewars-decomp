@@ -3,7 +3,7 @@
 
 int Gsky_StartFadeModeTwo(void *outputStorage) {
     struct CCollisionResults *output = (void *)outputStorage;
-    output->field100 = 0;
+    output->contactValue = 0;
     output->typeFC = 2;
     return 2;
 }

@@ -3,20 +3,20 @@
 #if defined(VERSION_US)
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
-extern ResidentEventHandlerEntry D_800E5628[];
+extern ResidentEventHandlerEntry g_residentEventEntries[];
 
 s32 Frontend_DispatchResidentActorTableEvent(ActorDefinitionHeader *actor, s32 event, s32 eventArg2, s32 eventArg3, s32 eventArg4) {
     s32 index;
     index = 0;
-    if (D_800E5628[index].handler != 0) {
+    if (g_residentEventEntries[index].handler != 0) {
         do {
-            if (D_800E5628[index].event == event) {
-                if (D_800E5628[index].actorKind == actor->character || D_800E5628[index].actorKind == 30000) {
-                    return D_800E5628[index].handler(actor, event, eventArg2, eventArg3, eventArg4);
+            if (g_residentEventEntries[index].event == event) {
+                if (g_residentEventEntries[index].actorKind == actor->character || g_residentEventEntries[index].actorKind == 30000) {
+                    return g_residentEventEntries[index].handler(actor, event, eventArg2, eventArg3, eventArg4);
                 }
             }
             index++;
-        } while (D_800E5628[index].handler != 0);
+        } while (g_residentEventEntries[index].handler != 0);
     }
     return 0;
 }

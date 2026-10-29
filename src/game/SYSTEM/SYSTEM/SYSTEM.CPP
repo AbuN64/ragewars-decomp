@@ -7,13 +7,13 @@
 #include "RESMGR/X_PLUS.H"
 
 #if !(defined(VERSION_US))
-extern OSPiHandle_s *D_800D437C;
+extern OSPiHandle_s *g_peripheralHandleList;
 
 OSPiHandle_s *System_InitializeCartridgeHandle(void)
 {
     u32 domain = 0;
     u32 saveMask;
-    OSPiHandle_s *h = &D_801486C0;
+    OSPiHandle_s *h = &g_diskPiHandle;
     OSPiHandle_s **table;
 
     if (h->baseAddress == 0xB0000000)
@@ -32,7 +32,7 @@ OSPiHandle_s *System_InitializeCartridgeHandle(void)
     XPlus_FillMemory(&h->transferInfo.bytes, 0, sizeof(h->transferInfo.bytes));
 
     saveMask = __osDisableInt();
-    table = &D_800D437C;
+    table = &g_peripheralHandleList;
     h->next = *table;
     *table = h;
     __osRestoreInt(saveMask);

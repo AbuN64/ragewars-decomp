@@ -5,20 +5,20 @@
 #include "TYPES.H"
 
 /* Marks the pair ending at D_80154024 as set by storing one there, and stores its argument in the
-   word before it; Random_SetSelectedStage fills the pair ending at D_8015402C. */
+   word before it; Random_SetSelectedStage fills the pair ending at g_selectedLevelId. */
 
 void Random_SetMenuChoiceResult(s32 value) {
-    s32 *pair = &D_80154020.ready;
+    s32 *pair = &g_selectionMessageReply.ready;
 
     pair[0] = 1;
     pair[-1] = value;
 }
 
-/* Stores a pair of words: the second argument in D_8015402C and the first in the word before
+/* Stores a pair of words: the second argument in g_selectedLevelId and the first in the word before
    it; Random_SetMenuChoiceResult does the same for the pair ending at D_80154024. */
 
 void Random_SetSelectedStage(s32 first, s32 second) {
-    s32 *pair = &D_8015402C;
+    s32 *pair = &g_selectedLevelId;
 
     pair[0] = second;
     pair[-1] = first;
@@ -95,46 +95,46 @@ extern void Random_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 Random_GetStageTransitionResource(void);
 extern void Match_StartMatchTransition(GameSession *, s32);
 void Random_StartFragTagMatch(void) {
- Shared_Game *g=&D_801462C8;
+ Shared_Game *g=&g_gameSettings;
  if(g->controllerMode != 0) Random_InitGameStatus((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,1,0,0);
  else Random_InitGameStatus((f32)g->laps,0,g->trialScore,g->trialOther,1,0,0);
- Match_StartMatchTransition(&D_8011FAC0,Random_GetStageTransitionResource());
+ Match_StartMatchTransition(&g_gameSession,Random_GetStageTransitionResource());
 }
 
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
 void Random_StartCaptureTheFlagMatch(void) {
- Shared_Game *g=&D_801462C8;
+ Shared_Game *g=&g_gameSettings;
  if(g->controllerMode != 0) Random_InitGameStatus((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,0,1,1);
  else Random_InitGameStatus((f32)g->laps,0,g->trialScore,g->trialOther,0,1,1);
- Match_StartMatchTransition(&D_8011FAC0,Random_GetStageTransitionResource());
+ Match_StartMatchTransition(&g_gameSession,Random_GetStageTransitionResource());
 }
 
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
 void Random_StartTeamMatch(void) {
- Shared_Game *g=&D_801462C8;
+ Shared_Game *g=&g_gameSettings;
  if(g->controllerMode != 0) Random_InitGameStatus((f32)D_800E4680->time,D_800E4680->limit,D_800E4680->score,D_800E4680->other,0,1,0);
- else Random_InitGameStatus((f32)g->laps,D_801462C8.players,g->trialScore,g->trialOther,0,1,0);
- Match_StartMatchTransition(&D_8011FAC0,Random_GetStageTransitionResource());
+ else Random_InitGameStatus((f32)g->laps,g_gameSettings.players,g->trialScore,g->trialOther,0,1,0);
+ Match_StartMatchTransition(&g_gameSession,Random_GetStageTransitionResource());
 }
 
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
 void Random_StartIndividualMatch(void) {
- Shared_Game *g=&D_801462C8;
+ Shared_Game *g=&g_gameSettings;
  if(g->controllerMode != 0) Random_InitGameStatus((f32)D_800E4680->time,D_800E4680->score,D_800E4680->score,D_800E4680->other,0,0,0);
- else Random_InitGameStatus((f32)g->laps,D_801462C8.players,g->trialScore,g->trialOther,0,0,0);
- Match_StartMatchTransition(&D_8011FAC0,Random_GetStageTransitionResource());
+ else Random_InitGameStatus((f32)g->laps,g_gameSettings.players,g->trialScore,g->trialOther,0,0,0);
+ Match_StartMatchTransition(&g_gameSession,Random_GetStageTransitionResource());
 }
 
 /* Starts the match status block: the frag tag limit, the second score limit, the frag tag, team and
  * capture-the-flag switches and the mode, the time limit scaled by 900 (15 in controller modes 2 and 3,
  * -1 when there is no limit), then clears the score and count rows. */
-static inline CGameStatus *GameCounters(void) { return &D_801462C8.counters; }
+static inline CGameStatus *GameCounters(void) { return &g_gameSettings.counters; }
 void Random_InitGameStatus(f32 duration, s32 mode, s32 fragTagLimit, s32 otherLimit,
                      s32 fragTagOn, s32 teams, s32 ctfOn) {
     s32 i;
@@ -144,7 +144,7 @@ void Random_InitGameStatus(f32 duration, s32 mode, s32 fragTagLimit, s32 otherLi
     GameCounters()->m_bFragTagOn = fragTagOn;
     GameCounters()->teams = teams;
     GameCounters()->m_bCTFOn = ctfOn;
-    if ((u32)(D_801462C8.controllerMode - 2) < 2) {
+    if ((u32)(g_gameSettings.controllerMode - 2) < 2) {
         GameCounters()->timeLimit = duration * 15.0f;
     } else {
         GameCounters()->timeLimit = duration * 900.0f;

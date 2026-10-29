@@ -2,7 +2,7 @@
 
 /* DATA_800E2850.CPP */
 /* ROM-grounded data: rodata/writable/800E2850 */
-unsigned int D_blob_phase2_68c1c663cddeafbcff6d[3] = {
+unsigned int g_GControllerpakfilenamealphabetWords4[3] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
@@ -47,32 +47,32 @@ unsigned short g_controllerPakFilenameAlphabet[] = {
 
 /* 800E28A0.CPP */
 /* ROM-grounded data: rodata/writable/800E28A0 */
-unsigned int D_blob_phase2_5a247187d2e6747d8707[1] = {
+unsigned int g_GControllerpakfilenamealphabetWords3[1] = {
     0x00000002,
 };
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int D_blob_f32799a6cdf43a0d380f[3] = {
+unsigned int g_GControllerpakfilenamealphabetWords2[3] = {
     0x00002C00, 0x00000200, 0x00000001,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EEEC4[3] = {
+unsigned int k_GControllerpakfilenamealphabetEncodedWordsBlock1[3] = {
     0x00002C00, 0x00000200, 0x002BB820,
 };
 #endif
 
 /* 800E28A4.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
-unsigned int rodata_unresolved_800E28A4[3] = {
+unsigned int k_GControllerpakfilenamealphabetEncodedWords[3] = {
     0x00002C00, 0x00000200, 0x00000000,
 };
 #endif
 
 /* 800E28A4_2.CPP */
-unsigned int D_auto_rodata_writable_800E28B0[8] = {
+unsigned int g_GControllerpakfilenamealphabetWords1[8] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000000,
 };
 

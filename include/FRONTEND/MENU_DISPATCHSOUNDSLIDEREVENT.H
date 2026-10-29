@@ -1,5 +1,5 @@
 #ifndef FRONTEND_MENU_DISPATCHSOUNDSLIDEREVENT_H
 #define FRONTEND_MENU_DISPATCHSOUNDSLIDEREVENT_H
 #include "COMMON/OBJECTRECAT28.H"
-extern s32 Menu_DispatchSoundSliderEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Menu_DispatchSoundSliderEvent(void *actor, s32 event, s32 itemId, s32 value, s32 context);
 #endif

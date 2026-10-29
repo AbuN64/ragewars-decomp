@@ -24,7 +24,7 @@ CVector3 Track_EvaluateTrackColor(f32 t) {
     CVector3 a;
     CVector3 b;
 
-    track = SetN64_GetPackSection(D_800E2830->resource, 1);
+    track = SetN64_GetPackSection(g_cinemaSequenceState->resource, 1);
     count = track[1];
     key = (PositionKey *)(track + 2);
     if (count == 0) {
@@ -61,7 +61,7 @@ CVector3 Track_EvaluateTrackColor(f32 t) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int rodata_func_8040170C_de_800DB7DC[2] = {
+const unsigned int g_trackCameraInterpolationUnitConstantsDe[2] = {
     0x3F800000, 0x3F800000,
 };
 #endif

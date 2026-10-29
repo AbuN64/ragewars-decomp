@@ -7,7 +7,7 @@
 
 
 
-extern OSTimer *D_800D5280;
+extern OSTimer *g_timerListSentinel;
 
 u64 __osInsertTimer(OSTimer *t)
 {
@@ -15,15 +15,15 @@ u64 __osInsertTimer(OSTimer *t)
     u64 tim;
     u32 savedMask = __osDisableInt();
 
-    timep = D_800D5280->next;
+    timep = g_timerListSentinel->next;
     tim = t->value;
-    for (; timep != D_800D5280 && tim > timep->value; timep = timep->next) {
+    for (; timep != g_timerListSentinel && tim > timep->value; timep = timep->next) {
         tim -= timep->value;
     }
 
     t->value = tim;
 
-    if (timep != D_800D5280) {
+    if (timep != g_timerListSentinel) {
         timep->value -= tim;
     }
 

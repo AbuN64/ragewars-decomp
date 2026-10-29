@@ -3,7 +3,7 @@
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/S2.H"
 #include "TYPES.H"
-#include "COMMON/OBJECTLINKS1458.H"
+#include "COMMON/NAVIGATION_ACTOR_SEARCH_VIEWS.H"
 #include "COMMON/SELF.H"
 
 void Nav_RequestRandomArmedWeapon(void *brain) {
@@ -16,7 +16,7 @@ void Nav_RequestRandomArmedWeapon(void *brain) {
         } while (chosenWeapon >= 0x10);
         ((Shared_ActorView *)controller->player)->nextWeapon = chosenWeapon;
         if (chosenWeapon != ((Shared_ActorView *)controller->player)->selectedAction) {
-            controller->unk2E4 = 0;
+            controller->actionDelay = 0;
         }
     }
 }

@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "FRONTEND/PAKINTERFACE_LOADLINKEDPLAYERPROFILE.H"
 
-/* Copies the block's chosen 400-byte record for the place at slot arg0 into D_80102B00[arg0]: when
+/* Copies the block's chosen 400-byte record for the place at slot arg0 into g_localPlayerProfiles[arg0]: when
    the place is claimed (id != -1), copies the owning player's chosen slot into the record and marks
    the record's owned-slot byte, then always stamps the record's place-id byte. */
 
@@ -14,7 +14,7 @@
 
 
 
-extern char D_80102B00[];
+extern char g_localPlayerProfiles[];
 
 
 
@@ -24,12 +24,12 @@ void PAKInterface_LoadLinkedPlayerProfile(s32 linkIndex) {
     s32 place;
     s32 owner;
 
-    place = D_800E54A4->links[linkIndex].player;
-    owner = D_800E54A4->links[linkIndex].entry;
-    record = &D_80102B00[linkIndex * 400];
+    place = g_pakProfileScreenState->links[linkIndex].player;
+    owner = g_pakProfileScreenState->links[linkIndex].entry;
+    record = &g_localPlayerProfiles[linkIndex * 400];
     if (place != -1) {
-        XPlus_CopyBytes(record, D_800E54A4->players[place].slots[owner], 400);
-        ((struct RecordRecAtD *)record)->slot = (s8) owner;
+        XPlus_CopyBytes(record, g_pakProfileScreenState->players[place].slots[owner], 400);
+        ((struct LinkedProfileOwnerRecord *)record)->slot = (s8) owner;
     }
-    ((struct RecordRecAtD *)record)->place = (s8) place;
+    ((struct LinkedProfileOwnerRecord *)record)->place = (s8) place;
 }

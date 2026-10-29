@@ -5,7 +5,7 @@
 #include "TYPES.H"
 
 /* Handles a player's death: stops the body's motion at 0x1C to 0x24 and runs func_8044A07C_de; in a
-   single player game (D_801462E5) a player with limited lives at 0x1450 gets the death menu for its
+   single player game (g_motionVisibilitySettings) a player with limited lives at 0x1450 gets the death menu for its
    profile slot 0 to 3 on its view, and when D_80146938 asks and the player is out of a team game, once
    every active player among the first eight is out the team is revived through Player_PlacePlayerForRound (every
    active player in mode 2 when the mode 14 leader is down, and the leader in modes below 3); in
@@ -26,14 +26,14 @@ extern char D_00450AD0;
 extern char D_00450AF4;
 extern char D_00450B18;
 extern char D_00450B3C;
-extern char D_80145040;
+extern char g_playerViewRenderContext;
 
 extern void Player_ReleaseObjectHandles(void *);
 extern void Menu_OpenDialog(char *, char *, SharedPlayer *, void *, s32);
 extern SharedPlayer *Playerai_GetPlayerByIndex(char *, s32);
 extern void Player_PlacePlayerForRound(SharedPlayer *);
 
-void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
+void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, PlayerRespawnBodyView *body) {
     SharedPlayer *other;
     SharedPlayer *leader;
     s32 i;
@@ -44,7 +44,7 @@ void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
     body->motion[1] = 0;
     body->motion[2] = 0;
     Player_ReleaseObjectHandles(player);
-    if (D_801462C8.local != 0) {
+    if (g_gameSettings.local != 0) {
         if (player->views1450.view1450_2.infinite == 0) {
             switch (player->views1C.view5D4_46.slot) {
             case 0:
@@ -61,12 +61,12 @@ void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
                 break;
             }
         }
-        if (D_801462C8.counters.enabled != 0 && player->views5D8.view5D8_2.controls->team == 0 && player->views5D8.view5D8_2.controls->active != 0) {
+        if (g_gameSettings.counters.enabled != 0 && player->views5D8.view5D8_2.controls->team == 0 && player->views5D8.view5D8_2.controls->active != 0) {
             active = 0;
             out = 0;
             leader = 0;
             for (i = 0; i < 8; i++) {
-                other = Playerai_GetPlayerByIndex(&D_80145040, i);
+                other = Playerai_GetPlayerByIndex(&g_playerViewRenderContext, i);
                 if (other != 0) {
                     if (other->views5D8.view5D8_2.controls->active != 0) {
                         active++;
@@ -80,15 +80,15 @@ void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
                 }
             }
             if (out == active) {
-                if (D_801462C8.counters.m_nTalsetLives == 2 && leader->views5E4.view5E4_3.alive == 0) {
+                if (g_gameSettings.counters.m_nTalsetLives == 2 && leader->views5E4.view5E4_3.alive == 0) {
                     for (i = 0; i < 8; i++) {
-                        other = Playerai_GetPlayerByIndex(&D_80145040, i);
+                        other = Playerai_GetPlayerByIndex(&g_playerViewRenderContext, i);
                         if (other != 0 && other->views5D8.view5D8_2.controls->active != 0) {
                             Player_PlacePlayerForRound(other);
                         }
                     }
                 }
-                if (D_801462C8.counters.m_nTalsetLives < 3) {
+                if (g_gameSettings.counters.m_nTalsetLives < 3) {
                     Player_PlacePlayerForRound(leader);
                 }
             }
@@ -102,13 +102,13 @@ void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
     }
 }
 
-extern s32 D_800C9FE4;
-extern s32 D_800CD6E0_de;
-extern void *D_800FE9F0;
-extern u8 D_800FEAD8[];
+extern s32 g_playerSequenceCompletionPending;
+extern s32 g_playerSequenceWindowEnabled;
+extern void *g_playerSequenceActor;
+extern u8 g_playerSequenceSavedViewBytes[];
 
 
-extern char D_0022ECCC;
+extern char g_playerSequenceCallbacks;
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 extern s32 CCinema_RequestTrackWithCallbacks(s32 requestId, void *requestContextCallback, VoidCallback completionCallback);
@@ -119,7 +119,7 @@ extern void *Scene_FindActorDefinition(Shared_World *world, s32 selection, s32 m
 
 
 
-void Playerai_TryStartPlayerSequence(ObjectLinks854 *playerActor, void *arg1, s32 sequenceType)
+void Playerai_TryStartPlayerSequence(PlayerSequenceActorView *playerActor, void *bodyActor, s32 sequenceType)
 {
     s32 enabled;
     u32 resource_flags;
@@ -132,7 +132,7 @@ void Playerai_TryStartPlayerSequence(ObjectLinks854 *playerActor, void *arg1, s3
     if (playerActor->unk_14 != 0) {
         resource = Scene_GetModelRecordByIndexPointer(&g_world, playerActor->unk_14);
         if (resource != 0) {
-            resource_flags = ((ObjectState108 *)(resource))->resourceFlagBits;
+            resource_flags = ((PlayerSequenceResourceView *)(resource))->resourceFlagBits;
         }
     }
 
@@ -145,7 +145,7 @@ void Playerai_TryStartPlayerSequence(ObjectLinks854 *playerActor, void *arg1, s3
     if (g_world.visibilityEnabled != 0) {
         enabled = 0;
     }
-    if (D_80145048 >= 2) {
+    if (g_playerCount >= 2) {
         enabled = 0;
     }
     if (sequenceType == 12) {
@@ -168,22 +168,22 @@ void Playerai_TryStartPlayerSequence(ObjectLinks854 *playerActor, void *arg1, s3
             void *data;
 
             data = playerActor->unk_5DC;
-            D_800C9FE4 = 1;
+            g_playerSequenceCompletionPending = 1;
             if (data != 0) {
                 for (i = 0; i < 4; i++) {
-                    D_800FEAD8[i] = ((struct ObjectState521 *) (((u8 *) playerActor->unk_5DC) + i))->unk_520;
+                    g_playerSequenceSavedViewBytes[i] = ((struct PlayerViewSavedBytes *) (((u8 *) playerActor->unk_5DC) + i))->unk_520;
                 }
             }
         }
-        D_800CD6E0_de = 0;
-        D_800FE9F0 = playerActor;
-        CCinema_RequestTrackWithCallbacks(sequenceType, 0, (VoidCallback)&D_0022ECCC);
+        g_playerSequenceWindowEnabled = 0;
+        g_playerSequenceActor = playerActor;
+        CCinema_RequestTrackWithCallbacks(sequenceType, 0, (VoidCallback)&g_playerSequenceCallbacks);
     }
 
     resource = Scene_FindActorDefinition(&g_world, -1, 0xC45);
     if (resource != 0) {
-        playerActor->unk_50 = ((ObjectState108 *)(resource))->unk_FC;
-        playerActor->unk_54 = ((ObjectState108 *)(resource))->unk_100;
-        playerActor->unk_58 = ((ObjectState108 *)(resource))->unk_104;
+        playerActor->unk_50 = ((PlayerSequenceResourceView *)(resource))->unk_FC;
+        playerActor->unk_54 = ((PlayerSequenceResourceView *)(resource))->unk_100;
+        playerActor->unk_58 = ((PlayerSequenceResourceView *)(resource))->unk_104;
     }
 }

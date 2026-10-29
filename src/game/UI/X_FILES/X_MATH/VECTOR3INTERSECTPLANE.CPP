@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "MATH/DOUBLEBITS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"
 #include "MATH/math_double.H"
@@ -18,42 +18,42 @@
 
 
 
-inline static f32 wrap(f32 arg0)
+inline static f32 wrap(f32 angle)
 {
-  f32 new_var3;
+  f32 angleReductionValue;
   f32 value;
-  f32 *new_var;
-  f32 new_var2;
-  value = arg0;
-  new_var2 = value;
+  f32 *angleWrapConstants;
+  f32 originalAngle;
+  value = angle;
+  originalAngle = value;
   if (1)
   {
-    if (((long long) (D_800C5C88_de < new_var2)) || (new_var2 < D_800C5C8C))
+    if (((long long) (k_xmathVectorAngleUpperThreshold < originalAngle)) || (originalAngle < k_xmathVectorAngleLowerThreshold))
     {
-      value = (f32) FloatModulo((f64) value, D_800C5C90_de);
+      value = (f32) FloatModulo((f64) value, k_xmathVectorAnglePeriodDouble);
     }
     else
     {
-      if (D_800C5C98_de[0] < value)
+      if (k_xmathVectorAngleWrapConstants[0] < value)
       {
-        new_var3 = D_800C5C98_de[0];
+        angleReductionValue = k_xmathVectorAngleWrapConstants[0];
         do
         {
-          value -= new_var3;
+          value -= angleReductionValue;
           if (1)
           {
           }
         }
-        while (new_var3 < value);
+        while (angleReductionValue < value);
       }
       if (value < 0.0f)
       {
         do
         {
-          new_var = D_800C5C98_de;
-          value += new_var[1];
+          angleWrapConstants = k_xmathVectorAngleWrapConstants;
+          value += angleWrapConstants[1];
         }
-        while (value < (new_var3 = 0.0f));
+        while (value < (angleReductionValue = 0.0f));
       }
     }
   }
@@ -63,16 +63,16 @@ inline static f32 wrap(f32 arg0)
 
 static inline f32 centered(f32 x)
 {
-  f32 new_var;
-  float new_var3;
-  f32 new_var2;
-  new_var = D_800C5C84;
-  new_var2 = x + new_var;
+  f32 centerOffset;
+  float shiftedAngle;
+  f32 wrappedAngle;
+  centerOffset = k_xmathVectorAngleCenterOffset;
+  wrappedAngle = x + centerOffset;
   {
-    new_var3 = new_var2;
+    shiftedAngle = wrappedAngle;
   }
-  new_var2 = wrap(new_var3);
-  return new_var2 - D_800CAE30;
+  wrappedAngle = wrap(shiftedAngle);
+  return wrappedAngle - k_xmathVectorAngleCenterResultOffset;
 }
 
 
@@ -123,11 +123,11 @@ void Vector3Subtract(void *destination, void *leftVector, void *rightVector) {
 
 /** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
 void Vector3Scale(void *destination, void *source, f32 scaleFactor) {
-    CVector3 *arg1_record = source;
-    CVector3 *arg0_record = destination;
-    arg0_record->x = arg1_record->x * scaleFactor;
-    arg0_record->y = arg1_record->y * scaleFactor;
-    arg0_record->z = arg1_record->z * scaleFactor;
+    CVector3 *sourceVector = source;
+    CVector3 *destinationVector = destination;
+    destinationVector->x = sourceVector->x * scaleFactor;
+    destinationVector->y = sourceVector->y * scaleFactor;
+    destinationVector->z = sourceVector->z * scaleFactor;
 }
 
 void Vector3Negate(void *destination, void *source) {
@@ -163,14 +163,14 @@ void Vector3Cross(CVector3 *out, CVector3 *a, CVector3 *b) {
     *out = tmp;
 }
 
-void XMath_EvaluateVectorLength(CVector3 *arg0)
+void XMath_EvaluateVectorLength(CVector3 *vector)
 {
   f32 sum;
-  sum = ((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (arg0->z * arg0->z);
-  if (!((((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (arg0->z * arg0->z)) <= 0.0f))
+  sum = ((vector->x * vector->x) + (vector->y * vector->y)) + (vector->z * vector->z);
+  if (!((((vector->x * vector->x) + (vector->y * vector->y)) + (vector->z * vector->z)) <= 0.0f))
   {
-    sum = arg0->z;
-    Gu_Sqrtf(((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (sum * sum));
+    sum = vector->z;
+    Gu_Sqrtf(((vector->x * vector->x) + (vector->y * vector->y)) + (sum * sum));
   }
 }
 
@@ -179,7 +179,7 @@ void Vector3Normalize(f32 *vector) {
     f32 scale;
 
     mag = safe_sqrt((vector[0] * vector[0]) + (vector[1] * vector[1]) + (vector[2] * vector[2]));
-    scale = D_800C5CA4_de / mag;
+    scale = k_xmathVectorNormalizeUnit / mag;
     vector[0] = vector[0] * scale;
     vector[1] = vector[1] * scale;
     vector[2] = vector[2] * scale;
@@ -199,24 +199,24 @@ void Vector3RotatePitch(CVector3 *destination, CVector3 *source, f32 angle) {
 
 void Vector3RotateYaw(CVector3 *destination, CVector3 *source, f32 angle) {
     CVector3 tmp;
-    f32 sp20;
-    f32 sp24;
+    f32 sineAngle;
+    f32 cosineAngle;
 
-    XMath_EvaluateSineCosine(angle, &sp20, &sp24);
-    tmp.x = (sp24 * source->x) + (sp20 * source->z);
+    XMath_EvaluateSineCosine(angle, &sineAngle, &cosineAngle);
+    tmp.x = (cosineAngle * source->x) + (sineAngle * source->z);
     tmp.y = source->y;
-    tmp.z = (sp24 * source->z) - (sp20 * source->x);
+    tmp.z = (cosineAngle * source->z) - (sineAngle * source->x);
     *destination = tmp;
 }
 
 void Vector3RotateRoll(CVector3 *destination, CVector3 *source, f32 angle) {
     CVector3 tmp;
-    f32 sp20;
-    f32 sp24;
+    f32 sineAngle;
+    f32 cosineAngle;
 
-    XMath_EvaluateSineCosine(angle, &sp20, &sp24);
-    tmp.x = (sp24 * source->x) - (sp20 * source->y);
-    tmp.y = (sp24 * source->y) + (sp20 * source->x);
+    XMath_EvaluateSineCosine(angle, &sineAngle, &cosineAngle);
+    tmp.x = (cosineAngle * source->x) - (sineAngle * source->y);
+    tmp.y = (cosineAngle * source->y) + (sineAngle * source->x);
     tmp.z = source->z;
     *destination = tmp;
 }
@@ -295,7 +295,7 @@ void Vector3IntersectPlane(CVector3 *intersectionOut, CVector3 *lineStart, CVect
     delta.z = lineEnd->z - lineStart->z;
     numerator = -((normalX * lineStart->x) + (normalY * lineStart->y) + (normalZ * lineStart->z) + planeOffset);
     denominator = (normalX * delta.x) + (normalY * delta.y) + (normalZ * delta.z);
-    if (!(denominator < D_800C5CAC_de) || (fraction = D_800C5CB4_de, !(D_800C5CB0_de < denominator))) {
+    if (!(denominator < k_xmathPlaneDenominatorUpperTolerance) || (fraction = k_xmathPlaneParallelFraction, !(k_xmathPlaneDenominatorLowerTolerance < denominator))) {
         fraction = numerator / denominator;
     }
     intersectionOut->x = lineStart->x + (fraction * delta.x);
@@ -303,12 +303,12 @@ void Vector3IntersectPlane(CVector3 *intersectionOut, CVector3 *lineStart, CVect
     intersectionOut->z = lineStart->z + (fraction * delta.z);
 }
 
-void XMath_CopyMatrix(void *arg0, void *arg1) {
-    char *dst = (char *)arg0;
-    char *src = (char *)arg1;
+void XMath_CopyMatrix(void *destination, void *source) {
+    char *dst = (char *)destination;
+    char *src = (char *)source;
     char *end = src + 0x40;
     do {
-        *(struct Shape_typemap_165 *)dst = *(struct Shape_typemap_165 *)src;
+        *(struct CacheResourceBlockView *)dst = *(struct CacheResourceBlockView *)src;
         src += 0x10;
         dst += 0x10;
     } while (src != end);

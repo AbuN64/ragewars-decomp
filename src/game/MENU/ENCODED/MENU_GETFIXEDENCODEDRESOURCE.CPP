@@ -8,7 +8,7 @@
 
 /* 80408AC4_6.CPP */
 #if defined(VERSION_DE)
-const unsigned int rodata_func_8043C688_de_800E21E8[35] = {
+const unsigned int g_Encoded_HandleUnlockedLevelSelectionConstantWords[35] = {
     0x0043C6C4, 0x0043C6CC, 0x0043C6D4, 0x0043C6DC, 0x0043C6E4, 0x0043C6EC, 0x0043C6F4, 0x0043C6FC,
     0x0043C704, 0x0043C70C, 0x0043C714, 0x00000000, 0x0043C820, 0x0043C828, 0x0043C830, 0x0043C838,
     0x0043C840, 0x0043C848, 0x0043C850, 0x0043C858, 0x0043C860, 0x0043C868, 0x0043C870, 0x00000000,
@@ -20,11 +20,11 @@ const unsigned int rodata_func_8043C688_de_800E21E8[35] = {
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-extern s32 D_auto_004360EC;
+extern s32 g_menuFixedEncodedResource;
 
-s32 *Menu_GetFixedEncodedResource(s32 arg0) {
-    arg0 -= 1;
-    return &D_auto_004360EC;
+s32 *Menu_GetFixedEncodedResource(s32 resourceId) {
+    resourceId -= 1;
+    return &g_menuFixedEncodedResource;
 }
 #else
 INCLUDE_ASM("ovl_80400000", Menu_GetFixedEncodedResource);
@@ -36,7 +36,7 @@ INCLUDE_ASM("ovl_80400000", Menu_GetFixedEncodedResource);
 
 #include "COMMON/SHARED_GAMESLOT.H"
 
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
 #include "COMMON/GAME_SESSION.H"
 #include "OVLGAME/SHAREDRECAT224.H"
@@ -101,18 +101,18 @@ static inline s32 findUnlocked(s32 level, s32 step) {
         } else if (level < 0) {
             level = 10;
         }
-        if (D_801462C8.unlockedLevels & levelBit(level)) {
+        if (g_gameSettings.unlockedLevels & levelBit(level)) {
             return level;
         }
     }
     return -1;
 }
 
-s32 Encoded_HandleUnlockedLevelSelection(s32 arg0, Shared_MenuInput *pad) {
+s32 Encoded_HandleUnlockedLevelSelection(s32 levelId, Shared_MenuInput *pad) {
     s32 target;
     Shared_Game *rules;
 
-    switch (D_80154034) {
+    switch (g_encodedSelectedLevelIndex) {
     default:
     case 0:
         target = 1000;
@@ -151,27 +151,27 @@ s32 Encoded_HandleUnlockedLevelSelection(s32 arg0, Shared_MenuInput *pad) {
 
     if (Control_IsAButtonPressed(pad->buttons) != 0) {
         if (target == 8000) {
-            D_801462C8.mode1E = 1;
+            g_gameSettings.mode1E = 1;
             Confirming_SelectConfirmingController(pad);
-            SetN64_SetTransitionTarget(&D_8011FAC0, 0x11);
+            SetN64_SetTransitionTarget(&g_gameSession, 0x11);
             return 1;
         }
         if (SetN64_IsModeThirteen() != 0) {
             Scene_SetSelection(&g_world, target, 2);
             return 0;
         }
-        rules = &D_801462C8;
+        rules = &g_gameSettings;
         rules->local = 0;
         rules->mode1E = 1;
         Confirming_SelectConfirmingController(pad);
-        SetN64_SelectSpawnAndStartSession(&D_8011FAC0, target);
+        SetN64_SelectSpawnAndStartSession(&g_gameSession, target);
         return 1;
     }
 
     if (((s32 (*)(s32))Control_IsLeftPressed)(pad->buttons) != 0) {
-        D_80154034 = findUnlocked(D_80154034, -1);
+        g_encodedSelectedLevelIndex = findUnlocked(g_encodedSelectedLevelIndex, -1);
     } else if (((s32 (*)(s32))Control_IsRightPressed)(pad->buttons) != 0) {
-        D_80154034 = findUnlocked(D_80154034, 1);
+        g_encodedSelectedLevelIndex = findUnlocked(g_encodedSelectedLevelIndex, 1);
     }
     return 0;
 }

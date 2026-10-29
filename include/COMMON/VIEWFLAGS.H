@@ -6,10 +6,10 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-/* The camera view fade timer, the word after the view flags D_80103220 (its own global: read with its own lui). */
-extern f32 D_800FF224_de;
+/* The camera view fade timer, the word after the view flags g_cameraRenderFlagState (its own global: read with its own lui). */
+extern f32 g_cameraFramingTransitionTimer;
 struct Triple;
-struct ObjRecAt260;
+struct CameraObjectPositionView;
 
 
 struct RacerViewport;
@@ -21,25 +21,25 @@ typedef struct Overlay Overlay;
 typedef CShakeAxis AxisWave;
 
 
-extern float D_800C3090_de;
+extern float g_cameraShakeDistanceComplement;
 
 
 
-struct ObjRecAtE4V1;
-typedef struct ObjRecAtE4V1 ObjRecAtE4V1;
+struct ShakeEmitterChannelView;
+typedef struct ShakeEmitterChannelView ShakeEmitterChannelView;
 
 
 
-struct ObjRecAt260;
-typedef struct ObjRecAt260 ObjRecAt260;
+struct CameraObjectPositionView;
+typedef struct CameraObjectPositionView CameraObjectPositionView;
 
-extern float D_800C3530_de;
+extern float k_cameraInitialBobAmplitudeY;
 
 
 struct Overlay;
 
 
-struct ObjRecAtE4V1;
+struct ShakeEmitterChannelView;
 
 struct CShake_t;
 typedef struct CShake_t CShake;
@@ -59,10 +59,10 @@ struct CShake_t {
 struct ThreeChannels;
 typedef struct ThreeChannels ThreeChannels;
 
-extern float D_800C352C_de;
+extern float k_cameraInitialBobAmplitudeX;
 
-struct State44;
-typedef struct State44 State44;
+struct LensFlareEffectState;
+typedef struct LensFlareEffectState LensFlareEffectState;
 
 struct Race;
 typedef struct Race Race;
@@ -154,21 +154,21 @@ struct Race {
 
 
 
-extern float D_800C3098_de;
+extern float g_cameraShakeYAngleScale;
 
-extern float D_800C8610;
-
-
-
-
-struct State44;
+extern float k_cameraInputSurfaceDistanceScale;
 
 
 
 
-extern float D_800C3094_de;
+struct LensFlareEffectState;
 
-extern float D_800C309C_de;
+
+
+
+extern float g_cameraShakeXAngleScale;
+
+extern float g_cameraShakeZAngleScale;
 
 
 struct ThreeChannels;
@@ -178,17 +178,17 @@ struct GameplayCamera;
 
 
 
-extern float D_800C3528_de;
+extern float k_cameraInputSurfaceLowerDistance;
 
 
-extern float D_800C3524_de;
+extern float k_cameraInputSurfaceUpperDistance;
 
 extern void Gsky_StartFade(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
 
 
-extern f32 D_800D05D0;
+extern f32 g_cameraViewportLeftInset;
 
-extern Box D_800FF208;
+extern Box g_cameraClipBounds;
 
 extern s32 Cinema_IsSequenceActive(void);
 #endif

@@ -9,8 +9,8 @@
 
 
 
-union func_802070D0_S3_U8;
-union func_802070D0_S3_U8 {
+union TriggeredPathActorPositionWords;
+union TriggeredPathActorPositionWords {
     u8 v0;
     f32 v1;
 };
@@ -28,17 +28,17 @@ struct Rec;
 typedef struct Rec Rec;
 
 
-struct func_802070D0_S3;
-typedef struct func_802070D0_S3 func_802070D0_S3;
+struct PathMotionActorView;
+typedef struct PathMotionActorView PathMotionActorView;
 
 
-extern float D_800C1AE0_de;
+extern float k_deviceInitialCharge;
 
 
 struct ActorMotionState;
 struct LevelActor;
 
-struct func_802070D0_S1;
+struct PathMotionInterpolationState;
 
 
 struct Rec;
@@ -50,21 +50,21 @@ struct Rec;
 struct Settings;
 typedef struct Settings Settings;
 
-union func_802070D0_S3_U8;
-typedef union func_802070D0_S3_U8 func_802070D0_S3_U8;
+union TriggeredPathActorPositionWords;
+typedef union TriggeredPathActorPositionWords TriggeredPathActorPositionWords;
 
-struct func_802070D0_S3;
-
-
+struct PathMotionActorView;
 
 
 
-struct Actor_func_80206DD4_de;
-typedef struct Actor_func_80206DD4_de Actor_func_80206DD4_de;
 
 
-struct func_80206604_G1;
-typedef struct func_80206604_G1 func_80206604_G1;
+struct MovingPlatformActorView;
+typedef struct MovingPlatformActorView MovingPlatformActorView;
+
+
+struct MovingActorGameFlagView;
+typedef struct MovingActorGameFlagView MovingActorGameFlagView;
 
 
 
@@ -78,17 +78,17 @@ union WaypointFlags {
 };
 
 
-struct func_802070D0_S2;
-typedef struct func_802070D0_S2 func_802070D0_S2;
+struct PathMotionWaypoint;
+typedef struct PathMotionWaypoint PathMotionWaypoint;
 
 union WaypointFlags;
 typedef union WaypointFlags WaypointFlags;
 
 
-struct Actor_func_80206DD4_de;
+struct MovingPlatformActorView;
 
 
-struct func_802070D0_S2;
+struct PathMotionWaypoint;
 
 
 
@@ -129,14 +129,14 @@ typedef struct CPlatformIntelligence CPlatformIntelligence;
 
 
 
-struct func_802070D0_S1;
-typedef struct func_802070D0_S1 func_802070D0_S1;
+struct PathMotionInterpolationState;
+typedef struct PathMotionInterpolationState PathMotionInterpolationState;
 
 
-struct func_80206604_G1;
+struct MovingActorGameFlagView;
 
 
-struct InputRecAt37;
+struct TriggeredMotionSoundOption;
 
 typedef struct ActorMotionDefinition {
     s32 flags; /* 0x0 */
@@ -203,8 +203,8 @@ typedef struct ActorMotionState {
     u8 pad114[8];
     void * transform; /* 0x11C */
     u8 pad120[0x4];
-    s32 unk124; /* 0x124 */
-    s32 unk128; /* 0x128 */
+    s32 animation; /* 0x124 */
+    s32 remainingCount; /* 0x128 */
     s32 unk12C; /* 0x12C */
     s32 unk130; /* 0x130 */
     f32 yaw; /* 0x134 */

@@ -5,46 +5,46 @@ struct ModelTreeNode;
 #define SPAN_1000_CODE_80275E44_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-extern void Region_UnmarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 arg1);
+extern void Region_UnmarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 nodeId);
 
 extern void Gregion_NoOperation(void);
 
 extern void Region_ClearNodeGroupFlag(void *modelTreeNode);
 
 
-extern float D_800C4A04_de;
+extern float g_regionCeilingDefaultUp;
 
 extern void Region_SetNodeGroupFlag(void *modelTreeNode);
 
-extern float D_800CD3F8[];
+extern float g_lightVolumeSphereDistanceLookup[];
 
-extern float D_800C4A00_de;
+extern float g_regionVerticalPolygonMeanScale;
 
-extern float D_800C4ACC_de;
-
-
-extern float D_800C49FC_de;
-
-union ObjectLinks4_2;
-typedef union ObjectLinks4_2 ObjectLinks4_2;
+extern float g_lightVolumeConeLookupScale;
 
 
+extern float g_regionMissingPolygonHeight;
 
-
-extern float D_800C4AD0_de;
+union RegionVertexReference;
+typedef union RegionVertexReference RegionVertexReference;
 
 
 
 
+extern float g_lightVolumeUnitIntensity;
 
-union ObjectLinks4_2;
-union ObjectLinks4_2 {
+
+
+
+
+union RegionVertexReference;
+union RegionVertexReference {
     void * v0;
     u16 * v1;
 };
 
-struct ObjectLinks1C;
-struct ObjectLinks1C {
+struct RegionTriangleVertexView;
+struct RegionTriangleVertexView {
     char pad0[0x4];
     char * unk_4;
     char pad4[0x8 - 0x4 - sizeof(char*)];
@@ -52,32 +52,32 @@ struct ObjectLinks1C {
     char pad8[0xC - 0x8 - sizeof(char*)];
     char * unk_C;
     char padC[0x10 - 0xC - sizeof(char*)];
-    ObjectLinks4_2 unk_10;
-    char pad10[0x14 - 0x10 - sizeof(ObjectLinks4_2)];
-    ObjectLinks4_2 unk_14;
-    char pad14[0x18 - 0x14 - sizeof(ObjectLinks4_2)];
-    ObjectLinks4_2 unk_18;
+    RegionVertexReference unk_10;
+    char pad10[0x14 - 0x10 - sizeof(RegionVertexReference)];
+    RegionVertexReference unk_14;
+    char pad14[0x18 - 0x14 - sizeof(RegionVertexReference)];
+    RegionVertexReference unk_18;
 };
 
 
 
 
-extern float D_800C4AC8_de;
+extern float g_lightVolumeSphereLookupScale;
 
-extern float D_800C4AC0_de;
+extern float g_lightVolumePositiveBound;
 
-struct ObjectLinks1C;
-typedef struct ObjectLinks1C ObjectLinks1C;
+struct RegionTriangleVertexView;
+typedef struct RegionTriangleVertexView RegionTriangleVertexView;
 
-extern float D_800C4AC4_de;
+extern float g_lightVolumeNegativeBound;
 
-extern void Region_ExpandPointBounds(f32 *arg0, s32 arg1, CVector3 *arg2);
+extern void Region_ExpandPointBounds(f32 *bounds, s32 pointCount, CVector3 *points);
 
-extern float D_800CD4FC[];
+extern float g_lightVolumeConeDistanceLookup[];
 
 
 
-extern void Region_MarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 arg1);
+extern void Region_MarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 nodeId);
 
 
 /* Shared object layout established by model-tree consumers. */
@@ -88,7 +88,7 @@ struct ModelTreeNode {
     struct ModelTreeNode *branches[3]; /* 0x10 */
 };
 
-extern f32 Region_SetMatchingVertexHeights(u16 *arg0, f32 arg1, u16 arg2);
+extern f32 Region_SetMatchingVertexHeights(u16 *modelTree, f32 height, u16 nodeId);
 
 #endif
 #endif

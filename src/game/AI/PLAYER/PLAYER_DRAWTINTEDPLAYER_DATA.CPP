@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/INTEGERSTATE1250.H"
@@ -8,9 +8,9 @@
 
 f32 Graphu64_ApproachValue(f32, f32, s32);
 
-void func_8022B5C0_de(void *player) {
-    if ((((struct ObjectState12C4 *) ((s8 *) player))->unk_5E4) != 0) {
-        (((struct ObjectState12C4 *) ((s8 *) player))->unk_12C0) = Graphu64_ApproachValue((((struct ObjectState12C4 *) ((s8 *) player))->unk_12C0), D_800C2D14_de, D_800C9FF0);
+void Playerai_UpdateReactionReserve(void *player) {
+    if ((((struct PlayerTintBlendStateView *) ((s8 *) player))->unk_5E4) != 0) {
+        (((struct PlayerTintBlendStateView *) ((s8 *) player))->unk_12C0) = Graphu64_ApproachValue((((struct PlayerTintBlendStateView *) ((s8 *) player))->unk_12C0), g_playerReactionReserveTarget, g_playerReactionReserveApproachRate);
     }
 }
 
@@ -18,7 +18,7 @@ void func_8022B5C0_de(void *player) {
 #include "RENDER/SHARED_REACTIONINTERACTION.H"
 extern void Barrel_FillDamagePacket(Shared_ReactionInteraction *, s32, s32, f32, s32, s32);
 
-void func_8022B60C_de(Shared_ReactionPlayer *actor, f32 amount, s32 source) {
+void Playerai_AddReactionReserve(Shared_ReactionPlayer *actor, f32 amount, s32 source) {
     Shared_ReactionInteraction packet;
     f32 value;
     f32 limited;
@@ -30,6 +30,6 @@ void func_8022B60C_de(Shared_ReactionPlayer *actor, f32 amount, s32 source) {
     actor->reserve = limited;
     if (gReactionReserveMaximum <= limited) {
         Barrel_FillDamagePacket(&packet, source, 0x40000, 25.599998f, 0x80, 0);
-        func_80219A40_de((Shared_ReactionActor *)actor, &actor->unk170, &packet);
+        Playerai_ApplyDamagePacket((Shared_ReactionActor *)actor, &actor->damageState, &packet);
     }
 }

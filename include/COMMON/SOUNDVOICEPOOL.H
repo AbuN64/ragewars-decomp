@@ -19,15 +19,15 @@ struct SongHeader;
 
 
 
-extern float D_800C3FB0_de;
+extern float g_dialogPlaybackTimingConstants;
 
-extern int D_800CBB18;
+extern int g_lastPausedPoolSoundHandle;
 
 
 
 struct CLoopingSoundData_t;
 struct CLoopingSoundData_t {
-    s32 unk0;
+    s32 previous;
     struct CLoopingSoundData_t *next;
     s32 value;
     s32 state;
@@ -37,7 +37,7 @@ struct CLoopingSoundData_t {
 
 struct CLoopingSoundData_t;
 
-extern float D_800C3FC0_de;
+extern float g_dialogTempoScale;
 
 
 
@@ -50,7 +50,7 @@ typedef struct Track Track;
 
 extern void func_8025C8D0_de(void);
 
-extern int D_800CBB14;
+extern int g_lastStoppedPoolSoundHandle;
 
 
 struct Resource;
@@ -65,19 +65,19 @@ struct BankAudioStartDialogGroup {
 };
 
 struct BankAudioStartDialogGroup;
-struct PlayerRecAt1E;
+struct DialogGroupPlayer;
 
 
 
-extern double D_800C3FB8_de;
+extern double g_dialogUnsignedTimeCorrection;
 
 
 
 
-struct SlotRecAtB4V2;
+struct AudioVoiceControlSlotView;
 
-struct ContextRecAt2BB8;
-typedef struct ContextRecAt2BB8 ContextRecAt2BB8;
+struct AudioPlaybackContextView;
+typedef struct AudioPlaybackContextView AudioPlaybackContextView;
 
 
 
@@ -93,36 +93,36 @@ struct Bank {
 };
 
 struct Bank;
-struct PlayerRecAt24;
+struct DialogPlaybackPlayer;
 
-extern int D_800CBB10;
+extern int g_lastStartedPoolSoundHandle;
 
 struct Resource;
 struct Resource {
-    s32 unk0;
-    u16 unk4;
+    s32 baseVolume;
+    u16 durationHighWord;
 };
 
-struct PlayerRecAt1E;
-typedef struct PlayerRecAt1E PlayerRecAt1E;
+struct DialogGroupPlayer;
+typedef struct DialogGroupPlayer DialogGroupPlayer;
 
-struct ContextRecAt2BB8;
-struct ContextRecAt2BB8 {
+struct AudioPlaybackContextView;
+struct AudioPlaybackContextView {
     char pad[0x2B50];
-    s32 unk2B50;
+    s32 songs;
     char p54[12];
-    s32 unk2B60;
-    s32 unk2B64;
+    s32 resourceIndexTable;
+    s32 resourceIndexCount;
     char p68[0x3C];
-    f32 unk2BA4;
+    f32 volumePercent;
     char pa8[16];
-    s32 unk2BB8;
+    s32 musicAttenuated;
 };
 
 struct QueueRec;
 typedef struct QueueRec QueueRec;
 
-extern void func_8025C8C0_de(void *cLoopingSoundData);
+extern void SoundVoicePool_ResetNode(void *cLoopingSoundData);
 
 struct CLoopingSoundData_t;
 typedef struct CLoopingSoundData_t CLoopingSoundData;
@@ -141,31 +141,31 @@ typedef struct BankAudioStartDialogGroup BankAudioStartDialogGroup;
 
 
 
-extern int D_800CBB1C;
+extern int g_lastResumedPoolSoundHandle;
 
-struct ContextRecAt2BB8;
+struct AudioPlaybackContextView;
 struct IntPair;
 struct ALCMidiHdr;
 struct ALCSeq_s;
 struct Track;
 struct Track {
-    struct ContextRecAt2BB8 *unk0;
-    s32 unk4;
-    struct IntPair *unk8;
-    struct ALCMidiHdr *unkC;
-    struct ALCSeq_s *unk10;
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-    f32 unk2C;
-    f32 unk30;
-    f32 unk34;
-    s32 unk38;
-    f32 unk3C;
-    f32 unk40; /* fade reset value */
+    struct AudioPlaybackContextView *context;
+    s32 sequenceLoaded;
+    struct IntPair *sequenceTable;
+    struct ALCMidiHdr *midiHeader;
+    struct ALCSeq_s *sequence;
+    s32 sequencePlayer;
+    s32 playbackState;
+    s32 playbackFlags;
+    s32 fadeStartVolume;
+    s32 baseVolume;
+    s32 requestedSequence;
+    f32 currentVolume;
+    f32 fadeDuration;
+    f32 fadeStep;
+    s32 gainOverride;
+    f32 overrideGain;
+    f32 fadeResetValue; /* fade reset value */
 };
 
 
@@ -180,8 +180,8 @@ struct Track {
 struct Bank;
 typedef struct Bank Bank;
 
-struct PlayerRecAt24;
-typedef struct PlayerRecAt24 PlayerRecAt24;
+struct DialogPlaybackPlayer;
+typedef struct DialogPlaybackPlayer DialogPlaybackPlayer;
 
 
 

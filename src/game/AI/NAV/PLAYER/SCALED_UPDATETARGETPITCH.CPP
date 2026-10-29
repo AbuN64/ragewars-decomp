@@ -1,13 +1,13 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80103FD0.H"
+#include "COMMON/LONE/PARTICLE_COLLISION_PROBE_RESULT.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/INTEGERSTATE2C.H"
-#include "COMMON/OBJECTLINKS14.H"
+#include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -21,10 +21,10 @@ f32 Graphu64_GetPointDistance(f32 *, f32 *);
 
 extern void *Portal_GetGraphPoint(void *, s32);
 
-extern CNavData D_8013B364;
+extern CNavData g_navigationGraph;
 
 
-extern void **D_80103FCC;
+extern void **g_collisionCurrentActor;
 
 extern s32 CCollision_SweepPoint(void *actorStorage, CVector3 startPosition, CVector3 desired, void *motionSettings);
 
@@ -58,8 +58,8 @@ void Scaled_UpdateTargetPitch(Brain *object) {
             Player_GetPlayerViewTranslation(target, &delta.x);
             targetHeight = delta.y - target->position.y;
         } else targetHeight = target->model->height - target->position.y;
-        targetHeight *= D_800C1C74_de;
-        if (D_801462C8.counters.m_bFragTagOn && target->profile->scaled) targetHeight *= D_800C1C78_de;
+        targetHeight *= g_targetPitchHeightScale;
+        if (g_gameSettings.counters.m_bFragTagOn && target->profile->scaled) targetHeight *= g_fragTagTargetHeightScale;
         delta = brain->targetPosition;
         delta.x -= origin.x;
         delta.y -= origin.y;
@@ -72,9 +72,9 @@ void Scaled_UpdateTargetPitch(Brain *object) {
         zero = delta.y;
         horizontal = Gu_Sqrtf(delta.x*delta.x + delta.z*delta.z);
         if (horizontal == zero) {
-            if (vertical < zero) brain->angle = D_800C1C7C_de;
-            else brain->angle = D_800C1C80_de;
-        } else brain->angle = XMath_EvaluateArcTangentTwo(vertical, horizontal) * D_800C1C84_de;
+            if (vertical < zero) brain->angle = g_targetPitchDownAngle;
+            else brain->angle = g_targetPitchUpAngle;
+        } else brain->angle = XMath_EvaluateArcTangentTwo(vertical, horizontal) * g_targetPitchRadiansToDegrees;
     } else brain->angle = 0.0f;
     brain->previousAngle = brain->angle;
 }
@@ -146,7 +146,7 @@ s32 Scaled_SetBehaviourState(AiController *controller, s32 behaviourId) {
 }
 
 void Scaled_SetPitchFromAngle(AiController *controller, float amount) {
-    float result = amount * D_800C1C88_de;
+    float result = amount * g_difficultyAimAmountScale;
     if (controller != 0) {
         controller->player->pitch = -result;
     }
@@ -157,7 +157,7 @@ CVector3 *Scaled_GetControllerPosition(AiController *controller) {
 }
 
 f32 Scaled_DistanceToNode(AiController *controller, s32 nodeId) {
-    return Graphu64_GetPointDistance(&controller->player->pos.x, Portal_GetGraphPoint(&D_8013B364, nodeId));
+    return Graphu64_GetPointDistance(&controller->player->pos.x, Portal_GetGraphPoint(&g_navigationGraph, nodeId));
 }
 
 /** Reset three state words and set the final state to one. */
@@ -165,16 +165,16 @@ void Scaled_ResetBehaviorState(void *object) {
     AiController *controller = object;
     controller->unk2F4 = 0;
     controller->unk2F8 = 0;
-    controller->unk2FC = 1;
+    controller->behaviorResetFlag = 1;
 }
 
 /** Clear five consecutive object words beginning at offset 0x300. */
 void Scaled_ClearAuxiliaryBehaviorState(AiController *controller) {
-    controller->unk300 = 0;
-    controller->unk304 = 0;
-    controller->unk308 = 0;
-    controller->unk30C = 0;
-    controller->unk310 = 0;
+    controller->routeComplete = 0;
+    controller->airPitchNode = 0;
+    controller->jumpLinkActive = 0;
+    controller->kindFourLinkActive = 0;
+    controller->holdMovement = 0;
 }
 
 s32 Scaled_HasLineOfSight(Player **fromRef, Player *target) {
@@ -187,10 +187,10 @@ s32 Scaled_HasLineOfSight(Player **fromRef, Player *target) {
 
     first = (*fromRef)->pos;
     second = target->pos;
-    first.y += D_800C1C8C_de;
-    second.y += D_800C1C8C_de;
-    if (CCollision_SweepPoint(*fromRef, first, second, &D_80103FD0) != 0) {
-        return *D_80103FCC == target;
+    first.y += g_difficultyAimHeightOffset;
+    second.y += g_difficultyAimHeightOffset;
+    if (CCollision_SweepPoint(*fromRef, first, second, &g_particleCollisionProbeResult) != 0) {
+        return *g_collisionCurrentActor == target;
     }
     return 1;
 }
@@ -220,7 +220,7 @@ ret0:
 }
 
 /** Report whether the state word at offset 0x21C equals eight. */
-int func_80209AD8_de(AiController *object) {
+int Scaled_IsBehaviorStateEight(AiController *object) {
     return object->state == 8;
 }
 
@@ -229,13 +229,13 @@ f32 Scaled_GetDifficultyEngagementAdjustment(AiController *controller)
   Player *object;
     AiCharacterDefinition *definition;
   u8 state;
-  f32 var_f0;
-  f32 var_f1;
+  f32 difficultyMultiplier;
+  f32 engagementAdjustment;
   object = controller->player;
     definition = object->definition;
   state = object->profile->difficulty;
-  var_f1 = definition->unk2C;
-  var_f1 = var_f1 * D_800C1C90_de;
+  engagementAdjustment = definition->engagement;
+  engagementAdjustment = engagementAdjustment * g_difficultyEngagementScale;
   switch (state)
   {
     case 1:
@@ -245,18 +245,18 @@ f32 Scaled_GetDifficultyEngagementAdjustment(AiController *controller)
       controller->player->profile->difficulty = 0;
 
     case 0:
-      var_f0 = D_800C1C94_de;
+      difficultyMultiplier = g_difficultyEngagementFirstMultiplier;
       break;
 
     case 2:
-      var_f0 = D_800C1C98_de;
+      difficultyMultiplier = g_difficultyEngagementOtherMultiplier;
       break;
 
   }
 
-  var_f1 *= var_f0;
+  engagementAdjustment *= difficultyMultiplier;
   done:
-  return var_f1;
+  return engagementAdjustment;
 
 }
 
@@ -269,18 +269,18 @@ f32 Scaled_GetScaledAggression(AiController *controller) {
     player = controller->player;
     definition = player->definition;
     difficulty = player->profile->difficulty;
-    value = definition->unk28;
-    value *= D_800C1C9C_de;
+    value = definition->aggression;
+    value *= g_aiAggressionBaseScale;
     switch (difficulty) {
     case 1:
         break;
     default:
         controller->player->profile->difficulty = 0;
     case 0:
-        value *= D_800C1CA0_de;
+        value *= g_aiAggressionEasyScale;
         break;
     case 2:
-        value *= D_800C1CA4_de;
+        value *= g_aiAggressionHardScale;
         break;
     }
     return value;
@@ -296,18 +296,18 @@ f32 Scaled_ScaleCharacterSettingByDifficulty(AiController *controller) {
     player = controller->player;
     definition = player->definition;
     difficulty = player->profile->difficulty;
-    value = definition->unk34;
-    value *= D_800C1CA8_de;
+    value = definition->characterSetting;
+    value *= g_aiCharacterSettingBaseScale;
     switch (difficulty) {
     case 1:
         goto done;
     default:
         controller->player->profile->difficulty = 0;
     case 0:
-        difficultyScale = D_800C1CAC_de;
+        difficultyScale = g_aiCharacterSettingEasyScale;
         goto multiply;
     case 2:
-        difficultyScale = D_800C1CB0_de;
+        difficultyScale = g_aiCharacterSettingHardScale;
     }
 multiply:
     value *= difficultyScale;
@@ -325,18 +325,18 @@ f32 Scaled_GetScaledAttackRange(AiController *controller) {
     player = controller->player;
     definition = player->definition;
     difficulty = player->profile->difficulty;
-    value = definition->unk30;
-    value *= D_800C1CB4_de;
+    value = definition->attackRange;
+    value *= g_aiAttackRangeBaseScale;
     switch (difficulty) {
     case 1:
         break;
     default:
         controller->player->profile->difficulty = 0;
     case 0:
-        difficultyScale = D_800C1CB8_de;
+        difficultyScale = g_aiAttackRangeEasyScale;
         goto multiply;
     case 2:
-        difficultyScale = D_800C1CBC_de;
+        difficultyScale = g_aiAttackRangeHardScale;
 multiply:
         value *= difficultyScale;
         break;
@@ -350,7 +350,7 @@ void Scaled_HandlePlayerTimeout(SharedPlayer **brain) {
     CGameStatus *session;
     s8 mode;
 
-    if (D_801462C8.counters.enabled != 0) {
+    if (g_gameSettings.counters.enabled != 0) {
         mode = (*brain)->views5D8.view5D8_2.controls->mode;
         if (mode == 0xC || mode == 0xF) {
             limit = 0x384;
@@ -361,7 +361,7 @@ void Scaled_HandlePlayerTimeout(SharedPlayer **brain) {
         limit = 0x1E;
     }
     if (limit < (*brain)->views1340.view1340_2.timer) {
-        session = &D_801462C8.counters;
+        session = &g_gameSettings.counters;
         do {
             (*brain)->views1340.view1340_2.timer = 0;
         } while (0);
@@ -405,16 +405,16 @@ f32 Scaled_UpdateDifficultyAimJitter(void *aiController) {
     }
     aim = brain->aim;
     if (aim < Graphu64_RandomBetween(-aimLimit, aimLimit)) {
-        aim += D_800C1CC0_de;
+        aim += g_difficultyAimPositiveJitter;
     } else {
-        aim -= D_800C1CC4_de;
+        aim -= g_difficultyAimNegativeJitter;
     }
     brain->aim = aim;
     return aim;
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C870C[1] = {
+unsigned int k_ScaledUpdatetargetpitchEncodedWords[1] = {
     0x0B000000,
 };
 #endif

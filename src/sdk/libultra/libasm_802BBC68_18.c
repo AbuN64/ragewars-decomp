@@ -2,6 +2,6 @@
 
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BD078[8] =
+char s_LibultraModelRText[8] =
     "ModelR\000\000";
 #endif

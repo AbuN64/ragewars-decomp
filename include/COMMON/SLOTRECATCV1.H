@@ -2,8 +2,8 @@
 #define COMMON_SLOTRECATCV1_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct SlotRecAtCV1;
-struct SlotRecAtCV1 {
+struct ArchiveChunkImageSlot;
+struct ArchiveChunkImageSlot {
     char pad0[8];
     u16 flags;
     char padA[2];
@@ -11,14 +11,14 @@ struct SlotRecAtCV1 {
 };
 
 struct EntryCode8040B45C80411518;
-struct SlotRecAtCV1;
+struct ArchiveChunkImageSlot;
 struct EntryCode8040B45C80411518 {
     s32 active;
     char pad4[0x300];
     void *buffers[0x60];
-    struct SlotRecAtCV1 **ns;
+    struct ArchiveChunkImageSlot **ns;
     char pad488[4];
-    ObjRecAtE *def;
+    FontGlyphCountView *def;
     char pad490[0xC];
 };
 struct EntryCode8040B45C80411518;
@@ -32,12 +32,12 @@ struct PoolFrontendReleaseChunkImages {
 
 extern void Node_SkipResourceOperation(void);
 
-struct EntryRecAt18V1;
-typedef struct EntryRecAt18V1 EntryRecAt18V1;
+struct ArchiveTextureEntry;
+typedef struct ArchiveTextureEntry ArchiveTextureEntry;
 
 
-struct SlotRecAtCV2;
-struct SlotRecAtCV2 {
+struct ArchiveOwnedImageSlot;
+struct ArchiveOwnedImageSlot {
     char pad0[4];
     s32 owner;
     u16 flags;
@@ -46,8 +46,8 @@ struct SlotRecAtCV2 {
 };
 
 
-struct ChunkRecAt48C;
-struct ChunkRecAt48C {
+struct ArchiveChunkImageListsView;
+struct ArchiveChunkImageListsView {
     char pad[0x484];
     void **primary;
     void **optional;
@@ -66,13 +66,13 @@ struct TimerFrontendUpdateImageReleaseTimers {
     s32 owner;
     s16 delay;
 };
-struct PoolRecAtC;
+struct ArchiveImageReleasePool;
 struct ResourceFrontendUpdateImageReleaseTimers;
 struct TimerFrontendUpdateImageReleaseTimers;
-struct PoolRecAtC {
+struct ArchiveImageReleasePool {
     s16 count;
     struct ResourceFrontendUpdateImageReleaseTimers *resources;
-    s32 unk8;
+    s32 timerCount;
     struct TimerFrontendUpdateImageReleaseTimers *timers;
 };
 
@@ -84,8 +84,8 @@ extern int g_frontendResourceFirstScreen;
 
 
 
-struct QuadRecAt2C;
-struct QuadRecAt2C {
+struct WidgetRecordValueQuadView;
+struct WidgetRecordValueQuadView {
     char pad[0x2C];
     s32 values[4];
 };
@@ -100,22 +100,22 @@ typedef struct ButtonWidget ButtonWidget;
 
 
 
-struct SlotRecAtCV1;
-typedef struct SlotRecAtCV1 SlotRecAtCV1;
+struct ArchiveChunkImageSlot;
+typedef struct ArchiveChunkImageSlot ArchiveChunkImageSlot;
 
 
 
 extern s16 Node_GetTextureEntryHeight(s32 index);
 
 struct EntryCode8040B45C;
-struct SlotRecAtCV2;
+struct ArchiveOwnedImageSlot;
 struct EntryCode8040B45C {
     s32 active;
     char pad4[0x300];
     void *buffers[0x60];
-    struct SlotRecAtCV2 **pages;
+    struct ArchiveOwnedImageSlot **pages;
     char pad488[4];
-    ObjRecAtE *def;
+    FontGlyphCountView *def;
     unsigned char refCount;
     char pad491[0xB];
 };
@@ -154,24 +154,24 @@ extern s16 Node_GetResourceScreenCount(void);
 struct FileHeader;
 typedef struct FileHeader FileHeader;
 
-struct EntryRecAt18V1;
-struct EntryRecAt18V1 {
-    s32 unk0;
-    s32 unk4;
-    s16 unk8;
-    s16 unkA;
-    s16 unkC;
-    s16 unkE;
+struct ArchiveTextureEntry;
+struct ArchiveTextureEntry {
+    s32 imageHandle;
+    s32 flags;
+    s16 bitsPerPixel;
+    s16 width;
+    s16 height;
+    s16 paletteCount;
     s32 unk10;
-    s32 unk14;
-    s32 unk18;
+    s32 pixelOffset;
+    s32 paletteOffset;
 };
 
-struct EntryRecAt18V1;
+struct ArchiveTextureEntry;
 struct FileHeader;
 struct FileHeader {
     char pad0[0x25C];
-    struct EntryRecAt18V1 *unk25C;
+    struct ArchiveTextureEntry *textureEntries;
 };
 
 struct UiWidget;
@@ -190,16 +190,16 @@ extern s16 Node_GetTextureEntryWidth(s32 index);
 
 
 
-struct SlotRecAtCV2;
-typedef struct SlotRecAtCV2 SlotRecAtCV2;
+struct ArchiveOwnedImageSlot;
+typedef struct ArchiveOwnedImageSlot ArchiveOwnedImageSlot;
 
 struct Style;
 typedef struct Style Style;
 
 
 
-struct PoolRecAtC;
-typedef struct PoolRecAtC PoolRecAtC;
+struct ArchiveImageReleasePool;
+typedef struct ArchiveImageReleasePool ArchiveImageReleasePool;
 
 struct Pair14;
 struct ButtonWidget;
@@ -211,18 +211,18 @@ struct ButtonWidget {
 };
 
 struct FileState;
-struct EntryRecAt8V1;
-struct ResourceRecAt6;
+struct ArchiveTextureDataEntryView;
+struct FrontendTextureTimerEntry;
 struct ChunkFrontendEvictExpiredImages;
 struct FileState {
-    s32 unk0;
+    s32 streamHandle;
     char pad4[0x244];
-    s32 unk248;
+    s32 textureDataOffset;
     char pad24C[0x10];
     s16 count;
-    struct EntryRecAt8V1 *entries;
+    struct ArchiveTextureDataEntryView *entries;
     char pad264[4];
-    struct ResourceRecAt6 *resources;
+    struct FrontendTextureTimerEntry *resources;
     char pad26C[4];
     s16 chunkCount;
     char pad272[6];
@@ -237,23 +237,23 @@ typedef struct PoolFrontendReleaseActiveChunkImages PoolFrontendReleaseActiveChu
 struct FileState;
 typedef struct FileState FileState;
 
-struct QuadRecAt2C;
+struct WidgetRecordValueQuadView;
 
 extern s32 Node_GetTextureChromaKey(s32 index);
 
 struct ChunkFrontendEvictExpiredImages;
-struct SlotRecAtCV2;
-struct ObjRecAtE;
+struct ArchiveOwnedImageSlot;
+struct FontGlyphCountView;
 struct ChunkFrontendEvictExpiredImages {
     void *active;
     char pad4[0x480];
-    struct SlotRecAtCV2 **slots;
+    struct ArchiveOwnedImageSlot **slots;
     char pad488[4];
-    struct ObjRecAtE *header;
+    struct FontGlyphCountView *header;
     u8 live;
     char pad491[0xB];
 };
 struct ChunkFrontendEvictExpiredImages;
-struct EntryRecAt8V1;
-struct ResourceRecAt6;
+struct ArchiveTextureDataEntryView;
+struct FrontendTextureTimerEntry;
 #endif

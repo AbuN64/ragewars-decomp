@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "ANIM/RAY180.H"
 #include "ENGINE/UNICOL/POLYCOL/POLYCOL_TRACEGEOMETRY.H"
@@ -13,7 +13,7 @@
 /* 800C886C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C886C */
-unsigned int D_blob_baaccdf3eb4fb9c2ef70[1] = {
+unsigned int g_PolycolTracegeometryEncodedWords[1] = {
     0x4F000000,
 };
 #endif
@@ -37,7 +37,7 @@ s32 CCollision_TestRayCylinder(void *, void *, f32, s32, f32, s32, s32 *, s32);
 
 s32 CCollision_TestSegmentDisk(void *, s32 *, void *, f32, s32);
 
-/* Gathers the pieces a ray sweeps through: for each entry of the counted table in D_8011CD20 whose
+/* Gathers the pieces a ray sweeps through: for each entry of the counted table in g_worldCollisionElementTable whose
  * rectangle, grown by the ray's radius, overlaps the ray's rectangle and is hit by it, each visible element
  * of the entry's resource whose grown box overlaps the ray's box and is hit is recorded with its hit
  * parameter (at most 128). The hits are sorted and, while nearer than the ray's current nearest hit, each
@@ -46,7 +46,7 @@ extern struct {
     char pad0[0x5AC];
     s32 count;
     EntryC entries[1];
-} D_8011CD20;
+} g_worldCollisionElementTable;
 
 extern s32 CCollision_IntersectSegmentBox(Ray180 *, Box *, f32 *);
 
@@ -56,16 +56,16 @@ extern void CPolyCollision_TraceElementMesh(ContextB0 *);
 
 extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
 
-s32 func_80242920_de(void *ray, void *arg1, void *corners, s32 *quad) {
+s32 CPolyCollision_TraceBoxFaces(void *ray, void *unusedPlatform, void *corners, s32 *quad) {
     s32 result;
 
     result = 0;
-    if (((struct FloatState68 *) ray)->unk_60 > 0.0f) {
+    if (((struct PlatformMovementView *) ray)->unk_60 > 0.0f) {
         *quad = 2;
         Plane_BuildBoxFace1(quad, corners);
         result = CCollision_TestSegmentPolygon(ray, quad, 1);
     }
-    if ((((struct FloatState68 *) ray)->unk_5C != 0.0f) || (((struct FloatState68 *) ray)->unk_64 != 0.0f)) {
+    if ((((struct PlatformMovementView *) ray)->unk_5C != 0.0f) || (((struct PlatformMovementView *) ray)->unk_64 != 0.0f)) {
         *quad = 3;
         Plane_BuildBoxFace2(quad, corners);
         result |= CCollision_TestSegmentPolygon(ray, quad, 1);
@@ -76,7 +76,7 @@ s32 func_80242920_de(void *ray, void *arg1, void *corners, s32 *quad) {
         Plane_BuildBoxFace5(quad, corners);
         result |= CCollision_TestSegmentPolygon(ray, quad, 1);
     }
-    if (((struct FloatState68 *) ray)->unk_60 < 0.0f) {
+    if (((struct PlatformMovementView *) ray)->unk_60 < 0.0f) {
         *quad = 9;
         Plane_BuildBoxFace0(quad, corners);
         result |= CCollision_TestSegmentPolygon(ray, quad, 1);
@@ -84,24 +84,24 @@ s32 func_80242920_de(void *ray, void *arg1, void *corners, s32 *quad) {
     return result;
 }
 
-s32 func_80242A94_de(void *ray, void *platform, void *corners, s32 *contactPolygon) {
+s32 CPolyCollision_TraceCylinderFaces(void *ray, void *platform, void *corners, s32 *contactPolygon) {
     f32 radius;
     s32 hitFound;
     void *point;
 
     hitFound = 0;
     point = platform + 8;
-    radius = ((struct FloatState20 *) ((struct ObjRecAt18V5 *) platform)->unk18)->unk_1C + ((struct FloatState68_2 *) ray)->unk_C;
-    if ((((struct FloatState68_2 *) ray)->unk_5C != 0.0f) || (((struct FloatState68_2 *) ray)->unk_64 != 0.0f)) {
+    radius = ((struct PlatformHeightView *) ((struct ActorDefinitionPointerView *) platform)->definition)->unk_1C + ((struct PlatformRadiusMovementView *) ray)->unk_C;
+    if ((((struct PlatformRadiusMovementView *) ray)->unk_5C != 0.0f) || (((struct PlatformRadiusMovementView *) ray)->unk_64 != 0.0f)) {
         *contactPolygon = 3;
-        hitFound = CCollision_TestRayCylinder(ray, point, radius, ((struct ObjRecAt34 *) corners)->unk4, ((struct ObjRecAt34 *) corners)->unk34, 1, contactPolygon, 1);
+        hitFound = CCollision_TestRayCylinder(ray, point, radius, ((struct PlatformActivityPhaseView *) corners)->unk4, ((struct PlatformActivityPhaseView *) corners)->unk34, 1, contactPolygon, 1);
     }
-    if (((struct FloatState68_2 *) ray)->unk_60 > 0.0f) {
+    if (((struct PlatformRadiusMovementView *) ray)->unk_60 > 0.0f) {
         *contactPolygon = 2;
         Plane_BuildBoxFace1(contactPolygon, corners);
         hitFound |= CCollision_TestSegmentDisk(ray, contactPolygon, point, radius, 1);
     }
-    if (((struct FloatState68_2 *) ray)->unk_60 < 0.0f) {
+    if (((struct PlatformRadiusMovementView *) ray)->unk_60 < 0.0f) {
         *contactPolygon = 9;
         Plane_BuildBoxFace0(contactPolygon, corners);
         hitFound |= CCollision_TestSegmentDisk(ray, contactPolygon, point, radius, 1);
@@ -109,7 +109,7 @@ s32 func_80242A94_de(void *ray, void *platform, void *corners, s32 *contactPolyg
     return hitFound;
 }
 
-void func_80242BF0_de(Ray180 *ray) {
+void CPolyCollision_TraceWorldElements(Ray180 *ray) {
     Box box;
     CQuatern rect;
     ContextB0 ctx;
@@ -144,8 +144,8 @@ void func_80242BF0_de(Ray180 *ray) {
     }
     hit = hits;
     hitCount = 0;
-    table = D_8011CD20.entries;
-    count = D_8011CD20.count;
+    table = g_worldCollisionElementTable.entries;
+    count = g_worldCollisionElementTable.count;
     for (i = 0; i < count; i++) {
         rect.x = table[i].rect->x - ray->radius;
         rect.y = table[i].rect->y - ray->radius;
@@ -181,8 +181,8 @@ void func_80242BF0_de(Ray180 *ray) {
         }
     }
     if (hitCount != 0) {
-        Graphu64_ComputeViewMatrix(&ctx.matrix, start, end, &D_800CC3D0_de);
-        PpDecom_QuickSortRecords((char *) hits, hitCount, sizeof(Hit8), D_00243850, D_00243814);
+        Graphu64_ComputeViewMatrix(&ctx.matrix, start, end, &g_collisionTraceViewUpVector);
+        PpDecom_QuickSortRecords((char *) hits, hitCount, sizeof(Hit8), CPolyCollision_CompareSortedHits, CPolyCollision_SwapSortedHits);
         hit = hits;
         for (j = 0; j < hitCount; j++, hit++) {
             if (!(hit->t < ray->nearest)) {

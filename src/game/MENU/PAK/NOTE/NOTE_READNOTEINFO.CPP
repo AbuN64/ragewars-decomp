@@ -1,6 +1,6 @@
 #include "sdk/LIBC.H"
 #include "MENU/PAK/pak_note_search.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "include_asm.h"
@@ -22,11 +22,11 @@
 
 
 
-extern OSPfs D_8014D280[];
+extern OSPfs g_controllerPakFileSystems[];
 
-extern PakDirectory *D_800E2854;
+extern PakDirectory *g_controllerPakNoteLists;
 
-extern u8 D_8010BBB8;
+extern u8 g_controllerPakFrontendState;
 
 extern u8 g_controllerPakFilenameAlphabet[0x42];
 
@@ -71,12 +71,12 @@ static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
 }
 
 /* Saves data as a Controller Pak note on channel ch and verifies it: refuses with -2 unless the pak
-   is ready, then up to four times writes the note through Note_CreateAndWriteNote with the D_800D36DC
+   is ready, then up to four times writes the note through Note_CreateAndWriteNote with the g_pakCompanyCodeFixed
    company code, reads it back into a temporary buffer through an inlined note read, and stops when
    the bytes compare equal or deletes the note through Note_DeleteNote and retries, returning the
    write result. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 *D_800E25C4[], *D_800E25C4[];
+extern u8 *g_pakCompanyCodes[], *g_pakCompanyCodes[];
 #endif
 
 
@@ -97,7 +97,7 @@ extern s32 Note_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, 
 
 extern s32 Note_DeleteNote(s32 ch, s32 index);
 
-static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
+static inline s32 Note_ReadFileIntoBuffer(s32 ch, s32 file_no, void *dst, s32 size) {
     s32 result;
     s32 blocks;
     void **handle;
@@ -115,13 +115,13 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
     result = g_controllerPakChannelStatuses[ch];
-    D_8010BBB8 = 2;
+    g_controllerPakFrontendState = 2;
     if (result == 0) {
-        if ((result = Pfs_ReadWriteFile(&D_8014D280[ch], file_no, 0, 0, blocks, buf)) != 0) {
+        if ((result = Pfs_ReadWriteFile(&g_controllerPakFileSystems[ch], file_no, 0, 0, blocks, buf)) != 0) {
             result = -1;
         }
         if (result == 0) {
-            func_802BD3A0_de(dst, buf, size);
+            Libc_CopyBytes(dst, buf, size);
         }
     }
     Control_ReleasePakLock();
@@ -143,15 +143,15 @@ s32 Note_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *si
     if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
     }
-    if (D_800E2854[ch].notes[index].file_size == 0) {
+    if (g_controllerPakNoteLists[ch].notes[index].file_size == 0) {
         *exists = 0;
     } else {
         *exists = 1;
-    *size = D_800E2854[ch].notes[index].file_size >> 8;
-    func_802BD3A0_de(company, &D_800E2854[ch].notes[index].company_code, 2);
-    func_802BD3A0_de(code, &D_800E2854[ch].notes[index].game_code, 4);
-    Pak_DecodeNoteName(D_800E2854[ch].notes[index].game_name, name, 17);
-    Pak_DecodeNoteName(D_800E2854[ch].notes[index].ext_name, ext, 4);
+    *size = g_controllerPakNoteLists[ch].notes[index].file_size >> 8;
+    Libc_CopyBytes(company, &g_controllerPakNoteLists[ch].notes[index].company_code, 2);
+    Libc_CopyBytes(code, &g_controllerPakNoteLists[ch].notes[index].game_code, 4);
+    Pak_DecodeNoteName(g_controllerPakNoteLists[ch].notes[index].game_name, name, 17);
+    Pak_DecodeNoteName(g_controllerPakNoteLists[ch].notes[index].ext_name, ext, 4);
     code[4] = 0;
     company[2] = 0;
     }
@@ -169,12 +169,12 @@ s32 Note_DeleteNote(s32 ch, s32 index) {
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
     result = g_controllerPakChannelStatuses[ch];
-    D_8010BBB8 = 2;
+    g_controllerPakFrontendState = 2;
     if (result == 0) {
-        result = osPfsDeleteFile(&D_8014D280[ch], D_800E2854[ch].notes[index].company_code,
-                               D_800E2854[ch].notes[index].game_code,
-                               D_800E2854[ch].notes[index].game_name,
-                               D_800E2854[ch].notes[index].ext_name);
+        result = osPfsDeleteFile(&g_controllerPakFileSystems[ch], g_controllerPakNoteLists[ch].notes[index].company_code,
+                               g_controllerPakNoteLists[ch].notes[index].game_code,
+                               g_controllerPakNoteLists[ch].notes[index].game_name,
+                               g_controllerPakNoteLists[ch].notes[index].ext_name);
         if (result != 0) {
             result = -1;
         }
@@ -199,11 +199,11 @@ s32 Note_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     handle = Cache_AllocateResource(0, blocks, 0x23, g_pakWriteScratchNoteName);
     buf = *handle;
     for (tries = 0; tries < 4; tries++) {
-        result = Note_CreateAndWriteNote(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(D_800D36DC, D_800E25C4, D_800E25C4, g_languageIndex), code);
+        result = Note_CreateAndWriteNote(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(g_pakCompanyCodeFixed, g_pakCompanyCodes, g_pakCompanyCodes, g_languageIndex), code);
         if (result != 0) {
             break;
         }
-        if (func_80404958_read(ch, file_no, buf, blocks) == 0 && Defs_CompareMemory(buf, data, size) == 0) {
+        if (Note_ReadFileIntoBuffer(ch, file_no, buf, blocks) == 0 && Defs_CompareMemory(buf, data, size) == 0) {
             break;
         }
         if (Note_DeleteNote(ch, file_no) != 0) {
@@ -225,7 +225,7 @@ static inline s32 Pak_PeekNoteGameName(s32 channel, s32 note, u8 **gameName) {
     if (g_controllerPakChannelStates[channel] != 3) {
         return -2;
     }
-    *gameName = D_800E2854[channel].notes[note].game_name;
+    *gameName = g_controllerPakNoteLists[channel].notes[note].game_name;
     return 0;
 }
 

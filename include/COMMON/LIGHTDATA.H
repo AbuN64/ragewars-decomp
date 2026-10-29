@@ -2,7 +2,7 @@
 #define COMMON_LIGHTDATA_H
 #include "TYPES.H"
 
-extern float D_800C439C_de;
+extern float g_cosineEaseAngleScale;
 
 struct LightData;
 struct LightData {
@@ -21,7 +21,7 @@ extern int Defs_IsAddressInBufferRanges(u32 address);
 struct UnitLight;
 typedef struct UnitLight UnitLight;
 
-extern int Defs_GetBitArrayByteCount(int arg0);
+extern int Defs_GetBitArrayByteCount(int bitCount);
 
 
 struct UnitLight;
@@ -33,14 +33,14 @@ struct UnitLight {
     u16 range;
 };
 
-extern void Defs_ToggleBit(s32 arg0, s32 arg1);
+extern void Defs_ToggleBit(s32 bits, s32 bitIndex);
 
-extern float D_800C4398_de;
+extern float g_cosineEaseUpperBound;
 
 struct LightNode;
 typedef struct LightNode LightNode;
 
-extern float D_800C43A0_de;
+extern float g_cosineEaseOutputConstants;
 
 extern f32 Defs_CosineEase(f32 fraction);
 

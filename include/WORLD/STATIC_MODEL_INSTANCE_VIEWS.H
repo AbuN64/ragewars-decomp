@@ -12,9 +12,9 @@ struct OwnerStaticInstanceDrawDistanceFadedModel {
     char pad0[8];
     CVector3 position; /* 0x08 */
     char pad14[4];
-    struct DescriptorRecAt24 *descriptor;
+    struct StaticModelAnimationDescriptor *descriptor;
     char pad1C[4];
-    s32 field20;
+    s32 pairedResource;
     char pad24[4];
     char transform[0xA8];
     s32 flagsD0;
@@ -25,7 +25,7 @@ struct OwnerStaticInstanceDrawDistanceFadedModel {
     u32 timer;
     s8 fade;
 };
-struct GlobalStateRecAt1C {
+struct ModelEffectSpawnState {
     s32 field0;
     u8 pad4[0x18];
     s32 field1C;
@@ -64,9 +64,9 @@ struct StaticObject {
 };
 struct ModelOwner {
     char pad0[0x18];
-    struct Descriptor_func_802504B0_de *descriptor;
+    struct StaticModelMaterialDescriptor *descriptor;
     char pad1C[4];
-    s32 field20;
+    s32 pairedResource;
     char pad24[4];
     char transform[0xA8];
     s32 flagsD0;
@@ -90,7 +90,7 @@ typedef struct ResourceObject23 {
     s32 resourceSize;
     CachedResource *blockNode;
 } ResourceObject23;
-extern char D_800C3DA8_de;
+extern char g_simpleObjectModelResourceTagData;
 extern char g_simpModelText[];
 extern char g_simpModelsIndexText[];
 #endif

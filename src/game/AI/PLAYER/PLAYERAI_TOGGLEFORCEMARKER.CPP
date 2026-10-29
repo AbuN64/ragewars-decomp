@@ -15,17 +15,17 @@
 
 extern void Graphu64_GetMatrixTranslation(char *, f32 *);
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 
 extern void Particle_ReleaseOwnerEmitters(void *world, s32 owner);
 
 void Player_SetPlayerResetPosition(void *actorObject, CVector3 *newResetPosition)
 {
   Shared_ActorView *player = actorObject;
-  void *new_var;
+  void *positionRecord;
   player->resetPosition = *newResetPosition;
-  new_var = actorObject;
-  Player_SetPlayerState(new_var, new_var, 0x11);
+  positionRecord = actorObject;
+  Player_SetPlayerState(positionRecord, positionRecord, 0x11);
 }
 
 extern void Player_BuildPlayerViewTransform(void *, MatrixF *);
@@ -35,8 +35,8 @@ void Player_TransformPointByViewOrOwnerMatrix(void *player, CVector3 *point) {
     CVector3 *input_ptr;
     MatrixF *matrix_ptr;
 
-    func_8022B08C_S1 *object = player;
-    func_8022B08C_S2 *owner;
+    PlayerForceMarkerOwnerView *object = player;
+    PlayerForceMarkerMatrixView *owner;
 
     input = *point;
     input_ptr = &input;
@@ -52,16 +52,16 @@ void Player_TransformPointByViewOrOwnerMatrix(void *player, CVector3 *point) {
     Graphu64_TransformPoint(matrix_ptr, input_ptr, point);
 }
 
-void func_8022B11C_de(void *player, s32 increment) {
+void Playerai_AddCappedEventCounter(void *player, s32 increment) {
     u16 wrappedSum;
     u16 cappedCounter;
-    wrappedSum = (((struct ObjectState16DA *) ((s8 *) player))->unk_16D8) + increment;
+    wrappedSum = (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->unk_16D8) + increment;
     cappedCounter = wrappedSum;
-    (((struct ObjectState16DA *) ((s8 *) player))->unk_16D8) = wrappedSum;
+    (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->unk_16D8) = wrappedSum;
     if ((u32) (cappedCounter & 0xFFFF) >= 0x65U) {
         cappedCounter = 0x64;
     }
-    (((struct ObjectState16DA *) ((s8 *) player))->unk_16D8) = cappedCounter;
+    (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->unk_16D8) = cappedCounter;
 }
 
 void Player_GetPlayerViewTranslation(void *player, f32 *origin) {
@@ -71,23 +71,23 @@ void Player_GetPlayerViewTranslation(void *player, f32 *origin) {
 }
 
 /** Report whether the word at offset 0x5E4 is zero. */
-int func_8022B178_de(struct SharedPlayer *player) {
-    return player->views5E4.view5E4_0.unk5E4 == 0;
+int Playerai_IsPlayerInactive(struct SharedPlayer *player) {
+    return player->views5E4.view5E4_0.health == 0;
 }
 
 /** Return the word at offset 0x1210. */
-int func_8022B184_de(struct SharedPlayer *object) {
-    return object->views5E8.view1210_152.unk1210;
+int Playerai_IsAlternateFireHeld(struct SharedPlayer *object) {
+    return object->views5E8.view1210_152.marker;
 }
 
 void Player_ReleasePlayerParticleEmitters(s32 actor) {
-    Particle_ReleaseOwnerEmitters(&D_8011D8D0, actor);
+    Particle_ReleaseOwnerEmitters(&g_actorParticleEffectSystem, actor);
 }
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/CHANNEL.H"
-extern u8 *D_800D311C, *D_800D3120, *D_800D3124;
+extern u8 *g_forceMarkerRemovedText, *g_forceMarkerAttractText, *g_forceMarkerRepulseText;
 extern void BuildDirectionMatrix(Matrix *, CVector3 *);
 extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
@@ -118,7 +118,7 @@ void Playerai_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
             SoundElement_PlayFlatSound(0x578);
             screen = player->message;
             if (screen == 0) return;
-            text = D_800D311C;
+            text = g_forceMarkerRemovedText;
         } else {
             player->targetPosition = player->aimPoint;
             player->attract = attract;
@@ -127,10 +127,10 @@ void Playerai_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
             SoundElement_PlayFlatSound(0x578);
             screen = player->message;
             if (screen == 0) return;
-            if (attract != 0) text = D_800D3120;
-            else text = D_800D3124;
+            if (attract != 0) text = g_forceMarkerAttractText;
+            else text = g_forceMarkerRepulseText;
         }
-        Camera_PostScreenMessage((void *)&D_80145088, screen, text);
+        Camera_PostScreenMessage((void *)&g_frontendScreenStatus, screen, text);
     }
 }
 #endif

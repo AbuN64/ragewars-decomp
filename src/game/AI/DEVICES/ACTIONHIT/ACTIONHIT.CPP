@@ -2,7 +2,7 @@
 #include "COMMON/OBJRECAT30.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_VOIDCALLBACK.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
@@ -72,12 +72,12 @@ void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *
         }
     }
     if (hit->limit != 0.0f && hit->limit <= hit->elapsed) {
-        Actor_RequestActorState(ctx, (ObjectStateCC *)hit, 1);
+        Actor_RequestActorState(ctx, (BreakableHitStateView *)hit, 1);
     }
 }
 
 /* Destroys a breakable object after a hit: when its descriptor has a damage factor at 0x1D, scaled
-   by D_800C6B74, and the object is forced at 0xE6, or the hit's team byte at 0xCA matches both ids at
+   by k_breakableDamageScale, and the object is forced at 0xE6, or the hit's team byte at 0xCA matches both ids at
    0x108 and 0x10A and either the hit at 0xCB bypasses an object without flag 0x400 or the scaled count
    reaches its limit (the count at 0x12C against 0x134 while flagged 0x400 below three hits at 0x10C,
    otherwise the hits against 0x104), it raises event 7 at its position through Events_DispatchCallback and
@@ -97,23 +97,23 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 
 
 
-extern void Events_DispatchCallback(void *arg0, void *arg1, s32 arg2,
-                          CVector3 arg3, ResourceManagerState arg4);
+extern void Events_DispatchCallback(void *sourceActor, void *targetActor, s32 eventKind,
+                          CVector3 eventPosition, ResourceManagerState eventParams);
 
 extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
-void Action_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *hitState) {
+void Action_ResolveBreakableHit(void *breakableHitContext, BreakableHitStateView *hitState) {
     ResourceManagerState local;
     s8 factor;
     f32 scale;
     s32 destroy;
     s8 team;
 
-    factor = ((struct ObjectState1E *) ((BreakableHitContext *) breakableHitContext)->unk_18)->unk_1D;
+    factor = ((struct BreakableDamageScaleView *) ((BreakableHitContext *) breakableHitContext)->unk_18)->unk_1D;
     if (factor == -1) {
         return;
     }
-    scale = factor * D_800C6B74;
+    scale = factor * k_breakableDamageScale;
     if (((BreakableHitContext *)(breakableHitContext))->unk_E6 == 1) {
         destroy = 1;
     } else {
@@ -135,12 +135,12 @@ void Action_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *hitSta
     }
 }
 
-void Action_SetEnterHandler(void *unused0, Dest *arg1) {
-    arg1->table = &D_800C8380_de;
-    arg1->enter = &D_00204C34;
+void Action_SetEnterHandler(void *unused0, Dest *dispatchState) {
+    dispatchState->table = &g_actionEnterDispatchTable;
+    dispatchState->enter = &g_actionEnterRomEntry;
 }
 
-void func_80204BD0_de(void *actor, void *requestContext) {
+void Action_ToggleActorState(void *actor, void *requestContext) {
     s32 different = Rumble_TestActorStateBit(&g_world, actor) != 1;
 
     if (different == 0) {
@@ -150,7 +150,7 @@ void func_80204BD0_de(void *actor, void *requestContext) {
     }
 }
 
-void func_80204C34_de(void *callbackContext, Shared_CallbackOwner *callbackOwner) {
+void Action_InvokeOwnerCallback(void *callbackContext, Shared_CallbackOwner *callbackOwner) {
     Shared_CallbackHook *obj = callbackOwner->hook;
     if (obj != 0) {
         Shared_VoidCallback fn = obj->callback;
@@ -160,7 +160,7 @@ void func_80204C34_de(void *callbackContext, Shared_CallbackOwner *callbackOwner
     }
 }
 
-void func_80204C68_de(void *actor, ActorMotionState *motionState) {
+void Action_ActivateActorAndClearMotion(void *actor, ActorMotionState *motionState) {
     ResourceManagerState local;
     Shared_World *flag;
 
@@ -169,7 +169,7 @@ void func_80204C68_de(void *actor, ActorMotionState *motionState) {
     Rumble_SetActorStateBit(flag, actor, 1);
     Link_DispatchActorLinks(actor, 0x4000, actor);
     motionState->speed = 0;
-    Fx_RecycleOwnerParticles(&D_801379C0, (s32)actor);
+    Fx_RecycleOwnerParticles(&g_actorParticleScene, (s32)actor);
     if (flag->mode != 4) {
         Events_DispatchCallback(actor, actor, 6,
                       ((LevelActor *)actor)->position0, local);
@@ -177,7 +177,7 @@ void func_80204C68_de(void *actor, ActorMotionState *motionState) {
     }
 }
 
-void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
+void Action_DeactivateBreakable(BreakableHitContext *breakableHitContext) {
     ResourceManagerState local;
     Shared_World *flag;
 
@@ -185,7 +185,7 @@ void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
     flag = &g_world;
     Rumble_SetActorStateBit(flag, breakableHitContext, 0);
     Link_DispatchActorLinks(breakableHitContext, 0x8000, breakableHitContext);
-    Fx_RecycleOwnerParticles(&D_801379C0, (s32)breakableHitContext);
+    Fx_RecycleOwnerParticles(&g_actorParticleScene, (s32)breakableHitContext);
     if (flag->mode != 4) {
         Events_DispatchCallback(breakableHitContext, breakableHitContext, 7,
                       breakableHitContext->unk_8, local);
@@ -193,29 +193,29 @@ void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
     }
 }
 
-void func_80204DE0_de(void *a, void *b) {
+void Action_RequestInactiveState(void *a, void *b) {
     Actor_RequestActorState(a, b, 0x0); }
 
-void func_80204DFC_de(Trigger *trigger) {
+void Action_EnableTriggerActor(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
-void func_80204E2C_de(void *a, void *b) {
+void Action_RequestActiveState(void *a, void *b) {
     Actor_RequestActorState(a, b, 0x1); }
 
-void func_80204E48_de(Trigger *trigger) {
+void Action_DisableTriggerActor(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
 
 
 
-int func_80204E78_de(int actor) {
+int Action_IsActorStateActive(int actor) {
     return Rumble_TestActorStateBit(&g_world, actor) == 1;
 }
 
 /** Submit an object's three-word record, then attach it in mode one. */
-void func_80204EA8_de(LevelActor *actor) {
+void Action_NotifyActorActivated(LevelActor *actor) {
     ResourceManagerState pair;
 
     pair.active = 0;
@@ -224,7 +224,7 @@ void func_80204EA8_de(LevelActor *actor) {
 }
 
 /** Submit an object's three-word record, then attach it to the global owner. */
-void func_80204F10_de(LevelActor *actor) {
+void Action_NotifyActorDeactivated(LevelActor *actor) {
     ResourceManagerState pair;
 
     pair.active = 0;
@@ -233,7 +233,7 @@ void func_80204F10_de(LevelActor *actor) {
 }
 
 /** Update the floating state at offsets 0x40 and 0x64 under its range rules. */
-void func_80204F78_de(void *unused, char *object, float value) {
+void Action_RaiseMotionSpeed(void *unused, char *object, float value) {
     ActorMotionState *state = (void *)object;
     if (value == 0.0f || state->speed < value) {
         if (state->speed == 0.0f) {
@@ -248,7 +248,7 @@ void func_80204F78_de(void *unused, char *object, float value) {
 
 
 
-int func_80204FC4_de(ActorRecAt134 *actor, Cell *cell, float scale) {
+int Action_TestScaledTriggerRange(ActorTriggerRangeView *actor, Cell *cell, float scale) {
     if (actor->always == 1) {
         return 1;
     }

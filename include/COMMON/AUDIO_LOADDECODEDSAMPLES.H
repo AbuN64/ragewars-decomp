@@ -5,10 +5,10 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern float D_801514C0[];
+extern float g_audioTransformSums[];
 
 
-extern float D_800C7CEC_de;
+extern float g_audioSampleMaximum;
 
 
 
@@ -19,12 +19,12 @@ typedef struct ALLoadFilter48_2 ALLoadFilter48_2;
 
 
 
-extern float D_800CCF10;
+extern float g_audioTransformCoefficientStep;
 
-extern float D_801512C0[];
+extern float g_audioTransformCosines[];
 
 
-extern float D_801510C0[];
+extern float g_audioTransformSines[];
 
 
 struct ALRawLoop;
@@ -49,7 +49,7 @@ struct ALADPCMBook {
 };
 
 
-struct Shape_typemap_165;
+struct CacheResourceBlockView;
 
 
 
@@ -69,21 +69,21 @@ struct ALLoadFilter48_2 {
     s32 memin;
 };
 
-extern float D_801516C0[];
+extern float g_audioTransformDifferences[];
 
-extern float D_800C7CF0_de;
+extern float g_audioSampleNegativeRoundingBias;
 
-extern float D_800C7CF4_de;
+extern float g_audioSampleMinimum;
 
-extern float D_800CCF18;
+extern float g_audioTransformPrimaryScale;
 
 extern Acmd *Audio_LoadDecodedSamples(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p);
 
-extern float D_800CCF24;
+extern float g_audioTransformOutputGain;
 
-extern float D_800CCF20;
+extern float g_audioTransformTertiaryScale;
 
-extern float D_800C7CE8_de;
+extern float g_audioSamplePositiveRoundingBias;
 
 
 typedef struct DecodeState {
@@ -95,7 +95,7 @@ typedef struct DecodeState {
     void *cursor;
     u16 frame[336]; /* +0x18: Audio_DecodeFrame header and coefficients */
 } DecodeState;
-extern DecodeState D_8014BA38_de;
+extern DecodeState g_audioSampleDecodeState;
 extern u16 gPackedBitsLeft;
 extern u16 gPackedBitMasks[17];
 extern u16 gPackedSignBits[17];
@@ -103,7 +103,7 @@ extern u16 gPackedWord;
 extern unsigned short D_800D54BA;
 extern unsigned short D_800D54BC;
 extern s16 D_800D54BE;
-extern s16 D_800D54C0_de;
+extern s16 g_audioTransformTablesInitialized;
 
 /* Dictionary decoder records, shared by the block and phrase streams. */
 typedef struct DecodeNode {
@@ -138,6 +138,6 @@ typedef struct DecodeBlock {
     s32 offset;
     DecodeTable *table;
 } DecodeBlock;
-extern DecodeBlock D_800D5564[]; /* Audio_DecodeFrame block list, ends at kind 0 */
-extern u16 D_8014AE10[16];        /* Audio_DecodeFrame per-coefficient history */
+extern DecodeBlock g_audioDecodeBlock[]; /* Audio_DecodeFrame block list, ends at kind 0 */
+extern u16 g_audioDecodeScaleTable[16];        /* Audio_DecodeFrame per-coefficient history */
 #endif

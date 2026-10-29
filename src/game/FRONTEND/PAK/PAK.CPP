@@ -1,6 +1,6 @@
 #include "COMMON/RECORDRECATCV1.H"
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MENURECAT24.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "FRONTEND/PAK.H"
 
-extern s32 D_8015375C;
+extern s32 g_pakUseScannedChannel;
 
 
 
@@ -27,7 +27,7 @@ extern s32 D_800E28C0;
 
 
 
-/* Points a field's text at D_800D7990 when the option D_80153760 is set and at D_800D7994 otherwise, and returns
+/* Points a field's text at g_pakStatusPrimaryLabel when the option D_80153760 is set and at g_pakStatusSecondaryLabel otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
@@ -45,107 +45,107 @@ extern s32 D_800E28C0;
 extern s32 Snapshot_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
 
 static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
-    if (D_8015375C != 0) {
-        return D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        return g_introSelectedItem;
     }
-    return record->owner->unk4;
+    return record->owner->controllerPort;
 }
 
-/* Stores 0 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
+/* Stores 0 in g_frontendResourceLoadStage and 0 in g_frontendPakPromptAccepted. */
 
 
-/* Stores 1 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
+/* Stores 1 in g_frontendResourceLoadStage and 0 in g_frontendPakPromptAccepted. */
 
 
-/* Stores 2 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
+/* Stores 2 in g_frontendResourceLoadStage and 0 in g_frontendPakPromptAccepted. */
 
 
-/* Stores 3 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
+/* Stores 3 in g_frontendResourceLoadStage and 0 in g_frontendPakPromptAccepted. */
 
 
-/* Stores 4 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
+/* Stores 4 in g_frontendResourceLoadStage and 0 in g_frontendPakPromptAccepted. */
 
 
-/* Points a field's text at the label for the state word D_80153778: one of four strings through the
-   jump table jtbl_800E1008 for states 0 to 4, and D_800D7998 for any other state. Returns zero. */
-
-
-
+/* Points a field's text at the label for the state word g_frontendResourceLoadStage: one of four strings through the
+   jump table jtbl_800E1008 for states 0 to 4, and g_pakStatusDefaultLabel for any other state. Returns zero. */
 
 
 
 
 
 
-extern void Menu_OpenDialog(void *dst, void *text, void *player, void *controller, void *arg4);
-extern char D_8014561C[];
-extern s32 D_80153778;
-/* Starts the action's channel (D_800E28C8 in demo mode, else the record's inner value) through Snapshot_CheckStatusPrompt; on success loads the record's actor resource into D_8014561C and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
+
+
+
+extern void Menu_OpenDialog(void *dst, void *text, void *player, void *controller, void *dialogParameter);
+extern char g_matchEndingTeamWheelClose[];
+extern s32 g_frontendResourceLoadStage;
+/* Starts the action's channel (g_introSelectedItem in demo mode, else the record's inner value) through Snapshot_CheckStatusPrompt; on success loads the record's actor resource into g_matchEndingTeamWheelClose and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
 s32 Pak_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     s32 channel;
 
-    if (D_8015375C != 0) {
-        channel = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        channel = g_introSelectedItem;
     } else {
-        channel = menu->owner->unk4;
+        channel = menu->owner->controllerPort;
     }
     if (Snapshot_CheckStatusPrompt(menu, channel, 1) != 0) {
         D_80153784 = 1;
-        Menu_OpenDialog(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->unk24, menu->player, menu->owner, 0);
         return 1;
     }
-    Menu_OpenDialog(D_8014561C, &D_0044EE88, menu->player, menu->owner, menu->unk24);
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, &D_0044EE88, menu->player, menu->owner, menu->unk24);
     return 1;
 }
 
-s32 Pak_OpenPakStatusPrompt(void *arg0, Shared_PakMenu *menu) {
+s32 Pak_OpenPakStatusPrompt(void *menuContext, Shared_PakMenu *menu) {
     void *buffer;
-    ObjRecAt5DC *player;
+    ActorOwnerView *player;
     s32 channel;
-    if (D_8015375C != 0) {
-        channel = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        channel = g_introSelectedItem;
     } else {
-        channel = menu->owner->unk4;
+        channel = menu->owner->controllerPort;
     }
     D_80153784 = 1;
     if (Snapshot_CheckStatusPrompt(menu, channel, 1) != 0) {
         player = menu->player;
         if (player != NULL) {
-            buffer = player->unk5DC + 0x554;
+            buffer = player->owner + 0x554;
         } else {
-            buffer = D_8014561C;
+            buffer = g_matchEndingTeamWheelClose;
         }
         Menu_OpenDialog(buffer, menu->unk24, menu->player, menu->owner, 0);
         return 1;
     }
-    Menu_OpenDialog(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->unk24, menu->player, menu->owner, 0);
     return 1;
 }
 
-s32 Pak_CancelPakAction(s32 unused0, ActionRecAt24 *arg1) {
-    void *var_a0;
-    ObjRecAt5DC *temp_v0;
+s32 Pak_CancelPakAction(s32 unused0, PakCancelActionView *action) {
+    void *dialogOwner;
+    ActorOwnerView *actionOwner;
     D_800E28C0 = 1;
     D_8014D480 = 0;
-    if (D_8015375C != 0) {
+    if (g_pakUseScannedChannel != 0) {
         D_8014ADA0 = 1;
     } else {
-        temp_v0 = arg1->unk1C;
-        if (temp_v0 != NULL) {
-            var_a0 = temp_v0->unk5DC + 0x554;
+        actionOwner = action->unk1C;
+        if (actionOwner != NULL) {
+            dialogOwner = actionOwner->owner + 0x554;
         } else {
-            var_a0 = D_8014561C;
+            dialogOwner = g_matchEndingTeamWheelClose;
         }
-        Menu_OpenDialog(var_a0, (void *)arg1->unk24, (void *)arg1->unk1C, (void *)arg1->unk20, 0);
+        Menu_OpenDialog(dialogOwner, (void *)action->unk24, (void *)action->unk1C, (void *)action->unk20, 0);
     }
     return 1;
 }
 
-s32 Pak_SelectPakLoadHeading(struct FieldRecAt14 *field) {
+s32 Pak_SelectPakLoadHeading(struct PakActionLabelView *field) {
     if (D_80153760 != 0) {
-        field->text = D_800D7990;
+        field->text = g_pakStatusPrimaryLabel;
     } else {
-        field->text = D_800D7994;
+        field->text = g_pakStatusSecondaryLabel;
     }
     return 0;
 }
@@ -164,32 +164,32 @@ s32 Pak_CheckPakActionChange(struct Shared_PakMenu *record) {
 }
 
 void Pak_SelectPakOperationZero(void) {
-    D_80153778 = 0;
+    g_frontendResourceLoadStage = 0;
     g_frontendPakPromptAccepted = 0;
 }
 
 void Pak_SelectPakOperationOne(void) {
-    D_80153778 = 1;
+    g_frontendResourceLoadStage = 1;
     g_frontendPakPromptAccepted = 0;
 }
 
 void Pak_SelectPakOperationTwo(void) {
-    D_80153778 = 2;
+    g_frontendResourceLoadStage = 2;
     g_frontendPakPromptAccepted = 0;
 }
 
 void Pak_SelectPakOperationThree(void) {
-    D_80153778 = 3;
+    g_frontendResourceLoadStage = 3;
     g_frontendPakPromptAccepted = 0;
 }
 
 void Pak_SelectPakOperationFour(void) {
-    D_80153778 = 4;
+    g_frontendResourceLoadStage = 4;
     g_frontendPakPromptAccepted = 0;
 }
 
-s32 Pak_SelectPakOperationTextOne(struct FieldRecAt14 *field) {
-    u32 state = D_80153778;
+s32 Pak_SelectPakOperationTextOne(struct PakActionLabelView *field) {
+    u32 state = g_frontendResourceLoadStage;
 
     if (state >= 5) {
         goto state_other;
@@ -202,19 +202,19 @@ s32 Pak_SelectPakOperationTextOne(struct FieldRecAt14 *field) {
         case 4: goto state_4;
         }
 state_other:
-    field->text = D_800D7998;
+    field->text = g_pakStatusDefaultLabel;
     goto done;
 state_1:
-    field->text = D_800D3980;
+    field->text = g_pakOperationOneStateOneLabel;
     goto done;
 state_2:
-    field->text = D_800D3994;
+    field->text = g_pakOperationOneStateTwoLabel;
     goto done;
 state_3:
-    field->text = D_800D39A8;
+    field->text = g_pakOperationOneStateThreeLabel;
     goto done;
 state_4:
-    field->text = D_800D39BC;
+    field->text = g_pakOperationOneStateFourLabel;
 done:
     return 0;
 }

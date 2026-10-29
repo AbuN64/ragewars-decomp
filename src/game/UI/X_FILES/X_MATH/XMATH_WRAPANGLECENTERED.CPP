@@ -5,83 +5,83 @@
 #include "MATH/math_double.H"
 #include "MATH/XMATH_WRAPANGLEPOSITIVE.H"
 
-inline static f32 wrap(f32 arg0)
+inline static f32 wrap(f32 angle)
 {
-  f32 new_var3;
+  f32 angleReductionValue;
   f32 value;
-  
-  f32 new_var2;
-  value = arg0;
-  new_var2 = value;
+
+  f32 originalAngle;
+  value = angle;
+  originalAngle = value;
   if (1)
   {
-    if (((long long) (D_800C5C64 < new_var2)) || (new_var2 < D_800C5C68_de))
+    if (((long long) (k_xmathCenteredAngleUpperThreshold < originalAngle)) || (originalAngle < k_xmathCenteredAngleLowerThreshold))
     {
-      value = (f32) FloatModulo((f64) value, D_800C5C70_de);
+      value = (f32) FloatModulo((f64) value, k_xmathCenteredAnglePeriodDouble);
     }
     else
     {
-      if (D_800C5C78_de < value)
+      if (k_xmathCenteredAngleUpperLimit < value)
       {
-        new_var3 = D_800C5C78_de;
+        angleReductionValue = k_xmathCenteredAngleUpperLimit;
         do
         {
-          value -= new_var3;
+          value -= angleReductionValue;
           if (1)
           {
           }
         }
-        while (new_var3 < value);
+        while (angleReductionValue < value);
       }
       if (value < 0.0f)
       {
         do
         {
-          value += D_800C5C7C;
+          value += k_xmathCenteredAnglePeriod;
         }
-        while (value < (new_var3 = 0.0f));
+        while (value < (angleReductionValue = 0.0f));
       }
     }
   }
   return value;
 }
 
-f32 XMath_WrapAnglePositive(f32 arg0)
+f32 XMath_WrapAnglePositive(f32 angle)
 {
-  f32 new_var3;
+  f32 angleReductionValue;
   f32 value;
-  f32 *new_var;
-  f32 new_var2;
-  value = arg0;
-  new_var2 = value;
+  f32 *angleWrapConstants;
+  f32 originalAngle;
+  value = angle;
+  originalAngle = value;
   if (1)
   {
-    if (((long long) (D_800C5C48_de < new_var2)) || (new_var2 < (-25.13274383544922f)))
+    if (((long long) (k_xmathPositiveAngleModuloThreshold < originalAngle)) || (originalAngle < (-25.13274383544922f)))
     {
-      value = (f32) FloatModulo((f64) value, D_800C5C50_de);
+      value = (f32) FloatModulo((f64) value, k_xmathPositiveAnglePeriodDouble);
     }
     else
     {
-      if (D_800C5C58_de[0] < value)
+      if (k_xmathPositiveAngleWrapConstants[0] < value)
       {
-        new_var3 = D_800C5C58_de[0];
+        angleReductionValue = k_xmathPositiveAngleWrapConstants[0];
         do
         {
-          value -= new_var3;
+          value -= angleReductionValue;
           if (1)
           {
           }
         }
-        while (new_var3 < value);
+        while (angleReductionValue < value);
       }
       if (value < 0.0f)
       {
         do
         {
-          new_var = D_800C5C58_de;
-          value += new_var[1];
+          angleWrapConstants = k_xmathPositiveAngleWrapConstants;
+          value += angleWrapConstants[1];
         }
-        while (value < (new_var3 = 0.0f));
+        while (value < (angleReductionValue = 0.0f));
       }
     }
   }
@@ -90,14 +90,14 @@ f32 XMath_WrapAnglePositive(f32 arg0)
 
 f32 XMath_WrapAngleCentered(f32 x)
 {
-  f32 new_var;
-  float new_var3;
-  f32 new_var2;
-  new_var = D_800C5C60_de;
-  new_var2 = x + new_var;
+  f32 centerOffset;
+  float shiftedAngle;
+  f32 wrappedAngle;
+  centerOffset = k_xmathAngleCenterOffset;
+  wrappedAngle = x + centerOffset;
   {
-    new_var3 = new_var2;
+    shiftedAngle = wrappedAngle;
   }
-  new_var2 = wrap(new_var3);
-  return new_var2 - D_800C5C80_de;
+  wrappedAngle = wrap(shiftedAngle);
+  return wrappedAngle - k_xmathCenteredAngleOffset;
 }

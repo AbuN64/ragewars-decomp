@@ -12,18 +12,18 @@
 #include "TYPES.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 extern void Graphu64_ScaleVector(void *, void *, f32);
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, Triple *, s32 *, s32, s32);
-extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(Triple *);
+extern struct CacheResourceBlockView Graphu64_BuildDirectionQuaternion(Triple *);
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
-void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 attachmentsRemaining, struct MatrixF *attachmentMatrices, func_8026E5E0_S3 *actor, AttachmentTable *attachmentNodes) {
+void Ghot_DispatchAttachmentEffects(ModelAttachmentEffect *effectAttachments, s32 attachmentsRemaining, struct MatrixF *attachmentMatrices, AttachmentEffectActorView *actor, AttachmentTable *attachmentNodes) {
     Triple pos;
     Triple mapped;
     Triple zero;
-    struct Shape_typemap_165 rotation;
+    struct CacheResourceBlockView rotation;
     AttachmentEffectArgs params;
     s32 room;
     f32 actorParticleScale;
@@ -34,20 +34,20 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
     u16 attachmentNodeIndex;
     u32 attachmentMask;
     u8 *node;
-    ObjRecAt4V7 *effectBinding;
+    AttachmentEffectBinding *effectBinding;
 
     attachmentsRemaining = attachmentsRemaining - 1;
     if (attachmentsRemaining != -1) {
         do {
-            effectBinding = (void *)&effectAttachments->unkC;
-            if (effectBinding->unk0 & actor->unk2E0) {
-                attachmentNodeIndex = effectBinding->unk4;
+            effectBinding = (void *)&effectAttachments->effectMask;
+            if (effectBinding->effectMask & actor->attachmentEffectMask) {
+                attachmentNodeIndex = effectBinding->boneIndex;
                 node = attachmentNodes->bytes + attachmentNodeIndex * attachmentNodes->stride;
                 attachmentEffectFlags = (*node == 5) * 2;
                 Graphu64_TransformPoint(&attachmentMatrices[attachmentNodeIndex], effectAttachments, &pos);
                 Graphu64_ScaleVector(&pos, &pos, 0.000015258789f);
                 particleLifeRange = 0;
-                attachmentMask = effectBinding->unk0;
+                attachmentMask = effectBinding->effectMask;
                 switch (attachmentMask) {                  /* irregular */
 #if !defined(VERSION_DE)
                 case 0x2:
@@ -63,30 +63,30 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
                 case 0x20:
                     break;
                 case 0x40:
-                    actor->unk248 = pos;
-                    actorDefinitionKind = *actor->unk18;
-                    if (((actorDefinitionKind == 1) && (actor->unk1A4 == 0x21)) || ((actorDefinitionKind == 0xB) && (actor->unk1D8->unk650 == 0x26))) {
+                    actor->attachmentPosition = pos;
+                    actorDefinitionKind = *actor->definition;
+                    if (((actorDefinitionKind == 1) && (actor->action == 0x21)) || ((actorDefinitionKind == 0xB) && (actor->player->action == 0x26))) {
                         InstHdr_CopyActorPositionAndModel(actor, pos, &mapped, &room, 0, 1);
-                        rotation = Graphu64_BuildDirectionQuaternion(&actor->unk254);
+                        rotation = Graphu64_BuildDirectionQuaternion(&actor->attachmentDirection);
                         zero.x = 0;
                         zero.y = 0;
                         zero.z = 0;
-                        if (actor->unk1B0 <
+                        if (actor->effectThresholdValue <
 #if defined(VERSION_US)
-                            D_800C4960_eu
+                            g_attachmentParticleEmissionThreshold
 #elif defined(VERSION_EU)
-                            D_800C4960_eu
+                            g_attachmentParticleEmissionThreshold
 #elif defined(VERSION_EU_X)
-                            D_800C4960_eu
+                            g_attachmentParticleEmissionThreshold
 #elif defined(VERSION_DE)
-                            D_800C46B0
+                            g_attachmentParticleEmissionThresholdDe
 #else
-                            D_800C4960_eu
+                            g_attachmentParticleEmissionThreshold
 #endif
                         ) {
-                            Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE6, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
+                            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE6, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
                         }
-                        Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x8A, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
+                        Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x8A, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
                     }
                     break;
                 case 0x80:
@@ -150,7 +150,7 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
                     Barrel_SpawnActorEffect(actor, 0x11C, pos, attachmentEffectFlags);
                     break;
                 case 0x10000000:
-                    actor->unk260 = pos;
+                    actor->secondaryAttachmentPosition = pos;
                     break;
                 case 0x800000:
                     particleLifeRange = 5;
@@ -173,27 +173,27 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
                     params.fields.modifier = 0;
                     params.fields.chance = 0;
 #if defined(VERSION_US)
-                    lifetime = D_800C4964_eu;
+                    lifetime = g_attachmentParticleLifetimeBase;
 #elif defined(VERSION_EU)
-                    lifetime = D_800C4964_eu;
+                    lifetime = g_attachmentParticleLifetimeBase;
 #elif defined(VERSION_EU_X)
-                    lifetime = D_800C4964_eu;
+                    lifetime = g_attachmentParticleLifetimeBase;
 #elif defined(VERSION_DE)
-                    lifetime = D_800C46B4;
+                    lifetime = g_attachmentParticleLifetimeBaseDe;
 #else
-                    lifetime = D_800C4964_eu;
+                    lifetime = g_attachmentParticleLifetimeBase;
 #endif
                     lifetime /= actorParticleScale;
 #if defined(VERSION_US)
-                    lifetime *= D_800C4968_eu;
+                    lifetime *= g_attachmentParticleLifetimeScale;
 #elif defined(VERSION_EU)
-                    lifetime *= D_800C4968_eu;
+                    lifetime *= g_attachmentParticleLifetimeScale;
 #elif defined(VERSION_EU_X)
-                    lifetime *= D_800C4968_eu;
+                    lifetime *= g_attachmentParticleLifetimeScale;
 #elif defined(VERSION_DE)
-                    lifetime *= D_800C46B8;
+                    lifetime *= g_attachmentParticleLifetimeScaleDe;
 #else
-                    lifetime *= D_800C4968_eu;
+                    lifetime *= g_attachmentParticleLifetimeScale;
 #endif
                     params.fields.lifeBase = (s16)(s32)lifetime;
                     Events_DeliverContactEffect(actor, actor, 3, -1, pos, params);
@@ -207,19 +207,19 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8026E5E0_CA3A0_us_rev1.c */
-const unsigned int D_blob_66088a10f518a8d8ca1f[3] = {
+const unsigned int g_Ghot_DispatchAttachmentEffectsConstantWords[3] = {
     0x41700000, 0x40A00000, 0x43800000,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C45EC[1] = {
+unsigned int k_GhotEncodedWords[1] = {
     0x740E6D5F,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C496C[1] = {
+unsigned int k_GhotEncodedWordsBlock1[1] = {
     0x4491A000,
 };
 #endif

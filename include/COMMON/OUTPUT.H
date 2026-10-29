@@ -66,15 +66,15 @@ struct ActorMotion;
 struct MotionContactResult;
 
 
-struct ObjRecAt18C;
-struct ObjRecAt18C {
+struct CollisionContactVectorView;
+struct CollisionContactVectorView {
     char pad0[0x18C];
-    Triple unk18C;
+    Triple contactVector;
 };
 
 
-struct ObjRecAt18C;
-typedef struct ObjRecAt18C ObjRecAt18C;
+struct CollisionContactVectorView;
+typedef struct CollisionContactVectorView CollisionContactVectorView;
 
 struct PolygonCCollisionTestRayCylinder;
 typedef struct PolygonCCollisionTestRayCylinder PolygonCCollisionTestRayCylinder;
@@ -132,7 +132,7 @@ struct Input {
     struct Instance *instance104;
     s32 field108;
     Block70 block10C;
-    s32 field17C;
+    s32 reservedWord;
     Triple vec180;
     CVector3 contactNormal; /* 0x18C */
 };
@@ -188,23 +188,23 @@ struct CCollisionResults {
     Triple vecE4;
     Triple vecF0;
     s32 typeFC;
-    s32 field100;
+    s32 contactValue;
 };
 
 struct RayCCollisionTestRayCylinder;
 typedef struct RayCCollisionTestRayCylinder RayCCollisionTestRayCylinder;
 
 
-struct ObjRecAt48;
-typedef struct ObjRecAt48 ObjRecAt48;
+struct CollisionPolygonNormalView;
+typedef struct CollisionPolygonNormalView CollisionPolygonNormalView;
 
 struct Reusable;
 typedef struct Reusable Reusable;
 
-struct ObjRecAt48;
-struct ObjRecAt48 {
+struct CollisionPolygonNormalView;
+struct CollisionPolygonNormalView {
     char pad0[0x48];
-    Triple unk48;
+    Triple normal;
 };
 
 struct SegmentCode8023A284;
@@ -228,7 +228,7 @@ struct SegmentCode8023A284 {
 struct Input;
 typedef struct Input Input;
 
-extern float D_800C87B4;
+extern float g_collisionCylinderRangeMargin;
 
 
 
@@ -237,13 +237,13 @@ struct Reusable;
 
 struct CapsuleSweep;
 
-extern f32 D_800C3670_de;
-extern f32 D_800C3674_de;
-extern f32 D_800C3678_de;
-extern f32 D_800C367C_de;
-extern f32 D_800C3680_de;
-extern f32 D_800C3684_de;
-extern f32 D_800C3688_de;
-extern f32 D_800C368C_de;
+extern f32 g_collisionBounceOrientationDampingBase;
+extern f32 g_collisionBounceRemainingFractionBase;
+extern f32 g_collisionSlideOrientationDampingBase;
+extern f32 g_collisionSlideRemainingFractionBase;
+extern f32 g_collisionPreservedSlideFractionBase;
+extern f32 g_collisionBlendedSlideDampingBase;
+extern f32 g_collisionBlendedSlideFractionBase;
+extern f32 g_collisionSurfaceGravityScale;
 extern CVector3 Graphu64_ProjectVectorPreservingLength(CVector3 *,CVector3 *);
 #endif

@@ -1,0 +1,7 @@
+
+#if defined(VERSION_US_REV1)
+unsigned int g_characterPreviewPositions16UsRev1[12] = {
+    0x42200000, 0x40000000, 0xC2C80000, 0xC2200000, 0x40000000, 0xC2C80000, 0x42000000, 0xC2040000,
+    0xC2A00000, 0xC1F80000, 0xC2040000, 0xC2A00000,
+};
+#endif

@@ -3,22 +3,22 @@
 #include "TYPES.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
-struct ObjRecAtDC {
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+struct SoundSlotHandleView {
     char pad0[0xDC];
-    s16 unkDC;
+    s16 soundId;
 };
-struct func_80245A10_S1 {
+struct VoiceMatchingKeyView {
     char pad0[0x104];
-    int unk104;
+    int voiceKey;
 };
-struct ObjRecAt4V6 {
+struct VoiceRecordHolder {
     char pad0[0x4];
-    RecordCode8025A3EC unk4;
+    RecordCode8025A3EC record;
 };
-struct RecordRecAt4V3 {
-    HeaderRecAt102 *header;
-    SlotRecAtA8 slots[17];
+struct VoiceKeyTable {
+    AudioSelectedHandleView *header;
+    AudioVoiceKeySlotView slots[17];
 };
 struct IntegerStateB4 {
     s32 unk_0;
@@ -31,8 +31,8 @@ struct IntegerStateB4 {
     s32 unk_AC;
     s32 unk_B0;
 };
-struct ObjRecAtCV4 {
-    HeaderRecAt102 *owner;
+struct VoiceKeyPairTable {
+    AudioSelectedHandleView *owner;
     char pad4[8];
     SlotCode8025A3EC slots[16];
 };
@@ -87,13 +87,13 @@ struct ViewChannelUpdateVoicePlayback {
     s32 attenuate; /* 0xC4 */
     f32 volumeScale; /* 0xC8 */
 };
-struct RecordRecAt4V6 {
-    struct HeaderRecAt102 *header;
-    SlotRecAtB0 slots[17];
+struct VoiceStopKeyTable {
+    struct AudioSelectedHandleView *header;
+    AudioVoiceStopKeySlotView slots[17];
 };
-struct RecordRecAt4V5 {
-    HeaderRecAt102 *header;
-    SlotRecAtB4V1 slots[17];
+struct VoiceSecondaryKeyTable {
+    AudioSelectedHandleView *header;
+    AudioVoiceSecondarySlotView slots[17];
 };
 struct Emitter {
     char pad0[0x34];
@@ -122,22 +122,22 @@ typedef struct SoundSpatialSource {
 struct ViewChannelUpdateVoicePitch {
     s32 slot;
     char pad4[0xC];
-    MotionRecAt24 motion;
+    VoicePitchMotion motion;
     char pad38[0x60 - 0x38];
-    AnglesRecAt8 angles;
+    VoicePitchAngles angles;
     f32 pitch;
     f32 pitchStep;
     char pad74[0xA4 - 0x74];
     s32 flags;
     char padA8[0xB0 - 0xA8];
-    struct ContextRecAt104 *context;
+    struct VoicePitchChannelContext *context;
     char padB4[4];
     f32 scale;
 };
 struct VoiceChannelUpdateVoicePan {
     s32 index;
     char pad4[0xC];
-    ParamsRecAt18 params;
+    VoiceVolumeParameters params;
     char position[0x44];
     s32 sweeping;
     char pad8C[4];

@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 
-extern s32 D_8013B364;
+extern s32 g_navigationGraph;
 
 
 extern void *Portal_GetGraphPoint(void *, s32);
@@ -16,7 +16,7 @@ extern void *Portal_GetGraphPoint(void *, s32);
 
 
 
-void Nav_SelectFlaggedRoamingGoal(void *arg0)
+void Nav_SelectFlaggedRoamingGoal(void *controller)
 {
     s32 choices[32];
     s32 count;
@@ -34,7 +34,7 @@ void Nav_SelectFlaggedRoamingGoal(void *arg0)
         } while (index >= 0);
 
         {
-            s32 *table = &D_8013B364;
+            s32 *table = &g_navigationGraph;
         index = 0;
         if (table[1] > 0) {
             do {
@@ -49,38 +49,38 @@ void Nav_SelectFlaggedRoamingGoal(void *arg0)
     }
 
     if (count == 0) {
-        s32 global_count = D_8013B368;
-        s32 *table = &D_8013B364;
+        s32 global_count = g_navigationNodeCount;
+        s32 *table = &g_navigationGraph;
         s32 tries = 0;
         s32 candidate;
         if (global_count >= 2) {
-            candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
+            candidate = ((NavigationBrainView *)controller)->goal;
 loop:
             if (tries < 10) {
                 candidate = Graphu64_NextRandom() % table[1];
                 if (navigation_point_flags((NavigationPoint *)Portal_GetGraphPoint(table, candidate)) & 0x400) {
-                    candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
+                    candidate = ((NavigationBrainView *)controller)->goal;
                 }
                 tries++;
-                if (candidate != ((Brain_func_80212D78_eu_x *)arg0)->goal) {
+                if (candidate != ((NavigationBrainView *)controller)->goal) {
                     goto store_both;
                 }
                 goto loop;
             } else {
-                ((Brain_func_80212D78_eu_x *)arg0)->goal = candidate;
+                ((NavigationBrainView *)controller)->goal = candidate;
                 goto store_c;
             }
         } else {
             candidate = 1;
         }
 store_both:
-        ((Brain_func_80212D78_eu_x *)arg0)->goal = candidate;
+        ((NavigationBrainView *)controller)->goal = candidate;
 store_c:
-        ((Brain_func_80212D78_eu_x *)arg0)->nextNode = candidate;
+        ((NavigationBrainView *)controller)->nextNode = candidate;
     } else {
         result = choices[Graphu64_NextRandom() % count];
     }
 
-    ((Brain_func_80212D78_eu_x *)arg0)->goal = result;
-    ((Brain_func_80212D78_eu_x *)arg0)->nextNode = result;
+    ((NavigationBrainView *)controller)->goal = result;
+    ((NavigationBrainView *)controller)->nextNode = result;
 }

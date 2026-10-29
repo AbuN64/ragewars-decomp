@@ -5,7 +5,7 @@
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/PACKED.H"
-#include "COMMON/OBJECTLINKS150C.H"
+#include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
 #include "TYPES.H"
 #include "SYSTEM/DEFS.H"
 #include "COMMON/APPROACHLOCATION.H"
@@ -16,7 +16,7 @@ extern void SetN64_SpawnModelEffect(s32, s32, s32, Triple, Triple, s32, f32);
 
 extern f32 Region_GetPolygonHeight(void *, f32, f32);
 
-extern f32 Graphu64_GetTrianglePlaneHeight(void *node, f32 arg1, f32 arg2);
+extern f32 Graphu64_GetTrianglePlaneHeight(void *node, f32 x, f32 z);
 
 extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bankOffset, s32 level);
 
@@ -62,12 +62,12 @@ void *Scene_ResolveFloorPolygon(void *triangle, CVector3 *position) {
 
 
 
-EntryRecAt18V4 *Scene_FindSwitchByDefinitionId(World *world, s32 id) {
+SceneDefinitionActorView *Scene_FindSwitchByDefinitionId(World *world, s32 id) {
     s32 i;
-    EntryRecAt18V4 *found = 0;
+    SceneDefinitionActorView *found = 0;
 
     for (i = 0; i < world->count; i++) {
-        if (world->list[i]->def->unkC == id) {
+        if (world->list[i]->def->input == id) {
             found = world->list[i];
             break;
         }
@@ -75,8 +75,8 @@ EntryRecAt18V4 *Scene_FindSwitchByDefinitionId(World *world, s32 id) {
     return found;
 }
 
-void Scene_LocateTextureResource(void *arg0, s32 sectionIndex, s32 *arg2, s32 *sectionSizeOut) {
-    *arg2 = SetN64_LocatePackSection((((struct IntegerState54 *) ((s8 *) arg0))->unk_50), (((struct IntegerState54 *) ((s8 *) arg0))->unk_20), sectionIndex, sectionSizeOut);
+void Scene_LocateTextureResource(void *world, s32 sectionIndex, s32 *resourceAddressOutput, s32 *sectionSizeOut) {
+    *resourceAddressOutput = SetN64_LocatePackSection((((struct SceneCounterPairView *) ((s8 *) world))->unk_50), (((struct SceneCounterPairView *) ((s8 *) world))->unk_20), sectionIndex, sectionSizeOut);
 }
 
 s32 Scene_GetIndexedModelResource(Shared_World *world, s32 type) {
@@ -88,28 +88,28 @@ s32 Scene_GetIndexedModelResource(Shared_World *world, s32 type) {
     return 0;
 }
 
-s32 Scene_FindAlternateTriggerRange(char *world, u16 *arg1, s32 *arg2, s32 *arg3) {
+s32 Scene_FindAlternateTriggerRange(char *world, u16 *triggerIds, s32 *firstIndex, s32 *lastIndex) {
     s32 sp18;
     s32 sp1C;
     s32 matchCount;
     s32 field_cc;
     s32 field_c4;
 
-    matchCount = Defs_FindSortedGroupRange(field_cc, field_c4, *arg1,
+    matchCount = Defs_FindSortedGroupRange(field_cc, field_c4, *triggerIds,
         (field_cc = (s32)((Shared_World *)world)->alternateRecordIndex,
          field_c4 = ((Shared_World *)world)->alternateRecordCount, &sp18), &sp1C);
     if (matchCount != 0) {
-        *arg2 = (s32)((Shared_World *)world)->alternateRecordArray + (sp18 * 0x14);
+        *firstIndex = (s32)((Shared_World *)world)->alternateRecordArray + (sp18 * 0x14);
         matchCount = (sp1C - sp18) + 1;
-        *arg3 = matchCount;
+        *lastIndex = matchCount;
     } else {
-        *arg2 = 0;
-        *arg3 = 0;
+        *firstIndex = 0;
+        *lastIndex = 0;
     }
     return matchCount;
 }
 
-void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *arg2, s32 *arg3) {
+void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *firstIndex, s32 *lastIndex) {
     s32 sp18;
     s32 last;
     s32 index;
@@ -133,22 +133,22 @@ void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *arg2, s32 *
         index = -1;
     }
     if (index == -1) {
-        *arg3 = 0;
+        *lastIndex = 0;
         return;
     }
     sortedGroupRangeResult = Defs_FindSortedGroupRange(field_c8, field_c0, index,
         (field_c8 = (s32)((Shared_World *)world)->recordIndex,
          field_c0 = ((Shared_World *)world)->recordCount, &sp18), &last);
     if (sortedGroupRangeResult != 0) {
-        *arg2 = (s32)((Shared_World *)world)->recordArray + (sp18 * 0x14);
-        *arg3 = (last - sp18) + 1;
+        *firstIndex = (s32)((Shared_World *)world)->recordArray + (sp18 * 0x14);
+        *lastIndex = (last - sp18) + 1;
     } else {
-        *arg2 = 0;
-        *arg3 = 0;
+        *firstIndex = 0;
+        *lastIndex = 0;
     }
 }
 
-void Scene_ActivateTriggersOfKind(Shared_World *world, s32 arg1) {
+void Scene_ActivateTriggersOfKind(Shared_World *world, s32 triggerKind) {
     s32 primaryRemaining;
     s32 alternateRemaining;
     Record14 *trigger;
@@ -159,7 +159,7 @@ void Scene_ActivateTriggersOfKind(Shared_World *world, s32 arg1) {
     primaryRemaining -= 1;
     if (primaryRemaining != -1) {
         do {
-            if (trigger->kind == arg1) {
+            if (trigger->kind == triggerKind) {
                 Link_ActivateTrigger(trigger);
             }
             primaryRemaining -= 1;
@@ -171,7 +171,7 @@ void Scene_ActivateTriggersOfKind(Shared_World *world, s32 arg1) {
     alternateRemaining -= 1;
     if (alternateRemaining != -1) {
         do {
-            if (alternateTrigger->kind == arg1) {
+            if (alternateTrigger->kind == triggerKind) {
                 Link_ActivateTrigger(alternateTrigger);
             }
             alternateRemaining -= 1;

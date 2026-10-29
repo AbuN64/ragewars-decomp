@@ -154,10 +154,10 @@ s32 Curve_DecodePackedChannels(s32 destinations, void *encoded, s32 channel_coun
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802652E4[12] =
+char s_CurvePairTYDiText[12] =
     "Pair_t\014m_YDi";
 #endif
 
 #if defined(VERSION_DE)
-unsigned char D_auto_func_80265344_de_padding_65F44[12] = { 0x34, 0x63, 0xFF, 0xFF, 0x3C, 0x04, 0x80, 0x00, 0x8C, 0x84, 0x03, 0x18 };
+unsigned char g_CurveTrailingBytes[12] = { 0x34, 0x63, 0xFF, 0xFF, 0x3C, 0x04, 0x80, 0x00, 0x8C, 0x84, 0x03, 0x18 };
 #endif

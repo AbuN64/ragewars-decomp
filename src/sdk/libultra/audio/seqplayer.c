@@ -19,9 +19,9 @@ static inline ALVoice_s *event_voice(ALEvent *event) {
 
 extern s32 __alSeqNextDelta(void *sequence, s32 *deltaTicks);
 
-extern s32 alSeqGetTicks(void *arg0);
+extern s32 alSeqGetTicks(void *sequence);
 
-extern void alSeqSetLoc(void *arg0, void *arg1);
+extern void alSeqSetLoc(void *sequence, void *marker);
 
 /** Store a new history slot (pointer + selected byte/word fields) into the ring buffer at arg0+0x60. */
 void __setInstChanState(void *seqPlayer, void *selectedInstrument, s32 channelNumber) {
@@ -114,32 +114,32 @@ void __postNextSeqEvent(void *seqPlayer) {
     s32 remainingLoops;
     void *sequence;
 
-    sequence = ((ObjectLinks88 *)(seqPlayer))->unk_18;
-    if ((((ObjectLinks88 *)(seqPlayer))->unk_2C == 1) && (sequence != 0) &&
+    sequence = ((SequencePlayerEventView *)(seqPlayer))->unk_18;
+    if ((((SequencePlayerEventView *)(seqPlayer))->unk_2C == 1) && (sequence != 0) &&
         (__alSeqNextDelta(sequence, &deltaTicks) & 0xFF)) {
-        if ((((ObjectLinks88 *)(seqPlayer))->unk_84 != 0) &&
+        if ((((SequencePlayerEventView *)(seqPlayer))->unk_84 != 0) &&
             ((alSeqGetTicks(sequence) + deltaTicks) >=
-             ((struct func_80254D70_S2 *) ((ObjectLinks88 *) seqPlayer)->unk_80)->unk8)) {
-            alSeqSetLoc(sequence, ((ObjectLinks88 *)(seqPlayer))->unk_7C);
-            remainingLoops = ((ObjectLinks88 *)(seqPlayer))->unk_84;
+             ((struct MenuTextOwnerView *) ((SequencePlayerEventView *) seqPlayer)->unk_80)->flags)) {
+            alSeqSetLoc(sequence, ((SequencePlayerEventView *)(seqPlayer))->unk_7C);
+            remainingLoops = ((SequencePlayerEventView *)(seqPlayer))->unk_84;
             if (remainingLoops != -1) {
-                ((ObjectLinks88 *)(seqPlayer))->unk_84 = remainingLoops - 1;
+                ((SequencePlayerEventView *)(seqPlayer))->unk_84 = remainingLoops - 1;
             }
         }
         referenceEvent.type = 0;
-        alEvtqPostEvent(&((ObjectLinks88 *)(seqPlayer))->unk_48, &referenceEvent,
-                      deltaTicks * ((ObjectLinks88 *)(seqPlayer))->unk_24);
+        alEvtqPostEvent(&((SequencePlayerEventView *)(seqPlayer))->unk_48, &referenceEvent,
+                      deltaTicks * ((SequencePlayerEventView *)(seqPlayer))->unk_24);
     }
 }
 
-extern void func_802B1E50_de(void *player, f32 tempo);
+extern void Seqplayer_SetTempoMicrosecondsPerTick(void *player, f32 tempo);
 
-void __handleMetaMsg(void *player, void *arg1) {
-    u8 *p = (u8 *)arg1;
+void __handleMetaMsg(void *player, void *metaEvent) {
+    u8 *p = (u8 *)metaEvent;
     int pad[4];
 
     (void)pad;
     if (p[8] == 0xFF && p[9] == 0x51) {
-        func_802B1E50_de(player, (f32)((p[0xB] << 0x10) | (p[0xC] << 8) | p[0xD]));
+        Seqplayer_SetTempoMicrosecondsPerTick(player, (f32)((p[0xB] << 0x10) | (p[0xC] << 8) | p[0xD]));
     }
 }

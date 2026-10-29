@@ -73,29 +73,29 @@ recurse:
 }
 
 /* Sorts fixed-stride records by selecting a maximum and swapping it to the end. */
-void PpDecom_SelectionSortRange(u32 arg0, u32 arg1, s32 width, s32 (*arg3)(u32, u32), void (*arg4)(u32, u32)) {
-    u32 var_a0;
-    u32 var_s0;
-    u32 var_s1;
-    u32 var_s2;
-    var_s2 = arg1;
-    if (arg0 < var_s2) {
-        var_s0 = arg0 + width;
+void PpDecom_SelectionSortRange(u32 firstRecord, u32 lastRecord, s32 width, s32 (*compareRecords)(u32, u32), void (*swapRecords)(u32, u32)) {
+    u32 candidateRecord;
+    u32 scanRecord;
+    u32 greatestRecord;
+    u32 unsortedLastRecord;
+    unsortedLastRecord = lastRecord;
+    if (firstRecord < unsortedLastRecord) {
+        scanRecord = firstRecord + width;
         do {
-            do { var_s1 = arg0; } while (0);
-            if (var_s2 >= var_s0) {
-                var_a0 = var_s0;
+            do { greatestRecord = firstRecord; } while (0);
+            if (unsortedLastRecord >= scanRecord) {
+                candidateRecord = scanRecord;
                 do {
-                    if (arg3(var_a0, var_s1) > 0) {
-                        var_s1 = var_s0;
+                    if (compareRecords(candidateRecord, greatestRecord) > 0) {
+                        greatestRecord = scanRecord;
                     }
-                    var_s0 += width;
-                    var_a0 = var_s0;
-                } while (var_s2 >= var_s0);
+                    scanRecord += width;
+                    candidateRecord = scanRecord;
+                } while (unsortedLastRecord >= scanRecord);
             }
-            arg4(var_s1, var_s2);
-            var_s2 -= width;
-            var_s0 = arg0 + width;
-        } while (arg0 < var_s2);
+            swapRecords(greatestRecord, unsortedLastRecord);
+            unsortedLastRecord -= width;
+            scanRecord = firstRecord + width;
+        } while (firstRecord < unsortedLastRecord);
     }
 }

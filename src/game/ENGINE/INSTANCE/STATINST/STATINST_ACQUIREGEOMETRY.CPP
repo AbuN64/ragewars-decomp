@@ -36,6 +36,6 @@ void *Statinst_AcquireGeometry(ResourceOwner *owner,s32 index) {
         }
     }
     if (owner->selected != 0) {
-        return Cache_RequestResource(0,owner->selected,owner->selected,owner->size,0,0,D_0026D7D4_de,s_statModelText,0);
+        return Cache_RequestResource(0,owner->selected,owner->selected,owner->size,0,0,g_Geometry_ExpandBasicModelAddressDe,s_statModelText,0);
     } else { return 0; }
 }

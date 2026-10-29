@@ -5,7 +5,7 @@
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "COMMON/WORLD.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
@@ -56,11 +56,11 @@ void SetN64_SelectSpawnAndStartSession(GameSession *gameSession, s32 target) {
     if (Scene_FindPlacedObjectsByKey(&g_world, -1, selectionValues, &spawn, 1) == 0) {
         selectionValues = 0;
     }
-    D_801462C8.counters.m_GameTimeFifteenth = 0;
-    D_801462C8.counters.m_GameTimeSeconds = 0;
-    D_801462C8.counters.m_GameTimeMinutes = 0;
-    D_801462C8.counters.m_GameTimeHours = 0;
-    D_801462C8.counters.first = 0;
+    g_gameSettings.counters.m_GameTimeFifteenth = 0;
+    g_gameSettings.counters.m_GameTimeSeconds = 0;
+    g_gameSettings.counters.m_GameTimeMinutes = 0;
+    g_gameSettings.counters.m_GameTimeHours = 0;
+    g_gameSettings.counters.first = 0;
     gameSession->phase = 2;
     gameSession->selector = selectionValues;
     gameSession->selectionActive = 1;

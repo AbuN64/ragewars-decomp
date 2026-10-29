@@ -1,9 +1,9 @@
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
-#include "COMMON/ARG.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 
@@ -15,13 +15,13 @@ s32 osContStartQuery(s32 completionQueue) {
     u8 *p;
 
     __osSiGetAccess();
-    p = &D_8014D4B0;
+    p = &g_controllerLastCommand;
     if (*p != 0) {
         __osPackRequestData(0);
-        __osSiRawStartDma(1, &D_8014D470);
+        __osSiRawStartDma(1, &g_controllerQueryPifBuffer);
         osRecvMesg(completionQueue, 0, 1);
     }
-    result = __osSiRawStartDma(0, &D_8014D470);
+    result = __osSiRawStartDma(0, &g_controllerQueryPifBuffer);
     *p = 0;
     __osSiRelAccess();
     return result;

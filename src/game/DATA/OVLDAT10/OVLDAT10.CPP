@@ -3,7 +3,7 @@
 
 /* 800FE3E4.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800FE3E4[13] = {
+unsigned int k_Ovldat10EncodedWords[13] = {
     0x00000000, 0x24020640, 0xAFC20014, 0x8FC40018, 0x8FC50014, 0x24060007, 0x0C000000, 0x00000000,
     0xAFC20020, 0x8FC20018, 0x8FC30020, 0x8C420644, 0x14620008,
 };
@@ -11,14 +11,14 @@ unsigned int D_auto_rodata_unresolved_800FE3E4[13] = {
 
 /* 800FE3E4_2.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_writable_800FE418[8] = {
+unsigned int k_Ovldat10EncodedWordsBlock5[8] = {
     0x00000000, 0x8FC40030, 0x0C000000, 0x00000000, 0x24020001, 0xAFC2001C, 0x08000000, 0x00000000,
 };
 #endif
 
 /* 800FE438.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800FE438[62] = {
+unsigned int k_Ovldat10EncodedWordsBlock1[62] = {
     0x8FC40030, 0x8FC50034, 0x0C000000, 0x00000000, 0xAFC20010, 0x08000000, 0x00000000, 0x8FC40030,
     0x8FC50034, 0x0C000000, 0x00000000, 0xAFC20010, 0x8FC2001C, 0x1440001D, 0x00000000, 0x3C020000,
     0x8C420000, 0x8FC30030, 0x00602021, 0x000428C0, 0x00A32821, 0x000520C0, 0x00832021, 0x00041880,
@@ -32,26 +32,26 @@ unsigned int D_auto_rodata_unresolved_800FE438[62] = {
 
 /* 800FE438_2.CPP */
 #if defined(VERSION_US)
-unsigned int D_d1_8e575b292d1824d8[4] = {
+unsigned int g_Ovldat10EncodedWords[4] = {
     0x08000000, 0x00000000, 0x3C020000, 0x8C420000,
 };
 #endif
 
 /* 800FE548.CPP */
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800FE540[2] = {
+unsigned int k_Ovldat10EncodedWordsBlock9[2] = {
     0x8FC30000, 0x00602021,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_writable_800FE548[7] = {
+unsigned int k_Ovldat10EncodedWordsBlock6[7] = {
     0x000428C0, 0x00A32821, 0x000520C0, 0x00832021, 0x00041880, 0x00832021, 0x000418C0,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800FE564[1] = {
+unsigned int k_Ovldat10EncodedWordsBlock10[1] = {
     0x00431021,
 };
 #endif
@@ -64,7 +64,7 @@ unsigned int rodata_writable_800FE568[2] = {
 
 /* 800FE570.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800FE570[10] = {
+unsigned int k_Ovldat10EncodedWordsBlock2[10] = {
     0x00000000, 0x3C020000, 0x8C420000, 0x8FC30000, 0x00602021, 0x000428C0, 0x00A32821, 0x000520C0,
     0x00832021, 0x00041880,
 };
@@ -78,13 +78,13 @@ unsigned int rodata_writable_800FE598[2] = {
 
 /* 800FE5A8.CPP */
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800FE5A0[2] = {
+unsigned int k_Ovldat10EncodedWordsBlock11[2] = {
     0x00431021, 0x8C430058,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_writable_800FE5A8[142] = {
+unsigned int k_Ovldat10EncodedWordsBlock7[142] = {
     0x2402000E, 0x10620014, 0x00000000, 0x3C020000, 0x8C420000, 0x8FC30000, 0x00602021, 0x000428C0,
     0x00A32821, 0x000520C0, 0x00832021, 0x00041880, 0x00832021, 0x000418C0, 0x00431021, 0x8C430058,
     0x24020011, 0x10620004, 0x00000000, 0x8FC20004, 0x24430001, 0xAFC30004, 0x8FC20000, 0x24430001,
@@ -220,7 +220,7 @@ unsigned int rodata_writable_800FF134[3] = {
 
 /* 800FF140.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800FF140[7] = {
+unsigned int k_Ovldat10EncodedWordsBlock3[7] = {
     0x54052C04, 0x0200007C, 0xF4000032, 0x5C053474, 0x05003474, 0x05033474, 0x05003280,
 };
 #endif
@@ -233,11 +233,11 @@ unsigned int rodata_writable_800FF15C[1] = {
 
 /* 800FF160.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800FF160[7] = {
+unsigned int k_Ovldat10EncodedWordsBlock4[7] = {
     0x03328405, 0x0A5C9805, 0x2C040200, 0x009CF500, 0x0034A005, 0x020A60A2, 0x052C0403,
 };
 
-unsigned int D_auto_rodata_writable_800FF17C[9] = {
+unsigned int k_Ovldat10EncodedWordsBlock8[9] = {
     0x00000400, 0x00000A62, 0xA6052C04, 0x03000004, 0x0000000A, 0x60DE052C, 0x04030000, 0x04000000,
     0x0A62E205,
 };

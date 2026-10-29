@@ -11,6 +11,6 @@ void Textload_SetResourceLocation(int *value, int first, int second) {
     value[1] = second;
 }
 
-void Textload_LocateTextureResource(s32 *arg0, s32 sectionIndex) {
-    Scene_LocateTextureResource(&g_world, sectionIndex, arg0, arg0 + 1);
+void Textload_LocateTextureResource(s32 *resourcePair, s32 sectionIndex) {
+    Scene_LocateTextureResource(&g_world, sectionIndex, resourcePair, resourcePair + 1);
 }

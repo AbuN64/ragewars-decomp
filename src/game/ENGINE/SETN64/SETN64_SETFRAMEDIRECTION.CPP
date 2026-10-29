@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "include_asm.h"
-#include "RENDER/802909E0.H"
+#include "RENDER/RECORD_OUTPUT_AND_TIMED_SESSION_VIEWS.H"
 #include "RENDER/SETN64_SETFRAMEDIRECTION.H"
 
 void SetN64_ClearFrameDirection(void *frame) {
@@ -15,16 +15,16 @@ void SetN64_ClearFrameDirection(void *frame) {
 void SetN64_OnFrameComplete(void *schedule) {}
 
 
-void SetN64_SetFrameDirection(void *frame, void *arg1) {
+void SetN64_SetFrameDirection(void *frame, void *directionStorage) {
     Frame *view = frame;
-    CVector3 *direction = arg1;
+    CVector3 *direction = directionStorage;
     view->direction = *direction;
     Graphu64_NormalizeVec3(&view->direction.x);
 }
 
 /** Copy four scalar fields from the source into output pointers. */
 void SetN64_GetRecordOutputs(void *source, int *word, float *third, float *fourth, float *second) {
-    ObjRecAt20V1 *source_record = source;
+    RecordOutputFieldsView *source_record = source;
     *word = source_record->unk20;
     *second = source_record->unk10;
     *third = source_record->unk8;
@@ -33,12 +33,12 @@ void SetN64_GetRecordOutputs(void *source, int *word, float *third, float *fourt
 
 #if defined(VERSION_US)
 /** Perform no operation. */
-void func_80290980_us(void) {
+void SetN64_EmptyFrameDirectionHookUs(void) {
 }
 #endif
 
 #if defined(VERSION_EU)
 /** Perform no operation. */
-void func_80290B80_eu(void) {
+void SetN64_EmptyFrameDirectionHookEu(void) {
 }
 #endif

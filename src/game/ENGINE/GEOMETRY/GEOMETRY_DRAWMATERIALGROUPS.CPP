@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "abi.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "gbi.h"
 #include "TYPES.H"
@@ -11,7 +11,7 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-extern Group18 *D_8010C56C,*D_8010C584;
+extern Group18 *g_opaqueMaterialGroupList,*g_translucentMaterialGroupList;
 
 extern Gfx *g_displayListCursor;
 
@@ -35,9 +35,9 @@ s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
  /* extern */
 
-extern s32 **D_8011064C;
+extern s32 **g_modelBatchResource;
 
-extern ObjRecAtCV2 D_801157D8[];
+extern QueuedModelInstance g_modelInstanceQueue[];
 
 extern s32 s_simpObjectIndexText;
 
@@ -48,7 +48,7 @@ extern s32 s_simpModelsIndexText;
 extern s32 s_simpModelText;
 
 void Geometry_DrawMaterialGroups(void) {
- Group18 *group=D_8010C56C,*deferred=0;
+ Group18 *group=g_opaqueMaterialGroupList,*deferred=0;
  Mesh *mesh;u16 scaleS,scaleT;u32 cmd;
  if(group)do {
   mesh=group->meshes;
@@ -90,7 +90,7 @@ void Geometry_DrawMaterialGroups(void) {
    group=group->next;
   }while(group);
  }
- group=D_8010C584;
+ group=g_translucentMaterialGroupList;
  if(group)do {
   mesh=group->meshes;
   if(mesh && Geometry_SetupMaterial(group->material,group->mode)) {
@@ -114,51 +114,51 @@ void Geometry_DrawMaterialGroups(void) {
  }while(group);
 }
 
-                          
-void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 direct) {
+
+void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 textures, s32 pass, s32 direct) {
         s32 *sp28;
         s32 sp2C;
-        s32 **temp_v0;
+        s32 **objectIndexResource;
         s32 **resource;
-        s32 temp_s0;
+        s32 modelResourceKey;
         s32 directoryEntryResult;
-        s32 temp_v0_2;
-        s32 temp_v0_3;
-        s32 temp_v1;
+        s32 modelIndexResource;
+        s32 modelVariantCount;
+        s32 instanceCount;
         s8 *packSectionResult;
-        ObjRecAtCV2 *temp_v1_2;
-        temp_v0 = Cache_RequestResource(0, arg0, arg0, 0x18, 0, 0, 0, &s_simpObjectIndexText, 1);
-        if (temp_v0 != 0) {
-                directoryEntryResult = SetN64_GetDirectoryEntry(*temp_v0, arg0, 1);
-                Cache_UnlockResource(0, temp_v0);
-                temp_v0_2 = Cache_RequestWordCountedResource(0, (void **) &sp28, directoryEntryResult, &s_simpModelsIndexText, 1);
-                if (temp_v0_2 != 0) {
-                        temp_v0_3 = *sp28;
-                        temp_s0 = SetN64_LocatePackSection((s32) sp28, directoryEntryResult, arg3 % temp_v0_3, &sp2C);
-                        Cache_UnlockResource(0, (void *) temp_v0_2);
-                        resource = Cache_RequestResource(0, temp_s0, temp_s0, sp2C, 0, 0, &D_0026D7F4, &s_simpModelText, direct);
+        QueuedModelInstance *queuedInstance;
+        objectIndexResource = Cache_RequestResource(0, modelIndex, modelIndex, 0x18, 0, 0, 0, &s_simpObjectIndexText, 1);
+        if (objectIndexResource != 0) {
+                directoryEntryResult = SetN64_GetDirectoryEntry(*objectIndexResource, modelIndex, 1);
+                Cache_UnlockResource(0, objectIndexResource);
+                modelIndexResource = Cache_RequestWordCountedResource(0, (void **) &sp28, directoryEntryResult, &s_simpModelsIndexText, 1);
+                if (modelIndexResource != 0) {
+                        modelVariantCount = *sp28;
+                        modelResourceKey = SetN64_LocatePackSection((s32) sp28, directoryEntryResult, textures % modelVariantCount, &sp2C);
+                        Cache_UnlockResource(0, (void *) modelIndexResource);
+                        resource = Cache_RequestResource(0, modelResourceKey, modelResourceKey, sp2C, 0, 0, &g_simpleModelResourceCallbackAddress, &s_simpModelText, direct);
                         if (resource != 0) {
                                 packSectionResult = SetN64_GetPackSection(*resource, 0);
-                                if (D_8011064C != resource || D_8010C564 != arg4 || D_80110640 == 0x20) {
+                                if (g_modelBatchResource != resource || g_modelBatchPass != pass || g_modelInstanceQueueCount == 0x20) {
                                         Geometry_GroupModelInstances();
-                                        if (D_80111310 != 0x100) {
+                                        if (g_modelBatchResourceCount != 0x100) {
                                                 Cache_LockResource(0, resource);
-                                                D_80111318[D_80111310] = resource;
-                                                D_80111310 += 1;
+                                                g_modelBatchResources[g_modelBatchResourceCount] = resource;
+                                                g_modelBatchResourceCount += 1;
                                                 goto block_11;
                                         }
                                 } else {
                                         block_11:
-                                        D_8011064C = resource;
+                                        g_modelBatchResource = resource;
 
-                                        D_8010C564 = arg4;
-                                        temp_v1 = D_80110640;
-                                        temp_v1_2 = &D_801157D8[temp_v1++];
-                                        D_80110640 = temp_v1;
-                                        temp_v1_2->unk0 = arg1;
-                                        temp_v1_2->unkC = 0;
-                                        temp_v1_2->unk4 = arg2;
-                                        temp_v1_2->unk8 = packSectionResult;
+                                        g_modelBatchPass = pass;
+                                        instanceCount = g_modelInstanceQueueCount;
+                                        queuedInstance = &g_modelInstanceQueue[instanceCount++];
+                                        g_modelInstanceQueueCount = instanceCount;
+                                        queuedInstance->matrix = matrix;
+                                        queuedInstance->segmented = 0;
+                                        queuedInstance->lights = lights;
+                                        queuedInstance->vertices = packSectionResult;
                                 }
                                 Cache_UnlockResource(0, resource);
                         }
@@ -170,7 +170,7 @@ void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg
 
 #include "COMMON/DISPLAY.H"
 
-#include "COMMON/LONE/D_800CC384.H"
+#include "COMMON/LONE/GEOMETRY_EFFECT_GEOMETRY_MODE.H"
 extern void Cache_MarkResourceInUse(s32, void **);
 
 /* Draws a pack resource model as a translucent decal: skips when fewer than 3000 display-list commands are
@@ -191,7 +191,7 @@ void Geometry_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     s32 partIndex;
     s32 opacity = alpha;
 
-    if (D_800E28A4 - (((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) >> 3) < 3000U) {
+    if (g_displayListCapacityUsRev1 - (((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) >> 3) < 3000U) {
         return;
     }
     resourceHeader = *(void **)resource;
@@ -207,10 +207,10 @@ void Geometry_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     }
     gSPSegment(g_displayListCursor++, 2, (u32)textures);
     partTable = SetN64_GetPackSection(resourceHeader, 2);
-    D_800CC360 = -1;
-    D_800CC364 = -1;
+    g_geometryPreviousModePreset = -1;
+    g_geometryPreviousCombineMode = -1;
     syncCommand = g_displayListCursor++;
-    geometryMode = D_800CC384;
+    geometryMode = g_geometryEffectGeometryMode;
     partCount = *(s32 *)partTable;
     gDPPipeSync(syncCommand);
     gDPSetTextureLUT(g_displayListCursor++, G_TT_NONE);
@@ -218,7 +218,7 @@ void Geometry_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     gDPSetPrimColor(g_displayListCursor++, 0, 0, 0, 0, 0, opacity & 0xFF);
     gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE,
                      0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE);
-    gDPSetRenderMode(g_displayListCursor++, D_800CC38C, G_RM_ZB_XLU_DECAL2);
+    gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, G_RM_ZB_XLU_DECAL2);
     gSPGeometryMode(g_displayListCursor++, G_SHADE | G_CULL_BACK | G_FOG |
                     G_LIGHTING | G_TEXTURE_GEN | G_SHADING_SMOOTH, 0);
     geometryMode |= G_CULL_BACK;
@@ -229,6 +229,6 @@ void Geometry_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
         displayList = SetN64_GetPackSection(partHeader, 1);
         gSPDisplayList(g_displayListCursor++, (u32)displayList);
     }
-    D_800CC364 = -1;
-    D_800CC360 = -1;
+    g_geometryPreviousCombineMode = -1;
+    g_geometryPreviousModePreset = -1;
 }

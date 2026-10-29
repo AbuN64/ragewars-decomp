@@ -1,5 +1,5 @@
 #include "COMMON/VIEWFLAGS.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -11,7 +11,7 @@
 #include "COMMON/DESCRIPTORRECAT29.H"
 
 /* Posts a text as on-screen messages for a target: the target's messages still in the pool's list at 0xE40
- * are unlinked and returned to the owner's list at 0xF24, then the text (or D_800D7028 when given D_800D7034)
+ * are unlinked and returned to the owner's list at 0xF24, then the text (or g_screenMessageSubstitutionReplacement when given g_screenMessageSubstitutionSource)
  * is split at newlines and for each non-empty line the oldest message node of the owner's list is recycled
  * and set up as a kind 2 message for the target, centred horizontally 80 pixels above the bottom of the
  * screen and scaled by the given size. Returns the last message node. */
@@ -19,11 +19,11 @@
 
 
 
-extern func_80237E70_G1 D_800D7028;
+extern ScreenMessageTextView g_screenMessageSubstitutionReplacement;
 
-extern func_80237E70_G1 D_800D7034;
+extern ScreenMessageTextView g_screenMessageSubstitutionSource;
 
-extern s32 D_800E28D0;
+extern s32 g_hudReferenceViewportWidth;
 
 
 static inline CCameraText *recycle(void *owner, void *pool) {
@@ -32,8 +32,8 @@ static inline CCameraText *recycle(void *owner, void *pool) {
     oldest = ((struct ScreenMessageOwner *)owner)->activeMessages.head;
     if (oldest != 0) {
         Gsky_ClearScreenMessage(oldest);
-        func_80255ED8_de(&((struct ScreenMessageOwner *)owner)->activeMessages, oldest);
-        func_80255D14_de(&((struct ScreenMessagePool *)pool)->freeMessages, oldest);
+        List_RemoveIntrusive(&((struct ScreenMessageOwner *)owner)->activeMessages, oldest);
+        List_AppendIntrusive(&((struct ScreenMessagePool *)pool)->freeMessages, oldest);
     }
     return oldest;
 }
@@ -48,8 +48,8 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
     if (pool == 0) {
         return message;
     }
-    if (text == D_800D7034.unk0) {
-        text = D_800D7028.unk0;
+    if (text == g_screenMessageSubstitutionSource.text) {
+        text = g_screenMessageSubstitutionReplacement.text;
     }
     p = text;
     line = p;
@@ -69,8 +69,8 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
                     message->pad2C = 0;
                     message->m_XScale = 1.0f;
                     message->m_YScale = 1.0f;
-                    height = D_800E28D4;
-                    message->x = D_800E28D0 / 2;
+                    height = g_hudReferenceViewportHeight;
+                    message->x = g_hudReferenceViewportWidth / 2;
                     message->y = height - 80;
                     message->m_DisplayTime = size * 15.0f;
                 }
@@ -81,7 +81,7 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
     return message;
 }
 
-extern void *D_80140FE8_de;
+extern void *g_gameplayCameraList;
 
 extern void Pool_InitEntryPool(int a);
 
@@ -97,8 +97,8 @@ CCameraText *Gsky_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s
     for (pending = ((struct ScreenMessagePool *)pool)->freeMessages.head; pending != 0; pending = next) {
         next = pending->next;
         if (pending->target == target) {
-            func_80255ED8_de(&((struct ScreenMessagePool *)pool)->freeMessages, pending);
-            func_80255CB8_de(&((struct ScreenMessageOwner *)owner)->activeMessages, pending);
+            List_RemoveIntrusive(&((struct ScreenMessagePool *)pool)->freeMessages, pending);
+            List_PrependIntrusive(&((struct ScreenMessageOwner *)owner)->activeMessages, pending);
         }
     }
     pending = post_lines(owner, pool, text, 2, size, target);
@@ -116,8 +116,8 @@ void Gsky_ActivateMessagePool(struct ScreenMessageOwner *owner, struct ScreenMes
         if (message != 0) {
             do {
                 nextMessage = message->next;
-                func_80255ED8_de(freeList, message);
-                func_80255CB8_de(&owner->activeMessages, message);
+                List_RemoveIntrusive(freeList, message);
+                List_PrependIntrusive(&owner->activeMessages, message);
                 message = nextMessage;
                 freeList = &pool->freeMessages;
             } while (message != 0);
@@ -139,22 +139,22 @@ void Gsky_ActivateAllMessagePools(s32 messageOwner) {
         if (embeddedMessage != 0) {
             do {
                 next = embeddedMessage->next;
-                func_80255ED8_de(&((struct ScreenMessagePool *)embeddedPool)->freeMessages, embeddedMessage);
-                func_80255CB8_de(&((struct ScreenMessageOwner *)messageOwner)->activeMessages, embeddedMessage);
+                List_RemoveIntrusive(&((struct ScreenMessagePool *)embeddedPool)->freeMessages, embeddedMessage);
+                List_PrependIntrusive(&((struct ScreenMessageOwner *)messageOwner)->activeMessages, embeddedMessage);
                 embeddedMessage = next;
             } while (embeddedMessage != 0);
         }
     }
 
-    poolCursor = D_80140FE8_de;
+    poolCursor = g_gameplayCameraList;
     if (poolCursor != 0) {
         do {
             pooledMessage = ((struct ScreenMessagePool *)poolCursor)->freeMessages.tail;
             if (pooledMessage != 0) {
                 do {
                     nextPooledMessage = pooledMessage->next;
-                    func_80255ED8_de(&((struct ScreenMessagePool *)poolCursor)->freeMessages, pooledMessage);
-                    func_80255CB8_de(&((struct ScreenMessageOwner *)messageOwner)->activeMessages, pooledMessage);
+                    List_RemoveIntrusive(&((struct ScreenMessagePool *)poolCursor)->freeMessages, pooledMessage);
+                    List_PrependIntrusive(&((struct ScreenMessageOwner *)messageOwner)->activeMessages, pooledMessage);
                     pooledMessage = nextPooledMessage;
                 } while (pooledMessage != 0);
             }
@@ -176,19 +176,19 @@ void *Gsky_RecycleFirstScreenMessage(void *screenMessageOwner, struct ScreenMess
     message = owner->activeMessages.head;
     if (message != 0) {
         Gsky_ClearScreenMessage(message);
-        func_80255ED8_de(&owner->activeMessages, message);
-        func_80255D14_de(&pool->freeMessages, message);
+        List_RemoveIntrusive(&owner->activeMessages, message);
+        List_AppendIntrusive(&pool->freeMessages, message);
     }
     return message;
 }
 
 void Gsky_ActivateScreenMessage(s32 destinationOwner, s32 sourcePool, s32 messageNode) {
-    func_80255ED8_de(sourcePool + 0xE40, messageNode);
-    func_80255CB8_de(destinationOwner + 0xF24, messageNode);
+    List_RemoveIntrusive(sourcePool + 0xE40, messageNode);
+    List_PrependIntrusive(destinationOwner + 0xF24, messageNode);
 }
 
-void Gsky_ClearScreenMessage(void *arg0) {
-    struct CCameraText_t *message = arg0;
+void Gsky_ClearScreenMessage(void *screenMessage) {
+    struct CCameraText_t *message = screenMessage;
     message->kind = 0;
     message->target = 0;
 }
@@ -202,17 +202,17 @@ void Gsky_InitializeShakeChannel(void *channelStorage) {
     channel->state[2] = 0;
 }
 
-/** Stores the float argument scaled by D_800C8658 at 0x4 of the object and the int argument at 0x0. */
+/** Stores the float argument scaled by k_screenMessageWaveLevelScale at 0x4 of the object and the int argument at 0x0. */
 
 
 
 
 void Gsky_SetShakeChannel(struct Channel *channel, float inputLevel, int waveMode) {
-    channel->level = inputLevel * (D_800C8658);
+    channel->level = inputLevel * (k_screenMessageWaveLevelScale);
     channel->mode = waveMode;
 }
 
-/* Evaluates a wave: kind 1 returns func_802B7130_de of the phase at 0x10 scaled by D_800C865C, times
+/* Evaluates a wave: kind 1 returns func_802B7130_de of the phase at 0x10 scaled by k_screenMessageWavePhaseScale, times
    the amplitude at 0xC; kind 0 returns Graphu64_RandomBetween over minus to plus the amplitude; any other
    kind returns zero. */
 
@@ -224,7 +224,7 @@ void Gsky_SetShakeChannel(struct Channel *channel, float inputLevel, int waveMod
 f32 Gsky_SampleShakeWave(struct Wave *wave) {
     switch (wave->kind) {
     case 1:
-        return Gu_Sinf(wave->phase * D_800C865C) * wave->amplitude;
+        return Gu_Sinf(wave->phase * k_screenMessageWavePhaseScale) * wave->amplitude;
     case 0:
         return Graphu64_RandomBetween(-wave->amplitude, wave->amplitude);
     }
@@ -233,13 +233,13 @@ f32 Gsky_SampleShakeWave(struct Wave *wave) {
 
 /** Zero the object's vector fields and reset the scale field to the default. */
 void Gsky_InitializeShakeRecord(void *channelRecord) {
-    struct RecordRecAt18 *o = channelRecord;
+    struct CameraShakeRecordView *o = channelRecord;
     struct Channel *channel0;
     struct Channel *channel1;
     struct Channel *channel2;
     f32 diag;
 
-    diag = D_800C3570_de;
+    diag = k_screenMessageWaveDefault;
     channel0 = &o->channels[0];
     o->triple.x = 0;
     o->triple.y = 0;
@@ -263,7 +263,7 @@ void Gsky_InitializeShakeRecord(void *channelRecord) {
 
 /* Configures a three-channel record: copies a by-value three-word block to offset 8 and a value to
    0x14, and gives each of the channels at 0x18, 0x2C and 0x40 the same mode word and a level scaled
-   by the pooled constant D_800C8664. */
+   by the pooled constant k_screenMessageChannelLevelScale. */
 
 
 
@@ -272,16 +272,16 @@ void Gsky_InitializeShakeRecord(void *channelRecord) {
 
 
 
-void Gsky_SetShakeRecord(struct RecordRecAt18 *record, f32 first, f32 second, f32 third, f32 value, s32 mode,
+void Gsky_SetShakeRecord(struct CameraShakeRecordView *record, f32 first, f32 second, f32 third, f32 value, s32 mode,
                    Triple triple) {
     record->triple = triple;
     record->value = value;
     record->channels[0].mode = mode;
     record->channels[1].mode = mode;
     record->channels[2].mode = mode;
-    record->channels[0].level = first * D_800C8664;
-    record->channels[1].level = second * D_800C8664;
-    record->channels[2].level = third * D_800C8664;
+    record->channels[0].level = first * k_screenMessageChannelLevelScale;
+    record->channels[1].level = second * k_screenMessageChannelLevelScale;
+    record->channels[2].level = third * k_screenMessageChannelLevelScale;
 }
 
 s32 Gsky_UpdateShakeRecord(s32 waveRecord) {

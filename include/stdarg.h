@@ -1,7 +1,7 @@
 /* va_list access for the target compilers. */
 #ifndef STDARG_H
 #define STDARG_H
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #if defined(__STDARG_GCC)
 typedef char StdargTargetLayout[
     sizeof(int) == 4 && sizeof(long) == 4 && sizeof(long long) == 8 &&

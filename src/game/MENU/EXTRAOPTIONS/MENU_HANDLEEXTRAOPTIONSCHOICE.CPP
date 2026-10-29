@@ -5,12 +5,12 @@
 #if !(defined(VERSION_DE) || defined(VERSION_EU_X))
 s32 Menu_HandleExtraOptionsChoice(void) {
     MarkMenuEventHandled();
-    if (D_800E4400->open == 0) {
+    if (g_extraOptionsScreen->open == 0) {
         Menu_ShowExtraOptionsPanel();
     } else {
         switch (Menu_GetFocusedElementId()) {
         case 0x3AC:
-            SmpSlider_SetTransitionMode(D_800E4400->dialog, 2);
+            SmpSlider_SetTransitionMode(g_extraOptionsScreen->dialog, 2);
             Menu_ApplyExtraOptionFlags();
             break;
         case 0x3B6:

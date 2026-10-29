@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "AUDIO/VOICE_AND_SPATIAL_SOURCE_VIEWS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "AUDIO/LIST_AND_CHANNEL_VIEWS.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON.H"
@@ -18,7 +18,7 @@
 /* Returns the stereo pan of a sound at a position for a listener: centre (0x40) without a listener, when
  * the sound is horizontally within a small radius or straight ahead; otherwise the horizontal direction
  * in listener space is compared with the forward axis through Graphu64_ArcCos and func_802B7130_de, given the
- * side's sign, and scaled around the centre by D_800C8FF8. */
+ * side's sign, and scaled around the centre by g_listenerPanCenterAndRange. */
 
 extern void Graphu64_TransformDirectionTranspose(void *, CVector3 *, CVector3 *);
 
@@ -34,13 +34,13 @@ s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *liste
         return 0x40;
     }
     Graphu64_SubtractVectors(&offset, &listener->position, position);
-    if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
+    if (offset.x * offset.x + offset.z * offset.z < g_listenerPanCenterRadiusConstants) {
         return 0x40;
     }
     Graphu64_TransformDirectionTranspose(listener->viewOrient, &offset, &local);
     local.y = 0.0f;
     forward.x = forward.y = local.y;
-    forward.z = (&D_800C3F00_de)[1];
+    forward.z = (&g_listenerPanCenterRadiusConstants)[1];
     Graphu64_NormalizeVec3(&local.x);
     pan = Gu_Sinf(Graphu64_ArcCos(local.x * forward.x + local.y * forward.y + local.z * forward.z));
     if (local.x == 0.0f) {
@@ -53,18 +53,18 @@ s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *liste
     } else {
         pan = -fabsf(pan);
     }
-    return pan * D_800C8FF8 + D_800C8FF8;
+    return pan * g_listenerPanCenterAndRange + g_listenerPanCenterAndRange;
 }
 
 /* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from Graphu64_RandomBetween of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table g_audioPitchRatioCurve with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
-extern struct Bytes12 *Audio_GetMetadataSectionFourEntry(ContextRecAt2BC0 *, s32);
+extern struct Bytes12 *Audio_GetMetadataSectionFourEntry(GameAudioContext *, s32);
 extern unsigned short Menu_GetFloatHighWord(f32);
 
-extern s32 func_8025E584_de(ControllerCode802591C0 *);
-extern s32 func_8025E590_de(ControllerCode802591C0 *);
+extern s32 SoundInfo_GetX(ControllerCode802591C0 *);
+extern s32 SoundInfo_GetY(ControllerCode802591C0 *);
 
 
-void Channel_InitializeVoicePitchMotion(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32 flags) {
+void Channel_InitializeVoicePitchMotion(ChannelPitchMotionView *view, ControllerCode802591C0 *controller, s32 flags) {
     s16 x;
     s16 y;
     f32 fx;
@@ -87,20 +87,20 @@ void Channel_InitializeVoicePitchMotion(ViewRecAtB0 *view, ControllerCode802591C
     } else {
         angles->heading = Menu_GetFloatHighWord(controller->yaw);
     }
-    x = func_8025E584_de(controller);
-    y = func_8025E590_de(controller);
+    x = SoundInfo_GetX(controller);
+    y = SoundInfo_GetY(controller);
     fy = y;
     fx = x;
     turn = (s16)(s32)(fx + ((Graphu64_RandomBetween(fy, fx)) < 0.0f ? -(Graphu64_RandomBetween(fy, fx)) : (Graphu64_RandomBetween(fy, fx))));
     angles->heading = Menu_GetFloatHighWord(RW_BITS_TO_FLOAT(angles->heading) + turn);
     if (flags & 0x40) {
-        angles->heading = Menu_GetFloatHighWord(RW_BITS_TO_FLOAT(angles->heading) + D_800C3F0C_de);
+        angles->heading = Menu_GetFloatHighWord(RW_BITS_TO_FLOAT(angles->heading) + g_voicePitchRaiseStep);
     }
     if (flags & 0x80) {
-        angles->heading = Menu_GetFloatHighWord(RW_BITS_TO_FLOAT(angles->heading) - D_800C3F10_de);
+        angles->heading = Menu_GetFloatHighWord(RW_BITS_TO_FLOAT(angles->heading) - g_voicePitchLowerStep);
     }
-    if (RW_BITS_TO_FLOAT(angles->heading) >= D_800C3F14_de) {
-        angles->heading = Menu_GetFloatHighWord(D_800C3F14_de);
+    if (RW_BITS_TO_FLOAT(angles->heading) >= g_voicePitchMaximum) {
+        angles->heading = Menu_GetFloatHighWord(g_voicePitchMaximum);
     }
     if (controller->flags & 2) {
         motion->heading = RW_BITS_TO_FLOAT(angles->heading);
@@ -113,7 +113,7 @@ void Channel_InitializeVoicePitchMotion(ViewRecAtB0 *view, ControllerCode802591C
         }
         view->pitch = RW_BITS_TO_FLOAT(angles->pitch);
     }
-    position = (RW_BITS_TO_FLOAT(angles->heading) + D_800C3F18_de) * D_800C3F1C_de;
+    position = (RW_BITS_TO_FLOAT(angles->heading) + g_voicePitchHeadingBias) * g_voicePitchHeadingIndexScale;
     index = position;
     if (index != position) {
         next = index + 1;
@@ -142,11 +142,11 @@ typedef struct SoundEnvelopeControl {
 
 typedef struct VoiceScaleEntry { f32 soundId, scale; } VoiceScaleEntry;
 extern VoiceScaleEntry g_soundVolumeScales[];
-extern float D_800C3F34_de;
-extern SoundEnvelope *Audio_GetMetadataSectionThreeEntry(ContextRecAt2BC0 *context, int index);
+extern float g_voiceDefaultGain;
+extern SoundEnvelope *Audio_GetMetadataSectionThreeEntry(GameAudioContext *context, int index);
 static inline s32 lookupPanValue(s32 panAngle) {
-    if ((f32)panAngle < 0.0f) return D_80107FA0[-panAngle];
-    return D_80107FA0[panAngle];
+    if ((f32)panAngle < 0.0f) return g_voiceAttenuationTable[-panAngle];
+    return g_voiceAttenuationTable[panAngle];
 }
 
 void Channel_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32 unused2) {
@@ -169,7 +169,7 @@ void Channel_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s
 
     mix = (AudioVolumeMix *)voice->reserved10;
     gainRange = voice->context->selectedEntry;
-    voice->volumeScale = D_800C3F20_de;
+    voice->volumeScale = g_voiceDefaultVolumeScale;
     if (voice->soundId < 0x100) {
         for (i = 0; i < 0x1F; i++) {
             if (voice->soundId == (s32)g_soundVolumeScales[i].soundId) {
@@ -179,28 +179,28 @@ void Channel_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s
         }
     }
     if (Cinema_IsSequenceInWindow()) {
-        voice->volumeScale = voice->volumeScale * D_800C3F24_de;
+        voice->volumeScale = voice->volumeScale * g_voiceModeVolumeScale;
     }
     envelope = (SoundEnvelopeControl *)voice->envelope;
-    if (control->field8 != -1) {
-        preset = Audio_GetMetadataSectionThreeEntry(voice->context, control->field8);
+    if (control->pitchPresetId != -1) {
+        preset = Audio_GetMetadataSectionThreeEntry(voice->context, control->pitchPresetId);
         *(SoundEnvelope *)voice->envelope = *preset;
     } else {
         envelope->flags = Menu_GetFloatHighWord((f32)control->fieldF);
     }
-    if (!(control->flags & 0x800) && voice->fieldC0 != 1 && voice->context->field2B98 != 0) {
-        minimumGain = (f32)gainRange[0] * D_800C3F28_de;
-        maximumGain = (f32)gainRange[1] * D_800C3F28_de;
-        if (minimumGain == D_800C3F2C_de) gain = D_800C3F2C_de;
+    if (!(control->flags & 0x800) && voice->fixedPosition != 1 && voice->context->listenerCamera != 0) {
+        minimumGain = (f32)gainRange[0] * g_voiceGainPercentScale;
+        maximumGain = (f32)gainRange[1] * g_voiceGainPercentScale;
+        if (minimumGain == g_voiceGainIdentityValue) gain = g_voiceGainIdentityValue;
         else if (maximumGain == minimumGain) gain = minimumGain;
         else gain = minimumGain + Graphu64_RandomFloat(maximumGain - minimumGain);
         sourcePosition = &mix->position;
-        listenerPosition = &voice->context->field2B98->position;
+        listenerPosition = &voice->context->listenerCamera->position;
         dx = sourcePosition->x - listenerPosition->x;
         dy = sourcePosition->y - listenerPosition->y;
         dz = sourcePosition->z - listenerPosition->z;
         distanceSquared = dx * dx + dy * dy + dz * dz;
-        attenuation = D_800D0D10 <= distanceSquared ? 0.0f : D_800C3F30_de - distanceSquared / D_800D0D10;
+        attenuation = g_spatialSoundRangeSquared <= distanceSquared ? 0.0f : g_voiceInitialAttenuationUnit - distanceSquared / g_spatialSoundRangeSquared;
         switch (mix->curve) {
         case 2:
             mix->attenuation = attenuation;
@@ -219,7 +219,7 @@ void Channel_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s
         }
         mix->baseAttenuation = attenuation;
     } else {
-        gain = D_800C3F34_de;
+        gain = g_voiceDefaultGain;
         mix->attenuation = gain;
         mix->baseAttenuation = gain;
     }

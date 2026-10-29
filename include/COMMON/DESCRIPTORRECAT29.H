@@ -9,14 +9,14 @@
 struct CROMSkyLayer;
 typedef struct CROMSkyLayer CROMSkyLayer;
 
-extern float D_800C86E8;
+extern float g_skyRotorAngleWrap;
 
 struct ClipView;
 typedef struct ClipView ClipView;
 
 
-struct IntegerState8A4;
-typedef struct IntegerState8A4 IntegerState8A4;
+struct SkyEffectObjectListsView;
+typedef struct SkyEffectObjectListsView SkyEffectObjectListsView;
 
 struct Host;
 struct Host {
@@ -44,8 +44,8 @@ struct CROMSkyLayer {
     u8 flags;
 };
 
-struct ObjRecAt210;
-typedef struct ObjRecAt210 ObjRecAt210;
+struct SkyEffectSortValueView;
+typedef struct SkyEffectSortValueView SkyEffectSortValueView;
 
 struct Effect;
 struct Effect {
@@ -70,10 +70,10 @@ struct Effect {
 struct Host;
 typedef struct Host Host;
 
-struct ObjectRecAt220;
-struct ObjectRecAt220 {
+struct SkyLayerRuntimeView;
+struct SkyLayerRuntimeView {
     char gap0[4];
-    struct ObjectRecAt220 *next;
+    struct SkyLayerRuntimeView *next;
     char gap8[4];
     CROMSkyLayer *descriptor;
     u16 mask;
@@ -93,7 +93,7 @@ struct ObjectRecAt220 {
 };
 
 
-extern float D_800CD744_de;
+extern float g_skyRotorSpinScale;
 
 
 struct ClipView;
@@ -112,13 +112,13 @@ struct ClipView {
     f32 clipPlane[4];
 };
 
-struct ObjectRecAt220;
-typedef struct ObjectRecAt220 ObjectRecAt220;
+struct SkyLayerRuntimeView;
+typedef struct SkyLayerRuntimeView SkyLayerRuntimeView;
 
 struct Scene;
 typedef struct Scene Scene;
 
-extern float D_800C86E0;
+extern float g_skyRotorMaximumThrottle;
 
 struct Effect;
 typedef struct Effect Effect;
@@ -126,25 +126,25 @@ typedef struct Effect Effect;
 struct Rotor;
 typedef struct Rotor Rotor;
 
-extern float D_800C35F4_de;
+extern float g_skyRotorAngleAScale;
 
 struct CROMSkyLayer;
 struct Rotor;
 
-struct ObjRecAt210;
+struct SkyEffectSortValueView;
 
-struct ObjectRecAt220;
+struct SkyLayerRuntimeView;
 struct Scene;
 
-struct IntegerState8A4;
+struct SkyEffectObjectListsView;
 
 extern void Textload_ReadTextureAnimationInfo(s32 **, void *);
 
 
-extern void D_0023B938();
-extern void D_0023B94C();
-extern void D_0023B978_de();
+extern void Sky_SwapEntryCallback();
+extern void Sky_CompareRotorSpeedsDescendingCallback();
+extern void Sky_CompareRotorSpeedsAscendingCallback();
 
 
-extern void Gsky_ClearScreenMessage(void *arg0);
+extern void Gsky_ClearScreenMessage(void *owner);
 #endif

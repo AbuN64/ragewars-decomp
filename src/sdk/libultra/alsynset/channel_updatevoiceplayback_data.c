@@ -6,10 +6,10 @@
 #include "TYPES.H"
 
 s32 alSndpGetState(void *soundPlayer) {
-    return (((struct ObjRecAt28V2 *) ((s8 *) ((((struct ObjRecAt40V3 *) ((s8 *) soundPlayer))->unk3C * 0x30) + ((struct ObjRecAt40V3 *) ((s8 *) soundPlayer))->unk40)))->unk28);
+    return (((struct ObjRecAt28V2 *) ((s8 *) ((((struct SoundPlayerStateTableView *) ((s8 *) soundPlayer))->selectedSoundIndex * 0x30) + ((struct SoundPlayerStateTableView *) ((s8 *) soundPlayer))->soundStates)))->unk28);
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B2574[12] =
+char s_ChannelUpdatevoiceplaybackDataRyTEosTText[12] =
     "ry_t\004.eosT\000\000";
 #endif

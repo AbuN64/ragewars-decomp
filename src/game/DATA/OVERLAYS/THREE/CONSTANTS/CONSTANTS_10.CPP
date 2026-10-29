@@ -1,28 +1,28 @@
 
 #if defined(VERSION_US_REV1)
-extern char D_00204468[];
-extern char D_002044C8[];
-extern char D_00204770[];
-extern char D_0020478C[];
-extern char D_002047BC[];
-extern char D_002047D8[];
-extern char D_00278FD8[];
-extern char D_00278FF4[];
-extern char D_00279024[];
-extern char D_00279074[];
-extern char D_002790EC[];
-extern char D_002791A8[];
-extern char D_002791C8[];
-extern char D_002791E8[];
-extern char D_00279208[];
-extern char D_00279228[];
-extern char D_00279248[];
-extern char D_00279260[];
-unsigned int D_auto_rodata_unresolved_800CD4C4_unclaimed_CE0F0_unclaimed_CE104_unclaimed_CE10C_unclaimed_CE124_unclaimed_CE130_unclaimed_CE144_unclaimed_CE148[42] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, (unsigned int)D_00204468,
-    (unsigned int)D_002044C8, 0x00000000, 0x00000000, (unsigned int)D_00204770, (unsigned int)D_0020478C, (unsigned int)D_002047BC, (unsigned int)D_002047D8, (unsigned int)D_00279024,
-    (unsigned int)D_00279074, (unsigned int)D_00278FD8, 0x00000000, (unsigned int)D_002791A8, (unsigned int)D_002791E8, (unsigned int)D_002790EC, (unsigned int)D_002791C8, (unsigned int)D_00279208,
-    (unsigned int)D_00279228, (unsigned int)D_00279248, 0x00000000, (unsigned int)D_00279260, 0x00000000, (unsigned int)D_00278FF4, 0x00000000, 0x00000004,
+extern char addrLow_Actionai_InitBreakableMotion[];
+extern char addrLow_Action_ActivateBreakableState[];
+extern char addrLow_Action_RequestStateOn[];
+extern char addrLow_Actionai_EnableTrigger[];
+extern char addrLow_Action_RequestStateOff[];
+extern char addrLow_Actionai_DisableTrigger[];
+extern char addrLow_Link_ClearActorFlagMask[];
+extern char addrLow_Link_SetActorFlagMask[];
+extern char addrLow_Link_RequestOwnerTrack[];
+extern char addrLow_Link_RequestGlobalTrack[];
+extern char addrLow_Link_DispatchTriggerAudio[];
+extern char addrLow_Link_PlayTriggerSoundCallback[];
+extern char addrLow_Link_SelectTriggerMusic[];
+extern char addrLow_Link_PlayTriggerSound[];
+extern char addrLow_Link_SetTriggerTrackCallback[];
+extern char addrLow_Link_SetTriggerTrack[];
+extern char addrLow_Link_ClearActorStateBit[];
+extern char addrLow_Link_SetActorStateBit[];
+unsigned int k_ConstantsEncodedWordsBlock3[42] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, (unsigned int)addrLow_Actionai_InitBreakableMotion,
+    (unsigned int)addrLow_Action_ActivateBreakableState, 0x00000000, 0x00000000, (unsigned int)addrLow_Action_RequestStateOn, (unsigned int)addrLow_Actionai_EnableTrigger, (unsigned int)addrLow_Action_RequestStateOff, (unsigned int)addrLow_Actionai_DisableTrigger, (unsigned int)addrLow_Link_RequestOwnerTrack,
+    (unsigned int)addrLow_Link_RequestGlobalTrack, (unsigned int)addrLow_Link_ClearActorFlagMask, 0x00000000, (unsigned int)addrLow_Link_PlayTriggerSoundCallback, (unsigned int)addrLow_Link_PlayTriggerSound, (unsigned int)addrLow_Link_DispatchTriggerAudio, (unsigned int)addrLow_Link_SelectTriggerMusic, (unsigned int)addrLow_Link_SetTriggerTrackCallback,
+    (unsigned int)addrLow_Link_SetTriggerTrack, (unsigned int)addrLow_Link_ClearActorStateBit, 0x00000000, (unsigned int)addrLow_Link_SetActorStateBit, 0x00000000, (unsigned int)addrLow_Link_SetActorFlagMask, 0x00000000, 0x00000004,
     0x0004CCCC, 0x00000002, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000,
 };

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-char rodata_unresolved_802AD868[8] =
+char s_LibultraIMPACTSText[8] =
     "_IMPACTS";
 #endif
 

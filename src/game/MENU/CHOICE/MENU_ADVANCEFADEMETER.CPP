@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -51,17 +51,17 @@ extern void Tsmos_ActivateControllerState(void);
 extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
 extern s32 SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_EnableTransition(s32);
-extern StateCode80420E90 *D_800E4450;
+extern StateCode80420E90 *g_sixChoiceMenuState;
 
-/* Builds the screen state D_800E4450: allocates it, opens screen 0x39E, registers six resources, opens window 0x3A0 and stores the 0x3A1 label. */
+/* Builds the screen state g_sixChoiceMenuState: allocates it, opens screen 0x39E, registers six resources, opens window 0x3A0 and stores the 0x3A1 label. */
 s32 Menu_CreateSixChoiceMenu(s32 root) {
     s32 screen;
     MenuWidget *window;
 
-    D_800E4450 = (StateCode80420E90 *) Cache_AllocateMemory(0x14);
+    g_sixChoiceMenuState = (StateCode80420E90 *) Cache_AllocateMemory(0x14);
     Tsmos_ActivateControllerState();
     screen = SmpFade_CreateFadeWidget(ID_SCREEN, ID_SCREEN_B);
-    D_800E4450->unk0 = (struct ObjMenuUpdateSixChoiceMenu *) screen;
+    g_sixChoiceMenuState->slider = (struct ObjMenuUpdateSixChoiceMenu *) screen;
     SmpSlider_EnableTransition(screen);
     SmpButton_WrapButtonWidget(ID_ROW0);
     SmpButton_WrapButtonWidget(ID_ROW1);
@@ -70,17 +70,17 @@ s32 Menu_CreateSixChoiceMenu(s32 root) {
     SmpButton_WrapButtonWidget(ID_ROW4);
     SmpButton_WrapButtonWidget(ID_ROW5);
     window = Node_FindWidgetByResourceId(root, ID_WINDOW);
-    D_800E4450->unk8 = (struct CellRecAt1A *) window;
+    g_sixChoiceMenuState->transitionCell = (struct ChoiceMenuCellView *) window;
     window->alpha = 0xF;
-    D_800E4450->unk4 = SmpFlicker_CreateFlickerWidget(ID_LABEL, 0x6E);
-    D_800E4450->unkC = 3;
+    g_sixChoiceMenuState->labelFlicker = SmpFlicker_CreateFlickerWidget(ID_LABEL, 0x6E);
+    g_sixChoiceMenuState->transitionTimer = 3;
     return 0;
 }
 
 /* 80420E90_3.CPP */
 extern void SmpSlider_SetTransitionMode(void *, s32);
 
-/* Releases the object D_800E4450 holds through Cache_FreeMemory, clears D_800E4450 and returns zero. */
+/* Releases the object g_sixChoiceMenuState holds through Cache_FreeMemory, clears g_sixChoiceMenuState and returns zero. */
 
 /* Advances menu selection timing and dispatches the selected action. */
 
@@ -98,19 +98,19 @@ s32 SmpSlider_GetTransitionMode(void *);
 
                           /* extern */
 
-                          
+
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled, for messages 0x3A2 to 0x3A7
    through jtbl_800E1610: five pick option 0, 1, 3, 4 or 2, pass it to PAKInterface_SetScreenPhase and set the
-   result word at offset 0x10 of the screen D_800E4450 to 0x13; the sixth sets it to -1. Both then
+   result word at offset 0x10 of the screen g_sixChoiceMenuState to 0x13; the sixth sets it to -1. Both then
    close the screen's first word through SmpSlider_SetTransitionMode with 2. Returns zero. */
 
 extern s32 Menu_GetFocusedElementId(void);
 
-/* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E4450 points to to -1 and
+/* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object g_sixChoiceMenuState points to to -1 and
    calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4454, an actor kind at D_800E4458 and a handler at D_800E445C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_sixChoiceMenuEventKinds, an actor kind at g_sixChoiceMenuActorKinds and a handler at g_sixChoiceMenuEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 /* Advances a filling or draining bar by the step and writes its level byte at 0x10 of the bar at
    0xC: while rising it scales the amount for the display and, at or above the wrap point, stores
@@ -122,48 +122,48 @@ extern s32 Menu_GetFocusedElementId(void);
    in the fifth, then calls Tsmos_DeactivateControllerState. */
 
 s32 Menu_DestroySixChoiceMenu(void) {
-    Cache_FreeMemory(D_800E4450);
-    D_800E4450 = 0;
+    Cache_FreeMemory(g_sixChoiceMenuState);
+    g_sixChoiceMenuState = 0;
     return 0;
 }
 
-                     
+
 
 s32 Menu_UpdateSixChoiceMenu(void) {
     s32 transitionModeResult;
-    s32 temp_v0_2;
-    s32 var_a0;
-    CellRecAt1A *temp_a0;
-    CellRecAt1A *temp_v1;
+    s32 remainingFrames;
+    s32 nextScreen;
+    ChoiceMenuCellView *choiceCell;
+    ChoiceMenuCellView *decrementedChoiceCell;
 
-    if (D_800E28E0 >= 2) {
+    if (g_selectionMessageStage >= 2) {
         Tsmos_DeactivateControllerState();
         return 0;
     }
     Tsmos_ActivateControllerState();
-    transitionModeResult = SmpSlider_GetTransitionMode(D_800E4450->unk0);
+    transitionModeResult = SmpSlider_GetTransitionMode(g_sixChoiceMenuState->slider);
     switch (transitionModeResult) {                              /* irregular */
     case 3:
-        temp_v0_2 = D_800E4450->unkC - 1;
-        D_800E4450->unkC = temp_v0_2;
-        if (temp_v0_2 <= 0) {
-            temp_v1 = D_800E4450->unk8;
-            temp_v1->unk16 = (u16) (temp_v1->unk16 - 1);
-            temp_a0 = D_800E4450->unk8;
-            if (((s16) temp_a0->unk16 + temp_a0->unk1A) < 0) {
-                temp_a0->unk16 = (u16) D_800E4450->unk0->unk44->unk1A;
+        remainingFrames = g_sixChoiceMenuState->transitionTimer - 1;
+        g_sixChoiceMenuState->transitionTimer = remainingFrames;
+        if (remainingFrames <= 0) {
+            decrementedChoiceCell = g_sixChoiceMenuState->transitionCell;
+            decrementedChoiceCell->transitionTimer = (u16) (decrementedChoiceCell->transitionTimer - 1);
+            choiceCell = g_sixChoiceMenuState->transitionCell;
+            if (((s16) choiceCell->transitionTimer + choiceCell->transitionDuration) < 0) {
+                choiceCell->transitionTimer = (u16) g_sixChoiceMenuState->slider->transitionCell->transitionDuration;
             }
-            D_800E4450->unkC = transitionModeResult;
+            g_sixChoiceMenuState->transitionTimer = transitionModeResult;
         }
 block_12:
         return 0;
     case 4:
         MarkMenuEventHandled();
-        var_a0 = D_800E4450->unk10;
-        if (var_a0 == -1) {
-            var_a0 = 3;
+        nextScreen = g_sixChoiceMenuState->unk10;
+        if (nextScreen == -1) {
+            nextScreen = 3;
         }
-        SmXlate_SwitchScreen(var_a0);
+        SmXlate_SwitchScreen(nextScreen);
         goto block_12;
     default:
         return 0;
@@ -217,12 +217,12 @@ option_2:
     option = 2;
 choose:
     PAKInterface_SetScreenPhase(option);
-    D_800E4450->unk10 = 0x13;
+    g_sixChoiceMenuState->unk10 = 0x13;
     goto close;
 cancel:
-    D_800E4450->unk10 = -1;
+    g_sixChoiceMenuState->unk10 = -1;
 close:
-    SmpSlider_SetTransitionMode(D_800E4450->unk0, 2);
+    SmpSlider_SetTransitionMode(g_sixChoiceMenuState->slider, 2);
 done:
     return 0;
 }
@@ -231,29 +231,29 @@ s32 Menu_CancelSixChoiceMenu(void) {
     StateCode80420E90 *state;
 
     MarkMenuEventHandled();
-    state = D_800E4450;
+    state = g_sixChoiceMenuState;
     state->unk10 = -1;
-    SmpSlider_SetTransitionMode(state->unk0, 2);
+    SmpSlider_SetTransitionMode(state->slider, 2);
     return 0;
 }
 
-s32 Menu_DispatchSixChoiceEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchSixChoiceEvent(void *menuActor, s32 eventKind, s32 eventDataOne, s32 eventDataTwo, s32 eventDataThree) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E445C != 0) {
+    if (g_sixChoiceMenuEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E445C;
+        entry = (char *)&g_sixChoiceMenuEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E4454)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E4458)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_sixChoiceMenuEventKinds)) + offset))->value == eventKind) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) menuActor))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_sixChoiceMenuActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(menuActor, eventKind, eventDataOne, eventDataTwo, eventDataThree);
                 }
             }
             entry += 0xC;
@@ -292,12 +292,12 @@ s32 Menu_AdvanceFadeMeter(struct Meter *meter, s32 step) {
     if (meter->done == 0) {
         if (meter->falling == 0) {
             if (meter->amount < 0x3E8) {
-                value = (f32)meter->amount * D_800DD600;
+                value = (f32)meter->amount * k_menuFadeInConstants;
                 bar = meter->bar;
-                if (!(value >= *(&D_800DD600 + 1))) {
+                if (!(value >= *(&k_menuFadeInConstants + 1))) {
                     level = (s32)value;
                 } else {
-                    level = (s32)(value - *(&D_800DD600 + 1)) | 0x80000000;
+                    level = (s32)(value - *(&k_menuFadeInConstants + 1)) | 0x80000000;
                 }
                 bar->value = level;
             } else {
@@ -308,12 +308,12 @@ s32 Menu_AdvanceFadeMeter(struct Meter *meter, s32 step) {
             meter->amount = meter->amount + step;
         } else {
             if (meter->amount > 0) {
-                value = (f32)meter->amount * D_800DD608;
+                value = (f32)meter->amount * k_menuFadeOutConstants;
                 bar = meter->bar;
-                if (!(value >= *(&D_800DD608 + 1))) {
+                if (!(value >= *(&k_menuFadeOutConstants + 1))) {
                     level = (s32)value;
                 } else {
-                    level = (s32)(value - *(&D_800DD608 + 1)) | 0x80000000;
+                    level = (s32)(value - *(&k_menuFadeOutConstants + 1)) | 0x80000000;
                 }
                 bar->value = level;
             } else {
@@ -337,25 +337,25 @@ void Menu_InitializeFadeMeter(struct RecGobjinstSampleBoneTranslation *record, s
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800DC2A8[2] = {
+unsigned int k_MenuAdvancefademeterEncodedWords[2] = {
     0x000F000A, 0x00040000,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E8E38[2] = {
+unsigned int k_MenuAdvancefademeterEncodedWordsBlock2[2] = {
     0x0044333C, 0x0044333C,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EDC78[2] = {
+unsigned int k_MenuAdvancefademeterEncodedWordsBlock3[2] = {
     0x0800FFB6, 0x0800FFB7,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DD5F8[2] = {
+unsigned int k_MenuAdvancefademeterEncodedWordsBlock1[2] = {
     0x3E828F5D, 0x4F000000,
 };
 #endif

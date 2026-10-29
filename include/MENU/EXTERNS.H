@@ -2,11 +2,11 @@
 #define MENU_EXTERNS_H
 #include "TYPES.H"
 
-extern s32 D_800E57DC;
-extern s32 D_800E57E0;
-extern Handler802A2B50 D_800E57E4;
+extern s32 g_titleButtonEventTable;
+extern s32 g_titleButtonEventActorKinds;
+extern Handler802A2B50 g_titleButtonEventHandlers;
 
-extern s32 D_800E4EC0;
-extern s32 D_800E4EC4;
-extern Handler802A2B50 D_800E4EC8;
+extern s32 g_matchMenuEventIds;
+extern s32 g_matchMenuEventKinds;
+extern Handler802A2B50 g_matchMenuEventHandlers;
 #endif

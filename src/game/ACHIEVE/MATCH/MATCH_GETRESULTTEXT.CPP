@@ -8,14 +8,14 @@
 #include "COMMON/MENULISTSCREEN.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "COMMON/STATERECAT91.H"
 #include "ACHIEVE/MATCH_GETRESULTTEXT.H"
 #include "COMMON/PLAYERPROFILES.H"
 extern s32 Player_GetLevelProgress(Profile *, s32);
 
-/* Applies event *D_800E4680 to player record D_80102B00[index] once per D_8015402C: when that bit
+/* Applies event *D_800E4680 to player record g_localPlayerProfiles[index] once per g_selectedLevelId: when that bit
    of the record's current slot flags is already set it returns -1; otherwise it sets the bit and,
    for an event code below 58, dispatches through jtbl_800E1790 to the effect for that code and
    returns the code plus 5000 (5001 when the second effect's test clears bit 0), or -1 for a code
@@ -62,8 +62,8 @@ extern void Player_AdvanceProfileProgress(Profile *);
 
 s32 Match_ApplyLevelCompletionReward(s32 index) {
     s32 result = -1;
-    Profile *player = &D_80102B00[index];
-    s32 *key = &D_8015402C;
+    Profile *player = &g_localPlayerProfiles[index];
+    s32 *key = &g_selectedLevelId;
     u32 code;
 
     if (Defs_TestBit(&player->achievementFlags[0xDB + player->slot * 5], *key) != 0) {
@@ -256,7 +256,7 @@ s32 Match_ApplyLevelCompletionReward(s32 index) {
 }
 
 char *Match_GetResultText(s32 result) {
-    Profile *player = D_80102B00;
+    Profile *player = g_localPlayerProfiles;
     char *text = 0;
 
     if (result < 0) {
@@ -264,116 +264,116 @@ char *Match_GetResultText(s32 result) {
     }
     switch (result) {
     case 5001:
-        text = RW_LOCALIZED_TEXT(D_800D34E4, D_800E1DE4, D_800E1DE4, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5001TextDe, g_matchResult5001TextEu, g_matchResult5001TextEu, g_languageIndex);
         break;
     case 5002:
         if ((Player_GetLevelProgress(player, player->slot) & 1) == 0) {
-            text = RW_LOCALIZED_TEXT(D_800D34EC, D_800E1E04, D_800E1E04, g_languageIndex);
+            text = RW_LOCALIZED_TEXT(g_matchResult5002UnplayedTextDe, g_matchResult5002UnplayedTextEu, g_matchResult5002UnplayedTextEu, g_languageIndex);
         } else {
-            text = RW_LOCALIZED_TEXT(D_800D34E8, D_800E1DF4, D_800E1DF4, g_languageIndex);
+            text = RW_LOCALIZED_TEXT(g_matchResult5002PlayedTextDe, g_matchResult5002PlayedTextEu, g_matchResult5002PlayedTextEu, g_languageIndex);
         }
         break;
     case 5004:
-        text = RW_LOCALIZED_TEXT(D_800D3510, D_800E1E94, D_800E1E94, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5004TextDe, g_matchResult5004TextEu, g_matchResult5004TextEu, g_languageIndex);
         break;
     case 5005:
-        text = RW_LOCALIZED_TEXT(D_800D3550, D_800E1F94, D_800E1F94_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5005TextDe, g_matchResult5005TextEu, g_matchResult5005TextEuX, g_languageIndex);
         break;
     case 5006:
-        text = RW_LOCALIZED_TEXT(D_800D3564, D_800E1FE4, D_800E1FE4, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5006TextDe, g_matchResult5006TextEu, g_matchResult5006TextEu, g_languageIndex);
         break;
     case 5007:
-        text = RW_LOCALIZED_TEXT(D_800D351C, D_800E1EC4, D_800E1EC4, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5007TextDe, g_matchResult5007TextEu, g_matchResult5007TextEu, g_languageIndex);
         break;
     case 5008:
-        text = RW_LOCALIZED_TEXT(D_800D3528, D_800E1EF4, D_800E1EF4, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5008TextDe, g_matchResult5008TextEu, g_matchResult5008TextEu, g_languageIndex);
         break;
     case 5009:
-        text = RW_LOCALIZED_TEXT(D_800D350C, D_800E1E84, D_800E1E84, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5009TextDe, g_matchResult5009TextEu, g_matchResult5009TextEu, g_languageIndex);
         break;
     case 5010:
-        text = RW_LOCALIZED_TEXT(D_800D3524, D_800E1EE4, D_800E1EE4_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5010TextDe, g_matchResult5010TextEu, g_matchResult5010TextEuX, g_languageIndex);
         break;
     case 5011:
-        text = RW_LOCALIZED_TEXT(D_800D3560, D_800E1FD4, D_800E1FD4_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5011TextDe, D_800E1FD4, g_matchResult5011TextEuX, g_languageIndex);
         break;
     case 5012:
-        text = RW_LOCALIZED_TEXT(D_800D3554, D_800E1FA4, D_800E1FA4, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5012TextDe, g_matchResult5012TextEu, g_matchResult5012TextEu, g_languageIndex);
         break;
     case 5013:
-        text = RW_LOCALIZED_TEXT(D_800D3568, D_800E1FF4, D_800E1FF4, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5013TextDe, g_matchResult5013TextEu, g_matchResult5013TextEu, g_languageIndex);
         break;
     case 5014:
-        text = RW_LOCALIZED_TEXT(D_800D3544, D_800E1F64_eu, D_800E1F64_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5014TextDe, g_matchResult5014TextEu, g_matchResult5014TextEu, g_languageIndex);
         break;
     case 5015:
-        text = RW_LOCALIZED_TEXT(D_800D3514, D_800E1EA4_eu, D_800E1EA4_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5015TextDe, g_matchResult5015TextEu, g_matchResult5015TextEu, g_languageIndex);
         break;
     case 5016:
-        text = RW_LOCALIZED_TEXT(D_800D34F0, D_800E1E14, D_800E1E14, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5016TextDe, g_matchResult5016TextEu, g_matchResult5016TextEu, g_languageIndex);
         break;
     case 5017:
-        text = RW_LOCALIZED_TEXT(D_800D3540, D_800E1F54_eu, D_800E1F54_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5017TextDe, g_matchResult5017TextEu, g_matchResult5017TextEu, g_languageIndex);
         break;
     case 5018:
-        text = RW_LOCALIZED_TEXT(D_800D353C, D_800E1F44_eu, D_800E1F44_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5018TextDe, g_matchResult5018TextEu, g_matchResult5018TextEu, g_languageIndex);
         break;
     case 5019:
-        text = RW_LOCALIZED_TEXT(D_800D354C, D_800E1F84_eu, D_800E1F84_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5019TextDe, g_matchResult5019TextEu, g_matchResult5019TextEu, g_languageIndex);
         break;
     case 5020:
-        text = RW_LOCALIZED_TEXT(D_800D3538, D_800E1F34_eu, D_800E1F34_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5020TextDe, g_matchResult5020TextEu, g_matchResult5020TextEu, g_languageIndex);
         break;
     case 5021:
-        text = RW_LOCALIZED_TEXT(D_800D3518, D_800E1EB4, D_800E1EB4, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5021TextDe, g_matchResult5021TextEu, g_matchResult5021TextEu, g_languageIndex);
         break;
     case 5022:
-        text = RW_LOCALIZED_TEXT(D_800D3548, D_800E1F74_eu, D_800E1F74_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5022TextDe, g_matchResult5022TextEu, g_matchResult5022TextEu, g_languageIndex);
         break;
     case 5023:
-        text = RW_LOCALIZED_TEXT(D_800D34F8, D_800E1E34, D_800E1E34, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5023TextDe, g_matchResult5023TextEu, g_matchResult5023TextEu, g_languageIndex);
         break;
     case 5024:
-        text = RW_LOCALIZED_TEXT(D_800D34F4, D_800E1E24_eu, D_800E1E24_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5024TextDe, g_matchResult5024TextEu, g_matchResult5024TextEu, g_languageIndex);
         break;
     case 5025:
-        text = RW_LOCALIZED_TEXT(D_800D356C, D_800E2004_eu, D_800DDA78, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5025TextDe, g_matchResult5025TextEu, g_matchResult5025TextEuX, g_languageIndex);
         break;
     case 5026:
-        text = RW_LOCALIZED_TEXT(D_800D352C, D_800E1F04_eu, D_800DD9B8, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5026TextDe, g_matchResult5026TextEu, g_matchResult5026TextEuX, g_languageIndex);
         break;
     case 5027:
-        text = RW_LOCALIZED_TEXT(D_800D355C, D_800E1FC4, D_800E1FC4_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5027TextDe, D_800E1FC4, g_matchResult5027TextEuX, g_languageIndex);
         break;
     case 5028:
-        text = RW_LOCALIZED_TEXT(D_800D3530, D_800E1F14, D_800E1F14, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5028TextDe, g_matchResult5028TextEu, g_matchResult5028TextEu, g_languageIndex);
         break;
     case 5029:
-        text = RW_LOCALIZED_TEXT(D_800D3520, D_800E1ED4, D_800E1ED4, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5029TextDe, g_matchResult5029TextEu, g_matchResult5029TextEu, g_languageIndex);
         break;
     case 5030:
-        text = RW_LOCALIZED_TEXT(D_800D3570, D_800E2014, D_800E2014, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5030TextDe, g_matchResult5030TextEu, g_matchResult5030TextEu, g_languageIndex);
         break;
     case 5031:
-        text = RW_LOCALIZED_TEXT(D_800D3508, D_800E1E74, D_800E1E74, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5031TextDe, g_matchResult5031TextEu, g_matchResult5031TextEu, g_languageIndex);
         break;
     case 5033:
-        text = RW_LOCALIZED_TEXT(D_800D3558, D_800E1FB4_eu, D_800E1FB4_eu, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5033TextDe, g_matchResult5033TextEu, g_matchResult5033TextEu, g_languageIndex);
         break;
     case 5034:
-        text = RW_LOCALIZED_TEXT(D_800D3574, D_800E2024, D_800DDA90, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5034TextDe, g_matchResult5034TextEu, g_matchResult5034TextEuX, g_languageIndex);
         break;
     case 5037:
-        text = RW_LOCALIZED_TEXT(D_800D3534, D_800E1F24, D_800E1F24, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5037TextDe, g_matchResult5037TextEu, g_matchResult5037TextEu, g_languageIndex);
         break;
     case 5057:
-        text = RW_LOCALIZED_TEXT(D_800D34FC, D_800E1E44, D_800E1E44, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5057TextDe, g_matchResult5057TextEu, g_matchResult5057TextEu, g_languageIndex);
         break;
     case 5052:
-        text = RW_LOCALIZED_TEXT(D_800D3500, D_800E1E54, D_800E1E54, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5052TextDe, g_matchResult5052TextEu, g_matchResult5052TextEu, g_languageIndex);
         break;
     case 5053:
-        text = RW_LOCALIZED_TEXT(D_800D3504, D_800E1E64, D_800E1E64, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5053TextDe, g_matchResult5053TextEu, g_matchResult5053TextEu, g_languageIndex);
         break;
     default:
         break;

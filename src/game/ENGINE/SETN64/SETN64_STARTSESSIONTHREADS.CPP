@@ -5,5 +5,5 @@
 s32 SetN64_StartBootstrapThread(s32 *);
 #include "COMMON/GAME_SESSION.H"
 void SetN64_StartSessionThreads(void) {
-    SetN64_StartBootstrapThread(&D_8011FAC0);
+    SetN64_StartBootstrapThread(&g_gameSession);
 }

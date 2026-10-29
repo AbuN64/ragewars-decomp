@@ -18,8 +18,8 @@ static inline s32 entryScore(void) {
     score = 0;
     points = 0;
     for (i = 0; i < 3; i++) {
-        if (D_80153F80[i].id >= 0) {
-            switch (D_80153F80[i].variant) {
+        if (g_joinRequestEntries[i].id >= 0) {
+            switch (g_joinRequestEntries[i].variant) {
             case 0:
                 points = 5;
                 break;
@@ -43,7 +43,7 @@ static inline s32 activeCount(void) {
 
     count = 0;
     for (i = 0; i < 3; i++) {
-        if (D_80153F80[i].id >= 0) {
+        if (g_joinRequestEntries[i].id >= 0) {
             count++;
         }
     }

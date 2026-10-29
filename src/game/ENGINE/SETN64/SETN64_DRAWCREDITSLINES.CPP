@@ -22,16 +22,16 @@ void SetN64_DrawCreditsLines(void) {
     f32 top;
 
     top = 0.0f;
-    line = D_8011B9F0;
-    y = D_80146CB8;
+    line = g_creditsCurrentLine;
+    y = g_creditsScrollPosition;
     OnScreen_SetupTextRendering();
     OnScreen_LoadTextTileModeTwo();
     OnScreen_SetTextScale(1.0f, 1.0f);
     do {
         #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = D_800D3E14_de[D_801462C8.language][line];
+        text = g_creditsLocalizedLines[g_gameSettings.language][line];
 #else
-        text = D_800D3E14_de[0][line];
+        text = g_creditsLocalizedLines[0][line];
 #endif
         if (text != 0) {
             fade = top;
@@ -50,12 +50,12 @@ void SetN64_DrawCreditsLines(void) {
             alpha = fade;
             OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, alpha, alpha, alpha);
             if (y >= top) {
-                OnScreen_DrawTextWithShadow(text, (f32)(D_800E28D0 * 14 / 284), (f32)(s32)y,
-                              D_800E28D0 * 0.0028169013f, D_800E28D4 * 0.0045045046f, 1, alpha,
-                              D_80147150);
+                OnScreen_DrawTextWithShadow(text, (f32)(g_hudReferenceViewportWidth * 14 / 284), (f32)(s32)y,
+                              g_hudReferenceViewportWidth * 0.0028169013f, g_hudReferenceViewportHeight * 0.0045045046f, 1, alpha,
+                              g_creditsTextDrawingEnabled);
             }
             line++;
         }
-        y += D_800E28D4 * 0.045045048f;
-    } while (y <= D_800E28D4);
+        y += g_hudReferenceViewportHeight * 0.045045048f;
+    } while (y <= g_hudReferenceViewportHeight);
 }

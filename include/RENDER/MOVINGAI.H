@@ -24,67 +24,67 @@ struct RiderCode80206258 {
     char pad134[8];
     f32 phase;
 };
-struct func_802070D0_S1 {
+struct PathMotionInterpolationState {
     char pad0[0x54];
-    f32 unk54;
-    f32 unk58;
-    f32 unk5C;
+    f32 nextPositionX;
+    f32 nextPositionY;
+    f32 nextPositionZ;
     char pad5C[0x34];
-    u8 unk94;
+    u8 pathCursor;
     char pad94[0x9F];
-    f32 unk134;
-    f32 unk138;
+    f32 secondaryAngle;
+    f32 tertiaryAngle;
     char pad138[0x4];
-    f32 unk140;
-    f32 unk144;
-    f32 unk148;
-    f32 unk14C;
-    f32 unk150;
-    f32 unk154;
-    f32 unk158;
-    f32 unk15C;
-    f32 unk160;
-    f32 unk164;
-    f32 unk168;
-    f32 unk16C;
+    f32 previousDirectionX;
+    f32 previousDirectionY;
+    f32 previousDirectionZ;
+    f32 directionBlend;
+    f32 directionX;
+    f32 directionY;
+    f32 directionZ;
+    f32 initialSecondaryAngle;
+    f32 initialHeading;
+    f32 initialTertiaryAngle;
+    f32 movementSpeed;
+    f32 pauseRemaining;
 };
 struct Rec {
     char pad0[0xC];
     void *a;
     void *b;
 };
-struct func_802070D0_S3 {
+struct PathMotionActorView {
     char pad0[0x8];
-    func_802070D0_S3_U8 unk8;
-    f32 unkC;
-    f32 unk10;
+    TriggeredPathActorPositionWords positionX;
+    f32 positionY;
+    f32 positionZ;
     char pad10[0x24];
-    s32 unk38;
+    s32 inputFlags;
     char pad38[0x30];
-    f32 unk6C;
+    f32 heading;
 };
-struct func_802070D0_S2 {
+struct PathMotionWaypoint {
     Triple pos;
     char pad8[0x4];
-    f32 unk10;
-    WaypointFlags unk14;
+    f32 headingDegrees;
+    WaypointFlags flags;
     char pad14[0x4];
-    f32 unk1C;
-    f32 unk20;
-    f32 unk24;
-    f32 unk28;
-    f32 unk2C;
-    f32 unk30;
-    f32 unk34;
+    f32 arrivalRadius;
+    f32 directionBlendRate;
+    f32 targetSpeed;
+    f32 secondaryAngleDegrees;
+    f32 tertiaryAngleDegrees;
+    f32 speedCurvePhase;
+    f32 pauseDuration;
 };
 struct TrackCode80206258 {
     char prefix[0x14];
     struct CPlatformIntelligence segment;
 };
-struct func_80206604_G1 {
+struct MovingActorGameFlagView {
     u8 unk0;
 };
-struct Actor_func_80206DD4_de {
+struct MovingPlatformActorView {
     char pad0[8];
     f32 x;
     f32 y;
@@ -98,11 +98,11 @@ struct Actor_func_80206DD4_de {
     char pad70[0x90];
     u32 flags;
 };
-extern int func_80206758_de(void *unused0, struct Dest *deviceState);
-extern void func_802062B0_de(struct Trigger *trigger);
-extern void func_80206604_de(struct LevelActor *actor, struct ActorMotionState *motionState);
-extern void func_80206764_de(void);
-extern s32 func_8020655C_de(s32 actorKind);
-extern void func_80206258_de(struct Trigger *trigger);
-extern void func_802065C0_de(void *a, struct ActorMotionState *b, s32 c);
+extern int MovingAI_GetDeviceHealth(void *unused0, struct Dest *deviceState);
+extern void MovingAI_DisableTriggerActor(struct Trigger *trigger);
+extern void MovingAI_InitializeMotionDispatch(struct LevelActor *actor, struct ActorMotionState *motionState);
+extern void MovingAI_DeviceHealthNoOp(void);
+extern s32 MovingAI_CanSpawnActorKind(s32 actorKind);
+extern void MovingAI_EnableTriggerActor(struct Trigger *trigger);
+extern void MovingAI_RequestMotionAnimation(void *a, struct ActorMotionState *b, s32 c);
 #endif

@@ -6,15 +6,15 @@
 struct Texture;
 typedef struct Texture Texture;
 
-struct Image_func_80419490_de;
-typedef struct Image_func_80419490_de Image_func_80419490_de;
+struct SwizzledImageView;
+typedef struct SwizzledImageView SwizzledImageView;
 
 
 
 
-extern void func_8029D7E8_auto(void);
+extern void XMath_ShutdownMath(void);
 
-struct Image_func_80419490_de;
+struct SwizzledImageView;
 
 struct Command;
 
@@ -37,7 +37,7 @@ struct Texture {
 
 extern int D_80153F68;
 
-extern float D_800DD410_de;
+extern float g_fullImageTextureCoordinate;
 
 
 
@@ -48,21 +48,21 @@ extern float D_800DD410_de;
 
 
 
-extern s32 D_800DF258;
-extern s32 D_800DF25C;
-extern s32 D_800DF260_de;
-extern s32 D_800DF264_de;
-extern s32 D_800DF26C_de;
+extern s32 g_combineBoundImageWidth;
+extern s32 g_combineBoundImageHeight;
+extern s32 g_combineImageRequiresChunks;
+extern s32 g_combineImageChunkState;
+extern s32 g_combineBoundImageMaskComponent;
 extern s32 Frontend_HasImageFormatMaskComponent(u8 *);
 
 extern const u8 g_printfLowercaseHexDigits[];
-extern const u8 D_800DD1DC[];
-extern const u8 D_800DD1F0[];
-extern const u8 D_800DF230_de[];
-extern const u8 D_800DF240[];
+extern const u8 g_formatUppercaseHexDigits[];
+extern const u8 g_formatPercentText[];
+extern const u8 g_formatSpacePadding[];
+extern const u8 g_formatZeroPadding[];
 
-extern f64 D_800E1118;
-extern f64 D_800E1130;
-extern f64 D_800E1148;
-extern f64 D_800E11F0;
+extern f64 g_formatNegativeThreshold;
+extern f64 g_formatZeroPrecisionScale;
+extern f64 g_formatRoundingNumerator;
+extern f64 g_formatScientificFractionDecimalBase;
 #endif

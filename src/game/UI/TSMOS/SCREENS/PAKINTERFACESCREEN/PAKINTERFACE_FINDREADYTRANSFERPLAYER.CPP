@@ -3,7 +3,7 @@
 #include "COMMON/NAME.H"
 #include "FRONTEND/PAKINTERFACE_FINDREADYTRANSFERPLAYER.H"
 
-/* Returns the first of the four players in D_800E54A4 whose state at 0x58 is 14, provided every player
+/* Returns the first of the four players in g_pakProfileScreenState whose state at 0x58 is 14, provided every player
    is idle (0), finished (17) or in state 14; otherwise, or when none is in state 14, returns -1. */
 
 
@@ -13,13 +13,13 @@ int PAKInterface_FindReadyTransferPlayer(void) {
     int state;
 
     for (i = 0; i < 4; i++) {
-        state = D_800E54A4->players[i].state;
+        state = g_pakProfileScreenState->players[i].state;
         if (state != 0 && state != 17 && state != 14) {
             return -1;
         }
     }
     for (i = 0; i < 4; i++) {
-        if (D_800E54A4->players[i].state == 14) {
+        if (g_pakProfileScreenState->players[i].state == 14) {
             return i;
         }
     }

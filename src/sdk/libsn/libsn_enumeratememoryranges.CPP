@@ -10,17 +10,17 @@ void Libsn_EnumerateMemoryRanges(void) {
     u32 *boundary;
     u32 *supportedMasks;
     addressSpaceId = Libgultra_TrwReadTlbEntry() & 0xFF;
-    entry = &D_800F3470[0].pageMask;
+    entry = &g_libsnPageTableEntries[0].pageMask;
     for (i = 16; i < 48; i++) {
-        D_800F2D00[i].first = -1;
-        D_800F2D00[i].flags = 0;
+        g_libsnHostMemoryRanges[i].first = -1;
+        g_libsnHostMemoryRanges[i].flags = 0;
         pageMask = *entry++;
         entryHi = *entry++;
         entryLo0 = *entry++;
         entryLo1 = *entry++;
         if ((entryLo0 | entryLo1) & TLBLO_V) {
             pageMask &= TLBPGMASK_16M;
-            supportedMasks = D_800C8148_de;
+            supportedMasks = g_libsnSupportedPageMasks;
             pageSize = 0x1000;
             while (1) {
                 supportedMask = *supportedMasks;
@@ -40,25 +40,25 @@ void Libsn_EnumerateMemoryRanges(void) {
                 first = entryHi & TLBHI_VPN2MASK;
                 if (entryLo0 & entryLo1 & TLBLO_V) pageSize <<= 1;
                 else if (entryLo1 & TLBLO_V) first += pageSize;
-                D_800F2D00[i].first = first;
-                D_800F2D00[i].last = first + pageSize - 1;
-                D_800F2D00[i].flags = MEMORY_READ | MEMORY_WRITE;
+                g_libsnHostMemoryRanges[i].first = first;
+                g_libsnHostMemoryRanges[i].last = first + pageSize - 1;
+                g_libsnHostMemoryRanges[i].flags = MEMORY_READ | MEMORY_WRITE;
             }
         }
     }
-    boundary = &D_800CB3A0[0].last;
+    boundary = &g_libsnDefaultMemoryRanges[0].last;
     first = 0x80000000;
     while (*boundary < first) boundary += 2;
     rangeCount = 0;
     do {
-        D_800F2D00[rangeCount].first = first;
-        D_800F2D00[rangeCount].last = *boundary++;
-        D_800F2D00[rangeCount].flags = *boundary++;
-        first = D_800F2D00[rangeCount].last + 1;
+        g_libsnHostMemoryRanges[rangeCount].first = first;
+        g_libsnHostMemoryRanges[rangeCount].last = *boundary++;
+        g_libsnHostMemoryRanges[rangeCount].flags = *boundary++;
+        first = g_libsnHostMemoryRanges[rangeCount].last + 1;
         rangeCount++;
     } while (first != 0);
     for (; rangeCount < 16; rangeCount++) {
-        D_800F2D00[rangeCount].first = -1;
-        D_800F2D00[rangeCount].flags = 0;
+        g_libsnHostMemoryRanges[rangeCount].first = -1;
+        g_libsnHostMemoryRanges[rangeCount].flags = 0;
     }
 }

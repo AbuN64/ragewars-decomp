@@ -21,10 +21,10 @@ void alCSPSetSeq(s32 player, ALCSeq_s *sequence) {
 }
 
 
-void alCSPSetVol(s32 player, s16 arg1) {
+void alCSPSetVol(s32 player, s16 volume) {
     Buf16b volumeEvent;
 
-    volumeEvent.value = arg1;
+    volumeEvent.value = volume;
     volumeEvent.count = 0xA;
     alEvtqPostEvent(player + 0x48, &volumeEvent, 0);
 }

@@ -2,7 +2,7 @@
 #include "COMMON/MANAGER.H"
 #include "COMMON/RESOURCELOCKSTATE.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "COMMON/PROPGEOMETRY.H"
@@ -42,13 +42,13 @@ void Simpinst_RegisterModelVariantResources(struct ObjB *object, s32 unused) {
         }
     }
     if (obj->resourceName != 0) {
-        resource = Cache_RequestResource(0, obj->resourceName, obj->resourceName, obj->resourceSize, 0, 0, &D_0026D7F4, g_simpModelText, 0);
+        resource = Cache_RequestResource(0, obj->resourceName, obj->resourceName, obj->resourceSize, 0, 0, &g_simpleModelResourceCallbackAddress, g_simpModelText, 0);
     } else {
         resource = 0;
     }
     if (resource != 0) {
         Geometry_UnlockMaterialResources(resource);
-        block = Cache_RequestPairedResource(0, D_800CD3F0, (void *)resource, obj->blockNode, 8, obj, &D_0024F8DC, &s_litVerticesText, 0);
+        block = Cache_RequestPairedResource(0, g_litGeometryResourceKeyFlags, (void *)resource, obj->blockNode, 8, obj, &g_Simpinst_BuildLitGeometryResourceAddress, &s_litVerticesText, 0);
         if (block != 0) {
             Cache_UnlockResource(0, (void *)block);
         }

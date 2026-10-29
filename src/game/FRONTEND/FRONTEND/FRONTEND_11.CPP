@@ -10,13 +10,13 @@ unsigned int func_8043A7E8_eu_x[2] = { 0xAC431358U, 0x24030004U };
 #if defined(VERSION_US)
 #include "COMMON/CCOLLISIONSETUP_T.H"
 
-unsigned int D_auto_rodata_unresolved_8044A9B8[2] = {
+unsigned int k_FrontendEncodedWordsBlock6[2] = {
     0x00086D5F, 0x41637469,
 };
 
 /* The collision setup table CCollision_Initialize hands to CCollision_ApplySetupTable (through its KUSEG alias
- * D_0044A850): one row per collision info, ended by an empty row. */
-CCollisionSetup_t D_8044A850[36] = {
+ * g_collisionSetupTableResource): one row per collision info, ended by an empty row. */
+CCollisionSetup_t g_collisionSetupTable[36] = {
     { (CCollisionInfo2_t *)0x800FE458, 0x3C5729, 5, 2, 2, -2303.9998f, 0.0f, 0.7f, 0.0f, 0.0f },
     { (CCollisionInfo2_t *)0x800FE358, 0x3C552B, 5, 2, 2, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
     { (CCollisionInfo2_t *)0x800FE190, 0x3C5529, 2, 2, 2, -2100.0f, 0.0f, 0.0f, 0.0f, 0.0f },

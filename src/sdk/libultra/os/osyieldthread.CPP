@@ -1,36 +1,36 @@
-#include "COMMON/EXTERNS_18.H"
-#include "COMMON/LONE/D_800D5268_de.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
+#include "COMMON/LONE/OS_RUNNABLE_THREAD_QUEUE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NODERECAT1C.H"
 #include "TYPES.H"
 #include "sdk/OSINT/osyieldthread.H"
 #include "sdk/os.h"
 
-extern s32 func_802BD080_de(void);
+extern s32 System_TranslateTlbVirtualAddress(void);
 
 s32 osVirtualToPhysical(s32 virtualAddress) {
     if (virtualAddress < 0 && (u32)virtualAddress <= 0x9FFFFFFFU) {
         return virtualAddress & 0x1FFFFFFF;
     }
     if ((u32)(virtualAddress + 0x60000000) > 0x1FFFFFFFU) {
-        return func_802BD080_de();
+        return System_TranslateTlbVirtualAddress();
     }
     return virtualAddress & 0x1FFFFFFF;
 }
 
 s32 func_802BC36C_de(s32 *, s32);
-extern void *D_800D5270;
+extern void *g_osRunningThread;
 
 
 void osYieldThread(void)
 {
   void *savedInterruptMask;
-  s32 *new_var2;
-  s8 *new_var;
-  int new_var3;
+  s32 *runnableQueue;
+  s8 *runningThreadBytes;
+  int runnableState;
   savedInterruptMask = __osDisableInt();
-  ((OSThread_s *)(new_var = (s8 *) D_800D5270))->state = (new_var3 = 2);
-  new_var2 = &D_800D5268_de;
-  func_802BC36C_de(new_var2, new_var3);
+  ((OSThread_s *)(runningThreadBytes = (s8 *) g_osRunningThread))->state = (runnableState = 2);
+  runnableQueue = &g_osRunnableThreadQueue;
+  func_802BC36C_de(runnableQueue, runnableState);
   __osRestoreInt(savedInterruptMask);
 }

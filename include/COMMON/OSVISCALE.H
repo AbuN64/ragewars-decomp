@@ -25,10 +25,10 @@ struct __OSViScale {
     u32 scale;
 };
 
-extern float D_800C79D8_de;
+extern float g_videoScaleSignedConversionLimit;
 
-struct __OSViContext_func_802BA6B0_de;
-typedef struct __OSViContext_func_802BA6B0_de __OSViContext_func_802BA6B0_de;
+struct ViModeContextView;
+typedef struct ViModeContextView ViModeContextView;
 
 struct OSMesgQueue;
 
@@ -64,7 +64,7 @@ struct OSViCommonRegs {
 struct RecCode802BA23C;
 typedef struct RecCode802BA23C RecCode802BA23C;
 
-extern double D_800C79D0_de;
+extern double g_videoScaleUnsignedBias;
 
 
 struct OSViFieldRegs;
@@ -72,8 +72,8 @@ typedef struct OSViFieldRegs OSViFieldRegs;
 
 struct RecCode802BA23C;
 
-struct ObjectState28;
-struct ObjectState28 {
+struct ViVerticalScaleView;
+struct ViVerticalScaleView {
     u16 unk_0;
     unsigned char padding_2[34];
     f32 unk_24;
@@ -86,8 +86,8 @@ struct OSViMode {
 };
 
 struct OSViMode;
-struct __OSViContext_func_802BA6B0_de;
-struct __OSViContext_func_802BA6B0_de {
+struct ViModeContextView;
+struct ViModeContextView {
     u16 state;
     u16 retraceCount;
     void *framep;
@@ -116,8 +116,8 @@ struct Modep {
     OSViFieldRegs fldRegs[2];
 };
 
-struct ObjectState28;
-typedef struct ObjectState28 ObjectState28;
+struct ViVerticalScaleView;
+typedef struct ViVerticalScaleView ViVerticalScaleView;
 
 
 struct Modep;
@@ -130,8 +130,8 @@ struct __OSViScale;
 typedef struct __OSViScale __OSViScale;
 
 struct Modep;
-struct __OSViContext_func_802BA910_de;
-struct __OSViContext_func_802BA910_de {
+struct ViSwapContextView;
+struct ViSwapContextView {
     u16 state;
     u16 retraceCount;
     void *framep;
@@ -158,6 +158,6 @@ struct StateosViSetSpecialFeatures {
 struct OSDevMgr_func_802BA350_de;
 typedef struct OSDevMgr_func_802BA350_de OSDevMgr_func_802BA350_de;
 
-struct __OSViContext_func_802BA910_de;
-typedef struct __OSViContext_func_802BA910_de __OSViContext_func_802BA910_de;
+struct ViSwapContextView;
+typedef struct ViSwapContextView ViSwapContextView;
 #endif

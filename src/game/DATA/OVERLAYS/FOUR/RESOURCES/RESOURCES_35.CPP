@@ -1,8 +1,8 @@
-#include "DATA/OVLDAT2/800C87B0.H"
+#include "DATA/OVLDAT2/ACTOR_STATE_CALLBACK_LABELS.H"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_actor_handler_run_CEBBC_us_rev1.c */
-unsigned int D_blob_dbd38335a5ea4f10f74d[1] = {
-    (unsigned int)D_00210068,
+unsigned int g_ResourcesEncodedWordsBlock58[1] = {
+    (unsigned int)addrLow_Nav_SelectWeaponFromThirdAmmoGroup,
 };
 #endif

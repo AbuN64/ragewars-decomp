@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "sdk/OBJECTSTATE2.H"
+#include "sdk/PERIPHERAL_PORT_BYTE_VIEWS.H"
 
 /* CODE_802B2340.CPP */
 unsigned short Menu_GetFloatHighWord(float value) {
@@ -21,7 +21,7 @@ f32 Menu_ExpandFloatHighWord(u32 value) {
 #ifdef NON_MATCHING
 /* Split artefact: the tail of the routine at 0x802A8544's neighbour; hands $s3 to $a1 and jumps into that routine, the
    rest is a bare return. Carried as the original instructions. */
-void func_802AD538(void) {
+void Menu_FloatConversionSplitTailEuropean(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -33,7 +33,7 @@ void func_802AD538(void) {
     );
 }
 #else
-INCLUDE_ASM("span_1000", func_802AD538);
+INCLUDE_ASM("span_1000", Menu_FloatConversionSplitTailEuropean);
 #endif
 #endif
 

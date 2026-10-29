@@ -2,7 +2,7 @@
 
 /* 800C9E9C.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800C9E9C[6] = {
+unsigned int k_SceneLoadlevelresourcesEncodedWords[6] = {
     0xC3040000, 0x42800000, 0x42800000, 0x41C00000, 0xC1400000, 0xC2400000,
 };
 #endif
@@ -10,98 +10,98 @@ unsigned int D_auto_rodata_unresolved_800C9E9C[6] = {
 /* 800C9F94.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C9F94 */
-unsigned int D_blob_b1d2fc088137f44cf321[3] = {
+unsigned int g_SceneLoadlevelresourcesEncodedWordsBlock1[3] = {
     0x3F800000, 0x40480000, 0x00000000,
 };
 #endif
 
 /* 800CA0FC.CPP */
 #if defined(VERSION_EU)
-extern char D_00224138[];
-extern char D_002244A4[];
-extern char D_002247A8[];
-extern char D_00224CE8[];
-extern char D_00224FF8[];
-extern char D_00225278[];
-extern char D_002259DC[];
-extern char D_00225DD0[];
-extern char D_002263DC[];
-extern char D_002265E4[];
-extern char D_0022C98C[];
-extern char D_0022C99C[];
+extern char addrLow_Player_UpdateFlyMode_eu[];
+extern char addrLow_Player_UpdateStandingState_eu[];
+extern char addrLow_Playerai_UpdateWalkingMovement_eu[];
+extern char addrLow_Player_UpdateWadingState_eu[];
+extern char addrLow_Player_UpdateFloatingState_eu[];
+extern char addrLow_Player_UpdateSwimmingState_eu[];
+extern char addrLow_Playerai_ResetPlayerAfterDeath_eu[];
+extern char addrLow_Playerai_UpdateTravelSequenceEntryVariant1[];
+extern char addrLow_Playerai_UpdateHazardDamageEntryVariant1[];
+extern char addrLow_Playerai_UpdateTargetFacingEntryVariant1[];
+extern char addrLow_Player_ZeroBodyVelocity_eu[];
+extern char addrLow_Player_StartMovingOnStickInput_eu[];
 extern char D_0022C9E4[];
 extern char D_0022C9EC[];
-extern char D_0022C9F4[];
-extern char D_0022CB0C[];
-extern char D_0022CC54[];
-extern char D_0022CD2C[];
-extern char D_0022CE70[];
-extern char D_0022CEB4[];
-extern char D_0022CF70[];
-extern char D_0022D010[];
+extern char addrLow_Player_UpdateGroundMoveState_eu[];
+extern char addrLow_Player_BeginJump_eu[];
+extern char addrLow_Player_UpdateJumpAscent_eu[];
+extern char addrLow_Player_UpdateJumpAirMotion_eu[];
+extern char addrLow_Player_BeginLateralLeap_eu[];
+extern char addrLow_Player_UpdateLateralLeap_eu[];
+extern char addrLow_Player_UpdateLeapMotion_eu[];
+extern char g_Player_DampMotionCallbackAddressDe[];
 extern char D_0022D030[];
-extern char D_0022D108[];
-extern char D_0022D138[];
-extern char D_0022D25C[];
+extern char addrLow_Player_DampMotion_eu[];
+extern char g_Player_ResetMovementInputCallbackAddressUs[];
+extern char g_PlayerStateNoOperationCallbackAddressUsVariant6[];
 extern char D_0022D280[];
-extern char D_0022D290[];
+extern char g_PlayerResetStunAndMotionCallbackAddressDe[];
 extern char D_0022D298[];
-extern char D_0022D2A0[];
+extern char addrLow_Player_AimPreviousPositionAtReset_eu[];
 extern char D_0022D304[];
-extern char D_0022D30C[];
-extern char D_0022D354[];
-extern char D_0022D380[];
-extern char D_0022D388[];
-extern char D_0022D400[];
+extern char addrLow_Player_ResetStunAndReleaseHandles_eu[];
+extern char addrLow_Player_ResetStunFlags_eu[];
+extern char addrLow_Player_ResetStunFlags_eu_eu_x[];
+extern char addrLow_Playerai_BeginRoundEndWaitEntryVariant1[];
+extern char addrLow_Playerai_UpdateRoundEndWaitEntryVariant2[];
 extern char D_0022D4E4[];
 extern char D_0022D4EC[];
-extern char D_0022D4F4[];
+extern char addrLow_Playerai_UpdateRoundEndViewAngles[];
 extern char D_0022D518[];
-extern char D_0022D520[];
+extern char g_PlayerRequestCinemaTrackCallbackAddressUs[];
 extern char D_0022D594[];
 extern char D_0022D59C[];
-extern char D_0022D5A4[];
-extern char D_0022D5B4[];
-extern char D_0022D644[];
-extern char D_0022D6E8[];
-extern char D_0022D704[];
-extern char D_0022D720[];
-extern char D_0022D73C[];
-extern char D_0022D758[];
-extern char D_0022D774[];
-extern char D_0022D790[];
-extern char D_0022D7AC[];
-extern char D_0022D7C8[];
-extern char D_0022D7E4[];
-extern char D_0022D800[];
-extern char D_0022D81C[];
-extern char D_0022D838[];
-extern char D_0022D854[];
-extern char D_0022D870[];
-extern char D_0022D88C[];
-extern char D_0022D8A8[];
-extern char D_0022D8C4[];
-extern char D_0022D8E0[];
-extern char D_0022D8FC[];
-extern char D_0022D918[];
-extern char D_0022D934[];
-extern char D_0022D950[];
-extern char D_0022D96C[];
-extern char D_0022D988[];
-extern char D_0022D9A4[];
-extern char D_0022D9C0[];
-extern char D_0022D9DC[];
-extern char D_0022D9F8[];
-extern char D_0022DA14[];
-extern char D_0022DA30[];
-extern char D_0022DA4C[];
-extern char D_0022DA68[];
-extern char D_0022DAFC[];
+extern char addrLow_Playerai_SetRunEndFlagEntryVariant1[];
+extern char addrLow_Playerai_UpdateRunEndTransition[];
+extern char g_PlayerSequenceRunEndUpdateCallbackAddressDeVariant2[];
+extern char addrLow_Playerai_StartSequenceTen[];
+extern char addrLow_Playerai_UpdateSequence50Wait[];
+extern char addrLow_Playerai_StartSequence50[];
+extern char addrLow_Playerai_UpdateSequence30Wait[];
+extern char addrLow_Playerai_StartSequence30[];
+extern char addrLow_Playerai_UpdateSequence40Wait[];
+extern char addrLow_Playerai_StartSequence40[];
+extern char addrLow_Playerai_UpdateSequence11Wait[];
+extern char addrLow_Playerai_StartSequence11[];
+extern char addrLow_Playerai_UpdateSequence12Wait[];
+extern char addrLow_Playerai_StartSequence12[];
+extern char addrLow_Playerai_UpdateSequence13Wait[];
+extern char addrLow_Playerai_StartSequence13[];
+extern char addrLow_Playerai_UpdateSequence14Wait[];
+extern char addrLow_Playerai_StartSequence14[];
+extern char addrLow_Playerai_UpdateSequence15Wait[];
+extern char addrLow_Playerai_StartSequence15[];
+extern char addrLow_Playerai_UpdateSequence20Wait[];
+extern char addrLow_Playerai_StartSequence20[];
+extern char addrLow_Playerai_UpdateSequence70Wait[];
+extern char addrLow_Playerai_StartSequence70[];
+extern char addrLow_Playerai_UpdateSequence60Wait[];
+extern char addrLow_Playerai_StartPlayerSequence60_eu[];
+extern char addrLow_Playerai_UpdateSequence60RunEndPose_eu[];
+extern char addrLow_Playerai_StartPlayerSequence71_eu[];
+extern char addrLow_Playerai_UpdateSequence71RunEndPose_eu[];
+extern char addrLow_Playerai_StartPlayerSequence72_eu[];
+extern char addrLow_Playerai_UpdateSequence72RunEndPose_eu[];
+extern char addrLow_Playerai_StartPlayerSequence73_eu[];
+extern char addrLow_Playerai_UpdateSequence73RunEndPose_eu[];
+extern char g_Playerai_EnterMovingSequenceStateCallbackAddressDe[];
+extern char addrLow_Playerai_UpdateSequence74RunEndPose_eu[];
+extern char addrLow_Playerai_InitializeActorModelEffect_eu[];
+extern char addrLow_Playerai_ClearPlayerWeaponLock[];
 extern char D_0022DB28[];
-extern char D_0022DB7C[];
+extern char addrLow_Playerai_ResetPlayerWeaponLock[];
 extern char D_0022DBA8[];
-extern char D_0022DBFC[];
-unsigned int D_auto_rodata_unresolved_800CA0FC[662] = {
+extern char addrLow_Playerai_OffsetActorForState15_eu[];
+unsigned int g_playerMovementStateWordsDe[662] = {
     0x3FDD2F1C, 0x4030F27C, 0x41A5E354, 0x3F84B5DE, 0x00000000, 0x00000000, 0x00000000, 0x403851EC,
     0x41ACCCCC, 0x3F8A3D71, 0x3FDD2F1C, 0x414F5C2A, 0x3F25E355, 0x00000000, 0x00000000, 0x00000000,
     0x4123D70A, 0x41F5C28F, 0x41570A3D, 0x4123D70A, 0x420F5C29, 0x41570A3D, 0x00000000, 0x00000000,
@@ -113,77 +113,77 @@ unsigned int D_auto_rodata_unresolved_800CA0FC[662] = {
     0x41A3D70A, 0x3FC49BA6, 0x41A3D70A, 0x43199999, 0x42CCCCCC, 0x00000001, 0x3ECCCCCD, 0x3F000000,
     0x3F800000, 0x3E800000, 0xBFC90FDC, 0x3FC90FDC, 0x3E4CCCCD, 0x3E800000, 0x3F000000, 0x3E000000,
     0xBFC90FDC, 0x3FC90FDC, 0x3F83126F, 0x40F5C28F, 0x3F03126F, 0x4123D70A, 0x3F449BA6, 0x4123D70A,
-    0x42999999, 0x424CCCCC, 0x00000000, (unsigned int)D_0022C98C, (unsigned int)D_00224138, 0x801104F8, 0x00000000, 0x00000001,
-    0x00020000, 0x00000000, (unsigned int)D_00224138, 0x801104F8, 0x00000000, 0x00000001, 0x00020000, (unsigned int)D_0022C99C,
-    (unsigned int)D_002244A4, 0x80110458, 0x00000000, 0x00000001, 0x00020000, (unsigned int)D_0022C9E4, (unsigned int)D_002247A8, 0x80110458,
-    0x00000000, 0x000007DA, 0x00030000, (unsigned int)D_0022C9EC, (unsigned int)D_0022C9F4, 0x80110458, 0x00000000, 0x00000A64,
-    0x00030000, (unsigned int)D_0022CB0C, (unsigned int)D_0022CC54, 0x80110190, 0x00000800, 0x000007EE, 0x00020000, 0x00000000,
-    (unsigned int)D_0022CD2C, 0x80110190, 0x00000800, 0x000007EE, 0x00020000, (unsigned int)D_0022CE70, (unsigned int)D_0022CEB4, 0x80110458,
-    0x00000000, 0x000007EE, 0x00020000, 0x00000000, (unsigned int)D_0022CF70, 0x80110458, 0x00000000, 0x000007EE,
-    0x00020000, (unsigned int)D_0022D010, (unsigned int)D_00224CE8, 0x80110418, 0x00000080, 0x000008A2, 0x00020000, (unsigned int)D_0022D010,
-    (unsigned int)D_00224CE8, 0x80110418, 0x00000080, 0x000008A2, 0x00030000, (unsigned int)D_0022D030, (unsigned int)D_00224FF8, 0x8010FFB0,
-    0x00000040, 0x000008A2, 0x00020000, (unsigned int)D_0022D030, (unsigned int)D_00224FF8, 0x8010FFB0, 0x00000040, 0x000008A2,
-    0x00030000, (unsigned int)D_0022D108, (unsigned int)D_0022D138, 0x801101B0, 0x00000000, 0x000007DA, 0x00020000, (unsigned int)D_0022D108,
-    (unsigned int)D_0022D138, 0x801101B0, 0x00000000, 0x000007DA, 0x00020000, (unsigned int)D_0022D25C, (unsigned int)D_00225278, 0x80110358,
-    0x00000100, 0x00000A3C, 0x00020000, (unsigned int)D_0022D280, (unsigned int)D_0022D290, 0x80110458, 0x00080000, 0x00000001,
-    0x00020000, (unsigned int)D_0022D298, (unsigned int)D_0022D2A0, 0x801104F8, 0x00100000, 0x00000001, 0x00020000, (unsigned int)D_002259DC,
-    (unsigned int)D_0022D304, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)D_0022D30C, 0x00000000, 0x801103D8,
-    0x00000000, 0x00000000, 0x00010000, (unsigned int)D_0022D354, (unsigned int)D_0022D380, 0x801103D8, 0x00000000, 0x00000000,
-    0x00010000, (unsigned int)D_0022D388, (unsigned int)D_0022D400, 0x801103D8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)D_0022D6E8,
-    (unsigned int)D_0022D704, 0x801102F8, 0x00000000, 0x00001B58, 0x00010000, (unsigned int)D_0022D758, (unsigned int)D_0022D774, 0x801102F8,
-    0x00000000, 0x00001BBC, 0x00010000, (unsigned int)D_0022D918, (unsigned int)D_0022D934, 0x801102F8, 0x00000000, 0x00001BBD,
-    0x00010000, (unsigned int)D_0022D7C8, (unsigned int)D_0022D7E4, 0x801102F8, 0x00000000, 0x00001C20, 0x00010000, (unsigned int)D_0022D950,
-    (unsigned int)D_0022D96C, 0x801102F8, 0x00000000, 0x00001C21, 0x00010000, (unsigned int)D_0022D790, (unsigned int)D_0022D7AC, 0x801102F8,
-    0x00000000, 0x00001CE8, 0x00010000, (unsigned int)D_0022D800, (unsigned int)D_0022D81C, 0x801102F8, 0x00000000, 0x00001B5D,
-    0x00010000, (unsigned int)D_0022D838, (unsigned int)D_0022D854, 0x801102F8, 0x00000000, 0x00001D4C, 0x00010000, (unsigned int)D_0022D870,
-    (unsigned int)D_0022D88C, 0x801102F8, 0x00000000, 0x00001D51, 0x00010000, (unsigned int)D_0022D720, (unsigned int)D_0022D73C, 0x801103B8,
-    0x00000000, 0x00001B6C, 0x00010000, (unsigned int)D_0022D8E0, (unsigned int)D_0022D8FC, 0x801103B8, 0x00000000, 0x00001B62,
-    0x00010000, (unsigned int)D_0022D8A8, (unsigned int)D_0022D8C4, 0x801102F8, 0x00000000, 0x00001B5C, 0x00010000, (unsigned int)D_0022D644,
-    0x00000000, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)D_0022DA68, (unsigned int)D_00225DD0, 0x801101B0,
-    0x00000000, 0x000007EE, 0x00010000, (unsigned int)D_0022DAFC, (unsigned int)D_0022DB28, 0x80110010, 0x00008000, 0x000007DA,
-    0x00020000, (unsigned int)D_0022DB7C, (unsigned int)D_0022DBA8, 0x80110010, 0x00008000, 0x000007DA, 0x00030000, (unsigned int)D_0022DBFC,
-    (unsigned int)D_002263DC, 0x80110458, 0x00000000, 0x000023F0, 0x00020000, (unsigned int)D_0022D4E4, (unsigned int)D_002265E4, 0x80110458,
-    0x00000000, 0x00000001, 0x00020000, (unsigned int)D_0022D4EC, (unsigned int)D_0022D4F4, 0x80110458, 0x00000000, 0x00000001,
-    0x00020000, (unsigned int)D_0022D988, (unsigned int)D_0022D9A4, 0x801102F8, 0x00000000, 0x00001B83, 0x00010000, (unsigned int)D_0022D9C0,
-    (unsigned int)D_0022D9DC, 0x801102F8, 0x00000000, 0x00001B84, 0x00010000, (unsigned int)D_0022D9F8, (unsigned int)D_0022DA14, 0x801102F8,
-    0x00000000, 0x00001B85, 0x00010000, (unsigned int)D_0022DA30, (unsigned int)D_0022DA4C, 0x801102F8, 0x00000000, 0x00001B86,
-    0x00010000, (unsigned int)D_0022D594, (unsigned int)D_0022D59C, 0x80110458, 0x00000000, 0x00005B04, 0x00020000, (unsigned int)D_0022D5A4,
-    (unsigned int)D_0022D5B4, 0x80110458, 0x00000000, 0x00005B05, 0x00020000, (unsigned int)D_0022C98C, (unsigned int)D_00224138, 0x801104F8,
-    0x00000000, 0x00000001, 0x00020000, 0x00000000, (unsigned int)D_00224138, 0x801104F8, 0x00000000, 0x00000001,
-    0x00020000, (unsigned int)D_0022C99C, (unsigned int)D_002244A4, 0x80110458, 0x00000000, 0x00005E24, 0x00020000, (unsigned int)D_0022C9E4,
-    (unsigned int)D_002247A8, 0x80110458, 0x00000000, 0x00005E29, 0x00030000, (unsigned int)D_0022C9EC, (unsigned int)D_0022C9F4, 0x80110458,
-    0x00000000, 0x00000A64, 0x00030000, (unsigned int)D_0022CB0C, (unsigned int)D_0022CC54, 0x80110190, 0x00000800, 0x00005E2D,
-    0x00020000, 0x00000000, (unsigned int)D_0022CD2C, 0x80110190, 0x00000800, 0x00005E2D, 0x00020000, (unsigned int)D_0022CE70,
-    (unsigned int)D_0022CEB4, 0x80110458, 0x00000000, 0x00005E2D, 0x00020000, 0x00000000, (unsigned int)D_0022CF70, 0x80110458,
-    0x00000000, 0x00005E2D, 0x00020000, (unsigned int)D_0022D010, (unsigned int)D_00224CE8, 0x80110418, 0x00000080, 0x000008A2,
-    0x00020000, (unsigned int)D_0022D010, (unsigned int)D_00224CE8, 0x80110418, 0x00000080, 0x000008A2, 0x00030000, (unsigned int)D_0022D030,
-    (unsigned int)D_00224FF8, 0x8010FFB0, 0x00000040, 0x000008A2, 0x00020000, (unsigned int)D_0022D030, (unsigned int)D_00224FF8, 0x8010FFB0,
-    0x00000040, 0x000008A2, 0x00030000, (unsigned int)D_0022D108, (unsigned int)D_0022D138, 0x801101B0, 0x00000000, 0x00005E29,
-    0x00020000, (unsigned int)D_0022D108, (unsigned int)D_0022D138, 0x801101B0, 0x00000000, 0x00005E29, 0x00020000, (unsigned int)D_0022D25C,
-    (unsigned int)D_00225278, 0x80110358, 0x00000100, 0x00005E28, 0x00020000, (unsigned int)D_0022D280, (unsigned int)D_0022D290, 0x80110458,
-    0x00080000, 0x00005E24, 0x00020000, (unsigned int)D_0022D298, (unsigned int)D_0022D2A0, 0x801104F8, 0x00100000, 0x00005E24,
-    0x00020000, (unsigned int)D_002259DC, (unsigned int)D_0022D304, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)D_0022D30C,
-    0x00000000, 0x801103D8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)D_0022D354, (unsigned int)D_0022D380, 0x801103D8,
-    0x00000000, 0x00000000, 0x00010000, (unsigned int)D_0022D388, (unsigned int)D_0022D400, 0x801103D8, 0x00000000, 0x00000000,
-    0x00010000, (unsigned int)D_0022D6E8, (unsigned int)D_0022D704, 0x801102F8, 0x00000000, 0x00001B58, 0x00010000, (unsigned int)D_0022D758,
-    (unsigned int)D_0022D774, 0x801102F8, 0x00000000, 0x00001BBC, 0x00010000, (unsigned int)D_0022D918, (unsigned int)D_0022D934, 0x801102F8,
-    0x00000000, 0x00001BBD, 0x00010000, (unsigned int)D_0022D7C8, (unsigned int)D_0022D7E4, 0x801102F8, 0x00000000, 0x00001C20,
-    0x00010000, (unsigned int)D_0022D950, (unsigned int)D_0022D96C, 0x801102F8, 0x00000000, 0x00001C21, 0x00010000, (unsigned int)D_0022D790,
-    (unsigned int)D_0022D7AC, 0x801102F8, 0x00000000, 0x00001CE8, 0x00010000, (unsigned int)D_0022D800, (unsigned int)D_0022D81C, 0x801102F8,
-    0x00000000, 0x00001B5D, 0x00010000, (unsigned int)D_0022D838, (unsigned int)D_0022D854, 0x801102F8, 0x00000000, 0x00001D4C,
-    0x00010000, (unsigned int)D_0022D870, (unsigned int)D_0022D88C, 0x801102F8, 0x00000000, 0x00001D51, 0x00010000, (unsigned int)D_0022D720,
-    (unsigned int)D_0022D73C, 0x801103B8, 0x00000000, 0x00001B6C, 0x00010000, (unsigned int)D_0022D8E0, (unsigned int)D_0022D8FC, 0x801103B8,
-    0x00000000, 0x00001B62, 0x00010000, (unsigned int)D_0022D8A8, (unsigned int)D_0022D8C4, 0x801102F8, 0x00000000, 0x00001B63,
-    0x00010000, (unsigned int)D_0022D644, 0x00000000, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)D_0022DA68,
-    (unsigned int)D_00225DD0, 0x801101B0, 0x00000000, 0x00005E2D, 0x00010000, (unsigned int)D_0022DAFC, (unsigned int)D_0022DB28, 0x80110010,
-    0x00008000, 0x00005E29, 0x00020000, (unsigned int)D_0022DB7C, (unsigned int)D_0022DBA8, 0x80110010, 0x00008000, 0x00005E29,
-    0x00030000, (unsigned int)D_0022DBFC, (unsigned int)D_002263DC, 0x80110458, 0x00000000, 0x000023F0, 0x00020000, (unsigned int)D_0022D4E4,
-    (unsigned int)D_002265E4, 0x80110458, 0x00000000, 0x00005E24, 0x00020000, (unsigned int)D_0022D4EC, (unsigned int)D_0022D4F4, 0x80110458,
-    0x00000000, 0x00005E24, 0x00020000, (unsigned int)D_0022D518, (unsigned int)D_0022D520, 0x80110458, 0x00000000, 0x00001B83,
-    0x00020000, (unsigned int)D_0022D9C0, (unsigned int)D_0022D9DC, 0x801102F8, 0x00000000, 0x00001B84, 0x00010000, (unsigned int)D_0022D9F8,
-    (unsigned int)D_0022DA14, 0x801102F8, 0x00000000, 0x00001B85, 0x00010000, (unsigned int)D_0022DA30, (unsigned int)D_0022DA4C, 0x801102F8,
+    0x42999999, 0x424CCCCC, 0x00000000, (unsigned int)addrLow_Player_ZeroBodyVelocity_eu, (unsigned int)addrLow_Player_UpdateFlyMode_eu, 0x801104F8, 0x00000000, 0x00000001,
+    0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateFlyMode_eu, 0x801104F8, 0x00000000, 0x00000001, 0x00020000, (unsigned int)addrLow_Player_StartMovingOnStickInput_eu,
+    (unsigned int)addrLow_Player_UpdateStandingState_eu, 0x80110458, 0x00000000, 0x00000001, 0x00020000, (unsigned int)D_0022C9E4, (unsigned int)addrLow_Playerai_UpdateWalkingMovement_eu, 0x80110458,
+    0x00000000, 0x000007DA, 0x00030000, (unsigned int)D_0022C9EC, (unsigned int)addrLow_Player_UpdateGroundMoveState_eu, 0x80110458, 0x00000000, 0x00000A64,
+    0x00030000, (unsigned int)addrLow_Player_BeginJump_eu, (unsigned int)addrLow_Player_UpdateJumpAscent_eu, 0x80110190, 0x00000800, 0x000007EE, 0x00020000, 0x00000000,
+    (unsigned int)addrLow_Player_UpdateJumpAirMotion_eu, 0x80110190, 0x00000800, 0x000007EE, 0x00020000, (unsigned int)addrLow_Player_BeginLateralLeap_eu, (unsigned int)addrLow_Player_UpdateLateralLeap_eu, 0x80110458,
+    0x00000000, 0x000007EE, 0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateLeapMotion_eu, 0x80110458, 0x00000000, 0x000007EE,
+    0x00020000, (unsigned int)g_Player_DampMotionCallbackAddressDe, (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2, 0x00020000, (unsigned int)g_Player_DampMotionCallbackAddressDe,
+    (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2, 0x00030000, (unsigned int)D_0022D030, (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0,
+    0x00000040, 0x000008A2, 0x00020000, (unsigned int)D_0022D030, (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0, 0x00000040, 0x000008A2,
+    0x00030000, (unsigned int)addrLow_Player_DampMotion_eu, (unsigned int)g_Player_ResetMovementInputCallbackAddressUs, 0x801101B0, 0x00000000, 0x000007DA, 0x00020000, (unsigned int)addrLow_Player_DampMotion_eu,
+    (unsigned int)g_Player_ResetMovementInputCallbackAddressUs, 0x801101B0, 0x00000000, 0x000007DA, 0x00020000, (unsigned int)g_PlayerStateNoOperationCallbackAddressUsVariant6, (unsigned int)addrLow_Player_UpdateSwimmingState_eu, 0x80110358,
+    0x00000100, 0x00000A3C, 0x00020000, (unsigned int)D_0022D280, (unsigned int)g_PlayerResetStunAndMotionCallbackAddressDe, 0x80110458, 0x00080000, 0x00000001,
+    0x00020000, (unsigned int)D_0022D298, (unsigned int)addrLow_Player_AimPreviousPositionAtReset_eu, 0x801104F8, 0x00100000, 0x00000001, 0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerAfterDeath_eu,
+    (unsigned int)D_0022D304, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunAndReleaseHandles_eu, 0x00000000, 0x801103D8,
+    0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunFlags_eu, (unsigned int)addrLow_Player_ResetStunFlags_eu_eu_x, 0x801103D8, 0x00000000, 0x00000000,
+    0x00010000, (unsigned int)addrLow_Playerai_BeginRoundEndWaitEntryVariant1, (unsigned int)addrLow_Playerai_UpdateRoundEndWaitEntryVariant2, 0x801103D8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Playerai_StartSequenceTen,
+    (unsigned int)addrLow_Playerai_UpdateSequence50Wait, 0x801102F8, 0x00000000, 0x00001B58, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence30, (unsigned int)addrLow_Playerai_UpdateSequence40Wait, 0x801102F8,
+    0x00000000, 0x00001BBC, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence70, (unsigned int)addrLow_Playerai_UpdateSequence60Wait, 0x801102F8, 0x00000000, 0x00001BBD,
+    0x00010000, (unsigned int)addrLow_Playerai_StartSequence11, (unsigned int)addrLow_Playerai_UpdateSequence12Wait, 0x801102F8, 0x00000000, 0x00001C20, 0x00010000, (unsigned int)addrLow_Playerai_StartPlayerSequence60_eu,
+    (unsigned int)addrLow_Playerai_UpdateSequence60RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001C21, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence40, (unsigned int)addrLow_Playerai_UpdateSequence11Wait, 0x801102F8,
+    0x00000000, 0x00001CE8, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence12, (unsigned int)addrLow_Playerai_UpdateSequence13Wait, 0x801102F8, 0x00000000, 0x00001B5D,
+    0x00010000, (unsigned int)addrLow_Playerai_StartSequence13, (unsigned int)addrLow_Playerai_UpdateSequence14Wait, 0x801102F8, 0x00000000, 0x00001D4C, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence14,
+    (unsigned int)addrLow_Playerai_UpdateSequence15Wait, 0x801102F8, 0x00000000, 0x00001D51, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence50, (unsigned int)addrLow_Playerai_UpdateSequence30Wait, 0x801103B8,
+    0x00000000, 0x00001B6C, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence20, (unsigned int)addrLow_Playerai_UpdateSequence70Wait, 0x801103B8, 0x00000000, 0x00001B62,
+    0x00010000, (unsigned int)addrLow_Playerai_StartSequence15, (unsigned int)addrLow_Playerai_UpdateSequence20Wait, 0x801102F8, 0x00000000, 0x00001B5C, 0x00010000, (unsigned int)g_PlayerSequenceRunEndUpdateCallbackAddressDeVariant2,
+    0x00000000, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Playerai_InitializeActorModelEffect_eu, (unsigned int)addrLow_Playerai_UpdateTravelSequenceEntryVariant1, 0x801101B0,
+    0x00000000, 0x000007EE, 0x00010000, (unsigned int)addrLow_Playerai_ClearPlayerWeaponLock, (unsigned int)D_0022DB28, 0x80110010, 0x00008000, 0x000007DA,
+    0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerWeaponLock, (unsigned int)D_0022DBA8, 0x80110010, 0x00008000, 0x000007DA, 0x00030000, (unsigned int)addrLow_Playerai_OffsetActorForState15_eu,
+    (unsigned int)addrLow_Playerai_UpdateHazardDamageEntryVariant1, 0x80110458, 0x00000000, 0x000023F0, 0x00020000, (unsigned int)D_0022D4E4, (unsigned int)addrLow_Playerai_UpdateTargetFacingEntryVariant1, 0x80110458,
+    0x00000000, 0x00000001, 0x00020000, (unsigned int)D_0022D4EC, (unsigned int)addrLow_Playerai_UpdateRoundEndViewAngles, 0x80110458, 0x00000000, 0x00000001,
+    0x00020000, (unsigned int)addrLow_Playerai_StartPlayerSequence71_eu, (unsigned int)addrLow_Playerai_UpdateSequence71RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B83, 0x00010000, (unsigned int)addrLow_Playerai_StartPlayerSequence72_eu,
+    (unsigned int)addrLow_Playerai_UpdateSequence72RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B84, 0x00010000, (unsigned int)addrLow_Playerai_StartPlayerSequence73_eu, (unsigned int)addrLow_Playerai_UpdateSequence73RunEndPose_eu, 0x801102F8,
+    0x00000000, 0x00001B85, 0x00010000, (unsigned int)g_Playerai_EnterMovingSequenceStateCallbackAddressDe, (unsigned int)addrLow_Playerai_UpdateSequence74RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B86,
+    0x00010000, (unsigned int)D_0022D594, (unsigned int)D_0022D59C, 0x80110458, 0x00000000, 0x00005B04, 0x00020000, (unsigned int)addrLow_Playerai_SetRunEndFlagEntryVariant1,
+    (unsigned int)addrLow_Playerai_UpdateRunEndTransition, 0x80110458, 0x00000000, 0x00005B05, 0x00020000, (unsigned int)addrLow_Player_ZeroBodyVelocity_eu, (unsigned int)addrLow_Player_UpdateFlyMode_eu, 0x801104F8,
+    0x00000000, 0x00000001, 0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateFlyMode_eu, 0x801104F8, 0x00000000, 0x00000001,
+    0x00020000, (unsigned int)addrLow_Player_StartMovingOnStickInput_eu, (unsigned int)addrLow_Player_UpdateStandingState_eu, 0x80110458, 0x00000000, 0x00005E24, 0x00020000, (unsigned int)D_0022C9E4,
+    (unsigned int)addrLow_Playerai_UpdateWalkingMovement_eu, 0x80110458, 0x00000000, 0x00005E29, 0x00030000, (unsigned int)D_0022C9EC, (unsigned int)addrLow_Player_UpdateGroundMoveState_eu, 0x80110458,
+    0x00000000, 0x00000A64, 0x00030000, (unsigned int)addrLow_Player_BeginJump_eu, (unsigned int)addrLow_Player_UpdateJumpAscent_eu, 0x80110190, 0x00000800, 0x00005E2D,
+    0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateJumpAirMotion_eu, 0x80110190, 0x00000800, 0x00005E2D, 0x00020000, (unsigned int)addrLow_Player_BeginLateralLeap_eu,
+    (unsigned int)addrLow_Player_UpdateLateralLeap_eu, 0x80110458, 0x00000000, 0x00005E2D, 0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateLeapMotion_eu, 0x80110458,
+    0x00000000, 0x00005E2D, 0x00020000, (unsigned int)g_Player_DampMotionCallbackAddressDe, (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2,
+    0x00020000, (unsigned int)g_Player_DampMotionCallbackAddressDe, (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2, 0x00030000, (unsigned int)D_0022D030,
+    (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0, 0x00000040, 0x000008A2, 0x00020000, (unsigned int)D_0022D030, (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0,
+    0x00000040, 0x000008A2, 0x00030000, (unsigned int)addrLow_Player_DampMotion_eu, (unsigned int)g_Player_ResetMovementInputCallbackAddressUs, 0x801101B0, 0x00000000, 0x00005E29,
+    0x00020000, (unsigned int)addrLow_Player_DampMotion_eu, (unsigned int)g_Player_ResetMovementInputCallbackAddressUs, 0x801101B0, 0x00000000, 0x00005E29, 0x00020000, (unsigned int)g_PlayerStateNoOperationCallbackAddressUsVariant6,
+    (unsigned int)addrLow_Player_UpdateSwimmingState_eu, 0x80110358, 0x00000100, 0x00005E28, 0x00020000, (unsigned int)D_0022D280, (unsigned int)g_PlayerResetStunAndMotionCallbackAddressDe, 0x80110458,
+    0x00080000, 0x00005E24, 0x00020000, (unsigned int)D_0022D298, (unsigned int)addrLow_Player_AimPreviousPositionAtReset_eu, 0x801104F8, 0x00100000, 0x00005E24,
+    0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerAfterDeath_eu, (unsigned int)D_0022D304, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunAndReleaseHandles_eu,
+    0x00000000, 0x801103D8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunFlags_eu, (unsigned int)addrLow_Player_ResetStunFlags_eu_eu_x, 0x801103D8,
+    0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Playerai_BeginRoundEndWaitEntryVariant1, (unsigned int)addrLow_Playerai_UpdateRoundEndWaitEntryVariant2, 0x801103D8, 0x00000000, 0x00000000,
+    0x00010000, (unsigned int)addrLow_Playerai_StartSequenceTen, (unsigned int)addrLow_Playerai_UpdateSequence50Wait, 0x801102F8, 0x00000000, 0x00001B58, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence30,
+    (unsigned int)addrLow_Playerai_UpdateSequence40Wait, 0x801102F8, 0x00000000, 0x00001BBC, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence70, (unsigned int)addrLow_Playerai_UpdateSequence60Wait, 0x801102F8,
+    0x00000000, 0x00001BBD, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence11, (unsigned int)addrLow_Playerai_UpdateSequence12Wait, 0x801102F8, 0x00000000, 0x00001C20,
+    0x00010000, (unsigned int)addrLow_Playerai_StartPlayerSequence60_eu, (unsigned int)addrLow_Playerai_UpdateSequence60RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001C21, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence40,
+    (unsigned int)addrLow_Playerai_UpdateSequence11Wait, 0x801102F8, 0x00000000, 0x00001CE8, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence12, (unsigned int)addrLow_Playerai_UpdateSequence13Wait, 0x801102F8,
+    0x00000000, 0x00001B5D, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence13, (unsigned int)addrLow_Playerai_UpdateSequence14Wait, 0x801102F8, 0x00000000, 0x00001D4C,
+    0x00010000, (unsigned int)addrLow_Playerai_StartSequence14, (unsigned int)addrLow_Playerai_UpdateSequence15Wait, 0x801102F8, 0x00000000, 0x00001D51, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence50,
+    (unsigned int)addrLow_Playerai_UpdateSequence30Wait, 0x801103B8, 0x00000000, 0x00001B6C, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence20, (unsigned int)addrLow_Playerai_UpdateSequence70Wait, 0x801103B8,
+    0x00000000, 0x00001B62, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence15, (unsigned int)addrLow_Playerai_UpdateSequence20Wait, 0x801102F8, 0x00000000, 0x00001B63,
+    0x00010000, (unsigned int)g_PlayerSequenceRunEndUpdateCallbackAddressDeVariant2, 0x00000000, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Playerai_InitializeActorModelEffect_eu,
+    (unsigned int)addrLow_Playerai_UpdateTravelSequenceEntryVariant1, 0x801101B0, 0x00000000, 0x00005E2D, 0x00010000, (unsigned int)addrLow_Playerai_ClearPlayerWeaponLock, (unsigned int)D_0022DB28, 0x80110010,
+    0x00008000, 0x00005E29, 0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerWeaponLock, (unsigned int)D_0022DBA8, 0x80110010, 0x00008000, 0x00005E29,
+    0x00030000, (unsigned int)addrLow_Playerai_OffsetActorForState15_eu, (unsigned int)addrLow_Playerai_UpdateHazardDamageEntryVariant1, 0x80110458, 0x00000000, 0x000023F0, 0x00020000, (unsigned int)D_0022D4E4,
+    (unsigned int)addrLow_Playerai_UpdateTargetFacingEntryVariant1, 0x80110458, 0x00000000, 0x00005E24, 0x00020000, (unsigned int)D_0022D4EC, (unsigned int)addrLow_Playerai_UpdateRoundEndViewAngles, 0x80110458,
+    0x00000000, 0x00005E24, 0x00020000, (unsigned int)D_0022D518, (unsigned int)g_PlayerRequestCinemaTrackCallbackAddressUs, 0x80110458, 0x00000000, 0x00001B83,
+    0x00020000, (unsigned int)addrLow_Playerai_StartPlayerSequence72_eu, (unsigned int)addrLow_Playerai_UpdateSequence72RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B84, 0x00010000, (unsigned int)addrLow_Playerai_StartPlayerSequence73_eu,
+    (unsigned int)addrLow_Playerai_UpdateSequence73RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B85, 0x00010000, (unsigned int)g_Playerai_EnterMovingSequenceStateCallbackAddressDe, (unsigned int)addrLow_Playerai_UpdateSequence74RunEndPose_eu, 0x801102F8,
     0x00000000, 0x00001B86, 0x00010000, (unsigned int)D_0022D594, (unsigned int)D_0022D59C, 0x80110458, 0x00000000, 0x00005B04,
-    0x00020000, (unsigned int)D_0022D5A4, (unsigned int)D_0022D5B4, 0x80110458, 0x00000000, 0x00005B05, 0x00020000, 0x0000012B,
+    0x00020000, (unsigned int)addrLow_Playerai_SetRunEndFlagEntryVariant1, (unsigned int)addrLow_Playerai_UpdateRunEndTransition, 0x80110458, 0x00000000, 0x00005B05, 0x00020000, 0x0000012B,
     0x012B012B, 0x012B012B, 0x012B012B, 0x012B012B, 0x012B0000, 0xBE800000,
 };
 #endif

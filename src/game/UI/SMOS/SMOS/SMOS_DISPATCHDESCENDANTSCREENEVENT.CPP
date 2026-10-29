@@ -6,7 +6,7 @@
 #include "MATH/MENU.H"
 #include "include_asm.h"
 
-void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 event, s32 arg2, s32 control, s32 extra,
+void Smos_DispatchDescendantScreenEvent(ScreenEventTreeNode *node, s32 event, s32 source, s32 control, s32 extra,
                    s32 depth) {
     ScreenManager *context;
     s32 saved;
@@ -14,16 +14,16 @@ void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 event, s32 arg2, 
     s32 *value;
 
     if (node != 0) {
-        context = D_8014D080;
+        context = g_screenManager;
         saved = context->handled;
         context->handled = 0;
         value = &context->handled;
         if (node->left != 0) {
-            Smos_DispatchDescendantScreenEvent(node->left, event, arg2, control, extra, depth + 1);
+            Smos_DispatchDescendantScreenEvent(node->left, event, source, control, extra, depth + 1);
         }
         if (context->handled == 0) {
             if (node->right != 0) {
-                Smos_DispatchDescendantScreenEvent(node->right, event, arg2, control, extra, depth + 1);
+                Smos_DispatchDescendantScreenEvent(node->right, event, source, control, extra, depth + 1);
             }
             if ((context->handled == 0) && (depth > 0) && (node->value != -1) &&
                 (node->type >= 9U)) {
@@ -34,7 +34,7 @@ void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 event, s32 arg2, 
                 }
                 if (valid != 0) {
                     GetMenuScreenOwner();
-                    Menu_RouteElementEvent(node->value, event, arg2, control, extra);
+                    Menu_RouteElementEvent(node->value, event, source, control, extra);
                 }
             }
         }
@@ -43,10 +43,10 @@ void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 event, s32 arg2, 
 }
 
 void *Smos_GetScreenManager(void) {
-    return D_8014D080;
+    return g_screenManager;
 }
 
 #if defined(VERSION_DE)
-unsigned char D_auto_func_80299E74_de_padding_9AA74[12] = { 0xC6, 0x00, 0x00, 0x08, 0x02, 0x00, 0x20, 0x21, 0x0C, 0x09, 0x34, 0x99 };
+unsigned char g_SmosDispatchdescendantscreeneventTrailingBytes[12] = { 0xC6, 0x00, 0x00, 0x08, 0x02, 0x00, 0x20, 0x21, 0x0C, 0x09, 0x34, 0x99 };
 #endif
 

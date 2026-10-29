@@ -8,5 +8,5 @@ struct CGameDynamicLight_t {
     IntrusiveList m_FreeList;
     struct CDLight_t m_DLights[8];
 };
-extern void Ovlgame_InitializeDynamicLightPool(struct CGameDynamicLight_t*arg0);
+extern void Ovlgame_InitializeDynamicLightPool(struct CGameDynamicLight_t*lightPool);
 #endif

@@ -23,7 +23,7 @@ CVector3 Track_GetTrackTargetPosition(f32 t) {
     s32 i;
     s32 idx;
     s32 count;
-    KeyRecAt1C *keys;
+    TrackTransformKey *keys;
     s32 *clip;
     f32 start;
     f32 end;
@@ -34,17 +34,17 @@ CVector3 Track_GetTrackTargetPosition(f32 t) {
     idx = 0;
     i = 0;
     end = start;
-    while (i < *((s32 *)SetN64_GetPackSection(D_800E2830->resource, 0))) {
+    while (i < *((s32 *)SetN64_GetPackSection(g_cinemaSequenceState->resource, 0))) {
         idx = i;
-        clip = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), idx), 1);
+        clip = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(g_cinemaSequenceState->resource, 0), idx), 1);
         count = clip[1];
-        keys = (KeyRecAt1C *)(clip + 2);
+        keys = (TrackTransformKey *)(clip + 2);
         start = end;
         end = start + keys[count - 1].time;
         if (idx == 0 && t <= start) {
             break;
         }
-        if (idx == *((s32 *)SetN64_GetPackSection(D_800E2830->resource, 0)) - 1 && end < t) {
+        if (idx == *((s32 *)SetN64_GetPackSection(g_cinemaSequenceState->resource, 0)) - 1 && end < t) {
             break;
         }
         i = idx + 1;
@@ -52,7 +52,7 @@ CVector3 Track_GetTrackTargetPosition(f32 t) {
             break;
         }
     }
-    if (((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), idx), 2))[1] != 0) {
+    if (((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(g_cinemaSequenceState->resource, 0), idx), 2))[1] != 0) {
         t = start;
     }
     return Track_EvaluateCameraSpline((SplineNode *)keys, count, t - start);

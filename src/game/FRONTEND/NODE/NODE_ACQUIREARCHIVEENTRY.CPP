@@ -1,5 +1,5 @@
 #include "MENU/GFX/IMAGE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MATH/N64_ENG.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
@@ -29,9 +29,9 @@ extern PoolFrontendReleaseChunkImages g_frontendResourceFontCount;
 void Node_ReleaseChunkImages(s32 index) {
     s32 n;
     s32 i;
-    SlotRecAtCV1 *slot;
+    ArchiveChunkImageSlot *slot;
 
-    for (n = 0; n < g_frontendResourceFontCount.entries[index].def->unkE; n++) {
+    for (n = 0; n < g_frontendResourceFontCount.entries[index].def->glyphCount; n++) {
         slot = g_frontendResourceFontCount.entries[index].ns[n];
         for (i = 0; i < 0x60; i++) {
             if (slot[i].flags & 1) {
@@ -72,10 +72,10 @@ void Node_AcquireArchiveEntry(s32 index) {
 load:
     N64Eng_GetTimeSeconds();
     g_frontendResourceState.Screen[index].data = Cache_AllocateMemory(g_frontendResourceState.Screen[index].size);
-    g_frontendResourceState.In = XStdio_OpenStream(g_frontendResourceState.Name, &D_800DD0B0);
+    g_frontendResourceState.In = XStdio_OpenStream(g_frontendResourceState.Name, &s_frontendResourceOpenMode);
     XStdio_SeekStream(g_frontendResourceState.In, g_frontendResourceState.Header.ScreenData + g_frontendResourceState.Screen[index].offset, 0);
     XStdio_ReadStream(g_frontendResourceState.Screen[index].data, g_frontendResourceState.Screen[index].size, 1, g_frontendResourceState.In);
-    if (D_800E2AC4 != 0) {
+    if (g_frontendArchiveResident != 0) {
         g_frontendResourceState.ScreenOriginal[index].data = Cache_AllocateMemory(g_frontendResourceState.Screen[index].size);
         XPlus_CopyBytes(g_frontendResourceState.ScreenOriginal[index].data, g_frontendResourceState.Screen[index].data, g_frontendResourceState.Screen[index].size);
     }

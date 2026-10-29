@@ -16,23 +16,23 @@ struct {
     },
 };
 
-extern char D_0041F2A0[];
-extern char D_0041F738[];
-extern char D_0041FCC0[];
+extern char g_cCharacterSelection_OpenCharacterSelectionScreenEntry[];
+extern char g_character_UpdateCharacterPreviewEntry[];
+extern char g_menu_RenderPlayerCharacterPreviewsEntry[];
 extern char D_00420B80[];
-extern char D_00420BC0[];
-extern char D_00420BE8[];
-extern char D_00420C60[];
-extern char D_00420C68[];
-extern char D_00420C70[];
-extern char D_00420C78[];
-extern char D_00420C80[];
-extern char D_00420D4C[];
-unsigned int D_auto_src_ragewars_event_handlers_E4F64_us_rev1[39] = {
-    0x00000E07, 0x00000007, (unsigned int)D_00420BC0, 0x00000E08, 0x00000007, (unsigned int)D_0041F738, 0x0000000A, 0x00000007,
-    (unsigned int)D_00420BE8, 0x00000E0A, 0x00000007, (unsigned int)D_0041FCC0, 0x00000E06, 0x00000007, (unsigned int)D_0041F2A0, 0x00000E03,
-    0x00000007, (unsigned int)D_00420B80, 0x00000002, 0x00000007, (unsigned int)D_00420C80, 0x00000001, 0x00000007, (unsigned int)D_00420D4C,
-    0x00000008, 0x00000007, (unsigned int)D_00420C60, 0x00000007, 0x00000007, (unsigned int)D_00420C68, 0x00000005, 0x00000007,
-    (unsigned int)D_00420C70, 0x00000006, 0x00000007, (unsigned int)D_00420C78, 0x00000000, 0x00000000, 0x00000000,
+extern char g_selection_ActivateCharacterSelectionModeEntry[];
+extern char g_selection_HandleCharacterVariantCycleEntry[];
+extern char g_selection_ReturnCharacterEventZeroAEntry[];
+extern char g_selection_ReturnCharacterEventZeroBEntry[];
+extern char g_selection_ReturnCharacterEventZeroCEntry[];
+extern char g_selection_ReturnCharacterEventZeroDEntry[];
+extern char g_selection_CancelCharacterConfirmationEntry[];
+extern char g_selection_ReadSelectionSlotEntry[];
+unsigned int g_eventHandlers_us_rev1[39] = {
+    0x00000E07, 0x00000007, (unsigned int)g_selection_ActivateCharacterSelectionModeEntry, 0x00000E08, 0x00000007, (unsigned int)g_character_UpdateCharacterPreviewEntry, 0x0000000A, 0x00000007,
+    (unsigned int)g_selection_HandleCharacterVariantCycleEntry, 0x00000E0A, 0x00000007, (unsigned int)g_menu_RenderPlayerCharacterPreviewsEntry, 0x00000E06, 0x00000007, (unsigned int)g_cCharacterSelection_OpenCharacterSelectionScreenEntry, 0x00000E03,
+    0x00000007, (unsigned int)D_00420B80, 0x00000002, 0x00000007, (unsigned int)g_selection_CancelCharacterConfirmationEntry, 0x00000001, 0x00000007, (unsigned int)g_selection_ReadSelectionSlotEntry,
+    0x00000008, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroAEntry, 0x00000007, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroBEntry, 0x00000005, 0x00000007,
+    (unsigned int)g_selection_ReturnCharacterEventZeroCEntry, 0x00000006, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroDEntry, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif

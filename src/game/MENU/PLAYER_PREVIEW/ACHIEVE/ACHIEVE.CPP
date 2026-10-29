@@ -10,12 +10,12 @@ const unsigned char rodata_func_8043829C_de_800DCBC4[3] = {
 /* 804379C8_4.CPP */
 /* 804379C8_4.CPP */
 #if defined(VERSION_US_REV1)
-unsigned char D_auto_func_80438F0C_de_padding_1A70EC[4] = { 0x24, 0x05, 0x00, 0x04 };
+unsigned char g_AchieveTrailingBytes[4] = { 0x24, 0x05, 0x00, 0x04 };
 #endif
 
 /* DATA_80444F98.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_80444F98[1110] = {
+unsigned int k_AchieveEncodedWords[1110] = {
     0x0000000F, 0x534D5F41, 0x27BDFFE8, 0xAFBF0010, 0x0C09789D, 0x2404FFFF, 0x0C0978C9, 0x00000000,
     0x0C0978B7, 0x00000000, 0x3C048012, 0x24849A00, 0x0C1137B0, 0x00000000, 0x8FBF0010, 0x24020001,
     0x03E00008, 0x27BD0018, 0x24020004, 0x03E00008, 0xA4820000, 0x27BDFFE8, 0xAFBF0010, 0x0C097303,
@@ -169,13 +169,13 @@ const unsigned char rodata_func_8043829C_de_800E9754[3] = {
 /* 800E1F40.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_constants_80437C28_us_rev1_E2B40_us_rev1.c */
-const unsigned int D_blob_8953d58d3c35985f217c[1] = {
+const unsigned int k_AchieveEncodedWordsBlock1[1] = {
     0x3D888889,
 };
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-const unsigned char D_blob_83fae0a1897e2dffd396[3] = {
+const unsigned char k_AchieveEncodedBytes[3] = {
     0x25, 0x64, 0x00,
 };
 #endif

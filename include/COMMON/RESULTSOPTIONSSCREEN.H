@@ -7,7 +7,7 @@
 struct ResourceSmpFlickerCreateFlickerWidget;
 
 struct ResultsOptionsScreen;
-struct func_8028469C_S2;
+struct WidgetLabelTextView;
 struct ResultsOptionsScreen {
     char pad0[0x20];
     char panels[2][0x4A8];
@@ -21,7 +21,7 @@ struct ResultsOptionsScreen {
     s32 slideFrames;
     void *resource;
     MenuWidget *focusItem;
-    struct func_8028469C_S2 *owner;
+    struct WidgetLabelTextView *owner;
     MenuWidget *item155;
     char pad9A0[0xA04 - 0x9A0];
     char text[0x40];
@@ -41,15 +41,15 @@ struct ResultsOptionsScreen {
     u8 pending[5];
 };
 
-struct EntryRecAt11C;
-struct EntryRecAt11C {
+struct ProfileWeaponOwnedView;
+struct ProfileWeaponOwnedView {
     char pad0[0x11C];
     u8 owned;
 };
 
 
-struct RowRecAt54;
-struct RowRecAt54 {
+struct PlayerSettingsOptionRow;
+struct PlayerSettingsOptionRow {
     s32 portrait; /* character portrait image id shown in result and selection rows */
     f32 scale[4];
     f32 distance[4];
@@ -74,8 +74,8 @@ struct ScreenFrontendMarkLinkedTrialsAvailable {
     u8 unlocked[1];
 };
 
-struct RecordRecAt8D;
-struct RecordRecAt8D {
+struct ResultsPreviewProfile;
+struct ResultsPreviewProfile {
     char pad0[0x7E];
     u8 single[5];
     u8 versus[5];
@@ -149,11 +149,11 @@ struct ScreenFrontendAnimateResultsOptionsScreen {
     s32 requested;
 };
 
-struct func_8028469C_S2;
+struct WidgetLabelTextView;
 
 
-struct EntryRecAt8V3;
-struct EntryRecAt8V3 {
+struct ResultsOptionEntry;
+struct ResultsOptionEntry {
     s32 id;
     s32 first;
     s32 second;
@@ -161,7 +161,7 @@ struct EntryRecAt8V3 {
 };
 
 
-struct Shape_typemap_21;
+struct WidgetFlagsView;
 
 struct TableFrontendMarkLinkedTrialsAvailable;
 struct TableFrontendMarkLinkedTrialsAvailable {
@@ -181,8 +181,8 @@ struct RecordFrontendFillTrialPresetWeaponRows {
     u16 items[8];
 };
 
-struct EntryRecAt11C;
-typedef struct EntryRecAt11C EntryRecAt11C;
+struct ProfileWeaponOwnedView;
+typedef struct ProfileWeaponOwnedView ProfileWeaponOwnedView;
 
 struct RecordFrontendFillTrialPresetWeaponRows;
 typedef struct RecordFrontendFillTrialPresetWeaponRows RecordFrontendFillTrialPresetWeaponRows;

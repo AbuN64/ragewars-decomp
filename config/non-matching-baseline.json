@@ -20,25 +20,25 @@
     ],
     "src/game/FRONTEND/80423280_8.CPP": [
       {
-        "reason": "NON_MATCHING changes ROM-side C: func_80428850_de [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
+        "reason": "NON_MATCHING changes ROM-side C: CTrialCatalogue_SelectNeighborTwo [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
         "lines": [
           125
         ]
       },
       {
-        "reason": "NON_MATCHING changes ROM-side C: func_804289B4_de [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
+        "reason": "NON_MATCHING changes ROM-side C: CTrialCatalogue_SelectNeighborThree [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
         "lines": [
           125
         ]
       },
       {
-        "reason": "NON_MATCHING changes ROM-side C: func_80428B18_de [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
+        "reason": "NON_MATCHING changes ROM-side C: CTrialCatalogue_SelectNeighborOne [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
         "lines": [
           125
         ]
       },
       {
-        "reason": "NON_MATCHING changes ROM-side C: func_80428C7C_de [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
+        "reason": "NON_MATCHING changes ROM-side C: CTrialCatalogue_SelectNeighborZero [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
         "lines": [
           125
         ]

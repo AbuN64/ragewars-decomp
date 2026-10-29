@@ -22,13 +22,13 @@ extern void SwapMatrixUpForward(Matrix *object);
 
 extern void Graphu64_ConvertMatrixToFixed(Matrix *src, void *dst);
 
-extern s32 Scene_FindModelIdIndex(struct Shared_World *world, s32 arg1);
+extern s32 Scene_FindModelIdIndex(struct Shared_World *world, s32 modelId);
 
 extern s32 Scene_GetIndexedModelResource(void *world, s32 type);
 
-extern void Geometry_QueueDirectModel(s32 model, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern void Geometry_QueueDirectModel(s32 model, s32 transform, s32 lighting, s32 flags, s32 materialOverride);
 
-void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *position) {
+void *Playerai_FindNearestForceMarker(ForcePlayerList *forcePlayerList, void *position) {
     CVector3 markerDelta;
     Shared_ActorView *node;
     void *bestNode;
@@ -69,13 +69,13 @@ void Playerai_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *
 }
 
 /** Report whether the floating field at offset 0x11FC is positive. */
-int func_8022B460_de(char *object) {
+int Playerai_HasForceMarker(char *object) {
     Shared_ActorView *actor = (void *)object;
     return actor->marker.time > 0.0f;
 }
 
-void func_8022B484_de(char *player) {
-    ObjRecAt120C *object = player;
+void Playerai_DrawForceMarker(char *player) {
+    PlayerForceMarkerHandleView *object = player;
     s32 index;
 
     if (object->unk120C != 0) {
@@ -85,29 +85,29 @@ void func_8022B484_de(char *player) {
     }
     if (index != -1) {
         Geometry_QueueDirectModel(Scene_GetIndexedModelResource(&g_world, index),
-                      (s32)((Shared_ActorView *)player)->transform1600, (s32)&D_800D0EF8, 0, -1);
+                      (s32)((Shared_ActorView *)player)->transform1600, (s32)&g_defaultParticleLighting, 0, -1);
     }
 }
 
-void func_8022B510_de(s32 player) {
+void Playerai_ClearDamageTimers(s32 player) {
     s32 effectIndex;
     void *effectBase;
     effectIndex = 4;
     effectBase = player + 0x60;
     do {
-        (((struct IntegerState1250 *) ((s8 *) effectBase))->unk_124C) = 0;
+        (((struct PlayerForceMarkerStateView *) ((s8 *) effectBase))->unk_124C) = 0;
         effectIndex -= 1;
         effectBase -= 0x18;
     } while (effectIndex >= 0);
 }
 
-void func_8022B530_de(s32 playerAddress) {
+void Playerai_ResetDamageTimers(s32 playerAddress) {
     s32 effectIndex;
     void *effectBase;
     effectIndex = 4;
     effectBase = playerAddress + 0x60;
     do {
-        (((struct IntegerState1250 *) ((s8 *) effectBase))->unk_124C) = 0;
+        (((struct PlayerForceMarkerStateView *) ((s8 *) effectBase))->unk_124C) = 0;
         effectIndex -= 1;
         effectBase -= 0x18;
     } while (effectIndex >= 0);
@@ -115,13 +115,13 @@ void func_8022B530_de(s32 playerAddress) {
 
 /* Starts a timer in the first of the object's five 24-byte slots at 0x1248 whose remaining time is not
    positive: records the kind, target, a zero elapsed value and the tag, sets the duration to rate
-   times D_800C7E00 and the step to target over duration. */
+   times g_playerDamageTimerDurationScale and the step to target over duration. */
 
 
 
 
 
-void func_8022B550_de(Obj_func_8022B550_de *obj, float target, float rate, int kind, int tag) {
+void Playerai_StartDamageTimer(PlayerEffectTimerSet *obj, float target, float rate, int kind, int tag) {
     int i;
 
     for (i = 0; i < 5; i++) {
@@ -131,7 +131,7 @@ void func_8022B550_de(Obj_func_8022B550_de *obj, float target, float rate, int k
             t->m_TotalDamage = target;
             t->m_DamageIssued = 0.0f;
             t->m_bIsInflator = tag;
-            t->m_FramesRemaining = rate * D_800C7E00;
+            t->m_FramesRemaining = rate * g_playerDamageTimerDurationScale;
             do {
                 t->m_DamagePerFrame = target / t->m_FramesRemaining;
                 return;

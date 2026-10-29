@@ -14,10 +14,10 @@ struct Shared_Pickup;
 
 
 
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/TRIPLE.H"
 
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 
@@ -32,7 +32,7 @@ struct Node80253610;
 extern void Cache_MarkResourceInUse(s32, struct Node80253610 *);
 extern void Fx_ResetRibbonVertexPool(void *);
 struct CPlayerPool_t;
-extern void func_8022A170_de(struct CPlayerPool_t *);
+extern void Playerai_RotatePlayerPoseBuffers(struct CPlayerPool_t *);
 extern void Scene_CollectVisibleEffects(void *);
 extern void Fx_UpdateEffectLists(void *);
 extern void Scene_UpdateActorsAndRoundState(void *);

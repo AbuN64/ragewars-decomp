@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-const unsigned int D_auto_src_rw_pool_8026193C_C9EB8_us_rev1[12] = {
+const unsigned int g_rootMotionRestartUnsignedBias_StorageWords[12] = {
     0x41F00000, 0x00000000, 0x41F00000, 0x00000000, 0x41F00000, 0x00000000, 0x41F00000, 0x00000000,
     0x41F00000, 0x00000000, 0x38C9116D, 0x38C9116D,
 };

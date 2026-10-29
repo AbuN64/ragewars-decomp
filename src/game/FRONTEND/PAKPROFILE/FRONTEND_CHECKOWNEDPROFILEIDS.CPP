@@ -5,8 +5,8 @@
 #include "FRONTEND/FRONTEND_CHECKOWNEDPROFILEIDS.H"
 
 /* Checks that every active player on the selected team has the configured value. */
-extern s32 D_80102B08[]; extern s8 D_80102B0D[];
-extern s32 D_80102B08[]; extern s8 D_800FEB0E[];
+extern s32 g_profileSlotResetWord[]; extern s8 g_profileSlotIndices[];
+extern s32 g_profileSlotResetWord[]; extern s8 g_profileSlotEnabledFlags[];
 s32 Frontend_CheckOwnedProfileIds(s32 player) {
     s32 profileOffset;
     s32 profileIndex;
@@ -15,7 +15,7 @@ s32 Frontend_CheckOwnedProfileIds(s32 player) {
     profileIndex = 0;
     profileOffset = 0;
     do {
-        if ((*(D_800FEB0E + profileOffset) == 0) && (*(D_80102B0D + profileOffset) == player) && (*(s32 *)((char *)D_80102B08 + profileOffset) != D_800E54A4->players[player].profile)) {
+        if ((*(g_profileSlotEnabledFlags + profileOffset) == 0) && (*(g_profileSlotIndices + profileOffset) == player) && (*(s32 *)((char *)g_profileSlotResetWord + profileOffset) != g_pakProfileScreenState->players[player].profile)) {
             allMatch = 0;
         }
         profileIndex += 1;

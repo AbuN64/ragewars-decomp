@@ -3,17 +3,17 @@
 /* 802B7058_10.CPP */
 /* 802B7058_10.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_802B754C_eu_padding_B814C[4] = { 0x8F, 0xB1, 0x00, 0x2C };
+unsigned char g_SinfTrailingBytesBlock1[4] = { 0x8F, 0xB1, 0x00, 0x2C };
 #endif
 
 /* 802BA5F0_9.CPP */
 #if defined(VERSION_US)
-unsigned char D_auto_func_802BA7E4_us_padding_BB3E4[12] = { 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x17, 0x6D, 0x5F, 0x62, 0x4C };
+unsigned char g_SinfTrailingBytesBlock3[12] = { 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x17, 0x6D, 0x5F, 0x62, 0x4C };
 #endif
 
 /* 802BE040_30.CPP */
 #if defined(VERSION_EU_X)
-unsigned char D_auto_func_802B9F88_eu_x_padding_BAB88[8] = { 0x24, 0x84, 0xCA, 0x4C, 0x00, 0x80, 0x18, 0x21 };
+unsigned char g_SinfTrailingBytesBlock2[8] = { 0x24, 0x84, 0xCA, 0x4C, 0x00, 0x80, 0x18, 0x21 };
 #endif
 
 /* 802BE040_65.CPP */
@@ -24,7 +24,7 @@ unsigned int func_802BEE58_us_rev1[2] = { 0xFF500098U, 0xFF5100A0U };
 
 /* 802B7058_4.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802B72AC_de_padding_B7EAC[4] = { 0xAE, 0x25, 0x00, 0x00 };
+unsigned char g_SinfTrailingBytes[4] = { 0xAE, 0x25, 0x00, 0x00 };
 #endif
 
 /* DATA_800CCB6C.CPP */

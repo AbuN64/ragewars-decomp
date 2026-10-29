@@ -4,7 +4,7 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENUSELECTIONMESSAGE.H"
@@ -20,7 +20,7 @@ extern void InitFrontendMenus(void);
 extern void Tsmos_DeactivateControllerState(void);
 
 void Achieve_OpenResultsFrontend(void) {
-    
+
 #if defined(VERSION_EU)
 Tsmos_InitializeEuropeanFrontend
 #else
@@ -33,11 +33,11 @@ InitFrontendMenus
 
 void Achieve_SelectPostResultScreen(void) {
     s32 next;
-    CGameStatus *layout = &D_801462C8.counters;
+    CGameStatus *layout = &g_gameSettings.counters;
     layout->m_bCTFOn = 0;
     layout->m_bFragTagOn = 0;
-    if (layout->humanWon == 1 && D_8015402C >= 35) {
-        switch (D_801462C8.controllerMode) {
+    if (layout->humanWon == 1 && g_selectedLevelId >= 35) {
+        switch (g_gameSettings.controllerMode) {
         case 4:
             next = 3;
             break;

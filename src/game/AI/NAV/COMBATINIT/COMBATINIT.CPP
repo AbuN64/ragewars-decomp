@@ -8,8 +8,8 @@
 
 /* 802106E0_15.CPP */
 #if !(defined(VERSION_DE))
-void Nav_InitRangedCombat(CloseAttackActor *arg0) {
-    CloseAttackActor *level1 = arg0->self;
+void Nav_InitRangedCombat(CloseAttackActor *actor) {
+    CloseAttackActor *level1 = actor->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2, r3;
 
@@ -29,8 +29,8 @@ void Nav_InitRangedCombat(CloseAttackActor *arg0) {
     inner->distance = r3 % 250000 + 360000;
 }
 
-void Nav_InitCloseCombat(CloseAttackActor *arg0) {
-    CloseAttackActor *level1 = arg0->self;
+void Nav_InitCloseCombat(CloseAttackActor *actor) {
+    CloseAttackActor *level1 = actor->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2, r3;
 
@@ -52,8 +52,8 @@ void Nav_InitCloseCombat(CloseAttackActor *arg0) {
     inner->fireTimer = -1;
 }
 
-void Nav_InitVisiblePursuit(CloseAttackActor *arg0) {
-    CloseAttackActor *level1 = arg0->self;
+void Nav_InitVisiblePursuit(CloseAttackActor *actor) {
+    CloseAttackActor *level1 = actor->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2;
 
@@ -75,7 +75,7 @@ unsigned int func_80212610_eu_padding_13264[1] = {
 #endif
 
 #if defined(VERSION_US)
-char rodata_unresolved_80212668[8] =
+char s_CombatinitSFXPLAText[8] =
     "!SFX_PLA";
 #endif
 
@@ -131,5 +131,5 @@ void Nav_InitVisiblePursuitDe(CloseAttackActor *actor) {
 #endif
 
 #if defined(VERSION_DE)
-unsigned char D_auto_func_80211120_de_padding_13264[12] = { 0xAD, 0x20, 0x00, 0x08, 0x8C, 0xE5, 0x00, 0x00, 0x24, 0xE7, 0x00, 0x04 };
+unsigned char g_CombatinitTrailingBytes[12] = { 0xAD, 0x20, 0x00, 0x08, 0x8C, 0xE5, 0x00, 0x00, 0x24, 0xE7, 0x00, 0x04 };
 #endif

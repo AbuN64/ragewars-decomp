@@ -1,6 +1,6 @@
 #include "COMMON/STATERECAT10.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "include_asm.h"
 
 /* 80231F5C_15.CPP */
@@ -12,27 +12,27 @@ u32 Weapon_UpdateShakeAxis(CShakeAxis *state) {
         state->m_LastShake = state->value;
     }
     if (state->m_Amp == 0.0f) {
-        state->m_Angle = D_800C3080_de;
+        state->m_Angle = g_weaponShakeInitialAngle;
     }
     if (state->m_Amp < state->m_LastShake + state->m_LastShake) {
         state->m_Amp = state->m_LastShake + state->m_LastShake;
     }
 
-    step = D_800D2988;
-    scale = D_800C3084_de;
+    step = g_frameElapsedTime;
+    scale = g_weaponShakeAngleRate;
     state->value = Graphu64_DecayToZero(state->value, step * scale);
-    state->m_LastShake = Graphu64_DecayToZero(state->m_LastShake, D_800D2988 * scale);
+    state->m_LastShake = Graphu64_DecayToZero(state->m_LastShake, g_frameElapsedTime * scale);
 
     switch (state->mode) {
     case 1:
         if (state->m_Amp > 0.0f) {
-            state->m_Angle += (state->m_Amp + state->m_Amp) * (D_800D2988 * scale);
-            state->m_Amp = Graphu64_DecayToZero(state->m_Amp, D_800C3088_de);
+            state->m_Angle += (state->m_Amp + state->m_Amp) * (g_frameElapsedTime * scale);
+            state->m_Amp = Graphu64_DecayToZero(state->m_Amp, g_weaponShakeActiveDecay);
         }
         break;
     case 0:
         if (state->m_Amp > 0.0f) {
-            state->m_Amp = Graphu64_DecayToZero(state->m_Amp, D_800C308C_de);
+            state->m_Amp = Graphu64_DecayToZero(state->m_Amp, g_weaponShakeIdleDecay);
         }
         break;
     }
@@ -40,11 +40,11 @@ u32 Weapon_UpdateShakeAxis(CShakeAxis *state) {
     return state->m_Amp == 0.0f;
 }
 
-const unsigned int D_auto_src_rw_pool_802337D0_C8D70_us_rev1[4] = {
+const unsigned int k_WeaponshakeEncodedWords[4] = {
     0x42B40000, 0x40400000, 0x40C00000, 0x40C00000,
 };
 
 /* 800C8180.CPP */
-const unsigned int D_auto_src_rw_pool_80233930_C8D80_us_rev1[4] = {
+const unsigned int k_WeaponshakeEncodedWordsBlock1[4] = {
     0x3F800000, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36,
 };

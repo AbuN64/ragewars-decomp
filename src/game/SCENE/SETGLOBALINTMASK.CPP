@@ -1,5 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "SCENE/SETGLOBALINTMASK.H"
 #include "sdk/os.h"
@@ -11,7 +11,7 @@ void Scene_SetGlobalInterruptMask(s32 interruptMask) {
     s32 *p;
 
     mask = __osDisableInt();
-    p = &D_800D5258;
+    p = &g_globalInterruptMask;
     *p |= interruptMask;
     __osRestoreInt(mask);
 }

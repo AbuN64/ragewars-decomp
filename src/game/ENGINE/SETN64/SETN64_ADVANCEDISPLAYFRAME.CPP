@@ -2,15 +2,15 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "RENDER/SETN64_ADVANCEDISPLAYFRAME.H"
 #include "RESMGR/X_PLUS.H"
 
 
-extern void osCreateThread(s32 arg0, s32 arg1, void *entry, s32 arg, s32 arg4, s32 arg5);
+extern void osCreateThread(s32 thread, s32 threadId, void *entry, s32 arg, s32 stackTop, s32 priority);
 
 
 
@@ -25,25 +25,25 @@ extern s32 Scene_SetThreadPriority(s32 *, s32);
 /* Advances the frame ring and alternates the color and depth buffer pointers for the next frame. */
 
 
-extern unsigned int D_800D2978;
+extern unsigned int g_gameFrameCounter;
 
-extern int D_800CD730;
+extern int g_gameLoopFrameCount;
 
 
 void SetN64_StartBootstrapThread(void) {
-    XPlus_FillMemory((s32)D_800E7C00, 0, 0x80);
-    osCreateThread((s32)D_8011B590, 0, D_0029350C, 0, (s32)(D_800E7C00 + 0x80), D_800CD8A4_de);
-    osStartThread(D_8011B590);
+    XPlus_FillMemory((s32)g_bootstrapThreadStack, 0, 0x80);
+    osCreateThread((s32)g_bootstrapThread, 0, g_packedCodeAddress24_0029350C, 0, (s32)(g_bootstrapThreadStack + 0x80), g_bootstrapThreadPriority);
+    osStartThread(g_bootstrapThread);
 }
 
 void SetN64_StartGameThreadAndIdle(s32 *gameSession, s32 threadArgument) {
-    XPlus_FillMemory((s32)D_800E7C80_de, 1, 0x8000);
-    osCreateThread((s32)D_8011B7C0, 1, D_00293534, threadArgument, (s32)D_800EFC80_de, D_800CD8B4);
-    osStartThread(D_8011B7C0);
+    XPlus_FillMemory((s32)g_gameThreadStack, 1, 0x8000);
+    osCreateThread((s32)g_gameThread, 1, g_packedCodeAddress24_00293534, threadArgument, (s32)g_schedulerThreadStack, g_gameThreadPriority);
+    osStartThread(g_gameThread);
     {
-        s32 temp = D_800CD8A0_de;
+        s32 schedulingPriority = g_videoFrameSchedulingMode;
         ((GameSession *)gameSession)->enabled = 0;
-        Scene_SetThreadPriority(0, temp);
+        Scene_SetThreadPriority(0, schedulingPriority);
     }
 loop_1:
     goto loop_1;
@@ -51,11 +51,11 @@ loop_1:
 
 void SetN64_AdvanceDisplayFrame(Display *display) {
  unsigned int index; Frame *frame;
- index=++D_800D2978%D_800DE850;
- D_800CD730++;
- D_800D297C^=1;
+ index=++g_gameFrameCounter%g_renderFrameBufferCount;
+ g_gameLoopFrameCount++;
+ g_lightingBufferIndex^=1;
  display->current=&display->frames[index];
- display->current->commands = D_800D297C ? D_8014D464 : D_8014D460;
+ display->current->commands = g_lightingBufferIndex ? g_displayListBufferOne : g_displayListBufferZero;
  frame = display->current;
- frame->secondCommands = D_800D297C ? D_8014D42C : D_8014D430_de;
+ frame->secondCommands = g_lightingBufferIndex ? g_secondaryDisplayListBufferZero : g_secondaryDisplayListBufferOne;
 }

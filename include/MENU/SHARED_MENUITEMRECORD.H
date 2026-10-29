@@ -17,5 +17,5 @@ struct Shared_MenuItemList {
     s32 selection;
 };
 
-extern f32 D_800C917C;
+extern f32 g_teamWheelInitialSlotScale;
 #endif

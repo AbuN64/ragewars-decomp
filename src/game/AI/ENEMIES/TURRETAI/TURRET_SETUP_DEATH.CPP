@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_15.H"
+#include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
@@ -7,14 +7,14 @@
 #include "TYPES.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 
-extern s32 Turret_TrackTarget(void *arg0);
+extern s32 Turret_TrackTarget(void *actor);
 
 
 extern s32 Barrel_SpawnFlaggedEffects(void *actor, void *emittedFlags, s32 emissionFlag, s32 primaryEffectMask, s32 secondaryEffectMask);
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
-extern void Link_DispatchActorLinks(void *actor, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *actor, s32 eventMask, void *eventSource);
 
 s32 Animpool_ReleaseSceneEffect(void *);
 

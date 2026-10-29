@@ -1,6 +1,6 @@
 #ifndef COMMON_WORLDSORTENTRY_H
 #define COMMON_WORLDSORTENTRY_H
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "sdk/SCHED/SCHED.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -17,14 +17,14 @@ struct Def {
 };
 struct Def;
 
-struct SceneRecAt140;
-typedef struct SceneRecAt140 SceneRecAt140;
+struct LevelActorArrayView;
+typedef struct LevelActorArrayView LevelActorArrayView;
 
 
 
-extern float D_800C5350_de;
+extern float g_schedulerVideoYScale;
 
-struct ObjRecAtE4V2;
+struct NearbySpecialActorView;
 
 struct Shared_World;
 
@@ -58,22 +58,22 @@ struct Panel {
 extern int D_800CD710;
 
 
-struct ObjectLinks2F8;
-struct ObjectLinks2F8 {
+struct SchedulerCurrentRspTaskView;
+struct SchedulerCurrentRspTaskView {
     unsigned char padding_0[756];
     void *unk_2F4;
 };
 
 struct LevelActor;
-struct SceneRecAt140;
-struct SceneRecAt140 {
+struct LevelActorArrayView;
+struct LevelActorArrayView {
     char pad[0x138];
     struct LevelActor *actors;
     s32 pad13C;
     s32 count;
 };
 
-extern float D_800C533C_de;
+extern float g_sceneImageVectorTolerance;
 
 
 
@@ -90,8 +90,8 @@ struct OSScClientWork {
 
 
 
-struct IntegerState14;
-typedef struct IntegerState14 IntegerState14;
+struct SchedulerTaskFlagsView;
+typedef struct SchedulerTaskFlagsView SchedulerTaskFlagsView;
 
 
 
@@ -100,13 +100,13 @@ struct OSSched;
 
 
 
-struct ObjRecAt78V2;
-typedef struct ObjRecAt78V2 ObjRecAt78V2;
+struct SchedulerCommandQueueView;
+typedef struct SchedulerCommandQueueView SchedulerCommandQueueView;
 
 struct IntPair;
 
 
-extern int D_800CD708;
+extern int g_schedulerShutdownPending;
 
 
 
@@ -150,21 +150,21 @@ struct OSScClientWork;
 typedef struct OSScClientWork OSScClientWork;
 
 
-struct ObjectLinks2F8;
-typedef struct ObjectLinks2F8 ObjectLinks2F8;
+struct SchedulerCurrentRspTaskView;
+typedef struct SchedulerCurrentRspTaskView SchedulerCurrentRspTaskView;
 
 
 
 struct OSSched;
 typedef struct OSSched OSSched;
 
-struct ObjRecAtE4V2;
-typedef struct ObjRecAtE4V2 ObjRecAtE4V2;
+struct NearbySpecialActorView;
+typedef struct NearbySpecialActorView NearbySpecialActorView;
 
 struct NodeSchedHandleTaskCommands;
 typedef struct NodeSchedHandleTaskCommands NodeSchedHandleTaskCommands;
 
-struct ObjRecAt78V2;
+struct SchedulerCommandQueueView;
 
 
 
@@ -189,8 +189,8 @@ struct NodeSchedHandleTaskCommands {
 
 
 
-struct IntegerState14;
-struct IntegerState14 {
+struct SchedulerTaskFlagsView;
+struct SchedulerTaskFlagsView {
     unsigned char padding_0[4];
     s32 unk_4;
     unsigned char padding_8[8];
@@ -199,6 +199,6 @@ struct IntegerState14 {
 
 
 
-extern f32 D_800CD750;
-extern s32 D_800CD700;
+extern f32 g_schedulerAudioDuration;
+extern s32 g_schedulerRetraceCount;
 #endif

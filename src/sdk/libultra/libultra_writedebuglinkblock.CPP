@@ -1,13 +1,13 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESPONSE.H"
-#include "COMMON/S1_4.H"
+#include "TYPES.H"
 #include "TYPES.H"
 #include "sdk/OSINT/pigetstatus.H"
 
 #if defined(VERSION_US_REV1)
-/* Reads count bytes from the cartridge-domain port D_B2000021 into a buffer, waiting for bit 0x40 of D_B2000015 before each byte with D_800D3650 retries, accumulating a rotate-and-add checksum stored through the third argument and returning 1 on success. Adapted from Libultra_ReadDebugLinkByte with the single-byte read changed to a counted loop with a checksum and the strobe registers D_B2000004 and D_B2000008 raised and lowered around it. */
+/* Reads count bytes from the cartridge-domain port DEBUG_LINK_BLOCK_STATUS_BYTE into a buffer, waiting for bit 0x40 of DEBUG_LINK_TRANSMIT_STATUS_BYTE before each byte with g_debugLinkRetryLimit retries, accumulating a rotate-and-add checksum stored through the third argument and returning 1 on success. Adapted from Libultra_ReadDebugLinkByte with the single-byte read changed to a counted loop with a checksum and the strobe registers DEBUG_LINK_HANDSHAKE_REGISTER and DEBUG_LINK_TRANSFER_REGISTER raised and lowered around it. */
 
 
 
@@ -25,35 +25,35 @@ s32 Libultra_ReadDebugLinkBlock(u8 *dst, s32 count, u32 *checksum) {
 
     result = 0;
     sum = 0;
-    control = D_8014D3E1 | 8;
-    D_8014D3E1 = control;
+    control = g_debugLinkHandshakeControl | 8;
+    g_debugLinkHandshakeControl = control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = control;
-    control = D_8014D3E3 & 0xF8;
-    D_8014D3E3 = control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = control;
+    control = g_debugLinkModeControl & 0xF8;
+    g_debugLinkModeControl = control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B200000C = control;
-    control = D_8014D3E2 | 2;
-    D_8014D3E2 = control;
+    DEBUG_LINK_MODE_REGISTER = control;
+    control = g_debugLinkTransferControl | 2;
+    g_debugLinkTransferControl = control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000008 = control;
+    DEBUG_LINK_TRANSFER_REGISTER = control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000018 = 0;
+    DEBUG_LINK_BLOCK_CONTROL_REGISTER = 0;
 
     if (count-- != 0) {
         mask = 0x40;
         expected = 0x40;
 next:
-        retries = D_800D3650;
+        retries = g_debugLinkRetryLimit;
         timeout = 0x4E20;
         do {
             do {
             } while (osPiGetStatus() & 3);
-            if ((D_B2000015 & mask) == expected) {
+            if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
                 goto ready;
             }
             if (timeout-- == 0) {
@@ -61,15 +61,15 @@ next:
                 timeout = 0x4E20;
             }
         } while (retries > 0);
-        D_8014D3E8 = 1;
+        g_debugLinkTransferFailed = 1;
 ready:
-        if (D_8014D3E8 != 0) {
+        if (g_debugLinkTransferFailed != 0) {
             goto release;
         }
         do {
         } while (osPiGetStatus() & 3);
         sum = (sum << 1) | (sum >> 31);
-        value = D_B2000021;
+        value = DEBUG_LINK_BLOCK_STATUS_BYTE;
         *dst++ = value;
         sum += value;
         if (count-- != 0) {
@@ -79,31 +79,31 @@ ready:
     *checksum = sum;
     result = 1;
 release:
-    control = D_8014D3E2 & 0xFD;
-    D_8014D3E2 = control;
+    control = g_debugLinkTransferControl & 0xFD;
+    g_debugLinkTransferControl = control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000008 = control;
-    control = D_8014D3E1 & 0xF7;
-    D_8014D3E1 = control;
+    DEBUG_LINK_TRANSFER_REGISTER = control;
+    control = g_debugLinkHandshakeControl & 0xF7;
+    g_debugLinkHandshakeControl = control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = control;
-    control = D_8014D3E3 & 0xF8;
-    D_8014D3E3 = control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = control;
+    control = g_debugLinkModeControl & 0xF8;
+    g_debugLinkModeControl = control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B200000C = control;
+    DEBUG_LINK_MODE_REGISTER = control;
     return result;
 }
 #endif
 
 #if defined(VERSION_US_REV1)
-extern s16 D_auto_B2000014;
-extern s16 D_auto_B2000020;
+extern s16 DEBUG_LINK_BLOCK_REQUEST_REGISTER;
+extern s16 DEBUG_LINK_BLOCK_DATA_REGISTER;
 static inline void waitPort(u8 *port, u8 mask, u8 expected)
 {
-    s32 retries = D_800D3650;
+    s32 retries = g_debugLinkRetryLimit;
     s32 timeout = 0x4E20;
     do {
         do {
@@ -115,7 +115,7 @@ static inline void waitPort(u8 *port, u8 mask, u8 expected)
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 }
 
 s32 Libultra_WriteDebugLinkBlock(u8 *stream, s32 count)
@@ -124,65 +124,65 @@ s32 Libultra_WriteDebugLinkBlock(u8 *stream, s32 count)
     u8 control;
     u8 data;
 
-    waitPort(&D_B2000011, 0x40, 0x40);
-    if (D_8014D3E8 == 0) {
-        control = (D_8014D3E3 & 0xF8) | 1;
-        D_8014D3E3 = control;
+    waitPort(&DEBUG_LINK_RECEIVE_STATUS_BYTE, 0x40, 0x40);
+    if (g_debugLinkTransferFailed == 0) {
+        control = (g_debugLinkModeControl & 0xF8) | 1;
+        g_debugLinkModeControl = control;
         do {} while (osPiGetStatus() & 3);
-        D_B200000C = control;
-        control = D_8014D3E2 | 2;
-        D_8014D3E2 = control;
+        DEBUG_LINK_MODE_REGISTER = control;
+        control = g_debugLinkTransferControl | 2;
+        g_debugLinkTransferControl = control;
         do {} while (osPiGetStatus() & 3);
-        D_B2000008 = control;
-        control = D_8014D3E1 | 1;
-        D_8014D3E1 = control;
+        DEBUG_LINK_TRANSFER_REGISTER = control;
+        control = g_debugLinkHandshakeControl | 1;
+        g_debugLinkHandshakeControl = control;
         do {} while (osPiGetStatus() & 3);
-        D_B2000004 = control;
+        DEBUG_LINK_HANDSHAKE_REGISTER = control;
         do {} while (osPiGetStatus() & 3);
-        D_auto_B2000014 = 0;
+        DEBUG_LINK_BLOCK_REQUEST_REGISTER = 0;
         while (count-- != 0) {
-            waitPort(&D_B2000015, 0x40, 0x40);
-            if (D_8014D3E8 != 0)
+            waitPort(&DEBUG_LINK_TRANSMIT_STATUS_BYTE, 0x40, 0x40);
+            if (g_debugLinkTransferFailed != 0)
                 goto cleanup;
             data = *stream++;
             do {} while (osPiGetStatus() & 3);
-            D_auto_B2000020 = data;
+            DEBUG_LINK_BLOCK_DATA_REGISTER = data;
         }
-        waitPort(&D_B2000015, 0x40, 0x40);
-        if (D_8014D3E8 == 0) {
+        waitPort(&DEBUG_LINK_TRANSMIT_STATUS_BYTE, 0x40, 0x40);
+        if (g_debugLinkTransferFailed == 0) {
             s32 timeout = 0x4E20;
             u8 mask = 0x40;
-            s32 retries = D_800D3650;
+            s32 retries = g_debugLinkRetryLimit;
             s32 expected = 0;
             do {
                 do {} while (osPiGetStatus() & 3);
-                if ((D_B2000011 & mask) == expected)
+                if ((DEBUG_LINK_RECEIVE_STATUS_BYTE & mask) == expected)
                     goto close_ready;
                 if (timeout-- == 0) {
                     retries--;
                     timeout = 0x4E20;
                 }
             } while (retries > 0);
-            D_8014D3E8 = 1;
+            g_debugLinkTransferFailed = 1;
 close_ready:
 
-            if (D_8014D3E8 == 0)
+            if (g_debugLinkTransferFailed == 0)
                 result = 1;
         }
     }
 cleanup:
-    control = D_8014D3E1 & 0xFE;
-    D_8014D3E1 = control;
+    control = g_debugLinkHandshakeControl & 0xFE;
+    g_debugLinkHandshakeControl = control;
     do {} while (osPiGetStatus() & 3);
-    D_B2000004 = control;
-    control = D_8014D3E2 & 0xFD;
-    D_8014D3E2 = control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = control;
+    control = g_debugLinkTransferControl & 0xFD;
+    g_debugLinkTransferControl = control;
     do {} while (osPiGetStatus() & 3);
-    D_B2000008 = control;
-    control = D_8014D3E3 & 0xF8;
-    D_8014D3E3 = control;
+    DEBUG_LINK_TRANSFER_REGISTER = control;
+    control = g_debugLinkModeControl & 0xF8;
+    g_debugLinkModeControl = control;
     do {} while (osPiGetStatus() & 3);
-    D_B200000C = control;
+    DEBUG_LINK_MODE_REGISTER = control;
     return result;
 }
 #endif

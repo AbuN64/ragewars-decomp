@@ -12,7 +12,7 @@ struct Held;
 struct Mode;
 struct Model;
 struct Mount;
-struct ProfileRecAt84;
+struct PakStatusProfile;
 struct Record;
 struct Rider;
 struct Settings;
@@ -30,8 +30,8 @@ struct MenuPakBeginProfileLoad;
 typedef struct MenuPakBeginProfileLoad MenuPakBeginProfileLoad;
 
 
-struct Shape_typemap_110;
-struct RecordRecAt1C;
+struct DialogPlayerState;
+struct RenderBufferResources;
 
 
 struct OwnerPakBeginProfileLoad;
@@ -45,17 +45,17 @@ struct OwnerPakBeginProfileLoad;
 
 struct MenuPakConfirmProfileOrDeleteNote;
 
-struct RecordRecAt1C;
+struct RenderBufferResources;
 
-struct RecordRecAt1C;
+struct RenderBufferResources;
 
-struct ObjRecAtB0;
-
-
-struct Shape_typemap_110;
+struct ControllerButtonFlagsView;
 
 
-struct Shape_typemap_110;
+struct DialogPlayerState;
+
+
+struct DialogPlayerState;
 
 struct PakRecord;
 struct PakRecord {
@@ -71,5 +71,5 @@ typedef struct MenuPakConfirmProfileOrDeleteNote MenuPakConfirmProfileOrDeleteNo
 struct PakRecord;
 typedef struct PakRecord PakRecord;
 
-extern int Note_AllocateRenderBuffers(struct RecordRecAt1C * record);
+extern int Note_AllocateRenderBuffers(struct RenderBufferResources * record);
 #endif

@@ -2,9 +2,9 @@
 #include "TYPES.H"
 #include "FRONTEND/PAKINTERFACE_SETSCREENPHASE.H"
 
-/* Stores its argument in D_800E54A0. */
+/* Stores its argument in g_pakProfileRequestedPhase. */
 
 
 void PAKInterface_SetScreenPhase(s32 value) {
-    D_800E54A0 = value;
+    g_pakProfileRequestedPhase = value;
 }

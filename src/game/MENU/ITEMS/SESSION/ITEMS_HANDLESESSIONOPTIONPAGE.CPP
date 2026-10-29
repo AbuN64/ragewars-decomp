@@ -15,13 +15,13 @@ s32 Items_ForwardRulesLock(void *unused, MenuRules *rules) {
 #endif
 
 #if defined(VERSION_EU)
-extern char D_8011FAC0[];
+extern char g_gameSession[];
 extern void Match_ResetMatchControllerState(void *);
-/* Pak/option page handler: while D_80145070 is 1 it runs Match_ResetMatchControllerState on the session, otherwise it clears the
+/* Pak/option page handler: while g_sessionOptionResetMode is 1 it runs Match_ResetMatchControllerState on the session, otherwise it clears the
    flag word at 0x5D0 of the record at 0x1C of its second argument. Returns one. */
 s32 Items_HandleSessionOptionPage(void *unused, void **menu) {
-    if (D_80145070 == 1) {
-        Match_ResetMatchControllerState(D_8011FAC0);
+    if (g_sessionOptionResetMode == 1) {
+        Match_ResetMatchControllerState(g_gameSession);
     } else {
         *(s32 *)((u8 *)menu[7] + 0x5D0) = 0;
     }
@@ -31,11 +31,11 @@ s32 Items_HandleSessionOptionPage(void *unused, void **menu) {
 
 #if defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_8043EF1C_us_rev1[12] = { 0x00431023U, 0x3C01800EU, 0xC4202390U, 0x3C018014U, 0xE42068B0U, 0x8C84000CU, 0x3C03FBFFU, 0x8C820030U, 0x3463FFFFU, 0x00431024U, 0x03E00008U, 0xAC820030U };
+unsigned int g_itemsHandlesessionoptionpageLinkGapWords_8043EF1CPart1[12] = { 0x00431023U, 0x3C01800EU, 0xC4202390U, 0x3C018014U, 0xE42068B0U, 0x8C84000CU, 0x3C03FBFFU, 0x8C820030U, 0x3463FFFFU, 0x00431024U, 0x03E00008U, 0xAC820030U };
 #endif
 
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_8043EF1C[12] = {
+unsigned int g_itemsHandlesessionoptionpageLinkGapWords[12] = {
     0x41444745, 0x3C01800E, 0xC420D010, 0x3C018014, 0xE42007F0, 0x8C84000C, 0x3C03FBFF, 0x8C820030,
     0x3463FFFF, 0x00431024, 0x03E00008, 0xAC820030,
 };
@@ -43,7 +43,7 @@ unsigned int D_auto_rodata_unresolved_8043EF1C[12] = {
 
 /* 80408AC4_4.CPP */
 #if defined(VERSION_DE)
-const u32 data_func_8043C324_de_800DE050[33] = {
+const u32 k_itemsHandlesessionoptionpageConstantWords[33] = {
     0x0043C344, 0x0043C544, 0x0043C3B4, 0x0043C3C4, 0x0043C3E4, 0x0043C3D4,
     0x0043C374, 0x0043C384, 0x0043C454, 0x0043C394, 0x0043C3F4, 0x0043C404,
     0x0043C414, 0x0043C4A4, 0x0043C3A4, 0x0043C424, 0x0043C434, 0x0043C444,

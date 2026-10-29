@@ -1,9 +1,9 @@
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
 #include "FRONTEND/MENU_COMMITOPTIONSPAGE.H"
 
-/* Refreshes the option block D_801462C8 from the menu g_optionsPage points to: the bytes at 0x1B, 0x1F
+/* Refreshes the option block g_gameSettings from the menu g_optionsPage points to: the bytes at 0x1B, 0x1F
    and 0x580 from the selections SmpButton_GetListSelection reports for its items at 0xC, 0x10 and 0x14, and the
    word at 0x10 from the position SmpSlider_GetSliderItem reports for its item at 8. */
 
@@ -17,7 +17,7 @@ extern s32 SmpButton_GetListSelection(void *);
 
 extern s32 SmpSlider_GetSliderItem(void *);
 
-/* Refreshes the option block D_801462C8 from the menu D_800E4514 points to: the bytes at 0x1B and 0x580
+/* Refreshes the option block g_gameSettings from the menu g_gameOptionsScreenState points to: the bytes at 0x1B and 0x580
    from the selections SmpButton_GetListSelection reports for its items at 4 and 8, and the word at 0x10 from
    the position SmpSlider_GetSliderItem reports for its item at 0. */
 
@@ -27,9 +27,9 @@ extern s32 SmpSlider_GetSliderItem(void *);
 
 
 
-extern CompactOptionsCommitContext *D_800E4514;
+extern CompactOptionsCommitContext *g_gameOptionsScreenState;
 
-/* Refreshes the option block D_801462C8 from the menu D_800E4518 points to: the bytes at 0x1B and 0x580
+/* Refreshes the option block g_gameSettings from the menu g_optionsShortcutScreen points to: the bytes at 0x1B and 0x580
    from the selections SmpButton_GetListSelection reports for its items at 0x54 and 0x58, and the word at 0x10 from
    the position SmpSlider_GetSliderItem reports for its item at 0x50. */
 
@@ -39,24 +39,24 @@ extern CompactOptionsCommitContext *D_800E4514;
 
 
 
-extern TabOptionsCommitContext *D_800E4518;
+extern TabOptionsCommitContext *g_optionsShortcutScreen;
 
 void Menu_CommitOptionsPage(void) {
     Shared_Game *options;
     s32 value;
 
 #if defined(VERSION_DE)
-    value = SmpButton_GetListSelection(g_optionsPage->unk_10);
-    options = &D_801462C8;
-    options->unknown1F = value;
+    value = SmpButton_GetListSelection(g_optionsPage->twoPlayerScreenList);
+    options = &g_gameSettings;
+    options->twoPlayerScreenPreference = value;
 #else
-    value = SmpButton_GetListSelection(g_optionsPage->unk_C);
-    options = &D_801462C8;
-    options->firstListMode = value;
-    options->unknown1F = SmpButton_GetListSelection(g_optionsPage->unk_10);
+    value = SmpButton_GetListSelection(g_optionsPage->bloodModeList);
+    options = &g_gameSettings;
+    options->bloodMode = value;
+    options->twoPlayerScreenPreference = SmpButton_GetListSelection(g_optionsPage->twoPlayerScreenList);
 #endif
-    options->reserved580 = SmpButton_GetListSelection(g_optionsPage->unk_14);
-    options->buttons = SmpSlider_GetSliderItem(g_optionsPage->unk_8);
+    options->resolution = SmpButton_GetListSelection(g_optionsPage->resolutionList);
+    options->lightingGamma = SmpSlider_GetSliderItem(g_optionsPage->gammaSlider);
 }
 
 void Menu_CommitCompactOptionsPage(void) {
@@ -64,16 +64,16 @@ void Menu_CommitCompactOptionsPage(void) {
     s32 value;
 
 #if defined(VERSION_DE)
-    value = SmpButton_GetListSelection(D_800E4514->unk_8);
-    options = &D_801462C8;
-    options->reserved580 = value;
+    value = SmpButton_GetListSelection(g_gameOptionsScreenState->resolutionList);
+    options = &g_gameSettings;
+    options->resolution = value;
 #else
-    value = SmpButton_GetListSelection(D_800E4514->unk_4);
-    options = &D_801462C8;
-    options->firstListMode = value;
-    options->reserved580 = SmpButton_GetListSelection(D_800E4514->unk_8);
+    value = SmpButton_GetListSelection(g_gameOptionsScreenState->bloodModeList);
+    options = &g_gameSettings;
+    options->bloodMode = value;
+    options->resolution = SmpButton_GetListSelection(g_gameOptionsScreenState->resolutionList);
 #endif
-    options->buttons = SmpSlider_GetSliderItem(D_800E4514->unk_0);
+    options->lightingGamma = SmpSlider_GetSliderItem(g_gameOptionsScreenState->gammaSlider);
 }
 
 void Menu_CommitTabOptionsPage(void) {
@@ -81,14 +81,14 @@ void Menu_CommitTabOptionsPage(void) {
     s32 value;
 
 #if defined(VERSION_DE)
-    value = SmpButton_GetListSelection(D_800E4518->unk_58);
-    options = &D_801462C8;
-    options->reserved580 = value;
+    value = SmpButton_GetListSelection(g_optionsShortcutScreen->resolutionList);
+    options = &g_gameSettings;
+    options->resolution = value;
 #else
-    value = SmpButton_GetListSelection(D_800E4518->unk_54);
-    options = &D_801462C8;
-    options->firstListMode = value;
-    options->reserved580 = SmpButton_GetListSelection(D_800E4518->unk_58);
+    value = SmpButton_GetListSelection(g_optionsShortcutScreen->bloodModeList);
+    options = &g_gameSettings;
+    options->bloodMode = value;
+    options->resolution = SmpButton_GetListSelection(g_optionsShortcutScreen->resolutionList);
 #endif
-    options->buttons = SmpSlider_GetSliderItem(D_800E4518->unk_50);
+    options->lightingGamma = SmpSlider_GetSliderItem(g_optionsShortcutScreen->gammaSlider);
 }

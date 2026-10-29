@@ -1,7 +1,7 @@
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "include_asm.h"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
@@ -20,7 +20,7 @@ s32 SetN64_StartGameThreadAndIdle(s32 *, s32);
 
 
 
-extern void func_802BD160_de(s32 arg0);
+extern void __osSetFpcCsr(s32 csr);
 
 
 
@@ -43,7 +43,7 @@ void SetN64_DrawSessionFade(struct GameSession *session) {
         if (!((&D_800CA560)[1] < value)) {
             alpha = 0xFF;
             if (!(value < 0)) {
-                alpha = ~(s32)(value * D_800C547C);
+                alpha = ~(s32)(value * g_sessionFadeAlphaScale);
             }
         }
     }
@@ -88,17 +88,17 @@ u8 *SetN64_CopyString(u8 *destination, u8 *source)
 }
 
 int SetN64_IsModeThirteen(void) {
-    return D_8011FAC0.mode == 0xD;
+    return g_gameSession.mode == 0xD;
 }
 
 void SetN64_RunBootstrapThread(s32 threadArgument) {
-    SetN64_StartGameThreadAndIdle(&D_8011FAC0, threadArgument);
+    SetN64_StartGameThreadAndIdle(&g_gameSession, threadArgument);
 }
 
 void SetN64_RunGameThread(void) {
-    func_802BD320_de(D_80146CE8, D_800C5400_de, g_buildDateTimeTextRev1, D_800C5414_de);
-    func_802BD160_de(__osGetFpcCsr() | 0x400);
-    SetN64_RunGameLoop(&D_8011FAC0);
+    Libc_FormatString(g_buildVersionTextBuffer, g_buildVersionFormat, g_buildDateTimeTextRev1, g_buildVersionSuffix);
+    __osSetFpcCsr(__osGetFpcCsr() | 0x400);
+    SetN64_RunGameLoop(&g_gameSession);
 }
 
 /** Reset three large-offset fields and mark the record active. */
@@ -109,7 +109,7 @@ void SetN64_BeginSessionFadeIn(void *gameSession) {
     session->fastFade = 0;
 }
 
-/* Steps the session's screen fade by the frame time D_800D2988 (fastFade picks the fast rate). Phase 2 fades out: the
+/* Steps the session's screen fade by the frame time g_frameElapsedTime (fastFade picks the fast rate). Phase 2 fades out: the
  * timer falls to zero, then keeps counting below it until -4 before the session switches to mode 0x14 and fades back
  * in. Phase 1 fades in, at least half the rate per frame, until the timer reaches one. */
 void SetN64_UpdateFadeTransition(GameSession *session) {
@@ -130,7 +130,7 @@ void SetN64_UpdateFadeTransition(GameSession *session) {
     case 2:
         timer = session->timer;
         if (timer > 0.0f) {
-            step = D_800D2988;
+            step = g_frameElapsedTime;
             next = timer - rate * step;
             session->timer = next;
             if (next < 0.0f) {
@@ -149,10 +149,10 @@ void SetN64_UpdateFadeTransition(GameSession *session) {
         break;
     case 1:
         timer = session->timer;
-        if (D_800D2988 < 0.5f) {
+        if (g_frameElapsedTime < 0.5f) {
             next = timer + step * 0.5f;
         } else {
-            next = timer + step * D_800D2988;
+            next = timer + step * g_frameElapsedTime;
         }
         session->timer = next;
         if (next >= 1.0f) {

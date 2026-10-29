@@ -5,12 +5,12 @@
 #include "COMMON/VECTOR4F.H"
 struct Trigger;
 
-struct ObjRecAt30;
+struct ActionTrackCallbackRecord;
 
-struct func_80204620_S2;
-typedef struct func_80204620_S2 func_80204620_S2;
+struct ActorModelIndexView;
+typedef struct ActorModelIndexView ActorModelIndexView;
 
-extern float D_800C6B74;
+extern float k_breakableDamageScale;
 
 
 struct BreakableHitContext;
@@ -44,8 +44,8 @@ struct BreakableHitContext {
 
 
 
-struct ObjectStateCC;
-struct ObjectStateCC {
+struct BreakableHitStateView;
+struct BreakableHitStateView {
     char pad0[0xCA];
     s8 unk_CA;
     char padCA[0xCB - 0xCA - sizeof(s8)];
@@ -58,29 +58,29 @@ struct Dest;
 struct ActorMotionState;
 struct LevelActor;
 
-extern float D_800C1A70_de;
+extern float k_actionMotionThreshold;
 
 
 
 
 
-struct ObjRecAt30;
-typedef struct ObjRecAt30 ObjRecAt30;
+struct ActionTrackCallbackRecord;
+typedef struct ActionTrackCallbackRecord ActionTrackCallbackRecord;
 
-struct ObjectStateCC;
-typedef struct ObjectStateCC ObjectStateCC;
+struct BreakableHitStateView;
+typedef struct BreakableHitStateView BreakableHitStateView;
 
 struct BreakableHitContext;
 typedef struct BreakableHitContext BreakableHitContext;
 
-struct RiderRecAt130V2;
-typedef struct RiderRecAt130V2 RiderRecAt130V2;
+struct TurretTargetVisibilityView;
+typedef struct TurretTargetVisibilityView TurretTargetVisibilityView;
 
 
 
 
-struct RiderRecAt130V2;
-struct RiderRecAt130V2 {
+struct TurretTargetVisibilityView;
+struct TurretTargetVisibilityView {
     char pad0[0x130];
     CVector3 aim;
 };
@@ -91,8 +91,8 @@ struct LevelActor;
 
 
 
-struct Actor_func_8024A1D0_de;
-struct InputRecAt40;
+struct FadedActorRenderView;
+struct ActionFadeInput;
 struct Lookup;
 
 /* Definition fields used by breakable-actor flag setup. */

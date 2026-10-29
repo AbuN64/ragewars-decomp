@@ -1,13 +1,13 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE) || defined(VERSION_US)
-const unsigned char D_8041BE90_E2080[3] = {
+const unsigned char s_pakDialogNoteCountFormat[3] = {
     0x25, 0x64, 0x00,
 };
 #endif
 
 #if defined(VERSION_US)
-char rodata_unresolved_800DC103[13] =
+char s_GNotecountintformatMEDALSSCREEText[13] =
     "_MEDALS_SCREE";
 #endif
 
@@ -16,7 +16,7 @@ char rodata_unresolved_800DC103[13] =
 #endif
 
 #if defined(VERSION_DE)
-char rodata_unresolved_800DD453[13] =
+char s_GNotecountintformatMObjectIndeText[13] =
     "m object inde";
 #endif
 

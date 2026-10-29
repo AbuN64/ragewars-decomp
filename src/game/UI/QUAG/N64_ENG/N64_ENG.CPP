@@ -19,22 +19,22 @@ extern f64 Gfx_GetNormalizedCounter(void);
 
 /** Store four arguments in the adjacent global state words. */
 void N64Eng_SetClipBounds(unsigned int a0, unsigned int a1, unsigned int a2, unsigned int a3) {
-    D_800CD990_de = a0;
-    D_800CD994 = a1;
-    D_800CD998 = a2;
-    D_800CD99C = a3;
+    g_numericWidgetClipLeft = a0;
+    g_numericWidgetClipTop = a1;
+    g_numericWidgetClipRight = a2;
+    g_numericWidgetClipBottom = a3;
 }
 
-void N64Eng_GetClipBounds(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
+void N64Eng_GetClipBounds(s32 *leftOut, s32 *topOut, s32 *rightOut, s32 *bottomOut) {
 
-    *arg0 = D_800CD990_de;
-    *arg1 = D_800CD994;
-    *arg2 = D_800CD998;
-    *arg3 = D_800CD99C;
+    *leftOut = g_numericWidgetClipLeft;
+    *topOut = g_numericWidgetClipTop;
+    *rightOut = g_numericWidgetClipRight;
+    *bottomOut = g_numericWidgetClipBottom;
 }
 
 f64 N64Eng_GetTimeSeconds(void) {
-    return 
+    return
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 Gfx_GetConvertedCounterRatio
 #else
@@ -50,47 +50,47 @@ void N64Eng_RenderNoop(void) {
 void N64Eng_ResetRenderState(void) { Rect_ResetRenderState(); }
 
 /** Copy the global two-word record into the two output pointers. */
-void N64Eng_GetScreenSize(int *arg0, int *arg1) {
-    *arg0 = D_800E28D0;
-    *arg1 = D_800E28D4;
+void N64Eng_GetScreenSize(int *widthOut, int *heightOut) {
+    *widthOut = g_hudReferenceViewportWidth;
+    *heightOut = g_hudReferenceViewportHeight;
 }
 
 int N64Eng_GetFrameCounter(void) {
-    return D_800D2C18;
+    return g_n64UiFrameCounter;
 }
 
-/** Increment the global counter D_800D2C18. */
+/** Increment the global counter g_n64UiFrameCounter. */
 void N64Eng_AdvanceFrameCounter(void) {
-    D_800D2C18 += 1;
+    g_n64UiFrameCounter += 1;
 }
 
 void N64Eng_RegisterNumericWidgetClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB65, D_002A1B50, D_002A1BE0, 3);
+    SmSmngr_RegisterElementHandlers(0xB65, N64Eng_DispatchNumericWidgetEvent_Address, N64Eng_DrawNumericWidgetChildren_Address, 3);
 }
 
 /* ROM-grounded data: rodata/writable/800D2C18 */
 #ifdef VERSION_DE
-unsigned int D_blob_phase2_346e9edb07d1cfeff80c[2] = {
+unsigned int g_N64EngEncodedWords[2] = {
     0x00000000, 0x0000000F,
 };
 #endif
 #ifdef VERSION_EU
-unsigned int D_blob_phase2_346e9edb07d1cfeff80c[2] = {
+unsigned int g_N64EngEncodedWords[2] = {
     0x00000000, 0x00000000,
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned int D_blob_phase2_346e9edb07d1cfeff80c[2] = {
+unsigned int g_N64EngEncodedWords[2] = {
     0x00000000, 0x74000000,
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_blob_phase2_346e9edb07d1cfeff80c[2] = {
+unsigned int g_N64EngEncodedWords[2] = {
     0x00000000, 0x50414354,
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_346e9edb07d1cfeff80c[2] = {
+unsigned int g_N64EngEncodedWords[2] = {
     0x00000000, 0x20626F72,
 };
 #endif

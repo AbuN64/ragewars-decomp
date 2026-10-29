@@ -5,7 +5,7 @@
 #include "COMMON/ALDELAY28.H"
 #include "TYPES.H"
 
-extern void alFxNew(s32 arg0, s32 arg1, s32 arg2);
+extern void alFxNew(s32 effect, s32 config, s32 heap);
 extern s32 alMainBusParam(void *bus, s32 param, s32 source);
 
 
@@ -23,7 +23,7 @@ s32 Audio_AllocateSynthesizerEffect(ALSynth *synth, s16 busNumber, s32 config, s
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802B6484[3] = {
+unsigned int k_SynallocfxEncodedWords[3] = {
     0x03000000, 0x0000116D, 0x5F416D6D,
 };
 #endif

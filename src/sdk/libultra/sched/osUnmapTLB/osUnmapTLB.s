@@ -26,12 +26,12 @@ osUnmapTLB:
 .set noreorder
 .set noat
 .section .text
-.globl func_802AD42C_de
-func_802AD42C_de:
+.globl Libgultra_CaptureTlbMappingTable
+Libgultra_CaptureTlbMappingTable:
     add $v0, $zero, $zero
     addi $a1, $zero, 0x1E
-    lui $a0, %hi(D_800D3F70)
-    addiu $a0, $a0, %lo(D_800D3F70)
+    lui $a0, %hi(g_capturedTlbMappings)
+    addiu $a0, $a0, %lo(g_capturedTlbMappings)
 .if VERSION_EU
     addi $a2, $zero, 0x15E
 .elseif VERSION_EU_X

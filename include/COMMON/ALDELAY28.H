@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-extern float D_800C788C_de;
+extern float g_matrixFixedToFloatScale;
 
 struct ALDelay28;
 typedef struct ALDelay28 ALDelay28;
@@ -73,8 +73,8 @@ struct ALDelay28 {
 struct ALResampler_s;
 typedef struct ALResampler_s ALResampler_s;
 
-struct IntegerState34;
-typedef struct IntegerState34 IntegerState34;
+struct AudioReverbParameterStateView;
+typedef struct AudioReverbParameterStateView AudioReverbParameterStateView;
 
 struct ALFx;
 typedef struct ALFx ALFx;
@@ -83,16 +83,16 @@ typedef struct ALFx ALFx;
 
 
 
-extern float D_800C7748_de;
+extern float g_audioResamplerInverseFixedPointUnit;
 
-extern float D_800C7880_de;
+extern float g_matrixIdentityUnitValue;
 
 
-extern float D_800C7888_de;
+extern float g_matrixFloatIdentityUnitValue;
 
-extern float D_800C7884_de;
+extern float g_matrixFloatToFixedScale;
 
-struct IntegerState34;
+struct AudioReverbParameterStateView;
 
 
 struct CallbackStateC;
@@ -109,7 +109,7 @@ struct ALFx {
     void *paramHdl;
 };
 
-extern float D_800C7740_de;
+extern float g_audioResamplerMaximumRatio;
 
 typedef struct ALFilter_u1 {
     struct ALFilter_u1 *source;
@@ -119,6 +119,6 @@ typedef struct ALFilter_u1 {
     s16 outp;
     s32 type;
 } ALFilter_u1;
-extern char D_800C8DB0_eu_x[];
+extern char g_audioSaveAssertConditionText[];
 extern char g_audioSaveText[];
 #endif

@@ -2,7 +2,7 @@
 #define MENU_SMP_SLIDER_H
 #include "MENU/SCROLL.H"
 extern void SmpSlider_IgnoreFormattedMessage(void *target, const char *format, ...);
-extern s32 SmpSlider_DispatchSliderEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 SmpSlider_DispatchSliderEvent(void *element, s32 event, s32 source, s32 parameter, s32 value);
 extern void SmpSlider_RegisterSliderClass(void);
-extern s32 SmpSlider_DispatchTransitionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 SmpSlider_DispatchTransitionEvent(void *element, s32 event, s32 source, s32 parameter, s32 value);
 #endif

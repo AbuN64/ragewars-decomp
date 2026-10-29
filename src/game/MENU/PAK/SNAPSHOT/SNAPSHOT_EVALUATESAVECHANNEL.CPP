@@ -7,7 +7,7 @@
 #include "COMMON/RECORDRECAT1C.H"
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
 /* Enters pak menu mode 1: sets the mode flags, clears the owner's 0x01000000 flag and, when a
    message is pending (D_800E28C0), shows the player's message at 0x554 through Menu_OpenDialog;
@@ -29,15 +29,15 @@
 
 
 
-extern s32 D_8015375C;
+extern s32 g_pakUseScannedChannel;
 extern s32 D_800E28C0;
-extern char D_8014561C[];
+extern char g_matchEndingTeamWheelClose[];
 
 extern void Note_ProbeStatus(s32 ch);
 extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
 extern s32 Note_NeedsIdRepair(s32 ch);
-extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
+extern void Menu_OpenDialog(char *, char *, ActorOwnerView *, PakMenuSlot *, char *);
 
 void Snapshot_BeginProfileLoad(Shared_PakMenu *menu) {
     s32 ch;
@@ -48,12 +48,12 @@ void Snapshot_BeginProfileLoad(Shared_PakMenu *menu) {
     D_8014D4EC_de = 1;
     D_800DE874 = 1;
     D_80153784 = 0;
-    D_8015375C = 0;
+    g_pakUseScannedChannel = 0;
     menu->items[20].flags &= ~0x01000000;
-    ch = menu->slot->unk4;
+    ch = menu->slot->controllerPort;
     if (D_800E28C0 != 0) {
         D_80153784 = 1;
-        Menu_OpenDialog(menu->player->unk5DC + 0x554, D_0044FB50, menu->player, menu->slot, 0);
+        Menu_OpenDialog(menu->player->owner + 0x554, D_0044FB50, menu->player, menu->slot, 0);
         return;
     }
     Note_ProbeStatus(ch);
@@ -63,16 +63,16 @@ void Snapshot_BeginProfileLoad(Shared_PakMenu *menu) {
     }
     D_80153784 = 1;
     if (Note_IsChannelReady(ch) != 0) {
-        Menu_OpenDialog(D_8014561C, D_0044EA2C, menu->player, menu->slot, D_0044FB50);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EA2C, menu->player, menu->slot, D_0044FB50);
     } else if (Note_NeedsIdRepair(ch) != 0) {
-        Menu_OpenDialog(D_8014561C, D_0044ED44, menu->player, menu->slot, D_0044E468);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044ED44, menu->player, menu->slot, D_0044E468);
     } else {
-        Menu_OpenDialog(D_8014561C, D_0044E9C0, menu->player, menu->slot, D_0044FB50);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044E9C0, menu->player, menu->slot, D_0044FB50);
     }
 }
 
 /* Rates the Controller Pak on channel ch as a save target: when one of its 16 notes is named
-   D_800D36D4 or D_800D36D8 it selects the pak with score 123 and returns 1; otherwise it reads the
+   g_pakProfileGameNameFixed or g_pakSnapshotGameNameFixed it selects the pak with score 123 and returns 1; otherwise it reads the
    pak's free space and note count and, when the pak is readable but has no notes or lacks the
    space the save image needs, records the pak as the best candidate if that need beats the
    current score and returns 0; a readable pak with room returns 1 and a read error returns 0. */
@@ -80,8 +80,8 @@ void Snapshot_BeginProfileLoad(Shared_PakMenu *menu) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 
 
-extern char *D_800E25A4[];
-extern char *D_800E25B4[];
+extern char *g_pakProfileGameNames[];
+extern char *g_pakSnapshotGameNames[];
 
 
 #else
@@ -92,7 +92,7 @@ extern char *D_800E25B4[];
 #endif
 
 
-extern s32 D_8011FECC;
+extern s32 g_worldSnapshotNoteBytes;
 
 extern s32 Note_GetNoteGameName(s32 ch, s32 index, u8 **state);
 extern void Note_DecodeNoteText(u8 *state, u8 *name, s32 size);
@@ -114,9 +114,9 @@ s32 Snapshot_EvaluateSaveChannel(void *unused, s32 ch, s32 *bestCh, s32 *bestSco
     char *wanted;
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    wanted = D_800E25A4[g_languageIndex];
+    wanted = g_pakProfileGameNames[g_languageIndex];
 #else
-    wanted = D_800D36D4;
+    wanted = g_pakProfileGameNameFixed;
 #endif
     for (i = 0; i < 16; i++) {
         Note_GetNoteGameName(ch, i, &state0);
@@ -129,9 +129,9 @@ s32 Snapshot_EvaluateSaveChannel(void *unused, s32 ch, s32 *bestCh, s32 *bestSco
     found0 = 0;
 search1:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    wanted = D_800E25B4[g_languageIndex];
+    wanted = g_pakSnapshotGameNames[g_languageIndex];
 #else
-    wanted = D_800D36D8;
+    wanted = g_pakSnapshotGameNameFixed;
 #endif
     for (i = 0; i < 16; i++) {
         Note_GetNoteGameName(ch, i, &state1);
@@ -148,11 +148,11 @@ check:
         *bestScore = 123;
         return 1;
     }
-    result = Note_GetFreePages(D_800E28C8, &freeSpace);
+    result = Note_GetFreePages(g_introSelectedItem, &freeSpace);
     if (result == 0) {
-        result = Note_CountFreeNotes(D_800E28C8, &noteCount);
+        result = Note_CountFreeNotes(g_introSelectedItem, &noteCount);
         if (result == 0) {
-            need = Note_BytesToPakPages(D_8011FECC + 0x610);
+            need = Note_BytesToPakPages(g_worldSnapshotNoteBytes + 0x610);
             if (noteCount == 0 || freeSpace < need) {
                 if (*bestScore < need) {
                     *bestScore = need;

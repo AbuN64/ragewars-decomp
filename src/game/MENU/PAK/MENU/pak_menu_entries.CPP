@@ -4,7 +4,7 @@
 #include "MENU/pak_menu_entries.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MENU/OPTION_AND_TEXT_LAYER_VIEWS.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
@@ -16,8 +16,8 @@
 
 
 
-void Menu_MoveMenuCursor(struct MenuRecAt10 *menu, u8 dir) {
-    struct EntryRecAt18V2 *entry;
+void Menu_MoveMenuCursor(struct MenuCursorNavigationView *menu, u8 dir) {
+    struct PakMenuChoiceEntry *entry;
     s32 old;
 
     entry = &menu->entries[menu->cursor];
@@ -59,7 +59,7 @@ void Menu_MoveMenuCursor(struct MenuRecAt10 *menu, u8 dir) {
 /* Update entry callbacks, animate opening/closing, and handle the selected entry. */
 extern f32 literals_Scene_GetPlatformRoutePoint;
 extern const f32 g_pakMenuAnimationLimits[4];
-extern f32 D_800DE4A8, D_800DE4AC, D_800DE4B0_de;
+extern f32 g_menuPanelOpenRate, g_menuPanelOpenLimit, g_menuPanelCloseRate;
 typedef struct PakMenu PakMenu;
 typedef struct PakEntry PakEntry;
 typedef s32 (*PakEntryCallback)();
@@ -136,14 +136,14 @@ s32 Menu_UpdateMenuEntries(PakMenu *menu, void *context) {
         }
         break;
     case 1:
-        menu->openB += literals_Scene_GetPlatformRoutePoint * D_800DE4A8;
-        if (menu->openB >= D_800DE4AC) {
-            menu->openB = D_800DE4AC;
+        menu->openB += literals_Scene_GetPlatformRoutePoint * g_menuPanelOpenRate;
+        if (menu->openB >= g_menuPanelOpenLimit) {
+            menu->openB = g_menuPanelOpenLimit;
             menu->state = 2;
         }
         break;
     case 3:
-        menu->openB -= literals_Scene_GetPlatformRoutePoint * D_800DE4B0_de;
+        menu->openB -= literals_Scene_GetPlatformRoutePoint * g_menuPanelCloseRate;
         if (menu->openB <= 0.0f) {
             menu->openB = 0.0f;
             menu->state = 4;
@@ -223,7 +223,7 @@ s32 Menu_UpdateMenuEntries(PakMenu *menu, void *context) {
 
 extern void *Menu_GetListContext(s8 *);
 extern void Menu_MeasureMenuText(TextBoundsText *, CItemInfo *);
-extern u32 D_800CD730;
+extern u32 g_gameLoopFrameCount;
 extern const f32 g_menuCenterFraction;
 
 /* Lay out visible menu entries and draw their callbacks with a pulsing selection highlight. */
@@ -283,7 +283,7 @@ void Menu_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     metrics.right = 0;
     metrics.m_Top = 0;
     metrics.m_Bottom = 0;
-    D_800E1E20 = -1;
+    g_multiplayerItemRenderState = -1;
     for (i = 0; i < menu->count; i++) {
         entry = &menu->entries[i];
         if (entry->flags & 0x800000) {
@@ -326,25 +326,25 @@ void Menu_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
                     bottom = top + (bottom - top);
                     OnScreen_SetupFillMode();
                     alpha = menu->alpha * menu->fade *
-                        ((Gu_Sinf((f32)(D_800CD730 * 10) * 0.017453294f) + 1.0f) * 50.0f + 50.0f);
+                        ((Gu_Sinf((f32)(g_gameLoopFrameCount * 10) * 0.017453294f) + 1.0f) * 50.0f + 50.0f);
                     if (entry->flags & 0x10) {
                         OnScreen_DrawBevelBox(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
                     } else {
                         OnScreen_DrawBevelBox(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
                     }
-                    D_800E1E20 = -1;
+                    g_multiplayerItemRenderState = -1;
                 }
-                entry->field18->draw(entry, &placed, &bounds, menu);
+                entry->handlers->draw(entry, &placed, &bounds, menu);
             }
         }
     }
 }
 
 
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/VIDEO_DIMENSIONS.H"
-extern s32 D_800E28D0;
-extern TextBoundsFont D_800E1E24_de[];
+extern s32 g_hudReferenceViewportWidth;
+extern TextBoundsFont g_menuFontStyles[];
 /* The font a text entry's style bits select (the switch of Menu_DrawStyledMenuText). */
 static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     s32 style = 0;
@@ -360,12 +360,12 @@ static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     case 0x2000: style = 8; break;
     default: style = 0; break;
     }
-    return &D_800E1E24_de[style];
+    return &g_menuFontStyles[style];
 }
 /* Draws the dark backing panel behind a menu: as wide as the screen, centred on the menu's anchor, and as
  * tall as a fraction of the screen height less a margin. The relative pass places it above the anchor, the
  * other below. Measures every entry first and draws nothing when the menu has no extent. */
-void Menu_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relative) {
+void Menu_DrawMenuPanel(StyledMenuTextPanel *menu, TextBoundsText *text, s32 relative) {
     TextBoundsData *data = menu->data;
     TextBoundsFont *font = textBoundsFont(text);
     CItemInfo panel;

@@ -14,10 +14,10 @@ typedef struct MarkerItemMenuRestoreBootMemory MarkerItemMenuRestoreBootMemory;
 struct Node802A697C;
 typedef struct Node802A697C Node802A697C;
 
-struct State802A6DF8;
-struct State802A6DF8 {
-    struct State802A6DF8 *prev;
-    struct State802A6DF8 *next;
+struct ItemMenuRenderNode;
+struct ItemMenuRenderNode {
+    struct ItemMenuRenderNode *prev;
+    struct ItemMenuRenderNode *next;
     Node802A697C *node;
     u8 padC[0x10];
     void *object;
@@ -33,10 +33,10 @@ struct State802A6DF8 {
 };
 
 struct List802A6DF8;
-struct State802A6DF8;
+struct ItemMenuRenderNode;
 struct List802A6DF8 {
-    struct State802A6DF8 *head;
-    struct State802A6DF8 *tail;
+    struct ItemMenuRenderNode *head;
+    struct ItemMenuRenderNode *tail;
     s32 count;
 };
 
@@ -54,11 +54,11 @@ struct Node44;
 
 
 
-struct ObjRecAt18V6;
+struct TimedEffectCallbackView;
 
 struct Bar;
 struct Bar {
-    s32 unk0;
+    s32 active;
     s32 *script;
     s32 state;
     s32 wait;
@@ -100,19 +100,19 @@ struct Owner802A6DF8 {
 struct CItem;
 typedef struct CItem CItem;
 
-struct State802A6DF8;
-typedef struct State802A6DF8 State802A6DF8;
+struct ItemMenuRenderNode;
+typedef struct ItemMenuRenderNode ItemMenuRenderNode;
 
-struct Input_func_802A65E0_de;
+struct ToggleMenuPlayerInputView;
 
 
-struct ObjectState30_2;
-typedef struct ObjectState30_2 ObjectState30_2;
+struct ItemMenuToggleStateView;
+typedef struct ItemMenuToggleStateView ItemMenuToggleStateView;
 
 
 struct Sprite;
 
-extern float D_800C5EB0_de;
+extern float g_spriteExtentAndUnitConstants;
 
 
 struct Owner802A6DF8;
@@ -120,37 +120,37 @@ typedef struct Owner802A6DF8 Owner802A6DF8;
 
 struct CItem;
 struct CItem {
-    int unk0;
-    int unk4;
-    s32 unk8;
-    u8 unkC;
-    unsigned char unkD;
+    int active;
+    int state;
+    s32 resource;
+    u8 key;
+    unsigned char generation;
     char padE[2];
-    s32 unk10;
-    s32 unk14;
-    short unk18;
-    int unk1C;
-    f32 unk20;
-    s32 unk24;
-    f32 unk28;
-    s32 unk2C;
-    s32 unk30;
-    s32 unk34;
+    s32 imageResource;
+    s32 imageFrameOrTextureHandle;
+    short transitionStep;
+    int transitionFrame;
+    f32 value;
+    s32 extra;
+    f32 restoreValue;
+    s32 restoreExtra;
+    s32 selectCallbackAddress;
+    s32 updateCallbackOrTextureId;
 };
 
 
 
 
 
-struct CallbackState1C;
-typedef struct CallbackState1C CallbackState1C;
+struct EffectCallbackEntryView;
+typedef struct EffectCallbackEntryView EffectCallbackEntryView;
 
 
-struct ObjectLinks14_2;
-typedef struct ObjectLinks14_2 ObjectLinks14_2;
+struct AttachedEffectTimerView;
+typedef struct AttachedEffectTimerView AttachedEffectTimerView;
 
-struct ObjRecAt18V6;
-typedef struct ObjRecAt18V6 ObjRecAt18V6;
+struct TimedEffectCallbackView;
+typedef struct TimedEffectCallbackView TimedEffectCallbackView;
 
 
 
@@ -179,20 +179,20 @@ struct MenuItem {
 
 struct ToggleMenu;
 
-struct ObjectLinks7598;
-typedef struct ObjectLinks7598 ObjectLinks7598;
+struct AttachedEffectPoolView;
+typedef struct AttachedEffectPoolView AttachedEffectPoolView;
 
-extern float D_800C5EA8_de;
+extern float g_impactMarkScaleConstants;
 
-struct ObjectLinks7598;
+struct AttachedEffectPoolView;
 
 
-struct ObjectState30_2;
+struct ItemMenuToggleStateView;
 
 struct Hud;
 typedef struct Hud Hud;
 
-struct ObjectLinks14_2;
+struct AttachedEffectTimerView;
 
 struct Sprite;
 typedef struct Sprite Sprite;
@@ -204,8 +204,8 @@ struct Image;
 
 
 
-struct State802A6FE0;
-typedef struct State802A6FE0 State802A6FE0;
+struct AttachedEffectDetachState;
+typedef struct AttachedEffectDetachState AttachedEffectDetachState;
 
 
 
@@ -222,28 +222,28 @@ typedef struct EntryItemMenuAdvanceSelection EntryItemMenuAdvanceSelection;
 struct MenuCode802A6AC0;
 
 
-extern float D_800C5EC4_de;
+extern float g_attachedTransformModelScale;
 
-extern float D_800C5EBC_de;
+extern float g_childTransformAlternateScale;
 
 struct CItemMenu_t;
 typedef struct CItemMenu_t CItemMenu;
 
-struct State802A6FE0;
+struct AttachedEffectDetachState;
 
 
 
 
 
-extern float D_800C5EB8_de;
+extern float g_childTransformDefaultScale;
 
 
-struct CallbackState1C;
+struct EffectCallbackEntryView;
 
 
 struct CItemMenu_t;
 struct CItemMenu_t {
-    unsigned char unk0;
+    unsigned char active;
     unsigned char m_ModePos;
     char pad2[2];
     CItem entries[4];
@@ -254,7 +254,7 @@ struct CItemMenu_t {
 
 
 
-extern float D_800C5EC0_de;
+extern float g_attachedTransformDefaultScale;
 
 
 struct MenuCode802A6AC0;
@@ -262,6 +262,6 @@ typedef struct MenuCode802A6AC0 MenuCode802A6AC0;
 
 
 
-struct Input_func_802A65E0_de;
-typedef struct Input_func_802A65E0_de Input_func_802A65E0_de;
+struct ToggleMenuPlayerInputView;
+typedef struct ToggleMenuPlayerInputView ToggleMenuPlayerInputView;
 #endif

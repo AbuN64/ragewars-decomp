@@ -51143,7 +51143,7 @@ evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68
 
 [blob."resource.bit-sets"]
 type = "world"
-format = "resource bank child 6: bit sets (Items_LoadPreviewBufferA copies it into D_800F91F0: world->bitSections)"
+format = "resource bank child 6: bit sets (Items_LoadPreviewBufferA copies it into g_worldSnapshotNoteData: world->bitSections)"
 codec = "rnc1"
 state = "decoded"
 stored_size = 328
@@ -51156,7 +51156,7 @@ evidence = [{ artifact = "resource-children-readers.json", sha256 = "fd83e37d5ee
 
 [blob."resource.bit-sets.de"]
 type = "world"
-format = "resource bank child 6: bit sets (Items_LoadPreviewBufferA copies it into D_800F91F0: world->bitSections)"
+format = "resource bank child 6: bit sets (Items_LoadPreviewBufferA copies it into g_worldSnapshotNoteData: world->bitSections)"
 codec = "rnc1"
 state = "decoded"
 stored_size = 336

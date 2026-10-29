@@ -18,9 +18,9 @@
 
 extern void *SmpOverlay_GetSlotValue(s32 root, s32 player);
 
-s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
+s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 playerEntryId, s32 selectionPressed) {
     struct ResourceSmpFlickerCreateFlickerWidget *sound;
-    struct RowRecAtBA4 *row;
+    struct PakPanelSelectionView *row;
     char *base;
     u8 *mark;
     s32 index;
@@ -28,26 +28,26 @@ s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 arg2, s32 
     s32 state;
     s32 count;
 
-    index = arg2 & 0xFFFF;
+    index = playerEntryId & 0xFFFF;
     offset = index * 0xB68;
-    state = ((struct RowRecAtBA4 *)(offset + (char *)D_800E54A4))->state;
+    state = ((struct PakPanelSelectionView *)(offset + (char *)g_pakProfileScreenState))->state;
     if (state == 0xD) {
         return 0;
     }
     if (state >= 0xE) {
         return 0;
     }
-    if (state == 0xC && arg3 == 1) {
-        sound = SmpOverlay_GetSlotValue(D_800E54A4->root, index);
-        row = (struct RowRecAtBA4 *)(index * 0xB68 + (char *)D_800E54A4);
+    if (state == 0xC && selectionPressed == 1) {
+        sound = SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, index);
+        row = (struct PakPanelSelectionView *)(index * 0xB68 + (char *)g_pakProfileScreenState);
         row->phase = 2;
         count = row->count;
         row->timer = 0;
         if (count > 0) {
             row->count = count - 1;
         }
-        base = (char *)D_800E54A4;
-        mark = (u8 *)(base + ((((struct RowRecAtBA4 *)(offset + base))->count * 2) +
+        base = (char *)g_pakProfileScreenState;
+        mark = (u8 *)(base + ((((struct PakPanelSelectionView *)(offset + base))->count * 2) +
                               index * 0xB68) + 0xB8C);
         if (*mark == 0) {
             *mark = 0x41;
@@ -67,75 +67,75 @@ void PAKInterface_UpdatePlayerControlRows(s32);                               /*
 void PAKInterface_ScrollNoteList(s32, s32);                            /* extern */
 void PAKInterface_DecrementNameCharacter(s32);                               /* extern */
 
-s32 PAKInterface_HandleNextPanelSelection(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 fifth) {
-    s32 temp_s0;
+s32 PAKInterface_HandleNextPanelSelection(s32 unusedWidget, s32 unusedEventId, s32 playerEntryId, s32 selectionPressed, s32 fifth) {
+    s32 repeatMagnitude;
     s32 player;
     s32 playerState;
-    MenuWidget *var_s0;
-    MenuWidget *var_s0_2;
-    MenuWidget *var_s0_3;
+    MenuWidget *nextCharacterWidget;
+    MenuWidget *nextChoiceWidget;
+    MenuWidget *nextOptionWidget;
 
-    player = arg2 & 0xFFFF;
-    playerState = D_800E54A4->players[player].state;
+    player = playerEntryId & 0xFFFF;
+    playerState = g_pakProfileScreenState->players[player].state;
     switch (playerState) {
     case 12:
-        temp_s0 = XMath_AbsoluteInteger(fifth);
-        if (temp_s0 < Smos_GetControlRepeatLimit()) {
-            D_800E54A4->players[player].nameTimer = 0;
-            D_800E54A4->players[player].namePhase = 2;
+        repeatMagnitude = XMath_AbsoluteInteger(fifth);
+        if (repeatMagnitude < Smos_GetControlRepeatLimit()) {
+            g_pakProfileScreenState->players[player].nameTimer = 0;
+            g_pakProfileScreenState->players[player].namePhase = 2;
         }
-        if (arg3 == 1) {
+        if (selectionPressed == 1) {
             MarkMenuEventHandled();
             PAKInterface_DecrementNameCharacter(player);
-            D_800E54A4->players[player].namePhase = 0;
+            g_pakProfileScreenState->players[player].namePhase = 0;
             SoundElement_PlayFlatSound(0xE81);
             return 0;
         }
         return 0;
     case 4:
-        if (arg3 == 1) {
+        if (selectionPressed == 1) {
             MarkMenuEventHandled();
             PAKInterface_ScrollNoteList(player, 1);
-            D_800E54A4->selected[player] = 0;
+            g_pakProfileScreenState->selected[player] = 0;
             SoundElement_PlayFlatSound(0xE74);
             return 0;
         }
         return 0;
     case 13:
-        if ((D_800E54A4->players[player].sub == 6) && (arg3 == 1)) {
+        if ((g_pakProfileScreenState->players[player].sub == 6) && (selectionPressed == 1)) {
             MarkMenuEventHandled();
-            var_s0 = ((MenuWidget *)SmpOverlay_GetSlotValue(D_800E54A4->root, player))->next;
+            nextCharacterWidget = ((MenuWidget *)SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, player))->next;
 loop_11:
-            if (Widget_ListHasFlag100(var_s0) != 0) {
-                var_s0 = var_s0->next;
+            if (Widget_ListHasFlag100(nextCharacterWidget) != 0) {
+                nextCharacterWidget = nextCharacterWidget->next;
                 goto loop_11;
             }
-            SmpOverlay_ShowSlotNode((D_800E54A4->root), player, var_s0);
+            SmpOverlay_ShowSlotNode((g_pakProfileScreenState->root), player, nextCharacterWidget);
             SoundElement_PlayFlatSound(0xE74);
             return 0;
         }
         return 0;
     case 22:
-        if (arg3 == 1) {
-            var_s0_2 = ((MenuWidget *)SmpOverlay_GetSlotValue(D_800E54A4->root, player))->next;
+        if (selectionPressed == 1) {
+            nextChoiceWidget = ((MenuWidget *)SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, player))->next;
 loop_16:
-            if (Widget_ListHasFlag100(var_s0_2) != 0) {
-                var_s0_2 = var_s0_2->next;
+            if (Widget_ListHasFlag100(nextChoiceWidget) != 0) {
+                nextChoiceWidget = nextChoiceWidget->next;
                 goto loop_16;
             }
-            SmpOverlay_ShowSlotNode((D_800E54A4->root), player, var_s0_2);
+            SmpOverlay_ShowSlotNode((g_pakProfileScreenState->root), player, nextChoiceWidget);
             PAKInterface_RelabelSlotRows(player);
         }
         goto block_24;
     case 27:
-        if (arg3 == 1) {
-            var_s0_3 = ((MenuWidget *)SmpOverlay_GetSlotValue(D_800E54A4->root, player))->next;
+        if (selectionPressed == 1) {
+            nextOptionWidget = ((MenuWidget *)SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, player))->next;
 loop_21:
-            if (Widget_ListHasFlag100(var_s0_3) != 0) {
-                var_s0_3 = var_s0_3->next;
+            if (Widget_ListHasFlag100(nextOptionWidget) != 0) {
+                nextOptionWidget = nextOptionWidget->next;
                 goto loop_21;
             }
-            SmpOverlay_ShowSlotNode((D_800E54A4->root), player, var_s0_3);
+            SmpOverlay_ShowSlotNode((g_pakProfileScreenState->root), player, nextOptionWidget);
             PAKInterface_UpdatePlayerControlRows(player);
         }
 block_24:
@@ -148,19 +148,19 @@ block_24:
 /* Handles Controller Pak menu confirmations and returns focus to an enabled widget for the active channel. */
 extern void PAKInterface_IncrementNameCharacter(s32);
 s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayerEvent, s32 pressState, s32 fifth) {
-    NodeRecAt44 *node;
+    WidgetReferenceNodeView *node;
     s32 player;
 
     player = packedPlayerEvent & 0xFFFF;
-    switch (D_800E54A4->players[player].state) {
+    switch (g_pakProfileScreenState->players[player].state) {
     case 12:
         if (XMath_AbsoluteInteger(fifth) < Smos_GetControlRepeatLimit()) {
-            D_800E54A4->players[player].nameTimer = 0;
-            D_800E54A4->players[player].namePhase = 2;
+            g_pakProfileScreenState->players[player].nameTimer = 0;
+            g_pakProfileScreenState->players[player].namePhase = 2;
         }
         if (pressState == 1) {
             MarkMenuEventHandled();
-            D_800E54A4->players[player].namePhase = pressState;
+            g_pakProfileScreenState->players[player].namePhase = pressState;
             PAKInterface_IncrementNameCharacter(player);
             SoundElement_PlayFlatSound(0xE81);
         }
@@ -169,42 +169,42 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
         if (pressState == 1) {
             MarkMenuEventHandled();
             PAKInterface_ScrollNoteList(player, 0);
-            D_800E54A4->selected[player] = 0;
+            g_pakProfileScreenState->selected[player] = 0;
             SoundElement_PlayFlatSound(0xE74);
         }
         return 0;
     case 13:
-        if (D_800E54A4->players[player].sub == 6 && pressState == 1) {
+        if (g_pakProfileScreenState->players[player].sub == 6 && pressState == 1) {
             MarkMenuEventHandled();
-            node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
+            node = SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, player);
             node = node->ref2C;
             while (Widget_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
-            SmpOverlay_ShowSlotNode(D_800E54A4->root, player, node);
+            SmpOverlay_ShowSlotNode(g_pakProfileScreenState->root, player, node);
             SoundElement_PlayFlatSound(0xE74);
         }
         return 0;
     case 22:
         if (pressState == 1) {
-            node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
+            node = SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, player);
             node = node->ref2C;
             while (Widget_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
-            SmpOverlay_ShowSlotNode(D_800E54A4->root, player, node);
+            SmpOverlay_ShowSlotNode(g_pakProfileScreenState->root, player, node);
             PAKInterface_RelabelSlotRows(player);
         }
         MarkMenuEventHandled();
         break;
     case 27:
         if (pressState == 1) {
-            node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
+            node = SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, player);
             node = node->ref2C;
             while (Widget_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
-            SmpOverlay_ShowSlotNode(D_800E54A4->root, player, node);
+            SmpOverlay_ShowSlotNode(g_pakProfileScreenState->root, player, node);
             PAKInterface_UpdatePlayerControlRows(player);
         }
         MarkMenuEventHandled();
@@ -215,7 +215,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
 
 /* 8042E080_28.CPP */
 /* Handles a cancel event for the player the low half of the third argument names: calls
-   MarkMenuEventHandled and, when the block D_800E54A4 points to is in phase 7 at 0x54, returns to screen 3
+   MarkMenuEventHandled and, when the block g_pakProfileScreenState points to is in phase 7 at 0x54, returns to screen 3
    through PAKInterface_BeginScreenExit; otherwise by the player's state at the start of its 2920-byte record at
    0x58: in state 0 it leaves for screen 0x1B unless PAKInterface_CountActivePlayerPanels reports something pending, in
    state 0xC it blanks the character at the cursor of the name at 0xB34 of the record, and in
@@ -227,11 +227,11 @@ extern void PAKInterface_RefreshPlayerPanel(s32);
 
 s32 PAKInterface_HandlePlayerPanelBack(void *unused0, void *unused1, u16 player) {
     MarkMenuEventHandled();
-    if (D_800E54A4->phase == 7) {
+    if (g_pakProfileScreenState->phase == 7) {
         PAKInterface_BeginScreenExit(3);
         return 0;
     }
-    switch (D_800E54A4->players[player].state) {
+    switch (g_pakProfileScreenState->players[player].state) {
     case 0:
         if (PAKInterface_CountActivePlayerPanels() > 0) {
             return 0;
@@ -241,18 +241,18 @@ s32 PAKInterface_HandlePlayerPanelBack(void *unused0, void *unused1, u16 player)
         return 0;
     case 0xC:
         MarkMenuEventHandled();
-        D_800E54A4->players[player].name[D_800E54A4->players[player].nameCursor].available = ' ';
+        g_pakProfileScreenState->players[player].name[g_pakProfileScreenState->players[player].nameCursor].available = ' ';
         break;
     case 0x16:
         MarkMenuEventHandled();
         PAKInterface_RelabelSlotRows(-1);
-        D_800E54A4->players[player].state = 0xD;
+        g_pakProfileScreenState->players[player].state = 0xD;
         PAKInterface_RefreshPlayerPanel(player);
         break;
     case 0x1B:
         MarkMenuEventHandled();
         PAKInterface_UpdatePlayerControlRows(-1);
-        D_800E54A4->players[player].state = 0xD;
+        g_pakProfileScreenState->players[player].state = 0xD;
         PAKInterface_RefreshPlayerPanel(player);
         break;
     default:

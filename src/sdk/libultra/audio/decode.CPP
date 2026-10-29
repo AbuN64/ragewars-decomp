@@ -146,7 +146,7 @@ s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCoun
 }
 
 s32 Audio_DecodeFrame(DecodeState *stream) {
-    DecodeBlock *block = D_800D5564;
+    DecodeBlock *block = g_audioDecodeBlock;
     s16 done;
     s16 i;
     s32 count;
@@ -158,7 +158,7 @@ s32 Audio_DecodeFrame(DecodeState *stream) {
         }
         block->offset += 0x60;
         for (i = 0; i < 16; i++) {
-            D_8014AE10[i] = stream->frame[i];
+            g_audioDecodeScaleTable[i] = stream->frame[i];
         }
         while (block->kind != 0) {
             block++;
@@ -172,9 +172,9 @@ s32 Audio_DecodeFrame(DecodeState *stream) {
         value = done;
         block += value;
         for (i = 0; i < 16; i++) {
-            value = D_8014AE10[i];
+            value = g_audioDecodeScaleTable[i];
             stream->frame[i] += value;
-            D_8014AE10[i] = stream->frame[i];
+            g_audioDecodeScaleTable[i] = stream->frame[i];
         }
     }
     count = (s16)Audio_DecodeHuffmanSamples(block, stream->frame + 80, 256, &done, stream);

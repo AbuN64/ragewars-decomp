@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SCREEN.H"
 #include "COMMON/VIDEO_DIMENSIONS.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
@@ -18,24 +18,24 @@
 /* 800E1FC0.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80439EC4_E2BC0_us_rev1.c */
-const unsigned int D_blob_9c12cf7de65376bb1f33[1] = {
+const unsigned int g_PlayerWords2[1] = {
     0x3F800000,
 };
 #endif
 
 /* 800E1FC4.CPP */
-const unsigned int D_auto_src_rw_pool_8043A330_E2BC4_us_rev1[7] = {
+const unsigned int g_PlayerWords1[7] = {
     0x3B656042, 0x40A00000, 0xC2C80000, 0x41E00000, 0x41400000, 0xC0400000, 0xC1900000,
 };
 
 /* 8043A0B0_6.CPP */
 
 /* CODE_8043A0B0.CPP */
-extern struct FourPlayerResultsScreen *D_800E59E0;
+extern struct FourPlayerResultsScreen *g_equipmentAndResultsScreen;
 extern Shared_PlayerSettingsRecord g_playerSettings[];
-extern struct RowRecAt54 D_800E3A58[];
-extern struct StateFlags D_800E59E6[][19];
-extern f32 D_800DDF90_de;
+extern struct PlayerSettingsOptionRow g_characterPortraitRecords[];
+extern struct StateFlags g_equipmentPanelWidgetIds[][19];
+extern f32 g_fourPlayerBadgeScale;
 extern void *Cache_AllocateMemory(s32);
 extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
@@ -44,7 +44,7 @@ extern void Widget_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Key_FindKeyIndex(s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void Tsmos_DeactivateControllerState(void);
-extern struct StateFlags D_800E5A06[][19];
+extern struct StateFlags g_equipmentPrimaryWidgetIds[][19];
 extern s32 SmpFlicker_IsFlickerIdle(void *);
 extern void SmpFlicker_RestoreFlickerValue(void *);
 extern void SmpFlicker_StartFlicker(void *, int);
@@ -72,53 +72,53 @@ s32 Player_CreateFourPlayerResults(void *window) {
     CVector3 scale;
     Shared_PlayerSettingsRecord *config;
 
-    D_800E59E0 = Cache_AllocateMemory(sizeof(struct FourPlayerResultsScreen));
-    D_800E59E0->window = window;
-    D_800E59E0->menu = SmpOverlay_CreateOverlayNode(window, 4);
+    g_equipmentAndResultsScreen = Cache_AllocateMemory(sizeof(struct FourPlayerResultsScreen));
+    g_equipmentAndResultsScreen->window = window;
+    g_equipmentAndResultsScreen->menu = SmpOverlay_CreateOverlayNode(window, 4);
     SmpOverlay_ShowSlotById(window, 0, slotResource);
     SmpOverlay_ShowSlotById(window, 1, slotResource);
     SmpOverlay_ShowSlotById(window, 2, slotResource);
     SmpOverlay_ShowSlotById(window, 3, slotResource);
-    scale.x = D_800DDF90_de;
-    scale.y = D_800DDF90_de;
-    scale.z = D_800DDF90_de;
+    scale.x = g_fourPlayerBadgeScale;
+    scale.y = g_fourPlayerBadgeScale;
+    scale.z = g_fourPlayerBadgeScale;
     for (player = 0; player < 4; player++) {
         Shared_PlayerSettingsRecord *config;
-        D_800E59E0->panels[player].state = 0;
-        D_800E59E0->panels[player].selection = 5;
-        bar = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][1].value);
-        D_800E59E0->panels[player].item = bar;
+        g_equipmentAndResultsScreen->panels[player].state = 0;
+        g_equipmentAndResultsScreen->panels[player].selection = 5;
+        bar = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentPanelWidgetIds[player][1].value);
+        g_equipmentAndResultsScreen->panels[player].item = bar;
         bar->alpha = 0x64;
         Widget_SetWidgetFlag08(bar, 0);
-        widget = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][0].value);
+        widget = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentPanelWidgetIds[player][0].value);
         widget->alpha = 0x6E;
         config = &g_playerSettings[player];
         if (config->enabled == 1) {
             row = Key_FindKeyIndex(config->character);
-            scale.x = D_800E3A58[row].scale[player];
-            scale.y = D_800E3A58[row].scale[player];
-            scale.z = D_800E3A58[row].scale[player];
-            Preview_InitModelPreview(&D_800E59E0->panels[player], 9, config->character + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[player], D_800E3A58[row].distance[player], D_800E3A58[row].light[player]);
+            scale.x = g_characterPortraitRecords[row].scale[player];
+            scale.y = g_characterPortraitRecords[row].scale[player];
+            scale.z = g_characterPortraitRecords[row].scale[player];
+            Preview_InitModelPreview(&g_equipmentAndResultsScreen->panels[player], 9, config->character + 0x38F, 0x4B, 0x5DC0, scale, g_characterPortraitRecords[row].position[player], g_characterPortraitRecords[row].distance[player], g_characterPortraitRecords[row].light[player]);
         }
     }
-    D_800E59E0->state = 1;
-    D_800E59E0->timer = 4;
-    D_800E59E0->leftArrow = Node_FindWidgetByResourceId(window, leftResource);
-    D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x - (u16)D_800E59E0->leftArrow->width;
-    D_800E59E0->leftStep = D_800E59E0->leftArrow->width / 4;
-    delta = D_800E59E0->leftArrow->width - D_800E59E0->leftStep * 4;
-    D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x + delta;
-    D_800E59E0->rightArrow = Node_FindWidgetByResourceId(window, rightResource);
-    D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x + (u16)D_800E59E0->rightArrow->width;
-    D_800E59E0->rightStep = D_800E59E0->rightArrow->width / 4;
-    delta = D_800E59E0->rightArrow->width - D_800E59E0->rightStep * 4;
-    D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x - delta;
+    g_equipmentAndResultsScreen->state = 1;
+    g_equipmentAndResultsScreen->timer = 4;
+    g_equipmentAndResultsScreen->leftArrow = Node_FindWidgetByResourceId(window, leftResource);
+    g_equipmentAndResultsScreen->leftArrow->x = (u16)g_equipmentAndResultsScreen->leftArrow->x - (u16)g_equipmentAndResultsScreen->leftArrow->width;
+    g_equipmentAndResultsScreen->leftStep = g_equipmentAndResultsScreen->leftArrow->width / 4;
+    delta = g_equipmentAndResultsScreen->leftArrow->width - g_equipmentAndResultsScreen->leftStep * 4;
+    g_equipmentAndResultsScreen->leftArrow->x = (u16)g_equipmentAndResultsScreen->leftArrow->x + delta;
+    g_equipmentAndResultsScreen->rightArrow = Node_FindWidgetByResourceId(window, rightResource);
+    g_equipmentAndResultsScreen->rightArrow->x = (u16)g_equipmentAndResultsScreen->rightArrow->x + (u16)g_equipmentAndResultsScreen->rightArrow->width;
+    g_equipmentAndResultsScreen->rightStep = g_equipmentAndResultsScreen->rightArrow->width / 4;
+    delta = g_equipmentAndResultsScreen->rightArrow->width - g_equipmentAndResultsScreen->rightStep * 4;
+    g_equipmentAndResultsScreen->rightArrow->x = (u16)g_equipmentAndResultsScreen->rightArrow->x - delta;
     Node_FindWidgetByResourceId(window, titleResource)->alpha = 0x6E;
-    D_800E59E0->resource = SmpFlicker_CreateFlickerWidget(messageResource, 0xFF);
+    g_equipmentAndResultsScreen->resource = SmpFlicker_CreateFlickerWidget(messageResource, 0xFF);
     widget = Node_FindWidgetByResourceId(window, messageResource);
-    D_800E59E0->message = widget;
+    g_equipmentAndResultsScreen->message = widget;
     Widget_SetWidgetFlag08(widget, 0);
-    screen = D_800E59E0;
+    screen = g_equipmentAndResultsScreen;
     for (player = 0; player < 4; player++) {
         config = &g_playerSettings[player];
         if (config->enabled == 1) {
@@ -141,7 +141,7 @@ s32 Player_CreateFourPlayerResults(void *window) {
             Equip_ActivateEquipmentPanel(player);
         }
     }
-    D_800E59E0->next = -1;
+    g_equipmentAndResultsScreen->next = -1;
     Tsmos_DeactivateControllerState();
     return 0;
 }
@@ -151,14 +151,14 @@ extern void Frontend_SetPreviewRotation(void *, CVector3);
 extern void Frontend_SetPreviewRotationSpeed(void *, CVector3);
 #if defined(VERSION_EU)
 /* eu keeps these two floats elsewhere: D_800E1FC4/D_800E1FD4 name its string tables */
-#define D_800E1FC4 D_800EE614_eu
-#define D_800E1FD4 D_800EE624_eu
+#define D_800E1FC4 g_fourPlayerBadgeScaleEu
+#define D_800E1FD4 g_fourPlayerBadgeSecondYEu
 #endif
 extern f32 D_800E1FC4;
-extern f32 D_800DDF98_de;
+extern f32 g_fourPlayerBadgeAngularVelocity;
 extern f32 D_800E1FD4;
-extern f32 D_800DDFA8;
-extern f32 D_800DDFAC_de;
+extern f32 g_fourPlayerBadgeUpperY;
+extern f32 g_fourPlayerBadgeLowerY;
 /* Initialize four rotating result badges and reveal enabled player cards. */
 s32 Player_StartFourPlayerResults(void) {
     CVector3 scale;
@@ -184,38 +184,38 @@ s32 Player_StartFourPlayerResults(void) {
     angularVelocity.z = 0;
     position.x = 0;
     position.y = 0;
-    angularVelocity.y = D_800DDF98_de;
-    position.z = D_800DDF9C;
+    angularVelocity.y = g_fourPlayerBadgeAngularVelocity;
+    position.z = g_fourPlayerBadgeDepth;
     baseAngle = i;
     for (; i < 4; i++) {
         switch (i) {
         case 0:
-            position.y = D_800E1FD0;
+            position.y = g_fourPlayerBadgeBaseY;
             break;
         case 1:
             position.y = D_800E1FD4;
             break;
         case 2:
-            position.y = D_800DDFA8;
+            position.y = g_fourPlayerBadgeUpperY;
             break;
         case 3:
-            position.y = D_800DDFAC_de;
+            position.y = g_fourPlayerBadgeLowerY;
             break;
         }
         rotation.y = (f32)(baseAngle + Graphu64_NextRandom() % 10);
         baseAngle += 0x2D;
-        Frontend_InitModelPreviewTransform((u8 *)D_800E59E0 + badgeOffset, 0, scale, position);
-        Frontend_SetPreviewRotation((u8 *)D_800E59E0 + badgeOffset, rotation);
-        Frontend_SetPreviewRotationSpeed((u8 *)D_800E59E0 + badgeOffset, angularVelocity);
-        badgeOffset += sizeof(D_800E59E0->badges[0]);
+        Frontend_InitModelPreviewTransform((u8 *)g_equipmentAndResultsScreen + badgeOffset, 0, scale, position);
+        Frontend_SetPreviewRotation((u8 *)g_equipmentAndResultsScreen + badgeOffset, rotation);
+        Frontend_SetPreviewRotationSpeed((u8 *)g_equipmentAndResultsScreen + badgeOffset, angularVelocity);
+        badgeOffset += sizeof(g_equipmentAndResultsScreen->badges[0]);
     }
     for (i = 0; i < 4; i++) {
         config = &g_playerSettings[i];
         if (config->enabled == 1) {
-            widget = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E19DE[i * 0x26]);
+            widget = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_fourPlayerResultsWidgetIds[i * 0x26]);
             Widget_SetWidgetFlag40(widget, 0);
             widget->alpha = 0x23;
-            screen = D_800E59E0;
+            screen = g_equipmentAndResultsScreen;
             switch (screen->panels[i].mode) {
             case 0:
                 Frontend_SelectEquipmentColumn(i, screen->panels[i].selection = 5);
@@ -242,27 +242,27 @@ s32 Player_UpdateFourPlayerResults(void) {
     s32 left;
     s32 timer;
     struct FourPlayerResultsScreen *screen;
-    switch (D_800E59E0->state) {
+    switch (g_equipmentAndResultsScreen->state) {
     case 1:
-        D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x + (u16)D_800E59E0->leftStep;
-        D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x - (u16)D_800E59E0->rightStep;
-        D_800E59E0->timer--;
-        if (D_800E59E0->timer <= 0) {
+        g_equipmentAndResultsScreen->leftArrow->x = (u16)g_equipmentAndResultsScreen->leftArrow->x + (u16)g_equipmentAndResultsScreen->leftStep;
+        g_equipmentAndResultsScreen->rightArrow->x = (u16)g_equipmentAndResultsScreen->rightArrow->x - (u16)g_equipmentAndResultsScreen->rightStep;
+        g_equipmentAndResultsScreen->timer--;
+        if (g_equipmentAndResultsScreen->timer <= 0) {
             SoundElement_PlayFlatSound(0xE79);
-            Widget_SetWidgetFlag08(D_800E59E0->message, 1);
-            SmpFlicker_StartFlicker(D_800E59E0->resource, 4);
-            D_800E59E0->state = 4;
-            D_800E59E0->timer = 4;
+            Widget_SetWidgetFlag08(g_equipmentAndResultsScreen->message, 1);
+            SmpFlicker_StartFlicker(g_equipmentAndResultsScreen->resource, 4);
+            g_equipmentAndResultsScreen->state = 4;
+            g_equipmentAndResultsScreen->timer = 4;
         }
         break;
     case 2:
-        D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x - (u16)D_800E59E0->leftStep;
-        D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x + (u16)D_800E59E0->rightStep;
-        D_800E59E0->timer--;
-        if (D_800E59E0->timer <= 0) {
-            D_800E59E0->state = 3;
+        g_equipmentAndResultsScreen->leftArrow->x = (u16)g_equipmentAndResultsScreen->leftArrow->x - (u16)g_equipmentAndResultsScreen->leftStep;
+        g_equipmentAndResultsScreen->rightArrow->x = (u16)g_equipmentAndResultsScreen->rightArrow->x + (u16)g_equipmentAndResultsScreen->rightStep;
+        g_equipmentAndResultsScreen->timer--;
+        if (g_equipmentAndResultsScreen->timer <= 0) {
+            g_equipmentAndResultsScreen->state = 3;
             MarkMenuEventHandled();
-            SmXlate_SwitchScreen(D_800E59E0->next);
+            SmXlate_SwitchScreen(g_equipmentAndResultsScreen->next);
             return 0;
         }
         break;
@@ -270,7 +270,7 @@ s32 Player_UpdateFourPlayerResults(void) {
         Tsmos_ActivateControllerState();
         return 0;
     case 4:
-        screen = D_800E59E0;
+        screen = g_equipmentAndResultsScreen;
         timer = screen->timer;
         left = timer - 1;
         if (left >= 0) {
@@ -279,23 +279,23 @@ s32 Player_UpdateFourPlayerResults(void) {
             left = 0;
         }
         screen->timer = left;
-        if (D_800E59E0->timer <= 0) {
-            if (SmpFlicker_IsFlickerIdle(D_800E59E0->resource)) {
-                SmpFlicker_RestoreFlickerValue(D_800E59E0->resource);
-                D_800E59E0->state = 3;
+        if (g_equipmentAndResultsScreen->timer <= 0) {
+            if (SmpFlicker_IsFlickerIdle(g_equipmentAndResultsScreen->resource)) {
+                SmpFlicker_RestoreFlickerValue(g_equipmentAndResultsScreen->resource);
+                g_equipmentAndResultsScreen->state = 3;
             }
         }
         return 0;
     case 5:
         SoundElement_PlayFlatSound(0xE78);
-        D_800E59E0->state = 2;
-        D_800E59E0->timer = 4;
-        Widget_SetWidgetFlag08(D_800E59E0->message, 0);
+        g_equipmentAndResultsScreen->state = 2;
+        g_equipmentAndResultsScreen->timer = 4;
+        Widget_SetWidgetFlag08(g_equipmentAndResultsScreen->message, 0);
         for (player = 0; player < 4; player++) {
             for (i = 0; i < 5; i++) {
-                Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][i].value), 0);
+                Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentPrimaryWidgetIds[player][i].value), 0);
             }
-            Widget_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
+            Widget_SetWidgetFlag08(g_equipmentAndResultsScreen->panels[player].item, 0);
         }
         break;
     case 6:
@@ -306,44 +306,44 @@ s32 Player_UpdateFourPlayerResults(void) {
 }
 
 extern Gfx *g_displayListCursor;
-extern s32 D_800E28D0;
+extern s32 g_hudReferenceViewportWidth;
 extern void Preview_DrawModelPreview(struct ResultsPlayerPanel *);
 extern s32 Model_GetModelRecordCount(char *);
 #if defined(VERSION_DE)
-extern void func_804397F0_auto(char *);
+extern void Frontend_DrawResultModelPreviewDe(char *);
 #else
-extern void func_804399D0(char *);
+extern void Preview_DrawMenuModelItem(char *);
 #endif
-extern struct Shape_typemap_6 g_menuPlayerScissorRects[];
-/* Draw callback of the four-player results screen: on draw event 1 in state 3 it resets the fill colour D_800D15E0
-   and the colour table D_800D15E4, scissors the display list to each active panel rectangle in g_menuPlayerScissorRects and draws
+extern struct MenuPlayerScissorRect g_menuPlayerScissorRects[];
+/* Draw callback of the four-player results screen: on draw event 1 in state 3 it resets the fill colour g_menuModelFillEnabled
+   and the colour table g_menuModelFillColor, scissors the display list to each active panel rectangle in g_menuPlayerScissorRects and draws
    the panel, then clips to the full screen and draws the badge of every panel whose state is 1. Returns zero. */
 s32 Player_DrawFourPlayerResults(void *window, void *item, s32 event) {
     s32 i;
-    if (event == 1 && D_800E59E0->state == 3) {
-        D_800D15E0 = 0;
-        D_800D15E4[0] = 255.0f;
-        D_800D15E4[1] = 255.0f;
-        D_800D15E4[2] = 255.0f;
-        D_800D15E4[3] = 255.0f;
+    if (event == 1 && g_equipmentAndResultsScreen->state == 3) {
+        g_menuModelFillEnabled = 0;
+        g_menuModelFillColor[0] = 255.0f;
+        g_menuModelFillColor[1] = 255.0f;
+        g_menuModelFillColor[2] = 255.0f;
+        g_menuModelFillColor[3] = 255.0f;
         for (i = 0; i < 4; i++) {
-            if (D_800E59E0->panels[i].state == 1 || D_800E59E0->panels[i].state == 2) {
-                gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, g_menuPlayerScissorRects[i].field_0, g_menuPlayerScissorRects[i].field_4, g_menuPlayerScissorRects[i].field_8, g_menuPlayerScissorRects[i].field_C);
-                Preview_DrawModelPreview(&D_800E59E0->panels[i]);
+            if (g_equipmentAndResultsScreen->panels[i].state == 1 || g_equipmentAndResultsScreen->panels[i].state == 2) {
+                gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, g_menuPlayerScissorRects[i].left, g_menuPlayerScissorRects[i].top, g_menuPlayerScissorRects[i].right, g_menuPlayerScissorRects[i].bottom);
+                Preview_DrawModelPreview(&g_equipmentAndResultsScreen->panels[i]);
             }
         }
         gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         for (i = 0; i < 4; i++) {
-            if (D_800E59E0->panels[i].state == 1 && Model_GetModelRecordCount(D_800E59E0->badges[i]) != 0) {
-                D_800D15E0 = 1;
-                D_800D15E4[3] = 150.0f;
+            if (g_equipmentAndResultsScreen->panels[i].state == 1 && Model_GetModelRecordCount(g_equipmentAndResultsScreen->badges[i]) != 0) {
+                g_menuModelFillEnabled = 1;
+                g_menuModelFillColor[3] = 150.0f;
 #if defined(VERSION_DE)
-                func_804397F0_auto(D_800E59E0->badges[i]);
+                Frontend_DrawResultModelPreviewDe(g_equipmentAndResultsScreen->badges[i]);
 #else
-                func_804399D0(D_800E59E0->badges[i]);
+                Preview_DrawMenuModelItem(g_equipmentAndResultsScreen->badges[i]);
 #endif
-                D_800D15E0 = 0;
-                D_800D15E4[3] = 255.0f;
+                g_menuModelFillEnabled = 0;
+                g_menuModelFillColor[3] = 255.0f;
             }
         }
     }

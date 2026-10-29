@@ -10,6 +10,6 @@ extern void SoundElement_ClearVoiceFlags(void);
 extern void SoundElement_DisablePeriodicSound(void);
 extern void SoundElement_AcquireContextLock(void);
 extern void SoundElement_EnablePeriodicSound(void);
-extern int func_8025E2C4_de(void);
+extern int SoundElement_GetMusicPlaybackEnabled(void);
 extern void SoundElement_SetVoiceMixValue(s32 mixValue);
 #endif

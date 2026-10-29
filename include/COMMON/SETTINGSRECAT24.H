@@ -3,32 +3,32 @@
 #include "TYPES.H"
 #include "COMMON/ACTIVE.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct SettingsRecAt24;
-struct SettingsRecAt24 {
+struct MatchTimeSettingView;
+struct MatchTimeSettingView {
     char pad0[0x24];
     s8 timeSetting;
 };
 
-struct SettingsRecAt24;
-typedef struct SettingsRecAt24 SettingsRecAt24;
+struct MatchTimeSettingView;
+typedef struct MatchTimeSettingView MatchTimeSettingView;
 
-struct Rules_func_8042D060_de;
-typedef struct Rules_func_8042D060_de Rules_func_8042D060_de;
+struct MatchResultsRulesView;
+typedef struct MatchResultsRulesView MatchResultsRulesView;
 
-struct Rules_func_8042D060_de;
-struct Rules_func_8042D060_de {
+struct MatchResultsRulesView;
+struct MatchResultsRulesView {
     char pad0[0x14];
     f32 timeLeft;
     char pad18[0x98 - 0x18];
     s32 lastStanding;
 };
 
-struct Game_func_8042D060_de;
-struct Game_func_8042D060_de {
+struct MatchResultsGameSettingsView;
+struct MatchResultsGameSettingsView {
     char pad0[0xCAC];
-    SettingsRecAt24 settings;
+    MatchTimeSettingView settings;
     char padCD1[0x1284 - 0xCD1];
-    Rules_func_8042D060_de rules;
+    MatchResultsRulesView rules;
 };
 
 
@@ -45,27 +45,27 @@ struct Shared_Rec3 {
     char pad93[0x3];
 };
 
-struct CellRecAt1A;
+struct ChoiceMenuCellView;
 struct MenuFrontendUpdatePlayModeMenu;
 struct StateFrontendUpdatePlayerCountScreen;
 struct StateFrontendUpdatePlayerCountScreen {
     struct MenuFrontendUpdatePlayModeMenu *menu;
     char pad4[0x8 - 0x4];
-    struct CellRecAt1A *list;
+    struct ChoiceMenuCellView *list;
     s32 delay;
     s32 target;
 };
 
 struct IntPair;
 
-struct SlotRecAt7F;
-typedef struct SlotRecAt7F SlotRecAt7F;
+struct PlayerCountSettingsSlotView;
+typedef struct PlayerCountSettingsSlotView PlayerCountSettingsSlotView;
 
 extern void Frontend_ContinueCupOrOpenResults(void);
 
 struct MatchScoreScreen;
 typedef struct MatchScoreScreen MatchScoreScreen;
-typedef struct MatchScoreScreen func_8042CE54_S1;
+typedef struct MatchScoreScreen MatchScoreScreenView;
 
 
 struct ResourceBank;
@@ -81,7 +81,7 @@ struct MatchScoreScreen {
     s32 transition[7];
     s32 active;
     char pad20[0xC0];
-    void * unkE0;
+    void * window;
     s32 buttonAddress;
     s32 first, count;
     union { s32 players[8]; void *data; };
@@ -104,18 +104,18 @@ extern void Frontend_AwardResultAchievements(void);
 extern void Frontend_OpenControllerModeResults(void);
 
 
-struct Game_func_8042D060_de;
-typedef struct Game_func_8042D060_de Game_func_8042D060_de;
+struct MatchResultsGameSettingsView;
+typedef struct MatchResultsGameSettingsView MatchResultsGameSettingsView;
 
 
 
-extern void Frontend_HideResultBadgeGroup(s32 arg0);
+extern void Frontend_HideResultBadgeGroup(s32 rootWidgetId);
 
 
 extern s32 Frontend_GetMatchEndReason(void);
 
-struct SlotRecAt7F;
-struct SlotRecAt7F {
+struct PlayerCountSettingsSlotView;
+struct PlayerCountSettingsSlotView {
     char pad0[0x78];
     u8 active;
     char pad79[6];

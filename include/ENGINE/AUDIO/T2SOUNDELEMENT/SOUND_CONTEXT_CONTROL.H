@@ -3,8 +3,8 @@
 #include "COMMON/SOUNDINFO.H"
 extern void SoundElement_SetTrackAndPeriodicPlayback(int trackId);
 extern void SoundElement_SetVoiceMixValue(s32 mixValue);
-extern int func_8025E2C4_de(void);
-extern void func_8025E2D4_de(s32 a);
+extern int SoundElement_GetMusicPlaybackEnabled(void);
+extern void SoundElement_SetMusicPlaybackEnabled(s32 a);
 extern void SoundElement_FadeOutMusic(void);
 extern void SoundElement_StopMusic(void);
 extern void SoundElement_EnableMusicGainOverride(void);

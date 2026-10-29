@@ -21,18 +21,18 @@
 
 extern s32 Smos_GetControlRepeatLimit();
 
-extern void SmpSlider_IncrementSliderItem(struct func_8022FD9C_Record *);
+extern void SmpSlider_IncrementSliderItem(struct SliderStepRecord *);
 
-extern void SmpSlider_DecrementSliderItem(struct func_8022FD9C_Record *);
+extern void SmpSlider_DecrementSliderItem(struct SliderStepRecord *);
 
 /* Scrolls a menu one step in the direction its state word at offset 0x54 records: up through
    SmpSlider_DecrementSliderItem for state 0, down through SmpSlider_IncrementSliderItem for state 1, and returns zero. */
 
 
 
-extern void SmpSlider_DecrementSliderItem(struct func_8022FD9C_Record *menu);
+extern void SmpSlider_DecrementSliderItem(struct SliderStepRecord *menu);
 
-extern void SmpSlider_IncrementSliderItem(struct func_8022FD9C_Record *menu);
+extern void SmpSlider_IncrementSliderItem(struct SliderStepRecord *menu);
 
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
@@ -53,7 +53,7 @@ s32 SmpList_ResetEntryCommands(struct CommandListMenu *commandListMenu) {
     return 0;
 }
 
-s32 SmpList_HandleIncrementInput(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
+s32 SmpList_HandleIncrementInput(struct SliderStepRecord *menu, void *second, void *third, s32 active, s32 fifth) {
     if (XMath_AbsoluteInteger(fifth) < Smos_GetControlRepeatLimit()) {
         menu->activeState = 2;
     }
@@ -65,7 +65,7 @@ s32 SmpList_HandleIncrementInput(struct func_8022FD9C_Record *menu, void *second
     return 0;
 }
 
-s32 SmpList_HandleDecrementInput(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
+s32 SmpList_HandleDecrementInput(struct SliderStepRecord *menu, void *second, void *third, s32 active, s32 fifth) {
     if (XMath_AbsoluteInteger(fifth) < Smos_GetControlRepeatLimit()) {
         menu->activeState = 2;
     }
@@ -81,16 +81,16 @@ s32 SmpList_HandleDecrementInput(struct func_8022FD9C_Record *menu, void *second
    value is 6 or 7, and returns zero. */
 
 
-s32 SmpList_HandleStopEvent(struct func_8022FD9C_Record *object, void *unused, u32 event, s32 value) {
+s32 SmpList_HandleStopEvent(struct SliderStepRecord *object, void *unused, u32 event, s32 value) {
     if ((event >> 16) == 3 && value < 8 && value >= 6) {
         object->activeState = 2;
     }
     return 0;
 }
 
-s32 SmpList_UpdateSliderMotion(struct func_8022FD9C_Record *menu)
+s32 SmpList_UpdateSliderMotion(struct SliderStepRecord *menu)
 {
-    struct func_8022FD9C_Record *target = menu;
+    struct SliderStepRecord *target = menu;
 
     switch (menu->activeState) {
     case 0:
@@ -111,5 +111,5 @@ s32 SmpList_DestroyController(void *allocation) {
 }
 
 void SmpList_RegisterListClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB64, D_0041AD7C, D_0041AE0C, 3);
+    SmSmngr_RegisterElementHandlers(0xB64, g_SmpButton_DispatchListEventAddress, g_SmpButton_DrawListWidgetAddress, 3);
 }

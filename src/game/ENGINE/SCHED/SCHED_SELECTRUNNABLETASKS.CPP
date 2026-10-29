@@ -3,21 +3,21 @@
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "sdk/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "sdk/SCHED/osscremoveclient.H"
 #include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "sdk/libgultra/sptaskyield.h"
 #include "sdk/os.h"
-extern s32 D_80142C30;
-extern s32 D_80142C38;
+extern s32 g_schedulerPendingFramebuffer;
+extern s32 g_displayedFramebufferAndRefreshRate;
 /* Initialises a panel: marks it active, clears its counters, lays out its two eight-slot rows, binds text 0x29B to 0x29D and 0x29A with the given style byte to the first row, and builds its element list from the D_28E910 template. */
 
 
@@ -27,26 +27,26 @@ extern void osSetEventMesg(s32 slot, char *row, s32 text);
 
 extern void System_SetVideoEvent(char *row, s32 text, s32 style);
 
-extern void osCreateThread(char *list, s32 count, void *entryTemplate, Panel *owner, s32 arg4, s32 arg5);
+extern void osCreateThread(char *list, s32 count, void *entryTemplate, Panel *owner, s32 stackPointer, s32 priority);
 
 
-s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **arg1, OSScTask_s **arg2, s32 arg3) {
+s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **rspTaskOut, OSScTask_s **rdpTaskOut, s32 processorMask) {
     OSScTask_s *gfxListHead;
     OSScTask_s *audioListHead;
     OSScTask_s *next;
-    OSScTask_s *var_v1;
-    s32 temp_s5;
-    s32 temp_v0_2;
+    OSScTask_s *runnableGraphicsTask;
+    s32 initialProcessorMask;
+    s32 graphicsTaskFlags;
     s32 state;
     s32 availableProcessors;
 
-    availableProcessors = arg3;
+    availableProcessors = processorMask;
     gfxListHead = scheduler->gfxListHead;
     audioListHead = scheduler->audioListHead;
-    temp_s5 = availableProcessors;
+    initialProcessorMask = availableProcessors;
     if ((scheduler->doAudio != 0) && (availableProcessors & 2)) {
         if ((gfxListHead == 0) || !(gfxListHead->flags & 0x10)) {
-            *arg1 = audioListHead;
+            *rspTaskOut = audioListHead;
             scheduler->doAudio = 0;
             next = scheduler->audioListHead->next;
             availableProcessors &= ~2;
@@ -55,24 +55,24 @@ s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **arg1, OSScTask_s 
                 scheduler->audioListTail = 0;
             }
         } else {
-            *arg1 = gfxListHead;
+            *rspTaskOut = gfxListHead;
             availableProcessors &= ~2;
         }
     } else {
         if (gfxListHead == 0) {
-            var_v1 = 0;
-        } else if ((s32)gfxListHead->framebuffer == D_80142C38) {
-            var_v1 = 0;
+            runnableGraphicsTask = 0;
+        } else if ((s32)gfxListHead->framebuffer == g_displayedFramebufferAndRefreshRate) {
+            runnableGraphicsTask = 0;
         } else if (gfxListHead->framebuffer == osViGetCurrentFramebuffer()) {
-            var_v1 = 0;
-        } else if ((s32)gfxListHead->framebuffer == D_80142C30) {
-            var_v1 = 0;
+            runnableGraphicsTask = 0;
+        } else if ((s32)gfxListHead->framebuffer == g_schedulerPendingFramebuffer) {
+            runnableGraphicsTask = 0;
         } else {
-            var_v1 = gfxListHead;
+            runnableGraphicsTask = gfxListHead;
         }
-        if (var_v1 != 0) {
-            temp_v0_2 = gfxListHead->flags & 7;
-            switch (temp_v0_2) {
+        if (runnableGraphicsTask != 0) {
+            graphicsTaskFlags = gfxListHead->flags & 7;
+            switch (graphicsTaskFlags) {
             case 1:
             case 4:
             case 5:
@@ -80,10 +80,10 @@ s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **arg1, OSScTask_s 
             case 3:
                 if (gfxListHead->state & 0x20) {
                     if (availableProcessors & 2) {
-                        *arg1 = gfxListHead;
+                        *rspTaskOut = gfxListHead;
                         availableProcessors &= ~2;
                         if (gfxListHead->state & 1) {
-                            *arg2 = gfxListHead;
+                            *rdpTaskOut = gfxListHead;
                             availableProcessors &= ~1;
                         }
                         scheduler->gfxListHead = scheduler->gfxListHead->next;
@@ -92,8 +92,8 @@ s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **arg1, OSScTask_s 
                         }
                     }
                 } else if (availableProcessors == 3) {
-                    *arg2 = gfxListHead;
-                    *arg1 = gfxListHead;
+                    *rdpTaskOut = gfxListHead;
+                    *rspTaskOut = gfxListHead;
                     scheduler->gfxListHead = scheduler->gfxListHead->next;
                     availableProcessors = 0;
                     if (scheduler->gfxListHead == 0) {
@@ -107,11 +107,11 @@ s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **arg1, OSScTask_s 
                 state = gfxListHead->state;
                 if (state & 2) {
                     if (availableProcessors & 2) {
-                        *arg1 = gfxListHead;
+                        *rspTaskOut = gfxListHead;
                         availableProcessors &= ~2;
                     }
                 } else if ((state & 1) && (availableProcessors & 1)) {
-                    *arg2 = gfxListHead;
+                    *rdpTaskOut = gfxListHead;
                     scheduler->gfxListHead = scheduler->gfxListHead->next;
                     availableProcessors &= ~1;
                     if (scheduler->gfxListHead == 0) {
@@ -122,13 +122,13 @@ s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **arg1, OSScTask_s 
             }
         }
     }
-    if (availableProcessors != temp_s5) {
-        availableProcessors = Sched_SelectRunnableTasks(scheduler, arg1, arg2, availableProcessors);
+    if (availableProcessors != initialProcessorMask) {
+        availableProcessors = Sched_SelectRunnableTasks(scheduler, rspTaskOut, rdpTaskOut, availableProcessors);
     }
     return availableProcessors;
 }
 
-void Sched_InitializeSchedulerThread(Panel *panel, s32 threadStack, s32 priority, s32 arg3, unsigned char style) {
+void Sched_InitializeSchedulerThread(Panel *panel, s32 threadStack, s32 priority, s32 unusedVideoMode, unsigned char style) {
     panel->active = 1;
     panel->field2F4 = 0;
     panel->field2F8 = 0;
@@ -146,6 +146,6 @@ void Sched_InitializeSchedulerThread(Panel *panel, s32 threadStack, s32 priority
     osSetEventMesg(9, panel->row0, 0x29C);
     osSetEventMesg(0xE, panel->row0, 0x29D);
     System_SetVideoEvent(panel->row0, 0x29A, style);
-    osCreateThread(panel->elements, 7, &D_0028E930, panel, threadStack, priority);
+    osCreateThread(panel->elements, 7, &g_schedulerThreadEntryAddress, panel, threadStack, priority);
     osStartThread(panel->elements);
 }

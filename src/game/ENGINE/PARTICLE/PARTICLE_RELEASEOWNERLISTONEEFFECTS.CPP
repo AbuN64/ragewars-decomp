@@ -1,10 +1,10 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/OBJECTLINKS1E8.H"
+#include "COMMON/PARTICLE_ATTACHMENT_AND_OWNER_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "FX/PARTICLE_ATTACHMENT.H"
@@ -23,7 +23,7 @@
 #include "particle/CAMERA_SCALE.H"
 extern void Particle_UpdateMatrix(void *);
 
-extern void Particle_FinishActorEffects(void *arg0);
+extern void Particle_FinishActorEffects(void *actor);
 
 extern void Fx_DetachParticleSwooshes(void *effectWorld, void *detachedEntity);
 
@@ -33,13 +33,13 @@ extern void Fx_DetachParticleSwooshes(void *effectWorld, void *detachedEntity);
 
 
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 
 extern void Particle_Release(void *a, void *b);
 
-extern CVector3 D_801042C8;
+extern CVector3 g_particleZeroVector;
 
-extern Params D_80100290;
+extern Params g_particlePrimaryContactPosition;
 
 
 /* Apply resource indices and dispatch the optional object effect. */
@@ -63,7 +63,7 @@ void Graphu64_ScaleVector(CVector3 *,CVector3 *,f32);
  void Graphu64_AddVec3(CVector3 *,CVector3 *,CVector3 *);
 
 /* Transform the measured attachment position and direction into the target frame. */
-extern ParticleAttachmentState D_801041F0;
+extern ParticleAttachmentState g_currentActorInstance;
 
 extern void Graphu64_ConvertMatrixToFloat(f32 *out, void *in);
 
@@ -81,51 +81,51 @@ int Particle_GetLastSpawnedEffect(struct EffectSystem *effectSystem) {
     return (s32)effectSystem->last;
 }
 
-void Particle_ReleaseOwnerListOneEffects(struct EffectSystem *effectSystem, s32 arg1) {
-    s32 *temp_v1_3;
-    s32 temp_a1;
+void Particle_ReleaseOwnerListOneEffects(struct EffectSystem *effectSystem, s32 ownerAddress) {
+    s32 *referenceCount;
+    s32 light;
     s32 flags;
     u16 kind;
     ParticleEffect *next;
-    ParticleEffect *var_s0;
+    ParticleEffect *effect;
 
-    var_s0 = effectSystem->lists[1].head;
-    if (var_s0 != 0) {
+    effect = effectSystem->lists[1].head;
+    if (effect != 0) {
         do {
-            kind = var_s0->kind;
-            next = var_s0->next;
+            kind = effect->kind;
+            next = effect->next;
             if ((kind == 0x41E) || (kind == 0x3EF)) {
-                flags = var_s0->flags;
-                if ((flags & 0x100) && (var_s0->owner == (void *)arg1) && !(flags & 0x800)) {
-                    Particle_FinishActorEffects(var_s0);
-                    if (var_s0->unk1D9 != 0) {
-                        Particle_UpdateMatrix(var_s0);
-                        Fx_DetachParticleSwooshes(&D_801379C0, var_s0);
+                flags = effect->flags;
+                if ((flags & 0x100) && (effect->owner == (void *)ownerAddress) && !(flags & 0x800)) {
+                    Particle_FinishActorEffects(effect);
+                    if (effect->releaseRequested != 0) {
+                        Particle_UpdateMatrix(effect);
+                        Fx_DetachParticleSwooshes(&g_actorParticleScene, effect);
                     }
-                    temp_a1 = var_s0->unk138;
-                    if (temp_a1 != 0) {
-                        Gdynlight_ReleaseLight(&D_8013B1A8, temp_a1);
-                        var_s0->unk138 = 0;
+                    light = effect->lightHandle;
+                    if (light != 0) {
+                        Gdynlight_ReleaseLight(&g_dynamicLightPool, light);
+                        effect->lightHandle = 0;
                     }
-                    temp_v1_3 = var_s0->refCount;
-                    if (temp_v1_3 != 0) {
-                        *temp_v1_3 -= 1;
+                    referenceCount = effect->refCount;
+                    if (referenceCount != 0) {
+                        *referenceCount -= 1;
                     }
-                    var_s0->flags = var_s0->flags & 0xFDFFFEFF;
-                    func_80255ED8_de(var_s0->list, var_s0);
-                    var_s0->list = 0;
-                    func_80255CB8_de(&effectSystem->free, var_s0);
-                    if (var_s0->flags & 0x01000000) {
-                        func_80255ED8_de(&effectSystem->groups, var_s0);
+                    effect->flags = effect->flags & 0xFDFFFEFF;
+                    List_RemoveIntrusive(effect->list, effect);
+                    effect->list = 0;
+                    List_PrependIntrusive(&effectSystem->free, effect);
+                    if (effect->flags & 0x01000000) {
+                        List_RemoveIntrusive(&effectSystem->groups, effect);
                     }
                 }
             }
-            var_s0 = next;
-        } while (var_s0 != 0);
+            effect = next;
+        } while (effect != 0);
     }
 }
 
-s32 Particle_CountOwnerListOneEffects(struct EffectSystem *effectSystem, s32 arg1) {
+s32 Particle_CountOwnerListOneEffects(struct EffectSystem *effectSystem, s32 ownerAddress) {
     ParticleEffect *record;
     s32 count;
     u16 v;
@@ -135,7 +135,7 @@ s32 Particle_CountOwnerListOneEffects(struct EffectSystem *effectSystem, s32 arg
     if (record != 0) {
         do {
             v = record->kind;
-            if (((v == 0x3EF) || (v == 0x41E)) && (record->owner == (void *)arg1)) {
+            if (((v == 0x3EF) || (v == 0x41E)) && (record->owner == (void *)ownerAddress)) {
                 count += 1;
             }
             record = record->next;
@@ -144,107 +144,107 @@ s32 Particle_CountOwnerListOneEffects(struct EffectSystem *effectSystem, s32 arg
     return count;
 }
 
-void Particle_ReleaseOwnerListTwoEffects(struct EffectSystem *effectSystem, s32 arg1) {
-    s32 *temp_v1_3;
-    s32 temp_a1;
+void Particle_ReleaseOwnerListTwoEffects(struct EffectSystem *effectSystem, s32 ownerAddress) {
+    s32 *referenceCount;
+    s32 light;
     s32 flags;
     u16 kind;
     ParticleEffect *next;
-    ParticleEffect *var_s0;
+    ParticleEffect *effect;
 
-    var_s0 = effectSystem->lists[2].head;
-    if (var_s0 != 0) {
+    effect = effectSystem->lists[2].head;
+    if (effect != 0) {
         do {
-            kind = var_s0->kind;
-            next = var_s0->next;
+            kind = effect->kind;
+            next = effect->next;
             if (((kind == 0x414) || (kind == 0x42D)) &&
-                (var_s0->owner == (void *)arg1)) {
-                flags = var_s0->flags;
+                (effect->owner == (void *)ownerAddress)) {
+                flags = effect->flags;
                 if (flags & 0x100) {
                   if (!(flags & 0x800)) {
-                    Particle_FinishActorEffects(var_s0);
-                    if (var_s0->unk1D9 != 0) {
-                        Particle_UpdateMatrix(var_s0);
-                        Fx_DetachParticleSwooshes(&D_801379C0, var_s0);
+                    Particle_FinishActorEffects(effect);
+                    if (effect->releaseRequested != 0) {
+                        Particle_UpdateMatrix(effect);
+                        Fx_DetachParticleSwooshes(&g_actorParticleScene, effect);
                     }
-                    temp_a1 = var_s0->unk138;
-                    if (temp_a1 != 0) {
-                        Gdynlight_ReleaseLight(&D_8013B1A8, temp_a1);
-                        var_s0->unk138 = 0;
+                    light = effect->lightHandle;
+                    if (light != 0) {
+                        Gdynlight_ReleaseLight(&g_dynamicLightPool, light);
+                        effect->lightHandle = 0;
                     }
-                    temp_v1_3 = var_s0->refCount;
-                    if (temp_v1_3 != 0) {
-                        *temp_v1_3 -= 1;
+                    referenceCount = effect->refCount;
+                    if (referenceCount != 0) {
+                        *referenceCount -= 1;
                     }
-                    var_s0->flags =
-                        var_s0->flags & 0xFDFFFEFF;
-                    func_80255ED8_de(var_s0->list, var_s0);
-                    var_s0->list = 0;
-                    func_80255CB8_de(&effectSystem->free, var_s0);
-                    if (var_s0->flags & 0x01000000) {
-                        func_80255ED8_de(&effectSystem->groups, var_s0);
+                    effect->flags =
+                        effect->flags & 0xFDFFFEFF;
+                    List_RemoveIntrusive(effect->list, effect);
+                    effect->list = 0;
+                    List_PrependIntrusive(&effectSystem->free, effect);
+                    if (effect->flags & 0x01000000) {
+                        List_RemoveIntrusive(&effectSystem->groups, effect);
                     }
                   }
                 }
             }
-            var_s0 = next;
-        } while (var_s0 != 0);
+            effect = next;
+        } while (effect != 0);
     }
 }
 
-int Particle_GetEffectResource(void *arg0) {
-    ObjParticleInitializeAttachmentsAndSound *actor = arg0;
+int Particle_GetEffectResource(void *particle) {
+    ObjParticleInitializeAttachmentsAndSound *actor = particle;
     return (int)actor->effectResource;
 }
 
-s32 Particle_GetRenderLayer(void *arg0) {
-    ObjParticleInitializeAttachmentsAndSound *object = arg0;
+s32 Particle_GetRenderLayer(void *particle) {
+    ObjParticleInitializeAttachmentsAndSound *object = particle;
     s32 result;
 
     result = 0;
     if ((*object->effectFlags) & 0x02000000) {
-        if (object->unk5C & 2) {
+        if (object->flags & 2) {
             result = 2;
-        } else if (D_801462C8.firstListMode == 2) {
+        } else if (g_gameSettings.bloodMode == 2) {
             result = 1;
         }
     }
     return result;
 }
 
-void Particle_InitializeObjectLinks(void *arg0) {
-    (((struct ObjectLinks1E8 *) ((s8 *) arg0))->unk_18) = &D_8011ADB0;
-    (((struct ObjectLinks1E8 *) ((s8 *) arg0))->unk_0) = 2;
-    (((struct ObjectLinks1E8 *) ((s8 *) arg0))->unk_5C) = 0;
-    (((struct ObjectLinks1E8 *) ((s8 *) arg0))->unk_1DC) = 0;
-    (((struct ObjectLinks1E8 *) ((s8 *) arg0))->unk_1E4) = 0;
+void Particle_InitializeObjectLinks(void *particle) {
+    (((struct ParticleObjectLinkView *) ((s8 *) particle))->unk_18) = &g_particleActorDefinition;
+    (((struct ParticleObjectLinkView *) ((s8 *) particle))->kind) = 2;
+    (((struct ParticleObjectLinkView *) ((s8 *) particle))->unk_5C) = 0;
+    (((struct ParticleObjectLinkView *) ((s8 *) particle))->unk_1DC) = 0;
+    (((struct ParticleObjectLinkView *) ((s8 *) particle))->unk_1E4) = 0;
 }
 
 void Particle_ReleaseObjectAndSound(void *object) {
-    Particle_Release(&D_8011D8D0, object);
+    Particle_Release(&g_actorParticleEffectSystem, object);
     Particle_StopSound(object);
 }
 
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
-extern Triple D_801002A8;
+extern Triple g_particleSecondaryContactPosition;
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 void Particle_SpawnAtSharedContactPoint(ObjParticleInitializeAttachmentsAndSound *source, s32 kind) {
     CQuatern q;
     CVector3 pos;
 
     if ((*source->effectFlags & 0x10) != 0) {
-        pos = D_801042C8;
+        pos = g_particleZeroVector;
     } else {
         pos = source->rotation;
     }
     q = Graphu64_BuildDirectionQuaternion(&pos);
-    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
                   source->effectCount, kind,
-                  pos, q, *(CVector3 *)&D_80100290.v, 0, D_80100290.w,
-                  (source->unk5C & 0x200006) | 1);
+                  pos, q, *(CVector3 *)&g_particlePrimaryContactPosition.v, 0, g_particlePrimaryContactPosition.w,
+                  (source->flags & 0x200006) | 1);
 }
 
 void Particle_SpawnWithModeMinusThree(ObjParticleInitializeAttachmentsAndSound *source, s32 kind) {
@@ -252,17 +252,17 @@ void Particle_SpawnWithModeMinusThree(ObjParticleInitializeAttachmentsAndSound *
     CVector3 position;
 
     if ((*source->effectFlags & 0x10) != 0) {
-        position = D_801042C8;
+        position = g_particleZeroVector;
     } else {
         position = source->rotation;
     }
     rotation = Graphu64_BuildDirectionQuaternion(&position);
-    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
                   source->effectCount, kind,
-                  position, rotation, *(CVector3 *)&D_801002A8, 0, -3,
-                  (source->unk5C & 0x200006) | 1);
+                  position, rotation, *(CVector3 *)&g_particleSecondaryContactPosition, 0, -3,
+                  (source->flags & 0x200006) | 1);
 }
 
 void Particle_SpawnWithModeMinusTwo(ObjParticleInitializeAttachmentsAndSound *source, s32 kind) {
@@ -270,17 +270,17 @@ void Particle_SpawnWithModeMinusTwo(ObjParticleInitializeAttachmentsAndSound *so
     CVector3 position;
 
     if ((*source->effectFlags & 0x10) != 0) {
-        position = D_801042C8;
+        position = g_particleZeroVector;
     } else {
         position = source->rotation;
     }
     rotation = Graphu64_BuildDirectionQuaternion(&position);
-    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
                   source->effectCount, kind,
-                  position, rotation, *(CVector3 *)&D_801002A8, 0, -2,
-                  (source->unk5C & 0x200006) | 1);
+                  position, rotation, *(CVector3 *)&g_particleSecondaryContactPosition, 0, -2,
+                  (source->flags & 0x200006) | 1);
 }
 
 void Particle_SpawnWithModeMinusFive(ObjParticleInitializeAttachmentsAndSound *source, s32 kind) {
@@ -288,86 +288,86 @@ void Particle_SpawnWithModeMinusFive(ObjParticleInitializeAttachmentsAndSound *s
     CVector3 position;
 
     if (*source->effectFlags & 0x10) {
-        position = D_801042C8;
+        position = g_particleZeroVector;
     } else {
         position = source->rotation;
     }
     rotation = Graphu64_BuildDirectionQuaternion(&position);
-    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
                   source->effectCount, kind,
-                  position, rotation, *(CVector3 *)&D_801002B8, 0, -5,
-                  (source->unk5C & 0x200006) | 1);
+                  position, rotation, *(CVector3 *)&g_particleTertiaryContactPosition, 0, -5,
+                  (source->flags & 0x200006) | 1);
 }
 
-void Particle_InitializeAttachmentsAndSound(ObjParticleInitializeAttachmentsAndSound *actor, ParamsParticleInitializeAttachmentsAndSound *arg1) {
-    s32 temp_t0;
-    s8 temp_a1;
+void Particle_InitializeAttachmentsAndSound(ObjParticleInitializeAttachmentsAndSound *actor, ParamsParticleInitializeAttachmentsAndSound *parameters) {
+    s32 soundId;
+    s8 lightType;
     s8 resourceId;
-    u16 temp_v1;
+    u16 unusedValue;
     Particle_Attach((Shared_Particle *)actor, 0, 0);
-    resourceId = arg1->unk6;
+    resourceId = parameters->resourceId;
     if (resourceId != -1) {
-        Fx_AttachActorRibbon(&D_801379C0, actor, resourceId);
+        Fx_AttachActorRibbon(&g_actorParticleScene, actor, resourceId);
     }
-    temp_a1 = arg1->unk7;
-    actor->unk138 = temp_a1 == -1 ? 0 : Gdynlight_AllocateWorldLight(&D_8013B1A8, temp_a1);
-    if (!(actor->unk5C & 0x200000) && (temp_t0 = arg1->unkC, (temp_t0 != 0))) {
-        switch(actor->unk4) {
+    lightType = parameters->attachmentIndex;
+    actor->soundHandle = lightType == -1 ? 0 : Gdynlight_AllocateWorldLight(&g_dynamicLightPool, lightType);
+    if (!(actor->flags & 0x200000) && (soundId = parameters->soundId, (soundId != 0))) {
+        switch(actor->modelId) {
         case 0x22: case 0x5f: case 0x60:
-            Particle_PlayAttachedSound(actor,temp_t0); break;
+            Particle_PlayAttachedSound(actor,soundId); break;
         default:
-            SoundElement_PlaySoundAtPosition(temp_t0, *(CVector3 *)&actor->unk8, 0, -1); break;
+            SoundElement_PlaySoundAtPosition(soundId, *(CVector3 *)&actor->positionX, 0, -1); break;
         }
     }
 }
 
-void Particle_ReleaseAttachments(void *arg0) {
-    s32 temp;
+void Particle_ReleaseAttachments(void *particle) {
+    s32 attachmentLightHandle;
 
-    if (((ObjParticleInitializeAttachmentsAndSound *)arg0)->active1D9 != 0) {
-        Particle_UpdateMatrix(arg0);
-        Fx_DetachParticleSwooshes(&D_801379C0, arg0);
+    if (((ObjParticleInitializeAttachmentsAndSound *)particle)->active1D9 != 0) {
+        Particle_UpdateMatrix(particle);
+        Fx_DetachParticleSwooshes(&g_actorParticleScene, particle);
     }
-    temp = ((ObjParticleInitializeAttachmentsAndSound *)arg0)->unk138;
-    if (temp != 0) {
-        Gdynlight_ReleaseLight(&D_8013B1A8, temp);
-        ((ObjParticleInitializeAttachmentsAndSound *)arg0)->unk138 = 0;
+    attachmentLightHandle = ((ObjParticleInitializeAttachmentsAndSound *)particle)->soundHandle;
+    if (attachmentLightHandle != 0) {
+        Gdynlight_ReleaseLight(&g_dynamicLightPool, attachmentLightHandle);
+        ((ObjParticleInitializeAttachmentsAndSound *)particle)->soundHandle = 0;
     }
 }
 
-void Particle_ApplyDirectionalAcceleration(ObjRecAt174 *arg0) {
+void Particle_ApplyDirectionalAcceleration(DirectionalAccelerationParticle *particle) {
  CVector3 delta, direction;
  CVector3 *velocity, *dir;
  int condition;
  f32 accel, length, limit;
- accel=RW_BITS_TO_FLOAT(arg0->link->params->accel);
+ accel=RW_BITS_TO_FLOAT(particle->link->params->accel);
  if(accel != 0.0f) {
  dir=&direction;
- direction=arg0->direction;
+ direction=particle->direction;
  Graphu64_ScaleVector(&delta,dir,accel);
- velocity=&arg0->velocity;
+ velocity=&particle->velocity;
  Graphu64_AddVec3(velocity,velocity,&delta);
- length=Gu_Sqrtf(arg0->velocity.x*arg0->velocity.x+arg0->velocity.y*arg0->velocity.y+arg0->velocity.z*arg0->velocity.z);
- limit=RW_BITS_TO_FLOAT(arg0->link->params->limit);
+ length=Gu_Sqrtf(particle->velocity.x*particle->velocity.x+particle->velocity.y*particle->velocity.y+particle->velocity.z*particle->velocity.z);
+ limit=RW_BITS_TO_FLOAT(particle->link->params->limit);
  if(accel>0.0f) { if(!(limit<length)) goto done; } else { if(!(length<limit)) goto done; } Graphu64_ScaleVector(velocity,dir,limit); done:;
  }
 }
 
-void Particle_FlagKind86ModeTwo(void *arg0, s32 arg1) {
-    if (((((struct ObjectState60 *) ((s8 *) arg0))->unk_4) == 0x56) && (arg1 == 2)) {
-        (((struct ObjectState60 *) ((s8 *) arg0))->unk_5C) = (s32) ((((struct ObjectState60 *) ((s8 *) arg0))->unk_5C) | 0x04000000);
+void Particle_FlagKind86ModeTwo(void *particle, s32 mode) {
+    if (((((struct ParticleKindFlagsView *) ((s8 *) particle))->unk_4) == 0x56) && (mode == 2)) {
+        (((struct ParticleKindFlagsView *) ((s8 *) particle))->unk_5C) = (s32) ((((struct ParticleKindFlagsView *) ((s8 *) particle))->unk_5C) | 0x04000000);
     }
 }
 
-void Particle_CaptureSharedTrailState(void *arg0) {
-    ((ObjParticleInitializeAttachmentsAndSound *)arg0)->unk5C |= 0x20000;
-    ((TrailActor *)arg0)->origin = D_801001F8.first;
-    ((TrailActor *)arg0)->position = D_801001F8.second;
+void Particle_CaptureSharedTrailState(void *particle) {
+    ((ObjParticleInitializeAttachmentsAndSound *)particle)->flags |= 0x20000;
+    ((TrailActor *)particle)->origin = g_particleContactState.first;
+    ((TrailActor *)particle)->position = g_particleContactState.second;
 }
 
-void Particle_AttachToCurrentTarget(void *arg0, f32 *arg1, s32 arg2) {
+void Particle_AttachToCurrentTarget(void *particle, f32 *attachmentMatrix, s32 attachmentMode) {
     f32 source[16];
     f32 matrix[16];
     CVector3 direction;
@@ -378,18 +378,18 @@ void Particle_AttachToCurrentTarget(void *arg0, f32 *arg1, s32 arg2) {
     SceneState *scene;
     CVector3 *direction_ptr;
 
-    actor = arg0;
-    mode = arg2;
-    current = D_801041F0.current;
-    if (arg1 != 0) {
-        Graphu64_InvertAffineMatrix(matrix, arg1);
+    actor = particle;
+    mode = attachmentMode;
+    current = g_currentActorInstance.current;
+    if (attachmentMatrix != 0) {
+        Graphu64_InvertAffineMatrix(matrix, attachmentMatrix);
     } else {
         Graphu64_ConvertMatrixToFloat(source,
-            &current->drawMatrices[D_801041F0.frame]);
+            &current->drawMatrices[g_currentActorInstance.frame]);
         Graphu64_InvertAffineMatrix(matrix, source);
     }
     matrix_ptr = matrix;
-    scene = &D_801001F8;
+    scene = &g_particleContactState;
     Graphu64_TransformPoint(matrix_ptr, scene, &((Shared_Particle *)actor)->attachmentPosition);
     direction_ptr = &direction;
     direction = scene->direction;
@@ -404,87 +404,87 @@ void Particle_AttachToCurrentTarget(void *arg0, f32 *arg1, s32 arg2) {
 }
 
 /** Return arg0, but treat the sentinel value 0xA as 0. */
-s32 Particle_MapEventTenToZero(s32 arg0) {
-    if (arg0 == 0xA) {
+s32 Particle_MapEventTenToZero(s32 eventId) {
+    if (eventId == 0xA) {
         return 0;
     }
-    return arg0;
+    return eventId;
 }
 
 void Particle_DispatchActorContactEvents(void *actor) {
     struct IntPair pair;
-    s32 temp_a1;
+    s32 surfaceIndexBytes;
     struct Shared_ParticleEvents *events;
-    s32 var_a0;
-    s32 temp_a2;
+    s32 surfaceEventIndex;
+    s32 effectId;
     s32 model;
-    s32 temp_s3;
+    s32 soundId;
     struct Shared_ParticleDesc *particleDescription;
-    void *temp_v0_2;
-    void *temp_v1;
+    void *eventParameterAddress;
+    void *eventHalfwordAddress;
 
     particleDescription = ((Shared_Particle *)actor)->desc;
     if (Particle_HasSurfaceFlag(actor) != 0) {
-        var_a0 = 0xC;
+        surfaceEventIndex = 0xC;
     } else {
-        var_a0 = 0xA;
+        surfaceEventIndex = 0xA;
     }
-    temp_a1 = var_a0 * 2;
+    surfaceIndexBytes = surfaceEventIndex * 2;
     events = particleDescription->events;
-    temp_v1 = (char *)events + temp_a1;
-    model = events->particles[var_a0];
-    temp_a2 = events->effects[var_a0];
-    temp_v0_2 = (char *)events + (var_a0 * 8);
-    pair = events->parameters[var_a0];
-    temp_s3 = particleDescription->events->sounds[var_a0];
-    if (temp_a2 != 0xFFFF) {
-        Events_DeliverContactEffect(actor, actor, temp_a2, -1,
+    eventHalfwordAddress = (char *)events + surfaceIndexBytes;
+    model = events->particles[surfaceEventIndex];
+    effectId = events->effects[surfaceEventIndex];
+    eventParameterAddress = (char *)events + (surfaceEventIndex * 8);
+    pair = events->parameters[surfaceEventIndex];
+    soundId = particleDescription->events->sounds[surfaceEventIndex];
+    if (effectId != 0xFFFF) {
+        Events_DeliverContactEffect(actor, actor, effectId, -1,
                      ((Shared_Particle *)actor)->inst.pos, pair);
     }
     if (model != 0xFFFF) {
         Particle_SpawnChildEffect(actor, model, ((Shared_Particle *)actor)->space, 1);
     }
-    if (temp_s3 != 0xFFFF) {
-        SoundElement_PlaySoundAtPosition((s16)temp_s3,
+    if (soundId != 0xFFFF) {
+        SoundElement_PlaySoundAtPosition((s16)soundId,
                       ((Shared_Particle *)actor)->inst.pos, 0, -1);
     }
 }
 
 void Particle_DispatchSpatialContactEvents(void *particle) {
     struct IntPair pair;
-    s32 temp_a1;
+    s32 surfaceIndexBytes;
     struct Shared_ParticleEvents *events;
-    s32 var_a0;
-    s32 temp_a2;
-    s32 temp_s2;
-    s32 temp_s3;
+    s32 surfaceEventIndex;
+    s32 effectId;
+    s32 childParticleType;
+    s32 soundId;
     struct Shared_ParticleDesc *particleDescription;
-    void *temp_v0_2;
-    void *temp_v1;
+    void *eventParameterAddress;
+    void *eventHalfwordAddress;
 
     particleDescription = ((Shared_Particle *)particle)->desc;
     if (Particle_HasSurfaceFlag(particle) != 0) {
-        var_a0 = 0xD;
+        surfaceEventIndex = 0xD;
     } else {
-        var_a0 = 0xB;
+        surfaceEventIndex = 0xB;
     }
-    temp_a1 = var_a0 * 2;
+    surfaceIndexBytes = surfaceEventIndex * 2;
     events = particleDescription->events;
-    temp_v1 = (char *)events + temp_a1;
-    temp_s2 = events->particles[var_a0];
-    temp_a2 = events->effects[var_a0];
-    temp_v0_2 = (char *)events + (var_a0 * 8);
-    pair = events->parameters[var_a0];
-    temp_s3 = particleDescription->events->sounds[var_a0];
-    if (temp_a2 != 0xFFFF) {
-        Events_DeliverContactEffect(particle, particle, temp_a2, -1,
+    eventHalfwordAddress = (char *)events + surfaceIndexBytes;
+    childParticleType = events->particles[surfaceEventIndex];
+    effectId = events->effects[surfaceEventIndex];
+    eventParameterAddress = (char *)events + (surfaceEventIndex * 8);
+    pair = events->parameters[surfaceEventIndex];
+    soundId = particleDescription->events->sounds[surfaceEventIndex];
+    if (effectId != 0xFFFF) {
+        Events_DeliverContactEffect(particle, particle, effectId, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);
     }
-    if (temp_s2 != 0xFFFF) {
-        Particle_SpawnChildEffect(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
+    if (childParticleType != 0xFFFF) {
+        Particle_SpawnChildEffect(particle, childParticleType, ((Shared_Particle *)particle)->space, 1);
     }
-    if (temp_s3 != 0xFFFF) {
-        SoundElement_PlaySoundAtPosition((s16)temp_s3,
+    if (soundId != 0xFFFF) {
+        SoundElement_PlaySoundAtPosition((s16)soundId,
                       ((Shared_Particle *)particle)->inst.pos,
                       (s32)&((Shared_Particle *)particle)->inst.pos, (s32)particle);
     }
@@ -492,39 +492,39 @@ void Particle_DispatchSpatialContactEvents(void *particle) {
 
 void Particle_DispatchParticleContactEvents(void *particle) {
     struct IntPair pair;
-    s32 temp_a1;
+    s32 surfaceIndexBytes;
     struct Shared_ParticleEvents *events;
-    s32 var_a0;
-    s32 temp_a2;
-    s32 temp_s2;
-    s32 temp_s3;
+    s32 surfaceEventIndex;
+    s32 effectId;
+    s32 childParticleType;
+    s32 soundId;
     struct Shared_ParticleDesc *particleDescription;
-    void *temp_v0_2;
-    void *temp_v1;
+    void *eventParameterAddress;
+    void *eventHalfwordAddress;
 
     particleDescription = ((Shared_Particle *)particle)->desc;
     if (Particle_HasSurfaceFlag(particle) != 0) {
-        var_a0 = 0xC;
+        surfaceEventIndex = 0xC;
     } else {
-        var_a0 = 0xA;
+        surfaceEventIndex = 0xA;
     }
-    temp_a1 = var_a0 * 2;
+    surfaceIndexBytes = surfaceEventIndex * 2;
     events = particleDescription->events;
-    temp_v1 = (char *)events + temp_a1;
-    temp_s2 = events->particles[var_a0];
-    temp_a2 = events->effects[var_a0];
-    temp_v0_2 = (char *)events + (var_a0 * 8);
-    pair = events->parameters[var_a0];
-    temp_s3 = particleDescription->events->sounds[var_a0];
-    if (temp_a2 != 0xFFFF) {
-        Events_DeliverContactEffect(particle, particle, temp_a2, -1,
+    eventHalfwordAddress = (char *)events + surfaceIndexBytes;
+    childParticleType = events->particles[surfaceEventIndex];
+    effectId = events->effects[surfaceEventIndex];
+    eventParameterAddress = (char *)events + (surfaceEventIndex * 8);
+    pair = events->parameters[surfaceEventIndex];
+    soundId = particleDescription->events->sounds[surfaceEventIndex];
+    if (effectId != 0xFFFF) {
+        Events_DeliverContactEffect(particle, particle, effectId, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);
     }
-    if (temp_s2 != 0xFFFF) {
-        Particle_SpawnChildEffect(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
+    if (childParticleType != 0xFFFF) {
+        Particle_SpawnChildEffect(particle, childParticleType, ((Shared_Particle *)particle)->space, 1);
     }
-    if (temp_s3 != 0xFFFF) {
-        SoundElement_PlaySoundAtPosition((s16)temp_s3,
+    if (soundId != 0xFFFF) {
+        SoundElement_PlaySoundAtPosition((s16)soundId,
                       ((Shared_Particle *)particle)->inst.pos, 0, -1);
     }
 }

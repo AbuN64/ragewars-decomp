@@ -9,9 +9,9 @@
 #include "SYSTEM/POLYTRAK2_INTERPOLATEJOINTQUATERNION.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-extern void Graphu64_InterpolateVector(CVector3 *arg0, s32 arg1, void *arg2, void *arg3);
+extern void Graphu64_InterpolateVector(CVector3 *result, s32 weight, void *firstVector, void *secondVector);
 
-extern void Graphu64_InterpolateQuaternionArc(void *out, s32 amount, void *arg2, void *arg3);
+extern void Graphu64_InterpolateQuaternionArc(void *out, s32 amount, void *firstQuaternion, void *secondQuaternion);
 
 /** Return the first word of the object referenced at offset 0x10. */
 void *Polytrak2_GetResidentResource(void *object) {
@@ -20,8 +20,8 @@ void *Polytrak2_GetResidentResource(void *object) {
 }
 
 void Polytrak2_InterpolateJointTranslation(void *animationLinks, s32 jointIndex, void *translationOut) {
-    ObjectLinks24_2 *o = animationLinks;
-    ObjRecAt2V1 *indices = (void *)o->unk_0;
+    BoneRotationTrackView *o = animationLinks;
+    BoneRotationIndexPair *indices = (void *)o->unk_0;
     s16 idx;
     RecGobjinstSampleBoneTranslation *recs;
     void *base;
@@ -40,18 +40,18 @@ void Polytrak2_InterpolateJointTranslation(void *animationLinks, s32 jointIndex,
 }
 
 void Polytrak2_InterpolateJointQuaternion(void *animationLinks, s32 jointIndex, void *cQuatern) {
-    ObjectLinks24_2 *o = animationLinks;
+    BoneRotationTrackView *o = animationLinks;
     CQuatern *out = cQuatern;
-    ObjRecAt2V1 *indices = (void *)o->unk_0;
+    BoneRotationIndexPair *indices = (void *)o->unk_0;
     s16 idx;
     CROMInitialOrientation_t *rec;
     void *base;
     f32 scale;
 
-    idx = indices[jointIndex].unk2;
+    idx = indices[jointIndex].rotationIndex;
     if (idx == -1) {
         rec = (void *)(o->unk_4 + jointIndex * 0x14);
-        scale = D_800C416C_de;
+        scale = g_jointInterpolationAngleScale;
         out->x = (f32)(rec->unk_C) * scale;
         out->y = (f32)(rec->m_RotY) * scale;
         out->z = (f32)(rec->unk_10) * scale;
@@ -140,7 +140,7 @@ void Polytrak2_WriteBitsAtAddress(u32 bitAddress, u32 bitCount, u32 fieldValue) 
     }
     wordAddress = (bitAddress & 0xF0000000) | ((u32)(bitAddress & 0x0FFFFFE0) >> 3);
     *(s32 *)wordAddress = (*(s32 *)wordAddress & ~firstWordMask) | firstWordValue;
-    ((struct func_80203E78_S1 *) wordAddress)->unk4 = (((struct func_80203E78_S1 *) wordAddress)->unk4 & ~overflowMask) | overflowValue;
+    ((struct ResourceKeyView *) wordAddress)->key = (((struct ResourceKeyView *) wordAddress)->key & ~overflowMask) | overflowValue;
 }
 
 u32 Polytrak2_ReadBitsAndAdvance(u32 *stream, u32 width) {
@@ -199,7 +199,7 @@ void Polytrak2_WriteBitsAndAdvance(u32 *bitCursor, u32 bitCount, u32 fieldValue)
     }
     wordAddress = (value & 0xF0000000) | ((u32)(value & 0x0FFFFFE0) >> 3);
     *(s32 *)wordAddress = (*(s32 *)wordAddress & ~firstWordMask) | firstWordValue;
-    ((struct func_80203E78_S1 *) wordAddress)->unk4 = (((struct func_80203E78_S1 *) wordAddress)->unk4 & ~overflowMask) | overflowValue;
+    ((struct ResourceKeyView *) wordAddress)->key = (((struct ResourceKeyView *) wordAddress)->key & ~overflowMask) | overflowValue;
     *bitCursor += bitCount;
 }
 

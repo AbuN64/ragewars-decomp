@@ -14,14 +14,14 @@ unsigned int data_unresolved_800C1E74[3] = {
 /* 800C2298.CPP */
 #if defined(VERSION_EU)
 /* ROM-grounded data for eu; supplied-list member has no us-rev1 placement. */
-unsigned int D_blob_92158f5607296072ba32[2] = {
+unsigned int g_NavCheckcloseattackrouteEncodedWords[2] = {
     0x1420FFFD, 0x25080010,
 };
 #endif
 
 /* 80208000_28.CPP */
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C2084[3] = {
+unsigned int k_NavCheckcloseattackrouteEncodedWordsBlock2[3] = {
     0x3F000000, 0x3F83126F, 0xBF83126F,
 };
 #endif

@@ -2,10 +2,10 @@
 #define SCENE_SHARED_S9_H
 #include "TYPES.H"
 
-typedef struct Shared_func_80286A78_S9 Shared_func_80286A78_S9;
-struct Shared_func_80286A78_S9 {
+typedef struct ScenePackedResourceCountView ScenePackedResourceCountView;
+struct ScenePackedResourceCountView {
     char pad0[0x4];
-    s32 unk4; /* +0x4: src/func_80286A78.c */
+    s32 count; /* +0x4: src/func_80286A78.c */
 };
-typedef char Shared_func_80286A78_S9_size_check[(sizeof(Shared_func_80286A78_S9) == 0x8) ? 1 : -1];
+typedef char ScenePackedResourceCountSizeCheck[(sizeof(ScenePackedResourceCountView) == 0x8) ? 1 : -1];
 #endif

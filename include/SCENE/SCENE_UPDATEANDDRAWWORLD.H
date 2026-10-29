@@ -4,7 +4,7 @@
 #include "COMMON/FLOOR_RESOURCE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SCENERECAT10C0.H"
-struct Shape_typemap_165;
+struct CacheResourceBlockView;
 typedef struct FloorGrid {
     s32 stride;
     s32 cellCount;
@@ -26,13 +26,13 @@ struct ObjectSceneDrawCachedOpaqueGeometry {
     u16 flags;
     char padDA[0xE8 - 0xDA];
 };
-struct WorldRecAt1B660 {
+struct SceneLevelSwitchCollectionView {
     char pad0[0x138];
-    struct ObjectRecAt18 *objects;
+    struct SceneSwitchObjectView *objects;
     s32 pad13C;
     s32 count;
     char pad144[0x1B620 - 0x144];
-    ObjectRecAt18 *switches[16];
+    SceneSwitchObjectView *switches[16];
     s32 switchCount;
 };
 struct Entity {
@@ -45,7 +45,7 @@ struct GlobalMode {
     char pad[0x1295];
     u8 mode;
 };
-struct ObjectLinks74 {
+struct ScenePackResourceView {
     unsigned char padding_0[112];
     void *unk_70;
 };
@@ -58,7 +58,7 @@ typedef struct DraftStreamWorld {
     char pad34[0xC]; s32 resourceKey;
     char pad44[0x20]; void *table, *grid;
     char pad6C[0x1C]; s32 *cache; void *specialTable;
-    char pad90[0x68]; struct Shape_typemap_165 *cacheHandle;
+    char pad90[0x68]; struct CacheResourceBlockView *cacheHandle;
     char padFC[0x1404]; s32 entryCount, activeCount;
     DraftStreamEntry entries[128];
     char pad1B08[0x1B2FC - 0x1B08]; f32 maximumHeight;
@@ -67,5 +67,5 @@ typedef struct DraftStreamWorld {
     f32 originX, originZ, cellX, cellZ;
     char pad1B920[8]; s32 specialPresent, specialEnabled;
 } DraftStreamWorld;
-extern void Scene_UpdateAndDrawWorld(void *arg0);
+extern void Scene_UpdateAndDrawWorld(void *sceneState);
 #endif

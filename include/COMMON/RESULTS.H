@@ -35,23 +35,23 @@ struct Results {
 
 
 
-extern float D_800C53A8_de;
+extern float g_effectDefaultUpperBound;
 
-struct ObjectLinks3C0C;
+struct ActorPoolFreeListView;
 
 
 struct SceneEffect;
 typedef struct SceneEffect SceneEffect;
 
 
-struct ObjectLinks1E0;
-typedef struct ObjectLinks1E0 ObjectLinks1E0;
+struct VisibleEffectNodeLinks;
+typedef struct VisibleEffectNodeLinks VisibleEffectNodeLinks;
 
-struct ObjectLinks1E0;
+struct VisibleEffectNodeLinks;
 
 
 
-struct ContainerRecAt3C04;
+struct VisibleEffectPoolView;
 struct NodeSetN64CollectVisibleEffectNodes;
 
 
@@ -100,7 +100,7 @@ struct SceneEffect {
 };
 
 struct SceneEffect;
-struct WorldRecAt3C08;
+struct EffectSlotPool;
 /* The world record opens with a pool of 32 effect slots of 0x1E0 bytes each (Effect_InitEffectPool). */
 #define EFFECT_SLOTS 32
 #define EFFECT_STRIDE 0x1E0
@@ -143,7 +143,7 @@ struct EffectSlot {
     struct EffectSlot *prev;
     struct EffectSlot *next;
 };
-struct WorldRecAt3C08 {
+struct EffectSlotPool {
     struct EffectSlot slots[EFFECT_SLOTS];
     struct EffectSlot *free;
     struct EffectSlot *head;
@@ -157,7 +157,7 @@ typedef struct ListNode80290528 ListNode80290528;
 
 struct ListNode80290528;
 struct ListNode80290528 {
-    char unknown000[0x1D0];
+    char instanceStorage[0x1D0];
     unsigned int flags;
     int *reference_count;
     struct ListNode80290528 *previous;
@@ -169,20 +169,20 @@ struct ListNode80290528 {
 
 
 
-struct ObjectLinks3C0C;
-typedef struct ObjectLinks3C0C ObjectLinks3C0C;
+struct ActorPoolFreeListView;
+typedef struct ActorPoolFreeListView ActorPoolFreeListView;
 
 
 
 
 
 
-struct WorldRecAt3C08;
-typedef struct WorldRecAt3C08 WorldRecAt3C08;
+struct EffectSlotPool;
+typedef struct EffectSlotPool EffectSlotPool;
 
 
-struct ContainerRecAt3C04;
-typedef struct ContainerRecAt3C04 ContainerRecAt3C04;
+struct VisibleEffectPoolView;
+typedef struct VisibleEffectPoolView VisibleEffectPoolView;
 
 /* Resident resource chunks have two count/stride words followed by byte payload. */
 typedef struct ResidentDataChunk {

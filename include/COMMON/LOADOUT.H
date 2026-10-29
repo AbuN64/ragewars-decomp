@@ -28,57 +28,57 @@ struct Entry190 {
     u8 pad[0x18C];
 };
 
-struct Shape_typemap_165;
+struct CacheResourceBlockView;
 
 
-struct ObjRecAt16E0V3;
-struct ObjRecAt16E0V3 {
+struct PlayerViewRenderListNode;
+struct PlayerViewRenderListNode {
     char pad0[0xE4];
-    u16 unkE4;
+    u16 modelKind;
     char padE4[0x5DC - 0xE4 - sizeof(u16)];
-    void * unk5DC;
+    void * view;
     char pad5DC[0x16E0 - 0x5DC - sizeof(void*)];
-    void * unk16E0;
+    void * next;
 };
 
-struct ObjectLinks1454_3;
-struct ObjectLinks1454_3 {
+struct PlayerHealthDefinitionView;
+struct PlayerHealthDefinitionView {
     char pad0[0x18];
-    void * unk_18;
+    void * definition;
     char pad18[0x5D4 - 0x18 - sizeof(void*)];
-    s32 unk_5D4;
+    s32 playerIndex;
     char pad5D4[0x5D8 - 0x5D4 - sizeof(s32)];
-    char * unk_5D8;
+    char * options;
     char pad5D8[0x1450 - 0x5D8 - sizeof(char*)];
-    s32 unk_1450;
+    s32 computerControlled;
 };
 
 
 struct Entry190;
 typedef struct Entry190 Entry190;
 
-struct Shape_typemap_165;
+struct CacheResourceBlockView;
 
 
-struct SharedRecAt848;
-typedef struct SharedRecAt848 SharedRecAt848;
+struct PlayerSequenceFadeView;
+typedef struct PlayerSequenceFadeView PlayerSequenceFadeView;
 
-struct SharedRecAt848;
-struct SharedRecAt848 {
+struct PlayerSequenceFadeView;
+struct PlayerSequenceFadeView {
     char pad0[0x840];
     f32 value;
     char pad844[4];
     s32 override;
 };
 
-extern f32 func_8022AA44_de(SharedRecAt848 *rampState);
+extern f32 Playerai_GetSequenceFade(PlayerSequenceFadeView *rampState);
 
-struct func_8022A274_S2;
-struct func_8022A274_S2 {
+struct PlayerViewListNode;
+struct PlayerViewListNode {
     char pad0[0x5DC];
-    void * unk5DC;
+    void * view;
     char pad5DC[0x16E0 - 0x5DC - sizeof(void*)];
-    void * unk16E0;
+    void * next;
 };
 
 
@@ -87,7 +87,7 @@ typedef struct IntegerStateD4 IntegerStateD4;
 
 
 
-extern float D_800C2D04_de;
+extern float g_playerOwnerHeightScale;
 
 struct PlayerWeaponsGetAmmoCapacity;
 typedef struct PlayerWeaponsGetAmmoCapacity PlayerWeaponsGetAmmoCapacity;
@@ -98,7 +98,7 @@ struct Node_Weapons_EndRound {
     u8 pad0[0x5D8];
     u8 *state;
     u8 pad5DC[0x280];
-    s32 field85C;
+    s32 roundEndTimer;
     u8 pad860[0xE80];
     struct Node_Weapons_EndRound *next;
 };
@@ -112,42 +112,42 @@ struct IntegerStateD4 {
 };
 
 
-struct func_8022A8B8_S2;
-struct func_8022A8B8_S2 {
+struct PlayerTimeScaleListNode;
+struct PlayerTimeScaleListNode {
     char pad0[0x670];
-    f32 unk670;
+    f32 timeScale;
     char pad670[0x16E0 - 0x670 - sizeof(f32)];
-    char * unk16E0;
+    char * next;
 };
 
-extern int func_8022AE28_de(void *player, void *newPosition);
+extern int Playerai_SetPositionAndFloor(void *player, void *newPosition);
 
 struct Context;
-extern void *func_8022A634_de(struct Context *context, u32 viewPlayerIndex);
+extern void *Playerai_GetPlayerByViewIndex(struct Context *context, u32 viewPlayerIndex);
 
-extern void func_8022A95C_de(void *player);
-
-
-
-struct ObjRecAtB4;
-typedef struct ObjRecAtB4 ObjRecAtB4;
-
-extern float D_800C2CE8_de;
+extern void Playerai_UpdateHeldWeaponPose(void *player);
 
 
 
+struct TrackedRecordValueView;
+typedef struct TrackedRecordValueView TrackedRecordValueView;
 
-extern void func_8022A940_de(Shared_Effect *effect);
-
-
-extern void func_8022A8C8_de(char *object, f32 arg1);
-
-extern void func_8022A928_de(ObjRecAtB4 *record, int newValue);
+extern float g_playerNearestLiveDistanceLimit;
 
 
 
 
-extern float D_800C2D08_de;
+extern void Playerai_StopActiveEffect(Shared_Effect *effect);
+
+
+extern void Playerai_SetAllPlayerTimeScales(char *object, f32 timeScale);
+
+extern void Playerai_SetTrackedRecordValue(TrackedRecordValueView *record, int newValue);
+
+
+
+
+extern float g_playerUndefinedActorHeight;
 
 
 
@@ -160,16 +160,16 @@ typedef struct GlobalState GlobalState;
 
 
 
-struct func_8022A470_S2;
-typedef struct func_8022A470_S2 func_8022A470_S2;
+struct PlayerPositionListNode;
+typedef struct PlayerPositionListNode PlayerPositionListNode;
 
 
-struct ObjRecAtB4;
-struct ObjRecAtB4 {
+struct TrackedRecordValueView;
+struct TrackedRecordValueView {
     char pad0[0x4];
-    int unk4;
+    int value;
     char pad4[0xB4 - 0x4 - sizeof(int)];
-    int unkB4;
+    int repeatedValue;
 };
 
 
@@ -179,22 +179,22 @@ struct ObjRecAtB4 {
 
 
 
-struct ObjectLinks1454_3;
-typedef struct ObjectLinks1454_3 ObjectLinks1454_3;
+struct PlayerHealthDefinitionView;
+typedef struct PlayerHealthDefinitionView PlayerHealthDefinitionView;
 
 
-struct func_8022A274_S2;
-typedef struct func_8022A274_S2 func_8022A274_S2;
+struct PlayerViewListNode;
+typedef struct PlayerViewListNode PlayerViewListNode;
 
-struct ObjRecAt16E0V3;
-typedef struct ObjRecAt16E0V3 ObjRecAt16E0V3;
+struct PlayerViewRenderListNode;
+typedef struct PlayerViewRenderListNode PlayerViewRenderListNode;
 
 struct GlobalState;
 struct GlobalState {
     u8 pad0[0x1C];
     s32 field1C;
-    s32 field20;
-    s32 field24;
+    s32 primaryFireMode;
+    s32 alternateFireMode;
     s32 field28;
     u8 pad2C[0x28];
     s32 restricted; /* 0x54 */
@@ -204,20 +204,20 @@ struct GlobalState {
 
 struct Node_Weapons_EndRound;
 
-struct func_8022A8B8_S2;
-typedef struct func_8022A8B8_S2 func_8022A8B8_S2;
+struct PlayerTimeScaleListNode;
+typedef struct PlayerTimeScaleListNode PlayerTimeScaleListNode;
 
-struct func_8022A470_S2;
-struct func_8022A470_S2 {
+struct PlayerPositionListNode;
+struct PlayerPositionListNode {
     char pad0[0x8];
-    f32 unk8;
+    f32 positionX;
     char pad8[0xC - 0x8 - sizeof(f32)];
-    f32 unkC;
+    f32 positionY;
     char padC[0x10 - 0xC - sizeof(f32)];
-    f32 unk10;
+    f32 positionZ;
     char pad10[0x16E0 - 0x10 - sizeof(f32)];
-    void * unk16E0;
+    void * next;
 };
 
-extern float D_800C2D00_de;
+extern float g_playerDefaultOwnerHeight;
 #endif

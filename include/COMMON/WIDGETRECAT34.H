@@ -4,8 +4,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 extern void Node_InitializeResourceState(void);
 
-struct WidgetRecAt34;
-typedef struct WidgetRecAt34 WidgetRecAt34;
+struct WidgetTextureRetentionView;
+typedef struct WidgetTextureRetentionView WidgetTextureRetentionView;
 
 extern s16 Node_GetResourceLanguageCount(void);
 
@@ -56,17 +56,17 @@ struct ManagerFrontendReleaseAllChunkImages {
 
 extern signed char Node_GetFontCharacterHeight(int entry, int index);
 
-struct WidgetRecAt34;
-struct WidgetRecAt34 {
+struct WidgetTextureRetentionView;
+struct WidgetTextureRetentionView {
     char pad0[4];
-    struct WidgetRecAt34 *next;
-    struct WidgetRecAt34 *child;
+    struct WidgetTextureRetentionView *next;
+    struct WidgetTextureRetentionView *child;
     char padC[2];
     u16 type;
     char pad10[0x1C];
-    struct WidgetRecAt34 *normal;
-    struct WidgetRecAt34 *highlighted;
-    struct WidgetRecAt34 *pressed;
+    struct WidgetTextureRetentionView *normal;
+    struct WidgetTextureRetentionView *highlighted;
+    struct WidgetTextureRetentionView *pressed;
 };
 
 #endif

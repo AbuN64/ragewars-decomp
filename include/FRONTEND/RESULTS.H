@@ -1,9 +1,9 @@
 #ifndef FRONTEND_RESULTS_H
 #define FRONTEND_RESULTS_H
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 extern struct Pair g_arenaCompatibilityTable[];
-extern char D_800EE048[];
-extern char D_800EE050[];
+extern char g_resultsBestTimeFormatEuro[];
+extern char g_resultsBestTimePlaceholderEuro[];
 extern s32 Results_IsUnlockLinked(s32 a, s32 b);
 #endif

@@ -15,30 +15,30 @@ struct TargetPakDisablePreviewSelection {
     char padAC[0xD0 - 0xAC];
     s32 second;
 };
-struct RecordRecAtCV1;
+struct PakPreviewSelectionView;
 struct TargetPakDisablePreviewSelection;
 
-struct RecordRecAtCV1;
+struct PakPreviewSelectionView;
 
 struct PakPreview;
 typedef struct PakPreview PakPreview;
 
 
-struct RecordRecAt20V2;
+struct PakChannelResultView;
 struct PakMenuSlot;
 
 struct PakPreview;
 
 
-struct RecordRecAt24;
+struct PakSelectedPromptView;
 
-struct RecordRecAt24;
+struct PakSelectedPromptView;
 
-struct OwnerRecAt5D8V1;
+struct PlayerSavedProfileOwner;
 
 struct Shared_PakMenu;
 
-struct RecordRecAt20V2;
+struct PakChannelResultView;
 
 struct Shared_PakMenu;
 

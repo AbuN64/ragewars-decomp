@@ -21,24 +21,24 @@ s32 PAKInterface_MoveNameCursorForward(s32 unusedA, s32 unusedB, s32 index, s32 
   s32 slot = index & 0xFFFF;
   s32 offset = slot * 0xB68;
   void *handle;
-  if ((D_800E54A4->players[slot].state) == 0xC)
+  if ((g_pakProfileScreenState->players[slot].state) == 0xC)
   {
-    handle = SmpOverlay_GetSlotValue((s32)D_800E54A4->list, slot);
-    D_800E54A4->players[slot].nameTimer = 0;
-    D_800E54A4->players[slot].namePhase = 2;
+    handle = SmpOverlay_GetSlotValue((s32)g_pakProfileScreenState->list, slot);
+    g_pakProfileScreenState->players[slot].nameTimer = 0;
+    g_pakProfileScreenState->players[slot].namePhase = 2;
     if (mode == 1)
     {
-      s32 tier = (D_800E54A4->players[slot].nameCursor) + 1;
+      s32 tier = (g_pakProfileScreenState->players[slot].nameCursor) + 1;
       if (tier < 7)
       {
-        D_800E54A4->players[slot].nameCursor = tier;
+        g_pakProfileScreenState->players[slot].nameCursor = tier;
       }
       {
-        if (D_800E54A4->players[slot].name[D_800E54A4->players[slot].nameCursor].available == 0) {
-          D_800E54A4->players[slot].name[D_800E54A4->players[slot].nameCursor].available = 0x41;
+        if (g_pakProfileScreenState->players[slot].name[g_pakProfileScreenState->players[slot].nameCursor].available == 0) {
+          g_pakProfileScreenState->players[slot].name[g_pakProfileScreenState->players[slot].nameCursor].available = 0x41;
         }
       }
-      ((struct Shape_typemap_21 *)(handle))->field_10 = 0xFF;
+      ((struct WidgetFlagsView *)(handle))->field_10 = 0xFF;
       SoundElement_PlayFlatSound(0xE74);
     }
   }

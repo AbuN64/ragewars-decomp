@@ -1,6 +1,6 @@
 #include "include_asm.h"
-#include "MENU/80406A88_6.H"
-#include "COMMON/EXTERNS_20.H"
+#include "MENU/LOCALIZED_GAME_OPTION_CHOICES.H"
+#include "COMMON/FRONTEND_RESOURCE_LOAD_STATE.H"
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
 /* 80406A88_6.CPP */
@@ -9,7 +9,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/SCROLL.H"
 #include "COMMON/OWNERRECAT8V1.H"
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "TYPES.H"
 struct MenuFadeWidget;
 struct MenuResourceWidget;
@@ -19,7 +19,7 @@ extern u8 *D_800E1C14[];
 extern u8 *D_800D2134[];
 extern u8 *D_800D2138[];
 extern u8 *D_800D213C[];
-extern u8 *D_auto_800DDB08[];
+extern u8 *g_optionsLocalizedShortcutText[];
 extern void *Cache_AllocateMemory(s32);
 extern s32 Defs_GetMemorySize(void);
 extern struct MenuFadeWidget *SmpFade_CreateFadeWidget(s32, s32);
@@ -31,7 +31,7 @@ extern MenuSliderWidget *SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(Scroll *, s32);
 extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 /* eu-x Options_CreateOptionsPage: the PAL options page with its own resource ids, plus the caption widget
-   0x5E whose text is set from the per-language table D_auto_800DDB08. */
+   0x5E whose text is set from the per-language table g_optionsLocalizedShortcutText. */
 s32 Menu_CreateLocalizedSettingsPage(void *node) {
     Shared_Game *settings;
     void *firstList;
@@ -44,30 +44,30 @@ s32 Menu_CreateLocalizedSettingsPage(void *node) {
     SmpButton_WrapButtonWidget(0x52);
     SmpButton_WrapButtonWidget(0x55);
     firstList = SmpButton_CreateListWidget(0x53, 0x54);
-    settings = &D_801462C8;
-    g_optionsPage->unk_C = firstList;
+    settings = &g_gameSettings;
+    g_optionsPage->bloodModeList = firstList;
     SmpButton_AppendListText(firstList, D_800E1C14[settings->language]);
-    SmpButton_AppendListText(g_optionsPage->unk_C, D_800E1C34[settings->language]);
-    SmpButton_AppendListText(g_optionsPage->unk_C, D_800E1C44[settings->language]);
-    SmpButton_SelectListEntry(g_optionsPage->unk_C, settings->firstListMode);
+    SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListChoiceZeroLabels[settings->language]);
+    SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListChoiceOneLabels[settings->language]);
+    SmpButton_SelectListEntry(g_optionsPage->bloodModeList, settings->bloodMode);
     secondList = SmpButton_CreateListWidget(0x56, 0x57);
-    g_optionsPage->unk_10 = secondList;
-    SmpButton_AppendListText(secondList, D_auto_800E1C54[settings->language]);
-    SmpButton_AppendListText(g_optionsPage->unk_10, D_auto_800E1C64[settings->language]);
-    SmpButton_SelectListEntry(g_optionsPage->unk_10, settings->unknown1F);
+    g_optionsPage->twoPlayerScreenList = secondList;
+    SmpButton_AppendListText(secondList, g_optionsSecondListChoiceZeroLabels[settings->language]);
+    SmpButton_AppendListText(g_optionsPage->twoPlayerScreenList, g_optionsSecondListChoiceOneLabels[settings->language]);
+    SmpButton_SelectListEntry(g_optionsPage->twoPlayerScreenList, settings->twoPlayerScreenPreference);
     thirdList = SmpButton_CreateListWidget(0x58, 0x59);
-    g_optionsPage->unk_14 = thirdList;
+    g_optionsPage->resolutionList = thirdList;
     SmpButton_AppendListText(thirdList, D_800D2134[settings->language]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(g_optionsPage->unk_14, D_800D2138[settings->language]);
-        SmpButton_AppendListText(g_optionsPage->unk_14, D_800D213C[settings->language]);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D2138[settings->language]);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D213C[settings->language]);
     }
-    SmpButton_SelectListEntry(g_optionsPage->unk_14, settings->reserved580);
+    SmpButton_SelectListEntry(g_optionsPage->resolutionList, settings->resolution);
     slider = SmpSlider_CreateSliderWidget(0x5A, 0x5B, 0x80);
-    g_optionsPage->unk_8 = slider;
-    SmpSlider_SetSliderItem(slider, settings->buttons);
+    g_optionsPage->gammaSlider = slider;
+    SmpSlider_SetSliderItem(slider, settings->lightingGamma);
     SmpButton_WrapButtonWidget(0x5D);
-    Node_FindWidgetByResourceId(node, 0x5E)->text = D_auto_800DDB08[settings->language];
+    Node_FindWidgetByResourceId(node, 0x5E)->text = g_optionsLocalizedShortcutText[settings->language];
     SmpButton_WrapButtonWidget(0x5C);
     title = SmpFlicker_CreateFlickerWidget(0x51, 0x6E);
     g_optionsPage->state = 3;
@@ -79,24 +79,24 @@ s32 Menu_CreateLocalizedSettingsPage(void *node) {
 
 /* 80408AC4_12.CPP */
 #if defined(VERSION_DE)
-extern char D_800D7A0C[];
-extern char D_800DE7BC[];
-typedef struct { char pad0[0x14]; char *text; } Func_8040BB40_Obj;
-s32 Menu_SelectPakOperationActionLabel(Func_8040BB40_Obj *arg0) {
-    switch (D_80153778) {
+extern char s_nodeDefaultFieldText[];
+extern char s_nodeAlternateFieldText[];
+typedef struct { char pad0[0x14]; char *text; } PakOperationLabelItem;
+s32 Menu_SelectPakOperationActionLabel(PakOperationLabelItem *labelItem) {
+    switch (g_frontendResourceLoadStage) {
     case 0:
     default:
-        arg0->text = D_800D7A0C;
+        labelItem->text = s_nodeDefaultFieldText;
         break;
     case 3:
-        arg0->text = D_800D7A0C;
+        labelItem->text = s_nodeDefaultFieldText;
         break;
     case 4:
-        arg0->text = D_800D7A0C;
+        labelItem->text = s_nodeDefaultFieldText;
         break;
     case 1:
     case 2:
-        arg0->text = D_800DE7BC;
+        labelItem->text = s_nodeAlternateFieldText;
         break;
     }
     return 0;
@@ -104,7 +104,7 @@ s32 Menu_SelectPakOperationActionLabel(Func_8040BB40_Obj *arg0) {
 #endif
 
 #if defined(VERSION_DE)
-unsigned char D_auto_func_8040BBAC_de_padding_171BAC[4] = { 0xD3, 0x1F, 0xFF, 0x0D };
+unsigned char g_MenuCreatelocalizedsettingspageTrailingBytes[4] = { 0xD3, 0x1F, 0xFF, 0x0D };
 #endif
 
 /* 80408CB0_24.CPP */

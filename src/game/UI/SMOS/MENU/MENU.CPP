@@ -2,7 +2,7 @@
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/CALLBACK.H"
 #include "COMMON/RECORD.H"
@@ -22,9 +22,9 @@
 #include "COMMON/OBJRECAT3CV2.H"
 #include "include_asm.h"
 
-extern int SmSmngr_DeactivateCurrentScreen(s32 arg0);
+extern int SmSmngr_DeactivateCurrentScreen(s32 screenOwner);
 
-extern void Node_ReleaseReferencedBuffer(s32 arg0);
+extern void Node_ReleaseReferencedBuffer(s32 bufferId);
 
 extern void Widget_DrawVisibleWidgetClipped(void *, ArgsCode80296014);
 
@@ -33,7 +33,7 @@ extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, Qua
 /* Moves menu focus and sends leave and enter events through menu and element callbacks. */
 
 extern Element *FindMenuElement(s32 id);
-static inline s32 send_event(s32 value, s32 event, s32 arg2, s32 amount, s32 context) {
+static inline s32 send_event(s32 value, s32 event, s32 source, s32 amount, s32 context) {
     ScreenManager *manager;
     s32 locked;
     s32 index;
@@ -42,31 +42,31 @@ static inline s32 send_event(s32 value, s32 event, s32 arg2, s32 amount, s32 con
     s32 result;
 
     if (Node_IsValidScreenIndex(value) != 0) {
-        if (value != D_8014D080->screens[D_8014D080->current].owner) {
+        if (value != g_screenManager->screens[g_screenManager->current].owner) {
             return 0;
         }
     }
-    manager = D_8014D080;
+    manager = g_screenManager;
     locked = manager->focus;
     index = manager->current;
     minusOne = -1;
     if ((value == locked) || (index == minusOne)) {
         return 0;
     }
-    if (D_8014D080->callback != 0) {
-        saved = D_8014D080->handled;
-        D_8014D080->handled = 0;
-        result = D_8014D080->callback(event, arg2, amount, context);
-        if (D_8014D080->handled == 1) {
-            D_8014D080->handled = saved;
+    if (g_screenManager->callback != 0) {
+        saved = g_screenManager->handled;
+        g_screenManager->handled = 0;
+        result = g_screenManager->callback(event, source, amount, context);
+        if (g_screenManager->handled == 1) {
+            g_screenManager->handled = saved;
             return result;
         }
-        D_8014D080->handled = saved;
+        g_screenManager->handled = saved;
     }
-    if (value == D_8014D080->screens[D_8014D080->current].primary->id) {
-        result = SmSmngr_DispatchPrimaryScreenEvent(event, arg2, amount, context);
+    if (value == g_screenManager->screens[g_screenManager->current].primary->id) {
+        result = SmSmngr_DispatchPrimaryScreenEvent(event, source, amount, context);
     } else {
-        result = DispatchElementEvent(value, event, arg2, amount, context);
+        result = DispatchElementEvent(value, event, source, amount, context);
     }
     return result;
 }
@@ -80,21 +80,21 @@ s32 SmXlate_SwitchScreen(s32);
 void Menu_PopScreen(void) {
     s32 index;
 
-    if (D_8014D080->screens[D_8014D080->current].primary != 0) {
-        SmSmngr_DeactivateCurrentScreen(D_8014D080->screens[D_8014D080->current - 1].owner);
-        StreamBufferFree(&D_8014D080->screens[D_8014D080->current].data);
+    if (g_screenManager->screens[g_screenManager->current].primary != 0) {
+        SmSmngr_DeactivateCurrentScreen(g_screenManager->screens[g_screenManager->current - 1].owner);
+        StreamBufferFree(&g_screenManager->screens[g_screenManager->current].data);
         {
-            Element *element = D_8014D080->screens[D_8014D080->current].primary;
+            Element *element = g_screenManager->screens[g_screenManager->current].primary;
             Node_ReleaseReferencedBuffer(element->id);
         }
     }
-    D_8014D080->screens[D_8014D080->current].primary = 0;
-    D_8014D080->screens[D_8014D080->current].owner = 0;
-    D_8014D080->screens[D_8014D080->current].focus = 0;
-    index = D_8014D080->current - 1;
-    D_8014D080->current = index;
-    if (index < D_8014D080->lowIndex) {
-        D_8014D080->lowIndex = index;
+    g_screenManager->screens[g_screenManager->current].primary = 0;
+    g_screenManager->screens[g_screenManager->current].owner = 0;
+    g_screenManager->screens[g_screenManager->current].focus = 0;
+    index = g_screenManager->current - 1;
+    g_screenManager->current = index;
+    if (index < g_screenManager->lowIndex) {
+        g_screenManager->lowIndex = index;
     }
 }
 
@@ -107,19 +107,19 @@ void Menu_DrawScreenStack(void) {
     s32 offset;
     s32 now;
 
-    args.word0 = D_8014D080->field534;
-    args.word4 = D_8014D080->field538;
+    args.word0 = g_screenManager->eventArgument0;
+    args.word4 = g_screenManager->eventArgument1;
     args.byte14 = 0xFF;
     args.word8 = 0;
-    args.wordC = D_800C5678_de;
-    args.word10 = D_800C5678_de;
-    args.word18 = D_8014D080->field534;
+    args.wordC = g_menuDefaultEventWord;
+    args.word10 = g_menuDefaultEventWord;
+    args.word18 = g_screenManager->eventArgument0;
     g_menuEventCount = 0;
-    args.word20 = D_8014D080->field538;
+    args.word20 = g_screenManager->eventArgument1;
     args.word1C = g_screenDrawWidth - 1;
     args.word24 = g_screenDrawHeight - 1;
 
-    now = (s32)(N64Eng_GetTimeSeconds() * D_800C5680_de);
+    now = (s32)(N64Eng_GetTimeSeconds() * g_menuTimeTickScale);
     if (s_smackFormat == 0) {
         s_smackFormat = now;
     }
@@ -127,19 +127,19 @@ void Menu_DrawScreenStack(void) {
     s_smackFormat = now;
     DispatchScreenRangeEvent(0, 0xE0A, 0, &args, delta);
 
-    index = D_8014D080->lowIndex;
-    if (D_8014D080->current >= index) {
+    index = g_screenManager->lowIndex;
+    if (g_screenManager->current >= index) {
         offset = index * 0x1C;
         do {
             index++;
             N64Eng_RenderNoop();
-            Widget_DrawVisibleWidgetClipped(*(void **)(offset + (s32)D_8014D080->screens), args);
+            Widget_DrawVisibleWidgetClipped(*(void **)(offset + (s32)g_screenManager->screens), args);
             Widget_ResetTextClipBounds();
             N64Eng_ResetRenderState();
             Widget_ComputeWidgetBounds(&first, &basis,
-                          *(void **)(offset + (s32)D_8014D080->screens), &args);
+                          *(void **)(offset + (s32)g_screenManager->screens), &args);
             offset += 0x1C;
-        } while (D_8014D080->current >= index);
+        } while (g_screenManager->current >= index);
     }
     DispatchScreenRangeEvent(0, 0xE0A, 1, 0, delta);
     g_menuElementLoadCount = 0;
@@ -151,11 +151,11 @@ void Menu_SetFocusedElement(s32 id) {
     if (FindKindHandler(FindMenuElement(id)->kind) == 0) {
         return;
     }
-    previous = D_8014D080->screens[D_8014D080->current].focus;
+    previous = g_screenManager->screens[g_screenManager->current].focus;
     if (previous != 0) {
         send_event(previous->id, 0x10,0,0,0);
     }
-    D_8014D080->screens[D_8014D080->current].focus = FindMenuElement(id);
+    g_screenManager->screens[g_screenManager->current].focus = FindMenuElement(id);
     send_event(id, 0xF,0,0,0);
 }
 
@@ -164,50 +164,50 @@ void Menu_DestroyScreenManager(void) {
     s32 lowIndex;
     s32 one;
 
-    manager = D_8014D080;
+    manager = g_screenManager;
     lowIndex = manager->lowIndex;
     if (manager->current >= lowIndex) {
         one = 1;
         do {
-            manager->field530 = one;
+            manager->screenChangePending = one;
             Menu_PopScreen();
-            manager = D_8014D080;
+            manager = g_screenManager;
         } while (manager->current >= lowIndex);
     }
-    if (D_8014D080->callback != 0) {
-        D_8014D080->callback(0xE05, 0, 0, 0);
+    if (g_screenManager->callback != 0) {
+        g_screenManager->callback(0xE05, 0, 0, 0);
     }
-    if (D_8014D080->cache != 0) {
-        Cache_FreeMemory(D_8014D080->cache);
+    if (g_screenManager->cache != 0) {
+        Cache_FreeMemory(g_screenManager->cache);
     }
-    Cache_FreeMemory(D_8014D080->screens);
-    Cache_FreeMemory(D_8014D080);
-    D_8014D080 = 0;
+    Cache_FreeMemory(g_screenManager->screens);
+    Cache_FreeMemory(g_screenManager);
+    g_screenManager = 0;
     Controller_FreeControllerContext();
     Node_NoOperation();
     Node_ClearResourceInitializationFlag();
 }
 
-void Menu_SetEventCallback(FuncPtr arg0) {
-    D_8014D080->callback = arg0;
-    if (arg0 != 0) {
-        arg0(0xE04, 0, 0, 0);
+void Menu_SetEventCallback(FuncPtr callback) {
+    g_screenManager->callback = callback;
+    if (callback != 0) {
+        callback(0xE04, 0, 0, 0);
     }
 }
 
-void Menu_SetPagingEnabled(s32 arg0) {
-    if (arg0 != 0) {
-        D_8014D080->paging = (s32) (D_8014D080->paging | 1);
+void Menu_SetPagingEnabled(s32 enabled) {
+    if (enabled != 0) {
+        g_screenManager->paging = (s32) (g_screenManager->paging | 1);
         return;
     }
-    D_8014D080->paging = (s32) (D_8014D080->paging & ~1);
+    g_screenManager->paging = (s32) (g_screenManager->paging & ~1);
 }
 
-void func_802995C4_de(int arg0) {
-    D_80146E14 = arg0;
+void Menu_SetScreenOwnerOverride(int screenOwner) {
+    g_menuScreenOwnerOverride = screenOwner;
 }
 
-s32 Menu_RouteElementEvent(s32 value, s32 event, s32 arg2, s32 control, s32 extra) {
+s32 Menu_RouteElementEvent(s32 value, s32 event, s32 source, s32 control, s32 extra) {
     ScreenManager *manager;
     s32 blockedValue;
     s32 index;
@@ -217,50 +217,50 @@ s32 Menu_RouteElementEvent(s32 value, s32 event, s32 arg2, s32 control, s32 extr
     Element *element;
 
     if (Node_IsValidScreenIndex(value) != 0) {
-        if (value != D_8014D080->screens[D_8014D080->current].owner) {
+        if (value != g_screenManager->screens[g_screenManager->current].owner) {
             return 0;
         }
     }
-    manager = D_8014D080;
+    manager = g_screenManager;
     blockedValue = manager->focus;
     index = manager->current;
     minusOne = -1;
     if ((value == blockedValue) || (index == minusOne)) {
         return 0;
     }
-    if (D_8014D080->callback != 0) {
-        saved = D_8014D080->handled;
-        D_8014D080->handled = 0;
-        result = D_8014D080->callback(event, arg2, control, extra);
-        if (D_8014D080->handled == 1) {
-            D_8014D080->handled = saved;
+    if (g_screenManager->callback != 0) {
+        saved = g_screenManager->handled;
+        g_screenManager->handled = 0;
+        result = g_screenManager->callback(event, source, control, extra);
+        if (g_screenManager->handled == 1) {
+            g_screenManager->handled = saved;
             return result;
         }
-        D_8014D080->handled = saved;
+        g_screenManager->handled = saved;
     }
-    element = D_8014D080->screens[D_8014D080->current].primary;
+    element = g_screenManager->screens[g_screenManager->current].primary;
     if (value == element->id) {
-        result = SmSmngr_DispatchPrimaryScreenEvent(event, arg2, control, extra);
+        result = SmSmngr_DispatchPrimaryScreenEvent(event, source, control, extra);
     } else {
-        result = DispatchElementEvent(value, event, arg2, control, extra);
+        result = DispatchElementEvent(value, event, source, control, extra);
     }
     return result;
 }
 
 void MarkMenuEventHandled(void) {
-    ScreenManager *object = D_8014D080;
+    ScreenManager *object = g_screenManager;
     object->handled = 1;
 }
 
-void Menu_SetElementUserData(s32 arg0, s32 arg1) {
-    ((ObjRecAt40V1 *)FindMenuElement(arg0))->unk40 = arg1;
+void Menu_SetElementUserData(s32 elementId, s32 userData) {
+    ((ObjRecAt40V1 *)FindMenuElement(elementId))->unk40 = userData;
 }
 
 void Menu_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handler)
 {
     s32 index = -1;
     s32 i;
-    struct MenuHandlerEntry *entry = &D_8014D080->handlers[0];
+    struct MenuHandlerEntry *entry = &g_screenManager->handlers[0];
 
     for (i = 0; i < 64; i++, entry++) {
         if (entry->id == id) {
@@ -268,7 +268,7 @@ void Menu_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handler)
             break;
         }
     }
-    entry = &D_8014D080->handlers[index];
+    entry = &g_screenManager->handlers[index];
     if (mode == 1) {
         entry->default_handler = handler;
         entry->override_handler = 0;
@@ -285,8 +285,8 @@ MenuElementHandler FindKindHandler(s32 id)
     s32 *key;
     struct MenuHandlerEntry *entry;
 
-    key = &D_8014D080->handlers[0].id;
-    entry = &D_8014D080->handlers[0];
+    key = &g_screenManager->handlers[0].id;
+    entry = &g_screenManager->handlers[0];
     for (i = 0; i < 64; i++) {
         if (*key == id) {
             if (entry->override_handler != 0) {
@@ -300,14 +300,14 @@ MenuElementHandler FindKindHandler(s32 id)
     return 0;
 }
 
-s32 Menu_GetElementHandlerFlags(s32 arg0)
+s32 Menu_GetElementHandlerFlags(s32 kind)
 {
   s32 count;
   struct MenuHandlerEntry *ptr;
   count = 0;
-  ptr = D_8014D080->handlers;
+  ptr = g_screenManager->handlers;
   loop:
-  if ((ptr->id) != arg0)
+  if ((ptr->id) != kind)
   {
     goto not_found;
   }
@@ -331,93 +331,93 @@ s32 Menu_GetElementHandlerFlags(s32 arg0)
   return 0;
 }
 
-void Menu_SetKindHandlerFlags(s32 arg0, s32 arg1) {
+void Menu_SetKindHandlerFlags(s32 kind, s32 flags) {
     s32 i;
-    struct MenuHandlerEntry *var_v1;
+    struct MenuHandlerEntry *handler;
     i = 0;
-    var_v1 = D_8014D080->handlers;
+    handler = g_screenManager->handlers;
     do {
-        if (var_v1->id == arg0) {
-            var_v1->flags = arg1;
+        if (handler->id == kind) {
+            handler->flags = flags;
         }
         i += 1;
-        var_v1++;
+        handler++;
     } while (i < 0x40);
 }
 
 void Menu_ReturnToPreviousScreen(void) {
-    if (D_8014D080->current > 0) {
+    if (g_screenManager->current > 0) {
         SmXlate_SwitchScreen(Menu_GetPreviousScreenOwner(0));
     }
 }
 
-s32 Menu_InvokeKindEventHandler(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+s32 Menu_InvokeKindEventHandler(void *elementStorage, s32 event, s32 source, s32 parameter, s32 value)
 {
-    Element *element = arg0;
+    Element *element = elementStorage;
     MenuElementHandler handler;
 
     handler = FindKindHandler(element->kind);
     if (handler != 0) {
-        return handler(arg0, arg1, arg2, arg3, arg4);
+        return handler(elementStorage, event, source, parameter, value);
     }
     return 0;
 }
 
 s32 GetMenuScreenOwner(void) {
     s32 result;
-    s32 field4;
+    s32 screenIndex;
     result = g_dispatchingScreenOwner;
     if (result < 0) {
-        field4 = D_8014D080->current;
-        if (field4 < 0) {
+        screenIndex = g_screenManager->current;
+        if (screenIndex < 0) {
             return -1;
         }
-        result = D_8014D080->screens[field4].owner;
+        result = g_screenManager->screens[screenIndex].owner;
     }
     return result;
 }
 
-s32 Menu_GetPreviousScreenOwner(s32 arg0) {
+s32 Menu_GetPreviousScreenOwner(s32 screenOwner) {
     s32 idx;
     s32 countMinus1;
-    countMinus1 = D_8014D080->current - 1;
-    idx = countMinus1 - arg0;
+    countMinus1 = g_screenManager->current - 1;
+    idx = countMinus1 - screenOwner;
     if (idx >= 0) {
-        return D_8014D080->screens[idx].owner;
+        return g_screenManager->screens[idx].owner;
     }
     return -1;
 }
 
 /** Return one greater than the current object's word at offset four. */
 unsigned int Menu_GetScreenStackDepth(void) {
-    return D_8014D080->current + 1;
+    return g_screenManager->current + 1;
 }
 
 /** Return the word at offset 0x528 of the current global object. */
 unsigned int Menu_GetBlockedScreenOwner(void) {
-    return D_8014D080->focus;
+    return g_screenManager->focus;
 }
 
 s16 Menu_GetFocusedElementId(void) {
     Element *ptr;
-    ptr = D_8014D080->screens[D_8014D080->current].focus;
+    ptr = g_screenManager->screens[g_screenManager->current].focus;
     if (ptr != 0) {
         return ptr->id;
     }
     return -1;
 }
 
-void Menu_SetScreenDrawOrigin(int arg0, int arg1) {
-    D_8014D080->field534 = arg0;
-    D_8014D080->field538 = arg1;
+void Menu_SetScreenDrawOrigin(int x, int y) {
+    g_screenManager->eventArgument0 = x;
+    g_screenManager->eventArgument1 = y;
 }
 
-void Menu_GetScreenDrawOrigin(s32 *arg0, s32 *arg1) {
-    *arg0 = D_8014D080->field534;
-    *arg1 = D_8014D080->field538;
+void Menu_GetScreenDrawOrigin(s32 *xOut, s32 *yOut) {
+    *xOut = g_screenManager->eventArgument0;
+    *yOut = g_screenManager->eventArgument1;
 }
 
 /* ROM-grounded data: src/rw_pool_80298FE8_CB408_us_rev1.c */
-const unsigned int D_blob_95c14edb8bb0fb2af018[1] = {
+const unsigned int g_Menu_DrawScreenStackConstantWords_de_eu_eu_x_us_us_rev1[1] = {
     0x3F800000,
 };

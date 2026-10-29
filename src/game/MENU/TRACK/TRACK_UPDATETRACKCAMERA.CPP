@@ -2,7 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "TYPES.H"
 #include "MENU/TRACK_UPDATETRACKCAMERA.H"
@@ -10,22 +10,22 @@
 
 /* Evaluates keyframe track 3 of the current record's resource at time t: before the first key or
    after the last it holds that key's value, otherwise it finds the surrounding keys and blends
-   their values with the smoothstep weight 3u^2 - 2u^3; an empty track yields D_800E0B60[1]. */
+   their values with the smoothstep weight 3u^2 - 2u^3; an empty track yields g_trackSplineOutputBounds[1]. */
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 f32 Track_EvaluateTrackScalar(f32 t) {
     s32 *track;
-    D_800C7470_Pair *key;
+    ScalarPair *key;
     s32 count;
     s32 i;
     f32 u;
-    track = SetN64_GetPackSection(D_800E2830->resource, 3);
-    key = (D_800C7470_Pair *)(track + 2);
+    track = SetN64_GetPackSection(g_cinemaSequenceState->resource, 3);
+    key = (ScalarPair *)(track + 2);
     count = track[1];
     for (i = 0; i < count; i++) {
     }
     if (count == 0) {
-        return D_800E0B60[1];
+        return g_trackSplineOutputBounds[1];
     }
     if (t <= key[0].second) {
         return key[0].first;
@@ -37,13 +37,13 @@ f32 Track_EvaluateTrackScalar(f32 t) {
         key++;
     }
     u = (t - key[-1].second) / (key->second - key[-1].second);
-    u = u * (u * D_800DCB38) - 2.0f * u * u * u;
-    return key[-1].first * ((*(&D_800DCB38 + 1)) - u) + key->first * u;
+    u = u * (u * g_trackSmoothInterpolationConstants) - 2.0f * u * u * u;
+    return key[-1].first * ((*(&g_trackSmoothInterpolationConstants + 1)) - u) + key->first * u;
 }
 
 #include "COMMON/WORLD.H"
-extern f32 D_800DCB40[];
-extern u8 D_80100030[];
+extern f32 g_trackCameraScaleAndYawOffset[];
+extern u8 g_defaultProbeMotionSettings[];
 extern void CCinema_DrawMessages(void);
 extern CVector3 Track_GetTrackEyePosition(f32);
 extern CVector3 Track_GetTrackTargetPosition(f32);
@@ -67,60 +67,60 @@ void Track_UpdateTrackCamera(SharedTrackCamera *camera) {
     f32 pitch;
     f32 scale;
 
-    if (D_800E2830->active == 0) {
+    if (g_cinemaSequenceState->active == 0) {
         return;
     }
     if (Cinema_IsSequenceInWindow() == 0) {
         return;
     }
-    if (D_800E2830->time < D_800E2830->start || D_800E2830->end < D_800E2830->time) {
+    if (g_cinemaSequenceState->time < g_cinemaSequenceState->start || g_cinemaSequenceState->end < g_cinemaSequenceState->time) {
         return;
     }
-    if (D_800E2830->messageCount > 0) {
+    if (g_cinemaSequenceState->messageCount > 0) {
         CCinema_DrawMessages();
     }
-    eye = Track_GetTrackEyePosition(D_800E2830->time);
-    target = Track_GetTrackTargetPosition(D_800E2830->time);
-    scale = D_800DCB40[0];
+    eye = Track_GetTrackEyePosition(g_cinemaSequenceState->time);
+    target = Track_GetTrackTargetPosition(g_cinemaSequenceState->time);
+    scale = g_trackCameraScaleAndYawOffset[0];
     Graphu64_ScaleVector(&eye, &eye, scale);
     Graphu64_ScaleVector(&target, &target, scale);
     camera->distance = 0.0f;
     Graphu64_SubtractVectors(&delta, &target, &eye);
-    if (((D_800E2830->spec.flags & 1) && D_800E2830->target != 0) || (D_800E2830->spec.flags & 2)) {
-        actor = D_80145060.actorList;
-        if ((D_800E2830->spec.flags & 1) && D_800E2830->target != 0) {
-            D_800E2830->position = D_800E2830->target->prefix.position;
-            D_800E2830->yaw = D_800E2830->target->yaw + D_800DCB40[1];
+    if (((g_cinemaSequenceState->spec.flags & 1) && g_cinemaSequenceState->target != 0) || (g_cinemaSequenceState->spec.flags & 2)) {
+        actor = g_transientPlayerList.actorList;
+        if ((g_cinemaSequenceState->spec.flags & 1) && g_cinemaSequenceState->target != 0) {
+            g_cinemaSequenceState->position = g_cinemaSequenceState->target->prefix.position;
+            g_cinemaSequenceState->yaw = g_cinemaSequenceState->target->yaw + g_trackCameraScaleAndYawOffset[1];
         }
-        if (D_800E2830->spec.flags & 2) {
+        if (g_cinemaSequenceState->spec.flags & 2) {
             if (actor != 0) {
-                D_800E2830->position = actor->prefix.position;
-                D_800E2830->yaw = actor->yaw;
+                g_cinemaSequenceState->position = actor->prefix.position;
+                g_cinemaSequenceState->yaw = actor->yaw;
             } else {
-                D_800E2830->position.x = 0.0f;
-                D_800E2830->position.y = 0.0f;
-                D_800E2830->position.z = 0.0f;
-                D_800E2830->yaw = 0.0f;
+                g_cinemaSequenceState->position.x = 0.0f;
+                g_cinemaSequenceState->position.y = 0.0f;
+                g_cinemaSequenceState->position.z = 0.0f;
+                g_cinemaSequenceState->yaw = 0.0f;
             }
         }
         Graphu64_IdentityMatrix(matrix);
-        Graphu64_MatrixFromEulerXYZ(matrix, 0.0f, D_800E2830->yaw, 0.0f);
+        Graphu64_MatrixFromEulerXYZ(matrix, 0.0f, g_cinemaSequenceState->yaw, 0.0f);
         Graphu64_TransformPoint(matrix, &target, &rotated);
         target = rotated;
         Graphu64_TransformPoint(matrix, &eye, &rotated);
         eye = rotated;
-        Graphu64_AddVec3(&target, &target, &D_800E2830->position);
-        Graphu64_AddVec3(&eye, &eye, &D_800E2830->position);
+        Graphu64_AddVec3(&target, &target, &g_cinemaSequenceState->position);
+        Graphu64_AddVec3(&eye, &eye, &g_cinemaSequenceState->position);
         Graphu64_SubtractVectors(&delta, &target, &eye);
         if (actor != 0) {
             saved = actor->prefix;
             actor->prefix.position = target;
             Scene_RequestVisibleGridSections(&g_world);
-            collisionHit = Unicol_MoveActorWithCollision(actor, eye.x, eye.y, eye.z, D_80100030);
+            collisionHit = Unicol_MoveActorWithCollision(actor, eye.x, eye.y, eye.z, g_defaultProbeMotionSettings);
             Scene_UnlockActiveSectionResources(&g_world);
             actor->prefix = saved;
             if (collisionHit != 0) {
-                eye = *(CVector3 *)&D_801001F8;
+                eye = *(CVector3 *)&g_particleContactState;
             }
         }
     }

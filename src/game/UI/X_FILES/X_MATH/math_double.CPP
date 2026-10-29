@@ -6,12 +6,12 @@
 
 #include "MATH/DOUBLEBITS.H"
 
-extern const f64 D_800C56C0_de;
-extern const f64 D_800C56C8_de;
-extern const f64 D_800C56D0_de;
+extern const f64 k_xmathScaleExponentOverflow;
+extern const f64 k_xmathScaleExponentUnit;
+extern const f64 k_xmathScaleExponentDenormalUnit;
 
 /* Scales a double by 2^shift (ldexp): adds shift to the biased exponent in place, returns zeros and infinities unchanged, saturates to the
-   D_800C56C0_de constant on overflow, flushes to zero below 2^-53 and builds denormal results through a recursive multiply. */
+   k_xmathScaleExponentOverflow constant on overflow, flushes to zero below 2^-53 and builds denormal results through a recursive multiply. */
 f64 ScaleDoubleExponent(f64 value, s32 shift) {
     DoubleBits_8029ECB0 *bits = (DoubleBits_8029ECB0 *)&value;
     u32 high = bits->w.hi;
@@ -32,11 +32,11 @@ f64 ScaleDoubleExponent(f64 value, s32 shift) {
 overflow:
                     current = bits->w.hi;
                     sign = current;
-                    value = D_800C56C0_de;
+                    value = k_xmathScaleExponentOverflow;
                     current &= 0x7FFFFFFF;
                     current |= (sign >> 31) << 31;
                     bits->w.hi = current;
-                    return D_800C56C0_de;
+                    return k_xmathScaleExponentOverflow;
                 }
                 if ((u32)exponent < (u32)-53) {
                     value = 0.0;
@@ -45,7 +45,7 @@ overflow:
                 }
             }
             bits->w.hi = (bits->w.hi & 0x800FFFFF) | 0x100000;
-            value *= ScaleDoubleExponent(D_800C56C8_de, exponent - 1);
+            value *= ScaleDoubleExponent(k_xmathScaleExponentUnit, exponent - 1);
             return value;
         }
         if ((high & 0xFFFFF) == 0 && bits->w.lo == 0) {
@@ -59,7 +59,7 @@ overflow:
     if ((high & 0xFFFFF) == 0 && bits->w.lo == 0) {
         return value;
     }
-    return ScaleDoubleExponent(value * ScaleDoubleExponent(D_800C56D0_de, 53), shift - 53);
+    return ScaleDoubleExponent(value * ScaleDoubleExponent(k_xmathScaleExponentDenormalUnit, 53), shift - 53);
 }
 
 /* Splits a double into a mantissa in [0.5, 1) and a power of two (frexp): rewrites the biased exponent to 0x3FE and

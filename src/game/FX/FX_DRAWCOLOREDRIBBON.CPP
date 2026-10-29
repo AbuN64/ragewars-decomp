@@ -4,12 +4,12 @@
 #include "RENDER/ANIMATION_FRAME_AND_RIBBON_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "RENDER/RIBBON_DRAW.H"
 #include "COMMON/SELF.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
 #include "RENDER/LINKED_BUILDCOLOREDRIBBONVERTICES.H"
@@ -21,7 +21,7 @@ extern void Graphu64_ConvertMatrixToFixed(void *,void *),Graphu64_ConvertMatrixT
 void Fx_DrawColoredRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     Morph storage;
     Morph *morph = &storage;
-    ObjRecAt28V1 *clock, *next;
+    RibbonClockNode *clock, *next;
     Vtx *vertices;
     u32 count, i;
     s32 edges;
@@ -29,19 +29,19 @@ void Fx_DrawColoredRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamera 
     morph->count = actor->track->count;
     if (actor->flags & 2) { morph->first = actor->first; morph->second = actor->second; }
     else { morph->first = actor->first; morph->second = actor->first; }
-    morph->scaleS = actor->track->scaleS * D_800C5E08_de;
-    morph->scaleT = actor->track->scaleT * D_800C5E08_de;
+    morph->scaleS = actor->track->scaleS * g_coloredRibbonTextureCoordinateScale;
+    morph->scaleT = actor->track->scaleT * g_coloredRibbonTextureCoordinateScale;
     clock = actor->clock;
     next = clock->next;
     count = actor->track->count;
     edges = count - 1;
-    gSPMatrix(g_displayListCursor++, &clock->matrix[D_800D297C], G_MTX_LOAD);
-    while (clock != 0 && next != 0 && 0.0f < clock->unk8 && 0.0f < next->unk8) {
+    gSPMatrix(g_displayListCursor++, &clock->matrix[g_lightingBufferIndex], G_MTX_LOAD);
+    while (clock != 0 && next != 0 && 0.0f < clock->time && 0.0f < next->time) {
         vertices = Fx_AllocateRibbonVertices(pool, count);
         if (vertices == 0) break;
         Linked_BuildColoredRibbonVertices(actor, clock, vertices, &storage);
         gSPVertex(g_displayListCursor++, vertices, count, 0);
-        gSPMatrix(g_displayListCursor++, &next->matrix[D_800D297C], G_MTX_LOAD);
+        gSPMatrix(g_displayListCursor++, &next->matrix[g_lightingBufferIndex], G_MTX_LOAD);
         vertices = Fx_AllocateRibbonVertices(pool, count);
         if (vertices == 0) return;
         Linked_BuildColoredRibbonVertices(actor, next, vertices, &storage);
@@ -131,90 +131,90 @@ void Fx_DetachParticleSwooshes(Root752C *effectWorld, Entity1DC *detachedEntity)
     s32 effectFlags;
     u8 effectReferences;
     u8 ribbonReferences;
-    char *temp_v1_2;
+    char *unusedPointer;
     Entity1DC *attachedEntity;
     Entity1DC *ribbonEntity;
-    struct Shape_typemap_6 *var_a0;
+    struct MenuPlayerScissorRect *unusedPointer1;
     ChildB4 *segment;
     Node44 *ribbon;
-    struct Shape_typemap_6 *var_v0;
-    ribbon = effectWorld->unk_7528;
+    struct MenuPlayerScissorRect *unusedPointer2;
+    ribbon = effectWorld->activeRibbons;
     if (ribbon != 0) {
         do {
-            effectFlags = ribbon->unk_3C;
+            effectFlags = ribbon->flags;
             if (effectFlags & 8) {
-                segment = ribbon->unk_40;
+                segment = ribbon->segments;
                 if (segment != 0) {
 loop_4:
-                    if (segment->unk_B0 == detachedEntity) {
+                    if (segment->attachedEntity == detachedEntity) {
                         if (detachedEntity != 0) {
                             if (detachedEntity == (void *)-1) {
-                                ((struct ObjectState68 *) (((char *) segment) + (D_800D297C << 6)))->unk_28=((struct ObjectState68 *) (((char *) segment) + ((D_800D297C ^ 1) << 6)))->unk_28;
-                                segment->unk_B0 = 0;
+                                ((struct RibbonFrameBufferView *) (((char *) segment) + (g_lightingBufferIndex << 6)))->matrix=((struct RibbonFrameBufferView *) (((char *) segment) + ((g_lightingBufferIndex ^ 1) << 6)))->matrix;
+                                segment->attachedEntity = 0;
                             } else {
-                                Graphu64_ConvertMatrixToFloat(&localMatrix, (char *)detachedEntity + ((D_800D297C << 6) + 0x60));
-                                scale = D_800C5E28_de;
-                                if (detachedEntity->unk_118->unk14 != 0) {
-                                    scale = D_800C5E2C_de;
+                                Graphu64_ConvertMatrixToFloat(&localMatrix, (char *)detachedEntity + ((g_lightingBufferIndex << 6) + 0x60));
+                                scale = g_detachedRibbonActorScale;
+                                if (detachedEntity->renderDefinition->flags != 0) {
+                                    scale = g_detachedRibbonSpecialActorScale;
                                 }
                                 ScaleMatrixLocal(&localMatrix, scale, scale, scale);
                                 Graphu64_ClampMatrixToFixedRange(&localMatrix);
                                 Graphu64_GetMatrixTranslation(&localMatrix, segment->pos);
-                                if (ribbon->unk_3C & 4) {
+                                if (ribbon->flags & 4) {
                                     Graphu64_GetMatrixScale(&localMatrix, segment->rot);
                                 } else {
-                                    Graphu64_ConvertMatrixToFixed(&localMatrix, (char *)segment + ((D_800D297C << 6) + 0x28));
+                                    Graphu64_ConvertMatrixToFixed(&localMatrix, (char *)segment + ((g_lightingBufferIndex << 6) + 0x28));
                                 }
                             }
-                            segment->unk_8 = (f32) ribbon->unk_8->unk_8;
+                            segment->remainingLifetime = (f32) ribbon->definition->segmentLifetime;
                         }
-                        segment->unk_B0 = (Entity1DC *)-1;
+                        segment->attachedEntity = (Entity1DC *)-1;
                     }
-                    segment = segment->unk_4;
+                    segment = segment->next;
                     if (segment != 0) {
                         goto loop_4;
                     }
                 }
-            } else if (ribbon->unk_1C == detachedEntity) {
+            } else if (ribbon->attachedEntity == detachedEntity) {
                 if (effectFlags & 2) {
-                    unsigned int offset = D_800D297C << 6;
+                    unsigned int offset = g_lightingBufferIndex << 6;
                     char *matrix = (char *)offset;
                     matrix += (unsigned int)detachedEntity;
                     matrix += 0x60;
-                    if (ribbon->unk_24 > 0.0f) {
+                    if (ribbon->lifetime > 0.0f) {
                     Graphu64_ConvertMatrixToFloat(&localMatrix, matrix);
-                    entityScale = D_800C5E30_de;
-                    if (detachedEntity->unk_118->unk14 != 0) {
-                        entityScale = D_800C5E34_de;
+                    entityScale = g_detachedRibbonEntityScale;
+                    if (detachedEntity->renderDefinition->flags != 0) {
+                        entityScale = g_detachedRibbonSpecialEntityScale;
                     }
                     ScaleMatrixLocal(&localMatrix, entityScale, entityScale, entityScale);
                     Graphu64_ClampMatrixToFixedRange(&localMatrix);
-                    Linked_AppendRibbonSegment(&D_801379C0, ribbon, &localMatrix);
+                    Linked_AppendRibbonSegment(&g_actorParticleScene, ribbon, &localMatrix);
                 }
                 }
-                attachedEntity = ribbon->unk_1C;
+                attachedEntity = ribbon->attachedEntity;
                 if (attachedEntity != 0) {
-                    if (ribbon->unk_3C & 1) {
-                        effectReferences = attachedEntity->unk_13B;
+                    if (ribbon->flags & 1) {
+                        effectReferences = attachedEntity->effectReferenceCount;
                         if (effectReferences != 0) {
-                            attachedEntity->unk_13B = (u8) (effectReferences - 1);
+                            attachedEntity->effectReferenceCount = (u8) (effectReferences - 1);
                         }
                     }
-                    if (ribbon->unk_3C & 2) {
-                        ribbonEntity = ribbon->unk_1C;
-                        ribbonReferences = ribbonEntity->unk_1D9;
+                    if (ribbon->flags & 2) {
+                        ribbonEntity = ribbon->attachedEntity;
+                        ribbonReferences = ribbonEntity->ribbonReferenceCount;
                         if (ribbonReferences != 0) {
-                            ribbonEntity->unk_1D9 = (u8) (ribbonReferences - 1);
+                            ribbonEntity->ribbonReferenceCount = (u8) (ribbonReferences - 1);
                         }
                     }
                 }
-                ribbon->unk_1C = 0;
-                minimumLifetime = ribbon->unk_8->unk_4;
-                if (ribbon->unk_24 < minimumLifetime) {
-                    ribbon->unk_24 = minimumLifetime;
+                ribbon->attachedEntity = 0;
+                minimumLifetime = ribbon->definition->minimumLifetime;
+                if (ribbon->lifetime < minimumLifetime) {
+                    ribbon->lifetime = minimumLifetime;
                 }
             }
-            ribbon = ribbon->unk_4;
+            ribbon = ribbon->next;
         } while (ribbon != 0);
     }
 }
@@ -268,8 +268,8 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
         node = Lists_MoveHeadToInactiveList(&world->pool);
         if (node) {
         resource = Scene_GetLinkedResourceSection(&g_world, resourceId);
-        first = ((void **)D_800CDBD0)[resource->first];
-        second = ((void **)D_800CDBD0)[resource->second];
+        first = ((void **)g_ribbonBlendResourceTable)[resource->first];
+        second = ((void **)g_ribbonBlendResourceTable)[resource->second];
         Lists_ClearHeader(&node->children);
         node->flags = 2;
         if (*actor->flags & 0x10000) {

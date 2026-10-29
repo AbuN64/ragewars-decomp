@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "GAMECORE/EXTERNS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/OBJECTLINKS150C.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
 #include "GAMECORE/CODE.H"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "TYPES.H"
@@ -13,19 +13,19 @@
 #include "GAMECORE/LINK_SUMWORLDSECTIONCOUNTS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-extern s32 D_800D2978;
+extern s32 g_gameFrameCounter;
 
 
 
-f32 Link_GetLightAnimationOffset(void *arg0)
+f32 Link_GetLightAnimationOffset(void *link)
 {
-  ObjectRecAtBC *volume = arg0;
+  SceneLightVolume *volume = link;
   u32 animationSeedValue;
   s32 idx;
   animationSeedValue = volume->animationSeed;
-  idx = D_800D2978 + ((((animationSeedValue % 7) & 0xFF) + 1) * 0x10);
+  idx = g_gameFrameCounter + ((((animationSeedValue % 7) & 0xFF) + 1) * 0x10);
   idx = idx % 90;
-  return (f32) D_800CD604[idx];
+  return (f32) g_enemyDispatchLinkStorage_800CD604[idx];
 }
 
 
@@ -34,13 +34,13 @@ f32 Link_GetLightAnimationOffset(void *arg0)
 
 
 
-void Link_AnimateVertexColors(ObjectRecAt8 *object, u8 *colors) {
+void Link_AnimateVertexColors(VertexColorMeshView *object, u8 *colors) {
     s32 state;
     s32 i;
     Vtx *record;
     Vtx *end;
 
-    state = D_800D2978;
+    state = g_gameFrameCounter;
     i = 0;
     if (!(state & 1)) {
         record = (void *)object->records;
@@ -53,7 +53,7 @@ void Link_AnimateVertexColors(ObjectRecAt8 *object, u8 *colors) {
                 u8 *color;
 
                 if (flags & 0x70) {
-                    amount = D_800CD604[(state + ((flags & 0x70) >> 2)) & 0x3F];
+                    amount = g_enemyDispatchLinkStorage_800CD604[(state + ((flags & 0x70) >> 2)) & 0x3F];
                     amount >>= (flags & 0xC) >> 2;
                     color = colors + i * 4;
 
@@ -81,7 +81,7 @@ void Link_AnimateVertexColors(ObjectRecAt8 *object, u8 *colors) {
 
 /* Saves each vertex's base colour for the colour pulse (Link_AnimateVertexColors): copies the r, g, b of every
    vertex of the object into colors (4 bytes per vertex), clamped to 30..225. */
-void Link_CaptureVertexColors(ObjectRecAt8 *object, u8 *colors) {
+void Link_CaptureVertexColors(VertexColorMeshView *object, u8 *colors) {
     s32 i, count;
     Vtx *records;
     Vtx *record;
@@ -128,8 +128,8 @@ s32 Link_SumWorldSectionCounts(void) {
     s32 i;
     char *base = (char *)&g_world;
 
-    for (i = 0; i < ((IntegerState1504 *)(base))->unk_1500; i++) {
-        total += ((struct Shape_typemap_13 *)SetN64_GetPackSection(*((struct ObjectLinks150C *) (base + (i * 0xC)))->unk_1508, 2))->field_4;
+    for (i = 0; i < ((WorldSectionCountView *)(base))->unk_1500; i++) {
+        total += ((struct ActorAnimationEventTable *)SetN64_GetPackSection(*((struct WorldSectionResourceView *) (base + (i * 0xC)))->unk_1508, 2))->field_4;
     }
     return total;
 }

@@ -1,18 +1,18 @@
 #include "sdk/LIBC.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "include_asm.h"
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "GFX/OVERLAY_SCRIPT_AND_TEXT_TABLE_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/STATEPAIR.H"
 #include "COMMON/OBJRECAT18V6.H"
 #include "TYPES.H"
 #include "RESMGR/TSMOS_UPDATEFRONTEND.H"
 #include "SYSTEM/TEXTLOAD_RESETTEXTURECACHE.H"
-#include "COMMON/LONE/D_800CD764_de.H"
+#include "COMMON/LONE/SCREEN_IMAGE_RESOURCES_ENABLED.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "gbi.h"
@@ -32,34 +32,34 @@ s32 OnScreen_UpdateMoverScript(void *);
 
 extern void OnScreen_DrawStatusBar(void *hud, int which);
 
-void OnScreen_InitMover(void *arg0, s16 arg1, s16 arg2)
+void OnScreen_InitMover(void *moverStorage, s16 x, s16 y)
 {
-  COverlay *mover = arg0;
+  COverlay *mover = moverStorage;
   mover->handle = -1;
   mover->active = 0;
   mover->state = 0;
-  mover->x = (f32) arg1;
-  mover->y = (f32) arg2;
+  mover->x = (f32) x;
+  mover->y = (f32) y;
 }
 
-s32 OnScreen_StartMoverScript(void *widget, s32 *arg1) {
-    (((struct ObjectLinksC_2 *) ((s8 *) widget))->unk_4) = arg1;
-    (((struct ObjectLinksC_2 *) ((s8 *) widget))->unk_8) = 2;
+s32 OnScreen_StartMoverScript(void *widget, s32 *script) {
+    (((struct OverlayScriptTableView *) ((s8 *) widget))->script) = script;
+    (((struct OverlayScriptTableView *) ((s8 *) widget))->state) = 2;
     return OnScreen_UpdateMoverScript(widget);
 }
 
-s32 OnScreen_StartFirstStatusBar(void *widget, s32 arg1, s32 arg2) {
-    (((struct IntegerState48 *) ((s8 *) widget))->unk_40) = arg1;
-    (((struct IntegerState48 *) ((s8 *) widget))->unk_3C) = arg2;
-    (((struct IntegerState48 *) ((s8 *) widget))->unk_44) = 0x64;
-    return OnScreen_StartMoverScript(widget, &D_800CDEB4);
+s32 OnScreen_StartFirstStatusBar(void *widget, s32 owner, s32 target) {
+    (((struct OverlayScriptPrimaryRangeView *) ((s8 *) widget))->owner) = owner;
+    (((struct OverlayScriptPrimaryRangeView *) ((s8 *) widget))->target) = target;
+    (((struct OverlayScriptPrimaryRangeView *) ((s8 *) widget))->initialPercent) = 0x64;
+    return OnScreen_StartMoverScript(widget, &g_firstStatusBarMoverScript);
 }
 
-void OnScreen_StartSecondStatusBar(void *arg0, s32 arg1, s32 arg2) {
-    (((struct IntegerState90 *) ((s8 *) arg0))->unk_88) = arg1;
-    (((struct IntegerState90 *) ((s8 *) arg0))->unk_84) = arg2;
-    (((struct IntegerState90 *) ((s8 *) arg0))->unk_8C) = 0x64;
-    OnScreen_StartMoverScript(arg0 + 0x48, &D_800CDEC8);
+void OnScreen_StartSecondStatusBar(void *hud, s32 owner, s32 target) {
+    (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->owner) = owner;
+    (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->target) = target;
+    (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->initialPercent) = 0x64;
+    OnScreen_StartMoverScript(hud + 0x48, &g_secondStatusBarMoverScript);
 }
 
 void OnScreen_SetFirstBarTarget(char *object, int value) {
@@ -83,9 +83,9 @@ void OnScreen_DrawStatusBars(void *playerHud) {
     }
     OnScreen_SetupTextRendering();
     OnScreen_LoadTextTileModeOne();
-    OnScreen_SetTextScale(D_800C61F0_de, D_800C61F0_de);
+    OnScreen_SetTextScale(g_hudStatusBarTextScale, g_hudStatusBarTextScale);
     OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-    Onscrn_SetupSpriteMode(D_801462C8.hudFade);
+    Onscrn_SetupSpriteMode(g_gameSettings.hudFade);
     if (((Hud *)playerHud)->bars[0].enabled != 0) {
         OnScreen_DrawStatusBar(playerHud, 1);
     }
@@ -97,7 +97,7 @@ void OnScreen_DrawStatusBars(void *playerHud) {
 /** Return the floating parameter selected by the current global mode. */
 f32 OnScreen_GetGlyphWidth(void) {
     {
-        s32 sw_mode_value = D_80147150;
+        s32 sw_mode_value = g_creditsTextDrawingEnabled;
         if ((unsigned int)sw_mode_value > 6) {
             goto sw_mode_default;
         }
@@ -126,7 +126,7 @@ f32 OnScreen_GetGlyphWidth(void) {
         return 16.0f;
     sw_mode_default:
         return 1.0f;
-    
+
     } while (0);
 }
 
@@ -154,28 +154,28 @@ void OnScreen_GetImageEntry(Table802AB8DC **handle, s32 index, void **out, u8 *t
 
 extern Gfx *g_displayListCursor;
 
-extern s32 Scene_StartWorldEffect(void *world, s32 arg1, s32 flags, s32 extra);
-extern void Cache_UnlockResource(s32 arg0, s32 resource);
+extern s32 Scene_StartWorldEffect(void *world, s32 id, s32 flags, s32 extra);
+extern void Cache_UnlockResource(s32 cacheContext, s32 resource);
 extern s32 Geometry_SetModePreset(s32);
 extern void Geometry_SetCombineMode(u32);
 
 #if defined(VERSION_EU_X)
-void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
+void OnScreen_GetImageDimensions(s32 resourceId, s32 frameIndex, s32 *widthOutput, s32 *heightOutput)
 {
   void *sp10;
   s32 sp14;
   void *imageData;
-  s32 temp_v0;
-  if (D_800CD764_de != 0)
+  s32 resourceHandle;
+  if (g_screenImageResourcesEnabled != 0)
   {
-    temp_v0 = Scene_StartWorldEffect(&g_world, arg0, 0, 1);
-    if (temp_v0 != 0)
+    resourceHandle = Scene_StartWorldEffect(&g_world, resourceId, 0, 1);
+    if (resourceHandle != 0)
     {
-      OnScreen_GetImageEntry(temp_v0, arg1, &sp10, &sp14);
+      OnScreen_GetImageEntry(resourceHandle, frameIndex, &sp10, &sp14);
       imageData = sp10;
-      *arg2 = ((ImageSet *)sp10)->width;
-      *arg3 = ((ImageSet *)imageData)->height;
-      Cache_UnlockResource(0, temp_v0);
+      *widthOutput = ((ImageSet *)sp10)->width;
+      *heightOutput = ((ImageSet *)imageData)->height;
+      Cache_UnlockResource(0, resourceHandle);
     }
   }
 }
@@ -208,29 +208,29 @@ void OnScreen_FillRectangle(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 extern s32 Scene_StartWorldEffect(void *,s32,s32,s32);
 extern void Cache_UnlockResource(s32,s32);
 
-void OnScreen_SetTextColors(int arg0, int arg1, int arg2, int alpha, int arg4, int arg5) {
-    D_801376F8.envR = arg0;
-    D_801376F8.envG = arg1;
-    D_801376F8.envB = arg2;
-    D_801376F8.primR = alpha;
-    D_801376F8.primG = arg4;
-    D_801376F8.primB = arg5;
+void OnScreen_SetTextColors(int topRed, int topGreen, int topBlue, int alpha, int bottomGreen, int bottomBlue) {
+    g_tutorialStatusBars.envR = topRed;
+    g_tutorialStatusBars.envG = topGreen;
+    g_tutorialStatusBars.envB = topBlue;
+    g_tutorialStatusBars.primR = alpha;
+    g_tutorialStatusBars.primG = bottomGreen;
+    g_tutorialStatusBars.primB = bottomBlue;
 }
 #endif
 
 #if defined(VERSION_EU_X)
-void OnScreen_SetTextScale(float arg0, float arg1) {
-    D_801376F8.width = arg0;
-    D_801376F8.height = arg1;
+void OnScreen_SetTextScale(float scaleX, float scaleY) {
+    g_tutorialStatusBars.width = scaleX;
+    g_tutorialStatusBars.height = scaleY;
 }
 #endif
 
 #if defined(VERSION_EU_X)
-void OnScreen_DrawTextWithShadow(u8 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 alpha, s32 arg7) {
-    if (arg5 != 0) {
-        OnScreen_DrawTextGlyphs(arg0, arg1, arg2, arg3, arg4, 1, alpha, arg7);
+void OnScreen_DrawTextWithShadow(u8 *text, f32 x, f32 y, f32 scaleX, f32 scaleY, s32 drawShadow, s32 alpha, s32 textFlags) {
+    if (drawShadow != 0) {
+        OnScreen_DrawTextGlyphs(text, x, y, scaleX, scaleY, 1, alpha, textFlags);
     }
-    OnScreen_DrawTextGlyphs(arg0, arg1, arg2, arg3, arg4, 0, alpha, arg7);
+    OnScreen_DrawTextGlyphs(text, x, y, scaleX, scaleY, 0, alpha, textFlags);
 }
 #endif
 
@@ -243,22 +243,22 @@ void OnScreen_DrawTextWithShadow(u8 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 
 extern void Text_DrawTileGrid(s32 handle, s32 index, s16 initialX, s16 initialY, f32 scaleX, f32 scaleY, s32 scaled);
 
-void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *outWidth, s32 *outHeight)
+void OnScreen_GetImageDimensions(s32 resourceId, s32 frameIndex, s32 *outWidth, s32 *outHeight)
 {
   void *image;
   s32 imageTag;
-  void *new_var;
-  s32 temp_v0;
-  if (D_800CD764_de != 0)
+  void *imageResource;
+  s32 resourceHandle;
+  if (g_screenImageResourcesEnabled != 0)
   {
-    temp_v0 = Scene_StartWorldEffect(&g_world, arg0, 0, 1);
-    if (temp_v0 != 0)
+    resourceHandle = Scene_StartWorldEffect(&g_world, resourceId, 0, 1);
+    if (resourceHandle != 0)
     {
-      OnScreen_GetImageEntry(temp_v0, arg1, &image, &imageTag);
-      new_var = image;
+      OnScreen_GetImageEntry(resourceHandle, frameIndex, &image, &imageTag);
+      imageResource = image;
       *outWidth = ((ImageSet *)image)->width;
-      *outHeight = ((ImageSet *)new_var)->height;
-      Cache_UnlockResource(0, temp_v0);
+      *outHeight = ((ImageSet *)imageResource)->height;
+      Cache_UnlockResource(0, resourceHandle);
     }
   }
 }
@@ -284,24 +284,24 @@ void OnScreen_FillRectangle(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 
 /** Store six words into the global record. */
 void OnScreen_SetTextColors(int environmentRed, int environmentGreen, int environmentBlue, int primitiveRed, int primitiveGreen, int primitiveBlue) {
-    D_801376F8.envR = environmentRed;
-    D_801376F8.envG = environmentGreen;
-    D_801376F8.envB = environmentBlue;
-    D_801376F8.primR = primitiveRed;
-    D_801376F8.primG = primitiveGreen;
-    D_801376F8.primB = primitiveBlue;
+    g_tutorialStatusBars.envR = environmentRed;
+    g_tutorialStatusBars.envG = environmentGreen;
+    g_tutorialStatusBars.envB = environmentBlue;
+    g_tutorialStatusBars.primR = primitiveRed;
+    g_tutorialStatusBars.primG = primitiveGreen;
+    g_tutorialStatusBars.primB = primitiveBlue;
 }
 
 void OnScreen_SetTextScale(float horizontalScale, float verticalScale) {
-    D_801376F8.width = horizontalScale;
-    D_801376F8.height = verticalScale;
+    g_tutorialStatusBars.width = horizontalScale;
+    g_tutorialStatusBars.height = verticalScale;
 }
 
-void OnScreen_DrawTextWithShadow(s32 text, f32 x, f32 arg2, f32 width, f32 height, s32 arg5, s32 alpha, s32 language) {
-    if (arg5 != 0) {
-        OnScreen_DrawTextGlyphs(text, x, arg2, width, height, 1, alpha, language);
+void OnScreen_DrawTextWithShadow(s32 text, f32 x, f32 y, f32 width, f32 height, s32 drawShadow, s32 alpha, s32 language) {
+    if (drawShadow != 0) {
+        OnScreen_DrawTextGlyphs(text, x, y, width, height, 1, alpha, language);
     }
-    OnScreen_DrawTextGlyphs(text, x, arg2, width, height, 0, alpha, language);
+    OnScreen_DrawTextGlyphs(text, x, y, width, height, 0, alpha, language);
 }
 
 #endif
@@ -311,8 +311,8 @@ s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 x, s16 y, f32 sca
 
     s32 resourceHandle;
 
-    if ((u32)(D_800E28A4 - (((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) >> 3)) < 0x3E8
-        || D_800CD764_de == 0
+    if ((u32)(g_displayListCapacityUsRev1 - (((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) >> 3)) < 0x3E8
+        || g_screenImageResourcesEnabled == 0
         || (resourceHandle = Scene_StartWorldEffect(&g_world, resourceId, 0, 1), resourceHandle == 0)) {
         return 0;
     }
@@ -321,7 +321,7 @@ s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 x, s16 y, f32 sca
     return 1;
 }
 
-extern u8 D_801470C0_de[0x90];
+extern u8 g_onScreenFontTextureStorage[0x90];
 
 typedef struct ResourceView {
     u8 *data;
@@ -352,9 +352,9 @@ void OnScreen_LoadFontTexture(void) {
         if (view.data != 0) {
             view.data += 0x10;
         }
-        func_802BD3A0_de(D_801470C0_de, view.data, 0x90);
+        Libc_CopyBytes(g_onScreenFontTextureStorage, view.data, 0x90);
         Cache_UnlockResource(0, handle);
-        g_onScreenFontTexture = D_801470C0_de;
+        g_onScreenFontTexture = g_onScreenFontTextureStorage;
     }
 }
 

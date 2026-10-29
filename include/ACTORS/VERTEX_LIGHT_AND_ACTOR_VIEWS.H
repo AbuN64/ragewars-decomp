@@ -1,11 +1,11 @@
 #ifndef ACTORS_VERTEX_LIGHT_AND_ACTOR_VIEWS_H
 #define ACTORS_VERTEX_LIGHT_AND_ACTOR_VIEWS_H
 #include "TYPES.H"
-struct ObjRecAt6V2 {
+struct TriggerSoundIdView {
     char pad0[0x6];
-    short unk6;
+    short soundId;
 };
-struct ObjectState104 {
+struct TriggerActorTransformView {
     unsigned char padding_0[8];
     f32 unk_8;
     f32 unk_C;
@@ -15,7 +15,7 @@ struct ObjectState104 {
     unsigned char padding_70[144];
     s32 unk_100;
 };
-struct FloatState64 {
+struct TriggerTargetTransformView {
     unsigned char padding_0[72];
     f32 unk_48;
     f32 unk_4C;
@@ -23,9 +23,9 @@ struct FloatState64 {
     unsigned char padding_54[12];
     f32 unk_60;
 };
-struct func_80278EEC_S1 {
+struct TriggerActivationView {
     char pad0[0xE];
-    char unkE;
+    char enabled;
 };
 typedef struct Vertex38 { s16 px, py, pz; u16 flags; s16 s, t; s8 x, y, z; u8 alpha; } Vertex38;
 typedef struct Vertices38 { s32 stride, count; Vertex38 vertices[1]; } Vertices38;

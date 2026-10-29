@@ -9,7 +9,7 @@ extern void DispatchControllerButtonEvent(input_event *event);
 extern void Controller_SendControllerButtonEvent(s16 port, s16 control, s32 pressed);
 extern void Controller_SendControllerStickEvent(s16 port, s32 stick_x, s32 stick_y);
 
-extern void Controller_SetControllerEventFilter(s32 (*arg0)(void));
+extern void Controller_SetControllerEventFilter(s32 (*filter)(void));
 
 extern void Controller_AllocateControllerContext(void);
 extern void Controller_FreeControllerContext(void);

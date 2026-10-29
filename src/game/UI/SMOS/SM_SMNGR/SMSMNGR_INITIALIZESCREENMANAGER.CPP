@@ -9,7 +9,7 @@
 #include "COMMON/WIDGETRECAT34.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "FRONTEND/FRONTEND_OPENRESOURCEARCHIVE.H"
 #include "MATH/SMSMNGR_INITIALIZESCREENMANAGER.H"
 #include "RESMGR/STREAM.H"
@@ -37,7 +37,7 @@ void Stream_DrainResourceWork(void);
  /* extern */
 
 
-/* Initialises the interface system for a number of screens: resets the input state and display, allocates and clears the 0x544-byte interface state in D_8014D080 with its 64 widget slots, its 900-byte object cache and its screen table, records the screen count, a 4000 limit and the frame duration from N64Eng_GetTimeSeconds, resets the focus and paging fields, and registers fonts 9 and 11. */
+/* Initialises the interface system for a number of screens: resets the input state and display, allocates and clears the 0x544-byte interface state in g_screenManager with its 64 widget slots, its 900-byte object cache and its screen table, records the screen count, a 4000 limit and the frame duration from N64Eng_GetTimeSeconds, resets the focus and paging fields, and registers fonts 9 and 11. */
 
 
 
@@ -62,42 +62,42 @@ void SmSmngr_InitializeCurrentScreen(void) {
     s32 (*callback2Value)(s32);
     s32 current;
     s32 value, param;
-    current = D_8014D080->current;
-    callback2Value = D_8014D080->callback2;
-    param = D_8014D080->screens[current].owner;
+    current = g_screenManager->current;
+    callback2Value = g_screenManager->callback2;
+    param = g_screenManager->screens[current].owner;
     if (callback2Value != NULL) {
         value = callback2Value(param);
-        ((struct ObjRecAt40V1 *)D_8014D080->screens[current].primary)->unk40 = value;
+        ((struct ObjRecAt40V1 *)g_screenManager->screens[current].primary)->unk40 = value;
     }
     DispatchCurrentScreenEvent(1, 0xE06, 0, 0, 0);
     DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
-    D_8014D080->screens[current].data.readPosition = 0;
-    DispatchCurrentScreenEvent(1, 0xE02, &D_8014D080->screens[current].data, 0, 0);
-    StreamBufferFree(&D_8014D080->screens[current].data);
+    g_screenManager->screens[current].data.readPosition = 0;
+    DispatchCurrentScreenEvent(1, 0xE02, &g_screenManager->screens[current].data, 0, 0);
+    StreamBufferFree(&g_screenManager->screens[current].data);
 }
 
-int SmSmngr_DeactivateCurrentScreen(int arg0) {
- int index,event,result; ObjRecAtCV1 *item; int (*callback)(int,int,int,int);
- index=D_8014D080->current;
- if(index>=0 && D_8014D080->field530) {
- item=(ObjRecAtCV1 *)D_8014D080->screens[index].focus;
- if(item) Menu_RouteElementEvent(item->unkC,0x10,0,0,0);
- event=arg0;
+int SmSmngr_DeactivateCurrentScreen(int screenOwner) {
+ int index,event,result; MenuActorInputView *item; int (*callback)(int,int,int,int);
+ index=g_screenManager->current;
+ if(index>=0 && g_screenManager->screenChangePending) {
+ item=(MenuActorInputView *)g_screenManager->screens[index].focus;
+ if(item) Menu_RouteElementEvent(item->input,0x10,0,0,0);
+ event=screenOwner;
  Stream_DrainResourceWork();
- if(D_8014D080->current != -1) {
- callback=D_8014D080->callback;
+ if(g_screenManager->current != -1) {
+ callback=g_screenManager->callback;
  if(callback) {
- arg0=D_8014D080->handled;
- D_8014D080->handled=0;
+ screenOwner=g_screenManager->handled;
+ g_screenManager->handled=0;
  callback(0xE03,event,0,0);
- result=D_8014D080->handled;
- if(result==1) { D_8014D080->handled=arg0; goto done; }
- D_8014D080->handled=arg0;
+ result=g_screenManager->handled;
+ if(result==1) { g_screenManager->handled=screenOwner; goto done; }
+ g_screenManager->handled=screenOwner;
  }
  DispatchCurrentScreenEvent(1,0xE03,event,0,0);
  }
  done:
- D_8014D080->field530=0;
+ g_screenManager->screenChangePending=0;
  }
  return 1;
 }
@@ -112,13 +112,13 @@ void SmSmngr_InitializeScreenManager(s32 screenCount, s32 value) {
     Node_SetDisplayClipBounds(g_screenDrawWidth, g_screenDrawHeight);
     Controller_AllocateControllerContext();
     g_menuEventCount = 0;
-    D_8014D080 = Cache_AllocateMemory(0x544);
-    XPlus_FillBytes(D_8014D080, 0, 0x544);
-    D_8014D080->callback2 = (s32 (*)(s32))value;
-    D_8014D080->limit = 4000;
+    g_screenManager = Cache_AllocateMemory(0x544);
+    XPlus_FillBytes(g_screenManager, 0, 0x544);
+    g_screenManager->callback2 = (s32 (*)(s32))value;
+    g_screenManager->limit = 4000;
     {
-        struct MenuHandlerEntry *slot = D_8014D080->handlers;
-        s32 *ids = &D_8014D080->handlers[0].id;
+        struct MenuHandlerEntry *slot = g_screenManager->handlers;
+        s32 *ids = &g_screenManager->handlers[0].id;
         for (i = 0; i < 64; slot++, i++, ids += 5) {
             slot->override_handler = 0;
             *ids = -1;
@@ -126,22 +126,22 @@ void SmSmngr_InitializeScreenManager(s32 screenCount, s32 value) {
             slot->draw_handler = 0;
         }
     }
-    D_8014D080->cache = Cache_AllocateMemory(0x384);
-    XPlus_FillBytes(D_8014D080->cache, 0, 0x384);
-    D_8014D080->cacheCount = 0;
-    frames = N64Eng_GetTimeSeconds() * D_800C5668_de;
-    D_8014D080->screenCount = screenCount;
-    D_8014D080->frames = frames;
-    D_8014D080->screens = Cache_AllocateMemory(screenCount * 28);
-    XPlus_FillBytes(D_8014D080->screens, 0, screenCount * 28);
-    D_80146E14 = 0;
-    D_8014D080->current = -1;
-    D_8014D080->focus = -1;
-    D_8014D080->field534 = 0;
-    D_8014D080->field538 = 0;
-    D_8014D080->paging = 1;
-    SmSmngr_RegisterElementHandlers(9, D_0040C5C0, D_0040C5C8, 1);
-    SmSmngr_RegisterElementHandlers(11, D_004125A4, D_00412634, 1);
+    g_screenManager->cache = Cache_AllocateMemory(0x384);
+    XPlus_FillBytes(g_screenManager->cache, 0, 0x384);
+    g_screenManager->cacheCount = 0;
+    frames = N64Eng_GetTimeSeconds() * g_screenManagerFrameScale;
+    g_screenManager->screenCount = screenCount;
+    g_screenManager->frames = frames;
+    g_screenManager->screens = Cache_AllocateMemory(screenCount * 28);
+    XPlus_FillBytes(g_screenManager->screens, 0, screenCount * 28);
+    g_menuScreenOwnerOverride = 0;
+    g_screenManager->current = -1;
+    g_screenManager->focus = -1;
+    g_screenManager->eventArgument0 = 0;
+    g_screenManager->eventArgument1 = 0;
+    g_screenManager->paging = 1;
+    SmSmngr_RegisterElementHandlers(9, Menu_KindNineDrawHandlerAddress, Menu_KindNineEventHandlerAddress, 1);
+    SmSmngr_RegisterElementHandlers(11, Menu_KindElevenDrawHandlerAddress, Menu_KindElevenEventHandlerAddress, 1);
 }
 
 Element *FindMenuElement(s32 id) {
@@ -150,10 +150,10 @@ Element *FindMenuElement(s32 id) {
     s32 i;
 
     context = (s32)Node_GetScreenData(GetMenuScreenOwner());
-    for (i = 0; i < D_8014D080->cacheCount; i++) {
-        if (D_8014D080->cache[i].context == context && D_8014D080->cache[i].id == id
-            && D_8014D080->cache[i].object != 0 && D_8014D080->cache[i].object->id == id) {
-            return D_8014D080->cache[i].object;
+    for (i = 0; i < g_screenManager->cacheCount; i++) {
+        if (g_screenManager->cache[i].context == context && g_screenManager->cache[i].id == id
+            && g_screenManager->cache[i].object != 0 && g_screenManager->cache[i].object->id == id) {
+            return g_screenManager->cache[i].object;
         }
     }
     object = (Element *)Node_FindWidgetByResourceId((struct Tree *)context, id & 0xFFFF);
@@ -161,39 +161,39 @@ Element *FindMenuElement(s32 id) {
     if (g_menuElementLoadPeak < g_menuElementLoadCount) {
         g_menuElementLoadPeak = g_menuElementLoadCount;
     }
-    if (D_8014D080->cacheCount < 75) {
-        D_8014D080->cache[D_8014D080->cacheCount].id = id;
-        D_8014D080->cache[D_8014D080->cacheCount].object = object;
-        D_8014D080->cache[D_8014D080->cacheCount].context = context;
-        D_8014D080->cacheCount++;
+    if (g_screenManager->cacheCount < 75) {
+        g_screenManager->cache[g_screenManager->cacheCount].id = id;
+        g_screenManager->cache[g_screenManager->cacheCount].object = object;
+        g_screenManager->cache[g_screenManager->cacheCount].context = context;
+        g_screenManager->cacheCount++;
     }
     return object;
 }
 
 /* Registers a widget handler under an identifier, reusing its slot or the first free one, or clears that slot when no handler is given. */
-void SmSmngr_RegisterElementHandlers(s32 id, MenuElementHandler arg1, MenuDrawHandler draw_handler, s32 arg3) {
+void SmSmngr_RegisterElementHandlers(s32 id, MenuElementHandler eventHandler, MenuDrawHandler draw_handler, s32 flags) {
     s32 slot = -1;
     s32 i;
 
     for (i = 0; i < 64; i++) {
-        if (D_8014D080->handlers[i].id == id) {
+        if (g_screenManager->handlers[i].id == id) {
             slot = i;
             break;
         }
-        if (D_8014D080->handlers[i].id == -1 && slot == -1) {
+        if (g_screenManager->handlers[i].id == -1 && slot == -1) {
             slot = i;
         }
     }
-    if (arg1 != 0) {
-        D_8014D080->handlers[slot].id = id;
-        D_8014D080->handlers[slot].default_handler = arg1;
-        D_8014D080->handlers[slot].draw_handler = draw_handler;
-        D_8014D080->handlers[slot].override_handler = 0;
-        D_8014D080->handlers[slot].flags = arg3;
+    if (eventHandler != 0) {
+        g_screenManager->handlers[slot].id = id;
+        g_screenManager->handlers[slot].default_handler = eventHandler;
+        g_screenManager->handlers[slot].draw_handler = draw_handler;
+        g_screenManager->handlers[slot].override_handler = 0;
+        g_screenManager->handlers[slot].flags = flags;
     } else {
-        D_8014D080->handlers[slot].id = -1;
-        D_8014D080->handlers[slot].default_handler = 0;
-        D_8014D080->handlers[slot].draw_handler = 0;
-        D_8014D080->handlers[slot].override_handler = 0;
+        g_screenManager->handlers[slot].id = -1;
+        g_screenManager->handlers[slot].default_handler = 0;
+        g_screenManager->handlers[slot].draw_handler = 0;
+        g_screenManager->handlers[slot].override_handler = 0;
     }
 }

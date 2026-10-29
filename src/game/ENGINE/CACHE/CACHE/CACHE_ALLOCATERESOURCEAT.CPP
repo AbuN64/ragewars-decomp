@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RESOURCELOCKSTATE.H"
 #include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
@@ -12,17 +12,17 @@
 
 
 
-extern struct Shape_typemap_165 *func_802548B8_de(s32, s32, u32, void *);
+extern struct CacheResourceBlockView *Cache_AllocateResourceNodeStorage(s32, s32, u32, void *);
 
-extern s8 D_801051A0;
+extern s8 g_runtimeHeap;
 
-extern struct Shape_typemap_165 *Cache_AcquireResourceNodeWithEviction(s32, u32);
+extern struct CacheResourceBlockView *Cache_AcquireResourceNodeWithEviction(s32, u32);
 
-extern s32 func_80255630_de(s8 *, void *, s32);
+extern s32 Heap_AllocateAtAddress(s8 *, void *, s32);
 
 extern void Cache_InsertResourceByAddress(s32 unused, void *object);
 
-extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 entryAddress);
 
 extern void Cache_TouchResource(void *, Node80253610 *);
 
@@ -34,47 +34,47 @@ extern s32 Cache_SelectAllocationCandidate(s32, s32, s32);
 
 
 
-extern s32 D_80101134[];
+extern s32 g_resourceSlotActivity[];
 
-struct Shape_typemap_165 *Cache_AllocateResource(s32 arg0, s32 byteCount, u32 allocationFlags, void *arg3) {
-    extern OSMesgQueue D_80101140;
-    struct Shape_typemap_165 *resource;
+struct CacheResourceBlockView *Cache_AllocateResource(s32 unusedCache, s32 byteCount, u32 allocationFlags, void *context) {
+    extern OSMesgQueue g_resourceHeapLockQueue;
+    struct CacheResourceBlockView *resource;
     s32 lockUsers;
     s32 remainingLockUsers;
     u32 mask;
     u32 unlockInterruptMask;
     s32 requestedBytes;
     u32 requestedFlags;
-    void *temp_s2;
+    void *evictedResource;
 
     requestedBytes = byteCount;
     requestedFlags = allocationFlags;
-    temp_s2 = arg3;
+    evictedResource = context;
     mask = __osDisableInt();
-    lockUsers = D_8010515C + 1;
-    D_8010515C = lockUsers;
+    lockUsers = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = lockUsers;
     if (lockUsers != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(&D_80101140, 0, 1);
+        osRecvMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    resource = func_802548B8_de(0, requestedBytes, requestedFlags, temp_s2);
+    resource = Cache_AllocateResourceNodeStorage(0, requestedBytes, requestedFlags, evictedResource);
     unlockInterruptMask = __osDisableInt();
-    remainingLockUsers = D_8010515C - 1;
-    D_8010515C = remainingLockUsers;
+    remainingLockUsers = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = remainingLockUsers;
     if (remainingLockUsers != 0) {
         __osRestoreInt(unlockInterruptMask);
-        osSendMesg(&D_80101140, 0, 1);
+        osSendMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(unlockInterruptMask);
     }
     return resource;
 }
 
-struct Shape_typemap_165 *Cache_AllocateResourceAt(void *arg0, void *requestedAddress, s32 byteCount, char *name) {
-    extern OSMesgQueue D_80101140;
-    struct Shape_typemap_165 *allocatedResource;
+struct CacheResourceBlockView *Cache_AllocateResourceAt(void *address, void *requestedAddress, s32 byteCount, char *name) {
+    extern OSMesgQueue g_resourceHeapLockQueue;
+    struct CacheResourceBlockView *allocatedResource;
     s32 allocatedAddress;
     s32 lockClaimCount;
     s32 lockReleaseCount;
@@ -82,21 +82,21 @@ struct Shape_typemap_165 *Cache_AllocateResourceAt(void *arg0, void *requestedAd
     u32 releaseInterruptMask;
 
     mask = __osDisableInt();
-    lockClaimCount = D_8010515C + 1;
-    D_8010515C = lockClaimCount;
+    lockClaimCount = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = lockClaimCount;
     if (lockClaimCount != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(&D_80101140, 0, 1);
+        osRecvMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
     allocatedResource = Cache_AcquireResourceNodeWithEviction(0, 0U);
     if (allocatedResource != 0) {
-        allocatedAddress = func_80255630_de(&D_801051A0, requestedAddress, byteCount);
-        allocatedResource->field_0 = allocatedAddress;
+        allocatedAddress = Heap_AllocateAtAddress(&g_runtimeHeap, requestedAddress, byteCount);
+        allocatedResource->first = allocatedAddress;
         if (allocatedAddress != 0) {
-            allocatedResource->field_4 = byteCount;
-            allocatedResource->field_C |= 3;
+            allocatedResource->second = byteCount;
+            allocatedResource->fourth |= 3;
             Cache_InsertResourceByAddress(0, allocatedResource);
         } else {
             Cache_ReleasePendingResourceEntry(0, allocatedResource);
@@ -104,19 +104,19 @@ struct Shape_typemap_165 *Cache_AllocateResourceAt(void *arg0, void *requestedAd
         }
     }
     releaseInterruptMask = __osDisableInt();
-    lockReleaseCount = D_8010515C - 1;
-    D_8010515C = lockReleaseCount;
+    lockReleaseCount = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = lockReleaseCount;
     if (lockReleaseCount != 0) {
         __osRestoreInt(releaseInterruptMask);
-        osSendMesg(&D_80101140, 0, 1);
+        osSendMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(releaseInterruptMask);
     }
     return allocatedResource;
 }
 
-void Cache_LockResource(void *arg0, Node80253610 *resource) {
-    extern OSMesgQueue D_80101140;
+void Cache_LockResource(void *cacheContext, Node80253610 *resource) {
+    extern OSMesgQueue g_resourceHeapLockQueue;
     s32 lockUsers;
     s32 remainingLockUsers;
     u32 mask;
@@ -125,11 +125,11 @@ void Cache_LockResource(void *arg0, Node80253610 *resource) {
 
     resourceNode = resource;
     mask = __osDisableInt();
-    lockUsers = D_8010515C + 1;
-    D_8010515C = lockUsers;
+    lockUsers = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = lockUsers;
     if (lockUsers != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(&D_80101140, 0, 1);
+        osRecvMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -137,18 +137,18 @@ void Cache_LockResource(void *arg0, Node80253610 *resource) {
     resourceNode->references += 1;
     resourceNode->flags |= 0x100;
     unlockInterruptMask = __osDisableInt();
-    remainingLockUsers = D_8010515C - 1;
-    D_8010515C = remainingLockUsers;
+    remainingLockUsers = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = remainingLockUsers;
     if (remainingLockUsers != 0) {
         __osRestoreInt(unlockInterruptMask);
-        osSendMesg(&D_80101140, 0, 1);
+        osSendMesg(&g_resourceHeapLockQueue, 0, 1);
         return;
     }
     __osRestoreInt(unlockInterruptMask);
 }
 
-void Cache_UnlockResource(void *arg0, Node80253610 *resource) {
-    extern OSMesgQueue D_80101140;
+void Cache_UnlockResource(void *cacheContext, Node80253610 *resource) {
+    extern OSMesgQueue g_resourceHeapLockQueue;
     s32 lockUsers;
     s32 remainingLockUsers;
     u32 mask;
@@ -157,11 +157,11 @@ void Cache_UnlockResource(void *arg0, Node80253610 *resource) {
 
     resourceNode = resource;
     mask = __osDisableInt();
-    lockUsers = D_8010515C + 1;
-    D_8010515C = lockUsers;
+    lockUsers = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = lockUsers;
     if (lockUsers != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(&D_80101140, 0, 1);
+        osRecvMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -170,57 +170,57 @@ void Cache_UnlockResource(void *arg0, Node80253610 *resource) {
         resourceNode->flags &= ~0x100;
     }
     unlockInterruptMask = __osDisableInt();
-    remainingLockUsers = D_8010515C - 1;
-    D_8010515C = remainingLockUsers;
+    remainingLockUsers = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = remainingLockUsers;
     if (remainingLockUsers != 0) {
         __osRestoreInt(unlockInterruptMask);
-        osSendMesg(&D_80101140, 0, 1);
+        osSendMesg(&g_resourceHeapLockQueue, 0, 1);
         return;
     }
     __osRestoreInt(unlockInterruptMask);
 }
 
-void Cache_ReleaseResource(void *arg0, void *resource) {
-    extern OSMesgQueue D_80101140;
+void Cache_ReleaseResource(void *cacheContext, void *resource) {
+    extern OSMesgQueue g_resourceHeapLockQueue;
     s32 lockUsers;
     s32 remainingLockUsers;
     u32 mask;
     u32 unlockInterruptMask;
 
     mask = __osDisableInt();
-    lockUsers = D_8010515C + 1;
-    D_8010515C = lockUsers;
+    lockUsers = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = lockUsers;
     if (lockUsers != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(&D_80101140, 0, 1);
+        osRecvMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
     Cache_ReleaseResourceCompletely(0, resource);
     unlockInterruptMask = __osDisableInt();
-    remainingLockUsers = D_8010515C - 1;
-    D_8010515C = remainingLockUsers;
+    remainingLockUsers = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = remainingLockUsers;
     if (remainingLockUsers != 0) {
         __osRestoreInt(unlockInterruptMask);
-        osSendMesg(&D_80101140, 0, 1);
+        osSendMesg(&g_resourceHeapLockQueue, 0, 1);
         return;
     }
     __osRestoreInt(unlockInterruptMask);
 }
 
 void Cache_DrainAndCompactResources(s32 unusedHeap) {
-    extern OSMesgQueue D_80101140;
+    extern OSMesgQueue g_resourceHeapLockQueue;
     s32 lockUsers;
     s32 remainingLockUsers;
     u32 mask;
     u32 unlockInterruptMask;
 
     mask = __osDisableInt();
-    lockUsers = D_8010515C + 1;
-    D_8010515C = lockUsers;
+    lockUsers = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = lockUsers;
     if (lockUsers != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(&D_80101140, 0, 1);
+        osRecvMesg(&g_resourceHeapLockQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -229,11 +229,11 @@ void Cache_DrainAndCompactResources(s32 unusedHeap) {
     }
     Cache_CompactResourceHeap(0, 1);
     unlockInterruptMask = __osDisableInt();
-    remainingLockUsers = D_8010515C - 1;
-    D_8010515C = remainingLockUsers;
+    remainingLockUsers = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = remainingLockUsers;
     if (remainingLockUsers != 0) {
         __osRestoreInt(unlockInterruptMask);
-        osSendMesg(&D_80101140, 0, 1);
+        osSendMesg(&g_resourceHeapLockQueue, 0, 1);
         return;
     }
     __osRestoreInt(unlockInterruptMask);
@@ -247,20 +247,20 @@ void Cache_SelectResourceSlot(s32 unused, s32 resourceSlot) {
     u32 releaseInterruptMask;
 
     mask = __osDisableInt();
-    lockClaimCount = D_8010515C + 1;
-    D_8010515C = lockClaimCount;
+    lockClaimCount = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = lockClaimCount;
     if (lockClaimCount != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(&((ResourceLockState *)&D_801005A8)->waitQueue, 0, 1);
+        osRecvMesg(&((ResourceLockState *)&g_resourceSlotLockState)->waitQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    base = (ResourceLockState *)&D_801005A8;
+    base = (ResourceLockState *)&g_resourceSlotLockState;
     base->slot = resourceSlot;
-    D_80100598[resourceSlot] = 1;
+    g_resourceSlotProtected[resourceSlot] = 1;
     releaseInterruptMask = __osDisableInt();
-    lockReleaseCount = D_8010515C - 1;
-    D_8010515C = lockReleaseCount;
+    lockReleaseCount = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = lockReleaseCount;
     if (lockReleaseCount != 0) {
         __osRestoreInt(releaseInterruptMask);
         osSendMesg(&base->waitQueue, 0, 1);
@@ -278,20 +278,20 @@ s32 Cache_FinishResourceSlot(void) {
     s32 result;
 
     mask = __osDisableInt();
-    lockClaimCount = D_8010515C + 1;
-    D_8010515C = lockClaimCount;
+    lockClaimCount = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = lockClaimCount;
     if (lockClaimCount != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(((char *)&D_801005A8 + 0xB98), 0, 1);
+        osRecvMesg(((char *)&g_resourceSlotLockState + 0xB98), 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    base = &D_801005A8;
-    result = *(s32 *)((char *)D_80100598 + (*base << 2));
+    base = &g_resourceSlotLockState;
+    result = *(s32 *)((char *)g_resourceSlotProtected + (*base << 2));
     *base = -1;
     releaseInterruptMask = __osDisableInt();
-    lockReleaseCount = D_8010515C - 1;
-    D_8010515C = lockReleaseCount;
+    lockReleaseCount = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = lockReleaseCount;
     if (lockReleaseCount != 0) {
         __osRestoreInt(releaseInterruptMask);
         osSendMesg((char *)base + 0xB98, 0, 1);
@@ -302,7 +302,7 @@ s32 Cache_FinishResourceSlot(void) {
 }
 
 void Cache_MarkResourceInUse(s32 unused0, Node80253610 *resource) {
-    extern OSMesgQueue D_80101140;
+    extern OSMesgQueue g_resourceHeapLockQueue;
     s32 index;
     s32 mask;
     s32 flags;
@@ -312,11 +312,11 @@ void Cache_MarkResourceInUse(s32 unused0, Node80253610 *resource) {
     u32 token;
     u32 token2;
 
-    base = &D_801005A8;
+    base = &g_resourceSlotLockState;
     index = *base;
     token = __osDisableInt();
-    counter = D_8010515C + 1;
-    D_8010515C = counter;
+    counter = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = counter;
     if (counter != 1) {
         __osRestoreInt(token);
         osRecvMesg(((char *)base + 0xB98), 0, 1);
@@ -324,7 +324,7 @@ void Cache_MarkResourceInUse(s32 unused0, Node80253610 *resource) {
         __osRestoreInt(token);
     }
 
-    if (D_80100598[index] != 0) {
+    if (g_resourceSlotProtected[index] != 0) {
         mask = 0x200;
         if (index != 0) {
             mask = 0x400;
@@ -332,16 +332,16 @@ void Cache_MarkResourceInUse(s32 unused0, Node80253610 *resource) {
         flags = resource->flags;
         if (!(flags & mask)) {
             resource->flags = flags | mask;
-            D_80101134[index]++;
+            g_resourceSlotActivity[index]++;
         }
     }
 
     token2 = __osDisableInt();
-    counter2 = D_8010515C - 1;
-    D_8010515C = counter2;
+    counter2 = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = counter2;
     if (counter2 != 0) {
         __osRestoreInt(token2);
-        osSendMesg(&D_80101140, 0, 1);
+        osSendMesg(&g_resourceHeapLockQueue, 0, 1);
         return;
     }
     __osRestoreInt(token2);

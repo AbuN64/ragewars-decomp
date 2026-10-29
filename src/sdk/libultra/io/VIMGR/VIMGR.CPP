@@ -2,13 +2,13 @@
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/NODERECAT1C.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "sdk/AUDIO/vi.H"
 #include "SYSTEM/VIMGR.H"
 #include "sdk/os.h"
 #include "include_asm.h"
-#include "COMMON/EXTERNS_18.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "SYSTEM/VIDEO_CONTEXT_VIEWS.H"
 #include "sdk/AUDIO/__OSVISWAPCONTEXT.H"
@@ -19,34 +19,34 @@
 
 typedef struct OSThread OSThread;
 
-extern OSThread D_80148850;
-extern OSMesgQueue D_80149A80;
-extern OSMesg D_80149AA0[5];
+extern OSThread g_videoManagerThread;
+extern OSMesgQueue g_videoManagerEventQueue;
+extern OSMesg g_videoManagerEventMessages[5];
 
 extern void osSetEventMesg(s32 event, OSMesgQueue *mq, OSMesg msg);
 extern s32 osGetThreadPri(OSThread *t);
 extern void Scene_SetThreadPriority(OSThread *t, s32 pri);
 
 
-void func_802BA350_de(s32 pri)
+void System_CreateVideoManager(s32 pri)
 {
     u32 savedMask;
     s32 oldPri;
     s32 myPri;
 
-    if (D_800D4420.active) {
+    if (g_videoDeviceManager.active) {
         return;
     }
     Util_InitializeTimerServices();
-    osCreateMesgQueue(&D_80149A80, D_80149AA0, 5);
-    D_80149AC0.hdr.type = 13;
-    D_80149AC0.hdr.pri = 0;
-    D_80149AC0.hdr.retQueue = 0;
-    D_80149AE0.hdr.type = 14;
-    D_80149AE0.hdr.pri = 0;
-    D_80149AE0.hdr.retQueue = 0;
-    osSetEventMesg(7, &D_80149A80, &D_80149AC0);
-    osSetEventMesg(3, &D_80149A80, &D_80149AE0);
+    osCreateMesgQueue(&g_videoManagerEventQueue, g_videoManagerEventMessages, 5);
+    g_videoRetraceEvent.hdr.type = 13;
+    g_videoRetraceEvent.hdr.pri = 0;
+    g_videoRetraceEvent.hdr.retQueue = 0;
+    g_videoTimerEvent.hdr.type = 14;
+    g_videoTimerEvent.hdr.pri = 0;
+    g_videoTimerEvent.hdr.retQueue = 0;
+    osSetEventMesg(7, &g_videoManagerEventQueue, &g_videoRetraceEvent);
+    osSetEventMesg(3, &g_videoManagerEventQueue, &g_videoTimerEvent);
     oldPri = -1;
     myPri = osGetThreadPri(0);
 
@@ -56,16 +56,16 @@ void func_802BA350_de(s32 pri)
     }
 
     savedMask = __osDisableInt();
-    D_800D4420.active = 1;
-    D_800D4420.thread = &D_80148850;
-    D_800D4420.cmdQueue = &D_80149A80;
-    D_800D4420.evtQueue = &D_80149A80;
-    D_800D4420.acsQueue = 0;
-    D_800D4420.dma = 0;
-    D_800D4420.edma = 0;
-    osCreateThread(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + 0x1000 / sizeof(u64), pri);
+    g_videoDeviceManager.active = 1;
+    g_videoDeviceManager.thread = &g_videoManagerThread;
+    g_videoDeviceManager.cmdQueue = &g_videoManagerEventQueue;
+    g_videoDeviceManager.evtQueue = &g_videoManagerEventQueue;
+    g_videoDeviceManager.acsQueue = 0;
+    g_videoDeviceManager.dma = 0;
+    g_videoDeviceManager.edma = 0;
+    osCreateThread(&g_videoManagerThread, 0, System_VideoManagerThreadEntry, &g_videoDeviceManager, g_videoManagerThreadStack + 0x1000 / sizeof(u64), pri);
     __osViInit();
-    osStartThread(&D_80148850);
+    osStartThread(&g_videoManagerThread);
     __osRestoreInt(savedMask);
 
     if (oldPri != -1) {
@@ -82,44 +82,44 @@ void func_802BA350_de(s32 pri)
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message);
 s32 osGetThreadPri(OSThread_s *thread);
 void Scene_SetThreadPriority(OSThread_s *thread, s32 priority);
-extern OSThread_s D_80148850;
-extern struct OSMesgQueue D_80149A80;
-extern void *D_80149AA0[5];
-extern u64 D_8014ED10_de[0x200];
+extern OSThread_s g_videoManagerThread;
+extern struct OSMesgQueue g_videoManagerEventQueue;
+extern void *g_videoManagerEventMessages[5];
+extern u64 g_videoManagerThreadStack[0x200];
 
-void func_802BA5F0_eu(s32 managerPriority) {
+void System_CreateVideoManagerEu(s32 managerPriority) {
     s32 currentPriority;
     s32 restorePriority;
     u32 savedInterruptMask;
 
-    if (D_800D4420.active == 0) {
+    if (g_videoDeviceManager.active == 0) {
         restorePriority = -1;
         Util_InitializeTimerServices();
-        osCreateMesgQueue(&D_80149A80, D_80149AA0, 5);
-        D_80149AC0.hdr.type = 0xD;
-        D_80149AC0.hdr.pri = 0;
-        D_80149AC0.hdr.retQueue = 0;
-        D_80149AE0.hdr.type = 0xE;
-        D_80149AE0.hdr.pri = 0;
-        D_80149AE0.hdr.retQueue = 0;
-        osSetEventMesg(7, &D_80149A80, &D_80149AC0);
-        osSetEventMesg(3, &D_80149A80, &D_80149AE0);
+        osCreateMesgQueue(&g_videoManagerEventQueue, g_videoManagerEventMessages, 5);
+        g_videoRetraceEvent.hdr.type = 0xD;
+        g_videoRetraceEvent.hdr.pri = 0;
+        g_videoRetraceEvent.hdr.retQueue = 0;
+        g_videoTimerEvent.hdr.type = 0xE;
+        g_videoTimerEvent.hdr.pri = 0;
+        g_videoTimerEvent.hdr.retQueue = 0;
+        osSetEventMesg(7, &g_videoManagerEventQueue, &g_videoRetraceEvent);
+        osSetEventMesg(3, &g_videoManagerEventQueue, &g_videoTimerEvent);
         currentPriority = osGetThreadPri(0);
         if (currentPriority < managerPriority) {
             restorePriority = currentPriority;
             Scene_SetThreadPriority(0, managerPriority);
         }
         savedInterruptMask = __osDisableInt();
-        D_800D4420.active = 1;
-        D_800D4420.cmdQueue = &D_80149A80;
-        D_800D4420.evtQueue = &D_80149A80;
-        D_800D4420.thread = &D_80148850;
-        D_800D4420.acsQueue = 0;
-        D_800D4420.dma = 0;
-        D_800D4420.edma = 0;
-        osCreateThread(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + sizeof(D_8014ED10_de) / sizeof(D_8014ED10_de[0]), managerPriority);
+        g_videoDeviceManager.active = 1;
+        g_videoDeviceManager.cmdQueue = &g_videoManagerEventQueue;
+        g_videoDeviceManager.evtQueue = &g_videoManagerEventQueue;
+        g_videoDeviceManager.thread = &g_videoManagerThread;
+        g_videoDeviceManager.acsQueue = 0;
+        g_videoDeviceManager.dma = 0;
+        g_videoDeviceManager.edma = 0;
+        osCreateThread(&g_videoManagerThread, 0, System_VideoManagerThreadEntry, &g_videoDeviceManager, g_videoManagerThreadStack + sizeof(g_videoManagerThreadStack) / sizeof(g_videoManagerThreadStack[0]), managerPriority);
         __osViInit();
-        osStartThread(&D_80148850);
+        osStartThread(&g_videoManagerThread);
         __osRestoreInt(savedInterruptMask);
         if (restorePriority != -1) {
             Scene_SetThreadPriority(0, restorePriority);
@@ -132,7 +132,7 @@ void func_802BA5F0_eu(s32 managerPriority) {
    each retrace, posts the client's retrace message every retraceCount retraces, advances the
    64-bit OS time, and runs timer interrupts. retrace is its static u16. */
 
-extern u16 D_80148840;
+extern u16 g_videoManagerRetraceCountdown;
 
 extern struct __OSViContext *System_GetCurrentVideoContext(void);
 
@@ -140,7 +140,7 @@ extern void Util_HandleTimerInterrupt(void);
 
 static inline u16 *viRetrace(void)
 {
-    return &D_80148840;
+    return &g_videoManagerRetraceCountdown;
 }
 
 void System_RunVideoManager(struct OSDevMgr *arg)
@@ -159,7 +159,7 @@ void System_RunVideoManager(struct OSDevMgr *arg)
     mb = 0;
     first = 0;
     vc = System_GetCurrentVideoContext();
-    retraceInit = &D_80148840;
+    retraceInit = &g_videoManagerRetraceCountdown;
     *retraceInit = vc->retraceCount;
     if (*retraceInit == 0) {
         *retraceInit = 1;
@@ -179,20 +179,20 @@ void System_RunVideoManager(struct OSDevMgr *arg)
                     *viRetrace() = vc->retraceCount;
                 }
 
-                intrCount = &D_80149B94;
+                intrCount = &g_timerServiceCounter;
                 (*intrCount)++;
 
                 if (first) {
-                    count = func_802BCF00_de();
-                    D_80149B98 = count;
+                    count = Util_ReadProcessorCount();
+                    __osCurrentTime = count;
                     first = 0;
                 }
 
-                baseCounter = &D_80149B90;
+                baseCounter = &__osBaseCounter;
                 count = *baseCounter;
-                *baseCounter = func_802BCF00_de();
+                *baseCounter = Util_ReadProcessorCount();
                 count = *baseCounter - count;
-                currentTime = &D_80149B98;
+                currentTime = &__osCurrentTime;
                 *currentTime = *currentTime + count;
                 break;
             case 14:

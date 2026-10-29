@@ -5,7 +5,7 @@
 #include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 #include "COMMON/TRIPLE.H"
 
-const unsigned int D_d0_960271c30e399034[3] = {
+const unsigned int g_regionHueFirstWeightScale_StorageWords[3] = {
     0x3C40C0C1, 0x3C40C0C1, 0x3C40C0C1,
 };
 
@@ -24,31 +24,31 @@ void Gregion_ShiftColorHue(u8 hue, u8 red_arg, u8 green_arg, u8 blue_arg,
     if (phase != 0) {
         if (phase < 0) {
             distance0 = phase + 85;
-            if (distance0 >= 0) w0 = (s32)((f32)(distance0 * 100) * D_800C4A10_de);
+            if (distance0 >= 0) w0 = (s32)((f32)(distance0 * 100) * g_regionHueFirstWeightScale);
             else w0 = 0;
         } else {
             distance0 = 85 - phase;
-            if (distance0 >= 0) w0 = (s32)((f32)(distance0 * 100) * D_800C4A10_de);
+            if (distance0 >= 0) w0 = (s32)((f32)(distance0 * 100) * g_regionHueFirstWeightScale);
             else w0 = 0;
         }
         distance1 = (s8)hue;
         if (distance1 < -85) {
             distance1 += 170;
-            w1 = (s32)((f32)(distance1 * 100) * D_800C4A14_de);
+            w1 = (s32)((f32)(distance1 * 100) * g_regionHueSecondWeightScale);
         } else {
             distance1 = -distance1;
-            if (distance1 >= 0) w1 = (s32)((f32)(distance1 * 100) * D_800C4A14_de);
+            if (distance1 >= 0) w1 = (s32)((f32)(distance1 * 100) * g_regionHueSecondWeightScale);
             else w1 = 0;
         }
         phase2 = (s8)hue;
         if (phase2 > 85) {
             distance2 = 170 - phase2;
-            w2 = (s32)((f32)(distance2 * 100) * D_800C4A18_de);
+            w2 = (s32)((f32)(distance2 * 100) * g_regionHueThirdWeightScale);
         } else {
-            if (phase2 >= 0) w2 = (s32)((f32)(phase2 * 100) * D_800C4A18_de);
+            if (phase2 >= 0) w2 = (s32)((f32)(phase2 * 100) * g_regionHueThirdWeightScale);
             else w2 = 0;
         }
-    
+
         blue = (u8)blue_arg;
         red = (u8)red_arg;
         green = (u8)green_arg;
@@ -120,25 +120,25 @@ void Gregion_DarkenColor(unsigned char percent, unsigned char r, unsigned char g
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C4988[2] = {
+unsigned int k_GregionShiftcolorhueEncodedWords[2] = {
     0x00005400, 0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C4D48[2] = {
+unsigned int k_GregionShiftcolorhueEncodedWordsBlock3[2] = {
     0xBC3F5FAF, 0x3CFD10F8,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C4D08[2] = {
+unsigned int k_GregionShiftcolorhueEncodedWordsBlock2[2] = {
     0x00621821, 0x0105102A,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C4A58[2] = {
+unsigned int k_GregionShiftcolorhueEncodedWordsBlock1[2] = {
     0xBF800000, 0x32200000,
 };
 #endif

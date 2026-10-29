@@ -6,7 +6,7 @@ const char g_pirawreadText[15] =
 #endif
 
 #if defined(VERSION_US)
-unsigned char rodata_unresolved_800C78A3[13] = {
+unsigned char k_PirawreadEncodedBytes[13] = {
     0x0F, 0x00, 0x0A, 0x00, 0x04, 0x00, 0x00, 0x00, 0x08, 0x2E, 0x31, 0x37, 0x35,
 };
 #endif
@@ -20,7 +20,7 @@ unsigned char rodata_unresolved_800C78A3[13] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C8573[13] = {
+unsigned char k_PirawreadEncodedBytesBlock1[13] = {
     0x00, 0x4F, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00,
 };
 #endif
@@ -30,7 +30,7 @@ unsigned char rodata_unresolved_800C8573[13] = {
 #endif
 
 #if defined(VERSION_DE)
-char rodata_unresolved_800C7983[13] =
+char s_PirawreadIoSirawdmaText[13] =
     "\000io/sirawdma.";
 #endif
 

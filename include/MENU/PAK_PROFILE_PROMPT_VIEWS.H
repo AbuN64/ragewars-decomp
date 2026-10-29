@@ -3,18 +3,18 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
-struct MenuRecAt24 {
+struct PakPromptContext {
     char pad0[0x1C];
-    struct PlayerRecAt5EC *player;
+    struct PlayerMessageMenuView *player;
     PakMenuSlot *slot;
     char *prompt;
 };
-struct MenuRecAt20V3 {
+struct PakNoteBrowserContext {
     char pad0[0x1C];
     SharedPlayer *player;
     PakMenuSlot *slot;
 };
-struct IntegerState610 {
+struct PlayerPakTimerView {
     unsigned char padding_0[1548];
     s32 unk_60C;
 };
@@ -30,7 +30,7 @@ struct MenuPakBeginProfileLoad {
     char pad10[4];
     char *dialogData; /* 0x14 */
     char pad18[4];
-    ObjRecAt5DC *player;
+    ActorOwnerView *player;
     PakMenuSlot *slot;
     struct Dialog *prompt; /* 0x24: dialog resource */
 };

@@ -23,8 +23,8 @@ Libgultra_TrwReadTlbEntry:
     sw $a3, 0xC($sp)
     mfc0 $v0, $10
     addi $a0, $zero, 0x1F
-    lui $a1, %hi(D_800F3660)
-    addiu $a1, $a1, %lo(D_800F3660)
+    lui $a1, %hi(g_debugTlbEntryTableEnd)
+    addiu $a1, $a1, %lo(g_debugTlbEntryTableEnd)
 .LLibgultra_TrwReadTlbEntry_024:
     mtc0 $a0, $0
     addi $a0, $a0, -0x1

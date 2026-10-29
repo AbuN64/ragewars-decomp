@@ -2,7 +2,7 @@
 
 /* 80408CB0_27.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_8042251C_eu_padding_19851C[4] = { 0x0C, 0x10, 0x77, 0xE0 };
+unsigned char g_MenuTrailingBytesBlock7[4] = { 0x0C, 0x10, 0x77, 0xE0 };
 #endif
 
 /* DATA_802B2584.CPP */

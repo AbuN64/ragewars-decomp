@@ -5,7 +5,7 @@ struct SongHeader {
     u32 tempo;
     u16 volume;
 };
-struct PlayerRecAt1E {
+struct DialogGroupPlayer {
     struct BankAudioStartDialogGroup *bank;
     s32 request;
     s32 state;
@@ -16,7 +16,7 @@ struct PlayerRecAt1E {
     char pad1C[2];
     s16 id;
 };
-struct PlayerRecAt24 {
+struct DialogPlaybackPlayer {
     struct Bank *bank;
     char pad4[4];
     u32 state;

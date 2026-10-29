@@ -24,20 +24,20 @@ struct Frame {
     Frame *next; /* 0x130 */
     char pad134[0xC];
 };
-/* The frame ring at the start of the game session D_8011FAC0. */
+/* The frame ring at the start of the game session g_gameSession. */
 typedef struct Display Display;
 struct Display {
     Frame frames[3];
     Frame *current; /* 0x3C0 */
 };
-/* D_8011BDC0 is the session's ring.current (D_8011FAC0 + 0x3C0 in every version). Code reads it as
- * D_8011FAC0.ring.current; this scalar name stays only where the ROM schedules the load as a plain scalar
+/* g_currentRenderFrame is the session's ring.current (g_gameSession + 0x3C0 in every version). Code reads it as
+ * g_gameSession.ring.current; this scalar name stays only where the ROM schedules the load as a plain scalar
  * (MIXED: Camera_DrawActiveViews, SetN64_DrawIntroBackdrop, SetN64_DrawMode4Backdrop move it across Gfx stores). */
-extern Frame *D_8011BDC0;
-extern Frame *D_80146CD8; /* the frame being built */
-extern Gfx *D_8014D460, *D_8014D464; /* command buffers, alternating per frame */
-extern Gfx *D_8014D430_de, *D_8014D42C; /* second command buffers */
-extern u64 *D_8014D428; /* RSP output buffer */
-extern s32 D_8014D424; /* its size */
-extern Frame *D_801428B0[]; /* built frames waiting for their buffer swap */
+extern Frame *g_currentRenderFrame;
+extern Frame *g_currentTaskFrame; /* the frame being built */
+extern Gfx *g_displayListBufferZero, *g_displayListBufferOne; /* command buffers, alternating per frame */
+extern Gfx *g_secondaryDisplayListBufferOne, *g_secondaryDisplayListBufferZero; /* second command buffers */
+extern u64 *g_graphicsMicrocodeDataSize; /* RSP output buffer */
+extern s32 g_graphicsMicrocodeTextSize; /* its size */
+extern Frame *g_schedulerFramebufferSchedule[]; /* built frames waiting for their buffer swap */
 #endif

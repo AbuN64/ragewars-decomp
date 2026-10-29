@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "FRONTEND/PAKINTERFACE_FINDEMPTYPROFILESLOT.H"
 
-/* Returns the index of the first of a player's four 400-byte entries in the game D_800E54A4 whose
+/* Returns the index of the first of a player's four 400-byte entries in the game g_pakProfileScreenState whose
    state byte at 0x7D is -1, or -1 when all are in use. */
 
 
@@ -15,7 +15,7 @@ int PAKInterface_FindEmptyProfileSlot(int player) {
 
     result = -1;
     for (i = 0; i < 4 && result == -1; i++) {
-        if (D_800E54A4->players[player].records[i].player == -1) {
+        if (g_pakProfileScreenState->players[player].records[i].player == -1) {
             result = i;
         }
     }

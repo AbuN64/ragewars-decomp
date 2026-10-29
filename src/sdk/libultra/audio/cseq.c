@@ -1,10 +1,10 @@
-#include "sdk/OBJECTSTATE2.H"
+#include "sdk/PERIPHERAL_PORT_BYTE_VIEWS.H"
 #include "sdk/AUDIO_EVENTS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/libgultra_inferred/cseq.H"
 #include "include_asm.h"
 #include "sdk/libgultra_inferred/ALCSPGETSTATE.H"
@@ -54,9 +54,9 @@ static inline void alCSeqNewMarkerInitSequence(ALCSeq_s *seq, u8 *ptr)
     division = seq->base->division;
     t = (f64)division;
     if (division < 0) {
-        t += D_800C72F0_de;
+        t += g_compressedMarkerDivisionUnsignedBias;
     }
-    seq->qnpt = D_800C72F8_de / (f32)t;
+    seq->qnpt = g_compressedMarkerQuarterNoteUnit / (f32)t;
 }
 
 static inline void alCSeqNewMarkerNextEvent(ALCSeq_s *seq, ALEvent *evt)
@@ -176,9 +176,9 @@ void alCSeqNew(ALCSeq_s *state, ALCMidiHdr *base) {
     count = state->base->division;
     converted = (f64)count;
     if (count < 0) {
-        converted += D_800C7300_de;
+        converted += g_compressedSequenceDivisionUnsignedBias;
     }
-    state->qnpt = D_800C7308_de / (f32)converted;
+    state->qnpt = g_compressedSequenceQuarterNoteUnit / (f32)converted;
 }
 
 void alCSeqNextEvent(ALCSeq_s *state, ALEvent *result) {
@@ -216,8 +216,8 @@ void alCSeqNextEvent(ALCSeq_s *state, ALEvent *result) {
     state->deltaFlag = 1;
 }
 
-int alCSeqGetTicks(void *arg0) {
-    struct ALCSeq_s *sequence = arg0;
+int alCSeqGetTicks(void *sequenceStorage) {
+    struct ALCSeq_s *sequence = sequenceStorage;
     return sequence->lastTicks;
 }
 
@@ -231,15 +231,15 @@ f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQu
     angle = (f64)microsecondsPerQuarter;
     arg1f = (f32)tickCount;
     if (microsecondsPerQuarter < 0) {
-        angle += D_800C7310_de;
+        angle += g_compressedTicksToSecondsTempoUnsignedBias;
     }
     ticksPerQuarter = ((ObjRecAt40V1 *)((*sequenceHandle)))->unk40;
     scaled = arg1f * (f32)angle;
     val = (f64)ticksPerQuarter;
     if (ticksPerQuarter < 0) {
-        val += D_800C7318_de;
+        val += g_compressedTicksToSecondsDivisionUnsignedBias;
     }
-    return scaled / ((f32)val * D_800C7320_de);
+    return scaled / ((f32)val * g_compressedTicksToSecondsMicrosecondScale);
 }
 
 /* Scales the float argument by the unsigned rate at offset 0x40 of the object behind arg0 times a constant, divides by the unsigned third argument, and returns the quotient converted to unsigned. Adapted from alCSeqTicksToSec with the second argument changed to a float, the product and quotient reordered so the rate term multiplies and the third argument divides, and the result converted to u32 with the explicit 2^31 split. */
@@ -257,18 +257,18 @@ u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuar
     arg1f = seconds;
     val = (f64)ticksPerQuarter;
     if (ticksPerQuarter < 0) {
-        val += D_800C7328_de;
+        val += g_compressedSecondsToTicksDivisionUnsignedBias;
     }
-    scaled = arg1f * ((f32)val * D_800C7330_de);
+    scaled = arg1f * ((f32)val * g_compressedSecondsToTicksMicrosecondScale);
     div = (f64)microsecondsPerQuarter;
     if (microsecondsPerQuarter < 0) {
-        div += D_800C7338_de;
+        div += g_compressedSecondsToTicksTempoUnsignedBias;
     }
     value = scaled / (f32)div;
-    if (!(D_800C7340_de <= value)) {
+    if (!(g_compressedSecondsToTicksSignedLimit <= value)) {
         converted = (s32)value;
     } else {
-        converted = (s32)(value - D_800C7340_de);
+        converted = (s32)(value - g_compressedSecondsToTicksSignedLimit);
         converted |= 0x80000000;
     }
     return converted;
@@ -334,47 +334,47 @@ s32 __alCSeqNextDelta(ALCSeq_s *seq, s32 *result) {
 u8 __getTrackByte(ALCSeq_s *seq, u32 track);
 
 s32 __readVarLen(ALCSeq_s *seq, s32 track) {
-    s32 temp_v0;
+    s32 nextByte;
     s32 decodedValue;
 
     decodedValue = (u8) __getTrackByte(seq, track);
     if (decodedValue & 0x80) {
         decodedValue &= 0x7F;
         do {
-            temp_v0 = (u8) __getTrackByte(seq, track);
-            decodedValue = (decodedValue << 7) + (temp_v0 & 0x7F);
-        } while (temp_v0 & 0x80);
+            nextByte = (u8) __getTrackByte(seq, track);
+            decodedValue = (decodedValue << 7) + (nextByte & 0x7F);
+        } while (nextByte & 0x80);
     }
     return decodedValue;
 }
 
 /** Read the object word at offset 0x2C. */
 int alCSPGetState(void *object) {
-    ObjRecAt2CV2 *record = object;
-    return record->unk2C;
+    FrontendArchiveHandleView *record = object;
+    return record->archiveHandle;
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802AE9DC[1] = {
+unsigned int k_CseqEncodedWordsBlock1[1] = {
     0x4576656E,
 };
 #endif
 
 /* ROM-grounded data: rodata/shared/800CC540 */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US)
-const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[3] = {
+const unsigned int k_CseqEncodedWords[3] = {
     0x41F00000, 0x00000000, 0x3F800000,
 };
 #endif
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[2] = {
+const unsigned int k_CseqEncodedWords[2] = {
     0x41F00000, 0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802AE290_CD148_us_rev1.c */
-const unsigned int D_blob_6068a82f1f3c1327b771[1] = {
+const unsigned int g_alCSeqNewMarkerConstantWords[1] = {
     0x3F800000,
 };
 #endif

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-typedef struct { s32 owner; void *list; void *w8[3]; void *w14; s32 sel; s32 unk1C; } Func_8041DF50_State;
-extern Func_8041DF50_State *D_800E39C0;
+typedef struct { s32 owner; void *list; void *w8[3]; void *w14; s32 sel; s32 joinedSlotCount; } CourseSelectionState;
+extern CourseSelectionState *D_800E39C0;
 extern void *Cache_AllocateMemory(s32);
 extern void *SmpOverlay_CreateOverlayNode(s32, s32);
 extern void SmpOverlay_ShowSlotById(s32, s32, s32);
@@ -16,7 +16,7 @@ extern void Join_UpdateJoinRequestDisplay(s32);
 s32 Menu_CreateGermanCourseOptions(s32 owner) {
     u8 *widget;
     s32 i;
-    D_800E39C0 = (Func_8041DF50_State *)Cache_AllocateMemory(0x20);
+    D_800E39C0 = (CourseSelectionState *)Cache_AllocateMemory(0x20);
     D_800E39C0->owner = owner;
     D_800E39C0->list = SmpOverlay_CreateOverlayNode(owner, 4);
     SmpOverlay_ShowSlotById(owner, 0, 0x383);
@@ -33,7 +33,7 @@ s32 Menu_CreateGermanCourseOptions(s32 owner) {
     D_800E39C0->w8[0] = Node_FindWidgetByResourceId(owner, 0x386);
     D_800E39C0->w8[1] = Node_FindWidgetByResourceId(owner, 0x38F);
     D_800E39C0->w8[2] = Node_FindWidgetByResourceId(owner, 0x390);
-    D_800E39C0->unk1C = (s32)Join_CountUsedSlots();
+    D_800E39C0->joinedSlotCount = (s32)Join_CountUsedSlots();
     for (i = 0; i < 3; ) {
         Join_UpdateJoinRequestDisplay(i);
         Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((s32)D_800E39C0->w8[i], 0x38C), 0);

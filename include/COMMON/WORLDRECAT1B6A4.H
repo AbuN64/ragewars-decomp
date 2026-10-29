@@ -23,38 +23,38 @@ typedef struct ObjectSceneRegisterActorInSceneLists ObjectSceneRegisterActorInSc
 struct ObjCode8028B64C;
 struct ObjCode8028B64C {
     char pad[0xC50];
-    ActorRecAt1D8V1 *actors[0x80];
+    ActorLinkedControllerView *actors[0x80];
     int count;
 };
 
 struct ObjCode8028B64C;
 typedef struct ObjCode8028B64C ObjCode8028B64C;
 
-extern ActorRecAt1D8V1 *Scene_ResolveActorLinkGroup(ObjCode8028B64C *obj, int id);
+extern ActorLinkedControllerView *Scene_ResolveActorLinkGroup(ObjCode8028B64C *obj, int id);
 
 
-struct WorldRecAt1B6A4;
-struct WorldRecAt1B6A4 {
+struct ScenePlayerObjectListView;
+struct ScenePlayerObjectListView {
     char pad0[0x1B664];
     Player *objects[16];
     s32 count;
 };
 
-struct ObjectRecAtB0;
-typedef struct ObjectRecAtB0 ObjectRecAtB0;
+struct SceneTriggerCounterOwnerView;
+typedef struct SceneTriggerCounterOwnerView SceneTriggerCounterOwnerView;
 
 extern s32 Scene_TestLevelRecordStateBit(void *world, struct LevelBitRecord *levelBitRecord);
 
 
 struct World;
 
-struct IntegerState54;
-typedef struct IntegerState54 IntegerState54;
+struct SceneCounterPairView;
+typedef struct SceneCounterPairView SceneCounterPairView;
 
 
 
 
-extern int D_800D2850;
+extern int g_vertexLightingMode;
 
 
 
@@ -64,11 +64,11 @@ extern int D_800D2850;
 struct WorldCode8028B64C;
 typedef struct WorldCode8028B64C WorldCode8028B64C;
 
-struct ObjectRecAt1A4;
-typedef struct ObjectRecAt1A4 ObjectRecAt1A4;
+struct SceneNearestActorView;
+typedef struct SceneNearestActorView SceneNearestActorView;
 
-struct ObjectRecAt1A4;
-struct ObjectRecAt1A4 {
+struct SceneNearestActorView;
+struct SceneNearestActorView {
     u8 pad0[0x8];
     f32 x;
     f32 y;
@@ -87,37 +87,37 @@ struct ObjectRecAt1A4 {
 struct WorldSceneFindNearestMatchingActor;
 typedef struct WorldSceneFindNearestMatchingActor WorldSceneFindNearestMatchingActor;
 
-struct ObjectRecAt1A4;
+struct SceneNearestActorView;
 struct WorldSceneFindNearestMatchingActor;
 struct WorldSceneFindNearestMatchingActor {
     u8 pad0[0x138];
-    struct ObjectRecAt1A4 *objects;
+    struct SceneNearestActorView *objects;
     u8 pad13C[0x4];
     s32 count;
 };
 
-extern ObjectRecAt1A4 *Scene_FindNearestMatchingActor(WorldSceneFindNearestMatchingActor *world, ObjectRecAt1A4 *self, s32 team, s32 kind, s32 activeOnly);
+extern SceneNearestActorView *Scene_FindNearestMatchingActor(WorldSceneFindNearestMatchingActor *world, SceneNearestActorView *self, s32 team, s32 kind, s32 activeOnly);
 
-struct EntryRecAt18V4;
-struct EntryRecAt18V4 {
+struct SceneDefinitionActorView;
+struct SceneDefinitionActorView {
     char pad[0x18];
-    ObjRecAtCV1 *def;
+    MenuActorInputView *def;
 };
 
-struct EntryRecAt18V4;
-typedef struct EntryRecAt18V4 EntryRecAt18V4;
+struct SceneDefinitionActorView;
+typedef struct SceneDefinitionActorView SceneDefinitionActorView;
 
 struct WorldCode8028B64C;
 struct WorldCode8028B64C {
     char pad[0x1B664];
-    EntryRecAt18V4 *list[16];
+    SceneDefinitionActorView *list[16];
     s32 count;
 };
 
-extern EntryRecAt18V4 *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *world, s32 id);
+extern SceneDefinitionActorView *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *world, s32 id);
 
-struct IntegerState54;
-struct IntegerState54 {
+struct SceneCounterPairView;
+struct SceneCounterPairView {
     unsigned char padding_0[32];
     s32 unk_20;
     unsigned char padding_24[44];
@@ -127,40 +127,40 @@ struct IntegerState54 {
 
 
 
-struct EntryRecAt10;
-struct EntryRecAt10 {
+struct ScenePositionEntry;
+struct ScenePositionEntry {
     char pad[8];
     f32 x;
     f32 y;
     f32 z;
 };
 
-struct EntryRecAt10;
+struct ScenePositionEntry;
 struct OwnerCode8028B64C;
 struct OwnerCode8028B64C {
     char pad[0x1024];
-    struct EntryRecAt10 *entries[0x20];
+    struct ScenePositionEntry *entries[0x20];
     s32 count;
 };
 
-struct EntryRecAt10;
+struct ScenePositionEntry;
 struct OwnerCode8028B64C;
-extern struct EntryRecAt10 *Scene_FindNearestListedEntry(struct OwnerCode8028B64C *owner, struct EntryRecAt10 *pos);
+extern struct ScenePositionEntry *Scene_FindNearestListedEntry(struct OwnerCode8028B64C *owner, struct ScenePositionEntry *pos);
 
 
 
 
 struct World;
 
-extern EntryRecAt18V4 *Scene_FindSwitchByDefinitionId(World *world, s32 id);
+extern SceneDefinitionActorView *Scene_FindSwitchByDefinitionId(World *world, s32 id);
 
 
 
 struct ObjectSceneRegisterActorInSceneLists;
-struct Shape_func_8021A2D4_de_2;
+struct MemoryUsageStats;
 struct ObjectSceneRegisterActorInSceneLists {
     char pad0[0x18];
-    struct Shape_func_8021A2D4_de_2 *descriptor;
+    struct MemoryUsageStats *descriptor;
     char pad1C[0xE4 - 0x1C];
     u16 model;
     char padE6[0x100 - 0xE6];
@@ -171,8 +171,8 @@ struct ObjectSceneRegisterActorInSceneLists {
 
 
 
-struct WorldRecAt10B8;
-struct WorldRecAt10B8 {
+struct SceneActorCategoryListsView;
+struct SceneActorCategoryListsView {
     char pad0[0x144];
     ObjectSceneRegisterActorInSceneLists *listA[512];
     s32 countA;
@@ -197,28 +197,28 @@ struct WorldRecAt10B8 {
 
 
 
-struct ObjectRecAtB0;
-struct ObjectRecAtB0 {
+struct SceneTriggerCounterOwnerView;
+struct SceneTriggerCounterOwnerView {
     u8 pad0[0x80];
     void *resource;
     u8 pad84[0x2C];
     Table *list;
 };
 
-extern s32 Scene_GetTriggerCounterById(ObjectRecAtB0 *counterOwner, s32 counterId);
+extern s32 Scene_GetTriggerCounterById(SceneTriggerCounterOwnerView *counterOwner, s32 counterId);
 
 
-struct WorldRecAt10B8;
-typedef struct WorldRecAt10B8 WorldRecAt10B8;
+struct SceneActorCategoryListsView;
+typedef struct SceneActorCategoryListsView SceneActorCategoryListsView;
 
 
 
 
 
-struct WorldRecAt1B6A4;
-typedef struct WorldRecAt1B6A4 WorldRecAt1B6A4;
+struct ScenePlayerObjectListView;
+typedef struct ScenePlayerObjectListView ScenePlayerObjectListView;
 
-extern Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world);
+extern Player *Scene_FindNearestObjectToFirstPlayer(ScenePlayerObjectListView *world);
 
 
 

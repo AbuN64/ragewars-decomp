@@ -5,8 +5,8 @@
 #include "RESMGR/STATEPAIR.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "FRONTEND/NODE_GETIMAGETEXTURE.H"
 #include "FRONTEND/RANDOM_SETUPRANDOMTEAMS.H"
 #include "RESMGR/TSMOS_UPDATEFRONTEND.H"
@@ -16,14 +16,14 @@
 #include "RESMGR/FRAME_HEAP_MARKS.H"
 #include "MATH/MENU.H"
 
-extern s32 D_800D2C90;
-extern s8 D_8010BBB8;
+extern s32 g_frontendShutdownState;
+extern s8 g_controllerPakFrontendState;
 void Tsmos_UpdateFrontend(void) {
     s32 mode;
     s32 value;
     s32 active;
     s32 state;
-    if (D_800D2C98 == 1) {
+    if (g_frontendActiveState == 1) {
         ESmem_SwapFrameHeap();
         mode = GetMenuScreenOwner();
         Menu_RouteElementEvent(mode, 0xE08, 0, 0, 0);
@@ -47,21 +47,21 @@ mode_three:
 mode_inactive:
         active = 0;
 mode_done:
-        if ((D_801462C8.counters.transitionActive == 0) && (active == 1) && ((f32)(value * 15) < D_800CDA30_de.value)) {
+        if ((g_gameSettings.counters.transitionActive == 0) && (active == 1) && ((f32)(value * 15) < g_frontendTimerState.value)) {
             Random_SetupRandomTeams();
             Stage_StartConfiguredMatch();
             Tsmos_SetIdleTimer(0.0f);
         }
-        D_800CDA30_de.value += D_800D2988;
-        state = D_800CDA30_de.state;
+        g_frontendTimerState.value += g_frameElapsedTime;
+        state = g_frontendTimerState.state;
         if (state == 1) {
-            D_800CBC14--;
-            if (D_800CBC14 <= 0) {
-                D_800CBC14 = 60;
-                D_8010BBB8 = state;
+            g_frontendTransitionCountdown--;
+            if (g_frontendTransitionCountdown <= 0) {
+                g_frontendTransitionCountdown = 60;
+                g_controllerPakFrontendState = state;
             }
         }
-        if (D_800D2C90 == 1) {
+        if (g_frontendShutdownState == 1) {
             Tsmos_ShutdownFrontend();
         }
     }
@@ -73,7 +73,7 @@ void InitFrontendMenus(void);
 #endif
 void Join_ResetJoinRequestEntries(void);
 void Tsmos_InitFrontendOnce(void) {
-    if (D_800D2C98 == 0) {
+    if (g_frontendActiveState == 0) {
         Join_ResetJoinRequestEntries();
 #if defined(VERSION_EU)
         Tsmos_InitializeEuropeanFrontend();

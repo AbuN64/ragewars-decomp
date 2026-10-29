@@ -7,12 +7,12 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SHAREDPLAYER.H"
 struct LevelActor;
-struct SceneRecAt10C0;
-typedef struct SceneRecAt10C0 SceneRecAt10C0;
+struct SceneActorUpdateLists;
+typedef struct SceneActorUpdateLists SceneActorUpdateLists;
 
 
-struct TableRecAt8;
-typedef struct TableRecAt8 TableRecAt8;
+struct SceneModelIdTable;
+typedef struct SceneModelIdTable SceneModelIdTable;
 
 struct Shared_World;
 
@@ -31,27 +31,27 @@ struct SceneSceneDrawCachedOpaqueGeometry {
 
 
 
-struct ObjectLinks74;
-typedef struct ObjectLinks74 ObjectLinks74;
+struct ScenePackResourceView;
+typedef struct ScenePackResourceView ScenePackResourceView;
 
-struct BankRecAt94;
-typedef struct BankRecAt94 BankRecAt94;
+struct SceneModelBankView;
+typedef struct SceneModelBankView SceneModelBankView;
 
 struct ObjectSceneDrawCachedOpaqueGeometry;
 
-struct DescriptorRecAt20;
-typedef struct DescriptorRecAt20 DescriptorRecAt20;
+struct SceneSwitchDescriptor;
+typedef struct SceneSwitchDescriptor SceneSwitchDescriptor;
 
-struct TableRecAt8;
-struct TableRecAt8 {
+struct SceneModelIdTable;
+struct SceneModelIdTable {
     s32 unused;
     s32 count;
     u16 entries[1];
 };
 
 
-struct DescriptorRecAt20;
-struct DescriptorRecAt20 {
+struct SceneSwitchDescriptor;
+struct SceneSwitchDescriptor {
     s32 type;
     s32 flags;
     char pad8[4];
@@ -60,19 +60,19 @@ struct DescriptorRecAt20 {
     s32 kind;
 };
 
-struct DescriptorRecAt20;
-struct ObjectRecAt18;
-struct ObjectRecAt18 {
+struct SceneSwitchDescriptor;
+struct SceneSwitchObjectView;
+struct SceneSwitchObjectView {
     char pad0[0x18];
-    struct DescriptorRecAt20 *descriptor;
+    struct SceneSwitchDescriptor *descriptor;
     char pad1C[0x2E8 - 0x1C];
 };
 
-struct ObjectRecAt18;
-typedef struct ObjectRecAt18 ObjectRecAt18;
+struct SceneSwitchObjectView;
+typedef struct SceneSwitchObjectView SceneSwitchObjectView;
 
-struct ObjectRecAt18;
-struct WorldRecAt1B660;
+struct SceneSwitchObjectView;
+struct SceneLevelSwitchCollectionView;
 
 
 
@@ -85,11 +85,11 @@ struct GlobalMode;
 struct ObjectSceneDrawCachedOpaqueGeometry;
 typedef struct ObjectSceneDrawCachedOpaqueGeometry ObjectSceneDrawCachedOpaqueGeometry;
 
-struct ObjectLinks74;
+struct ScenePackResourceView;
 
 
-struct SceneRecAt10C0;
-struct SceneRecAt10C0 {
+struct SceneActorUpdateLists;
+struct SceneActorUpdateLists {
     char pad0[0xC50];
     struct LevelActor *objects[128];
     s32 count;
@@ -98,20 +98,20 @@ struct SceneRecAt10C0 {
     struct LevelActor *late[64];
 };
 
-struct BankRecAt94;
-struct TableRecAt8;
-struct BankRecAt94 {
+struct SceneModelBankView;
+struct SceneModelIdTable;
+struct SceneModelBankView {
     char pad0[0x24];
     s32 field24;
     char pad28[0x2C];
     s32 field54;
     char pad58[0x3C];
-    struct TableRecAt8 *table;
+    struct SceneModelIdTable *table;
 };
 
 
-struct WorldRecAt1B660;
-typedef struct WorldRecAt1B660 WorldRecAt1B660;
+struct SceneLevelSwitchCollectionView;
+typedef struct SceneLevelSwitchCollectionView SceneLevelSwitchCollectionView;
 
 
 

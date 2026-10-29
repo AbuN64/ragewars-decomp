@@ -1,38 +1,38 @@
-#include "COMMON/EXTERNS_6.H"
-#include "RENDER/OBJECTSTATE8E.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
+#include "RENDER/PLAYER_CONTROLLER_RESET_VIEWS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "gbi.h"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/INTEGERSTATE244.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/RESOURCELOADSTATE.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "ENGINE/SCENE_DRAWOPAQUEACTORS.H"
 
 
 
 
-extern f32 Gobjinst_GetActorHeight(void *arg0);
+extern f32 Gobjinst_GetActorHeight(void *actor);
 
-extern void Scene_SampleWorldLighting(void *arg0, void *arg1, void *arg2);
+extern void Scene_SampleWorldLighting(void *world, void *position, void *lighting);
 
-extern void Gobjinst_DrawVisibleCachedActor(void *arg0, void *arg1);
+extern void Gobjinst_DrawVisibleCachedActor(void *actor, void *view);
 
-extern void Player_DrawRedMarkerPrism(void *arg0, void *arg1);
+extern void Player_DrawRedMarkerPrism(void *player, void *unusedView);
 
 
 #include "COMMON/GAME_SESSION.H"
 
-extern void SetN64_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
-                          s32 arg4, s32 arg5);
+extern void SetN64_ClearDepthRect(void *unused, s32 left, s32 right, s32 top,
+                          s32 bottom, s32 interlaced);
 
 void Player_DrawPlayerModel(void *player, void *camera) {
     CVector3 pos;
@@ -41,18 +41,18 @@ void Player_DrawPlayerModel(void *player, void *camera) {
 
     pos = ((LevelActor *)player)->position0;
     pos.y += ((LevelActor *)player)->eyeHeight;
-    pos.y += Gobjinst_GetActorHeight(player) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
+    pos.y += Gobjinst_GetActorHeight(player) * ((ScalarPair *)&D_800C22B0_us)->second;
     Scene_SampleWorldLighting(&g_world, &pos,
-                  &((LevelActor *)player)->lighting[D_800D297C]);
+                  &((LevelActor *)player)->lighting[g_lightingBufferIndex]);
 
     value = 0x66;
-    if (D_801462C8.local != 0) {
-        if ((D_801468F4 != 0) &&
+    if (g_gameSettings.local != 0) {
+        if ((g_resultExitPending != 0) &&
             (((Shared_ActorView *)player)->controls->transientFlag != 0)) {
-            value = D_800CE47C;
+            value = g_fragTagModelId;
         } else {
-            value = D_800CE430[((MovementDescriptor *)((LevelActor *)player)->definition)->body.header.character];
-            ((LevelActor *)player)->field3 =
+            value = g_characterModelIds[((MovementDescriptor *)((LevelActor *)player)->definition)->body.header.character];
+            ((LevelActor *)player)->renderPass =
                 ((Shared_ActorView *)player)->controls->playerId;
         }
     }
@@ -96,7 +96,7 @@ void Player_DrawHeldWeapon(void *player, WeaponMenuView *camera) {
         gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
         Geometry_InvalidateMaterialKeys();
 
-        entry = D_800D052C[((Shared_ActorView *)player)->selectedAction];
+        entry = g_weaponInfoByType[((Shared_ActorView *)player)->selectedAction];
         rect = camera->viewport;
         x = rect[0];
         y = rect[1];
@@ -104,7 +104,7 @@ void Player_DrawHeldWeapon(void *player, WeaponMenuView *camera) {
         right = entry->scopeBounds[2] * x + rect[2];
         top = entry->scopeBounds[1] * y + rect[3];
         bottom = entry->scopeBounds[3] * y + rect[3];
-        SetN64_ClearDepthRect(&D_8011FAC0, (s32)left, (s32)right, (s32)top,
+        SetN64_ClearDepthRect(&g_gameSession, (s32)left, (s32)right, (s32)top,
                       (s32)bottom, camera->clipMode);
 
         gSPGeometryMode(g_displayListCursor++, 0, G_FOG);

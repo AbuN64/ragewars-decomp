@@ -3,11 +3,11 @@
 #include "TYPES.H"
 #include "CAMERA/GSKY_GETMASKEDEFFECTCOLOR.H"
 
-extern s32 D_801462C8;
+extern s32 g_gameSettings;
 
 
 void Gsky_GetMaskedEffectColor(ThreeChannels *threeChannels, s8 *red, s8 *green, s8 *blue) {
-    if (D_801462C8 & 0x4000) {
+    if (g_gameSettings & 0x4000) {
         *red = 0;
         *green = 0;
         *blue = 0;

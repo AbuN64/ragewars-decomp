@@ -1,92 +1,92 @@
 #include "TYPES.H"
 
 #if defined(VERSION_EU_X)
-extern char D_00230DD4[];
-extern char D_0023101C[];
-extern char D_00231334[];
-extern char D_002314E0[];
-extern char D_002316D0[];
-extern char D_002319F4[];
-extern char D_00231C54[];
-extern char D_00231DFC[];
-extern char D_0023203C[];
-extern char D_002322B4[];
-extern char D_002324A0[];
-extern char D_00232A58[];
-extern char D_00232CA8[];
-extern char D_00232FCC[];
-extern char D_002331C8[];
-extern char D_0023323C[];
+extern char g_weaponai_DecaySpinAndActivateEffectEntry[];
+extern char g_weaponai_ToggleFiringModeWithAmmoCheckEntry[];
+extern char g_weaponai_UpdateSpinAndRepeatCueEntry[];
+extern char g_weaponai_SettleSpinToThirdTurnEntry[];
+extern char g_weaponai_UpdateAnimatedFiringModeEntry[];
+extern char g_weaponai_TryEnterAmmoCostStateEntry[];
+extern char g_weaponai_TryEnterAlternateStateEightEntry[];
+extern char g_weaponai_TryEnterAlternateAmmoModeEntry[];
+extern char g_weaponai_TryEnterChargedAlternateModeEntry[];
+extern char g_weaponai_UpdateForceMarkerTriggerEntry[];
+extern char g_weaponai_UpdateHeldFireEntry[];
+extern char g_weapon_InitializeFireStateCallbacksEntry[];
+extern char addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant3[];
+extern char g_weapon_ApplyScaledSideYawEntry[];
+extern char g_weapon_ApplySideDependentYawEntry[];
+extern char g_weapon_EnterChargeStateWithCuesEntry[];
 extern char D_00233354[];
 extern char D_0023335C[];
-extern char D_00233384[];
-extern char D_0023338C[];
-extern char D_00233478[];
-extern char D_00233584[];
-extern char D_002335AC[];
-extern char D_002335D8[];
-extern char D_0023362C[];
-extern char D_0023375C[];
-extern char D_002337CC[];
-extern char D_0023A00C[];
+extern char addrLow_Weapon_EmptyAlternateFireHookEntryVariant2[];
+extern char g_weapon_UpdateHeldAlternateFireEntry[];
+extern char g_weapon_UpdateSpecialFireAndAmmoEntry[];
+extern char g_weapon_RequestReleaseOnEnabledEventEntry[];
+extern char g_weapon_PlayStartupCue80CEntry[];
+extern char g_weapon_UpdateAlternateTriggerCompletionEntry[];
+extern char g_weapon_EaseSpinForActionFiveEntry[];
+extern char g_weapon_ApproachSpinPhaseAndReleaseEntry[];
+extern char g_weapon_TranslateEventSixByPitchEntry[];
+extern char addrLow_Gsky_FloorSurfaceNoOpEntryVariant2[];
 u32 data_unresolved_800CB930[1026] = {
     0x800CB608, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000002, (unsigned int)D_00232CA8, (unsigned int)D_0023101C, 0x00000000,
+    0x00000000, 0x00000000, 0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant3, (unsigned int)g_weaponai_ToggleFiringModeWithAmmoCheckEntry, 0x00000000,
     0x00004E84, 0x3F800000, 0x00000000, 0x00000000, 0x00000003, 0x00000000,
-    (unsigned int)D_0023101C, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000004, (unsigned int)D_0023323C, (unsigned int)D_00231334, 0x00000000, 0x00004EE8, 0x3F800000,
+    (unsigned int)g_weaponai_ToggleFiringModeWithAmmoCheckEntry, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000004, (unsigned int)g_weapon_EnterChargeStateWithCuesEntry, (unsigned int)g_weaponai_UpdateSpinAndRepeatCueEntry, 0x00000000, 0x00004EE8, 0x3F800000,
     0x00000003, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x800CB608, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, 0x00000000, (unsigned int)D_002316D0, 0x00000000, 0x00004E84, 0x3F800000,
-    0x00000000, 0x00000000, 0x00000003, 0x00000000, (unsigned int)D_002316D0, 0x00000000,
+    0x00000002, 0x00000000, (unsigned int)g_weaponai_UpdateAnimatedFiringModeEntry, 0x00000000, 0x00004E84, 0x3F800000,
+    0x00000000, 0x00000000, 0x00000003, 0x00000000, (unsigned int)g_weaponai_UpdateAnimatedFiringModeEntry, 0x00000000,
     0x00004E8E, 0x3F800000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x800CB608, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000008, (unsigned int)D_0023335C, (unsigned int)D_002324A0, 0x00000000,
+    0x00000000, 0x00000000, 0x00000008, (unsigned int)D_0023335C, (unsigned int)g_weaponai_UpdateHeldFireEntry, 0x00000000,
     0x800CB5C8, 0x3F800000, 0x00000003, 0x00000000, 0xFFFFFFFF, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x800CB608, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000002, 0x00000000, (unsigned int)D_002319F4, 0x00000000,
+    0x00000000, 0x00000000, 0x00000002, 0x00000000, (unsigned int)g_weaponai_TryEnterAmmoCostStateEntry, 0x00000000,
     0x00004E84, 0x3F800000, 0x00000000, 0x00000000, 0x00000003, 0x00000000,
-    (unsigned int)D_002319F4, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x0000000B, (unsigned int)D_00233384, (unsigned int)D_0023338C, 0x00000000, 0x00004EE8, 0x3F800000,
+    (unsigned int)g_weaponai_TryEnterAmmoCostStateEntry, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x0000000B, (unsigned int)addrLow_Weapon_EmptyAlternateFireHookEntryVariant2, (unsigned int)g_weapon_UpdateHeldAlternateFireEntry, 0x00000000, 0x00004EE8, 0x3F800000,
     0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x800CB608, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, 0x00000000, (unsigned int)D_00231C54, 0x00000000, 0x00004E84, 0x3F800000,
-    0x00000000, 0x00000000, 0x00000003, 0x00000000, (unsigned int)D_00231C54, 0x00000000,
+    0x00000002, 0x00000000, (unsigned int)g_weaponai_TryEnterAlternateStateEightEntry, 0x00000000, 0x00004E84, 0x3F800000,
+    0x00000000, 0x00000000, 0x00000003, 0x00000000, (unsigned int)g_weaponai_TryEnterAlternateStateEightEntry, 0x00000000,
     0x00004E84, 0x3F800000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x800CB608, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000002, 0x00000000, (unsigned int)D_00233478, 0x00000000,
+    0x00000000, 0x00000000, 0x00000002, 0x00000000, (unsigned int)g_weapon_UpdateSpecialFireAndAmmoEntry, 0x00000000,
     0x00004E84, 0x3F800000, 0x00000000, 0x00000000, 0x00000003, 0x00000000,
-    (unsigned int)D_00233478, 0x00000000, 0x00004E8E, 0x3F800000, 0x00000000, 0x00000000,
+    (unsigned int)g_weapon_UpdateSpecialFireAndAmmoEntry, 0x00000000, 0x00004E8E, 0x3F800000, 0x00000000, 0x00000000,
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x800CB608, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000002, (unsigned int)D_00232CA8,
-    (unsigned int)D_00231DFC, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
-    0x00000003, 0x00000000, (unsigned int)D_00231DFC, 0x00000000, 0x00004E8E, 0x3F800000,
-    0x00000000, 0x00000000, 0x00000005, 0x00000000, (unsigned int)D_00233584, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant3,
+    (unsigned int)g_weaponai_TryEnterAlternateAmmoModeEntry, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000003, 0x00000000, (unsigned int)g_weaponai_TryEnterAlternateAmmoModeEntry, 0x00000000, 0x00004E8E, 0x3F800000,
+    0x00000000, 0x00000000, 0x00000005, 0x00000000, (unsigned int)g_weapon_RequestReleaseOnEnabledEventEntry, 0x00000000,
     0x00004EE8, 0x3F800000, 0x00000003, 0x00000000, 0xFFFFFFFF, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x800CBC50, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000005, (unsigned int)D_002335AC, (unsigned int)D_002335D8, 0x00000000,
+    0x00000000, 0x00000000, 0x00000005, (unsigned int)g_weapon_PlayStartupCue80CEntry, (unsigned int)g_weapon_UpdateAlternateTriggerCompletionEntry, 0x00000000,
     0x00004EE8, 0x3F800000, 0x00000003, 0x00000000, 0xFFFFFFFF, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x41F00000, 0x800CB608, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000002, 0x00000000, (unsigned int)D_0023203C,
+    0x00000000, 0x00000000, 0x00000000, 0x00000002, 0x00000000, (unsigned int)g_weaponai_TryEnterChargedAlternateModeEntry,
     0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000, 0x00000003,
-    0x00000000, (unsigned int)D_0023203C, 0x00000000, 0x00004E8E, 0x3F800000, 0x00000000,
-    0x00000000, 0x00000005, 0x00000000, (unsigned int)D_0023375C, 0x00000000, 0x00004E84,
+    0x00000000, (unsigned int)g_weaponai_TryEnterChargedAlternateModeEntry, 0x00000000, 0x00004E8E, 0x3F800000, 0x00000000,
+    0x00000000, 0x00000005, 0x00000000, (unsigned int)g_weapon_ApproachSpinPhaseAndReleaseEntry, 0x00000000, 0x00004E84,
     0x3F800000, 0x00000003, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x800CB608,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000002, 0x00000000, (unsigned int)D_002322B4, 0x00000000, 0x00004E84,
-    0x3F800000, 0x00000000, 0x00000000, 0x00000003, 0x00000000, (unsigned int)D_002322B4,
+    0x00000000, 0x00000002, 0x00000000, (unsigned int)g_weaponai_UpdateForceMarkerTriggerEntry, 0x00000000, 0x00004E84,
+    0x3F800000, 0x00000000, 0x00000000, 0x00000003, 0x00000000, (unsigned int)g_weaponai_UpdateForceMarkerTriggerEntry,
     0x00000000, 0x00004E8E, 0x3F800000, 0x00000000, 0x00000000, 0xFFFFFFFF,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, (unsigned int)D_00232A58, 0x00000000, 0x00010064, 0x0414000A, 0x00010064,
+    0x00000000, (unsigned int)g_weapon_InitializeFireStateCallbacksEntry, 0x00000000, 0x00010064, 0x0414000A, 0x00010064,
     0x042D0014, 0x00010064, 0x03E8000A, 0x00010064, 0x03EB0019, 0x000000C8,
     0x03F10001, 0x000000C8, 0x04310019, 0x000000C8, 0x00070001, 0x000000C8,
     0x0439000C, 0x000000C8, 0x04330001, 0x000000C8, 0x04370001, 0x000000C8,
@@ -110,7 +110,7 @@ u32 data_unresolved_800CB930[1026] = {
     0xFFFFFFFF, 0xFFFF0000, 0x00000003, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x40C00000,
     0x40E00000, 0x41200000, 0x00000000, 0x00000000, 0x3F800000, 0x3F800000,
-    0x800CBCF0, 0x00000000, (unsigned int)D_0023362C, 0x800DCC80, 0x04D3FFFF, 0x0000FFFF,
+    0x800CBCF0, 0x00000000, (unsigned int)g_weapon_EaseSpinForActionFiveEntry, 0x800DCC80, 0x04D3FFFF, 0x0000FFFF,
     0xFFFF02DA, 0x02DA0000, 0x00000003, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x40C00000,
     0x40E00000, 0x41200000, 0x00000000, 0x00000000, 0x3F800000, 0x3F800000,
@@ -142,7 +142,7 @@ u32 data_unresolved_800CB930[1026] = {
     0xFFFF02DA, 0x02DA0000, 0x00000003, 0x00000000, 0x00000000, 0x800CBECC,
     0x00000000, 0x00000000, 0x800CBFB4, 0x00000000, 0x00000000, 0x40C00000,
     0x40E00000, 0x41200000, 0x00000000, 0x00000000, 0x3F800000, 0x3F800000,
-    0x800CB88C, (unsigned int)D_00232FCC, (unsigned int)D_00230DD4, 0x800DCCE0, 0x04CA0BBF, 0x0C83FFFF,
+    0x800CB88C, (unsigned int)g_weapon_ApplyScaledSideYawEntry, (unsigned int)g_weaponai_DecaySpinAndActivateEffectEntry, 0x800DCCE0, 0x04CA0BBF, 0x0C83FFFF,
     0xFFFF02DA, 0x02DA0000, 0x00000027, 0x00000000, 0x00000000, 0x800CBED4,
     0x800CBEDC, 0x00000000, 0x800CBFBC, 0x800CBFC4, 0x00000000, 0x40C00000,
     0x40E00000, 0x41200000, 0x00000000, 0x00000000, 0x3F800000, 0x3F800000,
@@ -170,15 +170,15 @@ u32 data_unresolved_800CB930[1026] = {
     0xFFFF02DA, 0x02DA0000, 0x00000003, 0x00000000, 0x00000000, 0x800CBF24,
     0x800CBF2C, 0x00000000, 0x800CC00C, 0x800CC014, 0x00000000, 0x40C00000,
     0x40E00000, 0x41200000, 0x00000000, 0x00000000, 0x3F800000, 0x3F800000,
-    0x800CB930, (unsigned int)D_002331C8, (unsigned int)D_002314E0, 0x800DCD34, 0x04D10BC6, 0x0000FFFF,
+    0x800CB930, (unsigned int)g_weapon_ApplySideDependentYawEntry, (unsigned int)g_weaponai_SettleSpinToThirdTurnEntry, 0x800DCD34, 0x04D10BC6, 0x0000FFFF,
     0xFFFF02DA, 0x02DA0000, 0x00000003, 0x00000000, 0x00000000, 0x800CBF34,
     0x800CBF3C, 0x00000000, 0x800CC01C, 0x800CC024, 0x00000000, 0x40C00000,
     0x40E00000, 0x41200000, 0x00000000, 0x00000000, 0x3F800000, 0x3F800000,
-    0x800CB728, 0x00000000, (unsigned int)D_0023362C, 0x800DCD40, 0x04D20BC7, 0x0000FFFF,
+    0x800CB728, 0x00000000, (unsigned int)g_weapon_EaseSpinForActionFiveEntry, 0x800DCD40, 0x04D20BC7, 0x0000FFFF,
     0xFFFF02DA, 0x02DA0000, 0x00000003, 0x00000000, 0x00000000, 0x800CBF44,
     0x800CBF4C, 0x00000000, 0x800CC02C, 0x800CC034, 0x00000000, 0x40C00000,
     0x40E00000, 0x41200000, 0x00000000, 0x00000000, 0x3F800000, 0x3F800000,
-    0x800CBD54, (unsigned int)D_002337CC, 0x00000000, 0x800DCD4C, 0x04D50BC8, 0x0000FFFF,
+    0x800CBD54, (unsigned int)g_weapon_TranslateEventSixByPitchEntry, 0x00000000, 0x800DCD4C, 0x04D50BC8, 0x0000FFFF,
     0xFFFF02C6, 0x02C70000, 0x00000003, 0x40800000, 0x3F490FDC, 0x800CBF54,
     0x00000000, 0x00000000, 0x800CC03C, 0x00000000, 0x00000000, 0x40C00000,
     0x40E00000, 0x41200000, 0x00000000, 0x00000000, 0x3F800000, 0x3F800000,
@@ -200,6 +200,6 @@ u32 data_unresolved_800CB930[1026] = {
     0x800CC6BC, 0x800CC0BC, 0x800CC11C, 0x800CC71C, 0x800CC77C, 0x800CC7DC,
     0x800CC83C, 0x00000000, 0x0BEA0BEB, 0x0BECFFFF, 0x0BED0BEE, 0x0BEF0BF0,
     0x800DCFD4, 0x800DCFE0, 0x800DCFEC, 0x800DCFF8, 0x800DD004, 0x800DD010,
-    0x800DD01C, 0x00000001, 0x00000001, 0x00000001, 0x00000000, (unsigned int)D_0023A00C,
+    0x800DD01C, 0x00000001, 0x00000001, 0x00000001, 0x00000000, (unsigned int)addrLow_Gsky_FloorSurfaceNoOpEntryVariant2,
 };
 #endif

@@ -61,6 +61,6 @@ u8 __osContDataCrc(u8 *data)
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B8C18[8] =
+char k_ContcrcEncodedBytes[8] =
     "MODER\000\000\024";
 #endif

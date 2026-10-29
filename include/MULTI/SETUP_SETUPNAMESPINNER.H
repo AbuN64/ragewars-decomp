@@ -12,7 +12,7 @@ typedef struct NameSlotModel {
     char pad0[0x30];
     NameSlotPart part[4];
 } NameSlotModel;
-struct MenuRecAt20V1 {
+struct NameSpinnerMenu {
     s16 state;
     char pad2[0xA];
     NameSlotModel *model;
@@ -20,7 +20,7 @@ struct MenuRecAt20V1 {
     s32 id;
     s32 input;
 };
-struct PlayerRecAtC {
+struct PlayerOptionsEntry {
     s16 state;
     char pad2[0xA];
     struct ActorPakEnterPlayerOptions *actor;
@@ -32,15 +32,15 @@ struct StyleMultiDrawNameCursor {
     f32 alpha;
     f32 fade;
 };
-struct EntryRecAtCV2 {
+struct NameSpinnerEntry {
     s32 value;
     f32 timer;
     s32 count;
     u8 text[12];
 };
-struct EntryRecAt1C {
+struct NameEditMenuContext {
     char pad[0x1C];
-    ObjRecAt5D8 *unk1C;
+    PlayerNameProfileView *profileOwner;
 };
 struct Spinner {
     s32 value;
@@ -48,11 +48,11 @@ struct Spinner {
     s32 max;
     char name[12];
 };
-struct TextEntryRecAtC {
+struct PlayerNameTextEntry {
     s32 length;
     s32 cursor;
     s32 count;
     char text[12];
 };
-extern void Setup_SetupNameSpinner(MenuRecAt20V1 *menu);
+extern void Setup_SetupNameSpinner(NameSpinnerMenu *menu);
 #endif

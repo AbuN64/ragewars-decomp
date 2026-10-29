@@ -1,6 +1,6 @@
 #include "COMMON/OBJRECAT5F14.H"
-#include "COMMON/LONE/D_800CD764_de.H"
-#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/SCREEN_IMAGE_RESOURCES_ENABLED.H"
+#include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WORLD.H"
@@ -39,8 +39,8 @@ static inline SceneEffect *take_effect(struct CAnimPool *scene, s32 *ref) {
     }
     effect = scene->FreeList.head;
     if (effect != 0) {
-        func_80255ED8_de(&scene->FreeList, effect);
-        func_80255CB8_de(&scene->UsedList, effect);
+        List_RemoveIntrusive(&scene->FreeList, effect);
+        List_PrependIntrusive(&scene->UsedList, effect);
         effect->ref = ref;
         if (ref != 0) {
             *ref += 1;
@@ -51,8 +51,8 @@ static inline SceneEffect *take_effect(struct CAnimPool *scene, s32 *ref) {
 
 /* Culls a scene's active effects against the view box: effects whose bounds overlap the box ending at
  * D_801031F8 + 4 are passed to Scene_RegisterActorInSceneLists and, when idle, drop their counted reference; the others are
- * reset, release their reference, and are unlinked from the active list (func_80255ED8_de) and returned to
- * the free list (func_80255D14_de). */
+ * reset, release their reference, and are unlinked from the active list (List_RemoveIntrusive) and returned to
+ * the free list (List_AppendIntrusive). */
 
 
 
@@ -72,7 +72,7 @@ SceneEffect *Animpool_SpawnSceneEffect(struct CAnimPool *scene, s32 id, s32 vari
                       CVector3 direction, CVector3 color, s32 *ref) {
     SceneEffect *effect;
 
-    if (D_800CD764_de == 0 || count == 0) {
+    if (g_screenImageResourcesEnabled == 0 || count == 0) {
         return 0;
     }
     if (id == -1) {
@@ -88,7 +88,7 @@ SceneEffect *Animpool_SpawnSceneEffect(struct CAnimPool *scene, s32 id, s32 vari
     if (effect == 0) {
         return 0;
     }
-    Gobjinst_InitializeActor(effect, id, variant, D_800CD8D0, count, -1, owner, scale, position, 0x80000, color, direction, 0);
+    Gobjinst_InitializeActor(effect, id, variant, g_defaultCameraSurfaceType, count, -1, owner, scale, position, 0x80000, color, direction, 0);
     Gobjinst_DispatchActorTypeUpdate(effect);
     return effect;
 }
@@ -118,8 +118,8 @@ void Animpool_UpdateSceneEffects(struct CAnimPool *scene, s32 world) {
             if (effect->ref != 0) {
                 *effect->ref -= 1;
             }
-            func_80255ED8_de(&scene->UsedList, effect);
-            func_80255D14_de(&scene->FreeList, effect);
+            List_RemoveIntrusive(&scene->UsedList, effect);
+            List_AppendIntrusive(&scene->FreeList, effect);
         }
         effect = next;
     } while (0);
@@ -134,8 +134,8 @@ void *Animpool_AcquireSceneEffect(s32 effectPool, s32 *referenceCount) {
     if ((g_world.visibilityEnabled != 0) || ((u32)((struct CAnimPool *) effectPool)->UsedList.count < 3)) {
         acquiredEffect = ((struct CAnimPool *) effectPool)->FreeList.head;
         if (acquiredEffect != 0) {
-            func_80255ED8_de((void *)(effectPool + 0x5F00), acquiredEffect);
-            func_80255CB8_de((void *)(effectPool + 0x5F14), acquiredEffect);
+            List_RemoveIntrusive((void *)(effectPool + 0x5F00), acquiredEffect);
+            List_PrependIntrusive((void *)(effectPool + 0x5F14), acquiredEffect);
             ((SceneEffect *)(acquiredEffect))->ref = referenceCount;
             if (referenceCount != 0) {
                 *referenceCount += 1;

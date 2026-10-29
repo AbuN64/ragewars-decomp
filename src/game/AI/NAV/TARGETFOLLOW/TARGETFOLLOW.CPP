@@ -9,8 +9,8 @@
 
 /* 80212C90_3.CPP */
 #if !(defined(VERSION_DE) || defined(VERSION_EU))
-void func_80212D80_eu_x(struct ActorRecAt1D8V2 *actor) {
-    Brain_func_80212D78_eu_x *brain = actor->player->brain;
+void Nav_InitTargetFollowing(struct TargetFollowingActorView *actor) {
+    NavigationBrainView *brain = actor->player->brain;
 
     brain->unk220 = 0;
     Scaled_ResetBehaviorState(brain);
@@ -35,9 +35,9 @@ extern void Nav_RunBehaviorHandler(void *);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdatePlayerSteering(void *controller);
 
-void Nav_UpdateTargetRouteFollow(void *arg0)
+void Nav_UpdateTargetRouteFollow(void *actorObject)
 {
-    AiTarget *actor = arg0;
+    AiTarget *actor = actorObject;
     AiController *state;
     AiTarget *peer;
     AiController *peer_state;
@@ -80,7 +80,7 @@ void Nav_ResetTargetFollowStateEu(AiTarget *pThis) {
     AiController *controller = pThis->player->controller;
     controller->handlerIndex = 0;
     Scaled_ResetBehaviorState(controller);
-    controller->unk2FC = 0;
+    controller->behaviorResetFlag = 0;
 }
 #endif
 

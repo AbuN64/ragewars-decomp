@@ -4,19 +4,19 @@
 /* Section one of the resource selected by an actor's resource key. */
 /* Section zero of the resource selected by an actor's resource key. */
 typedef struct ActorResourceHeader {
-    u8 unknown0[0x1E];
+    u8 headerPrefix[0x1E];
     u16 particleScale; /* Float encoded in its high sixteen bits. */
 } ActorResourceHeader;
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-struct LookupRecAtC;
-struct LookupRecAtC {
+struct ResourceLookupPointerView;
+struct ResourceLookupPointerView {
     u32 pad0[3];
     void **value;
 };
 
-extern float D_800C3B60_de;
+extern float g_maskedModelViewEffectTuning;
 
 struct BodyGobjinstApplyBoneTwistImpulse;
 typedef struct BodyGobjinstApplyBoneTwistImpulse BodyGobjinstApplyBoneTwistImpulse;
@@ -25,13 +25,13 @@ typedef struct BodyGobjinstApplyBoneTwistImpulse BodyGobjinstApplyBoneTwistImpul
 
 struct LevelActor;
 
-extern float D_800C3BA8;
+extern float g_affinePackUnsignedThresholdsTranslationZ;
 
 
 
 struct Node75;
 
-extern float D_800C3B7C;
+extern float g_maskedModelViewEffectScale;
 
 
 
@@ -50,10 +50,10 @@ struct BodyGobjinstApplyBoneTwistImpulse {
 
 
 
-struct ObjRecAt17C;
-struct ObjRecAt17C {
+struct ActorMatrixPackFlagsView;
+struct ActorMatrixPackFlagsView {
     char pad0[0x17C];
-    s32 unk17C;
+    s32 matrixPackFlags;
 };
 
 struct ObjectList;
@@ -63,13 +63,13 @@ struct ObjectList {
     s32 count;
 };
 
-struct ObjRecAt2E0;
-struct ObjRecAt2E0 {
+struct ActorEffectFlagsView;
+struct ActorEffectFlagsView {
     char pad0[0x2E0];
-    unsigned int unk2E0;
+    unsigned int effectFlags;
 };
 
-extern float D_800C3BA0_de;
+extern float g_affinePackUnsignedThresholdsTranslationXY;
 
 struct Scratch;
 struct Scratch {
@@ -82,8 +82,8 @@ struct Scratch {
     char matrix[0x40];
 };
 
-struct SourceRecAt18;
-struct SourceRecAt18 {
+struct BoneTwistSourceView;
+struct BoneTwistSourceView {
     char pad0[0x12];
     s8 charges;
     char pad13;
@@ -97,8 +97,8 @@ struct Scratch;
 typedef struct Scratch Scratch;
 
 
-struct ObjRecAt17C;
-typedef struct ObjRecAt17C ObjRecAt17C;
+struct ActorMatrixPackFlagsView;
+typedef struct ActorMatrixPackFlagsView ActorMatrixPackFlagsView;
 
 struct Camera;
 struct Camera {
@@ -109,20 +109,20 @@ struct Camera {
 };
 
 
-struct SourceRecAt18;
-typedef struct SourceRecAt18 SourceRecAt18;
+struct BoneTwistSourceView;
+typedef struct BoneTwistSourceView BoneTwistSourceView;
 
 
-extern float D_800C8C44;
+extern float g_actorDefaultOffsetValue;
 
-extern float D_800C8C70;
+extern float g_affinePackUnsignedThresholdsRowZero;
 
 
-struct ObjectLinks1DC_3;
-typedef struct ObjectLinks1DC_3 ObjectLinks1DC_3;
+struct ActorAnimationResourceView;
+typedef struct ActorAnimationResourceView ActorAnimationResourceView;
 
-struct ObjectLinks1DC_3;
-struct ObjectLinks1DC_3 {
+struct ActorAnimationResourceView;
+struct ActorAnimationResourceView {
     char pad0[0x8];
     CVector3 unk_8;
     char pad14[0xC4 - 0x14];
@@ -136,11 +136,11 @@ struct ObjectLinks1DC_3 {
     char * unk_1D8;
 };
 
-struct LookupRecAtC;
-typedef struct LookupRecAtC LookupRecAtC;
+struct ResourceLookupPointerView;
+typedef struct ResourceLookupPointerView ResourceLookupPointerView;
 
 
-extern float D_800C3B98;
+extern float g_affinePackUnsignedThresholdsRowThree;
 
 struct AnimInfo;
 typedef struct AnimInfo AnimInfo;
@@ -172,14 +172,14 @@ struct AnimInfo {
 };
 
 
-extern float D_800C3B90;
+extern float g_affinePackUnsignedThresholdsRowTwo;
 
-struct ObjRecAt2E0;
-typedef struct ObjRecAt2E0 ObjRecAt2E0;
+struct ActorEffectFlagsView;
+typedef struct ActorEffectFlagsView ActorEffectFlagsView;
 
 struct Shared_Func80243A80Actor;
 
-extern float D_800C3B88;
+extern float g_affinePackUnsignedThresholdsRowOne;
 
 
 extern void Gobjinst_EuropeNoOperation(void);
@@ -198,7 +198,7 @@ extern void Geometry_DrawResourceModel(s32, s32, void *, s32, void *, s32, s32);
 extern CVector3 *Region_GetNodeEdgeCross(CVector3 *out, Node75 *node);
 
 extern char g_unitScaleMultiplierAnimObjectInfoRev1Text;
-extern char D_0026D814;
+extern char g_Geometry_ExpandExtendedModelAddress;
 extern char s_animModelIndexText;
 extern char s_animatedModelText;
 #endif

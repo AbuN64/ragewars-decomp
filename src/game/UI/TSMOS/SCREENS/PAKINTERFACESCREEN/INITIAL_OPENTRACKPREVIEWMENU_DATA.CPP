@@ -2,7 +2,7 @@
 
 /* 800E0D4C.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800E0D4C[15309] = {
+unsigned int g_frontendMenuResourceWordsUs[15309] = {
     0x00000010, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -1928,44 +1928,44 @@ unsigned int rodata_writable_800EFC80[1] = {
 
 /* 80408AC4_18.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_8040C6FC_de_padding_182B3C[4] = { 0x24, 0x06, 0x00, 0x33 };
+unsigned char g_InitialOpentrackpreviewmenuTrailingBytes[4] = { 0x24, 0x06, 0x00, 0x33 };
 #endif
 
 /* DATA_800E56B0.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5698_unclaimed_E62B0 */
-extern char D_004366D0[];
-unsigned int D_blob_71e77bfb2ca14ea94eb6[3] = {
-    0x00000E06, 0x00000005, (unsigned int)D_004366D0,
+extern char g_Player_InitPlayerSettingsScreenAddress[];
+unsigned int g_playerSettingsCreateEventRecordUsRev1[3] = {
+    0x00000E06, 0x00000005, (unsigned int)g_Player_InitPlayerSettingsScreenAddress,
 };
 
-extern char D_00436D18[];
-extern char D_00436DCC[];
-extern char D_00436DD4[];
-extern char D_00436E38[];
-extern char D_00436E74[];
-extern char D_00436F2C[];
-unsigned int D_auto_src_rw_menu_event_handlers_E62BC_us_rev1[21] = {
-    0x00000E03, 0x00000005, (unsigned int)D_00436D18, 0x0000000A, 0x00000005, (unsigned int)D_00436DCC, 0x00000002, 0x00000005,
-    (unsigned int)D_00436E38, 0x00000001, 0x00000005, (unsigned int)D_00436DD4, 0x00000008, 0x0000005E, (unsigned int)D_00436E74, 0x00000007,
-    0x0000005E, (unsigned int)D_00436F2C, 0x00000000, 0x00000000, 0x00000000,
+extern char g_Player_FreePlayerSettingsScreenAddress[];
+extern char g_playerSettingsUnhandledEventCallbackAddressUsRev1[];
+extern char g_Player_ConfirmPlayerSettingsEntryAddress[];
+extern char g_Player_CancelPlayerSettingsEntryAddress[];
+extern char g_Player_SelectNextPlayerSettingsEntryAddress[];
+extern char g_Player_SelectPreviousPlayerSettingsEntryAddress[];
+unsigned int g_playerSettingsEventHandlerRecordsUsRev1[21] = {
+    0x00000E03, 0x00000005, (unsigned int)g_Player_FreePlayerSettingsScreenAddress, 0x0000000A, 0x00000005, (unsigned int)g_playerSettingsUnhandledEventCallbackAddressUsRev1, 0x00000002, 0x00000005,
+    (unsigned int)g_Player_CancelPlayerSettingsEntryAddress, 0x00000001, 0x00000005, (unsigned int)g_Player_ConfirmPlayerSettingsEntryAddress, 0x00000008, 0x0000005E, (unsigned int)g_Player_SelectNextPlayerSettingsEntryAddress, 0x00000007,
+    0x0000005E, (unsigned int)g_Player_SelectPreviousPlayerSettingsEntryAddress, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
 /* DATA_800E5710.CPP */
 #if defined(VERSION_US_REV1)
-extern char D_00437074[];
-extern char D_004371FC[];
-extern char D_0043722C[];
-extern char D_00437234[];
-extern char D_0043723C[];
-extern char D_004372AC[];
-extern char D_004372F4[];
-extern char D_004373A4[];
-unsigned int D_auto_src_rw_menu_event_handlers_E6310_us_rev1[27] = {
-    0x00000E07, 0x0000000C, (unsigned int)D_0043722C, 0x00000E08, 0x0000000C, (unsigned int)D_00437234, 0x00000E06, 0x0000000C,
-    (unsigned int)D_00437074, 0x00000E03, 0x0000000C, (unsigned int)D_004371FC, 0x00000002, 0x0000000C, (unsigned int)D_004372AC, 0x00000001,
-    0x0000000C, (unsigned int)D_0043723C, 0x00000008, 0x000001C6, (unsigned int)D_004372F4, 0x00000007, 0x000001C6, (unsigned int)D_004373A4,
+extern char g_Player_BuildItemLabelListAddress[];
+extern char g_Player_FreeAlternatePlayerSettingsScreenAddress[];
+extern char g_alternatePlayerSettingsUnhandledEventCallbackAddressUsRev1[];
+extern char g_alternatePlayerSettingsUnhandledEventCallbackAddressUsRev1Alternate[];
+extern char g_Player_ConfirmAlternatePlayerSettingsEntryAddress[];
+extern char g_Player_CancelAlternatePlayerSettingsEntryAddress[];
+extern char g_Player_SelectNextAlternatePlayerSettingsEntryAddress[];
+extern char g_Player_SelectPreviousAlternatePlayerSettingsEntryAddress[];
+unsigned int g_alternatePlayerSettingsEventHandlerRecordsUsRev1[27] = {
+    0x00000E07, 0x0000000C, (unsigned int)g_alternatePlayerSettingsUnhandledEventCallbackAddressUsRev1, 0x00000E08, 0x0000000C, (unsigned int)g_alternatePlayerSettingsUnhandledEventCallbackAddressUsRev1Alternate, 0x00000E06, 0x0000000C,
+    (unsigned int)g_Player_BuildItemLabelListAddress, 0x00000E03, 0x0000000C, (unsigned int)g_Player_FreeAlternatePlayerSettingsScreenAddress, 0x00000002, 0x0000000C, (unsigned int)g_Player_CancelAlternatePlayerSettingsEntryAddress, 0x00000001,
+    0x0000000C, (unsigned int)g_Player_ConfirmAlternatePlayerSettingsEntryAddress, 0x00000008, 0x000001C6, (unsigned int)g_Player_SelectNextAlternatePlayerSettingsEntryAddress, 0x00000007, 0x000001C6, (unsigned int)g_Player_SelectPreviousAlternatePlayerSettingsEntryAddress,
     0x00000000, 0x00000000, 0x00000000,
 };
 #endif
@@ -1973,26 +1973,26 @@ unsigned int D_auto_src_rw_menu_event_handlers_E6310_us_rev1[27] = {
 /* DATA_800E577C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5698_unclaimed_E62B0_unclaimed_E6310_unclaimed_E637C */
-unsigned int D_blob_6997c0a77e8da68b29a1[1] = {
+unsigned int g_playerSettingsPackedTextFragmentUsRev1[1] = {
     0x4C4C5F53,
 };
 #endif
 
 /* DATA_800ED1E8.CPP */
 #if defined(VERSION_EU_X)
-extern char D_0043AED0[];
-extern char D_0043B330[];
-extern char D_0043B5F8[];
-extern char D_0043B890[];
-extern char D_0043BB40[];
-extern char D_0043CB80[];
-extern char D_0043CBC0[];
-extern char D_0043CCD0[];
-extern char D_0043CD68[];
-extern char D_0043CE00[];
-extern char D_0043CE9C[];
-extern char D_0043CF38[];
-unsigned int D_auto_data_unresolved_800ED1E8[174] = {
+extern char g_Player_CreateFourPlayerResultsAddress[];
+extern char g_Player_StartFourPlayerResultsAddress[];
+extern char g_Player_UpdateFourPlayerResultsAddress[];
+extern char g_Player_DrawFourPlayerResultsAddress[];
+extern char g_Frontend_ConfirmEquipmentSelectionAddress[];
+extern char g_Frontend_FreeEquipmentScreenAddress[];
+extern char g_Frontend_RestoreEquipmentSelectionsAddress[];
+extern char g_packedCodeAddress24_0043CCD0[];
+extern char g_Frontend_SelectNextEquipmentColumnAddress[];
+extern char g_Frontend_SelectPreviousEquipmentChoiceAddress[];
+extern char g_Frontend_SelectNextEquipmentChoiceAddress[];
+extern char g_Frontend_CancelEquipmentSelectionAddress[];
+unsigned int g_equipmentAndPlayerSettingsMenuDataEu[174] = {
     0x00000136, 0x000000EE, 0x000000EF, 0x000000F0, 0x000000F1, 0x000000F2, 0x000000F3, 0x00000126,
     0x00000125, 0x00000124, 0x00000123, 0x00000122, 0x000000E2, 0x000000E4, 0x000000E6, 0x000000E8,
     0x000000EA, 0x000000EC, 0x000000FB, 0x00000137, 0x00000115, 0x00000116, 0x00000117, 0x00000118,
@@ -2010,10 +2010,10 @@ unsigned int D_auto_data_unresolved_800ED1E8[174] = {
     0x0000138F, 0x00000007, 0x800DCCE0, 0x000000B0, 0x0000138C, 0x00000002, 0x800DCCA4, 0x000000A9,
     0x000013A7, 0x00000005, 0x800DCCC8, 0x000000AB, 0x0000139E, 0x00000003, 0x800DCCB0, 0x000000AC,
     0x00001393, 0x00000006, 0x800DCCD4, 0x000000B1, 0x0000138B, 0x00000004, 0x800DCCBC, 0x00000E07,
-    0x00000008, (unsigned int)D_0043B330, 0x00000E08, 0x00000008, (unsigned int)D_0043B5F8, 0x00000E0A, 0x00000008, (unsigned int)D_0043B890,
-    0x00000E06, 0x00000008, (unsigned int)D_0043AED0, 0x00000E03, 0x00000008, (unsigned int)D_0043CB80, 0x0000000A, 0x00000008,
-    (unsigned int)D_0043CBC0, 0x00000002, 0x00000008, (unsigned int)D_0043CF38, 0x00000001, 0x00000008, (unsigned int)D_0043BB40, 0x00000007,
-    0x00007530, (unsigned int)D_0043CE00, 0x00000005, 0x00007530, (unsigned int)D_0043CCD0, 0x00000008, 0x00007530, (unsigned int)D_0043CE9C,
-    0x00000006, 0x00007530, (unsigned int)D_0043CD68, 0x00000000, 0x00000000, 0x00000000,
+    0x00000008, (unsigned int)g_Player_StartFourPlayerResultsAddress, 0x00000E08, 0x00000008, (unsigned int)g_Player_UpdateFourPlayerResultsAddress, 0x00000E0A, 0x00000008, (unsigned int)g_Player_DrawFourPlayerResultsAddress,
+    0x00000E06, 0x00000008, (unsigned int)g_Player_CreateFourPlayerResultsAddress, 0x00000E03, 0x00000008, (unsigned int)g_Frontend_FreeEquipmentScreenAddress, 0x0000000A, 0x00000008,
+    (unsigned int)g_Frontend_RestoreEquipmentSelectionsAddress, 0x00000002, 0x00000008, (unsigned int)g_Frontend_CancelEquipmentSelectionAddress, 0x00000001, 0x00000008, (unsigned int)g_Frontend_ConfirmEquipmentSelectionAddress, 0x00000007,
+    0x00007530, (unsigned int)g_Frontend_SelectPreviousEquipmentChoiceAddress, 0x00000005, 0x00007530, (unsigned int)g_packedCodeAddress24_0043CCD0, 0x00000008, 0x00007530, (unsigned int)g_Frontend_SelectNextEquipmentChoiceAddress,
+    0x00000006, 0x00007530, (unsigned int)g_Frontend_SelectNextEquipmentColumnAddress, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif

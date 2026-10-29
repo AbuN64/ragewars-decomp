@@ -2,14 +2,14 @@
 
 /* 80414480.CPP */
 #if defined(VERSION_US)
-const unsigned int rodata_unresolved_800DC00C[1] = {
+const unsigned int k_GfxdataEncodedWordsBlock1[1] = {
     0x5349435F,
 };
 #endif
 
 /* 80414480_5.CPP */
 #if defined(VERSION_EU_X)
-const unsigned int rodata_unresolved_800E8B9C[1] = {
+const unsigned int k_GfxdataEncodedWordsBlock2[1] = {
     0x0043F8DC,
 };
 #endif
@@ -19,7 +19,7 @@ const unsigned int rodata_unresolved_800E8B9C[1] = {
 struct {
     unsigned char b0[16];
     unsigned int w1[106];
-} D_auto_src_huffman_single_zero_runs = {
+} g_huffmanSingleZeroRuns = {
     {
         0x28, 0x20, 0x20, 0x31, 0x31, 0x20, 0x20, 0x20, 0x30, 0x27, 0x73, 0x20, 0x29, 0x20, 0x00, 0x00,
     },
@@ -44,7 +44,7 @@ struct {
 
 /* DATA_800D979C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_huffman_delta_single_zero_run_nodes[515] = {
+unsigned int g_huffmanDeltaSingleZeroRunNodes[515] = {
     0x00010006, 0x00020005, 0x00030004, 0x0800FFFE, 0x08000002, 0x08000000, 0x00070200, 0x000800A7,
     0x0009000A, 0x0800FFFD, 0x000B000C, 0x08000004, 0x000D00A6, 0x000E00A1, 0x000F0058, 0x0010003B,
     0x00110020, 0x0012001F, 0x0013001E, 0x0014001D, 0x0015001A, 0x00160019, 0x00170018, 0x0800006F,
@@ -118,7 +118,7 @@ unsigned int D_auto_src_huffman_delta_single_zero_run_nodes[515] = {
 struct {
     unsigned char b0[16];
     unsigned int w1[546];
-} D_auto_src_huffman_five_zero_runs = {
+} g_huffmanFiveZeroRuns = {
     {
         0x28, 0x20, 0x20, 0x31, 0x31, 0x20, 0x20, 0x20, 0x30, 0x27, 0x73, 0x20, 0x29, 0x20, 0x00, 0x00,
     },
@@ -198,7 +198,7 @@ struct {
 
 /* DATA_800DA840.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_huffman_delta_five_zero_runs_nodes[523] = {
+unsigned int g_huffmanDeltaFiveZeroRunNodes[523] = {
     0x0001020A, 0x00020003, 0x08000001, 0x00040209, 0x00050206, 0x00060017, 0x00070016, 0x00080009,
     0x08000004, 0x000A000D, 0x000B000C, 0x08000006, 0x0800FFFA, 0x000E0011, 0x000F0010, 0x08000A02,
     0x08000007, 0x00120013, 0x0800FFF9, 0x00140015, 0x0800FFF8, 0x08000008, 0x08000003, 0x00180019,
@@ -273,7 +273,7 @@ unsigned int D_auto_src_huffman_delta_five_zero_runs_nodes[523] = {
 struct {
     unsigned char b0[16];
     unsigned int w1[986];
-} D_auto_src_huffman_nine_zero_runs = {
+} g_huffmanNineZeroRuns = {
     {
         0x28, 0x20, 0x20, 0x20, 0x38, 0x20, 0x20, 0x20, 0x30, 0x27, 0x73, 0x20, 0x29, 0x20, 0x00, 0x00,
     },
@@ -408,7 +408,7 @@ struct {
 
 /* DATA_800DBFE4.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_huffman_delta_nine_zero_runs_nodes[531] = {
+unsigned int g_huffmanDeltaNineZeroRunNodes[531] = {
     0x00010212, 0x00020003, 0x08000001, 0x00040211, 0x0005001A, 0x00060007, 0x0800FFFE, 0x00080019,
     0x00090018, 0x000A0015, 0x000B000C, 0x08000A08, 0x000D000E, 0x08000A05, 0x000F0010, 0x08000A07,
     0x00110014, 0x00120013, 0x08000007, 0x0800FFF9, 0x08000006, 0x00160017, 0x0800FFFC, 0x08000004,
@@ -481,7 +481,7 @@ unsigned int D_auto_src_huffman_delta_nine_zero_runs_nodes[531] = {
 
 /* DATA_800DC830.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_huffman_signed_small_nodes[257] = {
+unsigned int g_huffmanSignedSmallNodes[257] = {
     0x0001001E, 0x0002001D, 0x00030004, 0x08000002, 0x00050006, 0x0800FFFD, 0x0007001C, 0x00080009,
     0x0800FFFA, 0x000A000B, 0x08000008, 0x000C001B, 0x000D000E, 0x0800000C, 0x000F001A, 0x00100019,
     0x00110018, 0x00120017, 0x00130014, 0x0800001A, 0x00150016, 0x0800FFE3, 0x0800001E, 0x0800FFE6,

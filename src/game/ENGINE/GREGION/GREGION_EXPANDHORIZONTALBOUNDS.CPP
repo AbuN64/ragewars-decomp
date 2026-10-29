@@ -4,40 +4,40 @@
 #include "TYPES.H"
 
 /** Expand the four-float X/Z bounds in arg0 over arg1 packed vectors. */
-void Gregion_ExpandHorizontalBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
+void Gregion_ExpandHorizontalBounds(f32 *bounds, s32 pointCount, CVector3 *points)
 {
     f32 value;
     f32 bound;
     s32 i;
     i = 0;
-    if (arg1 > 0) {
+    if (pointCount > 0) {
         do {
-            value = arg2[i].x;
-            bound = arg0[0];
+            value = points[i].x;
+            bound = bounds[0];
             if (!(value <= bound)) {
                 value = bound;
             }
-            arg0[0] = value;
-            value = arg2[i].z;
-            bound = arg0[1];
+            bounds[0] = value;
+            value = points[i].z;
+            bound = bounds[1];
             if (!(value <= bound)) {
                 value = bound;
             }
-            arg0[1] = value;
-            value = arg2[i].x;
-            bound = arg0[2];
+            bounds[1] = value;
+            value = points[i].x;
+            bound = bounds[2];
             if (!(bound <= value)) {
                 value = bound;
             }
-            arg0[2] = value;
-            value = arg2[i].z;
-            bound = arg0[3];
+            bounds[2] = value;
+            value = points[i].z;
+            bound = bounds[3];
             if (!(bound <= value)) {
                 value = bound;
             }
-            arg0[3] = value;
+            bounds[3] = value;
             i += 1;
-        } while (i < arg1);
+        } while (i < pointCount);
     }
 }
 /** Empty adjacent entry point included in Gregion_ExpandHorizontalBounds's Splat span. */
@@ -46,11 +46,11 @@ void Gregion_NoOperation(void)
 }
 
 #if defined(VERSION_US)
-unsigned char D_auto_func_80276598_us_padding_77198[4] = { 0x00, 0x06, 0x00, 0x00 };
+unsigned char g_GregionExpandhorizontalboundsTrailingBytes[4] = { 0x00, 0x06, 0x00, 0x00 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8027659C[1] = {
+unsigned int k_GregionExpandhorizontalboundsEncodedWords[1] = {
     0x0000000A,
 };
 #endif

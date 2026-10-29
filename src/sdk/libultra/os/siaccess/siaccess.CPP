@@ -2,40 +2,40 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
 #include "COMMON/OSPIHANDLE_S.H"
-#include "COMMON/ARG.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "sdk/OS/siaccess.H"
 #include "sdk/os.h"
 #include "COMMON/LONE/siaccess.H"
 
 /* 802BECB0.CPP */
 void __osSiCreateAccessQueue(void) {
-    extern OSMesgQueue D_8014EA78;
-    extern OSMesg D_8014EA70;
-    D_800D83D0[0] = 1;
-    osCreateMesgQueue(&D_8014EA78, &D_8014EA70, 1);
-    osSendMesg(&D_8014EA78, 0, 0);
+    extern OSMesgQueue g_serialInterfaceAccessQueue;
+    extern OSMesg g_serialInterfaceAccessMessage;
+    g_serialInterfaceAccessQueueInitialized[0] = 1;
+    osCreateMesgQueue(&g_serialInterfaceAccessQueue, &g_serialInterfaceAccessMessage, 1);
+    osSendMesg(&g_serialInterfaceAccessQueue, 0, 0);
 }
 
 /* 802BECB0_2.CPP */
-/* Takes the access token from the message queue D_8014EA78, first creating that one-message queue
+/* Takes the access token from the message queue g_serialInterfaceAccessQueue, first creating that one-message queue
    over D_8014EA70 with osCreateMesgQueue and seeding it with a null message through func_802BB420_de
-   when D_800D83D0 says it does not exist yet. Adapted from __osPiGetAccess with the queue, its buffer and its flag changed. */
+   when g_serialInterfaceAccessQueueInitialized says it does not exist yet. Adapted from __osPiGetAccess with the queue, its buffer and its flag changed. */
 
 static inline void create_access_queue(void) {
-    extern OSMesgQueue D_8014EA78;
-    extern OSMesg D_8014EA70;
-    D_800D83D0[0] = 1;
-    osCreateMesgQueue(&D_8014EA78, &D_8014EA70, 1);
-    osSendMesg(&D_8014EA78, 0, 0);
+    extern OSMesgQueue g_serialInterfaceAccessQueue;
+    extern OSMesg g_serialInterfaceAccessMessage;
+    g_serialInterfaceAccessQueueInitialized[0] = 1;
+    osCreateMesgQueue(&g_serialInterfaceAccessQueue, &g_serialInterfaceAccessMessage, 1);
+    osSendMesg(&g_serialInterfaceAccessQueue, 0, 0);
 }
 
 void __osSiGetAccess(void) {
-    extern OSMesgQueue D_8014EA78;
+    extern OSMesgQueue g_serialInterfaceAccessQueue;
     OSMesg token;
 
-    if (!D_800D83D0[0]) {
+    if (!g_serialInterfaceAccessQueueInitialized[0]) {
         create_access_queue();
     }
-    osRecvMesg(&D_8014EA78, &token, 1);
+    osRecvMesg(&g_serialInterfaceAccessQueue, &token, 1);
 }

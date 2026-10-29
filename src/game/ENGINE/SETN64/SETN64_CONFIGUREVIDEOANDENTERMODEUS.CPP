@@ -14,36 +14,36 @@ void SetN64_InitializeTransitionMode(void) {
 }
 
 #if defined(VERSION_US)
-extern s32 D_800E28D8;
-extern char D_auto_800D3460[], D_800D4530[];
-extern f32 rodata_func_8029499C_us_800C5410;
-extern void *D_auto_rodata_unresolved_800CD698[];
+extern s32 g_frontendCurrentVideoModeIndex;
+extern char g_videoModeDefaultLabel[], g_videoModeLabels[];
+extern f32 g_Setn64Initializemode17creditsWords1;
+extern void *g_Setn64ConfigurevideoandentermodeusPointerWords1[];
 extern void osViSetMode(void *);
 extern void osViSetYScale(f32);
 extern void osViSetSpecialFeatures(s32);
 extern void Cinema_EndSequence(void);
 #define SCR_W(state, off) (*(s32 *)((char *)(state) + (off)))
-/* Per-frame screen step: when the flag at 0x26DD0 is set it switches the video mode (label chosen by D_800E28D8, Y scale from a constant, mode 2); in state 2 of D_80142CA8 with that flag clear it latches 0x26DBC into 0x26DB8, clears 0x26DB0, runs the reset calls and dispatches the 12-byte table row D_auto_rodata_unresolved_800CD698 for that value. */
+/* Per-frame screen step: when the flag at 0x26DD0 is set it switches the video mode (label chosen by g_frontendCurrentVideoModeIndex, Y scale from a constant, mode 2); in state 2 of g_gameModeTransitionFrames with that flag clear it latches 0x26DBC into 0x26DB8, clears 0x26DB0, runs the reset calls and dispatches the 12-byte table row g_Setn64ConfigurevideoandentermodeusPointerWords1 for that value. */
 void SetN64_ConfigureVideoAndEnterModeUs(char *state) {
     void (*handler)(char *);
     s32 mode;
     if (SCR_W(state, 0x26DD0) != 0) {
-        char *label = D_auto_800D3460;
-        if (D_800E28D8 == 0) {
-            label = D_800D4530;
+        char *label = g_videoModeDefaultLabel;
+        if (g_frontendCurrentVideoModeIndex == 0) {
+            label = g_videoModeLabels;
         }
         osViSetMode(label);
-        osViSetYScale(rodata_func_8029499C_us_800C5410);
+        osViSetYScale(g_Setn64Initializemode17creditsWords1);
         osViSetSpecialFeatures(2);
     }
-    if (D_80142CA8 == 2 && SCR_W(state, 0x26DD0) == 0) {
+    if (g_gameModeTransitionFrames == 2 && SCR_W(state, 0x26DD0) == 0) {
         mode = SCR_W(state, 0x26DBC);
         SCR_W(state, 0x26DB0) = 0;
         SCR_W(state, 0x26DB8) = mode;
         Cinema_EndSequence();
         SoundElement_StopAudioExceptKey(-1);
         Control_SetControllerMode(0);
-        handler = (void (*)(char *))D_auto_rodata_unresolved_800CD698[SCR_W(state, 0x26DB8) * 3];
+        handler = (void (*)(char *))g_Setn64ConfigurevideoandentermodeusPointerWords1[SCR_W(state, 0x26DB8) * 3];
         if (handler != 0) {
             handler(state);
         }
@@ -53,13 +53,13 @@ void SetN64_ConfigureVideoAndEnterModeUs(char *state) {
 
 /* 802944E8_7.CPP */
 #if !(defined(VERSION_US))
-extern Entry80294AC4 D_800CD788[];
+extern Entry80294AC4 g_sessionInitializeHandlers[];
 
 void SetN64_EnterPendingSessionMode(void *gameSession) {
     void (*callback)(void *gameSession);
     s32 index;
 
-    if ((D_80142CA8 == 2) &&
+    if ((g_gameModeTransitionFrames == 2) &&
         (((struct GameSession *)gameSession)->transitionBlocked == 0)) {
         index = ((struct GameSession *)gameSession)->target;
         ((struct GameSession *)gameSession)->transitionTime = 0;
@@ -67,7 +67,7 @@ void SetN64_EnterPendingSessionMode(void *gameSession) {
         Cinema_EndSequence();
         SoundElement_StopAudioExceptKey(-1);
         Control_SetControllerMode(0);
-        callback = D_800CD788[((struct GameSession *)gameSession)->mode].callback;
+        callback = g_sessionInitializeHandlers[((struct GameSession *)gameSession)->mode].callback;
         if (callback != 0) {
             callback(gameSession);
         }
@@ -105,6 +105,6 @@ void SetN64_DrawMode19(void) {
 
 #if defined(VERSION_US)
 /** Perform no operation. */
-void func_80294AB0_us(void) {
+void SetN64_EmptyVideoModeHookUs(void) {
 }
 #endif

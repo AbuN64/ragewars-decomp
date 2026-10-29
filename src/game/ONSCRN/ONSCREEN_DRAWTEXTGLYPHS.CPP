@@ -20,7 +20,7 @@ extern void Cache_UnlockResource(void *, Node80253610 *);
 static inline f32 fontGlyphWidth(void)
 {
     f32 result;
-    switch (D_80147150) {
+    switch (g_creditsTextDrawingEnabled) {
     case 0: result = 24.0f; break;
     case 1: result = 12.0f; break;
     case 3: result = 6.0f; break;
@@ -33,7 +33,7 @@ static inline f32 fontGlyphWidth(void)
 
 void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language)
 {
-    FontStyle *style = &D_801376F8;
+    FontStyle *style = &g_tutorialStatusBars;
     Node80253610 *font;
     s32 special = 0;
     s32 resource;
@@ -44,8 +44,8 @@ void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 
     if (shadow) {
         gDPSetEnvColor(g_displayListCursor++, 0, 0, 0, alpha);
         gDPSetPrimColor(g_displayListCursor++, 0, 0, 0, 0, 0, 255);
-        x += style->shadowX * (D_800E28D0 / 284);
-        y += style->shadowY * (D_800E28D4 / 222);
+        x += style->shadowX * (g_hudReferenceViewportWidth / 284);
+        y += style->shadowY * (g_hudReferenceViewportHeight / 222);
     } else {
         gDPSetEnvColor(g_displayListCursor++, style->envR, style->envG, style->envB, alpha);
         gDPSetPrimColor(g_displayListCursor++, 0, 0, style->primR, style->primG, style->primB, 255);
@@ -63,21 +63,21 @@ void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 
             next = text[1];
             switch (language) {
             default: case 0:
-                glyph = D_801378C0[ch];
+                glyph = g_fontAlternateGlyphLookup[ch];
                 a = fontGlyphWidth();
                 b = fontGlyphWidth();
                 advance = Menu_GetGlyphAdvance(ch, next, a, b);
                 break;
             case 1:
-                glyph = D_801377C0[ch];
+                glyph = g_fontGlyphLookup[ch];
                 advance = fontGlyphWidth();
                 break;
             case 2:
-                glyph = D_801377C0[ch];
+                glyph = g_fontGlyphLookup[ch];
                 advance = fontGlyphWidth();
                 break;
             case 3:
-                glyph = D_801377C0[ch];
+                glyph = g_fontGlyphLookup[ch];
                 advance = fontGlyphWidth();
                 break;
             case 4:
@@ -99,8 +99,8 @@ void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 
             sx = width;
             sy = height;
             if (special && (glyph == 0x25 || glyph == 0x2B || glyph == 0x3D)) {
-                sx = D_800E28D0 * (1.0f / 284.0f);
-                sy = D_800E28D4 * (1.0f / 222.0f);
+                sx = g_hudReferenceViewportWidth * (1.0f / 284.0f);
+                sy = g_hudReferenceViewportHeight * (1.0f / 222.0f);
             }
             if (glyph != 255) {
                 Text_DrawTileGrid(font, glyph, (s16)x, (s16)y, sx, sy, 1);

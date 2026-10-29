@@ -1,0 +1,4 @@
+#ifndef DATA_OVLTAB3_ACTION_ACTIVATE_ROM_ENTRY_H
+#define DATA_OVLTAB3_ACTION_ACTIVATE_ROM_ENTRY_H
+extern char addrLow_Action_ActivateActorAndClearMotion[];
+#endif

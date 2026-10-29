@@ -1,7 +1,7 @@
 #include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "sdk/EXTERNS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/LLDIVRESULT.H"
 #include <stdarg.h>
 #include "TYPES.H"
@@ -14,7 +14,7 @@
 
 /* 800C7C68.CPP */
 #if defined(VERSION_DE)
-unsigned int D_auto_rodata_unresolved_800C7C68[22] = {
+unsigned int g_XprintfWords1[22] = {
     0x40590000, 0x00000000, 0x40240000, 0x00000000, 0x40590000, 0x00000000, 0x40C38800, 0x00000000,
     0x4197D784, 0x00000000, 0x4341C379, 0x37E08000, 0x4693B8B5, 0xB5056E17, 0x4D384F03, 0xE93FF9F5,
     0x5A827748, 0xF9301D32, 0x75154FDD, 0x7F73BF3C, 0x3B490FDB, 0x3C490FDB,
@@ -25,8 +25,8 @@ unsigned int D_auto_rodata_unresolved_800C7C68[22] = {
 /* _Printf core of the SDK: scans the format, parses flags, width, precision and size qualifier, and emits each field through prout. */
 
 extern u8 g_printfFlagCharactersText;
-extern u8 D_800C7B10_de;
-extern const char D_800D52B0[];
+extern u8 g_printfLengthQualifierCharacters;
+extern const char g_printfPaddingCharacters[];
 extern const char g_libcZeroPaddingText[];
 
 /* va_arg(ap, int) as this SDK expands it: load at the aligned cursor, then advance it. */
@@ -48,7 +48,7 @@ extern const char g_libcZeroPaddingText[];
             PRINTF_PUT(s, i); \
         } \
     }
-extern unsigned int D_auto_data_unresolved_800CCD48[];
+extern unsigned int g_printfFlagBits[];
 s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, const char *fmt, va_list ap) {
     _Pft x;
     x.nchar = 0;
@@ -67,7 +67,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
             return x.nchar;
         }
         ++s;
-        for (x.flags = 0, fchar = &g_printfFlagCharactersText, fbit = D_auto_data_unresolved_800CCD48; (t = (unsigned char *)func_802BD3C8_de((const char *)fchar, *s)) != 0; ++s) {
+        for (x.flags = 0, fchar = &g_printfFlagCharactersText, fbit = g_printfFlagBits; (t = (unsigned char *)Libc_FindStringByte((const char *)fchar, *s)) != 0; ++s) {
             x.flags |= fbit[t - fchar];
         }
         if (*s == 0x2A) {
@@ -96,7 +96,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
                 }
             }
         }
-        x.qual = func_802BD3C8_de((const char *)&D_800C7B10_de, *s) ? *s++ : 0;
+        x.qual = Libc_FindStringByte((const char *)&g_printfLengthQualifierCharacters, *s) ? *s++ : 0;
         if (x.qual == 0x6C && *s == 0x6C) {
             x.qual = 0x4C;
             ++s;
@@ -104,7 +104,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
         _Putfld(&x, &ap, *s, ac);
         x.width -= x.n0 + x.nz0 + x.n1 + x.nz1 + x.n2 + x.nz2;
         if (!(x.flags & 4)) {
-            PRINTF_PAD(32, D_800D52B0, x.width);
+            PRINTF_PAD(32, g_printfPaddingCharacters, x.width);
         }
         PRINTF_PUT(ac, x.n0);
         PRINTF_PAD(32, g_libcZeroPaddingText, x.nz0);
@@ -113,7 +113,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
         PRINTF_PUT(x.s + x.n1, x.n2);
         PRINTF_PAD(32, g_libcZeroPaddingText, x.nz2);
         if (x.flags & 4) {
-            PRINTF_PAD(32, D_800D52B0, x.width);
+            PRINTF_PAD(32, g_printfPaddingCharacters, x.width);
         }
         fmt = (const char *)s + 1;
     }
@@ -225,7 +225,7 @@ case_p:
     return;
 case_s:
     px->s = va_arg(*pap, unsigned char *);
-    px->n1 = func_802BD400_de((const char *)px->s);
+    px->n1 = Libc_StringLength((const char *)px->s);
 
     if (px->prec >= 0 && px->prec < px->n1) {
         px->n1 = px->prec;
@@ -241,7 +241,7 @@ case_default:
 /* EU enters __umoddi3 one word before its symbol (data_unresolved_802C15D0), so EU keeps the ROM body. */
 
 extern u8 g_lowercaseHexDigitsText[];
-extern u8 D_800D5314[];
+extern u8 g_printfDigitCharacters[];
 
 
 
@@ -260,7 +260,7 @@ void Libc_FormatInteger(_Pft *px, unsigned char code) {
     u64 value;
     table = g_lowercaseHexDigitsText;
     if (code == 0x58) {
-        table = D_800D5314;
+        table = g_printfDigitCharacters;
     }
     base = (code == 0x6F) ? 8 : ((code != 0x78 && code != 0x58) ? 10 : 16);
     i = 0x18;
@@ -278,7 +278,7 @@ void Libc_FormatInteger(_Pft *px, unsigned char code) {
         buffer[--i] = table[qr.rem];
     }
     px->n1 = 0x18 - i;
-    func_802BD3A0_de(px->s, &buffer[i], px->n1);
+    Libc_CopyBytes(px->s, &buffer[i], px->n1);
     if (px->n1 < px->prec) {
         px->nz0 = px->prec - px->n1;
     }

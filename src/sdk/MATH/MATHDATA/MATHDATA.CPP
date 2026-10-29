@@ -3,7 +3,7 @@
 
 /* 802BB630_3.CPP */
 #if defined(VERSION_DE)
-const unsigned int D_auto_rodata_func_802B6560_de_800C7818[15] = {
+const unsigned int g_Math_CosfConstantWords_de[15] = {
     0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
     0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000,
 };
@@ -11,7 +11,7 @@ const unsigned int D_auto_rodata_func_802B6560_de_800C7818[15] = {
 
 /* 802BB630_4.CPP */
 #if defined(VERSION_EU)
-const unsigned int D_auto_rodata_func_802B6560_de_800C8408[15] = {
+const unsigned int g_Math_CosfConstantWords_eu[15] = {
     0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
     0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000,
 };
@@ -19,7 +19,7 @@ const unsigned int D_auto_rodata_func_802B6560_de_800C8408[15] = {
 
 /* 802BB630_5.CPP */
 #if defined(VERSION_EU_X)
-const unsigned int D_auto_rodata_func_802B6560_de_800C8DD8[15] = {
+const unsigned int g_Math_CosfConstantWords_eu_x[15] = {
     0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
     0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000,
 };
@@ -27,7 +27,7 @@ const unsigned int D_auto_rodata_func_802B6560_de_800C8DD8[15] = {
 
 /* 802BC200_2.CPP */
 #if defined(VERSION_US)
-const unsigned int D_auto_rodata_func_802B7130_de_800C77F8[17] = {
+const unsigned int g_Gu_SinfConstantWords[17] = {
     0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
     0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000, 0x3F000000,
     0x3F000000,
@@ -35,7 +35,7 @@ const unsigned int D_auto_rodata_func_802B7130_de_800C77F8[17] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C783C[1] = {
+unsigned int k_MathdataEncodedWords[1] = {
     0x42415252,
 };
 #endif

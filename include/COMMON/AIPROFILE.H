@@ -191,14 +191,14 @@ struct Player {
 
 
 
-struct ObjRecAt1D8V2;
-typedef struct ObjRecAt1D8V2 ObjRecAt1D8V2;
+struct ActionTargetPlayerView;
+typedef struct ActionTargetPlayerView ActionTargetPlayerView;
 
-struct func_8022A404_S1;
+struct MenuValueStepView;
 
-struct func_80237E70_G1;
-struct func_80237E70_G1 {
-    u8 * unk0;
+struct ScreenMessageTextView;
+struct ScreenMessageTextView {
+    u8 * text;
 };
 
 
@@ -216,13 +216,13 @@ struct CollisionInfo8020CD74;
 typedef struct CollisionInfo8020CD74 CollisionInfo8020CD74;
 
 
-struct ObjRecAtCV1;
-typedef struct ObjRecAtCV1 ObjRecAtCV1;
+struct MenuActorInputView;
+typedef struct MenuActorInputView MenuActorInputView;
 
-struct ObjRecAtCV1;
-struct ObjRecAtCV1 {
+struct MenuActorInputView;
+struct MenuActorInputView {
     char pad0[0xC];
-    s16 unkC;
+    s16 input;
 };
 
 
@@ -273,13 +273,13 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 
-struct ObjRecAt18V5;
-struct ObjRecAt18V5 {
+struct ActorDefinitionPointerView;
+struct ActorDefinitionPointerView {
     char pad0[0x18];
-    void * unk18;
+    void * definition;
 };
 
-extern int D_800CE47C;
+extern int g_fragTagModelId;
 
 
 struct CCameraText_t;
@@ -290,21 +290,21 @@ struct CCameraText_t;
 
 
 
-struct ObjectLinks3C;
-typedef struct ObjectLinks3C ObjectLinks3C;
+struct PlayerCameraMotionView;
+typedef struct PlayerCameraMotionView PlayerCameraMotionView;
 
 
-struct ObjRecAt5D8;
-typedef struct ObjRecAt5D8 ObjRecAt5D8;
+struct PlayerNameProfileView;
+typedef struct PlayerNameProfileView PlayerNameProfileView;
 
-struct ObjRecAt5D8;
-struct ObjRecAt5D8 {
+struct PlayerNameProfileView;
+struct PlayerNameProfileView {
     char pad0[0x5D8];
-    void * unk5D8;
+    void * profile;
 };
 
-struct func_80237E70_G1;
-typedef struct func_80237E70_G1 func_80237E70_G1;
+struct ScreenMessageTextView;
+typedef struct ScreenMessageTextView ScreenMessageTextView;
 
 struct ModelBlend;
 struct ModelBlend {
@@ -326,10 +326,10 @@ struct ModelBlend {
     f32 height;
 };
 
-struct ObjRecAt20V2;
-struct ObjRecAt20V2 {
+struct GamePlayerListView;
+struct GamePlayerListView {
     char pad0[0x20];
-    char * unk20;
+    char * players;
 };
 
 
@@ -339,14 +339,14 @@ struct ObjRecAt20V2 {
 
 struct CCameraText_t;
 
-struct func_8020D1FC_S1;
-struct func_8020D1FC_S1 {
+struct ActorFlagsWordView;
+struct ActorFlagsWordView {
     char pad0[0x38];
-    s32 unk38;
+    s32 flags;
 };
 
-struct func_8020D1FC_S1;
-typedef struct func_8020D1FC_S1 func_8020D1FC_S1;
+struct ActorFlagsWordView;
+typedef struct ActorFlagsWordView ActorFlagsWordView;
 
 
 
@@ -357,59 +357,59 @@ typedef struct ModelBlend ModelBlend;
 struct Course;
 typedef struct Course Course;
 
-struct ObjectLinks3C;
-struct ObjectLinks3C {
+struct PlayerCameraMotionView;
+struct PlayerCameraMotionView {
     char pad0[0x18];
-    char * unk_18;
+    char * definition;
     char pad18[0x38 - 0x18 - sizeof(char*)];
-    s32 unk_38;
+    s32 flags;
 };
 
 
-struct func_80204620_S2;
-struct func_80204620_S2 {
+struct ActorModelIndexView;
+struct ActorModelIndexView {
     char pad0[0x28];
-    s16 unk28;
+    s16 modelIndex;
 };
 
 
-struct ObjRecAt1D8V2;
-struct ObjRecAt1D8V2 {
+struct ActionTargetPlayerView;
+struct ActionTargetPlayerView {
     char pad0[0x1D8];
-    char * unk1D8;
+    char * player;
 };
 
-struct func_80203E78_S1;
-struct func_80203E78_S1 {
+struct ResourceKeyView;
+struct ResourceKeyView {
     char pad0[0x4];
-    s32 unk4;
+    s32 key;
 };
 
 
 
 
-struct func_80228774_S1;
-struct func_80228774_S1 {
+struct WorldPlayerHeadView;
+struct WorldPlayerHeadView {
     char pad0[0x20];
-    void * unk20;
+    void * players;
 };
 
-struct ObjRecAt20V2;
-typedef struct ObjRecAt20V2 ObjRecAt20V2;
+struct GamePlayerListView;
+typedef struct GamePlayerListView GamePlayerListView;
 
 
 
-extern int D_800CE430[];
+extern int g_characterModelIds[];
 
-struct func_8022A404_S1;
-typedef struct func_8022A404_S1 func_8022A404_S1;
+struct MenuValueStepView;
+typedef struct MenuValueStepView MenuValueStepView;
 
-struct RecordRecAt94;
-typedef struct RecordRecAt94 RecordRecAt94;
+struct PlayerProfileStatusView;
+typedef struct PlayerProfileStatusView PlayerProfileStatusView;
 
 
-struct ObjRecAt18V5;
-typedef struct ObjRecAt18V5 ObjRecAt18V5;
+struct ActorDefinitionPointerView;
+typedef struct ActorDefinitionPointerView ActorDefinitionPointerView;
 
 struct CollisionInfo8020CD74;
 struct CollisionInfo8020CD74 {
@@ -417,10 +417,10 @@ struct CollisionInfo8020CD74 {
 };
 
 
-struct func_80203E78_S1;
-typedef struct func_80203E78_S1 func_80203E78_S1;
+struct ResourceKeyView;
+typedef struct ResourceKeyView ResourceKeyView;
 
-struct func_80228774_S1;
-typedef struct func_80228774_S1 func_80228774_S1;
+struct WorldPlayerHeadView;
+typedef struct WorldPlayerHeadView WorldPlayerHeadView;
 
 #endif

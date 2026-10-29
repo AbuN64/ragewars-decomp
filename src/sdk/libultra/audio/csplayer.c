@@ -1,6 +1,6 @@
-#include "sdk/OBJECTSTATE2.H"
+#include "sdk/PERIPHERAL_PORT_BYTE_VIEWS.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 #include "sdk/libgultra_inferred/cseq.H"
 #include "COMMON/ALBANK_S.H"
@@ -26,7 +26,7 @@ extern void alEvtqNew(void *, void *, s32);
 extern void alSynAddPlayer(s32, void *);
 
 
-void __CSPHandleMetaMsg(void *arg0, ObjectState10_2 *arg1);
+void __CSPHandleMetaMsg(void *sequencePlayer, CompressedSequenceMetaEvent *metaEvent);
 
 extern void alEvtqPostEvent(ALEventQueue *, ALEvent *, s32);
 
@@ -55,7 +55,7 @@ void alCSPNew(void *sequencePlayer, InitParams *config) {
     ALSeqPlayer *obj = sequencePlayer;
     InitParams *params = config;
     s32 context = params->context;
-    s32 global = (s32)D_800D4070;
+    s32 global = (s32)g_audioGlobals;
     s32 allocation;
     s32 i;
 
@@ -99,9 +99,9 @@ void alCSPNew(void *sequencePlayer, InitParams *config) {
     {
         ALPlayer_s *node = &obj->node;
         node->next = 0;
-        node->handler = &D_002AEC20;
+        node->handler = &__CSPVoiceHandler_Address;
         node->clientData = node;
-        alSynAddPlayer(D_800D4070, node);
+        alSynAddPlayer(g_audioGlobals, node);
     }
 }
 
@@ -182,7 +182,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             __CSPHandleMIDIMsg(seqp, (ALEvent *)&seqp->nextEvent);
             break;
         case 7: /* AL_SEQP_META_EVT */
-            __CSPHandleMetaMsg(seqp, (ObjectState10_2 *)&seqp->nextEvent);
+            __CSPHandleMetaMsg(seqp, (CompressedSequenceMetaEvent *)&seqp->nextEvent);
             break;
         case 10: /* AL_SEQP_VOL_EVT */
             seqp->vol = seqp->nextEvent.msg.spvol.type;
@@ -229,22 +229,22 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             break;
         case 13: /* AL_SEQP_SEQ_EVT */
             if (seqp->state == 1)
-                Audio_Assert(D_800C7350_de, g_audioCsplayerText, 295);
-            seqp->target = seqp->nextEvent.msg.spseq.unk0;
+                Audio_Assert(g_compressedSequencePlayerAssertText, g_audioCsplayerText, 295);
+            seqp->target = seqp->nextEvent.msg.spseq.previous;
             __setUsptFromTempo(seqp, 500000.0f);
             if (seqp->bank)
                 __initFromBank(seqp, seqp->bank);
             break;
         case 14: /* AL_SEQP_BANK_EVT */
             if (seqp->state != 0)
-                Audio_Assert(D_800C7350_de, g_audioCsplayerText, 304);
-            seqp->bank = seqp->nextEvent.msg.spbank.unk0;
+                Audio_Assert(g_compressedSequencePlayerAssertText, g_audioCsplayerText, 304);
+            seqp->bank = seqp->nextEvent.msg.spbank.previous;
             __initFromBank(seqp, seqp->bank);
             break;
         case 4: /* AL_SEQ_END_EVT */
         case 3: /* AL_TEMPO_EVT */
         case 1: /* AL_SEQ_MIDI_EVT */
-            Audio_Assert(D_800C7350_de, g_audioCsplayerText, 314);
+            Audio_Assert(g_compressedSequencePlayerAssertText, g_audioCsplayerText, 314);
             break;
         }
         seqp->nextDelta = alEvtqNextEvent(&seqp->evtq, (s16 *)&seqp->nextEvent);
@@ -366,9 +366,9 @@ send_value:
             }
             break;
         sw_message_default:
-            Audio_Assert(D_800C7350_de, g_audioCsplayerText, 0x190);
+            Audio_Assert(g_compressedSequencePlayerAssertText, g_audioCsplayerText, 0x190);
             break;
-        
+
     } while (0);
     }
 }
@@ -432,8 +432,8 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             else
                 vstate->phase = 0;
             cents = (key - sound->keyMap->keyBase) * 100 + sound->keyMap->detune;
-            vstate->pitch = func_802AFE30_de(cents);
-            initialOscValue = D_800C7420_de;
+            vstate->pitch = Audio_CentsToPitchRatio(cents);
+            initialOscValue = g_compressedSequenceInitialOscillatorValue;
             vstate->envGain = sound->envelope->attackVolume;
             vstate->envEndTime = seqp->curTime + sound->envelope->attackTime;
             vstate->flags = 0;
@@ -453,13 +453,13 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
                 }
             }
             tremeloSlot = &vstate->tremelo;
-            if (!(oscValue >= D_800C7424_de)) {
+            if (!(oscValue >= g_compressedSequenceOscillatorMinimum)) {
                 tremelo = (s32)oscValue;
             } else {
-                tremelo = (s32)(oscValue - D_800C7424_de);
+                tremelo = (s32)(oscValue - g_compressedSequenceOscillatorMinimum);
                 tremelo |= 0x80000000;
             }
-            initialOscValue = D_800C7428_de;
+            initialOscValue = g_compressedSequenceFallbackOscillatorValue;
             *tremeloSlot = tremelo;
             oscValue = initialOscValue;
             if (inst->vibType) {
@@ -580,7 +580,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
         break;
     case 0xC0: /* AL_MIDI_ProgramChange */
         if (seqp->bank == 0)
-            Audio_Assert(D_800C7350_de, g_audioCsplayerText, 711);
+            Audio_Assert(g_compressedSequencePlayerAssertText, g_audioCsplayerText, 711);
         if (key < seqp->bank->instCount) {
             ALInstrument *inst = seqp->bank->instArray[key];
             __setInstChanState(seqp, inst, chan);
@@ -594,7 +594,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
 
             bendVal = ((byte2 << 7) + byte1) - 8192;
             cents = (seqp->chanState[chan].bendRange * bendVal) / 8192;
-            bendRatio = func_802AFE30_de(cents);
+            bendRatio = Audio_CentsToPitchRatio(cents);
             seqp->chanState[chan].pitchBend = bendRatio;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next)
                 if (vs->channel == chan)
@@ -606,29 +606,29 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
     }
 }
 
-void __CSPRepostEvent(void *arg0, Node_func_802AFD6C_de *arg1);
+void __CSPRepostEvent(void *eventQueue, CompressedSequenceEventNode *repostedEvent);
 
 
 
-extern s32 func_802BD170_de(s32);
+extern s32 osSetIntMask(s32);
 
-void __CSPHandleMetaMsg(void *arg0, ObjectState10_2 *arg1) {
+void __CSPHandleMetaMsg(void *sequencePlayer, CompressedSequenceMetaEvent *metaEvent) {
     s32 padding[4];
     s32 total = 0;
-    Node_func_802AFD6C_de *head = 0;
+    CompressedSequenceEventNode *head = 0;
     s32 scale;
-    Node_func_802AFD6C_de *node;
-    Node_func_802AFD6C_de *next;
-    if (arg1->unk_8 == 0xFF) {
-        if (arg1->unk_9 != 0x51) {
+    CompressedSequenceEventNode *node;
+    CompressedSequenceEventNode *next;
+    if (metaEvent->unk_8 == 0xFF) {
+        if (metaEvent->unk_9 != 0x51) {
             return;
         }
-        scale = ((ObjectState4C *)(arg0))->unk_24;
-        __setUsptFromTempo(arg0,
-                      (f32)((arg1->unk_B << 16) | (arg1->unk_C << 8) | arg1->unk_D));
-        node = ((struct ObjectLinks54_2 *) ((char *) arg0))->link;
+        scale = ((CompressedSequenceTempoAndQueueView *)(sequencePlayer))->unk_24;
+        __setUsptFromTempo(sequencePlayer,
+                      (f32)((metaEvent->unk_B << 16) | (metaEvent->unk_C << 8) | metaEvent->unk_D));
+        node = ((struct CompressedSequenceAllocatedEventsView *) ((char *) sequencePlayer))->link;
         while (node != 0) {
-            next = ((struct ObjectLinks4_5 *) ((char *) node))->link;
+            next = ((struct CompressedSequenceEventLink *) ((char *) node))->link;
             total += node->value;
             if (node->type == 0x15) {
                 s32 node_total;
@@ -652,15 +652,15 @@ void __CSPHandleMetaMsg(void *arg0, ObjectState10_2 *arg1) {
         node = head;
         while (node != 0) {
             next = node->prev;
-            node->value = (node->value / scale) * ((ObjectState4C *)(arg0))->unk_24;
-            __CSPRepostEvent(&((ObjectState4C *)(arg0))->unk_48, node);
+            node->value = (node->value / scale) * ((CompressedSequenceTempoAndQueueView *)(sequencePlayer))->unk_24;
+            __CSPRepostEvent(&((CompressedSequenceTempoAndQueueView *)(sequencePlayer))->unk_48, node);
             node = next;
         }
     }
 }
 
-void __CSPPostNextSeqEvent(void *arg0) {
-    struct ALSeqPlayer *player = arg0;
+void __CSPPostNextSeqEvent(void *sequencePlayer) {
+    struct ALSeqPlayer *player = sequencePlayer;
     ALEvent sp10;
     s32 result;
     ALCSeq_s *sequence;
@@ -674,85 +674,85 @@ void __CSPPostNextSeqEvent(void *arg0) {
     }
 }
 
-void __CSPRepostEvent(void *arg0, Node_func_802AFD6C_de *arg1) {
-    ObjRecAt8V3 *object = arg0;
+void __CSPRepostEvent(void *eventQueue, CompressedSequenceEventNode *repostedEvent) {
+    CompressedSequenceEventQueueHead *object = eventQueue;
     s32 saved;
-    Node_func_802AFD6C_de **link;
-    Node_func_802AFD6C_de *node;
+    CompressedSequenceEventNode **link;
+    CompressedSequenceEventNode *node;
     s32 value;
     s32 node_value;
 
-    saved = func_802BD170_de(1);
-    link = &object->unk8;
+    saved = osSetIntMask(1);
+    link = &object->allocatedEvents;
     if (link != 0) {
 loop:
         node = *link;
         if (node == 0) {
             goto insert;
         }
-        value = arg1->value;
+        value = repostedEvent->value;
         node_value = node->value;
         if (value < node_value) {
             node->value = node_value - value;
 insert:
-            alLink(arg1, link);
+            alLink(repostedEvent, link);
             goto done;
         }
-        arg1->value = value - node_value;
-        link = (Node_func_802AFD6C_de **)*link;
+        repostedEvent->value = value - node_value;
+        link = (CompressedSequenceEventNode **)*link;
         if (link != 0) {
             goto loop;
         }
     }
 done:
-    func_802BD170_de(saved);
+    osSetIntMask(saved);
 }
 
-void __setUsptFromTempo(void *arg0, f32 arg1) {
-    ALSeqPlayer *player = arg0;
+void __setUsptFromTempo(void *sequencePlayer, f32 microsecondsPerQuarter) {
+    ALSeqPlayer *player = sequencePlayer;
     ALCSeq_s *targetValue;
 
     targetValue = player->target;
     if (targetValue != 0) {
-        player->uspt = (s32)(arg1 * targetValue->qnpt);
+        player->uspt = (s32)(microsecondsPerQuarter * targetValue->qnpt);
         return;
     }
     player->uspt = 0x1E8;
 }
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_802AF2E0_CD270[3] = {
+const unsigned int k_CsplayerEncodedWords[3] = {
     0x42FE0000, 0x4F000000, 0x3F800000,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C734C[1] = {
+unsigned int k_CsplayerEncodedWordsBlock1[1] = {
     0x6174615F,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C89EC[1] = {
+unsigned int k_CsplayerZeroWords[1] = {
     0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C801C[1] = {
+unsigned int k_CsplayerEncodedWordsBlock3[1] = {
     0x4275C28F,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C742C[1] = {
+unsigned int k_CsplayerEncodedWordsBlock2[1] = {
     0xAFB60030,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802AF2E0_CD270_us_rev1.c */
-const unsigned int D_blob_868e5463195d5f476023[3] = {
+const unsigned int g___CSPHandleMIDIMsgConstantWords[3] = {
     0x42FE0000, 0x4F000000, 0x3F800000,
 };
 #endif

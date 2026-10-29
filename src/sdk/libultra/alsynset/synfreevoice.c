@@ -17,22 +17,22 @@
 
 
 void alSynFreeVoice(void *synth, void *voice) {
-    void *Shared_func_802B3200_de_v0;
+    void *controlUpdate;
     void *voiceFilter;
     SharedRecV8 fn;
-    s32 new_var;
+    s32 updateSampleTime;
 
     if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0) {
         if ((((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset) != 0) {
-            Shared_func_802B3200_de_v0 = Audio_AllocParam();
-            if (Shared_func_802B3200_de_v0 != 0) {
-                new_var = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
-                ((AudioFreeVoiceUpdateView *)(Shared_func_802B3200_de_v0))->type = AL_FILTER_FREE_VOICE;
-                ((AudioFreeVoiceUpdateView *)(Shared_func_802B3200_de_v0))->delta = new_var;
-                ((AudioFreeVoiceUpdateView *)(Shared_func_802B3200_de_v0))->pvoice = ((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0;
+            controlUpdate = Audio_AllocParam();
+            if (controlUpdate != 0) {
+                updateSampleTime = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
+                ((AudioFreeVoiceUpdateView *)(controlUpdate))->type = AL_FILTER_FREE_VOICE;
+                ((AudioFreeVoiceUpdateView *)(controlUpdate))->delta = updateSampleTime;
+                ((AudioFreeVoiceUpdateView *)(controlUpdate))->pvoice = ((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0;
                 voiceFilter = ((struct Draw *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->model;
                 fn = ((CallbackStateC_4 *)(voiceFilter))->callback;
-                fn(voiceFilter, AL_FILTER_ADD_UPDATE, Shared_func_802B3200_de_v0);
+                fn(voiceFilter, AL_FILTER_ADD_UPDATE, controlUpdate);
                 ((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0 = 0;
             }
         } else {

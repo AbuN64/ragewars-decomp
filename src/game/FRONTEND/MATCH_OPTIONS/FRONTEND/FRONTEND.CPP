@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_20.H"
+#include "COMMON/FRONTEND_RESOURCE_LOAD_STATE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/OWNERRECAT8V1.H"
@@ -8,7 +8,7 @@
 /* 80423280_2.CPP */
 /* 80423280_2.CPP */
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DDA68[2] = {
+unsigned int k_FrontendEncodedWordsBlock9[2] = {
     0x41500000, 0xC2480000,
 };
 #endif
@@ -46,7 +46,7 @@ s32 Frontend_ClearLoadingHints(void) {
 
 /* DATA_800DC718.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800DC718[9] = {
+unsigned int k_FrontendEncodedWordsBlock2[9] = {
     0x5F335400, 0x00040000, 0x3C9374BC, 0x40A00000, 0x41500000, 0xC2480000, 0x3D23D70A, 0x41880000,
     0xC1200000,
 };
@@ -54,7 +54,7 @@ unsigned int D_auto_rodata_unresolved_800DC718[9] = {
 
 /* 80423280_14.CPP */
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E92A8[2] = {
+unsigned int k_FrontendEncodedWordsBlock13[2] = {
     0x00000016, 0x3DE147AE,
 };
 #endif
@@ -62,14 +62,14 @@ unsigned int rodata_unresolved_800E92A8[2] = {
 /* 800E1A98.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E1A98 */
-unsigned int D_blob_6e88bbefb9bce6e3882c[2] = {
+unsigned int g_FrontendEncodedWordsBlock2[2] = {
     0x0000001F, 0x00000024,
 };
 #endif
 
 /* 80423280_15.CPP */
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EE0E8[2] = {
+unsigned int k_FrontendEncodedWordsBlock16[2] = {
     0x08000027, 0x08000028,
 };
 #endif

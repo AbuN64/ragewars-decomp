@@ -1,4 +1,4 @@
-#ifndef DATA_OVL1_D_DATA_800CE208_H
-#define DATA_OVL1_D_DATA_800CE208_H
-extern char D_00212088[];
+#ifndef DATA_OVERLAY_ONE_D_CALLBACK_ROM_ENTRY_H
+#define DATA_OVERLAY_ONE_D_CALLBACK_ROM_ENTRY_H
+extern char addrLow_Nav_UpdateVisiblePursuit[];
 #endif

@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct ObjectLinks54 {
+struct TexturedRibbonOwnerView {
     char pad0[0x8];
     char * unk_8;
     char pad8[0x28 - 0x8 - sizeof(char*)];
@@ -17,13 +17,13 @@ struct ObjectLinks54 {
     char pad4C[0x50 - 0x4C - sizeof(f32)];
     s32 unk_50;
 };
-struct ObjectStateB0 {
+struct TexturedRibbonSegmentView {
     char pad0[0x10];
     CVector3 unk_10;
     char pad10[0xAC - 0x10 - sizeof(CVector3)];
     f32 unk_AC;
 };
-struct ObjectLinksB4 {
+struct TexturedRibbonStateView {
     char pad0[0x4];
     char * unk_4;
     char pad4[0x8 - 0x4 - sizeof(char*)];
@@ -43,7 +43,7 @@ struct ObjectLinksB4 {
     char padAC[0xB0 - 0xAC - sizeof(func_8022E280_S1_U744)];
     s32 unk_B0;
 };
-struct ObjectState20 {
+struct TexturedRibbonResourceView {
     unsigned char padding_0[8];
     f32 unk_8;
     unsigned char padding_C[16];

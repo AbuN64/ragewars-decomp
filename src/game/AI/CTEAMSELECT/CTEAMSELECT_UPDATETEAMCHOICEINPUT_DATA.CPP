@@ -1,24 +1,24 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/rw_pool_802191B8_C7FB8_us_rev1.c */
-const unsigned int D_blob_e0ab93a21c02d31fb494[1] = {
+const unsigned int g_teamWheelPlayerShieldDuration_StorageWords[1] = {
     0x40000000,
 };
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C25AC[1] = {
+unsigned int k_CteamselectUpdateteamchoiceinputQuarterWords[1] = {
     0x3E800000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C256C[1] = {
+unsigned int k_CteamselectUpdateteamchoiceinputEncodedWordsBlock1[1] = {
     0x2529FFF0,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C22CC[1] = {
+unsigned int k_CteamselectUpdateteamchoiceinputEncodedWords[1] = {
     0xBF350481,
 };
 #endif

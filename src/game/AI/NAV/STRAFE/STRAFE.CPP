@@ -27,8 +27,8 @@ typedef struct Actor {
 
 
 
-extern s32 D_800D297C;
-extern char D_8013B364[];
+extern s32 g_lightingBufferIndex;
+extern char g_navigationGraph[];
 
 extern void Nav_RunBehaviorHandler(Brain *aiController);
 extern s32 Scaled_HasLineOfSight(Brain *, Actor *);
@@ -40,11 +40,11 @@ extern f32 Scaled_UpdateDifficultyAimJitter(Brain *aiController);
 extern f32 Nav_SteerTowardPoint(Brain *, CVector3 *, f32, f32);
 extern s32 Wheel_GetDirectionSector(f32);
 extern void Wheel_MeasureWheelClearance(Actor *, s32);
-extern void Portal_DispatchActorBehavior(Brain *arg0);
+extern void Portal_DispatchActorBehavior(Brain *controller);
 extern s32 Route_GetRouteRelation(char *, s32, s32);
 
 
-extern void Nav_SteerAlongRoute(Brain *arg0), Nav_UpdatePlayerSteering(Brain *arg0);
+extern void Nav_SteerAlongRoute(Brain *controller), Nav_UpdatePlayerSteering(Brain *controller);
 void Nav_UpdatePursuitStrafe(Actor *actor) {
     s32 mine, theirs, dir, route;
     Actor *player;
@@ -88,7 +88,7 @@ void Nav_UpdatePursuitStrafe(Actor *actor) {
             if (pattern == 0) {
                 dir = Wheel_GetDirectionSector((((Actor *)brain->player)->yaw - 3.1415927f) - 1.5707964f);
                 player = ((Actor *)brain->player);
-                if ((player->slot % 2) == D_800D297C) {
+                if ((player->slot % 2) == g_lightingBufferIndex) {
                     Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->clearance[dir] < 100.0f)) {
@@ -99,7 +99,7 @@ void Nav_UpdatePursuitStrafe(Actor *actor) {
             } else if (pattern == 1) {
                 dir = Wheel_GetDirectionSector((((Actor *)brain->player)->yaw - 3.1415927f) + 1.5707964f);
                 player = ((Actor *)brain->player);
-                if ((player->slot % 2) == D_800D297C) {
+                if ((player->slot % 2) == g_lightingBufferIndex) {
                     Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (brain->clearance[dir] < 100.0f) {
@@ -121,7 +121,7 @@ halt:
         }
         if (route != brain->node) {
             brain->node = route;
-            if (Route_GetRouteRelation(D_8013B364, brain->start, route) == 0) {
+            if (Route_GetRouteRelation(g_navigationGraph, brain->start, route) == 0) {
                 Scaled_SetBehaviourState(brain, 1);
             }
         }

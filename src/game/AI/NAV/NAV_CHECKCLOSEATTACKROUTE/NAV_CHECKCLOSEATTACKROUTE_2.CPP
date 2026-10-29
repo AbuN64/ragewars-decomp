@@ -14,7 +14,7 @@ char func_80210248_eu_padding_10E28[8] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_80210248_eu_padding_10E28 */
-unsigned int D_blob_phase2_b2a21442bf66baa14340[2] = {
+unsigned int g_NavCheckcloseattackrouteEncodedWordsBlock2[2] = {
     0x04620001, 0x24620003,
 };
 #endif

@@ -30,12 +30,12 @@ char func_802BE3A8_eu_x_padding_C3DB8[8] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_802BE3A8_eu_x_padding_C3DB8 */
-unsigned int D_blob_phase2_dbd66ddbd340792b7c96[2] = {
+unsigned int g_XldtobEncodedWords[2] = {
     0x0C0B0FA8, 0xAFAB0010,
 };
 #endif
 
 /* 802C6A00.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_802BE368_eu_padding_BEF68[8] = { 0x8F, 0xA2, 0x00, 0x18, 0x8C, 0x42, 0x00, 0x14 };
+unsigned char g_XldtobTrailingBytes[8] = { 0x8F, 0xA2, 0x00, 0x18, 0x8C, 0x42, 0x00, 0x14 };
 #endif

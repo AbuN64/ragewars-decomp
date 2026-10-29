@@ -1,6 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RECORDRECAT1C.H"
-#include "OVLGAME/80405454.H"
+#include "OVLGAME/RENDER_BUFFER_RESOURCES.H"
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
@@ -8,7 +8,7 @@
 
 /* Clears a record: the words at offsets 0, 4, 8, 0x18 and 0x1C, and the three-word array at 0xC
    from its last entry down. */
-void Note_ClearRenderRecord(struct RecordRecAt1C *record) {
+void Note_ClearRenderRecord(struct RenderBufferResources *record) {
     s32 i;
     record->ready = 0;
     record->displayLists = 0;
@@ -20,7 +20,7 @@ void Note_ClearRenderRecord(struct RecordRecAt1C *record) {
     }
 }
 /* Releases every resource handle the render buffer record holds and clears the record. */
-void Note_ReleaseRenderBuffers(struct RecordRecAt1C *record) {
+void Note_ReleaseRenderBuffers(struct RenderBufferResources *record) {
     s32 j;
     s32 k;
 

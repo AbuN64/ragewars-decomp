@@ -9,9 +9,9 @@ extern void Gsky_PostScaledScreenMessage(void *, s32, void *, f32);
 
 
 
-void func_8022B75C_de(void *player, u8 *message, f32 size) {
+void Playerai_PostMessageHistoryEntry(void *player, u8 *message, f32 size) {
     s32 count;
-    s32 temp;
+    s32 messageCameraAddress;
 
     count = ((Shared_ActorView *)player)->messageIndex + 1;
     ((Shared_ActorView *)player)->messageIndex = count;
@@ -19,9 +19,9 @@ void func_8022B75C_de(void *player, u8 *message, f32 size) {
         ((Shared_ActorView *)player)->messageIndex = 0;
     }
     XPlus_CopyString(((Shared_ActorView *)player)->messageHistory[((Shared_ActorView *)player)->messageIndex], message);
-    temp = (s32)((Shared_ActorView *)player)->message;
-    if (temp != 0) {
-        Gsky_PostScaledScreenMessage(&D_80145088, temp,
+    messageCameraAddress = (s32)((Shared_ActorView *)player)->message;
+    if (messageCameraAddress != 0) {
+        Gsky_PostScaledScreenMessage(&g_frontendScreenStatus, messageCameraAddress,
                       ((Shared_ActorView *)player)->messageHistory[((Shared_ActorView *)player)->messageIndex],
                       size);
     }

@@ -1,7 +1,7 @@
 #include "COMMON/LEVEL.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_10.H"
+#include "COMMON/TRIGGER_AND_FLOAT_VALUE_OPERATIONS.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
@@ -44,16 +44,16 @@ void Scene_DispatchSelectedEntityKinds(Level *level) {
     Cinema_SetPlaybackFlag();
 }
 
-void Scene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *arg0) {
+void Scene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *scene) {
     EntryOvlSceneDispatchAndRecycleQueuedTriggers *entry;
     EntryOvlSceneDispatchAndRecycleQueuedTriggers *next;
 
-    entry = arg0->active;
+    entry = scene->active;
     while (entry != 0) {
         next = entry->next;
         Link_DispatchTrigger(entry->handle);
-        func_80255ED8_de(&arg0->active, entry);
-        func_80255CB8_de(&arg0->spare, entry);
+        List_RemoveIntrusive(&scene->active, entry);
+        List_PrependIntrusive(&scene->spare, entry);
         entry = next;
     }
 }
@@ -137,13 +137,13 @@ void Scene_ScaleDefinitionFields(s32 unused0, void ***handle) {
     }
 }
 
-void Scene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***handle) {
+void Scene_ResolveFrameItemReferences(OwnerCode8044E2B8 *scene, void ***handle) {
     void *obj;
     FrameCode8044E2B8 *frame;
     BankCode8044E2B8 *bank;
-    struct EntryRecAt0V3 *items;
-    struct EntryRecAt0V3 *item;
-    SlotRecAt0V2 *slot;
+    struct SceneFrameItemReference *items;
+    struct SceneFrameItemReference *item;
+    ParticleEffectRelocationSlot *slot;
     s32 count;
     s32 inner;
     s32 i;
@@ -162,7 +162,7 @@ void Scene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***handle) {
                 do {
                     index = slot->item;
                     if (index != -1) {
-                        bank = SetN64_GetPackSection(arg0->unk6C, 2);
+                        bank = SetN64_GetPackSection(scene->modelBankData, 2);
                         items = bank->items;
                         if ((index < 0) || (index >= bank->count)) {
                             item = 0;
@@ -178,6 +178,6 @@ void Scene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***handle) {
                 } while (j < inner);
             }
         }
-        arg0->unk7C = obj;
+        scene->frameResourceData = obj;
     }
 }

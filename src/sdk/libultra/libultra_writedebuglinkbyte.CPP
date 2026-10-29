@@ -1,15 +1,15 @@
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESPONSE.H"
-#include "COMMON/S1_4.H"
+#include "TYPES.H"
 #include "TYPES.H"
 #include "sdk/OSINT/pigetstatus.H"
 
 #if defined(VERSION_US_REV1)
-/* Writes one byte through the cartridge-domain port at D_B2000000 with the control register D_B200000C and strobe register D_B2000004, waiting for the ready bit of D_B2000015 to set and then clear with D_800D3650 retries each, setting D_8014D3E8 on a timeout and returning 1 on success. Adapted from Libultra_ReadDebugLinkByte with the read of D_B2000001 changed to a write of the argument through D_B2000000 and the strobe at D_B2000004 raised and lowered around the handshake, and the argument copied into a second local for the port write. */
+/* Writes one byte through the cartridge-domain port at DEBUG_LINK_DATA_REGISTER with the control register DEBUG_LINK_MODE_REGISTER and strobe register DEBUG_LINK_HANDSHAKE_REGISTER, waiting for the ready bit of DEBUG_LINK_TRANSMIT_STATUS_BYTE to set and then clear with g_debugLinkRetryLimit retries each, setting g_debugLinkTransferFailed on a timeout and returning 1 on success. Adapted from Libultra_ReadDebugLinkByte with the read of D_B2000001 changed to a write of the argument through DEBUG_LINK_DATA_REGISTER and the strobe at DEBUG_LINK_HANDSHAKE_REGISTER raised and lowered around the handshake, and the argument copied into a second local for the port write. */
 
 
-extern u8 D_8014D3E0;
+extern u8 g_debugLinkDataByte;
 
 
 
@@ -26,36 +26,36 @@ s32 Libultra_WriteDebugLinkByte(s32 outputByte) {
     u8 strobe;
     u8 status;
 
-    initial_control = (D_8014D3E3 & 0xF8) | 3;
+    initial_control = (g_debugLinkModeControl & 0xF8) | 3;
     result = 0;
-    D_8014D3E3 = initial_control;
+    g_debugLinkModeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B200000C = initial_control;
-    D_8014D3E0 = outputByte;
+    DEBUG_LINK_MODE_REGISTER = initial_control;
+    g_debugLinkDataByte = outputByte;
     data = outputByte;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000000 = (u8)data;
-    strobe = D_8014D3E1 | 1;
-    D_8014D3E1 = strobe;
+    DEBUG_LINK_DATA_REGISTER = (u8)data;
+    strobe = g_debugLinkHandshakeControl | 1;
+    g_debugLinkHandshakeControl = strobe;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = strobe;
-    control = D_8014D3E3 | 8;
-    D_8014D3E3 = control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = strobe;
+    control = g_debugLinkModeControl | 8;
+    g_debugLinkModeControl = control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 1;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 1;
-    D_B200000C = control;
+    DEBUG_LINK_MODE_REGISTER = control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto first_done;
         }
         if (timeout-- == 0) {
@@ -63,23 +63,23 @@ s32 Libultra_WriteDebugLinkByte(s32 outputByte) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 first_done:
 
-    if (D_8014D3E8 == 0) {
-        control = D_8014D3E3 & 0xF7;
-        D_8014D3E3 = control;
+    if (g_debugLinkTransferFailed == 0) {
+        control = g_debugLinkModeControl & 0xF7;
+        g_debugLinkModeControl = control;
         do {
         } while (osPiGetStatus() & 3);
 
         expected = 1;
-        retries = D_800D3650;
+        retries = g_debugLinkRetryLimit;
         timeout = 0x4E20;
-        D_B200000C = control;
+        DEBUG_LINK_MODE_REGISTER = control;
         do {
             do {
             } while (osPiGetStatus() & 3);
-            status = D_B2000015 & expected;
+            status = DEBUG_LINK_TRANSMIT_STATUS_BYTE & expected;
             if (status == 0) {
                 goto second_done;
             }
@@ -88,20 +88,20 @@ first_done:
                 timeout = 0x4E20;
             }
         } while (retries > 0);
-        D_8014D3E8 = 1;
+        g_debugLinkTransferFailed = 1;
 second_done:
 
-        if (D_8014D3E8 == 0) {
-            strobe = D_8014D3E1 & 0xFE;
-            D_8014D3E1 = strobe;
+        if (g_debugLinkTransferFailed == 0) {
+            strobe = g_debugLinkHandshakeControl & 0xFE;
+            g_debugLinkHandshakeControl = strobe;
             do {
             } while (osPiGetStatus() & 3);
-            D_B2000004 = strobe;
-            final_control = D_8014D3E3 & 0xF8;
-            D_8014D3E3 = final_control;
+            DEBUG_LINK_HANDSHAKE_REGISTER = strobe;
+            final_control = g_debugLinkModeControl & 0xF8;
+            g_debugLinkModeControl = final_control;
             do {
             } while (osPiGetStatus() & 3);
-            D_B200000C = final_control;
+            DEBUG_LINK_MODE_REGISTER = final_control;
             result = 1;
         }
     }

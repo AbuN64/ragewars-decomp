@@ -2,6 +2,6 @@
 
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BCF38[8] =
+char s_LibultraCInstancText[8] =
     "cInstanc";
 #endif

@@ -1,6 +1,6 @@
 #include "sdk/LIBC.H"
 #include "include_asm.h"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/VECTOR4F.H"
@@ -8,39 +8,39 @@
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "TYPES.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
-extern Shared_Entry D_800E5CA0;
+extern Shared_Entry g_encodedTextEntryState;
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 extern func_802077F4_S2 *Menu_GetWidgetStyle(void *, s32);
 
-extern void Menu_DrawLocalizedMenuItemText(void *, ItemRecAt20V1 *, void *, MenuStyle *);
+extern void Menu_DrawLocalizedMenuItemText(void *, MenuLocalizedTextItemView *, void *, MenuStyle *);
 
-/* Steps the menu spinner in D_800E5CA0: advances its repeat timer by D_800D2988, wrapping at the second entry of D_800E2280, and while the menu is active (state 2) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
+/* Steps the menu spinner in g_encodedTextEntryState: advances its repeat timer by g_frameElapsedTime, wrapping at the second entry of g_encodedTextCursorTiming, and while the menu is active (state 2) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
 /* Shifts the input history, appends the current byte, and advances the history counters. */
 
-extern s32 D_80154030;
+extern s32 g_encodedCheatCharacterIndex;
 
 /* Checks whether the input matches the indexed, XOR-masked reference string. */
 
 
 
-extern u8 D_800E5CAC[0x64];
+extern u8 g_encodedCheatCode[0x64];
 
-/* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
-void Encoded_DrawTextEntryCursor(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *style) {
+/* Draws the g_encodedTextEntryState spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
+void Encoded_DrawTextEntryCursor(void *menu, MenuLocalizedTextItemView *item, void *third, MenuStyle *style) {
     f32 width;
     f32 alpha;
     s32 x;
     unsigned int bits;
 
-    if (D_800E5CA0.timer <= (6.0f)) {
-        width = Menu_GetWidgetStyle(menu, 0)->unk4 * (f32)D_800E28D0 * (0.0035211266949772835f);
-        x = (f32)item->x + (f32)D_800E5CA0.value * width;
-        D_800E1E20 = -1;
+    if (g_encodedTextEntryState.timer <= (6.0f)) {
+        width = Menu_GetWidgetStyle(menu, 0)->unk4 * (f32)g_hudReferenceViewportWidth * (0.0035211266949772835f);
+        x = (f32)item->x + (f32)g_encodedTextEntryState.value * width;
+        g_multiplayerItemRenderState = -1;
         alpha = style->alpha * (style->fade * (128.0f));
         OnScreen_SetupFillMode();
         OnScreen_DrawBevelBox(x, item->y, (f32)x + width, item->y + 2, 0, 0, 0xFF, 0xFF, 0xFF,
@@ -49,22 +49,22 @@ void Encoded_DrawTextEntryCursor(void *menu, ItemRecAt20V1 *item, void *third, M
     Menu_DrawLocalizedMenuItemText(menu, item, third, style);
 }
 
-s32 Encoded_UpdateTextEntryCursor(void *unused, MenuRecAt20V4 *menu) {
+s32 Encoded_UpdateTextEntryCursor(void *unused, CheatMenuInputView *menu) {
     f32 t;
 
-    t = D_800E5CA0.timer + D_800D2988;
-    D_800E5CA0.timer = t;
-    if (t >= D_800E2280[1]) {
-        D_800E5CA0.timer = t - D_800E2280[1];
+    t = g_encodedTextEntryState.timer + g_frameElapsedTime;
+    g_encodedTextEntryState.timer = t;
+    if (t >= g_encodedTextCursorTiming[1]) {
+        g_encodedTextEntryState.timer = t - g_encodedTextCursorTiming[1];
     }
     if (menu->state == 2) {
-        if (((s32 (*)(s32))Control_IsLeftPressed)(menu->input) != 0 && D_800E5CA0.value > 0) {
-            D_800E5CA0.value--;
-            D_800E5CA0.timer = 0.0f;
+        if (((s32 (*)(s32))Control_IsLeftPressed)(menu->input) != 0 && g_encodedTextEntryState.value > 0) {
+            g_encodedTextEntryState.value--;
+            g_encodedTextEntryState.timer = 0.0f;
         } else if (((s32 (*)(s32))Control_IsRightPressed)(menu->input) != 0) {
-            if (D_800E5CA0.value < D_800E5CA0.count) {
-                D_800E5CA0.value++;
-                D_800E5CA0.timer = 0.0f;
+            if (g_encodedTextEntryState.value < g_encodedTextEntryState.count) {
+                g_encodedTextEntryState.value++;
+                g_encodedTextEntryState.timer = 0.0f;
             }
         }
     }
@@ -73,36 +73,36 @@ s32 Encoded_UpdateTextEntryCursor(void *unused, MenuRecAt20V4 *menu) {
 
 /* Does nothing and returns 0. */
 
-s32 func_8043CC08_de(void) {
+s32 Encoded_TextEntryReturnZero(void) {
     return 0;
 }
 
-s32 Encoded_InsertTextEntryCharacter(ObjRecAt14V2 *arg0) {
+s32 Encoded_InsertTextEntryCharacter(TextEntryBufferView *textEntry) {
     s32 index;
     s32 count;
 
-    D_80154030 = -1;
-    D_800E5CA0.timer = 0;
-    if (D_800E5CA0.count == 0x16) {
+    g_encodedCheatCharacterIndex = -1;
+    g_encodedTextEntryState.timer = 0;
+    if (g_encodedTextEntryState.count == 0x16) {
         return 0;
     }
     index = 0x16;
-    if (D_800E5CA0.value < 0x16) {
+    if (g_encodedTextEntryState.value < 0x16) {
         do {
-            D_800E5CA0.text[index] = D_800E5CA0.text[index - 1];
+            g_encodedTextEntryState.text[index] = g_encodedTextEntryState.text[index - 1];
             index--;
-        } while (D_800E5CA0.value < index);
+        } while (g_encodedTextEntryState.value < index);
     }
-    D_800E5CA0.text[D_800E5CA0.value] =
+    g_encodedTextEntryState.text[g_encodedTextEntryState.value] =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        *arg0->unk14[g_languageIndex];
+        *textEntry->textBuffer[g_languageIndex];
 #else
-        **arg0->unk14;
+        **textEntry->textBuffer;
 #endif
-    count = D_800E5CA0.count + 1;
-    D_800E5CA0.value++;
-    D_800E5CA0.count = count;
-    D_800E5CA0.text[count] = 0;
+    count = g_encodedTextEntryState.count + 1;
+    g_encodedTextEntryState.value++;
+    g_encodedTextEntryState.count = count;
+    g_encodedTextEntryState.text[count] = 0;
     return 0;
 }
 
@@ -110,35 +110,35 @@ s32 Encoded_DeletePreviousTextEntryCharacter(void) {
     s32 index;
     s32 next;
 
-    D_80154030 = -1;
-    D_800E5CA0.timer = 0;
-    if (D_800E5CA0.count == 0) {
+    g_encodedCheatCharacterIndex = -1;
+    g_encodedTextEntryState.timer = 0;
+    if (g_encodedTextEntryState.count == 0) {
         return 0;
     }
-    if (D_800E5CA0.value == 0) {
+    if (g_encodedTextEntryState.value == 0) {
         return 0;
     }
-    index = D_800E5CA0.value - 1;
+    index = g_encodedTextEntryState.value - 1;
     if (index < 0x17) {
         do {
             next = index + 1;
-            D_800E5CA0.text[index] = D_800E5CA0.text[next];
+            g_encodedTextEntryState.text[index] = g_encodedTextEntryState.text[next];
             index = next;
         } while (index < 0x17);
     }
-    D_800E5CA0.value--;
-    D_800E5CA0.count--;
+    g_encodedTextEntryState.value--;
+    g_encodedTextEntryState.count--;
     return 0;
 }
 
 s32 Encoded_CheckEncodedText(u8 *input) {
     s32 index = 0;
 
-    if ((s32)func_802BD400_de((const char *)input) != (s32)func_802BD400_de((const char *)D_800E5CAC)) {
+    if ((s32)Libc_StringLength((const char *)input) != (s32)Libc_StringLength((const char *)g_encodedCheatCode)) {
         return 0;
     }
-    for (; index < (s32)func_802BD400_de((const char *)input); index++) {
-        if ((input[index] ^ index) != D_800E5CAC[index]) {
+    for (; index < (s32)Libc_StringLength((const char *)input); index++) {
+        if ((input[index] ^ index) != g_encodedCheatCode[index]) {
             return 0;
         }
     }
@@ -146,7 +146,7 @@ s32 Encoded_CheckEncodedText(u8 *input) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int rodata_func_8043CB30_de_800DCF04[1] = {
+const unsigned int g_Encoded_UpdateTextEntryCursorConstantWords[1] = {
     0x41700000,
 };
 #endif

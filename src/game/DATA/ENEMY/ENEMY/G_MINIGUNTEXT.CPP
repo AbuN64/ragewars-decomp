@@ -2,7 +2,7 @@
 
 /* DATA_800D274C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_cone_attenuation_us_rev1[65] = {
+unsigned int g_ConeAttenuationWords1[65] = {
     0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
     0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
     0x3F000000, 0x3F03F078, 0x3F07C3B5, 0x3F0B7C13, 0x3F0F1BBD, 0x3F12A476, 0x3F1617E3, 0x3F197775,
@@ -18,11 +18,11 @@ unsigned int D_auto_src_ragewars_cone_attenuation_us_rev1[65] = {
 /* DATA_800D2850.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800D2648_unclaimed_D3450 */
-unsigned int D_blob_7e585071816fd959ab49[1] = {
+unsigned int g_GMiniguntextWords1[1] = {
     0x00000001,
 };
 
-unsigned short D_auto_src_ragewars_color_jitter_us_rev1[] = {
+unsigned short g_ColorJitterHalfwords1[] = {
     0xF7F9, 0xF8F5, 0x080E, 0x190C, 0x1217, 0x1A0E, 0xFCEE, 0xF2E3, 0xD7E2, 0xE5E7, 0xE5DD, 0xE2EA,
     0xE1E5, 0xEFF2, 0x0002, 0xFEF3, 0xF3F7, 0x0502, 0xFE09, 0x181F, 0x221D, 0x1518, 0x0A0D, 0xFDFA,
     0x0113, 0x1F27, 0x1D1E, 0x1414, 0xFFF1, 0xE6EC, 0xE8E1, 0xE3E8, 0xE6F1, 0xF102, 0x1108, 0x0711,

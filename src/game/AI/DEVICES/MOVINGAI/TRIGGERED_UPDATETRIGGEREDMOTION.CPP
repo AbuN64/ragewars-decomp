@@ -23,7 +23,7 @@ extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned shor
 extern int Cinema_IsSequenceInWindow(void);
 
 /** For each of the object's child slots, attach the child to the record and spawn its effect. */
-extern int D_800D297C;
+extern int g_lightingBufferIndex;
 
 extern void *Gobjinst_RequestAnimatedModelVariant(void *, int);
 
@@ -31,15 +31,15 @@ extern void GameObject_DrawActorShadow(char *obj, s32 unused, char *info);
 
 extern void Track_RequestTrackByIds(s32, void *);
 
-void func_8020676C_de(void *actor, void *motionState, Trigger *trigger) {
+void Triggered_StartTriggerAnimation(void *actor, void *motionState, Trigger *trigger) {
     extern void Rumble_SetActorStateBit(Shared_World *a, void *b, int c);
-    func_802065C0_de(actor, motionState, trigger->unk6);
+    MovingAI_RequestMotionAnimation(actor, motionState, trigger->trackArgument);
     ((LevelActor *)actor)->flags = ((LevelActor *)actor)->flags | 0x2100;
-    func_802472F0_de(actor);
+    Gobjinst_AdvanceActorRootMotion(actor);
     Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 
-void func_802067BC_de(Shared_Actor *actor) {
+void Triggered_ClearCollisionAndActivate(Shared_Actor *actor) {
     extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
     s32 v = actor->weaponFlags;
     v &= ~0x2000;
@@ -52,13 +52,13 @@ void Triggered_EnableTriggeredActorState(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
-void func_8020682C_de(Shared_Actor *actor, s32 *sequenceFlags) {
+void Triggered_DeactivateForSequence(Shared_Actor *actor, s32 *sequenceFlags) {
     extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
     actor->weaponFlags |= 0x2100;
     if (Cinema_IsSequenceInWindow() != 0) {
         *sequenceFlags |= 0x200;
     }
-    func_802472F0_de(actor);
+    Gobjinst_AdvanceActorRootMotion(actor);
     Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 
@@ -66,7 +66,7 @@ void Triggered_DisableTriggeredActorState(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
-void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 trackRequest) {
+void Triggered_RequestTrackAndDeactivate(struct Shared_Actor *actor, s32 unusedContext, s32 trackRequest) {
     extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
     Track_RequestTrackByIds((s32)actor, (void *)trackRequest);
     actor->weaponFlags |= 0x2100;
@@ -78,14 +78,14 @@ void Triggered_RequestTrackById(s32 trackRequest) {
 }
 
 /** Copy the source byte at offset 7 into two fields under object offset 0x18. */
-void func_80206930_de(LevelActor *actor, int arg1, Trigger *triggerRecord) {
+void Triggered_SetPairedDefinitionBytes(LevelActor *actor, int unusedContext, Trigger *triggerRecord) {
     void *inner = actor->definition;
-    ((ActorDefinitionHeader *)inner)->first = (s8)triggerRecord->unk6;
+    ((ActorDefinitionHeader *)inner)->first = (s8)triggerRecord->trackArgument;
     inner = actor->definition;
-    ((ActorDefinitionHeader *)inner)->second = (s8)triggerRecord->unk6;
+    ((ActorDefinitionHeader *)inner)->second = (s8)triggerRecord->trackArgument;
 }
 
-void func_8020694C_de(char *actor, void *renderContext, Rec *info) {
+void Triggered_DrawAnimatedVariants(char *actor, void *renderContext, Rec *info) {
     int i;
     int n;
     void *child;
@@ -97,16 +97,16 @@ void func_8020694C_de(char *actor, void *renderContext, Rec *info) {
             info->a = child;
             info->b = child;
             GameObject_DrawActorShadow(actor, renderContext, info);
-            Geometry_DrawModelResource(child, ((LevelActor *)actor)->fieldB4, 1, &((LevelActor *)actor)->lighting[D_800D297C], 0, ((LevelActor *)actor)->field3);
+            Geometry_DrawModelResource(child, ((LevelActor *)actor)->animationMatrices, 1, &((LevelActor *)actor)->lighting[g_lightingBufferIndex], 0, ((LevelActor *)actor)->renderPass);
         }
     }
 }
 
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
 /* Advance triggered shaking and vertical motion, invalidating animation on a state change. */
 /* A hold segment keeps the motion until the input is held. */
-void Triggered_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode80206258 *motion) {
+void Triggered_UpdateTriggeredMotion(MovingPlatformActorView *actor, RiderCode80206258 *motion) {
     CPlatformIntelligence *segment;
     s32 oldState;
     s32 release;
@@ -120,13 +120,13 @@ void Triggered_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802
         if (segment->flags & 0xC00000) {
             if (segment->flags & 0x04000000) {
                 if (actor->inputFlags & 0x40) {
-                    motion->triggerTime = motion->triggerTime + D_800D2988;
+                    motion->triggerTime = motion->triggerTime + g_frameElapsedTime;
                 } else {
                     motion->triggerTime = 0.0f;
                     break;
                 }
             } else if (motion->triggerTime > 0.0f || (actor->inputFlags & 0x20)) {
-                motion->triggerTime += D_800D2988;
+                motion->triggerTime += g_frameElapsedTime;
             }
             if (motion->triggerTime >= segment->triggerDelay) {
                 motion->timer = 0.0f;
@@ -146,7 +146,7 @@ void Triggered_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802
         motion->shake.x = Graphu64_RandomBetween(shakeMin, shakeMax);
         motion->shake.y = Graphu64_RandomBetween(shakeMin, shakeMax);
         motion->shake.z = Graphu64_RandomBetween(shakeMin, shakeMax);
-        motion->timer += D_800D2988;
+        motion->timer += g_frameElapsedTime;
         if (45.0f < motion->timer) {
             motion->timer = 0.0f;
             if (segment->flags & 0x400000) {
@@ -158,7 +158,7 @@ void Triggered_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802
         break;
     case 1:
         if (motion->timer < segment->duration) {
-            motion->timer += D_800D2988;
+            motion->timer += g_frameElapsedTime;
         } else if (segment->flags & 0x02000000) {
             actor->flags &= ~0x2000;
         } else {
@@ -184,7 +184,7 @@ void Triggered_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802
         break;
     case 2:
         if (motion->timer > 0.0f) {
-            motion->timer -= D_800D2988;
+            motion->timer -= g_frameElapsedTime;
         } else {
             motion->state = 0;
             motion->triggerTime = 0.0f;
@@ -197,7 +197,7 @@ void Triggered_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802
         break;
     case 4:
         if (motion->timer < segment->duration) {
-            motion->timer += D_800D2988;
+            motion->timer += g_frameElapsedTime;
         }
         if (segment->duration > 0.0f) {
             motion->shake.y = -segment->displacement * Defs_CosineEase(motion->timer / segment->duration);
@@ -223,7 +223,7 @@ extern f32 Region_GetPolygonHeight(s32, f32, f32);
 extern void Region_SetNodeGroupHeight(s32, f32);
 
 /* Steers an actor along path nodes, blending direction, speed and orientation as it advances waypoints. */
-/* The values func_802070D0_de loads by address:
+/* The values Triggered_AdvancePathMotion loads by address:
  * 0x800C6C18 = 3.0 (float, D_800C6C18 in this cartridge's tables)
  * 0x800C6C1C = 10.24 (float, unnamed in this cartridge's tables)
  * 0x800C6C20 = 1.0 (float, D_800C6C20 in this cartridge's tables)
@@ -233,7 +233,7 @@ extern void Region_SetNodeGroupHeight(s32, f32);
  * 0x800C6C30 = 0.5 (float, D_800C6C30 in this cartridge's tables)
  * 0x800C6C34 = 0.3 (float, D_800C6C34 in this cartridge's tables)
  * 0x800C6C38 = 15.0 (float, D_800C6C38 in this cartridge's tables)
- * 0x800D2988 = 1.0 (float, D_800D2988 in this cartridge's tables; not a literal: a variable, its value in the image, since D_800D2988: `swc1` at %lo(D_800D2988) in Actor_UpdateActorStateAnimation.s)
+ * 0x800D2988 = 1.0 (float, g_frameElapsedTime in this cartridge's tables; not a literal: a variable, its value in the image, since g_frameElapsedTime: `swc1` at %lo(g_frameElapsedTime) in Actor_UpdateActorStateAnimation.s)
  * 0x800C6C3C = 1.0 (float, D_800C6C3C in this cartridge's tables)
  * 0x800C6C40 = 3.1415927 (float, D_800C6C40 in this cartridge's tables)
  * 0x800C6C44 = 0.5 (float, D_800C6C44 in this cartridge's tables)
@@ -252,11 +252,11 @@ extern void Region_SetNodeGroupHeight(s32, f32);
  */
 void Barrel_ApplyClampedTurn(void *, s32, f32, f32);
 
-void func_802192C0_de(void *);
+void Playerai_AdvanceRouteCursor(void *);
 
-void * func_80219408_de(struct Cursor *);
+void * Playerai_GetRouteCursorPoint(struct Cursor *);
 
-void *func_80219434_de(struct Cursor *);
+void *Playerai_GetRouteCursorNextPoint(struct Cursor *);
 
 void Graphu64_SubtractVectors(void *, void *, void *);
 
@@ -268,29 +268,29 @@ f32 Barrel_GetSignedAngleToPoint(void *, CVector3);
 
 /* Chooses the option label from the signed kind byte and, for the default
  * kind, the paired variant byte. The caller's context is unused. */
-struct InputRecAt37 {
+struct TriggeredMotionSoundOption {
     char pad0[0x34];
     s8 variant;
     char pad35[2];
     s8 kind;
 };
 
-extern char D_800C86A0_de;
+extern char g_triggeredMotionDispatchTable;
 
-extern char D_002079B0;
+extern char g_triggeredUpdateRomEntry;
 
-extern char D_00207910;
+extern char g_triggeredTransformRomEntry;
 
-extern f32 D_800C1B9C_de;
+extern f32 k_triggeredInitialMotionScale;
 
-void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
+void Triggered_PositionPlatformRider(MovingPlatformActorView *actor, RiderCode80206258 *rider) {
     CVector3 point;
     CPlatformIntelligence *segment;
     f32 t;
     f32 phase;
     f32 amp;
     CVector3 *base;
-    Actor_func_80206DD4_de *owner;
+    MovingPlatformActorView *owner;
     t = rider->throttle;
     segment = (CPlatformIntelligence *)(actor->track + 0x14);
     if (t < 0.0f) {
@@ -348,14 +348,14 @@ struct Cursor;
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x40, 0x44, 0x48, 0x4c, 0x50, 0x54, 0x58, 0x68, 0x6c], gap at: 0x5c. */
 /* Steers an actor along path nodes, blending direction, speed and orientation as it advances waypoints. */
-void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
+void Triggered_AdvancePathMotion(PathMotionActorView *actor, PathMotionInterpolationState *pathState) {
     Triple initial;
     CVector3 vec0;
     CVector3 vec1;
     f32 advancedBlend;
     f32 remainingPause;
     f32 previousBlend;
-    f32 temp_f1_2;
+    f32 unusedPathInterpolationOne;
     f32 previousDirectionY;
     f32 previousDirectionZ;
     f32 pauseOrDirectionZ;
@@ -364,7 +364,7 @@ void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
     f32 currentTertiaryAngle;
     f32 blendRate;
     f32 targetDistance;
-    f32 temp_f2_2;
+    f32 unusedPathInterpolationTwo;
     f32 segmentDirectionY;
     f32 segmentDirectionZ;
     f32 arg0_2;
@@ -374,146 +374,146 @@ void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
     f32 arrivalRadius;
     f32 movementSpeed;
     u16 half;
-    func_802070D0_S2 *segmentNode;
+    PathMotionWaypoint *segmentNode;
     void *pathCursor;
-    func_802070D0_S2 *targetNode;
-    pathCursor = (void *) &pathState->unk94;
-    targetNode = func_80219408_de(pathCursor);
+    PathMotionWaypoint *targetNode;
+    pathCursor = (void *) &pathState->pathCursor;
+    targetNode = Playerai_GetRouteCursorPoint(pathCursor);
     initial = targetNode->pos;
-    Graphu64_SubtractVectors(&vec0, &initial, &actor->unk8);
-    segmentNode = func_80219434_de(pathCursor);
+    Graphu64_SubtractVectors(&vec0, &initial, &actor->positionX);
+    segmentNode = Playerai_GetRouteCursorNextPoint(pathCursor);
     targetDistance = Gu_Sqrtf(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
-    arrivalRadius = targetNode->unk1C;
-    blendRate = segmentNode->unk20;
+    arrivalRadius = targetNode->arrivalRadius;
+    blendRate = segmentNode->directionBlendRate;
     if (arrivalRadius < 3.0f) {
         arrivalRadius = 3.0f;
     }
     if (targetDistance <= arrivalRadius * 10.24f) {
-        pathState->unk14C = 0.0f;
-        segmentNode->unk14.half = (u16) (segmentNode->unk14.half & 0x7FFF);
-        func_802192C0_de(pathCursor);
-        pathState->unk140 = (f32) pathState->unk150;
-        pathState->unk144 = (f32) pathState->unk154;
-        pathState->unk148 = (f32) pathState->unk158;
-        pathState->unk15C = (f32) pathState->unk134;
-        arg0_2 = actor->unk6C;
-        pathState->unk164 = (f32) pathState->unk138;
-        pathState->unk160 = (f32) arg0_2;
+        pathState->directionBlend = 0.0f;
+        segmentNode->flags.half = (u16) (segmentNode->flags.half & 0x7FFF);
+        Playerai_AdvanceRouteCursor(pathCursor);
+        pathState->previousDirectionX = (f32) pathState->directionX;
+        pathState->previousDirectionY = (f32) pathState->directionY;
+        pathState->previousDirectionZ = (f32) pathState->directionZ;
+        pathState->initialSecondaryAngle = (f32) pathState->secondaryAngle;
+        arg0_2 = actor->heading;
+        pathState->initialTertiaryAngle = (f32) pathState->tertiaryAngle;
+        pathState->initialHeading = (f32) arg0_2;
         return;
     }
-    if (segmentNode->unk14.half & 2) {
-        previousBlend = pathState->unk14C;
+    if (segmentNode->flags.half & 2) {
+        previousBlend = pathState->directionBlend;
         if (previousBlend <= 0.0f) {
-            pathState->unk14C = blendRate;
+            pathState->directionBlend = blendRate;
         } else {
             advancedBlend = previousBlend + blendRate;
-            pathState->unk14C = advancedBlend;
+            pathState->directionBlend = advancedBlend;
             if (advancedBlend > 1.0f) {
-                pathState->unk14C = 1.0f;
+                pathState->directionBlend = 1.0f;
             }
         }
         if (segmentNode == targetNode) {
-            Graphu64_SubtractVectors(&vec1, segmentNode, &actor->unk8);
+            Graphu64_SubtractVectors(&vec1, segmentNode, &actor->positionX);
         } else {
             Graphu64_SubtractVectors(&vec1, targetNode, segmentNode);
         }
         Graphu64_NormalizeVec3(&vec1);
         ;
-        vec1.x = pathState->unk140 + pathState->unk14C * (vec1.x - pathState->unk140);
-        segmentDirectionY = pathState->unk144;
-        vec1.y = segmentDirectionY + pathState->unk14C * (vec1.y - segmentDirectionY);
-        segmentDirectionZ = pathState->unk148;
-        vec1.z = segmentDirectionZ + pathState->unk14C * (vec1.z - segmentDirectionZ);
+        vec1.x = pathState->previousDirectionX + pathState->directionBlend * (vec1.x - pathState->previousDirectionX);
+        segmentDirectionY = pathState->previousDirectionY;
+        vec1.y = segmentDirectionY + pathState->directionBlend * (vec1.y - segmentDirectionY);
+        segmentDirectionZ = pathState->previousDirectionZ;
+        vec1.z = segmentDirectionZ + pathState->directionBlend * (vec1.z - segmentDirectionZ);
         Graphu64_NormalizeVec3(&vec1);
-        if (pathState->unk14C >= 1.0f) {
+        if (pathState->directionBlend >= 1.0f) {
             goto block_17;
         }
     } else {
         Graphu64_NormalizeVec3(&vec0);
         ;
-        vec1.x = pathState->unk140 + blendRate * (vec0.x - pathState->unk140);
-        previousDirectionY = pathState->unk144;
+        vec1.x = pathState->previousDirectionX + blendRate * (vec0.x - pathState->previousDirectionX);
+        previousDirectionY = pathState->previousDirectionY;
         vec1.y = previousDirectionY + blendRate * (vec0.y - previousDirectionY);
-        previousDirectionZ = pathState->unk148;
+        previousDirectionZ = pathState->previousDirectionZ;
         vec1.z = previousDirectionZ + blendRate * (vec0.z - previousDirectionZ);
         Graphu64_NormalizeVec3(&vec1);
         block_17:
-        pathState->unk140 = vec1.x;
-        pathState->unk144 = vec1.y;
-        pathState->unk148 = vec1.z;
+        pathState->previousDirectionX = vec1.x;
+        pathState->previousDirectionY = vec1.y;
+        pathState->previousDirectionZ = vec1.z;
     }
-    pathState->unk150 = vec1.x;
-    pathState->unk154 = vec1.y;
-    pathState->unk158 = vec1.z;
-    half = segmentNode->unk14.half;
+    pathState->directionX = vec1.x;
+    pathState->directionY = vec1.y;
+    pathState->directionZ = vec1.z;
+    half = segmentNode->flags.half;
     if (half & 1) {
-        if (pathState->unk168 > 0.0f && !(half & 0x8000)) {
-            movementSpeed = pathState->unk168 + (Math_Cosf((1.0f - segmentNode->unk30) * 3.1415927f) + 1.0f) * (-pathState->unk168 * 0.5f);
+        if (pathState->movementSpeed > 0.0f && !(half & 0x8000)) {
+            movementSpeed = pathState->movementSpeed + (Math_Cosf((1.0f - segmentNode->speedCurvePhase) * 3.1415927f) + 1.0f) * (-pathState->movementSpeed * 0.5f);
             if (movementSpeed <= 0.3f) {
-                pathState->unk16C = (f32) (segmentNode->unk34 * 15.0f);
+                pathState->pauseRemaining = (f32) (segmentNode->pauseDuration * 15.0f);
                 movementSpeed = 0.0f;
-                segmentNode->unk14.half = (u16) (segmentNode->unk14.half | 0x8000);
+                segmentNode->flags.half = (u16) (segmentNode->flags.half | 0x8000);
             }
         } else {
-            pauseOrDirectionZ = pathState->unk16C;
+            pauseOrDirectionZ = pathState->pauseRemaining;
             movementSpeed = 0.0f;
             if (pauseOrDirectionZ > 0.0f) {
-                remainingPause = pauseOrDirectionZ - D_800D2988;
-                pathState->unk16C = remainingPause;
+                remainingPause = pauseOrDirectionZ - g_frameElapsedTime;
+                pathState->pauseRemaining = remainingPause;
                 if (remainingPause <= 0.0f) {
-                    pathState->unk16C = 0.0f;
+                    pathState->pauseRemaining = 0.0f;
                 }
             } else if (pauseOrDirectionZ == 0.0f) {
-                movementSpeed = pathState->unk168 + (Math_Cosf((1.0f - segmentNode->unk30) * 3.1415927f) + 1.0f) * ((segmentNode->unk24 - pathState->unk168) * 0.5f);
+                movementSpeed = pathState->movementSpeed + (Math_Cosf((1.0f - segmentNode->speedCurvePhase) * 3.1415927f) + 1.0f) * ((segmentNode->targetSpeed - pathState->movementSpeed) * 0.5f);
             }
         }
     } else {
-        movementSpeed = pathState->unk168 + (Math_Cosf(2.670354f) + 1.0f) * ((segmentNode->unk24 - pathState->unk168) * 0.5f);
+        movementSpeed = pathState->movementSpeed + (Math_Cosf(2.670354f) + 1.0f) * ((segmentNode->targetSpeed - pathState->movementSpeed) * 0.5f);
     }
-    if (actor->unk38 & 8) {
+    if (actor->inputFlags & 8) {
         movementSpeed = 0.0f;
     }
-    pathState->unk168 = movementSpeed;
-    pathState->unk54 = (f32) (actor->unk8.v1 + vec1.x * movementSpeed * D_800D2988);
-    pathState->unk58 = (f32) (actor->unkC + vec1.y * movementSpeed * D_800D2988);
+    pathState->movementSpeed = movementSpeed;
+    pathState->nextPositionX = (f32) (actor->positionX.v1 + vec1.x * movementSpeed * g_frameElapsedTime);
+    pathState->nextPositionY = (f32) (actor->positionY + vec1.y * movementSpeed * g_frameElapsedTime);
     pauseOrDirectionZ = vec1.z;
-    pathState->unk5C = (f32) (actor->unk10 + pauseOrDirectionZ * movementSpeed * D_800D2988);
-    if (segmentNode->unk14.half & 8) {
-        if ((segmentNode->unk14.word & 0x420000) == 0x420000) {
-            initialHeading = pathState->unk160;
-            actor->unk6C = (f32) (initialHeading + pathState->unk14C * (segmentNode->unk10 * 0.017453294f - initialHeading));
+    pathState->nextPositionZ = (f32) (actor->positionZ + pauseOrDirectionZ * movementSpeed * g_frameElapsedTime);
+    if (segmentNode->flags.half & 8) {
+        if ((segmentNode->flags.word & 0x420000) == 0x420000) {
+            initialHeading = pathState->initialHeading;
+            actor->heading = (f32) (initialHeading + pathState->directionBlend * (segmentNode->headingDegrees * 0.017453294f - initialHeading));
         } else {
-            currentHeading = actor->unk6C;
-            actor->unk6C = (f32) (currentHeading + (segmentNode->unk10 * 0.017453294f - currentHeading) * 0.1f);
+            currentHeading = actor->heading;
+            actor->heading = (f32) (currentHeading + (segmentNode->headingDegrees * 0.017453294f - currentHeading) * 0.1f);
         }
     } else {
-        Barrel_ApplyClampedTurn(actor, (s32) pathState, 10.0f, Barrel_GetSignedAngleToPoint(actor, *(CVector3 *) &pathState->unk54));
+        Barrel_ApplyClampedTurn(actor, (s32) pathState, 10.0f, Barrel_GetSignedAngleToPoint(actor, *(CVector3 *) &pathState->nextPositionX));
     }
-    if (segmentNode->unk14.half & 4) {
-        if ((segmentNode->unk14.word & 0x220000) == 0x220000) {
-            initialSecondaryAngle = pathState->unk15C;
-            pathState->unk134 = (f32) (initialSecondaryAngle + pathState->unk14C * (segmentNode->unk28 * 0.017453294f - initialSecondaryAngle));
+    if (segmentNode->flags.half & 4) {
+        if ((segmentNode->flags.word & 0x220000) == 0x220000) {
+            initialSecondaryAngle = pathState->initialSecondaryAngle;
+            pathState->secondaryAngle = (f32) (initialSecondaryAngle + pathState->directionBlend * (segmentNode->secondaryAngleDegrees * 0.017453294f - initialSecondaryAngle));
         } else {
-            currentSecondaryAngle = pathState->unk134;
-            pathState->unk134 = (f32) (currentSecondaryAngle + (segmentNode->unk28 * 0.017453294f - currentSecondaryAngle) * 0.1f);
+            currentSecondaryAngle = pathState->secondaryAngle;
+            pathState->secondaryAngle = (f32) (currentSecondaryAngle + (segmentNode->secondaryAngleDegrees * 0.017453294f - currentSecondaryAngle) * 0.1f);
         }
     }
-    if (segmentNode->unk14.half & 0x10) {
-        if ((segmentNode->unk14.word & 0x820000) == 0x820000) {
-            initialTertiaryAngle = pathState->unk164;
-            pathState->unk138 = (f32) (initialTertiaryAngle + pathState->unk14C * (segmentNode->unk2C * 0.017453294f - initialTertiaryAngle));
+    if (segmentNode->flags.half & 0x10) {
+        if ((segmentNode->flags.word & 0x820000) == 0x820000) {
+            initialTertiaryAngle = pathState->initialTertiaryAngle;
+            pathState->tertiaryAngle = (f32) (initialTertiaryAngle + pathState->directionBlend * (segmentNode->tertiaryAngleDegrees * 0.017453294f - initialTertiaryAngle));
             return;
         }
-        currentTertiaryAngle = (*pathState).unk138;
-        pathState->unk138 = (f32) (currentTertiaryAngle + (segmentNode->unk2C * 0.017453294f - currentTertiaryAngle) * 0.1f);
+        currentTertiaryAngle = (*pathState).tertiaryAngle;
+        pathState->tertiaryAngle = (f32) (currentTertiaryAngle + (segmentNode->tertiaryAngleDegrees * 0.017453294f - currentTertiaryAngle) * 0.1f);
     }
 }
 
 /** Perform no operation. */
-void func_80207730_de(void) {
+void Triggered_PathMotionNoOp(void) {
 }
 
-s32 func_80207738_de(void *context, struct InputRecAt37 *option) {
+s32 Triggered_SelectMotionSound(void *context, struct TriggeredMotionSoundOption *option) {
     s32 result;
     switch (option->kind) {
     case 3:
@@ -545,7 +545,7 @@ void Triggered_TestActorStateCallback(int actorHandle) {
     Rumble_TestActorStateBit(&g_world, (void *)actorHandle);
 }
 
-void func_802077F4_de(void *object, void *state)
+void Triggered_InitializeMotionState(void *object, void *state)
 {
     Player *actor = object;
     ActorMotionState *motionState = state;
@@ -556,16 +556,16 @@ void func_802077F4_de(void *object, void *state)
     ActorMotionDefinition *motionDefinition;
 
     motionResource = actor->definition;
-    k = D_800C1B9C_de;
-    motionState->table = &D_800C86A0_de;
-    motionState->update = &D_002079B0;
-    motionState->transform = &D_00207910;
+    k = k_triggeredInitialMotionScale;
+    motionState->table = &g_triggeredMotionDispatchTable;
+    motionState->update = &g_triggeredUpdateRomEntry;
+    motionState->transform = &g_triggeredTransformRomEntry;
     motionState->yaw = 0;
     motionState->pitch = 0;
     motionDefinition = &motionResource->motion;
     value = motionDefinition->speed;
-    motionState->unk124 = 0;
-    motionState->unk128 = 0;
+    motionState->animation = 0;
+    motionState->remainingCount = 0;
     motionState->unk12C = 0;
     motionState->unk130 = 0;
     motionState->speed = value;
@@ -583,7 +583,7 @@ void func_802077F4_de(void *object, void *state)
     }
 }
 
-void func_80207890_de(void *object, void *state) {
+void Triggered_ResetMotionState(void *object, void *state) {
     Player *player = object;
     ActorMotionState *motionState = state;
     motionState->state = 0;
@@ -598,6 +598,6 @@ void func_80207890_de(void *object, void *state) {
 }
 
 /* ROM-grounded data: src/rw_pool_802077F4_C788C_us_rev1.c */
-const unsigned int D_blob_349aecbf22c8d4304034[1] = {
+const unsigned int k_triggeredUpdatetriggeredmotionFloatConstantWords[1] = {
     0x40C90FDC,
 };

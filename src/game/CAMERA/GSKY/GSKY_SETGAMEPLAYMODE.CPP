@@ -4,7 +4,7 @@
 
 typedef void (*FuncPtr)(void);
 
-extern FuncPtr D_800CB380_de[][2];
+extern FuncPtr g_cameraGameplayModeCallbacks[][2];
 
 
 
@@ -16,7 +16,7 @@ void Gsky_SetGameplayMode(void *gameplayCamera, s16 requestedMode) {
     ((GameplayCamera *)gameplayCamera)->elapsed = 0;
     ((GameplayCamera *)gameplayCamera)->state = 0;
     ((GameplayCamera *)gameplayCamera)->stateCounter = 0;
-    fn = D_800CB380_de[((GameplayCamera *)gameplayCamera)->mode][0];
+    fn = g_cameraGameplayModeCallbacks[((GameplayCamera *)gameplayCamera)->mode][0];
     if (fn != 0) {
         ((void (*)(void *))fn)(gameplayCamera);
     }

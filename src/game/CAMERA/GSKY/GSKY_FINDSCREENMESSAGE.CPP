@@ -1,13 +1,13 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 
-extern void *D_80145060;
+extern void *g_transientPlayerList;
 
 
 
 
 void *Gsky_FindScreenMessage(int messageId) {
-    Shared_ActorView *node = D_80145060;
+    Shared_ActorView *node = g_transientPlayerList;
     if (node != 0) {
         do {
             if ((s32)node->message == messageId) {

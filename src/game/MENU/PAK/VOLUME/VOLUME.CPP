@@ -1,7 +1,7 @@
 #include "COMMON/EXTERNS_21.H"
 #include "TYPES.H"
 #include "MENU/OPTIONEDITSTATE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/PLAYERRECAT64E.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

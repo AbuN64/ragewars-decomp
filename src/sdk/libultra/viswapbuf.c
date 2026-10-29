@@ -4,18 +4,18 @@
 #include "TYPES.H"
 #include "sdk/os.h"
 
-extern StateosViSetSpecialFeatures *D_800D4414;
+extern StateosViSetSpecialFeatures *g_nextVideoInterfaceContext;
 
 void osViSwapBuffer(s32 framebuffer) {
     u32 savedMask;
 
     savedMask = __osDisableInt();
-    D_800D4414->word4 = framebuffer;
-    D_800D4414->status |= 0x10;
+    g_nextVideoInterfaceContext->word4 = framebuffer;
+    g_nextVideoInterfaceContext->status |= 0x10;
     __osRestoreInt(savedMask);
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BA834[12] =
+char s_ViswapbufCharAnimRText[12] =
     "_CharAnimR\000\000";
 #endif

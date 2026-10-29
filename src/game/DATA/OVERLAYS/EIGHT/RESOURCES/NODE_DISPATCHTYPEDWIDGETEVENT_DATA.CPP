@@ -1,16 +1,16 @@
 #include "TYPES.H"
 
 #if defined(VERSION_DE)
-extern char D_00412B78[];
-extern char D_00412BC0[];
-extern char D_00412C0C[];
-extern char D_00412C54[];
-extern char D_00412CA0[];
-extern char D_00415C20[];
+extern char g_node_SelectPreviousGridRowEntry[];
+extern char g_node_SelectNextGridRowEntry[];
+extern char g_node_SelectPreviousGridColumnEntry[];
+extern char g_node_SelectNextGridColumnEntry[];
+extern char g_node_DestroyGridListEntry[];
+extern char g_gfx_BlinkVideoUnlessBypassedEntry[];
 u32 data_unresolved_800DEA80[492] = {
-    0x00000005, 0x00007530, (unsigned int)D_00412B78, 0x00000006, 0x00007530, (unsigned int)D_00412BC0,
-    0x00000007, 0x00007530, (unsigned int)D_00412C0C, 0x00000008, 0x00007530, (unsigned int)D_00412C54,
-    0x00000E03, 0x00007530, (unsigned int)D_00412CA0, 0x00000000, 0x00000000, 0x00000000,
+    0x00000005, 0x00007530, (unsigned int)g_node_SelectPreviousGridRowEntry, 0x00000006, 0x00007530, (unsigned int)g_node_SelectNextGridRowEntry,
+    0x00000007, 0x00007530, (unsigned int)g_node_SelectPreviousGridColumnEntry, 0x00000008, 0x00007530, (unsigned int)g_node_SelectNextGridColumnEntry,
+    0x00000E03, 0x00007530, (unsigned int)g_node_DestroyGridListEntry, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFF8,
     0xFFFFFFF8, 0xFFFFFFF8, 0xFFFFFFF8, 0x00000001, 0x00000000, 0x00000010,
@@ -89,6 +89,6 @@ u32 data_unresolved_800DEA80[492] = {
     0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFC, 0xFFFFFFF8, 0xFFFFFFF8,
     0xFFFFFFF8, 0x00000023, 0x00000000, 0x00000008, 0x00000008, 0x00000008,
     0x000000FF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFF8,
-    0xFFFFFFF8, 0xFFFFFFF8, (unsigned int)D_00415C20, 0x00000000, 0x20202020, 0x20202020,
+    0xFFFFFFF8, 0xFFFFFFF8, (unsigned int)g_gfx_BlinkVideoUnlessBypassedEntry, 0x00000000, 0x20202020, 0x20202020,
 };
 #endif

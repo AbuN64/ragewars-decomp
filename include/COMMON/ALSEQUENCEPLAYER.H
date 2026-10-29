@@ -1,10 +1,10 @@
 #ifndef COMMON_ALSEQUENCEPLAYER_H
 #define COMMON_ALSEQUENCEPLAYER_H
-#include "COMMON/LONE/D_800C7440.H"
+#include "COMMON/LONE/SEQUENCE_PLAYER_ASSERT_TEXT.H"
 #include "COMMON/LONE/G_AUDIOSEQPLAYERTEXT.H"
 struct ALSeq_s;
-#ifndef FUNC_802B0A90_DE_CLOSED_H
-#define FUNC_802B0A90_DE_CLOSED_H
+#ifndef COMMON_SEQUENCE_PLAYER_EVENT_HELPERS_H
+#define COMMON_SEQUENCE_PLAYER_EVENT_HELPERS_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALBANK_S.H"
@@ -26,7 +26,7 @@ extern void alSeqNextEvent(struct ALSeq_s *, ALEvent *);                 /* alSe
 extern void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *, ALEvent *);           /* __handleMIDIMsg */
 extern void __handleMetaMsg(ALSeqPlayer *, ALEvent *);           /* __handleMetaMsg */
 extern u8 __alSeqNextDelta(struct ALSeq_s *, s32 *);                       /* __alSeqNextDelta (char; unsigned in this build) */
-extern int alSeqGetTicks(struct ALSeq_s *arg0);                             /* alSeqGetTicks */
+extern int alSeqGetTicks(struct ALSeq_s *sequence);                             /* alSeqGetTicks */
 extern void alSeqSetLoc(struct ALSeq_s *, ALSeqMarker *);             /* alSeqSetLoc */
 extern void alEvtqPostEvent(ALEventQueue *, ALEvent *, ALMicroTime);  /* alEvtqPostEvent */
                 /* __assert */

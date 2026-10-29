@@ -23,14 +23,14 @@ struct {
 
 /* 800C83D4.CPP */
 #if defined(VERSION_EU)
-unsigned int D_d1_57a81820031ac38e[3] = {
+unsigned int g_SaveWords2[3] = {
     0x42800000, 0x43000000, 0x4F000000,
 };
 #endif
 
 /* 800C853C_4.CPP */
 #if defined(VERSION_EU_X)
-const unsigned char rodata_func_80238670_de_800C3754[3] = {
+const unsigned char g_SaveBytes1[3] = {
     0x42, 0x40, 0x00,
 };
 #endif

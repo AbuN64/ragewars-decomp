@@ -7,11 +7,11 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-struct WidgetRecAt1A;
-struct WidgetRecAt1A {
+struct WidgetPointHitView;
+struct WidgetPointHitView {
     char pad0[4];
-    struct WidgetRecAt1A *next;
-    struct WidgetRecAt1A *child;
+    struct WidgetPointHitView *next;
+    struct WidgetPointHitView *child;
     s16 id;
     u16 selector;
     char pad10[4];
@@ -24,14 +24,14 @@ struct WidgetRecAt1A {
 
 struct Widget;
 
-struct WidgetRecAtE;
-typedef struct WidgetRecAtE WidgetRecAtE;
+struct WidgetTreePositionView;
+typedef struct WidgetTreePositionView WidgetTreePositionView;
 
-struct WidgetRecAtE;
-struct WidgetRecAtE {
-    struct WidgetRecAtE *parent;
-    struct WidgetRecAtE *next;
-    struct WidgetRecAtE *child;
+struct WidgetTreePositionView;
+struct WidgetTreePositionView {
+    struct WidgetTreePositionView *parent;
+    struct WidgetTreePositionView *next;
+    struct WidgetTreePositionView *child;
     char padC[2];
     u16 type;
     char pad10[0x1C];
@@ -41,13 +41,13 @@ struct WidgetRecAtE {
 struct t_dldc;
 typedef struct t_dldc sm_dldc;
 
-extern int D_800DEA6C;
+extern int g_widgetTextBatchMode;
 
 struct NodeFrontendReplaceWidgetLinks;
 struct NodeFrontendReplaceWidgetLinks {
-    struct NodeFrontendReplaceWidgetLinks *unk0;
-    struct NodeFrontendReplaceWidgetLinks *unk4;
-    struct NodeFrontendReplaceWidgetLinks *unk8;
+    struct NodeFrontendReplaceWidgetLinks *parent;
+    struct NodeFrontendReplaceWidgetLinks *nextSibling;
+    struct NodeFrontendReplaceWidgetLinks *firstChild;
 };
 
 
@@ -67,8 +67,8 @@ struct WidgetNode;
 struct WidgetNode;
 
 
-struct NodeRecAt44;
-typedef struct NodeRecAt44 NodeRecAt44;
+struct WidgetReferenceNodeView;
+typedef struct WidgetReferenceNodeView WidgetReferenceNodeView;
 
 struct WidgetFrontendDrawImageWidget;
 struct WidgetFrontendDrawImageWidget {
@@ -105,7 +105,7 @@ struct WidgetLayout {
     s16 width, height;
     s16 offsetX, offsetY;
     f32 scaleX, scaleY;
-    s32 unknown28;
+    s32 reservedWord;
     u32 colors[4];
 };
 
@@ -133,15 +133,15 @@ struct DrawArgsFrontendDrawVisibleWidgetClipped {
     s32 v[5];
 };
 
-struct NodeRecAt16;
-struct NodeRecAt16 {
-    struct NodeRecAt16 *next;
+struct WidgetAncestorOffsetView;
+struct WidgetAncestorOffsetView {
+    struct WidgetAncestorOffsetView *next;
     char pad4[0x14 - 4];
     s16 x;
     s16 y;
 };
 
-struct NodeRecAt16;
+struct WidgetAncestorOffsetView;
 
 struct t_dldc;
 struct t_dldc {
@@ -152,7 +152,7 @@ struct t_dldc {
     f32 YScale;
     u8 alpha;
     u8 pad15[3];
-    struct Shape_typemap_165 Rgn;
+    struct CacheResourceBlockView Rgn;
 };
 
 struct WidgetNode;
@@ -193,11 +193,11 @@ typedef struct Slider Slider;
 struct WidgetLayout;
 typedef struct WidgetLayout WidgetLayout;
 
-struct NodeRecAt44;
-struct NodeRecAt44 {
+struct WidgetReferenceNodeView;
+struct WidgetReferenceNodeView {
     char pad0[4];
-    struct NodeRecAt44 *left;
-    struct NodeRecAt44 *right;
+    struct WidgetReferenceNodeView *left;
+    struct WidgetReferenceNodeView *right;
     char padC[2];
     u16 kind;
     char pad10[2];
@@ -214,8 +214,8 @@ struct NodeRecAt44 {
 struct DrawArgsFrontendDrawVisibleWidgetClipped;
 typedef struct DrawArgsFrontendDrawVisibleWidgetClipped DrawArgsFrontendDrawVisibleWidgetClipped;
 
-struct WidgetRecAt1A;
-typedef struct WidgetRecAt1A WidgetRecAt1A;
+struct WidgetPointHitView;
+typedef struct WidgetPointHitView WidgetPointHitView;
 
 
 extern int g_textBatchFontId;
@@ -228,14 +228,14 @@ extern int g_textBatchFontId;
 struct MenuWidget;
 
 struct BatchRec;
-struct Shape_typemap_165;
+struct CacheResourceBlockView;
 struct TextSprite;
 struct BatchRec {
-    struct Shape_typemap_165 area;
+    struct CacheResourceBlockView area;
     struct TextSprite *cursor;
     s32 count;
 };
 
 char *Node_GetStringByIndex(s32);
-s32 D_0040F570(char *, char *);
+s32 Node_CompareRecordShortValuesRomEntry(char *, char *);
 #endif

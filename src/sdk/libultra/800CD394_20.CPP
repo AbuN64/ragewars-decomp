@@ -1,9 +1,9 @@
 #include "sdk/libgultra.h"
-#include "sdk/libultra/800CD394_20.h"
+#include "sdk/libultra/TURRET_ACTIVATE_CALLBACK_ADDRESS.h"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CD3C0_unclaimed_CDFEC */
-unsigned int D_blob_d9192dda749d821556cf[2] = {
-    0x801044B8, (unsigned int)D_00203A94,
+unsigned int g_LibultraEncodedWordsBlock6[2] = {
+    0x801044B8, (unsigned int)Turret_Anim_ACTIVATE_Address,
 };
 #endif

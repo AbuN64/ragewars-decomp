@@ -1,6 +1,6 @@
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -12,14 +12,14 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Returns 0xBC2 plus ten times either the halfword at offset 2 of what Scene_GetBlLevelData finds for
-   D_8015402C in D_8011FE88, when the option byte D_801462D5 is one, or D_8015402C itself. */
+   g_selectedLevelId in D_8011FE88, when the option byte D_801462D5 is one, or g_selectedLevelId itself. */
 
 
 
 extern struct StateFlags *Scene_GetBlLevelData(void *, s32);
 
 s32 Random_GetStageTransitionResource(void) {
-    return (D_801462C8.controllerMode == 1 ? Scene_GetBlLevelData(&g_world, D_8015402C)->flags : D_8015402C) * 10 + 0xBC2;
+    return (g_gameSettings.controllerMode == 1 ? Scene_GetBlLevelData(&g_world, g_selectedLevelId)->flags : g_selectedLevelId) * 10 + 0xBC2;
 }
 
 extern Shared_PlayerSettingsRecord g_playerSettings[];

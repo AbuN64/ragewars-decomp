@@ -16,10 +16,10 @@ typedef struct Label Label;
 struct MenuFrontendRefreshUnlockedFocusLabel;
 typedef struct MenuFrontendRefreshUnlockedFocusLabel MenuFrontendRefreshUnlockedFocusLabel;
 
-struct ObjRecAt480;
-struct ObjRecAt480 {
+struct PreviewPositionView;
+struct PreviewPositionView {
     char pad[0x480];
-    CVector3 unk480;
+    CVector3 position;
 };
 
 struct ProfileStatisticsScreen;
@@ -35,46 +35,46 @@ struct Object49C {
     s32 value;
 };
 
-struct ObjRecAt48C;
-struct ObjRecAt48C {
+struct PreviewFacingView;
+struct PreviewFacingView {
     char pad[0x48C];
-    CVector3 unk48C;
+    CVector3 facing;
 };
 
-struct ObjRecAt48C;
-typedef struct ObjRecAt48C ObjRecAt48C;
+struct PreviewFacingView;
+typedef struct PreviewFacingView PreviewFacingView;
 
 
 
-struct MenuRecAt108;
-typedef struct MenuRecAt108 MenuRecAt108;
+struct FrontendPanelTransitionView;
+typedef struct FrontendPanelTransitionView FrontendPanelTransitionView;
 
-struct ObjRecAt480;
-typedef struct ObjRecAt480 ObjRecAt480;
-
-
+struct PreviewPositionView;
+typedef struct PreviewPositionView PreviewPositionView;
 
 
 
-struct ObjRecAt498;
-struct ObjRecAt498 {
+
+
+struct PreviewAngleView;
+struct PreviewAngleView {
     char pad[0x498];
-    s32 unk498;
+    s32 angle;
 };
 
 
 
 
-struct ObjRecAt498;
-typedef struct ObjRecAt498 ObjRecAt498;
+struct PreviewAngleView;
+typedef struct PreviewAngleView PreviewAngleView;
 
 
 
 struct NodeFrontendAnimateSlotSelectionMenu;
 typedef struct NodeFrontendAnimateSlotSelectionMenu NodeFrontendAnimateSlotSelectionMenu;
 
-struct MenuRecAt8;
-struct MenuRecAt8 {
+struct FrontendPreviewMenuView;
+struct FrontendPreviewMenuView {
     char pad0[8];
     char model[1];
 };
@@ -106,21 +106,21 @@ struct Label;
 struct MenuFrontendRefreshUnlockedFocusLabel;
 struct MenuFrontendRefreshUnlockedFocusLabel {
     char pad0[0xEC];
-    ObjRecAtCV1 *focus;
+    MenuActorInputView *focus;
     struct Label *label;
     char padF4[0x18];
     s32 player;
 };
 
-struct ListRecAt4C;
-typedef struct ListRecAt4C ListRecAt4C;
+struct OverlayWidgetListView;
+typedef struct OverlayWidgetListView OverlayWidgetListView;
 
-struct MenuRecAt8;
-typedef struct MenuRecAt8 MenuRecAt8;
+struct FrontendPreviewMenuView;
+typedef struct FrontendPreviewMenuView FrontendPreviewMenuView;
 
 
-struct ListRecAt4C;
-struct ListRecAt4C {
+struct OverlayWidgetListView;
+struct OverlayWidgetListView {
     char pad[0x48];
     int count;
     void *items[1];
@@ -129,9 +129,9 @@ struct ListRecAt4C {
 
 
 
-struct MenuRecAt108;
+struct FrontendPanelTransitionView;
 struct NodeFrontendAnimateSlotSelectionMenu;
-struct MenuRecAt108 {
+struct FrontendPanelTransitionView {
     char pad0[4];
     void *handle;
     char pad8[0xC8 - 8];

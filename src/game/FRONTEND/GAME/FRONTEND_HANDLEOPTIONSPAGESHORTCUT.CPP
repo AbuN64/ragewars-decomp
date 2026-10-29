@@ -1,4 +1,4 @@
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
 #include "TYPES.H"
@@ -51,17 +51,17 @@ s32 Frontend_UpdateOptionsPageExit(void) {
 
 s32 Frontend_HandleOptionsPageShortcut(void) {
     s32 focusedElementIdResult;
-    s32 var_s0;
+    s32 shortcutHandled;
     MarkMenuEventHandled();
-    var_s0 = 1;
+    shortcutHandled = 1;
     focusedElementIdResult = Menu_GetFocusedElementId();
     switch(focusedElementIdResult) {
     case SHORTCUT_RESET:g_optionsPage->value=-1;break;
     case SHORTCUT_SIX:g_optionsPage->value=6;break;
     case SHORTCUT_FIVE:g_optionsPage->value=5;break;
-    default:var_s0=0;break;
+    default:shortcutHandled=0;break;
     }
-    if (var_s0 == 1) {
+    if (shortcutHandled == 1) {
         Menu_CommitOptionsPage();
         SmpSlider_SetTransitionMode(g_optionsPage->menu, 2);
     }

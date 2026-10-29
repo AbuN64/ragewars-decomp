@@ -19,24 +19,24 @@
 
 
 
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "MENU/TRACK_EVALUATETRACKOPACITY.H"
 #include "COMMON/TRIPLE.H"
 
-extern f32 D_800E2848;
+extern f32 g_trackSplineRangeScale;
 
 
 f32 Track_EvaluateTrackOpacity(f32 t) {
     s32 *track;
-    KeyRecAt10 *key;
+    TrackOpacityKey *key;
     s32 count;
     f32 u;
     f32 v;
 
-    track = SetN64_GetPackSection(D_800E2830->resource, 1);
+    track = SetN64_GetPackSection(g_cinemaSequenceState->resource, 1);
     count = track[1];
-    key = (KeyRecAt10 *)(track + 2);
+    key = (TrackOpacityKey *)(track + 2);
     if (count == 0) {
         v = 0.0f;
     } else if (t <= key[0].time) {
@@ -48,12 +48,12 @@ f32 Track_EvaluateTrackOpacity(f32 t) {
             key++;
         }
         u = (t - key[-1].time) / (key->time - key[-1].time);
-        v = key[-1].value * ((*(&D_800DCB28 + 1)) - u) + key->value * u;
+        v = key[-1].value * ((*(&g_trackLinearInterpolationConstants + 1)) - u) + key->value * u;
     }
-    v *= 2.0f * D_800E2848 + D_800E0B60[0];
-    v -= D_800E2848;
-    if (D_800E0B60[0] < v) {
-        v = D_800E0B60[0];
+    v *= 2.0f * g_trackSplineRangeScale + g_trackSplineOutputBounds[0];
+    v -= g_trackSplineRangeScale;
+    if (g_trackSplineOutputBounds[0] < v) {
+        v = g_trackSplineOutputBounds[0];
     }
     if (v < 0.0f) {
         v = 0.0f;

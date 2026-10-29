@@ -12,8 +12,8 @@ extern CVector3 Menu_GetTrackStartEye(void);
 
 
 
-struct EntryRecAt8V4;
-struct EntryRecAt8V4 {
+struct TrackTimedItemEvent;
+struct TrackTimedItemEvent {
     f32 time;
     s32 side;
     s32 index;
@@ -23,17 +23,17 @@ struct RecordMenuProcessTrackItemEvents;
 typedef struct RecordMenuProcessTrackItemEvents RecordMenuProcessTrackItemEvents;
 
 
-struct EntryRecAt4V2;
-typedef struct EntryRecAt4V2 EntryRecAt4V2;
+struct TrackOverlayIdEntry;
+typedef struct TrackOverlayIdEntry TrackOverlayIdEntry;
 
 
 extern void Track_DrawTrackOverlay();
 
-struct ItemRecAt12;
-typedef struct ItemRecAt12 ItemRecAt12;
+struct TriggerStateBitDescriptor;
+typedef struct TriggerStateBitDescriptor TriggerStateBitDescriptor;
 
-struct ItemRecAt12;
-struct ItemRecAt12 {
+struct TriggerStateBitDescriptor;
+struct TriggerStateBitDescriptor {
     char pad0[0xE];
     u8 flags;
     char padF[2];
@@ -45,15 +45,15 @@ struct ItemRecAt12 {
 struct Tables;
 struct Tables {
     char pad0[0x11D0];
-    ItemRecAt12 *items[2];
+    TriggerStateBitDescriptor *items[2];
 };
 
 
 
 
 
-struct EntryRecAt18V5;
-struct EntryRecAt18V5 {
+struct TrackOverlayNamedEntry;
+struct TrackOverlayNamedEntry {
     s32 id0;
     s32 id4;
     s32 id8;
@@ -75,8 +75,8 @@ extern u32 Menu_TestBit(u8 *bits, s32 index);
 struct Spline;
 typedef struct Spline Spline;
 
-struct EntryRecAt18V5;
-typedef struct EntryRecAt18V5 EntryRecAt18V5;
+struct TrackOverlayNamedEntry;
+typedef struct TrackOverlayNamedEntry TrackOverlayNamedEntry;
 
 extern CVector3 Menu_GetTrackStartTarget(void);
 
@@ -101,11 +101,11 @@ struct Spline {
 
 extern f32 Menu_GetTrackDuration(void);
 
-struct EntryRecAt8V4;
-typedef struct EntryRecAt8V4 EntryRecAt8V4;
+struct TrackTimedItemEvent;
+typedef struct TrackTimedItemEvent TrackTimedItemEvent;
 
-struct EntryRecAt4V2;
-struct EntryRecAt4V2 {
+struct TrackOverlayIdEntry;
+struct TrackOverlayIdEntry {
     s32 id0;
     s32 id4;
     char pad8[0x44];
@@ -142,7 +142,7 @@ extern s32 Menu_GetTrackClipCount(void);
 
 
 
-extern f32 D_800E0B60[];
+extern f32 g_trackSplineOutputBounds[];
 
 
 typedef struct ScreenRectangle { char pad0[0x29c]; f32 x,y,width,height; } ScreenRectangle;
@@ -154,7 +154,7 @@ extern void Polytrak2_InitializeOutputPack(void *,s32);
 extern char *Polytrak2_AppendOutputPackSection(Pack *,const void *,s32);
 typedef union SplineSourceCursor { SplineSource *header; CVector3 *points; f32 *weights; } SplineSourceCursor;
 
-extern char D_0040067C[];
+extern char g_Track_BuildTrackResourceSplinesAddress[];
 extern const char s_cinemaText[];
 extern void *Menu_GetTrackClip(s32);
 #endif

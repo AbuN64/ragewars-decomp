@@ -21,7 +21,7 @@ extern void *Portal_GetGraphPoint(void *, s32);
 
 
 extern Link *Portal_GetStridedTableEntry(CNavData *, int);
-extern CNavData D_8013B364;
+extern CNavData g_navigationGraph;
 
 s32 Nav_ComputeScaledPointCentroid(ObjNavComputeScaledPointCentroid *obj) {
     CVector3 sum;
@@ -32,7 +32,7 @@ s32 Nav_ComputeScaledPointCentroid(ObjNavComputeScaledPointCentroid *obj) {
     void *global;
 
     sum.x = sum.y = sum.z = 0.0f;
-    global = &D_8013B364;
+    global = &g_navigationGraph;
     for (i = 0; i < obj->count; i++) {
         sum.x += obj->points[i].x;
         sum.y += obj->points[i].y;
@@ -41,7 +41,7 @@ s32 Nav_ComputeScaledPointCentroid(ObjNavComputeScaledPointCentroid *obj) {
     if (obj->count == 0)
         return 1;
 
-    scale = D_800C1DB8_de / (f32)obj->count;
+    scale = g_pointCentroidUnitScale / (f32)obj->count;
     sum.x *= scale;
     sum.y *= scale;
     sum.z *= scale;
@@ -60,7 +60,7 @@ int Nav_FindSpecialLinkedCandidate(ObjNavFindSpecialLinkedCandidate *obj) {
     int j;
     int i;
     Link *link;
-    CNavData *graph = &D_8013B364;
+    CNavData *graph = &g_navigationGraph;
 
     obj->node = -1;
     obj->pending = 0;
@@ -78,7 +78,7 @@ int Nav_FindSpecialLinkedCandidate(ObjNavFindSpecialLinkedCandidate *obj) {
 }
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_8020DC04[3] = {
+unsigned int k_PointsEncodedWords[3] = {
     0x12F214AC, 0x4A120003, 0x9629070C,
 };
 #endif

@@ -1,5 +1,5 @@
 #ifndef DATA_OVLDAT6_PLAYERAI_INITIALIZEPLAYERHEALTH_H
 #define DATA_OVLDAT6_PLAYERAI_INITIALIZEPLAYERHEALTH_H
 #include "COMMON/OBJRECV5.H"
-extern float D_800C9FEC;
+extern float g_playerTargetFacingEaseRate;
 #endif

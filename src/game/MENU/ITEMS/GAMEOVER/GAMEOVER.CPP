@@ -3,12 +3,12 @@
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
-typedef struct { char pad0[0x30]; u32 flags; } Func_8043EDB0_Rec;
-typedef struct { char pad0[0xC]; Func_8043EDB0_Rec *rec; } Func_8043EDB0_Obj;
+typedef struct { char pad0[0x30]; u32 flags; } GameOverMenuFlagsView;
+typedef struct { char pad0[0xC]; GameOverMenuFlagsView *rec; } GameOverMenuContext;
 /* Resets the game-over timer to 120.0f and clears bit 26 of the flags in the record at 0xC of arg0. */
-void Items_ResetGameOverTimer(Func_8043EDB0_Obj *arg0) {
-    D_801462C8.counters.m_GameOverTimer = 120.0f;
-    arg0->rec->flags &= 0xFBFFFFFF;
+void Items_ResetGameOverTimer(GameOverMenuContext *menuContext) {
+    g_gameSettings.counters.m_GameOverTimer = 120.0f;
+    menuContext->rec->flags &= 0xFBFFFFFF;
 }
 #else
 INCLUDE_ASM("ovl_80400000", Items_ResetGameOverTimer);

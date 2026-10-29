@@ -1,9 +1,9 @@
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_800CA8C4_de.H"
+#include "COMMON/LONE/ACTOR_DEFINITION_TABLE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
 #include "ENGINE/INSTANCE/GOBJINST_INITIALIZEPLACEDACTOR.H"
@@ -14,7 +14,7 @@
 /* Finds the hit box of an object nearest a point: with the object's bone matrices (0xB4, else 0xB8) and its
  * hit-box resource from Gobjinst_RequestAnimatedModelVariant, each box whose mask matches the object's mask 0x17C has the average
  * of its eight corners carried through its bone matrix, and the box whose center lies nearest the point is
- * copied out, taking weight 1 for a controlled actor unless the global option D_801462E5 is set. The
+ * copied out, taking weight 1 for a controlled actor unless the global option g_motionVisibilitySettings is set. The
  * resource is released afterwards; returns whether a box was found. */
 
 
@@ -38,9 +38,9 @@ extern void Graphu64_ConvertMatrixToFloat(f32 *, char *);
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern TypeEntry *D_800CB440_de[];
+extern TypeEntry *g_actorTypeOperations[];
 
-extern char *D_80140F84;
+extern char *g_gamePlayerAndMenuState;
 
 
 extern void *Scene_GetActorDefinition(void *, s32);
@@ -56,7 +56,7 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
     f32 matrix[16];
     s32 *resource;
     s32 count;
-    struct Shape_typemap_13 *table;
+    struct ActorAnimationEventTable *table;
     Box70 *box;
     Box70 *best;
     char *bones;
@@ -65,14 +65,14 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
     f32 dist;
     f32 bestDist;
 
-    bones = ((struct ObjectLinks180_2 *) obj)->unk_B4;
+    bones = ((struct BoneBoundsActorView *) obj)->unk_B4;
     if (bones == 0) {
-        bones = ((struct ObjectLinks180_2 *) obj)->unk_B8;
+        bones = ((struct BoneBoundsActorView *) obj)->unk_B8;
         if (bones == 0) {
             return 0;
         }
     }
-    resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct ObjectLinks180_2 *) obj)->unk_1);
+    resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct BoneBoundsActorView *) obj)->unk_1);
     if (resource == 0) {
         return 0;
     }
@@ -82,7 +82,7 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
     best = 0;
     for (i = 0; i < count; i++) {
         box = (Box70 *)((char *)table + (i * table->field_0 + 8));
-        if (box->mask & ((struct ObjectLinks180_2 *) obj)->unk_17C) {
+        if (box->mask & ((struct BoneBoundsActorView *) obj)->unk_17C) {
             center = box->corners[0];
             for (j = 1; j < 8; j++) {
                 Graphu64_AddVec3(&center, &center, &box->corners[j]);
@@ -100,7 +100,7 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
     }
     if (best != 0) {
         *out = *best;
-        if ((((struct ObjectLinks180_2 *) obj)->unk_100 & 0x300000) && D_801462C8.local == 0) {
+        if ((((struct BoneBoundsActorView *) obj)->unk_100 & 0x300000) && g_gameSettings.local == 0) {
             ((struct Shield *) ((char *) out))->factor = 1.0f;
         }
     }
@@ -125,15 +125,15 @@ zero_entry:
     entry = 0;
     goto selected;
 special_entry:
-    entry = (TypeEntry *)D_800CA8C4_de;
+    entry = (TypeEntry *)g_actorDefinitionTable;
     goto selected;
 valid_type:
     if (type == 11) {
-        count = D_80145048;
+        count = g_playerCount;
         i = 0;
         if (count > 0) {
             limit = count;
-            object = D_80140F84;
+            object = g_gamePlayerAndMenuState;
             do {
                 if (object == actor) {
                     goto zero_entry;
@@ -146,7 +146,7 @@ valid_type:
             } while (i < limit);
         }
     }
-    entry = D_800CB440_de[type];
+    entry = g_actorTypeOperations[type];
 
 selected:
     if (entry != 0 && entry->callback != 0) {
@@ -157,7 +157,7 @@ selected:
     }
 }
 
-void Gobjinst_InitializePlacedActor(void *actorStorage, InputRecAt27 *placement, s32 mode, s32 index) {
+void Gobjinst_InitializePlacedActor(void *actorStorage, LevelPlacedActorRecord *placement, s32 mode, s32 index) {
     void *resource0;
     s32 resource1;
     s32 lookup;
@@ -174,18 +174,18 @@ void Gobjinst_InitializePlacedActor(void *actorStorage, InputRecAt27 *placement,
     }
     amountRaw = placement->amount24;
     fzero = 0.0f;
-    amount = amountRaw * D_800C3B48_de[1];
+    amount = amountRaw * g_actorOffsetTransformConstants[1];
     zero.x = zero.y = zero.z = fzero;
     lookup = Rumble_TestActorStateBit(&g_world, actorStorage);
-    Gobjinst_InitializeActor(actorStorage, placement->unk1C, placement->unk1E, placement->unk0,
-                  resource0, placement->unk27 == 0xFF ? -1 : placement->unk27,
-                  resource1, amount, *(CVector3 *)placement->vec4, placement->unk26,
+    Gobjinst_InitializeActor(actorStorage, placement->actorKind, placement->actorVariant, placement->actorId,
+                  resource0, placement->ownerIndex == 0xFF ? -1 : placement->ownerIndex,
+                  resource1, amount, *(CVector3 *)placement->vec4, placement->spawnFlags,
                   *(CVector3 *)placement->vec10, zero, lookup);
 }
 
 void Gobjinst_UpdateModelBounds(void *actorStorage, int model) {
     Actor36 *actor = actorStorage;
-    func_8024B4E4_de_FuncPtr fn = actor->update;
+    ActorBoneBoundsCallback fn = actor->update;
     fn(actorStorage, actor->state);
     Graphu64_TransformBoundingBox(actor->matrix, model, &actor->box);
 }

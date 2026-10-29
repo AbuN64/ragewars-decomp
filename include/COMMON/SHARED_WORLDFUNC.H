@@ -3,5 +3,5 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 
-extern Shared_MenuData D_80145040;
+extern Shared_MenuData g_playerViewRenderContext;
 #endif

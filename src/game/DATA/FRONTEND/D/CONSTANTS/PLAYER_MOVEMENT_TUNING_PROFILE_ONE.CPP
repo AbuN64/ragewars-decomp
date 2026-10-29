@@ -1,0 +1,7 @@
+#include "include_asm.h"
+
+#if defined(VERSION_US) || defined(VERSION_US_REV1)
+unsigned int g_playerMovementTuningProfileOneUsRev1[8] = {
+    0x4123D70A, 0x41F5C28F, 0x41570A3D, 0x4123D70A, 0x420F5C29, 0x41570A3D, 0x00000000, 0x00000000,
+};
+#endif

@@ -3,7 +3,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OUTPUT.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "ANIM/CCOLLISION_TESTSEGMENTPOLYGON.H"
 
 extern f32 CCollision_GetSurfaceHeight(struct Query *, f32, f32);
@@ -126,9 +126,9 @@ s32 CCollision_HasMatchingNormal(struct Input *input, PolygonCCollisionTestSegme
 
 /** Copy three words from offsets 0x48..0x50 to offsets 0x18C..0x194. */
 void CCollision_CopyPolygonNormal(void *contactStorage, void *polygonStorage) {
-    ObjRecAt48 *arg1_record = polygonStorage;
-    ObjRecAt18C *arg0_record = contactStorage;
-    arg0_record->unk18C = arg1_record->unk48;
+    CollisionPolygonNormalView *polygon = polygonStorage;
+    CollisionContactVectorView *contact = contactStorage;
+    contact->contactVector = polygon->normal;
 }
 
 s32 CCollision_TestSegmentPolygon(CapsuleSweep *ray, PolygonCCollisionTestSegmentPolygon *poly, s32 keep) {

@@ -1,29 +1,29 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80106248.H"
+#include "COMMON/LONE/RESOURCE_REQUEST_QUEUE.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "sdk/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "sdk/SCHED/osscremoveclient.H"
 #include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "sdk/libgultra/sptaskyield.h"
 #include "sdk/os.h"
 
-extern s32 D_800CD704;
-extern void Scene_SetThreadPriority(void *arg0, s32 pri);
+extern s32 g_resourceLoadPriorityBoost;
+extern void Scene_SetThreadPriority(void *priority, s32 pri);
 void __scYield(void *scheduler) {
     void *currentRspTask;
-    currentRspTask = (((struct ObjectLinks2F8 *) ((s8 *) scheduler))->unk_2F4);
-    if ((((struct IntegerState14 *) ((s8 *) currentRspTask))->unk_10) == 1) {
-        (((struct IntegerState14 *) ((s8 *) currentRspTask))->unk_4) = (s32) ((((struct IntegerState14 *) ((s8 *) currentRspTask))->unk_4) | 0x10);
+    currentRspTask = (((struct SchedulerCurrentRspTaskView *) ((s8 *) scheduler))->unk_2F4);
+    if ((((struct SchedulerTaskFlagsView *) ((s8 *) currentRspTask))->unk_10) == 1) {
+        (((struct SchedulerTaskFlagsView *) ((s8 *) currentRspTask))->unk_4) = (s32) ((((struct SchedulerTaskFlagsView *) ((s8 *) currentRspTask))->unk_4) | 0x10);
         osSpTaskYield();
     }
 }
@@ -35,9 +35,9 @@ void Sched_HandleTaskCommands(void *scheduler) {
     s32 flags;
 
     while (osRecvMesg(&((OSSched *)scheduler)->commandQueue, &node, 0) != -1) {
-        if (node->type == 1 && (node->flags & 0x20) && D_800CD704 == 0) {
-            D_800CD704 = 2;
-            Scene_SetThreadPriority(&D_80106248, D_800CD8B8_de);
+        if (node->type == 1 && (node->flags & 0x20) && g_resourceLoadPriorityBoost == 0) {
+            g_resourceLoadPriorityBoost = 2;
+            Scene_SetThreadPriority(&g_resourceCacheWorker, g_resourceLoadBusyPriority);
         }
         __scAppendList(scheduler, node);
     }
@@ -55,6 +55,6 @@ void Sched_HandleTaskCommands(void *scheduler) {
     }
 }
 
-int Sched_GetInterruptQueueAddress(int arg0) {
-    return arg0 + 0x40;
+int Sched_GetInterruptQueueAddress(int scheduler) {
+    return scheduler + 0x40;
 }

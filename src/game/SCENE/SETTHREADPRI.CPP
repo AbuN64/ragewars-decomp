@@ -1,6 +1,6 @@
 #include "sdk/thread_queue.h"
 #include "include_asm.h"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 
@@ -8,8 +8,8 @@
 
 
 
-extern OSThread_s *D_800D5268_de;
-extern OSThread_s *D_800D5270;
+extern OSThread_s *g_osRunnableThreadQueue;
+extern OSThread_s *g_osRunningThread;
 extern void Audio_DequeueThread(OSThread_s **queue, OSThread_s *t);
 extern void func_802BC36C_de(OSThread_s **queue);
 
@@ -21,20 +21,20 @@ void Scene_SetThreadPriority(OSThread_s *t, s32 pri)
     saveMask = __osDisableInt();
 
     if (t == 0) {
-        t = D_800D5270;
+        t = g_osRunningThread;
     }
 
     if (t->priority != pri) {
         t->priority = pri;
 
-        if (t != D_800D5270 && t->state != 1) {
+        if (t != g_osRunningThread && t->state != 1) {
             Audio_DequeueThread(t->queue, t);
             __osEnqueueThread(t->queue, t);
         }
 
-        runQueue = &D_800D5268_de;
-        if (D_800D5270->priority < (*runQueue)->priority) {
-            D_800D5270->state = 2;
+        runQueue = &g_osRunnableThreadQueue;
+        if (g_osRunningThread->priority < (*runQueue)->priority) {
+            g_osRunningThread->state = 2;
             func_802BC36C_de(runQueue);
         }
     }
@@ -43,6 +43,6 @@ void Scene_SetThreadPriority(OSThread_s *t, s32 pri)
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BB5E4[12] =
+char s_SetthreadpriStBotTBoText[12] =
     "stBot_t\005m_Bo";
 #endif

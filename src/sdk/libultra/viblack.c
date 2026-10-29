@@ -4,7 +4,7 @@
 #include "sdk/libgultra/viblack.h"
 #include "sdk/os.h"
 
-extern void *D_800D4414;
+extern void *g_nextVideoInterfaceContext;
 
 void osViBlack(s32 blackEnabled) {
     u32 savedInterruptMask;
@@ -13,10 +13,10 @@ void osViBlack(s32 blackEnabled) {
 
     savedInterruptMask = __osDisableInt();
     if (blackEnabled & 0xFF) {
-        ptr = (u16 *)D_800D4414;
+        ptr = (u16 *)g_nextVideoInterfaceContext;
         v = *ptr | 0x20;
     } else {
-        ptr = (u16 *)D_800D4414;
+        ptr = (u16 *)g_nextVideoInterfaceContext;
         v = *ptr & 0xFFDF;
     }
     *ptr = v;
@@ -24,7 +24,7 @@ void osViBlack(s32 blackEnabled) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BA13C[1] = {
+unsigned int k_ViblackEncodedWords[1] = {
     0x4F666673,
 };
 #endif

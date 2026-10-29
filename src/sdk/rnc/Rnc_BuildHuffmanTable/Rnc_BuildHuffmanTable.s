@@ -99,12 +99,12 @@ Rnc_BuildHuffmanTable:
     jr $ra
     nop
 
-/* func_802AD8F4_de.s */
+/* Libgultra_SetWatchpoint.s */
 .set noreorder
 .set noat
 .section .text
-.globl func_802AD8F4_de
-func_802AD8F4_de:
+.globl Libgultra_SetWatchpoint
+Libgultra_SetWatchpoint:
     sll $a0, $a0, 4
     srl $a0, $a0, 4
     addi $v0, $zero, -0x8

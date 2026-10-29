@@ -1,31 +1,31 @@
 #include "COMMON/DESCRIPTORRECAT29.H"
-#include "COMMON/LONE/D_80103FCC.H"
+#include "COMMON/LONE/COLLISION_CURRENT_ACTOR.H"
 #include "COMMON/OUTPUT.H"
 #include "SCHED/SKY_POSTSCREENMESSAGE.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/CCOLLISIONSETUP_T.H"
 #include "SCHED/COLLIDE.H"
 #include "include_asm.h"
 
 /* 8023A284_29.CPP */
-/* Points the active collision state at D_801041F0 and fills the collision infos from the setup table
- * D_0044A850 (the KUSEG alias of D_8044A850). */
+/* Points the active collision state at g_currentActorInstance and fills the collision infos from the setup table
+ * g_collisionSetupTableResource (the KUSEG alias of g_collisionSetupTable). */
 
-extern u8 D_801041F0[];
+extern u8 g_currentActorInstance[];
 
-extern CCollisionSetup_t D_0044A850[];
+extern CCollisionSetup_t g_collisionSetupTableResource[];
 
 void CCollision_Initialize(void) {
-    D_80103FCC = D_801041F0;
-    CCollision_ApplySetupTable(D_0044A850);
+    g_collisionCurrentActor = g_currentActorInstance;
+    CCollision_ApplySetupTable(g_collisionSetupTableResource);
 }
 
 /** Reset the selected fields of the current global record. */
 void CCollision_ResetResult(void) {
-    Reusable *record = D_80103FCC;
+    Reusable *record = g_collisionCurrentActor;
     record->unk0 = 0;
-    record->unk14 = -1;
+    record->collisionCounter = -1;
     record->unk88 = 0;
     record->unk9C = 0;
     record->unkB0 = 0;
@@ -35,7 +35,7 @@ void CCollision_ResetResult(void) {
 
 /* 8023A284_32.CPP */
 /* Fills every collision info named by a collision setup table from its row, resetting the
- * active collision state D_80103FCC before each one; the table ends at a row without info. */
+ * active collision state g_collisionCurrentActor before each one; the table ends at a row without info. */
 void CCollision_ApplySetupTable(CCollisionSetup_t *setupTable)
 {
     CCollisionSetup_t *setup = setupTable;
@@ -45,13 +45,13 @@ void CCollision_ApplySetupTable(CCollisionSetup_t *setupTable)
         do {
             CCollisionInfo2_t *info = setup->m_pCollInfo;
 
-            ((Reusable *)D_80103FCC)->unk0 = 0;
-            ((Reusable *)D_80103FCC)->unk14 = counter;
-            ((Reusable *)D_80103FCC)->unk88 = 0;
-            ((Reusable *)D_80103FCC)->unk9C = 0;
-            ((Reusable *)D_80103FCC)->unkB0 = 0;
-            ((Reusable *)D_80103FCC)->unkB4 = 0;
-            ((Reusable *)D_80103FCC)->unkC4 = 0;
+            ((Reusable *)g_collisionCurrentActor)->unk0 = 0;
+            ((Reusable *)g_collisionCurrentActor)->collisionCounter = counter;
+            ((Reusable *)g_collisionCurrentActor)->unk88 = 0;
+            ((Reusable *)g_collisionCurrentActor)->unk9C = 0;
+            ((Reusable *)g_collisionCurrentActor)->unkB0 = 0;
+            ((Reusable *)g_collisionCurrentActor)->unkB4 = 0;
+            ((Reusable *)g_collisionCurrentActor)->unkC4 = 0;
 
             info->dwFlags = setup->m_dwFlags;
             info->InstanceBehavior = setup->m_InstanceBehavior;
@@ -68,7 +68,7 @@ void CCollision_ApplySetupTable(CCollisionSetup_t *setupTable)
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8023EEDC[1] = {
+unsigned int k_CollideEncodedWordsBlock2[1] = {
     0x0000000B,
 };
 #endif
@@ -81,5 +81,5 @@ unsigned int func_8023EE60_de_padding_3FB3C[1] = {
 
 /* 8023A284_34.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_8023EF0C_eu_padding_3FB0C[4] = { 0x10, 0x40, 0x00, 0x05 };
+unsigned char g_CollideTrailingBytesBlock1[4] = { 0x10, 0x40, 0x00, 0x05 };
 #endif

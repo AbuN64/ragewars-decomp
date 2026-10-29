@@ -4,10 +4,10 @@
 
 /** Copy the three-word vector at source offset 0x260. */
 void *Gsky_GetObjectPositionAt260(void *destination, void *source) {
-    ObjRecAt260 *source_record = source;
+    CameraObjectPositionView *source_record = source;
 
     Triple *out = destination;
     *out =
-        source_record->unk260;
+        source_record->position;
     return destination;
 }

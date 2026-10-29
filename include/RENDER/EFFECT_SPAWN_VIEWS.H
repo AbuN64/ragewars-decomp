@@ -16,7 +16,7 @@ struct CameraEventsSpawnAttachedEffect {
     CVector3 position;
     CVector3 offset;
 };
-struct SourceRecAt1C {
+struct EffectSpawnSourceView {
     unsigned char active;
     char pad1[7];
     CVector3 position;
@@ -29,7 +29,7 @@ struct Spawn {
     s32 kind;
     f32 size;
 };
-struct ObjRecAt1 {
+struct EffectSpawnModeView {
     char pad0[0x1];
     s8 unk1;
 };

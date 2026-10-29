@@ -6,22 +6,22 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ACTOR_DEFINITION.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ARGB_COLOR.H"
 #include "COMMON/GFX.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/LOADOUT.H"
 #include "COMMON/OWNERRECAT8V2.H"
 #include "COMMON/GROUP.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "COMMON/LIGHTDATA.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/MTX.H"
-#include "COMMON/OBJECTLINKS1E8.H"
+#include "COMMON/PARTICLE_ATTACHMENT_AND_OWNER_VIEWS.H"
 #include "COMMON/COLORENTRY.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/RESULTS.H"
@@ -58,15 +58,15 @@
 #include "COMMON/MEASUREDRECAT14V4.H"
 #include "COMMON/MEASUREDRECAT14V2.H"
 #include "COMMON/SHAREDPLAYER.H"
-extern float D_800C2100_de;
+extern float g_actorDefaultLevelPair;
 
-extern double D_800C2108_de;
+extern double g_actorKindOneUnsignedHealthBias;
 
-extern double D_800C2110_de;
+extern double g_actorKindFourUnsignedHealthBias;
 
-extern float D_800C20F0_de;
+extern float g_timedJumpRouteArrivalDistance;
 
-extern float D_800C2124_de;
+extern float g_actorSceneMaskTwentySecondaryLevel;
 
 struct AiTarget;
 
@@ -92,12 +92,12 @@ struct Source {
     u32 flags; /* +0x100; probe 20261019T012702233005Z */
 };
 
-extern int D_8013B368;
+extern int g_navigationNodeCount;
 
-extern float D_800C2120_de;
+extern float g_actorSceneMaskTwentyHealthScale;
 
-struct IntegerState23C;
-struct IntegerState23C {
+struct NavigationChaseResetView;
+struct NavigationChaseResetView {
     unsigned char padding_0[104];
     s32 unk_68;
     unsigned char padding_6C[436];
@@ -106,12 +106,12 @@ struct IntegerState23C {
     s32 unk_238;
 };
 
-extern float D_800C2118_de;
+extern float g_actorSceneMaskEightHealthLimits;
 
 
 
-struct IntegerState23C;
-typedef struct IntegerState23C IntegerState23C;
+struct NavigationChaseResetView;
+typedef struct NavigationChaseResetView NavigationChaseResetView;
 
 
 

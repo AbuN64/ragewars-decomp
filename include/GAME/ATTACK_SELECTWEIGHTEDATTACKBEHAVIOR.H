@@ -11,14 +11,14 @@ struct WeightSource {
     f32 second;
     f32 third;
 };
-struct func_8020DCA0_S1 {
-    void * unk0;
+struct WeightedAttackSelectionBrainView {
+    void * actor;
     char pad0[0x230 - 0x0 - sizeof(void*)];
-    s32 unk230;
+    s32 selectedBehavior;
 };
-struct ObjRecAt18V4 {
+struct AttackBehaviorDefinitionView {
     char pad0[0x18];
-    s32 unk18;
+    s32 attackDefinitionAddress;
 };
 extern void Attack_SelectWeightedAttackBehavior(void *brainAddress);
 #endif

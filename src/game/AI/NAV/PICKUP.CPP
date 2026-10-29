@@ -1,6 +1,6 @@
 #include "COMMON/ACTORREC.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "include_asm.h"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -10,7 +10,7 @@
 #include "AI/NAV/PICKUP.H"
 
 /* 80208000_12.CPP */
-/* Advances a committed selection's stage against the node list D_8013B364: finishes through
+/* Advances a committed selection's stage against the node list g_navigationGraph: finishes through
    Nav_FindSpecialLinkedCandidate when there are no stages at 0x1BC, counts once into 0x1C8 the list's kind-6 nodes whose
    id matches the selection id at 0x1C0, then runs Nav_AppendDirectionalRouteStage while the stage is within that count,
    Nav_InsertPickupRouteNode on the stage right after it and Nav_ComputeScaledPointCentroid on the one after that. */
@@ -22,8 +22,8 @@ extern s32 Nav_FindSpecialLinkedCandidate(Selection *sel);
 
 s32 Nav_AdvancePickupRouteSelection(Selection *sel)
 {
-    NodeList *list = (NodeList *)&D_8013B364;
-    Node_func_8020D364_de *node;
+    NodeList *list = (NodeList *)&g_navigationGraph;
+    PickupGoalAvailabilityNode *node;
     s32 i;
 
     if (list == 0) {
@@ -34,7 +34,7 @@ s32 Nav_AdvancePickupRouteSelection(Selection *sel)
     }
     if (sel->selection != -1 && sel->matches == 0) {
         for (i = 0; i < list->count; i++) {
-            node = (Node_func_8020D364_de *)Portal_GetStridedTableEntry((PickupGoalNodeList *)list, i);
+            node = (PickupGoalAvailabilityNode *)Portal_GetStridedTableEntry((PickupGoalNodeList *)list, i);
             if (node->id == sel->selection && node->kind == 6) {
                 sel->matches++;
             }
@@ -53,7 +53,7 @@ s32 Nav_AdvancePickupRouteSelection(Selection *sel)
 }
 
 /* 80208000_14.CPP */
-/* Records the next stage of a selection: finds the kind-6 link from the selection's node in the route D_8013B364 (stopping at the stage number at 0x1BC), stores its two node ids in that stage's entry, measures the distance from the selection's own node through func_8020C994_de and Graphu64_GetSquaredDistance, multiplies the unit directions from each attached object to the stage's node (func_8027207C_de) into a facing term, and stores the distance scaled by that term (made positive for a single object) before advancing the stage count. Returns zero. */
+/* Records the next stage of a selection: finds the kind-6 link from the selection's node in the route g_navigationGraph (stopping at the stage number at 0x1BC), stores its two node ids in that stage's entry, measures the distance from the selection's own node through func_8020C994_de and Graphu64_GetSquaredDistance, multiplies the unit directions from each attached object to the stage's node (func_8027207C_de) into a facing term, and stores the distance scaled by that term (made positive for a single object) before advancing the stage count. Returns zero. */
 
 extern CVector3 *Portal_GetGraphPoint(PickupGoalNodeList *, s32);
 extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
@@ -71,7 +71,7 @@ s32 Nav_AppendDirectionalRouteStage(SelectionNavAppendDirectionalRouteStage *sel
     node = 0;
     i = 0;
     stage = 0;
-    route = &D_8013B364;
+    route = &g_navigationGraph;
     for (; i < route->count; i++) {
         link = Portal_GetStridedTableEntry(route, i);
         if (link->from == sel->id && link->type == 6) {
@@ -122,7 +122,7 @@ s32 Nav_InsertPickupRouteNode(SelectionNavAppendDirectionalRouteStage *sel) {
     next = -1;
     count = 0;
     best = sel->objectCount;
-    list = &D_8013B364;
+    list = &g_navigationGraph;
     for (i = 0; i < sel->objectCount; i++) {
         if (sel->stages[i].distance > count) {
             best = i;

@@ -3,76 +3,76 @@
 /* DATA_800E3AAC.CPP */
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int D_blob_871ddb7f200dd0a5f378[4] = {
+unsigned int g_overlayOneIPreviewConstantWords[4] = {
     0x00000000, 0x00000000, 0xFFFFFFEC, 0xFFFFFFEC,
 };
 #endif
 
 #if defined(VERSION_US)
 #if defined(VERSION_US)
-extern char D_800D3304[];
-extern char D_800D3334[];
-extern char D_800D3338[];
-extern char D_800D333C[];
-extern char D_800D3340[];
+extern char g_characterPreviewTextReferenceShared1[];
+extern char g_characterPreviewTextReferenceShared2[];
+extern char g_characterPreviewTextReferenceShared3[];
+extern char g_characterPreviewTextReferenceShared4[];
+extern char g_characterPreviewTextReferenceShared5[];
 unsigned int data_unresolved_800DE71C[517] = {
-    (unsigned int)D_800D3304 + 0x4, 0x00000086, 0x00000001, 0x00000016, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE,
+    (unsigned int)g_characterPreviewTextReferenceShared1 + 0x4, 0x00000086, 0x00000001, 0x00000016, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE,
     0x43200000, 0x43480000, 0x43200000, 0x43520000, 0x42240000, 0xC2140000, 0xC2C80000, 0xC2180000,
     0xC2140000, 0xC2C80000, 0x42080000, 0xC2940000, 0xC2A00000, 0xC1F00000, 0xC2940000, 0xC2A00000,
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)D_800D3304 + 0x8, 0x00000091, 0x00000002, 0x0000001D,
+    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)g_characterPreviewTextReferenceShared1 + 0x8, 0x00000091, 0x00000002, 0x0000001D,
     0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x43200000, 0x43430000, 0x43200000, 0x43430000,
     0x42200000, 0xC2540000, 0xC2C80000, 0xC2200000, 0xC2540000, 0xC2C80000, 0x42000000, 0xC2B60000,
     0xC2A00000, 0xC20C0000, 0xC2B60000, 0xC2A00000, 0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
-    (unsigned int)D_800D3304 + 0xC, 0x00000084, 0x00000003, 0x0000001A, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8,
+    (unsigned int)g_characterPreviewTextReferenceShared1 + 0xC, 0x00000084, 0x00000003, 0x0000001A, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8,
     0x43200000, 0x43480000, 0x43200000, 0x43480000, 0x421C0000, 0xC20C0000, 0xC2C80000, 0xC21C0000,
     0xC20C0000, 0xC2C80000, 0x42000000, 0xC2900000, 0xC2A00000, 0xC2000000, 0xC2900000, 0xC2A00000,
-    0x00000014, 0x00000014, 0x00000000, 0x00000000, (unsigned int)D_800D3304 + 0x10, 0x00000087, 0x00000004, 0x00000014,
+    0x00000014, 0x00000014, 0x00000000, 0x00000000, (unsigned int)g_characterPreviewTextReferenceShared1 + 0x10, 0x00000087, 0x00000004, 0x00000014,
     0x3D6147AE, 0x3D6147AE, 0x3D6147AE, 0x3D6147AE, 0x431B0000, 0x43480000, 0x43200000, 0x43480000,
     0x42200000, 0xC20C0000, 0xC2C80000, 0xC2200000, 0xC20C0000, 0xC2C80000, 0x41F00000, 0xC2900000,
     0xC2A00000, 0xC2040000, 0xC2900000, 0xC2A00000, 0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
-    (unsigned int)D_800D3304 + 0x14, 0x0000008C, 0x00000005, 0x00000020, 0x3E2E147B, 0x3E2E147B, 0x3E2E147B, 0x3E2E147B,
+    (unsigned int)g_characterPreviewTextReferenceShared1 + 0x14, 0x0000008C, 0x00000005, 0x00000020, 0x3E2E147B, 0x3E2E147B, 0x3E2E147B, 0x3E2E147B,
     0x43340000, 0x435C0000, 0x43340000, 0x435C0000, 0x42240000, 0xC29E0000, 0xC2C80000, 0xC21C0000,
     0xC29E0000, 0xC2C80000, 0x42200000, 0xC2E60000, 0xC28C0000, 0xC1880000, 0xC2E60000, 0xC28C0000,
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)D_800D3304 + 0x18, 0x0000008E, 0x00000006, 0x00000017,
+    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)g_characterPreviewTextReferenceShared1 + 0x18, 0x0000008E, 0x00000006, 0x00000017,
     0x3DA3D70A, 0x3DA3D70A, 0x3DA3D70A, 0x3DA3D70A, 0x43200000, 0x43480000, 0x43200000, 0x43480000,
     0x42280000, 0xC2340000, 0xC2C80000, 0xC2180000, 0xC2340000, 0xC2C80000, 0x42180000, 0xC2A20000,
     0xC2B00000, 0xC2040000, 0xC2A20000, 0xC2B00000, 0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
-    (unsigned int)D_800D3304 + 0x1C, 0x0000008D, 0x00000007, 0x0000001B, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8,
+    (unsigned int)g_characterPreviewTextReferenceShared1 + 0x1C, 0x0000008D, 0x00000007, 0x0000001B, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8,
     0x43200000, 0x43480000, 0x43200000, 0x43480000, 0x42200000, 0xC2100000, 0xC2C80000, 0xC2200000,
     0xC2100000, 0xC2C80000, 0x42040000, 0xC28E0000, 0xC2A00000, 0xC2040000, 0xC28E0000, 0xC2A00000,
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)D_800D3304 + 0x20, 0x00000089, 0x00000008, 0x00000019,
+    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)g_characterPreviewTextReferenceShared1 + 0x20, 0x00000089, 0x00000008, 0x00000019,
     0x3E051EB8, 0x3E051EB8, 0x3E051EB8, 0x3E051EB8, 0x43200000, 0x43480000, 0x43200000, 0x43480000,
     0x421C0000, 0xC2680000, 0xC2C80000, 0xC2240000, 0xC2680000, 0xC2C80000, 0x42000000, 0xC2BE0000,
     0xC2A00000, 0xC2080000, 0xC2BE0000, 0xC2A00000, 0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
-    (unsigned int)D_800D3304 + 0x24, 0x00000082, 0x00000009, 0x00000018, 0x3D75C28F, 0x3D75C28F, 0x3D75C28F, 0x3D75C28F,
+    (unsigned int)g_characterPreviewTextReferenceShared1 + 0x24, 0x00000082, 0x00000009, 0x00000018, 0x3D75C28F, 0x3D75C28F, 0x3D75C28F, 0x3D75C28F,
     0x43200000, 0x434D0000, 0x43200000, 0x434D0000, 0x421C0000, 0xC1A00000, 0xC2C80000, 0xC2240000,
     0xC1A00000, 0xC2C80000, 0x41F80000, 0xC25C0000, 0xC2A00000, 0xC2040000, 0xC25C0000, 0xC2A00000,
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)D_800D3304 + 0x28, 0x00000090, 0x0000000A, 0x0000001C,
+    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)g_characterPreviewTextReferenceShared1 + 0x28, 0x00000090, 0x0000000A, 0x0000001C,
     0x3E051EB8, 0x3E051EB8, 0x3E051EB8, 0x3E051EB8, 0x43480000, 0x43750000, 0x43480000, 0x43750000,
     0x42200000, 0xC2700000, 0xC2C80000, 0xC2200000, 0xC2700000, 0xC2C80000, 0x422C0000, 0xC2BE0000,
     0xC2A00000, 0xC1A80000, 0xC2BE0000, 0xC2A00000, 0x00000000, 0x00000000, 0xFFFFFFF6, 0xFFFFFFF6,
-    (unsigned int)D_800D3304 + 0x2C, 0x00000088, 0x0000000B, 0x00000021, 0x3E570A3D, 0x3E570A3D, 0x3E570A3D, 0x3E570A3D,
+    (unsigned int)g_characterPreviewTextReferenceShared1 + 0x2C, 0x00000088, 0x0000000B, 0x00000021, 0x3E570A3D, 0x3E570A3D, 0x3E570A3D, 0x3E570A3D,
     0x43200000, 0x43480000, 0x43200000, 0x43480000, 0x42280000, 0xC2780000, 0xC2C80000, 0xC2240000,
     0xC2780000, 0xC2C80000, 0x42100000, 0xC2CE0000, 0xC2A00000, 0xC2100000, 0xC2CE0000, 0xC2A00000,
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)D_800D3334, 0x0000008A, 0x0000000C, 0x00000022,
+    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)g_characterPreviewTextReferenceShared2, 0x0000008A, 0x0000000C, 0x00000022,
     0x3E428F5C, 0x3E428F5C, 0x3E428F5C, 0x3E428F5C, 0x435C0000, 0x43820000, 0x435C0000, 0x43820000,
     0x42340000, 0xC2680000, 0xC2C80000, 0xC2080000, 0xC2700000, 0xC2C80000, 0x42540000, 0xC2C20000,
     0xC2A00000, 0xC1500000, 0xC2C20000, 0xC2A00000, 0x00000000, 0x00000000, 0xFFFFFFF6, 0xFFFFFFF6,
-    (unsigned int)D_800D3338, 0x0000008F, 0x0000000D, 0x0000001F, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29,
+    (unsigned int)g_characterPreviewTextReferenceShared3, 0x0000008F, 0x0000000D, 0x0000001F, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29,
     0x435C0000, 0x43870000, 0x435C0000, 0x43898000, 0x42400000, 0xC25C0000, 0xC2C80000, 0xC2040000,
     0xC2680000, 0xC2C80000, 0x42580000, 0xC2B80000, 0xC2A00000, 0xC1300000, 0xC2B60000, 0xC2A00000,
-    0x00000000, 0x00000000, 0xFFFFFFF6, 0xFFFFFFF6, (unsigned int)D_800D333C, 0x00000080, 0x0000000E, 0x00000015,
+    0x00000000, 0x00000000, 0xFFFFFFF6, 0xFFFFFFF6, (unsigned int)g_characterPreviewTextReferenceShared4, 0x00000080, 0x0000000E, 0x00000015,
     0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x43200000, 0x43480000, 0x43200000, 0x43480000,
     0x42200000, 0xC2680000, 0xC2C80000, 0xC2240000, 0xC2680000, 0xC2C80000, 0x42000000, 0xC2C00000,
     0xC2A00000, 0xC2040000, 0xC2C00000, 0xC2A00000, 0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
-    (unsigned int)D_800D3340, 0x0000008B, 0x00000011, 0x0000001E, 0x3DAE147B, 0x3DAE147B, 0x3DAE147B, 0x3DAE147B,
+    (unsigned int)g_characterPreviewTextReferenceShared5, 0x0000008B, 0x00000011, 0x0000001E, 0x3DAE147B, 0x3DAE147B, 0x3DAE147B, 0x3DAE147B,
     0x430F0000, 0x43570000, 0x430F0000, 0x43570000, 0x42340000, 0xC2100000, 0xC2C80000, 0xC2600000,
     0xC2080000, 0xC2C80000, 0x42140000, 0xC28E0000, 0xC2B40000, 0xC2400000, 0xC28E0000, 0xC2B40000,
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)D_800D3340 + 0x4, 0x00000085, 0x00000012, 0x00000024,
+    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1, (unsigned int)g_characterPreviewTextReferenceShared5 + 0x4, 0x00000085, 0x00000012, 0x00000024,
     0x3DB851EC, 0x3DB851EC, 0x3DB851EC, 0x3DB851EC, 0x432A0000, 0x43520000, 0x432A0000, 0x43520000,
     0x42200000, 0x40000000, 0xC2C80000, 0xC2200000, 0x40000000, 0xC2C80000, 0x42000000, 0xC2040000,
     0xC2A00000, 0xC1F80000, 0xC2040000, 0xC2A00000, 0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
-    (unsigned int)D_800D3340 + 0x8, 0x00000012, 0x0000000F, 0x00000034, 0x0000005E, 0x000000E8, 0x0000000F, 0x0000010B,
+    (unsigned int)g_characterPreviewTextReferenceShared5 + 0x8, 0x00000012, 0x0000000F, 0x00000034, 0x0000005E, 0x000000E8, 0x0000000F, 0x0000010B,
     0x0000005E, 0x00000012, 0x00000080, 0x00000034, 0x000000CE, 0x000000E8, 0x00000080, 0x0000010B,
     0x000000CE, 0x0000006B, 0x0000006C, 0x0000006D, 0x0000006E, 0x00000066, 0x00000070, 0x00000071,
     0x00000072, 0x00000073, 0x00000074, 0x00000075, 0x00000076, 0x00000077, 0x00000078, 0x00000079,
@@ -88,7 +88,7 @@ unsigned int data_unresolved_800DE71C[517] = {
 /* DATA_800E3ABC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E46AC_unclaimed_E46BC */
-unsigned int D_blob_7e70989894a0bdc76747[1] = {
+unsigned int g_overlayOneIPreviewAddressWords[1] = {
     0x800D7334,
 };
 #endif
@@ -96,7 +96,7 @@ unsigned int D_blob_7e70989894a0bdc76747[1] = {
 /* DATA_800E3AC0.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_keys_01_us_rev1.c */
-unsigned int D_blob_a730c5b849efd061a0f4[2] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock1[2] = {
     0x00000086, 0x00000001,
 };
 #endif
@@ -104,18 +104,18 @@ unsigned int D_blob_a730c5b849efd061a0f4[2] = {
 /* DATA_800E3AC8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E46AC_unclaimed_E46C8 */
-unsigned int D_blob_16cf4099c65c4bd0cf29[1] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock2[1] = {
     0x00000016,
 };
 
-unsigned int D_auto_src_ragewars_character_preview_scale_distance_01_us_rev1[8] = {
+unsigned int g_overlayOneIPreviewFloatConstantWords[8] = {
     0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x43200000, 0x43480000, 0x43200000, 0x43520000,
 };
 #endif
 
 /* DATA_800E3AEC.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_character_preview_positions_01_us_rev1[12] = {
+unsigned int g_overlayOneIPreviewFloatConstantWordsBlock1[12] = {
     0x42240000, 0xC2140000, 0xC2C80000, 0xC2180000, 0xC2140000, 0xC2C80000, 0x42080000, 0xC2940000,
     0xC2A00000, 0xC1F00000, 0xC2940000, 0xC2A00000,
 };
@@ -123,7 +123,7 @@ unsigned int D_auto_src_ragewars_character_preview_positions_01_us_rev1[12] = {
 
 /* DATA_800E3B1C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_d1_ea66246de6dd0ff3[4] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock3[4] = {
     0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
 };
 #endif
@@ -131,12 +131,12 @@ unsigned int D_d1_ea66246de6dd0ff3[4] = {
 /* DATA_800E3B2C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E471C_unclaimed_E472C */
-unsigned int D_blob_79a104771bafb324f9bb[1] = {
+unsigned int g_overlayOneIPreviewAddressWordsBlock1[1] = {
     0x800D7338,
 };
 
 /* ROM-grounded data: src/ragewars_character_preview_keys_02_us_rev1.c */
-unsigned int D_blob_156bcb3ca20e2808d683[2] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock4[2] = {
     0x00000091, 0x00000002,
 };
 #endif
@@ -144,18 +144,18 @@ unsigned int D_blob_156bcb3ca20e2808d683[2] = {
 /* DATA_800E3B38.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E471C_unclaimed_E4738 */
-unsigned int D_blob_ca9097f48e3995b77a02[1] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock5[1] = {
     0x0000001D,
 };
 
-unsigned int D_auto_src_ragewars_character_preview_scale_distance_02_us_rev1[8] = {
+unsigned int g_overlayOneIPreviewFloatConstantWordsBlock2[8] = {
     0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x43200000, 0x43430000, 0x43200000, 0x43430000,
 };
 #endif
 
 /* DATA_800E3B5C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_character_preview_positions_02_us_rev1[12] = {
+unsigned int g_overlayOneIPreviewFloatConstantWordsBlock3[12] = {
     0x42200000, 0xC2540000, 0xC2C80000, 0xC2200000, 0xC2540000, 0xC2C80000, 0x42000000, 0xC2B60000,
     0xC2A00000, 0xC20C0000, 0xC2B60000, 0xC2A00000,
 };
@@ -163,7 +163,7 @@ unsigned int D_auto_src_ragewars_character_preview_positions_02_us_rev1[12] = {
 
 /* DATA_800E3B8C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_d0_36a1c50337b8b72b[4] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock6[4] = {
     0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
 };
 #endif
@@ -171,12 +171,12 @@ unsigned int D_d0_36a1c50337b8b72b[4] = {
 /* DATA_800E3B9C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E478C_unclaimed_E479C */
-unsigned int D_blob_39a5e44187a57453ef16[1] = {
+unsigned int g_overlayOneIPreviewAddressWordsBlock2[1] = {
     0x800D733C,
 };
 
 /* ROM-grounded data: src/ragewars_character_preview_keys_03_us_rev1.c */
-unsigned int D_blob_3c4d0a7a71f3659958ad[2] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock7[2] = {
     0x00000084, 0x00000003,
 };
 #endif
@@ -184,18 +184,18 @@ unsigned int D_blob_3c4d0a7a71f3659958ad[2] = {
 /* DATA_800E3BA8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E478C_unclaimed_E47A8 */
-unsigned int D_blob_9d95271d1acd88b9b538[1] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock8[1] = {
     0x0000001A,
 };
 
-unsigned int D_auto_src_ragewars_character_preview_scale_distance_03_us_rev1[8] = {
+unsigned int g_overlayOneIPreviewFloatConstantWordsBlock4[8] = {
     0x3D851EB8, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8, 0x43200000, 0x43480000, 0x43200000, 0x43480000,
 };
 #endif
 
 /* DATA_800E3BCC.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_character_preview_positions_03_us_rev1[12] = {
+unsigned int g_overlayOneIPreviewFloatConstantWordsBlock5[12] = {
     0x421C0000, 0xC20C0000, 0xC2C80000, 0xC21C0000, 0xC20C0000, 0xC2C80000, 0x42000000, 0xC2900000,
     0xC2A00000, 0xC2000000, 0xC2900000, 0xC2A00000,
 };
@@ -203,7 +203,7 @@ unsigned int D_auto_src_ragewars_character_preview_positions_03_us_rev1[12] = {
 
 /* DATA_800E3BFC.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_d1_0234d1e4d502f417[4] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock9[4] = {
     0x00000014, 0x00000014, 0x00000000, 0x00000000,
 };
 #endif
@@ -211,12 +211,12 @@ unsigned int D_d1_0234d1e4d502f417[4] = {
 /* DATA_800E3C0C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E47FC_unclaimed_E480C */
-unsigned int D_blob_d6086fafa4d94498f372[1] = {
+unsigned int g_overlayOneIPreviewAddressWordsBlock3[1] = {
     0x800D7340,
 };
 
 /* ROM-grounded data: src/ragewars_character_preview_keys_04_us_rev1.c */
-unsigned int D_blob_1d1c4cf73ee09cac922b[2] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock10[2] = {
     0x00000087, 0x00000004,
 };
 #endif
@@ -224,18 +224,18 @@ unsigned int D_blob_1d1c4cf73ee09cac922b[2] = {
 /* DATA_800E3C18.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E47FC_unclaimed_E4818 */
-unsigned int D_blob_d2854b17c777293302e2[1] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock11[1] = {
     0x00000014,
 };
 
-unsigned int D_auto_src_ragewars_character_preview_scale_distance_04_us_rev1[8] = {
+unsigned int g_overlayOneIPreviewFloatConstantWordsBlock6[8] = {
     0x3D6147AE, 0x3D6147AE, 0x3D6147AE, 0x3D6147AE, 0x431B0000, 0x43480000, 0x43200000, 0x43480000,
 };
 #endif
 
 /* DATA_800E3C3C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_character_preview_positions_04_us_rev1[12] = {
+unsigned int g_overlayOneIPreviewFloatConstantWordsBlock7[12] = {
     0x42200000, 0xC20C0000, 0xC2C80000, 0xC2200000, 0xC20C0000, 0xC2C80000, 0x41F00000, 0xC2900000,
     0xC2A00000, 0xC2040000, 0xC2900000, 0xC2A00000,
 };
@@ -244,7 +244,7 @@ unsigned int D_auto_src_ragewars_character_preview_positions_04_us_rev1[12] = {
 /* DATA_800E3C6C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_lights_04_us_rev1.c */
-unsigned int D_blob_8f63e37709e4abc5c578[4] = {
+unsigned int g_overlayOneIPreviewConstantWordsBlock12[4] = {
     0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
 };
 #endif

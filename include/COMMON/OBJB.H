@@ -32,25 +32,25 @@ struct CROMLevel_t {
     signed char m_Direction[3];
 };
 struct CROMLevel_t;
-struct SceneRecAt1B2B4;
+struct SceneLightLoadView;
 
-struct func_8044B27C_S1;
+struct MenuPlayerPoolView;
 
-struct func_8044CBE0_S1;
-typedef struct func_8044CBE0_S1 func_8044CBE0_S1;
+struct SceneResourceOwnerView;
+typedef struct SceneResourceOwnerView SceneResourceOwnerView;
 
-struct func_8044B27C_S1;
-typedef struct func_8044B27C_S1 func_8044B27C_S1;
+struct MenuPlayerPoolView;
+typedef struct MenuPlayerPoolView MenuPlayerPoolView;
 
 
 
 struct CActiveLink;
 typedef struct CActiveLink CActiveLink;
 
-struct SceneRecAt1B2B4;
-typedef struct SceneRecAt1B2B4 SceneRecAt1B2B4;
+struct SceneLightLoadView;
+typedef struct SceneLightLoadView SceneLightLoadView;
 
-struct Level_func_8044CD8C_de;
+struct SceneGridCellLoadView;
 
 struct CDLight_t;
 typedef struct CDLight_t CDLight;
@@ -92,7 +92,7 @@ typedef struct Face Face;
 
 
 
-struct func_8044CBE0_S1;
+struct SceneResourceOwnerView;
 
 struct ItemsPreviewStateB;
 
@@ -124,14 +124,14 @@ extern float g_lightDirectionLength;
 
 struct ObjA;
 
-struct Level_func_8044CD8C_de;
-typedef struct Level_func_8044CD8C_de Level_func_8044CD8C_de;
+struct SceneGridCellLoadView;
+typedef struct SceneGridCellLoadView SceneGridCellLoadView;
 
 
 
 struct Face;
-struct WorldRecAt1B40C;
-struct WorldRecAt1B40C {
+struct SceneVisibilityGeometryView;
+struct SceneVisibilityGeometryView {
     char pad0[0x80];
     void *tree;
     char pad84[0x11C0 - 0x84];
@@ -159,7 +159,7 @@ struct ItemsSelectionState;
 
 
 
-struct ObjRecAt8C8;
+struct MenuEntryPoolCountView;
 struct EntryCode8044ACCC {
     char pad0[0x228];
 };
@@ -170,8 +170,8 @@ struct EntryCode8044ACCC {
 struct ItemsPendingState;
 typedef struct ItemsPendingState ItemsPendingState;
 
-struct ObjRecAt8C8;
-typedef struct ObjRecAt8C8 ObjRecAt8C8;
+struct MenuEntryPoolCountView;
+typedef struct MenuEntryPoolCountView MenuEntryPoolCountView;
 
 
 struct Floats;
@@ -194,8 +194,8 @@ struct ItemsHandleOwner {
 };
 typedef struct ItemsHandleOwner ResourceHandleOwner;
 
-struct WorldRecAt1B40C;
-typedef struct WorldRecAt1B40C WorldRecAt1B40C;
+struct SceneVisibilityGeometryView;
+typedef struct SceneVisibilityGeometryView SceneVisibilityGeometryView;
 
 struct ObjB;
 struct ObjB {
@@ -208,22 +208,22 @@ struct ObjB {
 
 struct Shared_World;
 extern void **Cache_RequestWordCountedResource(s32,void **,s32,void *,s32);
-extern s32 D_0044D804;
-extern s32 D_0044D934;
+extern s32 g_sceneParticleEffectSectionTag;
+extern s32 g_sceneGeometrySectionTag;
 extern char g_cartridgeIndex;
-extern char D_800C4F60_de;
+extern char g_sceneDirectoryResourceTag;
 extern char g_textureSetsIndex;
 extern char g_objectTypesText;
 extern char g_objectsIndex;
-extern char D_800C4FA4_de;
+extern char g_sceneGeometryResourceTag;
 extern char g_particleEffects;
 extern char g_binariesIndexText;
 extern char g_particleSwooshes;
-extern char D_800C4FEC_de;
+extern char g_sceneSectionTwelveResourceTag;
 extern char g_warpDests;
 extern char g_curves;
 extern char g_rumbleLabels;
-extern char D_800C5018_de;
+extern char g_sceneSectionFifteenResourceTag;
 extern char g_graphicsetType;
 extern char g_graphicsetIndex;
 extern char g_cinemasIndexText;
@@ -254,5 +254,5 @@ extern void SetN64_TransposeRecords(void *src, void *dst, s32 copyBack);
 
 extern void *memcpy(void *, const void *, unsigned int);
 extern s32 g_spawnReferenceFloorPolygon;
-extern void Player_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index);
+extern void Player_InitActorParts(SharedPlayer *player, LevelPlacedActorRecord *rec, s32 mode, s32 index);
 #endif

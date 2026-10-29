@@ -5,8 +5,8 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/ROUND_STATE_VARIANTS.H"
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
 
@@ -20,7 +20,7 @@ void SetN64_HandleSessionTransitionInput(GameSession *session, s32 cancelTarget,
     s32 pending;
     s32 *flags;
 
-    flags = (s32 *)&D_8010B0E0.pressedButtons;
+    flags = (s32 *)&g_combinedControllerProfile.pressedButtons;
     pending = *flags & 0x1000;
     if ((unsigned)(session->mode - 0xB) < 2) {
         pending = 0;
@@ -52,7 +52,7 @@ void SetN64_HandleSessionTransitionInput(GameSession *session, s32 cancelTarget,
 
 extern void SmXlate_SwitchScreen(s32 index);
 extern void SetN64_BeginModeTransition(GameSession *session, s32 targetMode);
-extern void Gsky_DrawPlayerListNoOp(void *arg0);
+extern void Gsky_DrawPlayerListNoOp(void *unusedSession);
 extern void SetN64_DrawSessionFade(struct GameSession *session);
 
 
@@ -64,12 +64,12 @@ void SetN64_DrawSessionWithAttractTimeout(void *session) {
     f32 value;
 
     state = session;
-    if (D_8014288C == 1) {
+    if (g_attractTimeoutEnabled == 1) {
         value = state->transitionTime;
-        if (D_800C54A4_de < value) {
-            if (D_800C54A8_de < value) {
-                D_8014288C = 0;
-                
+        if (g_attractTimeoutBegin < value) {
+            if (g_attractTimeoutFinish < value) {
+                g_attractTimeoutEnabled = 0;
+
 #if defined(VERSION_EU)
 Tsmos_InitializeEuropeanFrontend
 #else
@@ -80,9 +80,9 @@ InitFrontendMenus
                 Frontend_RequestScreenMode(0);
                 SetN64_BeginModeTransition(state, 1);
                 state->transitionTime = 0;
-            } else if (D_8010B0E0.buttons != 0) {
-                D_8014288C = 0;
-                
+            } else if (g_combinedControllerProfile.buttons != 0) {
+                g_attractTimeoutEnabled = 0;
+
 #if defined(VERSION_EU)
 Tsmos_InitializeEuropeanFrontend
 #else
@@ -121,19 +121,19 @@ void SetN64_AdvanceGameClock(GameSession *world) {
     f32 t3;
 
     if (world->clockPaused == 0) {
-        t1 = D_801462C8.counters.m_GameTimeFifteenth + D_800D2988;
-        D_801462C8.counters.m_GameTimeFifteenth = t1;
-        if (D_800C54AC_de <= t1) {
-            t2 = D_801462C8.counters.m_GameTimeSeconds + D_800C54B0_de;
-            D_801462C8.counters.m_GameTimeFifteenth = t1 - D_800C54AC_de;
-            D_801462C8.counters.m_GameTimeSeconds = t2;
-            if (D_800C54B4_de <= t2) {
-                t3 = D_801462C8.counters.m_GameTimeMinutes + D_800C54B0_de;
-                D_801462C8.counters.m_GameTimeSeconds = t2 - D_800C54B4_de;
-                D_801462C8.counters.m_GameTimeMinutes = t3;
-                if (D_800C54B4_de <= t3) {
-                    D_801462C8.counters.m_GameTimeMinutes = t3 - D_800C54B4_de;
-                    D_801462C8.counters.m_GameTimeHours = D_801462C8.counters.m_GameTimeHours + D_800C54B0_de;
+        t1 = g_gameSettings.counters.m_GameTimeFifteenth + g_frameElapsedTime;
+        g_gameSettings.counters.m_GameTimeFifteenth = t1;
+        if (g_gameClockTicksPerSecond <= t1) {
+            t2 = g_gameSettings.counters.m_GameTimeSeconds + g_gameClockUnitIncrement;
+            g_gameSettings.counters.m_GameTimeFifteenth = t1 - g_gameClockTicksPerSecond;
+            g_gameSettings.counters.m_GameTimeSeconds = t2;
+            if (g_gameClockSecondsPerMinute <= t2) {
+                t3 = g_gameSettings.counters.m_GameTimeMinutes + g_gameClockUnitIncrement;
+                g_gameSettings.counters.m_GameTimeSeconds = t2 - g_gameClockSecondsPerMinute;
+                g_gameSettings.counters.m_GameTimeMinutes = t3;
+                if (g_gameClockSecondsPerMinute <= t3) {
+                    g_gameSettings.counters.m_GameTimeMinutes = t3 - g_gameClockSecondsPerMinute;
+                    g_gameSettings.counters.m_GameTimeHours = g_gameSettings.counters.m_GameTimeHours + g_gameClockUnitIncrement;
                 }
             }
         }
@@ -141,26 +141,26 @@ void SetN64_AdvanceGameClock(GameSession *world) {
 }
 
 #include "COMMON/SESSIONHANDLERROW.H"
-extern f32 D_800C54B8_de, D_800C54BC_de;
+extern f32 g_roundTimeoutBegin, g_roundTimeoutFinish;
 extern void Gsky_DrawPlayerListNoOp(void *);
 extern void SmXlate_SwitchScreen(s32);
 extern void SetN64_BeginModeTransition(GameSession *, s32);
 extern void SetN64_DrawSessionFade(GameSession *);
 
 void SetN64_DrawSessionWithRoundTimeout(GameSession *session) {
-    CGameStatus *counters = &D_801462C8.counters;
+    CGameStatus *counters = &g_gameSettings.counters;
     f32 time;
     if (counters->transitionActive == 1) {
         time = session->transitionTime;
-        if (D_800C54B8_de < time) {
-            if (D_800C54BC_de < time) {
+        if (g_roundTimeoutBegin < time) {
+            if (g_roundTimeoutFinish < time) {
                 counters->transitionActive = 0;
                 stopRoundPlatform();
                 SmXlate_SwitchScreen(2);
                 Frontend_RequestScreenMode(0);
                 SetN64_BeginModeTransition(session, 1);
                 session->transitionTime = 0;
-            } else if (D_8010B0E0.buttons != 0) {
+            } else if (g_combinedControllerProfile.buttons != 0) {
                 counters->transitionActive = 0;
                 stopRoundPlatform();
                 SmXlate_SwitchScreen(2);

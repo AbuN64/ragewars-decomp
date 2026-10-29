@@ -6,5 +6,5 @@
 #include "COMMON/LISTNODE.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/VECTOR4F.H"
-extern void func_802AFE80_de(s32);
+extern void Audio_PostPlayerStopEvent(s32);
 #endif

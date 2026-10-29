@@ -6,15 +6,15 @@
 
 
 
-extern float D_800C3C98_de;
+extern float g_actorBoneAimSourceY;
 
-extern float D_800C3CA0_de;
-
-
+extern float g_actorBoneAimAngleScale;
 
 
 
-extern float D_800C8CA0;
+
+
+extern float g_actorAffineMatrixHomogeneousUnit;
 
 
 struct Probe;
@@ -29,7 +29,7 @@ struct SoundRequest {
     s32 flags;
 };
 
-extern float D_800C3C9C_de;
+extern float g_actorBoneAimUpY;
 
 
 
@@ -37,11 +37,11 @@ extern float D_800C3C9C_de;
 
 
 
-struct InputRecAt44;
-typedef struct InputRecAt44 InputRecAt44;
+struct ActorDirectionTiltInput;
+typedef struct ActorDirectionTiltInput ActorDirectionTiltInput;
 
-struct InputRecAt44;
-struct InputRecAt44 {
+struct ActorDirectionTiltInput;
+struct ActorDirectionTiltInput {
     u8 state;
     u8 pad[0x43];
     CVector3 direction;
@@ -106,7 +106,7 @@ typedef struct {
     u8 kind;
     u8 pad1[7];
     CVector3 position;
-    u32 unknown14;
+    u32 reservedWord;
     Resource_u1 *resource;
     u8 pad1C[0x50];
     f32 yaw;
@@ -117,6 +117,6 @@ typedef struct {
     u8 pad178[0x1D8 - 0x178];
     State_u1 *state;
 } Actor_u1;
-extern f32 D_800C3C7C_de;
-extern f32 D_800C3C80_de;
+extern f32 g_activePlayerActorRadius;
+extern f32 g_collisionShapeRadiusScale;
 #endif

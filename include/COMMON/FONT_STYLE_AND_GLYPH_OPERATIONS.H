@@ -8,17 +8,17 @@ extern void OnScreen_LoadTextTileModeOne(void);
 struct Table802AB8DC;
 typedef struct Table802AB8DC Table802AB8DC;
 
-struct ObjectLinksC_2;
+struct OverlayScriptTableView;
 
 
-extern s32 D_80147150;
+extern s32 g_creditsTextDrawingEnabled;
 
 
 
 extern f32 OnScreen_GetGlyphWidth(void);
 
 
-struct IntegerState48;
+struct OverlayScriptPrimaryRangeView;
 
 
 struct FontStyle;
@@ -28,22 +28,22 @@ typedef struct FontStyle FontStyle;
 extern void OnScreen_LoadTextTileModeTwo(void);
 
 
-struct IntegerState90;
+struct OverlayScriptSecondaryRangeView;
 
 
-extern float D_800C61B8_de;
+extern float g_maskedImageTextureCoordinateScale;
 
 struct COverlay;
 typedef struct COverlay COverlay;
 
 struct COverlay;
 
-extern float D_800C61F0_de;
+extern float g_hudStatusBarTextScale;
 
 
 
 
-extern float D_800C5FB0_de;
+extern float g_onscreenDefaultTextScale;
 
 struct FontStyle;
 struct FontStyle {
@@ -62,22 +62,22 @@ struct FontStyle {
 
 
 
-struct IntegerState90;
-typedef struct IntegerState90 IntegerState90;
+struct OverlayScriptSecondaryRangeView;
+typedef struct OverlayScriptSecondaryRangeView OverlayScriptSecondaryRangeView;
 
 
 struct Table802AB8DC;
 
-struct ObjectLinksC_2;
-typedef struct ObjectLinksC_2 ObjectLinksC_2;
+struct OverlayScriptTableView;
+typedef struct OverlayScriptTableView OverlayScriptTableView;
 
 
-extern FontStyle D_801376F8;
+extern FontStyle g_tutorialStatusBars;
 
 
-struct IntegerState48;
-typedef struct IntegerState48 IntegerState48;
+struct OverlayScriptPrimaryRangeView;
+typedef struct OverlayScriptPrimaryRangeView OverlayScriptPrimaryRangeView;
 
-extern u8 D_801377C0[];
-extern u8 D_801378C0[];
+extern u8 g_fontGlyphLookup[];
+extern u8 g_fontAlternateGlyphLookup[];
 #endif

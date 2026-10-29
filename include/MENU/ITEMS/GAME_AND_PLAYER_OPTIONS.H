@@ -1,7 +1,7 @@
 #ifndef MENU_ITEMS_GAME_AND_PLAYER_OPTIONS_H
 #define MENU_ITEMS_GAME_AND_PLAYER_OPTIONS_H
 #include "MENU/HOLDERRECAT1CV2.H"
-/* The SN debug records name the options record D_801462C8 COptions_t and its 0x96-byte player
+/* The SN debug records name the options record g_gameSettings COptions_t and its 0x96-byte player
    records CPlayerOptions_t; these are views of them with the debug member names and types. */
 typedef struct CPlayerOptions {
     s16 totalSuicide;

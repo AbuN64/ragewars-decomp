@@ -6,19 +6,19 @@ typedef struct CShakeAxis_t CShakeAxis;
 
 
 
-extern float D_800C3080_de;
+extern float g_weaponShakeInitialAngle;
 
-extern float D_800C3084_de;
+extern float g_weaponShakeAngleRate;
 
-extern float D_800C3060_de;
+extern float g_weaponActionFiveNegativeFeedbackLimit;
 
-extern float D_800C3078_de;
+extern float g_weaponReleaseSpinTarget;
 
 
-extern float D_800C3050_de;
+extern float g_weaponStateEightDelay;
 
-struct ObjectLinks11DC;
-typedef struct ObjectLinks11DC ObjectLinks11DC;
+struct WeaponSpecialFirePlayerView;
+typedef struct WeaponSpecialFirePlayerView WeaponSpecialFirePlayerView;
 
 struct CShakeAxis_t;
 struct CShakeAxis_t {
@@ -29,28 +29,28 @@ struct CShakeAxis_t {
     f32 m_Angle;
 };
 
-extern float D_800C3074_de;
+extern float g_weaponActionFiveClampedFeedback;
 
 
-extern float D_800C3054_de;
+extern float g_weaponAlternateFireAnimationThreshold;
 
 
-extern float D_800C3088_de;
+extern float g_weaponShakeActiveDecay;
 
-extern float D_800C3064_de;
-
-
-extern float D_800C3058_de;
-
-extern float D_800C3070_de;
-
-extern float D_800C308C_de;
+extern float g_weaponActionFivePositiveFeedbackScale;
 
 
-extern float D_800C305C_de;
+extern float g_weaponActionFiveSpinTargetScale;
 
-struct ObjectLinks11DC;
-struct ObjectLinks11DC {
+extern float g_weaponActionFivePositiveOutputScale;
+
+extern float g_weaponShakeIdleDecay;
+
+
+extern float g_weaponActionFiveNegativeFeedbackScale;
+
+struct WeaponSpecialFirePlayerView;
+struct WeaponSpecialFirePlayerView {
     char pad0[0x5D8];
     char * unk_5D8;
     char pad5D8[0x62E - 0x5D8 - sizeof(char*)];

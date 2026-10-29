@@ -1,6 +1,6 @@
 #ifndef RESMGR_RESMGR_STREAM_IO_H
 #define RESMGR_RESMGR_STREAM_IO_H
-#include "COMMON/INTEGERSTATE14_2.H"
+#include "COMMON/MEMORY_STREAM_BUFFER.H"
 
 /* An open callback consumes the name and mode byte strings and returns a stream handle. */
 typedef s32 (*ResourceOpenCallback)(const void *name, const void *mode);

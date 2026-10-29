@@ -4,15 +4,15 @@
 #if defined(VERSION_DE)
 /* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 /* Runs a computer player's chase step toward the object at 0x68: without a target id at 0xBC it
-   switches to mode 2 and without an object it only updates; farther than D_800C2380_eu from its goal
+   switches to mode 2 and without an object it only updates; farther than g_objectChaseRouteDistanceLimit from its goal
    node it heads there through Nav_SteerAlongRoute, otherwise it takes mode 8 once arrived or copies the
-   object's position to 0x2C; then, within D_800C2384_eu of the object and not yet arrived, it marks
+   object's position to 0x2C; then, within g_objectChaseArrivalDistance of the object and not yet arrived, it marks
    arrival at 0x238 and plans a new route through Portal_CollectDirectedNeighbors to pick the next goal node. */
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
-extern RouteChaseGraph D_8013B364;
-extern f32 rodata_func_80212FBC_de_800C20E0[2];
+extern RouteChaseGraph g_navigationGraph;
+extern f32 g_Nav_ResetPatrolRouteSelectionConstantWords[2];
 
 extern void Scaled_SetBehaviourState(RouteChaseBot *bot, s32 mode);
 extern void Nav_RunBehaviorHandler(RouteChaseBot *bot);
@@ -27,7 +27,7 @@ void Nav_UpdateObjectArrivalChase(RouteChaseActor *actor)
 {
     s32 path[64];
     RouteChaseBot *bot = actor->player->bot;
-    RouteChaseGraph *graph = &D_8013B364;
+    RouteChaseGraph *graph = &g_navigationGraph;
     f32 dist;
     s32 i;
     s32 len;
@@ -43,7 +43,7 @@ void Nav_UpdateObjectArrivalChase(RouteChaseActor *actor)
         return;
     }
     dist = Scaled_DistanceToNode(bot, bot->goal);
-    if (bot->node != bot->goal && rodata_func_80212FBC_de_800C20E0[0] < dist) {
+    if (bot->node != bot->goal && g_Nav_ResetPatrolRouteSelectionConstantWords[0] < dist) {
         Nav_SteerAlongRoute(bot);
     } else if (bot->arrived != 0) {
         Scaled_SetBehaviourState(bot, 8);
@@ -53,7 +53,7 @@ void Nav_UpdateObjectArrivalChase(RouteChaseActor *actor)
     Nav_RunBehaviorHandler(bot);
     if (bot->target != 0) {
         Nav_UpdateTargetSteering(bot);
-        if (Graphu64_GetPointDistance(&bot->self->pos, &bot->target->pos) < rodata_func_80212FBC_de_800C20E0[1] && bot->arrived == 0) {
+        if (Graphu64_GetPointDistance(&bot->self->pos, &bot->target->pos) < g_Nav_ResetPatrolRouteSelectionConstantWords[1] && bot->arrived == 0) {
             bot->arrived = 1;
             none = -1;
             for (i = 63; i >= 0; i--) {

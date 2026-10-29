@@ -1,9 +1,9 @@
 #include "MENU/BUILD/DEFINITION_DATA.H"
 
 #if defined(VERSION_US_REV1)
-extern char rw_menu_paged_func_80407748_de[];
-extern char rw_menu_paged_func_80407F6C_de[];
-extern char rw_menu_paged_func_80442064_de[];
+extern char g_menuPaged_Snapshot_SelectNote[];
+extern char g_menuPaged_Snapshot_UpdateNoteLabel[];
+extern char g_menuPaged_Menu_DrawMenuItemLabel[];
 
 struct {
     unsigned int parameter1;
@@ -32,8 +32,8 @@ struct {
     0xFF,
     0x01,
     0x800D7734,
-    (unsigned int)rw_menu_paged_func_80442064_de,
-    (unsigned int)rw_menu_paged_func_80407F6C_de,
-    (unsigned int)rw_menu_paged_func_80407748_de,
+    (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel,
+    (unsigned int)g_menuPaged_Snapshot_UpdateNoteLabel,
+    (unsigned int)g_menuPaged_Snapshot_SelectNote,
 };
 #endif

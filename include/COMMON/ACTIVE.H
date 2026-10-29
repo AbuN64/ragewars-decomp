@@ -6,8 +6,8 @@ typedef struct Active Active;
 
 
 
-struct RecordRecAt189;
-struct RecordRecAt189 {
+struct PlayerNameProfileRecord;
+struct PlayerNameProfileRecord {
     char name[0x189];
     u8 profile[5];
     char pad18E[2];
@@ -35,8 +35,8 @@ extern void Random_StartIndividualMatch(void);
 
 
 
-struct StatusRecAt95;
-struct StatusRecAt95 {
+struct MatchPlayerStatus;
+struct MatchPlayerStatus {
     char pad0[0x78];
     u8 joined;
     u8 unk79;

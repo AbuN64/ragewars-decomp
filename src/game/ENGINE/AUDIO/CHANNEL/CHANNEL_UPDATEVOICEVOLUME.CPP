@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJRECAT4V6.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "AUDIO/VOICE_AND_SPATIAL_SOURCE_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
@@ -30,29 +30,29 @@ typedef struct AudioVolumeControl {
 } AudioVolumeControl;
 
 typedef struct AudioVolumeVoice {
-    s32 unk0, sound, unk8, unkC;
+    s32 slotIndex, sound, primaryKey, secondaryKey;
     AudioVolumeMix mix;
     AudioVolumeControl control;
     f32 envelopeValue, envelopeStep;
     u8 reserved88[0x18];
-    s32 pending, flags, soundId, fieldAC;
-    ContextRecAt2BC0 *context;
+    s32 pending, flags, soundId, releasePending;
+    GameAudioContext *context;
     s32 fieldB4;
-    f32 fieldB8;
-    s32 fieldBC, fieldC0, fieldC4;
+    f32 reservedFloat;
+    s32 fieldBC, fixedPosition, musicGainScalingEnabled;
     f32 volumeScale;
 } AudioVolumeVoice;
 
 /* Converts the attenuated level to a volume and applies it, scaled, to the voice sound. */
 static inline void apply_volume(AudioVolumeVoice *voice, f32 level) {
-    ContextRecAt2BC0 *outputContext;
+    GameAudioContext *outputContext;
     ALSndPlayer *outputSound;
     s32 volume;
 
     outputContext = voice->context;
     outputSound = outputContext->list;
     volume = (s32)level;
-    alSndpSetSound(outputSound, outputContext->handles[voice->unk0]);
+    alSndpSetSound(outputSound, outputContext->handles[voice->slotIndex]);
     alSndpSetVol(outputSound, (s16)(s32)((f32)volume * voice->volumeScale));
 }
 
@@ -60,7 +60,7 @@ static inline void apply_volume(AudioVolumeVoice *voice, f32 level) {
 void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
     AudioVolumeMix *mix;
     u16 *envelope;
-    ContextRecAt2BC0 *context;
+    GameAudioContext *context;
     GameplayCamera *listener;
     CVector3 *position;
     CVector3 *ear;
@@ -70,19 +70,19 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
     s32 increasing;
     s32 value;
 
-    listener = voice->context->field2B98;
+    listener = voice->context->listenerCamera;
     radius = listener->farPlane;
     squared = radius < 3072.0f ? 3072.0f : radius;
     squared *= radius < 3072.0f ? 3072.0f : radius;
-    D_800D0D10 = squared;
+    g_spatialSoundRangeSquared = squared;
     switch (voice->mix.curve) {
     case 0:
         break;
     case 2:
-        D_800D0D10 = squared + squared * 0.5f;
+        g_spatialSoundRangeSquared = squared + squared * 0.5f;
         break;
     case 1:
-        D_800D0D10 = squared + squared * 0.25f;
+        g_spatialSoundRangeSquared = squared + squared * 0.25f;
         break;
     }
     mix = &voice->mix;
@@ -92,22 +92,22 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
         masterGain = context->blue;
     } else {
         masterGain = context->red;
-        if (voice->fieldC4 && context->field2BB8) {
+        if (voice->musicGainScalingEnabled && context->dialogEnabled) {
             masterGain *= 0.5f;
         }
     }
-    if ((voice->flags & 0x400) && voice->fieldC0 == 0 && !(voice->flags & 0x800)) {
-        listener = voice->context->field2B98;
+    if ((voice->flags & 0x400) && voice->fixedPosition == 0 && !(voice->flags & 0x800)) {
+        listener = voice->context->listenerCamera;
         position = &mix->position;
         ear = &listener->position;
         dx = position->x - ear->x;
         dy = position->y - ear->y;
         dz = position->z - ear->z;
         distance = dx * dx + dy * dy + dz * dz;
-        if (D_800D0D10 <= distance) {
+        if (g_spatialSoundRangeSquared <= distance) {
             falloff = 0.0f;
         } else {
-            falloff = 1.0f - distance / D_800D0D10;
+            falloff = 1.0f - distance / g_spatialSoundRangeSquared;
         }
         switch (mix->curve) {
         case 2:
@@ -152,14 +152,14 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
                     voice->envelopeValue = Menu_ExpandFloatHighWord(envelope[2]);
                     if (voice->envelopeValue == 0.0f) {
                         ALSndPlayer *stoppedSound;
-                        ContextRecAt2BC0 *stopContext;
+                        GameAudioContext *stopContext;
 
                         stopContext = voice->context;
-                        voice->fieldAC = 1;
+                        voice->releasePending = 1;
                         voice->mix.tracked = 0;
                         stoppedSound = stopContext->list;
                         if (voice->mix.frame != stopContext->frame) {
-                            alSndpSetSound(stoppedSound, stopContext->handles[voice->unk0]);
+                            alSndpSetSound(stoppedSound, stopContext->handles[voice->slotIndex]);
                             if (alSndpGetState(stoppedSound)) {
                                 alSndpStop(stoppedSound);
                             }
@@ -201,7 +201,7 @@ static inline void apply_pan(VoiceChannelUpdateVoicePan *voice, u8 pan) {
 
 void Channel_UpdateVoicePan(VoiceChannelUpdateVoicePan *voice) {
     s32 rising;
-    ParamsRecAt18 *params;
+    VoiceVolumeParameters *params;
 
     params = &voice->params;
     if (Audio_GetSpatialPanMode(voice->owner) == 0) {
@@ -242,8 +242,8 @@ clamp_done:
 
 /* Fades emitter 0x8AC with the listener's distance: optionally resets its level, stores the squared
  * distance to the listener, lowers the level by a step while the distance grows and raises it while it
- * shrinks (clamped to the D_800C9048 range, remembering the distance), and otherwise eases the level one
- * step toward the rest level D_800C9044. */
+ * shrinks (clamped to the g_distancePitchFactorBounds range, remembering the distance), and otherwise eases the level one
+ * step toward the rest level g_distancePitchRestFactor. */
 void Channel_UpdateDistancePitchFactor(Emitter *emitter) {
     char *listener;
     f32 dx;
@@ -257,7 +257,7 @@ void Channel_UpdateDistancePitchFactor(Emitter *emitter) {
         return;
     }
     if (emitter->reset != 0) {
-        emitter->level = D_800C3F50_de;
+        emitter->level = g_distancePitchInitialFactor;
     }
     listener = ((OwnerCode8025A3EC *)emitter->scene)->listener;
     dx = emitter->x - ((GameplayCamera *)listener)->position.x;
@@ -266,31 +266,31 @@ void Channel_UpdateDistancePitchFactor(Emitter *emitter) {
     distance = dx * dx + dy * dy + dz * dz;
     emitter->distance = distance;
     if (emitter->lastDistance < distance) {
-        emitter->level -= D_800CB8E8;
+        emitter->level -= g_voicePitchTableBase;
     } else if (distance < emitter->lastDistance) {
-        emitter->level += D_800CB8E8;
+        emitter->level += g_voicePitchTableBase;
     } else {
         current = emitter->level;
-        if (D_800C9044 < current) {
-            level = current - D_800CB8E8;
-            if (level < D_800C9044) {
-                level = D_800C9044;
+        if (g_distancePitchRestFactor < current) {
+            level = current - g_voicePitchTableBase;
+            if (level < g_distancePitchRestFactor) {
+                level = g_distancePitchRestFactor;
             }
             emitter->level = level;
-        } else if (current < D_800C9044) {
-            level = current + D_800CB8E8;
-            if (D_800C9044 < level) {
-                level = D_800C9044;
+        } else if (current < g_distancePitchRestFactor) {
+            level = current + g_voicePitchTableBase;
+            if (g_distancePitchRestFactor < level) {
+                level = g_distancePitchRestFactor;
             }
             emitter->level = level;
         }
         return;
     }
     level = emitter->level;
-    if (D_800C9048 < level) {
-        emitter->level = D_800C9048;
-    } else if (level < (&D_800C9048)[1]) {
-        emitter->level = (&D_800C9048)[1];
+    if (g_distancePitchFactorBounds < level) {
+        emitter->level = g_distancePitchFactorBounds;
+    } else if (level < (&g_distancePitchFactorBounds)[1]) {
+        emitter->level = (&g_distancePitchFactorBounds)[1];
     }
     emitter->lastDistance = emitter->distance;
 }

@@ -4,7 +4,7 @@
 #include "MENU/PAK_PREVIEW_VIEWS.H"
 extern void Timer_EnableProfilePreview(void);
 extern void Timer_ClearProfilePreview(void);
-extern void Timer_DisablePreviewSelection(struct RecordRecAtCV1 *record);
-extern s32 Timer_OpenSelectedPrompt(void *unused, struct RecordRecAt24 *record);
+extern void Timer_DisablePreviewSelection(struct PakPreviewSelectionView *record);
+extern s32 Timer_OpenSelectedPrompt(void *unused, struct PakSelectedPromptView *record);
 extern s32 Menu_CountLineChars(struct Field *);
 #endif

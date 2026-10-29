@@ -4,7 +4,7 @@
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/ACTORRECAT260.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/MENURECAT20V1.H"
@@ -12,15 +12,15 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "SYSTEM/DEFS.H"
-extern Shared_MenuData D_80145040;
+extern Shared_MenuData g_playerViewRenderContext;
 extern s16 g_playerResultScoreFields[];
 
 s32 Player_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder) {
-    Shared_MenuData *players = &D_80145040;
+    Shared_MenuData *players = &g_playerViewRenderContext;
     s32 player = Player_GetPlayerIndex(players, holder->locked);
     s32 value = g_playerResultScoreFields[player * 75];
     char *text = (char *)field->text[players->game.language];
-    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_playerMenuValueFormat, value);
     return 0;
 }
 #endif
@@ -35,9 +35,9 @@ s32 Player_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder)
    format D_800DE700 four bytes before the length Menu_CountLineChars reports. Returns zero. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern struct LocalizedInputState D_80145040;
+extern struct LocalizedInputState g_playerViewRenderContext;
 #else
-extern char D_80145040[];
+extern char g_playerViewRenderContext[];
 #endif
 
 extern char g_fmtDec4Pad[];
@@ -48,13 +48,13 @@ extern s32 Menu_CountLineChars(LayeredText *);
 s32 Player_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    struct LocalizedInputState *players = &D_80145040;
+    struct LocalizedInputState *players = &g_playerViewRenderContext;
     s32 player = Player_GetPlayerIndex(players, holder->locked);
 #else
-    s32 player = Player_GetPlayerIndex(D_80145040, holder->locked);
+    s32 player = Player_GetPlayerIndex(g_playerViewRenderContext, holder->locked);
 #endif
 
-    s32 value = D_801462C8.playerSettings[player].resultScore;
+    s32 value = g_gameSettings.playerSettings[player].resultScore;
     char *text =
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -64,7 +64,7 @@ s32 Player_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder)
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_playerMenuValueFormat, value);
 #else
     Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_fmtDec4Pad, value);
 #endif

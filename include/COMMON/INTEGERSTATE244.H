@@ -6,64 +6,64 @@ struct SharedPlayer;
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
-#include "COMMON/EXTERNS_15.H"
-struct IntegerState244;
-typedef struct IntegerState244 IntegerState244;
+#include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
+struct PlayerSequenceRunEndStateView;
+typedef struct PlayerSequenceRunEndStateView PlayerSequenceRunEndStateView;
 
 
 
 extern void func_8022D420_de(void);
 
-extern void func_8022D4AC_de(struct SharedPlayer *player);
+extern void Playerai_SetRunEndFlag(struct SharedPlayer *player);
 
-struct ObjectLinks1458_2;
-typedef struct ObjectLinks1458_2 ObjectLinks1458_2;
+struct PlayerSequenceRunEndActorView;
+typedef struct PlayerSequenceRunEndActorView PlayerSequenceRunEndActorView;
 
 extern void Player_AimPreviousPositionAtReset(void *aimPlayerState);
 
 extern void func_8022D254_de(void);
 
 
-extern float D_800C2D90_de;
+extern float g_playerLateralLeapVerticalSpeed;
 
 
 
 
 
-extern float D_800C2DBC_de;
+extern float g_playerRunEndTransitionDelay;
 
 
 extern void func_8022D49C_de(void);
 
-extern float D_800C2DB8_de;
+extern float g_playerShortSequenceWaitLimit;
 
-extern float D_800C7E9C;
-
-
-
-
-
-
-extern float D_800C7E90;
-
-extern float D_800C2D88_de;
-
-extern float D_800C7E94;
-
-extern float D_800C2D8C_de;
+extern float g_playerFloatPoseMinimumDuration;
 
 
 
 
 
-struct IntegerState244;
-struct IntegerState244 {
+
+extern float g_playerMotionDamping;
+
+extern float g_playerLateralLeapInitialVerticalSpeed;
+
+extern float g_playerFloatForwardAnimationThreshold;
+
+extern float g_playerLateralLeapDuration;
+
+
+
+
+
+struct PlayerSequenceRunEndStateView;
+struct PlayerSequenceRunEndStateView {
     unsigned char padding_0[572];
     s32 unk_23C;
     s32 unk_240;
 };
 
-extern float D_800C2D80_de;
+extern float g_playerLateralLeapNegativeInputSpeed;
 
 extern void Player_ClearGlobalFlagBit(void);
 
@@ -76,7 +76,7 @@ extern void func_8022D3F4_de(void);
 
 
 
-extern float D_800C2DC0_de;
+extern float g_playerRunEndModelScale;
 
 
 extern void func_8022D288_de(void);
@@ -88,10 +88,10 @@ extern void func_8022D4A4_de(void);
 extern void func_8022C8EC_de(void);
 
 
-extern float D_800C2D84_de;
+extern float g_playerLateralLeapPositiveInputSpeed;
 
-struct FloatState6C8;
-typedef struct FloatState6C8 FloatState6C8;
+struct PlayerStrafeVelocityView;
+typedef struct PlayerStrafeVelocityView PlayerStrafeVelocityView;
 
 
 extern void func_8022C8F4_de(void);
@@ -103,8 +103,8 @@ extern void Player_ResetStunFlags(void *actorState);
 
 extern void func_8022D1A0_de(void);
 
-struct ObjectLinks1458_2;
-struct ObjectLinks1458_2 {
+struct PlayerSequenceRunEndActorView;
+struct PlayerSequenceRunEndActorView {
     char pad0[0x50];
     f32 unk_50;
     char pad50[0x54 - 0x50 - sizeof(f32)];
@@ -126,11 +126,11 @@ struct ObjectLinks1458_2 {
 };
 
 
-extern float D_800C7E98;
+extern float g_playerFloatReverseAnimationThreshold;
 
 
-struct FloatState6C8;
-struct FloatState6C8 {
+struct PlayerStrafeVelocityView;
+struct PlayerStrafeVelocityView {
     unsigned char padding_0[1700];
     f32 unk_6A4;
     unsigned char padding_6A8[28];
@@ -145,7 +145,7 @@ struct FloatState6C8 {
 
 
 
-extern float D_800C2D60_de;
+extern float g_playerJumpInitialSpeedScale;
 
 extern void func_8022D198_de(void);
 
@@ -155,10 +155,10 @@ extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern void Player_UpdateLeapMotion(s32 player, s32 body);
 
 extern void Player_UpdateRunEndPlayer(void *);
-struct ObjectLinks854;
-extern void Playerai_TryStartPlayerSequence(struct ObjectLinks854 *a, void *b, int c);
+struct PlayerSequenceActorView;
+extern void Playerai_TryStartPlayerSequence(struct PlayerSequenceActorView *a, void *b, int c);
 
-s32 func_8021C45C_de(s32, void *, s32, s32);
+s32 Playerai_ApplyProjectileStatus(s32, void *, s32, s32);
 
 
 #endif

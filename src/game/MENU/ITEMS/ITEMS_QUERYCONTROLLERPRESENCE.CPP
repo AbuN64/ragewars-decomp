@@ -1,76 +1,76 @@
 #include "include_asm.h"
-#include "COMMON/ARG.H"
-#include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
+#include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 
 #if !(defined(VERSION_EU_X) || defined(VERSION_US_REV1))
 #ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/ARG.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "TYPES.H"
-#include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 void __osPfsRequestData(u8 cmd);
 
-s32 Items_QueryControllerPresence(OSMesgQueue *queue, s8 *arg1) {
-    EntryRecAt3 sp10;
+s32 Items_QueryControllerPresence(OSMesgQueue *queue, s8 *presentMask) {
+    ControllerInitStatusBytes sp10;
     void *sp20;
     u8 sp24;
-    EntryRecAt3 *var_v1;
-    EntryRecAt3 *var_v1_2;
-    s32 temp_s6;
-    s32 var_a0;
-    s32 var_a0_2;
-    s32 var_s0;
-    s8 var_s2;
+    ControllerInitStatusBytes *retryStatus;
+    ControllerInitStatusBytes *presenceStatus;
+    s32 dmaResult;
+    s32 retryChannel;
+    s32 presenceChannel;
+    s32 retriesRemaining;
+    s8 connectedMask;
 
-    var_s2 = 0;
-    var_s0 = 3;
+    connectedMask = 0;
+    retriesRemaining = 3;
     __osSiGetAccess();
     do {
         __osPfsRequestData(0U);
-        __osSiRawStartDma(1, (u8 *)&D_80154110);
+        __osSiRawStartDma(1, (u8 *)&g_controllerStatusPifBuffer);
         osRecvMesg(queue, &sp20, 1);
-        temp_s6 = __osSiRawStartDma(0, (u8 *)&D_80154110);
+        dmaResult = __osSiRawStartDma(0, (u8 *)&g_controllerStatusPifBuffer);
         osRecvMesg(queue, &sp20, 1);
         Items_DecodeControllerStatusReplies(&sp24, &sp10);
-        var_a0 = 0;
-        if (D_8014D46C[0] != 0) {
-            var_v1 = &sp10;
+        retryChannel = 0;
+        if (g_controllerChannelCount[0] != 0) {
+            retryStatus = &sp10;
 loop_3:
-            if (var_v1->team & 4) {
-                var_a0 += 1;
-                var_v1 += 4;
-                if (var_a0 < (s32) D_8014D46C[0]) {
+            if (retryStatus->team & 4) {
+                retryChannel += 1;
+                retryStatus += 4;
+                if (retryChannel < (s32) g_controllerChannelCount[0]) {
                     goto loop_3;
                 }
             } else {
-                var_s0 -= 1;
+                retriesRemaining -= 1;
             }
         }
-        if (var_a0 == D_8014D46C[0]) {
-            var_s0 = 0;
+        if (retryChannel == g_controllerChannelCount[0]) {
+            retriesRemaining = 0;
         }
-    } while (var_s0 > 0);
-    var_a0_2 = 0;
-    if (D_8014D46C[0] != 0) {
-        var_v1_2 = &sp10;
+    } while (retriesRemaining > 0);
+    presenceChannel = 0;
+    if (g_controllerChannelCount[0] != 0) {
+        presenceStatus = &sp10;
         do {
-            if ((var_v1_2->slot == 0) && (var_v1_2->team & 1)) {
-                var_s2 |= 1 << var_a0_2;
+            if ((presenceStatus->slot == 0) && (presenceStatus->team & 1)) {
+                connectedMask |= 1 << presenceChannel;
             }
-            var_a0_2 += 1;
-            var_v1_2 += 4;
-        } while (var_a0_2 < (s32) D_8014D46C[0]);
+            presenceChannel += 1;
+            presenceStatus += 4;
+        } while (presenceChannel < (s32) g_controllerChannelCount[0]);
     }
     __osSiRelAccess();
-    *arg1 = var_s2;
-    return temp_s6;
+    *presentMask = connectedMask;
+    return dmaResult;
 }
 #else
 INCLUDE_ASM("ovl_80400000", Items_QueryControllerPresence);
@@ -81,7 +81,7 @@ INCLUDE_ASM("ovl_80400000", Items_QueryControllerPresence);
 extern void __osPfsRequestData(u8);
 
 s32 Items_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
-    EntryRecAt3 data[4];
+    ControllerInitStatusBytes data[4];
     void *dummy;
     u8 bitpattern;
     s32 i;
@@ -92,20 +92,20 @@ s32 Items_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
     __osSiGetAccess();
     do {
         __osPfsRequestData(0);
-        __osSiRawStartDma(1, &D_80154110);
+        __osSiRawStartDma(1, &g_controllerStatusPifBuffer);
         osRecvMesg(queue, &dummy, 1);
-        ret = __osSiRawStartDma(0, &D_80154110);
+        ret = __osSiRawStartDma(0, &g_controllerStatusPifBuffer);
         osRecvMesg(queue, &dummy, 1);
         Items_DecodeControllerStatusReplies(&bitpattern, data);
-        for (i = 0; i < D_8014D46C[0]; i++) {
+        for (i = 0; i < g_controllerChannelCount[0]; i++) {
             if (!(data[i].team & 4)) {
                 retry--;
                 break;
             }
         }
-        if (i == D_8014D46C[0]) retry = 0;
+        if (i == g_controllerChannelCount[0]) retry = 0;
     } while (retry > 0);
-    count = D_8014D46C;
+    count = g_controllerChannelCount;
     for (i = 0; i < *count; i++) {
         if (data[i].slot == 0 && (data[i].team & 1)) patternmask |= 1 << i;
     }
@@ -115,7 +115,7 @@ s32 Items_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
 }
 #endif
 
-/* Sets the last controller command to the given byte, marks the pak PIF RAM block for execution and packs one request-status command per controller followed by the end marker (libultra __osPfsRequestData). Adapted from __osPackRequestData with the RAM clearing loop dropped, the command byte also stored to D_8014D4B0, and the pak PIF RAM block D_80154110 used in place of D_8014D470, with the pointer taken before the status word is written. */
+/* Sets the last controller command to the given byte, marks the pak PIF RAM block for execution and packs one request-status command per controller followed by the end marker (libultra __osPfsRequestData). Adapted from __osPackRequestData with the RAM clearing loop dropped, the command byte also stored to g_controllerLastCommand, and the pak PIF RAM block g_controllerStatusPifBuffer used in place of g_controllerQueryPifBuffer, with the pointer taken before the status word is written. */
 
 
 
@@ -124,7 +124,7 @@ s32 Items_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
 
 
 
-/* Decodes the controller status replies in D_80154110 for each of D_8014D46C channels, recording the error bits from each reply's receive size and, for a channel without error, its type and status, and stores the mask of answering channels through arg0. Adapted from __osContGetInitData. */
+/* Decodes the controller status replies in g_controllerStatusPifBuffer for each of g_controllerChannelCount channels, recording the error bits from each reply's receive size and, for a channel without error, its type and status, and stores the mask of answering channels through arg0. Adapted from __osContGetInitData. */
 
 
 
@@ -138,9 +138,9 @@ void __osPfsRequestData(u8 cmd) {
     s32 i;
     u8 *count;
 
-    D_8014D4B0 = cmd;
-    ptr = (u8 *)&D_80154110;
-    D_80154110.pifstatus = 1;
+    g_controllerLastCommand = cmd;
+    ptr = (u8 *)&g_controllerStatusPifBuffer;
+    g_controllerStatusPifBuffer.pifstatus = 1;
     requestformat.dummy = 0xFF;
     requestformat.txsize = 1;
     requestformat.rxsize = 3;
@@ -150,7 +150,7 @@ void __osPfsRequestData(u8 cmd) {
     requestformat.status = 0xFF;
     requestformat.dummy1 = 0xFF;
 
-    count = D_8014D46C;
+    count = g_controllerChannelCount;
     for (i = 0; i < *count; i++) {
         *(__OSContRequesFormat *)ptr = requestformat;
         ptr += sizeof(requestformat);
@@ -158,14 +158,14 @@ void __osPfsRequestData(u8 cmd) {
     *ptr = 0xFE;
 }
 
-void Items_DecodeControllerStatusReplies(u8 *valid, EntryRecAt3 *data) {
+void Items_DecodeControllerStatusReplies(u8 *valid, ControllerInitStatusBytes *data) {
     u8 *ptr;
     __OSContRequesFormat readformat;
     s32 i;
     u8 mask = 0;
 
-    ptr = (u8 *)&D_80154110;
-    for (i = 0; i < D_8014D46C[0]; i++, ptr += sizeof(readformat), data++) {
+    ptr = (u8 *)&g_controllerStatusPifBuffer;
+    for (i = 0; i < g_controllerChannelCount[0]; i++, ptr += sizeof(readformat), data++) {
         readformat = *(__OSContRequesFormat *)ptr;
         data->slot = (readformat.rxsize & 0xC0) >> 4;
         if (data->slot != 0) {

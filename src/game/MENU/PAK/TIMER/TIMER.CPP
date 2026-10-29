@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "RESMGR/resmgr_string_memory.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "TYPES.H"
 #include "COMMON/MENURECAT24.H"
@@ -14,15 +14,15 @@
 /* 80405DC0_15.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-extern char *D_800E25D4[];
-extern char *D_800E25C4[];
+extern char *g_pakLegacySnapshotGameNames[];
+extern char *g_pakCompanyCodes[];
 
 s32 Timer_MatchesGameIdentity(char *code, char *name) {
     Shared_Game *settings;
     if (XPlus_StringLength((u8 *)name) == 4 && XPlus_StringLength((u8 *)code) == 2) {
-        settings = &D_801462C8;
-        if (XPlus_CompareStrings(name, D_800E25D4[settings->language]) == 0 &&
-            XPlus_CompareStrings(code, D_800E25C4[settings->language]) == 0) {
+        settings = &g_gameSettings;
+        if (XPlus_CompareStrings(name, g_pakLegacySnapshotGameNames[settings->language]) == 0 &&
+            XPlus_CompareStrings(code, g_pakCompanyCodes[settings->language]) == 0) {
             return 1;
         }
     }
@@ -31,15 +31,15 @@ s32 Timer_MatchesGameIdentity(char *code, char *name) {
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-/* Reports whether the two-character code arg0 and the four-character name arg1 are the pair D_800D36DC and D_800D36E0, measuring them with XPlus_StringLength and comparing them with XPlus_CompareStrings; returns one on a match and zero otherwise. */
+/* Reports whether the two-character code arg0 and the four-character name arg1 are the pair g_pakCompanyCodeFixed and g_pakLegacySnapshotGameNameFixed, measuring them with XPlus_StringLength and comparing them with XPlus_CompareStrings; returns one on a match and zero otherwise. */
 
-extern char *D_800D36E0;
+extern char *g_pakLegacySnapshotGameNameFixed;
 
 extern s32 XPlus_StringLength(u8 *);
 
 s32 Timer_MatchesGameIdentity(char *code, char *name) {
     if (XPlus_StringLength((u8 *)name) == 4 && XPlus_StringLength((u8 *)code) == 2 &&
-        XPlus_CompareStrings(name, D_800D36E0) == 0 && XPlus_CompareStrings(code, D_800D36DC) == 0) {
+        XPlus_CompareStrings(name, g_pakLegacySnapshotGameNameFixed) == 0 && XPlus_CompareStrings(code, g_pakCompanyCodeFixed) == 0) {
         return 1;
     }
     return 0;
@@ -47,11 +47,11 @@ s32 Timer_MatchesGameIdentity(char *code, char *name) {
 #endif
 
 /* 80405DC0_16.CPP */
-extern void Cache_ReleaseResource(void *arg0, void *resource);
+extern void Cache_ReleaseResource(void *cache, void *resource);
 
 /* Returns the address of block n, n times 256; block zero is the area 0x610 bytes into the
-   buffer D_8011FECC points to. */
-extern char *D_8011FECC;
+   buffer g_worldSnapshotNoteBytes points to. */
+extern char *g_worldSnapshotNoteBytes;
 
 extern void Cache_DrainAndCompactResources(s32 a);
 
@@ -63,28 +63,28 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
  /* extern */
 
-extern s32 D_800E28BC;
+extern s32 g_controllerPakSnapshotPayload;
 
-/* Saves the settings the object at offset 0x5D8 of an owner holds into the block D_80153738: the
+/* Saves the settings the object at offset 0x5D8 of an owner holds into the block g_pakControllerRecord: the
    flag byte, the four halfwords, three cleared bytes after the flag and the eight bytes at 0x84. */
 
-extern struct Saved D_80153738;
+extern struct Saved g_pakControllerRecord;
 
 char *Timer_GetSaveBlockByteCount(s32 block) {
     if (block == 0) {
-        return D_8011FECC + 0x610;
+        return g_worldSnapshotNoteBytes + 0x610;
     }
     return (char *) (block << 8);
 }
 
 void Timer_SetSaveTrailerValue(s32 offset, s32 value) {
-    ((struct IntegerState610 *) (D_8011FECC + offset))->unk_60C = value;
+    ((struct PlayerPakTimerView *) (g_worldSnapshotNoteBytes + offset))->unk_60C = value;
 }
 
 /* Returns the last word of a self-sized block: the first word holds the block's byte length and
    the result is the word just before that many bytes from the start. */
 s32 Timer_GetSaveTrailerValue(s32 *block) {
-    return ((struct Shape_typemap_3 *) (block[0] + (s32) block))[-1].field_0;
+    return ((struct AnimationEventMaskView *) (block[0] + (s32) block))[-1].value;
 }
 
 void Timer_AllocateSaveBlock(void ***handle, void **data, s32 units) {
@@ -98,7 +98,7 @@ void Timer_AllocateSaveBlock(void ***handle, void **data, s32 units) {
     if (units != 0) {
         units <<= 8;
     } else {
-        units = (s32)(D_8011FECC + 0x610);
+        units = (s32)(g_worldSnapshotNoteBytes + 0x610);
     }
     block = Cache_AllocateResource(0, units, 0x33, g_pakSingleSaveBlockName);
     *handle = block;
@@ -108,34 +108,34 @@ void Timer_AllocateSaveBlock(void ***handle, void **data, s32 units) {
 }
 
 void Timer_ReleaseSaveBlocks(void) {
-    if ((D_800DE860_de != 0) || (D_800DE864_de != 0)) {
+    if ((g_pakSnapshotResourceHandle != 0) || (g_pakLoadedNoteResourceHandle != 0)) {
         Cache_DrainAndCompactResources(0);
     }
-    if (D_800DE860_de != 0) {
-        Cache_ReleaseResource(0, D_800DE860_de);
+    if (g_pakSnapshotResourceHandle != 0) {
+        Cache_ReleaseResource(0, g_pakSnapshotResourceHandle);
     }
-    if (D_800DE864_de != 0) {
-        Cache_ReleaseResource(0, D_800DE864_de);
+    if (g_pakLoadedNoteResourceHandle != 0) {
+        Cache_ReleaseResource(0, g_pakLoadedNoteResourceHandle);
     }
-    D_800DE860_de = 0;
-    D_800DE864_de = 0;
-    D_800DE868 = 0;
-    D_800E28BC = 0;
+    g_pakSnapshotResourceHandle = 0;
+    g_pakLoadedNoteResourceHandle = 0;
+    g_pakSaveSnapshot = 0;
+    g_controllerPakSnapshotPayload = 0;
 }
 
-void Timer_CapturePlayerProfile(struct OwnerRecAt5D8V1 *owner) {
-    struct ProfileRecAt84 *settings = owner->settings;
+void Timer_CapturePlayerProfile(struct PlayerSavedProfileOwner *owner) {
+    struct PakStatusProfile *settings = owner->settings;
     s32 i;
 
-    D_80153738.flag = settings->flags;
-    D_80153738.values[0] = settings->words[0];
-    D_80153738.values[1] = settings->words[1];
-    D_80153738.values[2] = settings->words[2];
-    D_80153738.values[3] = settings->words[3];
-    D_80153738.pad[0] = 0;
-    D_80153738.pad[1] = 0;
-    D_80153738.pad[2] = 0;
+    g_pakControllerRecord.flag = settings->flags;
+    g_pakControllerRecord.values[0] = settings->words[0];
+    g_pakControllerRecord.values[1] = settings->words[1];
+    g_pakControllerRecord.values[2] = settings->words[2];
+    g_pakControllerRecord.values[3] = settings->words[3];
+    g_pakControllerRecord.pad[0] = 0;
+    g_pakControllerRecord.pad[1] = 0;
+    g_pakControllerRecord.pad[2] = 0;
     for (i = 0; i < 8; i++) {
-        D_80153738.bytes[i] = settings->name[i];
+        g_pakControllerRecord.bytes[i] = settings->name[i];
     }
 }

@@ -28,9 +28,9 @@ typedef struct CDamageInfo_t {
 } CDamageInfo;
 
 struct Shared_ReactionObjectKind {
-    u8 unk0;
+    u8 category;
     char pad0[0x3];
-    u16 unk4;
+    u16 type;
 };
 
 struct Shared_ReactionActor {
@@ -45,7 +45,7 @@ struct Shared_ReactionActor {
     };
     CVector3 position;
     char pad14[0x58];
-    f32 unk6C;
+    f32 heading;
     f32 height;
     char pad74[0x70];
     u16 team;
@@ -54,14 +54,14 @@ struct Shared_ReactionActor {
     char pad104[0x28];
     Shared_ReactionActor *owner;
     char pad130[0x40];
-    s32 unk170;
-    s32 unk174;
+    s32 damageState;
+    s32 health;
     char pad178[0x60];
-    Shared_ReactionPlayer *unk1D8;
+    Shared_ReactionPlayer *player;
 };
 
 struct Shared_ReactionPlayer {
-    u8 unk0;
+    u8 category;
     char pad0[0x7];
     union {
         CVector3 position;
@@ -69,51 +69,51 @@ struct Shared_ReactionPlayer {
     };
     u16* unk14;
     char pad14[0xCC];
-    u16 unkE4;
+    u16 type;
     char padE4[0x1A];
-    s32 unk100;
+    s32 flags;
     char pad104[0x6C];
-    s32 unk170;
-    s32 unk174;
+    s32 damageState;
+    s32 actorHealth;
     char pad178[0x60];
-    Shared_ReactionPlayer *unk1D8;
+    Shared_ReactionPlayer *player;
     char pad1DC[0x10C];
     Shared_ReactionActor actor2E8;
     char pad4C4[0x110];
-    s32 unk5D4;
-    Shared_ReactionStatistics * unk5D8;
+    s32 profileIndex;
+    Shared_ReactionStatistics * statistics;
     void *owner; /* 0x5DC: actor that shows the reaction text */
     char pad5E0[0x4];
-    s32 unk5E4;
+    s32 health;
     char pad5E8[0x46];
-    s16 unk62E;
+    s16 weaponIndex;
     char pad630[0x20];
-    s16 unk650;
+    s16 action;
     char pad652[0xB86];
-    f32 unk11D8;
+    f32 reactionTimer;
     char pad11DC[4];
-    f32 unk11E0;
+    f32 stun;
     char pad11E4[0x34];
     s32 unk1218;
     char pad121C[0x10];
-    s32 unk122C;
+    s32 reactionFlags;
     char pad1230[0x90];
     f32 reserve; /* 0x12C0: reaction reserve */
     Shared_ReactionPlayer *unk12C4;
     Shared_ReactionPlayer *unk12C8;
-    Shared_ReactionPlayer *unk12CC[8];
-    Shared_ReactionPlayer *unk12EC;
-    s32 unk12F0;
-    s32 unk12F4[8];
+    Shared_ReactionPlayer *killHistory[8];
+    Shared_ReactionPlayer *lastKiller;
+    s32 deathReactionVariant;
+    s32 killHistoryTimers[8];
     char pad1314[0x24];
-    s32 unk1338;
+    s32 killHistoryIndex;
     char pad1338[0x88];
-    s8 unk13C4;
+    s8 hitDirection;
     char pad13C5[0x23];
     s32 messageNext; /* 0x13E8: next slot of messages */
     char messages[4][25]; /* 0x13EC */
-    s32 unk1450;
-    Shared_ReactionPlayerRecord * unk1454;
+    s32 isBot;
+    Shared_ReactionPlayerRecord * botRecord;
 };
 
 struct Shared_ReactionFlags {
@@ -122,7 +122,7 @@ struct Shared_ReactionFlags {
     char pad24[0x44 - 0x24];
     u32 flags; /* 0x44 */
     char pad48[0x52 - 0x48];
-    u16 unk52;
+    u16 flags52;
     char pad54[2];
     u16 mask; /* 0x56: effect objects enabled for this record */
 };
@@ -135,7 +135,7 @@ struct Shared_ReactionFlags {
 
 struct Shared_ReactionPlayerIndex {
     char pad0[0x5D4];
-    s32 unk5D4;
+    s32 profileIndex;
 };
 
 
@@ -154,9 +154,9 @@ struct Shared_ReactionStatistics {
     char name[9]; /* 0x84: player name, terminated before counted */
     u8 counted;
     char pad8E[0x1];
-    u8 unk8F;
+    u8 isHuman;
     char pad90[0x2];
-    u8 unk92;
+    u8 team;
 };
 
 
@@ -164,10 +164,10 @@ struct Shared_ReactionPlayerRecord {
     char pad0[0x4];
     s32 unk4;
     char pad8[0x31C];
-    s32 unk324;
-    Shared_ReactionPlayer *unk328;
+    s32 attackerMemoryTicks;
+    Shared_ReactionPlayer *lastAttacker;
 };
 extern f32 gReactionReserveMaximum;
-extern void func_80219A40_de(Shared_ReactionActor *, void *, Shared_ReactionInteraction *);
+extern void Playerai_ApplyDamagePacket(Shared_ReactionActor *, void *, Shared_ReactionInteraction *);
 extern void Player_PostKillMessages(Shared_ReactionPlayer *, Shared_ReactionPlayer *, Shared_ReactionInteraction *);
 #endif

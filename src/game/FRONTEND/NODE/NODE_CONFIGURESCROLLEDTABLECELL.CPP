@@ -15,11 +15,11 @@
 
 extern BufferPool g_frontendResourceScreenCount;
 extern ManagerFrontendReleaseAllChunkImages g_frontendResourceFontCount;
-extern EntryRecAt18V1 *g_frontendResourceTextures;
+extern ArchiveTextureEntry *g_frontendResourceTextures;
 /* Releases the buffers of the pool at g_frontendResourceScreenCount: every entry holding a buffer that is not locked
    (flag 1) unless force is set has its reference count forced to one and dropped, and when it
    reaches zero the buffer is freed through Cache_FreeMemory, along with the entry's secondary buffer
-   when secondary buffers are in use (D_800E2AC4), and the entry is cleared. Pool fields read as one struct at g_frontendResourceScreenCount, as in Node_UpdateImageReleaseTimers. */
+   when secondary buffers are in use (g_frontendArchiveResident), and the entry is cleared. Pool fields read as one struct at g_frontendResourceScreenCount, as in Node_UpdateImageReleaseTimers. */
 
 
 
@@ -27,7 +27,7 @@ extern EntryRecAt18V1 *g_frontendResourceTextures;
 
 
 
-extern s32 D_800E2AC4;
+extern s32 g_frontendArchiveResident;
 
 
 /* Returns the screen count g_frontendResourceState.NScreens. */
@@ -60,7 +60,7 @@ extern s16 g_frontendResourceTextureCount;
 
 
 
-extern struct ResourceRecAt6 *g_frontendResourceTextureTimers;
+extern struct FrontendTextureTimerEntry *g_frontendResourceTextureTimers;
 
 
 /* Returns the signed byte at offset 0x9 of entry j in the 8-byte entries that begin record i of
@@ -107,10 +107,10 @@ extern void Node_LoadLanguageStrings(s32);
 
 
 
-/* Clears the 0x2A8-byte block g_frontendResourceState through XPlus_FillBytes, sets D_800E2AC0 and clears
-   D_800E2AC4. */
+/* Clears the 0x2A8-byte block g_frontendResourceState through XPlus_FillBytes, sets g_frontendWidgetStateChanged and clears
+   g_frontendArchiveResident. */
 
-extern s32 D_800E2AC0;
+extern s32 g_frontendWidgetStateChanged;
 
 
 /* Sets the buffer pool flag, then runs Node_AcquireArchiveEntry on every buffer pool entry, func_80410674_de in mode 2 on every resource slot and Node_GetBankTileTexture on every chunk. */
@@ -142,15 +142,15 @@ extern void Node_ReleaseRetainedImageSlot(s32 i);
 
 typedef struct List List;
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at s_typeText, an actor kind at D_800E2AD4 and a handler at D_800E2AD8: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at s_typeText, an actor kind at g_typedWidgetEventActorKinds and a handler at g_typedWidgetEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
 extern s32 s_typeText;
 
-extern s32 D_800E2AD4;
+extern s32 g_typedWidgetEventActorKinds;
 
-extern Handler802A2B50 D_800E2AD8;
+extern Handler802A2B50 g_typedWidgetEventHandlers;
 
 void Node_ReleaseUnprotectedBuffers(s32 force) {
     s32 i;
@@ -161,7 +161,7 @@ void Node_ReleaseUnprotectedBuffers(s32 force) {
             g_frontendResourceScreenCount.refs[i]--;
             if (g_frontendResourceScreenCount.primary[i].unk8 != 0 && g_frontendResourceScreenCount.refs[i] == 0) {
                 Cache_FreeMemory(g_frontendResourceScreenCount.primary[i].unk8);
-                if (D_800E2AC4 != 0 && g_frontendResourceScreenCount.secondary != 0 &&
+                if (g_frontendArchiveResident != 0 && g_frontendResourceScreenCount.secondary != 0 &&
                     g_frontendResourceScreenCount.secondary[i].unk8 != 0) {
                     Cache_FreeMemory(g_frontendResourceScreenCount.secondary[i].unk8);
                 }
@@ -212,16 +212,16 @@ int Node_ReturnOne(void) {
 }
 
 void Node_ReleaseRetainedImageSlot(s32 i) {
-    struct ResourceRecAt6 *resource;
+    struct FrontendTextureTimerEntry *resource;
 
-    resource = (struct ResourceRecAt6 *)(i * 8 + (s32)g_frontendResourceTextureTimers);
+    resource = (struct FrontendTextureTimerEntry *)(i * 8 + (s32)g_frontendResourceTextureTimers);
     if (resource->id != -1) {
         if (resource->retained > 0) {
             resource->retained--;
         } else {
-            if (g_frontendResourceTextures[i].unk4 & 1) {
-                Image_ReleaseImage((struct OwnedImage *)g_frontendResourceTextures[i].unk0);
-                g_frontendResourceTextures[i].unk4 &= ~1;
+            if (g_frontendResourceTextures[i].flags & 1) {
+                Image_ReleaseImage((struct OwnedImage *)g_frontendResourceTextures[i].imageHandle);
+                g_frontendResourceTextures[i].flags &= ~1;
             }
             g_frontendResourceTextureTimers[i].id = 0;
         }
@@ -304,7 +304,7 @@ void Node_ReleaseReferencedBuffer(s32 i) {
     g_frontendResourceScreenCount.refs[i]--;
     if (g_frontendResourceScreenCount.primary[i].unk8 != 0 && g_frontendResourceScreenCount.refs[i] == 0) {
         Cache_FreeMemory(g_frontendResourceScreenCount.primary[i].unk8);
-        if (D_800E2AC4 != 0 && g_frontendResourceScreenCount.secondary != 0 &&
+        if (g_frontendArchiveResident != 0 && g_frontendResourceScreenCount.secondary != 0 &&
             g_frontendResourceScreenCount.secondary[i].unk8 != 0) {
             Cache_FreeMemory(g_frontendResourceScreenCount.secondary[i].unk8);
         }
@@ -314,16 +314,16 @@ void Node_ReleaseReferencedBuffer(s32 i) {
 
 void Node_InitializeResourceState(void) {
     XPlus_FillBytes(&g_frontendResourceState, 0, sizeof(g_frontendResourceState));
-    D_800E2AC0 = 1;
-    D_800E2AC4 = 0;
+    g_frontendWidgetStateChanged = 1;
+    g_frontendArchiveResident = 0;
 }
 
 void Node_ClearResourceInitializationFlag(void) {
-    D_800E2AC0 = 0;
+    g_frontendWidgetStateChanged = 0;
 }
 
 void Node_SetSecondaryBufferMode(s32 value) {
-    D_800E2AC4 = value;
+    g_frontendArchiveResident = value;
 }
 
 void Node_AcquireAllResourceTextures(void) {
@@ -349,14 +349,14 @@ void Node_ReleaseUnretainedTextureEntries(void) {
     s32 i;
     s32 invalid;
     s32 offset;
-    struct ResourceRecAt6 *resource;
+    struct FrontendTextureTimerEntry *resource;
 
     i = 0;
     if (g_frontendResourceTextureCount > 0) {
         invalid = -1;
         offset = 0;
         do {
-            if (((EntryRecAt18V1 *)(offset + (s32)g_frontendResourceTextures))->unk4 & 1) {
+            if (((ArchiveTextureEntry *)(offset + (s32)g_frontendResourceTextures))->flags & 1) {
                 resource = g_frontendResourceTextureTimers + i;
                 if (resource->id != invalid && resource->retained == 0) {
                     Node_ReleaseRetainedImageSlot(i);
@@ -367,7 +367,7 @@ void Node_ReleaseUnretainedTextureEntries(void) {
     }
 }
 
-void Node_UpdateWidgetTextureRetention(WidgetRecAt34 *widget, s32 load, s32 siblings) {
+void Node_UpdateWidgetTextureRetention(WidgetTextureRetentionView *widget, s32 load, s32 siblings) {
     if (widget == 0) {
         return;
     }
@@ -536,23 +536,23 @@ void Node_ConfigureScrolledTableCell(sm_dllistbox *table, sm_dltext *cell, u32 r
     cell->Hdr.y += y;
 }
 
-s32 Node_DispatchTypedWidgetEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Node_DispatchTypedWidgetEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E2AD8 != 0) {
+    if (g_typedWidgetEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E2AD8;
+        entry = (char *)&g_typedWidgetEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&s_typeText)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E2AD4)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&s_typeText)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_typedWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;

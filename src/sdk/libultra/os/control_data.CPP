@@ -1,34 +1,34 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_8014D6E0.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/LONE/CONTROLLER_MOTOR_STOP_DATA.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/OBJRECAT4V6.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
-#include "COMMON/ARG.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 
 #if defined(VERSION_EU)
-extern u8 D_8014D5E0[];
-u32 func_802B7EF0_eu(void *motorContext) {
+extern u8 g_controllerMotorStopCommands[];
+u32 Control_StopMotorEu(void *motorContext) {
     Block40 saved;
     u8 *source;
     s32 i;
 
-    source = (u8 *)&D_80154110;
-    if (D_800D8380[((func_802B80B4_eu_Arg *)motorContext)->index] == 0) {
+    source = (u8 *)&g_controllerStatusPifBuffer;
+    if (g_controllerMotorInitialized[((ControllerMotorIndexView *)motorContext)->channel] == 0) {
         return 5;
     } else {
         u32 result;
         s32 count;
 
         __osSiGetAccess();
-        D_8014D4B0 = 3;
-        __osSiRawStartDma(1, &D_8014D5E0[((func_802B80B4_eu_Arg *)motorContext)->index << 6]);
-        osRecvMesg(((func_802B80B4_eu_Arg *)motorContext)->field4, 0, 1);
-        __osSiRawStartDma(0, (u8 *)&D_80154110);
-        osRecvMesg(((func_802B80B4_eu_Arg *)motorContext)->field4, 0, 1);
-        count = ((func_802B80B4_eu_Arg *)motorContext)->index;
+        g_controllerLastCommand = 3;
+        __osSiRawStartDma(1, &g_controllerMotorStopCommands[((ControllerMotorIndexView *)motorContext)->channel << 6]);
+        osRecvMesg(((ControllerMotorIndexView *)motorContext)->messageQueueAddress, 0, 1);
+        __osSiRawStartDma(0, (u8 *)&g_controllerStatusPifBuffer);
+        osRecvMesg(((ControllerMotorIndexView *)motorContext)->messageQueueAddress, 0, 1);
+        count = ((ControllerMotorIndexView *)motorContext)->channel;
         if (count != 0) {
             i = 0;
             if (count > 0) {
@@ -40,7 +40,7 @@ u32 func_802B7EF0_eu(void *motorContext) {
         }
         saved = *(Block40 *)source;
         result = (saved.bytes[2] & 0xC0) >> 4;
-        if ((result == 0) && ((__osContDataCrc(&D_8014D6E0) & 0xFF) != saved.bytes[0x26])) {
+        if ((result == 0) && ((__osContDataCrc(&g_controllerMotorStopData) & 0xFF) != saved.bytes[0x26])) {
             result = 4;
         }
         __osSiRelAccess();
@@ -50,25 +50,25 @@ u32 func_802B7EF0_eu(void *motorContext) {
 #endif
 
 #if defined(VERSION_EU)
-u32 func_802B80B4_eu(void *motorContext) {
+u32 Control_StartMotorEu(void *motorContext) {
     Block40 saved;
     u8 *source;
     s32 i;
 
-    source = (u8 *)&D_80154110;
-    if (D_800D8380[((func_802B80B4_eu_Arg *)motorContext)->index] == 0) {
+    source = (u8 *)&g_controllerStatusPifBuffer;
+    if (g_controllerMotorInitialized[((ControllerMotorIndexView *)motorContext)->channel] == 0) {
         return 5;
     } else {
         u32 result;
         s32 count;
 
         __osSiGetAccess();
-        D_8014D4B0 = 3;
-        __osSiRawStartDma(1, &D_8014D4C0[((func_802B80B4_eu_Arg *)motorContext)->index << 6]);
-        osRecvMesg(((func_802B80B4_eu_Arg *)motorContext)->field4, 0, 1);
-        __osSiRawStartDma(0, (u8 *)&D_80154110);
-        osRecvMesg(((func_802B80B4_eu_Arg *)motorContext)->field4, 0, 1);
-        count = ((func_802B80B4_eu_Arg *)motorContext)->index;
+        g_controllerLastCommand = 3;
+        __osSiRawStartDma(1, &g_controllerMotorStartCommands[((ControllerMotorIndexView *)motorContext)->channel << 6]);
+        osRecvMesg(((ControllerMotorIndexView *)motorContext)->messageQueueAddress, 0, 1);
+        __osSiRawStartDma(0, (u8 *)&g_controllerStatusPifBuffer);
+        osRecvMesg(((ControllerMotorIndexView *)motorContext)->messageQueueAddress, 0, 1);
+        count = ((ControllerMotorIndexView *)motorContext)->channel;
         if (count != 0) {
             i = 0;
             if (count > 0) {
@@ -80,7 +80,7 @@ u32 func_802B80B4_eu(void *motorContext) {
         }
         saved = *(Block40 *)source;
         result = (saved.bytes[2] & 0xC0) >> 4;
-        if ((result == 0) && ((__osContDataCrc(&D_8014D5C0) & 0xFF) != saved.bytes[0x26])) {
+        if ((result == 0) && ((__osContDataCrc(&g_controllerMotorStartData) & 0xFF) != saved.bytes[0x26])) {
             result = 4;
         }
         __osSiRelAccess();

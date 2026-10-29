@@ -7,8 +7,8 @@
 
 
 
-struct EntryRecAt6C;
-struct EntryRecAt6C {
+struct PakPlayerPanelView;
+struct PakPlayerPanelView {
     char pad0[0x58];
     s32 first;
     char pad5C[0x6C - 0x5C];
@@ -17,8 +17,8 @@ struct EntryRecAt6C {
 };
 
 
-struct ObjectState71;
-struct ObjectState71 {
+struct PakSavePacketView;
+struct PakSavePacketView {
     char pad0[0x70];
     char unk_70;
 };
@@ -32,8 +32,8 @@ struct Triple;
 
 
 
-struct RecordRecAtD;
-struct RecordRecAtD {
+struct LinkedProfileOwnerRecord;
+struct LinkedProfileOwnerRecord {
     s32 id;
     signed char kind;
     char pad5[7];
@@ -53,8 +53,8 @@ struct EntryPAKInterfacePulseIdlePanelLabels {
     char pad6C[2920 - 0x6C];
 };
 
-struct PlayerRecAtBA4;
-struct PlayerRecAtBA4 {
+struct PakNameRepeatView;
+struct PakNameRepeatView {
     char pad[0x58];
     int state;
     char pad5C[0xBA0 - 0x5C];
@@ -74,7 +74,7 @@ typedef struct IntegerStateBC0 IntegerStateBC0;
 
 
 
-extern int D_800E54A0;
+extern int g_pakProfileRequestedPhase;
 
 
 
@@ -95,7 +95,7 @@ struct IntegerStateBC0 {
     s32 unk_BBC;
 };
 
-extern float D_800DDED0;
+extern float g_pakPanelPulseUnsignedThreshold;
 
 struct Triple;
 
@@ -119,10 +119,10 @@ struct StatePAKInterfaceBeginLinkedProfileTransfer {
 
 
 
-extern float D_800E1EF8;
+extern float g_pakPanelPulsePhaseScale;
 
-struct PlayerRecAtBA4;
-typedef struct PlayerRecAtBA4 PlayerRecAtBA4;
+struct PakNameRepeatView;
+typedef struct PakNameRepeatView PakNameRepeatView;
 
 struct StatePAKInterfaceBeginLinkedProfileTransfer;
 typedef struct StatePAKInterfaceBeginLinkedProfileTransfer StatePAKInterfaceBeginLinkedProfileTransfer;
@@ -130,8 +130,8 @@ typedef struct StatePAKInterfaceBeginLinkedProfileTransfer StatePAKInterfaceBegi
 
 
 
-struct ObjectState71;
-typedef struct ObjectState71 ObjectState71;
+struct PakSavePacketView;
+typedef struct PakSavePacketView PakSavePacketView;
 
 
 

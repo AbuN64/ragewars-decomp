@@ -5,7 +5,7 @@
 #endif
 
 #if defined(VERSION_DE)
-unsigned int D_d1_8b4e2aa7c1163b08[3] = {
+unsigned int g_RspEncodedWords[3] = {
     0x43480000, 0x43200000, 0x43480000,
 };
 #endif

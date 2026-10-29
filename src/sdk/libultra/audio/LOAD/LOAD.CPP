@@ -8,7 +8,7 @@
 #include "include_asm.h"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
 /* 802BE370_2.CPP */
 #if !(defined(VERSION_DE) || defined(VERSION_EU))
@@ -242,7 +242,7 @@ Acmd *alAdpcmPull(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleO
 #if defined(VERSION_EU)
 #include "sdk/ACMD.H"
 
-Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) 
+Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd        *ptr = p;
     s16         inp;
@@ -258,7 +258,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
     s32         bEnd;
     s32         decoded = 0;
     s32         looped = 0;
-    
+
     ALLoadFilter48_2 *f = (ALLoadFilter48_2 *)filter;
 
     if (outCount == 0)
@@ -273,14 +273,14 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
         nSam = f->loop.end - f->sample;
     else
         nSam = outCount;
-    
+
     if (f->lastsam)
         nLeft = 16 - f->lastsam;
     else
         nLeft = 0;
     tsam = nSam - nLeft;
     if (tsam<0) tsam = 0;
-    
+
     nframes = (tsam+16-1)>>4;
     nbytes =  nframes*9;
 
@@ -288,13 +288,13 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 
         ptr = _decodeChunk(ptr, f, tsam, nbytes, *outp, inp, f->first);
 
-        
+
         if (f->lastsam)
             *outp += (f->lastsam<<1);
         else
             *outp += (16<<1);
 
-        
+
         f->lastsam = f->loop.start &0xf;
         f->memin = (s32) f->table->base + 9 *
             ((s32) (f->loop.start>>4) + 1);
@@ -302,56 +302,56 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 
         bEnd = *outp;
         while (outCount > nSam){
-            
+
             outCount -= nSam;
-            
-            
+
+
             op = (bEnd + ((nframes+1)<<(4+1))) & ~0x1f;
 
-            
+
             bEnd += (nSam<<1);
-            
-            
+
+
             if ((f->loop.count != -1) && (f->loop.count != 0))
                 f->loop.count--;
-            
-            
+
+
             nSam = (outCount < f->loop.end - f->loop.start ? outCount : f->loop.end - f->loop.start);
-            tsam = nSam - 16 + f->lastsam;  
+            tsam = nSam - 16 + f->lastsam;
             if (tsam<0) tsam = 0;
             nframes = (tsam+16-1)>>4;
             nbytes =  nframes*9;
             ptr = _decodeChunk(ptr, f, tsam, nbytes, op, inp, f->first | 2);
-            
+
             aDMEMMove(ptr++, op+(f->lastsam<<1), bEnd, nSam<<1);
 
         }
-        
+
         f->lastsam = (outCount + f->lastsam) & 0xf;
         f->sample += outCount;
-        f->memin += 9*nframes;    
+        f->memin += 9*nframes;
 
         return ptr;
     }
 
-    
+
 
     nSam = nframes<<4;
-    
-    
+
+
     overFlow = f->memin + nbytes - ((s32) f->table->base + f->table->len);
     if (overFlow < 0)
         overFlow = 0;
     nOver = (overFlow/9)<<4;
     if (nOver > nSam + nLeft)
         nOver = nSam + nLeft;
-    
+
     nbytes -= overFlow;
 
     if ((nOver - (nOver & 0xf))< outCount){
         decoded = 1;
         ptr = _decodeChunk(ptr, f, nSam - nOver, nbytes, *outp, inp, f->first);
-    
+
         if (f->lastsam)
             *outp += (f->lastsam<<1);
         else
@@ -359,13 +359,13 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 
         f->lastsam = (outCount + f->lastsam) & 0xf;
         f->sample += outCount;
-        f->memin += 9*nframes;    
-    } else {        
+        f->memin += 9*nframes;
+    } else {
         f->lastsam = 0;
-        f->memin += 9*nframes;    
+        f->memin += 9*nframes;
     }
 
-    
+
     if (nOver){
         f->lastsam = 0;
         if (decoded)
@@ -379,10 +379,10 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 }
 #endif
 
-/* Streams raw 16-bit samples into DMEM for the requested byte count: clears the output when the wave table is empty, otherwise refills a 0x100-sample block at D_800D9360 through Audio_NextDecodedSampleBlock and func_802BD280_de whenever the filter has none left (clearing and stopping when none arrives), then loads the available samples at 8-byte alignment and moves them into place. Adapted from alRaw16Pull (alRaw16Pull) with the loop handling replaced by the streamed block, updated through a pointer to D_800D9360. */
+/* Streams raw 16-bit samples into DMEM for the requested byte count: clears the output when the wave table is empty, otherwise refills a 0x100-sample block at g_audioTransformInputStream through Audio_NextDecodedSampleBlock and osWritebackDCache whenever the filter has none left (clearing and stopping when none arrives), then loads the available samples at 8-byte alignment and moves them into place. Adapted from alRaw16Pull (alRaw16Pull) with the loop handling replaced by the streamed block, updated through a pointer to g_audioTransformInputStream. */
 extern s32 Audio_NextDecodedSampleBlock();
 
-extern void func_802BD280_de(s32 buffer, s32 size);
+extern void osWritebackDCache(s32 buffer, s32 size);
 
 /* alRaw16Pull, drafted from ultralib src/audio/load.c: DMA raw 16-bit samples into DMEM at 8-byte
    alignment for the requested output count, restarting from the loop start and merging the
@@ -487,23 +487,23 @@ Acmd *Audio_LoadDecodedSamples(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCoun
         return ptr;
     }
     if (byteCount != 0) {
-        stream = &D_800D9360;
+        stream = &g_audioTransformInputStream;
         do {
             nSam = byteCount;
             if (f->sample == 0) {
-                D_800D9360 = Audio_NextDecodedSampleBlock();
-                if (D_800D9360 == 0) {
+                g_audioTransformInputStream = Audio_NextDecodedSampleBlock();
+                if (g_audioTransformInputStream == 0) {
                     aClearBuffer(ptr++, op, byteCount << 1);
                     return ptr;
                 }
-                func_802BD280_de(D_800D9360, 0x200);
+                osWritebackDCache(g_audioTransformInputStream, 0x200);
                 f->sample = 0x100;
             }
             if (f->sample < byteCount) {
                 nSam = f->sample;
             }
             nbytes = nSam << 1;
-            dramAlign = D_800D9360 & 0x7;
+            dramAlign = g_audioTransformInputStream & 0x7;
             nbytes += dramAlign;
             if (op & 0x7) {
                 dmemAlign = 8 - (op & 0x7);
@@ -511,7 +511,7 @@ Acmd *Audio_LoadDecodedSamples(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCoun
                 dmemAlign = 0;
             }
             aSetBuffer(ptr++, 0, op + dmemAlign, 0, nbytes + 8 - (nbytes & 0x7));
-            aLoadBuffer(ptr++, (D_800D9360 & 0x1FFFFFFF) - dramAlign);
+            aLoadBuffer(ptr++, (g_audioTransformInputStream & 0x1FFFFFFF) - dramAlign);
             if (dramAlign || dmemAlign) {
                 aDMEMMove(ptr++, op + dramAlign + dmemAlign, op, nSam << 1);
             }
@@ -527,7 +527,7 @@ Acmd *Audio_LoadDecodedSamples(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCoun
 /* alLoadParam, drafted from ultralib src/audio/load.c: set a load filter's wave table, choosing the
    pull handler and loop points by the table's type, or reset its decode state. This cartridge's
    version has no table length rounding and a third wave type (2) handled by Audio_LoadDecodedSamples; the
-   handlers are addressed by the cartridge at 0x002Cxxxx (D_002BE0D0, D_002BE514, D_002BE898). */
+   handlers are addressed by the cartridge at 0x002Cxxxx (alAdpcmPull_Address, alRaw16Pull_Address, Audio_LoadDecodedSamples_Address). */
  /* alCopy */
 
  /* alAdpcmPull */
@@ -546,7 +546,7 @@ s32 alLoadParam(void *filter, s32 paramID, struct ALWaveTable_s *param)
             a->sample = 0;
             switch (a->table->type) {
                 case 0: /* AL_ADPCM_WAVE */
-                    f->handler = &D_002BE0D0;
+                    f->handler = &alAdpcmPull_Address;
                     a->bookSize = 2 * a->table->waveInfo.adpcmWave.book->order *
                         a->table->waveInfo.adpcmWave.book->npredictors * 8;
                     if (a->table->waveInfo.adpcmWave.loop) {
@@ -561,7 +561,7 @@ s32 alLoadParam(void *filter, s32 paramID, struct ALWaveTable_s *param)
                     break;
 
                 case 1: /* AL_RAW16_WAVE */
-                    f->handler = &D_002BE514;
+                    f->handler = &alRaw16Pull_Address;
                     if (a->table->waveInfo.rawWave.loop) {
                         a->loop.start = a->table->waveInfo.rawWave.loop->start;
                         a->loop.end = a->table->waveInfo.rawWave.loop->end;
@@ -572,7 +572,7 @@ s32 alLoadParam(void *filter, s32 paramID, struct ALWaveTable_s *param)
                     break;
 
                 case 2:
-                    f->handler = &D_002BE898;
+                    f->handler = &Audio_LoadDecodedSamples_Address;
                     a->loop.start = a->loop.end = a->loop.count = 0;
                     break;
 
@@ -631,27 +631,27 @@ Acmd *_decodeChunk(Acmd *ptr, ALLoadFilter48_2 *f, s32 tsam, s32 nbytes, s16 out
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BECDC[1] = {
+unsigned int k_LoadEncodedWords[1] = {
     0x72696453,
 };
 #endif
 
 /* 802C6A00_18.CPP */
 #if defined(VERSION_US_REV1)
-unsigned char D_auto_func_802BF08C_eu_x_padding_C4A9C[4] = { 0x45, 0x00, 0x00, 0x08 };
+unsigned char g_LoadTrailingBytesBlock3[4] = { 0x45, 0x00, 0x00, 0x08 };
 #endif
 
 /* 802C6A00_19.CPP */
 #if defined(VERSION_EU_X)
-unsigned char D_auto_func_802BF08C_eu_x_padding_BFC8C[4] = { 0x45, 0x00, 0x00, 0x08 };
+unsigned char g_LoadTrailingBytesBlock2[4] = { 0x45, 0x00, 0x00, 0x08 };
 #endif
 
 /* 802C6A00_2.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802BEDAC_de_padding_BF9AC[4] = { 0x3C, 0x04, 0x80, 0x0D };
+unsigned char g_LoadTrailingBytes[4] = { 0x3C, 0x04, 0x80, 0x0D };
 #endif
 
 /* 802C6A00_3.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_802BF04C_eu_padding_BFC4C[4] = { 0xAF, 0xBF, 0x00, 0x18 };
+unsigned char g_LoadTrailingBytesBlock1[4] = { 0xAF, 0xBF, 0x00, 0x18 };
 #endif

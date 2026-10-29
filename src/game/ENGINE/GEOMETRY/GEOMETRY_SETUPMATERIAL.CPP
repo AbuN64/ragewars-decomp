@@ -1,6 +1,6 @@
 #include "ANIM/ANIMATION_FRAME.H"
 #include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
-#include "COMMON/LONE/D_800CC384.H"
+#include "COMMON/LONE/GEOMETRY_EFFECT_GEOMETRY_MODE.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "RENDER/RANGENODE.H"
@@ -11,8 +11,8 @@
 /* Selects a cached RDP color-combiner mode and emits the corresponding display-list command. */
 extern Gfx *g_displayListCursor;
 void Geometry_SetCombineMode(u32 mode) {
- if (D_800CC360 != mode) {
- D_800CC360=mode;
+ if (g_geometryPreviousModePreset != mode) {
+ g_geometryPreviousModePreset=mode;
  switch(mode) {
  case 0: gDPSetCombineLERP(g_displayListCursor++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, SHADE, 0, TEXEL0, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED); break;
  case 1: gDPSetCombineLERP(g_displayListCursor++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, SHADE, 0, TEXEL0, 0, 0, 0, 0, COMBINED, COMBINED, 0, ENVIRONMENT, 0); break;
@@ -68,10 +68,10 @@ void Geometry_SetCombineMode(u32 mode) {
 
 s32 Geometry_SetModePreset(s32 tailEnum) {
 
-    if (D_800CC364 == tailEnum) {
+    if (g_geometryPreviousCombineMode == tailEnum) {
         return 0;
     }
-    D_800CC364 = tailEnum;
+    g_geometryPreviousCombineMode = tailEnum;
 
     {
         if ((u32)tailEnum > 30) {
@@ -113,11 +113,11 @@ s32 Geometry_SetModePreset(s32 tailEnum) {
     }
     switch (tailEnum) {
     case 0: sw_mode_0: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, 0x0C1849D8, 0) else gDPSetRenderMode(g_displayListCursor++, 0x0C184A50, 0);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, 0x0C1849D8, 0) else gDPSetRenderMode(g_displayListCursor++, 0x0C184A50, 0);
         break;
     }
     case 1: sw_mode_1: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x001049D8) else gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x00104A50);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x001049D8) else gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x00104A50);
         break;
     }
     case 2: sw_mode_2: {
@@ -131,42 +131,42 @@ s32 Geometry_SetModePreset(s32 tailEnum) {
         break;
     }
     case 4: sw_mode_4: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x00104DD8) else gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x00104E50);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x00104DD8) else gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x00104E50);
         break;
     }
     case 5: sw_mode_5: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x001041F8) else gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x001041F0);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x001041F8) else gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x001041F0);
         break;
     }
     case 6: sw_mode_6: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x00113078) else gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x00113078);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x00113078) else gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x00113078);
         break;
     }
     case 7: sw_mode_7: {
         Gfx *gfx = g_displayListCursor++;
-        gDPSetRenderMode(gfx, D_800CC38C, 0x00112E10);
+        gDPSetRenderMode(gfx, g_geometryTranslucentRenderMode, 0x00112E10);
         break;
     }
     case 8: sw_mode_8: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x00112478) else gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x00112478);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x00112478) else gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x00112478);
         break;
     }
     case 9: sw_mode_9: {
         Gfx *gfx = g_displayListCursor++;
-        gDPSetRenderMode(gfx, D_800CC38C, 0x00112438);
+        gDPSetRenderMode(gfx, g_geometryTranslucentRenderMode, 0x00112438);
         break;
     }
     case 10: sw_mode_10: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x00112078) else gDPSetRenderMode(g_displayListCursor++, D_800CC38C, 0x00112230);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x00112078) else gDPSetRenderMode(g_displayListCursor++, g_geometryTranslucentRenderMode, 0x00112230);
         break;
     }
     case 11: sw_mode_11: {
         Gfx *gfx = g_displayListCursor++;
-        gDPSetRenderMode(gfx, D_800CC38C, 0x00112038);
+        gDPSetRenderMode(gfx, g_geometryTranslucentRenderMode, 0x00112038);
         break;
     }
     case 12: sw_mode_12: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, 0x005045D8, 0) else gDPSetRenderMode(g_displayListCursor++, 0x004045D0, 0);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, 0x005045D8, 0) else gDPSetRenderMode(g_displayListCursor++, 0x004045D0, 0);
         break;
     }
     case 13: sw_mode_13: {
@@ -175,7 +175,7 @@ s32 Geometry_SetModePreset(s32 tailEnum) {
         break;
     }
     case 14: sw_mode_14: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, 0x005049D8, 0) else gDPSetRenderMode(g_displayListCursor++, 0x00504A50, 0);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, 0x005049D8, 0) else gDPSetRenderMode(g_displayListCursor++, 0x00504A50, 0);
         break;
     }
     case 15: sw_mode_15: {
@@ -189,11 +189,11 @@ s32 Geometry_SetModePreset(s32 tailEnum) {
         break;
     }
     case 17: sw_mode_17: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, 0x00553078, 0) else gDPSetRenderMode(g_displayListCursor++, 0x00553078, 0);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, 0x00553078, 0) else gDPSetRenderMode(g_displayListCursor++, 0x00553078, 0);
         break;
     }
     case 18: sw_mode_18: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, 0x00553048, 0) else gDPSetRenderMode(g_displayListCursor++, 0x0F0A7008, 0);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, 0x00553048, 0) else gDPSetRenderMode(g_displayListCursor++, 0x0F0A7008, 0);
         break;
     }
     case 19: sw_mode_19: {
@@ -218,12 +218,12 @@ s32 Geometry_SetModePreset(s32 tailEnum) {
     }
     case 23: sw_mode_23: {
         Gfx *gfx = g_displayListCursor++;
-        gDPSetRenderMode(gfx, D_800CC38C, 0x00104B50);
+        gDPSetRenderMode(gfx, g_geometryTranslucentRenderMode, 0x00104B50);
         break;
     }
     case 24: sw_mode_24: {
         Gfx *gfx = g_displayListCursor++;
-        gDPSetRenderMode(gfx, D_800CC38C, 0x00104E50);
+        gDPSetRenderMode(gfx, g_geometryTranslucentRenderMode, 0x00104E50);
         break;
     }
     case 25: sw_mode_25: {
@@ -242,17 +242,17 @@ s32 Geometry_SetModePreset(s32 tailEnum) {
         break;
     }
     case 28: sw_mode_28: {
-        if (D_800CC370) gDPSetRenderMode(g_displayListCursor++, 0x00507048, 0) else gDPSetRenderMode(g_displayListCursor++, 0x00507040, 0);
+        if (g_geometryAntialiasingEnabled) gDPSetRenderMode(g_displayListCursor++, 0x00507048, 0) else gDPSetRenderMode(g_displayListCursor++, 0x00507040, 0);
         break;
     }
     case 29: sw_mode_29: {
         Gfx *gfx = g_displayListCursor++;
-        gDPSetRenderMode(gfx, D_800CC38C, 0x00104F50);
+        gDPSetRenderMode(gfx, g_geometryTranslucentRenderMode, 0x00104F50);
         break;
     }
     case 30: sw_mode_30: {
         Gfx *gfx = g_displayListCursor++;
-        gDPSetRenderMode(gfx, D_800CC388, 0x00104F50);
+        gDPSetRenderMode(gfx, g_geometryOpaqueRenderMode, 0x00104F50);
         break;
     }
     }
@@ -260,12 +260,12 @@ sw_mode_default:
     return 1;
 }
 
-extern Gfx D_800CC018_de[], D_800CC0A0[];
+extern Gfx g_geometryDefaultMaterialDisplayList[], g_geometryAlternateMaterialDisplayList[];
 extern void TextLoad_ResetTextureCache(void);
 /* Emits a 16 by 16 intensity texture, white tint, matrix and the selected pass list. */
 void Geometry_DrawIntensityMask(void *matrix, s32 pass, u32 alpha) {
     Gfx *list;
-    gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, D_800D14B0);
+    gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, g_materialIntensityMaskTexture);
     gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
     gDPLoadSync(g_displayListCursor++);
     gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, 127, 1024);
@@ -274,10 +274,10 @@ void Geometry_DrawIntensityMask(void *matrix, s32 pass, u32 alpha) {
     gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, 15 << 2, 15 << 2);
     gDPSetPrimColor(g_displayListCursor++, 0, 0, 255, 255, 255, alpha);
     gSPMatrix(g_displayListCursor++, matrix, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    list = D_800CC018_de;
-    gSPDisplayList(g_displayListCursor++, ({ if (pass != 0) list = D_800CC0A0; list; }));
-    D_800CC364 = -1;
-    D_800CC360 = -1;
+    list = g_geometryDefaultMaterialDisplayList;
+    gSPDisplayList(g_displayListCursor++, ({ if (pass != 0) list = g_geometryAlternateMaterialDisplayList; list; }));
+    g_geometryPreviousCombineMode = -1;
+    g_geometryPreviousModePreset = -1;
     TextLoad_ResetTextureCache();
 }
 
@@ -287,22 +287,22 @@ void Geometry_DrawIntensityMask(void *matrix, s32 pass, u32 alpha) {
 struct Shared_GfxMaterial {
     u32 flags;
     u8 pad4[3];
-    u8 unk7;
-    s32 unk8;
+    u8 cachedTextureIndex;
+    s32 textureResource;
     u8 padC[4];
-    u8 unk10;
-    u8 unk11;
-    u8 unk12;
-    u8 unk13;
-    u8 unk14;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u16 unk18;
-    u16 unk1A;
+    u8 primitiveRed;
+    u8 primitiveGreen;
+    u8 primitiveBlue;
+    u8 primitiveAlpha;
+    u8 environmentRed;
+    u8 environmentGreen;
+    u8 environmentBlue;
+    u8 environmentAlpha;
+    u16 textureMaskS;
+    u16 textureMaskT;
 };
 
-extern u32 D_800CD730;
+extern u32 g_gameLoopFrameCount;
 
 void *Textload_RequestTextureVariation(s32 *, s32);
 void Textload_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
@@ -334,12 +334,12 @@ s32 Geometry_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
     if (g_geometryViewEffect != 0 && (flags & 0x8040) != 0x8000) {
         flags |= 2;
     }
-    if ((flags & 0x100) && mat->unk13 == 0) {
+    if ((flags & 0x100) && mat->primitiveAlpha == 0) {
         return 0;
     }
     tailEnum = -1;
-    if (mat->unk8 != 0 && !(D_801462C8.flags & 0x400) && !(g_geometryViewEffect != 0 && (flags & 0x8000))) {
-        node = Textload_RequestTextureVariation(&mat->unk8, pass);
+    if (mat->textureResource != 0 && !(g_gameSettings.flags & 0x400) && !(g_geometryViewEffect != 0 && (flags & 0x8000))) {
+        node = Textload_RequestTextureVariation(&mat->textureResource, pass);
         if (node == 0) {
             return 0;
         }
@@ -351,25 +351,25 @@ s32 Geometry_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
                     b = 0;
                     break;
                 }
-                idx = (u8)(D_800CD730 / info.frame->unknown1);
-                if (mat->unk7 != idx) {
+                idx = (u8)(g_gameLoopFrameCount / info.frame->frameDuration);
+                if (mat->cachedTextureIndex != idx) {
 a = Graphu64_NextRandom() % info.count;
- if (info.unk4 != 0) { b = a; if (b >= info.unk4) { b = 0; } } else { b = 0; }
-                    mat->unk7 = idx;
+ if (info.variationCount != 0) { b = a; if (b >= info.variationCount) { b = 0; } } else { b = 0; }
+                    mat->cachedTextureIndex = idx;
                 } else {
                     a = idx % info.count;
-                    b = info.unk4 ? idx % info.unk4 : 0;
+                    b = info.variationCount ? idx % info.variationCount : 0;
                 }
                 break;
             case -1:
-                idx = D_800CD730 / info.frame->unknown1;
+                idx = g_gameLoopFrameCount / info.frame->frameDuration;
                 a = idx % info.count;
-                b = (info.unk4 == 0) ? 0 : idx % info.unk4;
+                b = (info.variationCount == 0) ? 0 : idx % info.variationCount;
                 break;
             default:
                 a = pass % info.count;
-                if (info.unk4 != 0) {
-                    b = pass % info.unk4;
+                if (info.variationCount != 0) {
+                    b = pass % info.variationCount;
                 } else {
                     b = 0;
                 }
@@ -379,8 +379,8 @@ a = Graphu64_NextRandom() % info.count;
             maskS = 1 << (info.frame->shiftS + 6);
             maskT = 1 << (info.frame->shiftT + 6);
         } else {
-            maskS = mat->unk18;
-            maskT = mat->unk1A;
+            maskS = mat->textureMaskS;
+            maskT = mat->textureMaskT;
         }
         if (flags & 0x20) {
             extra = G_TX_CLAMP;
@@ -394,30 +394,30 @@ a = Graphu64_NextRandom() % info.count;
             extra2 |= G_TX_MIRROR;
         }
 #if defined(VERSION_US_REV1)
-        Textload_LoadTextureFrameTiles(&mat->unk8, node, a, b, maskS, maskT, extra, extra2, 0);
+        Textload_LoadTextureFrameTiles(&mat->textureResource, node, a, b, maskS, maskT, extra, extra2, 0);
     #else
-        Textload_LoadTextureFrame(&mat->unk8, node, a, b, maskS, maskT, extra, extra2, 0);
+        Textload_LoadTextureFrame(&mat->textureResource, node, a, b, maskS, maskT, extra, extra2, 0);
     #endif
         if (flags & 0x2000) {
             gDPSetTextureLOD(g_displayListCursor++, G_TL_LOD);
         }
         if (g_geometryViewEffect != 0) {
-            u32 avg = (u32)(mat->unk10 + mat->unk11 + mat->unk12) / 3;
-            gDPSetPrimColor(g_displayListCursor++, info.frame->unk4, 0, 0, 0, avg, mat->unk13);
+            u32 avg = (u32)(mat->primitiveRed + mat->primitiveGreen + mat->primitiveBlue) / 3;
+            gDPSetPrimColor(g_displayListCursor++, info.frame->primitiveMinimumLod, 0, 0, 0, avg, mat->primitiveAlpha);
         } else {
-            gDPSetPrimColor(g_displayListCursor++, info.frame->unk4, 0, mat->unk10, mat->unk11, mat->unk12, mat->unk13);
+            gDPSetPrimColor(g_displayListCursor++, info.frame->primitiveMinimumLod, 0, mat->primitiveRed, mat->primitiveGreen, mat->primitiveBlue, mat->primitiveAlpha);
         }
         if (flags & 0x400) {
             if (g_geometryViewEffect != 0) {
-                u32 avg = (u32)(mat->unk14 + mat->unk15 + mat->unk16) / 3;
-                gDPSetEnvColor(g_displayListCursor++, 0, 0, avg, D_800D15E0 == 0 ? mat->unk13 : D_800D15E4[3]);
+                u32 avg = (u32)(mat->environmentRed + mat->environmentGreen + mat->environmentBlue) / 3;
+                gDPSetEnvColor(g_displayListCursor++, 0, 0, avg, g_menuModelFillEnabled == 0 ? mat->primitiveAlpha : g_menuModelFillColor[3]);
             } else {
-                gDPSetEnvColor(g_displayListCursor++, mat->unk14, mat->unk15, mat->unk16, D_800D15E0 == 0 ? mat->unk13 : D_800D15E4[3]);
+                gDPSetEnvColor(g_displayListCursor++, mat->environmentRed, mat->environmentGreen, mat->environmentBlue, g_menuModelFillEnabled == 0 ? mat->primitiveAlpha : g_menuModelFillColor[3]);
             }
             if (flags & 2) {
                 if (!(flags & 0x1000)) {
                     Geometry_SetCombineMode(2);
-                } else if (D_800D15E0 == 0) {
+                } else if (g_menuModelFillEnabled == 0) {
                     Geometry_SetCombineMode(0);
                 } else {
                     Geometry_SetCombineMode(1);
@@ -430,21 +430,21 @@ a = Graphu64_NextRandom() % info.count;
             Cache_UnlockResource(0, node);
         } else if (flags & 2) {
             if (flags & 0x2000) {
-                switch (info.frame->unk5) {
+                switch (info.frame->materialCombineKind) {
                     case 4:
                     case 5:
-                        gDPSetEnvColor(g_displayListCursor++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
+                        gDPSetEnvColor(g_displayListCursor++, mat->environmentRed, mat->environmentGreen, mat->environmentBlue, mat->environmentAlpha);
                         Geometry_SetCombineMode(0x23);
                         break;
                     default:
                         Geometry_SetCombineMode(5);
                         break;
                 }
-            } else if (D_800D15E0 == 0) {
+            } else if (g_menuModelFillEnabled == 0) {
                 Geometry_SetCombineMode(6);
             } else {
-                gDPSetEnvColor(g_displayListCursor++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
-                switch (D_800D15E0) {
+                gDPSetEnvColor(g_displayListCursor++, g_menuModelFillColor[0], g_menuModelFillColor[1], g_menuModelFillColor[2], g_menuModelFillColor[3]);
+                switch (g_menuModelFillEnabled) {
                     case 1:
                     case 2:
                         Geometry_SetCombineMode(7);
@@ -460,7 +460,7 @@ a = Graphu64_NextRandom() % info.count;
                         Geometry_SetCombineMode(10);
                         break;
                     case 6:
-                        gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
+                        gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->primitiveRed, mat->primitiveGreen, mat->primitiveBlue, g_menuModelFillColor[4]);
                         Geometry_SetCombineMode(0xB);
                         break;
                     default:
@@ -470,24 +470,24 @@ a = Graphu64_NextRandom() % info.count;
             Cache_UnlockResource(0, node);
         } else {
             if (flags & 0x2000) {
-                switch (info.frame->unk5) {
+                switch (info.frame->materialCombineKind) {
                     case 4:
-                        gDPSetEnvColor(g_displayListCursor++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
+                        gDPSetEnvColor(g_displayListCursor++, mat->environmentRed, mat->environmentGreen, mat->environmentBlue, mat->environmentAlpha);
                         Geometry_SetCombineMode(0x25);
                         break;
                     case 5:
-                        gDPSetEnvColor(g_displayListCursor++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
+                        gDPSetEnvColor(g_displayListCursor++, mat->environmentRed, mat->environmentGreen, mat->environmentBlue, mat->environmentAlpha);
                         Geometry_SetCombineMode(0x24);
                         break;
                     default:
                         Geometry_SetCombineMode(0xC);
                         break;
                 }
-            } else if (D_800D15E0 == 0) {
+            } else if (g_menuModelFillEnabled == 0) {
                 Geometry_SetCombineMode(0xD);
             } else {
-                gDPSetEnvColor(g_displayListCursor++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
-                switch (D_800D15E0) {
+                gDPSetEnvColor(g_displayListCursor++, g_menuModelFillColor[0], g_menuModelFillColor[1], g_menuModelFillColor[2], g_menuModelFillColor[3]);
+                switch (g_menuModelFillEnabled) {
                     case 1:
                     case 2:
                         Geometry_SetCombineMode(0xE);
@@ -503,7 +503,7 @@ a = Graphu64_NextRandom() % info.count;
                         Geometry_SetCombineMode(0x10);
                         break;
                     case 6:
-                        gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
+                        gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->primitiveRed, mat->primitiveGreen, mat->primitiveBlue, g_menuModelFillColor[4]);
                         Geometry_SetCombineMode(0x11);
                         break;
                     default:
@@ -514,31 +514,31 @@ a = Graphu64_NextRandom() % info.count;
         }
     } else {
         gDPPipeSync(g_displayListCursor++);
-        if (D_800CC3A8 != 0) {
-            if (D_800CC3AC != 0) {
-                gDPSetPrimColor(g_displayListCursor++, 0, 0, D_800CC3A9, D_800CC3AA, D_800CC3AB, D_800CC3AD);
+        if (g_primitiveColorOverrideEnabled != 0) {
+            if (g_primitiveAlphaOverrideEnabled != 0) {
+                gDPSetPrimColor(g_displayListCursor++, 0, 0, g_primitiveColorOverrideRed, g_primitiveColorOverrideGreen, g_primitiveColorOverrideBlue, g_primitiveAlphaOverride);
             } else {
-                gDPSetPrimColor(g_displayListCursor++, 0, 0, D_800CC3A9, D_800CC3AA, D_800CC3AB, mat->unk13);
+                gDPSetPrimColor(g_displayListCursor++, 0, 0, g_primitiveColorOverrideRed, g_primitiveColorOverrideGreen, g_primitiveColorOverrideBlue, mat->primitiveAlpha);
             }
-        } else if (D_800CC3AC != 0) {
-            gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800CC3AD);
+        } else if (g_primitiveAlphaOverrideEnabled != 0) {
+            gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->primitiveRed, mat->primitiveGreen, mat->primitiveBlue, g_primitiveAlphaOverride);
         } else if (flags & 0x8000) {
             if (flags & 0x40) {
-                gDPSetPrimColor(g_displayListCursor++, 0, 0, 255, 0, 0, mat->unk13);
+                gDPSetPrimColor(g_displayListCursor++, 0, 0, 255, 0, 0, mat->primitiveAlpha);
             } else {
-                gDPSetPrimColor(g_displayListCursor++, 0, 0, 255, 255, 0, mat->unk13);
+                gDPSetPrimColor(g_displayListCursor++, 0, 0, 255, 255, 0, mat->primitiveAlpha);
             }
         } else {
-            gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->unk10, mat->unk11, mat->unk12, mat->unk13);
+            gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->primitiveRed, mat->primitiveGreen, mat->primitiveBlue, mat->primitiveAlpha);
         }
         gSPTexture(g_displayListCursor++, 0, 0, 0, 0, 0);
         if (flags & 2) {
             Geometry_SetCombineMode(0x12);
-        } else if (D_800D15E0 == 0) {
+        } else if (g_menuModelFillEnabled == 0) {
             Geometry_SetCombineMode(0x13);
         } else {
-            gDPSetEnvColor(g_displayListCursor++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
-            switch (D_800D15E0) {
+            gDPSetEnvColor(g_displayListCursor++, g_menuModelFillColor[0], g_menuModelFillColor[1], g_menuModelFillColor[2], g_menuModelFillColor[3]);
+            switch (g_menuModelFillEnabled) {
                 case 1:
                 case 2:
                     Geometry_SetCombineMode(0x14);
@@ -554,7 +554,7 @@ a = Graphu64_NextRandom() % info.count;
                     Geometry_SetCombineMode(0x17);
                     break;
                 case 6:
-                    gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
+                    gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->primitiveRed, mat->primitiveGreen, mat->primitiveBlue, g_menuModelFillColor[4]);
                     Geometry_SetCombineMode(0x11);
                     break;
                 default:
@@ -562,8 +562,8 @@ a = Graphu64_NextRandom() % info.count;
             }
         }
     }
-    if ((flags & 0x100) || D_800D15E0 == 1 || D_800D15E0 == 4 || D_800D15E0 == 6) {
-        if (D_800D15E0 == 0) {
+    if ((flags & 0x100) || g_menuModelFillEnabled == 1 || g_menuModelFillEnabled == 4 || g_menuModelFillEnabled == 6) {
+        if (g_menuModelFillEnabled == 0) {
             tailEnum = 3;
             if (!(flags & 0x1000)) {
                 tailEnum = 1;
@@ -582,14 +582,14 @@ a = Graphu64_NextRandom() % info.count;
     } else {
         tailEnum = 7;
         if (!(flags & 0x200)) {
-            if (D_800CC378 != 0) {
+            if (g_geometryTextureFilterOverride != 0) {
                 tailEnum = 9;
-                if (D_800CC37C != 0) {
+                if (g_geometryTexturePerspectiveOverride != 0) {
                     tailEnum = 8;
                 }
             } else {
                 tailEnum = 0xB;
-                if (D_800CC37C != 0) {
+                if (g_geometryTexturePerspectiveOverride != 0) {
                     tailEnum = 10;
                 }
             }
@@ -600,14 +600,14 @@ a = Graphu64_NextRandom() % info.count;
     }
     mode = 0x260404;
     if (flags & 0x1000) {
-        mode |= D_800CC384;
+        mode |= g_geometryEffectGeometryMode;
     }
     gSPGeometryMode(g_displayListCursor++, mode, 0);
     mode = 0;
     if (!(flags & 0x1000)) {
-        mode = D_800CC384;
+        mode = g_geometryEffectGeometryMode;
     }
-    if (D_800D15E0 == 7) {
+    if (g_menuModelFillEnabled == 7) {
         mode |= 0x20000;
     }
     if (!(flags & 0x42)) {

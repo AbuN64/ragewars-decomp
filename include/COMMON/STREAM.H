@@ -21,9 +21,9 @@ typedef struct Segment8025FFD0 Segment8025FFD0;
 
 
 
-extern float D_800C9208;
+extern float g_motionQuantizedRateFallbackScale;
 
-extern float D_800C4168_de;
+extern float g_packedFloatQuantizationRoundBias;
 
 
 
@@ -32,13 +32,13 @@ struct Segment8025FFD0;
 
 struct Stream;
 struct Stream {
-    s32 unk0;
+    s32 coefficientBitWidth;
     char pad4[8];
-    s32 unkC;
+    s32 segmentBitAddress;
     float coeff[4];
-    u32 unk20;
-    u32 unk24;
-    s32 unk28;
+    u32 segmentSampleCount;
+    u32 segmentStartSample;
+    s32 segmentIndex;
 };
 
 struct Decode8025EF54;
@@ -47,11 +47,11 @@ struct Curve;
 typedef struct Curve Curve;
 
 
-extern double D_800C40F8_de;
+extern double g_sampleTrackUnsignedConversionBias;
 
-extern float D_800C9200;
+extern float g_motionQuantizedRatePeriodThreshold;
 
-extern double D_800C4100_de;
+extern double g_trackSectionUnsignedConversionBias;
 
 
 
@@ -68,6 +68,6 @@ struct Curve;
 
 
 /* Frame counts of the loaded motion, read by the stream decoder. */
-extern s32 D_8010AC84;
-extern s32 D_8010AC88;
+extern s32 g_motionTrackSourceFrameCount;
+extern s32 g_motionTrackRotationFrameCount;
 #endif

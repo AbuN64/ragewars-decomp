@@ -4,7 +4,7 @@
 #include "COMMON/DISPLAY.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJRECAT18V6.H"
-#include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "COMMON/CHANNEL.H"
 #include "COMMON/RENDERSETTINGS.H"
 #include "COMMON/SESSION_STATE.H"
@@ -18,14 +18,14 @@ struct GameSession {
     u8 reservedHud[0x25580 - 0x1BCF8 - sizeof(Hud)];
     CPlayerPool menu[1]; /* +0x25580, func_80449DB0_de */
     u8 reserved255C4[4];
-    /* D_8014561C is this session's match state at +0x25B5C. Its
+    /* g_matchEndingTeamWheelClose is this session's match state at +0x25B5C. Its
      * messages overlap the screen-message owner, and its settings overlap
      * local/arena. The pause word belongs to clockPaused only. */
     union {
         struct {
             struct ScreenMessageOwner players[1]; /* +0x255C8, func_8044A62C_de */
             u8 reservedPlayers[0x26825 - 0x255C8 - sizeof(struct ScreenMessageOwner)];
-            u8 local; /* +0x26825: D_801462C8.local, the local-player input flag (func_8044DE7C_de) */
+            u8 local; /* +0x26825: g_gameSettings.local, the local-player input flag (func_8044DE7C_de) */
             u8 arena; /* +0x26826: SetN64_StartRound */
             u8 reserved26827[0x26D8C - 0x26827];
             RenderSettings settings; /* +0x26D8C */
@@ -38,7 +38,7 @@ struct GameSession {
             u8 reserved26DC2[2];
             f32 timer;
             s32 enabled;
-            s32 field26DCC;
+            s32 reservedTransitionState;
             s32 transitionBlocked;
             s32 clockPaused;
             s32 selector;
@@ -50,6 +50,6 @@ struct GameSession {
         };
     };
 };
-/* The game session; its ring.current is D_8011BDC0 (+0x3C0). */
-extern GameSession D_8011FAC0;
+/* The game session; its ring.current is g_currentRenderFrame (+0x3C0). */
+extern GameSession g_gameSession;
 #endif

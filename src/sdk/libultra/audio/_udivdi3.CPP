@@ -6,13 +6,13 @@
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802C1254[3] = {
+unsigned int k_Udivdi3EncodedWords[3] = {
     0x00660000, 0x00040000, 0x00000009,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_802C1604[3] = {
+unsigned int k_Udivdi3EncodedWordsBlock1[3] = {
     0x40400000, 0x40400000, 0x41B80000,
 };
 #endif

@@ -6,10 +6,10 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "COMMON/OBJRECAT18V6.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
@@ -18,11 +18,11 @@
 #include "COMMON/RESIDENTSTATE.H"
 #include "RENDER/RIBBON_DRAW.H"
 
-extern void *Fx_AllocateRibbonSegment(void *arg0, s32 arg1);
+extern void *Fx_AllocateRibbonSegment(void *effectSystem, s32 ribbonAddress);
 
 extern void Graphu64_GetMatrixTranslation(char *object, f32 *output);
 
-extern void Graphu64_GetMatrixScale(void *matrix, f32 *arg1);
+extern void Graphu64_GetMatrixScale(void *matrix, f32 *scaleOut);
 
 extern void Graphu64_SubtractVectors(CVector3 *difference, CVector3 *leftVector, CVector3 *rightVector);
 
@@ -99,61 +99,61 @@ extern void Linked_BuildRibbonSegmentMatrix(Node438C *, Node438C *, struct Gamep
 extern void Graphu64_ScaleVector(void *, void *, f32);
 extern void Graphu64_ConvertMatrixToFixed(void *, f32 *);
 
-void *Linked_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
+void *Linked_AppendRibbonSegment(void *effectSystem, void *ribbon, void *local) {
     CVector3 sp10;
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 var_f1;
-    void *temp_s1;
-    char *var_s0;
+    f32 segmentDistance;
+    f32 previousSegmentDistance;
+    f32 accumulatedDistance;
+    void *previousSegment;
+    char *segment;
     char *ribbonSegmentResult;
 
-    ribbonSegmentResult = Fx_AllocateRibbonSegment(arg0, (s32)arg1);
-    var_s0 = ribbonSegmentResult;
+    ribbonSegmentResult = Fx_AllocateRibbonSegment(effectSystem, (s32)ribbon);
+    segment = ribbonSegmentResult;
     if (ribbonSegmentResult != 0) {
-        ((ObjectLinks54 *)(arg1))->unk_50 = 0;
-        ((ObjectLinksB4 *)(var_s0))->unk_8 = ((struct ObjectState20 *) ((ObjectLinks54 *) arg1)->unk_8)->unk_8;
-        ((ObjectLinksB4 *)(var_s0))->unk_B0 = 0;
-        Graphu64_GetMatrixTranslation(local, &((ObjectLinksB4 *)(var_s0))->unk_10.v0);
-        if (((ObjectLinks54 *)(arg1))->unk_3C & 4) {
-            Graphu64_GetMatrixScale(local, &((ObjectLinksB4 *)(var_s0))->unk_1C);
+        ((TexturedRibbonOwnerView *)(ribbon))->unk_50 = 0;
+        ((TexturedRibbonStateView *)(segment))->unk_8 = ((struct TexturedRibbonResourceView *) ((TexturedRibbonOwnerView *) ribbon)->unk_8)->unk_8;
+        ((TexturedRibbonStateView *)(segment))->unk_B0 = 0;
+        Graphu64_GetMatrixTranslation(local, &((TexturedRibbonStateView *)(segment))->unk_10.v0);
+        if (((TexturedRibbonOwnerView *)(ribbon))->unk_3C & 4) {
+            Graphu64_GetMatrixScale(local, &((TexturedRibbonStateView *)(segment))->unk_1C);
         } else {
-            Graphu64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
-            Graphu64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
+            Graphu64_ConvertMatrixToFixed(local, &((TexturedRibbonStateView *)(segment))->unk_28);
+            Graphu64_ConvertMatrixToFixed(local, &((TexturedRibbonStateView *)(segment))->unk_68);
         }
-        temp_s1 = *(void **)var_s0;
-        ((ObjectLinksB4 *)(var_s0))->unk_AC.v0 = 0;
-        ((ObjectLinksB4 *)(var_s0))->unk_A8 = 0.0f;
-        if (temp_s1 != 0) {
-            Graphu64_SubtractVectors(&sp10, &((ObjectLinksB4 *)(var_s0))->unk_10.v1, &((ObjectStateB0 *)(temp_s1))->unk_10);
-            temp_f0 = Gu_Sqrtf((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
-            ((ObjectStateB0 *)(temp_s1))->unk_AC = temp_f0;
-            ((ObjectLinks54 *)(arg1))->unk_4C += temp_f0;
+        previousSegment = *(void **)segment;
+        ((TexturedRibbonStateView *)(segment))->unk_AC.v0 = 0;
+        ((TexturedRibbonStateView *)(segment))->unk_A8 = 0.0f;
+        if (previousSegment != 0) {
+            Graphu64_SubtractVectors(&sp10, &((TexturedRibbonStateView *)(segment))->unk_10.v1, &((TexturedRibbonSegmentView *)(previousSegment))->unk_10);
+            segmentDistance = Gu_Sqrtf((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
+            ((TexturedRibbonSegmentView *)(previousSegment))->unk_AC = segmentDistance;
+            ((TexturedRibbonOwnerView *)(ribbon))->unk_4C += segmentDistance;
         }
-        if (((struct ObjectState20 *) ((ObjectLinks54 *) arg1)->unk_8)->unk_1C == 0) {
-            if (((ObjectLinks54 *)(arg1))->unk_4C > 0.0f) {
-                var_f1 = 0.0f;
-                var_s0 = ((ObjectLinks54 *)(arg1))->unk_40;
-                if (var_s0 != 0) {
+        if (((struct TexturedRibbonResourceView *) ((TexturedRibbonOwnerView *) ribbon)->unk_8)->unk_1C == 0) {
+            if (((TexturedRibbonOwnerView *)(ribbon))->unk_4C > 0.0f) {
+                accumulatedDistance = 0.0f;
+                segment = ((TexturedRibbonOwnerView *)(ribbon))->unk_40;
+                if (segment != 0) {
                     do {
-                        ((ObjectLinksB4 *)(var_s0))->unk_A8 = var_f1 / ((ObjectLinks54 *)(arg1))->unk_4C;
-                        temp_f0_2 = ((ObjectLinksB4 *)(var_s0))->unk_AC.v1;
-                        var_s0 = ((ObjectLinksB4 *)(var_s0))->unk_4;
-                        var_f1 += temp_f0_2;
-                    } while (var_s0 != 0);
+                        ((TexturedRibbonStateView *)(segment))->unk_A8 = accumulatedDistance / ((TexturedRibbonOwnerView *)(ribbon))->unk_4C;
+                        previousSegmentDistance = ((TexturedRibbonStateView *)(segment))->unk_AC.v1;
+                        segment = ((TexturedRibbonStateView *)(segment))->unk_4;
+                        accumulatedDistance += previousSegmentDistance;
+                    } while (segment != 0);
                 }
             }
         } else {
-            if (temp_s1 != 0) {
-                ((ObjectLinks54 *)(arg1))->unk_28 += ((ObjectStateB0 *)(temp_s1))->unk_AC * D_800C5DC0_de;
+            if (previousSegment != 0) {
+                ((TexturedRibbonOwnerView *)(ribbon))->unk_28 += ((TexturedRibbonSegmentView *)(previousSegment))->unk_AC * g_ribbonDistancePhaseScale;
             }
-            ((ObjectLinksB4 *)(var_s0))->unk_A8 = ((ObjectLinks54 *)(arg1))->unk_28;
+            ((TexturedRibbonStateView *)(segment))->unk_A8 = ((TexturedRibbonOwnerView *)(ribbon))->unk_28;
         }
     }
     return ribbonSegmentResult;
 }
 
-void Linked_BuildColoredRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *morph) {
+void Linked_BuildColoredRibbonVertices(RibbonActor *actor, RibbonClockNode *clock, Vtx *out, Morph *morph) {
     f32 a[3];
     f32 b[3];
     f32 weight;
@@ -167,7 +167,7 @@ void Linked_BuildColoredRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, 
     s32 green;
     s32 blue;
 
-    weight = 0.5f - Math_Cosf(clock->unk8 / actor->track->total * 3.1415927f) * 0.5f;
+    weight = 0.5f - Math_Cosf(clock->time / actor->track->total * 3.1415927f) * 0.5f;
     if (actor->time <= actor->track->span) {
         weight = weight * (0.5f - Math_Cosf(actor->time / actor->track->span * 3.1415927f) * 0.5f);
     }
@@ -203,7 +203,7 @@ void Linked_BuildColoredRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, 
     }
 }
 
-void Linked_BuildTexturedRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 scale, Morph *morph) {
+void Linked_BuildTexturedRibbonVertices(RibbonActor *actor, RibbonClockNode *clock, Vtx *out, f32 scale, Morph *morph) {
     f32 a[3];
     f32 b[3];
     f32 weight;
@@ -218,7 +218,7 @@ void Linked_BuildTexturedRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock,
     s32 green;
     s32 blue;
 
-    weight = 0.5f - Math_Cosf(clock->unk8 / actor->track->total * 3.1415927f) * 0.5f;
+    weight = 0.5f - Math_Cosf(clock->time / actor->track->total * 3.1415927f) * 0.5f;
     if (actor->time <= actor->track->span) {
         weight = weight * (0.5f - Math_Cosf(actor->time / actor->track->span * 3.1415927f) * 0.5f);
     }
@@ -269,12 +269,12 @@ s32 Linked_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) 
     f32 value;
     f32 updated;
 
-    saved_step = D_800D2988;
+    saved_step = g_frameElapsedTime;
     if (state->flags & 2) {
-        D_800D2988 = saved_step * D_800CD740_de;
+        g_frameElapsedTime = saved_step * g_particleSimulationTimeScale;
     }
     if (state->flags & 1) {
-        D_800D2988 *= (&D_800D2988)[1];
+        g_frameElapsedTime *= (&g_frameElapsedTime)[1];
     }
     if (state->flags & 8) {
         state->retries++;
@@ -284,9 +284,9 @@ s32 Linked_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) 
     }
 
     if (state->count_up >= 0.0f) {
-        state->total += D_800D2988;
+        state->total += g_frameElapsedTime;
     }
-    state->timer -= D_800D2988;
+    state->timer -= g_frameElapsedTime;
     if (state->timer < 0.0f) {
         state->timer = 0.0f;
     }
@@ -294,8 +294,8 @@ s32 Linked_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) 
     node = state->nodes;
     if (node != 0) {
         zero = 0.0f;
-        decay = D_800C5DE0_de[1];
-        cutoff = D_800C5DE8_de[0];
+        decay = g_ribbonNodeTransformDecayConstants[1];
+        cutoff = g_ribbonNodeTransformCutoffConstants[0];
         do {
             next = node->next;
             if (state->timer <= zero && node->value > zero) {
@@ -309,7 +309,7 @@ s32 Linked_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) 
                     Fx_FreeRibbonSegment(owner, state, node);
                 }
             } else {
-                updated = value - D_800D2988;
+                updated = value - g_frameElapsedTime;
                 node->value = updated;
                 if (updated < zero) {
                     node->value = zero;
@@ -324,7 +324,7 @@ s32 Linked_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) 
         !(object->flags & 0x200)) {
         Fx_DetachEffectObject(state);
     }
-    D_800D2988 = saved_step;
+    g_frameElapsedTime = saved_step;
 
     if (state->active == 0) {
         if (state->timer != 0.0f) {
@@ -338,7 +338,7 @@ s32 Linked_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) 
     return 1;
 }
 
-void Linked_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, void *matrix) {
+void Linked_BuildRibbonSegmentMatrix(Node438C *firstSegment, Node438C *secondSegment, GameplayCamera *camera, void *matrix) {
     f32 setup[4];
     CVector3 first;
     CVector3 basis;
@@ -347,12 +347,12 @@ void Linked_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCam
     f32 neg_y;
     f32 neg_z;
 
-    Graphu64_SubtractVectors(&first, &arg0->position,
-                  &arg1->position);
+    Graphu64_SubtractVectors(&first, &firstSegment->position,
+                  &secondSegment->position);
     Graphu64_NormalizeVec3(&first);
     setup[0] = 0;
     setup[1] = 0;
-    setup[2] = D_800C5DE8_de[1];
+    setup[2] = g_ribbonNodeTransformCutoffConstants[1];
     Graphu64_TransformDirection(camera->inverseViewOrient, setup, &basis);
     neg_y = -basis.y;
     neg_z = -basis.z;
@@ -364,9 +364,9 @@ void Linked_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCam
     Graphu64_NormalizeVec3(&cross);
     Graphu64_CrossVectors(&result, &basis, &cross);
     Graphu64_NormalizeVec3(&result);
-    Graphu64_ScaleVector(&result, &result, arg0->a);
-    Graphu64_ScaleVector(&cross, &cross, arg0->b);
-    Graphu64_ScaleVector(&basis, &basis, arg0->c);
+    Graphu64_ScaleVector(&result, &result, firstSegment->a);
+    Graphu64_ScaleVector(&cross, &cross, firstSegment->b);
+    Graphu64_ScaleVector(&basis, &basis, firstSegment->c);
     Graphu64_IdentityMatrix(matrix);
     ((Matrix *)matrix)->m[0] = result.x;
     ((Matrix *)matrix)->m[1] = result.y;
@@ -377,18 +377,18 @@ void Linked_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCam
     ((Matrix *)matrix)->m[8] = basis.x;
     ((Matrix *)matrix)->m[9] = basis.y;
     ((Matrix *)matrix)->m[10] = basis.z;
-    ((Matrix *)matrix)->m[12] = arg0->position.x;
-    ((Matrix *)matrix)->m[13] = arg0->position.y;
-    ((Matrix *)matrix)->m[14] = arg0->position.z;
+    ((Matrix *)matrix)->m[12] = firstSegment->position.x;
+    ((Matrix *)matrix)->m[13] = firstSegment->position.y;
+    ((Matrix *)matrix)->m[14] = firstSegment->position.z;
 }
 
 struct GameplayCamera;
 
-void Linked_UpdateRibbonMatrices(void *arg0, void *camera) {
+void Linked_UpdateRibbonMatrices(void *ribbon, void *camera) {
     f32 matrix[16];
     Node438C *first;
     Node438C *next;
-    State802A6DF8 *state = arg0;
+    ItemMenuRenderNode *state = ribbon;
 
     if (state->vertexCount < 2) {
         return;
@@ -442,7 +442,7 @@ no_pair:
             matrix[14] = first->position.z;
         }
 apply:
-        Graphu64_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
+        Graphu64_ConvertMatrixToFixed(matrix, first->matrices[g_lightingBufferIndex]);
         first = next;
         next = first->next;
     }
@@ -450,10 +450,10 @@ apply:
     matrix[12] = first->position.x;
     matrix[13] = first->position.y;
     matrix[14] = first->position.z;
-    Graphu64_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
+    Graphu64_ConvertMatrixToFixed(matrix, first->matrices[g_lightingBufferIndex]);
 }
 
-extern f32 D_800C5DF0_de, D_800C5DF4_de;
+extern f32 g_ribbonPositiveLayerScale, g_ribbonNegativeLayerScale;
 extern void Graphu64_ConvertMatrixToFloat(void *, void *);
 extern void ScaleMatrixLocal(void *, f32, f32, f32);
 extern void Graphu64_ClampMatrixToFixedRange(void *);
@@ -483,10 +483,10 @@ typedef struct LinkOwner802A {
 static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A *node, void *source) {
     f32 matrix[16];
     f32 scale;
-    Graphu64_ConvertMatrixToFloat(matrix, (char *)source + (D_800D297C * 64 + 0x60));
-    scale = D_800C5DF0_de;
+    Graphu64_ConvertMatrixToFloat(matrix, (char *)source + (g_lightingBufferIndex * 64 + 0x60));
+    scale = g_ribbonPositiveLayerScale;
     if (*(s32 *)(*(char **)((char *)source + 0x118) + 0x14) != 0) {
-        scale = D_800C5DF4_de;
+        scale = g_ribbonNegativeLayerScale;
     }
     ScaleMatrixLocal(matrix, scale, scale, scale);
     Graphu64_ClampMatrixToFixedRange(matrix);
@@ -494,7 +494,7 @@ static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A 
     if (owner->flags & 4) {
         Graphu64_GetMatrixScale(matrix, (f32 *)((char *)node + 0x1C));
     } else {
-        Graphu64_ConvertMatrixToFixed(matrix, node->matrices[D_800D297C].m);
+        Graphu64_ConvertMatrixToFixed(matrix, node->matrices[g_lightingBufferIndex].m);
     }
 }
 void Linked_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
@@ -508,7 +508,7 @@ void Linked_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
         source = node->source;
         if (source != 0) {
             if (source == (void *)-1) {
-                node->matrices[D_800D297C] = node->matrices[D_800D297C ^ 1];
+                node->matrices[g_lightingBufferIndex] = node->matrices[g_lightingBufferIndex ^ 1];
                 node->source = 0;
             } else {
                 Render_UpdateLinkedSource(owner, node, source);
@@ -530,7 +530,7 @@ void Linked_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
     }
 }
 
-extern float D_800C5DF8_de, D_800C5DFC, D_800C5E00_de, D_800C5E04_de;
+extern float g_texturedRibbonTextureCoordinateScale, g_ribbonTextureCoordinateOffset, g_ribbonInterpolationUnit, g_ribbonTexturePeriod;
 
 void *Textload_RequestTextureVariation(s32 *, s32);
 void Textload_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
@@ -550,7 +550,7 @@ void Linked_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCa
     struct Shared_AnimInfo *anim;
     void *model;
     struct CROMSwoosh_t *track;
-    ObjRecAt28V1 *clock, *next, *node;
+    RibbonClockNode *clock, *next, *node;
     Vtx *vertices;
     f32 offset;
     f32 period;
@@ -574,15 +574,15 @@ void Linked_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCa
     storage.count = actor->track->count;
     if (actor->flags & 2) { storage.first = actor->first; storage.second = actor->second; }
     else { storage.first = actor->first; storage.second = actor->first; }
-    storage.scaleS = actor->track->scaleS * D_800C5DF8_de;
-    storage.scaleT = actor->track->scaleT * D_800C5DF8_de;
+    storage.scaleS = actor->track->scaleS * g_texturedRibbonTextureCoordinateScale;
+    storage.scaleT = actor->track->scaleT * g_texturedRibbonTextureCoordinateScale;
     if (anim != 0) {
         storage.textureScaleS = 1 << (anim->frame->shiftS + 5);
-        storage.textureScaleS = storage.textureScaleS * actor->track->textureScale - D_800C5DFC;
+        storage.textureScaleS = storage.textureScaleS * actor->track->textureScale - g_ribbonTextureCoordinateOffset;
         storage.textureScaleT = 1 << (anim->frame->shiftT + 5);
-        storage.step = D_800C5E00_de / (storage.count - D_800C5E00_de);
+        storage.step = g_ribbonInterpolationUnit / (storage.count - g_ribbonInterpolationUnit);
     }
-    period = D_800C5E04_de;
+    period = g_ribbonTexturePeriod;
     while (actor->phase >= period) actor->phase -= period;
     gDPPipeSync(g_displayListCursor++);
     switch (info.frame->kind) {
@@ -614,15 +614,15 @@ void Linked_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCa
     Textload_LoadTextureFrame(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
 #endif
     edges = count - 1;
-    gSPMatrix(g_displayListCursor++, &clock->matrix[D_800D297C], G_MTX_LOAD);
-    while (clock != 0 && next != 0 && 0.0f < clock->unk8 && 0.0f < next->unk8 && used + count * 2 < 32) {
+    gSPMatrix(g_displayListCursor++, &clock->matrix[g_lightingBufferIndex], G_MTX_LOAD);
+    while (clock != 0 && next != 0 && 0.0f < clock->time && 0.0f < next->time && used + count * 2 < 32) {
         f32 scale;
         vertices = Fx_AllocateRibbonVertices(pool, count);
         if (vertices == 0) break;
         Linked_BuildTexturedRibbonVertices(actor, clock, vertices, clock->offset, &storage);
         used += count;
         gSPVertex(g_displayListCursor++, vertices, count, 0);
-        gSPMatrix(g_displayListCursor++, &next->matrix[D_800D297C], G_MTX_LOAD);
+        gSPMatrix(g_displayListCursor++, &next->matrix[g_lightingBufferIndex], G_MTX_LOAD);
         vertices = Fx_AllocateRibbonVertices(pool, count);
         if (vertices == 0) break;
         scale = next->offset;

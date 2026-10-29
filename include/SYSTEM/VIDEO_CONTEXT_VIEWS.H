@@ -1,7 +1,7 @@
 #ifndef SYSTEM_VIDEO_CONTEXT_VIEWS_H
 #define SYSTEM_VIDEO_CONTEXT_VIEWS_H
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 struct RecCode802BA23C {
     char pad0[2];
     s16 f2;

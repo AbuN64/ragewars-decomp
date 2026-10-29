@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "COMMON/DEVICE_IO.H"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
@@ -9,14 +9,14 @@
 /* __osViSwapContext, drafted from ultralib src/io/viswapcontext.c (2.0I: vStart straight from the
    field registers). The unsigned-to-float and float-to-unsigned conversions of the y scale use the
    cartridge's 2^32 and 2^31 constants, so both are written out. */
-extern __OSViContext_func_802BA910_de *D_800D8440;
-extern __OSViContext_func_802BA910_de *D_800D4414;
+extern ViSwapContextView *g_currentVideoInterfaceContext;
+extern ViSwapContextView *g_nextVideoInterfaceContext;
  /* 2^32 */
  /* 2^31 */
 void __osViSwapContext(void)
 {
     register Modep *vm;
-    register __OSViContext_func_802BA910_de *vc;
+    register ViSwapContextView *vc;
     u32 origin;
     u32 hStart;
     u32 nomValue;
@@ -25,9 +25,9 @@ void __osViSwapContext(void)
     f32 scale;
     u32 yscale;
     u32 *yscalep;
-    __OSViContext_func_802BA910_de **curr;
+    ViSwapContextView **curr;
     field = 0;
-    vc = D_800D4414;
+    vc = g_nextVideoInterfaceContext;
     vm = vc->modep;
     field = (*(volatile u32 *)(0xA4400010)) & 1;
     origin = osVirtualToPhysical(vc->framep) + (vm->fldRegs[field].origin);
@@ -41,17 +41,17 @@ void __osViSwapContext(void)
         yscalep = &vc->y.scale;
         nom = (s32)nomValue;
         if ((s32)nomValue < 0) {
-            nom += D_800C79D0_de;
+            nom += g_videoScaleUnsignedBias;
         }
         scale = vc->y.factor * (f32)nom;
         /* The unsigned conversion in GCC's own order: large values take the offset path. */
-        if (scale >= D_800C79D8_de) {
+        if (scale >= g_videoScaleSignedConversionLimit) {
             goto large;
         }
         yscale = (s32)scale;
         goto converted;
     large:
-        yscale = (s32)(scale - D_800C79D8_de) | 0x80000000;
+        yscale = (s32)(scale - g_videoScaleSignedConversionLimit) | 0x80000000;
     converted:
         *yscalep = yscale;
         vc->y.scale |= vm->fldRegs[field].yScale & ~0xFFF;
@@ -83,14 +83,14 @@ void __osViSwapContext(void)
     IO_WRITE(0xA4400030, vc->x.scale);
     IO_WRITE(0xA4400034, vc->y.scale);
     IO_WRITE(0xA4400000, vc->control);
-    curr = &D_800D8440;
-    D_800D4414 = *curr;
+    curr = &g_currentVideoInterfaceContext;
+    g_nextVideoInterfaceContext = *curr;
     *curr = vc;
-    *D_800D4414 = **curr;
+    *g_nextVideoInterfaceContext = **curr;
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BAB7C[1] = {
+unsigned int k_ViDataEncodedWords[1] = {
     0x003C0000,
 };
 #endif

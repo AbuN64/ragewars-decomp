@@ -46,7 +46,7 @@ struct CloseAttackBrain;
 
 extern s32 Nav_SelectCloseAttackPickupGoal(struct CloseAttackBrain *closeAttackBrain);
 
-extern s32 Nav_SelectChaseObjectGoal(void *arg0);
+extern s32 Nav_SelectChaseObjectGoal(void *actor);
 
 struct AiController;
 
@@ -54,19 +54,19 @@ extern s32 Nav_SelectStationaryObjectGoal(struct AiController *controller);
 
 extern void Nav_ResetPatrolRouteSelection(void *object);
 
-extern void Nav_SelectFlaggedRoamingGoal(void *arg0);
+extern void Nav_SelectFlaggedRoamingGoal(void *actor);
 
 struct AimPlayer;
 
-extern void func_8021A9A4_de(struct AimPlayer *aimPlayer, s32 effect);
+extern void Playerai_DispatchWeaponFireEffect(struct AimPlayer *aimPlayer, s32 effect);
 
 extern s32 Player_HasAmmoForMode(void *, s32);
 
-extern void func_8022B00C_de(void *player);
+extern void Playerai_StopSecondaryAttachedSound(void *player);
 
 struct LevelActor;
 
-extern void Player_ZeroBodyVelocity(void *arg0, struct LevelActor *actor);
+extern void Player_ZeroBodyVelocity(void *unusedContext, struct LevelActor *actor);
 
 extern void Player_UpdateJumpAirMotion(void *player, void *body);
 
@@ -80,7 +80,7 @@ extern void Player_ResetMovementInput(void *motionPlayerState, struct LevelActor
 
 extern void Player_ResetObjectVelocity(void *unused, void *object);
 
-extern void Player_InitializeProfileSlot(s32 arg0);
+extern void Player_InitializeProfileSlot(s32 profileIndex);
 
 extern void Cinema_SetResponse(float responseValue);
 
@@ -94,25 +94,25 @@ extern s32 Gobjinst_RequestAnimationIndex(void *levelActor, s32 animationIndex, 
 
 extern s32 Cache_EvictResource(s32 unused0, s32 unused1, s32 keep_recent);
 
-extern void *Cache_AllocateHeapWithEviction(s32 arg0, u32 byteCount, s32 allocatorSelection, u32 evictionFlags);
+extern void *Cache_AllocateHeapWithEviction(s32 unusedCache, u32 byteCount, s32 allocatorSelection, u32 evictionFlags);
 
 extern void Cache_ClearResourceSlotProtection(s32, s32);
 
-extern void func_80255F70_de(IntrusiveList *list);
+extern void List_DropIntrusiveHead(IntrusiveList *list);
 
 struct RecordD90;
 
 extern s32 Audio_ReleaseMatchingExclusiveVoice(struct RecordD90 *record, s16 value, s16 id);
 
-extern void Audio_SetVoiceTrackId(void *arg0, int newTrackId);
+extern void Audio_SetVoiceTrackId(void *voice, int newTrackId);
 
 extern void SoundElement_PlayDialogGroup(s32 callback);
 
 extern void SoundElement_StopAudioExceptKey(s32 retainedKey);
 
-extern void func_8025E2D4_de(s32 a);
+extern void SoundElement_SetMusicPlaybackEnabled(s32 a);
 
-extern void SoundElement_SetClampedAudioLevel(f32 arg0);
+extern void SoundElement_SetClampedAudioLevel(f32 level);
 
 extern int Control_IsLeftPressed(struct ControllerProfile *object);
 
@@ -120,7 +120,7 @@ extern int Control_IsRightPressed(struct ControllerProfile *object);
 
 extern s32 Control_AcquireControllerLock(s32 block);
 
-extern int Control_IsControllerPakEnabled(int arg0);
+extern int Control_IsControllerPakEnabled(int controllerPort);
 
 extern void Control_SetControllerMode(s32 a);
 
@@ -154,7 +154,7 @@ struct Shared_World;
 struct CVector3_t;
 extern s32 Scene_FindFloorPolygon(struct Shared_World *, struct CVector3_t *);
 
-extern s32 Scene_GetModelSectionTwoRecord(void *world, s32 arg1);
+extern s32 Scene_GetModelSectionTwoRecord(void *world, s32 modelIndex);
 
 extern void Sched_HandleRspCompletion(void *object);
 
@@ -178,37 +178,37 @@ extern s32 DispatchElementEvent(s32 id, s32 event, s32, s32, s32);
 
 extern s32 SmSmngr_DispatchPrimaryScreenEvent(s32 event, s32, s32, s32);
 
-extern f32 XMath_EvaluateSine(f32 arg0);
+extern f32 XMath_EvaluateSine(f32 angle);
 
 extern void XMath_EvaluateSineCosine(f32 angle, f32 *sinOut, f32 *cosOut);
 
 extern f32 XMath_EvaluateArcTangentTwo(f32 y, f32 x);
 
-extern void XMath_MultiplyMatrices(s32 matrix, s32 arg1, s32 arg2);
+extern void XMath_MultiplyMatrices(s32 matrix, s32 leftMatrix, s32 rightMatrix);
 
-extern s32 XMath_AbsoluteInteger(s32 fifth);
+extern s32 XMath_AbsoluteInteger(s32 value);
 
-extern void XMath_EvaluateCosine(f32 arg0);
+extern void XMath_EvaluateCosine(f32 angle);
 
 extern f32 XMath_EvaluateArcSine(f32 x);
 
 extern s32 XPlus_ParseDecimalInteger(u8 *s);
 
-extern void N64Eng_GetScreenSize(int *arg0, int *arg1);
+extern void N64Eng_GetScreenSize(int *widthOut, int *heightOut);
 
-extern void Tsmos_SetModeOneFlag(s32 arg0);
+extern void Tsmos_SetModeOneFlag(s32 enabled);
 
 extern void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language);
 
-extern void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
+extern void OnScreen_GetImageDimensions(s32 resourceId, s32 imageIndex, s32 *widthOut, s32 *heightOut);
 
-extern void OnScreen_SetTextColors(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
+extern void OnScreen_SetTextColors(int red, int green, int blue, int shadowRed, int shadowGreen, int shadowBlue);
 
-extern void OnScreen_SetTextScale(float arg0, float arg1);
+extern void OnScreen_SetTextScale(float scaleX, float scaleY);
 
 extern s32 Pickup_ApplyAmmo(void *player, void *pickupEntry);
 
-extern s32 Pickup_ApplyLifePoints(void *arg0, void *arg1);
+extern s32 Pickup_ApplyLifePoints(void *player, void *pickup);
 
 struct ActorPickupCanCollect;
 
@@ -216,24 +216,24 @@ struct MultiChannelItemEffect;
 
 extern s32 Pickup_ApplyAmmoBundle(struct ActorPickupCanCollect *player, struct MultiChannelItemEffect *ammoBundle);
 
-extern void osUnmapTLB(int arg0);
+extern void osUnmapTLB(int tlbIndex);
 
 extern void __CSPHandleNextSeqEvent(void *rawPlayer);
 
-extern void __CSPPostNextSeqEvent(void *arg0);
+extern void __CSPPostNextSeqEvent(void *sequencePlayer);
 
-extern void __setUsptFromTempo(void *arg0, f32 arg1);
+extern void __setUsptFromTempo(void *sequencePlayer, f32 tempo);
 
-extern f32 func_802AFE30_de(s32 arg0);
+extern f32 Audio_CentsToPitchRatio(s32 cents);
 
 extern void alCSPSetBank(s32 player, s32 bank);
 
 
-extern void alCSPSetVol(s32 player, s16 arg1);
+extern void alCSPSetVol(s32 player, s16 volume);
 
 extern void alCopy(unsigned char *source, unsigned char *destination, int count);
 
-extern s32 __voiceNeedsNoteKill(void *arg0, s32 targetVoice, s32 releaseDeadline);
+extern s32 __voiceNeedsNoteKill(void *voice, s32 targetVoice, s32 releaseDeadline);
 
 extern void __seqpStopOsc(void *seqPlayer, void *voiceState);
 
@@ -241,7 +241,7 @@ extern float Math_Cosf(float x);
 
 extern float Gu_Sinf(float x);
 
-extern unsigned int func_802B7EF0_eu(void *motorContext);
+extern unsigned int Control_StopMotorEu(void *motorContext);
 
 extern void osViSwapBuffer(s32 framebuffer);
 
@@ -267,7 +267,7 @@ struct Block40 {
 
 struct Block40;
 
-extern unsigned int func_802B80B4_eu(void *motorContext);
+extern unsigned int Control_StartMotorEu(void *motorContext);
 
 typedef struct __OSContRamReadFormat __OSContRamReadFormat;
 
@@ -307,8 +307,8 @@ struct Triple;
 
 extern u32 osMotorStop(struct Triple *);
 
-extern u32 func_802B7C50_de(struct Triple *);
+extern u32 Control_StopMotorDe(struct Triple *);
 
-extern u32 func_802B7F30_eu_x(struct Triple *);
+extern u32 Control_StopMotorEuX(struct Triple *);
 
 #endif

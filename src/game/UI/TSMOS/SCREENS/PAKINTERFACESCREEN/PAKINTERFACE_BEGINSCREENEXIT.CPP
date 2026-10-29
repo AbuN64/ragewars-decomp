@@ -3,7 +3,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "FRONTEND/PAKINTERFACE_BEGINSCREENEXIT.H"
 #include "FRONTEND/PAKINTERFACE_RETURNWITHOUTACTION.H"
 
@@ -12,43 +12,43 @@
 
 extern void Tsmos_DeactivateControllerState(void);
 void PAKInterface_BeginScreenExit(s32 focusEntry) {
-    s32 var_v0;
+    s32 unusedExitResult;
 
     Tsmos_DeactivateControllerState();
-    D_800E54A4->ready = 5;
-    D_800E54A4->timer = 4;
-    D_800E54A4->focus = focusEntry;
+    g_pakProfileScreenState->ready = 5;
+    g_pakProfileScreenState->timer = 4;
+    g_pakProfileScreenState->focus = focusEntry;
     if (focusEntry == -2) {
-        switch(D_801462C8.controllerMode) {
-        case 0:D_800E54A4->focus=7;break;
-        case 2:D_800E54A4->focus=7;break;
-        case 1:D_800E54A4->focus=9;break;
-        case 3:D_800E54A4->focus=7;break;
-        case 4:D_800E54A4->focus=10;break;
+        switch(g_gameSettings.controllerMode) {
+        case 0:g_pakProfileScreenState->focus=7;break;
+        case 2:g_pakProfileScreenState->focus=7;break;
+        case 1:g_pakProfileScreenState->focus=9;break;
+        case 3:g_pakProfileScreenState->focus=7;break;
+        case 4:g_pakProfileScreenState->focus=10;break;
         }
     }
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800DCB9C[1] = {
+unsigned int k_PakinterfaceBeginscreenexitEncodedWords[1] = {
     0x5F444541,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E972C[1] = {
+unsigned int k_PakinterfaceBeginscreenexitEncodedWordsBlock2[1] = {
     0x0000003E,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EE56C[1] = {
+unsigned int k_PakinterfaceBeginscreenexitEncodedWordsBlock3[1] = {
     0x8C180FE8,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DDEEC[1] = {
+unsigned int k_PakinterfaceBeginscreenexitEncodedWordsBlock1[1] = {
     0x004360AC,
 };
 #endif

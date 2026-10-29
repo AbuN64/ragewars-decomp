@@ -3,8 +3,8 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-struct IntegerState2C;
-struct IntegerState2C {
+struct CountedEffectActionConfig;
+struct CountedEffectActionConfig {
     char pad0[0x8];
     s32 unk_8;
     char pad8[0xC - 0x8 - sizeof(s32)];
@@ -16,22 +16,22 @@ struct IntegerState2C {
 };
 
 
-extern float D_800C1CFC_de;
+extern float g_actionBurstRestartRandomRange;
 
-extern float D_800C1CF4_de;
-
-
-
-extern float D_800C1CC0_de;
-
-struct SharedRecAt0V1;
-typedef struct SharedRecAt0V1 SharedRecAt0V1;
+extern float g_actionBurstRandomRange;
 
 
 
-extern float D_800C1C98_de;
+extern float g_difficultyAimPositiveJitter;
 
-extern float D_800C6E20;
+struct NavigationRawByteStorage;
+typedef struct NavigationRawByteStorage NavigationRawByteStorage;
+
+
+
+extern float g_difficultyEngagementOtherMultiplier;
+
+extern float g_actionSettingsRandomRange;
 
 struct Shared_WeaponSlot;
 typedef struct Shared_WeaponSlot Shared_WeaponSlot;
@@ -39,28 +39,28 @@ typedef struct Shared_WeaponSlot Shared_WeaponSlot;
 
 
 
-extern float D_800C1CAC_de;
+extern float g_aiCharacterSettingEasyScale;
 
 
 
 
 
-extern float D_800C1D00_de;
+extern float g_actionBurstAlternateDelayRandomRange;
 
 
-extern float D_800C1D08_de;
+extern float g_actionBurstPrimaryDelayRandomRange;
 
 
-extern float D_800C1CB0_de;
+extern float g_aiCharacterSettingHardScale;
 
-extern float D_800C1CC4_de;
+extern float g_difficultyAimNegativeJitter;
 
-extern float D_800C1CA8_de;
+extern float g_aiCharacterSettingBaseScale;
 
-extern float D_800C1CB8_de;
+extern float g_aiAttackRangeEasyScale;
 
-struct ObjectLinks2EC;
-struct ObjectLinks2EC {
+struct CountedEffectActionState;
+struct CountedEffectActionState {
     char pad0[0x64];
     char * unk_64;
     char pad64[0x23C - 0x64 - sizeof(char*)];
@@ -73,22 +73,22 @@ struct ObjectLinks2EC {
     s32 unk_2E8;
 };
 
-extern float D_800C1CA0_de;
+extern float g_aiAggressionEasyScale;
 
 
-extern float D_800C1D1C_de;
+extern float g_meterActionEffectDistanceLimit;
 
-extern float D_800C1D28_de;
+extern float g_actionPulseChanceRandomRange;
 
-extern float D_800C1CBC_de;
-
-
-
-extern float D_800C1C94_de;
+extern float g_aiAttackRangeHardScale;
 
 
 
-extern float D_800C1D2C_de;
+extern float g_difficultyEngagementFirstMultiplier;
+
+
+
+extern float g_actionPulseChanceBase;
 
 
 struct Shared_Arg0;
@@ -96,59 +96,59 @@ typedef struct Shared_Arg0 Shared_Arg0;
 
 struct Shared_Node;
 struct Shared_Node {
-    s32 unk0;
+    s32 nodeKey;
     char pad4[0xC];
-    struct Shared_Node * unk10;
+    struct Shared_Node * next;
     char pad14[0x20];
-    void * unk34;
+    void * linkedActor;
 };
 
 struct Shared_Arg0;
 struct Shared_Node;
 struct Shared_Arg0 {
-    s32 * unk0;
+    s32 * pointStorage;
     char pad4[0x20];
-    struct Shared_Node * unk24;
+    struct Shared_Node * searchNodes;
 };
 
 
 
 
-extern float D_800C6E04;
+extern float g_alternatingActionWaitRandomScale;
 
 
-struct ObjectLinks2EC;
-typedef struct ObjectLinks2EC ObjectLinks2EC;
+struct CountedEffectActionState;
+typedef struct CountedEffectActionState CountedEffectActionState;
 
-extern float D_800C1D24_de;
+extern float g_meterActionChanceBase;
 
 
-extern float D_800C1D20_de;
+extern float g_meterActionChanceRandomRange;
 
-extern float D_800C6E00;
+extern float g_timedActionWaitRandomScale;
 
-extern float D_800C1C9C_de;
+extern float g_aiAggressionBaseScale;
 
 struct Shared_Node;
 typedef struct Shared_Node Shared_Node;
 
-struct SharedRecAt0V1;
-struct SharedRecAt0V1 {
-    char unk0[1];
+struct NavigationRawByteStorage;
+struct NavigationRawByteStorage {
+    char bytes[1];
 };
 
 
-extern float D_800C1CF8_de;
+extern float g_actionBurstAlternateChance;
 
 struct Shared_WeaponSlot;
-struct func_80204620_S2;
+struct ActorModelIndexView;
 struct Shared_WeaponSlot {
     char pad0[0x8];
-    char unk8;
+    char positionBytes;
     char pad9[0xF];
-    struct func_80204620_S2 * unk18;
+    struct ActorModelIndexView * model;
     char pad1C[0xC8];
-    u16 unkE4;
+    u16 objectId;
     char padE6[0x2];
 };
 
@@ -163,25 +163,25 @@ extern void Portal_UpdateAlternatingActionBursts(struct AiController *controller
 extern void Portal_InitializeRandomActionSettings(void *object, void *settings);
 
 
-extern float D_800C1C90_de;
+extern float g_difficultyEngagementScale;
 
 struct Controls;
 typedef struct Controls Controls;
 
-extern float D_800C6E28;
+extern float g_portalEngagementScale;
 
 
-extern float D_800C1CA4_de;
+extern float g_aiAggressionHardScale;
 
 
-struct IntegerState2C;
-typedef struct IntegerState2C IntegerState2C;
+struct CountedEffectActionConfig;
+typedef struct CountedEffectActionConfig CountedEffectActionConfig;
 
 
-extern float D_800C1D04_de;
+extern float g_actionBurstAlternateAngleLimit;
 
 
-extern float D_800C1CB4_de;
+extern float g_aiAttackRangeBaseScale;
 
 
 
@@ -190,12 +190,12 @@ extern void Portal_UpdateMeterGatedActionBurst(void *object, void *settings);
 
 
 
-extern void Portal_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *config);
+extern void Portal_UpdateCountedEffectAction(CountedEffectActionState *controller, CountedEffectActionConfig *config);
 
-extern float D_800C6E08;
+extern float g_alternatingActionTargetRange;
 
 
-extern void Portal_UpdateRandomActionPulse(void *arg0, void *settings);
+extern void Portal_UpdateRandomActionPulse(void *controller, void *settings);
 
 
 
@@ -204,33 +204,33 @@ extern void Portal_UpdateTimedActionBurst(void *controller, void *settings);
 
 extern void Portal_UpdateHeldActionBurst(void *controller, void *settings);
 
-extern float D_800C1D0C_de;
+extern float g_actionBurstPrimaryAngleLimit;
 
 
 #include "COMMON/SHAREDCALLBACK5.H"
 typedef struct AiCharacterDefinition {
     u8 pad0[0x28];
-    f32 unk28; /* 0x28 */
-    f32 unk2C; /* 0x2C */
-    f32 unk30; /* 0x30 */
-    f32 unk34; /* 0x34 */
+    f32 aggression; /* 0x28 */
+    f32 engagement; /* 0x2C */
+    f32 attackRange; /* 0x30 */
+    f32 characterSetting; /* 0x34 */
     u8 pad38[0x14];
     u32 loadout[4]; /* 0x4C: word-sized item IDs; low half of [1] is the starting weapon ID. */
 } AiCharacterDefinition;
 typedef struct AiConfig {
-    s32 unk0; /* 0x0 */
-    s32 unk4; /* 0x4 */
-    s32 unk8; /* 0x8 */
-    s32 unkC; /* 0xC */
-    s32 unk10; /* 0x10 */
-    s32 unk14; /* 0x14 */
-    s32 unk18; /* 0x18 */
-    s32 unk1C; /* 0x1C */
-    s32 unk20; /* 0x20 */
-    s32 unk24; /* 0x24 */
-    s32 unk28; /* 0x28 */
-    s32 unk2C; /* 0x2C */
-    s32 unk30; /* 0x30 */
-    s32 unk34; /* 0x34 */
+    s32 primaryDelayBase; /* 0x0 */
+    s32 primaryDelaySpread; /* 0x4 */
+    s32 primaryDurationBase; /* 0x8 */
+    s32 primaryDurationSpread; /* 0xC */
+    s32 alternateCountdownBase; /* 0x10 */
+    s32 alternateCountdownSpread; /* 0x14 */
+    s32 pulseChancePercent; /* 0x18 */
+    s32 alternateDelayBase; /* 0x1C */
+    s32 alternateDelaySpread; /* 0x20 */
+    s32 alternateDurationBase; /* 0x24 */
+    s32 alternateDurationSpread; /* 0x28 */
+    s32 meterCooldownBase; /* 0x2C */
+    s32 meterCooldownSpread; /* 0x30 */
+    s32 meterThreshold; /* 0x34 */
 } AiConfig;
 #endif

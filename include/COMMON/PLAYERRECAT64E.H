@@ -5,8 +5,8 @@
 #include "COMMON/AIPROFILE.H"
 
 
-struct PlayerRecAt64E;
-struct PlayerRecAt64E {
+struct PlayerItemInventoryView;
+struct PlayerItemInventoryView {
     char pad[0x644];
     u8 flags[9];
     u8 count64D;
@@ -14,7 +14,7 @@ struct PlayerRecAt64E {
 };
 
 struct HolderMultiIsPlayerItemAvailable;
-struct PlayerRecAt64E;
+struct PlayerItemInventoryView;
 
 struct Flagged;
 struct Flagged {
@@ -33,13 +33,13 @@ struct ItemDef {
 };
 
 struct ItemDef;
-struct ItemRecAt18V2;
+struct MultiplayerItemAvailabilityView;
 
 
 struct Obj8043EB20;
 typedef struct Obj8043EB20 Obj8043EB20;
 
-struct ObjRecAt20V2;
+struct GamePlayerListView;
 
 struct PlayerFrontendCountOpenPlayerSlots;
 
@@ -57,12 +57,12 @@ struct Shared_PakMenu;
 
 
 
-extern f32 D_800E23A0[2];
-extern f32 D_800E23A8;
+extern f32 g_playerItemAlphaScale[2];
+extern f32 g_playerItemDisabledAlphaScale;
 
-extern char D_800DE380[];
-extern char D_800DE388_de[];
-extern char D_800DE390_de[];
-extern char D_8014DE10[];
-extern char D_8014DDD0[];
+extern char g_debugVariableValueFormat[];
+extern char g_debugVariableNamedFormat[];
+extern char g_debugVariableUnnamedFormat[];
+extern char g_debugVariableValueBuffer[];
+extern char g_debugVariableLabelBuffer[];
 #endif

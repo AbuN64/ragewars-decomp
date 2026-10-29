@@ -15,7 +15,7 @@ unsigned int s_bursteText[3] = {
 struct {
     unsigned int w0;
     unsigned char b1[3];
-} __attribute__((packed)) D_blob_phase2_1134fedb73172490582c = {
+} __attribute__((packed)) g_burstTextPackedStateWords = {
     0x00000001,
     { 0x00, 0x00, 0x00 },
 };

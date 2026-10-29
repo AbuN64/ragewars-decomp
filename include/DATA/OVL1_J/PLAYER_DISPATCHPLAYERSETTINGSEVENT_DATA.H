@@ -1,5 +1,5 @@
 #ifndef DATA_OVL1_J_PLAYER_DISPATCHPLAYERSETTINGSEVENT_DATA_H
 #define DATA_OVL1_J_PLAYER_DISPATCHPLAYERSETTINGSEVENT_DATA_H
-extern char D_00436D48[];
-extern char D_00436D50[];
+extern char g_packedCodeAddress24_00436D48[];
+extern char g_packedCodeAddress24_00436D50[];
 #endif

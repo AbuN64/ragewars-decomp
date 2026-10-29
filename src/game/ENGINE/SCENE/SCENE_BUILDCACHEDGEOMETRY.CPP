@@ -15,7 +15,7 @@
 #include "COMMON/GFX.H"
 #include "gbi.h"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "ENGINE/SCENE_GRID_AND_GEOMETRY_OPERATIONS.H"
 #include "stddef.h"
 #include "COMMON/GAMEPLAY_CAMERA.H"
@@ -26,7 +26,7 @@
 /* Tag of the cell grid packs (the first .rodata of this unit; the items overlay reads it too). */
 const char s_gridSectionText[] = "grid section";
 extern DraftStreamPair D_801031F8;
-extern char D_00285160[];
+extern char g_cResource_UnpackRequestEntry[];
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 extern void **Cache_RequestPackSection(s32, void *, s32, s32, void *, void *, void *);
 extern void Cache_LockResource(void *, Node80253610 *);
@@ -44,7 +44,7 @@ void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
     s32 zCount, lastX, firstZ, lastZ;
     s32 x, z, row, loaded, size, visible, slot;
 
-    viewers = (void *)D_80140FE8_de.camera;
+    viewers = (void *)g_gameplayCameraList.camera;
     if (viewers) {
         firstX = count = 0;
         table = SetN64_GetPackSection(world->grid, 0);
@@ -62,7 +62,7 @@ void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
         table = SetN64_GetPackSection(world->grid, 4);
         lastZ = zCount - 1;
         cells = table->data.cells;
-        while (firstX < xCount && xHigh[firstX] < D_801031F0.min.x) firstX++;
+        while (firstX < xCount && xHigh[firstX] < g_cameraVolumeBounds.min.x) firstX++;
         while (lastX >= 0 && D_801031F8.second < xLow[lastX]) lastX--;
         while (firstZ < zCount && zHigh[firstZ] < D_801031F8.first) firstZ++;
         while (lastZ >= 0 && D_800FF200.second < zLow[lastZ]) lastZ--;
@@ -76,7 +76,7 @@ void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
         else {
             world->specialPresent = 1;
             world->special = (void *)Cache_RequestPackSection(0, world->specialTable, focusX + focusZ * xCount + 1,
-                world->resourceKey, world, D_00285160, "Vis Info");
+                world->resourceKey, world, g_cResource_UnpackRequestEntry, "Vis Info");
             Cache_LockResource(0, (void *)world->special);
             Visdata_DecodeRegionGrid(world->specialState, focusX, focusZ, world->special->data, &viewers->position);
         }
@@ -99,7 +99,7 @@ void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
                 if (visible) {
                     loaded = SetN64_LocatePackSection(world->table, world->key, slot, &size);
                     resource = Cache_RequestResource(0, loaded, loaded, size, 8, world,
-                                              D_0028798C, s_gridSectionText, 0);
+                                              g_scene_BuildPlacedInstancesEntry, s_gridSectionText, 0);
                     if (resource) {
                         if (resource->data->count) {
                             entry->resource = resource;
@@ -125,7 +125,7 @@ finished:
 /* One geometry vertex of a prop's collision mesh (stride from its section header). */
 typedef struct ScenePoint { s16 x, y, z; } ScenePoint;
 extern Gfx *g_displayListCursor;
-extern struct Shape_typemap_165 *Cache_AllocateResource(s32, s32, u32, void *);
+extern struct CacheResourceBlockView *Cache_AllocateResource(s32, s32, u32, void *);
 extern s32 Statinst_GetPropModelIndex(ObjectSceneDrawCachedOpaqueGeometry *object);
 extern s32 Statinst_GetPropGeometryIndex(ObjectSceneDrawCachedOpaqueGeometry *object);
 extern DraftStreamHandle **Statinst_CollectPropResources(ObjectSceneDrawCachedOpaqueGeometry *object, s32 model, s32 index, DraftStreamHandle **nextResource);
@@ -152,7 +152,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     s32 row;
     DraftStreamHandle **nextResource;
     DraftStreamHandle *resource;
-    struct Shape_typemap_165 *handle;
+    struct CacheResourceBlockView *handle;
     DraftStreamHandle *geometry;
     DraftStreamTable *table;
     DraftStreamData *resourceData;
@@ -203,7 +203,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
                 cell = &cells[slot];
                 if (cell->occupied == 0) {
                     key = SetN64_LocatePackSection(world->table, world->key, slot, &resourceSize);
-                    resource = Cache_RequestResource(0, key, key, resourceSize, 4, (s32)world, D_0028798C, s_gridSectionText, 1);
+                    resource = Cache_RequestResource(0, key, key, resourceSize, 4, (s32)world, g_scene_BuildPlacedInstancesEntry, s_gridSectionText, 1);
                     if (resource != 0) {
                         resourceData = resource->data;
                         if (resourceData->count != 0) {
@@ -273,9 +273,9 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     world->cache[1] = 0x18;
     world->cache[2] = count;
     world->cache[3] = offset;
-    func_802BD3A0_de(SetN64_GetPackSection(world->cache, 0), resources, resourceBytes);
-    func_802BD3A0_de(SetN64_GetPackSection(world->cache, 1), props, propBytes);
-    func_802BD3A0_de(SetN64_GetPackSection(world->cache, 2), firstGfx, gfxBytes);
+    Libc_CopyBytes(SetN64_GetPackSection(world->cache, 0), resources, resourceBytes);
+    Libc_CopyBytes(SetN64_GetPackSection(world->cache, 1), props, propBytes);
+    Libc_CopyBytes(SetN64_GetPackSection(world->cache, 2), firstGfx, gfxBytes);
     g_displayListCursor = firstGfx;
 }
 
@@ -325,7 +325,7 @@ void Scene_DrawCachedOpaqueGeometry(SceneSceneDrawCachedOpaqueGeometry *scene, v
     gSPDisplayList(g_displayListCursor++, (unsigned int)scene->lists[0]);
 }
 
-extern void Cache_ReleaseResource(void *arg0, void *resource);
+extern void Cache_ReleaseResource(void *cacheContext, void *resource);
 
 /* One sector of the world: its model resource, its x/z extent and its cell in the streaming grid. */
 /* Views of the SN debug records this pass reads, with their original member names: CScene_t (0x1B930 bytes),
@@ -380,7 +380,7 @@ typedef struct SceneStaticSection {
 } SceneStaticSection;
 typedef struct CScene_t {
     char pad0[0x94];
-    TableRecAt8 *m_pusObjectTypes;
+    SceneModelIdTable *m_pusObjectTypes;
     char pad98[0xB4C - 0x98];
     CGameStaticInstance_t *m_pStaticEventsInstances[64];
     s32 m_nStaticEventsInstances;
@@ -398,9 +398,9 @@ typedef struct CScene_t {
     char pad1B92C[0x1B930 - 0x1B92C];
 } CScene_t;
 
-extern s32 D_800D2AE0;
-extern s32 D_800CD730;
-extern Shared_func_80234FDC_S1 *Gsky_FindScreenMessage(GameplayCamera *camera);
+extern s32 g_textureVariationBypassEnabled;
+extern s32 g_gameLoopFrameCount;
+extern SharedCameraOwnerView *Gsky_FindScreenMessage(GameplayCamera *camera);
 extern s32 Visdata_TestVisibilityGridBit(void *grid, s32 x, s32 z, s32 index);
 extern s32 Visdata_TestBoxAgainstFrustum(void *planes, void *bounds);
 extern void Statinst_RegisterGeometryResources(CGameStaticInstance_t *prop, GameplayCamera *camera);
@@ -409,7 +409,7 @@ extern void Statinst_DrawDistanceFadedModel(CGameStaticInstance_t *prop, Gamepla
 extern void Simpinst_RegisterModelVariantResources(CGameSimpleInstance_t *object, GameplayCamera *camera);
 extern void Simple_DrawCachedModel(CGameSimpleInstance_t *object);
 
-static __inline__ s32 SceneFindShip(TableRecAt8 *table) {
+static __inline__ s32 SceneFindShip(SceneModelIdTable *table) {
     s32 i;
     s32 count = table->count;
     u16 *p = table->entries;
@@ -431,7 +431,7 @@ void Scene_DrawVisibleInstances(CScene_t *world, GameplayCamera *camera) {
     s32 viewMask;
     s32 shipModel;
     s32 showShip;
-    Shared_func_80234FDC_S1 *player;
+    SharedCameraOwnerView *player;
     CActiveGridSection_t *sector;
     CActiveGridSection_t *sectors;
     CGameSimpleInstance_t *statics;
@@ -442,13 +442,13 @@ void Scene_DrawVisibleInstances(CScene_t *world, GameplayCamera *camera) {
     s32 queued;
     s32 i;
 
-    mask = D_801462C8.sceneMask;
+    mask = g_gameSettings.sceneMask;
     viewMask = camera->floorSurface;
     world->m_nTransparentInstances = 0;
 #if defined(VERSION_US_REV1)
-    if (D_800D2AE0 == 0 && D_801462C8.local != 0) {
+    if (g_textureVariationBypassEnabled == 0 && g_gameSettings.local != 0) {
 #else
-    if (D_801462C8.local != 0) {
+    if (g_gameSettings.local != 0) {
 #endif
         Scene_DrawCachedOpaqueGeometry(world, camera);
         return;
@@ -457,14 +457,14 @@ void Scene_DrawVisibleInstances(CScene_t *world, GameplayCamera *camera) {
     shipModel = SceneFindShip(world->m_pusObjectTypes);
     showShip = 0;
     if (player != NULL && shipModel != -1) {
-        showShip = D_801462C8.local == 0;
+        showShip = g_gameSettings.local == 0;
     }
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
     scene = world;
     Geometry_BeginModelBatch();
     scene->m_nTransparentInstances = 0;
-    if (player != NULL && (player->unk664 & 0x100)) {
+    if (player != NULL && (player->movementFlags & 0x100)) {
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
@@ -484,7 +484,7 @@ void Scene_DrawVisibleInstances(CScene_t *world, GameplayCamera *camera) {
             continue;
         }
         Cache_MarkResourceInUse(0, sector->m_pmeGridSection);
-        model = sector->m_pmeGridSection->field0;
+        model = sector->m_pmeGridSection->data;
         propSection = SetN64_GetPackSection(model, 0);
         propCount = propSection->count;
         props = propSection->props;
@@ -496,7 +496,7 @@ void Scene_DrawVisibleInstances(CScene_t *world, GameplayCamera *camera) {
                 continue;
             }
             prop->m_pmeGridSection = sector->m_pmeGridSection;
-            if (D_800CD730 == 0) {
+            if (g_gameLoopFrameCount == 0) {
                 Statinst_RegisterGeometryResources(prop, camera);
             }
             if ((prop->m_wFlags & 8) && (prop->m_pI->flags & 4)) {
@@ -541,7 +541,7 @@ void Scene_DrawVisibleInstances(CScene_t *world, GameplayCamera *camera) {
         statics = staticSection->statics;
         for (i = 0; i < staticCount; i++) {
             statics[i].m_pmeGridSection = sector->m_pmeGridSection;
-            if (D_800CD730 == 0) {
+            if (g_gameLoopFrameCount == 0) {
                 Simpinst_RegisterModelVariantResources(&statics[i], camera);
             }
             if ((statics[i].m_pI->gate & mask) && !(statics[i].m_wFlags & 1) && (viewMask & statics[i].m_VisBits) &&

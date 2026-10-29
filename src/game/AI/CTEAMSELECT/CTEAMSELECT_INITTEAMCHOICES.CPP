@@ -3,8 +3,8 @@
 
 void Cteamselect_InitTeamChoices(Shared_MenuItemList *list) {
     s32 i;
-    f32 scale = D_800C22C4_de;
-    f32 value = D_800C917C;
+    f32 scale = g_teamWheelChoiceScale;
+    f32 value = g_teamWheelInitialSlotScale;
 
     list->selection = -1;
     for (i = 0; i < 4; i++) {

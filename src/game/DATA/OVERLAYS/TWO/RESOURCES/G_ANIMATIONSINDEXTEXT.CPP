@@ -1,12 +1,12 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80247004_C9614[33] =
+const char k_GAnimationsindextextEncodedBytes[33] =
     "\077\200\000\000>\000\000\000=\031\231\232\077\200\000\000animations index\000";
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int D_auto_src_rw_pool_80247004_C9614_us_rev1[4] = {
+const unsigned int k_GAnimationsindextextEncodedWords[4] = {
     0x3F800000, 0x3E000000, 0x3D19999A, 0x3F800000,
 };
 

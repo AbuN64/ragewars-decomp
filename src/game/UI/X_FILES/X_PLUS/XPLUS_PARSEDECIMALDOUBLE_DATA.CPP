@@ -3,7 +3,7 @@
 
 /* 800CA60C_22.CPP */
 #if defined(VERSION_US_REV1)
-const unsigned int D_auto_src_rw_pool_8029F5E0_CBA60_us_rev1[34] = {
+const unsigned int k_xplusParsedecimaldoubleDataFloatConstantWords[34] = {
     0x3FF00000, 0x00000000, 0x00000000, 0x00000000, 0xBFF00000, 0x00000000, 0x00000000, 0x00000000,
     0x40240000, 0x00000000, 0x00000000, 0x00000000, 0x40240000, 0x00000000, 0x3FF00000, 0x00000000,
     0xBFF00000, 0x00000000, 0x00000000, 0x00000000, 0x40240000, 0x00000000, 0x403E0000, 0x00000000,
@@ -14,7 +14,7 @@ const unsigned int D_auto_src_rw_pool_8029F5E0_CBA60_us_rev1[34] = {
 
 /* 8029FA7C_6.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const f32 data_func_8029F5E0_de_800C5C00[34] = {
+const f32 k_xplusParsedecimaldoubleDataConstantWords[34] = {
     1.875f, 0.0f, 0.0f, 0.0f, -1.875f, 0.0f,
     0.0f, 0.0f, 2.5625f, 0.0f, 0.0f, 0.0f,
     2.5625f, 0.0f, 1.875f, 0.0f, -1.875f, 0.0f,
@@ -32,7 +32,7 @@ const f32 data_func_8029F5E0_de_800C5C00[34] = {
 
 /* DATA_802A0A08.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_802A0A08[80] = {
+unsigned int g_xplusParsedecimaldoubleDataLinkGapWords[80] = {
     0x18474144, 0x4745545F, 0xAFA40000, 0xAFA50004, 0xAFA60008, 0xAFA7000C, 0x27BDFFE8, 0x00802821,
     0xAFB00010, 0x3C108014, 0x26104E50, 0x02002021, 0xAFBF0014, 0x0C105353, 0x27A6001C, 0x3C01800D,
     0xAC22D828, 0x02001021, 0x8FBF0014, 0x8FB00010, 0x03E00008, 0x27BD0018, 0xAFA40000, 0xAFA50004,

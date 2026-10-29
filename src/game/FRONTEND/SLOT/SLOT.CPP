@@ -20,8 +20,8 @@
 #include "COMMON/ANIMATION.H"
 #include "TYPES.H"
 
-/* D_800E3590 and its 528-byte block layout are spelled once in the closed hub as
- * func_8041F2A0_MenuBlock, shared with the neighbouring menu units that keep their own views over
+/* g_profileStatisticsScreen and its 528-byte block layout are spelled once in the closed hub as
+ * SlotSelectionMenuBlock, shared with the neighbouring menu units that keep their own views over
  * the same block. */
 
 /* The hub spells func_8041DB30_de; these two stay here, matching how the landed units that own
@@ -41,81 +41,81 @@ static inline s32 slotRes(s32 id) {
 #endif
 }
 
-s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
-    func_8041F2A0_Item *item;
+s32 Frontend_CreateSlotSelectionMenu(void *menuTree) {
+    SlotSelectionWidget *item;
     s32 shift;
     s32 adjust;
 
-    D_800E3590 = (func_8041F2A0_MenuBlock *) Cache_AllocateMemory(528);
-    D_800E3590->root = arg0;
-    D_800E3590->list = SmpOverlay_CreateOverlayNode((s32) arg0, 4);
-    SmpOverlay_ShowSlotById((s32) arg0, 0, slotRes(513));
-    SmpOverlay_ShowSlotById((s32) arg0, 1, slotRes(513));
-    SmpOverlay_ShowSlotById((s32) arg0, 2, slotRes(513));
-    SmpOverlay_ShowSlotById((s32) arg0, 3, slotRes(513));
+    g_profileStatisticsScreen = (SlotSelectionMenuBlock *) Cache_AllocateMemory(528);
+    g_profileStatisticsScreen->root = menuTree;
+    g_profileStatisticsScreen->list = SmpOverlay_CreateOverlayNode((s32) menuTree, 4);
+    SmpOverlay_ShowSlotById((s32) menuTree, 0, slotRes(513));
+    SmpOverlay_ShowSlotById((s32) menuTree, 1, slotRes(513));
+    SmpOverlay_ShowSlotById((s32) menuTree, 2, slotRes(513));
+    SmpOverlay_ShowSlotById((s32) menuTree, 3, slotRes(513));
     /* func_8041B610_de is published to this unit as handing back a word while SmpOverlay_SetObjectValue is
      * published as taking the pool object that word names; the cast puts that object view back on
      * the pool stored at +0x004 and carries it through unchanged. */
-    SmpOverlay_SetObjectValue((struct Object6C *) D_800E3590->list, 1);
+    SmpOverlay_SetObjectValue((struct Object6C *) g_profileStatisticsScreen->list, 1);
 
-    D_800E3590->unk216 = 1;
-    D_800E3590->unk220 = 4;
-    D_800E3590->item492 = Node_FindWidgetByResourceId(arg0, slotRes(492));
-    D_800E3590->item492->x = D_800E3590->item492->x - D_800E3590->item492->w;
-    shift = D_800E3590->item492->w;
+    g_profileStatisticsScreen->unk216 = 1;
+    g_profileStatisticsScreen->unk220 = 4;
+    g_profileStatisticsScreen->item492 = Node_FindWidgetByResourceId(menuTree, slotRes(492));
+    g_profileStatisticsScreen->item492->x = g_profileStatisticsScreen->item492->x - g_profileStatisticsScreen->item492->w;
+    shift = g_profileStatisticsScreen->item492->w;
     if (shift < 0) {
         shift += 3;
     }
-    D_800E3590->round492 = shift >> 2;
-    adjust = D_800E3590->item492->w - ((shift >> 2) << 2);
-    D_800E3590->item492->x = D_800E3590->item492->x + adjust;
+    g_profileStatisticsScreen->round492 = shift >> 2;
+    adjust = g_profileStatisticsScreen->item492->w - ((shift >> 2) << 2);
+    g_profileStatisticsScreen->item492->x = g_profileStatisticsScreen->item492->x + adjust;
 
-    D_800E3590->item491 = Node_FindWidgetByResourceId(arg0, slotRes(491));
-    D_800E3590->item491->x = D_800E3590->item491->x + D_800E3590->item491->w;
-    shift = D_800E3590->item491->w;
+    g_profileStatisticsScreen->item491 = Node_FindWidgetByResourceId(menuTree, slotRes(491));
+    g_profileStatisticsScreen->item491->x = g_profileStatisticsScreen->item491->x + g_profileStatisticsScreen->item491->w;
+    shift = g_profileStatisticsScreen->item491->w;
     if (shift < 0) {
         shift += 3;
     }
-    D_800E3590->round491 = shift >> 2;
-    adjust = D_800E3590->item491->w - ((shift >> 2) << 2);
-    D_800E3590->item491->x = D_800E3590->item491->x - adjust;
+    g_profileStatisticsScreen->round491 = shift >> 2;
+    adjust = g_profileStatisticsScreen->item491->w - ((shift >> 2) << 2);
+    g_profileStatisticsScreen->item491->x = g_profileStatisticsScreen->item491->x - adjust;
 
-    Node_FindWidgetByResourceId(arg0, slotRes(488))->alpha = 110;
-    D_800E3590->lookup486 = SmpFlicker_CreateFlickerWidget((s32)slotRes(486), 255);
+    Node_FindWidgetByResourceId(menuTree, slotRes(488))->alpha = 110;
+    g_profileStatisticsScreen->lookup486 = SmpFlicker_CreateFlickerWidget((s32)slotRes(486), 255);
 
-    item = Node_FindWidgetByResourceId(arg0, slotRes(486));
-    D_800E3590->item486 = item;
+    item = Node_FindWidgetByResourceId(menuTree, slotRes(486));
+    g_profileStatisticsScreen->item486 = item;
     Widget_SetWidgetFlag08(item, 0);
 
-    item = Node_FindWidgetByResourceId(arg0, slotRes(563));
-    D_800E3590->item563 = item;
+    item = Node_FindWidgetByResourceId(menuTree, slotRes(563));
+    g_profileStatisticsScreen->item563 = item;
     Widget_SetWidgetFlag08(item, 0);
 
-    Node_FindWidgetByResourceId(arg0, slotRes(496))->alpha = 110;
-    Node_FindWidgetByResourceId(arg0, slotRes(497))->alpha = 120;
+    Node_FindWidgetByResourceId(menuTree, slotRes(496))->alpha = 110;
+    Node_FindWidgetByResourceId(menuTree, slotRes(497))->alpha = 120;
 
-    item = Node_FindWidgetByResourceId(arg0, slotRes(512));
-    D_800E3590->item512 = item;
+    item = Node_FindWidgetByResourceId(menuTree, slotRes(512));
+    g_profileStatisticsScreen->item512 = item;
     Widget_SetWidgetFlag08(item, 0);
 
-    D_800E3590->style = 0;
-    D_800E3590->unk248 = 27;
-    item = Node_FindWidgetByResourceId(arg0, slotRes(511));
-    D_800E3590->item511 = item;
+    g_profileStatisticsScreen->style = 0;
+    g_profileStatisticsScreen->unk248 = 27;
+    item = Node_FindWidgetByResourceId(menuTree, slotRes(511));
+    g_profileStatisticsScreen->item511 = item;
     Widget_SetWidgetFlag08(item, 0);
 
-    D_800E3590->item511->alpha = 0;
-    D_800E3590->unk260 = 25;
-    item = Node_FindWidgetByResourceId(arg0, slotRes(510));
-    D_800E3590->item510 = item;
+    g_profileStatisticsScreen->item511->alpha = 0;
+    g_profileStatisticsScreen->unk260 = 25;
+    item = Node_FindWidgetByResourceId(menuTree, slotRes(510));
+    g_profileStatisticsScreen->item510 = item;
 
-    D_800E3590->player = 0;
-    D_800E3590->unk268 = -1;
-    Focus_AdvanceActiveSlot(&D_800E3590->unk268);
+    g_profileStatisticsScreen->player = 0;
+    g_profileStatisticsScreen->unk268 = -1;
+    Focus_AdvanceActiveSlot(&g_profileStatisticsScreen->unk268);
     Focus_RefreshProfileStatistics();
-    Focus_ShowUnlockedEntries(D_800E3590->style);
-    Node_FindWidgetByResourceId(arg0, slotRes(493))->alpha = 110;
-    D_800E3590->focus = 0;
+    Focus_ShowUnlockedEntries(g_profileStatisticsScreen->style);
+    Node_FindWidgetByResourceId(menuTree, slotRes(493))->alpha = 110;
+    g_profileStatisticsScreen->focus = 0;
     return 0;
 }
 #endif
@@ -125,8 +125,8 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
    visible item groups as each phase's timer runs out, and while idle (state 3) pulses the cursor's
    style from the elapsed time and moves the cursor to the node now under focus. */
 
-/* The hub spells D_800E3590 as the padded menu block; this unit's view of it is the published
-   MenuRecAt108 struct, so each member use casts D_800E3590 to that view. */
+/* The hub spells g_profileStatisticsScreen as the padded menu block; this unit's view of it is the published
+   FrontendPanelTransitionView struct, so each member use casts g_profileStatisticsScreen to that view. */
 
 extern void Menu_ReturnToPreviousScreen(void);
 
@@ -135,92 +135,92 @@ extern NodeFrontendAnimateSlotSelectionMenu *SmpOverlay_GetSlotValue(void *handl
 
 /* Focus_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
 
-s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
+s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 animationStep) {
     NodeFrontendAnimateSlotSelectionMenu *node;
 
-    switch (((MenuRecAt108 *) D_800E3590)->state) {
+    switch (((FrontendPanelTransitionView *) g_profileStatisticsScreen)->state) {
     case 1:
-        ((MenuRecAt108 *) D_800E3590)->left->x += ((MenuRecAt108 *) D_800E3590)->leftStep;
-        ((MenuRecAt108 *) D_800E3590)->right->x -= ((MenuRecAt108 *) D_800E3590)->rightStep;
-        if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->left->x += ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->leftStep;
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->right->x -= ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->rightStep;
+        if (--((FrontendPanelTransitionView *) g_profileStatisticsScreen)->timer <= 0) {
             SoundElement_PlayFlatSound(0xE79);
             /* NodeFrontendAnimateSlotSelectionMenu is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
                E8D8 speaks Item, so the node slots cast to it here. */
-            Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
-            SmpFlicker_StartFlicker(((MenuRecAt108 *) D_800E3590)->fade, 4);
-            ((MenuRecAt108 *) D_800E3590)->state = 4;
-            ((MenuRecAt108 *) D_800E3590)->timer = 4;
+            Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupA, 1);
+            SmpFlicker_StartFlicker(((FrontendPanelTransitionView *) g_profileStatisticsScreen)->fade, 4);
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->state = 4;
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->timer = 4;
         }
         break;
     case 2:
-        ((MenuRecAt108 *) D_800E3590)->left->x -= ((MenuRecAt108 *) D_800E3590)->leftStep;
-        ((MenuRecAt108 *) D_800E3590)->right->x += ((MenuRecAt108 *) D_800E3590)->rightStep;
-        if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
-            ((MenuRecAt108 *) D_800E3590)->state = 3;
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->left->x -= ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->leftStep;
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->right->x += ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->rightStep;
+        if (--((FrontendPanelTransitionView *) g_profileStatisticsScreen)->timer <= 0) {
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->state = 3;
             MarkMenuEventHandled();
             Menu_ReturnToPreviousScreen();
             return 0;
         }
         break;
     case 4:
-        if (SmpFlicker_IsFlickerIdle(((MenuRecAt108 *) D_800E3590)->fade) != 0) {
-            SmpFlicker_RestoreFlickerValue(((MenuRecAt108 *) D_800E3590)->fade);
-            ((MenuRecAt108 *) D_800E3590)->state = 6;
-            ((MenuRecAt108 *) D_800E3590)->timer = 4;
-            Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 1);
-            Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 1);
+        if (SmpFlicker_IsFlickerIdle(((FrontendPanelTransitionView *) g_profileStatisticsScreen)->fade) != 0) {
+            SmpFlicker_RestoreFlickerValue(((FrontendPanelTransitionView *) g_profileStatisticsScreen)->fade);
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->state = 6;
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->timer = 4;
+            Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupB, 1);
+            Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupC, 1);
         }
         break;
     case 5:
         SoundElement_PlayFlatSound(0xE78);
-        ((MenuRecAt108 *) D_800E3590)->state = 2;
-        ((MenuRecAt108 *) D_800E3590)->timer = 4;
-        Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 0);
-        Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 0);
-        Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 0);
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->state = 2;
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->timer = 4;
+        Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupB, 0);
+        Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupC, 0);
+        Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupA, 0);
         break;
     case 6:
-        ((MenuRecAt108 *) D_800E3590)->styleValue += ((MenuRecAt108 *) D_800E3590)->styleStep;
-        ((MenuRecAt108 *) D_800E3590)->groupC->style += ((MenuRecAt108 *) D_800E3590)->alphaStep;
-        Focus_ShowUnlockedEntries(((MenuRecAt108 *) D_800E3590)->styleValue);
-        if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
-            ((MenuRecAt108 *) D_800E3590)->groupC->style = 100;
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->styleValue += ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->styleStep;
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupC->style += ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->alphaStep;
+        Focus_ShowUnlockedEntries(((FrontendPanelTransitionView *) g_profileStatisticsScreen)->styleValue);
+        if (--((FrontendPanelTransitionView *) g_profileStatisticsScreen)->timer <= 0) {
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupC->style = 100;
             Focus_ShowUnlockedEntries(0x6E);
-            ((MenuRecAt108 *) D_800E3590)->state = 3;
-            Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->cursor, 1);
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->state = 3;
+            Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->cursor, 1);
         }
         break;
     case 7:
         break;
     }
 
-    if (((MenuRecAt108 *) D_800E3590)->state == 3) {
-        ((MenuRecAt108 *) D_800E3590)->clock += arg2;
-        ((MenuRecAt108 *) D_800E3590)->cursor->style = Math_Cosf((f32) ((MenuRecAt108 *) D_800E3590)->clock * 0.0033333334f) * 30.0f + 220.0f;
-        node = SmpOverlay_GetSlotValue(((MenuRecAt108 *) D_800E3590)->handle, 0);
-        if (node != ((MenuRecAt108 *) D_800E3590)->focus) {
+    if (((FrontendPanelTransitionView *) g_profileStatisticsScreen)->state == 3) {
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->clock += animationStep;
+        ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->cursor->style = Math_Cosf((f32) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->clock * 0.0033333334f) * 30.0f + 220.0f;
+        node = SmpOverlay_GetSlotValue(((FrontendPanelTransitionView *) g_profileStatisticsScreen)->handle, 0);
+        if (node != ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->focus) {
             SoundElement_PlayFlatSound(0xE7E);
-            if (((MenuRecAt108 *) D_800E3590)->focus != 0) {
-                ((MenuRecAt108 *) D_800E3590)->focus->style = 0x6E;
+            if (((FrontendPanelTransitionView *) g_profileStatisticsScreen)->focus != 0) {
+                ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->focus->style = 0x6E;
             }
-            ((MenuRecAt108 *) D_800E3590)->focus = node;
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->focus = node;
             node->style = 0xE1;
             Focus_RefreshUnlockedFocusLabel();
             Focus_UpdateFocusCaption();
-            ((MenuRecAt108 *) D_800E3590)->cursor->x = node->x - 2;
-            ((MenuRecAt108 *) D_800E3590)->cursor->y = node->y;
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->cursor->x = node->x - 2;
+            ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->cursor->y = node->y;
         }
     }
     return 0;
 }
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
-unsigned int rodata_unresolved_800E14FC[1] = {
+unsigned int k_SlotZeroWords[1] = {
     0x00000000,
 };
 #endif
 #if defined(VERSION_EU) || defined(VERSION_US)
-const unsigned int rodata_unresolved_800E14FC[1] = {
+const unsigned int k_SlotZeroWords[1] = {
     0x00000000,
 };
 #endif

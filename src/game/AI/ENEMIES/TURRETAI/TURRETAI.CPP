@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_15.H"
+#include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/BALLISTICPARAMS.H"
@@ -26,7 +26,7 @@ void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
 void SwapMatrixUpForward(struct Mtx *);
 
-static inline void alignment_from_rider(f32 *matrix, RiderRecAt130V1 *rider) {
+static inline void alignment_from_rider(f32 *matrix, TurretRiderTargetView *rider) {
     CQuatern q;
     CVector3 aim;
     aim.x = rider->aim.x;
@@ -43,14 +43,14 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
     f32 angle;
     f32 turn;
 
-    up = D_800C19F0;
+    up = k_turretUpDirection;
     Graphu64_NormalizeVec3(dir);
-    if (dir->y > D_800C19FC_de) {
+    if (dir->y > k_turretVerticalAimUpperLimit) {
         q.x = q.y = q.z = 0.0f;
-        q.w = D_800C1A00_de;
-    } else if (dir->y < D_800C1A04_de) {
-        angle = D_800C1A08_de;
-        q.x = D_80115DEC = Gu_Sinf(angle);
+        q.w = k_turretIdentityQuaternionW;
+    } else if (dir->y < k_turretVerticalAimLowerLimit) {
+        angle = k_turretInvertedAimAngle;
+        q.x = g_turretAimSine = Gu_Sinf(angle);
         q.y = 0.0f;
         q.z = 0.0f;
         q.w = Math_Cosf(angle);
@@ -58,17 +58,17 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
         turn = Graphu64_ArcCos(dir->x * up.x + dir->y * up.y + dir->z * up.z);
         Graphu64_CrossVectors(&axis, &up, dir);
         Graphu64_NormalizeVec3(&axis);
-        angle = turn * D_800C1A0C;
-        D_80115DEC = Gu_Sinf(angle);
-        q.x = axis.x * D_80115DEC;
-        q.y = axis.y * D_80115DEC;
-        q.z = axis.z * D_80115DEC;
+        angle = turn * k_turretTurnAngleScale;
+        g_turretAimSine = Gu_Sinf(angle);
+        q.x = axis.x * g_turretAimSine;
+        q.y = axis.y * g_turretAimSine;
+        q.z = axis.z * g_turretAimSine;
         q.w = Math_Cosf(angle);
     }
     return q;
 }
 
-void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
+void Turret_CalcOrientMtx(struct Owner *owner, TurretRiderTargetView *rider) {
     CQuatern rotation;
     CQuatern combined;
     f32 model[16];
@@ -82,20 +82,20 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
     alignment_from_rider(alignment, rider);
     if (segment->m_RotNode == -1) {
         angle = owner->heading;
-        angleScale = D_800C1A10_de;
+        angleScale = k_turretQuaternionAngleScale;
         sine = Gu_Sinf(angle * angleScale);
         rotation.x = 0.0f;
         rotation.y = sine;
-        D_80115DEC = sine;
+        g_turretAimSine = sine;
         rotation.z = 0.0f;
         rotation.w = Math_Cosf(owner->heading * angleScale);
     } else {
-        D_80115DEC = Gu_Sinf(rider->heading * D_800C1A14_de);
+        g_turretAimSine = Gu_Sinf(rider->heading * k_turretHeadingSineScale);
     }
     rotation.x = 0.0f;
     rotation.z = 0.0f;
-    rotation.y = D_80115DEC;
-    rotation.w = Math_Cosf(rider->heading * D_800C1A18);
+    rotation.y = g_turretAimSine;
+    rotation.w = Math_Cosf(rider->heading * k_turretHeadingCosineScale);
     MultiplyQuaternions(&combined, &rotation, &owner->orientation);
     MatrixFromQuaternion(&combined, model);
     ScaleMatrixLocal(model, owner->scale.x, owner->scale.y, owner->scale.z);
@@ -106,12 +106,12 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
 }
 
 /* 800C6B18.CPP */
-const unsigned int D_auto_src_rw_pool_802034A4_C7718_us_rev1[5] = {
+const unsigned int k_turretaiFloatConstantWords[5] = {
     0x3F000000, 0x40C90FDC, 0x3F000000, 0x3C23D70A, 0x3C23D70A,
 };
 
 /* 800C6B2C.CPP */
 /* ROM-grounded data: src/rw_pool_8020388C_C772C_us_rev1.c */
-const unsigned int D_blob_f9c773ad0f04affb460a[2] = {
+const unsigned int k_turretaiFloatConstantWordsBlock1[2] = {
     0x3F800000, 0xBFC90FDC,
 };

@@ -4,7 +4,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/COLORENTRY.H"
 #include "ENGINE/SCENE_SETLEVELACTORSTATEBIT.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 extern void Scene_ReleaseCachedGeometry(void *);
 extern void Scene_CollectVisibleEffects(s32);
 extern void Scene_ClearTransparentInstanceCount(void *object);

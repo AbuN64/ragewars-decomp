@@ -41,7 +41,7 @@ s32 _allocatePVoice(void *synth, void **selectedVoice, s16 requestedPriority) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802B3118[2] = {
+unsigned int k_AllocatepvoiceEncodedWords[2] = {
     0x00000066, 0x00000004,
 };
 #endif

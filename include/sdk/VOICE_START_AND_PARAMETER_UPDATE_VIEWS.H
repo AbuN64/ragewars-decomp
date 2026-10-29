@@ -8,10 +8,10 @@ typedef struct AudioStartVoiceUpdate AudioStartVoiceUpdate;
 struct AudioVolumeControlUpdate;
 typedef struct AudioVolumeControlUpdate AudioVolumeControlUpdate;
 
-struct func_802B8540_S1;
-struct func_802B8540_S1 {
+struct AudioVoicePriorityView;
+struct AudioVoicePriorityView {
     char pad0[0x16];
-    unsigned short unk16;
+    unsigned short priority;
 };
 
 typedef void ( *SharedRecV3)(void *, signed int, void *);
@@ -47,8 +47,8 @@ struct AudioVoiceStartView {
 
 extern void alSynStartVoice(void *synth, void *voice, s32 waveTable);
 
-struct func_802B8540_S1;
-typedef struct func_802B8540_S1 func_802B8540_S1;
+struct AudioVoicePriorityView;
+typedef struct AudioVoicePriorityView AudioVoicePriorityView;
 
 struct AudioStartVoiceUpdate;
 struct AudioStartVoiceUpdate {

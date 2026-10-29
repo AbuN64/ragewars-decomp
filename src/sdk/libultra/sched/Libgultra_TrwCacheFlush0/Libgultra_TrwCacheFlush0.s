@@ -1,21 +1,21 @@
 
 
-/* func_802022E0_de.s */
+/* Libsn_InstallDebuggerExceptionHooks.s */
 .set noreorder
 .set noat
 .section .text
-.globl func_802022E0_de
-func_802022E0_de:
+.globl Libsn_InstallDebuggerExceptionHooks
+Libsn_InstallDebuggerExceptionHooks:
     addi $sp, $sp, -0x8
     sw $ra, 0x0($sp)
-    lui $t0, %hi(D_00202270)
-    addiu $t0, $t0, %lo(D_00202270)
-    lui $t1, %hi(D_00202284)
-    addiu $t1, $t1, %lo(D_00202284)
+    lui $t0, %hi(Libgultra_DebugExceptionVectorTemplateAddress)
+    addiu $t0, $t0, %lo(Libgultra_DebugExceptionVectorTemplateAddress)
+    lui $t1, %hi(Libgultra_SavedExceptionVectorAddress)
+    addiu $t1, $t1, %lo(Libgultra_SavedExceptionVectorAddress)
     lui $t2, 0x8000
     ori $t2, $t2, 0x180
-    lui $t3, %hi(D_00202284)
-    addiu $t3, $t3, %lo(D_00202284)
+    lui $t3, %hi(Libgultra_SavedExceptionVectorAddress)
+    addiu $t3, $t3, %lo(Libgultra_SavedExceptionVectorAddress)
 .Lfunc_802022E0_de_028:
     lw $t4, 0x0($t2)
     lw $t5, 0x0($t0)
@@ -25,15 +25,15 @@ func_802022E0_de:
     sw $t5, 0x0($t2)
     bne $t0, $t3, .Lfunc_802022E0_de_028
     addiu $t2, $t2, 0x4
-    lui $t0, %hi(D_002022A8)
-    addiu $t0, $t0, %lo(D_002022A8)
-    lui $t1, %hi(D_002022BC)
-    addiu $t1, $t1, %lo(D_002022BC)
-    lui $t2, %hi(D_80000000)
-    lui $t3, %hi(D_002022BC)
-    addiu $t3, $t3, %lo(D_002022BC)
+    lui $t0, %hi(Libgultra_DebugTlbVectorTemplateAddress)
+    addiu $t0, $t0, %lo(Libgultra_DebugTlbVectorTemplateAddress)
+    lui $t1, %hi(Libgultra_SavedTlbVectorAddress)
+    addiu $t1, $t1, %lo(Libgultra_SavedTlbVectorAddress)
+    lui $t2, %hi(g_tlbMissExceptionVector)
+    lui $t3, %hi(Libgultra_SavedTlbVectorAddress)
+    addiu $t3, $t3, %lo(Libgultra_SavedTlbVectorAddress)
 .Lfunc_802022E0_de_064:
-    lw $t4, %lo(D_80000000)($t2)
+    lw $t4, %lo(g_tlbMissExceptionVector)($t2)
     lw $t5, 0x0($t0)
     addiu $t0, $t0, 0x4
     sw $t4, 0x0($t1)
@@ -46,8 +46,8 @@ func_802022E0_de:
     jal Libgultra_TrwCacheFlush1
     nop
     addiu $t0, $zero, -0x802
-    lui $at, %hi(D_800F3468)
-    sw $t0, %lo(D_800F3468)($at)
+    lui $at, %hi(g_debugExceptionStatusMask)
+    sw $t0, %lo(g_debugExceptionStatusMask)($at)
     lw $ra, 0x0($sp)
     jr $ra
     addi $sp, $sp, 0x8
@@ -58,8 +58,8 @@ func_802022E0_de:
 .section .text
 .globl Libgultra_TrwCacheFlush0
 Libgultra_TrwCacheFlush0:
-    lui $t0, %hi(D_80001FF0)
-    addiu $t1, $t0, %lo(D_80001FF0)
+    lui $t0, %hi(g_debugDataCacheLastIndex)
+    addiu $t1, $t0, %lo(g_debugDataCacheLastIndex)
 .LLibgultra_TrwCacheFlush0_008:
     cache 0x01, 0x0($t0)
     bne $t0, $t1, .LLibgultra_TrwCacheFlush0_008
@@ -73,8 +73,8 @@ Libgultra_TrwCacheFlush0:
 .section .text
 .globl Libgultra_TrwCacheFlush1
 Libgultra_TrwCacheFlush1:
-    lui $t0, %hi(D_80003FE0)
-    addiu $t1, $t0, %lo(D_80003FE0)
+    lui $t0, %hi(g_debugInstructionCacheLastIndex)
+    addiu $t1, $t0, %lo(g_debugInstructionCacheLastIndex)
 .LLibgultra_TrwCacheFlush1_008:
     cache 0x00, 0x0($t0)
     bne $t0, $t1, .LLibgultra_TrwCacheFlush1_008

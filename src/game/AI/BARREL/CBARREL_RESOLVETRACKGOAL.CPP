@@ -7,17 +7,17 @@
 #include "WEAPONS/CBARREL_RESOLVETRACKGOAL.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
-extern s32 Cbarrel_UpdateTrackerAim(Actor_func_80214DD4_de *actor, Tracker *tracker, Actor_func_80214DD4_de *target);
-extern Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 lineOfSight, s32 combat);
-extern f32 Barrel_FindClearAimAngle(Actor_func_80214DD4_de *actor, CVector3 pos, Actor_func_80214DD4_de *target, f32 distance);
-extern f32 Barrel_GetSignedAngleToPoint(Actor_func_80214DD4_de *actor, CVector3 pos);
+extern s32 Cbarrel_UpdateTrackerAim(BarrelAnchorActorView *actor, Tracker *tracker, BarrelAnchorActorView *target);
+extern BarrelAnchorActorView *Cbarrel_SelectCombatTarget(BarrelAnchorActorView *actor, Tracker *tracker, s32 lineOfSight, s32 combat);
+extern f32 Barrel_FindClearAimAngle(BarrelAnchorActorView *actor, CVector3 pos, BarrelAnchorActorView *target, f32 distance);
+extern f32 Barrel_GetSignedAngleToPoint(BarrelAnchorActorView *actor, CVector3 pos);
 struct Cursor;
-extern Location *func_80219408_de(struct Cursor *slot);
-extern f32 Gobjinst_GetActorHeight(Actor_func_80214DD4_de *actor);
-extern f32 Gobjinst_GetActorRadius(Actor_func_80214DD4_de *actor);
-extern f32 InstHdr_GetActorReach(Actor_func_80214DD4_de *object);
-extern void InstHdr_CopyActorPositionAndModel(Actor_func_80214DD4_de *levelActor, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 unused6, s32 unused7);
-extern f32 func_8024E80C_de(Actor_func_80214DD4_de *object);
+extern Location *Playerai_GetRouteCursorPoint(struct Cursor *slot);
+extern f32 Gobjinst_GetActorHeight(BarrelAnchorActorView *actor);
+extern f32 Gobjinst_GetActorRadius(BarrelAnchorActorView *actor);
+extern f32 InstHdr_GetActorReach(BarrelAnchorActorView *object);
+extern void InstHdr_CopyActorPositionAndModel(BarrelAnchorActorView *levelActor, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 unused6, s32 unused7);
+extern f32 InstHdr_GetModelRecordValue20(BarrelAnchorActorView *object);
 extern f32 Graphu64_GetHorizontalAngle(CVector3 *direction);
 extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void Graphu64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
@@ -25,7 +25,7 @@ extern void Graphu64_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
 
 
 /* Places the goal beside kind-7 targets: pushed away from the anchor by both extents. */
-static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_func_80214DD4_de *target, Actor_func_80214DD4_de *anchor, CVector3 *outPos, s32 *outRoom) {
+static inline void Weapons_PlaceGoalBeside(BarrelAnchorActorView *actor, BarrelAnchorActorView *target, BarrelAnchorActorView *anchor, CVector3 *outPos, s32 *outRoom) {
     CVector3 dir;
     CVector3 goal;
     if (anchor != 0) {
@@ -44,13 +44,13 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
 /** Picks what the tracker aims at (its target, itself, a slot or home point, or the actor) and
     fills out with the kind, target, reach, goal position and its offset from the actor, both in 3D
     and flattened to the ground plane. The third parameter is overwritten: it serves as the boost flag. */
-void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 boost, CTargetInfo *out) {
+void Cbarrel_ResolveTrackGoal(BarrelAnchorActorView *actor, Tracker *tracker, s32 boost, CTargetInfo *out) {
     CVector3 pos;
     CVector3 probe;
     CVector3 away;
     CVector3 delta;
     s32 room;
-    Actor_func_80214DD4_de *target;
+    BarrelAnchorActorView *target;
     s32 kind;
     s32 mode;
     f32 range;
@@ -108,7 +108,7 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
         gap = Gobjinst_GetActorRadius(target) + Gobjinst_GetActorRadius(actor);
         switch (kind) {
             case 2:
-                gap += D_800C2174_de;
+                gap += k_barrelKindTwoApproachPadding;
             default:
                 boost = 1;
                 break;
@@ -122,7 +122,7 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
         gap = Gobjinst_GetActorRadius(actor);
         switch (kind) {
             case 4:
-                loc = func_80219408_de(&tracker->slot);
+                loc = Playerai_GetRouteCursorPoint(&tracker->slot);
                 pos = loc->pos;
                 gap = 0.0f;
                 room = loc->room;
@@ -139,7 +139,7 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
                 pos = actor->pos;
                 room = actor->room;
                 if (mode == 2) {
-                    pos.y = func_8024E80C_de(actor);
+                    pos.y = InstHdr_GetModelRecordValue20(actor);
                 }
                 break;
         }
@@ -152,14 +152,14 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
         pos.z -= gap * Math_Cosf(angle);
     }
     if (mode == 2) {
-        pos.y = RW_MIN_LT(pos.y, func_8024E80C_de(actor));
+        pos.y = RW_MIN_LT(pos.y, InstHdr_GetModelRecordValue20(actor));
     }
     if (boost) {
         reach = InstHdr_GetActorReach(actor);
         probe.x = actor->pos.x + reach * Gu_Sinf(tracker->angle);
         probe.y = tracker->height;
         probe.z = actor->pos.z + reach * Math_Cosf(tracker->angle);
-        range = Barrel_FindClearAimAngle(actor, probe, target, D_800C2178_de);
+        range = Barrel_FindClearAimAngle(actor, probe, target, k_barrelClearAimSearchRange);
         pos.y = tracker->height;
     } else {
         range = Barrel_GetSignedAngleToPoint(actor, pos);

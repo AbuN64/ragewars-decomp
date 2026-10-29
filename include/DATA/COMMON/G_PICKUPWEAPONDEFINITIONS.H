@@ -1,4 +1,4 @@
 #ifndef DATA_COMMON_G_PICKUPWEAPONDEFINITIONS_H
 #define DATA_COMMON_G_PICKUPWEAPONDEFINITIONS_H
-extern char D_002ADB08[];
+extern char addrLow_Pickup_ApplyAmmoEntryVariant4[];
 #endif

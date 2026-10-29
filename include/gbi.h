@@ -1,5 +1,5 @@
 /* C89 adaptation of glankk/libgfxd gbi.h v0.3.6.
- * Source: https://github.com/glankk/libgfxd/blob/49ec1bb893a16b769ddfd0b329d238a658dc0ea2/gbi.h
+ * Source: https:/github.com/glankk/libgfxd/blob/49ec1bb893a16b769ddfd0b329d238a658dc0ea2/gbi.h
  * Constants and encodings from the open reconstruction; no SDK types.
  * Include the project Gfx declaration before this header.
  *

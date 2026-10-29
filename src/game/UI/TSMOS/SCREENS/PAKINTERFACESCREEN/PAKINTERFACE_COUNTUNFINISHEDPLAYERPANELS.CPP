@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "FRONTEND/PAKINTERFACE_COUNTUNFINISHEDPLAYERPANELS.H"
 
-/* Counts how many of the four 2920-byte entries D_800E54A4 points to have a word at offset 0x58 that is neither zero nor 0x11.
+/* Counts how many of the four 2920-byte entries g_pakProfileScreenState points to have a word at offset 0x58 that is neither zero nor 0x11.
    Adapted from PAKInterface_CountActivePlayerPanels with the extra 0x11 exclusion changed. */
 
 
@@ -14,7 +14,7 @@ s32 PAKInterface_CountUnfinishedPlayerPanels(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (D_800E54A4->players[i].state != 0 && D_800E54A4->players[i].state != 0x11) {
+        if (g_pakProfileScreenState->players[i].state != 0 && g_pakProfileScreenState->players[i].state != 0x11) {
             count++;
         }
     }

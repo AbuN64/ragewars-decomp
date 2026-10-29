@@ -6,55 +6,55 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "COMMON/S1.H"
-#include "COMMON/EXTERNS_10.H"
-#include "SYSTEM/802A6AC0.H"
+#include "COMMON/TRIGGER_AND_FLOAT_VALUE_OPERATIONS.H"
+#include "SYSTEM/TIMED_EFFECT_AND_ITEM_MENU_VIEWS.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "SYSTEM/LIST.H"
 #include "LISTS/LISTS.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "SYSTEM/FX_SPAWNIMPACTMARK.H"
 #include "include_asm.h"
 
 /* 802A6AC0.CPP */
-void Fx_AccumulateEffectComponents(ObjRecAt3CV1 *contribution) {
-    if (contribution->unk24 != 0.0f) {
-        D_800D15E4[0] += contribution->unk34;
-        D_800D15E4[1] += contribution->unk38;
-        D_800D15E4[2] += contribution->unk3C;
-        D_800D15E4[3] += contribution->unk24;
+void Fx_AccumulateEffectComponents(EffectColorContribution *contribution) {
+    if (contribution->alpha != 0.0f) {
+        g_menuModelFillColor[0] += contribution->red;
+        g_menuModelFillColor[1] += contribution->green;
+        g_menuModelFillColor[2] += contribution->blue;
+        g_menuModelFillColor[3] += contribution->alpha;
     }
-    D_800D15E4[4] += contribution->unk14;
+    g_menuModelFillColor[4] += contribution->auxiliaryAlpha;
 }
 
-extern f32 D_800C5EA0_de[2];
+extern f32 g_effectContributionInitialScale[2];
 
 void Fx_ClampScalarRange(f32 *scalarPointer) {
-    f32 new_var;
-    f32 new_var2;
+    f32 maximum;
+    f32 contributionScale;
 
-    new_var2 = (new_var2 = *scalarPointer);
+    contributionScale = (contributionScale = *scalarPointer);
     if (*scalarPointer < 0.0f) {
         *scalarPointer = 0.0f;
     } else {
-        new_var = D_800C5EA0_de[1];
-        if (new_var < new_var2) {
-            *scalarPointer = new_var;
+        maximum = g_effectContributionInitialScale[1];
+        if (maximum < contributionScale) {
+            *scalarPointer = maximum;
         }
     }
 }
 
-void Fx_AddTimedCallback(s32 arg0, s32 arg1, s32 arg2, s32 remainingCalls, f32 interval) {
+void Fx_AddTimedCallback(s32 ownerAddress, s32 callbackContextAddress, s32 callbackAddress, s32 remainingCalls, f32 interval) {
     void *node;
 
-    node = Lists_MoveHeadToInactiveList(arg0 + 0x7588);
+    node = Lists_MoveHeadToInactiveList(ownerAddress + 0x7588);
     if (node != 0) {
-        ((ObjRecAt18V6 *)(node))->unk18 = arg1;
-        ((ObjRecAt18V6 *)(node))->unk14 = arg2;
-        ((ObjRecAt18V6 *)(node))->unk8 = 0;
-        ((ObjRecAt18V6 *)(node))->unkC = interval;
-        ((ObjRecAt18V6 *)(node))->unk10 = remainingCalls;
+        ((TimedEffectCallbackView *)(node))->callback = callbackContextAddress;
+        ((TimedEffectCallbackView *)(node))->callbackData = callbackAddress;
+        ((TimedEffectCallbackView *)(node))->countdown = 0;
+        ((TimedEffectCallbackView *)(node))->interval = interval;
+        ((TimedEffectCallbackView *)(node))->remainingCalls = remainingCalls;
     }
 }
 
@@ -63,25 +63,25 @@ void TranslateMatrix(char *, f32, f32, f32);
 void ScaleMatrixLocal(void *, f32, f32, f32);
 void Graphu64_ConvertMatrixToFixed(f32 *, PackedMatrixWords *);
 
-Particle *Fx_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 normal, s32 surface, s32 owner) {
+Particle *Fx_SpawnImpactMark(ParticleQuadPoolScene *scene, CVector3 position, CVector3 normal, s32 surface, s32 owner) {
     f32 matrix[16];
     CQuatern rotation;
     Particle *node;
     IntrusiveList *list;
 
     rotation = Graphu64_BuildDirectionQuaternion(&normal.x);
-    if (D_800CDBE8 != 0) return 0;
-    D_800CDBE8 = 1;
+    if (g_particleQuadDisplayListState != 0) return 0;
+    g_particleQuadDisplayListState = 1;
     list = &scene->lists[surface];
     node = scene->free.head;
     if (node != 0) {
-        func_80255ED8_de(&scene->free, node);
+        List_RemoveIntrusive(&scene->free, node);
     } else {
         node = list->head;
         if (node == 0) goto done;
-        func_80255ED8_de(list, node);
+        List_RemoveIntrusive(list, node);
     }
-    func_80255D14_de(list, node);
+    List_AppendIntrusive(list, node);
     if (node != 0) {
         node->owner = owner;
         MatrixFromQuaternion(&rotation.x, matrix);
@@ -90,7 +90,7 @@ Particle *Fx_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 
         Graphu64_ScaleVector(&normal, &normal, 2.048f);
         Graphu64_AddVec3(&position, &position, &normal);
         TranslateMatrix((char *)matrix, position.x, position.y, position.z);
-        ScaleMatrixLocal(matrix, D_800C5EA8_de, 1.0f, D_800C5EA8_de);
+        ScaleMatrixLocal(matrix, g_impactMarkScaleConstants, 1.0f, g_impactMarkScaleConstants);
         Graphu64_ConvertMatrixToFixed(matrix, &node->transform.matrix);
     }
 done:
@@ -98,17 +98,17 @@ done:
 }
 
 /* 802A6AC0_2.CPP */
-extern s32 Linked_UpdateRibbonLifetime(s32 owner, State802A6DF8 *state);
+extern s32 Linked_UpdateRibbonLifetime(s32 owner, ItemMenuRenderNode *state);
 
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
-extern void Textload_LocateTextureResource(s32 *arg0, s32 sectionIndex);
+extern void Textload_LocateTextureResource(s32 *resourceOutput, s32 sectionIndex);
 
-extern void Particle_EncodeRenderLayer(void *actor, s32 *arg1);
+extern void Particle_EncodeRenderLayer(void *actor, s32 *resource);
 
 typedef struct Image Image;
 
-extern s32 D_800D297C;
+extern s32 g_lightingBufferIndex;
 
 extern void Graphu64_ConvertMatrixToFloat(f32 *, s32);
 
@@ -116,7 +116,7 @@ extern void Graphu64_ClampMatrixToFixedRange(f32 *matrixComponents);
 
 extern void Graphu64_GetMatrixTranslation(char *object, float *output);
 
-extern void Graphu64_GetMatrixScale(void *matrix, f32 *arg1);
+extern void Graphu64_GetMatrixScale(void *matrix, f32 *scaleOutput);
 
 
 
@@ -128,27 +128,27 @@ extern void Linked_DrawTexturedRibbon(s32, void *, s32);
 
 extern void Fx_DrawColoredRibbon(s32, void *, s32);
 
-extern void Linked_AppendRibbonSegment(void *arg0, void *arg1, f32 *local);
+extern void Linked_AppendRibbonSegment(void *ribbonOwner, void *attachmentState, f32 *local);
 
-void Fx_RecycleOwnerParticles(SceneRecAt95A8 *arg0, s32 arg1) {
+void Fx_RecycleOwnerParticles(ParticleQuadPoolScene *particlePool, s32 ownerId) {
     s32 count;
     s32 offset;
     void **slot;
     Particle *node;
     Particle *next;
 
-    if (arg0->free.count != 0x64) {
+    if (particlePool->free.count != 0x64) {
         count = 0;
         offset = 0x94E0;
         do {
-            slot = &arg0->lists[count].head;
+            slot = &particlePool->lists[count].head;
             node = *slot;
             if (node != 0) {
                 do {
                     next = node->next;
-                    if (node->owner == arg1) {
-                        func_80255ED8_de(slot, node);
-                        func_80255D14_de(&arg0->free, node);
+                    if (node->owner == ownerId) {
+                        List_RemoveIntrusive(slot, node);
+                        List_AppendIntrusive(&particlePool->free, node);
                     }
                     node = next;
                 } while (node != 0);
@@ -160,8 +160,8 @@ void Fx_RecycleOwnerParticles(SceneRecAt95A8 *arg0, s32 arg1) {
 }
 
 void Fx_UpdateAttachedEffects(Owner802A6DF8 *owner) {
-    State802A6DF8 *state;
-    State802A6DF8 *next;
+    ItemMenuRenderNode *state;
+    ItemMenuRenderNode *next;
     u8 *object;
 
     state = owner->lists.inactive.head;
@@ -194,34 +194,34 @@ void Fx_UpdateAttachedEffects(Owner802A6DF8 *owner) {
     }
 }
 
-void Fx_UpdateTimedCallbacks(void *arg0)
+void Fx_UpdateTimedCallbacks(void *owner)
 {
   void *node;
-  char *new_var;
+  char *callbackNodeAddress;
   void *next;
   f32 value;
   s32 count;
-  node = ((ObjectLinks7598 *)(arg0))->unk_7594;
+  node = ((AttachedEffectPoolView *)(owner))->activeAttachedEffects;
   if (node != 0)
   {
     do
     {
-      value = (((ObjectLinks14_2 *)(node))->unk_8 = (((ObjectLinks14_2 *)(node))->unk_8) - D_800D2988);
-      next = ((ObjectLinks14_2 *)(node))->next;
+      value = (((AttachedEffectTimerView *)(node))->remainingTime = (((AttachedEffectTimerView *)(node))->remainingTime) - g_frameElapsedTime);
+      next = ((AttachedEffectTimerView *)(node))->next;
       if (value <= 0.0f)
       {
-        value += ((ObjectLinks14_2 *)(node))->unk_C;
-        ((ObjectLinks14_2 *)(node))->unk_8 = value;
+        value += ((AttachedEffectTimerView *)(node))->interval;
+        ((AttachedEffectTimerView *)(node))->remainingTime = value;
         if (value < 0.0f)
         {
-          ((ObjectLinks14_2 *)(node))->unk_8 = 0.0f;
+          ((AttachedEffectTimerView *)(node))->remainingTime = 0.0f;
         }
-        (((struct CallbackState1C *) ((char *) node))->callback)(node);
-        count = (((struct func_8022BC04_S3 *) (new_var = (char *) node))->unk10) - 1;
-        ((ObjectLinks14_2 *)(node))->unk_10 = count;
+        (((struct EffectCallbackEntryView *) ((char *) node))->callback)(node);
+        count = (((struct AnimationResourceHandleView *) (callbackNodeAddress = (char *) node))->resourceHandle) - 1;
+        ((AttachedEffectTimerView *)(node))->remainingCalls = count;
         if (count <= 0)
         {
-          Lists_MoveNodeToActiveList((struct Lists18 *)&((ObjectLinks7598 *)(arg0))->unk_7588, node);
+          Lists_MoveNodeToActiveList((struct Lists18 *)&((AttachedEffectPoolView *)(owner))->attachedEffectLists, node);
         }
       }
       node = next;
@@ -230,22 +230,22 @@ void Fx_UpdateTimedCallbacks(void *arg0)
   }
 }
 
-void Fx_ResolveEntryResource(void *unused, void *arg1, void *actor) {
-    CItem *entry = arg1;
-    s32 field34;
+void Fx_ResolveEntryResource(void *unused, void *itemEntry, void *actor) {
+    CItem *entry = itemEntry;
+    s32 resourceId;
     s32 *p;
 
-    field34 = entry->unk34;
-    if (field34 != -1) {
-        p = &entry->unk14;
-        Textload_LocateTextureResource(p, field34);
+    resourceId = entry->updateCallbackOrTextureId;
+    if (resourceId != -1) {
+        p = &entry->imageFrameOrTextureHandle;
+        Textload_LocateTextureResource(p, resourceId);
         if (actor != 0) {
             Particle_EncodeRenderLayer(actor, p);
         }
     }
 }
 
-void Fx_DetachEffectObject(State802A6FE0 *state) {
+void Fx_DetachEffectObject(AttachedEffectDetachState *state) {
     u8 *object;
 
     object = state->object;
@@ -278,58 +278,58 @@ void Fx_ConfigureSpriteImage(Image *image, Image *texture, Sprite *sprite) {
     sprite->data = image->header->data;
     sprite->format = image->header->format;
     if (image->flags & 2) {
-        sprite->field8 = image->fieldC;
-        sprite->fieldC = image->field10;
+        sprite->primaryData = image->primaryData;
+        sprite->secondaryData = image->secondaryData;
     } else {
-        sprite->field8 = image->fieldC;
-        sprite->fieldC = image->fieldC;
+        sprite->primaryData = image->primaryData;
+        sprite->secondaryData = image->primaryData;
     }
-    scale = *(&D_800C5EA8_de + 1);
+    scale = *(&g_impactMarkScaleConstants + 1);
     sprite->width = image->header->width * scale;
     sprite->height = image->header->height * scale;
     if (texture != 0) {
         sprite->extentX = 1 << (texture->header->widthShift + 5);
-        sprite->extentX = sprite->extentX * image->header->scale - D_800C5EB0_de;
+        sprite->extentX = sprite->extentX * image->header->scale - g_spriteExtentAndUnitConstants;
         height = 1 << (texture->header->heightShift + 5);
-        unit = &D_800C5EB0_de + 1;
+        unit = &g_spriteExtentAndUnitConstants + 1;
         sprite->step = *unit / ((f32)sprite->format - *unit);
         sprite->extentY = height;
     }
 }
 
-void Fx_UpdateChildTransform(Node44 *arg0, void *arg1) {
+void Fx_UpdateChildTransform(Node44 *parentNode, void *childNode) {
     f32 local[16];
     f32 scale;
     void *entry;
     Matrix *dst;
     Matrix *src;
 
-    entry = ((ChildB4 *)arg1)->unk_B0;
+    entry = ((ChildB4 *)childNode)->attachedEntity;
     if (entry != 0) {
         if (entry == (void *)-1) {
-            ((ChildB4 *)arg1)->mat[D_800D297C] = ((ChildB4 *)arg1)->mat[D_800D297C ^ 1];
-            ((ChildB4 *)arg1)->unk_B0 = 0;
+            ((ChildB4 *)childNode)->mat[g_lightingBufferIndex] = ((ChildB4 *)childNode)->mat[g_lightingBufferIndex ^ 1];
+            ((ChildB4 *)childNode)->attachedEntity = 0;
         } else {
-            Graphu64_ConvertMatrixToFloat(local, entry + ((D_800D297C << 6) + 0x60));
-            scale = D_800C5EB8_de;
+            Graphu64_ConvertMatrixToFloat(local, entry + ((g_lightingBufferIndex << 6) + 0x60));
+            scale = g_childTransformDefaultScale;
             if (((ParticleEffect *)entry)->entry->unk14 != 0) {
-                scale = D_800C5EBC_de;
+                scale = g_childTransformAlternateScale;
             }
             ScaleMatrixLocal(local, scale, scale, scale);
             Graphu64_ClampMatrixToFixedRange(local);
-            Graphu64_GetMatrixTranslation((char *)local, &((ChildB4 *)arg1)->pos[0]);
-            if (arg0->unk_3C & 4) {
-                Graphu64_GetMatrixScale(local, &((ChildB4 *)arg1)->rot[0]);
+            Graphu64_GetMatrixTranslation((char *)local, &((ChildB4 *)childNode)->pos[0]);
+            if (parentNode->flags & 4) {
+                Graphu64_GetMatrixScale(local, &((ChildB4 *)childNode)->rot[0]);
             } else {
-                Graphu64_ConvertMatrixToFixed(local, (PackedMatrixWords *)(arg1 + ((D_800D297C << 6) + 0x28)));
+                Graphu64_ConvertMatrixToFixed(local, (PackedMatrixWords *)(childNode + ((g_lightingBufferIndex << 6) + 0x28)));
             }
         }
-        ((ChildB4 *)arg1)->unk_8 = arg0->unk_8->unk_8;
+        ((ChildB4 *)childNode)->remainingLifetime = parentNode->definition->segmentLifetime;
     }
 }
 
-void Fx_UpdateNodeFractions(void *arg0) {
-    StateSmpUpdateRibbonLifetime *state = arg0;
+void Fx_UpdateNodeFractions(void *ribbonState) {
+    StateSmpUpdateRibbonLifetime *state = ribbonState;
     f32 accum;
     f32 delta;
     ChildB4 *node;
@@ -349,7 +349,7 @@ void Fx_UpdateNodeFractions(void *arg0) {
 }
 
 void Fx_DrawEffectGeometry(s32 pool, void *ribbon, s32 camera) {
-    State802A6DF8 *state = ribbon;
+    ItemMenuRenderNode *state = ribbon;
     if (state->flags & 8) {
         Linked_UpdateLinkedNodeTransforms(ribbon);
     }
@@ -365,33 +365,33 @@ void Fx_DrawEffectGeometry(s32 pool, void *ribbon, s32 camera) {
     }
 }
 
-void Fx_AppendAttachedTransform(void *arg0, void *arg1, void *arg2, s32 sourceMatrix) {
-    State802A6DF8 *state = arg1;
+void Fx_AppendAttachedTransform(void *ribbonOwner, void *attachmentState, void *particle, s32 sourceMatrix) {
+    ItemMenuRenderNode *state = attachmentState;
     f32 local[16];
     Shared_Particle *entry;
     f32 scale;
 
     entry = state->object;
-    if (entry == arg2 && state->value > 0.0f) {
+    if (entry == particle && state->value > 0.0f) {
         Graphu64_ConvertMatrixToFloat(local, sourceMatrix);
-        scale = D_800C5EC0_de;
+        scale = g_attachedTransformDefaultScale;
         if (entry->desc->renderModel != 0) {
-            scale = D_800C5EC4_de;
+            scale = g_attachedTransformModelScale;
         }
         ScaleMatrixLocal(local, scale, scale, scale);
         Graphu64_ClampMatrixToFixedRange(local);
-        Linked_AppendRibbonSegment(arg0, state, local);
+        Linked_AppendRibbonSegment(ribbonOwner, state, local);
     }
 }
 
-void *Fx_FindAttachedEffect(Owner802A6DF8 *arg0, s32 arg1, s32 arg2) {
-    State802A6DF8 *node;
+void *Fx_FindAttachedEffect(Owner802A6DF8 *owner, s32 particleAddress, s32 contextId) {
+    ItemMenuRenderNode *node;
 
-    node = arg0->lists.inactive.head;
+    node = owner->lists.inactive.head;
     if (node != 0) {
         do {
-            if ((s32)node->object == arg1) {
-                if (node->contextId == arg2) {
+            if ((s32)node->object == particleAddress) {
+                if (node->contextId == contextId) {
                     return node;
                 }
             }
@@ -402,7 +402,7 @@ void *Fx_FindAttachedEffect(Owner802A6DF8 *arg0, s32 arg1, s32 arg2) {
 }
 
 void Fx_DrawEffectPasses(void *pool, void *camera) {
-    State802A6DF8 *node;
+    ItemMenuRenderNode *node;
 
     node = ((Owner802A6DF8 *)pool)->lists.inactive.head;
     while (node != 0) {

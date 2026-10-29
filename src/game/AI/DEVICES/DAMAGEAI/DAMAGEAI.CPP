@@ -7,7 +7,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/FUNCPTR.H"
 #include "COMMON/SHARED_VOIDCALLBACK.H"
 #include "COMMON/WORLD.H"
@@ -20,7 +20,7 @@
    the model and time at 0x124 and 0x128 and the stage byte, and runs func_80214178_de (kind 2 when the
    descriptor has flag 0x40, else 1) once the health reaches zero. */
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 
 
@@ -29,7 +29,7 @@
 
 
 
-void func_802050C0_eu_x(Damageable *obj, Health *health, Hit *hit)
+void DamageAI_ApplyHitEuropeanExtended(Damageable *obj, Health *health, Hit *hit)
 {
     s32 canHit = 0;
     s32 flags;
@@ -80,7 +80,7 @@ void func_802050C0_eu_x(Damageable *obj, Health *health, Hit *hit)
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C1D78[2] = {
+unsigned int k_DamageaiEncodedWordsBlock1[2] = {
     0x43C00000, 0x3FC90FDC,
 };
 #endif
@@ -103,7 +103,7 @@ unsigned int rodata_unresolved_800C1D78[2] = {
 
 
 
-void func_802050C0_eu(Damageable *obj, Health *health, Hit *hit)
+void DamageAI_ApplyHitEuropean(Damageable *obj, Health *health, Hit *hit)
 {
     s32 canHit = 0;
     s32 flags;
@@ -154,7 +154,7 @@ void func_802050C0_eu(Damageable *obj, Health *health, Hit *hit)
 #endif
 
 #if defined(VERSION_DE)
-void func_802050A0_de(Damageable *obj, Health *health, Hit *hit)
+void DamageAI_ApplyHitGerman(Damageable *obj, Health *health, Hit *hit)
 {
     s32 canHit = 0;
     s32 flags;
@@ -205,7 +205,7 @@ void func_802050A0_de(Damageable *obj, Health *health, Hit *hit)
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C1A98[2] = {
+unsigned int k_DamageaiEncodedWords[2] = {
     0x00205940, 0x00205940,
 };
 #endif
@@ -216,16 +216,16 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 typedef struct Owner Owner;
 
 /** Initialize the dest record's vtable-like fields from source's flag byte. */
-void func_8020520C_de(LevelActor *source, void *dest) {
-    ((SpawnDispatchOwner *)dest)->callbacks = &D_800C8420_de;
-    ((SpawnDispatchOwner *)dest)->update = &D_002052C4;
-    ((SpawnDispatchOwner *)dest)->draw = &D_00205628;
-    ((SpawnDispatchOwner *)dest)->hit = &D_002050A0;
+void DamageAI_InitializeDispatch(LevelActor *source, void *dest) {
+    ((SpawnDispatchOwner *)dest)->callbacks = &g_damageDispatchTable;
+    ((SpawnDispatchOwner *)dest)->update = &g_damageUpdateRomEntry;
+    ((SpawnDispatchOwner *)dest)->draw = &g_deviceDrawRomEntry;
+    ((SpawnDispatchOwner *)dest)->hit = &g_damageHitRomEntry;
     ((SpawnDispatchOwner *)dest)->spawn = 0;
-    ((SpawnDispatchOwner *)dest)->remaining = source->field3;
+    ((SpawnDispatchOwner *)dest)->remaining = source->renderPass;
 }
 
-void func_8020524C_de(LevelActor *actor, void *requestContext) {
+void DamageAI_RequestCurrentActorState(LevelActor *actor, void *requestContext) {
     if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
         Actor_RequestActorState(actor, requestContext, 1);
     } else {
@@ -234,7 +234,7 @@ void func_8020524C_de(LevelActor *actor, void *requestContext) {
     }
 }
 
-void func_802052C4_de(void *callbackContext, Shared_CallbackOwner *callbackOwner) {
+void DamageAI_InvokeOwnerCallback(void *callbackContext, Shared_CallbackOwner *callbackOwner) {
     void *obj = callbackOwner->hook;
     if (obj != 0) {
         FuncPtr fn = ((Shared_CallbackHook *)(obj))->callback;
@@ -245,19 +245,19 @@ void func_802052C4_de(void *callbackContext, Shared_CallbackOwner *callbackOwner
 }
 
 /** Return the nested record's field, or a fallback constant when zero. */
-int func_802052F8_de(void *owner) {
-    int temp = ((Hold5324 *)((Owner *)owner)->track)->r.sound;
-    if (temp != 0) {
-        return temp;
+int DamageAI_GetActivationSound(void *owner) {
+    int activationSound = ((Hold5324 *)((Owner *)owner)->track)->r.sound;
+    if (activationSound != 0) {
+        return activationSound;
     }
     return 0x5334;
 }
 
-int func_80205314_de(void *actor) {
+int DamageAI_GetActivationMode(void *actor) {
     return ((Obj5324 *)actor)->holder->r.unk18;
 }
 
-void func_80205324_de(Obj5324 *actor, s32 *activationContext) {
+void DamageAI_ActivateActor(Obj5324 *actor, s32 *activationContext) {
     s32 mode;
     Rec5324 *rec;
     Shared_World *pFlag;
@@ -284,7 +284,7 @@ void func_80205324_de(Obj5324 *actor, s32 *activationContext) {
         Barrel_SpawnFlaggedEffects(actor, activationContext, 4, rec->unk24, rec->unk28);
         /* Fx_RecycleOwnerParticles unlinks the walker by the object's 32-bit identity;
          * the registry holds those identities as s32. */
-        Fx_RecycleOwnerParticles(&D_801379C0, (s32)actor);
+        Fx_RecycleOwnerParticles(&g_actorParticleScene, (s32)actor);
         if (pFlag->mode != mode) {
             goto block_10;
         }
@@ -295,7 +295,7 @@ block_10:
 }
 
 /** Clear two flags when the controlling byte and nested flag are set. */
-void func_80205494_de(BreakableHitContext *breakableHitContext, ObjectStateCC *hitState) {
+void DamageAI_ClearCollisionFlagsOnHit(BreakableHitContext *breakableHitContext, BreakableHitStateView *hitState) {
     char *nested = breakableHitContext->unk_18;
     if (hitState->unk_CB != 0 &&
         (((struct Descriptor *)nested)->damage.flags & 0x4) != 0) {
@@ -307,6 +307,6 @@ void func_80205494_de(BreakableHitContext *breakableHitContext, ObjectStateCC *h
 }
 
 /** Return the word at offset 0x40 through the pointer stored at offset 0x18. */
-int func_802054D0_de(void *object) {
+int DamageAI_GetDefinitionValue(void *object) {
     return ((struct Access_s32_40 *) ((Owner *) object)->track)->field;
 }

@@ -7,9 +7,9 @@
 #include "sdk/al_globals.h"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/LONE/G_AUDIOSEQPLAYERTEXT.H"
-#include "COMMON/LONE/D_800C7440.H"
+#include "COMMON/LONE/SEQUENCE_PLAYER_ASSERT_TEXT.H"
 #include "COMMON/ALBANK_S.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OBJRECAT18V1.H"
 #include "sdk/libgultra/seqplayer.h"
 #include "sdk/libgultra/__POSTNEXTSEQEVENT.H"
@@ -33,7 +33,7 @@ extern void alSynAddPlayer(void *, void *);
 
 void Seqplayer_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c) {
     void *heap = c->context;
-    void *drvr = D_800D4070;
+    void *drvr = g_audioGlobals;
     ALVoiceState *vs;
     ALVoiceState *voices;
     ALEventListItem *items;
@@ -71,9 +71,9 @@ void Seqplayer_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c
     items = alHeapDBAlloc(0, 0, heap, c->count1C, sizeof(ALEventListItem));
     alEvtqNew(&seqp->base.evtq, items, c->count1C);
     seqp->base.node.next = 0;
-    seqp->base.node.handler = &D_002B0554;
+    seqp->base.node.handler = &Seqplayer_ProcessSequenceEvents_Address;
     seqp->base.node.clientData = seqp;
-    alSynAddPlayer(D_800D4070, seqp);
+    alSynAddPlayer(g_audioGlobals, seqp);
 }
 #endif
 
@@ -85,7 +85,7 @@ extern void alSynAddPlayer(void *, void *);
 
 void alSeqpNew(SeqInitPlayer *p, ALSeqpConfig *c) {
     void *heap = c->heap;
-    void *driver = D_800D4070;
+    void *driver = g_audioGlobals;
     SeqFreeVoice *voice;
     void *events;
     s32 i;
@@ -129,9 +129,9 @@ void alSeqpNew(SeqInitPlayer *p, ALSeqpConfig *c) {
     events = alHeapDBAlloc(0, 0, heap, c->events, 28);
     alEvtqNew(p->queue, events, c->events);
     p->next = 0;
-    p->callback = &D_002B0554;
+    p->callback = &Seqplayer_ProcessSequenceEvents_Address;
     p->self = p;
-    alSynAddPlayer(D_800D4070, p);
+    alSynAddPlayer(g_audioGlobals, p);
 }
 #endif
 
@@ -139,7 +139,7 @@ void alSeqpNew(SeqInitPlayer *p, ALSeqpConfig *c) {
  /* 2147483648.0f */
 
 extern void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *);                        /* __handleNextSeqEvent */
-extern void func_802B1E50_de(ALSeqPlayer *, f32);                   /* __setUsptFromTempo */
+extern void Seqplayer_SetTempoMicrosecondsPerTick(ALSeqPlayer *, f32);                   /* __setUsptFromTempo */
 extern ALMicroTime alEvtqNextEvent(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
 extern void alEvtqFlushType(ALEventQueue *, s16);                 /* alEvtqFlushType */
 extern void alSynStopVoice(struct AudioSynthParamSamplesView *, ALVoice_s *);                   /* alSynStopVoice */
@@ -277,22 +277,22 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
             break;
         case 13: /* AL_SEQP_SEQ_EVT */
             if (seqp->base.state == 1)
-                Audio_Assert(D_800C7440, g_audioSeqplayerText, 296);
-            seqp->base.target = seqp->base.nextEvent.msg.spseq.unk0;
-            func_802B1E50_de(&seqp->base, 500000.0f);
+                Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 296);
+            seqp->base.target = seqp->base.nextEvent.msg.spseq.previous;
+            Seqplayer_SetTempoMicrosecondsPerTick(&seqp->base, 500000.0f);
             if (seqp->base.bank)
                 __initFromBank(&seqp->base, seqp->base.bank);
             break;
         case 14: /* AL_SEQP_BANK_EVT */
             if (seqp->base.state != 0)
-                Audio_Assert(D_800C7440, g_audioSeqplayerText, 305);
-            seqp->base.bank = seqp->base.nextEvent.msg.spbank.unk0;
+                Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 305);
+            seqp->base.bank = seqp->base.nextEvent.msg.spbank.previous;
             __initFromBank(&seqp->base, seqp->base.bank);
             break;
         case 4: /* AL_SEQ_END_EVT */
         case 3: /* AL_TEMPO_EVT */
         case 1: /* AL_SEQ_MIDI_EVT */
-            Audio_Assert(D_800C7440, g_audioSeqplayerText, 315);
+            Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 315);
             break;
         }
         seqp->base.nextDelta = alEvtqNextEvent(&seqp->base.evtq, &seqp->base.nextEvent);
@@ -384,7 +384,7 @@ void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
         break;
 
     default:
-        Audio_Assert(D_800C7440, g_audioSeqplayerText, 412);
+        Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 412);
     }
 }
 
@@ -406,7 +406,7 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
     ALVoiceState *vstate;
     u8 pan;
     if (!(event->type == 1 || event->type == 2)) /* AL_SEQ_MIDI_EVT, AL_SEQP_MIDI_EVT */
-        Audio_Assert(D_800C7440, g_audioSeqplayerText, 436);
+        Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 436);
     status = event->msg.midi.status & 0xF0;
     chan = event->msg.midi.status & 0x0F;
     byte1 = key = event->msg.midi.byte1;
@@ -443,12 +443,12 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             else
                 vstate->phase = 0;
             cents = (key - sound->keyMap->keyBase) * 100 + sound->keyMap->detune;
-            vstate->pitch = func_802AFE30_de(cents);
+            vstate->pitch = Audio_CentsToPitchRatio(cents);
             vstate->envGain = sound->envelope->attackVolume;
             vstate->envEndTime = seqp->curTime + sound->envelope->attackTime;
             vstate->flags = 0;
             inst = seqp->chanState[chan].instrument;
-            oscValue = D_800C74C0_de;
+            oscValue = g_sequenceInitialOscillatorValue;
             if (inst->tremType) {
                 if (seqp->initOsc) {
                     deltaTime = (*seqp->initOsc)(&oscState, &oscValue, inst->tremType,
@@ -463,14 +463,14 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
                 }
             }
             tremeloSlot = &vstate->tremelo;
-            if (!(oscValue >= (*(&D_800C74C0_de + 1)))) {
+            if (!(oscValue >= (*(&g_sequenceInitialOscillatorValue + 1)))) {
                 tremelo = (s32)oscValue;
             } else {
-                tremelo = (s32)(oscValue - (*(&D_800C74C0_de + 1)));
+                tremelo = (s32)(oscValue - (*(&g_sequenceInitialOscillatorValue + 1)));
                 tremelo |= 0x80000000;
             }
             *tremeloSlot = tremelo;
-            oscValue = D_800C74C8_de;
+            oscValue = g_sequenceFallbackOscillatorValue;
             if (inst->vibType) {
                 if (seqp->initOsc) {
                     deltaTime = (*seqp->initOsc)(&oscState, &oscValue, inst->vibType,
@@ -591,7 +591,7 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
         break;
     case 0xC0: /* AL_MIDI_ProgramChange */
         if (seqp->bank == 0)
-            Audio_Assert(D_800C7440, g_audioSeqplayerText, 714);
+            Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 714);
         if (key < seqp->bank->instCount) {
             ALInstrument *inst = seqp->bank->instArray[key];
             __setInstChanState(seqp, inst, chan);
@@ -604,7 +604,7 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             s32 cents;
             bendVal = ((byte2 << 7) + byte1) - 8192;
             cents = (seqp->chanState[chan].bendRange * bendVal) / 8192;
-            bendRatio = func_802AFE30_de(cents);
+            bendRatio = Audio_CentsToPitchRatio(cents);
             seqp->chanState[chan].pitchBend = bendRatio;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next)
                 if (vs->channel == chan)

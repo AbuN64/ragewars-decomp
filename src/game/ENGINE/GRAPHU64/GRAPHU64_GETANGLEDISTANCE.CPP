@@ -90,10 +90,10 @@ void Graphu64_ScaleVector(void *scaledVector, void *inputVector, f32 scaleFactor
 }
 
 /** Lerp a 3-component vector: out = a + t * (b - a). */
-void Graphu64_InterpolateVector(CVector3 *arg0, f32 t, void *a, void *b) {
-    arg0->x = ((CVector3 *)(a))->x + (t * (((CVector3 *)(b))->x - ((CVector3 *)(a))->x));
-    arg0->y = ((CVector3 *)(a))->y + (t * (((CVector3 *)(b))->y - ((CVector3 *)(a))->y));
-    arg0->z = ((CVector3 *)(a))->z + (t * (((CVector3 *)(b))->z - ((CVector3 *)(a))->z));
+void Graphu64_InterpolateVector(CVector3 *result, f32 t, void *a, void *b) {
+    result->x = ((CVector3 *)(a))->x + (t * (((CVector3 *)(b))->x - ((CVector3 *)(a))->x));
+    result->y = ((CVector3 *)(a))->y + (t * (((CVector3 *)(b))->y - ((CVector3 *)(a))->y));
+    result->z = ((CVector3 *)(a))->z + (t * (((CVector3 *)(b))->z - ((CVector3 *)(a))->z));
 }
 
 /** Cross product of two vectors, written directly to the output (no aliasing guard). */
@@ -133,36 +133,36 @@ void Graphu64_InterpolateAtHeight(CVector3 *out, CVector3 *a, CVector3 *b, f32 y
     }
 }
 
-void *Graphu64_ReflectVector(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2, f32 arg3) {
+void *Graphu64_ReflectVector(CVector3 *result, CVector3 *remaining, CVector3 *planeNormal, f32 restitution) {
     CVector3 tmp;
-    f32 temp_f2;
-    f32 temp_f3;
-    f32 temp_f4;
-    f32 temp_f5;
+    f32 normalScale;
+    f32 normalDot;
+    f32 normalX;
+    f32 inputX;
 
-    temp_f5 = remaining->x;
-    temp_f4 = arg2->x;
-    temp_f3 = (temp_f5 * temp_f4) + (remaining->y * arg2->y) + (remaining->z * arg2->z);
-    temp_f2 = (arg3 * temp_f3) + temp_f3;
-    tmp.x = temp_f5 - (temp_f2 * temp_f4);
-    tmp.y = remaining->y - (temp_f2 * arg2->y);
-    tmp.z = remaining->z - (temp_f2 * arg2->z);
-    *arg0 = tmp;
-    return arg0;
+    inputX = remaining->x;
+    normalX = planeNormal->x;
+    normalDot = (inputX * normalX) + (remaining->y * planeNormal->y) + (remaining->z * planeNormal->z);
+    normalScale = (restitution * normalDot) + normalDot;
+    tmp.x = inputX - (normalScale * normalX);
+    tmp.y = remaining->y - (normalScale * planeNormal->y);
+    tmp.z = remaining->z - (normalScale * planeNormal->z);
+    *result = tmp;
+    return result;
 }
 
-void *Graphu64_ProjectVectorOntoPlane(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2) {
+void *Graphu64_ProjectVectorOntoPlane(CVector3 *result, CVector3 *remaining, CVector3 *planeNormal) {
     CVector3 tmp;
-    f32 temp_f2;
-    f32 temp_f4;
-    f32 temp_f5;
+    f32 normalDot;
+    f32 normalX;
+    f32 inputX;
 
-    temp_f5 = remaining->x;
-    temp_f4 = arg2->x;
-    temp_f2 = (temp_f5 * temp_f4) + (remaining->y * arg2->y) + (remaining->z * arg2->z);
-    tmp.x = temp_f5 - (temp_f2 * temp_f4);
-    tmp.y = remaining->y - (temp_f2 * arg2->y);
-    tmp.z = remaining->z - (temp_f2 * arg2->z);
-    *arg0 = tmp;
-    return arg0;
+    inputX = remaining->x;
+    normalX = planeNormal->x;
+    normalDot = (inputX * normalX) + (remaining->y * planeNormal->y) + (remaining->z * planeNormal->z);
+    tmp.x = inputX - (normalDot * normalX);
+    tmp.y = remaining->y - (normalDot * planeNormal->y);
+    tmp.z = remaining->z - (normalDot * planeNormal->z);
+    *result = tmp;
+    return result;
 }

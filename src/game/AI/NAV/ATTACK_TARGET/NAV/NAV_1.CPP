@@ -8,12 +8,12 @@ unsigned int func_802106FC_eu_x[1] = { 0x00101080U };
 
 /* 802106E0_18.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_80212684_eu_padding_13284[12] = { 0x24, 0x02, 0x00, 0x01, 0x46, 0x01, 0x00, 0x00, 0xC7, 0xA1, 0x00, 0x18 };
+unsigned char g_NavTrailingBytesBlock8[12] = { 0x24, 0x02, 0x00, 0x01, 0x46, 0x01, 0x00, 0x00, 0xC7, 0xA1, 0x00, 0x18 };
 #endif
 
 /* 8023A284_2.CPP */
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8023A4BC[1] = {
+unsigned int k_NavEncodedWordsBlock7[1] = {
     0x43454649,
 };
 #endif

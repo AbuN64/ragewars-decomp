@@ -18,29 +18,29 @@ struct Rotor {
     char pad218[4];
     f32 trim;
 };
-struct ObjRecAt210 {
+struct SkyEffectSortValueView {
     char pad0[0x210];
-    float unk210;
+    float sortValue;
 };
 struct Scene {
     u8 reserved000[0x8A0];
     IntrusiveList freeObjects; /* +0x8A0; probe 20261019T012545644265Z */
-    struct ObjectRecAt220 *objects; /* active-list head, +0x8B4 */
-    struct ObjectRecAt220 *lastObject;
+    struct SkyLayerRuntimeView *objects; /* active-list head, +0x8B4 */
+    struct SkyLayerRuntimeView *lastObject;
     s32 objectPrevOffset, objectNextOffset;
     s32 count;
     u16 effectMask; /* +0x8C8: Sky_UpdateSceneEffects */
     u8 reserved8CA[2];
 };
-struct IntegerState8A4 {
+struct SkyEffectObjectListsView {
     unsigned char padding_0[2208];
-    IntrusiveList unk_8A0;
-    IntrusiveList unk_8B4;
+    IntrusiveList sceneEffects;
+    IntrusiveList inactiveSceneEffects;
 };
 struct Reusable {
     s32 unk0;
     char pad4[0x10];
-    s32 unk14;
+    s32 collisionCounter;
     char pad18[0x70];
     s32 unk88;
     char pad8C[0x10];
@@ -73,16 +73,16 @@ struct PagerState {
     OSMesgQueue pending;
     char list2Data[0xB10 - 0xAF0];
     Channels channels[8];
-    ResourcePageMapping *head; /* pager LRU list (head, tail), appended by Virtual_AppendPageChainNode; = D_800FFE20 */
+    ResourcePageMapping *head; /* pager LRU list (head, tail), appended by Virtual_AppendPageChainNode; = g_pagerLruHead */
     union { s32 fBF4; ResourcePageMapping *tail; };
     u8 lookup[0x100];
-    EntryRecAt3 entries[24];
+    ControllerInitStatusBytes entries[24];
     struct Region regions; /* the first page region: ROM pages at source, slot map lookup */
     s16 fD70;
     s16 fD72;
     char padD74[4];
 };
-extern struct PagerState D_800FF230;
+extern struct PagerState g_resourcePager;
 struct Block10 {
     s16 f28;
     s16 pad;
@@ -91,12 +91,12 @@ struct Block10 {
     void **f34;
 };
 struct AnimationInfo {
-    s32 unk0;
+    s32 frameCount;
     char pad0[0x4 - 0x0 - sizeof(s32)];
     s32 unk4;
     char pad4[0x8 - 0x4 - sizeof(s32)];
-    void * unk8;
+    void * frames;
 };
-extern f32 func_8023A294_de(s32 unused0, f32 value, f32 target, f32 step);
+extern f32 Gsky_StepValueTowardTarget(s32 unused0, f32 value, f32 target, f32 step);
 extern CCameraText *Sky_PostScreenMessage(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target);
 #endif

@@ -8,7 +8,7 @@
 #include "abi.h"
 
 /* 802A8A94_3.CPP */
-/* Draws a text string in the current font style D_801376F8: when centring, measures it through Menu_MeasureLine at the style size scaled by the language-dependent factors for D_80147150, shrinks the scale so it fits 44 pixels inside the screen width D_800E28D0 and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through OnScreen_DrawTextGlyphs, first as a shadow when requested. */
+/* Draws a text string in the current font style g_tutorialStatusBars: when centring, measures it through Menu_MeasureLine at the style size scaled by the language-dependent factors for g_creditsTextDrawingEnabled, shrinks the scale so it fits 44 pixels inside the screen width g_hudReferenceViewportWidth and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through OnScreen_DrawTextGlyphs, first as a shadow when requested. */
 
 extern Gfx *g_displayListCursor;
 extern f32 Menu_MeasureLine(u8 *text, f32 size, f32 spacing);
@@ -27,9 +27,9 @@ void Onscrn_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shad
     f32 h;
     s32 language;
 
-    style = &D_801376F8;
+    style = &g_tutorialStatusBars;
     if (centred) {
-        switch (D_80147150) {
+        switch (g_creditsTextDrawingEnabled) {
         case 0:
             sizeFactor = 24.0f;
             break;
@@ -52,7 +52,7 @@ void Onscrn_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shad
             break;
         }
         size = style->width * scaleX * sizeFactor;
-        switch (D_80147150) {
+        switch (g_creditsTextDrawingEnabled) {
         case 0:
             spacing = 24.0f;
             break;
@@ -75,7 +75,7 @@ void Onscrn_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shad
             break;
         }
         width = Menu_MeasureLine(text, size, spacing);
-        limit = D_800E28D0 - 0x2C;
+        limit = g_hudReferenceViewportWidth - 0x2C;
         if (limit < width) {
             ratio = limit / width;
             scaleX *= ratio;
@@ -89,7 +89,7 @@ void Onscrn_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shad
     fx = x;
     w = style->width * scaleX;
     h = style->height * scaleY;
-    language = D_80147150;
+    language = g_creditsTextDrawingEnabled;
     fy = y;
     if (shadow) {
         OnScreen_DrawTextGlyphs(text, fx, fy, w, h, 1, alpha, language);
@@ -100,7 +100,7 @@ void Onscrn_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shad
 /* Emits the render-state display-list prologue for a flat colour pass: pipeline sync, one-cycle
    mode, the two combiner/mode presets through func_80268CE0_de and Geometry_SetModePreset, the environment
    colour from the argument with full alpha bits, texture enable and the texture-filter, colour-dither
-   and alpha-dither mode words, the alpha dither chosen by D_800E28D8. */
+   and alpha-dither mode words, the alpha dither chosen by g_frontendCurrentVideoModeIndex. */
 
 extern void Geometry_SetCombineMode(u32 mode);
 extern s32 Geometry_SetModePreset(s32 tailEnum);
@@ -117,7 +117,7 @@ void Onscrn_SetupSpriteMode(s32 color) {
     gSPTexture(g_displayListCursor++, 32768, 32768, 0, 0, G_ON);
     gDPSetTextureLUT(g_displayListCursor++, G_TT_NONE);
     gDPSetTexturePersp(g_displayListCursor++, G_TP_NONE);
-    if (D_800E28D8 == 0) { gDPSetTextureFilter(g_displayListCursor++, G_TF_POINT); } else { gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP); }
+    if (g_frontendCurrentVideoModeIndex == 0) { gDPSetTextureFilter(g_displayListCursor++, G_TF_POINT); } else { gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP); }
 }
 
 void OnScreen_DrawTextureWithOpacity(void *pTexture, void *pOpacity, int XPos, int YPos, int TextureWidth, int TextureHeight) {
@@ -133,8 +133,8 @@ void OnScreen_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, 
  if(ScaleX!=0.0f) dsdx=dsdx/ScaleX;
  dtdy=1024;
  if(ScaleY!=0.0f) dtdy=dtdy/ScaleY;
- xl=XPos*D_800C61B8_de; xh=(XPos+TextureWidth*ScaleX)*D_800C61B8_de;
- yl=YPos*D_800C61B8_de; yh=(YPos+TextureHeight*ScaleY)*D_800C61B8_de;
+ xl=XPos*g_maskedImageTextureCoordinateScale; xh=(XPos+TextureWidth*ScaleX)*g_maskedImageTextureCoordinateScale;
+ yl=YPos*g_maskedImageTextureCoordinateScale; yh=(YPos+TextureHeight*ScaleY)*g_maskedImageTextureCoordinateScale;
 
     { gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)pOpacity); gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(g_displayListCursor++); gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, (u32)((((((TextureWidth*TextureHeight+3)>>2)-1)<2047?(((TextureWidth*TextureHeight+3)>>2)-1):2047))), (u32)((((1<<11)+(1>(TextureWidth/16)?1:(TextureWidth/16))-1)/(1>(TextureWidth/16)?1:(TextureWidth/16))))); gDPPipeSync(g_displayListCursor++); gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)(((((TextureWidth>>1)+7)>>3))), 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
     { gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, (u32)pTexture); gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(g_displayListCursor++); gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, (u32)((((TextureWidth*TextureHeight-1)<2047?(TextureWidth*TextureHeight-1):2047))), (u32)((((1<<11)+(1>(TextureWidth*2/8)?1:(TextureWidth*2/8))-1)/(1>(TextureWidth*2/8)?1:(TextureWidth*2/8))))); gDPPipeSync(g_displayListCursor++); gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, (u32)((((TextureWidth*2)+7)>>3)), 0, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
@@ -156,7 +156,7 @@ void OnScreen_DrawIntensityTexture(void *pTexture, int XPos, int YPos, int Textu
     { Gfx *g=g_displayListCursor++; gDPTexRect(g, XPos<<2, YPos<<2, (XPos+TextureWidth)<<2, (YPos+TextureHeight)<<2, 0); gDPHalf1(g_displayListCursor++, 0); gDPHalf2(g_displayListCursor++, (((u32)((1<<10)) & 0xFFFF) << ((16)))|(((u32)((1<<10)) & 0xFFFF) << ((0)))); }
 }
 
-/* Appends display-list commands to D_80110634 that load a 4-bit texture block of the given size and draw it as a texture rectangle at a floating-point position, stretched by the given horizontal and vertical scales with the texture steps divided by them. Adapted from OnScreen_DrawIntensityTexture with the position made floating point, the rectangle corners scaled by D_800C61BC_de and the scale factors applied to the extent and the texture step. */
+/* Appends display-list commands to D_80110634 that load a 4-bit texture block of the given size and draw it as a texture rectangle at a floating-point position, stretched by the given horizontal and vertical scales with the texture steps divided by them. Adapted from OnScreen_DrawIntensityTexture with the position made floating point, the rectangle corners scaled by g_maskedImageRectangleCoordinateScale and the scale factors applied to the extent and the texture step. */
 
 void OnScreen_DrawScaledIntensityTexture(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int TextureHeight, f32 ScaleX, f32 ScaleY) {
     int dsdx;
@@ -171,16 +171,16 @@ void OnScreen_DrawScaledIntensityTexture(void *pTexture, f32 XPos, f32 YPos, int
     if (ScaleY != 0.0f) {
         dtdy = dtdy / ScaleY;
     }
-    xl = XPos * D_800C61BC_de;
-    xh = (XPos + TextureWidth * ScaleX) * D_800C61BC_de;
-    yl = YPos * D_800C61BC_de;
-    yh = (YPos + TextureHeight * ScaleY) * D_800C61BC_de;
+    xl = XPos * g_maskedImageRectangleCoordinateScale;
+    xh = (XPos + TextureWidth * ScaleX) * g_maskedImageRectangleCoordinateScale;
+    yl = YPos * g_maskedImageRectangleCoordinateScale;
+    yh = (YPos + TextureHeight * ScaleY) * g_maskedImageRectangleCoordinateScale;
     { gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)pTexture); gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(g_displayListCursor++); gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, (u32)((((((TextureWidth*TextureHeight+3)>>2)-1)<2047?(((TextureWidth*TextureHeight+3)>>2)-1):2047))), (u32)((((1<<11)+(1>(TextureWidth/16)?1:(TextureWidth/16))-1)/(1>(TextureWidth/16)?1:(TextureWidth/16))))); gDPPipeSync(g_displayListCursor++); gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)(((((TextureWidth>>1)+7)>>3))), 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
     { Gfx *g=g_displayListCursor++; gDPTexRect(g, xl, yl, xh, yh, 0); gDPHalf1(g_displayListCursor++, 0); gDPHalf2(g_displayListCursor++, (((u32)((dsdx)) & 0xFFFF) << ((16)))|(((u32)((dtdy)) & 0xFFFF) << ((0)))); }
 }
 
 /* 802A8A94_7.CPP */
 /* ROM-grounded data: src/rw_pool_802A9734_CBF48_us_rev1.c */
-const unsigned int D_blob_92c5c4c132cac6f4e59b[1] = {
+const unsigned int g_maskedImageTextureCoordinateScaleWordsUsRev1[1] = {
     0x40800000,
 };

@@ -10,7 +10,7 @@
 #include "stddef.h"
 #include "UTIL/HEAP.H"
 
-s32 func_80255630_de(s8 *arena, void *requestedAddress, s32 requestedBytes) {
+s32 Heap_AllocateAtAddress(s8 *arena, void *requestedAddress, s32 requestedBytes) {
     s32 alignedBlockBytes;
     s32 leadingFreeBytes;
     u32 followingFreeAddress;
@@ -26,71 +26,71 @@ s32 func_80255630_de(s8 *arena, void *requestedAddress, s32 requestedBytes) {
     void *allocationHeader;
     void *containingBlock;
     alignedBlockBytes = (requestedBytes + 0x2F) & ~0xF;
-    firstFreeBlock = ((struct MeasuredRecAt8V2 *)(arena))->value;
+    firstFreeBlock = ((struct HeapFirstFreeBlockView *)(arena))->value;
     if (firstFreeBlock != NULL) {
         containingBlock = firstFreeBlock;
-        while (((struct MeasuredRecAt4V4 *)(containingBlock))->value != 0) {
-            candidateNextAddress = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
+        while (((struct HeapNextBlockAddressView *)(containingBlock))->value != 0) {
+            candidateNextAddress = ((struct HeapNextBlockAddressView *)(containingBlock))->value;
             if (candidateNextAddress >= (u32) requestedAddress) {
                 break;
             }
             containingBlock = (void *) candidateNextAddress;
         }
-        freeSpanStart = containingBlock + ((struct MeasuredRecAt10V2 *)(containingBlock))->value;
-        freeSpanEnd = freeSpanStart + ((struct MeasuredRecAt14V2 *)(containingBlock))->value;
+        freeSpanStart = containingBlock + ((struct RegionAllocatedBlockSizeView *)(containingBlock))->value;
+        freeSpanEnd = freeSpanStart + ((struct RegionFreeBlockSizeView *)(containingBlock))->value;
         allocationHeader = requestedAddress - 0x20;
         allocationEnd = allocationHeader + alignedBlockBytes;
         if ((u32) allocationHeader >= (u32) freeSpanStart) {
             if ((u32) freeSpanEnd >= (u32) allocationEnd) {
                 s32 trailingFreeBytes = freeSpanEnd - allocationEnd;
-                ((struct MeasuredRecAt10V2 *)(allocationHeader))->value = alignedBlockBytes;
-                ((struct MeasuredRecAt14V2 *)(allocationHeader))->value = trailingFreeBytes;
+                ((struct RegionAllocatedBlockSizeView *)(allocationHeader))->value = alignedBlockBytes;
+                ((struct RegionFreeBlockSizeView *)(allocationHeader))->value = trailingFreeBytes;
                 if (trailingFreeBytes != 0) {
-                    ((struct MeasuredRecAt4V3 *)(requestedAddress))[-1].value = containingBlock;
-                    followingFreeAddress = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
-                    ((struct MeasuredRecAt4V4 *)(allocationHeader))->value = followingFreeAddress;
-                    if (((struct MeasuredRecAt4V4 *)(containingBlock))->value != 0) {
+                    ((struct HeapAllocationOwnerHeader *)(requestedAddress))[-1].value = containingBlock;
+                    followingFreeAddress = ((struct HeapNextBlockAddressView *)(containingBlock))->value;
+                    ((struct HeapNextBlockAddressView *)(allocationHeader))->value = followingFreeAddress;
+                    if (((struct HeapNextBlockAddressView *)(containingBlock))->value != 0) {
                         *(void **) followingFreeAddress = allocationHeader;
                     }
-                    ((struct MeasuredRecAt4V4 *)(containingBlock))->value = (u32) allocationHeader;
-                    if (((struct MeasuredRecAtCV2 *)(arena))->value == containingBlock) {
-                        ((struct MeasuredRecAtCV2 *)(arena))->value = allocationHeader;
+                    ((struct HeapNextBlockAddressView *)(containingBlock))->value = (u32) allocationHeader;
+                    if (((struct HeapLastFreeBlockView *)(arena))->value == containingBlock) {
+                        ((struct HeapLastFreeBlockView *)(arena))->value = allocationHeader;
                     }
                 } else {
-                    ((struct MeasuredRecAt4V3 *)(requestedAddress))[-1].value = NULL;
-                    ((struct MeasuredRecAt4V4 *)(allocationHeader))->value = 0U;
+                    ((struct HeapAllocationOwnerHeader *)(requestedAddress))[-1].value = NULL;
+                    ((struct HeapNextBlockAddressView *)(allocationHeader))->value = 0U;
                 }
-                leadingFreeBytes = allocationHeader - (containingBlock + ((struct MeasuredRecAt10V2 *)(containingBlock))->value);
-                ((struct MeasuredRecAt14V2 *)(containingBlock))->value = leadingFreeBytes;
+                leadingFreeBytes = allocationHeader - (containingBlock + ((struct RegionAllocatedBlockSizeView *)(containingBlock))->value);
+                ((struct RegionFreeBlockSizeView *)(containingBlock))->value = leadingFreeBytes;
                 if (leadingFreeBytes == 0) {
-                    previousFreeBlock = ((struct MeasuredRecAt0V2 *)(containingBlock))->value;
+                    previousFreeBlock = ((struct HeapPreviousFreeLinkView *)(containingBlock))->value;
                     if (previousFreeBlock != NULL) {
-                        ((struct MeasuredRecAt4V4 *)(previousFreeBlock))->value = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
+                        ((struct HeapNextBlockAddressView *)(previousFreeBlock))->value = ((struct HeapNextBlockAddressView *)(containingBlock))->value;
                     }
-                    unlinkSuccessorAddress = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
+                    unlinkSuccessorAddress = ((struct HeapNextBlockAddressView *)(containingBlock))->value;
                     if (unlinkSuccessorAddress != 0) {
-                        *(void **) unlinkSuccessorAddress = ((struct MeasuredRecAt0V2 *)(containingBlock))->value;
+                        *(void **) unlinkSuccessorAddress = ((struct HeapPreviousFreeLinkView *)(containingBlock))->value;
                     }
-                    if (((struct MeasuredRecAt8V2 *)(arena))->value == containingBlock) {
-                        ((struct MeasuredRecAt8V2 *)(arena))->value = ((struct MeasuredRecAt4V2 *)(containingBlock))->value;
+                    if (((struct HeapFirstFreeBlockView *)(arena))->value == containingBlock) {
+                        ((struct HeapFirstFreeBlockView *)(arena))->value = ((struct HeapNextFreeLinkView *)(containingBlock))->value;
                     }
-                    if (((struct MeasuredRecAtCV2 *)(arena))->value == containingBlock) {
-                        replacementTailAddress = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
+                    if (((struct HeapLastFreeBlockView *)(arena))->value == containingBlock) {
+                        replacementTailAddress = ((struct HeapNextBlockAddressView *)(containingBlock))->value;
                         if (replacementTailAddress == 0) {
-                            replacementTailAddress = (u32) ((struct MeasuredRecAt0V2 *)(containingBlock))->value;
+                            replacementTailAddress = (u32) ((struct HeapPreviousFreeLinkView *)(containingBlock))->value;
                         }
-                        ((struct MeasuredRecAtCV2 *)(arena))->value = (void *) replacementTailAddress;
+                        ((struct HeapLastFreeBlockView *)(arena))->value = (void *) replacementTailAddress;
                     }
-                    ((struct MeasuredRecAt0V2 *)(containingBlock))->value = NULL;
-                    ((struct MeasuredRecAt4V4 *)(containingBlock))->value = 0U;
+                    ((struct HeapPreviousFreeLinkView *)(containingBlock))->value = NULL;
+                    ((struct HeapNextBlockAddressView *)(containingBlock))->value = 0U;
                 }
-                ((struct MeasuredRecAt8V2 *)(allocationHeader))->value = containingBlock;
-                nextPhysicalBlock = ((struct MeasuredRecAtCV2 *)(containingBlock))->value;
-                ((struct MeasuredRecAtCV2 *)(allocationHeader))->value = nextPhysicalBlock;
-                if (((struct MeasuredRecAtCV2 *)(containingBlock))->value != NULL) {
-                    ((struct MeasuredRecAt8V2 *)(nextPhysicalBlock))->value = allocationHeader;
+                ((struct HeapFirstFreeBlockView *)(allocationHeader))->value = containingBlock;
+                nextPhysicalBlock = ((struct HeapLastFreeBlockView *)(containingBlock))->value;
+                ((struct HeapLastFreeBlockView *)(allocationHeader))->value = nextPhysicalBlock;
+                if (((struct HeapLastFreeBlockView *)(containingBlock))->value != NULL) {
+                    ((struct HeapFirstFreeBlockView *)(nextPhysicalBlock))->value = allocationHeader;
                 }
-                ((struct MeasuredRecAtCV2 *)(containingBlock))->value = allocationHeader;
+                ((struct HeapLastFreeBlockView *)(containingBlock))->value = allocationHeader;
                 return (s32) requestedAddress;
             }
         }
@@ -101,7 +101,7 @@ s32 func_80255630_de(s8 *arena, void *requestedAddress, s32 requestedBytes) {
 /* Coalesces every block that physically follows a pool's anchor block at 0x10 into its physical
    predecessor: first puts an empty predecessor on the free list (after the next non-empty block, or
    at the head), then grows it by the block's header and size, unlinks the block from the physical
-   chain and, when it was free, from the free list. Written like func_80255B2C_de, which absorbs one block. */
+   chain and, when it was free, from the free list. Written like Heap_FreeAllocation, which absorbs one block. */
 
 
 
@@ -109,7 +109,7 @@ s32 func_80255630_de(s8 *arena, void *requestedAddress, s32 requestedBytes) {
 
 
 
-void func_80255780_de(Pool80255720 *arena)
+void Heap_CoalesceEmptyPhysicalBlocks(Pool80255720 *arena)
 {
     Block80255720 *block;
     Block80255720 *header;
@@ -187,12 +187,12 @@ merge:
 
 
 
-void func_802558B4_de(struct Heap *heap, char *start, s32 size) {
-    struct BlockRecAt20 *block;
+void Heap_InitializeArena(struct Heap *heap, char *start, s32 size) {
+    struct HeapAllocationBlock *block;
 
     heap->start = start;
     heap->end = start + size;
-    block = (struct BlockRecAt20 *) (((u32) start + 15) & ~15);
+    block = (struct HeapAllocationBlock *) (((u32) start + 15) & ~15);
     size -= (char *) block - start;
     size &= ~15;
     block->nextFree = 0;
@@ -224,15 +224,15 @@ void func_802558B4_de(struct Heap *heap, char *start, s32 size) {
 
 
 
-void *func_80255920_de(HeapRecAtC *heap, s32 request) {
-    BlockRecAt20 *block;
-    BlockRecAt20 *split;
+void *Heap_AllocateFromFront(HeapFreeBlockList *heap, s32 request) {
+    HeapAllocationBlock *block;
+    HeapAllocationBlock *split;
     u32 size;
 
     size = (request + 0x2F) & ~0xF;
     for (block = heap->head; block != 0; block = block->nextFree) {
         if (block->free >= size) {
-            { u8 *cursor = (u8 *)block; cursor += block->size; split = (BlockRecAt20 *)cursor; }
+            { u8 *cursor = (u8 *)block; cursor += block->size; split = (HeapAllocationBlock *)cursor; }
             split->size = size;
             split->free = block->free - size;
             if (split->free != 0) {
@@ -285,16 +285,16 @@ void *func_80255920_de(HeapRecAtC *heap, s32 request) {
 
 
 
-void *func_80255A34_de(HeapRecAtC *heap, s32 request)
+void *Heap_AllocateFromBack(HeapFreeBlockList *heap, s32 request)
 {
-    BlockRecAt20 *block;
-    BlockRecAt20 *split;
+    HeapAllocationBlock *block;
+    HeapAllocationBlock *split;
     u32 size;
 
     size = (request + 0x2F) & ~0xF;
     for (block = heap->tail; block != 0; block = block->prevFree) {
         if (block->free >= size) {
-            { u8 *cursor = (u8 *)block; cursor += block->size; cursor += block->free; cursor -= size; split = (BlockRecAt20 *)cursor; }
+            { u8 *cursor = (u8 *)block; cursor += block->size; cursor += block->free; cursor -= size; split = (HeapAllocationBlock *)cursor; }
             split->size = size;
             split->free = 0;
             block->free -= size;
@@ -328,7 +328,7 @@ void *func_80255A34_de(HeapRecAtC *heap, s32 request)
     return 0;
 }
 
-s32 func_80255B2C_de(Pool80255ACC *arena, char *dataToFree) {
+s32 Heap_FreeAllocation(Pool80255ACC *arena, char *dataToFree) {
     Block80255720 *block;
     Block80255720 *header;
     Block80255720 *other;
@@ -397,7 +397,7 @@ merge:
     return block->size - 0x20;
 }
 
-void func_80255C4C_de(Pool80255ACC *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut) {
+void Heap_GetFreeByteCounts(Pool80255ACC *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut) {
     u32 previousLargestBytes;
     u32 largestBytes;
     void *freeBlockCursor;

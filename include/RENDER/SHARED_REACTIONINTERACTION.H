@@ -3,9 +3,9 @@
 #include "TYPES.H"
 struct Shared_ReactionInteraction {
     void* unk0;
-    s32 unk4;
+    s32 damage;
     f32 magnitude;
-    s32 unkC;
-    s32 unk10;
+    s32 damageFlags;
+    s32 shield;
 };
 #endif

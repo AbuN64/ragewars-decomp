@@ -3,7 +3,7 @@
 struct {
     unsigned int w0[3];
     unsigned char b1[168];
-} D_auto_rodata_unresolved_800E9914 = {
+} g_encodedCheatTextAndHeaderEuX = {
     {
         0x00000000, 0x0000001E, 0x00000001,
     },

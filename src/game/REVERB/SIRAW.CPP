@@ -1,5 +1,5 @@
 #include "TYPES.H"
-#include "COMMON/ARG.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "AUDIO/SIRAW.H"
 
 /** Report whether either low bit of the VI current register is set. */

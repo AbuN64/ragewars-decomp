@@ -1,10 +1,10 @@
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
-#include "COMMON/ARG.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "sdk/OS/controller.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
@@ -18,13 +18,13 @@ s32 osContStartReadData(s32 completionQueue) {
     u8 *p;
 
     __osSiGetAccess();
-    p = &D_8014D4B0;
+    p = &g_controllerLastCommand;
     if (*p != 1) {
         __osPackReadData();
-        __osSiRawStartDma(1, &D_8014D470);
+        __osSiRawStartDma(1, &g_controllerQueryPifBuffer);
         osRecvMesg(completionQueue, 0, 1);
     }
-    result = __osSiRawStartDma(0, &D_8014D470);
+    result = __osSiRawStartDma(0, &g_controllerQueryPifBuffer);
     *p = 1;
     __osSiRelAccess();
     return result;
@@ -37,8 +37,8 @@ extern void __osContGetInitData(s32 *valid, s32 data);
 void __osPackResetData(void);
 
 void osContGetReadData(ContPad *data) {
-    u8 *ptr = (u8 *)&D_8014D470;
-    u8 *count = D_8014D46C;
+    u8 *ptr = (u8 *)&g_controllerQueryPifBuffer;
+    u8 *count = g_controllerChannelCount;
     ContReadFormat readformat;
     s32 i;
 
@@ -61,12 +61,12 @@ void __osPackReadData(void) {
     u8 *count;
     s32 i;
 
-    ptr = (u8 *)D_8014D470.ramarray;
+    ptr = (u8 *)g_controllerQueryPifBuffer.ramarray;
     for (i = 14; i >= 0; i--) {
         ((s32 *)ptr)[i] = 0;
     }
 
-    D_8014D470.pifstatus = 1;
+    g_controllerQueryPifBuffer.pifstatus = 1;
     readformat.dummy = 0xFF;
     readformat.txsize = 1;
     readformat.rxsize = 4;
@@ -75,7 +75,7 @@ void __osPackReadData(void) {
     readformat.stick_x = -1;
     readformat.stick_y = -1;
 
-    count = D_8014D46C;
+    count = g_controllerChannelCount;
     for (i = 0; i < *count; i++) {
         *(ContReadFormat *)ptr = readformat;
         ptr += sizeof(ContReadFormat);
@@ -90,13 +90,13 @@ s32 osContReset(s32 queue, s32 controllerStatus) {
     s32 sentinel;
 
     __osSiGetAccess();
-    state = &D_8014D4B0;
+    state = &g_controllerLastCommand;
     sentinel = 0xFF;
     if (*state != sentinel) {
         char *data;
 
         __osPackResetData();
-        data = &D_8014D470;
+        data = &g_controllerQueryPifBuffer;
         __osSiRawStartDma(1, data);
         osRecvMesg(queue, 0, 1);
         __osSiRawStartDma(0, data);
@@ -106,7 +106,7 @@ s32 osContReset(s32 queue, s32 controllerStatus) {
         osRecvMesg(queue, 0, 1);
         *state = sentinel;
     }
-    result = __osSiRawStartDma(0, &D_8014D470);
+    result = __osSiRawStartDma(0, &g_controllerQueryPifBuffer);
     osRecvMesg(queue, 0, 1);
     __osContGetInitData(&output, controllerStatus);
     __osSiRelAccess();
@@ -119,24 +119,24 @@ extern void osSetTimer(void *node, u64 initialDelay, u64 repeatInterval, void *m
 
 
 void __osPackResetData(void) {
-    OSPifRam *ram = (OSPifRam *)&D_8014D470;
-    s32 var_v0;
-    u8 *var_v1;
+    OSPifRam *ram = (OSPifRam *)&g_controllerQueryPifBuffer;
+    s32 channel;
+    u8 *commandCursor;
     s32 val;
 
-    var_v1 = &D_8014D470;
+    commandCursor = &g_controllerQueryPifBuffer;
     ram->pifstatus = 1;
     val = 0xFD;
-    var_v0 = 3;
+    channel = 3;
     do {
-        *var_v1 = val;
-        var_v0 -= 1;
-        var_v1 += 1;
-    } while (var_v0 >= 0);
-    *var_v1 = 0xFE;
+        *commandCursor = val;
+        channel -= 1;
+        commandCursor += 1;
+    } while (channel >= 0);
+    *commandCursor = 0xFE;
 }
 
-s32 osContInit(s32 queue, s32 *valid, s32 arg2) {
+s32 osContInit(s32 queue, s32 *valid, s32 connectedPatternOut) {
     s32 node[8];
     s32 sp40[6];
     s32 message[2];
@@ -154,15 +154,15 @@ s32 osContInit(s32 queue, s32 *valid, s32 arg2) {
         osSetTimer(node, 0x0165A0BCULL - value, 0, sp40, message);
         osRecvMesg(sp40, (s32)message, 1);
     }
-    D_8014D46C[0] = 4;
+    g_controllerChannelCount[0] = 4;
     __osPackRequestData(0);
-    __osSiRawStartDma(1, &D_8014D470);
+    __osSiRawStartDma(1, &g_controllerQueryPifBuffer);
     osRecvMesg(queue, (s32)message, 1);
-    result = __osSiRawStartDma(0, &D_8014D470);
+    result = __osSiRawStartDma(0, &g_controllerQueryPifBuffer);
     osRecvMesg(queue, (s32)message, 1);
-    __osContGetInitData(valid, arg2);
-    D_8014D4B0 = 0;
+    __osContGetInitData(valid, connectedPatternOut);
+    g_controllerLastCommand = 0;
     __osSiCreateAccessQueue();
-    osCreateMesgQueue(&D_801471C0, (s32)&D_801471D8, 1);
+    osCreateMesgQueue(&g_controllerInitializationQueue, (s32)&g_controllerInitializationMessage, 1);
     return result;
 }

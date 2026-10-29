@@ -26,7 +26,7 @@ u32 data_writable_800CD810[40] = {
 /* DATA_800D1600.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800D1600 */
-unsigned int D_blob_c77b04cedb5eca95ebde[4] = {
+unsigned int g_materialPlusModeConstantsUsRev1[4] = {
     0xA0000000, 0xA0000000, 0x00FF0000, 0x00FF0000,
 };
 #endif

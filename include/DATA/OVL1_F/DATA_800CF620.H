@@ -1,4 +1,4 @@
-#ifndef DATA_OVL1_F_DATA_800CF620_H
-#define DATA_OVL1_F_DATA_800CF620_H
-extern char D_002331EC[];
+#ifndef DATA_OVERLAY_ONE_F_FIRST_CALLBACK_ROM_ENTRY_H
+#define DATA_OVERLAY_ONE_F_FIRST_CALLBACK_ROM_ENTRY_H
+extern char g_overlayOneFLinkRecordRomLinkTarget_002331EC[];
 #endif

@@ -1,6 +1,6 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
@@ -15,8 +15,8 @@ void Gsky_ProjectToScreen(s32 view, s32 point, f32 *screenX, f32 *screenY) {
     f32 half;
 
     Graphu64_ProjectPoint(view + 0x1E0, point, &value);
-    half = (f32)(D_800E28D0 / 2);
+    half = (f32)(g_hudReferenceViewportWidth / 2);
     *screenX = value.x * half + half;
-    *screenY = value.y * (f32)(-D_800E28D4 / 2) +
-            (f32)(D_800E28D4 / 2);
+    *screenY = value.y * (f32)(-g_hudReferenceViewportHeight / 2) +
+            (f32)(g_hudReferenceViewportHeight / 2);
 }

@@ -1,11 +1,11 @@
-#include "COMMON/EXTERNS_15.H"
+#include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/APPROACHLOCATION.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
@@ -20,19 +20,19 @@
 #include "WEAPONS/BARREL_UPDATETRACKGOALS.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 
-void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result);
+void AI_DynTurretGetTargetInfo(SharedPlayer *player, TurretRiderTargetView *rider, Result *result);
 
-void Graphu64_TransformDirectionTranspose(void *matrix, void *arg1, void *arg2);
+void Graphu64_TransformDirectionTranspose(void *matrix, void *inputVector, void *outputVector);
 
 void Turret_Move(struct Owner *owner, Rider *rider, s32 mode, SharedPlayer *target);
 
 void Barrel_SetLoopingSound(void *actor, void *stateController, s32 sixth);
 
-void Barrel_StopActorLoopingSound(void *arg0, void *arg1);
+void Barrel_StopActorLoopingSound(void *actor, void *soundState);
 
 f32 Graphu64_ApproachValue(f32 current, f32 target, f32 rate);
 
-typedef union NavRider { RiderRecAt130V1 target; Rider rider; struct { char pad0[0x9C]; f32 heading; char padA0[0x124-0xA0]; f32 speed; char pad128[8]; CVector3 aim; } nav; } NavRider;
+typedef union NavRider { TurretRiderTargetView target; Rider rider; struct { char pad0[0x9C]; f32 heading; char padA0[0x124-0xA0]; f32 speed; char pad128[8]; CVector3 aim; } nav; } NavRider;
 
 /* Callers reserve a 136-byte result workspace shared by both target searches. */
 static inline void navRotation(CQuatern *q,CVector3 *aim) {
@@ -53,7 +53,7 @@ typedef struct NavWork {
 } NavWork;
 
 /* Installs a weapon record's handler table and routine pointers and, when its owner's id is 0x40C,
-   clears its counters and sets its rate to 200 and its range and speed from D_800C6B2C and D_800C6B30. */
+   clears its counters and sets its rate to 200 and its range and speed from k_turretInitialRange and k_turretInitialSpeeds. */
 
 
 
@@ -89,9 +89,9 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
 
     inFireCone = 0;
     turret = &actor->player.views18.navigationTrack->segment;
-    work.heading = actor->player.views1C.view6C_4.unk6C - riderState->nav.heading;
+    work.heading = actor->player.views1C.view6C_4.heading - riderState->nav.heading;
     Graphu64_WrapPeriodicValue(&work.heading);
-    actorKind = actor->player.views1C.viewE4_6.unkE4;
+    actorKind = actor->player.views1C.viewE4_6.kind;
     switch (actorKind) {                              /* irregular */
     case 0x40B:
         Barrel_UpdateTrackGoals(&actor->input, riderState, &work.result.output, 0, 1);
@@ -102,11 +102,11 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
     }
     target = riderState->target.target;
     if ((target != NULL) && (work.result.result.distance <= turret->m_SightRadius)) {
-        heightScale = D_800C1A28;
-        work.origin.v=actor->player.views0.view8_2.unk8;
+        heightScale = k_turretAimHeightScale;
+        work.origin.v=actor->player.views0.view8_2.position;
         desiredSpeed=Gobjinst_GetActorHeight(&actor->player);
         work.origin.v.y+=desiredSpeed*heightScale;
-        work.destination.v=target->views0.view8_2.unk8;
+        work.destination.v=target->views0.view8_2.position;
         desiredSpeed=Gobjinst_GetActorHeight(target);
         work.destination.v.y+=desiredSpeed*heightScale;
         work.aim.v.x = riderState->nav.aim.x;
@@ -135,8 +135,8 @@ block_12:
             }
         }
         turnLimit = turret->limit;
-        if (turnLimit < D_800C1A2C) {
-            maxTurn = turnLimit * D_800C1A30;
+        if (turnLimit < k_turretTurnLimitThreshold) {
+            maxTurn = turnLimit * k_turretMaximumTurnScale;
             turnedAimError = work.heading + aimError;
             if (maxTurn < turnedAimError) {
                 aimError = maxTurn - work.heading;
@@ -150,14 +150,14 @@ block_12:
         Turret_Move(&actor->owner,&riderState->rider,turret->m_TargetVisibleMotionType,target);
     } else {
         desiredSpeed = 0.0f;
-        
+
         aimError = -work.heading;
         Turret_Move(&actor->owner,&riderState->rider,turret->m_TargetNotVisibleMotionType,target);
     }
 
     if(aimError<0.0f) {
-        if(D_800C1A34_de < -aimError) goto changed;
-    } else if(D_800C1A38_de < aimError) goto changed;
+        if(k_turretNegativeAimTolerance < -aimError) goto changed;
+    } else if(k_turretPositiveAimTolerance < aimError) goto changed;
     if(riderState->nav.speed != desiredSpeed) {
 changed:
         Barrel_SetLoopingSound(actor,riderState,0xC3F);
@@ -176,31 +176,31 @@ s32 Turret_BuildPlaneRot(s32 out, s32 actor, struct RotationObject *rotation) {
     ((void (*)(s32, f32 *))CVector3_GetDirectionRotation2)(out, angles);
     return out;
 }
-void Turret_Construct(struct OwnerRecAtE4 *owner, struct RecordRecAt13C *record)
+void Turret_Construct(struct ItemMenuSelectionView *owner, struct TurretSetupState *record)
 {
-    record->table = D_800C8170_de;
-    record->first = D_002039F8;
-    record->second = D_00203E78;
-    record->third = D_00202E4C;
-    record->fourth = D_00203DF0;
+    record->table = g_turretDispatchTable;
+    record->first = Turret_AdvanceRomEntry;
+    record->second = Turret_DecreaseHealthRomEntry;
+    record->third = Turret_CalcOrientMtxRomEntry;
+    record->fourth = Turret_SpecialEffectsRomEntry;
     if (owner->id == 0x40C) {
         record->a = 0;
         record->b = 0;
-        record->fourth = D_00203DF0;
+        record->fourth = Turret_SpecialEffectsRomEntry;
         record->rate = 0xC8;
         record->c = 0;
-        record->range = D_800C6B2C;
-        record->speed = D_800C6B30;
+        record->range = k_turretInitialRange;
+        record->speed = k_turretInitialSpeeds;
     }
 }
 
-void Turret_Setup(LevelActor *actor, struct RecordRecAt13C *turret) {
+void Turret_Setup(LevelActor *actor, struct TurretSetupState *turret) {
     s32 flags;
     ActorMotionDefinition *record;
 
     record = &((ActorMotionResource *)actor->definition)->motion;
     if (actor->type == 0x40C) {
-        turret->speed = (&D_800C6B30)[1];
+        turret->speed = (&k_turretInitialSpeeds)[1];
     } else {
         turret->speed = 0.0f;
     }
@@ -230,9 +230,9 @@ void Turret_Advance(char *actor, Obj *state) {
     if (state->hook != 0 && state->hook->fn != 0) {
         state->hook->fn(actor, state);
     }
-    if (((struct OwnerRecAtE4 *)(actor))->id == 0x40C) {
-        state->timer += D_800D2988;
-        if (D_800C1A48_de < state->timer || state->count <= 0) {
+    if (((struct ItemMenuSelectionView *)(actor))->id == 0x40C) {
+        state->timer += g_frameElapsedTime;
+        if (k_turretStateTimeout < state->timer || state->count <= 0) {
             Actor_RequestActorState(actor, state, 0x40);
         }
     }
@@ -240,9 +240,9 @@ void Turret_Advance(char *actor, Obj *state) {
 
 /** Return the nested record's field, or a fallback constant when zero. */
 int Turret_Anim_ACTIVATE(struct Owner *owner) {
-    int temp = ((struct MenuRules *) owner->track)->locked;
-    if (temp != 0) {
-        return temp;
+    int activationAnimation = ((struct MenuRules *) owner->track)->locked;
+    if (activationAnimation != 0) {
+        return activationAnimation;
     }
     return 0x2F44;
 }

@@ -17,19 +17,19 @@
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/GAMEPLAY_MOVEMENT.H"
 #include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
-#include "GFX/TEXT/8022BA90_4.H"
+#include "GFX/TEXT/PLAYER_CAMERA_CALLBACK.H"
 #include "COMMON/EFFECTRENDER.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/SHAPE_TYPEMAP_14.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/PLAYER_ACTION_AND_POSE_VIEWS.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "ENGINE/SCENE_DRAWOPAQUEACTORS.H"
 #include "AI/NAV/NAV_UPDATECOMPUTERPLAYERSTATUS.H"
 #include "COMMON/LEVEL_TRACK.H"
 #include "include_asm.h"
-extern f32 D_800C7948[];
+extern f32 g_playerGroundMovementSpeedLimits[];
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LOADOUT.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -41,10 +41,10 @@ extern f32 D_800C7948[];
 #include "AI/PLAYER_DRAWTINTEDPLAYER.H"
 #include "ENGINE/AUDIO/T2SOUNDELEMENT/SOUND_CONTEXT_CONTROL.H"
 
-extern s32 func_80222EA4_de(void *, void *);
-extern s32 func_80222FE0_de(void *, void *, s32 *);
+extern s32 Player_TryEnterHitReactionState(void *, void *);
+extern s32 Player_TryThrowSelectedActor(void *, void *, s32 *);
 
-extern void *D_800D052C[];
+extern void *g_weaponInfoByType[];
 
 /* 8021CD70_7.CPP */
 /* Draws a player's HUD for one frame unless the game state is 8 or 11: ticks the HUD animations,
@@ -55,15 +55,15 @@ extern void *D_800D052C[];
    team and squad overlays. */
 extern Gfx *g_displayListCursor;
 
-extern char D_8011D8D0;
-extern s32 D_80140FF8;
-void func_802183E8_de(void *, Shared_HudView *, Shared_HudPlayer *);
-void func_80218F08_de(void *, Shared_HudView *, Shared_HudPlayer *);
-void func_80219490_de(void *, Shared_HudView *);
-void func_8021E2A0_de(Shared_HudPlayer *, Shared_HudView *);
-void func_8021EA54_de(Shared_HudPlayer *, Shared_HudView *);
-void func_8022C1E8_de(Shared_HudPlayer *, Shared_HudView *);
-void func_8022C37C_de(Shared_HudPlayer *, Shared_HudView *);
+extern char g_actorParticleEffectSystem;
+extern s32 g_playerWeaponClassMode;
+void TeamSelect_DrawWeaponWheelSprites(void *, Shared_HudView *, Shared_HudPlayer *);
+void TeamSelect_DrawTeamWheelSprites(void *, Shared_HudView *, Shared_HudPlayer *);
+void Playerai_DrawAnimatedSprite(void *, Shared_HudView *);
+void Playerai_DrawAimHud(Shared_HudPlayer *, Shared_HudView *);
+void Playerai_DrawAmmoCounters(Shared_HudPlayer *, Shared_HudView *);
+void Playerai_DrawHudSprite1FC(Shared_HudPlayer *, Shared_HudView *);
+void Playerai_DrawHudSprite201(Shared_HudPlayer *, Shared_HudView *);
 s32 Particle_CountOwnerListOneEffects(void *, Shared_HudPlayer *);
 s16 **Scene_StartWorldEffect(void *, s32, s32, s32);
 void ItemMenu_DrawEntries(void *, Shared_HudPlayer *);
@@ -71,9 +71,9 @@ void OnScreen_UpdateMoverScript(void *);
 
 f32 Menu_MeasureLine(char *, f32, f32);
 static inline CGameStatus *hudRules(void) {
-    return &D_801462C8.counters;
+    return &g_gameSettings.counters;
 }
-void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
+void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
     char text[16];
     f32 sx;
     f32 sy;
@@ -113,7 +113,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
     s32 w;
     s32 width;
     s32 level;
-    if (D_801462C8.state != 0xB && D_801462C8.state != 8) {
+    if (g_gameSettings.state != 0xB && g_gameSettings.state != 8) {
         OnScreen_UpdateMoverScript(player->anim0);
         OnScreen_UpdateMoverScript(player->anim1);
         OnScreen_UpdateMoverScript(player->anim2);
@@ -123,17 +123,17 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
         OnScreen_UpdateMoverScript(&player->scoreAnim);
         OnScreen_UpdateMoverScript(&player->countAnim);
         OnScreen_UpdateMoverScript(&player->squadAnim);
-        func_8021E2A0_de(player, view);
+        Playerai_DrawAimHud(player, view);
         if (view->flags == 0) {
-            func_80219490_de(player->effect, view);
+            Playerai_DrawAnimatedSprite(player->effect, view);
         }
-        func_802183E8_de(player->strokes, view, player);
-        func_80218F08_de(player->trails, view, player);
+        TeamSelect_DrawWeaponWheelSprites(player->strokes, view, player);
+        TeamSelect_DrawTeamWheelSprites(player->trails, view, player);
         ItemMenu_DrawEntries(player->marks, player);
-        Onscrn_SetupSpriteMode(D_801462C8.hudFade);
-        sx = view->width / (f32) D_800E28D0;
-        sy = view->height / (f32) D_800E28D4;
-        if (D_800E28D8 == 0) {
+        Onscrn_SetupSpriteMode(g_gameSettings.hudFade);
+        sx = view->width / (f32) g_hudReferenceViewportWidth;
+        sy = view->height / (f32) g_hudReferenceViewportHeight;
+        if (g_frontendCurrentVideoModeIndex == 0) {
             kx = ky = 1.0f;
         } else {
             kx = ky = 1.5f;
@@ -141,7 +141,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
         scaleX = sx * kx;
         scaleY = sy * ky;
         if (hudRules()->state == 0) {
-            func_8021EA54_de(player, view);
+            Playerai_DrawAmmoCounters(player, view);
         }
         n = (player->health + 0xFF) >> 8;
         x = player->healthX * scaleX + view->x;
@@ -197,7 +197,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             Onscrn_SetupSpriteMode(0xFA);
             gDPSetEnvColor(g_displayListCursor++, (r), (g), (b), 250);
             for (k = 0; k < 4; k++) {
-                OnScreen_DrawSpriteResource(0x208, k, y + scaleX * D_800C9F64_de[k + 4], x + scaleY * D_800C9F74_de[k + 4], sx,
+                OnScreen_DrawSpriteResource(0x208, k, y + scaleX * g_hudSpriteVerticalOffsets[k + 4], x + scaleY * g_hudSpriteHorizontalOffsets[k + 4], sx,
                               scaleY * 1.5f, 1);
             }
             player->flashState = 0;
@@ -214,24 +214,24 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 b = 0;
                 gDPSetEnvColor(g_displayListCursor++, (r), (g), (b), (player->flashAlpha));
                 for (k = 0; k < 4; k++) {
-                    OnScreen_DrawSpriteResource(0x208, k, y + scaleX * D_800C9F64_de[k + 4], x + scaleY * D_800C9F74_de[k + 4], sx,
+                    OnScreen_DrawSpriteResource(0x208, k, y + scaleX * g_hudSpriteVerticalOffsets[k + 4], x + scaleY * g_hudSpriteHorizontalOffsets[k + 4], sx,
                                   scaleY * 1.5f, 1);
                 }
             } else {
                 player->flashState = 0;
             }
         }
-        if (D_800E28D8 == 0) {
+        if (g_frontendCurrentVideoModeIndex == 0) {
             kx = ky = 0.75f;
         } else {
             kx = ky = 1.0f;
         }
         scaleX = sx * kx;
         scaleY = sy * ky;
-        if (D_801462C8.local == 0) {
+        if (g_gameSettings.local == 0) {
             n = player->lives;
             if (player->livesLast != n) {
-                OnScreen_StartMoverScript(&player->livesAnim, &D_800C93D8_de);
+                OnScreen_StartMoverScript(&player->livesAnim, &g_hudLivesMoverScript);
                 player->livesLast = n;
             }
             if (player->livesAnim != 0 && player->livesShown != 0) {
@@ -241,7 +241,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 OnScreen_DrawSpriteResource(0x1F6, 0, x, y, sx, sy, 1);
                 OnScreen_DrawSpriteNumber(player->lives, x + sx * 30.0f, y + sy * 24.0f, sx, sy, 1, 0, 0);
             }
-        } else if ((D_801462C8.controllerMode == 1 || D_801462C8.controllerMode == 4) && player->hideLives == 0) {
+        } else if ((g_gameSettings.controllerMode == 1 || g_gameSettings.controllerMode == 4) && player->hideLives == 0) {
             n = player->lifeCount - 1;
             if (n < 0) {
                 n = 0;
@@ -251,11 +251,11 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             Onscrn_SetupSpriteMode(player->alpha);
             OnScreen_DrawSpriteNumber(n, x, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
             OnScreen_DrawSpriteResource(0x1F6, 0, x + scaleX * 20.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
-            if (D_801462C8.counters.enabled != 0) {
+            if (g_gameSettings.counters.enabled != 0) {
                 OnScreen_DrawSpriteResource(0x203, 0, x + scaleX * 40.0f, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
             }
         }
-        if (hudRules()->state == 0 && D_801462C8.local != 0) {
+        if (hudRules()->state == 0 && g_gameSettings.local != 0) {
             if (hudRules()->teams != 0) {
                 if (player->owner->team != 0xFF) {
                     score = hudRules()->scores[player->owner->team];
@@ -269,7 +269,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 score = -99;
             }
             if (player->scoreLast != score) {
-                OnScreen_StartMoverScript(&player->scoreAnim, &D_800C943C);
+                OnScreen_StartMoverScript(&player->scoreAnim, &g_hudScoreMoverScript);
                 player->scoreLast = score;
                 player->scoreFrame = 0;
             }
@@ -280,7 +280,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             player->alpha = 255.0f;
             if (player->scoreAnim != 0 && player->scoreState != 0) {
                 frames = 1;
-                if (D_801462C8.counters.teams != 0) {
+                if (g_gameSettings.counters.teams != 0) {
                     res = Scene_StartWorldEffect(&g_world, 0x204, 0, 1);
                 } else {
                     res = Scene_StartWorldEffect(&g_world, 0x1FA, 0, 1);
@@ -334,11 +334,11 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     }
                     OnScreen_SetupTextRendering();
                     OnScreen_SetTextScale(1.0f, 1.0f);
-                    if (D_801462C8.counters.enabled == 0) {
+                    if (g_gameSettings.counters.enabled == 0) {
                         /* Names scroll right to left, each fading out from 0xFF in steps of 6. */
                         for (i = player->nameHead; i >= player->nameTail; i--) {
                             if (player->names[i] != NULL) {
-                                if (D_800E28D8 == 0 && D_80140FF8 == 1) {
+                                if (g_frontendCurrentVideoModeIndex == 0 && g_playerWeaponClassMode == 1) {
                                     nameZoom = 0.75f;
                                     indent = 0xF;
                                 } else {
@@ -346,9 +346,9 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                                     indent = 0;
                                 }
                                 scaleX *= nameZoom;
-                                func_802BD320_de(text, D_800C25FC_de, player->names[i]->owner->name);
+                                Libc_FormatString(text, s_hudPlayerNameFormat, player->names[i]->owner->name);
                                 OnScreen_SetTextColors(0, 0, 0, 1, 1, 1);
-                                textScale = D_801376F8.width * 0.5f * scaleX * OnScreen_GetGlyphWidth();
+                                textScale = g_tutorialStatusBars.width * 0.5f * scaleX * OnScreen_GetGlyphWidth();
                                 scaleY *= nameZoom;
                                 w = Menu_MeasureLine(text, textScale, OnScreen_GetGlyphWidth());
                                 player->nameWidths[i] = w;
@@ -382,7 +382,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             if (hudRules()->m_bFragTagOn != 0) {
                 n = player->owner->count;
                 if (player->countLast != n) {
-                    OnScreen_StartMoverScript(&player->countAnim, &D_800C9468);
+                    OnScreen_StartMoverScript(&player->countAnim, &g_hudCountMoverScript);
                     if (player->countLast == -1) {
                         player->countState = 1;
                     }
@@ -427,7 +427,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     score = 0;
                 }
                 if (player->squadLast != score) {
-                    OnScreen_StartMoverScript(&player->squadAnim, &D_800C94A4_de);
+                    OnScreen_StartMoverScript(&player->squadAnim, &g_hudSquadMoverScript);
                     if (player->squadLast == -1) {
                         player->squadState = 1;
                     }
@@ -558,8 +558,8 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             Onscrn_SetupSpriteMode(0xFF);
             OnScreen_DrawSpriteResource(0x20A, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         }
-        if (player->weapon == 0xC && player->kind != D_800CE47C) {
-            ammo = 3 - Particle_CountOwnerListOneEffects(&D_8011D8D0, player);
+        if (player->weapon == 0xC && player->kind != g_fragTagModelId) {
+            ammo = 3 - Particle_CountOwnerListOneEffects(&g_actorParticleEffectSystem, player);
             if (player->ammo < ammo) {
                 ammo = player->ammo;
             }
@@ -567,15 +567,15 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             y = view->y + view->height * 0.5f;
             for (i = 0; i < 3; i++, ammo--) {
                 Onscrn_SetupSpriteMode(ammo > 0 ? 0xFF : 0x40);
-                OnScreen_DrawSpriteResource(0x2F4, 0, x + D_800CAB78_eu[i] * scaleX, y + scaleY * 64.0f, scaleX, scaleY, 1);
+                OnScreen_DrawSpriteResource(0x2F4, 0, x + g_hudPlayerMarkerHorizontalOffsets[i] * scaleX, y + scaleY * 64.0f, scaleX, scaleY, 1);
             }
         }
         if (hudRules()->state == 0) {
             if (player->owner->active == 1 && hudRules()->m_bFragTagOn != 0) {
-                func_8022C1E8_de(player, view);
+                Playerai_DrawHudSprite1FC(player, view);
             }
             if (hudRules()->state == 0 && hudRules()->m_bCTFOn != 0 && player->owner->active != 0) {
-                func_8022C37C_de(player, view);
+                Playerai_DrawHudSprite201(player, view);
             }
         }
     }
@@ -583,12 +583,12 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
 /* Aims a player's view camera and updates the player: with a view at 0x5DC, camera mode 1 at 0x5D0
    looks from the player's eye (the body position plus the eye offset at 0x73C, raised at least 40.96)
    along the body heading with the player's angles and sway and the aim zoom at 0x7EC, and mode 2 orbits the player at the angle
-   D_800C9FA0_de and distance D_800CAB88_eu, which input bits 0x200 and 0x100 turn and 0x800 and 0x400 pull
+   g_playerDebugThrowHeadingOffset and distance g_playerDebugThrowDistance, which input bits 0x200 and 0x100 turn and 0x800 and 0x400 pull
    in and push out; the camera is set through Gsky_SetPlayerViewInputs and the view refreshed through
-   Camera_UpdateViewProjectionAndEffects before the player is updated through func_8021D774_de. */
+   Camera_UpdateViewProjectionAndEffects before the player is updated through Playerai_UpdateAimAndLockMarker. */
 extern void Gsky_SetPlayerViewInputs(void *, s32, f32, f32, f32, f32, f32, f32, f32, f32, Shared_Quad, s32, f32, f32);
 extern void Camera_UpdateViewProjectionAndEffects(void *);
-extern void func_8021D774_de(PlayerWeaponsUpdatePlayerCamera *);
+extern void Playerai_UpdateAimAndLockMarker(PlayerWeaponsUpdatePlayerCamera *);
 
 void Player_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWeaponsUpdatePlayerCamera *body) {
     void *view;
@@ -604,27 +604,27 @@ void Player_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWeap
                           3.0f);
         } else if (player->cameraMode == 2) {
             if (player->input & 0x200) {
-                D_800C9FA0_de += 0.06981318f;
+                g_playerDebugThrowHeadingOffset += 0.06981318f;
             } else if (player->input & 0x100) {
-                D_800C9FA0_de -= 0.06981318f;
+                g_playerDebugThrowHeadingOffset -= 0.06981318f;
             } else if (player->input & 0x800) {
-                D_800CAB88_eu -= 4.096f;
+                g_playerDebugThrowDistance -= 4.096f;
             } else if (player->input & 0x400) {
-                D_800CAB88_eu += 4.096f;
+                g_playerDebugThrowDistance += 4.096f;
             }
-            angle = body->heading + D_800C9FA0_de;
-            x = body->x + D_800CAB88_eu * Gu_Sinf(angle);
+            angle = body->heading + g_playerDebugThrowHeadingOffset;
+            x = body->x + g_playerDebugThrowDistance * Gu_Sinf(angle);
             Gsky_SetPlayerViewInputs(view, 1, angle, 0.0f, 0.0f, 0.0f, x, body->y + 81.92f,
-                          body->z + D_800CAB88_eu * Math_Cosf(angle), 0.0f, body->rotation, body->room,
+                          body->z + g_playerDebugThrowDistance * Math_Cosf(angle), 0.0f, body->rotation, body->room,
                           0.0f, 3.0f);
         }
         Camera_UpdateViewProjectionAndEffects(view);
     }
-    func_8021D774_de(player);
+    Playerai_UpdateAimAndLockMarker(player);
 }
-/* Regenerates a player's health at 0x5E4 toward the cap from func_8022AC00_de: under flag 4 at 0x122C it adds D_800D2988 times gFastRegen's rate and mirrors the result to 0x174 and 0x45C, otherwise, while the flag byte at D_80145088.settings.local is set, the speed at 0x18's 0x24 meets D_800C78B8's threshold, the health is nonzero and the word 0x60F past that flag byte does not hold it back, it adds the speed scaled by D_800C78BC, D_800D2988 and D_800C78C0's rate. */
+/* Regenerates a player's health at 0x5E4 toward the cap from func_8022AC00_de: under flag 4 at 0x122C it adds g_frameElapsedTime times gFastRegen's rate and mirrors the result to 0x174 and 0x45C, otherwise, while the flag byte at g_frontendScreenStatus.settings.local is set, the speed at 0x18's 0x24 meets g_movementHealthRegenerationSpeedThreshold's threshold, the health is nonzero and the word 0x60F past that flag byte does not hold it back, it adds the speed scaled by g_movementHealthRegenerationSpeedScale, g_frameElapsedTime and g_movementHealthRegenerationTuning's rate. */
 extern s32 Player_GetMaxHealth(SharedPlayer *p);
-void func_80220D44_de(SharedPlayer *p) {
+void Player_UpdateHealthRegeneration(SharedPlayer *p) {
     f32 f0;
     f32 f20;
     f32 cur;
@@ -632,57 +632,57 @@ void func_80220D44_de(SharedPlayer *p) {
     s32 val;
     if ((p->views122C.view122C_1.flags & 4) && p->views5E4.view5E4_2.health > 0) {
         cap = Player_GetMaxHealth(p);
-        f20 = p->views5E4.view5E4_2.health + D_800D2988 * D_800C27C0_de.second;
+        f20 = p->views5E4.view5E4_2.health + g_frameElapsedTime * g_fastHealthRegenerationTuning.second;
         f0 = cap;
         if (!(f0 <= f20)) {
             f0 = f20;
         }
         val = f0;
-        p->views5E4.view5E4_2.health = val; p->views1C.view174_17.unk174 = val; p->views1C.view45C_31.unk45C = p->views5E4.view5E4_2.health;
+        p->views5E4.view5E4_2.health = val; p->views1C.view174_17.bodyHealth = val; p->views1C.view45C_31.mirroredHealth = p->views5E4.view5E4_2.health;
         return;
     }
     f20 = p->views18.view18_3.body->speed;
-    if (D_80145088.settings.local == 0) return;
-    if (f20 < D_800C78B8) return;
+    if (g_frontendScreenStatus.settings.local == 0) return;
+    if (f20 < g_movementHealthRegenerationSpeedThreshold) return;
     cur = p->views5E4.view5E4_2.health;
     if (cur == 0.0f) return;
-    if (p->views5D8.view5D8_4.ctrl->flag != 0 && D_80145088.modes.tag != 0) return;
-    f20 = cur + (s32)(f20 * D_800C78BC) * (D_800D2988 * D_800C78C0.first);
+    if (p->views5D8.view5D8_4.ctrl->flag != 0 && g_frontendScreenStatus.modes.tag != 0) return;
+    f20 = cur + (s32)(f20 * g_movementHealthRegenerationSpeedScale) * (g_frameElapsedTime * g_movementHealthRegenerationTuning.first);
     p->views5E4.view5E4_2.health = RW_MIN_LT(f20, Player_GetMaxHealth(p));
 }
 
 /* 8021CD70_8.CPP */
-extern char D_8013B364;
+extern char g_navigationGraph;
 
-extern u8 *D_801041F0;
+extern u8 *g_currentActorInstance;
 
-extern struct Shared_Floor *D_80103FCC;
+extern struct Shared_Floor *g_collisionCurrentActor;
 
-extern struct Shared_StateInfo D_800CED30[];
-extern struct Shared_StateInfo D_800C9684[];
+extern struct Shared_StateInfo g_playerSpecialAnimationTable[];
+extern struct Shared_StateInfo g_playerActionStateHandlers[];
 extern void Portal_UpdateActorCurrentNode(void *, void *);
 extern void Actor_ApplySupportingPlatformMotion(void *, void *);
 extern void Barrel_FillDamagePacket(void *, s32, s32, s32, s32, s32);
 extern void TeamSelect_UpdateDraftPanel(void *, void *, void *);
 extern void Cteamselect_UpdateTeamWheel(void *, void *, void *);
-extern void func_80219480_de(void *, void *);
-extern void func_80219A40_de(void *, void *, void *);
+extern void Playerai_EmptyWeaponEffectHook(void *, void *);
+extern void Playerai_ApplyDamagePacket(void *, void *, void *);
 extern void Player_UpdatePlayerEffectLights(void *, void *);
 extern s32 Player_GetAmmoCapacity(void *, s32, s32);
-extern void func_8022B5C0_de(void *);
-extern void func_8022B8E0_de(void *);
-extern void func_8022BD94_de(void *, void *, void *);
-extern void func_8022C080_de(void *, void *);
-extern s32 func_8022C6E4_de(void *, void *);
-extern s32 func_8022C760_de(void *, void *);
+extern void Playerai_UpdateReactionReserve(void *);
+extern void Playerai_UpdateDelayedDamage(void *);
+extern void Playerai_SetInheritedMotionFlags(void *, void *, void *);
+extern void Playerai_UpdateModelBlend(void *, void *);
+extern s32 Playerai_TryEnterMotionFlagState(void *, void *);
+extern s32 Playerai_TryEnterBodyFlagState(void *, void *);
 extern s32 Unicol_MoveActorWithCollision(void *, CVector3, s32 *);
 struct CCollisionInfo2_t;
 extern s32 Unicol_SweepActorMotion(void *, CVector3, CVector3, struct CCollisionInfo2_t *, f32, f32, f32, f32);
-extern void func_80245D30_de(void *, void *, void *, s32);
+extern void GameObject_ApplyMaterialCurrents(void *, void *, void *, s32);
 extern void Gobjinst_ReadActorMotionIndex(void *);
 extern s32 Gobjinst_ChooseAnimationVariant(void *, s32, s32);
-extern void func_80246E44_de(void *);
-extern void func_80247004_de(void *);
+extern void Gobjinst_UpdateActorRootDisplacement(void *);
+extern void Gobjinst_UpdateActorGroundRotation(void *);
 extern s32 Gobjinst_RequestAnimationKind(void *, s32, s32);
 
 extern f32 InstHdr_GetActorReach(void *);
@@ -698,26 +698,26 @@ extern void Link_DispatchObjectLinks(struct Shared_Model *, s32, void *);
 extern void ItemMenu_UpdateToggleMenu(void *, void *);
 extern void Pickup_TryCollectActor(void *, void *);
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80220D44_C84B4[4] = {
+const unsigned int g_playerHealthRegenerationConstants[4] = {
     0x42888889, 0x3DCCCCCD, 0x43800000, 0x3D888889,
 };
 #endif
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80220ED4_C84C4[2] = {
+const unsigned int g_playerBodyMovementConstants[2] = {
     0x3E800000, 0x3FAAAAAB,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int D_auto_src_rw_pool_80220D44_C84B4_us_rev1[4] = {
+const unsigned int g_playerHealthRegenerationConstantsUsRev1[4] = {
     0x42888889, 0x3DCCCCCD, 0x43800000, 0x3D888889,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int D_blob_cf23fc622b47ff805f4b[2] = {
+const unsigned int g_playerBodyMovementConstantsUsRev1[2] = {
     0x3E800000, 0x3FAAAAAB,
 };
 #endif
-void func_80220ED4_de(SharedPlayer *player)
+void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
 {
   CVector3 prev;
   struct Shared_Input saved;
@@ -780,52 +780,52 @@ void func_80220ED4_de(SharedPlayer *player)
   u16 next770u;
   linkFlags = 0;
   soundFlags = 0;
-  scale = D_800D2988;
+  scale = g_frameElapsedTime;
   if (player->views122C.view122C_4.fxFlags & 0x2000)
   {
-    D_800D2988 = scale * D_800C27D4_de;
+    g_frameElapsedTime = scale * g_playerMovementTimeScale;
   }
   else
     if (player->views122C.view122C_4.fxFlags & 0x80)
   {
-    D_800D2988 = scale * D_800C27D8_de;
+    g_frameElapsedTime = scale * g_playerAlternateMovementTimeScale;
   }
   else
-    if (player->views5E8.view11E0_186.unk11E0 > 0.0f)
+    if (player->views5E8.view11E0_186.timeScale > 0.0f)
   {
-    D_800D2988 = scale * player->views5E8.view11E0_186.unk11E0;
+    g_frameElapsedTime = scale * player->views5E8.view11E0_186.timeScale;
   }
-  human = player->views1C.view5D0_43.unk5D0 == 2;
+  human = player->views1C.view5D0_43.controlKind == 2;
   actor = player;
   if (Cinema_IsSequenceInWindow() != 0)
   {
     human = 1;
   }
-  game = &D_801462C8;
+  game = &g_gameSettings;
   if (game->local != 0)
   {
     human = 1;
   }
-  Portal_UpdateActorCurrentNode(&D_8013B364, player);
-  if (player->views1450.view1450_0.unk1450 != 0)
+  Portal_UpdateActorCurrentNode(&g_navigationGraph, player);
+  if (player->views1450.view1450_0.computerControlled != 0)
   {
-    Nav_UpdateComputerPlayerStatus((struct Brain *)player->views1454.view1454_0.unk1454);
+    Nav_UpdateComputerPlayerStatus((struct Brain *)player->views1454.view1454_0.aiController);
   }
   if (game->local != 0)
   {
     Cache_SetResourceActivityState(8);
   }
   enable = 0;
-  player->views1C.view1D8_32.unk1D8 = player;
-  player->views1C.view4C0_47.unk4C0 = player;
-  if ((player->views1C.view38_2.unk38 & 0x1000) && (game->local == 0))
+  player->views1C.view1D8_32.self = player;
+  player->views1C.view4C0_47.self = player;
+  if ((player->views1C.view38_2.flags & 0x1000) && (game->local == 0))
   {
     enable = (game - 1)->flags == 0;
   }
   SoundElement_SetMusicGainScalingEnabled(enable);
-  if (D_80145088.settings.local == 0)
+  if (g_frontendScreenStatus.settings.local == 0)
   {
-    if ((!((D_801421D0 != 0) && (player->views5E8.view688_43.input.held & 0x20))) && (player->views5E8.view688_43.input.pressed & 0x800))
+    if ((!((g_playerAlternateActionModifierEnabled != 0) && (player->views5E8.view688_43.input.held & 0x20))) && (player->views5E8.view688_43.input.pressed & 0x800))
     {
       if (player->unk13D4 != 0)
       {
@@ -836,9 +836,9 @@ void func_80220ED4_de(SharedPlayer *player)
         player->unk13D4 = 1;
       }
     }
-    if ((((D_80145088.settings.local == 0) && (!((player->views5E8.viewCB8_163.unkCB8 != 0) && (player->views5E8.view938_162.unk938 != 0)))) && (!((D_801421D0 != 0) && (player->views5E8.view688_43.input.held & 0x20)))) && (player->views5E8.view688_43.input.pressed & 0x200))
+    if ((((g_frontendScreenStatus.settings.local == 0) && (!((player->views5E8.viewCB8_163.weaponLocked != 0) && (player->views5E8.view938_162.weaponWheel != 0)))) && (!((g_playerAlternateActionModifierEnabled != 0) && (player->views5E8.view688_43.input.held & 0x20)))) && (player->views5E8.view688_43.input.pressed & 0x200))
     {
-      slotInfo = D_800D052C[player->views5E8.view770_113.weapon];
+      slotInfo = g_weaponInfoByType[player->views5E8.view770_113.weapon];
       next770 = slotInfo->viewsC.viewC_0.next_s;
       next770u = slotInfo->viewsC.viewC_1.next_u;
       if (next770 != (-1))
@@ -850,56 +850,56 @@ void func_80220ED4_de(SharedPlayer *player)
       }
     }
   }
-  func_80220D44_de(player);
-  func_802292B8_de(player);
-  func_8022B5C0_de(player);
-  func_8022B8E0_de(player);
-  actor->views1C.view100_8.unk100 &= ~0x20000;
-  if (human && (player->views5E8.view11D8_147.unk11D8 <= 0.0f))
+  Player_UpdateHealthRegeneration(player);
+  Playerai_UpdateDamageTimers(player);
+  Playerai_UpdateReactionReserve(player);
+  Playerai_UpdateDelayedDamage(player);
+  actor->views1C.view100_8.flags &= ~0x20000;
+  if (human && (player->views5E8.view11D8_147.jumpCooldown <= 0.0f))
   {
-    func_80246E44_de(actor);
+    Gobjinst_UpdateActorRootDisplacement(actor);
   }
   if (((u16) player->views5E8.view650_16.state) >= 2)
   {
-    Actor_ApplySupportingPlatformMotion(actor, &actor->views1C.view170_23.unk170);
+    Actor_ApplySupportingPlatformMotion(actor, &actor->views1C.view170_23.actorBody);
   }
-  net = &D_801462C8.counters;
+  net = &g_gameSettings.counters;
   if (((net->m_bFragTagOn != 0) && (net->m_FragTagFlipTimer == 0)) && (player->views5D8.view5D8_9.profile->remote == 1))
   {
     linkFlags |= 0x2000;
     soundFlags |= 0x400000;
   }
-  if ((D_801462C8.counters.m_bCTFOn != 0) && (player->views5D8.view5D8_9.profile->remote == 1))
+  if ((g_gameSettings.counters.m_bCTFOn != 0) && (player->views5D8.view5D8_9.profile->remote == 1))
   {
     linkFlags |= 0x2000;
   }
-  if (player->views5E8.view704_67.unk704 > 0.0f)
+  if (player->views5E8.view704_67.lift > 0.0f)
   {
-    f32 left = player->views5E8.view704_67.unk704 - D_800D2988;
+    f32 left = player->views5E8.view704_67.lift - g_frameElapsedTime;
     if (left < 0.0f)
     {
       left = 0.0f;
     }
-    player->views5E8.view704_67.unk704 = left;
+    player->views5E8.view704_67.lift = left;
   }
-  if (player->views5E8.view670_30.unk670 > 0.0f)
+  if (player->views5E8.view670_30.shield > 0.0f)
   {
-    f32 left = player->views5E8.view670_30.unk670 - D_800D2988;
+    f32 left = player->views5E8.view670_30.shield - g_frameElapsedTime;
     if (left < 0.0f)
     {
       left = 0.0f;
     }
-    player->views5E8.view670_30.unk670 = left;
+    player->views5E8.view670_30.shield = left;
   }
   saved = player->views5E8.view688_43.input;
-  for (remaining = D_800D2988; remaining > 0.0f;)
+  for (remaining = g_frameElapsedTime; remaining > 0.0f;)
   {
     remaining = 0.0f;
     player->views5E8.view654_25.prevState = (u16) player->views5E8.view650_16.state;
-    player->views5E8.view65C_32.unk65C = player->views5E8.view664_27.unk664;
+    player->views5E8.view65C_32.savedStateTimer = player->views5E8.view664_27.timer;
     model = actor->views0.view14_6.model;
-    func_80222908_de(player, actor, InstHdr_FindActorModelEntry(actor));
-    if (D_80145088.settings.local == 0)
+    Player_UpdateMovementSpeedFactor(player, actor, InstHdr_FindActorModelEntry(actor));
+    if (g_frontendScreenStatus.settings.local == 0)
     {
       pos = &player->views0.view8_3.pos;
       if (((model != 0) && (pos != 0)) && (model->flags & 0x40))
@@ -918,13 +918,13 @@ void func_80220ED4_de(SharedPlayer *player)
       ;
       ;
     }
-    player->views5E8.view66C_29.unk66C = D_800D2988 * player->views5E8.view784_117.unk784;
-    func_8022C080_de(player, actor);
+    player->views5E8.view66C_29.movementTimeScale = g_frameElapsedTime * player->views5E8.view784_117.movementRate;
+    Playerai_UpdateModelBlend(player, actor);
     player->views5E8.view6C8_57.speed = Gu_Sqrtf((player->views5E8.view6C0_64.velX * player->views5E8.view6C0_64.velX) + (player->views5E8.view6C4_67.velZ * player->views5E8.view6C4_67.velZ));
-    player->views5E8.view75C_89.unk75C += player->views5E8.view6C8_57.speed * 0.021000001579523087f;
-    player->views5E8.view758_87.unk758 += player->views5E8.view6C8_57.speed * 0.00010000000474974513f;
-    player->views5E8.view6E8_79.unk6E8 = actor->views0.view8_3.pos;
-    player->views5E8.view658_31.stateTime += D_800D2988;
+    player->views5E8.view75C_89.bobSpeed += player->views5E8.view6C8_57.speed * 0.021000001579523087f;
+    player->views5E8.view758_87.bobStrength += player->views5E8.view6C8_57.speed * 0.00010000000474974513f;
+    player->views5E8.view6E8_79.movementPosition = actor->views0.view8_3.pos;
+    player->views5E8.view658_31.stateTime += g_frameElapsedTime;
     ground = InstHdr_GetActorMotionState(actor);
     if (((ground != 0) && (player->views5E8.view6D0_71.onGround == 0)) && (player->views5E8.view6CC_70.lastVelY < (-51.19999694824219f)))
     {
@@ -932,9 +932,9 @@ void func_80220ED4_de(SharedPlayer *player)
     }
     player->views5E8.view6D0_71.onGround = ground;
     player->views5E8.view6CC_70.lastVelY = actor->views1C.view20_2.velY;
-    if (((ground == 0) && (player->views5E8.view650_16.state != 15)) && (!(actor->views1C.view38_2.unk38 & 0x2000)))
+    if (((ground == 0) && (player->views5E8.view650_16.state != 15)) && (!(actor->views1C.view38_2.flags & 0x2000)))
     {
-      player->views5E8.view6E4_77.airTime += D_800D2988;
+      player->views5E8.view6E4_77.airTime += g_frameElapsedTime;
     }
     else
     {
@@ -943,38 +943,38 @@ void func_80220ED4_de(SharedPlayer *player)
     if ((((u16) player->views5E8.view650_16.state) >= 2) && (player->views5E4.view5E4_2.health != 0))
     {
       f32 target;
-      func_80222EA4_de(player, actor);
-      func_8022C6E4_de(player, actor);
-      if (((func_8022C760_de(player, actor) == 0) && (player->views5E8.view728_73.unk728 != 0.0f)) && (!(actor->views1C.view38_2.unk38 & 0x100)))
+      Player_TryEnterHitReactionState(player, actor);
+      Playerai_TryEnterMotionFlagState(player, actor);
+      if (((Playerai_TryEnterBodyFlagState(player, actor) == 0) && (player->views5E8.view728_73.kickPitch != 0.0f)) && (!(actor->views1C.view38_2.flags & 0x100)))
       {
-        if (((f32) XMath_AbsoluteInteger((s32) player->views5E8.view728_73.unk728)) < 0.7853982448577881f)
+        if (((f32) XMath_AbsoluteInteger((s32) player->views5E8.view728_73.kickPitch)) < 0.7853982448577881f)
         {
-          actor->views1C.view6C_9.yaw += player->views5E8.view728_73.unk728;
+          actor->views1C.view6C_9.yaw += player->views5E8.view728_73.kickPitch;
         }
-        player->views5E8.view728_73.unk728 = 0.0f;
+        player->views5E8.view728_73.kickPitch = 0.0f;
       }
       target = 0.0f;
-      if (((((struct Shared_CharInfo *)D_800D052C[player->views5E8.view62E_17.character])->ammo <= 0) || (player->views5E8.view7E8_105.unk7E8 == 0)) || ((D_801462C8.counters.m_bFragTagOn != 0) && (player->views5D8.view5D8_9.profile->remote != 0)))
+      if (((((struct Shared_CharInfo *)g_weaponInfoByType[player->views5E8.view62E_17.character])->ammo <= 0) || (player->views5E8.view7E8_105.zoomed == 0)) || ((g_gameSettings.counters.m_bFragTagOn != 0) && (player->views5D8.view5D8_9.profile->remote != 0)))
       {
         effect = &player->views5E8.view878_158.effect;
-        player->views5E8.view7E8_105.unk7E8 = 0;
+        player->views5E8.view7E8_105.zoomed = 0;
         cur = effect->state;
         if ((cur != 0) && (cur != 3))
         {
           effect->state = 3;
         }
       }
-      if ((player->views5E4.view5E4_2.health != 0) && (player->views5E8.view7E8_105.unk7E8 != 0))
+      if ((player->views5E4.view5E4_2.health != 0) && (player->views5E8.view7E8_105.zoomed != 0))
       {
         target = 0.7f;
-        player->views5E8.view7E8_105.unk7E8 = 1;
+        player->views5E8.view7E8_105.zoomed = 1;
       }
-      player->views5E8.view7F0_133.unk7F0 = target;
-      func_80219480_de(&player->views5E8.view878_158.effect, player);
-      Graphu64_EaseValueToward(&player->views5E8.view7EC_132.unk7EC, target, 0.5f);
-      if ((target == 0.0f) && (player->views5E8.view7EC_132.unk7EC < 0.01f))
+      player->views5E8.view7F0_133.targetZoom = target;
+      Playerai_EmptyWeaponEffectHook(&player->views5E8.view878_158.effect, player);
+      Graphu64_EaseValueToward(&player->views5E8.view7EC_132.smoothedZoom, target, 0.5f);
+      if ((target == 0.0f) && (player->views5E8.view7EC_132.smoothedZoom < 0.01f))
       {
-        player->views5E8.view7EC_132.unk7EC = 0.0f;
+        player->views5E8.view7EC_132.smoothedZoom = 0.0f;
       }
     }
     if ((Cinema_IsSequenceInWindow() == 0) || (((u32) (((u16) player->views5E8.view650_16.state) - 22)) < 12))
@@ -988,32 +988,32 @@ void func_80220ED4_de(SharedPlayer *player)
     material = InstHdr_FindActorModelEntry(actor);
     if (material != 0)
     {
-      func_80245D30_de(actor, material, &player->views5E8.view6E8_79.unk6E8, 1);
+      GameObject_ApplyMaterialCurrents(actor, material, &player->views5E8.view6E8_79.movementPosition, 1);
       if ((material->flags & 0x4000) && (player->views5E4.view5E4_2.health > 0))
       {
         Player_SetPlayerState(player, player, 32);
         Barrel_FillDamagePacket(scratch.views0.view0_0.damage, 0, 0x3E700, 0x41CCCCCC, 128, 0);
-        func_80219A40_de(player, &player->views1C.view170_23.unk170, scratch.views0.view0_0.damage);
+        Playerai_ApplyDamagePacket(player, &player->views1C.view170_23.actorBody, scratch.views0.view0_0.damage);
       }
       if (material->flags & 0x80000)
       {
-        player->views5E8.view854_147.unk854 -= D_800D2988;
-        if (player->views5E8.view854_147.unk854 <= 0.0f)
+        player->views5E8.view854_147.effectCountdown -= g_frameElapsedTime;
+        if (player->views5E8.view854_147.effectCountdown <= 0.0f)
         {
           if (player->views5E4.view5E4_2.health > 0)
           {
             Barrel_FillDamagePacket(scratch.views0.view0_0.damage, 0, material->sound << 8, 0x41CCCCCC, 128, 0);
-            func_80219A40_de(player, &player->views1C.view170_23.unk170, scratch.views0.view0_0.damage);
+            Playerai_ApplyDamagePacket(player, &player->views1C.view170_23.actorBody, scratch.views0.view0_0.damage);
           }
-          player->views5E8.view854_147.unk854 = material->timer;
+          player->views5E8.view854_147.effectCountdown = material->timer;
         }
         player->unk12EC = 0;
       }
     }
-    held = actor->views1C.view38_2.unk38 & 0xC0000;
+    held = actor->views1C.view38_2.flags & 0xC0000;
     flag = held != 0;
     stateFlags = player->views13B4.view13B4_5.states[player->views5E8.view650_16.state].flags;
-    if (player->views5E8.view71C_89.unk71C != 0)
+    if (player->views5E8.view71C_89.forceCrouch != 0)
     {
       flag = 1;
       if (player->views5E8.view650_16.state != 4)
@@ -1085,7 +1085,7 @@ void func_80220ED4_de(SharedPlayer *player)
       }
       player->views5E8.view720_90.swim += step;
     }
-    rise = (((player->views18.view18_5.body->ceiling - player->views5E8.view780_116.unk780) - player->views5E8.view718_70.crouch) - player->views5E8.view720_90.swim) - player->views5E8.view6F4_83.unk6F4;
+    rise = (((player->views18.view18_5.body->ceiling - player->views5E8.view780_116.cameraHeightOffset) - player->views5E8.view718_70.crouch) - player->views5E8.view720_90.swim) - player->views5E8.view6F4_83.heightDelta;
     if (rise > 0.0f)
     {
       f22 = InstHdr_GetActorReach(actor);
@@ -1095,21 +1095,21 @@ void func_80220ED4_de(SharedPlayer *player)
       scratch.views0.view0_1.to.x = actor->views0.view8_3.pos.x;
       scratch.views0.view0_1.to.y = actor->views0.view8_3.pos.y + rise;
       scratch.views0.view0_1.to.z = actor->views0.view8_3.pos.z;
-      if (Unicol_SweepActorMotion(actor, actor->views0.view8_3.pos, scratch.views0.view0_1.to, &D_801000F0, f22, f21, f20, f0) != 0)
+      if (Unicol_SweepActorMotion(actor, actor->views0.view8_3.pos, scratch.views0.view0_1.to, &g_playerCollisionProbe, f22, f21, f20, f0) != 0)
       {
-        floor = D_80103FCC->y - actor->views0.view8_3.pos.y;
-        player->views5E8.view6E8_79.unk6E8.y -= rise - floor;
+        floor = g_collisionCurrentActor->y - actor->views0.view8_3.pos.y;
+        player->views5E8.view6E8_79.movementPosition.y -= rise - floor;
         rise = floor;
       }
     }
-    player->views5E8.view6F4_83.unk6F4 += rise;
-    func_8022BD94_de(player, actor, material);
-    if (player->views5E8.view678_40.unk678 > 0.0f)
+    player->views5E8.view6F4_83.heightDelta += rise;
+    Playerai_SetInheritedMotionFlags(player, actor, material);
+    if (player->views5E8.view678_40.powerupCountdown > 0.0f)
     {
-      player->views5E8.view678_40.unk678 -= D_800D2988;
-      if (player->views5E8.view678_40.unk678 < 0.0f)
+      player->views5E8.view678_40.powerupCountdown -= g_frameElapsedTime;
+      if (player->views5E8.view678_40.powerupCountdown < 0.0f)
       {
-        player->views5E8.view678_40.unk678 = 0.0f;
+        player->views5E8.view678_40.powerupCountdown = 0.0f;
       }
     }
     Player_UpdatePlayerEffectLights(player, actor);
@@ -1118,13 +1118,13 @@ void func_80220ED4_de(SharedPlayer *player)
     before = InstHdr_FindActorModelEntry(actor);
     if (player->views5E8.view5EA_2.unk5EA != 0)
     {
-      actor->views1C.view100_8.unk100 |= 0x10000;
-      if (player->views5E8.view11D8_147.unk11D8 > 0.0f)
+      actor->views1C.view100_8.flags |= 0x10000;
+      if (player->views5E8.view11D8_147.jumpCooldown > 0.0f)
       {
-        player->views5E8.view6E8_79.unk6E8 = player->views0.view8_3.pos;
+        player->views5E8.view6E8_79.movementPosition = player->views0.view8_3.pos;
       }
-      hit = Unicol_MoveActorWithCollision(actor, player->views5E8.view6E8_79.unk6E8, stateFlags);
-      actor->views1C.view100_8.unk100 &= ~0x10000;
+      hit = Unicol_MoveActorWithCollision(actor, player->views5E8.view6E8_79.movementPosition, stateFlags);
+      actor->views1C.view100_8.flags &= ~0x10000;
     }
     else
     {
@@ -1138,23 +1138,23 @@ void func_80220ED4_de(SharedPlayer *player)
       Link_DispatchObjectLinks(newModel, linkFlags | 1, actor);
       if ((after != 0) && (after->flags & 0x80000))
       {
-        player->views5E8.view854_147.unk854 = after->timer;
+        player->views5E8.view854_147.effectCountdown = after->timer;
       }
     }
     Scene_UpdateMovementTriggers(&g_world, actor, &prev, &actor->views0.view8_3.pos);
     if (hit != 0)
     {
-      if ((D_801041F0 != 0) && ((*D_801041F0) == 1))
+      if ((g_currentActorInstance != 0) && ((*g_currentActorInstance) == 1))
       {
-        Link_DispatchActorLinks(D_801041F0, soundFlags | 2, actor);
+        Link_DispatchActorLinks(g_currentActorInstance, soundFlags | 2, actor);
       }
-      if (D_8010028C != 0)
+      if (g_collisionProbeActorOne != 0)
       {
-        Link_DispatchObjectLinks(D_8010028C, linkFlags | 4, actor);
+        Link_DispatchObjectLinks(g_collisionProbeActorOne, linkFlags | 4, actor);
       }
-      func_80222FE0_de(player, actor, stateFlags);
+      Player_TryThrowSelectedActor(player, actor, stateFlags);
       func_8022C88C_de(player, actor, stateFlags);
-      if ((D_801002EC == 2) && (((u32) (((u16) player->views5E8.view650_16.state) - 5)) < 2))
+      if ((g_playerMovementRuleMode == 2) && (((u32) (((u16) player->views5E8.view650_16.state) - 5)) < 2))
       {
         if (actor->views1C.view20_2.velY > 0.0f)
         {
@@ -1165,23 +1165,23 @@ void func_80220ED4_de(SharedPlayer *player)
         player->views5E8.view6C0_64.velX *= 0.001f;
       }
     }
-    if ((D_801041F0 != 0) && ((*D_801041F0) == 3))
+    if ((g_currentActorInstance != 0) && ((*g_currentActorInstance) == 3))
     {
-      Pickup_TryCollectActor(player, D_801041F0);
+      Pickup_TryCollectActor(player, g_currentActorInstance);
     }
     if ((before != 0) && (after != 0))
     {
       if (after->flags & 0x4000000)
       {
-        if (after->item != player->views5E8.view5EC_5.unk5EC)
+        if (after->item != player->views5E8.view5EC_5.currentItem)
         {
-          player->views5E8.view5EC_5.unk5EC = after->item;
+          player->views5E8.view5EC_5.currentItem = after->item;
         }
       }
       if (after->flags & 0x8000000)
       {
-        player->views5E8.view5EC_5.unk5EC = after->item;
-        player->views5E8.view5F0_9.unk5F0 = after->item;
+        player->views5E8.view5EC_5.currentItem = after->item;
+        player->views5E8.view5F0_9.pendingItem = after->item;
         g_world.selectionValues[3] = after->item;
       }
     }
@@ -1224,8 +1224,8 @@ void func_80220ED4_de(SharedPlayer *player)
 
   player->views5E8.view688_43.input = saved;
   {
-    f32 fade = player->views5E8.view11E0_186.unk11E0;
-    D_800D2988 = scale;
+    f32 fade = player->views5E8.view11E0_186.timeScale;
+    g_frameElapsedTime = scale;
     if (fade != 0.0f)
     {
       f32 left = fade - (scale * 0.042857144f);
@@ -1233,7 +1233,7 @@ void func_80220ED4_de(SharedPlayer *player)
       {
         left = 0.0f;
       }
-      if (player->views5E8.view678_40.unk678)
+      if (player->views5E8.view678_40.powerupCountdown)
       {
         fade = left;
       }
@@ -1241,7 +1241,7 @@ void func_80220ED4_de(SharedPlayer *player)
       {
         fade = left;
       }
-      player->views5E8.view11E0_186.unk11E0 = fade;
+      player->views5E8.view11E0_186.timeScale = fade;
     }
   }
   under = InstHdr_FindActorModelEntry(actor);
@@ -1250,39 +1250,39 @@ void func_80220ED4_de(SharedPlayer *player)
     actor->views1C.view20_2.velY = 0.0f;
   }
   else
-    if (actor->views0.view8_3.pos.y < (D_801370C4 - 5120.0f))
+    if (actor->views0.view8_3.pos.y < (g_sceneMinimumActorHeight - 5120.0f))
   {
-    Player_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_5.unk5EC, 0, 0);
+    Player_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_5.currentItem, 0, 0);
   }
   if (InstHdr_GetActorMotionState(actor) != 0)
   {
-    player->views5E8.view6F8_84.unk6F8 = actor->views0.view8_3.pos;
+    player->views5E8.view6F8_84.previousTargetPosition = actor->views0.view8_3.pos;
   }
   if (human)
   {
     sound = 102;
-    if (D_80145088.settings.local != 0)
+    if (g_frontendScreenStatus.settings.local != 0)
     {
-      if ((D_801462C8.counters.m_bFragTagOn != 0) && (player->views5D8.view5D8_9.profile->remote != 0))
+      if ((g_gameSettings.counters.m_bFragTagOn != 0) && (player->views5D8.view5D8_9.profile->remote != 0))
       {
-        sound = D_800CE47C;
+        sound = g_fragTagModelId;
       }
       else
       {
-        sound = D_800CE430[player->views18.view18_5.body->kind];
+        sound = g_characterModelIds[player->views18.view18_5.body->kind];
         player->views0.view3_2.team = player->views5D8.view5D8_9.profile->team;
       }
     }
-    ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, player, sound, player->views5E8.view86C_125.unk86C);
-    if (player->views5E8.view870_157.unk870 != player->views5E8.view86C_125.unk86C)
+    ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, player, sound, player->views5E8.view86C_125.animationId);
+    if (player->views5E8.view870_157.previousAnimationId != player->views5E8.view86C_125.animationId)
     {
-      if ((Gobjinst_RequestAnimationKind(actor, player->views5E8.view86C_125.unk86C, 0) == 0) && (Cinema_IsSequenceInWindow() != 0))
+      if ((Gobjinst_RequestAnimationKind(actor, player->views5E8.view86C_125.animationId, 0) == 0) && (Cinema_IsSequenceInWindow() != 0))
       {
         Gobjinst_RequestAnimationKind(actor, 7000, 0);
       }
     }
-    first = Gobjinst_ChooseAnimationVariant(actor, player->views5E8.view86C_125.unk86C, -1);
-    second = Gobjinst_ChooseAnimationVariant(actor, player->views5E8.view86C_125.unk86C, first);
+    first = Gobjinst_ChooseAnimationVariant(actor, player->views5E8.view86C_125.animationId, -1);
+    second = Gobjinst_ChooseAnimationVariant(actor, player->views5E8.view86C_125.animationId, first);
     low = second;
     if (second > first)
     {
@@ -1312,21 +1312,21 @@ void func_80220ED4_de(SharedPlayer *player)
   }
   if (!human)
   {
-    func_80247004_de(actor);
+    Gobjinst_UpdateActorGroundRotation(actor);
   }
   player->views1C.view2E8_37.emitter.pos = player->views0.view8_3.pos;
   player->views1C.view2E8_37.emitter.model = player->views0.view14_6.model;
   player->views1C.view2E8_37.emitter.unk40 = player->views1C.view40_5.unk40;
   player->views1C.view2E8_37.emitter.unk6C = player->views1C.view6C_9.yaw;
   player->views1C.view2E8_37.emitter.unk5C = player->views1C.view5C_6.unk5C;
-  player->views5E8.view774_115.unk774 = player->views0.view8_3.pos;
-  if ((D_801462C8.flags & 8) || ((D_801462C8.counters.enabled != 0) && (player->views5D8.view5D8_9.profile->counts != 0)))
+  player->views5E8.view774_115.requestedPosition = player->views0.view8_3.pos;
+  if ((g_gameSettings.flags & 8) || ((g_gameSettings.counters.enabled != 0) && (player->views5D8.view5D8_9.profile->counts != 0)))
   {
     player->views5E8.view5F4_13.ammo[0] = Player_GetAmmoCapacity(player, 0, 0);
     player->views5E8.view5F4_13.ammo[1] = Player_GetAmmoCapacity(player, 1, 0);
     player->views5E8.view5F4_13.ammo[2] = Player_GetAmmoCapacity(player, 2, 0);
   }
-  if (D_801462C8.flags & 4)
+  if (g_gameSettings.flags & 4)
   {
     for (slot = 21; slot >= 0; slot--)
     {
@@ -1336,7 +1336,7 @@ void func_80220ED4_de(SharedPlayer *player)
   }
   if (player->views5DC.view5DC_8.hud != 0)
   {
-    player->views5DC.view5DC_8.hud->score = player->views16D4.view16D4_0.unk16D4;
+    player->views5DC.view5DC_8.hud->score = player->views16D4.view16D4_0.score;
     player->views5DC.view5DC_8.hud->bonus = player->pendingBonus;
   }
   if (player->pendingBonus != 0)
@@ -1356,78 +1356,78 @@ void func_80220ED4_de(SharedPlayer *player)
       player->pendingBonus = count - drain;
     }
   }
-  TeamSelect_UpdateDraftPanel(&player->views5E8.view938_162.unk938, player, &player->views1C.view458_40.unk458);
-  Cteamselect_UpdateTeamWheel(&player->views5E8.viewCCC_164.unkCCC, player, &player->views1C.view458_40.unk458);
+  TeamSelect_UpdateDraftPanel(&player->views5E8.view938_162.weaponWheel, player, &player->views1C.view458_40.weaponSelectionContext);
+  Cteamselect_UpdateTeamWheel(&player->views5E8.viewCCC_164.teamWheel, player, &player->views1C.view458_40.weaponSelectionContext);
   if (player->views5E8.view62E_17.character == 0)
   {
-    player->views13B4.view13B4_5.states = D_800CED30;
+    player->views13B4.view13B4_5.states = g_playerSpecialAnimationTable;
   }
   else
   {
-    player->views13B4.view13B4_5.states = D_800C9684;
+    player->views13B4.view13B4_5.states = g_playerActionStateHandlers;
   }
-  ItemMenu_UpdateToggleMenu(&player->views5E8.viewD40_165.unkD40, player);
-  if (player->views5E8.view11D8_147.unk11D8 > 0.0f)
+  ItemMenu_UpdateToggleMenu(&player->views5E8.viewD40_165.toggleMenu, player);
+  if (player->views5E8.view11D8_147.jumpCooldown > 0.0f)
   {
-    player->views5E8.view11D8_147.unk11D8 -= D_800D2988;
-    if (player->views5E8.view11D8_147.unk11D8 <= 0.0f)
+    player->views5E8.view11D8_147.jumpCooldown -= g_frameElapsedTime;
+    if (player->views5E8.view11D8_147.jumpCooldown <= 0.0f)
     {
-      player->views1C.view100_8.unk100 |= 0x1000000;
+      player->views1C.view100_8.flags |= 0x1000000;
     }
   }
-  if (player->views5E8.view11DC_185.unk11DC > 0.0f)
+  if (player->views5E8.view11DC_185.timeScaleCountdown > 0.0f)
   {
-    player->views5E8.view11DC_185.unk11DC -= scale;
-    if (player->views5E8.view11DC_185.unk11DC <= 0.0f)
+    player->views5E8.view11DC_185.timeScaleCountdown -= scale;
+    if (player->views5E8.view11DC_185.timeScaleCountdown <= 0.0f)
     {
-      player->views5E8.view11DC_185.unk11DC = 0.0f;
+      player->views5E8.view11DC_185.timeScaleCountdown = 0.0f;
       player->views122C.view122C_4.fxFlags &= ~0x2000;
     }
   }
-  if (player->views5E8.view11EC_189.unk11EC > 0.0f)
+  if (player->views5E8.view11EC_189.glowDuration > 0.0f)
   {
-    f32 left = player->views5E8.view11EC_189.unk11EC - D_800D2988;
+    f32 left = player->views5E8.view11EC_189.glowDuration - g_frameElapsedTime;
     if (!(left >= 0.0f))
     {
       left = 0.0f;
     }
-    player->views5E8.view11EC_189.unk11EC = left;
+    player->views5E8.view11EC_189.glowDuration = left;
   }
   player->views5E8.view688_43.input.shadow->pos = player->views0.view8_3.pos;
-  if ((player->views1450.view1450_0.unk1450 != 0) && (D_801462C8.counters.transitionActive == 0))
+  if ((player->views1450.view1450_0.computerControlled != 0) && (g_gameSettings.counters.transitionActive == 0))
   {
     offset = 23;
   }
   else
   {
     offset = 0;
-    if (D_80140FF8 != 1)
+    if (g_playerWeaponClassMode != 1)
     {
       offset = 23;
     }
   }
-  ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, &player->views1C.view2E8_37.emitter, ((struct Shared_CharInfo *)D_800D052C[player->views5E8.view62E_17.character])->sound + offset, player->views1C.view484_44.voice->bank);
-  if (!(player->views1C.view100_8.unk100 & 0x400))
+  ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, &player->views1C.view2E8_37.emitter, ((struct Shared_CharInfo *)g_weaponInfoByType[player->views5E8.view62E_17.character])->sound + offset, player->views1C.view484_44.voice->bank);
+  if (!(player->views1C.view100_8.flags & 0x400))
   {
-    player->views5E8.view870_157.unk870 = player->views5E8.view86C_125.unk86C;
+    player->views5E8.view870_157.previousAnimationId = player->views5E8.view86C_125.animationId;
   }
   if (player->views122C.view122C_4.fxFlags & 0x4000)
   {
-    if (player->views5E8.view11D8_147.unk11D8 <= 0.0f)
+    if (player->views5E8.view11D8_147.jumpCooldown <= 0.0f)
     {
       player->views122C.view122C_4.fxFlags &= ~0x4000;
     }
   }
   if (player->views122C.view122C_4.fxFlags & 0x2000)
   {
-    if (player->views5E8.view11DC_185.unk11DC <= 0.0f)
+    if (player->views5E8.view11DC_185.timeScaleCountdown <= 0.0f)
     {
       player->views122C.view122C_4.fxFlags &= ~0x2000;
     }
   }
   if ((!(player->views122C.view122C_4.fxFlags & 0x10020)) && (player->views122C.view122C_4.fxFlags != 0))
   {
-    player->fxTime -= D_800D2988;
+    player->fxTime -= g_frameElapsedTime;
     if (player->fxTime <= 0.0f)
     {
       player->fxLevel = 0.0f;
@@ -1450,7 +1450,7 @@ void func_80220ED4_de(SharedPlayer *player)
         left = 0.0f;
       }
 
-      if (player->views5E8.view678_40.unk678)
+      if (player->views5E8.view678_40.powerupCountdown)
       {
         right = left;
       }
@@ -1483,7 +1483,7 @@ void func_80220ED4_de(SharedPlayer *player)
     }
     if (player->fxStage == 0)
     {
-      player->fxTime += D_800D2988;
+      player->fxTime += g_frameElapsedTime;
       if ((player->fxTime > 15.0f) || (player->fxTime < 0.0f))
       {
         player->fxSpeed = -player->fxSpeed;
@@ -1498,7 +1498,7 @@ void func_80220ED4_de(SharedPlayer *player)
     else
       if (player->fxStage == 1)
     {
-      player->fxTime += D_800D2988;
+      player->fxTime += g_frameElapsedTime;
       if (player->fxTime > 75.0f)
       {
         player->fxStage = 2;
@@ -1508,7 +1508,7 @@ void func_80220ED4_de(SharedPlayer *player)
     else
       if (player->fxStage == 2)
     {
-      player->fxTime += D_800D2988;
+      player->fxTime += g_frameElapsedTime;
       if (player->fxTime >= 150.0f)
       {
         player->fxStage = 3;
@@ -1530,19 +1530,19 @@ void func_80220ED4_de(SharedPlayer *player)
 }
 
 /* CODE_802227D0.CPP */
-/* Switches a player to a new state unless option D_801462E5 is on, func_8022C460_de refuses and the
+/* Switches a player to a new state unless option g_motionVisibilitySettings is on, Playerai_IsRoundEndState refuses and the
    state is not 0x13 to 0x15: keeps the previous state and timer, clears flag 0x800000, runs the new
    state's entry handler from the player's state table at 0x13B4, loads the state's timer and its
    nonzero parameter at 0x86C, and returns 1 with the counter at 0x658 cleared when the handler left
    the state in place, otherwise 0. */
 
-extern s32 func_8022C460_de(void *player);
+extern s32 Playerai_IsRoundEndState(void *player);
 
 s32 Player_SetPlayerState(SharedPlayer *player, void *stateContext, s32 state) {
     void (*enter)(void *, void *);
     s32 parameter;
 
-    if (D_801462C8.local != 0 && func_8022C460_de(player) != 0 && state != 0x15 && state != 0x13 && state != 0x14) {
+    if (g_gameSettings.local != 0 && Playerai_IsRoundEndState(player) != 0 && state != 0x15 && state != 0x13 && state != 0x14) {
         return 0;
     }
     player->views5E8.view652_20.previous = player->views5E8.view650_16.state;
@@ -1565,31 +1565,31 @@ s32 Player_SetPlayerState(SharedPlayer *player, void *stateContext, s32 state) {
     return 0;
 }
 
-/* Sets a player's movement speed factor at 0x784: D_800C2848_de[0] in states 0 and 1, otherwise the
+/* Sets a player's movement speed factor at 0x784: g_playerBaseAndEasyMovementFactors[0] in states 0 and 1, otherwise the
    character's speed at 0x1C of its descriptor, which for a computer player (0x1450) is scaled twice by
-   its skill byte at 0x93 (D_800C2848_de[1] then D_800C2850_de[1] for skill 0, D_800C2850_de[0] then D_800C7948
+   its skill byte at 0x93 (g_playerBaseAndEasyMovementFactors[1] then g_playerMediumAndHardMovementFactors[1] for skill 0, g_playerMediumAndHardMovementFactors[0] then g_playerGroundMovementSpeedLimits
    for skill 1, unchanged for skill 2, other values reset to 0), then by the game option factor at 0x20
-   of D_801462C8 when enabled at 0x1D, and by the ground's factor at 0x30 when state bits 3 at 0x38 are
+   of g_gameSettings when enabled at 0x1D, and by the ground's factor at 0x30 when state bits 3 at 0x38 are
    clear, there is ground, and InstHdr_GetActorMotionState reports true or the ground is flagged 0x800. */
 
 
-void func_80222908_de(void *actorView, void *bodyActor, ObjectState54 *ground) {
+void Player_UpdateMovementSpeedFactor(void *actorView, void *bodyActor, PlayerGroundContactView *ground) {
     u8 *options;
 
     if ((u16)((Shared_ActorView *)actorView)->action < 2) {
-        ((Shared_ActorView *)actorView)->speedFactor = D_800C2848_de[0];
+        ((Shared_ActorView *)actorView)->speedFactor = g_playerBaseAndEasyMovementFactors[0];
         return;
     }
-    ((Shared_ActorView *)actorView)->speedFactor = ((MovementDescriptor *)(((ObjectLinks3C *)bodyActor)->unk_18))->speed;
+    ((Shared_ActorView *)actorView)->speedFactor = ((MovementDescriptor *)(((PlayerCameraMotionView *)bodyActor)->definition))->speed;
     if (((Shared_ActorView *)actorView)->remote != 0) {
         switch (((Shared_ActorView *)actorView)->controls->difficulty) {
         default:
             ((Shared_ActorView *)actorView)->controls->difficulty = 0;
         case 0:
-            ((Shared_ActorView *)actorView)->speedFactor *= D_800C2848_de[1];
+            ((Shared_ActorView *)actorView)->speedFactor *= g_playerBaseAndEasyMovementFactors[1];
             break;
         case 1:
-            ((Shared_ActorView *)actorView)->speedFactor *= D_800C2850_de[0];
+            ((Shared_ActorView *)actorView)->speedFactor *= g_playerMediumAndHardMovementFactors[0];
             break;
         case 2:
             break;
@@ -1599,21 +1599,21 @@ void func_80222908_de(void *actorView, void *bodyActor, ObjectState54 *ground) {
             default:
                 ((Shared_ActorView *)actorView)->controls->difficulty = 0;
             case 0:
-                ((Shared_ActorView *)actorView)->speedFactor *= D_800C2850_de[1];
+                ((Shared_ActorView *)actorView)->speedFactor *= g_playerMediumAndHardMovementFactors[1];
                 break;
             case 1:
-                ((Shared_ActorView *)actorView)->speedFactor *= D_800C7948[0];
+                ((Shared_ActorView *)actorView)->speedFactor *= g_playerGroundMovementSpeedLimits[0];
                 break;
             case 2:
                 break;
             }
         }
     }
-    options = (u8 *)&D_801462C8;
+    options = (u8 *)&g_gameSettings;
     if (options[0x1D] != 0) {
         ((Shared_ActorView *)actorView)->speedFactor *= ((Shared_Game *)options)->speedFactor;
     }
-    if (!(((ObjectLinks3C *)(bodyActor))->unk_38 & 3) && ground != 0
+    if (!(((PlayerCameraMotionView *)(bodyActor))->flags & 3) && ground != 0
         && (InstHdr_GetActorMotionState(bodyActor) != 0 || (ground->unk_52 & 0x800))) {
         ((Shared_ActorView *)actorView)->speedFactor *= ground->unk_30;
     }
@@ -1629,7 +1629,7 @@ s32 Player_HasAmmoForMode(void *object, s32 weaponNumber)
     WeaponInfo *definition;
     s16 *condition;
 
-    definition = D_800D052C[weapon];
+    definition = g_weaponInfoByType[weapon];
     if (player->gear == 1) {
         condition = definition->weaponClass;
     } else {
@@ -1640,7 +1640,7 @@ s32 Player_HasAmmoForMode(void *object, s32 weaponNumber)
         if (player->gear == 2) {
             switch (weapon) {
             default: {
-                s16 *alternate = ((WeaponInfo *)D_800D052C[weapon])->alternateClass;
+                s16 *alternate = ((WeaponInfo *)g_weaponInfoByType[weapon])->alternateClass;
                 if (alternate != 0) {
                     return player->ammo[slot] >= alternate[3];
                 }
@@ -1655,7 +1655,7 @@ s32 Player_HasAmmoForMode(void *object, s32 weaponNumber)
         if (player->gear == 1) {
             switch (weapon) {
             default: {
-                s16 *primary = ((WeaponInfo *)D_800D052C[weapon])->weaponClass;
+                s16 *primary = ((WeaponInfo *)g_weaponInfoByType[weapon])->weaponClass;
                 if (primary != 0) {
                     return player->ammo[slot] >= primary[3];
                 }
@@ -1673,12 +1673,12 @@ s32 Player_HasAmmoForMode(void *object, s32 weaponNumber)
 
 
 /* 8021CD70_10.CPP */
-/* Adds ammunition to a player's weapon slot: computes the slot's cap as func_80222D64_de does (zero for
-   no slot, the character's cap unless option D_801462D5 is 1, otherwise D_800CE3E8's cap plus the
-   profile bonus from D_80102B00 unless the flag at 0x1450 is set), and when the slot has room it
+/* Adds ammunition to a player's weapon slot: computes the slot's cap as Player_IsAmmoPickupBelowCapacity does (zero for
+   no slot, the character's cap unless option D_801462D5 is 1, otherwise g_baseAmmoCapacities's cap plus the
+   profile bonus from g_localPlayerProfiles unless the flag at 0x1450 is set), and when the slot has room it
    selects weapon 1, 5 or 4 at 0xCC0 for slots 0, 1 and 2 if the slot was empty and ammunition is
    added, then adds the amount clamped to the cap. Returns whether the slot had room. Adapted from
-   func_80222D64_de with the count read once into an int and the weapon selection as a switch. */
+   Player_IsAmmoPickupBelowCapacity with the count read once into an int and the weapon selection as a switch. */
 
 extern void *Pickup_FindAmmoEntry(s32);
 
@@ -1692,17 +1692,17 @@ s32 Player_AddAmmo(void *player, s32 slot, s32 amount) {
     count = (&((Shared_ActorView *)(player))->ammo[0] + slot);
     if (slot == -1) {
         cap = 0;
-    } else if (D_801462C8.controllerMode != 1) {
+    } else if (g_gameSettings.controllerMode != 1) {
         cap = ((Desc *)((Shared_ActorView *)(player))->model)->caps[slot];
     } else {
-        cap = D_800CE3E8[slot];
+        cap = g_baseAmmoCapacities[slot];
         if (((Shared_ActorView *)(player))->remote == 0) {
             if (slot == 0) {
-                cap += D_80102B00[((Shared_ActorView *)(player))->mode].bonus0;
+                cap += g_localPlayerProfiles[((Shared_ActorView *)(player))->mode].bonus0;
             } else if (slot == 1) {
-                cap += D_80102B00[((Shared_ActorView *)(player))->mode].bonus1;
+                cap += g_localPlayerProfiles[((Shared_ActorView *)(player))->mode].bonus1;
             } else if (slot == 2) {
-                cap += D_80102B00[((Shared_ActorView *)(player))->mode].bonus2;
+                cap += g_localPlayerProfiles[((Shared_ActorView *)(player))->mode].bonus2;
             }
         }
     }
@@ -1733,11 +1733,11 @@ s32 Player_AddAmmo(void *player, s32 slot, s32 amount) {
 
 /* Returns whether a player can take more ammunition for a pickup: looks up the pickup's weapon slot
    through Pickup_FindAmmoEntry, takes the cap as zero for no slot, the character's cap at 0x108 when option
-   D_801462D5 is not 1, or otherwise D_800CE3E8's cap raised, unless the flag at 0x1450 is set, by the
-   player profile's bonus byte for slots 0, 1 and 2 in D_80102B00, and compares the slot's count at
+   D_801462D5 is not 1, or otherwise g_baseAmmoCapacities's cap raised, unless the flag at 0x1450 is set, by the
+   player profile's bonus byte for slots 0, 1 and 2 in g_localPlayerProfiles, and compares the slot's count at
    0x5F4 against it. */
 
-s32 func_80222D64_de(void *context, s32 pickupType) {
+s32 Player_IsAmmoPickupBelowCapacity(void *context, s32 pickupType) {
     void *pickup;
     s32 slot;
     s16 *count;
@@ -1753,17 +1753,17 @@ s32 func_80222D64_de(void *context, s32 pickupType) {
     if (slot == -1) {
         cap = 0;
     } else {
-        if (D_801462C8.controllerMode != 1) {
+        if (g_gameSettings.controllerMode != 1) {
             base = ((Desc *)((Shared_ActorView *)(context))->model)->caps[slot];
         } else {
-            base = D_800CE3E8[slot];
+            base = g_baseAmmoCapacities[slot];
             if (((Shared_ActorView *)(context))->remote == 0) {
                 if (slot == 0) {
-                    base += D_80102B00[((Shared_ActorView *)(context))->mode].bonus0;
+                    base += g_localPlayerProfiles[((Shared_ActorView *)(context))->mode].bonus0;
                 } else if (slot == 1) {
-                    base += D_80102B00[((Shared_ActorView *)(context))->mode].bonus1;
+                    base += g_localPlayerProfiles[((Shared_ActorView *)(context))->mode].bonus1;
                 } else if (slot == 2) {
-                    base += D_80102B00[((Shared_ActorView *)(context))->mode].bonus2;
+                    base += g_localPlayerProfiles[((Shared_ActorView *)(context))->mode].bonus2;
                 }
             }
         }
@@ -1775,15 +1775,15 @@ s32 func_80222D64_de(void *context, s32 pickupType) {
 /* Starts a player's ducking states from input: with button 0x1000 held and the player not already
    down (states 9 to 0xC or 0x26) it enters state 0xC, or while being hit (states 0x13 to 0x15) keeps
    the button latched at 0x38 instead; otherwise, when not being hit, holding direction bits 0x2000
-   without 0x3, on the ground or descending no faster than D_800C7948[1] and not already down, it
+   without 0x3, on the ground or descending no faster than g_playerGroundMovementSpeedLimits[1] and not already down, it
    enters state 0xA. Returns whether a state was entered. */
 
 
-s32 func_80222EA4_de(void *player, void *bodyActor) {
+s32 Player_TryEnterHitReactionState(void *player, void *bodyActor) {
     s16 state;
     s32 hit;
 
-    if (((Actor_func_802238E0_de *)(bodyActor))->inputFlags & 0x1000) {
+    if (((PlayerBodyMotionView *)(bodyActor))->inputFlags & 0x1000) {
         state = ((Shared_ActorView *)(player))->action;
         if (state != 0xB) {
             if (state != 0xC) {
@@ -1816,13 +1816,13 @@ s32 func_80222EA4_de(void *player, void *bodyActor) {
     if (hit) {
         return 0;
     }
-    if ((((Actor_func_802238E0_de *)(bodyActor))->inputFlags & 0x2003) != 0x2000) {
+    if ((((PlayerBodyMotionView *)(bodyActor))->inputFlags & 0x2003) != 0x2000) {
         return 0;
     }
-    if (!(((Actor_func_802238E0_de *)(bodyActor))->unk20 <= 0.0f)) {
+    if (!(((PlayerBodyMotionView *)(bodyActor))->verticalSpeed <= 0.0f)) {
         return 0;
     }
-    if (!(D_800C7948[1] < ((Actor_func_802238E0_de *)(bodyActor))->unk20)) {
+    if (!(g_playerGroundMovementSpeedLimits[1] < ((PlayerBodyMotionView *)(bodyActor))->verticalSpeed)) {
         return 0;
     }
     state = ((Shared_ActorView *)(player))->action;
@@ -1845,13 +1845,13 @@ s32 func_80222EA4_de(void *player, void *bodyActor) {
     return 1;
 }
 
-s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused) {
+s32 Player_TryThrowSelectedActor(void *playerObject, void *positionObject, s32 *unused) {
     ThrowPlayer *player = playerObject;
     ThrowPosition *position = positionObject;
     ThrowActor *actor, *selected;
     s32 kind;
     f32 offset, scale, xSpeed, angle;
-    { void *object = D_801041F0; actor = object; }
+    { void *object = g_currentActorInstance; actor = object; }
     if (!(player->flags & 0x8000)) goto invalid;
     if (!actor) return 0;
     selected = player->selected;
@@ -1861,25 +1861,25 @@ s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused) {
     if (kind != 1 || !selected) return 0;
     if (actor->state.active) {
         angle = position->angle;
-        offset = D_800C2860_de;
+        offset = g_playerThrowHeightOffset;
         xSpeed = player->speed * Gu_Sinf(angle + offset);
-        scale = D_800C2864_de;
+        scale = g_playerThrowForwardScale;
         actor->vx = xSpeed * scale;
-        actor->vy = player->speed * D_800C2868_de;
+        actor->vy = player->speed * g_playerThrowVerticalSpeedScale;
         actor->vz = player->speed * Math_Cosf(position->angle + offset) * scale;
         if (player->effect)
-            Gsky_StartScaledShake(player->effect, D_800C2870_de, 100.0f, D_800C2870_de, D_800C286C_de, kind, position->pos);
+            Gsky_StartScaledShake(player->effect, g_playerHeavyThrowShakeStrength, 100.0f, g_playerHeavyThrowShakeStrength, g_playerHeavyThrowShakeDuration, kind, position->pos);
         if (selected->state.kind == 0x2E) actor->state.flags |= 0x200;
         actor->state.timer = -1;
         Actor_RequestActorState(actor, &actor->state, 0x34);
     } else if (player->effect)
-        Gsky_StartScaledShake(player->effect, D_800C2878_de, 60.0f, D_800C2878_de, D_800C2874_de, kind, position->pos);
+        Gsky_StartScaledShake(player->effect, g_playerLightThrowShakeStrength, 60.0f, g_playerLightThrowShakeStrength, g_playerLightThrowShakeDuration, kind, position->pos);
     return 1;
 invalid:
     return 0;
 }
 
-/* A turn-rate table (D_800CE7E4 and its siblings): yawScale gates and scales stick yaw, yawRate and
+/* A turn-rate table (g_playerAirViewAngleParameters and its siblings): yawScale gates and scales stick yaw, yawRate and
    pitchRate are the base smoothing rates, pitchScale scales pitchRate, downScale/upScale scale the
    look-down and look-up stick. */
 typedef struct ViewTuning {
@@ -1901,32 +1901,32 @@ typedef struct SurfaceView {
    a surface that stops turning, the heading eases toward the stick yaw, then the pitch offset eases
    toward the stick pitch (degrees to radians). */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80222908_C8538[5] = {
+const unsigned int g_playerMovementSpeedConstants[5] = {
     0x3F800000, 0x3F553F7D, 0x3F6AC083, 0x3F553F7D, 0x3F6AC083,
 };
 #endif
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80222EA4_C854C[1] = {
+const unsigned int g_playerHitReactionConstants[1] = {
     0xC1A3D70A,
 };
 #endif
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80222FE0_C8550[7] = {
+const unsigned int g_playerThrowConstants[7] = {
     0x40490FDB, 0x41A00000, 0x41F00000, 0x3F800000, 0x42480000, 0x3F800000, 0x41F00000,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int D_auto_src_rw_pool_80222908_C8538_us_rev1[5] = {
+const unsigned int g_playerMovementSpeedConstantsUsRev1[5] = {
     0x3F800000, 0x3F553F7D, 0x3F6AC083, 0x3F553F7D, 0x3F6AC083,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int D_blob_1ea948a57be0c4b3561e[1] = {
+const unsigned int g_playerHitReactionConstantsUsRev1[1] = {
     0xC1A3D70A,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int D_auto_src_rw_pool_80222FE0_C8550_us_rev1[7] = {
+const unsigned int g_playerThrowConstantsUsRev1[7] = {
     0x40490FDB, 0x41A00000, 0x41F00000, 0x3F800000, 0x42480000, 0x3F800000, 0x41F00000,
 };
 #endif
@@ -1974,69 +1974,69 @@ void Player_UpdateViewAngles(Player *player, Player *body, ViewTuning *tuning) {
 
 extern void Graphu64_AddVec3(CVector3 *,CVector3 *,CVector3 *),Graphu64_ScaleVector(CVector3 *,CVector3 *,f32);
 
-void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *movementProfile) {
+void Player_UpdateGroundThrustAndBoost(SharedPlayer *player, PlayerBodyPositionYawView *body, SharedMovement *movementProfile) {
     CVector3 motion;
     f32 forwardSpeed;
     f32 updatedForwardSpeed;
     f32 boostCooldown;
     f32 forwardSpeedLimit;
-    f32 temp_f1_3;
+    f32 unusedBoostFloat1;
     f32 forwardMotionX;
     f32 strafeSpeed;
-    f32 temp_f1_6;
-    f32 temp_f2;
+    f32 unusedFloat;
+    f32 unusedBoostFloat2;
     f32 strafeSpeedLimit;
-    f32 temp_f2_3;
-    f32 var_a1;
-    f32 var_f0;
-    f32 var_f0_2;
+    f32 unusedBoostFloat3;
+    f32 unusedFloat1;
+    f32 unusedBoostFloat4;
+    f32 unusedBoostFloat5;
     f32 forwardBoostSpeed;
-    f32 var_f0_4;
-    f32 var_f14;
-    f32 var_f14_2;
+    f32 unusedBoostFloat6;
+    f32 unusedBoostFloat7;
+    f32 unusedBoostFloat8;
     f32 strafeSpeedMagnitude;
     s32 boostButtons;
-    s32 temp_v1_2;
+    s32 unusedBoostStatus;
     s32 boostApplied;
     s32 boostReady;
     CVector3 *movementOutput;
 
     if (Cinema_IsSequenceActive() == 0) {
         boostApplied = 0;
-        if (player->views5E8.view11B8_137.unk11B8 == 0) {
-            boostCooldown = player->views5E8.view6DC_60.unk6DC;
+        if (player->views5E8.view11B8_137.frozen == 0) {
+            boostCooldown = player->views5E8.view6DC_60.boostCooldown;
             boostReady = 1;
             if (!(boostCooldown <= 0.0f)) {
                 boostReady = 0;
-                player->views5E8.view6DC_60.unk6DC = (f32) (boostCooldown - (&D_800D2988)[0]);
+                player->views5E8.view6DC_60.boostCooldown = (f32) (boostCooldown - (&g_frameElapsedTime)[0]);
             }
-            forwardSpeed=player->views5E8.view6C0_51.unk6C0; forwardSpeedLimit=movementProfile->unk4;
+            forwardSpeed=player->views5E8.view6C0_51.movementSpeed; forwardSpeedLimit=movementProfile->speedLimit;
             if (forwardSpeed < 0.0f ? forwardSpeedLimit < -forwardSpeed : forwardSpeedLimit < forwardSpeed) {
-                player->views5E8.view6C0_51.unk6C0=Graphu64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
-            } else if(player->views5E8.view6A8_43.unk6A8 != 0.0f && player->views5E8.view7E8_105.unk7E8 != 2) {
-                player->views5E8.view6C0_51.unk6C0=Graphu64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
+                player->views5E8.view6C0_51.movementSpeed=Graphu64_DecayToZero(player->views5E8.view6C0_51.movementSpeed,movementProfile->speedDecay*0.5f);
+            } else if(player->views5E8.view6A8_43.lift != 0.0f && player->views5E8.view7E8_105.zoomed != 2) {
+                player->views5E8.view6C0_51.movementSpeed=Graphu64_IntegrateBoundedValue(player->views5E8.view6C0_51.movementSpeed,player->views5E8.view6A8_43.lift*movementProfile->acceleration,(player->views5E8.view6A8_43.lift<0.0f?-player->views5E8.view6A8_43.lift:player->views5E8.view6A8_43.lift)*movementProfile->speedLimit);
             } else {
-                player->views5E8.view6C0_51.unk6C0=Graphu64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
+                player->views5E8.view6C0_51.movementSpeed=Graphu64_DecayToZero(player->views5E8.view6C0_51.movementSpeed,movementProfile->speedDecay);
             }
-            forwardMotionX = player->views5E8.view6C0_51.unk6C0 * Gu_Sinf(body->unk6C + 3.1415927f);
+            forwardMotionX = player->views5E8.view6C0_51.movementSpeed * Gu_Sinf(body->yaw + 3.1415927f);
             motion.y = 0;
             motion.x = forwardMotionX;
-            motion.z = player->views5E8.view6C0_51.unk6C0 * Math_Cosf(body->unk6C + 3.1415927f);
-            strafeSpeed=player->views5E8.view6C4_54.unk6C4; strafeSpeedLimit=movementProfile->unk10;
+            motion.z = player->views5E8.view6C0_51.movementSpeed * Math_Cosf(body->yaw + 3.1415927f);
+            strafeSpeed=player->views5E8.view6C4_54.sideSpeed; strafeSpeedLimit=movementProfile->strafeLimitOrBoostDecay;
             if (strafeSpeed < 0.0f ? strafeSpeedLimit < -strafeSpeed : strafeSpeedLimit < strafeSpeed) {
-                player->views5E8.view6C4_54.unk6C4=Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14*0.5f);
-            } else if(player->views5E8.view6A4_41.unk6A4 != 0.0f) {
-                player->views5E8.view6C4_54.unk6C4=Graphu64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unkC,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk10);
+                player->views5E8.view6C4_54.sideSpeed=Graphu64_DecayToZero(player->views5E8.view6C4_54.sideSpeed,movementProfile->strafeDecayOrLiftAcceleration*0.5f);
+            } else if(player->views5E8.view6A4_41.strafe != 0.0f) {
+                player->views5E8.view6C4_54.sideSpeed=Graphu64_IntegrateBoundedValue(player->views5E8.view6C4_54.sideSpeed,player->views5E8.view6A4_41.strafe*movementProfile->strafeAccelerationOrBoostSpeed,(player->views5E8.view6A4_41.strafe<0.0f?-player->views5E8.view6A4_41.strafe:player->views5E8.view6A4_41.strafe)*movementProfile->strafeLimitOrBoostDecay);
             } else {
-                player->views5E8.view6C4_54.unk6C4=Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14);
+                player->views5E8.view6C4_54.sideSpeed=Graphu64_DecayToZero(player->views5E8.view6C4_54.sideSpeed,movementProfile->strafeDecayOrLiftAcceleration);
             }
-            motion.x += player->views5E8.view6C4_54.unk6C4 * Gu_Sinf(body->unk6C - 1.5707964f);
-            motion.z += player->views5E8.view6C4_54.unk6C4 * Math_Cosf(body->unk6C - 1.5707964f);
-            strafeSpeedMagnitude = player->views5E8.view6C4_54.unk6C4;
+            motion.x += player->views5E8.view6C4_54.sideSpeed * Gu_Sinf(body->yaw - 1.5707964f);
+            motion.z += player->views5E8.view6C4_54.sideSpeed * Math_Cosf(body->yaw - 1.5707964f);
+            strafeSpeedMagnitude = player->views5E8.view6C4_54.sideSpeed;
             if (strafeSpeedMagnitude < 0.0f) {
                 strafeSpeedMagnitude = -strafeSpeedMagnitude;
             }
-            updatedForwardSpeed = player->views5E8.view6C0_51.unk6C0;
+            updatedForwardSpeed = player->views5E8.view6C0_51.movementSpeed;
             if (updatedForwardSpeed < 0.0f) {
                 if (-updatedForwardSpeed < strafeSpeedMagnitude) {
                     goto block_35;
@@ -2045,47 +2045,47 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             }
             if (updatedForwardSpeed < strafeSpeedMagnitude) {
 block_35:
-                Graphu64_ClampMotionLength(&motion,movementProfile->unk10);
+                Graphu64_ClampMotionLength(&motion,movementProfile->strafeLimitOrBoostDecay);
             } else {
 block_36:
-                Graphu64_ClampMotionLength(&motion,movementProfile->unk4);
+                Graphu64_ClampMotionLength(&motion,movementProfile->speedLimit);
             }
             if (boostReady != 0) {
-                boostButtons = player->views5E8.view6B0_46.unk6B0;
+                boostButtons = player->views5E8.view6B0_46.actionFlags;
                 if (boostButtons & 8) {
-                    forwardBoostSpeed = movementProfile->unk18;
+                    forwardBoostSpeed = movementProfile->boostSpeedOrLiftLimit;
                     boostApplied = 1;
                 } else if (boostButtons & 4) {
-                    forwardBoostSpeed = -movementProfile->unk18 * 0.5f;
+                    forwardBoostSpeed = -movementProfile->boostSpeedOrLiftLimit * 0.5f;
                     boostApplied = 1;
                 } else {
                     goto block_42;
                 }
             } else {
 block_42:
-                forwardBoostSpeed = Graphu64_DecayToZero(player->views5E8.view6D4_58.unk6D4, movementProfile->unk1C);
+                forwardBoostSpeed = Graphu64_DecayToZero(player->views5E8.view6D4_58.forwardBoostSpeed, movementProfile->boostDecayOrLiftImpulse);
             }
-            player->views5E8.view6D4_58.unk6D4 = forwardBoostSpeed;
-            motion.x += player->views5E8.view6D4_58.unk6D4 * Gu_Sinf(body->unk6C + 3.1415927f);
-            motion.z += player->views5E8.view6D4_58.unk6D4 * Math_Cosf(body->unk6C + 3.1415927f);
-            if (boostReady && (player->views5E8.view6B8_49.unk6B8 & 1)) {
-                player->views5E8.view6D8_59.unk6D8 = movementProfile->unk18;
-                player->views5E8.view6D8_59.unk6D8 *= 0.75f;
+            player->views5E8.view6D4_58.forwardBoostSpeed = forwardBoostSpeed;
+            motion.x += player->views5E8.view6D4_58.forwardBoostSpeed * Gu_Sinf(body->yaw + 3.1415927f);
+            motion.z += player->views5E8.view6D4_58.forwardBoostSpeed * Math_Cosf(body->yaw + 3.1415927f);
+            if (boostReady && (player->views5E8.view6B8_49.input & 1)) {
+                player->views5E8.view6D8_59.boostStrength = movementProfile->boostSpeedOrLiftLimit;
+                player->views5E8.view6D8_59.boostStrength *= 0.75f;
                 boostApplied=1;
-            } else if (boostReady && (player->views5E8.view6B8_49.unk6B8 & 2)) {
-                player->views5E8.view6D8_59.unk6D8 = -movementProfile->unk18*0.75f;
+            } else if (boostReady && (player->views5E8.view6B8_49.input & 2)) {
+                player->views5E8.view6D8_59.boostStrength = -movementProfile->boostSpeedOrLiftLimit*0.75f;
                 boostApplied=1;
             } else {
-                player->views5E8.view6D8_59.unk6D8=Graphu64_DecayToZero(player->views5E8.view6D8_59.unk6D8,movementProfile->unk1C*0.75f);
+                player->views5E8.view6D8_59.boostStrength=Graphu64_DecayToZero(player->views5E8.view6D8_59.boostStrength,movementProfile->boostDecayOrLiftImpulse*0.75f);
             }
-            motion.x += player->views5E8.view6D8_59.unk6D8 * Gu_Sinf(body->unk6C - 1.5707964f);
-            motion.z += player->views5E8.view6D8_59.unk6D8 * Math_Cosf(body->unk6C - 1.5707964f);
-            Graphu64_ScaleVector(&motion, &motion, player->views5E8.view66C_29.unk66C);
-            movementOutput = &player->views5E8.view6E8_63.unk6E8;
+            motion.x += player->views5E8.view6D8_59.boostStrength * Gu_Sinf(body->yaw - 1.5707964f);
+            motion.z += player->views5E8.view6D8_59.boostStrength * Math_Cosf(body->yaw - 1.5707964f);
+            Graphu64_ScaleVector(&motion, &motion, player->views5E8.view66C_29.movementTimeScale);
+            movementOutput = &player->views5E8.view6E8_63.movementX;
             Graphu64_AddVec3(movementOutput, movementOutput, &motion);
             if (boostApplied != 0) {
-                player->views5E8.view6DC_60.unk6DC = (f32) (player->views5E8.view6DC_60.unk6DC + 7.5f);
-                SoundElement_PlaySoundAtPosition(movementProfile->unk22, body->unk8, 0, -1);
+                player->views5E8.view6DC_60.boostCooldown = (f32) (player->views5E8.view6DC_60.boostCooldown + 7.5f);
+                SoundElement_PlaySoundAtPosition(movementProfile->boostSoundId, body->position, 0, -1);
             }
         }
     }
@@ -2095,9 +2095,9 @@ block_42:
 /* Updates flying-player thrust and impulses, transforms movement into world space and applies descent and roll. */
 
 
-extern CQuatern func_8024796C_de(Actor_func_802238E0_de *);
+extern CQuatern Gobjinst_BuildActorAimQuaternion(PlayerBodyMotionView *);
 extern void Graphu64_AddVec3(CVector3 *,CVector3 *,CVector3 *),Graphu64_EaseValueToward(f32 *,f32,f32);
-void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, SharedMovement *movementProfile) {
+void Player_UpdateFlyingThrustAndBoost(SharedPlayer *player, PlayerBodyMotionView *body, SharedMovement *movementProfile) {
     CVector3 v18,v28,v38,v48,v58;
     MatrixF rotationMatrix;
     CQuatern bodyRotation;
@@ -2106,105 +2106,105 @@ void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, Shared
     f32 verticalSpeed;
     f32 boostCooldown;
     f32 forwardSpeedLimit;
-    f32 temp_f1_3;
+    f32 unusedBoostFloat1;
     f32 strafeSpeed;
-    f32 temp_f1_5;
-    f32 temp_f2;
+    f32 unusedFloat2;
+    f32 unusedBoostFloat2;
     f32 strafeSpeedLimit;
-    f32 temp_f2_3;
-    f32 var_f0;
-    f32 var_f0_2;
+    f32 unusedBoostFloat3;
+    f32 unusedBoostFloat4;
+    f32 unusedBoostFloat5;
     f32 forwardBoostSpeed;
-    f32 var_f0_4;
-    f32 var_f14;
-    f32 var_f14_2;
-    f32 var_f1;
+    f32 unusedBoostFloat6;
+    f32 unusedBoostFloat7;
+    f32 unusedBoostFloat8;
+    f32 unusedFloat3;
     s32 boostButtons;
-    s32 temp_v1_2;
+    s32 unusedBoostStatus;
     s32 boostReady;
     s32 boostApplied;
 
     boostApplied = 0;
-    boostCooldown = player->views5E8.view6DC_60.unk6DC;
+    boostCooldown = player->views5E8.view6DC_60.boostCooldown;
     boostReady = 1;
     if (!(boostCooldown <= 0.0f)) {
         boostReady = 0;
-        player->views5E8.view6DC_60.unk6DC = (f32) (boostCooldown - (&D_800D2988)[0]);
+        player->views5E8.view6DC_60.boostCooldown = (f32) (boostCooldown - (&g_frameElapsedTime)[0]);
     }
-    forwardSpeed=player->views5E8.view6C0_51.unk6C0; forwardSpeedLimit=movementProfile->unk4;
+    forwardSpeed=player->views5E8.view6C0_51.movementSpeed; forwardSpeedLimit=movementProfile->speedLimit;
     if (forwardSpeed<0.0f ? forwardSpeedLimit < -forwardSpeed : forwardSpeedLimit < forwardSpeed) {
-        player->views5E8.view6C0_51.unk6C0=Graphu64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
-    } else if(player->views5E8.view6A8_43.unk6A8 != 0.0f) {
-        player->views5E8.view6C0_51.unk6C0=Graphu64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
+        player->views5E8.view6C0_51.movementSpeed=Graphu64_DecayToZero(player->views5E8.view6C0_51.movementSpeed,movementProfile->speedDecay*0.5f);
+    } else if(player->views5E8.view6A8_43.lift != 0.0f) {
+        player->views5E8.view6C0_51.movementSpeed=Graphu64_IntegrateBoundedValue(player->views5E8.view6C0_51.movementSpeed,player->views5E8.view6A8_43.lift*movementProfile->acceleration,(player->views5E8.view6A8_43.lift<0.0f?-player->views5E8.view6A8_43.lift:player->views5E8.view6A8_43.lift)*movementProfile->speedLimit);
     } else {
-        player->views5E8.view6C0_51.unk6C0=Graphu64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
+        player->views5E8.view6C0_51.movementSpeed=Graphu64_DecayToZero(player->views5E8.view6C0_51.movementSpeed,movementProfile->speedDecay);
     }
-    strafeSpeed=player->views5E8.view6C4_54.unk6C4; strafeSpeedLimit=movementProfile->unk4;
+    strafeSpeed=player->views5E8.view6C4_54.sideSpeed; strafeSpeedLimit=movementProfile->speedLimit;
     if (strafeSpeed<0.0f ? strafeSpeedLimit < -strafeSpeed : strafeSpeedLimit < strafeSpeed) {
-        player->views5E8.view6C4_54.unk6C4=Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk8*0.5f);
-    } else if(player->views5E8.view6A4_41.unk6A4 != 0.0f) {
-        player->views5E8.view6C4_54.unk6C4=Graphu64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unk0,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk4*0.75f);
+        player->views5E8.view6C4_54.sideSpeed=Graphu64_DecayToZero(player->views5E8.view6C4_54.sideSpeed,movementProfile->speedDecay*0.5f);
+    } else if(player->views5E8.view6A4_41.strafe != 0.0f) {
+        player->views5E8.view6C4_54.sideSpeed=Graphu64_IntegrateBoundedValue(player->views5E8.view6C4_54.sideSpeed,player->views5E8.view6A4_41.strafe*movementProfile->acceleration,(player->views5E8.view6A4_41.strafe<0.0f?-player->views5E8.view6A4_41.strafe:player->views5E8.view6A4_41.strafe)*movementProfile->speedLimit*0.75f);
     } else {
-        player->views5E8.view6C4_54.unk6C4=Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk8);
+        player->views5E8.view6C4_54.sideSpeed=Graphu64_DecayToZero(player->views5E8.view6C4_54.sideSpeed,movementProfile->speedDecay);
     }
     if (boostReady != 0) {
-        boostButtons = player->views5E8.view6B0_46.unk6B0;
+        boostButtons = player->views5E8.view6B0_46.actionFlags;
         if (boostButtons & 8) {
-            forwardBoostSpeed = movementProfile->unkC;
+            forwardBoostSpeed = movementProfile->strafeAccelerationOrBoostSpeed;
             boostApplied = 1;
         } else if (boostButtons & 4) {
-            forwardBoostSpeed = -movementProfile->unkC * 0.5f;
+            forwardBoostSpeed = -movementProfile->strafeAccelerationOrBoostSpeed * 0.5f;
             boostApplied = 1;
         } else {
             goto block_31;
         }
     } else {
 block_31:
-        forwardBoostSpeed = Graphu64_DecayToZero(player->views5E8.view6D4_58.unk6D4, movementProfile->unk10);
+        forwardBoostSpeed = Graphu64_DecayToZero(player->views5E8.view6D4_58.forwardBoostSpeed, movementProfile->strafeLimitOrBoostDecay);
     }
-    player->views5E8.view6D4_58.unk6D4 = forwardBoostSpeed;
-    if (boostReady && (player->views5E8.view6B8_49.unk6B8 & 1)) {
-        player->views5E8.view6D8_59.unk6D8=movementProfile->unkC;
-        player->views5E8.view6D8_59.unk6D8*=0.75f;
+    player->views5E8.view6D4_58.forwardBoostSpeed = forwardBoostSpeed;
+    if (boostReady && (player->views5E8.view6B8_49.input & 1)) {
+        player->views5E8.view6D8_59.boostStrength=movementProfile->strafeAccelerationOrBoostSpeed;
+        player->views5E8.view6D8_59.boostStrength*=0.75f;
         boostApplied=1;
-    } else if (boostReady && (player->views5E8.view6B8_49.unk6B8 & 2)) {
-        player->views5E8.view6D8_59.unk6D8=-movementProfile->unkC*0.75f;
+    } else if (boostReady && (player->views5E8.view6B8_49.input & 2)) {
+        player->views5E8.view6D8_59.boostStrength=-movementProfile->strafeAccelerationOrBoostSpeed*0.75f;
         boostApplied=1;
     } else {
-        player->views5E8.view6D8_59.unk6D8=Graphu64_DecayToZero(player->views5E8.view6D8_59.unk6D8,movementProfile->unk10*0.75f);
+        player->views5E8.view6D8_59.boostStrength=Graphu64_DecayToZero(player->views5E8.view6D8_59.boostStrength,movementProfile->strafeLimitOrBoostDecay*0.75f);
     }
-    if ((boostReady != 0) && (player->views5E8.view6B0_46.unk6B0 & 0x10)) {
+    if ((boostReady != 0) && (player->views5E8.view6B0_46.actionFlags & 0x10)) {
         boostApplied = 1;
-        body->unk20 = (f32) (body->unk20 + movementProfile->unk1C);
+        body->verticalSpeed = (f32) (body->verticalSpeed + movementProfile->boostDecayOrLiftImpulse);
     }
-    if (player->views5E8.view6AC_45.unk6AC & 0x10) {
-        verticalSpeed = body->unk20;
-        upwardSpeedLimit = movementProfile->unk18;
+    if (player->views5E8.view6AC_45.inputFlags & 0x10) {
+        verticalSpeed = body->verticalSpeed;
+        upwardSpeedLimit = movementProfile->boostSpeedOrLiftLimit;
         if (verticalSpeed < upwardSpeedLimit) {
-            body->unk20 = Graphu64_IntegrateBoundedValue(verticalSpeed, movementProfile->unk14, upwardSpeedLimit);
+            body->verticalSpeed = Graphu64_IntegrateBoundedValue(verticalSpeed, movementProfile->strafeDecayOrLiftAcceleration, upwardSpeedLimit);
         }
     }
     v18.x = 0.0f;
     v18.y = 0;
-    v18.z = player->views5E8.view6C0_51.unk6C0 + player->views5E8.view6D4_58.unk6D4;
-    v28.x = player->views5E8.view6C4_54.unk6C4 + player->views5E8.view6D8_59.unk6D8;
+    v18.z = player->views5E8.view6C0_51.movementSpeed + player->views5E8.view6D4_58.forwardBoostSpeed;
+    v28.x = player->views5E8.view6C4_54.sideSpeed + player->views5E8.view6D8_59.boostStrength;
     v28.y = 0;
     v28.z = 0;
-    bodyRotation = func_8024796C_de(body);
+    bodyRotation = Gobjinst_BuildActorAimQuaternion(body);
     MatrixFromQuaternion(&bodyRotation, &rotationMatrix);
     Graphu64_TransformPoint(&rotationMatrix, &v18, &v38);
     Graphu64_TransformPoint(&rotationMatrix, &v28, &v48);
-    player->views5E8.view6E8_63.unk6E8 = (f32) (player->views5E8.view6E8_63.unk6E8 + ((v38.x + v48.x) * player->views5E8.view66C_29.unk66C));
-    player->views5E8.view6EC_64.unk6EC = (f32) (player->views5E8.view6EC_64.unk6EC + ((v38.y + v48.y) * player->views5E8.view66C_29.unk66C));
-    player->views5E8.view6F0_66.unk6F0 = (f32) (player->views5E8.view6F0_66.unk6F0 + ((v38.z + v48.z) * player->views5E8.view66C_29.unk66C));
-    if (body->unk20 < 0.0f) {
+    player->views5E8.view6E8_63.movementX = (f32) (player->views5E8.view6E8_63.movementX + ((v38.x + v48.x) * player->views5E8.view66C_29.movementTimeScale));
+    player->views5E8.view6EC_64.height = (f32) (player->views5E8.view6EC_64.height + ((v38.y + v48.y) * player->views5E8.view66C_29.movementTimeScale));
+    player->views5E8.view6F0_66.movementZ = (f32) (player->views5E8.view6F0_66.movementZ + ((v38.z + v48.z) * player->views5E8.view66C_29.movementTimeScale));
+    if (body->verticalSpeed < 0.0f) {
         Graphu64_AddVec3(&v58, &v38, &v48);
-        body->unk20 = (f32) (body->unk20 - (player->views13B4.view13B4_2.unk13B4[player->views5E8.view650_15.unk650].physics->unk8 * (Gu_Sqrtf((v58.x * v58.x) + (v58.y * v58.y) + (v58.z * v58.z)) / (movementProfile->unk4 * 4.0f)) * player->views5E8.view66C_29.unk66C));
+        body->verticalSpeed = (f32) (body->verticalSpeed - (player->views13B4.view13B4_2.actionDefinitions[player->views5E8.view650_15.actionState].physics->time * (Gu_Sqrtf((v58.x * v58.x) + (v58.y * v58.y) + (v58.z * v58.z)) / (movementProfile->speedLimit * 4.0f)) * player->views5E8.view66C_29.movementTimeScale));
     }
-    Graphu64_EaseValueToward(&player->views5E8.view72C_75.unk72C, ((player->views5E8.view6C4_54.unk6C4 * 1.8f) + (player->views5E8.view69C_39.unk69C * 16.0f)) * 0.01745329424738884f, 0.04f);
+    Graphu64_EaseValueToward(&player->views5E8.view72C_75.strideRoll, ((player->views5E8.view6C4_54.sideSpeed * 1.8f) + (player->views5E8.view69C_39.stick * 16.0f)) * 0.01745329424738884f, 0.04f);
     if (boostApplied != 0) {
-        player->views5E8.view6DC_60.unk6DC = (f32) (player->views5E8.view6DC_60.unk6DC + 7.5f);
-        SoundElement_PlaySoundAtPosition(movementProfile->unk22, body->unk8, 0, -1);
+        player->views5E8.view6DC_60.boostCooldown = (f32) (player->views5E8.view6DC_60.boostCooldown + 7.5f);
+        SoundElement_PlaySoundAtPosition(movementProfile->boostSoundId, body->position, 0, -1);
     }
 }
 
@@ -2216,7 +2216,7 @@ block_31:
    weapon height at 0x740 (from the model's height at 0xF4 or a default) and its side and forward
    offsets at 0x73C and 0x744 along the camera's heading. */
 
-void func_80223E34_de(SharedPlayer *player, func_80203908_S4 *camera) {
+void Player_UpdateWeaponSwayAndBob(SharedPlayer *player, ActorYawView *camera) {
     f32 step;
     f32 phase;
     f32 height;
@@ -2250,23 +2250,23 @@ void func_80223E34_de(SharedPlayer *player, func_80203908_S4 *camera) {
         rate = 0.5f;
         Graphu64_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (Gu_Sinf(phase) * 10.24f), rate);
         amount = player->views5E8.view758_88.bobStrength * (Math_Cosf(phase) * 8.192f);
-        Graphu64_EaseValueToward(&player->views5E8.view73C_81.side, -Gu_Sinf(camera->unk6C + 3.1415927f) * amount, rate);
-        Graphu64_EaseValueToward(&player->views5E8.view744_86.forward, -Math_Cosf(camera->unk6C + 3.1415927f) * amount, rate);
+        Graphu64_EaseValueToward(&player->views5E8.view73C_81.side, -Gu_Sinf(camera->yaw + 3.1415927f) * amount, rate);
+        Graphu64_EaseValueToward(&player->views5E8.view744_86.forward, -Math_Cosf(camera->yaw + 3.1415927f) * amount, rate);
     }
 }
 
 /* 8021CD70_14.CPP */
 /* Starts the effect at offset 0x740 of an object through Graphu64_EaseValueToward at half intensity, with a
-   level taken from the owner at offset 0x18 scaled by D_800C7A38[0], or D_800C7A38[1] without an
+   level taken from the owner at offset 0x18 scaled by g_playerOwnerHeightEffectTuning[0], or g_playerOwnerHeightEffectTuning[1] without an
    owner. */
 
 void Player_EaseOwnerHeightEffect(struct EffectOwnerObject *object) {
     f32 level;
 
     if (object->owner != 0) {
-        level = object->owner->height * D_800C7A38[0];
+        level = object->owner->height * g_playerOwnerHeightEffectTuning[0];
     } else {
-        level = D_800C7A38[1];
+        level = g_playerOwnerHeightEffectTuning[1];
     }
     Graphu64_EaseValueToward(&object->effect740, level, 0.5f);
 }
@@ -2294,14 +2294,14 @@ void Player_EaseOwnerHeightEffect(struct EffectOwnerObject *object) {
 
 /* 800C7A38.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8022404C_C8638[2] = {
+const unsigned int g_playerOwnerHeightEffectConstants[2] = {
     0x3F666666, 0x42A5E353,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8022404C_C8638_us_rev1.c */
-const unsigned int D_blob_78b96c19bad6359051b0[2] = {
+const unsigned int g_playerOwnerHeightEffectConstantsUsRev1[2] = {
     0x3F666666, 0x42A5E353,
 };
 #endif

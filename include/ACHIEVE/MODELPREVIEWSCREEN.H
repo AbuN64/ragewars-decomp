@@ -3,13 +3,13 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/MENU_SCREEN_SETUP.H"
 
 
 
-extern ModelPreviewScreen *D_800E5830;
+extern ModelPreviewScreen *g_resultsModelPreviewScreen;
 
 extern s32 Model_SetPreviewModel(void *,s32);
 

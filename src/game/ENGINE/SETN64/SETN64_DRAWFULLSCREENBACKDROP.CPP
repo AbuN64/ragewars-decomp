@@ -11,7 +11,7 @@
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "RENDER/802909E0.H"
+#include "RENDER/RECORD_OUTPUT_AND_TIMED_SESSION_VIEWS.H"
 #include "RENDER/VIEW_MATRICES.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
@@ -19,7 +19,7 @@
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("span_1000", func_80290BD0_eu_x);
+INCLUDE_ASM("span_1000", SetN64_SetupLoadingBackdropEuX);
 #endif
 #endif
 
@@ -27,27 +27,27 @@ INCLUDE_ASM("span_1000", func_80290BD0_eu_x);
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("span_1000", func_80290BA0_eu);
+INCLUDE_ASM("span_1000", SetN64_SetupLoadingBackdropEu);
 #endif
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 #if defined(NON_MATCHING) || defined(VERSION_US_REV1) || defined(VERSION_DE)
 /* Sets up the loading-screen scene: resets the camera globals, loads the 0xE10 resource, builds a
- * look-at matrix from the state's field at 0x26DB0 scaled by D_800CA4B4, links it to the active view and
+ * look-at matrix from the state's field at 0x26DB0 scaled by g_backdropYawRate, links it to the active view and
  * draws the backdrop through SetN64_DrawTextLines with half the video height. */
 #include "RENDER/SETN64_DRAWTEXTLINES.H"
-extern s32 D_800D297C;
-extern f32 D_800CA4B0, D_800CA4B4, D_800CA4B8;
-extern char D_80141008;
+extern s32 g_lightingBufferIndex;
+extern f32 g_backdropModelFillValue, g_backdropYawRate, D_800CA4B8;
+extern char g_fallbackScreenMessageEmitter;
 #if defined(VERSION_DE)
-extern s32 D_auto_800D303C;
-#define D_auto_800D7068 D_auto_800D303C
+extern s32 g_backdropTextLinesDe;
+#define g_backdropTextLines g_backdropTextLinesDe
 #else
-extern s32 D_auto_800D7068;
+extern s32 g_backdropTextLines;
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern f32 D_auto_800C5678[2];
+extern f32 g_backdropTextScales[2];
 #endif
 extern s32 Scene_FindModelIdIndex(void *, s32);
 extern s32 Scene_GetIndexedModelResource(void *, s32);
@@ -59,39 +59,39 @@ extern void Graphu64_ConvertMatrixToFixed(void *, void *);
 extern void Geometry_QueueDirectModel(s32, void *, void *, s32, s32);
 #undef LOAD_SETUP
 #if defined(VERSION_EU)
-#define LOAD_SETUP func_80290BA0_eu
+#define LOAD_SETUP SetN64_SetupLoadingBackdropEu
 #elif defined(VERSION_EU_X)
-#define LOAD_SETUP func_80290BD0_eu_x
+#define LOAD_SETUP SetN64_SetupLoadingBackdropEuX
 #elif defined(VERSION_DE)
-#define LOAD_SETUP func_80290A90_de
+#define LOAD_SETUP SetN64_SetupLoadingBackdropDe
 #else
-#define LOAD_SETUP func_80290A70_us_rev1
+#define LOAD_SETUP SetN64_SetupLoadingBackdropRev1
 #endif
-void LOAD_SETUP(ObjRecAt26DC1 *state) {
+void LOAD_SETUP(TimedSessionTransitionView *state) {
     s32 handle, h2;
     u8 matrix[0x40];
 
-    D_800CC380 = 0;
+    g_geometryFogEffectEnabled = 0;
     handle = Scene_FindModelIdIndex(&g_world, 0xE10);
-    D_800D15E0 = 0;
-    D_800D15E4[0] = D_800CA4B0;
-    D_800D15E4[1] = D_800CA4B0;
-    D_800D15E4[2] = D_800CA4B0;
-    D_800D15E4[3] = D_800CA4B0;
+    g_menuModelFillEnabled = 0;
+    g_menuModelFillColor[0] = g_backdropModelFillValue;
+    g_menuModelFillColor[1] = g_backdropModelFillValue;
+    g_menuModelFillColor[2] = g_backdropModelFillValue;
+    g_menuModelFillColor[3] = g_backdropModelFillValue;
     if (handle != -1) {
-        Camera_SetupViewportAndFog(&D_80141008);
+        Camera_SetupViewportAndFog(&g_fallbackScreenMessageEmitter);
         Graphu64_BuildTranslationMatrix(matrix, 0.0f, -100.0f, -500.0f);
-        YawMatrixLocal(matrix, state->unk26DB0 * D_800CA4B4);
+        YawMatrixLocal(matrix, state->transitionTimer * g_backdropYawRate);
         SwapMatrixUpForward(matrix);
-        Graphu64_ConvertMatrixToFixed(matrix, VIEW_MATRICES + D_800D297C * 64);
+        Graphu64_ConvertMatrixToFixed(matrix, VIEW_MATRICES + g_lightingBufferIndex * 64);
         h2 = Scene_GetIndexedModelResource(&g_world, handle);
         Geometry_BeginModelBatch();
-        Geometry_QueueDirectModel(h2, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);
+        Geometry_QueueDirectModel(h2, VIEW_MATRICES + g_lightingBufferIndex * 64, &g_defaultParticleLighting, 0, -1);
         Geometry_FlushModelBatch();
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        SetN64_DrawTextLines(state, 0, (void *)((s32 **)&D_800CA4B8)[g_languageIndex], D_800E28D0 / 2, 0xBE, 0xA, D_auto_800C5678[0], D_auto_800C5678[1]);
+        SetN64_DrawTextLines(state, 0, (void *)((s32 **)&D_800CA4B8)[g_languageIndex], g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScales[0], g_backdropTextScales[1]);
 #else
-        SetN64_DrawTextLines(state, 0, (void *)D_auto_800D7068, D_800E28D0 / 2, 0xBE, 0xA, D_800CA4B8, (&D_800CA4B8)[1]);
+        SetN64_DrawTextLines(state, 0, (void *)g_backdropTextLines, g_hudReferenceViewportWidth / 2, 0xBE, 0xA, D_800CA4B8, (&D_800CA4B8)[1]);
 #endif
     }
 }
@@ -100,13 +100,13 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
 
 
 #if !(defined(VERSION_US))
-/* Clears the screen: clears the depth buffer over the whole screen through SetN64_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through OnScreen_DrawSpriteResource after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from D_800E28D0 and D_800E28D4. */
+/* Clears the screen: clears the depth buffer over the whole screen through SetN64_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through OnScreen_DrawSpriteResource after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from g_hudReferenceViewportWidth and g_hudReferenceViewportHeight. */
 #include "COMMON/DISPLAY.H"
 extern void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 
 extern void Onscrn_SetupSpriteMode(s32 alpha);
 void SetN64_DrawFullscreenBackdrop(void *unused) {
-    Frame *frame = D_8011FAC0.ring.current;
+    Frame *frame = g_gameSession.ring.current;
     s32 width;
     s32 height;
     SetN64_ClearDepthRect(unused, 0, SCREEN_WD, 0, SCREEN_HT, 0);

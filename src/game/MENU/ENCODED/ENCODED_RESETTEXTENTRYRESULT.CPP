@@ -2,10 +2,10 @@
 #include "TYPES.H"
 #include "MENU/ENCODED_RESETTEXTENTRYRESULT.H"
 
-/* Resets D_80154030 to -1. */
+/* Resets g_encodedCheatCharacterIndex to -1. */
 
-extern s32 D_80154030;
+extern s32 g_encodedCheatCharacterIndex;
 
 void Encoded_ResetTextEntryResult(void) {
-    D_80154030 = -1;
+    g_encodedCheatCharacterIndex = -1;
 }

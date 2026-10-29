@@ -1,26 +1,26 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OSTHREAD_S.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "AUDIO/GETTHREADID.H"
 
-/** Return the global word at D_800D92A4. */
+/** Return the global word at g_audioInterruptMask. */
 
 int Audio_GetInterruptMask(void) {
-    return D_800D92A4;
+    return g_audioInterruptMask;
 }
 
-extern void *D_800D5270;
+extern void *g_osRunningThread;
 
 
 
 
 /** Return offset 0x14 from the supplied object or the default global object. */
 unsigned int Audio_GetThreadIdentifier(void *object) {
-    func_80205494_S3 *object_record;
+    ThreadIdentifierView *object_record;
     if (object == 0) {
-        object = D_800D5270;
+        object = g_osRunningThread;
     }
     object_record = object;
-    return object_record->unk14;
+    return object_record->threadId;
 }

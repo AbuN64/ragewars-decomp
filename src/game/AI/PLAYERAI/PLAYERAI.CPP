@@ -3,13 +3,13 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-#include "RENDER/OBJECTSTATE8E.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "RENDER/PLAYER_CONTROLLER_RESET_VIEWS.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "TYPES.H"
 #include "gbi.h"
 #include "COMMON/GAMEPLAY_CAMERA.H"
-#include "COMMON/EXTERNS_15.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "COMMON/GAME_SESSION.H"
@@ -22,11 +22,11 @@
 #include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/EFFECTRENDER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/TRIPLE.H"
 #include "RENDER/PLAYERAI.H"
 #include "COMMON/GAMEPLAY_REACTION_RULES.H"
-#include "RENDER/802192C0_7.H"
+#include "RENDER/RENDER_FLOAT_QUAD_CONSTANTS.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/OBJRECV5.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
@@ -50,7 +50,7 @@
 
 extern Clip *Scene_GetPlatformRoute(char *, s32);
 
-void func_802192C0_de(Cursor *cursor) {
+void Playerai_AdvanceRouteCursor(Cursor *cursor) {
     Clip *clip;
     s32 frames;
     s32 state;
@@ -96,9 +96,9 @@ void func_802192C0_de(Cursor *cursor) {
     }
 }
 
-extern s16 Scene_FindNearestRouteFrame(char *arg0);
+extern s16 Scene_FindNearestRouteFrame(char *world);
 
-void func_802193C8_de(Struct802193C8 *cursorState, s8 initialState) {
+void Playerai_InitializeRouteCursor(Struct802193C8 *cursorState, s8 initialState) {
     cursorState->field0 = 1;
     cursorState->field1 = initialState;
     cursorState->field2 = Scene_FindNearestRouteFrame(&g_world);
@@ -107,16 +107,16 @@ void func_802193C8_de(Struct802193C8 *cursorState, s8 initialState) {
 
 extern void *Scene_GetPlatformRoutePoint(char *a, unsigned char b, short c);
 
-ApproachLocation *func_80219408_de(Cursor *cursor) {
+ApproachLocation *Playerai_GetRouteCursorPoint(Cursor *cursor) {
     return Scene_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->frame);
 }
 
-void *func_80219434_de(Cursor *cursor) {
+void *Playerai_GetRouteCursorNextPoint(Cursor *cursor) {
     return Scene_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->previous);
 }
 
 /** Initialize the compact state record to its default values. */
-void func_80219460_de(CompactAnimationState *record) {
+void Playerai_InitializeCompactAnimationState(CompactAnimationState *record) {
     record->active = 1;
     record->state = 0;
     record->cursor = 0;
@@ -124,7 +124,7 @@ void func_80219460_de(CompactAnimationState *record) {
     record->clip = -1;
 }
 
-void func_80219480_de(void *effect, void *player) {
+void Playerai_EmptyWeaponEffectHook(void *effect, void *player) {
     char pad[0x10];
 }
 
@@ -133,11 +133,11 @@ extern void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly,
 extern void TranslateMatrix(char *object, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(void *object);
 extern void CopyMatrix(f32 *destinationMatrix, f32 *sourceMatrix);
-extern void Graphu64_ScaleMatrixWorld(void *matrix, s32 arg1, f32 arg2, f32 arg3);
+extern void Graphu64_ScaleMatrixWorld(void *matrix, s32 sx, f32 scaleY, f32 scaleZ);
 extern void Graphu64_ConvertMatrixToFixed(void *src, void *dst);
-extern void Geometry_QueueDirectModel(s32 model, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern void Geometry_QueueDirectModel(s32 model, s32 transform, s32 lighting, s32 flags, s32 materialOverride);
 
-void func_80219490_de(char *object, char *camera) {
+void Playerai_DrawAnimatedSprite(char *object, char *camera) {
     f32 first[16];
     f32 second[16];
     s32 output[4];
@@ -166,7 +166,7 @@ void func_80219490_de(char *object, char *camera) {
     y = ((GameplayCamera *)(camera))->viewTop;
     z = ((GameplayCamera *)(camera))->viewHeight + y;
     w = ((GameplayCamera *)(camera))->viewWidth + x;
-    SetN64_ClearDepthRect(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
+    SetN64_ClearDepthRect(&g_gameSession, (s32)x, (s32)w, (s32)y, (s32)z, 0);
 
     Graphu64_BuildScaleMatrix(first, ((AnimationSprite *)(object))->scaleX,
                    ((AnimationSprite *)(object))->scaleY, ((AnimationSprite *)(object))->scaleZ);
@@ -178,18 +178,18 @@ void func_80219490_de(char *object, char *camera) {
 
     matrix = (char *)second;
     CopyMatrix(second, first);
-    if (D_800E28D8 == 2) {
-        Graphu64_ScaleMatrixWorld(matrix, D_800C94E8_de, D_800C22D0_de, D_800C22D0_de);
+    if (g_frontendCurrentVideoModeIndex == 2) {
+        Graphu64_ScaleMatrixWorld(matrix, g_playerAnimatedSpriteScaleX, g_playerAnimatedSpriteScaleYZ, g_playerAnimatedSpriteScaleYZ);
     }
     {
-        s32 offset = (D_800D297C << 6) + 0x10;
+        s32 offset = (g_lightingBufferIndex << 6) + 0x10;
         Graphu64_ConvertMatrixToFixed(matrix, object + offset);
     }
     Graphu64_TransformPoint(first, object + 0xA8, output);
     {
-        s32 offset = (D_800D297C << 6) + 0x10;
+        s32 offset = (g_lightingBufferIndex << 6) + 0x10;
         Geometry_QueueDirectModel(((AnimationSprite *)(object))->model, (s32)(object + offset),
-                       (s32)&D_800CBC90, 0, -1);
+                       (s32)&g_playerModelLighting, 0, -1);
     }
     Geometry_FlushModelBatch();
     Geometry_SetColorDither(0);
@@ -197,10 +197,10 @@ void func_80219490_de(char *object, char *camera) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char *D_800D3A40[], *D_800D3A44[], *D_800D3A48[], *D_800D3A54[];
+extern char *g_tagKillerMessage[], *g_tagVictimMessage[], *g_captureFlagKillerMessage[], *g_captureFlagKillerFollowupMessage[];
 static inline char *reactionText(void *text, MenuSettings *settings) { return ((char **)text)[settings->language]; }
 #else
-extern char *D_800D3A40, *D_800D3A44, *D_800D3A48, *D_800D3A54;
+extern char *g_tagKillerMessage, *g_tagVictimMessage, *g_captureFlagKillerMessage, *g_captureFlagKillerFollowupMessage;
 static inline char *reactionText(void *text, MenuSettings *settings) { return *(char **)text; }
 #endif
 extern void SetN64_CopyString(char *,const char *);
@@ -211,35 +211,35 @@ static inline void nextMessage(s32 *next) {
 }
 
 void Player_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,Shared_ReactionInteraction *unused) {
-    MenuSettings *settings = &D_80145088.settings;
+    MenuSettings *settings = &g_frontendScreenStatus.settings;
     MatchModes *modes;
     if (!settings->local) return;
     if (a!=b) {
-        if (!a->unk5D8->unk8F) return;
-        modes = &D_80145088.modes;
+        if (!a->statistics->isHuman) return;
+        modes = &g_frontendScreenStatus.modes;
         if (modes->tag) {
-            SetN64_CopyString(a->messages[a->messageNext], reactionText(&D_800D3A40, settings));
-            SetN64_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
-            if (a->owner) Gsky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            SetN64_CopyString(a->messages[a->messageNext], reactionText(&g_tagKillerMessage, settings));
+            SetN64_CopyString(a->messages[a->messageNext]+10, b->statistics->name);
+            if (a->owner) Gsky_PostScaledScreenMessage(&g_frontendScreenStatus,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
-            SetN64_CopyString(b->messages[b->messageNext], reactionText(&D_800D3A44, settings));
-            SetN64_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
-            if (b->owner) Gsky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            SetN64_CopyString(b->messages[b->messageNext], reactionText(&g_tagVictimMessage, settings));
+            SetN64_CopyString(b->messages[b->messageNext]+11, a->statistics->name);
+            if (b->owner) Gsky_PostScaledScreenMessage(&g_frontendScreenStatus,b->owner,b->messages[b->messageNext],1.5f);
         } else {
             if (!modes->captureFlag) return;
-            SetN64_CopyString(a->messages[a->messageNext], reactionText(&D_800D3A48, settings));
-            SetN64_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
-            if (a->owner) Gsky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            SetN64_CopyString(a->messages[a->messageNext], reactionText(&g_captureFlagKillerMessage, settings));
+            SetN64_CopyString(a->messages[a->messageNext]+10, b->statistics->name);
+            if (a->owner) Gsky_PostScaledScreenMessage(&g_frontendScreenStatus,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
-            SetN64_CopyString(a->messages[a->messageNext], reactionText(&D_800D3A54, settings));
-            if (a->owner) Gsky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            SetN64_CopyString(a->messages[a->messageNext], reactionText(&g_captureFlagKillerFollowupMessage, settings));
+            if (a->owner) Gsky_PostScaledScreenMessage(&g_frontendScreenStatus,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
-            SetN64_CopyString(b->messages[b->messageNext], reactionText(&D_800D3A44, settings));
-            SetN64_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
-            if (b->owner) Gsky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            SetN64_CopyString(b->messages[b->messageNext], reactionText(&g_tagVictimMessage, settings));
+            SetN64_CopyString(b->messages[b->messageNext]+11, a->statistics->name);
+            if (b->owner) Gsky_PostScaledScreenMessage(&g_frontendScreenStatus,b->owner,b->messages[b->messageNext],1.5f);
             nextMessage(&b->messageNext);
-            SetN64_CopyString(b->messages[b->messageNext], reactionText(&D_800D3A58, settings));
-            if (b->owner) Gsky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            SetN64_CopyString(b->messages[b->messageNext], reactionText(&g_captureFlagVictimFollowupMessage, settings));
+            if (b->owner) Gsky_PostScaledScreenMessage(&g_frontendScreenStatus,b->owner,b->messages[b->messageNext],1.5f);
         }
     }
     nextMessage(&b->messageNext);
@@ -252,18 +252,18 @@ void Player_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,S
 
 /* Reaction thresholds are loaded from the cartridge's shared float table. */
 void Playerai_ApplyStun(void *, f32);
-void func_80229FA0_de(void *, void *);
+void Playerai_CreditDamageSource(void *, void *);
 s32 Player_GetPlayerIndex(void *, unsigned int);
 s32 Player_GetMaxHealth(void *);
-int func_8022B178_de(void *);
+int Playerai_IsPlayerInactive(void *);
 void Particle_ReleaseOwnerListOneEffects(void *, s32);
 void * Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 s32 XPlus_NextRandomInteger(void);
 
-extern s32 D_8011D8D0;
-extern Shared_MatchRules D_801468A0[];
+extern s32 g_actorParticleEffectSystem;
+extern Shared_MatchRules g_matchRoundCounters[];
 
-void func_80219A40_de(struct Shared_ReactionActor *attacker, void *arg1, struct Shared_ReactionInteraction *packet) {
+void Playerai_ApplyDamagePacket(struct Shared_ReactionActor *attacker, void *damageState, struct Shared_ReactionInteraction *packet) {
     f32 facingSine;
     f32 sourceForwardProjection;
     f32 accumulatedStun;
@@ -316,10 +316,10 @@ void func_80219A40_de(struct Shared_ReactionActor *attacker, void *arg1, struct 
 
     creditedPlayer = 0;
     kind = -1;
-    if ((Cinema_IsSequenceInWindow() == 0) && (Cinema_IsSequenceActive() == 0) && !(D_801462C8.flags & 1)) {
-        damagedPlayer = attacker->unk1D8;
+    if ((Cinema_IsSequenceInWindow() == 0) && (Cinema_IsSequenceActive() == 0) && !(g_gameSettings.flags & 1)) {
+        damagedPlayer = attacker->player;
         sourceHandle = damagedPlayer->unk14;
-        wasAlive = damagedPlayer->unk5E4 > 0;
+        wasAlive = damagedPlayer->health > 0;
         if (sourceHandle == 0) {
             goto flag_clear;
         }
@@ -331,7 +331,7 @@ void func_80219A40_de(struct Shared_ReactionActor *attacker, void *arg1, struct 
                 break;
             }
             hasSpecialSourceFlag = 1;
-            if (sourceFlags->unk52 & 0x40) {
+            if (sourceFlags->flags52 & 0x40) {
                 goto flag_done;
             }
             break;
@@ -343,13 +343,13 @@ flag_done:
         if (hasSpecialSourceFlag != 0) {
             kind = 0x17;
         }
-        if (damagedPlayer->unk650 == 0x20) {
+        if (damagedPlayer->action == 0x20) {
             kind = 0x20;
         }
         if (packet != 0) {
             interactionObject = packet->unk0;
-            if ((interactionObject != 0) && (interactionObject->unk0 == 2)) {
-                interactionType = interactionObject->unk4;
+            if ((interactionObject != 0) && (interactionObject->category == 2)) {
+                interactionType = interactionObject->type;
                 if (interactionType == 0x432) {
                     goto block_45;
                 }
@@ -388,36 +388,36 @@ flag_done:
                 }
                 goto block_47;
 block_early_return:
-                if (damagedPlayer->unk5E4 > 0) {
+                if (damagedPlayer->health > 0) {
                     Playerai_ApplyStun(damagedPlayer, 2.5f);
                 }
                 return;
 block_33:
-                if (damagedPlayer->unk5E4 > 0) {
-                    accumulatedStun = damagedPlayer->unk11E0 + D_800C22D4_de[0];
-                    damagedPlayer->unk11E0 = accumulatedStun < D_800C22D8_de ? D_800C22D8_de : accumulatedStun;
+                if (damagedPlayer->health > 0) {
+                    accumulatedStun = damagedPlayer->stun + g_playerDamageStunIncrement[0];
+                    damagedPlayer->stun = accumulatedStun < g_playerMinimumAccumulatedStun ? g_playerMinimumAccumulatedStun : accumulatedStun;
 
                 }
-                packet->unk4 = 0x100;
+                packet->damage = 0x100;
                 goto block_46;
 block_38:
-                if (damagedPlayer->unk122C & 0x1000) {
-                    previousHealth = damagedPlayer->unk5E4;
+                if (damagedPlayer->reactionFlags & 0x1000) {
+                    previousHealth = damagedPlayer->health;
                     if (previousHealth <= 0) {
-                        packet->unk4 = 0;
+                        packet->damage = 0;
                     } else {
-                        healedHealth = previousHealth + packet->unk4;
+                        healedHealth = previousHealth + packet->damage;
                         clampedHealth = Player_GetMaxHealth(damagedPlayer);
                         if (healedHealth < clampedHealth) {
                             clampedHealth = healedHealth;
                         }
-                        damagedPlayer->unk5E4 = clampedHealth;
+                        damagedPlayer->health = clampedHealth;
                         goto block_45;
                     }
                 }
                 goto block_47;
 block_45:
-                packet->unk4 = 0;
+                packet->damage = 0;
                 goto block_46;
             } else {
 block_46:
@@ -425,48 +425,48 @@ block_46:
             }
         } else {
 block_47:
-            func_80229FA0_de(damagedPlayer, packet);
-            Player_ApplyPlayerDamage(damagedPlayer, attacker, packet->unk4, packet->unkC, kind);
+            Playerai_CreditDamageSource(damagedPlayer, packet);
+            Player_ApplyPlayerDamage(damagedPlayer, attacker, packet->damage, packet->damageFlags, kind);
 
             damageSource = packet->unk0;
             if (damageSource != 0) {
-                sourceKind = damageSource->unk0;
+                sourceKind = damageSource->kind;
                 if (sourceKind != 1) {
                     if (sourceKind == 2) {
-                        projectileOwner = damageSource->unk12C;
+                        projectileOwner = damageSource->projectileOwner;
                         reaction_source = damageSource;
                         if (projectileOwner != 0) {
-                            if (projectileOwner->unk0 == 1) {
-                                if (projectileOwner->unk100 & 0x300000) {
+                            if (projectileOwner->category == 1) {
+                                if (projectileOwner->flags & 0x300000) {
                                     creditedPlayer = projectileOwner;
-                                } else if (projectileOwner->unkE4 == 0x40C) {
-                                    creditedPlayer = projectileOwner->unk1D8;
+                                } else if (projectileOwner->type == 0x40C) {
+                                    creditedPlayer = projectileOwner->player;
                                 }
                             }
-                            projectileType = reaction_source->unk4;
-                            if (((projectileType == 0x3EB) || (projectileType == 0x416)) && (wasAlive != 0) && (func_8022B178_de(damagedPlayer) != 0)) {
-                                specialHitStatistics = (void *)creditedPlayer->unk5D8;
+                            projectileType = reaction_source->type;
+                            if (((projectileType == 0x3EB) || (projectileType == 0x416)) && (wasAlive != 0) && (Playerai_IsPlayerInactive(damagedPlayer) != 0)) {
+                                specialHitStatistics = (void *)creditedPlayer->statistics;
                                 specialHitStatistics->special_hits = (u16) (specialHitStatistics->special_hits + 1);
                             }
-                            facingSine = Gu_Sinf(attacker->unk6C);
-                            sourceForwardProjection = ((damagedPlayer->unk8 - reaction_source->unk8) * -facingSine) + ((damagedPlayer->unk10 - reaction_source->unk10) * -Math_Cosf(attacker->unk6C));
-                            if (sourceForwardProjection < D_800C22DC_de) {
+                            facingSine = Gu_Sinf(attacker->heading);
+                            sourceForwardProjection = ((damagedPlayer->unk8 - reaction_source->positionX) * -facingSine) + ((damagedPlayer->unk10 - reaction_source->positionZ) * -Math_Cosf(attacker->heading));
+                            if (sourceForwardProjection < g_playerDamageRearProjectionThreshold) {
 
-                                damagedPlayer->unk13C4 = 1;
-                            } else if (sourceForwardProjection > D_800C22E0_de) {
+                                damagedPlayer->hitDirection = 1;
+                            } else if (sourceForwardProjection > g_playerDamageFrontProjectionThreshold) {
 
-                                damagedPlayer->unk13C4 = 2;
+                                damagedPlayer->hitDirection = 2;
                             } else {
                                 goto block_69;
                             }
                         }
                     }
                 } else {
-                    if (damageSource->unk100 & 0x300000) {
-                        creditedPlayer = damageSource->unk1D8;
+                    if (damageSource->flags & 0x300000) {
+                        creditedPlayer = damageSource->player;
                     }
 block_69:
-                    damagedPlayer->unk13C4 = 0;
+                    damagedPlayer->hitDirection = 0;
                 }
             } else {
                 creditedPlayer = damagedPlayer;
@@ -477,8 +477,8 @@ block_69:
                     projectile_present = attributionSource != 0;
                     do {
                       if (!projectile_present) { break; }
-                      if (attributionSource->unk0 == 2) {
-                        hitCounterIndex = attributionSource->unk4;
+                      if (attributionSource->kind == 2) {
+                        hitCounterIndex = attributionSource->type;
                         switch (hitCounterIndex) {
                             case 0x404:
                             case 0x40F:
@@ -487,20 +487,20 @@ block_69:
                             case 0x427:
                                 goto block_87;
                             default:
-                                if (!(packet->unkC & 0x100000)) {
-                                    hitCounterIndex = creditedPlayer->unk5D4;
+                                if (!(packet->damageFlags & 0x100000)) {
+                                    hitCounterIndex = creditedPlayer->profileIndex;
                                     goto block_86;
                                 }
                                 goto block_87;
                         }
                     }
                     } while (0);
-                    if ((attributionSource != 0) && (attributionSource->unk0 == 1) && (attributionSource->unk100 & 0x300000)) {
-                        attributed_actor = attributionSource->unk1D8;
-                        if (!(packet->unkC & 0x100000)) {
-                            hitCounterIndex = attributed_actor->unk5D4;
+                    if ((attributionSource != 0) && (attributionSource->kind == 1) && (attributionSource->flags & 0x300000)) {
+                        attributed_actor = attributionSource->creditedPlayer;
+                        if (!(packet->damageFlags & 0x100000)) {
+                            hitCounterIndex = attributed_actor->profileIndex;
 block_86:
-                            ++D_800FEAE0[hitCounterIndex];
+                            ++g_playerHitCounts[hitCounterIndex];
 
                         }
                     }
@@ -509,60 +509,60 @@ block_86:
 block_87:
                 if (creditedPlayer != 0) {
 block_88:
-                    if ((creditedPlayer != damagedPlayer) && (damagedPlayer->unk1450 != 0)) {
-                        damagedPlayer->unk1454->unk328 = creditedPlayer;
-                        damagedPlayer->unk1454->unk324 = 0x1F4;
+                    if ((creditedPlayer != damagedPlayer) && (damagedPlayer->isBot != 0)) {
+                        damagedPlayer->botRecord->lastAttacker = creditedPlayer;
+                        damagedPlayer->botRecord->attackerMemoryTicks = 0x1F4;
                     }
-                    if ((creditedPlayer != 0) && (damagedPlayer->unk5E4 == 0)) {
-                        countedDeathStatistics = (void *)damagedPlayer->unk5D8;
+                    if ((creditedPlayer != 0) && (damagedPlayer->health == 0)) {
+                        countedDeathStatistics = (void *)damagedPlayer->statistics;
                         if (countedDeathStatistics->counted == 0) {
                             countedDeathStatistics->counted = 1U;
-                            killerPlayerIndex = Player_GetPlayerIndex(&D_80145040, (u32) creditedPlayer);
-                            victimKillStatistics = (void *)damagedPlayer->unk5D8;
-                            if ((victimKillStatistics->unk8F == 1) && ((((struct Shared_ReactionMatchState *)(&D_80145040))->unk18B4) != 0)) {
+                            killerPlayerIndex = Player_GetPlayerIndex(&g_playerViewRenderContext, (u32) creditedPlayer);
+                            victimKillStatistics = (void *)damagedPlayer->statistics;
+                            if ((victimKillStatistics->isHuman == 1) && ((((struct Shared_ReactionMatchState *)(&g_playerViewRenderContext))->flagModeEnabled) != 0)) {
                                 victimKillStatistics->kills_special[killerPlayerIndex]++;
                             } else {
-                                damagedPlayer->unk5D8->kills_normal[killerPlayerIndex]++;
+                                damagedPlayer->statistics->kills_normal[killerPlayerIndex]++;
                             }
-                            victimPlayerIndex = Player_GetPlayerIndex(&D_80145040, (u32) damagedPlayer);
-                            if ((damagedPlayer->unk5D8->unk8F == 1) && ((((struct Shared_ReactionMatchState *)(&D_80145040))->unk18B4) != 0)) {
-                                creditedPlayer->unk5D8->deaths_special[victimPlayerIndex]++;
+                            victimPlayerIndex = Player_GetPlayerIndex(&g_playerViewRenderContext, (u32) damagedPlayer);
+                            if ((damagedPlayer->statistics->isHuman == 1) && ((((struct Shared_ReactionMatchState *)(&g_playerViewRenderContext))->flagModeEnabled) != 0)) {
+                                creditedPlayer->statistics->deaths_special[victimPlayerIndex]++;
                             } else {
-                                creditedPlayer->unk5D8->deaths_normal[victimPlayerIndex]++;
+                                creditedPlayer->statistics->deaths_normal[victimPlayerIndex]++;
                             }
                             Player_PostKillMessages(damagedPlayer, creditedPlayer, packet);
                             if (creditedPlayer != 0) {
-                                previousKillHistoryCursor = creditedPlayer->unk1338;
+                                previousKillHistoryCursor = creditedPlayer->killHistoryIndex;
                                 nextKillHistoryCursor = previousKillHistoryCursor + 1;
                                 signedKillHistoryCursor = nextKillHistoryCursor;
                                 if (nextKillHistoryCursor < 0) {
                                     signedKillHistoryCursor = previousKillHistoryCursor + 8;
                                 }
                                 statisticsValue = nextKillHistoryCursor - ((signedKillHistoryCursor >> 3) * 8);
-                                creditedPlayer->unk1338 = statisticsValue;
-                                creditedPlayer->unk12CC[statisticsValue] = damagedPlayer;
-                                creditedPlayer->unk12F4[creditedPlayer->unk1338] = 0xFF;
+                                creditedPlayer->killHistoryIndex = statisticsValue;
+                                creditedPlayer->killHistory[statisticsValue] = damagedPlayer;
+                                creditedPlayer->killHistoryTimers[creditedPlayer->killHistoryIndex] = 0xFF;
                             }
                             if (damagedPlayer != 0) {
-                                damagedPlayer->unk12EC = creditedPlayer;
-                                damagedPlayer->unk12F0 = (s32) (XPlus_NextRandomInteger() % 7);
+                                damagedPlayer->lastKiller = creditedPlayer;
+                                damagedPlayer->deathReactionVariant = (s32) (XPlus_NextRandomInteger() % 7);
                             }
                             if (killerPlayerIndex == victimPlayerIndex) {
-                                suicideStatistics = (void *)damagedPlayer->unk5D8;
+                                suicideStatistics = (void *)damagedPlayer->statistics;
                                 suicideStatistics->deaths_self = (u16) (suicideStatistics->deaths_self + 1);
-                                suicideScoreStatistics = (void *)damagedPlayer->unk5D8;
+                                suicideScoreStatistics = (void *)damagedPlayer->statistics;
                                 statisticsValue = suicideScoreStatistics->score - 1;
                                 suicideScoreStatistics->score = (u16) statisticsValue;
-                                statisticsValue = D_801468C4;
+                                statisticsValue = g_teamScoringEnabled;
                                 if (statisticsValue != 0) {
-                                    suicideTeam = damagedPlayer->unk5D8->unk92;
+                                    suicideTeam = damagedPlayer->statistics->team;
 
                                     if (suicideTeam >= 0) {
                                         if (suicideTeam < 5) {
-                                            teamScoreSlot = &D_8014280C[suicideTeam];
+                                            teamScoreSlot = &g_teamScores[suicideTeam];
 
-                                            if (D_80146918 == 0) {
-                                                if (D_801468F4 != 0) {
+                                            if (g_resultReplayPending == 0) {
+                                                if (g_resultExitPending != 0) {
 
                                                 } else {
                                                     goto block_134;
@@ -572,28 +572,28 @@ block_88:
                                     }
                                 }
                             } else {
-                                victimDeathStatistics = (void *)damagedPlayer->unk5D8;
+                                victimDeathStatistics = (void *)damagedPlayer->statistics;
                                 victimDeathStatistics->deaths_other = (u16) (victimDeathStatistics->deaths_other + 1);
-                                actorStatisticsNode = Portal_FindSearchNode(&D_8013B364, damagedPlayer->unk1454->unk4);
-                                actorStatisticsNode->unk38 = (s32) (actorStatisticsNode->unk38 + 1);
-                                actorStatisticsNode = Portal_FindSearchNode(&D_8013B364, creditedPlayer->unk1454->unk4);
-                                actorStatisticsNode->unk3C = (s32) (actorStatisticsNode->unk3C + 1);
-                                if (damagedPlayer->unk5D8->unk8F == 1) {
-                                    if (D_801468A0->countRule != 0) {
-                                        specialKillStatistics = (void *)creditedPlayer->unk5D8;
+                                actorStatisticsNode = Portal_FindSearchNode(&g_navigationGraph, damagedPlayer->botRecord->unk4);
+                                actorStatisticsNode->primaryReactionCount = (s32) (actorStatisticsNode->primaryReactionCount + 1);
+                                actorStatisticsNode = Portal_FindSearchNode(&g_navigationGraph, creditedPlayer->botRecord->unk4);
+                                actorStatisticsNode->secondaryReactionCount = (s32) (actorStatisticsNode->secondaryReactionCount + 1);
+                                if (damagedPlayer->statistics->isHuman == 1) {
+                                    if (g_matchRoundCounters->countRule != 0) {
+                                        specialKillStatistics = (void *)creditedPlayer->statistics;
                                         creditedPlayer->unk12C4 = damagedPlayer;
                                         specialKillStatistics->special_kills = (u16) (specialKillStatistics->special_kills + 1);
-                                        specialScoreStatistics = (void *)creditedPlayer->unk5D8;
+                                        specialScoreStatistics = (void *)creditedPlayer->statistics;
                                         statisticsValue = specialScoreStatistics->score + 1;
                                         specialScoreStatistics->score = (u16) statisticsValue;
-                                        statisticsValue = D_801468C4;
+                                        statisticsValue = g_teamScoringEnabled;
                                         if (statisticsValue != 0) {
-                                            specialKillerTeam = creditedPlayer->unk5D8->unk92;
-                                            score_owner_6 = damagedPlayer->unk5D8->unk92;
+                                            specialKillerTeam = creditedPlayer->statistics->team;
+                                            score_owner_6 = damagedPlayer->statistics->team;
 
                                             if (specialKillerTeam >= 0) {
                                                 if (specialKillerTeam < 5) {
-                                                    first_score_slot = &D_8014280C[specialKillerTeam];
+                                                    first_score_slot = &g_teamScores[specialKillerTeam];
 
                                                     teamScoreSlot = first_score_slot;
                                                     if (score_owner_6 != specialKillerTeam) {
@@ -605,31 +605,31 @@ block_88:
                                                 }
                                             }
                                         }
-                                    } else if (D_801468A0->squads != 0) {
+                                    } else if (g_matchRoundCounters->squads != 0) {
                                         creditedPlayer->unk12C8 = damagedPlayer;
                                     } else {
                                         goto block_124;
                                     }
                                 } else {
 block_124:
-                                    if (D_801468C4 != 0) {
-                                        killerTeamStatistics = (void *)creditedPlayer->unk5D8;
-                                        if (killerTeamStatistics->unk92 == damagedPlayer->unk5D8->unk92) {
+                                    if (g_teamScoringEnabled != 0) {
+                                        killerTeamStatistics = (void *)creditedPlayer->statistics;
+                                        if (killerTeamStatistics->team == damagedPlayer->statistics->team) {
                                             killerTeamStatistics->score = (u16) (killerTeamStatistics->score - 1);
                                         } else {
                                             killerTeamStatistics->score = (u16) (killerTeamStatistics->score + 1);
                                         }
                                     } else {
-                                        killerScoreStatistics = (void *)creditedPlayer->unk5D8;
+                                        killerScoreStatistics = (void *)creditedPlayer->statistics;
                                         killerScoreStatistics->score = (u16) (killerScoreStatistics->score + 1);
                                     }
-                                    if (D_801468C4 != 0) {
-                                        killerTeam = creditedPlayer->unk5D8->unk92;
-                                        score_owner_8 = damagedPlayer->unk5D8->unk92;
+                                    if (g_teamScoringEnabled != 0) {
+                                        killerTeam = creditedPlayer->statistics->team;
+                                        score_owner_8 = damagedPlayer->statistics->team;
 
                                         if (killerTeam >= 0) {
                                             if (killerTeam < 5) {
-                                                teamScoreSlot = &D_8014280C[killerTeam];
+                                                teamScoreSlot = &g_teamScores[killerTeam];
 
                                                 if (score_owner_8 != killerTeam) {
                                                     *teamScoreSlot = *teamScoreSlot + 1;
@@ -644,8 +644,8 @@ block_134:
                                 }
                             }
 reaction_statistics_done:
-                            Particle_RetireOwnedActors(&D_8011D8D0, (s32) damagedPlayer);
-                            Particle_ReleaseOwnerListOneEffects(&D_8011D8D0, (s32) damagedPlayer);
+                            Particle_RetireOwnedActors(&g_actorParticleEffectSystem, (s32) damagedPlayer);
+                            Particle_ReleaseOwnerListOneEffects(&g_actorParticleEffectSystem, (s32) damagedPlayer);
                         }
                     }
                 }
@@ -667,76 +667,76 @@ void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 animationContext, Dra
         temporaryFlag = 1;
         if (player->flags & 0x8000) temporaryFlag = 0;
         else player->flags |= 0x8000;
-        D_800D15E4[0] = 0.0f;
-        D_800D15E0 = 3;
+        g_menuModelFillColor[0] = 0.0f;
+        g_menuModelFillEnabled = 3;
         if (player->flags & 0x4000) {
-            D_800D15E4[2] = 0.0f;
-            D_800D15E4[1] = 150.0f;
+            g_menuModelFillColor[2] = 0.0f;
+            g_menuModelFillColor[1] = 150.0f;
         } else {
-            D_800D15E4[1] = 0.0f;
-            D_800D15E4[2] = 150.0f;
+            g_menuModelFillColor[1] = 0.0f;
+            g_menuModelFillColor[2] = 150.0f;
         }
-        if (player->fixedAlpha) D_800D15E4[3] = 70.0f;
-        else D_800D15E4[3] = (u8)player->camera->fadeState;
-        D_800D15E4[4] = 128.0f;
-        if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
+        if (player->fixedAlpha) g_menuModelFillColor[3] = 70.0f;
+        else g_menuModelFillColor[3] = (u8)player->camera->fadeState;
+        g_menuModelFillColor[4] = 128.0f;
+        if (g_matchRoundCounters->countRule && player->controls->fragTagEnabled) actor->team = g_matchRoundCounters->teamColour;
         else actor->team = (u8)actor->definition->first;
-        Geometry_DrawActorModelParts(context->model, player, actor->fieldB4, 1,
-                       &actor->lighting[D_800D297C], 0, actor->field3);
-        D_800D15E0 = 0;
+        Geometry_DrawActorModelParts(context->model, player, actor->animationMatrices, 1,
+                       &actor->lighting[g_lightingBufferIndex], 0, actor->renderPass);
+        g_menuModelFillEnabled = 0;
         if (temporaryFlag) player->flags &= ~0x8000;
         if ((u32)(player->state - 0x11) < 2) return;
     if (player->state == 15) return;
-    if (player->controls->unk8F && D_80145088.modes.tag) return;
+    if (player->controls->fragTagEnabled && g_frontendScreenStatus.modes.tag) return;
     if (player->health == 0) return;
-    if (player->kind == D_800CE47C) return;
+    if (player->kind == g_fragTagModelId) return;
     if (player->flags & 0x20) return;
-    { s32 weaponModel = ((WeaponInfo *)D_800D052C[player->selectedWeapon])->model;
+    { s32 weaponModel = ((WeaponInfo *)g_weaponInfoByType[player->selectedWeapon])->model;
     model = weaponModel - 0x4B3;
     if (player->selectedWeapon >= 16) model = weaponModel - 0x4B5; }
         goto weapon;
     } else {
-        if (D_80145088.settings.local) {
-            if (player->controls->unk8F && D_80145088.modes.tag && player->health == 0) return;
-            if (D_80145088.settings.local && (player->hidden || player->kind == D_800C9228_de) &&
+        if (g_frontendScreenStatus.settings.local) {
+            if (player->controls->fragTagEnabled && g_frontendScreenStatus.modes.tag && player->health == 0) return;
+            if (g_frontendScreenStatus.settings.local && (player->hidden || player->kind == g_playerDeathEffectModelIds) &&
                 player->health == 0) return;
         }
         if (player->flags & 0x20) Player_DrawTintedPlayer(actor, animationContext, context);
         else {
-            if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
+            if (g_matchRoundCounters->countRule && player->controls->fragTagEnabled) actor->team = g_matchRoundCounters->teamColour;
             else actor->team = (u8)actor->definition->first;
-            Geometry_DrawActorModelParts(context->model, player, actor->fieldB4, 1,
-                           &actor->lighting[D_800D297C], 0, actor->field3);
+            Geometry_DrawActorModelParts(context->model, player, actor->animationMatrices, 1,
+                           &actor->lighting[g_lightingBufferIndex], 0, actor->renderPass);
             if (0.0f < player->opacity) {
-                Geometry_DrawTintedModelParts(context->model, player, actor->fieldB4, 1,
-                    &actor->lighting[D_800D297C], 0, actor->field3, player->red,
+                Geometry_DrawTintedModelParts(context->model, player, actor->animationMatrices, 1,
+                    &actor->lighting[g_lightingBufferIndex], 0, actor->renderPass, player->red,
                     player->green, player->blue, (s32)player->opacity & 255);
             }
         }
     }
     if ((u32)(player->state - 0x11) < 2) return;
     if (player->state == 15) return;
-    if (player->controls->unk8F && D_80145088.modes.tag) return;
+    if (player->controls->fragTagEnabled && g_frontendScreenStatus.modes.tag) return;
     if (player->health == 0) return;
-    if (player->kind == D_800CE47C) return;
+    if (player->kind == g_fragTagModelId) return;
     if (player->flags & 0x20) return;
-    model = ((WeaponInfo *)D_800D052C[player->selectedWeapon])->model;
+    model = ((WeaponInfo *)g_weaponInfoByType[player->selectedWeapon])->model;
     model -= 0x4B3;
     if (player->selectedWeapon >= 16) model -= 2;
 weapon:
     if (model >= 0) {
         resource = Gobjinst_RequestAnimatedModelVariant(actor, model);
         if (resource) {
-            Geometry_DrawModelResource(resource, actor->fieldB4, 1,
-                            &actor->lighting[D_800D297C], 0, actor->field3);
+            Geometry_DrawModelResource(resource, actor->animationMatrices, 1,
+                            &actor->lighting[g_lightingBufferIndex], 0, actor->renderPass);
             Cache_UnlockResource(0, resource);
         }
     }
 }
 
 /* 802192C0_3.CPP */
-extern char D_8010F328[];
-void func_8021A78C_de(void *playerObject) {
+extern char g_controllerProfiles[];
+void Playerai_InitializeMovementAndAim(void *playerObject) {
     char *object = playerObject;
     void *attributes;
     void *state = object + 0x688;
@@ -745,104 +745,104 @@ void func_8021A78C_de(void *playerObject) {
     f32 tail_value;
     CVector3 *tail_vector;
     s32 type;
-    if (((ObjectLinks16D8 *)(object))->unk_1450 != 0) {
-        attributes = D_8010EEB8;
+    if (((PlayerControllerReleaseView *)(object))->unk_1450 != 0) {
+        attributes = g_botControllerProfile;
     } else {
-        s32 index = ((ObjectLinks16D8 *)(object))->unk_5D4;
+        s32 index = ((PlayerControllerReleaseView *)(object))->unk_5D4;
         attributes = (void *)(index << 4);
         attributes = (char *)attributes + index;
         attributes = (void *)((s32)attributes << 3);
         attributes = (char *)attributes + index;
         attributes = (void *)((s32)attributes << 2);
-        attributes = D_8010F328 + (s32)attributes;
+        attributes = g_controllerProfiles + (s32)attributes;
     }
     ContPad_InitControllerInput(state, attributes);
-    ((ObjectLinks16D8 *)(object))->unk_6C0 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_6C4 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_6C8 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_6CC = 0;
-    ((ObjectLinks16D8 *)(object))->unk_6D0 = 1;
-    ((ObjectLinks16D8 *)(object))->unk_6D4 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_6D8 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_6DC = 0;
-    ((ObjectLinks16D8 *)(object))->unk_6E4 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_758 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_75C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_11B4 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_11B8 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_708 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_70C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_710 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_714 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_724 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_728 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_72C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_730 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_734 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_738 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_73C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_740 = Playerai_GetObjectOwnerHeight(object);
-    default_value = D_800C22F8_de;
-    ((ObjectLinks16D8 *)(object))->unk_744 = 0;
-    (&((ObjectLinks16D8 *)(object))->unk_748)->x = (&((ObjectLinks16D8 *)(object))->unk_748)->y = (&((ObjectLinks16D8 *)(object))->unk_748)->z = 0;
-    ((ObjectLinks16D8 *)(object))->unk_754 = default_value;
-    ((ObjectLinks16D8 *)(object))->unk_780 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_784 = default_value;
-    ((ObjectLinks16D8 *)(object))->unk_6E8 = ((ObjectLinks16D8 *)(object))->unk_8;
-    ((ObjectLinks16D8 *)(object))->unk_6F8 = ((ObjectLinks16D8 *)(object))->unk_8;
-    ((ObjectLinks16D8 *)(object))->unk_658 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_668 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_66C = 0;
-    if (((ObjectLinks16D8 *)(object))->unk_18.v0 != 0) {
-        ((ObjectLinks16D8 *)(object))->unk_6F4.v0 = ((struct ModelBlend *) ((ObjectLinks16D8 *) object)->unk_18.v1)->height;
+    ((PlayerControllerReleaseView *)(object))->unk_6C0 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_6C4 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_6C8 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_6CC = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_6D0 = 1;
+    ((PlayerControllerReleaseView *)(object))->unk_6D4 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_6D8 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_6DC = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_6E4 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_758 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_75C = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_11B4 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_11B8 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_708 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_70C = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_710 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_714 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_724 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_728 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_72C = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_730 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_734 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_738 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_73C = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_740 = Playerai_GetObjectOwnerHeight(object);
+    default_value = g_playerInitialMotionScale;
+    ((PlayerControllerReleaseView *)(object))->unk_744 = 0;
+    (&((PlayerControllerReleaseView *)(object))->unk_748)->x = (&((PlayerControllerReleaseView *)(object))->unk_748)->y = (&((PlayerControllerReleaseView *)(object))->unk_748)->z = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_754 = default_value;
+    ((PlayerControllerReleaseView *)(object))->unk_780 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_784 = default_value;
+    ((PlayerControllerReleaseView *)(object))->unk_6E8 = ((PlayerControllerReleaseView *)(object))->unk_8;
+    ((PlayerControllerReleaseView *)(object))->unk_6F8 = ((PlayerControllerReleaseView *)(object))->unk_8;
+    ((PlayerControllerReleaseView *)(object))->unk_658 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_668 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_66C = 0;
+    if (((PlayerControllerReleaseView *)(object))->unk_18.v0 != 0) {
+        ((PlayerControllerReleaseView *)(object))->unk_6F4.v0 = ((struct ModelBlend *) ((PlayerControllerReleaseView *) object)->unk_18.v1)->height;
     } else {
-        ((ObjectLinks16D8 *)(object))->unk_6F4.v1 = 0;
+        ((PlayerControllerReleaseView *)(object))->unk_6F4.v1 = 0;
     }
-    tail_vector = &((ObjectLinks16D8 *)(object))->unk_7D8;
-    ((ObjectLinks16D8 *)(object))->unk_7B0.v0 = 0;
-    zero = ((ObjectLinks16D8 *)(object))->unk_7B0.v1;
-    tail_value = D_800C22FC_de;
+    tail_vector = &((PlayerControllerReleaseView *)(object))->unk_7D8;
+    ((PlayerControllerReleaseView *)(object))->unk_7B0.v0 = 0;
+    zero = ((PlayerControllerReleaseView *)(object))->unk_7B0.v1;
+    tail_value = g_playerInitialAimScale;
     type = 2;
-    ((ObjectLinks16D8 *)(object))->unk_718 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_71C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_720 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_7EC = 0;
-    ((ObjectLinks16D8 *)(object))->unk_7F0 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_7E8 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_788 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_78C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_790 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_794 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_798 = -1;
-    ((ObjectLinks16D8 *)(object))->unk_79C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_7A0 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_7A4 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_7A8 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_7AC = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_718 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_71C = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_720 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_7EC = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_7F0 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_7E8 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_788 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_78C = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_790 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_794 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_798 = -1;
+    ((PlayerControllerReleaseView *)(object))->unk_79C = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_7A0 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_7A4 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_7A8 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_7AC = 0;
     tail_vector->x = tail_vector->y = tail_vector->z = zero;
-    ((ObjectLinks16D8 *)(object))->unk_7E4 = tail_value;
-    ((ObjectLinks16D8 *)(object))->unk_7B4 = 0;
-    ((ObjectLinks16D8 *)(object))->unk_7B8 = -1;
-    ((ObjectLinks16D8 *)(object))->unk_7C0 = zero;
-    ((ObjectLinks16D8 *)(object))->unk_7C4 = zero;
-    ((ObjectLinks16D8 *)(object))->unk_7C8 = zero;
-    ((ObjectLinks16D8 *)(object))->unk_7CC = zero;
-    ((ObjectLinks16D8 *)(object))->unk_7D0 = zero;
-    ((ObjectLinks16D8 *)(object))->unk_7D4 = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_7E4 = tail_value;
+    ((PlayerControllerReleaseView *)(object))->unk_7B4 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_7B8 = -1;
+    ((PlayerControllerReleaseView *)(object))->unk_7C0 = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_7C4 = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_7C8 = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_7CC = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_7D0 = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_7D4 = zero;
     Player_SetPlayerState(object, object, type);
-    ((ObjectLinks16D8 *)(object))->unk_80C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_838 = zero;
-    ((ObjectLinks16D8 *)(object))->unk_83C = zero;
-    ((ObjectLinks16D8 *)(object))->unk_840 = zero;
-    ((ObjectLinks16D8 *)(object))->unk_848 = 0;
-    ((struct ObjectState8E *) ((ObjectLinks16D8 *) object)->unk_5D8)->state = 0;
-    ((ObjectLinks16D8 *)(object))->unk_704 = zero;
-    ((ObjectLinks16D8 *)(object))->unk_16D4 = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_80C = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_838 = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_83C = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_840 = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_848 = 0;
+    ((struct PlayerControllerResetStateView *) ((PlayerControllerReleaseView *) object)->unk_5D8)->state = 0;
+    ((PlayerControllerReleaseView *)(object))->unk_704 = zero;
+    ((PlayerControllerReleaseView *)(object))->unk_16D4 = 0;
 }
 
-extern s32 D_80140FF8;
-CQuatern func_8024796C_de(void *actor);
-s16 *func_8022AA9C_de(AimPlayer *aimPlayer, s32 weaponId);
+extern s32 g_playerWeaponClassMode;
+CQuatern Gobjinst_BuildActorAimQuaternion(void *actor);
+s16 *Playerai_GetWeaponFireMode(AimPlayer *aimPlayer, s32 weaponId);
 void Player_GetPlayerViewTranslation(void *player, f32 *origin);
 s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 followTarget, s32 kind, CVector3 inheritedVelocity, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 requestedMode, s32 spawnFlags);
 
@@ -855,7 +855,7 @@ static __inline__ s32 containsFire(s16 **entries,s32 effect) {
  if(i<3) goto search;
  return 0;
 }
-void func_8021A9A4_de(AimPlayer *aimPlayer, s32 effect) {
+void Playerai_DispatchWeaponFireEffect(AimPlayer *aimPlayer, s32 effect) {
 
     AimView *weapon;
     s16 *mode;
@@ -868,35 +868,35 @@ void func_8021A9A4_de(AimPlayer *aimPlayer, s32 effect) {
     s16 *ammo;
     weapon = aimPlayer->view;
     if (aimPlayer->state < 2 || (s16)aimPlayer->state == 0x10 || (s16)aimPlayer->state == 0x11) return;
-    aim = func_8024796C_de(aimPlayer);
+    aim = Gobjinst_BuildActorAimQuaternion(aimPlayer);
     if (effect == 0x439 || effect == 0x4C4 || effect == 0x432 || effect == 0x4E3 ||
-        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) aimPlayer->unk594 = 2;
-    mode = func_8022AA9C_de(aimPlayer, aimPlayer->unk62E);
+        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) aimPlayer->weaponActionMode = 2;
+    mode = Playerai_GetWeaponFireMode(aimPlayer, aimPlayer->selectedWeapon);
     if (effect == 0x439 || effect == 0x4C4 || effect == 0x432 || effect == 0x4E3 ||
-        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) aimPlayer->unk594 = 1;
+        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) aimPlayer->weaponActionMode = 1;
     if (mode) {
-        WeaponInfo *table = D_800D052C[aimPlayer->unk62E];
-        if (!aimPlayer->controlled && D_80140FF8 == 1) entries=&table->weaponClass;
+        WeaponInfo *table = g_weaponInfoByType[aimPlayer->selectedWeapon];
+        if (!aimPlayer->controlled && g_playerWeaponClassMode == 1) entries=&table->weaponClass;
         else entries=table->computerClasses;
         if (containsFire(entries,effect)) goto fire;
     }
-    if (aimPlayer->unk62E != 0 && aimPlayer->unk62E != 0x10) goto spawn;
+    if (aimPlayer->selectedWeapon != 0 && aimPlayer->selectedWeapon != 0x10) goto spawn;
 fire:
     if (weapon) aim = aimPlayer->rotation;
-    if (aimPlayer->unk62E != 0 && aimPlayer->unk62E != 0x10) {
+    if (aimPlayer->selectedWeapon != 0 && aimPlayer->selectedWeapon != 0x10) {
         ammo = &aimPlayer->ammo[mode[0]];
         *ammo -= (u16)mode[3];
         if (*ammo < 0) *ammo = 0;
         if (*ammo == 0) {
-            if (aimPlayer->weapons[aimPlayer->unk62E][1] == 3 || aimPlayer->weapons[aimPlayer->unk62E][1] == 7) {
-                aimPlayer->weapons[aimPlayer->unk62E][0] = 0;
-                aimPlayer->weapons[aimPlayer->unk62E][1] = -1;
+            if (aimPlayer->weapons[aimPlayer->selectedWeapon][1] == 3 || aimPlayer->weapons[aimPlayer->selectedWeapon][1] == 7) {
+                aimPlayer->weapons[aimPlayer->selectedWeapon][0] = 0;
+                aimPlayer->weapons[aimPlayer->selectedWeapon][1] = -1;
             }
         }
     }
     if (aimPlayer->equippedKind == 0x11) {
-        if (aimPlayer->animation == 0x1004) {timer=aimPlayer->animationTimer; amount = D_800C2318_de;}
-        else if (aimPlayer->animation == 4000) {timer=aimPlayer->animationTimer; amount = D_800C231C_de;}
+        if (aimPlayer->animation == 0x1004) {timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1004Duration;}
+        else if (aimPlayer->animation == 4000) {timer=aimPlayer->animationTimer; amount = g_playerWeaponFireFA0Duration;}
         else {
             if (aimPlayer->weaponKind == 8) aimPlayer->animation = 0x1004;
             else aimPlayer->animation = 4000;
@@ -905,33 +905,33 @@ fire:
         goto consume;
     }
     if (aimPlayer->animation == 1) aimPlayer->animation = 0x1130;
-    else if (aimPlayer->animation == 0x1130) { timer=aimPlayer->animationTimer; amount = D_800C2320_de; goto consume; }
+    else if (aimPlayer->animation == 0x1130) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1130Duration; goto consume; }
     else if (aimPlayer->animation == 0xA28) aimPlayer->animation = 0x1135;
-    else if (aimPlayer->animation == 0x1135) { timer=aimPlayer->animationTimer; amount = D_800C2324_de; goto consume; }
+    else if (aimPlayer->animation == 0x1135) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1135Duration; goto consume; }
     else if (aimPlayer->animation == 0x14) aimPlayer->animation = 0x1144;
-    else if (aimPlayer->animation == 0x1144) { timer=aimPlayer->animationTimer; amount = D_800C2328_de; goto consume; }
-    else if (aimPlayer->unk62E == 0 && aimPlayer->weaponKind == 8) aimPlayer->animation = 0x5E5E;
+    else if (aimPlayer->animation == 0x1144) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1144Duration; goto consume; }
+    else if (aimPlayer->selectedWeapon == 0 && aimPlayer->weaponKind == 8) aimPlayer->animation = 0x5E5E;
     else {
-            if (aimPlayer->animation == 0x5E5E) { timer=aimPlayer->animationTimer; amount = D_800C232C_de; goto consume; }
+            if (aimPlayer->animation == 0x5E5E) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire5E5EDuration; goto consume; }
         if ((u32)(aimPlayer->animation - 0x5E24) < 3) aimPlayer->animation = 0x5E56;
-        else if (aimPlayer->animation == 0x5E56) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+        else if (aimPlayer->animation == 0x5E56) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
         else if (aimPlayer->animation == 0x5E29) aimPlayer->animation = 0x5E59;
-        else if (aimPlayer->animation == 0x5E59) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+        else if (aimPlayer->animation == 0x5E59) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
         else if (aimPlayer->animation == 0x5E2A) aimPlayer->animation = 0x5E5A;
-        else if (aimPlayer->animation == 0x5E5A) { timer=aimPlayer->animationTimer; amount = D_800C2330_de; goto consume; }
+        else if (aimPlayer->animation == 0x5E5A) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire5E5ADuration; goto consume; }
         else if (aimPlayer->animation == 0x5E2B) aimPlayer->animation = 0x5E5B;
-        else if (aimPlayer->animation == 0x5E5B) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+        else if (aimPlayer->animation == 0x5E5B) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
         else if (aimPlayer->animation == 0x5E2C) aimPlayer->animation = 0x5E5C;
         else {
-                    if (aimPlayer->animation == 0x5E5C) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+                    if (aimPlayer->animation == 0x5E5C) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
             if (aimPlayer->animation == 0x5E2D) aimPlayer->animation = 0x5E5D;
-            else if (aimPlayer->animation == 0x5E5D) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+            else if (aimPlayer->animation == 0x5E5D) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
             else { aimPlayer->firing = 0; goto spawn; }
         }
     }
     goto clear;
 ordinary:
-    timer=aimPlayer->animationTimer; amount = D_800C2334_de;
+    timer=aimPlayer->animationTimer; amount = g_playerWeaponFireDefaultDuration;
 consume:
     if (!(amount <= timer)) { aimPlayer->firing = 0; goto spawn; }
     aimPlayer->animationTimer = timer-amount;
@@ -942,16 +942,16 @@ spawn:
     else Player_GetPlayerViewTranslation(aimPlayer, &direction.x);
     position = aimPlayer->position;
     extra = 0;
-    if (aimPlayer->unk788 == 2) extra = aimPlayer->unk794;
-    Particle_SpawnEffectGroup(&D_8011D8D0, aimPlayer, aimPlayer, 0, extra, effect, position, aim,
+    if (aimPlayer->lockState == 2) extra = aimPlayer->lockedTarget;
+    Particle_SpawnEffectGroup(&g_actorParticleEffectSystem, aimPlayer, aimPlayer, 0, extra, effect, position, aim,
                      direction, &aimPlayer->aim, -1, (aimPlayer->movementFlags&0x1000)?5:1);
     if (effect == 0x414 || effect == 0x42D) {
         s32 shots = aimPlayer->shots - 1;
         if (shots < 0) shots = 0;
         aimPlayer->shots = shots;
     }
-    if (aimPlayer->unk62E != 9 && aimPlayer->unk62E != 0x15 && aimPlayer->unk62E != 0x14)
-        D_800FF140_de[aimPlayer->playerIndex]++;
+    if (aimPlayer->selectedWeapon != 9 && aimPlayer->selectedWeapon != 0x15 && aimPlayer->selectedWeapon != 0x14)
+        g_playerCountedShots[aimPlayer->playerIndex]++;
 }
 
 /* Resets a player record for a new round: clears the ammo and the 22 action slots, marks every action but the first
@@ -975,15 +975,15 @@ void Player_ResetPlayerWeapons(struct Player *player) {
     for (i = 21; i >= 0; i--) {
         player->actions[i][0] = 0;
     }
-    game = &D_801462C8;
+    game = &g_gameSettings;
     if (game->local == 1 && player->definition != 0) {
-        if (game->unk62C == 0 || player->profile->bonus == 0) {
+        if (game->fragTagEnabled == 0 || player->profile->bonus == 0) {
             for (j = 1; j < 22; j++) {
                 player->actions[j][0] = 0;
                 player->actions[j][1] = -1;
             }
         }
-        switch (D_801462C8.controllerMode) {
+        switch (g_gameSettings.controllerMode) {
         case 1:
             Achieve_ApplyProfileWeaponUnlocks(player);
             break;
@@ -1015,7 +1015,7 @@ void Player_ResetPlayerWeapons(struct Player *player) {
         player->selectedAction = 17;
         player->queuedAction = 17;
         player->lastAction = 17;
-    } else if (D_801462C8.counters.m_bFragTagOn != 0 && player->profile->bonus != 0) {
+    } else if (g_gameSettings.counters.m_bFragTagOn != 0 && player->profile->bonus != 0) {
         player->selectedAction = 0;
         player->weapon = 0;
         player->queuedAction = 0;
@@ -1047,15 +1047,15 @@ void Player_ResetPlayerWeapons(struct Player *player) {
         player->queuedAction = player->selectedAction;
         player->lastAction = player->selectedAction;
     }
-    if (D_80145088.settings.local != 0) {
-        weaponInfo = D_800D052C[player->weapon];
+    if (g_frontendScreenStatus.settings.local != 0) {
+        weaponInfo = g_weaponInfoByType[player->weapon];
         player->weaponAnimationTable = weaponInfo->animation;
-        weaponInfo = D_800D052C[player->selectedAction];
+        weaponInfo = g_weaponInfoByType[player->selectedAction];
         player->weaponAnimationCount = weaponInfo->animationCount;
     }
 }
 
-extern s32 D_801371D4;
+extern s32 g_activeLinkSequenceId;
 extern void Player_ReleaseObjectHandles(void *);
 extern void Scene_SetSelection(void *, s32, s32);
 extern f32 Graphu64_GetPointDistance(void *, void *);
@@ -1086,13 +1086,13 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         ((Shared_ActorView *)player)->field864 = 0;
         ((Shared_ActorView *)player)->field868 = 0;
     }
-    if (D_80145088.settings.local) {
+    if (g_frontendScreenStatus.settings.local) {
         count = Scene_FindPlacedObjectsByKey(world, -1, model, points, 32);
         best = -1;
         bestDistance = 0.0f;
         for (i = 0; i < count; i++) {
-            distance = D_800C2340_de;
-            for (other = D_80145060.actorList; other; other = other->next) {
+            distance = k_spawnNearestPlayerInitialDistance;
+            for (other = g_transientPlayerList.actorList; other; other = other->next) {
                 f32 d = Graphu64_GetPointDistance(&points[i].pos, &other->position.vector);
                 if (d < distance) distance = d;
             }
@@ -1104,7 +1104,7 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         if (best == -1) goto fallback;
         ((Shared_ActorView *)player)->weapon.position0 = points[best].pos;
         ((Shared_ActorView *)player)->position.vector = ((Shared_ActorView *)player)->weapon.position0;
-        ((LevelActor *)player)->yaw = ((Shared_ActorView *)player)->weapon.yaw = points[best].unkC;
+        ((LevelActor *)player)->yaw = ((Shared_ActorView *)player)->weapon.yaw = points[best].heading;
         floor = Scene_FindFloorPolygon(&g_world, &((Shared_ActorView *)player)->position.vector);
     } else {
         if (model != 0 && player != 0) {
@@ -1113,13 +1113,13 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         if (Scene_FindPlacedObjectsByKey(world, -1, model, &single, 1) == 0) {
             goto fallback;
         }
-        if (single.kind != D_801371D4) {
+        if (single.kind != g_activeLinkSequenceId) {
             Scene_SetSelection(world, model, scale);
             goto done;
         }
         ((Shared_ActorView *)player)->weapon.position0 = single.pos;
         ((Shared_ActorView *)player)->position.vector = ((Shared_ActorView *)player)->weapon.position0;
-        ((LevelActor *)player)->yaw = ((Shared_ActorView *)player)->weapon.yaw = single.unkC;
+        ((LevelActor *)player)->yaw = ((Shared_ActorView *)player)->weapon.yaw = single.heading;
         floor = Scene_GetModelSectionTwoRecord(world, single.pad12);
     }
     ((Shared_ActorView *)player)->weapon.model = floor;
@@ -1129,12 +1129,12 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
 fallback:
     Scene_SetSelection(&g_world, model, scale);
 done:
-    cell = Portal_FindNearestPointIndex(&D_8013B364, &((Shared_ActorView *)player)->position.vector);
+    cell = Portal_FindNearestPointIndex(&g_navigationGraph, &((Shared_ActorView *)player)->position.vector);
     ((AiController *)((Shared_ActorView *)player)->owner)->current = cell;
 }
 
 /* 800C73E8.CPP */
 /* ROM-grounded data: src/rw_pool_8021A78C_C7FE8_us_rev1.c */
-const unsigned int D_blob_87bff964910f8ef44402[2] = {
+const unsigned int g_PlayeraiInitializeMovementAndAimConstantWordsUsRev1[2] = {
     0x3F800000, 0x3F800000,
 };

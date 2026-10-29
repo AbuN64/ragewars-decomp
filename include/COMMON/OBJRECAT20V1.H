@@ -4,15 +4,15 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 
-struct ObjRecAt20V1;
-typedef struct ObjRecAt20V1 ObjRecAt20V1;
+struct RecordOutputFieldsView;
+typedef struct RecordOutputFieldsView RecordOutputFieldsView;
 
 
 
-extern void SetN64_SetFrameDirection(void *frame, void *arg1);
+extern void SetN64_SetFrameDirection(void *frame, void *direction);
 
 
-struct ObjRecAt20V1;
+struct RecordOutputFieldsView;
 
 extern void SetN64_OnFrameComplete(void *schedule);
 

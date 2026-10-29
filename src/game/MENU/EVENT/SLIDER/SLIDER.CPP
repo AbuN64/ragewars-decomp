@@ -7,7 +7,7 @@
 #include "MATH/MENU.H"
 
 /* Clamp the slider and handle range, value, step and parent notifications. */
-s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
+s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 value, s32 inputState) {
     s32 result;
     Slider *widget = slider;
 
@@ -21,7 +21,7 @@ s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
     switch (msg) {
         case 5:
         case 8:
-            if (arg3 != 0) {
+            if (inputState != 0) {
                 s32 v = widget->value + widget->step;
                 s32 hi = widget->max;
                 widget->value = v;
@@ -33,7 +33,7 @@ s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
 
         case 6:
         case 7:
-            if (arg3 != 0) {
+            if (inputState != 0) {
                 s32 v = widget->value - widget->step;
                 s32 lo = widget->min;
                 widget->value = v;
@@ -64,32 +64,32 @@ s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
             goto end;
 
         case 0x1005:
-            if (arg2 < widget->min) {
+            if (value < widget->min) {
                 goto post;
             }
-            if (widget->max < arg2) {
+            if (widget->max < value) {
                 goto post;
             }
-            widget->value = arg2;
+            widget->value = value;
             goto post;
 
         case 0x1004:
-            if (widget->min < arg2) {
-                widget->max = arg2;
+            if (widget->min < value) {
+                widget->max = value;
             }
-            if (arg3 < widget->max) {
-                widget->min = arg3;
+            if (inputState < widget->max) {
+                widget->min = inputState;
             }
             goto post;
 
         case 0x1007:
-            if (arg2 < (widget->max - widget->min)) {
-                widget->step = arg2;
+            if (value < (widget->max - widget->min)) {
+                widget->step = value;
             }
             goto post;
 
         case 0x1009:
-            widget->flags = arg2;
+            widget->flags = value;
             goto post;
 
         default:
@@ -109,5 +109,5 @@ end:
 #endif
 
 #if defined(VERSION_US)
-unsigned char D_auto_func_8040C780_us_padding_1709C8[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+unsigned char g_SliderTrailingBytes[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
 #endif

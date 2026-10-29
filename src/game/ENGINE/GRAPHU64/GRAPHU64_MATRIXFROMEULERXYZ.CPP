@@ -7,25 +7,25 @@
 
 extern f32 Gu_Sqrtf(f32);
 
-static __inline__ CVector3 project(CVector3 *arg0, CVector3 *arg1) {
+static __inline__ CVector3 project(CVector3 *vector, CVector3 *planeNormal) {
     CVector3 projected;
     f32 dot;
 
-    dot = (arg0->x * arg1->x) + (arg0->y * arg1->y) + (arg0->z * arg1->z);
-    projected.x = arg0->x - (dot * arg1->x);
-    projected.y = arg0->y - (dot * arg1->y);
-    projected.z = arg0->z - (dot * arg1->z);
+    dot = (vector->x * planeNormal->x) + (vector->y * planeNormal->y) + (vector->z * planeNormal->z);
+    projected.x = vector->x - (dot * planeNormal->x);
+    projected.y = vector->y - (dot * planeNormal->y);
+    projected.z = vector->z - (dot * planeNormal->z);
     return projected;
 }
 
 extern f32 Gu_Sqrtf(f32 value);
 
-CVector3 Graphu64_ProjectVectorPreservingLength(CVector3 *remaining, CVector3 *arg1) {
+CVector3 Graphu64_ProjectVectorPreservingLength(CVector3 *remaining, CVector3 *planeNormal) {
     CVector3 projected;
     f32 projectedMagnitude;
     f32 magnitudeRatio;
 
-    projected = project(remaining, arg1);
+    projected = project(remaining, planeNormal);
 
     projectedMagnitude = Gu_Sqrtf((projected.x * projected.x) +
                                        (projected.y * projected.y) +
@@ -86,13 +86,13 @@ f32 Graphu64_GetVerticalAngle(f32 *delta) {
         return zero;
     }
     ratio = y / Gu_Sqrtf(magnitude_squared);
-    if (ratio < *(&D_800C48B0_de + 1)) {
+    if (ratio < *(&g_vectorVerticalAngleLowerConstants + 1)) {
         return zero;
     }
-    if (D_800C48B8_de < ratio) {
+    if (g_vectorVerticalAngleUpperConstants < ratio) {
         goto return_zero;
     }
-    return Graphu64_ArcCos(ratio) - *(&D_800C48B8_de + 1);
+    return Graphu64_ArcCos(ratio) - *(&g_vectorVerticalAngleUpperConstants + 1);
 
 return_zero:
     return zero;
@@ -112,30 +112,30 @@ f32 Graphu64_GetPointDistance(f32 *a, f32 *b) {
     return Gu_Sqrtf((dx * dx) + (dy * dy) + (dz * dz));
 }
 
-void Graphu64_ClampMotionLength(CVector3 *motion, f32 arg1) {
+void Graphu64_ClampMotionLength(CVector3 *motion, f32 maximumLength) {
     f32 magSq;
     f32 mag;
     f32 scale;
 
     magSq = (motion->x * motion->x) + (motion->y * motion->y) + (motion->z * motion->z);
-    if ((arg1 * arg1) < magSq) {
+    if ((maximumLength * maximumLength) < magSq) {
         mag = Gu_Sqrtf(magSq);
-        scale = arg1 / mag;
+        scale = maximumLength / mag;
         motion->x = motion->x * scale;
         motion->y = motion->y * scale;
         motion->z = motion->z * scale;
     }
 }
 
-/** Reset the matrix to identity-diagonal * D_800C99B0, zeroing the rest. */
+/** Reset the matrix to identity-diagonal * g_identityAndFixedMatrixConstants, zeroing the rest. */
 void Graphu64_IdentityMatrix(void *matrixStorage) {
     Matrix *matrix = matrixStorage;
     f32 zero = 0.0f;
 
-    matrix->m[15] = D_800C99B0;
-    matrix->m[10] = D_800C99B0;
-    matrix->m[5] = D_800C99B0;
-    matrix->m[0] = D_800C99B0;
+    matrix->m[15] = g_identityAndFixedMatrixConstants;
+    matrix->m[10] = g_identityAndFixedMatrixConstants;
+    matrix->m[5] = g_identityAndFixedMatrixConstants;
+    matrix->m[0] = g_identityAndFixedMatrixConstants;
     matrix->m[14] = zero;
     matrix->m[13] = zero;
     matrix->m[12] = zero;
@@ -159,8 +159,8 @@ void Graphu64_ClampMatrixToFixedRange(f32 *matrixComponents) {
     f32 maxVal;
     f32 minVal;
 
-    maxVal = *(&D_800C99B0 + 1);
-    minVal = D_800C48C8_de;
+    maxVal = *(&g_identityAndFixedMatrixConstants + 1);
+    minVal = g_matrixClampAndProjectionConstants;
     rowCursor = matrixComponents;
     j = 0;
     do {
@@ -239,7 +239,7 @@ void Graphu64_ProjectPoint(void *matrix, void *inputPoint, CVector3 *localDirect
         + (m->m[11] * v->z)
         + m->m[15];
     if (w != 0.0f) {
-        scale = *(&D_800C48C8_de + 1) / w;
+        scale = *(&g_matrixClampAndProjectionConstants + 1) / w;
         localDirection->x = localDirection->x * scale;
         localDirection->y = localDirection->y * scale;
         localDirection->z = localDirection->z * scale;
@@ -262,10 +262,10 @@ void Graphu64_TransformDirection(void *matrix, void *inputDirection, void *trans
                        + (m->m[10] * v->z);
 }
 
-void Graphu64_TransformDirectionTranspose(void *matrix, void *arg1, void *arg2) {
+void Graphu64_TransformDirectionTranspose(void *matrix, void *inputDirection, void *outputDirection) {
     Matrix *m = matrix;
-    CVector3 *v = arg1;
-    CVector3 *out = arg2;
+    CVector3 *v = inputDirection;
+    CVector3 *out = outputDirection;
 
     out->x = (m->m[0] * v->x)
                        + (m->m[1] * v->y)
@@ -280,7 +280,7 @@ void Graphu64_TransformDirectionTranspose(void *matrix, void *arg1, void *arg2) 
 
 void Graphu64_BuildTranslationMatrix(void *matrix, f32 translationX, f32 translationY, f32 translationZ) {
     Matrix *o = matrix;
-    f32 val = D_800C48D0_de;
+    f32 val = g_translationAndScaleMatrixUnitConstants;
     f32 zero = 0.0f;
 
     o->m[12] = translationX;
@@ -301,14 +301,14 @@ void Graphu64_BuildTranslationMatrix(void *matrix, f32 translationX, f32 transla
     o->m[1] = zero;
 }
 
-void Graphu64_BuildScaleMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
+void Graphu64_BuildScaleMatrix(void *matrix, f32 scaleX, f32 scaleY, f32 scaleZ) {
     Matrix *o = matrix;
-    f32 val = *(&D_800C48D0_de + 1);
+    f32 val = *(&g_translationAndScaleMatrixUnitConstants + 1);
     f32 zero = 0.0f;
 
-    o->m[0] = arg1;
-    o->m[5] = arg2;
-    o->m[10] = arg3;
+    o->m[0] = scaleX;
+    o->m[5] = scaleY;
+    o->m[10] = scaleZ;
     o->m[15] = val;
     o->m[14] = zero;
     o->m[13] = zero;
@@ -332,7 +332,7 @@ void Graphu64_BuildAxisAngleMatrix(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f3
     sine = Gu_Sinf(Theta);
     cosine = Math_Cosf(Theta);
 
-    one = D_800C48D8_de;
+    one = g_inverseAffineHomogeneousScale;
     t = one - cosine;
     ab = X * Y * t;
     bc = Y * Z * t;
@@ -368,11 +368,11 @@ void Graphu64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
   f32 bx = Math_Cosf(x);
   f32 ay = Gu_Sinf(y);
   f32 by = Math_Cosf(y);
-  int new_var;
+  int firstMatrixElement;
   f32 az = Gu_Sinf(z);
   f32 bz = Math_Cosf(z);
-  new_var = 0;
-  m[new_var] = by * bz;
+  firstMatrixElement = 0;
+  m[firstMatrixElement] = by * bz;
   m[1] = by * az;
   m[2] = -ay;
   zero = 0.0f;
@@ -388,7 +388,7 @@ void Graphu64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
   m[8] = ((bx * ay) * bz) + (ax * az);
   m[9] = ((bx * ay) * az) - (ax * bz);
   m[10] = bx * by;
-  m[15] = D_800C48DC_de;
+  m[15] = g_eulerMatrixHomogeneousScale;
 }
 
 /** Trivial busy-wait delay loop (no side effects). */

@@ -5,14 +5,14 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/STREAM.H"
-extern float D_800C41A0_de;
+extern float g_motionRotationQuantizationScale;
 
-extern double D_800C4190_de;
+extern double g_packedStreamUnsignedBias;
 
 
-extern float D_800C4198_de;
+extern float g_motionTranslationQuantizationScale;
 
-extern float D_8010AC70;
+extern float g_motionTrackFrameScale;
 
 struct LocalDecodeRange;
 
@@ -20,7 +20,7 @@ struct LocalDecodeRange;
 typedef struct LocalDecodeRange LocalDecodeRange;
 
 
-extern double D_800C4170_de;
+extern double g_packedScalarUnsignedBias;
 
 
 
@@ -44,12 +44,12 @@ typedef struct DecodeArray DecodeArray;
 extern void Bitarray_ExpandCurveSamples(char **stream, f32 *out, s32 frames);
 
 
-extern double D_800C4188_de;
+extern double g_packedRangeUnsignedBias;
 
 
 
-struct ObjRecAt4V4;
-typedef struct ObjRecAt4V4 ObjRecAt4V4;
+struct PolytrakWordAndTripleRecord;
+typedef struct PolytrakWordAndTripleRecord PolytrakWordAndTripleRecord;
 
 struct Pack;
 struct Pack {
@@ -57,7 +57,7 @@ struct Pack {
     s32 offsets[1];
 };
 
-extern double D_800C4180_de;
+extern double g_packedArrayUnsignedBias;
 
 struct Anim;
 struct Anim {
@@ -86,7 +86,7 @@ typedef struct Pack Pack;
 struct Entry802612C8;
 typedef struct Entry802612C8 Entry802612C8;
 
-extern float D_800C41A4_de;
+extern float g_motionRotationDecodeLimit;
 
 struct TrackBitarrayExpandCurveSamples;
 typedef struct TrackBitarrayExpandCurveSamples TrackBitarrayExpandCurveSamples;
@@ -95,7 +95,7 @@ typedef struct TrackBitarrayExpandCurveSamples TrackBitarrayExpandCurveSamples;
 
 
 
-struct ObjRecAt4V4;
+struct PolytrakWordAndTripleRecord;
 
 
 typedef struct CGameAnimateState_t {
@@ -105,5 +105,5 @@ typedef struct CGameAnimateState_t {
     char padc[4]; void *resource;
 } CGameAnimateState_t;
 extern f32 Graphu64_InterpolateWrappedValue(f32,f32,f32);
-extern s32 func_802625C4_de(void *);
+extern s32 Gastate_GetAnimationEventCount(void *);
 #endif

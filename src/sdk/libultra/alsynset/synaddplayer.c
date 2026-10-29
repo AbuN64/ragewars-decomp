@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "sdk/libultra/audio/synthesizer.h"
 
-s32 func_802BD170_de(s32);
+s32 osSetIntMask(s32);
 
 /* alSynAllocVoice, drafted from ultralib src/audio/synallocvoice.c: initialises a virtual voice from
    its config and binds it to a physical voice; a stolen physical voice is ramped to silence and
@@ -32,11 +32,11 @@ extern s32 _allocatePVoice(AudioSynthVoiceAllocatorView *, AudioAllocatedPhysica
 
 void alSynAddPlayer(void *synth, void *audioPlayer) {
     s32 savedInterruptMask;
-    savedInterruptMask = func_802BD170_de(1);
+    savedInterruptMask = osSetIntMask(1);
     (((ALPlayer_s14 *)audioPlayer)->samplesLeft) = (s32) (((ALSynth4C *)synth)->curSamples);
     (((ALPlayer_s14 *)audioPlayer)->next) = (((ALSynth4C *)synth)->head);
     (((ALSynth4C *)synth)->head) = (ALPlayer_s14 *)audioPlayer;
-    func_802BD170_de(savedInterruptMask);
+    osSetIntMask(savedInterruptMask);
 }
 
                  /* __allocParam */

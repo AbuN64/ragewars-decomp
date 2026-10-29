@@ -26,10 +26,10 @@ struct OptionEditState {
 };
 
 struct OptionEditContext;
-struct Shape_typemap_13;
+struct ActorAnimationEventTable;
 struct OptionEditContext {
     char pad0[0x8];
-    struct Shape_typemap_13 unk_8;
+    struct ActorAnimationEventTable unk_8;
 };
 
 
@@ -55,25 +55,25 @@ s32 Pak_FormatMusicPreview(struct LayeredText *field);
 s32 Pak_UpdateThirdVolumeLabel(struct LayeredText *field);
 #endif
 
-extern u8 *D_800D3D8C;
-extern u8 *D_800D3D90;
-extern u8 *D_800D3D94;
-extern u8 *D_800E4084[];
-extern u8 *D_800E4094[];
-extern u8 *D_800E40A4[];
-extern char D_800EEE10[];
-extern char D_800EEE18[];
+extern u8 *g_volumeZeroMinimumLabelFixed;
+extern u8 *g_volumeZeroMaximumLabelFixed;
+extern u8 *g_volumeZeroNeutralLabelFixed;
+extern u8 *g_volumeZeroMinimumLabels[];
+extern u8 *g_volumeZeroMaximumLabels[];
+extern u8 *g_volumeZeroNeutralLabels[];
+extern char g_volumePositiveStepFormat[];
+extern char g_volumeNegativeStepFormat[];
 extern char g_pakFormatSpacedInt2[];
 extern char g_pakFormatSpacedInt3[];
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char *D_800D7DC8[];
-extern char *D_800D7DCC[];
-extern char *D_800D7DD0[];
+extern char *g_volumeOneMinimumLabel[];
+extern char *g_volumeOneMaximumLabel[];
+extern char *g_volumeOneNeutralLabel[];
 #else
-extern char *D_800D7DC8;
-extern char *D_800D7DCC;
-extern char *D_800D7DD0;
+extern char *g_volumeOneMinimumLabel;
+extern char *g_volumeOneMaximumLabel;
+extern char *g_volumeOneNeutralLabel;
 #endif
 
 extern u8 *D_800D3DBC;
@@ -82,9 +82,9 @@ extern char D_800DE7B0_de[];
 
 extern u8 *D_800D3624;
 
-extern u8 *D_800D7DD8;
-extern u8 *D_800D3DB0;
-extern u8 *D_800D3DB4;
+extern u8 *g_volumeTwoMinimumLabel;
+extern u8 *g_volumeTwoMaximumLabel;
+extern u8 *g_volumeTwoNeutralLabel;
 
 s32 Control_IsStartPressed(Shared_Effect *);
 #endif

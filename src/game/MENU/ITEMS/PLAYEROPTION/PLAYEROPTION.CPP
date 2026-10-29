@@ -2,7 +2,7 @@
 #include "MENU/HOLDERRECAT1CV2.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "FRONTEND/SCREEN_VIDEO_MODE.H"
 #include "SYSTEM/DEFS.H"
@@ -13,7 +13,7 @@
 
 extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
-/* Replaces the byte at offset 0x79 of the second argument's owner settings (or the defaults D_80146302) with what Menu_AdjustValue returns for the second argument, that byte, 8, 8, 0xF8 and 0, and returns zero. */
+/* Replaces the byte at offset 0x79 of the second argument's owner settings (or the defaults g_playerPartnerNameFallback) with what Menu_AdjustValue returns for the second argument, that byte, 8, 8, 0xF8 and 0, and returns zero. */
 
 
 
@@ -23,21 +23,21 @@ extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-extern struct MenuSettings D_801462C8;
+extern struct MenuSettings g_gameSettings;
 
 #if defined(VERSION_EU)
-/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults D_80146302) as a signed offset from 128 in steps of eight, using the text D_800D35F8 for zero and otherwise the text D_800E2244 formatted with D_800DE758_de for a positive or D_800EEDE0 for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
+/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playeroptionText_800D35F8 for zero and otherwise the text g_playeroptionText_800E2244 formatted with g_playerMenuStepFormatGerman for a positive or g_playerMenuStepFormat for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
 #elif defined(VERSION_EU_X)
-/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults D_80146302) as a signed offset from 128 in steps of eight, using the text D_800D35F8 for zero and otherwise the text D_800DDC28 formatted with D_800DE758_de for a positive or D_800EEDE0 for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
+/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playeroptionText_800D35F8 for zero and otherwise the text g_playeroptionText_800DDC28 formatted with g_playerMenuStepFormatGerman for a positive or g_playerMenuStepFormat for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
 #else
-/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults D_80146302) as a signed offset from 128 in steps of eight, using the text D_800D35F8 for zero and otherwise the text D_800D35FC_de formatted with D_800DE758_de for a positive or D_800DE760 for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
+/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playeroptionText_800D35F8 for zero and otherwise the text g_playeroptionText_800D35FC formatted with g_playerMenuStepFormatGerman for a positive or D_800DE760 for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
 #endif
 
 
 #if defined(VERSION_EU)
-extern char *D_800E2244;
+extern char *g_playeroptionText_800E2244;
 #elif defined(VERSION_EU_X)
-extern char *D_800DDC28;
+extern char *g_playeroptionText_800DDC28;
 #else
 #endif
 
@@ -49,7 +49,7 @@ extern char *D_800DDC28;
 extern s32 Menu_CountLineChars(struct Field *);
 
 
-/* Replaces the byte at offset 0x7A of the second argument's owner settings (or the defaults D_80146302) with what Menu_AdjustValue returns for the second argument, that byte, 8, 8, 0xF8 and 0, and returns zero. Adapted from Items_AdjustPlayerOption79 with the settings byte 0x7A changed. */
+/* Replaces the byte at offset 0x7A of the second argument's owner settings (or the defaults g_playerPartnerNameFallback) with what Menu_AdjustValue returns for the second argument, that byte, 8, 8, 0xF8 and 0, and returns zero. Adapted from Items_AdjustPlayerOption79 with the settings byte 0x7A changed. */
 
 
 
@@ -61,13 +61,13 @@ extern s32 Menu_CountLineChars(struct Field *);
 
 
 #if defined(VERSION_EU)
-extern char *D_800E2264;
+extern char *g_playeroptionText_800E2264;
 #elif defined(VERSION_EU_X)
-extern char *D_800DDC40;
+extern char *g_playeroptionText_800DDC40;
 #else
 #endif
 
-/* Points a field's text at D_800D7634 when the byte at offset 0x82 of the settings the second argument's owner holds, or of the defaults D_80146302 without an owner, is one, and at D_800D7638 otherwise, returning zero. Adapted from Pak_UpdateOwnerModeText with the settings lookup of Items_TogglePlayerFlag82 and the texts D_800D7634 and D_800D7638 changed, and a zero result local declared first to give the owner and settings pointers the cartridge's registers. */
+/* Points a field's text at g_playeroptionText_800D3608 when the byte at offset 0x82 of the settings the second argument's owner holds, or of the defaults g_playerPartnerNameFallback without an owner, is one, and at g_playeroptionText_800D360C otherwise, returning zero. Adapted from Pak_UpdateOwnerModeText with the settings lookup of Items_TogglePlayerFlag82 and the texts g_playeroptionText_800D3608 and g_playeroptionText_800D360C changed, and a zero result local declared first to give the owner and settings pointers the cartridge's registers. */
 
 
 
@@ -81,7 +81,7 @@ extern char *D_800DDC40;
 
 
 /* Toggles the byte at offset 0x82 of the settings the object at offset 0x5D8 of the second
-   argument's owner holds, or of the defaults D_80146302 when there is no owner, and returns zero. */
+   argument's owner holds, or of the defaults g_playerPartnerNameFallback when there is no owner, and returns zero. */
 
 
 
@@ -90,12 +90,12 @@ extern char *D_800DDC40;
 
 
 
-/* Counts the timer D_80154100 down by D_800D2988 without passing zero, then sets bit 24 of the flag word at offset 8 of a record unless Defs_GetMemorySize reports 0x400000, in which case the bit is cleared, stores what func_8040C3BC_de returns at offset 0x14 and returns zero. Adapted from Pak_UpdateScreenModeAvailability with the timer countdown added, Defs_GetMemorySize called without arguments and bit 24 instead of bit 23 changed. */
+/* Counts the timer g_controllerPakProbeState down by g_frameElapsedTime without passing zero, then sets bit 24 of the flag word at offset 8 of a record unless Defs_GetMemorySize reports 0x400000, in which case the bit is cleared, stores what func_8040C3BC_de returns at offset 0x14 and returns zero. Adapted from Pak_UpdateScreenModeAvailability with the timer countdown added, Defs_GetMemorySize called without arguments and bit 24 instead of bit 23 changed. */
 
 
-extern f32 D_80154100;
+extern f32 g_controllerPakProbeState;
 
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
 extern s32 Defs_GetMemorySize(void);
 
@@ -117,8 +117,8 @@ s32 Items_AdjustPackedGameOption(void *first, void *second) {
     return 0;
 }
 
-s32 Items_AdjustPlayerOption79(void *first, struct ActorRecAt1C *holder) {
-    struct PlayerOptions *settings = &D_80146302;
+s32 Items_AdjustPlayerOption79(void *first, struct PlayerSettingsTextHolder *holder) {
+    struct PlayerOptions *settings = &g_playerPartnerNameFallback;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
@@ -127,8 +127,8 @@ s32 Items_AdjustPlayerOption79(void *first, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 Items_FormatPlayerOption79Step(struct Field *field, struct ActorRecAt1C *holder) {
-    struct PlayerOptions *settings = &D_80146302;
+s32 Items_FormatPlayerOption79Step(struct Field *field, struct PlayerSettingsTextHolder *holder) {
+    struct PlayerOptions *settings = &g_playerPartnerNameFallback;
     s32 step;
     char *text;
 
@@ -137,40 +137,40 @@ s32 Items_FormatPlayerOption79Step(struct Field *field, struct ActorRecAt1C *hol
     }
     step = (settings->option79 - 128) / 8;
     if (step == 0) {
-        field->text = &D_800D35F8;
+        field->text = &g_playeroptionText_800D35F8;
     } else if (step > 0) {
 #if defined(VERSION_EU)
-        field->text = &D_800E2244;
+        field->text = &g_playeroptionText_800E2244;
 #elif defined(VERSION_EU_X)
-        field->text = &D_800DDC28;
+        field->text = &g_playeroptionText_800DDC28;
 #else
-        field->text = &D_800D35FC_de;
+        field->text = &g_playeroptionText_800D35FC;
 #endif
-        text = 
+        text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-field->text[D_801462C8.language]
+field->text[g_gameSettings.language]
 #else
 *field->text
 #endif
 ;
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800DE758_de, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_playerMenuStepFormatGerman, step);
     } else {
 #if defined(VERSION_EU)
-        field->text = &D_800E2244;
+        field->text = &g_playeroptionText_800E2244;
 #elif defined(VERSION_EU_X)
-        field->text = &D_800DDC28;
+        field->text = &g_playeroptionText_800DDC28;
 #else
-        field->text = &D_800D35FC_de;
+        field->text = &g_playeroptionText_800D35FC;
 #endif
-        text = 
+        text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-field->text[D_801462C8.language]
+field->text[g_gameSettings.language]
 #else
 *field->text
 #endif
 ;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EEDE0, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_playerMenuStepFormat, step);
 #else
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
 #endif
@@ -178,8 +178,8 @@ field->text[D_801462C8.language]
     return 0;
 }
 
-s32 Items_AdjustPlayerOption7A(void *first, struct ActorRecAt1C *holder) {
-    struct PlayerOptions *settings = &D_80146302;
+s32 Items_AdjustPlayerOption7A(void *first, struct PlayerSettingsTextHolder *holder) {
+    struct PlayerOptions *settings = &g_playerPartnerNameFallback;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
@@ -188,8 +188,8 @@ s32 Items_AdjustPlayerOption7A(void *first, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 Items_FormatPlayerOption7AStep(struct Field *field, struct ActorRecAt1C *holder) {
-    struct PlayerOptions *settings = &D_80146302;
+s32 Items_FormatPlayerOption7AStep(struct Field *field, struct PlayerSettingsTextHolder *holder) {
+    struct PlayerOptions *settings = &g_playerPartnerNameFallback;
     s32 step;
     char *text;
 
@@ -198,40 +198,40 @@ s32 Items_FormatPlayerOption7AStep(struct Field *field, struct ActorRecAt1C *hol
     }
     step = (settings->option7A - 128) / 8;
     if (step == 0) {
-        field->text = &D_800D3600;
+        field->text = &g_playeroptionText_800D3600;
     } else if (step > 0) {
 #if defined(VERSION_EU)
-        field->text = &D_800E2264;
+        field->text = &g_playeroptionText_800E2264;
 #elif defined(VERSION_EU_X)
-        field->text = &D_800DDC40;
+        field->text = &g_playeroptionText_800DDC40;
 #else
-        field->text = &D_800D3604_de;
+        field->text = &g_playeroptionText_800D3604;
 #endif
-        text = 
+        text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-field->text[D_801462C8.language]
+field->text[g_gameSettings.language]
 #else
 *field->text
 #endif
 ;
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800DE758_de, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_playerMenuStepFormatGerman, step);
     } else {
 #if defined(VERSION_EU)
-        field->text = &D_800E2264;
+        field->text = &g_playeroptionText_800E2264;
 #elif defined(VERSION_EU_X)
-        field->text = &D_800DDC40;
+        field->text = &g_playeroptionText_800DDC40;
 #else
-        field->text = &D_800D3604_de;
+        field->text = &g_playeroptionText_800D3604;
 #endif
-        text = 
+        text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-field->text[D_801462C8.language]
+field->text[g_gameSettings.language]
 #else
 *field->text
 #endif
 ;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EEDE0, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_playerMenuStepFormat, step);
 #else
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
 #endif
@@ -239,23 +239,23 @@ field->text[D_801462C8.language]
     return 0;
 }
 
-s32 Items_SelectPlayerFlag82Text(struct FieldRecAt14 *field, struct ActorRecAt1C *holder) {
+s32 Items_SelectPlayerFlag82Text(struct PakActionLabelView *field, struct PlayerSettingsTextHolder *holder) {
     s32 result = 0;
-    struct PlayerOptions *settings = &D_80146302;
+    struct PlayerOptions *settings = &g_playerPartnerNameFallback;
 
     if (holder->owner != 0) {
         settings = holder->owner->settings;
     }
     if (settings->flag82 == 1) {
-        field->text = D_800D7634;
+        field->text = g_playeroptionText_800D3608;
     } else {
-        field->text = D_800D7638;
+        field->text = g_playeroptionText_800D360C;
     }
     return result;
 }
 
-s32 Items_TogglePlayerFlag82(void *unused, struct ActorRecAt1C *holder) {
-    struct PlayerOptions *settings = &D_80146302;
+s32 Items_TogglePlayerFlag82(void *unused, struct PlayerSettingsTextHolder *holder) {
+    struct PlayerOptions *settings = &g_playerPartnerNameFallback;
 
     if (holder->owner != 0) {
         settings = holder->owner->settings;
@@ -268,10 +268,10 @@ s32 Items_TogglePlayerFlag82(void *unused, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 Items_UpdateScreenModeMenuItem(struct RecordRecAt14 *record) {
-    D_80154100 -= D_800D2988;
-    if (D_80154100 <= 0.0f) {
-        D_80154100 = 0.0f;
+s32 Items_UpdateScreenModeMenuItem(struct MenuTextResultView *record) {
+    g_controllerPakProbeState -= g_frameElapsedTime;
+    if (g_controllerPakProbeState <= 0.0f) {
+        g_controllerPakProbeState = 0.0f;
     }
     if (Defs_GetMemorySize() != 0x400000) {
         record->flags |= 0x1000000;
@@ -283,10 +283,10 @@ s32 Items_UpdateScreenModeMenuItem(struct RecordRecAt14 *record) {
 }
 
 s32 Items_RequestScreenModeFade(void) {
-    if (D_80154100 == 0.0f) {
+    if (g_controllerPakProbeState == 0.0f) {
         Frontend_StartScreenModeFade();
-        D_80154100 = (18.0f);
-        D_80146848 = (u8)D_800E28D8;
+        g_controllerPakProbeState = (18.0f);
+        g_frontendSavedVideoModeIndex = (u8)g_frontendCurrentVideoModeIndex;
     }
     return 0;
 }

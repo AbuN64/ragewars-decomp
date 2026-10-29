@@ -21,9 +21,9 @@ void __osPackRequestData(u8 cmd) {
     OSPifRam *pifram;
 
     for (i = 0; i < 15; i++) {
-        ((u32 *)&D_8014D470)[i] = 0;
+        ((u32 *)&g_controllerQueryPifBuffer)[i] = 0;
     }
-    pifram = &D_8014D470;
+    pifram = &g_controllerQueryPifBuffer;
     pifram->pifstatus = 1;
     ptr = (u8 *)pifram->ramarray;
     requestformat.dummy = 0xFF;
@@ -35,7 +35,7 @@ void __osPackRequestData(u8 cmd) {
     requestformat.status = 0xFF;
     requestformat.dummy1 = 0xFF;
 
-    count = D_8014D46C;
+    count = g_controllerChannelCount;
     for (i = 0; i < *count; i++) {
         *(__OSContRequesFormat *)ptr = requestformat;
         ptr += sizeof(requestformat);
@@ -43,14 +43,14 @@ void __osPackRequestData(u8 cmd) {
     *ptr = 0xFE;
 }
 
-void __osContGetInitData(u8 *valid, EntryRecAt3 *data) {
+void __osContGetInitData(u8 *valid, ControllerInitStatusBytes *data) {
     u8 *ptr;
     __OSContRequesFormat readformat;
     s32 i;
     u8 mask = 0;
 
-    ptr = (u8 *)&D_8014D470;
-    for (i = 0; i < D_8014D46C[0]; i++, ptr += sizeof(readformat), data++) {
+    ptr = (u8 *)&g_controllerQueryPifBuffer;
+    for (i = 0; i < g_controllerChannelCount[0]; i++, ptr += sizeof(readformat), data++) {
         readformat = *(__OSContRequesFormat *)ptr;
         data->slot = (readformat.rxsize & 0xC0) >> 4;
         if (data->slot != 0) {

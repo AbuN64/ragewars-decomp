@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #if defined(VERSION_DE)
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 /* German Menu_DestroyOptionsPage: releases the object g_optionsPage holds through Cache_FreeMemory, clears

@@ -4,8 +4,8 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "sdk/PFS/PLAYER_DRAWPULSINGMENUSPRITE.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
@@ -19,9 +19,9 @@ extern void Player_PlacePlayerForRound(void *player);
 
 
 /* When team sync is enabled, copies a player's team flag from its actor (byte 0x8F of the record at
-   0x5D8) into D_801468A0 if it is 1; then resumes the script D_8011FAC0 through Match_ResetMatchControllerState in mode
+   0x5D8) into g_matchRoundCounters if it is 1; then resumes the script g_gameSession through Match_ResetMatchControllerState in mode
    1 or else clears the actor's word at 0x5D0; returns 1. Matched through a local pointer to
-   D_801468A0 and the team byte held in a local. */
+   g_matchRoundCounters and the team byte held in a local. */
 
 
 
@@ -37,12 +37,12 @@ extern void Player_PlacePlayerForRound(void *player);
 extern void Match_ResetMatchControllerState(char *);
 
 /* Advances the actor inactivity timer and reports pending menu state. */
-s32 func_8022B178_de(void *);
+s32 Playerai_IsPlayerInactive(void *);
 
  /* extern */
 
 
-/* Points a field's text at D_800D7BE8 when the option D_801468F4 is set and at D_800D7BE4 otherwise, and returns
+/* Points a field's text at g_playerDrawpulsingmenuspriteText_800D3BBC when the option g_resultExitPending is set and at g_playerDrawpulsingmenuspriteText_800D3BB8 otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
@@ -57,84 +57,84 @@ s32 func_8022B178_de(void *);
 
 
 
-s32 Player_SetNestedItemFlag(void *unused, struct RootRecAt1C *root) {
+s32 Player_SetNestedItemFlag(void *unused, struct NestedPlayerMenuFlagContext *root) {
     root->middle->leaf->flag = 1;
     return 1;
 }
 
-s32 Player_RespawnItemPlayer(void *unused0, StateRecAt1C *arg1) {
-    Player_PlacePlayerForRound(arg1->unk1C);
+s32 Player_RespawnItemPlayer(void *unused0, PlayerRespawnMenuContext *menuState) {
+    Player_PlacePlayerForRound(menuState->actor);
     return 1;
 }
 
-void Player_DrawPulsingMenuSprite(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, MenuStyle *arg3) {
+void Player_DrawPulsingMenuSprite(PulsingMenuSpriteView *spriteState, CaptionEntry *caption, s32 unusedEventKind, MenuStyle *menuStyle) {
     s32 phase;
     s32 amount;
     s32 half;
     s32 drop;
     f32 scale;
     f32 sx;
-    phase = arg0->unk1C = (arg0->unk1C + 0x14) % 512;
+    phase = spriteState->pulsePhase = (spriteState->pulsePhase + 0x14) % 512;
     if (phase >= 0x100) {
-        amount = (s32) ((f32) (0x200 - phase) * arg3->alpha * arg3->fade);
+        amount = (s32) ((f32) (0x200 - phase) * menuStyle->alpha * menuStyle->fade);
     } else {
-        amount = (s32) ((f32) phase * arg3->alpha * arg3->fade);
+        amount = (s32) ((f32) phase * menuStyle->alpha * menuStyle->fade);
     }
     Onscrn_SetupSpriteMode(amount);
     drop = 0x50;
-    half = arg1->width >> 1;
-    if (D_800E28D8 == 0) {
+    half = caption->width >> 1;
+    if (g_frontendCurrentVideoModeIndex == 0) {
         drop = 0x2D;
     }
-    sx = arg1->scaleX;
-    scale = *(&D_800DE740 + 1);
-    OnScreen_DrawSpriteResource(arg0->unk14, 0, arg1->x - (half * 8), arg1->y + drop,
-                  sx * scale, arg1->scaleY * scale, 1);
+    sx = caption->scaleX;
+    scale = *(&k_playerMenuSpriteScaleConstants + 1);
+    OnScreen_DrawSpriteResource(spriteState->spriteResource, 0, caption->x - (half * 8), caption->y + drop,
+                  sx * scale, caption->scaleY * scale, 1);
 }
 
-int Player_ResumePlayerFromMenu(int unused, PlayerRecAt1C *player) {
-    CGameStatus *sync = &D_801462C8.counters;
+int Player_ResumePlayerFromMenu(int unused, PlayerMenuResumeContext *player) {
+    CGameStatus *sync = &g_gameSettings.counters;
     int team;
 
     if (sync->m_bFragTagOn != 0) {
-        team = player->actor->info->unk8F;
+        team = player->actor->info->fragTagEnabled;
         if (team == 1) {
             sync->m_FragTagMode = team;
         }
     }
-    if (D_80145070 == 1) {
-        Match_ResetMatchControllerState(&D_8011FAC0);
+    if (g_sessionOptionResetMode == 1) {
+        Match_ResetMatchControllerState(&g_gameSession);
     } else {
         player->actor->waiting = 0;
     }
     return 1;
 }
 
-s32 Player_UpdatePlayerRespawnDelay(StateRecAt1C *arg0) {
+s32 Player_UpdatePlayerRespawnDelay(PlayerRespawnMenuContext *menuState) {
     CGameStatus *state;
-    s32 temp_v0;
-    s32 var_v0;
-    ActorCode80443868804438BC *temp_s0;
-    temp_s0 = arg0->unk1C;
-    if ((temp_s0->unk1450 == 0) && (func_8022B178_de(temp_s0) != 0)) {
-        temp_v0 = temp_s0->unk1340 + 1;
-        temp_s0->unk1340 = temp_v0;
-        if (temp_v0 >= 0x4C) {
-            Player_PlacePlayerForRound(arg0->unk1C);
+    s32 respawnFrames;
+    s32 roundFinished;
+    ActorCode80443868804438BC *player;
+    player = menuState->actor;
+    if ((player->unk1450 == 0) && (Playerai_IsPlayerInactive(player) != 0)) {
+        respawnFrames = player->respawnDelayFrames + 1;
+        player->respawnDelayFrames = respawnFrames;
+        if (respawnFrames >= 0x4C) {
+            Player_PlacePlayerForRound(menuState->actor);
             return 1;
         }
     }
-    var_v0 = 0;
-    state = &D_801462C8.counters;
-    if (state->round || state->elapsed || state->state) var_v0 = 1;
-    return var_v0;
+    roundFinished = 0;
+    state = &g_gameSettings.counters;
+    if (state->round || state->elapsed || state->state) roundFinished = 1;
+    return roundFinished;
 }
 
-s32 Player_SelectFragTagLabel(struct FieldRecAt14 *field) {
-    if (D_801462C8.counters.m_bFragTagOn != 0) {
-        field->text = D_800D7BE8;
+s32 Player_SelectFragTagLabel(struct PakActionLabelView *field) {
+    if (g_gameSettings.counters.m_bFragTagOn != 0) {
+        field->text = g_playerDrawpulsingmenuspriteText_800D3BBC;
     } else {
-        field->text = D_800D7BE4;
+        field->text = g_playerDrawpulsingmenuspriteText_800D3BB8;
     }
     return 0;
 }

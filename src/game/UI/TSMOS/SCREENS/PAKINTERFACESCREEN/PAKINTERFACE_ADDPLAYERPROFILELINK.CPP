@@ -20,9 +20,9 @@ s32 PAKInterface_AddPlayerProfileLink(s32 first, s32 second) {
     if (index >= 0) {
         taken = 1;
         result = taken;
-        D_800E54A4->links[index].player = first;
-        D_800E54A4->links[index].entry = second;
-        D_800E54A4->links[index].state = result;
+        g_pakProfileScreenState->links[index].player = first;
+        g_pakProfileScreenState->links[index].entry = second;
+        g_pakProfileScreenState->links[index].state = result;
     }
     taken = result;
     return taken;

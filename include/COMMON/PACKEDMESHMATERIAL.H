@@ -34,8 +34,8 @@ struct ObjParticleMarkNearbyObjects;
 struct ParticleEffect;
 
 
-struct ObjRecAt12;
-typedef struct ObjRecAt12 ObjRecAt12;
+struct RncCompressedResourceHeaderView;
+typedef struct RncCompressedResourceHeaderView RncCompressedResourceHeaderView;
 
 
 
@@ -43,16 +43,16 @@ typedef struct ObjRecAt12 ObjRecAt12;
 
 
 
-struct ObjRecAt4V2;
-typedef struct ObjRecAt4V2 ObjRecAt4V2;
+struct ResourcePayloadSizeView;
+typedef struct ResourcePayloadSizeView ResourcePayloadSizeView;
 
 
-struct Arg1;
-typedef struct Arg1 Arg1;
+struct ParticleTrailEmitterView;
+typedef struct ParticleTrailEmitterView ParticleTrailEmitterView;
 
 struct ObjParticleMarkNearbyObjects;
 
-extern float D_800C4EB8_de;
+extern float g_packedFloatRandomScale;
 
 
 
@@ -61,19 +61,19 @@ extern float D_800C4EB8_de;
 
 
 
-extern float D_800C4EA0_de;
+extern float g_particleMaximumSearchDistance;
 
 
 
 
-struct ObjRecAt4V2;
+struct ResourcePayloadSizeView;
 
 
 
 
-struct ObjRecAt12;
+struct RncCompressedResourceHeaderView;
 
-struct Arg1;
+struct ParticleTrailEmitterView;
 
 
 
@@ -83,13 +83,13 @@ typedef struct ObjParticleMarkNearbyObjects ObjParticleMarkNearbyObjects;
 
 
 
-extern float D_800C4E90_de;
+extern float g_particleNearestEffectDistanceTuning;
 
 
 
 
 
-extern double D_800C4EB0_de;
+extern double g_packedFloatRandomBias;
 
 
 

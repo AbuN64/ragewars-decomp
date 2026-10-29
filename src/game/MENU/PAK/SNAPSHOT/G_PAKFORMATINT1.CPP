@@ -2,7 +2,7 @@
 
 /* 800E0DA8.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80408118_E19A8[1] = {
+const unsigned int k_GPakformatint1EncodedWords[1] = {
     0x20202000,
 };
 #endif
@@ -26,7 +26,7 @@ const char s_snapshotThreePartNumberFormat[14] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_80408118_E19A8_us_rev1.c */
-const unsigned char D_blob_4fb6fb10cdfd8ef7403a[4] = {
+const unsigned char k_GPakformatint1EncodedBytes[4] = {
     0x20, 0x20, 0x20, 0x00,
 };
 #endif
@@ -41,14 +41,14 @@ const unsigned int g_pakFormatInt1[1] = {
 
 /* 800E0DB0.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
-const unsigned int D_8040A58C_E19B0[1] = {
+const unsigned int k_GPakformatint1EncodedWordsBlock1[1] = {
     0x25326400,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_8040A58C_E19B0_us_rev1.c */
-const unsigned char D_blob_7acc5732eee3ab6bdc83[4] = {
+const unsigned char k_GPakformatint1EncodedBytesBlock1[4] = {
     0x25, 0x32, 0x64, 0x00,
 };
 #endif

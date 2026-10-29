@@ -3,7 +3,7 @@
 #include "COMMON/RECORD.H"
 #include "COMMON/STATEPAIR.H"
 
-extern s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *widget, s32 event, s32 eventData, s32 eventValue, s32 eventContext);
 
-extern void N64Eng_DecrementNumericWidget(void *arg0);
+extern void N64Eng_DecrementNumericWidget(void *widget);
 #endif

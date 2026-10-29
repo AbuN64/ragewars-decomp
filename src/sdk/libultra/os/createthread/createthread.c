@@ -5,14 +5,14 @@
 
 /* 802BFD80_5.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802BAD68_de_padding_BB968[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+unsigned char g_CreatethreadTrailingBytes[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
 #endif
 
 /* createthread.c */
 /* osCreateThread, drafted from ultralib src/os/createthread.c (2.0I-J, no thread profile). */
 
-extern OSThread_s *D_800D526C;
-extern void D_002BC76C(void);
+extern OSThread_s *__osActiveQueue;
+extern void System_CleanupThreadEntry(void);
 
 void osCreateThread(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 p)
 {
@@ -27,7 +27,7 @@ void osCreateThread(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, voi
     t->context.pc = (u32)entry;
     t->context.a0 = (s64)(s32)arg;
     t->context.sp = (s64)(s32)sp - 16;
-    t->context.ra = (s64)(s32)D_002BC76C;
+    t->context.ra = (s64)(s32)System_CleanupThreadEntry;
     mask = 0x3FFF01;
     t->context.sr = (mask & 0xFF01) | 0x04000002;
     t->context.rcp = (mask & 0x3F0000) >> 16;
@@ -37,13 +37,13 @@ void osCreateThread(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, voi
     t->flags = 0;
 
     saveMask = __osDisableInt();
-    active = &D_800D526C;
+    active = &__osActiveQueue;
     t->tlnext = *active;
     *active = t;
     __osRestoreInt(saveMask);
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BAC98[8] =
+char s_CreatethreadOnFiringText[8] =
     "onFiring";
 #endif

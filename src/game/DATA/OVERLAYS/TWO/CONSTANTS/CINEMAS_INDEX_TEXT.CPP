@@ -6,5 +6,5 @@ const char g_cinemasIndexText[14] =
 #endif
 
 #if defined(VERSION_US_REV1)
-const char D_d1_1fe71b6b9055290c[14] = "Cinemas index";
+const char g_cinemasIndexText[14] = "Cinemas index";
 #endif

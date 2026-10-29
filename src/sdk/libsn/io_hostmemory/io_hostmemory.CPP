@@ -6,8 +6,8 @@
 #include "TYPES.H"
 #include "IO/libsn_disableinterrupts.H"
 #include "sdk/os.h"
-#include "COMMON/EXTERNS_15.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "IO/libsn_readportbufferwithdma.H"
 #include "IO/io_hostmemory.H"
 #include "IO/DEBUG_MEMORY.H"
@@ -15,14 +15,14 @@
 #include "COMMON/OSTHREAD_S.H"
 
 /* 80200B14_2.CPP */
-void Libsn_WriteTransferPortByte(s32 arg0, unsigned char arg1)
+void Libsn_WriteTransferPortByte(s32 address, unsigned char byteValue)
 {
-  int new_var;
-  s32 temp_s2;
-  new_var = ((~arg0) & 3) * 8;
-  arg0 = arg0 & (~3);
-  temp_s2 = new_var;
-  Libsn_WritePortWord(arg0, (Libsn_ReadPortWord(arg0) & (~(0xFF << temp_s2))) | (new_var = (arg1 & 0xFF) << temp_s2));
+  int shiftedByte;
+  s32 byteShift;
+  shiftedByte = ((~address) & 3) * 8;
+  address = address & (~3);
+  byteShift = shiftedByte;
+  Libsn_WritePortWord(address, (Libsn_ReadPortWord(address) & (~(0xFF << byteShift))) | (shiftedByte = (byteValue & 0xFF) << byteShift));
 }
 
 /* Copy an arbitrary byte buffer to a PI range, packing big-endian words. */
@@ -56,26 +56,26 @@ void Libsn_WritePortBuffer(s32 address, const u8 *source, u32 length)
 
 }
 
-extern volatile s32 D_800C8140_de;
+extern volatile s32 g_staticDataRegionStart;
 struct OSIoMesg;
-extern struct OSIoMesg D_800F2CE0;
-extern OSMesgQueue D_800F2CC0;
+extern struct OSIoMesg g_libsnDmaRequest;
+extern OSMesgQueue g_libsnDmaCompletionQueue;
 extern s32 Io_StartPeripheralDma(struct OSIoMesg *, s32, s32, u32, void *, u32, OSMesgQueue *);
 
 /* Write an arbitrary byte stream to the device, using DMA when aligned
  * and falling back to byte/word writes if the DMA request is unavailable. */
 void Libsn_WritePortBufferWithDma(u32 address, u8 *source, u32 remaining) {
-    s32 dmaResult = -(D_800C8140_de == 0);
+    s32 dmaResult = -(g_staticDataRegionStart == 0);
     while (remaining != 0 && (address & 3) != 0) {
         Libsn_WriteTransferPortByte(address++, *source++);
         remaining--;
     }
     while (remaining >= 4) {
         if (remaining >= 16 && ((((u32)source & 15) == 0) & (dmaResult != -1))) {
-            dmaResult = Io_StartPeripheralDma(&D_800F2CE0, 1, 1, address,
-                source, remaining, &D_800F2CC0);
+            dmaResult = Io_StartPeripheralDma(&g_libsnDmaRequest, 1, 1, address,
+                source, remaining, &g_libsnDmaCompletionQueue);
             if (dmaResult != -1) {
-                osRecvMesg(&D_800F2CC0, 0, 1);
+                osRecvMesg(&g_libsnDmaCompletionQueue, 0, 1);
                 remaining = 0;
             }
         } else {
@@ -95,22 +95,22 @@ void Libsn_WritePortBufferWithDma(u32 address, u8 *source, u32 remaining) {
 /* io_hostmemory.CPP */
 void Libsn_FillPortBytes(s32 address, s32 value, u32 count)
 {
-  u32 new_var;
+  u32 fillByte;
   u32 byte;
-  unsigned char new_var2;
+  unsigned char byteValue;
   u32 word;
-  new_var2 = value & 0xFF;
+  byteValue = value & 0xFF;
   while ((count != 0) && ((address & 3) != 0))
   {
-    Libsn_WritePortByte(address++, new_var2);
+    Libsn_WritePortByte(address++, byteValue);
     count--;
   }
 
   if (count >= 4)
   {
-    byte = new_var2;
-    new_var = byte;
-    word = (((byte << 24) | (byte << 16)) | (new_var << 8)) | new_var;
+    byte = byteValue;
+    fillByte = byte;
+    word = (((byte << 24) | (byte << 16)) | (fillByte << 8)) | fillByte;
     do
     {
       Libsn_WritePortWord(address, word);
@@ -121,7 +121,7 @@ void Libsn_FillPortBytes(s32 address, s32 value, u32 count)
   }
   while (count)
   {
-    Libsn_WritePortByte(address++, new_var2);
+    Libsn_WritePortByte(address++, byteValue);
     count--;
   }
 
@@ -141,7 +141,7 @@ void Libsn_CopyPortBytes(s32 address, s32 port, s32 count) {
 }
 
 extern void Libsn_EnumerateMemoryRanges(void);
-extern u8 D_8F0F3130[];
+extern u8 g_libsnHostAddressAdjustment[];
 extern void Libsn_ReadPortBuffer(s32, u8 *, u32);
 extern void Libsn_CopyPortToWordMemory(s32, s32, u32);
 
@@ -153,16 +153,16 @@ void Libsn_TransferHostMemoryRanges(u32 mode) {
     port = 0xB1FE0000;
     address = Libsn_ReadPortWord(0xB1FFFFF4);
     remaining = Libsn_ReadPortWord(0xB1FFFFF8);
-    if (address > 0xEFFFFFFF) address += (u32)D_8F0F3130;
+    if (address > 0xEFFFFFFF) address += (u32)g_libsnHostAddressAdjustment;
     while (remaining != 0) {
         i = 0;
-        while (address < D_800F2D00[i].first || address > D_800F2D00[i].last) i++;
+        while (address < g_libsnHostMemoryRanges[i].first || address > g_libsnHostMemoryRanges[i].last) i++;
         if (i >= 48) {
             flags = 0;
             chunk = 0x1000 - (address & 0xFFF);
         } else {
-            flags = D_800F2D00[i].flags;
-            chunk = (D_800F2D00[i].last + 1) - address;
+            flags = g_libsnHostMemoryRanges[i].flags;
+            chunk = (g_libsnHostMemoryRanges[i].last + 1) - address;
         }
         if (remaining < chunk) chunk = remaining;
         if ((flags & mode) == 0) {
@@ -208,24 +208,24 @@ void Libsn_CopyHostBlockToCart(void) {
 }
 
 /* 802013D8.CPP */
-extern u8 D_800F3452;
-extern void func_802022E0_de(void);
+extern u8 g_libsnMonitorResumeMask;
+extern void Libsn_InstallDebuggerExceptionHooks(void);
 
 void Libsn_InitializeHostMemoryAccess(void) {
     s32 saved;
     u32 size;
     saved = Libsn_DisableInterrupts();
-    func_802022E0_de();
+    Libsn_InstallDebuggerExceptionHooks();
     Libsn_WritePortWord(0xB1FFFFF0, 0);
     Libsn_WritePortWord(0xB1FFFFFC, 0);
     size = *(u32 *)0x80000318;
-    D_800F3450 = 1;
-    D_800F3452 = 0xFF;
+    g_libsnMonitorEnabled = 1;
+    g_libsnMonitorResumeMask = 0xFF;
     if (size > 0x3FFFFFU) {
         if (((size & 0x1FFFF) == 0) & (size <= 0x02000000U)) {
             size--;
-            D_800CB3A0[1].last = size - 0x80000000;
-            D_800CB3A0[3].last = size + 0xA0000000;
+            g_libsnDefaultMemoryRanges[1].last = size - 0x80000000;
+            g_libsnDefaultMemoryRanges[3].last = size + 0xA0000000;
         }
     }
     Libsn_RestoreInterruptEnable(saved);
@@ -265,22 +265,22 @@ void Libsn_ServiceHostCommands(void) {
             break;
         case 0x12:
             D_800F32A8 &= ~1U;
-            D_800F3450 = 0;
-            D_800F3452 = 0;
+            g_libsnMonitorEnabled = 0;
+            g_libsnMonitorResumeMask = 0;
             Libgultra_TrwSetSr(Libgultra_TrwGetSr() & ~1);
             break;
         case 0x13:
-            D_800F3452 = 0;
-            D_800F3450 = 0;
+            g_libsnMonitorResumeMask = 0;
+            g_libsnMonitorEnabled = 0;
             break;
         case 0x14:
-            D_800F3452 = 0xFF;
+            g_libsnMonitorResumeMask = 0xFF;
             break;
         case 0x15:
-            D_800F3452 = 0;
+            g_libsnMonitorResumeMask = 0;
             break;
         case 0x16:
-            Libsn_WritePortWord(0xB1FE0000, (D_800F3452 << 24) | ((u8)D_800F3450 << 16));
+            Libsn_WritePortWord(0xB1FE0000, (g_libsnMonitorResumeMask << 24) | ((u8)g_libsnMonitorEnabled << 16));
             break;
         case 0x17:
             Libsn_TransferHostMemoryRanges(2);
@@ -296,60 +296,60 @@ void Libsn_ServiceHostCommands(void) {
         while (Libsn_ReadPortWord(0xB1FFFFF0) == 1) {
             Libsn_SpinDelay(500);
         }
-    } while (keepRunning != 0 || D_800F3452 == 0);
+    } while (keepRunning != 0 || g_libsnMonitorResumeMask == 0);
     Libsn_WritePortWord(0xB1FFFFF0, 0);
 }
 
 /* 802013D8_2.CPP */
 /** Return strlen(arg0) + 1 (byte count including the terminating NUL). */
-s32 Libsn_MeasureTerminatedString(u8 *arg0) {
-    u8 *var_v1;
+s32 Libsn_MeasureTerminatedString(u8 *string) {
+    u8 *cursor;
     u8 temp;
 
-    var_v1 = arg0 + 1;
-    if (*arg0 != 0) {
+    cursor = string + 1;
+    if (*string != 0) {
         do {
-            temp = *var_v1;
-            var_v1 += 1;
+            temp = *cursor;
+            cursor += 1;
         } while (temp != 0);
     }
-    return var_v1 - arg0;
+    return cursor - string;
 }
 
 /* Shared declarations of the drafts below (one place, so every draft compiles together under -DNON_MATCHING). */
-extern void D_002018A0(void *); /* host request thread entry, as the ROM stores its address */
-extern s32 D_800C8144_de;
-extern void *D_800F1C84;
-extern OSMesgQueue D_800F1C90;
-extern void *D_800F2CB0;
-extern void *D_800F2CB4;
-extern OSMesgQueue D_800F2F40;
-extern void *D_800F2F58;
-extern OSThread_s D_800F2F60; /* host request thread */
-extern OSMesgQueue D_800F3110;
+extern void g_libsnRunHostRequestThreadEntry(void *); /* host request thread entry, as the ROM stores its address */
+extern s32 g_libsnHostTransportMode;
+extern void *g_libsnHostEventMessage;
+extern OSMesgQueue g_libsnHostEventQueue;
+extern void *g_libsnHostRequestMessage;
+extern void *g_libsnDmaCompletionMessage;
+extern OSMesgQueue g_libsnHostRequestQueue;
+extern void *g_libsnHostReplyMessage;
+extern OSThread_s g_libsnHostRequestThread; /* host request thread */
+extern OSMesgQueue g_libsnHostReplyQueue;
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
 extern void Libsn_ReadPortBufferWithDma(u32, u8 *, u32);
 /* Create the host request queues and start the request thread once (thread id FS). */
 void Libsn_InitializeHostRequestThread(s32 threadPriority) {
-    if (D_800C8140_de == 0) {
-        D_800C8140_de = 1;
-        osCreateMesgQueue(&D_800F2CC0, &D_800F2CB4, 1);
-        osCreateMesgQueue(&D_800F2F40, &D_800F2CB0, 1);
-        osCreateMesgQueue(&D_800F3110, &D_800F2F58, 1);
-        osCreateMesgQueue(&D_800F1C90, &D_800F1C84, 1);
-        osSetEventMesg(0, &D_800F1C90, (void *)1);
-        osCreateThread(&D_800F2F60, 0x4653, D_002018A0, 0, (u8 *)&D_800F2CE0 - 0x30, threadPriority);
-        osStartThread(&D_800F2F60);
+    if (g_staticDataRegionStart == 0) {
+        g_staticDataRegionStart = 1;
+        osCreateMesgQueue(&g_libsnDmaCompletionQueue, &g_libsnDmaCompletionMessage, 1);
+        osCreateMesgQueue(&g_libsnHostRequestQueue, &g_libsnHostRequestMessage, 1);
+        osCreateMesgQueue(&g_libsnHostReplyQueue, &g_libsnHostReplyMessage, 1);
+        osCreateMesgQueue(&g_libsnHostEventQueue, &g_libsnHostEventMessage, 1);
+        osSetEventMesg(0, &g_libsnHostEventQueue, (void *)1);
+        osCreateThread(&g_libsnHostRequestThread, 0x4653, g_libsnRunHostRequestThreadEntry, 0, (u8 *)&g_libsnDmaRequest - 0x30, threadPriority);
+        osStartThread(&g_libsnHostRequestThread);
     }
 }
 /* Host monitor call: writes the three arguments and then the command word to the SN cart port, polls until
    the host clears the command (a set error word raises SN's debugger trap `break 1`; cc1 has no construct
    for it, SN wrote it inline in their runtime: the only `break 1` in the ROM) and returns the host's reply. */
-s32 Libsn_SendHostCommand(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    Libsn_WritePortWord(0xB1FFFFE4, arg1);
-    Libsn_WritePortWord(0xB1FFFFE8, arg2);
-    Libsn_WritePortWord(0xB1FFFFEC, arg3);
-    Libsn_WritePortWord(0xB1FFFFE0, arg0);
+s32 Libsn_SendHostCommand(s32 command, s32 firstArgument, s32 secondArgument, s32 thirdArgument) {
+    Libsn_WritePortWord(0xB1FFFFE4, firstArgument);
+    Libsn_WritePortWord(0xB1FFFFE8, secondArgument);
+    Libsn_WritePortWord(0xB1FFFFEC, thirdArgument);
+    Libsn_WritePortWord(0xB1FFFFE0, command);
     do {
         Libsn_SpinDelay(0x3E8);
         if (Libsn_ReadPortWord(0xB1FFFFF0) != 0) {
@@ -365,32 +365,32 @@ s32 Libsn_SendHostCommand(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 void Libsn_RunHostRequestThread(void) {
     ControllerRequest *request;
     for (;;) {
-        osRecvMesg(&D_800F2F40, (OSMesg *)&request, 1);
+        osRecvMesg(&g_libsnHostRequestQueue, (OSMesg *)&request, 1);
         if (request->status != 0 && request->reserved == 1) {
             if (request->command & 0x80000000) {
-                D_800C8140_de = 0;
+                g_staticDataRegionStart = 0;
             }
             Libsn_WritePortBufferWithDma(0xB1FF0000, (u8 *)request->header, request->status);
             if (request->command & 0x80000000) {
-                D_800C8140_de = 1;
+                g_staticDataRegionStart = 1;
             }
         }
-        osRecvMesg(&D_800F1C90, 0, 0);
+        osRecvMesg(&g_libsnHostEventQueue, 0, 0);
         Libsn_WritePortWord(0xB1FFFFE4, request->argument0);
         Libsn_WritePortWord(0xB1FFFFE8, request->argument1);
         Libsn_WritePortWord(0xB1FFFFEC, request->argument2);
         Libsn_WritePortWord(0xB1FFFFD8, 0x01010101);
         Libsn_WritePortWord(0xB1FFFFE0, (u16)request->command);
-        osRecvMesg(&D_800F1C90, 0, 1);
+        osRecvMesg(&g_libsnHostEventQueue, 0, 1);
         if (request->status != 0 && request->reserved == 0) {
             s32 length = Libsn_ReadPortWord(0xB1FFFFDC);
             if (length != 0) {
                 if (request->command & 0x80000000) {
-                    D_800C8140_de = 0;
+                    g_staticDataRegionStart = 0;
                 }
                 Libsn_ReadPortBufferWithDma(0xB1FF0000, (u8 *)request->header, length);
                 if (request->command & 0x80000000) {
-                    D_800C8140_de = 1;
+                    g_staticDataRegionStart = 1;
                 }
             }
         }
@@ -405,7 +405,7 @@ s32 Libsn_InitializePollingHost(void)
     s32 previous;
     s32 result;
     previous = Libsn_DisableInterrupts();
-    D_800C8144_de = 1;
+    g_libsnHostTransportMode = 1;
     result = Libsn_SendHostCommand(0x101, 0, 0, 0);
     Libsn_RestoreInterruptEnable(previous);
     return result;
@@ -413,16 +413,16 @@ s32 Libsn_InitializePollingHost(void)
 void *Libsn_InitializeQueuedHost(void) {
     ControllerRequest request;
     ControllerResponse response;
-    D_800C8144_de = 2;
+    g_libsnHostTransportMode = 2;
     Libsn_InitializeHostRequestThread(0xFF);
     request.status = 0;
     request.command = 0x80000101;
     request.argument0 = 0;
     request.argument1 = 0;
     request.argument2 = 0;
-    request.reply = &D_800F3110;
-    osSendMesg(&D_800F2F40, &request, 1);
-    osRecvMesg(&D_800F3110, &response.message, 1);
+    request.reply = &g_libsnHostReplyQueue;
+    osSendMesg(&g_libsnHostRequestQueue, &request, 1);
+    osRecvMesg(&g_libsnHostReplyQueue, &response.message, 1);
     return response.message;
 }
 u32 Libsn_SendHostStringRequest(u8 *buffer, s32 argument) {
@@ -431,7 +431,7 @@ u32 Libsn_SendHostStringRequest(u8 *buffer, s32 argument) {
     s32 length;
     s32 saved;
     length = Libsn_MeasureTerminatedString(buffer);
-    if (D_800C8144_de == 2) {
+    if (g_libsnHostTransportMode == 2) {
         request.status = length;
         request.argument0 = length;
         request.header = (u32)buffer;
@@ -439,9 +439,9 @@ u32 Libsn_SendHostStringRequest(u8 *buffer, s32 argument) {
         request.command = 0x80000202;
         request.argument1 = argument;
         request.argument2 = 0;
-        request.reply = &D_800F3110;
-        osSendMesg(&D_800F2F40, &request, 1);
-        osRecvMesg(&D_800F3110, &response.message, 1);
+        request.reply = &g_libsnHostReplyQueue;
+        osSendMesg(&g_libsnHostRequestQueue, &request, 1);
+        osRecvMesg(&g_libsnHostReplyQueue, &response.message, 1);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
@@ -463,7 +463,7 @@ s32 Libsn_SendHostNameFlags(u8 *name, u32 flags) {
     s32 length;
     s32 saved;
     length = Libsn_MeasureTerminatedString(name);
-    if (D_800C8144_de == 2) {
+    if (g_libsnHostTransportMode == 2) {
         request.status = length;
         request.argument0 = length;
         request.header = (u32)name;
@@ -471,9 +471,9 @@ s32 Libsn_SendHostNameFlags(u8 *name, u32 flags) {
         request.command = 0x80000303;
         request.argument1 = flags;
         request.argument2 = 0;
-        request.reply = &D_800F3110;
-        osSendMesg(&D_800F2F40, &request, 1);
-        osRecvMesg(&D_800F3110, &response.message, 1);
+        request.reply = &g_libsnHostReplyQueue;
+        osSendMesg(&g_libsnHostRequestQueue, &request, 1);
+        osRecvMesg(&g_libsnHostReplyQueue, &response.message, 1);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
@@ -489,25 +489,25 @@ s32 Libsn_SendHostNameFlags(u8 *name, u32 flags) {
     }
     return response.status;
 }
-s32 Libsn_SendHostScalarRequest(s32 arg0) {
+s32 Libsn_SendHostScalarRequest(s32 argument) {
     ControllerRequest request;
     ControllerResponse response;
     s32 saved;
-    if (D_800C8144_de == 2) {
-        request.argument0 = arg0;
+    if (g_libsnHostTransportMode == 2) {
+        request.argument0 = argument;
         request.status = 0;
         request.command = 0x80000404;
         request.argument1 = 0;
         request.argument2 = 0;
-        request.reply = &D_800F3110;
-        osSendMesg(&D_800F2F40, &request, 1);
-        osRecvMesg(&D_800F3110, &response.message, 1);
+        request.reply = &g_libsnHostReplyQueue;
+        osSendMesg(&g_libsnHostRequestQueue, &request, 1);
+        osRecvMesg(&g_libsnHostReplyQueue, &response.message, 1);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
     } else {
         saved = Libsn_DisableInterrupts();
-        response.status = Libsn_SendHostCommand(0x404, arg0, 0, 0);
+        response.status = Libsn_SendHostCommand(0x404, argument, 0, 0);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
@@ -521,7 +521,7 @@ s32 Libsn_ReadHostChannel(s32 channel, u8 *destination, u32 remaining) {
     s32 total = 0;
     s32 saved;
     u32 chunk;
-    if (D_800C8144_de == 2) {
+    if (g_libsnHostTransportMode == 2) {
         while (remaining != 0) {
             chunk = remaining;
             if (chunk > 0x8000) {
@@ -534,9 +534,9 @@ s32 Libsn_ReadHostChannel(s32 channel, u8 *destination, u32 remaining) {
             request.argument0 = channel;
             request.argument1 = chunk;
             request.argument2 = 0;
-            request.reply = &D_800F3110;
-            osSendMesg(&D_800F2F40, &request, 1);
-            osRecvMesg(&D_800F3110, &response.message, 1);
+            request.reply = &g_libsnHostReplyQueue;
+            osSendMesg(&g_libsnHostRequestQueue, &request, 1);
+            osRecvMesg(&g_libsnHostReplyQueue, &response.message, 1);
             if (response.status == 0) {
                 return total;
             }
@@ -570,7 +570,7 @@ s32 Libsn_WriteHostChannel(s32 channel, u8 *source, u32 remaining) {
     s32 total = 0;
     s32 saved;
     u32 chunk;
-    if (D_800C8144_de == 2) {
+    if (g_libsnHostTransportMode == 2) {
         while (remaining != 0) {
             chunk = remaining;
             if (chunk > 0x8000) chunk = 0x8000;
@@ -581,9 +581,9 @@ s32 Libsn_WriteHostChannel(s32 channel, u8 *source, u32 remaining) {
             request.argument0 = channel;
             request.argument1 = chunk;
             request.argument2 = 0;
-            request.reply = &D_800F3110;
-            osSendMesg(&D_800F2F40, &request, 1);
-            osRecvMesg(&D_800F3110, &response.message, 1);
+            request.reply = &g_libsnHostReplyQueue;
+            osSendMesg(&g_libsnHostRequestQueue, &request, 1);
+            osRecvMesg(&g_libsnHostReplyQueue, &response.message, 1);
             if (response.status == 0) return total;
             source += response.status;
             total += response.status;
@@ -605,22 +605,22 @@ s32 Libsn_WriteHostChannel(s32 channel, u8 *source, u32 remaining) {
     }
     return total;
 }
-s32 Libsn_SendHostTripleRequest(s32 arg0, u32 arg1, s32 arg2) {
+s32 Libsn_SendHostTripleRequest(s32 firstArgument, u32 secondArgument, s32 thirdArgument) {
     ControllerRequest request;
     ControllerResponse response;
     s32 saved;
-    if (D_800C8144_de == 2) {
-        request.argument0 = arg0;
+    if (g_libsnHostTransportMode == 2) {
+        request.argument0 = firstArgument;
         request.status = 0;
         request.command = 0x80000707;
-        request.argument1 = arg1;
-        request.argument2 = arg2;
-        request.reply = &D_800F3110;
-        osSendMesg(&D_800F2F40, &request, 1);
-        osRecvMesg(&D_800F3110, &response.message, 1);
+        request.argument1 = secondArgument;
+        request.argument2 = thirdArgument;
+        request.reply = &g_libsnHostReplyQueue;
+        osSendMesg(&g_libsnHostRequestQueue, &request, 1);
+        osRecvMesg(&g_libsnHostReplyQueue, &response.message, 1);
     } else {
         saved = Libsn_DisableInterrupts();
-        response.status = Libsn_SendHostCommand(0x707, arg0, arg1, arg2);
+        response.status = Libsn_SendHostCommand(0x707, firstArgument, secondArgument, thirdArgument);
         Libsn_RestoreInterruptEnable(saved);
     }
     return response.status;

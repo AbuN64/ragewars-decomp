@@ -20,8 +20,8 @@ typedef struct WriteWord WriteWord;
 
 
 
-struct ReadWordRecAt4;
-typedef struct ReadWordRecAt4 ReadWordRecAt4;
+struct WordAndByteResult;
+typedef struct WordAndByteResult WordAndByteResult;
 
 
 struct TransferScratch;
@@ -39,8 +39,8 @@ struct WriteWord {
     u8 value;
 };
 
-struct ReadWordRecAt4;
-struct ReadWordRecAt4 {
+struct WordAndByteResult;
+struct WordAndByteResult {
     u32 word;
     u8 byte;
 };
@@ -49,8 +49,8 @@ struct CommandState;
 struct CommandState {
     u8 command;
     u8 pad01[3];
-    ReadWordRecAt4 address;
-    ReadWordRecAt4 callback;
+    WordAndByteResult address;
+    WordAndByteResult callback;
     WriteWord output;
 };
 
@@ -74,10 +74,10 @@ struct ReadHalfword {
 extern unsigned char D_B2000001;
 
 
-extern int D_800D3648;
+extern int g_debugLinkImageByteCount;
 
 
-extern int D_800D3640;
+extern int g_debugLinkImagePending;
 
 
 
@@ -86,5 +86,5 @@ struct Response;
 typedef struct Response Response;
 
 
-extern int D_800D3644;
+extern int g_debugLinkImageLoadAddress;
 #endif

@@ -1,7 +1,7 @@
 #include "DATA/OVL1_G/DATA_800D02D0.H"
 
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_unresolved_800CF5C0_unclaimed_D0ED0[7] = {
-    0x00000000, 0x00000000, 0x3F800000, 0x3F800000, 0x800CF5C0, (unsigned int)D_00233178, (unsigned int)D_00231464,
+unsigned int k_ConstantsEncodedWordsBlock19[7] = {
+    0x00000000, 0x00000000, 0x3F800000, 0x3F800000, 0x800CF5C0, (unsigned int)g_weapon_ApplySideDependentYawEntry, (unsigned int)g_weaponai_SettleSpinToThirdTurnEntry,
 };
 #endif

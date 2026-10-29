@@ -1,7 +1,7 @@
 #include "FX/CONTROLLER_INPUT.H"
 
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800CBA74[3] = {
+unsigned int k_ContpadEncodedWords[3] = {
     0x0000000F, 0x000A0004, 0x0000001A,
 };
 ButtonRemap g_controllerButtonRemap[19] = {
@@ -25,7 +25,7 @@ ButtonRemap g_controllerButtonRemap[19] = {
     { 0x80000, 0x80000 },
     { 0, 0 },
 };
-unsigned int D_800CBB18_us[2] = {
+unsigned int g_ContpadEncodedWords[2] = {
     0x4E476571, 0x75520000,
 };
 #endif

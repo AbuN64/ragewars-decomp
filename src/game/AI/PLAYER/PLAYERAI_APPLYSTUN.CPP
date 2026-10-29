@@ -1,6 +1,6 @@
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/OBJRECV5.H"
 #include "WEAPONS/PLAYERAI_APPLYSTUN.H"
@@ -16,19 +16,19 @@ typedef struct {
     s32 protect;
 } StunProtectionRules;
 
-extern StunProtectionRules D_801468A0[];
+extern StunProtectionRules g_matchRoundCounters[];
 
-extern void Gsky_StartFade(ViewRecAt54D *, s32, s32, s32, s32, s32, s32, s32);
+extern void Gsky_StartFade(PlayerFlashView *, s32, s32, s32, s32, s32, s32, s32);
 
 void Playerai_ApplyStun(SharedPlayer *player, f32 amount) {
     f32 stun;
 
     if (amount != 0.0f && !(75.0f <= player->views5E8.view11D8_149.stun) && !(player->views5E8.view670_31.shield > 0.0f)
-        && !(D_801468A0->rule != 0
+        && !(g_matchRoundCounters->rule != 0
 #if defined(VERSION_DE) || defined(VERSION_EU_X)
             && player->views5D8.view5D8_2.controls->team != 0
 #endif
-            && player->views5D8.view5D8_2.controls->mode == 0xB && D_801468A0->protect > 0)
+            && player->views5D8.view5D8_2.controls->mode == 0xB && g_matchRoundCounters->protect > 0)
         && !(player->views122C.view122C_2.options & 0x8000)) {
         stun = player->views5E8.view11D8_149.stun + amount * 15.0f;
         if (75.0f < stun) {
@@ -45,12 +45,12 @@ void Playerai_ApplyStun(SharedPlayer *player, f32 amount) {
         }
         player->views1C.view100_9.flags &= ~0x01000000;
         if (player->views5DC.view5DC_2.view != 0) {
-            if (((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash == 0) {
-                Gsky_StartFade((ViewRecAt54D *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) Graphu64_RandomFloat(7.5f), 0,
+            if (((PlayerFlashView *)player->views5DC.view5DC_2.view)->flash == 0) {
+                Gsky_StartFade((PlayerFlashView *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) Graphu64_RandomFloat(7.5f), 0,
                               (u8) (u32) ((player->views5E8.view11D8_149.stun * 0.06666667f - 1.5f) * 15.0f));
             } else {
-                ((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash = 3;
-                ((ViewRecAt54D *)player->views5DC.view5DC_2.view)->level = (u32) player->views5E8.view11D8_149.stun;
+                ((PlayerFlashView *)player->views5DC.view5DC_2.view)->flash = 3;
+                ((PlayerFlashView *)player->views5DC.view5DC_2.view)->level = (u32) player->views5E8.view11D8_149.stun;
             }
         }
     }

@@ -14,54 +14,54 @@ extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void *Scene_GetStridedWorldRecord(struct Shared_World *object, int index);
 
-void *Gdynlight_AllocateLightNode(void *intrusiveList, void *arg1);
+void *Gdynlight_AllocateLightNode(void *intrusiveList, void *radiusDescriptor);
 
-void Gdynlight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
-                   CVector3 *left, f32 *arg5) {
+void Gdynlight_AccumulateLightDirections(RangeNode **lightList, u32 positionXBits, u32 positionYBits, u32 positionZBits,
+                   CVector3 *left, f32 *remainingIntensity) {
     CVector3 delta;
-    f32 temp_f0;
-    f32 temp_f1;
-    f32 temp_f20;
-    f32 temp_f20_2;
-    f32 temp_f3;
-    f32 var_f2;
-    f32 var_f2_2;
-    f32 var_f2_3;
+    f32 deltaZ;
+    f32 deltaY;
+    f32 falloffFraction;
+    f32 directionWeight;
+    f32 lightRadius;
+    f32 absoluteDeltaX;
+    f32 distanceXY;
+    f32 distanceXYZ;
     RangeNode *node;
     u16 *radius_ptr;
 
-    node = *arg0;
+    node = *lightList;
     if (node != 0) {
         do {
             if (node->active != 0) {
-                var_f2 = *(f32 *)&arg1 - (f32)node->x;
+                absoluteDeltaX = *(f32 *)&positionXBits - (f32)node->x;
                 radius_ptr = node->radius;
-                if (var_f2 < 0.0f) {
-                    var_f2 = -var_f2;
+                if (absoluteDeltaX < 0.0f) {
+                    absoluteDeltaX = -absoluteDeltaX;
                 }
-                temp_f1 = *(f32 *)&arg2 - (f32)node->y;
-                if (temp_f1 < 0.0f) {
-                    var_f2_2 = var_f2 - temp_f1;
+                deltaY = *(f32 *)&positionYBits - (f32)node->y;
+                if (deltaY < 0.0f) {
+                    distanceXY = absoluteDeltaX - deltaY;
                 } else {
-                    var_f2_2 = var_f2 + temp_f1;
+                    distanceXY = absoluteDeltaX + deltaY;
                 }
-                temp_f0 = *(f32 *)&arg3 - (f32)node->z;
-                if (temp_f0 < 0.0f) {
-                    var_f2_3 = var_f2_2 - temp_f0;
+                deltaZ = *(f32 *)&positionZBits - (f32)node->z;
+                if (deltaZ < 0.0f) {
+                    distanceXYZ = distanceXY - deltaZ;
                 } else {
-                    var_f2_3 = var_f2_2 + temp_f0;
+                    distanceXYZ = distanceXY + deltaZ;
                 }
-                temp_f3 = (f32)*radius_ptr;
-                if (var_f2_3 < temp_f3) {
-                    delta.x = (f32)node->x - *(f32 *)&arg1;
-                    delta.y = (f32)node->y - *(f32 *)&arg2;
-                    delta.z = (f32)node->z - *(f32 *)&arg3;
-                    temp_f20 = D_800C4490_de - (var_f2_3 / temp_f3);
+                lightRadius = (f32)*radius_ptr;
+                if (distanceXYZ < lightRadius) {
+                    delta.x = (f32)node->x - *(f32 *)&positionXBits;
+                    delta.y = (f32)node->y - *(f32 *)&positionYBits;
+                    delta.z = (f32)node->z - *(f32 *)&positionZBits;
+                    falloffFraction = g_dynamicLightFalloffUnit - (distanceXYZ / lightRadius);
                     Graphu64_NormalizeVec3(&delta);
-                    temp_f20_2 = temp_f20 * D_800C4494_de;
-                    Graphu64_ScaleVector(&delta, &delta, temp_f20_2);
+                    directionWeight = falloffFraction * g_dynamicLightDirectionScale;
+                    Graphu64_ScaleVector(&delta, &delta, directionWeight);
                     Graphu64_AddVec3(left, left, &delta);
-                    *arg5 -= temp_f20_2;
+                    *remainingIntensity -= directionWeight;
                 }
             }
             node = node->next;
@@ -73,23 +73,23 @@ void *Gdynlight_AllocateWorldLight(s32 intrusiveList, s32 index) {
     return Gdynlight_AllocateLightNode(intrusiveList, Scene_GetStridedWorldRecord(&g_world, index));
 }
 
-void *Gdynlight_AllocateLightNode(void *intrusiveList, void *arg1) {
-    void *temp_s0;
+void *Gdynlight_AllocateLightNode(void *intrusiveList, void *radiusDescriptor) {
+    void *lightNode;
 
-    temp_s0 = ((IntrusiveList *)intrusiveList)[1].head;
-    if (temp_s0 != 0) {
-        func_80255ED8_de(&((IntrusiveList *)intrusiveList)[1], temp_s0);
-        func_80255CB8_de(intrusiveList, temp_s0);
-        ((RangeNode *)temp_s0)->radius = arg1;
-        ((RangeNode *)temp_s0)->active = 0;
+    lightNode = ((IntrusiveList *)intrusiveList)[1].head;
+    if (lightNode != 0) {
+        List_RemoveIntrusive(&((IntrusiveList *)intrusiveList)[1], lightNode);
+        List_PrependIntrusive(intrusiveList, lightNode);
+        ((RangeNode *)lightNode)->radius = radiusDescriptor;
+        ((RangeNode *)lightNode)->active = 0;
     }
-    return temp_s0;
+    return lightNode;
 }
 
 void Gdynlight_ReleaseLight(void *a, s32 b) {
     (((struct Limit *) ((s8 *) b))->limit) = 0;
-    func_80255ED8_de(a, b);
-    func_80255CB8_de(a + 0x14, b);
+    List_RemoveIntrusive(a, b);
+    List_PrependIntrusive(a + 0x14, b);
 }
 
 int Gdynlight_GetFirstLight(void *intrusiveList) {
@@ -103,6 +103,6 @@ int Gdynlight_GetNextLight(void *unused0, void *rangeNode) {
 }
 
 /* ROM-grounded data: src/rw_pool_80268A40_CA180_us_rev1.c */
-const unsigned int D_blob_b6dc0b0a225255b58d34[2] = {
+const unsigned int g_dynamicLightDirectionConstants[2] = {
     0x3F800000, 0x3ECCCCCD,
 };

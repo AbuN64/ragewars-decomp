@@ -1,13 +1,13 @@
 #include "include_asm.h"
 #include "TYPES.H"
-#include "COMMON/LONE/D_8011AF38.H"
+#include "COMMON/LONE/PARTICLE_PITCH_MATRIX_SCRATCH.H"
 
 extern void guMtxIdent(s32 *);
-extern void func_80255CA0_de(void *list, s32 nextOffset, s32 prevOffset);
-extern void func_80255D14_de(void *list, void *node);
-extern void func_80219460_de(void *definition);
+extern void List_InitializeIntrusive(void *list, s32 nextOffset, s32 prevOffset);
+extern void List_AppendIntrusive(void *list, void *node);
+extern void Playerai_InitializeCompactAnimationState(void *definition);
 extern void BuildPitchMatrix(void *matrix, f32 angle);
-extern s32 D_8011ADB0;
+extern s32 g_particleActorDefinition;
 
 typedef struct EntryBlock {
     s32 *entries;
@@ -24,7 +24,7 @@ typedef struct PoolVertex {
     u8 color[4];
 } PoolVertex;
 
-extern PoolVertex D_8011AF78[4];
+extern PoolVertex g_particleSpriteVertices[4];
 
 typedef struct PoolSlot {
     u8 kind;                                   /* +0x0 */
@@ -61,32 +61,32 @@ void Batch_InitEntryBatch(EntryBlock *batch, s32 *entries, s32 count) {
     Map_ResetFramePool(batch);
 }
 
-/* Initialises a pool of 128 slots of 0x1F8 bytes: every slot gets kind 2, the shared definition D_8011ADB0 and
+/* Initialises a pool of 128 slots of 0x1F8 bytes: every slot gets kind 2, the shared definition g_particleActorDefinition and
  * cleared words; the free list takes all slots, then the live list and the three group lists are emptied. Sets
- * the unit quad D_8011AF78 (corner signs and texture corners per vertex, white), builds the matrix D_8011AF38
+ * the unit quad g_particleSpriteVertices (corner signs and texture corners per vertex, white), builds the matrix g_particlePitchMatrixScratch
  * for a quarter turn and records the owner word. */
 void Batch_InitSlotPool(SlotPool *pool, s32 owner) {
     s32 i;
     s32 corner;
 
     for (i = 0; i < 128; i++) {
-        pool->slots[i].definition = &D_8011ADB0;
+        pool->slots[i].definition = &g_particleActorDefinition;
         pool->slots[i].kind = 2;
         pool->slots[i].word5C = 0;
         pool->slots[i].word1DC = 0;
         pool->slots[i].word1E4 = 0;
     }
-    func_80255CA0_de(pool->freeList, 0x1E8, 0x1EC);
+    List_InitializeIntrusive(pool->freeList, 0x1E8, 0x1EC);
     for (i = 0; i < 128; i++) {
-        func_80255D14_de(pool->freeList, &pool->slots[i]);
+        List_AppendIntrusive(pool->freeList, &pool->slots[i]);
     }
-    func_80255CA0_de(pool->liveList, 0x1F0, 0x1F4);
+    List_InitializeIntrusive(pool->liveList, 0x1F0, 0x1F4);
     for (i = 0; i < 3; i++) {
-        func_80255CA0_de(pool->groups[i], 0x1E8, 0x1EC);
+        List_InitializeIntrusive(pool->groups[i], 0x1E8, 0x1EC);
     }
-    func_80219460_de(&D_8011ADB0);
+    Playerai_InitializeCompactAnimationState(&g_particleActorDefinition);
     for (corner = 0; corner < 4; corner++) {
-        PoolVertex *v = &D_8011AF78[corner];
+        PoolVertex *v = &g_particleSpriteVertices[corner];
         switch (corner) {
         case 0:
             v->x = -1;
@@ -120,28 +120,28 @@ void Batch_InitSlotPool(SlotPool *pool, s32 owner) {
         v->color[2] = 0xFF;
         v->color[3] = 0xFF;
     }
-    BuildPitchMatrix(D_8011AF38, 1.5707964f);
+    BuildPitchMatrix(g_particlePitchMatrixScratch, 1.5707964f);
     pool->owner = owner;
     pool->count = 0;
 }
 
 #if defined(VERSION_DE)
-unsigned int D_auto_rodata_unresolved_8044B5F4[3] = {
+unsigned int g_batchLinkGapWords[3] = {
     0x14A20003, 0x00000000, 0x08112DD8,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_8044B764[3] = {
+unsigned int g_batchConstantWords[3] = {
     0x616D6552, 0x00000400, 0x00000800,
 };
 #endif
 #if defined(VERSION_EU)
-unsigned int D_auto_rodata_unresolved_8044C8C4[3] = {
+unsigned int g_batchConstantWordsBlock1[3] = {
     0x14400048, 0x00000000, 0x93B10127,
 };
 #endif
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_unresolved_8044C244[3] = {
+unsigned int g_batchLinkGapWordsBlock1[3] = {
     0x3C010002, 0x01010821, 0x8C30B40C,
 };
 #endif

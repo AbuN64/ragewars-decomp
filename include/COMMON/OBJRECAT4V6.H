@@ -2,9 +2,9 @@
 #define COMMON_OBJRECAT4V6_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-extern f32 D_800C9068;
+extern f32 g_initialVoiceUnitScale;
 
-extern float D_800D0D10;
+extern float g_spatialSoundRangeSquared;
 
 struct RecordCode8025A3EC;
 typedef struct RecordCode8025A3EC RecordCode8025A3EC;
@@ -37,7 +37,7 @@ struct RecordCode8025A3EC {
     s32 fA4;
     s32 soundId; /* +0xA8 */
     s32 fAC;
-    struct ContextRecAt2BC0 *owner; /* probe 20261019T012703451174Z */
+    struct GameAudioContext *owner; /* probe 20261019T012703451174Z */
     s32 fB4;
     f32 fB8;
     s32 fBC;
@@ -46,16 +46,16 @@ struct RecordCode8025A3EC {
     f32 fC8; /* per-slot volume scale, 0xC8 */
 };
 
-struct ObjRecAt4V6;
+struct VoiceRecordHolder;
 
 
-struct SlotRecAtB0;
-typedef struct SlotRecAtB0 SlotRecAtB0;
+struct AudioVoiceStopKeySlotView;
+typedef struct AudioVoiceStopKeySlotView AudioVoiceStopKeySlotView;
 
 
 
-struct SlotRecAtA8;
-struct SlotRecAtA8 {
+struct AudioVoiceKeySlotView;
+struct AudioVoiceKeySlotView {
     char pad0[8];
     s32 used;
     char pad[0x9C];
@@ -63,23 +63,23 @@ struct SlotRecAtA8 {
     char pad2[0x20];
 };
 
-struct HeaderRecAt102;
-typedef struct HeaderRecAt102 HeaderRecAt102;
+struct AudioSelectedHandleView;
+typedef struct AudioSelectedHandleView AudioSelectedHandleView;
 
-struct SlotRecAtA8;
-typedef struct SlotRecAtA8 SlotRecAtA8;
+struct AudioVoiceKeySlotView;
+typedef struct AudioVoiceKeySlotView AudioVoiceKeySlotView;
 
-struct HeaderRecAt102;
-struct HeaderRecAt102 {
+struct AudioSelectedHandleView;
+struct AudioSelectedHandleView {
     char pad[0x102];
     s16 local;
 };
 
-struct RecordRecAt4V3;
+struct VoiceKeyTable;
 
 
-struct ObjRecAt4V6;
-typedef struct ObjRecAt4V6 ObjRecAt4V6;
+struct VoiceRecordHolder;
+typedef struct VoiceRecordHolder VoiceRecordHolder;
 
 struct OwnerCode8025A3EC8025B5F0;
 typedef struct OwnerCode8025A3EC8025B5F0 OwnerCode8025A3EC8025B5F0;
@@ -96,8 +96,8 @@ struct OwnerCode8025A3EC8025B5F0 {
 };
 
 struct OwnerCode8025A3EC8025B5F0;
-struct SlotRecAtB0;
-struct SlotRecAtB0 {
+struct AudioVoiceStopKeySlotView;
+struct AudioVoiceStopKeySlotView {
     s32 index;
     s32 state;
     s32 used;
@@ -112,12 +112,12 @@ struct SlotRecAtB0 {
     char pad3[0x18];
 };
 
-extern int D_800CBB00;
+extern int g_peakActiveVoiceCount;
 
 struct IntegerStateB4;
 
-struct SlotRecAtB8;
-struct SlotRecAtB8 {
+struct AudioVoiceSoundSlotView;
+struct AudioVoiceSoundSlotView {
     char pad0[0xA8];
     s32 flags;
     char padaC[8];
@@ -125,8 +125,8 @@ struct SlotRecAtB8 {
     char end[0x14];
 };
 
-struct SlotRecAtB4V1;
-typedef struct SlotRecAtB4V1 SlotRecAtB4V1;
+struct AudioVoiceSecondarySlotView;
+typedef struct AudioVoiceSecondarySlotView AudioVoiceSecondarySlotView;
 
 
 struct SlotCode8025A3EC;
@@ -142,13 +142,13 @@ struct SlotCode8025A3EC {
 struct SlotCode8025A3EC;
 typedef struct SlotCode8025A3EC SlotCode8025A3EC;
 
-struct ObjRecAtCV4;
+struct VoiceKeyPairTable;
 
 
-extern float D_800C9044;
+extern float g_distancePitchRestFactor;
 
-struct RecordRecAt4V3;
-typedef struct RecordRecAt4V3 RecordRecAt4V3;
+struct VoiceKeyTable;
+typedef struct VoiceKeyTable VoiceKeyTable;
 
 
 
@@ -160,8 +160,8 @@ struct Slots {
 };
 
 
-struct SlotRecAtB4V1;
-struct SlotRecAtB4V1 {
+struct AudioVoiceSecondarySlotView;
+struct AudioVoiceSecondarySlotView {
     s32 index;
     s32 state;
     s32 used;
@@ -177,7 +177,7 @@ struct SlotRecAtB4V1 {
     char pad3[0x14];
 };
 
-extern float D_800C3F68_de;
+extern float g_voicePlaybackTimeThreshold;
 
 struct Slots;
 typedef struct Slots Slots;
@@ -209,10 +209,10 @@ struct ViewChannelUpdateVoicePlayback;
 
 
 
-extern float D_800C3F80_de;
+extern float g_voiceAttenuationOutputScale;
 
-struct SlotRecAtB4V2;
-struct SlotRecAtB4V2 {
+struct AudioVoiceControlSlotView;
+struct AudioVoiceControlSlotView {
     s32 index;
     s32 state;
     s32 used;
@@ -232,57 +232,57 @@ struct SlotRecAtB4V2 {
     char padB8[0x14];
 };
 
-extern float D_800C3F88_de;
+extern float g_voiceDistanceAttenuationConstants;
 
 
-struct SlotRecAtB4V2;
-typedef struct SlotRecAtB4V2 SlotRecAtB4V2;
+struct AudioVoiceControlSlotView;
+typedef struct AudioVoiceControlSlotView AudioVoiceControlSlotView;
 
-struct RecordRecAt4V4;
-struct RecordRecAt4V4 {
-    HeaderRecAt102 *header;
-    SlotRecAtB4V2 slots[17];
+struct AudioVoiceFlagsPoolView;
+struct AudioVoiceFlagsPoolView {
+    AudioSelectedHandleView *header;
+    AudioVoiceControlSlotView slots[17];
 };
 
 
-struct SlotRecAtB8;
-typedef struct SlotRecAtB8 SlotRecAtB8;
+struct AudioVoiceSoundSlotView;
+typedef struct AudioVoiceSoundSlotView AudioVoiceSoundSlotView;
 
-extern void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index);
-
-
-
-extern s32 Audio_GetVoiceSoundState(SlotRecAtB8 *voicePool, s16 slotIndex);
+extern void Audio_PlayVoiceSound(AudioVoiceSoundSlotView *base, s16 index);
 
 
 
-
-struct RecordRecAt4V5;
-typedef struct RecordRecAt4V5 RecordRecAt4V5;
-
-
-struct HeaderRecAt102;
-struct RecordRecAt4V6;
-
-struct RecordRecAt4V5;
-
-extern float D_800C3F50_de;
+extern s32 Audio_GetVoiceSoundState(AudioVoiceSoundSlotView *voicePool, s16 slotIndex);
 
 
 
-struct RecordRecAt4V4;
-typedef struct RecordRecAt4V4 RecordRecAt4V4;
 
-extern float D_800CB8E8;
+struct VoiceSecondaryKeyTable;
+typedef struct VoiceSecondaryKeyTable VoiceSecondaryKeyTable;
+
+
+struct AudioSelectedHandleView;
+struct VoiceStopKeyTable;
+
+struct VoiceSecondaryKeyTable;
+
+extern float g_distancePitchInitialFactor;
+
+
+
+struct AudioVoiceFlagsPoolView;
+typedef struct AudioVoiceFlagsPoolView AudioVoiceFlagsPoolView;
+
+extern float g_voicePitchTableBase;
 
 
 struct Emitter;
 
-extern float D_800C3F84_de;
+extern float g_voicePoolInitialUnitScale;
 
 
-struct RecordRecAt4V6;
-typedef struct RecordRecAt4V6 RecordRecAt4V6;
+struct VoiceStopKeyTable;
+typedef struct VoiceStopKeyTable VoiceStopKeyTable;
 
 
 struct IntegerStateB4;
@@ -294,13 +294,13 @@ typedef struct ContextCode8025A3EC ContextCode8025A3EC;
 struct ViewChannelUpdateVoicePlayback;
 typedef struct ViewChannelUpdateVoicePlayback ViewChannelUpdateVoicePlayback;
 
-extern float D_800C9048;
+extern float g_distancePitchFactorBounds;
 
 struct Emitter;
 typedef struct Emitter Emitter;
 
 
-struct ObjRecAtCV4;
-typedef struct ObjRecAtCV4 ObjRecAtCV4;
+struct VoiceKeyPairTable;
+typedef struct VoiceKeyPairTable VoiceKeyPairTable;
 
 #endif

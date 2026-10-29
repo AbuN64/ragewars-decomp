@@ -1,11 +1,11 @@
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MOTION_STEP.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "ANIM/RAY180.H"
 #include "TYPES.H"
 #include "COMMON/OBJ.H"
-#include "COMMON/LONE/D_80103FCC.H"
+#include "COMMON/LONE/COLLISION_CURRENT_ACTOR.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
 extern f32 Gobjinst_GetActorRadius(void *);
@@ -35,7 +35,7 @@ void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *flo
     f32 turn[16];
     CQuatern yaw;
     CQuatern orient;
-    ShapeRecAt18V1 *shape;
+    CollisionShapeDefinition *shape;
     char *anim;
     f32 grow;
     f32 lift;
@@ -54,7 +54,7 @@ void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *flo
     f32 angle;
 
     anim = obj + 0x170;
-    shape = (ShapeRecAt18V1 *)((u8 *)((LevelActor *)obj)->definition + 0x14);
+    shape = (CollisionShapeDefinition *)((u8 *)((LevelActor *)obj)->definition + 0x14);
     if (attachment != 0) {
         grow = Gobjinst_GetActorRadius(attachment);
         lift = Gobjinst_GetActorHeight(attachment);
@@ -110,7 +110,7 @@ void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *flo
     yaw.y = sine;
     yaw.z = 0.0f;
     angle = ((LevelActor *)obj)->yaw * 0.5f;
-    D_80115DEC = sine;
+    g_turretAimSine = sine;
     yaw.w = Math_Cosf(angle);
     MultiplyQuaternions(&orient, &yaw, &((LevelActor *)obj)->rotation);
     MatrixFromQuaternion(&orient, turn);
@@ -138,7 +138,7 @@ struct CCollisionInfo2_t;
 
 extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-extern char D_80100338;
+extern char g_supportingPlatformCollisionQuery;
 
 extern void Plane_BuildBoxFace5(void *, RayCornerBounds *);
 extern void Plane_BuildBoxFace4(void *, RayCornerBounds *);
@@ -149,7 +149,7 @@ extern void Plane_BuildBoxFace0(void *, RayCornerBounds *);
 extern s32 CCollision_TestSegmentDisk(void *, void *, void *, f32, s32);
 extern s32 CCollision_TestSegmentPolygon(void *, void *, s32);
 extern s32 CCollision_TestRayCylinder(void *, void *, f32, f32, f32, s32, void *, s32);
-void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox *actor, OwnerRecAt18 *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
+void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox *actor, PlatformCollisionEntryOwner *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
     u8 collision[0x108];
     CVector3 next;
     f32 hit_y;
@@ -164,8 +164,8 @@ void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox
         query->word0 = 3;
         Plane_BuildBoxFace0(query, bounds);
         if (CCollision_TestSegmentPolygon(actor, query, 0)) {
-            saved_collision = D_80103FCC;
-            D_80103FCC = collision;
+            saved_collision = g_collisionCurrentActor;
+            g_collisionCurrentActor = collision;
             hit_y = CCollision_GetSurfaceHeight(query, input->x, input->z);
             input->owner = owner;
             extent0 = InstHdr_GetActorReach(input);
@@ -173,9 +173,9 @@ void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox
             extent2 = Gobjinst_GetActorHeight(input);
             extent3 = InstHdr_GetActorBaseOffset(input);
             next.x = input->x;
-            next.y = hit_y + D_800C3758_de[0];
+            next.y = hit_y + g_platformCollisionHeightOffsets[0];
             next.z = input->z;
-            if (Unicol_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
+            if (Unicol_SweepActorMotion(input, *(CVector3 *)&input->x, next, &g_playerCollisionProbe,
                               extent0, extent1, extent2, extent3)) {
                 actor->saved_query = *query;
                 actor->flags |= 8;
@@ -191,7 +191,7 @@ void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox
                 }
                 input->flags38 = (input->flags38 & ~3) | 2;
             }
-            D_80103FCC = saved_collision;
+            g_collisionCurrentActor = saved_collision;
         }
     }
     if (actor->movement.y < 0.0f) {
@@ -221,7 +221,7 @@ void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox
     }
 }
 
-void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFromBox *actor, OwnerRecAt18 *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
+void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFromBox *actor, PlatformCollisionEntryOwner *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
     u8 collision[0x108];
     CVector3 next;
     f32 hit_y;
@@ -236,13 +236,13 @@ void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFr
 
     owner_data = &((LevelActor *)owner)->position0;
     entry = owner->entries + 0x14;
-    height = ((ShapeRecAt18V1 *)entry)->radius + Gobjinst_GetActorRadius(input);
+    height = ((CollisionShapeDefinition *)entry)->radius + Gobjinst_GetActorRadius(input);
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
         Plane_BuildBoxFace0(query, bounds);
         if (CCollision_TestSegmentDisk(actor, query, owner_data, height, 0)) {
-            saved_collision = D_80103FCC;
-            D_80103FCC = collision;
+            saved_collision = g_collisionCurrentActor;
+            g_collisionCurrentActor = collision;
             hit_y = CCollision_GetSurfaceHeight(query, input->x, input->z);
             input->owner = owner;
             extent0 = InstHdr_GetActorReach(input);
@@ -250,9 +250,9 @@ void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFr
             extent2 = Gobjinst_GetActorHeight(input);
             extent3 = InstHdr_GetActorBaseOffset(input);
             next.x = input->x;
-            next.y = hit_y + D_800C3758_de[1];
+            next.y = hit_y + g_platformCollisionHeightOffsets[1];
             next.z = input->z;
-            if (Unicol_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
+            if (Unicol_SweepActorMotion(input, *(CVector3 *)&input->x, next, &g_playerCollisionProbe,
                               extent0, extent1, extent2, extent3)) {
                 actor->saved_query = *query;
                 actor->flags |= 8;
@@ -268,7 +268,7 @@ void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFr
                 }
                 input->flags38 = (input->flags38 & ~3) | 2;
             }
-            D_80103FCC = saved_collision;
+            g_collisionCurrentActor = saved_collision;
         }
     }
     if (actor->movement.y < 0.0f) {
@@ -292,13 +292,13 @@ void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFr
     }
 }
 
-void CPlatformCollision_TraceShape(ActorCPlatformCollisionTraceShape *actor, OwnerRecAt18 *owner) {
-    QueryRecAt58 query;
+void CPlatformCollision_TraceShape(ActorCPlatformCollisionTraceShape *actor, PlatformCollisionEntryOwner *owner) {
+    PlatformCollisionQuery query;
     RayCornerBounds bounds;
-    EntryRecAt8V5 *entry;
+    CollisionKindValueRecord *entry;
 
     entry = &((RayEntryBlock *)owner->entries)->entry;
-    if ((actor->field40 != &D_80100338) && (((Shape *)actor->field40)->enabled != 0)) {
+    if ((actor->collisionShape != &g_supportingPlatformCollisionQuery) && (((Shape *)actor->collisionShape)->enabled != 0)) {
         f32 value;
         s32 *word;
         void *owner_data;
@@ -314,19 +314,19 @@ void CPlatformCollision_TraceShape(ActorCPlatformCollisionTraceShape *actor, Own
         case 1:
             word = &query.word0;
             owner_data = &((LevelActor *)owner)->position0;
-            value = ((RayEntryBlock *)owner->entries)->entry.value + actor->fieldC;
-            if ((actor->field5C != *(f32 *)&query.word4) ||
-                (actor->field64 != *(f32 *)&query.word4)) {
+            value = ((RayEntryBlock *)owner->entries)->entry.value + actor->radius;
+            if ((actor->movementX != *(f32 *)&query.word4) ||
+                (actor->movementZ != *(f32 *)&query.word4)) {
                 *word = 3;
                 CCollision_TestRayCylinder(actor, owner_data, value, bounds.corners[0].y,
                               bounds.corners[4].y, 1, word, 1);
             }
-            if (actor->field60 > 0.0f) {
+            if (actor->movementY > 0.0f) {
                 *word = 2;
                 Plane_BuildBoxFace1(word, &bounds);
                 CCollision_TestSegmentDisk(actor, word, owner_data, value, 1);
             }
-            if (actor->field60 < 0.0f) {
+            if (actor->movementY < 0.0f) {
                 *word = 9;
                 Plane_BuildBoxFace0(word, &bounds);
                 CCollision_TestSegmentDisk(actor, word, owner_data, value, 1);
@@ -339,14 +339,14 @@ void CPlatformCollision_TraceShape(ActorCPlatformCollisionTraceShape *actor, Own
             f32 zero;
 
             word = &query.word0;
-            movement = actor->field60;
+            movement = actor->movementY;
             zero = *(f32 *)&query.word4;
             if (zero < movement) {
                 *word = 2;
                 Plane_BuildBoxFace1(word, &bounds);
                 CCollision_TestSegmentPolygon(actor, word, 1);
             }
-            if ((actor->field5C != zero) || (actor->field64 != zero)) {
+            if ((actor->movementX != zero) || (actor->movementZ != zero)) {
                 *word = 3;
                 Plane_BuildBoxFace2(word, &bounds);
                 CCollision_TestSegmentPolygon(actor, word, 1);
@@ -357,7 +357,7 @@ void CPlatformCollision_TraceShape(ActorCPlatformCollisionTraceShape *actor, Own
                 Plane_BuildBoxFace5(word, &bounds);
                 CCollision_TestSegmentPolygon(actor, word, 1);
             }
-            if (actor->field60 < 0.0f) {
+            if (actor->movementY < 0.0f) {
                 *word = 9;
                 Plane_BuildBoxFace0(word, &bounds);
                 CCollision_TestSegmentPolygon(actor, word, 1);
@@ -382,11 +382,11 @@ void CPlatformCollision_ProcessRiderMotion(ActorCPlatformCollisionProcessRiderMo
     Triple saved_position;
     SurfaceHit query;
     RayCornerBounds bounds;
-    OwnerRecAt18 *owner;
-    EntryRecAt4V3 *entry;
+    PlatformCollisionEntryOwner *owner;
+    CollisionKindRecord *entry;
 
     owner = actor->owner;
-    entry = (EntryRecAt4V3 *)(owner->entries + 0x14);
+    entry = (CollisionKindRecord *)(owner->entries + 0x14);
     if (*actor->flags & 0x40000) {
         saved_previous = actor->previous;
         saved_position = actor->position;
@@ -414,7 +414,7 @@ void CPlatformCollision_ProcessRiderMotion(ActorCPlatformCollisionProcessRiderMo
 
 struct CCollisionInfo2_t;
 
-void CPlatformCollision_LiftActorToSurface(ActorRecAtB0 *actor, void *owner, InputCPlatformCollisionLiftActorToSurface *input, SurfaceHit *query) {
+void CPlatformCollision_LiftActorToSurface(PlatformSavedCollisionQueryView *actor, void *owner, InputCPlatformCollisionLiftActorToSurface *input, SurfaceHit *query) {
     u8 collision[0x108];
     CVector3 next;
     f32 hit_y;
@@ -424,8 +424,8 @@ void CPlatformCollision_LiftActorToSurface(ActorRecAtB0 *actor, void *owner, Inp
     f32 extent3;
     void *saved_collision;
 
-    saved_collision = D_80103FCC;
-    D_80103FCC = collision;
+    saved_collision = g_collisionCurrentActor;
+    g_collisionCurrentActor = collision;
     hit_y = CCollision_GetSurfaceHeight(query, input->x, input->z);
     input->owner = owner;
     extent0 = InstHdr_GetActorReach(input);
@@ -433,9 +433,9 @@ void CPlatformCollision_LiftActorToSurface(ActorRecAtB0 *actor, void *owner, Inp
     extent2 = Gobjinst_GetActorHeight(input);
     extent3 = InstHdr_GetActorBaseOffset(input);
     next.x = input->x;
-    next.y = hit_y + D_800C3760_de;
+    next.y = hit_y + g_platformCollisionHeightClearance;
     next.z = input->z;
-    if (Unicol_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
+    if (Unicol_SweepActorMotion(input, *(CVector3 *)&input->x, next, &g_playerCollisionProbe,
                       extent0, extent1, extent2, extent3)) {
         actor->saved_query = *query;
         actor->flags |= 8;
@@ -451,5 +451,5 @@ void CPlatformCollision_LiftActorToSurface(ActorRecAtB0 *actor, void *owner, Inp
         }
         input->flags38 = (input->flags38 & ~3) | 2;
     }
-    D_80103FCC = saved_collision;
+    g_collisionCurrentActor = saved_collision;
 }

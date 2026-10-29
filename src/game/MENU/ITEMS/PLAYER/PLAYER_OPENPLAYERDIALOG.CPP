@@ -1,26 +1,26 @@
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/ITEMS/PLAYER_OPENPLAYERDIALOG.H"
 #include "MENU/PAK/TIMER_CANCELPENDINGOPERATION.H"
 
-/* Loads the owner at offset 0x1C of the second argument into D_80145040 through func_8022A5A0_de,
+/* Loads the owner at offset 0x1C of the second argument into g_playerViewRenderContext through func_8022A5A0_de,
    calls func_804097E8_de, and hands the owner, its word at 0x698 and a zero with the resource
-   D_44F0DC to Menu_OpenDialog for the block 0x5DC bytes into D_80145040. Returns one. */
+   D_44F0DC to Menu_OpenDialog for the block 0x5DC bytes into g_playerViewRenderContext. Returns one. */
 
 
 
 
-extern char D_80145040[];
-extern void Player_GetPlayerIndex(void *, struct OwnerRecAt698 *);
-extern void Menu_OpenDialog(void *, void *, struct OwnerRecAt698 *, s32, s32);
+extern char g_playerViewRenderContext[];
+extern void Player_GetPlayerIndex(void *, struct MenuItemControllerView *);
+extern void Menu_OpenDialog(void *, void *, struct MenuItemControllerView *, s32, s32);
 
-s32 Player_OpenPlayerDialog(void *unused, struct HolderRecAt1CV1 *holder) {
-    struct OwnerRecAt698 *owner = holder->owner;
+s32 Player_OpenPlayerDialog(void *unused, struct MenuItemOwnerLinkView *holder) {
+    struct MenuItemControllerView *owner = holder->owner;
 
-    Player_GetPlayerIndex(D_80145040, owner);
+    Player_GetPlayerIndex(g_playerViewRenderContext, owner);
     Timer_ClearTimerFlag();
-    Menu_OpenDialog(D_80145040 + 0x5DC, D_0044E48C, owner, owner->value, 0);
+    Menu_OpenDialog(g_playerViewRenderContext + 0x5DC, g_playerMenuDialogRomResource, owner, owner->value, 0);
     return 1;
 }

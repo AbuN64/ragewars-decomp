@@ -1,5 +1,5 @@
 #include "COMMON/WORLD.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "include_asm.h"
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "MENU/PAK_DIRECTORY_VIEWS.H"
@@ -10,7 +10,7 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-/* Returns one less than the word D_8011FEFC points to. */
+/* Returns one less than the word g_trackResourceDirectory points to. */
 
 /* Looks up the current menu resource through SetN64_LocatePackSection from the fields at 0x74 and 0x34 of
    D_8011FE88 and, when found, opens it through Cache_RequestResource as widget 0x33 with the handler table
@@ -27,13 +27,13 @@ extern void *SetN64_LocatePackSection(int, int, int, int *);
    weighted by u cubed less u and to by t cubed less t. The constant lives in a shared literal
    pool outside this object, so it is read by name. */
 
-/* Looks up the object at offset 4 of the structure D_800E2830 points to through SetN64_GetPackSection
+/* Looks up the object at offset 4 of the structure g_cinemaSequenceState points to through SetN64_GetPackSection
    with zero, then looks up the result again with the argument, and returns that. */
 
 
 
 s32 Menu_GetCinemaSequenceCount(void) {
-    return *D_8011FEFC - 1;
+    return *g_trackResourceDirectory - 1;
 }
 
 int Menu_RequestTrackBundle(void) {
@@ -59,30 +59,30 @@ f32 Menu_BlendLinear(f32 from, f32 to, f32 weight) {
 }
 
 void *Menu_GetPackEntry(s32 key) {
-    return SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key);
+    return SetN64_GetPackSection(SetN64_GetPackSection(g_cinemaSequenceState->resource, 0), key);
 }
 
 s32 Menu_GetTrackEyeHoldFlag(s32 key) {
-    return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key), 2))[0];
+    return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(g_cinemaSequenceState->resource, 0), key), 2))[0];
 }
 
 s32 Menu_GetTrackTargetHoldFlag(s32 key) {
-    return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key), 2))[1];
+    return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(g_cinemaSequenceState->resource, 0), key), 2))[1];
 }
 
 void *Menu_GetTrackTargetClip(s32 key) {
-    return SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key), 1);
+    return SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(g_cinemaSequenceState->resource, 0), key), 1);
 }
 
 void CTrackResource_AccessResourceSection(void) {
-    SetN64_GetPackSection(D_800E2830->resource, 3);
+    SetN64_GetPackSection(g_cinemaSequenceState->resource, 3);
 }
 
 /* Returns whether a record's subtype at 0x12 is the one its kind at 0x11 requires: 5 for kind 1, 4 for
    kind 9 and 3 for kind 10; other kinds give 0. */
 
 
-int Menu_IsTrackRequestItem(RecordRecAt12 *rec) {
+int Menu_IsTrackRequestItem(PakDirectoryEntryKindView *rec) {
     int result = 0;
 
     switch (rec->kind) {

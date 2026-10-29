@@ -6,7 +6,7 @@
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-/* The selection-message screen D_800E5830: its menu rules block, then its item and reply state. */
+/* The selection-message screen g_resultsModelPreviewScreen: its menu rules block, then its item and reply state. */
 struct SelectionMessageScreen;
 
 struct SoundOptionsScreen;

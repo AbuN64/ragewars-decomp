@@ -10,7 +10,7 @@ struct ContactNode {
     u8 pad0[0x16E0];
     ContactNode *next; /* 0x16E0 */
 };
-extern ContactNode *D_80145060;
+extern ContactNode *g_transientPlayerList;
 static inline void dispatchEffect(void *object, void *source, s32 effect, CVector3 position, ContactEffectStyle style) {
     if (g_effectCallbackFlags[effect].handler != 0) {
         g_effectCallbackFlags[effect].handler(object, source, effect, position, style);
@@ -45,7 +45,7 @@ void Events_DeliverContactEffect(void *target, void *source, s32 effect, s32 unu
                 dispatchEffect(other, source, effect, position, style);
             }
         }
-        for (node = D_80145060; node != 0; node = node->next) {
+        for (node = g_transientPlayerList; node != 0; node = node->next) {
             if ((void *)node != target && (char *)node + 0x2E8 != target) {
                 dispatchEffect(node, source, effect, position, style);
             }
@@ -58,7 +58,7 @@ void Events_DeliverContactEffect(void *target, void *source, s32 effect, s32 unu
                 dispatchEffect(other, source, effect, position, style);
             }
         }
-        node = D_80145060;
+        node = g_transientPlayerList;
         while (node != 0) {
             if ((void *)node != target && (char *)node + 0x2E8 != target) {
                 dispatchEffect(node, source, effect, position, style);

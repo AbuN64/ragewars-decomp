@@ -5,9 +5,9 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 /* Complete camera records and callback ABI from origin/legacy func_80234FDC.c. */
-typedef struct Shared_func_80234FDC_S5 Shared_func_80234FDC_S5;
-struct Shared_func_80234FDC_S5 {
-    s32 unk0; /* +0x0: src/func_80234FDC.c */
+typedef struct CameraRuntimeMode CameraRuntimeMode;
+struct CameraRuntimeMode {
+    s32 mode; /* +0x0: src/func_80234FDC.c */
 };
 
 
@@ -40,16 +40,16 @@ struct Lights {
 };
 
 
-typedef struct Shared_func_80234FDC_S1 Shared_func_80234FDC_S1;
-struct Shared_func_80234FDC_S1 {
+typedef struct SharedCameraOwnerView SharedCameraOwnerView;
+struct SharedCameraOwnerView {
     char pad0[0x5DC];
-    s32 unk5DC; /* +0x5DC: src/func_80234FDC.c */
+    s32 camera; /* +0x5DC: src/func_80234FDC.c */
     char pad5E0[0x84];
-    s32 unk664; /* +0x664: src/func_80234FDC.c */
+    s32 movementFlags; /* +0x664: src/func_80234FDC.c */
     char pad668[0x60];
-    f32 unk6C8; /* +0x6C8: src/func_80234FDC.c */
+    f32 bobSpeed; /* +0x6C8: src/func_80234FDC.c */
     char pad6CC[0x1014];
-    void * unk16E0; /* +0x16E0: src/func_80234FDC.c */
+    void * nextActor; /* +0x16E0: src/func_80234FDC.c */
 };
 
 
@@ -66,17 +66,17 @@ struct GameplayCamera {
     s16 state; /* 0x1C */
     u8 pad1E[2];
     s32 stateCounter; /* 0x20 */
-    s32 unk24; /* +0x24: src/func_80234FDC.c */
-    f32 unk28;
-    f32 unk2C;
-    f32 unk30;
-    f32 unk34;
-    f32 unk38; /* +0x38: src/func_80234FDC.c */
-    f32 unk3C; /* +0x3C: src/func_80234FDC.c */
-    f32 unk40; /* +0x40: src/func_80234FDC.c */
-    f32 unk44; /* +0x44: src/func_80234FDC.c */
-    Shared_Quad unk48;
-    struct Shared_func_80234FDC_S8 *floorPoly; /* +0x58: src/func_80234FDC.c */
+    s32 bobSuppressed; /* +0x24: src/func_80234FDC.c */
+    f32 lensFlareInputOne;
+    f32 lensFlareInputTwo;
+    f32 lensFlareInputThree;
+    f32 lensFlareInputFour;
+    f32 floorSampleX; /* +0x38: src/func_80234FDC.c */
+    f32 floorSampleY; /* +0x3C: src/func_80234FDC.c */
+    f32 floorSampleZ; /* +0x40: src/func_80234FDC.c */
+    f32 floorHeightOffset; /* +0x44: src/func_80234FDC.c */
+    Shared_Quad floorSampleData;
+    struct CameraFloorSurfaceView *floorPoly; /* +0x58: src/func_80234FDC.c */
     f32 zoomBlend; /* +0x5C: src/func_80234FDC.c */
     f32 zoomFov; /* +0x60: src/func_80234FDC.c */
     s32 floorSurface; /* +0x64: src/func_80234FDC.c */
@@ -96,19 +96,19 @@ struct GameplayCamera {
     f32 bobRateX; /* +0x98: src/func_80234FDC.c */
     f32 bobRateY; /* +0x9C: src/func_80234FDC.c */
     char padA0[0x18];
-    char unkB8[20]; /* +0xB8: src/func_80234FDC.c */
-    char unkCC[20]; /* +0xCC: src/func_80234FDC.c */
-    char unkE0[20]; /* 0xE0: third CShakeAxis */
+    char shakeAxisX[20]; /* +0xB8: src/func_80234FDC.c */
+    char shakeAxisY[20]; /* +0xCC: src/func_80234FDC.c */
+    char shakeAxisZ[20]; /* 0xE0: third CShakeAxis */
     f32 shakeHorizontal; /* 0xF4 */
     f32 shakeVertical; /* 0xF8 */
-    s32 unkFC;
-    s32 unk100;
-    s32 unk104;
-    s32 unk108;
-    s32 unk10C;
-    f32 unk110;
-    f32 unk114;
-    s32 unk118;
+    s32 fadeMode;
+    s32 fadeState;
+    s32 fadeParameterOne;
+    s32 fadeParameterTwo;
+    s32 fadeParameterThree;
+    f32 fadeScalarOne;
+    f32 fadeScalarTwo;
+    s32 fadeParameterFour;
     char pad11C[4];
     s32 monochrome; /* 0x120: ribbons draw grey while set */
     u16 kickStep; /* +0x124: src/func_80234FDC.c */
@@ -118,7 +118,7 @@ struct GameplayCamera {
     f32 roll; /* +0x138: src/func_80234FDC.c */
     char pad13C[4];
     CQuatern orientation;
-    f32 unk150; /* +0x150: src/func_80234FDC.c */
+    f32 billboardQuaternion; /* +0x150: src/func_80234FDC.c */
     char pad154[0xC];
     f32 viewOrient[16]; /* 0x160: view-to-world rotation (CCamera_t m_mfViewOrient) */
     f32 inverseViewOrient[16]; /* 0x1A0: world-to-view rotation (m_mfInverseViewOrient) */
@@ -151,7 +151,7 @@ struct GameplayCamera {
     u8 unk527;
     f32 farPlane; /* +0x528: src/func_80234FDC.c */
     f32 unk52C;
-    f32 unk530;
+    f32 verticalFieldOfView;
     f32 unk534;
     s32 fadeCounter; /* 0x538 */
     s32 fogNear; /* 0x53C */
@@ -175,25 +175,25 @@ struct GameplayCamera {
 
 
 
-typedef struct Shared_func_80234FDC_S4 Shared_func_80234FDC_S4;
-struct Shared_func_80234FDC_S4 {
-    s32 unk0; /* +0x0: src/func_80234FDC.c */
+typedef struct SharedCameraRenderView SharedCameraRenderView;
+struct SharedCameraRenderView {
+    s32 renderMode; /* +0x0: src/func_80234FDC.c */
     s32 unk4; /* +0x4: src/func_80234FDC.c */
-    s32 unk8; /* +0x8: src/func_80234FDC.c */
+    s32 alternateViewEnabled; /* +0x8: src/func_80234FDC.c */
     char padC[4];
-    RacerViewport view; /* +0x10: D_80141008, the render view embedded in D_80140FF8 */
+    RacerViewport view; /* +0x10: g_fallbackScreenMessageEmitter, the render view embedded in g_playerWeaponClassMode */
     char padView[0x122F - 0x10 - sizeof(RacerViewport)];
-    u8 unk122F; /* +0x122F: src/func_80234FDC.c */
+    u8 sequenceViewReady; /* +0x122F: src/func_80234FDC.c */
     char pad1230[0x590];
-    Shared_func_80234FDC_S5 state; /* +0x17C0: src/func_80234FDC.c */
+    CameraRuntimeMode state; /* +0x17C0: src/func_80234FDC.c */
 };
 
 
 
-typedef struct Shared_func_80234FDC_S8 Shared_func_80234FDC_S8;
-struct Shared_func_80234FDC_S8 {
+typedef struct CameraFloorSurfaceView CameraFloorSurfaceView;
+struct CameraFloorSurfaceView {
     char pad0[0x1C];
-    s32 unk1C; /* +0x1C: src/func_80234FDC.c */
+    s32 surfaceType; /* +0x1C: src/func_80234FDC.c */
 };
 
 

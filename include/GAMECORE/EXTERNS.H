@@ -6,6 +6,6 @@
 
 #include "COMMON/OSPIHANDLE_S.H"
 
-extern s32 D_800C7950_de;
+extern s32 g_extendedPeripheralReadAssertText;
 extern s32 s_epirawreadText;
 #endif

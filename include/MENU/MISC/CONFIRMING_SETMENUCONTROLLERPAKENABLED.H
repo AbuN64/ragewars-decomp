@@ -1,5 +1,5 @@
 #ifndef MENU_MISC_CONFIRMING_SETMENUCONTROLLERPAKENABLED_H
 #define MENU_MISC_CONFIRMING_SETMENUCONTROLLERPAKENABLED_H
 #include "MENU/PLAYERSETTINGS.H"
-extern void Confirming_SetMenuControllerPakEnabled(void *arg0, s32 arg1);
+extern void Confirming_SetMenuControllerPakEnabled(void *menu, s32 enabled);
 #endif

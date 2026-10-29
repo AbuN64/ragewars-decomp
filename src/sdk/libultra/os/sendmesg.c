@@ -1,10 +1,10 @@
 #include "sdk/thread_queue.h"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 
-extern OSThread_s *D_800D5270;
+extern OSThread_s *g_osRunningThread;
 
 extern void func_802BC36C_de(void *queue_data);
 
@@ -19,7 +19,7 @@ s32 osSendMesg(OSMesgQueue *queue, OSMesg entry, s32 mode) {
             __osRestoreInt(saved);
             return -1;
         }
-        D_800D5270->state = 8;
+        g_osRunningThread->state = 8;
         func_802BC36C_de(&queue->fullqueue);
     }
     queue->msg[(queue->first + queue->validCount) % queue->msgCount] = entry;

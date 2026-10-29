@@ -2,7 +2,7 @@
 
 /* 800D7058.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58[6] = {
+unsigned int k_Ovltab8EncodedWords[6] = {
     0x800D7034, 0x800D3668, 0x800D3678, 0x800D367C, 0x800D3680, 0x800D3688,
 };
 #endif
@@ -59,7 +59,7 @@ unsigned int g_itemLabelSlots[187] = {
 /* 800D74F8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D80F8 */
-unsigned int D_blob_phase2_b549ecb9aa43027b8d75[2] = {
+unsigned int g_Ovltab8EncodedWordsBlock6[2] = {
     0x800D4888, 0x800D488C,
 };
 #endif
@@ -83,7 +83,7 @@ unsigned int g_matchOptionLabelSlots[88] = {
 
 /* 800D7660.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260[22] = {
+unsigned int k_Ovltab8EncodedWordsBlock1[22] = {
     0x800D51A0, 0x800D51A4, 0x800D51A8, 0x800D51AC, 0x800D51B0, 0x800D51B4, 0x800D51B8, 0x800D51BC,
     0x800D51C0, 0x800D51C4, 0x800D51C8, 0x800D51CC, 0x800D51D0, 0x800D51D4, 0x800D51D8, 0x800D51DC,
     0x800D51E0, 0x800D51E4, 0x800D51E8, 0x800D51EC, 0x800D51F0, 0x800D51F4,
@@ -92,7 +92,7 @@ unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_uncla
 
 /* 800D76B8.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_inventory_label_slots_us_rev1[17] = {
+unsigned int g_inventoryLabelSlotWords[17] = {
     0x800D51F8, 0x800D5200, 0x800D520C, 0x800D5218, 0x800D5224, 0x800D523C, 0x800D5254, 0x800D5268,
     0x800D5270, 0x800D527C, 0x800D528C, 0x800D52A0, 0x800D52AC, 0x800D52B4, 0x800D52BC, 0x800D52C4,
     0x800D52CC,
@@ -102,7 +102,7 @@ unsigned int D_auto_src_ragewars_inventory_label_slots_us_rev1[17] = {
 /* 800D76FC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D82FC */
-unsigned int D_blob_phase2_de1a2aafdda0f50b73b2[1] = {
+unsigned int g_Ovltab8EncodedWordsBlock8[1] = {
     0x800D52D8,
 };
 #endif
@@ -110,7 +110,7 @@ unsigned int D_blob_phase2_de1a2aafdda0f50b73b2[1] = {
 /* 800D7700.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_pak_game_title_slots_us_rev1.c */
-unsigned int D_blob_eb678a72ce9984380912[2] = {
+unsigned int g_Ovltab8EncodedWordsBlock2[2] = {
     0x800D52DC, 0x800D52E8,
 };
 #endif
@@ -118,22 +118,22 @@ unsigned int D_blob_eb678a72ce9984380912[2] = {
 /* 800D7708.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D82FC_unclaimed_D8308 */
-unsigned int D_blob_phase2_96938f23061fcd7fab72[1] = {
+unsigned int g_Ovltab8EncodedWordsBlock5[1] = {
     0x800D52F0,
 };
 #endif
 
 /* 800D770C.CPP */
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/D_800D36E0.c */
-unsigned int D_blob_phase2_1140d9aa10f48958e9fd[1] = {
+/* ROM-grounded data: src/g_pakLegacySnapshotGameNameFixed.c */
+unsigned int g_Ovltab8EncodedWordsBlock4[1] = {
     0x800D52F4,
 };
 #endif
 
 /* 800D7710.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D82FC_unclaimed_D8308_unclaimed_D8310[29] = {
+unsigned int k_Ovltab8EncodedWordsBlock2[29] = {
     0x800D52FC, 0x800D5300, 0x800D5304, 0x800D5308, 0x800D530C, 0x800D5310, 0x800D5314, 0x800D5318,
     0x800D531C, 0x800D5320, 0x800D5324, 0x800D5328, 0x800D532C, 0x800D5330, 0x800D5334, 0x800D5338,
     0x800D533C, 0x800D5340, 0x800D5344, 0x800D5348, 0x800D534C, 0x800D5350, 0x800D5354, 0x800D5358,
@@ -143,15 +143,15 @@ unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_uncla
 
 /* 800D7784.CPP */
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/D_800D3758.c */
-unsigned int D_blob_phase2_ddc37b49ac2320671a05[1] = {
+/* ROM-grounded data: src/g_pakDefaultNoteNameFixed.c */
+unsigned int g_Ovltab8EncodedWordsBlock7[1] = {
     0x800D5374,
 };
 #endif
 
 /* 800D7788.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D82FC_unclaimed_D8308_unclaimed_D8310_unclaimed_D8388[17] = {
+unsigned int k_Ovltab8EncodedWordsBlock3[17] = {
     0x800D5370, 0x800D5380, 0x800D5384, 0x800D5388, 0x800D538C, 0x800D5390, 0x800D5394, 0x800D5398,
     0x800D539C, 0x800D53A0, 0x800D53A4, 0x800D53A8, 0x800D53AC, 0x800D53B0, 0x800D53B4, 0x800D53B8,
     0x800D53BC,
@@ -170,14 +170,14 @@ unsigned int g_pakNoteLabelSlots[22] = {
 /* 800D7824.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_pak_ok_label_slot_us_rev1.c */
-unsigned int D_blob_32f1948e2d6c194da4de[1] = {
+unsigned int g_Ovltab8EncodedWordsBlock1[1] = {
     0x800D551C,
 };
 #endif
 
 /* 800D7828.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D8424_unclaimed_D8428[145] = {
+unsigned int k_Ovltab8EncodedWordsBlock4[145] = {
     0x800D5520, 0x800D5524, 0x800D5528, 0x800D552C, 0x800D5530, 0x800D5534, 0x800D5538, 0x800D553C,
     0x800D5540, 0x800D5544, 0x800D5548, 0x800D554C, 0x800D5550, 0x800D5554, 0x800D5558, 0x800D555C,
     0x800D5560, 0x800D5564, 0x800D5568, 0x800D556C, 0x800D5570, 0x800D5574, 0x800D5578, 0x800D557C,
@@ -202,7 +202,7 @@ unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_uncla
 
 /* 800D7A6C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_confirmation_label_slots_us_rev1[10] = {
+unsigned int g_confirmationLabelSlotWords[10] = {
     0x800D579C, 0x800D57A8, 0x800D57B4, 0x800D57C0, 0x800D57CC, 0x800D57E0, 0x800D57F8, 0x800D5810,
     0x800D5820, 0x800D582C,
 };
@@ -211,7 +211,7 @@ unsigned int D_auto_src_ragewars_confirmation_label_slots_us_rev1[10] = {
 /* 800D7A94.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D8424_unclaimed_D8694 */
-unsigned int D_blob_phase2_06827b5890e84d0b30ef[1] = {
+unsigned int g_Ovltab8EncodedWordsBlock3[1] = {
     0x800D5830,
 };
 #endif
@@ -252,7 +252,7 @@ unsigned int g_optionLabelSlots[224] = {
 
 /* 800D7E18.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8A18[10] = {
+unsigned int k_Ovltab8EncodedWordsBlock5[10] = {
     0x800D6BE0, 0x800D6BE4, 0x800D6BE8, 0x800D6BEC, 0x800D6BF0, 0x800D6BF4, 0x800D6BF8, 0x800D6BFC,
     0x800D6C00, 0x800D6C04,
 };
@@ -261,14 +261,14 @@ unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_uncla
 /* 800D7E40.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_credits_language_table_us_rev1.c */
-unsigned int D_blob_0ae2358f8bae8d59d7be[1] = {
+unsigned int g_Ovltab8EncodedWords[1] = {
     0x800D6C08,
 };
 #endif
 
 /* 800D7E44.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_keyboard_key_labels_us_rev1[80] = {
+unsigned int g_keyboardKeyLabelWords[80] = {
     0x41000000, 0x800D7E44, 0x42000000, 0x800D7E4C, 0x43000000, 0x800D7E54, 0x44000000, 0x800D7E5C,
     0x45000000, 0x800D7E64, 0x46000000, 0x800D7E6C, 0x47000000, 0x800D7E74, 0x48000000, 0x800D7E7C,
     0x49000000, 0x800D7E84, 0x4A000000, 0x800D7E8C, 0x4B000000, 0x800D7E94, 0x4C000000, 0x800D7E9C,

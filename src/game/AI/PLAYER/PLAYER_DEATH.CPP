@@ -2,7 +2,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/ROUND_STATE_VARIANTS.H"
 
@@ -13,7 +13,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/VECTOR4F.H"
-#include "RENDER/OBJECTSTATE8E.H"
+#include "RENDER/PLAYER_CONTROLLER_RESET_VIEWS.H"
 #include "COMMON/RESULTS.H"
 #include "SYSTEM/LIST.H"
 #include "SYSTEM/LIST.H"
@@ -30,7 +30,7 @@
 extern const Shared_HeightBonuses g_playerDeathHeightOffsets;
 extern const f32 g_playerDeathMotionCenter;
 extern const f32 g_playerDeathMovingSpeed;
-extern s32 D_800C9228_de[2];
+extern s32 g_playerDeathEffectModelIds[2];
 
 
 
@@ -45,8 +45,8 @@ s32 Player_SetPlayerState(void *, void *, s32);
 #ifndef NON_MATCHING
 void *Camera_PostScreenMessage(void *, void *, u8 *);
 #endif
-void *Gsky_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern func_8024796C_de(char *);
-s32 func_8024BE80_de(void *);
+void *Gsky_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern Gobjinst_BuildActorAimQuaternion(char *);
+s32 Gobjinst_GetModelRenderMode(void *);
 void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32); /* extern */
 s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32); /* extern */
 void Control_SetProfileMode(void *, s32);
@@ -65,11 +65,11 @@ void Player_PlacePlayerForRound(void *);
 void Player_ReleaseObjectHandles(void *);
 
 
-extern s32 D_8011D8D0;
+extern s32 g_actorParticleEffectSystem;
 
 
-extern s32 D_8013B364;
-extern struct Shared_GlobalRuntimeState D_80145060;
+extern s32 g_navigationGraph;
+extern struct Shared_GlobalRuntimeState g_transientPlayerList;
 
 
 
@@ -89,7 +89,7 @@ extern struct Shared_GlobalRuntimeState D_80145060;
 
 
 
-void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 damageFlags, s32 state) {
+void Playerai_HandlePlayerDeath(struct Shared_ActorView *player, void *attacker, s32 damageFlags, s32 state) {
     CVector3 spawnPosition;
     struct CVector3_t spawnVector;
     struct CVector3_t motionVector;
@@ -100,7 +100,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 damag
     s32 *messageContext;
     CQuatern motionOutput;
     s32 spawnProbeResult;
-    
+
     s8 *settingsBase;
     struct Shared_PlayerSettingsRecord *playerSettingsRecord;
     s16 firstAmmoCount;
@@ -108,30 +108,30 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 damag
     s16 thirdAmmoCount;
     s32 previousAction;
     s16 deathSound;
-    s16 var_a0_5;
+    s16 unusedShort;
     void *resetMessageTarget;
     void *releaseMessageTarget;
     s32 deathEffectFrame;
     void *spawnedAmmoPickup;
-    s32 temp_v0_12;
+    s32 unusedDeathWord;
     s32 firstAmmoRandom;
     s32 firstAmmoQuotient;
     s32 secondAmmoRandom;
     s32 secondAmmoQuotient;
     s32 thirdAmmoRandom;
     s32 thirdAmmoQuotient;
-    s32 temp_v1_4;
+    s32 unusedEffectWord;
     s32 motionRandomX;
     s32 motionRandomY;
     s32 motionRandomZ;
     s32 firstAmmoDrop;
     s32 secondAmmoDrop;
     s32 thirdAmmoDrop;
-    s32 var_a2;
+    s32 unusedPickupWord;
     s32 ammoPickupType;
     s32 deathEffectFlags;
     s32 i;
-    
+
     s32 loopLimit;
     s32 hasAmmoDrop;
     s32 playerArrayOffset;
@@ -160,16 +160,16 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 damag
     ((struct Shared_ActorView *)player)->field1218 = 0;
     Link_DispatchActorLinks(attacker, 1, attacker);
     Player_ReleaseObjectHandles(player);
-    func_8022B530_de((s32)player);
+    Playerai_ResetDamageTimers((s32)player);
     ((struct Shared_ActorView *)player)->stun = 0;
     ((struct Shared_ActorView *)player)->marker.time = 0;
-    Particle_ReleaseOwnerListTwoEffects(&D_8011D8D0, (s32)player);
-    flow = &D_80145060.flow;
+    Particle_ReleaseOwnerListTwoEffects(&g_actorParticleEffectSystem, (s32)player);
+    flow = &g_transientPlayerList.flow;
     if ((flow->active != 0)
         && gameplayTransitionEnabled(player->controls->germanActive)
         && (i = 0, (((struct Shared_ActorView *)player)->controls->mode == 0xE))) {
         flow->count = (s32) (flow->count + 1);
-        playersGlobal = (struct Shared_GlobalPlayers *)&D_80145040;
+        playersGlobal = (struct Shared_GlobalPlayers *)&g_playerViewRenderContext;
         if (playersGlobal->count > 0) {
             settingsBase = (s8 *)&g_playerSettings;
             playerSettingsRecord = (struct Shared_PlayerSettingsRecord *)settingsBase;
@@ -185,8 +185,8 @@ settings_loop:
                     ((struct Shared_ModelView *)roundPlayerModel)->flags = (s32) (((struct Shared_ModelView *)roundPlayerModel)->flags & ~4);
                     Actor_RequestActorState(&((struct Shared_ActorView *)roundPlayer)->weapon, &((struct Shared_ActorView *)roundPlayer)->weapon.behaviorFlags, 2);
                     Player_PlacePlayerAtSpawnPoint(roundPlayer, ((struct Shared_PlayerSettingsView *)settingsBase)->effect, 0, 0);
-                    func_80255ED8_de(playersGlobal->controller, roundPlayer);
-                    func_80255CB8_de(&playersGlobal->effects, roundPlayer);
+                    List_RemoveIntrusive(playersGlobal->controller, roundPlayer);
+                    List_PrependIntrusive(&playersGlobal->effects, roundPlayer);
                     } else if (((struct Shared_PlayerSettingsView *)settingsBase)->state < 3) {
                         Player_PlacePlayerForRound(roundPlayer);
                     }
@@ -203,7 +203,7 @@ block_13:
                 if (i < loopLimit) goto settings_loop;
             } while (0);
         }
-        if (D_801462C8.counters.m_nTalsetLives < 3) {
+        if (g_gameSettings.counters.m_nTalsetLives < 3) {
             ((struct Shared_ActorView *)player)->special = 0;
             Player_SetPlayerState(player, attacker, 0x2E);
             return;
@@ -212,7 +212,7 @@ block_13:
         }
     } else {
 block_17:
-        if (D_80145088.settings.local != 0) {
+        if (g_frontendScreenStatus.settings.local != 0) {
             if ((((struct Shared_ActorView *)player)->ammo[0] > 0) || (((struct Shared_ActorView *)player)->ammo[1] > 0) || (((struct Shared_ActorView *)player)->ammo[2] > 0)) {
                 ammoPickupMode = ((struct Shared_ActorView *)player)->mode;
                 hasAmmoDrop = 0;
@@ -256,9 +256,9 @@ case 7:
                     }
                 }
                 ammoDropActorKind = ((struct Shared_ActorView *)player)->kind;
-                if (ammoDropActorKind == D_800CE474[0]) {
+                if (ammoDropActorKind == g_playerSpecialModelIds[0]) {
                     hasAmmoDrop = 0;
-                } else if (ammoDropActorKind == D_800CE474[1]) {
+                } else if (ammoDropActorKind == g_playerSpecialModelIds[1]) {
                     hasAmmoDrop = 0;
                 } else {
                     switch (XPlus_NextRandomInteger() % 3) {            /* switch 2; irregular */
@@ -331,7 +331,7 @@ case 7:
                     }
                 }
                 if (hasAmmoDrop != 0) {
-                    nearestSpawnPoint = Portal_GetGraphPoint(&D_8013B364, Portal_FindNearestPointIndex(&D_8013B364, &player->position.vector));
+                    nearestSpawnPoint = Portal_GetGraphPoint(&g_navigationGraph, Portal_FindNearestPointIndex(&g_navigationGraph, &player->position.vector));
                     InstHdr_CopyActorPositionAndModel(player, player->position.words, &spawnPosition, &spawnProbeResult, 0, 0);
                     if (nearestSpawnPoint != 0) {
                         spawnPosition = *(CVector3 *)nearestSpawnPoint;
@@ -339,7 +339,7 @@ case 7:
                     spawnVector.x = 0;
                     spawnVector.y = 0.0f;
                     spawnVector.z = 0;
-                    spawnedAmmoPickup = SetN64_SpawnModelEffect(&D_80131600, 0, ammoPickupType, spawnVector, spawnPosition, 0, 0);
+                    spawnedAmmoPickup = SetN64_SpawnModelEffect(&g_modelEffectPool, 0, ammoPickupType, spawnVector, spawnPosition, 0, 0);
                     if (spawnedAmmoPickup != 0) {
                         spawnPosition.y += g_playerDeathHeightOffsets.spawn;
                         ((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex] = (void *)spawnedAmmoPickup;
@@ -349,16 +349,16 @@ case 7:
                 }
                 ((struct Shared_ActorView *)player)->projectileIndex = (s32) (((struct Shared_ActorView *)player)->projectileIndex == 0);
             }
-            if ((((struct Shared_ActorView *)player)->controls->transientFlag != 0) && (laterFlow = &D_80145060.flow, laterFlow->transition != 0)) {
-                if (D_800F3D08 != 0) {
-                    Actor_RequestActorState(D_800F3D08, ((struct Shared_SpecialObjectView *)D_800F3D08)->segment, 1);
-                    ((struct Shared_SpecialObjectView *)D_800F3D08)->reset = 0;
+            if ((((struct Shared_ActorView *)player)->controls->transientFlag != 0) && (laterFlow = &g_transientPlayerList.flow, laterFlow->transition != 0)) {
+                if (g_fragTagObjectiveActor != 0) {
+                    Actor_RequestActorState(g_fragTagObjectiveActor, ((struct Shared_SpecialObjectView *)g_fragTagObjectiveActor)->segment, 1);
+                    ((struct Shared_SpecialObjectView *)g_fragTagObjectiveActor)->reset = 0;
                     laterFlow->reset = 0;
                     SoundElement_PlayFlatSound(0x2D0);
-                    resetMessageActor = D_80145060.actorList;
+                    resetMessageActor = g_transientPlayerList.actorList;
                     if (resetMessageActor != 0) {
-                        messageContext = &D_80145060.messageContext;
-                        localization = &D_80145060.localization;
+                        messageContext = &g_transientPlayerList.messageContext;
+                        localization = &g_transientPlayerList.localization;
                         do {
                             resetMessageTarget = ((struct Shared_ActorView *)resetMessageActor)->message;
                             if (resetMessageTarget != 0) {
@@ -371,10 +371,10 @@ case 7:
                 ((struct Shared_ActorView *)player)->controls->transientFlag = 0U;
                 ((struct Shared_ActorView *)player)->controls->resetFlag = 0;
             }
-            childActor = D_80145060.actorList;
+            childActor = g_transientPlayerList.actorList;
             if (childActor != 0) {
-                messageContext = &D_80145060.messageContext;
-                localization = &D_80145060.localization;
+                messageContext = &g_transientPlayerList.messageContext;
+                localization = &g_transientPlayerList.localization;
                 do {
                     if ((childActor != player) && (((struct Shared_ActorView *)childActor)->parent == player)) {
                         releaseMessageTarget = ((struct Shared_ActorView *)childActor)->message;
@@ -392,7 +392,7 @@ case 7:
         ((struct Shared_ActorView *)player)->field1230 = 0;
         ((struct Shared_ActorView *)player)->field1234 = 0;
         ((struct Shared_ActorView *)player)->field1240 = 0;
-        ((struct Shared_ActorView *)player)->field122C = (s32) (((struct Shared_ActorView *)player)->field122C & 0xFFFF0000);
+        ((struct Shared_ActorView *)player)->impulseFlags = (s32) (((struct Shared_ActorView *)player)->impulseFlags & 0xFFFF0000);
         if (damageFlags & 0x4000) {
             if ((u32) (((struct Shared_ActorView *)player)->state - 0x11) < 2U) {
                 ((struct Shared_ActorView *)player)->special = 1;
@@ -401,14 +401,14 @@ case 7:
         if (((struct Shared_ActorView *)player)->special == 0) {
             deathSound = 0x2BC;
             if (state != 0x1F) {
-                deathSound = func_80229C0C_de(player, 0x1397);
+                deathSound = Playerai_SelectCharacterSound(player, 0x1397);
             }
             SoundElement_PlaySoundAtPosition(deathSound, player->position.vector, (s32)&player->position.vector, -1);
         } else {
             SoundElement_PlaySoundAtPosition(0x9FB, player->position.vector, (s32)&player->position.vector, -1);
         }
         SoundElement_PlayFlatSound(0x212);
-        if ((((struct Shared_ActorView *)player)->special != 0) || (deathEffectActorKind = ((struct Shared_ActorView *)player)->kind, (deathEffectActorKind == D_800C9228_de[0])) || (deathEffectActorKind == D_800C9228_de[1])) {
+        if ((((struct Shared_ActorView *)player)->special != 0) || (deathEffectActorKind = ((struct Shared_ActorView *)player)->kind, (deathEffectActorKind == g_playerDeathEffectModelIds[0])) || (deathEffectActorKind == g_playerDeathEffectModelIds[1])) {
             spawnVector.x = player->position.vector.x;
             spawnVector.y = player->position.vector.y + g_playerDeathHeightOffsets.projectile;
             deathEffectFlags = 1;
@@ -431,12 +431,12 @@ case 7:
                 signedMotionRandomZ = motionRandomZ + 0x3FF;
             }
             motionVector.z = (f32) (motionRandomZ - ((signedMotionRandomZ >> 0xA) << 0xA)) - g_playerDeathMotionCenter;
-            motionOutput = func_8024796C_de((char *)player);
+            motionOutput = Gobjinst_BuildActorAimQuaternion((char *)player);
             deathEffectFrame = ((struct Shared_ActorView *)player)->frameValue;
-            if (func_8024BE80_de(player) == 5) {
+            if (Gobjinst_GetModelRenderMode(player) == 5) {
                 deathEffectFlags = 3;
             }
-            Particle_SpawnEffectGroup(&D_8011D8D0, player, player, 0, deathEffectFrame, 0x64, motionVector, motionOutput, spawnVector, 0, -1, deathEffectFlags);
+            Particle_SpawnEffectGroup(&g_actorParticleEffectSystem, player, player, 0, deathEffectFrame, 0x64, motionVector, motionOutput, spawnVector, 0, -1, deathEffectFlags);
         }
         if (state != -1) {
             Player_SetPlayerState(player, attacker, state);
@@ -505,19 +505,19 @@ case 7:
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
-extern f32 D_800C22A8_us, D_800C22AC_us;
+extern f32 g_playerDamageRumbleScale, g_playerDamageRumbleMaximum;
 extern s32 D_800D2A90;
-extern char D_801468A0[];
-extern s32 func_8022C460_de(void *);
+extern char g_matchRoundCounters[];
+extern s32 Playerai_IsRoundEndState(void *);
 extern s32 Player_GetMaxHealth(void *);
 extern void CScene_StartEventClips(void *, void *, s32, CVector3, f32, f32);
 extern void Gsky_SetDamageEffect(void *, s32, s32);
-extern void func_8022B11C_de(void *, u16);
+extern void Playerai_AddCappedEventCounter(void *, u16);
 /* Applies damage to a player: ignored while the game is paused, the player is protected or the damage
  * source is not allowed; scales the amount by one fifth with armour (0x80C); when the health stays above
  * zero and drops through half of the maximum it respawns the weapon (Player_PlacePlayerAtSpawnPoint); lowers the health
  * (with a flash sound at random), starts the knock-back and the hit effect scaled by the damage, and on death
- * reports the kill through func_8021B468_de. */
+ * reports the kill through Playerai_HandlePlayerDeath. */
 /* Exact for us and us-rev1; de/eu/eu-x add extra checks (0x1450, 0x94) and keep their asm. */
 void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 damageFlags, s32 kind) {
     s32 oldHealth = FIELD(s32, player, 0x5E4);
@@ -533,10 +533,10 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
     s32 shifted;
     char *state;
     s32 remaining;
-    if (Cinema_IsSequenceActive() != 0 || func_8022C460_de(player) != 0 || g_world.frozen != 0) {
+    if (Cinema_IsSequenceActive() != 0 || Playerai_IsRoundEndState(player) != 0 || g_world.frozen != 0) {
         return;
     }
-    if ((FIELD(u32, &D_801462C8, 0) & 1) && kind != 0x20) {
+    if ((FIELD(u32, &g_gameSettings, 0) & 1) && kind != 0x20) {
         return;
     }
     if (FIELD(u16, player, 0x650) < 2) {
@@ -568,9 +568,9 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
         }
     }
 #if defined(VERSION_DE) || defined(VERSION_EU_X)
-    if (FIELD(s32, player, 0x1450) != 0 && FIELD(s32, state = D_801468A0, 0x98) != 0 &&
+    if (FIELD(s32, player, 0x1450) != 0 && FIELD(s32, state = g_matchRoundCounters, 0x98) != 0 &&
 #else
-    state = D_801468A0;
+    state = g_matchRoundCounters;
     if (FIELD(s32, state, 0x98) != 0 &&
 #endif
 #if defined(VERSION_DE) || defined(VERSION_EU_X)
@@ -606,7 +606,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
     roll = Graphu64_NextRandom();
     if ((roll % 2) == 1) {
         if (FIELD(s32, player, 0x5E4) > 0) {
-            s32 id = func_80229C0C_de((struct Shared_ActorView *)player, 0x138D);
+            s32 id = Playerai_SelectCharacterSound((struct Shared_ActorView *)player, 0x138D);
             if (SoundElement_HasActiveOrPendingSound(id) == 0) {
                 SoundElement_PlaySoundAtPosition((s16)id, FIELD(CVector3, player, 0x8), (s32)((char *)player + 8), -1);
             }
@@ -617,7 +617,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
     dead = FIELD(s32, player, 0x5E4) == 0;
     if (dead != 0) {
         if (wasDead == 0) {
-            func_8021B468_de((struct Shared_ActorView *)player, attacker, damageFlags, kind);
+            Playerai_HandlePlayerDeath((struct Shared_ActorView *)player, attacker, damageFlags, kind);
         }
         intensity = 0xFF;
         delay = 0xC;
@@ -627,18 +627,18 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
         intensity = ((intensity > 0xFF ? 0xFF : intensity) < 0x80) ? 0x80 : (intensity > 0xFF ? 0xFF : intensity);
         delay = 0x1E;
         if (FIELD(void *, player, 0x5DC) != 0) {
-            if (oldHealth > 0xF00 && FIELD(s32, player, 0x5E4) <= 0xF00 && D_80145088.settings.local == 0) {
+            if (oldHealth > 0xF00 && FIELD(s32, player, 0x5E4) <= 0xF00 && g_frontendScreenStatus.settings.local == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                Camera_PostScreenMessage(&D_80145088, FIELD(void *, player, 0x5DC), ((u8 **)&D_800D2A90)[*((u8 *)&D_80145088.settings.local + 0x564)]);
+                Camera_PostScreenMessage(&g_frontendScreenStatus, FIELD(void *, player, 0x5DC), ((u8 **)&D_800D2A90)[*((u8 *)&g_frontendScreenStatus.settings.local + 0x564)]);
 #else
-                Camera_PostScreenMessage(&D_80145088, FIELD(void *, player, 0x5DC), (u8 *)D_800D2A90);
+                Camera_PostScreenMessage(&g_frontendScreenStatus, FIELD(void *, player, 0x5DC), (u8 *)D_800D2A90);
 #endif
             }
         }
         if ((amount >> 8) != 0) {
             f32 strength;
             CVector3 zero;
-            strength = ((f32)(amount >> 8) * D_800C22A8_us > D_800C22AC_us) ? D_800C22AC_us : (f32)(amount >> 8) * D_800C22A8_us;
+            strength = ((f32)(amount >> 8) * g_playerDamageRumbleScale > g_playerDamageRumbleMaximum) ? g_playerDamageRumbleMaximum : (f32)(amount >> 8) * g_playerDamageRumbleScale;
             zero.x = 0;
             zero.y = 0;
             zero.z = 0;
@@ -654,7 +654,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
         if (hit > 100) {
             hit = 100;
         }
-        func_8022B11C_de(player, (u16)hit);
+        Playerai_AddCappedEventCounter(player, (u16)hit);
     }
     return;
 }
@@ -665,14 +665,14 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
 #include "TYPES.H"
 
 
-extern s32 func_8022C460_de(void *actorObject);
+extern s32 Playerai_IsRoundEndState(void *actorObject);
 extern void Player_DrainReserveAndDamage(void *actor, f32 amount, void *damageSource);
-extern void func_8022B550_de(void *obj, f32 target, f32 rate, void *kind,
+extern void Playerai_StartDamageTimer(void *obj, f32 target, f32 rate, void *kind,
                           s32 tag);
-extern void func_8022B60C_de(void *actor, f32 amount, void *source);
+extern void Playerai_AddReactionReserve(void *actor, f32 amount, void *source);
 extern void Player_StartSourceEffect(void *actor, void *effectSource);
 
-void func_8021C45C_de(void *playerObject, void *unused1, s32 unused2, void *projectileEvent) {
+void Playerai_ApplyProjectileStatus(void *playerObject, void *unused1, s32 unused2, void *projectileEvent) {
     Player *actor = playerObject;
     Shared_Particle *event = projectileEvent;
     CGameStatus *audio;
@@ -681,13 +681,13 @@ void func_8021C45C_de(void *playerObject, void *unused1, s32 unused2, void *proj
     if (actor->health == 0) {
         return;
     }
-    if (func_8022C460_de(actor) != 0) {
+    if (Playerai_IsRoundEndState(actor) != 0) {
         return;
     }
     if (actor->damageCooldown > 0.0f) {
         return;
     }
-    audio = &D_801462C8.counters;
+    audio = &g_gameSettings.counters;
     if (audio->enabled != 0 &&
 #if defined(VERSION_DE) || defined(VERSION_EU_X)
         actor->profile->enabled != 0 &&
@@ -716,11 +716,11 @@ void func_8021C45C_de(void *playerObject, void *unused1, s32 unused2, void *proj
         return;
     case 0x432:
     case 0x4E3:
-        func_8022B550_de(actor, 80.0f, 2.0f, event->owner, 1);
+        Playerai_StartDamageTimer(actor, 80.0f, 2.0f, event->owner, 1);
         return;
     case 0x408:
     case 0x4E0:
-        func_8022B60C_de(actor, 0.25f, event->owner);
+        Playerai_AddReactionReserve(actor, 0.25f, event->owner);
         return;
     case 0x419:
     case 0x4D3:

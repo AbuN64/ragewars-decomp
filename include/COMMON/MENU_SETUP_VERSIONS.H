@@ -16,15 +16,15 @@ extern s8 g_modeToken[8];
 extern s8 g_modeToken[8];
 #endif
 #if defined(VERSION_DE)
-extern s32 D_800DF4C4;
+extern s32 g_pakProfileOperationPhase;
 #elif defined(VERSION_US)
-extern s32 D_800DE174;
+extern s32 g_pakDialogProbeStateUs;
 #elif defined(VERSION_EU)
-extern s32 D_800EFB34;
+extern s32 g_pakDialogProbeStateEu;
 #elif defined(VERSION_EU_X)
-extern s32 D_800EACF4;
+extern s32 g_pakDialogProbeStateEuX;
 #else
-extern s32 D_800E3514;
+extern s32 g_pakDialogProbeStateUsRev1;
 #endif
 #if defined(VERSION_DE)
 enum { SETUP_LABEL_ID = 0x281 };

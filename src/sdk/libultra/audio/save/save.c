@@ -12,7 +12,7 @@
 
 /* 802B63E4_3.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802B64B4_de_padding_B70B4[12] = { 0xAF, 0xB1, 0x00, 0x14, 0x00, 0x80, 0x88, 0x21, 0x00, 0x05, 0x14, 0x00 };
+unsigned char g_SaveTrailingBytes[12] = { 0xAF, 0xB1, 0x00, 0x14, 0x00, 0x80, 0x88, 0x21, 0x00, 0x05, 0x14, 0x00 };
 #endif
 
 /* save.c */
@@ -23,7 +23,7 @@ Acmd *alSavePull(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
     ALFilter_u1 *source = filter->filter.source;
 
     if (!source) {
-        Audio_Assert(D_800C8DB0_eu_x, g_audioSaveText, 0x22);
+        Audio_Assert(g_audioSaveAssertConditionText, g_audioSaveText, 0x22);
     }
     ptr = source->handler(source, outp, outCount, sampleOffset, ptr);
     aSetBuffer(ptr++, 0, 0, 0, outCount << 1);

@@ -1,7 +1,7 @@
 
 /* ROM-grounded data: rodata/writable/800D94E8 */
 #ifdef VERSION_DE
-unsigned int D_blob_phase2_830bb735447d12ea4c02[43] = {
+unsigned int g_audioInitdecodestreamDataConstantWords[43] = {
     0x00000000, 0x00000000, 0x00000000, 0x0000007F, 0x000000FF, 0x00000010, 0xFFFFFF81, 0x0000007F,
     0x000000FF, 0x00000010, 0x00000101, 0x00000100, 0x00000001, 0x800D55B4, 0x800D576C, 0xFFFFFF81,
     0x0000007F, 0x000000FF, 0x00000010, 0x00000105, 0x00000100, 0x00000005, 0x800D5F78, 0x800D6810,
@@ -11,7 +11,7 @@ unsigned int D_blob_phase2_830bb735447d12ea4c02[43] = {
 };
 #endif
 #ifdef VERSION_EU
-unsigned int D_blob_phase2_830bb735447d12ea4c02[43] = {
+unsigned int g_audioInitdecodestreamDataConstantWords[43] = {
     0x00000000, 0x00000000, 0x00000000, 0x800CEFD0, 0x800D341C, 0x800D8ED8, 0xFFFFFF81, 0x0000007F,
     0x000000FF, 0x00000010, 0x00000101, 0x00000100, 0x00000001, 0x800E5C34, 0x800E5DEC, 0xFFFFFF81,
     0x0000007F, 0x000000FF, 0x00000010, 0x00000105, 0x00000100, 0x00000005, 0x800E65F8, 0x800E6E90,
@@ -21,7 +21,7 @@ unsigned int D_blob_phase2_830bb735447d12ea4c02[43] = {
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned int D_blob_phase2_830bb735447d12ea4c02[43] = {
+unsigned int g_audioInitdecodestreamDataConstantWords[43] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFF81, 0x0000007F,
     0x000000FF, 0x00000010, 0x00000101, 0x00000100, 0x00000001, 0x800E0DF4, 0x800E0FAC, 0xFFFFFF81,
     0x0000007F, 0x000000FF, 0x00000010, 0x00000105, 0x00000100, 0x00000005, 0x800E17B8, 0x800E2050,
@@ -31,7 +31,7 @@ unsigned int D_blob_phase2_830bb735447d12ea4c02[43] = {
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_blob_phase2_830bb735447d12ea4c02[43] = {
+unsigned int g_audioInitdecodestreamDataConstantWords[43] = {
     0x00000000, 0x00000000, 0x00000000, 0x54485F47, 0x55415244, 0x5F44414D, 0xFFFFFF81, 0x0000007F,
     0x000000FF, 0x00000010, 0x00000101, 0x00000100, 0x00000001, 0x800D4264, 0x800D441C, 0xFFFFFF81,
     0x0000007F, 0x000000FF, 0x00000010, 0x00000105, 0x00000100, 0x00000005, 0x800D4C28, 0x800D54C0,
@@ -41,7 +41,7 @@ unsigned int D_blob_phase2_830bb735447d12ea4c02[43] = {
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_830bb735447d12ea4c02[6] = {
+unsigned int g_audioInitdecodestreamDataConstantWords[6] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif

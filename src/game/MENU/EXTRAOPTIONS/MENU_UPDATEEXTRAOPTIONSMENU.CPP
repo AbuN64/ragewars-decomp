@@ -9,7 +9,7 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 
-/* Calls func_8040E8D8_de with zero on the object at offset 0x20 of the structure D_800E4400 points
+/* Calls func_8040E8D8_de with zero on the object at offset 0x20 of the structure g_extraOptionsScreen points
    to, and with one on the entry 0x3AB that Node_FindWidgetByResourceId finds in the list at offset 8, then sets
    the word at offset 0x34. */
 
@@ -25,12 +25,12 @@ void Menu_AdvanceTextRows(void *, void *);
  /* extern */
 
 
-/* Releases the object D_800E4400 holds through Cache_FreeMemory, clears D_800E4400 and returns zero. */
+/* Releases the object g_extraOptionsScreen holds through Cache_FreeMemory, clears g_extraOptionsScreen and returns zero. */
 
 
 
-/* Polls the dialog of screen D_800E4400 through SmpSlider_GetTransitionMode: state 3 opens the screen through
-   Menu_ScrollOptionsKeypad while its word at 0x34 is zero, and otherwise, when D_8010B0E0.buttons is 0x433, marks the
+/* Polls the dialog of screen g_extraOptionsScreen through SmpSlider_GetTransitionMode: state 3 opens the screen through
+   Menu_ScrollOptionsKeypad while its word at 0x34 is zero, and otherwise, when g_combinedControllerProfile.buttons is 0x433, marks the
    screen confirmed at 0x38 and calls Menu_RefreshExtraOptionLocks; state 4 calls MarkMenuEventHandled and waits 3
    through SmXlate_SwitchScreen. Returns zero. */
 
@@ -44,60 +44,60 @@ extern s32 SmpSlider_GetTransitionMode(s32);
 extern void SmXlate_SwitchScreen(s32);
 
 void Menu_ShowExtraOptionsPanel(void) {
-    Widget_SetWidgetFlag08(D_800E4400->pad, 0);
+    Widget_SetWidgetFlag08(g_extraOptionsScreen->pad, 0);
 #if defined(VERSION_DE)
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3A5), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3A5), 1);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3AB), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3AB), 1);
 #elif defined(VERSION_EU_X)
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3AF), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3AF), 1);
 #endif
-    D_800E4400->open = 1;
+    g_extraOptionsScreen->open = 1;
 }
 
 void Menu_ScrollOptionsKeypad(void) {
     s32 currentMode;
-    MenuWidget *temp_a0;
-    MenuWidget *temp_a0_2;
-    MenuWidget *temp_v0_2;
-    currentMode = D_800E4400->mode - 1;
-    D_800E4400->mode = currentMode;
+    MenuWidget *scrollingPad;
+    MenuWidget *wrappedPad;
+    MenuWidget *textRow;
+    currentMode = g_extraOptionsScreen->mode - 1;
+    g_extraOptionsScreen->mode = currentMode;
     if (currentMode <= 0) {
 #if defined(VERSION_DE)
-        temp_v0_2 = Node_FindWidgetByResourceId(D_800E4400->window, 0x3B2);
+        textRow = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3B2);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        temp_v0_2 = Node_FindWidgetByResourceId(D_800E4400->window, 0x3B8);
+        textRow = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3B8);
 #elif defined(VERSION_EU_X)
-        temp_v0_2 = Node_FindWidgetByResourceId(D_800E4400->window, 0x3BC);
+        textRow = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3BC);
 #endif
-        temp_a0 = D_800E4400->pad;
-        temp_a0->y = (u16) (temp_a0->y - 1);
-        temp_a0_2 = D_800E4400->pad;
-        if (((s16) temp_a0_2->y + temp_v0_2->height) < 0) {
-            temp_a0_2->y = 2U;
-            Menu_AdvanceTextRows(temp_a0_2, D_800E4400);
+        scrollingPad = g_extraOptionsScreen->pad;
+        scrollingPad->y = (u16) (scrollingPad->y - 1);
+        wrappedPad = g_extraOptionsScreen->pad;
+        if (((s16) wrappedPad->y + textRow->height) < 0) {
+            wrappedPad->y = 2U;
+            Menu_AdvanceTextRows(wrappedPad, g_extraOptionsScreen);
         }
-        D_800E4400->mode = 1;
+        g_extraOptionsScreen->mode = 1;
     }
 }
 
 s32 Menu_DestroyExtraOptionsMenu(void) {
-    Cache_FreeMemory(D_800E4400);
-    D_800E4400 = 0;
+    Cache_FreeMemory(g_extraOptionsScreen);
+    g_extraOptionsScreen = 0;
     return 0;
 }
 
 s32 Menu_UpdateExtraOptionsMenu(void) {
-    switch (SmpSlider_GetTransitionMode(D_800E4400->dialog)) {
+    switch (SmpSlider_GetTransitionMode(g_extraOptionsScreen->dialog)) {
     case 3:
-        if (D_800E4400->open == 0) {
+        if (g_extraOptionsScreen->open == 0) {
             Menu_ScrollOptionsKeypad();
             return 0;
         }
-        if (D_8010B0E0.buttons != 0x433) {
+        if (g_combinedControllerProfile.buttons != 0x433) {
             return 0;
         }
-        D_800E4400->confirmed = 1;
+        g_extraOptionsScreen->confirmed = 1;
         Menu_RefreshExtraOptionLocks();
         return 0;
     case 4:

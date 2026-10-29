@@ -6,7 +6,7 @@
 #include "COMMON/ARGB_COLOR.H"
 #include "abi.h"
 #include "COMMON/TRIPLE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MENU/IMAGE_AND_DISPLAY_COMMAND_VIEWS.H"
 #include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
 #include "MENU/GFX/RECT.H"
@@ -121,13 +121,13 @@ void Combine_DrawClippedGradientQuad(f32 x, f32 y, f32 w, f32 h, u32 col0, u32 c
 }
 
 /* Switches the graphics combiner and emits a pipeline sync once per frame. */
-extern int D_800DF270;
-static inline void sync(void){D_800E32E4=1;gDPPipeSync(g_displayListCursor++);}
+extern int g_combineCachedCombineMode;
+static inline void sync(void){g_combinePipelineSyncPending=1;gDPPipeSync(g_displayListCursor++);}
 
 void Combine_SetCombineMode(int mode){
- if(mode!=D_800DF270){
- D_800DF270=mode;
- if(!D_800E32E4)sync();
+ if(mode!=g_combineCachedCombineMode){
+ g_combineCachedCombineMode=mode;
+ if(!g_combinePipelineSyncPending)sync();
  gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
  switch(mode){
  case 1: if(D_8014DCDC){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);}break;
@@ -139,12 +139,12 @@ void Combine_SetCombineMode(int mode){
  }
 }
 
-/* Selects vertex mode when it differs from D_800DF278: mode 9 loads an identity model matrix
-   through XMath_SetIdentityMatrix and Image_EmitMatrix, transforms the point (0, 0, D_800DD3FC) by the view
+/* Selects vertex mode when it differs from g_combineCachedPrimitiveMode: mode 9 loads an identity model matrix
+   through XMath_SetIdentityMatrix and Image_EmitMatrix, transforms the point (0, 0, g_gradientQuadProjectionDepth) by the view
    g_uiPointTransform, loads four white vertices at that point and marks each vertex's screen position for
    modification. */
 
-extern s32 D_800DF278;
+extern s32 g_combineCachedPrimitiveMode;
 
 extern char g_uiPointTransform;
 
@@ -159,7 +159,7 @@ void Combine_SetPrimitiveVertexMode(s32 mode) {
     s32 count;
     s32 i;
 
-    if (mode == D_800DF278) {
+    if (mode == g_combineCachedPrimitiveMode) {
         return;
     }
     if (mode == 9) {
@@ -167,7 +167,7 @@ void Combine_SetPrimitiveVertexMode(s32 mode) {
         Image_EmitMatrix(&identity);
         point.x = 0.0f;
         point.y = 0.0f;
-        point.z = D_800DD3FC;
+        point.z = g_gradientQuadProjectionDepth;
         Graphu64_TransformPoint(&g_uiPointTransform, &point, &projected);
         count = 4;
         vertices = ESmem_AllocateFrameHeapHigh(0x40);
@@ -191,17 +191,17 @@ void Combine_SetPrimitiveVertexMode(s32 mode) {
             gSPModifyVertex(cmd, i, G_MWO_POINT_ZSCREEN, 0);
         }
     }
-    D_800DF278 = mode;
+    g_combineCachedPrimitiveMode = mode;
 }
 
 /* Selects render mode 11 or 12 (always 11 while D_80153F60's enable word is clear) when it differs
-   from the cached mode D_800E32CC: flushes through Rect_ResetRenderState and applies the mode word built
+   from the cached mode g_combineCachedRenderMode: flushes through Rect_ResetRenderState and applies the mode word built
    from the mode's base bits (0x53 or 0x33, with bit 2 when the first switch is set), then 0x300 or
    0x500, 0x3000 or 0x5000 and 0x30000 or 0x50000 chosen by the three further switches, through
    Combine_ConfigurePrimitiveRenderFlags. */
 
 
-extern s32 D_800E32CC;
+extern s32 g_combineCachedRenderMode;
 
 void Combine_SetRenderMode(s32 mode) {
     s32 bits;
@@ -209,10 +209,10 @@ void Combine_SetRenderMode(s32 mode) {
     if (D_80153F60.y == 0) {
         mode = 11;
     }
-    if (mode == D_800E32CC) {
+    if (mode == g_combineCachedRenderMode) {
         return;
     }
-    D_800E32CC = mode;
+    g_combineCachedRenderMode = mode;
     if (mode == 11) {
         Rect_ResetRenderState();
         bits = D_80153F60.x ? 0x55 : 0x53;

@@ -2,15 +2,15 @@
 #define COMMON_OBJRECAT26DD8_H
 #include "TYPES.H"
 /* Independent simulation-time scale, adjacent to the current time step. */
-extern f32 D_800D298C;
+extern f32 g_roundTimerStep;
 #include "COMMON/ITEMRECAT20V1.H"
 
 struct Entry80294AC4;
-struct ObjRecAt26DD8;
-typedef struct ObjRecAt26DD8 ObjRecAt26DD8;
+struct RoundSessionItemStateView;
+typedef struct RoundSessionItemStateView RoundSessionItemStateView;
 
 struct Entry80294AC4 {
-    void (*callback)(void *arg0);
+    void (*callback)(void *sessionContext);
     s32 field4;
     s32 field8;
 };
@@ -35,7 +35,7 @@ struct SequencePromptStateView;
 
 
 
-extern float D_800C54DC_de;
+extern float g_creditsInitialLineTimer;
 
 
 
@@ -48,7 +48,7 @@ extern float D_800C54DC_de;
 
 
 
-extern float D_80142CB4;
+extern float g_creditsLineTimer;
 
 
 

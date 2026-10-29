@@ -22,5 +22,5 @@
 
 
 
-extern void Cache_ReleaseResource(void *arg0, void *resource);
+extern void Cache_ReleaseResource(void *cacheContext, void *resource);
 #endif

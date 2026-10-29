@@ -4,27 +4,27 @@
 /* The resource API retains an unused arena selector. */
 void Cache_DrainAndCompactResources(s32 unusedHeap);
 #include "COMMON/ITEMRECAT20V1.H"
-extern int func_802547CC_de(void);
+extern int Cache_QueryResourceEntryCount(void);
 
 
-extern int func_802547BC_de(void);
+extern int Cache_ReadResourceEntryCount(void);
 
 
-extern int func_8025478C_de(void);
+extern int Cache_GetPendingRequestCount(void);
 
 
 
 
-extern int D_80104580;
+extern int g_resourceEntryCount;
 
 struct NodePair80253E04;
 typedef struct NodePair80253E04 NodePair80253E04;
 
-extern int D_80101108;
+extern int g_resourcePendingRequestCount;
 
 struct NodePair80253E04;
 
-extern int func_802547AC_de(void);
+extern int Cache_GetResourceEntryCount(void);
 
 
 

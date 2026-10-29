@@ -11,30 +11,30 @@
 #include "ACTORS/LIGHTING_BUILDLITMODEL.H"
 #include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-extern s32 D_800D2978;
+extern s32 g_gameFrameCounter;
 
 /* Returns the matching resource entry index, or minus one when absent. */
 
 extern void *Statinst_AcquireGeometry(ResourceOwner *owner,s32 index);
 
-extern void Geometry_UnlockMaterialResources(void **arg0);
+extern void Geometry_UnlockMaterialResources(void **modelResource);
 
-extern void Cache_UnlockResource(s32 arg0, s32 resource);
+extern void Cache_UnlockResource(s32 cache, s32 resource);
 
-extern s32 D_800CD3F0;
+extern s32 g_litGeometryResourceKeyFlags;
 
-extern char D_00250C2C;
+extern char g_Statinst_BuildLitGeometryResourceAddress;
 
-extern char D_800C3E40_de[];
+extern char s_staticLitGeometryResourceTag[];
 
 void Statinst_DrawDistanceFadedModel(void *);
 
 void Statinst_DrawModel(void *);
 
 
-extern void Cache_TouchResourceByKey(s32 arg0, s32 resourceKey);
+extern void Cache_TouchResourceByKey(s32 cache, s32 resourceKey);
 
-extern s32 *Geometry_CollectMaterialResources(void **arg0, s32 arg1, s32 *arg2);
+extern s32 *Geometry_CollectMaterialResources(void **modelResource, s32 variation, s32 *resourcesOut);
 
 
 extern void Cache_MarkResourceInUse(s32, s32);
@@ -53,28 +53,28 @@ i=0; if(count>0) {offset=i; do {if(entries+offset!=wanted) {i++;offset+=232;} el
 
 void Statinst_RegisterGeometryResources(void *owner) {
     struct ResourceBinding *o = (struct ResourceBinding *) owner;
-    void *temp_v0;
+    void *geometryResource;
     CachedResource *ret2;
 
     if (!(o->status & 0x40)) {
-        temp_v0 = Statinst_AcquireGeometry(owner, o->variant);
-        if (temp_v0 != 0) {
-            Geometry_UnlockMaterialResources((void **) temp_v0);
-            ret2 = Cache_RequestPairedResource(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, owner, &D_00250C2C, D_800C3E40_de, 0);
+        geometryResource = Statinst_AcquireGeometry(owner, o->variant);
+        if (geometryResource != 0) {
+            Geometry_UnlockMaterialResources((void **) geometryResource);
+            ret2 = Cache_RequestPairedResource(0, o->registrationFlags | g_litGeometryResourceKeyFlags, geometryResource, (CachedResource *)o->resource, 8, owner, &g_Statinst_BuildLitGeometryResourceAddress, s_staticLitGeometryResourceTag, 0);
             if (ret2 != 0) {
                 Cache_UnlockResource(0, (s32)ret2);
             }
-            Cache_UnlockResource(0, (s32) temp_v0);
+            Cache_UnlockResource(0, (s32) geometryResource);
         }
     }
 }
 
 /** Return the nested signed byte unless flag 0x40 suppresses it. */
 int Statinst_GetPropModelIndex(char *object) {
-    if (((ObjectLinksDC *)(object))->unk_D8 & 0x40) {
+    if (((ActorResourceStatusView *)(object))->unk_D8 & 0x40) {
         return 0;
     }
-    return ((struct ObjectState13 *) ((ObjectLinksDC *) object)->unk_18)->unk_12;
+    return ((struct GeometryVariantByteView *) ((ActorResourceStatusView *) object)->unk_18)->unk_12;
 }
 
 /** Read the signed byte at offset 0xE from the object's linked record. */
@@ -84,7 +84,7 @@ signed char Statinst_GetPropGeometryIndex(struct PlacedProp *object) {
 }
 
 void Statinst_DrawForGameMode(void *owner) {
-    if (D_801462C8.local != 0) {
+    if (g_gameSettings.local != 0) {
         Statinst_DrawModel(owner);
         return;
     }
@@ -93,8 +93,8 @@ void Statinst_DrawForGameMode(void *owner) {
 
 void Statinst_RefreshResourceUsage(void *resourceBinding) {
     struct ResourceBinding *binding = resourceBinding;
-    if (!(binding->status & 0x40) && (binding->colorFrame != (u8)D_800D2978)) {
-        Cache_TouchResourceByKey(0, binding->registrationFlags | D_800CD3F0);
+    if (!(binding->status & 0x40) && (binding->colorFrame != (u8)g_gameFrameCounter)) {
+        Cache_TouchResourceByKey(0, binding->registrationFlags | g_litGeometryResourceKeyFlags);
     }
 }
 
@@ -110,7 +110,7 @@ s32 *Statinst_CollectPropResources(void *prop, s32 model, s32 geometryVariant, s
         o->loadedResource = geometryResource;
         *resourceCursor = (s32) geometryResource;
         resourceCursor = Geometry_CollectMaterialResources(geometryResource, model, resourceCursor + 1);
-        ret2 = Cache_RequestPairedResource(0, o->registrationFlags | D_800CD3F0, geometryResource, (CachedResource *)o->resource, 8, prop, &D_00250C2C, D_800C3E40_de, 1);
+        ret2 = Cache_RequestPairedResource(0, o->registrationFlags | g_litGeometryResourceKeyFlags, geometryResource, (CachedResource *)o->resource, 8, prop, &g_Statinst_BuildLitGeometryResourceAddress, s_staticLitGeometryResourceTag, 1);
         if (ret2 != 0) {
             *resourceCursor = (s32)ret2;
             resourceCursor += 1;
@@ -119,24 +119,24 @@ s32 *Statinst_CollectPropResources(void *prop, s32 model, s32 geometryVariant, s
     return resourceCursor;
 }
 
-/** Advance the wrapping counter D_800D0910, resetting to 0x380000 at 0x3FFFFF. */
+/** Advance the wrapping counter g_staticObjectResourceSerial, resetting to 0x380000 at 0x3FFFFF. */
 int Statinst_AdvanceResourceKey(void) {
-    int temp_v0;
+    int nextResourceKey;
 
-    temp_v0 = D_800D0910 + 1;
-    D_800D0910 = temp_v0;
-    if (temp_v0 == 0x3FFFFF) {
-        D_800D0910 = 0x380000;
+    nextResourceKey = g_staticObjectResourceSerial + 1;
+    g_staticObjectResourceSerial = nextResourceKey;
+    if (nextResourceKey == 0x3FFFFF) {
+        g_staticObjectResourceSerial = 0x380000;
     }
-    return D_800D0910;
+    return g_staticObjectResourceSerial;
 }
 
 void Statinst_BuildLitGeometryResource(void *wanted, s32 **resourcePair)
 {
   struct ResourceBinding *binding = wanted;
-  s32 new_var;
-  new_var = *(*resourcePair);
-  Cache_ReplaceResourcePairFirst(0, resourcePair, Lighting_BuildLitModel(new_var, *binding->resource, binding->runtimeState, (s32)binding->transform, 0, wanted));
+  s32 sourceGeometry;
+  sourceGeometry = *(*resourcePair);
+  Cache_ReplaceResourcePairFirst(0, resourcePair, Lighting_BuildLitModel(sourceGeometry, *binding->resource, binding->runtimeState, (s32)binding->transform, 0, wanted));
 }
 
 void Statinst_DrawGeometryVariant(OwnerStaticInstanceDrawGeometryVariant *owner, s32 unused, s32 remaining, s32 key) {
@@ -149,8 +149,8 @@ void Statinst_DrawGeometryVariant(OwnerStaticInstanceDrawGeometryVariant *owner,
     if (instance == 0) {
         return;
     }
-    resource = Cache_RequestPairedResource(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
-                             D_800C3E40_de, 0);
+    resource = Cache_RequestPairedResource(0, owner->flagsD0 | g_litGeometryResourceKeyFlags, instance, (CachedResource *)owner->resourceDescriptor, 8, owner, &g_Statinst_BuildLitGeometryResourceAddress,
+                             s_staticLitGeometryResourceTag, 0);
     if (resource != 0) {
         Cache_MarkResourceInUse(0, (s32)resource);
         header = (s32 *)resource->data;
@@ -158,14 +158,14 @@ void Statinst_DrawGeometryVariant(OwnerStaticInstanceDrawGeometryVariant *owner,
             char *object = (char *)header + header[1];
             char *colors = (char *)header + header[2];
 
-            if (owner->colorFrame != (u8)D_800D2978) {
+            if (owner->colorFrame != (u8)g_gameFrameCounter) {
                 Link_AnimateVertexColors(object, colors);
             }
             data = object;
         } else {
             data = (char *)&header[2];
         }
-        if (D_800D15E0 != 0) {
+        if (g_menuModelFillEnabled != 0) {
             Geometry_DrawModelResource(instance, owner->transform, 0, 0, data, remaining);
         } else {
             Geometry_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
@@ -173,7 +173,7 @@ void Statinst_DrawGeometryVariant(OwnerStaticInstanceDrawGeometryVariant *owner,
         Cache_UnlockResource(0, (s32)resource);
     }
     Cache_UnlockResource(0, (s32)instance);
-    owner->colorFrame = (u8)D_800D2978;
+    owner->colorFrame = (u8)g_gameFrameCounter;
 }
 
 /** Select one of two signed bytes according to a doubled nested count. */
@@ -190,7 +190,7 @@ int Statinst_SelectDistanceVariant(void *object) {
 s8 Statinst_SelectGameModeVariant(LevelActor *actor) {
     void *definition;
 
-    if (D_801462C8.local != 0) {
+    if (g_gameSettings.local != 0) {
         return ((struct ResourceFadeDefinition *)actor->definition)->nearValue;
     }
     definition = actor->definition;

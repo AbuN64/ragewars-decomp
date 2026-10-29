@@ -4,13 +4,13 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
-#include "COMMON/OBJECTLINKS150C.H"
+#include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
 #include "COMMON/COLORENTRY.H"
 #include "ENGINE/SCENE_SETLEVELACTORSTATEBIT.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "ENGINE/SCENE_DRAWTRANSITIONCOLOROVERLAY.H"
@@ -95,16 +95,16 @@ void *Scene_GetEffectCurveRecord(Shared_World *world, s32 index) {
     return bytes + (index * stride + 8);
 }
 
-void CScene_StartEventClips(ObjectCSceneStartEventClips *arg0,s32 resource,s32 group,Triple pos,D_800C7470_Pair scale) {
- s32 sp20,sp24; void *data; s32 count; StridedTable *temp_v1; s32 i; StridedTable *temp_v0;
+void CScene_StartEventClips(ObjectCSceneStartEventClips *scene,s32 resource,s32 group,Triple pos,ScalarPair scale) {
+ s32 sp20,sp24; void *data; s32 count; StridedTable *clipRecords; s32 i; StridedTable *clipGroups;
  f32 firstValue,secondValue;
- temp_v0=arg0->unkA8;
+ clipGroups=scene->clipGroupKeys;
  firstValue=scale.first;secondValue=scale.second;
- data=temp_v0->data;count=temp_v0->count;
+ data=clipGroups->data;count=clipGroups->count;
  if(Defs_FindSortedGroupRange(data,count,group,&sp20,&sp24)) {
   for(i=sp20;i<=sp24;i++) {
-   temp_v1=arg0->unkAC;
-   Rumble_AllocatePoolNode(resource,(char *)temp_v1+(i*temp_v1->stride+8),pos,firstValue,secondValue,0);
+   clipRecords=scene->clipDefinitions;
+   Rumble_AllocatePoolNode(resource,(char *)clipRecords+(i*clipRecords->stride+8),pos,firstValue,secondValue,0);
   }
  }
 }
@@ -115,7 +115,7 @@ void *Scene_GetActorDefinition(void *world, s32 index) {
     if (index == -1) {
         goto ret_null;
     }
-    result = SetN64_GetPackSection(((struct ObjRecAt78V1 *) ((s8 *) world))->unk78, index);
+    result = SetN64_GetPackSection(((struct ScenePackSectionTableView *) ((s8 *) world))->sectionTable, index);
     goto end;
 ret_null:
     result = 0;
@@ -148,20 +148,20 @@ void *Scene_FindActorDefinition(Shared_World *world, s32 selection, s32 modelKin
 }
 
 /* Collects up to max records of arg0 (indices unk13C to unk140) whose unkE4, unk18->unk0 and unk18->unkC match key0, key1 and key2 (each skipped when -1) into out, returning the count. */
-s32 Scene_CollectMatchingLevelActors(Container *container, s32 key0, s32 key1, s32 key2, RecordRecAtE4 **out, s32 max) {
-    s32 i = container->unk13C;
-    s32 end = container->unk140;
-    RecordRecAtE4 *base = container->unk138;
+s32 Scene_CollectMatchingLevelActors(Container *container, s32 key0, s32 key1, s32 key2, SceneActorMatchRecord **out, s32 max) {
+    s32 i = container->actorCursor;
+    s32 end = container->actorCount;
+    SceneActorMatchRecord *base = container->actors;
     s32 count = 0;
-    RecordRecAtE4 *rec;
+    SceneActorMatchRecord *rec;
 
     for (; i < end; i++) {
         rec = &base[i];
         if (count >= max) {
             return count;
         }
-        if ((key0 == -1 || rec->unkE4 == key0) && (key1 == -1 || rec->unk18->unk0 == key1)
-            && (key2 == -1 || rec->unk18->unkC == key2)) {
+        if ((key0 == -1 || rec->modelId == key0) && (key1 == -1 || rec->kindDescriptor->kindId == key1)
+            && (key2 == -1 || rec->kindDescriptor->teamId == key2)) {
             *out++ = rec;
             count++;
         }
@@ -194,20 +194,20 @@ void Scene_DrawTransitionColorOverlay(Shared_World *world) {
             color[2] = entry->blue;
             alpha = (world->selectionTimer * D_800CA3E0[1]) /
                     entry->value;
-            if (!(D_800C52F8_de <= alpha)) {
+            if (!(g_transitionAlphaUnsignedConversionBase <= alpha)) {
                 converted = (s32)alpha;
             } else {
-                converted = (s32)(alpha - D_800C52F8_de);
+                converted = (s32)(alpha - g_transitionAlphaUnsignedConversionBase);
                 converted |= 0x80000000;
             }
             color[3] = converted;
-            SetN64_DrawColorRectangle(&D_8011FAC0, color, 0, 0, D_800E28D0,
-                          D_800E28D4);
+            SetN64_DrawColorRectangle(&g_gameSession, color, 0, 0, g_hudReferenceViewportWidth,
+                          g_hudReferenceViewportHeight);
         }
     }
 }
 
 /* SCENE_13.CPP */
 char *Scene_GetPlatformRoute(void *world, s32 index) {
-    return SetN64_GetPackSection(SetN64_GetPackSection((((struct ObjRecAt7C *) ((s8 *) world))->unk7C), index), 0);
+    return SetN64_GetPackSection(SetN64_GetPackSection((((struct SceneNestedPackSectionTableView *) ((s8 *) world))->nestedSectionTable), index), 0);
 }

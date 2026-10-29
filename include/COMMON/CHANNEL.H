@@ -8,16 +8,16 @@ struct Channel;
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 struct ScreenMessageOwner;
-extern void func_8023A1F4_de(struct ScreenMessageOwner *owner);
+extern void Gsky_ReleaseScreenMessageRendering(struct ScreenMessageOwner *owner);
 
 
-extern float D_800C8664;
+extern float k_screenMessageChannelLevelScale;
 
 
 
-extern float D_800C8658;
+extern float k_screenMessageWaveLevelScale;
 
-extern float D_800C3598_de;
+extern float k_floorSurfaceLowerDistance;
 
 extern void Gsky_SetShakeChannel(struct Channel *channel, float inputLevel, int waveMode);
 
@@ -35,8 +35,8 @@ struct Channel {
 };
 
 struct Channel;
-struct RecordRecAt18;
-struct RecordRecAt18 {
+struct CameraShakeRecordView;
+struct CameraShakeRecordView {
     char pad[8];
     Triple triple;
     f32 value;
@@ -51,10 +51,10 @@ struct IntegerStateF24;
 typedef struct IntegerStateF24 IntegerStateF24;
 
 
-extern float D_800C3548_de;
+extern float k_screenMessageInitialNearestDistance;
 
 
-extern float D_800C3570_de;
+extern float k_screenMessageWaveDefault;
 
 extern int Gsky_StartFadeModeTwo(void *outputStorage);
 
@@ -63,7 +63,7 @@ extern int Gsky_StartFadeModeTwo(void *outputStorage);
 struct ScreenMessagePool;
 extern void Gsky_ActivateMessagePool(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool);
 
-extern void func_8023A24C_de(void *bufferOwner);
+extern void Gsky_ReleaseMessageBuffer(void *bufferOwner);
 
 extern s32 Gsky_UpdateShakeRecord(s32 waveRecord);
 
@@ -72,9 +72,9 @@ extern s32 Gsky_UpdateShakeRecord(s32 waveRecord);
 struct IntegerStateF24;
 struct IntegerStateF24 {
     unsigned char padding_0[3864];
-    s32 unk_F18;
-    s32 unk_F1C;
-    s32 unk_F20;
+    s32 allocationHandle;
+    s32 allocationSize;
+    s32 allocationCount;
 };
 
 
@@ -89,20 +89,20 @@ struct Wave {
     f32 phase;
 };
 
-extern float D_800C3590_de;
+extern float k_floorSurfaceDistanceScale;
 
-extern double D_800C3550_de;
-
-
+extern double k_screenMessageScaleDivisorStep;
 
 
-extern void func_80239FCC_de(void);
+
+
+extern void Gsky_FloorSurfaceNoOp(void);
 
 
 extern void Gsky_InitializeShakeChannel(void *channelStorage);
 
 
-extern float D_800C865C;
+extern float k_screenMessageWavePhaseScale;
 
 
 struct Wave;
@@ -110,24 +110,24 @@ extern f32 Gsky_SampleShakeWave(struct Wave *wave);
 
 struct NodeGskyActivateMessagePool;
 
-extern float D_800C8668;
+extern float k_floorShakeTargetHorizontal;
 
-extern void func_8023A114_de(void *messageBuffer, s32 count);
-
-
+extern void Gsky_AllocateMessageBuffer(void *messageBuffer, s32 count);
 
 
-struct RecordRecAt18;
-extern void Gsky_SetShakeRecord(struct RecordRecAt18 *record, f32 first, f32 second, f32 third, f32 value, s32 mode, Triple triple);
 
 
-extern void func_8023A190_de(void *screenMessageOwner, int count);
+struct CameraShakeRecordView;
+extern void Gsky_SetShakeRecord(struct CameraShakeRecordView *record, f32 first, f32 second, f32 third, f32 value, s32 mode, Triple triple);
 
-extern float D_800C3594_de;
+
+extern void Gsky_AllocateScreenMessageStorage(void *screenMessageOwner, int count);
+
+extern float k_floorSurfaceUpperDistance;
 
 extern void Gsky_UpdateFloorSurface(void *gameplayCamera);
 
-extern void func_80239404_de(void);
+extern void Gsky_ViewportUpdateNoOp(void);
 
 
 
@@ -153,7 +153,7 @@ struct ScreenMessageOwner {
     IntrusiveList activeMessages; /* 0xF24 */
     u8 paddingF38[0x1200 - 0xF38];
     s32 state; /* 0x1200 */
-    s32 field1204; /* the owner initialized by func_8044A62C_de is0x1208 */
+    s32 reservedWord; /* the owner initialized by func_8044A62C_de is0x1208 */
 };
 struct ScreenMessagePool {
     u8 padding000[4];

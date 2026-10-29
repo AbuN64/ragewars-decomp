@@ -7,30 +7,30 @@
 #include "COMMON/APPROACHLOCATION.H"
 #include "WEAPONS/CBARREL_CLASSIFYTRACKTARGET.H"
 
-s32 Cbarrel_ClassifyTrackTarget(LevelActor *actor, RouteChaseBot *routeChaseBot, LevelActor *arg2) {
+s32 Cbarrel_ClassifyTrackTarget(LevelActor *actor, RouteChaseBot *routeChaseBot, LevelActor *target) {
     void *controller;
 
     if (routeChaseBot->node == 0) {
         return 6;
     }
-    if (arg2 == 0) {
+    if (target == 0) {
         if (routeChaseBot->routeReady != 0) {
             return 4;
         }
         return 3;
     }
-    if (arg2 == routeChaseBot->target) {
+    if (target == routeChaseBot->target) {
         return 2;
     }
-    if (arg2->definition->kind == 5) {
+    if (target->definition->kind == 5) {
         return 5;
     }
-    if (arg2->type == 0x64F) {
+    if (target->type == 0x64F) {
         return 7;
     }
     if (g_world.visibilityEnabled == 0) {
-        if (arg2->flags & 0x300000) {
-            controller = arg2->controller;
+        if (target->flags & 0x300000) {
+            controller = target->controller;
             if ((((Shared_ActorView *)controller)->controllerOwner == actor) &&
                 (((Shared_ActorView *)controller)->controllerMode == 2)) {
                 return 1;

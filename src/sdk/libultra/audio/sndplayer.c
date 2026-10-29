@@ -1,7 +1,7 @@
 #include "sdk/libgultra.h"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/PARAMSRECAT8V3.H"
 #include "COMMON/CONTREADFORMAT.H"
@@ -41,7 +41,7 @@
 
 
 
-extern ALGlobalsalSndpNew *D_800D4070;
+extern ALGlobalsalSndpNew *g_audioGlobals;
 
  /* alGlobals */
 
@@ -86,7 +86,7 @@ extern void alSynStopVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *);
 extern void alSynFreeVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *);
 
        /* alEvtqPostEvent */
-void _removeEvents(ALEventQueue *arg0, void *arg1);
+void _removeEvents(ALEventQueue *eventQueue, void *soundState);
 
 void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
 {
@@ -107,10 +107,10 @@ void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
     ptr = alHeapDBAlloc(0, 0, c->heap, 1, c->maxEvents * sizeof(ALEventListItem));
     alEvtqNew(&sndp->evtq, (ALEventListItem *)ptr, c->maxEvents);
 
-    sndp->drvr = &D_800D4070->drvr;
+    sndp->drvr = &g_audioGlobals->drvr;
 
     sndp->node.next = 0;
-    sndp->node.handler = D_002B2BBC;
+    sndp->node.handler = Audio_SoundPlayerVoiceHandlerEntry;
     sndp->node.clientData = sndp;
     alSynAddPlayer(sndp->drvr, &sndp->node);
 
@@ -286,7 +286,7 @@ s32 _sndpVoiceHandler(void *node)
     return sndp->nextDelta;
 }
 
-extern s32 func_802BD170_de(s32);
+extern s32 osSetIntMask(s32);
 
 
 
@@ -295,27 +295,27 @@ extern s32 func_802BD170_de(s32);
 
 
 
-void _removeEvents(ALEventQueue *arg0, void *arg1) {
+void _removeEvents(ALEventQueue *eventQueue, void *soundState) {
     s32 saved;
     ALEventListItem *cur;
     ALEventListItem *next;
 
-    saved = func_802BD170_de(1);
-    cur = (ALEventListItem *)arg0->allocList.next;
+    saved = osSetIntMask(1);
+    cur = (ALEventListItem *)eventQueue->allocList.next;
     if (cur != 0) {
         do {
             next = (ALEventListItem *)cur->node.next;
-            if (((ALSndpEvent *)&cur->evt)->common.state == arg1) {
+            if (((ALSndpEvent *)&cur->evt)->common.state == soundState) {
                 if (next != 0) {
                     next->delta = next->delta + cur->delta;
                 }
                 alUnlink(cur);
-                alLink(cur, arg0);
+                alLink(cur, eventQueue);
             }
             cur = next;
         } while (cur != 0);
     }
-    func_802BD170_de(saved);
+    osSetIntMask(saved);
 }
 
 s32 _DivS32ByF32(s32 val, f32 div) {
@@ -324,20 +324,20 @@ s32 _DivS32ByF32(s32 val, f32 div) {
     s32 result;
 
     if (div == 0.0f) {
-        Audio_Assert(D_800C7548, s_audioSndplayerText, 0x11D);
+        Audio_Assert(g_soundPlayerAssertText, s_audioSndplayerText, 0x11D);
     }
 
     result = 0x7FFFFFFF;
     fval = (f32)val / div;
     dresult = (f64)fval;
-    if (!(D_800C7560 < dresult)) {
+    if (!(g_soundPlayerDelayConversionLimit < dresult)) {
         result = (s32)dresult;
     }
     return result;
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802B2CA8[2] = {
+unsigned int k_SndplayerEncodedWordsBlock6[2] = {
     0x73540000, 0x02000000,
 };
 #endif

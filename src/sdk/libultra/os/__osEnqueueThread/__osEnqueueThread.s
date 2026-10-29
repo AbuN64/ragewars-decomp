@@ -7,56 +7,56 @@
 .set fp=64
 .section .text
 .if VERSION_EU
-.globl func_802BBF08_eu
-func_802BBF08_eu:
+.globl System_ExceptionEntryEu
+System_ExceptionEntryEu:
     addiu $sp, $sp, 0x40
     addu $a2, $zero, $zero
-    lui $k0, %hi(D_002BBF20_eu)
-    addiu $k0, $k0, %lo(D_002BBF20_eu)
+    lui $k0, %hi(System_ExceptionContextSaveAddressEu)
+    addiu $k0, $k0, %lo(System_ExceptionContextSaveAddressEu)
 .elseif VERSION_EU_X
-.globl func_802BBF48_eu_x
-func_802BBF48_eu_x:
+.globl System_ExceptionEntryEuX
+System_ExceptionEntryEuX:
     sw $v0, 0x0($s0)
     jal Audio_AbortDiskTransfer
-    lui $k0, %hi(D_002BBF60_eu_x)
-    addiu $k0, $k0, %lo(D_002BBF60_eu_x)
+    lui $k0, %hi(System_ExceptionContextSaveAddressEuX)
+    addiu $k0, $k0, %lo(System_ExceptionContextSaveAddressEuX)
 .elseif VERSION_US_REV1
-.globl func_802C0D58_us_rev1
-func_802C0D58_us_rev1:
+.globl System_ExceptionEntryUsRev1
+System_ExceptionEntryUsRev1:
     sw $v0, 0x0($s0)
     jal Audio_AbortDiskTransfer
-    lui $k0, %hi(D_002C0D70_us_rev1)
-    addiu $k0, $k0, %lo(D_002C0D70_us_rev1)
+    lui $k0, %hi(System_ExceptionContextSaveAddressUsRev1)
+    addiu $k0, $k0, %lo(System_ExceptionContextSaveAddressUsRev1)
 .elseif VERSION_US
-.globl func_802BBBA0_us
-func_802BBBA0_us:
-    lui $k0, %hi(D_002BBBB0_us)
-    addiu $k0, $k0, %lo(D_002BBBB0_us)
+.globl System_ExceptionEntryUs
+System_ExceptionEntryUs:
+    lui $k0, %hi(System_ExceptionContextSaveAddressUs)
+    addiu $k0, $k0, %lo(System_ExceptionContextSaveAddressUs)
 .else
-.globl func_802BBC68_de
-func_802BBC68_de:
+.globl System_ExceptionEntryDe
+System_ExceptionEntryDe:
 .endif
     jr $k0
     nop
 .if VERSION_EU
-    lui $k0, %hi(D_8015ABD0_eu)
-    addiu $k0, $k0, %lo(D_8015ABD0_eu)
+    lui $k0, %hi(g_exceptionScratchContextEu)
+    addiu $k0, $k0, %lo(g_exceptionScratchContextEu)
 .elseif VERSION_EU_X
-    lui $k0, %hi(D_80154BD0_eu_x)
-    addiu $k0, $k0, %lo(D_80154BD0_eu_x)
+    lui $k0, %hi(g_exceptionScratchContextEuX)
+    addiu $k0, $k0, %lo(g_exceptionScratchContextEuX)
 .elseif VERSION_US_REV1
-    lui $k0, %hi(D_80150E60_us_rev1)
-    addiu $k0, $k0, %lo(D_80150E60_us_rev1)
+    lui $k0, %hi(g_exceptionScratchContextUsRev1)
+    addiu $k0, $k0, %lo(g_exceptionScratchContextUsRev1)
 .elseif VERSION_US
     lui $k0, 0x8015
     addiu $k0, $k0, -0x7430
 .else
-    lui $k0, %hi(D_002BBC80_de)
-    addiu $k0, $k0, %lo(D_002BBC80_de)
+    lui $k0, %hi(System_ExceptionContextSaveAddressDe)
+    addiu $k0, $k0, %lo(System_ExceptionContextSaveAddressDe)
     jr $k0
     nop
-    lui $k0, %hi(D_8014ABD0_de)
-    addiu $k0, $k0, %lo(D_8014ABD0_de)
+    lui $k0, %hi(g_exceptionScratchContextDe)
+    addiu $k0, $k0, %lo(g_exceptionScratchContextDe)
 .endif
     sd $at, 0x20($k0)
     mfc0 $k1, $12
@@ -71,8 +71,8 @@ func_802BBC68_de:
     sw $zero, 0x18($k0)
     mfc0 $t0, $13
     addu $t0, $k0, $zero
-    lui $k0, %hi(D_800D5270)
-    lw $k0, %lo(D_800D5270)($k0)
+    lui $k0, %hi(g_osRunningThread)
+    lw $k0, %lo(g_osRunningThread)($k0)
     ld $t1, 0x20($t0)
     ld $t2, 0x118($t0)
     sd $t1, 0x20($k0)
@@ -117,8 +117,8 @@ func_802BBC68_de:
     andi $t1, $k1, 0xFF00
     beqz $t1, .Lfunc_802BBC68_158
     nop
-    lui $t0, %hi(D_800D5258)
-    addiu $t0, $t0, %lo(D_800D5258)
+    lui $t0, %hi(g_globalInterruptMask)
+    addiu $t0, $t0, %lo(g_globalInterruptMask)
     lw $t0, 0x0($t0)
     nop
     addiu $at, $zero, -0x1
@@ -137,13 +137,13 @@ func_802BBC68_de:
     and $k1, $k1, $at
     or $k1, $k1, $t1
 .Lfunc_802BBC68_158:
-    lui $t1, %hi(D_A430000C)
-    lw $t1, %lo(D_A430000C)($t1)
+    lui $t1, %hi(MI_INTERRUPT_MASK_REGISTER)
+    lw $t1, %lo(MI_INTERRUPT_MASK_REGISTER)($t1)
     nop
     beqz $t1, .Lfunc_802BBC68_198
     nop
-    lui $t0, %hi(D_800D5258)
-    addiu $t0, $t0, %lo(D_800D5258)
+    lui $t0, %hi(g_globalInterruptMask)
+    addiu $t0, $t0, %lo(g_globalInterruptMask)
     lw $t0, 0x0($t0)
     nop
     srl $t0, $t0, 16
@@ -223,9 +223,9 @@ func_802BBC68_de:
     addi $t2, $t2, 0x10
 .Lfunc_802BBC68_29C:
 .if VERSION_EU
-    lui $at, %hi(D_800C8610_eu)
+    lui $at, %hi(g_interruptDispatchOffsetsEu)
 .elseif VERSION_EU_X
-    lui $at, %hi(D_800C8FE0_eu_x)
+    lui $at, %hi(g_interruptDispatchOffsetsEuX)
 .elseif VERSION_US_REV1
     lui $at, 0x800D
 .else
@@ -233,10 +233,10 @@ func_802BBC68_de:
 .endif
     addu $at, $at, $t2
 .if VERSION_EU
-    lbu $t2, %lo(D_800C8610_eu)($at)
-    lui $at, %hi(D_800C8630_eu)
+    lbu $t2, %lo(g_interruptDispatchOffsetsEu)($at)
+    lui $at, %hi(g_interruptDispatchHandlersEu)
 .elseif VERSION_EU_X
-    lbu $t2, %lo(D_800C8FE0_eu_x)($at)
+    lbu $t2, %lo(g_interruptDispatchOffsetsEuX)($at)
     lui $at, 0x800D
 .elseif VERSION_US_REV1
     lbu $t2, -0x3390($at)
@@ -250,7 +250,7 @@ func_802BBC68_de:
 .endif
     addu $at, $at, $t2
 .if VERSION_EU
-    lw $t2, %lo(D_800C8630_eu)($at)
+    lw $t2, %lo(g_interruptDispatchHandlersEu)($at)
 .elseif VERSION_EU_X
     lw $t2, -0x7000($at)
 .elseif VERSION_US_REV1
@@ -284,20 +284,20 @@ func_802BBC68_de:
     addiu $at, $zero, -0x801
     and $s0, $s0, $at
 .if VERSION_EU
-    lui $sp, %hi(D_80159BD0_eu)
-    addiu $sp, $sp, %lo(D_80159BD0_eu)
+    lui $sp, %hi(g_exceptionStackTopEu)
+    addiu $sp, $sp, %lo(g_exceptionStackTopEu)
 .elseif VERSION_EU_X
-    lui $sp, %hi(D_80153BD0_eu_x)
-    addiu $sp, $sp, %lo(D_80153BD0_eu_x)
+    lui $sp, %hi(g_exceptionStackTopEuX)
+    addiu $sp, $sp, %lo(g_exceptionStackTopEuX)
 .elseif VERSION_US_REV1
-    lui $sp, %hi(D_8014FE60_us_rev1)
-    addiu $sp, $sp, %lo(D_8014FE60_us_rev1)
+    lui $sp, %hi(g_exceptionStackTopUsRev1)
+    addiu $sp, $sp, %lo(g_exceptionStackTopUsRev1)
 .elseif VERSION_US
     lui $sp, 0x8014
     addiu $sp, $sp, 0x7BD0
 .else
-    lui $sp, %hi(D_80149BD0_de)
-    addiu $sp, $sp, %lo(D_80149BD0_de)
+    lui $sp, %hi(g_exceptionStackTopDe)
+    addiu $sp, $sp, %lo(g_exceptionStackTopDe)
 .endif
     addiu $sp, $sp, 0xFF0
     addiu $t2, $zero, 0x4
@@ -334,8 +334,8 @@ func_802BBC68_de:
     nop
     lui $s1, 0xA430
     lw $s1, 0x8($s1)
-    lui $t0, %hi(D_800D5258)
-    addiu $t0, $t0, %lo(D_800D5258)
+    lui $t0, %hi(g_globalInterruptMask)
+    addiu $t0, $t0, %lo(g_globalInterruptMask)
     lw $t0, 0x0($t0)
     nop
     srl $t0, $t0, 16
@@ -432,8 +432,8 @@ func_802BBC68_de:
     lui $t1, %hi(rodata_unresolved_800E0A94)
     addiu $t1, $t1, %lo(rodata_unresolved_800E0A94)
 .elseif VERSION_US_REV1
-    lui $t1, %hi(D_blob_50a0a30405484edcbe79)
-    addiu $t1, $t1, %lo(D_blob_50a0a30405484edcbe79)
+    lui $t1, %hi(g_preNmiShutdownFlagUsRev1)
+    addiu $t1, $t1, %lo(g_preNmiShutdownFlagUsRev1)
 .elseif VERSION_US
     lui $t1, 0x800D
     addiu $t1, $t1, 0x3F04
@@ -455,8 +455,8 @@ func_802BBC68_de:
     sw $t2, 0x0($t1)
     jal send_mesg
     addiu $a0, $zero, 0x70
-    lui $t2, %hi(D_800D5268_de)
-    lw $t2, %lo(D_800D5268_de)($t2)
+    lui $t2, %hi(g_osRunnableThreadQueue)
+    lw $t2, %lo(g_osRunnableThreadQueue)($t2)
     addiu $at, $zero, -0x1001
     and $s0, $s0, $at
     lw $k1, 0x118($t2)
@@ -491,31 +491,31 @@ func_802BBC68_de:
     bgez $zero, .Lfunc_802BBC68_57C
     nop
 .Lfunc_802BBC68_57C:
-    lui $t2, %hi(D_800D5268_de)
-    lw $t2, %lo(D_800D5268_de)($t2)
+    lui $t2, %hi(g_osRunnableThreadQueue)
+    lw $t2, %lo(g_osRunnableThreadQueue)($t2)
     lw $t1, 0x4($k0)
     lw $t3, 0x4($t2)
     nop
     slt $at, $t1, $t3
     beqz $at, .Lfunc_802BBC68_5B4
     nop
-    lui $a0, %hi(D_800D5268_de)
-    addiu $a0, $a0, %lo(D_800D5268_de)
+    lui $a0, %hi(g_osRunnableThreadQueue)
+    addiu $a0, $a0, %lo(g_osRunnableThreadQueue)
     jal __osEnqueueThread
     addu $a1, $k0, $zero
-    j func_802BC850_eu_x
+    j __osDispatchThread
     nop
 .Lfunc_802BBC68_5B4:
-    lui $t1, %hi(D_800D5268_de)
-    addiu $t1, $t1, %lo(D_800D5268_de)
+    lui $t1, %hi(g_osRunnableThreadQueue)
+    addiu $t1, $t1, %lo(g_osRunnableThreadQueue)
     lw $t2, 0x0($t1)
     nop
     sw $t2, 0x0($k0)
-    j func_802BC850_eu_x
+    j __osDispatchThread
     sw $k0, 0x0($t1)
 .Lfunc_802BBC68_5D0:
-    lui $at, %hi(D_800D92A4)
-    sw $k0, %lo(D_800D92A4)($at)
+    lui $at, %hi(g_audioInterruptMask)
+    sw $k0, %lo(g_audioInterruptMask)($at)
     addiu $t1, $zero, 0x1
     sh $t1, 0x10($k0)
     addiu $t1, $zero, 0x2
@@ -524,7 +524,7 @@ func_802BBC68_de:
     sw $t2, 0x124($k0)
     jal send_mesg
     addiu $a0, $zero, 0x60
-    j func_802BC850_eu_x
+    j __osDispatchThread
     nop
 
 /* libultra exceptasm.s send_mesg: queue the message for the event in $a0 and wake a blocked receiver.
@@ -532,8 +532,8 @@ func_802BBC68_de:
 .globl send_mesg
 send_mesg:
     addu $s2, $ra, $zero
-    lui $t2, %hi(D_80149B10)
-    addiu $t2, $t2, %lo(D_80149B10)
+    lui $t2, %hi(g_osEventMessageBindings)
+    addiu $t2, $t2, %lo(g_osEventMessageBindings)
     addu $t2, $t2, $a0
     lw $t1, 0x0($t2)
     nop
@@ -578,8 +578,8 @@ send_mesg:
     jal __osPopThread
     addu $a0, $t1, $zero
     addu $t2, $v0, $zero
-    lui $a0, %hi(D_800D5268_de)
-    addiu $a0, $a0, %lo(D_800D5268_de)
+    lui $a0, %hi(g_osRunnableThreadQueue)
+    addiu $a0, $a0, %lo(g_osRunnableThreadQueue)
     jal __osEnqueueThread
     addu $a1, $t2, $zero
 .Lsend_mesg_C4:
@@ -609,8 +609,8 @@ send_mesg:
 .section .text
 .globl func_802BC36C_de
 func_802BC36C_de:
-    lui $a1, %hi(D_800D5270)
-    lw $a1, %lo(D_800D5270)($a1)
+    lui $a1, %hi(g_osRunningThread)
+    lw $a1, %lo(g_osRunningThread)($a1)
     mfc0 $t0, $12
     nop
     ori $t0, $t0, 0x2
@@ -678,8 +678,8 @@ func_802BC36C_de:
     andi $t1, $k1, 0xFF00
     beqz $t1, .Lfunc_802BC36C_de_148
     nop
-    lui $t0, %hi(D_800D5258)
-    addiu $t0, $t0, %lo(D_800D5258)
+    lui $t0, %hi(g_globalInterruptMask)
+    addiu $t0, $t0, %lo(g_globalInterruptMask)
     nop
     lw $t0, 0x0($t0)
     nop
@@ -693,13 +693,13 @@ func_802BC36C_de:
     or $k1, $k1, $t1
     sw $k1, 0x118($a1)
 .Lfunc_802BC36C_de_148:
-    lui $k1, %hi(D_A430000C)
-    lw $k1, %lo(D_A430000C)($k1)
+    lui $k1, %hi(MI_INTERRUPT_MASK_REGISTER)
+    lw $k1, %lo(MI_INTERRUPT_MASK_REGISTER)($k1)
     nop
     beqz $k1, .Lfunc_802BC36C_de_188
     nop
-    lui $k0, %hi(D_800D5258)
-    addiu $k0, $k0, %lo(D_800D5258)
+    lui $k0, %hi(g_globalInterruptMask)
+    addiu $k0, $k0, %lo(g_globalInterruptMask)
     lw $k0, 0x0($k0)
     nop
     srl $k0, $k0, 16
@@ -715,7 +715,7 @@ func_802BC36C_de:
     jal __osEnqueueThread
     nop
 .Lfunc_802BC36C_de_198:
-    j func_802BC850_eu_x
+    j __osDispatchThread
 
 /* __osEnqueueThread.s */
 .set noreorder

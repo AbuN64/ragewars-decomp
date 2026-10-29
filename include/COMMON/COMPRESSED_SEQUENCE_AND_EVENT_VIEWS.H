@@ -3,10 +3,10 @@
 #include "TYPES.H"
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct ObjectState10_2;
-typedef struct ObjectState10_2 ObjectState10_2;
+struct CompressedSequenceMetaEvent;
+typedef struct CompressedSequenceMetaEvent CompressedSequenceMetaEvent;
 
-extern float D_800C7340_de;
+extern float g_compressedSecondsToTicksSignedLimit;
 
 
 
@@ -38,7 +38,7 @@ struct ALCMidiHdr {
     u32 division;
 };
 
-extern double D_800C7318_de;
+extern double g_compressedTicksToSecondsDivisionUnsignedBias;
 
 
 struct InitParams;
@@ -54,20 +54,20 @@ struct InitParams {
     Lane_ALOscStop value18;
 };
 
-extern double D_800C7310_de;
+extern double g_compressedTicksToSecondsTempoUnsignedBias;
 
-struct ObjectState4C;
-typedef struct ObjectState4C ObjectState4C;
+struct CompressedSequenceTempoAndQueueView;
+typedef struct CompressedSequenceTempoAndQueueView CompressedSequenceTempoAndQueueView;
 
-struct ObjRecAt8V3;
-typedef struct ObjRecAt8V3 ObjRecAt8V3;
+struct CompressedSequenceEventQueueHead;
+typedef struct CompressedSequenceEventQueueHead CompressedSequenceEventQueueHead;
 
 
 
-struct ObjectLinks4_5;
-typedef struct ObjectLinks4_5 ObjectLinks4_5;
+struct CompressedSequenceEventLink;
+typedef struct CompressedSequenceEventLink CompressedSequenceEventLink;
 
-extern double D_800C7300_de;
+extern double g_compressedSequenceDivisionUnsignedBias;
 
 
 
@@ -77,28 +77,28 @@ typedef struct ALCMidiHdr ALCMidiHdr;
 
 
 
-struct Node_func_802AFD6C_de;
-struct Node_func_802AFD6C_de {
-    struct Node_func_802AFD6C_de *prev;
-    struct Node_func_802AFD6C_de *next;
+struct CompressedSequenceEventNode;
+struct CompressedSequenceEventNode {
+    struct CompressedSequenceEventNode *prev;
+    struct CompressedSequenceEventNode *next;
     s32 value;
     short type;
 };
 
-struct Node_func_802AFD6C_de;
-struct ObjRecAt8V3;
-struct ObjRecAt8V3 {
+struct CompressedSequenceEventNode;
+struct CompressedSequenceEventQueueHead;
+struct CompressedSequenceEventQueueHead {
     char pad0[0x8];
-    struct Node_func_802AFD6C_de * unk8;
+    struct CompressedSequenceEventNode * allocatedEvents;
 };
 
-struct Node_func_802AFD6C_de;
-typedef struct Node_func_802AFD6C_de Node_func_802AFD6C_de;
+struct CompressedSequenceEventNode;
+typedef struct CompressedSequenceEventNode CompressedSequenceEventNode;
 
-struct ObjectLinks54_2;
-struct ObjectLinks54_2 {
+struct CompressedSequenceAllocatedEventsView;
+struct CompressedSequenceAllocatedEventsView {
     unsigned char padding[80];
-    Node_func_802AFD6C_de * link;
+    CompressedSequenceEventNode * link;
 };
 
 
@@ -108,7 +108,7 @@ struct ObjectLinks54_2 {
 struct InitParams;
 typedef struct InitParams InitParams;
 
-extern float D_800C7330_de;
+extern float g_compressedSecondsToTicksMicrosecondScale;
 
 struct DecodeResult;
 struct DecodeResult {
@@ -123,10 +123,10 @@ struct DecodeResult {
 
 
 
-struct ObjectLinks54_2;
-typedef struct ObjectLinks54_2 ObjectLinks54_2;
+struct CompressedSequenceAllocatedEventsView;
+typedef struct CompressedSequenceAllocatedEventsView CompressedSequenceAllocatedEventsView;
 
-extern float D_800C7320_de;
+extern float g_compressedTicksToSecondsMicrosecondScale;
 
 
 struct ALCMidiHdr;
@@ -148,9 +148,9 @@ struct ALCSeq_s {
 
 
 
-struct ObjectLinks4_5;
-struct ObjectLinks4_5 {
-    Node_func_802AFD6C_de * link;
+struct CompressedSequenceEventLink;
+struct CompressedSequenceEventLink {
+    CompressedSequenceEventNode * link;
 };
 
 
@@ -158,10 +158,10 @@ struct ObjectLinks4_5 {
 
 
 
-extern float D_800C7308_de;
+extern float g_compressedSequenceQuarterNoteUnit;
 
-struct ObjectState10_2;
-struct ObjectState10_2 {
+struct CompressedSequenceMetaEvent;
+struct CompressedSequenceMetaEvent {
     s16 type;
     u8 pad2[6];
     u8 unk_8;
@@ -173,7 +173,7 @@ struct ObjectState10_2 {
     u8 padE[2];
 };
 
-extern double D_800C7338_de;
+extern double g_compressedSecondsToTicksTempoUnsignedBias;
 
 struct ALCSeqMarker;
 typedef struct ALCSeqMarker ALCSeqMarker;
@@ -184,10 +184,10 @@ typedef struct DecodeResult DecodeResult;
 
 
 
-extern double D_800C7328_de;
+extern double g_compressedSecondsToTicksDivisionUnsignedBias;
 
-struct ObjectState4C;
-struct ObjectState4C {
+struct CompressedSequenceTempoAndQueueView;
+struct CompressedSequenceTempoAndQueueView {
     char pad0[0x24];
     s32 unk_24;
     char pad24[0x48 - 0x24 - sizeof(s32)];

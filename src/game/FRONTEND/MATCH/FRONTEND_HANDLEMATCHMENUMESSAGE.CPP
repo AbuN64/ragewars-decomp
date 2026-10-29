@@ -15,7 +15,7 @@
 #include "TYPES.H"
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled. 0x1D9: when
-   Menu_GetPreviousScreenOwner(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
+   Menu_GetPreviousScreenOwner(0) reports 0x16 it stops the menu object and the menu data g_playerViewRenderContext, releases
    D_8011FE88, restarts Cache_SetResourceActivityState when Cache_GetResourceActivityState reports it idle, sets the menu stage to 8
    and sends Random_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1DA sends 11 when Menu_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
@@ -35,14 +35,14 @@ s32 Frontend_HandleMatchMenuMessage(void) {
         return 0;
     case MENU_804291A8_473:
         if (Menu_GetPreviousScreenOwner(0) == 0x16) {
-            Pools_ResetActorPools(&D_80145040.object, 0);
-            Player_InitializePlayerPool(&D_80145040, 0, 0);
+            Pools_ResetActorPools(&g_playerViewRenderContext.object, 0);
+            Player_InitializePlayerPool(&g_playerViewRenderContext, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             if (Cache_GetResourceActivityState() == 0) {
                 Cache_SetResourceActivityState(1);
             }
-            D_80145040.stage = 8;
-            switch (D_80145040.game.controllerMode) {
+            g_playerViewRenderContext.stage = 8;
+            switch (g_playerViewRenderContext.game.controllerMode) {
             case 0:
                 Random_SetMenuChoiceResult(20);
                 break;
@@ -89,35 +89,35 @@ s32 Frontend_CloseMatchMenu(void) {
 
 /* 80423280_46.CPP */
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4EC0, an actor kind at D_800E4EC4 and a handler at D_800E4EC8: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_matchMenuEventIds, an actor kind at g_matchMenuEventKinds and a handler at g_matchMenuEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8042931C)(void *, s32, s32, s32, s32);
 
-extern FieldRow D_800E4EC0[];
-extern FieldRow D_800E4EC4[];
-extern Handler8042931C D_800E4EC8;
+extern FieldRow g_matchMenuEventIds[];
+extern FieldRow g_matchMenuEventKinds[];
+extern Handler8042931C g_matchMenuEventHandlers;
 
-struct ObjRecAtCV1;
+struct MenuActorInputView;
 
-s32 Frontend_DispatchMatchMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchMatchMenuEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
     Handler8042931C *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E4EC8 != 0) {
+    if (g_matchMenuEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E4EC8;
+        entry = &g_matchMenuEventHandlers;
         index = 0;
         do {
-            if (D_800E4EC0[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E4EC4[index].value;
+            if (g_matchMenuEventIds[index].value == eventId) {
+                actor = eventObject;
+                actor_kind = actor->input;
+                table_kind = g_matchMenuEventKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(eventObject, eventId, eventPayload, eventValue, eventExtra);
                 }
             }
             entry += 3;

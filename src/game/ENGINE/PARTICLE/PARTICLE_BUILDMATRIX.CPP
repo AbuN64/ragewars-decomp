@@ -1,8 +1,8 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_8011AF38.H"
+#include "COMMON/LONE/PARTICLE_PITCH_MATRIX_SCRATCH.H"
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "TYPES.H"
@@ -27,7 +27,7 @@ extern void Graphu64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right);
 
 
 /* Returns the matrix a particle's alignment places it in, or null for world space. Matrices built here go to the
- * scratch matrix D_8011AD70; D_8011AF38 is the lying-flat basis (a quarter turn about X), tilted to the floor's
+ * scratch matrix g_particleYawMatrixScratch; g_particlePitchMatrixScratch is the lying-flat basis (a quarter turn about X), tilted to the floor's
  * slope for a floor particle on the floor and to the cached slope for a ceiling one. */
 f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera) {
     f32 tilt[16];
@@ -37,7 +37,7 @@ f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera)
 
     switch (particle->space) {
     case PARTICLE_ALIGN_TRAVEL:
-        matrix = D_8011AD70;
+        matrix = g_particleYawMatrixScratch;
         BuildDirectionMatrix(matrix, &particle->direction);
         return matrix;
     case PARTICLE_ALIGN_BILLBOARD_UPRIGHT:
@@ -56,25 +56,25 @@ f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera)
         if (particle->inst.pos.y - value <= 0.01f) {
             Region_GetPolygonUpQuat(&up, 0);
             MatrixFromQuaternion(&up, tilt);
-            matrix = D_8011AD70;
-            Graphu64_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
+            matrix = g_particleYawMatrixScratch;
+            Graphu64_MultiplyAffineMatrices(matrix, g_particlePitchMatrixScratch, tilt);
             return matrix;
         }
         /* off the floor it lies flat */
     case PARTICLE_ALIGN_FLAT:
-        return D_8011AF38;
+        return g_particlePitchMatrixScratch;
     case PARTICLE_ALIGN_CEILING:
         Region_GetCachedUpQuat(&up, 0);
         MatrixFromQuaternion(&up, tilt);
-        matrix = D_8011AD70;
-        Graphu64_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
+        matrix = g_particleYawMatrixScratch;
+        Graphu64_MultiplyAffineMatrices(matrix, g_particlePitchMatrixScratch, tilt);
         return matrix;
     case PARTICLE_ALIGN_EDGE_0:
     case PARTICLE_ALIGN_EDGE_1:
     case PARTICLE_ALIGN_EDGE_2:
         value = Region_GetTriangleEdgeAngle(0, particle->space);
-        BuildYawMatrix(D_8011AD70, value);
-        return D_8011AD70;
+        BuildYawMatrix(g_particleYawMatrixScratch, value);
+        return g_particleYawMatrixScratch;
     }
     return 0;
 }
@@ -157,7 +157,7 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "particle/CAMERA_SCALE.H"
 #include "ENGINE/SCENE_SAMPLEWORLDLIGHTING.H"
@@ -311,7 +311,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         } else {
             Graphu64_MatrixFromEulerXYZ(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
         }
-        Scene_SampleWorldLighting(&g_world, &particle->inst.pos, &particle->lighting[D_800D297C]);
+        Scene_SampleWorldLighting(&g_world, &particle->inst.pos, &particle->lighting[g_lightingBufferIndex]);
     } else if ((particle->rot.x == 0.0f) && (particle->rot.y == 0.0f)) {
         BuildRollMatrix(local, particle->rot.z);
     } else {

@@ -6,7 +6,7 @@ struct Tree;
 
 
 
-extern int D_801470A8;
+extern int g_frameHeapLowCursor;
 
 
 
@@ -16,10 +16,10 @@ extern int D_801470A8;
 struct RecordN64EngCreateNumericWidget;
 typedef struct RecordN64EngCreateNumericWidget RecordN64EngCreateNumericWidget;
 
-extern int D_80147060[16];
+extern int g_frameHeapLowMarks[16];
 
 
-extern int D_800D2C18;
+extern int g_n64UiFrameCounter;
 
 struct RecordN64EngCreateNumericWidget;
 struct RecordN64EngCreateNumericWidget {
@@ -28,7 +28,7 @@ struct RecordN64EngCreateNumericWidget {
     s16 field_0E;
     s32 words_10[7];
     s32 fields_2C[5];
-    s32 field_40;
+    s32 reservedWord;
     struct RecordN64EngCreateNumericWidget *field_44;
     s32 field_48;
     s32 field_4C;
@@ -46,5 +46,5 @@ struct RecordN64EngCreateNumericWidget {
 
 
 
-extern const char D_800CAF20[];
+extern const char g_numericWidgetValueFormat[];
 #endif

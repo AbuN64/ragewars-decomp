@@ -4,7 +4,7 @@
 #include "MENU/PAK_LOAD.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/ITEMRECAT24.H"
@@ -16,136 +16,136 @@
 #include "COMMON/TRIPLE.H"
 #include "COMMON/EFFECTRENDER.H"
 
-extern s32 D_80153788;
+extern s32 g_controllerPakPromptKind;
 
 /* Formats the score into the last four characters of the item's text and returns zero.
    PAL items select their text using the current language. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800ED414[];
+extern char g_pakFourDigitValueFormat[];
 #else
 #endif
 
 extern s32 Menu_CountLineChars(LayeredText *);
 
 
-/* Draws an item's label at its position into the text layer D_8014561C through Menu_OpenDialog, using
+/* Draws an item's label at its position into the text layer g_matchEndingTeamWheelClose through Menu_OpenDialog, using
    the fixed label D_44F0B8 instead of the item's own when D_80153730 is set; returns 1. */
 
 
-extern char D_8014561C[];
+extern char g_matchEndingTeamWheelClose[];
 
 
 extern void Menu_OpenDialog(char *, char *, int, int, int);
 
-/* Clears the word held in D_80153788. */
+/* Clears the word held in g_controllerPakPromptKind. */
 
 
-/* Sets the state word D_80153788 to 1; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 1; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 2; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 2; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 3; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 3; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 4; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 4; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 5; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 5; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 6; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 6; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 7; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 7; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Clears bit 26 and sets bit 3 of the flag word at offset 0x120 of the object at offset 0xC of a
-   record, stores 8 in the state word D_80153788 between the two, and calls Control_ClearMenuControlFlag. */
+   record, stores 8 in the state word g_controllerPakPromptKind between the two, and calls Control_ClearMenuControlFlag. */
 
 
 
 
 
 
-/* Stores 9 in D_80153788 and 0 in D_80153758. */
+/* Stores 9 in g_controllerPakPromptKind and 0 in D_80153758. */
 
 
-/* Stores 9 in the state word D_80153788 and one in D_80153758; Pak_SelectPromptKindNine stores 9 and zero. */
+/* Stores 9 in the state word g_controllerPakPromptKind and one in D_80153758; Pak_SelectPromptKindNine stores 9 and zero. */
 
 
-/* Sets the state word D_80153788 to 0xA; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 0xA; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 0xB; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 0xB; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 0xC; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 0xC; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 0xD; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 0xD; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 0xE; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 0xE; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Sets the state word D_80153788 to 0xF; this is one of a run of functions that each store one
+/* Sets the state word g_controllerPakPromptKind to 0xF; this is one of a run of functions that each store one
    state number there, and Pak_SelectPromptKindZero clears it. */
 
 
-/* Points a field's text at the label for the state word D_80153788: the second string through the jump table
-   jtbl_800E0E48 for states 0 to 15, and D_800D781C for any other state. Returns zero. An earlier attempt misjudged this switch as a dispatch head whose
+/* Points a field's text at the label for the state word g_controllerPakPromptKind: the second string through the jump table
+   jtbl_800E0E48 for states 0 to 15, and g_SelectPromptActionHeadingStateOtherText for any other state. Returns zero. An earlier attempt misjudged this switch as a dispatch head whose
    cases lay outside the interval; its case bodies are inside it. */
 
 
 
 
-/* Points a field's text at the label for the state word D_80153788: one of 15 strings through the jump table
-   jtbl_800E0E88 for states 0 to 15, and D_800D782C for any other state. Returns zero. */
+/* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
+   jtbl_800E0E88 for states 0 to 15, and g_SelectPromptTextGroupOneStateOtherText for any other state. Returns zero. */
 
 
 
 
-/* Points a field's text at the label for the state word D_80153788: one of 15 strings through the jump table
-   jtbl_800E0EC8 for states 0 to 15, and D_800D7830 for any other state. Returns zero. */
+/* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
+   jtbl_800E0EC8 for states 0 to 15, and g_SelectPromptTextGroupTwoStateOtherText for any other state. Returns zero. */
 
 
 
 
-/* Points a field's text at the label for the state word D_80153788: one of 15 strings through the jump table
-   jtbl_800E0F08 for states 0 to 15, and D_800D7834 for any other state. Returns zero. */
+/* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
+   jtbl_800E0F08 for states 0 to 15, and g_SelectPromptTextGroupThreeStateOtherText for any other state. Returns zero. */
 
 
 
 
-/* Points a field's text at the label for the state word D_80153788: one of 15 strings through the jump table
-   jtbl_800E0F48 for states 0 to 15, and D_800D7838 for any other state. Returns zero. */
+/* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
+   jtbl_800E0F48 for states 0 to 15, and g_SelectPromptTextGroupFourStateOtherText for any other state. Returns zero. */
 
 
 
 
-/* Points a field's text at the label for the state word D_80153788: one of 15 strings through the jump table
-   jtbl_800E0F88 for states 0 to 15, and D_800D783C for any other state. Returns zero. */
+/* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
+   jtbl_800E0F88 for states 0 to 15, and g_SelectPromptTextGroupFiveStateOtherText for any other state. Returns zero. */
 
 
 
 
-/* Points a field's text at the label for the state word D_80153788: the second string through the jump table
-   jtbl_800E0FC8 for states 0 to 15, and D_800D7824 for any other state. Returns zero. An earlier attempt misjudged this switch as a dispatch head whose
+/* Points a field's text at the label for the state word g_controllerPakPromptKind: the second string through the jump table
+   jtbl_800E0FC8 for states 0 to 15, and g_SelectModalPromptLabelStateOtherText for any other state. Returns zero. An earlier attempt misjudged this switch as a dispatch head whose
    cases lay outside the interval; its case bodies are inside it. */
 
 
@@ -157,15 +157,15 @@ extern void Menu_OpenDialog(char *, char *, int, int, int);
 
 
 
-extern s32 D_8015375C;
+extern s32 g_pakUseScannedChannel;
 
 extern s32 Snapshot_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
 
 static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
-    if (D_8015375C != 0) {
-        return D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        return g_introSelectedItem;
     }
-    return record->owner->unk4;
+    return record->owner->controllerPort;
 }
 
 s32 Pak_FormatPreviewFourDigitValue(LayeredText *field) {
@@ -173,7 +173,7 @@ s32 Pak_FormatPreviewFourDigitValue(LayeredText *field) {
     s32 value = g_pakPreviewNumber;
     char *text = (char *)field->text[g_languageIndex];
 
-    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800ED414, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_pakFourDigitValueFormat, value);
 #else
     s32 value = D_8014D488.values[2];
     char *text = (char *)*field->text;
@@ -183,15 +183,15 @@ s32 Pak_FormatPreviewFourDigitValue(LayeredText *field) {
     return 0;
 }
 
-/* Points a field's text at D_800D7810 when D_80153730 is set, at D_800D7818 when D_80153774 is set instead, and at
+/* Points a field's text at D_800D7810 when D_80153730 is set, at D_800D7818 when g_pakUseDefaultPreviewLabels is set instead, and at
    D_800D7814 otherwise. Returns zero. */
 
 
 
-s32 Pak_UpdateProfileActionLabel(struct FieldRecAt14 *field) {
+s32 Pak_UpdateProfileActionLabel(struct PakActionLabelView *field) {
     if (D_80153730 != 0) {
         field->text = D_800D7810;
-    } else if (D_80153774 != 0) {
+    } else if (g_pakUseDefaultPreviewLabels != 0) {
         field->text = D_800D7818;
     } else {
         field->text = D_800D7814;
@@ -199,90 +199,90 @@ s32 Pak_UpdateProfileActionLabel(struct FieldRecAt14 *field) {
     return 0;
 }
 
-int Pak_OpenProfileActionPrompt(int unused, ItemRecAt24 *item) {
+int Pak_OpenProfileActionPrompt(int unused, PakActionPromptItemView *item) {
     if (D_80153730 != 0) {
-        Menu_OpenDialog(D_8014561C, D_0044E468, item->x, item->y, 0);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044E468, item->x, item->y, 0);
     } else {
-        Menu_OpenDialog(D_8014561C, item->label, item->x, item->y, 0);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, item->label, item->x, item->y, 0);
     }
     return 1;
 }
 
 void Pak_SelectPromptKindZero(void) {
-    D_80153788 = 0;
+    g_controllerPakPromptKind = 0;
 }
 
 void Pak_SelectPromptKindOne(void) {
-    D_80153788 = 1;
+    g_controllerPakPromptKind = 1;
 }
 
 void Pak_SelectPromptKindTwo(void) {
-    D_80153788 = 2;
+    g_controllerPakPromptKind = 2;
 }
 
 void Pak_SelectPromptKindThree(void) {
-    D_80153788 = 3;
+    g_controllerPakPromptKind = 3;
 }
 
 void Pak_SelectPromptKindFour(void) {
-    D_80153788 = 4;
+    g_controllerPakPromptKind = 4;
 }
 
 void Pak_SelectPromptKindFive(void) {
-    D_80153788 = 5;
+    g_controllerPakPromptKind = 5;
 }
 
 void Pak_SelectPromptKindSix(void) {
-    D_80153788 = 6;
+    g_controllerPakPromptKind = 6;
 }
 
 void Pak_SelectPromptKindSeven(void) {
-    D_80153788 = 7;
+    g_controllerPakPromptKind = 7;
 }
 
-void Pak_SelectPromptKindEight(struct RecordRecAtCV3 *record) {
+void Pak_SelectPromptKindEight(struct MenuPromptKindView *record) {
     record->target->flags &= ~0x04000000;
-    D_80153788 = 8;
+    g_controllerPakPromptKind = 8;
     record->target->flags |= 8;
     Control_ClearMenuControlFlag();
 }
 
 void Pak_SelectPromptKindNine(void) {
-    D_80153788 = 9;
+    g_controllerPakPromptKind = 9;
     D_80153758 = 0;
 }
 
 void Pak_SelectPromptKindNinePending(void) {
-    D_80153788 = 9;
+    g_controllerPakPromptKind = 9;
     D_80153758 = 1;
 }
 
 void Pak_SelectPromptKindTen(void) {
-    D_80153788 = 0xA;
+    g_controllerPakPromptKind = 0xA;
 }
 
 void Pak_SelectPromptKindEleven(void) {
-    D_80153788 = 0xB;
+    g_controllerPakPromptKind = 0xB;
 }
 
 void Pak_SelectPromptKindTwelve(void) {
-    D_80153788 = 0xC;
+    g_controllerPakPromptKind = 0xC;
 }
 
 void Pak_SelectPromptKindThirteen(void) {
-    D_80153788 = 0xD;
+    g_controllerPakPromptKind = 0xD;
 }
 
 void Pak_SelectPromptKindFourteen(void) {
-    D_80153788 = 0xE;
+    g_controllerPakPromptKind = 0xE;
 }
 
 void Pak_SelectPromptKindFifteen(void) {
-    D_80153788 = 0xF;
+    g_controllerPakPromptKind = 0xF;
 }
 
-s32 Pak_SelectPromptActionHeading(struct FieldRecAt14 *field) {
-    u32 state = D_80153788;
+s32 Pak_SelectPromptActionHeading(struct PakActionLabelView *field) {
+    u32 state = g_controllerPakPromptKind;
 
     if (state >= 16) {
         goto state_other;
@@ -306,16 +306,16 @@ s32 Pak_SelectPromptActionHeading(struct FieldRecAt14 *field) {
         case 15: goto case_1;
         }
 state_other:
-    field->text = D_800D781C;
+    field->text = g_SelectPromptActionHeadingStateOtherText;
     goto done;
 case_1:
-    field->text = D_800D37F4;
+    field->text = g_SelectPromptActionHeadingCase1Text;
 done:
     return 0;
 }
 
-s32 Pak_SelectPromptTextGroupOne(struct FieldRecAt14 *field) {
-    u32 state = D_80153788;
+s32 Pak_SelectPromptTextGroupOne(struct PakActionLabelView *field) {
+    u32 state = g_controllerPakPromptKind;
 
     if (state >= 16) {
         goto state_other;
@@ -339,58 +339,58 @@ s32 Pak_SelectPromptTextGroupOne(struct FieldRecAt14 *field) {
         case 15: goto case_15;
         }
 state_other:
-    field->text = D_800D782C;
+    field->text = g_SelectPromptTextGroupOneStateOtherText;
     goto done;
 case_1:
-    field->text = D_800D3814;
+    field->text = g_SelectPromptTextGroupOneCase1Text;
     goto done;
 case_2:
-    field->text = D_800D3828;
+    field->text = g_SelectPromptTextGroupOneCase2Text;
     goto done;
 case_3:
-    field->text = D_800D3850;
+    field->text = g_SelectPromptTextGroupOneCase3Text;
     goto done;
 case_4:
-    field->text = D_800D383C;
+    field->text = g_SelectPromptTextGroupOneCase4Text;
     goto done;
 case_5:
-    field->text = D_800D3864;
+    field->text = g_SelectPromptTextGroupOneCase5Text;
     goto done;
 case_6:
-    field->text = D_800D3878;
+    field->text = g_SelectPromptTextGroupOneCase6Text;
     goto done;
 case_7:
-    field->text = D_800D388C;
+    field->text = g_SelectPromptTextGroupOneCase7Text;
     goto done;
 case_8:
-    field->text = D_800D38A0;
+    field->text = g_SelectPromptTextGroupOneCase8Text;
     goto done;
 case_9:
-    field->text = D_800D38B4;
+    field->text = g_SelectPromptTextGroupOneCase9Text;
     goto done;
 case_10:
-    field->text = D_800D38C8;
+    field->text = g_SelectPromptTextGroupOneCase10Text;
     goto done;
 case_11:
-    field->text = D_800D38DC;
+    field->text = g_SelectPromptTextGroupOneCase11Text;
     goto done;
 case_12:
-    field->text = D_800D38F0;
+    field->text = g_SelectPromptTextGroupOneCase12Text;
     goto done;
 case_13:
-    field->text = D_800D3904;
+    field->text = g_SelectPromptTextGroupOneCase13Text;
     goto done;
 case_14:
-    field->text = D_800D3918;
+    field->text = g_SelectPromptTextGroupOneCase14Text;
     goto done;
 case_15:
-    field->text = D_800D392C;
+    field->text = g_SelectPromptTextGroupOneCase15Text;
 done:
     return 0;
 }
 
-s32 Pak_SelectPromptTextGroupTwo(struct FieldRecAt14 *field) {
-    u32 state = D_80153788;
+s32 Pak_SelectPromptTextGroupTwo(struct PakActionLabelView *field) {
+    u32 state = g_controllerPakPromptKind;
 
     if (state >= 16) {
         goto state_other;
@@ -414,58 +414,58 @@ s32 Pak_SelectPromptTextGroupTwo(struct FieldRecAt14 *field) {
         case 15: goto case_15;
         }
 state_other:
-    field->text = D_800D7830;
+    field->text = g_SelectPromptTextGroupTwoStateOtherText;
     goto done;
 case_1:
-    field->text = D_800D3818;
+    field->text = g_SelectPromptTextGroupTwoCase1Text;
     goto done;
 case_2:
-    field->text = D_800D382C;
+    field->text = g_SelectPromptTextGroupTwoCase2Text;
     goto done;
 case_3:
-    field->text = D_800D3854;
+    field->text = g_SelectPromptTextGroupTwoCase3Text;
     goto done;
 case_4:
-    field->text = D_800D3840;
+    field->text = g_SelectPromptTextGroupTwoCase4Text;
     goto done;
 case_5:
-    field->text = D_800D3868;
+    field->text = g_SelectPromptTextGroupTwoCase5Text;
     goto done;
 case_6:
-    field->text = D_800D387C;
+    field->text = g_SelectPromptTextGroupTwoCase6Text;
     goto done;
 case_7:
-    field->text = D_800D3890;
+    field->text = g_SelectPromptTextGroupTwoCase7Text;
     goto done;
 case_8:
-    field->text = D_800D38A4;
+    field->text = g_SelectPromptTextGroupTwoCase8Text;
     goto done;
 case_9:
-    field->text = D_800D38B8;
+    field->text = g_SelectPromptTextGroupTwoCase9Text;
     goto done;
 case_10:
-    field->text = D_800D38CC;
+    field->text = g_SelectPromptTextGroupTwoCase10Text;
     goto done;
 case_11:
-    field->text = D_800D38E0;
+    field->text = g_SelectPromptTextGroupTwoCase11Text;
     goto done;
 case_12:
-    field->text = D_800D38F4;
+    field->text = g_SelectPromptTextGroupTwoCase12Text;
     goto done;
 case_13:
-    field->text = D_800D3908;
+    field->text = g_SelectPromptTextGroupTwoCase13Text;
     goto done;
 case_14:
-    field->text = D_800D391C;
+    field->text = g_SelectPromptTextGroupTwoCase14Text;
     goto done;
 case_15:
-    field->text = D_800D3930;
+    field->text = g_SelectPromptTextGroupTwoCase15Text;
 done:
     return 0;
 }
 
-s32 Pak_SelectPromptTextGroupThree(struct FieldRecAt14 *field) {
-    u32 state = D_80153788;
+s32 Pak_SelectPromptTextGroupThree(struct PakActionLabelView *field) {
+    u32 state = g_controllerPakPromptKind;
 
     if (state >= 16) {
         goto state_other;
@@ -489,58 +489,58 @@ s32 Pak_SelectPromptTextGroupThree(struct FieldRecAt14 *field) {
         case 15: goto case_15;
         }
 state_other:
-    field->text = D_800D7834;
+    field->text = g_SelectPromptTextGroupThreeStateOtherText;
     goto done;
 case_1:
-    field->text = D_800D381C;
+    field->text = g_SelectPromptTextGroupThreeCase1Text;
     goto done;
 case_2:
-    field->text = D_800D3830;
+    field->text = g_SelectPromptTextGroupThreeCase2Text;
     goto done;
 case_3:
-    field->text = D_800D3858;
+    field->text = g_SelectPromptTextGroupThreeCase3Text;
     goto done;
 case_4:
-    field->text = D_800D3844;
+    field->text = g_SelectPromptTextGroupThreeCase4Text;
     goto done;
 case_5:
-    field->text = D_800D386C;
+    field->text = g_SelectPromptTextGroupThreeCase5Text;
     goto done;
 case_6:
-    field->text = D_800D3880;
+    field->text = g_SelectPromptTextGroupThreeCase6Text;
     goto done;
 case_7:
-    field->text = D_800D3894;
+    field->text = g_SelectPromptTextGroupThreeCase7Text;
     goto done;
 case_8:
-    field->text = D_800D38A8;
+    field->text = g_SelectPromptTextGroupThreeCase8Text;
     goto done;
 case_9:
-    field->text = D_800D38BC;
+    field->text = g_SelectPromptTextGroupThreeCase9Text;
     goto done;
 case_10:
-    field->text = D_800D38D0;
+    field->text = g_SelectPromptTextGroupThreeCase10Text;
     goto done;
 case_11:
-    field->text = D_800D38E4;
+    field->text = g_SelectPromptTextGroupThreeCase11Text;
     goto done;
 case_12:
-    field->text = D_800D38F8;
+    field->text = g_SelectPromptTextGroupThreeCase12Text;
     goto done;
 case_13:
-    field->text = D_800D390C;
+    field->text = g_SelectPromptTextGroupThreeCase13Text;
     goto done;
 case_14:
-    field->text = D_800D3920;
+    field->text = g_SelectPromptTextGroupThreeCase14Text;
     goto done;
 case_15:
-    field->text = D_800D3934;
+    field->text = g_SelectPromptTextGroupThreeCase15Text;
 done:
     return 0;
 }
 
-s32 Pak_SelectPromptTextGroupFour(struct FieldRecAt14 *field) {
-    u32 state = D_80153788;
+s32 Pak_SelectPromptTextGroupFour(struct PakActionLabelView *field) {
+    u32 state = g_controllerPakPromptKind;
 
     if (state >= 16) {
         goto state_other;
@@ -564,58 +564,58 @@ s32 Pak_SelectPromptTextGroupFour(struct FieldRecAt14 *field) {
         case 15: goto case_15;
         }
 state_other:
-    field->text = D_800D7838;
+    field->text = g_SelectPromptTextGroupFourStateOtherText;
     goto done;
 case_1:
-    field->text = D_800D3820;
+    field->text = g_SelectPromptTextGroupFourCase1Text;
     goto done;
 case_2:
-    field->text = D_800D3834;
+    field->text = g_SelectPromptTextGroupFourCase2Text;
     goto done;
 case_3:
-    field->text = D_800D385C;
+    field->text = g_SelectPromptTextGroupFourCase3Text;
     goto done;
 case_4:
-    field->text = D_800D3848;
+    field->text = g_SelectPromptTextGroupFourCase4Text;
     goto done;
 case_5:
-    field->text = D_800D3870;
+    field->text = g_SelectPromptTextGroupFourCase5Text;
     goto done;
 case_6:
-    field->text = D_800D3884;
+    field->text = g_SelectPromptTextGroupFourCase6Text;
     goto done;
 case_7:
-    field->text = D_800D3898;
+    field->text = g_SelectPromptTextGroupFourCase7Text;
     goto done;
 case_8:
-    field->text = D_800D38AC;
+    field->text = g_SelectPromptTextGroupFourCase8Text;
     goto done;
 case_9:
-    field->text = D_800D38C0;
+    field->text = g_SelectPromptTextGroupFourCase9Text;
     goto done;
 case_10:
-    field->text = D_800D38D4;
+    field->text = g_SelectPromptTextGroupFourCase10Text;
     goto done;
 case_11:
-    field->text = D_800D38E8;
+    field->text = g_SelectPromptTextGroupFourCase11Text;
     goto done;
 case_12:
-    field->text = D_800D38FC;
+    field->text = g_SelectPromptTextGroupFourCase12Text;
     goto done;
 case_13:
-    field->text = D_800D3910;
+    field->text = g_SelectPromptTextGroupFourCase13Text;
     goto done;
 case_14:
-    field->text = D_800D3924;
+    field->text = g_SelectPromptTextGroupFourCase14Text;
     goto done;
 case_15:
-    field->text = D_800D3938;
+    field->text = g_SelectPromptTextGroupFourCase15Text;
 done:
     return 0;
 }
 
-s32 Pak_SelectPromptTextGroupFive(struct FieldRecAt14 *field) {
-    u32 state = D_80153788;
+s32 Pak_SelectPromptTextGroupFive(struct PakActionLabelView *field) {
+    u32 state = g_controllerPakPromptKind;
 
     if (state >= 16) {
         goto state_other;
@@ -639,58 +639,58 @@ s32 Pak_SelectPromptTextGroupFive(struct FieldRecAt14 *field) {
         case 15: goto case_15;
         }
 state_other:
-    field->text = D_800D783C;
+    field->text = g_SelectPromptTextGroupFiveStateOtherText;
     goto done;
 case_1:
-    field->text = D_800D3824;
+    field->text = g_SelectPromptTextGroupFiveCase1Text;
     goto done;
 case_2:
-    field->text = D_800D3838;
+    field->text = g_SelectPromptTextGroupFiveCase2Text;
     goto done;
 case_3:
-    field->text = D_800D3860;
+    field->text = g_SelectPromptTextGroupFiveCase3Text;
     goto done;
 case_4:
-    field->text = D_800D384C;
+    field->text = g_SelectPromptTextGroupFiveCase4Text;
     goto done;
 case_5:
-    field->text = D_800D3874;
+    field->text = g_SelectPromptTextGroupFiveCase5Text;
     goto done;
 case_6:
-    field->text = D_800D3888;
+    field->text = g_SelectPromptTextGroupFiveCase6Text;
     goto done;
 case_7:
-    field->text = D_800D389C;
+    field->text = g_SelectPromptTextGroupFiveCase7Text;
     goto done;
 case_8:
-    field->text = D_800D38B0;
+    field->text = g_SelectPromptTextGroupFiveCase8Text;
     goto done;
 case_9:
-    field->text = D_800D38C4;
+    field->text = g_SelectPromptTextGroupFiveCase9Text;
     goto done;
 case_10:
-    field->text = D_800D38D8;
+    field->text = g_SelectPromptTextGroupFiveCase10Text;
     goto done;
 case_11:
-    field->text = D_800D38EC;
+    field->text = g_SelectPromptTextGroupFiveCase11Text;
     goto done;
 case_12:
-    field->text = D_800D3900;
+    field->text = g_SelectPromptTextGroupFiveCase12Text;
     goto done;
 case_13:
-    field->text = D_800D3914;
+    field->text = g_SelectPromptTextGroupFiveCase13Text;
     goto done;
 case_14:
-    field->text = D_800D3928;
+    field->text = g_SelectPromptTextGroupFiveCase14Text;
     goto done;
 case_15:
-    field->text = D_800D393C;
+    field->text = g_SelectPromptTextGroupFiveCase15Text;
 done:
     return 0;
 }
 
-s32 Pak_SelectModalPromptLabel(struct FieldRecAt14 *field) {
-    u32 state = D_80153788;
+s32 Pak_SelectModalPromptLabel(struct PakActionLabelView *field) {
+    u32 state = g_controllerPakPromptKind;
 
     if (state >= 16) {
         goto state_other;
@@ -714,10 +714,10 @@ s32 Pak_SelectModalPromptLabel(struct FieldRecAt14 *field) {
         case 15: goto state_other;
         }
 state_other:
-    field->text = D_800D7824;
+    field->text = g_SelectModalPromptLabelStateOtherText;
     goto done;
 case_1:
-    field->text = D_800D37FC;
+    field->text = g_SelectModalPromptLabelCase1Text;
 done:
     return 0;
 }
@@ -754,7 +754,7 @@ void Pak_DisableOperationHeading(void) {
 
 
 
-s32 Pak_SelectOperationHeading(struct FieldRecAt14 *field) {
+s32 Pak_SelectOperationHeading(struct PakActionLabelView *field) {
     if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D7970;
     } else {
@@ -768,7 +768,7 @@ s32 Pak_SelectOperationHeading(struct FieldRecAt14 *field) {
 
 
 
-s32 Pak_SelectOperationDescription(struct FieldRecAt14 *field) {
+s32 Pak_SelectOperationDescription(struct PakActionLabelView *field) {
     if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D7974;
     } else {
@@ -782,25 +782,25 @@ s32 Pak_SelectOperationDescription(struct FieldRecAt14 *field) {
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "SYSTEM/DEFS.H"
-extern char D_800ED41C[];
+extern char g_pakTwoDigitValueFormat[];
 extern char *D_800D394C[];
 
 s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) {
     char *text;
     char **strings;
     s32 value;
-    if (D_8015375C != 0) {
-        value = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        value = g_introSelectedItem;
     } else {
-        value = pThis->owner->unk4;
+        value = pThis->owner->controllerPort;
     }
     if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D394C;
     } else {
         strings = D_800E2FB4;
         field->text = strings;
-        text = strings[D_801462C8.language];
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), D_800ED41C, value + 1);
+        text = strings[g_gameSettings.language];
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), g_pakTwoDigitValueFormat, value + 1);
     }
     return 0;
 }
@@ -810,8 +810,8 @@ s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #else
 #endif
-/* Takes D_800E28C8 when D_8015375C is set and otherwise the signed byte at offset 4 of the second argument's record at 0x20, then shows D_800D394C in a field when g_pakAlternateNameSelected is set and otherwise points the field at D_800D3958 and formats one more than that value into it with D_800DCD9C two bytes before the length Menu_CountLineChars reports, returning zero.
-   Adapted from Timer_UpdateOwnerChannelLabel with the value source chosen by D_8015375C, the text chosen by g_pakAlternateNameSelected, the offset two bytes, and the texts and format changed. */
+/* Takes g_introSelectedItem when g_pakUseScannedChannel is set and otherwise the signed byte at offset 4 of the second argument's record at 0x20, then shows D_800D394C in a field when g_pakAlternateNameSelected is set and otherwise points the field at D_800D3958 and formats one more than that value into it with D_800DCD9C two bytes before the length Menu_CountLineChars reports, returning zero.
+   Adapted from Timer_UpdateOwnerChannelLabel with the value source chosen by g_pakUseScannedChannel, the text chosen by g_pakAlternateNameSelected, the offset two bytes, and the texts and format changed. */
 
 
 extern u8 *D_800D394C[];
@@ -828,10 +828,10 @@ s32 Pak_FormatOperationChannelLabel(LayeredText *field, struct Shared_PakMenu *h
 
 #else
 #endif
-    if (D_8015375C != 0) {
-        value = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        value = g_introSelectedItem;
     } else {
-        value = holder->owner->unk4;
+        value = holder->owner->controllerPort;
     }
     if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D394C;
@@ -847,7 +847,7 @@ s32 Pak_FormatOperationChannelLabel(LayeredText *field, struct Shared_PakMenu *h
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), D_800ED41C, value + 1);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), g_pakTwoDigitValueFormat, value + 1);
 #else
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), g_digitDotFormat, value + 1);
 #endif

@@ -1,6 +1,6 @@
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/S1_4.H"
+#include "TYPES.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 #include "IO/PIGETCMDQ.H"
@@ -16,7 +16,7 @@ s32 Io_StartPeripheralDma(OSIoMesg *entry, s32 subtype, s32 direction, s32 devic
                    s32 dramAddress, s32 transferSize, Opaque_OSMesgQueue *completionQueue) {
     s16 type;
 
-    if (D_800D4360 == 0) {
+    if (g_piManagerState == 0) {
         return -1;
     }
     type = 12;

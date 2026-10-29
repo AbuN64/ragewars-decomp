@@ -4,8 +4,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V6.H"
 #include "COMMON/EFFECTCONTRIBUTION.H"
-#include "SYSTEM/802A6AC0.H"
-extern void Fx_AccumulateEffectComponents(ObjRecAt3CV1 *);
+#include "SYSTEM/TIMED_EFFECT_AND_ITEM_MENU_VIEWS.H"
+extern void Fx_AccumulateEffectComponents(EffectColorContribution *);
 extern void Fx_ClampScalarRange(f32 *);
 extern void Fx_AddTimedCallback(s32, s32, s32, s32, f32);
 extern void Fx_ResolveEntryResource(void *unused, void *, void *);

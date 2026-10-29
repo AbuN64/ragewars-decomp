@@ -2,21 +2,21 @@
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "sdk/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "sdk/SCHED/osscremoveclient.H"
 #include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "sdk/libgultra/sptaskyield.h"
 #include "sdk/os.h"
-extern s32 D_80142C30;
-extern s32 D_80142C38;
+extern s32 g_schedulerPendingFramebuffer;
+extern s32 g_displayedFramebufferAndRefreshRate;
 void __scAppendList(OSSched *scheduler, void *task) {
     void *previousTail;
 
@@ -42,57 +42,57 @@ void __scAppendList(OSSched *scheduler, void *task) {
     ((struct OSScTask_s *)task)->state = (((struct OSScTask_s *)task)->flags) & 3;
 }
 
-void *Sched_GetTaskWithAvailableFramebuffer(struct OSScTask_s *arg0) {
+void *Sched_GetTaskWithAvailableFramebuffer(struct OSScTask_s *scheduler) {
     s32 f1a;
     s32 f1b;
     void *v2;
 
-    if (arg0 == 0) {
+    if (scheduler == 0) {
         return 0;
     }
-    f1a = (s32)arg0->framebuffer;
-    if (f1a == D_80142C38) {
+    f1a = (s32)scheduler->framebuffer;
+    if (f1a == g_displayedFramebufferAndRefreshRate) {
         return 0;
     }
     v2 = osViGetCurrentFramebuffer();
-    f1b = (s32)arg0->framebuffer;
+    f1b = (s32)scheduler->framebuffer;
     if (f1b == (s32)v2) {
         return 0;
     }
-    if (f1b != D_80142C30) {
-        return arg0;
+    if (f1b != g_schedulerPendingFramebuffer) {
+        return scheduler;
     }
     return 0;
 }
 
-s32 Sched_CompleteTaskAndSwapBuffer(void *arg0, void *arg1) {
-    if ((((s32)((struct OSScTask_s *)arg1)->state)) & 3) {
+s32 Sched_CompleteTaskAndSwapBuffer(void *scheduler, void *task) {
+    if ((((s32)((struct OSScTask_s *)task)->state)) & 3) {
         return 0;
     }
-    if ((((struct OSScTask_s *)arg1)->list.type) != 1) {
+    if ((((struct OSScTask_s *)task)->list.type) != 1) {
         return 1;
     }
-    if (((((s32)((struct OSScTask_s *)arg1)->flags)) & 0x60) != 0x60) {
+    if (((((s32)((struct OSScTask_s *)task)->flags)) & 0x60) != 0x60) {
         return 1;
     }
-    osViSwapBuffer(((s32)((struct OSScTask_s *)arg1)->framebuffer));
+    osViSwapBuffer(((s32)((struct OSScTask_s *)task)->framebuffer));
     return 1;
 }
 
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C52B4[3] = {
+unsigned int k_SchedEncodedWords[3] = {
     0x63616C65, 0x52000088, 0x00000008,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-char rodata_unresolved_800C5674[12] =
+char s_SchedLILLYJIMText[12] =
     "LILLY\000\000\000JIM ";
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C5384[3] = {
+unsigned int k_SchedEncodedWordsBlock1[3] = {
     0x4123D70A, 0x3F800000, 0x42A3D70A,
 };
 #endif

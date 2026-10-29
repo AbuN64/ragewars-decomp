@@ -6,7 +6,7 @@ struct CAnimPool;
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
 
 
@@ -44,8 +44,8 @@ struct RecordAnimPoolSpawnAnimationObject {
     u16 angle;
 };
 
-struct ObjRecAt10V1;
-typedef struct ObjRecAt10V1 ObjRecAt10V1;
+struct AnimationPoseRecordView;
+typedef struct AnimationPoseRecordView AnimationPoseRecordView;
 
 struct ResourceEntry;
 typedef struct ResourceEntry ResourceEntry;
@@ -53,8 +53,8 @@ typedef struct ResourceEntry ResourceEntry;
 struct EffectAnimPoolUpdateSceneEffects;
 typedef struct EffectAnimPoolUpdateSceneEffects EffectAnimPoolUpdateSceneEffects;
 
-struct ObjRecAt10V1;
-struct ObjRecAt10V1 {
+struct AnimationPoseRecordView;
+struct AnimationPoseRecordView {
     int unk0;
     short unk4;
     char pad4[0x6 - 0x4 - sizeof(short)];
@@ -103,7 +103,7 @@ struct RecordAnimPoolSpawnAnimationObject;
 typedef struct RecordAnimPoolSpawnAnimationObject RecordAnimPoolSpawnAnimationObject;
 
 
-extern void func_802624A8_de(void *animationState);
+extern void Gastate_ReleaseAnimationResource(void *animationState);
 
 
 
@@ -111,7 +111,7 @@ extern void func_802624A8_de(void *animationState);
 struct BitReader;
 typedef struct BitReader BitReader;
 
-extern float D_800C4258_de;
+extern float g_animationFrameAngleScale;
 
 
 

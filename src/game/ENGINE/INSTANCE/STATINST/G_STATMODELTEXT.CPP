@@ -6,13 +6,13 @@ const char g_statModelText[11] =
 #endif
 
 #if defined(VERSION_US)
-unsigned char rodata_unresolved_800C3DCF[1] = {
+unsigned char k_GStatmodeltextEncodedBytes[1] = {
     0x65,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C3E9F[1] = {
+unsigned char k_GStatmodeltextEncodedBytesBlock1[1] = {
     0x21,
 };
 #endif

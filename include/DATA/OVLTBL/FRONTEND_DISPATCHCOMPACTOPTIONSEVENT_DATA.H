@@ -1,8 +1,8 @@
 #ifndef DATA_OVLTBL_FRONTEND_DISPATCHCOMPACTOPTIONSEVENT_DATA_H
 #define DATA_OVLTBL_FRONTEND_DISPATCHCOMPACTOPTIONSEVENT_DATA_H
-extern char D_0042362C[];
-extern char D_004237C0[];
-extern char D_004237F8[];
-extern char D_0042382C[];
-extern char D_004238F8[];
+extern char g_frontend_CreateGameOptionsScreenEntry[];
+extern char g_frontend_DestroyCompactOptionsPageEntry[];
+extern char g_frontend_ActivateCompactOptionsPageEntry[];
+extern char g_frontend_HandleCompactOptionsShortcutEntry[];
+extern char g_frontend_CloseCompactOptionsPageEntry[];
 #endif

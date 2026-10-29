@@ -1,5 +1,5 @@
 #include "COMMON/VIEWFLAGS.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -13,11 +13,11 @@
 #include "COMMON/DESCRIPTORRECAT29.H"
 extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-/* Spawns an emitter record: takes the head of the free list at 0x11D8 into the active list at 0x11EC (or reuses the record at 0x11F0 when none is free) and fills its position, scale, shared value and three rates converted by D_800C8630. */
+/* Spawns an emitter record: takes the head of the free list at 0x11D8 into the active list at 0x11EC (or reuses the record at 0x11F0 when none is free) and fills its position, scale, shared value and three rates converted by k_cameraFadeResetValue. */
 
 
 
-extern f32 D_800C8630[];
+extern f32 k_cameraFadeResetValue[];
 
 
 static inline void set_emitter(CShake *node, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
@@ -36,7 +36,7 @@ extern s32 Graphu64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength);
 
 extern f32 Gu_Sqrtf(f32);
 
-/* Posts a text as on-screen messages, one per line: the text (or D_800D7028 when given D_800D7034) is split
+/* Posts a text as on-screen messages, one per line: the text (or g_screenMessageSubstitutionReplacement when given g_screenMessageSubstitutionSource) is split
  * at newlines and for each non-empty line the oldest message node of the owner's list at 0xF24 is recycled
  * (cleared through Gsky_ClearScreenMessage, unlinked, and pushed onto the free list at 0xE40 of the pool) and set up
  * as a kind 2 message centred horizontally 80 pixels above the bottom of the screen, scaled by the given
@@ -45,11 +45,11 @@ extern f32 Gu_Sqrtf(f32);
 
 
 
-extern func_80237E70_G1 D_800D7028;
+extern ScreenMessageTextView g_screenMessageSubstitutionReplacement;
 
-extern func_80237E70_G1 D_800D7034;
+extern ScreenMessageTextView g_screenMessageSubstitutionSource;
 
-extern s32 D_800E28D0;
+extern s32 g_hudReferenceViewportWidth;
 
 
 static inline CCameraText *recycle(void *owner, void *pool) {
@@ -58,8 +58,8 @@ static inline CCameraText *recycle(void *owner, void *pool) {
     oldest = ((struct ScreenMessageOwner *)owner)->activeMessages.head;
     if (oldest != 0) {
         Gsky_ClearScreenMessage(oldest);
-        func_80255ED8_de(&((struct ScreenMessageOwner *)owner)->activeMessages, oldest);
-        func_80255D14_de(&((struct ScreenMessagePool *)pool)->freeMessages, oldest);
+        List_RemoveIntrusive(&((struct ScreenMessageOwner *)owner)->activeMessages, oldest);
+        List_AppendIntrusive(&((struct ScreenMessagePool *)pool)->freeMessages, oldest);
     }
     return oldest;
 }
@@ -74,8 +74,8 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
     if (pool == 0) {
         return message;
     }
-    if (text == D_800D7034.unk0) {
-        text = D_800D7028.unk0;
+    if (text == g_screenMessageSubstitutionSource.text) {
+        text = g_screenMessageSubstitutionReplacement.text;
     }
     p = text;
     line = p;
@@ -85,7 +85,7 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
             if (line != p) {
                 message = recycle(owner, pool);
                 if (message != 0) {
-                    s32 half = D_800E28D0 / 2;
+                    s32 half = g_hudReferenceViewportWidth / 2;
                     message->kind = kind;
                     message->text = line;
                     message->m_nAlpha = 0;
@@ -96,7 +96,7 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
                     message->pad2C = 0;
                     message->m_XScale = 1.0f;
                     message->m_YScale = 1.0f;
-                    height = D_800E28D4;
+                    height = g_hudReferenceViewportHeight;
                     message->x = half;
                     message->y = height - 80;
                     message->m_DisplayTime = size * 15.0f;
@@ -115,12 +115,12 @@ void Gsky_StartEmitter(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVe
     f32 k;
 
     if (node != 0) {
-        func_80255ED8_de(&state->freeEffects, node);
-        func_80255CB8_de(&state->activeEffects, node);
+        List_RemoveIntrusive(&state->freeEffects, node);
+        List_PrependIntrusive(&state->activeEffects, node);
     } else {
         node = state->activeEffects.tail;
     }
-    k = D_800C8630[1];
+    k = k_cameraFadeResetValue[1];
     set_emitter(node, a * k, b * k, c * k, scale, value, pos);
 }
 
@@ -136,7 +136,7 @@ void *Gsky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero)
         return &menuMatchGlobals->fallbackCamera;
     }
     node = menuMatchGlobals->cameras;
-    bestDist = D_800C3548_de;
+    bestDist = k_screenMessageInitialNearestDistance;
     bestNode = 0;
     if (node != 0) {
         do {
@@ -182,7 +182,7 @@ f32 Gsky_GetMeanViewDistance(Race *viewOwner, void *targetPosition) {
     count = viewOwner->header.views.count;
     divisor = (f64)count;
     if (count < 0) {
-        divisor += D_800C3550_de;
+        divisor += k_screenMessageScaleDivisorStep;
     }
     return sum / (f32)divisor;
 }

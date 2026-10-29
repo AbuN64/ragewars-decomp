@@ -4,9 +4,9 @@
 #include "AUDIO/SONG_PLAYER_VIEWS.H"
 #include "TYPES.H"
 
-extern void Audio_StopDialogPlayer(void *arg0);
-extern s32 Audio_ChooseSequenceVariant(void **arg0, s16 id, s16 avoid);
-extern void Audio_LoadDialogMetadata(void *arg0, s32 songIndex);
-extern void Audio_StopDialogPlayerUnlocked(void *arg0);
-extern s32 Audio_StartDialogGroup(PlayerRecAt1E *player, s32 group, f32 scale, int unused3);
+extern void Audio_StopDialogPlayer(void *dialogPlayer);
+extern s32 Audio_ChooseSequenceVariant(void **sequenceTable, s16 id, s16 avoid);
+extern void Audio_LoadDialogMetadata(void *dialogPlayer, s32 songIndex);
+extern void Audio_StopDialogPlayerUnlocked(void *dialogPlayer);
+extern s32 Audio_StartDialogGroup(DialogGroupPlayer *player, s32 group, f32 scale, int unused3);
 #endif

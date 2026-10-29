@@ -4,6 +4,6 @@
 
 extern void Frontend_ResetEquipmentFromCharacter(void);
 extern s32 Frontend_CountActiveEquipmentPanels(void);
-extern s32 Frontend_DispatchEquipmentEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Frontend_DispatchEquipmentEvent(void *eventTarget, s32 eventId, s32 eventCode, s32 eventValue, s32 repeatCount);
 extern void Frontend_SelectEquipmentColumn(s32, s32);
 #endif

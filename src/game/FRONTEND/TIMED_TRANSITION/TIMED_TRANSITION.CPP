@@ -35,7 +35,7 @@ s32 Frontend_UpdateTimedTransition(void) {
     MarkMenuEventHandled();
     switch (Menu_GetFocusedElementId()) {
     case MENU_80439F38_986:
-        switch (D_801462C8.controllerMode) {
+        switch (g_gameSettings.controllerMode) {
         case 0:
             time = 20;
             break;
@@ -70,35 +70,35 @@ s32 Frontend_CancelNodePairMenu(void) {
     return 0;
 }
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E59B0, an actor kind at D_800E59B4 and a handler at D_800E59B8: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_nodePairMenuEventIds, an actor kind at g_nodePairMenuEventActorKinds and a handler at g_nodePairMenuEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8043A014)(void *, s32, s32, s32, s32);
 
 
-extern FieldRow D_800E59B0[];
-extern FieldRow D_800E59B4[];
-extern Handler8043A014 D_800E59B8;
+extern FieldRow g_nodePairMenuEventIds[];
+extern FieldRow g_nodePairMenuEventActorKinds[];
+extern Handler8043A014 g_nodePairMenuEventHandlers;
 
 
 
 
-s32 Frontend_DispatchNodePairMenuEvent(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchNodePairMenuEvent(struct Tree *eventTarget, s32 eventId, s32 eventCode, s32 eventValue, s32 repeatCount) {
     char *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E59B8 != 0) {
+    if (g_nodePairMenuEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E59B8;
+        entry = (char *)&g_nodePairMenuEventHandlers;
         index = 0;
         do {
-            if (D_800E59B0[index].value == arg1) {
-                actor_kind = arg0->id;
-                table_kind = D_800E59B4[index].value;
+            if (g_nodePairMenuEventIds[index].value == eventId) {
+                actor_kind = eventTarget->id;
+                table_kind = g_nodePairMenuEventActorKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler8043A014 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler8043A014 *)entry)(eventTarget, eventId, eventCode, eventValue, repeatCount);
                 }
             }
             entry += 0xC;

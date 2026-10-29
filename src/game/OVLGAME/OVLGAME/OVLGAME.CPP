@@ -8,19 +8,19 @@ void Ovlgame_InitializeSceneEffectPool(struct CAnimPool *animationPool) {
     SceneEffect *sceneEffect;
     s32 i;
 
-    func_80255CA0_de(&animationPool->FreeList, 0x2E8, 0x2EC);
-    func_80255CA0_de(&animationPool->UsedList, 0x2E8, 0x2EC);
+    List_InitializeIntrusive(&animationPool->FreeList, 0x2E8, 0x2EC);
+    List_InitializeIntrusive(&animationPool->UsedList, 0x2E8, 0x2EC);
     i = 0;
     sceneEffect = animationPool->DynAnims;
     do {
-        func_80255D14_de(&animationPool->FreeList, sceneEffect);
+        List_AppendIntrusive(&animationPool->FreeList, sceneEffect);
         i += 1;
         sceneEffect += 1;
     } while (i < 0x20);
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8044AFD4[3] = {
+unsigned int k_OvlgameEncodedWords[3] = {
     0x61775200, 0x00100100, 0x00080091,
 };
 #endif

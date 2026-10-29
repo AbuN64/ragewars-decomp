@@ -1,15 +1,15 @@
 #ifndef RENDER_RESIDENT_TEXTURE_MENU_VIEWS_H
 #define RENDER_RESIDENT_TEXTURE_MENU_VIEWS_H
 #include "COMMON/OBJRECAT26DD8.H"
-#include "RENDER/802944E8.H"
+#include "RENDER/SEQUENCE_PROMPT_STATE_VIEWS.H"
 #include "COMMON/RESIDENTSTATE.H"
 
-extern s32 Simppool_CheckSequencePromptRequest(SequencePromptRequestView *arg0);
+extern s32 Simppool_CheckSequencePromptRequest(SequencePromptRequestView *request);
 
 struct ResidentSlot {
     s32 unk0;
     char pad4[0x21A0 - 0x4];
-    s32 unk21A0;
+    s32 reservedWord;
 };
 struct ResidentEntry {
     s32 unk0;
@@ -29,9 +29,9 @@ typedef struct FrontendInputSelector {
     u8 secondaryButton;
 } FrontendInputSelector;
 struct Node80253610;
-/* The us-rev1 resident texture menu state (D_8014AEB0, 0x21BC bytes): TextLoad_ResetArtsendTextureState clears it,
+/* The us-rev1 resident texture menu state (g_artsendTextureViewer, 0x21BC bytes): TextLoad_ResetArtsendTextureState clears it,
    Tengine_LoadSelectedTexture loads the selected entry and Tengine_UpdateArtsendTexturePreview steps the selection. */
-struct MenuGlobalRecAt21B8 {
+struct ArtsendTextureMenuState {
     u8 alternateTitle; /* +0x0 */
     u8 state; /* +0x1 */
     u8 unused0[2];
@@ -53,11 +53,11 @@ struct MenuGlobalRecAt21B8 {
     char displayData[0x80]; /* +0x2138 */
     s32 frameCount; /* +0x21B8 */
 };
-extern struct MenuGlobalRecAt21B8 D_8014AEB0;
-struct SelectionRecAt8 {
-    s32 index; /* +0x0: == D_8014AEBC */
+extern struct ArtsendTextureMenuState g_artsendTextureViewer;
+struct ArtsendTextureSelection {
+    s32 index; /* +0x0: == g_artsendTextureSelectionIndex */
     s32 value; /* +0x4 */
-    s32 changed; /* +0x8: == D_8014AEC4 */
+    s32 changed; /* +0x8: == g_artsendTextureSelectionChanged */
 };
 extern void Simppool_ResetEffectsAndControllers(void);
 extern void func_80294C84_de(void);

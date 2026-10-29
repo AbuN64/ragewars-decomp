@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80106248.H"
+#include "COMMON/LONE/RESOURCE_REQUEST_QUEUE.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/GFX_INITIALIZEFRONTENDSERVICES.H"
 #include "COMMON/OWNERRECAT8V1.H"
@@ -17,9 +17,9 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
-extern s32 D_800CBC14;
-extern struct Triple D_800D2C90;
-extern s32 func_80255228_de(s32 *);
+extern s32 g_frontendTransitionCountdown;
+extern struct Triple g_frontendShutdownState;
+extern s32 Cache_WaitForResourceLoads(s32 *);
 extern void Cache_DrainAndCompactResources(s32);
 extern void Node_OpenResourceArchive(char *);
 extern void Tsmos_SetIdleTimer(f32);
@@ -28,12 +28,12 @@ extern void Tsmos_ActivateControllerState(void);
 extern void Node_LoadLanguageStringsIfAny(s32);
 
 void InitFrontendMenus(void) {
-    func_80255228_de(&D_80106248);
+    Cache_WaitForResourceLoads(&g_resourceCacheWorker);
     Cache_DrainAndCompactResources(0);
     Gfx_InitializeFrontendServices();
     ESmem_InitializeFrameHeaps(0x3000);
-    SmSmngr_InitializeScreenManager(0x23, (s32)D_0043C500);
-    Node_OpenResourceArchive(D_800C6080_eu_x);
+    SmSmngr_InitializeScreenManager(0x23, (s32)g_Level_GetScreenEventTableAddress);
+    Node_OpenResourceArchive(s_frontendResourceArchiveNameEuX);
     SmpOverlay_RegisterOverlayClass();
     SmpFrameAnim_RegisterFrameAnimClass();
     SmpFade_RegisterFadeClass();
@@ -42,12 +42,12 @@ void InitFrontendMenus(void) {
     SmpSlider_RegisterSliderClass();
     SmpList_RegisterListClass();
     N64Eng_RegisterNumericWidgetClass();
-    D_800CBC14 = 0x3C;
+    g_frontendTransitionCountdown = 0x3C;
     Tsmos_SetIdleTimer(0.0f);
     Tsmos_SetTimerState(1);
-    D_800D2C90.z = 1;
+    g_frontendShutdownState.z = 1;
     Tsmos_ActivateControllerState();
-    D_800D2C90.x = 0;
+    g_frontendShutdownState.x = 0;
     Tsmos_SetModeOneFlag(2);
 #if defined(VERSION_DE)
     Node_LoadLanguageStringsIfAny(0);

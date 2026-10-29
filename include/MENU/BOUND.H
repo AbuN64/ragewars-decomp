@@ -2,7 +2,7 @@
 #define MENU_BOUND_H
 #include "TYPES.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
-struct ItemRecAt14 {
+struct MenuBindingItemView {
     char pad[20];
     struct Binding *binding;
 };

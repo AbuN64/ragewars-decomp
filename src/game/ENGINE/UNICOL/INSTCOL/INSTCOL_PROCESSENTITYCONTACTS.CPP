@@ -82,7 +82,7 @@ s32 CInstanceCollision_TestBoxFaces(BoxContactRay *ray, void *unused, BoxContact
             if ((edge.x * offset.x + edge.y * offset.y + edge.z * offset.z) < 0.0f) { inside = 0; break; }
         }
         if (!inside) continue;
-        if (func_8024E2C4_de(actor)) polygon.kind = ray->material->alternateKind;
+        if (InstHdr_UsesDefaultDefinitionHandling(actor)) polygon.kind = ray->material->alternateKind;
         else polygon.kind = ray->material->kind;
         polygon.type = 8;
         polygon.response = ray->material->response;
@@ -131,7 +131,7 @@ void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 
 void Graphu64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count);
 
-void Cache_UnlockResource(void *arg0, Node80253610 *resource);
+void Cache_UnlockResource(void *cache, Node80253610 *resource);
 
 void CInstanceCollision_TraceActorBounds(BoxContactRay *ray, BoxContactActor *actor, CVector3 *origin, Box *bounds) {
     CVector3 vertices[8];
@@ -302,8 +302,8 @@ typedef struct HitSelf {
     u8 pad9C[0xE0];
     f32 range; /* 0x17C */
 } HitSelf;
-extern LevelActor **D_80103FCC;
-extern char D_002405FC[], D_00240638[];
+extern LevelActor **g_collisionCurrentActor;
+extern char CInstanceCollision_SwapSortedContacts[], CInstanceCollision_CompareSortedContacts[];
 extern void PpDecom_QuickSortRecords();
 extern void CInstanceCollision_BuildSweepQuery(void *, void *);
 void InstCol_ProcessEntityContacts(HitSelf *self) {
@@ -336,7 +336,7 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
         if ((LevelActor *)owner == candidate) {
             continue;
         }
-        if (state->mode == 7 && *D_80103FCC == candidate) {
+        if (state->mode == 7 && *g_collisionCurrentActor == candidate) {
             continue;
         }
         if ((state->flags & 0x8000) && candidate->type == 0x64F) {
@@ -367,14 +367,14 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
     if (count == 0) {
         return;
     }
-    PpDecom_QuickSortRecords(list, count, 8, D_00240638, D_002405FC);
+    PpDecom_QuickSortRecords(list, count, 8, CInstanceCollision_CompareSortedContacts, CInstanceCollision_SwapSortedContacts);
     entry = list;
     for (contactIndex = 0; contactIndex < count; contactIndex++, entry++) {
         if (!(entry->distance < self->range)) {
             return;
         }
         candidate = entry->object;
-        if ((candidate->flags & 0x300000) && (game = &D_801462C8)->local == 0) {
+        if ((candidate->flags & 0x300000) && (game = &g_gameSettings)->local == 0) {
             CInstanceCollision_BuildSweepQuery(self, scratch);
             Instcol_TestEntityContact(self, scratch, candidate);
         } else {
@@ -384,19 +384,19 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C3654[3] = {
+unsigned int k_InstcolProcessentitycontactsEncodedWords[3] = {
     0x0000000A, 0x00080084, 0x0500000A,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C39D4[3] = {
+unsigned int k_InstcolProcessentitycontactsEncodedWordsBlock2[3] = {
     0x8E430038, 0x02601021, 0x00761821,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C3724[3] = {
+unsigned int k_InstcolProcessentitycontactsEncodedWordsBlock1[3] = {
     0x3F800000, 0xBF800000, 0x3F800000,
 };
 #endif

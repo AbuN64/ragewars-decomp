@@ -2,30 +2,30 @@
 
 /* 8040B45C_15.CPP */
 #if defined(VERSION_US)
-unsigned char D_auto_func_804142AC_de_padding_17832C[4] = { 0x14, 0x05, 0x00, 0x00 };
+unsigned char g_EncodeTrailingBytesBlock1[4] = { 0x14, 0x05, 0x00, 0x00 };
 #endif
 
 /* 80414430_14.CPP */
 #if defined(VERSION_US_REV1)
-unsigned char D_auto_func_80414798_eu_x_padding_1823D8[8] = { 0x8C, 0x50, 0xFF, 0xFC, 0x06, 0x40, 0x00, 0x14 };
+unsigned char g_EncodeTrailingBytesBlock4[8] = { 0x8C, 0x50, 0xFF, 0xFC, 0x06, 0x40, 0x00, 0x14 };
 #endif
 
 /* 8044E2B8_7.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_8044EF2C_eu_padding_1C4F2C[4] = { 0x00, 0x80, 0x38, 0x21 };
+unsigned char g_EncodeTrailingBytesBlock5[4] = { 0x00, 0x80, 0x38, 0x21 };
 #endif
 
 /* DATA_8044B4A0.CPP */
 #if defined(VERSION_EU_X)
 #include "COMMON/CCOLLISIONSETUP_T.H"
 
-unsigned int D_auto_rodata_unresolved_8044BC48[2] = {
+unsigned int k_EncodeEncodedWords[2] = {
     0x02610821, 0xAC20B61C,
 };
 
 /* The collision setup table CCollision_Initialize hands to CCollision_ApplySetupTable (through its KUSEG alias
- * D_0044A850): one row per collision info, ended by an empty row. */
-CCollisionSetup_t D_8044A850[36] = {
+ * g_collisionSetupTableResource): one row per collision info, ended by an empty row. */
+CCollisionSetup_t g_collisionSetupTable[36] = {
     { (CCollisionInfo2_t *)0x8010A458, 0x3C5729, 5, 2, 2, -2303.9998f, 0.0f, 0.7f, 0.0f, 0.0f },
     { (CCollisionInfo2_t *)0x8010A358, 0x3C552B, 5, 2, 2, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
     { (CCollisionInfo2_t *)0x8010A190, 0x3C5529, 2, 2, 2, -2100.0f, 0.0f, 0.0f, 0.0f, 0.0f },

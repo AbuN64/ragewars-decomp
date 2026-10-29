@@ -15,33 +15,33 @@ struct AnimationFrameState {
     u8 state_between_frame_and_cache[4];
     s32 cached_frame;
 };
-struct ObjectState68 {
+struct RibbonFrameBufferView {
     unsigned char padding_0[40];
-    UnitMtx unk_28;
+    UnitMtx matrix;
 };
 struct Owner802A697C {
     u8 pad0[0x7528];
-    struct State802A697C *head;
+    struct ParticleSwooshAttachment *head;
 };
-struct FloatState50 {
+struct ParticleRibbonLifetimeView {
     unsigned char padding_0[76];
-    f32 unk_4C;
+    f32 length;
 };
 struct Root752C {
     char pad[0x7528];
-    Node44 *unk_7528;
+    Node44 *activeRibbons;
 };
 struct FloatStateB0 {
     unsigned char padding_0[172];
-    f32 unk_AC;
+    f32 segmentLength;
 };
-struct func_802A68A0_S2 {
+struct ParticleRibbonNodeView {
     char pad0[0x4];
-    void * unk4;
+    void * next;
     char pad4[0x1C - 0x4 - sizeof(void*)];
-    void * unk1C;
+    void * samples;
     char pad1C[0x24 - 0x1C - sizeof(void*)];
-    f32 unk24;
+    f32 time;
 };
 struct RibbonActor {
     char pad0[4];
@@ -57,8 +57,8 @@ struct RibbonActor {
     s32 layer; /* 0x34: negative layers draw first, positive second */
     char pad38[0x3C - 0x38];
     u32 flags;
-    ObjRecAt28V1 *tail;
-    ObjRecAt28V1 *clock;
+    RibbonClockNode *tail;
+    RibbonClockNode *clock;
     s32 pointCount; /* 0x48: drawn once it has two points */
     f32 length;
 };
@@ -81,9 +81,9 @@ struct RibbonVertexPool {
     s32 remaining; /* 0x2588 */
     Vtx *next; /* 0x258C */
 };
-struct IntegerState6A94 {
+struct ParticleActorListView {
     unsigned char padding_0[27280];
-    s32 unk_6A90;
+    s32 particleActors;
 };
 struct Animator {
     s32 unk0;

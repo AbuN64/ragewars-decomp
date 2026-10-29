@@ -8,7 +8,7 @@ static inline void normalizeProjectionNormal(CVector3 *normal) {
     f32 inverse;
     length = Gu_Sqrtf(normal->x * normal->x + normal->y * normal->y + normal->z * normal->z);
     if (length != 0.0f) {
-        inverse = D_800C48B0_de / length;
+        inverse = g_vectorVerticalAngleLowerConstants / length;
         normal->x *= inverse;
         normal->y *= inverse;
         normal->z *= inverse;

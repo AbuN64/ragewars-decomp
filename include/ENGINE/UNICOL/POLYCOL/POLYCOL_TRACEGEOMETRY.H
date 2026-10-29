@@ -1,5 +1,5 @@
 #ifndef ENGINE_UNICOL_POLYCOL_TRACEGEOMETRY_H
 #define ENGINE_UNICOL_POLYCOL_TRACEGEOMETRY_H
-#include "COMMON/UNUSED.H"
-extern CVector3 D_800CC3D0_de;
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+extern CVector3 g_collisionTraceViewUpVector;
 #endif

@@ -4,7 +4,7 @@
 #if !(defined(VERSION_EU_X) || defined(VERSION_US_REV1))
 #ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "TYPES.H"
 #include "sdk/PFS/PFS_READWRITEINODE.H"
 /* Counts (up to 2) the inode-table slots of every bank holding the page key fpage, reading banks through the cache; returns the count, a read error, or 2 once two slots hold it. 6/88 words: bank value copy register only. */
@@ -45,7 +45,7 @@ INCLUDE_ASM("ovl_80400000", Pfs_CountPageReferences);
 #endif
 
 #if defined(VERSION_EU)
-unsigned char D_auto_func_80447818_de_padding_1BEA78[8] = { 0x8C, 0x82, 0x01, 0xCC, 0x14, 0x40, 0x00, 0x03 };
+unsigned char g_PfsCountpagereferencesTrailingBytes[8] = { 0x8C, 0x82, 0x01, 0xCC, 0x14, 0x40, 0x00, 0x03 };
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US)

@@ -28,23 +28,23 @@ s32 SmSmngr_DispatchPrimaryScreenEvent(s32 event,s32 value,s32 amount,s32 contex
     s32 focusId;
     s32 ticks;
     MenuElementHandler handler;
-    handled=&D_8014D080->handled;
-    element=D_8014D080->screens[D_8014D080->current].primary;
+    handled=&g_screenManager->handled;
+    element=g_screenManager->screens[g_screenManager->current].primary;
     result=0;
     GetMenuScreenOwner();
     category=menuCategory(event);
     switch(category) {
     case 0:
-        focus=D_8014D080->screens[D_8014D080->current].focus;
+        focus=g_screenManager->screens[g_screenManager->current].focus;
         focusId=focus ? focus->id : -1;
         result=DispatchElementEvent(focusId,event,value,amount,context);
         break;
     case 2:
         if(event==0xE08) {
-            ticks=(s32)(N64Eng_GetTimeSeconds()*D_800C5620_de);
-            value=ticks-D_8014D080->frames;
+            ticks=(s32)(N64Eng_GetTimeSeconds()*g_primaryScreenEventTickScale);
+            value=ticks-g_screenManager->frames;
             amount=ticks;
-            D_8014D080->frames=amount;
+            g_screenManager->frames=amount;
         }
         saved=*handled;
         *handled=0;
@@ -56,7 +56,7 @@ s32 SmSmngr_DispatchPrimaryScreenEvent(s32 event,s32 value,s32 amount,s32 contex
     case 3:
         saved=*handled;
         *handled=0;
-        handler=D_8014D080->screens[D_8014D080->current].primary->handler;
+        handler=g_screenManager->screens[g_screenManager->current].primary->handler;
         if(handler != 0)
             result=handler(element,event,value,amount,context);
         if(*handled==0) {
@@ -80,7 +80,7 @@ s32 SmSmngr_DispatchPrimaryScreenEvent(s32 event,s32 value,s32 amount,s32 contex
                     break;
                 case 2:
                     result=value;
-                    if(D_8014D080->current>0) Menu_ReturnToPreviousScreen();
+                    if(g_screenManager->current>0) Menu_ReturnToPreviousScreen();
                     break;
                 case 15:
                     value=0;

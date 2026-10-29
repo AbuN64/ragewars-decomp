@@ -1,4 +1,4 @@
-#include "COMMON/S1_4.H"
+#include "TYPES.H"
 #include "sdk/OSINT/pigetstatus.H"
 
 #if defined(VERSION_US_REV1)

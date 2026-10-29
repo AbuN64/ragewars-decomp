@@ -3,24 +3,24 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/OBJECTRECAT28.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #include "COMMON/GAMEPLAY_MOVEMENT.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 
-extern u8 D_80142233; /* MIXED func_8021E2A0_de */
-void func_8021E2A0_de(SharedPlayer *player, void *view) {
+extern u8 g_playerAimHudEnabled; /* MIXED Playerai_DrawAimHud */
+void Playerai_DrawAimHud(SharedPlayer *player, void *view) {
     s32 icon;
     s32 show;
     f32 scale;
 
-    player->views5E8.view7BC_102.timer += D_800D2988;
+    player->views5E8.view7BC_102.timer += g_frameElapsedTime;
     if (player->views5E8.view788_94.icons == 0) {
         return;
     }
-    if (player->views5D8.view5D8_9.profile->remote == 1 && D_801462C8.counters.m_bFragTagOn != 0) {
+    if (player->views5D8.view5D8_9.profile->remote == 1 && g_gameSettings.counters.m_bFragTagOn != 0) {
         return;
     }
     if (player->views5E8.view650_17.action == 0x27) {
@@ -34,7 +34,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
     }
     if (player->views5E8.view798_96.carried == 0x2DA) {
         if (player->views1C.view594_40.mode == 1) {
-            if (player->views1C.viewE4_7.kind != D_800CE474[0] && player->views1C.viewE4_7.kind != D_800CE474[1]) {
+            if (player->views1C.viewE4_7.kind != g_playerSpecialModelIds[0] && player->views1C.viewE4_7.kind != g_playerSpecialModelIds[1]) {
                 player->views5E8.view798_96.carried = 0x2EF;
                 if ((u8) player->views1C.view48C_35.state - 2U < 2) {
                     player->views5E8.view7BC_102.timer = 0.0f;
@@ -44,7 +44,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
                     player->views5E8.view7BC_102.timer = 1.0f;
                 }
             }
-        } else if (player->views1C.viewE4_7.kind != D_800CE474[0] && player->views1C.viewE4_7.kind != D_800CE474[1]) {
+        } else if (player->views1C.viewE4_7.kind != g_playerSpecialModelIds[0] && player->views1C.viewE4_7.kind != g_playerSpecialModelIds[1]) {
             player->views5E8.view798_96.carried = 0x2F1;
             if (player->views5E8.view62E_14.weapon == 9 && player->views1C.view5A0_42.charge > 0.0f) {
                 player->views5E8.view7BC_102.timer = 1.0f;
@@ -64,8 +64,8 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
 
     icon = player->views5E8.view7B8_100.target;
     show = 1;
-    if (icon == 0x2DA && D_80145088.settings.local != 0) {
-        show = D_80142233;
+    if (icon == 0x2DA && g_frontendScreenStatus.settings.local != 0) {
+        show = g_playerAimHudEnabled;
     }
     if (icon != -1) {
         switch (icon) {
@@ -91,14 +91,14 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
             break;
         }
         if (show) {
-            func_8021E08C_de(view, &player->views5E8.view7C0_104.targetPosition, icon, player->views5E8.view7BC_102.timer, scale, 1.0f);
+            Playerai_DrawProjectedAimIcon(view, &player->views5E8.view7C0_104.targetPosition, icon, player->views5E8.view7BC_102.timer, scale, 1.0f);
         }
     }
 
     icon = player->views5E8.view798_96.carried;
     show = 1;
-    if (icon == 0x2DA && D_80145088.settings.local != 0) {
-        show = D_80142233;
+    if (icon == 0x2DA && g_frontendScreenStatus.settings.local != 0) {
+        show = g_playerAimHudEnabled;
     }
     if (icon != -1) {
         switch (icon) {
@@ -122,7 +122,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
             break;
         }
         if (show) {
-            func_8021E08C_de(view, &player->views5E8.view79C_98.carriedPosition, icon, player->views5E8.view7BC_102.timer, scale, 1.0f);
+            Playerai_DrawProjectedAimIcon(view, &player->views5E8.view79C_98.carriedPosition, icon, player->views5E8.view7BC_102.timer, scale, 1.0f);
         }
     }
 }
@@ -136,28 +136,28 @@ struct PlayerEffectLight {
     s16 active;
 };
 #if defined(VERSION_US)
-#define PLAYER_SECOND_LIGHT_RADIUS D_auto_800C24E0
+#define PLAYER_SECOND_LIGHT_RADIUS g_playerSecondLightRadiusUs
 #else
-#define PLAYER_SECOND_LIGHT_RADIUS D_800C76A0
+#define PLAYER_SECOND_LIGHT_RADIUS g_playerSecondLightRadius
 #endif
 extern f32 PLAYER_SECOND_LIGHT_RADIUS;
 #if defined(VERSION_DE)
-#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800C91C0
-#define PLAYER_MODE_LIGHT_PATTERN D_auto_800C91D0
+#define PLAYER_EFFECT_LIGHT_PATTERN g_playerEffectLightPatternGerman
+#define PLAYER_MODE_LIGHT_PATTERN g_playerModeLightPatternGerman
 #elif defined(VERSION_EU)
-#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800C9DB0
-#define PLAYER_MODE_LIGHT_PATTERN D_auto_800C9DC0
+#define PLAYER_EFFECT_LIGHT_PATTERN g_playerEffectLightPatternEuropean
+#define PLAYER_MODE_LIGHT_PATTERN g_playerModeLightPatternEuropean
 #elif defined(VERSION_EU_X)
-#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800CA780
-#define PLAYER_MODE_LIGHT_PATTERN D_auto_800CA790
+#define PLAYER_EFFECT_LIGHT_PATTERN g_playerEffectLightPatternWords
+#define PLAYER_MODE_LIGHT_PATTERN g_playerModeLightPatternEuropeanX
 #elif defined(VERSION_US)
-#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800C90E0
-#define PLAYER_MODE_LIGHT_PATTERN D_auto_800C90F0
+#define PLAYER_EFFECT_LIGHT_PATTERN g_playerEffectLightPatternUs
+#define PLAYER_MODE_LIGHT_PATTERN g_playerModeLightPatternUs
 #elif defined(VERSION_US_REV1)
-#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800CE410
-#define PLAYER_MODE_LIGHT_PATTERN D_auto_800CE420
+#define PLAYER_EFFECT_LIGHT_PATTERN g_playerEffectLightPatternUsRev1
+#define PLAYER_MODE_LIGHT_PATTERN g_playerModeLightPatternUsRev1
 #endif
-extern char PLAYER_EFFECT_LIGHT_PATTERN[], D_800C91C8_de[], PLAYER_MODE_LIGHT_PATTERN[], D_800C91D8_de[];
+extern char PLAYER_EFFECT_LIGHT_PATTERN[], g_playerSecondaryLightPattern[], PLAYER_MODE_LIGHT_PATTERN[], g_playerAlternateModeLightPattern[];
 extern void *Gdynlight_AllocateLightNode(void *, void *);
 #include "ENGINE/INSTANCE/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.H"
 /* Position one effect light, reading its scale and radius at their use sites. */
@@ -168,7 +168,7 @@ static inline void placePlayerLight(struct Player *player, struct PlayerEffectLi
     offset.x = 0.0f;
     offset.y = 0.0f;
     offset.z = offsetZ;
-    func_8024BC94_de(&position, player, offset);
+    Gobjinst_TransformVectorByActorAim(&position, player, offset);
     Graphu64_AddVec3(&position, &position, &player->pos);
     light->active = 1;
     light->x = (s16)position.x;
@@ -180,32 +180,32 @@ static inline void placePlayerLight(struct Player *player, struct PlayerEffectLi
 void Player_UpdatePlayerEffectLights(struct Player *player) {
     struct PlayerEffectLight *light;
     s32 flicker;
-    if (D_801462C8.flags & 0x4000) {
+    if (g_gameSettings.flags & 0x4000) {
         player->rangeTimer = 0.0f;
     } else if (player->rangeNodes[2] != 0) {
-        Gdynlight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[2]);
+        Gdynlight_ReleaseLight(&g_dynamicLightPool, (s32)player->rangeNodes[2]);
         player->rangeNodes[2] = 0;
     }
     if (player->rangeTimer != 0.0f) {
         light = (struct PlayerEffectLight *)player->rangeNodes[0];
         if (light == 0) {
-            light = Gdynlight_AllocateLightNode(&D_8013B1A8, PLAYER_EFFECT_LIGHT_PATTERN);
+            light = Gdynlight_AllocateLightNode(&g_dynamicLightPool, PLAYER_EFFECT_LIGHT_PATTERN);
         }
         if (light != 0) {
             player->rangeNodes[0] = (struct RangeNode *)light;
-            placePlayerLight(player, light, D_800C259C_de, &D_800C25A0_de, &D_800C25A4_de);
+            placePlayerLight(player, light, g_playerFirstLightForwardOffset, &g_playerFirstLightHeight, &g_playerFirstLightRadius);
         }
         light = (struct PlayerEffectLight *)player->rangeNodes[1];
         if (light == 0) {
-            light = Gdynlight_AllocateLightNode(&D_8013B1A8, D_800C91C8_de);
+            light = Gdynlight_AllocateLightNode(&g_dynamicLightPool, g_playerSecondaryLightPattern);
         }
         if (light != 0) {
             player->rangeNodes[1] = (struct RangeNode *)light;
-            placePlayerLight(player, light, D_800C25A8_de, &D_800C25AC_de, &PLAYER_SECOND_LIGHT_RADIUS);
+            placePlayerLight(player, light, g_playerSecondLightForwardOffset, &g_playerSecondLightHeight, &PLAYER_SECOND_LIGHT_RADIUS);
         }
-        if (player->rangeTimer < D_800C25B4_de) {
+        if (player->rangeTimer < g_playerRangeLightFirstInterval) {
             flicker = 1;
-            if (player->rangeTimer < D_800C25B8_de) {
+            if (player->rangeTimer < g_playerRangeLightSecondInterval) {
                 flicker ^= (Graphu64_NextRandom() % 100) < 50;
             } else {
                 if ((Graphu64_NextRandom() % 100) < 15) {
@@ -221,27 +221,27 @@ void Player_UpdatePlayerEffectLights(struct Player *player) {
         }
     } else {
         if (player->rangeNodes[0] != 0) {
-            Gdynlight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[0]);
+            Gdynlight_ReleaseLight(&g_dynamicLightPool, (s32)player->rangeNodes[0]);
             player->rangeNodes[0] = 0;
         }
         if (player->rangeNodes[1] != 0) {
-            Gdynlight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[1]);
+            Gdynlight_ReleaseLight(&g_dynamicLightPool, (s32)player->rangeNodes[1]);
             player->rangeNodes[1] = 0;
         }
     }
-    if (D_801462C8.flags & 0x4000) {
+    if (g_gameSettings.flags & 0x4000) {
         light = (struct PlayerEffectLight *)player->rangeNodes[2];
         if (light == 0) {
-            light = Gdynlight_AllocateLightNode(&D_8013B1A8, PLAYER_MODE_LIGHT_PATTERN);
+            light = Gdynlight_AllocateLightNode(&g_dynamicLightPool, PLAYER_MODE_LIGHT_PATTERN);
         }
         if (light != 0) {
             player->rangeNodes[2] = (struct RangeNode *)light;
-            placePlayerLight(player, light, 0.0f, &D_800C25BC_de, &D_800C25C0_de);
+            placePlayerLight(player, light, 0.0f, &g_playerRangeLightHeight, &g_playerRangeLightRadius);
         }
         if ((player->actionFlags & 0x20) && player->rangeNodes[2] != 0) {
             struct PlayerEffectLight *entry = (struct PlayerEffectLight *)player->rangeNodes[2];
             if (entry->pattern == PLAYER_MODE_LIGHT_PATTERN) {
-                entry->pattern = D_800C91D8_de;
+                entry->pattern = g_playerAlternateModeLightPattern;
             } else {
                 entry->pattern = PLAYER_MODE_LIGHT_PATTERN;
             }

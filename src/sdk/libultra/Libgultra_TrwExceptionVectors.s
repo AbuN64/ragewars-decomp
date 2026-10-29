@@ -22,8 +22,8 @@ Libultra_DispatchExceptionVectors:
     ldc1 $f20, 0x98($sp)
 .endif
     mtc0 $k0, $30
-    lui $k0, %hi(D_00202460_eu_x)
-    addiu $k0, $k0, %lo(D_00202460_eu_x)
+    lui $k0, %hi(Libgultra_TrwExceptionHandler_Address)
+    addiu $k0, $k0, %lo(Libgultra_TrwExceptionHandler_Address)
     jr $k0
     nop
     nop
@@ -39,8 +39,8 @@ Libultra_DispatchExceptionVectors:
     jr $k0
     nop
     mtc0 $k0, $30
-    lui $k0, %hi(D_00202460_eu_x)
-    addiu $k0, $k0, %lo(D_00202460_eu_x)
+    lui $k0, %hi(Libgultra_TrwExceptionHandler_Address)
+    addiu $k0, $k0, %lo(Libgultra_TrwExceptionHandler_Address)
     jr $k0
     nop
     nop

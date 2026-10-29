@@ -1,3 +1,3 @@
 #if defined(VERSION_EU_X)
-unsigned char D_auto_func_80415C1C_de_padding_10605C[4] = { 0x3C, 0x06, 0x08, 0x02 };
+unsigned char g_PutTrailingBytes[4] = { 0x3C, 0x06, 0x08, 0x02 };
 #endif

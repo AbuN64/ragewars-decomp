@@ -2,31 +2,31 @@
 #define OVLGAME_SHAREDRECAT224_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "OVLGAME/8043D54C.H"
+#include "OVLGAME/MENU_CONTROLLER_SELECTION_VIEW.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 
 struct Holder;
 
-struct SharedRecAt148;
-typedef struct SharedRecAt148 SharedRecAt148;
+struct ConfirmingControllerStatusView;
+typedef struct ConfirmingControllerStatusView ConfirmingControllerStatusView;
 
-struct Shared_func_8043DEDC_S3;
-typedef struct Shared_func_8043DEDC_S3 Shared_func_8043DEDC_S3;
+struct ConfirmingControllerSettingsView;
+typedef struct ConfirmingControllerSettingsView ConfirmingControllerSettingsView;
 
-extern void Confirming_SelectConfirmingController(func_80250BD4_S1 *menuOwner);
+extern void Confirming_SelectConfirmingController(MenuControllerSelectionView *menuOwner);
 
-struct SharedRecAt148;
-struct SharedRecAt148 {
+struct ConfirmingControllerStatusView;
+struct ConfirmingControllerStatusView {
     char pad0[0x148];
     s8 unk148;
 };
 
-struct Shared_func_8043DEDC_S3;
-struct Shared_func_8043DEDC_S3 {
+struct ConfirmingControllerSettingsView;
+struct ConfirmingControllerSettingsView {
     char pad0[0x78];
-    s8 unk78;
+    s8 controllerSelected;
     char pad79[0x6];
-    s8 unk7F;
+    s8 controllerIndex;
 };
 
 extern s32 Player_PlacePlayerForRound(s32 player);

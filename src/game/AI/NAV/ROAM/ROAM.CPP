@@ -10,13 +10,13 @@
 #include "AI/NAV/ROAM.H"
 
 /* Runs a computer player's think step: when it has reached its goal node or the goal at 0x22C is past
-   the node count D_8013B368, it picks a new goal as Nav_InitRoamingWithJumps does (Nav_SelectFlaggedRoamingGoal for a player
-   flagged at 0x94 in mode 12, otherwise up to ten random nodes of D_8013B364 not flagged 0x400); then
+   the node count g_navigationNodeCount, it picks a new goal as Nav_InitRoamingWithJumps does (Nav_SelectFlaggedRoamingGoal for a player
+   flagged at 0x94 in mode 12, otherwise up to ten random nodes of g_navigationGraph not flagged 0x400); then
    it counts down the jump timer at 0x320 and on expiry makes its player jump (bit 0x10 at 0x6B0)
    unless the player is in state 0xF, holds input bits 0x3000 or the bot is busy at 0x314, rerolls an
    expired timer to 15 times 3 to 9 frames, and runs Nav_RunBehaviorHandler, Nav_SteerAlongRoute and Nav_UpdatePlayerSteering. */
 
-extern s32 D_8013B364;
+extern s32 g_navigationGraph;
 
 
 extern void *Portal_GetGraphPoint(void *, s32);
@@ -39,61 +39,61 @@ extern void Nav_UpdatePlayerSteering(void *);
 
 
 
-void Nav_UpdateRoamingWithJumps(Shared_Actor *arg0) {
-    void *actor = ((Shared_ActorView *)(arg0->entity))->owner;
+void Nav_UpdateRoamingWithJumps(Shared_Actor *actorContext) {
+    void *actor = ((Shared_ActorView *)(actorContext->entity))->owner;
     void *player;
     s32 busy;
     s32 held;
     s32 state;
 
-    if (((Brain_func_80212D78_eu_x *)(actor))->node == ((Brain_func_80212D78_eu_x *)(actor))->goal
-        || !(((Brain_func_80212D78_eu_x *)(actor))->goal < D_8013B368)) {
+    if (((NavigationBrainView *)(actor))->node == ((NavigationBrainView *)(actor))->goal
+        || !(((NavigationBrainView *)(actor))->goal < g_navigationNodeCount)) {
         void *data = ((Shared_ActorView *)(*(void **) actor))->controls;
-        if (((RecordRecAt94 *)(data))->display && ((RecordRecAt94 *)(data))->kind == 12) {
+        if (((PlayerProfileStatusView *)(data))->display && ((PlayerProfileStatusView *)(data))->kind == 12) {
             Nav_SelectFlaggedRoamingGoal(actor);
         } else {
-            s32 global_count = D_8013B368;
-            s32 *table = &D_8013B364;
+            s32 global_count = g_navigationNodeCount;
+            s32 *table = &g_navigationGraph;
             s32 tries = 0;
             s32 candidate;
 
             if (global_count >= 2) {
-                candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
+                candidate = ((NavigationBrainView *)(actor))->goal;
 loop:
                 if (tries < 10) {
                     candidate = Graphu64_NextRandom() % table[1];
                     if (navigation_point_flags((NavigationPoint *)(Portal_GetGraphPoint(table, candidate))) & 0x400) {
-                        candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
+                        candidate = ((NavigationBrainView *)(actor))->goal;
                     }
                     tries++;
-                    if (candidate != ((Brain_func_80212D78_eu_x *)(actor))->goal) {
+                    if (candidate != ((NavigationBrainView *)(actor))->goal) {
                         goto store_both;
                     }
                     goto loop;
                 } else {
-                    ((Brain_func_80212D78_eu_x *)(actor))->goal = candidate;
+                    ((NavigationBrainView *)(actor))->goal = candidate;
                     goto store_c;
                 }
             } else {
                 candidate = 1;
             }
 store_both:
-            ((Brain_func_80212D78_eu_x *)(actor))->goal = candidate;
+            ((NavigationBrainView *)(actor))->goal = candidate;
 store_c:
-            ((Brain_func_80212D78_eu_x *)(actor))->nextNode = candidate;
+            ((NavigationBrainView *)(actor))->nextNode = candidate;
         }
     }
-    if (--((Brain_func_80212D78_eu_x *)(actor))->jumpTimer == 0) {
+    if (--((NavigationBrainView *)(actor))->jumpTimer == 0) {
         player = *(void **) actor;
         state = ((Shared_ActorView *)(player))->action != 0xF;
-        busy = ((Brain_func_80212D78_eu_x *)(actor))->busy != 0;
+        busy = ((NavigationBrainView *)(actor))->busy != 0;
         held = (((Shared_ActorView *)(player))->unk_0x0038 & 0x3000) != 0;
         if (state && !held && !busy) {
             ((Shared_ActorView *)(player))->unk_0x06B0 |= 0x10;
         }
     }
-    if (((Brain_func_80212D78_eu_x *)(actor))->jumpTimer < 0) {
-        ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = (Graphu64_NextRandom() % 7 + 3) * 15;
+    if (((NavigationBrainView *)(actor))->jumpTimer < 0) {
+        ((NavigationBrainView *)(actor))->jumpTimer = (Graphu64_NextRandom() % 7 + 3) * 15;
     }
     Nav_RunBehaviorHandler(actor);
     Nav_SteerAlongRoute(actor);
@@ -118,49 +118,49 @@ store_c:
 
 
 
-void Nav_InitRoamingWithJumps(Shared_Actor *arg0)
+void Nav_InitRoamingWithJumps(Shared_Actor *actorStorage)
 {
-    void *actor = ((Shared_ActorView *)(arg0->entity))->owner;
+    void *actor = ((Shared_ActorView *)(actorStorage->entity))->owner;
 
-    ((Brain_func_80212D78_eu_x *)(actor))->unk220 = 0;
+    ((NavigationBrainView *)(actor))->unk220 = 0;
     {
         void *data = ((Shared_ActorView *)(*(void **)actor))->controls;
-        if (((RecordRecAt94 *)(data))->display && ((RecordRecAt94 *)(data))->kind == 12) {
+        if (((PlayerProfileStatusView *)(data))->display && ((PlayerProfileStatusView *)(data))->kind == 12) {
             Nav_SelectFlaggedRoamingGoal(actor);
         } else {
-            s32 global_count = D_8013B368;
-            s32 *table = &D_8013B364;
+            s32 global_count = g_navigationNodeCount;
+            s32 *table = &g_navigationGraph;
             s32 tries = 0;
             s32 candidate;
 
             if (global_count >= 2) {
-                candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
+                candidate = ((NavigationBrainView *)(actor))->goal;
 loop:
                 if (tries < 10) {
                     candidate = Graphu64_NextRandom() % table[1];
                     if (navigation_point_flags((NavigationPoint *)(Portal_GetGraphPoint(table, candidate))) & 0x400) {
-                        candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
+                        candidate = ((NavigationBrainView *)(actor))->goal;
                     }
                     tries++;
-                    if (candidate != ((Brain_func_80212D78_eu_x *)(actor))->goal) {
+                    if (candidate != ((NavigationBrainView *)(actor))->goal) {
                         goto store_both;
                     }
                     goto loop;
                 } else {
-                    ((Brain_func_80212D78_eu_x *)(actor))->goal = candidate;
+                    ((NavigationBrainView *)(actor))->goal = candidate;
                     goto store_c;
                 }
             } else {
                 candidate = 1;
             }
 store_both:
-            ((Brain_func_80212D78_eu_x *)(actor))->goal = candidate;
+            ((NavigationBrainView *)(actor))->goal = candidate;
 store_c:
-            ((Brain_func_80212D78_eu_x *)(actor))->nextNode = candidate;
+            ((NavigationBrainView *)(actor))->nextNode = candidate;
         }
     }
     Scaled_ResetBehaviorState(actor);
-    ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = -1;
+    ((NavigationBrainView *)(actor))->jumpTimer = -1;
 }
 
 
@@ -170,39 +170,39 @@ store_c:
 
 
 
-void Nav_ChooseNewRoamingGoal(void *arg0)
+void Nav_ChooseNewRoamingGoal(void *controller)
 {
-    s32 *table = &D_8013B364;
+    s32 *table = &g_navigationGraph;
     s32 tries = 0;
     s32 candidate;
 
     if (table[1] >= 2) {
-        candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
+        candidate = ((NavigationBrainView *)(controller))->goal;
 loop:
         if (tries < 10) {
             candidate = Graphu64_NextRandom() % table[1];
             if (navigation_point_flags((NavigationPoint *)(Portal_GetGraphPoint(table, candidate))) & 0x400) {
-                candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
+                candidate = ((NavigationBrainView *)(controller))->goal;
             }
             tries++;
-            if (candidate != ((Brain_func_80212D78_eu_x *)(arg0))->goal) {
+            if (candidate != ((NavigationBrainView *)(controller))->goal) {
                 goto store_both;
             }
             goto loop;
         } else {
-            ((Brain_func_80212D78_eu_x *)(arg0))->goal = candidate;
+            ((NavigationBrainView *)(controller))->goal = candidate;
             goto store_c;
         }
     } else {
         candidate = 1;
     }
 store_both:
-    ((Brain_func_80212D78_eu_x *)(arg0))->goal = candidate;
+    ((NavigationBrainView *)(controller))->goal = candidate;
 store_c:
-    ((Brain_func_80212D78_eu_x *)(arg0))->nextNode = candidate;
+    ((NavigationBrainView *)(controller))->nextNode = candidate;
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802138E8[8] =
+char s_RoamSFXWAText[8] =
     "\000\033SFX_WA";
 #endif

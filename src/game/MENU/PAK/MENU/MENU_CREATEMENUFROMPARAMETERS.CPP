@@ -7,7 +7,7 @@
 #include "SYSTEM/LIST.H"
 #include "MENU/PAK/MENU_INITIALIZEMENU.H"
 
-/* Allocates a block sized for the entries of the list the parameters point at through Cache_AllocateResource, builds it with Menu_InitializeMenu from the list's own value and three parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_AllocateMenu with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
+/* Allocates a block sized for the entries of the list the parameters point at through Cache_AllocateResource, builds it with Menu_InitializeMenu from the list's own value and three parameters, registers it with List_PrependIntrusive and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_AllocateMenu with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
 
 
 
@@ -25,7 +25,7 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-/* Returns the length of the first line of a text item's string, taken from func_8043F290 for type 5 items and from the string pointer at 0x14 otherwise, counting until a newline, the end of the string or a null pointer. */
+/* Returns the length of the first line of a text item's string, taken from Menu_GetDynamicItemText for type 5 items and from the string pointer at 0x14 otherwise, counting until a newline, the end of the string or a null pointer. */
 
 
 
@@ -44,7 +44,7 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 
 
-/* Forwards its four arguments to Menu_DrawStyledMenuText with what func_8043F290 returns for the object as the fifth and a one as the sixth. Adapted from Menu_DrawLocalizedMenuItemText with the fifth argument taken from func_8043F290 and a one as the sixth changed. */
+/* Forwards its four arguments to Menu_DrawStyledMenuText with what Menu_GetDynamicItemText returns for the object as the fifth and a one as the sixth. Adapted from Menu_DrawLocalizedMenuItemText with the fifth argument taken from Menu_GetDynamicItemText and a one as the sixth changed. */
 
 
 
@@ -55,7 +55,7 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 extern PreviewWidget *Scene_FindActorDefinition(Shared_World *,int,int);
 
-void *Menu_CreateMenuFromParameters(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *params) {
+void *Menu_CreateMenuFromParameters(struct MenuCreationOwnerView *owner, struct MenuCreationParameters *params) {
     struct Dialog *list = params->list;
     s32 a;
     s32 b;
@@ -86,9 +86,9 @@ void *Menu_CreateMenuFromParameters(struct func_8025E5B0_S1 *owner, struct Param
         first = *block;
         if (first != 0) {
             Menu_InitializeMenu(first, block, list, a, b, c, d, owner);
-            func_80255CB8_de(owner, first);
-            if (++owner->unk14 >= 4) {
-                owner->unk14 = 0;
+            List_PrependIntrusive(owner, first);
+            if (++owner->menuFlags >= 4) {
+                owner->menuFlags = 0;
             }
             return first;
         }
@@ -96,7 +96,7 @@ void *Menu_CreateMenuFromParameters(struct func_8025E5B0_S1 *owner, struct Param
     return 0;
 }
 
-extern u8 *func_8043F290(LayeredText *item);
+extern u8 *Menu_GetDynamicItemText(LayeredText *item);
 extern void Menu_DrawStyledMenuText(void *item, s32 second, s32 third, s32 fourth, void *text, s32 mode);
 int Menu_CountLineChars(LayeredText *item) {
     u8 *p;
@@ -104,9 +104,9 @@ int Menu_CountLineChars(LayeredText *item) {
 
     len = 0;
     if (item->mode == 5) {
-        p = func_8043F290(item);
+        p = Menu_GetDynamicItemText(item);
     } else {
-        
+
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 p = item->text[g_languageIndex];
 #else
@@ -122,7 +122,7 @@ p = *item->text;
 }
 
 void Menu_DrawMenuItemLabel(struct Field *object, s32 second, s32 third, s32 fourth) {
-    
+
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 Menu_DrawStyledMenuText(object, second, third, fourth, object->text[g_languageIndex], 0);
 #else
@@ -132,7 +132,7 @@ Menu_DrawStyledMenuText(object, second, third, fourth, *object->text, 0);
 }
 
 void Menu_DrawLocalizedMenuItemText(struct Field *object, s32 second, s32 third, s32 fourth) {
-    
+
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 Menu_DrawStyledMenuText(object, second, third, fourth, object->text[g_languageIndex], 0);
 #else
@@ -151,20 +151,20 @@ void Menu_DrawMenuCharacter(struct ObjectPakDrawMenuCharacter *object, s32 secon
 
 void Menu_DrawDynamicMenuText(LayeredText *object, s32 second, s32 third, s32 fourth) {
 #if defined(VERSION_DE)
-    Menu_DrawStyledMenuText(object, second, third, fourth, func_8043F290(object), 1);
+    Menu_DrawStyledMenuText(object, second, third, fourth, Menu_GetDynamicItemText(object), 1);
 #else
     Menu_DrawStyledMenuText(object, second, third, fourth,
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-func_8043F290
+Menu_GetDynamicItemText
 #else
-func_8043F114_de
+Menu_GetGermanDynamicItemText
 #endif
 (object), 1);
 #endif
 }
 
-PreviewWidget *Menu_SelectPreviewModel(WidgetRecAt20 *widget,int selection,int kind) {
- StateRecAt47C *state=widget->state;
+PreviewWidget *Menu_SelectPreviewModel(MenuPreviewSelectionView *widget,int selection,int kind) {
+ MenuCharacterPreviewState *state=widget->state;
  PreviewWidget *model=Scene_FindActorDefinition(&g_world,selection,kind);
  if(!model){state->active=0;return 0;}
  state->selection=selection;

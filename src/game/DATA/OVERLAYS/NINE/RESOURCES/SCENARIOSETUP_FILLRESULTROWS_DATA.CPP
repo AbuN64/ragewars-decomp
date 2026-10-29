@@ -2,7 +2,7 @@
 
 /* 800E53C0.CPP */
 /* ROM-grounded data: rodata/writable/800E53C0 */
-unsigned int D_blob_phase2_5dad0374daadeeeb94ea[1] = {
+unsigned int g_ScenariosetupFillresultrowsWords1[1] = {
     0x00000000,
 };
 
@@ -36,18 +36,18 @@ unsigned int D_src_6d0863ff[27] = {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-extern char D_0042BD40[];
-extern char D_0042D6AC[];
-extern char D_0042D6DC[];
-extern char D_0042D870[];
-extern char D_0042D968[];
-extern char D_0042DA84[];
-extern char D_0042DAA4[];
-extern char D_0042DAE8[];
-unsigned int D_blob_f87b2dd9d8e138119cb9[27] = {
-    0x00000E08, 0x00000011, (unsigned int)D_0042D870, 0x00000E06, 0x00000011, (unsigned int)D_0042BD40, 0x00000E03, 0x00000011,
-    (unsigned int)D_0042D6AC, 0x00000002, 0x00000011, (unsigned int)D_0042DA84, 0x00000001, 0x00000011, (unsigned int)D_0042D968, 0x00000E0A,
-    0x00000011, (unsigned int)D_0042D6DC, 0x00000005, 0x00000011, (unsigned int)D_0042DAA4, 0x00000006, 0x00000011, (unsigned int)D_0042DAE8,
+extern char g_ScenarioSetup_OpenResultsScreenPackedAddress242[];
+extern char g_Frontend_DestroyMatchResultsPackedAddress242[];
+extern char g_Frontend_UpdateMatchResultsTransitionPackedAddress242[];
+extern char g_Frontend_HandleResultsConfirmationPackedAddress242[];
+extern char g_Frontend_ActivateResultsActionPackedAddress242[];
+extern char g_Frontend_ConsumeResultsEventPackedAddress242[];
+extern char g_Frontend_ScrollResultsBackwardPackedAddress242[];
+extern char g_Frontend_ScrollResultsForwardPackedAddress242[];
+unsigned int g_ScenariosetupFillresultrowsPointerWords1[27] = {
+    0x00000E08, 0x00000011, (unsigned int)g_Frontend_HandleResultsConfirmationPackedAddress242, 0x00000E06, 0x00000011, (unsigned int)g_ScenarioSetup_OpenResultsScreenPackedAddress242, 0x00000E03, 0x00000011,
+    (unsigned int)g_Frontend_DestroyMatchResultsPackedAddress242, 0x00000002, 0x00000011, (unsigned int)g_Frontend_ConsumeResultsEventPackedAddress242, 0x00000001, 0x00000011, (unsigned int)g_Frontend_ActivateResultsActionPackedAddress242, 0x00000E0A,
+    0x00000011, (unsigned int)g_Frontend_UpdateMatchResultsTransitionPackedAddress242, 0x00000005, 0x00000011, (unsigned int)g_Frontend_ScrollResultsBackwardPackedAddress242, 0x00000006, 0x00000011, (unsigned int)g_Frontend_ScrollResultsForwardPackedAddress242,
     0x00000000, 0x00000000, 0x00000000,
 };
 #endif

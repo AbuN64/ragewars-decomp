@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "COMMON/CHANNEL.H"
 
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
 
 extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
@@ -18,13 +18,13 @@ extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /* Runs a player's standing and walking state for its body: settles the weapon sway through
-   func_80223E34_de, turns the view through Player_UpdateViewAngles with the crouching tuning D_800CE7FC while the
-   crouch at 0x718 is past 5.12 or the standing tuning D_800CE7E4 otherwise, and unless a jump releases
+   Player_UpdateWeaponSwayAndBob, turns the view through Player_UpdateViewAngles with the crouching tuning g_playerGroundViewAngleParameters while the
+   crouch at 0x718 is past 5.12 or the standing tuning g_playerAirViewAngleParameters otherwise, and unless a jump releases
    the player into mode 5 it hands strafing at 0x6A4 or lifting at 0x6A8 (outside zoom mode 2) to mode
    3; then, unless an unfinished pickup, reload or wave animation is playing, it picks the animation at
-   0x86C: for the idle character D_800CE47C the fidget animations 1 and 2 alternate after 12 and 21 time
+   0x86C: for the idle character g_fragTagModelId the fidget animations 1 and 2 alternate after 12 and 21 time
    units at 0x104, and otherwise the turning animations follow the heading change this frame (0xA28
-   while the body is falling, with a separate set for the character D_800CED30). */
+   while the body is falling, with a separate set for the character g_playerSpecialAnimationTable). */
 
 
 
@@ -37,15 +37,15 @@ extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 
 
-extern char D_800CED30;
+extern char g_playerSpecialAnimationTable;
 
-extern void func_80223E34_de(SharedPlayer *, BodyPlayerUpdateStandingState *);
+extern void Player_UpdateWeaponSwayAndBob(SharedPlayer *, BodyPlayerUpdateStandingState *);
 
 extern void Player_UpdateViewAngles(SharedPlayer *, BodyPlayerUpdateStandingState *, char *);
 
 static inline s32 try_jump(SharedPlayer *player, BodyPlayerUpdateStandingState *body) {
     if (player->views5E8.view7E8_106.zoomed == 0 && !(11.25f < player->views5E8.view6E4_62.depth) && !(body->flags & 0xC0000)
-        && (body->surface->unk14 & 2) && (player->views5E8.view6B0_47.input & 0x10) && player->views5E8.view11D8_149.stun <= 0.0f) {
+        && (body->surface->flags & 2) && (player->views5E8.view6B0_47.input & 0x10) && player->views5E8.view11D8_149.stun <= 0.0f) {
         Player_SetPlayerState(player, body, 5);
         return 1;
     }
@@ -60,98 +60,98 @@ void Player_UpdateFlyMode(void *player, void *bodyActor) {
     s32 result;
     void *data;
 
-    if (((func_80224078_Arg0 *)player)->unk650 == 0 &&
-        !(((func_80224078_Arg0 *)player)->unk6AC & 0xE000)) {
-        ((func_80224078_Arg0 *)player)->unk650 = 1;
+    if (((PlayerFlyModeView *)player)->action == 0 &&
+        !(((PlayerFlyModeView *)player)->motionFlags & 0xE000)) {
+        ((PlayerFlyModeView *)player)->action = 1;
     }
-    ((func_80224078_Arg0 *)player)->unk72C = 0;
+    ((PlayerFlyModeView *)player)->lean = 0;
 
-    held = (&D_800C2960_de)[1];
-    Graphu64_EaseValueToward(&((func_80224078_Arg1 *)(bodyActor))->unk6C,
-                  ((func_80224078_Arg1 *)bodyActor)->unk6C +
-                      (f32)((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->x * D_800C2960_de,
+    held = (&g_playerFlyYawInputScale)[1];
+    Graphu64_EaseValueToward(&((PlayerFlyBodyView *)(bodyActor))->yaw,
+                  ((PlayerFlyBodyView *)bodyActor)->yaw +
+                      (f32)((ControllerAxesView *)((PlayerFlyModeView *)player)->controller)->x * g_playerFlyYawInputScale,
                   held);
-    Graphu64_EaseValueToward(&((func_80224078_Arg0 *)(player))->unk724,
-                  ((func_80224078_Arg0 *)player)->unk724 +
-                      (f32)-((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->y * D_800C2968_de,
+    Graphu64_EaseValueToward(&((PlayerFlyModeView *)(player))->pitch,
+                  ((PlayerFlyModeView *)player)->pitch +
+                      (f32)-((ControllerAxesView *)((PlayerFlyModeView *)player)->controller)->y * g_playerFlyPitchInputScale,
                   held);
 
-    value = ((func_80224078_Arg0 *)player)->unk6A8;
+    value = ((PlayerFlyModeView *)player)->lateralInput;
     if (value != 0.0f) {
         f32 step;
         f32 limit;
-        step = value * (&D_800C2968_de)[1];
+        step = value * (&g_playerFlyPitchInputScale)[1];
         if (value < 0.0f) {
-            limit = -value * D_800C2970_de;
+            limit = -value * g_playerFlyReverseSpeedScale;
         } else {
-            limit = value * D_800C2974_de;
+            limit = value * g_playerFlyForwardSpeedScale;
         }
-        ((func_80224078_Arg0 *)player)->unk6C0 =
-            Graphu64_IntegrateBoundedValue(((func_80224078_Arg0 *)player)->unk6C0, step, limit);
+        ((PlayerFlyModeView *)player)->forwardSpeed =
+            Graphu64_IntegrateBoundedValue(((PlayerFlyModeView *)player)->forwardSpeed, step, limit);
     } else {
-        ((func_80224078_Arg0 *)player)->unk6C0 =
-            Graphu64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C0, D_800C2978_de);
+        ((PlayerFlyModeView *)player)->forwardSpeed =
+            Graphu64_DecayToZero(((PlayerFlyModeView *)player)->forwardSpeed, g_playerFlyForwardSpeedDecay);
     }
 
-    value = ((func_80224078_Arg0 *)player)->unk6A4;
+    value = ((PlayerFlyModeView *)player)->forwardInput;
     if (value != 0.0f) {
         f32 step;
         f32 limit;
-        step = value * D_800C297C_de;
+        step = value * g_playerFlyStrafeAcceleration;
         if (value < 0.0f) {
-            limit = -value * D_800C2980_de;
+            limit = -value * g_playerFlyLeftSpeedScale;
         } else {
-            limit = value * D_800C2984_de;
+            limit = value * g_playerFlyRightSpeedScale;
         }
-        ((func_80224078_Arg0 *)player)->unk6C4 =
-            Graphu64_IntegrateBoundedValue(((func_80224078_Arg0 *)player)->unk6C4, step, limit);
+        ((PlayerFlyModeView *)player)->lateralSpeed =
+            Graphu64_IntegrateBoundedValue(((PlayerFlyModeView *)player)->lateralSpeed, step, limit);
     } else {
-        ((func_80224078_Arg0 *)player)->unk6C4 =
-            Graphu64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C4, D_800C2988_de);
+        ((PlayerFlyModeView *)player)->lateralSpeed =
+            Graphu64_DecayToZero(((PlayerFlyModeView *)player)->lateralSpeed, g_playerFlyStrafeSpeedDecay);
     }
 
-    flags = ((func_80224078_Arg0 *)player)->unk6AC;
+    flags = ((PlayerFlyModeView *)player)->motionFlags;
     if (flags & 0x10) {
-        ((func_80224078_Arg1 *)bodyActor)->unk20 =
-            Graphu64_IntegrateBoundedValue(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C298C_de, 71.68f);
+        ((PlayerFlyBodyView *)bodyActor)->verticalSpeed =
+            Graphu64_IntegrateBoundedValue(((PlayerFlyBodyView *)bodyActor)->verticalSpeed, g_playerFlyRiseAcceleration, 71.68f);
     } else if (flags & 0x2020) {
-        ((func_80224078_Arg1 *)bodyActor)->unk20 =
-            Graphu64_IntegrateBoundedValue(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2990_de, 71.68f);
+        ((PlayerFlyBodyView *)bodyActor)->verticalSpeed =
+            Graphu64_IntegrateBoundedValue(((PlayerFlyBodyView *)bodyActor)->verticalSpeed, g_playerFlyFallAcceleration, 71.68f);
     } else {
-        ((func_80224078_Arg1 *)bodyActor)->unk20 =
-            Graphu64_DecayToZero(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2994_de);
+        ((PlayerFlyBodyView *)bodyActor)->verticalSpeed =
+            Graphu64_DecayToZero(((PlayerFlyBodyView *)bodyActor)->verticalSpeed, g_playerFlyVerticalSpeedDecay);
     }
 
     {
         f32 angle;
-        angle = ((func_80224078_Arg1 *)bodyActor)->unk6C;
-        angle += (held = D_800C2998_de);
-        direction.x = ((func_80224078_Arg0 *)player)->unk6C0 * Gu_Sinf(angle);
+        angle = ((PlayerFlyBodyView *)bodyActor)->yaw;
+        angle += (held = g_playerFlyPositiveYawPeriod);
+        direction.x = ((PlayerFlyModeView *)player)->forwardSpeed * Gu_Sinf(angle);
     }
-    direction.y = ((func_80224078_Arg1 *)bodyActor)->unk20;
-    direction.z = ((func_80224078_Arg0 *)player)->unk6C0 *
-                  Math_Cosf(((func_80224078_Arg1 *)bodyActor)->unk6C + held);
-    held = D_800C299C_de;
-    direction.x += ((func_80224078_Arg0 *)player)->unk6C4 *
-                   Gu_Sinf(((func_80224078_Arg1 *)bodyActor)->unk6C - held);
-    direction.z += ((func_80224078_Arg0 *)player)->unk6C4 *
-                   Math_Cosf(((func_80224078_Arg1 *)bodyActor)->unk6C - held);
+    direction.y = ((PlayerFlyBodyView *)bodyActor)->verticalSpeed;
+    direction.z = ((PlayerFlyModeView *)player)->forwardSpeed *
+                  Math_Cosf(((PlayerFlyBodyView *)bodyActor)->yaw + held);
+    held = g_playerFlyNegativeYawPeriod;
+    direction.x += ((PlayerFlyModeView *)player)->lateralSpeed *
+                   Gu_Sinf(((PlayerFlyBodyView *)bodyActor)->yaw - held);
+    direction.z += ((PlayerFlyModeView *)player)->lateralSpeed *
+                   Math_Cosf(((PlayerFlyBodyView *)bodyActor)->yaw - held);
 
-    Graphu64_ScaleVector(&direction, &direction, D_800D2988);
-    Graphu64_AddVec3(&((func_80224078_Arg0 *)(player))->unk6E8,
-                  &((func_80224078_Arg0 *)(player))->unk6E8, &direction);
-    result = Scene_FindFloorPolygon(&g_world, &((func_80224078_Arg1 *)bodyActor)->unk8);
+    Graphu64_ScaleVector(&direction, &direction, g_frameElapsedTime);
+    Graphu64_AddVec3(&((PlayerFlyModeView *)(player))->previousPosition,
+                  &((PlayerFlyModeView *)(player))->previousPosition, &direction);
+    result = Scene_FindFloorPolygon(&g_world, &((PlayerFlyBodyView *)bodyActor)->position);
     if (result != 0) {
-        ((func_80224078_Arg1 *)bodyActor)->unk14 = result;
+        ((PlayerFlyBodyView *)bodyActor)->model = result;
     }
 
-    if (((func_80224078_Arg0 *)player)->unk650 == 1 &&
-        (((func_80224078_Arg0 *)player)->unk6AC & 0xE000) == 0xE000 &&
-        (((func_80224078_Arg0 *)player)->unk6B0 & 0xE000)) {
+    if (((PlayerFlyModeView *)player)->action == 1 &&
+        (((PlayerFlyModeView *)player)->motionFlags & 0xE000) == 0xE000 &&
+        (((PlayerFlyModeView *)player)->inputFlags & 0xE000)) {
         Player_SetPlayerState(player, bodyActor, 2);
-        data = ((func_80224078_Arg0 *)player)->unk5DC;
+        data = ((PlayerFlyModeView *)player)->view;
         if (data != 0) {
-            Camera_PostScreenMessage(&D_80145088, data, &s_flyModeOffText);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, data, &s_flyModeOffText);
         }
     }
 }
@@ -161,13 +161,13 @@ void Player_UpdateStandingState(SharedPlayer *player, BodyPlayerUpdateStandingSt
     s32 crouching;
     s32 animate;
 
-    func_80223E34_de(player, body);
+    Player_UpdateWeaponSwayAndBob(player, body);
     heading = body->heading;
     crouching = 5.12f < player->views5E8.view718_70.crouch;
     if (crouching) {
-        Player_UpdateViewAngles(player, body, &D_800CE7FC);
+        Player_UpdateViewAngles(player, body, &g_playerGroundViewAngleParameters);
     } else {
-        Player_UpdateViewAngles(player, body, &D_800CE7E4);
+        Player_UpdateViewAngles(player, body, &g_playerAirViewAngleParameters);
     }
     heading = body->heading - heading;
     if (try_jump(player, body)) {
@@ -187,7 +187,7 @@ void Player_UpdateStandingState(SharedPlayer *player, BodyPlayerUpdateStandingSt
         animate = 0;
     }
     if (animate) {
-        if (player->views1C.viewE4_7.kind == D_800CE47C) {
+        if (player->views1C.viewE4_7.kind == g_fragTagModelId) {
             if (player->views5E8.view86C_127.animation == 1 && 12.0f <= player->views1C.view104_11.idleTime) {
                 player->views5E8.view86C_127.animation = 2;
             } else if (player->views5E8.view86C_127.animation == 2 && 21.0f <= player->views1C.view104_11.idleTime) {
@@ -195,7 +195,7 @@ void Player_UpdateStandingState(SharedPlayer *player, BodyPlayerUpdateStandingSt
             } else if ((u32) (player->views5E8.view86C_127.animation - 1) >= 2) {
                 player->views5E8.view86C_127.animation = 1;
             }
-        } else if (player->views13B4.view13B4_3.character == &D_800CED30) {
+        } else if (player->views13B4.view13B4_3.character == &g_playerSpecialAnimationTable) {
             if (body->flags & 0xC0000) {
                 player->views5E8.view86C_127.animation = 0xA28;
             } else if (0.017453294f < heading) {

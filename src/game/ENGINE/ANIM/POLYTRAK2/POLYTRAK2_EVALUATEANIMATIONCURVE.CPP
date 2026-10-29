@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/STREAM.H"
 #include "GAME/SOUNDINFO.H"
 #include "TYPES.H"
@@ -12,52 +12,52 @@
 
 
 
-extern s32 D_8010AC80;
+extern s32 g_motionTrackDecodeRangeEnd;
 
 
 extern void Polytrak2_DecodeCubicSegment(Curve *compressedCurve);
 
 extern int Polytrak2_ReadBitsAtAddress(s32, unsigned int);
 
-static inline void seek(Stream *compressedCurve, u32 arg1) {
+static inline void seek(Stream *compressedCurve, u32 sampleIndex) {
     u32 sp10[64];
-    s32 temp_a0;
-    s32 temp_lo;
-    s32 temp_s1;
-    s32 temp_s6;
-    s32 var_s1;
-    s32 var_s2;
-    u32 *var_s3;
-    u32 temp_v0;
-    u32 temp_v1;
-    u32 var_s0;
-    u32 var_s4;
+    s32 segmentSampleCount;
+    s32 segmentBitOffset;
+    s32 firstSegmentBitAddress;
+    s32 segmentBitStride;
+    s32 segmentBitCursor;
+    s32 segmentIndex;
+    u32 *sampleCountCursor;
+    u32 sampleCount;
+    u32 activeSegmentStart;
+    u32 segmentEndSample;
+    u32 segmentStartSample;
 
-    temp_s6 = (compressedCurve->unk0 * 4) + 6;
-    temp_v1 = compressedCurve->unk24;
-    if (arg1 < temp_v1 || arg1 >= temp_v1 + compressedCurve->unk20) {
-        var_s2 = compressedCurve->unk28;
-        var_s4 = temp_v1;
-        var_s0 = var_s4 + compressedCurve->unk20;
-        var_s1 = compressedCurve->unkC;
-        temp_s1=var_s1;
-        var_s1 += var_s2 * temp_s6;
-        if(arg1 < temp_v1) {
-            var_s1=temp_s1;var_s2=0;var_s4=0;
-            var_s0=Polytrak2_ReadBitsAtAddress(var_s1,6);
+    segmentBitStride = (compressedCurve->coefficientBitWidth * 4) + 6;
+    activeSegmentStart = compressedCurve->segmentStartSample;
+    if (sampleIndex < activeSegmentStart || sampleIndex >= activeSegmentStart + compressedCurve->segmentSampleCount) {
+        segmentIndex = compressedCurve->segmentIndex;
+        segmentStartSample = activeSegmentStart;
+        segmentEndSample = segmentStartSample + compressedCurve->segmentSampleCount;
+        segmentBitCursor = compressedCurve->segmentBitAddress;
+        firstSegmentBitAddress=segmentBitCursor;
+        segmentBitCursor += segmentIndex * segmentBitStride;
+        if(sampleIndex < activeSegmentStart) {
+            segmentBitCursor=firstSegmentBitAddress;segmentIndex=0;segmentStartSample=0;
+            segmentEndSample=Polytrak2_ReadBitsAtAddress(segmentBitCursor,6);
         }
         for (;;) {
-            if(arg1>=var_s4 && arg1<var_s0) {
-                if(var_s2!=compressedCurve->unk28) {
-                    compressedCurve->unk24=var_s4;compressedCurve->unk28=var_s2;Polytrak2_DecodeCubicSegment(compressedCurve);
+            if(sampleIndex>=segmentStartSample && sampleIndex<segmentEndSample) {
+                if(segmentIndex!=compressedCurve->segmentIndex) {
+                    compressedCurve->segmentStartSample=segmentStartSample;compressedCurve->segmentIndex=segmentIndex;Polytrak2_DecodeCubicSegment(compressedCurve);
                 }
                 break;
             }
-            var_s1 += temp_s6;
-            var_s2++;
-            var_s4=var_s0;
-            sp10[var_s2]=Polytrak2_ReadBitsAtAddress(var_s1,6);
-            var_s0+=sp10[var_s2];
+            segmentBitCursor += segmentBitStride;
+            segmentIndex++;
+            segmentStartSample=segmentEndSample;
+            sp10[segmentIndex]=Polytrak2_ReadBitsAtAddress(segmentBitCursor,6);
+            segmentEndSample+=sp10[segmentIndex];
         }
     }
 }
@@ -72,8 +72,8 @@ void Polytrak2_InitializePackedCurve(Segment8025FFD0 *curve, u32 *stream) {
     f32 hi;
 
     bits = *stream;
-    curve->unk2C = Polytrak2_ReadBitsAndAdvance(&bits, 6);
-    if (D_8010AC78 != 0) {
+    curve->segmentCount = Polytrak2_ReadBitsAndAdvance(&bits, 6);
+    if (g_motionTrackDecodeTranslation != 0) {
         first = Polytrak2_ReadBitsAndAdvance(&bits, 0x20);
         second = Polytrak2_ReadBitsAndAdvance(&bits, 0x20);
         lo = *(f32 *)&first;
@@ -83,16 +83,16 @@ void Polytrak2_InitializePackedCurve(Segment8025FFD0 *curve, u32 *stream) {
         second = Polytrak2_ReadBitsAndAdvance(&bits, 6);
         lo = Polytrak2_UnpackUnitValue((f32)first, 6);
         hi = Polytrak2_UnpackUnitValue((f32)second, 6);
-        lo = ((f32 (*)(f32, f32, s32))Polytrak2_ScaleToRange)(lo, D_8010AC7C, D_8010AC80);
-        hi = ((f32 (*)(f32, f32, s32))Polytrak2_ScaleToRange)(hi, D_8010AC7C, D_8010AC80);
+        lo = ((f32 (*)(f32, f32, s32))Polytrak2_ScaleToRange)(lo, g_motionTrackDecodeRangeStart, g_motionTrackDecodeRangeEnd);
+        hi = ((f32 (*)(f32, f32, s32))Polytrak2_ScaleToRange)(hi, g_motionTrackDecodeRangeStart, g_motionTrackDecodeRangeEnd);
     }
-    curve->unk4 = lo;
-    curve->unk8 = hi - lo;
+    curve->baseValue = lo;
+    curve->valueRange = hi - lo;
     do {
-        curve->unk0 = Polytrak2_ReadBitsAndAdvance(&bits, 6);
-        curve->unk28 = 0;
-        curve->unk24 = 0;
-        curve->unkC = bits;
+        curve->valueBitWidth = Polytrak2_ReadBitsAndAdvance(&bits, 6);
+        curve->segmentIndex = 0;
+        curve->segmentStartSample = 0;
+        curve->bitStreamAddress = bits;
         Polytrak2_DecodeCubicSegment(curve);
     } while (0);
     *stream = bits;
@@ -100,7 +100,7 @@ void Polytrak2_InitializePackedCurve(Segment8025FFD0 *curve, u32 *stream) {
 
 float Polytrak2_EvaluateAnimationCurve(Stream *stream, float time) {
     seek(stream, (u32)time);
-    return evaluate(*(Poly *)&stream->coeff[0], time - stream->unk24);
+    return evaluate(*(Poly *)&stream->coeff[0], time - stream->segmentStartSample);
 }
 
 #include "SYSTEM/PACKED_BIT_WORDS.H"
@@ -145,7 +145,7 @@ static inline void writeQuantized(u32 bitAddress, Func802608ECResult range, f32 
     s32 integral;
     s32 quantized;
 
-    scaled = (((value - range.start) / range.delta) * (f32) ((1 << range.value) - 1)) + D_800C4168_de;
+    scaled = (((value - range.start) / range.delta) * (f32) ((1 << range.value) - 1)) + g_packedFloatQuantizationRoundBias;
     if (scaled >= 0.0f) {
         quantized = (s32) scaled;
     } else {

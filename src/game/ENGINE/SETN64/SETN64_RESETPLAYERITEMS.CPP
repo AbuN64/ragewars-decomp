@@ -15,9 +15,9 @@ extern void Scene_LoadPreviewBufferB(void *state);
 
 
 void SetN64_ResetPlayerItems(s32 sessionAddress, s32 selectionKey) {
-    ObjRecAt255C8 *object = (void *)sessionAddress;
-    Pools_ResetActorPools(&object->unk255C8, 1);
-    Player_InitializePlayerPool(&object->unk25580, (void *)1, 0);
+    SessionPlayerItemResetView *object = (void *)sessionAddress;
+    Pools_ResetActorPools(&object->actorPools, 1);
+    Player_InitializePlayerPool(&object->playerPool, (void *)1, 0);
     Scene_SetSelection(&g_world, ~Track_RequestTrackByKey(selectionKey), 0);
     Scene_LoadPreviewBufferA(&g_world);
     Scene_LoadPreviewBufferB(&g_world);

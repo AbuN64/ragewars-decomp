@@ -1,7 +1,7 @@
 #ifndef ITEMMENU_ITEMMENU_H
 #define ITEMMENU_ITEMMENU_H
 #include "COMMON/OBJRECAT18V6.H"
-#include "SYSTEM/802A6AC0.H"
+#include "SYSTEM/TIMED_EFFECT_AND_ITEM_MENU_VIEWS.H"
 extern void ItemMenu_ResetEntries(CItemMenu *rec);
 extern s32 ItemMenu_SetEntry(char *, s32, s32, s32, s32, f32, s32, s32, s32);
 extern s32 ItemMenu_IsSelectedEntryActive(void *);

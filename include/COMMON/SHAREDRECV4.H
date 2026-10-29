@@ -52,13 +52,13 @@ struct AudioVoiceAllocationUpdate {
 
 typedef void ( *SharedRecV5)(void *, signed int, void *);
 
-struct ObjRecAt40V2;
-struct ObjRecAt40V2 {
+struct SoundPlayerEventStateView;
+struct SoundPlayerEventStateView {
     u8 padding000[0x14];
     ALEventQueue events; /* 0x14 */
     u8 padding028[0x14];
-    s32 field3C;
-    s32 field40;
+    s32 frameSampleCount;
+    s32 eventTime;
 };
 
 
@@ -96,7 +96,7 @@ struct AudioPitchControlUpdate {
     f32 pitch;
 };
 
-struct ObjRecAt40V2;
-typedef struct ObjRecAt40V2 ObjRecAt40V2;
+struct SoundPlayerEventStateView;
+typedef struct SoundPlayerEventStateView SoundPlayerEventStateView;
 
 #endif

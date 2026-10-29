@@ -3,11 +3,11 @@
 
 /* 8043D3BC.CPP */
 #if defined(VERSION_US_REV1)
-extern u32 D_80154034;
+extern u32 g_encodedSelectedLevelIndex;
 
 /* Returns the score threshold for the current level index, 1000 for level 0 or out of range. */
 s32 Level_GetSelectedResourceId(void) {
-    switch (D_80154034) {
+    switch (g_encodedSelectedLevelIndex) {
     case 0:
     default:
         return 1000;

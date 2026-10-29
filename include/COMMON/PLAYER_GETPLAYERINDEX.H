@@ -4,7 +4,7 @@
 #include "COMMON/SHARED_DEBUGFIELD.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/SHARED_MENUSELECTION.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 
 
@@ -28,7 +28,7 @@ struct PlayerRankInner;
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800EED80[];
+extern char g_playerMenuValueFormat[];
 #else
 extern char g_fmtDec4Pad[];
 #endif

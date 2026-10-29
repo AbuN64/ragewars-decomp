@@ -8,12 +8,12 @@
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/MANAGER.H"
-#include "COMMON/OBJECTLINKS150C.H"
+#include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/COLORENTRY.H"
 #include "ENGINE/SCENE_SETLEVELACTORSTATEBIT.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "SCENE/SCENE_FINDTRACKEDACTORS.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "SYSTEM/DEFS.H"
@@ -26,19 +26,19 @@
 
 extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bankOffset, s32 level);
 
-extern s32 Cache_RequestWordCountedResourcePinned(s32 arg0, s32 *handle, s32 tempv0, void *loadTag);
+extern s32 Cache_RequestWordCountedResourcePinned(s32 cacheAddress, s32 *handle, s32 resourceKey, void *loadTag);
 
-extern void **Cache_RequestPackSection(s32 arg0, s32 handle, s32 sectionSelector, s32 tempv0, s32 world, s32 resourceTag, void *loadTag);
+extern void **Cache_RequestPackSection(s32 cacheAddress, s32 handle, s32 sectionSelector, s32 resourceKey, s32 world, s32 resourceTag, void *loadTag);
 
 
 
-extern void Scene_ReleaseCachedLevelData(Shared_World *arg0);
+extern void Scene_ReleaseCachedLevelData(Shared_World *world);
 
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
-extern s32 D_00285160;
+extern s32 g_cResource_UnpackRequestEntry;
 
-extern void Cache_UnlockResource(s32 arg0, s32 resource);
+extern void Cache_UnlockResource(s32 cacheContext, s32 resource);
 
 s32 SetN64_CollectVisibleEffectNodes(s32, s32);
 
@@ -59,10 +59,10 @@ void *Scene_GetPlatformRoutePoint(void *a, s32 b, s32 c) {
     return r2->data + (c * field);
 }
 
-s32 Scene_FindNearestRouteFrame(void *arg0, s32 routeIndex, void *queryPosition) {
+s32 Scene_FindNearestRouteFrame(void *worldPointer, s32 routeIndex, void *queryPosition) {
     CVector3 position;
     AnimationPoseFrameSet *list;
-    Shared_World *world = arg0;
+    Shared_World *world = worldPointer;
     AnimationPoseFrame *item;
     f32 distSq;
     f32 bestDist;
@@ -70,7 +70,7 @@ s32 Scene_FindNearestRouteFrame(void *arg0, s32 routeIndex, void *queryPosition)
     s32 count;
     s32 index;
 
-    bestIndex = D_800C5300_de;
+    bestIndex = g_nearestRouteFrameAbsentIndex;
     bestDist = 0.0f;
     index = 0;
     list = SetN64_GetPackSection(SetN64_GetPackSection(world->routeCount, routeIndex), 1);
@@ -93,24 +93,24 @@ s32 Scene_FindNearestRouteFrame(void *arg0, s32 routeIndex, void *queryPosition)
     return (s32)bestIndex;
 }
 
-void Scene_CopyLevelName(Shared_World *world, s32 type, void *levelName, s32 arg3) {
+void Scene_CopyLevelName(Shared_World *world, s32 type, void *levelName, s32 maximumBytes) {
     s32 specialTable;
-    s32 tempv0;
-    s32 temps2;
+    s32 resourceKey;
+    s32 levelIndexHandle;
     CachedResource *node;
     s32 count;
 
-    tempv0 = SetN64_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, type);
-    temps2 = Cache_RequestWordCountedResourcePinned(0, &specialTable, tempv0, g_levelIndexText);
-    node = Cache_RequestPackSection(0, specialTable, 8, tempv0, (s32)world, 0, &D_800C5280_de + 4);
+    resourceKey = SetN64_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, type);
+    levelIndexHandle = Cache_RequestWordCountedResourcePinned(0, &specialTable, resourceKey, g_levelIndexText);
+    node = Cache_RequestPackSection(0, specialTable, 8, resourceKey, (s32)world, 0, &D_800C5280_de + 4);
     count = node->unk04;
-    if (arg3 < count) {
-        count = arg3;
+    if (maximumBytes < count) {
+        count = maximumBytes;
     }
-    func_802BD3A0_de(levelName, node->data, count);
+    Libc_CopyBytes(levelName, node->data, count);
     Cache_ReleaseResource(0, (s32)node);
     if (world->level != type) {
-        Cache_ReleaseResource(0, temps2);
+        Cache_ReleaseResource(0, levelIndexHandle);
     }
 }
 
@@ -121,22 +121,22 @@ void *Scene_GetBlLevelData(void *world, s32 record) {
     s32 size;
     s32 one;
 
-    if (((struct MeasuredRecAt14V2 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != record) {
+    if (((struct RegionFreeBlockSizeView *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != record) {
         Scene_ReleaseCachedLevelData(world);
-        if (((struct MeasuredRecAtCV3 *)(world))->value != 0) {
+        if (((struct WorldResourceKeyView *)(world))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = Cache_RequestResource(0, ((struct MeasuredRecAtCV3 *)(world))->value,
-                                     ((struct MeasuredRecAtCV3 *)(world))->value,
-                                     ((struct MeasuredRecAt10V2 *)(world))->value, size, 0, 0,
+            resource = Cache_RequestResource(0, ((struct WorldResourceKeyView *)(world))->value,
+                                     ((struct WorldResourceKeyView *)(world))->value,
+                                     ((struct RegionAllocatedBlockSizeView *)(world))->value, size, 0, 0,
                                      D_800C5290_de, one);
             if (resource != 0) {
-                key = SetN64_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
+                key = SetN64_LocatePackSection((s32)*resource, ((struct WorldResourceKeyView *)(world))->value,
                                     record, &sp28);
                 Cache_ReleaseResource(0, resource);
-                if ((((struct MeasuredRecAt14V6 *)(world))->value =
+                if ((((struct WorldResourceHandleView *)(world))->value =
                      Cache_RequestResource(0, key, key, sp28, size, 0,
-                                   &D_00285160, D_800C52BC, one)) != 0) {
+                                   &g_cResource_UnpackRequestEntry, D_800C52BC, one)) != 0) {
                     ((struct MeasuredCode8028B64C *)(world))->value = record;
                 } else {
                     return 0;
@@ -144,14 +144,14 @@ void *Scene_GetBlLevelData(void *world, s32 record) {
             }
         }
     }
-    if (((struct MeasuredRecAt14V6 *)(world))->value != 0) {
-        return *((struct MeasuredRecAt14V5 *)(world))->value;
+    if (((struct WorldResourceHandleView *)(world))->value != 0) {
+        return *((struct SceneLevelNameView *)(world))->value;
     }
     return 0;
 }
 
-void Scene_ReleaseCachedGeometry(void *arg0) {
-    SceneSceneDrawCachedOpaqueGeometry *object = arg0;
+void Scene_ReleaseCachedGeometry(void *world) {
+    SceneSceneDrawCachedOpaqueGeometry *object = world;
     s32 *list;
     s32 val;
 
@@ -176,8 +176,8 @@ void Scene_CollectVisibleEffects(s32 results) {
 
 /** Clear the object field at offset 0x10BC. */
 void Scene_ClearTransparentInstanceCount(void *object) {
-    ObjRecAt10BC *record = object;
-    record->unk10BC = 0;
+    SceneActiveResourceCountView *record = object;
+    record->activeResourceCount = 0;
 }
 
 /** Clear the scene counters and linked state fields. */
@@ -195,79 +195,79 @@ void Scene_ClearSceneObjectCounts(void *object) {
     ((Shared_World *)object)->sectorCount = 0;
 }
 
-void Scene_UpdateStaticEventInstances(StateSceneUpdateStaticEventInstances *arg0)
+void Scene_UpdateStaticEventInstances(StateSceneUpdateStaticEventInstances *scene)
 {
-  f32 temp_f1;
+  f32 nextEventPhase;
   s32 object;
   int first_index;
   s32 instanceIndex;
   s32 dispatchAll;
 
-  temp_f1 = arg0->unk1B31C + 1.0f;
-  arg0->unk1B31C = temp_f1;
+  nextEventPhase = scene->eventPhase + 1.0f;
+  scene->eventPhase = nextEventPhase;
   dispatchAll = 1;
-  if (!(temp_f1 > 0.0f))
+  if (!(nextEventPhase > 0.0f))
   {
     dispatchAll = 0;
   }
   if (dispatchAll != 0)
   {
-    arg0->unk1B31C = (f32) (temp_f1 - ((f32) (((s32) temp_f1) + 1)));
+    scene->eventPhase = (f32) (nextEventPhase - ((f32) (((s32) nextEventPhase) + 1)));
   }
   instanceIndex = (first_index = 0);
-  if (arg0->unkC4C > first_index)
+  if (scene->trackedInstanceCount > first_index)
   {
     do
     {
-      object = arg0->values[instanceIndex];
+      object = scene->values[instanceIndex];
       Statinst_DispatchAttachmentEvents(object, dispatchAll);
       instanceIndex += 1;
     }
-    while (instanceIndex < arg0->unkC4C);
+    while (instanceIndex < scene->trackedInstanceCount);
   }
 }
 
-s32 Scene_GetLevelActorIndex(void *container, void *arg1) {
+s32 Scene_GetLevelActorIndex(void *container, void *actorStorage) {
     Container *scene = container;
-    LevelActor *actor = arg1;
+    LevelActor *actor = actorStorage;
     void *base;
 
     if (actor->flags & 0x80000) {
         return -1;
     }
-    base = scene->unk138;
-    if (arg1 >= base &&
-        (char *)arg1 <= (char *)base + ((u32)scene->unk140 * 0x2E8 - 0x2E8)) {
-        return ((u32)arg1 - (u32)base) / 0x2E8;
+    base = scene->actors;
+    if (actorStorage >= base &&
+        (char *)actorStorage <= (char *)base + ((u32)scene->actorCount * 0x2E8 - 0x2E8)) {
+        return ((u32)actorStorage - (u32)base) / 0x2E8;
     }
     return -1;
 }
 
-void Scene_FindSelectedTriggerRange(char *world, s32 arg1, s32 group, s32 *arg3, s32 *arg4) {
+void Scene_FindSelectedTriggerRange(char *world, s32 useAlternateRecords, s32 group, s32 *recordsOutput, s32 *countOutput) {
     s32 sp18;
     s32 sp1C;
-    s32 field0;
-    s32 field1;
+    s32 recordIndex;
+    s32 recordCount;
     s32 offset;
 
-    if (arg1 != 0) {
-        field0 = (s32)((Shared_World *)world)->alternateRecordIndex;
-        field1 = ((Shared_World *)world)->alternateRecordCount;
+    if (useAlternateRecords != 0) {
+        recordIndex = (s32)((Shared_World *)world)->alternateRecordIndex;
+        recordCount = ((Shared_World *)world)->alternateRecordCount;
     } else {
-        field0 = (s32)((Shared_World *)world)->recordIndex;
-        field1 = ((Shared_World *)world)->recordCount;
+        recordIndex = (s32)((Shared_World *)world)->recordIndex;
+        recordCount = ((Shared_World *)world)->recordCount;
     }
-    if (Defs_FindSortedGroupRange(field0, field1, group, &sp18, &sp1C) != 0) {
+    if (Defs_FindSortedGroupRange(recordIndex, recordCount, group, &sp18, &sp1C) != 0) {
         offset = sp18 * 0x14;
-        if (arg1 != 0) {
-            *arg3 = (s32)((Shared_World *)world)->alternateRecordArray + offset;
+        if (useAlternateRecords != 0) {
+            *recordsOutput = (s32)((Shared_World *)world)->alternateRecordArray + offset;
         } else {
-            *arg3 = (s32)((Shared_World *)world)->recordArray + offset;
+            *recordsOutput = (s32)((Shared_World *)world)->recordArray + offset;
         }
-        *arg4 = (sp1C - sp18) + 1;
+        *countOutput = (sp1C - sp18) + 1;
     } else {
-        *arg3 = 0;
-        *arg4 = 0;
+        *recordsOutput = 0;
+        *countOutput = 0;
     }
 }
 
@@ -285,7 +285,7 @@ void Scene_UnlockActiveSectionResources(OwnerSceneUnlockActiveSectionResources *
     count = owner->count;
     owner->unk944 = 0;
     owner->unkC4C = 0;
-    owner->unk10BC = 0;
+    owner->activeResourceCount = 0;
     owner->count = 0;
     owner->prevCount = count;
 }
@@ -297,7 +297,7 @@ void Scene_ResetTransitionViewport(void) {
     Cinema_SetLoopMode(0);
     Cinema_SetResponse(D_800C5338_de);
     viewportWidth = 0x1E0;
-    if (D_800E28D8 == 0) {
+    if (g_frontendCurrentVideoModeIndex == 0) {
         viewportWidth = 0x17C;
         viewportHeight = 0xDC;
     } else {
@@ -313,22 +313,22 @@ void Scene_CacheBlLevelData(void *world, s32 sectionIndex) {
     s32 size;
     s32 one;
 
-    if (((struct MeasuredRecAt14V2 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != sectionIndex) {
+    if (((struct RegionFreeBlockSizeView *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != sectionIndex) {
         Scene_ReleaseCachedLevelData(world);
-        if (((struct MeasuredRecAtCV3 *)(world))->value != 0) {
+        if (((struct WorldResourceKeyView *)(world))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = Cache_RequestResource(0, ((struct MeasuredRecAtCV3 *)(world))->value,
-                                     ((struct MeasuredRecAtCV3 *)(world))->value,
-                                     ((struct MeasuredRecAt10V2 *)(world))->value, size, 0, 0,
+            resource = Cache_RequestResource(0, ((struct WorldResourceKeyView *)(world))->value,
+                                     ((struct WorldResourceKeyView *)(world))->value,
+                                     ((struct RegionAllocatedBlockSizeView *)(world))->value, size, 0, 0,
                                      D_800C5290_de, one);
             if (resource != 0) {
-                key = SetN64_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
+                key = SetN64_LocatePackSection((s32)*resource, ((struct WorldResourceKeyView *)(world))->value,
                                     sectionIndex, &sectionSize);
                 Cache_ReleaseResource(0, resource);
-                if ((((struct MeasuredRecAt14V6 *)(world))->value =
+                if ((((struct WorldResourceHandleView *)(world))->value =
                      Cache_RequestResource(0, key, key, sectionSize, size, 0,
-                                   &D_00285160, D_800C52BC, one)) != 0) {
+                                   &g_cResource_UnpackRequestEntry, D_800C52BC, one)) != 0) {
                     ((struct MeasuredCode8028B64C *)(world))->value = sectionIndex;
                 }
             }
@@ -337,7 +337,7 @@ void Scene_CacheBlLevelData(void *world, s32 sectionIndex) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-unsigned int rodata_unresolved_800CD64C[3] = {
+unsigned int k_SceneFindtrackedactorsEncodedWords[3] = {
     0x3F800000, 0x3F800000, 0x3F800000,
 };
 #endif
@@ -356,14 +356,14 @@ void Scene_ReleaseCachedLevelData(Shared_World *world) {
     }
 }
 
-void Scene_AccessLevelStateSection(struct WorldSceneDispatchEnabledEntityTrigger *arg0, s32 arg1, s32 index, s32 levelIndex) {
+void Scene_AccessLevelStateSection(struct WorldSceneDispatchEnabledEntityTrigger *world, s32 usePrimaryLevels, s32 index, s32 levelIndex) {
     void *base;
     void *table;
 
-    if (arg1 != 0) {
-        base = arg0->levels;
+    if (usePrimaryLevels != 0) {
+        base = world->levels;
     } else {
-        base = arg0->secondaryLevels;
+        base = world->secondaryLevels;
     }
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), levelIndex), index);
     SetN64_GetPackSection(table, 0);
@@ -371,7 +371,7 @@ void Scene_AccessLevelStateSection(struct WorldSceneDispatchEnabledEntityTrigger
     SetN64_GetPackSection(table, 1);
 }
 
-void Scene_SetSelectedLevelStateBit(struct WorldSceneDispatchEnabledEntityTrigger *arg0, s32 arg1, s32 index, s32 arg3, s32 arg4, s32 arg5) {
+void Scene_SetSelectedLevelStateBit(struct WorldSceneDispatchEnabledEntityTrigger *world, s32 usePrimaryLevels, s32 index, s32 levelIndex, s32 bitIndex, s32 enabled) {
     void *base;
     void *table;
     u8 *base1;
@@ -380,161 +380,161 @@ void Scene_SetSelectedLevelStateBit(struct WorldSceneDispatchEnabledEntityTrigge
     s32 idx;
     s32 idx2;
 
-    if (arg1 != 0) {
-        base = arg0->levels;
+    if (usePrimaryLevels != 0) {
+        base = world->levels;
     } else {
-        base = arg0->secondaryLevels;
+        base = world->secondaryLevels;
     }
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), arg3), index);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), levelIndex), index);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
-    mask = 1 << (arg4 & 7);
-    if (arg5 != 0) {
-        idx = arg4;
-        if (arg4 < 0) {
-            idx = arg4 + 7;
+    mask = 1 << (bitIndex & 7);
+    if (enabled != 0) {
+        idx = bitIndex;
+        if (bitIndex < 0) {
+            idx = bitIndex + 7;
         }
         base1[idx >> 3] |= mask;
         return;
     }
-    idx2 = arg4;
+    idx2 = bitIndex;
     if (idx2 < 0) {
         idx2 += 7;
     }
     base2[idx2 >> 3] &= ~mask;
 }
 
-s32 Scene_TestSelectedLevelStateBit(struct WorldSceneDispatchEnabledEntityTrigger *arg0, s32 arg1, s32 index, s32 arg3, s32 arg4) {
+s32 Scene_TestSelectedLevelStateBit(struct WorldSceneDispatchEnabledEntityTrigger *world, s32 usePrimaryLevels, s32 index, s32 levelIndex, s32 bitIndex) {
     void *base;
     void *table;
-    u8 *temp_a0;
+    u8 *stateBits;
     s32 mask;
     s32 i;
 
-    if (arg1 != 0) {
-        base = arg0->levels;
+    if (usePrimaryLevels != 0) {
+        base = world->levels;
     } else {
-        base = arg0->secondaryLevels;
+        base = world->secondaryLevels;
     }
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), arg3), index);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), levelIndex), index);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32)table, 1);
-    temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
-    mask = 1 << (arg4 & 7);
-    i = arg4;
+    stateBits = (u8 *)SetN64_GetPackSection(table, 1);
+    mask = 1 << (bitIndex & 7);
+    i = bitIndex;
     if (i < 0) {
         i += 7;
     }
-    return (temp_a0[i >> 3] & mask) != 0;
+    return (stateBits[i >> 3] & mask) != 0;
 }
 
-s32 Scene_TestSecondaryLevelBit(void *arg0, s32 index, s32 arg2) {
-    Shared_World *world = arg0;
+s32 Scene_TestSecondaryLevelBit(void *worldStorage, s32 index, s32 bitIndex) {
+    Shared_World *world = worldStorage;
     void *table;
-    u8 *temp_a0;
+    u8 *stateBits;
     s32 mask;
     s32 i;
 
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(world->secondaryLevels, 0), index), 0);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32)table, 1);
-    temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
-    mask = 1 << (arg2 & 7);
-    i = arg2;
+    stateBits = (u8 *)SetN64_GetPackSection(table, 1);
+    mask = 1 << (bitIndex & 7);
+    i = bitIndex;
     if (i < 0) {
         i += 7;
     }
-    return (temp_a0[i >> 3] & mask) != 0;
+    return (stateBits[i >> 3] & mask) != 0;
 }
 
-s32 Scene_TestActorBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2) {
+s32 Scene_TestActorBitForLevel(Field_void_80 *world, s32 index, s32 actorIndex) {
     void *table;
-    u8 *temp_a0;
+    u8 *stateBits;
     s32 mask;
     s32 i;
 
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(world->value, 0), index), 0);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32)table, 1);
-    temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
-    mask = 1 << (arg2 & 7);
-    i = arg2;
+    stateBits = (u8 *)SetN64_GetPackSection(table, 1);
+    mask = 1 << (actorIndex & 7);
+    i = actorIndex;
     if (i < 0) {
         i += 7;
     }
-    return (temp_a0[i >> 3] & mask) != 0;
+    return (stateBits[i >> 3] & mask) != 0;
 }
 
-s32 Scene_TestRecordBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2) {
+s32 Scene_TestRecordBitForLevel(Field_void_80 *world, s32 index, s32 recordIndex) {
     void *table;
-    u8 *temp_a0;
+    u8 *stateBits;
     s32 mask;
     s32 i;
 
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 1);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(world->value, 0), index), 1);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32)table, 1);
-    temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
-    mask = 1 << (arg2 & 7);
-    i = arg2;
+    stateBits = (u8 *)SetN64_GetPackSection(table, 1);
+    mask = 1 << (recordIndex & 7);
+    i = recordIndex;
     if (i < 0) {
         i += 7;
     }
-    return (temp_a0[i >> 3] & mask) != 0;
+    return (stateBits[i >> 3] & mask) != 0;
 }
 
-s32 Scene_TestTriggerBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2) {
+s32 Scene_TestTriggerBitForLevel(Field_void_80 *world, s32 index, s32 triggerIndex) {
     void *table;
-    u8 *temp_a0;
+    u8 *stateBits;
     s32 mask;
     s32 i;
 
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 2);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(world->value, 0), index), 2);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32)table, 1);
-    temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
-    mask = 1 << (arg2 & 7);
-    i = arg2;
+    stateBits = (u8 *)SetN64_GetPackSection(table, 1);
+    mask = 1 << (triggerIndex & 7);
+    i = triggerIndex;
     if (i < 0) {
         i += 7;
     }
-    return (temp_a0[i >> 3] & mask) != 0;
+    return (stateBits[i >> 3] & mask) != 0;
 }
 
 /* world_actorscan.CPP */
-s32 Scene_GetTriggerCounterAddress(Shared_World *world, s32 arg1) {
+s32 Scene_GetTriggerCounterAddress(Shared_World *world, s32 triggerIndex) {
     void *packSectionResult;
     packSectionResult = SetN64_GetPackSection(world->bitSections, 1);
     SetN64_GetPackSection(packSectionResult, 0);
-    return SetN64_GetPackSection(packSectionResult, 1) + arg1;
+    return SetN64_GetPackSection(packSectionResult, 1) + triggerIndex;
 }
 
-void Scene_SwapDistanceSortEntries(WorldSortEntry *arg0, WorldSortEntry *arg1) {
+void Scene_SwapDistanceSortEntries(WorldSortEntry *left, WorldSortEntry *right) {
     WorldSortEntry tmp;
 
-    tmp = *arg0;
-    *arg0 = *arg1;
-    *arg1 = tmp;
+    tmp = *left;
+    *left = *right;
+    *right = tmp;
 }
 
-s32 Scene_CompareDistanceAscending(WorldSortEntry *arg0, WorldSortEntry *arg1) {
+s32 Scene_CompareDistanceAscending(WorldSortEntry *left, WorldSortEntry *right) {
     s32 result;
     result = 1;
-    if ((arg0->distance) < (arg1->distance)) {
+    if ((left->distance) < (right->distance)) {
         result = -1;
     }
     return result;
 }
 
-s32 Scene_CompareDistanceDescending(WorldSortEntry *arg0, WorldSortEntry *arg1)
+s32 Scene_CompareDistanceDescending(WorldSortEntry *left, WorldSortEntry *right)
 {
-  f32 new_var;
+  f32 leftDistance;
   s32 sortOrder;
-  new_var = arg0->distance;
+  leftDistance = left->distance;
   sortOrder = 1;
-  if ((arg1->distance) < new_var)
+  if ((right->distance) < leftDistance)
   {
     sortOrder = -1;
   }
@@ -579,36 +579,36 @@ void Scene_CollectTypeFourteenActors(Shared_World *world) {
     world->specialActorCount = found;
 }
 
-extern LevelActor *D_800F3CF8[4];
-extern LevelActor *D_800F3D08;
+extern LevelActor *g_sceneTrackedActors[4];
+extern LevelActor *g_fragTagObjectiveActor;
 extern s32 Scene_GetModelIdAtIndex(Shared_World *world, s32 id);
 void Scene_FindTrackedActors(Shared_World *world) {
     LevelActor *actor = world->actors;
     s32 i;
-    D_800F3D08 = 0;
+    g_fragTagObjectiveActor = 0;
     for (i = 0; i < 4; i++) {
-        D_800F3CF8[i] = 0;
+        g_sceneTrackedActors[i] = 0;
     }
     for (i = 0; i < world->actorCount; actor++, i++) {
         struct Def *def = (struct Def *)actor->definition;
         if (def->type == 3) {
             if (Scene_GetModelIdAtIndex(&g_world, def->id) == 0xBD7) {
-                D_800F3D08 = actor;
+                g_fragTagObjectiveActor = actor;
                 return;
             }
         } else if (def->type == 10) {
             switch (actor->type) {
             case 0x653:
-                D_800F3CF8[0] = actor;
+                g_sceneTrackedActors[0] = actor;
                 break;
             case 0x654:
-                D_800F3CF8[1] = actor;
+                g_sceneTrackedActors[1] = actor;
                 break;
             case 0x655:
-                D_800F3CF8[2] = actor;
+                g_sceneTrackedActors[2] = actor;
                 break;
             case 0x656:
-                D_800F3CF8[3] = actor;
+                g_sceneTrackedActors[3] = actor;
                 break;
             }
         }

@@ -5,31 +5,31 @@
 /* DATA_800E5E48.CPP */
 /* ROM-grounded data: rodata/writable/800E5E48 */
 #ifdef VERSION_DE
-unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
+unsigned int g_GMenuboxcornersWords1[11] = {
     0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
     0x6F7400CC, 0x41C00000, 0xFFFFFFFF,
 };
 #endif
 #ifdef VERSION_EU
-unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
+unsigned int g_GMenuboxcornersWords1[11] = {
     0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
     0x6F7400F8, 0x0040B108, 0xFFFFFFFF,
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
+unsigned int g_GMenuboxcornersWords1[11] = {
     0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
     0x6F740024, 0x8FB40020, 0xFFFFFFFF,
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
+unsigned int g_GMenuboxcornersWords1[11] = {
     0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
     0x6F74003A, 0x5C50726F, 0xFFFFFFFF,
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
+unsigned int g_GMenuboxcornersWords1[11] = {
     0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
     0x6F740041, 0x4E544544, 0xFFFFFFFF,
 };
@@ -58,13 +58,13 @@ MenuBoxCorner g_menuBoxCorners[8] = {
     { 1, 1, -2, 0, 0, 0 },
     { -1, 1, -2, 0, 0, 0 },
 };
-unsigned int D_auto_rodata_unresolved_800E1FE0[45] = {
+unsigned int g_GMenuboxcornersLevelTextWords1[45] = {
     0x00000000, 0x00000000, 0xC4098000, 0x20203A20, 0x6C657665, 0x6C202020, 0x20202020, 0x20203A20,
-    0x20202020, 0x20000000, (unsigned int)D_800E1FD4_de + 0x1C, 0x6C6F6420, 0x63686720, 0x64697374, 0x20203A20, 0x20202020,
-    0x20000000, (unsigned int)D_800E1FD4_de + 0x38, 0x676C6F62, 0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000,
-    (unsigned int)D_800E1FD4_de + 0x54, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)D_800E1FD4_de + 0x70,
+    0x20202020, 0x20000000, (unsigned int)g_debugMenuLabelStorageDe + 0x1C, 0x6C6F6420, 0x63686720, 0x64697374, 0x20203A20, 0x20202020,
+    0x20000000, (unsigned int)g_debugMenuLabelStorageDe + 0x38, 0x676C6F62, 0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000,
+    (unsigned int)g_debugMenuLabelStorageDe + 0x54, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_debugMenuLabelStorageDe + 0x70,
     0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
-    0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)D_800E1FD4_de + 0x8C,
+    0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLabelStorageDe + 0x8C,
 };
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
@@ -93,13 +93,13 @@ MenuBoxCorner g_menuBoxCorners[8] = {
     { 1, 1, -2, 0, 0, 0 },
     { -1, 1, -2, 0, 0, 0 },
 };
-unsigned int D_auto_rodata_unresolved_800E0C90[45] = {
+unsigned int g_GMenuboxcornersOurclevelTextWords1[45] = {
     0x00000000, 0x00000000, 0xC4098000, 0x6F757263, 0x6C657665, 0x6C202020, 0x20202020, 0x20203A20,
-    0x20202020, 0x20000000, (unsigned int)D_800E0C14_us + 0x8C, 0x6C6F6420, 0x63686720, 0x64697374, 0x20203A20, 0x20202020,
-    0x20000000, (unsigned int)D_800E0CB0_us + 0xC, 0x676C6F62, 0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000,
-    (unsigned int)D_800E0CB0_us + 0x28, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)D_800E0CB0_us + 0x44,
+    0x20202020, 0x20000000, (unsigned int)g_debugMenuLabelPrefixStorageUs + 0x8C, 0x6C6F6420, 0x63686720, 0x64697374, 0x20203A20, 0x20202020,
+    0x20000000, (unsigned int)g_debugMenuLabelSuffixStorageUs + 0xC, 0x676C6F62, 0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000,
+    (unsigned int)g_debugMenuLabelSuffixStorageUs + 0x28, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_debugMenuLabelSuffixStorageUs + 0x44,
     0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
-    0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)D_800E0CB0_us + 0x60,
+    0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLabelSuffixStorageUs + 0x60,
 };
 #endif
 #endif
@@ -142,22 +142,22 @@ MenuBoxCorner g_menuBoxCorners[8] = {
     { 1, 1, -2, 0, 0, 0 },
     { -1, 1, -2, 0, 0, 0 },
 };
-unsigned int D_auto_rodata_unresolved_800EDB74[59] = {
+unsigned int g_GMenuboxcornersLevelTextWords2[59] = {
     0x00000000, 0x00000000, 0xC4098000, 0x6C657665, 0x6C202020, 0x20202020, 0x20203A20, 0x20202020,
-    0x20000000, (unsigned int)D_800EDAD0_eu_x + 0xB0, (unsigned int)D_800EDAD0_eu_x + 0xB0, (unsigned int)D_800EDAD0_eu_x + 0xB0, (unsigned int)D_800EDAD0_eu_x + 0xB0, 0x6C6F6420, 0x63686720, 0x64697374,
-    0x20203A20, 0x20202020, 0x20000000, (unsigned int)D_800EDAD0_eu_x + 0xD8, (unsigned int)D_800EDAD0_eu_x + 0xD8, (unsigned int)D_800EDAD0_eu_x + 0xD8, (unsigned int)D_800EDAD0_eu_x + 0xD8, 0x676C6F62,
-    0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000, (unsigned int)D_800EDAD0_eu_x + 0x100, (unsigned int)D_800EDAD0_eu_x + 0x100, (unsigned int)D_800EDAD0_eu_x + 0x100,
-    (unsigned int)D_800EDAD0_eu_x + 0x100, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)D_800EDAD0_eu_x + 0x128,
-    (unsigned int)D_800EDAD0_eu_x + 0x128, (unsigned int)D_800EDAD0_eu_x + 0x128, (unsigned int)D_800EDAD0_eu_x + 0x128, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
-    0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)D_800EDAD0_eu_x + 0x150,
-    (unsigned int)D_800EDAD0_eu_x + 0x150, (unsigned int)D_800EDAD0_eu_x + 0x150, (unsigned int)D_800EDAD0_eu_x + 0x150,
+    0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xB0, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xB0, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xB0, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xB0, 0x6C6F6420, 0x63686720, 0x64697374,
+    0x20203A20, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xD8, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xD8, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xD8, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xD8, 0x676C6F62,
+    0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x100, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x100, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x100,
+    (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x100, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x128,
+    (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x128, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x128, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x128, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
+    0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x150,
+    (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x150, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x150, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x150,
 };
 #endif
 #endif
 
 #if defined(VERSION_EU)
 #if defined(VERSION_EU)
-extern char D_800E1F37[];
+extern char g_debugMenuLocalizedLabelStorageEu[];
 unsigned int data_unresolved_800F25E0[189] = {
     0x00000000, 0x41900000, 0x41C00000, 0x3F400000, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000001,
     0x41040000, 0x41200000, 0x3F2CCCCC, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000000, 0x412CCCCD,
@@ -194,15 +194,15 @@ MenuBoxCorner g_menuBoxCorners[8] = {
     { 1, 1, -2, 0, 0, 0 },
     { -1, 1, -2, 0, 0, 0 },
 };
-unsigned int D_auto_rodata_unresolved_800F2994[59] = {
+unsigned int g_GMenuboxcornersLevelTextWords3[59] = {
     0x00000000, 0x00000000, 0xC4098000, 0x6C657665, 0x6C202020, 0x20202020, 0x20203A20, 0x20202020,
-    0x20000000, (unsigned int)D_800E1F37 + 0xB5, (unsigned int)D_800E1F37 + 0xB5, (unsigned int)D_800E1F37 + 0xB5, (unsigned int)D_800E1F37 + 0xB5, 0x6C6F6420, 0x63686720, 0x64697374,
-    0x20203A20, 0x20202020, 0x20000000, (unsigned int)D_800E1F37 + 0xDD, (unsigned int)D_800E1F37 + 0xDD, (unsigned int)D_800E1F37 + 0xDD, (unsigned int)D_800E1F37 + 0xDD, 0x676C6F62,
-    0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000, (unsigned int)D_800E1F37 + 0x105, (unsigned int)D_800E1F37 + 0x105, (unsigned int)D_800E1F37 + 0x105,
-    (unsigned int)D_800E1F37 + 0x105, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)D_800E1F37 + 0x12D,
-    (unsigned int)D_800E1F37 + 0x12D, (unsigned int)D_800E1F37 + 0x12D, (unsigned int)D_800E1F37 + 0x12D, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
-    0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)D_800E1F37 + 0x155,
-    (unsigned int)D_800E1F37 + 0x155, (unsigned int)D_800E1F37 + 0x155, (unsigned int)D_800E1F37 + 0x155,
+    0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xB5, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xB5, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xB5, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xB5, 0x6C6F6420, 0x63686720, 0x64697374,
+    0x20203A20, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xDD, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xDD, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xDD, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xDD, 0x676C6F62,
+    0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x105, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x105, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x105,
+    (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x105, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x12D,
+    (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x12D, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x12D, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x12D, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
+    0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x155,
+    (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x155, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x155, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x155,
 };
 #endif
 #endif
@@ -234,7 +234,7 @@ unsigned int rodata_writable_800E2094[2] = {
 struct {
     unsigned int w0[5];
     unsigned char b1[8];
-} D_d0_4f1aec8babeef855[9] = {
+} g_debugMenuMixedRows[9] = {
     { { 0x00000000, 0x41C00000, 0x41C00000, 0x3F800000, 0x3F800000 }, { 0x02, 0xFF, 0xFF, 0xC8, 0x56, 0x47, 0x2F, 0x00 } },
     { { 0x00000001, 0x41300000, 0x41200000, 0x3F666666, 0x3F800000 }, { 0x02, 0xFF, 0xFF, 0xC8, 0x56, 0x47, 0x2F, 0x00 } },
     { { 0x00000000, 0x41666667, 0x41866666, 0x3F19999A, 0x3F19999A }, { 0x02, 0xFF, 0xFF, 0xC8, 0x56, 0x47, 0x2F, 0x00 } },

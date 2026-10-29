@@ -1,16 +1,16 @@
 #include "sdk/thread_queue.h"
 #include "include_asm.h"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 
 /* 802C0390_4.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802BB3C4_de_padding_BBFC4[12] = { 0xAF, 0xB0, 0x00, 0x10, 0xAF, 0xBF, 0x00, 0x14, 0x0C, 0x0A, 0xF3, 0xC8 };
+unsigned char g_RecvmesgTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 0xAF, 0xBF, 0x00, 0x14, 0x0C, 0x0A, 0xF3, 0xC8 };
 #endif
 
 /* recvmesg.c */
-extern OSThread_s *D_800D5270;
+extern OSThread_s *g_osRunningThread;
 extern void func_802BC36C_de(void *);
 
 s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
@@ -22,7 +22,7 @@ s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
             __osRestoreInt(mask);
             return -1;
         }
-        D_800D5270->state = 8;
+        g_osRunningThread->state = 8;
         func_802BC36C_de(&queue->mtqueue);
     }
 
@@ -39,7 +39,7 @@ s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BB2F4[3] = {
+unsigned int k_RecvmesgEncodedWords[3] = {
     0x0800F200, 0x69000000, 0x02000500,
 };
 #endif

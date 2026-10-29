@@ -1,9 +1,9 @@
 
 #if defined(VERSION_US_REV1)
-extern char D_002790EC[];
-extern char D_002791A8[];
-extern char D_002791E8[];
-unsigned int D_d0_3733d083bc209526[3] = {
-    (unsigned int)D_002791A8, (unsigned int)D_002791E8, (unsigned int)D_002790EC,
+extern char addrLow_Link_DispatchTriggerAudio[];
+extern char addrLow_Link_PlayTriggerSoundCallback[];
+extern char addrLow_Link_PlayTriggerSound[];
+unsigned int g_ResourcesEncodedWordsBlock68[3] = {
+    (unsigned int)addrLow_Link_PlayTriggerSoundCallback, (unsigned int)addrLow_Link_PlayTriggerSound, (unsigned int)addrLow_Link_DispatchTriggerAudio,
 };
 #endif

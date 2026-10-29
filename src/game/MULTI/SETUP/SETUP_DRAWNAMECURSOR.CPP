@@ -7,7 +7,7 @@
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 #if !(defined(VERSION_US))
-/* Draws a menu spinner: during the first half of its blink period (the timer of its D_800E63C0 entry up to the float after D_800E2810) it fills a two-pixel white bar under the digit its value selects, placed from the item's x at 0x14 by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha at 0x30 and 0x34, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
+/* Draws a menu spinner: during the first half of its blink period (the timer of its g_multiplayerNameEntryStates entry up to the float after g_multiplayerNameEntryTimingLimits) it fills a two-pixel white bar under the digit its value selects, placed from the item's x at 0x14 by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha at 0x30 and 0x34, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
 
 
 
@@ -16,27 +16,27 @@
 
 
 
-extern Spinner D_800E63C0[];
+extern Spinner g_multiplayerNameEntryStates[];
 
 
 
 extern s32 Player_GetPlayerIndex(char *, s32);
 extern func_802077F4_S2 *Menu_GetWidgetStyle(void *, s32);
 
-extern void Menu_DrawLocalizedMenuItemText(void *, ItemRecAt20V1 *, void *, StyleMultiDrawNameCursor *);
+extern void Menu_DrawLocalizedMenuItemText(void *, MenuLocalizedTextItemView *, void *, StyleMultiDrawNameCursor *);
 
-void Setup_DrawNameCursor(void *menu, ItemRecAt20V1 *item, void *third, StyleMultiDrawNameCursor *style) {
+void Setup_DrawNameCursor(void *menu, MenuLocalizedTextItemView *item, void *third, StyleMultiDrawNameCursor *style) {
     s32 i;
     f32 width;
     f32 alpha;
     s32 x;
     unsigned int bits;
 
-    i = Player_GetPlayerIndex(&D_80145040, style->id);
-    if (D_800E63C0[i].timer <= *(&D_800E2810 + 1)) {
-        width = Menu_GetWidgetStyle(menu, 0)->unk4 * (f32)D_800E28D0 * D_800DE7C8_de;
-        x = (f32)item->x + (f32)D_800E63C0[i].value * width;
-        D_800E1E20 = -1;
+    i = Player_GetPlayerIndex(&g_playerViewRenderContext, style->id);
+    if (g_multiplayerNameEntryStates[i].timer <= *(&g_multiplayerNameEntryTimingLimits + 1)) {
+        width = Menu_GetWidgetStyle(menu, 0)->unk4 * (f32)g_hudReferenceViewportWidth * g_multiplayerNameCursorWidthScale;
+        x = (f32)item->x + (f32)g_multiplayerNameEntryStates[i].value * width;
+        g_multiplayerItemRenderState = -1;
         alpha = style->alpha * (style->fade * (64.0f));
         OnScreen_SetupFillMode();
         OnScreen_DrawBevelBox(x, item->y - 2, (f32)x + width, item->y, 0, 0, 0xFF, 0xFF, 0xFF,

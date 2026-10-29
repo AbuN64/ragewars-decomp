@@ -26,7 +26,7 @@ void guMtxIdent(s32 *fixedMatrix) {
     s32 j;
 
     r = 0;
-    one = D_800C7880_de;
+    one = g_matrixIdentityUnitValue;
     diagBase = (u8 *)matrix;
     row = (u8 *)matrix;
     do {
@@ -50,7 +50,7 @@ void guMtxIdent(s32 *fixedMatrix) {
     outLo = fixedMatrix;
     outHi = fixedMatrix + 8;
     i = 0;
-    mult = D_800C7884_de;
+    mult = g_matrixFloatToFixedScale;
     mask = 0xFFFF0000;
     inRow = matrix;
     do {
@@ -81,7 +81,7 @@ void guMtxIdentF(u8 *matrixBytes) {
     f32 one;
 
     r = 0;
-    one = D_800C7888_de;
+    one = g_matrixFloatIdentityUnitValue;
     diag = matrixBytes;
     do {
         c = 0;
@@ -118,7 +118,7 @@ void guMtxF2L(f32 *floatMatrix, s32 *fixedMatrix) {
     outLo = fixedMatrix;
     outHi = fixedMatrix + 8;
     i = 0;
-    mult = D_800C788C_de;
+    mult = g_matrixFixedToFloatScale;
     mask = 0xFFFF0000;
     inRow = floatMatrix;
     do {
@@ -159,7 +159,7 @@ void guMtxL2F(f32 *floatMatrix, s32 *fixedMatrix) {
     inHi = (u32 *) (fixedMatrix + 8);
     i = 0;
     mask = 0xFFFF0000;
-    mult = D_800C7890_de;
+    mult = g_matrixLongToFloatScale;
     outRow = floatMatrix;
     do {
         j = 0;

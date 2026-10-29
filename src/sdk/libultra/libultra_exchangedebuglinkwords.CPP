@@ -1,8 +1,8 @@
 #include "sdk/libgultra_inferred/LIBULTRA_WRITEDEBUGLINKBYTE.H"
 #include "COMMON/RESPONSE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/S1_4.H"
+#include "TYPES.H"
 #include "COMMON/EXTERNS_19.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
@@ -26,7 +26,7 @@ extern void Libultra_ReadDebugLinkHalfword(void);
 
 extern void Libultra_ReadDebugLinkWord(void);
 
-extern void func_802BD010_de(u32, u32);
+extern void osInvalICache(u32, u32);
 
 extern void Libultra_WriteDebugLinkHalfword(void);
 
@@ -46,7 +46,7 @@ extern void Libultra_ReadDebugLinkBlock(s32, s32, void *);
 
 extern void Libultra_WriteDebugLinkBlock(void *, s32);
 
-extern s32 D_800D364C;
+extern s32 g_debugLinkCallbackAddress;
 
 void Libultra_RunDebugLinkCommands(void) {
     CommandState state;
@@ -58,11 +58,11 @@ void Libultra_RunDebugLinkCommands(void) {
     u8 enabledControl;
 
     Libultra_InitDebugLink();
-    enabledControl = D_8014D3E2 | 0x40;
-    D_8014D3E2 = enabledControl;
+    enabledControl = g_debugLinkTransferControl | 0x40;
+    g_debugLinkTransferControl = enabledControl;
     while (osPiGetStatus() & 3) {
     }
-    D_B2000008 = enabledControl;
+    DEBUG_LINK_TRANSFER_REGISTER = enabledControl;
 
     command = &state.command;
     address = &state.address.byte;
@@ -91,18 +91,18 @@ void Libultra_RunDebugLinkCommands(void) {
             break;
         case 0x44:
             Libultra_ReadDebugLinkByte(address);
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word = state.address.byte << 8;
             Libultra_ReadDebugLinkByte(address);
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word |= state.address.byte;
             Libultra_ReadDebugLinkByte(address);
             word <<= 8;
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word |= state.address.byte;
             Libultra_ReadDebugLinkByte(address);
             word <<= 8;
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word |= state.address.byte;
             state.address.word = word;
             Libultra_WriteDebugLinkByte(*(u8 *)word);
@@ -115,45 +115,45 @@ void Libultra_RunDebugLinkCommands(void) {
             break;
         case 0x22:
             Libultra_ReadDebugLinkByte(callback);
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word = state.callback.byte << 8;
             Libultra_ReadDebugLinkByte(callback);
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word |= state.callback.byte;
             Libultra_ReadDebugLinkByte(callback);
             word <<= 8;
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word |= state.callback.byte;
             Libultra_ReadDebugLinkByte(callback);
             word <<= 8;
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word |= state.callback.byte;
             state.callback.word = word;
             if (word != 0) {
-                func_802BD170_de(1);
+                osSetIntMask(1);
                 osWritebackDCacheAll();
-                func_802BD010_de(0x80000000, 0x800000);
+                osInvalICache(0x80000000, 0x800000);
                 ((void (*)(void))word)();
             }
             break;
         case 0x40:
             Libultra_ReadDebugLinkByte(output);
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word = state.output.byte << 8;
             Libultra_ReadDebugLinkByte(output);
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word |= state.output.byte;
             Libultra_ReadDebugLinkByte(output);
             word <<= 8;
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word |= state.output.byte;
             Libultra_ReadDebugLinkByte(output);
             word <<= 8;
-            if (D_8014D3E8 != 0) break;
+            if (g_debugLinkTransferFailed != 0) break;
             word |= state.output.byte;
             state.output.word = word;
             Libultra_ReadDebugLinkByte(&state.output.value);
-            if (D_8014D3E8 == 0) {
+            if (g_debugLinkTransferFailed == 0) {
                 *(u8 *)state.output.word = state.output.value;
             }
             break;
@@ -173,7 +173,7 @@ void Libultra_RunDebugLinkCommands(void) {
     }
 }
 
-u32 Libultra_ExchangeDebugLinkStrings(u8 *arg0, u8 *arg1) {
+u32 Libultra_ExchangeDebugLinkStrings(u8 *firstString, u8 *secondString) {
     Response response;
     s32 timeout;
     s32 retries;
@@ -193,22 +193,22 @@ u32 Libultra_ExchangeDebugLinkStrings(u8 *arg0, u8 *arg1) {
     u8 first_c;
 
     response.output = 0;
-    D_8014D3E8 = 0;
-    D_800D3650 = 100;
-    initial_control = D_8014D3E1 | 4;
-    D_8014D3E1 = initial_control;
+    g_debugLinkTransferFailed = 0;
+    g_debugLinkRetryLimit = 100;
+    initial_control = g_debugLinkHandshakeControl | 4;
+    g_debugLinkHandshakeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 2;
-    D_B2000004 = initial_control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = initial_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto ready;
         }
         if (timeout-- == 0) {
@@ -216,16 +216,16 @@ u32 Libultra_ExchangeDebugLinkStrings(u8 *arg0, u8 *arg1) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 ready:
-    if (D_8014D3E8 != 0) {
+    if (g_debugLinkTransferFailed != 0) {
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x10);
     valid = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         Libultra_ReadDebugLinkByte(&response.handshake);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             valid = response.handshake == 0x11;
         }
     }
@@ -233,57 +233,57 @@ ready:
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x80);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
-    first = arg0;
+    first = firstString;
     do {
         first_c = *first++;
         Libultra_WriteDebugLinkByte(first_c);
-        if (D_8014D3E8 != 0) goto cleanup;
+        if (g_debugLinkTransferFailed != 0) goto cleanup;
     } while (first_c != 0);
 
-    second = arg1;
+    second = secondString;
     do {
         second_c = *second++;
         Libultra_WriteDebugLinkByte(second_c);
-        if (D_8014D3E8 != 0) goto cleanup;
+        if (g_debugLinkTransferFailed != 0) goto cleanup;
     } while (second_c != 0);
 
     byte = &response.byte;
     Libultra_ReadDebugLinkByte(byte);
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         word = response.byte << 8;
         Libultra_ReadDebugLinkByte(byte);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             word |= response.byte;
             Libultra_ReadDebugLinkByte(byte);
             word <<= 8;
-            if (D_8014D3E8 == 0) {
+            if (g_debugLinkTransferFailed == 0) {
                 word |= response.byte;
                 Libultra_ReadDebugLinkByte(byte);
                 word <<= 8;
-                if (D_8014D3E8 == 0) {
+                if (g_debugLinkTransferFailed == 0) {
                     word |= response.byte;
                     response.output = word;
                 }
             }
         }
     }
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
-    final_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = final_control;
+    final_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = final_control;
     do {
     } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
-    D_B2000004 = final_control;
+    retries = g_debugLinkRetryLimit;
+    DEBUG_LINK_HANDSHAKE_REGISTER = final_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & final_expected) == final_mask) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & final_expected) == final_mask) {
             goto cleanup;
         }
         if (timeout-- == 0) {
@@ -291,19 +291,19 @@ ready:
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 
 cleanup:
-    cleanup_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = cleanup_control;
+    cleanup_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = cleanup_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = cleanup_control;
-    D_800D3650 = 1;
+    DEBUG_LINK_HANDSHAKE_REGISTER = cleanup_control;
+    g_debugLinkRetryLimit = 1;
     return response.output;
 }
 
-s32 Libultra_SendDebugLinkCommand81(s32 arg0) {
+s32 Libultra_SendDebugLinkCommand81(s32 value) {
     TransferScratch scratch;
     s32 timeout;
     s32 retries;
@@ -316,22 +316,22 @@ s32 Libultra_SendDebugLinkCommand81(s32 arg0) {
     u8 final_mask;
     s32 valid;
 
-    D_8014D3E8 = 0;
-    D_800D3650 = 100;
-    initial_control = D_8014D3E1 | 4;
-    D_8014D3E1 = initial_control;
+    g_debugLinkTransferFailed = 0;
+    g_debugLinkRetryLimit = 100;
+    initial_control = g_debugLinkHandshakeControl | 4;
+    g_debugLinkHandshakeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 2;
-    D_B2000004 = initial_control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = initial_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto ready;
         }
         if (timeout-- == 0) {
@@ -339,16 +339,16 @@ s32 Libultra_SendDebugLinkCommand81(s32 arg0) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 ready:
-    if (D_8014D3E8 != 0) {
+    if (g_debugLinkTransferFailed != 0) {
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x10);
     valid = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         Libultra_ReadDebugLinkByte(&scratch.response);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             valid = scratch.response == 0x11;
         }
     }
@@ -356,29 +356,29 @@ ready:
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x81);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((u32)arg0 >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(((u32)arg0 >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(((u32)arg0 >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg0 & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((u32)value >> 24);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(((u32)value >> 16) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(((u32)value >> 8) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(value & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
-    final_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = final_control;
+    final_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = final_control;
     do {
     } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
-    D_B2000004 = final_control;
+    retries = g_debugLinkRetryLimit;
+    DEBUG_LINK_HANDSHAKE_REGISTER = final_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & final_expected) == final_mask) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & final_expected) == final_mask) {
             goto cleanup;
         }
         if (timeout-- == 0) {
@@ -386,19 +386,19 @@ ready:
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 
 cleanup:
-    cleanup_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = cleanup_control;
+    cleanup_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = cleanup_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = cleanup_control;
-    D_800D3650 = 1;
+    DEBUG_LINK_HANDSHAKE_REGISTER = cleanup_control;
+    g_debugLinkRetryLimit = 1;
     return 0;
 }
 
-s32 Libultra_RequestDebugLinkBlock(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 Libultra_RequestDebugLinkBlock(void *stream, s32 elementBytes, s32 elementCount, s32 requestCode) {
     TransferScratch scratch;
     s32 timeout;
     s32 retries;
@@ -413,23 +413,23 @@ s32 Libultra_RequestDebugLinkBlock(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 product;
     s32 valid;
 
-    D_8014D3E8 = 0;
+    g_debugLinkTransferFailed = 0;
     attempts = 100;
-    D_800D3650 = attempts;
-    initial_control = D_8014D3E1 | 4;
-    D_8014D3E1 = initial_control;
+    g_debugLinkRetryLimit = attempts;
+    initial_control = g_debugLinkHandshakeControl | 4;
+    g_debugLinkHandshakeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 2;
-    D_B2000004 = initial_control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = initial_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto ready;
         }
         if (timeout-- == 0) {
@@ -437,16 +437,16 @@ s32 Libultra_RequestDebugLinkBlock(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 ready:
-    if (D_8014D3E8 != 0) {
+    if (g_debugLinkTransferFailed != 0) {
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x10);
     valid = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         Libultra_ReadDebugLinkByte(&scratch.response);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             valid = scratch.response == 0x11;
         }
     }
@@ -454,45 +454,45 @@ ready:
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x82);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((u32)arg3 >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(((u32)arg3 >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(((u32)arg3 >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg3 & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    product = arg1 * arg2;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((u32)requestCode >> 24);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(((u32)requestCode >> 16) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(((u32)requestCode >> 8) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(requestCode & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    product = elementBytes * elementCount;
     Libultra_WriteDebugLinkByte((u32)product >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
     Libultra_WriteDebugLinkByte(((u32)product >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
     Libultra_WriteDebugLinkByte(((u32)product >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
     Libultra_WriteDebugLinkByte(product & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
     do {
-        D_8014D3E8 = 0;
+        g_debugLinkTransferFailed = 0;
         Libultra_ReadDebugLinkByte(&scratch.status);
-    } while (attempts-- > 0 && D_8014D3E8 != 0);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_ReadDebugLinkBlock(arg0, arg1 * arg2, &scratch.output);
+    } while (attempts-- > 0 && g_debugLinkTransferFailed != 0);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_ReadDebugLinkBlock(stream, elementBytes * elementCount, &scratch.output);
 
-    final_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = final_control;
+    final_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = final_control;
     do {
     } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
-    D_B2000004 = final_control;
+    retries = g_debugLinkRetryLimit;
+    DEBUG_LINK_HANDSHAKE_REGISTER = final_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & final_expected) == final_mask) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & final_expected) == final_mask) {
             goto cleanup;
         }
         if (timeout-- == 0) {
@@ -500,19 +500,19 @@ ready:
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 
 cleanup:
-    cleanup_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = cleanup_control;
+    cleanup_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = cleanup_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = cleanup_control;
-    D_800D3650 = 1;
-    return arg2;
+    DEBUG_LINK_HANDSHAKE_REGISTER = cleanup_control;
+    g_debugLinkRetryLimit = 1;
+    return elementCount;
 }
 
-s32 Libultra_SubmitDebugLinkBlock(void *stream, s32 arg1, s32 arg2, s32 arg3) {
+s32 Libultra_SubmitDebugLinkBlock(void *stream, s32 elementBytes, s32 elementCount, s32 requestCode) {
     TransferScratch scratch;
     s32 timeout;
     s32 retries;
@@ -527,23 +527,23 @@ s32 Libultra_SubmitDebugLinkBlock(void *stream, s32 arg1, s32 arg2, s32 arg3) {
     s32 product;
     s32 valid;
 
-    D_8014D3E8 = 0;
+    g_debugLinkTransferFailed = 0;
     attempts = 100;
-    D_800D3650 = attempts;
-    initial_control = D_8014D3E1 | 4;
-    D_8014D3E1 = initial_control;
+    g_debugLinkRetryLimit = attempts;
+    initial_control = g_debugLinkHandshakeControl | 4;
+    g_debugLinkHandshakeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 2;
-    D_B2000004 = initial_control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = initial_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto ready;
         }
         if (timeout-- == 0) {
@@ -551,16 +551,16 @@ s32 Libultra_SubmitDebugLinkBlock(void *stream, s32 arg1, s32 arg2, s32 arg3) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 ready:
-    if (D_8014D3E8 != 0) {
+    if (g_debugLinkTransferFailed != 0) {
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x10);
     valid = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         Libultra_ReadDebugLinkByte(&scratch.response);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             valid = scratch.response == 0x11;
         }
     }
@@ -568,45 +568,45 @@ ready:
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x83);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((u32)arg3 >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(((u32)arg3 >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(((u32)arg3 >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg3 & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    product = arg1 * arg2;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((u32)requestCode >> 24);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(((u32)requestCode >> 16) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(((u32)requestCode >> 8) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(requestCode & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    product = elementBytes * elementCount;
     Libultra_WriteDebugLinkByte((u32)product >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
     Libultra_WriteDebugLinkByte(((u32)product >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
     Libultra_WriteDebugLinkByte(((u32)product >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
     Libultra_WriteDebugLinkByte(product & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
     Libultra_WriteDebugLinkBlock(stream, product);
 
     do {
-        D_8014D3E8 = 0;
+        g_debugLinkTransferFailed = 0;
         Libultra_ReadDebugLinkByte(&scratch.status);
-    } while (attempts-- > 0 && D_8014D3E8 != 0);
-    if (D_8014D3E8 != 0) goto cleanup;
+    } while (attempts-- > 0 && g_debugLinkTransferFailed != 0);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
-    final_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = final_control;
+    final_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = final_control;
     do {
     } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
-    D_B2000004 = final_control;
+    retries = g_debugLinkRetryLimit;
+    DEBUG_LINK_HANDSHAKE_REGISTER = final_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & final_expected) == final_mask) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & final_expected) == final_mask) {
             goto cleanup;
         }
         if (timeout-- == 0) {
@@ -614,19 +614,19 @@ ready:
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 
 cleanup:
-    cleanup_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = cleanup_control;
+    cleanup_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = cleanup_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = cleanup_control;
-    D_800D3650 = 1;
-    return arg2;
+    DEBUG_LINK_HANDSHAKE_REGISTER = cleanup_control;
+    g_debugLinkRetryLimit = 1;
+    return elementCount;
 }
 
-u32 Libultra_ExchangeDebugLinkWords(u32 arg0, u32 arg1, u32 arg2) {
+u32 Libultra_ExchangeDebugLinkWords(u32 firstWord, u32 secondWord, u32 thirdWord) {
     Response response;
     s32 timeout;
     s32 retries;
@@ -644,23 +644,23 @@ u32 Libultra_ExchangeDebugLinkWords(u32 arg0, u32 arg1, u32 arg2) {
     u32 *output;
 
     response.output = 0;
-    D_8014D3E8 = 0;
+    g_debugLinkTransferFailed = 0;
     attempts = 100;
-    D_800D3650 = attempts;
-    initial_control = D_8014D3E1 | 4;
-    D_8014D3E1 = initial_control;
+    g_debugLinkRetryLimit = attempts;
+    initial_control = g_debugLinkHandshakeControl | 4;
+    g_debugLinkHandshakeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 2;
-    D_B2000004 = initial_control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = initial_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto ready;
         }
         if (timeout-- == 0) {
@@ -668,16 +668,16 @@ u32 Libultra_ExchangeDebugLinkWords(u32 arg0, u32 arg1, u32 arg2) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 ready:
-    if (D_8014D3E8 != 0) {
+    if (g_debugLinkTransferFailed != 0) {
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x10);
     valid = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         Libultra_ReadDebugLinkByte(&response.handshake);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             valid = response.handshake == 0x11;
         }
     }
@@ -685,71 +685,71 @@ ready:
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x84);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg0 >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((arg0 >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((arg0 >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg0 & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg1 >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((arg1 >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((arg1 >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg1 & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg2 >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((arg2 >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((arg2 >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg2 & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(firstWord >> 24);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((firstWord >> 16) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((firstWord >> 8) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(firstWord & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(secondWord >> 24);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((secondWord >> 16) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((secondWord >> 8) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(secondWord & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(thirdWord >> 24);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((thirdWord >> 16) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((thirdWord >> 8) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(thirdWord & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
     output = &response.output;
     byte = &response.byte;
     do {
-        D_8014D3E8 = 0;
+        g_debugLinkTransferFailed = 0;
         Libultra_ReadDebugLinkByte(byte);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             word = response.byte << 8;
             Libultra_ReadDebugLinkByte(byte);
-            if (D_8014D3E8 == 0) {
+            if (g_debugLinkTransferFailed == 0) {
                 word |= response.byte;
                 Libultra_ReadDebugLinkByte(byte);
                 word <<= 8;
-                if (D_8014D3E8 == 0) {
+                if (g_debugLinkTransferFailed == 0) {
                     word |= response.byte;
                     Libultra_ReadDebugLinkByte(byte);
                     word <<= 8;
-                    if (D_8014D3E8 == 0) {
+                    if (g_debugLinkTransferFailed == 0) {
                         word |= response.byte;
                         *output = word;
                     }
                 }
             }
         }
-    } while (attempts-- > 0 && D_8014D3E8 != 0);
-    if (D_8014D3E8 != 0) goto cleanup;
+    } while (attempts-- > 0 && g_debugLinkTransferFailed != 0);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
-    final_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = final_control;
+    final_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = final_control;
     do {
     } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
-    D_B2000004 = final_control;
+    retries = g_debugLinkRetryLimit;
+    DEBUG_LINK_HANDSHAKE_REGISTER = final_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & final_expected) == final_mask) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & final_expected) == final_mask) {
             goto cleanup;
         }
         if (timeout-- == 0) {
@@ -757,19 +757,19 @@ ready:
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 
 cleanup:
-    cleanup_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = cleanup_control;
+    cleanup_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = cleanup_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = cleanup_control;
-    D_800D3650 = 1;
+    DEBUG_LINK_HANDSHAKE_REGISTER = cleanup_control;
+    g_debugLinkRetryLimit = 1;
     return response.output;
 }
 
-u32 Libultra_ExchangeDebugLinkWord(u32 arg0) {
+u32 Libultra_ExchangeDebugLinkWord(u32 requestWord) {
     Response response;
     s32 timeout;
     s32 retries;
@@ -787,23 +787,23 @@ u32 Libultra_ExchangeDebugLinkWord(u32 arg0) {
     u32 *output;
 
     response.output = 0;
-    D_8014D3E8 = 0;
+    g_debugLinkTransferFailed = 0;
     attempts = 100;
-    D_800D3650 = attempts;
-    initial_control = D_8014D3E1 | 4;
-    D_8014D3E1 = initial_control;
+    g_debugLinkRetryLimit = attempts;
+    initial_control = g_debugLinkHandshakeControl | 4;
+    g_debugLinkHandshakeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 2;
-    D_B2000004 = initial_control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = initial_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto ready;
         }
         if (timeout-- == 0) {
@@ -811,16 +811,16 @@ u32 Libultra_ExchangeDebugLinkWord(u32 arg0) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 ready:
-    if (D_8014D3E8 != 0) {
+    if (g_debugLinkTransferFailed != 0) {
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x10);
     valid = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         Libultra_ReadDebugLinkByte(&response.handshake);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             valid = response.handshake == 0x11;
         }
     }
@@ -828,55 +828,55 @@ ready:
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x85);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg0 >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((arg0 >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((arg0 >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg0 & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(requestWord >> 24);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((requestWord >> 16) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((requestWord >> 8) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(requestWord & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
     output = &response.output;
     byte = &response.byte;
     do {
-        D_8014D3E8 = 0;
+        g_debugLinkTransferFailed = 0;
         Libultra_ReadDebugLinkByte(byte);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             word = response.byte << 8;
             Libultra_ReadDebugLinkByte(byte);
-            if (D_8014D3E8 == 0) {
+            if (g_debugLinkTransferFailed == 0) {
                 word |= response.byte;
                 Libultra_ReadDebugLinkByte(byte);
                 word <<= 8;
-                if (D_8014D3E8 == 0) {
+                if (g_debugLinkTransferFailed == 0) {
                     word |= response.byte;
                     Libultra_ReadDebugLinkByte(byte);
                     word <<= 8;
-                    if (D_8014D3E8 == 0) {
+                    if (g_debugLinkTransferFailed == 0) {
                         word |= response.byte;
                         *output = word;
                     }
                 }
             }
         }
-    } while (attempts-- > 0 && D_8014D3E8 != 0);
-    if (D_8014D3E8 != 0) goto cleanup;
+    } while (attempts-- > 0 && g_debugLinkTransferFailed != 0);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
-    final_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = final_control;
+    final_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = final_control;
     do {
     } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
-    D_B2000004 = final_control;
+    retries = g_debugLinkRetryLimit;
+    DEBUG_LINK_HANDSHAKE_REGISTER = final_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & final_expected) == final_mask) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & final_expected) == final_mask) {
             goto cleanup;
         }
         if (timeout-- == 0) {
@@ -884,19 +884,19 @@ ready:
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 
 cleanup:
-    cleanup_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = cleanup_control;
+    cleanup_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = cleanup_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = cleanup_control;
-    D_800D3650 = 1;
+    DEBUG_LINK_HANDSHAKE_REGISTER = cleanup_control;
+    g_debugLinkRetryLimit = 1;
     return response.output;
 }
 
-s32 Libultra_SendDebugLinkControlWord(s32 arg0) {
+s32 Libultra_SendDebugLinkControlWord(s32 value) {
     TransferScratch scratch;
     s32 timeout;
     s32 retries;
@@ -909,22 +909,22 @@ s32 Libultra_SendDebugLinkControlWord(s32 arg0) {
     u8 final_mask;
     s32 valid;
 
-    D_8014D3E8 = 0;
-    D_800D3650 = 100;
-    initial_control = D_8014D3E1 | 4;
-    D_8014D3E1 = initial_control;
+    g_debugLinkTransferFailed = 0;
+    g_debugLinkRetryLimit = 100;
+    initial_control = g_debugLinkHandshakeControl | 4;
+    g_debugLinkHandshakeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 2;
-    D_B2000004 = initial_control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = initial_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto ready;
         }
         if (timeout-- == 0) {
@@ -932,16 +932,16 @@ s32 Libultra_SendDebugLinkControlWord(s32 arg0) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 ready:
-    if (D_8014D3E8 != 0) {
+    if (g_debugLinkTransferFailed != 0) {
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x10);
     valid = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         Libultra_ReadDebugLinkByte(&scratch.response);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             valid = scratch.response == 0x11;
         }
     }
@@ -949,29 +949,29 @@ ready:
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0xC0);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte((u32)arg0 >> 24);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(((u32)arg0 >> 16) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(((u32)arg0 >> 8) & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkByte(arg0 & 0xFF);
-    if (D_8014D3E8 != 0) goto cleanup;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte((u32)value >> 24);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(((u32)value >> 16) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(((u32)value >> 8) & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    Libultra_WriteDebugLinkByte(value & 0xFF);
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
 
-    final_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = final_control;
+    final_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = final_control;
     do {
     } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
-    D_B2000004 = final_control;
+    retries = g_debugLinkRetryLimit;
+    DEBUG_LINK_HANDSHAKE_REGISTER = final_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & final_expected) == final_mask) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & final_expected) == final_mask) {
             goto cleanup;
         }
         if (timeout-- == 0) {
@@ -979,19 +979,19 @@ ready:
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 
 cleanup:
-    cleanup_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = cleanup_control;
+    cleanup_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = cleanup_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = cleanup_control;
-    D_800D3650 = 1;
+    DEBUG_LINK_HANDSHAKE_REGISTER = cleanup_control;
+    g_debugLinkRetryLimit = 1;
     return 0;
 }
 
-s32 Libultra_SendDebugLinkControlString(u8 *arg0) {
+s32 Libultra_SendDebugLinkControlString(u8 *text) {
     u8 *p;
     u8 c;
     TransferScratch scratch;
@@ -1006,22 +1006,22 @@ s32 Libultra_SendDebugLinkControlString(u8 *arg0) {
     u8 final_mask;
     s32 valid;
 
-    D_8014D3E8 = 0;
-    D_800D3650 = 100;
-    initial_control = D_8014D3E1 | 4;
-    D_8014D3E1 = initial_control;
+    g_debugLinkTransferFailed = 0;
+    g_debugLinkRetryLimit = 100;
+    initial_control = g_debugLinkHandshakeControl | 4;
+    g_debugLinkHandshakeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 2;
-    D_B2000004 = initial_control;
+    DEBUG_LINK_HANDSHAKE_REGISTER = initial_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto ready;
         }
         if (timeout-- == 0) {
@@ -1029,16 +1029,16 @@ s32 Libultra_SendDebugLinkControlString(u8 *arg0) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 ready:
-    if (D_8014D3E8 != 0) {
+    if (g_debugLinkTransferFailed != 0) {
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0x10);
     valid = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         Libultra_ReadDebugLinkByte(&scratch.response);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             valid = scratch.response == 0x11;
         }
     }
@@ -1046,27 +1046,27 @@ ready:
         goto cleanup;
     }
     Libultra_WriteDebugLinkByte(0xC1);
-    if (D_8014D3E8 != 0) goto cleanup;
-    p = arg0;
+    if (g_debugLinkTransferFailed != 0) goto cleanup;
+    p = text;
     do {
         c = *p++;
         Libultra_WriteDebugLinkByte(c);
-        if (D_8014D3E8 != 0) goto cleanup;
+        if (g_debugLinkTransferFailed != 0) goto cleanup;
     } while (c != 0);
 
-    final_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = final_control;
+    final_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = final_control;
     do {
     } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
-    retries = D_800D3650;
-    D_B2000004 = final_control;
+    retries = g_debugLinkRetryLimit;
+    DEBUG_LINK_HANDSHAKE_REGISTER = final_control;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & final_expected) == final_mask) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & final_expected) == final_mask) {
             goto cleanup;
         }
         if (timeout-- == 0) {
@@ -1074,65 +1074,65 @@ ready:
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 
 cleanup:
-    cleanup_control = D_8014D3E1 & 0xFB;
-    D_8014D3E1 = cleanup_control;
+    cleanup_control = g_debugLinkHandshakeControl & 0xFB;
+    g_debugLinkHandshakeControl = cleanup_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = cleanup_control;
-    D_800D3650 = 1;
+    DEBUG_LINK_HANDSHAKE_REGISTER = cleanup_control;
+    g_debugLinkRetryLimit = 1;
     return 0;
 }
 
-void func_802B1554_us_rev1(void) {
+void Libultra_EmptyDebugLinkHook(void) {
 }
 
-void Libultra_SetDebugLinkCallback(int arg0) {
-    D_800D364C = arg0;
+void Libultra_SetDebugLinkCallback(int callbackAddress) {
+    g_debugLinkCallbackAddress = callbackAddress;
 }
 
-s32 Libultra_ReceiveDebugLinkHalfword(u16 *arg0) {
+s32 Libultra_ReceiveDebugLinkHalfword(u16 *halfwordOut) {
     u8 sp10;
     s32 result;
     u16 high;
 
     Libultra_ReadDebugLinkByte(&sp10);
     result = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         high = sp10 << 8;
         Libultra_ReadDebugLinkByte(&sp10);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             result = 1;
-            *arg0 = high | sp10;
+            *halfwordOut = high | sp10;
         }
     }
     return result;
 }
 
-s32 Libultra_ReceiveDebugLinkWord(s32 *arg0) {
+s32 Libultra_ReceiveDebugLinkWord(s32 *wordOut) {
     u8 sp10;
     s32 result;
     s32 word;
 
     Libultra_ReadDebugLinkByte(&sp10);
     result = 0;
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         word = sp10 << 8;
         Libultra_ReadDebugLinkByte(&sp10);
-        if (D_8014D3E8 == 0) {
+        if (g_debugLinkTransferFailed == 0) {
             word |= sp10;
             Libultra_ReadDebugLinkByte(&sp10);
             word <<= 8;
-            if (D_8014D3E8 == 0) {
+            if (g_debugLinkTransferFailed == 0) {
                 word |= sp10;
                 Libultra_ReadDebugLinkByte(&sp10);
                 word <<= 8;
-                if (D_8014D3E8 == 0) {
+                if (g_debugLinkTransferFailed == 0) {
                     result = 1;
                     word |= sp10;
-                    *arg0 = word;
+                    *wordOut = word;
                 }
             }
         }
@@ -1140,7 +1140,7 @@ s32 Libultra_ReceiveDebugLinkWord(s32 *arg0) {
     return result;
 }
 
-s32 Libultra_ReceiveDebugLinkString(u8 *arg0, s32 arg1) {
+s32 Libultra_ReceiveDebugLinkString(u8 *textOut, s32 capacity) {
     s32 result;
     s32 i;
     u8 value;
@@ -1149,11 +1149,11 @@ s32 Libultra_ReceiveDebugLinkString(u8 *arg0, s32 arg1) {
     i = 0;
     while (1) {
         Libultra_ReadDebugLinkByte(&value);
-        if (D_8014D3E8 != 0) {
+        if (g_debugLinkTransferFailed != 0) {
             break;
         }
-        if (i < arg1) {
-            arg0[i] = value;
+        if (i < capacity) {
+            textOut[i] = value;
         }
         i += 1;
         if (value != 0) {
@@ -1165,31 +1165,31 @@ s32 Libultra_ReceiveDebugLinkString(u8 *arg0, s32 arg1) {
     return result;
 }
 
-s32 Libultra_SendDebugLinkHalfword(u32 arg0)
+s32 Libultra_SendDebugLinkHalfword(u32 value)
 {
   s32 result;
   result = 0;
-  Libultra_WriteDebugLinkByte((arg0 >> 8) & 0xFF);
-  if (D_8014D3E8 == 0)
+  Libultra_WriteDebugLinkByte((value >> 8) & 0xFF);
+  if (g_debugLinkTransferFailed == 0)
   {
-    Libultra_WriteDebugLinkByte(arg0 & 0xFF);
-    result = D_8014D3E8 == 0;
+    Libultra_WriteDebugLinkByte(value & 0xFF);
+    result = g_debugLinkTransferFailed == 0;
   }
   return result;
 }
 
-s32 Libultra_SendDebugLinkWord(u32 arg0) {
+s32 Libultra_SendDebugLinkWord(u32 value) {
     s32 result;
 
     result = 0;
-    Libultra_WriteDebugLinkByte(arg0 >> 0x18);
-    if (D_8014D3E8 == 0) {
-        Libultra_WriteDebugLinkByte((arg0 >> 0x10) & 0xFF);
-        if (D_8014D3E8 == 0) {
-            Libultra_WriteDebugLinkByte((arg0 >> 8) & 0xFF);
-            if (D_8014D3E8 == 0) {
-                Libultra_WriteDebugLinkByte(arg0 & 0xFF);
-                result = D_8014D3E8 == 0;
+    Libultra_WriteDebugLinkByte(value >> 0x18);
+    if (g_debugLinkTransferFailed == 0) {
+        Libultra_WriteDebugLinkByte((value >> 0x10) & 0xFF);
+        if (g_debugLinkTransferFailed == 0) {
+            Libultra_WriteDebugLinkByte((value >> 8) & 0xFF);
+            if (g_debugLinkTransferFailed == 0) {
+                Libultra_WriteDebugLinkByte(value & 0xFF);
+                result = g_debugLinkTransferFailed == 0;
             }
         }
     }

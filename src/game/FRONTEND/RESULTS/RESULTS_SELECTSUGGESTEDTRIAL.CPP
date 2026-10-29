@@ -3,7 +3,7 @@
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "COMMON/STATERECAT91.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "FRONTEND/RESULTSOPTIONSSCREEN.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "ACHIEVE/ACHIEVE.H"
@@ -14,28 +14,28 @@ void Results_SelectSuggestedTrial(void) {
     Shared_Game *config;
     Preset *preset;
     s32 value, choice, i;
-    D_800E4690->selection = D_8015402C;
-    if (D_800E4690->selection >= 37) D_800E4690->selection = 0;
-    if (Defs_TestBit(D_800E4690->owned, D_800E4690->selection) != 0) {
-        state = &D_801462C8.counters;
+    g_trialCatalogueScreen->selection = g_selectedLevelId;
+    if (g_trialCatalogueScreen->selection >= 37) g_trialCatalogueScreen->selection = 0;
+    if (Defs_TestBit(g_trialCatalogueScreen->owned, g_trialCatalogueScreen->selection) != 0) {
+        state = &g_gameSettings.counters;
         if (state->humanWon != 0) {
             /* The counters alias Game+0x5D8 in every version. */
             { void *whole = (u8 *)state - 0x5D8; config = whole; }
             switch (config->controllerMode) {
             case 1:
-                preset = Achieve_CopyPreset(D_800E4690->selection, 0, config->slots[D_800E4690->player].kind);
+                preset = Achieve_CopyPreset(g_trialCatalogueScreen->selection, 0, config->slots[g_trialCatalogueScreen->player].kind);
                 break;
             case 2:
-                preset = Achieve_CopyPreset(D_800E4690->selection, 1, 0);
+                preset = Achieve_CopyPreset(g_trialCatalogueScreen->selection, 1, 0);
                 break;
             case 3:
-                preset = Achieve_CopyPreset(D_800E4690->selection, 3, 0);
+                preset = Achieve_CopyPreset(g_trialCatalogueScreen->selection, 3, 0);
                 break;
             case 4:
-                preset = Achieve_CopyPreset(D_800E4690->selection, 2, 0);
+                preset = Achieve_CopyPreset(g_trialCatalogueScreen->selection, 2, 0);
                 break;
             default:
-                preset = Achieve_CopyPreset(D_800E4690->selection, 0, D_801462C8.playerSettings[D_800E4690->player].character);
+                preset = Achieve_CopyPreset(g_trialCatalogueScreen->selection, 0, g_gameSettings.playerSettings[g_trialCatalogueScreen->player].character);
                 break;
             }
             choice = 0;
@@ -50,7 +50,7 @@ void Results_SelectSuggestedTrial(void) {
                 }
             }
             if (choice >= 37) choice = 0;
-            D_800E4690->selection = choice;
+            g_trialCatalogueScreen->selection = choice;
         }
     }
 }

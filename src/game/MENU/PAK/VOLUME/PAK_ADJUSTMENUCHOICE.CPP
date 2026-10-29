@@ -1,43 +1,43 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/EXTERNS_21.H"
 
 #if defined(VERSION_US_REV1)
-/* Points a field's text at D_800E60E4 when the option D_800D0EBC is set and at D_800E60C8 otherwise, and returns
+/* Points a field's text at g_ownerNotificationEnabledLabels when the option g_playerViewRenderingEnabled is set and at g_ownerNotificationDisabledLabels otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
 
-s32 Pak_UpdateOwnerNotificationOptionText(struct FieldRecAt14 *field) {
-    if (D_800D0EBC != 0) {
-        field->text = D_800E60E4;
+s32 Pak_UpdateOwnerNotificationOptionText(struct PakActionLabelView *field) {
+    if (g_playerViewRenderingEnabled != 0) {
+        field->text = g_ownerNotificationEnabledLabels;
     } else {
-        field->text = D_800E60C8;
+        field->text = g_ownerNotificationDisabledLabels;
     }
     return 0;
 }
 
-/* Replaces D_800E63BC with what Menu_AdjustValue returns for the second argument, D_800E63BC, 1, 0, 1 and 1,
+/* Replaces g_menuBinaryChoice with what Menu_AdjustValue returns for the second argument, g_menuBinaryChoice, 1, 0, 1 and 1,
    and returns zero. */
 extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 s32 Pak_AdjustMenuChoice(void *first, void *second) {
-    D_800E63BC = Menu_AdjustValue(second, D_800E63BC, 1, 0, 1, 1);
+    g_menuBinaryChoice = Menu_AdjustValue(second, g_menuBinaryChoice, 1, 0, 1, 1);
     return 0;
 }
 
-/* Points a field's text at D_800E6100 when the option D_800E63BC is set and at D_800E611C otherwise, and returns
+/* Points a field's text at g_menuChoiceEnabledLabels when the option g_menuBinaryChoice is set and at g_menuChoiceDisabledLabels otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
 
-s32 Pak_UpdateMenuChoiceText(struct FieldRecAt14 *field) {
-    if (D_800E63BC != 0) {
-        field->text = D_800E6100;
+s32 Pak_UpdateMenuChoiceText(struct PakActionLabelView *field) {
+    if (g_menuBinaryChoice != 0) {
+        field->text = g_menuChoiceEnabledLabels;
     } else {
-        field->text = D_800E611C;
+        field->text = g_menuChoiceDisabledLabels;
     }
     return 0;
 }

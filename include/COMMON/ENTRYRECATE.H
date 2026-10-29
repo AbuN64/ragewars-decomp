@@ -4,8 +4,8 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
 
-struct EntryRecAtE;
-typedef struct EntryRecAtE EntryRecAtE;
+struct PowerupIdEntry;
+typedef struct PowerupIdEntry PowerupIdEntry;
 
 
 struct Other;
@@ -38,7 +38,7 @@ struct ActorPickupCanCollect {
     u8 pad104[0x174 - 0x104];
     s32 active; /* 0x174 */
     u8 pad178[0x5D8 - 0x178];
-    ObjRecAt8F *model;
+    FragTagProfileFlagView *model;
     void *owner; /* 0x5DC */
     u8 pad5E0[4];
     s32 count;
@@ -71,8 +71,8 @@ typedef struct Other Other;
 
 
 
-struct EntryRecAtE;
-struct EntryRecAtE {
+struct PowerupIdEntry;
+struct PowerupIdEntry {
     void *resource;
     s16 id;
     s16 sound;
@@ -94,7 +94,7 @@ typedef struct ActorPickupCanCollect ActorPickupCanCollect;
 
 
 
-extern float D_800C62E0;
+extern float k_pickupBonusSelectionConstants;
 
 /* The five 0x14-byte ammunition definitions searched at g_pickupWeaponDefinitions. */
 typedef struct AmmoPickupDefinition {
@@ -109,7 +109,7 @@ typedef struct AmmoPickupDefinition {
 
 /* Three-channel pickups extend the common two-argument effect record. */
 typedef struct MultiChannelItemEffect {
-    EntryRecAtE effect;
+    PowerupIdEntry effect;
     s16 third;
 } MultiChannelItemEffect;
 

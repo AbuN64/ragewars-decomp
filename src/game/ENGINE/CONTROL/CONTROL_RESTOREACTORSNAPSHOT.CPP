@@ -22,7 +22,7 @@ struct {
 
 /* DATA_800C42B4.CPP */
 #if defined(VERSION_EU_X)
-char D_d1_2eb85d99fa7081ae[12] = "\000\000\000\000binaries";
+char g_ControlRestoreactorsnapshotEncodedBytes[12] = "\000\000\000\000binaries";
 #endif
 
 /* DATA_800C45D4.CPP */

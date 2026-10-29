@@ -1,11 +1,11 @@
 #ifndef MENU_FRAME_SEQUENCE_H
 #define MENU_FRAME_SEQUENCE_H
 #include "TYPES.H"
-struct ObjRecAt2CV2;
+struct FrontendArchiveHandleView;
 typedef struct FrameSequence FrameSequence;
 struct FrameSequence {
     char pad0[0x44];
-    struct ObjRecAt2CV2 *target;
+    struct FrontendArchiveHandleView *target;
     s32 *frames;
     s32 frame;
     s32 count;

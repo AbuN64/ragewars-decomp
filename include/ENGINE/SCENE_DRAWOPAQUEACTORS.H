@@ -1,9 +1,9 @@
 #ifndef ENGINE_SCENE_DRAWOPAQUEACTORS_H
 #define ENGINE_SCENE_DRAWOPAQUEACTORS_H
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/SCENERECAT10C0.H"
-extern void Scene_ChangeInstanceModel(struct BankRecAt94 *, struct ObjectSceneChangeInstanceModel *, s32, s32);
+extern void Scene_ChangeInstanceModel(struct SceneModelBankView *, struct ObjectSceneChangeInstanceModel *, s32, s32);
 extern void func_8028B4C8_de(void);
 extern s32 Scene_TestCurrentSecondaryLevelBit(struct Shared_World *world, s32 bitIndex);
-extern void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32 enabled);
+extern void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 bitIndex, s32 enabled);
 #endif

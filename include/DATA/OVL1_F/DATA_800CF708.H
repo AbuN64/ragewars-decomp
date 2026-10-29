@@ -1,4 +1,4 @@
 #ifndef DATA_OVL1_F_DATA_800CF708_H
 #define DATA_OVL1_F_DATA_800CF708_H
-extern char D_00232394[];
+extern char addrLow_Weaponai_UpdateHeldFire[];
 #endif

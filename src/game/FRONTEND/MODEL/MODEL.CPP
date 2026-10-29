@@ -39,7 +39,7 @@ void Model_SetPreviewRenderFlags(struct ObjectB8 *object, s32 value) {
 
 
 
-struct Triple Model_GetPreviewPosition(struct ObjectRecAt10 *object) {
+struct Triple Model_GetPreviewPosition(struct ModelPreviewPositionView *object) {
     return object->vector;
 }
 
@@ -48,7 +48,7 @@ struct Triple Model_GetPreviewPosition(struct ObjectRecAt10 *object) {
 
 
 
-void Model_SetModelPreviewPosition(struct ObjectRecAt10 *object, struct Triple vector) {
+void Model_SetModelPreviewPosition(struct ModelPreviewPositionView *object, struct Triple vector) {
     object->vector = vector;
 }
 

@@ -30,7 +30,7 @@ s32 SmpFrameAnim_HasSequenceFlags(struct FrameSequence *sequence, s32 bits);
 s32 SmpFrameAnim_UpdateFrameSequence(struct FrameSequence *sequence, s32 unused, s32 elapsed) {
     if (SmpFrameAnim_HasSequenceFlags(sequence, 4) == 0) {
         sequence->elapsed += elapsed;
-        sequence->target->unk2C = sequence->frames[sequence->frame];
+        sequence->target->archiveHandle = sequence->frames[sequence->frame];
         if (sequence->elapsed > sequence->duration) {
             sequence->elapsed = 0;
             if (SmpFrameAnim_HasSequenceFlags(sequence, 1)) {
@@ -92,7 +92,7 @@ void SmpFrameAnim_SetLoopCount(struct FrameSequence *sequence, s32 loops);
 extern void Node_InsertWidgetBefore(s32 widget, Animation *anim);
 
 void SmpFrameAnim_RegisterFrameAnimClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB5F, D_00419A4C, D_00419ADC, 3);
+    SmSmngr_RegisterElementHandlers(0xB5F, g_SmpFrameAnim_DispatchEventAddress, g_SmpFrameAnim_IgnoreEventAddress, 3);
 }
 
 Animation *SmpFrameAnim_CreateFrameSequence(s32 id, s32 *frames) {
@@ -122,7 +122,7 @@ Animation *SmpFrameAnim_CreateFrameSequence(s32 id, s32 *frames) {
     return anim;
 }
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_smpEventHandlerTables, an actor kind at D_800E3304 and a handler at D_800E3308: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_smpEventHandlerTables, an actor kind at g_frameAnimationEventActorKinds and a handler at g_frameAnimationEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -201,23 +201,23 @@ s32 SmpFrameAnim_HasSequenceFlags(struct FrameSequence *sequence, s32 bits) {
     return (sequence->flags & bits) != 0;
 }
 
-s32 SmpFrameAnim_DispatchEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpFrameAnim_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E3308 != 0) {
+    if (g_frameAnimationEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E3308;
+        entry = (char *)&g_frameAnimationEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&g_smpEventHandlerTables)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3304)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_smpEventHandlerTables)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_frameAnimationEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;

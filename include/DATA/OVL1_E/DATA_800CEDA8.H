@@ -1,5 +1,5 @@
-#ifndef DATA_OVL1_E_DATA_800CEDA8_H
-#define DATA_OVL1_E_DATA_800CEDA8_H
-extern char D_0022CA04[];
-extern char D_0022CB4C[];
+#ifndef DATA_OVL1_E_PLAYER_JUMP_CALLBACK_ADDRESSES_H
+#define DATA_OVL1_E_PLAYER_JUMP_CALLBACK_ADDRESSES_H
+extern char g_packedCodeAddress24_0022CA04[];
+extern char g_packedCodeAddress24_0022CB4C[];
 #endif

@@ -1,6 +1,6 @@
 #include "MENU/PLAYERSETTINGS.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PAKQUEUESTATE.H"
@@ -17,18 +17,18 @@ extern PlayerSettings g_playerSettings[];
 
 extern s32 Control_IsAButtonPressed(ControllerProfile *);
 
-/* Finds the first of the four slots in D_8010F328 that func_8026437C_de accepts, writing its index to out and returning it, or writing -1 and returning NULL when none does. */
+/* Finds the first of the four slots in g_controllerProfiles that func_8026437C_de accepts, writing its index to out and returning it, or writing -1 and returning NULL when none does. */
 
 
 extern s32 Control_IsAButtonPressed(ControllerProfile *slot);
 
-/** Count how many of the 4 flagged entries in D_8010F328 also have a nonzero unk148 in the
- *  matching D_801462C8 record, returning 0 early on the first flagged entry that does not. */
+/** Count how many of the 4 flagged entries in g_controllerProfiles also have a nonzero unk148 in the
+ *  matching g_gameSettings record, returning 0 early on the first flagged entry that does not. */
 
 
 
-/* Advances the frame timer D_8015404C by D_800D2988 and, once it reaches
-   threshold D_800E2358, clears a flag at D_801468A0+0x24 and reports the
+/* Advances the frame timer g_profileConfirmationElapsedTime by g_frameElapsedTime and, once it reaches
+   threshold g_profileGameSpeedPreview, clears a flag at g_matchRoundCounters+0x24 and reports the
    round over through Playerai_EndRound on the world 0x1860 bytes before it. */
 
 
@@ -36,12 +36,12 @@ extern s32 Control_IsAButtonPressed(ControllerProfile *slot);
 
 void Playerai_EndRound(void *roundContext);
 
-/* Sets arg0's unk14 field to the address of D_800D76C8 and returns 0. */
+/* Sets arg0's unk14 field to the address of g_profileFirstConfirmationLabel and returns 0. */
 
 
 
 
-/* Sets arg0's unk14 field to the address of D_800D76CC and returns 0. */
+/* Sets arg0's unk14 field to the address of g_profileSecondConfirmationLabel and returns 0. */
 
 
 
@@ -84,7 +84,7 @@ void CMenuProfile_ActivateFirstConfirmingPlayer(void) {
     active = 1;
     settings = g_playerSettings;
     for (; i < 4; i++) {
-        if (Control_IsAButtonPressed(&D_8010F328[i]) != 0) {
+        if (Control_IsAButtonPressed(&g_controllerProfiles[i]) != 0) {
             settings[i].active = active;
             settings[i].selected = i;
             break;
@@ -96,7 +96,7 @@ ControllerProfile *CMenuProfile_FindConfirmingController(s32 *out) {
     s32 i;
     ControllerProfile *s;
     i = 0;
-    s = D_8010F328;
+    s = g_controllerProfiles;
     while (i < 4) {
         if (Control_IsAButtonPressed(s) != 0) {
             *out = i;
@@ -117,10 +117,10 @@ s32 CMenuProfile_CountReadyConnectedPlayers(void) {
 
     connectedCount = 0;
     controllerIndex = 0;
-    rosterRecord = (char *)&D_801462C8;
+    rosterRecord = (char *)&g_gameSettings;
     controllerOffset = 0;
 loop_1:
-    if (*(s32 *) ((char *) D_8010F328 + controllerOffset) != 0) {
+    if (*(s32 *) ((char *) g_controllerProfiles + controllerOffset) != 0) {
         connectedCount += 1;
         if (((FlaggedRosterView *)rosterRecord)->flag == 0) {
             return 0;
@@ -135,19 +135,19 @@ loop_1:
     goto loop_1;
 }
 
-/** Clears the global counter/flag D_8015404C. */
+/** Clears the global counter/flag g_profileConfirmationElapsedTime. */
 void CMenuProfile_ResetRoundEndDelay(void) {
-    D_8015404C = 0;
+    g_profileConfirmationElapsedTime = 0;
 }
 
 s32 CMenuProfile_UpdateRoundEndDelay(void) {
     f32 time;
     CGameStatus *base;
 
-    time = D_8015404C + D_800D2988;
-    D_8015404C = time;
+    time = g_profileConfirmationElapsedTime + g_frameElapsedTime;
+    g_profileConfirmationElapsedTime = time;
     if ((120.0f) <= time) {
-        base = &D_801462C8.counters;
+        base = &g_gameSettings.counters;
         base->teams = 0;
         Playerai_EndRound((void *) ((char *) base - 0x1860));
         return 1;
@@ -155,25 +155,25 @@ s32 CMenuProfile_UpdateRoundEndDelay(void) {
     return 0;
 }
 
-s32 func_8043E190_de(ObjRecAt14V1 *labelItem) {
-    labelItem->unk14 = &D_800D76C8;
+s32 CMenuProfile_SetFirstResultLabel(MenuLabelPointerView *labelItem) {
+    labelItem->label = &g_profileFirstConfirmationLabel;
     return 0;
 }
 
-s32 func_8043E1A4_de(ObjRecAt14V1 *labelItem) {
-    labelItem->unk14 = &D_800D76CC;
+s32 CMenuProfile_SetSecondResultLabel(MenuLabelPointerView *labelItem) {
+    labelItem->label = &g_profileSecondConfirmationLabel;
     return 0;
 }
 
 /* Always returns 0. */
 
-s32 func_8043E1B8_de(void) {
+s32 CMenuProfile_ControllerSelectionReturnZero(void) {
     return 0;
 }
 
-/** True if any of three flags inside the D_801468A0 record are set. */
+/** True if any of three flags inside the g_matchRoundCounters record are set. */
 s32 CMenuProfile_HasRoundProgress(void) {
-    CGameStatus *base = &D_801462C8.counters;
+    CGameStatus *base = &g_gameSettings.counters;
     s32 result;
 
     result = 0;
@@ -183,15 +183,15 @@ s32 CMenuProfile_HasRoundProgress(void) {
     return result;
 }
 
-s32 CMenuProfile_ResetPlayerControllerProfile(s32 unused0, MenuRecAt20V2 *menu) {
+s32 CMenuProfile_ResetPlayerControllerProfile(s32 unused0, PlayerProfileMenuContext *menu) {
     PakMenuSlot **slot;
 
-    D_801462C8.counters.m_FragTagMode = 0;
+    g_gameSettings.counters.m_FragTagMode = 0;
     slot = &menu->widget;
-    Control_DisableControllerPak((*slot)->unk4);
+    Control_DisableControllerPak((*slot)->controllerPort);
     Control_ResetControllerPak(*slot);
     Control_SetProfileMode(*slot, 1);
-    menu->owner->unk85C = 0;
+    menu->owner->playerStateDirty = 0;
     return 1;
 }
 
@@ -199,7 +199,7 @@ s32 CMenuProfile_HasSavedRoundProgress(void) {
     s32 hasProgress;
     CGameStatus *state;
 
-    state = &D_801462C8.counters;
+    state = &g_gameSettings.counters;
     hasProgress = 0;
     if ((state->round != 0) || (state->elapsed != 0) || (state->state != 0)) {
         hasProgress = 1;
@@ -207,12 +207,12 @@ s32 CMenuProfile_HasSavedRoundProgress(void) {
     return hasProgress;
 }
 
-s32 CMenuProfile_AdjustControllerSelection(void *arg0, void *menuContext) {
+s32 CMenuProfile_AdjustControllerSelection(void *menuItem, void *menuContext) {
     Shared_ActorView *p;
     u8 *bytep;
     s32 result;
 
-    p = (void *)((MenuRecAt20V2 *)menuContext)->owner;
+    p = (void *)((PlayerProfileMenuContext *)menuContext)->owner;
     bytep = &p->controls->selection;
     result = Menu_AdjustValue(menuContext, *bytep, 1, 0, 0xA, 0);
     *bytep = (u8)result;

@@ -1,6 +1,6 @@
 #include "COMMON/OBJRECAT4V6.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "AUDIO/VOICE_AND_SPATIAL_SOURCE_VIEWS.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON.H"
@@ -12,12 +12,12 @@ extern void Channel_UpdateDistancePitchFactor(ViewChannelUpdateVoicePitch *);
 extern void alSndpSetSound(char *, s32);
 extern void alSndpSetPitch(char *, f32);
 
-static inline char *selectChannel(ContextRecAt104 *context, s32 slot) {
+static inline char *selectChannel(VoicePitchChannelContext *context, s32 slot) {
     alSndpSetSound(context->channels, context->slots[slot]);
     return context->channels;
 }
 
-static inline void apply(ContextRecAt104 *context, s32 slot, f32 value, ViewChannelUpdateVoicePitch *view) {
+static inline void apply(VoicePitchChannelContext *context, s32 slot, f32 value, ViewChannelUpdateVoicePitch *view) {
     char *channel = context->channels;
 
     alSndpSetSound(channel, context->slots[slot]);
@@ -27,8 +27,8 @@ static inline void apply(ContextRecAt104 *context, s32 slot, f32 value, ViewChan
 }
 
 void Channel_UpdateVoicePitch(ViewChannelUpdateVoicePitch *view) {
-    MotionRecAt24 *motion;
-    AnglesRecAt8 *angles;
+    VoicePitchMotion *motion;
+    VoicePitchAngles *angles;
     s32 refreshed;
     s32 falling;
     f32 position;
@@ -38,7 +38,7 @@ void Channel_UpdateVoicePitch(ViewChannelUpdateVoicePitch *view) {
     f32 base;
     f32 result;
     char *channel;
-    ContextRecAt104 *context;
+    VoicePitchChannelContext *context;
 
     refreshed = 0;
     motion = &view->motion;
@@ -66,7 +66,7 @@ void Channel_UpdateVoicePitch(ViewChannelUpdateVoicePitch *view) {
                 view->pitch = RW_BITS_TO_FLOAT(angles->target);
 clamp_done:;
 
-                position = (view->pitch + D_800C3F60_de) * D_800C3F64_de;
+                position = (view->pitch + g_voicePlaybackPitchBias) * g_voicePlaybackPitchIndexScale;
                 truncated = position;
                 index = (s16)truncated;
                 if (index != position) {

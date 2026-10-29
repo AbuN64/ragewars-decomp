@@ -1,4 +1,4 @@
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -7,7 +7,7 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/APPROACHLOCATION.H"
@@ -21,7 +21,7 @@
 /* GOBJINST_2.CPP */
 extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bankOffset, s32 level);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
-extern void func_80262480_de(void *);
+extern void Gastate_ResetAnimationReference(void *);
 extern s32 Gobjinst_ChooseAnimationVariant(void *, s32, s32);
 
 void Gobjinst_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directoryBank, s32 extra) {
@@ -29,7 +29,7 @@ void Gobjinst_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directoryBa
     void **resource1;
     void **resource2;
     s32 *entry;
-    void *temp;
+    void *modelBounds;
     void *node;
     s32 key;
     s32 found;
@@ -56,11 +56,11 @@ void Gobjinst_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directoryBa
                                  0, 0, 0, &g_gameObjectResetAnimInfoText, 1);
         if (resource2 != 0) {
             node = *resource2;
-            temp = SetN64_GetPackSection(node, 0);
+            modelBounds = SetN64_GetPackSection(node, 0);
             ((LevelActor *)actorStorage)->controllerUpdate(actorStorage, (char *)actorStorage + 0x170);
-            Graphu64_TransformBoundingBox(&((LevelActor *)actorStorage)->transform, (s32)temp, (char *)actorStorage + 0xE8);
-            func_80262480_de((char *)actorStorage + 0x104);
-            func_80262480_de((char *)actorStorage + 0x118);
+            Graphu64_TransformBoundingBox(&((LevelActor *)actorStorage)->transform, (s32)modelBounds, (char *)actorStorage + 0xE8);
+            Gastate_ResetAnimationReference((char *)actorStorage + 0x104);
+            Gastate_ResetAnimationReference((char *)actorStorage + 0x118);
             ((LevelActor *)actorStorage)->stateE6 = (u8)((ResourceManagerState *)SetN64_GetPackSection(node, 1))->count;
             ((LevelActor *)actorStorage)->flags |= 0x40000;
             if (extra > 0) {
@@ -100,21 +100,21 @@ void Graphu64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, f32 *
  /* extern */
 
  /* extern */
-extern f32 D_800C3928_de[], D_800C3930_de[], D_800D2988[];
+extern f32 g_actorGroundRotationBlendRates[], g_actorRotationBlendAndResourceTuning[], g_frameElapsedTime[];
 
 typedef struct CollisionInfo CollisionInfo;
 
-extern CollisionInfo D_801003D8;
+extern CollisionInfo g_defaultActorCollisionInfo;
 
-extern func_80237E70_G1 D_801041F0;
+extern ScreenMessageTextView g_currentActorInstance;
 
 extern s32 Unicol_MoveActorWithCollision(void *actor, CVector3 pos, CollisionInfo *motionSettings);
 
-extern void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *actor);
+extern void Link_DispatchObjectLinks(s32 objectId, s32 triggerFlags, void *actor);
 
-extern void Link_DispatchActorLinks(void *actor, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *actor, s32 triggerFlags, void *eventContext);
 
-void func_80246E44_de(Actor36 *actor) {
+void Gobjinst_UpdateActorRootDisplacement(Actor36 *actor) {
     CVector3 before, after;
     u32 flags, mode;
     void **resource;
@@ -124,19 +124,19 @@ void func_80246E44_de(Actor36 *actor) {
     if (g_world.mode == 4 && !(flags & 0x2000)) return;
     mode = flags & 0x300000;
     before = actor->position;
-    func_802472F0_de(actor);
+    Gobjinst_AdvanceActorRootMotion(actor);
     after = actor->position;
     actor->position = before;
     if (mode == 0 && *actor->kind != 0) {
         Graphu64_SubtractVectors(&after, &after, &before);
         Graphu64_AddVec3(&after, &after, &actor->displacement);
-        func_8024715C_de((void *)actor, &after);
+        Gobjinst_MoveActorWithContactCallback((void *)actor, &after);
         if (*actor->kind == 1) {
             Scene_UpdateMovementTriggers(&g_world, actor, &before, &actor->position);
         }
     }
-    func_80247004_de((void *)actor);
-    resource = Cache_RequestResource(0, actor->size, actor->size, actor->alignment, 0, 0, 0, D_800C38F4_de, 1);
+    Gobjinst_UpdateActorGroundRotation((void *)actor);
+    resource = Cache_RequestResource(0, actor->size, actor->size, actor->alignment, 0, 0, 0, s_actorModelAllocationTag, 1);
     if (resource != 0) {
         box = SetN64_GetPackSection(*resource, 0);
         actor->update(actor, actor->state);
@@ -145,7 +145,7 @@ void func_80246E44_de(Actor36 *actor) {
     }
 }
 
-void func_80247004_de(Obj_func_80247004_de *actor) {
+void Gobjinst_UpdateActorGroundRotation(ActorModelLoadState *actor) {
     CQuatern vec;
     f32 rotationBlend;
     f32 rotationBlendRate;
@@ -155,71 +155,71 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
     s32 flags;
     void *rotation;
     void *rotationDestination;
-    actorFlags = actor->unk100;
+    actorFlags = actor->flags;
     flags = actorFlags & 0x300000;
-    if (!(actorFlags & 1) && (rotationState = InstHdr_GetActorMotionState(actor), (actor->unk14 != NULL)) && (vec = Insthdr_BuildActorGroundRotation(actor), resetRotationFlag = actor->unk14->unk2 & 1, (InstHdr_UsesGroundRotation(actor) != 0))) {
+    if (!(actorFlags & 1) && (rotationState = InstHdr_GetActorMotionState(actor), (actor->modelHeader != NULL)) && (vec = Insthdr_BuildActorGroundRotation(actor), resetRotationFlag = actor->modelHeader->unk2 & 1, (InstHdr_UsesGroundRotation(actor) != 0))) {
         if (resetRotationFlag != 0) {
             vec.x = vec.y = vec.z = 0.0f;
-            vec.w = D_800C3924_de;
+            vec.w = g_actorGroundRotationUnitW;
         }
         if (flags) {
-            if ((!(actor->unk100 & 0x1000) && (rotationDestination = actor->rotation, (rotationState != 0))) || (rotationDestination = actor->rotation, (resetRotationFlag != 0))) {
+            if ((!(actor->flags & 0x1000) && (rotationDestination = actor->rotation, (rotationState != 0))) || (rotationDestination = actor->rotation, (resetRotationFlag != 0))) {
                 Graphu64_ApproachQuaternion(rotationDestination, &vec);
             }
         } else {
-            if ((rotationState != 0) && !(actor->unk100 & 0x1000)) {
-                rotationBlend = D_800D2988[0]; rotationBlendRate = D_800C3928_de[0];
+            if ((rotationState != 0) && !(actor->flags & 0x1000)) {
+                rotationBlend = g_frameElapsedTime[0]; rotationBlendRate = g_actorGroundRotationBlendRates[0];
             } else {
-                rotationBlend = D_800D2988[0]; rotationBlendRate = D_800C3928_de[1];
+                rotationBlend = g_frameElapsedTime[0]; rotationBlendRate = g_actorGroundRotationBlendRates[1];
             }
             rotationBlend = rotationBlend * rotationBlendRate;
             rotation = actor->rotation;
-            if (rotationBlend > D_800C3930_de[0]) {
-                rotationBlend = D_800C3930_de[0];
+            if (rotationBlend > g_actorRotationBlendAndResourceTuning[0]) {
+                rotationBlend = g_actorRotationBlendAndResourceTuning[0];
             }
             Graphu64_InterpolateQuaternionWithLinearFallback(rotation, rotationBlend, rotation, &vec);
         }
     }
 }
 
-void func_8024715C_de(char *actor, CVector3 *destination) {
+void Gobjinst_MoveActorWithContactCallback(char *actor, CVector3 *destination) {
     CollisionInfo *collision;
     u16 *old_contact;
     s32 collided;
     f32 saved;
     void (*callback)(void *, void *, CollisionInfo *);
 
-    if ((((ObjectLinks23C *)(actor))->unk_100 & 0x10000) && ((ObjectLinks23C *)(actor))->unk_1A0 != 0) {
-        collision = ((ObjectLinks10 *)(((ObjectLinks23C *)(actor))->unk_1A0))->unk_C;
+    if ((((ActorModelResourceView *)(actor))->unk_100 & 0x10000) && ((ActorModelResourceView *)(actor))->unk_1A0 != 0) {
+        collision = ((ActorCollisionResourceView *)(((ActorModelResourceView *)(actor))->unk_1A0))->unk_C;
         if (collision == 0) {
-            collision = &D_801003D8;
+            collision = &g_defaultActorCollisionInfo;
         }
-        saved = ((ObjectStateC *)(collision))->unk_8.v0;
-        if ((u32)(((ObjectLinks23C *)(actor))->unk_238 - 0x2B0C) < 8) {
-            ((ObjectStateC *)(collision))->unk_8.v1 = 0;
+        saved = ((ActorCollisionDataView *)(collision))->unk_8.v0;
+        if ((u32)(((ActorModelResourceView *)(actor))->unk_238 - 0x2B0C) < 8) {
+            ((ActorCollisionDataView *)(collision))->unk_8.v1 = 0;
         }
-        old_contact = ((ObjectLinks23C *)(actor))->unk_14;
+        old_contact = ((ActorModelResourceView *)(actor))->unk_14;
         collided = Unicol_MoveActorWithCollision(actor, *destination, collision);
-        if (old_contact != ((ObjectLinks23C *)(actor))->unk_14) {
-            ((ObjectLinks23C *)(actor))->unk_1F4 = old_contact;
+        if (old_contact != ((ActorModelResourceView *)(actor))->unk_14) {
+            ((ActorModelResourceView *)(actor))->unk_1F4 = old_contact;
         }
-        ((ObjectStateC *)(collision))->unk_8.v0 = saved;
-        if (old_contact != 0 && ((ObjectLinks23C *)(actor))->unk_14 != 0 &&
-                *old_contact != *((ObjectLinks23C *)(actor))->unk_14 &&
-                *((ObjectLinks23C *)(actor))->unk_18 == 1) {
+        ((ActorCollisionDataView *)(collision))->unk_8.v0 = saved;
+        if (old_contact != 0 && ((ActorModelResourceView *)(actor))->unk_14 != 0 &&
+                *old_contact != *((ActorModelResourceView *)(actor))->unk_14 &&
+                *((ActorModelResourceView *)(actor))->unk_18 == 1) {
             Link_DispatchObjectLinks((s32)old_contact, 0x80, actor);
-            Link_DispatchObjectLinks((s32)((ObjectLinks23C *)(actor))->unk_14, 0x40, actor);
+            Link_DispatchObjectLinks((s32)((ActorModelResourceView *)(actor))->unk_14, 0x40, actor);
         }
-        if (collided != 0 && !(((ObjectLinks23C *)(actor))->unk_100 & 0x300000) &&
-                *((ObjectLinks23C *)(actor))->unk_18 == 1 && D_801041F0.unk0 != 0 &&
-                *D_801041F0.unk0 == 1) {
-            Link_DispatchActorLinks(D_801041F0.unk0, 0x20, actor);
+        if (collided != 0 && !(((ActorModelResourceView *)(actor))->unk_100 & 0x300000) &&
+                *((ActorModelResourceView *)(actor))->unk_18 == 1 && g_currentActorInstance.text != 0 &&
+                *g_currentActorInstance.text == 1) {
+            Link_DispatchActorLinks(g_currentActorInstance.text, 0x20, actor);
         }
-        callback = ((struct CallbackState288 *) ((char *) actor))->callback;
+        callback = ((struct ActorModelCallbackView *) ((char *) actor))->callback;
         if (callback != 0) {
             callback(actor, actor + 0x170, collision);
         }
     } else {
-        ((ObjectLinks23C *)(actor))->unk_8 = *destination;
+        ((ActorModelResourceView *)(actor))->unk_8 = *destination;
     }
 }

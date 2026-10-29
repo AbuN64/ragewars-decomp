@@ -2,26 +2,26 @@
 #include "sdk/libgultra.h"
 
 #if defined(VERSION_DE) || defined(VERSION_EU)
-const unsigned int rodata_unresolved_800CCF48_unclaimed_CDE50_unclaimed_CDF50[6] = {
+const unsigned int k_LongarithDataEncodedWordsBlock2[6] = {
     0x41F00000, 0x00000000, 0x40F00000, 0x00000000, 0x41F00000, 0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C8D08[2] = {
+unsigned int k_LongarithDataEncodedWordsBlock1[2] = {
     0x3DCCCCCD, 0x3F000000,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C8118[2] = {
+unsigned int k_LongarithDataEncodedWords[2] = {
     0x40F00000, 0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
-unsigned int D_blob_b9e185f66508d14a5109[8] = {
+unsigned int g_longLongHighWordUnsignedBias_StorageWords[8] = {
     0x41F00000, 0x00000000, 0x40F00000, 0x00000000, 0x41F00000, 0x00000000, 0x00040000, 0x000C0000,
 };
 #endif

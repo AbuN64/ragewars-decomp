@@ -12,8 +12,8 @@
 /* Creates a 0x7C-byte fading widget: finds the frame the low half of the first argument names and
    the item the second names in the current context through GetMenuScreenOwner, Node_GetScreenData and
    Node_FindWidgetByResourceId, allocates and zeroes the widget, tags it 0xB60 with kind 8, links the frame at
-   0x44 (clearing its word at 0x20 and setting 0x24 to D_800E1474) and the item at 0x48, sets both
-   scales at 0x4C and 0x50 to D_800E1470, copies the item's two colours at 0x2C and 0x30 to 0x60,
+   0x44 (clearing its word at 0x20 and setting 0x24 to g_fadeWidgetInitialProgress) and the item at 0x48, sets both
+   scales at 0x4C and 0x50 to g_fadeWidgetInitialScale, copies the item's two colours at 0x2C and 0x30 to 0x60,
    stores the green and red differences between them over 75 steps at 0x70 and 0x74, marks it
    active at 0x78, starts it through SmpSlider_EnableTransition and SmpSlider_SetTransitionMode(1) and attaches it to the
    frame through Node_InsertWidgetBefore. Returns the widget. */
@@ -37,10 +37,10 @@ MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
     result->field_0C = 0xB60;
     result->frame = frame;
     result->item = Node_FindWidgetByResourceId((void*)context, itemId & 0xFFFF);
-    result->scaleX = D_800E1470;
-    result->scaleY = D_800E1470;
+    result->scaleX = g_fadeWidgetInitialScale;
+    result->scaleY = g_fadeWidgetInitialScale;
     result->frame->field_20 = 0;
-    result->frame->field_24 = D_800E1474;
+    result->frame->field_24 = g_fadeWidgetInitialProgress;
     result->copies[0] = result->item->colours[0];
     result->copies[1] = result->item->colours[1];
     result->copies[2] = result->item->colours[2];
@@ -56,45 +56,45 @@ MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
 }
 
 void SmpFade_RegisterFadeClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB60, D_0041A490, D_0041A520, 3);
+    SmSmngr_RegisterElementHandlers(0xB60, g_SmpSlider_DispatchTransitionEventAddress, g_SmpSlider_IgnoreFormattedMessageAddress, 3);
 }
 
 /* 800E1470.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8041A280_E2070[2] = {
+const unsigned int g_fadeWidgetSecondaryProgressConstants[2] = {
     0x3EAAAAAB, 0x3D4CCCCD,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800DC0F8[2] = {
+unsigned int k_SmpFadeEncodedWords[2] = {
     0x00000000, 0x00164D55,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E8C88[2] = {
+unsigned int k_SmpFadeEncodedWordsBlock2[2] = {
     0x3DDD67C9, 0x3F000000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EDAC8[2] = {
+unsigned int k_SmpFadeEncodedWordsBlock3[2] = {
     0x0800FFE0, 0x01270134,
 };
 #endif
 
 #if defined(VERSION_DE)
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DD448[2] = {
-    (unsigned int)&D_800C8380_de + 0x70, (unsigned int)&D_800C8420_de + 0x90,
+unsigned int k_SmpFadeEncodedWordsBlock1[2] = {
+    (unsigned int)&g_actionEnterDispatchTable + 0x70, (unsigned int)&g_damageDispatchTable + 0x90,
 };
 #endif
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8041A280_E2070_us_rev1.c */
-const unsigned int D_blob_1466e2b8289b860d4bb9[2] = {
+const unsigned int g_fadeWidgetProgressConstantsUsRev1[2] = {
     0x3EAAAAAB, 0x3D4CCCCD,
 };
 #endif

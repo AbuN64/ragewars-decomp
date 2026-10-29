@@ -7,22 +7,22 @@
 
 
 
-extern int D_8014D0C4;
+extern int g_xplusSortPartitionThreshold;
 
 
 
-extern int D_800CD900;
+extern int g_xplusRandomState;
 
 
 
-extern int D_8014D0C8;
+extern int g_xplusSortMedianThreshold;
 
 
 
 
-extern int D_8014D0C0;
+extern int g_xplusSortElementSize;
 
 
 
-extern signed int ( *D_8014D0CC)(char *, char *);
+extern signed int ( *g_xplusSortComparator)(char *, char *);
 #endif

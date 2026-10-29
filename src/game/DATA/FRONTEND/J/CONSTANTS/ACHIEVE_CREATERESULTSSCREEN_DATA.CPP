@@ -3,7 +3,7 @@
 
 /* DATA_800E5830.CPP */
 /* ROM-grounded data: rodata/writable/800E5830 */
-unsigned int D_blob_phase2_9fae0a8d0052f34c3565[1] = {
+unsigned int g_AchieveCreateresultsscreenWords1[1] = {
     0x00000000,
 };
 
@@ -37,8 +37,8 @@ unsigned int D_src_e3e7c440[27] = {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
-unsigned int D_blob_26675c10b25a02170679[6] = {
-    0x00000E08, 0x00000012, (unsigned int)D_00438E64, 0x00000E07, 0x00000012, (unsigned int)D_00438CB4,
+unsigned int g_AchieveCreateresultsscreenPointerWords1[6] = {
+    0x00000E08, 0x00000012, (unsigned int)g_packedCodeAddress24_00438E64, 0x00000E07, 0x00000012, (unsigned int)g_packedCodeAddress24_00438CB4,
 };
 #endif
 

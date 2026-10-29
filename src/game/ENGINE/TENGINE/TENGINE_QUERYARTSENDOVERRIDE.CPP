@@ -1,7 +1,7 @@
 #include "COMMON/RESIDENTSTATE.H"
 #include "RENDER/RESIDENT_TEXTURE_MENU_VIEWS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/TEXTURE_REQUEST.H"
 
 #if defined(VERSION_US_REV1)
@@ -11,13 +11,13 @@
 
 
 /** Decode a frontend input selector into its current button mask. */
-s32 Tengine_QueryArtsendOverride(s32 arg0) {
-    if (D_800D2AE0 == 0) {
+s32 Tengine_QueryArtsendOverride(s32 overrideSelector) {
+    if (g_textureVariationBypassEnabled == 0) {
         goto zero;
     }
 
     {
-        s32 sw_outer_value = arg0;
+        s32 sw_outer_value = overrideSelector;
         sw_outer_value -= (257);
         if ((unsigned int)sw_outer_value > 5) {
             goto sw_outer_default;
@@ -33,16 +33,16 @@ s32 Tengine_QueryArtsendOverride(s32 arg0) {
     }
     do {
     sw_outer_0x101:
-        return (s32)D_8014AEB0.textureOverride;
+        return (s32)g_artsendTextureViewer.textureOverride;
     sw_outer_0x102:
-        return (s32)D_8014AEB0.paletteOverride;
+        return (s32)g_artsendTextureViewer.paletteOverride;
     sw_outer_0x103:
-        return 1 << D_8014AEB0.selector->primaryButton;
+        return 1 << g_artsendTextureViewer.selector->primaryButton;
     sw_outer_0x104:
-        return 1 << D_8014AEB0.selector->secondaryButton;
+        return 1 << g_artsendTextureViewer.selector->secondaryButton;
     sw_outer_0x105:
         {
-        s32 sw_inner_value = D_8014AEB0.selector->mode;
+        s32 sw_inner_value = g_artsendTextureViewer.selector->mode;
         if ((unsigned int)sw_inner_value > 5) {
             goto zero;
         }
@@ -68,7 +68,7 @@ s32 Tengine_QueryArtsendOverride(s32 arg0) {
             return 0x10;
     } while (0);
     sw_outer_0x106:
-        D_8014AEB0.overridesOff = 1;
+        g_artsendTextureViewer.overridesOff = 1;
 zero:
         return 0;
     sw_outer_default:

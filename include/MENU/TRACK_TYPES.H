@@ -4,22 +4,22 @@
 #include "COMMON/SHAREDPLAYER.H"
 
 typedef struct SharedTrackObjectPrefix {
-    u32 unknown0[2];
+    u32 reservedElements[2];
     CVector3 position;
-    u8 unknown14[0x3C];
+    u8 reservedBytes[0x3C];
 } SharedTrackObjectPrefix;
 
 typedef struct SharedTrackObject {
     SharedTrackObjectPrefix prefix;
-    u8 unknown50[0x1C];
+    u8 reservedBytes1[0x1C];
     f32 yaw;
 } SharedTrackObject;
 
 typedef struct SharedTrackCamera {
-    u8 unknown0[0x28];
+    u8 reservedBytes2[0x28];
     f32 distance;
     f32 pitch;
-    u8 unknown30[8];
+    u8 reservedBytes3[8];
     CVector3 position;
 } SharedTrackCamera;
 

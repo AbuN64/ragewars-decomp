@@ -6,7 +6,7 @@ const char g_sprawdmaText[14] =
 #endif
 
 #if defined(VERSION_US)
-char rodata_unresolved_800C78E2[14] =
+char s_expandHudLabelFragment[14] =
     "MHUD_EXPANDHR\000";
 #endif
 
@@ -15,7 +15,7 @@ char rodata_unresolved_800C78E2[14] =
 #endif
 
 #if defined(VERSION_EU)
-unsigned short rodata_unresolved_800C85B2[7] = {
+unsigned short k_GSprawdmatextEncodedHalfwordsBlock1[7] = {
     0x0000, 0x41F0, 0x0000, 0x4180, 0x0000, 0x41F0, 0x0000,
 };
 #endif
@@ -25,7 +25,7 @@ unsigned short rodata_unresolved_800C85B2[7] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned short rodata_unresolved_800C79C2[7] = {
+unsigned short k_GSprawdmatextEncodedHalfwords[7] = {
     0x0000, 0x0000, 0x0000, 0x4F00, 0x0000, 0x8E02, 0x0024,
 };
 #endif

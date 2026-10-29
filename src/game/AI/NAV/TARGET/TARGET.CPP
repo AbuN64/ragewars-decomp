@@ -35,7 +35,7 @@ s32 Target_UpdateTargetSelection(void *object) {
         if (linked->reactionFlags & 0x20) {
             controller->target = NULL;
         }
-        if (D_801462C8.counters.teams != 0) {
+        if (g_gameSettings.counters.teams != 0) {
             if (controller->player->profile->team == linked->profile->team) {
                 controller->target = NULL;
             }

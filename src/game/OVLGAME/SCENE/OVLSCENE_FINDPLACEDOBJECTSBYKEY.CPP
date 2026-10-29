@@ -2,7 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJB.H"
-#include "MENU/8044ACCC.H"
+#include "MENU/SCENE_RESOURCE_PREVIEW_AND_COLLISION_VIEWS.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
@@ -15,7 +15,7 @@
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */
 
-extern char D_00285160[];
+extern char g_cResource_UnpackRequestEntry[];
 extern char g_gamePersistentData[];
 extern char D_800F41F0[];
 extern int Control_IsSnapshotActive(void);
@@ -25,8 +25,8 @@ void Scene_LoadPreviewBufferB(ItemsPreviewStateB *state) {
  int *resource;
  int id;
  if(Control_IsSnapshotActive()==0) {
-  resource=Cache_RequestResource(0,state->resource,state->resource,state->bank,0,0,D_00285160,g_gamePersistentData,1);
-  func_802BD3A0_de(D_800F41F0,(const void *)*resource,0x5000);
+  resource=Cache_RequestResource(0,state->resource,state->resource,state->bank,0,0,g_cResource_UnpackRequestEntry,g_gamePersistentData,1);
+  Libc_CopyBytes(D_800F41F0,(const void *)*resource,0x5000);
   Cache_ReleaseResource(0,resource);
  }
 }
@@ -56,7 +56,7 @@ void Scene_ResetSelectionState(char *state) {
     ((Shared_World *)state)->selectionValues[3] = 0;
 }
 
-/* Copies up to max of a track's placed objects whose key matches into out: finds the key's index range in the track's sorted key table through Defs_FindSortedGroupRange, queues each object in that range of the given kind (any kind for -1) on a local list through func_80255CA0_de and func_80255CB8_de, then takes them back off through func_80256190_de and func_80255ED8_de, copying each 20-byte object, and returns how many were copied. */
+/* Copies up to max of a track's placed objects whose key matches into out: finds the key's index range in the track's sorted key table through Defs_FindSortedGroupRange, queues each object in that range of the given kind (any kind for -1) on a local list through List_InitializeIntrusive and List_PrependIntrusive, then takes them back off through List_CountIntrusiveNodes and List_RemoveIntrusive, copying each 20-byte object, and returns how many were copied. */
 
 
 
@@ -65,7 +65,7 @@ void Scene_ResetSelectionState(char *state) {
 
 
 
-extern Node_Items_FindPlacedObjectsByKey *func_80256190_de(ListRec *);
+extern Node_Items_FindPlacedObjectsByKey *List_CountIntrusiveNodes(ListRec *);
 
 s32 Scene_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max) {
     Shared_World *track = world;
@@ -88,7 +88,7 @@ s32 Scene_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *
     objectTable = SetN64_GetPackSection(track->placedObjectTable, 1);
     objects = (Shared_Placed *)(objectTable + 2);
     if (Defs_FindSortedGroupRange(keys, count, key, &first, &last) != 0) {
-        func_80255CA0_de(&list, 4, 8);
+        List_InitializeIntrusive(&list, 4, 8);
         node = nodes;
         for (i = first; i <= last; i++) {
             match = 1;
@@ -97,7 +97,7 @@ s32 Scene_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *
             }
             if (match) {
                 node->index = i;
-                func_80255CB8_de(&list, node);
+                List_PrependIntrusive(&list, node);
                 node++;
             }
         }
@@ -105,9 +105,9 @@ s32 Scene_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *
             if (list.count == 0) {
                 return found;
             }
-            node = func_80256190_de(&list);
+            node = List_CountIntrusiveNodes(&list);
             out[found++] = objects[node->index];
-            func_80255ED8_de(&list, node);
+            List_RemoveIntrusive(&list, node);
         }
     }
     return found;

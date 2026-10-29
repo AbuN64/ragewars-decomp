@@ -3,7 +3,7 @@
 /* 800C87CC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C87CC */
-unsigned int D_blob_94d849a12a43d9bc847a[1] = {
+unsigned int g_ResourcesEncodedWordsBlock39[1] = {
     0x3A83126F,
 };
 #endif
@@ -40,14 +40,14 @@ struct {
 
 /* 800C8DA4.CPP */
 #if defined(VERSION_EU_X)
-unsigned int D_d1_a384ebabb7b7035b[3] = {
+unsigned int g_ResourcesEncodedWordsBlock71[3] = {
     0x3F5F66F4, 0x3F060A93, 0x00000100,
 };
 #endif
 
 /* 800C9060.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800C9060[15] = {
+unsigned int k_ResourcesEncodedWords[15] = {
     0x3DB851EC, 0x3D4CCCCD, 0x3F000000, 0x2E656F73, 0x00010000, 0x00050000, 0x00040000, 0x000C0000,
     0x00080000, 0x000A0000, 0x00020000, 0x00030000, 0x41F00000, 0x42400000, 0x43020000,
 };

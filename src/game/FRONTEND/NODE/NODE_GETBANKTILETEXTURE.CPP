@@ -16,7 +16,7 @@
 
 
 
-extern PoolRecAtC g_frontendResourceTextureCount;
+extern ArchiveImageReleasePool g_frontendResourceTextureCount;
 
 
 void Node_UpdateImageReleaseTimers(s32 mode) {
@@ -91,7 +91,7 @@ typedef struct {
     Tables tables;
 } File;
 extern File g_frontendResourceState;
-extern s32 D_800DD0B0;
+extern s32 s_frontendResourceOpenMode;
 extern s32 Cache_AllocateMemory(s32 size);
 extern void XStdio_CloseStream(s32 handle);
 extern void Frontend_ClearOwnedImage(Texture *texture);
@@ -170,7 +170,7 @@ void *Node_GetBankTileTexture(u8 which, s32 group, s32 pass) {
         Tables *tables = &g_frontendResourceState.tables;
 
         bank = &tables->banks[group];
-        g_frontendResourceState.handle = XStdio_OpenStream(&g_frontendResourceState.name, &D_800DD0B0);
+        g_frontendResourceState.handle = XStdio_OpenStream(&g_frontendResourceState.name, &s_frontendResourceOpenMode);
         size = bank->image->size;
         i = 0;
         bank->offsets[0] = Cache_AllocateMemory(size);

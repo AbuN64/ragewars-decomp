@@ -1,6 +1,6 @@
 #include "COMMON/PACKED.H"
 #include "COMMON/OBJ.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
@@ -13,11 +13,11 @@
 #include "include_asm.h"
 
 /* 8027451C_2.CPP */
-/* Returns the rotation quaternion that tilts the up axis onto a polygon's unit normal (recomputed from its edges into D_80115E10 and normalised into D_80115E20 whenever the polygon differs from the last one, straight up for no polygon), recording the half-angle sine in D_80115DEC and giving the identity when the normal is vertical. Adapted from func_80275688_de with the cached polygon normal of Region_TestPolygonSlopeFlag replacing Graphu64_GetCachedSurfaceNormal and the default normals written through their separate cells. */
+/* Returns the rotation quaternion that tilts the up axis onto a polygon's unit normal (recomputed from its edges into g_regionCachedEdgeCross and normalised into g_regionCachedUnitNormal whenever the polygon differs from the last one, straight up for no polygon), recording the half-angle sine in g_turretAimSine and giving the identity when the normal is vertical. Adapted from func_80275688_de with the cached polygon normal of Region_TestPolygonSlopeFlag replacing Graphu64_GetCachedSurfaceNormal and the default normals written through their separate cells. */
 
-extern Triangle *D_800CD3E8;
+extern Triangle *g_regionCachedEdgePolygon;
 
-extern Triangle *D_800CD3EC;
+extern Triangle *g_regionCachedNormalPolygon;
 
 extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
@@ -51,25 +51,25 @@ CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
     f32 scale;
 
     if (polygon == 0) {
-        *(s32 *)&D_80115E20 = 0;
-        D_80111D68 = 0;
-        D_80111D64 = 1.0f;
-    } else if (polygon != D_800CD3EC) {
+        *(s32 *)&g_regionCachedUnitNormal = 0;
+        g_regionNormalDefaultUpZ = 0;
+        g_regionNormalDefaultUpY = 1.0f;
+    } else if (polygon != g_regionCachedNormalPolygon) {
         if (polygon == 0) {
-            *(s32 *)&D_80115E10 = 0;
-            D_80111D58 = 0;
-            D_80111D54 = 1.0f;
-        } else if (polygon != D_800CD3E8) {
+            *(s32 *)&g_regionCachedEdgeCross = 0;
+            g_regionEdgeDefaultUpZ = 0;
+            g_regionEdgeDefaultUpY = 1.0f;
+        } else if (polygon != g_regionCachedEdgePolygon) {
             edge(&edge0, polygon->vertices[1], polygon->vertices[0]);
             edge(&edge1, polygon->vertices[2], polygon->vertices[1]);
-            Graphu64_CrossVectors(&D_80115E10, &edge0, &edge1);
+            Graphu64_CrossVectors(&g_regionCachedEdgeCross, &edge0, &edge1);
         }
-        D_800CD3E8 = polygon;
-        normalize_copy(&D_80115E20, &D_80115E10);
+        g_regionCachedEdgePolygon = polygon;
+        normalize_copy(&g_regionCachedUnitNormal, &g_regionCachedEdgeCross);
     }
     one = 1.0f;
-    D_800CD3EC = polygon;
-    normal = D_80115E20;
+    g_regionCachedNormalPolygon = polygon;
+    normal = g_regionCachedUnitNormal;
     up.x = 0.0f;
     up.y = one;
     up.z = 0.0f;
@@ -88,7 +88,7 @@ CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
         result.x = axis.x * scale;
         result.y = axis.y * scale;
         result.z = axis.z * scale;
-        D_80115DEC = scale;
+        g_turretAimSine = scale;
         result.w = Math_Cosf(angle);
     }
     *out = result;
@@ -106,7 +106,7 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
     float one;
 
     Graphu64_GetCachedSurfaceNormal(&a);
-    one = D_800C49D8_de[1];
+    one = g_regionUpQuaternionConstants[1];
     up.x = 0;
     up.y = one;
     up.z = 0;
@@ -120,12 +120,12 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
     } else {
         Graphu64_ScaleVector(&axis, &axis, one / len);
         angle = Graphu64_ArcCos(up.x * a.x + up.y * a.y + up.z * a.z);
-        angle *= D_800C49E0_de;
+        angle *= g_regionUpQuaternionHalfAngleScale;
         scale = Gu_Sinf(angle);
         result.x = axis.x * scale;
         result.y = axis.y * scale;
         result.z = axis.z * scale;
-        D_80115DEC = scale;
+        g_turretAimSine = scale;
         result.w = Math_Cosf(angle);
     }
     *out = result;
@@ -133,7 +133,7 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
 }
 
 /* 8027451C_3.CPP */
-/* Returns whether a polygon counts as a wall: without flag 0x2000 it returns its flag 8, and otherwise it takes the polygon's unit normal (recomputed from its edges into D_80115E10 and normalised into D_80115E20 whenever the polygon differs from the last one) and returns whether the normal's upward component is at most D_800C9AD8. */
+/* Returns whether a polygon counts as a wall: without flag 0x2000 it returns its flag 8, and otherwise it takes the polygon's unit normal (recomputed from its edges into g_regionCachedEdgeCross and normalised into g_regionCachedUnitNormal whenever the polygon differs from the last one) and returns whether the normal's upward component is at most g_regionWallSlopeThreshold. */
 
 s32 Region_TestPolygonSlopeFlag(Triangle *polygon) {
     CVector3 up;
@@ -148,24 +148,24 @@ s32 Region_TestPolygonSlopeFlag(Triangle *polygon) {
         return polygon->flags & 8;
     }
     up.x = 0.0f;
-    up.y = *(&D_800C49E0_de + 1);
+    up.y = *(&g_regionUpQuaternionHalfAngleScale + 1);
     up.z = 0.0f;
-    if (polygon != D_800CD3EC) {
+    if (polygon != g_regionCachedNormalPolygon) {
         if (polygon == 0) {
-            *(s32 *)&D_80115E10 = 0;
-            D_80111D54 = *(&D_800C49E0_de + 1);
-            D_80111D58 = 0;
-        } else if (polygon != D_800CD3E8) {
+            *(s32 *)&g_regionCachedEdgeCross = 0;
+            g_regionEdgeDefaultUpY = *(&g_regionUpQuaternionHalfAngleScale + 1);
+            g_regionEdgeDefaultUpZ = 0;
+        } else if (polygon != g_regionCachedEdgePolygon) {
             edge(&edge0, polygon->vertices[1], polygon->vertices[0]);
             edge(&edge1, polygon->vertices[2], polygon->vertices[1]);
-            Graphu64_CrossVectors(&D_80115E10, &edge0, &edge1);
+            Graphu64_CrossVectors(&g_regionCachedEdgeCross, &edge0, &edge1);
         }
-        D_800CD3E8 = polygon;
-        normalize_copy(&D_80115E20, &D_80115E10);
+        g_regionCachedEdgePolygon = polygon;
+        normalize_copy(&g_regionCachedUnitNormal, &g_regionCachedEdgeCross);
     }
-    normal = D_80115E20;
-    D_800CD3EC = polygon;
-    if (normal.x * up.x + normal.y * up.y + normal.z * up.z <= D_800C9AD8) {
+    normal = g_regionCachedUnitNormal;
+    g_regionCachedNormalPolygon = polygon;
+    if (normal.x * up.x + normal.y * up.y + normal.z * up.z <= g_regionWallSlopeThreshold) {
         return 1;
     }
     return 0;
@@ -251,7 +251,7 @@ bounds_loop:
 
 /* 8027451C_4.CPP */
 
-/* Returns the normalised cross product of a path node's two edge vectors, cached in D_80115E20 for the last node seen, with a default up vector for a null node.
+/* Returns the normalised cross product of a path node's two edge vectors, cached in g_regionCachedUnitNormal for the last node seen, with a default up vector for a null node.
    Adapted from Graphu64_GetCachedSurfaceNormal with the edge vectors computed through the Graphu64_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
 
 static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
@@ -259,16 +259,16 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
     CVector3 b;
 
     if (node == 0) {
-        D_80115E10.x = 0;
-        D_80115E10.z = 0;
-        D_80115E10.y = D_800C49F8_de;
-    } else if ((Triangle *)node != D_800CD3E8) {
+        g_regionCachedEdgeCross.x = 0;
+        g_regionCachedEdgeCross.z = 0;
+        g_regionCachedEdgeCross.y = g_regionCachedEdgeDefaultUp;
+    } else if ((Triangle *)node != g_regionCachedEdgePolygon) {
         Graphu64_SubtractVectors(&a, node->cur, node->prev);
         Graphu64_SubtractVectors(&b, node->next, node->cur);
-        Graphu64_CrossVectors(&D_80115E10, &a, &b);
+        Graphu64_CrossVectors(&g_regionCachedEdgeCross, &a, &b);
     }
-    D_800CD3E8 = (Triangle *)node;
-    *out = D_80115E10;
+    g_regionCachedEdgePolygon = (Triangle *)node;
+    *out = g_regionCachedEdgeCross;
     return out;
 }
 
@@ -333,36 +333,36 @@ CVector3 *Region_GetNodeEdgeCross(CVector3 *out, Node75 *node) {
     CVector3 *b_ptr;
 
     if (node == 0) {
-        D_80115E10.x = 0;
-        D_80115E10.z = 0;
-        D_80115E10.y = D_800C49F0_de;
-    } else if ((Triangle *)node != D_800CD3E8) {
+        g_regionCachedEdgeCross.x = 0;
+        g_regionCachedEdgeCross.z = 0;
+        g_regionCachedEdgeCross.y = g_regionEdgeCrossDefaultUp;
+    } else if ((Triangle *)node != g_regionCachedEdgePolygon) {
         Graphu64_SubtractVectors(&a, node->cur, node->prev);
         b_ptr = &b;
         Graphu64_SubtractVectors(b_ptr, node->next, node->cur);
-        Graphu64_CrossVectors(&D_80115E10, &a, b_ptr);
+        Graphu64_CrossVectors(&g_regionCachedEdgeCross, &a, b_ptr);
     }
-    *out = D_80115E10;
-    D_800CD3E8 = (Triangle *)node;
+    *out = g_regionCachedEdgeCross;
+    g_regionCachedEdgePolygon = (Triangle *)node;
     return out;
 }
 
 CVector3 *Region_GetNodeNormal(CVector3 *out, Node75 *node) {
     if (node == 0) {
-        D_80115E20.x = 0;
-        D_80115E20.z = 0;
-        D_80115E20.y = D_800C49F4_de;
-    } else if ((Triangle *)node != D_800CD3EC) {
-        cross_edges(&D_80115E20, node);
-        Graphu64_NormalizeVec3(&D_80115E20);
+        g_regionCachedUnitNormal.x = 0;
+        g_regionCachedUnitNormal.z = 0;
+        g_regionCachedUnitNormal.y = g_regionNormalDefaultUp;
+    } else if ((Triangle *)node != g_regionCachedNormalPolygon) {
+        cross_edges(&g_regionCachedUnitNormal, node);
+        Graphu64_NormalizeVec3(&g_regionCachedUnitNormal);
     }
-    *out = D_80115E20;
-    D_800CD3EC = (Triangle *)node;
+    *out = g_regionCachedUnitNormal;
+    g_regionCachedNormalPolygon = (Triangle *)node;
     return out;
 }
 
 /* 80275E44.CPP */
-/* Returns the height of a path node's triangle plane at (x, z) from the cached edge cross product in D_80115E10, or the mean vertex height when the plane is vertical.
+/* Returns the height of a path node's triangle plane at (x, z) from the cached edge cross product in g_regionCachedEdgeCross, or the mean vertex height when the plane is vertical.
    Adapted from func_8027525C_de with the edge vectors computed through the Graphu64_SubtractVectors subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
 
 static inline void cross_node_edges(Node75 *node) {
@@ -371,27 +371,27 @@ static inline void cross_node_edges(Node75 *node) {
 
     Graphu64_SubtractVectors(&a, node->cur, node->prev);
     Graphu64_SubtractVectors(&b, node->next, node->cur);
-    Graphu64_CrossVectors(&D_80115E10, &a, &b);
+    Graphu64_CrossVectors(&g_regionCachedEdgeCross, &a, &b);
 }
 
-extern void *Scene_GetModelRecordByIndexPointer(Shared_World *world, s32 arg1);
+extern void *Scene_GetModelRecordByIndexPointer(Shared_World *world, s32 modelId);
 
-extern void Gregion_ExpandHorizontalBounds(void *arg0, s32 arg1, void *arg2);
+extern void Gregion_ExpandHorizontalBounds(void *bounds, s32 pointCount, void *points);
 
 f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z) {
     CVector3 normal;
     CVector3 point;
 
     if (node == 0) {
-        return D_800C49FC_de;
+        return g_regionMissingPolygonHeight;
     }
-    if ((Triangle *)node != D_800CD3E8) {
+    if ((Triangle *)node != g_regionCachedEdgePolygon) {
         cross_node_edges(node);
     }
-    normal = D_80115E10;
-    D_800CD3E8 = (Triangle *)node;
+    normal = g_regionCachedEdgeCross;
+    g_regionCachedEdgePolygon = (Triangle *)node;
     if (normal.y == 0.0f) {
-        return (node->prev->y + node->cur->y + node->next->y) * D_800C4A00_de;
+        return (node->prev->y + node->cur->y + node->next->y) * g_regionVerticalPolygonMeanScale;
     }
     point = *node->prev;
     return (((point.z - z) * normal.z) +
@@ -406,10 +406,10 @@ CVector3 *Region_GetCachedCeilingNormal(CVector3 *out, Node75 *node) {
     CollisionBuildVertex *q;
 
     if (node == 0) {
-        D_80111D30.x = 0;
-        D_80111D30.z = 0;
-        D_80111D30.y = D_800C4A04_de;
-    } else if ((int)node != D_800CD3E0) {
+        g_cachedCeilingCrossProduct.x = 0;
+        g_cachedCeilingCrossProduct.z = 0;
+        g_cachedCeilingCrossProduct.y = g_regionCeilingDefaultUp;
+    } else if ((int)node != g_cachedCeilingCrossProductNode) {
         p = node->cur;
         q = node->prev;
         a.x = p->x - q->x;
@@ -428,10 +428,10 @@ CVector3 *Region_GetCachedCeilingNormal(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = p->z - q->z;
-        Graphu64_CrossVectors(&D_80111D30, &b, &a);
+        Graphu64_CrossVectors(&g_cachedCeilingCrossProduct, &b, &a);
     }
-    *out = D_80111D30;
-    D_800CD3E0 = (int)node;
+    *out = g_cachedCeilingCrossProduct;
+    g_cachedCeilingCrossProductNode = (int)node;
     return out;
 }
 
@@ -488,245 +488,245 @@ void Region_ClearNodeGroupFlag(void *modelTreeNode) {
     }
 }
 
-f32 Region_SetNodeGroupHeight(u16 *arg0, f32 arg1) {
-    f32 result = arg1;
-    if (arg0 != 0) {
-        result = Region_SetMatchingVertexHeights(arg0, arg1, *arg0);
+f32 Region_SetNodeGroupHeight(u16 *modelTreeNode, f32 height) {
+    f32 result = height;
+    if (modelTreeNode != 0) {
+        result = Region_SetMatchingVertexHeights(modelTreeNode, height, *modelTreeNode);
     }
     return result;
 }
 
-void Region_MarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 arg1) {
+void Region_MarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 matchingModelId) {
     u16 modelId;
     u16 flags;
-    void *temp_a0;
+    void *branch;
 
     modelId = modelTreeNode->modelId;
-    if (modelId == arg1) {
+    if (modelId == matchingModelId) {
         flags = modelTreeNode->flags;
         if (!(flags & 4)) {
-            temp_a0 = modelTreeNode->branches[0];
+            branch = modelTreeNode->branches[0];
             modelTreeNode->flags = flags | 4;
-            if (temp_a0 != 0) {
-                Region_MarkMatchingNodes(temp_a0, modelId);
+            if (branch != 0) {
+                Region_MarkMatchingNodes(branch, modelId);
             }
-            temp_a0 = modelTreeNode->branches[1];
-            if (temp_a0 != 0) {
-                Region_MarkMatchingNodes(temp_a0, modelId);
+            branch = modelTreeNode->branches[1];
+            if (branch != 0) {
+                Region_MarkMatchingNodes(branch, modelId);
             }
-            temp_a0 = modelTreeNode->branches[2];
-            if (temp_a0 != 0) {
-                Region_MarkMatchingNodes(temp_a0, modelId);
+            branch = modelTreeNode->branches[2];
+            if (branch != 0) {
+                Region_MarkMatchingNodes(branch, modelId);
             }
         }
     }
 }
 
-void Region_UnmarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 arg1) {
+void Region_UnmarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 matchingModelId) {
     u16 modelId;
     u16 flags;
-    void *temp_a0;
+    void *branch;
 
     modelId = modelTreeNode->modelId;
-    if (modelId == arg1) {
+    if (modelId == matchingModelId) {
         flags = modelTreeNode->flags;
         if (flags & 4) {
-            temp_a0 = modelTreeNode->branches[0];
+            branch = modelTreeNode->branches[0];
             modelTreeNode->flags = flags & 0xFFFB;
-            if (temp_a0 != 0) {
-                Region_UnmarkMatchingNodes(temp_a0, modelId);
+            if (branch != 0) {
+                Region_UnmarkMatchingNodes(branch, modelId);
             }
-            temp_a0 = modelTreeNode->branches[1];
-            if (temp_a0 != 0) {
-                Region_UnmarkMatchingNodes(temp_a0, modelId);
+            branch = modelTreeNode->branches[1];
+            if (branch != 0) {
+                Region_UnmarkMatchingNodes(branch, modelId);
             }
-            temp_a0 = modelTreeNode->branches[2];
-            if (temp_a0 != 0) {
-                Region_UnmarkMatchingNodes(temp_a0, modelId);
+            branch = modelTreeNode->branches[2];
+            if (branch != 0) {
+                Region_UnmarkMatchingNodes(branch, modelId);
             }
         }
     }
 }
 
-f32 Region_SetMatchingVertexHeights(u16 *arg0, f32 arg1, u16 arg2) {
-    u16 *node = arg0;
-    u16 id = arg2;
+f32 Region_SetMatchingVertexHeights(u16 *modelTreeNode, f32 height, u16 modelId) {
+    u16 *node = modelTreeNode;
+    u16 id = modelId;
 
     if (*node == id) {
-        if (((struct func_802077F4_S2 *) ((ObjectLinks1C *) node)->unk_4)->unk4 != arg1 ||
-            ((struct func_802077F4_S2 *) ((ObjectLinks1C *) node)->unk_8)->unk4 != arg1 ||
-            ((struct func_802077F4_S2 *) ((ObjectLinks1C *) node)->unk_C)->unk4 != arg1) {
-            ((struct func_802077F4_S2 *) ((ObjectLinks1C *) node)->unk_4)->unk4 = arg1;
-            ((struct func_802077F4_S2 *) ((ObjectLinks1C *) node)->unk_8)->unk4 = arg1;
-            ((struct func_802077F4_S2 *) ((ObjectLinks1C *) node)->unk_C)->unk4 = arg1;
+        if (((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_4)->unk4 != height ||
+            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_8)->unk4 != height ||
+            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_C)->unk4 != height) {
+            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_4)->unk4 = height;
+            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_8)->unk4 = height;
+            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_C)->unk4 = height;
 
-            if (((ObjectLinks1C *)(node))->unk_10.v0 != 0) {
-                Region_SetMatchingVertexHeights(((ObjectLinks1C *)(node))->unk_10.v1, arg1, id);
+            if (((RegionTriangleVertexView *)(node))->unk_10.v0 != 0) {
+                Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->unk_10.v1, height, id);
             }
-            if (((ObjectLinks1C *)(node))->unk_14.v0 != 0) {
-                Region_SetMatchingVertexHeights(((ObjectLinks1C *)(node))->unk_14.v1, arg1, id);
+            if (((RegionTriangleVertexView *)(node))->unk_14.v0 != 0) {
+                Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->unk_14.v1, height, id);
             }
-            if (((ObjectLinks1C *)(node))->unk_18.v0 != 0) {
-                Region_SetMatchingVertexHeights(((ObjectLinks1C *)(node))->unk_18.v1, arg1, id);
+            if (((RegionTriangleVertexView *)(node))->unk_18.v0 != 0) {
+                Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->unk_18.v1, height, id);
             }
         }
     }
 }
 
-void Region_ExpandPointBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
+void Region_ExpandPointBounds(f32 *bounds, s32 pointCount, CVector3 *points)
 {
     s32 i;
     i = 0;
-    if (arg1 > 0) {
+    if (pointCount > 0) {
         do {
             {
-                f32 value = arg2[i].x;
-                f32 bound = arg0[0];
+                f32 value = points[i].x;
+                f32 bound = bounds[0];
                 if (!(value <= bound)) {
                     value = bound;
                 }
-                arg0[0] = value;
+                bounds[0] = value;
             }
             {
-                f32 value = arg2[i].y;
-                f32 bound = arg0[1];
+                f32 value = points[i].y;
+                f32 bound = bounds[1];
                 if (!(value <= bound)) {
                     value = bound;
                 }
-                arg0[1] = value;
+                bounds[1] = value;
             }
             {
-                f32 value = arg2[i].z;
-                f32 bound = arg0[2];
+                f32 value = points[i].z;
+                f32 bound = bounds[2];
                 if (!(value <= bound)) {
                     value = bound;
                 }
-                arg0[2] = value;
+                bounds[2] = value;
             }
             {
-                f32 value = arg2[i].x;
-                f32 bound = arg0[3];
+                f32 value = points[i].x;
+                f32 bound = bounds[3];
                 if (!(bound <= value)) {
                     value = bound;
                 }
-                arg0[3] = value;
+                bounds[3] = value;
             }
             {
-                f32 value = arg2[i].y;
-                f32 bound = arg0[4];
+                f32 value = points[i].y;
+                f32 bound = bounds[4];
                 if (!(bound <= value)) {
                     value = bound;
                 }
-                arg0[4] = value;
+                bounds[4] = value;
             }
             {
-                f32 value = arg2[i].z;
-                f32 bound = arg0[5];
+                f32 value = points[i].z;
+                f32 bound = bounds[5];
                 if (!(bound <= value)) {
                     value = bound;
                 }
-                arg0[5] = value;
+                bounds[5] = value;
             }
             i += 1;
-        } while (i < arg1);
+        } while (i < pointCount);
     }
 }
 
-void Region_ComputeHorizontalBounds(void *arg0, s32 arg1, void *arg2) {
-    f32 *bounds = arg0;
-    CVector3 *points = arg2;
-    f32 temp_f0;
-    f32 temp_f0_2;
+void Region_ComputeHorizontalBounds(void *boundsStorage, s32 pointCount, void *pointStorage) {
+    f32 *bounds = boundsStorage;
+    CVector3 *points = pointStorage;
+    f32 pointX;
+    f32 pointZ;
 
-    if (arg1 != 0) {
-        temp_f0 = points->x;
-        bounds[2] = temp_f0;
-        bounds[0] = temp_f0;
-        temp_f0_2 = points->z;
-        bounds[3] = temp_f0_2;
-        bounds[1] = temp_f0_2;
-        Gregion_ExpandHorizontalBounds(arg0, arg1 - 1, points + 1);
+    if (pointCount != 0) {
+        pointX = points->x;
+        bounds[2] = pointX;
+        bounds[0] = pointX;
+        pointZ = points->z;
+        bounds[3] = pointZ;
+        bounds[1] = pointZ;
+        Gregion_ExpandHorizontalBounds(boundsStorage, pointCount - 1, points + 1);
     }
 }
 
 /* 800C9ACC.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80275688_CA6CC[2] = {
+const unsigned int k_GregionEncodedWords[2] = {
     0x3F800000, 0x3F000000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80275688_CA6CC_us_rev1.c */
-const unsigned int D_blob_6ed6742ca7aeefaa44c7[2] = {
+const unsigned int k_GregionEncodedWordsBlock1[2] = {
     0x3F800000, 0x3F000000,
 };
 #endif
 
 /* 800C9AD4.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_802757E4_CA6D4[2] = {
+const unsigned int g_Region_GetCachedUpQuatConstantWords[2] = {
     0x3F800000, 0x3F000000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802757E4_CA6D4_us_rev1.c */
-const unsigned int D_blob_704ee15b1ec28a1ee6e6[2] = {
+const unsigned int g_Region_TestPolygonSlopeFlagConstantWords[2] = {
     0x3F800000, 0x3F000000,
 };
 #endif
 
 /* 800C9ADC.CPP */
 /* ROM-grounded data: src/rw_pool_80275A58_CA6DC_us_rev1.c */
-const unsigned int D_blob_1dd2bb61dda88f70e062[1] = {
+const unsigned int g_Region_ScaleWordsToFloatsConstantWords[1] = {
     0x3CF00000,
 };
 
 /* 800C9AE0.CPP */
 /* ROM-grounded data: src/rw_pool_80275BC8_CA6E0_us_rev1.c */
-const unsigned int D_blob_2007bd9d947de3a8f876[1] = {
+const unsigned int g_regionEdgeCrossDefaultUp_StorageWords[1] = {
     0x3F800000,
 };
 
 /* 800C9AE4.CPP */
 /* ROM-grounded data: src/rw_pool_80275C94_CA6E4_us_rev1.c */
-const unsigned int D_blob_39bb6df7b4af97a3ff93[2] = {
+const unsigned int g_regionNormalDefaultUp_StorageWords[2] = {
     0x3F800000, 0x3F800000,
 };
 
 /* 800C9AEC.CPP */
 /* ROM-grounded data: src/rw_pool_80275DD4_CA6EC_us_rev1.c */
-const unsigned int D_blob_be6f94624239bf08ad99[2] = {
+const unsigned int g_regionMissingPolygonHeight_StorageWords[2] = {
     0xC6600000, 0x3EAAAAAB,
 };
 
 /* 800C9AF4.CPP */
 /* ROM-grounded data: src/rw_pool_80275F28_CA6F4_us_rev1.c */
-const unsigned int D_blob_dd17c7991d2f6b062f5a[1] = {
+const unsigned int g_regionCeilingDefaultUp_StorageWords[1] = {
     0xBF800000,
 };
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C4938[2] = {
+unsigned int k_GregionEncodedWordsBlock2[2] = {
     0x00000800, 0x08001400,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C4CF8[2] = {
+unsigned int k_GregionEncodedWordsBlock5[2] = {
     0xB58637BD, 0x358637BD,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C4CB8[2] = {
+unsigned int k_GregionEncodedWordsBlock4[2] = {
     0x00000000, 0x46022082,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C4A08[2] = {
+unsigned int k_GregionEncodedWordsBlock3[2] = {
     0x3C40C0C1, 0x4F000000,
 };
 #endif

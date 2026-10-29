@@ -10,7 +10,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 
 #if (defined(VERSION_US) || defined(VERSION_EU)) && !defined(NON_MATCHING)
-/* US and EU keep their asm: their jump table sits inside D_auto_rodata_unresolved_800C55BC / _800C592C, which
+/* US and EU keep their asm: their jump table sits inside g_controllerButtonDispatchTableUs / _800C592C, which
  * have no unit split yet. */
 INCLUDE_ASM("span_1000", DispatchControllerButtonEvent);
 #endif
@@ -26,16 +26,16 @@ extern s32 GetMenuScreenOwner(void);
 static inline s32 ControllerButtonIsHeld(s16 device, s16 control) {
     s32 index = control / 8;
     s32 bit = 1 << (control - index * 8);
-    return (s8)D_8014D0B0->flags[index + device * 4] & bit;
+    return (s8)g_controllerEventState->flags[index + device * 4] & bit;
 }
 
 static inline void ControllerButtonSetHeld(s16 device, s16 control, s16 pressed) {
     s32 index = control / 8;
     s32 bit = 1 << (control - index * 8);
     if (pressed == 1) {
-        D_8014D0B0->flags[index + device * 4] |= bit;
+        g_controllerEventState->flags[index + device * 4] |= bit;
     } else {
-        D_8014D0B0->flags[index + device * 4] &= ~bit;
+        g_controllerEventState->flags[index + device * 4] &= ~bit;
     }
 }
 
@@ -97,7 +97,7 @@ void DispatchControllerButtonEvent(input_event *event) {
 #endif
 
 static inline ControllerAxisState *Controller_FindAxisState(s32 device, s16 control) {
-    return &D_8014D0B0->axes[device][control];
+    return &g_controllerEventState->axes[device][control];
 }
 
 void DispatchControllerAxisEvents(input_event *event) {
@@ -155,7 +155,7 @@ void Controller_DispatchControllerEvent(input_event *event) {
 
     s32 source;
 
-    if (D_8014D0B0->callback != 0 && D_8014D0B0->callback() == 1) {
+    if (g_controllerEventState->callback != 0 && g_controllerEventState->callback() == 1) {
         return;
     }
 
@@ -231,8 +231,8 @@ void Controller_DispatchControllerProfileChanges(char *controllerProfile) {
     if (!(current & (4))) goto release_c_down; if (previous & (4)) goto select_c_down; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (1), 1); return; release_c_down: if (!(previous & (4))) goto next_c_down; select_c_down: if (current & (4)) goto next_c_down; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (1), 0); return; next_c_down: /* C-Down */
 }
 
-void Controller_SetControllerEventFilter(s32 (*arg0)(void)) {
-    D_8014D0B0->callback = arg0;
+void Controller_SetControllerEventFilter(s32 (*filter)(void)) {
+    g_controllerEventState->callback = filter;
 }
 
 void Controller_ClearControllerFlags(void) {
@@ -247,14 +247,14 @@ void Controller_ClearControllerFlags(void) {
         do {
             idx = i + j * 4;
             i += 1;
-            context = D_8014D0B0;
+            context = g_controllerEventState;
             context->flags[idx] = 0;
         } while (i < 4);
         j += 1;
     } while (j < 0x10);
 }
 
-/** Store a word through the global pointer at D_8014D0B0. */
+/** Store a word through the global pointer at g_controllerEventState. */
 
 
 void *Cache_AllocateMemory(s32);
@@ -264,54 +264,54 @@ void *Cache_AllocateMemory(s32);
 void Controller_AllocateControllerContext(void) {
     Callback *callback;
     callback = Cache_AllocateMemory(0xC44);
-    D_8014D0B0 = callback;
+    g_controllerEventState = callback;
     XPlus_FillBytes(callback, 0, 0xC44);
 }
 
 void Controller_FreeControllerContext(void) {
-    Cache_FreeMemory(D_8014D0B0);
-    D_8014D0B0 = 0;
+    Cache_FreeMemory(g_controllerEventState);
+    g_controllerEventState = 0;
 }
 
-void Controller_SendControllerButtonEvent(s16 arg0, s16 arg1, s32 arg2) {
+void Controller_SendControllerButtonEvent(s16 device, s16 control, s32 pressed) {
     input_event m;
 
     m.source = 4;
-    m.device = arg0;
+    m.device = device;
     m.kind = 1;
-    m.control = arg1;
+    m.control = control;
     m.reserved08 = 0;
-    m.pressed = arg2 != 0;
+    m.pressed = pressed != 0;
     m.x = 0;
     m.y = 0;
     m.z = 0;
     Controller_DispatchControllerEvent(&m);
 }
 
-void Controller_SendControllerStickEvent(s16 arg0, s32 arg1, s32 arg2) {
+void Controller_SendControllerStickEvent(s16 device, s32 stickX, s32 stickY) {
     input_event m;
 
     m.source = 4;
     m.kind = 3;
     m.control = 0x162;
-    m.x = arg1 * 0x64;
-    m.device = arg0;
+    m.x = stickX * 0x64;
+    m.device = device;
     m.reserved08 = 0;
     m.pressed = 0;
-    m.y = arg2 * 0x64;
+    m.y = stickY * 0x64;
     m.z = 0;
     Controller_DispatchControllerEvent(&m);
 }
 
 #if defined(VERSION_US)
-const unsigned int D_auto_rodata_unresolved_800C55BC[13] = {
+const unsigned int g_controllerButtonDispatchTableUs[13] = {
     0x40000000, 0x00299F18, 0x00299F9C, 0x0029A020, 0x0029A0A4, 0x0029A134, 0x0029A134, 0x0029A134,
     0x00299E38, 0x00299EA8, 0x00400000, 0x00020004, 0x00000004,
 };
 #endif
 
 #if defined(VERSION_EU)
-const unsigned int D_auto_rodata_unresolved_800C592C[13] = {
+const unsigned int g_controllerButtonDispatchTableEu[13] = {
     0x14C00009, 0x0029A0F8, 0x0029A17C, 0x0029A200, 0x0029A284, 0x0029A314, 0x0029A314, 0x0029A314,
     0x0029A018, 0x0029A088, 0x00C81804, 0x00A91006, 0x00624025,
 };
@@ -325,7 +325,7 @@ const unsigned int D_auto_rodata_unresolved_800C592C[13] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C56B4[3] = {
+unsigned int k_MathControllerEventsEncodedWords[3] = {
     0x00000000, 0x3FF00000, 0x00000000,
 };
 #endif

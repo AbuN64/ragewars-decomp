@@ -6,7 +6,7 @@
 #include "COMMON/ALBANK_S.H"
 #include "TYPES.H"
 #include "AUDIO/EXTERNS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
 /* Updates a playing view each frame: records the result of func_802395A4_de for its position in the context, selects its channel and checks whether it still plays; a view past its end, finished once, or whose track changed is marked done, and a done view that still plays is stopped once per frame and loses its handle; a stopped view first waits out its hold count, then is released with its slot and state cleared unless it is fading, while a playing view copies its tracked position and runs its three per-frame updates. The first channel selection matches as an inline helper returning the channel. */
 
@@ -46,9 +46,9 @@ void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
     Slots *slots;
     s32 playing;
 
-    view->context->result = Gsky_FindNearestCamera(&D_80145088, &view->position);
+    view->context->result = Gsky_FindNearestCamera(&g_frontendScreenStatus, &view->position);
     playing = alSndpGetState(selectChannel(view->context, view->slot));
-    if (view->time <= D_800C3F68_de || ((view->flags & 4) && view->finished == 0)) {
+    if (view->time <= g_voicePlaybackTimeThreshold || ((view->flags & 4) && view->finished == 0)) {
         view->done = 1;
     }
     if (view->followTrack != 0 && view->context->track != view->trackId) {
@@ -210,12 +210,12 @@ typedef struct SoundPlayer {
     SoundEngine *engine;
     SoundVoice voices[1];
 } SoundPlayer;
-extern s32 D_800CBAD4[];
-extern s32 D_800CBAE4[];
-extern s32 func_8025E518_de(void *);
-extern s32 func_8025E524_de(void *);
-extern s32 func_8025E548_de(void *);
-extern s32 func_8025E578_de(void *);
+extern s32 g_noteVoicePrimaryKeyTable[];
+extern s32 g_noteVoiceSecondaryKeyTable[];
+extern s32 SoundInfo_GetPriority(void *);
+extern s32 SoundInfo_GetMode(void *);
+extern s32 SoundInfo_GetPan(void *);
+extern s32 SoundInfo_GetFlags(void *);
 extern s16 alSndpAllocate(void *, s32);
 /* Starts a note on a free voice: picks the voice with Channel_SelectVoiceSlot, asks the sound set for its sample, and
  * fills in the voice record (volume, pan, pitch, which categories its effect belongs to). Returns the voice, or
@@ -237,23 +237,23 @@ SoundVoice *Channel_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *
     SoundVoiceParameters *parameters;
     char *pool;
 
-    count = func_8025E500_de(note);
-    priority = (s8)func_8025E518_de(note);
+    count = SoundInfo_GetGroup(note);
+    priority = (s8)SoundInfo_GetPriority(note);
     engine = player->engine;
     slots = engine->state.slots;
     if (player->engine->state.bank->instArray[0]->soundCount < count) {
         return 0;
     }
     Sound_AcquireContextLock((s32 *)engine);
-    if ((s8)func_8025E524_de(note) != 100) {
+    if ((s8)SoundInfo_GetMode(note) != 100) {
         roll = Graphu64_NextRandomValue();
         roll %= 100;
-        roll = roll < (s8)func_8025E524_de(note);
+        roll = roll < (s8)SoundInfo_GetMode(note);
         if (!roll) {
             goto fail;
         }
     }
-    index = Channel_SelectVoiceSlot((RecordD90 *)player, (s16)variant, count, priority, (s16)func_8025E578_de(note));
+    index = Channel_SelectVoiceSlot((RecordD90 *)player, (s16)variant, count, priority, (s16)SoundInfo_GetFlags(note));
     if (index == -1) {
         goto fail;
     }
@@ -290,14 +290,14 @@ fail:
     voice->f_C0 = player->engine->f2BAC;
     voice->flagBC = 0;
     for (i = 0; i < 4; i++) {
-        if (voice->f_A8 == D_800CBAD4[i]) {
+        if (voice->f_A8 == g_noteVoicePrimaryKeyTable[i]) {
             voice->flagBC = 1;
             break;
         }
     }
     voice->flagC4 = 1;
     for (i = 0; i < 6; i++) {
-        if (voice->f_A8 == D_800CBAE4[i]) {
+        if (voice->f_A8 == g_noteVoiceSecondaryKeyTable[i]) {
             voice->flagC4 = 0;
             break;
         }
@@ -317,8 +317,8 @@ fail:
     parameters->pitchOffset = notePitch;
     voice->parameters.effect = player->engine->effect;
     parameters->gain = 1.0f;
-    parameters->mode = func_8025E548_de(note);
-    voice->noteWord = (s16)func_8025E578_de(note);
+    parameters->mode = SoundInfo_GetPan(note);
+    voice->noteWord = (s16)SoundInfo_GetFlags(note);
     parameters->zero50 = 0;
     Sound_ReleaseContextLock((s32 *)player->engine);
     return voice;

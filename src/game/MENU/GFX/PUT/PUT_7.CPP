@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
-const unsigned int rodata_unresolved_800ED9DC[1] = {
+const unsigned int k_PutEncodedWordsBlock2[1] = {
     0x08000042,
 };
 #endif

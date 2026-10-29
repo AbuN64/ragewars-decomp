@@ -2,7 +2,7 @@
 #include "COMMON/STATEPAIR.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/SLOTRECATCV1.H"
@@ -13,19 +13,19 @@
 #include "RESMGR/FRAME_HEAP_LIFETIME.H"
 
 void Tsmos_ShutdownFrontend(void) {
-    extern struct Triple D_800D2C90;
+    extern struct Triple g_frontendShutdownState;
     s32 *selected;
     Menu_DestroyScreenManager();
     Node_CloseResourceArchive();
     ESmem_FreeFrameHeaps();
     Gfx_ShutdownFrontendServices();
-    selected = &D_800D2C90.z;
+    selected = &g_frontendShutdownState.z;
     *selected = 0;
     Tsmos_DeactivateControllerState();
-    D_800D2C90.x = 0;
+    g_frontendShutdownState.x = 0;
 }
 
-extern f32 D_800C5DB8_de, D_800C5DBC_de;
+extern f32 g_frontendWidgetHorizontalScale, g_frontendWidgetVerticalScale;
 
 void Tsmos_ScaleWidgetTree(Widget *widget, Widget *parent) {
     if (widget != 0) {
@@ -37,8 +37,8 @@ void Tsmos_ScaleWidgetTree(Widget *widget, Widget *parent) {
             if (widget->links[1] != 0) Tsmos_ScaleWidgetTree(widget->links[1], widget);
         }
         if (widget->scaled == 0) {
-            f32 factorX = D_800C5DB8_de;
-            f32 factorY = D_800C5DBC_de;
+            f32 factorX = g_frontendWidgetHorizontalScale;
+            f32 factorY = g_frontendWidgetVerticalScale;
             if (widget->kind == 4) {
                 widget->scaleX = factorX;
                 widget->scaleY = factorY;
@@ -64,7 +64,7 @@ void Tsmos_ScaleWidgetTree(Widget *widget, Widget *parent) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802A24FC[1] = {
+unsigned int k_TsmosScalewidgettreeEncodedWords[1] = {
     0x41445F52,
 };
 #endif

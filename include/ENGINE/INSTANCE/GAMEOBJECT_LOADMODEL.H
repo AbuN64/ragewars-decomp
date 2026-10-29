@@ -1,5 +1,5 @@
 #ifndef ENGINE_INSTANCE_GAMEOBJECT_LOADMODEL_H
 #define ENGINE_INSTANCE_GAMEOBJECT_LOADMODEL_H
-#include "COMMON/OBJECTLINKS180_2.H"
-extern void func_8024715C_de(char *, CVector3 *);
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
+extern void Gobjinst_MoveActorWithContactCallback(char *, CVector3 *);
 #endif

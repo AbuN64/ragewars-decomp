@@ -31,56 +31,56 @@ void PAKInterface_ResolvePlayerPakState(s32 player)
       case -3:
 
       case -1:
-        D_800E54A4->players[player].state = 3;
+        g_pakProfileScreenState->players[player].state = 3;
         break;
 
       case 0:
-        if (D_800E54A4->phase == 6)
+        if (g_pakProfileScreenState->phase == 6)
       {
-        D_800E54A4->players[player].state = D_800E54A4->players[player].next;
+        g_pakProfileScreenState->players[player].state = g_pakProfileScreenState->players[player].next;
       }
       else
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        if (Note_FindNoteByName(((D_800E25A4)[g_languageIndex]), player, &result) == one)
+        if (Note_FindNoteByName(((g_pakProfileGameNames)[g_languageIndex]), player, &result) == one)
 #else
-        if (Note_FindNoteByName((D_800D36D4), player, &result) == one)
+        if (Note_FindNoteByName((g_pakProfileGameNameFixed), player, &result) == one)
 #endif
       {
         if (PAKInterface_ReadRecordsNote(player, result) == one)
         {
-          D_800E54A4->players[player].state = D_800E54A4->players[player].next;
-          switch (D_800E54A4->phase)
+          g_pakProfileScreenState->players[player].state = g_pakProfileScreenState->players[player].next;
+          switch (g_pakProfileScreenState->phase)
           {
             case 0:
               if (PAKInterface_FindEmptyProfileSlot(player) == (-1))
             {
-              D_800E54A4->players[player].state = 24;
+              g_pakProfileScreenState->players[player].state = 24;
             }
               break;
 
             case 7:
               if (PAKInterface_AreProfileSlotsEmpty(player) == one)
             {
-              D_800E54A4->players[player].state = 15;
+              g_pakProfileScreenState->players[player].state = 15;
             }
               break;
 
             case 2:
               if (PAKInterface_AreProfileSlotsEmpty(player) == one)
             {
-              D_800E54A4->players[player].state = 25;
+              g_pakProfileScreenState->players[player].state = 25;
             }
             else
-              if ((D_800E54A4->players[player].host == one) && (PAKInterface_FindEmptyProfileSlot(player) == (-1)))
+              if ((g_pakProfileScreenState->players[player].host == one) && (PAKInterface_FindEmptyProfileSlot(player) == (-1)))
             {
-              D_800E54A4->players[player].state = 24;
+              g_pakProfileScreenState->players[player].state = 24;
             }
               break;
 
             case 5:
               if (Frontend_CheckOwnedProfileIds(player) == 0)
             {
-              D_800E54A4->players[player].state = 21;
+              g_pakProfileScreenState->players[player].state = 21;
             }
               break;
 
@@ -90,7 +90,7 @@ void PAKInterface_ResolvePlayerPakState(s32 player)
       }
       else
       {
-        switch (D_800E54A4->phase)
+        switch (g_pakProfileScreenState->phase)
         {
           case 0:
 
@@ -98,22 +98,22 @@ void PAKInterface_ResolvePlayerPakState(s32 player)
 
           case 7:
             random = Graphu64_NextRandom();
-            D_800E54A4->players[player].state = 15;
-            D_800E54A4->players[player].profile = (random % 9999999) + 1;
+            g_pakProfileScreenState->players[player].state = 15;
+            g_pakProfileScreenState->players[player].profile = (random % 9999999) + 1;
             break;
 
           case 5:
-            D_800E54A4->players[player].state = 21;
+            g_pakProfileScreenState->players[player].state = 21;
             break;
 
           case 4:
-            D_800E54A4->players[player].state = D_800E54A4->players[player].next;
+            g_pakProfileScreenState->players[player].state = g_pakProfileScreenState->players[player].next;
             break;
 
           case 2:
 
           case 3:
-            D_800E54A4->players[player].state = 25;
+            g_pakProfileScreenState->players[player].state = 25;
             break;
 
         }
@@ -126,7 +126,7 @@ void PAKInterface_ResolvePlayerPakState(s32 player)
       case -2:
 
       default:
-        D_800E54A4->players[player].state = one;
+        g_pakProfileScreenState->players[player].state = one;
         break;
 
     }

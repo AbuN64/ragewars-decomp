@@ -8,31 +8,31 @@
 #if !(defined(VERSION_US))
 /* Append one selected character to an eight-character entry buffer. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern char D_80145040;
+extern char g_playerViewRenderContext;
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-extern struct LocalizedInputState D_80145040;
+extern struct LocalizedInputState g_playerViewRenderContext;
 #endif
 
-extern EntryRecAtCV2 D_800E63C0[];
+extern NameSpinnerEntry g_multiplayerNameEntryStates[];
 
 extern s32 Player_GetPlayerIndex(void *,s32);
 
-s32 Setup_AppendNameCharacter(ObjRecAt14V2 *arg0, MenuRules *arg1) {
- s32 value; s32 count; s32 index=Player_GetPlayerIndex(&D_80145040,arg1->locked);
- D_800E63C0[index].timer=0;
- if(D_800E63C0[index].count == 8) return 0;
+s32 Setup_AppendNameCharacter(TextEntryBufferView *textEntry, MenuRules *menuRules) {
+ s32 value; s32 count; s32 index=Player_GetPlayerIndex(&g_playerViewRenderContext,menuRules->locked);
+ g_multiplayerNameEntryStates[index].timer=0;
+ if(g_multiplayerNameEntryStates[index].count == 8) return 0;
  {
- D_800E63C0[index].text[D_800E63C0[index].value]=
+ g_multiplayerNameEntryStates[index].text[g_multiplayerNameEntryStates[index].value]=
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-     **arg0->unk14;
+     **textEntry->textBuffer;
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-     *arg0->unk14[D_80145040.language];
+     *textEntry->textBuffer[g_playerViewRenderContext.language];
 #endif
- value=D_800E63C0[index].value+1;
- count=D_800E63C0[index].count+1;
- D_800E63C0[index].value=value;
- D_800E63C0[index].count=count;
- D_800E63C0[index].text[count]=0;
+ value=g_multiplayerNameEntryStates[index].value+1;
+ count=g_multiplayerNameEntryStates[index].count+1;
+ g_multiplayerNameEntryStates[index].value=value;
+ g_multiplayerNameEntryStates[index].count=count;
+ g_multiplayerNameEntryStates[index].text[count]=0;
  }
  return 0;
 }

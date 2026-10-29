@@ -4,8 +4,8 @@
 #include "TYPES.H"
 #include "FRONTEND/PAKINTERFACE_REASSIGNLOCALPROFILES.H"
 
-/* Reorders the four 400-byte player records D_80102B00 by the players' choices: copies all four to
-   the buffer at 0x2E28 of the block D_800E54A4 points to and resets each through Player_InitializeProfile,
+/* Reorders the four 400-byte player records g_localPlayerProfiles by the players' choices: copies all four to
+   the buffer at 0x2E28 of the block g_pakProfileScreenState points to and resets each through Player_InitializeProfile,
    copies back the record each player chose (index at 0xB28 of its 2920-byte record at 0x58) into
    that player's place, and then places every unchosen buffered record whose owner byte 0xD is not
    negative into the first place whose owner byte is still negative, all through XPlus_CopyBytes. */
@@ -16,7 +16,7 @@
 
 
 
-extern struct RecordPAKInterfaceReassignLocalProfiles D_80102B00[];
+extern struct RecordPAKInterfaceReassignLocalProfiles g_localPlayerProfiles[];
 extern void Player_InitializeProfile(struct RecordPAKInterfaceReassignLocalProfiles *);
 
 void PAKInterface_ReassignLocalProfiles(void) {
@@ -27,25 +27,25 @@ void PAKInterface_ReassignLocalProfiles(void) {
     s32 j;
 
     size = 400;
-    XPlus_CopyBytes(D_800E54A4->packet.saved, D_80102B00, 0x640);
+    XPlus_CopyBytes(g_pakProfileScreenState->packet.saved, g_localPlayerProfiles, 0x640);
     for (i = 0; i < 4; i++) {
-        Player_InitializeProfile(&D_80102B00[i]);
+        Player_InitializeProfile(&g_localPlayerProfiles[i]);
         used[i] = 0;
     }
     for (i = 0; i < 4; i++) {
-        chosen = D_800E54A4->players[i].port;
+        chosen = g_pakProfileScreenState->players[i].port;
         if (chosen >= 0) {
-            XPlus_CopyBytes(&D_80102B00[i], &D_800E54A4->packet.saved[chosen], size);
+            XPlus_CopyBytes(&g_localPlayerProfiles[i], &g_pakProfileScreenState->packet.saved[chosen], size);
             used[chosen] = 1;
         }
     }
     for (i = 0; i < 4; i++) {
-        if (used[i] != 0 || D_800E54A4->packet.saved[i].player < 0) {
+        if (used[i] != 0 || g_pakProfileScreenState->packet.saved[i].player < 0) {
             continue;
         }
         for (j = 0; j < 4; j++) {
-            if (D_80102B00[j].owner < 0) {
-                XPlus_CopyBytes(&D_80102B00[j], &D_800E54A4->packet.saved[i], size);
+            if (g_localPlayerProfiles[j].owner < 0) {
+                XPlus_CopyBytes(&g_localPlayerProfiles[j], &g_pakProfileScreenState->packet.saved[i], size);
                 break;
             }
         }

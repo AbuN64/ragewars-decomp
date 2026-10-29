@@ -1,6 +1,6 @@
 #include "COMMON/NODERECAT2A8.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/LONE/D_800DEA60.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/LONE/FRONTEND_VIEWPORT_WIDTH.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/INTEGERSTATE530.H"
@@ -21,25 +21,25 @@
 
 
 
-extern s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *a, struct Shape_typemap_165 *box, Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped *args);
+extern s32 Widget_ComputeWidgetBounds(struct CacheResourceBlockView *a, struct CacheResourceBlockView *box, Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped *args);
 
 extern void N64Eng_GetClipBounds(s32 *left, s32 *right, s32 *top, s32 *bottom);
 
-extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct CacheResourceBlockView *clip);
 
 
 /* Resets the state and copies the two configured values after initialization. */
 
 
 
-extern struct Shape_typemap_165 D_8014D580;
+extern struct CacheResourceBlockView g_frontendClipBounds;
 extern void Widget_DrawWidget(Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped args);
 
 void Widget_DrawVisibleWidgetClipped(Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped args) {
-    struct Shape_typemap_165 box;
-    struct Shape_typemap_165 area;
-    struct Shape_typemap_165 saved;
-    struct Shape_typemap_165 clip;
+    struct CacheResourceBlockView box;
+    struct CacheResourceBlockView area;
+    struct CacheResourceBlockView saved;
+    struct CacheResourceBlockView clip;
     DrawArgsFrontendDrawVisibleWidgetClipped local;
     s32 clipped;
 
@@ -48,17 +48,17 @@ void Widget_DrawVisibleWidgetClipped(Widget *widget, DrawArgsFrontendDrawVisible
         local = args;
         if (Widget_ComputeWidgetBounds(&area, &box, widget, &local) != 0) {
             if (local.flags & 0x200) {
-                N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+                N64Eng_GetClipBounds(&saved.first, &saved.third, &saved.second, &saved.fourth);
                 clip = saved;
                 if (Node_ClampRectToClip(&clip, &box) == 0) {
                     return;
                 }
                 clipped = 1;
-                N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+                N64Eng_SetClipBounds(clip.first, clip.third, clip.second, clip.fourth);
             }
             Widget_DrawWidget(widget, args);
             if (clipped) {
-                N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+                N64Eng_SetClipBounds(saved.first, saved.third, saved.second, saved.fourth);
             }
         }
     }
@@ -75,14 +75,14 @@ void Widget_DrawVisibleSiblings(Widget *node, DrawArgsFrontendDrawVisibleWidgetC
 
 void Widget_ResetTextClipBounds(void) {
 
-    struct Shape_typemap_165 *state;
+    struct CacheResourceBlockView *state;
 
     Widget_FlushTextBatches();
-    state = &D_8014D580;
-    state->field_8 = 0;
-    state->field_0 = 0;
-    state->field_4 = D_800DEA60;
-    state->field_C = D_800E2AB4_de;
+    state = &g_frontendClipBounds;
+    state->third = 0;
+    state->first = 0;
+    state->second = g_frontendViewportWidth;
+    state->fourth = g_frontendViewportHeight;
 }
 
 void Widget_SetWidgetFlag08(void *object, int enabled) {
@@ -147,7 +147,7 @@ void Widget_SetPairValues(struct Pair14 *record, s16 first, s16 second) {
 
 
 
-void Widget_FindWidgetAtPoint(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgsFrontendDrawVisibleWidgetClipped args, s32 px, s32 py) {
+void Widget_FindWidgetAtPoint(WidgetPointHitView **hit, WidgetPointHitView *node, DrawArgsFrontendDrawVisibleWidgetClipped args, s32 px, s32 py) {
     if (*hit != 0) {
         return;
     }
@@ -246,7 +246,7 @@ s32 Widget_ListHasFlag100(struct WidgetNode *node) {
    reports the totals through the two pointers. */
 
 
-void Widget_SumNodeOffsets(struct NodeRecAt16 *node, s32 *x, s32 *y) {
+void Widget_SumNodeOffsets(struct WidgetAncestorOffsetView *node, s32 *x, s32 *y) {
     s32 sumX = node->x;
     s32 sumY = node->y;
 

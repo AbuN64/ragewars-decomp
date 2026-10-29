@@ -17,13 +17,13 @@ typedef struct ListNode ListNode;
 
 struct ListNode;
 
-struct NodeRecAtAC;
-typedef struct NodeRecAtAC NodeRecAtAC;
+struct AudioPendingFlagsNode;
+typedef struct AudioPendingFlagsNode AudioPendingFlagsNode;
 
-struct NodeRecAtAC;
-struct NodeRecAtAC {
-    struct NodeRecAtAC *prev;
-    struct NodeRecAtAC *next;
+struct AudioPendingFlagsNode;
+struct AudioPendingFlagsNode {
+    struct AudioPendingFlagsNode *prev;
+    struct AudioPendingFlagsNode *next;
     char pad8[0xA4];
     s32 flags;
 };
@@ -31,28 +31,28 @@ struct NodeRecAtAC {
 struct Lists;
 
 
-struct VoiceRecAt8;
-typedef struct VoiceRecAt8 VoiceRecAt8;
+struct AudioChannelVoiceNode;
+typedef struct AudioChannelVoiceNode AudioChannelVoiceNode;
 
-extern void Audio_ResolveInstrumentSectionOne(void *arg0, s16 index);
+extern void Audio_ResolveInstrumentSectionOne(void *instrument, s16 index);
 
-struct ManagerRecAtD8V2;
-typedef struct ManagerRecAtD8V2 ManagerRecAtD8V2;
+struct AudioSpatialVoiceManagerView;
+typedef struct AudioSpatialVoiceManagerView AudioSpatialVoiceManagerView;
 
 
-struct ObjectLinks8;
-typedef struct ObjectLinks8 ObjectLinks8;
+struct AudioVoiceListLinks;
+typedef struct AudioVoiceListLinks AudioVoiceListLinks;
 
 struct Lists;
 typedef struct Lists Lists;
 
-struct Link_func_80259784_de;
-typedef struct Link_func_80259784_de Link_func_80259784_de;
+struct AudioPendingSoundLinks;
+typedef struct AudioPendingSoundLinks AudioPendingSoundLinks;
 
-struct NodeRecAt4C;
-struct NodeRecAt4C {
-    struct NodeRecAt4C *prev;
-    struct NodeRecAt4C *next;
+struct AudioPrioritizedSoundNode;
+struct AudioPrioritizedSoundNode {
+    struct AudioPrioritizedSoundNode *prev;
+    struct AudioPrioritizedSoundNode *next;
     char pad8[0x14];
     s32 timer;
     char pad20[0x20];
@@ -62,18 +62,18 @@ struct NodeRecAt4C {
     CVector3 position;
 };
 
-struct Link_func_80259784_de;
-struct NodeRecAt4C;
-struct Link_func_80259784_de {
-    struct NodeRecAt4C *prev;
-    struct NodeRecAt4C *next;
+struct AudioPendingSoundLinks;
+struct AudioPrioritizedSoundNode;
+struct AudioPendingSoundLinks {
+    struct AudioPrioritizedSoundNode *prev;
+    struct AudioPrioritizedSoundNode *next;
 };
 
-struct Entry_func_80259784_de;
-typedef struct Entry_func_80259784_de Entry_func_80259784_de;
+struct AudioDispatchBusySlot;
+typedef struct AudioDispatchBusySlot AudioDispatchBusySlot;
 
-struct Entry_func_80259784_de;
-struct Entry_func_80259784_de {
+struct AudioDispatchBusySlot;
+struct AudioDispatchBusySlot {
     char pad0[0xAC];
     s32 busy;
     char padB0[0x1C];
@@ -82,7 +82,7 @@ struct Entry_func_80259784_de {
 struct SceneCode802591C0;
 struct SceneCode802591C0 {
     char pad0[0x1DBC];
-    Entry_func_80259784_de entries[1];
+    AudioDispatchBusySlot entries[1];
     char pad1E88[0x2A84 - 0x1E88];
     s32 selection;
     s32 previousSelection;
@@ -90,14 +90,14 @@ struct SceneCode802591C0 {
     s16 activeSelection;
     s16 pendingSelection;
 };
-struct ManagerRecAtD8V2;
+struct AudioSpatialVoiceManagerView;
 struct SceneCode802591C0;
 
 
-struct ObjectLinks8;
+struct AudioVoiceListLinks;
 
 
-extern float D_800C8FF8;
+extern float g_listenerPanCenterAndRange;
 
 struct NodeAudioWorldRecyclePendingSoundsExceptKey;
 struct NodeAudioWorldRecyclePendingSoundsExceptKey {
@@ -108,9 +108,9 @@ struct NodeAudioWorldRecyclePendingSoundsExceptKey {
 };
 
 struct NodeAudioWorldRecyclePendingSoundsExceptKey;
-struct OwnerRecAtD8;
-struct OwnerRecAtD8 {
-    s32 unk00;
+struct AudioPendingSoundListOwner;
+struct AudioPendingSoundListOwner {
+    s32 reservedWord;
     struct NodeAudioWorldRecyclePendingSoundsExceptKey *activePrev;
     struct NodeAudioWorldRecyclePendingSoundsExceptKey *activeNext;
     char pad0C[0xD8 - 0xC];
@@ -153,7 +153,7 @@ struct SlotAudioIsSoundInstanceLimitReached {
 struct Cache;
 typedef struct Cache Cache;
 
-extern float D_800C3F00_de;
+extern float g_listenerPanCenterRadiusConstants;
 
 struct NodeAudioWorldRecyclePendingSoundsByIdentifier;
 struct NodeAudioWorldRecyclePendingSoundsByIdentifier {
@@ -167,8 +167,8 @@ struct NodeAudioWorldRecyclePendingSoundsByIdentifier {
 struct SlotAudioIsSoundInstanceLimitReached;
 typedef struct SlotAudioIsSoundInstanceLimitReached SlotAudioIsSoundInstanceLimitReached;
 
-struct ObjRecAt1E64;
-struct ObjRecAt1E64 {
+struct AudioInstanceLimitOwner;
+struct AudioInstanceLimitOwner {
     char pad[0x102];
     short owner;
     char pad104[0x1E64 - 0x104];
@@ -176,8 +176,8 @@ struct ObjRecAt1E64 {
 };
 
 
-struct ObjectLinks2B50;
-typedef struct ObjectLinks2B50 ObjectLinks2B50;
+struct AudioInstrumentPackView;
+typedef struct AudioInstrumentPackView AudioInstrumentPackView;
 
 struct CellCode802591C0;
 
@@ -204,10 +204,10 @@ struct EntryAudioWorldDispatchPendingSounds {
     s32 fieldA8;
 };
 
-struct NodeRecAtC8;
-struct NodeRecAtC8 {
-    struct NodeRecAtC8 *prev;
-    struct NodeRecAtC8 *next;
+struct AudioQueuedSoundNode;
+struct AudioQueuedSoundNode {
+    struct AudioQueuedSoundNode *prev;
+    struct AudioQueuedSoundNode *next;
     char channel[4];
     s32 volume;
     char pad10[4];
@@ -237,10 +237,10 @@ struct NodeRecAtC8 {
 };
 
 struct LinkAudioWorldQueuePrioritizedSound;
-struct NodeRecAtC8;
+struct AudioQueuedSoundNode;
 struct LinkAudioWorldQueuePrioritizedSound {
-    struct NodeRecAtC8 *prev;
-    struct NodeRecAtC8 *next;
+    struct AudioQueuedSoundNode *prev;
+    struct AudioQueuedSoundNode *next;
 };
 
 
@@ -248,24 +248,24 @@ struct LinkAudioWorldQueuePrioritizedSound {
 struct CellCode802591C0;
 typedef struct CellCode802591C0 CellCode802591C0;
 
-struct ObjRecAt1E64;
-typedef struct ObjRecAt1E64 ObjRecAt1E64;
+struct AudioInstanceLimitOwner;
+typedef struct AudioInstanceLimitOwner AudioInstanceLimitOwner;
 
 
 
 struct LinkAudioWorldQueuePrioritizedSound;
 typedef struct LinkAudioWorldQueuePrioritizedSound LinkAudioWorldQueuePrioritizedSound;
 
-struct ManagerRecAtD8V1;
+struct AudioPriorityQueueManagerView;
 
 struct NodeAudioWorldRecyclePendingSoundsExceptKey;
 typedef struct NodeAudioWorldRecyclePendingSoundsExceptKey NodeAudioWorldRecyclePendingSoundsExceptKey;
 
-struct ManagerRecAtD8V1;
-typedef struct ManagerRecAtD8V1 ManagerRecAtD8V1;
+struct AudioPriorityQueueManagerView;
+typedef struct AudioPriorityQueueManagerView AudioPriorityQueueManagerView;
 
-struct VoiceRecAt8;
-struct VoiceRecAt8 {
+struct AudioChannelVoiceNode;
+struct AudioChannelVoiceNode {
     ListLink link;
     Header header;
 };
@@ -277,13 +277,13 @@ struct ChannelSet {
     Header freeHeader;
     ListLink active;
     Header activeHeader;
-    VoiceRecAt8 voices[32];
+    AudioChannelVoiceNode voices[32];
 };
 
 
 
-struct NodeRecAtC8;
-typedef struct NodeRecAtC8 NodeRecAtC8;
+struct AudioQueuedSoundNode;
+typedef struct AudioQueuedSoundNode AudioQueuedSoundNode;
 
 struct EntryAudioWorldDispatchPendingSounds;
 struct ListHead;
@@ -306,16 +306,16 @@ struct Cache {
 
 
 
-struct OwnerRecAtD8;
-typedef struct OwnerRecAtD8 OwnerRecAtD8;
+struct AudioPendingSoundListOwner;
+typedef struct AudioPendingSoundListOwner AudioPendingSoundListOwner;
 
 
 struct EntryAudioWorldDispatchPendingSounds;
 typedef struct EntryAudioWorldDispatchPendingSounds EntryAudioWorldDispatchPendingSounds;
 
 
-struct NodeRecAt4C;
-typedef struct NodeRecAt4C NodeRecAt4C;
+struct AudioPrioritizedSoundNode;
+typedef struct AudioPrioritizedSoundNode AudioPrioritizedSoundNode;
 
 
 struct LinkPair;
@@ -330,14 +330,14 @@ typedef struct ContextCode802591C0 ContextCode802591C0;
 
 struct LinkPair;
 
-struct ObjectLinks2B50;
+struct AudioInstrumentPackView;
 
 struct ChannelSet;
 typedef struct ChannelSet ChannelSet;
 
-extern s16 func_8025E500_de(void *);
-extern s16 func_8025E50C_de(void *);
-extern s8 func_8025E554_de(void *);
+extern s16 SoundInfo_GetGroup(void *);
+extern s16 SoundInfo_GetSample(void *);
+extern s8 SoundInfo_GetPitch(void *);
 struct RecordD90;
 extern s16 Channel_SelectVoiceSlot(struct RecordD90 *, s32, s32, s16, s32);
 #endif

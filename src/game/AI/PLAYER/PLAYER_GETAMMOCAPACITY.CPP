@@ -15,27 +15,27 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "COMMON/PLAYERPROFILES.H"
 
-extern f32 D_800C2CE0_de[2];
+extern f32 g_playerDamageAndDistanceConstants[2];
 
 /** Start the round-end sequence once no menu or transition is active and any player is flagged. */
 extern int Cinema_IsSequenceInWindow(void);
 
 
-extern struct Shape_func_8021A2D4_de_2 D_801427FC;
+extern struct MemoryUsageStats g_playerRoundEndSignal;
 
 
 extern void Rumble_FreeAllPoolNodes(s32 *);
 
 
-extern void func_8024BE3C_de(void *base);
+extern void Gobjinst_UpdateActorController(void *base);
 
-extern void func_80246E44_de(char *);
+extern void Gobjinst_UpdateActorRootDisplacement(char *);
 
 
 
@@ -57,30 +57,30 @@ extern f32 Gobjinst_GetActorHeight(void);
 
 void *Playerai_FindNearestPlayer(void *world, s32 point, s32 pointYBits, s32 pointZBits) {
     f32 nearestDistanceSquared;
-    func_8022A470_S2 *candidatePlayer;
+    PlayerPositionListNode *candidatePlayer;
     void *result;
     f32 dx, dy, dz, distSq;
 
-    func_80228774_S1 *object;
+    WorldPlayerHeadView *object;
 
-    nearestDistanceSquared = D_800C2CE0_de[1];
+    nearestDistanceSquared = g_playerDamageAndDistanceConstants[1];
     object = world;
-    candidatePlayer = object->unk20;
+    candidatePlayer = object->players;
     result = 0;
     if (candidatePlayer != 0) {
         do {
-            dx = candidatePlayer->unk8 - *(f32 *)&point;
+            dx = candidatePlayer->positionX - *(f32 *)&point;
             dx = dx * dx;
-            dy = candidatePlayer->unkC - *(f32 *)&pointYBits;
+            dy = candidatePlayer->positionY - *(f32 *)&pointYBits;
             dy = dy * dy;
-            dz = candidatePlayer->unk10 - *(f32 *)&pointZBits;
+            dz = candidatePlayer->positionZ - *(f32 *)&pointZBits;
             dz = dz * dz;
             distSq = (dx + dy) + dz;
             if (distSq < nearestDistanceSquared) {
                 nearestDistanceSquared = distSq;
                 result = candidatePlayer;
             }
-            candidatePlayer = candidatePlayer->unk16E0;
+            candidatePlayer = candidatePlayer->next;
         } while (candidatePlayer != 0);
     }
     return result;
@@ -92,7 +92,7 @@ void *Playerai_FindNearestLivePlayer(struct Context *context, CVector3 position,
     void *nearestPlayer;
     f32 dx, dy, dz, distSq;
 
-    nearestDistanceSquared = D_800C2CE8_de;
+    nearestDistanceSquared = g_playerNearestLiveDistanceLimit;
     actor = (void *)context->head;
     nearestPlayer = 0;
     if (actor != 0) {
@@ -118,8 +118,8 @@ void *Playerai_FindNearestLivePlayer(struct Context *context, CVector3 position,
 
 s32 Player_GetPlayerIndex(void *world, unsigned int playerAddress)
 {
-    func_80203E78_S1 *arg0_record = world;
-  return (playerAddress - (arg0_record->unk4)) / 5864;
+    ResourceKeyView *playerArrayRecord = world;
+  return (playerAddress - (playerArrayRecord->key)) / 5864;
 }
 
 void *Playerai_FindPlayerByController(char *object, s32 controllerAddress) {
@@ -157,7 +157,7 @@ void *Playerai_GetPlayerByIndex(void *world, u32 playerIndex) {
     return actor;
 }
 
-void *func_8022A634_de(struct Context *context, u32 viewPlayerIndex) {
+void *Playerai_GetPlayerByViewIndex(struct Context *context, u32 viewPlayerIndex) {
     void *result;
     void *playerView;
     s32 currentViewIndex;
@@ -191,7 +191,7 @@ int Playerai_BeginRoundEnd(char *forcePlayerList) {
     if (Cinema_IsSequenceInWindow() != 0 || Cinema_IsSequenceActive() != 0 || g_world.frozen != 0) {
         return 0;
     }
-    t = &D_801462C8.counters;
+    t = &g_gameSettings.counters;
     if (t->state != 0 || t->elapsed == 0) {
         return 0;
     }
@@ -204,7 +204,7 @@ int Playerai_BeginRoundEnd(char *forcePlayerList) {
     if (count <= 0) {
         return 0;
     }
-    s = &D_801462C8.counters;
+    s = &g_gameSettings.counters;
     s->state = 1;
     s->elapsed = 0;
     return 1;
@@ -215,7 +215,7 @@ void Playerai_EndRound(void *roundContext) {
     Round *round = roundContext;
     Node_Weapons_EndRound *node;
 
-    state = &D_801462C8.counters;
+    state = &g_gameSettings.counters;
     if ((state->elapsed != 0) || (state->state != 0)) {
         return;
     }
@@ -239,10 +239,10 @@ void Playerai_EndRound(void *roundContext) {
         }
     }
 
-    D_801427FC.field_0 = 1;
+    g_playerRoundEndSignal.value = 1;
     node = (Node_Weapons_EndRound *)round->players;
     while (node != 0) {
-        node->field85C = 0;
+        node->roundEndTimer = 0;
         node->state[0x8E] = 1;
         node = node->next;
     }
@@ -273,18 +273,18 @@ void Playerai_ResetPlayerControllers(struct Context *object) {
     }
 }
 
-void func_8022A8C8_de(char *object, f32 arg1) {
-    ObjRecAt20V2 *object_record = (void *)object;
-    func_8022A8B8_S2 *record = object_record->unk20;
+void Playerai_SetAllPlayerTimeScales(char *object, f32 timeScale) {
+    GamePlayerListView *object_record = (void *)object;
+    PlayerTimeScaleListNode *record = object_record->players;
     if (record != 0) {
         do {
-            record->unk670 = arg1;
-            record = record->unk16E0;
+            record->timeScale = timeScale;
+            record = record->next;
         } while (record != 0);
     }
 }
 
-s32 func_8022A8F0_de(struct Context *context) {
+s32 Playerai_CountLocalActivePlayers(struct Context *context) {
     Shared_ActorView *record = (void *)context->head;
     s32 count = 0;
     if (record != 0) {
@@ -298,21 +298,21 @@ s32 func_8022A8F0_de(struct Context *context) {
     return count;
 }
 
-void func_8022A928_de(ObjRecAtB4 *record, int newValue) {
-    if (record->unk4 == newValue) {
-        record->unkB4 = 1;
+void Playerai_SetTrackedRecordValue(TrackedRecordValueView *record, int newValue) {
+    if (record->value == newValue) {
+        record->repeatedValue = 1;
     }
-    record->unk4 = newValue;
+    record->value = newValue;
 }
 
-void func_8022A940_de(Shared_Effect *effect) {
+void Playerai_StopActiveEffect(Shared_Effect *effect) {
     s32 val = effect->state;
     if (val != 0 && val != 3) {
         effect->state = 3;
     }
 }
 
-void func_8022A95C_de(void *player) {
+void Playerai_UpdateHeldWeaponPose(void *player) {
     LevelActor *base;
     s32 old_value;
     s32 new_value;
@@ -320,15 +320,15 @@ void func_8022A95C_de(void *player) {
 
     base = &((Shared_ActorView *)player)->weapon;
     old_value = ((Shared_ActorView *)player)->effectId;
-    saved_value = D_800D2988;
+    saved_value = g_frameElapsedTime;
     base->renderFlags = 0x10;
     base->flags &= 0xFFFDFFFF;
-    func_8024BE3C_de(base);
+    Gobjinst_UpdateActorController(base);
     if (((Shared_ActorView *)player)->stun <= 0.0f) {
-        func_80246E44_de(base);
+        Gobjinst_UpdateActorRootDisplacement(base);
     }
     new_value = ((Shared_ActorView *)player)->effectId;
-    D_800D2988 = saved_value;
+    g_frameElapsedTime = saved_value;
     if (old_value != new_value) {
         ((LevelActor *)player)->animationPending = 0;
     }
@@ -338,7 +338,7 @@ void func_8022A95C_de(void *player) {
     ((Shared_ActorView *)player)->weapon.rotation = ((LevelActor *)player)->rotation;
 }
 
-f32 func_8022AA44_de(SharedRecAt848 *rampState) {
+f32 Playerai_GetSequenceFade(PlayerSequenceFadeView *rampState) {
     f32 value;
     f32 scaled;
     f32 initial;
@@ -356,19 +356,19 @@ f32 func_8022AA44_de(SharedRecAt848 *rampState) {
     return 1.0f - value;
 }
 
-s32 func_8022AA9C_de(AimPlayer *aimPlayer, s32 weaponId) {
-    void *p = D_800D052C[weaponId];
-    if (aimPlayer->unk594 == 1) {
-        return ((GlobalState *)p)->field20;
+s32 Playerai_GetWeaponFireMode(AimPlayer *aimPlayer, s32 weaponId) {
+    void *p = g_weaponInfoByType[weaponId];
+    if (aimPlayer->weaponActionMode == 1) {
+        return ((GlobalState *)p)->primaryFireMode;
     }
-    return ((GlobalState *)p)->field24;
+    return ((GlobalState *)p)->alternateFireMode;
 }
 
 s16 Playerai_GetWeaponClassId(Player *player, s32 weaponId) {
     s16 *selectedClassEntry;
     WeaponInfo *weaponDefinition;
 
-    weaponDefinition = D_800D052C[weaponId];
+    weaponDefinition = g_weaponInfoByType[weaponId];
     if (player->gear == 1) {
         selectedClassEntry = weaponDefinition->weaponClass;
     } else {
@@ -388,7 +388,7 @@ s16 Playerai_GetWeaponAmmo(void *actor, s32 weaponId) {
     if ((weaponId == 1) && (((Shared_ActorView *)actor)->actions[1].kind != 0)) {
         return -1;
     }
-    weapon = D_800D052C[weaponId];
+    weapon = g_weaponInfoByType[weaponId];
     if (((Player *)actor)->gear == 1) {
         selectedClassEntry = weapon->weaponClass;
     } else {
@@ -405,12 +405,12 @@ s16 Playerai_GetWeaponAmmo(void *actor, s32 weaponId) {
     return -1;
 }
 
-s32 func_8022AB9C_de(void *player) {
+s32 Playerai_GetSelectedAmmoIcon(void *player) {
     s16 *selectedClassEntry;
     s32 ammoClassId;
     WeaponInfo *weapon;
 
-    weapon = D_800D052C[((Shared_ActorView *)player)->selectedAction];
+    weapon = g_weaponInfoByType[((Shared_ActorView *)player)->selectedAction];
     if (((Player *)player)->gear == 1) {
         selectedClassEntry = weapon->weaponClass;
     } else {
@@ -422,7 +422,7 @@ s32 func_8022AB9C_de(void *player) {
         ammoClassId = -1;
     }
     if (ammoClassId != -1) {
-        return D_800CB348_de[ammoClassId];
+        return g_ammoClassIconIds[ammoClassId];
     }
     return -1;
 }
@@ -432,8 +432,8 @@ s32 Player_GetMaxHealth(void *player) {
     s32 value;
     s8 type;
 
-    if (D_801462C8.counters.enabled != 0 && ((struct RecordRecAt94 *) ((ObjectLinks1454_3 *) o)->unk_5D8)->display != 0) {
-        type = ((struct RecordRecAt94 *) ((ObjectLinks1454_3 *) o)->unk_5D8)->kind;
+    if (g_gameSettings.counters.enabled != 0 && ((struct PlayerProfileStatusView *) ((PlayerHealthDefinitionView *) o)->options)->display != 0) {
+        type = ((struct PlayerProfileStatusView *) ((PlayerHealthDefinitionView *) o)->options)->kind;
         if (type == 0xB) {
             value = 0x19000;
         } else if (type == 0xC) {
@@ -443,13 +443,13 @@ s32 Player_GetMaxHealth(void *player) {
         } else if (type == 0xD) {
             value = 0x12C00;
         } else {
-            value = ((ActorHealthDefinition *)((ObjectLinks1454_3 *)o)->unk_18)->health << 8;
+            value = ((ActorHealthDefinition *)((PlayerHealthDefinitionView *)o)->definition)->health << 8;
         }
     } else {
-        value = ((ActorHealthDefinition *)((ObjectLinks1454_3 *)o)->unk_18)->health << 8;
+        value = ((ActorHealthDefinition *)((PlayerHealthDefinitionView *)o)->definition)->health << 8;
     }
-    if (D_801462C8.controllerMode == 1 && ((ObjectLinks1454_3 *)(o))->unk_1450 == 0) {
-        value += D_800FEB10[((ObjectLinks1454_3 *)(o))->unk_5D4].value;
+    if (g_gameSettings.controllerMode == 1 && ((PlayerHealthDefinitionView *)(o))->computerControlled == 0) {
+        value += g_characterHealthBonuses[((PlayerHealthDefinitionView *)(o))->playerIndex].value;
     }
     return value;
 }
@@ -460,17 +460,17 @@ int Player_GetAmmoCapacity(PlayerWeaponsGetAmmoCapacity *player, int slot) {
     if (slot == -1) {
         return 0;
     }
-    if (D_801462C8.controllerMode != 1) {
+    if (g_gameSettings.controllerMode != 1) {
         value = player->loadout->capacity[slot];
     } else {
-        value = D_800CE3E8[slot];
+        value = g_baseAmmoCapacities[slot];
         if (player->isBot == 0) {
             if (slot == 0) {
-                value += D_80102B00[player->character].bonus0;
+                value += g_localPlayerProfiles[player->character].bonus0;
             } else if (slot == 1) {
-                value += D_80102B00[player->character].bonus1;
+                value += g_localPlayerProfiles[player->character].bonus1;
             } else if (slot == 2) {
-                value += D_80102B00[player->character].bonus2;
+                value += g_localPlayerProfiles[player->character].bonus2;
             }
         }
     }
@@ -478,8 +478,8 @@ int Player_GetAmmoCapacity(PlayerWeaponsGetAmmoCapacity *player, int slot) {
 }
 
 /** Report whether the signed word at byte offset 0x5E4 is below 0x6400. */
-int func_8022ADB0_de(struct SharedPlayer *object, s32 unused1) {
-    return object->views5E4.view5E4_0.unk5E4 < 0x6400;
+int Playerai_IsHealthBelowThreshold(struct SharedPlayer *object, s32 unused1) {
+    return object->views5E4.view5E4_0.health < 0x6400;
 }
 
 f32 Playerai_GetObjectOwnerHeight(void *actorObject) {
@@ -488,20 +488,20 @@ f32 Playerai_GetObjectOwnerHeight(void *actorObject) {
 
     owner = object->owner;
     if (owner != 0) {
-        return owner->height * D_800C2D04_de;
+        return owner->height * g_playerOwnerHeightScale;
     }
-    return D_800C2D00_de;
+    return g_playerDefaultOwnerHeight;
 }
 
-f32 func_8022ADF0_de(LevelActor *actor) {
+f32 Playerai_GetDefinedActorHeight(LevelActor *actor) {
     if (actor->definition != 0) {
         return Gobjinst_GetActorHeight();
     } else {
-        return D_800C2D08_de;
+        return g_playerUndefinedActorHeight;
     }
 }
 
-int func_8022AE28_de(void *player, void *newPosition) {
+int Playerai_SetPositionAndFloor(void *player, void *newPosition) {
     int flag;
     CVector3 *src;
     src = newPosition;

@@ -1,0 +1,13 @@
+#ifndef RENDER_802192C0_7_H
+#define RENDER_802192C0_7_H
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/EFFECTRENDER.H"
+#include "COMMON/LENS_FLARE.H"
+#include "COMMON/APPROACHLOCATION.H"
+#include "COMMON/GLOBALS.H"
+#include "COMMON/SHARED_DEBUGFIELD.H"
+#include "COMMON/MENU_SETUP_VERSIONS.H"
+#include "COMMON/MENU_UI_PROVIDERS.H"
+extern const float g_playerDamageStunIncrement[4];
+#endif

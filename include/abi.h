@@ -1,6 +1,6 @@
 /* Open reconstruction of the standard 16-command Nintendo 64 audio ABI.
  * Encoding reference (decoder, not SDK header):
- * https://github.com/mupen64plus/mupen64plus-rsp-hle/blob/8a7a472a7172eb2c8725b305eae26818ed7b51a2/src/alist_audio.c
+ * https:/github.com/mupen64plus/mupen64plus-rsp-hle/blob/8a7a472a7172eb2c8725b305eae26818ed7b51a2/src/alist_audio.c
  * Independently written C89 builders; no Nintendo SDK macro text is vendored.
  * The flag field of aSetVolume intentionally masks 16 bits before shifting,
  * matching the legacy builder contract, including bits that overlap the opcode.

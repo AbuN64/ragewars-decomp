@@ -51,7 +51,7 @@ static inline s32 accepts(CapsuleSweep *ray, PolygonCCollisionTestSegmentPolygon
     return 1;
 }
 
-extern World *D_80103FCC;
+extern World *g_collisionCurrentActor;
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
@@ -74,7 +74,7 @@ s32 CCollision_TestSegmentDisk(CapsuleSweep *ray, PolygonCCollisionTestSegmentPo
 
 void CCollision_ClearResultFlags(void)
 {
-  D_80103FCC->unk100 = (D_80103FCC->state = (D_80103FCC->unkC4 = (D_80103FCC->unkB0 = (D_80103FCC->unk9C = (D_80103FCC->unk88 = (D_80103FCC->unk0 = 0))))));
+  g_collisionCurrentActor->unk100 = (g_collisionCurrentActor->state = (g_collisionCurrentActor->unkC4 = (g_collisionCurrentActor->unkB0 = (g_collisionCurrentActor->unk9C = (g_collisionCurrentActor->unk88 = (g_collisionCurrentActor->unk0 = 0))))));
 }
 
 void CCollision_UpdateSurfaceResponseFlags(ActorMotion *motion, MotionContactResult *contact) {

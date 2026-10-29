@@ -1,6 +1,6 @@
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/VECTOR4F.H"
-#include "COMMON/LONE/D_80103FCC.H"
+#include "COMMON/LONE/COLLISION_CURRENT_ACTOR.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
@@ -9,8 +9,8 @@
 
 typedef struct Owner Owner;
 
-extern void *Particle_GetEffectResource(void *arg0);
-extern s32 func_8022B178_de(void *player);
+extern void *Particle_GetEffectResource(void *particle);
+extern s32 Playerai_IsPlayerInactive(void *player);
 extern void Player_GiveAmmoWithMessage(void *player, s32 type, s32 amount);
 
 
@@ -23,34 +23,34 @@ extern void Player_GiveAmmoWithMessage(void *player, s32 type, s32 amount);
 
 
 
-void Particle_FinishActorEffects(void *arg0) {
-    char *actor = arg0;
+void Particle_FinishActorEffects(void *actorStorage) {
+    char *actor = actorStorage;
     char *state;
     char *owner;
     char *resource;
 
-    if (((ObjectLinks1BC *)(actor))->unk_4 != 0x414) {
-        if (((ObjectLinks1BC *)(actor))->unk_4 == 0x42D) {
+    if (((ParticleOwnerActorView *)(actor))->unk_4 != 0x414) {
+        if (((ParticleOwnerActorView *)(actor))->unk_4 == 0x42D) {
             state = Particle_GetEffectResource(actor);
-            if (((IntegerState5AC *)(state))->unk_5A8 != 0 && func_8022B178_de(state) == 0) {
-                Player_GiveAmmoWithMessage(state, ((IntegerState5AC *)(state))->unk_5A4,
-                               ((IntegerState5AC *)(state))->unk_5A8);
+            if (((ParticleAmmoRewardView *)(state))->unk_5A8 != 0 && Playerai_IsPlayerInactive(state) == 0) {
+                Player_GiveAmmoWithMessage(state, ((ParticleAmmoRewardView *)(state))->unk_5A4,
+                               ((ParticleAmmoRewardView *)(state))->unk_5A8);
             }
             goto reset_state;
         }
     } else {
 reset_state:
         state = Particle_GetEffectResource(actor);
-        ((IntegerState5AC *)(state))->unk_5A8 = 0;
-        if (func_8022B178_de(state) == 0) {
-            ((IntegerState5AC *)(state))->unk_59C = 1;
+        ((ParticleAmmoRewardView *)(state))->unk_5A8 = 0;
+        if (Playerai_IsPlayerInactive(state) == 0) {
+            ((ParticleAmmoRewardView *)(state))->unk_59C = 1;
         }
     }
 
-    if (((ObjectLinks1BC *)(actor))->unk_1B9 == 8 ||
-        ((ObjectLinks1BC *)(actor))->unk_1BA == 8 ||
-        ((ObjectLinks1BC *)(actor))->unk_1B8 == 8) {
-        resource = ((ObjectLinks1BC *)(actor))->unk_12C;
+    if (((ParticleOwnerActorView *)(actor))->unk_1B9 == 8 ||
+        ((ParticleOwnerActorView *)(actor))->unk_1BA == 8 ||
+        ((ParticleOwnerActorView *)(actor))->unk_1B8 == 8) {
+        resource = ((ParticleOwnerActorView *)(actor))->unk_12C;
         if (resource != 0 && *(u8 *)resource == 1 &&
             (((Shared_Actor *)(resource))->weaponFlags & 0x300000) != 0) {
             Player_SetPlayerState(((Shared_Actor *)(resource))->entity, resource, 2);
@@ -58,16 +58,16 @@ reset_state:
     }
 
     Particle_StopSound(actor);
-    owner = ((ObjectLinks1BC *)(actor))->unk_118;
-    if (((struct ObjectStateC4 *) ((Owner *) owner)->track)->unk_BE != 0xFFFF) {
+    owner = ((ParticleOwnerActorView *)(actor))->unk_118;
+    if (((struct ParticleFinishSoundView *) ((Owner *) owner)->track)->unk_BE != 0xFFFF) {
         SoundElement_StopAudioBySecondaryValue((s32)actor);
     }
-    if (((struct ObjectStateC4 *) ((Owner *) owner)->track)->unk_C2 != 0xFFFF) {
+    if (((struct ParticleFinishSoundView *) ((Owner *) owner)->track)->unk_C2 != 0xFFFF) {
         SoundElement_StopAudioBySecondaryValue((s32)actor);
     }
 }
 
-/* Spawns an effect for an actor through Particle_SpawnEffectGroup: the rotation comes from the fixed direction D_801042C8 or the actor's own facing, and the spawn point is the actor's position, or when the actor carries a horizontal offset the negated offset turned by the actor's angle, carried through its parent transform when it has one, and added to the position; the flags passed are the given flags with the actor's bits 0x200006. Adapted from Particle_HandleInitialMaterialContact with the offset reads as static inline getters and a stack state briefly made current in D_80103FCC. */
+/* Spawns an effect for an actor through Particle_SpawnEffectGroup: the rotation comes from the fixed direction g_particleZeroVector or the actor's own facing, and the spawn point is the actor's position, or when the actor carries a horizontal offset the negated offset turned by the actor's angle, carried through its parent transform when it has one, and added to the position; the flags passed are the given flags with the actor's bits 0x200006. Adapted from Particle_HandleInitialMaterialContact with the offset reads as static inline getters and a stack state briefly made current in g_collisionCurrentActor. */
 
 
 
@@ -77,28 +77,28 @@ reset_state:
 
 
 
-extern char D_8011D8D0;
-extern char D_801041F0;
+extern char g_actorParticleEffectSystem;
+extern char g_currentActorInstance;
 extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
 extern void BuildRollMatrix(f32 *matrix, s32 angle);
 extern void Graphu64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 
-static inline f32 offset_x(Actor_func_80279B40_de *actor) {
-    if (actor->def->unk14 != 0) {
+static inline f32 offset_x(ParticleChildEffectActorView *actor) {
+    if (actor->def->flags != 0) {
         return 0.0f;
     }
     return actor->offsetX;
 }
 
-static inline f32 offset_y(Actor_func_80279B40_de *actor) {
-    if (actor->def->unk14 != 0) {
+static inline f32 offset_y(ParticleChildEffectActorView *actor) {
+    if (actor->def->flags != 0) {
         return 0.0f;
     }
     return actor->offsetY;
 }
 
-void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 spawnMode, s32 flags) {
+void Particle_SpawnChildEffect(ParticleChildEffectActorView *actor, s32 model, s32 spawnMode, s32 flags) {
     CQuatern rotation;
     CVector3 direction;
     CVector3 offset;
@@ -110,8 +110,8 @@ void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 spa
     char scratch[0x108];
     void *parent;
 
-    if (actor->def->unk0 & 0x10) {
-        direction = D_801042C8;
+    if (actor->def->kind & 0x10) {
+        direction = g_particleZeroVector;
     } else {
         direction = actor->facing;
     }
@@ -131,10 +131,10 @@ void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 spa
             carried = turned;
         }
         Graphu64_AddVec3(&moved, &carried, &actor->position);
-        D_80103FCC = scratch;
+        g_collisionCurrentActor = scratch;
         point = moved;
-        D_80103FCC = &D_801041F0;
+        g_collisionCurrentActor = &g_currentActorInstance;
     }
-    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->unk130, actor->unk134, model,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->effectEntries, actor->effectEntryCount, model,
                   direction, rotation, point, 0, spawnMode, flags | (actor->flags & 0x200006));
 }

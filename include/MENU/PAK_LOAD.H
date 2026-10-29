@@ -1,46 +1,46 @@
 #ifndef MENU_PAK_LOAD_H
 #define MENU_PAK_LOAD_H
 #include "COMMON/RECORDRECAT1C.H"
-#include "COMMON/LONE/D_800D37D0.H"
+#include "COMMON/LONE/g_pakDefaultPreviewTypeLabel.H"
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
-extern struct Saved D_80153738;
-extern Shared_MenuData D_80145040;
+extern struct Saved g_pakControllerRecord;
+extern Shared_MenuData g_playerViewRenderContext;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern struct Saved D_8015D488;
-extern char *D_800E25A4[], *D_800E25B4[], *D_800E25C4[], *D_800E25D4[], *D_800E27B4[];
-extern u8 *D_800E2994[];
-extern struct Dialog D_0044F954, D_0044F978, D_0044FAE0_eu, D_0044FB04, D_0044FB28, D_004501E8;
-static __inline__ char *rw_pak_profile_name(Shared_Game *settings) { return D_800E25A4[settings->language]; }
-static __inline__ char *rw_pak_block_name(Shared_Game *settings) { return D_800E25B4[settings->language]; }
-static __inline__ char *rw_pak_company(Shared_Game *settings) { return D_800E25C4[settings->language]; }
-static __inline__ char *rw_pak_game_code(Shared_Game *settings) { return D_800E25D4[settings->language]; }
-static __inline__ char *rw_pak_invalid_name(Shared_Game *settings) { return D_800E27B4[settings->language]; }
-static __inline__ u8 *rw_pak_note_text(Shared_Game *settings) { return D_800E2994[settings->language]; }
-static __inline__ struct Dialog *rw_pak_loaded_block_dialog(void) { return &D_0044F954; }
-static __inline__ struct Dialog *rw_pak_selected_block_dialog(void) { return &D_0044F978; }
-static __inline__ struct Dialog *rw_pak_loaded_profile_dialog(void) { return &D_0044FAE0_eu; }
-static __inline__ struct Dialog *rw_pak_selected_profile_dialog(void) { return &D_0044FB04; }
-static __inline__ struct Dialog *rw_pak_other_note_dialog(void) { return &D_0044FB28; }
-static __inline__ struct Dialog *rw_pak_load_error_dialog(void) { return &D_004501E8; }
-static __inline__ struct Saved *rw_pak_loaded_profile(void) { return &D_8015D488; }
+extern struct Saved g_pakLoadedProfileEuropean;
+extern char *g_pakProfileGameNames[], *g_pakSnapshotGameNames[], *g_pakCompanyCodes[], *g_pakLegacySnapshotGameNames[], *g_pakDefaultNoteNamesLocalized[];
+extern u8 *g_localizedPakStatusHeading[];
+extern struct Dialog g_pakLoadedBlockDialogEuropean, g_pakSelectedBlockDialogEuropean, g_pakLoadedProfileDialogEuropean, g_pakSelectedProfileDialogEuropean, g_pakOtherNoteDialogEuropean, g_pakLoadErrorDialogEuropean;
+static __inline__ char *rw_pak_profile_name(Shared_Game *settings) { return g_pakProfileGameNames[settings->language]; }
+static __inline__ char *rw_pak_block_name(Shared_Game *settings) { return g_pakSnapshotGameNames[settings->language]; }
+static __inline__ char *rw_pak_company(Shared_Game *settings) { return g_pakCompanyCodes[settings->language]; }
+static __inline__ char *rw_pak_game_code(Shared_Game *settings) { return g_pakLegacySnapshotGameNames[settings->language]; }
+static __inline__ char *rw_pak_invalid_name(Shared_Game *settings) { return g_pakDefaultNoteNamesLocalized[settings->language]; }
+static __inline__ u8 *rw_pak_note_text(Shared_Game *settings) { return g_localizedPakStatusHeading[settings->language]; }
+static __inline__ struct Dialog *rw_pak_loaded_block_dialog(void) { return &g_pakLoadedBlockDialogEuropean; }
+static __inline__ struct Dialog *rw_pak_selected_block_dialog(void) { return &g_pakSelectedBlockDialogEuropean; }
+static __inline__ struct Dialog *rw_pak_loaded_profile_dialog(void) { return &g_pakLoadedProfileDialogEuropean; }
+static __inline__ struct Dialog *rw_pak_selected_profile_dialog(void) { return &g_pakSelectedProfileDialogEuropean; }
+static __inline__ struct Dialog *rw_pak_other_note_dialog(void) { return &g_pakOtherNoteDialogEuropean; }
+static __inline__ struct Dialog *rw_pak_load_error_dialog(void) { return &g_pakLoadErrorDialogEuropean; }
+static __inline__ struct Saved *rw_pak_loaded_profile(void) { return &g_pakLoadedProfileEuropean; }
 #else
 extern struct Saved D_8014D488;
-extern char *D_800D36D4, *D_800D36D8, *D_800D36E0, *D_800D3758;
-extern u8 *D_800D36DC;
-extern struct Dialog D_0044E684, D_0044E6A8, D_0044E810, D_0044E834, D_0044E858, D_0044EF18;
-static __inline__ char *rw_pak_profile_name(Shared_Game *settings) { return D_800D36D4; }
-static __inline__ char *rw_pak_block_name(Shared_Game *settings) { return D_800D36D8; }
-static __inline__ char *rw_pak_company(Shared_Game *settings) { return (char *)D_800D36DC; }
-static __inline__ char *rw_pak_game_code(Shared_Game *settings) { return D_800D36E0; }
-static __inline__ char *rw_pak_invalid_name(Shared_Game *settings) { return D_800D3758; }
-static __inline__ u8 *rw_pak_note_text(Shared_Game *settings) { return D_800D37D0; }
-static __inline__ struct Dialog *rw_pak_loaded_block_dialog(void) { return &D_0044E684; }
-static __inline__ struct Dialog *rw_pak_selected_block_dialog(void) { return &D_0044E6A8; }
-static __inline__ struct Dialog *rw_pak_loaded_profile_dialog(void) { return &D_0044E810; }
-static __inline__ struct Dialog *rw_pak_selected_profile_dialog(void) { return &D_0044E834; }
-static __inline__ struct Dialog *rw_pak_other_note_dialog(void) { return &D_0044E858; }
-static __inline__ struct Dialog *rw_pak_load_error_dialog(void) { return &D_0044EF18; }
+extern char *g_pakProfileGameNameFixed, *g_pakSnapshotGameNameFixed, *g_pakLegacySnapshotGameNameFixed, *g_pakDefaultNoteNameFixed;
+extern u8 *g_pakCompanyCodeFixed;
+extern struct Dialog g_pakLoadedBlockDialog, g_pakSelectedBlockDialog, g_pakLoadedProfileDialog, g_pakSelectedProfileDialog, g_pakOtherNoteDialog, g_pakLoadErrorDialog;
+static __inline__ char *rw_pak_profile_name(Shared_Game *settings) { return g_pakProfileGameNameFixed; }
+static __inline__ char *rw_pak_block_name(Shared_Game *settings) { return g_pakSnapshotGameNameFixed; }
+static __inline__ char *rw_pak_company(Shared_Game *settings) { return (char *)g_pakCompanyCodeFixed; }
+static __inline__ char *rw_pak_game_code(Shared_Game *settings) { return g_pakLegacySnapshotGameNameFixed; }
+static __inline__ char *rw_pak_invalid_name(Shared_Game *settings) { return g_pakDefaultNoteNameFixed; }
+static __inline__ u8 *rw_pak_note_text(Shared_Game *settings) { return g_pakDefaultPreviewTypeLabel; }
+static __inline__ struct Dialog *rw_pak_loaded_block_dialog(void) { return &g_pakLoadedBlockDialog; }
+static __inline__ struct Dialog *rw_pak_selected_block_dialog(void) { return &g_pakSelectedBlockDialog; }
+static __inline__ struct Dialog *rw_pak_loaded_profile_dialog(void) { return &g_pakLoadedProfileDialog; }
+static __inline__ struct Dialog *rw_pak_selected_profile_dialog(void) { return &g_pakSelectedProfileDialog; }
+static __inline__ struct Dialog *rw_pak_other_note_dialog(void) { return &g_pakOtherNoteDialog; }
+static __inline__ struct Dialog *rw_pak_load_error_dialog(void) { return &g_pakLoadErrorDialog; }
 static __inline__ struct Saved *rw_pak_loaded_profile(void) { return &D_8014D488; }
 #endif
 #endif

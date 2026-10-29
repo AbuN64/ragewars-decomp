@@ -1,4 +1,4 @@
 #ifndef DATA_OVLDAT6_800CF230_2_H
 #define DATA_OVLDAT6_800CF230_2_H
-extern char D_0022FEF4[];
+extern char addrLow_Weaponai_InitializeSwitchForSingleRound[];
 #endif

@@ -2,8 +2,8 @@
 #define COMMON_SELF_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/OBJECTLINKS14.H"
-extern float D_800C1FD8_de;
+#include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
+extern float g_wheelNegativeAngleWrap;
 
 
 
@@ -57,7 +57,7 @@ struct CloseAttackBrain;
 typedef struct CloseAttackBrain CloseAttackBrain;
 
 
-extern float D_800C1FE8_de;
+extern float g_wheelMinimumSectorAngle;
 
 struct CloseAttackActor;
 typedef struct CloseAttackActor CloseAttackActor;
@@ -121,8 +121,8 @@ typedef struct BrainNavUpdateVisiblePursuit BrainNavUpdateVisiblePursuit;
 
 
 
-struct PlayerRecAt288;
-struct PlayerRecAt288 {
+struct WheelProbeState;
+struct WheelProbeState {
     s32 active;
     char pad4[0x1CC - 4];
     s32 timer;
@@ -142,24 +142,24 @@ struct SweepHit {
 };
 
 
-struct PlayerRecAt1CC;
-struct PlayerRecAt1CC {
+struct WheelProbeClipState;
+struct WheelProbeClipState {
     void *clip;
     char pad4[0x1C8];
     int frame;
 };
 
-struct PlayerRecAt1CC;
-typedef struct PlayerRecAt1CC PlayerRecAt1CC;
+struct WheelProbeClipState;
+typedef struct WheelProbeClipState WheelProbeClipState;
 
 
 
-extern float D_800C1FF0_de;
+extern float g_wheelSectorConversionLimits;
 
 
-extern float D_800C1FDC_de;
+extern float g_wheelPositiveAngleWrap;
 
-extern float D_800C1FE4_de;
+extern float g_wheelMaximumSectorAngle;
 
 
 struct Shared_Actor;
@@ -176,14 +176,14 @@ typedef struct SweepHit SweepHit;
 
 
 
-extern float D_800C1FEC_de;
+extern float g_wheelAngleToSectorScale;
 
 
 struct Self;
 typedef struct Self Self;
 
 
-extern float D_800C1FE0_de;
+extern float g_wheelSectorAngleOffset;
 
 struct LevelActor;
 
@@ -193,9 +193,9 @@ struct LevelActor;
 
 
 
-extern float D_800C70F4;
+extern float g_behaviorInitialPlayerLevel;
 
-extern float D_800C70F0;
+extern float g_behaviorInitialPlayerDistance;
 
 
 

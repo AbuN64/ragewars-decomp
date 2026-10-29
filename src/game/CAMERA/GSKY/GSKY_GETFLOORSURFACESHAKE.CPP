@@ -1,7 +1,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
-#include "COMMON/LONE/D_800C32DC_de.H"
-#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/SCREEN_MESSAGE_ALLOCATION_LABEL.H"
+#include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
@@ -16,16 +16,16 @@
 /* 80233920_31.CPP */
 /* Produces a random shake offset for an object: looks up the object's model entry in D_8011FE88 and
  * zeroes the offset when there is none; otherwise eases the horizontal and vertical shake amplitudes
- * at 0xF4 and 0xF8 toward the pair D_800C8668 when the entry is flagged 0x10000 (toward zero when not)
+ * at 0xF4 and 0xF8 toward the pair k_floorShakeTargetHorizontal when the entry is flagged 0x10000 (toward zero when not)
  * and draws each offset component at random within the scaled amplitudes. */
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
-extern f32 Region_GetPolygonHeight(s32 node, f32 arg1, f32 arg2);
+extern f32 Region_GetPolygonHeight(s32 node, f32 positionX, f32 positionZ);
 
 extern void *Cache_AllocateResource(int a, int b, int c, void *d);
 
-extern void SoundElement_SetListenerCamera(s32 arg0);
+extern void SoundElement_SetListenerCamera(s32 listenerCamera);
 
 extern void Cache_DrainAndCompactResources(s32 a);
 
@@ -47,21 +47,21 @@ void Gsky_GetFloorSurfaceShake(void *gameplayCamera, CVector3 *out) {
         return;
     }
     if (entry->flags & 0x10000) {
-        targetX = D_800C8668;
-        targetY = D_800C357C_de;
+        targetX = k_floorShakeTargetHorizontal;
+        targetY = k_floorShakeTargetVertical;
     }
-    value = o->shakeHorizontal + (targetX - o->shakeHorizontal) * D_800C3580_de.unk0;
-    scale = D_800C3584_de.unk0;
+    value = o->shakeHorizontal + (targetX - o->shakeHorizontal) * k_floorShakeHorizontalBlend.value;
+    scale = k_floorShakeHorizontalScale.value;
     o->shakeHorizontal = value;
-    o->shakeVertical += (targetY - o->shakeVertical) * D_800C3588_de.unk0;
+    o->shakeVertical += (targetY - o->shakeVertical) * k_floorShakeVerticalBlend.value;
     out->x = Graphu64_RandomBetween(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
-    out->y = Graphu64_RandomBetween(0.0f, o->shakeVertical * D_800C358C_de.unk0);
+    out->y = Graphu64_RandomBetween(0.0f, o->shakeVertical * k_floorShakeVerticalScale.value);
     value = -o->shakeHorizontal * scale;
     out->z = Graphu64_RandomBetween(value, o->shakeHorizontal * scale);
 }
 
 /** Preserve the empty hook at VRAM 0x80239FBC. */
-void func_80239FCC_de(void) {
+void Gsky_FloorSurfaceNoOp(void) {
 }
 
 void Gsky_DrawViewportEffectNoOp(void) {
@@ -77,30 +77,30 @@ void Gsky_UpdateFloorSurface(void *gameplayCamera) {
     f32 w;
 
     if (Cinema_IsSequenceInWindow() != 0) {
-        camera->floorPoly = (Shared_func_80234FDC_S8 *)Scene_FindFloorPolygon(&g_world, &camera->unk38);
+        camera->floorPoly = (CameraFloorSurfaceView *)Scene_FindFloorPolygon(&g_world, &camera->floorSampleX);
     }
     object = (s32)camera->floorPoly;
-    x = camera->unk38;
-    y = camera->unk3C;
-    z = camera->unk40;
-    w = camera->unk44;
-    camera->floorSurface = D_800CD8D0;
+    x = camera->floorSampleX;
+    y = camera->floorSampleY;
+    z = camera->floorSampleZ;
+    w = camera->floorHeightOffset;
+    camera->floorSurface = g_defaultCameraSurfaceType;
     if (object != 0 && Cinema_IsSequenceInWindow() == 0) {
-        value = ((y + w) - Region_GetPolygonHeight(object, x, z)) * D_800C3590_de;
-        if (value < D_800C3594_de && D_800C3598_de < value) {
-            Shared_func_80234FDC_S8 *surface = (Shared_func_80234FDC_S8 *)object;
-            camera->floorSurface = surface->unk1C;
+        value = ((y + w) - Region_GetPolygonHeight(object, x, z)) * k_floorSurfaceDistanceScale;
+        if (value < k_floorSurfaceUpperDistance && k_floorSurfaceLowerDistance < value) {
+            CameraFloorSurfaceView *surface = (CameraFloorSurfaceView *)object;
+            camera->floorSurface = surface->surfaceType;
         }
     }
     if (Cinema_IsSequenceInWindow() != 0) {
-        camera->floorSurface = D_800CD8D0;
+        camera->floorSurface = g_defaultCameraSurfaceType;
     }
     if (camera->zoomBlend > 0.0f) {
-        camera->floorSurface = D_800CD8D0;
+        camera->floorSurface = g_defaultCameraSurfaceType;
     }
 }
 
-void func_8023A114_de(void *messageBuffer, s32 count) {
+void Gsky_AllocateMessageBuffer(void *messageBuffer, s32 count) {
     MessageBuffer *buffer = messageBuffer;
     s32 *allocation;
     s32 bytes;
@@ -108,28 +108,28 @@ void func_8023A114_de(void *messageBuffer, s32 count) {
 
     bytes = count * 0xED8;
     buffer->count = count;
-    allocation = Cache_AllocateResource(0, bytes, 0x23, (char *)&D_800C32D0_de + 4);
+    allocation = Cache_AllocateResource(0, bytes, 0x23, (char *)&g_messageBufferAllocationLabelStorage + 4);
     buffer->allocation = allocation;
     firstBlock = *allocation;
     buffer->first = firstBlock;
     XPlus_FillMemory(firstBlock, 0, bytes);
 }
 
-void func_8023A190_de(void *screenMessageOwner, int count) {
+void Gsky_AllocateScreenMessageStorage(void *screenMessageOwner, int count) {
     struct ScreenMessageOwner *owner = screenMessageOwner;
     int *allocation;
     int bytes;
     int firstBlock;
     bytes = count << 6;
     owner->storage.count = count;
-    allocation = Cache_AllocateResource(0, bytes, 0x23, &D_800C32DC_de);
+    allocation = Cache_AllocateResource(0, bytes, 0x23, &g_screenMessageAllocationLabel);
     owner->storage.allocation = allocation;
     firstBlock = *allocation;
     owner->storage.first = firstBlock;
     XPlus_FillMemory(firstBlock, 0, bytes);
 }
 
-void func_8023A1F4_de(struct ScreenMessageOwner *owner) {
+void Gsky_ReleaseScreenMessageRendering(struct ScreenMessageOwner *owner) {
     s32 allocation;
 
     owner->state = 1;
@@ -145,14 +145,14 @@ void func_8023A1F4_de(struct ScreenMessageOwner *owner) {
 }
 
 /* 80233920_32.CPP */
-void func_8023A24C_de(void *bufferOwner) {
+void Gsky_ReleaseMessageBuffer(void *bufferOwner) {
     s32 allocationHandle;
     Cache_DrainAndCompactResources(0);
-    allocationHandle = (((struct IntegerStateF24 *) ((s8 *) bufferOwner))->unk_F18);
+    allocationHandle = (((struct IntegerStateF24 *) ((s8 *) bufferOwner))->allocationHandle);
     if (allocationHandle != 0) {
         Cache_ReleaseResource(0, allocationHandle);
-        (((struct IntegerStateF24 *) ((s8 *) bufferOwner))->unk_F18) = 0;
-        (((struct IntegerStateF24 *) ((s8 *) bufferOwner))->unk_F1C) = 0;
-        (((struct IntegerStateF24 *) ((s8 *) bufferOwner))->unk_F20) = 0;
+        (((struct IntegerStateF24 *) ((s8 *) bufferOwner))->allocationHandle) = 0;
+        (((struct IntegerStateF24 *) ((s8 *) bufferOwner))->allocationSize) = 0;
+        (((struct IntegerStateF24 *) ((s8 *) bufferOwner))->allocationCount) = 0;
     }
 }

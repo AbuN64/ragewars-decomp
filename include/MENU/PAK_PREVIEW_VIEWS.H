@@ -1,20 +1,20 @@
 #ifndef MENU_PAK_PREVIEW_VIEWS_H
 #define MENU_PAK_PREVIEW_VIEWS_H
 #include "TYPES.H"
-struct RecordRecAt20V1 {
+struct PakControllerRequestView {
     char pad[0x20];
-    struct ObjRecAtB0 *inner;
+    struct ControllerButtonFlagsView *inner;
 };
-struct RecordRecAtCV1 {
+struct PakPreviewSelectionView {
     char pad[0xC];
     struct TargetPakDisablePreviewSelection *target;
 };
-struct RecordRecAt20V2 {
+struct PakChannelResultView {
     char pad[0x1C];
     s32 result;
     struct PakMenuSlot *inner;
 };
-/* The pak preview block D_800E28BC: a position, a packed value and the colour depth. */
+/* The pak preview block g_controllerPakSnapshotPayload: a position, a packed value and the colour depth. */
 struct PakPreview {
     char pad0[0xC];
     f32 x;
@@ -27,7 +27,7 @@ struct PakPreview {
     char pad28[0x90 - 0x28];
     unsigned int depth;
 };
-struct RecordRecAt24 {
+struct PakSelectedPromptView {
     char pad[0x1C];
     s32 first;
     s32 second;

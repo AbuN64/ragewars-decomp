@@ -2,7 +2,7 @@
 
 /* 800D2D20_3.CPP */
 #if defined(VERSION_EU_X)
-unsigned int D_800D4070[] = {
+unsigned int g_audioGlobals[] = {
     0x00000000, 0x0000324E, 0x00000500, 0x04651E39, 0x00000003, 0x00000FA0, 0x00000000, 0x00000870,
     0x00002666, 0xFFFFD99A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x000002F8, 0x000005F0,
     0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000960,
@@ -33,7 +33,7 @@ unsigned int D_800D4070[] = {
 
 /* 800D2D20_4.CPP */
 #if defined(VERSION_EU)
-unsigned int D_800D4070[] = {
+unsigned int g_audioGlobals[] = {
     0x00000000, 0x73706563, 0x69616C20, 0x6F626A65, 0x00000003, 0x00000FA0, 0x00000000, 0x00000870,
     0x00002666, 0xFFFFD99A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x000002F8, 0x000005F0,
     0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000960,
@@ -88,7 +88,7 @@ u32 data_writable_800CD930[108] = {
 
 /* DATA_800D2B78.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_d0_9ece8db99f7aa186[3] = {
+unsigned int g_TsmosRequestfrontendshutdownEnergyRTextWords1[3] = {
     0x456E6572, 0x67792072, 0x00000000,
 };
 #endif
@@ -99,7 +99,7 @@ struct {
     unsigned int w0[23];
     unsigned char b1[36];
     unsigned int w2[3];
-} D_auto_rodata_writable_800D2B70_unclaimed_D3784 = {
+} g_frontendShutdownRetainedMixedStorage = {
     {
         0x12345678, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
         0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,

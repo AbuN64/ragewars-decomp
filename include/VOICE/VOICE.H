@@ -3,8 +3,8 @@
 #include "COMMON/OBJRECAT4V6.H"
 #include "AUDIO/VOICE_AND_SPATIAL_SOURCE_VIEWS.H"
 extern void Audio_InitializeVoiceRecord(void *, int owner, int);
-extern s32 Audio_GetVoiceSoundState(SlotRecAtB8 *voicePool, s16 slotIndex);
-extern void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index);
+extern s32 Audio_GetVoiceSoundState(AudioVoiceSoundSlotView *voicePool, s16 slotIndex);
+extern void Audio_PlayVoiceSound(AudioVoiceSoundSlotView *base, s16 index);
 extern s32 Audio_ReleaseMatchingExclusiveVoice(RecordD90 *record, s16 value, s16 id);
 extern void Audio_ClearVoiceFlags(s32 a);
 extern void Audio_SetVoiceTrackId(void *, int newTrackId);
@@ -15,16 +15,16 @@ extern f32 Audio_RandomizeScaledByteRange(u8, u8);
 extern f32 Audio_ComputeSpatialAttenuationCurve(char *source, char *listener);
 extern void Audio_SetScaledVoiceVolume(void *, s32);
 extern void Audio_SetScaledVoicePitch(void *, f32);
-extern void func_8025C524_de(SlotRecAtB4V2 *voiceRecord, s32 panValue);
-extern void func_8025C578_de(SlotRecAtB4V2 *voiceRecord);
-extern void func_8025C5BC_de(SlotRecAtB4V2 *voiceRecord);
-extern void func_8025C5DC_de(SlotRecAtB4V2 *voiceRecord);
-extern void func_8025C65C_de(SlotRecAtB4V2 *voiceRecord);
-extern void func_8025C8C0_de(void *cLoopingSoundData);
+extern void Audio_SetVoicePan(AudioVoiceControlSlotView *voiceRecord, s32 panValue);
+extern void Audio_QueryVoicePlaybackState(AudioVoiceControlSlotView *voiceRecord);
+extern void Audio_StartSelectedVoice(AudioVoiceControlSlotView *voiceRecord);
+extern void Audio_StopVoiceForDifferentKey(AudioVoiceControlSlotView *voiceRecord);
+extern void Audio_DeallocateVoiceSlot(AudioVoiceControlSlotView *voiceRecord);
+extern void SoundVoicePool_ResetNode(void *cLoopingSoundData);
 extern void func_8025C8D0_de(void);
-extern void *func_8025C95C_de(void *voicePool, s32 soundId, CVector3 *soundPosition, void *position, s32 fallback);
-extern void func_8025CAB0_de(void *voicePool);
-extern void func_8025CB88_de(void *soundVoicePool);
-extern void func_8025CBEC_de(void *soundVoicePool);
+extern void *SoundVoicePool_PlaySpatialSound(void *voicePool, s32 soundId, CVector3 *soundPosition, void *position, s32 fallback);
+extern void SoundVoicePool_Pause(void *voicePool);
+extern void SoundVoicePool_RetireFinishedSounds(void *soundVoicePool);
+extern void SoundVoicePool_StopAll(void *soundVoicePool);
 extern void func_8025CC7C_de(void);
 #endif

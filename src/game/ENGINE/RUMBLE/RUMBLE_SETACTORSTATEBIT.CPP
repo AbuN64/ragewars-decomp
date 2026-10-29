@@ -14,11 +14,11 @@ extern void SetN64_GetPackSectionSize(s32 table, s32 index);
 void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 enabled) {
     LevelActor *entry;
     struct Def *cond;
-    void *field80;
+    void *levelStateSections;
     void *table;
     u8 *base1;
     u8 *base2;
-    s32 field1B40C;
+    s32 levelIndex;
     s32 mask;
     s32 index;
     s32 idx;
@@ -42,7 +42,7 @@ void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 enabled) {
     if (index == -1) {
         return;
     }
-    field1B40C = world->level;
+    levelIndex = world->level;
     if (world->mode == 2) {
         return;
     }
@@ -53,8 +53,8 @@ void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 enabled) {
             return;
         }
     }
-    field80 = world->bitSections;
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 0);
+    levelStateSections = world->bitSections;
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(levelStateSections, 0), levelIndex), 0);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
@@ -78,10 +78,10 @@ void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 enabled) {
 s32 Rumble_TestActorStateBit(void *worldState, void *actorPointer) {
     Shared_World *world = worldState;
     LevelActor *actor = actorPointer;
-    void *field80;
+    void *levelStateSections;
     void *table;
     u8 *base;
-    s32 field1B40C;
+    s32 levelIndex;
     s32 mask;
     s32 index;
     s32 i;
@@ -104,9 +104,9 @@ s32 Rumble_TestActorStateBit(void *worldState, void *actorPointer) {
     if (index == -1) {
         return 0;
     }
-    field80 = world->bitSections;
-    field1B40C = world->level;
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 0);
+    levelStateSections = world->bitSections;
+    levelIndex = world->level;
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(levelStateSections, 0), levelIndex), 0);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32) table, 1);
     base = (u8 *) SetN64_GetPackSection(table, 1);

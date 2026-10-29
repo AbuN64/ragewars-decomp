@@ -1,6 +1,6 @@
 #include "COMMON/ACCESS_S8_10F.H"
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -18,7 +18,7 @@ extern void Frontend_InitMenuImage(s32 *, s32, s32, s32, s32);
 
 s32 Menu_CreateOptionsImageTransition(void) {
     s32 *record = Cache_AllocateMemory(0x24);
-    D_800E44A0 = record;
+    g_optionsImageTransition = record;
     record[7] = 0;
     record[8] = 0;
     Frontend_InitMenuImage(record, 0x67, 0, 0, 0);
@@ -77,7 +77,7 @@ extern void MarkMenuEventHandled();
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E44A4, an actor kind at D_800E44A8 and a handler at D_800E44AC: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_optionsTransitionEventCodes, an actor kind at g_optionsTransitionActorKinds and a handler at g_optionsTransitionEventCallbacks: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -85,25 +85,25 @@ extern void MarkMenuEventHandled();
 
 
 s32 Menu_DestroyOptionsImageTransition(void) {
-    Cache_FreeMemory(D_800E44A0);
-    D_800E44A0 = 0;
+    Cache_FreeMemory(g_optionsImageTransition);
+    g_optionsImageTransition = 0;
     return 0;
 }
 
 s32 Menu_DrawOptionsImageTransition(s32 unused0, s32 unused1, s32 event) {
     if (event == 1) {
-        if (Frontend_GetMenuImageState(D_800E44A0) != 1) {
+        if (Frontend_GetMenuImageState(g_optionsImageTransition) != 1) {
             return 0;
         }
-        Frontend_DrawMenuImage(D_800E44A0);
-        Frontend_AdvanceMenuImageTransition(D_800E44A0);
-        if (Frontend_GetMenuImageState(D_800E44A0) != 2) {
+        Frontend_DrawMenuImage(g_optionsImageTransition);
+        Frontend_AdvanceMenuImageTransition(g_optionsImageTransition);
+        if (Frontend_GetMenuImageState(g_optionsImageTransition) != 2) {
             return 0;
         }
 #if defined(VERSION_DE)
         Menu_ReleaseOptionsScene();
 #else
-        
+
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 Menu_ReleaseOptionsScene
 #else
@@ -120,32 +120,32 @@ func_8042201C_de
 s32 Menu_StartOptionsImageTransition(void) {
     s32 one = 1;
 
-    if (Frontend_GetMenuImageState(D_800E44A0) == one) {
+    if (Frontend_GetMenuImageState(g_optionsImageTransition) == one) {
         return 0;
     }
     Tsmos_ActivateControllerState();
-    if (D_800E44A0[8] != one) {
+    if (g_optionsImageTransition[8] != one) {
         return 0;
     }
     Tsmos_DeactivateControllerState();
-    if (D_801462C8.controllerMode == 0) {
+    if (g_gameSettings.controllerMode == 0) {
         Cinema_ReleaseSequenceContext();
         ScenarioSetup_ResetSelectionIndicators();
     }
-    Frontend_StartMenuImageTransition(D_800E44A0);
+    Frontend_StartMenuImageTransition(g_optionsImageTransition);
     return 0;
 }
 
 s32 Menu_HandleOptionsTransitionRequest(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3 && value == 0xB) {
         MarkMenuEventHandled();
-        D_800E44A0[8] = 1;
+        g_optionsImageTransition[8] = 1;
     }
     return 0;
 }
 
 s32 Menu_RequestOptionsImageTransition(void) {
-    D_800E44A0[8] = 1;
+    g_optionsImageTransition[8] = 1;
     return 0;
 }
 
@@ -154,23 +154,23 @@ s32 Menu_ConsumeOptionsTransitionEvent(void) {
     return 0;
 }
 
-s32 Menu_DispatchOptionsTransitionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchOptionsTransitionEvent(void *object, s32 event, s32 eventData, s32 eventValue, s32 eventContext) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E44AC != 0) {
+    if (g_optionsTransitionEventCallbacks != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E44AC;
+        entry = (char *)&g_optionsTransitionEventCallbacks;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E44A4)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E44A8)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_optionsTransitionEventCodes)) + offset))->value == event) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) object))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_optionsTransitionActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(object, event, eventData, eventValue, eventContext);
                 }
             }
             entry += 0xC;

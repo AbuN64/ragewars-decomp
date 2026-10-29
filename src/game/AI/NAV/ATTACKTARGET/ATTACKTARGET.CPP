@@ -39,7 +39,7 @@ typedef struct Chaser {
 } Chaser;
 
 Racer *Playerai_GetPlayerByIndex(MatchWorld *world, u32 playerIndex);
-f32 Graphu64_GetPointDistance(void *arg0, void *arg1);
+f32 Graphu64_GetPointDistance(void *firstPoint, void *secondPoint);
 s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index);
 
 s32 Nav_CollectEnemyTargets(Chaser *self) {
@@ -56,7 +56,7 @@ s32 Nav_CollectEnemyTargets(Chaser *self) {
     }
     count = 0;
     i = count;
-    world = (MatchWorld *)&D_80145040;
+    world = (MatchWorld *)&g_playerViewRenderContext;
     rules = &world->rules;
     for (; i < 8; i++) {
         other = Playerai_GetPlayerByIndex(world, i);
@@ -74,7 +74,7 @@ s32 Nav_CollectEnemyTargets(Chaser *self) {
 }
 
 
-extern CNavData D_8013B364;
+extern CNavData g_navigationGraph;
 extern f32 Scaled_GetScaledAttackRange(AiController *controller);
 extern f32 Scaled_GetScaledAggression(AiController *controller);
 extern f32 Barrel_GetSignedAngleToPoint(Player *actor, CVector3 point);
@@ -114,13 +114,13 @@ s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index) {
         }
         range = 2;
     }
-    if (D_801462C8.counters.enabled && brain->player->profile->enabled && brain->player->profile->character == 12) accept = 1;
+    if (g_gameSettings.counters.enabled && brain->player->profile->enabled && brain->player->profile->character == 12) accept = 1;
     if (accept) {
-        if (D_801462C8.counters.m_bFragTagOn && target->profile->bonus)
+        if (g_gameSettings.counters.m_bFragTagOn && target->profile->bonus)
             brain->candidateDistances[index] = brain->candidateDistances[index] * 0.8f;
         if (target->computer == 0)
             brain->candidateDistances[index] = brain->candidateDistances[index] * 0.8f;
-        if (Route_GetRouteRelation(&D_8013B364, brain->current, target->controller->current)) return 1;
+        if (Route_GetRouteRelation(&g_navigationGraph, brain->current, target->controller->current)) return 1;
     }
     if (brain->lastAttacker != target || brain->attackedTimer < 451) return 0;
     if (brain->candidateDistances[index] < nearLimit * 2) {
@@ -143,11 +143,11 @@ s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index) {
     return 0;
 }
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802106DC[1] = {
+unsigned int k_AttacktargetEncodedWords[1] = {
     0x4F506571,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802106DC_de_padding_112DC[4] = { 0x32, 0xEC, 0x15, 0x93 };
+unsigned char g_AttacktargetTrailingBytes[4] = { 0x32, 0xEC, 0x15, 0x93 };
 #endif

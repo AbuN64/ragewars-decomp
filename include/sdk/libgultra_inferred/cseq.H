@@ -3,7 +3,7 @@
 #include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 extern f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQuarter);
 extern u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuarter);
-extern int alCSeqGetTicks(void *arg0);
+extern int alCSeqGetTicks(void *sequence);
 extern void alCSeqGetLoc(ALCSeq_s *src, ALCSeqMarker *dst);
 extern void alCSeqSetLoc(ALCSeq_s *dst, ALCSeqMarker *src);
 extern void alCSeqNewMarker(ALCSeq_s *seq, ALCSeqMarker *m, u32 ticks);

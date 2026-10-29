@@ -2,15 +2,15 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "MULTI/SETUP_SETUPNAMESPINNER.H"
 
 #if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_80145040[];
-extern Spinner D_800E63C0[];
+extern char g_playerViewRenderContext[];
+extern Spinner g_multiplayerNameEntryStates[];
 extern s32 Player_GetPlayerIndex(char *, s32);
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-extern u8 *D_800D3C44;
+extern u8 *g_defaultPlayerNameOne;
 #endif
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -19,7 +19,7 @@ extern u8 *D_800D3C44;
 /* Highlights the name slot func_8022A5A0_de finds for the menu (display flags 0x1800000 on its model part,
    cleared on the other three), resets that spinner's timer and copies the slot's name (trailing blanks
    dropped, none when it starts like the default name) into the spinner; value and max = its length. */
-void Setup_SetupNameSpinner(MenuRecAt20V1 *menu) {
+void Setup_SetupNameSpinner(NameSpinnerMenu *menu) {
     s32 index;
     s32 trailing;
     s32 i;
@@ -30,7 +30,7 @@ void Setup_SetupNameSpinner(MenuRecAt20V1 *menu) {
     u8 defaultChar;
     s32 remaining;
     s32 nameChar;
-    index = Player_GetPlayerIndex(D_80145040, menu->id);
+    index = Player_GetPlayerIndex(g_playerViewRenderContext, menu->id);
     switch (index) {
         default:
         case 0:
@@ -58,9 +58,9 @@ void Setup_SetupNameSpinner(MenuRecAt20V1 *menu) {
             menu->model->part[2].flags &= ~0x1800000;
             break;
     }
-    D_800E63C0[index].timer = 0;
-    destination = D_800E63C0[index].name;
-    source = D_801462C8.playerSettings[index].name;
+    g_multiplayerNameEntryStates[index].timer = 0;
+    destination = g_multiplayerNameEntryStates[index].name;
+    source = g_gameSettings.playerSettings[index].name;
     i = 8;
     trailing = 0;
     while (i > 0) {
@@ -72,9 +72,9 @@ void Setup_SetupNameSpinner(MenuRecAt20V1 *menu) {
     }
     name = source;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    defaultName = D_800E3B64[g_languageIndex];
+    defaultName = g_playerPartnerSuffixByLanguage[g_languageIndex];
 #else
-    defaultName = D_800D3C44;
+    defaultName = g_defaultPlayerNameOne;
 #endif
     remaining = 6;
     do {
@@ -93,42 +93,42 @@ void Setup_SetupNameSpinner(MenuRecAt20V1 *menu) {
         *destination++ = *source++;
     }
     *destination = 0;
-    D_800E63C0[index].value = 8 - trailing;
-    D_800E63C0[index].max = 8 - trailing;
+    g_multiplayerNameEntryStates[index].value = 8 - trailing;
+    g_multiplayerNameEntryStates[index].max = 8 - trailing;
 }
 #endif
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
-/* Steps a menu spinner for the entry func_8022A5A0_de finds in D_80145040: advances its repeat timer by D_800D2988, wrapping at D_800E2810, and while the menu is active (state 1) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
+/* Steps a menu spinner for the entry func_8022A5A0_de finds in g_playerViewRenderContext: advances its repeat timer by g_frameElapsedTime, wrapping at g_multiplayerNameEntryTimingLimits, and while the menu is active (state 1) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
 
 
 
 
-extern char D_80145040[];
-extern Spinner D_800E63C0[];
+extern char g_playerViewRenderContext[];
+extern Spinner g_multiplayerNameEntryStates[];
 
 extern s32 Player_GetPlayerIndex(char *, s32);
 
 
 
-s32 Setup_UpdateNameCursor(void *unused, MenuRecAt20V1 *menu) {
+s32 Setup_UpdateNameCursor(void *unused, NameSpinnerMenu *menu) {
     s32 i;
     f32 t;
 
-    i = Player_GetPlayerIndex(D_80145040, menu->id);
-    t = D_800E63C0[i].timer + D_800D2988;
-    D_800E63C0[i].timer = t;
+    i = Player_GetPlayerIndex(g_playerViewRenderContext, menu->id);
+    t = g_multiplayerNameEntryStates[i].timer + g_frameElapsedTime;
+    g_multiplayerNameEntryStates[i].timer = t;
     if (t >= (15.0f)) {
-        D_800E63C0[i].timer = t - (15.0f);
+        g_multiplayerNameEntryStates[i].timer = t - (15.0f);
     }
     if (menu->state == 1) {
-        if (((s32 (*)(s32))Control_IsLeftPressed)(menu->input) != 0 && D_800E63C0[i].value > 0) {
-            D_800E63C0[i].value--;
-            D_800E63C0[i].timer = 0.0f;
+        if (((s32 (*)(s32))Control_IsLeftPressed)(menu->input) != 0 && g_multiplayerNameEntryStates[i].value > 0) {
+            g_multiplayerNameEntryStates[i].value--;
+            g_multiplayerNameEntryStates[i].timer = 0.0f;
         } else if (((s32 (*)(s32))Control_IsRightPressed)(menu->input) != 0) {
-            if (D_800E63C0[i].value < D_800E63C0[i].max) {
-                D_800E63C0[i].value++;
-                D_800E63C0[i].timer = 0.0f;
+            if (g_multiplayerNameEntryStates[i].value < g_multiplayerNameEntryStates[i].max) {
+                g_multiplayerNameEntryStates[i].value++;
+                g_multiplayerNameEntryStates[i].timer = 0.0f;
             }
         }
     }
@@ -143,24 +143,24 @@ const unsigned int rodata_func_80445964_de_800E2810[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-s32 Setup_UpdateNameCursor(void *unused, MenuRecAt20V1 *menu) {
+s32 Setup_UpdateNameCursor(void *unused, NameSpinnerMenu *menu) {
     s32 i;
     f32 t;
 
-    i = Player_GetPlayerIndex(D_80145040, menu->id);
-    t = D_800E63C0[i].timer + D_800D2988;
-    D_800E63C0[i].timer = t;
-    if (t >= D_800E2810) {
-        D_800E63C0[i].timer = t - D_800E2810;
+    i = Player_GetPlayerIndex(g_playerViewRenderContext, menu->id);
+    t = g_multiplayerNameEntryStates[i].timer + g_frameElapsedTime;
+    g_multiplayerNameEntryStates[i].timer = t;
+    if (t >= g_multiplayerNameEntryTimingLimits) {
+        g_multiplayerNameEntryStates[i].timer = t - g_multiplayerNameEntryTimingLimits;
     }
     if (menu->state == 1) {
-        if (((s32 (*)(s32))Control_IsLeftPressed)(menu->input) != 0 && D_800E63C0[i].value > 0) {
-            D_800E63C0[i].value--;
-            D_800E63C0[i].timer = 0;
+        if (((s32 (*)(s32))Control_IsLeftPressed)(menu->input) != 0 && g_multiplayerNameEntryStates[i].value > 0) {
+            g_multiplayerNameEntryStates[i].value--;
+            g_multiplayerNameEntryStates[i].timer = 0;
         } else if (((s32 (*)(s32))Control_IsRightPressed)(menu->input) != 0) {
-            if (D_800E63C0[i].value < D_800E63C0[i].max) {
-                D_800E63C0[i].value++;
-                D_800E63C0[i].timer = 0;
+            if (g_multiplayerNameEntryStates[i].value < g_multiplayerNameEntryStates[i].max) {
+                g_multiplayerNameEntryStates[i].value++;
+                g_multiplayerNameEntryStates[i].timer = 0;
             }
         }
     }

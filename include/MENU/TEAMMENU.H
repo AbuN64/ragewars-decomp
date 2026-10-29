@@ -7,7 +7,7 @@
 struct TeamMenu;
 typedef struct TeamMenu TeamMenu;
 
-extern float D_800C2250_de;
+extern float g_weaponWheelPositiveAnglePeriod;
 
 extern float D_800C22A8_de;
 
@@ -39,47 +39,47 @@ typedef struct CBarrel_t {
     s32 m_WheelIndexLastFrame;
 } CBarrel;
 
-extern float D_800C2254_de;
+extern float g_weaponWheelNegativeAnglePeriod;
 
 struct Item;
 typedef struct Item Item;
 
-struct SlotRecAt10;
-typedef struct SlotRecAt10 SlotRecAt10;
+struct TeamMenuSlotView;
+typedef struct TeamMenuSlotView TeamMenuSlotView;
 
 
 struct Entry;
 typedef struct Entry Entry;
 
-struct PlayerRecAt698;
-typedef struct PlayerRecAt698 PlayerRecAt698;
+struct TeamMenuPlayerControllerView;
+typedef struct TeamMenuPlayerControllerView TeamMenuPlayerControllerView;
 
 struct MenuCteamselectDrawTeamWheel;
 typedef struct MenuCteamselectDrawTeamWheel MenuCteamselectDrawTeamWheel;
 
-struct ControllerRecAtC7;
-struct PlayerRecAt698;
-struct PlayerRecAt698 {
+struct ControllerAxesView;
+struct TeamMenuPlayerControllerView;
+struct TeamMenuPlayerControllerView {
     char pad0[0x698];
-    struct ControllerRecAtC7 *controller;
+    struct ControllerAxesView *controller;
 };
 
-struct ObjectLinks11BC;
-struct ObjectLinks11BC {
+struct TeamWeaponRuntimePlayerView;
+struct TeamWeaponRuntimePlayerView {
     char pad0[0x5D8];
-    char * unk_5D8;
+    char * options;
     char pad5D8[0x670 - 0x5D8 - sizeof(char*)];
-    f32 unk_670;
+    f32 shieldDuration;
     char pad670[0x698 - 0x670 - sizeof(f32)];
-    char * unk_698;
+    char * controller;
     char pad698[0x11B4 - 0x698 - sizeof(char*)];
-    s32 unk_11B4;
+    s32 locked;
     char pad11B4[0x11B8 - 0x11B4 - sizeof(s32)];
-    s32 unk_11B8;
+    s32 lockState;
 };
 
-struct ItemRecAt18V1;
-typedef struct ItemRecAt18V1 ItemRecAt18V1;
+struct TeamMenuIconView;
+typedef struct TeamMenuIconView TeamMenuIconView;
 
 
 struct Item;
@@ -92,8 +92,8 @@ struct Item {
     f32 height;
 };
 
-struct SlotRecAt10;
-struct SlotRecAt10 {
+struct TeamMenuSlotView;
+struct TeamMenuSlotView {
     s32 team;
     s32 unused;
     f32 angle;
@@ -109,20 +109,20 @@ struct TeamMenu {
     u8 reserved10[4];
     f32 spin;
     s32 count;
-    SlotRecAt10 slots[4];
+    TeamMenuSlotView slots[4];
     s32 cursor;
     s32 hover;
 };
 
-struct ObjectLinks11BC;
-typedef struct ObjectLinks11BC ObjectLinks11BC;
+struct TeamWeaponRuntimePlayerView;
+typedef struct TeamWeaponRuntimePlayerView TeamWeaponRuntimePlayerView;
 
-struct IntegerState74;
-struct IntegerState74 {
+struct TeamMenuSelectionPairView;
+struct TeamMenuSelectionPairView {
     char pad0[0x6C];
-    s32 unk_6C;
+    s32 cursor;
     char pad6C[0x70 - 0x6C - sizeof(s32)];
-    s32 unk_70;
+    s32 hover;
 };
 
 struct Entry34;
@@ -137,12 +137,12 @@ struct Entry34 {
 };
 
 
-struct IntegerState74;
-typedef struct IntegerState74 IntegerState74;
+struct TeamMenuSelectionPairView;
+typedef struct TeamMenuSelectionPairView TeamMenuSelectionPairView;
 
 
-struct ObjectLinks69C;
-typedef struct ObjectLinks69C ObjectLinks69C;
+struct TeamMenuPlayerLinksView;
+typedef struct TeamMenuPlayerLinksView TeamMenuPlayerLinksView;
 
 struct Entry;
 struct Entry {
@@ -155,8 +155,8 @@ struct Entry34;
 typedef struct Entry34 Entry34;
 
 
-struct ItemRecAt18V1;
-struct ItemRecAt18V1 {
+struct TeamMenuIconView;
+struct TeamMenuIconView {
     s32 slot;
     CVector3 position;
     s32 icon;
@@ -164,17 +164,17 @@ struct ItemRecAt18V1 {
     f32 height;
 };
 
-struct ObjectLinks69C;
-struct ObjectLinks69C {
+struct TeamMenuPlayerLinksView;
+struct TeamMenuPlayerLinksView {
     unsigned char padding_0[1496];
-    void *unk_5D8;
+    void *options;
     unsigned char padding_5DC[188];
-    void *unk_698;
+    void *controller;
 };
 
-extern float D_800C21F0_de;
+extern float g_barrelEffectSoundMaximumPitch;
 
-extern float D_800C224C_de;
+extern float g_weaponWheelResetAngleStep;
 
 struct Body;
 struct Character;
@@ -196,33 +196,33 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-struct ObjRecAtB0;
+struct ControllerButtonFlagsView;
 
-extern float D_800C21E8_de;
+extern float g_barrelApproachClearance;
 
-extern float D_800C22C8_de;
+extern float g_teamWheelPlayerShieldDuration;
 
-struct ObjectLinks11B8;
-struct ObjectLinks11B8 {
+struct TeamWeaponSelectionPlayerView;
+struct TeamWeaponSelectionPlayerView {
     char pad0[0x38];
-    s32 unk_38;
+    s32 flags;
     char pad38[0x5D8 - 0x38 - sizeof(s32)];
-    char * unk_5D8;
+    char * options;
     char pad5D8[0x62E - 0x5D8 - sizeof(char*)];
-    s16 unk_62E;
+    s16 selectedWeapon;
     char pad62E[0x698 - 0x62E - sizeof(s16)];
-    char * unk_698;
+    char * controller;
     char pad698[0x770 - 0x698 - sizeof(char*)];
-    s16 unk_770;
+    s16 requestedWeapon;
     char pad770[0xCC0 - 0x770 - sizeof(s16)];
-    s32 unk_CC0;
+    s32 pendingWeapon;
     char padCC0[0x11B4 - 0xCC0 - sizeof(s32)];
-    s32 unk_11B4;
+    s32 locked;
 };
 
 
-struct ObjectLinks11B8;
-typedef struct ObjectLinks11B8 ObjectLinks11B8;
+struct TeamWeaponSelectionPlayerView;
+typedef struct TeamWeaponSelectionPlayerView TeamWeaponSelectionPlayerView;
 
 struct MenuCteamselectDrawTeamWheel;
 struct MenuCteamselectDrawTeamWheel {
@@ -230,7 +230,7 @@ struct MenuCteamselectDrawTeamWheel {
     s32 unused;
     f32 open;
     char padC[0x10];
-    SlotRecAt10 slots[4];
+    TeamMenuSlotView slots[4];
     s32 cursor;
 };
 

@@ -31,13 +31,13 @@ struct G {
     char pad0[0x3DC];
     s32 unk3DC;
     char pad3E0[0x3EC - 0x3E0];
-    s32 unk3EC;
-    s32 unk3F0;
+    s32 reservedWord;
+    s32 reservedWord1;
     char pad3F4[0x440 - 0x3F4];
-    s32 unk440;
-    s32 unk444;
-    s32 unk448;
-    ResourceSmpFlickerCreateFlickerWidget *unk44C;
+    s32 reservedWord2;
+    s32 reservedWord3;
+    s32 reservedWord4;
+    ResourceSmpFlickerCreateFlickerWidget *reservedPointer;
 };
 
 struct ResourceSmpFlickerCreateFlickerWidget;
@@ -86,7 +86,7 @@ struct Cup {
 };
 
 /* The cup being played. */
-extern struct Cup D_80154010;
+extern struct Cup g_scenarioCupProgress;
 
 
 
@@ -122,7 +122,7 @@ struct MenuRenderFill {
 };
 
 
-extern s32 ScenarioSetup_DispatchCatalogueEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 ScenarioSetup_DispatchCatalogueEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra);
 extern s32 g_cupCategoryZeroArenaControls[];
 extern s32 g_cupCategoryOneArenaControls[];
 extern s32 g_cupCategoryThreeArenaControls[];

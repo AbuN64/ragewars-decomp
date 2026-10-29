@@ -120,7 +120,7 @@ toolchain = "gcc-2.7.2-sn64"
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math", "-fno-delayed-branch"]
 omit = []
-[file."src/sdk/libultra/libc/802C1880_2.CPP"]
+[file."src/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-mfp32"]
 omit = []

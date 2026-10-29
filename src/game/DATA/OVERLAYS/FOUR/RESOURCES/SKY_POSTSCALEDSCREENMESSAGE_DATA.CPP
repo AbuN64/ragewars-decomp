@@ -2,7 +2,7 @@
 
 /* 800CDEB4.CPP */
 #if defined(VERSION_US)
-char rodata_unresolved_800CDEB4[16008] =
+char s_SkyPostscaledscreenmessageFREEZEKLMOFormatText[16008] =
     "\000\000\000\003\000\000\000\000\000\000\000\000\000\000\000\002\000\000\000\000\000\000\000\003"
     "\000\000\000\000\000\000\000\000\000\000\000\002\000\000\000\000\000\000\000\003\000\000\000\000"
     "\377\377\377\330\000\000\000\002\000\000\000\000_FREEZE_\200\015\035\264\010K\016\014\377\377\000"
@@ -302,12 +302,12 @@ char rodata_unresolved_800CDEB4[16008] =
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #ifdef VERSION_DE
-extern char D_002ABBDC[];
-extern char D_002AC66C[];
-extern char D_002ACB18[];
-extern char D_002ACC04[];
-extern char D_002ACD28[];
-extern char D_002ACFB0[];
+extern char addrLow_Pickup_ApplySpecialPickupEntryVariant1[];
+extern char addrLow_Pickup_HandlePowerWeaponPickupEntryVariant1[];
+extern char addrLow_Pickup_ApplyAmmoEntryVariant1[];
+extern char addrLow_Pickup_ApplyHealthEntryVariant1[];
+extern char g_Pickup_ApplyLifePointsEncodedCallbackEntryVariant1[];
+extern char addrLow_Pickup_ApplyAmmoBundleEntryVariant1[];
 struct {
     unsigned int w0[299];
     unsigned char b1[2624];
@@ -320,29 +320,29 @@ struct {
     unsigned int w8[3];
     unsigned char b9[3828];
     unsigned int w10[266];
-} D_auto_rodata_unresolved_800CDEB4 = {
+} k_SkyPostscaledscreenmessageEncodedWords = {
     {
         0x00000003, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000003, 0x00000000, 0x00000000,
         0x00000002, 0x00000000, 0x00000003, 0x00000000, 0xFFFFFFD8, 0x00000002, 0x00000000, 0x800D3108,
-        0x084B0E0C, 0xFFFF0000, 0x00120003, 0x00010000, (unsigned int)D_002AC66C, 0x800D310C, 0x084C0E0C,
-        0xFFFF0000, 0x00130004, 0x00030000, (unsigned int)D_002AC66C, 0x800D3110, 0x084D0E0C, 0xFFFF0000,
-        0x00140006, 0x00010000, (unsigned int)D_002AC66C, 0x800D3118, 0x084F0E0C, 0xFFFF0000, 0x00150005,
-        0x00010000, (unsigned int)D_002AC66C, 0x800D31C4, 0x0BC40DB6, 0x00000000, 0x00010064,
-        (unsigned int)D_002ACB18, 0x800D31C8, 0x0BC50DB6, 0x00000000, 0x00010064, (unsigned int)D_002ACB18,
-        0x800D31CC, 0x0BC60DAC, 0x00000000, 0x00000032, (unsigned int)D_002ACB18, 0x800D31D0, 0x0BC70DAC,
-        0x00000000, 0x00000032, (unsigned int)D_002ACB18, 0x800D31D4, 0x0BC80DC0, 0x00000000, 0x00020005,
-        (unsigned int)D_002ACB18, 0x800D31D8, 0x0BC90DC0, 0x00000000, 0x00020005, (unsigned int)D_002ACB18,
-        0x800D3044, 0x06A50001, 0x00000000, 0x00000002, 0x000000C8, (unsigned int)D_002ACC04, 0x800D3048,
-        0x06A60001, 0x00000000, 0x0000000A, 0x00000064, (unsigned int)D_002ACC04, 0x800D3058, 0x06A70001,
-        0x012B0000, 0x00000064, 0x00000064, (unsigned int)D_002ACC04, 0x800D305C, 0x06A80001, 0x012B0000,
-        0x00000064, 0x000000C8, (unsigned int)D_002ACC04, 0x800D3048, 0x06B80001, 0x00000000, 0x0000000A,
-        0x00000064, (unsigned int)D_002ACC04, 0x800D304C, 0x06B90DE8, 0x00000000, 0x0000000F, 0x00000064,
-        (unsigned int)D_002ACC04, 0x800D3050, 0x06BA0DE8, 0x00000000, 0x00000019, 0x00000064,
-        (unsigned int)D_002ACC04, 0x800D3054, 0x06BB0DF2, 0x00000000, 0x00000032, 0x00000064,
-        (unsigned int)D_002ACC04, 0x00000000, 0x06A90001, 0x00000000, 0x00010000, (unsigned int)D_002ACD28,
-        0x00000000, 0x06AA0001, 0x00000000, 0x000A0000, (unsigned int)D_002ACD28, 0x800D30A8, 0x0BD60E0E,
-        0x00000000, (unsigned int)D_002ABBDC, 0x800D30AC, 0x0BD702C6, 0x00000000, (unsigned int)D_002ABBDC,
-        0x800D30B8, 0x0BD80DCA, 0x00000000, (unsigned int)D_002ABBDC, 0x800D3068, 0x07080001, 0x012B0000,
+        0x084B0E0C, 0xFFFF0000, 0x00120003, 0x00010000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant1, 0x800D310C, 0x084C0E0C,
+        0xFFFF0000, 0x00130004, 0x00030000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant1, 0x800D3110, 0x084D0E0C, 0xFFFF0000,
+        0x00140006, 0x00010000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant1, 0x800D3118, 0x084F0E0C, 0xFFFF0000, 0x00150005,
+        0x00010000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant1, 0x800D31C4, 0x0BC40DB6, 0x00000000, 0x00010064,
+        (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant1, 0x800D31C8, 0x0BC50DB6, 0x00000000, 0x00010064, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant1,
+        0x800D31CC, 0x0BC60DAC, 0x00000000, 0x00000032, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant1, 0x800D31D0, 0x0BC70DAC,
+        0x00000000, 0x00000032, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant1, 0x800D31D4, 0x0BC80DC0, 0x00000000, 0x00020005,
+        (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant1, 0x800D31D8, 0x0BC90DC0, 0x00000000, 0x00020005, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant1,
+        0x800D3044, 0x06A50001, 0x00000000, 0x00000002, 0x000000C8, (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant1, 0x800D3048,
+        0x06A60001, 0x00000000, 0x0000000A, 0x00000064, (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant1, 0x800D3058, 0x06A70001,
+        0x012B0000, 0x00000064, 0x00000064, (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant1, 0x800D305C, 0x06A80001, 0x012B0000,
+        0x00000064, 0x000000C8, (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant1, 0x800D3048, 0x06B80001, 0x00000000, 0x0000000A,
+        0x00000064, (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant1, 0x800D304C, 0x06B90DE8, 0x00000000, 0x0000000F, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant1, 0x800D3050, 0x06BA0DE8, 0x00000000, 0x00000019, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant1, 0x800D3054, 0x06BB0DF2, 0x00000000, 0x00000032, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant1, 0x00000000, 0x06A90001, 0x00000000, 0x00010000, (unsigned int)g_Pickup_ApplyLifePointsEncodedCallbackEntryVariant1,
+        0x00000000, 0x06AA0001, 0x00000000, 0x000A0000, (unsigned int)g_Pickup_ApplyLifePointsEncodedCallbackEntryVariant1, 0x800D30A8, 0x0BD60E0E,
+        0x00000000, (unsigned int)addrLow_Pickup_ApplySpecialPickupEntryVariant1, 0x800D30AC, 0x0BD702C6, 0x00000000, (unsigned int)addrLow_Pickup_ApplySpecialPickupEntryVariant1,
+        0x800D30B8, 0x0BD80DCA, 0x00000000, (unsigned int)addrLow_Pickup_ApplySpecialPickupEntryVariant1, 0x800D3068, 0x07080001, 0x012B0000,
         0x002ACE38, 0x800D306C, 0x07090001, 0x012B0000, 0x002ACE38, 0x800D3070, 0x070A0001, 0x012B0000,
         0x002ACE38, 0x800D3074, 0x070B0001, 0x012B0000, 0x002ACE38, 0x800D307C, 0x111C0001, 0x012B0000,
         0x002ACE38, 0x800D3080, 0x111D0001, 0x012B0000, 0x002ACE38, 0x800D3084, 0x111E0001, 0x012B0000,
@@ -351,22 +351,22 @@ struct {
         0x002ACE38, 0x800D3098, 0x11320001, 0x012B0000, 0x002ACE38, 0x800D309C, 0x11330001, 0x012B0000,
         0x002ACE38, 0x800D30A0, 0x11340001, 0x012B0000, 0x002ACE38, 0x800D30A4, 0x11940001, 0x012B0000,
         0x002ACE38, 0x800D3078, 0x070F0001, 0x012B0000, 0x002ACE38, 0x800D31DC, 0x0BD90DFC, 0x00000000,
-        0x00000000, 0x00000000, (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BDA0DFC, 0x00000000, 0x00000000,
-        0x00000000, (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BDB0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BDC0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BDD0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BDE0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BDF0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BE00DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BE10DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BE20DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BE30DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BE40DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BE50DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BE60DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BE70DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0, 0x800D31DC, 0x0BE80DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002ACFB0,
+        0x00000000, 0x00000000, (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BDA0DFC, 0x00000000, 0x00000000,
+        0x00000000, (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BDB0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BDC0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BDD0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BDE0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BDF0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BE00DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BE10DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BE20DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BE30DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BE40DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BE50DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BE60DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BE70DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1, 0x800D31DC, 0x0BE80DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant1,
     },
     {
         0x6B, 0x65, 0x69, 0x6E, 0x65, 0x00, 0x00, 0x00, 0x77, 0x61, 0x72, 0x6E, 0x2D, 0x6C, 0x65, 0x75,
@@ -1586,12 +1586,12 @@ struct {
 };
 #endif
 #ifdef VERSION_EU_X
-extern char D_002ABD3C[];
-extern char D_002AC8C8[];
-extern char D_002ACF1C[];
-extern char D_002AD018[];
-extern char D_002AD14C[];
-extern char D_002AD26C[];
+extern char addrLow_Pickup_ApplySpecialPickupEntryVariant3[];
+extern char addrLow_Pickup_HandlePowerWeaponPickupEntryVariant3[];
+extern char addrLow_Pickup_ApplyAmmoEntryVariant3[];
+extern char addrLow_Pickup_ApplyHealthEntryVariant3[];
+extern char g_Pickup_ApplyLifePointsEncodedCallbackEntryVariant3[];
+extern char addrLow_Pickup_ApplyAmmoBundleEntryVariant3[];
 struct {
     unsigned int w0[313];
     unsigned char b1[8444];
@@ -1613,30 +1613,30 @@ struct {
     unsigned char b17[48];
     unsigned int w18;
     unsigned char b19[1332];
-} D_auto_rodata_unresolved_800CDEB4 = {
+} k_SkyPostscaledscreenmessageEncodedWords = {
     {
         0x00000003, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000003, 0x00000000, 0x00000000,
         0x00000002, 0x00000000, 0x00000003, 0x00000000, 0xFFFFFFD8, 0x00000002, 0x00000000, 0x4F4E2043,
-        0x4F555254, 0x800DCD4C, 0x084B0E0C, 0xFFFF0000, 0x00120003, 0x00010000, (unsigned int)D_002AC8C8,
-        0x800DCD58, 0x084C0E0C, 0xFFFF0000, 0x00130004, 0x00030000, (unsigned int)D_002AC8C8, 0x800DCD64,
-        0x084D0E0C, 0xFFFF0000, 0x00140006, 0x00010000, (unsigned int)D_002AC8C8, 0x800DCD7C, 0x084F0E0C,
-        0xFFFF0000, 0x00150005, 0x00010000, (unsigned int)D_002AC8C8, 0x800DCF80, 0x0BC40DB6, 0x00000000,
-        0x00010064, (unsigned int)D_002ACF1C, 0x800DCF8C, 0x0BC50DB6, 0x00000000, 0x00010064,
-        (unsigned int)D_002ACF1C, 0x800DCF98, 0x0BC60DAC, 0x00000000, 0x00000032, (unsigned int)D_002ACF1C,
-        0x800DCFA4, 0x0BC70DAC, 0x00000000, 0x00000032, (unsigned int)D_002ACF1C, 0x800DCFB0, 0x0BC80DC0,
-        0x00000000, 0x00020005, (unsigned int)D_002ACF1C, 0x800DCFBC, 0x0BC90DC0, 0x00000000, 0x00020005,
-        (unsigned int)D_002ACF1C, 0x800DCB00, 0x06A50001, 0x00000000, 0x00000002, 0x000000C8,
-        (unsigned int)D_002AD018, 0x800DCB0C, 0x06A60001, 0x00000000, 0x0000000A, 0x00000064,
-        (unsigned int)D_002AD018, 0x800DCB3C, 0x06A70001, 0x012B0000, 0x00000064, 0x00000064,
-        (unsigned int)D_002AD018, 0x800DCB48, 0x06A80001, 0x012B0000, 0x00000064, 0x000000C8,
-        (unsigned int)D_002AD018, 0x800DCB0C, 0x06B80001, 0x00000000, 0x0000000A, 0x00000064,
-        (unsigned int)D_002AD018, 0x800DCB18, 0x06B90DE8, 0x00000000, 0x0000000F, 0x00000064,
-        (unsigned int)D_002AD018, 0x800DCB24, 0x06BA0DE8, 0x00000000, 0x00000019, 0x00000064,
-        (unsigned int)D_002AD018, 0x800DCB30, 0x06BB0DF2, 0x00000000, 0x00000032, 0x00000064,
-        (unsigned int)D_002AD018, 0x00000000, 0x06A90001, 0x00000000, 0x00010000, (unsigned int)D_002AD14C,
-        0x00000000, 0x06AA0001, 0x00000000, 0x000A0000, (unsigned int)D_002AD14C, 0x800DCC2C, 0x0BD60E0E,
-        0x00000000, (unsigned int)D_002ABD3C, 0x800DCC38, 0x0BD702C6, 0x00000000, (unsigned int)D_002ABD3C,
-        0x800DCC5C, 0x0BD80DCA, 0x00000000, (unsigned int)D_002ABD3C, 0x800DCB6C, 0x07080001, 0x012B0000,
+        0x4F555254, 0x800DCD4C, 0x084B0E0C, 0xFFFF0000, 0x00120003, 0x00010000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant3,
+        0x800DCD58, 0x084C0E0C, 0xFFFF0000, 0x00130004, 0x00030000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant3, 0x800DCD64,
+        0x084D0E0C, 0xFFFF0000, 0x00140006, 0x00010000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant3, 0x800DCD7C, 0x084F0E0C,
+        0xFFFF0000, 0x00150005, 0x00010000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant3, 0x800DCF80, 0x0BC40DB6, 0x00000000,
+        0x00010064, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant3, 0x800DCF8C, 0x0BC50DB6, 0x00000000, 0x00010064,
+        (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant3, 0x800DCF98, 0x0BC60DAC, 0x00000000, 0x00000032, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant3,
+        0x800DCFA4, 0x0BC70DAC, 0x00000000, 0x00000032, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant3, 0x800DCFB0, 0x0BC80DC0,
+        0x00000000, 0x00020005, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant3, 0x800DCFBC, 0x0BC90DC0, 0x00000000, 0x00020005,
+        (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant3, 0x800DCB00, 0x06A50001, 0x00000000, 0x00000002, 0x000000C8,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant3, 0x800DCB0C, 0x06A60001, 0x00000000, 0x0000000A, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant3, 0x800DCB3C, 0x06A70001, 0x012B0000, 0x00000064, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant3, 0x800DCB48, 0x06A80001, 0x012B0000, 0x00000064, 0x000000C8,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant3, 0x800DCB0C, 0x06B80001, 0x00000000, 0x0000000A, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant3, 0x800DCB18, 0x06B90DE8, 0x00000000, 0x0000000F, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant3, 0x800DCB24, 0x06BA0DE8, 0x00000000, 0x00000019, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant3, 0x800DCB30, 0x06BB0DF2, 0x00000000, 0x00000032, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant3, 0x00000000, 0x06A90001, 0x00000000, 0x00010000, (unsigned int)g_Pickup_ApplyLifePointsEncodedCallbackEntryVariant3,
+        0x00000000, 0x06AA0001, 0x00000000, 0x000A0000, (unsigned int)g_Pickup_ApplyLifePointsEncodedCallbackEntryVariant3, 0x800DCC2C, 0x0BD60E0E,
+        0x00000000, (unsigned int)addrLow_Pickup_ApplySpecialPickupEntryVariant3, 0x800DCC38, 0x0BD702C6, 0x00000000, (unsigned int)addrLow_Pickup_ApplySpecialPickupEntryVariant3,
+        0x800DCC5C, 0x0BD80DCA, 0x00000000, (unsigned int)addrLow_Pickup_ApplySpecialPickupEntryVariant3, 0x800DCB6C, 0x07080001, 0x012B0000,
         0x002ACB98, 0x800DCB78, 0x07090001, 0x012B0000, 0x002ACB98, 0x800DCB84, 0x070A0001, 0x012B0000,
         0x002ACB98, 0x800DCB90, 0x070B0001, 0x012B0000, 0x002ACB98, 0x800DCBA8, 0x111C0001, 0x012B0000,
         0x002ACB98, 0x800DCBB4, 0x111D0001, 0x012B0000, 0x002ACB98, 0x800DCBC0, 0x111E0001, 0x012B0000,
@@ -1645,22 +1645,22 @@ struct {
         0x002ACB98, 0x800DCBFC, 0x11320001, 0x012B0000, 0x002ACB98, 0x800DCC08, 0x11330001, 0x012B0000,
         0x002ACB98, 0x800DCC14, 0x11340001, 0x012B0000, 0x002ACB98, 0x800DCC20, 0x11940001, 0x012B0000,
         0x002ACB98, 0x800DCB9C, 0x070F0001, 0x012B0000, 0x002ACB98, 0x800DCFC8, 0x0BD90DFC, 0x00000000,
-        0x00000000, 0x00000000, (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BDA0DFC, 0x00000000, 0x00000000,
-        0x00000000, (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BDB0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BDC0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BDD0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BDE0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BDF0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BE00DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BE10DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BE20DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BE30DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BE40DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BE50DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BE60DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BE70DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x800DCFC8, 0x0BE80DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD26C, 0x6E6F6E65, 0x00000000, 0x800C65E4, 0x800C65E0, 0x800C65D0, 0x00000000,
+        0x00000000, 0x00000000, (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BDA0DFC, 0x00000000, 0x00000000,
+        0x00000000, (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BDB0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BDC0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BDD0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BDE0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BDF0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BE00DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BE10DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BE20DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BE30DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BE40DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BE50DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BE60DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BE70DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x800DCFC8, 0x0BE80DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant3, 0x6E6F6E65, 0x00000000, 0x800C65E4, 0x800C65E0, 0x800C65D0, 0x00000000,
         0x00000000, 0x00000000, 0x800C65F4, 0x00000000, 0x800C6608, 0x00000000,
     },
     {
@@ -2892,12 +2892,12 @@ struct {
 };
 #endif
 #ifdef VERSION_EU
-extern char D_002ABCFC[];
-extern char D_002AC888[];
-extern char D_002ACEDC[];
-extern char D_002ACFD8[];
-extern char D_002AD10C[];
-extern char D_002AD22C[];
+extern char addrLow_Pickup_ApplySpecialPickupEntryVariant2[];
+extern char addrLow_Pickup_HandlePowerWeaponPickupEntryVariant2[];
+extern char addrLow_Pickup_ApplyAmmoEntryVariant2[];
+extern char addrLow_Pickup_ApplyHealthEntryVariant2[];
+extern char g_Pickup_ApplyLifePointsEncodedCallbackEntryVariant2[];
+extern char addrLow_Pickup_ApplyAmmoBundleEntryVariant2[];
 struct {
     unsigned int w0[313];
     unsigned char b1[8444];
@@ -2919,30 +2919,30 @@ struct {
     unsigned char b17[48];
     unsigned int w18;
     unsigned char b19[1332];
-} D_auto_rodata_unresolved_800CDEB4 = {
+} k_SkyPostscaledscreenmessageEncodedWords = {
     {
         0x00000003, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000003, 0x00000000, 0x00000000,
         0x00000002, 0x00000000, 0x00000003, 0x00000000, 0xFFFFFFD8, 0x00000002, 0x00000000, 0x00000005,
-        0x00000000, 0x800E0E74, 0x084B0E0C, 0xFFFF0000, 0x00120003, 0x00010000, (unsigned int)D_002AC888,
-        0x800E0E84, 0x084C0E0C, 0xFFFF0000, 0x00130004, 0x00030000, (unsigned int)D_002AC888, 0x800E0E94,
-        0x084D0E0C, 0xFFFF0000, 0x00140006, 0x00010000, (unsigned int)D_002AC888, 0x800E0EB4, 0x084F0E0C,
-        0xFFFF0000, 0x00150005, 0x00010000, (unsigned int)D_002AC888, 0x800E1164, 0x0BC40DB6, 0x00000000,
-        0x00010064, (unsigned int)D_002ACEDC, 0x800E1174, 0x0BC50DB6, 0x00000000, 0x00010064,
-        (unsigned int)D_002ACEDC, 0x800E1184, 0x0BC60DAC, 0x00000000, 0x00000032, (unsigned int)D_002ACEDC,
-        0x800E1194, 0x0BC70DAC, 0x00000000, 0x00000032, (unsigned int)D_002ACEDC, 0x800E11A4, 0x0BC80DC0,
-        0x00000000, 0x00020005, (unsigned int)D_002ACEDC, 0x800E11B4, 0x0BC90DC0, 0x00000000, 0x00020005,
-        (unsigned int)D_002ACEDC, 0x800E0B64, 0x06A50001, 0x00000000, 0x00000002, 0x000000C8,
-        (unsigned int)D_002ACFD8, 0x800E0B74, 0x06A60001, 0x00000000, 0x0000000A, 0x00000064,
-        (unsigned int)D_002ACFD8, 0x800E0BB4, 0x06A70001, 0x012B0000, 0x00000064, 0x00000064,
-        (unsigned int)D_002ACFD8, 0x800E0BC4, 0x06A80001, 0x012B0000, 0x00000064, 0x000000C8,
-        (unsigned int)D_002ACFD8, 0x800E0B74, 0x06B80001, 0x00000000, 0x0000000A, 0x00000064,
-        (unsigned int)D_002ACFD8, 0x800E0B84, 0x06B90DE8, 0x00000000, 0x0000000F, 0x00000064,
-        (unsigned int)D_002ACFD8, 0x800E0B94, 0x06BA0DE8, 0x00000000, 0x00000019, 0x00000064,
-        (unsigned int)D_002ACFD8, 0x800E0BA4, 0x06BB0DF2, 0x00000000, 0x00000032, 0x00000064,
-        (unsigned int)D_002ACFD8, 0x00000000, 0x06A90001, 0x00000000, 0x00010000, (unsigned int)D_002AD10C,
-        0x00000000, 0x06AA0001, 0x00000000, 0x000A0000, (unsigned int)D_002AD10C, 0x800E0CF4, 0x0BD60E0E,
-        0x00000000, (unsigned int)D_002ABCFC, 0x800E0D04, 0x0BD702C6, 0x00000000, (unsigned int)D_002ABCFC,
-        0x800E0D34, 0x0BD80DCA, 0x00000000, (unsigned int)D_002ABCFC, 0x800E0BF4, 0x07080001, 0x012B0000,
+        0x00000000, 0x800E0E74, 0x084B0E0C, 0xFFFF0000, 0x00120003, 0x00010000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant2,
+        0x800E0E84, 0x084C0E0C, 0xFFFF0000, 0x00130004, 0x00030000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant2, 0x800E0E94,
+        0x084D0E0C, 0xFFFF0000, 0x00140006, 0x00010000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant2, 0x800E0EB4, 0x084F0E0C,
+        0xFFFF0000, 0x00150005, 0x00010000, (unsigned int)addrLow_Pickup_HandlePowerWeaponPickupEntryVariant2, 0x800E1164, 0x0BC40DB6, 0x00000000,
+        0x00010064, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant2, 0x800E1174, 0x0BC50DB6, 0x00000000, 0x00010064,
+        (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant2, 0x800E1184, 0x0BC60DAC, 0x00000000, 0x00000032, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant2,
+        0x800E1194, 0x0BC70DAC, 0x00000000, 0x00000032, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant2, 0x800E11A4, 0x0BC80DC0,
+        0x00000000, 0x00020005, (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant2, 0x800E11B4, 0x0BC90DC0, 0x00000000, 0x00020005,
+        (unsigned int)addrLow_Pickup_ApplyAmmoEntryVariant2, 0x800E0B64, 0x06A50001, 0x00000000, 0x00000002, 0x000000C8,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant2, 0x800E0B74, 0x06A60001, 0x00000000, 0x0000000A, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant2, 0x800E0BB4, 0x06A70001, 0x012B0000, 0x00000064, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant2, 0x800E0BC4, 0x06A80001, 0x012B0000, 0x00000064, 0x000000C8,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant2, 0x800E0B74, 0x06B80001, 0x00000000, 0x0000000A, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant2, 0x800E0B84, 0x06B90DE8, 0x00000000, 0x0000000F, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant2, 0x800E0B94, 0x06BA0DE8, 0x00000000, 0x00000019, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant2, 0x800E0BA4, 0x06BB0DF2, 0x00000000, 0x00000032, 0x00000064,
+        (unsigned int)addrLow_Pickup_ApplyHealthEntryVariant2, 0x00000000, 0x06A90001, 0x00000000, 0x00010000, (unsigned int)g_Pickup_ApplyLifePointsEncodedCallbackEntryVariant2,
+        0x00000000, 0x06AA0001, 0x00000000, 0x000A0000, (unsigned int)g_Pickup_ApplyLifePointsEncodedCallbackEntryVariant2, 0x800E0CF4, 0x0BD60E0E,
+        0x00000000, (unsigned int)addrLow_Pickup_ApplySpecialPickupEntryVariant2, 0x800E0D04, 0x0BD702C6, 0x00000000, (unsigned int)addrLow_Pickup_ApplySpecialPickupEntryVariant2,
+        0x800E0D34, 0x0BD80DCA, 0x00000000, (unsigned int)addrLow_Pickup_ApplySpecialPickupEntryVariant2, 0x800E0BF4, 0x07080001, 0x012B0000,
         0x002ACB58, 0x800E0C04, 0x07090001, 0x012B0000, 0x002ACB58, 0x800E0C14, 0x070A0001, 0x012B0000,
         0x002ACB58, 0x800E0C24, 0x070B0001, 0x012B0000, 0x002ACB58, 0x800E0C44, 0x111C0001, 0x012B0000,
         0x002ACB58, 0x800E0C54, 0x111D0001, 0x012B0000, 0x002ACB58, 0x800E0C64, 0x111E0001, 0x012B0000,
@@ -2951,22 +2951,22 @@ struct {
         0x002ACB58, 0x800E0CB4, 0x11320001, 0x012B0000, 0x002ACB58, 0x800E0CC4, 0x11330001, 0x012B0000,
         0x002ACB58, 0x800E0CD4, 0x11340001, 0x012B0000, 0x002ACB58, 0x800E0CE4, 0x11940001, 0x012B0000,
         0x002ACB58, 0x800E0C34, 0x070F0001, 0x012B0000, 0x002ACB58, 0x800E11C4, 0x0BD90DFC, 0x00000000,
-        0x00000000, 0x00000000, (unsigned int)D_002AD22C, 0x800E11C4, 0x0BDA0DFC, 0x00000000, 0x00000000,
-        0x00000000, (unsigned int)D_002AD22C, 0x800E11C4, 0x0BDB0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BDC0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BDD0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BDE0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BDF0DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BE00DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BE10DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BE20DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BE30DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BE40DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BE50DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BE60DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BE70DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x800E11C4, 0x0BE80DFC, 0x00000000, 0x00000000, 0x00000000,
-        (unsigned int)D_002AD22C, 0x6E6F6E65, 0x00000000, 0x800C65A4, 0x800C65A0, 0x800C6590, 0x00000000,
+        0x00000000, 0x00000000, (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BDA0DFC, 0x00000000, 0x00000000,
+        0x00000000, (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BDB0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BDC0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BDD0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BDE0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BDF0DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BE00DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BE10DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BE20DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BE30DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BE40DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BE50DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BE60DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BE70DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x800E11C4, 0x0BE80DFC, 0x00000000, 0x00000000, 0x00000000,
+        (unsigned int)addrLow_Pickup_ApplyAmmoBundleEntryVariant2, 0x6E6F6E65, 0x00000000, 0x800C65A4, 0x800C65A0, 0x800C6590, 0x00000000,
         0x00000000, 0x00000000, 0x800C65B4, 0x00000000, 0x800C65C8, 0x00000000,
     },
     {
@@ -4198,7 +4198,7 @@ struct {
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_auto_rodata_unresolved_800CDEB4[5205] = {
+unsigned int k_SkyPostscaledscreenmessageEncodedWords[5205] = {
     0x00000003, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000003, 0x00000000, 0x00000000,
     0x00000002, 0x00000000, 0x00000003, 0x00000000, 0xFFFFFFD8, 0x00000002, 0x00000000, 0x5F465245,
     0x455A455F, 0x800D1DB4, 0x084B0E0C, 0xFFFF0000, 0x00120003, 0x00010000, 0x002AC59C, 0x800D1DB8,
@@ -6300,7 +6300,7 @@ const char s_fadeOutCinemaTextHint[36] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned char D_blob_9d129132f0eff55f707d[36] = {
+unsigned char g_SkyPostscaledscreenmessageEncodedBytes[36] = {
     0x3C, 0x75, 0x73, 0x65, 0x20, 0x74, 0x68, 0x69, 0x73, 0x20, 0x74, 0x6F, 0x20, 0x66, 0x61, 0x64, 0x65,
     0x20, 0x6F, 0x75, 0x74, 0x20, 0x63, 0x69, 0x6E, 0x65, 0x6D, 0x61, 0x20, 0x74, 0x65, 0x78, 0x74, 0x3E,
     0x00, 0x00,

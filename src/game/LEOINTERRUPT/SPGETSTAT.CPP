@@ -7,6 +7,6 @@ unsigned int Audio_ReadSignalProcessorStatus(void) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BA0D4[12] =
+char s_swimOffsetMemberNameFragment[12] =
     "\000\014m_SwimOffs";
 #endif

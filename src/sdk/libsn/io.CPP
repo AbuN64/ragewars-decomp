@@ -12,9 +12,9 @@ s32 Libsn_ReadPortWord(s32 portAddress) {
     return IO_READ_WORD(portAddress);
 }
 
-extern volatile s32 D_800F1C80_de;
+extern volatile s32 g_libsnDelayIteration;
 
 void Libsn_SpinDelay(s32 iterationCount) {
-    for (D_800F1C80_de = 0; D_800F1C80_de < iterationCount; D_800F1C80_de++) {
+    for (g_libsnDelayIteration = 0; g_libsnDelayIteration < iterationCount; g_libsnDelayIteration++) {
     }
 }

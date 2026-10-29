@@ -1,6 +1,6 @@
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "WEAPONS/BARREL_ADDACTORYAW.H"
 
 void Barrel_ApplyClampedTurn(void *actor, s32 unused1, f32 turnLimit, f32 desiredTurn) {
@@ -15,7 +15,7 @@ void Barrel_ApplyClampedTurn(void *actor, s32 unused1, f32 turnLimit, f32 desire
     if (f0 < f1 || (f0 = -f0, f1 < f0)) {
         f1 = f0;
     }
-    f1 = f1 * D_800D2988;
+    f1 = f1 * g_frameElapsedTime;
     f2 = f1;
     if (f1 < 0.0f) {
         f2 = -f1;

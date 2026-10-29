@@ -2,7 +2,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MATH/math_double.H"
 #include "MATH/XMATH_EVALUATEHYPERBOLICTANGENT.H"
 
@@ -16,7 +16,7 @@
 
 
 
-void XMath_ConvertZyxToYxzAngles(f32 *arg0) {
+void XMath_ConvertZyxToYxzAngles(f32 *angles) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -28,9 +28,9 @@ void XMath_ConvertZyxToYxzAngles(f32 *arg0) {
     f32 out1;
     f32 out2;
 
-    XMath_EvaluateSineCosine(arg0[0], &sp10, &sp14);
-    XMath_EvaluateSineCosine(arg0[1], &sp18, &sp1C);
-    XMath_EvaluateSineCosine(arg0[2], &sp20, &sp24);
+    XMath_EvaluateSineCosine(angles[0], &sp10, &sp14);
+    XMath_EvaluateSineCosine(angles[1], &sp18, &sp1C);
+    XMath_EvaluateSineCosine(angles[2], &sp20, &sp24);
     test = (sp14 * sp20 * sp18) - (sp10 * sp24);
     if ((1.0f) < test) {
         test = (1.0f);
@@ -53,9 +53,9 @@ void XMath_ConvertZyxToYxzAngles(f32 *arg0) {
         out1 = 0.0f;
         out2 = XMath_EvaluateArcTangentTwo(-sp18, sp1C * sp24);
     }
-    arg0[0] = angle;
-    arg0[1] = out1;
-    arg0[2] = out2;
+    angles[0] = angle;
+    angles[1] = out1;
+    angles[2] = out2;
 }
 
 /* Converts a vector of three angles into another angle triple via sine/cosine products, clamping and atan2-style calls, and writes it back. Adapted from XMath_ConvertYzxToZyxAngles, with the clamped product, the branch products, and the stored order of the second and third results changed. */
@@ -70,7 +70,7 @@ void XMath_ConvertZyxToYxzAngles(f32 *arg0) {
 
 
 
-void XMath_ConvertZyxToYzxAngles(CVector3 *arg0) {
+void XMath_ConvertZyxToYzxAngles(CVector3 *angles) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -83,9 +83,9 @@ void XMath_ConvertZyxToYzxAngles(CVector3 *arg0) {
     f32 angle;
     f32 test;
 
-    XMath_EvaluateSineCosine(arg0->x, &sp10, &sp14);
-    XMath_EvaluateSineCosine(arg0->y, &sp18, &sp1C);
-    XMath_EvaluateSineCosine(arg0->z, &sp20, &sp24);
+    XMath_EvaluateSineCosine(angles->x, &sp10, &sp14);
+    XMath_EvaluateSineCosine(angles->y, &sp18, &sp1C);
+    XMath_EvaluateSineCosine(angles->z, &sp20, &sp24);
 
     clamped = sp1C * sp20;
     if ((1.0f) < clamped) {
@@ -113,9 +113,9 @@ void XMath_ConvertZyxToYzxAngles(CVector3 *arg0) {
         outZ = 0.0f;
     }
 
-    arg0->x = outX;
-    arg0->y = outZ;
-    arg0->z = angle;
+    angles->x = outX;
+    angles->y = outZ;
+    angles->z = angle;
 }
 
 
@@ -123,7 +123,7 @@ void XMath_ConvertZyxToYzxAngles(CVector3 *arg0) {
 
 
 
-void XMath_ConvertYzxToZyxAngles(CVector3 *arg0) {
+void XMath_ConvertYzxToZyxAngles(CVector3 *angles) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -136,9 +136,9 @@ void XMath_ConvertYzxToZyxAngles(CVector3 *arg0) {
     f32 angle;
     f32 test;
 
-    XMath_EvaluateSineCosine(arg0->x, &sp10, &sp14);
-    XMath_EvaluateSineCosine(arg0->y, &sp18, &sp1C);
-    XMath_EvaluateSineCosine(arg0->z, &sp20, &sp24);
+    XMath_EvaluateSineCosine(angles->x, &sp10, &sp14);
+    XMath_EvaluateSineCosine(angles->y, &sp18, &sp1C);
+    XMath_EvaluateSineCosine(angles->z, &sp20, &sp24);
 
     clamped = -sp18 * sp24;
     if ((1.0f) < clamped) {
@@ -165,9 +165,9 @@ void XMath_ConvertYzxToZyxAngles(CVector3 *arg0) {
         outZ = 0.0f;
     }
 
-    arg0->x = outX;
-    arg0->y = angle;
-    arg0->z = outZ;
+    angles->x = outX;
+    angles->y = angle;
+    angles->z = outZ;
 }
 
 
@@ -175,7 +175,7 @@ void XMath_ConvertYzxToZyxAngles(CVector3 *arg0) {
 
 
 
-void XMath_ConvertYxzToZyxAngles(f32 *arg0) {
+void XMath_ConvertYxzToZyxAngles(f32 *angles) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -187,9 +187,9 @@ void XMath_ConvertYxzToZyxAngles(f32 *arg0) {
     f32 out0;
     f32 out2;
 
-    XMath_EvaluateSineCosine(arg0[0], &sp10, &sp14);
-    XMath_EvaluateSineCosine(arg0[1], &sp18, &sp1C);
-    XMath_EvaluateSineCosine(arg0[2], &sp20, &sp24);
+    XMath_EvaluateSineCosine(angles[0], &sp10, &sp14);
+    XMath_EvaluateSineCosine(angles[1], &sp18, &sp1C);
+    XMath_EvaluateSineCosine(angles[2], &sp20, &sp24);
     test = (sp1C * sp10 * sp20) - (sp18 * sp24);
     if ((1.0f) < test) {
         test = (1.0f);
@@ -212,53 +212,53 @@ void XMath_ConvertYxzToZyxAngles(f32 *arg0) {
         out0 = XMath_EvaluateArcTangentTwo(sp10, sp14 * sp24);
         out2 = 0.0f;
     }
-    arg0[0] = out0;
-    arg0[1] = angle;
-    arg0[2] = out2;
+    angles[0] = out0;
+    angles[1] = angle;
+    angles[2] = out2;
 }
 
-f32 XMath_EvaluateSine(f32 arg0) {
-    f32 temp_f2;
+f32 XMath_EvaluateSine(f32 angle) {
+    f32 angleSquared;
     f32 result;
-    f32 var_f1;
-    f32 var_f20;
-    s32 var_s0;
+    f32 reducedAngle;
+    f32 workingAngle;
+    s32 resultSign;
 
-    var_f20 = arg0;
-    var_s0 = 1;
-    var_f1 = var_f20;
-    if (((25.132743835449219f) < var_f20) || (var_f20 < (-25.13274383544922f))) {
-        FloatModulo((f64)var_f20, (6.2831859588623047));
+    workingAngle = angle;
+    resultSign = 1;
+    reducedAngle = workingAngle;
+    if (((25.132743835449219f) < workingAngle) || (workingAngle < (-25.13274383544922f))) {
+        FloatModulo((f64)workingAngle, (6.2831859588623047));
     } else {
-        if ((6.2831859588623047f) < var_f20) {
+        if ((6.2831859588623047f) < workingAngle) {
             do {
-                var_f1 -= (6.2831859588623047f);
-            } while ((6.2831859588623047f) < var_f1);
+                reducedAngle -= (6.2831859588623047f);
+            } while ((6.2831859588623047f) < reducedAngle);
         }
         result = 0.0f;
-        if (var_f1 < result) {
+        if (reducedAngle < result) {
             do {
-                var_f1 += (6.283185958862305f);
-            } while (var_f1 < result);
+                reducedAngle += (6.283185958862305f);
+            } while (reducedAngle < result);
         }
     }
-    if (var_f20 < (-1.5707963705062866f)) {
+    if (workingAngle < (-1.5707963705062866f)) {
         do {
-            var_f20 += (6.2831854820251465f);
-        } while (var_f20 < (-1.5707963705062866f));
+            workingAngle += (6.2831854820251465f);
+        } while (workingAngle < (-1.5707963705062866f));
     }
-    if ((4.7123889923095703f) < var_f20) {
+    if ((4.7123889923095703f) < workingAngle) {
         do {
-            var_f20 -= (6.2831854820251465f);
-        } while ((4.7123889923095703f) < var_f20);
+            workingAngle -= (6.2831854820251465f);
+        } while ((4.7123889923095703f) < workingAngle);
     }
-    if ((1.5707963705062866f) < var_f20) {
-        var_s0 = -1;
-        var_f20 -= (3.1415927410125732f);
+    if ((1.5707963705062866f) < workingAngle) {
+        resultSign = -1;
+        workingAngle -= (3.1415927410125732f);
     }
-    temp_f2 = var_f20 * var_f20;
-    result = (((((((temp_f2 * (2.7557318844628753e-06f)) - (0.00019841270113829523f)) * temp_f2) + (0.0083333337679505348f)) * temp_f2) - (0.1666666716337204f)) * temp_f2 * var_f20) + var_f20;
-    if (var_s0 < 0) {
+    angleSquared = workingAngle * workingAngle;
+    result = (((((((angleSquared * (2.7557318844628753e-06f)) - (0.00019841270113829523f)) * angleSquared) + (0.0083333337679505348f)) * angleSquared) - (0.1666666716337204f)) * angleSquared * workingAngle) + workingAngle;
+    if (resultSign < 0) {
         result = -result;
     }
     return result;
@@ -396,7 +396,7 @@ f64 XMath_EvaluateHyperbolicTangent(f64 x) {
     return result;
 }
 
-/* Returns the angle of the vector (x, y) in radians, atan2(y, x): both components within 1e-6 of zero are snapped to zero, the axes return exact multiples of pi/2, and otherwise the arctangent of |y/x| comes from the (t - 1)/(t + 1) series around pi/4, negated for a negative ratio and offset by the quadrant's term from D_800D2B60. */
+/* Returns the angle of the vector (x, y) in radians, atan2(y, x): both components within 1e-6 of zero are snapped to zero, the axes return exact multiples of pi/2, and otherwise the arctangent of |y/x| comes from the (t - 1)/(t + 1) series around pi/4, negated for a negative ratio and offset by the quadrant's term from k_xmathAtanQuadrantOffsets. */
 
 
 f32 XMath_EvaluateArcTangentTwo(f32 y, f32 x) {
@@ -441,7 +441,7 @@ f32 XMath_EvaluateArcTangentTwo(f32 y, f32 x) {
         magnitude = -ratio;
     }
     if (magnitude < 1e-6f) {
-        return D_800D2B60[quadrant];
+        return k_xmathAtanQuadrantOffsets[quadrant];
     }
     magnitude = ratio;
     if (ratio < 0.0f) {
@@ -455,7 +455,7 @@ f32 XMath_EvaluateArcTangentTwo(f32 y, f32 x) {
     if (ratio < 0.0f) {
         angle = -angle;
     }
-    return angle + D_800D2B60[quadrant];
+    return angle + k_xmathAtanQuadrantOffsets[quadrant];
 }
 
 extern f32 Gu_Sqrtf(f32);

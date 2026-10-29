@@ -6,9 +6,9 @@
 #include "AUDIO/LIST_AND_CHANNEL_VIEWS.H"
 
 extern void AudioWorld_RecyclePendingSoundsByIdentifier(struct ChannelSet *channelSet, s32 soundId);
-extern void AudioWorld_StartSpatialVoice(ManagerRecAtD8V2 *manager, s32 index, s32 owner, CVector3 *position);
+extern void AudioWorld_StartSpatialVoice(AudioSpatialVoiceManagerView *manager, s32 index, s32 owner, CVector3 *position);
 extern void AudioWorld_InitializeVoiceListSentinel(void *sentinel, s32 owner);
 extern void *AudioWorld_UnlinkChannelNode(LinkPair *channelNode);
 extern void AudioWorld_RecyclePendingSoundsByKey(void *channelOwner, s32 matchingKey);
-extern void AudioWorld_RecyclePendingSoundsByTrack(OwnerRecAtD8 *listNode, s32 matchingValue);
+extern void AudioWorld_RecyclePendingSoundsByTrack(AudioPendingSoundListOwner *listNode, s32 matchingValue);
 #endif

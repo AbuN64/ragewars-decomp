@@ -1,0 +1,4 @@
+
+#if defined(VERSION_DE)
+unsigned char g_SystemTranslateTlbVirtualAddressLinkGapTrailingBytes[8] = { 0x00, 0x00, 0x00, 0x00, 0x8F, 0xA8, 0x00, 0x24 };
+#endif

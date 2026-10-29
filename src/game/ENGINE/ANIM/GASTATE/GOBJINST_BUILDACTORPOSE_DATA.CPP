@@ -15,8 +15,8 @@
 
 /* GASTATE_3.CPP */
 /** Initialize the compact record fields written by the VRAM 0x802624A0 leaf. */
-void func_80262480_de(void *record) {
-    ObjRecAt10V1 *record_record = record;
+void Gastate_ResetAnimationReference(void *record) {
+    AnimationPoseRecordView *record_record = record;
     record_record->unk4 = -1;
     record_record->unk6 = 0;
     record_record->unk0 = 0;
@@ -26,37 +26,37 @@ void func_80262480_de(void *record) {
     record_record->unk10 = 0;
 }
 
-void func_802624A8_de(void *animationState) {
-    Cache_UnlockResource(0, (struct Node80253610 *)(((struct func_8022BC04_S3 *) ((s8 *) animationState))->unk10));
-    (((struct func_8022BC04_S3 *) ((s8 *) animationState))->unk10) = 0;
+void Gastate_ReleaseAnimationResource(void *animationState) {
+    Cache_UnlockResource(0, (struct Node80253610 *)(((struct AnimationResourceHandleView *) ((s8 *) animationState))->resourceHandle));
+    (((struct AnimationResourceHandleView *) ((s8 *) animationState))->resourceHandle) = 0;
 }
 
-s32 func_802624D8_de(void *animationState) {
-    func_8020D0CC_S2 *arg0_record = animationState;
-    void *temp = arg0_record->unk10;
-    if (temp == 0) {
+s32 Gastate_IsAnimationResourceRetained(void *animationState) {
+    ResourceHandleLinkView *animationRecord = animationState;
+    void *animationResourceHandle = animationRecord->resourceHandle;
+    if (animationResourceHandle == 0) {
         return 0;
     }
-    return Cache_IsResourceRetained(temp) != 0;
+    return Cache_IsResourceRetained(animationResourceHandle) != 0;
 }
 
-void func_80262504_de(void *animationState, Six *recordOut) {
+void Gastate_CopyAnimationSectionSix(void *animationState, Six *recordOut) {
     Six *result = (Six *)SetN64_GetPackSection((void *)Polytrak2_GetResidentResource(animationState), 6);
 
     *recordOut = *result;
 }
 
 /* GASTATE_4.CPP */
-char *func_80262564_de(void *animationState) {
+char *Gastate_GetAnimationPoseSection(void *animationState) {
     return SetN64_GetPackSection(SetN64_GetPackSection(Polytrak2_GetResidentResource(animationState), 3), 0);
 }
 
-s32 func_80262598_de(void *animationState) {
+s32 Gastate_GetAnimationEventEntries(void *animationState) {
     return SetN64_GetPackSection(Polytrak2_GetResidentResource(animationState), 4) + 8;
 }
 
-s32 func_802625C4_de(void *animationState) {
-    return (((struct func_80203E78_S1 *) ((s8 *) SetN64_GetPackSection(Polytrak2_GetResidentResource(animationState), 4)))->unk4);
+s32 Gastate_GetAnimationEventCount(void *animationState) {
+    return (((struct ResourceKeyView *) ((s8 *) SetN64_GetPackSection(Polytrak2_GetResidentResource(animationState), 4)))->key);
 }
 
 /* GASTATE_5.CPP */
@@ -64,7 +64,7 @@ extern s32 SetN64_LocatePackSection(s32 directory, s32 bankOffset, s32 sectionIn
 
 extern ResourceEntry g_animationText[];
 
-void func_802625F0_de(AnimRef *animationState, f32 framePosition) {
+void Gastate_InterpolateFrameAngles(AnimRef *animationState, f32 framePosition) {
     s16 *base;
     s32 count;
     s32 currentAngleFrame;
@@ -81,12 +81,12 @@ void func_802625F0_de(AnimRef *animationState, f32 framePosition) {
     if (followingAngleFrame < nextAngleFrame) {
         nextAngleFrame = followingAngleFrame;
     }
-    b_term = (f32) base[currentAngleFrame] * D_800C4258_de;
-    e_term = (f32) base[nextAngleFrame] * D_800C4258_de;
+    b_term = (f32) base[currentAngleFrame] * g_animationFrameAngleScale;
+    e_term = (f32) base[nextAngleFrame] * g_animationFrameAngleScale;
     Graphu64_InterpolateWrappedValue(framePosition - (f32) currentAngleFrame, b_term, e_term);
 }
 
-s32 func_8026269C_de(void *animationState, s32 resourceTable, s32 resourceGroup, s32 animationId) {
+s32 Gastate_RequestAnimationResource(void *animationState, s32 resourceTable, s32 resourceGroup, s32 animationId) {
     AnimRef *out = animationState;
     void *resource;
     ResourceEntry *entry;
@@ -101,9 +101,9 @@ s32 func_8026269C_de(void *animationState, s32 resourceTable, s32 resourceGroup,
 
     key = SetN64_LocatePackSection(resourceTable, resourceGroup, animationId, &resourceBytes);
     resource = Cache_RequestResource(0, key, key, resourceBytes, 4, animationState,
-                            &D_0025F56C, g_animationText, 0);
+                            &Gastate_AnimationResourceCallbackEntry, g_animationText, 0);
     out->data = resource;
-    if (!func_802624D8_de(animationState)) {
+    if (!Gastate_IsAnimationResourceRetained(animationState)) {
         return 0;
     }
 
@@ -118,7 +118,7 @@ s32 func_8026269C_de(void *animationState, s32 resourceTable, s32 resourceGroup,
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_80262734[3] = {
+unsigned int k_GobjinstBuildactorposeEncodedWords[3] = {
     0x5F4D3230, 0x01000096, 0x08000800,
 };
 #endif

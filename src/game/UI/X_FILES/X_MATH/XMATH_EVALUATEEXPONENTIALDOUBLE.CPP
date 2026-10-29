@@ -1,7 +1,7 @@
 #include "COMMON/OBJRECAT3CV2.H"
 #include "MATH/DOUBLEBITS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MATH/math_double.H"
 #include "MATH/XMATH_EVALUATEEXPONENTIALDOUBLE.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
@@ -12,23 +12,23 @@
 
 
 
-static inline f64 round_down(f64 arg0) {
+static inline f64 round_down(f64 value) {
     f64 temp;
     f64 integral;
     f64 limit;
 
-    limit = D_800C5B28_de;
-    if (limit <= arg0) {
-        return arg0;
+    limit = k_xmathCeilIntegralLimit;
+    if (limit <= value) {
+        return value;
     }
-    if (arg0 < D_800C5B30_de) {
-        return -XMath_CeilDouble(-arg0);
+    if (value < k_xmathCeilSignBoundary) {
+        return -XMath_CeilDouble(-value);
     }
-    temp = arg0;
+    temp = value;
     temp += limit;
     temp -= limit;
-    if (arg0 < temp) {
-        integral = temp - D_800C5B38_de;
+    if (value < temp) {
+        integral = temp - k_xmathCeilIntegralBias;
     } else {
         integral = temp;
     }
@@ -80,129 +80,129 @@ void XMath_InitializeMath(void) {
 void XMath_ShutdownMath(void) {
 }
 
-f32 XMath_SquareFloat(f32 arg0) {
-    return arg0 * arg0;
+f32 XMath_SquareFloat(f32 value) {
+    return value * value;
 }
 
-void XMath_EvaluatePositiveSquareRoot(f32 arg0) {
-    if (!(arg0 <= 0.0f)) {
-        Gu_Sqrtf(arg0);
+void XMath_EvaluatePositiveSquareRoot(f32 value) {
+    if (!(value <= 0.0f)) {
+        Gu_Sqrtf(value);
     }
 }
 
-f32 XMath_EvaluateReciprocalSquareRoot(f32 arg0) {
-    f32 var_f0;
+f32 XMath_EvaluateReciprocalSquareRoot(f32 value) {
+    f32 squareRoot;
 
-    if (arg0 <= 0.0f) {
-        var_f0 = 0.0f;
+    if (value <= 0.0f) {
+        squareRoot = 0.0f;
     } else {
-        var_f0 = Gu_Sqrtf(arg0);
+        squareRoot = Gu_Sqrtf(value);
     }
-    return D_800C5B0C_de / var_f0;
+    return k_xmathReciprocalSquareRootUnit / squareRoot;
 }
 
-f32 XMath_OffsetFloatRemainder(f32 arg0, f32 arg1) {
+f32 XMath_OffsetFloatRemainder(f32 value, f32 divisor) {
     f32 result;
-    result = (f32) FloatModulo((f64) arg0, (f64) arg1);
-    if (result < arg1) {
-        result += arg1;
+    result = (f32) FloatModulo((f64) value, (f64) divisor);
+    if (result < divisor) {
+        result += divisor;
     }
     return result;
 }
 
-f64 XMath_FloorDouble(f64 arg0) {
+f64 XMath_FloorDouble(f64 value) {
     f64 temp;
     f64 integral;
     f64 limit;
 
-    limit = D_800C5B10_de;
-    if (limit <= arg0) {
-        return arg0;
+    limit = k_xmathFloorIntegralLimit;
+    if (limit <= value) {
+        return value;
     }
-    if (arg0 < D_800C5B18_de) {
-        return -XMath_CeilDouble(-arg0);
+    if (value < k_xmathFloorSignBoundary) {
+        return -XMath_CeilDouble(-value);
     }
-    temp = arg0;
+    temp = value;
     temp += limit;
     temp -= limit;
-    if (arg0 < temp) {
-        integral = temp - D_800C5B20_de;
+    if (value < temp) {
+        integral = temp - k_xmathFloorIntegralBias;
     } else {
         integral = temp;
     }
     return integral;
 }
 
-f64 XMath_CeilDouble(f64 arg0) {
+f64 XMath_CeilDouble(f64 value) {
     f64 temp;
     f64 integral;
     f64 limit;
 
-    limit = D_800C5B28_de;
-    if (limit <= arg0) {
-        return arg0;
+    limit = k_xmathCeilIntegralLimit;
+    if (limit <= value) {
+        return value;
     }
-    if (arg0 < D_800C5B30_de) {
-        return -round_down(-arg0);
+    if (value < k_xmathCeilSignBoundary) {
+        return -round_down(-value);
     }
-    temp = arg0;
+    temp = value;
     temp += limit;
     temp -= limit;
-    if (temp < arg0) {
-        integral = temp + D_800C5B40_de;
+    if (temp < value) {
+        integral = temp + k_xmathCeilRoundUpUnit;
     } else {
         integral = temp;
     }
     return integral;
 }
 
-f64 XMath_SplitDoubleFraction(f64 arg0, f64 *whole) {
+f64 XMath_SplitDoubleFraction(f64 value, f64 *whole) {
     f64 temp;
     f64 integral;
     f64 limit;
 
-    limit = D_800C5B48_de;
-    if (limit <= arg0) {
-        integral = arg0;
+    limit = k_xmathFractionIntegralLimit;
+    if (limit <= value) {
+        integral = value;
     } else {
-        if (arg0 < D_800C5B50_de) {
-            integral = -XMath_CeilDouble(-arg0);
+        if (value < k_xmathFractionSignBoundary) {
+            integral = -XMath_CeilDouble(-value);
         } else {
-            temp = arg0;
+            temp = value;
             temp += limit;
             temp -= limit;
-            if (arg0 < temp) {
-                integral = temp - D_800C5B58_de;
+            if (value < temp) {
+                integral = temp - k_xmathFractionIntegralBias;
             } else {
                 integral = temp;
             }
         }
     }
     *whole = integral;
-    return arg0 - integral;
+    return value - integral;
 }
 
-f32 XMath_AbsoluteFloat(f32 arg0) {
-    if (arg0 >= 0.0f) {
-        return arg0;
+f32 XMath_AbsoluteFloat(f32 value) {
+    if (value >= 0.0f) {
+        return value;
     }
-    return -arg0;
+    return -value;
 }
 
-s32 XMath_AbsoluteInteger(s32 fifth) {
-    if (fifth < 0) {
-        if (fifth) {
-            return -fifth;
+s32 XMath_AbsoluteInteger(s32 value) {
+    if (value < 0) {
+        if (value) {
+            return -value;
         } else {
-            return -fifth;
+            return -value;
         }
     }
-    return fifth;
+    return value;
 }
 
 /* Returns the base-10 logarithm of a double: NaturalLogDouble(value) times 1/ln 10. */
 f64 Log10Double(f64 value) {
-    return NaturalLogDouble(value) * D_800C5B60_de;
+    return NaturalLogDouble(value) * k_xmathNaturalLogToBaseTenScale;
 }
 
 f64 XMath_EvaluateExponentialDouble(f64 x) {
@@ -212,71 +212,71 @@ f64 XMath_EvaluateExponentialDouble(f64 x) {
     f64 q;
     s32 k;
 
-    if (D_800C5B68_de < x) {
-        f64 result = D_800C5B78_de;
-        if (x < D_800C5B70_de) return result;
+    if (k_xmathExponentialUpperLimit < x) {
+        f64 result = k_xmathExponentialInitialResult;
+        if (x < k_xmathExponentialLowerLimit) return result;
     }
-    t = x * D_800C5B80_de;
+    t = x * k_xmathExponentialBaseTwoScale;
     k = t;
     if (k < 0) {
         k--;
     }
-    if (D_800C5B88_de <= t - k) {
+    if (k_xmathExponentialRoundingAndDenominatorConstant <= t - k) {
         k++;
     }
-    r = x - k * D_800C5B90_de + k * D_800C5B98_de;
+    r = x - k * k_xmathExponentialReductionLeadingTerm + k * k_xmathExponentialReductionTrailingTerm;
     t = r * r;
-    p = ((t * D_800C5BA0_de + D_800C5BA8_de) * t + D_800C5BC0_de) * r;
-    q = (t * D_800C5BB0_de + D_800C5BB8_de) * t + D_800C5B88_de;
-    return ScaleDoubleExponent(p / (q - p) + D_800C5B88_de, k + 1);
+    p = ((t * k_xmathExponentialNumeratorCubicCoefficient + k_xmathExponentialNumeratorLinearCoefficient) * t + k_xmathExponentialNumeratorConstant) * r;
+    q = (t * k_xmathExponentialDenominatorQuadraticCoefficient + k_xmathExponentialDenominatorLinearCoefficient) * t + k_xmathExponentialRoundingAndDenominatorConstant;
+    return ScaleDoubleExponent(p / (q - p) + k_xmathExponentialRoundingAndDenominatorConstant, k + 1);
 }
 
-f64 XMath_SplitDoubleExponent(f64 arg0, s32 *arg1) {
+f64 XMath_SplitDoubleExponent(f64 value, s32 *exponent) {
     DoubleBits_8029ECB0 u;
     f64 special;
 
-    special = D_800C5BC8_de;
-    if (arg0 != special) {
-        if (D_800C5BC8_de || arg1) {
+    special = k_xmathExponentSpecialValue;
+    if (value != special) {
+        if (k_xmathExponentSpecialValue || exponent) {
             goto normal;
         } else {
             goto normal;
         }
     }
-    *arg1 = 0;
+    *exponent = 0;
     return special;
 normal:
-    u.d = arg0;
+    u.d = value;
 
-    *arg1 = ((u.w.hi >> 20) & 0x7FF) - 0x3FE;
+    *exponent = ((u.w.hi >> 20) & 0x7FF) - 0x3FE;
     u.w.hi = (u.w.hi & 0x800FFFFF) | 0x3FE00000;
     return u.d;
 }
 
-void XMath_EvaluateCosine(f32 arg0) {
-    ((s32 (*)(f32))XMath_EvaluateSine)(arg0 + D_800C5BD0_de);
+void XMath_EvaluateCosine(f32 angle) {
+    ((s32 (*)(f32))XMath_EvaluateSine)(angle + k_xmathCosinePhaseOffset);
 }
 
-f32 XMath_EvaluateTangent(f32 arg0) {
-    f32 r1 = XMath_EvaluateSine(arg0);
-    f32 r2 = XMath_EvaluateSine(arg0 + D_800C5BD4_de);
+f32 XMath_EvaluateTangent(f32 angle) {
+    f32 r1 = XMath_EvaluateSine(angle);
+    f32 r2 = XMath_EvaluateSine(angle + k_xmathTangentCosinePhaseOffset);
     return r1 / r2;
 }
 
-f32 XMath_EvaluateArcTangent(f32 arg0) {
-    f32 temp_f2;
-    f32 temp_f3;
+f32 XMath_EvaluateArcTangent(f32 value) {
+    f32 reducedValueSquared;
+    f32 reducedValue;
     f32 result;
-    f32 var_f1;
+    f32 magnitude;
 
-    var_f1 = arg0;
-    if (arg0 < 0.0f) {
-        var_f1 = -arg0;
+    magnitude = value;
+    if (value < 0.0f) {
+        magnitude = -value;
     }
-    temp_f3 = (var_f1 - D_800C5BD8_de) / (var_f1 + D_800C5BD8_de);
-    temp_f2 = temp_f3 * temp_f3;
-    result = (((((((((((((((temp_f2 * D_800C5BDC_de) + D_800C5BE0_de) * temp_f2) - *(&D_800C5BE0_de + 1)) * temp_f2) + D_800C5BE8_de) * temp_f2) - *(&D_800C5BE8_de + 1)) * temp_f2) + D_800C5BF0_de) * temp_f2) - *(&D_800C5BF0_de + 1)) * temp_f2) + D_800C5BF8_de) * temp_f3) + *(&D_800C5BF8_de + 1);
-    if (arg0 < 0.0f) {
+    reducedValue = (magnitude - k_xmathArcTangentReductionUnit) / (magnitude + k_xmathArcTangentReductionUnit);
+    reducedValueSquared = reducedValue * reducedValue;
+    result = (((((((((((((((reducedValueSquared * k_xmathArcTangentPolynomialLeadingCoefficient) + k_xmathArcTangentCoefficientPairOne) * reducedValueSquared) - *(&k_xmathArcTangentCoefficientPairOne + 1)) * reducedValueSquared) + k_xmathArcTangentCoefficientPairTwo) * reducedValueSquared) - *(&k_xmathArcTangentCoefficientPairTwo + 1)) * reducedValueSquared) + k_xmathArcTangentCoefficientPairThree) * reducedValueSquared) - *(&k_xmathArcTangentCoefficientPairThree + 1)) * reducedValueSquared) + k_xmathArcTangentCoefficientAndOffset) * reducedValue) + *(&k_xmathArcTangentCoefficientAndOffset + 1);
+    if (value < 0.0f) {
         result = -result;
     }
     return result;
@@ -288,28 +288,28 @@ f32 XMath_EvaluateArcSine(f32 x) {
     f32 root;
     f32 result;
 
-    if (D_800C5C00_de < x) {
-        x = D_800C5C00_de;
+    if (k_xmathArcSineClampConstants < x) {
+        x = k_xmathArcSineClampConstants;
     }
     do {
-        if (x < *(&D_800C5C00_de + 1)) {
-            x = *(&D_800C5C00_de + 1);
+        if (x < *(&k_xmathArcSineClampConstants + 1)) {
+            x = *(&k_xmathArcSineClampConstants + 1);
         }
         negative = 0;
         if (x < 0.0f) {
             negative = 1;
             x = -x;
         }
-        poly = (((((x * D_800C5C08_de + *(&D_800C5C08_de + 1)) * x - D_800C5C10_de) * x + *(&D_800C5C10_de + 1)) * x
-                 - D_800C5C18_de) * x) + *(&D_800C5C18_de + 1);
-        x = D_800C5C00_de - x;
+        poly = (((((x * k_xmathArcSineCoefficientPairOne + *(&k_xmathArcSineCoefficientPairOne + 1)) * x - k_xmathArcSineCoefficientPairTwo) * x + *(&k_xmathArcSineCoefficientPairTwo + 1)) * x
+                 - k_xmathArcSineCoefficientPairThree) * x) + *(&k_xmathArcSineCoefficientPairThree + 1);
+        x = k_xmathArcSineClampConstants - x;
         if (x <= 0.0f) {
             root = 0.0f;
         } else {
             root = Gu_Sqrtf(x);
         }
     } while (0);
-    result = D_800C5C20_de - root * poly;
+    result = k_xmathArcSineResultConstants - root * poly;
     if (negative) {
         result = -result;
     }
@@ -322,30 +322,30 @@ f32 XMath_EvaluateArcCosine(f32 x) {
     f32 root;
     f32 result;
 
-    if (*(&D_800C5C20_de + 1) < x) {
-        x = *(&D_800C5C20_de + 1);
+    if (*(&k_xmathArcSineResultConstants + 1) < x) {
+        x = *(&k_xmathArcSineResultConstants + 1);
     }
     do {
-        if (x < D_800C5C28_de) {
-            x = D_800C5C28_de;
+        if (x < k_xmathArcCosineLowerClamp) {
+            x = k_xmathArcCosineLowerClamp;
         }
         negative = 0;
         if (x < 0.0f) {
             negative = 1;
             x = -x;
         }
-        poly = (((((x * (-0.011680527590215206f) + D_800C5C30_de) * x - *(&D_800C5C30_de + 1)) * x + D_800C5C38_de) * x
-                 - *(&D_800C5C38_de + 1)) * x) + D_800C5C40_de;
-        x = *(&D_800C5C20_de + 1) - x;
+        poly = (((((x * (-0.011680527590215206f) + k_xmathArcCosineCoefficientPairOne) * x - *(&k_xmathArcCosineCoefficientPairOne + 1)) * x + k_xmathArcCosineCoefficientPairTwo) * x
+                 - *(&k_xmathArcCosineCoefficientPairTwo + 1)) * x) + k_xmathArcCosineCoefficientAndOffset;
+        x = *(&k_xmathArcSineResultConstants + 1) - x;
         if (x <= 0.0f) {
             root = 0.0f;
         } else {
             root = Gu_Sqrtf(x);
         }
     } while (0);
-    result = *(&D_800C5C40_de + 1) - root * poly;
+    result = *(&k_xmathArcCosineCoefficientAndOffset + 1) - root * poly;
     if (negative) {
         result = -result;
     }
-    return *(&D_800C5C40_de + 1) - result;
+    return *(&k_xmathArcCosineCoefficientAndOffset + 1) - result;
 }

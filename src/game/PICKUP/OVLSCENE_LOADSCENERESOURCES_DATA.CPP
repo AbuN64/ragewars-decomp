@@ -2,14 +2,14 @@
 
 /* 802ABDBC_24.CPP */
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C653C[1] = {
+unsigned int k_OvlsceneLoadsceneresourcesEncodedWords[1] = {
     0x49535400,
 };
 #endif
 
 /* 8044ACCC_2.CPP */
 #if defined(VERSION_EU) || defined(VERSION_US)
-const unsigned char D_auto_rodata_func_8044B7C0_de_800C4E80[29] = {
+const unsigned char k_ovlsceneLoadsceneresourcesDataTextBytes[29] = {
     0x63, 0x61, 0x72, 0x74, 0x72, 0x69, 0x64, 0x67, 0x65, 0x20, 0x69, 0x6E, 0x64, 0x65, 0x78, 0x00,
     0x6C, 0x65, 0x76, 0x65, 0x6C, 0x73, 0x20, 0x69, 0x6E, 0x64, 0x65, 0x78, 0x00,
 };
@@ -19,7 +19,7 @@ const unsigned char D_auto_rodata_func_8044B7C0_de_800C4E80[29] = {
 
 #if defined(VERSION_DE) || defined(VERSION_EU)
 #if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C521D[3] = {
+unsigned char k_sceneResourceTextAlignmentBytes[3] = {
     0x00, 0x00, 0x00,
 };
 #endif

@@ -1,10 +1,10 @@
 #include "COMMON/TRIPLE.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "SYSTEM/DEFS.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
@@ -19,15 +19,15 @@
 
 /* These canonical scalar owners are immutable ROM rodata. */
 
-extern EffectTarget *D_80103FCC;
-extern EffectTarget D_801041F0;
+extern EffectTarget *g_collisionCurrentActor;
+extern EffectTarget g_currentActorInstance;
 
-extern CVector3 D_801042C8;
+extern CVector3 g_particleZeroVector;
 
-extern s32 D_80140FF8;
+extern s32 g_playerWeaponClassMode;
 
 
-extern f32 D_800CD6B0;
+extern f32 g_particleInitialVelocityScale;
 
 extern void Graphu64_TransformDirection(MatrixF *, CVector3 *, CVector3 *);
 extern void Graphu64_IdentityMatrix(MatrixF *);
@@ -37,7 +37,7 @@ extern void Graphu64_ConvertMatrixToFloat(MatrixF *, PackedMatrixWords *);
 extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern void Particle_Release(EffectSystem *, ParticleEffect *);
-extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
+extern void List_InsertBeforeIntrusive(IntrusiveList *, ParticleEffect *, ParticleEffect *);
 extern void Textload_LocateTextureResource(u32 *, s32);
 extern void GameObject_ResetActorMotion(ParticleEffect *);
 extern f32 Rumble_SamplePackedFloatRange(CharacterScreenCell);
@@ -47,7 +47,7 @@ extern f32 Rumble_SamplePackedFloatRange(CharacterScreenCell);
 #else
 #endif
 
-extern void func_8022B040_de(s32, ParticleEffect *);
+extern void Playerai_StartTransitionState(s32, ParticleEffect *);
 extern void Fx_AttachActorRibbon(void *, ParticleEffect *, s32);
 extern s32 Gdynlight_AllocateWorldLight(void *, s32);
 extern void Particle_PlayAttachedSound(ParticleEffect *, s32);
@@ -97,9 +97,9 @@ static inline ParticleEffect *effect_spawn_allocate(EffectSystem *sys, u8 index)
     if (effect == 0) {
         return 0;
     }
-    func_80255ED8_de(&sys->free, effect);
+    List_RemoveIntrusive(&sys->free, effect);
     list = &sys->lists[index];
-    func_80255CB8_de(list, effect);
+    List_PrependIntrusive(list, effect);
     effect->list = list;
     effect->groupNext = 0;
     effect->unk1F0 = 0;
@@ -116,17 +116,17 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
 
     if (aimTarget->matrixIndex != -1) {
         effect->mode = -4;
-        targetActor = D_801041F0.actor;
+        targetActor = g_currentActorInstance.actor;
         targetTeam = aimTarget->victimTeam;
-        Graphu64_ConvertMatrixToFloat(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
+        Graphu64_ConvertMatrixToFloat(&targetMtx, &targetActor->u60.link.matrixArray[g_currentActorInstance.matrixIndex]);
         Graphu64_InvertAffineMatrix(targetInv.m[0], targetMtx.m[0]);
         Graphu64_TransformPoint(&targetInv, &aimTarget->pos, &effect->startPosition);
-        up = D_801042C8;
+        up = g_particleZeroVector;
         Graphu64_NormalizeVec3(&up.x);
         Graphu64_TransformDirection(&targetInv, &up, vel);
         effect->followedActor = (s32) targetActor;
         effect->flags |= 0x10000;
-        effect->boundMatrixIndex = D_801041F0.matrixIndex;
+        effect->boundMatrixIndex = g_currentActorInstance.matrixIndex;
         if (effect->kind == 0x56 && targetTeam == sourceType) {
             effect->flags |= 0x4000000;
         }
@@ -183,20 +183,20 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
     s32 sourceType;
     s32 sound;
 
-    if (D_80145060.frozen != 0) {
+    if (g_transientPlayerList.frozen != 0) {
         return 0;
     }
     count = 0;
     resource = sys->resource;
-    D_80103FCC = &target;
+    g_collisionCurrentActor = &target;
     sys->last = 0;
     block = SetN64_GetPackSection(resource, 1);
     numEntries = block->count;
     if (Defs_FindSortedGroupRange(block->entries, numEntries, kind, &first, &last) != 0) {
         entries = ((EffectBlock *)SetN64_GetPackSection(resource, 2))->entries;
         anchor = 0;
-        if (D_80145060.actorList != 0) {
-            anchor = D_80145060.actorList;
+        if (g_transientPlayerList.actorList != 0) {
+            anchor = g_transientPlayerList.actorList;
         }
         ownerId = 0;
         if (owner != 0) {
@@ -212,7 +212,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
             }
         }
         mask = 1;
-        if (D_80145088.settings.local != 0) {
+        if (g_frontendScreenStatus.settings.local != 0) {
             mask = 2;
         }
         for (i = first; i <= last; i++) {
@@ -238,7 +238,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     ok = 0;
                 }
             }
-            switch (entry->params->unkE) {
+            switch (entry->params->attachmentMode) {
                 case 6:
                     mode = -7;
                     break;
@@ -272,20 +272,20 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     }
                     break;
                 case 4:
-                    if (source->type == 2 && source->unk1D0 == -8) {
+                    if (source->type == 2 && source->effectMode == -8) {
                         requestedMode = -8;
-                        D_801002E0 = source->unk174;
+                        g_particleSharedInitialDirection = source->followDirection;
                     }
                     mode = requestedMode;
                     break;
             }
             if (entry->flags & 0x2000000) {
-                if (D_801462C8.firstListMode == 0 || !(spawnFlags & 1)) {
+                if (g_gameSettings.bloodMode == 0 || !(spawnFlags & 1)) {
                     ok = 0;
                 }
             }
             if (entry->flags & 0x4000000) {
-                if (D_801462C8.firstListMode != 0) {
+                if (g_gameSettings.bloodMode != 0) {
                     ok = 0;
                 }
             }
@@ -302,20 +302,20 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 switch (source->type) {
                     case 2:
                         if (!(source->flags & 0x100000)) {
-                            if (D_80140FF8 == 1) {
-                                camera = D_80140FE8_de.camera;
+                            if (g_playerWeaponClassMode == 1) {
+                                camera = g_gameplayCameraList.camera;
                                 Graphu64_TransformPoint(camera->worldToView, &source->pos, &aimDelta);
                                 depth = aimDelta.z;
                                 if (depth < 0.0f) {
                                     depth = -depth;
                                 }
-                                Particle_BuildMatrix((Shared_Particle *)source, &source->u60.matrices[D_800D297C], camera, depth);
+                                Particle_BuildMatrix((Shared_Particle *)source, &source->u60.matrices[g_lightingBufferIndex], camera, depth);
                             } else {
-                                Particle_BuildMatrix((Shared_Particle *)source, &source->u60.matrices[D_800D297C], 0, 0.0f);
+                                Particle_BuildMatrix((Shared_Particle *)source, &source->u60.matrices[g_lightingBufferIndex], 0, 0.0f);
                             }
                             source->flags |= 0x100000;
                         }
-                        Graphu64_ConvertMatrixToFloat(&mtx, &source->u60.matrices[D_800D297C]);
+                        Graphu64_ConvertMatrixToFloat(&mtx, &source->u60.matrices[g_lightingBufferIndex]);
                         scale = 0.09765625f;
                         if (source->model->unk14 != 0) {
                             scale = 2.857143f;
@@ -354,7 +354,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     break;
                 }
                 count++;
-                Textload_LocateTextureResource(&effect->unk11C, entry->unk4);
+                Textload_LocateTextureResource(&effect->textureAndLayer, entry->textureId);
                 GameObject_ResetActorMotion(effect);
                 effect->unk110 = 0;
                 effect->unk114 = 0;
@@ -375,35 +375,35 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 effect->followedActor = followTarget;
                 effect->unk13C = 0;
                 effect->flags = (effect->flags & ~0xE600) | (spawnFlags | extra);
-                bits = &effect->unk11C;
+                bits = &effect->textureAndLayer;
                 layer = 0;
                 if (effect->entry->flags & 0x2000000) {
                     if (effect->flags & 2) {
                         layer = 2;
-                    } else if (D_801462C8.firstListMode == 2) {
+                    } else if (g_gameSettings.bloodMode == 2) {
                         layer = 1;
                     }
                 }
                 *bits |= layer << 30;
-                effect->unk1D9 = 0;
+                effect->releaseRequested = 0;
                 spread = entry->params->emitSpread;
                 if (spread < 0) {
                     effect->spreadAngle = spread;
                 } else {
                     effect->spreadAngle = -(f32) effect_spawn_random_count(spread);
                 }
-                effect->unk19C[0] = Rumble_SamplePackedFloatRange(entry->unk2C[2]) * D_800C4E04_de;
+                effect->unk19C[0] = Rumble_SamplePackedFloatRange(entry->unk2C[2]) * g_particleAngularVelocityScale;
                 effect->unk19C[2] = Rumble_SamplePackedFloatRange(entry->unk2C[1]) * 0.41887906f;
                 effect->unk19C[4] = Rumble_SamplePackedFloatRange(entry->unk2C[0]);
-                effect->unk19C[1] = Rumble_SamplePackedFloatRange(entry->unk2C[5]) * D_800C4E04_de;
+                effect->unk19C[1] = Rumble_SamplePackedFloatRange(entry->unk2C[5]) * g_particleAngularVelocityScale;
                 effect->unk19C[3] = Rumble_SamplePackedFloatRange(entry->unk2C[4]) * 0.41887906f;
                 effect->unk19C[5] = Rumble_SamplePackedFloatRange(entry->unk2C[3]);
                 if (entry->flags & 2) {
-                    effect->unk144 = effect_spawn_random_count(life);
+                    effect->initialLifeOffset = effect_spawn_random_count(life);
                 } else {
-                    effect->unk144 = 0.0f;
+                    effect->initialLifeOffset = 0.0f;
                 }
-                effect->unk148 = entry->params->unkB;
+                effect->animationParameter = entry->params->animationParameter;
                 effect->life = life;
                 effect->unk14E = 0;
                 effect->unk14F = -1;
@@ -418,7 +418,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                         dirOut = dir;
                     }
                     if (mode == -8) {
-                        effect->direction = D_801002E0;
+                        effect->direction = g_particleSharedInitialDirection;
                         Graphu64_NormalizeVec3(&effect->direction.x);
                     } else {
                         effect->direction = dirOut;
@@ -445,11 +445,11 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     effect->unk180[4] = Rumble_SamplePackedFloatRange(entry->unk20[3]);
                     effect->unk180[5] = Rumble_SamplePackedFloatRange(entry->unk20[5]);
                 }
-                if ((entry->flags & 0x80000) && entry->unk8 == 1) {
-                    effect->unk1D8 = 0;
+                if ((entry->flags & 0x80000) && entry->alphaMode == 1) {
+                    effect->alphaByte = 0;
                     effect->alpha = 0.0f;
                 } else {
-                    effect->unk1D8 = 0xFF;
+                    effect->alphaByte = 0xFF;
                     effect->alpha = 255.0f;
                 }
                 effect->unk14 = 0;
@@ -469,7 +469,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     Graphu64_NormalizeVec3(&aimDelta.x);
                     BuildDirectionMatrix(&mtx, &aimDelta);
                     if (mode == -8) {
-                        effect->direction = D_801002E0;
+                        effect->direction = g_particleSharedInitialDirection;
                         Graphu64_NormalizeVec3(&effect->direction.x);
                     } else {
                         dir.x = Rumble_SamplePackedFloatRange(entry->direction[0]);
@@ -484,7 +484,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                         effect->direction = dirOut;
                     }
                 }
-                effect->unk168 = effect->pos;
+                effect->previousPosition = effect->pos;
                 effect->startPosition = effect->pos;
                 Graphu64_ScaleVector(&effect->velocity, &dirOut, Rumble_SamplePackedFloatRange(entry->motion->speed));
                 if (entry->flags & 0x20) {
@@ -495,7 +495,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     hue = Graphu64_NextRandom() % (entry->color->m_RandomizeHue * 2) - (u8) entry->color->m_RandomizeHue;
                 }
                 sat = entry->color->m_RandomizeSaturation != 0 ? Graphu64_NextRandom() % entry->color->m_RandomizeSaturation : 0;
-                val = entry->color->unkE != 0 ? Graphu64_NextRandom() % entry->color->unkE : 0;
+                val = entry->color->m_RandomizeValue != 0 ? Graphu64_NextRandom() % entry->color->m_RandomizeValue : 0;
                 r = entry->color->m_WhiteColor[0];
                 g = entry->color->m_WhiteColor[1];
                 b = entry->color->m_WhiteColor[2];
@@ -516,24 +516,24 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 effect->rgb1[2] = b1;
                 render = &effect->render;
                 *render = D_80100090;
-                render->WallBehavior = entry->unkA;
-                render->InstanceBehavior = entry->unk9;
-                render->GroundBehavior = entry->unkB;
-                render->GravityAcceleration = Rumble_SamplePackedFloatRange(entry->motion->unk0);
+                render->WallBehavior = entry->wallBehavior;
+                render->InstanceBehavior = entry->instanceBehavior;
+                render->GroundBehavior = entry->groundBehavior;
+                render->GravityAcceleration = Rumble_SamplePackedFloatRange(entry->motion->gravity);
 #if defined(VERSION_EU)
-                render->BounceReturnEnergy = Menu_ExpandFloatHighWord(entry->motion->unk8);
-                render->GroundFriction = Menu_ExpandFloatHighWord(entry->motion->unkA);
-                render->AirFriction = Menu_ExpandFloatHighWord(entry->motion->unkC);
-                render->WaterFriction = Menu_ExpandFloatHighWord(entry->motion->unkE);
+                render->BounceReturnEnergy = Menu_ExpandFloatHighWord(entry->motion->bounceEnergy);
+                render->GroundFriction = Menu_ExpandFloatHighWord(entry->motion->groundFriction);
+                render->AirFriction = Menu_ExpandFloatHighWord(entry->motion->airFriction);
+                render->WaterFriction = Menu_ExpandFloatHighWord(entry->motion->waterFriction);
 #else
-                render->BounceReturnEnergy = Menu_ExpandFloatHighWord(entry->motion->unk8);
-                render->GroundFriction = Menu_ExpandFloatHighWord(entry->motion->unkA);
-                render->AirFriction = Menu_ExpandFloatHighWord(entry->motion->unkC);
-                render->WaterFriction = Menu_ExpandFloatHighWord(entry->motion->unkE);
+                render->BounceReturnEnergy = Menu_ExpandFloatHighWord(entry->motion->bounceEnergy);
+                render->GroundFriction = Menu_ExpandFloatHighWord(entry->motion->groundFriction);
+                render->AirFriction = Menu_ExpandFloatHighWord(entry->motion->airFriction);
+                render->WaterFriction = Menu_ExpandFloatHighWord(entry->motion->waterFriction);
 #endif
                 if (render->WallBehavior == 8 || render->GroundBehavior == 8 || render->InstanceBehavior == 8) {
-                    if (effect->owner != 0 && effect->owner->type == 1 && (effect->owner->unk100 & 0x300000)) {
-                        func_8022B040_de(effect->owner->unk1D8, effect);
+                    if (effect->owner != 0 && effect->owner->type == 1 && (effect->owner->actorFlags & 0x300000)) {
+                        Playerai_StartTransitionState(effect->owner->player, effect);
                     }
                 }
                 if (kind == 0x101 || kind == 0x128) {
@@ -548,7 +548,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 if (entry->flags & 0x40000000) {
                     render->dwFlags |= 0x4000;
                 }
-                if (entry->params->unk5 != 3) {
+                if (entry->params->groupMode != 3) {
                     ParticleEffect *other;
 
                     for (other = sys->groups.head; other != 0; other = other->groupNext) {
@@ -557,34 +557,34 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                         }
                     }
                     if (other != 0) {
-                        func_80255D70_de(&sys->groups, other, effect);
+                        List_InsertBeforeIntrusive(&sys->groups, other, effect);
                     } else if (effect->entry->flags & 0x2000) {
-                        func_80255CB8_de(&sys->groups, effect);
+                        List_PrependIntrusive(&sys->groups, effect);
                     } else {
-                        func_80255D14_de(&sys->groups, effect);
+                        List_AppendIntrusive(&sys->groups, effect);
                     }
                     effect->flags |= 0x1000000;
                 }
-                if ((g_effectCallbackFlags[entry->model->unk94].flags & 1) || kind == 0x68) {
+                if ((g_effectCallbackFlags[entry->model->callbackKind].flags & 1) || kind == 0x68) {
                     render->dwFlags |= 0x20000;
                 }
                 vel = &effect->velocity;
-                Graphu64_ScaleVector(vel, vel, D_800CD6B0);
+                Graphu64_ScaleVector(vel, vel, g_particleInitialVelocityScale);
                 if ((kind == 0x2D || kind == 0x4F) && (sourceType = source->type) == 2) {
-                    aimTarget = &D_801041F0;
+                    aimTarget = &g_currentActorInstance;
                     if (aimTarget->actor != 0) {
                         effect_spawn_aim(effect, aimTarget, vel, sourceType);
                     }
                 }
-                effect->unk1E0 = D_800CD6B4;
+                effect->unk1E0 = g_particleInitialMotionValue;
                 Particle_Attach((Shared_Particle *)effect, 0, 0);
-                if (entry->unk6 != -1) {
-                    Fx_AttachActorRibbon(&D_801379C0, effect, entry->unk6);
+                if (entry->ribbonId != -1) {
+                    Fx_AttachActorRibbon(&g_actorParticleScene, effect, entry->ribbonId);
                 }
-                if (entry->unk7 != -1) {
-                    effect->unk138 = Gdynlight_AllocateWorldLight(&D_8013B1A8, entry->unk7);
+                if (entry->lightId != -1) {
+                    effect->lightHandle = Gdynlight_AllocateWorldLight(&g_dynamicLightPool, entry->lightId);
                 } else {
-                    effect->unk138 = 0;
+                    effect->lightHandle = 0;
                 }
                 if (!(effect->flags & 0x200000) && (sound = entry->sound) != 0) {
                     switch (effect->kind) {
@@ -602,6 +602,6 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
             }
         }
     }
-    D_80103FCC = &D_801041F0;
+    g_collisionCurrentActor = &g_currentActorInstance;
     return count;
 }

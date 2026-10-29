@@ -1,5 +1,5 @@
 #ifndef FRONTEND_FRONTEND_DISPATCHOPTIONSPAGEEVENT_H
 #define FRONTEND_FRONTEND_DISPATCHOPTIONSPAGEEVENT_H
-#include "COMMON/RECRECAT4.H"
-extern s32 Frontend_DispatchOptionsPageEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
+extern s32 Frontend_DispatchOptionsPageEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra);
 #endif

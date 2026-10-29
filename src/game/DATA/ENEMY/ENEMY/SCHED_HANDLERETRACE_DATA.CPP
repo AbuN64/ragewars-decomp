@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-unsigned int D_auto_rodata_writable_800D2950[6] = {
+unsigned int g_SchedHandleretraceWords1[6] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000014, 0x00000000, 0x00000000,
 };
 

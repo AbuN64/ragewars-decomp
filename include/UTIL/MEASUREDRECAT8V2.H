@@ -2,19 +2,19 @@
 #define UTIL_MEASUREDRECAT8V2_H
 #include "COMMON/MEASURED_STORAGE.H"
 /* Measured 4-byte access at 8; storage view, complete object unknown. */
-struct MeasuredRecAt8V2 { unsigned char padding[8]; void * value; };
+struct HeapFirstFreeBlockView { unsigned char padding[8]; void * value; };
 /* Measured 4-byte access at 4; storage view, complete object unknown. */
-struct MeasuredRecAt4V4 { unsigned char padding[4]; u32 value; };
+struct HeapNextBlockAddressView { unsigned char padding[4]; u32 value; };
 /* Measured 4-byte access at 0x10; storage view, complete object unknown. */
 
 /* Measured 4-byte access at 0x14; storage view, complete object unknown. */
 
 /* Measured 4-byte access at -0x20; storage view, complete object unknown. */
-struct MeasuredRecAt4V3 { void * value; unsigned char trailing[28]; };
+struct HeapAllocationOwnerHeader { void * value; unsigned char trailing[28]; };
 /* Measured 4-byte access at 0xC; storage view, complete object unknown. */
-struct MeasuredRecAtCV2 { unsigned char padding[12]; void * value; };
+struct HeapLastFreeBlockView { unsigned char padding[12]; void * value; };
 /* Measured 4-byte access at 0; storage view, complete object unknown. */
-struct MeasuredRecAt0V2 { void * value; };
+struct HeapPreviousFreeLinkView { void * value; };
 /* Measured 4-byte access at 4; storage view, complete object unknown. */
-struct MeasuredRecAt4V2 { unsigned char padding[4]; void * value; };
+struct HeapNextFreeLinkView { unsigned char padding[4]; void * value; };
 #endif

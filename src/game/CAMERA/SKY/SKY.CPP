@@ -7,7 +7,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/APPROACHLOCATION.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 #include "COMMON/FRUSTUM.H"
@@ -19,7 +19,7 @@
 #include "COMMON/S1.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "SYSTEM/LIST.H"
 #include "GSKY/SKY.H"
 
@@ -28,7 +28,7 @@ extern void Cache_UnlockResource(void *, Node80253610 *);
 extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 /* Clip and draw a textured translucent fan at the object's depth. */
-void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
+void Sky_DrawClippedEffectFan(SkyLayerRuntimeView *object, ClipView *view) {
     AnimationInfo animation;
     CVector3 points[5];
     f32 red[5], green[5], blue[5], alpha[5];
@@ -52,15 +52,15 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
     resource = Textload_RequestTextureVariation(object->texture, -1);
     if (resource != 0) {
         Textload_ReadTextureAnimationInfo(resource, &animation);
-        if (animation.unk0 != 0) {
+        if (animation.frameCount != 0) {
             descriptor = object->descriptor;
-            frame = animation.unk8;
+            frame = animation.frames;
             phase = object->phase / frame[1];
             scale = descriptor->textureScale * (object->textureScale * 768.0f);
             scaleS = (s32)((1 << frame[2]) * scale);
             scaleT = (s32)((1 << frame[3]) * scale);
             gDPPipeSync(g_displayListCursor++);
-            frameIndex = (s32)phase % animation.unk0;
+            frameIndex = (s32)phase % animation.frameCount;
 #if defined(VERSION_US_REV1)
             Textload_LoadTextureFrameTiles(object->texture, resource,
 #else
@@ -70,7 +70,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
                 scaleS, scaleT, 0, 0, 15);
             texturePeriod = 5120.0f;
             wrapPeriod = 10240.0f;
-            frame = animation.unk8;
+            frame = animation.frames;
             format = frame[0];
             switch (format) {
             case 2:
@@ -170,7 +170,7 @@ draw_face:
                         else if (minT <= -wrapPeriod) shiftT = (s32)(minT / wrapPeriod) * wrapPeriod;
                         else shiftT = 0.0f;
                         for (i = 0; i < 3; i++) {
-                            vertex = i + &object->vertices[D_800D297C][face * 3];
+                            vertex = i + &object->vertices[g_lightingBufferIndex][face * 3];
                             vertex->flag = 0;
                             vertex->x = (s32)triangle[i].x;
                             vertex->y = (s32)triangle[i].y;
@@ -183,7 +183,7 @@ draw_face:
                             vertex->b = (u32)triBlue[i];
                             vertex->a = (u32)triAlpha[i];
                         }
-                        gSPVertex(g_displayListCursor++, &object->vertices[D_800D297C][face * 3], 3, 0);
+                        gSPVertex(g_displayListCursor++, &object->vertices[g_lightingBufferIndex][face * 3], 3, 0);
                         gSP1Triangle(g_displayListCursor++, 0, 1, 2, 0);
                     }
                 }
@@ -200,37 +200,37 @@ typedef struct HostView8023AFF0 {
     char pad00[0x24];
     s32 stalled;
     char pad28[0x10];
-    s32 field38;
+    s32 polygonIndex;
     char pad3C[4];
-    s32 field40;
+    s32 polygonPartIndex;
     char pad44[0x14];
     void *resource;
     char pad5C[0xD0];
     f32 speed;
 } HostView8023AFF0;
-extern s32 D_801370CC;
-extern f32 D_800D2988;
+extern s32 g_skyLayerDescriptorCount;
+extern f32 g_frameElapsedTime;
 extern Shared_ReactionFlags *Scene_GetModelRecordByIndexPointer(void *, void *);
 extern f32 Region_GetPolygonHeight(void *, s32, s32);
 extern void Gsky_GetObjectPositionAt260(CVector3 *, void *);
 extern void Textload_LocateTextureResource(s32 *, s32);
-extern void func_80255ED8_de(void *, void *);
-extern void func_80255CB8_de(void *, void *);
-static inline ObjectRecAt220 *allocateSceneEffect(Scene *scene) {
-    ObjectRecAt220 *object = (ObjectRecAt220 *)scene->freeObjects.head;
+extern void List_RemoveIntrusive(void *, void *);
+extern void List_PrependIntrusive(void *, void *);
+static inline SkyLayerRuntimeView *allocateSceneEffect(Scene *scene) {
+    SkyLayerRuntimeView *object = (SkyLayerRuntimeView *)scene->freeObjects.head;
     if (object != 0) {
-        func_80255ED8_de(&scene->freeObjects, object);
-        func_80255D14_de(&scene->objects, object);
+        List_RemoveIntrusive(&scene->freeObjects, object);
+        List_AppendIntrusive(&scene->objects, object);
     }
     return object;
 }
 
-static inline s32 updateSceneEffect(ObjectRecAt220 *object, HostView8023AFF0 *host, u16 mask, s32 below, f32 hostDepth, f32 limit) {
+static inline s32 updateSceneEffect(SkyLayerRuntimeView *object, HostView8023AFF0 *host, u16 mask, s32 below, f32 hostDepth, f32 limit) {
     CROMSkyLayer *descriptor = object->descriptor;
     f32 value, step, depth, wrapPeriod, fadeStep;
     if (object->mask & mask) {
         value = object->throttle;
-        fadeStep = descriptor->throttleRate * D_800D2988;
+        fadeStep = descriptor->throttleRate * g_frameElapsedTime;
         value += fadeStep;
         if (1.0f < value) {
             value = 1.0f;
@@ -239,14 +239,14 @@ static inline s32 updateSceneEffect(ObjectRecAt220 *object, HostView8023AFF0 *ho
     } else if (object->throttle == 0.0f) {
         return 1;
     } else {
-        value = object->throttle - descriptor->throttleRate * D_800D2988;
+        value = object->throttle - descriptor->throttleRate * g_frameElapsedTime;
         if (value < 0.0f) {
             value = 0.0f;
         }
         object->throttle = value;
     }
-    object->phase = object->phase + D_800D2988 * descriptor->phaseRate * object->phaseScale;
-    step = D_800D2988 * D_800CD744_de * descriptor->spinRate;
+    object->phase = object->phase + g_frameElapsedTime * descriptor->phaseRate * object->phaseScale;
+    step = g_frameElapsedTime * g_skyRotorSpinScale * descriptor->spinRate;
     value = object->offsetS + step * 1.536f;
     wrapPeriod = 20480.0f;
     object->offsetS = value;
@@ -275,8 +275,8 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
     CVector3 probe;
     Shared_ReactionFlags *entry;
     CROMSkyLayer *descriptor;
-    ObjectRecAt220 *object;
-    ObjectRecAt220 *next;
+    SkyLayerRuntimeView *object;
+    SkyLayerRuntimeView *next;
     void *resource;
     f32 hostDepth, limit, fadeLimit, value;
     s32 below;
@@ -296,7 +296,7 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
         return;
     }
     hostDepth = 0.0f;
-    limit = Region_GetPolygonHeight(resource, host->field38, host->field40);
+    limit = Region_GetPolygonHeight(resource, host->polygonIndex, host->polygonPartIndex);
     below = 0;
     if (entry->flags & 1) {
         Gsky_GetObjectPositionAt260(&anchor, host);
@@ -317,8 +317,8 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
         hostDepth = entry->height - fadeLimit;
     }
     mask = entry->mask;
-    count = D_801370CC;
-    descriptor = (CROMSkyLayer *)D_801370C8;
+    count = g_skyLayerDescriptorCount;
+    descriptor = (CROMSkyLayer *)g_skyLayerDescriptors;
     bit = 1;
     while (--count != -1) {
         if ((u16)(mask & bit) && descriptor->texture != 0 && !(scene->effectMask & bit)) {
@@ -352,8 +352,8 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
         next = object->next;
         if (updateSceneEffect(object, host, mask, below, hostDepth, limit)) {
             scene->effectMask &= ~object->mask;
-            func_80255ED8_de(&scene->objects, object);
-            func_80255CB8_de(&scene->freeObjects, object);
+            List_RemoveIntrusive(&scene->objects, object);
+            List_PrependIntrusive(&scene->freeObjects, object);
         }
         object = next;
     } while (object != 0);
@@ -364,18 +364,18 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
 
 extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
 
-extern void Textload_LocateTextureResource(s32 *arg0, s32 sectionIndex);
+extern void Textload_LocateTextureResource(s32 *textureResource, s32 sectionIndex);
 
 /* Updates a rotor: while the control mask bit is held its throttle at 0x208 rises by the descriptor rate up
- * to D_800C86E0, otherwise it falls to zero (returning 1 once idle); the value phase advances, the two wrap
- * angles at 0x1C and 0x20 advance and wrap at D_800C86E8, and the speed at 0x210 becomes the descriptor
+ * to g_skyRotorMaximumThrottle, otherwise it falls to zero (returning 1 once idle); the value phase advances, the two wrap
+ * angles at 0x1C and 0x20 advance and wrap at g_skyRotorAngleWrap, and the speed at 0x210 becomes the descriptor
  * base plus trim, plus the boost when requested and the host is not stalled, or else the host's speed
  * scaled by the descriptor (flag 1) or the fallback speed (flag 2). Returns 0 while active. */
 
-void func_8023B3F8_de(Scene *scene, ClipView *view) {
-    ObjectRecAt220 *near[4];
-    ObjectRecAt220 *far[4];
-    ObjectRecAt220 *object;
+void Sky_DrawDepthSortedSceneEffects(Scene *scene, ClipView *view) {
+    SkyLayerRuntimeView *near[4];
+    SkyLayerRuntimeView *far[4];
+    SkyLayerRuntimeView *object;
     s32 nearCount;
     s32 farCount;
     s32 i;
@@ -384,7 +384,7 @@ void func_8023B3F8_de(Scene *scene, ClipView *view) {
         return;
     }
     gDPPipeSync(g_displayListCursor++);
-    gSPMatrix(g_displayListCursor++, (u32)(((u32)&D_80142C60)), G_MTX_LOAD);
+    gSPMatrix(g_displayListCursor++, (u32)(((u32)&g_skyEffectProjectionMatrix)), G_MTX_LOAD);
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 4, (u32)((2)));
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 12, (u32)((2)));
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 20, (u32)((0xFFFE)));
@@ -405,17 +405,17 @@ void func_8023B3F8_de(Scene *scene, ClipView *view) {
             far[farCount++] = object;
         }
     }
-    PpDecom_QuickSortRecords((char *)near, nearCount, 4, D_0023B94C, D_0023B938);
-    PpDecom_QuickSortRecords((char *)far, farCount, 4, D_0023B978_de, D_0023B938);
+    PpDecom_QuickSortRecords((char *)near, nearCount, 4, Sky_CompareRotorSpeedsDescendingCallback, Sky_SwapEntryCallback);
+    PpDecom_QuickSortRecords((char *)far, farCount, 4, Sky_CompareRotorSpeedsAscendingCallback, Sky_SwapEntryCallback);
     for (i = 0; i < nearCount; i++) {
-        func_8023A4E0_de(near[i], view);
+        Sky_DrawClippedEffectFan(near[i], view);
     }
     for (i = 0; i < farCount; i++) {
-        func_8023A4E0_de(far[i], view);
+        Sky_DrawClippedEffectFan(far[i], view);
     }
 }
 
-void func_8023B694_de(Effect *effect, s16 *definition, s16 mask, f32 scale,
+void Sky_InitializeEffect(Effect *effect, s16 *definition, s16 mask, f32 scale,
                    f32 offset0, f32 offset1, f32 offset2) {
     effect->definition = definition;
     effect->mask = mask;
@@ -430,7 +430,7 @@ void func_8023B694_de(Effect *effect, s16 *definition, s16 mask, f32 scale,
     effect->offset2 = offset2;
 }
 
-s32 func_8023B718_de(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boost, Host *host) {
+s32 Sky_UpdateRotor(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boost, Host *host) {
     CROMSkyLayer *descriptor;
     f32 throttle;
     f32 value;
@@ -442,9 +442,9 @@ s32 func_8023B718_de(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boo
 
     descriptor = rotor->descriptor;
     if (rotor->mask & mask) {
-        throttle = rotor->throttle + descriptor->throttleRate * D_800D2988;
-        if (D_800C86E0 < throttle) {
-            throttle = D_800C86E0;
+        throttle = rotor->throttle + descriptor->throttleRate * g_frameElapsedTime;
+        if (g_skyRotorMaximumThrottle < throttle) {
+            throttle = g_skyRotorMaximumThrottle;
         }
         rotor->throttle = throttle;
     } else {
@@ -453,21 +453,21 @@ s32 func_8023B718_de(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boo
         if (value == zero) {
             return 1;
         }
-        lowered = value - descriptor->throttleRate * D_800D2988;
+        lowered = value - descriptor->throttleRate * g_frameElapsedTime;
         if (lowered < zero) {
             lowered = zero;
         }
         rotor->throttle = lowered;
     }
-    rotor->phase += D_800D2988 * descriptor->phaseRate * rotor->phaseScale;
-    value = D_800D2988 * D_800CD744_de * descriptor->spinRate;
-    angle = rotor->angleA + value * D_800C35F4_de;
-    wrap = D_800C86E8;
+    rotor->phase += g_frameElapsedTime * descriptor->phaseRate * rotor->phaseScale;
+    value = g_frameElapsedTime * g_skyRotorSpinScale * descriptor->spinRate;
+    angle = rotor->angleA + value * g_skyRotorAngleAScale;
+    wrap = g_skyRotorAngleWrap;
     rotor->angleA = angle;
     if (wrap < angle) {
         rotor->angleA = angle - wrap;
     }
-    angle = rotor->angleB + value * D_800C35FC_de;
+    angle = rotor->angleB + value * g_skyRotorAngleBScale;
     rotor->angleB = angle;
     if (wrap < angle) {
         rotor->angleB = angle - wrap;
@@ -484,43 +484,43 @@ s32 func_8023B718_de(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boo
     return 0;
 }
 
-void *func_8023B8AC_de(struct IntegerState8A4 *sceneOwner) {
+void *Sky_AllocateEffectNode(struct SkyEffectObjectListsView *sceneOwner) {
     void *head;
 
-    head = sceneOwner->unk_8A0.head;
+    head = sceneOwner->sceneEffects.head;
     if (head != 0) {
-        func_80255ED8_de(&sceneOwner->unk_8A0, head);
-        func_80255D14_de(&sceneOwner->unk_8B4, head);
+        List_RemoveIntrusive(&sceneOwner->sceneEffects, head);
+        List_AppendIntrusive(&sceneOwner->inactiveSceneEffects, head);
     }
     return head;
 }
 
 /* 8023A284_8.CPP */
-void func_8023B8F8_de(s32 sceneAddress, s32 effectNode) {
-    func_80255ED8_de(sceneAddress + 0x8B4, effectNode);
-    func_80255CB8_de(sceneAddress + 0x8A0, effectNode);
+void Sky_ReleaseEffectNode(s32 sceneAddress, s32 effectNode) {
+    List_RemoveIntrusive(sceneAddress + 0x8B4, effectNode);
+    List_PrependIntrusive(sceneAddress + 0x8A0, effectNode);
 }
 
 /** Swap the two words pointed to by arg0 and arg1. */
 void Sky_SwapEntries(int *leftEntry, int *rightEntry) {
-    int temp;
+    int savedEntry;
 
-    temp = *leftEntry;
+    savedEntry = *leftEntry;
     *leftEntry = *rightEntry;
-    *rightEntry = temp;
+    *rightEntry = savedEntry;
 }
 
-s32 func_8023B94C_de(void **arg0, void **arg1)
+s32 Sky_CompareRotorSpeedsDescending(void **leftEntry, void **rightEntry)
 {
-  f32 new_var2;
-  int new_var;
+  f32 leftSortValue;
+  int comparisonMagnitude;
   s32 comparisonResult;
   comparisonResult = 1;
-  new_var2 = ((struct ObjRecAt210 *) ((s8 *) (*arg0)))->unk210;
-  if ((((struct ObjRecAt210 *) ((s8 *) (*arg1)))->unk210) < new_var2)
+  leftSortValue = ((struct SkyEffectSortValueView *) ((s8 *) (*leftEntry)))->sortValue;
+  if ((((struct SkyEffectSortValueView *) ((s8 *) (*rightEntry)))->sortValue) < leftSortValue)
   {
-    new_var = 1;
-    comparisonResult = -new_var;
+    comparisonMagnitude = 1;
+    comparisonResult = -comparisonMagnitude;
   }
   return comparisonResult;
 }
@@ -538,6 +538,6 @@ int Sky_CompareRotorSpeeds(void *first, void *second) {
 }
 
 /* 800C86E0.CPP */
-const unsigned int D_auto_src_rw_pool_8023B718_C92E0_us_rev1[4] = {
+const unsigned int g_skyRotorUpdateConstantsUsRev1[4] = {
     0x3F800000, 0x3FC49BA6, 0x46A00000, 0x40449BA6,
 };

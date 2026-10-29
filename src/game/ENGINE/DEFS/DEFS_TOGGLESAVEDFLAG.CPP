@@ -1,20 +1,20 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/LIGHTDATA.H"
 #include "TYPES.H"
 #include "SYSTEM/DEFS_TOGGLESAVEDFLAG.H"
 
 void Defs_ToggleSavedFlag(void) {
-    D_8010C4A0 = D_800CBC80;
-    if (D_800CBC80 == 0) {
-        D_800CBC80 = 0x20;
+    g_pointLightBufferOffset = g_pointLightSavedBufferOffset;
+    if (g_pointLightSavedBufferOffset == 0) {
+        g_pointLightSavedBufferOffset = 0x20;
         return;
     }
-    D_800CBC80 = 0;
+    g_pointLightSavedBufferOffset = 0;
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_80265DA8[2] = {
+unsigned int k_DefsTogglesavedflagEncodedWords[2] = {
     0x63740000, 0x0000940A,
 };
 #endif

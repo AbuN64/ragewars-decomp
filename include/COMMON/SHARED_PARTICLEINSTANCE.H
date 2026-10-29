@@ -28,20 +28,20 @@ struct ActorParticleDispatchOwnerContactLinks;
 typedef struct ActorParticleDispatchOwnerContactLinks ActorParticleDispatchOwnerContactLinks;
 
 struct ActorParticleDispatchOwnerContactLinks;
-struct Shape_func_8021A2D4_de_2;
+struct MemoryUsageStats;
 struct ActorParticleDispatchOwnerContactLinks {
     char pad0[4];
     u16 type;
     char pad6[0x12];
-    struct Shape_func_8021A2D4_de_2 *descriptor;
+    struct MemoryUsageStats *descriptor;
     char pad1C[0x110];
-    func_8024E8F0_S1 *owner;
+    ActorEmitterSource *owner;
 };
 
 
 
-struct EntryRecAt4V4;
-struct EntryRecAt4V4 {
+struct ParticleKindIdEntry;
+struct ParticleKindIdEntry {
     s16 kind;
     char pad[2];
     s16 id;
@@ -59,19 +59,19 @@ typedef struct Shared_ParticleInstance Shared_ParticleInstance;
 struct Shared_ParticleOwner;
 typedef struct Shared_ParticleOwner Shared_ParticleOwner;
 
-struct EntryRecAt4V4;
-typedef struct EntryRecAt4V4 EntryRecAt4V4;
+struct ParticleKindIdEntry;
+typedef struct ParticleKindIdEntry ParticleKindIdEntry;
 
-struct RecordRecAt2C;
-struct RecordRecAt2C {
+struct ParticleKindEntrySets;
+struct ParticleKindEntrySets {
     char pad[0x20];
-    EntryRecAt4V4 *first[3];
-    EntryRecAt4V4 *second[3];
+    ParticleKindIdEntry *first[3];
+    ParticleKindIdEntry *second[3];
 };
 
 
 
-extern int D_801042C4;
+extern int g_particleContactMode;
 
 
 
@@ -106,7 +106,7 @@ struct Shared_ParticleTarget {
 };
 
 
-extern float D_800C4E60_de;
+extern float g_particleOwnerImpactDuration;
 
 
 
@@ -126,7 +126,7 @@ struct Ground {
     CVector3 normal;
 };
 
-extern int D_8010029C;
+extern int g_particlePrimaryContactRoom;
 
 
 
@@ -198,7 +198,7 @@ struct Shared_ParticleDesc {
     char pad9;
     s8 wallBehavior; /* 0x0A: m_WallBehavior; the floor and ceiling alignments clamp to their surface when set */
     char padB[5];
-    s16 unk10;
+    s16 playerContactRadius;
     char pad12[2];
     s32 renderModel;
     struct Shared_ParticleEvents *events;
@@ -232,10 +232,10 @@ struct Shared_Particle {
     char pad13C[4];
     f32 time;
     f32 frame;
-    f32 unk148;
+    f32 lifetime;
     s16 life;
-    s8 unk14E;
-    s8 unk14F;
+    s8 spriteFrame;
+    s8 fixedSpriteFrame;
     CVector3 size;
     CVector3 growth;
     CVector3 prevPos;
@@ -307,8 +307,8 @@ struct Shared_ParticleTarget;
 typedef struct Shared_ParticleTarget Shared_ParticleTarget;
 
 
-struct RecordRecAt2C;
-typedef struct RecordRecAt2C RecordRecAt2C;
+struct ParticleKindEntrySets;
+typedef struct ParticleKindEntrySets ParticleKindEntrySets;
 
 
 
@@ -335,7 +335,7 @@ typedef struct SteeringTarget {u8 pad0[0x248];CVector3 position;} SteeringTarget
 typedef struct SteeringSettings {u8 pad0[0x10];u16 acceleration,speed;} SteeringSettings;
 typedef struct SteeringDescriptor {u8 pad0[0x30];SteeringSettings *motion;} SteeringDescriptor;
 typedef struct SteeringParticle {u8 pad0[8];CVector3 position;u8 pad14[8];CVector3 velocity;u8 pad28[0x34];u32 flags;u8 pad60[0xB8];SteeringDescriptor *descriptor;u8 pad11C[0x18];SteeringTarget *target;u8 pad138[8];f32 time;u8 pad144[0x30];CVector3 direction;u8 pad180[0x5C];SteeringSound *sound;} SteeringParticle;
-extern void *func_8025C95C_de(void *,s32,CVector3 *,void *,s32);
+extern void *SoundVoicePool_PlaySpatialSound(void *,s32,CVector3 *,void *,s32);
 
 typedef struct CVector3_t AccelSteeringVec;
 typedef struct { char pad[16]; u16 accel, limit; } AccelSteeringParams;

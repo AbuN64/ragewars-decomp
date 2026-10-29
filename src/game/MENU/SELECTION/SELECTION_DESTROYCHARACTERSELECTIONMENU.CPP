@@ -4,15 +4,15 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 
 #if !(defined(VERSION_US))
-/* Releases the object D_800E42D0 holds through Cache_FreeMemory, clears D_800E42D0, calls
+/* Releases the object g_characterSelectionMenu holds through Cache_FreeMemory, clears g_characterSelectionMenu, calls
    Tsmos_ActivateControllerState and Tsmos_SetModeOneFlag with 2, and returns zero. */
-extern void *D_800E42D0;
+extern void *g_characterSelectionMenu;
 extern void Tsmos_ActivateControllerState(void);
 
 
 s32 Selection_DestroyCharacterSelectionMenu(void) {
-    Cache_FreeMemory(D_800E42D0);
-    D_800E42D0 = 0;
+    Cache_FreeMemory(g_characterSelectionMenu);
+    g_characterSelectionMenu = 0;
     Tsmos_ActivateControllerState();
     Tsmos_SetModeOneFlag(2);
     return 0;

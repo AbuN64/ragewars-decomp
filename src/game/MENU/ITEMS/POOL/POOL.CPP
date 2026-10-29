@@ -1,23 +1,23 @@
 #include "COMMON/OBJB.H"
-#include "MENU/8044ACCC.H"
+#include "MENU/SCENE_RESOURCE_PREVIEW_AND_COLLISION_VIEWS.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
 
 /* Initialises the two lists at offsets 0x8B4 and 0x8A0 of a pool with node offsets 0 and 4
-   through func_80255CA0_de, adds the pool's four entries of 0x228 bytes to the second list through
-   func_80255D14_de and clears the halfword at 0x8C8. */
+   through List_InitializeIntrusive, adds the pool's four entries of 0x228 bytes to the second list through
+   List_AppendIntrusive and clears the halfword at 0x8C8. */
 
 
 
 
-void Pool_InitEntryPool(ObjRecAt8C8 *pool) {
+void Pool_InitEntryPool(MenuEntryPoolCountView *pool) {
     s32 i;
     struct EntryCode8044ACCC *entry;
 
-    func_80255CA0_de(&pool->active, 0, 4);
-    func_80255CA0_de(&pool->free, 0, 4);
+    List_InitializeIntrusive(&pool->active, 0, 4);
+    List_InitializeIntrusive(&pool->free, 0, 4);
     for (i = 0, entry = pool->entries; i < 4; i++, entry++) {
-        func_80255D14_de(&pool->free, entry);
+        List_AppendIntrusive(&pool->free, entry);
     }
-    pool->unk8C8 = 0;
+    pool->count = 0;
 }

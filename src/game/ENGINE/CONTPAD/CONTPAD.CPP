@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT5F14.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/AIPROFILE.H"
 #include "FX/EXTERNS.H"
 #include "FX/CONTROLLER_INPUT.H"
@@ -14,7 +14,7 @@
 /* Builds the player's analog input from its controller: remaps the buttons through g_controllerButtonRemap when the
    profile asks for it (control modes 0 and 1), turns stick and C buttons into turn, pitch, strafe and
    forward for the profile's control mode (pitch steps scale with the profile sensitivity, the frame time
-   D_800D2988 and the player's 0x7EC damping; mode 1 recentres the pitch through Graphu64_DecayToZero while
+   g_frameElapsedTime and the player's 0x7EC damping; mode 1 recentres the pitch through Graphu64_DecayToZero while
    moving), then writes the cubic-shaped turn and strafe and the pitch and forward copies.
    The ROM keeps two pieces of dead source: a first per-mode table choice that the reset to NULL
    overrides, and a pitch-mode test whose two arms are the same. gcc deletes the dead stores and the
@@ -50,7 +50,7 @@ void ContPad_BuildControllerState(ControllerInput *input, Player *player) {
     controller = input->controller;
     pitchStep = (f32)profile->sensitivity * 0.0078125f - 1.0f;
     pitchStep = pitchStep * 0.75f + 1.0f;
-    pitchStep *= D_800D2988 * (sensitivity * 0.1f);
+    pitchStep *= g_frameElapsedTime * (sensitivity * 0.1f);
     switch (profile->controlMode) {
     case 0:
         remap = g_controllerButtonRemap;
@@ -205,7 +205,7 @@ void ContPad_BuildControllerState(ControllerInput *input, Player *player) {
 
 void ContPad_InitControllerInput(void *input, s32 attributes) {
     ContPad_ClearControllerInput(input);
-    (((struct func_8022BC04_S3 *) ((s8 *) input))->unk10) = attributes;
+    (((struct AnimationResourceHandleView *) ((s8 *) input))->resourceHandle) = attributes;
 }
 
 /* 802631D0_2.CPP */
@@ -227,32 +227,32 @@ void ContPad_ClearControllerInput(void *object) {
     input->unk34 = 0;
 }
 
-s32 ContPad_SwapButtonPairs(s32 arg0)
+s32 ContPad_SwapButtonPairs(s32 buttons)
 {
-  int new_var;
-  s32 var_v1;
-  new_var = 0x80000;
-  var_v1 = arg0 & 0xFFF6FFF3;
-  if (arg0 & 0x10000)
+  int secondSourceMask;
+  s32 remappedButtons;
+  secondSourceMask = 0x80000;
+  remappedButtons = buttons & 0xFFF6FFF3;
+  if (buttons & 0x10000)
   {
-    var_v1 |= 8;
+    remappedButtons |= 8;
   }
-  if (arg0 & 8)
+  if (buttons & 8)
   {
-    var_v1 = var_v1 | 0x10000;
+    remappedButtons = remappedButtons | 0x10000;
   }
-  if (arg0 & new_var)
+  if (buttons & secondSourceMask)
   {
-    var_v1 |= 4;
+    remappedButtons |= 4;
   }
-  if (arg0 & 4)
+  if (buttons & 4)
   {
-    var_v1 |= 0x80000;
+    remappedButtons |= 0x80000;
   }
-  return var_v1;
+  return remappedButtons;
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802636D4[12] =
+char s_ContpadLEIMPACTSAText[12] =
     "LE_IMPACTS_A";
 #endif

@@ -1,21 +1,21 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SETTINGSRECAT24.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "FRONTEND/SCENARIO_RESULT_ROWS.H"
 #include "FRONTEND/FRONTEND_DISPATCHRESULTSEVENT.H"
 #include "FRONTEND/PAKINTERFACE_SETSCREENPHASE.H"
-#include "COMMON/EXTERNS_6.H"
-extern MatchScoreScreen *D_800E53C0;
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
+extern MatchScoreScreen *g_matchResultBadgeScreen;
 
-/* Handles the answer on the screen D_800E53C0. */
+/* Handles the answer on the screen g_matchResultBadgeScreen. */
 
 
 
@@ -34,35 +34,35 @@ extern void Frontend_StartMenuImageTransition(void *);
 extern void SmXlate_SwitchScreen(s32);
 
 /* When the fourth argument is one, calls MarkMenuEventHandled and, while the counter at offset 0xE8 of
-   the object D_800E53C0 points to is positive, decrements it and calls ScenarioSetup_FillResultRows. Returns zero. */
+   the object g_matchResultBadgeScreen points to is positive, decrements it and calls ScenarioSetup_FillResultRows. Returns zero. */
 
 
 
 
 
 /* When the fourth argument is one, calls MarkMenuEventHandled and, while the position at offset 0xE8 of
-   the object D_800E53C0 points to is more than four below the limit at 0xEC, advances it and calls
+   the object g_matchResultBadgeScreen points to is more than four below the limit at 0xEC, advances it and calls
    ScenarioSetup_FillResultRows. Returns zero. */
 
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E53C4, an actor kind at D_800E53C8 and a handler at D_800E53CC: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_resultsEventIds, an actor kind at g_resultsEventKinds and a handler at g_resultsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8042DB38)(void *, s32, s32, s32, s32);
 
 
 
-extern Handler8042DB38 D_800E53CC;
+extern Handler8042DB38 g_resultsEventHandlers;
 
-extern s32 D_80146894; /* MIXED Frontend_ActivateResultsAction */
+extern s32 g_simpleObjectPauseState; /* MIXED Frontend_ActivateResultsAction */
 s32 Frontend_ActivateResultsAction(void) {
     s32 *paused;
     MarkMenuEventHandled();
-    if (Frontend_GetMenuImageState(D_800E53C0) == 1) {
+    if (Frontend_GetMenuImageState(g_matchResultBadgeScreen) == 1) {
         return 0;
     }
-    paused = &D_80146894;
+    paused = &g_simpleObjectPauseState;
     *paused = 0;
     switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_DE)
@@ -73,11 +73,11 @@ s32 Frontend_ActivateResultsAction(void) {
     case 0x23E - 2:
 #endif
         if (((u8 *)paused)[-0x5BF] == 0) {
-            Frontend_StartMenuImageTransition(D_800E53C0);
-            D_800E53C0->active = 0;
+            Frontend_StartMenuImageTransition(g_matchResultBadgeScreen);
+            g_matchResultBadgeScreen->active = 0;
         } else {
-            D_80146918 = 0;
-            D_801468F4 = 0;
+            g_resultReplayPending = 0;
+            g_resultExitPending = 0;
             SmXlate_SwitchScreen(0xF);
         }
         break;
@@ -124,7 +124,7 @@ s32 Frontend_ScrollResultsBackward(void *first, void *second, void *third, s32 f
 
     if (fourth == 1) {
         MarkMenuEventHandled();
-        state = D_800E53C0;
+        state = g_matchResultBadgeScreen;
         if (state->first > 0) {
             state->first--;
             ScenarioSetup_FillResultRows();
@@ -140,7 +140,7 @@ s32 Frontend_ScrollResultsForward(void *first, void *second, void *third, s32 fo
 
     if (fourth == 1) {
         MarkMenuEventHandled();
-        state = D_800E53C0;
+        state = g_matchResultBadgeScreen;
         position = state->first;
         if (position + 4 < state->count) {
             state->first = position + 1;
@@ -151,25 +151,25 @@ s32 Frontend_ScrollResultsForward(void *first, void *second, void *third, s32 fo
     return 0;
 }
 
-s32 Frontend_DispatchResultsEvent(void *arg0, s32 arg1, s32 arg2, s32 eventValue, s32 eventExtra) {
+s32 Frontend_DispatchResultsEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
     Handler8042DB38 *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E53CC != 0) {
+    if (g_resultsEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E53CC;
+        entry = &g_resultsEventHandlers;
         index = 0;
         do {
-            if (D_800E53C4[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E53C8[index].value;
+            if (g_resultsEventIds[index].value == eventId) {
+                actor = eventObject;
+                actor_kind = actor->input;
+                table_kind = g_resultsEventKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, eventValue, eventExtra);
+                    return (*entry)(eventObject, eventId, eventPayload, eventValue, eventExtra);
                 }
             }
             entry += 3;

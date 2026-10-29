@@ -11,22 +11,22 @@
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "SYSTEM/DEFS.H"
-extern s32 D_8015375C;
-extern char *D_800D7E14[];
+extern s32 g_pakUseScannedChannel;
+extern char *g_unlockedLevelResultLabel[];
 extern s32 Menu_CountLineChars(struct Field *);
 
 s32 Timer_UpdateOwnerChannelLabel(struct Field *field, Shared_PakMenu *pThis) {
     char *text;
     char **strings;
     s32 value;
-    if (D_8015375C != 0) {
-        field->text = D_800D7E14;
+    if (g_pakUseScannedChannel != 0) {
+        field->text = g_unlockedLevelResultLabel;
     } else {
-        value = pThis->owner->unk4;
-        strings = D_800E25E4;
+        value = pThis->owner->controllerPort;
+        strings = g_pakOwnerChannelLabels;
         field->text = strings;
-        text = strings[D_801462C8.language];
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 1), D_800ED3FC, value + 1);
+        text = strings[g_gameSettings.language];
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 1), g_pakChannelNumberFormat, value + 1);
     }
     return 0;
 }
@@ -36,20 +36,20 @@ s32 Timer_UpdateOwnerChannelLabel(struct Field *field, Shared_PakMenu *pThis) {
 /* Uses the fixed option text while the mode flag is set. Otherwise formats
  * one more than the holder's signed option byte into the editable text,
  * one byte before the length returned by the item text helper. */
-extern s32 D_8015375C;
-extern u8 *D_800D7E14[];
+extern s32 g_pakUseScannedChannel;
+extern u8 *g_unlockedLevelResultLabel[];
 extern s32 Menu_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 s32 Timer_UpdateOwnerChannelLabel(LayeredText *field, struct Shared_PakMenu *holder) {
     char *text;
     s32 value;
-    if (D_8015375C != 0) {
-        field->text = D_800D7E14;
+    if (g_pakUseScannedChannel != 0) {
+        field->text = g_unlockedLevelResultLabel;
     } else {
-        value = holder->owner->unk4;
-        field->text = (u8 **)&D_800D36E4;
-        text = (char *)*(u8 **)&D_800D36E4;
+        value = holder->owner->controllerPort;
+        field->text = (u8 **)&g_pakOwnerChannelLabelFixed;
+        text = (char *)*(u8 **)&g_pakOwnerChannelLabelFixed;
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 1),
                         g_pakFormatInt1, value + 1);
     }

@@ -1,13 +1,13 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/AIPROFILE.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "RENDER/TIMED_SESSION_TRANSITIONS.H"
 #include "RENDER/SETN64_DRAWMODE4BACKDROP.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
@@ -24,7 +24,7 @@ extern Gfx *g_displayListCursor;
 
 #include "COMMON/DISPLAY.H"
 
-extern s32 D_800E28D0;
+extern s32 g_hudReferenceViewportWidth;
 
 
 
@@ -58,20 +58,20 @@ void SetN64_DrawMode4Backdrop(void) {
     s32 height;
     Gfx *cmd;
 
-    D_800CC380 = 0;
+    g_geometryFogEffectEnabled = 0;
     width = 0;
     height = 0;
-    gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
+    gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, g_hudReferenceViewportWidth, (u32)g_currentRenderFrame->colorImage);
     OnScreen_GetImageDimensions(0x389, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
         Onscrn_SetupSpriteMode(0xFA);
-        OnScreen_DrawSpriteResource(0x389, 0, 0, 0, (f32)D_800E28D0 / (f32)width, (f32)D_800E28D4 / (f32)height, 1);
+        OnScreen_DrawSpriteResource(0x389, 0, 0, 0, (f32)g_hudReferenceViewportWidth / (f32)width, (f32)g_hudReferenceViewportHeight / (f32)height, 1);
     }
 }
 
-void SetN64_ResetMode5Items(s32 arg0) {
+void SetN64_ResetMode5Items(s32 sessionAddress) {
     Scene_ResetTransitionViewport();
-    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x5A);
+    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(sessionAddress, 0x5A);
 }
 
 void SetN64_HandleMode5Input(s32 session) {
@@ -95,9 +95,9 @@ void SetN64_UpdateMode6(void) {
 void SetN64_DrawMode6(void) {
 }
 
-/** Thin wrapper calling func_8025E2D4_de with a fixed argument. */
+/** Thin wrapper calling SoundElement_SetMusicPlaybackEnabled with a fixed argument. */
 void SetN64_SetMode7AudioState(void) {
-    func_8025E2D4_de(0x10);
+    SoundElement_SetMusicPlaybackEnabled(0x10);
 }
 
 void SetN64_HandleMode7Transition(struct GameSession *session) {
@@ -107,9 +107,9 @@ void SetN64_HandleMode7Transition(struct GameSession *session) {
 void SetN64_InitializeMode8Scene(void *owner) {
     SetN64_ResetSessionPlayerPools(owner, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
-    D_801462C8.counters.transitionActive = 0;
+    g_gameSettings.counters.transitionActive = 0;
     SmXlate_SwitchScreen(0x18);
-    func_8025E2D4_de(0x34);
+    SoundElement_SetMusicPlaybackEnabled(0x34);
 }
 
 void SetN64_UpdateMode8(void) {
@@ -126,7 +126,7 @@ void SetN64_DrawMode8Session(GameSession *session) {
                                                   /* size = 0x18 */
 
 void SetN64_ResetMode9Items(s32 sessionAddress) {
-    D_800CD770 += 1;
+    g_modeFourFrameCounter += 1;
     Scene_ResetTransitionViewport();
     Cinema_SetResponse(0.5f);
     SetN64_ResetPlayerItems(sessionAddress, 0x6F);
@@ -140,7 +140,7 @@ void SetN64_DrawMode9Session(void *session) {
     SetN64_DrawSessionWithAttractTimeout(session);
 }
 
-void SetN64_ResetMode11Items(s32 arg0) {
+void SetN64_ResetMode11Items(s32 sessionAddress) {
     Scene_ResetTransitionViewport();
-    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x6F);
+    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(sessionAddress, 0x6F);
 }

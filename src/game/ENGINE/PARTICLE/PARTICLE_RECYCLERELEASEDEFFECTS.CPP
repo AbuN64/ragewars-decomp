@@ -1,4 +1,4 @@
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
@@ -8,7 +8,7 @@
 #include "SYSTEM/LIST.H"
 
 
-extern void Particle_FinishActorEffects(void *arg0);
+extern void Particle_FinishActorEffects(void *actor);
 extern void Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *effectWorld, void *detachedEntity);
 
@@ -50,25 +50,25 @@ void Particle_RecycleReleasedEffects(void *recycleSystem) {
                 if (flags & 0x100) {
                   if (!(flags & 0x800)) {
                     Particle_FinishActorEffects(effect);
-                    if (effect->unk1D9 != 0) {
+                    if (effect->releaseRequested != 0) {
                         Particle_UpdateMatrix(effect);
-                        Fx_DetachParticleSwooshes(&D_801379C0, effect);
+                        Fx_DetachParticleSwooshes(&g_actorParticleScene, effect);
                     }
-                    lightHandle = effect->unk138;
+                    lightHandle = effect->lightHandle;
                     if (lightHandle != 0) {
-                        Gdynlight_ReleaseLight(&D_8013B1A8, lightHandle);
-                        effect->unk138 = 0;
+                        Gdynlight_ReleaseLight(&g_dynamicLightPool, lightHandle);
+                        effect->lightHandle = 0;
                     }
                     referenceCount = effect->refCount;
                     if (referenceCount != 0) {
                         *referenceCount -= 1;
                     }
                     effect->flags = effect->flags & clear_mask;
-                    func_80255ED8_de(effect->list, effect);
+                    List_RemoveIntrusive(effect->list, effect);
                     effect->list = 0;
-                    func_80255CB8_de((char *)recycleSystem + remove_offset, effect);
+                    List_PrependIntrusive((char *)recycleSystem + remove_offset, effect);
                     if (effect->flags & active_mask) {
-                        func_80255ED8_de((char *)recycleSystem + flagged_offset, effect);
+                        List_RemoveIntrusive((char *)recycleSystem + flagged_offset, effect);
                     }
                   }
                 }

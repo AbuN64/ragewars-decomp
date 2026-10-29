@@ -1,11 +1,11 @@
 #include "COMMON/WORLD.H"
-#include "COMMON/LONE/D_80103FD0.H"
+#include "COMMON/LONE/PARTICLE_COLLISION_PROBE_RESULT.H"
 #include "COMMON/GROUP.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/ACCESS_S8_10F.H"
@@ -18,8 +18,8 @@
 #include "LISTS/LISTS.H"
 
 /* Returns the collisions an object would meet moving to a position, without committing the move: picks the collision set for the object
- * (D_801040D0 for flagged players; otherwise by Insthdr_IsInactiveOrCollisionOption4 and then Insthdr_GetModelCollisionFlag8 or Insthdr_GetModelCollisionFlag1 among
- * D_80103FF0, D_80104070, D_80104050 and D_801040D0), reports it through the optional out pointer, runs
+ * (g_portalAlternateCollisionQuery for flagged players; otherwise by Insthdr_IsInactiveOrCollisionOption4 and then Insthdr_GetModelCollisionFlag8 or Insthdr_GetModelCollisionFlag1 among
+ * g_portalDefaultCollisionQuery, g_portalNoModelFlagCollisionQuery, g_portalModeCollisionQuery and g_portalAlternateCollisionQuery), reports it through the optional out pointer, runs
  * the collision mover func_80243A90_de and restores the object's 0x50-byte header. Adapted from
  * Gobjinst_HasClearPathToActor. */
 
@@ -27,13 +27,13 @@
 
 
 
-extern char D_80103FF0;
+extern char g_portalDefaultCollisionQuery;
 
-extern char D_80104050;
+extern char g_portalModeCollisionQuery;
 
-extern char D_80104070;
+extern char g_portalNoModelFlagCollisionQuery;
 
-extern char D_801040D0;
+extern char g_portalAlternateCollisionQuery;
 
 extern s32 Insthdr_GetModelCollisionFlag1(Instance8020CD74 *);
 
@@ -44,7 +44,7 @@ extern s32 Insthdr_GetModelCollisionFlag8(Instance8020CD74 *);
 
 extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *);
 
-extern CollisionState D_801041F0;
+extern CollisionState g_currentActorInstance;
 
 extern int InstHdr_GetActorMotionIndex(void *record);
 
@@ -59,13 +59,13 @@ extern int InstHdr_GetActorMotionIndex(void *record);
 
 
 
-extern char *D_80140F84;
+extern char *g_gamePlayerAndMenuState;
 
-extern void *D_800CB440_de[];
+extern void *g_actorTypeOperations[];
 
-extern char D_800CA8C4_de;
+extern char g_actorDefinitionTable;
 
-extern void D_0024A7A0();
+extern void g_Gobjinst_DrawTeamMaskedModelAddress();
 
 struct Shared_World;
 extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
@@ -74,7 +74,7 @@ extern void GameObject_ResetActorMotion(char *);
 
 extern CQuatern Insthdr_BuildActorGroundRotation(char *);
 
-extern void func_80262480_de(char *);
+extern void Gastate_ResetAnimationReference(char *);
 
 extern void Gobjinst_QueueAnimation(char *, s32);
 
@@ -82,7 +82,7 @@ extern void Graphu64_IdentityMatrix(char *);
 
 extern void Actor_InitSpawnedActor(char *, char *, void *);
 
-extern void func_802193C8_de(char *, s32, char *);
+extern void Playerai_InitializeRouteCursor(char *, s32, char *);
 
 extern void Gobjinst_LoadModel(char *, s32, s32, s32);
 
@@ -97,17 +97,17 @@ static inline void *body_setup(char *obj) {
         return 0;
     }
     if (kind == 11) {
-        for (i = 0; i < D_80145048; i++) {
-            player = D_80140F84 + i * 0x16E8;
+        for (i = 0; i < g_playerCount; i++) {
+            player = g_gamePlayerAndMenuState + i * 0x16E8;
             if (player == obj) {
                 return 0;
             }
             if (player + 0x2E8 == obj) {
-                return &D_800CA8C4_de;
+                return &g_actorDefinitionTable;
             }
         }
     }
-    return D_800CB440_de[kind];
+    return g_actorTypeOperations[kind];
 }
 
 extern s32 g_lookupAIAnimTypeAnimObjectInfoText[];
@@ -125,21 +125,21 @@ s32 Gobjinst_ProbeActorMovement(Instance8020CD74 *actorState, CVector3 position,
     char *set;
     s32 grounded;
     s32 collisions;
-    struct Actor_func_80214DD4_de *actor = (struct Actor_func_80214DD4_de *)actorState;
+    struct BarrelAnchorActorView *actor = (struct BarrelAnchorActorView *)actorState;
 
     if (actor->type == 1 && (actor->flags100 & 0x300000) != 0) {
-        set = &D_801040D0;
+        set = &g_portalAlternateCollisionQuery;
     } else {
         grounded = Insthdr_GetModelCollisionFlag1(actorState);
         if (Insthdr_IsInactiveOrCollisionOption4(actorState) == 0) {
-            set = &D_801040D0;
+            set = &g_portalAlternateCollisionQuery;
             if (grounded != 0) {
-                set = &D_80104050;
+                set = &g_portalModeCollisionQuery;
             }
         } else if (Insthdr_GetModelCollisionFlag8(actorState) == 0) {
-            set = &D_80104070;
+            set = &g_portalNoModelFlagCollisionQuery;
         } else {
-            set = &D_80103FF0;
+            set = &g_portalDefaultCollisionQuery;
         }
     }
     if (out != 0) {
@@ -159,11 +159,11 @@ s32 Gobjinst_HasClearPathToActor(Instance8020CD74 *from, Instance8020CD74 *to) {
     s32 collisions;
 
     savedFrom = *from;
-    scale = D_800C3828_de;
-    ((struct Actor_func_80214DD4_de *)from)->pos.y += Gobjinst_GetActorHeight(from) * scale;
-    desired = ((struct Actor_func_80214DD4_de *)to)->pos;
+    scale = g_actorVisibilityProbeHeightScale;
+    ((struct BarrelAnchorActorView *)from)->pos.y += Gobjinst_GetActorHeight(from) * scale;
+    desired = ((struct BarrelAnchorActorView *)to)->pos;
     desired.y += Gobjinst_GetActorHeight(to) * scale;
-    collisions = Unicol_MoveActorWithCollision(from, desired, &D_80103FD0);
+    collisions = Unicol_MoveActorWithCollision(from, desired, &g_particleCollisionProbeResult);
     *from = savedFrom;
 
     return collisions == 0;
@@ -181,7 +181,7 @@ s32 Gobjinst_HasClearInstancePath(Instance8020CD74 *actorState, CVector3 positio
     Unicol_MoveActorWithCollision(actorState, position, &collision_info);
     *actorState = saved;
 
-    collisions = D_801041F0.active0 || D_801041F0.active9c;
+    collisions = g_currentActorInstance.active0 || g_currentActorInstance.active9c;
     return !collisions;
 }
 
@@ -221,13 +221,13 @@ void Gobjinst_InitializeActor(char *obj, s32 model, s32 kind, s32 unused, void *
     ((LevelActor *)obj)->state139 = 0;
     ((LevelActor *)obj)->state138 = 0;
     ((LevelActor *)obj)->renderFlags = 0x17800074;
-    func_80262480_de((char *)obj + 0x104);
-    func_80262480_de((char *)obj + 0x118);
+    Gastate_ResetAnimationReference((char *)obj + 0x104);
+    Gastate_ResetAnimationReference((char *)obj + 0x118);
     Gobjinst_QueueAnimation(obj, 0);
     ((LevelActor *)obj)->flags = (((LevelActor *)obj)->flags & ~0x400) | 0x2100;
     Graphu64_IdentityMatrix((char *)obj + 0x74);
-    ((LevelActor *)obj)->fieldB4 = 0;
-    ((LevelActor *)obj)->fieldB8 = 0;
+    ((LevelActor *)obj)->animationMatrices = 0;
+    ((LevelActor *)obj)->alternateAnimationMatrices = 0;
     ((LevelActor *)obj)->shadow = 0;
     ((LevelActor *)obj)->state13B = 0;
     ((LevelActor *)obj)->flags |= 0x10000;
@@ -237,7 +237,7 @@ void Gobjinst_InitializeActor(char *obj, s32 model, s32 kind, s32 unused, void *
     }
     lean = 0;
     delay = 0;
-    
+
 Actor_InitSpawnedActor
 (obj, obj + 0x170, body_setup(obj));
     if (((LevelActor *)obj)->collisionEnabled != 0) {
@@ -245,7 +245,7 @@ Actor_InitSpawnedActor
     }
     ((LevelActor *)obj)->controller = 0;
     if (effect != -1) {
-        func_802193C8_de(obj + 0x204, effect, (char *)obj + 0x8);
+        Playerai_InitializeRouteCursor(obj + 0x204, effect, (char *)obj + 0x8);
     }
     world = &g_world;
     Gobjinst_LoadModel(obj, (s32)world->indexedDirectory, world->indexedBank, lean);
@@ -255,9 +255,9 @@ Actor_InitSpawnedActor
     }
     ((LevelActor *)obj)->flags2E4 = Statinst_AdvanceResourceKey() << 10;
     if (((LevelActor *)obj)->flags & 8) {
-        ((LevelActor *)obj)->update = D_0024A7A0;
-        ((LevelActor *)obj)->lighting[0] = D_800D0EF8;
-        ((LevelActor *)obj)->lighting[1] = D_800D0EF8;
+        ((LevelActor *)obj)->update = g_Gobjinst_DrawTeamMaskedModelAddress;
+        ((LevelActor *)obj)->lighting[0] = g_defaultParticleLighting;
+        ((LevelActor *)obj)->lighting[1] = g_defaultParticleLighting;
     }
 }
 
@@ -280,8 +280,8 @@ s32 Gobjinst_ChooseAnimationVariant(LevelActor *owner, s32 animationKind, s32 ex
         goto fail;
     }
     data = SetN64_GetPackSection(*resource, 1);
-    entries = &((struct func_80254D70_S2 *)(data))->unk8;
-    total = ((struct func_80203E78_S1 *)(data))->unk4;
+    entries = &((struct MenuTextOwnerView *)(data))->flags;
+    total = ((struct ResourceKeyView *)(data))->key;
     count = Defs_FindSortedValue(entries, ((struct Access_s8_E6 *)(owner))->field, animationKind);
     if (count != -1) {
         original = count;

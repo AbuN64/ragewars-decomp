@@ -4,31 +4,31 @@
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 typedef struct JoinNameEntry { u8 **names; s32 pad; } JoinNameEntry;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 *D_800E1664_eu[], *D_800E1564_eu[];
-extern JoinNameEntry D_800EFE40[];
+extern u8 *g_characterPreviewTextReferenceEu1[], *g_slotSelectionTextReferenceEu4[];
+extern JoinNameEntry g_joinPlayerNamesLocalized[];
 #else
-extern u8 *D_800D3304[], *D_800D32C4[];
-extern JoinNameEntry D_800DF7D0[];
+extern u8 *g_characterPreviewTextReferenceShared1[], *g_slotSelectionTextReferenceShared3[];
+extern JoinNameEntry g_joinPlayerNamesDefault[];
 #endif
 static inline u8 *joinName15(void) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    return D_800E1664_eu[g_languageIndex];
+    return g_characterPreviewTextReferenceEu1[g_languageIndex];
 #else
-    return D_800D3304[0];
+    return g_characterPreviewTextReferenceShared1[0];
 #endif
 }
 static inline u8 *joinName16(void) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    return D_800E1564_eu[g_languageIndex];
+    return g_slotSelectionTextReferenceEu4[g_languageIndex];
 #else
-    return D_800D32C4[0];
+    return g_slotSelectionTextReferenceShared3[0];
 #endif
 }
 static inline u8 *joinTeamName(s32 index) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    return D_800EFE40[index].names[g_languageIndex];
+    return g_joinPlayerNamesLocalized[index].names[g_languageIndex];
 #else
-    return *D_800DF7D0[index].names;
+    return *g_joinPlayerNamesDefault[index].names;
 #endif
 }
 #endif

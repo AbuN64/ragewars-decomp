@@ -6,5 +6,5 @@
 
 extern void Player_TransferRandomInventoryItems(Inventory *inventory, Receiver *receiver);
 extern void Player_DrawTintedPlayer(LevelActor *actor, s32 animationContext, Draw *draw);
-extern void func_802292B8_de(void *actor);
+extern void Playerai_UpdateDamageTimers(void *actor);
 #endif

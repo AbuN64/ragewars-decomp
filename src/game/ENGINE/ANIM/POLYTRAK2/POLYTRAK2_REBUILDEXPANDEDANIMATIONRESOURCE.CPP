@@ -1,6 +1,6 @@
 #include "sdk/LIBC.H"
 #include "COMMON/STREAM.H"
-#include "COMMON/LONE/D_8010AC80.H"
+#include "COMMON/LONE/MOTION_TRACK_DECODE_RANGE_END.H"
 #include "GAME/SOUNDINFO.H"
 #include "TYPES.H"
 #include "SYSTEM/POLYTRAK2_INTERPOLATEJOINTQUATERNION.H"
@@ -37,15 +37,15 @@ extern void Cache_ReplaceResourceBlock(s32, void **, void *);
 
 extern s32 Polytrak2_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 
-extern const f32 D_800C411C_de, D_800C4120_de, D_800C4124_de;
+extern const f32 g_expandedAnimationInitialFrameStep, g_expandedTranslationRangeStart, g_expandedTranslationRangeEnd;
 
-extern const f32 D_800C4128_de, D_800C412C_de;
+extern const f32 g_expandedRotationRangeStart, g_expandedRotationRangeEnd;
 
-extern f32 D_8010AC70;
+extern f32 g_motionTrackFrameScale;
 
 #include "COMMON/STREAM.H"
-extern void Cache_ReleaseResource(void *arg0, void *resource);
-extern s32 D_8010AC74, D_8010AC78;
+extern void Cache_ReleaseResource(void *cacheContext, void *resource);
+extern s32 g_motionTrackDecodeRotation, g_motionTrackDecodeTranslation;
 
 static inline void resource_begin(ResourceBlock *block, s32 count, s32 bytes) {
     s32 i = 1;
@@ -81,7 +81,7 @@ loop:
 
 static inline void resource_copy(ResourceBlock *block, void *from, s32 bytes) {
     char *destination = resource_reserve(block, bytes);
-    if (from != 0) func_802BD3A0_de(destination, from, bytes);
+    if (from != 0) Libc_CopyBytes(destination, from, bytes);
 }
 
 static inline s32 motion_storage(s32 channels, s32 frames) {
@@ -130,16 +130,16 @@ void Polytrak2_RebuildExpandedAnimationResource(s32 unused, ResourceHandle **han
         section6 = (void *)SetN64_GetSizedPackSection((s32)source, 6, &bytes6);
         SetN64_GetPackSection(section3, 0);
         sourceFrames = header->frames;
-        D_8010AC84 = sourceFrames;
-        D_8010AC88 = sourceFrames;
+        g_motionTrackSourceFrameCount = sourceFrames;
+        g_motionTrackRotationFrameCount = sourceFrames;
         header->frameCount = (f32)sourceFrames;
-        header->frameStep = D_800C411C_de;
+        header->frameStep = g_expandedAnimationInitialFrameStep;
         if (sourceFrames >= 2) {
             count = (f32)(sourceFrames - 1);
             header->frameStep = count / count;
         }
-        rotationBytes = motion_storage(header->translations, D_8010AC88);
-        translationBytes = motion_storage(header->rotations, D_8010AC88);
+        rotationBytes = motion_storage(header->translations, g_motionTrackRotationFrameCount);
+        translationBytes = motion_storage(header->rotations, g_motionTrackRotationFrameCount);
         motionBytes = translationBytes + rotationBytes + 0x38;
         output = Cache_AllocResourceBlock(0, handle, sourceBytes - bytes5 + motionBytes + bytes6);
         if (output != 0) {
@@ -161,19 +161,19 @@ void Polytrak2_RebuildExpandedAnimationResource(s32 unused, ResourceHandle **han
             translations = SetN64_GetPackSection((s32 *)motion, 2);
             newRotations = SetN64_GetPackSection((s32 *)newMotion, 1);
             newTranslations = SetN64_GetPackSection((s32 *)newMotion, 2);
-            D_8010AC78 = 1;
-            D_8010AC74 = 0;
-            D_8010AC7C = D_800C4120_de;
-            D_8010AC80 = D_800C4124_de;
-            D_8010AC70 = newHeader->duration;
+            g_motionTrackDecodeTranslation = 1;
+            g_motionTrackDecodeRotation = 0;
+            g_motionTrackDecodeRangeStart = g_expandedTranslationRangeStart;
+            g_motionTrackDecodeRangeEnd = g_expandedTranslationRangeEnd;
+            g_motionTrackFrameScale = newHeader->duration;
             if (Polytrak2_ExpandAnimationTracks(rotations, newRotations, newHeader->translations, 3, newHeader->channels, newHeader->flags) == 0) {
                 success = 0;
             } else {
-                D_8010AC78 = 0;
-                D_8010AC74 = 1;
-                D_8010AC7C = D_800C4128_de;
-                D_8010AC80 = D_800C412C_de;
-                D_8010AC70 = newHeader->duration;
+                g_motionTrackDecodeTranslation = 0;
+                g_motionTrackDecodeRotation = 1;
+                g_motionTrackDecodeRangeStart = g_expandedRotationRangeStart;
+                g_motionTrackDecodeRangeEnd = g_expandedRotationRangeEnd;
+                g_motionTrackFrameScale = newHeader->duration;
                 success = Polytrak2_ExpandAnimationTracks(translations, newTranslations, newHeader->rotations, 4, newHeader->channels, newHeader->flags) != 0;
             }
             if (success == 0) {
@@ -192,10 +192,10 @@ replace_output:
 void Polytrak2_DecodeCubicSegment(Curve *compressedCurve)
 {
   s32 bitCursor;
-  int new_var;
+  int weightedFirstSample;
   f32 halfRange;
   f32 coefficientScale;
-  f32 temp_f0_3;
+  f32 unusedCoefficientScratch;
   f32 cubicCoefficient;
   f32 linearCoefficient;
   f32 constantCoefficient;
@@ -211,33 +211,33 @@ void Polytrak2_DecodeCubicSegment(Curve *compressedCurve)
   s32 thirdSample;
   u32 segmentSampleCount;
   s32 fourthSample;
-  valueBitWidth = compressedCurve->unk0;
-  segmentBitOffset = compressedCurve->unk28 * ((valueBitWidth * 4) + 6);
-  bitCursor = compressedCurve->unkC + segmentBitOffset;
+  valueBitWidth = compressedCurve->valueBitWidth;
+  segmentBitOffset = compressedCurve->segmentIndex * ((valueBitWidth * 4) + 6);
+  bitCursor = compressedCurve->bitStreamAddress + segmentBitOffset;
   segmentSampleCount = Polytrak2_ReadBitsAndAdvance(&bitCursor, 6);
   firstSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
   secondSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
   thirdSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
   fourthSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
   constantCoefficient = (f32) firstSample;
-  new_var=firstSample*0x15;
+  weightedFirstSample=firstSample*0x15;
   secondSampleTimes32 = secondSample << 5;
-  linearCoefficient = (f32) (((secondSampleTimes32 - new_var) - (thirdSample * 0xC)) + fourthSample);
+  linearCoefficient = (f32) (((secondSampleTimes32 - weightedFirstSample) - (thirdSample * 0xC)) + fourthSample);
   linearCoefficient *= 0.33333334f;
   quadraticCoefficient = (f32) ((((firstSample * 0xE) - secondSampleTimes32) + (thirdSample * 0x14)) - (fourthSample * 2));
-  new_var = firstSample * 0x18;
-  cubicCoefficient = (f32) ((((secondSample << 6) - new_var) - (thirdSample * 0x30)) + (fourthSample * 8));
+  weightedFirstSample = firstSample * 0x18;
+  cubicCoefficient = (f32) ((((secondSample << 6) - weightedFirstSample) - (thirdSample * 0x30)) + (fourthSample * 8));
   cubicCoefficient *= 0.33333334f;
   if (valueBitWidth != 0)
   {
-    quantizedValueScale = compressedCurve->unk8 / ((f32) ((1 << valueBitWidth) - 1));
+    quantizedValueScale = compressedCurve->valueRange / ((f32) ((1 << valueBitWidth) - 1));
   }
   else
   {
-    halfRange = compressedCurve->unk8 * 0.5f;
-    compressedCurve->unk8 = 0.0f;
-    quantizedValueScale = compressedCurve->unk8;
-    compressedCurve->unk4 = (f32) (compressedCurve->unk4 + halfRange);
+    halfRange = compressedCurve->valueRange * 0.5f;
+    compressedCurve->valueRange = 0.0f;
+    quantizedValueScale = compressedCurve->valueRange;
+    compressedCurve->baseValue = (f32) (compressedCurve->baseValue + halfRange);
   }
   constantCoefficient *= quantizedValueScale;
   if (segmentSampleCount >= 2U)
@@ -254,11 +254,11 @@ void Polytrak2_DecodeCubicSegment(Curve *compressedCurve)
   coefficientScale *= inverseSampleSpan;
   quadraticCoefficient *= coefficientScale;
   coefficientScale *= inverseSampleSpan;
-  constantCoefficient += compressedCurve->unk4;
+  constantCoefficient += compressedCurve->baseValue;
   cubicCoefficient *= coefficientScale;
-  compressedCurve->unk20 = segmentSampleCount;
-  compressedCurve->unk14 = linearCoefficient;
-  compressedCurve->unk10 = constantCoefficient;
-  compressedCurve->unk18 = quadraticCoefficient;
-  compressedCurve->unk1C = cubicCoefficient;
+  compressedCurve->segmentSampleCount = segmentSampleCount;
+  compressedCurve->linearCoefficient = linearCoefficient;
+  compressedCurve->constantCoefficient = constantCoefficient;
+  compressedCurve->quadraticCoefficient = quadraticCoefficient;
+  compressedCurve->cubicCoefficient = cubicCoefficient;
 }

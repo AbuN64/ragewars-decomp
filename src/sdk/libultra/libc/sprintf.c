@@ -1,13 +1,13 @@
 #include "sdk/LIBC.H"
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "sdk/EXTERNS.H"
 
 /* sprintf: formats into a buffer through Libc_FormatToCallback with the copying output routine, terminates the text when the length is not negative, and returns the length. */
-s32 func_802BD320_de(char *buffer, const char *format, ...) {
-    s32 length = Libc_FormatToCallback(D_002BD378, buffer, format, __builtin_next_arg(format));
+s32 Libc_FormatString(char *buffer, const char *format, ...) {
+    s32 length = Libc_FormatToCallback(Libc_FormatStringOutputCallback, buffer, format, __builtin_next_arg(format));
 
     if (length >= 0) {
         buffer[length] = 0;
@@ -19,11 +19,11 @@ s32 func_802BD320_de(char *buffer, const char *format, ...) {
 
 /* _Printf output routine: copy a span and return the next output position. */
 void *proutSprintf(void *destination, const void *source, s32 count) {
-    return (char *)func_802BD3A0_de(destination, source, count) + count;
+    return (char *)Libc_CopyBytes(destination, source, count) + count;
 }
 
 /** Copy a byte span and return its destination. */
-void *func_802BD3A0_de(void *destination, const void *source, size_t count) {
+void *Libc_CopyBytes(void *destination, const void *source, size_t count) {
     unsigned char *out = destination;
     const unsigned char *in = source;
     while (count != 0) {
@@ -34,7 +34,7 @@ void *func_802BD3A0_de(void *destination, const void *source, size_t count) {
 }
 
 /** Find a byte in a zero-terminated string. */
-char *func_802BD3C8_de(const char *string, int value) {
+char *Libc_FindStringByte(const char *string, int value) {
     const unsigned char *cursor = (const unsigned char *)string;
     unsigned char byte = (unsigned char)value;
     while (*cursor != byte) {
@@ -46,7 +46,7 @@ char *func_802BD3C8_de(const char *string, int value) {
     return (char *)cursor;
 }
 
-size_t func_802BD400_de(const char *string) {
+size_t Libc_StringLength(const char *string) {
     const unsigned char *cursor = (const unsigned char *)string;
     const unsigned char *terminator;
     terminator = cursor;
@@ -59,7 +59,7 @@ size_t func_802BD400_de(const char *string) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BD354[3] = {
+unsigned int k_SprintfEncodedWords[3] = {
     0x0C000000, 0x0000086D, 0x5F546578,
 };
 #endif

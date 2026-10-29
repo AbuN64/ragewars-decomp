@@ -12,14 +12,14 @@ struct Output8025EF54 {
     s32 pad0C;
 };
 struct Segment8025FFD0 {
-    s32 unk0;
-    f32 unk4;
-    f32 unk8;
-    u32 unkC;
+    s32 valueBitWidth;
+    f32 baseValue;
+    f32 valueRange;
+    u32 bitStreamAddress;
     u8 pad10[0x24 - 0x10];
-    s32 unk24;
-    s32 unk28;
-    s32 unk2C;
+    s32 segmentStartSample;
+    s32 segmentIndex;
+    s32 segmentCount;
 };
 struct Decode8025EF54 {
     s32 bits;
@@ -38,17 +38,17 @@ struct Poly {
     u32 duration;
 };
 struct Curve {
-    s32 unk0;
-    f32 unk4;
-    f32 unk8;
-    s32 unkC;
-    f32 unk10;
-    f32 unk14;
-    f32 unk18;
-    f32 unk1C;
-    u32 unk20;
-    s32 unk24;
-    s32 unk28;
+    s32 valueBitWidth;
+    f32 baseValue;
+    f32 valueRange;
+    s32 bitStreamAddress;
+    f32 constantCoefficient;
+    f32 linearCoefficient;
+    f32 quadraticCoefficient;
+    f32 cubicCoefficient;
+    u32 segmentSampleCount;
+    s32 segmentStartSample;
+    s32 segmentIndex;
 };
 typedef struct AnimTrack {
     /* 0x00 */ char pad0[0x18];

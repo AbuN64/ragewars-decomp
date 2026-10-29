@@ -4,12 +4,12 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "RSP/800C97E0.H"
+#include "RSP/FIXED_MATRIX_CONVERSION_CONSTANTS.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 
 /* Transforms an axis-aligned box by a matrix: starts the new minimum and maximum at the matrix translation and, for every matrix entry, adds the smaller of its products with the old minimum and maximum to the new minimum and the larger to the new maximum. */
 
-void Graphu64_TransformBoundingBox(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
+void Graphu64_TransformBoundingBox(f32 m[4][4], ModelBoundingBox *box, ModelBoundingBox *out) {
     f32 min[3];
     f32 max[3];
     f32 newMin[3];
@@ -220,7 +220,7 @@ void Graphu64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
     out[14] = (left[12] * right[2]) + (left[13] * right[6]) +
               (left[14] * right[10]) + right[14];
     out[3] = out[7] = out[11] = 0.0f;
-    out[15] = D_800C46EC_de;
+    out[15] = g_matrixUnpackHomogeneousScale;
 }
 /** Multiply two column-addressed 4x4 matrices into the output matrix. */
 void Graphu64_MultiplyMatrices(f32 *out, f32 *left, f32 *right)
@@ -249,14 +249,14 @@ void GraphU64_PackFixedMatrix(f32 *src, PackedMatrixWords *dst) {
     f32 value;
     s32 a;
     s32 b;
-    value = (src[(0) * 2]) * (D_800C46F0_de); if (!(*(&(D_800C46F0_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C46F0_de) + 1)); (a) |= 0x80000000; }; value = (src[(0) * 2 + 1]) * (D_800C46F8_de); if (!(*(&(D_800C46F8_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C46F8_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
-    value = (src[(1) * 2]) * (D_800C4700_de); if (!(*(&(D_800C4700_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4700_de) + 1)); (a) |= 0x80000000; }; value = (src[(1) * 2 + 1]) * (D_800C4708_de); if (!(*(&(D_800C4708_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4708_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
-    value = (src[(2) * 2]) * (D_800C4710_de); if (!(*(&(D_800C4710_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4710_de) + 1)); (a) |= 0x80000000; }; value = (src[(2) * 2 + 1]) * (D_800C4718_de); if (!(*(&(D_800C4718_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4718_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
-    value = (src[(3) * 2]) * (D_800C4720_de); if (!(*(&(D_800C4720_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4720_de) + 1)); (a) |= 0x80000000; }; value = (src[(3) * 2 + 1]) * (D_800C4728_de); if (!(*(&(D_800C4728_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4728_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
-    value = (src[(4) * 2]) * (D_800C4730_de); if (!(*(&(D_800C4730_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4730_de) + 1)); (a) |= 0x80000000; }; value = (src[(4) * 2 + 1]) * (D_800C4738_de); if (!(*(&(D_800C4738_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4738_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
-    value = (src[(5) * 2]) * (D_800C4740_de); if (!(*(&(D_800C4740_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4740_de) + 1)); (a) |= 0x80000000; }; value = (src[(5) * 2 + 1]) * (D_800C4748_de); if (!(*(&(D_800C4748_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4748_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
-    value = (src[(6) * 2]) * (D_800C4750_de); if (!(*(&(D_800C4750_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4750_de) + 1)); (a) |= 0x80000000; }; value = (src[(6) * 2 + 1]) * (D_800C4758_de); if (!(*(&(D_800C4758_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4758_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
-    value = (src[(7) * 2]) * (D_800C4760_de); if (!(*(&(D_800C4760_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4760_de) + 1)); (a) |= 0x80000000; }; value = (src[(7) * 2 + 1]) * (D_800C4768_de); if (!(*(&(D_800C4768_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4768_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
+    value = (src[(0) * 2]) * (g_fullFixedMatrixElement0ConversionConstants); if (!(*(&(g_fullFixedMatrixElement0ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_fullFixedMatrixElement0ConversionConstants) + 1)); (a) |= 0x80000000; }; value = (src[(0) * 2 + 1]) * (g_fullFixedMatrixElement1ConversionConstants); if (!(*(&(g_fullFixedMatrixElement1ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_fullFixedMatrixElement1ConversionConstants) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
+    value = (src[(1) * 2]) * (g_fullFixedMatrixElement2ConversionConstants); if (!(*(&(g_fullFixedMatrixElement2ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_fullFixedMatrixElement2ConversionConstants) + 1)); (a) |= 0x80000000; }; value = (src[(1) * 2 + 1]) * (g_fullFixedMatrixElement3ConversionConstants); if (!(*(&(g_fullFixedMatrixElement3ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_fullFixedMatrixElement3ConversionConstants) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
+    value = (src[(2) * 2]) * (g_fullFixedMatrixElement4ConversionConstants); if (!(*(&(g_fullFixedMatrixElement4ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_fullFixedMatrixElement4ConversionConstants) + 1)); (a) |= 0x80000000; }; value = (src[(2) * 2 + 1]) * (g_fullFixedMatrixElement5ConversionConstants); if (!(*(&(g_fullFixedMatrixElement5ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_fullFixedMatrixElement5ConversionConstants) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
+    value = (src[(3) * 2]) * (g_fullFixedMatrixElement6ConversionConstants); if (!(*(&(g_fullFixedMatrixElement6ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_fullFixedMatrixElement6ConversionConstants) + 1)); (a) |= 0x80000000; }; value = (src[(3) * 2 + 1]) * (g_fullFixedMatrixElement7ConversionConstants); if (!(*(&(g_fullFixedMatrixElement7ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_fullFixedMatrixElement7ConversionConstants) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
+    value = (src[(4) * 2]) * (g_fullFixedMatrixElement8ConversionConstants); if (!(*(&(g_fullFixedMatrixElement8ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_fullFixedMatrixElement8ConversionConstants) + 1)); (a) |= 0x80000000; }; value = (src[(4) * 2 + 1]) * (g_fullFixedMatrixElement9ConversionConstants); if (!(*(&(g_fullFixedMatrixElement9ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_fullFixedMatrixElement9ConversionConstants) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
+    value = (src[(5) * 2]) * (g_fullFixedMatrixElement10ConversionConstants); if (!(*(&(g_fullFixedMatrixElement10ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_fullFixedMatrixElement10ConversionConstants) + 1)); (a) |= 0x80000000; }; value = (src[(5) * 2 + 1]) * (g_fullFixedMatrixElement11ConversionConstants); if (!(*(&(g_fullFixedMatrixElement11ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_fullFixedMatrixElement11ConversionConstants) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
+    value = (src[(6) * 2]) * (g_fullFixedMatrixElement12ConversionConstants); if (!(*(&(g_fullFixedMatrixElement12ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_fullFixedMatrixElement12ConversionConstants) + 1)); (a) |= 0x80000000; }; value = (src[(6) * 2 + 1]) * (g_fullFixedMatrixElement13ConversionConstants); if (!(*(&(g_fullFixedMatrixElement13ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_fullFixedMatrixElement13ConversionConstants) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
+    value = (src[(7) * 2]) * (g_fullFixedMatrixElement14ConversionConstants); if (!(*(&(g_fullFixedMatrixElement14ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_fullFixedMatrixElement14ConversionConstants) + 1)); (a) |= 0x80000000; }; value = (src[(7) * 2 + 1]) * (g_fullFixedMatrixElement15ConversionConstants); if (!(*(&(g_fullFixedMatrixElement15ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_fullFixedMatrixElement15ConversionConstants) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
 }
 
 void Graphu64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
@@ -265,53 +265,53 @@ void Graphu64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
     f32 value;
     s32 a;
     s32 b;
-    value = (src[0]) * (D_800C4770_de); if (!(*(&(D_800C4770_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4770_de) + 1)); (a) |= 0x80000000; };
-    value = (src[1]) * (D_800C4778_de); if (!(*(&(D_800C4778_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4778_de) + 1)); (b) |= 0x80000000; };
+    value = (src[0]) * (g_affineFixedMatrixElement0ConversionConstants); if (!(*(&(g_affineFixedMatrixElement0ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_affineFixedMatrixElement0ConversionConstants) + 1)); (a) |= 0x80000000; };
+    value = (src[1]) * (g_affineFixedMatrixElement1ConversionConstants); if (!(*(&(g_affineFixedMatrixElement1ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_affineFixedMatrixElement1ConversionConstants) + 1)); (b) |= 0x80000000; };
     *upper = (a & 0xFFFF0000) | ((u32)b >> 16);
     *lower = (a << 16) | (b & 0xFFFF);
     upper++;
     lower++;
 
-    value = (src[2]) * (D_800C4780_de); if (!(*(&(D_800C4780_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4780_de) + 1)); (a) |= 0x80000000; };
+    value = (src[2]) * (g_affineFixedMatrixElement2ConversionConstants); if (!(*(&(g_affineFixedMatrixElement2ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_affineFixedMatrixElement2ConversionConstants) + 1)); (a) |= 0x80000000; };
     *upper = a & 0xFFFF0000;
     *lower = a << 16;
     upper++;
     lower++;
 
-    value = (src[4]) * (D_800C4788_de); if (!(*(&(D_800C4788_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4788_de) + 1)); (a) |= 0x80000000; };
-    value = (src[5]) * (D_800C4790_de); if (!(*(&(D_800C4790_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4790_de) + 1)); (b) |= 0x80000000; };
+    value = (src[4]) * (g_affineFixedMatrixElement4ConversionConstants); if (!(*(&(g_affineFixedMatrixElement4ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_affineFixedMatrixElement4ConversionConstants) + 1)); (a) |= 0x80000000; };
+    value = (src[5]) * (g_affineFixedMatrixElement5ConversionConstants); if (!(*(&(g_affineFixedMatrixElement5ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_affineFixedMatrixElement5ConversionConstants) + 1)); (b) |= 0x80000000; };
     *upper = (a & 0xFFFF0000) | ((u32)b >> 16);
     *lower = (a << 16) | (b & 0xFFFF);
     upper++;
     lower++;
 
-    value = (src[6]) * (D_800C4798_de); if (!(*(&(D_800C4798_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4798_de) + 1)); (a) |= 0x80000000; };
+    value = (src[6]) * (g_affineFixedMatrixElement6ConversionConstants); if (!(*(&(g_affineFixedMatrixElement6ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_affineFixedMatrixElement6ConversionConstants) + 1)); (a) |= 0x80000000; };
     *upper = a & 0xFFFF0000;
     *lower = a << 16;
     upper++;
     lower++;
 
-    value = (src[8]) * (D_800C47A0_de); if (!(*(&(D_800C47A0_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C47A0_de) + 1)); (a) |= 0x80000000; };
-    value = (src[9]) * (D_800C47A8_de); if (!(*(&(D_800C47A8_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C47A8_de) + 1)); (b) |= 0x80000000; };
+    value = (src[8]) * (g_affineFixedMatrixElement8ConversionConstants); if (!(*(&(g_affineFixedMatrixElement8ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_affineFixedMatrixElement8ConversionConstants) + 1)); (a) |= 0x80000000; };
+    value = (src[9]) * (g_affineFixedMatrixElement9ConversionConstants); if (!(*(&(g_affineFixedMatrixElement9ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_affineFixedMatrixElement9ConversionConstants) + 1)); (b) |= 0x80000000; };
     *upper = (a & 0xFFFF0000) | ((u32)b >> 16);
     *lower = (a << 16) | (b & 0xFFFF);
     upper++;
     lower++;
 
-    value = (src[10]) * (D_800C47B0_de); if (!(*(&(D_800C47B0_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C47B0_de) + 1)); (a) |= 0x80000000; };
+    value = (src[10]) * (g_affineFixedMatrixElement10ConversionConstants); if (!(*(&(g_affineFixedMatrixElement10ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_affineFixedMatrixElement10ConversionConstants) + 1)); (a) |= 0x80000000; };
     *upper = a & 0xFFFF0000;
     *lower = a << 16;
     upper++;
     lower++;
 
-    value = (src[12]) * (D_800C47B8_de); if (!(*(&(D_800C47B8_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C47B8_de) + 1)); (a) |= 0x80000000; };
-    value = (src[13]) * (D_800C47C0_de); if (!(*(&(D_800C47C0_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C47C0_de) + 1)); (b) |= 0x80000000; };
+    value = (src[12]) * (g_affineFixedMatrixElement12ConversionConstants); if (!(*(&(g_affineFixedMatrixElement12ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_affineFixedMatrixElement12ConversionConstants) + 1)); (a) |= 0x80000000; };
+    value = (src[13]) * (g_affineFixedMatrixElement13ConversionConstants); if (!(*(&(g_affineFixedMatrixElement13ConversionConstants) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(g_affineFixedMatrixElement13ConversionConstants) + 1)); (b) |= 0x80000000; };
     *upper = (a & 0xFFFF0000) | ((u32)b >> 16);
     *lower = (a << 16) | (b & 0xFFFF);
     upper++;
     lower++;
 
-    value = (src[14]) * (D_800C47C8_de); if (!(*(&(D_800C47C8_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C47C8_de) + 1)); (a) |= 0x80000000; };
+    value = (src[14]) * (g_affineFixedMatrixElement14ConversionConstants); if (!(*(&(g_affineFixedMatrixElement14ConversionConstants) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(g_affineFixedMatrixElement14ConversionConstants) + 1)); (a) |= 0x80000000; };
     *upper = (a & 0xFFFF0000) | 1;
     *lower = a << 16;
 }
@@ -319,7 +319,7 @@ void Graphu64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
 void Graphu64_UnpackFixedMatrix(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
-    f32 scale = D_800C47D0_de;
+    f32 scale = g_quaternionMatrixUnitScale;
 
     upper = src->upper[0]; lower = src->lower[0]; dst[(0) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(0) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
     upper = src->upper[1]; lower = src->lower[1]; dst[(1) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(1) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
@@ -331,12 +331,12 @@ void Graphu64_UnpackFixedMatrix(f32 *dst, PackedMatrixWords *src) {
     upper = src->upper[7]; lower = src->lower[7]; dst[(7) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(7) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
 }
 
-/* Unpacks a fixed-point 4x4 matrix held as separate integer and fraction halves into floats scaled by D_800C98C4, zeroing the fourth column and setting the last element to D_800C98C8. Adapted from Graphu64_UnpackFixedMatrix with the fourth column replaced by zeros and the constant at D_800C98C8, the third-column integer word used unmasked in the first three rows, the scale constant changed, and the last row computed into a local before the corner store. */
+/* Unpacks a fixed-point 4x4 matrix held as separate integer and fraction halves into floats scaled by g_quaternionInterpolationUnitScale, zeroing the fourth column and setting the last element to g_matrixAndSlerpUnitConstants. Adapted from Graphu64_UnpackFixedMatrix with the fourth column replaced by zeros and the constant at g_matrixAndSlerpUnitConstants, the third-column integer word used unmasked in the first three rows, the scale constant changed, and the last row computed into a local before the corner store. */
 
 void Graphu64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
-    f32 scale = D_800C98C4;
+    f32 scale = g_quaternionInterpolationUnitScale;
     upper = src->upper[0]; lower = src->lower[0]; dst[(0) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(0) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
     upper = src->upper[1]; lower = src->lower[1]; dst[(1) * 2] = (f32)(s32)(upper | (lower >> 16)) * scale; dst[(1) * 2 + 1] = 0.0f;
     upper = src->upper[2]; lower = src->lower[2]; dst[(2) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(2) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
@@ -349,7 +349,7 @@ void Graphu64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
         upper = src->upper[7];
         lower = src->lower[7];
         last = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale;
-        dst[15] = D_800C98C8;
+        dst[15] = g_matrixAndSlerpUnitConstants;
         dst[14] = last;
     }
 }
@@ -390,8 +390,8 @@ void Graphu64_InterpolateQuaternionArc(CQuatern *out, f32 amount, CQuatern *a, C
         return;
     }
 
-    inverseSine = *(&D_800C98C8 + 1) / sine;
-    scaleA = Gu_Sinf((*(&D_800C98C8 + 1) - amount) * angle) * inverseSine;
+    inverseSine = *(&g_matrixAndSlerpUnitConstants + 1) / sine;
+    scaleA = Gu_Sinf((*(&g_matrixAndSlerpUnitConstants + 1) - amount) * angle) * inverseSine;
     scaleB = Gu_Sinf(amount * angle) * inverseSine;
     if (dot < negativeDot) {
         other = &negative;
@@ -432,7 +432,7 @@ void Graphu64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount,
         other = &negative;
     }
 
-    if (D_800C47E0_de < dot) {
+    if (g_quaternionInterpolationThresholdConstants < dot) {
         f32 magnitude;
         f32 scale;
 
@@ -443,7 +443,7 @@ void Graphu64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount,
         magnitude = Gu_Sqrtf((out->x * out->x) + (out->y * out->y) +
                                   (out->z * out->z) + (out->w * out->w));
         if (magnitude != 0.0f) {
-            scale = *(&D_800C47E0_de + 1) / magnitude;
+            scale = *(&g_quaternionInterpolationThresholdConstants + 1) / magnitude;
             out->x *= scale;
             out->y *= scale;
             out->z *= scale;
@@ -457,8 +457,8 @@ void Graphu64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount,
             return;
         }
 
-        inverseSine = D_800C47E8_de / sine;
-        scaleA = Gu_Sinf((D_800C47E8_de - amount) * angle) * inverseSine;
+        inverseSine = g_quaternionSlerpUnitScale / sine;
+        scaleA = Gu_Sinf((g_quaternionSlerpUnitScale - amount) * angle) * inverseSine;
         scaleB = Gu_Sinf(amount * angle) * inverseSine;
         if (dot < negativeDot) {
             other = &negative;
@@ -490,7 +490,7 @@ CVector3 Graphu64_BlendRandomDirection(CVector3 *in, f32 amount) {
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
-        randomScale = D_800C47EC_de / randomMagnitude;
+        randomScale = g_randomDirectionNormalizeScale / randomMagnitude;
         randomPtr->x *= randomScale;
         randomPtr->y *= randomScale;
         randomPtr->z *= randomScale;
@@ -500,7 +500,7 @@ CVector3 Graphu64_BlendRandomDirection(CVector3 *in, f32 amount) {
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
-        inputScale = D_800C47F0_de / inputMagnitude;
+        inputScale = g_inputDirectionNormalizeScale / inputMagnitude;
         in->x *= inputScale;
         in->y *= inputScale;
         in->z *= inputScale;
@@ -523,7 +523,7 @@ CVector3 Graphu64_BlendRandomXDirection(CVector3 *in, f32 amount) {
     f32 inputScale;
 
     random.x = (f32)((Graphu64_NextRandom() % 20000) - 0x2710) *
-               *(&D_800C47F0_de + 1);
+               *(&g_inputDirectionNormalizeScale + 1);
     random.y = in->y;
     random.z = in->z;
     randomPtr = &random;
@@ -532,7 +532,7 @@ CVector3 Graphu64_BlendRandomXDirection(CVector3 *in, f32 amount) {
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
-        randomScale = D_800C47F8_de / randomMagnitude;
+        randomScale = g_randomDirectionPairNormalizeConstants / randomMagnitude;
         randomPtr->x *= randomScale;
         randomPtr->y *= randomScale;
         randomPtr->z *= randomScale;
@@ -542,7 +542,7 @@ CVector3 Graphu64_BlendRandomXDirection(CVector3 *in, f32 amount) {
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
-        inputScale = *(&D_800C47F8_de + 1) / inputMagnitude;
+        inputScale = *(&g_randomDirectionPairNormalizeConstants + 1) / inputMagnitude;
         in->x *= inputScale;
         in->y *= inputScale;
         in->z *= inputScale;
@@ -565,7 +565,7 @@ CVector3 Graphu64_BlendRandomYDirection(CVector3 *in, f32 amount) {
     f32 inputScale;
 
     random.x = in->x;
-    random.y = ((f32)(Graphu64_NextRandom() % 20000) - D_800C4800_de) * *(&D_800C4800_de + 1);
+    random.y = ((f32)(Graphu64_NextRandom() % 20000) - g_randomDirectionYRangeConstants) * *(&g_randomDirectionYRangeConstants + 1);
     random.z = in->z;
     randomPtr = &random;
 
@@ -573,7 +573,7 @@ CVector3 Graphu64_BlendRandomYDirection(CVector3 *in, f32 amount) {
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
-        randomScale = D_800C4808_de / randomMagnitude;
+        randomScale = g_randomDirectionRotationNormalizeConstants / randomMagnitude;
         randomPtr->x *= randomScale;
         randomPtr->y *= randomScale;
         randomPtr->z *= randomScale;
@@ -583,7 +583,7 @@ CVector3 Graphu64_BlendRandomYDirection(CVector3 *in, f32 amount) {
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
-        inputScale = *(&D_800C4808_de + 1) / inputMagnitude;
+        inputScale = *(&g_randomDirectionRotationNormalizeConstants + 1) / inputMagnitude;
         in->x *= inputScale;
         in->y *= inputScale;
         in->z *= inputScale;
@@ -603,8 +603,8 @@ CVector3 *Graphu64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount
 
     random.x = in->x;
     random.y = in->y;
-    random.z = ((f32)(Graphu64_NextRandom() % 20000) - D_800C4810_de) *
-               *(&D_800C4810_de + 1);
+    random.z = ((f32)(Graphu64_NextRandom() % 20000) - g_randomDirectionZRangeConstants) *
+               *(&g_randomDirectionZRangeConstants + 1);
 
     randomPtr = &random;
     {
@@ -615,7 +615,7 @@ CVector3 *Graphu64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount
                                   (randomPtr->y * randomPtr->y) +
                                   (randomPtr->z * randomPtr->z));
         if (magnitude != 0.0f) {
-            scale = D_800C4818_de / magnitude;
+            scale = g_quaternionNormalizeConstants / magnitude;
             randomPtr->x *= scale;
             randomPtr->y *= scale;
             randomPtr->z *= scale;
@@ -629,7 +629,7 @@ CVector3 *Graphu64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount
                                   (in->y * in->y) +
                                   (in->z * in->z));
         if (magnitude != 0.0f) {
-            scale = *(&D_800C4818_de + 1) / magnitude;
+            scale = *(&g_quaternionNormalizeConstants + 1) / magnitude;
             in->x *= scale;
             in->y *= scale;
             in->z *= scale;
@@ -664,26 +664,26 @@ CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *input) {
         result.z = 0.0f;
         result.y = 0.0f;
         result.x = 0.0f;
-        result.w = D_800C4820_de;
+        result.w = g_quaternionIdentityW;
     } else {
         f32 normalizationScale;
 
-        normalizationScale = D_800C4824_de / magnitude;
+        normalizationScale = g_quaternionDirectionUnitScale / magnitude;
         normalized.x = input->x * normalizationScale;
         normalized.y = input->y * normalizationScale;
         normalized.z = input->z * normalizationScale;
 
         basis.x = 0.0f;
         basis.y = 0.0f;
-        basis.z = D_800C4824_de;
+        basis.z = g_quaternionDirectionUnitScale;
 
         if (normalized.z < 0.0f) {
-            if (D_800C4828_de < -normalized.z) {
+            if (g_quaternionOppositeDirectionThreshold < -normalized.z) {
                 goto pole;
             }
             goto general;
         }
-        if (D_800C482C_de < normalized.z) {
+        if (g_quaternionParallelDirectionThreshold < normalized.z) {
 pole:
         {
             f32 halfAngle;
@@ -692,7 +692,7 @@ pole:
             halfAngle = 0.0f;
             scale = Gu_Sinf(halfAngle);
             result.z = normalized.z * scale;
-            D_80115DEC = scale;
+            g_turretAimSine = scale;
             result.x = halfAngle;
             result.y = halfAngle;
             result.w = Math_Cosf(halfAngle);
@@ -716,18 +716,18 @@ general:
             if (axisMagnitude != 0.0f) {
                 f32 axisScale;
 
-                axisScale = D_800C4830_de / axisMagnitude;
+                axisScale = g_quaternionAxisNormalizeScale / axisMagnitude;
                 axis.x *= axisScale;
                 axis.y *= axisScale;
                 axis.z *= axisScale;
             }
 
-            halfAngle = angle * D_800C4834_de;
+            halfAngle = angle * g_quaternionHalfAngleScale;
             scale = Gu_Sinf(halfAngle);
             result.x = axis.x * scale;
             result.y = axis.y * scale;
             result.z = axis.z * scale;
-            D_80115DEC = scale;
+            g_turretAimSine = scale;
             result.w = Math_Cosf(halfAngle);
         }
         }

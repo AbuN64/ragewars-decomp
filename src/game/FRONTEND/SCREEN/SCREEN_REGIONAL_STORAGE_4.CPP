@@ -1,0 +1,3 @@
+#if defined(VERSION_EU_X)
+unsigned char g_ScreenRegionalStorageTrailingBytesBlock3[8] = { 0x28, 0x62, 0x00, 0x02, 0x10, 0x40, 0x00, 0x05 };
+#endif

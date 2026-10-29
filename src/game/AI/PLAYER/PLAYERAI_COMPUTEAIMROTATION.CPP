@@ -6,9 +6,9 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/OBJ.H"
 #include "COMMON/RESOURCELOADSTATE.H"
@@ -17,52 +17,52 @@
 
 s32 Cbarrel_TestTargetEyeObstruction(void *, void *, void *);
 /* Whether the target's view reports an active shield. */
-static inline s32 Weapons_TargetShielded(func_8021CD70_S2 *target) {
-    View *view = target->unk5DC;
+static inline s32 Weapons_TargetShielded(TargetLockTargetView *target) {
+    View *view = target->view;
     if (view == NULL) {
         return 0;
     }
     return view->unk564 != 0;
 }
 /* Checks whether the player's current weapon can lock onto the target. Kind 0 and 7 targets never lock. */
-s32 Playerai_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
+s32 Playerai_CanLockTarget(TargetLockAttackerView *attacker, TargetLockTargetView *target) {
     s16 weapon;
     s8 mode;
     s32 canLock;
 
-    weapon = attacker->unk62E;
+    weapon = attacker->weaponId;
     if (weapon == 0x12) {
-        if (target->unk100 & 0x300000) {
-            if (!(target->unk18->unk14 & 0x20)) {
+        if (target->renderFlags & 0x300000) {
+            if (!(target->definition->flags & 0x20)) {
                 return 0;
             }
-            mode = target->unk1A4;
-            if (mode == 0x26 || mode == weapon || target->unk174 == 0) {
+            mode = target->targetLockState;
+            if (mode == 0x26 || mode == weapon || target->health == 0) {
                 return 0;
             }
             if (!Weapons_TargetShielded(target)) {
-                return Cbarrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
+                return Cbarrel_TestTargetEyeObstruction(attacker, &attacker->targetProbeState, target) == 0;
             }
             return 0;
         }
-        if (target->unk18->unk0 == 1) {
-            if (!(target->unk18->unk14 & 0x2400)) {
+        if (target->definition->kind == 1) {
+            if (!(target->definition->flags & 0x2400)) {
                 return 0;
             }
-            mode = target->unk1A4;
+            mode = target->targetLockState;
             if (mode == 0x21 || mode == 0x34 || mode == 0x3C || mode == 0x3D) {
                 return 0;
             }
-            if (target->unk174 != 0) {
-                return Cbarrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
+            if (target->health != 0) {
+                return Cbarrel_TestTargetEyeObstruction(attacker, &attacker->targetProbeState, target) == 0;
             }
             return 0;
         }
     }
-    switch (target->unk18->unk0) {
+    switch (target->definition->kind) {
     case 4:
-        if (target->unk174 != 0) {
-            return Cbarrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
+        if (target->health != 0) {
+            return Cbarrel_TestTargetEyeObstruction(attacker, &attacker->targetProbeState, target) == 0;
         }
         return 0;
     case 0:
@@ -70,8 +70,8 @@ s32 Playerai_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target)
         return 0;
     case 11:
         canLock = 0;
-        mode = target->unk1A4;
-        if (mode != 0x26 && mode != 0x12 && target->unk174 != 0 && !Weapons_TargetShielded(target)) {
+        mode = target->targetLockState;
+        if (mode != 0x26 && mode != 0x12 && target->health != 0 && !Weapons_TargetShielded(target)) {
             canLock = 1;
         }
         return canLock;
@@ -81,11 +81,11 @@ s32 Playerai_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target)
 
 /* These contiguous globals place the actor-list pointer 0x1285 bytes before the enable flag. */
 #include "ENGINE/INSTANCE/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.H"
-struct func_8021CD70_S1;
-struct func_8021CD70_S2;
-extern s32 Playerai_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
+struct TargetLockAttackerView;
+struct TargetLockTargetView;
+extern s32 Playerai_CanLockTarget(TargetLockAttackerView *, TargetLockTargetView *);
 extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
-extern CQuatern func_8024796C_de(char *);
+extern CQuatern Gobjinst_BuildActorAimQuaternion(char *);
 extern void MultiplyQuaternions(void *, void *, void *);
 
 CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **target,
@@ -110,24 +110,24 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
     bestDirection.y = 0.0f;
     bestDirection.z = 0.0f;
     result.x = result.y = result.z = bestPosition.x;
-    result.w = D_800C2388_de;
+    result.w = g_playerAimDefaultRotationW;
     best = 0;
-    if (player->weapon != -1) angle = ((DraftAimWeapon *)D_800D052C[player->weapon])->angle;
+    if (player->weapon != -1) angle = ((DraftAimWeapon *)g_weaponInfoByType[player->weapon])->angle;
     else angle = bestPosition.x;
-    threshold = Math_Cosf(angle * D_800C238C_de);
+    threshold = Math_Cosf(angle * g_playerAimConeAngleScale);
     if (angle != 0.0f) {
         unit.x = 0.0f;
         unit.y = 0.0f;
-        unit.z = D_800C2390_de;
-        func_8024BC94_de(&forward, player, unit);
+        unit.z = g_playerAimForwardDistance;
+        Gobjinst_TransformVectorByActorAim(&forward, player, unit);
         origin = player->position;
         origin.y += Playerai_GetObjectOwnerHeight(player);
-        enable = &D_80145088.settings.local;
+        enable = &g_frontendScreenStatus.settings.local;
         if (*enable) {
             other = ((AimGlobals *)(enable - 0x1285))->head;
             if (other) {
                 firstSpecial = 0x12;
-                scale = D_800C2394_de;
+                scale = g_playerAimPrimaryTurnScale;
                 do {
                 if (Playerai_CanLockTarget((void *)player, (void *)other) && other != player) {
                     if (player->weapon == firstSpecial) candidate = other->specialAim;
@@ -153,9 +153,9 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
         i = 0;
         if (i < count) {
             secondSpecial = 0x12;
-            scale = D_800C2398_de;
+            scale = g_playerAimSecondaryTurnScale;
             do {
-            other = (void *)D_8011CA18[i];
+            other = (void *)g_playerAimCandidateActors[i];
             if (Playerai_CanLockTarget((void *)player, (void *)other)) {
                 if (player->weapon == secondSpecial) candidate = other->specialAim;
                 else {
@@ -183,9 +183,9 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
     if (best) {
         Graphu64_CrossVectors(&axis, &forward, &bestDirection);
         Graphu64_NormalizeVec3(&axis.x);
-        scale = D_800C239C_de;
+        scale = g_playerAimFallbackTurnScale;
         threshold = Graphu64_ArcCos(threshold);
-        amount = Gu_Sqrtf(D_800C23A0_de - threshold / (angle * scale));
+        amount = Gu_Sqrtf(g_playerAimTurnRootBase - threshold / (angle * scale));
         amount = Gu_Sqrtf(amount);
         threshold *= amount;
         threshold *= scale;
@@ -193,9 +193,9 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
         correction.x = axis.x * amount;
         correction.y = axis.y * amount;
         correction.z = axis.z * amount;
-        D_80115DEC = amount;
+        g_turretAimSine = amount;
         correction.w = Math_Cosf(threshold);
-        facing = func_8024796C_de((char *)player);
+        facing = Gobjinst_BuildActorAimQuaternion((char *)player);
         MultiplyQuaternions(&result, &facing, &correction);
     }
     return result;

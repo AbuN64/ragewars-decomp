@@ -1,0 +1,4 @@
+#ifndef DATA_OVLDAT6_PLAYER_HEALTH_CALLBACK_LABELS_H
+#define DATA_OVLDAT6_PLAYER_HEALTH_CALLBACK_LABELS_H
+extern char addrLow_Weapon_UpdateIdleWeaponSelection[];
+#endif

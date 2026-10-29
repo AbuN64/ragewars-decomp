@@ -4,13 +4,13 @@
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
 #include "stddef.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"
 
-s32 Pak_SelectMusicPreview(s32 arg0, Shared_PakMenu *pThis) {
-    s32 selection = D_800E63B8;
+s32 Pak_SelectMusicPreview(s32 unusedEvent, Shared_PakMenu *pThis) {
+    s32 selection = g_menuMusicPreviewSelection;
     if (pThis->owner->unkB0 & 0x20202) {
         selection--;
         if (selection < 0) {
@@ -27,8 +27,8 @@ s32 Pak_SelectMusicPreview(s32 arg0, Shared_PakMenu *pThis) {
             selection = 15;
         }
     }
-    D_800E63B8 = selection;
-    func_8025E2D4_de(selection);
+    g_menuMusicPreviewSelection = selection;
+    SoundElement_SetMusicPlaybackEnabled(selection);
     return 0;
 }
 #endif
@@ -36,10 +36,10 @@ s32 Pak_SelectMusicPreview(s32 arg0, Shared_PakMenu *pThis) {
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Cycles a menu selection from directional input while skipping reserved entries. */
  /* extern */
-s32 Pak_SelectMusicPreview(s32 unused, struct RecordRecAt20V1 *menu) {
+s32 Pak_SelectMusicPreview(s32 unused, struct PakControllerRequestView *menu) {
     s32 musicSelection;
-    musicSelection = D_800E63B8;
-    if (menu->inner->unkB0 & 0x20202) {
+    musicSelection = g_menuMusicPreviewSelection;
+    if (menu->inner->buttons & 0x20202) {
         musicSelection -= 1;
         if (musicSelection < 0) {
             musicSelection = 0x16;
@@ -47,7 +47,7 @@ s32 Pak_SelectMusicPreview(s32 unused, struct RecordRecAt20V1 *menu) {
             musicSelection = 0xB;
         }
     }
-    if (menu->inner->unkB0 & 0x4D101) {
+    if (menu->inner->buttons & 0x4D101) {
         musicSelection += 1;
         if (musicSelection >= 0x17) {
             musicSelection = 0;
@@ -55,8 +55,8 @@ s32 Pak_SelectMusicPreview(s32 unused, struct RecordRecAt20V1 *menu) {
             musicSelection = 0xF;
         }
     }
-    D_800E63B8 = musicSelection;
-    func_8025E2D4_de(musicSelection);
+    g_menuMusicPreviewSelection = musicSelection;
+    SoundElement_SetMusicPlaybackEnabled(musicSelection);
     return 0;
 }
 #endif

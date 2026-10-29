@@ -3,14 +3,14 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/WORLDRECAT1B6A4.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_10.H"
+#include "COMMON/TRIGGER_AND_FLOAT_VALUE_OPERATIONS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/OBJECTLINKS150C.H"
+#include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/OBJB.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "SYSTEM/LIST.H"
 #include "SYSTEM/LIST.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
@@ -28,51 +28,51 @@ extern void Link_DispatchTriggerExit(RecGobjinstSampleBoneTranslation *trigger);
 
 
 
-void Scene_DispatchSecondaryTriggersOfKind(void *world, s32 arg1) {
+void Scene_DispatchSecondaryTriggersOfKind(void *world, s32 triggerKind) {
     RecGobjinstSampleBoneTranslation *trigger;
-    RecGobjinstSampleBoneTranslation *var_s1_2;
-    s32 var_s0;
-    s32 var_s0_2;
+    RecGobjinstSampleBoneTranslation *edgeTrigger;
+    s32 remainingFaces;
+    s32 remainingEdges;
 
-    var_s0 = ((WorldRecAt1B40C *)(world))->nfaces;
-    trigger = ((WorldRecAt1B40C *)(world))->faces;
-    var_s0 -= 1;
-    if (var_s0 != -1) {
+    remainingFaces = ((SceneVisibilityGeometryView *)(world))->nfaces;
+    trigger = ((SceneVisibilityGeometryView *)(world))->faces;
+    remainingFaces -= 1;
+    if (remainingFaces != -1) {
         do {
-            if (((Record14 *)(trigger))->kind == arg1) {
+            if (((Record14 *)(trigger))->kind == triggerKind) {
                 Link_DispatchTriggerExit(trigger);
             }
-            var_s0 -= 1;
+            remainingFaces -= 1;
             trigger += 1;
-        } while (var_s0 != -1);
+        } while (remainingFaces != -1);
     }
 
-    var_s0_2 = ((WorldRecAt1B40C *)(world))->nedges;
-    var_s1_2 = ((WorldRecAt1B40C *)(world))->edges;
-    var_s0_2 -= 1;
-    if (var_s0_2 != -1) {
+    remainingEdges = ((SceneVisibilityGeometryView *)(world))->nedges;
+    edgeTrigger = ((SceneVisibilityGeometryView *)(world))->edges;
+    remainingEdges -= 1;
+    if (remainingEdges != -1) {
         do {
-            if (((Record14 *)(var_s1_2))->kind == arg1) {
-                Link_DispatchTriggerExit(var_s1_2);
+            if (((Record14 *)(edgeTrigger))->kind == triggerKind) {
+                Link_DispatchTriggerExit(edgeTrigger);
             }
-            var_s0_2 -= 1;
-            var_s1_2 += 1;
-        } while (var_s0_2 != -1);
+            remainingEdges -= 1;
+            edgeTrigger += 1;
+        } while (remainingEdges != -1);
     }
 }
 
-s32 Scene_QueueTriggerTimer(WorldRecAt1B40C *arg0, Record14 *trigger) {
+s32 Scene_QueueTriggerTimer(SceneVisibilityGeometryView *world, Record14 *trigger) {
     void *rec;
     f32 val;
     s32 flag;
 
-    rec = arg0->listB.head;
+    rec = world->listB.head;
     if (rec != 0) {
-        func_80255ED8_de(&arg0->listB, rec);
-        func_80255CB8_de(&arg0->listA, rec);
+        List_RemoveIntrusive(&world->listB, rec);
+        List_PrependIntrusive(&world->listA, rec);
         ((CActiveLink *)(rec))->object = trigger;
     } else {
-        rec = arg0->listA.tail;
+        rec = world->listA.tail;
         Link_DispatchTrigger(((CActiveLink *)(rec))->object);
         ((CActiveLink *)(rec))->object = trigger;
     }
@@ -80,7 +80,7 @@ s32 Scene_QueueTriggerTimer(WorldRecAt1B40C *arg0, Record14 *trigger) {
     ((CActiveLink *)(rec))->remaining = val;
     flag = trigger->flags & 2;
     if (flag != 0) {
-        ((CActiveLink *)(rec))->remaining = val * D_800C52E8_de;
+        ((CActiveLink *)(rec))->remaining = val * g_triggerTimerFrameScale;
     }
     return flag;
 }
@@ -94,7 +94,7 @@ s32 Scene_QueueTriggerTimer(WorldRecAt1B40C *arg0, Record14 *trigger) {
 
 
 
-void Scene_UpdateTriggerTimers(void *arg0) {
+void Scene_UpdateTriggerTimers(void *world) {
     void *node;
     void *next;
     void *object;
@@ -103,7 +103,7 @@ void Scene_UpdateTriggerTimers(void *arg0) {
     f32 zero;
     f32 value;
 
-    node = ((WorldRecAt1B40C *)(arg0))->listA.head;
+    node = ((SceneVisibilityGeometryView *)(world))->listA.head;
     remove = 0;
     if (node != 0) {
         zero = 0.0f;
@@ -112,7 +112,7 @@ void Scene_UpdateTriggerTimers(void *arg0) {
             next = ((CActiveLink *)(node))->next;
             expired = remove;
             if (((Record14 *)(object))->flags & 2) {
-                value = ((CActiveLink *)(node))->remaining - D_800D2988;
+                value = ((CActiveLink *)(node))->remaining - g_frameElapsedTime;
                 ((CActiveLink *)(node))->remaining = value;
                 if (value <= zero) {
                     expired = 1;
@@ -123,8 +123,8 @@ void Scene_UpdateTriggerTimers(void *arg0) {
                 Link_DispatchTrigger(object);
             }
             if (remove != 0) {
-                func_80255ED8_de(&((WorldRecAt1B40C *)(arg0))->listA, node);
-                func_80255CB8_de(&((WorldRecAt1B40C *)(arg0))->listB, node);
+                List_RemoveIntrusive(&((SceneVisibilityGeometryView *)(world))->listA, node);
+                List_PrependIntrusive(&((SceneVisibilityGeometryView *)(world))->listB, node);
             }
             node = next;
             remove = 0;
@@ -132,7 +132,7 @@ void Scene_UpdateTriggerTimers(void *arg0) {
     }
 }
 
-/* Lights a point: blends the light volumes around it when the world's sectors hold any and lighting is on (D_800D2850), else copies the default lights D_800CBC90. */
+/* Lights a point: blends the light volumes around it when the world's sectors hold any and lighting is on (g_vertexLightingMode), else copies the default lights g_playerModelLighting. */
 
 
 
@@ -145,7 +145,7 @@ void Scene_UpdateTriggerTimers(void *arg0) {
 
 
 
-extern void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC **volumes, s32 *total);
+extern void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, SceneLightVolume **volumes, s32 *total);
 static inline s32 worldHasLightVolumes(Shared_World *world) {
     s32 i;
     for (i = 0; i < world->sectorCount; i++) {
@@ -156,10 +156,10 @@ static inline s32 worldHasLightVolumes(Shared_World *world) {
     return 0;
 }
 void Scene_SampleWorldLighting(Shared_World *world, CVector3 *position, Shared_ParticleLighting *out) {
-    ObjectRecAtBC *volumes[10];
+    SceneLightVolume *volumes[10];
     s32 count;
-    if (!worldHasLightVolumes(world) || D_800D2850 == 0) {
-        *out = D_800CBC90[0];
+    if (!worldHasLightVolumes(world) || g_vertexLightingMode == 0) {
+        *out = g_playerModelLighting[0];
     } else {
         Scene_FindLightVolumes(world, position, volumes, &count);
         Scene_SampleVolumeLighting(volumes, count, position, out);
@@ -174,12 +174,12 @@ void Scene_SampleWorldLighting(Shared_World *world, CVector3 *position, Shared_P
 
 
 
-EntryRecAt18V4 *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *world, s32 id) {
+SceneDefinitionActorView *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *world, s32 id) {
     s32 i;
-    EntryRecAt18V4 *found = 0;
+    SceneDefinitionActorView *found = 0;
 
     for (i = 0; i < world->count; i++) {
-        if (world->list[i]->def->unkC == id) {
+        if (world->list[i]->def->input == id) {
             found = world->list[i];
             break;
         }
@@ -199,7 +199,7 @@ extern Player *Playerai_GetFirstPlayer(void *list);
 #ifdef VERSION_EU
 #endif
 
-Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
+Player *Scene_FindNearestObjectToFirstPlayer(ScenePlayerObjectListView *world) {
     CVector3 delta;
     Player *player;
     Player *object;
@@ -209,9 +209,9 @@ Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
     s32 i;
 
 #ifdef VERSION_EU
-    player = Playerai_GetFirstPlayer(&D_80145040);
+    player = Playerai_GetFirstPlayer(&g_playerViewRenderContext);
 #else
-    player = Playerai_GetFirstPlayer(&D_80145040);
+    player = Playerai_GetFirstPlayer(&g_playerViewRenderContext);
 #endif
     best = 9999999;
     nearest = 0;
@@ -227,7 +227,7 @@ Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
     return nearest;
 }
 
-/* Registers an object with a world after preparing it with Gobjinst_RotatePoseMatrixBuffers: adds it to the lists of objects accepted by func_8024D160_de and func_8024E1B4_de, to the list of all objects, to the type 1 list (storing its slot in the object), to the list of objects flagged 2, to the type 5 list, and to the lists of model 0x64F and model 0x64D objects, each while that list has room. */
+/* Registers an object with a world after preparing it with Gobjinst_RotatePoseMatrixBuffers: adds it to the lists of objects accepted by InstHdr_CanActorReceiveInteraction and InstHdr_HasEnabledMotionHooks, to the list of all objects, to the type 1 list (storing its slot in the object), to the list of objects flagged 2, to the type 5 list, and to the lists of model 0x64F and model 0x64D objects, each while that list has room. */
 
 
 
@@ -236,19 +236,19 @@ Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
 
 
 extern void Gobjinst_RotatePoseMatrixBuffers(ObjectSceneRegisterActorInSceneLists *object);
-extern s32 func_8024D160_de(ObjectSceneRegisterActorInSceneLists *object);
-extern s32 func_8024E1B4_de(ObjectSceneRegisterActorInSceneLists *object);
+extern s32 InstHdr_CanActorReceiveInteraction(ObjectSceneRegisterActorInSceneLists *object);
+extern s32 InstHdr_HasEnabledMotionHooks(ObjectSceneRegisterActorInSceneLists *object);
 
-void Scene_RegisterActorInSceneLists(WorldRecAt10B8 *world, ObjectSceneRegisterActorInSceneLists *object) {
+void Scene_RegisterActorInSceneLists(SceneActorCategoryListsView *world, ObjectSceneRegisterActorInSceneLists *object) {
     Gobjinst_RotatePoseMatrixBuffers(object);
-    if (func_8024D160_de(object) != 0) {
+    if (InstHdr_CanActorReceiveInteraction(object) != 0) {
         s32 n = world->countA;
         if (n != 512) {
             world->listA[n] = object;
             world->countA = n + 1;
         }
     }
-    if (func_8024E1B4_de(object) != 0) {
+    if (InstHdr_HasEnabledMotionHooks(object) != 0) {
         s32 n = world->countB;
         if (n != 128) {
             world->listB[n] = object;
@@ -300,10 +300,10 @@ void Scene_RegisterActorInSceneLists(WorldRecAt10B8 *world, ObjectSceneRegisterA
 }
 
 /* Returns the nearest other object matching the optional team, kind and active filters, by squared distance. */
-ObjectRecAt1A4 *Scene_FindNearestMatchingActor(WorldSceneFindNearestMatchingActor *world, ObjectRecAt1A4 *self, s32 team, s32 kind, s32 activeOnly) {
+SceneNearestActorView *Scene_FindNearestMatchingActor(WorldSceneFindNearestMatchingActor *world, SceneNearestActorView *self, s32 team, s32 kind, s32 activeOnly) {
     s32 i;
-    ObjectRecAt1A4 *obj;
-    ObjectRecAt1A4 *best;
+    SceneNearestActorView *obj;
+    SceneNearestActorView *best;
     f32 min;
     f32 dx, dy, dz, distSq;
 
@@ -345,15 +345,15 @@ ObjectRecAt1A4 *Scene_FindNearestMatchingActor(WorldSceneFindNearestMatchingActo
 
 
 
-struct EntryRecAt10 *Scene_FindNearestListedEntry(struct OwnerCode8028B64C *owner, struct EntryRecAt10 *pos) {
+struct ScenePositionEntry *Scene_FindNearestListedEntry(struct OwnerCode8028B64C *owner, struct ScenePositionEntry *pos) {
     s32 i;
-    struct EntryRecAt10 *best;
+    struct ScenePositionEntry *best;
     f32 min;
-    struct EntryRecAt10 **entries;
+    struct ScenePositionEntry **entries;
     f32 dx, dy, dz, distSq;
-    struct EntryRecAt10 *e;
+    struct ScenePositionEntry *e;
     s32 n;
-    struct EntryRecAt10 **p;
+    struct ScenePositionEntry **p;
 
     i = 0;
     best = 0;
@@ -389,11 +389,11 @@ struct EntryRecAt10 *Scene_FindNearestListedEntry(struct OwnerCode8028B64C *owne
 
 
 
-ActorRecAt1D8V1 *Scene_ResolveActorLinkGroup(ObjCode8028B64C *obj, int id) {
+ActorLinkedControllerView *Scene_ResolveActorLinkGroup(ObjCode8028B64C *obj, int id) {
     int i;
-    ActorRecAt1D8V1 *found;
+    ActorLinkedControllerView *found;
     int count;
-    ActorRecAt1D8V1 **list;
+    ActorLinkedControllerView **list;
 
     i = 0;
     found = 0;
@@ -421,13 +421,13 @@ void Scene_ClearActorLinksById(void *scene, s32 linkId) {
     void *entry;
 
     i = 0;
-    count = ((SceneRecAt10C0 *)((scene)))->count;
-    arr = &((SceneRecAt10C0 *)((scene)))->objects[0];
+    count = ((SceneActorUpdateLists *)((scene)))->count;
+    arr = &((SceneActorUpdateLists *)((scene)))->objects[0];
     if (count > 0) {
         do {
             entry = *arr;
-            if (((ActorRecAt1D8V1 *)((entry)))->link == linkId) {
-                ((ActorRecAt1D8V1 *)((entry)))->link = 0;
+            if (((ActorLinkedControllerView *)((entry)))->link == linkId) {
+                ((ActorLinkedControllerView *)((entry)))->link = 0;
             }
             i += 1;
             arr += 1;

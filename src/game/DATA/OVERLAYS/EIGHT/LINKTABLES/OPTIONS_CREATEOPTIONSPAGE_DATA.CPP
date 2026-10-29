@@ -3,7 +3,7 @@
 
 /* 800E4504_2.CPP */
 /* ROM-grounded data: rodata/writable/800E4510 */
-unsigned int D_blob_phase2_d527d58d0d7520b70c48[3] = {
+unsigned int g_OptionsCreateoptionspageEncodedWordsBlock1[3] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
@@ -50,8 +50,8 @@ unsigned int D_src_4b23fe05[65] = {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int D_blob_ec5dd4e360119bdc0fe4[3] = {
-    0x00000E08, 0x00000004, (unsigned int)D_0042340C,
+unsigned int g_OptionsCreateoptionspageEncodedWords[3] = {
+    0x00000E08, 0x00000004, (unsigned int)g_frontend_UpdateOptionsPageExitEntry,
 };
 #endif
 

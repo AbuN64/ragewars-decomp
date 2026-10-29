@@ -2,7 +2,7 @@
 #include "COMMON/GROUP.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/LEGACY_COLLISION_ACTOR.H"
 #include "COMMON/MOTION_STEP.H"
 #include "COMMON/TRIPLE.H"
@@ -42,13 +42,13 @@ s32 CCollision_IntegrateGravityAndDrag();
                      /* extern */
 
                          /* extern */
-extern Func80243A80Global *D_80103FCC;
+extern Func80243A80Global *g_collisionCurrentActor;
 
-extern s32 D_80103FD0;
+extern s32 g_particleCollisionProbeResult;
 
 extern s32 D_801001D0;
 
-extern s32 D_80100338;
+extern s32 g_supportingPlatformCollisionQuery;
 
 extern float D_800C379C_de;
 
@@ -62,7 +62,7 @@ typedef CVector3 Func80243A80Vec3;
 extern void CCollision_SetUniformSweepExtent(void *actorMotion, f32 extent);
 
 s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *motionSettings) {
-    s32 func_8023D380_de();
+    s32 CCollision_ApplyMotionResponse();
     Func80243A80Frame frame;
     f32 headingCosine;
     f32 surfaceCeilingHeight;
@@ -77,7 +77,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     s32 repeatFloorProbe;
     s32 remainingIterations;
     s32 collisionCount;
-    s32 var_v0;
+    s32 unusedMovementState;
     s32 groundFollowEnabled;
     s32 peakMoveCount;
     s32 horizontalResponseTicks;
@@ -96,7 +96,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     f32 savedY;
 
     CCollision_ClearResultFlags(&frame.sp18);
-    __builtin_memcpy(&D_80103FCC->x, &actor->room, 12);
+    __builtin_memcpy(&g_collisionCurrentActor->x, &actor->room, 12);
     actor->flags = (u32) (actor->flags & ~0x18);
     frame.sp18 = actor;
     motionContinuation = 0;
@@ -132,13 +132,13 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
         frame.sp1E8 = actor->z;
         CCollision_ProjectSegmentOntoSurface(&frame.sp18, &frame.sp1C8);
     }
-    if ((frame.sp1C != 0) || (frame.sp5C != frame.sp68) || (frame.sp60 != frame.sp6C) || (var_v0 = 0, (frame.sp64 != frame.sp70))) {
-        peakMoveCount = ++D_800CB410_de;
-        if (peakMoveCount < D_800CB414_de) {
-            peakMoveCount = D_800CB414_de;
+    if ((frame.sp1C != 0) || (frame.sp5C != frame.sp68) || (frame.sp60 != frame.sp6C) || (unusedMovementState = 0, (frame.sp64 != frame.sp70))) {
+        peakMoveCount = ++g_collisionMovementCount;
+        if (peakMoveCount < g_collisionPeakMovementCount) {
+            peakMoveCount = g_collisionPeakMovementCount;
         }
-        D_800CB414_de = peakMoveCount;
-        if ((motionSettings != &D_80100338) && (motionSettings != &D_801001D0) && (motionSettings != &D_80103FD0) && (motionSettings != &D_80100170)) {
+        g_collisionPeakMovementCount = peakMoveCount;
+        if ((motionSettings != &g_supportingPlatformCollisionQuery) && (motionSettings != &D_801001D0) && (motionSettings != &g_particleCollisionProbeResult) && (motionSettings != &D_80100170)) {
             actor->attached = 0;
             frame.sp54 &= ~0x7B;
         }
@@ -197,7 +197,7 @@ block_42:
             }
             CCollision_StoreContactResult(&frame.sp18);
             collisionCount += 1;
-            motionContinuation = func_8023D380_de(&frame.sp18);
+            motionContinuation = CCollision_ApplyMotionResponse(&frame.sp18);
             __builtin_memcpy(&frame.sp5C, &frame.sp198, 12);
             __builtin_memcpy(&frame.sp68, &frame.sp1B0, 12);
             __builtin_memcpy(&frame.sp8C, &frame.sp1BC, 12);
@@ -220,7 +220,7 @@ block_42:
             savedY = frame.sp6C;
             dropDistance = D_800C3798_de;
             frame.sp6C = savedY - dropDistance;
-            __builtin_memcpy(&frame.sp2A8, &D_801000F0, sizeof(D_801000F0));
+            __builtin_memcpy(&frame.sp2A8, &g_playerCollisionProbe, sizeof(g_playerCollisionProbe));
             frame.sp58 = &frame.sp2A8;
             floorProbeBaseFlags = frame.sp2A8 & 0xFFE7FFF7;
             frame.sp2A8 = floorProbeBaseFlags;
@@ -236,7 +236,7 @@ loop_49:
                 if (frame.spD0 == 7) {
                     frame.sp3C = 0;
                 }
-                func_8023D380_de(&frame.sp18);
+                CCollision_ApplyMotionResponse(&frame.sp18);
                 repeatFloorProbe = 0;
                 actor->groundY = frame.sp19C;
                 __builtin_memcpy(&actor->contactX, &frame.sp110, 12);
@@ -297,13 +297,13 @@ block_71:
             frame.sp44 = 0;
             frame.sp48 = 0;
             frame.sp4C = 0;
-            frame.sp58 = &D_801000F0.flags;
+            frame.sp58 = &g_playerCollisionProbe.flags;
             frame.sp68 -= headingSine * D_800C37A8_de;
             frame.sp70 -= headingCosine * D_800C37A8_de;
             CCollision_ResetContactNormal(&frame.sp18);
             if ((CCollision_TraceActorMotion((s8 *) &frame.sp18) != 0) && (frame.spC8 == 4)) {
                 if (frame.sp38 != 0) {
-                    func_8023D380_de(&frame.sp18);
+                    CCollision_ApplyMotionResponse(&frame.sp18);
                     actor->x = frame.sp198;
                     actor->z = frame.sp1A0;
                     frame.sp54 |= 0x100;
@@ -340,7 +340,7 @@ block_71:
 }
 
 s32 CCollision_SweepPoint(char *actorStorage, CVector3 startPosition, CVector3 desired, s32 motionSettings) {
-    extern s32 func_8023D380_de(void *actorStorage);
+    extern s32 CCollision_ApplyMotionResponse(void *actorStorage);
     Work80244494 work;
     VectorPair vectors;
     char *object = actorStorage;
@@ -363,13 +363,13 @@ s32 CCollision_SweepPoint(char *actorStorage, CVector3 startPosition, CVector3 d
         return 0;
     }
 
-    D_800CB418_de += 1;
-    maximum = D_800CB41C_de;
-    next = D_800CB418_de;
+    g_collisionSweepCount += 1;
+    maximum = g_collisionPeakSweepCount;
+    next = g_collisionSweepCount;
     if (next < maximum) {
         next = maximum;
     }
-    D_800CB41C_de = next;
+    g_collisionPeakSweepCount = next;
 
     ((struct ActorMotion *)(out))->actor = object;
     if (object != 0) {
@@ -403,7 +403,7 @@ s32 CCollision_SweepPoint(char *actorStorage, CVector3 startPosition, CVector3 d
         if (CCollision_TraceActorMotion(out) != 0) {
             CCollision_StoreContactResult(out);
             count += 1;
-            result = func_8023D380_de(out);
+            result = CCollision_ApplyMotionResponse(out);
             ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
             ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
             ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
@@ -419,7 +419,7 @@ s32 CCollision_SweepPoint(char *actorStorage, CVector3 startPosition, CVector3 d
 
 s32 CCollision_SweepUniformExtent(char *actorStorage, CVector3 startPosition, CVector3 endPosition, CCollisionInfo2_t *sweepSurfaceSettings,
                    f32 sweepExtent) {
-    extern s32 func_8023D380_de(void *actorStorage);
+    extern s32 CCollision_ApplyMotionResponse(void *actorStorage);
     Work80244494 work;
     VectorPair vectors;
     char *object = actorStorage;
@@ -442,13 +442,13 @@ s32 CCollision_SweepUniformExtent(char *actorStorage, CVector3 startPosition, CV
         return 0;
     }
 
-    D_800CB418_de += 1;
-    maximum = D_800CB41C_de;
-    next = D_800CB418_de;
+    g_collisionSweepCount += 1;
+    maximum = g_collisionPeakSweepCount;
+    next = g_collisionSweepCount;
     if (next < maximum) {
         next = maximum;
     }
-    D_800CB41C_de = next;
+    g_collisionPeakSweepCount = next;
 
     ((struct ActorMotion *)(out))->actor = object;
     if (object != 0) {
@@ -482,7 +482,7 @@ s32 CCollision_SweepUniformExtent(char *actorStorage, CVector3 startPosition, CV
         if (CCollision_TraceActorMotion(out) != 0) {
             CCollision_StoreContactResult(out);
             count += 1;
-            result = func_8023D380_de(out);
+            result = CCollision_ApplyMotionResponse(out);
             ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
             ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
             ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
@@ -498,7 +498,7 @@ s32 CCollision_SweepUniformExtent(char *actorStorage, CVector3 startPosition, CV
 
 s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3 endPosition, CCollisionInfo2_t *motionSettings,
                   CVector3 motionExtents, f32 baseOffset) {
-    extern s32 func_8023D380_de(void *actorStorage);
+    extern s32 CCollision_ApplyMotionResponse(void *actorStorage);
     Work80244494 work;
     VectorPair vectors;
     char *object = actorStorage;
@@ -521,13 +521,13 @@ s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3
         return 0;
     }
 
-    D_800CB418_de += 1;
-    maximum = D_800CB41C_de;
-    next = D_800CB418_de;
+    g_collisionSweepCount += 1;
+    maximum = g_collisionPeakSweepCount;
+    next = g_collisionSweepCount;
     if (next < maximum) {
         next = maximum;
     }
-    D_800CB41C_de = next;
+    g_collisionPeakSweepCount = next;
 
     ((struct ActorMotion *)(out))->actor = object;
     if (object != 0) {
@@ -561,7 +561,7 @@ s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3
         if (CCollision_TraceActorMotion(out) != 0) {
             CCollision_StoreContactResult(out);
             count += 1;
-            result = func_8023D380_de(out);
+            result = CCollision_ApplyMotionResponse(out);
             ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
             ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
             ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
@@ -577,7 +577,7 @@ s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3
 
 s32 CCollision_SweepWithWorkBuffer(char *actorStorage, char *motionWork, CVector3 first, CVector3 second,
                    s32 motionSurface) {
-    extern s32 func_8023D380_de(void *actorStorage);
+    extern s32 CCollision_ApplyMotionResponse(void *actorStorage);
     char *object = actorStorage;
     char *out = motionWork;
     s32 count;
@@ -592,13 +592,13 @@ s32 CCollision_SweepWithWorkBuffer(char *actorStorage, char *motionWork, CVector
         return 0;
     }
 
-    D_800CB418_de += 1;
-    maximum = D_800CB41C_de;
-    next = D_800CB418_de;
+    g_collisionSweepCount += 1;
+    maximum = g_collisionPeakSweepCount;
+    next = g_collisionSweepCount;
     if (next < maximum) {
         next = maximum;
     }
-    D_800CB41C_de = next;
+    g_collisionPeakSweepCount = next;
 
     ((struct ActorMotion *)(out))->actor = object;
     if (object != 0) {
@@ -632,7 +632,7 @@ s32 CCollision_SweepWithWorkBuffer(char *actorStorage, char *motionWork, CVector
         if (CCollision_TraceActorMotion(out) != 0) {
             CCollision_StoreContactResult(out);
             count += 1;
-            result = func_8023D380_de(out);
+            result = CCollision_ApplyMotionResponse(out);
             ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
             ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
             ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
@@ -647,29 +647,29 @@ s32 CCollision_SweepWithWorkBuffer(char *actorStorage, char *motionWork, CVector
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_80244D44[12] =
+char s_UnicolCTERJUGGERNText[12] =
     "CTER_JUGGERN";
 #endif
 
 /* 800C8710_13.CPP */
-const unsigned int D_auto_src_rw_pool_80243A90_C9480_us_rev1[7] = {
+const unsigned int k_UnicolEncodedWordsBlock1[7] = {
     0xBEE66666, 0xBF350481, 0x434CCCCC, 0x3F800000, 0x424CCCCC, 0x3F83126F, 0x424CCCCC,
 };
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C3A9C[1] = {
+unsigned int k_UnicolEncodedWordsBlock10[1] = {
     0x4F000000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C3A5C[1] = {
+unsigned int k_UnicolEncodedWordsBlock8[1] = {
     0x26730008,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C37AC[1] = {
+unsigned int k_UnicolNegativeHalfWords[1] = {
     0xBF000000,
 };
 #endif

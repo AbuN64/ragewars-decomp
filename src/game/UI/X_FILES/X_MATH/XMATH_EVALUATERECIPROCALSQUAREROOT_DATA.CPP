@@ -2,38 +2,38 @@
 #include "COMMON/OBJRECAT3CV2.H"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8029D8E8_CB89C[1] = {
+const unsigned int k_XmathEvaluatereciprocalsquarerootOneWords[1] = {
     0x3F800000,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8029D964_CB8A0[6] = {
+const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWords[6] = {
     0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8029D9DC_CB8B8[8] = {
+const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock1[8] = {
     0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000, 0x3FF00000, 0x00000000,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8029DAA0_CB8D8[6] = {
+const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock2[6] = {
     0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8029DB74_CB8F0[2] = {
+const unsigned int k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock1[2] = {
     0x3FDBCB7B, 0x1FFFFFFF,
 };
 #endif
 
 #if defined(VERSION_US)
 #if defined(VERSION_US)
-const unsigned short rodata_func_8029DB9C_de_800C5A98[48] = {
+const unsigned short k_xmathEvaluatereciprocalsquarerootDataConstantWords[48] = {
     0xBBDF, 0xFFFF, 0xA000, 0x0001, 0x3BDF, 0xFFFF, 0xA000, 0x0001, 0x3FF0, 0x0000, 0x0000, 0x0000,
     0x3FF7, 0x1547, 0x6000, 0x0000, 0x3FE0, 0x0000, 0x0000, 0x0000, 0x3FE6, 0x3000, 0x0000, 0x0000,
     0x3F2B, 0xD010, 0x6000, 0x0001, 0x3EF1, 0x52A4, 0x6000, 0x0000, 0x3F7C, 0x70E4, 0x6000, 0x0000,
@@ -44,7 +44,7 @@ const unsigned short rodata_func_8029DB9C_de_800C5A98[48] = {
 
 #if defined(VERSION_EU_X)
 #if defined(VERSION_EU_X)
-const unsigned short rodata_func_8029DB9C_de_800C5E48[48] = {
+const unsigned short k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock4[48] = {
     0xBBDF, 0xFFFF, 0xA000, 0x0001, 0x3BDF, 0xFFFF, 0xA000, 0x0001, 0x3FF0, 0x0000, 0x0000, 0x0000,
     0x3FF7, 0x1547, 0x6000, 0x0000, 0x3FE0, 0x0000, 0x0000, 0x0000, 0x3FE6, 0x3000, 0x0000, 0x0000,
     0x3F2B, 0xD010, 0x6000, 0x0001, 0x3EF1, 0x52A4, 0x6000, 0x0000, 0x3F7C, 0x70E4, 0x6000, 0x0000,
@@ -55,7 +55,7 @@ const unsigned short rodata_func_8029DB9C_de_800C5E48[48] = {
 
 #if defined(VERSION_EU)
 #if defined(VERSION_EU)
-const unsigned short rodata_func_8029DB9C_de_800C5E08[48] = {
+const unsigned short k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock3[48] = {
     0xBBDF, 0xFFFF, 0xA000, 0x0001, 0x3BDF, 0xFFFF, 0xA000, 0x0001, 0x3FF0, 0x0000, 0x0000, 0x0000,
     0x3FF7, 0x1547, 0x6000, 0x0000, 0x3FE0, 0x0000, 0x0000, 0x0000, 0x3FE6, 0x3000, 0x0000, 0x0000,
     0x3F2B, 0xD010, 0x6000, 0x0001, 0x3EF1, 0x52A4, 0x6000, 0x0000, 0x3F7C, 0x70E4, 0x6000, 0x0000,
@@ -66,7 +66,7 @@ const unsigned short rodata_func_8029DB9C_de_800C5E08[48] = {
 
 #if defined(VERSION_DE)
 #if defined(VERSION_DE)
-const unsigned short rodata_func_8029DB9C_de_800C5B68[48] = {
+const unsigned short k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock2[48] = {
     0xBBDF, 0xFFFF, 0xA000, 0x0001, 0x3BDF, 0xFFFF, 0xA000, 0x0001, 0x3FF0, 0x0000, 0x0000, 0x0000,
     0x3FF7, 0x1547, 0x6000, 0x0000, 0x3FE0, 0x0000, 0x0000, 0x0000, 0x3FE6, 0x3000, 0x0000, 0x0000,
     0x3F2B, 0xD010, 0x6000, 0x0001, 0x3EF1, 0x52A4, 0x6000, 0x0000, 0x3F7C, 0x70E4, 0x6000, 0x0000,
@@ -76,24 +76,24 @@ const unsigned short rodata_func_8029DB9C_de_800C5B68[48] = {
 #endif
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8029D8E8_CB89C_us_rev1.c */
-const unsigned int D_blob_82d324d91f82118cf615[1] = {
+const unsigned int k_XmathEvaluatereciprocalsquarerootOneWordsVariant1[1] = {
     0x3F800000,
 };
 
-const unsigned int D_auto_src_rw_pool_8029D964_CB8A0_us_rev1[6] = {
+const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock3[6] = {
     0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000,
 };
 
-const unsigned int D_auto_src_rw_pool_8029D9DC_CB8B8_us_rev1[8] = {
+const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock4[8] = {
     0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000, 0x3FF00000, 0x00000000,
 };
 
-const unsigned int D_auto_src_rw_pool_8029DAA0_CB8D8_us_rev1[6] = {
+const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock5[6] = {
     0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000,
 };
 
 /* ROM-grounded data: src/rw_pool_8029DB74_CB8F0_us_rev1.c */
-const unsigned int D_blob_ff8383c2cd5c9886903f[2] = {
+const unsigned int k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock5[2] = {
     0x3FDBCB7B, 0x1FFFFFFF,
 };
 #endif

@@ -1,4 +1,4 @@
 #ifndef SDK_LIBULTRA_800CD394_36_H
 #define SDK_LIBULTRA_800CD394_36_H
-extern char D_002045CC[];
+extern char Action_ClearBreakableState_Address[];
 #endif

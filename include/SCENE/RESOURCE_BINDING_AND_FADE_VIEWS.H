@@ -8,29 +8,29 @@ struct Manager {
     IntrusiveList active;
     char padActive[0x20 - sizeof(IntrusiveList)];
     char lock[0x18];
-    char unk978[0x24];
+    char reservedBytes[0x24];
     s32 mask;
 };
-struct ObjectState13 {
+struct GeometryVariantByteView {
     unsigned char padding_0[18];
     signed char unk_12;
 };
 struct OwnerStaticInstanceDrawGeometryVariant {
     char pad0[0x20];
-    s32 field20;
+    s32 resourceDescriptor;
     char pad24[4];
     char transform[0xA8];
     s32 flagsD0;
     char padD4[6];
     u8 colorFrame;
 };
-struct ObjectLinksDC {
+struct ActorResourceStatusView {
     char pad0[0x18];
     char * unk_18;
     char pad18[0xD8 - 0x18 - sizeof(char*)];
     unsigned short unk_D8;
 };
-struct Shape_func_802BC570_de {
+struct CacheAllocationNodeView {
     int field_0;
     int field_4;
     int field_8;
@@ -63,7 +63,7 @@ struct NodePair80253E04 {
     Node80253610 *first;
     Node80253610 *second;
 };
-/* Resource manager slot and its wait queue (D_801005A8 / D_80101140). */
+/* Resource manager slot and its wait queue (g_resourceSlotLockState / g_resourceHeapLockQueue). */
 typedef struct ResourceLockState {
     s32 slot;
     u8 reserved4[0xB98 - 4];

@@ -1,4 +1,4 @@
 
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802B250C_de_padding_B310C[4] = { 0x00, 0x00, 0x40, 0x21 };
+unsigned char g_AlunlinkTrailingBytes[4] = { 0x00, 0x00, 0x40, 0x21 };
 #endif

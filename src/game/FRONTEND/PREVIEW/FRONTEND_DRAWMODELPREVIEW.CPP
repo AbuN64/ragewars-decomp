@@ -1,7 +1,7 @@
 #include "include_asm.h"
-#include "COMMON/OBJECTLINKS14C.H"
-#include "COMMON/LONE/D_800CD8D0.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
+#include "COMMON/LONE/g_defaultCameraSurfaceType.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/LABEL.H"
 #include "TYPES.H"
@@ -24,7 +24,7 @@ typedef struct FrontendModelHeader {
 void Preview_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
     Obj8041CAD8At190 *previewState = &preview->sub190;
     Shared_World *scene = &g_world;
-    struct TableRecAt8 *list = scene->modelIds;
+    struct SceneModelIdTable *list = scene->modelIds;
     s32 count = list->count;
     u16 *entries = list->entries;
     s32 i;
@@ -47,7 +47,7 @@ void Preview_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra,
                 modelResource = Cache_RequestResource(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, "anim object info", 1);
                 if (modelResource != 0) {
                     definition = Scene_GetActorDefinition(world, ((FrontendModelHeader *)SetN64_GetPackSection(*modelResource, 0))->definitionIndex);
-                    if (definition->character == expected && definition->kind == preview->unk0) {
+                    if (definition->character == expected && definition->kind == preview->actorKind) {
                         previewState->modelIndex = i;
                         previewState->type = id;
                         Gobjinst_LoadModel(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
@@ -93,8 +93,8 @@ void Preview_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra,
 #include "COMMON/GFX.H"
 #include "COMMON/GLOBALS.H"
 #include "COMMON/INTEGERSTATEB0.H"
-#include "COMMON/OBJECTLINKS14C.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/TRIPLE.H"
@@ -102,30 +102,30 @@ void Preview_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra,
 #include "TYPES.H"
 #include "gbi.h"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
-s32 func_80246E44_de(void *);
+s32 Gobjinst_UpdateActorRootDisplacement(void *);
 s32 Gobjinst_DrawVisibleCachedActor(void *, void *);
 s32 Gobjinst_RotatePoseMatrixBuffers(void *);
 s32 PitchMatrixLocal(void *, f32);
-extern MenuModelScreen D_80141008[];
+extern MenuModelScreen g_fallbackScreenMessageEmitter[];
 void Preview_DrawModelPreview(Obj8041CAD8 *self) {
     CVector3 local10;
     CVector3 local20;
     MenuModelScreen *view;
     Obj8041CAD8At190 *draw;
     s32 saved;
-    view = D_80141008;
+    view = g_fallbackScreenMessageEmitter;
     draw = &self->sub190;
-    if (self->unk478 != 0) {
-        saved = D_800CC380;
-        D_800CC380 = 0;
+    if (self->modelLoaded != 0) {
+        saved = g_geometryFogEffectEnabled;
+        g_geometryFogEffectEnabled = 0;
         {
             Gfx *g = g_displayListCursor++;
-            u32 address = (u32)(D_800D297C << 6);
+            u32 address = (u32)(g_lightingBufferIndex << 6);
             address += 0x380;
             address += (u32)view;
             gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
         }
-        local10 = self->unk48C;
+        local10 = self->facing;
         Graphu64_TransformPoint(&view->camera, &local10, &local20);
         if (Cache_GetResourceActivityState() == 0) {
             Cache_SetResourceActivityState(1);
@@ -136,26 +136,26 @@ void Preview_DrawModelPreview(Obj8041CAD8 *self) {
         gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
         gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
         Geometry_InitializeModelRenderState();
-        draw->unk8 = local20;
-        draw->unk1C4 = local20;
+        draw->position = local20;
+        draw->referencePosition = local20;
         Gobjinst_RotatePoseMatrixBuffers(draw);
-        draw->unk8 = local20;
-        draw->unk1C4 = local20;
-        if (self->unk49C != 0 || draw->unk10E == 0) {
-            func_80246E44_de(draw);
-            if (self->unk4A0 != 0) {
-                PitchMatrixLocal(&draw->unk74, (f32)self->unk4A0 * 0.017453294f);
+        draw->position = local20;
+        draw->referencePosition = local20;
+        if (self->updatePose != 0 || draw->animationPending == 0) {
+            Gobjinst_UpdateActorRootDisplacement(draw);
+            if (self->pitchDegrees != 0) {
+                PitchMatrixLocal(&draw->transform, (f32)self->pitchDegrees * 0.017453294f);
             }
         }
-        draw->unk6C = self->unk498 * 0.017453294f;
-        draw->unk8 = local20;
-        draw->unk1C4 = local20;
+        draw->yaw = self->angleDegrees * 0.017453294f;
+        draw->position = local20;
+        draw->referencePosition = local20;
         Geometry_BeginModelBatch();
         Gobjinst_DrawVisibleCachedActor(draw, view);
-        draw->unk140 = D_800DF520;
-        draw->unk158 = D_800DF520;
+        draw->lightingZero = g_menuModelPreviewLighting;
+        draw->lightingOne = g_menuModelPreviewLighting;
         Geometry_FlushModelBatch();
-        D_800CC380 = saved;
+        g_geometryFogEffectEnabled = saved;
     }
 }
 
@@ -179,39 +179,39 @@ void *Preview_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 pre
     Ret8028CFA0 *source;
     XPlus_FillMemory(&local60, 0, sizeof(local60));
     g = g_displayListCursor++;
-    view = D_80141008;
-    gSPMatrix(g, &view->matrices[D_800D297C], G_MTX_LOAD | G_MTX_PROJECTION);
-    self->unk49C = 1;
-    self->unk4A0 = pitchDegrees;
+    view = g_fallbackScreenMessageEmitter;
+    gSPMatrix(g, &view->matrices[g_lightingBufferIndex], G_MTX_LOAD | G_MTX_PROJECTION);
+    self->updatePose = 1;
+    self->pitchDegrees = pitchDegrees;
     draw = &self->sub190;
     source = Scene_FindActorDefinition(&g_world, id, modelKind, g);
     if (source == 0) {
-        self->unk478 = 0;
+        self->modelLoaded = 0;
         return 0;
     }
-    self->unk498 = scale;
-    self->unk0 = id;
-    self->unk478 = 1;
+    self->angleDegrees = scale;
+    self->actorKind = id;
+    self->modelLoaded = 1;
     self->copy4 = *source;
-    self->unk480 = position;
-    self->unk48C = facing;
+    self->position = position;
+    self->facing = facing;
     self->copy4.unk0 = 0;
     self->copy4.unk4 = 0;
     self->copy4.unk14 = 0;
     self->copy4.unk18 = 0;
     self->copy4.unk1C = 0;
     self->copy4.unk8 = 10240.0f;
-    ratio = view->width / (f32)D_800E28D0;
-    scales.x = self->unk480.x * ratio;
-    scales.z = self->unk480.z * ratio;
-    scales.y = self->unk480.y * (view->height / (f32)D_800E28D4);
-    draw->unk50 = scales;
-    local70 = self->unk48C;
+    ratio = view->width / (f32)g_hudReferenceViewportWidth;
+    scales.x = self->position.x * ratio;
+    scales.z = self->position.z * ratio;
+    scales.y = self->position.y * (view->height / (f32)g_hudReferenceViewportHeight);
+    draw->scale = scales;
+    local70 = self->facing;
     Graphu64_TransformPoint(&view->camera, &local70, &local80);
-    Gobjinst_InitializeActor(draw, -1, previewModelId, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * 0.017453294f, local80, 0,
-                     self->unk480, local60, 0);
+    Gobjinst_InitializeActor(draw, -1, previewModelId, g_defaultCameraSurfaceType, &self->copy4, -1, 0, self->angleDegrees * 0.017453294f, local80, 0,
+                     self->position, local60, 0);
     Gobjinst_DispatchActorTypeUpdate(draw);
-    if (self->unk0 == 9) {
+    if (self->actorKind == 9) {
         Preview_SelectPreviewModel(self, previewModelId, extra, modelKind);
     }
     return &self->copy4;
@@ -223,8 +223,8 @@ void *Preview_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 pre
 
 
 
-void Preview_SetPreviewPosition(ObjRecAt480 *arg0, CVector3 v) {
-    arg0->unk480 = v;
+void Preview_SetPreviewPosition(PreviewPositionView *preview, CVector3 v) {
+    preview->position = v;
 }
 
 /* Copies the three-word vector passed by value into the object's vector at 0x48C. */
@@ -233,16 +233,16 @@ void Preview_SetPreviewPosition(ObjRecAt480 *arg0, CVector3 v) {
 
 
 
-void Preview_SetPreviewFacing(ObjRecAt48C *arg0, CVector3 v) {
-    arg0->unk48C = v;
+void Preview_SetPreviewFacing(PreviewFacingView *preview, CVector3 v) {
+    preview->facing = v;
 }
 
 /* Stores arg1 into the word at 0x498 of the object arg0. */
 
 
 
-void Preview_SetPreviewAngle(ObjRecAt498 *arg0, s32 arg1) {
-    arg0->unk498 = arg1;
+void Preview_SetPreviewAngle(PreviewAngleView *preview, s32 angle) {
+    preview->angle = angle;
 }
 
 /* Stores a value into the word at offset 0x49C of an object; func_80420618_de and Frontend_ConfirmEquipmentSelection call

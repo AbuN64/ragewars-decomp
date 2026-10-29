@@ -1,7 +1,7 @@
 #include "MENU/TEAMMENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_800E28D4.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MENU/CTEAMSELECT_DRAWTEAMICONS.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
@@ -12,7 +12,7 @@
 
 
 
-extern s32 D_800E28D0;
+extern s32 g_hudReferenceViewportWidth;
 
 
 
@@ -22,7 +22,7 @@ extern s32 D_800E28D0;
 
 extern void Onscrn_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
-void Cteamselect_DrawTeamIcons(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, WeaponMenuPlayer *player) {
+void Cteamselect_DrawTeamIcons(struct TeamMenu *menu, TeamMenuIconView *items, s32 count, WeaponMenuPlayer *player) {
     s32 width;
     s32 height;
     f32 fade;
@@ -38,10 +38,10 @@ void Cteamselect_DrawTeamIcons(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 
     WeaponMenuView *view;
     WeaponMenuView *titleView;
     f32 *viewport;
-    ItemRecAt18V1 *item;
+    TeamMenuIconView *item;
 
     titleView = player->view;
-    level = D_801462C8.hudFade + 0x40;
+    level = g_gameSettings.hudFade + 0x40;
     fade = menu->open * (level < 0x100 ? level : 255.0f);
     item = items;
     while (--count != -1) {
@@ -72,8 +72,8 @@ void Cteamselect_DrawTeamIcons(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 
         }
         item++;
     }
-    scaleY = titleView->viewport[1] / D_800E28D4;
-    scaleX = titleView->viewport[0] / D_800E28D0;
+    scaleY = titleView->viewport[1] / g_hudReferenceViewportHeight;
+    scaleX = titleView->viewport[0] / g_hudReferenceViewportWidth;
     OnScreen_SetupTextRendering();
     OnScreen_SetTextScale(0.6f, 0.6f);
     OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);

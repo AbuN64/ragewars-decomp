@@ -1,6 +1,6 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_20.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/FRONTEND_RESOURCE_LOAD_STATE.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -9,16 +9,16 @@
 
 /* 8040B45C_17.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_80412CDC_de_padding_178CDC[4] = { 0x8C, 0x48, 0x00, 0x08 };
+unsigned char g_FrontendCreateprofileresetscreeneuropeanTrailingBytes[4] = { 0x8C, 0x48, 0x00, 0x08 };
 #endif
 
 /* 8040B45C_8.CPP */
 #if !(defined(VERSION_DE) || defined(VERSION_EU))
-/* Points a field's text at the label for the state word D_80153778: one of 3 strings through the jump table
-   jtbl_800E1098 for states 0 to 4, and D_800D7A0C for any other state. Returns zero. */
+/* Points a field's text at the label for the state word g_frontendResourceLoadStage: one of 3 strings through the jump table
+   jtbl_800E1098 for states 0 to 4, and s_nodeDefaultFieldText for any other state. Returns zero. */
 
-s32 Frontend_SelectPakActionLabel(struct FieldRecAt14 *field) {
-    u32 state = D_80153778;
+s32 Frontend_SelectPakActionLabel(struct PakActionLabelView *field) {
+    u32 state = g_frontendResourceLoadStage;
 
     if (state >= 5) {
         goto state_other;
@@ -31,29 +31,29 @@ s32 Frontend_SelectPakActionLabel(struct FieldRecAt14 *field) {
         case 4: goto case_2;
         }
 state_other:
-    field->text = D_800D7A0C;
+    field->text = s_nodeDefaultFieldText;
     goto done;
 case_1:
-    field->text = D_800D7A0C;
+    field->text = s_nodeDefaultFieldText;
     goto done;
 case_2:
-    field->text = D_800D7A0C;
+    field->text = s_nodeDefaultFieldText;
     goto done;
 case_3:
-    field->text = D_800DE7BC;
+    field->text = s_nodeAlternateFieldText;
 done:
     return 0;
 }
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8040BC2C[1] = {
+unsigned int k_FrontendCreateprofileresetscreeneuropeanEncodedWordsBlock1[1] = {
     0x00009608,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E88BC[1] = {
+unsigned int k_FrontendCreateprofileresetscreeneuropeanEncodedWords[1] = {
     0x0043D414,
 };
 #endif
@@ -65,7 +65,7 @@ unsigned int rodata_unresolved_800E88BC[1] = {
 #include "COMMON/WORLD.H"
 extern void *Cache_AllocateMemory(s32);
 extern void Player_InitializeProfile(Profile *);
-extern Pulse *D_800E5950;
+extern Pulse *g_profileResetScreen;
 extern void Pools_ResetActorPools(void *, s32);
 extern void Player_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
@@ -81,10 +81,10 @@ s32 Frontend_CreateProfileResetScreenEuropean(MenuWidget *tree) {
     Shared_PlayerSettingsRecord *record;
     Shared_MenuObject *object;
 
-    D_800E5950 = Cache_AllocateMemory(sizeof(*D_800E5950));
-    object = &D_80145040.object;
+    g_profileResetScreen = Cache_AllocateMemory(sizeof(*g_profileResetScreen));
+    object = &g_playerViewRenderContext.object;
     Pools_ResetActorPools(object, 0);
-    Player_InitializePlayerPool(&D_80145040, 0, 0);
+    Player_InitializePlayerPool(&g_playerViewRenderContext, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
@@ -98,13 +98,13 @@ s32 Frontend_CreateProfileResetScreenEuropean(MenuWidget *tree) {
         i--;
         record--;
     } while (i >= 0);
-    D_800E5950->widget = Node_FindWidgetByResourceId(tree, 0x397);
-    D_800E5950->phase = 0;
-    settings = &D_801462C8;
+    g_profileResetScreen->widget = Node_FindWidgetByResourceId(tree, 0x397);
+    g_profileResetScreen->phase = 0;
+    settings = &g_gameSettings;
     settings->laps = 10;
     settings->players = 10;
     for (i = 0; i < 4; i++) {
-        Player_InitializeProfile(&D_80102B00[i]);
+        Player_InitializeProfile(&g_localPlayerProfiles[i]);
     }
     Tsmos_SetIdleTimer(0.0f);
     return 0;

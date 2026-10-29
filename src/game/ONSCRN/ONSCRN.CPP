@@ -1,6 +1,6 @@
 #include "COMMON/OBJRECAT18V6.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "TYPES.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
@@ -20,7 +20,7 @@ extern void Onscrn_SetupSpriteMode(s32 color);
 /* Draws one of the two gauges of the head-up panel, the first at hud->bars[0] and the second at
    hud->bars[1]: steps the gauge's scripted mover, walks its shown amount toward the gauge's target
    count by eight a frame up or four a frame down without passing it, fills the bar from x+80 to the
-   right margin in the gauge's own colour at the options fade D_801462DE times 180/255, and draws the
+   right margin in the gauge's own colour at the options fade g_playerHudSpriteMode times 180/255, and draws the
    gauge's label at the bar's left edge. The first gauge also draws its two end caps, at the screen
    edges, unit width and one and a half times the panel scale. */
 
@@ -54,7 +54,7 @@ void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
         return;
     }
     wide = Frontend_GetScreenMode() == 0 ? 0.75f : 1.0f;
-    scale = D_80140FE8_de.camera->viewHeight / (f32) D_800E28D4;
+    scale = g_gameplayCameraList.camera->viewHeight / (f32) g_hudReferenceViewportHeight;
     scale = scale * wide;
     switch (which) {
     case 1:
@@ -98,8 +98,8 @@ void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
     }
     left = x + 0x50;
     inset = x - 0x70;
-    right = inset + D_800E28D0;
-    fade = &D_801462C8.hudFade;
+    right = inset + g_hudReferenceViewportWidth;
+    fade = &g_gameSettings.hudFade;
     OnScreen_FillRectangle(left, (s32) ((f32) y + scale * 9.0f),
                   left + ((right - left) * bar->fill) / 100,
                   (s32) ((f32) y + scale * 15.0f), red, green, blue,
@@ -108,7 +108,7 @@ void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
     if (which == 1) {
         shift = scale * 27.0f;
         OnScreen_DrawSpriteResource(0x202, 0, (s16) (x + 0x46), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
-        OnScreen_DrawSpriteResource(0x203, 0, (s16) (D_800E28D0 + x - 0x6D), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
+        OnScreen_DrawSpriteResource(0x203, 0, (s16) (g_hudReferenceViewportWidth + x - 0x6D), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
         OnScreen_SetupTextRendering();
         OnScreen_SetTextScale(0.4f, scale * 0.4f);
         OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
@@ -130,7 +130,7 @@ static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a
 
 /* Draws a signed integer of up to four digits with the font sprite set from Scene_StartWorldEffect: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through OnScreen_DrawSpriteResource when negative, then draws at least minDigits digits through Text_DrawTileGrid, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
 
-extern s32 Scene_StartWorldEffect(void *world, s32 arg1, s32 flags, s32 extra);
+extern s32 Scene_StartWorldEffect(void *world, s32 effectId, s32 flags, s32 extra);
 
 extern void Text_DrawTileGrid(s32 handle, s32 index, s16 initialX, s16 initialY, f32 scaleX, f32 scaleY, s32 scaled);
 
@@ -145,8 +145,8 @@ void OnScreen_UpdateMoverScript(COverlay *m) {
     s32 bottom;
     s32 right;
 
-    bottom = D_800E28D4 + 0x60;
-    right = D_800E28D0 + 0x60;
+    bottom = g_hudReferenceViewportHeight + 0x60;
+    right = g_hudReferenceViewportWidth + 0x60;
     do {
         next = 0;
         switch (m->state) {
@@ -355,7 +355,7 @@ void OnScreen_SetupTextRendering(void) {
         Geometry_SetCombineMode(0x1A);
         Geometry_SetModePreset(0x15);
 
-        D_80147150 = 0;
+        g_creditsTextDrawingEnabled = 0;
         {
         Gfx *cmd;
         cmd = g_displayListCursor++;
@@ -387,9 +387,9 @@ void OnScreen_SetupTextRendering(void) {
         }
 
         OnScreen_SetTextColors(0x8C, 0x8C, 0x8C, 0x8C, 0x8C, 0x8C);
-        OnScreen_SetTextScale(D_800C5FB0_de, D_800C5FB0_de);
-        D_801376F8.shadowX = 2;
-        D_801376F8.shadowY = 2;
+        OnScreen_SetTextScale(g_onscreenDefaultTextScale, g_onscreenDefaultTextScale);
+        g_tutorialStatusBars.shadowX = 2;
+        g_tutorialStatusBars.shadowY = 2;
     }
 }
 
@@ -399,7 +399,7 @@ void OnScreen_LoadTextTileModeOne(void) {
 
     v0 = OnScreen_GetFontTexture();
     if (v0 != 0) {
-        D_80147150 = 1;
+        g_creditsTextDrawingEnabled = 1;
         cmd = g_displayListCursor++;
         gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, v0);
         cmd = g_displayListCursor++;
@@ -423,7 +423,7 @@ void OnScreen_LoadTextTileModeTwo(void) {
 
     v0 = OnScreen_GetFontTexture();
     if (v0 != 0) {
-        D_80147150 = 2;
+        g_creditsTextDrawingEnabled = 2;
         cmd = g_displayListCursor++;
         gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, v0);
         cmd = g_displayListCursor++;

@@ -7,7 +7,7 @@
 
 /* 8043D54C_2.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US)
-s32 Menu_ForwardRulesLock(void *arg0, MenuRules *menuRules) {
+s32 Menu_ForwardRulesLock(void *unusedContext, MenuRules *menuRules) {
     Player_PlacePlayerForRound(menuRules->locked);
     return 1;
 }
@@ -22,15 +22,15 @@ s32 Menu_ForwardRulesLock(void *unused, MenuRules *rules) {
 
 /* 8043D54C_3.CPP */
 #if !(defined(VERSION_EU))
-/* Calls Match_ResetMatchControllerState on D_8011FAC0 when D_80145070 is one, otherwise clears the word at offset
+/* Calls Match_ResetMatchControllerState on g_gameSession when g_sessionOptionResetMode is one, otherwise clears the word at offset
    0x5D0 of the owner at offset 0x1C of the second argument. Returns one. */
 
 #include "COMMON/GAME_SESSION.H"
 extern void Match_ResetMatchControllerState(void *);
 
 s32 Menu_HandleSessionOptionPage(void *unused, struct Holder *holder) {
-    if (D_80145070 == 1) {
-        Match_ResetMatchControllerState(&D_8011FAC0);
+    if (g_sessionOptionResetMode == 1) {
+        Match_ResetMatchControllerState(&g_gameSession);
     } else {
         holder->owner->value = 0;
     }

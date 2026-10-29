@@ -1,8 +1,8 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
-#include "COMMON/LONE/D_8014DE50.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/MENU_TINT_ALPHA.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
@@ -21,7 +21,7 @@ void Menu_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, Menu
     TextLayerMetrics first, second, third;
     int center;
     LayeredText *draw;
-    center = (bounds->left + bounds->field18) / 2;
+    center = (bounds->left + bounds->right) / 2;
     current = *source;
     current.mode = 0;
     Menu_MeasureMenuText(&current, &first);
@@ -62,7 +62,7 @@ void Menu_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, Menu
     TextLayerMetrics first, second, third;
     int center;
     LayeredText *draw;
-    center = (bounds->left + bounds->field18) / 2;
+    center = (bounds->left + bounds->right) / 2;
     current = *source;
     current.mode = 0;
     Menu_MeasureMenuText(&current, &first);
@@ -112,7 +112,7 @@ typedef struct PakModelEntry {
     u8 reservedC[8];
     PakModelDefinition *definition;
     u8 reserved18[8];
-    StateRecAt47C *state;
+    MenuCharacterPreviewState *state;
 } PakModelEntry;
 typedef struct PakModelContext {
     s16 selection;
@@ -122,9 +122,9 @@ typedef struct PakModelContext {
     MenuModelScreen *screen;
 } PakModelContext;
 extern Gfx *g_displayListCursor;
-extern s32 D_800D297C, D_800E28D0, D_800CD730;
+extern s32 g_lightingBufferIndex, g_hudReferenceViewportWidth, g_gameLoopFrameCount;
 extern f32 literals_Scene_GetPlatformRoutePoint;
-extern u8 D_00443128[], D_00443104[];
+extern u8 addrLow_Bound_DrawActorWithRedMenuEffect[], addrLow_Bound_DrawActorWithMenuLighting[];
 extern void XPlus_FillMemory(void *, s32, s32);
 extern u8 *Scene_FindActorDefinition(void *, s32, s32);
 extern void Graphu64_TransformPoint(void *, CVector3 *, CVector3 *);
@@ -134,10 +134,10 @@ extern s32 Cache_GetResourceActivityState(void);
 extern void Cache_SetResourceActivityState(unsigned int);
 extern void Scene_ChangeInstanceModel(void *, u8 *, s32, s32);
 extern void Gobjinst_RotatePoseMatrixBuffers(u8 *);
-extern void func_80246E44_de(u8 *);
+extern void Gobjinst_UpdateActorRootDisplacement(u8 *);
 extern void Gobjinst_DrawVisibleCachedActor(void *object, void *camera);
 static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 variant) {
-    StateRecAt47C *owner = entry->state;
+    MenuCharacterPreviewState *owner = entry->state;
     PreviewWidget *source = (PreviewWidget *)Scene_FindActorDefinition(&g_world, id, variant);
     if (source == 0) {
         owner->active = 0;
@@ -164,7 +164,7 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     CVector3 offset;
     CVector3 placed;
     CVector3 scaled;
-    StateRecAt47C *widget, *selectedWidget;
+    MenuCharacterPreviewState *widget, *selectedWidget;
     PakModelDefinition *def;
     LevelActor *draw;
     PreviewWidget *link;
@@ -178,14 +178,14 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     def = entry->definition;
     draw = &widget->actor;
     if (widget->active == 0) return;
-    gSPMatrix(g_displayListCursor++, &context->screen->matrices[D_800D297C], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(g_displayListCursor++, &context->screen->matrices[g_lightingBufferIndex], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
     {
         MenuModelScreen *screen = context->screen;
-        ratioX = screen->width / (f32)D_800E28D0;
+        ratioX = screen->width / (f32)g_hudReferenceViewportWidth;
         ratioY = screen->height;
         scaled.x = def->scale.x * ratioX;
         scaled.z = def->scale.z * ratioX;
-        ratioY /= (f32)D_800E28D4;
+        ratioY /= (f32)g_hudReferenceViewportHeight;
         scaled.y = def->scale.y * ratioY;
     }
     widget->size = widget->model.size;
@@ -197,28 +197,28 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     offset.y = offset.y - widget->size * scaled.y * 0.8f;
     Graphu64_TransformPoint(&context->screen->camera, &offset, &placed);
     if (link != 0 && !(entry->flags & 0x2000000)) {
-        Gobjinst_InitializeActor(draw, -1, def->kind, D_800CD8D0, link, -1, 0,
+        Gobjinst_InitializeActor(draw, -1, def->kind, g_defaultCameraSurfaceType, link, -1, 0,
                          context->screen->heading + RW_PI_F6, placed, 0,
                          def->scale, zero, 0);
         Gobjinst_DispatchActorTypeUpdate(draw);
         entry->flags |= 0x2000000;
     }
-    wobble = Gu_Sinf((f32)(u32)((u32)D_800CD730 * 10U) * (RW_PI_F6 / 180.0f)) + 1.0f;
+    wobble = Gu_Sinf((f32)(u32)((u32)g_gameLoopFrameCount * 10U) * (RW_PI_F6 / 180.0f)) + 1.0f;
     opacity = context->fade * context->alpha;
-    D_8014DE50 = (s32)(opacity * (wobble * 50.0f + 50.0f));
+    g_menuTintAlpha = (s32)(opacity * (wobble * 50.0f + 50.0f));
     if (context->selection == cursor->selection) {
-        draw->update = D_00443128;
+        draw->update = addrLow_Bound_DrawActorWithRedMenuEffect;
     } else {
-        draw->update = D_00443104;
+        draw->update = addrLow_Bound_DrawActorWithMenuLighting;
     }
     if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
     }
     if (widget->selection == 0xB) {
-        Scene_ChangeInstanceModel(&g_world, draw, D_800CE430[draw->definition->character], 1);
+        Scene_ChangeInstanceModel(&g_world, draw, g_characterModelIds[draw->definition->character], 1);
     }
-    if (D_800E1E20 != 4) {
-        D_800E1E20 = 4;
+    if (g_multiplayerItemRenderState != 4) {
+        g_multiplayerItemRenderState = 4;
         gDPPipeSync(g_displayListCursor++);
         gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
         gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
@@ -230,7 +230,7 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     Gobjinst_RotatePoseMatrixBuffers(draw);
     draw->position0 = placed;
     draw->referencePosition = placed;
-    func_80246E44_de(draw);
+    Gobjinst_UpdateActorRootDisplacement(draw);
     draw->yaw = draw->yaw + def->rotationSpeed * literals_Scene_GetPlatformRoutePoint;
     draw->position0 = placed;
     draw->referencePosition = placed;
@@ -294,7 +294,7 @@ struct MenuBuildState {
     s32 count;
     MenuBuildDefinition *definition;
     s32 value18, value1C;
-    StateRecAtBCV1 *input;
+    PakMenuInputStateView *input;
     s32 value24;
     u16 state, ownerSlot;
     s32 value2C, value30, value34, value38, value3C;
@@ -327,7 +327,7 @@ static inline void initializeMenuEntry(MenuBuildEntry *entry, MenuBuildItem *def
     entry->menu = menu;
     if (menuItemExtraSize(definition) != 0) {
         entry->extra = *extra;
-        if (definition->type == 3) ((struct ObjectRecAt478 *)*extra)->flag = 1;
+        if (definition->type == 3) ((struct MenuItemVisibilityFlagView *)*extra)->flag = 1;
         *extra += menuItemExtraSize(definition);
     }
 }
@@ -335,7 +335,7 @@ static inline void initializeMenuEntry(MenuBuildEntry *entry, MenuBuildItem *def
    the private blocks packed after the entry array, stores the arguments, resets the eight highlight
    vertices of both banks from the default corner table, clears the input words, runs the definition's setup
    callback and then the setup callback of every entry whose item asks for one (flag 0x4000000). */
-void Menu_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefinition *definition, s32 value18, s32 value1C, StateRecAtBCV1 *input, s32 value24, MessageList *owner) {
+void Menu_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefinition *definition, s32 value18, s32 value1C, PakMenuInputStateView *input, s32 value24, MessageList *owner) {
     u8 *extra;
     MenuBuildEntry *entry;
     s32 i, bank;

@@ -1,6 +1,6 @@
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "gbi.h"
 #include "TYPES.H"
@@ -8,8 +8,8 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/DISPLAY.H"
 #include "COMMON/INTEGERSTATEB0.H"
-#include "COMMON/LONE/D_800CC384.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/LONE/GEOMETRY_EFFECT_GEOMETRY_MODE.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "abi.h"
 #include "COMMON/MEASUREDRECAT0V1.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -22,21 +22,21 @@
 #include "RSP/GEOMETRY_DRAWBLENDPARTS.H"
 
 /* 8026AC38_5.CPP */
-/* Draws the parts of a model resource tinted by an RGBA colour through the shared material D_8013B2D8: sets the tint mode D_800D15E0 to 3, clears the material's fog colour and sets its flags, records the colour as floats and its alpha on the material, advances the pass modulo 18, and when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material sets the render mode, selects blend 1, registers the resource, loads the matrix (or sets it as segment 1), sets segment 2 to the given texture base or the model's own, sets the lighting on the first part and emits each part whose material blend bits are all set and accepted for the pass, clearing the tint mode afterwards. Adapted from Geometry_DrawBlendParts with the tint setup, the render mode and blend commands and the trailing clear added. */
+/* Draws the parts of a model resource tinted by an RGBA colour through the shared material g_tintedModelSharedMaterial: sets the tint mode g_menuModelFillEnabled to 3, clears the material's fog colour and sets its flags, records the colour as floats and its alpha on the material, advances the pass modulo 18, and when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material sets the render mode, selects blend 1, registers the resource, loads the matrix (or sets it as segment 1), sets segment 2 to the given texture base or the model's own, sets the lighting on the first part and emits each part whose material blend bits are all set and accepted for the pass, clearing the tint mode afterwards. Adapted from Geometry_DrawBlendParts with the tint setup, the render mode and blend commands and the trailing clear added. */
 
 extern Gfx *g_displayListCursor;
 #if defined(VERSION_DE)
-extern u32 D_800DE854;
+extern u32 g_displayListCapacityDe;
 #elif defined(VERSION_EU)
-extern u32 D_800EEEC4;
+extern u32 g_displayListCapacityEu;
 #elif defined(VERSION_EU_X)
-extern u32 D_800EA084;
+extern u32 g_displayListCapacityEuX;
 #elif defined(VERSION_US)
-extern u32 D_800DD504;
+extern u32 g_displayListCapacityUs;
 #elif defined(VERSION_US_REV1)
-extern u32 D_800E28A4;
+extern u32 g_displayListCapacityUsRev1;
 #endif
-extern ObjectState18 D_8013B2D8;
+extern SharedModelTintMaterial g_tintedModelSharedMaterial;
 
 extern s32 Geometry_ApplyMaterialLighting(void *matrix, void *lights, void *material);
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
@@ -50,16 +50,16 @@ void Geometry_DrawTintedModelParts(void **resource, void *unused, void *matrix, 
     void *material;
     s32 count;
     s32 i;
-    ObjectState18 *shared;
+    SharedModelTintMaterial *shared;
     f32 *tint;
 
-    shared = &D_8013B2D8;
-    D_800D15E0 = 3;
+    shared = &g_tintedModelSharedMaterial;
+    g_menuModelFillEnabled = 3;
     shared->fog[0] = 0;
     shared->fog[1] = 0;
     shared->fog[2] = 0;
     shared->flags |= 0x1402;
-    tint = D_800D15E4;
+    tint = g_menuModelFillColor;
     tint[0] = r;
     tint[1] = g;
     tint[2] = b;
@@ -67,15 +67,15 @@ void Geometry_DrawTintedModelParts(void **resource, void *unused, void *matrix, 
     shared->fog[3] = a;
     pass = (pass + 1) % 18;
 #if defined(VERSION_DE)
-    if (D_800DE854 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityDe - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_EU)
-    if (D_800EEEC4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityEu - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_EU_X)
-    if (D_800EA084 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityEuX - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_US)
-    if (D_800DD504 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityUs - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_US_REV1)
-    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityUsRev1 - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
 #endif
         return;
     }
@@ -107,21 +107,21 @@ void Geometry_DrawTintedModelParts(void **resource, void *unused, void *matrix, 
             }
         }
     }
-    D_800D15E0 = 0;
+    g_menuModelFillEnabled = 0;
 }
 
 extern void Geometry_ExpandModelCommands(s32 unused, s32 res, s32 extra, s32 sentinel);
 
-void Geometry_ExpandBasicModel(s32 unused, s32 arg1) {
-    Geometry_ExpandModelCommands(unused, arg1, 0, 0);
+void Geometry_ExpandBasicModel(s32 unused, s32 modelResource) {
+    Geometry_ExpandModelCommands(unused, modelResource, 0, 0);
 }
 
-void Geometry_ExpandModelWithSentinel(s32 unused, s32 arg1) {
-    Geometry_ExpandModelCommands(unused, arg1, 0, 1);
+void Geometry_ExpandModelWithSentinel(s32 unused, s32 modelResource) {
+    Geometry_ExpandModelCommands(unused, modelResource, 0, 1);
 }
 
-void Geometry_ExpandExtendedModel(s32 unused, s32 arg1) {
-    Geometry_ExpandModelCommands(unused, arg1, 1, 0);
+void Geometry_ExpandExtendedModel(s32 unused, s32 modelResource) {
+    Geometry_ExpandModelCommands(unused, modelResource, 1, 0);
 }
 
 void Geometry_AlternateNoOperation(void) {
@@ -135,21 +135,21 @@ extern void Graphu64_BuildScaleMatrix(void *, float, float, float);
 
 extern void GraphU64_PackFixedMatrix(void *, void *);
 
-extern s32 D_8010C568;
+extern s32 g_opaqueMaterialGroupTree;
 
-extern s32 D_8010C56C;
+extern s32 g_opaqueMaterialGroupList;
 
-extern s32 D_8010C57C;
+extern s32 g_translucentMaterialGroupTree;
 
-extern s32 D_8010C584;
+extern s32 g_translucentMaterialGroupList;
 
-extern s32 D_8011064C;
+extern s32 g_modelBatchResource;
 
-extern ObjRecAtCV2 D_801157D8[];
+extern QueuedModelInstance g_modelInstanceQueue[];
 
 extern void Cache_LockResource(s32, s32);
 
-extern void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 direct);
+extern void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 textures, s32 pass, s32 direct);
 
 extern s32 Geometry_SetModePreset(s32 mode);
 
@@ -159,26 +159,26 @@ void Geometry_InitializeModelRenderState(void) {
     char local[64];
 
     Geometry_InvalidateMaterialKeys();
-    Graphu64_BuildScaleMatrix(local, D_800C46AC_de, D_800C46AC_de, D_800C46AC_de);
-    GraphU64_PackFixedMatrix(local, &D_8010C520);
+    Graphu64_BuildScaleMatrix(local, g_geometryInitialScale, g_geometryInitialScale, g_geometryInitialScale);
+    GraphU64_PackFixedMatrix(local, &g_geometryInitialScaleMatrix);
 }
 
 void Geometry_SelectEffectModes(void) {
-    if (D_800CC380 != 0 || g_geometryViewEffect != 0) {
-        D_800CC384 = 0x10000;
-        D_800CC388 = 0xC4000000;
-        D_800CC38C = 0xC8000000;
+    if (g_geometryFogEffectEnabled != 0 || g_geometryViewEffect != 0) {
+        g_geometryEffectGeometryMode = 0x10000;
+        g_geometryOpaqueRenderMode = 0xC4000000;
+        g_geometryTranslucentRenderMode = 0xC8000000;
         return;
     }
-    D_800CC384 = 0;
-    D_800CC388 = 0x0C080000;
-    D_800CC38C = 0x0C080000;
+    g_geometryEffectGeometryMode = 0;
+    g_geometryOpaqueRenderMode = 0x0C080000;
+    g_geometryTranslucentRenderMode = 0x0C080000;
 }
 
 /** Reset two global indices to minus one. */
 void Geometry_InvalidateMaterialKeys(void) {
-    D_800CC364 = -1;
-    D_800CC360 = -1;
+    g_geometryPreviousCombineMode = -1;
+    g_geometryPreviousModePreset = -1;
 }
 
 void Geometry_SetColorDither(s32 ditherMode) {
@@ -186,15 +186,15 @@ void Geometry_SetColorDither(s32 ditherMode) {
 }
 
 void Geometry_BeginModelBatch(void) {
-    D_8011064C = 0;
-    D_80110640 = 0;
-    D_8010C578 = 0;
-    D_8010C570 = 0;
-    D_80111310 = 0;
-    D_8010C56C = 0;
-    D_8010C568 = 0;
-    D_8010C584 = 0;
-    D_8010C57C = 0;
+    g_modelBatchResource = 0;
+    g_modelInstanceQueueCount = 0;
+    g_materialGroupCount = 0;
+    g_materialInstanceCount = 0;
+    g_modelBatchResourceCount = 0;
+    g_opaqueMaterialGroupList = 0;
+    g_opaqueMaterialGroupTree = 0;
+    g_translucentMaterialGroupList = 0;
+    g_translucentMaterialGroupTree = 0;
 }
 
 void Geometry_FlushModelBatch(void) {
@@ -204,13 +204,13 @@ void Geometry_FlushModelBatch(void) {
     Geometry_GroupModelInstances();
     i = 0;
     Geometry_DrawMaterialGroups();
-    if (D_80111310 > 0) {
+    if (g_modelBatchResourceCount > 0) {
         do {
-            resourceHandle = D_80111318[i];
+            resourceHandle = g_modelBatchResources[i];
             Cache_MarkResourceInUse(0, resourceHandle);
             Cache_UnlockResource(0, resourceHandle);
             i += 1;
-        } while (i < D_80111310);
+        } while (i < g_modelBatchResourceCount);
     }
 }
 
@@ -223,7 +223,7 @@ void Geometry_DrawModelResource(void **resource, void *matrix, s32 segment, void
     s32 count;
     s32 i;
 
-    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityUsRev1 - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     header = *resource;
@@ -255,7 +255,7 @@ void Geometry_DrawModelResource(void **resource, void *matrix, s32 segment, void
 void Geometry_QueueModelInstance(void **a, void *b, s32 c, void *d, void *e, s32 f) {
     s32 instanceCount;
     void *vertexBase;
-    ObjRecAtCV2 *queuedInstance;
+    QueuedModelInstance *queuedInstance;
     void *modelHeader;
     s32 *countp;
     s32 count;
@@ -266,29 +266,29 @@ void Geometry_QueueModelInstance(void **a, void *b, s32 c, void *d, void *e, s32
     if (vertexBase == 0) {
         vertexBase = SetN64_GetPackSection(modelHeader, 0);
     }
-    if ((D_8011064C != (s32)a) || (D_8010C564 != f) || (D_80110640 == 0x20)) {
+    if ((g_modelBatchResource != (s32)a) || (g_modelBatchPass != f) || (g_modelInstanceQueueCount == 0x20)) {
         Geometry_GroupModelInstances();
-        if (D_80111310 != 0x100) {
+        if (g_modelBatchResourceCount != 0x100) {
             Cache_LockResource(0, (s32)a);
-            countp = &D_80111310;
+            countp = &g_modelBatchResourceCount;
             count = *countp;
-            D_80111318[count] = (s32)a;
+            g_modelBatchResources[count] = (s32)a;
             *countp = count + 1;
             goto block_7;
         }
     } else {
 block_7:
-        D_8011064C = (s32)a;
-        D_8010C564 = f;
-        queue_countp = &D_80110640;
+        g_modelBatchResource = (s32)a;
+        g_modelBatchPass = f;
+        queue_countp = &g_modelInstanceQueueCount;
         instanceCount = *queue_countp;
-        queuedInstance = &D_801157D8[instanceCount];
+        queuedInstance = &g_modelInstanceQueue[instanceCount];
         instanceCount += 1;
         *queue_countp = instanceCount;
-        queuedInstance->unk0 = b;
-        queuedInstance->unkC = c;
-        queuedInstance->unk4 = d;
-        queuedInstance->unk8 = vertexBase;
+        queuedInstance->matrix = b;
+        queuedInstance->segmented = c;
+        queuedInstance->lights = d;
+        queuedInstance->vertices = vertexBase;
     }
 }
 
@@ -301,7 +301,7 @@ void Geometry_DrawBlendParts(void **resource, s32 unused, s32 matrix, s32 segmen
     s32 count;
     s32 i;
 
-    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityUsRev1 - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     header = *resource;
@@ -330,12 +330,12 @@ void Geometry_DrawBlendParts(void **resource, s32 unused, s32 matrix, s32 segmen
     }
 }
 
-void Geometry_QueueDirectModel(s32 model, void *arg1, void *arg2, s32 arg3, s32 arg4) {
-    Geometry_QueueModelById(model, arg1, arg2, arg3, arg4, 1);
+void Geometry_QueueDirectModel(s32 model, void *matrix, void *lights, s32 textures, s32 pass) {
+    Geometry_QueueModelById(model, matrix, lights, textures, pass, 1);
 }
 
-void Geometry_QueueDeferredModel(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4) {
-    Geometry_QueueModelById(arg0, arg1, arg2, arg3, arg4, 0);
+void Geometry_QueueDeferredModel(s32 modelIndex, void *matrix, void *lights, s32 textures, s32 pass) {
+    Geometry_QueueModelById(modelIndex, matrix, lights, textures, pass, 0);
 }
 
 void Geometry_DrawWithMaterialOverride(void *shared, s32 mode, void **resource, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
@@ -347,7 +347,7 @@ void Geometry_DrawWithMaterialOverride(void *shared, s32 mode, void **resource, 
     s32 count;
     s32 i;
 
-    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityUsRev1 - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (Geometry_SetupMaterial(shared, pass) == 0) {
@@ -382,14 +382,14 @@ void Geometry_DrawWithMaterialOverride(void *shared, s32 mode, void **resource, 
     }
 }
 
-void Geometry_UnlockMaterialResources(void **arg0) {
+void Geometry_UnlockMaterialResources(void **modelResource) {
     void *packSectionResult;
     s32 count;
     s32 i;
     void *rec;
     s32 result;
 
-    packSectionResult = SetN64_GetPackSection(*arg0, 2);
+    packSectionResult = SetN64_GetPackSection(*modelResource, 2);
     count = *(s32 *)packSectionResult;
     for (i = 0; i < count; i++) {
         rec = SetN64_GetPackSection(SetN64_GetPackSection(packSectionResult, i), 0);
@@ -408,7 +408,7 @@ void Geometry_UnlockMaterialResources(void **arg0) {
 
 
 /* 8026E1F8.CPP */
-extern void Cache_TouchResourceByKey(s32 arg0, s32 resourceKey);
+extern void Cache_TouchResourceByKey(s32 cache, s32 resourceKey);
 
 void Geometry_RefreshMaterialResources(void **resource) {
     void *packSectionResult;
@@ -427,7 +427,7 @@ void Geometry_RefreshMaterialResources(void **resource) {
     }
 }
 
-s32 *Geometry_CollectMaterialResources(void **arg0, s32 variation, s32 *arg2) {
+s32 *Geometry_CollectMaterialResources(void **modelResource, s32 variation, s32 *resourcesOut) {
     void *packSectionResult;
     s32 count;
     s32 i;
@@ -435,8 +435,8 @@ s32 *Geometry_CollectMaterialResources(void **arg0, s32 variation, s32 *arg2) {
     void *rec;
     s32 result;
 
-    out = arg2;
-    packSectionResult = SetN64_GetPackSection(*arg0, 2);
+    out = resourcesOut;
+    packSectionResult = SetN64_GetPackSection(*modelResource, 2);
     count = *(s32 *)packSectionResult;
     for (i = 0; i < count; i++) {
         rec = SetN64_GetPackSection(SetN64_GetPackSection(packSectionResult, i), 0);
@@ -466,15 +466,15 @@ int Geometry_GetViewEffect(void) {
 
 void Geometry_SetPrimitiveColorOverride(unsigned char first, unsigned char second,
                    unsigned char third, unsigned char fourth) {
-    D_800CC3A8 = first;
-    D_800CC3A9 = second;
-    D_800CC3AA = fourth;
-    D_800CC3AB = third;
+    g_primitiveColorOverrideEnabled = first;
+    g_primitiveColorOverrideRed = second;
+    g_primitiveColorOverrideGreen = fourth;
+    g_primitiveColorOverrideBlue = third;
 }
 
-void Geometry_SetPrimitiveAlphaOverride(int arg0, int arg1) {
-    D_800CC3AC = (unsigned char)arg0;
-    D_800CC3AD = (unsigned char)arg1;
+void Geometry_SetPrimitiveAlphaOverride(int enabled, int alpha) {
+    g_primitiveAlphaOverrideEnabled = (unsigned char)enabled;
+    g_primitiveAlphaOverride = (unsigned char)alpha;
 }
 
 void Geometry_LoadRenderMicrocode(void) {
@@ -483,9 +483,9 @@ void Geometry_LoadRenderMicrocode(void) {
     cmd = g_displayListCursor++;
     gDPFullSync(cmd);
     cmd = g_displayListCursor++;
-    gDPHalf1(cmd, (u32) &D_E0470);
+    gDPHalf1(cmd, (u32) &g_primaryRenderMicrocodeData);
     cmd = g_displayListCursor++;
-    gLoadUcode(cmd, &D_DE0A0, 0x800);
+    gLoadUcode(cmd, &g_primaryRenderMicrocodeText, 0x800);
     cmd = g_displayListCursor++;
     gSPDisplayList(cmd, (u32) &D_800CBCC0);
     cmd = g_displayListCursor++;
@@ -498,9 +498,9 @@ void Geometry_SwitchRenderMicrocode(void) {
     cmd = g_displayListCursor++;
     gDPFullSync(cmd);
     cmd = g_displayListCursor++;
-    gDPHalf1(cmd, (u32) &D_E0050);
+    gDPHalf1(cmd, (u32) &g_alternateRenderMicrocodeData);
     cmd = g_displayListCursor++;
-    gLoadUcode(cmd, &D_DCD10, 0x800);
+    gLoadUcode(cmd, &g_alternateRenderMicrocodeText, 0x800);
     cmd = g_displayListCursor++;
     gSPDisplayList(cmd, (u32) &D_800CBCC0);
     cmd = g_displayListCursor++;
@@ -520,43 +520,43 @@ void Geometry_ResetDisplayListState(int *state) {
 
 /** Clear four related global state words. */
 void Geometry_ClearMaterialGroups(void) {
-    D_8010C56C = 0;
-    D_8010C568 = 0;
-    D_8010C584 = 0;
-    D_8010C57C = 0;
+    g_opaqueMaterialGroupList = 0;
+    g_opaqueMaterialGroupTree = 0;
+    g_translucentMaterialGroupList = 0;
+    g_translucentMaterialGroupTree = 0;
 }
 
-void *Geometry_FindMaterialNodeOrParent(Node8026E4F8 **arg0, u32 arg1)
+void *Geometry_FindMaterialNodeOrParent(Node8026E4F8 **root, u32 materialKey)
 {
-  u32 temp_v1;
-  Node8026E4F8 *var_a0;
-  Node8026E4F8 *var_v0;
-  var_v0 = *arg0;
-  var_a0 = 0;
-  if (var_v0 != 0)
+  u32 nodeKey;
+  Node8026E4F8 *parent;
+  Node8026E4F8 *node;
+  node = *root;
+  parent = 0;
+  if (node != 0)
   {
     loop_1:
-    temp_v1 = var_v0->key;
+    nodeKey = node->key;
 
-    if (var_v0->key)
+    if (node->key)
     {
-      var_a0 = var_v0;
+      parent = node;
     }
     else
     {
-      var_a0 = var_v0;
+      parent = node;
     }
-    if (temp_v1 != arg1)
+    if (nodeKey != materialKey)
     {
-      if (arg1 < temp_v1)
+      if (materialKey < nodeKey)
       {
-        var_v0 = var_a0->left;
+        node = parent->left;
       }
       else
       {
-        var_v0 = var_a0->right;
+        node = parent->right;
       }
-      if (var_v0 == 0)
+      if (node == 0)
       {
         goto block_6;
       }
@@ -566,10 +566,10 @@ void *Geometry_FindMaterialNodeOrParent(Node8026E4F8 **arg0, u32 arg1)
   else
   {
     block_6:
-    var_v0 = var_a0;
+    node = parent;
 
   }
-  return var_v0;
+  return node;
 }
 
 /** Insert a node adjacent to the supplied node in an intrusive ordered tree. */
@@ -607,33 +607,33 @@ void Geometry_InsertMaterialNode(TreeNode **root, TreeNode **empty_root, TreeNod
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8026E55C[1] = {
+unsigned int k_GeometryDrawblendpartsEncodedWords[1] = {
     0x41594552,
 };
 #endif
 
 /* 800C979C.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8026D844_CA39C[1] = {
+const unsigned int g_geometryInitialModelScale[1] = {
     0x40000000,
 };
 #endif
 
 #if defined(VERSION_DE)
-const unsigned int rodata_func_8026E5E0_de_800C46B0[3] = {
+const unsigned int g_geometryMaterialSetupConstantsDe[3] = {
     0x41700000, 0x40A00000, 0x43800000,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C46BC[1] = {
+unsigned int k_GeometryDrawblendpartsZeroWords[1] = {
     0x00000000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8026D844_CA39C_us_rev1.c */
-const unsigned int D_blob_f1a5eff7b48ee6b5ab6b[1] = {
+const unsigned int g_geometryInitialModelScaleUsRev1[1] = {
     0x40000000,
 };
 #endif

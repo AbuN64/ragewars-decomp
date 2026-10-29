@@ -1,4 +1,4 @@
-#include "COMMON/S1_6.H"
+#include "COMMON/RESERVED_SHARED_DECLARATIONS.H"
 #include "TYPES.H"
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is

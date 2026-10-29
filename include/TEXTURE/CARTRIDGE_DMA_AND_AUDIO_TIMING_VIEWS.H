@@ -29,12 +29,12 @@ struct Item57BD4 {
 };
 struct Window;
 /* The audio DMA state (libultra dmaNew pattern): the in-use and free cartridge read windows. */
-struct ObjectLinksC {
+struct AudioDmaState {
     u8 initialized;
     unsigned char padding_1[3];
     struct Window *firstUsed;
     struct Window *firstFree;
 };
-extern struct ObjectLinksC D_80107DF0;
+extern struct AudioDmaState g_audioDmaState;
 typedef struct CacheCountdownEntry { struct CacheCountdownEntry *next; char pad4[4]; u16 state; } CacheCountdownEntry;
 #endif

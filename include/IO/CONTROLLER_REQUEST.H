@@ -1,6 +1,6 @@
 #ifndef IO_CONTROLLER_REQUEST_H
 #define IO_CONTROLLER_REQUEST_H
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 /* Queue protocol used by the controller filesystem wrappers. */
 typedef struct ControllerRequest {

@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "acmd.h"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
@@ -6,37 +6,37 @@
 #include "sdk/AUDIO/visetmode.H"
 #include "sdk/os.h"
 
-extern StateosViSetSpecialFeatures *D_800D4414;
+extern StateosViSetSpecialFeatures *g_nextVideoInterfaceContext;
 
 void osViSetSpecialFeatures(s32 featureCommands) {
     u32 token;
 
     token = __osDisableInt();
     if (featureCommands & 1) {
-        D_800D4414->flags |= 8;
+        g_nextVideoInterfaceContext->flags |= 8;
     }
     if (featureCommands & 2) {
-        D_800D4414->flags &= ~8;
+        g_nextVideoInterfaceContext->flags &= ~8;
     }
     if (featureCommands & 4) {
-        D_800D4414->flags |= 4;
+        g_nextVideoInterfaceContext->flags |= 4;
     }
     if (featureCommands & 8) {
-        D_800D4414->flags &= ~4;
+        g_nextVideoInterfaceContext->flags &= ~4;
     }
     if (featureCommands & 0x10) {
-        D_800D4414->flags |= 0x10;
+        g_nextVideoInterfaceContext->flags |= 0x10;
     }
     if (featureCommands & 0x20) {
-        D_800D4414->flags &= ~0x10;
+        g_nextVideoInterfaceContext->flags &= ~0x10;
     }
     if (featureCommands & 0x40) {
-        D_800D4414->flags = (D_800D4414->flags | 0x10000) & ~0x300;
+        g_nextVideoInterfaceContext->flags = (g_nextVideoInterfaceContext->flags | 0x10000) & ~0x300;
     }
     if (featureCommands & 0x80) {
-        D_800D4414->flags &= ~0x10000;
-        D_800D4414->flags |= D_800D4414->inner->w1 & 0x300;
+        g_nextVideoInterfaceContext->flags &= ~0x10000;
+        g_nextVideoInterfaceContext->flags |= g_nextVideoInterfaceContext->inner->w1 & 0x300;
     }
-    D_800D4414->status |= 8;
+    g_nextVideoInterfaceContext->status |= 8;
     __osRestoreInt(token);
 }

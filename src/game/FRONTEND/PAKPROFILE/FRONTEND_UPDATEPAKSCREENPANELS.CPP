@@ -2,7 +2,7 @@
 #include "include_asm.h"
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
@@ -17,48 +17,48 @@ extern void SmpFlicker_RestoreFlickerValue(void *);
 extern void SmpFlicker_StartFlicker(void *, s32);
 
 extern s32 SmpFlicker_IsFlickerIdle(void *);
-s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 arg2) {
+s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 event) {
     s32 readyState;
     s32 openFramesLeft;
     s32 closeFramesLeft;
-    s32 temp_v0_4;
-    s32 temp_v1;
-    s32 var_v0;
+    s32 unusedPanelState;
+    s32 unusedPanelTimer;
+    s32 unusedPanelResult;
     MenuWidget *closeTop;
     MenuWidget *closeBottom;
     MenuWidget *openTop;
     MenuWidget *openBottom;
 
-    if (D_800E28E0 < 2) {
-        readyState = D_800E54A4->ready;
+    if (g_selectionMessageStage < 2) {
+        readyState = g_pakProfileScreenState->ready;
         switch (readyState) {
         case 1:
-            openTop = D_800E54A4->top;
-            openTop->x = (u16) (openTop->x + (u16) D_800E54A4->topStep);
-            openBottom = D_800E54A4->bottom;
-            openBottom->x = (u16) (openBottom->x - (u16) D_800E54A4->bottomStep);
-            openFramesLeft = D_800E54A4->timer - 1;
-            D_800E54A4->timer = openFramesLeft;
+            openTop = g_pakProfileScreenState->top;
+            openTop->x = (u16) (openTop->x + (u16) g_pakProfileScreenState->topStep);
+            openBottom = g_pakProfileScreenState->bottom;
+            openBottom->x = (u16) (openBottom->x - (u16) g_pakProfileScreenState->bottomStep);
+            openFramesLeft = g_pakProfileScreenState->timer - 1;
+            g_pakProfileScreenState->timer = openFramesLeft;
             if (openFramesLeft <= 0) {
                 SoundElement_PlayFlatSound(0xE79);
                 /* unk28 is the panel's item handle, kept untyped in the animation state */
-                Widget_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 1);
-                SmpFlicker_StartFlicker(D_800E54A4->music, 4);
-                D_800E54A4->ready = 4;
-                D_800E54A4->timer = 4;
+                Widget_SetWidgetFlag08((SlotSelectionWidget *) g_pakProfileScreenState->title, 1);
+                SmpFlicker_StartFlicker(g_pakProfileScreenState->music, 4);
+                g_pakProfileScreenState->ready = 4;
+                g_pakProfileScreenState->timer = 4;
             }
             break;
         case 2:
-            closeTop = D_800E54A4->top;
-            closeTop->x = (u16) (closeTop->x - (u16) D_800E54A4->topStep);
-            closeBottom = D_800E54A4->bottom;
-            closeBottom->x = (u16) (closeBottom->x + (u16) D_800E54A4->bottomStep);
-            closeFramesLeft = D_800E54A4->timer - 1;
-            D_800E54A4->timer = closeFramesLeft;
+            closeTop = g_pakProfileScreenState->top;
+            closeTop->x = (u16) (closeTop->x - (u16) g_pakProfileScreenState->topStep);
+            closeBottom = g_pakProfileScreenState->bottom;
+            closeBottom->x = (u16) (closeBottom->x + (u16) g_pakProfileScreenState->bottomStep);
+            closeFramesLeft = g_pakProfileScreenState->timer - 1;
+            g_pakProfileScreenState->timer = closeFramesLeft;
             if (closeFramesLeft <= 0) {
-                D_800E54A4->ready = 3;
+                g_pakProfileScreenState->ready = 3;
                 MarkMenuEventHandled();
-                SmXlate_SwitchScreen(D_800E54A4->focus);
+                SmXlate_SwitchScreen(g_pakProfileScreenState->focus);
                 return 0;
             }
             break;
@@ -66,20 +66,20 @@ s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 arg2) {
             Tsmos_ActivateControllerState();
             break;
         case 4:
-            D_800E54A4->timer = RW_CLAMP(D_800E54A4->timer - 1, 0, D_800E54A4->timer);
-            if ((D_800E54A4->timer <= 0) && (SmpFlicker_IsFlickerIdle(D_800E54A4->music) != 0)) {
-                SmpFlicker_RestoreFlickerValue(D_800E54A4->music);
-                D_800E54A4->ready = 3;
+            g_pakProfileScreenState->timer = RW_CLAMP(g_pakProfileScreenState->timer - 1, 0, g_pakProfileScreenState->timer);
+            if ((g_pakProfileScreenState->timer <= 0) && (SmpFlicker_IsFlickerIdle(g_pakProfileScreenState->music) != 0)) {
+                SmpFlicker_RestoreFlickerValue(g_pakProfileScreenState->music);
+                g_pakProfileScreenState->ready = 3;
             }
             break;
         case 5:
             SoundElement_PlayFlatSound(0xE78);
-            D_800E54A4->ready = 2;
-            D_800E54A4->timer = 4;
-            Widget_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 0);
+            g_pakProfileScreenState->ready = 2;
+            g_pakProfileScreenState->timer = 4;
+            Widget_SetWidgetFlag08((SlotSelectionWidget *) g_pakProfileScreenState->title, 0);
             break;
         }
-        if (D_800E54A4->ready == 3) PAKInterface_UpdatePlayerPanelAnimations(arg2);
+        if (g_pakProfileScreenState->ready == 3) PAKInterface_UpdatePlayerPanelAnimations(event);
     }
     return 0;
 }

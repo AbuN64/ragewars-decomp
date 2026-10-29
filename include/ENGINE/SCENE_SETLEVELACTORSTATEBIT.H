@@ -5,26 +5,26 @@
 #include "COMMON/COLORENTRY.H"
 struct ObjectCSceneStartEventClips {
     char pad[0xA8];
-    struct StridedTable *unkA8;
-    struct StridedTable *unkAC;
+    struct StridedTable *clipGroupKeys;
+    struct StridedTable *clipDefinitions;
 };
 struct Container {
     char pad0[0x138];
-    struct RecordRecAtE4 *unk138;
-    s32 unk13C;
-    s32 unk140;
+    struct SceneActorMatchRecord *actors;
+    s32 actorCursor;
+    s32 actorCount;
 };
-struct ObjRecAt78V1 {
+struct ScenePackSectionTableView {
     char pad0[0x78];
-    void * unk78;
+    void * sectionTable;
 };
-struct ObjRecAt10BC {
+struct SceneActiveResourceCountView {
     char pad0[0x10BC];
-    int unk10BC;
+    int activeResourceCount;
 };
-struct ObjRecAt7C {
+struct SceneNestedPackSectionTableView {
     char pad0[0x7C];
-    void * unk7C;
+    void * nestedSectionTable;
 };
 struct OwnerSceneUnlockActiveSectionResources {
     char pad0[0x944];
@@ -32,7 +32,7 @@ struct OwnerSceneUnlockActiveSectionResources {
     char pad948[0xC4C - 0x948];
     s32 unkC4C;
     char padC50[0x10BC - 0xC50];
-    s32 unk10BC;
+    s32 activeResourceCount;
     char pad10C0[0x1500 - 0x10C0];
     s32 prevCount;
     s32 count;

@@ -1,9 +1,9 @@
 #ifndef MENU_OPTION_AND_TEXT_LAYER_VIEWS_H
 #define MENU_OPTION_AND_TEXT_LAYER_VIEWS_H
 #include "TYPES.H"
-struct func_8022A404_S1 {
+struct MenuValueStepView {
     char pad0[0x20];
-    int unk20;
+    int flags;
 };
 typedef struct MenuOption {
     u8 unobserved0[8];
@@ -32,7 +32,7 @@ struct ParamsPakAllocateMenu {
     s32 c;
     s32 d;
 };
-struct ParamsRecAt24V2 {
+struct MenuTemplateParameters {
     char pad[0x18];
     s32 a;
     s32 b;
@@ -40,50 +40,50 @@ struct ParamsRecAt24V2 {
     s32 d;
 };
 struct CMenuFontInfo_t {
-    s32 unk0;
+    s32 kind;
     char pad0[0x8];
-    f32 unkC;
-    f32 unk10;
-    u8 unk14;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u8 unk18;
-    u8 unk19;
-    u8 unk1A;
+    f32 scaleX;
+    f32 scaleY;
+    u8 shadowOffset;
+    u8 color0;
+    u8 color1;
+    u8 color2;
+    u8 color3;
+    u8 color4;
+    u8 color5;
     u8 pad1B;
 };
 struct Outer {
     char pad[0x14];
     struct MenuRules *inner;
 };
-struct WidgetRecAt20 {
+struct MenuPreviewSelectionView {
     char reserved00[8];
     u32 flags; /* +0x08: 80440838 tests/sets 0x02000000. */
     char reserved0C[0x14];
-    struct StateRecAt47C *state;
+    struct MenuCharacterPreviewState *state;
 };
-struct OwnerRecAt4 {
+struct MenuCallbackListOwner {
     char pad[4];
-    struct NodeRecAt1D0 *head;
+    struct PakMenuVirtualNode *head;
 };
 struct ObjectPakDrawMenuCharacter {
     char pad[0x17];
     u8 character;
 };
-struct ParamsRecAt24V1 {
+struct MenuCreationParameters {
     char pad[0x18];
     struct Dialog *list;
     s32 b;
     s32 c;
     s32 d;
 };
-struct func_8043FFAC_S5 {
-    s32 unk0;
+struct StyledMenuTextEntryView {
+    s32 index;
     char pad0[0x10];
-    s32 unk14;
+    s32 x;
     char pad14[0x4];
-    s32 unk1C;
+    s32 y;
 };
 struct TextBoundsData {
     char pad0[0x29C];

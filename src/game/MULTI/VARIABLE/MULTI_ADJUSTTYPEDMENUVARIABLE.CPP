@@ -7,7 +7,7 @@
 
 
 /* Read the descriptor's runtime value type and format the scaled value. */
-char *func_8043F120_de(Shared_DebugWidget *widget) {
+char *Multi_FormatTypedMenuVariable(Shared_DebugWidget *widget) {
     Shared_DebugField *field = widget->field;
     void *value = field->get();
     f32 number;
@@ -24,77 +24,77 @@ char *func_8043F120_de(Shared_DebugWidget *widget) {
     case 8: { u32 *p = value; number = (f64)*p; break; }
     }
     number /= field->scale;
-    func_802BD320_de(D_8014DE10, D_800DE380, (f64)number);
+    Libc_FormatString(g_debugVariableValueBuffer, g_debugVariableValueFormat, (f64)number);
     if (field->name != 0) {
-        func_802BD320_de(D_8014DDD0, D_800DE388_de, field->name, D_8014DE10);
+        Libc_FormatString(g_debugVariableLabelBuffer, g_debugVariableNamedFormat, field->name, g_debugVariableValueBuffer);
     } else {
-        func_802BD320_de(D_8014DDD0, D_800DE390_de, D_8014DE10);
+        Libc_FormatString(g_debugVariableLabelBuffer, g_debugVariableUnnamedFormat, g_debugVariableValueBuffer);
     }
-    return D_8014DDD0;
+    return g_debugVariableLabelBuffer;
 }
 
-s32 Multi_AdjustTypedMenuVariable(MenuRecAt14 *arg0, Shared_MenuInput *menuInput) {
-    void *temp_a0_2;
-    void *temp_v1;
-    f32 temp_v0;
-    f32 var_f0;
-    f32 var_f20;
-    f64 var_f1;
-    s32 var_condition_bit;
-    u32 temp_a0;
-    u32 temp_v1_2;
-    struct Variable *temp_s0;
-    struct Variable *temp_s0_2;
+s32 Multi_AdjustTypedMenuVariable(TypedMenuVariableView *widget, Shared_MenuInput *menuInput) {
+    void *writeValue;
+    void *readValue;
+    f32 unusedFloatValue;
+    f32 unusedFloatResult;
+    f32 adjustedValue;
+    f64 unusedDoubleValue;
+    s32 unusedComparison;
+    u32 readValueType;
+    u32 writeValueType;
+    struct Variable *readDescriptor;
+    struct Variable *writeDescriptor;
 
-    temp_s0 = arg0->unk14;
-    temp_v1 = temp_s0->unk18();
-    temp_a0 = temp_s0->unk4;
-    switch (temp_a0) {                              
-    default:                                        
-        var_f20 = 0.0f;
+    readDescriptor = widget->variable;
+    readValue = readDescriptor->unk18();
+    readValueType = readDescriptor->valueType;
+    switch (readValueType) {
+    default:
+        adjustedValue = 0.0f;
         break;
-    case 0:                                         
-        var_f20 = *(float *)temp_v1;
+    case 0:
+        adjustedValue = *(float *)readValue;
         break;
-    case 3:                                         
-        var_f20 = (f32) *(signed char *)temp_v1;
+    case 3:
+        adjustedValue = (f32) *(signed char *)readValue;
         break;
-    case 4:                                         
-        var_f20 = (f32) *(short *)temp_v1;
+    case 4:
+        adjustedValue = (f32) *(short *)readValue;
         break;
-    case 1:                                         
-    case 2:                                         
-    case 5:                                         
-        var_f20 = (f32) *(int *)temp_v1;
+    case 1:
+    case 2:
+    case 5:
+        adjustedValue = (f32) *(int *)readValue;
         break;
-    case 6:                                         
-        var_f20 = (f32) *(unsigned char *)temp_v1;
+    case 6:
+        adjustedValue = (f32) *(unsigned char *)readValue;
         break;
-    case 7:                                         
-        var_f20 = (f32) *(unsigned short *)temp_v1;
+    case 7:
+        adjustedValue = (f32) *(unsigned short *)readValue;
         break;
-    case 8:                                         
-        var_f20 = (float)*(unsigned int *)temp_v1;
+    case 8:
+        adjustedValue = (float)*(unsigned int *)readValue;
         break;
     }
     if (((s32 (*)(s32))Control_IsLeftPressed)(menuInput->buttons) != 0) {
-        var_f20 -= temp_s0->unk10;
-        if (var_f20 < temp_s0->unk8) var_f20 = temp_s0->unk8;
+        adjustedValue -= readDescriptor->step;
+        if (adjustedValue < readDescriptor->minimum) adjustedValue = readDescriptor->minimum;
     } else if (((s32 (*)(s32))Control_IsRightPressed)(menuInput->buttons) != 0) {
-        var_f20 += temp_s0->unk10;
-        if (var_f20 > temp_s0->unkC) var_f20 = temp_s0->unkC;
+        adjustedValue += readDescriptor->step;
+        if (adjustedValue > readDescriptor->maximum) adjustedValue = readDescriptor->maximum;
     }
-    temp_s0_2 = arg0->unk14;
-    temp_a0_2 = temp_s0_2->unk18(arg0);
-    temp_v1_2 = temp_s0_2->unk4;
-    switch (temp_v1_2) {
-    case 0: *(float *)temp_a0_2 = var_f20; break;
-    case 3: *(signed char *)temp_a0_2 = (int)var_f20; break;
-    case 4: *(short *)temp_a0_2 = (int)var_f20; break;
-    case 1: case 2: case 5: *(int *)temp_a0_2 = var_f20; break;
-    case 6: *(unsigned char *)temp_a0_2 = (unsigned int)var_f20; break;
-    case 7: *(unsigned short *)temp_a0_2 = (unsigned int)var_f20; break;
-    case 8: *(unsigned int *)temp_a0_2 = var_f20; break;
+    writeDescriptor = widget->variable;
+    writeValue = writeDescriptor->unk18(widget);
+    writeValueType = writeDescriptor->valueType;
+    switch (writeValueType) {
+    case 0: *(float *)writeValue = adjustedValue; break;
+    case 3: *(signed char *)writeValue = (int)adjustedValue; break;
+    case 4: *(short *)writeValue = (int)adjustedValue; break;
+    case 1: case 2: case 5: *(int *)writeValue = adjustedValue; break;
+    case 6: *(unsigned char *)writeValue = (unsigned int)adjustedValue; break;
+    case 7: *(unsigned short *)writeValue = (unsigned int)adjustedValue; break;
+    case 8: *(unsigned int *)writeValue = adjustedValue; break;
     }
     return 0;
 }

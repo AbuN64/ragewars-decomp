@@ -1,5 +1,5 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -17,28 +17,28 @@
 
 
 
-extern void *D_800D31B4_de[];
+extern void *g_playerSourceEffectStartMessage[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void *D_800E1144[];
+extern void *g_playerSourceEffectOwnerFormatEuropean[];
 #else
-extern void *D_800D31BC[];
+extern void *g_playerSourceEffectOwnerFormat[];
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void *D_800E1154[];
+extern void *g_playerSourceEffectFinalMessageEuropean[];
 #else
-extern void *D_800D31C0[];
+extern void *g_playerSourceEffectFinalMessage[];
 #endif
 #else
-extern void *D_800D31B4_de;
+extern void *g_playerSourceEffectStartMessage;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void *D_800E1144;
+extern void *g_playerSourceEffectOwnerFormatEuropean;
 #else
-extern void *D_800D31BC;
+extern void *g_playerSourceEffectOwnerFormat;
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void *D_800E1154;
+extern void *g_playerSourceEffectFinalMessageEuropean;
 #else
-extern void *D_800D31C0;
+extern void *g_playerSourceEffectFinalMessage;
 #endif
 #endif
 
@@ -63,7 +63,7 @@ void Player_StartSourceEffect(void *actor, void *effectSource) {
     }
 
     SoundElement_PlayFlatSound(0xB45);
-    state->pending = D_800C2D1C_de;
+    state->pending = g_playerSourceEffectDuration;
     state->parent = source;
     owner = state->message;
     if (owner == 0) {
@@ -71,13 +71,13 @@ void Player_StartSourceEffect(void *actor, void *effectSource) {
     }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    game = &D_80145088;
+    game = &g_frontendScreenStatus;
     settings = &game->settings;
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    Camera_PostScreenMessage(game, owner, D_800D31B4_de[settings->language]);
+    Camera_PostScreenMessage(game, owner, g_playerSourceEffectStartMessage[settings->language]);
 #else
-    Camera_PostScreenMessage(&D_80145088, owner, D_800D31B4_de);
+    Camera_PostScreenMessage(&g_frontendScreenStatus, owner, g_playerSourceEffectStartMessage);
 #endif
     if (source == 0) {
         return;
@@ -92,34 +92,34 @@ void Player_StartSourceEffect(void *actor, void *effectSource) {
     payload = state->effectPayload;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_802BD320_de(payload, D_800E1144[settings->language],
+    Libc_FormatString(payload, g_playerSourceEffectOwnerFormatEuropean[settings->language],
 #else
-    func_802BD320_de(payload, D_800E1144,
+    Libc_FormatString(payload, g_playerSourceEffectOwnerFormatEuropean,
 #endif
 #else
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_802BD320_de(payload, D_800D31BC[settings->language],
+    Libc_FormatString(payload, g_playerSourceEffectOwnerFormat[settings->language],
 #else
-    func_802BD320_de(payload, D_800D31BC,
+    Libc_FormatString(payload, g_playerSourceEffectOwnerFormat,
 #endif
 #endif
                   source->controls->pad84);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     Camera_PostScreenMessage(game, state->message, payload);
 #else
-    Camera_PostScreenMessage(&D_80145088, state->message, payload);
+    Camera_PostScreenMessage(&g_frontendScreenStatus, state->message, payload);
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    Camera_PostScreenMessage(game, state->message, D_800E1154[settings->language]);
+    Camera_PostScreenMessage(game, state->message, g_playerSourceEffectFinalMessageEuropean[settings->language]);
 #else
-    Camera_PostScreenMessage(&D_80145088, state->message, D_800E1154);
+    Camera_PostScreenMessage(&g_frontendScreenStatus, state->message, g_playerSourceEffectFinalMessageEuropean);
 #endif
 #else
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    Camera_PostScreenMessage(game, state->message, D_800D31C0[settings->language]);
+    Camera_PostScreenMessage(game, state->message, g_playerSourceEffectFinalMessage[settings->language]);
 #else
-    Camera_PostScreenMessage(&D_80145088, state->message, D_800D31C0);
+    Camera_PostScreenMessage(&g_frontendScreenStatus, state->message, g_playerSourceEffectFinalMessage);
 #endif
 #endif
 }

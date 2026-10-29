@@ -4,7 +4,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -30,7 +30,7 @@ extern void *Scene_GetActorDefinition(void *world, s32 index);
 extern int Scene_GetModelIdAtIndex(void *world, int modelIndex);
 
 struct Context;
-extern s32 func_8022A8F0_de(struct Context *context);
+extern s32 Playerai_CountLocalActivePlayers(struct Context *context);
 
 extern int Playerai_GetFirstPlayer(void *world);
 
@@ -40,60 +40,60 @@ extern SceneEffect *Animpool_SpawnSceneEffect(void *scene, s32 id, s32 variant, 
 
 extern s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 followTarget, s32 kind, CVector3 inheritedVelocity, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 requestedMode, s32 spawnFlags);
 
-extern void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 arg2, CVector3 rotation, CVector3 position, s32 effectOwner, f32 initialLifetime);
+extern void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 effectId, CVector3 rotation, CVector3 position, s32 effectOwner, f32 initialLifetime);
 
-extern char D_8011D8D0[];
+extern char g_actorParticleEffectSystem[];
 
 static __inline__ SpawnChoice *spawnTable0(void) {
-    extern SpawnChoice D_800C8510_de[];
-    return D_800C8510_de;
+    extern SpawnChoice g_spawnChoiceTableZero[];
+    return g_spawnChoiceTableZero;
 }
 
 static __inline__ SpawnChoice *spawnTable1(void) {
-    extern SpawnChoice D_800C8510_de[];
-    return D_800C8510_de + 1;
+    extern SpawnChoice g_spawnChoiceTableZero[];
+    return g_spawnChoiceTableZero + 1;
 }
 
 static __inline__ SpawnChoice *spawnTable2(void) {
-    extern SpawnChoice D_800C8518_de[];
-    return D_800C8518_de;
+    extern SpawnChoice g_spawnChoiceTableTwo[];
+    return g_spawnChoiceTableTwo;
 }
 
 static __inline__ SpawnChoice *spawnTable3(void) {
-    extern SpawnChoice D_800C8528_de[];
-    return D_800C8528_de;
+    extern SpawnChoice g_spawnChoiceTableThree[];
+    return g_spawnChoiceTableThree;
 }
 
 static __inline__ SpawnChoice *spawnTable4(void) {
-    extern SpawnChoice D_800C8534_de[];
-    return D_800C8534_de;
+    extern SpawnChoice g_spawnChoiceTableFour[];
+    return g_spawnChoiceTableFour;
 }
 
 static __inline__ SpawnChoice *spawnTable5(void) {
-    extern SpawnChoice D_800C8544_de[];
-    return D_800C8544_de;
+    extern SpawnChoice g_spawnChoiceTableFive[];
+    return g_spawnChoiceTableFive;
 }
 
 static __inline__ SpawnChoice *spawnTable6(void) {
-    extern SpawnChoice D_800C8548[];
-    return D_800C8548;
+    extern SpawnChoice g_spawnChoiceTableSix[];
+    return g_spawnChoiceTableSix;
 }
 
 static __inline__ s32 spawnBlocked(void) {
-    return D_801462C8.counters.m_CTFPlayerWithFlag;
+    return g_gameSettings.counters.m_CTFPlayerWithFlag;
 }
 
 static __inline__ s32 available(s32 id) {
     SpawnDispatchActor *actor;
     if (id == 0x84F) {
-        actor = D_80137064.head;
+        actor = g_spawnedActorList.head;
         while (actor) {
             if (*actor->definition == 4) {
                 return 0;
             }
             actor = actor->next;
         }
-        return func_8022A8F0_de(&D_80145040) == 0;
+        return Playerai_CountLocalActivePlayers(&g_playerViewRenderContext) == 0;
     }
     return 1;
 }
@@ -104,14 +104,14 @@ static __inline__ s32 availableChoice(s32 id) {
         id = 1;
         goto done;
     }
-    actor = D_80137064.head;
+    actor = g_spawnedActorList.head;
     while (actor) {
         if (*actor->definition == 4) {
             return id = 0;
         }
         actor = actor->next;
     }
-    return id = func_8022A8F0_de(&D_80145040) == 0;
+    return id = Playerai_CountLocalActivePlayers(&g_playerViewRenderContext) == 0;
 done:
     return id;
 }
@@ -127,16 +127,16 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
         CVector3 position, SpawnDispatchOwner *owner, void *world) {
     SpawnDispatchActor *actor;
     id = copySpawnId(id);
-    if (id == 0xBD7 && D_801462C8.counters.m_bCTFOn && spawnBlocked()) {
+    if (id == 0xBD7 && g_gameSettings.counters.m_bCTFOn && spawnBlocked()) {
         return;
     }
-    if (id == 0x1388 && D_801462C8.controllerMode == 1) {
+    if (id == 0x1388 && g_gameSettings.controllerMode == 1) {
         id = *D_800E4680 + 0x1388;
         if (id == 0x1388) {
             return;
         }
     }
-    actor = SetN64_SpawnModelEffect(&D_80131600, &owner->spawn, id,
+    actor = SetN64_SpawnModelEffect(&g_modelEffectPool, &owner->spawn, id,
         object->rotation, position, (s32)world, 0);
     if (actor) {
         actor->state = 0;
@@ -148,16 +148,16 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
 static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchOwner *owner, s32 id,
         void *world, CVector3 position) {
     SpawnDispatchActor *actor;
-    if (id == 0xBD7 && D_801462C8.counters.m_bCTFOn && spawnBlocked()) {
+    if (id == 0xBD7 && g_gameSettings.counters.m_bCTFOn && spawnBlocked()) {
         return;
     }
-    if (id == 0x1388 && D_801462C8.controllerMode == 1) {
+    if (id == 0x1388 && g_gameSettings.controllerMode == 1) {
         id = *D_800E4680 + 0x1388;
         if (id == 0x1388) {
             return;
         }
     }
-    actor = SetN64_SpawnModelEffect(&D_80131600, &owner->spawn, id,
+    actor = SetN64_SpawnModelEffect(&g_modelEffectPool, &owner->spawn, id,
         object->rotation, position, (s32)world, 0);
     if (actor) {
         actor->state = 0;
@@ -168,7 +168,7 @@ static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchO
 
 static __inline__ void spawnParticles(SpawnDispatchObject *object, SpawnDispatchOwner *owner,
         CVector3 position, CVector3 velocity, s32 type, s32 *entry, void *world) {
-    if (Animpool_SpawnSceneEffect(&D_80131150, type, 0, (s32)entry, (s32)world, position,
+    if (Animpool_SpawnSceneEffect(&g_sceneEffectPool, type, 0, (s32)entry, (s32)world, position,
             object->scale, object->rotation, velocity, &owner->spawn)) {
         owner->remaining--;
     }
@@ -176,7 +176,7 @@ static __inline__ void spawnParticles(SpawnDispatchObject *object, SpawnDispatch
 
 static __inline__ void spawnGroup(SpawnDispatchObject *object, SpawnDispatchOwner *owner,
         CVector3 position, s32 count) {
-    owner->remaining -= Particle_SpawnEffectGroup((EffectSystem *)D_8011D8D0, (EffectActor *)object, (EffectActor *)object, &owner->spawn,
+    owner->remaining -= Particle_SpawnEffectGroup((EffectSystem *)g_actorParticleEffectSystem, (EffectActor *)object, (EffectActor *)object, &owner->spawn,
             0, count, object->rotation, object->motion, position, 0, -1, 0);
 }
 
@@ -184,12 +184,12 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 
 /* Retained ROM words preceding this unit's generated jump table. */
 #if defined(VERSION_EU)
-const u32 D_auto_rodata_unresolved_800C1D38[2] = {
+const u32 k_spawnaiConstantWords[2] = {
     0x00031880, 0x96230004,
 };
 #endif
 
-void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
+void SpawnAI_DispatchSpawnChoice(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
     CVector3 position;
     CVector3 velocity;
     WeightedTable picker;
@@ -241,7 +241,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
         first = -1;
         second = -1;
         third = -1;
-        if (((SpawnDispatchConfig *)&D_801462C8)->enabled) {
+        if (((SpawnDispatchConfig *)&g_gameSettings)->enabled) {
             if (definition->flags & 0x20) {
                 first = (s16)Lists_ChooseWeightedEntry((s16 *)spawnTable1());
             }
@@ -261,7 +261,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
             }
         } else {
             /* Configuration lies 0x1288 bytes into the shared runtime block. */
-            context = Playerai_GetFirstPlayer((u8 *)&D_801462C8 - 0x1288);
+            context = Playerai_GetFirstPlayer((u8 *)&g_gameSettings - 0x1288);
             if (!context) {
                 return;
             }
@@ -269,7 +269,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
                 Lists_ClearWeightedTable(&picker);
                 choice = spawnTable0();
                 while (choice->id != -1) {
-                    if (func_80222D64_de((void *)context, choice->id)) {
+                    if (Player_IsAmmoPickupBelowCapacity((void *)context, choice->id)) {
                         Lists_AppendWeightedEntry(&picker, choice->id, choice->weight);
                     }
                     choice++;
@@ -283,7 +283,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
                     choice = spawnTable3();
                 }
                 while (choice->id != -1) {
-                    if (func_8022ADB0_de((void *)context, choice->id)) {
+                    if (Playerai_IsHealthBelowThreshold((void *)context, choice->id)) {
                         Lists_AppendWeightedEntry(&picker, choice->id, choice->weight);
                     }
                     choice++;
@@ -313,13 +313,13 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
     }
 }
 
-void func_80205EC4_de(void *levelActor, void *actorMotionState) {
+void SpawnAI_InitializeActorDispatch(void *levelActor, void *actorMotionState) {
     LevelActor *actor = levelActor;
     ActorMotionState *state = actorMotionState;
     BreakableDefinition *inner = (BreakableDefinition *)actor->definition;
 
-    state->table = &D_800C854C;
-    state->update = &D_00206018;
+    state->table = &g_spawnActorDispatchTable;
+    state->update = &g_spawnCallbackRomEntry;
     if ((actor->type == 0x644) ||
         (inner->flags & 8)) {
         actor->flags &= ~0x2000;
@@ -327,22 +327,22 @@ void func_80205EC4_de(void *levelActor, void *actorMotionState) {
 }
 
 /* Starts an eligible actor action with a random delay and descriptor duration, applies its flags and callback, then clears the pending flag when required. */
-void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action) {
+void SpawnAI_InitializeActionDelay(ActorTriggerDescriptorView *actor, Action *action) {
     ActionInfo *info = &actor->desc->info;
-    if ((info->flags & 0x10) && (D_801462C8.local == 0 || D_801462C8.mode1E != 1)) {
+    if ((info->flags & 0x10) && (g_gameSettings.local == 0 || g_gameSettings.mode1E != 1)) {
         actor->flags &= ~0x100;
         return;
     }
-    action->delay = Graphu64_RandomBetween(D_800C1AC8_de, D_800C1ACC_de);
+    action->delay = Graphu64_RandomBetween(k_spawnActionMinimumDelay, k_spawnActionMaximumDelay);
     action->timer = 0;
     action->duration = info->duration;
     if (actor->model == 0x644 || (info->flags & 8)) actor->flags &= ~0x2000;
     Actor_RequestActorState(actor, action, 0);
-    if (!(info->flags & 0x10) || D_801462C8.mode1E == 1) return;
+    if (!(info->flags & 0x10) || g_gameSettings.mode1E == 1) return;
     actor->flags &= ~0x100;
 }
 
-void func_80206018_de(void *actor, EventRecAt30 *callbackRecord) {
+void SpawnAI_InvokeActiveActorCallback(void *actor, ActorLinkCallbackEvent *callbackRecord) {
     CallbackHolder *holder;
     s32 different;
 
@@ -356,6 +356,6 @@ void func_80206018_de(void *actor, EventRecAt30 *callbackRecord) {
 }
 
 /* ROM-grounded data: src/rw_pool_80205F18_C77B8_us_rev1.c */
-const unsigned int D_blob_2e03215b6ac2c405dd16[2] = {
+const unsigned int k_spawnaiFloatConstantWords[2] = {
     0x42340000, 0x42700000,
 };

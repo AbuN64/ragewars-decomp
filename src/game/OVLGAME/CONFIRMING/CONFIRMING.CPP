@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "OVLGAME/8043D54C.H"
+#include "OVLGAME/MENU_CONTROLLER_SELECTION_VIEW.H"
 #include "OVLGAME/SHAREDRECAT224.H"
 #include "TYPES.H"
 #include "COMMON/TRIPLE.H"
@@ -11,7 +11,7 @@
 #include "MENU/MISC/CONFIRMING_SETMENUCONTROLLERPAKENABLED.H"
 
 #if defined(VERSION_EU)
-unsigned int D_auto_rodata_unresolved_800EE97C[9] = {
+unsigned int g_confirmationDialogCallbackAddressWordsEu[9] = {
     0x00000000, 0x0043EA68, 0x0043EA98, 0x0043EAC8, 0x0043EAF8, 0x0043EB28, 0x0043EB58, 0x0043EB88,
     0x0043EBB8,
 };
@@ -21,85 +21,85 @@ unsigned int D_auto_rodata_unresolved_800EE97C[9] = {
 /* Selects a field's text according to its type and option byte. */
 #include "TYPES.H"
 
-extern char *D_800D3D14;
-extern char *D_800D3D18;
-extern char *D_800D3D1C;
-extern char *D_800D3D20;
-extern char *D_800D3D24;
-extern char *D_800D3D28;
-extern char *D_800D3D2C;
-extern char *D_800D3D30;
-extern char *D_800D3D34;
-extern char *D_800D3D38;
-extern char *D_800D3D3C;
-extern char *D_800D3D40;
-extern char *D_800D3D44;
-extern char *D_800D3D48;
-extern char *D_800D3D4C;
-extern char *D_800D3D50;
+extern char *g_menuToggleRow2EnabledText;
+extern char *g_menuToggleRow2DisabledText;
+extern char *g_menuToggleRow3EnabledText;
+extern char *g_menuToggleRow3DisabledText;
+extern char *g_menuToggleRow4EnabledText;
+extern char *g_menuToggleRow4DisabledText;
+extern char *g_menuToggleRow5EnabledText;
+extern char *g_menuToggleRow5DisabledText;
+extern char *g_menuToggleRow6EnabledText;
+extern char *g_menuToggleRow6DisabledText;
+extern char *g_menuToggleRow7EnabledText;
+extern char *g_menuToggleRow7DisabledText;
+extern char *g_menuToggleRow8EnabledText;
+extern char *g_menuToggleRow8DisabledText;
+extern char *g_menuToggleRow9EnabledText;
+extern char *g_menuToggleRow9DisabledText;
 #include "MENU/OPTION_TEXT_TYPE.H"
 
 
-s32 Confirming_SelectToggleRowText(func_8043DD30_S1 *arg0) {
-    s32 temp_v0;
+s32 Confirming_SelectToggleRowText(ToggleRowTextView *row) {
+    s32 optionType;
 
-    temp_v0 = arg0->unk0;
-    switch (temp_v0) {
+    optionType = row->toggleRow;
+    switch (optionType) {
     case 2:
     default:
-        if (D_801462C8.menuToggles[0] != 0) {
-            arg0->unk14 = &D_800D3D14;
+        if (g_gameSettings.menuToggles[0] != 0) {
+            row->text = &g_menuToggleRow2EnabledText;
         } else {
-            arg0->unk14 = &D_800D3D18;
+            row->text = &g_menuToggleRow2DisabledText;
         }
         break;
     case 3:
-        if (D_801462C8.menuToggles[1] != 0) {
-            arg0->unk14 = &D_800D3D1C;
+        if (g_gameSettings.menuToggles[1] != 0) {
+            row->text = &g_menuToggleRow3EnabledText;
         } else {
-            arg0->unk14 = &D_800D3D20;
+            row->text = &g_menuToggleRow3DisabledText;
         }
         break;
     case 4:
-        if (D_801462C8.menuToggles[2] != 0) {
-            arg0->unk14 = &D_800D3D24;
+        if (g_gameSettings.menuToggles[2] != 0) {
+            row->text = &g_menuToggleRow4EnabledText;
         } else {
-            arg0->unk14 = &D_800D3D28;
+            row->text = &g_menuToggleRow4DisabledText;
         }
         break;
     case 5:
-        if (D_801462C8.menuToggles[3] != 0) {
-            arg0->unk14 = &D_800D3D2C;
+        if (g_gameSettings.menuToggles[3] != 0) {
+            row->text = &g_menuToggleRow5EnabledText;
         } else {
-            arg0->unk14 = &D_800D3D30;
+            row->text = &g_menuToggleRow5DisabledText;
         }
         break;
     case 6:
-        if (D_801462C8.menuToggles[4] != 0) {
-            arg0->unk14 = &D_800D3D34;
+        if (g_gameSettings.menuToggles[4] != 0) {
+            row->text = &g_menuToggleRow6EnabledText;
         } else {
-            arg0->unk14 = &D_800D3D38;
+            row->text = &g_menuToggleRow6DisabledText;
         }
         break;
     case 7:
-        if (D_801462C8.menuToggles[5] != 0) {
-            arg0->unk14 = &D_800D3D3C;
+        if (g_gameSettings.menuToggles[5] != 0) {
+            row->text = &g_menuToggleRow7EnabledText;
         } else {
-            arg0->unk14 = &D_800D3D40;
+            row->text = &g_menuToggleRow7DisabledText;
         }
         break;
     case 8:
-        if (D_801462C8.menuToggles[6] != 0) {
-            arg0->unk14 = &D_800D3D44;
+        if (g_gameSettings.menuToggles[6] != 0) {
+            row->text = &g_menuToggleRow8EnabledText;
         } else {
-            arg0->unk14 = &D_800D3D48;
+            row->text = &g_menuToggleRow8DisabledText;
         }
         break;
     case 9:
-        if (D_801462C8.menuToggles[8] != 0) {
-            arg0->unk14 = &D_800D3D4C;
+        if (g_gameSettings.menuToggles[8] != 0) {
+            row->text = &g_menuToggleRow9EnabledText;
         } else {
-            arg0->unk14 = &D_800D3D50;
+            row->text = &g_menuToggleRow9DisabledText;
         }
         break;
     }
@@ -110,9 +110,9 @@ s32 Confirming_SelectToggleRowText(func_8043DD30_S1 *arg0) {
 /* note: Clears eight status bytes and selects the first available profile. */
 void SoundElement_DisableMusicGainOverride(void);
 unsigned int Control_IsAButtonPressed(void *);
-extern s32 D_8010F328;
-extern s32 D_80146302;
-extern struct SharedRecAt148 D_80142622[];
+extern s32 g_controllerProfiles;
+extern s32 g_playerPartnerNameFallback;
+extern struct ConfirmingControllerStatusView D_80142622[];
 
 
 
@@ -123,8 +123,8 @@ extern struct SharedRecAt148 D_80142622[];
 
 
 
-void Confirming_SelectConfirmingController(func_80250BD4_S1 *menuOwner) {
-    Shared_func_8043DEDC_S3 *settings;
+void Confirming_SelectConfirmingController(MenuControllerSelectionView *menuOwner) {
+    ConfirmingControllerSettingsView *settings;
     s8 *status;
     s32 *profile;
     s32 i;
@@ -132,17 +132,17 @@ void Confirming_SelectConfirmingController(func_80250BD4_S1 *menuOwner) {
     i = 7;
     status = (s8 *)&D_80142622[0];
     for (; i >= 0; i--) {
-        ((SharedRecAt148 *)status)->unk148 = 0;
+        ((ConfirmingControllerStatusView *)status)->unk148 = 0;
         status -= 0x96;
     }
     i = 0;
-    settings = (Shared_func_8043DEDC_S3 *)&D_80146302;
+    settings = (ConfirmingControllerSettingsView *)&g_playerPartnerNameFallback;
     for (; i < 4; i++) {
-        profile = (s32 *)((char *)&D_8010F328 + i * 0x224);
+        profile = (s32 *)((char *)&g_controllerProfiles + i * 0x224);
         if (Control_IsAButtonPressed(profile) != 0) {
-            settings->unk78 = 1;
-            settings->unk7F = i;
-            menuOwner->unk20 = profile;
+            settings->controllerSelected = 1;
+            settings->controllerIndex = i;
+            menuOwner->controllerProfile = profile;
             break;
         }
     }
@@ -159,12 +159,12 @@ extern void Control_DisableControllerPak(s32 arg);
 
 
 
-void Confirming_SetMenuControllerPakEnabled(void *arg0, s32 arg1) {
+void Confirming_SetMenuControllerPakEnabled(void *menuStorage, s32 enabled) {
     s32 val;
-    MenuRecAt20V2 *menu = arg0;
+    PlayerProfileMenuContext *menu = menuStorage;
 
-    val = menu->widget->unk4;
-    if (arg1 != 0) {
+    val = menu->widget->controllerPort;
+    if (enabled != 0) {
         Control_EnableControllerPak(val);
     } else {
         Control_DisableControllerPak(val);
@@ -172,16 +172,16 @@ void Confirming_SetMenuControllerPakEnabled(void *arg0, s32 arg1) {
 }
 
 #include "COMMON/SESSIONHANDLERROW.H"
-extern f32 D_800DE324_de;
+extern f32 g_confirmationDialogDefaultTimeLimit;
 
 void Confirming_InitMatchCounters(f32 duration, s32 mode, s32 option, s32 teams, s32 last) {
     s32 i;
-    CGameStatus *state = &D_801462C8.counters;
+    CGameStatus *state = &g_gameSettings.counters;
     CGameStatus *result;
     state->m_bFragTagOn = option;
     state->teams = teams;
     state->m_CTFPlayerWithFlag = 0;
-    state->timeLimit = duration * D_800DE320;
+    state->timeLimit = duration * g_confirmationDialogTimeScale;
     state->mask = 0xA00;
     state->mode = mode;
     state->elapsed = 0;
@@ -190,10 +190,10 @@ void Confirming_InitMatchCounters(f32 duration, s32 mode, s32 option, s32 teams,
         state->scores[i] = 0;
         state->counts[i] = 0;
     }
-    result = &D_801462C8.counters;
+    result = &g_gameSettings.counters;
     result->round = 0;
     result->state = 0;
     if (result->timeLimit == 0.0f) {
-        result->timeLimit = D_800DE324_de;
+        result->timeLimit = g_confirmationDialogDefaultTimeLimit;
     }
 }

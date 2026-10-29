@@ -1,7 +1,7 @@
 #include "COMMON/ENTRYRECATE.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
@@ -37,7 +37,7 @@ s32 Pickup_ApplyAmmoBundle(ActorPickupCanCollect *player, MultiChannelItemEffect
         Gsky_StartFade(player->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
-            Camera_PostScreenMessage(&D_80145088,
+            Camera_PostScreenMessage(&g_frontendScreenStatus,
                           player->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[g_languageIndex]);
@@ -56,7 +56,7 @@ s32 Pickup_ApplyAmmoBundle(ActorPickupCanCollect *player, MultiChannelItemEffect
     return 1;
 }
 
-void *Pickup_FindBonusEntry(s32 arg0) {
+void *Pickup_FindBonusEntry(s32 bonusId) {
     char *v1;
     s32 i;
     Shared_struct_D_800D34C0_0x18 *record;
@@ -66,7 +66,7 @@ void *Pickup_FindBonusEntry(s32 arg0) {
     do {
         record = (Shared_struct_D_800D34C0_0x18 *)v1;
         i -= 1;
-        if (record->id != arg0) {
+        if (record->id != bonusId) {
             v1 += 0x18;
         } else {
             return v1;
@@ -76,15 +76,15 @@ void *Pickup_FindBonusEntry(s32 arg0) {
 }
 
 /** Apply optional resource, sound, and callback effects for an actor. */
-void Pickup_ShowFeedback(void *arg0, void *resource, s32 sound, s32 callback) {
-    if (((Shared_ActorView *)arg0)->message != 0) {
-        Gsky_StartFade(((Shared_ActorView *)arg0)->message,
+void Pickup_ShowFeedback(void *recipientActor, void *resource, s32 sound, s32 callback) {
+    if (((Shared_ActorView *)recipientActor)->message != 0) {
+        Gsky_StartFade(((Shared_ActorView *)recipientActor)->message,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
-            Camera_PostScreenMessage(&D_80145088,
-                          ((Shared_ActorView *)arg0)->message,
+            Camera_PostScreenMessage(&g_frontendScreenStatus,
+                          ((Shared_ActorView *)recipientActor)->message,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                          ((void **)resource)[D_80145088.settings.language]);
+                          ((void **)resource)[g_frontendScreenStatus.settings.language]);
 #else
                           *(void **)resource);
 #endif
@@ -92,7 +92,7 @@ void Pickup_ShowFeedback(void *arg0, void *resource, s32 sound, s32 callback) {
     }
     if (sound != 0) {
         SoundElement_PlaySoundAtPosition((s16)sound,
-                      ((LevelActor *)arg0)->position0, 0, -1);
+                      ((LevelActor *)recipientActor)->position0, 0, -1);
     }
     if (callback != 0) {
         SoundElement_PlayDialogGroup(callback);
@@ -105,13 +105,13 @@ s32 Pickup_ToggleEffectAndFlash(Shared_ActorView *actorView) {
     f32 threshold;
     u32 converted;
 
-    actorView->field16D4 =
-        actorView->field16D4 == 0;
+    actorView->pickupEffectToggle =
+        actorView->pickupEffectToggle == 0;
     if (actorView->message != 0) {
-        input = D_800C62E0;
+        input = k_pickupBonusSelectionConstants;
         ((RacerViewport *)actorView->message)->pad124 = 0;
         value = Graphu64_RandomFloat(input);
-        threshold = (&D_800C62E0)[1];
+        threshold = (&k_pickupBonusSelectionConstants)[1];
         if (!(threshold <= value)) {
             converted = (s32)value;
         } else {
@@ -130,7 +130,7 @@ int Pickup_HandleItemUpdate(void) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802AD19C[1] = {
+unsigned int k_PickupApplyammobundleEncodedWords[1] = {
     0x5F437572,
 };
 #endif

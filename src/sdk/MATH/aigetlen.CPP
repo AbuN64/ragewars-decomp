@@ -8,6 +8,6 @@ unsigned int osAiGetStatus(void) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B7204[12] =
+char s_AigetlenTPmeTinyText[12] =
     "_t\015m_pmeTiny";
 #endif

@@ -1,7 +1,7 @@
 #include "ANIM/ANIMATION_FRAME.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "gbi.h"
 #include "TYPES.H"
@@ -21,15 +21,15 @@ struct Shared_AnimInfo;
 
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
-extern f32 D_800D2988;
-extern s32 D_800D297C;
-extern char D_80100030;
-extern s32 D_80140FF8;
-extern GlobalsMenuSetOptionsSceneSelection D_80140FE8_de;
+extern f32 g_frameElapsedTime;
+extern s32 g_lightingBufferIndex;
+extern char g_defaultProbeMotionSettings;
+extern s32 g_playerWeaponClassMode;
+extern GlobalsMenuSetOptionsSceneSelection g_gameplayCameraList;
 
-extern s32 D_801462C8;
+extern s32 g_gameSettings;
 
-extern char D_8011AF78;
+extern char g_particleSpriteVertices;
 
 void *Textload_RequestTextureVariation(s32 *, s32);
 void Textload_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
@@ -46,40 +46,40 @@ s32 Geometry_SetModePreset(s32);
 void Cache_UnlockResource(s32, void *);
 s32 Graphu64_NextRandom(void);
 
-static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, GameplayCamera *view) {
+static inline s32 Particle_IsSpriteOccluded(Shared_Particle *particle, GameplayCamera *view) {
     Shared_ParticleInstance *inst;
     s32 hit;
 
     inst = Gsky_FindScreenMessage(view);
-    if (inst != 0 && view->unk24 == 0) {
+    if (inst != 0 && view->bobSuppressed == 0) {
         Shared_ParticleInstance saved;
         saved = *inst;
         inst->pos = view->position;
-        hit = Unicol_MoveActorWithCollision(inst, particle->inst.pos, &D_80100030);
+        hit = Unicol_MoveActorWithCollision(inst, particle->inst.pos, &g_defaultProbeMotionSettings);
         *inst = saved;
     } else {
         Shared_ParticleInstance probe;
         probe = particle->inst;
         probe.pos = view->position;
-        hit = Unicol_MoveActorWithCollision(&probe, particle->inst.pos, &D_80100030);
+        hit = Unicol_MoveActorWithCollision(&probe, particle->inst.pos, &g_defaultProbeMotionSettings);
     }
     return hit;
 }
 
-static inline s32 func_8027ED6C_de_mode(Shared_Particle *particle) {
+static inline s32 Particle_GetSpriteViewMode(Shared_Particle *particle) {
     s32 mode = 0;
 
     if (particle->desc->flags & 0x2000000) {
         if (particle->flags & 2) {
             mode = 2;
-        } else if (D_801462E3 == 2) {
+        } else if (g_particleSpriteViewMode == 2) {
             mode = 1;
         }
     }
     return mode;
 }
 
-static inline s32 func_8027ED6C_de_scale(f32 value, f32 div) {
+static inline s32 Particle_GetNonnegativeScaledSpriteSize(f32 value, f32 div) {
     return (value < 0.0f) ? 0 : (s32)((s32)value / div);
 }
 
@@ -113,7 +113,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     u8 *envFrom;
     u8 *primFrom;
 
-    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityUsRev1 - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (particle->time < 0.0f) {
@@ -128,12 +128,12 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
         if (particle->inst.type != 0x60) {
             particle->time = 0.0f;
         }
-        hit = func_8027ED6C_de_occluded(particle, view);
+        hit = Particle_IsSpriteOccluded(particle, view);
         if (!hit) {
-            fade = particle->opacity + D_800D2988 * 128.0f;
+            fade = particle->opacity + g_frameElapsedTime * 128.0f;
             alpha = (fade > 255.0f) ? 255 : (s32)fade;
         } else {
-            fade = particle->opacity - D_800D2988 * 128.0f;
+            fade = particle->opacity - g_frameElapsedTime * 128.0f;
             alpha = (fade < 0.0f) ? 0 : (s32)fade;
         }
         particle->opacity = alpha;
@@ -170,7 +170,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
         prim[2] = 0;
     }
 
-    mode = func_8027ED6C_de_mode(particle);
+    mode = Particle_GetSpriteViewMode(particle);
     Textload_ReadTextureAnimationInfo(model, &info);
     frame = particle->frame;
     time = particle->time;
@@ -204,16 +204,16 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
             frame = Graphu64_NextRandom() % info.count;
             break;
         case 5:
-            if (particle->unk14F == -1) {
-                particle->unk14F = Graphu64_NextRandom() % info.count;
+            if (particle->fixedSpriteFrame == -1) {
+                particle->fixedSpriteFrame = Graphu64_NextRandom() % info.count;
             }
-            frame = particle->unk14F;
+            frame = particle->fixedSpriteFrame;
             break;
     }
 
     if (!(particle->flags & 0x100000)) {
-        if (D_80140FF8 == 1) {
-            GameplayCamera *camera = D_80140FE8_de.camera;
+        if (g_playerWeaponClassMode == 1) {
+            GameplayCamera *camera = g_gameplayCameraList.camera;
             CVector3 local;
             f32 depth;
             Graphu64_TransformPoint(camera->worldToView, &particle->inst.pos, &local);
@@ -221,11 +221,11 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
             if (depth < 0.0f) {
                 depth = -depth;
             }
-            Particle_BuildMatrix(particle, &particle->mtx[D_800D297C], camera, depth);
+            Particle_BuildMatrix(particle, &particle->mtx[g_lightingBufferIndex], camera, depth);
         } else {
-            Particle_BuildMatrix(particle, &particle->mtx[D_800D297C], 0, 0.0f);
+            Particle_BuildMatrix(particle, &particle->mtx[g_lightingBufferIndex], 0, 0.0f);
         }
-        particle->unk14E = frame;
+        particle->spriteFrame = frame;
         particle->flags |= 0x100000;
     }
     Graphu64_TransformPoint(view->worldToView, &particle->inst.pos, &viewPos);
@@ -233,10 +233,10 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     if (dist < 0.0f) {
         dist = -dist;
     }
-    if (D_80140FF8 == 1) {
-        gSPMatrix(g_displayListCursor++, &particle->mtx[D_800D297C], G_MTX_LOAD);
+    if (g_playerWeaponClassMode == 1) {
+        gSPMatrix(g_displayListCursor++, &particle->mtx[g_lightingBufferIndex], G_MTX_LOAD);
     } else {
-        mtx = Map_ReserveEntries(&D_8011FFB0, 1);
+        mtx = Map_ReserveEntries(&g_actorMatrixPool, 1);
         if (mtx == 0) {
             Cache_UnlockResource(0, model);
             return;
@@ -270,9 +270,9 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     } else if ((desc->flags & 0x400) && desc->fade->unkE != 4) {
         Geometry_SetModePreset(0xF);
     } else if (desc->flags & 0x4000) {
-        Geometry_SetModePreset(!(D_801462C8 & 0x200) ? 0xD : 0x11);
+        Geometry_SetModePreset(!(g_gameSettings & 0x200) ? 0xD : 0x11);
     } else {
-        Geometry_SetModePreset((D_801462C8 & 0x200) ? 0x12 : 0x13);
+        Geometry_SetModePreset((g_gameSettings & 0x200) ? 0x12 : 0x13);
     }
 
     alpha = 0xFF;
@@ -287,7 +287,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     if (duration != -1) {
         f32 left = particle->life - time;
         if ((left < 0.0f ? 0.0f : left) < duration) {
-            alpha = func_8027ED6C_de_scale(alpha * (particle->life - time), duration + 1.0f);
+            alpha = Particle_GetNonnegativeScaledSpriteSize(alpha * (particle->life - time), duration + 1.0f);
         }
     }
     if (view->farPlane < -0.0001f || view->farPlane > 0.0001f) {
@@ -324,7 +324,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
         }
     }
     alpha = (alpha > 255 ? 255 : alpha) < 0 ? 0 : (alpha > 255 ? 255 : alpha);
-    gSPVertex(g_displayListCursor++, &D_8011AF78, 4, 0);
+    gSPVertex(g_displayListCursor++, &g_particleSpriteVertices, 4, 0);
     if (textured) {
         gSPTextureL(g_displayListCursor++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
         }

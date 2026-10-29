@@ -1,7 +1,7 @@
 
 /* ROM-grounded data: src/huffman_initial_block_ranges.c */
 #ifdef VERSION_DE
-unsigned int D_blob_phase2_98d8073aceac7537e5aa[7523] = {
+unsigned int g_AudioDecodeframeEncodedWords[7523] = {
     0x00000001, 0x00000000, 0x00000010, 0x00000000, 0x800D553C, 0x00000000, 0x00000000, 0x00000023,
     0x00000000, 0x800D54D0, 0x00000000, 0x00000023, 0x00000059, 0x00000000, 0x800D54F4, 0x00000000,
     0x0000007C, 0x00000084, 0x00000000, 0x800D5518, 0x28202031, 0x31202020, 0x30277320, 0x29200000,
@@ -954,7 +954,7 @@ struct {
     unsigned int w4[1069];
     unsigned char b5[16];
     unsigned int w6[5801];
-} D_blob_phase2_98d8073aceac7537e5aa = {
+} g_AudioDecodeframeEncodedWords = {
     {
         0x00000001, 0x00000000, 0x00000010, 0x00000000, 0x800E5BBC, 0x00000000, 0x00000000, 0x00000023,
         0x00000000, 0x800E5B50, 0x00000000, 0x00000023, 0x00000059, 0x00000000, 0x800E5B74, 0x00000000,
@@ -1924,7 +1924,7 @@ struct {
     unsigned int w4[1069];
     unsigned char b5[16];
     unsigned int w6[5801];
-} D_blob_phase2_98d8073aceac7537e5aa = {
+} g_AudioDecodeframeEncodedWords = {
     {
         0x00000001, 0x00000000, 0x00000010, 0x00000000, 0x800E0D7C, 0x00000000, 0x00000000, 0x00000023,
         0x00000000, 0x800E0D10, 0x00000000, 0x00000023, 0x00000059, 0x00000000, 0x800E0D34, 0x00000000,
@@ -2894,7 +2894,7 @@ struct {
     unsigned int w4[1069];
     unsigned char b5[16];
     unsigned int w6[5801];
-} D_blob_phase2_98d8073aceac7537e5aa = {
+} g_AudioDecodeframeEncodedWords = {
     {
         0x00000001, 0x00000000, 0x00000010, 0x00000000, 0x800D41EC, 0x00000000, 0x00000000, 0x00000023,
         0x00000000, 0x800D4180, 0x00000000, 0x00000023, 0x00000059, 0x00000000, 0x800D41A4, 0x00000000,
@@ -3856,7 +3856,7 @@ struct {
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_98d8073aceac7537e5aa[20] = {
+unsigned int g_AudioDecodeframeEncodedWords[20] = {
     0x00000001, 0x00000000, 0x00000010, 0x00000000, 0x800D956C, 0x00000000, 0x00000000, 0x00000023,
     0x00000000, 0x800D9500, 0x00000000, 0x00000023, 0x00000059, 0x00000000, 0x800D9524, 0x00000000,
     0x0000007C, 0x00000084, 0x00000000, 0x800D9548,

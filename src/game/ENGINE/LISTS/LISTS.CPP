@@ -14,17 +14,17 @@ void Lists_ClearHeader(ListHeader *list) {
     list->count = 0;
 }
 /** Push a node onto the front of a doubly-linked list. */
-void Lists_PrependNode(void *listHeader, void *arg1) {
+void Lists_PrependNode(void *listHeader, void *node) {
     if ((((struct ListHeader *) ((s8 *) listHeader))->count) == 0) {
-        (((struct ListHeader *) ((s8 *) listHeader))->head) = arg1;
-        (((struct ListHeader *) ((s8 *) listHeader))->tail) = arg1;
-        (((struct Shape_typemap_3 *) ((s8 *) arg1))->field_0) = 0;
-        (((struct func_80203E78_S1 *) ((s8 *) arg1))->unk4) = 0;
+        (((struct ListHeader *) ((s8 *) listHeader))->head) = node;
+        (((struct ListHeader *) ((s8 *) listHeader))->tail) = node;
+        (((struct AnimationEventMaskView *) ((s8 *) node))->value) = 0;
+        (((struct ResourceKeyView *) ((s8 *) node))->key) = 0;
     } else {
-        (((struct Field_void_4 *) ((s8 *) arg1))->value) = (((struct ListHeader *) ((s8 *) listHeader))->head);
-        (((struct Shape_typemap_3 *) ((s8 *) arg1))->field_0) = 0;
-        (((struct func_80284AF4_G2 *) ((s8 *) ((struct ListHeader *) ((s8 *) listHeader))->head))->unk0) = arg1;
-        (((struct ListHeader *) ((s8 *) listHeader))->head) = arg1;
+        (((struct Field_void_4 *) ((s8 *) node))->value) = (((struct ListHeader *) ((s8 *) listHeader))->head);
+        (((struct AnimationEventMaskView *) ((s8 *) node))->value) = 0;
+        (((struct ListPreviousLinkView *) ((s8 *) ((struct ListHeader *) ((s8 *) listHeader))->head))->previous) = node;
+        (((struct ListHeader *) ((s8 *) listHeader))->head) = node;
     }
     (((struct ListHeader *) ((s8 *) listHeader))->count) = (((struct ListHeader *) ((s8 *) listHeader))->count) + 1;
 }
@@ -34,11 +34,11 @@ s32 Lists_Append(void *listHeader, void *newNode) {
     if ((((struct ListHeader *) ((s8 *) listHeader))->count) == 0) {
         (((struct ListHeader *) ((s8 *) listHeader))->head) = newNode;
         (((struct ListHeader *) ((s8 *) listHeader))->tail) = newNode;
-        (((struct Shape_typemap_3 *) ((s8 *) newNode))->field_0) = 0;
-        (((struct func_80203E78_S1 *) ((s8 *) newNode))->unk4) = 0;
+        (((struct AnimationEventMaskView *) ((s8 *) newNode))->value) = 0;
+        (((struct ResourceKeyView *) ((s8 *) newNode))->key) = 0;
     } else {
-        (((struct func_80284AF4_G2 *) ((s8 *) newNode))->unk0) = (((struct ListHeader *) ((s8 *) listHeader))->tail);
-        (((struct func_80203E78_S1 *) ((s8 *) newNode))->unk4) = 0;
+        (((struct ListPreviousLinkView *) ((s8 *) newNode))->previous) = (((struct ListHeader *) ((s8 *) listHeader))->tail);
+        (((struct ResourceKeyView *) ((s8 *) newNode))->key) = 0;
         (((struct Field_void_4 *) ((s8 *) ((struct ListHeader *) ((s8 *) listHeader))->tail))->value) = newNode;
         (((struct ListHeader *) ((s8 *) listHeader))->tail) = newNode;
     }
@@ -96,11 +96,11 @@ void Lists_InitFromPool(ListHeader *lists, void *pool, s32 stride, s32 count) {
         pool = (char *)pool + stride;
     }
 }
-ListLink *Lists_MoveHeadToInactiveList(Lists18 *arg0) {
+ListLink *Lists_MoveHeadToInactiveList(Lists18 *lists) {
     ListLink *node;
     ListLink *tail;
     List802795C0 *inactive;
-    node = arg0->active.head;
+    node = lists->active.head;
     if (node != 0) {
         if (node->prev != 0) {
             node->prev->next = node->next;
@@ -108,14 +108,14 @@ ListLink *Lists_MoveHeadToInactiveList(Lists18 *arg0) {
         if (node->next != 0) {
             node->next->prev = node->prev;
         }
-        if (arg0->active.head == node) {
-            arg0->active.head = node->prev;
+        if (lists->active.head == node) {
+            lists->active.head = node->prev;
         }
-        if (arg0->active.tail == node) {
-            arg0->active.tail = node->next;
+        if (lists->active.tail == node) {
+            lists->active.tail = node->next;
         }
-        arg0->active.count -= 1;
-        inactive = &arg0->inactive;
+        lists->active.count -= 1;
+        inactive = &lists->inactive;
         if (inactive->count == 0) {
             inactive->head = node;
             inactive->tail = node;
@@ -132,44 +132,44 @@ ListLink *Lists_MoveHeadToInactiveList(Lists18 *arg0) {
     }
     return node;
 }
-void Lists_MoveNodeToActiveList(Lists18 *arg0, ListLink *arg1) {
+void Lists_MoveNodeToActiveList(Lists18 *lists, ListLink *node) {
     List802795C0 *inactive;
     ListLink *tail;
-    inactive = &arg0->inactive;
-    if (arg1->prev != 0) {
-        arg1->prev->next = arg1->next;
+    inactive = &lists->inactive;
+    if (node->prev != 0) {
+        node->prev->next = node->next;
     }
-    if (arg1->next != 0) {
-        arg1->next->prev = arg1->prev;
+    if (node->next != 0) {
+        node->next->prev = node->prev;
     }
-    if (inactive->head == arg1) {
-        inactive->head = arg1->prev;
+    if (inactive->head == node) {
+        inactive->head = node->prev;
     }
-    if (inactive->tail == arg1) {
-        inactive->tail = arg1->next;
+    if (inactive->tail == node) {
+        inactive->tail = node->next;
     }
     inactive->count -= 1;
-    if (arg0->active.count == 0) {
-        arg0->active.head = arg1;
-        arg0->active.tail = arg1;
-        arg1->next = 0;
-        arg1->prev = 0;
+    if (lists->active.count == 0) {
+        lists->active.head = node;
+        lists->active.tail = node;
+        node->next = 0;
+        node->prev = 0;
     } else {
-        tail = arg0->active.tail;
-        arg1->prev = 0;
-        arg1->next = tail;
-        arg0->active.tail->prev = arg1;
-        arg0->active.tail = arg1;
+        tail = lists->active.tail;
+        node->prev = 0;
+        node->next = tail;
+        lists->active.tail->prev = node;
+        lists->active.tail = node;
     }
-    arg0->active.count += 1;
+    lists->active.count += 1;
 }
-s16 Lists_ChooseWeightedEntry(s16 *arg0) {
+s16 Lists_ChooseWeightedEntry(s16 *weightedEntries) {
     s16 *entry;
     s16 *start;
     s32 random;
     s32 total;
     s32 value;
-    entry = arg0;
+    entry = weightedEntries;
     total = 0;
     start = entry;
     if (*entry != -1) {
@@ -195,17 +195,17 @@ s16 Lists_ChooseWeightedEntry(s16 *arg0) {
 void Lists_ClearWeightedTable(WeightedTable *object) {
     object->count = 0;
 }
-s32 Lists_AppendWeightedEntry(WeightedTable *arg0, s16 arg1, s16 arg2)
+s32 Lists_AppendWeightedEntry(WeightedTable *table, s16 value, s16 weight)
 {
-  s16 temp_v1;
-  temp_v1 = arg0->count;
-  if (temp_v1 == 0x18)
+  s16 entryIndex;
+  entryIndex = table->count;
+  if (entryIndex == 0x18)
   {
     return 0;
   }
-  arg0->entries[temp_v1][0] = arg1;
-  arg0->entries[arg0->count][1] = arg2;
-  arg0->count = ((u16) arg0->count) + 1;
+  table->entries[entryIndex][0] = value;
+  table->entries[table->count][1] = weight;
+  table->count = ((u16) table->count) + 1;
   return 1;
 }
 s16 Lists_ChooseWeightedTableEntry(WeightedTable *weightedTable) {

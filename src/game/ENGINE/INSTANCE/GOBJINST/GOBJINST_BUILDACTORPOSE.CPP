@@ -10,42 +10,42 @@
 /* Builds and packs the animated part matrices of an actor, then updates the
  * frame timing totals. */
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
-#include "FX/80246E34_10.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "FX/ACTOR_POSE_ANGLE_TABLE.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Complete nonpadded pose records recovered from the pinned shared pose header. */
 typedef struct Shared_PoseJointRef Shared_PoseJointRef;
 struct Shared_PoseJointRef {
-    s16 pos; 
-    s16 rot; 
+    s16 pos;
+    s16 rot;
 };
 
 typedef struct Shared_PoseDefaultFrame Shared_PoseDefaultFrame;
 struct Shared_PoseDefaultFrame {
-    CVector3 pos;  
-    s16 rot[4]; 
+    CVector3 pos;
+    s16 rot[4];
 };
 
 typedef struct Shared_PoseTrack Shared_PoseTrack;
 struct Shared_PoseTrack {
-    Shared_PoseJointRef *joints;     
-    Shared_PoseDefaultFrame *frames; 
-    void *posTable;                  
-    void *rotTable;                  
-    s32 rotFrame0;                   
-    s32 rotFrame1;                   
-    s32 posFrame0;                   
-    s32 posFrame1;                   
-    f32 blend;                       
+    Shared_PoseJointRef *joints;
+    Shared_PoseDefaultFrame *frames;
+    void *posTable;
+    void *rotTable;
+    s32 rotFrame0;
+    s32 rotFrame1;
+    s32 posFrame0;
+    s32 posFrame1;
+    f32 blend;
 };
 
 typedef struct Shared_PoseFlags Shared_PoseFlags;
 struct Shared_PoseFlags {
-    s32 frame; 
-    s32 blend; 
-    s32 mode;  
+    s32 frame;
+    s32 blend;
+    s32 mode;
 };
 typedef struct Shared_FrameProfile Shared_FrameProfile;
 struct Shared_FrameProfile {
@@ -54,7 +54,7 @@ struct Shared_FrameProfile {
     s32 frame;
     s32 prevCount;
     s32 count;
-    u32 unknown1C;
+    u32 reservedWord;
     f32 prev;
     f32 cur;
     f32 avg;
@@ -63,27 +63,27 @@ struct Shared_FrameProfile {
 typedef f32 PoseMatrix[4][4];
 typedef void (*PoseCallback)(PoseMatrix, Shared_PoseContext *);
 
-extern char D_800C3930_de;
+extern char g_actorRotationBlendAndResourceTuning;
 
 
-extern s32 D_800D2978;
-extern s32 D_800D297C;
-extern Shared_FrameProfile D_80100530;
+extern s32 g_gameFrameCounter;
+extern s32 g_lightingBufferIndex;
+extern Shared_FrameProfile g_actorPoseTiming;
 
 
 
 
 
-extern s32 D_801462C8;
+extern s32 g_gameSettings;
 
 extern s32 Cinema_IsSequenceInWindow(void);
-extern void func_80247F18_de(Shared_PoseActor *, Shared_PosePart *, PoseMatrix, CVector3, CVector3, s32);
-extern void func_802480F0_de(Shared_PoseActor *, s32, PoseMatrix);
+extern void Gobjinst_ApplyImpactBoneTwist(Shared_PoseActor *, Shared_PosePart *, PoseMatrix, CVector3, CVector3, s32);
+extern void Gobjinst_ApplyTimedMatrixWobble(Shared_PoseActor *, s32, PoseMatrix);
 extern f32 Gobjinst_GetActorHeight(Shared_PoseActor *);
 extern void Gastate_SwitchRequestedAnimation(Shared_AnimState *, s32, s32, s32, s32, s32);
 extern void Gastate_PrepareAnimationFrames();
-extern void func_802624A8_de(Shared_AnimState *);
-extern s32 func_802624D8_de(Shared_AnimState *);
+extern void Gastate_ReleaseAnimationResource(Shared_AnimState *);
+extern s32 Gastate_IsAnimationResourceRetained(Shared_AnimState *);
 extern void Ghot_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
 extern void Graphu64_MultiplyAffineMatrices(PoseMatrix, PoseMatrix, PoseMatrix);
 extern void Graphu64_ConvertMatrixToFloat(PoseMatrix, u8 *);
@@ -120,7 +120,7 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         turn.y = cur[3][1];
         turn.z = cur[3][2];
         axis = part->unk_18;
-        angle = D_800D06C0[0x19 - part->unk_12] * 0.5f;
+        angle = g_boneTwistImpulseCurve[0x19 - part->unk_12] * 0.5f;
         angle *= 0.3f;
         angle *= (n == 5 ? -2.0f : (f32)n);
         CopyMatrix(inv, cur);
@@ -299,31 +299,31 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
     world = 0;
     ctx.parts = SetN64_GetPackSection(modelPack, 5);
     count = ctx.parts->count;
-    actor->handle = Map_ReserveEntries(&D_8011FFB0, count);
+    actor->handle = Map_ReserveEntries(&g_actorMatrixPool, count);
     if (actor->handle == 0) {
         return 0;
     }
     ret = 0;
     isRoot = actor->flags & 1;
     isKind9 = actor->model->kind == 9;
-    mem = Cache_RequestResource(0, actor->unk_C8, actor->unk_C8, ((actor->unk_E6 * 4) + 0xF) & ~7, 4, 0, 0, &D_800C3930_de + 4, 0);
+    mem = Cache_RequestResource(0, actor->unk_C8, actor->unk_C8, ((actor->unk_E6 * 4) + 0xF) & ~7, 4, 0, 0, &g_actorRotationBlendAndResourceTuning + 4, 0);
     skip = ret;
     if (mem != 0) {
         animA = &actor->animA;
         animB = &actor->animB;
         Gastate_SwitchRequestedAnimation(animA, *mem, actor->unk_C8, 0, 0, 0);
-        if (func_802624D8_de(animA)) {
+        if (Gastate_IsAnimationResourceRetained(animA)) {
             if (actor->flags & 0x400) {
                 Gastate_SwitchRequestedAnimation(animB, *mem, actor->unk_C8, 0, 0, 0);
-                f.blend = func_802624D8_de(animB);
+                f.blend = Gastate_IsAnimationResourceRetained(animB);
             } else {
                 f.blend = 0;
             }
             ctx.actor = actor;
             ctx.handle = actor->handle;
             ctx.mtx = &mtx[1];
-            ctx.arg2 = model;
-            ctx.arg1 = modelPack;
+            ctx.model = model;
+            ctx.modelPack = modelPack;
             ctx.animA = animA;
             ctx.animB = animB;
             f.frame = (!isRoot || isKind9) && !skip;
@@ -363,7 +363,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                 f.mode = 1;
             }
             if (!(actor->flags & 0x200000) && (kind == 1 || kind == 11)) {
-                if (D_801462C8 & 0x100) {
+                if (g_gameSettings & 0x100) {
                     id0 = 0xC3;
                     id1 = 0xC7;
                     id2 = 0xC2;
@@ -375,10 +375,10 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                     id3 = -1;
                 }
                 id4 = -1;
-                if (D_801462C8 & 0x20) {
+                if (g_gameSettings & 0x20) {
                     id4 = 1;
                 }
-                if (D_801462C8 & 0x80) {
+                if (g_gameSettings & 0x80) {
                     scaled = 1;
                     Graphu64_ScaleVector(&scale, &scale, 0.5f);
                 }
@@ -405,7 +405,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
             mtx[0][3][3] = 65536.0f;
             out = (u32 *)actor->handle;
             i = 0;
-            D_80100530.start = func_802BCF00_de();
+            g_actorPoseTiming.start = Util_ReadProcessorCount();
             cur = &mtx[1];
             for (; i < count; cur++, out += 16, i++) {
                 Shared_PosePartEntry *entry;
@@ -466,12 +466,12 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                         CVector3 r = randVec();
 
                         Graphu64_ConvertMatrixToFloat(bone, actor->unk_B8 + i * 64);
-                        func_80247F18_de(actor, &actor->part, bone, actor->pos, r, i);
+                        Gobjinst_ApplyImpactBoneTwist(actor, &actor->part, bone, actor->pos, r, i);
                     }
                     world->unk_1218 = 0;
                 }
                 if (actor->flags & 0x800000) {
-                    func_802480F0_de(actor, partFlags, *cur);
+                    Gobjinst_ApplyTimedMatrixWobble(actor, partFlags, *cur);
                 }
                 if (partFlags == id0) {
                     id0 = -1;
@@ -497,24 +497,24 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                     packMtx(out, *cur);
                 }
             }
-            dt = func_802BCF00_de() - D_80100530.start;
-            if (D_800D2978 != D_80100530.frame) {
-                f32 last = D_80100530.cur;
-                s32 n = D_80100530.count;
+            dt = Util_ReadProcessorCount() - g_actorPoseTiming.start;
+            if (g_gameFrameCounter != g_actorPoseTiming.frame) {
+                f32 last = g_actorPoseTiming.cur;
+                s32 n = g_actorPoseTiming.count;
 
-                D_80100530.frame = D_800D2978;
-                D_80100530.cur = 0.0f;
-                D_80100530.count = 0;
-                D_80100530.prev = last;
-                D_80100530.prevCount = n;
-                D_80100530.avg = D_80100530.avg * 0.97f + last * 0.03f;
+                g_actorPoseTiming.frame = g_gameFrameCounter;
+                g_actorPoseTiming.cur = 0.0f;
+                g_actorPoseTiming.count = 0;
+                g_actorPoseTiming.prev = last;
+                g_actorPoseTiming.prevCount = n;
+                g_actorPoseTiming.avg = g_actorPoseTiming.avg * 0.97f + last * 0.03f;
             }
-            D_80100530.cur += (f32)(((u64)dt * 64) / 3000);
-            D_80100530.count++;
+            g_actorPoseTiming.cur += (f32)(((u64)dt * 64) / 3000);
+            g_actorPoseTiming.count++;
             if (f.blend) {
-                func_802624A8_de(animB);
+                Gastate_ReleaseAnimationResource(animB);
             }
-            func_802624A8_de(animA);
+            Gastate_ReleaseAnimationResource(animA);
             switch (kind) {
                 case 4:
                     actor->unk_70 = actor->model->unk_38;
@@ -558,14 +558,14 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                     }
                 }
             }
-            if (actor->unk_13B) {
-                Fx_AddActorRibbonSamples(&D_801379C0, actor, &mtx[1]);
+            if (actor->effectReferenceCount) {
+                Fx_AddActorRibbonSamples(&g_actorParticleScene, actor, &mtx[1]);
             }
             if (!(actor->flags & 8)) {
                 pos = actor->pos;
                 pos.y += actor->unk_70;
                 pos.y += Gobjinst_GetActorHeight(actor) * 0.5f;
-                Scene_SampleWorldLighting(&g_world, &pos, actor->unk_140[D_800D297C]);
+                Scene_SampleWorldLighting(&g_world, &pos, actor->unk_140[g_lightingBufferIndex]);
             }
             ret = 1;
             actor->flags |= 0x200;
@@ -580,7 +580,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
 
 #include "COMMON/VIEWFLAGS.H"
 #include "gbi.h"
-extern char D_800C3A20_de[];
+extern char s_actorModelVariantResourceTag[];
 extern Gfx *g_displayListCursor;
 typedef struct SceneModelRef {
     u8 pad0[0x1C];
@@ -644,12 +644,12 @@ void Gobjinst_DrawVisibleCachedActor(SceneObject *object, struct RacerViewport *
         object->flags &= ~0x200;
         return;
     }
-    mem = Cache_RequestResource(0, object->resource, object->resource, object->resourceFlags, 0, 0, 0, D_800C3A20_de, 1);
+    mem = Cache_RequestResource(0, object->resource, object->resource, object->resourceFlags, 0, 0, 0, s_actorModelVariantResourceTag, 1);
     if (mem == 0) {
         return;
     }
     model = SetN64_GetPackSection(*mem, 0);
-    if (D_8011FAC0.clockPaused != 0) {
+    if (g_gameSession.clockPaused != 0) {
         object->update(object, &object->behaviorFlags);
         Graphu64_TransformBoundingBox(object->transform, (s32)model, &object->bounds);
     }

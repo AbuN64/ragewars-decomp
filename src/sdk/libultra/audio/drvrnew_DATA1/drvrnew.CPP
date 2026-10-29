@@ -3,7 +3,7 @@
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800CC840 */
-const unsigned int D_blob_phase2_65373cfd01a52ee32139[2] = {
+const unsigned int g_lowPassFixedPointScale_StorageWords[2] = {
     0x40D00000, 0x00000000,
 };
 #endif

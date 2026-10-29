@@ -5,8 +5,8 @@
 .section .text
 .globl Libgultra_TrwExceptionHandler
 Libgultra_TrwExceptionHandler:
-    lui $k0, %hi(D_800F3130)
-    addiu $k0, $k0, %lo(D_800F3130)
+    lui $k0, %hi(g_debugExceptionContext)
+    addiu $k0, $k0, %lo(g_debugExceptionContext)
     sd $at, 0x328($k0)
     sd $v0, 0x330($k0)
     mfc0 $at, $13
@@ -142,16 +142,16 @@ Libgultra_TrwExceptionHandler:
     sd $ra, 0xF8($k0)
     jal Libgultra_TrwExceptionTail1
     nop
-    lui $sp, %hi(D_800F3CB0)
-    addiu $sp, $sp, %lo(D_800F3CB0)
+    lui $sp, %hi(g_debugExceptionStackTop)
+    addiu $sp, $sp, %lo(g_debugExceptionStackTop)
     jal Libsn_ServiceHostCommands
     nop
     jal Libgultra_TrwCacheFlush0
     nop
     jal Libgultra_TrwCacheFlush1
     nop
-    lui $k0, %hi(D_800F3130)
-    addiu $k0, $k0, %lo(D_800F3130)
+    lui $k0, %hi(g_debugExceptionContext)
+    addiu $k0, $k0, %lo(g_debugExceptionContext)
     addiu $at, $zero, 0x1
     sb $at, 0x320($k0)
     ld $t0, 0x108($k0)

@@ -121,15 +121,15 @@ f32 CPlane_GetSlopeAngle(Plane *p,f32 x0,f32 z0,f32 x1,f32 z1) {
 /* 8023EEF0_16.CPP */
 void CPlane_ResetContact(void *contactStorage)
 {
-    ObjRecAtCC *arg0_record = contactStorage;
-  int new_var;
-  f32 new_var2;
-  new_var2 = (f32) D_800C373C_de;
-  arg0_record->unk0 = 0;
-  arg0_record->unk54 = 0;
-  new_var = -1;
-  arg0_record->unk58 = new_var;
-  arg0_record->unkCC = new_var2;
+    PlaneContactStorageView *contact = contactStorage;
+  int invalidContact;
+  f32 initialContactDistance;
+  initialContactDistance = (f32) g_planeInitialContactDistance;
+  contact->unk0 = 0;
+  contact->unk54 = 0;
+  invalidContact = -1;
+  contact->unk58 = invalidContact;
+  contact->unkCC = initialContactDistance;
 }
 
 /* 802406C0_2.CPP */

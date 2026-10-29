@@ -1,52 +1,52 @@
-#include "COMMON/EXTERNS_18.H"
-#include "COMMON/LONE/D_80106248.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
+#include "COMMON/LONE/RESOURCE_REQUEST_QUEUE.H"
 #include "COMMON/MANAGER.H"
 #include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
-#include "COMMON/EXTERNS_10.H"
-#include "COMMON/ARG.H"
+#include "COMMON/TRIGGER_AND_FLOAT_VALUE_OPERATIONS.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/S1.H"
 #include "sdk/os.h"
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "SYSTEM/LIST.H"
 
-extern Manager D_801047E0;
-extern s32 D_80100570;
-extern u32 D_80101190;
-extern ResourceHashEntry *D_80101194;
-extern struct CartridgeReadWorker D_801011B8;
-extern s32 D_80105180;
-extern void func_80255FB8_de(void *, s32);
+extern Manager g_resourceRequestManager;
+extern s32 g_resourceRecencyList;
+extern u32 g_resourceHashEvenIndexMask;
+extern ResourceHashEntry *g_resourceHashBuckets;
+extern struct CartridgeReadWorker g_cartridgeReadWorker;
+extern s32 g_resourceCacheFrameStamp;
+extern void List_MoveIntrusiveToHead(void *, s32);
 extern void *Cache_AcquireLoadRequestWithEviction(s32, s32);
 extern void *Cache_AcquireResourceNodeWithEviction(s32, s32);
-extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 entryAddress);
 extern void Cache_InsertResourceByAddress(s32 unused, void *object);
-extern s32 func_80255170_de(s32 *, ResourceLoadRequest *);
+extern s32 Cache_SubmitResourceLoadAndWait(s32 *, ResourceLoadRequest *);
 extern ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest *request, s32 dropReference);
-extern void func_8025637C_de(struct CartridgeReadWorker *, u32, s32, void *);
-extern void func_80256454_de(struct CartridgeReadWorker *, u32, s32, void *, struct Queue *, s32, s32);
+extern void Cartridge_ReadChunksAndWait(struct CartridgeReadWorker *, u32, s32, void *);
+extern void Cartridge_SubmitReadChunks(struct CartridgeReadWorker *, u32, s32, void *, struct Queue *, s32, s32);
 
 static inline void acquire(void) {
     u32 token = __osDisableInt();
-    s32 count = D_8010515C + 1;
-    D_8010515C = count;
+    s32 count = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = count;
     if (count != 1) {
         __osRestoreInt(token);
-        osRecvMesg(D_801047E0.lock, 0, 1);
+        osRecvMesg(g_resourceRequestManager.lock, 0, 1);
     } else __osRestoreInt(token);
 }
 static inline void release(void) {
     u32 token = __osDisableInt();
-    s32 count = D_8010515C - 1;
-    D_8010515C = count;
+    s32 count = g_resourceHeapLockUsers - 1;
+    g_resourceHeapLockUsers = count;
     if (count != 0) {
         __osRestoreInt(token);
-        osSendMesg(D_801047E0.lock, 0, 1);
+        osSendMesg(g_resourceRequestManager.lock, 0, 1);
     } else __osRestoreInt(token);
 }
 static inline void find(u32 key, ResourceLoadRequest **out) {
-    ResourceHashEntry *node = D_80101194 + (((key<<5)^(key>>1)^(key>>9)^(key>>17))&D_80101190);
+    ResourceHashEntry *node = g_resourceHashBuckets + (((key<<5)^(key>>1)^(key>>9)^(key>>17))&g_resourceHashEvenIndexMask);
     if (node->key != key) goto not_initial;
     *out=node->value;
     goto done;
@@ -67,8 +67,8 @@ static inline void addref(CachedResource *node) {
     node->flags |= 0x100;
 }
 static inline void stamp(CachedResource *node) {
-    node->stamp=D_80105180;
-    func_80255FB8_de(&D_80100570,(s32)node);
+    node->stamp=g_resourceCacheFrameStamp;
+    List_MoveIntrusiveToHead(&g_resourceRecencyList,(s32)node);
 }
 static inline CachedResource *allocate(u32 size, u32 flags) {
     CachedResource *node=Cache_AcquireResourceNodeWithEviction(0,flags);
@@ -106,11 +106,11 @@ void *Cache_RequestResource(s32 unused, u32 key, u32 source, u32 size,
         release();
         return request->node;
     }
-    direct |= D_801047E0.mask;
+    direct |= g_resourceRequestManager.mask;
     busy=0;
     if(direct!=0) allocated=Cache_AcquireLoadRequestWithEviction(0,mode);
     else {
-        scan=D_801047E0.active.head;
+        scan=g_resourceRequestManager.active.head;
         while(scan!=0) {
             if(scan->key==key && size<=(u32)scan->priority) {busy=1;break;}
             scan=scan->next;
@@ -133,13 +133,13 @@ void *Cache_RequestResource(s32 unused, u32 key, u32 source, u32 size,
             request->owner=owner;
             request->tag=tag;
             request->mode=mode;
-            func_80255ED8_de(&D_801047E0.pending,request);
-            func_80255D14_de(&D_801047E0.active,request);
+            List_RemoveIntrusive(&g_resourceRequestManager.pending,request);
+            List_AppendIntrusive(&g_resourceRequestManager.active,request);
             if(direct!=0) {
                 if(tag!=0) request->flags |= 4;
                 release();
-                func_8025637C_de(&D_801011B8,source,size,request->node->data);
-                if(tag!=0) func_80255170_de(&D_80106248,request);
+                Cartridge_ReadChunksAndWait(&g_cartridgeReadWorker,source,size,request->node->data);
+                if(tag!=0) Cache_SubmitResourceLoadAndWait(&g_resourceCacheWorker,request);
                 acquire();
                 if(tag!=0) request->flags &= ~4;
                 resolved=Cache_FinalizeResourceLoad(0,request,0);
@@ -153,8 +153,8 @@ void *Cache_RequestResource(s32 unused, u32 key, u32 source, u32 size,
                 if(tag!=0) request->flags=oldFlags|0xE;
                 release();
                 {
-                    void *replyQueue = &D_801047E0;
-                    func_80256454_de(&D_801011B8,source,size,request->node->data,replyQueue,(s32)request,0);
+                    void *replyQueue = &g_resourceRequestManager;
+                    Cartridge_SubmitReadChunks(&g_cartridgeReadWorker,source,size,request->node->data,replyQueue,(s32)request,0);
                 }
                 return 0;
             }

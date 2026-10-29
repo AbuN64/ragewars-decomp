@@ -1,4 +1,4 @@
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
@@ -7,7 +7,7 @@
 #include "COMMON/PLAYERPROFILES.H"
 #include "RESMGR/X_PLUS.H"
 
-const unsigned int rodata_func_80438614_de_800E1F50[6] = {
+const unsigned int g_resultPreviewTransformConstants[6] = {
     0x3E99999A, 0x3C1374BC, 0x40400000, 0xC0A00000, 0xC2C80000, 0xC1F00000,
 };
 
@@ -25,11 +25,11 @@ const unsigned int rodata_func_80438614_de_800E1F50[6] = {
 #include "COMMON/WORLD.H"
 #include "ACHIEVE/MODELPREVIEWSCREEN.H"
 extern Active *D_800E4680;
-extern struct ResultsHeadingCharacter D_800DFA6C[];
+extern struct ResultsHeadingCharacter g_resultCharacterHeadings[];
 #if !defined(VERSION_EU) && !defined(VERSION_EU_X)
-extern f32 D_800E1F40;
+extern f32 g_resultTimeToSeconds;
 #endif
-extern char *D_800D3578, *D_800D357C, *D_800D3580, *D_800D3588, *D_800D358C, *D_800D3590, *D_800D3594, *D_800D3598;
+extern char *g_resultCharacterUnlockFormat, *D_800D357C, *g_resultPreviouslyCompletedText, *g_resultModeHeadingText, *g_resultTrialModeText, *g_resultChallengeModeText, *g_resultCampaignCompleteText, *g_resultTrialsCompleteText;
 extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(void *);
 extern void CPlayerPreview_ResetSelectionMessageState(void);
@@ -48,12 +48,12 @@ extern void Achieve_UpdatePlayerPreviewStats(void);
 extern void Achieve_ConfigureResultModelPreview(void);
 /* Opens the level results screen: allocates the preview state, records the finished level for the winning
    player, unlocks the level-end achievements and fills the level name and status lines. */
-static inline Shared_Game *Results_CurrentGame(void) { return &D_801462C8; }
+static inline Shared_Game *Results_CurrentGame(void) { return &g_gameSettings; }
 s32 Achieve_CreateResultsScreen(MenuWidget *menu) {
     char levelName[0x40];
     MenuWidget *item;
     Active *preset;
-    func_8041F2A0_Config *config;
+    SlotSelectionPlayerConfig *config;
     Shared_Game *game;
     CGameStatus *counters;
     s32 achievement;
@@ -64,47 +64,47 @@ s32 Achieve_CreateResultsScreen(MenuWidget *menu) {
     s32 *level;
     s32 i;
 
-    D_800E5830 = (ModelPreviewScreen *)Cache_AllocateMemory(sizeof(ModelPreviewScreen));
-    D_800E5830->window = menu;
+    g_resultsModelPreviewScreen = (ModelPreviewScreen *)Cache_AllocateMemory(sizeof(ModelPreviewScreen));
+    g_resultsModelPreviewScreen->window = menu;
     Widget_SetWidgetFlag08(menu, 0);
-    Frontend_InitMenuImage(D_800E5830, 0x67, 0, 0, 0);
-    Frontend_StartMenuImageTransition(D_800E5830);
-    D_800E5830->cursor = 1;
+    Frontend_InitMenuImage(g_resultsModelPreviewScreen, 0x67, 0, 0, 0);
+    Frontend_StartMenuImageTransition(g_resultsModelPreviewScreen);
+    g_resultsModelPreviewScreen->cursor = 1;
     Node_FindWidgetByResourceId(menu, 0x26B + PREVIEW_ID_SHIFT)->alpha = 0x6E;
     Node_FindWidgetByResourceId(menu, 0x270 + PREVIEW_ID_SHIFT)->alpha = 0x14;
     Node_FindWidgetByResourceId(menu, 0x26D + PREVIEW_ID_SHIFT)->alpha = 0x14;
     Node_FindWidgetByResourceId(menu, 0x280 + PREVIEW_ID_SHIFT)->alpha = 0x19;
     config = g_playerSettings;
-    D_800E5830->player = 0;
+    g_resultsModelPreviewScreen->player = 0;
     for (i = 0; i < 4; i++) {
         if (config[i].active == 1) {
-            D_800E5830->player = i;
+            g_resultsModelPreviewScreen->player = i;
             break;
         }
     }
     CPlayerPreview_ResetSelectionMessageState();
-    D_800E5830->badge = -1;
-    game = &D_801462C8;
+    g_resultsModelPreviewScreen->badge = -1;
+    game = &g_gameSettings;
     switch (game->controllerMode) {
     case 1:
         if (game->humanWon == 1) {
-            Achieve_MarkLevelPlayed(D_800E5830->player);
-            D_800E5830->rows[0].unk0 = -1;
+            Achieve_MarkLevelPlayed(g_resultsModelPreviewScreen->player);
+            g_resultsModelPreviewScreen->rows[0].model = -1;
             if (D_800E4680->recorded != 0) {
-                slot = D_80102B00[D_800E5830->player].slot;
-                if (Defs_TestBit(D_80102B00[D_800E5830->player].slotLevels[slot], D_8015402C) == 1) {
-                    item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27E + PREVIEW_ID_SHIFT);
+                slot = g_localPlayerProfiles[g_resultsModelPreviewScreen->player].slot;
+                if (Defs_TestBit(g_localPlayerProfiles[g_resultsModelPreviewScreen->player].slotLevels[slot], g_selectedLevelId) == 1) {
+                    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x27E + PREVIEW_ID_SHIFT);
                     Widget_SetWidgetFlag08(item, 1);
                     item->alpha = 0xAF;
-                    item->text = RW_LOCALIZED_TEXT(D_800D3580, D_auto_800E2054, D_auto_800E2054, Results_CurrentGame()->language);
+                    item->text = RW_LOCALIZED_TEXT(g_resultPreviouslyCompletedText, g_resultPreviouslyCompletedTranslations, g_resultPreviouslyCompletedTranslations, Results_CurrentGame()->language);
                     goto done;
                 }
             }
-            D_800E5830->rows[0].unk0 = Match_ApplyLevelCompletionReward(D_800E5830->player);
-            D_800E5830->rows[0].unk10 = Match_GetResultText(D_800E5830->rows[0].unk0);
+            g_resultsModelPreviewScreen->rows[0].model = Match_ApplyLevelCompletionReward(g_resultsModelPreviewScreen->player);
+            g_resultsModelPreviewScreen->rows[0].image = Match_GetResultText(g_resultsModelPreviewScreen->rows[0].model);
 done:
-            D_800E5830->badge = -1;
-            switch (D_8015402C) {
+            g_resultsModelPreviewScreen->badge = -1;
+            switch (g_selectedLevelId) {
             case 4:
                 achievement = 0x2D;
                 break;
@@ -121,91 +121,91 @@ done:
                 achievement = -1;
                 break;
             }
-            if (achievement != -1 && Defs_TestBit(D_80102B00[D_800E5830->player].achievementFlags, achievement) == 0) {
-                Defs_SetBitValue(D_80102B00[D_800E5830->player].achievementFlags, achievement, 1);
-                D_800E5830->badge = achievement;
-                Achieve_UpdateUnlockTiers(D_800E5830->player);
+            if (achievement != -1 && Defs_TestBit(g_localPlayerProfiles[g_resultsModelPreviewScreen->player].achievementFlags, achievement) == 0) {
+                Defs_SetBitValue(g_localPlayerProfiles[g_resultsModelPreviewScreen->player].achievementFlags, achievement, 1);
+                g_resultsModelPreviewScreen->badge = achievement;
+                Achieve_UpdateUnlockTiers(g_resultsModelPreviewScreen->player);
             }
-            if (D_80102B00[D_800E5830->player].count >= 18) {
-                Defs_SetBitValue(&D_80102B00[D_800E5830->player].groupFlags, 1, 1);
+            if (g_localPlayerProfiles[g_resultsModelPreviewScreen->player].count >= 18) {
+                Defs_SetBitValue(&g_localPlayerProfiles[g_resultsModelPreviewScreen->player].groupFlags, 1, 1);
             }
-            if (D_80102B00[D_800E5830->player].count >= 36) {
-                Defs_SetBitValue(&D_80102B00[D_800E5830->player].groupFlags, 2, 1);
+            if (g_localPlayerProfiles[g_resultsModelPreviewScreen->player].count >= 36) {
+                Defs_SetBitValue(&g_localPlayerProfiles[g_resultsModelPreviewScreen->player].groupFlags, 2, 1);
             }
-            if (D_8015402C >= 0x23) {
-                Defs_SetBitValue(D_80102B00[D_800E5830->player].kindFlags, g_playerSettings[D_800E5830->player].kind, 1);
-                XPlus_FillMemory(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
-                character = Achieve_AwardCharacterCompletionUnlock(D_800E5830->player);
+            if (g_selectedLevelId >= 0x23) {
+                Defs_SetBitValue(g_localPlayerProfiles[g_resultsModelPreviewScreen->player].kindFlags, g_playerSettings[g_resultsModelPreviewScreen->player].kind, 1);
+                XPlus_FillMemory(g_localPlayerProfiles[g_resultsModelPreviewScreen->player].levelFlags[0], 0, 5);
+                character = Achieve_AwardCharacterCompletionUnlock(g_resultsModelPreviewScreen->player);
                 nameGame = Results_CurrentGame();
                 if (character >= 0) {
                     character = Key_FindKeyIndex(character);
-                    XStdio_FormatBuffer(D_800E5830->resultText, RW_LOCALIZED_TEXT(D_800D3578, D_auto_800E2034, D_auto_800E2034, nameGame->language), RW_LOCALIZED_TEXT(D_800DFA6C[character].name[0], D_800F00DC[character].name, D_800F00DC[character].name, nameGame->language));
-                    item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+                    XStdio_FormatBuffer(g_resultsModelPreviewScreen->resultText, RW_LOCALIZED_TEXT(g_resultCharacterUnlockFormat, g_resultCharacterUnlockTranslations, g_resultCharacterUnlockTranslations, nameGame->language), RW_LOCALIZED_TEXT(g_resultCharacterHeadings[character].name[0], g_resultCharacterHeadingTranslations[character].name, g_resultCharacterHeadingTranslations[character].name, nameGame->language));
+                    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x27F + PREVIEW_ID_SHIFT);
                     item->alpha = 0xAF;
                     Widget_SetWidgetFlag08(item, 1);
-                    item->text = D_800E5830->resultText;
+                    item->text = g_resultsModelPreviewScreen->resultText;
                 }
             }
         } else {
             nameGame = Results_CurrentGame();
-            XPlus_CopyString(D_800E5830->resultText, resultsUnavailable(nameGame));
-            item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            XPlus_CopyString(g_resultsModelPreviewScreen->resultText, resultsUnavailable(nameGame));
+            item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Widget_SetWidgetFlag08(item, 1);
-            item->text = D_800E5830->resultText;
+            item->text = g_resultsModelPreviewScreen->resultText;
         }
         break;
     case 3:
         counters = &game->counters;
         if (counters->humanWon == 1) {
-            Achieve_MarkLevelPlayed(D_800E5830->player);
-            level = &D_8015402C;
+            Achieve_MarkLevelPlayed(g_resultsModelPreviewScreen->player);
+            level = &g_selectedLevelId;
             preset = Achieve_CopyPreset(*level, 3, 0);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
             time = counters->timeLimit * 0.06666667f;
 #else
-            time = counters->timeLimit * D_800E1F40;
+            time = counters->timeLimit * g_resultTimeToSeconds;
 #endif
-            if (D_80102B00[D_800E5830->player].times[*level] == 0) {
-                D_80102B00[D_800E5830->player].times[*level] = preset->time - time;
-            } else if (preset->time - time < D_80102B00[D_800E5830->player].times[*level]) {
-                D_80102B00[D_800E5830->player].times[*level] = preset->time - time;
+            if (g_localPlayerProfiles[g_resultsModelPreviewScreen->player].times[*level] == 0) {
+                g_localPlayerProfiles[g_resultsModelPreviewScreen->player].times[*level] = preset->time - time;
+            } else if (preset->time - time < g_localPlayerProfiles[g_resultsModelPreviewScreen->player].times[*level]) {
+                g_localPlayerProfiles[g_resultsModelPreviewScreen->player].times[*level] = preset->time - time;
             }
-            if (D_8015402C == 0x23) {
-                item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            if (g_selectedLevelId == 0x23) {
+                item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x27F + PREVIEW_ID_SHIFT);
                 item->alpha = 0xAF;
                 Widget_SetWidgetFlag08(item, 1);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                item->text = RW_LOCALIZED_TEXT(D_800D3598, D_auto_800E20B4, D_auto_800E20B4, g_languageIndex);
+                item->text = RW_LOCALIZED_TEXT(g_resultTrialsCompleteText, g_resultTrialsCompleteTranslations, g_resultTrialsCompleteTranslations, g_languageIndex);
 #else
-                item->text = D_800D3598;
+                item->text = g_resultTrialsCompleteText;
 #endif
             }
         } else {
             nameGame = Results_CurrentGame();
-            XPlus_CopyString(D_800E5830->resultText, resultsUnavailable(nameGame));
-            item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            XPlus_CopyString(g_resultsModelPreviewScreen->resultText, resultsUnavailable(nameGame));
+            item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Widget_SetWidgetFlag08(item, 1);
-            item->text = D_800E5830->resultText;
+            item->text = g_resultsModelPreviewScreen->resultText;
         }
         break;
     case 4:
         if (game->humanWon == 1) {
-            Achieve_MarkLevelPlayed(D_800E5830->player);
-            if (D_8015402C == 0x23) {
-                item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            Achieve_MarkLevelPlayed(g_resultsModelPreviewScreen->player);
+            if (g_selectedLevelId == 0x23) {
+                item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x27F + PREVIEW_ID_SHIFT);
                 item->alpha = 0xAF;
                 Widget_SetWidgetFlag08(item, 1);
-                item->text = RW_LOCALIZED_TEXT(D_800D3594, D_auto_800E20A4, D_auto_800E20A4, Results_CurrentGame()->language);
+                item->text = RW_LOCALIZED_TEXT(g_resultCampaignCompleteText, g_resultCampaignCompleteTranslations, g_resultCampaignCompleteTranslations, Results_CurrentGame()->language);
             }
         } else {
             nameGame = Results_CurrentGame();
-            XPlus_CopyString(D_800E5830->resultText, resultsUnavailable(nameGame));
-            item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            XPlus_CopyString(g_resultsModelPreviewScreen->resultText, resultsUnavailable(nameGame));
+            item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Widget_SetWidgetFlag08(item, 1);
-            item->text = D_800E5830->resultText;
+            item->text = g_resultsModelPreviewScreen->resultText;
         }
         break;
     }
@@ -216,32 +216,32 @@ done:
     SmpButton_WrapButtonWidget(0x273 + PREVIEW_ID_SHIFT);
     Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(menu, 0x26F + PREVIEW_ID_SHIFT), 1);
     for (i = 0; i < 4; i++) {
-        if (D_80102B00[i].player >= 0 && D_80102B00[i].fresh == 0) {
+        if (g_localPlayerProfiles[i].player >= 0 && g_localPlayerProfiles[i].fresh == 0) {
             Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(menu, 0x26F + PREVIEW_ID_SHIFT), 0);
             break;
         }
     }
-    Node_FindWidgetByResourceId(D_800E5830->window, 0x271 + PREVIEW_ID_SHIFT)->text = RW_LOCALIZED_TEXT(D_800D3588, D_800E2074_eu, D_800E2074_eu, Results_CurrentGame()->language);
-    item = Node_FindWidgetByResourceId(D_800E5830->window, 0x272 + PREVIEW_ID_SHIFT);
-    switch (D_8014DD98.kind) {
+    Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x271 + PREVIEW_ID_SHIFT)->text = RW_LOCALIZED_TEXT(g_resultModeHeadingText, g_resultModeHeadingTranslations, g_resultModeHeadingTranslations, Results_CurrentGame()->language);
+    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x272 + PREVIEW_ID_SHIFT);
+    switch (g_currentResultMode.kind) {
     case 0:
-        item->text = RW_LOCALIZED_TEXT(D_800D3590, D_800E2094_eu, D_800E2094_eu, Results_CurrentGame()->language);
+        item->text = RW_LOCALIZED_TEXT(g_resultChallengeModeText, g_resultChallengeModeTranslations, g_resultChallengeModeTranslations, Results_CurrentGame()->language);
         break;
     case 1:
-        item->text = RW_LOCALIZED_TEXT(D_800D358C, D_800E2084, D_800E2084, Results_CurrentGame()->language);
+        item->text = RW_LOCALIZED_TEXT(g_resultTrialModeText, g_resultTrialModeTranslations, g_resultTrialModeTranslations, Results_CurrentGame()->language);
         break;
     default:
-        item->text = RW_LOCALIZED_TEXT(D_800D358C, D_800E2084, D_800E2084, g_languageIndex);
+        item->text = RW_LOCALIZED_TEXT(g_resultTrialModeText, g_resultTrialModeTranslations, g_resultTrialModeTranslations, g_languageIndex);
         break;
     }
     item = Node_FindWidgetByResourceId(menu, 0x26C + PREVIEW_ID_SHIFT);
-    Scene_CopyLevelName(&g_world, D_8015402C, levelName, 0x3F);
-    XPlus_CopyString(D_800E5830->nameText, XPlus_UppercaseString(levelName));
-    item->text = D_800E5830->nameText;
-    D_800E5830->item24 = Node_FindWidgetByResourceId(menu, 0x274 + PREVIEW_ID_SHIFT);
-    D_800E5830->ready = 1;
-    D_80145088.status[7] = 1;
-    D_800E5830->started = 0;
+    Scene_CopyLevelName(&g_world, g_selectedLevelId, levelName, 0x3F);
+    XPlus_CopyString(g_resultsModelPreviewScreen->nameText, XPlus_UppercaseString(levelName));
+    item->text = g_resultsModelPreviewScreen->nameText;
+    g_resultsModelPreviewScreen->item24 = Node_FindWidgetByResourceId(menu, 0x274 + PREVIEW_ID_SHIFT);
+    g_resultsModelPreviewScreen->ready = 1;
+    g_frontendScreenStatus.status[7] = 1;
+    g_resultsModelPreviewScreen->started = 0;
     Tsmos_DeactivateControllerState();
     return 0;
 }
@@ -252,21 +252,21 @@ done:
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "ACHIEVE/MODELPREVIEWSCREEN.H"
 #include "COMMON/OBJECTRECAT28.H"
-extern char D_800E1F48[];
+extern char g_resultPercentFormat[];
 
 #if !defined(VERSION_US) && !defined(VERSION_US_REV1)
 extern void XStdio_FormatBuffer(char *, char *, ...);
 #endif
 
 #if defined(VERSION_DE)
-extern char rodata_func_8043829C_de_800DDF14[];
-#define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800DDF14
+extern char g_resultPreviewNumberFormatDe[];
+#define PREVIEW_NUMBER_FORMAT g_resultPreviewNumberFormatDe
 #elif defined(VERSION_US)
 extern char rodata_func_8043829C_de_800DCBC4[];
 #define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800DCBC4
 #elif defined(VERSION_US_REV1)
-extern char D_blob_83fae0a1897e2dffd396[];
-#define PREVIEW_NUMBER_FORMAT D_blob_83fae0a1897e2dffd396
+extern char k_AchieveEncodedBytes[];
+#define PREVIEW_NUMBER_FORMAT k_AchieveEncodedBytes
 #elif defined(VERSION_EU)
 extern char rodata_func_8043829C_de_800EE594[];
 #define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800EE594
@@ -278,70 +278,70 @@ extern char rodata_func_8043829C_de_800E9754[];
 /* Fill the selected player's preview statistics and optional rank badge. */
 void Achieve_UpdatePlayerPreviewStats(void) {
     MenuWidget *item, *lastItem;
-    func_8041F2A0_Config *record;
+    SlotSelectionPlayerConfig *record;
     s32 denominator;
     s32 player;
     s32 statIndex;
     s32 percent;
 
-    player = D_800E5830->player;
+    player = g_resultsModelPreviewScreen->player;
     statIndex = player;
     record = &g_playerSettings[player];
-    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x275 + PREVIEW_ID_SHIFT));
+    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, (0x275 + PREVIEW_ID_SHIFT));
     Widget_SetWidgetFlag08(item, 1);
     item->alpha = 0x96;
-    item->value = D_800E3A58[Key_FindKeyIndex((s32) record->kind)].portrait;
-    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x276 + PREVIEW_ID_SHIFT));
+    item->value = g_characterPortraitRecords[Key_FindKeyIndex((s32) record->kind)].portrait;
+    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, (0x276 + PREVIEW_ID_SHIFT));
     Widget_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
-    item->text = D_80102B00[player].name;
-    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x277 + PREVIEW_ID_SHIFT));
+    item->text = g_localPlayerProfiles[player].name;
+    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, (0x277 + PREVIEW_ID_SHIFT));
     Widget_SetWidgetFlag08(item, 1);
     item->alpha = 0x73;
     item->text = Match_UpdateRankText(player);
-    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x278 + PREVIEW_ID_SHIFT));
+    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, (0x278 + PREVIEW_ID_SHIFT));
     Widget_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
-    XStdio_FormatBuffer(D_800E5830->killsText, PREVIEW_NUMBER_FORMAT, record->kills);
-    item->text = D_800E5830->killsText;
-    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x279 + PREVIEW_ID_SHIFT));
+    XStdio_FormatBuffer(g_resultsModelPreviewScreen->killsText, PREVIEW_NUMBER_FORMAT, record->kills);
+    item->text = g_resultsModelPreviewScreen->killsText;
+    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, (0x279 + PREVIEW_ID_SHIFT));
     Widget_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
-    XStdio_FormatBuffer(D_800E5830->scoreText, PREVIEW_NUMBER_FORMAT, record->score + record->total);
-    item->text = D_800E5830->scoreText;
-    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x27a + PREVIEW_ID_SHIFT));
+    XStdio_FormatBuffer(g_resultsModelPreviewScreen->scoreText, PREVIEW_NUMBER_FORMAT, record->score + record->total);
+    item->text = g_resultsModelPreviewScreen->scoreText;
+    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, (0x27a + PREVIEW_ID_SHIFT));
     Widget_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
-    denominator = D_800FF140_de[statIndex];
+    denominator = g_playerCountedShots[statIndex];
     percent = 0;
     if (denominator > 0) {
-        percent = (s32) (D_800FEAE0[statIndex] * 0x64) / denominator;
+        percent = (s32) (g_playerHitCounts[statIndex] * 0x64) / denominator;
     }
-    XStdio_FormatBuffer(D_800E5830->ratioText, D_800E1F48, percent);
-    item->text = D_800E5830->ratioText;
-    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x27b + PREVIEW_ID_SHIFT));
+    XStdio_FormatBuffer(g_resultsModelPreviewScreen->ratioText, g_resultPercentFormat, percent);
+    item->text = g_resultsModelPreviewScreen->ratioText;
+    item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, (0x27b + PREVIEW_ID_SHIFT));
     Widget_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     lastItem=item;
-    switch (D_8014DD98.kind) {
-    case 0: XStdio_FormatBuffer(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, record->other); break;
-    case 1: XStdio_FormatBuffer(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, record->selected); break;
-    default: XStdio_FormatBuffer(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, 0); break;
+    switch (g_currentResultMode.kind) {
+    case 0: XStdio_FormatBuffer(g_resultsModelPreviewScreen->otherText, PREVIEW_NUMBER_FORMAT, record->other); break;
+    case 1: XStdio_FormatBuffer(g_resultsModelPreviewScreen->otherText, PREVIEW_NUMBER_FORMAT, record->selected); break;
+    default: XStdio_FormatBuffer(g_resultsModelPreviewScreen->otherText, PREVIEW_NUMBER_FORMAT, 0); break;
     }
-    lastItem->text = D_800E5830->otherText;
-    if (D_800E5830->badge != -1) {
-        item = Node_FindWidgetByResourceId(D_800E5830->window, (0x27c + PREVIEW_ID_SHIFT));
+    lastItem->text = g_resultsModelPreviewScreen->otherText;
+    if (g_resultsModelPreviewScreen->badge != -1) {
+        item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, (0x27c + PREVIEW_ID_SHIFT));
         item->alpha = 0x96;
         Widget_SetWidgetFlag08(item, 1);
-        item->value = D_800E01B0_de[D_800E5830->badge];
+        item->value = g_resultAchievementBadgeImages[g_resultsModelPreviewScreen->badge];
     }
 }
 
 #undef PREVIEW_NUMBER_FORMAT
 
 /* This function's literal pool (retained rodata): 0.3, 0.009, 3.0, -5.0, -100.0, -30.0. */
-extern f32 D_800E1F54;
-extern f32 D_800DDF30_de;
+extern f32 g_resultPreviewSmallScale;
+extern f32 g_resultPreviewCameraZ;
 /* Shows the selected preview row's model: sets its image widget, scales the model (0.3 for the listed models,
    0.009 otherwise; 0.3 with a lower camera for 0x1390/0x1392), places it and resets the row's fade. */
 void Achieve_ConfigureResultModelPreview(void) {
@@ -349,31 +349,31 @@ void Achieve_ConfigureResultModelPreview(void) {
  s32 index, displacement, model;
  MenuWidget *item;
  ModelPreviewScreen *slot;
- index=D_800E5830->selected;
+ index=g_resultsModelPreviewScreen->selected;
  displacement=index*20;
- model=D_800E5830->rows[index].unk0;
+ model=g_resultsModelPreviewScreen->rows[index].model;
  if(model>=0) {
   /* the hub's Item view shares the MenuWidget prefix; this unit writes alpha and image through its own view */
-  item=(MenuWidget *)Node_FindWidgetByResourceId(D_800E5830->window,MENU_804387F4_642);
+  item=(MenuWidget *)Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window,MENU_804387F4_642);
   Widget_SetWidgetFlag08(item,1);
   item->alpha=0xAF;
-  item->image=D_800E5830->rows[index].unk10;
+  item->image=g_resultsModelPreviewScreen->rows[index].image;
   if ((u32)(model-0x1389)<2U || model==0x139F || model==0x13A0 || model==0x13C1 || model==0x1398 || model==0x13BD) {
-   scale.value.x=D_800DDF20_de; scale.value.y=D_800DDF20_de; scale.value.z=D_800DDF20_de;
-  } else { scale.value.x=D_800E1F54; scale.value.y=D_800E1F54; scale.value.z=D_800E1F54; }
+   scale.value.x=g_resultPreviewLargeScale; scale.value.y=g_resultPreviewLargeScale; scale.value.z=g_resultPreviewLargeScale;
+  } else { scale.value.x=g_resultPreviewSmallScale; scale.value.y=g_resultPreviewSmallScale; scale.value.z=g_resultPreviewSmallScale; }
   angle.value.x=0;angle.value.y=0;angle.value.z=0;
-  position.value.x=0;position.value.y=D_800DDF28_de;position.value.z=0;
-  offset.value.x=0;offset.value.y=(&D_800DDF28_de)[1];offset.value.z=D_800DDF30_de;
+  position.value.x=0;position.value.y=g_resultPreviewRotationSpeedY;position.value.z=0;
+  offset.value.x=0;offset.value.y=(&g_resultPreviewRotationSpeedY)[1];offset.value.z=g_resultPreviewCameraZ;
   if (model==0x1390 || model==0x1392) {
-   offset.value.x=0;offset.value.y=(&D_800DDF30_de)[1];offset.value.z=D_800DDF30_de;
-   scale.value.x=D_800DDF38_de;scale.value.y=D_800DDF38_de;scale.value.z=D_800DDF38_de;
+   offset.value.x=0;offset.value.y=(&g_resultPreviewCameraZ)[1];offset.value.z=g_resultPreviewCameraZ;
+   scale.value.x=g_resultPreviewLowerCameraScale;scale.value.y=g_resultPreviewLowerCameraScale;scale.value.z=g_resultPreviewLowerCameraScale;
   }
-  Frontend_InitModelPreviewTransform(&D_800E5830->modelWorkspace,0,scale.words,offset.words);
-  Frontend_SetPreviewRotation(&D_800E5830->modelWorkspace,angle.words);
-  Frontend_SetPreviewRotationSpeed(&D_800E5830->modelWorkspace,position.words);
-  Model_SetPreviewModel(&D_800E5830->modelWorkspace,model);
-  D_800E5830->rows[index].unk4=0;
-  D_800E5830->rows[index].unk8=10;
+  Frontend_InitModelPreviewTransform(&g_resultsModelPreviewScreen->modelWorkspace,0,scale.words,offset.words);
+  Frontend_SetPreviewRotation(&g_resultsModelPreviewScreen->modelWorkspace,angle.words);
+  Frontend_SetPreviewRotationSpeed(&g_resultsModelPreviewScreen->modelWorkspace,position.words);
+  Model_SetPreviewModel(&g_resultsModelPreviewScreen->modelWorkspace,model);
+  g_resultsModelPreviewScreen->rows[index].state=0;
+  g_resultsModelPreviewScreen->rows[index].fade=10;
  }
 }
 
@@ -383,72 +383,72 @@ void Achieve_ConfigureResultModelPreview(void) {
 #include "COMMON/OBJECTRECAT28.H"
 #include "TYPES.H"
 #if defined(VERSION_DE)
-#define func_804399D0 func_804397F0_auto
+#define Preview_DrawMenuModelItem Frontend_DrawResultModelPreviewDe
 #else
-void func_804399D0(MenuModelItem *item);
+void Preview_DrawMenuModelItem(MenuModelItem *item);
 #endif
 void Achieve_ConfigureResultModelPreview(void);
-extern f32 D_800DDF3C_de;
+extern f32 g_resultPreviewDefaultAlpha;
 
 /* Advances the selected row's model preview animation one step: the preview scale (unk8) ramps up by 2
    toward 0x96 in state 0, holds in state 2 while the countdown (unkC) runs, and ramps back down to 10 in
    state 1, then moves the selection on. */
 void Achieve_AdvanceResultModelPreview(void) {
     s32 selected;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 var_v0;
+    s32 nextFadeScale;
+    s32 nextHoldTicks;
+    s32 nextFadeOutScale;
+    s32 previewState;
+    s32 holdTicks;
+    s32 selectedWordOffset;
 
-    selected = D_800E5830->selected;
+    selected = g_resultsModelPreviewScreen->selected;
     /* The word at +0x1C0 of the screen state has no shared field name yet. */
-    if ((D_800E5830->rows[selected].unk0 >= 0) && (*((s32 *) ((u8 *) (D_800E5830) + 448)) != 0)) {
-        D_800D15E0 = 1;
-        D_800D15E4[3] = (f32) D_800E5830->rows[selected].unk8;
-        func_804399D0((void *)&D_800E5830->modelWorkspace);
-        D_800D15E4[3] = D_800DDF3C_de;
-        temp_v1 = D_800E5830->rows[selected].unk4;
-        D_800D15E0 = 0;
-        switch (temp_v1) {                          /* irregular */
+    if ((g_resultsModelPreviewScreen->rows[selected].model >= 0) && (*((s32 *) ((u8 *) (g_resultsModelPreviewScreen) + 448)) != 0)) {
+        g_menuModelFillEnabled = 1;
+        g_menuModelFillColor[3] = (f32) g_resultsModelPreviewScreen->rows[selected].fade;
+        Preview_DrawMenuModelItem((void *)&g_resultsModelPreviewScreen->modelWorkspace);
+        g_menuModelFillColor[3] = g_resultPreviewDefaultAlpha;
+        previewState = g_resultsModelPreviewScreen->rows[selected].state;
+        g_menuModelFillEnabled = 0;
+        switch (previewState) {                          /* irregular */
         case 0:
-            temp_v0 = D_800E5830->rows[selected].unk8 + 2;
-            D_800E5830->rows[selected].unk8 = temp_v0;
-            if (temp_v0 >= 0x97) {
-                D_800E5830->rows[selected].unk8 = 0x96;
-                D_800E5830->rows[selected].unk4 = 2;
+            nextFadeScale = g_resultsModelPreviewScreen->rows[selected].fade + 2;
+            g_resultsModelPreviewScreen->rows[selected].fade = nextFadeScale;
+            if (nextFadeScale >= 0x97) {
+                g_resultsModelPreviewScreen->rows[selected].fade = 0x96;
+                g_resultsModelPreviewScreen->rows[selected].state = 2;
                 if (selected <= 0) {
-                    var_v0 = selected * 4;
-                    if (D_800E5830->rows[selected + 1].unk0 > 0) {
-                        D_800E5830->rows[selected].unkC = 0x96;
+                    selectedWordOffset = selected * 4;
+                    if (g_resultsModelPreviewScreen->rows[selected + 1].model > 0) {
+                        g_resultsModelPreviewScreen->rows[selected].holdTicks = 0x96;
                         return;
                     }
                     goto block_15;
                 }
-                var_v0 = selected * 4;
+                selectedWordOffset = selected * 4;
 block_15:
-                D_800E5830->rows[selected].unkC = 0x38F;
+                g_resultsModelPreviewScreen->rows[selected].holdTicks = 0x38F;
                 return;
             }
             break;
         case 2:
-            temp_v1_2 = D_800E5830->rows[selected].unkC;
-            if (temp_v1_2 != 0x38F) {
-                temp_v0_2 = temp_v1_2 - 1;
-                D_800E5830->rows[selected].unkC = temp_v0_2;
-                if (temp_v0_2 <= 0) {
-                    D_800E5830->rows[selected].unk4 = 1;
+            holdTicks = g_resultsModelPreviewScreen->rows[selected].holdTicks;
+            if (holdTicks != 0x38F) {
+                nextHoldTicks = holdTicks - 1;
+                g_resultsModelPreviewScreen->rows[selected].holdTicks = nextHoldTicks;
+                if (nextHoldTicks <= 0) {
+                    g_resultsModelPreviewScreen->rows[selected].state = 1;
                     return;
                 }
             }
             break;
         case 1:
-            temp_v0_3 = D_800E5830->rows[selected].unk8 - 2;
-            D_800E5830->rows[selected].unk8 = temp_v0_3;
-            if (temp_v0_3 < 0xA) {
-                D_800E5830->rows[selected].unk8 = 0xA;
-                D_800E5830->selected += 1;
+            nextFadeOutScale = g_resultsModelPreviewScreen->rows[selected].fade - 2;
+            g_resultsModelPreviewScreen->rows[selected].fade = nextFadeOutScale;
+            if (nextFadeOutScale < 0xA) {
+                g_resultsModelPreviewScreen->rows[selected].fade = 0xA;
+                g_resultsModelPreviewScreen->selected += 1;
                 Achieve_ConfigureResultModelPreview();
             }
             break;

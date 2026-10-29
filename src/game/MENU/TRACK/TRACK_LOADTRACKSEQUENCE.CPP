@@ -1,7 +1,7 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/BALLISTICPARAMS.H"
@@ -18,11 +18,11 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32,void *,s32);
+extern struct CacheResourceBlockView *Cache_AllocResourceBlock(s32,void *,s32);
 
 extern void Track_BuildWeightedSpline(s32,CVector3 *,f32 *,Spline *);
 
-extern void Cache_ReplaceResourceBlock(s32,struct Shape_typemap_165 **,struct Shape_typemap_165 *);
+extern void Cache_ReplaceResourceBlock(s32,struct CacheResourceBlockView **,struct CacheResourceBlockView *);
 
 /* A nonnull source is copied into the new pack section; null reserves it. */
 static inline char *packAppend(Pack *pack,const void *source,s32 size) { return Polytrak2_AppendOutputPackSection(pack,source,size); }
@@ -49,8 +49,8 @@ static inline void setTimes(f32 *a,f32 *b,f32 *c,f32 *t) {
     *c=*t;
 }
 
-void Track_BuildTrackResourceSplines(s32 unused, struct Shape_typemap_165 **handle) {
-    struct Shape_typemap_165 *output;
+void Track_BuildTrackResourceSplines(s32 unused, struct CacheResourceBlockView **handle) {
+    struct CacheResourceBlockView *output;
     void *source, *a, *b, *c, *part, *extra;
     Pack *pack, *dest;
     SplineTable *parts;
@@ -131,20 +131,20 @@ s32 Track_LoadTrackSequence(s32 index) {
     Shared_TrackClip *clip;
     Shared_MenuContext *context,*scanContext;
     f32 total;
-    captured=D_80145060.actorList;
-    pending=D_800E2830->field58;
+    captured=g_transientPlayerList.actorList;
+    pending=g_cinemaSequenceState->pendingTrackId;
     resources=&g_world;
     if(resources->trackLookup==0 || resources->trackBundle==0) {
         failed:
         return 0;
     }
     else {
-        if(D_800E2830->active!=0)Cinema_ReleaseSequenceContext();
+        if(g_cinemaSequenceState->active!=0)Cinema_ReleaseSequenceContext();
         loaded=SetN64_LocatePackSection(resources->trackBundle,resources->trackLookup,index+1,&size);
-        owner=Cache_RequestResource(0,loaded,loaded,size,0x33,0,D_0040067C,s_cinemaText,1);
+        owner=Cache_RequestResource(0,loaded,loaded,size,0x33,0,g_Track_BuildTrackResourceSplinesAddress,s_cinemaText,1);
         if(owner==0)goto failed;
-        D_800E2830->owner=owner;
-        D_800E2830->resource=*owner;
+        g_cinemaSequenceState->owner=owner;
+        g_cinemaSequenceState->resource=*owner;
         cues=Menu_GetTrackCues();
         cue=cues->cues;
         count=cues->count;
@@ -153,19 +153,19 @@ s32 Track_LoadTrackSequence(s32 index) {
             clip=Menu_GetTrackClip(i);
              {
                 s32 n=clip->count;
-                KeyRecAt1C *base=clip->keys;
+                TrackTransformKey *base=clip->keys;
                 if(n>0) {
                     total+=base[n-1].time;
                 }
             }
         }
-        D_800E2830->start=0.0f;
-        D_800E2830->end=total;
-        D_800E2830->clipStart=0.0f;
-        D_800E2830->clipEnd=total;
+        g_cinemaSequenceState->start=0.0f;
+        g_cinemaSequenceState->end=total;
+        g_cinemaSequenceState->clipStart=0.0f;
+        g_cinemaSequenceState->clipEnd=total;
         i=0;
         if(count>0) {
-            scanContext=D_800E2830;
+            scanContext=g_cinemaSequenceState;
             do {
                 PositionKey *c=&cue[i];
                 minTime(&scanContext->clipStart,&c->time);
@@ -174,44 +174,44 @@ s32 Track_LoadTrackSequence(s32 index) {
             }
             while(i<count);
         }
-        setTimes(&D_800E2830->time,&D_800E2830->time20,&D_800E2830->time24,&D_800E2830->clipStart);
-        previous=D_800E2830->spec.id8;
-        loaded=SetN64_LocatePackSection(D_8011FEFC,D_8011BDFC,0,&size2);
+        setTimes(&g_cinemaSequenceState->time,&g_cinemaSequenceState->time20,&g_cinemaSequenceState->time24,&g_cinemaSequenceState->clipStart);
+        previous=g_cinemaSequenceState->spec.id8;
+        loaded=SetN64_LocatePackSection(g_trackResourceDirectory,g_trackResourceDirectoryKey,0,&size2);
         if(loaded==0)table=0;
         else table=Cache_RequestResource(0,loaded,loaded,size2,0x33,0,0,g_cinemaDirectoryText,1);
          {
             Shared_TrackTable *entries=*table;
-            EntryRecAt48 *base=entries->entries;
-            D_800E2830->pending=pending;
-            D_800E2830->active=1;
-            D_800E2830->spec=base[index];
+            TrackResourceEntry *base=entries->entries;
+            g_cinemaSequenceState->pending=pending;
+            g_cinemaSequenceState->active=1;
+            g_cinemaSequenceState->spec=base[index];
         }
-        D_800E2830->field50=0;
-        D_800E2830->unknown40=0;
-        D_800E2830->initialized44=0;
-        D_800E2830->closed=0;
-        D_800E2830->requestE0=D_800E2830->spec.id8;
-        if((D_800E2830->spec.flags&1) && D_800E2830->target!=0) {
-            D_800E2830->position=D_800E2830->target->prefix.position;
-            D_800E2830->yaw=D_800E2830->target->yaw+D_800DCB18_de;
+        g_cinemaSequenceState->sequenceAdvanceRequested=0;
+        g_cinemaSequenceState->sequenceStarted=0;
+        g_cinemaSequenceState->initialized44=0;
+        g_cinemaSequenceState->closed=0;
+        g_cinemaSequenceState->requestE0=g_cinemaSequenceState->spec.id8;
+        if((g_cinemaSequenceState->spec.flags&1) && g_cinemaSequenceState->target!=0) {
+            g_cinemaSequenceState->position=g_cinemaSequenceState->target->prefix.position;
+            g_cinemaSequenceState->yaw=g_cinemaSequenceState->target->yaw+g_trackInitialYawOffset;
         }
-        if(D_800E2830->spec.flags&2) {
+        if(g_cinemaSequenceState->spec.flags&2) {
             if(captured!=0) {
-                D_800E2830->position=captured->prefix.position;
-                D_800E2830->yaw=captured->yaw;
+                g_cinemaSequenceState->position=captured->prefix.position;
+                g_cinemaSequenceState->yaw=captured->yaw;
             }
             else {
-                D_800E2830->position.x=0.0f;
-                D_800E2830->position.y=0.0f;
-                D_800E2830->position.z=0.0f;
-                D_800E2830->yaw=0.0f;
+                g_cinemaSequenceState->position.x=0.0f;
+                g_cinemaSequenceState->position.y=0.0f;
+                g_cinemaSequenceState->position.z=0.0f;
+                g_cinemaSequenceState->yaw=0.0f;
             }
         }
         Cache_UnlockResource(0,(void *)table);
         if(pending) {
             void (*first)();
             Shared_MenuVoidCallback second;
-            context=D_800E2830;
+            context=g_cinemaSequenceState;
             first=context->callbackE4;
             second=context->callbackE8;
             context->pending=1;
@@ -222,14 +222,14 @@ s32 Track_LoadTrackSequence(s32 index) {
             context->onClose=first;
             context->callback10=second;
             if(context->requestE0-10U<0x47U)context->mode=0;
-            if(D_800E2830->requestE0-400U<4U)D_800E2830->mode=0;
+            if(g_cinemaSequenceState->requestE0-400U<4U)g_cinemaSequenceState->mode=0;
         }
         else {
-            if(D_800E2830->spec.id8<3)D_800E2830->requestE0=previous;
-            D_800E2830->pending=0;
-            D_800E2830->time=D_800E2830->start;
+            if(g_cinemaSequenceState->spec.id8<3)g_cinemaSequenceState->requestE0=previous;
+            g_cinemaSequenceState->pending=0;
+            g_cinemaSequenceState->time=g_cinemaSequenceState->start;
         }
-        if(D_800E2830->spec.id8==0x9F)D_800E2830->mode=0;
+        if(g_cinemaSequenceState->spec.id8==0x9F)g_cinemaSequenceState->mode=0;
         return 1;
     }
 }

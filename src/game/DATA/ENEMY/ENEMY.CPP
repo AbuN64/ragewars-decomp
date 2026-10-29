@@ -4,7 +4,7 @@
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D0EFC */
 /* Light colour bytes (r, g, b, pad): bytes so every host reads the same colour. */
-const unsigned char D_blob_phase2_c55f3c51e55ee63497fd[4] = {
+const unsigned char k_enemyTextBytes[4] = {
     0x38, 0x38, 0x38, 0x00,
 };
 #endif
@@ -15,7 +15,7 @@ const unsigned char D_blob_phase2_c55f3c51e55ee63497fd[4] = {
 struct {
     unsigned char light[16];
     unsigned int list[12];
-} D_auto_rodata_unresolved_800D0F00 = {
+} g_enemyLightingDisplayListStorage = {
     { 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x00, 0x00, 0x00 },
     { 0xD9000000, 0x00000000, 0xD9FFFFFF, 0x00000001,
       0xDB020000, 0x00000018, 0xDC08060A, 0x800D0EE8, 0xDC08090A, 0x800D0EE0, 0xDF000000, 0x00000000 },
@@ -24,7 +24,7 @@ struct {
 
 /* DATA_800D0F40.CPP */
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_rdp_startup_us_rev1[24] = {
+unsigned int g_enemyConstantWords[24] = {
     0xE3000A01, 0x00000000, 0xE3000800, 0x00000000, 0xE3000F00, 0x00000000, 0xE3001001, 0x00000000,
     0xE3000D01, 0x00000000, 0xE3000C00, 0x00080000, 0xE3001201, 0x00002000, 0xE3001402, 0x00000C00,
     0xE3001700, 0x00000000, 0xE2001E01, 0x00000000, 0xE7000000, 0x00000000, 0xDF000000, 0x00000000,
@@ -33,7 +33,7 @@ unsigned int D_auto_src_ragewars_rdp_startup_us_rev1[24] = {
 
 /* DATA_800D0FA0.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_texture_rgba16_mip_us_rev1[32] = {
+unsigned int g_enemyConstantWordsBlock1[32] = {
     0xF5100000, 0x07000000, 0xF3000000, 0x0755C000, 0xF5101000, 0x00014050, 0xF2000000, 0x0007C07C,
     0xF5100900, 0x01010441, 0xF2000000, 0x0103C03C, 0xF5100540, 0x0200C832, 0xF2000000, 0x0201C01C,
     0xF5100350, 0x03008C23, 0xF2000000, 0x0300C00C, 0xF5100354, 0x04005014, 0xF2000000, 0x04004004,
@@ -43,7 +43,7 @@ unsigned int D_auto_src_ragewars_texture_rgba16_mip_us_rev1[32] = {
 
 /* DATA_800D1020.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_texture_rgba16_mip_clamp_us_rev1[32] = {
+unsigned int g_enemyConstantWordsBlock2[32] = {
     0xF5100000, 0x07000000, 0xF3000000, 0x0755C000, 0xF5101000, 0x00054150, 0xF2000000, 0x0007C07C,
     0xF5100900, 0x01050541, 0xF2000000, 0x0103C03C, 0xF5100540, 0x0204C932, 0xF2000000, 0x0201C01C,
     0xF5100350, 0x03048D23, 0xF2000000, 0x0300C00C, 0xF5100354, 0x04045114, 0xF2000000, 0x04004004,
@@ -53,7 +53,7 @@ unsigned int D_auto_src_ragewars_texture_rgba16_mip_clamp_us_rev1[32] = {
 
 /* DATA_800D10A0.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_texture_rgba16_detail_us_rev1[38] = {
+unsigned int g_enemyConstantWordsBlock3[38] = {
     0xF5100000, 0x07000000, 0xF3000000, 0x0755C000, 0xF5101000, 0x00017C5F, 0xF2000000, 0x0007C07C,
     0xF5101000, 0x01014050, 0xF2000000, 0x0107C07C, 0xF5100900, 0x02010441, 0xF2000000, 0x0203C03C,
     0xF5100540, 0x0300C832, 0xF2000000, 0x0301C01C, 0xF5100350, 0x04008C23, 0xF2000000, 0x0400C00C,
@@ -64,7 +64,7 @@ unsigned int D_auto_src_ragewars_texture_rgba16_detail_us_rev1[38] = {
 
 /* DATA_800D1138.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_texture_rgba16_sharpen_us_rev1[38] = {
+unsigned int g_enemyConstantWordsBlock4[38] = {
     0xF5100000, 0x07000000, 0xF3000000, 0x0755C000, 0xF5101000, 0x0001785E, 0xF2000000, 0x0007C07C,
     0xF5101000, 0x01014050, 0xF2000000, 0x0107C07C, 0xF5100900, 0x02010441, 0xF2000000, 0x0203C03C,
     0xF5100540, 0x0300C832, 0xF2000000, 0x0301C01C, 0xF5100350, 0x04008C23, 0xF2000000, 0x0400C00C,
@@ -75,7 +75,7 @@ unsigned int D_auto_src_ragewars_texture_rgba16_sharpen_us_rev1[38] = {
 
 /* DATA_800D11D0.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_800D11D0[] = {
+unsigned int g_enemyConstantWordsBlock5[] = {
     0xF5900000, 0x07000000, 0xF3000000, 0x07580000, 0xF5800800, 0x00018060, 0xF2000000, 0x000FC0FC,
     0xF5800500, 0x01014451, 0xF2000000, 0x0107C07C, 0xF5800340, 0x02010842, 0xF2000000, 0x0203C03C,
     0xF5800350, 0x0300CC33, 0xF2000000, 0x0301C01C, 0xF5800358, 0x04009024, 0xF2000000, 0x0400C00C,

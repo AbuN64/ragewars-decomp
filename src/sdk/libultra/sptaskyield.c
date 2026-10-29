@@ -6,12 +6,12 @@
 void osSpTaskYield(void) { Audio_WriteSignalProcessorStatus(0x400U); }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802BA06C[1] = {
+unsigned int k_SptaskyieldEncodedWords[1] = {
     0x7265644A,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802BA13C_de_padding_BAD3C[4] = { 0x0C, 0x0A, 0xE8, 0x60 };
+unsigned char g_SptaskyieldTrailingBytes[4] = { 0x0C, 0x0A, 0xE8, 0x60 };
 #endif
 

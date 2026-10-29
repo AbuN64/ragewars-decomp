@@ -1,6 +1,6 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80106248.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/LONE/RESOURCE_REQUEST_QUEUE.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/WORLDSORTENTRY.H"
@@ -11,8 +11,8 @@
 #if defined(VERSION_EU)
 #include "COMMON/OSVISCALE.H"
 #include "sdk/os.h"
-extern s32 D_800CD70C, D_800E28D8;
-extern OSViMode D_800D47B0, D_800D4530;
+extern s32 g_schedulerFrameCountdown, g_frontendCurrentVideoModeIndex;
+extern OSViMode g_schedulerAlternateVideoMode, g_videoModeLabels;
 extern void osViSetYScale(f32);
 extern void osViSetMode(OSViMode *);
 extern void osViBlack(s32);
@@ -21,8 +21,8 @@ extern void Sched_HandleRetrace(OSSched *);
 extern void Frontend_UpdateScreenMode(void);
 extern void Sched_HandleRdpCompletion(OSSched *);
 extern void SoundElement_FadeOutMusic(void);
-extern void *func_8025CC6C_de(void);
-extern void func_8025CBEC_de(void *);
+extern void *SoundVoicePool_GetGlobalState(void);
+extern void SoundVoicePool_StopAll(void *);
 extern void Sched_HandleTaskCommands(OSSched *);
 
 void Sched_RunEventLoopEu(OSSched *sc) {
@@ -33,10 +33,10 @@ void Sched_RunEventLoopEu(OSSched *sc) {
         osRecvMesg(&sc->interruptQueue, &msg, 1);
         switch ((s32)msg) {
         case 0x29A:
-            if (D_800CD708 && --D_800CD70C <= 0) {
-                osViSetYScale(D_800C5350_de);
-                mode = &D_800D47B0;
-                if (D_800E28D8 == 0) mode = &D_800D4530;
+            if (g_schedulerShutdownPending && --g_schedulerFrameCountdown <= 0) {
+                osViSetYScale(g_schedulerVideoYScale);
+                mode = &g_schedulerAlternateVideoMode;
+                if (g_frontendCurrentVideoModeIndex == 0) mode = &g_videoModeLabels;
                 osViSetMode(mode);
                 osViBlack(1);
                 osViSetSpecialFeatures(2);
@@ -50,10 +50,10 @@ void Sched_RunEventLoopEu(OSSched *sc) {
         case 0x29D:
             SoundElement_FadeOutMusic();
             SoundElement_StopAudioExceptKey(-1);
-            func_8025CBEC_de(func_8025CC6C_de());
+            SoundVoicePool_StopAll(SoundVoicePool_GetGlobalState());
             client = sc->clientList;
-            D_800CD708 = 1;
-            D_800CD70C = 20;
+            g_schedulerShutdownPending = 1;
+            g_schedulerFrameCountdown = 20;
             while (client) {
                 osSendMesg(client->queue, &sc->retraceMessage, 0);
                 client = client->next;
@@ -74,8 +74,8 @@ extern void Scene_SetThreadPriority(void *, s32);
 
 
 
-extern s32 D_800CD704, D_800CD8AC_de, D_800DE850;
-extern s32 D_8011B9F4, D_80142920, D_80142C30, D_80142C38, D_80146CC8, D_80146CD0;
+extern s32 g_resourceLoadPriorityBoost, g_resourceLoadIdlePriority, g_renderFrameBufferCount;
+extern s32 g_schedulerFrameQueueReadIndex, g_schedulerRetracesSinceSwap, g_schedulerPendingFramebuffer, g_displayedFramebufferAndRefreshRate, g_schedulerSwapPending, g_schedulerQueuedFrameCount;
 #include "COMMON/DISPLAY.H"
 
 
@@ -91,28 +91,28 @@ void Sched_HandleRetrace(OSSched *sc) {
     OSScClientWork *work;
     Frame *schedule;
 
-    if (D_800CD704 != 0) {
-        D_800CD704--;
-        if (D_800CD704 == 0) Scene_SetThreadPriority(&D_80106248, D_800CD8AC_de);
+    if (g_resourceLoadPriorityBoost != 0) {
+        g_resourceLoadPriorityBoost--;
+        if (g_resourceLoadPriorityBoost == 0) Scene_SetThreadPriority(&g_resourceCacheWorker, g_resourceLoadIdlePriority);
     }
     sc->frameCount++;
     while (osRecvMesg(&sc->commandQueue, &event, 0) != -1) __scAppendList(sc, event);
-    D_80142920++;
-    if (D_80146CC8 != 0) {
-        D_80142920 = 0;
-        D_80146CC8 = 0;
-        D_80142C38 = D_80142C30;
-        D_80142C30 = 0;
+    g_schedulerRetracesSinceSwap++;
+    if (g_schedulerSwapPending != 0) {
+        g_schedulerRetracesSinceSwap = 0;
+        g_schedulerSwapPending = 0;
+        g_displayedFramebufferAndRefreshRate = g_schedulerPendingFramebuffer;
+        g_schedulerPendingFramebuffer = 0;
     }
-    if (D_80146CD0 != 0) {
-        schedule = D_801428B0[D_8011B9F4];
-        if ((u32)(D_80142920 + 1) >= schedule->ticks) {
-            D_80142C30 = (s32)schedule->colorImage;
+    if (g_schedulerQueuedFrameCount != 0) {
+        schedule = g_schedulerFramebufferSchedule[g_schedulerFrameQueueReadIndex];
+        if ((u32)(g_schedulerRetracesSinceSwap + 1) >= schedule->ticks) {
+            g_schedulerPendingFramebuffer = (s32)schedule->colorImage;
             osViSwapBuffer((s32)schedule->colorImage);
-            D_80146CD0--;
-            D_80146CC8++;
-            D_8011B9F4++;
-            if ((u32)D_8011B9F4 >= (u32)D_800DE850) D_8011B9F4 = 0;
+            g_schedulerQueuedFrameCount--;
+            g_schedulerSwapPending++;
+            g_schedulerFrameQueueReadIndex++;
+            if ((u32)g_schedulerFrameQueueReadIndex >= (u32)g_renderFrameBufferCount) g_schedulerFrameQueueReadIndex = 0;
         }
     }
     if (sc->curRSPTask == 0 && sc->curRDPTask == 0) {
@@ -125,8 +125,8 @@ void Sched_HandleRetrace(OSSched *sc) {
             Sched_HandleRspCompletion(sc);
         }
     }
-    D_800CD700++;
-    if (D_800CD700 == 0x4B0) *(char *)0 = 0;
+    g_schedulerRetraceCount++;
+    if (g_schedulerRetraceCount == 0x4B0) *(char *)0 = 0;
     if (sc->doAudio != 0 && sc->curRSPTask != 0) __scYield(sc);
     else {
         flags = (sc->curRSPTask == 0) * 2 | (sc->curRDPTask == 0);

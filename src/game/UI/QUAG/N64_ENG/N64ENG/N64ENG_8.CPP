@@ -1,3 +1,3 @@
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802A208C_de_padding_A2C8C[4] = { 0x24, 0x42, 0xB3, 0x88 };
+unsigned char g_N64engTrailingBytes[4] = { 0x24, 0x42, 0xB3, 0x88 };
 #endif

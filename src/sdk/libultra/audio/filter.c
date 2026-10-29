@@ -1,14 +1,14 @@
 #include "include_asm.h"
 #include "COMMON/ALPARAM_S.H"
 
-void alFilterNew(void *arg0, void *arg1, void *arg2, int arg3) {
-    struct ALFilter_s *filter = arg0;
+void alFilterNew(void *filterStorage, void *pullHandler, void *parameterHandler, int filterType) {
+    struct ALFilter_s *filter = filterStorage;
     filter->source = 0;
-    filter->handler = arg1;
-    filter->setParam = (s32 (*)(void *, s32, void *))arg2;
+    filter->handler = pullHandler;
+    filter->setParam = (s32 (*)(void *, s32, void *))parameterHandler;
     filter->inp = 0;
     filter->outp = 0;
-    filter->type = arg3;
+    filter->type = filterType;
 }
 
 #if defined(VERSION_EU_X)

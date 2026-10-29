@@ -17,7 +17,7 @@
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/LABEL.H"
 #include "COMMON/PAKQUEUESTATE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/STATEPAIR.H"
 #include "COMMON/MENURECAT24.H"
@@ -38,7 +38,7 @@ extern void Node_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuC
 
 /* Unless slot index is locked, hides the node in that slot and shows the given node through func_8040E928_de, storing it in that slot or, in shared mode, in all four slots. */
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E34A0, an actor kind at D_800E34A4 and a handler at D_800E34A8: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_overlaySlotEventIds, an actor kind at g_overlaySlotEventActorKinds and a handler at g_overlaySlotEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 #if defined(VERSION_DE)
 #elif defined(VERSION_EU)
@@ -53,15 +53,15 @@ extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, Qua
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct CacheResourceBlockView *clip);
 
 extern void Widget_DrawVisibleSiblings(void *, Args);
 
 void SmpOverlay_RegisterOverlayClass(void) {
-    SmSmngr_RegisterElementHandlers(0x7D5, D_0041B970, D_0041BA00, 3);
+    SmSmngr_RegisterElementHandlers(0x7D5, g_SmpOverlay_DispatchSlotEventAddress, g_SmpOverlay_DrawOverlayWidgetAddress, 3);
 }
 
-NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(OwnerRecAt44 *owner, s32 value) {
+NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(MenuOverlayOwnerView *owner, s32 value) {
     NodeMenuCreateOverlayNode *node;
 
     node = (NodeMenuCreateOverlayNode *)Cache_AllocateMemory(0x70);
@@ -77,7 +77,7 @@ NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(OwnerRecAt44 *owner, s32
     return owner->overlay = node;
 }
 
-void SmpOverlay_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
+void SmpOverlay_ShowSlotById(MenuMultiUserOwnerView *owner, s32 index, s32 id) {
     sm_dlmultiuser *context;
     NodeMenuShowSlotById *node;
     s32 i;
@@ -103,14 +103,14 @@ void SmpOverlay_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
 /* Stores a value into entry i of the word array at offset 0x5C of an object; func_8041B7FC_de reads
    the parallel array at offset 0x4C. */
 
-void SmpOverlay_SetSlotValue(struct SlotsRecAt5CV1 *object, s32 index, s32 value) {
+void SmpOverlay_SetSlotValue(struct MenuSlotValueArrayView *object, s32 index, s32 value) {
     object->values[index] = value;
 }
 
 /* Counts the non-zero words among the first n of the array at offset 0x5C of an object, n being
    its count at 0x48. */
 
-s32 SmpOverlay_CountUsedSlots(struct SlotsRecAt5CV2 *object) {
+s32 SmpOverlay_CountUsedSlots(struct MenuCountedSlotValueArrayView *object) {
     s32 used = 0;
     s32 i;
 
@@ -132,8 +132,8 @@ struct WidgetNode *SmpOverlay_GetSlotValue(struct SlotsCode804196C0 *object, s32
 /* Returns the halfword at offset 0xC of the object held in entry i of the pointer array at
    offset 0x4C of an object. */
 
-s16 SmpOverlay_GetSlotNodeId(struct SlotsRecAt4C *object, s32 index) {
-    return object->entries[index]->unkC;
+s16 SmpOverlay_GetSlotNodeId(struct MenuObjectSlotArrayView *object, s32 index) {
+    return object->entries[index]->input;
 }
 
 void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id) {
@@ -175,13 +175,13 @@ void SmpOverlay_ShowSlotNode(sm_dlmultiuser *context, s32 index, NodeMenuShowSlo
 }
 
 /* Stores a value into the word at offset 0x6C of an object; func_8041CE18_de uses it to set that word
-   to one on the object held at offset 4 of the structure D_800E3590 points to. */
+   to one on the object held at offset 4 of the structure g_profileStatisticsScreen points to. */
 
 void SmpOverlay_SetObjectValue(struct Object6C *object, s32 value) {
     object->value = value;
 }
 
-s32 SmpOverlay_DispatchSlotEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpOverlay_DispatchSlotEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -190,38 +190,38 @@ s32 SmpOverlay_DispatchSlotEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 a
 
     if (
 #if defined(VERSION_DE)
-D_800DF458
+g_overlaySlotEventHandlersDe
 #elif defined(VERSION_EU)
-D_800EFAC8
+g_overlaySlotEventHandlersEu
 #elif defined(VERSION_EU_X)
-D_800EAC88
+g_overlaySlotEventHandlersEuX
 #elif defined(VERSION_US)
-D_800DE108
+g_overlaySlotEventHandlersUs
 #elif defined(VERSION_US_REV1)
-D_800E34A8
+g_overlaySlotEventHandlers
 #endif
  != 0) {
         wildcard = 0x7530;
         entry = (char *)&
 #if defined(VERSION_DE)
-D_800DF458
+g_overlaySlotEventHandlersDe
 #elif defined(VERSION_EU)
-D_800EFAC8
+g_overlaySlotEventHandlersEu
 #elif defined(VERSION_EU_X)
-D_800EAC88
+g_overlaySlotEventHandlersEuX
 #elif defined(VERSION_US)
-D_800DE108
+g_overlaySlotEventHandlersUs
 #elif defined(VERSION_US_REV1)
-D_800E34A8
+g_overlaySlotEventHandlers
 #endif
 ;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E34A0)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E34A4)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_overlaySlotEventIds)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_overlaySlotEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
@@ -295,7 +295,7 @@ s32 SmpOverlay_FollowSlotTarget34(struct sm_dlmultiuser_t *owner, s32 unused1, s
 }
 
 s32 SmpOverlay_FollowSlotTarget2c(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
-    struct ChildRecAt2C *child;
+    struct MenuListTargetView *child;
 
     MarkMenuEventHandled();
     if (kind != 1) {
@@ -319,7 +319,7 @@ s32 SmpOverlay_FollowSlotTarget2c(struct sm_dlmultiuser_t *owner, s32 unused1, s
 }
 
 s32 SmpOverlay_FollowSlotTarget38(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
-    struct ChildRecAt38 *child;
+    struct MenuOverlayTargetView *child;
 
     MarkMenuEventHandled();
     if (kind != 1) {
@@ -343,7 +343,7 @@ s32 SmpOverlay_FollowSlotTarget38(struct sm_dlmultiuser_t *owner, s32 unused1, s
 }
 
 s32 SmpOverlay_FollowSlotTarget30(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
-    struct ChildRecAt30 *child;
+    struct MenuTextTargetView *child;
 
     MarkMenuEventHandled();
     if (kind != 1) {
@@ -367,7 +367,7 @@ s32 SmpOverlay_FollowSlotTarget30(struct sm_dlmultiuser_t *owner, s32 unused1, s
 }
 
 int SmpOverlay_ForwardSlotEvent(Mixer *mixer, int unused, int channel, int value, int extra) {
-    ObjRecAtCV1 *h;
+    MenuActorInputView *h;
 
     MarkMenuEventHandled();
     if (mixer->muted[(unsigned short)channel] != 0) {
@@ -377,7 +377,7 @@ int SmpOverlay_ForwardSlotEvent(Mixer *mixer, int unused, int channel, int value
     if (h == 0) {
         return 0;
     }
-    Menu_RouteElementEvent(h->unkC, 1, channel, value, extra);
+    Menu_RouteElementEvent(h->input, 1, channel, value, extra);
     return 0;
 }
 
@@ -390,7 +390,7 @@ s32 SmpOverlay_FreeEventObject(void *allocation) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #else
 #endif
-extern SlotDialog *D_800E3518;
+extern SlotDialog *g_pakDialog;
 
 /* Calls func_8040E928_de with flag 1 on each of the list's items (count at 0x48, items from 0x4C) and
    returns 0. */
@@ -429,47 +429,47 @@ extern void SmpOverlay_AdvancePakDialogPort(void);
 #if defined(VERSION_DE)
 extern char g_noteCountIntFormat[];
 
-extern s32 D_800DF4C4;
+extern s32 g_pakProfileOperationPhase;
 #elif defined(VERSION_EU)
-extern char D_800EDAD0[];
-extern s32 D_800EFB34;
+extern char s_pakDialogNoteCountFormatEuropean[];
+extern s32 g_pakDialogProbeStateEu;
 #elif defined(VERSION_EU_X)
-extern char D_800EDAD0[];
-extern s32 D_800EACF4;
+extern char s_pakDialogNoteCountFormatEuropean[];
+extern s32 g_pakDialogProbeStateEuX;
 
 #elif defined(VERSION_US)
 extern char g_noteCountIntFormat[];
 
-extern s32 D_800DE174;
+extern s32 g_pakDialogProbeStateUs;
 #else
 extern char g_noteCountIntFormat[];
-extern s32 D_800E3514;
+extern s32 g_pakDialogProbeStateUsRev1;
 
 #endif
 
 /* Calls Tsmos_DeactivateControllerState and MarkMenuEventHandled, then SmXlate_SwitchScreen with 2, sets D_8014ADA0 and returns
    one. */
 
-/* Refreshes each of the four ports through Note_ProbeStatus and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Note_GetStatus, clearing it otherwise. */
+/* Refreshes each of the four ports through Note_ProbeStatus and sets field 0x1C of g_pakDialog as soon as one reports status 0, -1, -3 or -4 through Note_GetStatus, clearing it otherwise. */
 
 /* Advances the slot-dialog retry counter. Before the fourth attempt it updates
  * the dialog; later attempts start the transition and mark it active. */
 
 extern void SmpOverlay_RefreshPakDialog(void);
 
-/* Builds screen state D_800E3518 under a parent window: allocates its 0x2C bytes, keeps the parent,
+/* Builds screen state g_pakDialog under a parent window: allocates its 0x2C bytes, keeps the parent,
    opens windows 0x3C3 (shown), 0x3C9, 0x3C4 and 0x3C5 (hidden) at 0x4 to 0x10, clears the words at
-   0x14 and 0x18, resets through func_8040C428_de(0) and Tsmos_DeactivateControllerState, sets D_800E28C8 to -1 and
-   D_80146D70 to 0, releases the resources of D_8011FAC0 and of its block at 0x3C8, clears the
+   0x14 and 0x18, resets through func_8040C428_de(0) and Tsmos_DeactivateControllerState, sets g_introSelectedItem to -1 and
+   D_80146D70 to 0, releases the resources of g_gameSession and of its block at 0x3C8, clears the
    word at 0x1C and returns zero. */
 
 extern void SetN64_ResetSessionPlayerPools(void *, s32, s32);
 
 extern void Scene_LoadLevelResources(void *, s32, s32);
 
-/* Releases the object D_800E3518 holds through Cache_FreeMemory, clears D_800E3518 and returns zero. */
+/* Releases the object g_pakDialog holds through Cache_FreeMemory, clears g_pakDialog and returns zero. */
 
-/* In one- or no-player mode, counts a tick on the state D_800E3518 and, while it is not paused, once
+/* In one- or no-player mode, counts a tick on the state g_pakDialog and, while it is not paused, once
    more than five ticks have passed runs Tsmos_ActivateControllerState and SmpOverlay_AdvancePakDialogPort; always returns 0. */
 
 /* The slot-error scalar is real external storage in every ROM version: the de cart writes
@@ -485,9 +485,9 @@ extern void Scene_LoadLevelResources(void *, s32, s32);
 #else
 #endif
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E351C, an actor kind at D_800E3520 and a handler at D_800E3524: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_pakDialogEventIds, an actor kind at g_pakDialogEventActorKinds and a handler at g_pakDialogEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-int SmpOverlay_SetListWidgetFlag40(ListRecAt4C *list) {
+int SmpOverlay_SetListWidgetFlag40(OverlayWidgetListView *list) {
     int i;
 
     for (i = 0; i < list->count; i++) {
@@ -499,110 +499,110 @@ int SmpOverlay_SetListWidgetFlag40(ListRecAt4C *list) {
 void SmpOverlay_RefreshPakDialog(void) {
     s32 foundNote;
     u32 hasRoom;
-    s32 var_a0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 var_s1;
-    s32 var_s2;
-    Label *temp_s0;
+    s32 focusedResourceId;
+    s32 controllerConnected;
+    s32 pakStatus;
+    s32 hasCapacity;
+    s32 canContinue;
+    Label *statusTextWidget;
 
     Menu_SetFocusedElement(SLOT_RESOURCE_962);
-    Widget_SetWidgetFlag08(D_800E3518->absent, 0);
-    var_s2 = 0;
-    Widget_SetWidgetFlag08(D_800E3518->unavailable, 0);
-    var_s1 = 1;
-    Widget_SetWidgetFlag08(D_800E3518->prompt, 0);
-    temp_v0 = Control_IsControllerConnected(0);
-    if (temp_v0 == 1) {
+    Widget_SetWidgetFlag08(g_pakDialog->absent, 0);
+    canContinue = 0;
+    Widget_SetWidgetFlag08(g_pakDialog->unavailable, 0);
+    hasCapacity = 1;
+    Widget_SetWidgetFlag08(g_pakDialog->prompt, 0);
+    controllerConnected = Control_IsControllerConnected(0);
+    if (controllerConnected == 1) {
         SmpOverlay_ProbePakDialogPorts();
-        if (D_800E3518->ready == 1) {
-            Note_ProbeStatus(D_800DF4C0);
-            temp_v0_2 = Note_GetStatus(D_800DF4C0);
-            switch (temp_v0_2) { /* irregular */
+        if (g_pakDialog->ready == 1) {
+            Note_ProbeStatus(g_pakProfileControllerPort);
+            pakStatus = Note_GetStatus(g_pakProfileControllerPort);
+            switch (pakStatus) { /* irregular */
             case 0:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                if ((Note_FindNoteByName(((D_800E25A4)[g_languageIndex]), D_800DF4C0, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(D_800DF4C0, &hasRoom) == 0)) {
+                if ((Note_FindNoteByName(((g_pakProfileGameNames)[g_languageIndex]), g_pakProfileControllerPort, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(g_pakProfileControllerPort, &hasRoom) == 0)) {
 #else
-                if ((Note_FindNoteByName((D_800D36D4), D_800DF4C0, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(D_800DF4C0, &hasRoom) == 0)) {
+                if ((Note_FindNoteByName((g_pakProfileGameNameFixed), g_pakProfileControllerPort, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(g_pakProfileControllerPort, &hasRoom) == 0)) {
 #endif
-                    var_s1 = hasRoom > 0U;
+                    hasCapacity = hasRoom > 0U;
                 }
                 break;
             case -4:
             case -3:
             case -1:
-                var_s2 = 1;
+                canContinue = 1;
                 break;
             }
         }
     }
-    if (temp_v0 == 0) {
-        D_800E3518->state = 1;
-        D_800E3518->elapsed = 0;
-        Widget_SetWidgetFlag08(D_800E3518->main, 0);
-        Widget_SetWidgetFlag08(D_800E3518->unavailable, 1);
+    if (controllerConnected == 0) {
+        g_pakDialog->state = 1;
+        g_pakDialog->elapsed = 0;
+        Widget_SetWidgetFlag08(g_pakDialog->main, 0);
+        Widget_SetWidgetFlag08(g_pakDialog->unavailable, 1);
         goto block_25;
     }
-    if (D_800E3518->ready == 0) {
-        D_800E3518->state = 2;
-        D_800E3518->elapsed = 0;
-        Widget_SetWidgetFlag08(D_800E3518->main, 0);
-        Widget_SetWidgetFlag08(D_800E3518->absent, 1);
-        var_a0 = SLOT_RESOURCE_971;
+    if (g_pakDialog->ready == 0) {
+        g_pakDialog->state = 2;
+        g_pakDialog->elapsed = 0;
+        Widget_SetWidgetFlag08(g_pakDialog->main, 0);
+        Widget_SetWidgetFlag08(g_pakDialog->absent, 1);
+        focusedResourceId = SLOT_RESOURCE_971;
         goto block_24;
     }
-    if ((var_s2 == 1) || (D_8010B0E0.buttons & 0x1000)) {
+    if ((canContinue == 1) || (g_combinedControllerProfile.buttons & 0x1000)) {
         MarkMenuEventHandled();
         D_80146D60 = 1;
         D_800E28CC = 1;
         D_8014AD94 = 0;
-        if (var_s2 == 0) {
+        if (canContinue == 0) {
 #if defined(VERSION_DE)
-            D_800DF4C4 = 0;
+            g_pakProfileOperationPhase = 0;
 #elif defined(VERSION_EU)
-            D_800EFB34 = 0;
+            g_pakDialogProbeStateEu = 0;
 #elif defined(VERSION_EU_X)
-            D_800EACF4 = 0;
+            g_pakDialogProbeStateEuX = 0;
 #elif defined(VERSION_US)
-            D_800DE174 = 0;
+            g_pakDialogProbeStateUs = 0;
 #else
-            D_800E3514 = 0;
+            g_pakDialogProbeStateUsRev1 = 0;
 #endif
         } else {
 #if defined(VERSION_DE)
-            D_800DF4C4 = 2;
+            g_pakProfileOperationPhase = 2;
 #elif defined(VERSION_EU)
-            D_800EFB34 = 2;
+            g_pakDialogProbeStateEu = 2;
 #elif defined(VERSION_EU_X)
-            D_800EACF4 = 2;
+            g_pakDialogProbeStateEuX = 2;
 #elif defined(VERSION_US)
-            D_800DE174 = 2;
+            g_pakDialogProbeStateUs = 2;
 #else
-            D_800E3514 = 2;
+            g_pakDialogProbeStateUsRev1 = 2;
 #endif
         }
         PAKInterface_SetScreenPhase(6);
         SmXlate_SwitchScreen(0x13);
         return;
     }
-    if (var_s1 == 1) {
+    if (hasCapacity == 1) {
         SmpOverlay_AdvancePakDialogPort();
         return;
     }
-    temp_s0 = Node_FindWidgetByResourceId(D_800E3518->root, SLOT_RESOURCE_968);
+    statusTextWidget = Node_FindWidgetByResourceId(g_pakDialog->root, SLOT_RESOURCE_968);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    XStdio_FormatBuffer(D_800E3518->text, D_800EDAD0, D_800DF4C0 + 1);
+    XStdio_FormatBuffer(g_pakDialog->text, s_pakDialogNoteCountFormatEuropean, g_pakProfileControllerPort + 1);
 #else
-    XStdio_FormatBuffer(D_800E3518->text, g_noteCountIntFormat, D_800DF4C0 + 1);
+    XStdio_FormatBuffer(g_pakDialog->text, g_noteCountIntFormat, g_pakProfileControllerPort + 1);
 #endif
-    temp_s0->text = D_800E3518->text;
-    D_800E3518->state = 3;
-    D_800E3518->elapsed = 0;
-    Widget_SetWidgetFlag08(D_800E3518->main, 0);
-    Widget_SetWidgetFlag08(D_800E3518->prompt, 1);
-    var_a0 = SLOT_RESOURCE_966;
+    statusTextWidget->text = g_pakDialog->text;
+    g_pakDialog->state = 3;
+    g_pakDialog->elapsed = 0;
+    Widget_SetWidgetFlag08(g_pakDialog->main, 0);
+    Widget_SetWidgetFlag08(g_pakDialog->prompt, 1);
+    focusedResourceId = SLOT_RESOURCE_966;
 block_24:
-    Menu_SetFocusedElement(var_a0);
+    Menu_SetFocusedElement(focusedResourceId);
 block_25:
     Tsmos_ActivateControllerState();
 }
@@ -618,25 +618,25 @@ s32 SmpOverlay_FinishPakDialog(void) {
 void SmpOverlay_ProbePakDialogPorts(void) {
     s32 port;
 
-    D_800E3518->ready = 0;
+    g_pakDialog->ready = 0;
     for (port = 0; port < 4; port++) {
         Note_ProbeStatus(port);
         switch (Note_GetStatus(port)) {
         case 0:
-            D_800E3518->ready = 1;
+            g_pakDialog->ready = 1;
             return;
         case -1:
         case -3:
         case -4:
-            D_800E3518->ready = 1;
+            g_pakDialog->ready = 1;
             return;
         }
     }
 }
 
 void SmpOverlay_AdvancePakDialogPort(void) {
-    D_800DF4C0++;
-    if (D_800DF4C0 >= 4) {
+    g_pakProfileControllerPort++;
+    if (g_pakProfileControllerPort >= 4) {
         Tsmos_DeactivateControllerState();
         MarkMenuEventHandled();
         SmXlate_SwitchScreen(2);
@@ -649,8 +649,8 @@ void SmpOverlay_AdvancePakDialogPort(void) {
 s32 SmpOverlay_CreatePakDialog(void *parent) {
     void *window;
     char *resources;
-    D_800E3518 = Cache_AllocateMemory(0x2C);
-    D_800E3518->root = parent;
+    g_pakDialog = Cache_AllocateMemory(0x2C);
+    g_pakDialog->root = parent;
 #if defined(VERSION_DE)
     window = Node_FindWidgetByResourceId(parent, 0x3BE);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -658,7 +658,7 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
 #elif defined(VERSION_EU_X)
     window = Node_FindWidgetByResourceId(parent, 0x3CC);
 #endif
-    D_800E3518->main = window;
+    g_pakDialog->main = window;
     Widget_SetWidgetFlag08(window, 1);
 #if defined(VERSION_DE)
     window = Node_FindWidgetByResourceId(parent, 0x3C3);
@@ -667,7 +667,7 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
 #elif defined(VERSION_EU_X)
     window = Node_FindWidgetByResourceId(parent, 0x3CD);
 #endif
-    D_800E3518->absent = window;
+    g_pakDialog->absent = window;
     Widget_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
     window = Node_FindWidgetByResourceId(parent, 0x3BD);
@@ -676,7 +676,7 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
 #elif defined(VERSION_EU_X)
     window = Node_FindWidgetByResourceId(parent, 0x3C6);
 #endif
-    D_800E3518->unavailable = window;
+    g_pakDialog->unavailable = window;
     Widget_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
     window = Node_FindWidgetByResourceId(parent, 0x3BF);
@@ -685,32 +685,32 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
 #elif defined(VERSION_EU_X)
     window = Node_FindWidgetByResourceId(parent, 0x3C8);
 #endif
-    D_800E3518->prompt = window;
+    g_pakDialog->prompt = window;
     Widget_SetWidgetFlag08(window, 0);
-    D_800E3518->elapsed = 0;
-    D_800E3518->state = 0;
+    g_pakDialog->elapsed = 0;
+    g_pakDialog->state = 0;
     Frontend_RequestScreenMode(0);
     Tsmos_DeactivateControllerState();
-    D_800E28C8 = -1;
+    g_introSelectedItem = -1;
     D_80146D70 = 0;
-    resources = (char *)&D_8011FAC0;
+    resources = (char *)&g_gameSession;
     SetN64_ResetSessionPlayerPools(resources, 0, 0);
     Scene_LoadLevelResources(resources + 0x3C8, 0, 0);
-    D_800E3518->ready = 0;
+    g_pakDialog->ready = 0;
     return 0;
 }
 
 s32 SmpOverlay_DestroyPakDialog(void) {
-    Cache_FreeMemory(D_800E3518);
-    D_800E3518 = 0;
+    Cache_FreeMemory(g_pakDialog);
+    g_pakDialog = 0;
     return 0;
 }
 
 int SmpOverlay_TickPakDialog(void) {
-    if (D_800E28E0 < 2) {
-        D_800E3518->elapsed++;
-        if (D_800E3518->state == 0) {
-            if (D_800E3518->elapsed < 6) {
+    if (g_selectionMessageStage < 2) {
+        g_pakDialog->elapsed++;
+        if (g_pakDialog->state == 0) {
+            if (g_pakDialog->elapsed < 6) {
                 return 0;
             }
             Tsmos_ActivateControllerState();
@@ -722,7 +722,7 @@ int SmpOverlay_TickPakDialog(void) {
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_8041C46C_de(void) {
+s32 SmpOverlay_ReturnUnhandledPakDialogEvent(void) {
     return 0;
 }
 
@@ -744,7 +744,7 @@ s32 SmpOverlay_HandlePakDialogChoice(void) {
 #else
     case 0x3CB:
 #endif
-        Widget_SetWidgetFlag08(D_800E3518->absent, 0);
+        Widget_SetWidgetFlag08(g_pakDialog->absent, 0);
         SmpOverlay_RefreshPakDialog();
         break;
 #if defined(VERSION_EU_X)
@@ -776,15 +776,15 @@ s32 SmpOverlay_HandlePakDialogChoice(void) {
         D_800E28CC = 1;
         D_8014AD94 = 0;
 #if defined(VERSION_EU)
-        D_800EFB34 = 1;
+        g_pakDialogProbeStateEu = 1;
 #elif defined(VERSION_EU_X)
-        D_800EACF4 = 1;
+        g_pakDialogProbeStateEuX = 1;
 #elif defined(VERSION_DE)
-        D_800DF4C4 = 1;
+        g_pakProfileOperationPhase = 1;
 #elif defined(VERSION_US)
-        D_800DE174 = 1;
+        g_pakDialogProbeStateUs = 1;
 #else
-        D_800E3514 = 1;
+        g_pakDialogProbeStateUsRev1 = 1;
 #endif
         PAKInterface_SetScreenPhase(6);
         SmXlate_SwitchScreen(0x13);
@@ -793,23 +793,23 @@ s32 SmpOverlay_HandlePakDialogChoice(void) {
     return 0;
 }
 
-s32 SmpOverlay_DispatchPakDialogEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpOverlay_DispatchPakDialogEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E3524 != 0) {
+    if (g_pakDialogEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E3524;
+        entry = (char *)&g_pakDialogEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E351C)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3520)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_pakDialogEventIds)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_pakDialogEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
@@ -820,7 +820,7 @@ s32 SmpOverlay_DispatchPakDialogEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, 
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8041C67C[1] = {
+unsigned int k_SmpOverlayEncodedWords[1] = {
     0x00941000,
 };
 #endif
@@ -828,19 +828,19 @@ unsigned int rodata_unresolved_8041C67C[1] = {
 /* 800E1470_2.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)
-const unsigned char rodata_func_8041BE90_de_800EDAD0[3] = {
+const unsigned char s_SmpOverlay_RefreshPakDialogTextDePart2[3] = {
     0x25, 0x64, 0x00,
 };
 #endif
 #if defined(VERSION_EU_X)
-const unsigned int rodata_func_8041BE90_de_800EDAD0[1] = {
+const unsigned int s_SmpOverlay_RefreshPakDialogTextDePart2[1] = {
     0x25640086,
 };
 #endif
 #endif
 
 #if defined(VERSION_EU)
-unsigned char rodata_unresolved_800EDAD3[13] = {
+unsigned char k_SmpOverlayEncodedBytes[13] = {
     0x2F, 0x01, 0x29, 0x01, 0x2C, 0x01, 0x2A, 0x01, 0x2B, 0x08, 0x00, 0xFF, 0xE5,
 };
 #endif

@@ -20,9 +20,9 @@ void Pools_ResetActorPools(void *, s32);
 void Scene_LoadLevelResources(void *, s32, s32);
 void SmXlate_SwitchScreen(s32);
 
-extern Shared_MenuReply D_80154020;
+extern Shared_MenuReply g_selectionMessageReply;
 
-extern Shared_OptionsScreen *D_800E4518;
+extern Shared_OptionsScreen *g_optionsShortcutScreen;
 
 /* Advances the menu transition and dispatches the selected level once its animations finish. */
 #endif

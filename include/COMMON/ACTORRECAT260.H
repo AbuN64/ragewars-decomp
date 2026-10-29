@@ -5,11 +5,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 
-struct ActorRecAt260;
-typedef struct ActorRecAt260 ActorRecAt260;
+struct ControllerPakMenuActorView;
+typedef struct ControllerPakMenuActorView ControllerPakMenuActorView;
 
-struct ActorRecAt260;
-struct ActorRecAt260 {
+struct ControllerPakMenuActorView;
+struct ControllerPakMenuActorView {
     char pad[0x58];
     int flags58;
     char pad5c[0xC4];
@@ -24,40 +24,40 @@ struct ActorRecAt260 {
     int flags260;
 };
 
-struct ArgRecAt1C;
-struct ArgRecAt1C {
+struct ControllerPakMenuContext;
+struct ControllerPakMenuContext {
     char pad[12];
-    ActorRecAt260 *unkC;
+    ControllerPakMenuActorView *actor;
     char pad2[12];
-    int unk1C;
+    int playerAddress;
 };
 
 
-struct ArgRecAt1C;
-typedef struct ArgRecAt1C ArgRecAt1C;
+struct ControllerPakMenuContext;
+typedef struct ControllerPakMenuContext ControllerPakMenuContext;
 
 
 struct ActorCode80443868804438BC;
 struct ActorCode80443868804438BC {
     char pad0[4928];
-    s32 unk1340;
+    s32 respawnDelayFrames;
     char pad1344[268];
     s32 unk1450;
 };
 
 struct ActorCode80443868804438BC;
-struct StateRecAt1C;
-struct StateRecAt1C {
+struct PlayerRespawnMenuContext;
+struct PlayerRespawnMenuContext {
     char pad0[28];
-    struct ActorCode80443868804438BC * unk1C;
+    struct ActorCode80443868804438BC * actor;
 };
 
 struct CaptionEntry;
 typedef struct CaptionEntry CaptionEntry;
 
 
-struct ObjectRecAt1C;
-typedef struct ObjectRecAt1C ObjectRecAt1C;
+struct PlayerMenuFlagContext;
+typedef struct PlayerMenuFlagContext PlayerMenuFlagContext;
 
 struct Leaf;
 struct Leaf {
@@ -71,8 +71,8 @@ struct Middle {
     struct Leaf *leaf;
 };
 struct Middle;
-struct RootRecAt1C;
-struct RootRecAt1C {
+struct NestedPlayerMenuFlagContext;
+struct NestedPlayerMenuFlagContext {
     char pad[0x1C];
     struct Middle *middle;
 };
@@ -80,11 +80,11 @@ struct RootRecAt1C {
 struct OwnerCode8043DF84;
 typedef struct OwnerCode8043DF84 OwnerCode8043DF84;
 
-struct ActorRecAt260;
-struct ObjectRecAt1C;
-struct ObjectRecAt1C {
+struct ControllerPakMenuActorView;
+struct PlayerMenuFlagContext;
+struct PlayerMenuFlagContext {
     char pad[0xC];
-    struct ActorRecAt260 *actor;
+    struct ControllerPakMenuActorView *actor;
     char pad10[0xC];
     OwnerCode8043DF84 *parent;
 };
@@ -95,20 +95,20 @@ struct ActorCode80443868 {
     char pad[0x5D0];
     int waiting;
     char pad5D4[4];
-    ObjRecAt8F *info;
+    FragTagProfileFlagView *info;
 };
 struct ActorCode80443868;
-struct PlayerRecAt1C;
-struct PlayerRecAt1C {
+struct PlayerMenuResumeContext;
+struct PlayerMenuResumeContext {
     char pad[0x1C];
     struct ActorCode80443868 *actor;
 };
 
-struct PlayerRecAt1C;
-typedef struct PlayerRecAt1C PlayerRecAt1C;
+struct PlayerMenuResumeContext;
+typedef struct PlayerMenuResumeContext PlayerMenuResumeContext;
 
 
-struct RecordRecAtCV3;
+struct MenuPromptKindView;
 
 struct CaptionEntry;
 struct CaptionEntry {
@@ -127,11 +127,11 @@ struct CaptionEntry {
 struct ActorCode80443868804438BC;
 typedef struct ActorCode80443868804438BC ActorCode80443868804438BC;
 
-struct RootRecAt1C;
+struct NestedPlayerMenuFlagContext;
 
 
-struct StateRecAt1C;
-typedef struct StateRecAt1C StateRecAt1C;
+struct PlayerRespawnMenuContext;
+typedef struct PlayerRespawnMenuContext PlayerRespawnMenuContext;
 
 
 

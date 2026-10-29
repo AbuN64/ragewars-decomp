@@ -2,12 +2,12 @@
 
 /* 80275E44_5.CPP */
 #if defined(VERSION_EU_X)
-unsigned char D_auto_func_80276608_eu_x_padding_77208[8] = { 0x03, 0xE0, 0x00, 0x08, 0x27, 0xBD, 0x00, 0x60 };
+unsigned char g_RegionTrailingBytesBlock1[8] = { 0x03, 0xE0, 0x00, 0x08, 0x27, 0xBD, 0x00, 0x60 };
 #endif
 
 /* 80277444_5.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_80278C3C_eu_padding_7983C[4] = { 0xC6, 0x0C, 0x00, 0x08 };
+unsigned char g_RegionTrailingBytesBlock5[4] = { 0xC6, 0x0C, 0x00, 0x08 };
 #endif
 
 /* 80279208_6.CPP */

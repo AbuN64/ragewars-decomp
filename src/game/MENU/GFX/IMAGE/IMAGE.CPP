@@ -18,7 +18,7 @@ void Image_EmitMatrix(void *source) {
     command->words[1] = (unsigned)allocation;
 }
 
-/* Rewrites an image's pixel rows in place when row fixing is enabled (D_800E32F0): the row length
+/* Rewrites an image's pixel rows in place when row fixing is enabled (g_imageSwizzleEnabled): the row length
    in 8-byte pixel groups comes from the image width and the bit depth reported by Frontend_GetImagePixelType
    (4, 8 or 16 bits), odd rows swap the two words of each group and even rows are copied to the
    write position through XPlus_CopyBytes when source and destination differ. */
@@ -28,7 +28,7 @@ void Image_EmitMatrix(void *source) {
 
 extern s32 Frontend_GetImagePixelType(u8 *record);
 
-void Image_SwizzleImage(Image_func_80419490_de *image) {
+void Image_SwizzleImage(SwizzledImageView *image) {
     s32 *src;
     s32 *dst;
     s32 groups;
@@ -37,7 +37,7 @@ void Image_SwizzleImage(Image_func_80419490_de *image) {
     s32 first;
     s32 second;
 
-    if (D_800E32F0 == 0 || image->width == 0 || image->height == 0) {
+    if (g_imageSwizzleEnabled == 0 || image->width == 0 || image->height == 0) {
         return;
     }
     switch (Frontend_GetImagePixelType((u8 *)image)) {

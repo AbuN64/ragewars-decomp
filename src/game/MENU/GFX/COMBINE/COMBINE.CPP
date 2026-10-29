@@ -1,6 +1,6 @@
 #include "COMMON/RECTANGLE_DRAW.H"
 #include "COMMON/GFX.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TEXTURE.H"
 #include "gbi.h"
@@ -14,16 +14,16 @@
 
 
 extern Gfx *g_displayListCursor;
-extern s32 D_800DF250;
-extern s32 D_800E32CC;
+extern s32 g_combineRenderStateEnabled;
+extern s32 g_combineCachedRenderMode;
 
 
 static inline void sync(void) {
     Gfx *cmd;
 
-    if (D_800E32E4 == 0) {
+    if (g_combinePipelineSyncPending == 0) {
         cmd = g_displayListCursor++;
-        D_800E32E4 = 1;
+        g_combinePipelineSyncPending = 1;
         gDPPipeSync(cmd);
     }
 }
@@ -41,10 +41,10 @@ void Combine_ConfigurePrimitiveRenderFlags(s32 flags) {
     groups.pad0 = (flags & 0x3000) == 0x3000;
     groups.pad1 = (flags & 0x30000) == 0x30000;
     Rect_ResetRenderState();
-    D_800E32E4 = 0;
+    g_combinePipelineSyncPending = 0;
     sync();
     plain = groups.y == 0;
-    D_800E32CC = plain ? 11 : 12;
+    g_combineCachedRenderMode = plain ? 11 : 12;
     gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
     gSPGeometryMode(g_displayListCursor++, G_ZBUFFER | G_SHADE | G_CULL_FRONT | G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_SHADING_SMOOTH, 0);
     gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH);
@@ -73,7 +73,7 @@ void Combine_ConfigurePrimitiveRenderFlags(s32 flags) {
             cycle2 = 0x104A50;
             break;
     }
-    D_800DF250 = 1;
+    g_combineRenderStateEnabled = 1;
     gDPSetRenderMode(g_displayListCursor++, cycle1, cycle2);
     D_80153F60 = groups;
 }

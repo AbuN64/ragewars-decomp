@@ -20,9 +20,9 @@ typedef struct Owner8020F150 Owner8020F150;
 struct Shared_Input;
 typedef struct Shared_Input Shared_Input;
 
-struct Shape_func_8021A2D4_de_2;
-struct Shape_func_8021A2D4_de_2 {
-    int field_0;
+struct MemoryUsageStats;
+struct MemoryUsageStats {
+    int value;
 };
 
 struct Triple;
@@ -174,9 +174,9 @@ struct Shared_Effect {
 struct Record;
 struct Record {
     char pad0[0x80];
-    s8 unk80; /* Player_PlacePlayerForRound passes it to func_8022F454_de */
+    s8 characterId; /* Player_PlacePlayerForRound passes it to func_8022F454_de */
     char pad81[0x8F - 0x81];
-    u8 unk8F;
+    u8 fragTagEnabled;
     char pad90[0x92 - 0x90];
     u8 team;
     u8 unk93;
@@ -190,7 +190,7 @@ struct View {
     u16 *key; /* 0x58 */
     f32 blendOffset; /* 0x5C */
     char pad60[0x128 - 0x60];
-    CVector3 unk128;
+    CVector3 position;
     char pad134[0x29C - 0x134];
     f32 viewport[4]; /* 0x29C: width, height, x, y */
     char pad2AC[0x340 - 0x2AC];
@@ -251,9 +251,9 @@ struct Body {
     u8 pad[0x24];
     f32 speed;
 };
-struct Actor_func_80214DD4_de;
+struct BarrelAnchorActorView;
 struct Controller;
-struct Actor_func_80214DD4_de {
+struct BarrelAnchorActorView {
     u8 type;
     u8 pad1[7];
     CVector3 pos;
@@ -278,7 +278,7 @@ struct Actor_func_80214DD4_de {
 
 struct Controller {
     u8 pad0[0xB0];
-    s32 unkB0;
+    s32 rawButtons;
     u8 padB4[0x62E - 0xB4];
     s16 currentWeapon; /* 0x62E: CPlayerLoadSaveData_t m_CurrentWeapon */
     u8 pad630[0x6AC - 0x630];
@@ -286,21 +286,21 @@ struct Controller {
     u8 pad6B0[0x788 - 0x6B0];
     s32 state;
     u8 pad78C[8];
-    struct Actor_func_80214DD4_de *owner;
+    struct BarrelAnchorActorView *owner;
 };
 struct Ctrl;
 struct Ctrl {
     u8 pad[0x8F];
     u8 flag;
 };
-struct ObjRecAt28V1;
-typedef struct ObjRecAt28V1 ObjRecAt28V1;
+struct RibbonClockNode;
+typedef struct RibbonClockNode RibbonClockNode;
 
-struct ObjRecAt28V1;
-struct ObjRecAt28V1 {
-    struct ObjRecAt28V1 *next;
-    struct ObjRecAt28V1 *prev;
-    f32 unk8;
+struct RibbonClockNode;
+struct RibbonClockNode {
+    struct RibbonClockNode *next;
+    struct RibbonClockNode *prev;
+    f32 time;
     char padC[0x28 - 0xC];
     s32 matrix[2][16];
     f32 offset;
@@ -310,7 +310,7 @@ struct ObjRecAt28V1 {
 struct Mode;
 struct Mode {
     char pad0[8];
-    ObjRecAt28V1 *physics;
+    RibbonClockNode *physics;
     char padC[12];
 };
 struct StateInfo;
@@ -348,11 +348,11 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 
-struct ObjRecAt5DC;
-typedef struct ObjRecAt5DC ObjRecAt5DC;
+struct ActorOwnerView;
+typedef struct ActorOwnerView ActorOwnerView;
 
-struct ProfileRecAt84;
-struct ProfileRecAt84 {
+struct PakStatusProfile;
+struct PakStatusProfile {
     u16 words[4];
     char pad8[0x78];
     u8 flags;
@@ -360,67 +360,67 @@ struct ProfileRecAt84 {
     u8 name[8];
 };
 
-struct PlayerRecAt122C;
-struct PlayerRecAt122C {
+struct PlayerDamageFlagsView;
+struct PlayerDamageFlagsView {
     char pad0[0x122C];
     s32 flags;
 };
 
 
-struct ObjRecAt4V5;
-struct ObjRecAt4V5 {
+struct ParticleKindListView;
+struct ParticleKindListView {
     char pad0[0x4];
-    u16 unk4;
+    u16 kind;
 };
 
-struct func_8024E8F0_S1;
-struct func_8024E8F0_S1 {
-    u8 unk0;
+struct ActorEmitterSource;
+struct ActorEmitterSource {
+    u8 actorKind;
     char pad0[0x100 - 0x0 - sizeof(u8)];
-    s32 unk100;
+    s32 flags;
 };
 
-struct func_8024E8F0_S1;
-typedef struct func_8024E8F0_S1 func_8024E8F0_S1;
+struct ActorEmitterSource;
+typedef struct ActorEmitterSource ActorEmitterSource;
 
-struct Shape_typemap_165;
+struct CacheResourceBlockView;
 struct Pack;
-struct Shape_typemap_165 {
-    union { int field_0; struct Pack *pack; void *data; };
+struct CacheResourceBlockView {
+    union { int first; struct Pack *pack; void *data; };
     int field_4;
     int field_8;
     int field_C;
 };
 
-struct ObjRecAt18V4;
-typedef struct ObjRecAt18V4 ObjRecAt18V4;
+struct AttackBehaviorDefinitionView;
+typedef struct AttackBehaviorDefinitionView AttackBehaviorDefinitionView;
 
-struct ObjRecAt8F;
-typedef struct ObjRecAt8F ObjRecAt8F;
+struct FragTagProfileFlagView;
+typedef struct FragTagProfileFlagView FragTagProfileFlagView;
 
-struct func_80204468_S3;
-typedef struct func_80204468_S3 func_80204468_S3;
+struct LinkedWorldFlagsView;
+typedef struct LinkedWorldFlagsView LinkedWorldFlagsView;
 
-struct func_80204468_S3;
-struct func_80204468_S3 {
+struct LinkedWorldFlagsView;
+struct LinkedWorldFlagsView {
     char pad0[0x14];
-    int unk14;
+    int flags;
 };
 
 
 struct PakMenuSlot;
 struct PakMenuSlot {
     char pad0[0x4];
-    s8 unk4;
+    s8 controllerPort;
     char pad05[0xB0 - 5];
     s32 unkB0; /* controller input flags used by Controller Pak selection */
 };
 
-struct ObjRecAt5DC;
-struct ObjRecAt5DC {
+struct ActorOwnerView;
+struct ActorOwnerView {
     char pad0[0x5D8];
-    struct ProfileRecAt84 *profile;
-    char * unk5DC;
+    struct PakStatusProfile *profile;
+    char * owner;
     char pad5E0[0x698 - 0x5E0];
     struct Controller *controller;
 };
@@ -435,28 +435,28 @@ struct Owner8020F150 {
 };
 
 
-struct ObjRecAt8F;
-struct ObjRecAt8F {
+struct FragTagProfileFlagView;
+struct FragTagProfileFlagView {
     char pad0[0x8F];
-    u8 unk8F;
+    u8 fragTagEnabled;
 };
 
-extern float D_800CD740_de;
+extern float g_particleSimulationTimeScale;
 
 
-struct ObjRecAt4V5;
-typedef struct ObjRecAt4V5 ObjRecAt4V5;
+struct ParticleKindListView;
+typedef struct ParticleKindListView ParticleKindListView;
 
 
-struct ObjRecAt18V4;
+struct AttackBehaviorDefinitionView;
 
-struct func_80228774_S5;
-typedef struct func_80228774_S5 func_80228774_S5;
+struct LinkedActorOwnerView;
+typedef struct LinkedActorOwnerView LinkedActorOwnerView;
 
-struct func_80228774_S5;
-struct func_80228774_S5 {
+struct LinkedActorOwnerView;
+struct LinkedActorOwnerView {
     char pad0[0x5DC];
-    void * unk5DC;
+    void * owner;
 };
 
 
@@ -469,25 +469,25 @@ struct Saved {
     u32 checksum; /* 0x14: checksum over the preceding 20 bytes. */
 };
 
-struct PlayerRecAt122C;
-typedef struct PlayerRecAt122C PlayerRecAt122C;
+struct PlayerDamageFlagsView;
+typedef struct PlayerDamageFlagsView PlayerDamageFlagsView;
 
 
-struct OwnerRecAt5D8V1;
-struct ProfileRecAt84;
-struct OwnerRecAt5D8V1 {
+struct PlayerSavedProfileOwner;
+struct PakStatusProfile;
+struct PlayerSavedProfileOwner {
     char pad[0x5D8];
-    struct ProfileRecAt84 *settings;
+    struct PakStatusProfile *settings;
 };
 
 
-struct Shape_typemap_3;
-struct Shape_typemap_3 {
-    int field_0;
+struct AnimationEventMaskView;
+struct AnimationEventMaskView {
+    int value;
 };
 
 extern int D_800E28CC;
 
-struct ProfileRecAt84;
-typedef struct ProfileRecAt84 ProfileRecAt84;
+struct PakStatusProfile;
+typedef struct PakStatusProfile PakStatusProfile;
 #endif

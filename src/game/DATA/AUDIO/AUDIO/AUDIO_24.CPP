@@ -2,7 +2,7 @@
 
 /* 802B7058_47.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_802BD4B8_eu_padding_BE0B8[8] = { 0x02, 0x40, 0x30, 0x21, 0x1A, 0xA0, 0x00, 0x07 };
+unsigned char g_AudioTrailingBytesBlock24[8] = { 0x02, 0x40, 0x30, 0x21, 0x1A, 0xA0, 0x00, 0x07 };
 #endif
 
 /* 802BE040_69.CPP */
@@ -13,7 +13,7 @@ unsigned int func_802BA3AC_eu_x[1] = { 0x02021025U };
 
 /* DATA_802B62AC.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_802B62AC[65] = {
+unsigned int k_AudioEncodedWords[65] = {
     0x001A5745, 0x27BDFFC8, 0xAFB5002C, 0x0080A821, 0xAFB30024, 0x00A09821, 0xAFB20020, 0x00C09021,
     0xAFB40028, 0xAFBF0030, 0xAFB1001C, 0xAFB00018, 0x8EB10000, 0x8FB00048, 0x16200007, 0x00E0A021,
     0x3C04800C, 0x24847710, 0x3C05800C, 0x24A57714, 0x0C0AEAE0, 0x24060022, 0x02202021, 0x02602821,

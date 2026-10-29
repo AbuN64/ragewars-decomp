@@ -5,7 +5,7 @@
 struct {
     unsigned int w0;
     unsigned char b1[32];
-} D_auto_rodata_writable_800CBC80 = {
+} g_savedFlagToggleStorage = {
     0x00000000,
     {
         0x38, 0x38, 0x38, 0x00, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0x00, 0x38, 0x38, 0x38, 0x00,
@@ -17,7 +17,7 @@ struct {
 struct {
     unsigned int w0[4];
     unsigned char b1[20];
-} D_auto_rodata_writable_800CBC80 = {
+} g_savedFlagToggleStorage = {
     {
         0x00000000, 0x3F7F9F36, 0x3F7F52FA, 0x3F7F06B0,
     },
@@ -31,7 +31,7 @@ struct {
 struct {
     unsigned int w0[4];
     unsigned char b1[20];
-} D_auto_rodata_writable_800CBC80 = {
+} g_savedFlagToggleStorage = {
     {
         0x00000000, 0x00000000, 0x4E4F5553, 0x20564F55,
     },
@@ -45,7 +45,7 @@ struct {
 struct {
     unsigned int w0[4];
     unsigned char b1[20];
-} D_auto_rodata_writable_800CBC80 = {
+} g_savedFlagToggleStorage = {
     {
         0x00000000, 0x52454144, 0x59657175, 0x5200006C,
     },

@@ -1,8 +1,8 @@
 #include "DATA/OVL1_C/DATA_800CCBF4.H"
-#include "DATA/OVLDAT2/800C87B0.H"
+#include "DATA/OVLDAT2/ACTOR_STATE_CALLBACK_LABELS.H"
 
 #if defined(VERSION_US_REV1)
-unsigned int D_d0_159678a9b39e5d43[3] = {
-    (unsigned int)D_0020F2A8, (unsigned int)D_0020EAE0, (unsigned int)D_00210230,
+unsigned int g_ResourcesEncodedWordsBlock67[3] = {
+    (unsigned int)addrLow_Nav_SelectCloseAttackPickupGoal, (unsigned int)addrLow_Nav_RebuildRequestedGoalRoute, (unsigned int)addrLow_Nav_CollectEnemyTargets,
 };
 #endif

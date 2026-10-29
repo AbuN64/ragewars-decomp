@@ -16,16 +16,16 @@ extern void Join_SeatJoinRequests(void);
 
 extern s32 Join_ScoreJoinRequestEntries(void);
 
-struct RequestRecAt10;
-struct RequestRecAt10 {
+struct PlayerJoinRequestEntry;
+struct PlayerJoinRequestEntry {
     s32 id;
     s32 variant;
     s32 word8;
     s32 variantC;
     char name[28 - 0x10];
 };
-/* D_80153F80: the three join requests the request menus edit and Join_SeatJoinRequests seats. */
-extern struct RequestRecAt10 D_80153F80[3];
+/* g_joinRequestEntries: the three join requests the request menus edit and Join_SeatJoinRequests seats. */
+extern struct PlayerJoinRequestEntry g_joinRequestEntries[3];
 
 
 

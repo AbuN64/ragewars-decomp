@@ -4,29 +4,29 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
 #include "MENU/MENU_REFRESHEXTRAOPTIONLOCKS.H"
-extern NumberPadScreen *D_800E4400;
+extern NumberPadScreen *g_extraOptionsScreen;
 
-/* Copies the four checkboxes at 0xC to 0x18 of the screen D_800E4400 into the game flags word
-   D_801462C8, setting or clearing bits 0x08000000, 0x10000000, 0x8 and 0x20000000 as
+/* Copies the four checkboxes at 0xC to 0x18 of the screen g_extraOptionsScreen into the game flags word
+   g_gameSettings, setting or clearing bits 0x08000000, 0x10000000, 0x8 and 0x20000000 as
    SmpButton_GetListSelection reports each box checked. */
 
 
 
 
 
-extern struct Shape_func_8021A2D4_de_2 D_801462C8;
+extern struct MemoryUsageStats g_gameSettings;
 
 extern s32 SmpButton_GetListSelection(void *);
 
-/* Updates the limit markers of the screen D_800E4400: totals Achieve_CountEarnedAchievements over the four 400-byte
-   records of D_80102B00 whose owner byte 0xD is not negative (or takes 40 when the word at 0x38 is
+/* Updates the limit markers of the screen g_extraOptionsScreen: totals Achieve_CountEarnedAchievements over the four 400-byte
+   records of g_localPlayerProfiles whose owner byte 0xD is not negative (or takes 40 when the word at 0x38 is
    1), enables items 0x3B4, 0x3B1, 0x3AD and 0x3AF of the window at 0x8 through func_8040E950_de, then
    disables 0x3B1 from a total of 10, 0x3B4 from 6, 0x3AD from 12 and 0x3AF from 14. Written from
    the assembly. */
 
 
 
-extern s8 D_80102B0D[];
+extern s8 g_profileSlotIndices[];
 
 extern s32 Achieve_CountEarnedAchievements(s32);
 
@@ -40,7 +40,7 @@ enum { MENU_804212A4_941 = 950, MENU_804212A4_943 = 952, MENU_804212A4_945 = 947
 enum { MENU_804212A4_941 = 941, MENU_804212A4_943 = 943, MENU_804212A4_945 = 945, MENU_804212A4_948 = 948 };
 #endif
 
-/* Resets the number pad of the screen D_800E4400: shows the item at 0x20, hides item 0x3AB of the
+/* Resets the number pad of the screen g_extraOptionsScreen: shows the item at 0x20, hides item 0x3AB of the
    window at 0x8, sets the words at 0x2C, 0x28, 0x30 and 0x34 to 1, 8, 0 and 0, then for keys 0 to
    9 takes item 0x3B8 plus the key, sets its alpha to 0x96 and clears its word at 0x38, and
    finishes through Menu_AdvanceTextRows. */
@@ -60,25 +60,25 @@ enum { MENU_8042144C_939 = 939, MENU_8042144C_952 = 952, MENU_8042144C_953 = 953
 #endif
 
 void Menu_ApplyExtraOptionFlags(void) {
-    if (SmpButton_GetListSelection(D_800E4400->buttons[0]) == 0) {
-        D_801462C8.field_0 &= ~0x08000000;
+    if (SmpButton_GetListSelection(g_extraOptionsScreen->buttons[0]) == 0) {
+        g_gameSettings.value &= ~0x08000000;
     } else {
-        D_801462C8.field_0 |= 0x08000000;
+        g_gameSettings.value |= 0x08000000;
     }
-    if (SmpButton_GetListSelection(D_800E4400->buttons[1]) == 0) {
-        D_801462C8.field_0 &= ~0x10000000;
+    if (SmpButton_GetListSelection(g_extraOptionsScreen->buttons[1]) == 0) {
+        g_gameSettings.value &= ~0x10000000;
     } else {
-        D_801462C8.field_0 |= 0x10000000;
+        g_gameSettings.value |= 0x10000000;
     }
-    if (SmpButton_GetListSelection(D_800E4400->buttons[2]) == 0) {
-        D_801462C8.field_0 &= ~0x8;
+    if (SmpButton_GetListSelection(g_extraOptionsScreen->buttons[2]) == 0) {
+        g_gameSettings.value &= ~0x8;
     } else {
-        D_801462C8.field_0 |= 0x8;
+        g_gameSettings.value |= 0x8;
     }
-    if (SmpButton_GetListSelection(D_800E4400->buttons[3]) == 0) {
-        D_801462C8.field_0 &= ~0x20000000;
+    if (SmpButton_GetListSelection(g_extraOptionsScreen->buttons[3]) == 0) {
+        g_gameSettings.value &= ~0x20000000;
     } else {
-        D_801462C8.field_0 |= 0x20000000;
+        g_gameSettings.value |= 0x20000000;
     }
 }
 
@@ -88,28 +88,28 @@ void Menu_RefreshExtraOptionLocks(void) {
 
     total = 0;
     for (i = 0; i < 4; i++) {
-        if (D_80102B0D[i * 400] >= 0) {
+        if (g_profileSlotIndices[i * 400] >= 0) {
             total += Achieve_CountEarnedAchievements(i);
         }
     }
-    if (D_800E4400->full == 1) {
+    if (g_extraOptionsScreen->full == 1) {
         total = 40;
     }
-    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 1);
-    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 1);
-    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 1);
-    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_948), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_945), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_941), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_943), 1);
     if (total >= 10) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_945), 0);
     }
     if (total >= 6) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_948), 0);
     }
     if (total >= 12) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_941), 0);
     }
     if (total >= 14) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_943), 0);
     }
 }
 
@@ -117,44 +117,44 @@ void Menu_OpenOptionsKeypad(void) {
     MenuWidget *item;
     s32 key;
 
-    Widget_SetWidgetFlag08(D_800E4400->pad, 1);
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_939), 0);
-    D_800E4400->mode = 1;
-    D_800E4400->length = 8;
-    D_800E4400->value = 0;
-    D_800E4400->cursor = 0;
+    Widget_SetWidgetFlag08(g_extraOptionsScreen->pad, 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_939), 0);
+    g_extraOptionsScreen->mode = 1;
+    g_extraOptionsScreen->length = 8;
+    g_extraOptionsScreen->value = 0;
+    g_extraOptionsScreen->cursor = 0;
     for (key = 0; key < 10; key++) {
         switch (key) {
         case 1:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_953);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_953);
             break;
         case 2:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_954);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_954);
             break;
         case 3:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_955);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_955);
             break;
         case 4:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_956);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_956);
             break;
         case 5:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_957);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_957);
             break;
         case 6:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_958);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_958);
             break;
         case 7:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_959);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_959);
             break;
         case 8:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_960);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_960);
             break;
         case 9:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_961);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_961);
             break;
         case 0:
         default:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_952);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_952);
             break;
         }
         item->alpha = 0x96;

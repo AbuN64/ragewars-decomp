@@ -3,8 +3,8 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct ActorRecAt5E0;
-struct ActorRecAt5E0 {
+struct SnapshotActorView;
+struct SnapshotActorView {
     char pad0[8];
     Triple position;
     s32 id;
@@ -16,7 +16,7 @@ struct ActorRecAt5E0 {
 };
 
 struct ActorList;
-struct ActorRecAt5E0;
+struct SnapshotActorView;
 
 struct Snapshot;
 struct Snapshot {
@@ -39,8 +39,8 @@ struct SampledCurve {
 
 struct SampledCurve;
 
-struct PlayerRecAt8;
-struct PlayerRecAt8 {
+struct SampledEffectCurveState;
+struct SampledEffectCurveState {
     struct SampledCurve *curve;
     float time;
     float value;
@@ -49,12 +49,12 @@ struct PlayerRecAt8 {
 extern void Control_DeactivateActorSnapshot(void);
 
 
-struct PlayerRecAt8;
-typedef struct PlayerRecAt8 PlayerRecAt8;
+struct SampledEffectCurveState;
+typedef struct SampledEffectCurveState SampledEffectCurveState;
 
 struct Snapshot;
 typedef struct Snapshot Snapshot;
-extern Snapshot D_8010BC40;
+extern Snapshot g_controllerActorSnapshot;
 
 struct Snapshot;
 
@@ -62,7 +62,7 @@ extern void Control_SaveActorSnapshot(void);
 
 struct Snapshot;
 
-extern s32 Control_FindConnectedControllerPort(s32 arg0);
+extern s32 Control_FindConnectedControllerPort(s32 controllerOwner);
 
 
 extern void Control_RestoreActorSnapshot(void);
@@ -70,8 +70,8 @@ extern void Control_RestoreActorSnapshot(void);
 
 extern void Control_TickSnapshotCountdown(void);
 
-struct ActorRecAt5E0;
-typedef struct ActorRecAt5E0 ActorRecAt5E0;
+struct SnapshotActorView;
+typedef struct SnapshotActorView SnapshotActorView;
 
 extern void Control_ClearMenuControlFlag(void);
 
@@ -91,7 +91,7 @@ extern void Control_ResetActorSnapshot(void);
 extern void Control_RestoreControllerSetup(void);
 
 
-extern s32 Control_AdvanceEffectCurve(void *arg0);
+extern s32 Control_AdvanceEffectCurve(void *effectState);
 
 struct SampledCurve;
 typedef struct SampledCurve SampledCurve;

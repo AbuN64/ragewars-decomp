@@ -5,15 +5,15 @@
 /* Published animation descriptor prefix; callers receive a frame pointer. */
 struct Shared_AnimFrame {
     u8 kind;
-    u8 unknown1;
+    u8 frameDuration;
     u8 shiftS;
     u8 shiftT;
-    u8 unk4;
-    u8 unk5;
+    u8 primitiveMinimumLod;
+    u8 materialCombineKind;
 };
 typedef struct Shared_AnimInfo {
     s32 count;
-    s32 unk4;
+    s32 variationCount;
     struct Shared_AnimFrame *frame;
 } Shared_AnimInfo;
 #endif

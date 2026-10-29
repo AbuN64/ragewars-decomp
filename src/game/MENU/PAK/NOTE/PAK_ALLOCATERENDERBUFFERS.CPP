@@ -1,9 +1,9 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RECORDRECAT1C.H"
-#include "OVLGAME/80405454.H"
+#include "OVLGAME/RENDER_BUFFER_RESOURCES.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "OVLGAME/NOTE_ENCODENOTETEXT.H"
 #include "RESMGR/X_PLUS.H"
 
@@ -63,21 +63,21 @@ s32 Note_NeedsIdRepair(s32 index) {
     return g_controllerPakChannelStatuses[index] == -4;
 }
 
-/* Marks the given controller port's 0x70-byte pak record in D_80153330 present when the port's D_8010FBE3 status byte is clear and osMotorInit initialises the pak block at offset 8 of the record through D_8010FC00 without error, clearing the mark otherwise, and returns the mark.
+/* Marks the given controller port's 0x70-byte pak record in g_controllerPakChannelRecords present when the port's g_controllerReadStatusBytes status byte is clear and osMotorInit initialises the pak block at offset 8 of the record through g_controllerSiMessageQueue without error, clearing the mark otherwise, and returns the mark.
    Adapted from Scene_GetModelRecordByIndexPointer with the record reached by port index, the status byte guard and the initialisation result stored as a byte flag changed. */
 
 
 
-extern char D_8010FC00[];
-extern PakRecord D_80153330[];
+extern char g_controllerSiMessageQueue[];
+extern PakRecord g_controllerPakChannelRecords[];
 extern s32 osMotorInit(void *queue, void *pak, s32 channel);
 
 s32 Note_ProbeAccessoryPresence(s32 channel) {
-    PakRecord *record = &D_80153330[channel];
+    PakRecord *record = &g_controllerPakChannelRecords[channel];
     s32 result;
 
-    if (D_8010FBE3[channel * 4] == 0) {
-        record->present = osMotorInit(D_8010FC00, record->pak, channel) == 0;
+    if (g_controllerReadStatusBytes[channel * 4] == 0) {
+        record->present = osMotorInit(g_controllerSiMessageQueue, record->pak, channel) == 0;
         result = record->present;
     } else {
         record->present = 0;
@@ -89,21 +89,21 @@ s32 Note_ProbeAccessoryPresence(s32 channel) {
 extern u8 g_controllerPakFilenameAlphabet[];
 
 /* Converts a controller-pak filename through its character table, blanking leading nulls, then trims trailing spaces. */
-void Note_DecodeNoteText(u8 *arg0, u8 *noteText, s32 arg2) {
+void Note_DecodeNoteText(u8 *encodedText, u8 *noteText, s32 characterCount) {
     s32 i;
     s32 started;
 
-    for (i = 0; i < arg2; i++) {
+    for (i = 0; i < characterCount; i++) {
         noteText[i] = 0;
     }
 
     started = 0;
-    for (i = started; i < arg2; i++, arg0++) {
-        if (*arg0 < 0x42) {
-            if (*arg0 == 0 && !started) {
+    for (i = started; i < characterCount; i++, encodedText++) {
+        if (*encodedText < 0x42) {
+            if (*encodedText == 0 && !started) {
                 noteText[i] = ' ';
             } else {
-                noteText[i] = g_controllerPakFilenameAlphabet[*arg0];
+                noteText[i] = g_controllerPakFilenameAlphabet[*encodedText];
                 started = 1;
             }
         } else {
@@ -111,46 +111,46 @@ void Note_DecodeNoteText(u8 *arg0, u8 *noteText, s32 arg2) {
         }
     }
 
-    for (i = arg2 - 1; i >= 0; i--) {
+    for (i = characterCount - 1; i >= 0; i--) {
         if (noteText[i] != ' ' && noteText[i] != 0) {
             break;
         }
         noteText[i] = 0;
     }
-    noteText[arg2 - 1] = 0;
+    noteText[characterCount - 1] = 0;
 }
 
 extern int XPlus_UppercaseCharacter(int);
 extern u8 g_controllerPakFilenameAlphabet[0x42];
 
 /* Maps input bytes through a lookup table and stores results. */
-void Note_EncodeNoteText(u8 *arg0, s8 *arg1, s32 arg2) {
+void Note_EncodeNoteText(u8 *text, s8 *encodedText, s32 characterCount) {
     s32 i;
-    s8 *var_s1;
+    s8 *encodedCursor;
     s32 j;
-    u8 *var_s0;
-    int new_var;
+    u8 *textCursor;
+    int alphabetSize;
 
     i = 0;
-    if (arg2 > 0) {
-        new_var = 0x42;
-        var_s1 = arg1;
-        var_s0 = arg0;
+    if (characterCount > 0) {
+        alphabetSize = 0x42;
+        encodedCursor = encodedText;
+        textCursor = text;
         do {
-            *var_s0 = XPlus_UppercaseCharacter(*var_s0);
+            *textCursor = XPlus_UppercaseCharacter(*textCursor);
             for (j = 0; j < 0x42; j += 1) {
-                if (*var_s0 == g_controllerPakFilenameAlphabet[j]) {
-                    *var_s1 = (s8)j;
+                if (*textCursor == g_controllerPakFilenameAlphabet[j]) {
+                    *encodedCursor = (s8)j;
                     break;
                 }
             }
-            if (j == new_var) {
-                *var_s1 = 0;
+            if (j == alphabetSize) {
+                *encodedCursor = 0;
             }
-            var_s1 += 1;
+            encodedCursor += 1;
             i += 1;
-            var_s0 += 1;
-        } while (i < arg2);
+            textCursor += 1;
+        } while (i < characterCount);
     }
 }
 
@@ -200,10 +200,10 @@ u32 Note_Crc32(u8 *data, u32 byteCount, u32 initialCrc) {
     return ~initialCrc;
 }
 
-/* Returns the word held in D_800E2850. */
+/* Returns the word held in g_controllerPakProbeActive. */
 
 s32 Note_HasScratchBuffer(void) {
-    return D_800E2850;
+    return g_controllerPakProbeActive;
 }
 
 #include "stddef.h"
@@ -213,7 +213,7 @@ s32 Note_HasScratchBuffer(void) {
 #include "COMMON/TRIPLE.H"
 #include "COMMON/DISPLAY.H"
 #include "COMMON/SHAREDPLAYER.H"
-typedef struct Shape_typemap_165 Handle;
+typedef struct CacheResourceBlockView Handle;
 extern void Cache_ReleaseResource(void *heap, Handle *handle);
 extern u32 Defs_GetMemorySize(void);
 extern Handle *Cache_AllocateResourceAt(void *heap, u32 address, u32 size, char *name);
@@ -225,10 +225,10 @@ extern char s_fifoText[5];     /* "fifo" */
 extern char s_audioHeapText[11];    /* "audio heap" */
 /* Rebuilds the render buffers held by the record: releases every handle it holds and clears it, then
    claims the frame buffers at the top of RDRAM (three 0x54600-byte buffers below the 1 MB z-buffer when
-   the expansion pak gives 6 MB or more; otherwise the count in D_800DE850 plus one 0x1ECC0-byte buffer,
+   the expansion pak gives 6 MB or more; otherwise the count in g_renderFrameBufferCount plus one 0x1ECC0-byte buffer,
    the extra one holding the z-buffer, below 4 MB), clears them, allocates the display lists, the RSP fifo
    and the audio heap, publishes their addresses in the render globals and marks the record ready. */
-int Note_AllocateRenderBuffers(struct RecordRecAt1C *record) {
+int Note_AllocateRenderBuffers(struct RenderBufferResources *record) {
     u32 megabyte = 0x100000;
     u32 bufferBytes;
     u32 memoryEnd;
@@ -268,46 +268,46 @@ int Note_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     if (Defs_GetMemorySize() >= 6 * megabyte) {
         bufferBytes = 0x54600;
         memoryEnd = Defs_GetMemorySize() | 0x80000000;
-        D_800DE850 = 3;
+        g_renderFrameBufferCount = 3;
         zBuffer = Cache_AllocateResourceAt(NULL, memoryEnd - megabyte, 0x54600, s_bufferText);
-        frameBuffers = Cache_AllocateResourceAt(NULL, memoryEnd - 2 * megabyte, D_800DE850 * bufferBytes,
+        frameBuffers = Cache_AllocateResourceAt(NULL, memoryEnd - 2 * megabyte, g_renderFrameBufferCount * bufferBytes,
                                                 s_displayBufferText);
         XPlus_FillMemory(frameBuffers->data, 0, 0xFD200);
         XPlus_FillMemory(zBuffer->data, 0, 0x54600);
         record->zBuffer = zBuffer;
         record->frameBuffers[0] = frameBuffers;
-        D_801536E8 = record->zBuffer->data;
-        for (i = 0; i < D_800DE850; i++) {
-            D_8014D468_de[i] = (u8 *)frameBuffers->data + i * bufferBytes;
+        g_depthImageBuffer = record->zBuffer->data;
+        for (i = 0; i < g_renderFrameBufferCount; i++) {
+            g_colorImageBuffers[i] = (u8 *)frameBuffers->data + i * bufferBytes;
         }
     } else {
         bufferBytes = 0x1ECC0;
         memoryEnd = 0x80400000;
-        buffers = Cache_AllocateResourceAt(NULL, memoryEnd - (D_800DE850 + 1) * bufferBytes,
-                                           (D_800DE850 + 1) * bufferBytes, D_800DCD1C);
+        buffers = Cache_AllocateResourceAt(NULL, memoryEnd - (g_renderFrameBufferCount + 1) * bufferBytes,
+                                           (g_renderFrameBufferCount + 1) * bufferBytes, D_800DCD1C);
         record->frameBuffers[0] = buffers;
-        for (i = 0; i < D_800DE850; i++) {
-            D_8014D468_de[i] = (u8 *)buffers->data + bufferBytes * i;
+        for (i = 0; i < g_renderFrameBufferCount; i++) {
+            g_colorImageBuffers[i] = (u8 *)buffers->data + bufferBytes * i;
         }
-        D_801536E8 = (u8 *)buffers->data + bufferBytes * i;
+        g_depthImageBuffer = (u8 *)buffers->data + bufferBytes * i;
     }
-    for (i = 0; i < D_800DE850; i++) {
-        XPlus_FillMemory(D_8014D468_de[i], 0, bufferBytes);
+    for (i = 0; i < g_renderFrameBufferCount; i++) {
+        XPlus_FillMemory(g_colorImageBuffers[i], 0, bufferBytes);
     }
-    XPlus_FillMemory(D_801536E8, 0, bufferBytes);
+    XPlus_FillMemory(g_depthImageBuffer, 0, bufferBytes);
 
-    record->displayLists = Cache_AllocateResource(0, (D_800E28A4 + D_800DE858) * 2 * sizeof(Gfx), 0x23, s_displayListsText);
+    record->displayLists = Cache_AllocateResource(0, (g_displayListCapacityUsRev1 + g_secondaryDisplayListCapacity) * 2 * sizeof(Gfx), 0x23, s_displayListsText);
     record->fifo = Cache_AllocateResource(0, 0x8000, 0x23, s_fifoText);
     record->audioHeap = Cache_AllocateResource(0, 0x22000, 0x23, s_audioHeapText);
-    D_8014D424 = 0x8000;
-    D_8014D45C = 0x22000;
-    D_8014D460 = record->displayLists->data;
-    D_8014D42C = D_8014D460 + D_800E28A4;
-    D_8014D464 = D_8014D42C + D_800DE858;
-    D_8014D430_de = D_8014D464 + D_800E28A4;
-    D_8014D428 = record->fifo->data;
-    D_8014D420_de = (u8 *)record->audioHeap->data;
-    for (i = 0; i < D_800DE850; i++) {
+    g_graphicsMicrocodeTextSize = 0x8000;
+    g_audioContextHeapBytes = 0x22000;
+    g_displayListBufferZero = record->displayLists->data;
+    g_secondaryDisplayListBufferZero = g_displayListBufferZero + g_displayListCapacityUsRev1;
+    g_displayListBufferOne = g_secondaryDisplayListBufferZero + g_secondaryDisplayListCapacity;
+    g_secondaryDisplayListBufferOne = g_displayListBufferOne + g_displayListCapacityUsRev1;
+    g_graphicsMicrocodeDataSize = record->fifo->data;
+    g_audioContextHeapBuffer = (u8 *)record->audioHeap->data;
+    for (i = 0; i < g_renderFrameBufferCount; i++) {
     }
     record->ready = 1;
     return 1;

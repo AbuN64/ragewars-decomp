@@ -13,24 +13,24 @@
 
 /* 800C6E84_25.CPP */
 /* ROM-grounded data: src/rw_pool_80216288_C7EB4_us_rev1.c */
-const unsigned int D_blob_9daadc9a9b5d98ac85dc[1] = {
+const unsigned int k_BarrelGetfacingsideOneWords[1] = {
     0x3F800000,
 };
 /* ROM-grounded data: src/rw_pool_802168B8_C7EB8_us_rev1.c */
-const unsigned int D_blob_3bef34a9452fab132562[1] = {
+const unsigned int k_BarrelGetfacingsideEncodedWords[1] = {
     0x3FC00000,
 };
 /* ROM-grounded data: src/rw_pool_80216A6C_C7EBC_us_rev1.c */
-const unsigned int D_blob_950cbb3daf442f25a64a[1] = {
+const unsigned int k_BarrelGetfacingsideEncodedWordsBlock1[1] = {
     0x3F4CCCCD,
 };
 
 /* 80213ED4_4.CPP */
 /* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Cbarrel_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
-extern void *Cbarrel_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
+extern void *Cbarrel_SelectCombatTarget(void *,void *,s32,s32), *Playerai_GetRouteCursorPoint(void *);
 extern f32 Barrel_GetSignedAngleToPoint(void *,f32,f32,f32),Gu_Sqrtf(f32);
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx, Actor_func_80214DD4_de *target) {
+static inline s32 Barrel_ClassifyAnchorTarget(BarrelAnchorActorView *self, Tracker *ctx, BarrelAnchorActorView *target) {
     if (ctx->active == 0) {
         return 6;
     }
@@ -60,23 +60,23 @@ static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx,
     }
     return 0;
 }
-void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 unused, CTargetInfo *arg3) {
+void Barrel_FillAnchorTargetInfo(BarrelAnchorActorView *actor, Tracker *tracker, s32 unused, CTargetInfo *targetInfo) {
     CVector3 pos;
     CVector3 delta;
     f32 height;
     s32 kind;
-    Actor_func_80214DD4_de *target;
+    BarrelAnchorActorView *target;
     Location *point;
     if ((tracker->team == g_world.kind1Cursor) && !(actor->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->lockedTarget != 0))) {
         tracker->anchor = Cbarrel_SelectCombatTarget(actor, tracker, 1, 0);
     }
     if ((*actor->kind == 1) && (tracker->mode == 0xB)
-        && func_80215410_kind(actor, tracker, tracker->target) == 4) {
+        && Barrel_ClassifyAnchorTarget(actor, tracker, tracker->target) == 4) {
         target = tracker->target;
         kind = 4;
     } else {
         target = tracker->anchor;
-        kind = func_80215410_kind(actor, tracker, target);
+        kind = Barrel_ClassifyAnchorTarget(actor, tracker, target);
     }
     if (target != NULL) {
         pos = target->pos;
@@ -84,7 +84,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *actor, Tracker *tracker
     } else {
         switch (kind) {
             case 4:
-                point = func_80219408_de(&tracker->slot);
+                point = Playerai_GetRouteCursorPoint(&tracker->slot);
                 pos = point->pos;
                 if (point->flags & 1) {
                     height = point->heading * 0.0174532942f - actor->heading;
@@ -104,20 +104,20 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *actor, Tracker *tracker
     }
     Graphu64_WrapPeriodicValue(&height);
     Graphu64_SubtractVectors(&delta, &pos, &actor->pos);
-    arg3->m_DeltaAngle = height;
-    arg3->kind = kind;
-    arg3->target = target;
-    arg3->m_vTargetPos = pos;
-    arg3->m_vDeltaTargetPos = delta;
-    arg3->m_DistFrom = Gu_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
+    targetInfo->m_DeltaAngle = height;
+    targetInfo->kind = kind;
+    targetInfo->target = target;
+    targetInfo->m_vTargetPos = pos;
+    targetInfo->m_vDeltaTargetPos = delta;
+    targetInfo->m_DistFrom = Gu_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
     delta.y = 0.0f;
     pos.y = 0;
-    arg3->m_vXZTargetPos = pos;
-    arg3->m_vXZDeltaTargetPos = delta;
-    arg3->m_XZDistFrom = Gu_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
+    targetInfo->m_vXZTargetPos = pos;
+    targetInfo->m_vXZDeltaTargetPos = delta;
+    targetInfo->m_XZDistFrom = Gu_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
 }
 
-extern s32 D_801041F0;
+extern s32 g_currentActorInstance;
 extern s32 Gobjinst_ProbeActorMovement(Actor_u1 *, CVector3, char **);
 
 /* Aim toward a point; when obstructed, try progressively wider left/right
@@ -157,7 +157,7 @@ f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 di
     f32 cosine, sine, offset, angle, bias;
     s32 step, side, parity;
     if ((actor->flags & 0x200) && Gobjinst_ProbeActorMovement(actor, point, &hit)) {
-        if (target != 0 && D_801041F0 == target) return heading;
+        if (target != 0 && g_currentActorInstance == target) return heading;
         parity = ((u32)actor % 744U) & 1;
         probe.y = actor->position.y;
         for (step = 1; step < 6; step++) {
@@ -190,7 +190,7 @@ extern void Graphu64_NormalizeVec3(CVector3 *);
 extern f32 Gobjinst_GetActorHeight(void *);
 
 /* Barrel_GetSignedAngleToPoint's body: the signed angle between the actor's facing and the direction to the point. */
-static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
+static inline f32 angleTo(BarrelAnchorActorView *actor, CVector3 point) {
     f32 dx;
     f32 dz;
     f32 dist;
@@ -225,7 +225,7 @@ static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
  * (kind 4). Targets 70 to 110 degrees off the actor's heading are skipped. The line from the actor (its height
  * clamped to the target's aim point) to the target is compared with the target's forward vector: 0 when the angle
  * between them is not under half the cone, else -1 or 1 for the side. */
-s32 Barrel_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func_80214DD4_de *target, f32 cone) {
+s32 Barrel_GetFacingSide(BarrelAnchorActorView *self, void *unused, BarrelAnchorActorView *target, f32 cone) {
     CVector3 dir;
     CVector3 facing;
     CVector3 forward;
@@ -286,7 +286,7 @@ s32 Barrel_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func_
     forward.x = 0.0f;
     forward.y = 0.0f;
     forward.z = 1.0f;
-    func_8024BC94_de(&facing, target, forward);
+    Gobjinst_TransformVectorByActorAim(&facing, target, forward);
     if (Graphu64_ArcCos(dir.x * facing.x + dir.y * facing.y + dir.z * facing.z) < cone * 0.5f) {
         if (dir.x * -facing.z + dir.z * facing.x < 0.0f) {
             return -1;

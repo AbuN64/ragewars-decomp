@@ -39,7 +39,7 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-struct ObjRecAt80;
+struct PlayerCharacterKindView;
 
 struct MenuCMenuProfileUpdatePlayerAnimationChoice;
 struct MenuCMenuProfileUpdatePlayerAnimationChoice {
@@ -50,21 +50,21 @@ struct MenuCMenuProfileUpdatePlayerAnimationChoice {
 
 
 
-struct MenuRecAt20V2;
-typedef struct MenuRecAt20V2 MenuRecAt20V2;
+struct PlayerProfileMenuContext;
+typedef struct PlayerProfileMenuContext PlayerProfileMenuContext;
 
 
-struct MenuRecAt20V2;
+struct PlayerProfileMenuContext;
 struct OwnerCode8043DF84;
-struct MenuRecAt20V2 {
+struct PlayerProfileMenuContext {
     char pad0[0x1C];
     struct OwnerCode8043DF84 *owner;
     PakMenuSlot *widget;
 };
 
 
-struct Shape_typemap_114;
-struct Shape_typemap_114 {
+struct GameSpeedMenuValue;
+struct GameSpeedMenuValue {
     unsigned char padding_0[32];
     int field_20;
 };
@@ -73,7 +73,7 @@ struct Obj1C;
 struct Obj1C {
     char pad0[0x5D4];
     s32 unk5D4;
-    ObjRecAt80 *unk5D8;
+    PlayerCharacterKindView *unk5D8;
     s32 unk5DC;
     char pad5E0[0x698 - 0x5E0];
     s32 unk698;
@@ -90,7 +90,7 @@ struct Handle8043E788 {
 
 
 
-extern float D_800DE330_de;
+extern float g_profileGameSpeedWrapLimit;
 
 struct Outer8043E458;
 typedef struct Outer8043E458 Outer8043E458;

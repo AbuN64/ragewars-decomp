@@ -18,5 +18,5 @@ struct ArgsCode80296014 {
 };
 extern s32 Menu_RouteElementEvent(s32 value, s32 event, s32 source, s32 active, s32 amount);
 
-extern void Menu_GetScreenDrawOrigin(s32 *arg0, s32 *arg1);
+extern void Menu_GetScreenDrawOrigin(s32 *leftOut, s32 *topOut);
 #endif

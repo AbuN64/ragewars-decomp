@@ -22,12 +22,12 @@ unsigned int g_audioPitchRatioCurve[121] = {
 
 /* 800D0D10.CPP */
 /* ROM-grounded data: rodata/writable/800D0D10 */
-unsigned int D_blob_phase2_4ae27cab82365d99a51e[1] = {
+unsigned int g_GAudiopitchratiocurveWords5[1] = {
     0x4BC80000,
 };
 
 /* 800D0D14.CPP */
-unsigned int D_auto_rodata_unresolved_800D0D14[10] = {
+unsigned int g_GAudiopitchratiocurveWords1[10] = {
     0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
     0x00000001, 0x00000001,
 };
@@ -35,31 +35,31 @@ unsigned int D_auto_rodata_unresolved_800D0D14[10] = {
 /* 800D0D14_2.CPP */
 /* ROM-grounded data: rodata/writable/800D0D3C */
 #ifdef VERSION_DE
-unsigned int D_blob_phase2_ea6551b25983f7d7e92c[15] = {
+unsigned int g_GAudiopitchratiocurveWords6[15] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x7F7F0000, 0x007F2929, 0x29000000,
 };
 #endif
 #ifdef VERSION_EU
-unsigned int D_blob_phase2_ea6551b25983f7d7e92c[15] = {
+unsigned int g_GAudiopitchratiocurveWords6[15] = {
     0x00000000, 0x00000000, 0x52204E4F, 0x55532041, 0x564F4952, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x7F7F0000, 0x007F2929, 0x29000000,
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned int D_blob_phase2_ea6551b25983f7d7e92c[15] = {
+unsigned int g_GAudiopitchratiocurveWords6[15] = {
     0x00000000, 0x00000000, 0x3F8DA520, 0x3F8D814B, 0x3F8D5D71, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x7F7F0000, 0x007F2929, 0x29000000,
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_blob_phase2_ea6551b25983f7d7e92c[15] = {
+unsigned int g_GAudiopitchratiocurveWords6[15] = {
     0x00000000, 0x00000000, 0x71755200, 0x00260700, 0x0010000B, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x7F7F0000, 0x007F2929, 0x29000000,
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_ea6551b25983f7d7e92c[15] = {
+unsigned int g_GAudiopitchratiocurveWords6[15] = {
     0x00000000, 0x00000000, 0x3F8E3441, 0x3F8E1080, 0x3F8DECBA, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x7F7F0000, 0x007F2929, 0x29000000,
 };
@@ -68,22 +68,22 @@ unsigned int D_blob_phase2_ea6551b25983f7d7e92c[15] = {
 /* 800D0D78.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-unsigned short rodata_unresolved_800D0D78[12] = {
+unsigned short k_GAudiopitchratiocurveEncodedHalfwords[12] = {
     0x800C, 0xBB20, 0x800C, 0xBB30, 0x8010, 0x8060, 0x403F, 0x0000, 0x3442, 0x0010, 0x8C42, 0x0000,
 };
 #endif
 #if defined(VERSION_EU)
-unsigned short rodata_unresolved_800D0D78[12] = {
+unsigned short k_GAudiopitchratiocurveEncodedHalfwords[12] = {
     0x800C, 0xC700, 0x800C, 0xC710, 0x8011, 0x8060, 0x403F, 0x0000, 0x2054, 0x5520, 0x4D45, 0x204D,
 };
 #endif
 #if defined(VERSION_EU_X)
-unsigned short rodata_unresolved_800D0D78[12] = {
+unsigned short k_GAudiopitchratiocurveEncodedHalfwords[12] = {
     0x800C, 0xD0D0, 0x800C, 0xD0E0, 0x8011, 0x2060, 0x403F, 0x0000, 0x3F8B, 0x4141, 0x3F8B, 0x1D14,
 };
 #endif
 #if defined(VERSION_US)
-unsigned short rodata_unresolved_800D0D78[12] = {
+unsigned short k_GAudiopitchratiocurveEncodedHalfwords[12] = {
     0x800C, 0xBA30, 0x800C, 0xBA40, 0x8010, 0x6060, 0x403F, 0x0000, 0x4252, 0x414C, 0x5F42, 0x4F52,
 };
 #endif
@@ -91,7 +91,7 @@ unsigned short rodata_unresolved_800D0D78[12] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
-unsigned int D_blob_dac98c16e73164f072df[6] = {
+unsigned int g_GAudiopitchratiocurveWords3[6] = {
     0x800D0D60, 0x800D0D70, 0x8010C060, 0x403F0000, 0x3F8BD1C1, 0x3F8BADA9,
 };
 #endif
@@ -99,33 +99,33 @@ unsigned int D_blob_dac98c16e73164f072df[6] = {
 /* 800D0D78_2.CPP */
 /* ROM-grounded data: rodata/writable/800D0D90 */
 #ifdef VERSION_DE
-unsigned int D_blob_phase2_1719a24fe19d89786db9[4] = {
+unsigned int g_GAudiopitchratiocurveWords4[4] = {
     0x00000000, 0x00000000, 0x3C03A460, 0x34630010,
 };
 #endif
 #ifdef VERSION_EU
-unsigned int D_blob_phase2_1719a24fe19d89786db9[4] = {
+unsigned int g_GAudiopitchratiocurveWords4[4] = {
     0x00000000, 0x00000000, 0x44522E20, 0x444F4E20,
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned int D_blob_phase2_1719a24fe19d89786db9[4] = {
+unsigned int g_GAudiopitchratiocurveWords4[4] = {
     0x00000000, 0x00000000, 0x3F8AB06C, 0x3F8A8C29,
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_blob_phase2_1719a24fe19d89786db9[4] = {
+unsigned int g_GAudiopitchratiocurveWords4[4] = {
     0x00000000, 0x00000000, 0x65717504, 0x2E656F73,
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_1719a24fe19d89786db9[4] = {
+unsigned int g_GAudiopitchratiocurveWords4[4] = {
     0x00000000, 0x00000000, 0x3F8B4141, 0x3F8B1D14,
 };
 #endif
 
 /* 800D0DA0.CPP */
 /* ROM-grounded data: src/rw_pool_8025F434_D19A0_us_rev1.c */
-const unsigned int D_blob_ad33b3efa1aaa2d40199[1] = {
+const unsigned int g_GAudiopitchratiocurveWords2[1] = {
     0x42B40000,
 };

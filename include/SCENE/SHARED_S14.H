@@ -2,10 +2,10 @@
 #define SCENE_SHARED_S14_H
 #include "TYPES.H"
 
-typedef struct Shared_func_80286A78_S14 Shared_func_80286A78_S14;
-struct Shared_func_80286A78_S14 {
+typedef struct SceneResourceSectionPointerView SceneResourceSectionPointerView;
+struct SceneResourceSectionPointerView {
     char pad0[0x18];
-    s32 * unk18; /* +0x18: src/func_80286A78.c */
+    s32 * sectionWords; /* +0x18: src/func_80286A78.c */
 };
-typedef char Shared_func_80286A78_S14_size_check[(sizeof(Shared_func_80286A78_S14) == 0x1C) ? 1 : -1];
+typedef char SceneResourceSectionPointerSizeCheck[(sizeof(SceneResourceSectionPointerView) == 0x1C) ? 1 : -1];
 #endif

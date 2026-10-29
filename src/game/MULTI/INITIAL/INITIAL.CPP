@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/PLAYERRECAT64E.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -9,10 +9,10 @@
 #include "COMMON/AIPROFILE.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 
-struct func_8025E5B0_S1;
+struct MenuCreationOwnerView;
 struct ParamsPakAllocateMenu;
 struct Dialog;
-extern void *Menu_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list);
+extern void *Menu_AllocateMenu(struct MenuCreationOwnerView *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list);
 
 
 /* Reads an object's sub-record kind byte and forwards it to two per-kind setup routines. */
@@ -30,7 +30,7 @@ extern void Control_EnableControllerPak(int);
 
 extern s32 D_800E28C0;
 
-extern struct List D_0044EB04;
+extern struct List g_controllerPakEnabledDialogResource;
 
 extern void Control_EnableControllerPak(int controllerPort);
 
@@ -41,7 +41,7 @@ extern void Control_EnableControllerPak(int controllerPort);
 
 
 
-extern s32 D_0044E4B0;
+extern s32 g_controllerPakReadyDialogResource;
 
 void Timer_ClearTimerFlag(void);
 
@@ -50,104 +50,104 @@ extern void Control_DisableControllerPak(s32 controllerPort);
 #include "COMMON/GAME_SESSION.H"
 
 
-s32 Initial_ToggleMenuRowOption(s32 *arg0) {
+s32 Initial_ToggleMenuRowOption(s32 *optionValue) {
     Shared_Game *base;
 
-    switch (arg0[0]) {
+    switch (optionValue[0]) {
         case 2:
-            base = &D_801462C8;
-            base->unknown28[5] ^= 1;
+            base = &g_gameSettings;
+            base->multiplayerRuleBytes[5] ^= 1;
             break;
         case 3:
-            base = &D_801462C8;
-            base->unknown28[6] ^= 1;
+            base = &g_gameSettings;
+            base->multiplayerRuleBytes[6] ^= 1;
             break;
         case 4:
-            base = &D_801462C8;
-            base->unknown28[7] ^= 1;
+            base = &g_gameSettings;
+            base->multiplayerRuleBytes[7] ^= 1;
             break;
         case 5:
-            base = &D_801462C8;
-            base->unknown28[8] ^= 1;
+            base = &g_gameSettings;
+            base->multiplayerRuleBytes[8] ^= 1;
             break;
         case 6:
-            base = &D_801462C8;
-            base->unknown28[9] ^= 1;
+            base = &g_gameSettings;
+            base->multiplayerRuleBytes[9] ^= 1;
             break;
         case 7:
-            base = &D_801462C8;
-            base->unknown28[10] ^= 1;
+            base = &g_gameSettings;
+            base->multiplayerRuleBytes[10] ^= 1;
             break;
         case 8:
-            base = &D_801462C8;
-            base->unknown28[11] ^= 1;
+            base = &g_gameSettings;
+            base->multiplayerRuleBytes[11] ^= 1;
             break;
         case 9:
-            base = &D_801462C8;
-            base->unknown28[13] ^= 1;
+            base = &g_gameSettings;
+            base->multiplayerRuleBytes[13] ^= 1;
             break;
     }
     return 0;
 }
 
 /** Forwards arg1 through and arg2 as the first parameter, adding the D_450A20 record. */
-s32 func_8043E91C_de(void *unused0, void *menuOwner, void *menuContext) {
-    Menu_AllocateMenu(menuContext, menuOwner, &D_0044FDF4);
+s32 Initial_OpenMatchSetupMenu(void *unused0, void *menuOwner, void *menuContext) {
+    Menu_AllocateMenu(menuContext, menuOwner, &g_matchSetupMenuResource);
     return 1;
 }
 
-void Initial_ProbeMenuControllerPak(struct Shared_PakMenu *arg0)
+void Initial_ProbeMenuControllerPak(struct Shared_PakMenu *menu)
 {
-    s32 kind = arg0->owner->unk4;
+    s32 kind = menu->owner->controllerPort;
 
     Control_EnableControllerPak(kind);
     Note_ProbeStatus(kind);
 }
 
-void Initial_EnableMenuControllerPak(void *arg0) {
-    Obj8043EB20 *item = arg0;
+void Initial_EnableMenuControllerPak(void *menu) {
+    Obj8043EB20 *item = menu;
 
-    Control_EnableControllerPak(item->unk20->unk4);
+    Control_EnableControllerPak(item->controller->controllerPort);
     D_800E28C0 = 0;
 }
 
 struct List;
 
 extern void *Menu_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
-extern char D_8014561C[];
+extern char g_matchEndingTeamWheelClose[];
 
 /** Marks arg1's inner record's byte tag via func_80264770_de, then hands the record and arg1's fields to Menu_OpenDialog; ignores arg0. */
-s32 Initial_OpenDialogWithControllerPak(void *unused0, Obj8043EB20 *arg1) {
-    Control_EnableControllerPak(arg1->unk20->unk4);
-    Menu_OpenDialog(D_8014561C, &D_0044EB04, arg1->unk1C, (s32) arg1->unk20, 0);
+s32 Initial_OpenDialogWithControllerPak(void *unused0, Obj8043EB20 *dialog) {
+    Control_EnableControllerPak(dialog->controller->controllerPort);
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, &g_controllerPakEnabledDialogResource, dialog->player, (s32) dialog->controller, 0);
     return 1;
 }
 
-s32 Initial_OpenDialogAfterTimerReset(void *unused0, Arg1Struct *arg1) {
+s32 Initial_OpenDialogAfterTimerReset(void *unused0, Arg1Struct *dialog) {
     Timer_ClearTimerFlag();
-    Menu_OpenDialog(D_8014561C, &D_0044E4B0, arg1->unk1C, arg1->unk20, 0);
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, &g_controllerPakReadyDialogResource, dialog->player, dialog->controller, 0);
     return 1;
 }
 
-/** Clears the D_8011FAC0 record and D_80154048, then re-registers the target through func_80264788_de. */
-s32 Initial_RequestTransitionWithPakDisabled(void *unused0, Outer8043E56C *arg1) {
-    SetN64_SetTransitionTarget(&D_8011FAC0, 8);
+/** Clears the g_gameSession record and D_80154048, then re-registers the target through func_80264788_de. */
+s32 Initial_RequestTransitionWithPakDisabled(void *unused0, Outer8043E56C *dialog) {
+    SetN64_SetTransitionTarget(&g_gameSession, 8);
     D_80154048 = 0;
-    Control_DisableControllerPak(arg1->unk20->unk4);
+    Control_DisableControllerPak(dialog->controller->controllerPort);
     return 1;
 }
 
 #if defined(VERSION_US)
-const unsigned int rodata_unresolved_800DD010[8] = {
+const unsigned int k_InitialEncodedWords[8] = {
     0x42F00000, 0x04000000, 0x16524158, 0x5F50555F, 0x437F0000, 0x437F0000, 0x437F0000, 0x65717552,
 };
 #endif
 
-/* Starts a match from the menu: clears byte 0x1D and sets byte 0x1E of D_801462C8, clears the active byte 0x78 of its eight 150-byte status records, then gives the menu at 0x20 the first of the four 0x224-byte controller profiles of D_8010F328 that func_8026437C_de reports active, marking the settings D_80146302 at 0x78 and recording its index in D_801422C1, before calling SoundElement_DisableMusicGainOverride, resetting D_8011FAC0 through func_8044DE7C_de and setting D_80154048. */
+/* Starts a match from the menu: clears byte 0x1D and sets byte 0x1E of g_gameSettings, clears the active byte 0x78 of its eight 150-byte status records, then gives the menu at 0x20 the first of the four 0x224-byte controller profiles of g_controllerProfiles that func_8026437C_de reports active, marking the settings g_playerPartnerNameFallback at 0x78 and recording its index in D_801422C1, before calling SoundElement_DisableMusicGainOverride, resetting g_gameSession through func_8044DE7C_de and setting D_80154048. */
 
-extern struct Part D_80146302;
+extern struct Part g_playerPartnerNameFallback;
 
-extern struct ControllerProfile D_8010F328[4];
+extern struct ControllerProfile g_controllerProfiles[4];
 
 #include "COMMON/GAME_SESSION.H"
 
@@ -159,12 +159,12 @@ extern void Match_StartMatchTransition(GameSession *, s32);
 
 extern s32 Control_CountConnectedControllers(void);
 
-/* Sets the option bytes at 0x1D and 0x1E of D_801462C8 to 1 and 4, clears the first byte of each
+/* Sets the option bytes at 0x1D and 0x1E of g_gameSettings to 1 and 4, clears the first byte of each
    of the eight 150-byte player records at 0x148, then calls Menu_AllocateMenu with the third argument,
-   the second and the resource D_0044FEA8, and returns one. */
+   the second and the resource g_localPlayerSetupMenuResource, and returns one. */
 
 
-struct func_8025E5B0_S1;
+struct MenuCreationOwnerView;
 struct ParamsPakAllocateMenu;
 struct Dialog;
 
@@ -177,8 +177,8 @@ struct Dialog;
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4503E8,
    and returns one. */
 
-/* Restarts sound: calls SoundElement_StopAudioExceptKey with -1, records what func_8025E2C4_de returns in D_800E63B0,
-   passes D_800E63B8 to func_8025E2D4_de, calls SoundElement_SetVoiceMixValue with 1, clears D_800E63B4, calls
+/* Restarts sound: calls SoundElement_StopAudioExceptKey with -1, records what SoundElement_GetMusicPlaybackEnabled returns in g_menuSavedAudioSelection,
+   passes g_menuMusicPreviewSelection to SoundElement_SetMusicPlaybackEnabled, calls SoundElement_SetVoiceMixValue with 1, clears g_musicPreviewMenuActive, calls
    Control_ClearMenuControlFlag and then Menu_AllocateMenu with the third argument, the second and D_451F58.
    Returns one. */
 
@@ -190,49 +190,49 @@ extern void Control_ClearMenuControlFlag(void);
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_450C18,
    and returns one. */
 
-void Initial_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
+void Initial_SelectInitialController(void *unused0, struct GamePlayerListView *menu) {
     Shared_Game *globals;
     struct Part *settings;
     struct ControllerProfile *profile;
     s32 i;
 
-    globals = &D_801462C8;
+    globals = &g_gameSettings;
     globals->local = 0;
     globals->mode1E = 1;
     for (i = 7; i >= 0; i--) {
         globals->playerSettings[i].enabled = 0;
     }
     i = 0;
-    settings = &D_80146302;
+    settings = &g_playerPartnerNameFallback;
     for (; i < 4; i++) {
-        profile = &D_8010F328[i];
+        profile = &g_controllerProfiles[i];
         if (Control_IsAButtonPressed(profile) != 0) {
             settings->active = 1;
-            D_801462C8.defaults.slot = i;
-            menu->unk20 = profile;
+            g_gameSettings.defaults.slot = i;
+            menu->players = profile;
             break;
         }
     }
     SoundElement_DisableMusicGainOverride();
-    Match_StartMatchTransition(&D_8011FAC0, -1);
+    Match_StartMatchTransition(&g_gameSession, -1);
     D_80154048 = 1;
 }
 
 /** Clears or sets bit 24 of arg1's record's flags depending on how many of func_80264690_de's four slots are active, and demotes arg1->unk0 from state 2 to 1 in the low-count case. */
-s32 Initial_UpdateMultiplayerAvailability(void *unused0, Obj8043ECE8 *arg1) {
+s32 Initial_UpdateMultiplayerAvailability(void *unused0, Obj8043ECE8 *item) {
     if (Control_CountConnectedControllers() < 2) {
-        arg1->unkC->unk58 &= 0xFEFFFFFF;
-        if (arg1->unk0 == 2) {
-            arg1->unk0 = 1;
+        item->widget->unk58 &= 0xFEFFFFFF;
+        if (item->availability == 2) {
+            item->availability = 1;
         }
     } else {
-        arg1->unkC->unk58 |= 0x01000000;
+        item->widget->unk58 |= 0x01000000;
     }
     return 0;
 }
 
 s32 Initial_OpenLocalPlayerSetup(void *first, void *second, void *third) {
-    Shared_Game *options = &D_801462C8;
+    Shared_Game *options = &g_gameSettings;
     s32 i;
 
     options->local = 1;
@@ -240,47 +240,47 @@ s32 Initial_OpenLocalPlayerSetup(void *first, void *second, void *third) {
     for (i = 0; i < 8; i++) {
         options->playerSettings[i].enabled = 0;
     }
-    Menu_AllocateMenu(third, second, D_0044FEA8);
+    Menu_AllocateMenu(third, second, g_localPlayerSetupMenuResource);
     return 1;
 }
 
-s32 func_8043EC40_de(void *first, void *second, void *third) {
+s32 Initial_OpenDialog450E9C(void *first, void *second, void *third) {
     Menu_AllocateMenu(third, second, D_00450E9C);
     return 1;
 }
 
-s32 func_8043EC6C_de(void *first, void *second, void *third) {
+s32 Initial_OpenDialog44F4A4(void *first, void *second, void *third) {
     Menu_AllocateMenu(third, second, D_0044F4A4);
     return 1;
 }
 
-s32 func_8043EC98_de(void *first, void *second, void *third) {
+s32 Initial_OpenDialog44F798(void *first, void *second, void *third) {
     Menu_AllocateMenu(third, second, D_0044F798);
     return 1;
 }
 
 s32 Initial_OpenTrackPreviewMenu(void *first, void *second, void *third) {
     SoundElement_StopAudioExceptKey(-1);
-    D_800E63B0 = func_8025E2C4_de();
-    func_8025E2D4_de(D_800E63B8);
+    g_menuSavedAudioSelection = SoundElement_GetMusicPlaybackEnabled();
+    SoundElement_SetMusicPlaybackEnabled(g_menuMusicPreviewSelection);
     SoundElement_SetVoiceMixValue(1);
-    D_800E63B4 = 0;
+    g_musicPreviewMenuActive = 0;
     Control_ClearMenuControlFlag();
-    Menu_AllocateMenu(third, second, D_00451094);
+    Menu_AllocateMenu(third, second, g_musicPreviewMenuResource);
     return 1;
 }
 
 /* Returns one. Nothing in the cartridge image calls it or stores its address as a word. */
-s32 func_8043ED48_de(void) {
+s32 Initial_ReturnSuccess(void) {
     return 1;
 }
 
 s32 Initial_RequestSessionTransition(void) {
-    SetN64_SetTransitionTarget(&D_8011FAC0, 8);
+    SetN64_SetTransitionTarget(&g_gameSession, 8);
     return 1;
 }
 
-s32 func_8043ED78_de(void *first, void *second, void *third) {
+s32 Initial_OpenDialog44FFEC(void *first, void *second, void *third) {
     Menu_AllocateMenu(third, second, D_0044FFEC);
     return 1;
 }
@@ -288,7 +288,7 @@ s32 func_8043ED78_de(void *first, void *second, void *third) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "TYPES.H"
 
@@ -302,9 +302,9 @@ typedef struct HolderMultiResetPlayerGameOverTimer {
     FlagOwnerMultiResetPlayerGameOverTimer *owner;
 } HolderMultiResetPlayerGameOverTimer;
 
-void Initial_ResetPlayerGameOverTimer(HolderMultiResetPlayerGameOverTimer *arg0) {
-    D_801462C8.counters.m_GameOverTimer = 120.0f;
-    arg0->owner->flags &= 0xFBFFFFFF;
+void Initial_ResetPlayerGameOverTimer(HolderMultiResetPlayerGameOverTimer *holder) {
+    g_gameSettings.counters.m_GameOverTimer = 120.0f;
+    holder->owner->flags &= 0xFBFFFFFF;
 }
 #else
 INCLUDE_ASM("ovl_80400000", Initial_ResetPlayerGameOverTimer);

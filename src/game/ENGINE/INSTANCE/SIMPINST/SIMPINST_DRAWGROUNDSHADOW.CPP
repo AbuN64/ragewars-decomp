@@ -7,24 +7,24 @@
 #include "COMMON/LEGACY_COLLISION_ACTOR.H"
 #include "COMMON/OBJRECAT4V7.H"
 #include "TYPES.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "SOUND/INSTHDR_GETACTORSHADOWRADIUS.H"
 #include "WORLD/SIMPINST_REFRESHMODELRESOURCEUSAGE.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-extern f32 D_800C3D90_de;
+extern f32 g_simpleObjectViewEffectRotationAndHeight;
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 
 
 
 extern f32 Gobjinst_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor);
 
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
-extern void Cache_ReleaseResource(void *arg0, void *resource);
+extern void Cache_ReleaseResource(void *cache, void *resource);
 
-extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
+extern SpawnedEffectMotionView *Particle_GetLastSpawnedEffect(void *system);
 
 extern f32 Gobjinst_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor);
 
@@ -59,7 +59,7 @@ extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 extern void Cache_UnlockResource(s32, void *);
 
-extern char D_0026D7F4;
+extern char g_simpleModelResourceCallbackAddress;
 
 
 
@@ -67,25 +67,25 @@ extern char D_0026D7F4;
 void Simpinst_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor, void **resource) {
     CVector3 position;
     CQuatern rotation;
-    EffectRecAt154 *effect;
+    SpawnedEffectMotionView *effect;
     f32 scale;
     s32 *node;
 
     if (Geometry_GetViewEffect() != 0) {
         rotation.x = rotation.y = rotation.z = 0.0f;
-        rotation.w = D_800C3D90_de;
+        rotation.w = g_simpleObjectViewEffectRotationAndHeight;
         node = SetN64_GetPackSection(*resource, 2);
         if ((*node != 0) &&
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
-            position.y += Gobjinst_GetActorHeight(actor) * *(&D_800C3D90_de + 1);
-            Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+            position.y += Gobjinst_GetActorHeight(actor) * *(&g_simpleObjectViewEffectRotationAndHeight + 1);
+            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, rotation, position, 0, -1, 0);
-            effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
+            effect = Particle_GetLastSpawnedEffect(&g_actorParticleEffectSystem);
             if (effect != 0) {
-                scale = D_800C3D98_de;
-                effect->field150 = Gobjinst_GetActorRadius(actor) * scale;
-                effect->field154 = Gobjinst_GetActorHeight(actor) * scale;
+                scale = g_simpleObjectViewEffectScale;
+                effect->radius = Gobjinst_GetActorRadius(actor) * scale;
+                effect->height = Gobjinst_GetActorHeight(actor) * scale;
             }
         }
     }
@@ -113,8 +113,8 @@ void Simpinst_DrawGroundShadow(void *actor) {
     MatrixFromQuaternion(&rotation.x, matrix);
     ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, position.x, position.y, position.z);
-    Graphu64_ConvertMatrixToFixed(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));
-    Geometry_DrawIntensityMask((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
+    Graphu64_ConvertMatrixToFixed(matrix, (char *)actor + ((g_lightingBufferIndex << 6) + 0xE8));
+    Geometry_DrawIntensityMask((char *)actor + ((g_lightingBufferIndex << 6) + 0xE8), 1, 0x96);
 }
 
 void Simpinst_RefreshModelResourceUsage(StaticObject *staticObject) {
@@ -128,7 +128,7 @@ void Simpinst_RefreshModelResourceUsage(StaticObject *staticObject) {
     if (index != staticObject->animation) {
         resource = Cache_RequestResource(0, staticObject->animationKey,
                                 staticObject->animationKey, 0x18,
-                                0, 0, 0, &D_800C3DA8_de + 4, 1);
+                                0, 0, 0, &g_simpleObjectModelResourceTagData + 4, 1);
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource, staticObject->animationKey, 1);
             Cache_ReleaseResource(0, resource);
@@ -145,7 +145,7 @@ void Simpinst_RefreshModelResourceUsage(StaticObject *staticObject) {
     if (staticObject->resource != 0) {
         resource = Cache_RequestResource(0, staticObject->resource,
                                 staticObject->resource, staticObject->resourceSize,
-                                0, 0, &D_0026D7F4, g_simpModelText, 0);
+                                0, 0, &g_simpleModelResourceCallbackAddress, g_simpModelText, 0);
     } else {
         resource = 0;
     }

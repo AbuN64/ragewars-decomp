@@ -13,9 +13,9 @@
    message to get/set the value, range, step or user word, adjusts by one step, or posts the new
    value to the parent. */
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
-s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
+s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 valueOrUpperBound, s32 notifyOrLowerBound) {
     s32 result;
     Slider *widget = slider;
 
@@ -29,7 +29,7 @@ s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
     switch (msg) {
         case 5:
         case 8:
-            if (arg3 != 0) {
+            if (notifyOrLowerBound != 0) {
                 s32 v = widget->value + widget->step;
                 s32 hi = widget->max;
                 widget->value = v;
@@ -41,7 +41,7 @@ s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
 
         case 6:
         case 7:
-            if (arg3 != 0) {
+            if (notifyOrLowerBound != 0) {
                 s32 v = widget->value - widget->step;
                 s32 lo = widget->min;
                 widget->value = v;
@@ -72,32 +72,32 @@ s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
             goto end;
 
         case 0x1005:
-            if (arg2 < widget->min) {
+            if (valueOrUpperBound < widget->min) {
                 goto post;
             }
-            if (widget->max < arg2) {
+            if (widget->max < valueOrUpperBound) {
                 goto post;
             }
-            widget->value = arg2;
+            widget->value = valueOrUpperBound;
             goto post;
 
         case 0x1004:
-            if (widget->min < arg2) {
-                widget->max = arg2;
+            if (widget->min < valueOrUpperBound) {
+                widget->max = valueOrUpperBound;
             }
-            if (arg3 < widget->max) {
-                widget->min = arg3;
+            if (notifyOrLowerBound < widget->max) {
+                widget->min = notifyOrLowerBound;
             }
             goto post;
 
         case 0x1007:
-            if (arg2 < (widget->max - widget->min)) {
-                widget->step = arg2;
+            if (valueOrUpperBound < (widget->max - widget->min)) {
+                widget->step = valueOrUpperBound;
             }
             goto post;
 
         case 0x1009:
-            widget->flags = arg2;
+            widget->flags = valueOrUpperBound;
             goto post;
 
         default:
@@ -149,12 +149,12 @@ void Frontend_UpdateSliderGeometry(Slider *slider) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_8040CB24[12] =
+char s_SliderMULTIWEAPONText[12] =
     "MULTI_WEAPON";
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_8040CAA4[3] = {
+unsigned int k_SliderEncodedWords[3] = {
     0x05DF0113, 0x2D04EFEF, 0xC10DD311,
 };
 #endif

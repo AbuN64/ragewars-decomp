@@ -1,5 +1,5 @@
-#ifndef SYSTEM_2_802661FC_H
-#define SYSTEM_2_802661FC_H
+#ifndef SYSTEM_EVENTS_APPLYDAMAGEEVENT_H
+#define SYSTEM_EVENTS_APPLYDAMAGEEVENT_H
 #include "COMMON/TARGET.H"
 /* Damage packet passed by value to the area-hit callbacks. */
 typedef struct Shared_DamageParameters {
@@ -22,5 +22,5 @@ struct ClipEventTargetView {
     s32 value;
 };
 extern void Events_DispatchCallback(void *actor, void *source, s32 event, CVector3 position, struct ResourceManagerState state);
-extern void Events_ForwardCallback(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6);
+extern void Events_ForwardCallback(void *sourceActor, void *targetActor, s32 eventKind, CVector3 eventPosition, ResourceManagerState eventParams);
 #endif

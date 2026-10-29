@@ -1,5 +1,5 @@
 #include "MENU/GFX/IMAGE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MATH/N64_ENG.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "COMMON/NODERECAT2A8.H"
@@ -12,8 +12,8 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/FRONTEND_CONFIGUREIMAGECONVERSION.H"
-extern struct ResourceRecAt6 *g_frontendResourceTextureTimers;
-extern EntryRecAt18V1 *g_frontendResourceTextures;
+extern struct FrontendTextureTimerEntry *g_frontendResourceTextureTimers;
+extern ArchiveTextureEntry *g_frontendResourceTextures;
 extern FileState g_frontendResourceState;
 extern void XStdio_CloseStream(s32 file);
 extern void *Cache_AllocateMemory(s32 size);
@@ -30,7 +30,7 @@ extern void Frontend_ConfigureOwnedImage(s32 id, s32 format, s16 width, s16 heig
 
 extern s16 g_frontendResourceTextureCount, g_frontendResourceFontCount;
 
-extern struct ChunkRecAt48C *g_frontendResourceFonts;
+extern struct ArchiveChunkImageListsView *g_frontendResourceFonts;
 
 
 extern void Node_ReleaseRetainedImageSlot(s32 i);
@@ -116,8 +116,8 @@ void Node_CloseResourceArchive(void) {
     s32 i_chunks;
     s32 offset_chunks;
     s32 offset;
-    struct ResourceRecAt6 *resource;
-    struct ChunkRecAt48C *chunk;
+    struct FrontendTextureTimerEntry *resource;
+    struct ArchiveChunkImageListsView *chunk;
     void **block;
     void **tables;
     void **first;
@@ -128,7 +128,7 @@ void Node_CloseResourceArchive(void) {
         invalid = -1;
         offset = 0;
         do {
-            if (((EntryRecAt18V1 *)(offset + (s32)g_frontendResourceTextures))->unk4 & 1) {
+            if (((ArchiveTextureEntry *)(offset + (s32)g_frontendResourceTextures))->flags & 1) {
                 resource = g_frontendResourceTextureTimers + i;
                 if (resource->id != invalid && resource->retained == 0) {
                     Node_ReleaseRetainedImageSlot(i);
@@ -139,7 +139,7 @@ void Node_CloseResourceArchive(void) {
     }
     Node_ReleaseActiveChunkImages();
     state = &g_frontendResourceState;
-    if (state->unk0) XStdio_CloseStream(state->unk0);
+    if (state->streamHandle) XStdio_CloseStream(state->streamHandle);
     Node_ReleaseUnprotectedBuffers(1);
     Node_UpdateImageReleaseTimers(1);
     if (state->entries) Cache_FreeMemory(state->entries);
@@ -148,14 +148,14 @@ void Node_CloseResourceArchive(void) {
     offset_chunks = 0;
     if (state->chunkCount > 0) {
         do {
-            block = ((struct ChunkRecAt48C *)(offset_chunks + (s32)g_frontendResourceFonts))->optional;
+            block = ((struct ArchiveChunkImageListsView *)(offset_chunks + (s32)g_frontendResourceFonts))->optional;
             if (block) {
                 Cache_FreeMemory(*block);
-                Cache_FreeMemory(((struct ChunkRecAt48C *)(offset_chunks + (s32)g_frontendResourceFonts))->optional);
+                Cache_FreeMemory(((struct ArchiveChunkImageListsView *)(offset_chunks + (s32)g_frontendResourceFonts))->optional);
             }
             i_chunks++;
-            Cache_FreeMemory(*((struct ChunkRecAt48C *)(offset_chunks + (s32)g_frontendResourceFonts))->primary);
-            block = ((struct ChunkRecAt48C *)(offset_chunks + (s32)g_frontendResourceFonts))->primary;
+            Cache_FreeMemory(*((struct ArchiveChunkImageListsView *)(offset_chunks + (s32)g_frontendResourceFonts))->primary);
+            block = ((struct ArchiveChunkImageListsView *)(offset_chunks + (s32)g_frontendResourceFonts))->primary;
             offset_chunks += 0x49C;
             Cache_FreeMemory(block);
         } while (i_chunks < g_frontendResourceFontCount);
@@ -183,9 +183,9 @@ void Node_EvictExpiredImages(void) {
     s32 i;
     s32 j;
     s32 k;
-    struct SlotRecAtCV2 *slot;
-    struct SlotRecAtCV2 *slots;
-    struct ResourceRecAt6 *resource;
+    struct ArchiveOwnedImageSlot *slot;
+    struct ArchiveOwnedImageSlot *slots;
+    struct FrontendTextureTimerEntry *resource;
 
     now = N64Eng_GetFrameCounter();
     if (g_frontendResourceState.locked != 0) {
@@ -202,7 +202,7 @@ void Node_EvictExpiredImages(void) {
     }
     for (i = 0; i < g_frontendResourceState.chunkCount; i++) {
         if (g_frontendResourceState.chunks[i].live != 0 && g_frontendResourceState.chunks[i].active != 0) {
-            for (j = 0; j < g_frontendResourceState.chunks[i].header->unkE; j++) {
+            for (j = 0; j < g_frontendResourceState.chunks[i].header->glyphCount; j++) {
                 slots = g_frontendResourceState.chunks[i].slots[j];
                 for (k = 0; k < 0x60; k++) {
                     slot = &slots[k];
@@ -236,53 +236,53 @@ s32 Node_GetImageTexture(s32 index, s32 mode) {
     s32 size;
     s32 i;
     s32 format;
-    EntryRecAt18V1 *entry;
+    ArchiveTextureEntry *entry;
 
-    if (g_frontendResourceTextures[index].unk4 & 1) {
+    if (g_frontendResourceTextures[index].flags & 1) {
         touch(index, mode);
-        return g_frontendResourceTextures[index].unk0;
+        return g_frontendResourceTextures[index].imageHandle;
     }
     palette = 0;
     paletteBytes = 0;
-    id = g_frontendResourceTextures[index].unk0;
+    id = g_frontendResourceTextures[index].imageHandle;
     stride = 0;
     N64Eng_GetTimeSeconds();
-    ((FileState *)((char *)&g_frontendResourceFilename - 4))->unk0 = XStdio_OpenStream(&g_frontendResourceFilename, &D_800DD0B0);
-    entry = &g_frontendResourceFilename.unk25C[index];
+    ((FileState *)((char *)&g_frontendResourceFilename - 4))->streamHandle = XStdio_OpenStream(&g_frontendResourceFilename, &s_frontendResourceOpenMode);
+    entry = &g_frontendResourceFilename.textureEntries[index];
     transparent = 0;
-    if (entry->unk8 == 8) {
-        stride = (entry->unkA + 7) & -8;
-    } else if (entry->unk8 == 4) {
-        stride = (entry->unkA + 15) & -16;
-    } else if (entry->unk8 == 16) {
-        stride = (entry->unkA + 3) & -4;
+    if (entry->bitsPerPixel == 8) {
+        stride = (entry->width + 7) & -8;
+    } else if (entry->bitsPerPixel == 4) {
+        stride = (entry->width + 15) & -16;
+    } else if (entry->bitsPerPixel == 16) {
+        stride = (entry->width + 3) & -4;
     }
     Frontend_ClearOwnedImage(id);
     texture = id;
-    size = stride * entry->unkC * entry->unk8 / 8;
+    size = stride * entry->height * entry->bitsPerPixel / 8;
     pixels = Cache_AllocateMemory(size);
-    XStdio_SeekStream(g_frontendResourceState.unk0, g_frontendResourceState.unk248 + entry->unk14, 0);
-    XStdio_ReadStream(pixels, size, 1, g_frontendResourceState.unk0);
-    if (entry->unkE > 0) {
-        paletteBytes = entry->unkE * 2;
+    XStdio_SeekStream(g_frontendResourceState.streamHandle, g_frontendResourceState.textureDataOffset + entry->pixelOffset, 0);
+    XStdio_ReadStream(pixels, size, 1, g_frontendResourceState.streamHandle);
+    if (entry->paletteCount > 0) {
+        paletteBytes = entry->paletteCount * 2;
         palette = Cache_AllocateMemory(paletteBytes);
-        XStdio_SeekStream(g_frontendResourceState.unk0, g_frontendResourceState.unk248 + entry->unk18, 0);
-        XStdio_ReadStream(palette, paletteBytes, 1, g_frontendResourceState.unk0);
-        for (i = 0; i < entry->unkE; i++) {
+        XStdio_SeekStream(g_frontendResourceState.streamHandle, g_frontendResourceState.textureDataOffset + entry->paletteOffset, 0);
+        XStdio_ReadStream(palette, paletteBytes, 1, g_frontendResourceState.streamHandle);
+        for (i = 0; i < entry->paletteCount; i++) {
             if (!(palette[i] & 1)) {
                 transparent = 1;
                 g_frontendResourceChromaKeys[index] = palette[i];
                 break;
             }
         }
-        if (i == entry->unkE) {
+        if (i == entry->paletteCount) {
             transparent = 0;
             g_frontendResourceChromaKeys[index] = 0xFF000000;
         }
     }
     format = -1;
-    if (entry->unkE > 0) {
-        if (entry->unk8 == 8) {
+    if (entry->paletteCount > 0) {
+        if (entry->bitsPerPixel == 8) {
             format = 32;
             if (transparent) {
                 format = 30;
@@ -293,22 +293,22 @@ s32 Node_GetImageTexture(s32 index, s32 mode) {
                 format = 20;
             }
         }
-    } else if (entry->unk8 == 16) {
+    } else if (entry->bitsPerPixel == 16) {
         format = 5;
-    } else if (entry->unk8 == 24) {
+    } else if (entry->bitsPerPixel == 24) {
         format = 8;
-    } else if (entry->unk8 == 32) {
+    } else if (entry->bitsPerPixel == 32) {
         format = 12;
     }
-    Frontend_ConfigureOwnedImage(id, format, entry->unkA, entry->unkC, stride, entry->unkC, 1, size, pixels, 1, paletteBytes,
-                  palette, entry->unkE);
+    Frontend_ConfigureOwnedImage(id, format, entry->width, entry->height, stride, entry->height, 1, size, pixels, 1, paletteBytes,
+                  palette, entry->paletteCount);
     Smp_CopyAndSwizzleImage(texture, id);
-    g_frontendResourceTextures[index].unk4 |= 1;
-    XStdio_CloseStream(g_frontendResourceState.unk0);
-    g_frontendResourceState.unk0 = 0;
+    g_frontendResourceTextures[index].flags |= 1;
+    XStdio_CloseStream(g_frontendResourceState.streamHandle);
+    g_frontendResourceState.streamHandle = 0;
     N64Eng_GetTimeSeconds();
     touch(index, mode);
-    return g_frontendResourceTextures[index].unk0;
+    return g_frontendResourceTextures[index].imageHandle;
 }
 
 void Node_LoadTextureIntoOutput(s32 index, s32 output) {
@@ -320,49 +320,49 @@ void Node_LoadTextureIntoOutput(s32 index, s32 output) {
     s32 size;
     s32 i;
     s32 format;
-    EntryRecAt18V1 *entry;
+    ArchiveTextureEntry *entry;
 
-    if (g_frontendResourceTextures[index].unk4 & 1) {
-        Frontend_CopyOwnedImage(output, g_frontendResourceTextures[index].unk0);
+    if (g_frontendResourceTextures[index].flags & 1) {
+        Frontend_CopyOwnedImage(output, g_frontendResourceTextures[index].imageHandle);
         return;
     }
     palette = 0;
     paletteBytes = 0;
     stride = 0;
-    ((FileState *)((char *)&g_frontendResourceFilename - 4))->unk0 = XStdio_OpenStream(&g_frontendResourceFilename, &D_800DD0B0);
-    entry = &g_frontendResourceFilename.unk25C[index];
+    ((FileState *)((char *)&g_frontendResourceFilename - 4))->streamHandle = XStdio_OpenStream(&g_frontendResourceFilename, &s_frontendResourceOpenMode);
+    entry = &g_frontendResourceFilename.textureEntries[index];
     transparent = 0;
-    if (entry->unk8 == 8) {
-        stride = (entry->unkA + 7) & -8;
-    } else if (entry->unk8 == 4) {
-        stride = (entry->unkA + 15) & -16;
-    } else if (entry->unk8 == 16) {
-        stride = (entry->unkA + 3) & -4;
+    if (entry->bitsPerPixel == 8) {
+        stride = (entry->width + 7) & -8;
+    } else if (entry->bitsPerPixel == 4) {
+        stride = (entry->width + 15) & -16;
+    } else if (entry->bitsPerPixel == 16) {
+        stride = (entry->width + 3) & -4;
     }
-    size = stride * entry->unkC * entry->unk8 / 8;
+    size = stride * entry->height * entry->bitsPerPixel / 8;
     pixels = Cache_AllocateMemory(size);
-    XStdio_SeekStream(g_frontendResourceState.unk0, g_frontendResourceState.unk248 + entry->unk14, 0);
-    XStdio_ReadStream(pixels, size, 1, g_frontendResourceState.unk0);
-    if (entry->unkE > 0) {
-        paletteBytes = entry->unkE * 2;
+    XStdio_SeekStream(g_frontendResourceState.streamHandle, g_frontendResourceState.textureDataOffset + entry->pixelOffset, 0);
+    XStdio_ReadStream(pixels, size, 1, g_frontendResourceState.streamHandle);
+    if (entry->paletteCount > 0) {
+        paletteBytes = entry->paletteCount * 2;
         palette = Cache_AllocateMemory(paletteBytes);
-        XStdio_SeekStream(g_frontendResourceState.unk0, g_frontendResourceState.unk248 + entry->unk18, 0);
-        XStdio_ReadStream(palette, paletteBytes, 1, g_frontendResourceState.unk0);
-        for (i = 0; i < entry->unkE; i++) {
+        XStdio_SeekStream(g_frontendResourceState.streamHandle, g_frontendResourceState.textureDataOffset + entry->paletteOffset, 0);
+        XStdio_ReadStream(palette, paletteBytes, 1, g_frontendResourceState.streamHandle);
+        for (i = 0; i < entry->paletteCount; i++) {
             if (!(palette[i] & 0xFF000000)) {
                 transparent = 1;
                 g_frontendResourceChromaKeys[index] = palette[i];
                 break;
             }
         }
-        if (i == entry->unkE) {
+        if (i == entry->paletteCount) {
             transparent = 0;
             g_frontendResourceChromaKeys[index] = 0xFF000000;
         }
     }
     format = -1;
-    if (entry->unkE > 0) {
-        if (entry->unk8 == 8) {
+    if (entry->paletteCount > 0) {
+        if (entry->bitsPerPixel == 8) {
             format = 32;
             if (transparent) {
                 format = 30;
@@ -373,15 +373,15 @@ void Node_LoadTextureIntoOutput(s32 index, s32 output) {
                 format = 20;
             }
         }
-    } else if (entry->unk8 == 16) {
+    } else if (entry->bitsPerPixel == 16) {
         format = 28;
-    } else if (entry->unk8 == 24) {
+    } else if (entry->bitsPerPixel == 24) {
         format = 8;
-    } else if (entry->unk8 == 32) {
+    } else if (entry->bitsPerPixel == 32) {
         format = 12;
     }
-    Frontend_ConfigureOwnedImage(output, format, entry->unkA, entry->unkC, stride, entry->unkC, 1, size, pixels, 1, paletteBytes,
-                  palette, entry->unkE);
-    XStdio_CloseStream(g_frontendResourceState.unk0);
-    g_frontendResourceState.unk0 = 0;
+    Frontend_ConfigureOwnedImage(output, format, entry->width, entry->height, stride, entry->height, 1, size, pixels, 1, paletteBytes,
+                  palette, entry->paletteCount);
+    XStdio_CloseStream(g_frontendResourceState.streamHandle);
+    g_frontendResourceState.streamHandle = 0;
 }

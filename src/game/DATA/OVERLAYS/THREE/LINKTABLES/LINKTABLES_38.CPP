@@ -2,7 +2,7 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CE8E8 */
-unsigned int D_blob_496c184706bb7b097ea7[1] = {
-    (unsigned int)D_0020F6C0,
+unsigned int g_LinktablesEncodedWordsBlock9[1] = {
+    (unsigned int)addrLow_Target_UpdateTargetSelection,
 };
 #endif

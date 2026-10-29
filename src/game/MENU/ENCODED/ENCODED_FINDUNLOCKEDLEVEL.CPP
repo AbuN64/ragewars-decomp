@@ -4,32 +4,32 @@
 #include "COMMON/CHEATCODE.H"
 #include "TYPES.H"
 
-/* Points arg0's unk14 field at the entry of D_44FB94 that D_80154030 selects when it is below 12, else at D_800D7E14, and returns 0. */
+/* Points arg0's unk14 field at the entry of D_44FB94 that g_encodedCheatCharacterIndex selects when it is below 12, else at g_unlockedLevelResultLabel, and returns 0. */
 
 
 
 
 
-extern u32 D_80154030;
-extern EntryRecAt0V2 D_0044EF44[];
-extern char D_800D7E14;
+extern u32 g_encodedCheatCharacterIndex;
+extern MenuPointerEntry g_encodedCheatLabelTable[];
+extern char g_unlockedLevelResultLabel;
 
-s32 Encoded_SetTextEntryResultLabel(ObjRecAt14V1 *arg0) {
-    if (D_80154030 < 12) {
-        arg0->unk14 = D_0044EF44[D_80154030].ptr;
+s32 Encoded_SetTextEntryResultLabel(MenuLabelPointerView *labelItem) {
+    if (g_encodedCheatCharacterIndex < 12) {
+        labelItem->label = g_encodedCheatLabelTable[g_encodedCheatCharacterIndex].ptr;
     } else {
-        arg0->unk14 = &D_800D7E14;
+        labelItem->label = &g_unlockedLevelResultLabel;
     }
     return 0;
 }
 
-/* Steps index through the eleven entries (wrapping 10 to 0 and below 0 to 10), before the test when mode is 0 and after it otherwise, until one whose flag bit is set in D_801462CC; returns that index, or -1 after eleven tries. */
+/* Steps index through the eleven entries (wrapping 10 to 0 and below 0 to 10), before the test when mode is 0 and after it otherwise, until one whose flag bit is set in g_menuOptionAvailabilityFlags; returns that index, or -1 after eleven tries. */
 
 
 s32 Encoded_FindUnlockedLevel(s32 index, s32 step, s32 mode) {
     s32 i;
     s32 mask;
-    s32 *flags; 
+    s32 *flags;
 
     for (i = 0; i < 11; i++) {
         if (mode == 0) {
@@ -76,7 +76,7 @@ s32 Encoded_FindUnlockedLevel(s32 index, s32 step, s32 mode) {
             mask = 0x4000000;
             break;
         }
-        flags = &D_801462C8.unlockedLevels;
+        flags = &g_gameSettings.unlockedLevels;
         if (*flags & mask) {
             return index;
         }

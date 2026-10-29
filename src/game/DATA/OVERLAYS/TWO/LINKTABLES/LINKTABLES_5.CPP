@@ -1,10 +1,10 @@
 
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800CB2A8[4] = {
+unsigned int k_LinktablesEncodedWordsBlock1[4] = {
     0x52000058, 0x06000010, 0x7FFFFFFF, 0x00000000,
 };
 
-unsigned int D_auto_800CB2B8[22] = {
+unsigned int g_LinktablesEncodedWords[22] = {
     0x807FFFFF, 0x00000003, 0x9FFFFFFF, 0x00000000,
     0xA07FFFFF, 0x00000003, 0xA3FFFFFF, 0x00000000,
     0xA4001FFF, 0x0000000B, 0xA5FFFFFF, 0x00000000,

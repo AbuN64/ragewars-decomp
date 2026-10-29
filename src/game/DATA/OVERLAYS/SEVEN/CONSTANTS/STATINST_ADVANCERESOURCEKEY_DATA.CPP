@@ -2,7 +2,7 @@
 
 /* 800D06C0.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_blast_falloff_us_rev1[25] = {
+unsigned int g_BlastFalloffWords1[25] = {
     0x3F4CCCCD, 0x3F666666, 0x3F6A222D, 0x3F582CE4, 0x3F363609, 0x3F09ED18, 0x3EB202FB, 0x3E248A59,
     0x00000000, 0xBDEFBB95, 0xBE455AC0, 0xBE6FC505, 0xBE7E6ABA, 0xBE7899BF, 0xBE65A07B, 0xBE4CCCCD,
     0xBE342EDC, 0xBE1CDF26, 0xBE06B8FA, 0xBDE32DB2, 0xBDBAA79C, 0xBD9394B8, 0xBD5B573F, 0xBD1142B3,
@@ -12,7 +12,7 @@ unsigned int D_auto_src_ragewars_blast_falloff_us_rev1[25] = {
 
 /* 800D0724.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_model_sway_samples_us_rev1[120] = {
+unsigned int g_ModelSwaySamplesWords1[120] = {
     0x3F030553, 0x3F1D013B, 0x3F39C77A, 0x3F4F9724, 0x3F5645A2, 0x3F3D6388, 0x3F1BFB16, 0x3ED0BE0E,
     0x3E5E1B09, 0x3DA0C49C, 0x3D21CAC1, 0x00000000, 0x3D4B923A, 0x3E191687, 0x3E94538F, 0x3ED0E560,
     0x3F161E4F, 0x3F4872B0, 0x3F70CB29, 0x3F7CA57A, 0x3F800000, 0x3F6F0D84, 0x3F4BB2FF, 0x3F28E8A7,
@@ -30,7 +30,7 @@ unsigned int D_auto_src_ragewars_model_sway_samples_us_rev1[120] = {
     0x3E966CF4, 0x3E89374C, 0x3E97CED9, 0x3EA9E1B1, 0x3EC7C84B, 0x3EF1B717, 0x3F058E22, 0x3F0E2824,
 };
 
-unsigned int D_d1_870f34bd87ec095e[3] = {
+unsigned int g_StatinstAdvanceresourcekeyWords1[3] = {
     0x3FB22AF6, 0x3FB20A68, 0x3FB1E9D9,
 };
 #endif

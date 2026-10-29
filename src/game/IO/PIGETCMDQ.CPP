@@ -1,25 +1,25 @@
 #include "include_asm.h"
-#include "COMMON/S1_4.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "TYPES.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "IO/PIGETCMDQ.H"
 
 s32 Io_GetPeripheralCommandQueue(void)
 {
-  int new_var;
-  s32 *new_var2;
-  new_var = (*((s32 *) (((s8 *) (&D_800D4360)) + 0))) != 0;
-  if (new_var)
+  int interruptMask;
+  s32 *commandQueueAddress;
+  interruptMask = (*((s32 *) (((s8 *) (&g_piManagerState)) + 0))) != 0;
+  if (interruptMask)
   {
-    if (new_var2)
+    if (commandQueueAddress)
     {
-      new_var2 = (s32 *) (((s8 *) (&D_800D4360)) + 8);
-      return *new_var2;
+      commandQueueAddress = (s32 *) (((s8 *) (&g_piManagerState)) + 8);
+      return *commandQueueAddress;
     }
     else
     {
-      new_var2 = (s32 *) (((s8 *) (&D_800D4360)) + 8);
-      return *new_var2;
+      commandQueueAddress = (s32 *) (((s8 *) (&g_piManagerState)) + 8);
+      return *commandQueueAddress;
     }
   }
   return 0;

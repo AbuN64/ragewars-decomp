@@ -1,10 +1,10 @@
 #include "COMMON/WORLD.H"
-#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON.H"
-extern s32 D_800D2978;
+extern s32 g_gameFrameCounter;
 
 /* Initialises a placed prop from its record: resets its state and owner, loads its model and caches the squared model radius, builds its rotation from the record's packed quaternion, scale and position into a matrix copied into the object, sets its bounding box either as a fixed cube for flag 0x40 or from the record's six extents through Menu_ExpandFloatHighWord with a half-unit margin, copies the position, links its path segment and takes the next colour key and colour frame. The fixed cube is written through do-while(0) vector macros, which the stores' order needs, and 102.4 is the cartridge's rounded 0x42CCCCCC. */
 
@@ -27,12 +27,12 @@ extern s32 InstHdr_GetActorType(void *);
 static inline s32 advancePropKey(void) {
     s32 next;
 
-    next = D_800D0910 + 1;
-    D_800D0910 = next;
+    next = g_staticObjectResourceSerial + 1;
+    g_staticObjectResourceSerial = next;
     if (next == 0x3FFFFF) {
-        D_800D0910 = 0x380000;
+        g_staticObjectResourceSerial = 0x380000;
     }
-    return D_800D0910;
+    return g_staticObjectResourceSerial;
 }
 
 void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments) {
@@ -50,7 +50,7 @@ void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 own
     prop->fieldB4 = 0;
     prop->model = Scene_GetActorDefinition(&g_world, record->model);
     prop->fade = 16;
-    prop->fieldDC = 0;
+    prop->animationTimer = 0;
     model = prop->model;
     model->radiusSquared = model->radius * model->radius;
     prop->flags = record->flags;
@@ -66,7 +66,7 @@ void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 own
     if (prop->flags & 0x40) {
         do { (prop->min).x = (record->position).x - (102.399994f); (prop->min).y = (record->position).y - (102.399994f); (prop->min).z = (record->position).z - (102.399994f); } while (0);
         do { (prop->max).x = (record->position).x + (102.399994f); (prop->max).y = (record->position).y + (102.399994f); (prop->max).z = (record->position).z + (102.399994f); } while (0);
-        prop->fieldD4 = D_800CD8D0;
+        prop->fieldD4 = g_defaultCameraSurfaceType;
     } else {
         prop->min.x = RW_BITS_TO_FLOAT(record->extents[0]) + record->position.x - 0.5f;
         prop->min.y = RW_BITS_TO_FLOAT(record->extents[1]) + record->position.y - 0.5f;
@@ -85,7 +85,7 @@ void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 own
         prop->segment = segments + record->segment * 32;
     }
     prop->key = advancePropKey() << 10;
-    prop->colorFrame = (u8)D_800D2978 - 1;
+    prop->colorFrame = (u8)g_gameFrameCounter - 1;
 #if defined(VERSION_DE)
     if ((u32)(InstHdr_GetActorType(prop) - 9) < 2) {
         prop->flags |= 0x50;

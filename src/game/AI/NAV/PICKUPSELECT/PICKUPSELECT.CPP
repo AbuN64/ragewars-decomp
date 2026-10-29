@@ -1,25 +1,25 @@
-#include "COMMON/OBJECTLINKS1458.H"
+#include "COMMON/NAVIGATION_ACTOR_SEARCH_VIEWS.H"
 #include "AI/SHARED_PICKUPGOALNODE.H"
 #include "AI/NAV/NAV_SELECTPICKUPGOAL.H"
 #include "AI/NAV/NAV_SELECTPICKUPGOALEU.H"
 
 /* 8020EAE0_4.CPP */
 #if !defined(VERSION_EU)
-s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *arg0) {
+s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *controller) {
     s32 buffer[30];
     s32 count;
     Shared_PickupGoalNode *record;
     PickupGoalNodeList *base;
     u32 sel;
-    s32 *key; 
+    s32 *key;
 
-    if (arg0->unk_68 == 0) {
-        base = &D_8013B364;
+    if (controller->unk_68 == 0) {
+        base = &g_navigationGraph;
         for (count = 29; count >= 0; count--) {
             buffer[count] = 0;
         }
 
-        switch (arg0->unk_BC) {
+        switch (controller->unk_BC) {
         case 0:
             buffer[0] = 0xBC6;
             buffer[1] = 0xBC7;
@@ -66,10 +66,10 @@ s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *arg0) {
             Portal_ResetSearchState(base);
             Route_ClearGoalList(base);
 
-            key = &arg0->unk_4;
+            key = &controller->unk_4;
             if (Nav_AddPickupGoalsByObjectIds(buffer) == 0) {
-                arg0->unk_68 = 0;
-                arg0->unk_BC = -1U;
+                controller->unk_68 = 0;
+                controller->unk_BC = -1U;
                 return 1;
             }
 
@@ -79,16 +79,16 @@ s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *arg0) {
             sel = base->selected;
             if (sel != -1U) {
                 record = Portal_FindSearchNode(base, sel);
-                arg0->unk_C = base->selected;
-                arg0->unk_68 = record->goal;
-                Route_ReconstructSearchPath(base, arg0->history, 4);
+                controller->unk_C = base->selected;
+                controller->unk_68 = record->goal;
+                Route_ReconstructSearchPath(base, controller->history, 4);
                 return 1;
             }
-            arg0->unk_68 = 0;
-            arg0->unk_BC = sel;
+            controller->unk_68 = 0;
+            controller->unk_BC = sel;
         } else {
-            arg0->unk_68 = 0;
-            arg0->unk_BC = -1U;
+            controller->unk_68 = 0;
+            controller->unk_BC = -1U;
         }
     }
 
@@ -99,21 +99,21 @@ s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *arg0) {
 /* 8020EAE0_5.CPP */
 #if defined(VERSION_EU)
 int Nav_SelectPickupGoalEu(void *self) {
-    PickupGoalObj8020EF60 *arg0 = self;
+    PickupGoalObj8020EF60 *controller = self;
     s32 buffer[30];
     s32 count;
     Shared_PickupGoalNode *record;
     PickupGoalNodeList *base;
     u32 sel;
-    s32 *key; 
+    s32 *key;
 
-    if (arg0->unk_68 == 0) {
-        base = &D_8013B364;
+    if (controller->unk_68 == 0) {
+        base = &g_navigationGraph;
         for (count = 29; count >= 0; count--) {
             buffer[count] = 0;
         }
 
-        switch (arg0->unk_BC) {
+        switch (controller->unk_BC) {
         case 0:
             buffer[0] = 0xBC6;
             buffer[1] = 0xBC7;
@@ -160,10 +160,10 @@ int Nav_SelectPickupGoalEu(void *self) {
             Portal_ResetSearchState(base);
             Route_ClearGoalList(base);
 
-            key = &arg0->unk_4;
+            key = &controller->unk_4;
             if (Nav_AddPickupGoalsByObjectIds(buffer) == 0) {
-                arg0->unk_68 = 0;
-                arg0->unk_BC = -1U;
+                controller->unk_68 = 0;
+                controller->unk_BC = -1U;
                 return 1;
             }
 
@@ -173,16 +173,16 @@ int Nav_SelectPickupGoalEu(void *self) {
             sel = base->selected;
             if (sel != -1U) {
                 record = Portal_FindSearchNode(base, sel);
-                arg0->unk_C = base->selected;
-                arg0->unk_68 = record->goal;
-                Route_ReconstructSearchPath(base, arg0->history, 4);
+                controller->unk_C = base->selected;
+                controller->unk_68 = record->goal;
+                Route_ReconstructSearchPath(base, controller->history, 4);
                 return 1;
             }
-            arg0->unk_68 = 0;
-            arg0->unk_BC = sel;
+            controller->unk_68 = 0;
+            controller->unk_BC = sel;
         } else {
-            arg0->unk_68 = 0;
-            arg0->unk_BC = -1U;
+            controller->unk_68 = 0;
+            controller->unk_BC = -1U;
         }
     }
 

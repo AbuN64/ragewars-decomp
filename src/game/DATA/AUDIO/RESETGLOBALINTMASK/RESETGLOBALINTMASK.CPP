@@ -2,7 +2,7 @@
 
 /* 802C0390_12.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_802BB6B8_eu_padding_BC2B8[8] = { 0x00, 0x12, 0x10, 0x40, 0x30, 0x42, 0xFF, 0xFF };
+unsigned char g_ResetglobalintmaskTrailingBytesBlock1[8] = { 0x00, 0x12, 0x10, 0x40, 0x30, 0x42, 0xFF, 0xFF };
 #endif
 
 /* DATA_802BC4C8.CPP */

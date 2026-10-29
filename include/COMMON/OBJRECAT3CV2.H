@@ -5,33 +5,33 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 
-typedef struct ObjRecAt3CV2 ObjRecAt3CV2;
+typedef struct RotationMatrixWords RotationMatrixWords;
 
 
-struct ObjRecAt3CV2;
+struct RotationMatrixWords;
 
 
-typedef struct InputRecAt28 InputRecAt28;
+typedef struct RotationMatrixElementsView RotationMatrixElementsView;
 
 
 
-extern float D_800C5AE8_de;
+extern float k_zyxExtractionPolynomialCoefficientsThree;
 
 
-struct InputRecAt28;
+struct RotationMatrixElementsView;
 
-extern float D_800C5AB0_de;
+extern float k_yxzExtractionPolynomialCoefficientsOne;
 
 
 
-extern float D_800C5AA8_de;
+extern float k_yxzExtractionClampAndZero;
 
 
 
 
 
 
-extern float D_800C5B0C_de;
+extern float k_xmathReciprocalSquareRootUnit;
 
 
 
@@ -39,10 +39,10 @@ extern float D_800C5B0C_de;
 
 
 
-extern float D_800C5AB8_de;
+extern float k_yxzExtractionPolynomialCoefficientsTwo;
 
 
-extern float D_800C5AC8_de;
+extern float k_yxzExtractionHalfPi;
 
 
 
@@ -50,16 +50,16 @@ extern float D_800C5AC8_de;
 
 
 
-extern float D_800C5B00_de;
+extern float k_xmathAffineMatrixUnit;
 
 
 
 
 
 
-extern float D_800C5AE0_de;
+extern float k_zyxExtractionPolynomialCoefficientsTwo;
 
-extern float D_800C5AD8_de;
+extern float k_zyxExtractionPolynomialCoefficientsOne;
 
 
 
@@ -67,7 +67,7 @@ extern float D_800C5AD8_de;
 
 
 
-extern float D_800C5AF0_de;
+extern float k_zyxExtractionHalfPi;
 
 
 
@@ -77,14 +77,14 @@ extern float D_800C5AF0_de;
 
 
 
-extern float D_800C5AC0_de;
+extern float k_yxzExtractionPolynomialCoefficientsThree;
 
 
 
 
 
 
-extern float D_800C5AD0_de;
+extern float k_zyxExtractionClampAndZero;
 
-extern f32 D_800CAE30;
+extern f32 k_xmathVectorAngleCenterResultOffset;
 #endif

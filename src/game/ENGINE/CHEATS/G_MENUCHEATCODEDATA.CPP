@@ -1,92 +1,92 @@
 #include "MENU/BUILD/DEFINITION_DATA.H"
 
 #if defined(VERSION_US_REV1)
-extern char rw_menu_paged_func_80406434_de[];
-extern char rw_menu_paged_func_804066BC_de[];
-extern char rw_menu_paged_func_804069F4_de[];
-extern char rw_menu_paged_func_80406F7C_de[];
-extern char rw_menu_paged_func_804070F4_de[];
-extern char rw_menu_paged_func_80407748_de[];
-extern char rw_menu_paged_func_80407F6C_de[];
-extern char rw_menu_paged_func_80408118_de[];
-extern char rw_menu_paged_func_804082FC_de[];
-extern char rw_menu_paged_func_804085E0_de[];
-extern char rw_menu_paged_func_80408AC4_us[];
-extern char rw_menu_paged_func_80408C4C_de[];
-extern char rw_menu_paged_func_80408DF0_de[];
-extern char rw_menu_paged_func_80409144_de[];
-extern char rw_menu_paged_func_80409448_de[];
-extern char rw_menu_paged_func_80409C0C_de[];
-extern char rw_menu_paged_func_80409CEC_de[];
-extern char rw_menu_paged_func_80409E10_de[];
-extern char rw_menu_paged_func_8040A244_de[];
-extern char rw_menu_paged_func_8040A458_de[];
-extern char rw_menu_paged_func_8040A47C_de[];
-extern char rw_menu_paged_func_8040A490_de[];
-extern char rw_menu_paged_func_8040A4A0_de[];
-extern char rw_menu_paged_func_8040A4D4_de[];
-extern char rw_menu_paged_func_8040A530_de[];
-extern char rw_menu_paged_func_8040A58C_de[];
-extern char rw_menu_paged_func_8040A5E8_de[];
-extern char rw_menu_paged_func_8040A614_de[];
-extern char rw_menu_paged_func_8040A6A8_de[];
-extern char rw_menu_paged_func_8040A6DC_de[];
-extern char rw_menu_paged_func_8040A748_de[];
-extern char rw_menu_paged_func_8040A764_de[];
-extern char rw_menu_paged_func_8040A77C_de[];
-extern char rw_menu_paged_func_8040A7BC_de[];
-extern char rw_menu_paged_func_8040A83C_us[];
-extern char rw_menu_paged_func_8040A928_us[];
-extern char rw_menu_paged_func_8040A9A0_de[];
-extern char rw_menu_paged_func_8040A9F8_de[];
-extern char rw_menu_paged_func_8040AA4C_de[];
-extern char rw_menu_paged_func_8040AAB8_de[];
-extern char rw_menu_paged_func_8040AAC8_de[];
-extern char rw_menu_paged_func_8040AADC_de[];
-extern char rw_menu_paged_func_8040AAF0_de[];
-extern char rw_menu_paged_func_8040AB04_de[];
-extern char rw_menu_paged_func_8040AB18_de[];
-extern char rw_menu_paged_func_8040AB2C_de[];
-extern char rw_menu_paged_func_8040AB40_de[];
-extern char rw_menu_paged_func_8040AB54_de[];
-extern char rw_menu_paged_func_8040ABA0_de[];
-extern char rw_menu_paged_func_8040ABBC_de[];
-extern char rw_menu_paged_func_8040ABDC_de[];
-extern char rw_menu_paged_func_8040ABF0_de[];
-extern char rw_menu_paged_func_8040AC04_de[];
-extern char rw_menu_paged_func_8040AC18_de[];
-extern char rw_menu_paged_func_8040AC2C_de[];
-extern char rw_menu_paged_func_8040AC40_de[];
-extern char rw_menu_paged_func_8040AC54_de[];
-extern char rw_menu_paged_func_8040ACA0_de[];
-extern char rw_menu_paged_func_8040ADCC_de[];
-extern char rw_menu_paged_func_8040AEF8_de[];
-extern char rw_menu_paged_func_8040B024_de[];
-extern char rw_menu_paged_func_8040B150_de[];
-extern char rw_menu_paged_func_8040B27C_de[];
-extern char rw_menu_paged_func_8040B2C8_de[];
-extern char rw_menu_paged_func_8040B3A8_de[];
-extern char rw_menu_paged_func_8040B3C4_de[];
-extern char rw_menu_paged_func_8040B3DC_de[];
-extern char rw_menu_paged_func_8040B410_de[];
-extern char rw_menu_paged_func_8040B444_de[];
-extern char rw_menu_paged_func_8040B4E0_de[];
-extern char rw_menu_paged_func_8040B58C_de[];
-extern char rw_menu_paged_func_8040B648_de[];
-extern char rw_menu_paged_func_8040B6CC_de[];
-extern char rw_menu_paged_func_8040B700_de[];
-extern char rw_menu_paged_func_8040B7E0_de[];
-extern char rw_menu_paged_func_8040B7F8_de[];
-extern char rw_menu_paged_func_8040B814_de[];
-extern char rw_menu_paged_func_8040B830_de[];
-extern char rw_menu_paged_func_8040B84C_de[];
-extern char rw_menu_paged_func_8040B868_de[];
-extern char rw_menu_paged_func_8040B8E4_de[];
-extern char rw_menu_paged_func_8040B960_de[];
-extern char rw_menu_paged_func_8040B9DC_de[];
-extern char rw_menu_paged_func_8040BA58_de[];
-extern char rw_menu_paged_func_8040BAD4_de[];
-extern char rw_menu_paged_func_8040BBC0_us[];
+extern char Snapshot_BeginProfileSave_PagedAddress[];
+extern char Snapshot_BeginProfileLoad_PagedAddress[];
+extern char Snapshot_CheckControllerPak_PagedAddress[];
+extern char Snapshot_BeginSnapshotSave_PagedAddress[];
+extern char Snapshot_BeginBlockLoad_PagedAddress[];
+extern char g_menuPaged_Snapshot_SelectNote[];
+extern char g_menuPaged_Snapshot_UpdateNoteLabel[];
+extern char Snapshot_UpdateSpaceLabel_PagedAddress[];
+extern char Snapshot_HandleMenuAction_PagedAddress[];
+extern char Snapshot_CloseNoteBrowser_PagedAddress[];
+extern char Snapshot_UpdateScoreTitle_PagedAddress[];
+extern char Pak_ConfirmProfileOrDeleteNote_PagedAddress[];
+extern char Pak_ClosePromptByKind_PagedAddress[];
+extern char Pak_ConfirmPendingOperation_PagedAddress[];
+extern char Timer_CancelPendingOperation_PagedAddress[];
+extern char Timer_CheckMenuPakChange_PagedAddress[];
+extern char Timer_CheckChangedMenuChannel_PagedAddress[];
+extern char Timer_UpdateManagerStatus_PagedAddress[];
+extern char Timer_UpdateManagerChannelLabel_PagedAddress[];
+extern char Timer_SetManagerHeading_PagedAddress[];
+extern char Timer_EnableAlternatePrompt_PagedAddress[];
+extern char Timer_DisableAlternatePrompt_PagedAddress[];
+extern char Timer_UpdateAlternatePromptLabel_PagedAddress[];
+extern char Timer_UpdatePreviewDepthLabel_PagedAddress[];
+extern char Timer_FormatPreviewPageCount_PagedAddress[];
+extern char Timer_FormatPreviewValue_PagedAddress[];
+extern char Timer_DispatchPreviewHandle_PagedAddress[];
+extern char Timer_FormatPreviewDottedTriple_PagedAddress[];
+extern char Timer_UpdateAlternateActionLabel_PagedAddress[];
+extern char Timer_OpenSelectedPrompt_PagedAddress[];
+extern char Timer_EnableProfilePreview_PagedAddress[];
+extern char Timer_ClearProfilePreview_PagedAddress[];
+extern char Timer_DisablePreviewSelection_PagedAddress[];
+extern char Timer_UpdatePreviewKindLabel_PagedAddress[];
+extern char Status_FormatRightAlignedPreviewName_PagedAddress[];
+extern char Status_UpdateStatusText_PagedAddress[];
+extern char Pak_FormatPreviewFourDigitValue_PagedAddress[];
+extern char Pak_UpdateProfileActionLabel_PagedAddress[];
+extern char Pak_OpenProfileActionPrompt_PagedAddress[];
+extern char Pak_SelectPromptKindZero_PagedAddress[];
+extern char Pak_SelectPromptKindOne_PagedAddress[];
+extern char Pak_SelectPromptKindTwo_PagedAddress[];
+extern char Pak_SelectPromptKindThree_PagedAddress[];
+extern char Pak_SelectPromptKindFour_PagedAddress[];
+extern char Pak_SelectPromptKindFive_PagedAddress[];
+extern char Pak_SelectPromptKindSix_PagedAddress[];
+extern char Pak_SelectPromptKindSeven_PagedAddress[];
+extern char Pak_SelectPromptKindEight_PagedAddress[];
+extern char Pak_SelectPromptKindNine_PagedAddress[];
+extern char Pak_SelectPromptKindNinePending_PagedAddress[];
+extern char Pak_SelectPromptKindTen_PagedAddress[];
+extern char Pak_SelectPromptKindEleven_PagedAddress[];
+extern char Pak_SelectPromptKindTwelve_PagedAddress[];
+extern char Pak_SelectPromptKindThirteen_PagedAddress[];
+extern char Pak_SelectPromptKindFourteen_PagedAddress[];
+extern char Pak_SelectPromptKindFifteen_PagedAddress[];
+extern char Pak_SelectPromptActionHeading_PagedAddress[];
+extern char Pak_SelectPromptTextGroupOne_PagedAddress[];
+extern char Pak_SelectPromptTextGroupTwo_PagedAddress[];
+extern char Pak_SelectPromptTextGroupThree_PagedAddress[];
+extern char Pak_SelectPromptTextGroupFour_PagedAddress[];
+extern char Pak_SelectPromptTextGroupFive_PagedAddress[];
+extern char Pak_SelectModalPromptLabel_PagedAddress[];
+extern char Pak_CheckOperationPakChange_PagedAddress[];
+extern char Pak_EnableOperationHeading_PagedAddress[];
+extern char Pak_DisableOperationHeading_PagedAddress[];
+extern char Pak_SelectOperationHeading_PagedAddress[];
+extern char Pak_SelectOperationDescription_PagedAddress[];
+extern char Pak_FormatOperationChannelLabel_PagedAddress[];
+extern char Pak_OpenPakChannel_PagedAddress[];
+extern char Pak_OpenPakStatusPrompt_PagedAddress[];
+extern char Pak_CancelPakAction_PagedAddress[];
+extern char Pak_SelectPakLoadHeading_PagedAddress[];
+extern char Pak_CheckPakActionChange_PagedAddress[];
+extern char Pak_SelectPakOperationZero_PagedAddress[];
+extern char Pak_SelectPakOperationOne_PagedAddress[];
+extern char Pak_SelectPakOperationTwo_PagedAddress[];
+extern char Pak_SelectPakOperationThree_PagedAddress[];
+extern char Pak_SelectPakOperationFour_PagedAddress[];
+extern char Pak_SelectPakOperationTextOne_PagedAddress[];
+extern char Frontend_SelectPakOperationTextTwo_PagedAddress[];
+extern char Frontend_SelectPakOperationTextThree_PagedAddress[];
+extern char Frontend_SelectPakOperationTextFour_PagedAddress[];
+extern char Frontend_SelectPakOperationTextFive_PagedAddress[];
+extern char Frontend_SelectPakConfirmationLabel_PagedAddress[];
+extern char Frontend_SelectPakActionLabel_PagedAddress[];
 extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_23C[];
 extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_374[];
 extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_684[];
@@ -102,78 +102,78 @@ extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_F48[];
 extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_F64[];
 extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_FD0[];
 extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_FEC[];
-extern char rw_menu_paged_func_8043D36C_de[];
-extern char rw_menu_paged_func_8043D388_de[];
-extern char rw_menu_paged_func_8043D3F4_de[];
-extern char rw_menu_paged_func_8043D410_de[];
-extern char rw_menu_paged_func_8043D47C_de[];
-extern char rw_menu_paged_func_8043D498_de[];
-extern char rw_menu_paged_func_8043D504_de[];
-extern char rw_menu_paged_func_8043D520_de[];
-extern char rw_menu_paged_func_8043D58C_de[];
-extern char rw_menu_paged_func_8043D5A8_de[];
-extern char rw_menu_paged_func_8043D614_de[];
-extern char rw_menu_paged_func_8043D630_de[];
-extern char rw_menu_paged_func_8043D69C_de[];
-extern char rw_menu_paged_func_8043D6B8_de[];
-extern char rw_menu_paged_func_8043D724_de[];
-extern char rw_menu_paged_func_8043D740_de[];
-extern char rw_menu_paged_func_8043D7AC_de[];
-extern char rw_menu_paged_func_8043D7C8_de[];
-extern char rw_menu_paged_func_8043D834_de[];
-extern char rw_menu_paged_func_8043D850_de[];
-extern char rw_menu_paged_func_8043D8BC_de[];
-extern char rw_menu_paged_func_8043D8D8_de[];
-extern char rw_menu_paged_func_8043D944_de[];
-extern char rw_menu_paged_func_8043D960_de[];
-extern char rw_menu_paged_func_8043D9CC_de[];
-extern char rw_menu_paged_func_8043D9E8_de[];
-extern char rw_menu_paged_func_8043DA54_de[];
-extern char rw_menu_paged_func_8043DA70_de[];
+extern char Option_ToggleOptionBit2_PagedAddress[];
+extern char Option_UpdateOptionBit2Item_PagedAddress[];
+extern char Option_ToggleOptionBit3_PagedAddress[];
+extern char Option_UpdateOptionBit3Item_PagedAddress[];
+extern char Option_ToggleOptionBit4_PagedAddress[];
+extern char Option_UpdateOptionBit4Item_PagedAddress[];
+extern char Option_ToggleOptionBit5_PagedAddress[];
+extern char Option_UpdateOptionBit5Item_PagedAddress[];
+extern char Option_ToggleOptionBit6_PagedAddress[];
+extern char Option_UpdateOptionBit6Item_PagedAddress[];
+extern char Option_ToggleOptionBit7_PagedAddress[];
+extern char Option_UpdateOptionBit7Item_PagedAddress[];
+extern char Option_ToggleOptionBit8_PagedAddress[];
+extern char Option_UpdateOptionBit8Item_PagedAddress[];
+extern char Option_ToggleOptionBit9_PagedAddress[];
+extern char Option_UpdateOptionBit9Item_PagedAddress[];
+extern char Option_ToggleOptionBit10_PagedAddress[];
+extern char Option_UpdateOptionBit10Item_PagedAddress[];
+extern char Option_ToggleOptionBit11_PagedAddress[];
+extern char Option_UpdateOptionBit11Item_PagedAddress[];
+extern char Option_ToggleOptionBit12_PagedAddress[];
+extern char Option_UpdateOptionBit12Item_PagedAddress[];
+extern char Option_ToggleOptionBit13_PagedAddress[];
+extern char Option_UpdateOptionBit13Item_PagedAddress[];
+extern char Option_ToggleOptionBit14_PagedAddress[];
+extern char Option_UpdateOptionBit14Item_PagedAddress[];
+extern char Option_ToggleOptionBit15_PagedAddress[];
+extern char Option_UpdateOptionBit15Item_PagedAddress[];
 extern char rw_menu_paged_func_8043DADC_de_offset_4[];
-extern char rw_menu_paged_func_8043DB04_de[];
-extern char rw_menu_paged_func_8043E1C0_de[];
-extern char rw_menu_paged_func_8043E1F8_de[];
-extern char rw_menu_paged_func_8043E254_de[];
-extern char rw_menu_paged_func_8043E28C_de[];
-extern char rw_menu_paged_func_8043E2D8_de[];
-extern char rw_menu_paged_func_8043E3CC_de[];
+extern char Menu_HandleSessionOptionPage_PagedAddress[];
+extern char CMenuProfile_HasRoundProgress_PagedAddress[];
+extern char CMenuProfile_ResetPlayerControllerProfile_PagedAddress[];
+extern char CMenuProfile_HasSavedRoundProgress_PagedAddress[];
+extern char CMenuProfile_AdjustControllerSelection_PagedAddress[];
+extern char CMenuProfile_FormatProfileQuantityLabel_PagedAddress[];
+extern char CMenuProfile_ToggleProfileMode_PagedAddress[];
 extern char rw_menu_paged_func_8043E418_de[];
-extern char rw_menu_paged_func_8043E444_de[];
+extern char CMenuProfile_BindSelectedDebugField_PagedAddress[];
 extern char rw_menu_paged_func_8043E468_de[];
-extern char rw_menu_paged_func_8043E494_de[];
-extern char rw_menu_paged_func_8043E4E0_de[];
-extern char rw_menu_paged_func_8043E504_de[];
-extern char rw_menu_paged_func_8043E530_de[];
-extern char rw_menu_paged_func_8043E568_de[];
+extern char CMenuProfile_UpdateProfileModeLabel_PagedAddress[];
+extern char CMenuProfile_EnableOwnerControllerPak_PagedAddress[];
+extern char CMenuProfile_EnableControllerPakAndClearState_PagedAddress[];
+extern char CMenuProfile_HasProfileRoundProgress_PagedAddress[];
+extern char CMenuProfile_OpenTimedPlayerDialog_PagedAddress[];
 extern char rw_menu_paged_func_8043E5C8_de[];
 extern char rw_menu_paged_func_8043E5D0_de[];
-extern char rw_menu_paged_func_8043E5D8_de[];
-extern char rw_menu_paged_func_8043E610_de[];
-extern char rw_menu_paged_func_8043E658_de[];
-extern char rw_menu_paged_func_8043E830_de[];
+extern char CMenuProfile_HasDialogRoundProgress_PagedAddress[];
+extern char CMenuProfile_OpenPrimaryPlayerDialog_PagedAddress[];
+extern char CMenuProfile_OpenAlternatePlayerDialog_PagedAddress[];
+extern char Initial_ToggleMenuRowOption_PagedAddress[];
 extern char rw_menu_paged_func_8043E91C_de[];
-extern char rw_menu_paged_func_8043E948_de[];
-extern char rw_menu_paged_func_8043E97C_de[];
-extern char rw_menu_paged_func_8043E9A8_de[];
-extern char rw_menu_paged_func_8043EA00_de[];
-extern char rw_menu_paged_func_8043EA4C_de[];
-extern char rw_menu_paged_func_8043EA98_de[];
-extern char rw_menu_paged_func_8043EB70_de[];
-extern char rw_menu_paged_func_8043EBE4_de[];
+extern char Initial_ProbeMenuControllerPak_PagedAddress[];
+extern char Initial_EnableMenuControllerPak_PagedAddress[];
+extern char Initial_OpenDialogWithControllerPak_PagedAddress[];
+extern char Initial_OpenDialogAfterTimerReset_PagedAddress[];
+extern char Initial_RequestTransitionWithPakDisabled_PagedAddress[];
+extern char Initial_SelectInitialController_PagedAddress[];
+extern char Initial_UpdateMultiplayerAvailability_PagedAddress[];
+extern char Initial_OpenLocalPlayerSetup_PagedAddress[];
 extern char rw_menu_paged_func_8043EC40_de[];
 extern char rw_menu_paged_func_8043EC6C_de[];
 extern char rw_menu_paged_func_8043EC98_de[];
-extern char rw_menu_paged_func_8043ECC4_de[];
-extern char rw_menu_paged_func_8043EDDC_de[];
-extern char rw_menu_paged_func_8043EE24_de[];
-extern char rw_menu_paged_func_8043F37C_eu[];
-extern char rw_menu_paged_func_804402DC_de[];
-extern char rw_menu_paged_func_80440838_de[];
-extern char rw_menu_paged_func_804415F4_de[];
-extern char rw_menu_paged_func_80442064_de[];
-extern char rw_menu_paged_func_8044208C_de[];
-extern char rw_menu_paged_func_80442384_de[];
+extern char Initial_OpenTrackPreviewMenu_PagedAddress[];
+extern char Multi_CompleteGameOverDelay_PagedAddress[];
+extern char Multi_DecreaseGameOverTimer_PagedAddress[];
+extern char CMenuProfile_UpdatePlayerAnimationChoice_PagedAddress[];
+extern char g_menuPaged_Menu_DrawMenuOptionSprite[];
+extern char Menu_DrawMenuModel_PagedAddress[];
+extern char g_menuPaged_Menu_DrawMenuEntries[];
+extern char g_menuPaged_Menu_DrawMenuItemLabel[];
+extern char g_menuPaged_Menu_DrawLocalizedMenuItemText[];
+extern char g_menuPaged_Menu_TryCreateMenu[];
 
 struct {
     unsigned int parameter1;
@@ -194,7 +194,7 @@ struct {
 } g_menuItemFragment12 = {
     0x00000000,
     {
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7738, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7738, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)g_menuPaged_Snapshot_UpdateNoteLabel, (unsigned int)g_menuPaged_Snapshot_SelectNote, 0x00000000 },
     },
     0x0000,
     0x0000,
@@ -206,9 +206,9 @@ struct {
     0xFF,
     0x01,
     0x800D773C,
-    (unsigned int)rw_menu_paged_func_80442064_de,
-    (unsigned int)rw_menu_paged_func_80407F6C_de,
-    (unsigned int)rw_menu_paged_func_80407748_de,
+    (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel,
+    (unsigned int)g_menuPaged_Snapshot_UpdateNoteLabel,
+    (unsigned int)g_menuPaged_Snapshot_SelectNote,
 };
 
 struct {
@@ -228,117 +228,117 @@ struct {
 } g_menuPakOptionsData = {
     0x00000000,
     {
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7740, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7744, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7748, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D774C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7750, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0003, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80408118_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x000A, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A244_de, (unsigned int)rw_menu_paged_func_804082FC_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7778, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A458_de, (unsigned int)rw_menu_paged_func_804085E0_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7740, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)g_menuPaged_Snapshot_UpdateNoteLabel, (unsigned int)g_menuPaged_Snapshot_SelectNote, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7744, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)g_menuPaged_Snapshot_UpdateNoteLabel, (unsigned int)g_menuPaged_Snapshot_SelectNote, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7748, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)g_menuPaged_Snapshot_UpdateNoteLabel, (unsigned int)g_menuPaged_Snapshot_SelectNote, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D774C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)g_menuPaged_Snapshot_UpdateNoteLabel, (unsigned int)g_menuPaged_Snapshot_SelectNote, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7750, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)g_menuPaged_Snapshot_UpdateNoteLabel, (unsigned int)g_menuPaged_Snapshot_SelectNote, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0003, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Snapshot_UpdateSpaceLabel_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x000A, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_UpdateManagerChannelLabel_PagedAddress, (unsigned int)Snapshot_HandleMenuAction_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7778, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_SetManagerHeading_PagedAddress, (unsigned int)Snapshot_CloseNoteBrowser_PagedAddress, 0x00000000 },
     },
     {
-        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)rw_menu_paged_func_804066BC_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_80409C0C_de, 0x0015, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)rw_menu_paged_func_80406434_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_80409C0C_de, 0x0014, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)rw_menu_paged_func_804070F4_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_80409CEC_de, 0x0015, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)rw_menu_paged_func_80406F7C_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_80409CEC_de, 0x0014, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)rw_menu_paged_func_804069F4_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_80409E10_de, 0x0014, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)Snapshot_BeginProfileLoad_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Timer_CheckMenuPakChange_PagedAddress, 0x0015, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)Snapshot_BeginProfileSave_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Timer_CheckMenuPakChange_PagedAddress, 0x0014, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)Snapshot_BeginBlockLoad_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Timer_CheckChangedMenuChannel_PagedAddress, 0x0015, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)Snapshot_BeginSnapshotSave_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Timer_CheckChangedMenuChannel_PagedAddress, 0x0014, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044EDA0, 0x0016, 0x0000, (unsigned int)Snapshot_CheckControllerPak_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Timer_UpdateManagerStatus_PagedAddress, 0x0014, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
-        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000801, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D77CC, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A4A0_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0014, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A5E8_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D77E8, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A614_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x000A, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A4D4_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D77E0, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A530_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D77E4, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A58C_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0014, 0x00, 0x00, 0xFF, 0x01, 0x800D7810, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A6A8_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010040, 0x007D, 0x000A, 0x00, 0x01, 0x00, 0x00, 0x800D7A90, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00408870, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024040, 0x000A, 0x0000, 0xFF, 0x00, 0x00, 0x00, 0x800D7A94, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8040A6DC_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000801, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D77CC, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_UpdateAlternatePromptLabel_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0014, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_DispatchPreviewHandle_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D77E8, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_FormatPreviewDottedTriple_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x000A, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_UpdatePreviewDepthLabel_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D77E0, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_FormatPreviewPageCount_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D77E4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_FormatPreviewValue_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0014, 0x00, 0x00, 0xFF, 0x01, 0x800D7810, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_UpdateAlternateActionLabel_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010040, 0x007D, 0x000A, 0x00, 0x01, 0x00, 0x00, 0x800D7A90, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00408870, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024040, 0x000A, 0x0000, 0xFF, 0x00, 0x00, 0x00, 0x800D7A94, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Timer_OpenSelectedPrompt_PagedAddress, 0x00000000 },
     },
     {
-        { 0x0044F16C, 0x000A, 0x0000, (unsigned int)rw_menu_paged_func_8040A47C_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0008, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F16C, 0x000A, 0x0000, (unsigned int)rw_menu_paged_func_8040A490_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0009, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F16C, 0x000A, 0x0000, (unsigned int)Timer_EnableAlternatePrompt_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0008, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F16C, 0x000A, 0x0000, (unsigned int)Timer_DisableAlternatePrompt_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0009, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
-        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D77EC, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A7BC_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0032, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A83C_us, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0002, 0x00, 0x00, 0xFF, 0x01, 0x800D7804, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A928_us, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0002, 0x00, 0x00, 0xFF, 0x01, 0x800D7808, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A9A0_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0002, 0x00, 0x00, 0xFF, 0x01, 0x800D780C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80408AC4_us, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0010, 0x00, 0x00, 0xFF, 0x01, 0x800D7810, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040A9F8_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010040, 0x007D, 0x000A, 0x00, 0x01, 0x00, 0x00, 0x800D7A90, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_80408C4C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024040, 0x000A, 0x0000, 0xFF, 0x00, 0x00, 0x00, 0x800D7A94, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8040AA4C_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D77EC, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Timer_UpdatePreviewKindLabel_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0032, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Status_FormatRightAlignedPreviewName_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0002, 0x00, 0x00, 0xFF, 0x01, 0x800D7804, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Status_UpdateStatusText_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0002, 0x00, 0x00, 0xFF, 0x01, 0x800D7808, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_FormatPreviewFourDigitValue_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0002, 0x00, 0x00, 0xFF, 0x01, 0x800D780C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Snapshot_UpdateScoreTitle_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0010, 0x00, 0x00, 0xFF, 0x01, 0x800D7810, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_UpdateProfileActionLabel_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010040, 0x007D, 0x000A, 0x00, 0x01, 0x00, 0x00, 0x800D7A90, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Pak_ConfirmProfileOrDeleteNote_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024040, 0x000A, 0x0000, 0xFF, 0x00, 0x00, 0x00, 0x800D7A94, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Pak_OpenProfileActionPrompt_PagedAddress, 0x00000000 },
     },
     {
-        { 0x0044F31C, 0x0009, 0x0000, (unsigned int)rw_menu_paged_func_8040A748_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F31C, 0x0009, 0x0000, (unsigned int)rw_menu_paged_func_8040A764_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0008, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F31C, 0x0009, 0x0000, (unsigned int)rw_menu_paged_func_8040A77C_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0008, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F31C, 0x0009, 0x0000, (unsigned int)Timer_EnableProfilePreview_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F31C, 0x0009, 0x0000, (unsigned int)Timer_ClearProfilePreview_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0008, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F31C, 0x0009, 0x0000, (unsigned int)Timer_DisablePreviewSelection_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0008, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
-        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040AC54_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x001E, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040ACA0_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040ADCC_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040AEF8_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B024_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B150_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0019, 0x00, 0x00, 0xFF, 0x01, 0x800D7824, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B27C_de, (unsigned int)rw_menu_paged_func_80408DF0_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectPromptActionHeading_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x001E, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectPromptTextGroupOne_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectPromptTextGroupTwo_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectPromptTextGroupThree_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectPromptTextGroupFour_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectPromptTextGroupFive_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0019, 0x00, 0x00, 0xFF, 0x01, 0x800D7824, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectModalPromptLabel_PagedAddress, (unsigned int)Pak_ClosePromptByKind_PagedAddress, 0x00000000 },
     },
     {
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AAB8_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AAC8_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AADC_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AAF0_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AB04_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AB18_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AB2C_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AB40_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AB54_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040ABA0_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040ABBC_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040ABDC_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040ABF0_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AC04_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AC40_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AC18_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040AC2C_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindZero_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindOne_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindTwo_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindThree_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindFour_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindFive_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindSix_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindSeven_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindEight_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindNine_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindNinePending_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindTen_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindEleven_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindTwelve_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindFifteen_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindThirteen_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F4CC, 0x0008, 0x0000, (unsigned int)Pak_SelectPromptKindFourteen_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
-        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D796C, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0028, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B3DC_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B410_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B444_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0014, 0x00, 0x00, 0xFF, 0x01, 0x800D7988, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8040B4E0_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D798C, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8040B58C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B6CC_de, (unsigned int)rw_menu_paged_func_8040B648_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D796C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0028, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectOperationHeading_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectOperationDescription_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_FormatOperationChannelLabel_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0014, 0x00, 0x00, 0xFF, 0x01, 0x800D7988, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Pak_OpenPakChannel_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D798C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Pak_OpenPakStatusPrompt_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectPakLoadHeading_PagedAddress, (unsigned int)Pak_CancelPakAction_PagedAddress, 0x00000000 },
     },
     {
-        { 0x0044F850, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040B3A8_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8040B2C8_de, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F850, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040B3C4_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8040B2C8_de, 0x0005, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F850, 0x0008, 0x0000, (unsigned int)Pak_EnableOperationHeading_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Pak_CheckOperationPakChange_PagedAddress, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F850, 0x0008, 0x0000, (unsigned int)Pak_DisableOperationHeading_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Pak_CheckOperationPakChange_PagedAddress, 0x0005, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
-        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000801, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B868_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0023, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B8E4_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B960_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040B9DC_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040BA58_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00012001, 0x0000, 0x0023, 0x00, 0x00, 0xFF, 0x01, 0x800D7A08, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040BAD4_de, (unsigned int)rw_menu_paged_func_80409144_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00012001, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7A0C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8040BBC0_us, (unsigned int)rw_menu_paged_func_80409448_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x90000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000801, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Pak_SelectPakOperationTextOne_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0023, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Frontend_SelectPakOperationTextTwo_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Frontend_SelectPakOperationTextThree_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Frontend_SelectPakOperationTextFour_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Frontend_SelectPakOperationTextFive_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00012001, 0x0000, 0x0023, 0x00, 0x00, 0xFF, 0x01, 0x800D7A08, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Frontend_SelectPakConfirmationLabel_PagedAddress, (unsigned int)Pak_ConfirmPendingOperation_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00012001, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7A0C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Frontend_SelectPakActionLabel_PagedAddress, (unsigned int)Timer_CancelPendingOperation_PagedAddress, 0x00000000 },
     },
     {
-        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040B7E0_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8040B700_de, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040B7F8_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8040B700_de, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040B814_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8040B700_de, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040B830_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8040B700_de, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)rw_menu_paged_func_8040B84C_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8040B700_de, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)Pak_SelectPakOperationZero_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Pak_CheckPakActionChange_PagedAddress, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)Pak_SelectPakOperationOne_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Pak_CheckPakActionChange_PagedAddress, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)Pak_SelectPakOperationTwo_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Pak_CheckPakActionChange_PagedAddress, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)Pak_SelectPakOperationThree_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Pak_CheckPakActionChange_PagedAddress, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044F9B8, 0x0008, 0x0000, (unsigned int)Pak_SelectPakOperationFour_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Pak_CheckPakActionChange_PagedAddress, 0x0007, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
 };
 
-unsigned int D_auto_menu_13_untyped_2[1] = { 0x00010201 };
+unsigned int g_GMenucheatcodedataEncodedWordsBlock2[1] = { 0x00010201 };
 
 struct MenuCheatCodeData g_menuCheatCodeData[12] = {
     { 0x800E21AC, 0x800D7AE0, 0x00000020, 0x00000001 },
@@ -362,71 +362,71 @@ struct {
     struct MenuBuildDefinitionData definitions2[1];
 } g_menuPakOptionsDataPart3 = {
     {
-        { 0x0001, 0x0000, 0x50000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7AA4, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0001, 0x0000, 0x50000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7AA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
         { 0x0000, 0x0000, 0x00210041, 0x0000, 0x0014, 0x00, 0x00, 0xFF, 0x01, 0x800E5CC4, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_698, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_81C, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8F4, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0014, 0x06, 0x01, 0xFF, 0x07, 0x800D7E48, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFE, 0x07, 0x800D7E50, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFD, 0x07, 0x800D7E58, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFC, 0x07, 0x800D7E60, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFB, 0x07, 0x800D7E68, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFA, 0x07, 0x800D7E70, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7E78, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x07, 0x800D7E80, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E88, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E90, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E98, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EA0, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EA8, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7EB0, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x07, 0x800D7EB8, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EC0, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EC8, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7ED0, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7ED8, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EE0, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7EE8, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x08, 0x800D7EF0, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EF8, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x06, 0x800D7F00, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x05, 0x800D7F08, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x04, 0x800D7F10, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x03, 0x800D7F70, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_9BC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x02, 0x800D7F78, (unsigned int)rw_menu_paged_func_8044208C_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_AE4, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0014, 0x00, 0x00, 0x00, 0x00, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_C30, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00310201, 0x0000, 0x0018, 0x00, 0x00, 0xFE, 0xE2, 0x800D7AB4, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_80442384_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0014, 0x06, 0x01, 0xFF, 0x07, 0x800D7E48, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFE, 0x07, 0x800D7E50, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFD, 0x07, 0x800D7E58, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFC, 0x07, 0x800D7E60, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFB, 0x07, 0x800D7E68, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFA, 0x07, 0x800D7E70, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7E78, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x07, 0x800D7E80, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E88, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E90, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E98, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EA0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EA8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7EB0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x07, 0x800D7EB8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EC0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EC8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7ED0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7ED8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EE0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7EE8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x08, 0x800D7EF0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EF8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x06, 0x800D7F00, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x05, 0x800D7F08, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x04, 0x800D7F10, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x03, 0x800D7F70, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_9BC, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x02, 0x800D7F78, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_AE4, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0014, 0x00, 0x00, 0x00, 0x00, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_C30, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00310201, 0x0000, 0x0018, 0x00, 0x00, 0xFE, 0xE2, 0x800D7AB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)g_menuPaged_Menu_TryCreateMenu, 0x00000000 },
     },
     {
-        { 0x0044FC50, 0x0021, 0x0000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_684, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044FC50, 0x0021, 0x0000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_684, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
-        { 0x0001, 0x0000, 0x50000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7A98, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7B3C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_F64, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_F48, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B44, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_FEC, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_FD0, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B4C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D388_de, (unsigned int)rw_menu_paged_func_8043D36C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B54, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D410_de, (unsigned int)rw_menu_paged_func_8043D3F4_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B5C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D498_de, (unsigned int)rw_menu_paged_func_8043D47C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B64, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D520_de, (unsigned int)rw_menu_paged_func_8043D504_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B6C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D5A8_de, (unsigned int)rw_menu_paged_func_8043D58C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B7C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D6B8_de, (unsigned int)rw_menu_paged_func_8043D69C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B74, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D630_de, (unsigned int)rw_menu_paged_func_8043D614_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B84, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D740_de, (unsigned int)rw_menu_paged_func_8043D724_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B8C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D7C8_de, (unsigned int)rw_menu_paged_func_8043D7AC_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B94, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D850_de, (unsigned int)rw_menu_paged_func_8043D834_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B9C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D8D8_de, (unsigned int)rw_menu_paged_func_8043D8BC_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7BA4, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D960_de, (unsigned int)rw_menu_paged_func_8043D944_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7BAC, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043D9E8_de, (unsigned int)rw_menu_paged_func_8043D9CC_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7BB4, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043DA70_de, (unsigned int)rw_menu_paged_func_8043DA54_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_DDC, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_374, 0x00000000 },
-        { 0x0000, 0x0000, 0x00000201, 0x0000, 0x00C0, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB4, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_80442384_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x50000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7A98, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7B3C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_F64, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_F48, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B44, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_FEC, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_FD0, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B4C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit2Item_PagedAddress, (unsigned int)Option_ToggleOptionBit2_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B54, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit3Item_PagedAddress, (unsigned int)Option_ToggleOptionBit3_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B5C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit4Item_PagedAddress, (unsigned int)Option_ToggleOptionBit4_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B64, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit5Item_PagedAddress, (unsigned int)Option_ToggleOptionBit5_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B6C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit6Item_PagedAddress, (unsigned int)Option_ToggleOptionBit6_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B7C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit8Item_PagedAddress, (unsigned int)Option_ToggleOptionBit8_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B74, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit7Item_PagedAddress, (unsigned int)Option_ToggleOptionBit7_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B84, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit9Item_PagedAddress, (unsigned int)Option_ToggleOptionBit9_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B8C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit10Item_PagedAddress, (unsigned int)Option_ToggleOptionBit10_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B94, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit11Item_PagedAddress, (unsigned int)Option_ToggleOptionBit11_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B9C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit12Item_PagedAddress, (unsigned int)Option_ToggleOptionBit12_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7BA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit13Item_PagedAddress, (unsigned int)Option_ToggleOptionBit13_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7BAC, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit14Item_PagedAddress, (unsigned int)Option_ToggleOptionBit14_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7BB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit15Item_PagedAddress, (unsigned int)Option_ToggleOptionBit15_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_DDC, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_374, 0x00000000 },
+        { 0x0000, 0x0000, 0x00000201, 0x0000, 0x00C0, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)g_menuPaged_Menu_TryCreateMenu, 0x00000000 },
     },
     {
-        { 0x00450118, 0x0014, 0x0000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_23C, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0013, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x00450118, 0x0014, 0x0000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_23C, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0013, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
 };
 
-unsigned int D_auto_menu_13_untyped_4[1] = {
+unsigned int g_GMenucheatcodedataEncodedWordsBlock3[1] = {
     0x00000000,
 };
 
@@ -439,39 +439,39 @@ struct {
     struct MenuBuildDefinitionData definitions3[1];
 } g_menuPakOptionsDataPart5 = {
     {
-        { 0x0000, 0x0000, 0x00000021, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB8, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0028, 0x00, 0x00, 0xFF, 0x01, 0x800D7A90, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043DADC_de_offset_4, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7A94, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043DB04_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00000021, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB8, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0028, 0x00, 0x00, 0xFF, 0x01, 0x800D7A90, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043DADC_de_offset_4, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7A94, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Menu_HandleSessionOptionPage_PagedAddress, 0x00000000 },
     },
     {
-        { 0x00450410, 0x0003, 0x0000, 0x00000000, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x00450410, 0x0003, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D7698, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D769C, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76A0, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76A4, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76A8, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76AC, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76B0, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0x00, 0x00, 0x800D7694, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043E1F8_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D7698, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D769C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76A0, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76A4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76A8, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76AC, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x800D76B0, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0x00, 0x00, 0x800D7694, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)CMenuProfile_ResetPlayerControllerProfile_PagedAddress, 0x00000000 },
     },
     {
-        { 0x004504A0, 0x0008, 0x0000, 0x00000000, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8043E1C0_de, 0x0007, 0x0000, 0x0000, 0x0000, 0x00450698 },
+        { 0x004504A0, 0x0008, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)CMenuProfile_HasRoundProgress_PagedAddress, 0x0007, 0x0000, 0x0000, 0x0000, 0x00450698 },
     },
     {
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x02, 0x800D7668, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043E418_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010101, 0x0000, 0x0008, 0x00, 0x00, 0x00, 0x00, 0x800D766C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043E444_de, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0008, 0x00, 0x00, 0xFE, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043E2D8_de, (unsigned int)rw_menu_paged_func_8043E28C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0002, 0x00, 0x00, 0xFF, 0x01, 0x800D7688, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043E494_de, (unsigned int)rw_menu_paged_func_8043E3CC_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7694, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043E468_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x02, 0x800D7668, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043E418_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010101, 0x0000, 0x0008, 0x00, 0x00, 0x00, 0x00, 0x800D766C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)CMenuProfile_BindSelectedDebugField_PagedAddress, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0008, 0x00, 0x00, 0xFE, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)CMenuProfile_FormatProfileQuantityLabel_PagedAddress, (unsigned int)CMenuProfile_AdjustControllerSelection_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0002, 0x00, 0x00, 0xFF, 0x01, 0x800D7688, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)CMenuProfile_UpdateProfileModeLabel_PagedAddress, (unsigned int)CMenuProfile_ToggleProfileMode_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7694, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043E468_de, 0x00000000 },
     },
     {
-        { 0x004505E4, 0x0005, 0x0000, 0x00000000, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8043E254_de, 0x0004, 0x0000, 0x0000, 0x0000, 0x00450758 },
+        { 0x004505E4, 0x0005, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)CMenuProfile_HasSavedRoundProgress_PagedAddress, 0x0004, 0x0000, 0x0000, 0x0000, 0x00450758 },
     },
 };
 
-unsigned int D_auto_menu_13_untyped_6[12] = {
+unsigned int g_GMenucheatcodedataEncodedWordsBlock4[12] = {
     0x00000460, 0x0000000B, 0x00000000, 0x00000000, 0xC2480000, 0xC4610000, 0x40000000, 0x40000000,
     0x40000000, 0x00000032, 0x00000050, 0x3DB2B8C4,
 };
@@ -483,26 +483,26 @@ struct {
     struct MenuBuildDefinitionData definitions2[1];
 } g_menuPakOptionsDataPart7 = {
     {
-        { 0x0001, 0x0000, 0x30000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000387, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0003, 0x0000, 0x00410021, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x004506BC, (unsigned int)rw_menu_paged_func_80440838_de, (unsigned int)rw_menu_paged_func_8043E5D0_de, (unsigned int)rw_menu_paged_func_8043F37C_eu, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0019, 0x00, 0x00, 0xFF, 0x01, 0x800D7664, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043E5C8_de, (unsigned int)rw_menu_paged_func_8043E568_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x30000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000387, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0003, 0x0000, 0x00410021, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x004506BC, (unsigned int)Menu_DrawMenuModel_PagedAddress, (unsigned int)rw_menu_paged_func_8043E5D0_de, (unsigned int)CMenuProfile_UpdatePlayerAnimationChoice_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0019, 0x00, 0x00, 0xFF, 0x01, 0x800D7664, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043E5C8_de, (unsigned int)CMenuProfile_OpenTimedPlayerDialog_PagedAddress, 0x00000000 },
     },
     {
-        { 0x004506EC, 0x0003, 0x0000, (unsigned int)rw_menu_paged_func_8043E4E0_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8043E530_de, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x004506EC, 0x0003, 0x0000, (unsigned int)rw_menu_paged_func_8043E504_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8043E530_de, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x004506EC, 0x0003, 0x0000, (unsigned int)CMenuProfile_EnableOwnerControllerPak_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)CMenuProfile_HasProfileRoundProgress_PagedAddress, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x004506EC, 0x0003, 0x0000, (unsigned int)CMenuProfile_EnableControllerPakAndClearState_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)CMenuProfile_HasProfileRoundProgress_PagedAddress, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
-        { 0x0001, 0x0000, 0x30000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000387, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D76B8, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010101, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D76BC, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043E610_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010101, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D76C0, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043E658_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x30000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000387, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D76B8, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010101, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D76BC, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)CMenuProfile_OpenPrimaryPlayerDialog_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010101, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D76C0, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)CMenuProfile_OpenAlternatePlayerDialog_PagedAddress, 0x00000000 },
     },
     {
-        { 0x004507A0, 0x0004, 0x0000, 0x00000000, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8043E5D8_de, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x004507A0, 0x0004, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)CMenuProfile_HasDialogRoundProgress_PagedAddress, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
 };
 
-unsigned int D_auto_menu_13_untyped_8[16] = {
+unsigned int g_cheatMenuAnimationStepSamples[16] = {
     0xBF000000, 0xBECCCCCD, 0xBE99999A, 0xBE4CCCCD, 0xBDCCCCCD, 0x00000000, 0x3DCCCCCD, 0x3E4CCCCD,
     0x3E99999A, 0x3ECCCCCD, 0x3F000000, 0x3F19999A, 0x3F333333, 0x3F4CCCCD, 0x3F666666, 0x3F800000,
 };
@@ -520,62 +520,62 @@ struct {
     struct MenuBuildDefinitionData definitions5[1];
 } g_menuPakOptionsDataPart9 = {
     {
-        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000201, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7D3C, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x001E, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, 0x0043DD30, (unsigned int)rw_menu_paged_func_8043E830_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, 0x0043DD30, (unsigned int)rw_menu_paged_func_8043E830_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, 0x0043DD30, (unsigned int)rw_menu_paged_func_8043E830_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, 0x0043DD30, (unsigned int)rw_menu_paged_func_8043E830_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, 0x0043DD30, (unsigned int)rw_menu_paged_func_8043E830_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, 0x0043DD30, (unsigned int)rw_menu_paged_func_8043E830_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, 0x0043DD30, (unsigned int)rw_menu_paged_func_8043E830_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)rw_menu_paged_func_80442064_de, 0x0043DD30, (unsigned int)rw_menu_paged_func_8043E830_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010201, 0x0000, 0x002D, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB4, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_80442384_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000201, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7D3C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x001E, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x0043DD30, (unsigned int)Initial_ToggleMenuRowOption_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x0043DD30, (unsigned int)Initial_ToggleMenuRowOption_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x0043DD30, (unsigned int)Initial_ToggleMenuRowOption_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x0043DD30, (unsigned int)Initial_ToggleMenuRowOption_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x0043DD30, (unsigned int)Initial_ToggleMenuRowOption_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x0043DD30, (unsigned int)Initial_ToggleMenuRowOption_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x0043DD30, (unsigned int)Initial_ToggleMenuRowOption_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00410041, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x0043DD30, (unsigned int)Initial_ToggleMenuRowOption_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010201, 0x0000, 0x002D, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)g_menuPaged_Menu_TryCreateMenu, 0x00000000 },
     },
     {
-        { 0x00450894, 0x000B, 0x0000, 0x00000000, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x000A, 0x0000, 0x0000, 0x0000, 0x00450AD4 },
+        { 0x00450894, 0x000B, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x000A, 0x0000, 0x0000, 0x0000, 0x00450AD4 },
     },
     {
-        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7C90, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7D3C, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043E91C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010201, 0x0000, 0x0038, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB4, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_80442384_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7C90, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7D3C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043E91C_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010201, 0x0000, 0x0038, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)g_menuPaged_Menu_TryCreateMenu, 0x00000000 },
     },
     {
-        { 0x00450A44, 0x0004, 0x0000, 0x00000000, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00450D38 },
+        { 0x00450A44, 0x0004, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00450D38 },
     },
     {
-        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7C80, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0036, 0x00, 0x00, 0xFF, 0x01, 0x800D7C84, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043E9A8_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7C88, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043EA00_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010201, 0x0000, 0x0049, 0x00, 0x00, 0xFF, 0x01, 0x800D765C, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043EA4C_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7C80, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0036, 0x00, 0x00, 0xFF, 0x01, 0x800D7C84, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_OpenDialogWithControllerPak_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0004, 0x00, 0x00, 0xFF, 0x01, 0x800D7C88, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_OpenDialogAfterTimerReset_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010201, 0x0000, 0x0049, 0x00, 0x00, 0xFF, 0x01, 0x800D765C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_RequestTransitionWithPakDisabled_PagedAddress, 0x00000000 },
     },
     {
-        { 0x00450AF8, 0x0005, 0x0000, (unsigned int)rw_menu_paged_func_8043E948_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
-        { 0x00450AF8, 0x0005, 0x0000, (unsigned int)rw_menu_paged_func_8043E97C_de, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x00450AF8, 0x0005, 0x0000, (unsigned int)Initial_ProbeMenuControllerPak_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x00450AF8, 0x0005, 0x0000, (unsigned int)Initial_EnableMenuControllerPak_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
-        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
     },
     {
-        { 0x00450BF4, 0x0001, 0x0000, 0x00000000, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00450D38 },
+        { 0x00450BF4, 0x0001, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00450D38 },
     },
     {
-        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000384, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00000081, 0x0000, 0x001E, 0x00, 0x00, 0xFF, 0x01, 0x800D7C80, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043EA98_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7C8C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043EB70_de, (unsigned int)rw_menu_paged_func_8043EBE4_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7AA4, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043EC6C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DA8, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043EC98_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DA4, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043EC40_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DB4, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, (unsigned int)rw_menu_paged_func_8043ECC4_de, 0x00000000 },
+        { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000384, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00000081, 0x0000, 0x001E, 0x00, 0x00, 0xFF, 0x01, 0x800D7C80, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_SelectInitialController_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7C8C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Initial_UpdateMultiplayerAvailability_PagedAddress, (unsigned int)Initial_OpenLocalPlayerSetup_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7AA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043EC6C_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DA8, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043EC98_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043EC40_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_OpenTrackPreviewMenu_PagedAddress, 0x00000000 },
     },
     {
-        { 0x00450C3C, 0x0007, 0x0000, 0x00000000, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, 0x00000000, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x00450C3C, 0x0007, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
 };
 
-unsigned int D_auto_menu_13_untyped_10[1] = {
+unsigned int g_GMenucheatcodedataEncodedWords[1] = {
     0x00000000,
 };
 
@@ -584,15 +584,15 @@ struct {
     struct MenuBuildDefinitionData definitions1[1];
 } g_menuPakOptionsDataPart11 = {
     {
-        { 0x0001, 0x0000, 0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00000064, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00000089, 0x0000, 0x0028, 0x00, 0x00, 0x00, 0x00, 0x800D7F80, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_8043EE24_de, 0x00000000, 0x00000000 },
+        { 0x0001, 0x0000, 0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00000064, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00000089, 0x0000, 0x0028, 0x00, 0x00, 0x00, 0x00, 0x800D7F80, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Multi_DecreaseGameOverTimer_PagedAddress, 0x00000000, 0x00000000 },
     },
     {
-        { 0x00450D60, 0x0002, 0x0000, 0x0043EF20, 0x00000000, (unsigned int)rw_menu_paged_func_804415F4_de, (unsigned int)rw_menu_paged_func_8043EDDC_de, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x00450D60, 0x0002, 0x0000, 0x0043EF20, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)Multi_CompleteGameOverDelay_PagedAddress, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
 };
 
-unsigned int D_auto_menu_13_untyped_12[1] = {
+unsigned int g_GMenucheatcodedataEncodedWordsBlock1[1] = {
     0x00020000,
 };
 
@@ -605,9 +605,9 @@ struct {
     short y1;
 } g_menuPakOptionsDataPart13 = {
     {
-        { 0x0001, 0x0000, 0x50000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)rw_menu_paged_func_804402DC_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x08000801, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D76F8, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010080, 0x0023, 0x0016, 0x00, 0x00, 0x00, 0x00, 0x800D7E1C, (unsigned int)rw_menu_paged_func_80442064_de, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0001, 0x0000, 0x50000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x08000801, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D76F8, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010080, 0x0023, 0x0016, 0x00, 0x00, 0x00, 0x00, 0x800D7E1C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
     },
     0x0001,
     0x0000,

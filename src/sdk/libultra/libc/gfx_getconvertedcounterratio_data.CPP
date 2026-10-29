@@ -6,7 +6,7 @@
 /* Signed 64-bit integer to double: the high word scaled by 2^32 plus the low word, each word read
    as signed and corrected by 2^32 when negative. */
 
-double func_802C6970_us_rev1(s64 value) {
+double Libc_SignedLongLongToDoubleUsRev1(s64 value) {
     double high, low;
     s32 negate = 0;
     if (value < 0) {
@@ -15,19 +15,19 @@ double func_802C6970_us_rev1(s64 value) {
     }
     high = (s32)(value >> 32);
     if ((s32)(value >> 32) < 0)
-        high += D_800C8100_de;
-    high *= D_800C8108_de;
-    high *= D_800C8108_de;
+        high += g_longLongHighWordUnsignedBias;
+    high *= g_longLongHighWordHalfwordScale;
+    high *= g_longLongHighWordHalfwordScale;
     low = (s32)value;
     if ((s32)value < 0)
-        low += D_800C8110_de;
+        low += g_longLongLowWordUnsignedBias;
     high += low;
     return negate ? -high : high;
 }
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_802C1B58_0C27E8[2] = {
+unsigned int k_GfxGetconvertedcounterratioDataEncodedWords[2] = {
     0x41800000, 0x3C8EFA36,
 };
 #endif

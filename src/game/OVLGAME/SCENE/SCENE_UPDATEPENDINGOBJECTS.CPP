@@ -1,6 +1,6 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/INTEGERSTATEB0.H"
-#include "MENU/8044ACCC.H"
+#include "MENU/SCENE_RESOURCE_PREVIEW_AND_COLLISION_VIEWS.H"
 #include "TYPES.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
@@ -16,7 +16,7 @@ void Scene_SetSelection(ItemsSelectionState *state,int selection,int mode) {
 }
 void Scene_LoadSelectionLighting(ItemsSelectionState *state) {
  Scene_LoadSceneLight();
- D_800CC380=(state->input->value>>2)&1;
+ g_geometryFogEffectEnabled=(state->input->value>>2)&1;
 }
 
 /* Processes both pending object lists between update barriers. */
@@ -28,9 +28,9 @@ void Scene_DispatchEnabledEntityTrigger(void *, s32);                       /* e
 void Scene_UpdatePendingObjects(ItemsPendingState *pendingWorld) {
  s32 i,n;
  Cinema_ClearPlaybackFlag();
- n=pendingWorld->unk11C0;
- for(i=0;i<n;i++) Scene_DispatchEnabledEntityTrigger(pendingWorld,pendingWorld->unk11D0+i*20);
- n=pendingWorld->unk11C4;
- for(i=0;i<n;i++) Scene_DispatchEnabledEntityTrigger(pendingWorld,pendingWorld->unk11D4+i*20);
+ n=pendingWorld->firstPendingCount;
+ for(i=0;i<n;i++) Scene_DispatchEnabledEntityTrigger(pendingWorld,pendingWorld->firstPendingEntries+i*20);
+ n=pendingWorld->secondPendingCount;
+ for(i=0;i<n;i++) Scene_DispatchEnabledEntityTrigger(pendingWorld,pendingWorld->secondPendingEntries+i*20);
  Cinema_SetPlaybackFlag();
 }

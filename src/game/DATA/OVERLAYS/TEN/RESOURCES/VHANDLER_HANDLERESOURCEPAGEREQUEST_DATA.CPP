@@ -3,7 +3,7 @@
 /* 800FF254.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
 #ifdef VERSION_DE
-unsigned int D_auto_rodata_unresolved_800FF254[575] = {
+unsigned int k_VhandlerHandleresourcepagerequestEncodedWords[575] = {
     0xA131C611, 0x0B18060E, 0x50B13131, 0x5027B5F2, 0xC012B102, 0x2415E12E, 0x1A5E41A1, 0xD54E9F4B,
     0x4895E2F6, 0xA1E2092D, 0x3E6F20BF, 0x78B134B5, 0xF4DB1EC0, 0xCA2DA1B5, 0xAE6B4BF2, 0xB87DD3B1,
     0x110A5DE3, 0x0EF1BEDD, 0xA1A3E1F0, 0xF038661D, 0x63B12D02, 0xB2002A36, 0xF035B33F, 0x15D30E45,
@@ -79,7 +79,7 @@ unsigned int D_auto_rodata_unresolved_800FF254[575] = {
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_auto_rodata_unresolved_800FF254[575] = {
+unsigned int k_VhandlerHandleresourcepagerequestEncodedWords[575] = {
     0x00040000, 0x000A60D6, 0x042C0401, 0x00005C07, 0x00000A62, 0xDA042C04, 0x0100005C, 0x0700000A,
     0x5CE00402, 0xB70134E8, 0x04020A60, 0x12052C04, 0x03000004, 0x0000000A, 0x6216052C, 0x04030000,
     0x04000000, 0x0A607205, 0x2C040300, 0x00040000, 0x000A6276, 0x052C0403, 0x00000400, 0x00000A60,
@@ -180,7 +180,7 @@ unsigned int rodata_writable_800FFB50[1] = {
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #ifdef VERSION_DE
-unsigned int D_auto_data_unresolved_800FFB54[179] = {
+unsigned int g_VhandlerHandleresourcepagerequestEncodedWords[179] = {
     0x93F0D7E7, 0x709FF00E, 0x61931143, 0x0FDE1D15, 0x452D91CF, 0x0E1E71E7, 0x34FD29A3, 0x01021F41,
     0xE1E21D00, 0x93230208, 0x0DD1E525, 0xBE93DDBD, 0xDC31027B, 0xD09E938D, 0x6A33F2D2, 0xBBC1B091,
     0xC37EF3C2, 0xCFCA12F1, 0x90126F02, 0xF0EE0DFF, 0xEE911F03, 0xD5EC4C0E, 0x4743A1F2, 0x01E10041,
@@ -207,7 +207,7 @@ unsigned int D_auto_data_unresolved_800FFB54[179] = {
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_auto_data_unresolved_800FFB54[179] = {
+unsigned int g_VhandlerHandleresourcepagerequestEncodedWords[179] = {
     0x0000000A, 0x62AA132C, 0x04030000, 0x04000000, 0x0A5CDC13, 0x027D0132, 0xE8130A60, 0x16142C04,
     0x03000004, 0x0000000A, 0x621A142C, 0x04030000, 0x04000000, 0x344C140D, 0x34641400, 0x34641403,
     0x34641400, 0x327C1434, 0x7C14040A, 0x5C98142C, 0x04020000, 0x98E90000, 0x0A60A214, 0x2C040100,
@@ -254,7 +254,7 @@ unsigned int rodata_writable_800FFE20[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int D_auto_data_unresolved_800FFE2C[93] = {
+unsigned int g_VhandlerHandleresourcepagerequestEncodedWordsBlock1[93] = {
     0xF283FA02, 0x0304FF41, 0x0FBD8334, 0x1F160F0E, 0x1C232382, 0x2FEEFF01, 0xE02D2732, 0x725D1113,
     0x7AF9A760, 0x6482F204, 0x3EFFDF53, 0x2FB08150, 0x0422F1E0, 0x4CE0DE83, 0x10FCC205, 0x2F0AFFE0,
     0x8100F2F2, 0x1FFB1D2F, 0xE3832FED, 0xEFB2712F, 0xB61E83DF, 0xEC0252F4, 0xED20E272, 0x11FDF023,

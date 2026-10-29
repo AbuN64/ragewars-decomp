@@ -67,7 +67,7 @@ typedef struct _sm_font {
     u8 **Clut;
     ArchiveFontRecord *TableEntry;
     u8 NumInUse;
-    struct ResourceRecAt6 FontTimer;
+    struct FrontendTextureTimerEntry FontTimer;
 } _sm_font;
 
 /* The resource file header (0x54 bytes): where each table sits in the file and how long it is. */
@@ -104,7 +104,7 @@ typedef struct t_resource {
     s16 NTextures;
     _sm_texture_element *Texture;
     u32 *ChromaKey;
-    struct ResourceRecAt6 *TexTimer;
+    struct FrontendTextureTimerEntry *TexTimer;
     struct OwnedImage *VramPool;
     s16 NFonts;
     ArchiveFontRecord *FontTable;

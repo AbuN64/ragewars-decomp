@@ -3,14 +3,14 @@
 #if defined(VERSION_EU_X)
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern ResidentEventHandlerEntry D_800F1DA8[];
+extern ResidentEventHandlerEntry g_scrollingChoiceEventIds[];
 
-s32 Menu_DispatchSettingsTableEvent(MenuWidget *pThis, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchSettingsTableEvent(MenuWidget *pThis, s32 event, s32 eventPayload, s32 eventValue, s32 eventExtra) {
     s32 i;
-    for (i = 0; D_800F1DA8[i].handler != 0; i++) {
-        if (D_800F1DA8[i].event == event &&
-            (D_800F1DA8[i].actorKind == pThis->resource || D_800F1DA8[i].actorKind == 30000)) {
-            return D_800F1DA8[i].handler(pThis, event, arg2, arg3, arg4);
+    for (i = 0; g_scrollingChoiceEventIds[i].handler != 0; i++) {
+        if (g_scrollingChoiceEventIds[i].event == event &&
+            (g_scrollingChoiceEventIds[i].actorKind == pThis->resource || g_scrollingChoiceEventIds[i].actorKind == 30000)) {
+            return g_scrollingChoiceEventIds[i].handler(pThis, event, eventPayload, eventValue, eventExtra);
         }
     }
     return 0;

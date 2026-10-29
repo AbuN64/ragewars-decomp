@@ -2,14 +2,14 @@
 
 /* 800C5670.CPP */
 #if defined(VERSION_EU)
-const unsigned int D_auto_rodata_func_80290B98_eu_800C5670[4] = {
+const unsigned int g_Setn64DrawfullscreenbackdropWords1[4] = {
     0x437F0000, 0x3E32B8C4, 0x3ECCCCCD, 0x3F333333,
 };
 #endif
 
 /* 800CA4B0.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-const unsigned int D_auto_src_rw_pool_80290A68_us_rev1_CB0B0_us_rev1[4] = {
+const unsigned int g_Setn64DrawfullscreenbackdropWords4[4] = {
     0x437F0000, 0x3E32B8C4, 0x3ECCCCCD, 0x3F333333,
 };
 #endif
@@ -17,20 +17,20 @@ const unsigned int D_auto_src_rw_pool_80290A68_us_rev1_CB0B0_us_rev1[4] = {
 /* 80290990.CPP */
 #if defined(VERSION_US)
 /** Perform no operation. */
-void func_80290990_us(void) {
+void SetN64_EmptyBackdropHookUs(void) {
 }
 #endif
 
 /* 802909E0_15.CPP */
 #if defined(VERSION_EU_X)
-const unsigned int D_auto_rodata_func_80290BC8_eu_x_800C56B0[4] = {
+const unsigned int g_Setn64DrawfullscreenbackdropWords2[4] = {
     0x437F0000, 0x3E32B8C4, 0x3ECCCCCD, 0x3F333333,
 };
 #endif
 
 /* DATA_80290998.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_80290998[249] = {
+unsigned int g_Setn64DrawfullscreenbackdropWords3[249] = {
     0x7263655C, 0x55495C54, 0x27BDFF88, 0xAFB40070, 0x0080A021, 0xAFB3006C, 0x3C138012, 0x26739DC8,
     0x02602021, 0xAFBF0074, 0xAFB20068, 0xAFB10064, 0xAFB00060, 0x3C01800D, 0xAC20C290, 0x0C0A2C5B,
     0x24050E10, 0x3C03800D, 0x2463C2A4, 0x00408021, 0x3C01800C, 0xC42052F0, 0x2412FFFF, 0x3C01800D,

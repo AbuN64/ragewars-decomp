@@ -6,7 +6,7 @@
 struct IntegerStateB0;
 
 
-extern int D_800CD774;
+extern int g_frontendScreenInitialized;
 
 struct GameSession;
 #include "COMMON/GAME_SESSION.H"
@@ -26,33 +26,33 @@ typedef struct IntegerStateB0 IntegerStateB0;
 
 
 
-extern float D_800C54AC_de;
-extern float D_800C54B0_de;
+extern float g_gameClockTicksPerSecond;
+extern float g_gameClockUnitIncrement;
 
-struct IntegerState164;
-typedef struct IntegerState164 IntegerState164;
+struct IntroBackdropStateView;
+typedef struct IntroBackdropStateView IntroBackdropStateView;
 
-extern float D_800C54A4_de;
+extern float g_attractTimeoutBegin;
 
-extern float D_800C54C0_de;
+extern float g_introInitialFadeTimer;
 
 struct GameSession;
 
 
-struct IntegerState164;
+struct IntroBackdropStateView;
 
-extern int D_800CD770;
-
-
+extern int g_modeFourFrameCounter;
 
 
 
 
 
 
-extern float D_800C54A8_de;
 
-extern float D_800C54B4_de;
+
+extern float g_attractTimeoutFinish;
+
+extern float g_gameClockSecondsPerMinute;
 
 
 
@@ -61,10 +61,10 @@ extern float D_800C54B4_de;
 
 extern void Frontend_RequestScreenMode(s32 value);
 extern void Textload_SetTextureEffect(unsigned int value);
-extern s32 D_800CD77C;
+extern s32 g_introExitPending;
 
 
-extern s32 D_800CC380;
+extern s32 g_geometryFogEffectEnabled;
 
 extern s32 Control_IsSnapshotActive(void);
 extern void OnScreen_DrawStatusBars(void *playerHud);

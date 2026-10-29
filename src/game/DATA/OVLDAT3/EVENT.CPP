@@ -4,22 +4,22 @@
 #include "TYPES.H"
 
 /* ROM-grounded data: src/rw_pool_802AFE30_CD280_us_rev1.c */
-const unsigned int D_blob_5d5e9c19015825e88044[2] = {
+const unsigned int g_audio_CentsToPitchRatioConstantWords[2] = {
     0x3F800000, 0x3F8012EF,
 };
 
-extern f32 D_800C7430_de[];
+extern f32 g_centsToPitchRatioConstants[];
 
-f32 func_802AFE30_de(s32 arg0)
+f32 Audio_CentsToPitchRatio(s32 cents)
 {
   f32 result;
   f32 base;
   s32 n;
-  int new_var;
-  new_var = 0;
-  result = D_800C7430_de[new_var];
-  base = D_800C7430_de[1];
-  n = arg0;
+  int unitRatioIndex;
+  unitRatioIndex = 0;
+  result = g_centsToPitchRatioConstants[unitRatioIndex];
+  base = g_centsToPitchRatioConstants[1];
+  n = cents;
   if (n < 0)
   {
     base = (0.999422550201416f);
@@ -43,27 +43,27 @@ f32 func_802AFE30_de(s32 arg0)
 
 extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
-void func_802AFE80_de(s32 arg0) {
-    s16 sp10[8];
+void Audio_PostPlayerStopEvent(s32 playerAddress) {
+    s16 stopEvent[8];
 
-    sp10[0] = 0xF;
-    alEvtqPostEvent(arg0 + 0x48, sp10, 0);
+    stopEvent[0] = 0xF;
+    alEvtqPostEvent(playerAddress + 0x48, stopEvent, 0);
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802AFDDC[1] = {
+unsigned int k_EventEncodedWordsBlock2[1] = {
     0x5F745400,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C802C[1] = {
+unsigned int k_EventEncodedWordsBlock1[1] = {
     0x43999999,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C743C[1] = {
+unsigned int k_EventEncodedWords[1] = {
     0x71706C61,
 };
 #endif

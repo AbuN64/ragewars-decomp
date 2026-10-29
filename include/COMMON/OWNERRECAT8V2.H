@@ -8,19 +8,19 @@
 struct BlockVirtualFreeVirtualRegion;
 typedef struct BlockVirtualFreeVirtualRegion BlockVirtualFreeVirtualRegion;
 
-struct OwnerRecAt8V2;
+struct VirtualRegionOwnerState;
 
-struct OwnerRecAt8V2;
-typedef struct OwnerRecAt8V2 OwnerRecAt8V2;
+struct VirtualRegionOwnerState;
+typedef struct VirtualRegionOwnerState VirtualRegionOwnerState;
 
-extern void Virtual_ReleaseVirtualRegion(OwnerRecAt8V2 *arg0);
+extern void Virtual_ReleaseVirtualRegion(VirtualRegionOwnerState *allocation);
 
 struct Channels;
 typedef struct Channels Channels;
 
 
 
-struct Shape_typemap_110;
+struct DialogPlayerState;
 
 
 
@@ -32,8 +32,8 @@ typedef struct NodeVirtualAcquireRecycledPage NodeVirtualAcquireRecycledPage;
 struct Block10;
 typedef struct Block10 Block10;
 
-union ObjectState1000;
-union ObjectState1000 {
+union PagerSlotLookupStorage;
+union PagerSlotLookupStorage {
     u8 marks[4096];
     struct { u8 padding[0x3CF]; u8 indices[96]; } first;
     struct { u8 padding[0x3D0]; u8 indices[96]; } second;
@@ -45,10 +45,10 @@ struct ResourcePageMapping {
     struct ResourcePageMapping *prev;
     u16 id;
     union { u16 padA; struct { u8 index; u8 slot; }; };
-    s32 fieldC;
+    s32 age;
 };
 
-extern float D_800C3630_de;
+extern float g_collisionMotionRetreatDistance;
 
 struct Region;
 struct Region {
@@ -101,10 +101,10 @@ struct PagerCounters {
 struct PagerState;
 
 
-union ObjectState1000;
-typedef union ObjectState1000 ObjectState1000;
+union PagerSlotLookupStorage;
+typedef union PagerSlotLookupStorage PagerSlotLookupStorage;
 
-/* D_800FFB50: the page mappings of the resource pager */
+/* g_pagerPageMappings: the page mappings of the resource pager */
 typedef struct ResourcePageMapping SlotVirtualReleaseVirtualRegion;
 
 struct NodeVirtualFindRegionForPage;

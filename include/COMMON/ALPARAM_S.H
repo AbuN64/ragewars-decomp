@@ -5,9 +5,9 @@ struct ALParam_s;
 typedef struct ALParam_s ALParam_s;
 
 
-extern float D_800C7708_de;
+extern float g_audioEnvelopeRateScale;
 
-extern float D_800C75E0_de;
+extern float g_resamplerInitialRatio;
 
 struct ALFilter_s;
 typedef struct ALFilter_s ALFilter_s;
@@ -140,9 +140,9 @@ typedef struct ALEnvMixer ALEnvMixer;
 
 extern f64 _ldexpf(f64 value, s32 shift);
 
-extern f64 frexp(f64 arg0, s32 *arg2);
+extern f64 frexp(f64 inputValue, s32 *exponentOut);
 
-extern float D_800C770C_de;
+extern float g_audioEnvelopeFallbackRate;
 
 
 

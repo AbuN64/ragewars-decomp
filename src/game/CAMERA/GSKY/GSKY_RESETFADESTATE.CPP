@@ -1,20 +1,20 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 
-extern float D_800C8630;
+extern float k_cameraFadeResetValue;
 
 
 
 /** Reset the object fields from 0xFC through 0x118. */
 void Gsky_ResetFadeState(void *cameraStorage) {
     GameplayCamera *state = cameraStorage;
-    float value = D_800C8630;
-    state->unkFC = 0;
-    state->unk100 = 0;
-    state->unk104 = 0;
-    state->unk108 = 0;
-    state->unk10C = 0;
-    state->unk118 = 0;
-    state->unk110 = value;
-    state->unk114 = value;
+    float value = k_cameraFadeResetValue;
+    state->fadeMode = 0;
+    state->fadeState = 0;
+    state->fadeParameterOne = 0;
+    state->fadeParameterTwo = 0;
+    state->fadeParameterThree = 0;
+    state->fadeParameterFour = 0;
+    state->fadeScalarOne = value;
+    state->fadeScalarTwo = value;
 }

@@ -1,5 +1,5 @@
 #include "COMMON/NODERECAT2A8.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "FRONTEND/LAYOUT.H"
 #include "COMMON/FORMAT.H"
@@ -32,12 +32,12 @@ s32 Frontend_GetOwnedImagePalette(s32 *record) {
 }
 
 int Frontend_HasOwnedImagePalette(void *object) {
-    func_8022BC04_S3 *record = object;
-    return record->unk10 > 0;
+    AnimationResourceHandleView *record = object;
+    return record->resourceHandle > 0;
 }
 
 s32 Frontend_HasImageFormatMaskComponent(u8 *record) {
-    return D_800E2B40[*record][0] != 0;
+    return g_frontendImageRecordFlags[*record][0] != 0;
 }
 
 /* Returns bit 1 of the flag byte at offset 1 of a record; Frontend_OwnsImagePixels returns bit 0. */

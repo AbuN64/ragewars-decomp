@@ -7,7 +7,7 @@
 #include "SYSTEM/DEFS.H"
 
 /* Sets bit 24 of the flag word at offset 0x120 of the object at offset 0xC of a record when
-   D_801468F4 is set, and clears it otherwise. */
+   g_resultExitPending is set, and clears it otherwise. */
 
 
 
@@ -21,14 +21,14 @@
 
 
 s32 Player_FormatPlayerFirstHalfword(Shared_DebugWidget *field, Shared_MenuHandle *holder) {
-    s32 player = Player_GetPlayerIndex(&D_80145040, holder->owner);
-    /* D_80146398 is the hub's func_8041F2A0_Config array (0x96-byte records); index player*150 then reads the record's first halfword */
+    s32 player = Player_GetPlayerIndex(&g_playerViewRenderContext, holder->owner);
+    /* D_80146398 is the hub's SlotSelectionPlayerConfig array (0x96-byte records); index player*150 then reads the record's first halfword */
     s32 value = *(s16 *) &g_playerSettings[player];
     char *text;
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    text = field->inner->text[D_80145040.object.language];
-    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EED80, value);
+    text = field->inner->text[g_playerViewRenderContext.object.language];
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_playerMenuValueFormat, value);
 #else
     text = *field->inner->text;
     Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_fmtDec4Pad, value);
@@ -37,25 +37,25 @@ s32 Player_FormatPlayerFirstHalfword(Shared_DebugWidget *field, Shared_MenuHandl
 }
 
 /* Does nothing. Nothing in the cartridge image calls it or stores its address as a word. */
-void func_80443BCC_de(void) {
+void Player_MenuFlagsNoOp(void) {
 }
 
-void Player_SetFragTagItemFlag(struct RecordRecAtCV3 *record) {
-    if (D_801462C8.counters.m_bFragTagOn != 0) {
+void Player_SetFragTagItemFlag(struct MenuPromptKindView *record) {
+    if (g_gameSettings.counters.m_bFragTagOn != 0) {
         record->target->flags |= 0x01000000;
     } else {
         record->target->flags &= ~0x01000000;
     }
 }
 
-void Player_ConfigurePlayerMenuFlags(ObjectRecAt1C *object) {
- if(object->parent) object->parent->unk85C=1;
+void Player_ConfigurePlayerMenuFlags(PlayerMenuFlagContext *object) {
+ if(object->parent) object->parent->playerStateDirty=1;
  object->actor->flags1c0 |= 0x01800000;
  object->actor->flags1c0 &= 0xFEFFFFFF;
  object->actor->flags58 |= 0x01800000;
  object->actor->flags210 &= 0xFE7FFFFF;
  object->actor->flags238 &= 0xFE7FFFFF;
  object->actor->flags260 &= 0xFE7FFFFF;
- if(D_801462C8.counters.m_bFragTagOn) {object->actor->flags120 |= 0x01000000; return;}
+ if(g_gameSettings.counters.m_bFragTagOn) {object->actor->flags120 |= 0x01000000; return;}
  object->actor->flags120 &= 0xFEFFFFFF;
 }

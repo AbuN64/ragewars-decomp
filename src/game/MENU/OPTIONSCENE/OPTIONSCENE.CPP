@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/GLOBALS.H"
 
-/* Tears down the match display: calls func_80245B28_de, stops the objects at D_80145088 and 0x48 bytes
+/* Tears down the match display: calls func_80245B28_de, stops the objects at g_frontendScreenStatus and 0x48 bytes
    before it through Pools_ResetActorPools and Player_InitializePlayerPool, releases resource 0x24 of D_8011FE88 through
    Scene_LoadLevelResources, calls Cache_SetResourceActivityState with one when Cache_GetResourceActivityState reports nothing, then calls
    func_80245A10_de, Cinema_SetLoopMode with zero and Cinema_ResetViewport. */
@@ -12,7 +12,7 @@ void Menu_ReleaseOptionsScene(void) {
     char *object;
 
     Cinema_ReleaseSequenceContext();
-    object = &D_80145088;
+    object = &g_frontendScreenStatus;
     Pools_ResetActorPools(object, 0);
     Player_InitializePlayerPool(object - 0x48, 0, 0);
     Scene_LoadLevelResources(&g_world, 0x24, 0);
@@ -25,11 +25,11 @@ void Menu_ReleaseOptionsScene(void) {
 }
 
 void Menu_SetOptionsSceneSelection(int key) {
- GlobalsMenuSetOptionsSceneSelection *g = &D_80140FE8_de;
+ GlobalsMenuSetOptionsSceneSelection *g = &g_gameplayCameraList;
  GameplayCamera *o = g->camera;
  float width = 45.0f;
  float height = D_800DD610[1];
- StateMenuSetOptionsSceneSelection *state = D_800E2830;
+ StateMenuSetOptionsSceneSelection *state = g_cinemaSequenceState;
  int selection;
  o->fovY = width; o->aspect = height;
  o->viewWidth = state->a; o->viewHeight = state->b; o->viewLeft = state->c; o->viewTop = state->d;
@@ -40,7 +40,7 @@ void Menu_SetOptionsSceneSelection(int key) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int rodata_unresolved_800DC2C4[1] = {
+const unsigned int k_OptionsceneEncodedWords[1] = {
     0x3FAAAAA8,
 };
 #endif

@@ -1,31 +1,31 @@
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "FRONTEND/FRONTEND_ACCUMULATEPLAYERSTATISTICS.H"
 
-extern s8 D_80102B0D[][400];
-extern RecRecAt4 g_playerSettings[];
+extern s8 g_profileSlotIndices[][400];
+extern PlayerStatisticsCountView g_playerSettings[];
 
 /* Adds the current record's deltas to both running totals of each player still in play, capping each at 99999. */
 void Frontend_AccumulatePlayerStatistics(void) {
-    s32 i;
-    s32 v;
-    RecRecAt4 *rec;
+    s32 playerIndex;
+    s32 accumulatedCount;
+    PlayerStatisticsCountView *playerOptions;
 
-    for (i = 0; i < 4; i++) {
-        if (D_80102B0D[i][0] >= 0) {
-            rec = &g_playerSettings[i];
-            v = D_800FEB6C[i][0] + rec->unk4;
-            if (v > 99999) {
-                D_800FEB6C[i][0] = 99999;
+    for (playerIndex = 0; playerIndex < 4; playerIndex++) {
+        if (g_profileSlotIndices[playerIndex][0] >= 0) {
+            playerOptions = &g_playerSettings[playerIndex];
+            accumulatedCount = g_playerStatisticsAccumulatedKills[playerIndex][0] + playerOptions->totalKills;
+            if (accumulatedCount > 99999) {
+                g_playerStatisticsAccumulatedKills[playerIndex][0] = 99999;
             } else {
-                D_800FEB6C[i][0] = v;
+                g_playerStatisticsAccumulatedKills[playerIndex][0] = accumulatedCount;
             }
-            v = D_800FEB74[i][0] + rec->unk2;
-            if (v > 99999) {
-                D_800FEB74[i][0] = 99999;
+            accumulatedCount = g_playerStatisticsAccumulatedDeaths[playerIndex][0] + playerOptions->totalDeaths;
+            if (accumulatedCount > 99999) {
+                g_playerStatisticsAccumulatedDeaths[playerIndex][0] = 99999;
             } else {
-                D_800FEB74[i][0] = v;
+                g_playerStatisticsAccumulatedDeaths[playerIndex][0] = accumulatedCount;
             }
         }
     }

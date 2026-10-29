@@ -1,4 +1,4 @@
-#ifndef DATA_OVL1_F_DATA_800CF5E0_H
-#define DATA_OVL1_F_DATA_800CF5E0_H
-extern char D_00232C58[];
+#ifndef DATA_OVL1_F_WEAPON_CHARGE_CALLBACK_ADDRESS_H
+#define DATA_OVL1_F_WEAPON_CHARGE_CALLBACK_ADDRESS_H
+extern char addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant2[];
 #endif

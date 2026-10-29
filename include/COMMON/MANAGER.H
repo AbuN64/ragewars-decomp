@@ -6,7 +6,7 @@
 
 struct Manager;
 
-extern int D_801005A0[];
+extern int g_resourceSlotOwners[];
 
 struct CachedResource;
 typedef struct CachedResource CachedResource;
@@ -17,8 +17,8 @@ struct NodeCacheRunResourceCompletionWorker;
 typedef struct NodeCacheRunResourceCompletionWorker NodeCacheRunResourceCompletionWorker;
 
 
-struct ObjectState13;
-typedef struct ObjectState13 ObjectState13;
+struct GeometryVariantByteView;
+typedef struct GeometryVariantByteView GeometryVariantByteView;
 
 
 
@@ -65,7 +65,7 @@ struct ResourceLoadRequest;
 struct ResourceHashEntry {
     s32 key;
     struct ResourceLoadRequest *value;
-    s32 unk08;
+    s32 reservedWord;
     struct ResourceHashEntry *next;
 };
 
@@ -80,7 +80,7 @@ typedef struct Manager Manager;
 struct RequestCacheRunResourceCompletionWorker;
 typedef struct RequestCacheRunResourceCompletionWorker RequestCacheRunResourceCompletionWorker;
 
-struct ObjectState13;
+struct GeometryVariantByteView;
 
 struct Manager;
 
@@ -124,10 +124,10 @@ struct LevelActor;
 
 
 
-struct ObjectLinksDC;
-typedef struct ObjectLinksDC ObjectLinksDC;
+struct ActorResourceStatusView;
+typedef struct ActorResourceStatusView ActorResourceStatusView;
 
-struct ObjectLinksDC;
+struct ActorResourceStatusView;
 
 struct ResourceHashEntry;
 typedef struct ResourceHashEntry ResourceHashEntry;
@@ -142,7 +142,7 @@ struct ResourceHashEntry;
 struct ResourceLoadRequest;
 typedef struct ResourceLoadRequest ResourceLoadRequest;
 
-struct Shape_func_802BC570_de;
+struct CacheAllocationNodeView;
 
 struct ResourceLoadRequest;
 

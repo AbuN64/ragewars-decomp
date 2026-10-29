@@ -1,6 +1,6 @@
 #include "sdk/LIBC.H"
 #include "COMMON/OBJB.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -8,7 +8,7 @@
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/LEVEL_SPAWN.H"
-#include "MENU/8044ACCC.H"
+#include "MENU/SCENE_RESOURCE_PREVIEW_AND_COLLISION_VIEWS.H"
 #include "COMMON/LEVEL_TRACK.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/PROPGEOMETRY.H"
@@ -19,9 +19,9 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "ENGINE/SCENE_GRID_AND_GEOMETRY_OPERATIONS.H"
-extern void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *block);
+extern void Cache_ReplaceResourceBlock(s32 unused, struct CacheResourceBlockView **handle, struct CacheResourceBlockView *block);
 
-extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *handle, s32 size);
+extern struct CacheResourceBlockView *Cache_AllocResourceBlock(s32 cache, void *handle, s32 size);
 
 extern void *Scene_GetActorDefinition(void *world, s32 id);
 
@@ -47,9 +47,9 @@ extern s32 Scene_FindNearestPlacedObject(World *world, void *data, s32 group, vo
 
 extern void Simpinst_RegisterModelVariantResources(ObjB *obj, s32 unused);
 
-extern void *func_8024F6EC_de(ObjB *obj, s32 type);
+extern void *Simpinst_RequestModelVariant(ObjB *obj, s32 type);
 
-extern void Statinst_RegisterGeometryResources(ObjA *obj, s32 arg1);
+extern void Statinst_RegisterGeometryResources(ObjA *obj, s32 unusedGeometryArgument);
 
 extern void *Statinst_AcquireGeometry(ResourceOwner *owner,s32 index);
 
@@ -62,24 +62,24 @@ extern void Geometry_UnlockMaterialResources(void *handle);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 /* Runs func_8044D054_de and func_8044D0F0_de on a large state block, then clears its word at offset
-   0x1B444, sets the word at 0x1B448 to 0x15 and copies D_801462CC into the word at 0x1B44C. */
+   0x1B444, sets the word at 0x1B448 to 0x15 and copies g_menuOptionAvailabilityFlags into the word at 0x1B44C. */
 
-extern struct Shape_func_8021A2D4_de_2 D_801462CC;
+extern struct MemoryUsageStats g_menuOptionAvailabilityFlags;
 
 extern void Scene_LoadPreviewBufferA(ItemsPreviewStateA *);
 
 extern void Scene_LoadPreviewBufferB(char *);
 
-void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
+void Scene_BuildPlacedActors(World *world, struct CacheResourceBlockView **handle) {
     Shared_Placed spawns[8];
     Shared_Placed extra;
     s32 n;
     LevelActor *objects;
     s32 mode;
-    struct Shape_typemap_165 *block;
+    struct CacheResourceBlockView *block;
     s32 nspawns;
     LevelNode *node;
-    InputRecAt27 *records;
+    LevelPlacedActorRecord *records;
     LevelBlock *hdr;
     s32 i;
     s32 peerIndex;
@@ -87,10 +87,10 @@ void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
     s32 spawnIndex;
     s32 specialSet;
     s32 *definition;
-    InputRecAt27 *rec;
-    InputRecAt27 *recWalk;
+    LevelPlacedActorRecord *rec;
+    LevelPlacedActorRecord *recWalk;
     LevelActor *objWalk;
-    func_8041F2A0_Config *slot;
+    SlotSelectionPlayerConfig *slot;
     s16 value;
     LevelActor *obj;
     LevelActor *other;
@@ -112,19 +112,19 @@ void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
             hdr->count = n;
             records = node->records;
             objects = hdr->objects;
-            if (world->unk1B41C == 0) {
-                world->unk1B434 = Scene_FindNearestPlacedObject(world, node->records[0].vec4, world->unk1B40C, world->pad1B420);
-                if (world->unk1B434 != 0) {
-                    world->unk1B41C = 1;
+            if (world->placementInitialized == 0) {
+                world->nearestPlacedObjectKey = Scene_FindNearestPlacedObject(world, node->records[0].vec4, world->placedObjectGroup, world->pad1B420);
+                if (world->nearestPlacedObjectKey != 0) {
+                    world->placementInitialized = 1;
                 }
             }
             spawnIndex = 0;
             nspawns = 0;
-            if (world->unk1B41C != 0) {
-                nspawns = Scene_FindPlacedObjectsByKey(world, world->unk1B40C, world->unk1B434, spawns, 8);
+            if (world->placementInitialized != 0) {
+                nspawns = Scene_FindPlacedObjectsByKey(world, world->placedObjectGroup, world->nearestPlacedObjectKey, spawns, 8);
             }
-            world->unk138 = objects;
-            world->unk140 = n;
+            world->placedActors = objects;
+            world->actorCapacity = n;
             i = 0;
             if (i < n) {
                 objWalk = objects;
@@ -138,7 +138,7 @@ void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
                     recWalk = rec + 1;
                 }
             }
-            world->unk13C = 0;
+            world->createdActorCount = 0;
             for (i = 0; i < n; i++) {
                 rec = &records[i];
                 obj = &objects[i];
@@ -148,25 +148,25 @@ void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
                 if (*definition != 0xB && i != 0) {
                     continue;
                 }
-                world->unk13C++;
+                world->createdActorCount++;
                 memcpy(&g_spawnReferencePosition, rec->vec4, sizeof(CVector3));
                 g_spawnReferencePosition.y += 204.79998779296875f;
                 g_spawnReferenceFloorPolygon = Scene_FindFloorPolygon(world, rec->vec4);
                 playerIndex = 0;
-                if (playerIndex < D_80145048) {
+                if (playerIndex < g_playerCount) {
                     slot = g_playerSettings;
                     do {
-                        player = &D_80140F84[playerIndex];
+                        player = &g_gamePlayerAndMenuState[playerIndex];
                         if (nspawns != 0) {
-                            if (slot->kind == 0xC && player->views1450.view1450_1.computer != 0 && world->unk1B40C == 9) {
+                            if (slot->kind == 0xC && player->views1450.view1450_1.computer != 0 && world->placedObjectGroup == 9) {
                                 Scene_FindPlacedObjectsByKey(world, 9, specialSet, &extra, 1);
                                 spawn = &extra;
                             } else {
                                 spawn = &spawns[spawnIndex];
                             }
                             rec->resource20 = (u16)spawn->pad12;
-                            Graphu64_WrapPeriodicValue(&spawn->unkC);
-                            angle = spawn->unkC;
+                            Graphu64_WrapPeriodicValue(&spawn->heading);
+                            angle = spawn->heading;
                             if (!(angle > 3.1415927f)) {
                                 if (!(angle < -3.1415927f)) {
                                     if (!(angle > 3.1415927f)) {
@@ -182,9 +182,9 @@ void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
                             }
                             rec->amount24 = value;
                             memcpy(rec->vec4, &spawn->pos, sizeof(CVector3));
-                            world->unk1B614 = 0;
-                            world->unk1B618 = 0;
-                            world->unk1B61C = 0;
+                            world->spawnOffsetX = 0;
+                            world->spawnOffsetY = 0;
+                            world->spawnOffsetZ = 0;
                             spawnIndex++;
                             if (spawnIndex >= nspawns) {
                                 spawnIndex = 0;
@@ -193,17 +193,17 @@ void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
                         Player_InitActorParts(player, rec, mode, i);
                         slot++;
                         playerIndex++;
-                    } while (playerIndex < D_80145048);
+                    } while (playerIndex < g_playerCount);
                 }
             }
-            for (i = world->unk13C; i < n; i++) {
+            for (i = world->createdActorCount; i < n; i++) {
                 obj = &objects[i];
                 best = 3.4028235e38f;
                 obj->controller = 0;
                 if (Insthdr_GetModelPropertyFlag2(obj) == 0) {
                     continue;
                 }
-                for (peerIndex = world->unk13C; peerIndex < n; peerIndex++) {
+                for (peerIndex = world->createdActorCount; peerIndex < n; peerIndex++) {
                     other = &objects[peerIndex];
                     if (obj->definition->kind == other->definition->kind && Insthdr_GetModelPropertyFlag1(other) != 0 && obj != other) {
                         if (obj->controller != 0) {
@@ -221,11 +221,11 @@ void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
             }
         }
         Cache_ReplaceResourceBlock(0, handle, block);
-        world->unkF58 = 0;
+        world->kind1Cursor = 0;
     }
 }
 
-void Scene_LoadGridCells(Level_func_8044CD8C_de *level) {
+void Scene_LoadGridCells(SceneGridCellLoadView *level) {
     s32 size;
     s32 width;
     s32 row;
@@ -264,7 +264,7 @@ void Scene_LoadGridCells(Level_func_8044CD8C_de *level) {
                 continue;
             }
             key = SetN64_LocatePackSection(level->file, level->key, col + row * width, &size);
-            block = Cache_RequestResource(0, key, key, size, 4, level, D_0028798C, s_gridSectionText, 1);
+            block = Cache_RequestResource(0, key, key, size, 4, level, g_scene_BuildPlacedInstancesEntry, s_gridSectionText, 1);
             if (block == 0) {
                 continue;
             }
@@ -290,7 +290,7 @@ void Scene_LoadGridCells(Level_func_8044CD8C_de *level) {
                     b = &objsB[i];
                     b->block = block;
                     Simpinst_RegisterModelVariantResources(b, 0);
-                    handle = func_8024F6EC_de(b, b->type);
+                    handle = Simpinst_RequestModelVariant(b, b->type);
                     if (handle != 0) {
                         Geometry_UnlockMaterialResources(handle);
                         Cache_UnlockResource(0, handle);
@@ -307,7 +307,7 @@ void Scene_InitPreview(Shared_World *world, s32 level) {
     Scene_LoadPreviewBufferB((char *)world);
     world->previewState = 0;
     world->previewTimer = 0x15;
-    world->previewStart = D_801462CC.field_0;
+    world->previewStart = g_menuOptionAvailabilityFlags.first;
 }
 
 extern void Cache_ReleaseResource(void *, void *); /* extern */
@@ -319,17 +319,17 @@ struct ItemsPreviewStateA;
 /* extern */
 extern s32 Control_IsSnapshotActive(void); /* extern */
 
-extern char D_00285160;
+extern char g_cResource_UnpackRequestEntry;
 extern char g_loadSavePersistentData;
 
 void Scene_LoadPreviewBufferA(ItemsPreviewStateA *previewToLoad) {
     s32 *persistentDataResource;
-    s32 temp_a1;
+    s32 bufferSize;
 
     if (Control_IsSnapshotActive() == 0) {
-        persistentDataResource = Cache_RequestResource(0, previewToLoad->unk38, previewToLoad->unk38, previewToLoad->unk44, 0, 0, &D_00285160, &g_loadSavePersistentData, 1);
-        func_802BD3A0_de(&D_800F91F0, (const void *)*persistentDataResource, 0x5800);
+        persistentDataResource = Cache_RequestResource(0, previewToLoad->directoryKey, previewToLoad->directoryKey, previewToLoad->resourceFlags, 0, 0, &g_cResource_UnpackRequestEntry, &g_loadSavePersistentData, 1);
+        Libc_CopyBytes(&g_worldSnapshotNoteData, (const void *)*persistentDataResource, 0x5800);
         Cache_ReleaseResource(0, persistentDataResource);
-        previewToLoad->unk4 = 1;
+        previewToLoad->loaded = 1;
     }
 }

@@ -7,14 +7,14 @@
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/WORLD.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
-/* D_8011FECC is D_8011FE88.noteCount (world + 0x44). The tail reads it as that member, which keeps cse from
+/* g_worldSnapshotNoteBytes is D_8011FE88.noteCount (world + 0x44). The tail reads it as that member, which keeps cse from
  * folding its loads across the snapshot header stores; the two head reads stay plain scalar loads (MIXED). */
-extern s32 D_8011FECC;
-extern void *D_800DE860_de;
+extern s32 g_worldSnapshotNoteBytes;
+extern void *g_pakSnapshotResourceHandle;
 extern u8 g_pakSingleSaveBlockName[];
 #include "COMMON/SHARED_GAMESLOT.H"
-extern f32 D_801468A0[];
-extern u8 D_800F91F0[];
+extern f32 g_matchRoundCounters[];
+extern u8 g_worldSnapshotNoteData[];
 extern void Cache_DrainAndCompactResources(s32);
 extern SaveSnapshot **Cache_AllocateResource(s32, s32, s32, void *);
 extern void XPlus_FillMemory(void *, s32, s32);
@@ -22,52 +22,52 @@ extern void XPlus_FillMemory(void *, s32, s32);
 /* eu-x splits this function one word late (its leading lui sits in the
  * preceding data blob), so that version keeps the split asm. */
 void Snapshot_CreateSaveSnapshot(u8 *player) {
-    s32 snapshotSize = D_8011FECC + 0x610;
+    s32 snapshotSize = g_worldSnapshotNoteBytes + 0x610;
     s32 allocationSize;
     SaveSnapshot **snapshotHandle;
     SaveSnapshot *snapshot;
-    if (D_800DE860_de != 0) {
+    if (g_pakSnapshotResourceHandle != 0) {
         Cache_DrainAndCompactResources(0);
-        Cache_ReleaseResource(0, D_800DE860_de);
+        Cache_ReleaseResource(0, g_pakSnapshotResourceHandle);
     }
-    allocationSize = D_8011FECC + 0x610;
+    allocationSize = g_worldSnapshotNoteBytes + 0x610;
     snapshotHandle = Cache_AllocateResource(0, allocationSize, 0x33, g_pakSingleSaveBlockName);
-    D_800DE868 = *snapshotHandle;
-    D_800DE860_de = snapshotHandle;
-    XPlus_FillMemory(D_800DE868, 0, allocationSize);
-    D_800DE868->player = *(Copy70 *)(player + 0x5E0);
-    D_800DE868->world = *(Copy584 *)&D_801462C8;
-    snapshot = D_800DE868;
-    snapshot->view[0] = D_801468A0[0];
-    snapshot->view[1] = D_801468A0[1];
-    snapshot->view[2] = D_801468A0[2];
-    snapshot->view[3] = D_801468A0[3];
+    g_pakSaveSnapshot = *snapshotHandle;
+    g_pakSnapshotResourceHandle = snapshotHandle;
+    XPlus_FillMemory(g_pakSaveSnapshot, 0, allocationSize);
+    g_pakSaveSnapshot->player = *(Copy70 *)(player + 0x5E0);
+    g_pakSaveSnapshot->world = *(Copy584 *)&g_gameSettings;
+    snapshot = g_pakSaveSnapshot;
+    snapshot->view[0] = g_matchRoundCounters[0];
+    snapshot->view[1] = g_matchRoundCounters[1];
+    snapshot->view[2] = g_matchRoundCounters[2];
+    snapshot->view[3] = g_matchRoundCounters[3];
     snapshot->size = snapshotSize;
     snapshot->dataSize = g_world.noteCount;
-    func_802BD3A0_de(snapshot->name, D_800F91F0, g_world.noteCount);
+    Libc_CopyBytes(snapshot->name, g_worldSnapshotNoteData, g_world.noteCount);
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char *D_800E25D4[];
-extern char *D_800E25C4[];
-extern char *D_800E25A4[];
-extern char *D_800E25B4[];
-#define PAK_CODE D_800E25D4[g_languageIndex]
-#define PAK_COMPANY D_800E25C4[g_languageIndex]
-#define PAK_TITLE1 D_800E25A4[getSettings()->language]
-#define PAK_TITLE2 D_800E25B4[getSettings()->language]
+extern char *g_pakLegacySnapshotGameNames[];
+extern char *g_pakCompanyCodes[];
+extern char *g_pakProfileGameNames[];
+extern char *g_pakSnapshotGameNames[];
+#define PAK_CODE g_pakLegacySnapshotGameNames[g_languageIndex]
+#define PAK_COMPANY g_pakCompanyCodes[g_languageIndex]
+#define PAK_TITLE1 g_pakProfileGameNames[getSettings()->language]
+#define PAK_TITLE2 g_pakSnapshotGameNames[getSettings()->language]
 #else
-#define PAK_CODE D_800D36E0
-#define PAK_COMPANY D_800D36DC
-#define PAK_TITLE1 D_800D36D4
-#define PAK_TITLE2 D_800D36D8
+#define PAK_CODE g_pakLegacySnapshotGameNameFixed
+#define PAK_COMPANY g_pakCompanyCodeFixed
+#define PAK_TITLE1 g_pakProfileGameNameFixed
+#define PAK_TITLE2 g_pakSnapshotGameNameFixed
 #endif
-extern s32 D_800E28C8, D_800DE874;
-extern char *D_800D36D4, *D_800D36D8, *D_800D36DC;
+extern s32 g_introSelectedItem, D_800DE874;
+extern char *g_pakProfileGameNameFixed, *g_pakSnapshotGameNameFixed, *g_pakCompanyCodeFixed;
 
-extern s32 D_8015375C;
+extern s32 g_pakUseScannedChannel;
 
-extern char *D_800D36E0;
+extern char *g_pakLegacySnapshotGameNameFixed;
 
 extern s32 Note_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *name, char *ext, s32 *size,
                          char *company, char *code);
@@ -76,7 +76,7 @@ extern s32 XPlus_StringLength(char *);
 /* Inlined into each title lookup: the loop pass merges the two address loads into one hoisted register,
  * which then outranks the loop-hoisted length constants 4 and 2 (a local pointer loses that race). */
 static __inline__ Shared_Game *getSettings(void) {
-    return &D_801462C8;
+    return &g_gameSettings;
 }
 
 void Snapshot_MarkSaveNotes(Shared_PakMenu *menu) {
@@ -93,10 +93,10 @@ void Snapshot_MarkSaveNotes(Shared_PakMenu *menu) {
     s32 exists;
     s32 size;
 
-    if (D_8015375C != 0) {
-        ch = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        ch = g_introSelectedItem;
     } else {
-        ch = menu->owner->unk4;
+        ch = menu->owner->controllerPort;
     }
     for (i = 0; i < 16; i++) {
         result = Note_ReadNoteInfo(ch, i, &exists, name, ext, &size, company, code);
@@ -155,12 +155,12 @@ static __inline__ char *pakPrompt(s32 *channel) {
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RECORDRECAT1C.H"
 #include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
-extern s32 D_8014D4C0_de, D_8014D4EC_de, D_8015375C, D_80153760, D_80153784, D_800E28C8;
-extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
+extern s32 D_8014D4C0_de, D_8014D4EC_de, g_pakUseScannedChannel, D_80153760, D_80153784, g_introSelectedItem;
+extern char g_matchEndingTeamWheelClose[], D_0044FFA4[], D_0044FB50[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
 extern void Note_ProbeStatus(s32);
 extern s32 Note_GetStatus(s32), Note_IsChannelReady(s32), Note_NeedsIdRepair(s32), Control_TakePakChange(s32);
-extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
+extern void Menu_OpenDialog(char *, char *, ActorOwnerView *, PakMenuSlot *, char *);
 s32 Snapshot_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 quiet)
 {
     s32 result, busy, slot;
@@ -171,50 +171,50 @@ s32 Snapshot_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 q
     sel = 0;
     if (D_8014D4C0_de) {
         if (D_8014D4EC_de) {
-            if (D_8015375C) slot = D_800E28C8;
-            else slot = menu->slot->unk4;
+            if (g_pakUseScannedChannel) slot = g_introSelectedItem;
+            else slot = menu->slot->controllerPort;
             sel = pakPrompt(&slot);
         }
     } else if (D_80153760) {
         sel = D_0044FFA4;
         if (D_8014D4EC_de) sel = D_0044FB50;
-    } else if (D_8015375C) sel = D_0044E4F8;
+    } else if (g_pakUseScannedChannel) sel = D_0044E4F8;
     prompt = sel;
     if (!prompt) return 0;
     busy = Control_TakePakChange(channel);
     if ((result == 0 || busy != 0) && result != -2) {
         if (busy) {
-            Menu_OpenDialog(D_8014561C, D_0044EA98, menu->player, menu->slot, prompt);
+            Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EA98, menu->player, menu->slot, prompt);
             return -1;
         }
         return result;
     }
     if (Note_IsChannelReady(channel)) {
         D_80153784 = 1;
-        if (D_8015375C) message = D_0044E9E4;
+        if (g_pakUseScannedChannel) message = D_0044E9E4;
         else {
             if (D_8014D4C0_de) message = D_0044EA08;
             else message = D_0044EA2C;
         }
-        Menu_OpenDialog(D_8014561C, message, menu->player, menu->slot, prompt);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, message, menu->player, menu->slot, prompt);
     } else if (!quiet) {
         D_80153784 = 1;
         if (Note_NeedsIdRepair(channel))
-            Menu_OpenDialog(D_8014561C, D_0044ED44, menu->player, menu->slot, prompt);
-        else Menu_OpenDialog(D_8014561C, D_0044E9C0, menu->player, menu->slot, prompt);
+            Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044ED44, menu->player, menu->slot, prompt);
+        else Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044E9C0, menu->player, menu->slot, prompt);
     } else if (result != -2) result = 0;
     return result;
 }
 
 #include "COMMON/SHAREDPLAYER.H"
 extern void Cache_ReleaseResource(s32, void *);
-extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0, D_800E28C8;
-extern struct Saved D_80153738;
-extern struct { u8 value; } D_8014D4B0_de;
+extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, g_pakUseScannedChannel, D_800E28C0, g_introSelectedItem;
+extern struct Saved g_pakControllerRecord;
+extern struct { u8 value; } g_controllerPakPreviewProfileFlags;
 extern u8 D_8014D4B1, D_8014D4B2, D_8014D4B3;
-extern u8 D_8014D4B4[];
-extern struct { u16 value; } D_8014D4AA, D_8014D4AC_de, D_8014D4AE;
-extern char D_0044EA08[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
+extern u8 g_controllerPakPreviewProfileName[];
+extern struct { u16 value; } g_pakProfileSavedWordOne, g_pakProfileSavedWordTwo, g_pakProfileSavedWordThree;
+extern char D_0044EA08[], g_playerMenuDialogRomResource[], D_0044E9C0[], g_matchEndingTeamWheelClose[];
 extern void Note_ProbeStatus(s32 ch);
 extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
@@ -227,9 +227,9 @@ extern u32 Note_Crc32(void *data, u32 size, u32 seed);
    and eight name bytes) with its checksum and opens the note list through Snapshot_MarkSaveNotes, otherwise it
    shows the D_0044EA08, D_0044ED44 or D_0044E9C0 prompt. */
 void Snapshot_BeginProfileSave(Shared_PakMenu *menu) {
-    ObjRecAt5DC *owner = menu->player;
-    ObjRecAt5DC *player;
-    ProfileRecAt84 *profile;
+    ActorOwnerView *owner = menu->player;
+    ActorOwnerView *player;
+    PakStatusProfile *profile;
     s32 channel;
     char *prompt;
     s32 i;
@@ -240,43 +240,43 @@ void Snapshot_BeginProfileSave(Shared_PakMenu *menu) {
     D_8014D4EC_de = 1;
     D_800DE874 = 0;
     D_80153784 = 0;
-    D_8015375C = 0;
-    channel = menu->slot->unk4;
+    g_pakUseScannedChannel = 0;
+    channel = menu->slot->controllerPort;
     player = owner;
     prompt = pakPrompt(&channel);
     if (D_800E28C0) {
         D_80153784 = 1;
-        Menu_OpenDialog(menu->player->unk5DC + 0x554, prompt, player, player->controller, 0);
+        Menu_OpenDialog(menu->player->owner + 0x554, prompt, player, player->controller, 0);
         return;
     }
-    if (D_8015375C) {
-        Note_ProbeStatus(D_800E28C8);
+    if (g_pakUseScannedChannel) {
+        Note_ProbeStatus(g_introSelectedItem);
     } else {
-        Note_ProbeStatus(menu->slot->unk4);
+        Note_ProbeStatus(menu->slot->controllerPort);
     }
     if (!Note_GetStatus(channel)) {
         profile = player->profile;
-        D_8014D4B0_de.value = profile->flags;
-        D_80153738.values[0] = profile->words[0];
-        D_8014D4AA.value = profile->words[1];
-        D_8014D4AC_de.value = profile->words[2];
-        D_8014D4AE.value = profile->words[3];
+        g_controllerPakPreviewProfileFlags.value = profile->flags;
+        g_pakControllerRecord.values[0] = profile->words[0];
+        g_pakProfileSavedWordOne.value = profile->words[1];
+        g_pakProfileSavedWordTwo.value = profile->words[2];
+        g_pakProfileSavedWordThree.value = profile->words[3];
         D_8014D4B1 = 0;
         D_8014D4B2 = 0;
         D_8014D4B3 = 0;
         for (i = 0; i < 8; i++) {
-            D_8014D4B4[i] = profile->name[i];
+            g_controllerPakPreviewProfileName[i] = profile->name[i];
         }
-        D_80153738.checksum = Note_Crc32(&D_80153738, 0x14, 4);
+        g_pakControllerRecord.checksum = Note_Crc32(&g_pakControllerRecord, 0x14, 4);
         Snapshot_MarkSaveNotes(menu);
         return;
     }
     D_80153784 = 1;
     if (Note_IsChannelReady(channel)) {
-        Menu_OpenDialog(D_8014561C, D_0044EA08, player, player->controller, prompt);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EA08, player, player->controller, prompt);
     } else if (Note_NeedsIdRepair(channel)) {
-        Menu_OpenDialog(D_8014561C, D_0044ED44, player, player->controller, D_0044E48C);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044ED44, player, player->controller, g_playerMenuDialogRomResource);
     } else {
-        Menu_OpenDialog(D_8014561C, D_0044E9C0, player, player->controller, prompt);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044E9C0, player, player->controller, prompt);
     }
 }

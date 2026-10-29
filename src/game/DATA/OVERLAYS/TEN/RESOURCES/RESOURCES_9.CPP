@@ -12,7 +12,7 @@ u32 data_writable_800FD1B0[30] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800FD228[2] = {
+unsigned int k_ResourcesEncodedWordsBlock8[2] = {
     0x60620402, 0xB3010A62,
 };
 #endif

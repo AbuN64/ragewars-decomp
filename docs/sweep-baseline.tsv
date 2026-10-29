@@ -202,8 +202,8 @@ halfword-pair-in-word	include/COMMON/OBJB.H	2001d76590ca	0
 halfword-pair-in-word	include/COMMON/OBJB.H	714f12c53b0d	0
 halfword-pair-in-word	include/COMMON/OBJB.H	bc61b05fb1fe	0
 halfword-pair-in-word	include/COMMON/OBJB.H	f91cfb850f07	0
-halfword-pair-in-word	include/COMMON/OBJECTSTATE18.H	5295e32c131d	0
-halfword-pair-in-word	include/COMMON/OBJECTSTATE18.H	a3cb0e726ecb	0
+halfword-pair-in-word	include/COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H	5295e32c131d	0
+halfword-pair-in-word	include/COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H	a3cb0e726ecb	0
 halfword-pair-in-word	include/COMMON/OBJRECAT18V6.H	dde7b84f2b40	0
 halfword-pair-in-word	include/COMMON/OBJRECAT5F14.H	5b5fe242a566	0
 halfword-pair-in-word	include/COMMON/OBJRECAT5F14.H	f89277f40082	0
@@ -211,11 +211,11 @@ halfword-pair-in-word	include/COMMON/PACKED.H	6362e0f1fd2b	0
 halfword-pair-in-word	include/COMMON/PACKED.H	e09bd8189afd	0
 halfword-pair-in-word	include/COMMON/SLOTRECATCV1.H	08848092f302	0
 halfword-pair-in-word	include/COMMON/SLOTRECATCV1.H	503f5628680a	0
-halfword-pair-in-word	include/COMMON/UNUSED.H	1896dad96dbb	0
-halfword-pair-in-word	include/COMMON/UNUSED.H	526d0937b1b7	0
-halfword-pair-in-word	include/COMMON/UNUSED.H	b32314d06352	0
-halfword-pair-in-word	include/COMMON/UNUSED.H	ba3ba0748bee	0
-halfword-pair-in-word	include/COMMON/UNUSED.H	bea5469f56c2	0
+halfword-pair-in-word	include/COMMON/RUNTIME_DECLARATIONS.H	1896dad96dbb	0
+halfword-pair-in-word	include/COMMON/RUNTIME_DECLARATIONS.H	526d0937b1b7	0
+halfword-pair-in-word	include/COMMON/RUNTIME_DECLARATIONS.H	b32314d06352	0
+halfword-pair-in-word	include/COMMON/RUNTIME_DECLARATIONS.H	ba3ba0748bee	0
+halfword-pair-in-word	include/COMMON/RUNTIME_DECLARATIONS.H	bea5469f56c2	0
 halfword-pair-in-word	include/FRONTEND/FRONTEND_DRAWMODELPREVIEW.H	448f6f2e08e1	0
 halfword-pair-in-word	src/game/MENU/802ABDBC_9.CPP	44dd33836b94	0
 halfword-pair-in-word	src/game/MENU/802ABDBC_9.CPP	76fd12540c7c	0

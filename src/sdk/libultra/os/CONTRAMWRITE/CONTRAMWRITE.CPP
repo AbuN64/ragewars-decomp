@@ -1,9 +1,9 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
-#include "COMMON/ARG.H"
-#include "COMMON/EXTERNS_18.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/OS/__OSPACKRAMWRITEDATA.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
@@ -26,14 +26,14 @@ u32 __osContRamWrite(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inp
         return 0;
     }
     __osSiGetAccess();
-    D_8014D4B0 = 3;
+    g_controllerLastCommand = 3;
     __osPackRamWriteData(channel, blockAddress & 0xFFFF, inputData);
-    result = __osSiRawStartDma(1, (u8 *)&D_80154110);
+    result = __osSiRawStartDma(1, (u8 *)&g_controllerStatusPifBuffer);
     osRecvMesg(completionQueue, 0, 1);
     do {
-        result = __osSiRawStartDma(0, (u8 *)&D_80154110);
+        result = __osSiRawStartDma(0, (u8 *)&g_controllerStatusPifBuffer);
         osRecvMesg(completionQueue, 0, 1);
-        source = (u8 *)&D_80154110;
+        source = (u8 *)&g_controllerStatusPifBuffer;
         if (channel != 0) {
             i = 0;
             if (channel > 0) {
@@ -75,9 +75,9 @@ void __osPackRamWriteData(s32 channel, s32 blockAddress, u8 *inputData) {
     u32 checksum;
     s32 shifted;
 
-    dst = (u8 *)&D_80154110;
+    dst = (u8 *)&g_controllerStatusPifBuffer;
     tail = 0xFF;
-    D_80154110.pifstatus = 1;
+    g_controllerStatusPifBuffer.pifstatus = 1;
     packet.bytes[0] = tail;
     packet.bytes[1] = 0x23;
     packet.bytes[2] = 1;
@@ -111,7 +111,7 @@ unsigned int func_802B8AA0_de_padding_B9768[1] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802B8B6C[1] = {
+unsigned int k_ContramwriteEncodedWords[1] = {
     0x0011504C,
 };
 #endif

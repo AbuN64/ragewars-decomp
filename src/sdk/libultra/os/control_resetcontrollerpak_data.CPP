@@ -1,41 +1,41 @@
 #include "TYPES.H"
-#include "COMMON/LONE/D_8014D6E0.H"
+#include "COMMON/LONE/CONTROLLER_MOTOR_STOP_DATA.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "COMMON/ARG.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/CONTROLLER_MOTOR_STATE.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 
 #if defined(VERSION_DE)
 
-extern u8 D_8014D4B0;
+extern u8 g_controllerLastCommand;
 
-extern u8 D_8014D5E0[];
-
-
+extern u8 g_controllerMotorStopCommands[];
 
 
 
-unsigned char D_auto_func_802B7C48_de_padding_B8848[8] = { 0x00, 0x80, 0x88, 0x21, 0xAF, 0xBF, 0x00, 0x40 };
 
-u32 func_802B7C50_de(Triple *motorContext) {
+
+unsigned char g_ControlResetcontrollerpakDataTrailingBytes[8] = { 0x00, 0x80, 0x88, 0x21, 0xAF, 0xBF, 0x00, 0x40 };
+
+u32 Control_StopMotorDe(Triple *motorContext) {
     Block40 saved;
     u8 *source;
     s32 i;
 
-    source = (u8 *)&D_80154110;
-    if (D_800D8380[motorContext->z] == 0) {
+    source = (u8 *)&g_controllerStatusPifBuffer;
+    if (g_controllerMotorInitialized[motorContext->z] == 0) {
         return 5;
     } else {
         u32 result;
         s32 count;
 
         __osSiGetAccess();
-        D_8014D4B0 = 3;
-        __osSiRawStartDma(1, &D_8014D5E0[motorContext->z << 6]);
+        g_controllerLastCommand = 3;
+        __osSiRawStartDma(1, &g_controllerMotorStopCommands[motorContext->z << 6]);
         osRecvMesg(motorContext->y, 0, 1);
-        __osSiRawStartDma(0, (u8 *)&D_80154110);
+        __osSiRawStartDma(0, (u8 *)&g_controllerStatusPifBuffer);
         osRecvMesg(motorContext->y, 0, 1);
         count = motorContext->z;
         if (count != 0) {
@@ -49,7 +49,7 @@ u32 func_802B7C50_de(Triple *motorContext) {
         }
         saved = *(Block40 *)source;
         result = (saved.bytes[2] & 0xC0) >> 4;
-        if ((result == 0) && ((__osContDataCrc(&D_8014D6E0) & 0xFF) != saved.bytes[0x26])) {
+        if ((result == 0) && ((__osContDataCrc(&g_controllerMotorStopData) & 0xFF) != saved.bytes[0x26])) {
             result = 4;
         }
         __osSiRelAccess();

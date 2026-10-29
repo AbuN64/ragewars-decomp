@@ -45,7 +45,7 @@ static inline s32 pick(BankAudioStartDialogGroup *bank, s32 group) {
     return first;
 }
 
-static inline void restart(PlayerRecAt1E *player) {
+static inline void restart(DialogGroupPlayer *player) {
 
     char *channel;
 
@@ -57,11 +57,11 @@ static inline void restart(PlayerRecAt1E *player) {
     }
 }
 
-/* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword alSndpAllocate returns for Audio_GetSoundPlayer's result on the stored resource and D_800D0D78. Adapted from func_80205694_de with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
+/* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword alSndpAllocate returns for Audio_GetSoundPlayer's result on the stored resource and D_800D0D78. Adapted from Device_RequestAndSetActiveState with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
 
 extern s16 alSndpAllocate(void *, void *);
 
-s32 Audio_StartDialogGroup(PlayerRecAt1E *player, s32 group, f32 scale, int unused3) {
+s32 Audio_StartDialogGroup(DialogGroupPlayer *player, s32 group, f32 scale, int unused3) {
     s32 song;
     s32 request;
 
@@ -75,7 +75,7 @@ s32 Audio_StartDialogGroup(PlayerRecAt1E *player, s32 group, f32 scale, int unus
     player->song = song;
     request = ++player->request;
     pick(player->bank, (s16)player->group);
-    player->speed = scale * *(&D_800C3FB0_de + 1);
+    player->speed = scale * *(&g_dialogPlaybackTimingConstants + 1);
     player->volume = 0x40;
     if (player->state == 3 || player->state == 1) {
         restart(player);
@@ -86,20 +86,20 @@ s32 Audio_StartDialogGroup(PlayerRecAt1E *player, s32 group, f32 scale, int unus
     return request;
 }
 
-void Audio_InitializeDialogPlayer(struct Shape_typemap_110 *record, s32 resource) {
-    extern char D_800D0D78[];
+void Audio_InitializeDialogPlayer(struct DialogPlayerState *record, s32 resource) {
+    extern char g_dialogDefaultSample[];
     record->field_0 = resource;
     record->field_4 = -1;
     record->field_C = -1;
     record->field_8 = 0;
     record->field_14 = 0;
     record->field_18 = 0x40;
-    record->field_1C = alSndpAllocate(Audio_GetSoundPlayer(record->field_0), D_800D0D78);
+    record->field_1C = alSndpAllocate(Audio_GetSoundPlayer(record->field_0), g_dialogDefaultSample);
 }
 
-void Audio_StopDialogPlayer(void *arg0) {
+void Audio_StopDialogPlayer(void *dialogPlayer) {
 
-    PlayerRecAt1E *player = arg0;
+    DialogGroupPlayer *player = dialogPlayer;
     void *soundPlayer;
     s32 state;
 
@@ -114,18 +114,18 @@ void Audio_StopDialogPlayer(void *arg0) {
     Sound_ReleaseContextLock((s32 *)player->bank);
 }
 
-s32 Audio_ChooseSequenceVariant(void **arg0, s16 id, s16 avoid) {
+s32 Audio_ChooseSequenceVariant(void **dialogPlayer, s16 id, s16 avoid) {
     s32 first;
     s32 last;
     s32 total;
     s32 entry;
     s32 draw;
-    ContextRecAt2BB8 *table;
+    AudioPlaybackContextView *table;
     s32 result;
 
     total = 0;
-    table = *arg0;
-    if (Defs_FindSortedGroupRange(table->unk2B60, table->unk2B64, id, &first, &last) == 0) {
+    table = *dialogPlayer;
+    if (Defs_FindSortedGroupRange(table->resourceIndexTable, table->resourceIndexCount, id, &first, &last) == 0) {
         return -1;
     }
     result = first;
@@ -153,8 +153,8 @@ s32 Audio_ChooseSequenceVariant(void **arg0, s16 id, s16 avoid) {
     return result;
 }
 
-void Audio_LoadDialogMetadata(void *arg0, s32 songIndex) {
-    PlayerRecAt24 *player = arg0;
+void Audio_LoadDialogMetadata(void *dialogPlayer, s32 songIndex) {
+    DialogPlaybackPlayer *player = dialogPlayer;
     f64 tempoValue;
     s32 tempo;
     SongHeader *song;
@@ -163,16 +163,16 @@ void Audio_LoadDialogMetadata(void *arg0, s32 songIndex) {
     tempo = song->tempo;
     tempoValue = (f64) tempo;
     if (tempo < 0) {
-        tempoValue += D_800C3FB8_de;
+        tempoValue += g_dialogUnsignedTimeCorrection;
     }
-    player->tempoScale = (f32) tempoValue * D_800C3FC0_de;
+    player->tempoScale = (f32) tempoValue * g_dialogTempoScale;
     player->volume = (f32) song->volume;
     SetN64_GetPackSection(player->bank->songs, (songIndex * 2) | 1);
 }
 
-void Audio_StopDialogPlayerUnlocked(void *arg0) {
+void Audio_StopDialogPlayerUnlocked(void *dialogPlayer) {
 
-    PlayerRecAt1E *player = arg0;
+    DialogGroupPlayer *player = dialogPlayer;
     void *soundPlayer;
     s32 state;
 
@@ -186,23 +186,23 @@ void Audio_StopDialogPlayerUnlocked(void *arg0) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_8025D3E8[8] =
+char s_RaxplayerEHAVIORText[8] =
     "EHAVIOR_";
 #endif
 
 /* ROM-grounded data: src/rw_pool_8025D350_C9CA8_us_rev1.c */
-const unsigned int D_blob_a274f83a44ed3e23c66c[3] = {
+const unsigned int g_audio_LoadDialogMetadataConstantWords[3] = {
     0x41F00000, 0x00000000, 0x3C23D70A,
 };
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C4274[3] = {
+unsigned int k_RaxplayerEncodedWordsBlock1[3] = {
     0x8E740020, 0x186000DD, 0x02A08821,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C3FC4[3] = {
+unsigned int k_RaxplayerEncodedWords[3] = {
     0x3C23D70A, 0x46FFFE00, 0x3C23D70A,
 };
 #endif

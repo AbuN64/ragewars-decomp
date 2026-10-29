@@ -6,6 +6,6 @@
 #if defined(VERSION_US)
 #define LIBGCC2_EXTERNAL_CLZ s_ambiencText
 #else
-#define LIBGCC2_EXTERNAL_CLZ D_auto_src_rw_u64_remainder_normalization_width_us_rev1
+#define LIBGCC2_EXTERNAL_CLZ g_u64RemainderNormalizationBitWidths
 #endif
 #include "libgcc2.inc.c"

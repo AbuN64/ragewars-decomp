@@ -1,10 +1,10 @@
 #include "COMMON/MANAGER.H"
-#include "COMMON/LONE/D_80106248.H"
-#include "COMMON/LONE/D_801051A0.H"
+#include "COMMON/LONE/RESOURCE_REQUEST_QUEUE.H"
+#include "COMMON/LONE/RUNTIME_HEAP.H"
 #include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_RUNRESOURCECOMPLETIONWORKER.H"
 #include "sdk/os.h"
@@ -13,16 +13,16 @@
 #include "SYSTEM/LIST.H"
 
 /* Looks a key up in the request hash table under the manager lock: an existing request bumps its
-   node's reference count and flags, stamps it and hands the node to func_80255FB8_de; otherwise, unless
+   node's reference count and flags, stamps it and hands the node to List_MoveIntrusiveToHead; otherwise, unless
    a request for the key is already active, a fresh request is taken, filled in from the arguments,
    given a reference on each of the two nodes and moved to the active list. Outside the lock the
-   request is then either started asynchronously through func_80255170_de and Cache_FinalizeResourceLoad, or run
-   synchronously through func_802551FC_de, whose failure gives the two references back and finishes the
+   request is then either started asynchronously through Cache_SubmitResourceLoadAndWait and Cache_FinalizeResourceLoad, or run
+   synchronously through Cache_TrySubmitResourceLoad, whose failure gives the two references back and finishes the
    request. The lock, the hash lookup and the reference bump are the inline forms of Cache_RunResourceCompletionWorker,
    Cache_RetainResourceByKey and Cache_FinalizeResourceLoad. The eighth argument is never read.
 
    Manager is one object, which is what lets the compiler reach its lock queue from whichever of its
-   members is already in a base register; D_8010515C is a separate symbol although it lies past the
+   members is already in a base register; g_resourceHeapLockUsers is a separate symbol although it lies past the
    members named here, because every reference to it materialises its own address. */
 
 
@@ -35,22 +35,22 @@
 
 
 
-extern s32 D_80100570;
+extern s32 g_resourceRecencyList;
 
-extern s32 D_80105180;
+extern s32 g_resourceCacheFrameStamp;
 
-extern s32 D_80101190;
+extern s32 g_resourceHashEvenIndexMask;
 
-extern s32 D_80101194;
+extern s32 g_resourceHashBuckets;
 
 
 
 
 extern ResourceLoadRequest *Cache_AcquireLoadRequestWithEviction(s32, s32);
 
-extern void func_80255170_de(s32 *, ResourceLoadRequest *);
+extern void Cache_SubmitResourceLoadAndWait(s32 *, ResourceLoadRequest *);
 
-extern void func_80255FB8_de(void *, CachedResource *);
+extern void List_MoveIntrusiveToHead(void *, CachedResource *);
 
 extern ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest *request, s32 dropReference);
 
@@ -60,8 +60,8 @@ static inline void addref(CachedResource *node) {
 }
 
 static inline void stamp(CachedResource *node) {
-    node->stamp = D_80105180;
-    func_80255FB8_de(&D_80100570, node);
+    node->stamp = g_resourceCacheFrameStamp;
+    List_MoveIntrusiveToHead(&g_resourceRecencyList, node);
 }
 
 static inline void unref(CachedResource *node) {
@@ -71,34 +71,34 @@ static inline void unref(CachedResource *node) {
 }
 
 static inline void acquire(void) {
-    extern Manager D_801047E0;
+    extern Manager g_resourceRequestManager;
     u32 token = __osDisableInt();
-    s32 counter = D_8010515C + 1;
+    s32 counter = g_resourceHeapLockUsers + 1;
 
-    D_8010515C = counter;
+    g_resourceHeapLockUsers = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        osRecvMesg(D_801047E0.lock, 0, 1);
+        osRecvMesg(g_resourceRequestManager.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
 }
 
 static inline void release(void) {
-    extern Manager D_801047E0;
+    extern Manager g_resourceRequestManager;
     u32 token = __osDisableInt();
-    s32 counter = D_8010515C - 1;
+    s32 counter = g_resourceHeapLockUsers - 1;
 
-    D_8010515C = counter;
+    g_resourceHeapLockUsers = counter;
     if (counter != 0) {
         __osRestoreInt(token);
-        osSendMesg(D_801047E0.lock, 0, 1);
+        osSendMesg(g_resourceRequestManager.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
 }
 
-/* Runs the resource manager thread: waits for messages on its queue D_801047E0 and, under the manager lock, frees the heap for messages 0 and 1, retries or completes a pending load request (flag 8) by unlinking it, draining its node's reference count, releasing an unused node's data and handle, and finishing the request, or otherwise (flag 4) starts it through Cache_FinalizeResourceLoad. The flag 8 path clears its reference loop with an inner do-while, and each branch unlocks itself. */
+/* Runs the resource manager thread: waits for messages on its queue g_resourceRequestManager and, under the manager lock, frees the heap for messages 0 and 1, retries or completes a pending load request (flag 8) by unlinking it, draining its node's reference count, releasing an unused node's data and handle, and finishing the request, or otherwise (flag 4) starts it through Cache_FinalizeResourceLoad. The flag 8 path clears its reference loop with an inner do-while, and each branch unlocks itself. */
 
 
 
@@ -110,37 +110,37 @@ static inline void release(void) {
 
 
 extern void Cache_AcknowledgeResourceSlotRelease(s32, RequestCacheRunResourceCompletionWorker *);
-extern s32 func_802551FC_de(void *, void *, Manager *);
+extern s32 Cache_TrySubmitResourceLoad(void *, void *, Manager *);
 
 extern void Cache_DetachResourceRequest(s32, NodeCacheRunResourceCompletionWorker *);
 
-extern void func_80255B2C_de(void *, void *);
+extern void Heap_FreeAllocation(void *, void *);
 
-extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 entryAddress);
 
 static inline void lock(void) {
-    extern Manager D_801047E0;
+    extern Manager g_resourceRequestManager;
     u32 token = __osDisableInt();
-    s32 counter = D_8010515C + 1;
+    s32 counter = g_resourceHeapLockUsers + 1;
 
-    D_8010515C = counter;
+    g_resourceHeapLockUsers = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        osRecvMesg(D_801047E0.lock, 0, 1);
+        osRecvMesg(g_resourceRequestManager.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
 }
 
 static inline void unlock(void) {
-    extern Manager D_801047E0;
+    extern Manager g_resourceRequestManager;
     u32 token = __osDisableInt();
-    s32 counter = D_8010515C - 1;
+    s32 counter = g_resourceHeapLockUsers - 1;
 
-    D_8010515C = counter;
+    g_resourceHeapLockUsers = counter;
     if (counter != 0) {
         __osRestoreInt(token);
-        osSendMesg(D_801047E0.lock, 0, 1);
+        osSendMesg(g_resourceRequestManager.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -148,7 +148,7 @@ static inline void unlock(void) {
 
 CachedResource *Cache_RequestPairedResource(s32 unused, s32 key, CachedResource *first, CachedResource *second, s32 mode, void *owner,
                     void *tag, void *spare, s32 async) {
-    extern Manager D_801047E0;
+    extern Manager g_resourceRequestManager;
     ResourceHashEntry *node;
     ResourceLoadRequest *found;
     ResourceLoadRequest **out;
@@ -158,9 +158,9 @@ CachedResource *Cache_RequestPairedResource(s32 unused, s32 key, CachedResource 
     acquire();
 
     out = &found;
-    node = (ResourceHashEntry *)((s32)D_80101194 +
+    node = (ResourceHashEntry *)((s32)g_resourceHashBuckets +
         ((((key << 5) ^ ((u32)key >> 1) ^ ((u32)key >> 9) ^
-           ((u32)key >> 17)) & D_80101190) * 0x10));
+           ((u32)key >> 17)) & g_resourceHashEvenIndexMask) * 0x10));
     if (node->key != key) {
         goto not_initial;
     }
@@ -192,8 +192,8 @@ done:
         return found->node;
     }
 
-    async |= D_801047E0.mask;
-    scan = D_801047E0.active.head;
+    async |= g_resourceRequestManager.mask;
+    scan = g_resourceRequestManager.active.head;
     while (scan != 0) {
         if (scan->key == key) {
             busy = 1;
@@ -219,13 +219,13 @@ done:
                 addref(second);
             }
 
-            func_80255ED8_de(&D_801047E0.pending, found);
-            func_80255D14_de(&D_801047E0.active, found);
+            List_RemoveIntrusive(&g_resourceRequestManager.pending, found);
+            List_AppendIntrusive(&g_resourceRequestManager.active, found);
             release();
 
             if (async != 0) {
                 found->flags &= ~0xE;
-                func_80255170_de(&D_80106248, found);
+                Cache_SubmitResourceLoadAndWait(&g_resourceCacheWorker, found);
                 acquire();
                 found = Cache_FinalizeResourceLoad(0, found, 0);
                 release();
@@ -235,7 +235,7 @@ done:
                 return 0;
             }
 
-            if (func_802551FC_de(&D_80106248, found, &D_801047E0) == 0) {
+            if (Cache_TrySubmitResourceLoad(&g_resourceCacheWorker, found, &g_resourceRequestManager) == 0) {
                 acquire();
                 if (first != 0) {
                     unref(first);
@@ -243,8 +243,8 @@ done:
                 if (second != 0) {
                     unref(second);
                 }
-                func_80255ED8_de(&D_801047E0.active, found);
-                func_80255CB8_de(&D_801047E0.pending, found);
+                List_RemoveIntrusive(&g_resourceRequestManager.active, found);
+                List_PrependIntrusive(&g_resourceRequestManager.pending, found);
                 Cache_RecycleLoadRequest(0, found);
                 release();
             }
@@ -256,13 +256,13 @@ done:
 }
 
 void Cache_RunResourceCompletionWorker(void *arg) {
-    extern Manager D_801047E0;
+    extern Manager g_resourceRequestManager;
     RequestCacheRunResourceCompletionWorker *request;
     NodeCacheRunResourceCompletionWorker *node;
     s32 flags;
 
     for (;;) {
-        osRecvMesg(&D_801047E0, &request, 1);
+        osRecvMesg(&g_resourceRequestManager, &request, 1);
         if ((u32)request < 2) {
             lock();
             Cache_AcknowledgeResourceSlotRelease(0, request);
@@ -272,10 +272,10 @@ void Cache_RunResourceCompletionWorker(void *arg) {
             flags = request->flags;
             if (flags & 8) {
                 request->flags = flags & ~8;
-                if (func_802551FC_de(&D_80106248, request, &D_801047E0) == 0) {
+                if (Cache_TrySubmitResourceLoad(&g_resourceCacheWorker, request, &g_resourceRequestManager) == 0) {
                     lock();
-                    func_80255ED8_de(&D_801047E0.active, request);
-                    func_80255CB8_de(&D_801047E0.pending, request);
+                    List_RemoveIntrusive(&g_resourceRequestManager.active, request);
+                    List_PrependIntrusive(&g_resourceRequestManager.pending, request);
                     node = request->node;
                     node->flags &= ~2;
                     while (node->count != 0) {
@@ -285,7 +285,7 @@ void Cache_RunResourceCompletionWorker(void *arg) {
                     }
                     if (!(node->flags & 0x702)) {
                         Cache_DetachResourceRequest(0, node);
-                        func_80255B2C_de(&D_801051A0, node->data);
+                        Heap_FreeAllocation(&g_runtimeHeap, node->data);
                         Cache_ReleasePendingResourceEntry(0, node);
                     }
                     Cache_RecycleLoadRequest(0, request);

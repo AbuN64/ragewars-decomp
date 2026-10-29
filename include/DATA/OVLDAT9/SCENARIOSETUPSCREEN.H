@@ -1,5 +1,5 @@
 #ifndef DATA_OVLDAT9_SCENARIOSETUPSCREEN_H
 #define DATA_OVLDAT9_SCENARIOSETUPSCREEN_H
-#include "COMMON/UNUSED.H"
-extern ResourceBank D_800E12D2[];
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+extern ResourceBank g_scenarioResultRowWidgetIds[];
 #endif

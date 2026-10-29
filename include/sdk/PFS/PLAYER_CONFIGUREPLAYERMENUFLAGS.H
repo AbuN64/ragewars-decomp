@@ -1,7 +1,7 @@
 #ifndef SDK_PFS_PLAYER_CONFIGUREPLAYERMENUFLAGS_H
 #define SDK_PFS_PLAYER_CONFIGUREPLAYERMENUFLAGS_H
 #include "COMMON/ACTORRECAT260.H"
-extern void func_80443BCC_de(void);
-extern void Player_ConfigurePlayerMenuFlags(ObjectRecAt1C *object);
-extern void Player_SetFragTagItemFlag(struct RecordRecAtCV3 *record);
+extern void Player_MenuFlagsNoOp(void);
+extern void Player_ConfigurePlayerMenuFlags(PlayerMenuFlagContext *object);
+extern void Player_SetFragTagItemFlag(struct MenuPromptKindView *record);
 #endif

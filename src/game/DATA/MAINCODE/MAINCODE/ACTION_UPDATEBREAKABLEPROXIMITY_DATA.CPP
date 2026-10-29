@@ -11,13 +11,13 @@ const unsigned int rodata_func_8020402C_eu_x_800C1D30[1] = {
 
 /* DATA_80202C98.CPP */
 #if defined(VERSION_US)
-char rodata_unresolved_80202C98[8] =
+char s_ActionUpdatebreakableproximityYObjectTText[8] =
     "yObjectT";
 #endif
 
 #if defined(VERSION_DE)
 /* ROM-grounded data for de; supplied-list member has no us-rev1 placement. */
-unsigned int D_blob_9ace5635f896c825499f[2] = {
+unsigned int g_ActionUpdatebreakableproximityEncodedWords[2] = {
     0x5B735181, 0xB703BE02,
 };
 #endif

@@ -2,7 +2,7 @@
 #include "abi.h"
 #include "TYPES.H"
 #include "acmd.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 
@@ -78,17 +78,17 @@ Acmd *alAuxBusPull(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset
 #endif
 
 s32 alAuxBusParam(ObjalAuxBusParam *bus, s32 operation, s32 source) {
-    int new_var;
+    int sourceCount;
     s32 *base;
     s32 count;
 
     base = bus->base;
     if (operation == 2) {
-        new_var = bus->count;
-        count = new_var;
+        sourceCount = bus->count;
+        count = sourceCount;
         base[count] = source;
-        new_var = count + 1;
-        bus->count = new_var;
+        sourceCount = count + 1;
+        bus->count = sourceCount;
     }
     return 0;
 }

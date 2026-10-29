@@ -8,6 +8,6 @@ void Audio_WriteSignalProcessorStatus(unsigned int statusCommand) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BA044[12] =
+char s_startJumpMemberNameFragment[12] =
     "\000\020m_StartJum";
 #endif

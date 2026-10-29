@@ -1,4 +1,4 @@
-#include "COMMON/S1_6.H"
+#include "COMMON/RESERVED_SHARED_DECLARATIONS.H"
 #include "TYPES.H"
 #include "COMMON/SCREEN.H"
 #include "COMMON/GAME_SESSION.H"
@@ -24,9 +24,9 @@ s32 Frontend_AcknowledgePage67Event(void) {
 }
 
 /* 8042E080_93.CPP */
-/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x3D8 clears D_80146894, calls Tsmos_DeactivateControllerState, then calls Frontend_StartMenuImageTransition on D_800E5558 when ScenarioSetup_StartRandomCupStage reports non-zero or else func_8040C428_de with zero and SmXlate_SwitchScreen with 0x14; 0x3D9 calls SmXlate_SwitchScreen with one. Returns zero.
+/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x3D8 clears g_simpleObjectPauseState, calls Tsmos_DeactivateControllerState, then calls Frontend_StartMenuImageTransition on g_residentChoiceScreen when ScenarioSetup_StartRandomCupStage reports non-zero or else func_8040C428_de with zero and SmXlate_SwitchScreen with 0x14; 0x3D9 calls SmXlate_SwitchScreen with one. Returns zero.
    Adapted from Frontend_ActivatePauseMenuAction with the message numbers and the arms changed. */
-extern s32 D_800E5558;
+extern s32 g_residentChoiceScreen;
 extern void Tsmos_DeactivateControllerState(void);
 extern s32 ScenarioSetup_StartRandomCupStage(void);
 extern void Frontend_StartMenuImageTransition(s32);
@@ -47,13 +47,13 @@ s32 Frontend_HandlePage67Choice(void) {
         SmXlate_SwitchScreen(1);
         return 0;
     case MENU_8043659C_984:
-        D_8011FAC0.clockPaused = 0;
+        g_gameSession.clockPaused = 0;
         Tsmos_DeactivateControllerState();
         if (ScenarioSetup_StartRandomCupStage() == 0) {
             Frontend_RequestScreenMode(0);
             SmXlate_SwitchScreen(0x14);
         } else {
-            Frontend_StartMenuImageTransition(D_800E5558);
+            Frontend_StartMenuImageTransition(g_residentChoiceScreen);
         }
         return 0;
     }
@@ -62,33 +62,33 @@ s32 Frontend_HandlePage67Choice(void) {
 
 /* 8042E080_94.CPP */
 #if !(defined(VERSION_US))
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5628, an actor kind at D_800E562C and a handler at D_800E5630: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_residentEventEntries, an actor kind at g_residentActorEventKinds and a handler at g_residentActorEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler80436634)(void *, s32, s32, s32, s32);
 
-extern FieldRow D_800E5628[];
-extern FieldRow D_800E562C[];
-extern Handler80436634 D_800E5630;
+extern FieldRow g_residentEventEntries[];
+extern FieldRow g_residentActorEventKinds[];
+extern Handler80436634 g_residentActorEventHandlers;
 
-s32 Frontend_DispatchResidentActorEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchResidentActorEvent(void *menuActor, s32 eventKind, s32 eventDataOne, s32 eventDataTwo, s32 eventDataThree) {
     Handler80436634 *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E5630 != 0) {
+    if (g_residentActorEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E5630;
+        entry = &g_residentActorEventHandlers;
         index = 0;
         do {
-            if (D_800E5628[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E562C[index].value;
+            if (g_residentEventEntries[index].value == eventKind) {
+                actor = menuActor;
+                actor_kind = actor->input;
+                table_kind = g_residentActorEventKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(menuActor, eventKind, eventDataOne, eventDataTwo, eventDataThree);
                 }
             }
             entry += 3;

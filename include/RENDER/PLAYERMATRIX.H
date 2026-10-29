@@ -4,13 +4,13 @@
 #include "WORLD/INTEGERSTATE170.H"
 
 extern void Device_BuildPlayerMatrix(void *object, void *state);
-extern void func_80207A90_de(void *actor, s32 *stateFlags);
+extern void PlayerMatrix_ClearUnsupportedOpenFlag(void *actor, s32 *stateFlags);
 
-extern void func_80207EEC_de(void *event);
-extern void func_80207F90_de(void *object);
-extern void func_80207C68_de(void *actor, s32 *stateFlags);
-extern void func_80207F60_de(void *event);
-extern void func_80207FC4_de(char *object, unsigned int *flags);
-extern void func_80207FA0_de(struct LevelActor *actor, struct ActorMotionState *motionState);
-extern int func_80207FE4_de(void * player);
+extern void PlayerMatrix_EnableEventActor(void *event);
+extern void PlayerMatrix_EnableCollisionFlags(void *object);
+extern void PlayerMatrix_ClearUnsupportedCloseFlag(void *actor, s32 *stateFlags);
+extern void PlayerMatrix_DisableEventActor(void *event);
+extern void PlayerMatrix_MarkCloseRequested(char *object, unsigned int *flags);
+extern void PlayerMatrix_MarkOpenAndResetTimer(struct LevelActor *actor, struct ActorMotionState *motionState);
+extern int PlayerMatrix_ClearCollisionBit(void * player);
 #endif

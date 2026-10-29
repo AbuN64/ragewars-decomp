@@ -28,11 +28,11 @@ void Libsn_CopyPortToWordMemory(s32 source, s32 destination, u32 count) {
 }
 
 /* 80200800_3.CPP */
-void Libsn_WritePortByte(s32 arg0, unsigned char arg1)
+void Libsn_WritePortByte(s32 address, unsigned char byteValue)
 {
-  s32 temp_s0;
-  s32 temp_s2;
-  temp_s2 = ((~arg0) & 3) * 8;
-  arg0 &= ~3;
-  Libsn_WritePortWord(arg0, (Libsn_ReadPortWord(arg0) & (~(0xFF << temp_s2))) | ((arg1 & 0xFF) << temp_s2));
+  s32 unusedInteger1;
+  s32 byteShift;
+  byteShift = ((~address) & 3) * 8;
+  address &= ~3;
+  Libsn_WritePortWord(address, (Libsn_ReadPortWord(address) & (~(0xFF << byteShift))) | ((byteValue & 0xFF) << byteShift));
 }

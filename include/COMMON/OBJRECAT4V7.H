@@ -3,80 +3,80 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
-struct ObjRecAt4V7;
-typedef struct ObjRecAt4V7 ObjRecAt4V7;
+struct AttachmentEffectBinding;
+typedef struct AttachmentEffectBinding AttachmentEffectBinding;
 
-extern float D_800C4758_de;
+extern float g_fullFixedMatrixElement13ConversionConstants;
 
-extern float D_800C4810_de;
+extern float g_randomDirectionZRangeConstants;
 
-extern float D_800C46EC_de;
+extern float g_matrixUnpackHomogeneousScale;
 
-extern float D_800C4710_de;
+extern float g_fullFixedMatrixElement4ConversionConstants;
 
-extern float D_800C4780_de;
+extern float g_affineFixedMatrixElement2ConversionConstants;
 
 extern void Geometry_SetPrimitiveColorOverride(unsigned char first, unsigned char second, unsigned char third, unsigned char fourth);
 
-extern float D_800C4828_de;
+extern float g_quaternionOppositeDirectionThreshold;
 
 struct Node8026E4F8;
 typedef struct Node8026E4F8 Node8026E4F8;
 
-extern float D_800C4830_de;
+extern float g_quaternionAxisNormalizeScale;
 
-struct func_8026E5E0_S3;
-typedef struct func_8026E5E0_S3 func_8026E5E0_S3;
+struct AttachmentEffectActorView;
+typedef struct AttachmentEffectActorView AttachmentEffectActorView;
 
-extern float D_800C4730_de;
+extern float g_fullFixedMatrixElement8ConversionConstants;
 
-extern float D_800C47D0_de;
+extern float g_quaternionMatrixUnitScale;
 
 
-extern float D_800C47C8_de;
+extern float g_affineFixedMatrixElement14ConversionConstants;
 
-extern float D_800C47A8_de;
+extern float g_affineFixedMatrixElement9ConversionConstants;
 
-extern float D_800C4790_de;
+extern float g_affineFixedMatrixElement5ConversionConstants;
 
-extern float D_800C4738_de;
+extern float g_fullFixedMatrixElement9ConversionConstants;
 
-extern float D_800C47E0_de;
+extern float g_quaternionInterpolationThresholdConstants;
 
-extern float D_800C98C8;
+extern float g_matrixAndSlerpUnitConstants;
 
 extern void Geometry_SwitchRenderMicrocode(void);
 
-extern float D_800C4708_de;
+extern float g_fullFixedMatrixElement3ConversionConstants;
 
-extern float D_800C4700_de;
+extern float g_fullFixedMatrixElement2ConversionConstants;
 
-extern float D_800C4720_de;
+extern float g_fullFixedMatrixElement6ConversionConstants;
 
-struct ObjRecAt4V7;
+struct AttachmentEffectBinding;
 
-extern unsigned char D_800CC3AB;
+extern unsigned char g_primitiveColorOverrideBlue;
 
-extern float D_800C482C_de;
+extern float g_quaternionParallelDirectionThreshold;
 
-extern float D_800C4818_de;
+extern float g_quaternionNormalizeConstants;
 
-extern unsigned char D_800CC3A8;
+extern unsigned char g_primitiveColorOverrideEnabled;
 
-extern float D_800C4788_de;
+extern float g_affineFixedMatrixElement4ConversionConstants;
 
-struct BoxRecAtC;
-typedef struct BoxRecAtC BoxRecAtC;
+struct ModelBoundingBox;
+typedef struct ModelBoundingBox ModelBoundingBox;
 
 struct TreeNode;
 
-extern unsigned char D_800CC3AA;
+extern unsigned char g_primitiveColorOverrideGreen;
 
-extern float D_800C4740_de;
+extern float g_fullFixedMatrixElement10ConversionConstants;
 
-extern float D_800C47C0_de;
+extern float g_affineFixedMatrixElement13ConversionConstants;
 
-extern float D_800C4808_de;
+extern float g_randomDirectionRotationNormalizeConstants;
 
 extern void Geometry_ClearMaterialGroups(void);
 
@@ -88,82 +88,82 @@ struct Node8026E4F8 {
     struct Node8026E4F8 *right;
 };
 
-extern float D_800C47F8_de;
+extern float g_randomDirectionPairNormalizeConstants;
 
-extern float D_800C4798_de;
+extern float g_affineFixedMatrixElement6ConversionConstants;
 
 struct TreeNode;
 typedef struct TreeNode TreeNode;
 
-extern float D_800C4800_de;
+extern float g_randomDirectionYRangeConstants;
 
-extern void *Geometry_FindMaterialNodeOrParent(Node8026E4F8 **arg0, u32 arg1);
+extern void *Geometry_FindMaterialNodeOrParent(Node8026E4F8 **root, u32 materialKey);
 
-extern float D_800C4718_de;
+extern float g_fullFixedMatrixElement5ConversionConstants;
 
-extern float D_800C47A0_de;
+extern float g_affineFixedMatrixElement8ConversionConstants;
 
-extern float D_800C4728_de;
+extern float g_fullFixedMatrixElement7ConversionConstants;
 
-struct func_8026E5E0_S1;
+struct ModelAttachmentEffect;
 
-extern float D_800C4750_de;
+extern float g_fullFixedMatrixElement12ConversionConstants;
 
 extern void Geometry_ResetDisplayListState(int *state);
 
-extern float D_800C4768_de;
+extern float g_fullFixedMatrixElement15ConversionConstants;
 
-extern float D_800C46F8_de;
+extern float g_fullFixedMatrixElement1ConversionConstants;
 
-extern float D_800C4778_de;
+extern float g_affineFixedMatrixElement1ConversionConstants;
 
 extern void Geometry_LoadRenderMicrocode(void);
 
-struct func_8026E5E0_S1;
-typedef struct func_8026E5E0_S1 func_8026E5E0_S1;
+struct ModelAttachmentEffect;
+typedef struct ModelAttachmentEffect ModelAttachmentEffect;
 
-extern float D_800C47E8_de;
+extern float g_quaternionSlerpUnitScale;
 
-extern float D_800C47EC_de;
+extern float g_randomDirectionNormalizeScale;
 
-extern void Geometry_RefreshMaterialResources(void **arg0);
+extern void Geometry_RefreshMaterialResources(void **modelResource);
 
-struct BoxRecAtC;
-struct BoxRecAtC {
+struct ModelBoundingBox;
+struct ModelBoundingBox {
     f32 min[3];
     f32 max[3];
 };
 
-extern unsigned char D_800CC3A9;
+extern unsigned char g_primitiveColorOverrideRed;
 
 
-extern float D_800C4770_de;
+extern float g_affineFixedMatrixElement0ConversionConstants;
 
-extern float D_800C4820_de;
+extern float g_quaternionIdentityW;
 
 
-extern float D_800C47F0_de;
+extern float g_inputDirectionNormalizeScale;
 
-extern float D_800C4760_de;
+extern float g_fullFixedMatrixElement14ConversionConstants;
 
-extern float D_800C4748_de;
+extern float g_fullFixedMatrixElement11ConversionConstants;
 
 struct AttachmentTable;
 typedef struct AttachmentTable AttachmentTable;
 
-extern float D_800C4824_de;
+extern float g_quaternionDirectionUnitScale;
 
-extern float D_800C98C4;
+extern float g_quaternionInterpolationUnitScale;
 
 struct AttachmentTable;
 
-extern float D_800C4834_de;
+extern float g_quaternionHalfAngleScale;
 
-extern float D_800C47B0_de;
+extern float g_affineFixedMatrixElement10ConversionConstants;
 
-struct func_8026E5E0_S3;
+struct AttachmentEffectActorView;
 
-extern float D_800C47B8_de;
+extern float g_affineFixedMatrixElement12ConversionConstants;
 
 
 /* Reference stored in section zero of a resource entry. */

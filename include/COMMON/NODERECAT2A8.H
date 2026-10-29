@@ -5,24 +5,24 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 
-extern int D_800CC37C;
+extern int g_geometryTexturePerspectiveOverride;
 
-extern int D_800DE898;
-
-struct Shared_PakMenu;
-
+extern int g_frontendViDitherFilterEnabled;
 
 struct Shared_PakMenu;
 
 
-struct NodeRecAt2A8;
-typedef struct NodeRecAt2A8 NodeRecAt2A8;
+struct Shared_PakMenu;
 
-struct ActionRecAt24;
-typedef struct ActionRecAt24 ActionRecAt24;
 
-struct ShapeRecAt18V2;
-struct ShapeRecAt18V2 {
+struct FrontendScreenViewport;
+typedef struct FrontendScreenViewport FrontendScreenViewport;
+
+struct PakCancelActionView;
+typedef struct PakCancelActionView PakCancelActionView;
+
+struct FrontendVideoModeParameters;
+struct FrontendVideoModeParameters {
     int field_0;
     int field_4;
     int field_8;
@@ -32,24 +32,24 @@ struct ShapeRecAt18V2 {
     int field_18;
 };
 
-extern int D_800DE8A0[];
+extern int g_frontendVideoModeCounts[];
 
 
-struct ModeRecAt8;
-struct ModeRecAt8 {
+struct FrontendVideoDimensions;
+struct FrontendVideoDimensions {
     int width;
     int height;
     int rest[5];
 };
 
-extern int D_800CC378;
+extern int g_geometryTextureFilterOverride;
 
 struct Shared_PakMenu;
 
-struct NodeRecAt2A8;
-struct NodeRecAt2A8 {
+struct FrontendScreenViewport;
+struct FrontendScreenViewport {
     int unused;
-    struct NodeRecAt2A8 *next;
+    struct FrontendScreenViewport *next;
     char pad[0x294];
     float width;
     float height;
@@ -57,10 +57,10 @@ struct NodeRecAt2A8 {
     int y;
 };
 
-struct ActionRecAt24;
-struct ActionRecAt24 {
+struct PakCancelActionView;
+struct PakCancelActionView {
     char a[0x1C];
-    ObjRecAt5DC *unk1C;
+    ActorOwnerView *unk1C;
     s32 unk20;
     s32 unk24;
 };
@@ -71,8 +71,8 @@ extern int g_frontendStartupState;
 struct Shared_PakMenu;
 
 
-struct ModeRecAt8;
-typedef struct ModeRecAt8 ModeRecAt8;
+struct FrontendVideoDimensions;
+typedef struct FrontendVideoDimensions FrontendVideoDimensions;
 
 
 

@@ -5,7 +5,7 @@
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-extern char *D_auto_800DDB08[];
+extern char *g_optionsLocalizedShortcutText[];
 extern void MarkMenuEventHandled(void *);
 extern void *Node_FindWidgetByResourceId(void *, s32);
 extern s32 SoundElement_PlayFlatSound(s32);
@@ -15,8 +15,8 @@ typedef struct { u8 pad0[0x38]; char *text; } LangItemEu;
 s32 Frontend_SelectPreviousLanguage(void *window, s32 b, s32 c, s32 press) {
     MarkMenuEventHandled(window);
     if (press == 1) {
-        D_801462C8.language = D_801462C8.language == 0 ? 2 : D_801462C8.language - 1;
-        ((LangItemEu *)Node_FindWidgetByResourceId(window, 0x5E))->text = D_auto_800DDB08[g_languageIndex];
+        g_gameSettings.language = g_gameSettings.language == 0 ? 2 : g_gameSettings.language - 1;
+        ((LangItemEu *)Node_FindWidgetByResourceId(window, 0x5E))->text = g_optionsLocalizedShortcutText[g_languageIndex];
         SoundElement_PlayFlatSound(0xE81);
     }
     return 0;
@@ -32,8 +32,8 @@ INCLUDE_ASM("ovl_80400000", Frontend_SelectPreviousLanguage);
 s32 Frontend_SelectNextLanguage(void *window, s32 b, s32 c, s32 press) {
     MarkMenuEventHandled(window);
     if (press == 1) {
-        D_801462C8.language = D_801462C8.language == 2 ? 0 : D_801462C8.language + 1;
-        ((LangItemEu *)Node_FindWidgetByResourceId(window, 0x5E))->text = D_auto_800DDB08[g_languageIndex];
+        g_gameSettings.language = g_gameSettings.language == 2 ? 0 : g_gameSettings.language + 1;
+        ((LangItemEu *)Node_FindWidgetByResourceId(window, 0x5E))->text = g_optionsLocalizedShortcutText[g_languageIndex];
         SoundElement_PlayFlatSound(0xE81);
     }
     return 0;

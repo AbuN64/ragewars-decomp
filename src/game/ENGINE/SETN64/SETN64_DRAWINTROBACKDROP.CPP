@@ -2,13 +2,13 @@
 #include "RENDER/SETN64_DRAWINTROBACKDROP.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "gbi.h"
 #include "COMMON/WORLD.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/MENURECAT24.H"
 #include "RENDER/TIMED_SESSION_TRANSITIONS.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
@@ -19,7 +19,7 @@ extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_a
 
 
 
-extern u8 D_801468A0;
+extern u8 g_matchRoundCounters;
 
 
 extern u32 Defs_GetMemorySize(void);
@@ -37,27 +37,27 @@ extern Gfx *g_displayListCursor;
 
 
 
-/* Clears D_800D29C8 when SetN64_CheckTimedSessionTransition accepts its argument with 4.0 and two fours. */
+/* Clears g_expansionMemoryIntroEnabled when SetN64_CheckTimedSessionTransition accepts its argument with 4.0 and two fours. */
 
 /** Perform no work for callers at VRAM 0x80293DDC. */
 void SetN64_OnMode5DrawComplete(s32 session) {
 }
 
 void SetN64_InitializeFrontendScreenState(GameSession *gameSession) {
-    D_800E28C8 = -1;
+    g_introSelectedItem = -1;
     D_80146D70 = 0;
     Frontend_RequestScreenMode(0);
-    D_800CD774 = 1;
+    g_frontendScreenInitialized = 1;
     D_80146D60 = 1;
     D_800E28CC = 1;
     D_8014AD94 = 0;
-    gameSession->timer = D_800C54C0_de;
+    gameSession->timer = g_introInitialFadeTimer;
     SmXlate_SwitchScreen(0x1D);
 }
 
-void SetN64_ExitSessionAndDisablePaks(void *arg0) {
+void SetN64_ExitSessionAndDisablePaks(void *session) {
     if (D_8014ADA0 != 0) {
-        SetN64_SetTransitionTarget(arg0, 1);
+        SetN64_SetTransitionTarget(session, 1);
         Control_DisableAllControllerPaks();
     }
 }
@@ -70,21 +70,21 @@ void SetN64_DrawRoundTimeoutSession(GameSession *session) {
 void SetN64_ResetSceneForIntro(void *owner) {
     s8 *p1;
     s8 *p2;
-    int new_var;
+    int memoryBytes;
 
-    func_8025E2D4_de(0);
-    new_var = 0x5D8;
-    p1 = ((s8 *)(&D_801468A0)) - new_var;
-    ((struct IntegerStateB0 *) ((char *) (&D_801468A0)))->unk_AC = 0;
-    ((struct IntegerStateB0 *) ((char *) (&D_801468A0)))->unk_88 = 0;
+    SoundElement_SetMusicPlaybackEnabled(0);
+    memoryBytes = 0x5D8;
+    p1 = ((s8 *)(&g_matchRoundCounters)) - memoryBytes;
+    ((struct IntegerStateB0 *) ((char *) (&g_matchRoundCounters)))->unk_AC = 0;
+    ((struct IntegerStateB0 *) ((char *) (&g_matchRoundCounters)))->unk_88 = 0;
     p1[0xB2] = 1;
     p1[0x1D] = 0;
     p1[0x1E] = 1;
     SetN64_ResetSessionPlayerPools(owner, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
-    p2 = ((s8 *)(&D_801468A0)) - 0x1818;
+    p2 = ((s8 *)(&g_matchRoundCounters)) - 0x1818;
     Pools_ResetActorPools(p2, 1);
-    ((IntegerState164 *)(p2))->unk_160 = 0;
+    ((IntroBackdropStateView *)(p2))->unk_160 = 0;
     Textload_SetTextureEffect(0);
 }
 
@@ -95,19 +95,19 @@ void SetN64_AdvanceIntroForMemorySize(GameSession *session) {
 
     result = Defs_GetMemorySize();
     eight = 4;
-    if ((result > 0x400000U) && (D_800D29C8 != 0)) {
+    if ((result > 0x400000U) && (g_expansionMemoryIntroEnabled != 0)) {
         eight = 3;
     }
-    if (session->transitionTime > D_800C54C4_de) {
-        D_800CD77C = 0;
+    if (session->transitionTime > g_introTransitionDelay) {
+        g_introExitPending = 0;
     }
-    if (D_800CD77C != 0) {
+    if (g_introExitPending != 0) {
         call_result = SetN64_CheckTimedSessionTransition(session, 12.0f, eight, -1);
     } else {
         call_result = SetN64_CheckTimedSessionTransition(session, 12.0f, eight, eight);
     }
     if (call_result != 0) {
-        D_800CD77C = 0;
+        g_introExitPending = 0;
     }
 }
 
@@ -118,11 +118,11 @@ void SetN64_DrawIntroBackdrop(void) {
 
     width = 0;
     height = 0;
-    gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
+    gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, g_hudReferenceViewportWidth, (u32)g_currentRenderFrame->colorImage);
     OnScreen_GetImageDimensions(0x388, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
         Onscrn_SetupSpriteMode(0xFA);
-        OnScreen_DrawSpriteResource(0x388, 0, 0, 0, (f32)D_800E28D0 / (f32)width, (f32)D_800E28D4 / (f32)height, 1);
+        OnScreen_DrawSpriteResource(0x388, 0, 0, 0, (f32)g_hudReferenceViewportWidth / (f32)width, (f32)g_hudReferenceViewportHeight / (f32)height, 1);
     }
 }
 
@@ -132,7 +132,7 @@ void SetN64_ClearSessionPlayerPools(void *owner) {
 
 void SetN64_AdvanceToModeFour(struct GameSession *value) {
     if (SetN64_CheckTimedSessionTransition(value, 4.0f, 4, 4) != 0) {
-        D_800D29C8 = 0;
+        g_expansionMemoryIntroEnabled = 0;
     }
 }
 

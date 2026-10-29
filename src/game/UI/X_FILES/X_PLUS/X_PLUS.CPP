@@ -6,7 +6,7 @@
 #include "COMMON/MESSAGESEMAPHORE.H"
 #include "RESMGR/X_PLUS.H"
 #include "include_asm.h"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "stddef.h"
 #include "RESMGR/resmgr_string_memory.H"
 #include "sdk/os.h"
@@ -86,7 +86,7 @@ char *XPlus_MoveMemory(char *dst, const char *src, s32 n) {
     return dst;
 }
 
-f64 XPlus_ParseDecimalDouble(u8 *arg0) {
+f64 XPlus_ParseDecimalDouble(u8 *text) {
     f64 sign;
     f64 divisor;
     f64 value;
@@ -96,76 +96,76 @@ f64 XPlus_ParseDecimalDouble(u8 *arg0) {
     f64 scale;
     f64 threshold;
 
-    sign = D_800C5CD0_de;
-    fraction = D_800C5CD8_de;
+    sign = k_decimalInitialSign;
+    fraction = k_decimalInitialFraction;
     divisor = sign;
-    if (*arg0 == 0x20) {
+    if (*text == 0x20) {
         do {
-            arg0++;
-        } while (*arg0 == 0x20);
+            text++;
+        } while (*text == 0x20);
     }
-    if (*arg0 == 0x2D) {
-        arg0++;
-        sign = D_800C5CE0_de;
+    if (*text == 0x2D) {
+        text++;
+        sign = k_decimalNegativeSign;
     }
-    if (*arg0 == 0x2B) {
-        arg0++;
+    if (*text == 0x2B) {
+        text++;
     }
 
-    value = D_800C5CE8_de;
-    if ((u32)(*arg0 - 0x30) < 10) {
+    value = k_decimalInitialInteger;
+    if ((u32)(*text - 0x30) < 10) {
         do {
-            value = value * D_800C5CF0_de + (f64)(*arg0 - 0x30);
-            arg0++;
-        } while ((u32)(*arg0 - 0x30) < 10);
+            value = value * k_decimalIntegerRadix + (f64)(*text - 0x30);
+            text++;
+        } while ((u32)(*text - 0x30) < 10);
     }
 
-    if (*arg0 == 0x2E) {
-        arg0++;
-        fraction = D_800C5CF8_de;
-        if ((u32)(*arg0 - 0x30) < 10) {
+    if (*text == 0x2E) {
+        text++;
+        fraction = k_decimalFractionZero;
+        if ((u32)(*text - 0x30) < 10) {
             do {
-                divisor *= D_800C5D00_de;
-                fraction = fraction * D_800C5D00_de + (f64)(*arg0 - 0x30);
-                arg0++;
-            } while ((u32)(*arg0 - 0x30) < 10);
+                divisor *= k_decimalFractionRadix;
+                fraction = fraction * k_decimalFractionRadix + (f64)(*text - 0x30);
+                text++;
+            } while ((u32)(*text - 0x30) < 10);
         }
     }
 
-    if (*arg0 == 0x65 || *arg0 == 0x45) {
-        arg0++;
-        exponentSign = D_800C5D08_de;
-        if (*arg0 == 0x2D) {
-            arg0++;
-            exponentSign = D_800C5D10_de;
+    if (*text == 0x65 || *text == 0x45) {
+        text++;
+        exponentSign = k_decimalInitialExponentSign;
+        if (*text == 0x2D) {
+            text++;
+            exponentSign = k_decimalNegativeExponentSign;
         }
-        if (*arg0 == 0x2B) {
-            arg0++;
+        if (*text == 0x2B) {
+            text++;
         }
-        exponent = D_800C5D18_de;
-        if ((u32)(*arg0 - 0x30) < 10) {
+        exponent = k_decimalInitialExponent;
+        if ((u32)(*text - 0x30) < 10) {
             do {
-                exponent = exponent * D_800C5D20_de + (f64)(*arg0 - 0x30);
-                arg0++;
-            } while ((u32)(*arg0 - 0x30) < 10);
+                exponent = exponent * k_decimalExponentRadix + (f64)(*text - 0x30);
+                text++;
+            } while ((u32)(*text - 0x30) < 10);
         }
-        if (exponent < D_800C5D28_de) {
-            threshold = D_800C5D30_de;
-            scale = D_800C5D38_de;
+        if (exponent < k_decimalDirectExponentLimit) {
+            threshold = k_decimalExponentLoopLimit;
+            scale = k_decimalInitialExponentScale;
             if (exponent == threshold) {
                 goto compare_sign;
             } else {
                 do {
-                    scale *= D_800C5D40_de;
-                    exponent -= D_800C5D38_de;
+                    scale *= k_decimalExponentScaleRadix;
+                    exponent -= k_decimalInitialExponentScale;
                 } while (exponent != threshold);
             }
             goto set_threshold;
         } else {
-            scale = XMath_PowerDouble(D_800C5D48_de, exponent);
+            scale = XMath_PowerDouble(k_decimalPowerRadix, exponent);
         }
 set_threshold:
-        threshold = D_800C5D50_de;
+        threshold = k_decimalOverflowExponentLimit;
 compare_sign:
         if (exponentSign < threshold) {
             return sign * (value + fraction / divisor) / scale;
@@ -271,7 +271,7 @@ void XPlus_SplitPath(u8 *path, u8 *drive, u8 *dir, u8 *name, u8 *ext) {
     }
 }
 
-/* Quick-sorts the elements between base and max for XPlus_SortArray (the qsort helper qst): picks the median of the first, middle and last elements as the pivot when the span reaches the six-element threshold D_8014D0C8, partitions around it with the comparator D_8014D0CC swapping D_8014D0C0 bytes at a time, then recurses into the smaller side and loops on the larger while it spans at least D_8014D0C4 bytes. Written from the BSD qsort qst structure with the halving shift unsigned. */
+/* Quick-sorts the elements between base and max for XPlus_SortArray (the qsort helper qst): picks the median of the first, middle and last elements as the pivot when the span reaches the six-element threshold g_xplusSortMedianThreshold, partitions around it with the comparator g_xplusSortComparator swapping g_xplusSortElementSize bytes at a time, then recurses into the smaller side and loops on the larger while it spans at least g_xplusSortPartitionThreshold bytes. Written from the BSD qsort qst structure with the halving shift unsigned. */
 
 void XPlus_PartitionSortRange(char *base, char *max) {
     char c;
@@ -286,17 +286,17 @@ void XPlus_PartitionSortRange(char *base, char *max) {
 
     lo = max - base;
     do {
-        mid = i = base + D_8014D0C0 * ((unsigned)(lo / D_8014D0C0) >> 1);
-        if (lo >= D_8014D0C8) {
-            j = (D_8014D0CC((jj = base), i) > 0 ? jj : i);
-            if (D_8014D0CC(j, (tmp = max - D_8014D0C0)) > 0) {
+        mid = i = base + g_xplusSortElementSize * ((unsigned)(lo / g_xplusSortElementSize) >> 1);
+        if (lo >= g_xplusSortMedianThreshold) {
+            j = (g_xplusSortComparator((jj = base), i) > 0 ? jj : i);
+            if (g_xplusSortComparator(j, (tmp = max - g_xplusSortElementSize)) > 0) {
                 j = (j == jj ? i : jj);
-                if (D_8014D0CC(j, tmp) < 0) {
+                if (g_xplusSortComparator(j, tmp) < 0) {
                     j = tmp;
                 }
             }
             if (j != i) {
-                ii = D_8014D0C0;
+                ii = g_xplusSortElementSize;
                 do {
                     c = *i;
                     *i++ = *j;
@@ -304,21 +304,21 @@ void XPlus_PartitionSortRange(char *base, char *max) {
                 } while (--ii);
             }
         }
-        for (i = base, j = max - D_8014D0C0;;) {
-            while (i < mid && D_8014D0CC(i, mid) <= 0) {
-                i += D_8014D0C0;
+        for (i = base, j = max - g_xplusSortElementSize;;) {
+            while (i < mid && g_xplusSortComparator(i, mid) <= 0) {
+                i += g_xplusSortElementSize;
             }
             while (j > mid) {
-                if (D_8014D0CC(mid, j) <= 0) {
-                    j -= D_8014D0C0;
+                if (g_xplusSortComparator(mid, j) <= 0) {
+                    j -= g_xplusSortElementSize;
                     continue;
                 }
-                tmp = i + D_8014D0C0;
+                tmp = i + g_xplusSortElementSize;
                 if (i == mid) {
                     mid = jj = j;
                 } else {
                     jj = j;
-                    j -= D_8014D0C0;
+                    j -= g_xplusSortElementSize;
                 }
                 goto swap;
             }
@@ -327,10 +327,10 @@ void XPlus_PartitionSortRange(char *base, char *max) {
             } else {
                 jj = mid;
                 tmp = mid = i;
-                j -= D_8014D0C0;
+                j -= g_xplusSortElementSize;
             }
 swap:
-            ii = D_8014D0C0;
+            ii = g_xplusSortElementSize;
             do {
                 c = *i;
                 *i++ = *jj;
@@ -338,23 +338,23 @@ swap:
             } while (--ii);
             i = tmp;
         }
-        i = (j = mid) + D_8014D0C0;
+        i = (j = mid) + g_xplusSortElementSize;
         if ((lo = j - base) <= (hi = max - i)) {
-            if (lo >= D_8014D0C4) {
+            if (lo >= g_xplusSortPartitionThreshold) {
                 XPlus_PartitionSortRange(base, j);
             }
             base = i;
             lo = hi;
         } else {
-            if (hi >= D_8014D0C4) {
+            if (hi >= g_xplusSortPartitionThreshold) {
                 XPlus_PartitionSortRange(i, max);
             }
             max = j;
         }
-    } while (lo >= D_8014D0C4);
+    } while (lo >= g_xplusSortPartitionThreshold);
 }
 
-/* Sorts n elements of the given size with a comparator (qsort): records the element size, the four- and six-element thresholds and the comparator in D_8014D0C0 to D_8014D0CC, quick-sorts arrays of four or more through XPlus_PartitionSortRange, swaps the smallest of the first elements into place as a sentinel, and finishes with an insertion sort that shifts bytes. Written from the BSD qsort driver structure. */
+/* Sorts n elements of the given size with a comparator (qsort): records the element size, the four- and six-element thresholds and the comparator in g_xplusSortElementSize to g_xplusSortComparator, quick-sorts arrays of four or more through XPlus_PartitionSortRange, swaps the smallest of the first elements into place as a sentinel, and finishes with an insertion sort that shifts bytes. Written from the BSD qsort driver structure. */
 
 void XPlus_SortArray(char *base, s32 n, s32 size, s32 (*compare)(char *a, char *b)) {
     char c;
@@ -368,36 +368,36 @@ void XPlus_SortArray(char *base, s32 n, s32 size, s32 (*compare)(char *a, char *
     if (n <= 1) {
         return;
     }
-    D_8014D0C4 = size * 4;
-    D_8014D0C8 = size * 6;
-    D_8014D0C0 = size;
-    D_8014D0CC = compare;
+    g_xplusSortPartitionThreshold = size * 4;
+    g_xplusSortMedianThreshold = size * 6;
+    g_xplusSortElementSize = size;
+    g_xplusSortComparator = compare;
     max = base + n * size;
     if (n >= 4) {
         XPlus_PartitionSortRange(base, max);
-        hi = base + D_8014D0C4;
+        hi = base + g_xplusSortPartitionThreshold;
     } else {
         hi = max;
     }
-    for (j = lo = base; (lo += D_8014D0C0) < hi;) {
-        if (D_8014D0CC(j, lo) > 0) {
+    for (j = lo = base; (lo += g_xplusSortElementSize) < hi;) {
+        if (g_xplusSortComparator(j, lo) > 0) {
             j = lo;
         }
     }
     if (j != base) {
-        for (i = base, hi = base + D_8014D0C0; i < hi;) {
+        for (i = base, hi = base + g_xplusSortElementSize; i < hi;) {
             c = *j;
             *j++ = *i;
             *i++ = c;
         }
     }
-    for (min = base; (hi = min += D_8014D0C0) < max;) {
-        while (D_8014D0CC(hi -= D_8014D0C0, min) > 0) {
+    for (min = base; (hi = min += g_xplusSortElementSize) < max;) {
+        while (g_xplusSortComparator(hi -= g_xplusSortElementSize, min) > 0) {
         }
-        if ((hi += D_8014D0C0) != min) {
-            for (lo = min + D_8014D0C0; --lo >= min;) {
+        if ((hi += g_xplusSortElementSize) != min) {
+            for (lo = min + g_xplusSortElementSize; --lo >= min;) {
                 c = *lo;
-                for (i = j = lo; (j -= D_8014D0C0) >= hi; i = j) {
+                for (i = j = lo; (j -= g_xplusSortElementSize) >= hi; i = j) {
                     *i = *j;
                 }
                 *i = c;
@@ -495,15 +495,15 @@ less:
 
 /* resmgr_string_memory.CPP */
 void XPlus_SeedRandomGenerator(int seed) {
-    D_800CD900 = seed;
+    g_xplusRandomState = seed;
 }
 
 s32 XPlus_NextRandomInteger(void) {
-    s32 temp_v0;
+    s32 nextState;
 
-    temp_v0 = (D_800CD900 * 0x343FD) + 0x269EC3;
-    D_800CD900 = temp_v0;
-    return (temp_v0 >> 0x10) & 0x7FFF;
+    nextState = (g_xplusRandomState * 0x343FD) + 0x269EC3;
+    g_xplusRandomState = nextState;
+    return (nextState >> 0x10) & 0x7FFF;
 }
 
 /** Return strlen(arg0) (byte count not including the terminating NUL). */

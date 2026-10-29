@@ -35,22 +35,22 @@ s32 Gfx_FormatFloatingPoint(u8 *buf, f64 input, s32 ch, s32 width, s32 precision
     *ip = 0;
     *ep = 0;
     value = input;
-    negative = value < D_800E1118;
+    negative = value < g_formatNegativeThreshold;
     if (negative) value = -value;
     if (prec >= 127) prec = 126;
     if (prec == 6) {
-        scale = D_800DD0F0;
+        scale = g_formatDefaultPrecisionScale;
     } else {
-        base = D_800DD0F8_de;
+        base = g_formatPositivePrecisionBase;
         pow_n = prec;
         if (pow_n == 0) {
-            scale = D_800E1130;
+            scale = g_formatZeroPrecisionScale;
         } else {
             if (pow_n < 0) {
                 pow_n = -pow_n;
-                base = D_800DD108_de;
+                base = g_formatNegativePrecisionBase;
             }
-            power = D_800DD110_de;
+            power = g_formatPrecisionPowerIdentity;
             for (;;) {
                 if (pow_n & 1) power *= base;
                 pow_n >>= 1;
@@ -61,9 +61,9 @@ s32 Gfx_FormatFloatingPoint(u8 *buf, f64 input, s32 ch, s32 width, s32 precision
         }
     }
     fixed = 0;
-    round = D_800E1148 / scale;
+    round = g_formatRoundingNumerator / scale;
     if (format == 'f' || (format == 'g' &&
-        (value == D_800DD120_de || (value >= D_800DD128_de && value < scale)))) {
+        (value == g_formatFixedZero || (value >= g_formatFixedMinimum && value < scale)))) {
         fixed = 1;
     }
     ni = 0;
@@ -73,14 +73,14 @@ s32 Gfx_FormatFloatingPoint(u8 *buf, f64 input, s32 ch, s32 width, s32 precision
         value = XMath_SplitDoubleFraction(value, &whole);
         if (value >= round || format != 'g') {
             value += round;
-            if (value >= D_800DD130_de) {
-                whole += D_800DD130_de;
-                value -= D_800DD130_de;
+            if (value >= g_formatFractionCarryUnit) {
+                whole += g_formatFractionCarryUnit;
+                value -= g_formatFractionCarryUnit;
             }
             frac = value;
             i = 0;
             if (i < prec) {
-                fixed_ten = D_800DD138_de;
+                fixed_ten = g_formatFractionDecimalBase;
                 do {
                     frac = XMath_SplitDoubleFraction(frac * fixed_ten, &digit);
                     nf++;
@@ -95,12 +95,12 @@ s32 Gfx_FormatFloatingPoint(u8 *buf, f64 input, s32 ch, s32 width, s32 precision
                 }
             }
         }
-        if (whole == D_800DD140_de) {
+        if (whole == g_formatIntegerZero) {
             if (format != 'g' || nf < prec || nf < width) {
                 *--ip = '0';
                 ni++;
             }
-        } else if (whole <= D_800DD148_de) {
+        } else if (whole <= g_formatDirectIntegerLimit) {
             n = (s32)whole;
             while (n != 0) {
                 *--ip = n % 10 + '0';
@@ -108,11 +108,11 @@ s32 Gfx_FormatFloatingPoint(u8 *buf, f64 input, s32 ch, s32 width, s32 precision
                 n /= 10;
             }
         } else {
-            if (whole > D_800DD150_de) {
-                fixed_limit = D_800DD150_de;
-                fixed_base = D_800DD158_de;
-                round = D_800DD160_de;
-                fixed_ten = D_800DD168_de;
+            if (whole > g_formatLargeIntegerLimit) {
+                fixed_limit = g_formatLargeIntegerLimit;
+                fixed_base = g_formatLargeIntegerReciprocalBase;
+                round = g_formatLargeIntegerRoundingBias;
+                fixed_ten = g_formatLargeIntegerDecimalBase;
                 do {
                     *--ip = (s32)((XMath_SplitDoubleFraction(whole * fixed_base, &whole) + round) * fixed_ten) + '0';
                     ni++;
@@ -154,43 +154,43 @@ s32 Gfx_FormatFloatingPoint(u8 *buf, f64 input, s32 ch, s32 width, s32 precision
         }
     } else {
         e = 0;
-        norm_ten = D_800DD170_de;
+        norm_ten = g_formatNormalizationDecimalBase;
         if (value >= norm_ten) {
-        sci_base = D_800DD178_de;
+        sci_base = g_formatScientificReciprocalBase;
         do {
             value *= sci_base;
             e++;
         } while (value >= norm_ten);
         }
-        sci_limit = D_800DD180_de;
-        sci_bias = D_800DD188_de - round;
+        sci_limit = g_formatScientificDigitLimit;
+        sci_bias = g_formatScientificRoundingBase - round;
         while (value > sci_limit) {
             if (value < sci_bias) {
-                value *= D_800DD190_de;
+                value *= g_formatScientificValueScale;
                 e--;
             } else break;
         }
         value = XMath_SplitDoubleFraction(value, &mantissa);
         if (format == 'g') {
             prec--;
-            scale *= D_800DD198_de;
-            round = D_800DD1A0 / scale;
+            scale *= g_formatScientificPrecisionScale;
+            round = g_formatScientificRoundingNumerator / scale;
         }
         if (value >= round || format != 'g') {
             value += round;
-            if (value >= D_800DD1A8_de) {
-                value -= D_800DD1A8_de;
-                mantissa += D_800DD1A8_de;
-                if (mantissa >= D_800DD1B0) {
+            if (value >= g_formatScientificFractionCarryUnit) {
+                value -= g_formatScientificFractionCarryUnit;
+                mantissa += g_formatScientificFractionCarryUnit;
+                if (mantissa >= g_formatMantissaCarryLimit) {
                     e++;
-                    mantissa *= D_800DD1B8;
-                    value *= D_800DD1B8;
+                    mantissa *= g_formatMantissaDecimalScale;
+                    value *= g_formatMantissaDecimalScale;
                 }
             }
             sci_frac = value;
             i = 0;
             if (i < prec) {
-                scale = D_800E11F0;
+                scale = g_formatScientificFractionDecimalBase;
                 do {
                     sci_frac = XMath_SplitDoubleFraction(sci_frac * scale, &mantissa_digit);
                     nf++;

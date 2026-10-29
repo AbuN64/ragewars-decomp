@@ -8,22 +8,22 @@
 #include "MULTI/PAK_ENTERPLAYEROPTIONS.H"
 
 #if !(defined(VERSION_US))
-/* Sets a player state to 2, then in multiplayer (D_801462E5) clears and otherwise sets bit 0x800000 in both of its actor's visibility masks at 0x80 and 0xA8, and refreshes the audio state through func_8025CC6C_de and func_8025CAB0_de with that mask. */
+/* Sets a player state to 2, then in multiplayer (g_motionVisibilitySettings) clears and otherwise sets bit 0x800000 in both of its actor's visibility masks at 0x80 and 0xA8, and refreshes the audio state through SoundVoicePool_GetGlobalState and SoundVoicePool_Pause with that mask. */
 
 
 
 
 
-extern s32 func_8025CC6C_de(s32 mask);
-extern void func_8025CAB0_de(s32 value);
+extern s32 SoundVoicePool_GetGlobalState(s32 mask);
+extern void SoundVoicePool_Pause(s32 value);
 
-void Pak_EnterPlayerOptions(PlayerRecAtC *player) {
+void Pak_EnterPlayerOptions(PlayerOptionsEntry *player) {
     s32 mask;
 
     player->state = 2;
     Control_SaveControllerSetup();
     mask = 0x800000;
-    if (D_801462C8.local != 0) {
+    if (g_gameSettings.local != 0) {
         mask = 0xFF7FFFFF;
         player->actor->mask80 &= mask;
         player->actor->maskA8 &= mask;
@@ -31,7 +31,7 @@ void Pak_EnterPlayerOptions(PlayerRecAtC *player) {
         player->actor->mask80 |= mask;
         player->actor->maskA8 |= mask;
     }
-    func_8025CAB0_de(func_8025CC6C_de(mask));
+    SoundVoicePool_Pause(SoundVoicePool_GetGlobalState(mask));
 }
 
 /* Calls func_8026495C_de and nothing else. */

@@ -120,8 +120,8 @@ struct Shared_ActorView {
     u8 padED4[0x11B4 - 0xED4];
     s32 actionState; /* 0x11B4 */
     u8 pad11B8[4];
-    s32 field11BC;
-    s32 field11C0;
+    s32 weaponSoundHandle;
+    s32 weaponLoopSoundHandle;
     u8 pad11C4[8];
     s32 field11CC;
     u8 pad11D0[8];
@@ -142,7 +142,7 @@ struct Shared_ActorView {
     s32 projectileBase; /* +0x121C: src/func_8021B468.c */
     s32 projectileIndex; /* +0x1220: src/func_8021B468.c */
     void * projectiles[2]; /* +0x1224: src/func_8021B468.c */
-    s32 field122C; /* +0x122C: src/func_8021B468.c */
+    s32 impulseFlags; /* +0x122C: src/func_8021B468.c */
     s32 field1230; /* +0x1230: src/func_8021B468.c */
     s32 field1234; /* +0x1234: src/func_8021B468.c */
     s32 field1238; /* +0x1238: src/func_8021B468.c */
@@ -162,7 +162,7 @@ struct Shared_ActorView {
     u8 messageHistory[5][0x15]; /* 0x1344 */
     u8 pad13AD[3];
     s32 messageIndex; /* 0x13B0 */
-    s32 *field13B4;
+    s32 *animationStateTable;
     s32 weaponChanged; /* 0x13B8 */
     s32 secondaryChanged;
     s32 specialChanged;
@@ -184,7 +184,7 @@ struct Shared_ActorView {
     u8 pad1640[0x16C4 - 0x1640];
     CVector3 resetPosition; /* 0x16C4: previous reset position */
     u8 pad16D0[4];
-    s32 field16D4;
+    s32 pickupEffectToggle;
     s16 field16D8;
     u8 pad16DA[6];
     struct Shared_ActorView * next; /* +0x16E0: src/func_8021B468.c */

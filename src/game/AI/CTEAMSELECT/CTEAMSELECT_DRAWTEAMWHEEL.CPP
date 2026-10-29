@@ -1,6 +1,6 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "MENU/TEAMMENU.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 /* Lays out the four team choices around the open menu and draws their icons. */
@@ -12,16 +12,16 @@
 extern f32 Graphu64_ApproachValue(f32, f32, f32);
 extern void Graphu64_IdentityMatrix(Matrix *);
 extern void RollMatrix(Matrix *, f32);
-extern void Cteamselect_DrawTeamIcons(MenuCteamselectDrawTeamWheel *, ItemRecAt18V1 *, s32, void *);
+extern void Cteamselect_DrawTeamIcons(MenuCteamselectDrawTeamWheel *, TeamMenuIconView *, s32, void *);
 
 void Cteamselect_DrawTeamWheel(MenuCteamselectDrawTeamWheel *menu, s32 unused1, void *player) {
     Matrix matrix;
     CVector3 position;
-    ItemRecAt18V1 items[4];
+    TeamMenuIconView items[4];
     CVector3 offset;
     s32 i;
-    SlotRecAt10 *slot;
-    ItemRecAt18V1 *item;
+    TeamMenuSlotView *slot;
+    TeamMenuIconView *item;
     f32 target;
 
     if (menu->active != 0) {
@@ -32,11 +32,11 @@ void Cteamselect_DrawTeamWheel(MenuCteamselectDrawTeamWheel *menu, s32 unused1, 
         for (i = 0; i < 4; i++) {
             slot = &menu->slots[i];
             if (i == menu->cursor) {
-                target = *(&D_800C9178_de + 1) * 1.3f;
+                target = *(&g_teamWheelScalePoolPrefix + 1) * 1.3f;
             } else {
-                target = *(&D_800C9178_de + 1);
+                target = *(&g_teamWheelScalePoolPrefix + 1);
             }
-            slot->scale = Graphu64_ApproachValue(slot->scale, target, *(&D_800C9178_de + 1) * 0.1f);
+            slot->scale = Graphu64_ApproachValue(slot->scale, target, *(&g_teamWheelScalePoolPrefix + 1) * 0.1f);
             Graphu64_IdentityMatrix(&matrix);
             RollMatrix(&matrix, slot->angle);
             Graphu64_TransformPoint(&matrix, &offset, &position);

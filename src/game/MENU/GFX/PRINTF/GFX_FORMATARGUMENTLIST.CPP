@@ -255,7 +255,7 @@ reswitch:
             }
             put(&out, buf, size);
             if (flags & 0x40) {
-                pad(&out, -width - size, D_800DF230_de);
+                pad(&out, -width - size, g_formatSpacePadding);
             }
             ret += width > size ? width : size;
             continue;
@@ -343,7 +343,7 @@ reswitch:
             base = 10;
             goto nosign;
         case 'X':
-            xdigs = D_800DD1DC;
+            xdigs = g_formatUppercaseHexDigits;
             goto hex;
         case 'x':
             xdigs = g_printfLowercaseHexDigits;
@@ -407,7 +407,7 @@ number:
             realsz += 2;
         }
         if ((flags & 0xC0) == 0) {
-            pad(&out, width - realsz, D_800DF230_de);
+            pad(&out, width - realsz, g_formatSpacePadding);
         }
         if (sign) {
             put(&out, &sign, 1);
@@ -417,16 +417,16 @@ number:
             put(&out, ox, 2);
         }
         if ((flags & 0xC0) == 0x80) {
-            pad(&out, width - realsz, D_800DF240);
+            pad(&out, width - realsz, g_formatZeroPadding);
         }
-        pad(&out, dprec - size, D_800DF240);
+        pad(&out, dprec - size, g_formatZeroPadding);
         put(&out, cp, size);
         if (flags & 0x40) {
-            pad(&out, width - realsz, D_800DF230_de);
+            pad(&out, width - realsz, g_formatSpacePadding);
         }
         ret += width > realsz ? width : realsz;
     }
 done:
-    put(&out, D_800DD1F0, 1);
+    put(&out, g_formatPercentText, 1);
     return ret;
 }

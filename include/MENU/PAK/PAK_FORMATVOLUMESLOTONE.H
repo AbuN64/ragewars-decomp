@@ -4,8 +4,8 @@
 extern s32 Pak_FormatVolumeSlotOne(struct Field *field);
 #include "COMMON/SHARED_GAMESLOT.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char *D_800D7DD4[];
+extern char *g_volumeOneValueLabel[];
 #else
-extern char *D_800D7DD4;
+extern char *g_volumeOneValueLabel;
 #endif
 #endif

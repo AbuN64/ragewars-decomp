@@ -26,6 +26,6 @@ void alCSPSetChlFXMix(s32 player, s32 channel, s8 effectMix) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802AFE54[12] =
+char s_CspsetbankFPairTXPText[12] =
     "FPair_t\010m_XP";
 #endif

@@ -14,12 +14,12 @@
 #include "COMMON/APPROACHLOCATION.H"
 
 /* 8027A0F4.CPP */
-extern s32 *func_8025CC6C_de(void);
-extern s32 func_8025CA24_de(void *,void *);
+extern s32 *SoundVoicePool_GetGlobalState(void);
+extern s32 SoundVoicePool_StopNode(void *,void *);
 static inline void makeImpulse(CVector3 *input,f32 scale,CVector3 *out){Graphu64_ScaleVector(out,input,scale);}
 static inline void addImpulse(CVector3 *v,CVector3 *impulse){Graphu64_AddVec3(v,v,impulse);}
 void Particle_SteerSoundTrackingParticle(void *particle) {
-    SteeringParticle *arg0=particle;
+    SteeringParticle *steeringParticle=particle;
     CVector3 sp18;
     CVector3 sp28;
     CVector3 sp38;
@@ -29,125 +29,125 @@ void Particle_SteerSoundTrackingParticle(void *particle) {
     Matrix sp78;
     CVector3 spB8;
     CVector3 spC8;
-    CVector3 *temp_s0_3;
-    CVector3 *temp_s2;
-    CVector3 *temp_s4;
-    f32 temp_fa0;
-    f32 temp_fa0_2;
-    f32 temp_fs0;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
+    CVector3 *acceleratedVelocity;
+    CVector3 *direction;
+    CVector3 *unusedPointer;
+    f32 initialVelocityZ;
+    f32 acceleratedVelocityZ;
+    f32 acceleratedSpeed;
+    f32 initialVelocityY;
+    f32 initialSpeed;
     f32 scale;
-    f32 temp_fv0_4;
-    f32 temp_fv0_5;
-    f32 temp_fv0f;
-    f32 temp_fv0f_2;
-    f32 temp_fv0f_3;
+    f32 acceleratedVelocityY;
+    f32 speedLimit;
+    f32 initialVelocityX;
+    f32 attractionDistanceOffset;
+    f32 acceleratedVelocityX;
     f32 amount;
-    
-    s32 var_condition_bit;s32 id;
-    CVector3 *temp_a2;
+
+    s32 unusedValue;s32 id;
+    CVector3 *unusedPointer1;
     SteeringTarget *target;
-    CVector3 *temp_s0_2;
+    CVector3 *steeredDirection;
     SteeringSound *sound;
 
-    if (arg0->flags & 0x10000) {
-        if (arg0->sound != 0) {
-            func_8025CA24_de(func_8025CC6C_de(), arg0->sound);
-            arg0->sound = 0;
+    if (steeringParticle->flags & 0x10000) {
+        if (steeringParticle->sound != 0) {
+            SoundVoicePool_StopNode(SoundVoicePool_GetGlobalState(), steeringParticle->sound);
+            steeringParticle->sound = 0;
         }
     } else {
-        id=0x730;sound = arg0->sound;
+        id=0x730;sound = steeringParticle->sound;
         if (sound != 0) {
             if ((sound->id != id) || (sound->handle == -1)) {
-                Particle_StopSound(arg0);
+                Particle_StopSound(steeringParticle);
                 goto block_7;
             }
         } else {
 block_7:
-            arg0->sound = func_8025C95C_de(func_8025CC6C_de(), 0x730, &arg0->position, &arg0->position, -1);
+            steeringParticle->sound = SoundVoicePool_PlaySpatialSound(SoundVoicePool_GetGlobalState(), 0x730, &steeringParticle->position, &steeringParticle->position, -1);
         }
-        target = arg0->target;
-        if ((target != 0) && (arg0->time > D_800C4B4C_de)) {
-            temp_s2 = &arg0->direction;
-            sp48 = Graphu64_BuildDirectionQuaternion(temp_s2);
-            temp_fv0f = arg0->velocity.x;
-            temp_fv0 = arg0->velocity.y;
-            temp_fa0 = arg0->velocity.z;
-            temp_fv0_2 = Gu_Sqrtf((temp_fv0f * temp_fv0f) + (temp_fv0 * temp_fv0) + (temp_fa0 * temp_fa0));
-            
+        target = steeringParticle->target;
+        if ((target != 0) && (steeringParticle->time > g_particleAttractionDelay)) {
+            direction = &steeringParticle->direction;
+            sp48 = Graphu64_BuildDirectionQuaternion(direction);
+            initialVelocityX = steeringParticle->velocity.x;
+            initialVelocityY = steeringParticle->velocity.y;
+            initialVelocityZ = steeringParticle->velocity.z;
+            initialSpeed = Gu_Sqrtf((initialVelocityX * initialVelocityX) + (initialVelocityY * initialVelocityY) + (initialVelocityZ * initialVelocityZ));
+
             sp18 = target->position;
-            Graphu64_SubtractVectors(&sp28, &sp18, &arg0->position);
+            Graphu64_SubtractVectors(&sp28, &sp18, &steeringParticle->position);
             amount = Gu_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
-            if (amount < D_800C4B50_de) {
+            if (amount < g_particleAttractionMinimumDistance) {
                 sp68 = Graphu64_BuildDirectionQuaternion(&sp28);
                 MatrixFromQuaternion(&sp68.x, sp78.m);
                 sp38.x = 0;
                 sp38.y = 0;
-                sp38.z = D_800C4B54_de;
-                Graphu64_TransformPoint(&sp78, &sp38, temp_s2);
-                Graphu64_ScaleVector(&arg0->velocity, temp_s2, temp_fv0_2);
+                sp38.z = g_particleAttractionBasisZ;
+                Graphu64_TransformPoint(&sp78, &sp38, direction);
+                Graphu64_ScaleVector(&steeringParticle->velocity, direction, initialSpeed);
                 return;
             }
-            if (D_800C4B58_de < amount) {
-                sp18.y += D_800C4B50_de;
-                Graphu64_SubtractVectors(&sp28, &sp18, &arg0->position);
+            if (g_particleAttractionFarDistance < amount) {
+                sp18.y += g_particleAttractionMinimumDistance;
+                Graphu64_SubtractVectors(&sp28, &sp18, &steeringParticle->position);
                 amount = Gu_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             }
             Graphu64_NormalizeVec3(&sp28.x);
             sp58 = Graphu64_BuildDirectionQuaternion(&sp28);
-            if (amount < D_800C4B5C_de) {
-                temp_fv0f_2 = amount - D_800C4B60_de;
-                if (temp_fv0f_2 < 0.0f) {
+            if (amount < g_particleAttractionNearDistance) {
+                attractionDistanceOffset = amount - g_particleAttractionDistanceOffset;
+                if (attractionDistanceOffset < 0.0f) {
                     amount = 0.0f;
                 } else {
-                    amount = temp_fv0f_2 * D_800C4B64_de;
+                    amount = attractionDistanceOffset * g_particleAttractionDistanceScale;
                 }
-                amount = D_800C4B6C_de - (amount * D_800C4B68_de);
+                amount = g_particleAttractionFalloffBase - (amount * g_particleAttractionFalloffScale);
             } else {
-                amount = D_800C4B70_de;
+                amount = g_particleAttractionMaximumStrength;
             }
             Graphu64_NormalizeQuaternion(&sp58.x);
             Graphu64_NormalizeQuaternion(&sp48.x);
             Graphu64_InterpolateQuaternionWithLinearFallback(&sp68, amount, &sp48, &sp58);
             MatrixFromQuaternion(&sp68.x, sp78.m);
-            temp_s0_2 = &arg0->direction;
+            steeredDirection = &steeringParticle->direction;
             sp38.x = 0;
             sp38.y = 0;
-            sp38.z = D_800C4B74_de;
-            Graphu64_TransformPoint(&sp78, &sp38, temp_s0_2);
-            Graphu64_ScaleVector(&arg0->velocity, temp_s0_2, temp_fv0_2);
+            sp38.z = g_particleAttractionDirectionZ;
+            Graphu64_TransformPoint(&sp78, &sp38, steeredDirection);
+            Graphu64_ScaleVector(&steeringParticle->velocity, steeredDirection, initialSpeed);
             goto block_21;
         }
 block_21:
-        scale = Menu_ExpandFloatHighWord((s32) arg0->descriptor->motion->acceleration);
+        scale = Menu_ExpandFloatHighWord((s32) steeringParticle->descriptor->motion->acceleration);
         if (scale != 0.0f) {
-            spC8 = arg0->direction;
+            spC8 = steeringParticle->direction;
             makeImpulse(&spC8,scale,&spB8);
-            addImpulse(&arg0->velocity,&spB8);
-            temp_s0_3=&arg0->velocity;
-            temp_fv0f_3 = arg0->velocity.x;
-            temp_fv0_4 = arg0->velocity.y;
-            temp_fa0_2 = arg0->velocity.z;
-            temp_fs0 = Gu_Sqrtf((temp_fv0f_3 * temp_fv0f_3) + (temp_fv0_4 * temp_fv0_4) + (temp_fa0_2 * temp_fa0_2));
-            temp_fv0_5 = Menu_ExpandFloatHighWord((s32) arg0->descriptor->motion->speed);
-            if (scale > 0.0f) {if (!(temp_fv0_5 < temp_fs0)) goto after_clamp;} else {if (!(temp_fs0 < temp_fv0_5)) goto after_clamp;}
-            Graphu64_ScaleVector(temp_s0_3, &spC8, temp_fv0_5);
+            addImpulse(&steeringParticle->velocity,&spB8);
+            acceleratedVelocity=&steeringParticle->velocity;
+            acceleratedVelocityX = steeringParticle->velocity.x;
+            acceleratedVelocityY = steeringParticle->velocity.y;
+            acceleratedVelocityZ = steeringParticle->velocity.z;
+            acceleratedSpeed = Gu_Sqrtf((acceleratedVelocityX * acceleratedVelocityX) + (acceleratedVelocityY * acceleratedVelocityY) + (acceleratedVelocityZ * acceleratedVelocityZ));
+            speedLimit = Menu_ExpandFloatHighWord((s32) steeringParticle->descriptor->motion->speed);
+            if (scale > 0.0f) {if (!(speedLimit < acceleratedSpeed)) goto after_clamp;} else {if (!(acceleratedSpeed < speedLimit)) goto after_clamp;}
+            Graphu64_ScaleVector(acceleratedVelocity, &spC8, speedLimit);
             after_clamp:;
         }
-        Particle_UpdateSineMotion(arg0, 1.0f);
+        Particle_UpdateSineMotion(steeringParticle, 1.0f);
     }
 }
 
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
-extern char D_8011D8D0[];
+extern char g_actorParticleEffectSystem[];
 extern void Player_TransformPointByViewOrOwnerMatrix(void *, CVector3 *);
 extern void Particle_DispatchActorContactEvents(void *);
 extern void Particle_Release(void *, void *);
 /* Steers a homing particle (sound 0x8AC) at its target, or straight ahead when it has none: keeps its loop
- * sound alive, drops the target after D_800C4B78_de seconds, ends the particle when it gets close enough,
+ * sound alive, drops the target after g_homingParticleSteeringStartTime seconds, ends the particle when it gets close enough,
  * otherwise turns the direction toward the target by a blend rate chosen from the turn angle and age,
  * resets the velocity along the new direction and applies the descriptor's acceleration (clamped to its
  * top speed). */
@@ -190,29 +190,29 @@ void Particle_SteerHoming(void *particle) {
         }
     } else {
 create_sound:
-        homingParticle->sound = func_8025C95C_de(func_8025CC6C_de(), 0x8AC, &homingParticle->position, &homingParticle->position, -1);
+        homingParticle->sound = SoundVoicePool_PlaySpatialSound(SoundVoicePool_GetGlobalState(), 0x8AC, &homingParticle->position, &homingParticle->position, -1);
     }
     if (FIELD(void *, homingParticle, 0x134) != 0) {
-        if (homingParticle->time >= D_800C4B78_de) {
+        if (homingParticle->time >= g_homingParticleSteeringStartTime) {
             FIELD(void *, homingParticle, 0x134) = 0;
         }
     }
     if (FIELD(void *, homingParticle, 0x134) == 0) {
         v58.x = 0;
         v58.y = 0;
-        v58.z = D_800C4B7C_de;
+        v58.z = g_homingParticleForwardZ;
         Player_TransformPointByViewOrOwnerMatrix(owner, &v58);
         Graphu64_SubtractVectors(&v68, &v58, &homingParticle->position);
         distance = Gu_Sqrtf(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
-        if (distance < D_800C4B80_de && homingParticle->time > D_800C4B84_de) {
+        if (distance < g_homingParticleNearTargetDistance && homingParticle->time > g_homingParticleNearTargetDelay) {
             Particle_DispatchActorContactEvents(homingParticle);
-            Particle_Release(D_8011D8D0, homingParticle);
+            Particle_Release(g_actorParticleEffectSystem, homingParticle);
             Particle_StopSound(homingParticle);
             return;
         }
     } else {
         v18 = FIELD(CVector3, FIELD(void *, homingParticle, 0x134), 0x8);
-        v18.y += Gobjinst_GetActorHeight(FIELD(void *, homingParticle, 0x134)) * D_800C4B88_de;
+        v18.y += Gobjinst_GetActorHeight(FIELD(void *, homingParticle, 0x134)) * g_homingParticleTargetHeightScale;
         Graphu64_SubtractVectors(&v68, &v18, &homingParticle->position);
     }
     v28 = v68;
@@ -225,10 +225,10 @@ create_sound:
     Graphu64_NormalizeVec3(&v38);
     angle = Graphu64_ArcCos(v28.x * v38.x + v28.y * v38.y + v28.z * v38.z);
     rate = 0.0f;
-    if (!(homingParticle->time < D_800C4B8C_de)) {
-        rate = D_800C4B94_de;
-        if ((angle < D_800C4B90_de && D_800C4B98_de < homingParticle->time) || FIELD(void *, homingParticle, 0x134) != 0) {
-            rate = D_800C4B9C_de;
+    if (!(homingParticle->time < g_homingParticleTrackingDelay)) {
+        rate = g_homingParticleAcquiredTurnRate;
+        if ((angle < g_homingParticleSteeringAngleThreshold && g_homingParticleAcquisitionDelay < homingParticle->time) || FIELD(void *, homingParticle, 0x134) != 0) {
+            rate = g_homingParticleDefaultTurnRate;
         }
     }
     Graphu64_InterpolateQuaternionWithLinearFallback(&q98, rate, &q78, &q88);
@@ -236,11 +236,11 @@ create_sound:
     direction = &homingParticle->direction;
     v48.x = 0;
     v48.y = 0;
-    v48.z = D_800C4BA0_de;
+    v48.z = g_homingParticleSteeringBasisZ;
     Graphu64_TransformPoint(&mA8, &v48, direction);
     velocity = &homingParticle->velocity;
     Graphu64_ScaleVector(velocity, direction, speed);
-    if (homingParticle->time >= D_800C4BA4_de) {
+    if (homingParticle->time >= g_homingParticleMotionStartTime) {
         FIELD(s8, homingParticle, 0x1B9) = 0;
         FIELD(s8, homingParticle, 0x1BA) = 0;
     }
@@ -329,11 +329,11 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
 }
 
 /* 8027A0F4_2.CPP */
-/* Reports an actor to the active collision state D_801041F0 when that state is of kind 1: an actor whose owner is a kind 1 object flagged 0x300000 is reported with bit 8, 4 or 0x10 for each of three type groups its type belongs to, and otherwise an actor whose descriptor is of kind 1 or 4 is reported with bit 0x80, 0x40 or 0x100 for the same groups, each through Link_DispatchActorLinks. */
+/* Reports an actor to the active collision state g_currentActorInstance when that state is of kind 1: an actor whose owner is a kind 1 object flagged 0x300000 is reported with bit 8, 4 or 0x10 for each of three type groups its type belongs to, and otherwise an actor whose descriptor is of kind 1 or 4 is reported with bit 0x80, 0x40 or 0x100 for the same groups, each through Link_DispatchActorLinks. */
 
-extern func_8024E8F0_S1 *D_801041F0;
+extern ActorEmitterSource *g_currentActorInstance;
 
-extern void Link_DispatchActorLinks(func_8024E8F0_S1 *state, s32 bits, ActorParticleDispatchOwnerContactLinks *actor);
+extern void Link_DispatchActorLinks(ActorEmitterSource *state, s32 bits, ActorParticleDispatchOwnerContactLinks *actor);
 
 static inline s32 is_group_a(ActorParticleDispatchOwnerContactLinks *actor) {
     switch (actor->type) {
@@ -402,7 +402,7 @@ done:;
     Particle_UpdateSineMotion(particle, 1.0f);
 }
 
-void Particle_UpdateTypedMotion(Shared_Particle *arg0)
+void Particle_UpdateTypedMotion(Shared_Particle *particle)
 {
   CVector3 sp10;
   CVector3 sp20;
@@ -416,28 +416,28 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   CVector3 spD0;
 
   CVector3 spE0;
-  CVector3 *nearby_position; 
-  CVector3 *temp_s2_2;
-  f32 temp_f0;
-  f32 temp_f0_10;
-  CVector3 *new_var;
-  f32 temp_f0_11;
-  f32 temp_f0_2;
-  f32 temp_f0_3;
-  f32 temp_f0_4;
-  f32 temp_f0_5;
-  f32 temp_f0_6;
-  f32 temp_f0_7;
-  f32 temp_f0_8;
-  f32 temp_f0_9;
-  f32 temp_f12;
-  f32 temp_f12_2;
-  f32 temp_f12_3;
-  f32 temp_f1;
-  f32 temp_f1_2;
-  f32 temp_f1_3;
-  f32 temp_f1_4;
-  f32 temp_f1_5;
+  CVector3 *nearby_position;
+  CVector3 *steeringDirection;
+  f32 unusedFloat;
+  f32 acceleratedVelocityY;
+  CVector3 *transformedDirection;
+  f32 acceleratedSpeedLimit;
+  f32 attractionTargetHeight;
+  f32 targetMotionSpeed;
+  f32 specialVelocityY;
+  f32 specialSpeedLimit;
+  f32 targetBaseOffset;
+  f32 steeringVelocityY;
+  f32 steeringAngle;
+  f32 ballisticMotionSpeed;
+  f32 specialVelocityZ;
+  f32 steeringVelocityZ;
+  f32 acceleratedVelocityZ;
+  f32 specialVelocityX;
+  f32 unusedFloat1;
+  f32 steeringVelocityX;
+  f32 steeringAngleLimit;
+  f32 acceleratedVelocityX;
   f32 neighborInfluence;
   f32 nearby_height;
   f32 nearby_scale;
@@ -445,19 +445,19 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   f32 tracking_min;
   f32 tracking_max;
   f32 specialSpeed;
-  f32 temp_f20_3;
+  f32 steeringSpeed;
   f32 acceleratedSpeed;
-  f32 var_f2;
+  f32 steeringBlend;
   s32 particleType;
   void *particleDescriptor;
-  func_8027ADBC_S3 *attractionTarget;
-  void *temp_s0_2; 
-  func_8027ADBC_S3 *targetValue;
-  void *temp_s0_5;
-  void *temp_s2; 
-  void *var_a0;
-  SharedRecAt16E0V2 *nearbyActor;
-  particleType = arg0->inst.type;
+  ParticleAttractionTargetView *attractionTarget;
+  void *motionVector;
+  ParticleAttractionTargetView *targetValue;
+  void *unusedPointer2;
+  void *velocity;
+  void *nearbyActorCursor;
+  ParticleNearbyActorView *nearbyActor;
+  particleType = particle->inst.type;
   if (particleType == 0x127)
   {
     goto block_26;
@@ -516,219 +516,219 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   }
   goto block_common;
   block_46:
-  var_a0 = D_80145060.actorList;
+  nearbyActorCursor = g_transientPlayerList.actorList;
 
-  if (var_a0 != ((void *) 0))
+  if (nearbyActorCursor != ((void *) 0))
   {
     nearby_position = &sp20;
-    temp_s2 = (void *) (&arg0->inst.velocity.x);
-    do { 
-      nearby_scale = D_800C4BCC_de;
-      nearby_random_max = D_800C4BD0_de;
+    velocity = (void *) (&particle->inst.velocity.x);
+    do {
+      nearby_scale = g_particleNeighborScale;
+      nearby_random_max = g_particleNeighborRandomMaximum;
     } while (0);
-    nearbyActor = var_a0;
+    nearbyActor = nearbyActorCursor;
     do
     {
       nearby_height = nearbyActor->unk70;
       sp20 = nearbyActor->pos;
       sp20.y += nearby_height;
-      sp20.y += Gobjinst_GetActorHeight(var_a0) * nearby_scale;
-      Graphu64_SubtractVectors(&sp10, nearby_position, &arg0->inst.pos);
+      sp20.y += Gobjinst_GetActorHeight(nearbyActorCursor) * nearby_scale;
+      Graphu64_SubtractVectors(&sp10, nearby_position, &particle->inst.pos);
       neighborInfluence = Gu_Sqrtf(((sp10.x * sp10.x) + (sp10.y * sp10.y)) + (sp10.z * sp10.z));
-      if (neighborInfluence < D_800C4BD4_de)
+      if (neighborInfluence < g_particleNeighborInfluenceThreshold)
       {
-        neighborInfluence = D_800C4BDC_de - (neighborInfluence * D_800C4BD8_de);
+        neighborInfluence = g_particleNeighborInfluenceBase - (neighborInfluence * g_particleNeighborInfluenceScale);
         sp10.x *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
         sp10.y *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
         sp10.z *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
-        Graphu64_SubtractVectors(temp_s2, temp_s2, &sp10);
+        Graphu64_SubtractVectors(velocity, velocity, &sp10);
       }
-      var_a0 = nearbyActor->unk16E0;
-      nearbyActor = var_a0;
+      nearbyActorCursor = nearbyActor->next;
+      nearbyActor = nearbyActorCursor;
     }
-    while (var_a0 != ((void *) 0));
+    while (nearbyActorCursor != ((void *) 0));
   }
-  attractionTarget = arg0->target;
-  temp_f0_2 = InstHdr_GetActorBaseOffset(attractionTarget);
+  attractionTarget = particle->target;
+  attractionTargetHeight = InstHdr_GetActorBaseOffset(attractionTarget);
   sp20 = attractionTarget->pos;
-  sp20.y += temp_f0_2;
-  Graphu64_SubtractVectors(&sp10, &sp20, &arg0->inst.pos);
-  tracking_min = D_800C4BE0_de;
-  tracking_max = D_800C4BE4_de;
+  sp20.y += attractionTargetHeight;
+  Graphu64_SubtractVectors(&sp10, &sp20, &particle->inst.pos);
+  tracking_min = g_particleTrackingMinimum;
+  tracking_max = g_particleTrackingMaximum;
   sp10.x *= Graphu64_RandomBetween(tracking_min, tracking_max);
   sp10.y *= Graphu64_RandomBetween(tracking_min, tracking_max);
   sp10.z *= Graphu64_RandomBetween(tracking_min, tracking_max);
-  temp_s0_2 = (void *) (&arg0->inst.velocity.x);
-  Graphu64_AddVec3(temp_s0_2, temp_s0_2, &sp10);
+  motionVector = (void *) (&particle->inst.velocity.x);
+  Graphu64_AddVec3(motionVector, motionVector, &sp10);
 #if defined(VERSION_EU)
-  Graphu64_ClampMotionLength(temp_s0_2, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
+  Graphu64_ClampMotionLength(motionVector, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12));
 #else
-  Graphu64_ClampMotionLength(temp_s0_2, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
+  Graphu64_ClampMotionLength(motionVector, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12));
 #endif
   return;
   block_24:
-  Particle_SteerSoundTrackingParticle(arg0);
+  Particle_SteerSoundTrackingParticle(particle);
 
   return;
   block_540:
-  Particle_SteerHoming(arg0);
+  Particle_SteerHoming(particle);
 
   return;
   block_26:
-  Playerai_ApplyPlayerForces(&D_80145040, arg0);
+  Playerai_ApplyPlayerForces(&g_playerViewRenderContext, particle);
 
 #if defined(VERSION_EU)
-  temp_f0_3 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
+  targetMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk10);
 #else
-  temp_f0_3 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
+  targetMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk10);
 #endif
-  if (temp_f0_3 != 0.0f)
+  if (targetMotionSpeed != 0.0f)
   {
-    temp_s0_2 = &spD0; 
-    spE0 = arg0->direction;
-    Graphu64_ScaleVector(temp_s0_2, &spE0, temp_f0_3);
-    temp_s0_2 = (void *) (&arg0->inst.velocity.x);
-    Graphu64_AddVec3(temp_s0_2, temp_s0_2, &spD0);
-    temp_f1 = arg0->inst.velocity.x;
-    temp_f0_4 = arg0->inst.velocity.y;
-    temp_f12 = arg0->inst.velocity.z;
-    specialSpeed = Gu_Sqrtf(((temp_f1 * temp_f1) + (temp_f0_4 * temp_f0_4)) + (temp_f12 * temp_f12));
+    motionVector = &spD0;
+    spE0 = particle->direction;
+    Graphu64_ScaleVector(motionVector, &spE0, targetMotionSpeed);
+    motionVector = (void *) (&particle->inst.velocity.x);
+    Graphu64_AddVec3(motionVector, motionVector, &spD0);
+    specialVelocityX = particle->inst.velocity.x;
+    specialVelocityY = particle->inst.velocity.y;
+    specialVelocityZ = particle->inst.velocity.z;
+    specialSpeed = Gu_Sqrtf(((specialVelocityX * specialVelocityX) + (specialVelocityY * specialVelocityY)) + (specialVelocityZ * specialVelocityZ));
 #if defined(VERSION_EU)
-    temp_f0_5 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
+    specialSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12);
 #else
-    temp_f0_5 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
+    specialSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12);
 #endif
-    if (temp_f0_3 > 0.0f)
+    if (targetMotionSpeed > 0.0f)
     {
-      if (!(temp_f0_5 < specialSpeed))
+      if (!(specialSpeedLimit < specialSpeed))
       {
         goto after_special_clamp;
       }
     }
     else
-      if (!(specialSpeed < temp_f0_5))
+      if (!(specialSpeed < specialSpeedLimit))
     {
       goto after_special_clamp;
     }
-    Graphu64_ScaleVector(temp_s0_2, &spE0, temp_f0_5);
+    Graphu64_ScaleVector(motionVector, &spE0, specialSpeedLimit);
     after_special_clamp:
     ;
 
     ;
   }
-  Particle_UpdateSineMotion(arg0, 1.0f);
+  Particle_UpdateSineMotion(particle, 1.0f);
   return;
   block_common:
-  targetValue = arg0->target;
+  targetValue = particle->target;
 
-  particleDescriptor = arg0->desc;
-  if (((targetValue != ((void *) 0)) && (arg0->desc->flags & 0x40000)) && (((BallisticParamsHolder *)arg0->desc)->unkE != 0))
+  particleDescriptor = particle->desc;
+  if (((targetValue != ((void *) 0)) && (particle->desc->flags & 0x40000)) && (((BallisticParamsHolder *)particle->desc)->unkE != 0))
   {
-    temp_f0_6 = InstHdr_GetActorBaseOffset(targetValue);
+    targetBaseOffset = InstHdr_GetActorBaseOffset(targetValue);
     sp20 = targetValue->pos;
-    sp20.y += temp_f0_6;
-    sp20.y += Gobjinst_GetActorHeight(targetValue) * D_800C4BE8_de;
-    Graphu64_SubtractVectors(&sp40, &sp20, &arg0->inst.pos);
+    sp20.y += targetBaseOffset;
+    sp20.y += Gobjinst_GetActorHeight(targetValue) * g_particleTrackingTargetHeightScale;
+    Graphu64_SubtractVectors(&sp40, &sp20, &particle->inst.pos);
     Graphu64_NormalizeVec3(&sp40);
     sp70 = Graphu64_BuildDirectionQuaternion(&sp40);
-    temp_s2_2 = &arg0->direction;
-    sp60 = Graphu64_BuildDirectionQuaternion(temp_s2_2);
-    sp30 = arg0->direction;
+    steeringDirection = &particle->direction;
+    sp60 = Graphu64_BuildDirectionQuaternion(steeringDirection);
+    sp30 = particle->direction;
     Graphu64_NormalizeVec3(&sp30);
-    temp_f1_3 = arg0->inst.velocity.x;
-    temp_f0_7 = arg0->inst.velocity.y;
-    temp_f12_2 = arg0->inst.velocity.z;
-    temp_f20_3 = Gu_Sqrtf(((temp_f1_3 * temp_f1_3) + (temp_f0_7 * temp_f0_7)) + (temp_f12_2 * temp_f12_2));
-    temp_f0_8 = Graphu64_ArcCos(((sp30.x * sp40.x) + (sp30.y * sp40.y)) + (sp30.z * sp40.z));
-    temp_f1_4 = ((f32) ((BallisticParamsHolder *)arg0->desc)->unkE) * D_800C4BEC_de;
-    var_f2 = D_800C4BF0_de;
-    if (temp_f1_4 < temp_f0_8)
+    steeringVelocityX = particle->inst.velocity.x;
+    steeringVelocityY = particle->inst.velocity.y;
+    steeringVelocityZ = particle->inst.velocity.z;
+    steeringSpeed = Gu_Sqrtf(((steeringVelocityX * steeringVelocityX) + (steeringVelocityY * steeringVelocityY)) + (steeringVelocityZ * steeringVelocityZ));
+    steeringAngle = Graphu64_ArcCos(((sp30.x * sp40.x) + (sp30.y * sp40.y)) + (sp30.z * sp40.z));
+    steeringAngleLimit = ((f32) ((BallisticParamsHolder *)particle->desc)->unkE) * g_particleBallisticParameterScale;
+    steeringBlend = g_particleBallisticDefaultValue;
+    if (steeringAngleLimit < steeringAngle)
     {
-      var_f2 = temp_f1_4 / temp_f0_8;
+      steeringBlend = steeringAngleLimit / steeringAngle;
     }
-    Graphu64_InterpolateQuaternionWithLinearFallback(&sp80, var_f2, &sp60, &sp70);
+    Graphu64_InterpolateQuaternionWithLinearFallback(&sp80, steeringBlend, &sp60, &sp70);
     MatrixFromQuaternion(&sp80, &sp90);
     sp50.x = 0;
     sp50.y = 0;
-    sp50.z = D_800C4BF4_de;
-    new_var = temp_s2_2;
-    Graphu64_TransformPoint(&sp90, &sp50, new_var);
-    Graphu64_ScaleVector(&arg0->inst.velocity.x, new_var, temp_f20_3);
+    sp50.z = g_particleBallisticBasisZ;
+    transformedDirection = steeringDirection;
+    Graphu64_TransformPoint(&sp90, &sp50, transformedDirection);
+    Graphu64_ScaleVector(&particle->inst.velocity.x, transformedDirection, steeringSpeed);
   }
-  if (!(arg0->flags & 0x70000))
+  if (!(particle->flags & 0x70000))
   {
 #if defined(VERSION_EU)
-    temp_f0_9 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
+    ballisticMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk10);
 #else
-    temp_f0_9 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
+    ballisticMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk10);
 #endif
-    if (temp_f0_9 != 0.0f)
+    if (ballisticMotionSpeed != 0.0f)
     {
-      temp_s0_2 = &spD0; 
-    spE0 = arg0->direction;
-      Graphu64_ScaleVector(temp_s0_2, &spE0, temp_f0_9);
-      temp_s0_2 = (void *) (&arg0->inst.velocity.x);
-      Graphu64_AddVec3(temp_s0_2, temp_s0_2, &spD0);
-      temp_f1_5 = arg0->inst.velocity.x;
-      temp_f0_10 = arg0->inst.velocity.y;
-      temp_f12_3 = arg0->inst.velocity.z;
-      acceleratedSpeed = Gu_Sqrtf(((temp_f1_5 * temp_f1_5) + (temp_f0_10 * temp_f0_10)) + (temp_f12_3 * temp_f12_3));
+      motionVector = &spD0;
+    spE0 = particle->direction;
+      Graphu64_ScaleVector(motionVector, &spE0, ballisticMotionSpeed);
+      motionVector = (void *) (&particle->inst.velocity.x);
+      Graphu64_AddVec3(motionVector, motionVector, &spD0);
+      acceleratedVelocityX = particle->inst.velocity.x;
+      acceleratedVelocityY = particle->inst.velocity.y;
+      acceleratedVelocityZ = particle->inst.velocity.z;
+      acceleratedSpeed = Gu_Sqrtf(((acceleratedVelocityX * acceleratedVelocityX) + (acceleratedVelocityY * acceleratedVelocityY)) + (acceleratedVelocityZ * acceleratedVelocityZ));
 #if defined(VERSION_EU)
-      temp_f0_11 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
+      acceleratedSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12);
 #else
-      temp_f0_11 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
+      acceleratedSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12);
 #endif
-      if (temp_f0_9 > 0.0f)
+      if (ballisticMotionSpeed > 0.0f)
       {
-        if (!(temp_f0_11 < acceleratedSpeed))
+        if (!(acceleratedSpeedLimit < acceleratedSpeed))
         {
           goto after_normal_clamp;
         }
       }
       else
-        if (!(acceleratedSpeed < temp_f0_11))
+        if (!(acceleratedSpeed < acceleratedSpeedLimit))
       {
         goto after_normal_clamp;
       }
-      Graphu64_ScaleVector(temp_s0_2, &spE0, temp_f0_11);
+      Graphu64_ScaleVector(motionVector, &spE0, acceleratedSpeedLimit);
       after_normal_clamp:
       ;
 
       ;
     }
   }
-  if (!(arg0->flags & 0x30000))
+  if (!(particle->flags & 0x30000))
   {
-    Particle_UpdateSineMotion(arg0, 1.0f);
+    Particle_UpdateSineMotion(particle, 1.0f);
   }
 }
 
 void Particle_DispatchOwnerContactLinks(ActorParticleDispatchOwnerContactLinks *actor) {
-    func_8024E8F0_S1 *owner;
+    ActorEmitterSource *owner;
 
-    if (D_801041F0 == 0 || D_801041F0->unk0 != 1) {
+    if (g_currentActorInstance == 0 || g_currentActorInstance->actorKind != 1) {
         return;
     }
     owner = actor->owner;
-    if (owner != 0 && owner->unk0 == 1 && (owner->unk100 & 0x300000)) {
+    if (owner != 0 && owner->actorKind == 1 && (owner->flags & 0x300000)) {
         if (is_group_a(actor)) {
-            Link_DispatchActorLinks(D_801041F0, 8, actor);
+            Link_DispatchActorLinks(g_currentActorInstance, 8, actor);
         }
         if (is_group_b(actor)) {
-            Link_DispatchActorLinks(D_801041F0, 4, actor);
+            Link_DispatchActorLinks(g_currentActorInstance, 4, actor);
         }
         if (is_group_c(actor)) {
-            Link_DispatchActorLinks(D_801041F0, 0x10, actor);
+            Link_DispatchActorLinks(g_currentActorInstance, 0x10, actor);
         }
     } else if (actor->descriptor->field_0 == 1 || actor->descriptor->field_0 == 4) {
         if (is_group_a(actor)) {
-            Link_DispatchActorLinks(D_801041F0, 0x80, actor);
+            Link_DispatchActorLinks(g_currentActorInstance, 0x80, actor);
         }
         if (is_group_b(actor)) {
-            Link_DispatchActorLinks(D_801041F0, 0x40, actor);
+            Link_DispatchActorLinks(g_currentActorInstance, 0x40, actor);
         }
         if (is_group_c(actor)) {
-            Link_DispatchActorLinks(D_801041F0, 0x100, actor);
+            Link_DispatchActorLinks(g_currentActorInstance, 0x100, actor);
         }
     }
 }

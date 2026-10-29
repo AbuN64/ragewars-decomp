@@ -51,13 +51,13 @@ struct InfoCode80423280 {
     unsigned char locked;
 };
 struct InfoCode80423280;
-struct PlayerRecAt602;
+struct PlayerLoadoutSelectionView;
 
 struct WeaponUnlockPlayerView;
 typedef struct WeaponUnlockPlayerView WeaponUnlockPlayerView;
 
-struct PlayerRecAt602;
-typedef struct PlayerRecAt602 PlayerRecAt602;
+struct PlayerLoadoutSelectionView;
+typedef struct PlayerLoadoutSelectionView PlayerLoadoutSelectionView;
 
 
 #include "WEAPONS/PLAYER_INVENTORY.H"

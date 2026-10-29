@@ -48,6 +48,6 @@ s32 osPfsFreeBlocks(OSPfs *pfs, s32 *bytes_not_used)
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_80446EE8[8] =
+char s_OspfsfreeblocksPingSounText[8] =
     "pingSoun";
 #endif

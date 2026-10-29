@@ -1,5 +1,5 @@
 
 /* ROM-grounded data: rodata/unresolved/800C7D40 */
-unsigned char D_blob_4bfd0d97c5ac1844e484[8] = {
+unsigned char g_PlayerEncodedBytes[8] = {
     0x20, 0x00, 0x00, 0x00, 0x73, 0x00, 0x00, 0x00,
 };

@@ -6,7 +6,7 @@ const char g_binariesIndexText[15] =
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned char D_d1_020cabc903f155ab[15] = {
+const unsigned char g_binariesIndexText[15] = {
     0x62, 0x69, 0x6E, 0x61, 0x72, 0x69, 0x65, 0x73, 0x20, 0x69, 0x6E, 0x64, 0x65, 0x78, 0x00,
 };
 #endif

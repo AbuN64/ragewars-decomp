@@ -6,7 +6,7 @@ struct {
     unsigned int w0[37];
     unsigned char b1[168];
     unsigned int w2[12];
-} D_auto_rodata_unresolved_800EE6CC = {
+} g_encodedLevelHandlersAndCheatTextEu = {
     {
         0x4A0A6F4D, 0x0043D224, 0x0043D424, 0x0043D294, 0x0043D2A4, 0x0043D2C4, 0x0043D2B4, 0x0043D254,
         0x0043D264, 0x0043D334, 0x0043D274, 0x0043D2D4, 0x0043D2E4, 0x0043D2F4, 0x0043D384, 0x0043D284,
@@ -48,7 +48,7 @@ struct {
     unsigned int w0[37];
     unsigned char b1[168];
     unsigned int w2[12];
-} D_auto_rodata_unresolved_800DCCFC = {
+} g_encodedLevelHandlersAndCheatTextUs = {
     {
         0x00004B01, 0x0043C524, 0x0043C724, 0x0043C594, 0x0043C5A4, 0x0043C5C4, 0x0043C5B4, 0x0043C554,
         0x0043C564, 0x0043C634, 0x0043C574, 0x0043C5D4, 0x0043C5E4, 0x0043C5F4, 0x0043C684, 0x0043C584,

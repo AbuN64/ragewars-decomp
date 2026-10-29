@@ -24,7 +24,7 @@ extern f32 Graphu64_ApproachValue(f32, f32, f32);
 
 extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
-/* Picks a rider's nearest target: walks the player list D_80145060 for players within the segment's range at 0x54 (squared distance through Graphu64_GetSquaredDistance) that are not the rider's own player, are active and, in team play (D_801468C4), are on the other team, keeps those with a clear line of sight between their raised centres through CCollision_SweepPoint (or whose blocker is the player itself), and records the nearest in the rider at 0x80 and in the result with its distance through func_802B72B0_de, clearing both when none qualifies. */
+/* Picks a rider's nearest target: walks the player list g_transientPlayerList for players within the segment's range at 0x54 (squared distance through Graphu64_GetSquaredDistance) that are not the rider's own player, are active and, in team play (g_teamScoringEnabled), are on the other team, keeps those with a clear line of sight between their raised centres through CCollision_SweepPoint (or whose blocker is the player itself), and records the nearest in the rider at 0x80 and in the result with its distance through func_802B72B0_de, clearing both when none qualifies. */
 
 
 
@@ -34,11 +34,11 @@ extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 
 
-extern SharedPlayer *D_80145060;
+extern SharedPlayer *g_transientPlayerList;
 
-extern SharedPlayer **D_80103FCC;
+extern SharedPlayer **g_collisionCurrentActor;
 
-extern char D_80103FD0[];
+extern char g_particleCollisionProbeResult[];
 
 extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
 
@@ -119,7 +119,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     Graphu64_InterpolateVector(rider->frame, throttle, &rider->base, &position);
 }
 
-void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result) {
+void AI_DynTurretGetTargetInfo(SharedPlayer *player, TurretRiderTargetView *rider, Result *result) {
     f32 nearest;
     SharedPlayer *best;
     CTurretIntelligence *segment;
@@ -135,7 +135,7 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
     nearest = 0.0f;
     best = 0;
     segment = (CTurretIntelligence *)(player->views18.view18_1.track + 0x14);
-    other = D_80145060;
+    other = g_transientPlayerList;
     if (other != 0) {
         lift = (0.5f);
         do {
@@ -144,7 +144,7 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
                 enemy = 0;
                 if (player->views1C.view1D8_23.self != other && other->views5E4.view5E4_1.active != 0) {
                     enemy = 1;
-                    if (D_801462C8.counters.teams != 0) {
+                    if (g_gameSettings.counters.teams != 0) {
                         enemy = player->views1C.view1D8_23.self->views5D8.view5D8_1.record->team != other->views5D8.view5D8_1.record->team;
                     }
                 }
@@ -157,10 +157,10 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
                     from.y += Gobjinst_GetActorHeight(player) * lift;
                     to = other->views0.view8_3.pos;
                     to.y += Gobjinst_GetActorHeight(other) * lift;
-                    blocked = CCollision_SweepPoint(player, from, to, D_80103FD0);
+                    blocked = CCollision_SweepPoint(player, from, to, g_particleCollisionProbeResult);
                     valid = 1;
                     if (blocked != 0) {
-                        valid = *D_80103FCC == other;
+                        valid = *g_collisionCurrentActor == other;
                     }
                     if (valid && (best == 0 || distance < nearest)) {
                         best = other;

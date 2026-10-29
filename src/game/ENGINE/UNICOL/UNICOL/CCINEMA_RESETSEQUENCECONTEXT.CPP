@@ -5,14 +5,14 @@
 
 /* Zeroes the resident game-state block, sets its four persistent-slot markers to -1, then runs the two state-machine resets that depend on it. */
 
-extern s32 *D_800E2830;
+extern s32 *g_cinemaSequenceState;
 
 
 
 
 void CCinema_ResetSequenceContext(void)
 {
-    s32 *p = D_800E2830;
+    s32 *p = g_cinemaSequenceState;
 
     p[0x0 / 4] = 0;
     p[0x4 / 4] = 0;

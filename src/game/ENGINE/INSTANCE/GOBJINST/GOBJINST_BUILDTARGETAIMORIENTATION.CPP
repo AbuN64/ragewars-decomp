@@ -3,26 +3,26 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 /* Returns the rotation that turns an actor's aim toward a target point: a player's forward axis is its
- * aiming orientation from func_8024796C_de applied to +z, anyone else looks along +z; the target is the
+ * aiming orientation from Gobjinst_BuildActorAimQuaternion applied to +z, anyone else looks along +z; the target is the
  * player's lock-on at 0x1F0 or else whatever Playerai_FindNearestPlayer finds at the point, and with no target the
  * identity is returned. Otherwise the forward axis turns about its cross product with the direction from
  * the point up to three quarters of the target's height, by half the angle between them, composed with the
- * player's aiming orientation; the sine is kept in D_80115DEC. */
+ * player's aiming orientation; the sine is kept in g_turretAimSine. */
 
 
 
 
 
-extern char D_80145040;
+extern char g_playerViewRenderContext;
 
 
-extern CQuatern func_8024796C_de(char *);
+extern CQuatern Gobjinst_BuildActorAimQuaternion(char *);
 
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
@@ -59,7 +59,7 @@ CQuatern Gobjinst_BuildTargetAimOrientation(char *actor, CVector3 point) {
     target = 0;
     if (actor != 0 && *(u8 *)actor == 1) {
         target = ((LevelActor *)(actor))->lockOn;
-        aim = func_8024796C_de(actor);
+        aim = Gobjinst_BuildActorAimQuaternion(actor);
         MatrixFromQuaternion(&aim, matrix);
         local.x = 0.0f;
         local.y = 0.0f;
@@ -71,7 +71,7 @@ CQuatern Gobjinst_BuildTargetAimOrientation(char *actor, CVector3 point) {
         forward.z = 1.0f;
     }
     if (target == 0) {
-        found = Playerai_FindNearestPlayer(&D_80145040, point);
+        found = Playerai_FindNearestPlayer(&g_playerViewRenderContext, point);
         if (found != 0) {
             target = found;
         }
@@ -93,7 +93,7 @@ CQuatern Gobjinst_BuildTargetAimOrientation(char *actor, CVector3 point) {
     turn.x = axis.x * scale;
     turn.y = axis.y * scale;
     turn.z = axis.z * scale;
-    D_80115DEC = scale;
+    g_turretAimSine = scale;
     turn.w = Math_Cosf(angle);
     if (actor != 0 && *(u8 *)actor == 1) {
         MultiplyQuaternions(&result, &aim, &turn);
@@ -103,7 +103,7 @@ CQuatern Gobjinst_BuildTargetAimOrientation(char *actor, CVector3 point) {
     return result;
 }
 
-CQuatern Gobjinst_BuildActorDirectionTilt(InputRecAt44 *input) {
+CQuatern Gobjinst_BuildActorDirectionTilt(ActorDirectionTiltInput *input) {
     CVector3 source;
     CVector3 up;
     CVector3 axis;
@@ -124,7 +124,7 @@ CQuatern Gobjinst_BuildActorDirectionTilt(InputRecAt44 *input) {
     }
 default_source:
     source.x = 0.0f;
-    source.y = D_800C3C98_de;
+    source.y = g_actorBoneAimSourceY;
     source.z = 0.0f;
     goto source_ready;
 input_source:
@@ -132,7 +132,7 @@ input_source:
 source_ready:
 
     up.x = 0.0f;
-    up.y = D_800C3C9C_de;
+    up.y = g_actorBoneAimUpY;
     up.z = 0.0f;
     Graphu64_CrossVectors(&axis, &up, &source);
     Graphu64_NormalizeVec3(&axis);
@@ -140,12 +140,12 @@ source_ready:
     angle = Graphu64_ArcCos((up.x * source.x) +
                           (up.y * source.y) +
                           (up.z * source.z));
-    angle *= D_800C3CA0_de;
+    angle *= g_actorBoneAimAngleScale;
     scale = Gu_Sinf(angle);
     result.x = axis.x * scale;
     result.y = axis.y * scale;
     result.z = axis.z * scale;
-    D_80115DEC = scale;
+    g_turretAimSine = scale;
     result.w = Math_Cosf(angle);
 
     return result;

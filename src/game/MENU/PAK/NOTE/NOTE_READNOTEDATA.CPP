@@ -1,12 +1,12 @@
 #include "sdk/LIBC.H"
 #include "COMMON/ENTRYRECAT0V3.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MENU/PAK_DIRECTORY_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
 #include "TYPES.H"
 #include "MENU/PAK/NOTE_GETNOTEPAGECOUNT.H"
-extern void Cache_ReleaseResource(void *arg0, void *resource);
+extern void Cache_ReleaseResource(void *cache, void *resource);
 
 /* Loads a page-aligned resource into the selected device slot and reports the result. */
 
@@ -15,7 +15,7 @@ extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 
 
-extern s8 D_8010BBB8;
+extern s8 g_controllerPakFrontendState;
 
 
 extern s32 *Cache_AllocateResource(s32, s32, s32, void *);
@@ -36,7 +36,7 @@ extern void Control_ReleasePakLock(void);
 extern s32 Pfs_ReadWriteFile(Device *, s32, s32, s32, s32, s32);
 
 /* For a player slot whose state g_controllerPakChannelStates is 3, writes its score (the first word of its 0x204-byte
-   record in D_800E2854 divided by 256, or 0 when the flag g_controllerPakChannelStatuses is set) and returns the flag;
+   record in g_controllerPakNoteLists divided by 256, or 0 when the flag g_controllerPakChannelStatuses is set) and returns the flag;
    other states return -2. */
 
 
@@ -55,7 +55,7 @@ s32 Note_UpdateStatus(s32);
  /* extern */
 s32 osPfsRepairId(void *);
 
-/* Reports the address of the field at offset 0xE of entry j in record i of the table D_800E2854
+/* Reports the address of the field at offset 0xE of entry j in record i of the table g_controllerPakNoteLists
    points to, returning zero, or returns -2 when record i's state in g_controllerPakChannelStates is not 3. */
 
 
@@ -64,7 +64,7 @@ s32 osPfsRepairId(void *);
 
 
 
-/* Reports the address of the field at offset 0xA of entry j in record i of the table D_800E2854
+/* Reports the address of the field at offset 0xA of entry j in record i of the table g_controllerPakNoteLists
    points to, returning zero, or returns -2 when record i's state in g_controllerPakChannelStates is not 3. */
 
 
@@ -74,7 +74,7 @@ s32 osPfsRepairId(void *);
 
 
 /* Reports through the third argument the size in 256-byte units, per Note_BytesToPakPages, of entry j of
-   record i in the table D_800E2854 points to, returning zero, or returns -2 when record i's state in
+   record i in the table g_controllerPakNoteLists points to, returning zero, or returns -2 when record i's state in
    g_controllerPakChannelStates is not 3. */
 
 
@@ -85,9 +85,9 @@ s32 osPfsRepairId(void *);
 
 extern u32 Note_BytesToPakPages(u32);
 
-extern PakDirectory *D_800E2854;
+extern PakDirectory *g_controllerPakNoteLists;
 
-extern Device D_8014D280[];
+extern Device g_controllerPakFileSystems[];
 
 s32 Note_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
 {
@@ -113,17 +113,17 @@ s32 Note_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
   ((void (*)(s32))Control_AcquireControllerLock)(1);
   Control_ReadControllerStates();
   result = g_controllerPakChannelStatuses[slot];
-  D_8010BBB8 = 2;
+  g_controllerPakFrontendState = 2;
   if (result == 0)
   {
-    result = Pfs_ReadWriteFile(&D_8014D280[slot], noteIndex, zero, zero, size, addr);
+    result = Pfs_ReadWriteFile(&g_controllerPakFileSystems[slot], noteIndex, zero, zero, size, addr);
     if (result != zero)
     {
       result = -1;
     }
     if (result == 0)
     {
-      func_802BD3A0_de(destination, addr, length);
+      Libc_CopyBytes(destination, addr, length);
     }
   }
   Control_ReleasePakLock();
@@ -145,7 +145,7 @@ s32 Note_CountFreeNotes(s32 ch, s32 *count) {
     *count = 0;
     if (g_controllerPakChannelStatuses[ch] == 0) {
         for (i = 0; i < 16; i++) {
-            if (D_800E2854[ch].notes[i].file_size == 0) {
+            if (g_controllerPakNoteLists[ch].notes[i].file_size == 0) {
                 (*count)++;
             }
         }
@@ -158,7 +158,7 @@ int Note_GetFreePages(int slot, int *score) {
         return -2;
     }
     if (g_controllerPakChannelStatuses[slot] == 0) {
-        *score = D_800E2854[slot].free / 256;
+        *score = g_controllerPakNoteLists[slot].free / 256;
     } else {
         *score = 0;
     }
@@ -175,9 +175,9 @@ s32 Note_RepairIdIfNeeded(s32 channel) {
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
     result = g_controllerPakChannelStatuses[channel];
-    D_8010BBB8 = 2;
+    g_controllerPakFrontendState = 2;
     if (result == -4) {
-        result = osPfsRepairId(&D_8014D280[channel]);
+        result = osPfsRepairId(&g_controllerPakFileSystems[channel]);
         if (result != 0) {
             result = -1;
         }
@@ -194,8 +194,8 @@ s32 Note_RepairId(s32 channel) {
     }
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
-    D_8010BBB8 = 2;
-    result = osPfsRepairId(&D_8014D280[channel]);
+    g_controllerPakFrontendState = 2;
+    result = osPfsRepairId(&g_controllerPakFileSystems[channel]);
     if (result != 0) {
         result = -1;
     }
@@ -208,7 +208,7 @@ s32 Note_GetNoteGameName(s32 index, s32 entry, char **out) {
     if (g_controllerPakChannelStates[index] != 3) {
         return -2;
     }
-    *out = D_800E2854[index].notes[entry].game_name;
+    *out = g_controllerPakNoteLists[index].notes[entry].game_name;
     return 0;
 }
 
@@ -216,7 +216,7 @@ s32 Note_GetNoteExtension(s32 index, s32 entry, char **out) {
     if (g_controllerPakChannelStates[index] != 3) {
         return -2;
     }
-    *out = D_800E2854[index].notes[entry].ext_name;
+    *out = g_controllerPakNoteLists[index].notes[entry].ext_name;
     return 0;
 }
 
@@ -224,6 +224,6 @@ s32 Note_GetNotePageCount(s32 index, s32 entry, s32 *out) {
     if (g_controllerPakChannelStates[index] != 3) {
         return -2;
     }
-    *out = Note_BytesToPakPages(D_800E2854[index].notes[entry].file_size);
+    *out = Note_BytesToPakPages(g_controllerPakNoteLists[index].notes[entry].file_size);
     return 0;
 }

@@ -4,35 +4,35 @@
 #include "COMMON/FIELD_VEC_B0.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
 typedef struct CollisionInfo CollisionInfo;
 
-extern CollisionInfo D_80103FD0;
+extern CollisionInfo g_particleCollisionProbeResult;
 extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *);
 extern s32 CCollision_SweepPoint(Instance8020CD74 *actorStorage, CVector3 current, CVector3 desired, CollisionInfo *motionSettings);
 
-s32 Cbarrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *target) {
+s32 Cbarrel_TestFlaggedAimObstruction(Instance8020CD74 *probingActor, void *unused, Instance8020CD74 *target) {
     Instance8020CD74 saved;
     CVector3 desired;
     f32 scale;
 
-    saved = *arg0;
-    scale = D_800C21CC_de;
-    ((DraftAimPlayer *)arg0)->position.y += Gobjinst_GetActorHeight(arg0) * scale;
-    ((DraftAimPlayer *)arg0)->position.y += ((DraftAimPlayer *)arg0)->height;
+    saved = *probingActor;
+    scale = g_barrelFlaggedAimProbeScale;
+    ((DraftAimPlayer *)probingActor)->position.y += Gobjinst_GetActorHeight(probingActor) * scale;
+    ((DraftAimPlayer *)probingActor)->position.y += ((DraftAimPlayer *)probingActor)->height;
 
     desired = ((ActorBarrelIsTargetInViewCone *)(target))->position;
     desired.y += Gobjinst_GetActorHeight(target) * scale;
     desired.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
 
-    CCollision_SweepPoint(arg0, ((Player *)(arg0))->pos, desired, &D_80103FD0);
-    *arg0 = saved;
+    CCollision_SweepPoint(probingActor, ((Player *)(probingActor))->pos, desired, &g_particleCollisionProbeResult);
+    *probingActor = saved;
 
-    if (D_8010028C != 0 && (D_8010028C->flags & 2)) {
+    if (g_collisionProbeActorOne != 0 && (g_collisionProbeActorOne->flags & 2)) {
         return 1;
     }
-    if (D_801002A4 != 0 && (D_801002A4->flags & 2)) {
+    if (g_collisionProbeActorTwo != 0 && (g_collisionProbeActorTwo->flags & 2)) {
         return 1;
     }
     return 0;

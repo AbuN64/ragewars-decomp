@@ -1,23 +1,23 @@
 
 /* ROM-grounded data: rodata/writable/800E2AB0 */
 #ifdef VERSION_DE
-extern char D_00412B78[];
-unsigned int D_blob_phase2_77924f34fbc0b4a7149c[8] = {
-    0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, (unsigned int)D_00412B78, 0x00000006,
+extern char g_node_SelectPreviousGridRowEntry[];
+unsigned int g_NodeSetdisplayclipboundsPointerWords1[8] = {
+    0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, (unsigned int)g_node_SelectPreviousGridRowEntry, 0x00000006,
 };
 #endif
 #ifdef VERSION_EU
-unsigned int D_blob_phase2_77924f34fbc0b4a7149c[8] = {
+unsigned int g_NodeSetdisplayclipboundsPointerWords1[8] = {
     0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-unsigned int D_blob_phase2_77924f34fbc0b4a7149c[8] = {
+unsigned int g_NodeSetdisplayclipboundsPointerWords1[8] = {
     0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000016, 0x3DE147AE,
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_blob_phase2_77924f34fbc0b4a7149c[8] = {
+unsigned int g_NodeSetdisplayclipboundsPointerWords1[8] = {
     0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x4E545F53, 0x4D414C4C,
 };
 #endif

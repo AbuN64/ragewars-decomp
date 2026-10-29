@@ -6,5 +6,5 @@ extern void Timer_SetSaveTrailerValue(s32 offset, s32 value);
 extern void Timer_AllocateSaveBlock(void ***handle, void **data, s32 units);
 extern char *Timer_GetSaveBlockByteCount(s32 block);
 extern s32 Timer_GetSaveTrailerValue(s32 *block);
-extern void Timer_CapturePlayerProfile(struct OwnerRecAt5D8V1 *owner);
+extern void Timer_CapturePlayerProfile(struct PlayerSavedProfileOwner *owner);
 #endif

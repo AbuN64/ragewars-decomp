@@ -32,7 +32,7 @@ void Scene_CopySimpleModelHeader(void *level, void *buffer, s32 name) {
             resource = Cache_RequestWordCountedResource(0, &table, key, g_constructMapSimpModelsIndex, 1);
             if (resource != 0) {
                 shapeKey = SetN64_LocatePackSection(table, key, 0, &bytes);
-                shape = Cache_RequestResource(0, shapeKey, shapeKey, bytes, 0, 0, &D_0026D7F4, g_constructMapSimpleModel, 1);
+                shape = Cache_RequestResource(0, shapeKey, shapeKey, bytes, 0, 0, &g_simpleModelResourceCallbackAddress, g_constructMapSimpleModel, 1);
                 if (shape != 0) {
                     first = SetN64_GetPackSection(*shape, 2);
                     first = SetN64_GetPackSection(first, 0);

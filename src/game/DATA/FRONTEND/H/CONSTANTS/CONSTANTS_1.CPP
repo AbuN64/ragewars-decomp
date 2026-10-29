@@ -1,6 +1,6 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_writable_800D3640_unclaimed_D4268[10] = {
+unsigned int k_ConstantsEncodedWordsBlock22[10] = {
     0x800CB564, 0x800CB560, 0x800CB550, 0x00000000, 0x00000000, 0x00000000, 0x800CB574, 0x00000000,
     0x800CB588, 0x00000000,
 };

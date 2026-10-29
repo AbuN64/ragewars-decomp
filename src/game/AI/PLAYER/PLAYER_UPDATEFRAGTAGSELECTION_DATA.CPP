@@ -1,23 +1,23 @@
-#include "COMMON/OBJECTSTATE90.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/PLAYER_RECORD_AND_FRAGTAG_VIEWS.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "GFX/PLAYER_UPDATEFRAGTAGSELECTION_DATA.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "TYPES.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "GAME/BUILDDIRECTIONMATRIX.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
-extern void func_8022BF04_de(s32 player, s32 unused, s32 period, s32 kind);
+extern void Playerai_ApplyPeriodicDamage(s32 player, s32 unused, s32 period, s32 kind);
 
 extern s32 InstHdr_FindActorModelEntry(void *);
 
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
 /** Set up a player's starting lives from the game mode and character, then reset its respawn state. */
 
@@ -28,22 +28,22 @@ extern f32 D_800D2988;
 
 
 
-extern Rules_func_8022C110_de D_801462C8;
+extern FragTagMatchRulesView g_gameSettings;
 
 extern Course *D_800E4680;
 
-extern char D_80102B00[][0x190];
+extern char g_localPlayerProfiles[][0x190];
 
 extern unsigned char Player_GetLevelProgress(char *, int);
 
-extern u8 D_801462DE;
+extern u8 g_playerHudSpriteMode;
 
-extern s32 D_800E28D0;
+extern s32 g_hudReferenceViewportWidth;
 
 
 void Onscrn_SetupSpriteMode(s32 color);
 
-extern const struct D_800C7470_Pair D_800C2D40_de;
+extern const struct ScalarPair g_playerEyeMarkerYawAndHeight;
 
 
 
@@ -61,7 +61,7 @@ static inline void getEye(Player1680 *player, CVector3 *pos) {
     Matrix frame;
 
     if (player->mount != 0) {
-        *pos = player->mount->unk128;
+        *pos = player->mount->eyePosition;
     } else {
         Player_BuildPlayerViewTransform(player, &frame);
         Graphu64_GetMatrixTranslation(&frame, pos);
@@ -69,16 +69,16 @@ static inline void getEye(Player1680 *player, CVector3 *pos) {
 }
 
 static inline float getYaw(void) {
-    return D_80140FC0 * D_800C2D40_de.first;
+    return g_playerEyeMarkerAngle * g_playerEyeMarkerYawAndHeight.first;
 }
 
 extern void Playerai_InitializePlayerHealth(void *player);
 
-void func_8022C060_de(s32 player, s32 unused) {
-    func_8022BF04_de(player, unused, 5, 0x1B);
+void Playerai_ApplyPeriodicHazardDamage(s32 player, s32 unused) {
+    Playerai_ApplyPeriodicDamage(player, unused, 5, 0x1B);
 }
 
-void func_8022C080_de(void *actorView, void *bodyActor) {
+void Playerai_UpdateModelBlend(void *actorView, void *bodyActor) {
     void *result;
     f32 t0;
     f32 t1;
@@ -88,33 +88,33 @@ void func_8022C080_de(void *actorView, void *bodyActor) {
         t0 = ((ModelBlend *)result)->blend;
         t1 = ((Shared_ActorView *)actorView)->modelBlend;
         t0 = t0 - t1;
-        t0 = t0 * D_800C2D28_de;
+        t0 = t0 * g_playerModelBlendRate;
         t1 = t1 + t0;
         ((Shared_ActorView *)actorView)->modelBlend = t1;
     }
 }
 
-void func_8022C0D0_de(void *player) {
+void Playerai_UpdateCountdown(void *player) {
     f32 remainingTime;
     f32 previousTime;
-    previousTime = (((struct FloatState67C *) ((s8 *) player))->unk_678);
+    previousTime = (((struct PlayerTimedPowerupView *) ((s8 *) player))->unk_678);
     if (previousTime > 0.0f) {
-        remainingTime = previousTime - D_800D2988;
-        (((struct FloatState67C *) ((s8 *) player))->unk_678) = remainingTime;
+        remainingTime = previousTime - g_frameElapsedTime;
+        (((struct PlayerTimedPowerupView *) ((s8 *) player))->unk_678) = remainingTime;
         if (remainingTime < 0.0f) {
-            (((struct FloatState67C *) ((s8 *) player))->unk_678) = 0.0f;
+            (((struct PlayerTimedPowerupView *) ((s8 *) player))->unk_678) = 0.0f;
         }
     }
 }
 
-void func_8022C110_de(PlayerRecAt1450V2 *player) {
+void Playerai_InitializeLivesAndRespawn(PlayerFragTagSelectionView *player) {
     short state;
 
-    if (D_801462C8.started != 0) {
-        if (D_801462C8.mode == 1 && player->isBot == 0) {
-            player->lives = (unsigned char)Player_GetLevelProgress(D_80102B00[player->character], player->info->unk80) / 2 + 1;
+    if (g_gameSettings.started != 0) {
+        if (g_gameSettings.mode == 1 && player->isBot == 0) {
+            player->lives = (unsigned char)Player_GetLevelProgress(g_localPlayerProfiles[player->character], player->info->characterKind) / 2 + 1;
         }
-        if (D_801462C8.mode == 4 && player->isBot == 0 && D_800E4680 != 0) {
+        if (g_gameSettings.mode == 4 && player->isBot == 0 && D_800E4680 != 0) {
             player->lives = D_800E4680->laps;
         }
         state = 1;
@@ -125,7 +125,7 @@ void func_8022C110_de(PlayerRecAt1450V2 *player) {
     player->timer = 0;
 }
 
-void func_8022C1E8_de(char *player, char *view) {
+void Playerai_DrawHudSprite1FC(char *player, char *view) {
     f32 x, y;
     f32 sx, sy;
     f32 bx, by;
@@ -133,19 +133,19 @@ void func_8022C1E8_de(char *player, char *view) {
     f32 w;
     f32 screenX, screenY;
 
-    Onscrn_SetupSpriteMode(D_801462DE);
+    Onscrn_SetupSpriteMode(g_playerHudSpriteMode);
 
     x = ((Shared_HudView *)view)->width;
-    sx = x / (f32) D_800E28D0;
-    bx = sx * D_800C2D2C_de;
+    sx = x / (f32) g_hudReferenceViewportWidth;
+    bx = sx * g_playerHudSprite1FCOffset;
 
     y = ((Shared_HudView *)view)->height;
-    sy = y / (f32) D_800E28D4;
-    by = sy * D_800C2D2C_de;
+    sy = y / (f32) g_hudReferenceViewportHeight;
+    by = sy * g_playerHudSprite1FCOffset;
 
     t1 = ((Shared_HudView *)view)->x + x;
     t2 = ((Shared_HudView *)view)->y + y;
-    w = ((SharedPlayer *)player)->views5E8.view7BC_101.unk7BC;
+    w = ((SharedPlayer *)player)->views5E8.view7BC_101.timer;
 
     screenX = t1 + bx;
     screenY = t2 + by;
@@ -153,7 +153,7 @@ void func_8022C1E8_de(char *player, char *view) {
     OnScreen_DrawSpriteResource(0x1FC, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, sy, 1);
 }
 
-void func_8022C2B4_de(void *arg0, struct ScreenRectangle *viewport)
+void Playerai_DrawHudSprite1FB(void *unusedPlayer, struct ScreenRectangle *viewport)
 {
   f32 x;
   f32 y;
@@ -165,21 +165,21 @@ void func_8022C2B4_de(void *arg0, struct ScreenRectangle *viewport)
   f32 by;
   f32 screenX;
   f32 screenY;
-  Onscrn_SetupSpriteMode(D_801462DE);
+  Onscrn_SetupSpriteMode(g_playerHudSpriteMode);
   x = viewport->x;
-  ax = x * D_800C2D30_de;
+  ax = x * g_playerHudSprite1FBCenterScale;
   y = viewport->y;
-  ay = y * D_800C2D30_de;
-  sx = x / ((f32) D_800E28D0);
-  bx = sx * D_800C2D34_de;
-  sy = y / ((f32) D_800E28D4);
-  by = sy * D_800C2D34_de;
+  ay = y * g_playerHudSprite1FBCenterScale;
+  sx = x / ((f32) g_hudReferenceViewportWidth);
+  bx = sx * g_playerHudSprite1FBOffset;
+  sy = y / ((f32) g_hudReferenceViewportHeight);
+  by = sy * g_playerHudSprite1FBOffset;
   screenX = ((viewport->width) + ax) - bx;
   screenY = ((viewport->height) + ay) - by;
   OnScreen_DrawSpriteResource(0x1FB, 0, (s16) ((s32) (((viewport->width) + ax) - bx)), (s16) ((s32) screenY), sx, sy, 1);
 }
 
-void func_8022C37C_de(char *player, char *view) {
+void Playerai_DrawHudSprite201(char *player, char *view) {
     f32 x, y;
     f32 sx, sy;
     f32 bx, by, cz;
@@ -187,21 +187,21 @@ void func_8022C37C_de(char *player, char *view) {
     f32 w;
     f32 screenX, screenY;
 
-    Onscrn_SetupSpriteMode(D_801462DE);
+    Onscrn_SetupSpriteMode(g_playerHudSpriteMode);
 
     x = ((Shared_HudView *)view)->width;
-    sx = x / (f32) D_800E28D0;
-    bx = sx * D_800C2D38_de;
+    sx = x / (f32) g_hudReferenceViewportWidth;
+    bx = sx * g_playerHudSprite201Offset;
 
     y = ((Shared_HudView *)view)->height;
-    sy = y / (f32) D_800E28D4;
-    by = sy * D_800C2D38_de;
+    sy = y / (f32) g_hudReferenceViewportHeight;
+    by = sy * g_playerHudSprite201Offset;
 
-    cz = sy * D_800C2D3C_de;
+    cz = sy * g_playerHudSprite201HeightScale;
 
     t1 = ((Shared_HudView *)view)->x + x;
     t2 = ((Shared_HudView *)view)->y + y;
-    w = ((SharedPlayer *)player)->views5E8.view7BC_101.unk7BC;
+    w = ((SharedPlayer *)player)->views5E8.view7BC_101.timer;
 
     screenX = t1 + bx;
     screenY = t2 + by;
@@ -209,14 +209,14 @@ void func_8022C37C_de(char *player, char *view) {
     OnScreen_DrawSpriteResource(0x201, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, cz, 1);
 }
 
-void *func_8022C454_de(void *actorObject) {
+void *Playerai_ResetProfileState(void *actorObject) {
     struct Player *player = actorObject;
     AiProfile *p = player->profile;
     p->state90 = 0;
     return p;
 }
 
-s32 func_8022C460_de(void *actorObject) {
+s32 Playerai_IsRoundEndState(void *actorObject) {
     Shared_ActorView *player = actorObject;
     s16 action;
     action = player->action;
@@ -226,19 +226,19 @@ s32 func_8022C460_de(void *actorObject) {
     return 0;
 }
 
-void func_8022C490_de(Player1680 *player) {
+void Playerai_BuildEyeMarkerTransform(Player1680 *player) {
     Matrix mtx;
     CVector3 pos;
 
     getEye(player, &pos);
     Graphu64_IdentityMatrix(&mtx);
     BuildYawMatrix(&mtx, getYaw());
-    TranslateMatrix(&mtx, pos.x, pos.y + D_800C2D40_de.second, pos.z);
-    Graphu64_ConvertMatrixToFixed(&mtx, &player->views[D_800D297C]);
+    TranslateMatrix(&mtx, pos.x, pos.y + g_playerEyeMarkerYawAndHeight.second, pos.z);
+    Graphu64_ConvertMatrixToFixed(&mtx, &player->views[g_lightingBufferIndex]);
 }
 
-void *func_8022C55C_de(void *playerWorld, u32 eligiblePlayerIndex) {
-    struct World_func_802283B8_de *world = playerWorld;
+void *Playerai_GetEligiblePlayerByIndex(void *playerWorld, u32 eligiblePlayerIndex) {
+    struct PlayerWorldActorTables *world = playerWorld;
     Shared_ActorView *actor;
     s32 eligibleOrdinal;
 
@@ -261,8 +261,8 @@ void *func_8022C55C_de(void *playerWorld, u32 eligiblePlayerIndex) {
     return actor;
 }
 
-void func_8022C5AC_de(char *object) {
-    struct World_func_802283B8_de *world = (void *)object;
+void Playerai_ClearPlayerResetFlags(char *object) {
+    struct PlayerWorldActorTables *world = (void *)object;
     Shared_ActorView *record = (void *)world->players;
     while (record != 0) {
         Shared_ControlView *nested = record->controls;
@@ -273,8 +273,8 @@ void func_8022C5AC_de(char *object) {
     }
 }
 
-void func_8022C5DC_de(void *object) {
-    struct World_func_802283B8_de *world = (void *)object;
+void Playerai_ResetAllPlayerHealth(void *object) {
+    struct PlayerWorldActorTables *world = (void *)object;
     Shared_ActorView *record = (void *)world->players;
     if (record != 0) {
         do {
@@ -285,8 +285,8 @@ void func_8022C5DC_de(void *object) {
     }
 }
 
-s32 func_8022C620_de(char *object) {
-    struct World_func_802283B8_de *world = (void *)object;
+s32 Playerai_CountEligiblePlayers(char *object) {
+    struct PlayerWorldActorTables *world = (void *)object;
     Shared_ActorView *record = (void *)world->players;
     s32 count = 0;
     while (record != 0) {
@@ -299,8 +299,8 @@ s32 func_8022C620_de(char *object) {
     return count;
 }
 
-s32 func_8022C650_de(char *object) {
-    struct World_func_802283B8_de *world = (void *)object;
+s32 Playerai_CountActivePlayers(char *object) {
+    struct PlayerWorldActorTables *world = (void *)object;
     Shared_ActorView *record = (void *)world->players;
     s32 count = 0;
     while (record != 0) {

@@ -27,9 +27,9 @@ struct Group;
 typedef struct Group Group;
 
 
-extern int D_800CB418_de;
+extern int g_collisionSweepCount;
 
-extern float D_800C37B0_de;
+extern float g_cinemaSequenceTimeScale;
 
 
 
@@ -74,11 +74,11 @@ extern void Cinema_EndSequence(void);
 
 
 
-extern int D_800CB420_de;
+extern int g_cinemaLastUpdatedFrame;
 
 
 extern void Cinema_SetPlaybackFlag(void);
 
-extern int D_800CB41C_de;
+extern int g_collisionPeakSweepCount;
 
 #endif

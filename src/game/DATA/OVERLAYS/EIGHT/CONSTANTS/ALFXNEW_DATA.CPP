@@ -6,11 +6,11 @@
 
 /* 800D80A0.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_d0_a8a5a8901ee865be[4] = {
+unsigned int g_alfxnewDataConstantWords[4] = {
     0x00000000, 0x0000324E, 0x00000500, 0x04651E39,
 };
 
-unsigned int D_auto_src_ragewars_audio_effect_D8CB0_us_rev1[26] = {
+unsigned int g_alfxnewDataConstantWordsBlock1[26] = {
     0x00000003, 0x00000FA0, 0x00000000, 0x00000870, 0x00002666, 0xFFFFD99A, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x000002F8, 0x000005F0, 0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000960, 0x00001388, 0x00000000, 0x00000000, 0x00000000,
@@ -20,7 +20,7 @@ unsigned int D_auto_src_ragewars_audio_effect_D8CB0_us_rev1[26] = {
 
 /* 800D8118.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_audio_effect_D8D18_us_rev1[34] = {
+unsigned int g_alfxnewDataConstantWordsBlock2[34] = {
     0x00000004, 0x00000FA0, 0x00000000, 0x00000A50, 0x00002666, 0xFFFFD99A, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000370, 0x00000870, 0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000,
     0x00000000, 0x00000000, 0x00000A50, 0x00000E38, 0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000,
@@ -31,7 +31,7 @@ unsigned int D_auto_src_ragewars_audio_effect_D8D18_us_rev1[34] = {
 
 /* 800D81A0.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_audio_effect_D8DA0_us_rev1[10] = {
+unsigned int g_alfxnewDataConstantWordsBlock3[10] = {
     0x00000001, 0x00001F40, 0x00000000, 0x00001BF8, 0x00002EE0, 0x00000000, 0x00007FFF, 0x00000000,
     0x00000000, 0x00000000,
 };
@@ -39,7 +39,7 @@ unsigned int D_auto_src_ragewars_audio_effect_D8DA0_us_rev1[10] = {
 
 /* 800D81C8.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_audio_effect_D8DC8_us_rev1[10] = {
+unsigned int g_alfxnewDataConstantWordsBlock4[10] = {
     0x00000001, 0x00000320, 0x00000000, 0x000000C8, 0x00004000, 0x00000000, 0x00007FFF, 0x00001DB0,
     0x000002BC, 0x00000000,
 };
@@ -47,7 +47,7 @@ unsigned int D_auto_src_ragewars_audio_effect_D8DC8_us_rev1[10] = {
 
 /* 800D81F0.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_audio_effect_D8DF0_us_rev1[10] = {
+unsigned int g_alfxnewDataConstantWordsBlock5[10] = {
     0x00000001, 0x00000320, 0x00000000, 0x000000C8, 0x00000000, 0x00005FFF, 0x00007FFF, 0x0000017C,
     0x000001F4, 0x00000000,
 };

@@ -2,17 +2,17 @@
 #define AUDIO_INTEGERSTATE1DC4_H
 #include "TYPES.H"
 
-struct ObjRecAt2B9C;
-typedef struct ObjRecAt2B9C ObjRecAt2B9C;
+struct AudioLevelSettingView;
+typedef struct AudioLevelSettingView AudioLevelSettingView;
 
 struct SortTable;
 typedef struct SortTable SortTable;
 
-struct ContextRecAt2BC0;
-extern void *Audio_GetMetadataSectionFiveEntry(struct ContextRecAt2BC0 *arg0, int arg1);
+struct GameAudioContext;
+extern void *Audio_GetMetadataSectionFiveEntry(struct GameAudioContext *audioContext, int entryIndex);
 
-struct SceneRecAt2B5C;
-struct SceneRecAt2B5C {
+struct AudioWeightedVariantView;
+struct AudioWeightedVariantView {
     char pad0[0x130];
     s32 lastPick;
     char pad134[0x2B54 - 0x134];
@@ -21,45 +21,45 @@ struct SceneRecAt2B5C {
     s32 *weights;
 };
 
-struct SceneRecAt2B5C;
-typedef struct SceneRecAt2B5C SceneRecAt2B5C;
+struct AudioWeightedVariantView;
+typedef struct AudioWeightedVariantView AudioWeightedVariantView;
 
-extern s32 Audio_ChooseWeightedSoundVariant(SceneRecAt2B5C *scene, s16 id, s16 avoid);
+extern s32 Audio_ChooseWeightedSoundVariant(AudioWeightedVariantView *scene, s16 id, s16 avoid);
 
 struct SortTable;
 struct SortTable {
-    char unknown00[0xE];
+    char reservedHeader[0xE];
     s16 count;
     u32 entries[1];
 };
 
 extern void Audio_SortTableEntries(SortTable *table);
 
-extern float D_800C8FE0;
+extern float g_audioLevelMaximum;
 
-extern void Audio_SetVolumeSettingZero(struct ContextRecAt2BC0 *arg0, int arg1);
+extern void Audio_SetVolumeSettingZero(struct GameAudioContext *audioContext, int volume);
 
-extern void Audio_SetDialogVolume(struct ContextRecAt2BC0 *object, float value);
+extern void Audio_SetDialogVolume(struct GameAudioContext *object, float value);
 
 extern int Audio_GetSpatialPanMode(void *object);
 
-struct ObjRecAt2B9C;
-struct ObjRecAt2B9C {
+struct AudioLevelSettingView;
+struct AudioLevelSettingView {
     char pad[0x2B9C];
     int level;
 };
 
 extern char *Audio_GetMetadataSectionThreeEntry(char *object, int index);
 
-extern void Audio_SetSpatialPanMode(struct ContextRecAt2BC0 *arg0, int arg1);
+extern void Audio_SetSpatialPanMode(struct GameAudioContext *audioContext, int panMode);
 
 extern int Audio_FindVoiceSlotById(char *context, int id);
 
-extern void *Audio_GetMetadataSectionFourEntry(struct ContextRecAt2BC0 *arg0, int arg1);
+extern void *Audio_GetMetadataSectionFourEntry(struct GameAudioContext *audioContext, int entryIndex);
 
-extern double D_800C3EE8_de;
+extern double g_audioContextUnsignedValueCorrection;
 
-extern void Audio_SetVolumeSettingOne(struct ContextRecAt2BC0 *arg0, float arg1);
+extern void Audio_SetVolumeSettingOne(struct GameAudioContext *audioContext, float volume);
 
-extern float D_800C8FE4;
+extern float g_audioLevelIntegerScale;
 #endif

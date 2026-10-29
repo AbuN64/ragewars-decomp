@@ -5,9 +5,9 @@
 #include "COMMON/EFFECTRENDER.H"
 /* PAL resources provide a string per selected language. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern const char D_800EE170[], D_800EE174[];
-static inline const char *resultsNumberFormat(void) { return D_800EE170; }
-static inline const char *resultsPercentFormat(void) { return D_800EE174; }
+extern const char g_resultsNumberFormat[], g_resultsPercentFormat[];
+static inline const char *resultsNumberFormat(void) { return g_resultsNumberFormat; }
+static inline const char *resultsPercentFormat(void) { return g_resultsPercentFormat; }
 static inline char *resultsRankText(s32 rank) { return D_800DF964[rank][g_languageIndex]; }
 #else
 extern const char g_resultRowIntFormat[], g_resultRowPercentFormat[];

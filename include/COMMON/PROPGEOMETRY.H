@@ -13,10 +13,10 @@ struct StaticObject;
 
 
 
-extern float D_800C3DF0_de;
+extern float g_simpleObjectScaleTransitionTiming;
 
 
-extern float D_800C3E0C_de;
+extern float g_simpleObjectAlternateScaleTransitionTarget;
 
 
 
@@ -31,8 +31,8 @@ typedef struct PropGeometry PropGeometry;
 
 
 
-struct RecordRecAt1A;
-struct RecordRecAt1A {
+struct PackedPlacedPropDefinition;
+struct PackedPlacedPropDefinition {
     s32 value;
     f32 scale;
     u16 id;
@@ -103,7 +103,7 @@ struct PlacedProp {
     u16 flags;
     u8 colorFrame;
     char padDB;
-    s32 fieldDC;
+    s32 animationTimer;
     u8 fade;
     char padE1[0xE8 - 0xE1];
 };
@@ -111,12 +111,12 @@ struct PlacedProp {
 struct PlacedProp;
 typedef struct PlacedProp PlacedProp;
 
-struct DescriptorRecAt24;
-typedef struct DescriptorRecAt24 DescriptorRecAt24;
+struct StaticModelAnimationDescriptor;
+typedef struct StaticModelAnimationDescriptor StaticModelAnimationDescriptor;
 
 
-struct DescriptorRecAt24;
-struct DescriptorRecAt24 {
+struct StaticModelAnimationDescriptor;
+struct StaticModelAnimationDescriptor {
     char pad0[0xE];
     s8 key;
     s8 key2;
@@ -126,33 +126,33 @@ struct DescriptorRecAt24 {
     s32 period;
 };
 
-struct DescriptorRecAt24;
+struct StaticModelAnimationDescriptor;
 struct OwnerStaticInstanceDrawDistanceFadedModel;
 
 
 
 
-extern float D_800C3D98_de;
+extern float g_simpleObjectViewEffectScale;
 
 
 
-struct GlobalStateRecAt1C;
-typedef struct GlobalStateRecAt1C GlobalStateRecAt1C;
+struct ModelEffectSpawnState;
+typedef struct ModelEffectSpawnState ModelEffectSpawnState;
 
-struct GlobalStateRecAt1C;
+struct ModelEffectSpawnState;
 
 
 
 struct StaticObject;
 
-struct Descriptor_func_802504B0_de;
-struct Descriptor_func_802504B0_de {
+struct StaticModelMaterialDescriptor;
+struct StaticModelMaterialDescriptor {
     char pad0[0xE];
     s8 key;
     char padF[3];
     s8 argument;
 };
-struct Descriptor_func_802504B0_de;
+struct StaticModelMaterialDescriptor;
 struct ModelOwner;
 
 
@@ -166,15 +166,15 @@ struct ActorSimpleInstanceSpawnModelEffect;
 struct PlacedPropRecord;
 typedef struct PlacedPropRecord PlacedPropRecord;
 
-extern float D_800C3E08_de;
+extern float g_simpleObjectAlternateScaleTransitionFactor;
 
 
 
 
-struct RecordRecAt1A;
-typedef struct RecordRecAt1A RecordRecAt1A;
+struct PackedPlacedPropDefinition;
+typedef struct PackedPlacedPropDefinition PackedPlacedPropDefinition;
 
-extern float D_800C3E00_de;
+extern float g_simpleObjectAlternateScaleTransitionTiming;
 
 
 struct OwnerStaticInstanceDrawDistanceFadedModel;
@@ -184,16 +184,16 @@ typedef struct OwnerStaticInstanceDrawDistanceFadedModel OwnerStaticInstanceDraw
 
 
 
-extern char D_0024F8DC;
+extern char g_Simpinst_BuildLitGeometryResourceAddress;
 extern char g_simpObjectIndexText[];
 extern char s_litVerticesText;
 
 typedef struct ResourceOwner { u8 pad0[0x1c]; s32 key; u8 pad20[0x88]; s32 index; s32 selected; s32 size; void *resource; } ResourceOwner;
 extern char s_statModelsIndexText[];
 extern char s_statModelText[];
-extern char D_0026D7D4_de[];
+extern char g_Geometry_ExpandBasicModelAddressDe[];
 
-extern char D_800C3E70[];
+extern char s_staticObjectResourceTag[];
 
 extern s32 Geometry_GetViewEffect(void);
 #endif

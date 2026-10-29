@@ -1,10 +1,10 @@
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
-#include "COMMON/S1_6.H"
+#include "COMMON/RESERVED_SHARED_DECLARATIONS.H"
 #include "COMMON/GAME_SESSION.H"
 #include "TYPES.H"
 
 /* 8042E080_76.CPP */
-/* On event 3 with value 0xD, clears D_80146894 and calls Tsmos_RequestFrontendShutdown and SoundElement_DisableMusicGainOverride. Returns
+/* On event 3 with value 0xD, clears g_simpleObjectPauseState and calls Tsmos_RequestFrontendShutdown and SoundElement_DisableMusicGainOverride. Returns
    zero. */
 extern void Tsmos_RequestFrontendShutdown(void);
 
@@ -13,7 +13,7 @@ s32 Frontend_ResumeMatchOnInput(void *first, void *second, u32 event, s32 value)
         if (value != 0xD) {
             return 0;
         }
-        D_8011FAC0.clockPaused = 0;
+        g_gameSession.clockPaused = 0;
         Tsmos_RequestFrontendShutdown();
         SoundElement_DisableMusicGainOverride();
     }

@@ -2,12 +2,12 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OBJRECAT26DD8.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/EFFECTRENDER.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -17,42 +17,42 @@ void CCredits_UpdateScroll(void *object) {
     f32 time;
     f32 height;
     s32 line;
-    if (D_80142898 != 0) {
-        time = D_80142CB4 - D_800D2988;
-        D_80142CB4 = time;
+    if (g_creditsSkipRequested != 0) {
+        time = g_creditsLineTimer - g_frameElapsedTime;
+        g_creditsLineTimer = time;
         if (time <= 0.0f) {
-            Playerai_GetFirstPlayer(&D_80145040);
-            if (D_800CD784_de != 0) {
-                if (D_800CD780 == 0) {
+            Playerai_GetFirstPlayer(&g_playerViewRenderContext);
+            if (g_creditsSelectSpawnOnExit != 0) {
+                if (g_creditsReturnToFrontend == 0) {
                     SetN64_SelectSpawnAfterCredits(object, 0x7CF);
                     return;
                 }
                 goto advance;
             }
-            if (D_800CD780 != 0) {
+            if (g_creditsReturnToFrontend != 0) {
 advance:
                 SetN64_SetTransitionTarget(object, 1);
-                D_801462C8.counters.m_bCreditsSeenOnce = 1;
+                g_gameSettings.counters.m_bCreditsSeenOnce = 1;
             }
         }
     } else {
-        if (D_800E28D4 >= 223) {
-            D_80146CB8 -= D_800C53F0_de;
+        if (g_hudReferenceViewportHeight >= 223) {
+            g_creditsScrollPosition -= g_creditsNormalScrollStep;
         } else {
-            D_80146CB8 -= D_800C53F4_de;
+            g_creditsScrollPosition -= g_creditsFastScrollStep;
         }
-        height = (f32)D_800E28D4 * D_800C53F8_de;
-        if (D_80146CB8 <= -height) {
-            line = D_8011B9F0 + 1;
-            D_8011B9F0 = line;
-            D_80146CB8 += height;
+        height = (f32)g_hudReferenceViewportHeight * g_creditsViewportHeightScale;
+        if (g_creditsScrollPosition <= -height) {
+            line = g_creditsCurrentLine + 1;
+            g_creditsCurrentLine = line;
+            g_creditsScrollPosition += height;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-            if (D_800D3E14_de[g_languageIndex][line] == 0) {
+            if (g_creditsLocalizedLines[g_languageIndex][line] == 0) {
 #else
-            if (D_800D3E14_de[0][line] == 0) {
+            if (g_creditsLocalizedLines[0][line] == 0) {
 #endif
-                D_80142898 = 1;
-                D_80142CB4 = D_800C56AC_eu;
+                g_creditsSkipRequested = 1;
+                g_creditsLineTimer = g_creditsNextLineDelayEu;
             }
         }
     }
@@ -63,46 +63,46 @@ advance:
 extern int Playerai_GetFirstPlayer(void *world);
 
 
-void CCredits_UpdateScroll(void *arg0) {
-    f32 temp_f0;
-    f32 temp_f1;
-    s32 temp_v1;
+void CCredits_UpdateScroll(void *session) {
+    f32 remainingTime;
+    f32 scrollBoundary;
+    s32 nextLine;
 
-    if (D_80142898 != 0) {
-        temp_f0 = D_80142CB4 - D_800D2988;
-        D_80142CB4 = temp_f0;
-        if (temp_f0 <= 0.0f) {
-            Playerai_GetFirstPlayer(&D_80145040);
-            if (D_800CD784_de != 0) {
-                if (D_800CD780 == 0) {
-                    SetN64_SelectSpawnAfterCredits(arg0, 0x7CF);
+    if (g_creditsSkipRequested != 0) {
+        remainingTime = g_creditsLineTimer - g_frameElapsedTime;
+        g_creditsLineTimer = remainingTime;
+        if (remainingTime <= 0.0f) {
+            Playerai_GetFirstPlayer(&g_playerViewRenderContext);
+            if (g_creditsSelectSpawnOnExit != 0) {
+                if (g_creditsReturnToFrontend == 0) {
+                    SetN64_SelectSpawnAfterCredits(session, 0x7CF);
                     return;
                 }
                 goto block_6;
             }
-            if (D_800CD780 != 0) {
+            if (g_creditsReturnToFrontend != 0) {
 block_6:
-                SetN64_SetTransitionTarget(arg0, 1);
-                D_801462C8.counters.m_bCreditsSeenOnce = 1;
+                SetN64_SetTransitionTarget(session, 1);
+                g_gameSettings.counters.m_bCreditsSeenOnce = 1;
             }
         }
     } else {
-        if (D_800E28D4 >= 0xDF) {
-            D_80146CB8 -= D_800C53F0_de;
+        if (g_hudReferenceViewportHeight >= 0xDF) {
+            g_creditsScrollPosition -= g_creditsNormalScrollStep;
         } else {
-            D_80146CB8 -= D_800C53F4_de;
+            g_creditsScrollPosition -= g_creditsFastScrollStep;
         }
-        temp_f1 = (f32)D_800E28D4 * D_800C53F8_de;
-        if (D_80146CB8 <= -temp_f1) {
-            temp_v1 = D_8011B9F0 + 1;
-            D_8011B9F0 = temp_v1;
-            D_80146CB8 += temp_f1;
-            if (D_800D3E14_de[0][temp_v1] == 0) {
-                D_80142898 = 1;
+        scrollBoundary = (f32)g_hudReferenceViewportHeight * g_creditsViewportHeightScale;
+        if (g_creditsScrollPosition <= -scrollBoundary) {
+            nextLine = g_creditsCurrentLine + 1;
+            g_creditsCurrentLine = nextLine;
+            g_creditsScrollPosition += scrollBoundary;
+            if (g_creditsLocalizedLines[0][nextLine] == 0) {
+                g_creditsSkipRequested = 1;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                D_80142CB4 = D_800C56AC_eu;
+                g_creditsLineTimer = g_creditsNextLineDelayEu;
 #else
-                D_80142CB4 = D_800C53FC_de;
+                g_creditsLineTimer = g_creditsNextLineDelay;
 #endif
             }
         }

@@ -5,47 +5,47 @@
 #include "COMMON/VECTOR4F.H"
 
 
-typedef struct Shared_func_80227014_S2 Shared_func_80227014_S2;
-struct Shared_func_80227014_S2 {
+typedef struct FragTagPlayerStateView FragTagPlayerStateView;
+struct FragTagPlayerStateView {
     char pad0[0x8];
     CVector3 position; /* +0x8: actor position, shared player provider and sound CVector3 argument. */
     char pad14[0x4];
-    struct Shared_func_80227014_S7 * unk18; /* +0x18: src/func_80227014.c */
+    struct FragTagActorModelView * model; /* +0x18: src/func_80227014.c */
     char pad1C[0x158];
-    s32 unk174; /* +0x174: src/func_80227014.c */
+    s32 restoredHealth; /* +0x174: src/func_80227014.c */
     char pad178[0x170];
-    s8 unk2E8; /* +0x2E8: src/func_80227014.c */
+    s8 bodyStateStorage; /* +0x2E8: src/func_80227014.c */
     char pad2E9[0x16F];
-    s8 unk458; /* +0x458: src/func_80227014.c */
+    s8 weaponStateStorage; /* +0x458: src/func_80227014.c */
     char pad459[0x17B];
-    s32 unk5D4; /* +0x5D4: src/func_80227014.c */
-    struct Shared_func_80227014_S6 * unk5D8; /* +0x5D8: src/func_80227014.c */
-    void * unk5DC; /* +0x5DC: src/func_80227014.c */
+    s32 playerIndex; /* +0x5D4: src/func_80227014.c */
+    struct FragTagActiveProfileView * profile; /* +0x5D8: src/func_80227014.c */
+    void * view; /* +0x5DC: src/func_80227014.c */
     char pad5E0[0x4];
-    s32 unk5E4; /* +0x5E4: src/func_80227014.c */
+    s32 health; /* +0x5E4: src/func_80227014.c */
     char pad5E8[0x4];
-    s32 unk5EC; /* +0x5EC: src/func_80227014.c */
+    s32 spawnPoint; /* +0x5EC: src/func_80227014.c */
     char pad5F0[0x348];
-    char unk938[2172]; /* +0x938: src/func_80227014.c */
+    char animationState[2172]; /* +0x938: src/func_80227014.c */
     s32 unk11B4; /* +0x11B4: src/func_80227014.c */
     char pad11B8[0x298];
-    s32 unk1450; /* +0x1450: src/func_80227014.c */
+    s32 computerControlled; /* +0x1450: src/func_80227014.c */
 };
 
 
-typedef struct Shared_func_80227014_S3 Shared_func_80227014_S3;
-struct Shared_func_80227014_S3 {
+typedef struct FragTagSelectionProfileView FragTagSelectionProfileView;
+struct FragTagSelectionProfileView {
     char pad0[0x80];
-    s8 unk80; /* +0x80: src/func_80227014.c */
+    s8 team; /* +0x80: src/func_80227014.c */
     char pad81[0xF];
-    u8 unk90; /* +0x90: src/func_80227014.c */
+    u8 assigned; /* +0x90: src/func_80227014.c */
     char pad91[0x3];
-    u8 unk94; /* +0x94: src/func_80227014.c */
+    u8 selected; /* +0x94: src/func_80227014.c */
 };
 
 
-typedef struct SharedRecAt564V1 SharedRecAt564V1;
-struct SharedRecAt564V1 {
+typedef struct PlayerCameraTargetView PlayerCameraTargetView;
+struct PlayerCameraTargetView {
     u8 pad0[0x128];
     CVector3 position; /* 0x128 */
     u8 pad134[0xC];
@@ -53,93 +53,93 @@ struct SharedRecAt564V1 {
     u8 pad150[0x10];
     f32 transform[16]; /* 0x160 */
     u8 pad1A0[0x29C - 0x1A0];
-    f32 unk29C; /* +0x29C: src/func_80227014.c */
-    f32 unk2A0; /* +0x2A0: src/func_80227014.c */
-    f32 unk2A4; /* +0x2A4: src/func_80227014.c */
-    f32 unk2A8; /* +0x2A8: src/func_80227014.c */
+    f32 viewportWidth; /* +0x29C: src/func_80227014.c */
+    f32 viewportHeight; /* +0x2A0: src/func_80227014.c */
+    f32 viewportX; /* +0x2A4: src/func_80227014.c */
+    f32 viewportY; /* +0x2A8: src/func_80227014.c */
     char pad2AC[0x2B8];
-    s32 unk564; /* +0x564: src/func_80227014.c */
+    s32 disabled; /* +0x564: src/func_80227014.c */
 };
 
 
 
-typedef struct Shared_func_80227014_S6 Shared_func_80227014_S6;
-struct Shared_func_80227014_S6 {
+typedef struct FragTagActiveProfileView FragTagActiveProfileView;
+struct FragTagActiveProfileView {
     char pad0[0x8F];
-    s8 unk8F; /* +0x8F: src/func_80227014.c */
+    s8 fragTagEnabled; /* +0x8F: src/func_80227014.c */
 };
 
 
-typedef struct Shared_func_80227014_S7 Shared_func_80227014_S7;
-struct Shared_func_80227014_S7 {
+typedef struct FragTagActorModelView FragTagActorModelView;
+struct FragTagActorModelView {
     char pad0[0x18];
-    s32 unk18; /* +0x18: src/func_80227014.c */
+    s32 modelId; /* +0x18: src/func_80227014.c */
 };
 
 
-typedef struct Shared_func_80227014_S8 Shared_func_80227014_S8;
-struct Shared_func_80227014_S8 {
+typedef struct FragTagPlayerInputView FragTagPlayerInputView;
+struct FragTagPlayerInputView {
     char pad0[0x8];
     CVector3 position; /* +0x8: actor position, shared player provider and sound CVector3 argument. */
     char pad14[0x4];
-    struct Shared_func_80227014_S7 * unk18; /* +0x18: src/func_80227014.c */
+    struct FragTagActorModelView * model; /* +0x18: src/func_80227014.c */
     char pad1C[0x158];
-    s32 unk174; /* +0x174: src/func_80227014.c */
+    s32 restoredHealth; /* +0x174: src/func_80227014.c */
     char pad178[0x170];
-    s8 unk2E8; /* +0x2E8: src/func_80227014.c */
+    s8 bodyStateStorage; /* +0x2E8: src/func_80227014.c */
     char pad2E9[0x16F];
-    s8 unk458; /* +0x458: src/func_80227014.c */
+    s8 weaponStateStorage; /* +0x458: src/func_80227014.c */
     char pad459[0x17B];
-    s32 unk5D4; /* +0x5D4: src/func_80227014.c */
-    struct Shared_func_80227014_S10 * unk5D8; /* +0x5D8: src/func_80227014.c */
-    void * unk5DC; /* +0x5DC: src/func_80227014.c */
+    s32 playerIndex; /* +0x5D4: src/func_80227014.c */
+    struct FragTagEnableProfileView * profile; /* +0x5D8: src/func_80227014.c */
+    void * view; /* +0x5DC: src/func_80227014.c */
     char pad5E0[0x4];
-    s32 unk5E4; /* +0x5E4: src/func_80227014.c */
+    s32 health; /* +0x5E4: src/func_80227014.c */
     char pad5E8[0x4];
-    s32 unk5EC; /* +0x5EC: src/func_80227014.c */
+    s32 spawnPoint; /* +0x5EC: src/func_80227014.c */
     char pad5F0[0x348];
-    char unk938[2172]; /* +0x938: src/func_80227014.c */
+    char animationState[2172]; /* +0x938: src/func_80227014.c */
     s32 unk11B4; /* +0x11B4: src/func_80227014.c */
     char pad11B8[0x298];
-    s32 unk1450; /* +0x1450: src/func_80227014.c */
+    s32 computerControlled; /* +0x1450: src/func_80227014.c */
 };
 
 
-typedef struct Shared_func_80227014_S9 Shared_func_80227014_S9;
-struct Shared_func_80227014_S9 {
+typedef struct FragTagCameraStateView FragTagCameraStateView;
+struct FragTagCameraStateView {
     char pad0[0x29C];
-    f32 unk29C; /* +0x29C: src/func_80227014.c */
-    f32 unk2A0; /* +0x2A0: src/func_80227014.c */
-    f32 unk2A4; /* +0x2A4: src/func_80227014.c */
-    f32 unk2A8; /* +0x2A8: src/func_80227014.c */
+    f32 viewportWidth; /* +0x29C: src/func_80227014.c */
+    f32 viewportHeight; /* +0x2A0: src/func_80227014.c */
+    f32 viewportX; /* +0x2A4: src/func_80227014.c */
+    f32 viewportY; /* +0x2A8: src/func_80227014.c */
     char pad2AC[0x2B8];
-    s32 unk564; /* +0x564: src/func_80227014.c */
+    s32 disabled; /* +0x564: src/func_80227014.c */
 };
 
 
-typedef struct Shared_func_80227014_S10 Shared_func_80227014_S10;
-struct Shared_func_80227014_S10 {
+typedef struct FragTagEnableProfileView FragTagEnableProfileView;
+struct FragTagEnableProfileView {
     char pad0[0x8F];
-    u8 unk8F; /* +0x8F: src/func_80227014.c */
+    u8 fragTagEnabled; /* +0x8F: src/func_80227014.c */
 };
 
 
-typedef struct Shared_func_80227014_S11 Shared_func_80227014_S11;
-struct Shared_func_80227014_S11 {
+typedef struct FragTagTeamProfileView FragTagTeamProfileView;
+struct FragTagTeamProfileView {
     char pad0[0x80];
-    s8 unk80; /* +0x80: src/func_80227014.c */
+    s8 team; /* +0x80: src/func_80227014.c */
     char pad81[0xE];
-    u8 unk8F; /* +0x8F: src/func_80227014.c */
+    u8 fragTagEnabled; /* +0x8F: src/func_80227014.c */
     char pad90[0x4];
-    u8 unk94; /* +0x94: src/func_80227014.c */
+    u8 selected; /* +0x94: src/func_80227014.c */
 };
 
 
-typedef struct Shared_func_80227014_S19 Shared_func_80227014_S19;
-struct Shared_func_80227014_S19 {
+typedef struct FragTagAssignmentProfileView FragTagAssignmentProfileView;
+struct FragTagAssignmentProfileView {
     char pad0[0x8F];
-    u8 unk8F; /* +0x8F: src/func_80227014.c */
-    s8 unk90; /* +0x90: src/func_80227014.c */
+    u8 fragTagEnabled; /* +0x8F: src/func_80227014.c */
+    s8 assigned; /* +0x90: src/func_80227014.c */
 };
 
 

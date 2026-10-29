@@ -7,28 +7,28 @@ struct Tree;
 struct StateFrontendInitModelPreviewTransform;
 typedef struct StateFrontendInitModelPreviewTransform StateFrontendInitModelPreviewTransform;
 
-struct ObjectRecAt28;
+struct ModelPreviewRotationSpeedView;
 struct Triple;
-struct ObjectRecAt28 {
+struct ModelPreviewRotationSpeedView {
     char pad[0x28];
     struct Triple vector;
 };
 
-struct ObjectRecAt10;
+struct ModelPreviewPositionView;
 struct Triple;
-struct ObjectRecAt10 {
+struct ModelPreviewPositionView {
     char pad[0x10];
     struct Triple vector;
 };
 
-struct ObjectRecAt10;
+struct ModelPreviewPositionView;
 struct Triple;
 
-struct Shape_typemap_21;
+struct WidgetFlagsView;
 struct Pulse;
-struct Shape_typemap_21;
+struct WidgetFlagsView;
 struct Pulse {
-    union { struct Shape_typemap_21 *light; struct MenuWidget *widget; };
+    union { struct WidgetFlagsView *light; struct MenuWidget *widget; };
     s32 phase;
 };
 
@@ -46,16 +46,16 @@ struct MenuModelItem {
 
 struct StateFrontendInitModelPreviewTransform;
 struct StateFrontendInitModelPreviewTransform {
-    s32 unk0;
+    s32 unused;
     Triple first;
     Triple second;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-    s32 unk2C;
-    s32 unk30;
-    s32 unk34;
+    s32 rotationXBits;
+    s32 rotationYBits;
+    s32 rotationZBits;
+    s32 rotationSpeedXBits;
+    s32 rotationSpeedYBits;
+    s32 rotationSpeedZBits;
+    s32 modelId;
 };
 
 struct MenuModelScreen;
@@ -92,5 +92,5 @@ typedef struct MenuModelScreen MenuModelScreen;
 
 
 typedef s32 (*MenuEventHandler)(void *, s32, s32, s32, s32);
-extern MenuEventHandler D_800E595C;
+extern MenuEventHandler g_profileResetEventHandlers;
 #endif

@@ -4,12 +4,12 @@
 
 /* osMotorInit, drafted from ultralib src/io/motor.c (the branch before 2.0J) with its static
    _MakeMotorData, which this library inlines: _MotorStartData, _motorstartbuf, _MotorStopData and _motorstopbuf are
-   D_8014D4C0, D_8014D5C0, D_8014D5E0 and D_8014D6E0, and __osMotorinitialized is D_800D8380. */
-extern OSPifRam D_8014D4C0[4];
-extern u8 D_8014D5C0[32];
-extern OSPifRam D_8014D5E0[4];
-extern u8 D_8014D6E0[32];
-extern s32 D_800D8380[4];
+   g_controllerMotorStartCommands, g_controllerMotorStartData, g_controllerMotorStopCommands and g_controllerMotorStopData, and __osMotorinitialized is g_controllerMotorInitialized. */
+extern OSPifRam g_controllerMotorStartCommands[4];
+extern u8 g_controllerMotorStartData[32];
+extern OSPifRam g_controllerMotorStopCommands[4];
+extern u8 g_controllerMotorStopData[32];
+extern s32 g_controllerMotorInitialized[4];
 extern s32 __osContRamRead(OSMesgQueue *mq, int channel, u16 address, u8 *buffer);
 extern s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
 extern u8 __osContAddressCrc(u16 address);
@@ -91,28 +91,28 @@ s32 osMotorInit(OSMesgQueue *mq, OSPfs *pfs, int channel)
     if (temp[31] != 0x80) {
         return 11;
     }
-    if (!D_800D8380[channel]) {
-        for (i = 0; i < ((s32)(sizeof(D_8014D5C0) / sizeof(D_8014D5C0[0]))); i++) {
+    if (!g_controllerMotorInitialized[channel]) {
+        for (i = 0; i < ((s32)(sizeof(g_controllerMotorStartData) / sizeof(g_controllerMotorStartData[0]))); i++) {
             /* Each buffer address is taken where it is used, as -fforce-addr compiles it, so the
                loop optimiser hoists it into a register in this order. */
-            startbuf = D_8014D5C0;
+            startbuf = g_controllerMotorStartData;
             startbuf[i] = 1;
-            stopbuf = D_8014D6E0;
+            stopbuf = g_controllerMotorStopData;
             stopbuf[i] = 0;
         }
-        _MakeMotorData(channel, 0x600, D_8014D5C0, &D_8014D4C0[channel]);
-        _MakeMotorData(channel, 0x600, D_8014D6E0, &D_8014D5E0[channel]);
-        D_800D8380[channel] = 1;
+        _MakeMotorData(channel, 0x600, g_controllerMotorStartData, &g_controllerMotorStartCommands[channel]);
+        _MakeMotorData(channel, 0x600, g_controllerMotorStopData, &g_controllerMotorStopCommands[channel]);
+        g_controllerMotorInitialized[channel] = 1;
     }
     return 0;
 }
 
 #if defined(VERSION_US)
-unsigned char D_auto_func_802B83E4_us_padding_B8FE4[4] = { 0x00, 0x0B, 0x00, 0x00 };
+unsigned char g_OsmotorinitTrailingBytes[4] = { 0x00, 0x0B, 0x00, 0x00 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802B83E8[1] = {
+unsigned int k_OsmotorinitEncodedWords[1] = {
     0x0010000B,
 };
 #endif

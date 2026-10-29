@@ -3,7 +3,7 @@
 /* DATA_80153F4C.CPP */
 #if defined(VERSION_US_REV1)
 
-unsigned int D_auto_rodata_unresolved_80153F4C[3] = {
+unsigned int k_Ovl3EncodedWords[3] = {
     0x00000000, 0x00024050, 0x00080000,
 };
 
@@ -20,7 +20,7 @@ struct {
 
 /* DATA_80153F60.CPP */
 #if defined(VERSION_US_REV1)
-extern char rw_menu_paged_func_804402DC_de[];
+extern char g_menuPaged_Menu_DrawMenuOptionSprite[];
 
 struct {
     short x1;
@@ -43,7 +43,7 @@ struct {
 struct {
     unsigned int resourceCallback1;
 } g_menuItemFragment3 = {
-    (unsigned int)rw_menu_paged_func_804402DC_de,
+    (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite,
 };
 
 struct {

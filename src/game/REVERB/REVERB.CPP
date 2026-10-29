@@ -3,8 +3,8 @@
 #include "abi.h"
 #include "acmd.h"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
-#include "sdk/libultra/audio/save_3.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "sdk/libultra/audio/EFFECT_FILTER_STATE.H"
 #include "sdk/libgultra.h"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/ALDELAY28.H"
@@ -62,7 +62,7 @@ s32 Audio_SetEffectParameter(ALFxCode802BAC64 *filter, s32 paramID, void *param)
             f->delay[s].gain = (s16)val;
             break;
         case 5:
-            f->delay[s].rsinc = (((f32)val * D_800C77B8_de) * 2.0f) / D_800D4070->drvr.outputRate;
+            f->delay[s].rsinc = (((f32)val * g_reverbModulationRateScale) * 2.0f) / g_audioGlobals->drvr.outputRate;
             break;
         case 6: {
             f32 fval = (f32)val;
@@ -70,8 +70,8 @@ s32 Audio_SetEffectParameter(ALFxCode802BAC64 *filter, s32 paramID, void *param)
             double flength = length;
 
             if (length < 0)
-                flength += D_800C77C0_de;
-            f->delay[s].rsgain = fval * ((f32)flength * D_800C77C8_de);
+                flength += g_reverbDelayFloatConversionBias;
+            f->delay[s].rsgain = fval * ((f32)flength * g_reverbGainLengthScale);
             break;
         }
         case 7:
@@ -97,12 +97,12 @@ Acmd *Audio_LoadEffectOutput(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd 
 
     if (d->rs) {
         length = d->output - d->input;
-        delta = func_802B6300_de(d, incount);
+        delta = _getDelta(d, incount);
         delta /= length;
-        unity = D_800C77CC_de;
+        unity = g_reverbUnityRatio;
         delta = (s32)(delta * unity);
-        delta = delta * D_800C77D0_de;
-        fratio = D_800C77D4_de - delta;
+        delta = delta * g_reverbDeltaScale;
+        fratio = g_reverbRatioBase - delta;
 
         fincount = d->rs->delta + (fratio * (f32)incount);
         count = (s32)fincount;
@@ -111,7 +111,7 @@ Acmd *Audio_LoadEffectOutput(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd 
         out_ptr = &r->input[-(d->output - d->rsdelta)];
         ramalign = ((s32)out_ptr & 0x7) >> 1;
 
-        ptr = func_802B60EC_de(r, out_ptr - ramalign, rbuff, count + ramalign, ptr);
+        ptr = _loadBuffer(r, out_ptr - ramalign, rbuff, count + ramalign, ptr);
 
         ratio = (s32)(fratio * unity);
         aSetBuffer(ptr++, 0, rbuff + (ramalign << 1), buff, incount << 1);
@@ -121,7 +121,7 @@ Acmd *Audio_LoadEffectOutput(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd 
         d->rsdelta += count - incount;
     } else {
         out_ptr = &r->input[-d->output];
-        ptr = func_802B60EC_de(r, out_ptr, buff, incount, ptr);
+        ptr = _loadBuffer(r, out_ptr, buff, incount, ptr);
     }
 
     return ptr;
@@ -129,7 +129,7 @@ Acmd *Audio_LoadEffectOutput(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd 
 
  /* osVirtualToPhysical */
 
-Acmd *func_802B5F68_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
+Acmd *_saveBuffer(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
 {
     Acmd *ptr = p;
     s32 after_end, before_end;
@@ -167,7 +167,7 @@ int alFxParam(int *filter, int paramId, int param) {
 
  /* osVirtualToPhysical */
 
-Acmd *func_802B60EC_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
+Acmd *_loadBuffer(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
 {
     Acmd *ptr = p;
     s32 after_end, before_end;
@@ -197,7 +197,7 @@ Acmd *func_802B60EC_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
     return ptr;
 }
 
-void *func_802B625C_de(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount, void *awords) {
+void *_filterBuffer(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount, void *awords) {
     AudioLowPassFilter *o = audioLowPassFilter;
     Awords *d = awords;
     void *ret;
@@ -221,14 +221,14 @@ void *func_802B625C_de(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount
 }
 
  /* RANGE/2 */
-f32 func_802B6300_de(ALDelay28 *d, s32 count)
+f32 _getDelta(ALDelay28 *d, s32 count)
 {
     f32 val;
     d->rsval += d->rsinc * count;
-    d->rsval = (d->rsval > D_800C77D8_de) ? d->rsval - (*(&D_800C77D8_de + 1)) : d->rsval;
+    d->rsval = (d->rsval > g_reverbModulationWrapLimits) ? d->rsval - (*(&g_reverbModulationWrapLimits + 1)) : d->rsval;
     val = d->rsval;
     val = (val < 0) ? -val : val;
-    val -= D_800C77E0_de;
+    val -= g_reverbModulationCenter;
     return d->rsgain * val;
 }
 

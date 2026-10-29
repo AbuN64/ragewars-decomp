@@ -1,11 +1,11 @@
 #include "sdk/LIBC.H"
 #include "COMMON/ENTRYRECAT0V3.H"
-#include "COMMON/LONE/D_8010FC00.H"
+#include "COMMON/LONE/CONTROLLER_SI_MESSAGE_QUEUE.H"
 #include "MENU/PAK_DIRECTORY_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/RECORDRECAT1C.H"
 #include "MENU/PAK/NOTE_REFRESHNOTES.H"
@@ -22,19 +22,19 @@
 
 
 
-extern OSPfs D_8014D280[];
+extern OSPfs g_controllerPakFileSystems[];
 
-extern PakDirectory *D_800E2854;
+extern PakDirectory *g_controllerPakNoteLists;
 
 extern s32 osPfsFileState(OSPfs *pfs, s32 file_no, NoteState *state);
 
 extern s32 osPfsFreeBlocks(OSPfs *pfs, s32 *free);
 
-static inline void *pak27(s32 ch) {return ((u8 *)D_8014D280)+ch*0x68;}
+static inline void *pak27(s32 ch) {return ((u8 *)g_controllerPakFileSystems)+ch*0x68;}
 
-extern u8 D_8010BBB8;
+extern u8 g_controllerPakFrontendState;
 
-extern PakRecord D_80153330[];
+extern PakRecord g_controllerPakChannelRecords[];
 
 s32 osMotorInit(OSMesgQueue *mq, OSPfs *pfs, int channel);
 
@@ -53,7 +53,7 @@ extern s32 osPfsAllocateFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *ga
 
 extern s32 Pfs_ReadWriteFile(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
 
-static inline void func_804042F0_encode(u8 *dst, u8 *src, s32 n) {
+static inline void Note_EncodeUppercaseFilename(u8 *dst, u8 *src, s32 n) {
     s32 i;
     s32 j;
 
@@ -79,24 +79,24 @@ s32 Note_RefreshNotes(s32 ch) {
     s32 result;
     s32 free;
 
-    if (D_800E2854 != 0) {
+    if (g_controllerPakNoteLists != 0) {
         for (i = 0; i < 16; i++) {
-            result = osPfsFileState(&D_8014D280[ch], i, &D_800E2854[ch].notes[i]);
+            result = osPfsFileState(&g_controllerPakFileSystems[ch], i, &g_controllerPakNoteLists[ch].notes[i]);
             if (result != 0 && result != 5) {
-                result = osPfsFileState(&D_8014D280[ch], i, &D_800E2854[ch].notes[i]);
+                result = osPfsFileState(&g_controllerPakFileSystems[ch], i, &g_controllerPakNoteLists[ch].notes[i]);
             }
             if (result == 5) {
-                D_800E2854[ch].notes[i].file_size = 0;
-                D_800E2854[ch].notes[i].game_code = 0;
-                D_800E2854[ch].notes[i].company_code = 0;
-                D_800E2854[ch].notes[i].ext_name[0] = 0;
-                D_800E2854[ch].notes[i].game_name[0] = 0;
+                g_controllerPakNoteLists[ch].notes[i].file_size = 0;
+                g_controllerPakNoteLists[ch].notes[i].game_code = 0;
+                g_controllerPakNoteLists[ch].notes[i].company_code = 0;
+                g_controllerPakNoteLists[ch].notes[i].ext_name[0] = 0;
+                g_controllerPakNoteLists[ch].notes[i].game_name[0] = 0;
             }
         }
     }
-    result = osPfsFreeBlocks(&D_8014D280[ch], &free);
+    result = osPfsFreeBlocks(&g_controllerPakFileSystems[ch], &free);
     if (result == 0) {
-        D_800E2854[ch].free = free;
+        g_controllerPakNoteLists[ch].free = free;
     }
     return result;
 }
@@ -106,14 +106,14 @@ s32 Note_UpdateStatus(s32 ch) {
     s32 result;
     void *pfs;
     OSPfs *base;
-    if(D_8010FBE3[ch*4] != 0) {
+    if(g_controllerReadStatusBytes[ch*4] != 0) {
         g_controllerPakChannelStatuses[ch]=-2;
         return 0;
     }
     tries=0;
     do {
         pfs=pak27(ch);
-        result=osPfsInitPak(D_8010FC00,pfs,ch);
+        result=osPfsInitPak(g_controllerSiMessageQueue,pfs,ch);
         switch(result) {
         case 0: case 2:
             g_controllerPakChannelStatuses[ch]=-5;
@@ -147,14 +147,14 @@ void Note_ProbeAllChannels(void) {
     PakRecord *record;
     Control_AcquireControllerLock(1);
     Control_ReadControllerStates();
-    D_8010BBB8 = 2;
+    g_controllerPakFrontendState = 2;
     for (channel = 0; channel < 4; channel++) {
-        record = &D_80153330[channel];
-        if (D_8010FBE3[channel * 4] != 0) {
+        record = &g_controllerPakChannelRecords[channel];
+        if (g_controllerReadStatusBytes[channel * 4] != 0) {
             present = 0;
             record->present = 0;
         } else {
-            record->present = osMotorInit(D_8010FC00, record->pak, channel) == 0;
+            record->present = osMotorInit(g_controllerSiMessageQueue, record->pak, channel) == 0;
             present = record->present;
         }
         if (present) g_controllerPakChannelStates[channel] = 2;
@@ -184,13 +184,13 @@ s32 Note_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *fi
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
     result = g_controllerPakChannelStatuses[ch];
-    D_8010BBB8 = 2;
+    g_controllerPakFrontendState = 2;
     if (result == 0) {
-        func_804042F0_encode(ext, ext_name, 4);
+        Note_EncodeUppercaseFilename(ext, ext_name, 4);
         size = (size + 0xFF) & ~0xFF;
-        func_802BD3A0_de(name, game_name, 16);
-        func_804042F0_encode(name, game_name, 16);
-        pfs = &D_8014D280[ch];
+        Libc_CopyBytes(name, game_name, 16);
+        Note_EncodeUppercaseFilename(name, game_name, 16);
+        pfs = &g_controllerPakFileSystems[ch];
         company_code = (company[0] << 8) | company[1];
         game_code = (code[0] << 24) | (code[1] << 16) | (code[2] << 8) | code[3];
         result = osPfsAllocateFile(pfs, company_code, game_code, name, ext, size, file_no);

@@ -7,8 +7,8 @@
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/os.h"
 
-extern Func802C1F10Node *D_800D526C;
-extern void *D_800D5270;
+extern Func802C1F10Node *__osActiveQueue;
+extern void *g_osRunningThread;
 extern void Audio_DequeueThread(void *listHead, Func802C1F10Node *node);
 
 void Audio_DestroyThread(Func802C1F10Node *thread) {
@@ -19,16 +19,16 @@ void Audio_DestroyThread(Func802C1F10Node *thread) {
     node = thread;
     token = __osDisableInt();
     if (node == 0) {
-        node = D_800D5270;
-    } else if (node->field10 != 1) {
-        Audio_DequeueThread(node->field8, node);
+        node = g_osRunningThread;
+    } else if (node->state != 1) {
+        Audio_DequeueThread(node->queue, node);
     }
-    head = &D_800D526C;
+    head = &__osActiveQueue;
     if (*head == node) {
         *head = node->next;
     } else {
         cur = *head;
-        while (cur->field4 != -1) {
+        while (cur->priority != -1) {
             if (cur->next == node) {
                 cur->next = node->next;
                 break;
@@ -36,8 +36,8 @@ void Audio_DestroyThread(Func802C1F10Node *thread) {
             cur = cur->next;
         }
     }
-    if (node == D_800D5270) {
-        func_802BC850_eu_x();
+    if (node == g_osRunningThread) {
+        __osDispatchThread();
     }
     __osRestoreInt(token);
 }

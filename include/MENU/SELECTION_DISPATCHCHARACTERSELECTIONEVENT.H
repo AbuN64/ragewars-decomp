@@ -1,5 +1,5 @@
 #ifndef MENU_SELECTION_DISPATCHCHARACTERSELECTIONEVENT_H
 #define MENU_SELECTION_DISPATCHCHARACTERSELECTIONEVENT_H
 #include "COMMON/CHARACTERSELECTIONROOT.H"
-extern s32 Selection_DispatchCharacterSelectionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Selection_DispatchCharacterSelectionEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2);
 #endif

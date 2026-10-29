@@ -2,24 +2,24 @@
 #include "COMMON/DEVICE_IO.H"
 #include "COMMON/HARDWARE_IO.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "GAMECORE/EXTERNS.H"
 #include "sdk/libultra/io/epirawread.H"
 #include "AUDIO/AUDIO_ASSERT.H"
 
-extern OSPiHandle_s *D_800D4380[];
+extern OSPiHandle_s *g_peripheralDomainHandles[];
 
 s32 osEPiRawReadIo(OSPiHandle_s *piHandle, u32 deviceOffset, u32 *outputWord) {
     OSPiHandle_s *previous;
     s32 index;
 
     if (outputWord == 0) {
-        Audio_Assert(&D_800C7950_de, &s_epirawreadText, 0x2B);
+        Audio_Assert(&g_extendedPeripheralReadAssertText, &s_epirawreadText, 0x2B);
     }
     while (IO_READ_WORD(PI_STATUS_REG) & 3) {
     }
     index = piHandle->domain;
-    previous = D_800D4380[index];
+    previous = g_peripheralDomainHandles[index];
     if (previous != piHandle) {
         if (index == 0) {
             if (previous->latency != piHandle->latency) {
@@ -48,7 +48,7 @@ s32 osEPiRawReadIo(OSPiHandle_s *piHandle, u32 deviceOffset, u32 *outputWord) {
                 IO_WRITE(0xA4600028U, piHandle->pulse);
             }
         }
-        D_800D4380[index] = piHandle;
+        g_peripheralDomainHandles[index] = piHandle;
     }
     *outputWord = IO_READ_WORD(piHandle->baseAddress | deviceOffset | 0xA0000000U);
     return 0;

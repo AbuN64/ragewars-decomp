@@ -2,7 +2,7 @@
 
 /* 802BE040_46.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_802BA36C_eu_padding_BAF6C[4] = { 0xAC, 0x62, 0x00, 0x00 };
+unsigned char g_SprawdmaTrailingBytesBlock1[4] = { 0xAC, 0x62, 0x00, 0x00 };
 #endif
 
 /* DATA_802B7EFC.CPP */

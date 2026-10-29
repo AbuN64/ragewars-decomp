@@ -73,7 +73,7 @@ static inline f32 decode(s32 bitAddress, Func802608ECResult range) {
     }
     converted = (s32) value;
     if ((s32) value < 0) {
-        converted += D_800C4188_de;
+        converted += g_packedRangeUnsignedBias;
     }
     result = (f32) converted;
     result /= (f32) ((1 << width) - 1);
@@ -105,7 +105,7 @@ f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult ran
     }
     converted = (s32) value;
     if ((s32) value < 0) {
-        converted += D_800C4170_de;
+        converted += g_packedScalarUnsignedBias;
     }
     result = (f32) converted;
     result /= (f32) ((1 << range.value) - 1);
@@ -177,7 +177,7 @@ f32 Polytrak2_ReadQuantizedFloatAndAdvance(u32 *stream, Func802608ECResult range
     }
     converted = (s32) value;
     if ((s32) value < 0) {
-        converted += D_800C4180_de;
+        converted += g_packedArrayUnsignedBias;
     }
     result = (f32) converted;
     result /= (f32) ((1 << width) - 1);
@@ -188,7 +188,7 @@ f32 Polytrak2_ReadQuantizedFloatAndAdvance(u32 *stream, Func802608ECResult range
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260C6C_de(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
+void Polytrak2_InitializeQuantizedArray(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
     DecodeArray *array = decodeArray;
     array->base = baseBitAddress;
     array->range = valueRange;
@@ -200,7 +200,7 @@ f32 Polytrak2_GetQuantizedArrayElement(DecodeArray *packedArray, s32 elementInde
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260D78_de(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
+void Polytrak2_InitializeUnsignedArray(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
     DecodeArray *array = decodeArray;
     array->base = baseBitAddress;
     array->range = valueRange;
@@ -234,7 +234,7 @@ int Polytrak2_GetUnsignedArrayElement(BitFieldSource *packedArray, int elementIn
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260E1C_de(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
+void Polytrak2_InitializeHighBitsSetArray(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
     DecodeArray *array = decodeArray;
     array->base = baseBitAddress;
     array->range = valueRange;
@@ -269,9 +269,9 @@ int Polytrak2_GetPackedHighBitsSetElement(BitFieldSource *packedArray, int eleme
 
 /** Store a scalar word plus a three-word record by value. */
 void Polytrak2_StoreWordAndTriple(void *destination, int wordValue, Triple tripleValue) {
-    ObjRecAt4V4 *record = destination;
-    record->unk0 = wordValue;
-    record->unk4 = tripleValue;
+    PolytrakWordAndTripleRecord *record = destination;
+    record->wordValue = wordValue;
+    record->tripleValue = tripleValue;
 }
 
 /* DATA_800C926C.CPP */

@@ -1,23 +1,23 @@
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 
 /* 802C0390_9.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802BB5AC_de_padding_BC1AC[4] = { 0x0C, 0x0A, 0xF3, 0xC8 };
+unsigned char g_SeteventmesgTrailingBytes[4] = { 0x0C, 0x0A, 0xF3, 0xC8 };
 #endif
 
 /* seteventmesg.c */
-extern struct IntPair D_80149B10[];
+extern struct IntPair g_osEventMessageBindings[];
 
-void osSetEventMesg(s32 arg0, s32 arg1, s32 arg2) {
+void osSetEventMesg(s32 eventId, s32 messageQueue, s32 message) {
     u32 mask;
     struct IntPair *e;
 
     mask = __osDisableInt();
     ;
-    (&D_80149B10[arg0])->field_0 = arg1;
-    (*(&D_80149B10[arg0])).field_4 = arg2;
+    (&g_osEventMessageBindings[eventId])->field_0 = messageQueue;
+    (*(&g_osEventMessageBindings[eventId])).field_4 = message;
     __osRestoreInt(mask);
 }

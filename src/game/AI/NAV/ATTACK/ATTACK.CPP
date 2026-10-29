@@ -31,7 +31,7 @@ s32 UpdateCloseAttack(void *brainAddress) {
 
 void Attack_SelectWeightedAttackBehavior(void *brainAddress) {
     s32 selectedBehavior;
-    selectedBehavior = Reselect_ChooseWeightedAttackBehavior((((struct ObjRecAt18V4 *) ((s8 *) ((struct func_8020DCA0_S1 *) ((s8 *) brainAddress))->unk0))->unk18) + 0x14);
-    (((struct func_8020DCA0_S1 *) ((s8 *) brainAddress))->unk230) = selectedBehavior;
+    selectedBehavior = Reselect_ChooseWeightedAttackBehavior((((struct AttackBehaviorDefinitionView *) ((s8 *) ((struct WeightedAttackSelectionBrainView *) ((s8 *) brainAddress))->actor))->attackDefinitionAddress) + 0x14);
+    (((struct WeightedAttackSelectionBrainView *) ((s8 *) brainAddress))->selectedBehavior) = selectedBehavior;
     Scaled_SetBehaviourState(brainAddress, selectedBehavior);
 }

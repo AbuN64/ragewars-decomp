@@ -16,10 +16,10 @@ typedef struct s_CTargetInfo CTargetInfo;
 
 
 
-extern float D_800C21DC_de;
+extern float k_barrelPrimarySoundRandomMaximum;
 
-struct Actor_func_80214DD4_de;
-typedef struct Actor_func_80214DD4_de Actor_func_80214DD4_de;
+struct BarrelAnchorActorView;
+typedef struct BarrelAnchorActorView BarrelAnchorActorView;
 
 
 
@@ -40,11 +40,11 @@ struct SourceBarrelUpdateActorController {
 struct CActor_t;
 typedef struct CActor_t CActor_t;
 
-struct Actor_func_80214DD4_de;
+struct BarrelAnchorActorView;
 struct s_CTargetInfo;
 struct s_CTargetInfo {
     s32 kind;
-    struct Actor_func_80214DD4_de *target;
+    struct BarrelAnchorActorView *target;
     f32 m_DeltaAngle;
     CVector3 m_vTargetPos;
     CVector3 m_vDeltaTargetPos;
@@ -75,8 +75,8 @@ struct Func802172C4Value;
 typedef struct Func802172C4Value Func802172C4Value;
 
 
-struct ObjectLinks1230;
-struct ObjectLinks1230 {
+struct ActorProfileImpulseFlagsView;
+struct ActorProfileImpulseFlagsView {
     char pad0[0x100];
     u32 unk_100;
     char pad100[0x5D8 - 0x100 - sizeof(u32)];
@@ -96,7 +96,7 @@ struct CTeamSelectTeam_t {
 
 
 
-extern float D_800C21C8_de;
+extern float g_barrelClearAimClearance;
 
 
 
@@ -142,7 +142,7 @@ struct Location {
 
 
 
-extern void func_802172C4_de(void *unused0, void *unused1, Func802172C4Value unused2);
+extern void Barrel_IgnoreEffectCallback(void *unused0, void *unused1, Func802172C4Value unused2);
 
 
 struct Tracker;
@@ -151,7 +151,7 @@ typedef struct Tracker Tracker;
 
 
 
-extern float D_800C21CC_de;
+extern float g_barrelFlaggedAimProbeScale;
 
 
 
@@ -164,11 +164,11 @@ struct Cursor802171C8 {
     u16 *cur;
 };
 
-extern s16 Barrel_ReadLoopingSequenceValue(Cursor802171C8 *arg0);
+extern s16 Barrel_ReadLoopingSequenceValue(Cursor802171C8 *cursor);
 
 
 
-extern float D_800C21E4_de;
+extern float k_barrelSecondarySoundRandomMaximum;
 
 struct Location;
 typedef struct Location Location;
@@ -183,7 +183,7 @@ struct CTeamSelectTeam_t;
 typedef struct CTeamSelectTeam_t CTeamSelectTeam;
 
 
-struct Actor_func_80214DD4_de;
+struct BarrelAnchorActorView;
 struct Tracker;
 struct Tracker {
     s32 flags;
@@ -191,15 +191,15 @@ struct Tracker {
     u8 pad8[0x2C];
     s8 mode; /* 0x34 */
     u8 pad35[2];
-    s8 unk37;
+    s8 targetingDisabled;
     u8 pad38[0x30];
-    struct Actor_func_80214DD4_de *self;
+    struct BarrelAnchorActorView *self;
     CVector3 offset;
-    struct Actor_func_80214DD4_de *lockedTarget; /* 0x78 */
+    struct BarrelAnchorActorView *lockedTarget; /* 0x78 */
     f32 targetTimer; /* 0x7C */
-    struct Actor_func_80214DD4_de *anchor;
+    struct BarrelAnchorActorView *anchor;
     u8 pad84[4];
-    struct Actor_func_80214DD4_de *target;
+    struct BarrelAnchorActorView *target;
     f32 angle;
     f32 height;
     s8 slot;
@@ -233,7 +233,7 @@ struct DestBarrelUpdateActorController {
     char pad64[0x69];
     u8 timer;
     char padce[0x2E];
-    func_80205628_S3 *aux;
+    CompactOptionsPageView *aux;
     char pad100[8];
     void (*callback)(SourceBarrelUpdateActorController *, struct DestBarrelUpdateActorController *);
 };
@@ -241,8 +241,8 @@ struct DestBarrelUpdateActorController {
 
 
 
-struct ObjectLinks1230;
-typedef struct ObjectLinks1230 ObjectLinks1230;
+struct ActorProfileImpulseFlagsView;
+typedef struct ActorProfileImpulseFlagsView ActorProfileImpulseFlagsView;
 
 struct CAIMovementInfo;
 typedef struct CAIMovementInfo CAIMovementInfo;

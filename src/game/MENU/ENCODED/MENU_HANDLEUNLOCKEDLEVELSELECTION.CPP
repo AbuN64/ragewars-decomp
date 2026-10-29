@@ -57,7 +57,7 @@ static inline s32 firstUnlocked(void) {
     s32 level = 0;
     s32 i;
     for (i = 0; i < 11; i++) {
-        if (D_801462C8.unlockedLevels & levelBit(level)) {
+        if (g_gameSettings.unlockedLevels & levelBit(level)) {
             return level;
         }
         level++;
@@ -72,13 +72,13 @@ static inline s32 firstUnlocked(void) {
 
 void Encoded_UpdateLevelSelectionAvailability(LevelSelectOwner *owner) {
     s32 level = firstUnlocked();
-    D_80154034 = level;
+    g_encodedSelectedLevelIndex = level;
     if (level != -1) {
         owner->descriptor->flags |= 0x01800000;
     } else {
         owner->descriptor->flags &= 0xFE7FFFFF;
     }
-    if (D_801462C8.local) {
+    if (g_gameSettings.local) {
         owner->descriptor->flags &= 0xFE7FFFFF;
     }
 }
@@ -102,8 +102,8 @@ void Encoded_HandleUnlockedLevelSelection(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
-        "lui        $v1, %hi(D_80154034)\n"
-        "lw         $v1, %lo(D_80154034)($v1)\n"
+        "lui        $v1, %hi(g_encodedSelectedLevelIndex)\n"
+        "lw         $v1, %lo(g_encodedSelectedLevelIndex)($v1)\n"
         "addiu      $sp, $sp, -0x20\n"
         "sw         $s1, 0x14($sp)\n"
         "addu       $s1, $a1, $zero\n"
@@ -151,8 +151,8 @@ void Encoded_HandleUnlockedLevelSelection(void) {
         "sb         $v0, %lo(D_80142226)($at)\n"
         "jal        Confirming_SelectConfirmingController\n"
         "addu      $a0, $s1, $zero\n"
-        "lui        $a0, %hi(D_8011FAC0)\n"
-        "addiu      $a0, $a0, %lo(D_8011FAC0)\n"
+        "lui        $a0, %hi(g_gameSession)\n"
+        "addiu      $a0, $a0, %lo(g_gameSession)\n"
         "jal        SetN64_SetTransitionTarget\n"
         "addiu     $a1, $zero, 0x11\n"
         "j          .Lauto_8043C984\n"
@@ -170,14 +170,14 @@ void Encoded_HandleUnlockedLevelSelection(void) {
         "addu      $v0, $zero, $zero\n"
         ".Lauto_8043C784:\n"
         "addu       $a0, $s1, $zero\n"
-        "lui        $v1, %hi(D_801462C8)\n"
-        "addiu      $v1, $v1, %lo(D_801462C8)\n"
+        "lui        $v1, %hi(g_gameSettings)\n"
+        "addiu      $v1, $v1, %lo(g_gameSettings)\n"
         "addiu      $v0, $zero, 0x1\n"
         "sb         $zero, 0x1D($v1)\n"
         "jal        Confirming_SelectConfirmingController\n"
         "sb        $v0, 0x1E($v1)\n"
-        "lui        $a0, %hi(D_8011FAC0)\n"
-        "addiu      $a0, $a0, %lo(D_8011FAC0)\n"
+        "lui        $a0, %hi(g_gameSession)\n"
+        "addiu      $a0, $a0, %lo(g_gameSession)\n"
         "jal        SetN64_SelectSpawnAndStartSession\n"
         "addu      $a1, $s0, $zero\n"
         "j          .Lauto_8043C984\n"
@@ -190,10 +190,10 @@ void Encoded_HandleUnlockedLevelSelection(void) {
         "addu      $a0, $zero, $zero\n"
         "lui        $a2, %hi(jtbl_800DE1E8)\n"
         "addiu      $a2, $a2, %lo(jtbl_800DE1E8)\n"
-        "lui        $v1, %hi(D_80154034)\n"
-        "lw         $v1, %lo(D_80154034)($v1)\n"
-        "lui        $a1, %hi(D_801462CC)\n"
-        "lw         $a1, %lo(D_801462CC)($a1)\n"
+        "lui        $v1, %hi(g_encodedSelectedLevelIndex)\n"
+        "lw         $v1, %lo(g_encodedSelectedLevelIndex)($v1)\n"
+        "lui        $a1, %hi(g_menuOptionAvailabilityFlags)\n"
+        "lw         $a1, %lo(g_menuOptionAvailabilityFlags)($a1)\n"
         "addiu      $v1, $v1, -0x1\n"
         ".Lauto_8043C7E8:\n"
         "slti       $v0, $v1, 0xB\n"
@@ -255,10 +255,10 @@ void Encoded_HandleUnlockedLevelSelection(void) {
         "addu       $a0, $zero, $zero\n"
         "lui        $a2, %hi(jtbl_800DE218)\n"
         "addiu      $a2, $a2, %lo(jtbl_800DE218)\n"
-        "lui        $v1, %hi(D_80154034)\n"
-        "lw         $v1, %lo(D_80154034)($v1)\n"
-        "lui        $a1, %hi(D_801462CC)\n"
-        "lw         $a1, %lo(D_801462CC)($a1)\n"
+        "lui        $v1, %hi(g_encodedSelectedLevelIndex)\n"
+        "lw         $v1, %lo(g_encodedSelectedLevelIndex)($v1)\n"
+        "lui        $a1, %hi(g_menuOptionAvailabilityFlags)\n"
+        "lw         $a1, %lo(g_menuOptionAvailabilityFlags)($a1)\n"
         "addiu      $v1, $v1, 0x1\n"
         ".Lauto_8043C8D0:\n"
         "slti       $v0, $v1, 0xB\n"
@@ -308,8 +308,8 @@ void Encoded_HandleUnlockedLevelSelection(void) {
         "addiu     $v1, $v1, 0x1\n"
         "addiu      $v0, $zero, -0x1\n"
         ".Lauto_8043C978:\n"
-        "lui        $at, %hi(D_80154034)\n"
-        "sw         $v0, %lo(D_80154034)($at)\n"
+        "lui        $at, %hi(g_encodedSelectedLevelIndex)\n"
+        "sw         $v0, %lo(g_encodedSelectedLevelIndex)($at)\n"
         "addu       $v0, $zero, $zero\n"
         ".Lauto_8043C984:\n"
         "lw         $ra, 0x18($sp)\n"

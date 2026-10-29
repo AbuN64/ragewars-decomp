@@ -3,7 +3,7 @@
 
 /* 800E4400.CPP */
 /* ROM-grounded data: rodata/writable/800E4400 */
-unsigned int D_blob_phase2_16fe477c7993aecd5f10[1] = {
+unsigned int k_MenuOpenoptionskeypadZeroWords[1] = {
     0x00000000,
 };
 
@@ -34,9 +34,9 @@ unsigned int D_src_16391c30[19] = {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
-unsigned int D_blob_95bfc4689525ee9d507e[18] = {
-    0x00000E08, 0x0000001C, (unsigned int)D_004218F4, 0x00000E06, 0x0000001C, (unsigned int)D_00420E90, 0x00000E03, 0x0000001C,
-    (unsigned int)D_004218C4, 0x00000002, 0x0000001C, (unsigned int)D_00421A30, 0x00000001, 0x0000001C, (unsigned int)D_00421998, 0x00000000,
+unsigned int g_MenuOpenoptionskeypadEncodedWords[18] = {
+    0x00000E08, 0x0000001C, (unsigned int)g_menu_UpdateExtraOptionsMenuEntry, 0x00000E06, 0x0000001C, (unsigned int)g_menu_OpenRuleToggleScreenEntry, 0x00000E03, 0x0000001C,
+    (unsigned int)g_menu_DestroyExtraOptionsMenuEntry, 0x00000002, 0x0000001C, (unsigned int)g_menu_ConfirmExtraOptionsEntry, 0x00000001, 0x0000001C, (unsigned int)g_menu_HandleExtraOptionsChoiceEntry, 0x00000000,
     0x00000000, 0x00000000,
 };
 #endif

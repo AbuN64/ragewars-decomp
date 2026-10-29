@@ -41,17 +41,17 @@ s32 CPolyCollision_CompareHitFractions(Hit8 *a, Hit8 *b) {
 
 void CPolyCollision_TraceElementMesh(void *contextAddress) {
     void *collisionElement;
-    void **temp_s0;
+    void **meshResource;
     void *meshData;
     s32 *displayListTable;
     s32 displayListCount;
     s32 index;
 
     collisionElement = ((ContextB0 *)contextAddress)->element;
-    temp_s0 = ((ElementE8 *)collisionElement)->resource;
-    if (temp_s0 != 0) {
+    meshResource = ((ElementE8 *)collisionElement)->resource;
+    if (meshResource != 0) {
         Graphu64_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)collisionElement)->transform, (char *) contextAddress + 0xC);
-        meshData = *temp_s0;
+        meshData = *meshResource;
         ((ContextB0 *)contextAddress)->vertices = SetN64_GetPackSection(meshData, 0);
         displayListTable = SetN64_GetPackSection(meshData, 2);
         displayListCount = *displayListTable;
@@ -113,19 +113,19 @@ void CPolyCollision_TraceCeilingTriangle(ActorB0 *actor) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C36B4[3] = {
+unsigned int k_CpolycollisionTraceceilingtriangleEncodedWords[3] = {
     0x08000F00, 0x00000000, 0x0C6D5F44,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C3A74[3] = {
+unsigned int k_CpolycollisionTraceceilingtriangleEncodedWordsBlock2[3] = {
     0x4F000000, 0x47800000, 0x4F000000,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C3784[3] = {
+unsigned int k_CpolycollisionTraceceilingtriangleEncodedWordsBlock1[3] = {
     0xBF350481, 0x434CCCCC, 0x3F800000,
 };
 #endif

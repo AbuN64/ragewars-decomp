@@ -15,48 +15,48 @@ extern void PAKInterface_IncrementNameCharacter(s32);
 extern void PAKInterface_DecrementNameCharacter(s32);
 
 
-void PAKInterface_UpdatePlayerPanelAnimations(s32 arg0) {
+void PAKInterface_UpdatePlayerPanelAnimations(s32 phaseStep) {
     f32 bobValue;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 temp_idx;
-    ResourceSmpFlickerCreateFlickerWidget *temp_s0;
+    s32 nextCharacterAnimationFrame;
+    s32 nextRosterAnimationFrame;
+    s32 panelState;
+    s32 characterAnimationState;
+    s32 selectedLabelOffset;
+    ResourceSmpFlickerCreateFlickerWidget *animatedLabel;
     s32 player;
-    Blk *temp_a0;
-    Blk *temp_a0_2;
-    Blk *temp_v0_3;
-    Blk *temp_v0_4;
-    Blk *temp_v0_5;
+    Blk *playerPanel;
+    Blk *characterPanel;
+    Blk *panelPhaseStorage;
+    Blk *selectedPhaseStorage;
+    Blk *idlePhaseStorage;
 
     player = 0;
     do {
-        temp_a0 = (Blk *)((char *)D_800E54A4 + (player * 0xB68));
-        temp_v1 = temp_a0->unk58;
-        switch (temp_v1) {
+        playerPanel = (Blk *)((char *)g_pakProfileScreenState + (player * 0xB68));
+        panelState = playerPanel->panelState;
+        switch (panelState) {
         case 0:
             PAKInterface_PulseIdlePanelLabels(player);
             break;
         case 0xC:
-            temp_s0 = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
-            temp_v0_4 = (Blk *)((char *)D_800E54A4 + (player * 4));
-            bobValue = (Math_Cosf((f32)player + ((f32)temp_v0_4->unk2C * 0.005f)) * 100.0f) + 150.0f;
-            temp_s0->value = bobValue;
-            temp_a0_2 = (Blk *)((char *)D_800E54A4 + (player * 0xB68));
-            temp_v1_2 = temp_a0_2->unkBA0;
-            switch (temp_v1_2) {
+            animatedLabel = SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, player);
+            selectedPhaseStorage = (Blk *)((char *)g_pakProfileScreenState + (player * 4));
+            bobValue = (Math_Cosf((f32)player + ((f32)selectedPhaseStorage->animationClock * 0.005f)) * 100.0f) + 150.0f;
+            animatedLabel->value = bobValue;
+            characterPanel = (Blk *)((char *)g_pakProfileScreenState + (player * 0xB68));
+            characterAnimationState = characterPanel->nameEntryPhase;
+            switch (characterAnimationState) {
             case 0:
-                temp_v0 = temp_a0_2->unkBA4 + 1;
-                temp_a0_2->unkBA4 = temp_v0;
-                if (temp_v0 >= 6) {
+                nextCharacterAnimationFrame = characterPanel->nameEntryTimer + 1;
+                characterPanel->nameEntryTimer = nextCharacterAnimationFrame;
+                if (nextCharacterAnimationFrame >= 6) {
                     PAKInterface_DecrementNameCharacter(player);
                 }
                 break;
             case 1:
-                temp_v0_2 = temp_a0_2->unkBA4 + 1;
-                temp_a0_2->unkBA4 = temp_v0_2;
-                if (temp_v0_2 >= 6) {
+                nextRosterAnimationFrame = characterPanel->nameEntryTimer + 1;
+                characterPanel->nameEntryTimer = nextRosterAnimationFrame;
+                if (nextRosterAnimationFrame >= 6) {
                     PAKInterface_IncrementNameCharacter(player);
                 }
                 break;
@@ -65,15 +65,15 @@ void PAKInterface_UpdatePlayerPanelAnimations(s32 arg0) {
             }
             break;
         case 4:
-            temp_idx = ((temp_a0->unkB30 - temp_a0->unkB34) * 4) + (player * 0xB68);
-            temp_s0 = ((Blk *)((char *)D_800E54A4 + temp_idx))->unkB38;
-            temp_v0_5 = (Blk *)((char *)D_800E54A4 + (player * 4));
-            bobValue = (Math_Cosf((f32)player + ((f32)temp_v0_5->unk2C * 0.005f)) * 100.0f) + 150.0f;
-            temp_s0->value = bobValue;
+            selectedLabelOffset = ((playerPanel->selectedNote - playerPanel->noteScrollOffset) * 4) + (player * 0xB68);
+            animatedLabel = ((Blk *)((char *)g_pakProfileScreenState + selectedLabelOffset))->noteLabel;
+            idlePhaseStorage = (Blk *)((char *)g_pakProfileScreenState + (player * 4));
+            bobValue = (Math_Cosf((f32)player + ((f32)idlePhaseStorage->animationClock * 0.005f)) * 100.0f) + 150.0f;
+            animatedLabel->value = bobValue;
             break;
         }
-        temp_v0_3 = (Blk *)((char *)D_800E54A4 + (player * 4));
-        temp_v0_3->unk2C = temp_v0_3->unk2C + arg0;
+        panelPhaseStorage = (Blk *)((char *)g_pakProfileScreenState + (player * 4));
+        panelPhaseStorage->animationClock = panelPhaseStorage->animationClock + phaseStep;
         player += 1;
     } while (player < 4);
 }

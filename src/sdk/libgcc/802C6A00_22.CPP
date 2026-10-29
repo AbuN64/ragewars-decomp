@@ -1,5 +1,5 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU_X)
-unsigned char D_auto_func_802C0AFC_eu_x_padding_C16FC[4] = { 0x03, 0xE0, 0x00, 0x08 };
+unsigned char g_LibgccTrailingBytesBlock5[4] = { 0x03, 0xE0, 0x00, 0x08 };
 #endif

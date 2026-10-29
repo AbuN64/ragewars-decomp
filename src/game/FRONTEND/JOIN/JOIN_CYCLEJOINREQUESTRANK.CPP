@@ -9,14 +9,14 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
-/* Resets the three 28-byte entries of D_80153F80: -1 in the first word and zero in the next
+/* Resets the three 28-byte entries of g_joinRequestEntries: -1 in the first word and zero in the next
    three. */
 
 /* Counts the four player records whose byte 0x78 is one and returns 3, 2 or 1 for one, two or three such players, otherwise zero. */
 
 extern PlayerFrontendCountOpenPlayerSlots g_playerSettings[];
 
-/* Counts how many of the three 28-byte entries of D_80153F80 hold a non-negative first word. */
+/* Counts how many of the three 28-byte entries of g_joinRequestEntries hold a non-negative first word. */
 
 /* Returns entry column - 1 of row r in the five-word table g_rewardScoreBudgets, or zero when the column is
    not positive. */
@@ -68,10 +68,10 @@ void Join_ResetJoinRequestEntries(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        D_80153F80[i].id = -1;
-        D_80153F80[i].variant = 0;
-        D_80153F80[i].word8 = 0;
-        D_80153F80[i].variantC = 0;
+        g_joinRequestEntries[i].id = -1;
+        g_joinRequestEntries[i].variant = 0;
+        g_joinRequestEntries[i].word8 = 0;
+        g_joinRequestEntries[i].variantC = 0;
     }
 }
 
@@ -108,7 +108,7 @@ s32 Join_CountUsedSlots(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        if (D_80153F80[i].id >= 0) {
+        if (g_joinRequestEntries[i].id >= 0) {
             count++;
         }
     }
@@ -132,8 +132,8 @@ s32 Join_ScoreJoinRequestEntries(void) {
     score = 0;
     points = 0;
     for (i = 0; i < 3; i++) {
-        if (D_80153F80[i].id >= 0) {
-            switch (D_80153F80[i].variant) {
+        if (g_joinRequestEntries[i].id >= 0) {
+            switch (g_joinRequestEntries[i].variant) {
             case 0:
                 points = 5;
                 break;
@@ -154,7 +154,7 @@ s32 Join_FindJoinModelIndex(s32 row, s32 id) {
     s32 i;
 
     for (i = 0; i < 0x11; i++) {
-        if (g_rewardItemTiers[row][i].field_0 == id) {
+        if (g_rewardItemTiers[row][i].first == id) {
             return i;
         }
     }
@@ -195,12 +195,12 @@ s32 Join_RequestJoinOptionsExitAlternate(void) {
     return 0;
 }
 
-s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
+s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 eventValue) {
     s32 prevSelection;
     s32 idx;
     MenuWidget *oldItem;
     MenuWidget *newItem;
-    if (arg3 == 1) {
+    if (eventValue == 1) {
         MarkMenuEventHandled();
         idx = D_800E39C0->selection;
 #if defined(VERSION_DE)
@@ -234,21 +234,21 @@ s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 arg3) 
     return 0;
 }
 
-s32 Join_SelectNextJoinRow(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 Join_SelectNextJoinRow(s32 unusedObject, s32 unusedEvent, s32 unusedEventData, s32 eventValue) {
     s32 nextSelection;
-    s32 temp_v0_2;
+    s32 followingRow;
     s32 rowCount;
     MenuWidget *oldItem;
     MenuWidget *newItem;
 
-    if (arg3 == 1) {
+    if (eventValue == 1) {
         MarkMenuEventHandled();
         oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], MENU_RESOURCE);
         oldItem->alpha = 0xFF;
         Widget_SetWidgetFlag08(oldItem, 0);
         rowCount = D_800E39C0->step;
-        temp_v0_2 = D_800E39C0->selection + 1;
-        nextSelection = temp_v0_2 % rowCount;
+        followingRow = D_800E39C0->selection + 1;
+        nextSelection = followingRow % rowCount;
         D_800E39C0->selection = nextSelection;
         newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[nextSelection], MENU_RESOURCE);
         newItem->alpha = 0xFF;
@@ -260,20 +260,20 @@ s32 Join_SelectNextJoinRow(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
-s32 Join_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
-    s32 temp_a1;
+s32 Join_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 eventData, s32 eventValue) {
+    s32 rowByteOffset;
     s32 selectedRow;
-    u32 temp_a2;
+    u32 eventKind;
 
-    temp_a2 = arg2 >> 0x10;
-    if ((temp_a2 == 3) && (arg3 == 0)) {
+    eventKind = eventData >> 0x10;
+    if ((eventKind == 3) && (eventValue == 0)) {
         MarkMenuEventHandled();
-        temp_a1 = D_800E39C0->selection * 0x1C;
-        *(s32 *)((char *)D_8014DCF8 + temp_a1) = (*(s32 *)((char *)D_8014DCF8 + temp_a1) + 1) % 5;
+        rowByteOffset = D_800E39C0->selection * 0x1C;
+        *(s32 *)((char *)D_8014DCF8 + rowByteOffset) = (*(s32 *)((char *)D_8014DCF8 + rowByteOffset) + 1) % 5;
         Join_UpdateJoinRequestDisplay(D_800E39C0->selection);
         if (Menu_GetPreviousScreenOwner(0) == 0x16) {
             selectedRow = D_800E39C0->selection;
-            D_801462C8.playerSettings[7 - selectedRow].rank = *(D_8014DCFB + (selectedRow * 0x1C));
+            g_gameSettings.playerSettings[7 - selectedRow].rank = *(D_8014DCFB + (selectedRow * 0x1C));
         }
     }
     return 0;
@@ -287,14 +287,14 @@ const unsigned int rodata_func_8041F298_us_800DC1F0[1] = {
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-extern ResidentEventHandlerEntry D_800EB1A4[];
+extern ResidentEventHandlerEntry g_joinOptionsEventHandlers[];
 
-s32 Join_DispatchJoinOptionsEvent(MenuWidget *object, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Join_DispatchJoinOptionsEvent(MenuWidget *object, s32 event, s32 eventData, s32 eventValue, s32 eventContext) {
     s32 i = 0;
-    while (D_800EB1A4[i].handler != 0) {
-        if (D_800EB1A4[i].event == event &&
-            (D_800EB1A4[i].actorKind == object->resource || D_800EB1A4[i].actorKind == 30000)) {
-            return D_800EB1A4[i].handler(object, event, arg2, arg3, arg4);
+    while (g_joinOptionsEventHandlers[i].handler != 0) {
+        if (g_joinOptionsEventHandlers[i].event == event &&
+            (g_joinOptionsEventHandlers[i].actorKind == object->resource || g_joinOptionsEventHandlers[i].actorKind == 30000)) {
+            return g_joinOptionsEventHandlers[i].handler(object, event, eventData, eventValue, eventContext);
         }
         i++;
     }

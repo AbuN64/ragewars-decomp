@@ -2,7 +2,7 @@
 #define MENU_PAK_DIRECTORY_VIEWS_H
 #include "TYPES.H"
 #include "COMMON/ENTRYRECAT0V3.H"
-struct RecordRecAt12 {
+struct PakDirectoryEntryKindView {
     char pad[0x11];
     unsigned char kind;
     unsigned char subtype;

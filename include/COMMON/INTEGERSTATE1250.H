@@ -3,24 +3,24 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern f32 D_800C7E00;
+extern f32 g_playerDamageTimerDurationScale;
 
-struct IntegerState1250;
-typedef struct IntegerState1250 IntegerState1250;
+struct PlayerForceMarkerStateView;
+typedef struct PlayerForceMarkerStateView PlayerForceMarkerStateView;
 
-struct ObjectState12C4;
-typedef struct ObjectState12C4 ObjectState12C4;
+struct PlayerTintBlendStateView;
+typedef struct PlayerTintBlendStateView PlayerTintBlendStateView;
 
 
-extern int func_8022B460_de(char *object);
+extern int Playerai_HasForceMarker(char *object);
 
 
 struct RecordCode8022AE90;
 typedef struct RecordCode8022AE90 RecordCode8022AE90;
 
-struct ObjectState16DA;
+struct PlayerForceMarkerCounterView;
 
-extern int func_8022BA90_de(void);
+extern int Playerai_GetPlayerCount(void);
 
 
 
@@ -44,10 +44,10 @@ struct RecordCode8022AE90 {
     u8 pad16E4[4];
 };
 
-struct ObjectState12C4;
+struct PlayerTintBlendStateView;
 
-struct ObjRecAt120C;
-typedef struct ObjRecAt120C ObjRecAt120C;
+struct PlayerForceMarkerHandleView;
+typedef struct PlayerForceMarkerHandleView PlayerForceMarkerHandleView;
 
 struct Timer;
 struct Timer {
@@ -59,34 +59,34 @@ struct Timer {
     int m_bIsInflator;
 };
 
-struct Obj_func_8022B550_de;
+struct PlayerEffectTimerSet;
 
 
-struct IntegerState1218;
+struct PlayerAlternateFireStateView;
 
 
-struct ObjectState13E4;
-
-
-
-struct ObjRecAt120C;
-
-
-extern void func_8022B484_de(char *player);
-
-struct ObjectState16DA;
-typedef struct ObjectState16DA ObjectState16DA;
-
-struct Obj_func_8022B550_de;
-typedef struct Obj_func_8022B550_de Obj_func_8022B550_de;
-
-struct IntegerState16D4;
+struct PlayerWeaponDelayStateView;
 
 
 
-struct func_8022B08C_S2;
+struct PlayerForceMarkerHandleView;
 
-struct func_8022B08C_S1;
+
+extern void Playerai_DrawForceMarker(char *player);
+
+struct PlayerForceMarkerCounterView;
+typedef struct PlayerForceMarkerCounterView PlayerForceMarkerCounterView;
+
+struct PlayerEffectTimerSet;
+typedef struct PlayerEffectTimerSet PlayerEffectTimerSet;
+
+struct PlayerWeaponTransitionParameterView;
+
+
+
+struct PlayerForceMarkerMatrixView;
+
+struct PlayerForceMarkerOwnerView;
 
 struct Context;
 struct RecordCode8022AE90;
@@ -98,41 +98,41 @@ struct Context {
 };
 
 
-struct func_8022B08C_S1;
-typedef struct func_8022B08C_S1 func_8022B08C_S1;
+struct PlayerForceMarkerOwnerView;
+typedef struct PlayerForceMarkerOwnerView PlayerForceMarkerOwnerView;
 
-extern float D_800C7E08;
+extern float g_playerImpulseScale;
 
-struct IntegerState11C0;
+struct PlayerLoopingSoundHandleView;
 
-struct ObjectState13E4;
-typedef struct ObjectState13E4 ObjectState13E4;
+struct PlayerWeaponDelayStateView;
+typedef struct PlayerWeaponDelayStateView PlayerWeaponDelayStateView;
 
 struct Context;
 typedef struct Context Context;
 
-extern void *func_8022BA0C_de(Context *context);
+extern void *Playerai_FindHighestScoringOtherPlayer(Context *context);
 
 
-struct IntegerState16D4;
-typedef struct IntegerState16D4 IntegerState16D4;
+struct PlayerWeaponTransitionParameterView;
+typedef struct PlayerWeaponTransitionParameterView PlayerWeaponTransitionParameterView;
 
 
-struct func_8022B08C_S2;
-typedef struct func_8022B08C_S2 func_8022B08C_S2;
-
-
-
-
-struct IntegerState1250;
-
-
-struct IntegerState1218;
-typedef struct IntegerState1218 IntegerState1218;
+struct PlayerForceMarkerMatrixView;
+typedef struct PlayerForceMarkerMatrixView PlayerForceMarkerMatrixView;
 
 
 
-struct IntegerState11C0;
-typedef struct IntegerState11C0 IntegerState11C0;
+
+struct PlayerForceMarkerStateView;
+
+
+struct PlayerAlternateFireStateView;
+typedef struct PlayerAlternateFireStateView PlayerAlternateFireStateView;
+
+
+
+struct PlayerLoopingSoundHandleView;
+typedef struct PlayerLoopingSoundHandleView PlayerLoopingSoundHandleView;
 
 #endif

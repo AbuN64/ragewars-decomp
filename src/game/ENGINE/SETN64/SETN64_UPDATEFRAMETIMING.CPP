@@ -2,8 +2,8 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/EFFECTRENDER.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/UNSIGNED_QUOTIENT.H"
@@ -15,28 +15,28 @@
 
 
 #if defined(VERSION_DE)
-extern f32 D_800C5470;
+extern f32 g_systemTimeFrameRateDe;
 #endif
 static inline u32 averageFour(void) {
  s32 sum;
  s32 maximum;
- sum=D_80142CA4+D_8011B9F8+D_801428AC+D_80142C34;
- maximum=D_80142C34;
- if((u32)maximum<D_801428AC)maximum=D_801428AC;
- if((u32)maximum<D_8011B9F8)maximum=D_8011B9F8;
- if((u32)maximum<D_80142CA4)maximum=D_80142CA4;
+ sum=g_lastFrameRetraceCount+g_previousFrameRetraceCount+g_secondPreviousFrameRetraceCount+g_thirdPreviousFrameRetraceCount;
+ maximum=g_thirdPreviousFrameRetraceCount;
+ if((u32)maximum<g_secondPreviousFrameRetraceCount)maximum=g_secondPreviousFrameRetraceCount;
+ if((u32)maximum<g_previousFrameRetraceCount)maximum=g_previousFrameRetraceCount;
+ if((u32)maximum<g_lastFrameRetraceCount)maximum=g_lastFrameRetraceCount;
  { s32 adjusted=maximum-2; return ((u32)sum-(u32)adjusted)/3; }
 }
 static inline s32 idlePause(TimingWorld *world) {
- if(Menu_CountLiveNodes(&D_8014561C)==0 && Cinema_IsSequenceInWindow()!=0 && Cinema_GetSequenceRequest()==120) {
- if(D_801462C8.counters.first==0) {
- if(world->unk26DD4==0) { D_801462C8.counters.first=1;func_804037D4_de(); }
+ if(Menu_CountLiveNodes(&g_matchEndingTeamWheelClose)==0 && Cinema_IsSequenceInWindow()!=0 && Cinema_GetSequenceRequest()==120) {
+ if(g_gameSettings.counters.first==0) {
+ if(world->menuNodeCount==0) { g_gameSettings.counters.first=1;Track_RequestCameraRefresh(); }
  goto checkFlag;
  }
  goto active;
  }
  checkFlag:
- if(D_801462C8.counters.first!=0) {
+ if(g_gameSettings.counters.first!=0) {
  active:
  if(Cinema_GetPlaybackPauseState()!=0) return 1;
  }
@@ -45,85 +45,85 @@ static inline s32 idlePause(TimingWorld *world) {
 /* Update the frame timestep, render the frame, and advance the session mode. */
 void SetN64_UpdateFrameTiming(TimingWorld *world) {
     f32 scaledFrameTime;
-    f32 var_fv0f;
-    s32 temp_a2;
-    s32 temp_t0;
-    s32 temp_t1;
-    s32 temp_v0_2;
-    s32 var_t0;
-    s32 var_t1;
-    s32 var_v0;
-    s32 var_v0_2;
+    f32 unusedTimingFloat1;
+    s32 unusedTimingWord2;
+    s32 unusedTimingWord3;
+    s32 unusedTimingWord4;
+    s32 unusedTimingWord5;
+    s32 unusedTimingWord6;
+    s32 unusedTimingWord7;
+    s32 unusedTimingWord8;
+    s32 unusedTimingWord9;
     s32 idle;
-    u32 temp_a1;
-    u32 temp_v1;
-    u32 temp_v1_2;
+    u32 unusedTimingWord10;
+    u32 unusedTimingWord11;
+    u32 unusedTimingWord12;
     u32 sessionMode;
-    u32 var_v1_2;
-    u32 var_v1_3;
-    u32 var_v1_4;
-    u32 var_v1_5;
-    u32 var_v1_6;
-    u32 var_v1_7;
+    u32 unusedTimingWord13;
+    u32 unusedTimingWord14;
+    u32 unusedTimingWord15;
+    u32 unusedTimingWord16;
+    u32 unusedTimingWord17;
+    u32 unusedTimingWord18;
     u64 nowTicks;
     u64 elapsedUnits;
-    u64 temp_v0;
+    u64 unusedTimingTicks19;
 
     nowTicks = Audio_ReadSystemTime();
-    elapsedUnits = __udivdi3((nowTicks-D_801428A0)<<6,3000);
+    elapsedUnits = __udivdi3((nowTicks-g_previousFrameSystemTime)<<6,3000);
 #if defined(VERSION_DE)
-    scaledFrameTime = (f32)elapsedUnits * D_800C546C * D_800C5470;
+    scaledFrameTime = (f32)elapsedUnits * g_systemTimeFrameScale * g_systemTimeFrameRateDe;
 #else
-    scaledFrameTime = (f32)elapsedUnits * D_800C546C * D_800CA560;
+    scaledFrameTime = (f32)elapsedUnits * g_systemTimeFrameScale * D_800CA560;
 #endif
-    D_801428A0 = nowTicks;
+    g_previousFrameSystemTime = nowTicks;
     if (Tsmos_IsFrontendActive() == 0) {
         if (SetN64_IsModeThirteen() == 0) {
-            world->unk26DD4 = 0;
+            world->menuNodeCount = 0;
         } else {
-            world->unk26DD4 = Menu_CountLiveNodes(&world->viewport.self.messageList.head);
+            world->menuNodeCount = Menu_CountLiveNodes(&world->viewport.self.messageList.head);
         }
     }
     if (D_80154048 != 0) {
-        sessionMode = world->unk26DB8;
+        sessionMode = world->currentMode;
         if (sessionMode == 0xB) {
-            world->unk26DD4 = 1;
+            world->menuNodeCount = 1;
             goto block_10;
         }
     } else {
 block_10:
-        sessionMode = world->unk26DB8;
+        sessionMode = world->currentMode;
     }
  switch(sessionMode) { case 1: case 3: case 4: {
- D_801428A8=averageFour()>1 ? averageFour():2;
+ g_frameTimingTicks=averageFour()>1 ? averageFour():2;
  break; } default: {
- D_801428A8=averageFour()>1 ? averageFour():2;
+ g_frameTimingTicks=averageFour()>1 ? averageFour():2;
  if(Cinema_IsSequenceInWindow()!=0) {
- if((u32)(world->unk26DB8-16)<2 && D_800E28D4<223) {
- D_801428A8=averageFour()>1 ? averageFour():2;
+ if((u32)(world->currentMode-16)<2 && g_hudReferenceViewportHeight<223) {
+ g_frameTimingTicks=averageFour()>1 ? averageFour():2;
  } else {
- D_801428A8=averageFour()>3 ? averageFour():4;
+ g_frameTimingTicks=averageFour()>3 ? averageFour():4;
  }
  }
  }
  }
-    D_800D2988 = (f32) (D_801428A8 * 0xF) / D_80142C38[1];
+    g_frameElapsedTime = (f32) (g_frameTimingTicks * 0xF) / g_displayedFramebufferAndRefreshRate[1];
     if (Cinema_IsSequenceInWindow() != 0) {
-        D_800D2988 = scaledFrameTime;
+        g_frameElapsedTime = scaledFrameTime;
     }
 #if defined(VERSION_DE)
     if (Cinema_IsSequenceInWindow() != 0) {
-        D_800D2988 = D_800D2988 * D_800CA560;
+        g_frameElapsedTime = g_frameElapsedTime * D_800CA560;
     }
 #endif
     Cache_RunCompactionPasses(0);
-    D_80146CD8 = D_8011FAC0.ring.current;
+    g_currentTaskFrame = g_gameSession.ring.current;
     SetN64_BuildAndSubmitSessionFrame(world);
-    world->unk26DB0 = world->unk26DB0 + D_800D2988;
+    world->elapsedTime = world->elapsedTime + g_frameElapsedTime;
     SetN64_AdvanceGameClock(world);
     idle=idlePause(world);
-    if ((idle != 0) && (world->unk26DB8 != 0x10) && (world->unk26DBC != 0x10)) {
-        world->unk26DC1 = 2;
-        world->unk26DBC = 0x10;
+    if ((idle != 0) && (world->currentMode != 0x10) && (world->pendingMode != 0x10)) {
+        world->fadeMode = 2;
+        world->pendingMode = 0x10;
     }
 }

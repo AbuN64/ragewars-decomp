@@ -6,11 +6,11 @@ extern s32 D_8014AD94;
 
 extern char D_0044EB70[];
 
-extern int D_800D2448;
+extern int g_pakScoreAtLeast9999Title;
 
 
-struct MenuRecAt24;
-typedef struct MenuRecAt24 MenuRecAt24;
+struct PakPromptContext;
+typedef struct PakPromptContext PakPromptContext;
 
 
 extern s32 D_80153760;
@@ -22,8 +22,8 @@ struct Messages {
     char text[1];
 };
 struct Messages;
-struct PlayerRecAt5EC;
-struct PlayerRecAt5EC {
+struct PlayerMessageMenuView;
+struct PlayerMessageMenuView {
     char pad0[0x5DC];
     struct Messages *messages;
     char pad5E0[0xC];
@@ -34,89 +34,89 @@ extern s32 D_80153784;
 
 extern s32 D_8014D4C0_de;
 
-extern int D_800D2420;
+extern int g_pakScoreBelow150Title;
 
 extern s32 D_80146D60;
 
-extern int D_800D2424;
+extern int g_pakScoreBelow300Title;
 
-struct MenuRecAt24;
-struct PlayerRecAt5EC;
+struct PakPromptContext;
+struct PlayerMessageMenuView;
 
-struct MenuRecAt24;
+struct PakPromptContext;
 
 struct PakNoteTextEntry;
 typedef struct PakNoteTextEntry PakNoteTextEntry;
 
-struct MenuRecAt20V3;
+struct PakNoteBrowserContext;
 
-extern char *D_800D36D8;
+extern char *g_pakSnapshotGameNameFixed;
 
-struct MenuRecAt24;
+struct PakPromptContext;
 
-struct MenuRecAt24;
+struct PakPromptContext;
 
 
-extern int D_800D2428;
+extern int g_pakScoreBelow500Title;
 
-extern int D_800D241C;
+extern int g_pakScoreBelow50Title;
 
-extern int D_800D242C;
+extern int g_pakScoreBelow800Title;
 
-extern int D_800D2430;
+extern int g_pakScoreBelow1300Title;
 
-extern int D_800D2438;
+extern int g_pakScoreBelow3000Title;
 
 extern s32 D_8014D4EC_de;
 
-struct MenuRecAt20V3;
-typedef struct MenuRecAt20V3 MenuRecAt20V3;
+struct PakNoteBrowserContext;
+typedef struct PakNoteBrowserContext PakNoteBrowserContext;
 
 
 extern int g_pakAlternatePromptEnabled;
 
-extern int D_800D2440;
+extern int g_pakScoreBelow6500Title;
 
-struct PlayerRecAt5EC;
-typedef struct PlayerRecAt5EC PlayerRecAt5EC;
+struct PlayerMessageMenuView;
+typedef struct PlayerMessageMenuView PlayerMessageMenuView;
 
 extern s32 D_8014AD9C;
 
 extern s32 D_8014D4DC;
 
-extern int D_8014D4FC;
+extern int g_controllerPakOverwriteNoteIndex;
 
 extern char D_0044EBDC[];
 
-extern int D_800D2434;
+extern int g_pakScoreBelow2000Title;
 
 
-extern s32 D_800E28C8;
+extern s32 g_introSelectedItem;
 
-struct IntegerState610;
-typedef struct IntegerState610 IntegerState610;
+struct PlayerPakTimerView;
+typedef struct PlayerPakTimerView PlayerPakTimerView;
 
 
-struct IntegerState610;
+struct PlayerPakTimerView;
 
 
 extern s32 D_800DE874;
 
 
 
-extern int D_800D2444;
+extern int g_pakScoreBelow9999Title;
 
 struct PakNoteTextEntry;
 
-extern char *D_800D36D4;
+extern char *g_pakProfileGameNameFixed;
 
-extern int D_800D243C;
+extern int g_pakScoreBelow4500Title;
 
 extern s32 D_80142CAC;
 
 
 
-struct OwnerRecAt5D8V1;
+struct PlayerSavedProfileOwner;
 
 struct PakStatusPakSaveMenu;
 struct PakNotesMenu;

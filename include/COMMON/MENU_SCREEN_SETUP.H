@@ -12,8 +12,8 @@ typedef union SetupModelVector { CVector3 value; Triple words; } SetupModelVecto
 /* Five retained model records start at +8, with native stride 0xC0. */
 typedef union SetupScreenModel {
     StateFrontendInitModelPreviewTransform initial;
-    struct ObjRecAt1CV3 rotation;
-    struct ObjectRecAt28 offset;
+    struct PreviewRotationView rotation;
+    struct ModelPreviewRotationSpeedView offset;
     u8 record[0xC0];
 } SetupScreenModel;
 typedef struct SetupScreen {
@@ -28,32 +28,32 @@ typedef struct SetupScreen {
     s32 unk3DC;
     s32 unk3E0;
     void *text3E4;
-    MenuWidget *unk3E8;
+    MenuWidget *widget301;
     MenuWidget *label;
-    MenuWidget *unk3F0;
+    MenuWidget *widget310;
     char text[0x40];
     s32 category;
     s32 selection;
     MenuWidget *item;
-    MenuWidget *unk440;
-    MenuWidget *unk444;
-    MenuWidget *unk448;
-    MenuWidget *unk44C;
-    MenuWidget *unk450;
-    MenuWidget *unk454;
-    MenuWidget *unk458;
+    MenuWidget *widget30B;
+    MenuWidget *widget30D;
+    MenuWidget *widget35D;
+    MenuWidget *widget30C;
+    MenuWidget *widget2FE;
+    MenuWidget *widget308;
+    MenuWidget *widget300;
     s32 unk45C;
     s32 unk460;
     s32 unk464;
     s32 unk468;
     s32 unk46C;
 } SetupScreen;
-extern SetupScreen *D_800E4F60;
+extern SetupScreen *g_setupScreen;
 /* The prior selection and pending-state words are one real two-word array. */
 /* Actual loads in the US-rev1 constructor; not guessed constants. */
-extern f32 D_800E1AA0, D_800E1AA4, D_800E1AA8, D_800E1AAC;
-extern f32 D_800E1AB0, D_800E1AB4, D_800E1AB8;
+extern f32 g_setupFirstPreviewScale, g_setupFirstPreviewYOffset, g_setupFirstPreviewY, g_setupPreviewDepth;
+extern f32 g_setupSecondPreviewScale, g_setupSecondPreviewX, g_setupSecondPreviewY;
 extern s32 Frontend_InitModelPreviewTransform(StateFrontendInitModelPreviewTransform *, s32, Triple, Triple);
-extern void Frontend_SetPreviewRotation(struct ObjRecAt1CV3 *, Triple);
-extern void Frontend_SetPreviewRotationSpeed(struct ObjectRecAt28 *, Triple);
+extern void Frontend_SetPreviewRotation(struct PreviewRotationView *, Triple);
+extern void Frontend_SetPreviewRotationSpeed(struct ModelPreviewRotationSpeedView *, Triple);
 #endif

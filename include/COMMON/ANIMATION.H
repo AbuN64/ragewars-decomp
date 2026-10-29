@@ -1,23 +1,23 @@
 #ifndef COMMON_ANIMATION_H
 #define COMMON_ANIMATION_H
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct func_80419D04_S1;
-struct func_80419D04_S1 {
+struct FlickerUpdateState;
+struct FlickerUpdateState {
     char pad0[0x4];
     u8 unk4;
     char pad4[0x3F];
-    s32 unk44;
-    s32 unk48;
-    s32 unk4C[5];
-    s32 unk60[5];
-    s32 unk74;
-    struct ResourceSmpFlickerCreateFlickerWidget *unk78;
-    s32 unk7C;
-    s32 unk80;
-    s32 unk84;
+    s32 flickering;
+    s32 entryCount;
+    s32 entryValues[5];
+    s32 entryHoldCounts[5];
+    s32 entryIndex;
+    struct ResourceSmpFlickerCreateFlickerWidget *target;
+    s32 timer;
+    s32 restoreValue;
+    s32 armed;
 };
 
 struct MenuFadeWidget;
@@ -60,13 +60,13 @@ struct ObjectCode804196C0 {
     struct ResourceSmpFlickerCreateFlickerWidget *target;
 };
 
-extern float D_800E1470;
+extern float g_fadeWidgetInitialScale;
 
 struct FrameSequence;
 
 
 
-extern float D_800E1474;
+extern float g_fadeWidgetInitialProgress;
 
 struct Animation;
 struct Animation {
@@ -86,8 +86,8 @@ struct Animation {
     char pad60[4];
 };
 
-struct ObjectRecAt84;
-struct ObjectRecAt84 {
+struct FlickerActivityView;
+struct FlickerActivityView {
     char pad0[0x44];
     s32 busy;
     char pad48[0x84 - 0x48];
@@ -100,8 +100,8 @@ struct MenuFadeWidget;
 typedef struct MenuFadeWidget MenuFadeWidget;
 
 
-struct ObjectRecAt84;
-extern s32 SmpFlicker_IsFlickerIdle(struct ObjectRecAt84 *object);
+struct FlickerActivityView;
+extern s32 SmpFlicker_IsFlickerIdle(struct FlickerActivityView *object);
 
 
 struct Triple;
@@ -110,8 +110,8 @@ struct FrameSequence;
 
 
 struct ResourceSmpFlickerCreateFlickerWidget;
-struct SourceRecAt84;
-struct SourceRecAt84 {
+struct FlickerRestoreView;
+struct FlickerRestoreView {
     char pad[0x78];
     struct ResourceSmpFlickerCreateFlickerWidget *target;
     char pad7C[0x83 - 0x7C];
@@ -125,11 +125,11 @@ struct MenuResourceWidget;
 typedef struct MenuResourceWidget MenuResourceWidget;
 extern MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 
-struct SourceRecAt84;
-extern void SmpFlicker_RestoreFlickerValue(struct SourceRecAt84 *source);
+struct FlickerRestoreView;
+extern void SmpFlicker_RestoreFlickerValue(struct FlickerRestoreView *source);
 
-struct func_80419D04_S1;
-typedef struct func_80419D04_S1 func_80419D04_S1;
+struct FlickerUpdateState;
+typedef struct FlickerUpdateState FlickerUpdateState;
 
 struct FrameSequence;
 
@@ -153,7 +153,7 @@ struct MenuResourceWidget {
 };
 
 
-extern f32 D_800E1454;
-extern f32 D_800E1460;
-extern f32 D_800E146C;
+extern f32 g_fadeProgressRetreatStep;
+extern f32 g_fadeProgressHorizontalMaximum;
+extern f32 g_fadeProgressHorizontalAdvanceStep;
 #endif

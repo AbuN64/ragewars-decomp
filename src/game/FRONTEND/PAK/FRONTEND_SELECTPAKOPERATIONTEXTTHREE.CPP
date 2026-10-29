@@ -1,12 +1,12 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_20.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/FRONTEND_RESOURCE_LOAD_STATE.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 
-/* Points a field's text at the label for the state word D_80153778: one of 4 strings through the jump table
-   jtbl_800E1038 for states 0 to 4, and D_800D79A0 for any other state. Returns zero. */
+/* Points a field's text at the label for the state word g_frontendResourceLoadStage: one of 4 strings through the jump table
+   jtbl_800E1038 for states 0 to 4, and g_pakOperationThreeDefaultLabel for any other state. Returns zero. */
 
 
 
@@ -15,8 +15,8 @@
 
 
 
-s32 Frontend_SelectPakOperationTextThree(struct FieldRecAt14 *field) {
-    u32 state = D_80153778;
+s32 Frontend_SelectPakOperationTextThree(struct PakActionLabelView *field) {
+    u32 state = g_frontendResourceLoadStage;
 
     if (state >= 5) {
         goto state_other;
@@ -29,19 +29,19 @@ s32 Frontend_SelectPakOperationTextThree(struct FieldRecAt14 *field) {
         case 4: goto case_4;
         }
 state_other:
-    field->text = D_800D79A0;
+    field->text = g_pakOperationThreeDefaultLabel;
     goto done;
 case_1:
-    field->text = D_800D3988;
+    field->text = g_pakOperationThreeStateOneLabel;
     goto done;
 case_2:
-    field->text = D_800D399C;
+    field->text = g_pakOperationThreeStateTwoLabel;
     goto done;
 case_3:
-    field->text = D_800D39B0;
+    field->text = g_pakOperationThreeStateThreeLabel;
     goto done;
 case_4:
-    field->text = D_800D39C4;
+    field->text = g_pakOperationThreeStateFourLabel;
 done:
     return 0;
 }

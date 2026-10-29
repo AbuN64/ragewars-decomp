@@ -1,0 +1,5 @@
+#ifndef DATA_OVLDAT5_PLAYER_EMPTY_ACTION_HOOK_ADDRESSES_H
+#define DATA_OVLDAT5_PLAYER_EMPTY_ACTION_HOOK_ADDRESSES_H
+extern char g_overlayFiveLinkRecordRomLinkTarget_0022D48C[];
+extern char g_overlayFiveLinkRecordRomLinkTarget_0022D494[];
+#endif

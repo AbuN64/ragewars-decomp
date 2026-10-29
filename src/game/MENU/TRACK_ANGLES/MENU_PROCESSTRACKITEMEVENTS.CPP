@@ -18,39 +18,39 @@
 
 
 
-extern RecordMenuProcessTrackItemEvents *D_800E2830;
+extern RecordMenuProcessTrackItemEvents *g_cinemaSequenceState;
 
 extern s32 Cinema_IsSequenceActive(void);
-extern void Track_RequestTrackByIds(s32 mode, ItemRecAt12 *item);
-extern void Link_ActivateTrigger(ItemRecAt12 *item);
-extern void Scene_SetTriggerStateBit(Shared_World *world, ItemRecAt12 *item, s32 mode);
+extern void Track_RequestTrackByIds(s32 mode, TriggerStateBitDescriptor *item);
+extern void Link_ActivateTrigger(TriggerStateBitDescriptor *item);
+extern void Scene_SetTriggerStateBit(Shared_World *world, TriggerStateBitDescriptor *item, s32 mode);
 
 void Menu_ProcessTrackItemEvents(void) {
     f32 time;
     s32 late;
     s32 *track;
-    EntryRecAt8V4 *entry;
+    TrackTimedItemEvent *entry;
     Shared_World *tables;
-    ItemRecAt12 *item;
+    TriggerStateBitDescriptor *item;
     s32 n;
     s32 i;
     s32 hit;
 
-    time = D_800E2830->time;
+    time = g_cinemaSequenceState->time;
     late = 0;
     if (Cinema_IsSequenceActive() == 0) {
         return;
     }
-    if (D_800E2830->active == 0) {
+    if (g_cinemaSequenceState->active == 0) {
         return;
     }
-    track = SetN64_GetPackSection(D_800E2830->resource, 2);
+    track = SetN64_GetPackSection(g_cinemaSequenceState->resource, 2);
     n = track[1];
-    entry = (EntryRecAt8V4 *)(track + 2);
+    entry = (TrackTimedItemEvent *)(track + 2);
     if (n == 0) {
         return;
     }
-    if (D_800E2830->endTime <= time) {
+    if (g_cinemaSequenceState->endTime <= time) {
         late = 1;
     }
     for (i = 0; i < n; i++) {
@@ -62,9 +62,9 @@ void Menu_ProcessTrackItemEvents(void) {
             continue;
         }
         if (entry[i].side == 0) {
-            item = &((ItemRecAt12 *)tables->recordArray)[entry[i].index];
+            item = &((TriggerStateBitDescriptor *)tables->recordArray)[entry[i].index];
         } else {
-            item = &((ItemRecAt12 *)tables->alternateRecordArray)[entry[i].index];
+            item = &((TriggerStateBitDescriptor *)tables->alternateRecordArray)[entry[i].index];
         }
         hit = 0;
         switch (item->kind) {
@@ -89,7 +89,7 @@ void Menu_ProcessTrackItemEvents(void) {
         }
         if (hit) {
             Track_RequestTrackByIds(0, item);
-            D_800E2830->pending = 0;
+            g_cinemaSequenceState->pending = 0;
         } else {
             Link_ActivateTrigger(item);
         }

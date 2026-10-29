@@ -1,8 +1,8 @@
 #ifndef OVLGAME_SCENE_DISPATCHANDRECYCLEQUEUEDTRIGGERS_H
 #define OVLGAME_SCENE_DISPATCHANDRECYCLEQUEUEDTRIGGERS_H
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_10.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/TRIGGER_AND_FLOAT_VALUE_OPERATIONS.H"
 #include "COMMON/LEVEL.H"
 #include "COMMON/ENTRYRECAT0V3.H"
 struct Level {
@@ -14,7 +14,7 @@ struct Level {
 struct BankCode8044E2B8 {
     s32 unk0;
     s32 count;
-    struct EntryRecAt0V3 items[1];
+    struct SceneFrameItemReference items[1];
 };
 struct Ent {
     u32 kind;
@@ -35,7 +35,7 @@ struct FrameCode8044E2B8 {
     s32 unk0;
     s32 count;
     char pad8[0xC];
-    SlotRecAt0V2 slots[1];
+    ParticleEffectRelocationSlot slots[1];
 };
 struct GroupCode8044E2B8 {
     s32 unk0;
@@ -44,9 +44,9 @@ struct GroupCode8044E2B8 {
 };
 struct OwnerCode8044E2B8 {
     char pad0[0x6C];
-    void *unk6C;
+    void *modelBankData;
     char pad70[0xC];
-    void *unk7C;
+    void *frameResourceData;
     char pad80[0x1158];
     struct EntryOvlSceneDispatchAndRecycleQueuedTriggers *active;
     char pad11DC[0x10];

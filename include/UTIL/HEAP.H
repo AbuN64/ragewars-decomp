@@ -15,19 +15,19 @@ struct Pool80255720 {
     struct Block80255720 *anchor;
 };
 /* A first-fit heap: its byte range, the free-block list (head and tail) and the address-ordered list of all
-   blocks; D_801051A0 is the game's main heap. */
+   blocks; g_runtimeHeap is the game's main heap. */
 struct Heap {
     char *start;
     char *end;
-    struct BlockRecAt20 *free;
-    struct BlockRecAt20 *last;
-    struct BlockRecAt20 *first;
+    struct HeapAllocationBlock *free;
+    struct HeapAllocationBlock *last;
+    struct HeapAllocationBlock *first;
 };
-struct HeapRecAtC {
+struct HeapFreeBlockList {
     char pad0[8];
-    struct BlockRecAt20 *head;
-    struct BlockRecAt20 *tail;
+    struct HeapAllocationBlock *head;
+    struct HeapAllocationBlock *tail;
 };
-extern void func_80255780_de(Pool80255720 *arena);
-extern void func_80255C4C_de(struct Pool80255ACC *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut);
+extern void Heap_CoalesceEmptyPhysicalBlocks(Pool80255720 *arena);
+extern void Heap_GetFreeByteCounts(struct Pool80255ACC *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut);
 #endif

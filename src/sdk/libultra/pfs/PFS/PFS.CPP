@@ -1,12 +1,12 @@
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
 #include "sdk/PFS/PFS_SELECTACTIVEBANK.H"
 #include "sdk/PFS/PFS_READWRITEINODE.H"
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/PFS/__OSCHECKID.H"
 #include "sdk/libultra/pfs/PFS.H"
 
@@ -52,7 +52,7 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
     }
 
     newid->repaired = -1;
-    newid->random = func_802BCF00_de();
+    newid->random = Util_ReadProcessorCount();
     newid->serial_mid = badid->serial_mid;
     newid->serial_low = badid->serial_low;
 
@@ -412,16 +412,16 @@ s32 Pfs_SelectActiveBank(OSPfs *pfs)
 }
 
 #if defined(VERSION_US)
-unsigned char D_auto_func_80448E88_us_padding_1ACE88[4] = { 0x52, 0x00, 0x00, 0x00 };
+unsigned char g_PfsTrailingBytesBlock6[4] = { 0x52, 0x00, 0x00, 0x00 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_80448E8C[1] = {
+unsigned int k_PfsEncodedWords[1] = {
     0x0000000A,
 };
 #endif
 
 /* 80447BB0_8.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_80448D18_de_padding_1AED18[8] = { 0x3C, 0x03, 0x00, 0x10, 0x8E, 0x42, 0x01, 0x00 };
+unsigned char g_PfsTrailingBytesBlock5[8] = { 0x3C, 0x03, 0x00, 0x10, 0x8E, 0x42, 0x01, 0x00 };
 #endif

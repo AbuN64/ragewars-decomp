@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/ACTORRESOURCEHEADER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/ACCESS_S8_10F.H"
@@ -29,7 +29,7 @@ f32 Gobjinst_GetModelParticleScale(void *actor) {
     f32 result;
     void **modelResource;
 
-    result = D_800C3B5C;
+    result = g_defaultModelParticleScale;
     if (((LevelActor *)actor)->flags & 0x40000) {
         modelResource = Cache_RequestResource(0, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resourceFlags, 4, 0, 0, &g_unitScaleMultiplierAnimObjectInfoRev1Text, 1);
         if (modelResource != 0) {
@@ -62,7 +62,7 @@ void **Gobjinst_RequestAnimatedModelVariant(MenuPanelRoot *actor, s32 variantInd
     if (actor->selectedResource != 0) {
         return Cache_RequestResource(0, actor->selectedResource,
                              actor->selectedResource, actor->window,
-                             0, 0, &D_0026D814, &s_animatedModelText, 0);
+                             0, 0, &g_Geometry_ExpandExtendedModelAddress, &s_animatedModelText, 0);
     }
     return 0;
 }

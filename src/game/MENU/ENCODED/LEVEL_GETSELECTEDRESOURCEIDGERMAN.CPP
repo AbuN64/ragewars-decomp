@@ -3,17 +3,17 @@
 /* 800E2284.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E2284 */
-const unsigned int D_blob_abd6859932c02fdacd7a[1] = {
+const unsigned int k_LevelGetselectedresourceidgermanEncodedWords[1] = {
     0x41700000,
 };
 #endif
 
 /* 8043D1DC_2.CPP */
 #if !(defined(VERSION_US_REV1))
-/* Maps the state number D_80154034 (0 to 10) to a fixed value through a jump table; anything else gives 1000. */
-extern u32 D_80154034;
+/* Maps the state number g_encodedSelectedLevelIndex (0 to 10) to a fixed value through a jump table; anything else gives 1000. */
+extern u32 g_encodedSelectedLevelIndex;
 s32 Level_GetSelectedResourceIdGerman(void) {
-    switch (D_80154034) {
+    switch (g_encodedSelectedLevelIndex) {
     case 0:
     default:
         return 1000;

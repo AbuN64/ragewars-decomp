@@ -10,27 +10,27 @@
 #if defined(VERSION_US)
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
-extern ResidentEventHandlerEntry D_800EB1A4[];
+extern ResidentEventHandlerEntry g_joinOptionsEventHandlers[];
 
-s32 Frontend_DispatchUsJoinOptionsEvent(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchUsJoinOptionsEvent(ActorDefinitionHeader *actor, s32 event, s32 eventData, s32 eventValue, s32 eventContext) {
     s32 index;
     index = 0;
-    if (D_800EB1A4[index].handler != 0) {
+    if (g_joinOptionsEventHandlers[index].handler != 0) {
         do {
-            if (D_800EB1A4[index].event == event) {
-                if (D_800EB1A4[index].actorKind == actor->character || D_800EB1A4[index].actorKind == 30000) {
-                    return D_800EB1A4[index].handler(actor, event, arg2, arg3, arg4);
+            if (g_joinOptionsEventHandlers[index].event == event) {
+                if (g_joinOptionsEventHandlers[index].actorKind == actor->character || g_joinOptionsEventHandlers[index].actorKind == 30000) {
+                    return g_joinOptionsEventHandlers[index].handler(actor, event, eventData, eventValue, eventContext);
                 }
             }
             index++;
-        } while (D_800EB1A4[index].handler != 0);
+        } while (g_joinOptionsEventHandlers[index].handler != 0);
     }
     return 0;
 }
 #endif
 
 #if defined(VERSION_US)
-char rodata_unresolved_8041F1A8[8] =
+char s_FrontendSelectnextjoinmodelIANIMGText[8] =
     "I_ANIM_G";
 #endif
 
@@ -44,10 +44,10 @@ char rodata_unresolved_8041F1A8[8] =
    model table g_rewardItemTiers through Join_FindJoinModelIndex, walks back through its variants and, before the
    first, to the last variant of the previous model (wrapping to the last), skipping entries whose
    id is -1, then stores the variant at 0x4 and 0xC and the id at 0x0 of the 28-byte request in
-   D_80153F80, copies the name of the entry the found id selects in that variant row to 0x10, redraws through Join_UpdateJoinRequestDisplay and plays sound
+   g_joinRequestEntries, copies the name of the entry the found id selects in that variant row to 0x10, redraws through Join_UpdateJoinRequestDisplay and plays sound
    0xE81. Returns zero. */
 
-extern struct func_80204468_S3 *D_800E39C0;
+extern struct LinkedWorldFlagsView *D_800E39C0;
 extern struct TextEntry g_rewardItemTiers[][17];
 extern void MarkMenuEventHandled();
 extern void XPlus_CopyString(char *, char *);
@@ -64,8 +64,8 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         return 0;
     }
-    variant = D_80153F80[D_800E39C0->unk14].variant;
-    model = Join_FindJoinModelIndex(variant, D_80153F80[D_800E39C0->unk14].id);
+    variant = g_joinRequestEntries[D_800E39C0->flags].variant;
+    model = Join_FindJoinModelIndex(variant, g_joinRequestEntries[D_800E39C0->flags].id);
     do {
         variant--;
         if (variant < 0) {
@@ -77,17 +77,17 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
         }
         id = g_rewardItemTiers[variant][model].id;
     } while (id == -1);
-    D_80153F80[D_800E39C0->unk14].variant = variant;
-    D_80153F80[D_800E39C0->unk14].id = id;
-    XPlus_CopyString(D_80153F80[D_800E39C0->unk14].name, 
+    g_joinRequestEntries[D_800E39C0->flags].variant = variant;
+    g_joinRequestEntries[D_800E39C0->flags].id = id;
+    XPlus_CopyString(g_joinRequestEntries[D_800E39C0->flags].name,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         g_rewardItemTiers[variant][id].text[g_languageIndex]
 #else
         *g_rewardItemTiers[variant][id].text
 #endif
     );
-    D_80153F80[D_800E39C0->unk14].variantC = variant;
-    Join_UpdateJoinRequestDisplay(D_800E39C0->unk14);
+    g_joinRequestEntries[D_800E39C0->flags].variantC = variant;
+    Join_UpdateJoinRequestDisplay(D_800E39C0->flags);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
@@ -100,7 +100,7 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
    model table g_rewardItemTiers through Join_FindJoinModelIndex, walks forward through its variants and, past the
    last, to the first variant of the next model (wrapping to the first), skipping entries whose
    id is -1, then stores the variant at 0x4 and 0xC and the id at 0x0 of the 28-byte request in
-   D_80153F80, copies the name of the entry the found id selects in that variant row to 0x10, redraws through Join_UpdateJoinRequestDisplay and plays sound
+   g_joinRequestEntries, copies the name of the entry the found id selects in that variant row to 0x10, redraws through Join_UpdateJoinRequestDisplay and plays sound
    0xE81. Returns zero. Adapted from Frontend_SelectPreviousJoinModel with the walk direction reversed. */
 
 s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s32 event) {
@@ -115,8 +115,8 @@ s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s3
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         return 0;
     }
-    variant = D_80153F80[D_800E39C0->unk14].variant;
-    model = Join_FindJoinModelIndex(variant, D_80153F80[D_800E39C0->unk14].id);
+    variant = g_joinRequestEntries[D_800E39C0->flags].variant;
+    model = Join_FindJoinModelIndex(variant, g_joinRequestEntries[D_800E39C0->flags].id);
     do {
         variant++;
         if (variant >= 3) {
@@ -128,17 +128,17 @@ s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s3
         }
         id = g_rewardItemTiers[variant][model].id;
     } while (id == -1);
-    D_80153F80[D_800E39C0->unk14].variant = variant;
-    D_80153F80[D_800E39C0->unk14].id = id;
-    XPlus_CopyString(D_80153F80[D_800E39C0->unk14].name, 
+    g_joinRequestEntries[D_800E39C0->flags].variant = variant;
+    g_joinRequestEntries[D_800E39C0->flags].id = id;
+    XPlus_CopyString(g_joinRequestEntries[D_800E39C0->flags].name,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         g_rewardItemTiers[variant][id].text[g_languageIndex]
 #else
         *g_rewardItemTiers[variant][id].text
 #endif
     );
-    D_80153F80[D_800E39C0->unk14].variantC = variant;
-    id = D_800E39C0->unk14;
+    g_joinRequestEntries[D_800E39C0->flags].variantC = variant;
+    id = D_800E39C0->flags;
     Join_UpdateJoinRequestDisplay(id);
     SoundElement_PlayFlatSound(0xE81);
     return 0;

@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/libgultra/ALSEQGETLOC.H"
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
@@ -18,8 +18,8 @@ extern u8 read8(ALSeq_s *);
 
 /* alSeqSecToTicks, drafted from ultralib src/audio/seq.c: convert seconds to ticks at the given
    tempo. The library evaluates it in single precision as sec * (division * 1e6f), so the product is
-   spelled in that order against the cartridge constant after D_800CC740; GCC's u32-to-float and
-   float-to-u32 expansions are written out against D_800CC748 and D_800CC750. */
+   spelled in that order against the cartridge constant after g_sequenceMicrosecondsPerSecond; GCC's u32-to-float and
+   float-to-u32 expansions are written out against g_sequenceSecondsToTicksUnsignedBias and g_sequenceSignedTickConversionLimit. */
 
  /* followed by 1000000.0f */
 
@@ -91,7 +91,7 @@ void alSeqNew(ALSeq_s *state, u8 *start, s32 len) {
             division = read16(state);
             state->division = division;
             if (!(division & 0x8000)) {
-                state->qnpt = D_800C74E0_de / (f32) division;
+                state->qnpt = g_sequenceQuarterNoteUnit / (f32) division;
                 if (read32(state) == 0x4D54726B) {
                     read32(state);
                     state->trackStart = state->curPtr;
@@ -101,39 +101,39 @@ void alSeqNew(ALSeq_s *state, u8 *start, s32 len) {
     }
 }
 
-int alSeqGetTicks(struct ALSeq_s *arg0) {
-    return arg0->lastTicks;
+int alSeqGetTicks(struct ALSeq_s *sequence) {
+    return sequence->lastTicks;
 }
 
-f32 alSeqTicksToSec(ObjRecAt18V1 *sequence, s32 ticks, s32 tempo) {
+f32 alSeqTicksToSec(SequenceTicksPerQuarterView *sequence, s32 ticks, s32 tempo) {
     f64 v;
-    f32 new_var;
+    f32 tickCount;
 
     v = (f64)tempo;
-    new_var = (f32)ticks;
+    tickCount = (f32)ticks;
     if (tempo < 0) {
-        v = v + D_800C74E8_de;
+        v = v + g_sequenceTicksToSecondsUnsignedBias;
     }
-    return (new_var * (f32)v) / ((f32)sequence->field18 * D_800CC740);
+    return (tickCount * (f32)v) / ((f32)sequence->ticksPerQuarter * g_sequenceMicrosecondsPerSecond);
 }
 
  /* 2147483648.0f */
-u32 alSeqSecToTicks(ObjRecAt18V1 *seq, f32 sec, u32 tempo)
+u32 alSeqSecToTicks(SequenceTicksPerQuarterView *seq, f32 sec, u32 tempo)
 {
     f32 ticks;
     f64 t;
     f32 q;
     u32 result;
-    ticks = sec * ((f32)seq->field18 * (*(&D_800CC740 + 1)));
+    ticks = sec * ((f32)seq->ticksPerQuarter * (*(&g_sequenceMicrosecondsPerSecond + 1)));
     t = (f64)(s32)tempo;
     if ((s32)tempo < 0) {
-        t = t + D_800CC748;
+        t = t + g_sequenceSecondsToTicksUnsignedBias;
     }
     q = ticks / (f32)t;
-    if (!(q >= D_800CC750)) {
+    if (!(q >= g_sequenceSignedTickConversionLimit)) {
         result = (s32)q;
     } else {
-        q = q - D_800CC750;
+        q = q - g_sequenceSignedTickConversionLimit;
         result = (s32)q;
         result |= 0x80000000;
     }
@@ -183,15 +183,15 @@ void alSeqNewMarker(ALSeq_s *seq, ALSeqMarker *m, u32 ticks)
 }
 
 /** Copy selected fields from the compact source record. */
-void alSeqSetLoc(ALSeq_s *arg0, ALSeqMarker *arg1) {
-    arg0->curPtr = arg1->curPtr;
-    arg0->lastStatus = arg1->lastStatus;
-    arg0->lastTicks = arg1->lastTicks;
+void alSeqSetLoc(ALSeq_s *sequence, ALSeqMarker *marker) {
+    sequence->curPtr = marker->curPtr;
+    sequence->lastStatus = marker->lastStatus;
+    sequence->lastTicks = marker->lastTicks;
 }
 
 /** Copy selected fields into the compact destination record. */
-void alSeqGetLoc(void *arg0, void *markerObject) {
-    struct ALSeq_s *sequence = arg0;
+void alSeqGetLoc(void *sequenceStorage, void *markerObject) {
+    struct ALSeq_s *sequence = sequenceStorage;
     struct ALSeqMarker *marker = markerObject;
     marker->curPtr = sequence->curPtr;
     marker->lastStatus = sequence->lastStatus;
@@ -199,14 +199,14 @@ void alSeqGetLoc(void *arg0, void *markerObject) {
 }
 
 s32 __alSeqNextDelta(ALSeq_s *sequence, s32 *deltaTicks) {
-    u8 *field8;
+    u8 *savedCursor;
 
-    field8 = sequence->curPtr;
-    if (!(field8 < (sequence->base + sequence->len))) {
+    savedCursor = sequence->curPtr;
+    if (!(savedCursor < (sequence->base + sequence->len))) {
         return 0;
     }
     *deltaTicks = readVarLen(sequence);
-    sequence->curPtr = field8;
+    sequence->curPtr = savedCursor;
     return 1;
 }
 
@@ -232,6 +232,6 @@ s32 readVarLen(struct ALSeq_s *sequence) {
 }
 
 /* ROM-grounded data: src/rw_pool_802B1FE8_CD330_us_rev1.c */
-const unsigned int D_blob_049096e9a996bdbf5044[1] = {
+const unsigned int g_sequenceQuarterNoteUnit_StorageWords[1] = {
     0x3F800000,
 };

@@ -5,37 +5,37 @@
 #include "TYPES.H"
 #include "FRONTEND/MENU_DISPATCHSOUNDSLIDEREVENT.H"
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E58FC, an actor kind at D_800E5900 and a handler at D_800E5904: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_soundSliderEventIds, an actor kind at g_soundSliderEventKinds and a handler at g_soundSliderEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8043962C)(void *, s32, s32, s32, s32);
 
 
-extern FieldRow D_800E58FC[];
-extern FieldRow D_800E5900[];
-extern Handler8043962C D_800E5904;
+extern FieldRow g_soundSliderEventIds[];
+extern FieldRow g_soundSliderEventKinds[];
+extern Handler8043962C g_soundSliderEventHandlers;
 
 
 
 
-s32 Menu_DispatchSoundSliderEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchSoundSliderEvent(void *eventTarget, s32 event, s32 itemId, s32 value, s32 context) {
     Handler8043962C *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E5904 != 0) {
+    if (g_soundSliderEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E5904;
+        entry = &g_soundSliderEventHandlers;
         index = 0;
         do {
-            if (D_800E58FC[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E5900[index].value;
+            if (g_soundSliderEventIds[index].value == event) {
+                actor = eventTarget;
+                actor_kind = actor->input;
+                table_kind = g_soundSliderEventKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(eventTarget, event, itemId, value, context);
                 }
             }
             entry += 3;

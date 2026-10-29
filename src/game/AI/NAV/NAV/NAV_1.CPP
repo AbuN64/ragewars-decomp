@@ -14,7 +14,7 @@ unsigned int func_8020D364_de_padding_DF64[3] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int D_d0_cd1f3a8def92aa29[3] = {
+unsigned int g_NavEncodedWordsBlock6[3] = {
     0x46800860, 0x46030842, 0x3C01800C,
 };
 #endif

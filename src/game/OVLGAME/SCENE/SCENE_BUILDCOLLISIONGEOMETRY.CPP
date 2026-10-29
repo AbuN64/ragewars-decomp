@@ -4,18 +4,18 @@
    face, lowers the world's minimum height to every triangle vertex, and flags triangles whose group
    bit, callback or neighbours mark them with the default surface mask. */
 #include "TYPES.H"
-#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/PACKED.H"
 #include "COMMON/RESOURCELOCKSTATE.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/OBJB.H"
-#include "MENU/8044ACCC.H"
+#include "MENU/SCENE_RESOURCE_PREVIEW_AND_COLLISION_VIEWS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-struct Shape_typemap_165;
-extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *handle, s32 total);
-extern void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *replacement);
+struct CacheResourceBlockView;
+extern struct CacheResourceBlockView *Cache_AllocResourceBlock(s32 cache, void *handle, s32 total);
+extern void Cache_ReplaceResourceBlock(s32 unused, struct CacheResourceBlockView **handle, struct CacheResourceBlockView *replacement);
 
 
 
@@ -127,21 +127,21 @@ void Scene_BuildCollisionGeometry(CollisionBuildWorld *world, CollisionBuildMesh
                 if (testBit(j, bits)) {
                     tri->fields.flags |= 0x400;
                 }
-                if (!(tri->fields.mask & D_800CD8D0)) {
-                    tri->fields.mask = D_800CD8D0;
+                if (!(tri->fields.mask & g_defaultCameraSurfaceType)) {
+                    tri->fields.mask = g_defaultCameraSurfaceType;
                 }
                 if (Cinema_IsSequenceInWindow() != 0) {
-                    tri->fields.mask = D_800CD8D0;
+                    tri->fields.mask = g_defaultCameraSurfaceType;
                 }
                 if (tri->fields.flags & 0x2000) {
-                    tri->fields.mask = D_800CD8D0;
+                    tri->fields.mask = g_defaultCameraSurfaceType;
                 }
             }
             for (j = 0; j < ntris; j++) {
                 tri = &tris[j];
                 for (k = 0; k < 3; k++) {
                     if (tri->fields.adj[k] != 0 && (tri->fields.adj[k]->fields.flags & 0x2000)) {
-                        { s32 *surface = &tri->fields.mask; *surface = D_800CD8D0; }
+                        { s32 *surface = &tri->fields.mask; *surface = g_defaultCameraSurfaceType; }
                     }
                 }
             }

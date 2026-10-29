@@ -18,7 +18,7 @@
 
 extern f32 Gobjinst_GetActorHeight(ActorBarrelIsTargetInViewCone *);
 extern f32 Gu_Sqrtf(f32);
-extern CQuatern func_8024796C_de(ActorBarrelIsTargetInViewCone *);
+extern CQuatern Gobjinst_BuildActorAimQuaternion(ActorBarrelIsTargetInViewCone *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 
 s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarrelIsTargetInViewCone *target, f32 range, f32 across, f32 up)
@@ -51,7 +51,7 @@ s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarre
   {
     return 0;
   }
-  rotation = func_8024796C_de(viewer);
+  rotation = Gobjinst_BuildActorAimQuaternion(viewer);
   MatrixFromQuaternion(&rotation, &matrix);
   ahead.x = 0.0f;
   ahead.y = 0.0f;
@@ -111,14 +111,14 @@ s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarre
   return 1;
 }
 
-s32 Cbarrel_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80214624_de *candidate) {
+s32 Cbarrel_UpdateTrackerAim(TrackerAimActorView *actor, Plan *tracker, TrackerAimActorView *candidate) {
     CVector3 pos,hit;
     s32 room;
-    f32 temp_f20;
-    Actor_func_80214624_de *temp_a2;
+    f32 unusedAimValue;
+    TrackerAimActorView *unusedAimActor;
     s32 resolvedRoom;
     s32 targetKind;
-    s32 var_v0;
+    s32 unusedAimState;
     ApproachLocation *approachLocation;
     Runtime *runtime;
 
@@ -131,13 +131,13 @@ s32 Cbarrel_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
         }
     } else {
         targetKind = 2;
-        if (candidate != tracker->unk68) {
-            if (*candidate->unk18 == 5) targetKind=5;
-            else if(candidate->unkE4==0x64F) targetKind=7;
+        if (candidate != tracker->currentTarget) {
+            if (*candidate->definition == 5) targetKind=5;
+            else if(candidate->objectId==0x64F) targetKind=7;
             else {
                 targetKind=0;
                 if(!g_world.visibilityEnabled) {
-                    if((!(candidate->unk100&0x300000) || candidate->unk1D8->unk794!=actor || (targetKind=1,candidate->unk1D8->unk788!=2)) && (!(actor->unk2E0&2) || (targetKind=1,actor->unkE4==0xCA))) targetKind=0;
+                    if((!(candidate->flags&0x300000) || candidate->player->target!=actor || (targetKind=1,candidate->player->weaponState!=2)) && (!(actor->targetFlags&2) || (targetKind=1,actor->objectId==0xCA))) targetKind=0;
                 }
             }
         }
@@ -145,57 +145,57 @@ s32 Cbarrel_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
     switch (targetKind) {
     case 6:
         pos = actor->pos;
-        room = actor->unk14;
+        room = actor->room;
         break;
     case 4:
-        approachLocation = func_80219408_de(&tracker->unk94);
+        approachLocation = Playerai_GetRouteCursorPoint(&tracker->unk94);
         pos = approachLocation->pos;
-        room = approachLocation->unkC;
+        room = approachLocation->room;
         break;
     case 3:
         pos = tracker->pos;
-        room = tracker->unkBC;
+        room = tracker->aimRoom;
         break;
     case 7:
-        approach(actor,candidate,tracker->unk80,&pos,&room);
+        approach(actor,candidate,tracker->approachTarget,&pos,&room);
         break;
     case 1:
-        resolvedRoom = CCollision_CopyPositionAndGetModelFlags(actor, tracker->unk84, candidate->pos, candidate->unk14, tracker->unk30->unkC, &pos);
+        resolvedRoom = CCollision_CopyPositionAndGetModelFlags(actor, tracker->collisionMask, candidate->pos, candidate->room, tracker->unk30->unkC, &pos);
         room = resolvedRoom;
         if (resolvedRoom == 0) {
         default:
             pos = candidate->pos;
-            room = candidate->unk14;
+            room = candidate->room;
         }
         break;
     }
     if (CCollision_CopyProbePosition(actor, pos, room, tracker->unk30->unkC, &hit) != 0) {
-        if (Region_IsPointInTriangleXZ(actor->unk14, hit.x, hit.z) != 0) {
-            tracker->unk90 = hit.y;
+        if (Region_IsPointInTriangleXZ(actor->room, hit.x, hit.z) != 0) {
+            tracker->aimHeight = hit.y;
         } else {
-            tracker->unk90 = (f32) (hit.y + D_800C2160_de[0]);
+            tracker->aimHeight = (f32) (hit.y + k_barrelTargetAimOffsets[0]);
         }
         Graphu64_SubtractVectors(&hit, &hit, &actor->pos);
-        tracker->unk8C = (f32) (Graphu64_GetHorizontalAngle(&hit) + D_800C2160_de[1]);
+        tracker->aimYaw = (f32) (Graphu64_GetHorizontalAngle(&hit) + k_barrelTargetAimOffsets[1]);
         return 1;
     }
     if (targetKind == 1) {
-        tracker->unk90 = pos.y;
-        tracker->unk8C = (f32) (actor->unk6C + Barrel_GetSignedAngleToPoint(actor, pos));
+        tracker->aimHeight = pos.y;
+        tracker->aimYaw = (f32) (actor->heading + Barrel_GetSignedAngleToPoint(actor, pos));
         return 1;
     }
     return 0;
 }
 
 typedef struct CollisionInfo CollisionInfo;
-extern f32 D_800C2168_de;
-extern CollisionInfo D_80100030;
-extern Instance8020CD74 *D_801041F0;
-extern char D_80145040[];
+extern f32 g_barrelInitialBestTargetDistance;
+extern CollisionInfo g_defaultProbeMotionSettings;
+extern Instance8020CD74 *g_currentActorInstance;
+extern char g_playerViewRenderContext[];
 extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 Cinema_GetSequenceRequest(void);
-extern Actor_func_80214DD4_de *Playerai_FindNearestLivePlayer(void *players, CVector3 point, void *exclude);
-extern Actor_func_80214DD4_de *Playerai_FindNearestPlayer(void *players, CVector3 point);
+extern BarrelAnchorActorView *Playerai_FindNearestLivePlayer(void *players, CVector3 point, void *exclude);
+extern BarrelAnchorActorView *Playerai_FindNearestPlayer(void *players, CVector3 point);
 extern s32 InstHdr_FindActorModelEntry(void *actor);
 extern f32 Barrel_GetEyeDistanceSquared(void *candidate, CVector3 point);
 extern f32 Barrel_GetFlatDistanceSquared(void *candidate, CVector3 point);
@@ -213,16 +213,16 @@ typedef struct CombatPlayerView {
 
 /* Picks the best target for an actor: the tracker's locked target (0x78) if it has one, otherwise
  * gathers up to two candidates (the tracker's own entry at 0x68 and the nearest player found around the
- * actor), keeps the nearest within D_800C2168_de that passes the territory/visibility tests
+ * actor), keeps the nearest within g_barrelInitialBestTargetDistance that passes the territory/visibility tests
  * (func_80214624_de and a line-of-sight probe through CCollision_SweepPoint when requested), and remembers the
  * actor's position as the tracker's home when nothing qualified. */
-Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 lineOfSight,
+BarrelAnchorActorView *Cbarrel_SelectCombatTarget(BarrelAnchorActorView *actor, Tracker *tracker, s32 lineOfSight,
                                                    s32 combat) {
-    Actor_func_80214DD4_de *candidates[128];
+    BarrelAnchorActorView *candidates[128];
     Instance8020CD74 saved;
     CVector3 target;
-    Actor_func_80214DD4_de *best;
-    Actor_func_80214DD4_de *candidate;
+    BarrelAnchorActorView *best;
+    BarrelAnchorActorView *candidate;
     f32 bestDistance;
     f32 distance;
     s32 count;
@@ -232,8 +232,8 @@ Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor
 
     if (tracker->lockedTarget != 0) {
         if (combat != 0) {
-            Cbarrel_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker,
-                             (Actor_func_80214624_de *)tracker->lockedTarget);
+            Cbarrel_UpdateTrackerAim((TrackerAimActorView *)actor, (Plan *)tracker,
+                             (TrackerAimActorView *)tracker->lockedTarget);
         }
         return tracker->lockedTarget;
     }
@@ -255,9 +255,9 @@ Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor
         }
         if ((actor->kind[1] & 0x400) == 0) {
             if ((actor->flags100 & 0x300000) != 0) {
-                candidate = Playerai_FindNearestLivePlayer(D_80145040, actor->pos, actor->controller);
+                candidate = Playerai_FindNearestLivePlayer(g_playerViewRenderContext, actor->pos, actor->controller);
             } else {
-                candidate = Playerai_FindNearestPlayer(D_80145040, actor->pos);
+                candidate = Playerai_FindNearestPlayer(g_playerViewRenderContext, actor->pos);
             }
             if (candidate != 0) {
                 /* i and best are both reset again before the loop */
@@ -274,7 +274,7 @@ Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor
                 }
             }
         }
-        bestDistance = D_800C2168_de;
+        bestDistance = g_barrelInitialBestTargetDistance;
         best = 0;
         for (i = 0; i < count; i++) {
             candidate = candidates[i];
@@ -283,7 +283,7 @@ Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor
                 continue;
             }
             if (combat != 0) {
-                if (actor->kind[0] == 1 && tracker->unk37 == 0) {
+                if (actor->kind[0] == 1 && tracker->targetingDisabled == 0) {
                     continue;
                 }
                 if (Insthdr_HasActorTerritory(actor) != 0) {
@@ -293,8 +293,8 @@ Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor
                         continue;
                     }
                 }
-                if (Cbarrel_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker,
-                                     (Actor_func_80214624_de *)candidate) == 0) {
+                if (Cbarrel_UpdateTrackerAim((TrackerAimActorView *)actor, (Plan *)tracker,
+                                     (TrackerAimActorView *)candidate) == 0) {
                     continue;
                 }
             }
@@ -305,8 +305,8 @@ Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor
                 target = candidate->pos;
                 target.y += Gobjinst_GetActorHeight((ActorBarrelIsTargetInViewCone *)candidate);
                 target.y += candidate->height;
-                blocked = CCollision_SweepPoint(actor, actor->pos, target, &D_80100030);
-                if (D_801041F0 == (Instance8020CD74 *)candidate) {
+                blocked = CCollision_SweepPoint(actor, actor->pos, target, &g_defaultProbeMotionSettings);
+                if (g_currentActorInstance == (Instance8020CD74 *)candidate) {
                     blocked = 0;
                 }
                 *(Instance8020CD74 *)actor = saved;
@@ -319,7 +319,7 @@ Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor
         }
     }
     if (combat != 0 && best == 0 &&
-        Cbarrel_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker, 0) == 0) {
+        Cbarrel_UpdateTrackerAim((TrackerAimActorView *)actor, (Plan *)tracker, 0) == 0) {
         tracker->homePos = actor->pos;
         tracker->homeRoom = actor->room;
     }

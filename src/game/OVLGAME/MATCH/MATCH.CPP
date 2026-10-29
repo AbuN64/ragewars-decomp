@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "OVLGAME/MATCH_INITPARTICLEQUAD.H"
 #include "COMMON/LEVEL_TRACK.H"
 #include "include_asm.h"
@@ -46,13 +46,13 @@ s32 Match_InitParticleQuad(void) {
     return more;
 }
 
-/* Resets a match: calls func_80264854_de with zero, func_80285D30_de on D_8010EC90 and func_8022A880_de on
-   D_80145040, clears five state words of D_801468A0, and sets the byte at offset 0x26DC1 of the
+/* Resets a match: calls func_80264854_de with zero, func_80285D30_de on g_controllerRumblePool and func_8022A880_de on
+   g_playerViewRenderContext, clears five state words of g_matchRoundCounters, and sets the byte at offset 0x26DC1 of the
    match block to 2 and its word at 0x26DBC to one. */
 
 
-extern char D_8010EC90[];
-extern char D_80145040[];
+extern char g_controllerRumblePool[];
+extern char g_playerViewRenderContext[];
 
 extern void Rumble_FreeAllPoolNodes(void *);
 struct Context;
@@ -65,9 +65,9 @@ void Match_ResetMatchControllerState(char *match) {
     CGameStatus *state;
 
     Control_SetControllerMode(0);
-    Rumble_FreeAllPoolNodes(D_8010EC90);
-    Playerai_ResetPlayerControllers(D_80145040);
-    state = &D_801462C8.counters;
+    Rumble_FreeAllPoolNodes(g_controllerRumblePool);
+    Playerai_ResetPlayerControllers(g_playerViewRenderContext);
+    state = &g_gameSettings.counters;
     state->teams = 0;
     state->m_bFragTagOn = 0;
     state->m_bCTFOn = 0;
@@ -77,7 +77,7 @@ void Match_ResetMatchControllerState(char *match) {
     ((GameSession *)match)->target = 1;
 }
 
-/* Asks func_8044D220_de about D_8011FE88 with a minus-one selector, clears the words of D_801468A0 and puts the object at arg0 into state 0xC with byte 0x26DC1 set to two and the selector, or zero when the lookup failed, stored at 0x26DD8. Adapted from SetN64_SelectSpawnAndStartSession with the selector fixed at minus one, the word at 0x26DDC cleared before the last word of D_801468A0 instead of set after the selector, and the state 0xC instead of 0xD changed. */
+/* Asks func_8044D220_de about D_8011FE88 with a minus-one selector, clears the words of g_matchRoundCounters and puts the object at arg0 into state 0xC with byte 0x26DC1 set to two and the selector, or zero when the lookup failed, stored at 0x26DD8. Adapted from SetN64_SelectSpawnAndStartSession with the selector fixed at minus one, the word at 0x26DDC cleared before the last word of g_matchRoundCounters instead of set after the selector, and the state 0xC instead of 0xD changed. */
 
 
 
@@ -87,20 +87,20 @@ void Match_ResetMatchControllerState(char *match) {
 
 void Match_ResetGameClockAndSelectSpawn(GameSession *gameSession) {
     Shared_Placed spawn;
-    s32 var_s0;
+    s32 spawnSelector;
 
-    var_s0 = -1;
-    if (Scene_FindPlacedObjectsByKey(&g_world, var_s0, var_s0, &spawn, 1) == 0) {
-        var_s0 = 0;
+    spawnSelector = -1;
+    if (Scene_FindPlacedObjectsByKey(&g_world, spawnSelector, spawnSelector, &spawn, 1) == 0) {
+        spawnSelector = 0;
     }
-    D_801462C8.counters.m_GameTimeFifteenth = 0;
-    D_801462C8.counters.m_GameTimeSeconds = 0;
-    D_801462C8.counters.m_GameTimeMinutes = 0;
-    D_801462C8.counters.m_GameTimeHours = 0;
+    g_gameSettings.counters.m_GameTimeFifteenth = 0;
+    g_gameSettings.counters.m_GameTimeSeconds = 0;
+    g_gameSettings.counters.m_GameTimeMinutes = 0;
+    g_gameSettings.counters.m_GameTimeHours = 0;
     gameSession->selectionActive = 0;
-    D_801462C8.counters.first = 0;
+    g_gameSettings.counters.first = 0;
     gameSession->phase = 2;
-    gameSession->selector = var_s0;
+    gameSession->selector = spawnSelector;
     gameSession->target = 0xC;
 }
 
@@ -112,15 +112,15 @@ void Match_StartMatchTransition(GameSession *session, s32 key) {
     if (Scene_FindPlacedObjectsByKey(&g_world, -1, key, &spawn, 1) == 0) {
         key = 0;
     }
-    D_801462C8.counters.m_GameTimeFifteenth = 0;
-    D_801462C8.counters.m_GameTimeSeconds = 0;
-    D_801462C8.counters.m_GameTimeMinutes = 0;
-    D_801462C8.counters.m_GameTimeHours = 0;
-    D_801462C8.counters.first = 0;
+    g_gameSettings.counters.m_GameTimeFifteenth = 0;
+    g_gameSettings.counters.m_GameTimeSeconds = 0;
+    g_gameSettings.counters.m_GameTimeMinutes = 0;
+    g_gameSettings.counters.m_GameTimeHours = 0;
+    g_gameSettings.counters.first = 0;
     session->selectionActive = 0;
     session->selector = key;
     if (session->local != 0) {
-        if (D_801462C8.counters.transitionActive != 0) {
+        if (g_gameSettings.counters.transitionActive != 0) {
             session->phase = 2;
             session->target = 13;
         } else {
@@ -134,9 +134,9 @@ void Match_StartMatchTransition(GameSession *session, s32 key) {
 }
 
 #if defined(VERSION_EU)
-unsigned char D_auto_func_8044F224_eu_padding_1C5224[12] = { 0xA2, 0x23, 0x06, 0x0B, 0xA2, 0x23, 0x06, 0x08, 0xA2, 0x23, 0x06, 0x16 };
+unsigned char g_MatchTrailingBytesBlock2[12] = { 0xA2, 0x23, 0x06, 0x0B, 0xA2, 0x23, 0x06, 0x08, 0xA2, 0x23, 0x06, 0x16 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned char D_auto_func_8044DF54_de_padding_1B3F54[12] = { 0x26, 0x45, 0x75, 0x34, 0x24, 0x06, 0x00, 0x1C, 0x0C, 0x09, 0xE5, 0x6C };
+unsigned char g_MatchTrailingBytesBlock1[12] = { 0x26, 0x45, 0x75, 0x34, 0x24, 0x06, 0x00, 0x1C, 0x0C, 0x09, 0xE5, 0x6C };
 #endif

@@ -2,7 +2,7 @@
 #include "TYPES.H"
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C421C[1] = {
+unsigned int k_ContpadEncodedWordsBlock3[1] = {
     0x0000000B,
 };
 #endif

@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "CAMERA/GSKY_RESETHEADBOB.H"
 
-extern f32 D_800C8628;
+extern f32 k_cameraInitialBobRateY;
 
 
 
@@ -14,10 +14,10 @@ extern f32 D_800C8628;
 
 void Gsky_ResetHeadBob(GameplayCamera *camera) {
     if (camera != 0) {
-        f32 f0 = D_800C352C_de;
-        f32 f1 = D_800C3530_de;
-        f32 f2 = D_800C3534_de;
-        f32 f3 = D_800C8628;
+        f32 f0 = k_cameraInitialBobAmplitudeX;
+        f32 f1 = k_cameraInitialBobAmplitudeY;
+        f32 f2 = k_cameraInitialBobRateX;
+        f32 f3 = k_cameraInitialBobRateY;
 
         camera->bobPhaseX = 0;
         camera->bobPhaseY = 0;
@@ -28,8 +28,8 @@ void Gsky_ResetHeadBob(GameplayCamera *camera) {
     }
 }
 
-void func_80239184_de(void) {
+void Gsky_HeadBobInitializeNoOp(void) {
 }
 
-void func_8023918C_de(void) {
+void Gsky_HeadBobUpdateNoOp(void) {
 }

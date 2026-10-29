@@ -2,22 +2,22 @@
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #ifdef VERSION_DE
-extern char D_0041F230[];
-extern char D_0041F6C8[];
-extern char D_0041FC50[];
-extern char D_00420B10[];
-extern char D_00420B50[];
-extern char D_00420B78[];
-extern char D_00420BF0[];
-extern char D_00420BF8[];
-extern char D_00420C00[];
-extern char D_00420C08[];
-extern char D_00420C10[];
-extern char D_00420CDC[];
-extern char D_00420E20[];
-extern char D_00421854[];
-extern char D_00421884[];
-unsigned int D_auto_rodata_unresolved_800F1C84[1055] = {
+extern char addrLow_Character_CreateSelectionMenuGerman[];
+extern char g_character_UpdateCharacterPreviewEntry[];
+extern char g_menu_RenderPlayerCharacterPreviewsEntry[];
+extern char g_selection_DestroyCharacterSelectionMenuEntry[];
+extern char g_selection_ActivateCharacterSelectionModeEntry[];
+extern char g_selection_HandleCharacterVariantCycleEntry[];
+extern char g_selection_ReturnCharacterEventZeroAEntry[];
+extern char g_selection_ReturnCharacterEventZeroBEntry[];
+extern char g_selection_ReturnCharacterEventZeroCEntry[];
+extern char g_selection_ReturnCharacterEventZeroDEntry[];
+extern char g_selection_CancelCharacterConfirmationEntry[];
+extern char g_selection_ReadSelectionSlotEntry[];
+extern char Menu_OpenRuleToggleScreen_Address[];
+extern char Menu_DestroyExtraOptionsMenu_Address[];
+extern char Menu_UpdateExtraOptionsMenu_Address[];
+unsigned int k_LibsnEnumeratememoryrangesEncodedWords[1055] = {
     0xFFFFFFEC, 0xFFFFFFEC, 0x800D3310, 0x0000008C, 0x00000006, 0x00000017, 0x3DA3D70A, 0x3DA3D70A,
     0x3DA3D70A, 0x3DA3D70A, 0x43200000, 0x43480000, 0x43200000, 0x43480000, 0x42280000, 0xC2340000,
     0xC2C80000, 0xC2180000, 0xC2340000, 0xC2C80000, 0x42180000, 0xC2A20000, 0xC2B00000, 0xC2040000,
@@ -70,13 +70,13 @@ unsigned int D_auto_rodata_unresolved_800F1C84[1055] = {
     0x00000092, 0x00000094, 0x00000096, 0x000000A6, 0x000000A5, 0x000000A4, 0x0000008B, 0x0000007A,
     0x000000C5, 0x000000B1, 0x000000B3, 0x000000B5, 0x000000B7, 0x000000B8, 0x000000B9, 0x0000008A,
     0x0000007B, 0x000000A8, 0x0000009A, 0x00000099, 0x00000098, 0x0000009C, 0x0000009D, 0x0000009B,
-    0x00000E07, 0x00000007, (unsigned int)D_00420B50, 0x00000E08, 0x00000007, (unsigned int)D_0041F6C8, 0x0000000A, 0x00000007,
-    (unsigned int)D_00420B78, 0x00000E0A, 0x00000007, (unsigned int)D_0041FC50, 0x00000E06, 0x00000007, (unsigned int)D_0041F230, 0x00000E03,
-    0x00000007, (unsigned int)D_00420B10, 0x00000002, 0x00000007, (unsigned int)D_00420C10, 0x00000001, 0x00000007, (unsigned int)D_00420CDC,
-    0x00000008, 0x00000007, (unsigned int)D_00420BF0, 0x00000007, 0x00000007, (unsigned int)D_00420BF8, 0x00000005, 0x00000007,
-    (unsigned int)D_00420C00, 0x00000006, 0x00000007, (unsigned int)D_00420C08, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000E08, 0x0000001C, (unsigned int)D_00421884, 0x00000E06, 0x0000001C, (unsigned int)D_00420E20, 0x00000E03, 0x0000001C,
-    (unsigned int)D_00421854, 0x00000002, 0x0000001C, 0x004219C0, 0x00000001, 0x0000001C, 0x00421928, 0x00000000,
+    0x00000E07, 0x00000007, (unsigned int)g_selection_ActivateCharacterSelectionModeEntry, 0x00000E08, 0x00000007, (unsigned int)g_character_UpdateCharacterPreviewEntry, 0x0000000A, 0x00000007,
+    (unsigned int)g_selection_HandleCharacterVariantCycleEntry, 0x00000E0A, 0x00000007, (unsigned int)g_menu_RenderPlayerCharacterPreviewsEntry, 0x00000E06, 0x00000007, (unsigned int)addrLow_Character_CreateSelectionMenuGerman, 0x00000E03,
+    0x00000007, (unsigned int)g_selection_DestroyCharacterSelectionMenuEntry, 0x00000002, 0x00000007, (unsigned int)g_selection_CancelCharacterConfirmationEntry, 0x00000001, 0x00000007, (unsigned int)g_selection_ReadSelectionSlotEntry,
+    0x00000008, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroAEntry, 0x00000007, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroBEntry, 0x00000005, 0x00000007,
+    (unsigned int)g_selection_ReturnCharacterEventZeroCEntry, 0x00000006, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroDEntry, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000E08, 0x0000001C, (unsigned int)Menu_UpdateExtraOptionsMenu_Address, 0x00000E06, 0x0000001C, (unsigned int)Menu_OpenRuleToggleScreen_Address, 0x00000E03, 0x0000001C,
+    (unsigned int)Menu_DestroyExtraOptionsMenu_Address, 0x00000002, 0x0000001C, 0x004219C0, 0x00000001, 0x0000001C, 0x00421928, 0x00000000,
     0x00000000, 0x00000000, 0xEEC3441C, 0x00000000, 0x00000E08, 0x0000001B, 0x00421BAC, 0x00000E06,
     0x0000001B, 0x00421AB0, 0x00000E03, 0x0000001B, 0x00421B7C, 0x00000002, 0x0000001B, 0x00421D54,
     0x00000001, 0x0000001B, 0x00421CA8, 0x00000000, 0x00000000, 0x00000000, 0xDF2452DA, 0x00000000,
@@ -153,7 +153,7 @@ unsigned int D_auto_rodata_unresolved_800F1C84[1055] = {
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_auto_rodata_unresolved_800F1C84[1055] = {
+unsigned int k_LibsnEnumeratememoryrangesEncodedWords[1055] = {
     0x002C0402, 0x00004470, 0x00000A08, 0x10002C04, 0x02000094, 0x7000000A, 0x0814002C, 0x04020000,
     0x54700000, 0x0A081800, 0x2C040200, 0x00947000, 0x000A081C, 0x002C0402, 0x00006470, 0x00000602,
     0x00027408, 0xAFC00010, 0x08000000, 0x00000000, 0x24020001, 0xAFC20010, 0x08000000, 0x00000000,

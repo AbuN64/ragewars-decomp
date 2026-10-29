@@ -5,7 +5,7 @@
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "AUDIO/ACMD.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ALDELAY28.H"
 #include "sdk/libultra/audio/reverb.H"
 #include "TYPES.H"
@@ -20,7 +20,7 @@
 /* alResamplePull, drafted from ultralib src/audio/resample.c: at unity pitch pull the source and
    move its output; otherwise clip and quantise the pitch ratio, pull the input sample count it
    needs and append a resample command. The ratio limit, unity pitch and its reciprocal are the
-   cartridge floats D_800C7740_de, the one after it, and D_800C7748_de. */
+   cartridge floats g_audioResamplerMaximumRatio, the one after it, and g_audioResamplerInverseFixedPointUnit. */
 
 /* alFxPull, drafted from ultralib src/audio/reverb.c: pull the effect's source, mix the aux left
    and right outputs into the delay line input, run each delay section (load, feed-forward and
@@ -28,15 +28,15 @@
    length and move the result into the aux left output. */
 
 #if defined(VERSION_DE)
-extern const float D_800C7780;
+extern const float g_audioResamplerAssertText;
 #elif defined(VERSION_EU)
-extern const float D_800C8370;
+extern const float g_audioResamplerAssertTextUsRev1;
 #elif defined(VERSION_EU_X)
-extern char D_800C8D40[];
+extern char g_audioResamplerAssertTextEuX[];
 #elif defined(VERSION_US)
-extern const float D_800C76A0;
+extern const float g_playerSecondLightRadius;
 #else
-extern char D_800CC9D0[];
+extern char g_audioResamplerAssertTextEu[];
 #endif
 
  /* "audio/reverb.c" */
@@ -47,7 +47,7 @@ extern Acmd *Audio_LoadEffectOutput(struct ALFx *, ALDelay28 *, s32, s32, Acmd *
  /* _loadOutputBuffer */
 
  /* _loadBuffer */
-extern Acmd *func_802B5F68_de(struct ALFx *, s16 *, s32, s32, Acmd *);
+extern Acmd *_saveBuffer(struct ALFx *, s16 *, s32, s32, Acmd *);
 
 s32 alMainBusParam(ALAuxBus_s *bus, s32 param, ALFilter_s14 *source) {
     ALFilter_s14 **sources = bus->sources;
@@ -86,11 +86,11 @@ Acmd *alResamplePull(ALResampler_s *filter, s16 *outp, s32 outCnt, s32 sampleOff
 
     } else {
 
-        if (f->ratio > D_800C7740_de) f->ratio = D_800C7740_de;
+        if (f->ratio > g_audioResamplerMaximumRatio) f->ratio = g_audioResamplerMaximumRatio;
 
         ratio = f->ratio;
-        unity = D_800C7744_de;
-        f->ratio = (f32)(s32)(ratio * unity) * D_800C7748_de;
+        unity = g_audioResamplerFixedPointUnit;
+        f->ratio = (f32)(s32)(ratio * unity) * g_audioResamplerInverseFixedPointUnit;
 
         finCount = f->delta + (f->ratio * (f32)outCnt);
         inCount = (s32)finCount;
@@ -136,10 +136,10 @@ s32 alResampleParam(void *resampler, s32 parameterId, s32 parameterValue) {
         *(s32 *)resampler = parameterValue;
         break;
     sw_message_4:
-        ((IntegerState34 *)(node))->unk_20 = 0;
-        ((IntegerState34 *)(node))->unk_24 = 1;
-        ((IntegerState34 *)(node))->unk_30 = 0;
-        ((IntegerState34 *)(node))->unk_1C = 0;
+        ((AudioReverbParameterStateView *)(node))->unk_20 = 0;
+        ((AudioReverbParameterStateView *)(node))->unk_24 = 1;
+        ((AudioReverbParameterStateView *)(node))->unk_30 = 0;
+        ((AudioReverbParameterStateView *)(node))->unk_1C = 0;
         target = *(void **)resampler;
         if (target != 0) {
             callback = ((struct CallbackStateC *) ((char *) target))->callback;
@@ -147,7 +147,7 @@ s32 alResampleParam(void *resampler, s32 parameterId, s32 parameterValue) {
         }
         break;
     sw_message_9:
-        ((IntegerState34 *)(node))->unk_30 = 1;
+        ((AudioReverbParameterStateView *)(node))->unk_30 = 1;
         target = *(void **)resampler;
         if (target != 0) {
             callback = ((struct CallbackStateC *) ((char *) target))->callback;
@@ -155,10 +155,10 @@ s32 alResampleParam(void *resampler, s32 parameterId, s32 parameterValue) {
         }
         break;
     sw_message_7:
-        ((IntegerState34 *)(node))->unk_18 = parameterValue;
+        ((AudioReverbParameterStateView *)(node))->unk_18 = parameterValue;
         break;
     sw_message_8:
-        ((IntegerState34 *)(node))->unk_1C = 1;
+        ((AudioReverbParameterStateView *)(node))->unk_1C = 1;
         break;
     sw_message_default:
         target = *(void **)resampler;
@@ -185,15 +185,15 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
 
     if (!source)
 #if defined(VERSION_DE)
-        Audio_Assert(&D_800C7780, D_800C7784_de, 75);
+        Audio_Assert(&g_audioResamplerAssertText, g_audioResamplerSourceText, 75);
 #elif defined(VERSION_EU)
-        Audio_Assert(&D_800C8370, D_800C7784_de, 75);
+        Audio_Assert(&g_audioResamplerAssertTextUsRev1, g_audioResamplerSourceText, 75);
 #elif defined(VERSION_EU_X)
-        Audio_Assert(D_800C8D40, D_800C7784_de, 75);
+        Audio_Assert(g_audioResamplerAssertTextEuX, g_audioResamplerSourceText, 75);
 #elif defined(VERSION_US)
-        Audio_Assert(&D_800C76A0, D_800C7784_de, 75);
+        Audio_Assert(&g_playerSecondLightRadius, g_audioResamplerSourceText, 75);
 #else
-        Audio_Assert(D_800CC9D0, D_800C7784_de, 75);
+        Audio_Assert(g_audioResamplerAssertTextEu, g_audioResamplerSourceText, 75);
 #endif
 
     ptr = (*source->handler)(source, outp, outCount, sampleOffset, p);
@@ -206,7 +206,7 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
     aSetBuffer(ptr++, 0, 0, 0, outCount << 1);
     aMix(ptr++, 0, 0xda83, 1728, input);
     aMix(ptr++, 0, 0x5a82, 2048, input);
-    ptr = func_802B5F68_de(r, r->input, input, outCount, ptr);
+    ptr = _saveBuffer(r, r->input, input, outCount, ptr);
 
     aClearBuffer(ptr++, output, outCount << 1);
 
@@ -218,27 +218,27 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
         if (in_ptr == prev_out_ptr) {
             { s16 t = buff2; buff2 = buff1; buff1 = t; };
         } else {
-            ptr = func_802B60EC_de(r, in_ptr, buff1, outCount, ptr);
+            ptr = _loadBuffer(r, in_ptr, buff1, outCount, ptr);
         }
         ptr = Audio_LoadEffectOutput(r, d, buff2, outCount, ptr);
 
         if (d->ffcoef) {
             aMix(ptr++, 0, (u16)d->ffcoef, buff1, buff2);
             if (!d->rs && !d->lp) {
-                ptr = func_802B5F68_de(r, out_ptr, buff2, outCount, ptr);
+                ptr = _saveBuffer(r, out_ptr, buff2, outCount, ptr);
             }
         }
 
         if (d->fbcoef) {
             aMix(ptr++, 0, (u16)d->fbcoef, buff2, buff1);
-            ptr = func_802B5F68_de(r, in_ptr, buff1, outCount, ptr);
+            ptr = _saveBuffer(r, in_ptr, buff1, outCount, ptr);
         }
 
         if (d->lp)
-            ptr = func_802B625C_de(d->lp, buff2, outCount, ptr);
+            ptr = _filterBuffer(d->lp, buff2, outCount, ptr);
 
         if (!d->rs)
-            ptr = func_802B5F68_de(r, out_ptr, buff2, outCount, ptr);
+            ptr = _saveBuffer(r, out_ptr, buff2, outCount, ptr);
 
         if (d->gain)
             aMix(ptr++, 0, (u16)d->gain, buff2, output);
@@ -256,13 +256,13 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C7694[3] = {
+unsigned int k_ReverbEncodedWords[3] = {
     0x540000A0, 0x6E020066, 0x000000A0,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C8364[3] = {
+unsigned int k_ReverbEncodedWordsBlock1[3] = {
     0x00000000, 0x41F00000, 0x00000000,
 };
 #endif

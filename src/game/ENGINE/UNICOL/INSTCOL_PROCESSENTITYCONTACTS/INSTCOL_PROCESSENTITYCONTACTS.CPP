@@ -2,7 +2,7 @@
 
 /* 800C8814.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_d1_7d2feb9a11d5ac5e[3] = {
+unsigned int g_InstcolProcessentitycontactsEncodedWords[3] = {
     0x4F000000, 0x47800000, 0x4F000000,
 };
 #endif
@@ -11,7 +11,7 @@ unsigned int D_d1_7d2feb9a11d5ac5e[3] = {
 
 /* 800C8F98_2.CPP */
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C41AC[1] = {
+unsigned int k_InstcolProcessentitycontactsEncodedWordsBlock3[1] = {
     0x000213C3,
 };
 #endif

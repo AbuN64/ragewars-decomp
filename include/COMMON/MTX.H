@@ -17,26 +17,26 @@ struct Mtx {
     f32 m33;
 };
 
-extern float D_800C48E0_de;
+extern float g_planeProjectionAndDirectionConstants;
 
-extern float D_800C4920_de;
+extern float g_boundedApproachStepConstants;
 
-extern float D_800C4930_de;
-
-
-
-
-extern float D_800C48EC_de;
-
-
-
-extern float D_800C4910_de;
+extern float g_axisAngleMatrixHomogeneousScale;
 
 
 
 
+extern float g_directionFallbackAxisScale;
 
-extern float D_800C48F0_de;
+
+
+extern float g_wrappedInterpolationPeriod;
+
+
+
+
+
+extern float g_directionMatrixHomogeneousScale;
 
 
 
@@ -44,5 +44,5 @@ extern float D_800C48F0_de;
 struct Mtx;
 typedef struct Mtx Mtx;
 
-extern float D_800C4914_de;
+extern float g_wrappedDifferenceUpperPeriod;
 #endif

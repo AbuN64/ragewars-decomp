@@ -6,7 +6,7 @@
 #include "COMMON/VECTOR4F.H"
 
 /** Initialize a five-word record. */
-void func_80255CA0_de(IntrusiveList *list, s32 prevOffset, s32 nextOffset) {
+void List_InitializeIntrusive(IntrusiveList *list, s32 prevOffset, s32 nextOffset) {
     list->prevOffset = prevOffset;
     list->nextOffset = nextOffset;
     list->tail = 0;
@@ -14,7 +14,7 @@ void func_80255CA0_de(IntrusiveList *list, s32 prevOffset, s32 nextOffset) {
     list->count = 0;
 }
 
-void func_80255CB8_de(void *list, void *node) {
+void List_PrependIntrusive(void *list, void *node) {
     IntrusiveList *owner = list;
     char *head;
     head = owner->head;
@@ -30,7 +30,7 @@ void func_80255CB8_de(void *list, void *node) {
     owner->count = owner->count + 1;
 }
 
-s32 func_80255D14_de(IntrusiveList *list, void *node) {
+s32 List_AppendIntrusive(IntrusiveList *list, void *node) {
     void **prevLink;
     void **tailLink;
     void **nextLink;
@@ -56,7 +56,7 @@ s32 func_80255D14_de(IntrusiveList *list, void *node) {
     return count;
 }
 
-void func_80255D70_de(void *list, s32 anchorNode, s32 insertedNode) {
+void List_InsertBeforeIntrusive(void *list, s32 anchorNode, s32 insertedNode) {
     char *o = (char *) list;
     s32 next = *(s32 *) (anchorNode + ((IntrusiveList *)o)->prevOffset);
     s32 v0;
@@ -85,7 +85,7 @@ void func_80255D70_de(void *list, s32 anchorNode, s32 insertedNode) {
     ((IntrusiveList *)o)->count = v0;
 }
 
-void func_80255E24_de(void *list, s32 anchorNode, s32 insertedNode) {
+void List_InsertAfterIntrusive(void *list, s32 anchorNode, s32 insertedNode) {
     char *o = (char *) list;
     s32 next = *(s32 *) (anchorNode + ((IntrusiveList *)o)->nextOffset);
     s32 v0;
@@ -114,7 +114,7 @@ void func_80255E24_de(void *list, s32 anchorNode, s32 insertedNode) {
     ((IntrusiveList *)o)->count = v0;
 }
 
-void func_80255ED8_de(void *list, void *node) {
+void List_RemoveIntrusive(void *list, void *node) {
     IntrusiveList *owner = list;
     char *next;
     char *prev;
@@ -138,7 +138,7 @@ void func_80255ED8_de(void *list, void *node) {
 }
 
 /** Advance the cursor by its stride and decrement its remaining count. */
-void func_80255F70_de(IntrusiveList *list) {
+void List_DropIntrusiveHead(IntrusiveList *list) {
     char *cursor = list->head;
     int stride = list->nextOffset;
     int value = *(int *)(cursor + stride);
@@ -148,7 +148,7 @@ void func_80255F70_de(IntrusiveList *list) {
 }
 
 /** Advance the cursor by its stride and decrement its remaining count. */
-void func_80255F94_de(IntrusiveList *list) {
+void List_DropIntrusiveTail(IntrusiveList *list) {
     char *cursor = list->tail;
     int stride = list->prevOffset;
     int value = *(int *)(cursor + stride);
@@ -157,7 +157,7 @@ void func_80255F94_de(IntrusiveList *list) {
     list->tail = value;
 }
 
-void func_80255FB8_de(void *list, s32 nodeToMove) {
+void List_MoveIntrusiveToHead(void *list, s32 nodeToMove) {
     char *o = (char *)list;
     s32 next;
     s32 prev;
@@ -194,7 +194,7 @@ void func_80255FB8_de(void *list, s32 nodeToMove) {
     ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count + 1;
 }
 
-void func_802560A4_de(void *list, s32 nodeToMove) {
+void List_MoveIntrusiveToTail(void *list, s32 nodeToMove) {
     char *o = (char *)list;
     s32 next;
     s32 prev;
@@ -235,7 +235,7 @@ void func_802560A4_de(void *list, s32 nodeToMove) {
 
 
 
-void *func_80256190_de(void *intrusiveList) {
+void *List_CountIntrusiveNodes(void *intrusiveList) {
     s32 index;
     s32 offset;
     void *node;
@@ -256,7 +256,7 @@ void *func_80256190_de(void *intrusiveList) {
     return node;
 }
 
-void func_80256214_de(IntrusiveList *list) {
+void List_TraverseIntrusiveNodes(IntrusiveList *list) {
     s32 node = list->head;
     if (node != 0) {
         s32 offset = list->nextOffset;
@@ -267,7 +267,7 @@ void func_80256214_de(IntrusiveList *list) {
     }
 }
 
-int func_8025623C_de(IntrusiveList *list, int wantedNode) {
+int List_ContainsIntrusiveNode(IntrusiveList *list, int wantedNode) {
     int node = list->head;
     if (node != 0) {
         do {

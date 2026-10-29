@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/SCREEN.H"
 #include "FRONTEND/MENUTRANSITIONSIGNAL.H"
@@ -66,154 +66,154 @@ static inline s32 setupRes(s32 id) {
 #endif
 }
 
-s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 arg1, s32 arg2) {
+s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 unusedEventId, s32 phaseStep) {
     ListScreenScreen *countdown;
-    f32 var_f0;
-    s32 temp_a2;
-    s32 temp_s0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-    s32 temp_v1;
+    f32 pulseAlpha;
+    s32 updatedPulsePhase;
+    s32 catalogueAlpha;
+    s32 transitionStateOrAlpha;
+    s32 exitCountdown;
+    s32 entryCountdown;
+    s32 decrementedCountdown;
+    s32 previousCountdown;
     s32 enabled;
-    s32 var_v0;
+    s32 clampedCountdown;
     ListScreenItem *closeLeft;
     ListScreenItem *closeRight;
     ListScreenItem *openLeft;
     ListScreenItem *openRight;
-    void *var_a0;
-    ListScreenItem *var_a0_2;
-    void *var_a0_3;
+    void *flagWidget;
+    ListScreenItem *pulseWidget;
+    void *visibilityWidget;
 
-    if (D_80154020.ready == 1) {
-        D_80154020.ready = 0;
-        if (D_80154020.value != -1) {
-            D_800E4F60->unk44C->alpha = 0x5A;
+    if (g_selectionMessageReply.ready == 1) {
+        g_selectionMessageReply.ready = 0;
+        if (g_selectionMessageReply.value != -1) {
+            g_setupScreen->widget30C->alpha = 0x5A;
             MarkMenuEventHandled();
-            SmXlate_SwitchScreen(D_80154020.value);
+            SmXlate_SwitchScreen(g_selectionMessageReply.value);
             return 0;
         }
-        D_800E4F60->unk44C->alpha = 0xFF;
-        D_800E4F60->unk3DC = 9;
-        if (D_800E4F60->selection == 0) {
-            Widget_SetWidgetFlag08(D_800E4F60->unk440, 1);
-            var_a0 = D_800E4F60->unk448;
+        g_setupScreen->widget30C->alpha = 0xFF;
+        g_setupScreen->unk3DC = 9;
+        if (g_setupScreen->selection == 0) {
+            Widget_SetWidgetFlag08(g_setupScreen->widget30B, 1);
+            flagWidget = g_setupScreen->widget35D;
         } else {
-            var_a0 = D_800E4F60->unk444;
+            flagWidget = g_setupScreen->widget30D;
         }
-        Widget_SetWidgetFlag08(var_a0, 1);
-        Widget_SetWidgetFlag08(D_800E4F60->label, 1);
-        Widget_SetWidgetFlag08(D_800E4F60->unk3F0, 1);
+        Widget_SetWidgetFlag08(flagWidget, 1);
+        Widget_SetWidgetFlag08(g_setupScreen->label, 1);
+        Widget_SetWidgetFlag08(g_setupScreen->widget310, 1);
         goto block_7;
     }
 block_7:
-    temp_v0 = D_800E4F60->unk3DC;
-    switch (temp_v0) {
+    transitionStateOrAlpha = g_setupScreen->unk3DC;
+    switch (transitionStateOrAlpha) {
     case 1:
-        openLeft = D_800E4F60->left;
-        openLeft->x = (u16) (openLeft->x + (u16)D_800E4F60->leftCount);
-        openRight = D_800E4F60->right;
-        openRight->x = (u16) (openRight->x - (u16)D_800E4F60->rightCount);
-        temp_v0_2 = D_800E4F60->unk3E0 - 1;
-        D_800E4F60->unk3E0 = temp_v0_2;
-        if (temp_v0_2 <= 0) {
+        openLeft = g_setupScreen->left;
+        openLeft->x = (u16) (openLeft->x + (u16)g_setupScreen->leftCount);
+        openRight = g_setupScreen->right;
+        openRight->x = (u16) (openRight->x - (u16)g_setupScreen->rightCount);
+        exitCountdown = g_setupScreen->unk3E0 - 1;
+        g_setupScreen->unk3E0 = exitCountdown;
+        if (exitCountdown <= 0) {
             SoundElement_PlayFlatSound(0xE79);
-            Widget_SetWidgetFlag08(D_800E4F60->unk3E8, 1);
-            SmpFlicker_StartFlicker(D_800E4F60->text3E4, 4);
-            D_800E4F60->unk3DC = 4;
-            D_800E4F60->unk3E0 = 4;
+            Widget_SetWidgetFlag08(g_setupScreen->widget301, 1);
+            SmpFlicker_StartFlicker(g_setupScreen->text3E4, 4);
+            g_setupScreen->unk3DC = 4;
+            g_setupScreen->unk3E0 = 4;
         }
         break;
     case 2:
-        closeLeft = D_800E4F60->left;
-        closeLeft->x = (u16) (closeLeft->x - (u16)D_800E4F60->leftCount);
-        closeRight = D_800E4F60->right;
-        closeRight->x = (u16) (closeRight->x + (u16)D_800E4F60->rightCount);
-        temp_v0_3 = D_800E4F60->unk3E0 - 1;
-        D_800E4F60->unk3E0 = temp_v0_3;
-        if (temp_v0_3 <= 0) {
-            D_800E4F60->unk3DC = 3;
+        closeLeft = g_setupScreen->left;
+        closeLeft->x = (u16) (closeLeft->x - (u16)g_setupScreen->leftCount);
+        closeRight = g_setupScreen->right;
+        closeRight->x = (u16) (closeRight->x + (u16)g_setupScreen->rightCount);
+        entryCountdown = g_setupScreen->unk3E0 - 1;
+        g_setupScreen->unk3E0 = entryCountdown;
+        if (entryCountdown <= 0) {
+            g_setupScreen->unk3DC = 3;
             MarkMenuEventHandled();
             SmXlate_SwitchScreen(8);
             return 0;
         }
         break;
     case 3:
-        if (D_800E4F60->unk460 == 0) {
+        if (g_setupScreen->unk460 == 0) {
             Tsmos_ActivateControllerState();
             enabled = 0;
-            var_a0_3 = D_800E4F60->unk458;
-            D_800E4F60->unk460 = 1;
-            Widget_SetWidgetFlag08(var_a0_3, enabled);
+            visibilityWidget = g_setupScreen->widget300;
+            g_setupScreen->unk460 = 1;
+            Widget_SetWidgetFlag08(visibilityWidget, enabled);
         }
         break;
     case 4:
-        countdown = D_800E4F60;
-        temp_v1 = countdown->unk_3E0;
-        temp_v0_4 = temp_v1 - 1;
-        if (temp_v0_4 >= 0) {
-            var_v0 = temp_v1 - (temp_v1 >= temp_v0_4);
+        countdown = g_setupScreen;
+        previousCountdown = countdown->unk_3E0;
+        decrementedCountdown = previousCountdown - 1;
+        if (decrementedCountdown >= 0) {
+            clampedCountdown = previousCountdown - (previousCountdown >= decrementedCountdown);
         } else {
-            var_v0 = 0;
+            clampedCountdown = 0;
         }
-        countdown->unk_3E0 = var_v0;
+        countdown->unk_3E0 = clampedCountdown;
 
-        if ((((ListScreenScreen *) D_800E4F60)->unk_3E0 <= 0) && (SmpFlicker_IsFlickerIdle(D_800E4F60->text3E4) != 0)) {
-            SmpFlicker_RestoreFlickerValue(D_800E4F60->text3E4);
+        if ((((ListScreenScreen *) g_setupScreen)->unk_3E0 <= 0) && (SmpFlicker_IsFlickerIdle(g_setupScreen->text3E4) != 0)) {
+            SmpFlicker_RestoreFlickerValue(g_setupScreen->text3E4);
             ScenarioSetup_SetCatalogueAlpha(0xA);
-            D_800E4F60->unk3DC = 9;
+            g_setupScreen->unk3DC = 9;
         }
         break;
     case 5:
-        Widget_SetWidgetFlag08(D_800E4F60->unk458, 1);
-        Widget_SetWidgetFlag08(D_800E4F60->unk3E8, 0);
+        Widget_SetWidgetFlag08(g_setupScreen->widget300, 1);
+        Widget_SetWidgetFlag08(g_setupScreen->widget301, 0);
         ScenarioSetup_ResetSelectionIndicators();
         ScenarioSetup_SetCatalogueAlpha(0);
-        D_800E4F60->unk3DC = 2;
-        D_800E4F60->unk3E0 = 4;
-        Widget_SetWidgetFlag08(D_800E4F60->unk448, 0);
+        g_setupScreen->unk3DC = 2;
+        g_setupScreen->unk3E0 = 4;
+        Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
         SoundElement_PlayFlatSound(0xE78);
         break;
     case 8:
-        temp_v0 = ((ListScreenItem *)Node_FindWidgetByResourceId(root, setupRes(0x316)))->alpha;
-        temp_s0 = temp_v0 >> 1;
-        ScenarioSetup_SetCatalogueAlpha(temp_s0);
-        if (temp_s0 < 0xA) {
-            D_800E4F60->unk3DC = 3;
+        transitionStateOrAlpha = ((ListScreenItem *)Node_FindWidgetByResourceId(root, setupRes(0x316)))->alpha;
+        catalogueAlpha = transitionStateOrAlpha >> 1;
+        ScenarioSetup_SetCatalogueAlpha(catalogueAlpha);
+        if (catalogueAlpha < 0xA) {
+            g_setupScreen->unk3DC = 3;
             Random_SetMenuChoiceResult(0xB);
             return 0;
         }
         break;
     case 9:
-        temp_s0 = ((ListScreenItem *)Node_FindWidgetByResourceId(root, setupRes(0x316)))->alpha;
-        temp_s0 = (temp_s0 + 1) * 2;
-        if (temp_s0 >= 0x42) {
-            temp_s0 = 0x41;
-            D_800E4F60->unk3DC = 3;
+        catalogueAlpha = ((ListScreenItem *)Node_FindWidgetByResourceId(root, setupRes(0x316)))->alpha;
+        catalogueAlpha = (catalogueAlpha + 1) * 2;
+        if (catalogueAlpha >= 0x42) {
+            catalogueAlpha = 0x41;
+            g_setupScreen->unk3DC = 3;
         }
-        ScenarioSetup_SetCatalogueAlpha(temp_s0);
+        ScenarioSetup_SetCatalogueAlpha(catalogueAlpha);
         enabled = 1;
-        if (D_800E4F60->selection == 0) {
-            var_a0_3 = D_800E4F60->unk448;
-            Widget_SetWidgetFlag08(var_a0_3, enabled);
+        if (g_setupScreen->selection == 0) {
+            visibilityWidget = g_setupScreen->widget35D;
+            Widget_SetWidgetFlag08(visibilityWidget, enabled);
         }
         break;
     default:
         break;
     }
-    if (D_800E4F60->unk3DC == 3) {
-            temp_a2 = D_800E4F60->unk45C + arg2;
-            D_800E4F60->unk45C = temp_a2;
-            if (D_80154020.value == -1) {
-                if (D_800E4F60->selection == 0) {
-                    var_f0 = (Math_Cosf((f32) temp_a2 * 0.0033333334f) * 100.0f) + 150.0f;
-                    var_a0_2 = D_800E4F60->unk448;
-                    var_a0_2->alpha = (u8) (u32) var_f0;
+    if (g_setupScreen->unk3DC == 3) {
+            updatedPulsePhase = g_setupScreen->unk45C + phaseStep;
+            g_setupScreen->unk45C = updatedPulsePhase;
+            if (g_selectionMessageReply.value == -1) {
+                if (g_setupScreen->selection == 0) {
+                    pulseAlpha = (Math_Cosf((f32) updatedPulsePhase * 0.0033333334f) * 100.0f) + 150.0f;
+                    pulseWidget = g_setupScreen->widget35D;
+                    pulseWidget->alpha = (u8) (u32) pulseAlpha;
                 } else {
-                    var_f0 = (Math_Cosf((f32) temp_a2 * 0.0033333334f) * 100.0f) + 150.0f;
-                    var_a0_2 = D_800E4F60->item;
-                    var_a0_2->alpha = (u8) (u32) var_f0;
+                    pulseAlpha = (Math_Cosf((f32) updatedPulsePhase * 0.0033333334f) * 100.0f) + 150.0f;
+                    pulseWidget = g_setupScreen->item;
+                    pulseWidget->alpha = (u8) (u32) pulseAlpha;
                 }
             }
         }
@@ -222,12 +222,12 @@ block_7:
 #endif
 
 #if defined(VERSION_US)
-char rodata_unresolved_800DC794[12] =
+char s_ScenariosetupscreenRAXINTText[12] =
     "\000\000\000\000\023RAX_INT";
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EE164[3] = {
+unsigned int k_ScenariosetupscreenEncodedWordsBlock1[3] = {
     0x00BA00C9, 0x00BB00C2, 0x00BC00BF,
 };
 #endif
@@ -240,55 +240,55 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
     s32 fade;
     s32 count, previous, level;
     SetupScreen *countdown;
-    if (D_80154020.ready == 1) {
-        D_80154020.ready = 0;
-        if (D_80154020.value != -1) {
-            D_800E4F60->unk44C->alpha = 0x5A;
+    if (g_selectionMessageReply.ready == 1) {
+        g_selectionMessageReply.ready = 0;
+        if (g_selectionMessageReply.value != -1) {
+            g_setupScreen->widget30C->alpha = 0x5A;
             MarkMenuEventHandled();
-            SmXlate_SwitchScreen(D_80154020.value);
+            SmXlate_SwitchScreen(g_selectionMessageReply.value);
             return 0;
         }
-        D_800E4F60->unk44C->alpha = 0xFF;
-        D_800E4F60->unk3DC = 9;
-        if (D_800E4F60->selection == 0) {
-            Widget_SetWidgetFlag08(D_800E4F60->unk440, 1);
-            item = D_800E4F60->unk448;
-        } else item = D_800E4F60->unk444;
+        g_setupScreen->widget30C->alpha = 0xFF;
+        g_setupScreen->unk3DC = 9;
+        if (g_setupScreen->selection == 0) {
+            Widget_SetWidgetFlag08(g_setupScreen->widget30B, 1);
+            item = g_setupScreen->widget35D;
+        } else item = g_setupScreen->widget30D;
         Widget_SetWidgetFlag08(item, 1);
-        Widget_SetWidgetFlag08(D_800E4F60->label, 1);
-        Widget_SetWidgetFlag08(D_800E4F60->unk3F0, 1);
+        Widget_SetWidgetFlag08(g_setupScreen->label, 1);
+        Widget_SetWidgetFlag08(g_setupScreen->widget310, 1);
     }
-    switch (D_800E4F60->unk3DC) {
+    switch (g_setupScreen->unk3DC) {
     case 1:
-        D_800E4F60->left->x += (u16)D_800E4F60->leftCount;
-        D_800E4F60->right->x -= (u16)D_800E4F60->rightCount;
-        if (--D_800E4F60->unk3E0 <= 0) {
+        g_setupScreen->left->x += (u16)g_setupScreen->leftCount;
+        g_setupScreen->right->x -= (u16)g_setupScreen->rightCount;
+        if (--g_setupScreen->unk3E0 <= 0) {
             SoundElement_PlayFlatSound(0xE79);
-            Widget_SetWidgetFlag08(D_800E4F60->unk3E8, 1);
-            SmpFlicker_StartFlicker(D_800E4F60->text3E4, 4);
-            D_800E4F60->unk3DC = 4;
-            D_800E4F60->unk3E0 = 4;
+            Widget_SetWidgetFlag08(g_setupScreen->widget301, 1);
+            SmpFlicker_StartFlicker(g_setupScreen->text3E4, 4);
+            g_setupScreen->unk3DC = 4;
+            g_setupScreen->unk3E0 = 4;
         }
         break;
     case 2:
-        D_800E4F60->left->x -= (u16)D_800E4F60->leftCount;
-        D_800E4F60->right->x += (u16)D_800E4F60->rightCount;
-        if (--D_800E4F60->unk3E0 <= 0) {
-            D_800E4F60->unk3DC = 3;
+        g_setupScreen->left->x -= (u16)g_setupScreen->leftCount;
+        g_setupScreen->right->x += (u16)g_setupScreen->rightCount;
+        if (--g_setupScreen->unk3E0 <= 0) {
+            g_setupScreen->unk3DC = 3;
             MarkMenuEventHandled();
             SmXlate_SwitchScreen(8);
             return 0;
         }
         break;
     case 3:
-        if (D_800E4F60->unk460 == 0) {
+        if (g_setupScreen->unk460 == 0) {
             Tsmos_ActivateControllerState();
-            D_800E4F60->unk460 = 1;
-            Widget_SetWidgetFlag08(D_800E4F60->unk458, 0);
+            g_setupScreen->unk460 = 1;
+            Widget_SetWidgetFlag08(g_setupScreen->widget300, 0);
         }
         break;
     case 4:
-        countdown = D_800E4F60;
+        countdown = g_setupScreen;
         previous = countdown->unk3E0;
         count = previous - 1;
         /* fakematch: preserve the target's comparison-based decrement,
@@ -296,20 +296,20 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         if (count >= 0) count = previous - (previous >= count);
         else count = 0;
         countdown->unk3E0 = count;
-        if (D_800E4F60->unk3E0 <= 0 && SmpFlicker_IsFlickerIdle(D_800E4F60->text3E4)) {
-            SmpFlicker_RestoreFlickerValue(D_800E4F60->text3E4);
+        if (g_setupScreen->unk3E0 <= 0 && SmpFlicker_IsFlickerIdle(g_setupScreen->text3E4)) {
+            SmpFlicker_RestoreFlickerValue(g_setupScreen->text3E4);
             ScenarioSetup_SetCatalogueAlpha(10);
-            D_800E4F60->unk3DC = 9;
+            g_setupScreen->unk3DC = 9;
         }
         break;
     case 5:
-        Widget_SetWidgetFlag08(D_800E4F60->unk458, 1);
-        Widget_SetWidgetFlag08(D_800E4F60->unk3E8, 0);
+        Widget_SetWidgetFlag08(g_setupScreen->widget300, 1);
+        Widget_SetWidgetFlag08(g_setupScreen->widget301, 0);
         ScenarioSetup_ResetSelectionIndicators();
         ScenarioSetup_SetCatalogueAlpha(0);
-        D_800E4F60->unk3DC = 2;
-        D_800E4F60->unk3E0 = 4;
-        Widget_SetWidgetFlag08(D_800E4F60->unk448, 0);
+        g_setupScreen->unk3DC = 2;
+        g_setupScreen->unk3E0 = 4;
+        Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
         SoundElement_PlayFlatSound(0xE78);
         break;
     case 6: case 7: break;
@@ -318,7 +318,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         fade = level >> 1;
         ScenarioSetup_SetCatalogueAlpha(fade);
         if (fade < 10) {
-            D_800E4F60->unk3DC = 3;
+            g_setupScreen->unk3DC = 3;
             Random_SetMenuChoiceResult(11);
             return 0;
         }
@@ -326,21 +326,21 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
     case 9:
         fade = Node_FindWidgetByResourceId(root, 0x312)->alpha;
         fade = (fade + 1) * 2;
-        if (fade > 65) { fade = 65; D_800E4F60->unk3DC = 3; }
+        if (fade > 65) { fade = 65; g_setupScreen->unk3DC = 3; }
         ScenarioSetup_SetCatalogueAlpha(fade);
-        if (D_800E4F60->selection == 0) Widget_SetWidgetFlag08(D_800E4F60->unk448, 1);
+        if (g_setupScreen->selection == 0) Widget_SetWidgetFlag08(g_setupScreen->widget35D, 1);
         break;
     }
-    if (D_800E4F60->unk3DC == 3) {
-        D_800E4F60->unk45C += delta;
-        if (D_80154020.value == -1) {
-            if (D_800E4F60->selection == 0) {
-                alpha = Math_Cosf((f32)D_800E4F60->unk45C * 0.0033333334f) * 100.0f + 150.0f;
-                item = D_800E4F60->unk448;
+    if (g_setupScreen->unk3DC == 3) {
+        g_setupScreen->unk45C += delta;
+        if (g_selectionMessageReply.value == -1) {
+            if (g_setupScreen->selection == 0) {
+                alpha = Math_Cosf((f32)g_setupScreen->unk45C * 0.0033333334f) * 100.0f + 150.0f;
+                item = g_setupScreen->widget35D;
                 item->alpha = (u32)alpha;
             } else {
-                alpha = Math_Cosf((f32)D_800E4F60->unk45C * 0.0033333334f) * 100.0f + 150.0f;
-                item = D_800E4F60->item;
+                alpha = Math_Cosf((f32)g_setupScreen->unk45C * 0.0033333334f) * 100.0f + 150.0f;
+                item = g_setupScreen->item;
                 item->alpha = (u32)alpha;
             }
         }
@@ -350,7 +350,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DDAE4[3] = {
+unsigned int k_ScenariosetupscreenEncodedWords[3] = {
     0x25642525, 0x00000000, 0x3E99999A,
 };
 #endif
@@ -362,16 +362,16 @@ typedef struct ArenaCatalogueEntry {
     s32 reserved;
     s32 value;
 } ArenaCatalogueEntry;
-extern ArenaCatalogueEntry D_800E4F64[];
+extern ArenaCatalogueEntry g_scenarioCatalogueWidgetPairs[];
 
-/* Sets the alpha of every catalogue icon on the screen D_800E4F60: for categories 0 to 3 (tables
+/* Sets the alpha of every catalogue icon on the screen g_setupScreen: for categories 0 to 3 (tables
    g_cupCategoryTwoArenaControls, g_cupCategoryThreeArenaControls, g_cupCategoryOneArenaControls and g_cupCategoryZeroArenaControls) it walks the count ScenarioSetup_GetCategoryEntryCount gives for the
-   category's list ScenarioSetup_CategoryToList and, for the first of the forty 16-byte icon records D_800E4F64
+   category's list ScenarioSetup_CategoryToList and, for the first of the forty 16-byte icon records g_scenarioCatalogueWidgetPairs
    whose key matches the entry, sets the alpha of the item its key names (and of the item its second
    word names unless that is -1) and shows them through func_8040E8D8_de while the alpha is at least
    12. */
 
-/* Refreshes the selection on the screen D_800E4F60: for category 0 to 3 at 0x434 it takes the item
+/* Refreshes the selection on the screen g_setupScreen: for category 0 to 3 at 0x434 it takes the item
    the selection at 0x438 names in the 4-byte table g_cupCategoryTwoArenaControls, g_cupCategoryThreeArenaControls, g_cupCategoryOneArenaControls or
    g_cupCategoryZeroArenaControls from the window into 0x43C, copies the selection's name into the text at 0x3F4 (the
    default label for selection 0, otherwise the resource name Scene_CopyLevelName reads from
@@ -390,7 +390,7 @@ extern char *XPlus_CopyString(char *, char *);
 
 /* Resets the selection screen: maps the menu mode at 0x434 to a category (0 to 2, 1 to 3, 2 to 1,
    otherwise 0), builds the category list through ScenarioSetup_ResolveArenaFromSelection, hides the forty controls of the
-   table D_800E4F64 (and each entry's optional second control), refreshes the list, hides five fixed
+   table g_scenarioCatalogueWidgetPairs (and each entry's optional second control), refreshes the list, hides five fixed
    widgets and restores the selection, starting from the first entry when nothing was selected. */
 
 extern s32 ScenarioSetup_StartRandomCupStage(void);
@@ -456,12 +456,12 @@ void ScenarioSetup_SetCatalogueAlpha(s32 alpha) {
                 found = 0;
                 j = 0;
             scan:
-                if (table[i] == D_800E4F64[j].key) {
-                    item = Node_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[j].key);
+                if (table[i] == g_scenarioCatalogueWidgetPairs[j].key) {
+                    item = Node_FindWidgetByResourceId(g_setupScreen->window, (u16)g_scenarioCatalogueWidgetPairs[j].key);
                     Widget_SetWidgetFlag08(item, visible);
                     item->alpha = alpha;
-                    if (D_800E4F64[j].other != -1) {
-                        item = Node_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[j].other);
+                    if (g_scenarioCatalogueWidgetPairs[j].other != -1) {
+                        item = Node_FindWidgetByResourceId(g_setupScreen->window, (u16)g_scenarioCatalogueWidgetPairs[j].other);
                         Widget_SetWidgetFlag08(item, visible);
                         item->alpha = alpha;
                     }
@@ -479,7 +479,7 @@ void ScenarioSetup_SetCatalogueAlpha(s32 alpha) {
 void ScenarioSetup_RefreshSelectedArenaLabel(void) {
     s32 *table;
     char buffer[0x40];
-    switch (D_800E4F60->category) {
+    switch (g_setupScreen->category) {
     case 3:
         table = g_cupCategoryZeroArenaControls;
         break;
@@ -495,20 +495,20 @@ void ScenarioSetup_RefreshSelectedArenaLabel(void) {
     default:
         return;
     }
-    D_800E4F60->item = Node_FindWidgetByResourceId(D_800E4F60->window, (u16)table[D_800E4F60->selection]);
-    if (D_800E4F60->selection == 0) {
+    g_setupScreen->item = Node_FindWidgetByResourceId(g_setupScreen->window, (u16)table[g_setupScreen->selection]);
+    if (g_setupScreen->selection == 0) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        XPlus_CopyString(D_800E4F60->text, g_matchOptionLabelSlots[0]);
+        XPlus_CopyString(g_setupScreen->text, g_matchOptionLabelSlots[0]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        XPlus_CopyString(D_800E4F60->text, D_800E1DA4[g_languageIndex]);
+        XPlus_CopyString(g_setupScreen->text, g_scenarioSetupLocalizedTitles[g_languageIndex]);
 #endif
     } else {
         Scene_CopyLevelName(&g_world,
-                      ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(D_800E4F60->category), D_800E4F60->selection),
+                      ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(g_setupScreen->category), g_setupScreen->selection),
                       buffer, 0x3F);
-        XPlus_CopyString(D_800E4F60->text, XPlus_UppercaseString(buffer));
+        XPlus_CopyString(g_setupScreen->text, XPlus_UppercaseString(buffer));
     }
-    D_800E4F60->label->text = D_800E4F60->text;
+    g_setupScreen->label->text = g_setupScreen->text;
     Cinema_ReleaseSequenceContext();
 }
 
@@ -517,38 +517,38 @@ void ScenarioSetup_StartSelectedScenario(void) {
     int list;
     int i;
 
-    category = map_category(D_800E4F60->category);
-    list = ScenarioSetup_ResolveArenaFromSelection(category, D_800E4F60->selection);
+    category = map_category(g_setupScreen->category);
+    list = ScenarioSetup_ResolveArenaFromSelection(category, g_setupScreen->selection);
     for (i = 0; i < 40; i++) {
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[i].key), 0);
-        if (D_800E4F64[i].other != -1) {
-            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4F60->window, (unsigned short)D_800E4F64[i].other), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_setupScreen->window, (u16)g_scenarioCatalogueWidgetPairs[i].key), 0);
+        if (g_scenarioCatalogueWidgetPairs[i].other != -1) {
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_setupScreen->window, (unsigned short)g_scenarioCatalogueWidgetPairs[i].other), 0);
         }
     }
     Random_SetSelectedStage(category, list);
     Random_SetMenuChoiceResult(0x15);
-    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetC, 0);
-    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetE, 0);
-    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetD, 0);
-    Widget_SetWidgetFlag08(D_800E4F60->label, 0);
-    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetB, 0);
+    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)g_setupScreen)->widgetC, 0);
+    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)g_setupScreen)->widgetE, 0);
+    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)g_setupScreen)->widgetD, 0);
+    Widget_SetWidgetFlag08(g_setupScreen->label, 0);
+    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)g_setupScreen)->widgetB, 0);
     ScenarioSetup_ClearFlagBits();
-    if (D_800E4F60->selection == 0) {
+    if (g_setupScreen->selection == 0) {
         ScenarioSetup_SetCupCategory(category);
         ScenarioSetup_SetCupStageCount(0);
         ScenarioSetup_StartRandomCupStage();
     } else {
         ScenarioSetup_SetCupCategory(-1);
-        ScenarioSetup_SetCupStageCount(D_800E4F60->selection);
+        ScenarioSetup_SetCupStageCount(g_setupScreen->selection);
     }
 }
 
 /* 80423280_51.CPP */
-/* Starts the next stage of the current cup D_80154010 unless ScenarioSetup_IsCupComplete reports the cup over:
+/* Starts the next stage of the current cup g_scenarioCupProgress unless ScenarioSetup_IsCupComplete reports the cup over:
    draws random stage numbers below the cup's size (5, 7, 17 or 11 stages) until one not yet marked
    in the played set at D_80154018 turns up (giving up after 15000 draws), marks it, counts the stage in
    D_80154014, maps it through the cup's stage table to an arena id, finds that id among the 40
-   arena entries at D_800E4F64 and starts the cup with the entry's value through Random_SetSelectedStage.
+   arena entries at g_scenarioCatalogueWidgetPairs and starts the cup with the entry's value through Random_SetSelectedStage.
    Returns 1 when a stage was started, else 0. */
 
 
@@ -601,9 +601,9 @@ static inline s32 stage_arena(s32 cup, s32 stage) {
     found = 0;
     i = 0;
     do {
-        if (id == D_800E4F64[i].key) {
+        if (id == g_scenarioCatalogueWidgetPairs[i].key) {
             found = 1;
-            value = D_800E4F64[i].value;
+            value = g_scenarioCatalogueWidgetPairs[i].value;
         }
         i++;
     } while (i < 40 && !found);
@@ -623,35 +623,35 @@ s32 ScenarioSetup_StartRandomCupStage(void) {
         stage = 0;
         draws = 0;
         found = 0;
-        size = cup_stages(D_80154010.index) - 1;
+        size = cup_stages(g_scenarioCupProgress.index) - 1;
         while (!found) {
             stage = Graphu64_NextRandom() % size + 1;
-            if (Defs_TestBit(D_80154010.played, stage) == 0) {
+            if (Defs_TestBit(g_scenarioCupProgress.played, stage) == 0) {
                 found = 1;
-                Defs_SetBitValue(D_80154010.played, stage, found);
+                Defs_SetBitValue(g_scenarioCupProgress.played, stage, found);
             }
             draws++;
             if (draws >= 15001) {
                 found = 1;
             }
         }
-        D_80154010.stages++;
-        Random_SetSelectedStage(D_80154010.index, stage_arena(D_80154010.index, stage));
+        g_scenarioCupProgress.stages++;
+        Random_SetSelectedStage(g_scenarioCupProgress.index, stage_arena(g_scenarioCupProgress.index, stage));
     }
     return started;
 }
 
-/* Returns whether D_80154010 holds anything other than -1; ScenarioSetup_SetCupCategory stores it. */
+/* Returns whether g_scenarioCupProgress holds anything other than -1; ScenarioSetup_SetCupCategory stores it. */
 
 s32 ScenarioSetup_IsCupSelected(void) {
-    return D_80154010.index != -1;
+    return g_scenarioCupProgress.index != -1;
 }
 
 s32 ScenarioSetup_IsCupComplete(void) {
     s32 complete = 1;
-    if (D_80154010.index >= 0) {
-        complete = cup_stages(D_80154010.index);
-        complete = (D_80154010.stages + 1) == complete;
+    if (g_scenarioCupProgress.index >= 0) {
+        complete = cup_stages(g_scenarioCupProgress.index);
+        complete = (g_scenarioCupProgress.stages + 1) == complete;
     }
     return complete;
 }
@@ -661,7 +661,7 @@ s32 ScenarioSetup_IsCupComplete(void) {
 /* Stores its argument in D_80154014. */
 
 
-/* Refreshes the name label of screen D_800E4F60: with no entry at 0x438 it uses the default text
+/* Refreshes the name label of screen g_setupScreen: with no entry at 0x438 it uses the default text
    g_matchOptionLabelSlots; otherwise it formats the entry's name from ScenarioSetup_ResolveArenaFromSelection on the list ScenarioSetup_CategoryToList
    returns for 0x434 into a 0x40-byte buffer through D_8011FE88 and takes the text XPlus_UppercaseString
    makes of it. Either text is copied into the screen's label at 0x3F4 through func_802A025C_de, and the
@@ -683,33 +683,33 @@ s32 ScenarioSetup_ReturnResultsGateTrue(void) {
     return 1;
 }
 
-/* Stores its argument in D_80154010. */
+/* Stores its argument in g_scenarioCupProgress. */
 
 void ScenarioSetup_SetCupCategory(s32 value) {
-    D_80154010.index = value;
+    g_scenarioCupProgress.index = value;
 }
 
 void ScenarioSetup_SetCupStageCount(s32 value) {
-    D_80154010.stages = value;
+    g_scenarioCupProgress.stages = value;
 }
 
 void ScenarioSetup_LoadSetupArenaLabel(void) {
     char buffer[0x40];
 
-    if (D_800E4F60->selection == 0) {
-        XPlus_CopyString(D_800E4F60->text,
+    if (g_setupScreen->selection == 0) {
+        XPlus_CopyString(g_setupScreen->text,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-g_matchOptionLabelSlots[D_801462C8.language]
+g_matchOptionLabelSlots[g_gameSettings.language]
 #else
 g_matchOptionLabelSlots[0]
 #endif
 );
     } else {
-        Scene_CopyLevelName(&g_world, ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(D_800E4F60->category), D_800E4F60->selection),
+        Scene_CopyLevelName(&g_world, ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(g_setupScreen->category), g_setupScreen->selection),
                       buffer, 0x3F);
-        XPlus_CopyString(D_800E4F60->text, XPlus_UppercaseString(buffer));
+        XPlus_CopyString(g_setupScreen->text, XPlus_UppercaseString(buffer));
     }
-    D_800E4F60->label->text = D_800E4F60->text;
+    g_setupScreen->label->text = g_setupScreen->text;
 }
 
 void ScenarioSetup_HideSetupCatalogue(void) {
@@ -724,9 +724,9 @@ void ScenarioSetup_HideArenaCatalogueWidgets(void) {
     index = 0;
     do {
         offset = index * 0x10;
-        Widget_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)D_800E4F60->window, (u16)*(s32 *)(&D_800E0F16 - 2 + offset)), 0);
-        if (*(s32 *)(&D_800E0F18 + offset) != -1) {
-            Widget_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)D_800E4F60->window, (u16)*(s32 *)(&D_800E0F1A - 2 + offset)), 0);
+        Widget_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)g_setupScreen->window, (u16)*(s32 *)(&g_scenarioCatalogueFirstWidgetIds - 2 + offset)), 0);
+        if (*(s32 *)(&g_scenarioCatalogueLinkedWidgetIds + offset) != -1) {
+            Widget_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)g_setupScreen->window, (u16)*(s32 *)(&g_scenarioCatalogueSecondWidgetIds - 2 + offset)), 0);
         }
             index += 1;
     } while (index < 0x28);
@@ -754,17 +754,17 @@ int ScenarioSetup_GetCategoryEntryCount(int index) {
 }
 
 /* CODE_8042B398.CPP */
-extern s32 D_800E0F20[];
-s32 ScenarioSetup_ResolveArenaFromSelection(s32 arg0, s32 arg1) {
+extern s32 g_scenarioArenaSelectionTable[];
+s32 ScenarioSetup_ResolveArenaFromSelection(s32 gameMode, s32 arenaSelection) {
     s32 result = 0;
     s32 *table;
     s32 key;
     s32 found;
     s32 i;
-    if (arg1 == 0) {
-        arg1 = 1;
+    if (arenaSelection == 0) {
+        arenaSelection = 1;
     }
-    switch (arg0) {
+    switch (gameMode) {
     case 0:
         table = g_cupCategoryZeroArenaControls;
         break;
@@ -780,13 +780,13 @@ s32 ScenarioSetup_ResolveArenaFromSelection(s32 arg0, s32 arg1) {
     default:
         return 0;
     }
-    key = table[arg1];
+    key = table[arenaSelection];
     found = 0;
     i = 0;
     do {
-        if (key == D_800E4F64[i].key) {
+        if (key == g_scenarioCatalogueWidgetPairs[i].key) {
             found = 1;
-            result = D_800E0F20[i * 4];
+            result = g_scenarioArenaSelectionTable[i * 4];
         }
         i++;
     } while ((i < 0x28) && (found == 0));
@@ -819,11 +819,11 @@ s32 ScenarioSetup_ReturnSetupEventZero(void) {
 }
 
 void ScenarioSetup_ResetSelectionIndicators(void) {
-    D_800E4F60->unk454->alpha = 0xFF;
-    D_800E4F60->unk450->alpha = 0xFF;
-    Widget_SetWidgetFlag08(D_800E4F60->unk450, 1);
-    Widget_SetWidgetFlag08(D_800E4F60->unk454, 1);
-    D_800E4F60->unk46C = 0;
+    g_setupScreen->widget308->alpha = 0xFF;
+    g_setupScreen->widget2FE->alpha = 0xFF;
+    Widget_SetWidgetFlag08(g_setupScreen->widget2FE, 1);
+    Widget_SetWidgetFlag08(g_setupScreen->widget308, 1);
+    g_setupScreen->unk46C = 0;
 }
 
 extern void Defs_SetBitValue(void *, s32, s32);
@@ -833,17 +833,17 @@ void ScenarioSetup_ClearFlagBits(void) {
     s32 i;
 
     for (i = 0; i < 0x28; i++) {
-        Defs_SetBitValue(D_80154010.played, i, 0);
+        Defs_SetBitValue(g_scenarioCupProgress.played, i, 0);
     }
 }
 
-/* Closes the setup screen D_800E4F60: releases it through Cache_FreeMemory, runs Tsmos_ActivateControllerState and
+/* Closes the setup screen g_setupScreen: releases it through Cache_FreeMemory, runs Tsmos_ActivateControllerState and
    Menu_ReleaseOptionsScene, then clears the pointer. Returns zero. */
 s32 ScenarioSetup_CloseSetupScreen(void) {
-    Cache_FreeMemory(D_800E4F60);
+    Cache_FreeMemory(g_setupScreen);
     Tsmos_ActivateControllerState();
     Menu_ReleaseOptionsScene();
-    D_800E4F60 = 0;
+    g_setupScreen = 0;
     return 0;
 }
 
@@ -856,12 +856,12 @@ s32 ScenarioSetup_ReturnSetupEventZeroAlt(void) {
 /** Begin setup confirmation when the pending state and input event permit it. */
 s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 {
-    s32 v = D_800E4F60->unk3DC;
+    s32 v = g_setupScreen->unk3DC;
 
     if (v != 3) {
         return 0;
     }
-    if (D_80154020.value != -1) {
+    if (g_selectionMessageReply.value != -1) {
         return 0;
     }
     if ((u32)a2 >> 16 != v) {
@@ -872,23 +872,23 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
     }
 
     MarkMenuEventHandled();
-    D_800E4F60->unk3DC = 8;
+    g_setupScreen->unk3DC = 8;
     ScenarioSetup_SetCatalogueAlpha(0x41);
 
-    Widget_SetWidgetFlag08(D_800E4F60->unk440, 0);
-    Widget_SetWidgetFlag08(D_800E4F60->unk444, 0);
-    Widget_SetWidgetFlag08(D_800E4F60->unk448, 0);
-    Widget_SetWidgetFlag08(D_800E4F60->label, 0);
-    Widget_SetWidgetFlag08(D_800E4F60->unk3F0, 0);
+    Widget_SetWidgetFlag08(g_setupScreen->widget30B, 0);
+    Widget_SetWidgetFlag08(g_setupScreen->widget30D, 0);
+    Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
+    Widget_SetWidgetFlag08(g_setupScreen->label, 0);
+    Widget_SetWidgetFlag08(g_setupScreen->widget310, 0);
 
-    D_800E4F60->unk44C->alpha = 0x5A;
+    g_setupScreen->widget30C->alpha = 0x5A;
     SoundElement_PlayFlatSound(0xE7C);
 
     return 0;
 }
 
 extern void Model_SetPreviewModel(void *, s32);
-#define SCR4D4 ((struct ScreenScenarioSetupSelectPreviousCatalogueItem *)D_800E4F60)
+#define SCR4D4 ((struct ScreenScenarioSetupSelectPreviousCatalogueItem *)g_setupScreen)
 s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
 
@@ -946,8 +946,8 @@ s32 ScenarioSetup_SelectNextSetupItem(void *unused0, void *unused1, void *unused
         return 0;
     }
     changed = 0;
-    count = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(D_800E4F60->category));
-    screen = D_800E4F60;
+    count = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(g_setupScreen->category));
+    screen = g_setupScreen;
     if (screen->category != 0) {
         next = screen->selection + 1;
         if (next < count) {
@@ -960,7 +960,7 @@ s32 ScenarioSetup_SelectNextSetupItem(void *unused0, void *unused1, void *unused
             limit = 10;
         } else {
             limit = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(0));
-            screen = D_800E4F60;
+            screen = g_setupScreen;
             next = screen->selection + 1;
             if (next == limit) {
                 goto moved;
@@ -978,17 +978,17 @@ moved:
     }
     SoundElement_PlayFlatSound(0xE7D);
     ScenarioSetup_ResetSelectionIndicators();
-    D_800E4F60->unk45C = 0;
-    D_800E4F60->unk464 = 0;
-    D_800E4F60->item->alpha = 0x41;
+    g_setupScreen->unk45C = 0;
+    g_setupScreen->unk464 = 0;
+    g_setupScreen->item->alpha = 0x41;
     ScenarioSetup_RefreshSelectedArenaLabel();
-    Widget_SetWidgetFlag08(D_800E4F60->unk440, 0);
-    Widget_SetWidgetFlag08(D_800E4F60->unk444, 1);
-    Widget_SetWidgetFlag08(D_800E4F60->unk448, 0);
+    Widget_SetWidgetFlag08(g_setupScreen->widget30B, 0);
+    Widget_SetWidgetFlag08(g_setupScreen->widget30D, 1);
+    Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
     return 0;
 }
 
-#define SCR78C ((struct ScreenScenarioSetupSelectPreviousCatalogueCategory *)D_800E4F60)
+#define SCR78C ((struct ScreenScenarioSetupSelectPreviousCatalogueCategory *)g_setupScreen)
 s32 ScenarioSetup_SelectPreviousCatalogueCategory(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
     s32 count;
@@ -1031,7 +1031,7 @@ s32 ScenarioSetup_SelectPreviousCatalogueCategory(void *unused0, void *unused1, 
 }
 #undef SCR78C
 
-#define SCR904 ((struct ScreenScenarioSetupSelectPreviousCatalogueCategory *)D_800E4F60)
+#define SCR904 ((struct ScreenScenarioSetupSelectPreviousCatalogueCategory *)g_setupScreen)
 s32 ScenarioSetup_SelectNextCatalogueCategory(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
     s32 count;
@@ -1079,47 +1079,47 @@ s32 ScenarioSetup_SelectNextCatalogueCategory(void *unused0, void *unused1, void
 
 s32 ScenarioSetup_EndSetupInput(void) {
     MarkMenuEventHandled();
-    if (D_800E4F60->unk3DC == 3) {
-        D_800E4F60->unk3DC = 5;
-        D_800E4F60->unk3E0 = 4;
+    if (g_setupScreen->unk3DC == 3) {
+        g_setupScreen->unk3DC = 5;
+        g_setupScreen->unk3E0 = 4;
         return 0;
     }
     return 0;
 }
 
-/* Calls ScenarioSetup_StartSelectedScenario while the setup screen D_800E4F60 is in mode 3, and returns zero. */
+/* Calls ScenarioSetup_StartSelectedScenario while the setup screen g_setupScreen is in mode 3, and returns zero. */
 s32 ScenarioSetup_RefreshSetupScreen(void) {
-    if (D_800E4F60->unk3DC == 3) {
+    if (g_setupScreen->unk3DC == 3) {
         ScenarioSetup_StartSelectedScenario();
         return 0;
     }
     return 0;
 }
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5284, an actor kind at D_800E5288 and a handler at D_800E528C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_scenarioCatalogueEventIds, an actor kind at g_scenarioCatalogueEventActorKinds and a handler at g_scenarioCatalogueEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8042BCB0)(void *, s32, s32, s32, s32);
 
-extern Handler8042BCB0 D_800E528C;
-s32 ScenarioSetup_DispatchCatalogueEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+extern Handler8042BCB0 g_scenarioCatalogueEventHandlers;
+s32 ScenarioSetup_DispatchCatalogueEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     Handler8042BCB0 *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E528C != 0) {
+    if (g_scenarioCatalogueEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E528C;
+        entry = &g_scenarioCatalogueEventHandlers;
         index = 0;
         do {
-            if (D_800E5284[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E5288[index].value;
+            if (g_scenarioCatalogueEventIds[index].value == eventId) {
+                actor = widget;
+                actor_kind = actor->input;
+                table_kind = g_scenarioCatalogueEventActorKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 3;
@@ -1129,8 +1129,8 @@ s32 ScenarioSetup_DispatchCatalogueEvent(void *arg0, s32 arg1, s32 arg2, s32 arg
     return 0;
 }
 
-extern func_8042CE54_S1 *D_800E53C0;
-extern s8 D_80102B0D[], D_800FEB0E[];
+extern MatchScoreScreenView *g_matchResultBadgeScreen;
+extern s8 g_profileSlotIndices[], g_profileSlotEnabledFlags[];
 extern void Frontend_InitMenuImage(s32 *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(s32 *);
 extern void Frontend_AccumulatePlayerStatistics(void);
@@ -1145,54 +1145,54 @@ extern char *XPlus_CopyString(char *, char *);
 s32 ScenarioSetup_OpenResultsScreen(void *root) {
     char buffer[64];
     MenuWidget *item;
-    func_8042CE54_S1 *screen;
+    MatchScoreScreenView *screen;
     Shared_Game *game;
     Shared_Game *slot;
     Shared_PlayerSettingsRecord *config;
     s32 i, offset;
 
-    D_800E53C0 = (void *)Cache_AllocateMemory(0x330);
-    D_800E53C0->unkE0 = root;
+    g_matchResultBadgeScreen = (void *)Cache_AllocateMemory(0x330);
+    g_matchResultBadgeScreen->window = root;
     Widget_SetWidgetFlag08(root, 0);
-    Frontend_InitMenuImage(D_800E53C0->transition, 0x67, 0, 0, 0);
-    Frontend_StartMenuImageTransition(D_800E53C0->transition);
-    D_800E53C0->active = 1;
+    Frontend_InitMenuImage(g_matchResultBadgeScreen->transition, 0x67, 0, 0, 0);
+    Frontend_StartMenuImageTransition(g_matchResultBadgeScreen->transition);
+    g_matchResultBadgeScreen->active = 1;
     Node_FindWidgetByResourceId(root, 0x234 + RESULTS_MENU_SHIFT)->alpha = 110;
     Node_FindWidgetByResourceId(root, 0x239 + RESULTS_MENU_SHIFT)->alpha = 20;
     Node_FindWidgetByResourceId(root, 0x236 + RESULTS_MENU_SHIFT)->alpha = 20;
     Frontend_AccumulatePlayerStatistics();
-    screen = D_800E53C0;
+    screen = g_matchResultBadgeScreen;
     for (i = 0; i < 8; i++) {
         screen->icons[i][0] = -1;
         screen->icons[i][1] = -1;
     }
-    D_800E53C0->selection = -1;
+    g_matchResultBadgeScreen->selection = -1;
     ScenarioSetup_SortResultsPlayers();
-    game = &D_801462C8;
+    game = &g_gameSettings;
     switch (game->controllerMode) {
     case 0:
-        Match_UpdateMatchCounters(D_800E53C0->data, D_8015402C);
+        Match_UpdateMatchCounters(g_matchResultBadgeScreen->data, g_selectedLevelId);
         Frontend_AwardResultAchievements();
-        D_800E53C0->mode = 0;
+        g_matchResultBadgeScreen->mode = 0;
         break;
     case 2:
         if (game->humanWon == 1) {
-            D_800E53C0->mode = 0;
+            g_matchResultBadgeScreen->mode = 0;
             Frontend_AwardResultMilestones();
             config = game->playerSettings;
             for (i = 0; i < 4; i++) {
                 if (config[i].enabled == 1 && config[i].locked == 0) Achieve_MarkLevelPlayed(i);
             }
-        } else D_800E53C0->mode = 1;
+        } else g_matchResultBadgeScreen->mode = 1;
         break;
     }
-    slot = &D_801462C8;
+    slot = &g_gameSettings;
     switch (slot->controllerMode) {
     case 0:
         ScenarioSetup_FillResultRows();
         break;
     case 2:
-        screen = D_800E53C0;
+        screen = g_matchResultBadgeScreen;
         if (screen->mode == 1) {
             screen->first = 0;
             screen->count = 0;
@@ -1221,7 +1221,7 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     offset = 0;
     do {
         i++;
-        if (D_80102B0D[offset] >= 0 && D_800FEB0E[offset] == 0) {
+        if (g_profileSlotIndices[offset] >= 0 && g_profileSlotEnabledFlags[offset] == 0) {
             Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 0);
             break;
         }
@@ -1230,24 +1230,24 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     if (Widget_ListHasFlag100(Node_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && ScenarioSetup_IsCupSelected() == 1 && ScenarioSetup_ReturnResultsGateTrue() == 0) {
         Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     }
-    item = Node_FindWidgetByResourceId(D_800E53C0->unkE0, RESULTS_HEADING1);
-    if (D_8014DD98.kind == 0) item->text = resultsFirstHeading();
+    item = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, RESULTS_HEADING1);
+    if (g_currentResultMode.kind == 0) item->text = resultsFirstHeading();
     else item->text = resultsSecondHeading();
-    item = Node_FindWidgetByResourceId(D_800E53C0->unkE0, RESULTS_HEADING2);
-    switch (D_8014DD98.kind) {
+    item = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, RESULTS_HEADING2);
+    switch (g_currentResultMode.kind) {
     case 3: item->text = resultsFirstHeading(); break;
     case 0: item->text = resultsFourthHeading(); break;
     case 1:
     default: item->text = resultsThirdHeading(); break;
     }
     item = Node_FindWidgetByResourceId(root, 0x235 + RESULTS_MENU_SHIFT);
-    Scene_CopyLevelName(&g_world, D_8015402C, buffer, 63);
-    XPlus_CopyString(D_800E53C0->name, XPlus_UppercaseString(buffer));
-    item->text = D_800E53C0->name;
-    D_800E53C0->buttonAddress = (s32)Node_FindWidgetByResourceId(root, 0x23D + RESULTS_MENU_SHIFT);
-    D_800E53C0->dirty = 1;
-    D_80145088.status[7] = 1;
-    D_800E53C0->phase = 0;
+    Scene_CopyLevelName(&g_world, g_selectedLevelId, buffer, 63);
+    XPlus_CopyString(g_matchResultBadgeScreen->name, XPlus_UppercaseString(buffer));
+    item->text = g_matchResultBadgeScreen->name;
+    g_matchResultBadgeScreen->buttonAddress = (s32)Node_FindWidgetByResourceId(root, 0x23D + RESULTS_MENU_SHIFT);
+    g_matchResultBadgeScreen->dirty = 1;
+    g_frontendScreenStatus.status[7] = 1;
+    g_matchResultBadgeScreen->phase = 0;
     Tsmos_DeactivateControllerState();
     return 0;
 }
@@ -1260,107 +1260,107 @@ extern void Frontend_ShowResultRankBadge(s32,s32,u16);
 /* Fill the four visible player rows of the match results screen. */
 void ScenarioSetup_FillResultRows(void) {
     s32 row, player, attempts, percent;
-    func_8041F2A0_Config *record;
+    SlotSelectionPlayerConfig *record;
     MenuWidget *widget, *pending;
     char *name;
 
     ScenarioSetup_HideResultCatalogueWidgets();
     for (row = 0; row < 4; row++) {
-        if (row >= D_800E53C0->count) return;
-        player = D_800E53C0->players[D_800E53C0->first + row];
+        if (row >= g_matchResultBadgeScreen->count) return;
+        player = g_matchResultBadgeScreen->players[g_matchResultBadgeScreen->first + row];
         record = &g_playerSettings[player];
 
-        widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[0]);
+        widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[0]);
         Widget_SetWidgetFlag08(widget, 1);
         widget->alpha = 0x96;
         pending = widget;
-        pending->value = D_800E3A58[Key_FindKeyIndex(record->kind)].portrait;
+        pending->value = g_characterPortraitRecords[Key_FindKeyIndex(record->kind)].portrait;
 
-        widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[2]);
+        widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[2]);
         Widget_SetWidgetFlag08(widget, 1);
         widget->alpha = 0x19;
 
-        widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[4]);
+        widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[4]);
         widget->alpha = 0xAF;
         Widget_SetWidgetFlag08(widget, 1);
         if (record->out == 0) {
-            widget->text = D_80102B00[player].name;
+            widget->text = g_localPlayerProfiles[player].name;
         } else {
             name = record->name;
             XPlus_CopyString(name, XPlus_UppercaseString(name));
             widget->text = name;
         }
 
-        widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[6]);
+        widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[6]);
         widget->alpha = 0x73;
         Widget_SetWidgetFlag08(widget, 1);
         if (record->out == 0) widget->text = Match_UpdateRankText(player);
         else widget->text = resultsRankText(record->rank);
 
-        widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[8]);
+        widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[8]);
         widget->alpha = 0xAF;
         Widget_SetWidgetFlag08(widget, 1);
-        XStdio_FormatBuffer(D_800E53C0->killText[row], resultsNumberFormat(), record->kills);
-        widget->text = D_800E53C0->killText[row];
+        XStdio_FormatBuffer(g_matchResultBadgeScreen->killText[row], resultsNumberFormat(), record->kills);
+        widget->text = g_matchResultBadgeScreen->killText[row];
 
-        widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[10]);
+        widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[10]);
         widget->alpha = 0xAF;
         Widget_SetWidgetFlag08(widget, 1);
-        XStdio_FormatBuffer(D_800E53C0->scoreText[row], resultsNumberFormat(), record->score + record->total);
-        *&widget->text = D_800E53C0->scoreText[row];
+        XStdio_FormatBuffer(g_matchResultBadgeScreen->scoreText[row], resultsNumberFormat(), record->score + record->total);
+        *&widget->text = g_matchResultBadgeScreen->scoreText[row];
 
-        if (D_8014DD98.kind == 0) {
-            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[12]), 0);
+        if (g_currentResultMode.kind == 0) {
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[12]), 0);
             Frontend_ShowResultRankBadge(player, row, RESULTS_RANK_GROUP);
         } else {
-            widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[12]);
+            widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[12]);
             widget->alpha = 0xAF;
             Widget_SetWidgetFlag08(widget, 1);
-            attempts = D_800FF140_de[player];
+            attempts = g_playerCountedShots[player];
             percent = 0;
-            if (attempts > 0) percent = D_800FEAE0[player] * 100 / attempts;
-            XStdio_FormatBuffer(D_800E53C0->ratioText[row], resultsPercentFormat(), percent);
-            widget->text = D_800E53C0->ratioText[row];
+            if (attempts > 0) percent = g_playerHitCounts[player] * 100 / attempts;
+            XStdio_FormatBuffer(g_matchResultBadgeScreen->ratioText[row], resultsPercentFormat(), percent);
+            widget->text = g_matchResultBadgeScreen->ratioText[row];
         }
 
-        if (D_8014DD98.kind == 3) {
-            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[14]), 0);
+        if (g_currentResultMode.kind == 3) {
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[14]), 0);
             Frontend_ShowResultRankBadge(player, row, RESULTS_SECONDARY_GROUP);
         } else {
-            widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[14]);
+            widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[14]);
             widget->alpha = 0xAF;
             Widget_SetWidgetFlag08(widget, 1);
             pending = widget;
-            switch (D_8014DD98.kind) {
+            switch (g_currentResultMode.kind) {
             case 0:
-                XStdio_FormatBuffer(D_800E53C0->valueText[row], resultsNumberFormat(), record->other);
+                XStdio_FormatBuffer(g_matchResultBadgeScreen->valueText[row], resultsNumberFormat(), record->other);
                 break;
             case 1:
-                XStdio_FormatBuffer(D_800E53C0->valueText[row], resultsNumberFormat(), record->selected);
+                XStdio_FormatBuffer(g_matchResultBadgeScreen->valueText[row], resultsNumberFormat(), record->selected);
                 break;
             default:
-                XStdio_FormatBuffer(D_800E53C0->valueText[row], resultsNumberFormat(), 0);
+                XStdio_FormatBuffer(g_matchResultBadgeScreen->valueText[row], resultsNumberFormat(), 0);
                 break;
             }
-            pending->text = D_800E53C0->valueText[row];
+            pending->text = g_matchResultBadgeScreen->valueText[row];
         }
 
-        widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[16]);
+        widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[16]);
         Widget_SetWidgetFlag08(widget, 0);
         widget->alpha = 0x96;
-        widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[18]);
+        widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[18]);
         Widget_SetWidgetFlag08(widget, 0);
         widget->alpha = 0x96;
         if (record->out == 0) {
-            if (D_800E53C0->icons[player][0] != -1) {
-                widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[16]);
+            if (g_matchResultBadgeScreen->icons[player][0] != -1) {
+                widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[16]);
                 Widget_SetWidgetFlag08(widget, 1);
-                widget->value = D_800E01B0_de[D_800E53C0->icons[player][0]];
+                widget->value = g_resultAchievementBadgeImages[g_matchResultBadgeScreen->icons[player][0]];
             }
-            if (D_800E53C0->icons[player][1] != -1) {
-                widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[18]);
+            if (g_matchResultBadgeScreen->icons[player][1] != -1) {
+                widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[18]);
                 Widget_SetWidgetFlag08(widget, 1);
-                widget->value = D_800E01B0_de[D_800E53C0->icons[player][1]];
+                widget->value = g_resultAchievementBadgeImages[g_matchResultBadgeScreen->icons[player][1]];
             }
         }
         pending = 0;
@@ -1368,9 +1368,9 @@ void ScenarioSetup_FillResultRows(void) {
 }
 
 /* The game settings record. */
-static inline Shared_Game *resultsGame(void) { return &D_801462C8; }
+static inline Shared_Game *resultsGame(void) { return &g_gameSettings; }
 
-static inline LevelGoal *levelGoal(void) { return &D_8014DD98; }
+static inline LevelGoal *levelGoal(void) { return &g_currentResultMode; }
 static inline CGameStatus *gameStatus(void) { return &resultsGame()->counters; }
 static inline s32 resultsTeamTotal(s32 group) {
     if (levelGoal()->kind == 0) return gameStatus()->counts[group];
@@ -1381,7 +1381,7 @@ static inline Shared_PlayerSettingsRecord *playerSettings(void) { return results
 /* Swap two sort entries through the caller's temp. */
 #define RESULTS_SWAP(x, y) do { temp = x; x = y; y = temp; } while (0)
 /* Swap the joined players at slots n and n + 1. */
-#define RESULTS_SWAP_PLAYERS(n) do { RESULTS_SWAP(D_800E53C0->players[n], D_800E53C0->players[(n) + 1]); } while (0)
+#define RESULTS_SWAP_PLAYERS(n) do { RESULTS_SWAP(g_matchResultBadgeScreen->players[n], g_matchResultBadgeScreen->players[(n) + 1]); } while (0)
 /* Order the joined players for the results screen: in team games (goal kinds 0 and 3) teams by
  * total, players by their team's total, then players within each team by the mode's score; otherwise
  * players by the mode's score. Ties fall back to the kill score. */
@@ -1389,26 +1389,26 @@ void ScenarioSetup_SortResultsPlayers(void) {
     s32 groups[5];
     s32 i, j, k, mode, temp, leftTotal, rightTotal, group, a, b, leftKills, rightKills, leftScore, rightScore, nextTotal;
 
-    D_800E53C0->first = 0;
-    D_800E53C0->count = 0;
+    g_matchResultBadgeScreen->first = 0;
+    g_matchResultBadgeScreen->count = 0;
     /* leftKills doubles as the empty-slot marker while the slots are cleared. */
     for (i = 0, leftKills = -1; i < 8; i++) {
-        D_800E53C0->players[i] = leftKills;
+        g_matchResultBadgeScreen->players[i] = leftKills;
         if (playerSettings()[i].enabled == 1) {
-            D_800E53C0->players[D_800E53C0->count] = i;
-            D_800E53C0->count++;
+            g_matchResultBadgeScreen->players[g_matchResultBadgeScreen->count] = i;
+            g_matchResultBadgeScreen->count++;
         }
     }
     mode = Frontend_GetMatchEndReason();
     if (mode == 0) {
-        switch (D_8014DD98.kind) {
+        switch (g_currentResultMode.kind) {
         case 2: mode = 1; break;
         case 1: mode = 2; break;
         case 0: mode = 3; break;
         default: mode = 1; break;
         }
     }
-    if (D_8014DD98.kind == 3 || D_8014DD98.kind == 0) {
+    if (g_currentResultMode.kind == 3 || g_currentResultMode.kind == 0) {
         for (i = 4; i >= 0; i--) groups[i] = i;
         for (i = 0; i < 5; i++) {
             for (j = 0; j < 4; j++) {
@@ -1421,13 +1421,13 @@ void ScenarioSetup_SortResultsPlayers(void) {
                 }
             }
         }
-        for (j = 0; j < D_800E53C0->count; j++) {
-            for (k = 0; k < D_800E53C0->count - 1; k++) {
-                a = D_800E53C0->players[k];
+        for (j = 0; j < g_matchResultBadgeScreen->count; j++) {
+            for (k = 0; k < g_matchResultBadgeScreen->count - 1; k++) {
+                a = g_matchResultBadgeScreen->players[k];
                 leftTotal = resultsGame()->playerSettings[a].rank;
                 if (leftTotal >= 5) leftTotal = -1;
                 else leftTotal = resultsTeamTotal(leftTotal);
-                b = D_800E53C0->players[k + 1];
+                b = g_matchResultBadgeScreen->players[k + 1];
                 rightTotal = resultsGame()->playerSettings[b].rank;
                 if (rightTotal >= 5) nextTotal = -1;
                 else nextTotal = resultsTeamTotal(rightTotal);
@@ -1438,10 +1438,10 @@ void ScenarioSetup_SortResultsPlayers(void) {
         }
         for (i = 0; i < 5; i++) {
             group = groups[i];
-            for (j = 0; j < D_800E53C0->count; j++) {
-                for (k = 0; k < D_800E53C0->count - 1; k++) {
-                    a = D_800E53C0->players[k];
-                    b = D_800E53C0->players[k + 1];
+            for (j = 0; j < g_matchResultBadgeScreen->count; j++) {
+                for (k = 0; k < g_matchResultBadgeScreen->count - 1; k++) {
+                    a = g_matchResultBadgeScreen->players[k];
+                    b = g_matchResultBadgeScreen->players[k + 1];
                     leftKills = resultsGame()->playerSettings[a].score;
                     rightKills = resultsGame()->playerSettings[b].score;
                     if (resultsGame()->playerSettings[a].rank == group && resultsGame()->playerSettings[b].rank == group) {
@@ -1458,10 +1458,10 @@ void ScenarioSetup_SortResultsPlayers(void) {
             }
         }
     } else {
-        for (i = 0; i < D_800E53C0->count; i++) {
-            for (j = 0; j < D_800E53C0->count - 1; j++) {
-                a = D_800E53C0->players[j];
-                b = D_800E53C0->players[j + 1];
+        for (i = 0; i < g_matchResultBadgeScreen->count; i++) {
+            for (j = 0; j < g_matchResultBadgeScreen->count - 1; j++) {
+                a = g_matchResultBadgeScreen->players[j];
+                b = g_matchResultBadgeScreen->players[j + 1];
                 leftKills = resultsGame()->playerSettings[a].score;
                 rightKills = resultsGame()->playerSettings[b].score;
                 switch (mode) {
@@ -1479,15 +1479,15 @@ void ScenarioSetup_SortResultsPlayers(void) {
 }
 
 #ifdef NON_MATCHING
-/* Looks up entry arg1 of the table chosen by arg0 and returns field 0xC of the first of the forty records at D_800E4F64 whose first word equals it, or zero. */
+/* Looks up entry arg1 of the table chosen by arg0 and returns field 0xC of the first of the forty records at g_scenarioCatalogueWidgetPairs whose first word equals it, or zero. */
 
-/* Sets the byte at offset 0x10 of the two objects at offsets 0x454 and 0x450 of the structure D_800E4F60
+/* Sets the byte at offset 0x10 of the two objects at offsets 0x454 and 0x450 of the structure g_setupScreen
    points to to 0xFF, shows both through func_8040E8D8_de and clears the word at 0x46C. */
 
 /* Calls Defs_SetBitValue on D_80154018 for each index from 0 to 0x27 with zero. */
 
-/* Releases the object D_800E4F60 holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState and
-   Menu_ReleaseOptionsScene, clears D_800E4F60 and returns zero. */
+/* Releases the object g_setupScreen holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState and
+   Menu_ReleaseOptionsScene, clears g_setupScreen and returns zero. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #else
@@ -1495,7 +1495,7 @@ void ScenarioSetup_SortResultsPlayers(void) {
 
 /* When the global session is mode 3 with no pending state and the caller's high word and empty flag agree, resets the mode, restarts five subsystems and queues one status message. */
 
-/* Moves the selection of the screen D_800E4F60 back on event 1: calls MarkMenuEventHandled and steps the
+/* Moves the selection of the screen g_setupScreen back on event 1: calls MarkMenuEventHandled and steps the
    selection at 0x438 back while it is above 0; in category 0 the second page (11 and up) instead
    steps forward while below the count ScenarioSetup_GetCategoryEntryCount gives for list 0. When it moved it plays sound
    0xE7D, calls ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha
@@ -1506,7 +1506,7 @@ void ScenarioSetup_SortResultsPlayers(void) {
 
 extern s32 ScenarioSetup_GetCategoryEntryCount(s32);
 
-/* Moves the selection of the screen D_800E4F60 on event 1: calls MarkMenuEventHandled and steps the
+/* Moves the selection of the screen g_setupScreen on event 1: calls MarkMenuEventHandled and steps the
    selection at 0x438 forward while it stays below the count ScenarioSetup_GetCategoryEntryCount gives for the category's
    list; in category 0 the first page (below 11) steps forward unless it would reach the count of
    list 0 or 11, and the second page steps back unless it would reach 10. When it moved it plays
@@ -1514,7 +1514,7 @@ extern s32 ScenarioSetup_GetCategoryEntryCount(s32);
    alpha 0x41, refreshes through ScenarioSetup_RefreshSelectedArenaLabel, hides the items at 0x440 and 0x448 and shows the
    one at 0x444. Returns zero. */
 
-/* Moves the screen D_800E4F60 to its previous category on event 1: calls MarkMenuEventHandled and steps
+/* Moves the screen g_setupScreen to its previous category on event 1: calls MarkMenuEventHandled and steps
    the category at 0x434 back unless it is 0; in category 0 a selection at 0x438 from 5 to 10 is
    mirrored to 21 minus it when that stays below the count ScenarioSetup_GetCategoryEntryCount gives for list 0. When
    anything changed it plays sound 0xE7D, calls ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464,
@@ -1523,7 +1523,7 @@ extern s32 ScenarioSetup_GetCategoryEntryCount(s32);
    category in the view at 0x308 and moves the marker item at 0x448 to x 0x7C plus 34 per category.
    Returns zero. Adapted from ScenarioSetup_SelectNextCatalogueCategory with the step direction and the mirror test changed. */
 
-/* Moves the screen D_800E4F60 to its next category on event 1: calls MarkMenuEventHandled and, unless the
+/* Moves the screen g_setupScreen to its next category on event 1: calls MarkMenuEventHandled and, unless the
    category at 0x434 is already 3, advances it (from category 0 only while the selection at 0x438
    is below 11, otherwise mirroring the selection to 21 minus it), then plays sound 0xE7D, calls
    ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha 0x41, clamps
@@ -1531,7 +1531,7 @@ extern s32 ScenarioSetup_GetCategoryEntryCount(s32);
    ScenarioSetup_RefreshSelectedArenaLabel and, when the selection is 0, shows model 0xEA6 plus the category in the view at
    0x308 and moves the marker item at 0x448 to x 0x7C plus 34 per category. Returns zero. */
 
-/* Calls MarkMenuEventHandled; when the mode word at offset 0x3DC of the object D_800E4F60 points to is 3,
+/* Calls MarkMenuEventHandled; when the mode word at offset 0x3DC of the object g_setupScreen points to is 3,
    sets it to 5 and the word at 0x3E0 to 4. Returns zero. */
 
 #endif
@@ -1548,25 +1548,25 @@ void ScenarioSetup_HideResultCatalogueWidgets(void)
     bank = 0;
     offset = 0;
     do {
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[0]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[0]);
         Widget_SetWidgetFlag08(resource, 0);
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[2]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[2]);
         Widget_SetWidgetFlag08(resource, 0);
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[4]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[4]);
         Widget_SetWidgetFlag08(resource, 0);
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[6]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[6]);
         Widget_SetWidgetFlag08(resource, 0);
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[8]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[8]);
         Widget_SetWidgetFlag08(resource, 0);
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[10]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[10]);
         Widget_SetWidgetFlag08(resource, 0);
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[12]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[12]);
         Widget_SetWidgetFlag08(resource, 0);
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[14]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[14]);
         Widget_SetWidgetFlag08(resource, 0);
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[16]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[16]);
         Widget_SetWidgetFlag08(resource, 0);
-        resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[18]);
+        resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[18]);
         Widget_SetWidgetFlag08(resource, 0);
         offset += 0x28;
         bank++;
@@ -1584,11 +1584,11 @@ void ScenarioSetup_HideResultCatalogueWidgets(void)
 #endif
 }
 
-/* Shows the model preview of the screen D_800E53C0 when its model id at 0x32C is set: shows the
+/* Shows the model preview of the screen g_matchResultBadgeScreen when its model id at 0x32C is set: shows the
    version-specific preview item of the screen window with alpha 0xAF and the preview image, then sets up the
-   view at 0x20 of the screen through Frontend_InitModelPreviewTransform with mode 0, a uniform D_800DDAFC_de scale and the
-   offset (0, D_800DDB04, D_800DDB08_de), through Frontend_SetPreviewRotation with a zero vector, through
-   Frontend_SetPreviewRotationSpeed with (0, D_800DDB00, 0), and loads the model through Model_SetPreviewModel. */
+   view at 0x20 of the screen through Frontend_InitModelPreviewTransform with mode 0, a uniform g_scenarioPreviewScale scale and the
+   offset (0, g_scenarioPreviewOffsetY, g_resultBadgeDrawParameters), through Frontend_SetPreviewRotation with a zero vector, through
+   Frontend_SetPreviewRotationSpeed with (0, g_scenarioPreviewPositionY, 0), and loads the model through Model_SetPreviewModel. */
 typedef struct PreviewScreen {
     char pad0[0x20];
     char view[0xE0 - 0x20];
@@ -1596,9 +1596,9 @@ typedef struct PreviewScreen {
     char padE4[0x32C - 0xE4];
     s32 model;
 } PreviewScreen;
-#define PREVIEW_SCREEN ((PreviewScreen *)D_800E53C0)
-extern f32 D_800DDAFC_de;
-extern f32 D_800DDB00, D_800DDB04, D_800DDB08_de;
+#define PREVIEW_SCREEN ((PreviewScreen *)g_matchResultBadgeScreen)
+extern f32 g_scenarioPreviewScale;
+extern f32 g_scenarioPreviewPositionY, g_scenarioPreviewOffsetY, g_resultBadgeDrawParameters;
 void ScenarioSetup_InitResultModelPreview(void) {
     struct MenuWidget *item;
     CVector3 scale;
@@ -1616,18 +1616,18 @@ void ScenarioSetup_InitResultModelPreview(void) {
         Widget_SetWidgetFlag08(item, 1);
         item->alpha = 0xAF;
         item->image = previewModelImage();
-        scale.x = D_800DDAFC_de;
-        scale.y = D_800DDAFC_de;
-        scale.z = D_800DDAFC_de;
+        scale.x = g_scenarioPreviewScale;
+        scale.y = g_scenarioPreviewScale;
+        scale.z = g_scenarioPreviewScale;
         angle.x = 0;
         angle.y = 0;
         angle.z = 0;
         position.x = 0;
-        position.y = D_800DDB00;
+        position.y = g_scenarioPreviewPositionY;
         position.z = 0;
         offset.x = 0;
-        offset.y = D_800DDB04;
-        offset.z = D_800DDB08_de;
+        offset.y = g_scenarioPreviewOffsetY;
+        offset.z = g_resultBadgeDrawParameters;
         ((void (*)(void *, s32, CVector3, CVector3))Frontend_InitModelPreviewTransform)(PREVIEW_SCREEN->view, 0, scale, offset);
         ((void (*)(void *, CVector3))Frontend_SetPreviewRotation)(PREVIEW_SCREEN->view, angle);
         ((void (*)(void *, CVector3))Frontend_SetPreviewRotationSpeed)(PREVIEW_SCREEN->view, position);

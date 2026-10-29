@@ -13,13 +13,13 @@ const char g_allocText[8] =
 #endif
 
 #if defined(VERSION_US)
-unsigned short rodata_unresolved_800C3DDE[1] = {
+unsigned short k_CacheAllocatememoryEncodedHalfwords[1] = {
     0x0008,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned short rodata_unresolved_800C419E[1] = {
+unsigned short k_CacheAllocatememoryEncodedHalfwordsBlock1[1] = {
     0xCBEC,
 };
 #endif

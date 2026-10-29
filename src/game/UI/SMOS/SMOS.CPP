@@ -8,7 +8,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 
 s32 Smos_InvokeWidgetCallback(struct Shared_WidgetIdE *widget, sm_dldc event) {
-    WidgetCallback cb = func_8029AA80_find(widget->id);
+    WidgetCallback cb = Menu_FindKindDrawHandler(widget->id);
 
     if (cb != 0) {
         cb(widget, event);
@@ -17,11 +17,11 @@ s32 Smos_InvokeWidgetCallback(struct Shared_WidgetIdE *widget, sm_dldc event) {
     return 0;
 }
 
-void Smos_SetAxisThreshold(int arg0) {
-    D_8014D080->limit = arg0;
+void Smos_SetAxisThreshold(int threshold) {
+    g_screenManager->limit = threshold;
 }
 
 /** Return the word at offset 0x14 of the current global object. */
 unsigned int Smos_GetControlRepeatLimit(void) {
-    return D_8014D080->limit;
+    return g_screenManager->limit;
 }

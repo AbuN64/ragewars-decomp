@@ -20,30 +20,30 @@
 /* Per-frame step of a menu widget flicker: while the effect is armed (state 1) the timer counts down to 0 (capped at 50); at 0 a roll below 2 in 100
    starts the flicker (flag set, current entry shown on the widget, sound 0xE75). While flickering each frame spends one hold count of the current
    entry and moves on to the next entry; after the last one the effect is re-rolled and the timer rewinds to 50. Returns 0. */
-s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
+s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
  s32 entry,timer,next;
- func_80419D04_S1 *widgetOwner = flicker;
- if(flicker->unk84==1) {
-  if(flicker->unk44==0) {
-   timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
-   widgetOwner->unk7C=timer;
+ FlickerUpdateState *widgetOwner = flicker;
+ if(flicker->armed==1) {
+  if(flicker->flickering==0) {
+   timer=flicker->timer-1<0?0:flicker->timer-1>50?50:flicker->timer-1;
+   widgetOwner->timer=timer;
    if(timer<=0 && Graphu64_NextRandom()%100<2) {
-    widgetOwner->unk44=1;
-    widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
+    widgetOwner->flickering=1;
+    widgetOwner->target->value=widgetOwner->entryValues[widgetOwner->entryIndex];
     SoundElement_PlayFlatSound(0xe75);
    }
   } else {
-   flicker->unk78->value=flicker->unk80;
-   flicker->unk60[flicker->unk74]--;
-   entry=flicker->unk74;
-   if(flicker->unk60[entry]<=0 || entry+1>=flicker->unk48) {
-    next=entry+1; flicker->unk74=next;
-    if(flicker->unk48<=next) {
+   flicker->target->value=flicker->restoreValue;
+   flicker->entryHoldCounts[flicker->entryIndex]--;
+   entry=flicker->entryIndex;
+   if(flicker->entryHoldCounts[entry]<=0 || entry+1>=flicker->entryCount) {
+    next=entry+1; flicker->entryIndex=next;
+    if(flicker->entryCount<=next) {
      SmpFlicker_InitFlicker(flicker,-1);
-     flicker->unk78->value=flicker->unk80;
-     flicker->unk7C=50;
+     flicker->target->value=flicker->restoreValue;
+     flicker->timer=50;
     } else {
-     widgetOwner->unk78->value=widgetOwner->unk4C[next];
+     widgetOwner->target->value=widgetOwner->entryValues[next];
      SoundElement_PlayFlatSound(0xe75);
     }
    }
@@ -68,30 +68,30 @@ s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
 /* Per-frame step of a menu widget flicker: while the effect is armed (state 1) the timer counts down to 0 (capped at 50); at 0 a roll below 2 in 100
    starts the flicker (flag set, current entry shown on the widget, sound 0xE75). While flickering each frame spends one hold count of the current
    entry and moves on to the next entry; after the last one the effect is re-rolled and the timer rewinds to 50. Returns 0. */
-s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
+s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
  s32 entry,timer,next;
- func_80419D04_S1 *widgetOwner = flicker;
- if(flicker->unk84==1) {
-  if(flicker->unk44==0) {
-   timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
-   widgetOwner->unk7C=timer;
+ FlickerUpdateState *widgetOwner = flicker;
+ if(flicker->armed==1) {
+  if(flicker->flickering==0) {
+   timer=flicker->timer-1<0?0:flicker->timer-1>50?50:flicker->timer-1;
+   widgetOwner->timer=timer;
    if(timer<=0 && Graphu64_NextRandom()%100<2) {
-    widgetOwner->unk44=1;
-    widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
+    widgetOwner->flickering=1;
+    widgetOwner->target->value=widgetOwner->entryValues[widgetOwner->entryIndex];
     SoundElement_PlayFlatSound(0xe75);
    }
   } else {
-   flicker->unk78->value=flicker->unk80;
-   flicker->unk60[flicker->unk74]--;
-   entry=flicker->unk74;
-   if(flicker->unk60[entry]<=0 || entry+1>=flicker->unk48) {
-    next=entry+1; flicker->unk74=next;
-    if(flicker->unk48<=next) {
+   flicker->target->value=flicker->restoreValue;
+   flicker->entryHoldCounts[flicker->entryIndex]--;
+   entry=flicker->entryIndex;
+   if(flicker->entryHoldCounts[entry]<=0 || entry+1>=flicker->entryCount) {
+    next=entry+1; flicker->entryIndex=next;
+    if(flicker->entryCount<=next) {
      SmpFlicker_InitFlicker(flicker,-1);
-     flicker->unk78->value=flicker->unk80;
-     flicker->unk7C=50;
+     flicker->target->value=flicker->restoreValue;
+     flicker->timer=50;
     } else {
-     widgetOwner->unk78->value=widgetOwner->unk4C[next];
+     widgetOwner->target->value=widgetOwner->entryValues[next];
      SoundElement_PlayFlatSound(0xe75);
     }
    }
@@ -107,30 +107,30 @@ s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
 /* Per-frame step of a menu widget flicker: while the effect is armed (state 1) the timer counts down to 0 (capped at 50); at 0 a roll below 2 in 100
    starts the flicker (flag set, current entry shown on the widget, sound 0xE75). While flickering each frame spends one hold count of the current
    entry and moves on to the next entry; after the last one the effect is re-rolled and the timer rewinds to 50. Returns 0. */
-s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
+s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
  s32 entry,timer,next;
- func_80419D04_S1 *widgetOwner = flicker;
- if(flicker->unk84==1) {
-  if(flicker->unk44==0) {
-   timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
-   widgetOwner->unk7C=timer;
+ FlickerUpdateState *widgetOwner = flicker;
+ if(flicker->armed==1) {
+  if(flicker->flickering==0) {
+   timer=flicker->timer-1<0?0:flicker->timer-1>50?50:flicker->timer-1;
+   widgetOwner->timer=timer;
    if(timer<=0 && Graphu64_NextRandom()%100<2) {
-    widgetOwner->unk44=1;
-    widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
+    widgetOwner->flickering=1;
+    widgetOwner->target->value=widgetOwner->entryValues[widgetOwner->entryIndex];
     SoundElement_PlayFlatSound(0xe75);
    }
   } else {
-   flicker->unk78->value=flicker->unk80;
-   flicker->unk60[flicker->unk74]--;
-   entry=flicker->unk74;
-   if(flicker->unk60[entry]<=0 || entry+1>=flicker->unk48) {
-    next=entry+1; flicker->unk74=next;
-    if(flicker->unk48<=next) {
+   flicker->target->value=flicker->restoreValue;
+   flicker->entryHoldCounts[flicker->entryIndex]--;
+   entry=flicker->entryIndex;
+   if(flicker->entryHoldCounts[entry]<=0 || entry+1>=flicker->entryCount) {
+    next=entry+1; flicker->entryIndex=next;
+    if(flicker->entryCount<=next) {
      SmpFlicker_InitFlicker(flicker,-1);
-     flicker->unk78->value=flicker->unk80;
-     flicker->unk7C=50;
+     flicker->target->value=flicker->restoreValue;
+     flicker->timer=50;
     } else {
-     widgetOwner->unk78->value=widgetOwner->unk4C[next];
+     widgetOwner->target->value=widgetOwner->entryValues[next];
      SoundElement_PlayFlatSound(0xe75);
     }
    }
@@ -146,30 +146,30 @@ s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
 /* Per-frame step of a menu widget flicker: while the effect is armed (state 1) the timer counts down to 0 (capped at 50); at 0 a roll below 2 in 100
    starts the flicker (flag set, current entry shown on the widget, sound 0xE75). While flickering each frame spends one hold count of the current
    entry and moves on to the next entry; after the last one the effect is re-rolled and the timer rewinds to 50. Returns 0. */
-s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
+s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
  s32 entry,timer,next;
- func_80419D04_S1 *widgetOwner = flicker;
- if(flicker->unk84==1) {
-  if(flicker->unk44==0) {
-   timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
-   widgetOwner->unk7C=timer;
+ FlickerUpdateState *widgetOwner = flicker;
+ if(flicker->armed==1) {
+  if(flicker->flickering==0) {
+   timer=flicker->timer-1<0?0:flicker->timer-1>50?50:flicker->timer-1;
+   widgetOwner->timer=timer;
    if(timer<=0 && Graphu64_NextRandom()%100<2) {
-    widgetOwner->unk44=1;
-    widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
+    widgetOwner->flickering=1;
+    widgetOwner->target->value=widgetOwner->entryValues[widgetOwner->entryIndex];
     SoundElement_PlayFlatSound(0xe75);
    }
   } else {
-   flicker->unk78->value=flicker->unk80;
-   flicker->unk60[flicker->unk74]--;
-   entry=flicker->unk74;
-   if(flicker->unk60[entry]<=0 || entry+1>=flicker->unk48) {
-    next=entry+1; flicker->unk74=next;
-    if(flicker->unk48<=next) {
+   flicker->target->value=flicker->restoreValue;
+   flicker->entryHoldCounts[flicker->entryIndex]--;
+   entry=flicker->entryIndex;
+   if(flicker->entryHoldCounts[entry]<=0 || entry+1>=flicker->entryCount) {
+    next=entry+1; flicker->entryIndex=next;
+    if(flicker->entryCount<=next) {
      SmpFlicker_InitFlicker(flicker,-1);
-     flicker->unk78->value=flicker->unk80;
-     flicker->unk7C=50;
+     flicker->target->value=flicker->restoreValue;
+     flicker->timer=50;
     } else {
-     widgetOwner->unk78->value=widgetOwner->unk4C[next];
+     widgetOwner->target->value=widgetOwner->entryValues[next];
      SoundElement_PlayFlatSound(0xe75);
     }
    }
@@ -193,46 +193,46 @@ extern MenuResourceWidget *Cache_AllocateMemory(int);
 extern void Node_InsertWidgetBefore(ResourceSmpFlickerCreateFlickerWidget *, MenuResourceWidget *);
 
 
-void SmpFlicker_InitFlicker(func_80419D04_S1 *flicker, s32 sampleCount);
+void SmpFlicker_InitFlicker(FlickerUpdateState *flicker, s32 sampleCount);
 
 void SmpFlicker_EnableFlicker(struct StateBlock *object);
 
 /* Initializes a flicker effect and randomizes each element's intensity. */
-void SmpFlicker_InitFlicker(func_80419D04_S1 *flicker, s32 sampleCount) {
+void SmpFlicker_InitFlicker(FlickerUpdateState *flicker, s32 sampleCount) {
     s32 i;
     s32 sampleValue;
     s32 offset;
-    int temp;
-    flicker->unk44 = 0;
-    flicker->unk74 = 0;
+    int randomValueDrop;
+    flicker->flickering = 0;
+    flicker->entryIndex = 0;
     if (sampleCount > 0) {
-        flicker->unk48 = sampleCount;
+        flicker->entryCount = sampleCount;
     } else {
-        flicker->unk48 = (s32) (Graphu64_NextRandom() % 5 + 1);
+        flicker->entryCount = (s32) (Graphu64_NextRandom() % 5 + 1);
     }
-    for (i = 0; i < flicker->unk48; i++) {
-        flicker->unk60[i] = (s32) (Graphu64_NextRandom() % 3 + 1);
-        sampleValue = (offset = Graphu64_NextRandom() % 40 + 30, flicker->unk80 - offset) < 0 ? 0 : ((offset = Graphu64_NextRandom() % 40 + 30, flicker->unk80 - offset) >= 0x100 ? 0xFF : (offset = temp = Graphu64_NextRandom() % 40 + 30, flicker->unk80 - offset));
-        flicker->unk4C[i] = sampleValue;
+    for (i = 0; i < flicker->entryCount; i++) {
+        flicker->entryHoldCounts[i] = (s32) (Graphu64_NextRandom() % 3 + 1);
+        sampleValue = (offset = Graphu64_NextRandom() % 40 + 30, flicker->restoreValue - offset) < 0 ? 0 : ((offset = Graphu64_NextRandom() % 40 + 30, flicker->restoreValue - offset) >= 0x100 ? 0xFF : (offset = randomValueDrop = Graphu64_NextRandom() % 40 + 30, flicker->restoreValue - offset));
+        flicker->entryValues[i] = sampleValue;
     }
 }
 
 void SmpFlicker_RegisterFlickerClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB62, D_00419F9C, D_0041A02C, 3);
+    SmSmngr_RegisterElementHandlers(0xB62, g_SmpFlicker_DispatchEventAddress, g_SmpFlicker_IgnoreEventAddress, 3);
 }
 
-MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int arg0, int arg1)
+MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue)
 {
   ResourceSmpFlickerCreateFlickerWidget *r;
   MenuResourceWidget *p;
   int kind;
-  r = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 65535);
+  r = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), widgetResourceId & 65535);
   Node_GetScreenData(GetMenuScreenOwner());
   p = Cache_AllocateMemory(0x88);
   XPlus_FillBytes(p, 0, 0x88);
   p->b = (kind = 0xB62);
   p->resource = r;
-  p->owner.value = arg1;
+  p->owner.value = ownerValue;
   p->c = 8;
   p->a = kind;
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
@@ -255,7 +255,7 @@ MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int arg0, int arg1)
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3330, an actor kind at D_800E3334 and a handler at D_800E3338: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_flickerWidgetEventIds, an actor kind at g_flickerWidgetEventActorKinds and a handler at g_flickerWidgetEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -277,7 +277,7 @@ void SmpFlicker_EnableFlicker(struct StateBlock *object) {
 
 
 
-void SmpFlicker_RestoreFlickerValue(struct SourceRecAt84 *source) {
+void SmpFlicker_RestoreFlickerValue(struct FlickerRestoreView *source) {
     struct ResourceSmpFlickerCreateFlickerWidget *target = source->target;
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
     /* value is the low byte of the word at 0x80, which a little-endian host holds at 0x80. */
@@ -294,7 +294,7 @@ void SmpFlicker_RestoreFlickerValue(struct SourceRecAt84 *source) {
    at offset 0x44 is zero; SmpFlicker_EnableFlicker sets the pending word and SmpFlicker_RestoreFlickerValue clears it. */
 
 
-s32 SmpFlicker_IsFlickerIdle(struct ObjectRecAt84 *object) {
+s32 SmpFlicker_IsFlickerIdle(struct FlickerActivityView *object) {
     if (object->pending == 0) {
         return 1;
     }
@@ -307,23 +307,23 @@ void SmpFlicker_StartFlicker(struct ObjectCode804196C0 *object, s32 count) {
     object->target->value = object->entries[object->index];
 }
 
-s32 SmpFlicker_DispatchEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpFlicker_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E3338 != 0) {
+    if (g_flickerWidgetEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E3338;
+        entry = (char *)&g_flickerWidgetEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E3330)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3334)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_flickerWidgetEventIds)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_flickerWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;

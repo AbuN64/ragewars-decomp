@@ -14,27 +14,27 @@ struct Shared_MenuReply {
 };
 typedef struct Shared_MenuObject Shared_MenuObject;
 struct Shared_MenuObject {
-    u8 unknown00[0x1310];
+    u8 reservedBeforePlayerSettings[0x1310];
     Shared_PlayerSettingsRecord playerSettings[8];
-    u8 unknown17C0;
+    u8 reservedWord;
     u8 language;
-    u8 unknown17C2[0x2E];
+    u8 reservedTail[0x2E];
 };
 typedef struct Shared_MenuData Shared_MenuData;
 struct Shared_MenuData {
     union {
         struct {
-            u32 unknown00[18];
+            u32 reservedPrefix[18];
             Shared_MenuObject object;
             s32 stage;
-            u32 unknown183C[6];
+            u32 reservedBeforePause[6];
             s32 pause;
         };
         struct {
             u8 reserved0000[0x5DC];
-            struct func_8025E5B0_S1 dialogOwner; /* D_8014561C */
-            u8 reserved05F2[0x1288 - 0x5DC - sizeof(struct func_8025E5B0_S1)];
-            Shared_Game game; /* D_801462C8; language at root + 0x1809 */
+            struct MenuCreationOwnerView dialogOwner; /* g_matchEndingTeamWheelClose */
+            u8 reserved05F2[0x1288 - 0x5DC - sizeof(struct MenuCreationOwnerView)];
+            Shared_Game game; /* g_gameSettings; language at root + 0x1809 */
         };
     };
 };
@@ -51,7 +51,7 @@ struct Shared_MenuContext {
     u32 unknown08;
     Shared_MenuVoidCallback onClose;
     Shared_MenuVoidCallback callback10;
-    u32 unknown14;
+    u32 reservedWord1;
     struct SharedTrackObject *target;
     f32 time;
     f32 time20;
@@ -62,33 +62,33 @@ struct Shared_MenuContext {
     f32 end;
     s32 active;
     s32 state3C;
-    u32 unknown40;
+    u32 sequenceStarted;
     s32 initialized44;
     s32 closed;
     s32 field4C;
-    s32 field50;
+    s32 sequenceAdvanceRequested;
     s32 pending;
-    s32 field58;
-    u32 unknown5C;
-    u32 unknown60;
+    s32 pendingTrackId;
+    u32 noPendingTrackRequests;
+    u32 fadeRequested;
     f32 fade;
-    EntryRecAt48 spec; /* 0x68..0xB3 */
-    s32 fieldB4;
+    TrackResourceEntry spec; /* 0x68..0xB3 */
+    s32 sequenceEndRequested;
     s32 mode; /* 0xB8 */
-    u32 unknownBC[7];
+    u32 reservedElements[7];
     s32 targetD8;
     s32 resourceDC;
     s32 requestE0;
     Shared_ContextCallback callbackE4;
     Shared_MenuVoidCallback callbackE8;
-    u32 unknownEC;
+    u32 reservedWord2;
     CVector3 position;
     f32 yaw;
     f32 response; /* 0x100 */
-    s32 unknown104[5];
+    s32 loopBounds[5];
     char messages[5][0x28];
     s32 messageCount;
 };
 /* The context the camera and menu code works on. */
-extern Shared_MenuContext *D_800E2830;
+extern Shared_MenuContext *g_cinemaSequenceState;
 #endif

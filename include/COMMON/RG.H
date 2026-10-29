@@ -10,20 +10,20 @@ struct Func8043D458Arg {
 };
 
 
-extern s32 D_800D3D14;
-extern s32 D_800D3D18;
-extern s32 D_800D3D1C;
-extern s32 D_800D3D20;
-extern s32 D_800D3D24;
-extern s32 D_800D3D28;
-extern s32 D_800D3D2C;
-extern s32 D_800D3D30;
-extern s32 D_800D3D34;
-extern s32 D_800D3D38;
-extern s32 D_800D3D3C;
-extern s32 D_800D3D40;
-extern s32 D_800D3D44;
-extern s32 D_800D3D48;
-extern s32 D_800D3D4C;
-extern s32 D_800D3D50;
+extern s32 g_menuToggleRow2EnabledText;
+extern s32 g_menuToggleRow2DisabledText;
+extern s32 g_menuToggleRow3EnabledText;
+extern s32 g_menuToggleRow3DisabledText;
+extern s32 g_menuToggleRow4EnabledText;
+extern s32 g_menuToggleRow4DisabledText;
+extern s32 g_menuToggleRow5EnabledText;
+extern s32 g_menuToggleRow5DisabledText;
+extern s32 g_menuToggleRow6EnabledText;
+extern s32 g_menuToggleRow6DisabledText;
+extern s32 g_menuToggleRow7EnabledText;
+extern s32 g_menuToggleRow7DisabledText;
+extern s32 g_menuToggleRow8EnabledText;
+extern s32 g_menuToggleRow8DisabledText;
+extern s32 g_menuToggleRow9EnabledText;
+extern s32 g_menuToggleRow9DisabledText;
 #endif

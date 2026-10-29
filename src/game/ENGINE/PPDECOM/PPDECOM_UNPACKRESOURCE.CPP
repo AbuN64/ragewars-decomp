@@ -10,7 +10,7 @@
 
 void Cache_ReplaceResourceBlock(s32, void **, void *);
 void * Cache_AllocResourceBlock(s32, void *, s32);
-void * func_80254600_de(s32, s32, s32);
+void * Cache_AllocatePinnedResourceBlock(s32, s32, s32);
 
  /* extern */
 /* extern */
@@ -19,25 +19,25 @@ s32 Ppdecom_UnpackResource(void **handle, s32 retainUncompressed) {
     s32 succeeded;
     u8 compressionMethod;
     void **block;
-    ObjRecAt4V2 *sourceBlock;
-    ObjRecAt12 *packedHeader;
-    ObjRecAt4V2 *copySourceBlock;
+    ResourcePayloadSizeView *sourceBlock;
+    RncCompressedResourceHeaderView *packedHeader;
+    ResourcePayloadSizeView *copySourceBlock;
     sourceBlock = *handle;
-    packedHeader = sourceBlock->unk0;
-    if ((packedHeader->unk0 & ~0xFF) == 0x524E4300) {
+    packedHeader = sourceBlock->payload;
+    if ((packedHeader->magicAndMethod & ~0xFF) == 0x524E4300) {
         if (retainUncompressed != 0) {
-            block = func_80254600_de(0, (s32) handle, packedHeader->unk4);
+            block = Cache_AllocatePinnedResourceBlock(0, (s32) handle, packedHeader->decodedByteCount);
         } else {
-            block = Cache_AllocResourceBlock(0, handle, packedHeader->unk4);
+            block = Cache_AllocResourceBlock(0, handle, packedHeader->decodedByteCount);
         }
         if (block != NULL) {
-            compressionMethod = packedHeader->unk0; /* the method: low byte of the RNC magic word */
+            compressionMethod = packedHeader->magicAndMethod; /* the method: low byte of the RNC magic word */
             switch (compressionMethod) {
             case 1:
-                Rnc_UnpackMethod1(&packedHeader->unk12, *block, packedHeader->unk8, packedHeader->unk4);
+                Rnc_UnpackMethod1(&packedHeader->payloadStart, *block, packedHeader->packedByteCount, packedHeader->decodedByteCount);
                 break;
             case 2:
-                Rnc_UnpackMethod2(packedHeader, *block, packedHeader->unk8, packedHeader->unk4);
+                Rnc_UnpackMethod2(packedHeader, *block, packedHeader->packedByteCount, packedHeader->decodedByteCount);
                 break;
             default:
                 break;
@@ -47,11 +47,11 @@ s32 Ppdecom_UnpackResource(void **handle, s32 retainUncompressed) {
             succeeded = 0;
         }
     } else if (retainUncompressed == 0) {
-        block = Cache_AllocResourceBlock(0, handle, sourceBlock->unk4);
+        block = Cache_AllocResourceBlock(0, handle, sourceBlock->byteCount);
         if (block != NULL) {
             copySourceBlock = *handle;
             succeeded = 1;
-            func_802BD3A0_de(*block, copySourceBlock->unk0, copySourceBlock->unk4);
+            Libc_CopyBytes(*block, copySourceBlock->payload, copySourceBlock->byteCount);
         } else {
             succeeded = 0;
         }
@@ -65,6 +65,6 @@ done:
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_80285208[8] =
+char s_PpdecomUnpackresourceChannelsText[8] =
     "Channels";
 #endif

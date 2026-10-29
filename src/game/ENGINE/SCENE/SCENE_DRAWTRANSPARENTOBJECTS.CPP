@@ -1,5 +1,5 @@
 #include "COMMON/FLOOR_RESOURCE.H"
-#include "COMMON/LONE/D_800CD764_de.H"
+#include "COMMON/LONE/SCREEN_IMAGE_RESOURCES_ENABLED.H"
 #include "include_asm.h"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
@@ -21,22 +21,22 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "VOICE/VOICE.H"
 
-void Scene_UpdateAndDrawWorld(void *arg0) {
+void Scene_UpdateAndDrawWorld(void *world) {
     Shared_World *state;
     Shared_Game *input;
     s32 old_flags;
 
-    state = arg0;
-    input = &D_801462C8;
-    old_flags = D_800CD3F0;
-    D_800CD3F0 = input->buttons;
+    state = world;
+    input = &g_gameSettings;
+    old_flags = g_litGeometryResourceKeyFlags;
+    g_litGeometryResourceKeyFlags = input->buttons;
     if (input->flags & 0x4000) {
-        D_800CD3F0 |= 0x100;
+        g_litGeometryResourceKeyFlags |= 0x100;
     }
     if (input->flags & 0x8000) {
-        D_800CD3F0 |= 0x200;
+        g_litGeometryResourceKeyFlags |= 0x200;
     }
-    if (old_flags != D_800CD3F0) {
+    if (old_flags != g_litGeometryResourceKeyFlags) {
         D_800CD3F4 = 1;
         Cache_SetResourceActivityState(8);
     } else {
@@ -52,29 +52,29 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
     {
         void *manager;
 
-        manager = &D_801379C0;
+        manager = &g_actorParticleScene;
         Fx_ResetRibbonVertexPool(manager);
-        func_8022A170_de(&D_80145040);
+        Playerai_RotatePlayerPoseBuffers(&g_playerViewRenderContext);
         Scene_UpdateActorVisibility(state);
         Scene_RequestVisibleGridSections(state);
         Scene_CollectVisibleEffects(state);
 
-        if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
+        if ((state->frozen == 0) && (g_frontendScreenStatus.status[7] == 0)) {
             Fx_UpdateEffectLists(manager);
             Scene_UpdateActorsAndRoundState(state);
             SetN64_UpdateEffectPool(&state->system11778);
-            state->elapsed += D_800D2988 * D_800C50E4_de;
+            state->elapsed += g_frameElapsedTime * D_800C50E4_de;
             Scene_UpdateTriggerTimers(state);
         }
     }
 
     Particle_UpdateSystem(state->system1B08);
     if (state->frozen == 0) {
-        func_802285E8_de(&D_80145040);
+        Playerai_StopInactivePlayerSounds(&g_playerViewRenderContext);
     }
 
-    Camera_DrawActiveViews(&D_80145088, state);
-    if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
+    Camera_DrawActiveViews(&g_frontendScreenStatus, state);
+    if ((state->frozen == 0) && (g_frontendScreenStatus.status[7] == 0)) {
         Scene_UpdateStaticEventInstances(state);
     }
     Scene_UnlockActiveSectionResources(state);
@@ -83,15 +83,15 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
 
 
 
-extern void func_8024BE3C_de(void *base);
-extern void func_80246E44_de(char *);
+extern void Gobjinst_UpdateActorController(void *base);
+extern void Gobjinst_UpdateActorRootDisplacement(char *);
 extern s32 SetN64_IsModeThirteen(void);
 extern void Player_UpdateWorldPlayers(void *world);
 extern s32 Playerai_BeginRoundEnd(void *forcePlayerList);
 
 
 
-extern void *func_8025CC6C_de(void);
+extern void *SoundVoicePool_GetGlobalState(void);
 
 
 
@@ -101,7 +101,7 @@ extern void *func_8025CC6C_de(void);
 
 
 
-void Scene_UpdateActorsAndRoundState(void *arg0) {
+void Scene_UpdateActorsAndRoundState(void *world) {
     s32 count;
     s32 total;
     u32 skip_mask;
@@ -115,8 +115,8 @@ void Scene_UpdateActorsAndRoundState(void *arg0) {
     u32 remove_value;
 
     count = 0;
-    total = ((SceneRecAt10C0 *)arg0)->count;
-    objects = &((SceneRecAt10C0 *)(arg0))->objects[0];
+    total = ((SceneActorUpdateLists *)world)->count;
+    objects = &((SceneActorUpdateLists *)(world))->objects[0];
     if (total > 0) {
         object_type = 2;
         skip_mask = 0x40000000;
@@ -127,32 +127,32 @@ void Scene_UpdateActorsAndRoundState(void *arg0) {
             void *next_object;
 
             next_object = (void *)*objectp;
-            if (*((ObjectRecAt1A4 *)(next_object))->kind != object_type) {
+            if (*((SceneNearestActorView *)(next_object))->kind != object_type) {
                 goto first_pass_done;
             }
             object = next_object;
             objectp++;
             flags = ((Shared_Actor *)object)->weaponFlags;
-            saved_delta = D_800D2988;
+            saved_delta = g_frameElapsedTime;
             count++;
             if (!(flags & skip_mask)) {
-                func_8024BE3C_de(object);
+                Gobjinst_UpdateActorController(object);
             }
             if ((((Shared_Actor *)object)->weaponFlags & remove_mask) == remove_value) {
-                func_80246E44_de(object);
+                Gobjinst_UpdateActorRootDisplacement(object);
             }
-            D_800D2988 = saved_delta;
+            g_frameElapsedTime = saved_delta;
         } while (count < total);
     }
 
 first_pass_done:
     if (SetN64_IsModeThirteen()) {
-        Player_UpdateWorldPlayers(&D_80145040);
+        Player_UpdateWorldPlayers(&g_playerViewRenderContext);
     }
-    if (Playerai_BeginRoundEnd(&D_80145040)) {
-        func_8025E2D4_de(0x34);
+    if (Playerai_BeginRoundEnd(&g_playerViewRenderContext)) {
+        SoundElement_SetMusicPlaybackEnabled(0x34);
         {
-        s32 sw_mode_value = ((GlobalMode *)&D_80145040)->mode;
+        s32 sw_mode_value = ((GlobalMode *)&g_playerViewRenderContext)->mode;
         if ((unsigned int)sw_mode_value > 4) {
             goto sw_mode_default;
         }
@@ -174,7 +174,7 @@ first_pass_done:
         sw_mode_4:
             Achieve_OpenResultsFrontend();
             break;
-        
+
     sw_mode_default:;
     } while (0);
     }
@@ -184,20 +184,20 @@ first_pass_done:
         do {
             object = (void *)*objectp;
             objectp++;
-            saved_delta = D_800D2988;
-            func_8024BE3C_de(object);
+            saved_delta = g_frameElapsedTime;
+            Gobjinst_UpdateActorController(object);
             count++;
             if (((Shared_Actor *)object)->weaponFlags & 0x2000) {
-                func_80246E44_de(object);
+                Gobjinst_UpdateActorRootDisplacement(object);
             }
-            D_800D2988 = saved_delta;
+            g_frameElapsedTime = saved_delta;
         } while (count < total);
     }
-    func_8025CB88_de(func_8025CC6C_de());
+    SoundVoicePool_RetireFinishedSounds(SoundVoicePool_GetGlobalState());
 }
 
 extern Gfx *g_displayListCursor;
-extern char D_0028DFE4[], D_0028E044[];
+extern char g_scene_SwapDistanceSortEntriesEntry[], g_scene_CompareDistanceDescendingEntry[];
 typedef struct SortEntry { void *object; f32 distance; } SortEntry;
 extern void Gsky_GetObjectPositionAt260(void *, void *);
 extern void PpDecom_QuickSortRecords(void *, s32, s32, void *, void *);
@@ -263,7 +263,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
         entries[i].object = object;
         entries[i].distance = x * x + y * y + z * z;
     }
-    PpDecom_QuickSortRecords(entries, count, 8, D_0028E044, D_0028DFE4);
+    PpDecom_QuickSortRecords(entries, count, 8, g_scene_CompareDistanceDescendingEntry, g_scene_SwapDistanceSortEntriesEntry);
     Geometry_BeginModelBatch();
     for (i = 0; i < count; i++) {
         object = entries[i].object;
@@ -309,7 +309,7 @@ s32 Scene_FindFloorPolygon(Shared_World *world, CVector3 *pos) {
     s32 index;
     s32 i;
     u32 j;
-    if (D_800CD764_de == 0) {
+    if (g_screenImageResourcesEnabled == 0) {
         return 0;
     }
     polygonTable = SetN64_GetPackSection(world->modelSections, 2);

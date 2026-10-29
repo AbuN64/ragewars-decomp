@@ -11,8 +11,8 @@
 /* Seeds an actor record from its definition: clears the sound handle, pending flag and channel, copies the
    definition's first, second and send bytes into the source object, and takes the health from the
    definition (unsigned for kinds 1 and 4, with kind 1's two levels; signed short for kind 7). For kinds 1
-   and 4 the scene mask scales it: 8 by D_800C2118_de with a floor and no second level, 0x20 by
-   D_800C2120_de with second level D_800C2124_de. The health is kept as 24.8 fixed point. */
+   and 4 the scene mask scales it: 8 by g_actorSceneMaskEightHealthLimits with a floor and no second level, 0x20 by
+   g_actorSceneMaskTwentyHealthScale with second level g_actorSceneMaskTwentySecondaryLevel. The health is kept as 24.8 fixed point. */
 void Actor_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Source *source) {
     s32 send;
     s32 first;
@@ -25,8 +25,8 @@ void Actor_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Sourc
     s32 raw;
 
     send = 0;
-    level = D_800C2100_de;
-    level2 = (&D_800C2100_de)[1];
+    level = g_actorDefaultLevelPair;
+    level2 = (&g_actorDefaultLevelPair)[1];
     first = 0;
     second = 0;
     actor->handle = -1;
@@ -42,7 +42,7 @@ void Actor_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Sourc
             raw = ((ActorHealthDefinition *)def)->health;
             wide = raw;
             if (raw < 0) {
-                wide += D_800C2108_de;
+                wide += g_actorKindOneUnsignedHealthBias;
             }
             level = ((MovementDescriptor *)def)->level;
             level2 = ((MovementDescriptor *)def)->secondaryLevel;
@@ -52,7 +52,7 @@ void Actor_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Sourc
             raw = ((ActorHealthDefinition *)def)->health;
             wide = raw;
             if (raw < 0) {
-                wide += D_800C2110_de;
+                wide += g_actorKindFourUnsignedHealthBias;
             }
             pitch = wide;
             break;
@@ -61,18 +61,18 @@ void Actor_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Sourc
             break;
         }
         if (((ActorDefinitionHeader *)def)->kind == 1 || ((ActorDefinitionHeader *)def)->kind == 4) {
-            switch (D_801462C8.sceneMask) {
+            switch (g_gameSettings.sceneMask) {
             case 8:
-                scaled = pitch * D_800C2118_de;
+                scaled = pitch * g_actorSceneMaskEightHealthLimits;
                 level2 = 0.0f;
-                if (scaled < (&D_800C2118_de)[1]) {
-                    scaled = (&D_800C2118_de)[1];
+                if (scaled < (&g_actorSceneMaskEightHealthLimits)[1]) {
+                    scaled = (&g_actorSceneMaskEightHealthLimits)[1];
                 }
                 pitch = scaled;
                 break;
             case 0x20:
-                level2 = D_800C2124_de;
-                pitch *= D_800C2120_de;
+                level2 = g_actorSceneMaskTwentySecondaryLevel;
+                pitch *= g_actorSceneMaskTwentyHealthScale;
                 break;
             }
         }
@@ -104,10 +104,10 @@ void Actor_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *ca
     s32 value;
     u32 bits;
 
-    saved = actor->field68;
+    saved = actor->animation;
     XPlus_FillMemory(actor, 0, sizeof(Dest));
     actor->flags = 0x40;
-    actor->field68 = saved;
+    actor->animation = saved;
     Actor_ApplyActorDefinition(actor, source->definition, source->position, source);
     actor->callback11C = &ACTOR_TABLE_A;
     actor->draw = &ACTOR_TABLE_B;
@@ -116,9 +116,9 @@ void Actor_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *ca
     actor->entry = NULL;
     actor->initialPosition = source->position;
     actor->previousPosition = source->position;
-    actor->field6C[0] = 0;
-    actor->field6C[1] = 0;
-    actor->field6C[2] = 0;
+    actor->animationCount[0] = 0;
+    actor->animationCount[1] = 0;
+    actor->animationCount[2] = 0;
     actor->initialHeight = source->height;
     actor->cueTimer = 0;
     actor->field78[0] = 0;

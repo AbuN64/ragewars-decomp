@@ -10,14 +10,14 @@
    from n are its own constants. */
 
 
-extern const f64 D_800C7810_de[5];  /* P */
-extern const f64 D_800C7838_de;     /* rpi */
-extern const f64 D_800C7840_de;     /* pihi */
-extern const f64 D_800C7848_de;     /* pilo */
-extern const f32 D_800C7850_de;     /* zero */
-extern const double D_800C7858_de; /* 0.5 */
-extern const double D_800C7860_de; /* 0.0 */
-extern const double D_800C7868_de; /* 0.5 */
+extern const f64 g_cosinePolynomialCoefficients[5];  /* P */
+extern const f64 g_cosineInversePi;     /* rpi */
+extern const f64 g_cosinePiHigh;     /* pihi */
+extern const f64 g_cosinePiLow;     /* pilo */
+extern const f32 g_cosineLargeAngleZero;     /* zero */
+extern const double g_cosineRoundingHalf; /* 0.5 */
+extern const double g_cosineRoundingSignBoundary; /* 0.0 */
+extern const double g_cosineQuadrantOffset; /* 0.5 */
 
 float Math_Cosf(float x)
 {
@@ -37,19 +37,19 @@ float Math_Cosf(float x)
 
         dx = absx;
 
-        dn = dx * D_800C7838_de + D_800C7858_de;
-        n = (dn >= D_800C7860_de) ? (int)(dn + D_800C7858_de) : (int)(dn - D_800C7858_de);
+        dn = dx * g_cosineInversePi + g_cosineRoundingHalf;
+        n = (dn >= g_cosineRoundingSignBoundary) ? (int)(dn + g_cosineRoundingHalf) : (int)(dn - g_cosineRoundingHalf);
         dn = n;
 
-        dn -= D_800C7868_de;
+        dn -= g_cosineQuadrantOffset;
 
-        dx = dx - dn * D_800C7840_de;
-        dx = dx - dn * D_800C7848_de;
+        dx = dx - dn * g_cosinePiHigh;
+        dx = dx - dn * g_cosinePiLow;
 
         xsq = dx * dx;
 
         {
-            const f64 *P = D_800C7810_de;
+            const f64 *P = g_cosinePolynomialCoefficients;
 
             poly = ((P[4] * xsq + P[3]) * xsq + P[2]) * xsq + P[1];
         }
@@ -62,7 +62,7 @@ float Math_Cosf(float x)
         return -(float)result;
     }
 
-    return D_800C7850_de;
+    return g_cosineLargeAngleZero;
 }
 
 #if defined(VERSION_EU_X)

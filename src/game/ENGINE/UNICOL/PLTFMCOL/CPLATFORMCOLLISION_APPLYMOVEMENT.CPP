@@ -7,7 +7,7 @@ extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /** Set flag 8 in the first object and flag 0x10 in the second. */
 void CPlatformCollision_MarkBlocked(void *first, void *second) {
-    ActorRecAtB0 *actor = first;
+    PlatformSavedCollisionQueryView *actor = first;
     InputCPlatformCollisionLiftActorToSurface *input = second;
     actor->flags |= 8;
     input->flags38 |= 0x10;

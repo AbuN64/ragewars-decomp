@@ -1,7 +1,7 @@
 #include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "sdk/OSINT/CREATE.H"
-#include "sdk/libultra/os/802BDEA0.h"
+#include "sdk/libultra/os/pi_device_manager_operations.h"
 
 /* 802BDEA0.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
@@ -9,7 +9,7 @@
 #include "COMMON/OSVISCALE.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
-extern OSDevMgr D_800D4360;
+extern OSDevMgr g_piManagerState;
 extern void osSetEventMesg(s32, OSMesgQueue *, s32);
 extern s32 osGetThreadPri(struct OSThread_s *);
 extern void Scene_SetThreadPriority(struct OSThread_s *, s32);
@@ -21,17 +21,17 @@ void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
     s32 oldPri;
     s32 myPri;
 
-    if (D_800D4360.active) {
+    if (g_piManagerState.active) {
         return;
     }
     osCreateMesgQueue(cmdQ, cmdBuf, cmdMsgCnt);
-    osCreateMesgQueue(&D_801486A0, D_801486B8, 1);
+    osCreateMesgQueue(&g_peripheralManagerAccessQueue, g_peripheralAccessMessages, 1);
 
-    if (!D_800D83C0[0]) {
+    if (!g_peripheralAccessQueueInitialized[0]) {
         __osPiCreateAccessQueue();
     }
 
-    osSetEventMesg(8, &D_801486A0, 0x22222222);
+    osSetEventMesg(8, &g_peripheralManagerAccessQueue, 0x22222222);
     oldPri = -1;
     myPri = osGetThreadPri(0);
 
@@ -41,15 +41,15 @@ void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
     }
 
     savedMask = __osDisableInt();
-    D_800D4360.active = 1;
-    D_800D4360.acsQueue = &D_8014EA58;
-    D_800D4360.dma = D_002B9A40;
-    D_800D4360.edma = D_002B93B0;
-    D_800D4360.evtQueue = &D_801486A0;
-    D_800D4360.thread = &D_80147470;
-    D_800D4360.cmdQueue = cmdQ;
-    osCreateThread(&D_80147470, 0, D_002B9010, &D_800D4360, D_801476A0 + sizeof(D_801476A0), pri);
-    osStartThread(&D_80147470);
+    g_piManagerState.active = 1;
+    g_piManagerState.acsQueue = &g_peripheralDmaAccessQueue;
+    g_piManagerState.dma = System_PeripheralRawDmaEntry;
+    g_piManagerState.edma = System_PeripheralExtendedDmaEntry;
+    g_piManagerState.evtQueue = &g_peripheralManagerAccessQueue;
+    g_piManagerState.thread = &g_peripheralManagerThread;
+    g_piManagerState.cmdQueue = cmdQ;
+    osCreateThread(&g_peripheralManagerThread, 0, System_PeripheralManagerThreadEntry, &g_piManagerState, g_peripheralManagerThreadStack + sizeof(g_peripheralManagerThreadStack), pri);
+    osStartThread(&g_peripheralManagerThread);
     __osRestoreInt(savedMask);
 
     if (oldPri != -1) {
@@ -70,7 +70,7 @@ unsigned int func_802B8F48_de_padding_B9DE8[2] = {
 #include "COMMON/OSVISCALE.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
-extern OSDevMgr D_800D4360;
+extern OSDevMgr g_piManagerState;
 extern void osSetEventMesg(s32, OSMesgQueue *, s32);
 extern s32 osGetThreadPri(struct OSThread_s *);
 extern void Scene_SetThreadPriority(struct OSThread_s *, s32);
@@ -82,17 +82,17 @@ void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
     s32 oldPri;
     s32 myPri;
 
-    if (D_800D4360.active) {
+    if (g_piManagerState.active) {
         return;
     }
     osCreateMesgQueue(cmdQ, cmdBuf, cmdMsgCnt);
-    osCreateMesgQueue(&D_801486A0, D_801486B8, 1);
+    osCreateMesgQueue(&g_peripheralManagerAccessQueue, g_peripheralAccessMessages, 1);
 
-    if (!D_800D83C0[0]) {
+    if (!g_peripheralAccessQueueInitialized[0]) {
         __osPiCreateAccessQueue();
     }
 
-    osSetEventMesg(8, &D_801486A0, 0x22222222);
+    osSetEventMesg(8, &g_peripheralManagerAccessQueue, 0x22222222);
     oldPri = -1;
     myPri = osGetThreadPri(0);
 
@@ -102,15 +102,15 @@ void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
     }
 
     savedMask = __osDisableInt();
-    D_800D4360.active = 1;
-    D_800D4360.acsQueue = &D_8014EA58;
-    D_800D4360.dma = D_002B9A40;
-    D_800D4360.edma = D_002B93B0;
-    D_800D4360.evtQueue = &D_801486A0;
-    D_800D4360.thread = &D_80147470;
-    D_800D4360.cmdQueue = cmdQ;
-    osCreateThread(&D_80147470, 0, D_002B9010, &D_800D4360, D_801476A0 + sizeof(D_801476A0), pri);
-    osStartThread(&D_80147470);
+    g_piManagerState.active = 1;
+    g_piManagerState.acsQueue = &g_peripheralDmaAccessQueue;
+    g_piManagerState.dma = System_PeripheralRawDmaEntry;
+    g_piManagerState.edma = System_PeripheralExtendedDmaEntry;
+    g_piManagerState.evtQueue = &g_peripheralManagerAccessQueue;
+    g_piManagerState.thread = &g_peripheralManagerThread;
+    g_piManagerState.cmdQueue = cmdQ;
+    osCreateThread(&g_peripheralManagerThread, 0, System_PeripheralManagerThreadEntry, &g_piManagerState, g_peripheralManagerThreadStack + sizeof(g_peripheralManagerThreadStack), pri);
+    osStartThread(&g_peripheralManagerThread);
     __osRestoreInt(savedMask);
 
     if (oldPri != -1) {

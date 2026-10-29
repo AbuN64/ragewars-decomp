@@ -1,16 +1,16 @@
 #include "COMMON/EXTERNS.H"
-#include "COMMON/LONE/D_801051A0.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/LONE/RUNTIME_HEAP.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ENTRYRECAT18V3.H"
 #include "TYPES.H"
 #include "AUDIO/HASHTABLE.H"
 
-/* Creates the address hash table: rounds the requested capacity up to a power of two, allocates twice that many 16-byte slots from pool D_801051A0 (keeping the half size, slot count and both index masks in globals), and clears every slot, numbering each with its index. */
+/* Creates the address hash table: rounds the requested capacity up to a power of two, allocates twice that many 16-byte slots from pool g_runtimeHeap (keeping the half size, slot count and both index masks in globals), and clears every slot, numbering each with its index. */
 
 
 
-extern s32 D_80101190;
-extern EntryRecAtCV1 *func_80255920_de(void *, s32);
+extern s32 g_resourceHashEvenIndexMask;
+extern CacheHashEntry *Heap_AllocateFromFront(void *, s32);
 
 void HashTable_InitializeResourceTable(s32 capacity)
 {
@@ -31,16 +31,16 @@ void HashTable_InitializeResourceTable(s32 capacity)
         top++;
     }
     half = 1 << top;
-    D_800CB6F4 = half * 2;
-    D_800CB6F0 = half;
-    D_80101190 = D_800CB6F4 - 2;
-    D_80101198 = D_800CB6F4 - 1;
-    D_80101194 = func_80255920_de(&D_801051A0, half << 5);
-    for (n = 0; n < D_800CB6F4; n++) {
-        D_80101194[n].value = 0;
-        D_80101194[n].key = 0;
-        D_80101194[n].next = 0;
-        D_80101194[n].index = n;
+    g_resourceHashSlotCount = half * 2;
+    g_resourceHashBucketCount = half;
+    g_resourceHashEvenIndexMask = g_resourceHashSlotCount - 2;
+    g_resourceHashIndexMask = g_resourceHashSlotCount - 1;
+    g_resourceHashBuckets = Heap_AllocateFromFront(&g_runtimeHeap, half << 5);
+    for (n = 0; n < g_resourceHashSlotCount; n++) {
+        g_resourceHashBuckets[n].value = 0;
+        g_resourceHashBuckets[n].key = 0;
+        g_resourceHashBuckets[n].next = 0;
+        g_resourceHashBuckets[n].index = n;
     }
 }
 
@@ -53,15 +53,15 @@ void HashTable_InitializeResourceTable(s32 capacity)
 typedef struct Shared_HashLink Shared_HashLink;
 
 struct Shared_HashLink {
-    u32 unknown0[3];
+    u32 key[3];
     Shared_HashLink *next;
 };
 
 
 void HashTable_SetResourceByKey(u32 key, struct ResourceLoadRequest *value) {
- EntryRecAtCV1 *entry = D_80101194 + (((key<<5)^(key>>1)^(key>>9)^(key>>17)) & D_80101190);
- EntryRecAtCV1 *tail;
- EntryRecAtCV1 *slot;
+ CacheHashEntry *entry = g_resourceHashBuckets + (((key<<5)^(key>>1)^(key>>9)^(key>>17)) & g_resourceHashEvenIndexMask);
+ CacheHashEntry *tail;
+ CacheHashEntry *slot;
  s32 index;
  if (entry->value == 0) {entry->key=key;entry->value=value;return;}
  tail=entry;
@@ -72,22 +72,22 @@ void HashTable_SetResourceByKey(u32 key, struct ResourceLoadRequest *value) {
   tail=entry;
  }
  index=tail->index|1;
- while (D_80101194[index].value != 0) {index+=2; index &= D_80101198;}
- slot=(EntryRecAtCV1 *)((index << 4) + (u32)D_80101194);
+ while (g_resourceHashBuckets[index].value != 0) {index+=2; index &= g_resourceHashIndexMask;}
+ slot=(CacheHashEntry *)((index << 4) + (u32)g_resourceHashBuckets);
  slot->key=key;slot->value=value;tail->next=slot;
 }
 
 void HashTable_RemoveResourceByKey(s32 resourceKey) {
     s32 key;
-    EntryRecAtCV1 *preservedEntry;
-    EntryRecAtCV1 *successorEntry;
-    EntryRecAtCV1 *previousEntry;
-    EntryRecAtCV1 *entryToClear;
+    CacheHashEntry *preservedEntry;
+    CacheHashEntry *successorEntry;
+    CacheHashEntry *previousEntry;
+    CacheHashEntry *entryToClear;
 
     key = resourceKey;
-    entryToClear = D_80101194 + (((key << 5) ^ ((u32)key >> 1) ^
+    entryToClear = g_resourceHashBuckets + (((key << 5) ^ ((u32)key >> 1) ^
                             ((u32)key >> 9) ^ ((u32)key >> 0x11)) &
-                           D_80101190);
+                           g_resourceHashEvenIndexMask);
     previousEntry = 0;
     if (entryToClear->key != key) {
 loop:
@@ -144,7 +144,7 @@ s32 HashTable_RoundCapacityToPowerOfTwo(s32 mask) {
     return 1 << highestBit;
 }
 
-void func_8025558C_de(void) {
+void HashTable_GetMaximumResourceChainLength(void) {
     s32 maximumChainLength;
     s32 scanCount;
     u32 i;
@@ -155,7 +155,7 @@ void func_8025558C_de(void) {
 
     maximumChainLength = 0;
     i = maximumChainLength;
-    limit = D_800CB6F0;
+    limit = g_resourceHashBucketCount;
     if (limit != 0) {
         scanCount = limit;
         do {
@@ -163,8 +163,8 @@ void func_8025558C_de(void) {
         } while (i < (u32)scanCount);
     }
     j = 0;
-    if (D_800CB6F0 != 0) {
-        buckets = (Shared_HashLink *)D_80101194;
+    if (g_resourceHashBucketCount != 0) {
+        buckets = (Shared_HashLink *)g_resourceHashBuckets;
         do {
             chainEntry = &buckets[j];
             scanCount = 0;
@@ -179,9 +179,9 @@ void func_8025558C_de(void) {
             }
             j += 1;
             maximumChainLength = scanCount;
-        } while (j < D_800CB6F0);
+        } while (j < g_resourceHashBucketCount);
     }
-    if (D_800CB6F8 != 0) {
-        D_800CB6F8 = 0;
+    if (g_resourceHashInitialized != 0) {
+        g_resourceHashInitialized = 0;
     }
 }

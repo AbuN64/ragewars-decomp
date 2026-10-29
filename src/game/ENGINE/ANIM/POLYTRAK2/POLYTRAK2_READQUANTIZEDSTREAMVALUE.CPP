@@ -48,7 +48,7 @@ static inline f32 decode(u32 *stream, Func802608ECResult range) {
     }
     converted = (s32) value;
     if ((s32) value < 0) {
-        converted += D_800C4190_de;
+        converted += g_packedStreamUnsignedBias;
     }
     result = (f32) converted;
     result /= (f32) ((1 << width) - 1);
@@ -143,7 +143,7 @@ char *Polytrak2_AppendOutputPackSection(Pack *pack, const void *source, s32 size
     pack->offsets[i + 1] = pack->offsets[i] + size;
     data = (char *)pack + pack->offsets[i];
     if (source) {
-        func_802BD3A0_de(data, source, size);
+        Libc_CopyBytes(data, source, size);
     }
     return data;
 }

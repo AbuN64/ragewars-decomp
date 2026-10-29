@@ -1,13 +1,13 @@
 #if defined(VERSION_DE)
 #include "COMMON/CCOLLISIONSETUP_T.H"
 
-unsigned int D_auto_rodata_unresolved_8044A848[2] = {
+unsigned int k_CollideEncodedWords[2] = {
     0x00000002, 0x00000000,
 };
 
 /* The collision setup table CCollision_Initialize hands to CCollision_ApplySetupTable (through its KUSEG alias
- * D_0044A850): one row per collision info, ended by an empty row. */
-CCollisionSetup_t D_8044A850[36] = {
+ * g_collisionSetupTableResource): one row per collision info, ended by an empty row. */
+CCollisionSetup_t g_collisionSetupTable[36] = {
     { (CCollisionInfo2_t *)0x80100458, 0x3C5729, 5, 2, 2, -2303.9998f, 0.0f, 0.7f, 0.0f, 0.0f },
     { (CCollisionInfo2_t *)0x80100358, 0x3C552B, 5, 2, 2, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
     { (CCollisionInfo2_t *)0x80100190, 0x3C5529, 2, 2, 2, -2100.0f, 0.0f, 0.0f, 0.0f, 0.0f },

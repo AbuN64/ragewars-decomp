@@ -5,13 +5,13 @@
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/AUDIO/audio_decodetransformblock.H"
 
 /* Builds the decoder's trigonometric tables: for 128 steps it stores the sine and cosine of
-   (i * D_800CCF10 + D_800CCF14) * D_800CCF18 in D_801510C0 and D_801512C0 and clears D_801518C0,
-   then for 128 steps of i * D_800CCF1C stores sine plus cosine in D_801514C0 and cosine minus sine in
-   D_801516C0. */
+   (i * g_audioTransformCoefficientStep + g_audioTransformCoefficientOffset) * g_audioTransformPrimaryScale in g_audioTransformSines and g_audioTransformCosines and clears g_audioTransformZeros,
+   then for 128 steps of i * g_audioTransformSecondaryScale stores sine plus cosine in g_audioTransformSums and cosine minus sine in
+   g_audioTransformDifferences. */
 
 
 void Audio_InitTransformTables(void) {
@@ -27,13 +27,13 @@ void Audio_InitTransformTables(void) {
     f32 *zeros;
     f32 *sums;
     f32 *differences;
-    step = D_800CCF10;
-    offset = D_800CCF14;
-    scale = D_800CCF18;
+    step = g_audioTransformCoefficientStep;
+    offset = g_audioTransformCoefficientOffset;
+    scale = g_audioTransformPrimaryScale;
     i = 0;
-    sines = D_801510C0;
-    cosines = D_801512C0;
-    zeros = D_801518C0;
+    sines = g_audioTransformSines;
+    cosines = g_audioTransformCosines;
+    zeros = g_audioTransformZeros;
     for (; i < 128; i++) {
         angle = (i * step + offset) * scale;
         sines[i] = Math_Cosf(angle);
@@ -41,9 +41,9 @@ void Audio_InitTransformTables(void) {
         zeros[i] = 0.0f;
     }
     i = 0;
-    scale = D_800CCF1C;
-    sums = D_801514C0;
-    differences = D_801516C0;
+    scale = g_audioTransformSecondaryScale;
+    sums = g_audioTransformSums;
+    differences = g_audioTransformDifferences;
     for (; i < 128; i++) {
         angle = i * scale;
         s = Math_Cosf(angle);
@@ -52,8 +52,8 @@ void Audio_InitTransformTables(void) {
         differences[i] = c - s;
     }
 }
-/* Prepares the FFT tables in D_800D9370 for n points: fills the first n / 2 entries of the sine and
-   negated cosine tables for angles i * D_800CCF20 / n, fills the order table with 0..n - 1 and
+/* Prepares the FFT tables in g_audioTransformBandTables for n points: fills the first n / 2 entries of the sine and
+   negated cosine tables for angles i * g_audioTransformTertiaryScale / n, fills the order table with 0..n - 1 and
    bit-reverses it with the standard index-swapping walk, records n and returns the tables. */
 
 
@@ -71,10 +71,10 @@ FftTables *Audio_InitFftTables(s32 n) {
     f32 scale;
     f32 count;
     half = n >> 1;
-    tables = &D_800D9370;
+    tables = &g_audioTransformBandTables;
     i = 0;
     if (i < half) {
-        scale = D_800CCF20;
+        scale = g_audioTransformTertiaryScale;
         count = n;
         do {
             angle = i * scale / count;
@@ -105,10 +105,10 @@ FftTables *Audio_InitFftTables(s32 n) {
     tables->size = n;
     return tables;
 }
-/* Dequantises 256 coefficients: for each of the 16 bands, whose end indices are in D_800D93C8,
+/* Dequantises 256 coefficients: for each of the 16 bands, whose end indices are in g_audioTransformBandEnds,
    every coefficient is the quantised value at offset 0xA0 of the input divided by the step
-   D_800D93E8 selected by the band's scale index and multiplied by the gain D_800CCF24; the
-   coefficients past the last band end (D_800D93E6) are cleared. Returns 1. */
+   g_audioTransformBandSteps selected by the band's scale index and multiplied by the gain g_audioTransformOutputGain; the
+   coefficients past the last band end (g_audioTransformFirstUpperBand) are cleared. Returns 1. */
 s32 Audio_DequantizeTransformCoefficients(f32 *out, s16 *in) {
     s16 *scale;
     s16 band;
@@ -121,16 +121,16 @@ s32 Audio_DequantizeTransformCoefficients(f32 *out, s16 *in) {
     start = 0;
     values = in + 0x50;
     band = 0;
-    ends = D_800D93C8;
-    steps = D_800D93E8;
-    gain = D_800CCF24;
+    ends = g_audioTransformBandEnds;
+    steps = g_audioTransformBandSteps;
+    gain = g_audioTransformOutputGain;
     for (; band < 16; band++) {
         for (i = start; i < ends[band]; i++) {
             out[i] = (f32)values[i] / steps[*(scale = &in[band])] * gain;
         }
         start = ends[band];
     }
-    for (band = D_800D93E6; band < 0x100; band++) {
+    for (band = g_audioTransformFirstUpperBand; band < 0x100; band++) {
         out[band] = 0.0f;
     }
     return 1;
@@ -216,32 +216,32 @@ static inline s16 roundToSample(f32 value) {
     return (s16)(s32)rounded;
 }
 /* Decode a 256-sample transform block: unpack it, pre-rotate, inverse FFT, post-rotate, then
-   overlap it with the previous block's history (D_801518C0) and round/saturate to PCM. */
+   overlap it with the previous block's history (g_audioTransformZeros) and round/saturate to PCM. */
 void Audio_DecodeTransformBlock(s16 *out, s16 *input) {
     f32 data[256];
     f32 unpacked[256];
     f32 scale;
     s16 i;
-    s16 *initialized = &D_800D54C0_de;
+    s16 *initialized = &g_audioTransformTablesInitialized;
     if (*initialized == 0) {
         Audio_InitTransformTables();
-        D_8014B830 = Audio_InitFftTables(128);
+        g_audioTransformFftTable = Audio_InitFftTables(128);
         *initialized = 1;
     }
     scale = 23170.474609375f; /* 32768 / sqrt(2) */
     Audio_DequantizeTransformCoefficients(unpacked, input + 12);
     interleaveMirrored(data, unpacked);
-    rotatePairs(data, D_801510C0, D_801512C0);
-    transformFft(data, D_8014B830, -1);
-    rotatePairs(data, D_801514C0, D_801516C0);
+    rotatePairs(data, g_audioTransformSines, g_audioTransformCosines);
+    transformFft(data, g_audioTransformFftTable, -1);
+    rotatePairs(data, g_audioTransformSums, g_audioTransformDifferences);
     i = 0;
     do {
-        f32 *history = D_801518C0;
-        f32 *sines = D_801510C0;
+        f32 *history = g_audioTransformZeros;
+        f32 *sines = g_audioTransformSines;
         f32 previous = history[i];
         f32 s = sines[i];
         f32 im = data[i * 2 | 1];
-        f32 *cosines = D_801512C0;
+        f32 *cosines = g_audioTransformCosines;
         f32 c = cosines[i];
         f32 first = previous * s + im * c;
         f32 second = previous * c - im * s;

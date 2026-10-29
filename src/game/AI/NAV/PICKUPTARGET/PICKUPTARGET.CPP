@@ -1,9 +1,9 @@
 #include "COMMON/NAVIGATION_GRAPH.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/OBJECTLINKS1458.H"
+#include "COMMON/NAVIGATION_ACTOR_SEARCH_VIEWS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/OBJECTLINKS14.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
 #include "include_asm.h"
 #include "COMMON/MEASURED_STORAGE.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -14,14 +14,14 @@
 #include "COMMON/SELF.H"
 #include "AI/NAV/PICKUPTARGET.H"
 
-/* Selects the nodes of D_8013B364's list whose flagged record matches one of thirty ids: every match
+/* Selects the nodes of g_navigationGraph's list whose flagged record matches one of thirty ids: every match
    whose owner at 0x34 is active at 0x294 is selected through Nav_AddGoalNode, and when none was, every
    matching node is selected regardless of owner. Returns the number of selections. Written from its
    own assembly in the style of Nav_AddPickupCategoryCosts. */
 
 
 
-extern s32 D_8013B364;
+extern s32 g_navigationGraph;
 extern void *Portal_GetGraphPoint(void *, s32);
 struct ObjNavAddGoalNode;
 extern void Nav_AddGoalNode(struct ObjNavAddGoalNode *, int);
@@ -39,7 +39,7 @@ s32 Nav_AddPickupGoalsByObjectIds(s32 *ids) {
     s32 count;
     s32 i;
 
-    base = &D_8013B364;
+    base = &g_navigationGraph;
     count = 0;
     for (node = (Node8020BC50 *)((Obj8020BC50 *)base)->nodes; node != 0; node = node->next) {
         record = Portal_GetGraphPoint(base, node->key);
@@ -95,7 +95,7 @@ s32 Nav_SelectCloseAttackPickupGoal(CloseAttackBrain *closeAttackBrain) {
     s32 current;
     NavigationSearchNode *entry;
 
-    global = (CNavData *)&D_8013B364;
+    global = (CNavData *)&g_navigationGraph;
     Portal_ResetSearchState(global);
     Route_ClearGoalList((s32)global);
     count = 29;
@@ -127,7 +127,7 @@ s32 Nav_SelectCloseAttackPickupGoal(CloseAttackBrain *closeAttackBrain) {
     return 1;
 }
 
-s32 Nav_SelectChaseObjectGoal(void *arg0) {
+s32 Nav_SelectChaseObjectGoal(void *controller) {
     s32 data[30];
     s32 *cursor;
     s32 count;
@@ -135,7 +135,7 @@ s32 Nav_SelectChaseObjectGoal(void *arg0) {
     s32 value;
     s32 current;
 
-    global = &D_8013B364;
+    global = &g_navigationGraph;
     Portal_ResetSearchState(global);
     Route_ClearGoalList((s32)global);
     count = 29;
@@ -147,17 +147,17 @@ s32 Nav_SelectChaseObjectGoal(void *arg0) {
     } while (count >= 0);
     data[0] = 0x653;
     if (Nav_AddPickupGoalsByObjectIds(data) == 0) {
-        ((RouteChaseBot *)arg0)->target = 0;
-        ((RouteChaseBot *)arg0)->targetId = -1;
+        ((RouteChaseBot *)controller)->target = 0;
+        ((RouteChaseBot *)controller)->targetId = -1;
         return 1;
     }
     value = -1;
     ((CNavData *)global)->result = value;
-    Route_SearchPathByKey(global, ((RouteChaseBot *)arg0)->node);
+    Route_SearchPathByKey(global, ((RouteChaseBot *)controller)->node);
     current = ((CNavData *)global)->result;
     if (current != value) {
-        ((RouteChaseBot *)arg0)->goal = current;
-        Route_ReconstructSearchPath(global, &((AiController *)arg0)->queue[0], 4);
+        ((RouteChaseBot *)controller)->goal = current;
+        Route_ReconstructSearchPath(global, &((AiController *)controller)->queue[0], 4);
     }
     return 1;
 }
@@ -172,11 +172,11 @@ s32 Nav_SelectStationaryObjectGoal(AiController *controller) {
     s32 value;
     s32 current;
 
-    global = (CNavData *)&D_8013B364;
+    global = (CNavData *)&g_navigationGraph;
     Portal_ResetSearchState(global);
     Route_ClearGoalList((s32)global);
     count = 0;
-    node = D_801372C8;
+    node = g_pickupNavigationGoalList;
     scanbase = global;
     if (node != 0) {
         type = 0x64E;
@@ -208,9 +208,9 @@ s32 Nav_SelectStationaryObjectGoal(AiController *controller) {
 }
 
 /** Return whether arg0 is within the range [0x6BA, 0x6BC). */
-s32 func_8020F55C_de(s32 field0E) {
-    if (field0E < 0x6BC) {
-        if (field0E >= 0x6BA) {
+s32 Nav_IsPickupObjectInPairCategory(s32 objectId) {
+    if (objectId < 0x6BC) {
+        if (objectId >= 0x6BA) {
             return 1;
         }
     }
@@ -218,7 +218,7 @@ s32 func_8020F55C_de(s32 field0E) {
 }
 
 /** Return whether arg0 is within the range [0xBC4, 0xBCA). */
-s32 func_8020F57C_de(s32 objectId) {
+s32 Nav_IsPickupObjectInSixEntryCategory(s32 objectId) {
     if (objectId < 0xBCA) {
         if (objectId >= 0xBC4) {
             return 1;
@@ -228,16 +228,16 @@ s32 func_8020F57C_de(s32 objectId) {
 }
 
 /** Return the empty result used by callers at VRAM 0x8020F59C. */
-int func_8020F59C_de(void) {
+int Nav_PickupGoalReturnZero(void) {
     return 0;
 }
 
-s32 Nav_GetWeaponPickupGoalClass(void **arg0) {
+s32 Nav_GetWeaponPickupGoalClass(void **pickupHandle) {
     s32 weaponClassIdResult;
-    void *temp_a0;
+    void *pickupObject;
 
-    temp_a0 = *arg0;
-    weaponClassIdResult = Playerai_GetWeaponClassId(temp_a0, (s32) ((struct MeasuredRecAt62EV1 *)(temp_a0))->value);
+    pickupObject = *pickupHandle;
+    weaponClassIdResult = Playerai_GetWeaponClassId(pickupObject, (s32) ((struct PlayerWeaponClassView *)(pickupObject))->value);
     switch (weaponClassIdResult) {
         case 0:
             return 5;
@@ -256,7 +256,7 @@ s32 Nav_AddInactiveObjectGoals(void) {
     void *result;
     s32 count;
 
-    base = &D_8013B364;
+    base = &g_navigationGraph;
     node = ((CNavData *)base)->nodes;
     count = 0;
     if (node != 0) {

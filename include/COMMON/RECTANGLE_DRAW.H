@@ -5,9 +5,9 @@
 
 /* Five cached flag groups written together by Combine_ConfigurePrimitiveRenderFlags. */
 extern RecGobjinstSampleBoneTranslation D_80153F60;
-extern s32 D_800DF274;
-extern s32 D_800DF280;
-extern s32 D_800DF28C;
+extern s32 g_combineTextureTileMode;
+extern s32 g_combineTextureRenderMode;
+extern s32 g_combineRectangleColor;
 extern s32 D_800DF290;
 
 void Combine_DrawClippedGradientQuad(f32 x, f32 y, f32 width, f32 height, u32 c0, u32 c1, u32 c2, u32 c3);

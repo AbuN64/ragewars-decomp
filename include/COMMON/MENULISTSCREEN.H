@@ -2,13 +2,13 @@
 #define COMMON_MENULISTSCREEN_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct CellRecAt1A;
+struct ChoiceMenuCellView;
 struct MenuFrontendUpdatePlayModeMenu;
 struct StateMenuUpdateScrollingChoiceScreen;
 struct StateMenuUpdateScrollingChoiceScreen {
     struct MenuFrontendUpdatePlayModeMenu *menu;
     char pad4[0x8 - 0x4];
-    struct CellRecAt1A *list;
+    struct ChoiceMenuCellView *list;
     s32 delay;
     s32 target;
     s32 seen;
@@ -73,11 +73,11 @@ struct StateMenuSelectPlayerSettingsEntry {
 
 
 
-extern s32 D_800D34C0_de;
+extern s32 g_playerSettingsSlotNumberFormat;
 
 
 extern void Random_SetMenuChoiceResult(s32);
 
-extern FieldRow D_800F1DA8[];
-extern FieldRow D_800F1DAC[];
+extern FieldRow g_scrollingChoiceEventIds[];
+extern FieldRow g_scrollingChoiceEventKinds[];
 #endif

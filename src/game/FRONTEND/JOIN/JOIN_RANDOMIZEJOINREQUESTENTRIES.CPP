@@ -48,20 +48,20 @@ void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {
     }
     for (i = 0; i < count; i++) {
         tier = points[i] / 10;
-        D_80153F80[i].word8 = 4;
-        D_80153F80[i].variant = tier;
-        D_80153F80[i].variantC = tier;
+        g_joinRequestEntries[i].word8 = 4;
+        g_joinRequestEntries[i].variant = tier;
+        g_joinRequestEntries[i].variantC = tier;
         do {
             pick = Graphu64_NextRandom() % 17;
-            D_80153F80[i].id = g_rewardItemTiers[tier][pick].field_0;
+            g_joinRequestEntries[i].id = g_rewardItemTiers[tier][pick].first;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-            name = D_80153F80[i].name;
-            game = &D_801462C8;
-            XPlus_CopyString(name, ((char **)g_rewardItemTiers[tier][pick].field_4)[game->language]);
+            name = g_joinRequestEntries[i].name;
+            game = &g_gameSettings;
+            XPlus_CopyString(name, ((char **)g_rewardItemTiers[tier][pick].second)[game->language]);
 #else
-            XPlus_CopyString(D_80153F80[i].name, *(char **)g_rewardItemTiers[tier][pick].field_4);
+            XPlus_CopyString(g_joinRequestEntries[i].name, *(char **)g_rewardItemTiers[tier][pick].second);
 #endif
-        } while (D_80153F80[i].id == -1);
+        } while (g_joinRequestEntries[i].id == -1);
     }
 }
 #endif
@@ -70,7 +70,7 @@ void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {
 /* Deals out random rewards for count entries at difficulty level: starts every entry at 5 points
    from the level's budget in g_rewardScoreBudgets, then for up to 10001 random picks doubles an entry below
    20 points while the budget covers it; each entry then records mode 4 and its tier (points / 10)
-   in D_80153F80's 0x1C-byte records and draws random tier items from the seventeen per tier in
+   in g_joinRequestEntries's 0x1C-byte records and draws random tier items from the seventeen per tier in
    g_rewardItemTiers, copying the item's name, until it gets one that exists. */
 #include "TYPES.H"
 
@@ -89,7 +89,7 @@ typedef struct {
 
 extern s32 g_rewardScoreBudgets[];
 extern Prize g_rewardItemTiers[][17];
-extern Reward D_80153F80[];
+extern Reward g_joinRequestEntries[];
 
 extern void XPlus_CopyString(char *dst, char *src);
 
@@ -134,14 +134,14 @@ void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {
     }
     for (i = 0; i < count; i++) {
         tier = points[i] / 10;
-        D_80153F80[i].mode = 4;
-        D_80153F80[i].tier = tier;
-        D_80153F80[i].shown = tier;
+        g_joinRequestEntries[i].mode = 4;
+        g_joinRequestEntries[i].tier = tier;
+        g_joinRequestEntries[i].shown = tier;
         do {
             pick = Graphu64_NextRandom() % 17;
-            D_80153F80[i].id = g_rewardItemTiers[tier][pick].id;
-            XPlus_CopyString(D_80153F80[i].name, *g_rewardItemTiers[tier][pick].name);
-        } while (D_80153F80[i].id == -1);
+            g_joinRequestEntries[i].id = g_rewardItemTiers[tier][pick].id;
+            XPlus_CopyString(g_joinRequestEntries[i].name, *g_rewardItemTiers[tier][pick].name);
+        } while (g_joinRequestEntries[i].id == -1);
     }
 }
 #endif

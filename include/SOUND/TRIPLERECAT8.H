@@ -3,11 +3,11 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-struct TripleRecAt8;
-typedef struct TripleRecAt8 TripleRecAt8;
+struct ActorSurfaceSampleVector;
+typedef struct ActorSurfaceSampleVector ActorSurfaceSampleVector;
 
-struct ObjectLinks18;
-typedef struct ObjectLinks18 ObjectLinks18;
+struct ActorSurfaceHeightView;
+typedef struct ActorSurfaceHeightView ActorSurfaceHeightView;
 
 struct ItemCode8024E130;
 struct ItemCode8024E130 {
@@ -17,11 +17,11 @@ struct ItemCode8024E130 {
     unsigned flags;
 };
 
-extern int func_8024E610_de(void *actorStorage);
+extern int InstHdr_GetTypeOneItemValue(void *actorStorage);
 
 
-struct ObjectLinks18;
-struct ObjectLinks18 {
+struct ActorSurfaceHeightView;
+struct ActorSurfaceHeightView {
     unsigned char padding_0[12];
     f32 unk_C;
     unsigned char padding_10[4];
@@ -30,23 +30,23 @@ struct ObjectLinks18 {
 
 
 struct LevelActor;
-extern int func_8024E2B0_de(struct LevelActor *actor);
+extern int InstHdr_IsDefinitionKindOne(struct LevelActor *actor);
 
-struct TripleRecAt8;
-struct TripleRecAt8 {
+struct ActorSurfaceSampleVector;
+struct ActorSurfaceSampleVector {
     f32 a;
     s32 b;
     f32 c;
 };
 
-struct Object_func_8024E80C_de;
+struct ActorSurfaceKeyView;
 struct StateFlags;
-struct Object_func_8024E80C_de {
+struct ActorSurfaceKeyView {
     char pad[0x14];
     struct StateFlags *key;
 };
 
-extern s32 func_8024E208_de(char *actor);
+extern s32 InstHdr_IsActorControllerActive(char *actor);
 
-extern float D_800C3D74_de;
+extern float g_defaultActorShadowRadius;
 #endif

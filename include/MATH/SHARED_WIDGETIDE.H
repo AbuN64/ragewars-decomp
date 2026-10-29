@@ -2,7 +2,7 @@
 #define MATH_SHARED_WIDGETIDE_H
 /* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/INTEGERSTATE530.H"
 struct Shared_WidgetIdE { u8 pad0[0xE]; u16 id; };
 
@@ -16,8 +16,8 @@ struct Shared_WidgetIdE { u8 pad0[0xE]; u16 id; };
 
 
 
-static inline WidgetCallback func_8029AA80_find(s32 id) {
-    struct MenuHandlerEntry *h = D_8014D080->handlers;
+static inline WidgetCallback Menu_FindKindDrawHandler(s32 id) {
+    struct MenuHandlerEntry *h = g_screenManager->handlers;
     s32 i;
 
     for (i = 0; i < 64; i++, h++) {

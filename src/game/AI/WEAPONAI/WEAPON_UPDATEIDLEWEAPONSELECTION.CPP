@@ -1,9 +1,9 @@
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/INTEGERSTATE244.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
@@ -11,7 +11,7 @@
 
 /* 800C3144.CPP */
 #if defined(VERSION_EU)
-const unsigned int D_auto_rodata_unresolved_800C3144[19] = {
+const unsigned int k_WeaponUpdateidleweaponselectionEncodedWordsBlock1[19] = {
     0x00000000, 0x00230174, 0x00230180, 0x00230180, 0x00230180, 0x00230180, 0x00230180, 0x00230180,
     0x00230180, 0x002300EC, 0x00230180, 0x002300BC, 0x00230150, 0x00230180, 0x00230180, 0x00230180,
     0x00230180, 0x00230180, 0x002300D4,
@@ -20,7 +20,7 @@ const unsigned int D_auto_rodata_unresolved_800C3144[19] = {
 
 /* 8022F3E8_15.CPP */
 #if defined(VERSION_EU_X)
-const unsigned int D_auto_rodata_func_80230058_de_800C3188[18] = {
+const unsigned int k_WeaponUpdateidleweaponselectionEncodedWords[18] = {
     0x002301A4, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0,
     0x0023011C, 0x002301B0, 0x002300EC, 0x00230180, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0,
     0x002301B0, 0x00230104,
@@ -29,10 +29,10 @@ const unsigned int D_auto_rodata_func_80230058_de_800C3188[18] = {
 
 /* 8022F3E8_6.CPP */
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-extern char D_800CE8DC;
+extern char g_weaponActionRecords;
 
-extern s16 Weaponai_FindNextUsableWeapon(void *arg0);
-extern s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 position, s32 arg4, s32 ownerId);
+extern s16 Weaponai_FindNextUsableWeapon(void *player);
+extern s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 position, s32 emitterKey, s32 ownerId);
 
 void Weapon_UpdateIdleWeaponSelection(LevelActor *levelActor, void *weaponFireState) {
     s32 state;
@@ -41,24 +41,24 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *levelActor, void *weaponFireSt
     s32 mode;
 
     actor = levelActor->controller;
-    state = *(s16 *)(&D_800CE8DC +
+    state = *(s16 *)(&g_weaponActionRecords +
                      (((Shared_ActorView *)actor)->action * 0x18));
     if ((s8)((Dest *)weaponFireState)->count != 0) {
         if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
-            if (((Dest *)weaponFireState)->field13C == 2) {
-                ((Dest *)weaponFireState)->field13C = 1;
+            if (((Dest *)weaponFireState)->fireMode == 2) {
+                ((Dest *)weaponFireState)->fireMode = 1;
                 if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
                     ((Shared_ActorView *)actor)->nextWeapon = Weaponai_FindNextUsableWeapon(actor);
                 }
             }
         }
     }
-    func_8022B9C4_de(actor);
+    Playerai_EndHeldAlternateFire(actor);
     ((Shared_ActorView *)actor)->marker.word = 0;
     ((WeaponAnimationState *)((Shared_ActorView *)actor)->controller)->speed = 0;
-    ((Dest *)weaponFireState)->field138 = 0;
+    ((Dest *)weaponFireState)->fireCounter = 0;
 
-    audio = &D_801462C8.counters;
+    audio = &g_gameSettings.counters;
     if ((audio->m_bFragTagOn != 0) &&
         (((Shared_ActorView *)actor)->controls->transientFlag != 0)) {
         if (((Shared_ActorView *)actor)->unk_0x06B0 & 0x2000) {

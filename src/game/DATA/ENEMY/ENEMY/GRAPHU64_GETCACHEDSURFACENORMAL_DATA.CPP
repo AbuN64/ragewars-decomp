@@ -1,4 +1,4 @@
 
-unsigned int D_auto_rodata_writable_800D2630[6] = {
+unsigned int k_Graphu64GetcachedsurfacenormalEncodedWords[6] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };

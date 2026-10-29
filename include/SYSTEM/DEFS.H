@@ -14,5 +14,5 @@ extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value)
 extern void Defs_FormatSingleInteger(char *buffer, const char *format, s32 value);
 extern void Defs_FormatThreeIntegers(char *buffer, const char *format, s32 a, s32 b, s32 c);
 extern void Defs_FormatFourIntegers(char *buffer, const char *format, s32 a, s32 b, s32 c, s32 d);
-extern s32 Defs_FindSortedGroupRange(u32 *arg0, s32 arg1, u32 group, s32 *arg3, s32 *last);
+extern s32 Defs_FindSortedGroupRange(u32 *sortedGroups, s32 count, u32 group, s32 *first, s32 *last);
 #endif

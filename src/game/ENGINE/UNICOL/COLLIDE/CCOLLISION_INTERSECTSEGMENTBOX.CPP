@@ -3,7 +3,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/MOTION_STEP.H"
 #include "COMMON/OUTPUT.H"
@@ -17,7 +17,7 @@
 extern void Graphu64_InterpolateVector(CVector3 *,f32,void *,void *);
 
 /* Resolve contact response, updating translation and rotation along the contact normal. */
-s32 func_8023D380_de(ActorMotion *a) {
+s32 CCollision_ApplyMotionResponse(ActorMotion *a) {
     CVector3 remaining;
     CVector3 slide;
     CVector3 bounce;
@@ -32,7 +32,7 @@ s32 func_8023D380_de(ActorMotion *a) {
     settings=a->surface;
     if (a->collisionState!=0) {
     Graphu64_NormalizeVec3(&a->normal.x);
-    step=D_800CB404_de*D_800C3634_de;
+    step=D_800CB404_de*g_collisionRetreatStepScale;
     a->position=a->end;
     a->projectedOrientation=a->orientation;
     if (step<=a->distance && a->mode!=7) {
@@ -45,10 +45,10 @@ s32 func_8023D380_de(ActorMotion *a) {
         i=1;
         while(i<a->contactCount) { f32 point=a->contacts[i].y; if(!(highest<=point)) point=highest; highest=point; i++; }
         d=highest-a->start.y;
-        if(0.0f<d && d<=D_800C3638_de) {
+        if(0.0f<d && d<=g_collisionMaximumStepHeight) {
             a->interpolated=a->start; a->position=a->end; a->projectedOrientation=a->orientation;
             a->blend=0.0f;
-            d+=D_800C363C_de;
+            d+=g_collisionStepHeightClearance;
             a->interpolated.y+=d;
             a->position.y+=d;
             return 1;
@@ -57,9 +57,9 @@ s32 func_8023D380_de(ActorMotion *a) {
     type=a->mode;
     if(type==6) { if(a->grounded==0)a->mode=3;else a->mode=2; }
     type=a->mode;
-    if(type==3 && settings->BounceReturnEnergy<D_800C3640_de && a->distance<D_800C3644_de) {
+    if(type==3 && settings->BounceReturnEnergy<g_collisionMinimumBounceEnergy && a->distance<g_collisionMinimumBounceDistance) {
         s32 response=1;
-        if(!(a->velocity.x*a->velocity.x+a->velocity.z*a->velocity.z<D_800C3648_de))response=2;
+        if(!(a->velocity.x*a->velocity.x+a->velocity.z*a->velocity.z<g_collisionMinimumSlideSpeedSquared))response=2;
         a->mode=response;
     }
     type=a->collisionState;
@@ -98,11 +98,11 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             Graphu64_ReflectVector(&rotation,&a->orientation,&a->normal,settings->BounceReturnEnergy);
             a->projectedOrientation=rotation;
             damping=a->damping;
-            Graphu64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3670_de-damping);
+            Graphu64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,g_collisionBounceOrientationDampingBase-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
-        scale=D_800C3674_de;
+        scale=g_collisionBounceRemainingFractionBase;
         remainingFraction=scale-remainingFraction;
         Graphu64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         delta=&slide;
@@ -117,17 +117,17 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             Graphu64_ProjectVectorOntoPlane(&rotation,&a->orientation,&a->normal);
             a->projectedOrientation=rotation;
             damping=a->damping;
-            Graphu64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3678_de-damping);
+            Graphu64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,g_collisionSlideOrientationDampingBase-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
-        scale=D_800C367C_de;
+        scale=g_collisionSlideRemainingFractionBase;
         remainingFraction=scale-remainingFraction;
         Graphu64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         Graphu64_ProjectVectorOntoPlane(&bounce,&remaining,&a->normal);
         Graphu64_ScaleVector(&bounce,&bounce,scale-a->damping);
     Graphu64_AddVec3(&a->position,&a->interpolated,&bounce);
-    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*g_collisionSurfaceGravityScale);
     Graphu64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
@@ -136,10 +136,10 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         if(a->orientationActive!=0) {rotation=Graphu64_ProjectVectorPreservingLength(&a->orientation,&a->normal);a->projectedOrientation=rotation;}
         if(active==0)return 1;
         fraction=a->blend;
-        Graphu64_ScaleVector(&remaining,&a->velocity,D_800C3680_de-fraction);
+        Graphu64_ScaleVector(&remaining,&a->velocity,g_collisionPreservedSlideFractionBase-fraction);
         bounce=Graphu64_ProjectVectorPreservingLength(&remaining,&a->normal);
         Graphu64_AddVec3(&a->position,&a->interpolated,&bounce);
-    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*g_collisionSurfaceGravityScale);
     Graphu64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
@@ -150,11 +150,11 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             projected=Graphu64_ProjectVectorPreservingLength(&a->orientation,&a->normal);
             Graphu64_InterpolateVector(&a->projectedOrientation,0.25f,&reflection,&projected);
             damping=a->damping;
-            Graphu64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3684_de-damping);
+            Graphu64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,g_collisionBlendedSlideDampingBase-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
-        scale=D_800C3688_de;
+        scale=g_collisionBlendedSlideFractionBase;
         remainingFraction=scale-remainingFraction;
         Graphu64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         Graphu64_ProjectVectorOntoPlane(&reflection,&remaining,&a->normal);
@@ -162,7 +162,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         Graphu64_InterpolateVector(&bounce,0.25f,&reflection,&projected);
         Graphu64_ScaleVector(&bounce,&bounce,scale-a->damping);
     Graphu64_AddVec3(&a->position,&a->interpolated,&bounce);
-    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*g_collisionSurfaceGravityScale);
     Graphu64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
@@ -296,25 +296,25 @@ s32 CCollision_IntersectSegmentRectangle(Ray *ray, CQuatern *rect, f32 *t) {
     return 0;
 }
 
-const unsigned int D_auto_src_rw_tail_8023D380_C9360_us_rev1[8] = {
+const unsigned int k_CcollisionIntersectsegmentboxEncodedWordsBlock1[8] = {
     0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x4123D70A,
 };
 
 /* 800C8710_5.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8023DF70_C9380[3] = {
+const unsigned int k_CcollisionIntersectsegmentboxEncodedWords[3] = {
     0x4123D70A, 0x3F800000, 0x4123D70A,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8023DF70_C9380_us_rev1.c */
-const unsigned int D_blob_6624772531fcc4dc0e62[1] = {
+const unsigned int k_CcollisionIntersectsegmentboxEncodedWordsBlock3[1] = {
     0x4123D70A,
 };
 
 /* ROM-grounded data: src/rw_pool_8023E178_C9384_us_rev1.c */
-const unsigned int D_blob_15414668f9063e063991[2] = {
+const unsigned int k_CcollisionIntersectsegmentboxEncodedWordsBlock2[2] = {
     0x3F800000, 0x4123D70A,
 };
 #endif

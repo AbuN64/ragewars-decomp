@@ -14,13 +14,13 @@
 
 extern f32 Scaled_GetScaledAggression(void *controller);
 
-extern s32 D_801468A0;
+extern s32 g_matchRoundCounters;
 
 s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
     char *base;
-    f32 temp_f20;
+    f32 seekThreshold;
 
-    base = (char *)&D_801468A0;
+    base = (char *)&g_matchRoundCounters;
     if (((Shared_MatchRules *)base)->squads == 0) {
         return 0;
     }
@@ -30,8 +30,8 @@ s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
     if (Playerai_FindPlayerWithMarker(base - 0x1860) != 0) {
         return 0;
     }
-    temp_f20 = Scaled_GetScaledAggression(controller) * D_800C1E50_de + D_800C1E54_de;
-    if (temp_f20 < Graphu64_RandomBetween(0.0f, D_800C1E58_de)) {
+    seekThreshold = Scaled_GetScaledAggression(controller) * g_teamMarkerAggressionScale + g_teamMarkerSeekBaseThreshold;
+    if (seekThreshold < Graphu64_RandomBetween(0.0f, g_teamMarkerSeekRandomRange)) {
         return 1;
     }
     return 0;
@@ -39,31 +39,31 @@ s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
 
 s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller);
 s32 Nav_EvaluateCaptureFlagMarkerSearch(void **controller) {
-    if (D_801462C8.counters.m_bCTFOn != 0) {
+    if (g_gameSettings.counters.m_bCTFOn != 0) {
         Nav_ShouldSeekUnclaimedTeamMarker(controller);
     }
     return 1;
 }
 
 /* ROM-grounded data: src/rw_pool_8020EA10_C7B40_us_rev1.c */
-const unsigned int D_blob_e2105c22ed856e4916b8[3] = {
+const unsigned int g_Nav_ShouldSeekUnclaimedTeamMarkerConstantWords[3] = {
     0x3F19999A, 0x3E4CCCCD, 0x3F800000,
 };
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C1D8C[1] = {
+unsigned int k_TeammarkerEncodedWords[1] = {
     0x4353776F,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C213C[1] = {
+unsigned int k_TeammarkerEncodedWordsBlock2[1] = {
     0x0022EC68,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C1E5C[1] = {
+unsigned int k_TeammarkerEncodedWordsBlock1[1] = {
     0x0020ED00,
 };
 #endif

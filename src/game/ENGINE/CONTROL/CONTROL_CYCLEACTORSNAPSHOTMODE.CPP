@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_8010EC90.H"
+#include "COMMON/LONE/CONTROLLER_RUMBLE_POOL.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -8,7 +8,7 @@
 #include "COMMON/ACTORRECAT5E0.H"
 #include "RENDER/ACTOR_LIST_AND_RANDOM_CURVE.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "RENDER/SETN64_UPDATEFADETRANSITION.H"
 #include "RENDER/CONTROL_CYCLEACTORSNAPSHOTMODE.H"
@@ -16,12 +16,12 @@
 /* 80263760_8.CPP */
 extern void Rumble_FreeAllPoolNodes(s32 *);
 
-/* Advances the replay mode: when replays are possible (SetN64_IsModeThirteen, D_80145070 and the handle table) it
+/* Advances the replay mode: when replays are possible (SetN64_IsModeThirteen, g_sessionOptionResetMode and the handle table) it
  * cycles the mode 0 -> 1 -> 2 -> 0, snapshots the actors and records the camera target, promoting mode 1
  * to 2 when the player's target changed or the player is in states 0x16 to 0x21 and recording the player's
  * target instead; otherwise the mode is cleared. An active mode arms the 240-frame timer. */
 
-extern s32 D_8013B2BC;
+extern s32 g_activeActorKind;
 
 extern void *Playerai_GetFirstPlayer(void *);
 
@@ -36,7 +36,7 @@ extern void *Playerai_GetFirstPlayer(void *);
 
 extern s32 Scene_GetModelSectionTwoIndex(Shared_World *table, s32 id);
 
-const unsigned int D_d0_0d3281030ce1b896[3] = {
+const unsigned int k_ControlCycleactorsnapshotmodeEncodedWords[3] = {
     0x3F800000, 0x3F800000, 0x3B808081,
 };
 void Control_SetProfileMode(ControllerProfile *slot, s32 profileMode) {
@@ -51,7 +51,7 @@ void Control_ResetControllerProfiles(void) {
     s32 i;
 
     i = 0;
-    slot = D_8010F328;
+    slot = g_controllerProfiles;
     do {
         Control_ResetControllerPak(slot);
         i += 1;
@@ -64,7 +64,7 @@ void Control_SetControllerMode(s32 a) {
     s32 i;
 
     i = 0;
-    slot = D_8010F328;
+    slot = g_controllerProfiles;
     do {
         slot->mode = a;
         if (a == 0) {
@@ -74,7 +74,7 @@ void Control_SetControllerMode(s32 a) {
         slot += 1;
     } while (i < 4);
     if (a == 0) {
-        Rumble_FreeAllPoolNodes(&D_8010EC90);
+        Rumble_FreeAllPoolNodes(&g_controllerRumblePool);
     }
 }
 
@@ -91,12 +91,12 @@ void Control_SaveControllerSetup(void)
   do
   {
     profileValue = *((s32 *) ((&D_8010B3F4) + profileByteOffset));
- do { savedValueOffset = profileIndex * 4; profileIndex += 1; *((s32 *) (((u8 *) D_8010BC18) + savedValueOffset)) = profileValue; profileByteOffset += 0x224; } while (0);
+ do { savedValueOffset = profileIndex * 4; profileIndex += 1; *((s32 *) (((u8 *) g_controllerSnapshotProfileValues) + savedValueOffset)) = profileValue; profileByteOffset += 0x224; } while (0);
   }
   while (profileIndex < 4);
   profilesReset = 0;
-  Rumble_FreeAllPoolNodes(&D_8010EC90);
-  profileCursor = D_8010F328;
+  Rumble_FreeAllPoolNodes(&g_controllerRumblePool);
+  profileCursor = g_controllerProfiles;
   do
   {
     Control_ResetControllerPak(profileCursor);
@@ -116,7 +116,7 @@ void Control_RestoreControllerSetup(void) {
 
     if (D_800CBC18 != 0) {
         i = 0;
-        slot = D_8010F328;
+        slot = g_controllerProfiles;
         do {
             Control_ResetControllerPak(slot);
             i += 1;
@@ -125,22 +125,22 @@ void Control_RestoreControllerSetup(void) {
         j = 0;
         profileByteOffset = 0;
         do {
-            savedProfileValue = D_8010BC18[j];
+            savedProfileValue = g_controllerSnapshotProfileValues[j];
             j += 1;
             *(s32 *)(&D_8010B3F4 + profileByteOffset) = savedProfileValue;
             profileByteOffset += 0x224;
         } while (j < 4);
-        Rumble_FreeAllPoolNodes(&D_8010EC90);
+        Rumble_FreeAllPoolNodes(&g_controllerRumblePool);
         D_800CBC18 = 0;
     }
 }
 
 void Control_ClearMenuControlFlag(void) {
-    D_800CBC20 = 0;
+    g_controlMenuControlFlag = 0;
 }
 
 void Control_SetMenuControlFlag(void) {
-    D_800CBC20 = 1;
+    g_controlMenuControlFlag = 1;
 }
 
 void Control_CycleActorSnapshotMode(void) {
@@ -150,8 +150,8 @@ void Control_CycleActorSnapshotMode(void) {
     Shared_Game *options;
 
     enabled = SetN64_IsModeThirteen() != 0;
-    snapshot = &D_8010BC40;
-    if (D_80145070 == 0) {
+    snapshot = &g_controllerActorSnapshot;
+    if (g_sessionOptionResetMode == 0) {
         enabled = 0;
     }
     if (&g_world.mode == 0) {
@@ -171,13 +171,13 @@ void Control_CycleActorSnapshotMode(void) {
             break;
         }
         Control_SaveActorSnapshot();
-        snapshot->savedActorId = D_8013B2BC;
-        options = &D_80145040.game;
+        snapshot->savedActorId = g_activeActorKind;
+        options = &g_playerViewRenderContext.game;
         if (options->local == 0) {
-            player = Playerai_GetFirstPlayer(&D_80145040);
+            player = Playerai_GetFirstPlayer(&g_playerViewRenderContext);
             if (player != 0) {
                 if (snapshot->mode == 1 &&
-                    (D_8013B2BC != ((Shared_ActorView *)player)->spawn ||
+                    (g_activeActorKind != ((Shared_ActorView *)player)->spawn ||
                      (u16)(((Shared_ActorView *)player)->action - 0x16) < 12)) {
                     snapshot->mode = 2;
                 }
@@ -197,32 +197,32 @@ void Control_CycleActorSnapshotMode(void) {
 }
 
 void Control_ResetActorSnapshot(void) {
-    D_8010BC40.active = 0;
-    D_8010BC40.mode = 0;
-    D_8010BC40.countdown = 0;
+    g_controllerActorSnapshot.active = 0;
+    g_controllerActorSnapshot.mode = 0;
+    g_controllerActorSnapshot.countdown = 0;
 }
 
 s32 Control_GetSnapshotActorId(void) {
-    return D_8010BC40.savedActorId;
+    return g_controllerActorSnapshot.savedActorId;
 }
 
 int Control_IsSnapshotActive(void) {
-    return D_8010BC40.active;
+    return g_controllerActorSnapshot.active;
 }
 
 void Control_DeactivateActorSnapshot(void) {
-    D_8010BC40.active = 0;
+    g_controllerActorSnapshot.active = 0;
 }
 
 void Control_RestoreActorSnapshot(void) {
     s32 i;
-    ActorRecAt5E0 *actor;
+    SnapshotActorView *actor;
     Snapshot *snapshot;
     ActorList *list;
 
-    list = (ActorList *)&D_80145040;
-    snapshot = &D_8010BC40;
-    for (i = 0; i < list->count; i++, list = (ActorList *)&D_80145040) {
+    list = (ActorList *)&g_playerViewRenderContext;
+    snapshot = &g_controllerActorSnapshot;
+    for (i = 0; i < list->count; i++, list = (ActorList *)&g_playerViewRenderContext) {
         actor = &list->actors[i];
         actor->block = snapshot->blocks[i];
         if (snapshot->mode == 1) {
@@ -234,7 +234,7 @@ void Control_RestoreActorSnapshot(void) {
 }
 
 void Control_TickSnapshotCountdown(void) {
-    Snapshot *p = &D_8010BC40;
+    Snapshot *p = &g_controllerActorSnapshot;
     s32 v = p->countdown;
     if (v != 0) {
         v = v - 1;
@@ -247,19 +247,19 @@ void Control_TickSnapshotCountdown(void) {
 
 void Control_SaveActorSnapshot(void) {
     s32 i;
-    ActorRecAt5E0 *actor;
+    SnapshotActorView *actor;
     Snapshot *snapshot;
     ActorList *list;
 
-    list = (ActorList *)&D_80145040;
-    snapshot = &D_8010BC40;
+    list = (ActorList *)&g_playerViewRenderContext;
+    snapshot = &g_controllerActorSnapshot;
     for (i = 0; i < list->count; i++) {
         actor = &list->actors[i];
         snapshot->blocks[i] = actor->block;
         snapshot->positions[i] = actor->position;
         snapshot->values[i] = actor->field6C;
         snapshot->handles[i] = Scene_GetModelSectionTwoIndex(&g_world, actor->id);
-        list = (ActorList *)&D_80145040;
+        list = (ActorList *)&g_playerViewRenderContext;
     }
 }
 
@@ -270,10 +270,10 @@ void Control_InitializeCurvePlayer(unsigned int *record, unsigned int value) {
     record[2] = 0;
 }
 
-s32 Control_AdvanceEffectCurve(void *arg0) {
-    PlayerRecAt8 *player = arg0;
-    f32 temp_f1;
-    f32 temp_f1_2;
+s32 Control_AdvanceEffectCurve(void *curvePlayer) {
+    SampledEffectCurveState *player = curvePlayer;
+    f32 advancedTime;
+    f32 remainingTime;
     s32 type;
     SampledCurve *curve;
 
@@ -281,25 +281,25 @@ s32 Control_AdvanceEffectCurve(void *arg0) {
     type = curve->type;
     switch (type) {
     case 0: {
-        f32 divisor = D_80142C38[1];
-        temp_f1 = player->time + (D_800C4310_de.unk0 / divisor);
-        player->time = temp_f1;
-        if (curve->length <= temp_f1) {
+        f32 divisor = g_displayedFramebufferAndRefreshRate[1];
+        advancedTime = player->time + (g_controllerEffectTimeAdvanceScale.value / divisor);
+        player->time = advancedTime;
+        if (curve->length <= advancedTime) {
             return 1;
         }
         goto block_7;
     }
     case 1: {
         RandomCurve *random = (void *)curve;
-        f32 divisor = D_80142C38[1];
-        temp_f1_2 = player->time - (D_800C4314_de.unk0 / divisor);
-        player->time = temp_f1_2;
-        if (temp_f1_2 <= 0.0f) {
+        f32 divisor = g_displayedFramebufferAndRefreshRate[1];
+        remainingTime = player->time - (g_controllerEffectTimeRetreatScale.value / divisor);
+        player->time = remainingTime;
+        if (remainingTime <= 0.0f) {
             player->time =
-                temp_f1_2 + random->period;
+                remainingTime + random->period;
             player->value = Graphu64_RandomBetween(
-                (f32)random->minimum * D_800C4318_de.unk0,
-                (f32)random->maximum * D_800C4318_de.unk0);
+                (f32)random->minimum * g_controllerEffectRandomRangeScale.value,
+                (f32)random->maximum * g_controllerEffectRandomRangeScale.value);
         }
         goto block_7;
     }
@@ -311,7 +311,7 @@ block_7:
 
 /* Samples a curve at the player's time: a byte-sample curve (type 0) indexes its samples by time times 16 over the curve length and scales the byte to 0..1, a constant curve (type 1) returns the player's value, and any other type yields zero. */
 
-float Control_SampleEffectCurve(PlayerRecAt8 *p) {
+float Control_SampleEffectCurve(SampledEffectCurveState *p) {
     SampledCurve *c = p->curve;
 
     switch (c->type) {
@@ -324,7 +324,7 @@ float Control_SampleEffectCurve(PlayerRecAt8 *p) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_80264EFC[1] = {
+unsigned int k_ControlCycleactorsnapshotmodeEncodedWordsBlock1[1] = {
     0x00009666,
 };
 #endif

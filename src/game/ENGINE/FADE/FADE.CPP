@@ -12,141 +12,141 @@
 #include "sdk/libgultra_inferred/cseq.H"
 extern s32 Defs_FindSortedValue(s32,s32,s32);
 extern f32 Menu_ExpandFloatHighWord(u16);
-static inline f32 fade_rate(Track *track,f32 time,f32 rate) {track->unk30=time;return (f32)track->unk20/(time*rate);}
+static inline f32 fade_rate(Track *track,f32 time,f32 rate) {track->fadeDuration=time;return (f32)track->fadeStartVolume/(time*rate);}
 void Audio_UpdateMusicPlayback(Track *queue) {
-    f32 temp_f0;
-    f32 temp_f20;
-    f32 var_f20;
-    f32 var_f2;
-    s32 temp_a1;
-    s32 temp_a2;
-    s32 temp_s0;
-    s32 temp_v0;
+    f32 sequenceFadeDuration;
+    f32 initialVolume;
+    f32 targetVolume;
+    f32 fadeDuration;
+    s32 unusedValue;
+    s32 requestedSequence;
+    s32 sectionIndex;
+    s32 startupFrames;
     s32 sortedValueResult;
-    s32 temp_v1;
+    s32 playbackState;
     s32 i;
-    s32 var_v0;
-    struct ALCMidiHdr *temp_s0_2;
-    ContextRecAt2BB8 *temp_v0_2;
-    struct Resource *temp_v0_4;
-    ContextRecAt2BB8 *temp_v0_5;
-    struct ALCMidiHdr *var_v0_2;
-    temp_v1 = queue->unk18;
-    switch (temp_v1) { /* irregular */
+    s32 nextPlaybackState;
+    struct ALCMidiHdr *sequenceData;
+    AudioPlaybackContextView *sequenceContext;
+    struct Resource *sequenceInfo;
+    AudioPlaybackContextView *volumeContext;
+    struct ALCMidiHdr *selectedSequence;
+    playbackState = queue->playbackState;
+    switch (playbackState) { /* irregular */
     case 0x20:
-        if (queue->unk1C & 4) {
-            queue->unk1C = 0;
-            D_800CBB50_de = -1;
-            if (queue->unk28 >= 0) {
-                queue->unk18 = 0x40;
+        if (queue->playbackFlags & 4) {
+            queue->playbackFlags = 0;
+            g_musicRequestedTrack = -1;
+            if (queue->requestedSequence >= 0) {
+                queue->playbackState = 0x40;
                 return;
             }
-            queue->unk18 = 0x10;
+            queue->playbackState = 0x10;
             return;
         }
         return;
     case 0x100:
-        if (queue->unk1C & 8) {
-            queue->unk18 = 0x80;
-            queue->unk1C = 0;
+        if (queue->playbackFlags & 8) {
+            queue->playbackState = 0x80;
+            queue->playbackFlags = 0;
             return;
         }
-        temp_v0 = D_800CBB54 + 1;
-        D_800CBB54 = temp_v0;
-        if (temp_v0 >= 0xA) {
-            D_800CBB50_de = -1;
-            queue->unk18 = 0x40;
+        startupFrames = g_musicStartupFrameCount + 1;
+        g_musicStartupFrameCount = startupFrames;
+        if (startupFrames >= 0xA) {
+            g_musicRequestedTrack = -1;
+            queue->playbackState = 0x40;
             return;
         }
         break;
     case 0x40:
-        temp_a2 = queue->unk28;
-        var_v0 = 0x10;
-        if (temp_a2 != -1) {
-            temp_v0_2 = queue->unk0;
-            sortedValueResult = Defs_FindSortedValue(temp_v0_2->unk2B60, temp_v0_2->unk2B64, temp_a2);
-            temp_s0 = sortedValueResult;
-            if (temp_s0 != -1) {
-                temp_s0 *= 2;
-                temp_s0_2 = SetN64_GetPackSection(queue->unk0->unk2B50, temp_s0 | 1);
-                temp_v0_4 = SetN64_GetPackSection(queue->unk0->unk2B50, temp_s0);
-                queue->unk24 = (s32) temp_v0_4->unk0;
-                temp_f0 = Menu_ExpandFloatHighWord(temp_v0_4->unk4);
-                queue->unk30 = temp_f0;
-                if (temp_f0 <= 0.0f) {
-                    queue->unk30 = D_800C3FD0_de;
+        requestedSequence = queue->requestedSequence;
+        nextPlaybackState = 0x10;
+        if (requestedSequence != -1) {
+            sequenceContext = queue->context;
+            sortedValueResult = Defs_FindSortedValue(sequenceContext->resourceIndexTable, sequenceContext->resourceIndexCount, requestedSequence);
+            sectionIndex = sortedValueResult;
+            if (sectionIndex != -1) {
+                sectionIndex *= 2;
+                sequenceData = SetN64_GetPackSection(queue->context->songs, sectionIndex | 1);
+                sequenceInfo = SetN64_GetPackSection(queue->context->songs, sectionIndex);
+                queue->baseVolume = (s32) sequenceInfo->baseVolume;
+                sequenceFadeDuration = Menu_ExpandFloatHighWord(sequenceInfo->durationHighWord);
+                queue->fadeDuration = sequenceFadeDuration;
+                if (sequenceFadeDuration <= 0.0f) {
+                    queue->fadeDuration = g_musicDefaultFadeAndVolumeScale;
                 }
-                var_v0_2 = temp_s0_2;
+                selectedSequence = sequenceData;
             } else {
-                var_v0_2 = NULL;
+                selectedSequence = NULL;
             }
-            queue->unkC = var_v0_2;
-            if (var_v0_2 == NULL) {
-                queue->unk18 = 0x100;
-                D_800CBB54 = 0;
-                queue->unk1C = 0;
+            queue->midiHeader = selectedSequence;
+            if (selectedSequence == NULL) {
+                queue->playbackState = 0x100;
+                g_musicStartupFrameCount = 0;
+                queue->playbackFlags = 0;
                 return;
             }
-            queue->unk18 = 0x80;
-            queue->unk4 = 1;
+            queue->playbackState = 0x80;
+            queue->sequenceLoaded = 1;
         case 0x80:
             i = 0;
-            alCSeqNew(queue->unk10, queue->unkC);
-            alCSPSetSeq(queue->unk14, queue->unk10);
-            alCSPSetBank(queue->unk14, queue->unk8->field_4);
+            alCSeqNew(queue->sequence, queue->midiHeader);
+            alCSPSetSeq(queue->sequencePlayer, queue->sequence);
+            alCSPSetBank(queue->sequencePlayer, queue->sequenceTable->field_4);
             do {
-                alCSPSetChlFXMix(queue->unk14, i & 0xFF, 0);
+                alCSPSetChlFXMix(queue->sequencePlayer, i & 0xFF, 0);
                 i += 1;
             } while (i < 0x14);
-            temp_f20 = (f32) queue->unk24 * (queue->unk0->unk2BA4 * *(&D_800C3FD0_de+1));
-            alCSPSetVol(queue->unk14, (s16) (s32) (temp_f20 * D_800C3FD8_de));
-            queue->unk2C = temp_f20;
-            func_802AFE80_de(queue->unk14);
-            queue->unk1C = 0;
-            queue->unk18 = 0x10;
-            D_800CBB50_de = queue->unk28;
+            initialVolume = (f32) queue->baseVolume * (queue->context->volumePercent * *(&g_musicDefaultFadeAndVolumeScale+1));
+            alCSPSetVol(queue->sequencePlayer, (s16) (s32) (initialVolume * g_musicVolumeAndFadeScale));
+            queue->currentVolume = initialVolume;
+            Audio_PostPlayerStopEvent(queue->sequencePlayer);
+            queue->playbackFlags = 0;
+            queue->playbackState = 0x10;
+            g_musicRequestedTrack = queue->requestedSequence;
             return;
         }
         goto block_44;
     case 0x10:
     default:
-        if ((D_800CBB50_de > 0) && (alCSPGetState((void *)queue->unk14) == 0)) {
-            D_800CBB50_de = 0;
-            queue->unk28 = 0;
+        if ((g_musicRequestedTrack > 0) && (alCSPGetState((void *)queue->sequencePlayer) == 0)) {
+            g_musicRequestedTrack = 0;
+            queue->requestedSequence = 0;
         } else {
-            if (queue->unk38 != 0) {
-                var_f20 = (f32) queue->unk24;
-                var_f20 *= queue->unk0->unk2BA4 * *(&D_800C3FD8_de+1);
-                var_f20 *= queue->unk3C;
+            if (queue->gainOverride != 0) {
+                targetVolume = (f32) queue->baseVolume;
+                targetVolume *= queue->context->volumePercent * *(&g_musicVolumeAndFadeScale+1);
+                targetVolume *= queue->overrideGain;
                 goto block_37;
             }
-            temp_v0_5 = queue->unk0;
-            var_f20 = (f32) queue->unk24 * (temp_v0_5->unk2BA4 * D_800C3FE0_de);
-            if (temp_v0_5->unk2BB8 != 0) {
-                var_f20 *= D_800C3FE4;
+            volumeContext = queue->context;
+            targetVolume = (f32) queue->baseVolume * (volumeContext->volumePercent * g_musicPlaybackVolumeScale);
+            if (volumeContext->musicAttenuated != 0) {
+                targetVolume *= g_musicDuckedVolumeScale;
             }
-            if (var_f20 != queue->unk2C) {
+            if (targetVolume != queue->currentVolume) {
 block_37:
-                alCSPSetVol(queue->unk14, (s16) (s32) (var_f20 * D_800C3FE8_de));
-                queue->unk2C = var_f20;
+                alCSPSetVol(queue->sequencePlayer, (s16) (s32) (targetVolume * g_musicTargetVolumeToMidiScale));
+                queue->currentVolume = targetVolume;
             }
         }
-        if (queue->unk28 != D_800CBB50_de) {
-            if (D_800CBB50_de > 0) {
-                var_f2 = queue->unk30;
-                queue->unk1C = 2;
-                queue->unk18 = 0x20;
-                queue->unk20 = (s32) (queue->unk2C * D_800C3FEC_de);
-                if (!(var_f2 >= D_800C3FF0_de)) {
-                    var_f2 = D_800C3FF0_de;
+        if (queue->requestedSequence != g_musicRequestedTrack) {
+            if (g_musicRequestedTrack > 0) {
+                fadeDuration = queue->fadeDuration;
+                queue->playbackFlags = 2;
+                queue->playbackState = 0x20;
+                queue->fadeStartVolume = (s32) (queue->currentVolume * g_musicCurrentVolumeToMidiScale);
+                if (!(fadeDuration >= g_musicFadeDurationLimits)) {
+                    fadeDuration = g_musicFadeDurationLimits;
                 }
-                queue->unk34 = fade_rate(queue,var_f2,*(&D_800C3FF0_de+1));
+                queue->fadeStep = fade_rate(queue,fadeDuration,*(&g_musicFadeDurationLimits+1));
                 return;
             }
-            var_v0 = 0x40;
-            queue->unk1C = 0;
+            nextPlaybackState = 0x40;
+            queue->playbackFlags = 0;
 block_44:
-            queue->unk18 = var_v0;
+            queue->playbackState = nextPlaybackState;
         }
         break;
     }

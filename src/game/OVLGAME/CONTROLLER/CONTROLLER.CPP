@@ -10,7 +10,7 @@
 #include "COMMON/PACKED.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/LEVEL_INPUT.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/PFS/CONTROLLER.H"
 #include "sdk/os.h"
 #include "COMMON/PAKQUEUESTATE.H"
@@ -19,9 +19,9 @@
 /* Resets the controller and profile state for a new session: reinitialises the input buffers and stream through func_80285AC4_de, osCreateMesgQueue, func_802BB550_de, osContInit, Audio_GetThreadIdentifier and func_802BB420_de, then for slots 3 down to 0 clears the slot's three state words, refreshes its pad through func_80264788_de and counts the profiles Ovlgame_ResetControllerProfile accepts in D_800D0E52, remembering the lowest accepted slot in g_firstConnectedControllerPort; finally checks the profile just below slot 0 with mode 4, marks the session reset and returns the remembered slot. */
 
 
-extern char D_8010EC90[];
-extern signed char D_8010BBB8;
-extern char D_8010FC00[];
+extern char g_controllerRumblePool[];
+extern signed char g_controllerPakFrontendState;
+extern char g_controllerSiMessageQueue[];
 
 
 
@@ -35,28 +35,28 @@ extern void Control_DisableControllerPak(s32);
 s16 Ovlgame_InitializeControllerSession(void) {
     s32 i;
 
-    Rumble_InitPoolNodes(D_8010EC90, g_controllerRumbleNodes, 8);
-    D_8010BBB8 = 2;
-    osCreateMesgQueue(D_8010FC00, D_8010BBD8, 1);
-    osCreateMesgQueue(&D_8010FBC0, g_controllerAccessMessages, 1);
-    osSetEventMesg(5, D_8010FC00, 1);
-    osContInit(D_8010FC00, D_800CBC11, D_8010BBE0);
+    Rumble_InitPoolNodes(g_controllerRumblePool, g_controllerRumbleNodes, 8);
+    g_controllerPakFrontendState = 2;
+    osCreateMesgQueue(g_controllerSiMessageQueue, g_controllerSiMessageBuffer, 1);
+    osCreateMesgQueue(&g_controllerReadMessageQueue, g_controllerAccessMessages, 1);
+    osSetEventMesg(5, g_controllerSiMessageQueue, 1);
+    osContInit(g_controllerSiMessageQueue, g_controllerPresenceBits, g_controllerQueryStatus);
     Audio_GetThreadIdentifier(0);
-    D_800CBC1C = -1;
-    osSendMesg(&D_8010FBC0, 0, 1);
+    g_controllerAudioThreadId = -1;
+    osSendMesg(&g_controllerReadMessageQueue, 0, 1);
     g_firstConnectedControllerPort = -1;
     D_800D0E52 = 0;
     for (i = 3; i >= 0; i--) {
-        D_8010BBF0[i] = 0;
-        D_8010BC28[i] = 0;
-        D_8010B310[i] = 0;
+        g_controllerPakState[i] = 0;
+        g_controllerPakReinitializePending[i] = 0;
+        g_controllerPakProbePending[i] = 0;
         Control_DisableControllerPak(i);
-        if (Ovlgame_ResetControllerProfile(&D_8010F328[i], i) != 0) {
+        if (Ovlgame_ResetControllerProfile(&g_controllerProfiles[i], i) != 0) {
             g_firstConnectedControllerPort = i;
             D_800D0E52++;
         }
     }
-    Ovlgame_ResetControllerProfile(&D_8010F328[i], 4);
+    Ovlgame_ResetControllerProfile(&g_controllerProfiles[i], 4);
     D_800CBC10 = 1;
     return g_firstConnectedControllerPort;
 }
@@ -89,7 +89,7 @@ s32 Ovlgame_ResetControllerProfile(ControllerProfile *profile, s32 port) {
         profile->buttonHistory[i].repeat = 48;
         profile->buttonHistory[i].held = 0;
     }
-    connected = ((D_8010FBE3[port * 4] >> 3) ^ 1) & 1;
+    connected = ((g_controllerReadStatusBytes[port * 4] >> 3) ^ 1) & 1;
     profile->pakAmount = 0;
     profile->pakTimer = 0;
     profile->connected = connected;
@@ -98,6 +98,6 @@ s32 Ovlgame_ResetControllerProfile(ControllerProfile *profile, s32 port) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_8044B248[8] =
+char s_ControllerCMiscVarText[8] =
     "CMiscVar";
 #endif

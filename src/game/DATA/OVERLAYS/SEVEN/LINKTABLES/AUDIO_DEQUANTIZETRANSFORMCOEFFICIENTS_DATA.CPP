@@ -1,6 +1,6 @@
 
 #if defined(VERSION_US_REV1)
-unsigned short D_auto_src_ragewars_decoder_band_ends_us_rev1[16] = {
+unsigned short g_audioDequantizetransformcoefficientsDataConstantWords[16] = {
     0x0004, 0x0008, 0x000C, 0x0012, 0x0019, 0x0021, 0x002C, 0x0035, 0x003F, 0x004B, 0x0059, 0x0069, 0x007E,
     0x0095, 0x00B9, 0x0100,
 };

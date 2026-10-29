@@ -1,13 +1,13 @@
 #include "include_asm.h"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU_X) || defined(VERSION_EU) || defined(VERSION_DE)
-typedef struct Shared_MenuWidgetState { s32 list; s32 resourceWidget; void *item; s32 unkC; s32 unk10; s32 unk14; } Shared_MenuWidgetState;
-extern Shared_MenuWidgetState *D_800E5780;
-extern char D_80102B7E[];
+typedef struct Shared_MenuWidgetState { s32 list; s32 resourceWidget; void *item; s32 scrollDelay; s32 nextScreen; s32 seen; } Shared_MenuWidgetState;
+extern Shared_MenuWidgetState *g_unlockGatedListScreen;
+extern char g_profileModeOnePlayedLevels[];
 
 extern s32 SmpFade_CreateFadeWidget(s32, s32);
 extern s32 Defs_TestBit(char *, s32);
@@ -28,22 +28,22 @@ static inline s32 unlockRes(s32 id) {
 s32 Menu_CreateUnlockGatedListScreen(void *window) {
     void *obj;
 
-    D_800E5780 = (Shared_MenuWidgetState *)Cache_AllocateMemory(0x18);
-    D_800E5780->list = SmpFade_CreateFadeWidget(unlockRes(0x136), unlockRes(0x137));
-    D_800E5780->unk14 = 0;
+    g_unlockGatedListScreen = (Shared_MenuWidgetState *)Cache_AllocateMemory(0x18);
+    g_unlockGatedListScreen->list = SmpFade_CreateFadeWidget(unlockRes(0x136), unlockRes(0x137));
+    g_unlockGatedListScreen->seen = 0;
 
-    if (Defs_TestBit(D_80102B7E, 0) == 0) {
+    if (Defs_TestBit(g_profileModeOnePlayedLevels, 0) == 0) {
         Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(window, unlockRes(0x13A)), 1);
     }
 
-    D_800E5780->resourceWidget = SmpFlicker_CreateFlickerWidget(unlockRes(0x139), 0x6E);
+    g_unlockGatedListScreen->resourceWidget = SmpFlicker_CreateFlickerWidget(unlockRes(0x139), 0x6E);
 
     obj = Node_FindWidgetByResourceId(window, unlockRes(0x138));
-    D_800E5780->item = obj;
+    g_unlockGatedListScreen->item = obj;
     ((ListScreenItem *)obj)->alpha = 0xF;
 
-    D_800E5780->unkC = 3;
-    D_800E5780->unk10 = -1;
+    g_unlockGatedListScreen->scrollDelay = 3;
+    g_unlockGatedListScreen->nextScreen = -1;
     return 0;
 }
 #endif

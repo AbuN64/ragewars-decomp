@@ -1,13 +1,13 @@
 #include "MENU/TEAMMENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Runs a player's team selection menu each frame unless a menu is paused (Cinema_IsSequenceActive): while the
-   game is ending (D_8014561C) an open menu is closed through func_80218F84_de; a closed menu opens through
-   Cteamselect_InitTeamChoices when team selection D_801468C4 is on and the player has no team yet (0xFF at 0x92 of its
+   game is ending (g_matchEndingTeamWheelClose) an open menu is closed through TeamSelect_CloseTeamWheel; a closed menu opens through
+   Cteamselect_InitTeamChoices when team selection g_teamScoringEnabled is on and the player has no team yet (0xFF at 0x92 of its
    controls); while it is open the player is held (0x11B4, 0x11B8) and shielded for 2, and the team slot
    under the stick (Cteamselect_GetFourWayStickSlot) becomes the hovered entry at 0x70, moving the cursor at 0x6C and
    choosing the entry's team for the player unless the entry is disabled or flagged 0x8000; the menu
@@ -30,8 +30,8 @@
 #endif
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/CHANNEL.H"
-extern s32 D_8014561C;
-extern void func_80218F84_de(TeamMenu *);
+extern s32 g_matchEndingTeamWheelClose;
+extern void TeamSelect_CloseTeamWheel(TeamMenu *);
 extern void Cteamselect_InitTeamChoices(TeamMenu *, s32, SharedPlayer *);
 extern s32 Cteamselect_GetFourWayStickSlot(SharedPlayer *);
 extern s32 Cteamselect_TryConfirmTeamChoice(TeamMenu *, SharedPlayer *);
@@ -45,13 +45,13 @@ void Cteamselect_UpdateTeamWheel(TeamMenu *menu, SharedPlayer *player, void *unu
     if (Cinema_IsSequenceActive() != 0) {
         return;
     }
-    if (D_8014561C != 0 && menu->state != 0) {
-        func_80218F84_de(menu);
+    if (g_matchEndingTeamWheelClose != 0 && menu->state != 0) {
+        TeamSelect_CloseTeamWheel(menu);
         return;
     }
-    held = player->views5E8.view698_35.controller->unkB0 & 0x8000;
+    held = player->views5E8.view698_35.controller->rawButtons & 0x8000;
     if (menu->state == 0 || menu->state == 3) {
-        if (D_801462C8.counters.teams == 0 || player->views5D8.view5D8_1.record->team != 0xFF) {
+        if (g_gameSettings.counters.teams == 0 || player->views5D8.view5D8_1.record->team != 0xFF) {
             goto run;
         }
         Cteamselect_InitTeamChoices(menu, held, player);
@@ -82,7 +82,7 @@ void Cteamselect_UpdateTeamWheel(TeamMenu *menu, SharedPlayer *player, void *unu
 run:
     switch (menu->state) {
     case 1:
-        menu->open += D_800D2988 * 0.25f;
+        menu->open += g_frameElapsedTime * 0.25f;
         if (1.0f <= menu->open) {
             menu->open = 1.0f;
             menu->state = 2;
@@ -98,48 +98,48 @@ run:
         switch (player->views5D8.view5D8_1.record->team) {
         case 0:
 #ifdef VERSION_EU
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800E0FF4[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team0SelectedNoticesEu[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
 #elif defined(VERSION_EU_X)
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE6C[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team0SelectedNoticesEuX[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
 #else
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D3168);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team0SelectedNotice);
 #endif
             SoundElement_PlayFlatSound(0x2E6);
             break;
         case 1:
 #ifdef VERSION_EU
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800E1004[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team1SelectedNoticesEu[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
 #elif defined(VERSION_EU_X)
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE78[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team1SelectedNoticesEuX[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
 #else
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D316C);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team1SelectedNotice);
 #endif
             SoundElement_PlayFlatSound(0x2E4);
             break;
         case 2:
 #ifdef VERSION_EU
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800E1014[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team2SelectedNoticesEu[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
 #elif defined(VERSION_EU_X)
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE84[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team2SelectedNoticesEuX[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
 #else
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D3170);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team2SelectedNotice);
 #endif
             SoundElement_PlayFlatSound(0x2E8);
             break;
         case 3:
 #ifdef VERSION_EU
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800E1024[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team3SelectedNoticesEu[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
 #elif defined(VERSION_EU_X)
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE90[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team3SelectedNoticesEuX[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
 #else
-            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D3174);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team3SelectedNotice);
 #endif
             SoundElement_PlayFlatSound(0x2EC);
             break;
         }
         /* fall through */
     case 3:
-        menu->open -= D_800D2988 * 0.25f;
+        menu->open -= g_frameElapsedTime * 0.25f;
         if (menu->open <= 0.0f) {
             menu->open = 0.0f;
             menu->state = 0;
@@ -147,6 +147,6 @@ run:
         break;
     }
     if (menu->state != 0) {
-        menu->spin += D_800D2988 * 0.52359885f;
+        menu->spin += g_frameElapsedTime * 0.52359885f;
     }
 }

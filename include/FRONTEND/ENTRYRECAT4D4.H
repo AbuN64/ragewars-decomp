@@ -76,7 +76,7 @@ extern void Equip_ApplySelectedPlayerLoadouts(void);
 
 struct Entry42 {
     MenuWidget *window;
-    struct SlotsRecAt5CV1 *slots;
+    struct MenuSlotValueArrayView *slots;
     struct Object49C panel;
     char pad4A8[8];
     s32 state;

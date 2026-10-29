@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/LOCALDECODERANGE.H"
-#include "COMMON/LONE/D_8010AC80.H"
+#include "COMMON/LONE/MOTION_TRACK_DECODE_RANGE_END.H"
 #include "SYSTEM/POLYTRAK2_DECODESCALARSAMPLES_DATA.H"
 #include "GAME/SOUNDINFO.H"
 #include "COMMON/VECTOR4F.H"
@@ -12,7 +12,7 @@
 #include "SYSTEM/BITARRAY.H"
 
 /* ROM-grounded data: src/rw_pool_802612A8_C9E88_us_rev1.c */
-const unsigned int D_blob_d39bcb9851fad48bdbd2[1] = {
+const unsigned int g_motionTranslationQuantizationScale_StorageWords[1] = {
     0xC4FA0000,
 };
 
@@ -23,9 +23,9 @@ extern void Polytrak2_InitializePackedCurve(TrackBitarrayExpandCurveSamples *tra
 extern f32 Polytrak2_SampleAnimationCurve(TrackBitarrayExpandCurveSamples *track, f32 time, s32 unusedFirst, s32 unusedSecond);
 
 #if defined(VERSION_EU)
-extern s32 func_8025F094_eu(void *, void *, s32, s32, s32, s32);
+extern s32 Polytrak2_DecodeTrackSectionsEu(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_EU_X)
-extern s32 func_8025F0C4_eu_x(void *, void *, s32, s32, s32, s32);
+extern s32 Polytrak2_DecodeTrackSectionsEuX(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_US)
 extern s32 Polytrak2_DecodeAndSmoothSampleTracks(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_US_REV1)
@@ -34,9 +34,9 @@ extern s32 Polytrak2_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 extern s32 Polytrak2_DecodeTrackSections(void *, void *, s32, s32, s32, s32);
 #endif
 
-extern s32 D_8010AC78;
+extern s32 g_motionTrackDecodeTranslation;
 
-extern s32 D_8010AC74;
+extern s32 g_motionTrackDecodeRotation;
 
 /* Seeks the containing frame in a variable-length stream and reloads it when the frame changes. */
 
@@ -44,7 +44,7 @@ extern void Polytrak2_DecodeCubicSegment(Curve *compressedCurve);
 
 extern int Polytrak2_ReadBitsAtAddress(s32, unsigned int);
 
-extern f32 D_800C41A8_de[2];
+extern f32 g_motionQuantizationRangeAndUnit[2];
 
 void Bitarray_ExpandCurveSamples(char **stream, f32 *out, s32 frames)
 {
@@ -62,25 +62,25 @@ void Bitarray_ExpandCurveSamples(char **stream, f32 *out, s32 frames)
     *stream = cursor;
 }
 
-void Bitarray_ReadStridedFloatSamples(s32 bitCursor, void *arg1, s32 arg2)
+void Bitarray_ReadStridedFloatSamples(s32 bitCursor, void *sampleRecords, s32 sampleCount)
 {
-  int new_var;
+  int firstSampleIndex;
   s32 sp10;
-  s32 var_s0;
-  u8 *var_s1;
-  new_var = 0;
-  var_s0 = new_var;
-  if (arg2 > new_var)
+  s32 sampleIndex;
+  u8 *sampleOutput;
+  firstSampleIndex = 0;
+  sampleIndex = firstSampleIndex;
+  if (sampleCount > firstSampleIndex)
   {
-    var_s1 = (u8 *) arg1;
+    sampleOutput = (u8 *) sampleRecords;
     do
     {
-      var_s0 += 1;
+      sampleIndex += 1;
       sp10 = Polytrak2_ReadBitsAndAdvance(bitCursor, 0x20);
-      *((f32 *) var_s1) = *((f32 *) (&sp10));
-      var_s1 += 0x10;
+      *((f32 *) sampleOutput) = *((f32 *) (&sp10));
+      sampleOutput += 0x10;
     }
-    while (var_s0 < arg2);
+    while (sampleIndex < sampleCount);
   }
 }
 
@@ -99,16 +99,16 @@ s32 Bitarray_ExpandMotionPack(void *sourceMotionPack, void *destinationMotionPac
     d = SetN64_GetPackSection(destinationMotionPack, 2);
 
     one = 1;
-    D_8010AC78 = one;
-    D_8010AC74 = 0;
-    D_8010AC7C = D_800C4198_de;
-    D_8010AC80 = (2000.0f);
-    D_8010AC70 = first->f0C;
+    g_motionTrackDecodeTranslation = one;
+    g_motionTrackDecodeRotation = 0;
+    g_motionTrackDecodeRangeStart = g_motionTranslationQuantizationScale;
+    g_motionTrackDecodeRangeEnd = (2000.0f);
+    g_motionTrackFrameScale = first->f0C;
     if (
 #if defined(VERSION_EU)
-func_8025F094_eu
+Polytrak2_DecodeTrackSectionsEu
 #elif defined(VERSION_EU_X)
-func_8025F0C4_eu_x
+Polytrak2_DecodeTrackSectionsEuX
 #elif defined(VERSION_US)
 Polytrak2_DecodeAndSmoothSampleTracks
 #elif defined(VERSION_US_REV1)
@@ -119,16 +119,16 @@ Polytrak2_DecodeTrackSections
 (a, c, first->n14, 3, first->x, first->z) == 0) {
         return 0;
     }
-    D_8010AC78 = 0;
-    D_8010AC74 = one;
-    D_8010AC7C = D_800C41A0_de;
-    D_8010AC80 = D_800C41A4_de;
-    D_8010AC70 = first->f0C;
-    return 
+    g_motionTrackDecodeTranslation = 0;
+    g_motionTrackDecodeRotation = one;
+    g_motionTrackDecodeRangeStart = g_motionRotationQuantizationScale;
+    g_motionTrackDecodeRangeEnd = g_motionRotationDecodeLimit;
+    g_motionTrackFrameScale = first->f0C;
+    return
 #if defined(VERSION_EU)
-func_8025F094_eu
+Polytrak2_DecodeTrackSectionsEu
 #elif defined(VERSION_EU_X)
-func_8025F0C4_eu_x
+Polytrak2_DecodeTrackSectionsEuX
 #elif defined(VERSION_US)
 Polytrak2_DecodeAndSmoothSampleTracks
 #elif defined(VERSION_US_REV1)
@@ -140,43 +140,43 @@ Polytrak2_DecodeTrackSections
 }
 
 /** Return the word at offset twelve. */
-int func_8026140C_de(char *object) {
+int Bitarray_GetCurveBitAddress(char *object) {
     Stream *stream = (void *)object;
-    return stream->unkC;
+    return stream->segmentBitAddress;
 }
 
 void Bitarray_SeekCurveSegment(Stream *compressedCurve, u32 sampleIndex) {
     u32 segmentSampleCounts[64];
-    s32 temp_a0;
-    s32 temp_lo;
+    s32 segmentSampleCount;
+    s32 segmentBitOffset;
     s32 firstSegmentBitAddress;
-    s32 temp_s6;
+    s32 segmentBitStride;
     s32 segmentBitCursor;
     s32 segmentIndex;
-    u32 *var_s3;
-    u32 temp_v0;
+    u32 *sampleCountCursor;
+    u32 sampleCount;
     u32 activeSegmentStart;
     u32 segmentEndSample;
     u32 segmentStartSample;
 
-    temp_s6 = (compressedCurve->unk0 * 4) + 6;
-    activeSegmentStart = compressedCurve->unk24;
-    if (sampleIndex < activeSegmentStart || sampleIndex >= activeSegmentStart + compressedCurve->unk20) {
-        segmentIndex = compressedCurve->unk28;
+    segmentBitStride = (compressedCurve->coefficientBitWidth * 4) + 6;
+    activeSegmentStart = compressedCurve->segmentStartSample;
+    if (sampleIndex < activeSegmentStart || sampleIndex >= activeSegmentStart + compressedCurve->segmentSampleCount) {
+        segmentIndex = compressedCurve->segmentIndex;
         segmentStartSample = activeSegmentStart;
-        segmentEndSample = segmentStartSample + compressedCurve->unk20;
-        segmentBitCursor = compressedCurve->unkC;
+        segmentEndSample = segmentStartSample + compressedCurve->segmentSampleCount;
+        segmentBitCursor = compressedCurve->segmentBitAddress;
         firstSegmentBitAddress=segmentBitCursor;
-        segmentBitCursor += segmentIndex * temp_s6;
+        segmentBitCursor += segmentIndex * segmentBitStride;
         if(sampleIndex < activeSegmentStart) {
             segmentBitCursor=firstSegmentBitAddress;segmentIndex=0;segmentStartSample=0;
             segmentEndSample=Polytrak2_ReadBitsAtAddress(segmentBitCursor,6);
         }
         for (;;) {
-            segmentBitCursor += temp_s6;
+            segmentBitCursor += segmentBitStride;
             if(sampleIndex>=segmentStartSample && sampleIndex<segmentEndSample) {
-                if(segmentIndex!=compressedCurve->unk28) {
-                    compressedCurve->unk24=segmentStartSample;compressedCurve->unk28=segmentIndex;Polytrak2_DecodeCubicSegment(compressedCurve);
+                if(segmentIndex!=compressedCurve->segmentIndex) {
+                    compressedCurve->segmentStartSample=segmentStartSample;compressedCurve->segmentIndex=segmentIndex;Polytrak2_DecodeCubicSegment(compressedCurve);
                 }
                 break;
             }
@@ -188,36 +188,36 @@ void Bitarray_SeekCurveSegment(Stream *compressedCurve, u32 sampleIndex) {
     }
 }
 
-s32 Bitarray_GetQuantizationBitCount(f32 arg0)
+s32 Bitarray_GetQuantizationBitCount(f32 quantizationError)
 {
-  unsigned long long new_var;
-  f32 temp_f1;
+  unsigned long long unitConstantIndex;
+  f32 requiredLevels;
   s32 bitCount;
   bitCount = 0;
-  new_var = 1;
-  temp_f1 = arg0;
-  temp_f1 = (D_800C41A8_de[new_var] / (2.0f * temp_f1)) + D_800C41A8_de[new_var];
-  if (D_800C41A8_de[0] <= arg0)
+  unitConstantIndex = 1;
+  requiredLevels = quantizationError;
+  requiredLevels = (g_motionQuantizationRangeAndUnit[unitConstantIndex] / (2.0f * requiredLevels)) + g_motionQuantizationRangeAndUnit[unitConstantIndex];
+  if (g_motionQuantizationRangeAndUnit[0] <= quantizationError)
   {
     return 0;
   }
-  if (D_800C41A8_de[new_var] < temp_f1)
+  if (g_motionQuantizationRangeAndUnit[unitConstantIndex] < requiredLevels)
   {
     do
     {
       bitCount += 1;
     }
-    while (((f32) (1 << bitCount)) < temp_f1);
+    while (((f32) (1 << bitCount)) < requiredLevels);
   }
   return bitCount;
 }
 
-f32 Bitarray_EvaluateCubicPolynomial(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 unused4, f32 arg5) {
-    f32 bits = *(f32 *)&arg0;
-    f32 v1 = *(f32 *)&arg1;
-    f32 v2 = *(f32 *)&arg2;
-    f32 v3 = *(f32 *)&arg3;
-    return bits + (v1 * arg5) + (v2 * arg5 * arg5) + (v3 * arg5 * arg5 * arg5);
+f32 Bitarray_EvaluateCubicPolynomial(s32 constantBits, s32 linearBits, s32 quadraticBits, s32 cubicBits, s32 unused4, f32 sampleTime) {
+    f32 bits = *(f32 *)&constantBits;
+    f32 v1 = *(f32 *)&linearBits;
+    f32 v2 = *(f32 *)&quadraticBits;
+    f32 v3 = *(f32 *)&cubicBits;
+    return bits + (v1 * sampleTime) + (v2 * sampleTime * sampleTime) + (v3 * sampleTime * sampleTime * sampleTime);
 }
 
 /** Return the low five bits of the supplied value. */
@@ -225,39 +225,39 @@ unsigned int Bitarray_GetWordBitOffset(unsigned int value) {
     return value & 0x1F;
 }
 
-u32 Bitarray_GetRequiredBitCount(s32 arg0) {
-    u32 var_a1;
+u32 Bitarray_GetRequiredBitCount(s32 value) {
+    u32 setBitCount;
     u32 highestSetBit;
-    u32 var_v1;
+    u32 bitIndex;
 
-    var_a1 = 0;
+    setBitCount = 0;
     highestSetBit = 0;
-    var_v1 = 0;
+    bitIndex = 0;
     do {
-        if (arg0 & (u32)(1 << var_v1)) {
-            var_a1 += 1;
-            highestSetBit = var_v1;
+        if (value & (u32)(1 << bitIndex)) {
+            setBitCount += 1;
+            highestSetBit = bitIndex;
         }
-        var_v1 += 1;
-    } while (var_v1 < 0x20U);
-    if (var_a1 >= 2U) {
+        bitIndex += 1;
+    } while (bitIndex < 0x20U);
+    if (setBitCount >= 2U) {
         return highestSetBit + 1;
     }
     return highestSetBit;
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_80261608[2] = {
+unsigned int k_BitarrayEncodedWords[2] = {
     0x04000000, 0x01000400,
 };
 #endif
 
 /* ROM-grounded data: rodata/unresolved/800C9290 */
-const unsigned int D_blob_5472735a2d60c7e3f0e5[2] = {
+const unsigned int g_motionRotationQuantizationScale_StorageWords[2] = {
     0xBF800000, 0x3F800000,
 };
 
 /* ROM-grounded data: src/rw_pool_8026154C_C9E98_us_rev1.c */
-const unsigned int D_blob_30a83c3cc53f2e58e087[2] = {
+const unsigned int g_motionQuantizationRangeAndUnit_StorageWords[2] = {
     0x3F000000, 0x3F800000,
 };

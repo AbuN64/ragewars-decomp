@@ -8,7 +8,7 @@ struct IntegerStateB0 {
     unsigned char padding_8C[32];
     s32 unk_AC;
 };
-struct IntegerState164 {
+struct IntroBackdropStateView {
     char pad0[0x160];
     s32 unk_160;
 };

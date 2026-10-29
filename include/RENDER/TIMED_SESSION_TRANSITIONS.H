@@ -8,7 +8,7 @@ extern void SetN64_InitializeMode2(void);
 extern void SetN64_OnMode5DrawComplete(s32 session);
 extern void SetN64_AdvanceToModeFive(struct GameSession *session);
 extern void SetN64_DrawIntroBackdrop(void);
-extern s32 SetN64_CheckTimedSessionTransition(struct GameSession *session, f32 limit, s32 eight, s32 arg3);
+extern s32 SetN64_CheckTimedSessionTransition(struct GameSession *session, f32 limit, s32 eight, s32 transitionCode);
 extern void Scene_ResetTransitionViewport(void);
 extern void SetN64_DrawSessionWithAttractTimeout(void *session);
 #endif

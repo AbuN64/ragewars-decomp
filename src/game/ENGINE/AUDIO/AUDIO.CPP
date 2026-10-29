@@ -6,7 +6,7 @@
 #include "AUDIO/SONG_PLAYER_VIEWS.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "sdk/AUDIO/audio_nextdecodedsampleblock.H"
 #include "TEXTURE/SOUND_UPDATEAUDIOCONTEXT.H"
 #include "AUDIO/AUDIO_CHOOSEWEIGHTEDSOUNDVARIANT.H"
@@ -41,9 +41,9 @@ extern void alSndpSetPan(char *, s32);
 
 extern void alSndpPlay(char *);
 
-void Audio_UpdateDialogPlayer(PlayerRecAt24 *player) {
+void Audio_UpdateDialogPlayer(DialogPlaybackPlayer *player) {
     extern void alSndpSetSound(char *, s32);
-    extern func_80203E78_S1 *D_800D0D78;
+    extern ResourceKeyView *g_dialogDefaultSample;
     s32 rate;
     char *channel;
     s32 index;
@@ -79,7 +79,7 @@ void Audio_UpdateDialogPlayer(PlayerRecAt24 *player) {
             player->volume = header->volume;
             sequence = SetN64_GetPackSection(player->bank->songs, index | 1);
             ((void **)D_80108064)[-1] = sequence;
-            D_800D0D78->unk4 = Audio_InitDecodeStream(sequence, 0x5622, &rate);
+            g_dialogDefaultSample->key = Audio_InitDecodeStream(sequence, 0x5622, &rate);
             player->state = 3;
             alSndpSetSound(channel, player->id);
             alSndpSetPitch(channel, rate * 4.5351473e-05f);

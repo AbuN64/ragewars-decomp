@@ -1,22 +1,22 @@
 #ifndef AI_SHARED_PICKUPGOALNODE_H
 #define AI_SHARED_PICKUPGOALNODE_H
 struct Obj8020BC50;
-#ifndef FUNC_8020EF80_EU_X_CLOSED_H
-#define FUNC_8020EF80_EU_X_CLOSED_H
+#ifndef AI_PICKUP_GOAL_SEARCH_DECLARATIONS_H
+#define AI_PICKUP_GOAL_SEARCH_DECLARATIONS_H
 #include "TYPES.H"
 typedef struct Shared_PickupGoalNode Shared_PickupGoalNode;
 struct Shared_PickupGoalNode {
     s32 id;
-    u32 unknown4[3];
+    u32 reservedElements[3];
     Shared_PickupGoalNode *next;
     f32 radius;
-    u32 unknown18[7];
+    u32 reservedElements1[7];
     s32 goal;
 };
 
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
-extern PickupGoalNodeList D_8013B364;
+extern PickupGoalNodeList g_navigationGraph;
 
 extern void Portal_ResetSearchState(struct Obj8020BC50 *graph);
 extern void Route_ClearGoalList(PickupGoalNodeList *list);

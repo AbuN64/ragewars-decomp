@@ -9,22 +9,22 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 
 /* Reloads a saved controller-pak block when Snapshot_CheckStatusPrompt reports no problem for the selected
-   channel: with D_80153780 set it loads the block D_800E28BC points to onto the player found at
-   D_80145040 - the 0x18 Block70 into the player's 0x5E0 block, the 352 words at 0x88 into the option
-   block D_801462C8 plus the word at its 0x580 (keeping the byte D_80146848 there), the four floats at
-   0x8 (the game clock) into D_801468A0, D_801427E4, D_801427E8 and D_801427EC, the word at D_8011FE88+0x44 as a byte
-   count for the block at 0x60C copied into D_800F91F0 - then shows the D_0044EAE0 prompt through
-   Menu_OpenDialog; otherwise it retries Note_DeleteNote on note D_8014D4FC and shows the
+   channel: with D_80153780 set it loads the block g_controllerPakSnapshotPayload points to onto the player found at
+   g_playerViewRenderContext - the 0x18 Block70 into the player's 0x5E0 block, the 352 words at 0x88 into the option
+   block g_gameSettings plus the word at its 0x580 (keeping the byte g_frontendSavedVideoModeIndex there), the four floats at
+   0x8 (the game clock) into g_matchRoundCounters, g_controllerPakPreviewSeconds, g_controllerPakPreviewMinutes and g_controllerPakPreviewHours, the word at D_8011FE88+0x44 as a byte
+   count for the block at 0x60C copied into g_worldSnapshotNoteData - then shows the D_0044EAE0 prompt through
+   Menu_OpenDialog; otherwise it retries Note_DeleteNote on note g_controllerPakOverwriteNoteIndex and shows the
    D_0044EB70/D_0044EBDC result. Pak_ConfirmPendingOperation's state 4 flow with the load path added; returns 1. */
 
-/* The persistent options block: the first 0x584 bytes of Shared_Game (D_801462C8). */
+/* The persistent options block: the first 0x584 bytes of Shared_Game (g_gameSettings). */
 typedef struct PakSavedOptions {
     s32 words[353];
 } PakSavedOptions;
 
 struct PakSaveBlock {
     char pad0[0x8];
-    f32 ticks; /* the saved game clock, restored into D_801462C8.counters */
+    f32 ticks; /* the saved game clock, restored into g_gameSettings.counters */
     f32 seconds;
     f32 minutes;
     f32 hours;
@@ -40,29 +40,29 @@ struct PakSaveOwner {
     void *slot698;
 };
 
-extern s32 D_8015375C;
+extern s32 g_pakUseScannedChannel;
 extern s32 D_80153780;
 extern char D_0044EAE0[];
-extern char D_80145040[];
-extern char D_8014561C[];
+extern char g_playerViewRenderContext[];
+extern char g_matchEndingTeamWheelClose[];
 extern s32 D_80140FB4[];
-extern s32 D_8013B2D4;
-extern u8 D_80146848[]; /* D_801462C8+0x580, kept across the options reload */
+extern s32 g_persistedOptionUnlockFlags;
+extern u8 g_frontendSavedVideoModeIndex[]; /* g_gameSettings+0x580, kept across the options reload */
 /* The ROM stores the clock's seconds/minutes/hours through three separate objects (no shared base
-   register, each store ordered after the block load), not through D_801462C8.counters. */
-extern f32 D_801427E4[];
-extern f32 D_801427E8[];
-extern f32 D_801427EC[];
-extern u8 D_800F91F0[];
-extern struct PakSaveBlock *D_800E28BC;
+   register, each store ordered after the block load), not through g_gameSettings.counters. */
+extern f32 g_controllerPakPreviewSeconds[];
+extern f32 g_controllerPakPreviewMinutes[];
+extern f32 g_controllerPakPreviewHours[];
+extern u8 g_worldSnapshotNoteData[];
+extern struct PakSaveBlock *g_controllerPakSnapshotPayload;
 
-extern s32 Snapshot_CheckStatusPrompt(MenuRecAt24 *menu, s32 ch, s32 quiet);
+extern s32 Snapshot_CheckStatusPrompt(PakPromptContext *menu, s32 ch, s32 quiet);
 extern s32 Note_DeleteNote(s32 ch, s32 index);
 extern struct PakSaveOwner *Playerai_FindPlayerByController(char *profiles, PakMenuSlot *slot);
 extern void Menu_OpenDialog(void *owner, char *message, void *player, void *slot, char *title);
 
-extern s32 D_801462CC; /* MIXED Snapshot_RestoreSaveBlock */
-s32 Snapshot_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
+extern s32 g_menuOptionAvailabilityFlags; /* MIXED Snapshot_RestoreSaveBlock */
+s32 Snapshot_RestoreSaveBlock(void *unused, PakPromptContext *menu) {
     struct PakSaveOwner *owner;
     s32 channel;
     Shared_World *world;
@@ -71,45 +71,45 @@ s32 Snapshot_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
     u8 *dst;
     s32 i;
 
-    if (D_8015375C != 0) {
-        channel = D_800E28C8;
+    if (g_pakUseScannedChannel != 0) {
+        channel = g_introSelectedItem;
     } else {
-        channel = menu->slot->unk4;
+        channel = menu->slot->controllerPort;
     }
     if (Snapshot_CheckStatusPrompt(menu, channel, 0) != 0) {
         D_80153784 = 1;
         return 1;
     }
     if (D_80153780 != 0) {
-        owner = Playerai_FindPlayerByController(D_80145040, menu->slot);
+        owner = Playerai_FindPlayerByController(g_playerViewRenderContext, menu->slot);
         world = &g_world;
-        kept = D_80146848[0];
-        owner->block = D_800E28BC->block18;
-        *(PakSavedOptions *)&D_801462C8 = D_800E28BC->options;
-        D_801462C8.counters.m_GameTimeFifteenth = D_800E28BC->ticks;
-        D_801427E4[0] = D_800E28BC->seconds;
-        D_801427E8[0] = D_800E28BC->minutes;
-        D_801427EC[0] = D_800E28BC->hours;
-        D_8013B2D4 = D_801462CC;
-        D_80146848[0] = kept;
-        src = D_800E28BC->notes;
-        dst = D_800F91F0;
+        kept = g_frontendSavedVideoModeIndex[0];
+        owner->block = g_controllerPakSnapshotPayload->block18;
+        *(PakSavedOptions *)&g_gameSettings = g_controllerPakSnapshotPayload->options;
+        g_gameSettings.counters.m_GameTimeFifteenth = g_controllerPakSnapshotPayload->ticks;
+        g_controllerPakPreviewSeconds[0] = g_controllerPakSnapshotPayload->seconds;
+        g_controllerPakPreviewMinutes[0] = g_controllerPakSnapshotPayload->minutes;
+        g_controllerPakPreviewHours[0] = g_controllerPakSnapshotPayload->hours;
+        g_persistedOptionUnlockFlags = g_menuOptionAvailabilityFlags;
+        g_frontendSavedVideoModeIndex[0] = kept;
+        src = g_controllerPakSnapshotPayload->notes;
+        dst = g_worldSnapshotNoteData;
         for (i = 0; i < world->noteCount; i++) {
             *dst++ = *src++;
         }
         D_80140FB4[0] = 0;
         D_80140FB4[1] = 0;
         Menu_OpenDialog(&D_80140FB4[0x16A], D_0044EAE0, owner, owner->slot698, 0);
-    } else if (Note_DeleteNote(channel, D_8014D4FC) == 0) {
-        Menu_OpenDialog(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
+    } else if (Note_DeleteNote(channel, g_controllerPakOverwriteNoteIndex) == 0) {
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EB70, menu->player, menu->slot, menu->prompt);
     } else {
-        Menu_OpenDialog(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EBDC, menu->player, menu->slot, menu->prompt);
     }
     return 1;
 }
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
-/* Writes the 11-character rank title for the score D_8014D48C into the end of the item's text:
+/* Writes the 11-character rank title for the score g_pakProfileRankScore into the end of the item's text:
    the title comes from the band the score falls in (below 50, 150, 300, 500, 800, 1300, 2000,
    3000, 4500, 6500 and 9999 and above), and the text position is the text length from
    Menu_CountLineChars minus 11; returns 0. */
@@ -117,7 +117,7 @@ s32 Snapshot_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
 
 
 
-extern u16 D_8014D48C;
+extern u16 g_pakProfileRankScore;
 
 
 
@@ -152,31 +152,31 @@ s32 Snapshot_UpdateScoreTitle(PakNoteTextEntry *item) {
     s32 score;
 
     title = 0;
-    score = D_8014D48C;
-    if (D_8014D48C < 50) {
-        title = D_800D241C;
+    score = g_pakProfileRankScore;
+    if (g_pakProfileRankScore < 50) {
+        title = g_pakScoreBelow50Title;
     } else if (score >= 50 && score < 150) {
-        title = D_800D2420;
+        title = g_pakScoreBelow150Title;
     } else if (score >= 150 && score < 300) {
-        title = D_800D2424;
+        title = g_pakScoreBelow300Title;
     } else if (score >= 300 && score < 500) {
-        title = D_800D2428;
+        title = g_pakScoreBelow500Title;
     } else if (score >= 500 && score < 800) {
-        title = D_800D242C;
+        title = g_pakScoreBelow800Title;
     } else if (score >= 800 && score < 1300) {
-        title = D_800D2430;
+        title = g_pakScoreBelow1300Title;
     } else if (score >= 1300 && score < 2000) {
-        title = D_800D2434;
+        title = g_pakScoreBelow2000Title;
     } else if (score >= 2000 && score < 3000) {
-        title = D_800D2438;
+        title = g_pakScoreBelow3000Title;
     } else if (score >= 3000 && score < 4500) {
-        title = D_800D243C;
+        title = g_pakScoreBelow4500Title;
     } else if (score >= 4500 && score < 6500) {
-        title = D_800D2440;
+        title = g_pakScoreBelow6500Title;
     } else if (score >= 6500 && score < 9999) {
-        title = D_800D2444;
+        title = g_pakScoreBelow9999Title;
     } else if (score >= 9999) {
-        title = D_800D2448;
+        title = g_pakScoreAtLeast9999Title;
     }
     dest = *item->text;
     dest += Menu_CountLineChars() - 11;

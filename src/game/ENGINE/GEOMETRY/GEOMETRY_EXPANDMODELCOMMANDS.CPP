@@ -1,6 +1,6 @@
 #include "sdk/LIBC.H"
 #include "include_asm.h"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "gbi.h"
@@ -19,25 +19,25 @@
 
 extern Gfx *g_displayListCursor;
 
-extern char D_0044B180;
+extern char g_geometryMaterialIntensityTexture;
 
-extern u32 D_800CC384;
+extern u32 g_geometryEffectGeometryMode;
 
 extern s32 Geometry_SetModePreset(s32);
 
 s32 SetN64_GetSizedPackSection(s32 packAddress, s32 sectionIndex, s32 *sectionSizeOut);
 
-extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32, void *, s32);
+extern struct CacheResourceBlockView *Cache_AllocResourceBlock(s32, void *, s32);
 
-void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *replacement);
+void Cache_ReplaceResourceBlock(s32 unused, struct CacheResourceBlockView **handle, struct CacheResourceBlockView *replacement);
 
 
 
 extern s32 g_geometryViewEffect;
 
-extern signed char D_800D1610[3];
+extern signed char g_geometryMaterialLightDirection[3];
 
-extern char D_80145040;
+extern char g_playerViewRenderContext;
 
 extern void Graphu64_UnpackFixedMatrix(f32 *matrix, void *model);
 
@@ -54,7 +54,7 @@ void Geometry_SetupIntensityPass(void) {
     TextLoad_ResetTextureCache();
 
     cmd = g_displayListCursor++;
-    gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &D_0044B180);
+    gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &g_geometryMaterialIntensityTexture);
     cmd = g_displayListCursor++;
     gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP, 5, 0, G_TX_WRAP, 5, 0);
     cmd = g_displayListCursor++;
@@ -72,15 +72,15 @@ void Geometry_SetupIntensityPass(void) {
     cmd = g_displayListCursor++;
     gDPSetTextureLUT(cmd, G_TT_NONE);
     cmd = g_displayListCursor++;
-    gSPGeometryMode(cmd, 0, D_800CC384 | 0x00260404);
+    gSPGeometryMode(cmd, 0, g_geometryEffectGeometryMode | 0x00260404);
 
     Geometry_SetModePreset(0x1D);
 }
 
 /* Expand packed geometry commands into display lists while rebuilding resource offsets. */
-void Geometry_ExpandModelCommands(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32 sentinel) {
+void Geometry_ExpandModelCommands(s32 unused, struct CacheResourceBlockView **res, s32 extra, s32 sentinel) {
     s32 len0, len1, len3, len4, len5;
-    struct Shape_typemap_165 *allocation;
+    struct CacheResourceBlockView *allocation;
     struct Pack *old;
     struct Pack *oldList;
     struct Pack *newList;
@@ -165,12 +165,12 @@ void Geometry_ExpandModelCommands(s32 unused, struct Shape_typemap_165 **res, s3
             copySource0 = SetN64_GetSizedPackSection(old, 0, &len0);
             vertexCount = 0;
             vertices = SetN64_GetPackSection(dst, 0);
-            func_802BD3A0_de(vertices, copySource0, len0);
+            Libc_CopyBytes(vertices, copySource0, len0);
             offset += len0;
             dst->offsets[1] = offset;
             copySource1 = SetN64_GetSizedPackSection(old, 1, &len1);
             dstData = SetN64_GetPackSection(dst, 1);
-            func_802BD3A0_de(dstData, copySource1, len1);
+            Libc_CopyBytes(dstData, copySource1, len1);
             offset += len1;
             dst->offsets[2] = offset;
             oldList = SetN64_GetPackSection(old, 2);
@@ -273,17 +273,17 @@ void Geometry_ExpandModelCommands(s32 unused, struct Shape_typemap_165 **res, s3
             if (extra != 0) {
                 copySource3 = SetN64_GetSizedPackSection(old, 3, &len3);
                 dstData = SetN64_GetPackSection(dst, 3);
-                func_802BD3A0_de(dstData, copySource3, len3);
+                Libc_CopyBytes(dstData, copySource3, len3);
                 offset += len3;
                 dst->offsets[4] = offset;
                 copySource4 = SetN64_GetSizedPackSection(old, 4, &len4);
                 dstData = SetN64_GetPackSection(dst, 4);
-                func_802BD3A0_de(dstData, copySource4, len4);
+                Libc_CopyBytes(dstData, copySource4, len4);
                 offset += len4;
                 dst->offsets[5] = offset;
                 copySource5 = SetN64_GetSizedPackSection(old, 5, &len5);
                 dstData = SetN64_GetPackSection(dst, 5);
-                func_802BD3A0_de(dstData, copySource5, len5);
+                Libc_CopyBytes(dstData, copySource5, len5);
                 offset += len5;
                 dst->offsets[6] = offset;
             }
@@ -309,20 +309,20 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
     if (g_geometryViewEffect != 0 && (material->flagWord & 0x8000)) {
         Graphu64_UnpackFixedMatrix((f32 *)matrix, model);
         Graphu64_GetMatrixTranslation((f32 *)matrix, &position);
-        Graphu64_SubtractVectors(&direction, Playerai_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
+        Graphu64_SubtractVectors(&direction, Playerai_GetFirstPlayer(&g_playerViewRenderContext) + 0x6E8, &position);
         Graphu64_NormalizeVec3(&direction);
         {
             Gfx *cmd;
             Gfx *light;
             Gfx *ambient;
 
-            D_800D1610[0] = direction.x * D_800C4668_de;
-            D_800D1610[1] = direction.y * D_800C4668_de;
-            D_800D1610[2] = direction.z * D_800C4668_de;
+            g_geometryMaterialLightDirection[0] = direction.x * g_geometryLightDirectionScale;
+            g_geometryMaterialLightDirection[1] = direction.y * g_geometryLightDirectionScale;
+            g_geometryMaterialLightDirection[2] = direction.z * g_geometryLightDirectionScale;
             cmd = g_displayListCursor++;
             gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
-            gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 48, 16, (unsigned int)(D_800D1610 - 8));
-            gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 72, 16, (unsigned int)(D_800D1610 - 0x10));
+            gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 48, 16, (unsigned int)(g_geometryMaterialLightDirection - 8));
+            gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 72, 16, (unsigned int)(g_geometryMaterialLightDirection - 0x10));
         }
         return 1;
     }
@@ -338,8 +338,8 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "COMMON/DISPLAY.H"
-extern u32 D_800E28A4;
-extern CGameStatus D_801468A0;
+extern u32 g_displayListCapacityUsRev1;
+extern CGameStatus g_matchRoundCounters;
 extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 /* Draws an actor model's parts, choosing each part by the 0x38 bits of its material byte 6: on the special
@@ -358,10 +358,10 @@ void Geometry_DrawActorModelParts(void **resource, struct Player *owner, void *m
     s32 glow = 0;
     CGameStatus *settings;
 
-    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityUsRev1 - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
-    settings = &D_801468A0;
+    settings = &g_matchRoundCounters;
     if (settings->enabled != 0) {
         AiProfile *state = owner->profile;
         if (state->character == 0xB && state->enabled != 0) {
@@ -374,7 +374,7 @@ void Geometry_DrawActorModelParts(void **resource, struct Player *owner, void *m
     if (0.0f < owner->glow) {
         glow = 1;
     }
-    if (D_801468A0.m_bCTFOn != 0 && owner->profile->bonus == 1) {
+    if (g_matchRoundCounters.m_bCTFOn != 0 && owner->profile->bonus == 1) {
         bonus = 1;
     }
     header = *resource;
@@ -399,7 +399,7 @@ void Geometry_DrawActorModelParts(void **resource, struct Player *owner, void *m
             Geometry_ApplyMaterialLighting(matrix, lights, material);
         }
         state = owner->profile;
-        if (state->character == 0x12 && (D_801468A0.m_bFragTagOn == 0 || state->bonus == 0)) {
+        if (state->character == 0x12 && (g_matchRoundCounters.m_bFragTagOn == 0 || state->bonus == 0)) {
             u32 bits;
             u32 wanted;
             if (state->variant == 0) {

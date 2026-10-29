@@ -16,7 +16,7 @@ typedef struct Shared_PakMenu {
     char pad10[4];
     char *dialogData;
     char pad18[4];
-    ObjRecAt5DC *player;
+    ActorOwnerView *player;
     union {
         PakMenuSlot *owner;
         PakMenuSlot *slot;

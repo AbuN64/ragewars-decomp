@@ -1,10 +1,10 @@
 #include "COMMON/MODEL_RENDER.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "COMMON/LISTHEADER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "TYPES.H"
 #include "ENGINE/INSTANCE/GOBJINST_BUILDACTORTRANSFORM.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
@@ -47,7 +47,7 @@ void Gobjinst_BuildActorTransform(void *levelActor) {
     trig.y = sine;
     trig.z = 0.0f;
     angle = ((struct LevelActor *)(levelActor))->yaw * scale;
-    D_80115DEC = sine;
+    g_turretAimSine = sine;
     trig.w = Math_Cosf(angle);
 
     product_ptr = &product;
@@ -78,10 +78,10 @@ void Gobjinst_QueueAnimation(void *actorStorage, unsigned int animationIndex)
 }
 
 void Gobjinst_RestartAnimation(void *actorAnimationState) {
-    (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_10F) = 1;
-    (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_104) = 0;
-    (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_10E) = 0;
-    (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_100) = (s32) ((((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_100) & ~0x400);
+    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_10F) = 1;
+    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_104) = 0;
+    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_10E) = 0;
+    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_100) = (s32) ((((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_100) & ~0x400);
 }
 
 extern s32 Gobjinst_ChooseAnimationVariant(void *, s32, s32);
@@ -96,7 +96,7 @@ s32 Gobjinst_RequestAnimationKind(void *a, s32 c, s32 flag) {
     return 0;
 }
 
-extern void Gobjinst_QueueAnimation(void *arg0, u32 arg1);
+extern void Gobjinst_QueueAnimation(void *actor, u32 animationId);
 
 s32 Gobjinst_RequestAnimationIndex(void *levelActor, s32 animationIndex, s32 allowDuringBlend) {
     if (animationIndex < 0 || (allowDuringBlend == 0 && (((struct LevelActor *)(levelActor))->flags & 0x400))) {
@@ -129,7 +129,7 @@ s16 Gobjinst_ChooseAvailableAnimationKind(void *actor, s16 *callback, s32 exclud
 
 extern s32 *Gobjinst_RequestAnimatedModelVariant(void *actor, s8 variantIndex);
 extern s32 Gobjinst_BuildActorPose(void *actor, s32 modelPack, void *model);
-extern void Cache_UnlockResource(s32 arg0, s32 resource);
+extern void Cache_UnlockResource(s32 cache, s32 resource);
 
 s32 Gobjinst_BuildAnimatedPose(void *actorStorage, s32 resourceRequestMode)
 {
@@ -142,11 +142,11 @@ s32 Gobjinst_BuildAnimatedPose(void *actorStorage, s32 resourceRequestMode)
   {
     if (resource)
     {
-      resource = Cache_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, resourceRequestMode);
+      resource = Cache_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&g_actorAnimatedModelResourceTuning) + 4, resourceRequestMode);
     }
     else
     {
-      resource = Cache_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, resourceRequestMode);
+      resource = Cache_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&g_actorAnimatedModelResourceTuning) + 4, resourceRequestMode);
     }
     if (resource == 0)
     {
@@ -166,15 +166,15 @@ s32 Gobjinst_BuildAnimatedPose(void *actorStorage, s32 resourceRequestMode)
 
 void Gobjinst_RotatePoseMatrixBuffers(void *actorRenderState) {
     s32 previousPoseMatrices;
-    previousPoseMatrices = (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_B4);
-    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_B4) = 0;
-    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_BC) = 0;
-    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_C0) = 0;
-    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_100) = (s32) ((((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_100) & ~0x200);
-    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_B8) = previousPoseMatrices;
+    previousPoseMatrices = (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_B4);
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_B4) = 0;
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_BC) = 0;
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_C0) = 0;
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_100) = (s32) ((((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_100) & ~0x200);
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_B8) = previousPoseMatrices;
 }
 
-extern s32 D_800D297C;
+extern s32 g_lightingBufferIndex;
 extern void GameObject_DrawActorShadow(char *obj, s32 unused, char *info);
 extern void Gobjinst_SpawnAnimatedModelViewEffect(void *actor, void *lookup);
 
@@ -191,11 +191,11 @@ void Gobjinst_DrawMaskedModel(void *actor, void *unusedShadowContext, void *rend
         if (*(s32 *)renderSettings != 0) {
             one = 1;
             Geometry_DrawModelResource(((struct ActorRenderSettings *)(renderSettings))->view,
-                          ((struct LevelActor *)(actor))->fieldB4, one,
+                          ((struct LevelActor *)(actor))->animationMatrices, one,
                           (char *)actor
-                              + ((((D_800D297C << one) + D_800D297C) << 3)
+                              + ((((g_lightingBufferIndex << one) + g_lightingBufferIndex) << 3)
                                  + 0x140),
-                          0, ((struct LevelActor *)(actor))->field3);
+                          0, ((struct LevelActor *)(actor))->renderPass);
             Gobjinst_SpawnAnimatedModelViewEffect(actor, renderSettings);
         }
     }
@@ -206,7 +206,7 @@ void Gobjinst_DrawMaskedModelWithLighting(void *actor, void *unusedShadowContext
     s8 index;
     s32 one;
 
-    ((ObjectRecAt140 *)actor)->blocks[D_800D297C] = *lighting;
+    ((ActorLightingBlockView *)actor)->blocks[g_lightingBufferIndex] = *lighting;
     index = ((struct LevelActor *)(actor))->team;
     if (index != -1) {
         ((struct LevelActor *)(actor))->mask = 1 << index;
@@ -216,11 +216,11 @@ void Gobjinst_DrawMaskedModelWithLighting(void *actor, void *unusedShadowContext
         if (*(s32 *)renderSettings != 0) {
             one = 1;
             Geometry_DrawModelResource(((struct ActorRenderSettings *)(renderSettings))->view,
-                          ((struct LevelActor *)(actor))->fieldB4, one,
+                          ((struct LevelActor *)(actor))->animationMatrices, one,
                           (char *)actor
-                              + ((((D_800D297C << one) + D_800D297C) << 3)
+                              + ((((g_lightingBufferIndex << one) + g_lightingBufferIndex) << 3)
                                  + 0x140),
-                          0, ((struct LevelActor *)(actor))->field3);
+                          0, ((struct LevelActor *)(actor))->renderPass);
             Gobjinst_SpawnAnimatedModelViewEffect(actor, renderSettings);
         }
     }

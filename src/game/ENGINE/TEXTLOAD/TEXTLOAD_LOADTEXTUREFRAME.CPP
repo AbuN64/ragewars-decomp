@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-extern s32 D_800CD894_de;
+extern s32 g_texturePaletteOverrideEnabled;
 
 extern s32 Ppdecom_UnpackResource(void *, s32);
 extern u16 *SetN64_GetSizedPackSection(void *, s32, u32 *);
@@ -19,7 +19,7 @@ typedef struct {
 } Resource;
 
 /* Recolours the RGBA5551 frames of a resource by the global or per-resource colour mode, then rebuilds it as a three-part block holding the header, one selected entry of list 1 and one of list 2. */
-void Textload_PrepareTextureVariation(s32 arg0, Resource *handle) {
+void Textload_PrepareTextureVariation(s32 textureResource, Resource *handle) {
     u32 size;
     s32 rem1;
     s32 rem2;
@@ -42,7 +42,7 @@ void Textload_PrepareTextureVariation(s32 arg0, Resource *handle) {
     s32 *hdr;
     s32 *entry;
 
-    if (Ppdecom_UnpackResource(handle, arg0 >= 0) == 0) {
+    if (Ppdecom_UnpackResource(handle, textureResource >= 0) == 0) {
         return;
     }
     obj = *handle->handle;
@@ -52,13 +52,13 @@ void Textload_PrepareTextureVariation(s32 arg0, Resource *handle) {
     list2 = SetN64_GetPackSection(obj, 2);
     count = *list2;
     if (count != 0) {
-        rem2 = arg0 % count;
+        rem2 = textureResource % count;
     } else {
         rem2 = 0;
     }
     list1 = SetN64_GetPackSection(obj, 1);
-    rem1 = arg0 % *list1;
-    if (D_800CD894_de != 0) {
+    rem1 = textureResource % *list1;
+    if (g_texturePaletteOverrideEnabled != 0) {
         mode = 4;
     } else {
         mode = handle->flags >> 30;
@@ -92,7 +92,7 @@ void Textload_PrepareTextureVariation(s32 arg0, Resource *handle) {
             }
         }
     }
-    if (arg0 < 0) {
+    if (textureResource < 0) {
         return;
     }
     len0 = SetN64_GetPackSectionSize(obj, 0);
@@ -114,16 +114,16 @@ void Textload_PrepareTextureVariation(s32 arg0, Resource *handle) {
         hdr[1] = 0x18;
         hdr[2] = off1;
         hdr[3] = off2;
-        func_802BD3A0_de(SetN64_GetPackSection(hdr, 0), SetN64_GetPackSection(obj, 0), SetN64_GetPackSectionSize(obj, 0));
+        Libc_CopyBytes(SetN64_GetPackSection(hdr, 0), SetN64_GetPackSection(obj, 0), SetN64_GetPackSectionSize(obj, 0));
         entry = SetN64_GetPackSection(hdr, 1);
         entry[0] = 1;
         entry[1] = 0x10;
-        func_802BD3A0_de(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list1, rem1), SetN64_GetPackSectionSize(list1, rem1));
+        Libc_CopyBytes(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list1, rem1), SetN64_GetPackSectionSize(list1, rem1));
         entry = SetN64_GetPackSection(hdr, 2);
         if (count != 0) {
             entry[0] = 1;
             entry[1] = 0x10;
-            func_802BD3A0_de(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list2, rem2), SetN64_GetPackSectionSize(list2, rem2));
+            Libc_CopyBytes(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list2, rem2), SetN64_GetPackSectionSize(list2, rem2));
         } else {
             entry[0] = 0;
         }
@@ -138,12 +138,12 @@ void Textload_PrepareTextureVariation(s32 arg0, Resource *handle) {
 
 extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern Gfx *g_displayListCursor;
-extern int D_800CD890;
-extern s32 D_80146DF0;
-extern s32 D_80146DF4;
-extern s32 D_80146DF8;
-extern s32 D_80146DFC;
-extern Gfx D_800CBD50_de[16], D_800CBDD0[16], D_800CBE50[19], D_800CBEE8[19], D_800CBF80[19];
+extern int g_textureCacheResource;
+extern s32 g_textureCacheFrame;
+extern s32 g_textureCacheVariation;
+extern s32 g_textureCacheWrapS;
+extern s32 g_textureCacheWrapT;
+extern Gfx g_textureTileDefaultDisplayList[16], g_textureTileWrappedDisplayList[16], g_textureTileAlternateDisplayList[19], g_textureTilePaletteDisplayList[19], g_textureTileFinishDisplayList[19];
 
 /* Non-rev1 copy of func_80295FB4_us_rev1 (the texture state setter): the same gDP texture/TLUT load per header
    format, without rev1's two resource relocation calls before the switch. */
@@ -169,21 +169,21 @@ void Textload_LoadTextureFrame(s32 *output, void **resource, s32 frame, s32 seco
     if (*(s32 *)entries != 0) {
         palette = SetN64_GetPackSection(entries, secondary);
         paletteChanged = 0;
-        if (D_800CD890 != (s32)resource || D_80146DF4 != secondary) paletteChanged = 1;
+        if (g_textureCacheResource != (s32)resource || g_textureCacheVariation != secondary) paletteChanged = 1;
     } else {
         paletteChanged = 0;
         palette = 0;
     }
     changed = 0;
-    if (D_800CD890 != (s32)resource || D_80146DF0 != frame || D_80146DF8 != wrapS || D_80146DFC != wrapT) {
+    if (g_textureCacheResource != (s32)resource || g_textureCacheFrame != frame || g_textureCacheWrapS != wrapS || g_textureCacheWrapT != wrapT) {
         changed = 1;
     }
     if (changed || paletteChanged) {
-        D_800CD890 = (s32)resource;
-        D_80146DF0 = frame;
-        D_80146DF4 = secondary;
-        D_80146DF8 = wrapS;
-        D_80146DFC = wrapT;
+        g_textureCacheResource = (s32)resource;
+        g_textureCacheFrame = frame;
+        g_textureCacheVariation = secondary;
+        g_textureCacheWrapS = wrapS;
+        g_textureCacheWrapT = wrapT;
         maskS = 0;
         if (!(wrapS & G_TX_CLAMP)) {
             maskS = info[2];
@@ -272,20 +272,20 @@ void Textload_LoadTextureFrame(s32 *output, void **resource, s32 frame, s32 seco
                 switch (info[5]) {
                 case 2:
                 default:
-                    list = D_800CBE50;
+                    list = g_textureTileAlternateDisplayList;
                     break;
                 case 3:
-                    list = D_800CBEE8;
+                    list = g_textureTilePaletteDisplayList;
                     break;
                 case 1:
                     gDPSetTextureDetail(g_displayListCursor++, G_TD_SHARPEN);
-                    list = D_800CBD50_de;
-                    if (wrapS & 1) list = D_800CBDD0;
+                    list = g_textureTileDefaultDisplayList;
+                    if (wrapS & 1) list = g_textureTileWrappedDisplayList;
                     break;
                 case 0:
                     gDPSetTextureDetail(g_displayListCursor++, G_TD_CLAMP);
-                    list = D_800CBD50_de;
-                    if (wrapS & 1) list = D_800CBDD0;
+                    list = g_textureTileDefaultDisplayList;
+                    if (wrapS & 1) list = g_textureTileWrappedDisplayList;
                     break;
                 }
                 gSPDisplayList(g_displayListCursor++, list);
@@ -295,7 +295,7 @@ void Textload_LoadTextureFrame(s32 *output, void **resource, s32 frame, s32 seco
             if (changed) {
                 gDPPipeSync(g_displayListCursor++);
                 gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, texture);
-                gSPDisplayList(g_displayListCursor++, D_800CBF80);
+                gSPDisplayList(g_displayListCursor++, g_textureTileFinishDisplayList);
             }
             break;
         }

@@ -1,19 +1,19 @@
 
 #if !(defined(VERSION_US_REV1))
 #ifdef VERSION_DE
-extern char D_00429A30[];
-extern char D_00429FF0[];
-extern char D_0042A2B0[];
-extern char D_0042B394[];
-extern char D_0042B3D4[];
-extern char D_0042B3DC[];
-extern char D_0042B4D4[];
-extern char D_0042B644[];
-extern char D_0042B78C[];
-extern char D_0042B904[];
-extern char D_0042BA54[];
-extern char D_0042BA98[];
-unsigned int D_auto_data_unresolved_800E0F18[278] = {
+extern char g_CScenarioSetup_OpenScenarioSetupScreenEncodedCallbackEntryVariant1[];
+extern char addrLow_Frontend_DrawSetupResultPanelsEntryVariant1[];
+extern char g_packedCodeAddress24_0042A2B0[];
+extern char ScenarioSetup_CloseSetupScreen_Address[];
+extern char g_ScenarioSetup_ReturnSetupEventZeroAltEncodedCallbackEntryVariant1[];
+extern char g_ScenarioSetup_BeginSetupConfirmationEncodedCallbackEntryVariant1[];
+extern char g_ScenarioSetup_SelectPreviousCatalogueItemEncodedCallbackEntryVariant1[];
+extern char g_ScenarioSetup_SelectNextSetupItemEncodedCallbackEntryVariant1[];
+extern char g_ScenarioSetup_SelectPreviousCatalogueCategoryEncodedCallbackEntryVariant1[];
+extern char g_ScenarioSetup_SelectNextCatalogueCategoryEncodedCallback[];
+extern char g_ScenarioSetup_EndSetupInputEncodedCallbackEntryVariant1[];
+extern char g_ScenarioSetup_RefreshSetupScreenEncodedCallbackEntryVariant1[];
+unsigned int g_ScenariosetupHidearenacataloguewidgetsEncodedWords[278] = {
     0x0000032B, 0x00000002, 0x00000000, 0x0000030E, 0x0000032C, 0x00000002, 0x00000001, 0x0000030D,
     0x00000358, 0x00000002, 0x00000002, 0x0000030F, 0x0000033F, 0x00000002, 0x00000003, 0x0000031B,
     0x0000031D, 0x00000002, 0x00000004, 0x00000320, 0x00000310, 0x00000002, 0x00000005, 0x00000348,
@@ -39,11 +39,11 @@ unsigned int D_auto_data_unresolved_800E0F18[278] = {
     0x00000335, 0x00000334, 0x0000033B, 0x0000033A, 0x0000034C, 0x0000034B, 0x00000312, 0x0000030F,
     0x00000320, 0x0000031F, 0x0000031E, 0x00000325, 0x00000324, 0x00000323, 0x0000032A, 0x00000329,
     0x0000030E, 0x0000030D, 0x0000031B, 0x0000031C, 0x00000315, 0x00000316, 0x00000317, 0x00000E08,
-    0x00000014, (unsigned int)D_0042A2B0, 0x00000E07, 0x00000014, (unsigned int)D_0042B3D4, 0x0000000A, 0x00000014, (unsigned int)D_0042B3DC,
-    0x00000E06, 0x00000014, (unsigned int)D_00429A30, 0x00000E03, 0x00000014, (unsigned int)D_0042B394, 0x00000E0A, 0x00000014,
-    (unsigned int)D_00429FF0, 0x00000002, 0x00000014, (unsigned int)D_0042BA54, 0x00000001, 0x00000014, (unsigned int)D_0042BA98, 0x00000005,
-    0x00000014, (unsigned int)D_0042B4D4, 0x00000006, 0x00000014, (unsigned int)D_0042B644, 0x00000008, 0x00000014, (unsigned int)D_0042B904,
-    0x00000007, 0x00000014, (unsigned int)D_0042B78C, 0x00000000, 0x00000000, 0x00000000, 0x0000023A, 0x0000025E,
+    0x00000014, (unsigned int)g_packedCodeAddress24_0042A2B0, 0x00000E07, 0x00000014, (unsigned int)g_ScenarioSetup_ReturnSetupEventZeroAltEncodedCallbackEntryVariant1, 0x0000000A, 0x00000014, (unsigned int)g_ScenarioSetup_BeginSetupConfirmationEncodedCallbackEntryVariant1,
+    0x00000E06, 0x00000014, (unsigned int)g_CScenarioSetup_OpenScenarioSetupScreenEncodedCallbackEntryVariant1, 0x00000E03, 0x00000014, (unsigned int)ScenarioSetup_CloseSetupScreen_Address, 0x00000E0A, 0x00000014,
+    (unsigned int)addrLow_Frontend_DrawSetupResultPanelsEntryVariant1, 0x00000002, 0x00000014, (unsigned int)g_ScenarioSetup_EndSetupInputEncodedCallbackEntryVariant1, 0x00000001, 0x00000014, (unsigned int)g_ScenarioSetup_RefreshSetupScreenEncodedCallbackEntryVariant1, 0x00000005,
+    0x00000014, (unsigned int)g_ScenarioSetup_SelectPreviousCatalogueItemEncodedCallbackEntryVariant1, 0x00000006, 0x00000014, (unsigned int)g_ScenarioSetup_SelectNextSetupItemEncodedCallbackEntryVariant1, 0x00000008, 0x00000014, (unsigned int)g_ScenarioSetup_SelectNextCatalogueCategoryEncodedCallback,
+    0x00000007, 0x00000014, (unsigned int)g_ScenarioSetup_SelectPreviousCatalogueCategoryEncodedCallbackEntryVariant1, 0x00000000, 0x00000000, 0x00000000, 0x0000023A, 0x0000025E,
     0x0000023D, 0x00000242, 0x00000246, 0x0000024A, 0x0000024E, 0x00000252, 0x00000256, 0x00000257,
     0x0000023B, 0x0000025F, 0x0000023F, 0x00000243, 0x00000247, 0x0000024B, 0x0000024F, 0x00000253,
     0x00000258, 0x00000259, 0x0000023C, 0x00000260, 0x00000240, 0x00000244, 0x00000248, 0x0000024C,
@@ -52,19 +52,19 @@ unsigned int D_auto_data_unresolved_800E0F18[278] = {
 };
 #endif
 #ifdef VERSION_EU_X
-extern char D_0042A730[];
-extern char D_0042ACF0[];
-extern char D_0042AFB0[];
-extern char D_0042C0B4[];
-extern char D_0042C0F4[];
-extern char D_0042C0FC[];
-extern char D_0042C1F4[];
-extern char D_0042C364[];
-extern char D_0042C4AC[];
-extern char D_0042C624[];
-extern char D_0042C774[];
-extern char D_0042C7B8[];
-unsigned int D_auto_data_unresolved_800E0F18[278] = {
+extern char g_CScenarioSetup_OpenScenarioSetupScreenEncodedCallbackEntryVariant2[];
+extern char addrLow_Frontend_DrawSetupResultPanelsEntryVariant2[];
+extern char g_ScenarioSetup_UpdateSetupTransitionEncodedCallback[];
+extern char g_ScenarioSetup_CloseSetupScreenEncodedCallback[];
+extern char g_ScenarioSetup_ReturnSetupEventZeroAltEncodedCallbackEntryVariant2[];
+extern char g_ScenarioSetup_BeginSetupConfirmationEncodedCallbackEntryVariant2[];
+extern char g_ScenarioSetup_SelectPreviousCatalogueItemEncodedCallbackEntryVariant2[];
+extern char g_ScenarioSetup_SelectNextSetupItemEncodedCallbackEntryVariant2[];
+extern char g_ScenarioSetup_SelectPreviousCatalogueCategoryEncodedCallbackEntryVariant2[];
+extern char g_packedCodeAddress24_0042C624[];
+extern char g_ScenarioSetup_EndSetupInputEncodedCallbackEntryVariant2[];
+extern char g_ScenarioSetup_RefreshSetupScreenEncodedCallbackEntryVariant2[];
+unsigned int g_ScenariosetupHidearenacataloguewidgetsEncodedWords[278] = {
     0x00000333, 0x00000002, 0x00000000, 0x00000316, 0x00000334, 0x00000002, 0x00000001, 0x00000315,
     0x00000360, 0x00000002, 0x00000002, 0x00000317, 0x00000347, 0x00000002, 0x00000003, 0x00000323,
     0x00000325, 0x00000002, 0x00000004, 0x00000328, 0x00000318, 0x00000002, 0x00000005, 0x00000350,
@@ -90,11 +90,11 @@ unsigned int D_auto_data_unresolved_800E0F18[278] = {
     0x0000033D, 0x0000033C, 0x00000343, 0x00000342, 0x00000354, 0x00000353, 0x0000031A, 0x00000317,
     0x00000328, 0x00000327, 0x00000326, 0x0000032D, 0x0000032C, 0x0000032B, 0x00000332, 0x00000331,
     0x00000316, 0x00000315, 0x00000323, 0x00000324, 0x0000031D, 0x0000031E, 0x0000031F, 0x00000E08,
-    0x00000014, (unsigned int)D_0042AFB0, 0x00000E07, 0x00000014, (unsigned int)D_0042C0F4, 0x0000000A, 0x00000014, (unsigned int)D_0042C0FC,
-    0x00000E06, 0x00000014, (unsigned int)D_0042A730, 0x00000E03, 0x00000014, (unsigned int)D_0042C0B4, 0x00000E0A, 0x00000014,
-    (unsigned int)D_0042ACF0, 0x00000002, 0x00000014, (unsigned int)D_0042C774, 0x00000001, 0x00000014, (unsigned int)D_0042C7B8, 0x00000005,
-    0x00000014, (unsigned int)D_0042C1F4, 0x00000006, 0x00000014, (unsigned int)D_0042C364, 0x00000008, 0x00000014, (unsigned int)D_0042C624,
-    0x00000007, 0x00000014, (unsigned int)D_0042C4AC, 0x00000000, 0x00000000, 0x00000000, 0x00000243, 0x00000267,
+    0x00000014, (unsigned int)g_ScenarioSetup_UpdateSetupTransitionEncodedCallback, 0x00000E07, 0x00000014, (unsigned int)g_ScenarioSetup_ReturnSetupEventZeroAltEncodedCallbackEntryVariant2, 0x0000000A, 0x00000014, (unsigned int)g_ScenarioSetup_BeginSetupConfirmationEncodedCallbackEntryVariant2,
+    0x00000E06, 0x00000014, (unsigned int)g_CScenarioSetup_OpenScenarioSetupScreenEncodedCallbackEntryVariant2, 0x00000E03, 0x00000014, (unsigned int)g_ScenarioSetup_CloseSetupScreenEncodedCallback, 0x00000E0A, 0x00000014,
+    (unsigned int)addrLow_Frontend_DrawSetupResultPanelsEntryVariant2, 0x00000002, 0x00000014, (unsigned int)g_ScenarioSetup_EndSetupInputEncodedCallbackEntryVariant2, 0x00000001, 0x00000014, (unsigned int)g_ScenarioSetup_RefreshSetupScreenEncodedCallbackEntryVariant2, 0x00000005,
+    0x00000014, (unsigned int)g_ScenarioSetup_SelectPreviousCatalogueItemEncodedCallbackEntryVariant2, 0x00000006, 0x00000014, (unsigned int)g_ScenarioSetup_SelectNextSetupItemEncodedCallbackEntryVariant2, 0x00000008, 0x00000014, (unsigned int)g_packedCodeAddress24_0042C624,
+    0x00000007, 0x00000014, (unsigned int)g_ScenarioSetup_SelectPreviousCatalogueCategoryEncodedCallbackEntryVariant2, 0x00000000, 0x00000000, 0x00000000, 0x00000243, 0x00000267,
     0x00000246, 0x0000024B, 0x0000024F, 0x00000253, 0x00000257, 0x0000025B, 0x0000025F, 0x00000260,
     0x00000244, 0x00000268, 0x00000248, 0x0000024C, 0x00000250, 0x00000254, 0x00000258, 0x0000025C,
     0x00000261, 0x00000262, 0x00000245, 0x00000269, 0x00000249, 0x0000024D, 0x00000251, 0x00000255,
@@ -103,19 +103,19 @@ unsigned int D_auto_data_unresolved_800E0F18[278] = {
 };
 #endif
 #ifdef VERSION_EU
-extern char D_0042A5E0[];
-extern char D_0042ABA0[];
-extern char D_0042AE60[];
-extern char D_0042BF64[];
-extern char D_0042BFA4[];
-extern char D_0042BFAC[];
-extern char D_0042C0A4[];
-extern char D_0042C214[];
-extern char D_0042C35C[];
-extern char D_0042C4D4[];
-extern char D_0042C624[];
-extern char D_0042C668[];
-unsigned int D_auto_data_unresolved_800E0F18[278] = {
+extern char g_CScenarioSetup_OpenScenarioSetupScreenPackedAddress24[];
+extern char g_Frontend_DrawSetupResultPanelsPackedAddress24[];
+extern char g_ScenarioSetup_UpdateSetupTransitionPackedAddress24[];
+extern char g_ScenarioSetup_CloseSetupScreenPackedAddress24[];
+extern char g_ScenarioSetup_ReturnSetupEventZeroAltPackedAddress24[];
+extern char g_ScenarioSetup_BeginSetupConfirmationPackedAddress24[];
+extern char g_ScenarioSetup_SelectPreviousCatalogueItemPackedAddress24[];
+extern char g_ScenarioSetup_SelectNextSetupItemPackedAddress24[];
+extern char g_ScenarioSetup_SelectPreviousCatalogueCategoryPackedAddress24[];
+extern char g_ScenarioSetup_SelectNextCatalogueCategoryPackedAddress24[];
+extern char g_packedCodeAddress24_0042C624[];
+extern char g_ScenarioSetup_RefreshSetupScreenPackedAddress24[];
+unsigned int g_ScenariosetupHidearenacataloguewidgetsEncodedWords[278] = {
     0x0000032F, 0x00000002, 0x00000000, 0x00000312, 0x00000330, 0x00000002, 0x00000001, 0x00000311,
     0x0000035C, 0x00000002, 0x00000002, 0x00000313, 0x00000343, 0x00000002, 0x00000003, 0x0000031F,
     0x00000321, 0x00000002, 0x00000004, 0x00000324, 0x00000314, 0x00000002, 0x00000005, 0x0000034C,
@@ -141,11 +141,11 @@ unsigned int D_auto_data_unresolved_800E0F18[278] = {
     0x00000339, 0x00000338, 0x0000033F, 0x0000033E, 0x00000350, 0x0000034F, 0x00000316, 0x00000313,
     0x00000324, 0x00000323, 0x00000322, 0x00000329, 0x00000328, 0x00000327, 0x0000032E, 0x0000032D,
     0x00000312, 0x00000311, 0x0000031F, 0x00000320, 0x00000319, 0x0000031A, 0x0000031B, 0x00000E08,
-    0x00000014, (unsigned int)D_0042AE60, 0x00000E07, 0x00000014, (unsigned int)D_0042BFA4, 0x0000000A, 0x00000014, (unsigned int)D_0042BFAC,
-    0x00000E06, 0x00000014, (unsigned int)D_0042A5E0, 0x00000E03, 0x00000014, (unsigned int)D_0042BF64, 0x00000E0A, 0x00000014,
-    (unsigned int)D_0042ABA0, 0x00000002, 0x00000014, (unsigned int)D_0042C624, 0x00000001, 0x00000014, (unsigned int)D_0042C668, 0x00000005,
-    0x00000014, (unsigned int)D_0042C0A4, 0x00000006, 0x00000014, (unsigned int)D_0042C214, 0x00000008, 0x00000014, (unsigned int)D_0042C4D4,
-    0x00000007, 0x00000014, (unsigned int)D_0042C35C, 0x00000000, 0x00000000, 0x00000000, 0x0000023E, 0x00000262,
+    0x00000014, (unsigned int)g_ScenarioSetup_UpdateSetupTransitionPackedAddress24, 0x00000E07, 0x00000014, (unsigned int)g_ScenarioSetup_ReturnSetupEventZeroAltPackedAddress24, 0x0000000A, 0x00000014, (unsigned int)g_ScenarioSetup_BeginSetupConfirmationPackedAddress24,
+    0x00000E06, 0x00000014, (unsigned int)g_CScenarioSetup_OpenScenarioSetupScreenPackedAddress24, 0x00000E03, 0x00000014, (unsigned int)g_ScenarioSetup_CloseSetupScreenPackedAddress24, 0x00000E0A, 0x00000014,
+    (unsigned int)g_Frontend_DrawSetupResultPanelsPackedAddress24, 0x00000002, 0x00000014, (unsigned int)g_packedCodeAddress24_0042C624, 0x00000001, 0x00000014, (unsigned int)g_ScenarioSetup_RefreshSetupScreenPackedAddress24, 0x00000005,
+    0x00000014, (unsigned int)g_ScenarioSetup_SelectPreviousCatalogueItemPackedAddress24, 0x00000006, 0x00000014, (unsigned int)g_ScenarioSetup_SelectNextSetupItemPackedAddress24, 0x00000008, 0x00000014, (unsigned int)g_ScenarioSetup_SelectNextCatalogueCategoryPackedAddress24,
+    0x00000007, 0x00000014, (unsigned int)g_ScenarioSetup_SelectPreviousCatalogueCategoryPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x0000023E, 0x00000262,
     0x00000241, 0x00000246, 0x0000024A, 0x0000024E, 0x00000252, 0x00000256, 0x0000025A, 0x0000025B,
     0x0000023F, 0x00000263, 0x00000243, 0x00000247, 0x0000024B, 0x0000024F, 0x00000253, 0x00000257,
     0x0000025C, 0x0000025D, 0x00000240, 0x00000264, 0x00000244, 0x00000248, 0x0000024C, 0x00000250,
@@ -154,19 +154,19 @@ unsigned int D_auto_data_unresolved_800E0F18[278] = {
 };
 #endif
 #ifdef VERSION_US
-extern char D_00429C10[];
-extern char D_0042A1D0[];
-extern char D_0042A490[];
-extern char D_0042B574[];
-extern char D_0042B5B4[];
-extern char D_0042B5BC[];
-extern char D_0042B6B4[];
-extern char D_0042B824[];
-extern char D_0042B96C[];
-extern char D_0042BAE4[];
-extern char D_0042BC34[];
-extern char D_0042BC78[];
-unsigned int D_auto_data_unresolved_800E0F18[278] = {
+extern char addrLow_CScenarioSetup_OpenScenarioSetupScreen[];
+extern char g_frontend_DrawSetupResultPanelsEntry[];
+extern char addrLow_ScenarioSetup_UpdateSetupTransition[];
+extern char addrLow_ScenarioSetup_CloseSetupScreen[];
+extern char addrLow_ScenarioSetup_ReturnSetupEventZeroAlt[];
+extern char addrLow_ScenarioSetup_BeginSetupConfirmation[];
+extern char addrLow_ScenarioSetup_SelectPreviousCatalogueItem[];
+extern char addrLow_ScenarioSetup_SelectNextSetupItem[];
+extern char addrLow_ScenarioSetup_SelectPreviousCatalogueCategory[];
+extern char addrLow_ScenarioSetup_SelectNextCatalogueCategory[];
+extern char addrLow_ScenarioSetup_EndSetupInput[];
+extern char addrLow_ScenarioSetup_RefreshSetupScreen[];
+unsigned int g_ScenariosetupHidearenacataloguewidgetsEncodedWords[278] = {
     0x0000032F, 0x00000002, 0x00000000, 0x00000312, 0x00000330, 0x00000002, 0x00000001, 0x00000311,
     0x0000035C, 0x00000002, 0x00000002, 0x00000313, 0x00000343, 0x00000002, 0x00000003, 0x0000031F,
     0x00000321, 0x00000002, 0x00000004, 0x00000324, 0x00000314, 0x00000002, 0x00000005, 0x0000034C,
@@ -192,11 +192,11 @@ unsigned int D_auto_data_unresolved_800E0F18[278] = {
     0x00000339, 0x00000338, 0x0000033F, 0x0000033E, 0x00000350, 0x0000034F, 0x00000316, 0x00000313,
     0x00000324, 0x00000323, 0x00000322, 0x00000329, 0x00000328, 0x00000327, 0x0000032E, 0x0000032D,
     0x00000312, 0x00000311, 0x0000031F, 0x00000320, 0x00000319, 0x0000031A, 0x0000031B, 0x00000E08,
-    0x00000014, (unsigned int)D_0042A490, 0x00000E07, 0x00000014, (unsigned int)D_0042B5B4, 0x0000000A, 0x00000014, (unsigned int)D_0042B5BC,
-    0x00000E06, 0x00000014, (unsigned int)D_00429C10, 0x00000E03, 0x00000014, (unsigned int)D_0042B574, 0x00000E0A, 0x00000014,
-    (unsigned int)D_0042A1D0, 0x00000002, 0x00000014, (unsigned int)D_0042BC34, 0x00000001, 0x00000014, (unsigned int)D_0042BC78, 0x00000005,
-    0x00000014, (unsigned int)D_0042B6B4, 0x00000006, 0x00000014, (unsigned int)D_0042B824, 0x00000008, 0x00000014, (unsigned int)D_0042BAE4,
-    0x00000007, 0x00000014, (unsigned int)D_0042B96C, 0x00000000, 0x00000000, 0x00000000, 0x0000023E, 0x00000262,
+    0x00000014, (unsigned int)addrLow_ScenarioSetup_UpdateSetupTransition, 0x00000E07, 0x00000014, (unsigned int)addrLow_ScenarioSetup_ReturnSetupEventZeroAlt, 0x0000000A, 0x00000014, (unsigned int)addrLow_ScenarioSetup_BeginSetupConfirmation,
+    0x00000E06, 0x00000014, (unsigned int)addrLow_CScenarioSetup_OpenScenarioSetupScreen, 0x00000E03, 0x00000014, (unsigned int)addrLow_ScenarioSetup_CloseSetupScreen, 0x00000E0A, 0x00000014,
+    (unsigned int)g_frontend_DrawSetupResultPanelsEntry, 0x00000002, 0x00000014, (unsigned int)addrLow_ScenarioSetup_EndSetupInput, 0x00000001, 0x00000014, (unsigned int)addrLow_ScenarioSetup_RefreshSetupScreen, 0x00000005,
+    0x00000014, (unsigned int)addrLow_ScenarioSetup_SelectPreviousCatalogueItem, 0x00000006, 0x00000014, (unsigned int)addrLow_ScenarioSetup_SelectNextSetupItem, 0x00000008, 0x00000014, (unsigned int)addrLow_ScenarioSetup_SelectNextCatalogueCategory,
+    0x00000007, 0x00000014, (unsigned int)addrLow_ScenarioSetup_SelectPreviousCatalogueCategory, 0x00000000, 0x00000000, 0x00000000, 0x0000023E, 0x00000262,
     0x00000241, 0x00000246, 0x0000024A, 0x0000024E, 0x00000252, 0x00000256, 0x0000025A, 0x0000025B,
     0x0000023F, 0x00000263, 0x00000243, 0x00000247, 0x0000024B, 0x0000024F, 0x00000253, 0x00000257,
     0x0000025C, 0x0000025D, 0x00000240, 0x00000264, 0x00000244, 0x00000248, 0x0000024C, 0x00000250,

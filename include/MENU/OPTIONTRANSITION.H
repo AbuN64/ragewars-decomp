@@ -1,5 +1,5 @@
 #ifndef MENU_OPTIONTRANSITION_H
 #define MENU_OPTIONTRANSITION_H
 #include "TYPES.H"
-extern s32*D_800E44A0;
+extern s32*g_optionsImageTransition;
 #endif

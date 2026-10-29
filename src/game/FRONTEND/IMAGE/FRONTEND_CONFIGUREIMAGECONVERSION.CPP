@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "FRONTEND/LAYOUT.H"
 #include "COMMON/FORMAT.H"
 #include "TYPES.H"
@@ -119,10 +119,10 @@ extern void *Cache_AllocateMemory(s32 size);
 
 
 /* The argument is a pointer into 0x8068xxxx whose first byte the debugger read as 0x14, and the
-   stride is 52. D_800E2B40, which Frontend_HasImageFormatMaskComponent indexes with the same stride and the same
+   stride is 52. g_frontendImageRecordFlags, which Frontend_HasImageFormatMaskComponent indexes with the same stride and the same
    argument, sits 24 bytes further on, so both are fields of one 52-byte record. */
 
-/* Returns the word in the 52-byte record D_800E2B2C selected by the first byte of a record. */
+/* Returns the word in the 52-byte record g_frontendImageRecordValues selected by the first byte of a record. */
 
 u32 Frontend_ConvertPixelFormat(u32 value, s32 from, s32 to) {
     return encode(decode(value, &g_pixelFormatDescriptors[from]), &g_pixelFormatDescriptors[to]);
@@ -152,11 +152,11 @@ void Frontend_ConfigureImageConversion(ImageDescriptor *destination, ImageDescri
         else g_destinationColorBuffer=destination->palette;
         if(dst.flags) g_destinationPixelIndexBuffer=destination->palette;
         else g_destinationPixelIndexBuffer=0;
-        if(dst.bits==16) g_writeDestinationColor=D_0041406C;
-        else if(dst.bits==24) g_writeDestinationColor=D_004140BC;
-        else if(dst.bits==32) g_writeDestinationColor=D_00414094;
-        if(dst.type==4) g_writeDestinationIndex=D_00414244;
-        else if(dst.type==8) g_writeDestinationIndex=D_00414220;
+        if(dst.bits==16) g_writeDestinationColor=g_Frontend_WriteDestinationHalfwordPixelAddress;
+        else if(dst.bits==24) g_writeDestinationColor=g_Frontend_WriteDestinationThreeBytePixelAddress;
+        else if(dst.bits==32) g_writeDestinationColor=g_Frontend_WriteDestinationWordPixelAddress;
+        if(dst.type==4) g_writeDestinationIndex=g_Frontend_WriteDestinationNibbleIndexAddress;
+        else if(dst.type==8) g_writeDestinationIndex=g_Frontend_WriteDestinationByteIndexAddress;
         g_destinationRedMask=dst.mask[0];
         g_destinationGreenMask=dst.mask[1];
         g_destinationBlueMask=dst.mask[2];
@@ -174,14 +174,14 @@ void Frontend_ConfigureImageConversion(ImageDescriptor *destination, ImageDescri
         else g_sourceColorBuffer=source->palette;
         if(src.flags) g_sourcePixelIndexBuffer=source->palette;
         else g_sourcePixelIndexBuffer=0;
-        if(src.bits==16) g_readSourceColor=D_00413FCC;
-        else if(src.bits==24) g_readSourceColor=D_00414024;
-        else if(src.bits==32) g_readSourceColor=D_00413FF8;
-        if(src.type==4) g_readSourceIndex=D_00414168;
-        else if(src.type==8) g_readSourceIndex=D_00414138;
-        else if(src.type==16) g_readSourceIndex=D_004141C0;
-        else if(src.type==24) g_readSourceIndex=D_004141E0;
-        else if(src.type==32) g_readSourceIndex=D_00414200;
+        if(src.bits==16) g_readSourceColor=g_Frontend_ReadSourceHalfwordPixelAddress;
+        else if(src.bits==24) g_readSourceColor=g_Frontend_ReadSourceThreeBytePixelAddress;
+        else if(src.bits==32) g_readSourceColor=g_Frontend_ReadSourceWordPixelAddress;
+        if(src.type==4) g_readSourceIndex=g_Frontend_ReadSourceNibbleIndexAddress;
+        else if(src.type==8) g_readSourceIndex=g_Frontend_ReadSourceByteIndexAddress;
+        else if(src.type==16) g_readSourceIndex=g_Frontend_UseHalfwordPixelOffsetAddress;
+        else if(src.type==24) g_readSourceIndex=g_Frontend_UseThreeBytePixelOffsetAddress;
+        else if(src.type==32) g_readSourceIndex=g_Frontend_UseWordPixelOffsetAddress;
         g_sourceRedMask=src.mask[0];
         g_sourceGreenMask=src.mask[1];
         g_sourceBlueMask=src.mask[2];
@@ -253,11 +253,11 @@ u8 Frontend_GetOwnedImageFormat(u8 *record) {
 }
 
 s32 Frontend_GetImagePixelType(u8 *record) {
-    return D_800DEAD8[*record][0];
+    return g_frontendImageFormatTable[*record][0];
 }
 
 s32 Frontend_GetImageBitsPerPixel(u8 *record) {
-    return D_800E2B2C[record[0] * 13];
+    return g_frontendImageRecordValues[record[0] * 13];
 }
 
 /* Returns the halfword at offset 0x2 of a record. It is one of a run of accessors from

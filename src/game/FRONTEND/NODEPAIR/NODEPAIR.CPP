@@ -4,7 +4,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
-s32 func_80439F10_us_rev1(void) {
+s32 Frontend_WrapNodePairUsRev1(void) {
     SmpButton_WrapButtonWidget(0x3DA);
     SmpButton_WrapButtonWidget(0x3DB);
     return 0;

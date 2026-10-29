@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "MENU/OBJECT1C8.H"
 #include "MENU/ITEMS/ITEMS_PREPARECONTROLLERRETURN.H"
@@ -9,13 +9,13 @@
 #ifdef NON_MATCHING
 #include "TYPES.H"
 
-/* Stores what Menu_ClassifyResourceRange returns for D_8013B2BC in D_801540F4 and sets D_801540F0 to 1. */
-extern s32 D_8013B2BC;
+/* Stores what Menu_ClassifyResourceRange returns for g_activeActorKind in g_controllerReturnResourceRange and sets g_controllerReturnPending to 1. */
+extern s32 g_activeActorKind;
 extern s32 Menu_ClassifyResourceRange(s32);
 
 void Items_CacheIdentifierBand(void) {
-    D_801540F4 = Menu_ClassifyResourceRange(D_8013B2BC);
-    D_801540F0 = 1;
+    g_controllerReturnResourceRange = Menu_ClassifyResourceRange(g_activeActorKind);
+    g_controllerReturnPending = 1;
 }
 #else
 INCLUDE_ASM("ovl_80400000", Items_CacheIdentifierBand);
@@ -23,26 +23,26 @@ INCLUDE_ASM("ovl_80400000", Items_CacheIdentifierBand);
 #endif
 
 #if defined(VERSION_US_REV1)
-/* Stores what Menu_ClassifyResourceRange returns for D_8013B2BC in D_801540F4 and sets D_801540F0 to 1. */
-extern s32 D_8013B2BC;
+/* Stores what Menu_ClassifyResourceRange returns for g_activeActorKind in g_controllerReturnResourceRange and sets g_controllerReturnPending to 1. */
+extern s32 g_activeActorKind;
 
 extern s32 Menu_ClassifyResourceRange(s32);
 
 void Items_CacheIdentifierBand(void) {
-    D_801540F4 = Menu_ClassifyResourceRange(D_8013B2BC);
-    D_801540F0 = 1;
+    g_controllerReturnResourceRange = Menu_ClassifyResourceRange(g_activeActorKind);
+    g_controllerReturnPending = 1;
 }
 #endif
 
 /* 80443530_2.CPP */
 #if defined(VERSION_US)
 #include "TYPES.H"
-extern s32 D_8013B2BC;
+extern s32 g_activeActorKind;
 extern s32 Menu_ClassifyResourceRange(s32);
 
 void Items_PrepareMenuReturnUs(void) {
-    D_801540F4 = Menu_ClassifyResourceRange(D_8013B2BC);
-    D_801540F0 = 1;
+    g_controllerReturnResourceRange = Menu_ClassifyResourceRange(g_activeActorKind);
+    g_controllerReturnPending = 1;
 }
 #endif
 
@@ -50,29 +50,29 @@ void Items_PrepareMenuReturnUs(void) {
 #if defined(VERSION_EU_X)
 extern int Menu_ClassifyResourceRange(s32);
 
-void Items_PrepareControllerReturnEuX(s32 arg0) {
-    D_801540F4 = Menu_ClassifyResourceRange(arg0);
-    D_801540F0 = 0;
+void Items_PrepareControllerReturnEuX(s32 resourceId) {
+    g_controllerReturnResourceRange = Menu_ClassifyResourceRange(resourceId);
+    g_controllerReturnPending = 0;
 }
 #endif
 
 /* 8043D1DC_7.CPP */
 #if defined(VERSION_DE)
-extern int D_8013B2BC;
-extern int D_801540F4;
-extern int D_801540F0;
+extern int g_activeActorKind;
+extern int g_controllerReturnResourceRange;
+extern int g_controllerReturnPending;
 extern int Pickup_ClassifyMenuCode(int);
 
 void Items_PrepareMenuReturnDe(void) {
-    D_801540F4 = Pickup_ClassifyMenuCode(D_8013B2BC);
-    D_801540F0 = 1;
+    g_controllerReturnResourceRange = Pickup_ClassifyMenuCode(g_activeActorKind);
+    g_controllerReturnPending = 1;
 }
 #endif
 
 /* 80442BC8_14.CPP */
 #if !(defined(VERSION_EU_X))
-/* Stores what Menu_ClassifyResourceRange returns for D_8013B2BC in D_801540F4 and sets D_801540F0 to 0. */
-extern s32 D_8013B2BC;
+/* Stores what Menu_ClassifyResourceRange returns for g_activeActorKind in g_controllerReturnResourceRange and sets g_controllerReturnPending to 0. */
+extern s32 g_activeActorKind;
 #if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 extern s32 Menu_ClassifyResourceRange(s32);
 #else
@@ -80,14 +80,14 @@ extern s32 Pickup_ClassifyMenuCode(s32);
 #endif
 
 void Items_PrepareControllerReturn(void) {
-    D_801540F4 =
+    g_controllerReturnResourceRange =
 #if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 Menu_ClassifyResourceRange
 #else
 Pickup_ClassifyMenuCode
 #endif
-(D_8013B2BC);
-    D_801540F0 = 0;
+(g_activeActorKind);
+    g_controllerReturnPending = 0;
 }
 #endif
 

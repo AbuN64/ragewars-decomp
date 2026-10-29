@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/OBJECTLINKS1E8.H"
+#include "COMMON/PARTICLE_ATTACHMENT_AND_OWNER_VIEWS.H"
 #include "TYPES.H"
 #include "FX/PARTICLE_SOUND.H"
 #include "SYSTEM/LIST.H"
@@ -9,7 +9,7 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "particle/PARTICLE_BUILDMATRIX.H"
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "COMMON/S1.H"
 #include "COMMON/SELF.H"
@@ -20,10 +20,10 @@
 #include "PARTICLE/PARTICLE_SPAWNINTERPOLATEDTRAIL.H"
 
 /* CODE_8028414C.CPP */
-extern s32 func_8025CA24_de(void *work, void *wantedNode);
+extern s32 SoundVoicePool_StopNode(void *work, void *wantedNode);
 
-extern s32 D_80140FF8[];
-extern s32 D_800D297C;
+extern s32 g_playerWeaponClassMode[];
+extern s32 g_lightingBufferIndex;
 
 void Particle_UpdateMatrix(Shared_Particle *particle) {
     CVector3 delta;
@@ -31,7 +31,7 @@ void Particle_UpdateMatrix(Shared_Particle *particle) {
     f32 amount;
     s32 *state;
 
-    state = D_80140FF8;
+    state = g_playerWeaponClassMode;
     if (state[0] == 1) {
         camera = (GameplayCamera *)state[-4];
         Graphu64_TransformPoint(camera->worldToView, &particle->inst.pos, &delta);
@@ -39,20 +39,20 @@ void Particle_UpdateMatrix(Shared_Particle *particle) {
         if (amount < 0.0f) {
             amount = -amount;
         }
-        Particle_BuildMatrix(particle, &particle->mtx[D_800D297C], camera, amount);
+        Particle_BuildMatrix(particle, &particle->mtx[g_lightingBufferIndex], camera, amount);
     } else {
-        Particle_BuildMatrix(particle, &particle->mtx[D_800D297C], 0, 0.0f);
+        Particle_BuildMatrix(particle, &particle->mtx[g_lightingBufferIndex], 0, 0.0f);
     }
     particle->flags |= 0x100000;
 }
 
 /* Spawns a sequence of effects along an object's motion segment. */
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 
 void Particle_SpawnInterpolatedTrail(TrailActor *actor) {
         CQuatern rotation;
-        int temp;
+        int hasTrailSegments;
         Triple delta;
         Triple step;
         unsigned int actor_2;
@@ -66,11 +66,11 @@ void Particle_SpawnInterpolatedTrail(TrailActor *actor) {
                 position = actor->position;
                 rotation = Graphu64_BuildDirectionQuaternion((f32 *)&position);
                 Graphu64_SubtractVectors(&delta, &actor->origin, &actor->end);
-                system = &D_8011D8D0;
+                system = &g_actorParticleEffectSystem;
                 i = 1;
-                temp = i <= count;
-                if (temp) {
-                        divisor = (f32) count + (&D_800C4E88_de)[1];
+                hasTrailSegments = i <= count;
+                if (hasTrailSegments) {
+                        divisor = (f32) count + (&g_particleAveragePositionConstants)[1];
                         do {
     do { Graphu64_ScaleVector(&step, &delta, (f32) i / divisor); Graphu64_AddVec3(&step, &step, &actor->end); actor_2 = actor->model; Particle_SpawnEffectGroup((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
                         } while (count >= i);
@@ -78,7 +78,7 @@ void Particle_SpawnInterpolatedTrail(TrailActor *actor) {
         }
 }
 
-extern void *func_8025CC6C_de(void);
+extern void *SoundVoicePool_GetGlobalState(void);
 
 void Particle_PlayAttachedSound(void *soundParticle, s32 soundId) {
     void *node;
@@ -91,12 +91,12 @@ void Particle_PlayAttachedSound(void *soundParticle, s32 soundId) {
         Particle_StopSound(soundParticle);
     }
     ((SoundParticle *)soundParticle)->sound =
-        func_8025C95C_de(func_8025CC6C_de(), soundId, &((SoundParticle *)soundParticle)->particle.inst.pos, &((SoundParticle *)soundParticle)->particle.inst.pos, -1);
+        SoundVoicePool_PlaySpatialSound(SoundVoicePool_GetGlobalState(), soundId, &((SoundParticle *)soundParticle)->particle.inst.pos, &((SoundParticle *)soundParticle)->particle.inst.pos, -1);
 }
 
 void Particle_StopSound(void *a) {
     if (((SoundParticle *)a)->sound != 0) {
-        func_8025CA24_de(func_8025CC6C_de(), ((SoundParticle *)a)->sound);
+        SoundVoicePool_StopNode(SoundVoicePool_GetGlobalState(), ((SoundParticle *)a)->sound);
         ((SoundParticle *)a)->sound = 0;
     }
 }
@@ -142,9 +142,9 @@ PoolNode84478 *Particle_AllocPoolNode(PoolOwner84478 *owner, s32 index) {
     if (node == 0) {
         return 0;
     }
-    func_80255ED8_de(&owner->free, node);
+    List_RemoveIntrusive(&owner->free, node);
     slot = &owner->slots[index & 0xFF];
-    func_80255CB8_de(slot, node);
+    List_PrependIntrusive(slot, node);
     node->owner = slot;
     node->flags = 0;
     node->counter = 0;
@@ -153,7 +153,7 @@ PoolNode84478 *Particle_AllocPoolNode(PoolOwner84478 *owner, s32 index) {
 }
 
 /* 8028308C_3.CPP */
-extern void Particle_FinishActorEffects(void *arg0);
+extern void Particle_FinishActorEffects(void *actor);
 extern void Fx_DetachParticleSwooshes(void *effectWorld, void *detachedEntity);
 
 void Particle_Release(EffectSystem *owner, ParticleEffect *releasedEffect) {
@@ -165,14 +165,14 @@ void Particle_Release(EffectSystem *owner, ParticleEffect *releasedEffect) {
     if (flags & 0x100) {
         if (!(flags & 0x800)) {
             Particle_FinishActorEffects(releasedEffect);
-            if (releasedEffect->unk1D9 != 0) {
+            if (releasedEffect->releaseRequested != 0) {
                 Particle_UpdateMatrix(releasedEffect);
-                Fx_DetachParticleSwooshes(&D_801379C0, releasedEffect);
+                Fx_DetachParticleSwooshes(&g_actorParticleScene, releasedEffect);
             }
-            releasedLight = releasedEffect->unk138;
+            releasedLight = releasedEffect->lightHandle;
             if (releasedLight != 0) {
-                Gdynlight_ReleaseLight(&D_8013B1A8, releasedLight);
-                releasedEffect->unk138 = 0;
+                Gdynlight_ReleaseLight(&g_dynamicLightPool, releasedLight);
+                releasedEffect->lightHandle = 0;
             }
             releaseReferenceCount = releasedEffect->refCount;
             if (releaseReferenceCount != 0) {
@@ -180,11 +180,11 @@ void Particle_Release(EffectSystem *owner, ParticleEffect *releasedEffect) {
             }
             releasedEffect->flags =
                 releasedEffect->flags & 0xFDFFFEFF;
-            func_80255ED8_de(releasedEffect->list, releasedEffect);
+            List_RemoveIntrusive(releasedEffect->list, releasedEffect);
             releasedEffect->list = 0;
-            func_80255CB8_de(&owner->free, releasedEffect);
+            List_PrependIntrusive(&owner->free, releasedEffect);
             if (releasedEffect->flags & 0x01000000) {
-                func_80255ED8_de(&owner->groups, releasedEffect);
+                List_RemoveIntrusive(&owner->groups, releasedEffect);
             }
         }
     }
@@ -198,7 +198,7 @@ void Particle_ReleaseFirstHandle(char *obj, unsigned char count) {
     int i;
 
     for (i = 0; i <= count; i++) {
-        EntryRecAt4V1 *e = (EntryRecAt4V1 *)(obj + i * sizeof(EntryRecAt4V1) + 0xFC28);
+        ParticleResourceHandleEntry *e = (ParticleResourceHandleEntry *)(obj + i * sizeof(ParticleResourceHandleEntry) + 0xFC28);
         if (e->handle != 0) {
             Particle_Release(obj, e->handle);
             return;
@@ -207,14 +207,14 @@ void Particle_ReleaseFirstHandle(char *obj, unsigned char count) {
 }
 
 /* 8028469C.CPP */
-void *Particle_FindOwnerEntry(EffectSystem *effectSystem, s32 arg1, EffectEntry *effectEntry) {
+void *Particle_FindOwnerEntry(EffectSystem *effectSystem, s32 ownerId, EffectEntry *effectEntry) {
     void *record;
 
     record = effectEntry->params->listIndex[effectSystem->lists].head;
     if (effectEntry != 0) {
         if (record != 0) {
             do {
-                if (((ParticleEffect *)record)->ownerId == arg1) {
+                if (((ParticleEffect *)record)->ownerId == ownerId) {
                     if (((ParticleEffect *)record)->entry == effectEntry) {
                         return record;
                     }
@@ -224,7 +224,7 @@ void *Particle_FindOwnerEntry(EffectSystem *effectSystem, s32 arg1, EffectEntry 
         }
     } else if (record != 0) {
         do {
-            if (((ParticleEffect *)record)->ownerId == arg1) {
+            if (((ParticleEffect *)record)->ownerId == ownerId) {
                 return record;
             }
             record = ((ParticleEffect *)record)->next;
@@ -233,7 +233,7 @@ void *Particle_FindOwnerEntry(EffectSystem *effectSystem, s32 arg1, EffectEntry 
     return 0;
 }
 
-extern void func_80255D70_de(void *, s32, s32);
+extern void List_InsertBeforeIntrusive(void *, s32, s32);
 
 void Particle_InsertEntryGroup(EffectSystem *effectSystem, ParticleEffect *particleEffect)
 {
@@ -253,25 +253,25 @@ loop:
     }
 
     if (current != 0) {
-        func_80255D70_de(&effectSystem->groups, current, particleEffect);
+        List_InsertBeforeIntrusive(&effectSystem->groups, current, particleEffect);
     } else if (particleEffect->entry->flags & 0x2000) {
-        func_80255CB8_de(&effectSystem->groups, particleEffect);
+        List_PrependIntrusive(&effectSystem->groups, particleEffect);
     } else {
-        func_80255D14_de(&effectSystem->groups, particleEffect);
+        List_AppendIntrusive(&effectSystem->groups, particleEffect);
     }
 
     particleEffect->flags |= 0x01000000;
 }
 
-s32 Particle_RandomInclusiveCount(s32 arg0) {
-    if (arg0 != 0) {
-        return Graphu64_NextRandom() % (arg0 + 1);
+s32 Particle_RandomInclusiveCount(s32 maximumCount) {
+    if (maximumCount != 0) {
+        return Graphu64_NextRandom() % (maximumCount + 1);
     }
     return 0;
 }
 
-void Particle_AdvanceRandomWhenNonzero(f32 arg0) {
-    if (arg0 != 0.0f) {
+void Particle_AdvanceRandomWhenNonzero(f32 advanceCondition) {
+    if (advanceCondition != 0.0f) {
         ((s32 (*)())Graphu64_RandomFloat)();
     }
 }
@@ -405,7 +405,7 @@ void Particle_UpdateForcesAndMotion(ParticleEffect *effect)
     f32 x, y, z;
     CVector3 *velocity;
 
-    Playerai_ApplyPlayerForces(&D_80145040, effect);
+    Playerai_ApplyPlayerForces(&g_playerViewRenderContext, effect);
     acceleration = Menu_ExpandFloatHighWord(effect->entry->motion->acceleration);
     if (acceleration != 0.0f) {
         direction = effect->direction;
@@ -431,10 +431,10 @@ finished:
 
 /* 8028469C_2.CPP */
 
-extern f32 Graphu64_GetSquaredDistance(f32 *arg0, f32 *arg1);
+extern f32 Graphu64_GetSquaredDistance(f32 *firstPosition, f32 *secondPosition);
 extern void Particle_HandlePlayerContact(void *particle, void *player);
 
-const unsigned int D_blob_35af2254633920324f03[2] = {
+const unsigned int g_particleTrailSpacingAndOwnerHeightConstants[2] = {
     0x4123D70A, 0x3F000000,
 };
 void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
@@ -447,13 +447,13 @@ void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
     f32 radius_sq;
     f32 height_scale;
 
-    amount = particle->desc->unk10;
+    amount = particle->desc->playerContactRadius;
     radius_sq = (f32)amount;
     if (radius_sq <= 0.0f) {
         return;
     }
-    radius_sq *= D_800C4E90_de;
-    node = D_80145060.actorList;
+    radius_sq *= g_particleNearestEffectDistanceTuning;
+    node = g_transientPlayerList.actorList;
     radius_sq *= radius_sq;
     if (node == 0) {
         return;
@@ -461,7 +461,7 @@ void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
 
     point_ptr = &point;
     actor_id = 0x40F;
-    height_scale = (&D_800C4E90_de)[1];
+    height_scale = (&g_particleNearestEffectDistanceTuning)[1];
     do {
         point = ((Shared_ActorView *)node)->position.vector;
         stop = 0;
@@ -484,25 +484,25 @@ void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
 
 typedef struct CollisionInfo CollisionInfo;
 
-extern CollisionInfo D_80100030;
-extern Instance8020CD74 *Gsky_FindScreenMessage(Arg1 *messageId);
+extern CollisionInfo g_defaultProbeMotionSettings;
+extern Instance8020CD74 *Gsky_FindScreenMessage(ParticleTrailEmitterView *messageId);
 extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
-s32 Particle_HasClearMotionPath(Instance8020CD74 *arg0, Arg1 *messageId) {
+s32 Particle_HasClearMotionPath(Instance8020CD74 *particle, ParticleTrailEmitterView *messageId) {
     Instance8020CD74 saved;
     Instance8020CD74 *instance;
     s32 collisions;
 
     instance = Gsky_FindScreenMessage(messageId);
-    if (instance != 0 && messageId->field24 == 0) {
+    if (instance != 0 && messageId->mode == 0) {
         saved = *instance;
         instance->position = messageId->position128;
-        collisions = Unicol_MoveActorWithCollision(instance, arg0->position, &D_80100030);
+        collisions = Unicol_MoveActorWithCollision(instance, particle->position, &g_defaultProbeMotionSettings);
         *instance = saved;
     } else {
-        saved = *arg0;
+        saved = *particle;
         saved.position = messageId->position128;
-        collisions = Unicol_MoveActorWithCollision(&saved, arg0->position, &D_80100030);
+        collisions = Unicol_MoveActorWithCollision(&saved, particle->position, &g_defaultProbeMotionSettings);
     }
     return collisions == 0;
 }
@@ -513,9 +513,9 @@ void Particle_MarkNearbyObjects(s32 unused, ObjParticleMarkNearbyObjects *center
  f32 d[3]; s32 i; ObjParticleMarkNearbyObjects *o;
  for(i=0;i<count;i++) {
   o=objects[i];
-  if(o->unk4 != 0x57) {
+  if(o->flags != 0x57) {
    Graphu64_SubtractVectors(d,o->pos,center->pos);
-   if(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]<=65536.0f) o->unk14C=1;
+   if(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]<=65536.0f) o->nearbyEffectFlags=1;
   }
  }
 }
@@ -526,9 +526,9 @@ static inline void nearby(s32 unused, ObjParticleMarkNearbyObjects *center, ObjP
  f32 d[3]; s32 i; ObjParticleMarkNearbyObjects *o;
  for(i=0;i<count;i++) {
   o=objects[i];
-  if(o->unk4 != 0x57) {
+  if(o->flags != 0x57) {
    Graphu64_SubtractVectors(d,o->pos,center->pos);
-   if(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]<=65536.0f) o->unk14C=1;
+   if(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]<=65536.0f) o->nearbyEffectFlags=1;
   }
  }
 }
@@ -537,7 +537,7 @@ void Particle_UpdateNearbyObjectFlags(int context,ObjParticleMarkNearbyObjects *
  int i; ObjParticleMarkNearbyObjects *obj;
  for(i=0;i<count;i++) {
   obj=objects[i];
-  switch(obj->unk4) {
+  switch(obj->flags) {
    case 0xC: break;
    case 0x22: Particle_MarkCrowdedActor(context,obj,objects,count); break;
    case 0x57: nearby(context,obj,objects,count); break;
@@ -545,51 +545,51 @@ void Particle_UpdateNearbyObjectFlags(int context,ObjParticleMarkNearbyObjects *
  }
 }
 
-void Particle_AverageOwnerEffectPositions(EffectSystem *effectSystem, s32 arg1, CVector3 *arg2) {
-    f32 temp_f2;
+void Particle_AverageOwnerEffectPositions(EffectSystem *effectSystem, s32 ownerId, CVector3 *averagePositionOut) {
+    f32 effectCountFloat;
     s32 count;
     u16 v;
     s8 *record;
 
-    arg2->x = 0.0f;
-    arg2->y = 0.0f;
-    arg2->z = 0.0f;
+    averagePositionOut->x = 0.0f;
+    averagePositionOut->y = 0.0f;
+    averagePositionOut->z = 0.0f;
     record = effectSystem->lists[1].head;
     count = 0;
     if (record != 0) {
         do {
             v = ((ParticleEffect *)record)->kind;
             if (((v == 0x41E) || (v == 0x3EF)) &&
-                (((ParticleEffect *)record)->owner == arg1) &&
+                (((ParticleEffect *)record)->owner == ownerId) &&
                 (((ParticleEffect *)record)->flags & 0x100)) {
-                arg2->x += ((ParticleEffect *)record)->pos.x;
-                arg2->y += ((ParticleEffect *)record)->pos.y;
+                averagePositionOut->x += ((ParticleEffect *)record)->pos.x;
+                averagePositionOut->y += ((ParticleEffect *)record)->pos.y;
                 count += 1;
-                arg2->z += ((ParticleEffect *)record)->pos.z;
+                averagePositionOut->z += ((ParticleEffect *)record)->pos.z;
             }
             record = ((ParticleEffect *)record)->next;
         } while (record != 0);
     }
     if (count != 0) {
-        temp_f2 = (f32)count;
-        arg2->x = (f32)(arg2->x / temp_f2);
-        arg2->y = (f32)(arg2->y / temp_f2);
-        arg2->z = (f32)(arg2->z / temp_f2);
+        effectCountFloat = (f32)count;
+        averagePositionOut->x = (f32)(averagePositionOut->x / effectCountFloat);
+        averagePositionOut->y = (f32)(averagePositionOut->y / effectCountFloat);
+        averagePositionOut->z = (f32)(averagePositionOut->z / effectCountFloat);
     }
 }
 
-void Particle_FindNearestForeignEffectDistance(EffectSystem *effectSystem, LevelActor *actor, f32 *arg2) {
-    f32 temp;
+void Particle_FindNearestForeignEffectDistance(EffectSystem *effectSystem, LevelActor *actor, f32 *distanceOut) {
+    f32 distanceSquared;
     void *node;
 
-    *arg2 = D_800C4EA0_de;
+    *distanceOut = g_particleMaximumSearchDistance;
     node = effectSystem->groups.head;
     if (node != 0) {
         do {
             if (((ParticleEffect *)node)->owner != actor && (((ParticleEffect *)node)->flags & 0x100)) {
-                temp = Graphu64_GetSquaredDistance(&((ParticleEffect *)node)->pos.x, &actor->position0.x);
-                if (temp < *arg2) {
-                    *arg2 = temp;
+                distanceSquared = Graphu64_GetSquaredDistance(&((ParticleEffect *)node)->pos.x, &actor->position0.x);
+                if (distanceSquared < *distanceOut) {
+                    *distanceOut = distanceSquared;
                 }
             }
             node = ((ParticleEffect *)node)->groupNext;

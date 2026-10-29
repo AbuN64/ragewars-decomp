@@ -3,42 +3,42 @@
 
 /* 800CBCB0.CPP */
 #if defined(VERSION_DE)
-extern char D_0026730C[];
-extern char D_002673EC[];
-extern char D_0026740C[];
-extern char D_00267B68[];
-extern char D_00267BC8[];
-extern char D_00267C20[];
-extern char D_00267C78[];
-extern char D_00267C80[];
-extern char D_00267CB4[];
-extern char D_00267CE4[];
-extern char D_00267D68[];
-extern char D_00267D70[];
-extern char D_00267DB4[];
-extern char D_00267E48[];
-extern char D_00267ED8[];
-extern char D_00267F98[];
-extern char D_00267FF0[];
-extern char D_00268048[];
-extern char D_002680A0[];
-extern char D_002680F8[];
-extern char D_00268150[];
-extern char D_002681A8[];
+extern char g_Events_PlayClipEventEncodedCallbackEntryVariant2[];
+extern char g_Events_StopClipEventEncodedCallbackEntryVariant2[];
+extern char g_Events_SpawnActorEffectEncodedCallback[];
+extern char g_Events_ApplyDirectDamageEncodedCallbackEntryVariant2[];
+extern char g_Events_ApplyRadialDamageEncodedCallbackEntryVariant2[];
+extern char g_Events_ApplyRadialDamageWithKnockbackEncodedCallbackEntryVariant2[];
+extern char g_Events_PreserveEventArgumentEncodedCallbackEntryVariant2[];
+extern char g_Events_RunFirstNodeOperationEncodedCallbackEntryVariant2[];
+extern char addrLow_Events_RunSecondNodeOperationEntryVariant2[];
+extern char addrLow_Events_StartCameraFadeAtPointEntryVariant2[];
+extern char g_Events_ConsumeEventArgumentEncodedCallbackEntryVariant2[];
+extern char g_Events_RequestActorPositionEncodedCallbackEntryVariant2[];
+extern char g_Events_StartEnabledCameraEmitterEncodedCallbackEntryVariant2[];
+extern char g_Events_StartDisabledCameraEmitterEncodedCallbackEntryVariant2[];
+extern char g_Events_PostGameplayMessageEncodedCallbackEntryVariant2[];
+extern char g_Events_ApplyFlag100RadialDamageEncodedCallbackEntryVariant2[];
+extern char g_Events_ApplyFlag100RadialKnockbackEncodedCallbackEntryVariant2[];
+extern char g_Events_ApplyFlag200RadialDamageEncodedCallbackEntryVariant2[];
+extern char g_Events_ApplyFlag200RadialKnockbackEncodedCallbackEntryVariant2[];
+extern char g_Events_ApplyFlag400RadialDamageEncodedCallbackEntryVariant2[];
+extern char g_Events_ApplyFlag400RadialKnockbackEncodedCallbackEntryVariant2[];
+extern char g_Events_StartActorEmitterEncodedCallbackEntryVariant2[];
 extern char D_00268264[];
-extern char D_0026826C[];
-extern char D_0026835C[];
-extern char D_002683E0[];
-extern char D_002684B8[];
-extern char D_002684E8[];
-extern char D_0026851C[];
-extern char D_002686EC[];
-extern char D_00268768[];
-extern char D_00268864[];
-extern char D_002688AC[];
-extern char D_002688E4[];
-extern char D_002689BC[];
-extern char D_002689CC[];
+extern char addrLow_Events_PlayTeamClipEntryVariant2[];
+extern char g_Events_SpawnFilteredActorEffectEncodedCallbackEntryVariant2[];
+extern char g_Events_FireWithinHeightRangeEncodedCallbackEntryVariant2[];
+extern char addrLow_Events_SetActorEventBitEntryVariant2[];
+extern char g_Events_ClearActorEventBitEncodedCallbackEntryVariant2[];
+extern char g_Events_SpawnAttachedEffectEncodedCallbackEntryVariant2[];
+extern char g_Events_SpawnPositionedEffectPackedAddress24[];
+extern char g_Events_PlayTeamEffectPackedAddress24[];
+extern char g_packedCodeAddress24_00268864[];
+extern char g_Events_StopActorLoopingSoundPackedAddress24[];
+extern char g_Events_IncrementNearbyPlayerCounterPackedAddress24[];
+extern char g_Events_SetActorEffectModePackedAddress24[];
+extern char g_Events_DeactivateActorPackedAddress24[];
 u32 data_unresolved_800CBCB0[428] = {
     0xFFFFFF00, 0xFFFFFF00, 0x00007F00, 0x00000000, 0xD9000000, 0x00000000,
     0xD9FFFFFF, 0x00000001, 0xDB020000, 0x00000018, 0xDC08060A, 0x800CBC98,
@@ -87,20 +87,20 @@ u32 data_unresolved_800CBCB0[428] = {
     0xDB040004, 0x00000001, 0xDB04000C, 0x00000001, 0xDB040014, 0x0000FFFF,
     0xDB04001C, 0x0000FFFF, 0x01004008, 0x801428E0, 0x06000204, 0x00040600,
     0xDB040004, 0x00000005, 0xDB04000C, 0x00000005, 0xDB040014, 0x0000FFFB,
-    0xDB04001C, 0x0000FFFB, 0xDF000000, 0x00000000, (unsigned int)D_0026740C, 0x00000000,
-    (unsigned int)D_0026730C, 0x00000000, (unsigned int)D_0026740C, 0x00000000, (unsigned int)D_00267B68, 0x00000004,
-    (unsigned int)D_00267BC8, 0x00000006, (unsigned int)D_00267C20, 0x00000006, (unsigned int)D_00267C78, 0x0000000A,
-    (unsigned int)D_00267C80, 0x00000010, (unsigned int)D_00267CB4, 0x00000010, (unsigned int)D_0026740C, 0x00000000,
-    (unsigned int)D_00267CE4, 0x00000000, (unsigned int)D_00267D68, 0x00000000, (unsigned int)D_00267D70, 0x00000000,
-    (unsigned int)D_00267DB4, 0x00000000, (unsigned int)D_00267E48, 0x00000000, (unsigned int)D_00267ED8, 0x00000000,
-    (unsigned int)D_00267F98, 0x00000006, (unsigned int)D_00267FF0, 0x00000006, (unsigned int)D_00268048, 0x00000007,
-    (unsigned int)D_002680A0, 0x00000007, (unsigned int)D_002680F8, 0x00000006, (unsigned int)D_00268150, 0x00000006,
-    (unsigned int)D_002681A8, 0x00000000, (unsigned int)D_00268264, 0x00000000, (unsigned int)D_0026826C, 0x00000000,
-    (unsigned int)D_0026835C, 0x00000000, (unsigned int)D_002683E0, 0x00000007, (unsigned int)D_002684B8, 0x00000000,
-    (unsigned int)D_002684E8, 0x00000000, (unsigned int)D_0026851C, 0x00000000, (unsigned int)D_00268768, 0x00000000,
-    (unsigned int)D_002673EC, 0x00000000, (unsigned int)D_00268864, 0x00000000, (unsigned int)D_002688AC, 0x00000000,
-    (unsigned int)D_002688E4, 0x00000002, (unsigned int)D_002686EC, 0x00000000, (unsigned int)D_002689BC, 0x00000000,
-    (unsigned int)D_002689CC, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0xDB04001C, 0x0000FFFB, 0xDF000000, 0x00000000, (unsigned int)g_Events_SpawnActorEffectEncodedCallback, 0x00000000,
+    (unsigned int)g_Events_PlayClipEventEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_SpawnActorEffectEncodedCallback, 0x00000000, (unsigned int)g_Events_ApplyDirectDamageEncodedCallbackEntryVariant2, 0x00000004,
+    (unsigned int)g_Events_ApplyRadialDamageEncodedCallbackEntryVariant2, 0x00000006, (unsigned int)g_Events_ApplyRadialDamageWithKnockbackEncodedCallbackEntryVariant2, 0x00000006, (unsigned int)g_Events_PreserveEventArgumentEncodedCallbackEntryVariant2, 0x0000000A,
+    (unsigned int)g_Events_RunFirstNodeOperationEncodedCallbackEntryVariant2, 0x00000010, (unsigned int)addrLow_Events_RunSecondNodeOperationEntryVariant2, 0x00000010, (unsigned int)g_Events_SpawnActorEffectEncodedCallback, 0x00000000,
+    (unsigned int)addrLow_Events_StartCameraFadeAtPointEntryVariant2, 0x00000000, (unsigned int)g_Events_ConsumeEventArgumentEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_RequestActorPositionEncodedCallbackEntryVariant2, 0x00000000,
+    (unsigned int)g_Events_StartEnabledCameraEmitterEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_StartDisabledCameraEmitterEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_PostGameplayMessageEncodedCallbackEntryVariant2, 0x00000000,
+    (unsigned int)g_Events_ApplyFlag100RadialDamageEncodedCallbackEntryVariant2, 0x00000006, (unsigned int)g_Events_ApplyFlag100RadialKnockbackEncodedCallbackEntryVariant2, 0x00000006, (unsigned int)g_Events_ApplyFlag200RadialDamageEncodedCallbackEntryVariant2, 0x00000007,
+    (unsigned int)g_Events_ApplyFlag200RadialKnockbackEncodedCallbackEntryVariant2, 0x00000007, (unsigned int)g_Events_ApplyFlag400RadialDamageEncodedCallbackEntryVariant2, 0x00000006, (unsigned int)g_Events_ApplyFlag400RadialKnockbackEncodedCallbackEntryVariant2, 0x00000006,
+    (unsigned int)g_Events_StartActorEmitterEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)D_00268264, 0x00000000, (unsigned int)addrLow_Events_PlayTeamClipEntryVariant2, 0x00000000,
+    (unsigned int)g_Events_SpawnFilteredActorEffectEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_FireWithinHeightRangeEncodedCallbackEntryVariant2, 0x00000007, (unsigned int)addrLow_Events_SetActorEventBitEntryVariant2, 0x00000000,
+    (unsigned int)g_Events_ClearActorEventBitEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_SpawnAttachedEffectEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_PlayTeamEffectPackedAddress24, 0x00000000,
+    (unsigned int)g_Events_StopClipEventEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_packedCodeAddress24_00268864, 0x00000000, (unsigned int)g_Events_StopActorLoopingSoundPackedAddress24, 0x00000000,
+    (unsigned int)g_Events_IncrementNearbyPlayerCounterPackedAddress24, 0x00000002, (unsigned int)g_Events_SpawnPositionedEffectPackedAddress24, 0x00000000, (unsigned int)g_Events_SetActorEffectModePackedAddress24, 0x00000000,
+    (unsigned int)g_Events_DeactivateActorPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00071115, 0x15110700, 0x00000000,
     0x00000003, 0x1529363E, 0x3E362815, 0x03000000, 0x0000031C, 0x3550626E,
     0x6E625038, 0x1C010000, 0x00001738, 0x5879919F, 0x9E927959, 0x36170000,
@@ -127,7 +127,7 @@ u32 data_writable_800CC360[20] = {
 
 #if defined(VERSION_DE)
 #if defined(VERSION_DE)
-unsigned short rodata_unresolved_800CC3B0[8] = {
+unsigned short k_GeometryDrawresourcemodelEncodedHalfwords[8] = {
     0xA000, 0x0000, 0xA000, 0x0000, 0x00FF, 0x0000, 0x00FF, 0x0000,
 };
 #endif

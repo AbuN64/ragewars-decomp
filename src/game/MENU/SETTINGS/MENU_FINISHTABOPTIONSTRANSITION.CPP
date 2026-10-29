@@ -7,9 +7,9 @@
 #include "FRONTEND/MENUIMAGE.H"
 #include "FRONTEND/SCREEN.H"
 
-/* Event callback for the match setup screen D_800E4518: on event 1 with the screen in state 1 it
+/* Event callback for the match setup screen g_optionsShortcutScreen: on event 1 with the screen in state 1 it
    advances it, and once it reaches state 2 either goes back (choice 0: resets the mode, shows the
-   item and queues sound 0x259 past D_8015402C) or starts the match (choice 1: picks the arena,
+   item and queues sound 0x259 past g_selectedLevelId) or starts the match (choice 1: picks the arena,
    clears the pause word, then either sets the mode from the settings and active human players or
    stops the match objects and calls Stage_StartConfiguredMatch). Returns zero. */
 
@@ -18,9 +18,9 @@
 
 
 
-extern struct ScreenMenuFinishTabOptionsTransition *D_800E4518;
+extern struct ScreenMenuFinishTabOptionsTransition *g_optionsShortcutScreen;
 
-extern struct LevelActor *D_800E2830;
+extern struct LevelActor *g_cinemaSequenceState;
 
 
 
@@ -50,34 +50,34 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
     s32 *pause;
 
     if (event == 1) {
-        state = Frontend_GetMenuImageState(D_800E4518);
+        state = Frontend_GetMenuImageState(g_optionsShortcutScreen);
         if (state != event) {
             return 0;
         }
-        Frontend_DrawMenuImage(D_800E4518);
-        Frontend_AdvanceMenuImageTransition(D_800E4518);
-        if (Frontend_GetMenuImageState(D_800E4518) != 2) {
+        Frontend_DrawMenuImage(g_optionsShortcutScreen);
+        Frontend_AdvanceMenuImageTransition(g_optionsShortcutScreen);
+        if (Frontend_GetMenuImageState(g_optionsShortcutScreen) != 2) {
             return 0;
         }
-        if (D_800E4518->choice != 0 && D_800E4518->choice != state) {
+        if (g_optionsShortcutScreen->choice != 0 && g_optionsShortcutScreen->choice != state) {
             return 0;
         }
-        if (D_800E4518->choice == 0) {
+        if (g_optionsShortcutScreen->choice == 0) {
             Frontend_RequestScreenMode(0);
             Widget_SetWidgetFlag08(item, 1);
-            Track_RequestTrackByKey(D_8015402C + 0x259);
-            D_800E2830->resourceHandle = -1;
-            D_800E2830->motionIndex = state;
+            Track_RequestTrackByKey(g_selectedLevelId + 0x259);
+            g_cinemaSequenceState->resourceHandle = -1;
+            g_cinemaSequenceState->motionIndex = state;
         } else {
             MarkMenuEventHandled();
-            if (D_800E4518->arena == 0 && func_8025E2C4_de() != 0) {
-                func_8025E2D4_de(Graphu64_NextRandom() % 4 + 0x38);
+            if (g_optionsShortcutScreen->arena == 0 && SoundElement_GetMusicPlaybackEnabled() != 0) {
+                SoundElement_SetMusicPlaybackEnabled(Graphu64_NextRandom() % 4 + 0x38);
             } else {
-                func_8025E2D4_de(D_800E4518->arena);
+                SoundElement_SetMusicPlaybackEnabled(g_optionsShortcutScreen->arena);
             }
-            pause = &D_80145088.status[7];
+            pause = &g_frontendScreenStatus.status[7];
             *pause = 0;
-            if (D_800E4518->mode == -1) {
+            if (g_optionsShortcutScreen->mode == -1) {
                 humans = 0;
                 i = 0;
                 player = (u8 *)pause - 0x5CC;
@@ -87,11 +87,11 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
                     }
                     i++;
                 } while (i < 4);
-                settings = &D_801462C8;
-                if (settings->reserved580 == 2 && humans >= 2) {
+                settings = &g_gameSettings;
+                if (settings->resolution == 2 && humans >= 2) {
                     Frontend_RequestScreenMode(1);
                 } else {
-                    Frontend_RequestScreenMode(settings->reserved580);
+                    Frontend_RequestScreenMode(settings->resolution);
                 }
                 Tsmos_RequestFrontendShutdown();
                 return 0;

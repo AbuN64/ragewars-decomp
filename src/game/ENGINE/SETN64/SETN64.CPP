@@ -18,7 +18,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/PROPGEOMETRY.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "WORLD/BARREL_SPAWNACTOREFFECT_DATA.H"
 
 /* 8028FD2C_4.CPP */
@@ -89,15 +89,15 @@ int SetN64_GetRecordBlockSize(int *recordHeader) {
     return recordHeader[0] * recordHeader[1] + 8;
 }
 
-void SetN64_GetChunkStorage(void *arg0, void **arg1, s32 *arg2) {
-    *arg1 = arg0;
-    *arg2 = ((((struct Shape_typemap_13 *) ((s8 *) arg0))->field_0) * (((struct Shape_typemap_13 *) ((s8 *) arg0))->field_4)) + 8;
+void SetN64_GetChunkStorage(void *chunk, void **storageOut, s32 *sizeOut) {
+    *storageOut = chunk;
+    *sizeOut = ((((struct ActorAnimationEventTable *) ((s8 *) chunk))->field_0) * (((struct ActorAnimationEventTable *) ((s8 *) chunk))->field_4)) + 8;
 }
 
 /* 8028FD2C_11.CPP */
-void *SetN64_GetChunkPayload(int *arg0, int *arg1) {
-    *arg1 = arg0[0] * arg0[1];
-    return &((ResidentDataChunk *)(arg0))->data[0];
+void *SetN64_GetChunkPayload(int *chunk, int *sizeOut) {
+    *sizeOut = chunk[0] * chunk[1];
+    return &((ResidentDataChunk *)(chunk))->data[0];
 }
 
 /* Transposes the byte matrix after its eight-byte dimensions header and optionally copies the result back. */
@@ -116,10 +116,10 @@ void SetN64_TransposeRecords(void *sourceBlock, void *destinationBlock, s32 copy
   u8 *sourceByte;
   u8 *destinationByte;
   first_column = 0;
-  func_802BD3A0_de(destinationBlock, sourceBlock, 8);
+  Libc_CopyBytes(destinationBlock, sourceBlock, 8);
   destinationByte = destinationBlock + 8;
-  columnCount = ((struct IntPair *) sourceBlock)->field_4;
-  rowCount = ((struct IntPair *) sourceBlock)->field_0;
+  columnCount = ((struct IntPair *) sourceBlock)->second;
+  rowCount = ((struct IntPair *) sourceBlock)->first;
   columnIndex = first_column;
   if (columnCount > first_column)
   {
@@ -145,7 +145,7 @@ void SetN64_TransposeRecords(void *sourceBlock, void *destinationBlock, s32 copy
   }
   if (copyBack != 0)
   {
-    func_802BD3A0_de(sourceBlock, destinationBlock, (columnCount * rowCount) + 8);
+    Libc_CopyBytes(sourceBlock, destinationBlock, (columnCount * rowCount) + 8);
   }
 }
 
@@ -157,9 +157,9 @@ s32 Scene_GetIndexedModelResource(void *, s32);
 void Scene_SampleWorldLighting(void *, CVector3 *, void *);
 void SetN64_RecycleEffectNode(void *, void *);
 
-extern s32 D_800CD764_de[];
+extern s32 g_screenImageResourcesEnabled[];
 
-void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 arg2, CVector3 rotation, CVector3 position, s32 effectOwner, f32 initialLifetime)
+void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 modelId, CVector3 rotation, CVector3 position, s32 effectOwner, f32 initialLifetime)
 {
   CVector3 center;
   s32 type;
@@ -167,28 +167,28 @@ void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 arg2, 
   s32 modelResource;
   char *effectActor;
   char *previousActiveHead;
-  if (((*D_800CD764_de) == 0) || ((type = Scene_FindModelIdIndex(&g_world, arg2), type == (-1))))
+  if (((*g_screenImageResourcesEnabled) == 0) || ((type = Scene_FindModelIdIndex(&g_world, modelId), type == (-1))))
   {
     return 0;
   }
-  if ((((WorldRecAt3C08 *)(container))->free) == 0)
+  if ((((EffectSlotPool *)(container))->free) == 0)
   {
-    SetN64_RecycleEffectNode(container, ((WorldRecAt3C08 *)(container))->tail);
+    SetN64_RecycleEffectNode(container, ((EffectSlotPool *)(container))->tail);
   }
-  effectActor = ((WorldRecAt3C08 *)(container))->free;
-  previousActiveHead = ((WorldRecAt3C08 *)(container))->head;
-  ((WorldRecAt3C08 *)(container))->free = (void *) (((SceneEffect *)(effectActor))->next);
+  effectActor = ((EffectSlotPool *)(container))->free;
+  previousActiveHead = ((EffectSlotPool *)(container))->head;
+  ((EffectSlotPool *)(container))->free = (void *) (((SceneEffect *)(effectActor))->next);
   if (previousActiveHead != 0)
   {
     ((SceneEffect *)(previousActiveHead))->prev = effectActor;
   }
-  { char *next = ((WorldRecAt3C08 *)(container))->head;
+  { char *next = ((EffectSlotPool *)(container))->head;
   ((SceneEffect *)(effectActor))->prev = 0;
   ((SceneEffect *)(effectActor))->next = next; }
-  ((WorldRecAt3C08 *)(container))->head = effectActor;
-  if ((((WorldRecAt3C08 *)(container))->tail) == 0)
+  ((EffectSlotPool *)(container))->head = effectActor;
+  if ((((EffectSlotPool *)(container))->tail) == 0)
   {
-    ((WorldRecAt3C08 *)(container))->tail = effectActor;
+    ((EffectSlotPool *)(container))->tail = effectActor;
   }
   ((SceneEffect *)(effectActor))->state = (s32) ((((SceneEffect *)(effectActor))->state) | 1);
   GameObject_ResetActorMotion(effectActor);
@@ -199,7 +199,7 @@ void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 arg2, 
   {
     *referenceCounter += 1;
   }
-  if (D_801462C8.local != 0)
+  if (g_gameSettings.local != 0)
   {
     ((SceneEffect *)(effectActor))->definition = &g_boundedEffectDefinition.header;
   }
@@ -240,11 +240,11 @@ void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 arg2, 
   return effectActor;
 }
 
-/* Updates a world's active actors: counts each actor's lifetime down by the frame time and expires it when the lifetime runs out or when its bounds leave the world box D_801031F0 (unless it is flagged 0x200); an expired active actor loses its active bit, decrements its owner's counter and moves from the active list to the free list, and every other actor is updated through SetN64_UpdateEffectMotionAndBounds. */
+/* Updates a world's active actors: counts each actor's lifetime down by the frame time and expires it when the lifetime runs out or when its bounds leave the world box g_cameraVolumeBounds (unless it is flagged 0x200); an expired active actor loses its active bit, decrements its owner's counter and moves from the active list to the free list, and every other actor is updated through SetN64_UpdateEffectMotionAndBounds. */
 
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
-void SetN64_UpdateEffectPool(WorldRecAt3C08 *world) {
+void SetN64_UpdateEffectPool(EffectSlotPool *world) {
     SceneEffect *actor;
     SceneEffect *next;
     s32 expired;
@@ -259,15 +259,15 @@ void SetN64_UpdateEffectPool(WorldRecAt3C08 *world) {
         next = actor->next;
         expired = 0;
         if (actor->lifetime > 0.0f) {
-            lifetime = actor->lifetime - D_800D2988;
+            lifetime = actor->lifetime - g_frameElapsedTime;
             actor->lifetime = lifetime;
             if (lifetime <= 0.0f) {
                 expired = 1;
             }
         }
-        if (!((D_801031F0.max.x > actor->minX) && (D_801031F0.min.x < actor->maxX) &&
-              (D_801031F0.max.z > actor->minZ) && (D_801031F0.min.z < actor->maxZ) &&
-              (D_801031F0.max.y > actor->minY) && (D_801031F0.min.y < actor->maxY))) {
+        if (!((g_cameraVolumeBounds.max.x > actor->minX) && (g_cameraVolumeBounds.min.x < actor->maxX) &&
+              (g_cameraVolumeBounds.max.z > actor->minZ) && (g_cameraVolumeBounds.min.z < actor->maxZ) &&
+              (g_cameraVolumeBounds.max.y > actor->minY) && (g_cameraVolumeBounds.min.y < actor->maxY))) {
             if (!(actor->flags & 0x200)) {
                 expired = 1;
             }
@@ -306,10 +306,10 @@ void SetN64_InitializeEffectSlot(struct EffectSlot *effectSlot) {
     effectSlot->state = 0;
 }
 
-extern char D_801003F8;
-extern char D_80100438;
+extern char g_primaryCollisionContext;
+extern char g_secondaryCollisionContext;
 
-extern void func_8024F4A0_de(SceneEffect *);
+extern void Simpinst_UpdateModelAndScale(SceneEffect *);
 extern void Unicol_MoveActorWithCollision(SceneEffect *, f32, f32, f32, void *);
 
 void SetN64_UpdateEffectMotionAndBounds(SceneEffect *effect)
@@ -319,18 +319,18 @@ void SetN64_UpdateEffectMotionAndBounds(SceneEffect *effect)
   f32 radius;
   f32 x;
   CVector3 saved;
-  collisionContext = &D_80100438;
+  collisionContext = &g_secondaryCollisionContext;
   if (!(effect->definition->gate & 4))
   {
-    collisionContext = &D_801003F8;
+    collisionContext = &g_primaryCollisionContext;
   }
   motionHoldTime = effect->lifetimeState;
   if (motionHoldTime > 0.0f)
   {
-    effect->lifetimeState = (f32) (motionHoldTime - D_800D2988);
+    effect->lifetimeState = (f32) (motionHoldTime - g_frameElapsedTime);
     saved = effect->position;
   }
-  func_8024F4A0_de(effect);
+  Simpinst_UpdateModelAndScale(effect);
   if (effect->definition != (&g_defaultEffectDefinition))
   {
     effect->rotation.x = 0.0f;
@@ -339,7 +339,7 @@ void SetN64_UpdateEffectMotionAndBounds(SceneEffect *effect)
   }
   Unicol_MoveActorWithCollision(effect, effect->position.x, effect->position.y, effect->position.z, collisionContext);
   x = effect->position.x;
-  radius = D_800C53A4_de;
+  radius = g_effectDefaultRadius;
   effect->minX = (f32) (x - radius);
   effect->minY = (f32) (effect->position.y - radius);
   effect->minZ = (f32) (effect->position.z - radius);
@@ -353,13 +353,13 @@ void SetN64_UpdateEffectMotionAndBounds(SceneEffect *effect)
 }
 
 /* 8028FD2C_12.CPP */
-extern s32 Visdata_TestBoxAgainstFrustum(void *arg0, void *arg1);
+extern s32 Visdata_TestBoxAgainstFrustum(void *frustum, void *box);
 
 extern void Simple_DrawCachedModel(void *obj);
 
 extern f32 D_801031F8[];
 
-extern s32 func_8024D160_de(void *actor);
+extern s32 InstHdr_CanActorReceiveInteraction(void *actor);
 
 /** Unlink an active node and return it to the global free list. */
 void SetN64_RecycleGlobalEffectNode(ListNode80290528 *node) {
@@ -376,21 +376,21 @@ void SetN64_RecycleGlobalEffectNode(ListNode80290528 *node) {
         if (node->next != 0) {
             node->next->previous = node->previous;
         }
-        if (D_80131144 == node) {
-            D_80131144 = node->next;
+        if (g_effectPoolActiveHead == node) {
+            g_effectPoolActiveHead = node->next;
         }
-        if (D_80131148 == node) {
-            D_80131148 = node->previous;
+        if (g_effectPoolActiveTail == node) {
+            g_effectPoolActiveTail = node->previous;
         }
-        oldHead = D_80131140;
+        oldHead = g_effectPoolFreeHead;
         node->previous = 0;
         *(ListNode80290528 *volatile *) &node->next = oldHead;
-        D_80131140 = node;
+        g_effectPoolFreeHead = node;
     }
 }
 
 void SetN64_DrawVisibleEffects(char *effectPool, char *view) {
-    WorldRecAt3C08 *world = (void *)effectPool;
+    EffectSlotPool *world = (void *)effectPool;
     GameplayCamera *camera = (void *)view;
     SceneEffect *entry;
     f32 value;
@@ -402,8 +402,8 @@ void SetN64_DrawVisibleEffects(char *effectPool, char *view) {
     entry = world->head;
     if (entry != 0) {
         zero = 0.0f;
-        upper = D_800C53A8_de;
-        scale = D_800C53AC_de;
+        upper = g_effectDefaultUpperBound;
+        scale = g_effectDefaultScale;
         do {
             if ((camera->clipBounds[1].x > entry->minX) &&
                 (camera->clipBounds[0].x < entry->maxX) &&
@@ -413,13 +413,13 @@ void SetN64_DrawVisibleEffects(char *effectPool, char *view) {
                 (camera->clipBounds[0].y < entry->maxY) &&
                 (Visdata_TestBoxAgainstFrustum(camera->clipPlanes, &entry->minX) != 0)) {
                 value = entry->lifetime;
-                D_800D15E0 = 0;
+                g_menuModelFillEnabled = 0;
                 if ((value > zero) && (value <= upper)) {
-                    D_800D15E0 = 1;
-                    D_800D15E4[3] = value * scale;
+                    g_menuModelFillEnabled = 1;
+                    g_menuModelFillColor[3] = value * scale;
                 }
                 Simple_DrawCachedModel(entry);
-                D_800D15E0 = 0;
+                g_menuModelFillEnabled = 0;
             }
             entry = entry->next;
         } while (entry != 0);
@@ -427,7 +427,7 @@ void SetN64_DrawVisibleEffects(char *effectPool, char *view) {
     Geometry_FlushModelBatch();
 }
 
-void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *effectPool, Results *results) {
+void SetN64_CollectVisibleEffectNodes(VisibleEffectPoolView *effectPool, Results *results) {
     f32 *bounds;
     s32 count;
     s32 mask;
@@ -442,9 +442,9 @@ void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *effectPool, Results *r
         bounds = D_801031F8 + 1;
         limit = 0x200;
         do {
-            func_8024F470_de(node);
+            Simpinst_ClearCachedResource(node);
             if (((node->flags & mask) == required) &&
-                (func_8024D160_de(node) != 0) &&
+                (InstHdr_CanActorReceiveInteraction(node) != 0) &&
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
                 !(((u16 *)&node->flags)[1] & 0x100) &&
 #else
@@ -467,9 +467,9 @@ void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *effectPool, Results *r
     }
 }
 
-void *SetN64_AllocateActorFromPool(ObjectLinks3C0C *container)
+void *SetN64_AllocateActorFromPool(ActorPoolFreeListView *container)
 {
-  void *new_var;
+  void *actor;
   void *node;
   struct ListNode80290528 *next;
   if ((container->unk_3C00) == 0)
@@ -478,33 +478,33 @@ void *SetN64_AllocateActorFromPool(ObjectLinks3C0C *container)
   }
   node = container->unk_3C00;
   next = container->next;
-  container->unk_3C00 = ((ObjectLinks1E0 *)(node))->unk_1DC;
+  container->unk_3C00 = ((VisibleEffectNodeLinks *)(node))->unk_1DC;
   if (next != 0)
   {
     next->previous = node;
   }
-  new_var = container->next;
-  ((ObjectLinks1E0 *)(node))->unk_1D8 = 0;
-  ((ObjectLinks1E0 *)(node))->unk_1DC = new_var;
+  actor = container->next;
+  ((VisibleEffectNodeLinks *)(node))->unk_1D8 = 0;
+  ((VisibleEffectNodeLinks *)(node))->unk_1DC = actor;
   container->next = node;
   if ((container->unk_3C08) == 0)
   {
     container->unk_3C08 = node;
   }
-  ((ObjectLinks1E0 *)(node))->unk_1D0 |= 1;
+  ((VisibleEffectNodeLinks *)(node))->unk_1D0 |= 1;
   GameObject_ResetActorMotion(node);
-  ((ObjectLinks1E0 *)(node))->unk_1C8 = 0;
+  ((VisibleEffectNodeLinks *)(node))->unk_1C8 = 0;
   return node;
 }
 
 /* 800CA494.CPP */
 /* ROM-grounded data: src/rw_pool_80290424_CB094_us_rev1.c */
-const unsigned int D_blob_44d8067648dded17f40b[1] = {
+const unsigned int g_EngineSetn64RetainedWords1[1] = {
     0x42A3D70A,
 };
 
 /* 800CA498.CPP */
 /* ROM-grounded data: src/rw_pool_802905F4_CB098_us_rev1.c */
-const unsigned int D_blob_4aa51b098be20f0efb1c[2] = {
+const unsigned int g_EngineSetn64RetainedWords2[2] = {
     0x40F00000, 0x42080000,
 };

@@ -1,19 +1,19 @@
 #include "COMMON/OBJRECAT3CV2.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/STATEPAIR.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/TEXTURE.H"
 
-/** Set D_800D2C90 to one. */
+/** Set g_frontendShutdownState to one. */
 
 
-extern void Controller_ClearControllerFlags(s32 *arg0);
+extern void Controller_ClearControllerFlags(s32 *controller);
 
-/** Return the global word at D_800D2C98. */
+/** Return the global word at g_frontendActiveState. */
 
 
 
@@ -21,7 +21,7 @@ extern void Controller_ClearControllerFlags(s32 *arg0);
 void Tsmos_ActivateControllerState(void) {
     s32 *p;
 
-    p = &D_800CDA24;
+    p = &g_frontendControllerState;
     if (*p != 1) {
         *p = 1;
         Controller_ClearControllerFlags(p);
@@ -29,25 +29,25 @@ void Tsmos_ActivateControllerState(void) {
 }
 
 void Tsmos_DeactivateControllerState(void) {
-    D_800CDA24 = 0;
+    g_frontendControllerState = 0;
 }
 
 int Tsmos_IsControllerStateActive(void) {
-    return D_800CDA24;
+    return g_frontendControllerState;
 }
 
 int Tsmos_IsFrontendActive(void) {
-    return D_800D2C98;
+    return g_frontendActiveState;
 }
 
-void Tsmos_SetModeOneFlag(s32 arg0) {
-    if (arg0 == 1) {
-        D_800CDA2C = arg0;
+void Tsmos_SetModeOneFlag(s32 mode) {
+    if (mode == 1) {
+        g_frontendModeOneState = mode;
         return;
     }
-    D_800CDA2C = 0;
+    g_frontendModeOneState = 0;
 }
 
 int Tsmos_GetModeOneFlag(void) {
-    return D_800CDA2C;
+    return g_frontendModeOneState;
 }

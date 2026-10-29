@@ -1,0 +1,7 @@
+
+#if defined(VERSION_US_REV1)
+unsigned int ragewars_menu_digit_labels_us_rev1_StorageWords[11] = {
+    0x20000000, 0x30000000, 0x31000000, 0x32000000, 0x33000000, 0x34000000, 0x35000000, 0x36000000,
+    0x37000000, 0x38000000, 0x39000000,
+};
+#endif

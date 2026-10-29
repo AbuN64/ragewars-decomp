@@ -5,7 +5,7 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GFX.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/STATERECAT91.H"
@@ -19,7 +19,7 @@
 
 
 
-void Achieve_ApplyPlayerOptionOverrides(PlayerRecAt602 *p) {
+void Achieve_ApplyPlayerOptionOverrides(PlayerLoadoutSelectionView *p) {
     int i;
 
     if (p->info->locked != 1 && p->info->present != 0) {
@@ -42,7 +42,7 @@ void Achieve_EnableLevelWeapons(WeaponPlayer *player) {
     s32 active;
 
     if (status->out != 1 && status->active != 0) {
-        void *table = Scene_GetBlLevelData(&g_world, D_8015402C);
+        void *table = Scene_GetBlLevelData(&g_world, g_selectedLevelId);
         i = 0;
         active = 1;
         entries = table;
@@ -60,7 +60,7 @@ void Achieve_EnableLevelWeapons(WeaponPlayer *player) {
 }
 
 #include "COMMON/CHARACTERSELECTIONROOT.H"
-extern MatchMenuApplySlotValueGfx D_801462C8;
+extern MatchMenuApplySlotValueGfx g_gameSettings;
 
 s32 Achieve_MatchQualifies(void) {
     MatchMenuApplySlotValueGfx *match;
@@ -69,15 +69,15 @@ s32 Achieve_MatchQualifies(void) {
     s32 result;
     RosterSlot *slot;
 
-    match = &D_801462C8;
+    match = &g_gameSettings;
     if (match->unk24 <= 0 && match->unk25 <= 0) {
         return 0;
     }
     result = 1;
     count = 0;
     for (i = 0; i < 8; i++) {
-        slot = &D_801462C8.slots[i];
-        if (slot->active == 1 && slot->m_IsBot != slot->active && D_800FF140_de[i] >= 76) {
+        slot = &g_gameSettings.slots[i];
+        if (slot->active == 1 && slot->m_IsBot != slot->active && g_playerCountedShots[i] >= 76) {
             count++;
         }
     }

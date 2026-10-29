@@ -3,15 +3,15 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/NAVIGATION_GRAPH.H"
-#include "COMMON/OBJECTLINKS14.H"
+#include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 #include "AI/NAV/PORTAL_INITSEARCHNODE.H"
 #include "COMMON/POOLED_FLOATS.H"
 
-extern struct {s32 *unk0;} D_8013B364;
+extern struct {s32 *pointStorage;} g_navigationGraph;
 
 
 extern void Graphu64_SubtractVectors(CVector3 *out, void *leftVector, void *rightVector);
@@ -33,13 +33,13 @@ static inline int isTwoWay(Link *link) {
     return 0;
 }
 
-extern CollisionInfo8020CD74 D_80103FF0;
+extern CollisionInfo8020CD74 g_portalDefaultCollisionQuery;
 
-extern CollisionInfo8020CD74 D_80104050;
+extern CollisionInfo8020CD74 g_portalModeCollisionQuery;
 
-extern CollisionInfo8020CD74 D_80104070;
+extern CollisionInfo8020CD74 g_portalNoModelFlagCollisionQuery;
 
-extern CollisionInfo8020CD74 D_801040D0;
+extern CollisionInfo8020CD74 g_portalAlternateCollisionQuery;
 
 extern s32 Insthdr_GetModelCollisionFlag1(void *);
 
@@ -94,20 +94,20 @@ void Portal_InitSearchNode(void *searchNode, s32 nodeKey)
   NavigationPoint *entry;
   NavigationSearchNode *node = searchNode;
   u16 flags;
-  char *new_var;
+  char *nodeStorage;
   s32 *base;
-  node->value = D_800C1D8C_de;
+  node->value = g_portalNodeInitialValue;
   node->key = nodeKey;
   node->state = -1;
   node->flags = 0;
   node->next = 0;
-  base = D_8013B364.unk0;
-  new_var = (char *)base + ((nodeKey * (*base)) + 8);
-  entry = (NavigationPoint *)new_var;
+  base = g_navigationGraph.pointStorage;
+  nodeStorage = (char *)base + ((nodeKey * (*base)) + 8);
+  entry = (NavigationPoint *)nodeStorage;
   flags = navigation_point_flags(entry);
   if (flags & 2)
   {
-    node->wait = D_800C1D90_de;
+    node->wait = g_portalNodeWaitAndHeightOffset;
   }
   node->object = 0;
   node->ticks = 0;
@@ -211,7 +211,7 @@ s32 Portal_CollectIncidentLinks(EntryList8020CCE8 *list, s32 value, s32 *partner
     return found;
 }
 
-s32 Portal_IsNodeMovementBlocked(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
+s32 Portal_IsNodeMovementBlocked(s32 **nodeStorage, Instance8020CD74 *instance, s32 nodeKey) {
     CVector3 position;
     CollisionInfo8020CD74 collision;
     Instance8020CD74 saved;
@@ -220,31 +220,31 @@ s32 Portal_IsNodeMovementBlocked(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     s32 *table;
     void *entry;
 
-    table = *arg0;
-    entry = (u8 *)table + ((arg2 * table[0]) + 8);
+    table = *nodeStorage;
+    entry = (u8 *)table + ((nodeKey * table[0]) + 8);
     position = *(CVector3 *)entry;
-    position.y += *(&D_800C1D90_de + 1);
+    position.y += *(&g_portalNodeWaitAndHeightOffset + 1);
 
-    if ((((LevelActor *)arg1)->kind == 1) && (((LevelActor *)arg1)->flags & 0x300000)) {
-        collision = D_801040D0;
+    if ((((LevelActor *)instance)->kind == 1) && (((LevelActor *)instance)->flags & 0x300000)) {
+        collision = g_portalAlternateCollisionQuery;
     } else {
-        first_test = Insthdr_GetModelCollisionFlag1(arg1);
-        if (Insthdr_IsInactiveOrCollisionOption4(arg1) == 0) {
+        first_test = Insthdr_GetModelCollisionFlag1(instance);
+        if (Insthdr_IsInactiveOrCollisionOption4(instance) == 0) {
             if (first_test != 0) {
-                collision = D_80104050;
+                collision = g_portalModeCollisionQuery;
             } else {
-                collision = D_801040D0;
+                collision = g_portalAlternateCollisionQuery;
             }
-        } else if (Insthdr_GetModelCollisionFlag8(arg1) == 0) {
-            collision = D_80104070;
+        } else if (Insthdr_GetModelCollisionFlag8(instance) == 0) {
+            collision = g_portalNoModelFlagCollisionQuery;
         } else {
-            collision = D_80103FF0;
+            collision = g_portalDefaultCollisionQuery;
         }
     }
     collision.w[0] = 0x4000;
-    saved = *arg1;
-    result = Unicol_MoveActorWithCollision(arg1, position, &collision);
-    *arg1 = saved;
+    saved = *instance;
+    result = Unicol_MoveActorWithCollision(instance, position, &collision);
+    *instance = saved;
     return result == 0;
 }
 

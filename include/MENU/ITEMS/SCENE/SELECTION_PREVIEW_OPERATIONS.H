@@ -2,7 +2,7 @@
 #define MENU_ITEMS_SCENE_SELECTION_PREVIEW_OPERATIONS_H
 #include "COMMON/OBJB.H"
 #include "COMMON/WORLD.H"
-#include "MENU/8044ACCC.H"
+#include "MENU/SCENE_RESOURCE_PREVIEW_AND_COLLISION_VIEWS.H"
 extern void Scene_ResetSelectionState(char *);
 extern void Scene_InitPreview(struct Shared_World *world, s32 level);
 extern void Scene_ChangePreviewSelection(ItemsPreviewStateB *state, int selection);

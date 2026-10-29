@@ -3,19 +3,19 @@
 #include "COMMON/SOUNDINFO.H"
 #include "MENU/PAK/PAK_RESUMEMENUAUDIO.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/EXTERNS_21.H"
 
 /* 80444EC0_6.CPP */
 #if !(defined(VERSION_US))
-/* Passes what func_8025CC6C_de returns to func_8025CB0C_de, then calls SoundElement_DisableMusicGainOverride and SoundElement_EnablePeriodicSound,
+/* Passes what SoundVoicePool_GetGlobalState returns to SoundVoicePool_Resume, then calls SoundElement_DisableMusicGainOverride and SoundElement_EnablePeriodicSound,
    and returns one. */
-extern s32 func_8025CC6C_de();
+extern s32 SoundVoicePool_GetGlobalState();
 struct SoundVoicePool;
-extern void func_8025CB0C_de(struct SoundVoicePool *);
+extern void SoundVoicePool_Resume(struct SoundVoicePool *);
 
 s32 Pak_ResumeMenuAudio(void) {
-    func_8025CB0C_de(func_8025CC6C_de());
+    SoundVoicePool_Resume(SoundVoicePool_GetGlobalState());
     SoundElement_DisableMusicGainOverride();
     SoundElement_EnablePeriodicSound();
     return 1;

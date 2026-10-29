@@ -7,17 +7,17 @@
 #include "COMMON/PROPGEOMETRY.H"
 #include "WORLD/STATIC_MODEL_INSTANCE_VIEWS.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/FRUSTUM.H"
 #include "gbi.h"
 #include "TYPES.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "GAME/BUILDDIRECTIONMATRIX.H"
 #include "SYSTEM/TEXTLOAD_RESETTEXTURECACHE.H"
 
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/WORLD.H"
@@ -89,7 +89,7 @@ void Simple_InitSimpleInstance(SimpleInstanceOut *inst, CROMSimpleInstance *rec,
     v.x = inst->position.x;
     v.y = inst->position.y + Gobjinst_GetActorHeight(inst) * 0.5f;
     v.z = inst->position.z;
-    inst->light = D_800CBC90[0];
+    inst->light = g_playerModelLighting[0];
     inst->f1C4 = 0;
 }
 
@@ -106,7 +106,7 @@ void Simple_InitSimpleInstance(SimpleInstanceOut *inst, CROMSimpleInstance *rec,
 
 
 
-extern void **func_8024F6EC_de(StaticObject *, s32);
+extern void **Simpinst_RequestModelVariant(StaticObject *, s32);
 extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
 extern s32 Graphu64_LimitVectorLength(CVector3 *, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
@@ -126,7 +126,7 @@ void Simple_DrawCachedModel(StaticObject *obj) {
         gSPDisplayList(g_displayListCursor++, (unsigned int)obj->cached);
         return;
     }
-    resource = func_8024F6EC_de(obj, obj->model);
+    resource = Simpinst_RequestModelVariant(obj, obj->model);
     if (resource == 0) {
         return;
     }
@@ -141,9 +141,9 @@ void Simple_DrawCachedModel(StaticObject *obj) {
     Graphu64_LimitVectorLength(&obj->position, 20000.0f);
     TranslateMatrix(&matrix, obj->position.x, obj->position.y + obj->height, obj->position.z);
     SwapMatrixUpForward(&matrix);
-    Graphu64_ConvertMatrixToFixed(&matrix, obj->matrices[D_800D297C]);
+    Graphu64_ConvertMatrixToFixed(&matrix, obj->matrices[g_lightingBufferIndex]);
     if (*obj->type != 12) {
-        Geometry_DrawModelResource(resource, obj->matrices[D_800D297C], 0, obj->lights, 0, obj->material);
+        Geometry_DrawModelResource(resource, obj->matrices[g_lightingBufferIndex], 0, obj->lights, 0, obj->material);
         Simpinst_SpawnModelEffect(obj, resource);
     }
     gSPEndDisplayList(g_displayListCursor++);

@@ -1,5 +1,5 @@
-#include "COMMON/OBJECTSTATE18.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAME_SESSION.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -28,7 +28,7 @@ void Geometry_DrawVisibleOwnerParts(void **resource, struct Owner104 *owner, s32
     s32 i;
     s32 visible;
 
-    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (g_displayListCapacityUsRev1 - ((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     header = *resource;
@@ -87,12 +87,12 @@ void Geometry_DrawVisibleOwnerParts(void **resource, struct Owner104 *owner, s32
         }
     }
 }
-extern NodeGeometryGroupModelInstances *D_8010C568;
-extern NodeGeometryGroupModelInstances *D_8010C56C;
-extern NodeGeometryGroupModelInstances *D_8010C57C;
-extern NodeGeometryGroupModelInstances *D_8010C584;
-extern void **D_8011064C;
-extern struct Shape_typemap_165 D_801157D8[];
+extern NodeGeometryGroupModelInstances *g_opaqueMaterialGroupTree;
+extern NodeGeometryGroupModelInstances *g_opaqueMaterialGroupList;
+extern NodeGeometryGroupModelInstances *g_translucentMaterialGroupTree;
+extern NodeGeometryGroupModelInstances *g_translucentMaterialGroupList;
+extern void **g_modelBatchResource;
+extern struct CacheResourceBlockView g_modelInstanceQueue[];
 
 
 /* Returns the node keyed key in the tree under n, or the node a new key would hang from. */
@@ -113,9 +113,9 @@ static inline NodeGeometryGroupModelInstances *find_node(NodeGeometryGroupModelI
     return parent;
 }
 
-/* Files each entry of the list the resource D_8011064C holds into one of two keyed trees, allocating a
- * node from D_801144D0 when its key is new, and appends one item per queued parameter in D_801157D8
- * to that node's list; then clears the queue count D_80110640. */
+/* Files each entry of the list the resource g_modelBatchResource holds into one of two keyed trees, allocating a
+ * node from g_materialGroups when its key is new, and appends one item per queued parameter in g_modelInstanceQueue
+ * to that node's list; then clears the queue count g_modelInstanceQueueCount. */
 void Geometry_GroupModelInstances(void) {
     s32 *list;
     s32 count;
@@ -127,28 +127,28 @@ void Geometry_GroupModelInstances(void) {
     NodeGeometryGroupModelInstances *parent;
     NodeGeometryGroupModelInstances *node;
     s32 *data;
-    ItemRecAt1C *item;
-    struct Shape_typemap_165 *param;
+    GeometryModelInstanceEntry *item;
+    struct CacheResourceBlockView *param;
 
-    if (D_80110640 != 0) {
-        list = SetN64_GetPackSection(*D_8011064C, 2);
+    if (g_modelInstanceQueueCount != 0) {
+        list = SetN64_GetPackSection(*g_modelBatchResource, 2);
         count = *list;
         for (i = 0; i < count; i++) {
             entry = SetN64_GetPackSection(list, i);
             source = SetN64_GetPackSection(entry, 0);
-            key = (source->id << 8) | (u8)D_8010C564;
+            key = (source->id << 8) | (u8)g_modelBatchPass;
             if (source->flags & 0x700) {
-                parent = find_node(D_8010C57C, key);
+                parent = find_node(g_translucentMaterialGroupTree, key);
             } else {
-                parent = find_node(D_8010C568, key);
+                parent = find_node(g_opaqueMaterialGroupTree, key);
             }
             if (parent != ((void *) 0) && parent->key == key) {
                 node = parent;
             } else {
-                if (D_8010C578 == 120) {
+                if (g_materialGroupCount == 120) {
                     break;
                 }
-                node = &D_801144D0[D_8010C578++];
+                node = &g_materialGroups[g_materialGroupCount++];
                 node->key = key;
                 node->source = source;
                 node->tail = ((void *) 0);
@@ -165,8 +165,8 @@ void Geometry_GroupModelInstances(void) {
                                 parent->prev->next = node;
                             }
                             parent->prev = node;
-                            if (D_8010C584 == parent) {
-                                D_8010C584 = node;
+                            if (g_translucentMaterialGroupList == parent) {
+                                g_translucentMaterialGroupList = node;
                             }
                         } else {
                             parent->right = node;
@@ -180,8 +180,8 @@ void Geometry_GroupModelInstances(void) {
                             parent->next = node;
                         }
                     } else {
-                        D_8010C57C = node;
-                        D_8010C584 = node;
+                        g_translucentMaterialGroupTree = node;
+                        g_translucentMaterialGroupList = node;
                         node->right = ((void *) 0);
                         node->left = ((void *) 0);
                         node->next = ((void *) 0);
@@ -199,8 +199,8 @@ void Geometry_GroupModelInstances(void) {
                                 parent->prev->next = node;
                             }
                             parent->prev = node;
-                            if (D_8010C56C == parent) {
-                                D_8010C56C = node;
+                            if (g_opaqueMaterialGroupList == parent) {
+                                g_opaqueMaterialGroupList = node;
                             }
                         } else {
                             parent->right = node;
@@ -214,8 +214,8 @@ void Geometry_GroupModelInstances(void) {
                             parent->next = node;
                         }
                     } else {
-                        D_8010C568 = node;
-                        D_8010C56C = node;
+                        g_opaqueMaterialGroupTree = node;
+                        g_opaqueMaterialGroupList = node;
                         node->right = ((void *) 0);
                         node->left = ((void *) 0);
                         node->next = ((void *) 0);
@@ -224,17 +224,17 @@ void Geometry_GroupModelInstances(void) {
                 }
             }
             data = SetN64_GetPackSection(entry, 1);
-            for (j = 0; j < D_80110640; j++) {
-                param = &D_801157D8[j];
-                if (D_8010C570 != 500) {
-                    item = &D_8010C590[D_8010C570++];
+            for (j = 0; j < g_modelInstanceQueueCount; j++) {
+                param = &g_modelInstanceQueue[j];
+                if (g_materialInstanceCount != 500) {
+                    item = &g_materialInstances[g_materialInstanceCount++];
                     item->data = data;
-                    item->unk4 = param->field_0;
-                    item->unk8 = param->field_4;
-                    item->unkC = param->field_8;
+                    item->unk4 = param->first;
+                    item->unk8 = param->second;
+                    item->unkC = param->third;
                     item->unk10 = source->unk18;
                     item->unk12 = source->unk1A;
-                    item->unk14 = param->field_C;
+                    item->unk14 = param->fourth;
                     item->next = ((void *) 0);
                     if (node->tail != ((void *) 0)) {
                         node->tail->next = item;
@@ -245,6 +245,6 @@ void Geometry_GroupModelInstances(void) {
                 }
             }
         }
-        D_80110640 = 0;
+        g_modelInstanceQueueCount = 0;
     }
 }

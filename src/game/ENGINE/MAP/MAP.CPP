@@ -9,26 +9,26 @@
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 
 void Map_ResetFramePool(void *batch) {
     s32 *p = (s32 *)batch;
     p[2] = p[1];
-    p[3] = p[0] + ((p[1] * D_800D297C) << 6);
+    p[3] = p[0] + ((p[1] * g_lightingBufferIndex) << 6);
 }
 
-s32 Map_ReserveEntries(void *arg0, s32 arg1) {
-    s32 var_a2;
-    var_a2 = 0;
-    if ((((struct ObjRecAtCV3 *) ((s8 *) arg0))->unk8) >= arg1) {
-        var_a2 = (((struct ObjRecAtCV3 *) ((s8 *) arg0))->unkC);
-        (((struct ObjRecAtCV3 *) ((s8 *) arg0))->unkC) = (s32) (var_a2 + (arg1 << 6));
-        (((struct ObjRecAtCV3 *) ((s8 *) arg0))->unk8) = (s32) ((((struct ObjRecAtCV3 *) ((s8 *) arg0))->unk8) - arg1);
+s32 Map_ReserveEntries(void *map, s32 entryCount) {
+    s32 firstReservedEntry;
+    firstReservedEntry = 0;
+    if ((((struct MapBlockAllocatorView *) ((s8 *) map))->remainingBlocks) >= entryCount) {
+        firstReservedEntry = (((struct MapBlockAllocatorView *) ((s8 *) map))->nextBlockAddress);
+        (((struct MapBlockAllocatorView *) ((s8 *) map))->nextBlockAddress) = (s32) (firstReservedEntry + (entryCount << 6));
+        (((struct MapBlockAllocatorView *) ((s8 *) map))->remainingBlocks) = (s32) ((((struct MapBlockAllocatorView *) ((s8 *) map))->remainingBlocks) - entryCount);
     }
-    return var_a2;
+    return firstReservedEntry;
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802799E4[12] =
+char k_MapEncodedBytes[12] =
     "s_t\004.eos\000\000\000\000";
 #endif

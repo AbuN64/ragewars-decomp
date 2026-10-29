@@ -6,15 +6,15 @@
 
 typedef struct CollisionInfo CollisionInfo;
 
-extern CollisionInfo D_80100338;
+extern CollisionInfo g_supportingPlatformCollisionQuery;
 
-extern u8 *func_8024E6A0_de(Source *item);
+extern u8 *InstHdr_GetEnabledItemValue(Source *item);
 extern void InstHdr_GetActorTargetOffset(u8 *player, CVector3 *vector);
 extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void Graphu64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void Graphu64_TransformPoints(MatrixF *arg0, CVector3 *arg1, CVector3 *out, s32 count);
+extern void Graphu64_TransformPoints(MatrixF *matrix, CVector3 *points, CVector3 *out, s32 count);
 extern void Unicol_MoveActorWithCollision(Source *actor, CVector3 pos, CollisionInfo *motionSettings);
-extern void func_80207730_de(u8 *arg0, Source *arg1);
+extern void Triggered_PathMotionNoOp(u8 *platform, Source *player);
 
 
 
@@ -27,7 +27,7 @@ void Actor_ApplySupportingPlatformMotion(Source *player, void *unused1) {
     u8 *object;
     f32 amount;
 
-    object = func_8024E6A0_de(player);
+    object = InstHdr_GetEnabledItemValue(player);
     if ((object != 0) && (((Source *)object)->definition->kind == 2)) {
         position = player->position;
         InstHdr_GetActorTargetOffset(object, &saved_velocity);
@@ -46,10 +46,10 @@ void Actor_ApplySupportingPlatformMotion(Source *player, void *unused1) {
         Graphu64_SubtractVectors(&transformed, &transformed, &position);
         player->height += amount;
         Graphu64_AddVec3(&position, &position, &transformed);
-        Unicol_MoveActorWithCollision(player, position, &D_80100338);
+        Unicol_MoveActorWithCollision(player, position, &g_supportingPlatformCollisionQuery);
         player->velocity = saved_velocity;
         if ((object[0] == 1) && (((Source *)object)->definition->kind == 2)) {
-            func_80207730_de(object, player);
+            Triggered_PathMotionNoOp(object, player);
         }
     }
 }

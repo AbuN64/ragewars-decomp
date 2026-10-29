@@ -3,7 +3,7 @@
 #include "CAMERA/FADE_AND_COLOR_BLEND_VIEWS.H"
 #include "TYPES.H"
 #include "include_asm.h"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
 #include "COMMON/DESCRIPTORRECAT29.H"
@@ -13,53 +13,53 @@
 /* 80233920_10.CPP */
 /* Clears effect state and initializes its scalar, vector and resource defaults. */
 
-extern s32 D_800CD8D0[];
-void func_80238EB8_de(State44 *effectState) {
+extern s32 g_defaultCameraSurfaceType[];
+void Sky_InitializeLensFlareState(LensFlareEffectState *effectState) {
     f32 zeroValue;
     CVector3 *vectorDefaults;
 
-    effectState->unk_20.i = 0;
-    zeroValue = effectState->unk_20.f;
-    effectState->unk_0 = 1;
+    effectState->initialScalar.i = 0;
+    zeroValue = effectState->initialScalar.f;
+    effectState->enabled = 1;
     vectorDefaults = &effectState->v;
-    effectState->unk_4 = 0;
-    effectState->unk_8 = 0;
-    effectState->unk_C = 0;
-    effectState->unk_10 = 0;
-    effectState->unk_14 = 0;
-    effectState->unk_18 = 0;
-    effectState->unk_1C = 0;
+    effectState->stateWordOne = 0;
+    effectState->stateWordTwo = 0;
+    effectState->stateWordThree = 0;
+    effectState->stateWordFour = 0;
+    effectState->stateWordFive = 0;
+    effectState->stateWordSix = 0;
+    effectState->stateWordSeven = 0;
     vectorDefaults->z = zeroValue;
     vectorDefaults->y = zeroValue;
     effectState->v.x = zeroValue;
-    effectState->unk_30 = 1.0f;
-    effectState->unk_34 = 0;
-    effectState->unk_38 = zeroValue;
-    effectState->unk_3C = 0.174532949924469f;
-    effectState->unk_40 = (s32) *D_800CD8D0;
+    effectState->scale = 1.0f;
+    effectState->stateWordEight = 0;
+    effectState->scalarOffset = zeroValue;
+    effectState->defaultAngle = 0.174532949924469f;
+    effectState->defaultStateValue = (s32) *g_defaultCameraSurfaceType;
 }
 
 /* 80238670.CPP */
 typedef struct ClipView FlareActor;
-extern s32 D_800E28D0;
+extern s32 g_hudReferenceViewportWidth;
 extern Gfx *g_displayListCursor;
 extern f32 Gu_Sqrtf(f32);
 void Sky_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special, s32 unused) {
-    FlareRadii radii = D_800C344C_de;
-    FlareAlphas alphas = D_800C3468_de;
-    FlareColors colors = D_800C3484_de;
+    FlareRadii radii = k_lensFlareRadii;
+    FlareAlphas alphas = k_lensFlareAlphas;
+    FlareColors colors = k_lensFlareColors;
     f32 dx, dy, distance, nx, ny;
     f32 bottom, right, left, top, edge, width, half, alpha;
     Gfx *gfx;
     s32 i;
     if (intensity == 0.0f || actor->hidden) return;
-    dx = D_800E28D0 / 2 - x;
-    dy = D_800E28D4 / 2 - y;
+    dx = g_hudReferenceViewportWidth / 2 - x;
+    dy = g_hudReferenceViewportHeight / 2 - y;
     gfx = g_displayListCursor++;
     gDPSetTextureFilter(gfx, G_TF_BILERP);
     distance = Gu_Sqrtf(dx * dx + dy * dy);
     if (!special) {
-        edge = distance / Gu_Sqrtf((f32)(D_800E28D0 * D_800E28D0) * 0.25f + (f32)(D_800E28D4 * D_800E28D4) * 0.25f);
+        edge = distance / Gu_Sqrtf((f32)(g_hudReferenceViewportWidth * g_hudReferenceViewportWidth) * 0.25f + (f32)(g_hudReferenceViewportHeight * g_hudReferenceViewportHeight) * 0.25f);
         if (edge > 1.0f) intensity = 0.0f;
         else intensity *= 1.0f - edge;
     }
@@ -75,8 +75,8 @@ void Sky_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 speci
     }
     if (special) {
         half = 35.2f;
-        bottom = (f32)D_800E28D4 + half;
-        right = (f32)D_800E28D0 + half - x;
+        bottom = (f32)g_hudReferenceViewportHeight + half;
+        right = (f32)g_hudReferenceViewportWidth + half - x;
         left = x + half;
         top = y + half;
         edge = bottom - y;
@@ -102,7 +102,7 @@ void Sky_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 speci
         else width = radii.value[i] * 0.03125f;
         width *= 0.55f;
         half = width * 16.0f;
-        if (!(x > -half && x < D_800E28D0 + half && y > (top = -half) && y < D_800E28D4 + half)) return;
+        if (!(x > -half && x < g_hudReferenceViewportWidth + half && y > (top = -half) && y < g_hudReferenceViewportHeight + half)) return;
         if (special && i == 0) {
             gDPSetEnvColor(g_displayListCursor++, 255, 255, 255, intensity * 255.0f);
             OnScreen_DrawSpriteResource(600, 0, (s16)(s32)(x - half), (s16)(s32)(y - half), width, width, 1);
@@ -129,7 +129,7 @@ struct FlareSource {
     FlareSource *next;
 };
 typedef struct FlareSourceList { FlareSource *first; } FlareSourceList;
-extern FlareSourceList D_8012D4E4;
+extern FlareSourceList g_lensFlareSources;
 extern void Onscrn_SetupSpriteMode(s32);
 extern s32 Geometry_SetModePreset(s32);
 extern void Graphu64_ProjectPoint(void *, void *, CVector3 *);
@@ -139,9 +139,9 @@ static inline void ProjectToScreen(FlareActor *view, CVector3 *point, f32 *scree
     CVector3 value;
     f32 half;
     Graphu64_ProjectPoint(view->viewProjection, point, &value);
-    half = (f32)(D_800E28D0 / 2);
+    half = (f32)(g_hudReferenceViewportWidth / 2);
     *screenX = value.x * half + half;
-    *screenY = value.y * (f32)(-D_800E28D4 / 2) + (f32)(D_800E28D4 / 2);
+    *screenY = value.y * (f32)(-g_hudReferenceViewportHeight / 2) + (f32)(g_hudReferenceViewportHeight / 2);
 }
 
 /* Draws the lens flares of every lit flare source the view can see. */
@@ -157,7 +157,7 @@ void Gsky_DrawObjectFlares(FlareActor *view) {
     g = *gfx;
     gDPSetTextureFilter(g++, G_TF_BILERP);
     *gfx = g;
-    for (source = D_8012D4E4.first; source != 0; source = source->next) {
+    for (source = g_lensFlareSources.first; source != 0; source = source->next) {
         if ((source->viewMask & mask) && (*source->state & 0x80000)) {
             ProjectToScreen(view, &source->position, &x, &y);
             Sky_DrawLensFlare(view, x, y, source->brightness * (1.0f / 255.0f), 0, 0);

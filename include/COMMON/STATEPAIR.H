@@ -5,13 +5,13 @@
 
 struct StatePair;
 typedef struct StatePair StatePair;
-extern StatePair D_800CDA30_de;
+extern StatePair g_frontendTimerState;
 
 
 
 
 
-extern int D_800CBC14;
+extern int g_frontendTransitionCountdown;
 
 
 

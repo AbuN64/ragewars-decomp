@@ -6,13 +6,13 @@ const char g_systembootdoneText[15] =
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C61FF[1] = {
+unsigned char k_GSystembootdonetextEncodedBytesBlock1[1] = {
     0x20,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C61BF[1] = {
+unsigned char k_GSystembootdonetextEncodedBytes[1] = {
     0xFF,
 };
 #endif

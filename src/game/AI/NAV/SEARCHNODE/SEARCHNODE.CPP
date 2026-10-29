@@ -1,7 +1,7 @@
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAVIGATION_GRAPH.H"
-#include "COMMON/OBJECTLINKS14.H"
+#include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
 #include "TYPES.H"
 #include "AI/NAV/SEARCH_NODE_STATE.H"
 
@@ -95,7 +95,7 @@ s32 Nav_HasOpenSearchNodes(CNavData *cNavData) {
 }
 
 /** Clear the word at offset 0x28. */
-void Nav_ClearSearchNodeStatus(void *arg0) {
-    ObjRecAt28V2 *record = arg0;
+void Nav_ClearSearchNodeStatus(void *controller) {
+    ObjRecAt28V2 *record = controller;
     record->unk28 = 0;
 }

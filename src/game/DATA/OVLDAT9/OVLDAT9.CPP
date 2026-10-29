@@ -4,7 +4,7 @@
 #if !(defined(VERSION_DE))
 /* ROM-grounded data: rodata/writable/800E4F60 */
 #ifdef VERSION_EU
-unsigned short D_blob_phase2_45e9099eaa5a7e1aa72b[] = {
+unsigned short k_OvldatZeroWords[] = {
     0x0000, 0x0000, 0x0000,
 #if defined(VERSION_EU)
     0x032D,
@@ -12,7 +12,7 @@ unsigned short D_blob_phase2_45e9099eaa5a7e1aa72b[] = {
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned short D_blob_phase2_45e9099eaa5a7e1aa72b[] = {
+unsigned short k_OvldatZeroWords[] = {
     0x0000, 0x0000, 0x0000,
 #if defined(VERSION_EU_X)
     0x0331,
@@ -20,7 +20,7 @@ unsigned short D_blob_phase2_45e9099eaa5a7e1aa72b[] = {
 };
 #endif
 #ifdef VERSION_US
-unsigned short D_blob_phase2_45e9099eaa5a7e1aa72b[] = {
+unsigned short k_OvldatZeroWords[] = {
     0x0000, 0x0000, 0x0000,
 #if defined(VERSION_US)
     0x032D,
@@ -28,7 +28,7 @@ unsigned short D_blob_phase2_45e9099eaa5a7e1aa72b[] = {
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_45e9099eaa5a7e1aa72b[1] = {
+unsigned int k_OvldatZeroWords[1] = {
     0x00000000,
 };
 #endif
@@ -36,7 +36,7 @@ unsigned int D_blob_phase2_45e9099eaa5a7e1aa72b[1] = {
 
 /* 800E4F64.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_catalogue_arena_records_us_rev1[160] = {
+unsigned int g_catalogueArenaRecordWords[160] = {
     0x0000032D, 0x0000032F, 0x00000002, 0x00000000, 0x00000312, 0x00000330, 0x00000002, 0x00000001,
     0x00000311, 0x0000035C, 0x00000002, 0x00000002, 0x00000313, 0x00000343, 0x00000002, 0x00000003,
     0x0000031F, 0x00000321, 0x00000002, 0x00000004, 0x00000324, 0x00000314, 0x00000002, 0x00000005,
@@ -93,30 +93,30 @@ unsigned int g_cupCategoryTwoArenaControls[17] = {
 
 /* 800E5284.CPP */
 #if defined(VERSION_US_REV1)
-extern char D_00429C10[];
-extern char D_0042A1D0[];
-extern char D_0042A490[];
-extern char D_0042B574[];
-extern char D_0042B5B4[];
-extern char D_0042B5BC[];
-extern char D_0042B6B4[];
-extern char D_0042B824[];
-extern char D_0042B96C[];
-extern char D_0042BAE4[];
-extern char D_0042BC34[];
-extern char D_0042BC78[];
-unsigned int D_auto_src_rw_menu_event_handlers_E5E84_us_rev1[39] = {
-    0x00000E08, 0x00000014, (unsigned int)D_0042A490, 0x00000E07, 0x00000014, (unsigned int)D_0042B5B4, 0x0000000A, 0x00000014,
-    (unsigned int)D_0042B5BC, 0x00000E06, 0x00000014, (unsigned int)D_00429C10, 0x00000E03, 0x00000014, (unsigned int)D_0042B574, 0x00000E0A,
-    0x00000014, (unsigned int)D_0042A1D0, 0x00000002, 0x00000014, (unsigned int)D_0042BC34, 0x00000001, 0x00000014, (unsigned int)D_0042BC78,
-    0x00000005, 0x00000014, (unsigned int)D_0042B6B4, 0x00000006, 0x00000014, (unsigned int)D_0042B824, 0x00000008, 0x00000014,
-    (unsigned int)D_0042BAE4, 0x00000007, 0x00000014, (unsigned int)D_0042B96C, 0x00000000, 0x00000000, 0x00000000,
+extern char addrLow_CScenarioSetup_OpenScenarioSetupScreen[];
+extern char g_frontend_DrawSetupResultPanelsEntry[];
+extern char addrLow_ScenarioSetup_UpdateSetupTransition[];
+extern char addrLow_ScenarioSetup_CloseSetupScreen[];
+extern char addrLow_ScenarioSetup_ReturnSetupEventZeroAlt[];
+extern char addrLow_ScenarioSetup_BeginSetupConfirmation[];
+extern char addrLow_ScenarioSetup_SelectPreviousCatalogueItem[];
+extern char addrLow_ScenarioSetup_SelectNextSetupItem[];
+extern char addrLow_ScenarioSetup_SelectPreviousCatalogueCategory[];
+extern char addrLow_ScenarioSetup_SelectNextCatalogueCategory[];
+extern char addrLow_ScenarioSetup_EndSetupInput[];
+extern char addrLow_ScenarioSetup_RefreshSetupScreen[];
+unsigned int g_scenarioSetupMenuEventHandlerWords[39] = {
+    0x00000E08, 0x00000014, (unsigned int)addrLow_ScenarioSetup_UpdateSetupTransition, 0x00000E07, 0x00000014, (unsigned int)addrLow_ScenarioSetup_ReturnSetupEventZeroAlt, 0x0000000A, 0x00000014,
+    (unsigned int)addrLow_ScenarioSetup_BeginSetupConfirmation, 0x00000E06, 0x00000014, (unsigned int)addrLow_CScenarioSetup_OpenScenarioSetupScreen, 0x00000E03, 0x00000014, (unsigned int)addrLow_ScenarioSetup_CloseSetupScreen, 0x00000E0A,
+    0x00000014, (unsigned int)g_frontend_DrawSetupResultPanelsEntry, 0x00000002, 0x00000014, (unsigned int)addrLow_ScenarioSetup_EndSetupInput, 0x00000001, 0x00000014, (unsigned int)addrLow_ScenarioSetup_RefreshSetupScreen,
+    0x00000005, 0x00000014, (unsigned int)addrLow_ScenarioSetup_SelectPreviousCatalogueItem, 0x00000006, 0x00000014, (unsigned int)addrLow_ScenarioSetup_SelectNextSetupItem, 0x00000008, 0x00000014,
+    (unsigned int)addrLow_ScenarioSetup_SelectNextCatalogueCategory, 0x00000007, 0x00000014, (unsigned int)addrLow_ScenarioSetup_SelectPreviousCatalogueCategory, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
 /* 800E5320.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_writable_800E4F60_unclaimed_E5DE4_unclaimed_E5E84_unclaimed_E5F20[40] = {
+unsigned int k_Ovldat9EncodedWords[40] = {
     0x0000023E, 0x00000262, 0x00000241, 0x00000246, 0x0000024A, 0x0000024E, 0x00000252, 0x00000256,
     0x0000025A, 0x0000025B, 0x0000023F, 0x00000263, 0x00000243, 0x00000247, 0x0000024B, 0x0000024F,
     0x00000253, 0x00000257, 0x0000025C, 0x0000025D, 0x00000240, 0x00000264, 0x00000244, 0x00000248,

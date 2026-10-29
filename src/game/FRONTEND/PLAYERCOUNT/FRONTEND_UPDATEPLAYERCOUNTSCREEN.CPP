@@ -1,22 +1,22 @@
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SETTINGSRECAT24.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "FRONTEND/FRONTEND_DISPATCHPLAYERCOUNTEVENT.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
-extern SettingsScreenState *D_800E5430;
+extern SettingsScreenState *g_playerCountScreen;
 extern void SmpSlider_SetTransitionMode(void *, s32);
 
-/* Releases the object D_800E5430 holds through Cache_FreeMemory, clears D_800E5430 and returns zero. */
+/* Releases the object g_playerCountScreen holds through Cache_FreeMemory, clears g_playerCountScreen and returns zero. */
 
 
 
-/* Runs the screen D_800E5430 each frame: past stage 1 of D_800E28E0 it only calls Tsmos_DeactivateControllerState;
+/* Runs the screen g_playerCountScreen each frame: past stage 1 of g_selectionMessageStage it only calls Tsmos_DeactivateControllerState;
    otherwise it calls Tsmos_ActivateControllerState and, while its menu reports 3, counts the delay at 0xC down and
    on expiry scrolls the list at 0x8 back one row, wrapping to the menu's own row count, and
    restarts the delay at 3; when the menu reports 4 it calls MarkMenuEventHandled and leaves through
@@ -49,19 +49,19 @@ extern void SmXlate_SwitchScreen(s32);
 
 
 
-extern SlotRecAt7F g_playerSettings[];
+extern PlayerCountSettingsSlotView g_playerSettings[];
 
-extern s8 D_80102B0D[];
+extern s8 g_profileSlotIndices[];
 
 extern void MarkMenuEventHandled(void);
 
-/* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E5430 points to to -1 and
+/* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object g_playerCountScreen points to to -1 and
    calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
 
 
 
-/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while Control_IsControllerConnected reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through XStdio_FormatBuffer with D_800E1B60, and plays sound 0xE81 through SoundElement_PlayFlatSound; returns zero.
+/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object g_playerCountScreen holds while Control_IsControllerConnected reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through XStdio_FormatBuffer with s_playerCountFormat, and plays sound 0xE81 through SoundElement_PlayFlatSound; returns zero.
    Adapted from Menu_StartOptionsImageTransition with the object chain changed to a guarded counter increment, text format and sound call. */
 
 
@@ -75,48 +75,48 @@ extern void XStdio_FormatBuffer(char *, char *, s32);
 
 
 /* Slider-down handler: when the fourth argument is one, calls MarkMenuEventHandled, lowers the value at
-   offset 0x20 of the object D_800E5430 points to by one while it is at least 2, formats it into the
-   text at offset 0x14 with D_800E1B60 through XStdio_FormatBuffer and plays sound 0xE81. Returns zero. */
+   offset 0x20 of the object g_playerCountScreen points to by one while it is at least 2, formats it into the
+   text at offset 0x14 with s_playerCountFormat through XStdio_FormatBuffer and plays sound 0xE81. Returns zero. */
 
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5434, an actor kind at D_800E5438 and a handler at D_800E543C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_playerCountEventIds, an actor kind at g_playerCountEventActorKinds and a handler at g_playerCountEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8042DFF0)(void *, s32, s32, s32, s32);
 
 
 
-extern Handler8042DFF0 D_800E543C;
+extern Handler8042DFF0 g_playerCountEventHandlers;
 
 s32 Frontend_DestroyPlayerCountScreen(void) {
-    Cache_FreeMemory(D_800E5430);
-    D_800E5430 = 0;
+    Cache_FreeMemory(g_playerCountScreen);
+    g_playerCountScreen = 0;
     return 0;
 }
 
 s32 Frontend_UpdatePlayerCountScreen(void) {
     s32 result;
 
-    if (D_800E28E0 >= 2) {
+    if (g_selectionMessageStage >= 2) {
         Tsmos_DeactivateControllerState();
         return 0;
     }
     Tsmos_ActivateControllerState();
-    switch (result = SmpSlider_GetTransitionMode(D_800E5430->head.menu)) {
+    switch (result = SmpSlider_GetTransitionMode(g_playerCountScreen->head.menu)) {
     case 3:
-        if (--D_800E5430->head.delay <= 0) {
-            D_800E5430->head.list->unk16--;
-            if (D_800E5430->head.list->unk16 + D_800E5430->head.list->unk1A < 0) {
-                D_800E5430->head.list->unk16 = D_800E5430->head.menu->list->unk1A;
+        if (--g_playerCountScreen->head.delay <= 0) {
+            g_playerCountScreen->head.list->transitionTimer--;
+            if (g_playerCountScreen->head.list->transitionTimer + g_playerCountScreen->head.list->transitionDuration < 0) {
+                g_playerCountScreen->head.list->transitionTimer = g_playerCountScreen->head.menu->list->transitionDuration;
             }
-            D_800E5430->head.delay = result;
+            g_playerCountScreen->head.delay = result;
         }
         break;
     case 4:
         MarkMenuEventHandled();
-        if (D_800E5430->head.target != -1) {
-            SmXlate_SwitchScreen(D_800E5430->head.target);
+        if (g_playerCountScreen->head.target != -1) {
+            SmXlate_SwitchScreen(g_playerCountScreen->head.target);
             return 0;
         }
         Menu_ReturnToPreviousScreen();
@@ -129,16 +129,16 @@ s32 Frontend_UpdatePlayerCountScreen(void) {
 
 int Frontend_ConfirmPlayerCount(void) {
     int i;
-    SlotRecAt7F *slot;
+    PlayerCountSettingsSlotView *slot;
 
     MarkMenuEventHandled();
-    D_800E5430->head.target = 7;
-    SmpSlider_SetTransitionMode(D_800E5430->head.menu, 2);
-    for (i = 0; i < D_800E5430->count; i++) {
+    g_playerCountScreen->head.target = 7;
+    SmpSlider_SetTransitionMode(g_playerCountScreen->head.menu, 2);
+    for (i = 0; i < g_playerCountScreen->count; i++) {
         slot = &g_playerSettings[i];
         slot->active = 1;
         slot->index = i;
-        if (D_80102B0D[i * 400] < 0) {
+        if (g_profileSlotIndices[i * 400] < 0) {
             Player_InitializeProfileSlot(i);
         }
     }
@@ -149,7 +149,7 @@ s32 Frontend_CancelPlayerCount(void) {
     SettingsScreenState *state;
 
     MarkMenuEventHandled();
-    state = D_800E5430;
+    state = g_playerCountScreen;
     state->head.target = -1;
     SmpSlider_SetTransitionMode(state->head.menu, 2);
     return 0;
@@ -162,13 +162,13 @@ s32 Frontend_IncreasePlayerCount(void *a0, void *a1, void *a2, s32 press) {
         return 0;
     }
     MarkMenuEventHandled();
-    if (Control_IsControllerConnected(D_800E5430->count) == press) {
-        object = D_800E5430;
+    if (Control_IsControllerConnected(g_playerCountScreen->count) == press) {
+        object = g_playerCountScreen;
         if (object->count < Control_CountConnectedControllers()) {
-            D_800E5430->count++;
+            g_playerCountScreen->count++;
         }
     }
-    XStdio_FormatBuffer(D_800E5430->text, D_800E1B60, D_800E5430->count);
+    XStdio_FormatBuffer(g_playerCountScreen->text, s_playerCountFormat, g_playerCountScreen->count);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
@@ -180,34 +180,34 @@ s32 Frontend_DecreasePlayerCount(void *first, void *second, void *third, s32 fou
         return 0;
     }
     MarkMenuEventHandled();
-    value = D_800E5430->count;
+    value = g_playerCountScreen->count;
     if (value >= 2) {
-        D_800E5430->count = value - 1;
+        g_playerCountScreen->count = value - 1;
     }
-    XStdio_FormatBuffer(D_800E5430->text, D_800E1B60, D_800E5430->count);
+    XStdio_FormatBuffer(g_playerCountScreen->text, s_playerCountFormat, g_playerCountScreen->count);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 
-s32 Frontend_DispatchPlayerCountEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchPlayerCountEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     Handler8042DFF0 *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    ObjRecAtCV1 *actor;
+    MenuActorInputView *actor;
 
-    if (D_800E543C != 0) {
+    if (g_playerCountEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = &D_800E543C;
+        entry = &g_playerCountEventHandlers;
         index = 0;
         do {
-            if (D_800E5434[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E5438[index].value;
+            if (g_playerCountEventIds[index].value == eventId) {
+                actor = widget;
+                actor_kind = actor->input;
+                table_kind = g_playerCountEventActorKinds[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 3;

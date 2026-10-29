@@ -25,7 +25,7 @@ void alSndpPlay(ALSndPlayer *soundPlayer) {
 
 
 void alSndpSetFXMix(ALSndPlayer *soundPlayer, s8 effectMix) {
-    ParamsRecAt8V2 p;
+    SoundPlayerByteParameterEvent p;
     s32 acc;
 
     acc = (s32)soundPlayer->sndState;

@@ -3,18 +3,18 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SCREEN.H"
 #include "TYPES.H"
-extern struct MenuStepState *D_800E5690;
-#include "COMMON/UNUSED.H"
+extern struct MenuStepState *g_playerSettingsScreen;
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "MENU/PLAYER_INITPLAYERSETTINGSSCREEN.H"
 #include "MENU/PLAYER_STOREALTERNATEPLAYERSETTINGSENTRY.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
-/* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the D_80102C89 table into the objects D_800E5694 holds through func_8041AD10_de and SmpSlider_SetSliderItem. Adapted from func_804366B8_de with D_800E5690 changed to D_800E5694 and the object fields moved down by eight bytes. */
+/* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the g_profileSlotSettingsByte7B table into the objects g_alternatePlayerSettingsScreen holds through func_8041AD10_de and SmpSlider_SetSliderItem. Adapted from func_804366B8_de with g_playerSettingsScreen changed to g_alternatePlayerSettingsScreen and the object fields moved down by eight bytes. */
 
 
-extern struct StateMenuSelectAlternatePlayerSettingsEntry *D_800E5694;
+extern struct StateMenuSelectAlternatePlayerSettingsEntry *g_alternatePlayerSettingsScreen;
 
 
 
@@ -32,11 +32,11 @@ extern s32 SmpButton_GetListSelection(void *);
 
 extern s32 SmpSlider_GetSliderItem(void *);
 
-/* Releases the object D_800E5690 holds through Cache_FreeMemory, clears D_800E5690 and returns zero. */
+/* Releases the object g_playerSettingsScreen holds through Cache_FreeMemory, clears g_playerSettingsScreen and returns zero. */
 
 
 
-/* Acts on the mode of the menu held first in the block D_800E5690 points to: in mode 4 it calls
+/* Acts on the mode of the menu held first in the block g_playerSettingsScreen points to: in mode 4 it calls
    MarkMenuEventHandled and then either SmXlate_SwitchScreen with the block's word at 0x20, when that is not -1,
    or Menu_ReturnToPreviousScreen. Returns zero. */
 
@@ -49,60 +49,60 @@ extern s32 SmpSlider_GetTransitionMode(void *);
 
 
 /* Calls MarkMenuEventHandled; when Menu_GetFocusedElementId reports 0x60, passes the word at offset 0x28 of the object
-   D_800E5690 points to to Player_StorePlayerSettingsEntry, then sets its word at 0x20 to -1 and calls SmpSlider_SetTransitionMode
+   g_playerSettingsScreen points to to Player_StorePlayerSettingsEntry, then sets its word at 0x20 to -1 and calls SmpSlider_SetTransitionMode
    on its first word with 2. Returns zero. */
 
 
 
 void Player_SelectAlternatePlayerSettingsEntry(s32 entryIndex) {
-    u8 *slot = &D_801462C8.playerSettings[entryIndex].slot;
+    u8 *slot = &g_gameSettings.playerSettings[entryIndex].slot;
 
     *slot = entryIndex;
-    SmpButton_SelectListEntry(D_800E5694->a, D_80102C89[entryIndex * 0x190]);
-    SmpButton_SelectListEntry(D_800E5694->b, D_800FEC8A[entryIndex * 0x190]);
-    SmpSlider_SetSliderItem(D_800E5694->c, D_800FEC8B[entryIndex * 0x190]);
-    SmpSlider_SetSliderItem(D_800E5694->d, D_800FEC8C[entryIndex * 0x190]);
-    SmpButton_SelectListEntry(D_800E5694->e, D_800FEC8D[entryIndex * 0x190]);
+    SmpButton_SelectListEntry(g_alternatePlayerSettingsScreen->a, g_profileSlotSettingsByte7B[entryIndex * 0x190]);
+    SmpButton_SelectListEntry(g_alternatePlayerSettingsScreen->b, g_profileSlotSettingsByte7D[entryIndex * 0x190]);
+    SmpSlider_SetSliderItem(g_alternatePlayerSettingsScreen->c, g_profileSlotSettingsByte79[entryIndex * 0x190]);
+    SmpSlider_SetSliderItem(g_alternatePlayerSettingsScreen->d, g_profileSlotSettingsByte7A[entryIndex * 0x190]);
+    SmpButton_SelectListEntry(g_alternatePlayerSettingsScreen->e, g_profileSlotSettingsByte82[entryIndex * 0x190]);
 }
 
-void Player_StoreAlternatePlayerSettingsEntry(s32 arg0) {
+void Player_StoreAlternatePlayerSettingsEntry(s32 entryIndex) {
     u8 *config;
 
-    config = g_playerSettings + arg0 * 0x96;
-    D_80102C89[arg0 * 0x190] = SmpButton_GetListSelection(D_800E5694->a);
+    config = g_playerSettings + entryIndex * 0x96;
+    g_profileSlotSettingsByte7B[entryIndex * 0x190] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->a);
     do {
-        D_800FEC8A[arg0 * 0x190] = SmpButton_GetListSelection(D_800E5694->b);
-        D_800FEC8B[arg0 * 0x190] = SmpSlider_GetSliderItem(D_800E5694->c);
-        D_800FEC8C[arg0 * 0x190] = SmpSlider_GetSliderItem(D_800E5694->d);
-        D_800FEC8D[arg0 * 0x190] = SmpButton_GetListSelection(D_800E5694->e);
+        g_profileSlotSettingsByte7D[entryIndex * 0x190] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->b);
+        g_profileSlotSettingsByte79[entryIndex * 0x190] = SmpSlider_GetSliderItem(g_alternatePlayerSettingsScreen->c);
+        g_profileSlotSettingsByte7A[entryIndex * 0x190] = SmpSlider_GetSliderItem(g_alternatePlayerSettingsScreen->d);
+        g_profileSlotSettingsByte82[entryIndex * 0x190] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->e);
     } while (0);
-    config[0x7B] = D_80102C89[arg0 * 0x190];
-    config[0x7D] = D_800FEC8A[arg0 * 0x190];
-    config[0x79] = D_800FEC8B[arg0 * 0x190];
-    config[0x7A] = D_800FEC8C[arg0 * 0x190];
-    config[0x82] = D_800FEC8D[arg0 * 0x190];
+    config[0x7B] = g_profileSlotSettingsByte7B[entryIndex * 0x190];
+    config[0x7D] = g_profileSlotSettingsByte7D[entryIndex * 0x190];
+    config[0x79] = g_profileSlotSettingsByte79[entryIndex * 0x190];
+    config[0x7A] = g_profileSlotSettingsByte7A[entryIndex * 0x190];
+    config[0x82] = g_profileSlotSettingsByte82[entryIndex * 0x190];
 }
 
 s32 Player_FreePlayerSettingsScreen(void) {
-    Cache_FreeMemory(D_800E5690);
-    D_800E5690 = 0;
+    Cache_FreeMemory(g_playerSettingsScreen);
+    g_playerSettingsScreen = 0;
     return 0;
 }
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_80436B68_de(void) {
+s32 Player_EmptySettingsEntryHook(void) {
     return 0;
 }
 
 s32 Player_UpdatePlayerSettingsExit(void) {
-    switch (SmpSlider_GetTransitionMode(D_800E5690->menu)) {
+    switch (SmpSlider_GetTransitionMode(g_playerSettingsScreen->menu)) {
     case 3:
         break;
     case 4:
         MarkMenuEventHandled();
-        if (D_800E5690->value != -1) {
-            SmXlate_SwitchScreen(D_800E5690->value);
+        if (g_playerSettingsScreen->value != -1) {
+            SmXlate_SwitchScreen(g_playerSettingsScreen->value);
         } else {
             Menu_ReturnToPreviousScreen();
         }
@@ -113,7 +113,7 @@ s32 Player_UpdatePlayerSettingsExit(void) {
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_80436BEC_de(void) {
+s32 Player_EmptySettingsConfirmHook(void) {
     return 0;
 }
 
@@ -127,8 +127,8 @@ s32 Player_ConfirmPlayerSettingsEntry(void) {
 #elif defined(VERSION_EU_X)
     if (Menu_GetFocusedElementId() == 0x64) {
 #endif
-        Player_StorePlayerSettingsEntry(D_800E5690->item);
-        state = D_800E5690;
+        Player_StorePlayerSettingsEntry(g_playerSettingsScreen->item);
+        state = g_playerSettingsScreen;
         state->value = -1;
         SmpSlider_SetTransitionMode(state->menu, 2);
     }

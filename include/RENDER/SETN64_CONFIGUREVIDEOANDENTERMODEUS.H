@@ -8,5 +8,5 @@ extern void SetN64_DrawMode19(void);
 extern void SetN64_DrawTransitionMode(void);
 extern void SetN64_UpdateMode18(void);
 extern void SetN64_InitializeMode19(void);
-extern void func_80294AB0_us(void);
+extern void SetN64_EmptyVideoModeHookUs(void);
 #endif

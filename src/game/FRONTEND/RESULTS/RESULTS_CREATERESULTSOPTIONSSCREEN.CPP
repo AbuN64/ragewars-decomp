@@ -4,7 +4,7 @@
 #include "COMMON/REQUESTRECAT10.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "FRONTEND/RESULTS_REFRESHTRIALCATALOGUEWIDGETS.H"
 #include "FRONTEND/RESULTS_UPDATERESULTSHEADING.H"
 #include "FRONTEND/RESULTS_FILLPROFILEWEAPONROWS.H"
@@ -26,7 +26,7 @@ static inline s32 resultsRes(s32 id) {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/ANIMATION.H"
@@ -35,8 +35,8 @@ static inline s32 resultsRes(s32 id) {
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
-extern struct EntryRecAt8V3 D_800E4694[];
-void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 found);
+extern struct ResultsOptionEntry g_trialCatalogueStages[];
+void Defs_SetBitValue(u8 *bits, s32 bitIndex, s32 found);
 void Results_SelectSuggestedTrial(void);
 void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
 
@@ -50,10 +50,10 @@ struct GameOptions {
     u8 mode;
 };
 extern struct GameOptions D_801462D0;
-/* Builds the results options screen into D_800E4690: slides its two side panels in over four frames,
+/* Builds the results options screen into g_trialCatalogueScreen: slides its two side panels in over four frames,
    finds the first active player, clears the pending flags of the eight status records, and runs the
    per-mode setup selected by the option byte. Returns zero. */
-s32 Results_CreateResultsOptionsScreen(MenuWidget *arg0) {
+s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
     ResultsOptionsScreen *screen;
     s32 i;
     s32 d;
@@ -63,41 +63,41 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *arg0) {
     MenuWidget *wHead;
     MenuWidget *wItem;
     screen = Cache_AllocateMemory(0xA80);
-    D_800E4690 = screen;
-    screen->root = arg0;
-    D_800E4690->nodes = SmpOverlay_CreateOverlayNode(arg0, 4);
-    SmpOverlay_ShowSlotById(arg0, 0, resultsRes(0x13E));
-    SmpOverlay_ShowSlotById(arg0, 1, resultsRes(0x13E));
-    SmpOverlay_ShowSlotById(arg0, 2, resultsRes(0x13E));
-    SmpOverlay_ShowSlotById(arg0, 3, resultsRes(0x13E));
+    g_trialCatalogueScreen = screen;
+    screen->root = rootWidget;
+    g_trialCatalogueScreen->nodes = SmpOverlay_CreateOverlayNode(rootWidget, 4);
+    SmpOverlay_ShowSlotById(rootWidget, 0, resultsRes(0x13E));
+    SmpOverlay_ShowSlotById(rootWidget, 1, resultsRes(0x13E));
+    SmpOverlay_ShowSlotById(rootWidget, 2, resultsRes(0x13E));
+    SmpOverlay_ShowSlotById(rootWidget, 3, resultsRes(0x13E));
     for (i = 0; i < 0x24; i++) {
-        Defs_SetBitValue(D_800E4690->owned, i, 0);
-        Defs_SetBitValue(D_800E4690->pending, i, 0);
+        Defs_SetBitValue(g_trialCatalogueScreen->owned, i, 0);
+        Defs_SetBitValue(g_trialCatalogueScreen->pending, i, 0);
     }
-    D_800E4690->state = 1;
-    D_800E4690->slideFrames = 4;
-    wLeft = Node_FindWidgetByResourceId(arg0, resultsRes(0x145));
-    D_800E4690->leftPanel = wLeft;
+    g_trialCatalogueScreen->state = 1;
+    g_trialCatalogueScreen->slideFrames = 4;
+    wLeft = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x145));
+    g_trialCatalogueScreen->leftPanel = wLeft;
     wLeft->x -= wLeft->width;
-    D_800E4690->leftStep = D_800E4690->leftPanel->width / 4;
-    d = D_800E4690->leftPanel->width - D_800E4690->leftStep * 4;
-    D_800E4690->leftPanel->x += d;
-    wRight = Node_FindWidgetByResourceId(arg0, resultsRes(0x144));
-    D_800E4690->rightPanel = wRight;
+    g_trialCatalogueScreen->leftStep = g_trialCatalogueScreen->leftPanel->width / 4;
+    d = g_trialCatalogueScreen->leftPanel->width - g_trialCatalogueScreen->leftStep * 4;
+    g_trialCatalogueScreen->leftPanel->x += d;
+    wRight = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x144));
+    g_trialCatalogueScreen->rightPanel = wRight;
     wRight->x += wRight->width;
-    D_800E4690->rightStep = D_800E4690->rightPanel->width / 4;
-    d = D_800E4690->rightPanel->width - D_800E4690->rightStep * 4;
-    D_800E4690->rightPanel->x -= d;
-    D_800E4690->resource = SmpFlicker_CreateFlickerWidget(resultsRes(0x141), 0x6E);
-    wHead = Node_FindWidgetByResourceId(arg0, resultsRes(0x13F));
-    D_800E4690->focusItem = wHead;
+    g_trialCatalogueScreen->rightStep = g_trialCatalogueScreen->rightPanel->width / 4;
+    d = g_trialCatalogueScreen->rightPanel->width - g_trialCatalogueScreen->rightStep * 4;
+    g_trialCatalogueScreen->rightPanel->x -= d;
+    g_trialCatalogueScreen->resource = SmpFlicker_CreateFlickerWidget(resultsRes(0x141), 0x6E);
+    wHead = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x13F));
+    g_trialCatalogueScreen->focusItem = wHead;
     Widget_SetWidgetFlag08(wHead, 0);
-    D_800E4690->owner = (void *)Node_FindWidgetByResourceId(arg0, resultsRes(0x154));
-    D_800E4690->item155 = Node_FindWidgetByResourceId(arg0, resultsRes(0x155));
-    D_800E4690->player = 0;
+    g_trialCatalogueScreen->owner = (void *)Node_FindWidgetByResourceId(rootWidget, resultsRes(0x154));
+    g_trialCatalogueScreen->item155 = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x155));
+    g_trialCatalogueScreen->player = 0;
     for (i = 0; i < 4; i++) {
         if (((struct Status *)g_playerSettings)[i].active == 1) {
-            D_800E4690->player = i;
+            g_trialCatalogueScreen->player = i;
             break;
         }
     }
@@ -109,33 +109,33 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *arg0) {
     }
     Results_LoadTrialCompletionFlags();
     Results_SelectSuggestedTrial();
-    D_800E4690->window = Node_FindWidgetByResourceId(arg0, (u16)D_800E4694[D_800E4690->selection].id);
+    g_trialCatalogueScreen->window = Node_FindWidgetByResourceId(rootWidget, (u16)g_trialCatalogueStages[g_trialCatalogueScreen->selection].id);
     Results_RefreshTrialSelectionLabel();
-    D_80154020.ready = 0;
-    D_80154020.value = -1;
-    Frontend_InitMenuImage((s32 *)D_800E4690, 0x67, 0, 0, 0);
-    wItem = Node_FindWidgetByResourceId(arg0, resultsRes(0x151));
-    D_800E4690->item = wItem;
+    g_selectionMessageReply.ready = 0;
+    g_selectionMessageReply.value = -1;
+    Frontend_InitMenuImage((s32 *)g_trialCatalogueScreen, 0x67, 0, 0, 0);
+    wItem = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x151));
+    g_trialCatalogueScreen->item = wItem;
     wItem->alpha = 0xFF;
-    D_800E4690->modeFlag = 0;
+    g_trialCatalogueScreen->modeFlag = 0;
     mode = D_801462D0.mode;
     if (mode < 5) {
         if (mode >= 3) {
-            D_800E4690->modeFlag = 1;
-            Results_RefreshTrialCharacterPreview(D_800E4690);
+            g_trialCatalogueScreen->modeFlag = 1;
+            Results_RefreshTrialCharacterPreview(g_trialCatalogueScreen);
         }
     }
-    D_800E4690->blinking = 0;
-    D_800E4690->frames = 0;
-    D_800E4690->blinkDelay = -1;
+    g_trialCatalogueScreen->blinking = 0;
+    g_trialCatalogueScreen->frames = 0;
+    g_trialCatalogueScreen->blinkDelay = -1;
     switch (D_801462D0.mode) {
     case 1:
     case 3:
     case 4:
-        D_800E4690->bannerShadow = Node_FindWidgetByResourceId(arg0, resultsRes(0x13D));
+        g_trialCatalogueScreen->bannerShadow = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x13D));
         Menu_InitializeOptionsScene();
-        D_800E4690->banner = Node_FindWidgetByResourceId(arg0, resultsRes(0x147));
-        Node_FindWidgetByResourceId(arg0, resultsRes(0x148))->alpha = 0x6E;
+        g_trialCatalogueScreen->banner = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x147));
+        Node_FindWidgetByResourceId(rootWidget, resultsRes(0x148))->alpha = 0x6E;
         break;
     case 2:
         break;
@@ -159,10 +159,10 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *arg0) {
 }
 #endif
 
-/* Places the models of the first two active players on the screen D_800E4690: calls
+/* Places the models of the first two active players on the screen g_trialCatalogueScreen: calls
    Tsmos_SetModeOneFlag(1) and Tsmos_DeactivateControllerState, clears the word at 0xA58, and for each player whose 150-byte
    status record in D_80146398 has byte 0x78 equal to one maps its kind byte at 0x80 to a 0x70-byte
-   row of D_800E3A58 through func_8041F140_de and shows object 0x38F plus the kind through
+   row of g_characterPortraitRecords through func_8041F140_de and shows object 0x38F plus the kind through
    Preview_InitModelPreview in the next 0x4A8-byte view from 0x20 of the screen, using layout 0 of the row
    (uniform scale, position, float and word) for the first model and layout 2 for the second.
    Returns zero. */
@@ -194,18 +194,18 @@ s32 Results_ShowResultsPlayerModels(void) {
     i = 0;
     offset = 0;
     view = 0x20;
-    D_800E4690->wordA58 = 0;
+    g_trialCatalogueScreen->wordA58 = 0;
 next:
     status = (struct Status *)((char *)g_playerSettings + offset);
     if (status->active == 1) {
         shown++;
         row = Key_FindKeyIndex(status->kind);
-        scale.x = D_800E3A58[row].scale[layout];
-        scale.y = D_800E3A58[row].scale[layout];
-        scale.z = D_800E3A58[row].scale[layout];
-        Preview_InitModelPreview((char *)D_800E4690 + view, 9, status->kind + 0x38F, 0x4B, 0x5DC0, scale,
-                      D_800E3A58[row].position[layout], D_800E3A58[row].distance[layout],
-                      D_800E3A58[row].light[layout]);
+        scale.x = g_characterPortraitRecords[row].scale[layout];
+        scale.y = g_characterPortraitRecords[row].scale[layout];
+        scale.z = g_characterPortraitRecords[row].scale[layout];
+        Preview_InitModelPreview((char *)g_trialCatalogueScreen + view, 9, status->kind + 0x38F, 0x4B, 0x5DC0, scale,
+                      g_characterPortraitRecords[row].position[layout], g_characterPortraitRecords[row].distance[layout],
+                      g_characterPortraitRecords[row].light[layout]);
         view += 0x4A8;
         layout = 2;
         if (shown >= layout) {

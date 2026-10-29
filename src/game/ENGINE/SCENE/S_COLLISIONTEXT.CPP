@@ -2,11 +2,11 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US)
-const char D_80286AA8_CAE0C[10] =
+const char g_scene_LoadLevelResourcesConstantWords[10] =
     "collision\000";
 #endif
 #if defined(VERSION_EU_X)
-const char D_80286AA8_CAE0C[12] =
+const char g_scene_LoadLevelResourcesConstantWords[12] =
     "collision\000\000\000";
 #endif
 #endif

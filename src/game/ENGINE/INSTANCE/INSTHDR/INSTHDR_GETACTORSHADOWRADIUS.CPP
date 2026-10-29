@@ -5,13 +5,13 @@
 #include "COMMON/AIPROFILE.H"
 #include "SOUND/TRIPLERECAT8.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/LEGACY_COLLISION_ACTOR.H"
 #include "COMMON/FIELD_VEC_B0.H"
 #include "COMMON/VECTOR4F.H"
-#include "SOUND/8022C894.H"
+#include "SOUND/PLAYER_MOVEMENT_SCALAR_VIEW.H"
 #include "COMMON/WORLD.H"
 #include "INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.H"
 #include "COMMON/PROPGEOMETRY.H"
@@ -20,7 +20,7 @@
 
 /* 8024E130_2.CPP */
 /** Return the vertical offset selected by the actor's current state. */
-const unsigned int D_pad_func_8024E2C4_de[1] = {
+const unsigned int k_InsthdrGetactorshadowradiusTrailingBytes[1] = {
     0x00000000,
 };
 f32 InstHdr_GetActorShadowRadius(Actor_u1 *actor) {
@@ -54,7 +54,7 @@ f32 InstHdr_GetActorShadowRadius(Actor_u1 *actor) {
     sw_state_2:
         state = actor->resource;
         if (((CollisionShapeResource *)state)->mode == 0) {
-            return D_800C3D6C_de;
+            return g_inactiveCollisionShapeShadowRadius;
         }
         return ((CollisionShapeResource *)state)->height;
     sw_state_5:
@@ -62,11 +62,11 @@ f32 InstHdr_GetActorShadowRadius(Actor_u1 *actor) {
     sw_state_8:
         state = actor->resource;
         if ((state->flags14 & 1) != 0) {
-            return D_800C3D70_de;
+            return g_hiddenStaticObjectShadowRadius;
         }
         return state->radius;
     sw_state_default:
-        return D_800C3D74_de;
+        return g_defaultActorShadowRadius;
 
     } while (0);
 }
@@ -158,14 +158,14 @@ top:
 }
 
 /* 8024E130_3.CPP */
-void InstHdr_CopyActorPositionAndModel(void *arg0, Triple t, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
+void InstHdr_CopyActorPositionAndModel(void *actor, Triple t, void *positionOut, s32 *modelOut, s32 unusedPositionMode, s32 unusedModelMode);
 
 extern f32 Region_GetPolygonHeight(struct Node75 *node, f32 x, f32 z);
 
 extern void Barrel_ComputeTargetOffset(void *player, void *motionState, void *result);
 
 /** Return a nested float field when the nested record type is one, else zero. */
-float func_8024E544_de(void *object) {
+float InstHdr_GetTypeOneResourceValue50(void *object) {
     Actor_u1 *actor = object;
     Resource_u1 *nested = actor->resource;
     if (nested->kind == 1) {
@@ -184,21 +184,21 @@ float InstHdr_GetActorTerritoryRadius(void *object) {
     return 0.0f;
 }
 
-void InstHdr_ProjectPositionToActorGround(void *actor, void *arg1, void *arg2) {
-    CVector3 *source = arg1;
-    CVector3 *output = arg2;
-    TripleRecAt8 t;
+void InstHdr_ProjectPositionToActorGround(void *actor, void *position, void *positionOut) {
+    CVector3 *source = position;
+    CVector3 *output = positionOut;
+    ActorSurfaceSampleVector t;
     s32 sp30;
 
     t.a = source->x;
     t.b = 0;
     t.c = source->z;
-    InstHdr_CopyActorPositionAndModel(actor, *(Triple *)&t, arg2, &sp30, 0, 0);
+    InstHdr_CopyActorPositionAndModel(actor, *(Triple *)&t, positionOut, &sp30, 0, 0);
     output->y = Region_GetPolygonHeight((struct Node75 *)sp30, output->x, output->z);
 }
 
 /** Return offset 0x34 only when the type byte at offset 0 is 1. */
-int func_8024E610_de(void *actorStorage) {
+int InstHdr_GetTypeOneItemValue(void *actorStorage) {
     struct ItemCode8024E130 *item = actorStorage;
     if (item->kind == 1) {
         return (int)item->value;
@@ -215,20 +215,20 @@ int InstHdr_GetActorMotionState(void *levelActor) {
     return 0;
 }
 
-f32 InstHdr_GetActorGroundHeight(Shared_Func80243A80Actor *arg0)
+f32 InstHdr_GetActorGroundHeight(Shared_Func80243A80Actor *actor)
 {
-  if ((arg0->type) != 1)
+  if ((actor->type) != 1)
   {
-    if (arg0)
+    if (actor)
     {
-      return arg0->y;
+      return actor->y;
     }
     else
     {
-      return arg0->y;
+      return actor->y;
     }
   }
-  return arg0->groundY;
+  return actor->groundY;
 }
 
 /** Select one of two float fields according to the leading byte. */
@@ -239,7 +239,7 @@ float InstHdr_GetShadowGroundHeight(Shared_Func80243A80Actor *object, s32 mode) 
     return object->groundY;
 }
 
-void *func_8024E6A0_de(struct ItemCode8024E130 *item) {
+void *InstHdr_GetEnabledItemValue(struct ItemCode8024E130 *item) {
     if (item->kind == 1 && item->value != 0 && (item->flags & 3) != 0) {
         return item->value;
     }
@@ -278,16 +278,16 @@ int InstHdr_GetActorMotionFlags(void *levelActor) {
 }
 
 /* 8024E130_4.CPP */
-extern struct func_8022CA04_S3 *Scene_GetModelRecordByIndexPointer(Shared_World *, void *);
+extern struct PlayerMovementScalarView *Scene_GetModelRecordByIndexPointer(Shared_World *, void *);
 
 /* Returns the float at offset 0x20 of the entry Scene_GetModelRecordByIndexPointer finds in D_8011FE88 for an object's
    key at 0x14, when the key's flag halfword at 2 has bit 0 set; zero otherwise. */
 
-void InstHdr_CopyActorPositionAndModel(void *levelActor, Triple t, void *arg4, s32 *arg5, s32 unused6, s32 unused7) {
+void InstHdr_CopyActorPositionAndModel(void *levelActor, Triple t, void *positionOut, s32 *modelOut, s32 unused6, s32 unused7) {
     char unused[0x150];
-    Triple *output = arg4;
+    Triple *output = positionOut;
     *output = t;
-    *arg5 = ((LevelActor *)levelActor)->model;
+    *modelOut = ((LevelActor *)levelActor)->model;
 }
 
 int InstHdr_FindActorModelEntry(void *actorStorage) {
@@ -299,8 +299,8 @@ int InstHdr_FindActorModelEntry(void *actorStorage) {
     return result;
 }
 
-f32 func_8024E80C_de(struct Object_func_8024E80C_de *object) {
-    struct func_8022CA04_S3 *entry;
+f32 InstHdr_GetModelRecordValue20(struct ActorSurfaceKeyView *object) {
+    struct PlayerMovementScalarView *entry;
 
     if (object->key != 0 && (object->key->flags & 1)) {
         entry = Scene_GetModelRecordByIndexPointer(&g_world, object->key);
@@ -312,54 +312,54 @@ f32 func_8024E80C_de(struct Object_func_8024E80C_de *object) {
 }
 
 /** Return floating-point zero to callers at VRAM 0x8024E854. */
-float func_8024E864_de(void) {
+float InstHdr_ReturnUnusedActorFloat(void) {
     return 0.0f;
 }
 
-f32 InstHdr_GetActorTriangleTopOffset(void *arg0) {
-    f32 temp_f1;
-    f32 var_f0;
-    f32 var_f1;
-    void *temp_a1;
-    temp_a1 = (((struct ObjectLinks18 *) ((s8 *) arg0))->unk_14);
-    var_f0 = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) temp_a1))->cur))->unk4);
-    temp_f1 = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) temp_a1))->prev))->unk4);
-    if (!(temp_f1 <= var_f0)) {
-        var_f0 = temp_f1;
+f32 InstHdr_GetActorTriangleTopOffset(void *actor) {
+    f32 previousVertexHeight;
+    f32 upperPairHeight;
+    f32 highestVertexHeight;
+    void *groundTriangle;
+    groundTriangle = (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_14);
+    upperPairHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->unk4);
+    previousVertexHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->unk4);
+    if (!(previousVertexHeight <= upperPairHeight)) {
+        upperPairHeight = previousVertexHeight;
     }
-    var_f1 = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) temp_a1))->next))->unk4);
-    if (!(var_f0 <= var_f1)) {
-        var_f1 = var_f0;
+    highestVertexHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->unk4);
+    if (!(upperPairHeight <= highestVertexHeight)) {
+        highestVertexHeight = upperPairHeight;
     }
-    return var_f1 - (((struct ObjectLinks18 *) ((s8 *) arg0))->unk_C);
+    return highestVertexHeight - (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_C);
 }
 
-f32 InstHdr_GetActorTriangleBottomOffset(void *arg0) {
-    f32 temp_f1;
-    f32 var_f0;
-    f32 var_f1;
-    void *temp_a1;
-    temp_a1 = (((struct ObjectLinks18 *) ((s8 *) arg0))->unk_14);
-    var_f0 = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) temp_a1))->cur))->unk4);
-    temp_f1 = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) temp_a1))->prev))->unk4);
-    if (!(var_f0 <= temp_f1)) {
-        var_f0 = temp_f1;
+f32 InstHdr_GetActorTriangleBottomOffset(void *actor) {
+    f32 previousVertexHeight;
+    f32 lowerPairHeight;
+    f32 lowestVertexHeight;
+    void *groundTriangle;
+    groundTriangle = (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_14);
+    lowerPairHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->unk4);
+    previousVertexHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->unk4);
+    if (!(lowerPairHeight <= previousVertexHeight)) {
+        lowerPairHeight = previousVertexHeight;
     }
-    var_f1 = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) temp_a1))->next))->unk4);
-    if (!(var_f1 <= var_f0)) {
-        var_f1 = var_f0;
+    lowestVertexHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->unk4);
+    if (!(lowestVertexHeight <= lowerPairHeight)) {
+        lowestVertexHeight = lowerPairHeight;
     }
-    return (((struct ObjectLinks18 *) ((s8 *) arg0))->unk_C) - var_f1;
+    return (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_C) - lowestVertexHeight;
 }
 
-s32 func_8024E900_de(void *actorStorage)
+s32 InstHdr_HasTypeOneFlagOne(void *actorStorage)
 {
     LevelActor *actor = actorStorage;
-  int new_var;
-  new_var = 1;
+  int constantTrue;
+  constantTrue = 1;
   if ((actor->kind) != 1)
   {
-    if (new_var)
+    if (constantTrue)
     {
       return 0;
     }
@@ -387,35 +387,35 @@ int InstHdr_GetActorMotionIndex(void *record) {
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8024E964[3] = {
+unsigned int k_InsthdrGetactorshadowradiusEncodedWords[3] = {
     0x46540200, 0x00009410, 0x000B0000,
 };
 #endif
 
 /* 8024E130.CPP */
 /** Return the zero status used by callers at VRAM 0x8024E130. */
-int func_8024E140_de(void) {
+int InstHdr_ReturnUnusedActorStatus(void) {
     return 0;
 }
 
 /** Return zero. */
-int func_8024E148_de(void) {
+int InstHdr_ReturnUnusedActorStatusAlternate(void) {
     return 0;
 }
 
 /** Return the empty result used by callers at VRAM 0x8024E140. */
-int func_8024E150_de(void) {
+int InstHdr_ReturnUnusedActorQuery(void) {
     return 0;
 }
 
 /** Return whether this object is active for its current behavior class. */
-s32 InstHdr_CanActorCastShadow(void *arg0) {
-    if (*(u8 *)arg0 == 1) {
-        if ((((LevelActor *)arg0)->flags & 0x300000) != 0) {
+s32 InstHdr_CanActorCastShadow(void *actor) {
+    if (*(u8 *)actor == 1) {
+        if ((((LevelActor *)actor)->flags & 0x300000) != 0) {
             return 1;
         }
     }
-    switch (((LevelActor *)arg0)->definition->kind) {
+    switch (((LevelActor *)actor)->definition->kind) {
     case 1:
     case 2:
     case 5:
@@ -427,7 +427,7 @@ s32 InstHdr_CanActorCastShadow(void *arg0) {
     }
 }
 
-s32 func_8024E1B4_de(void *actor) {
+s32 InstHdr_HasEnabledMotionHooks(void *actor) {
     if (*(u8 *)actor != 1) {
         return 0;
     }
@@ -449,7 +449,7 @@ ret1:
 
 extern s32 Cinema_IsSequenceInWindow(char *actor);
 
-s32 func_8024E208_de(char *actor)
+s32 InstHdr_IsActorControllerActive(char *actor)
 {
     switch (((LevelActor *)actor)->definition->kind) {
     case 1:
@@ -476,11 +476,11 @@ unsigned int InstHdr_UsesGroundRotation(char *object) {
 }
 
 /** Report whether the object pointed to at offset 0x18 equals one. */
-int func_8024E2B0_de(LevelActor *actor) {
+int InstHdr_IsDefinitionKindOne(LevelActor *actor) {
     return actor->definition->kind == 1;
 }
 
-int func_8024E2C4_de(LevelActor *source) {
+int InstHdr_UsesDefaultDefinitionHandling(LevelActor *source) {
     switch (source->definition->kind) {
         case 0: case 2: case 3: case 5: case 6: case 7: case 8: case 0xA: case 0xC: case 0xD: case 0xE:
         default:

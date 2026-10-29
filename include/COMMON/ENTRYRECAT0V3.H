@@ -4,14 +4,14 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 
-struct EntryRecAt0V3;
-struct EntryRecAt0V3 {
+struct SceneFrameItemReference;
+struct SceneFrameItemReference {
     char data[32];
 };
 
 
-struct RecordRecAt12;
-typedef struct RecordRecAt12 RecordRecAt12;
+struct PakDirectoryEntryKindView;
+typedef struct PakDirectoryEntryKindView PakDirectoryEntryKindView;
 
 
 
@@ -28,13 +28,13 @@ struct NoteState {
 
 
 
-extern unsigned char * D_800D36DC;
+extern unsigned char * g_pakCompanyCodeFixed;
 
 
 
 
 
-struct EntryRecAt0V3;
+struct SceneFrameItemReference;
 
 struct PakDirectory;
 typedef struct PakDirectory PakDirectory;
@@ -42,7 +42,7 @@ typedef struct PakDirectory PakDirectory;
 struct Device;
 typedef struct Device Device;
 
-struct RecordRecAt12;
+struct PakDirectoryEntryKindView;
 
 struct Device;
 

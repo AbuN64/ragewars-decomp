@@ -1,5 +1,5 @@
-#include "COMMON/INTEGERSTATE14_2.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/MEMORY_STREAM_BUFFER.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "stdarg.h"
 #include "TYPES.H"
 #include "MENU/GFX/GFX_FORMATARGUMENTLIST.H"
@@ -21,9 +21,9 @@
 u8 *XStdio_FormatScratchBuffer(u8 *fmt0, ...) {
     va_list args;
     va_start(args, fmt0);
-    D_800CD918 = Gfx_FormatArgumentList((u8 *)&D_8014D0D0, fmt0, args);
+    g_stdioFormattedLength = Gfx_FormatArgumentList((u8 *)&g_stdioFormatBuffer, fmt0, args);
     va_end(args);
-    return (u8 *)&D_8014D0D0;
+    return (u8 *)&g_stdioFormatBuffer;
 }
 #endif
 
@@ -34,9 +34,9 @@ u8 *XStdio_FormatScratchBuffer(u8 *fmt0, ...) {
 int *XStdio_FormatGermanScratchBuffer(int format, ...) {
     va_list args;
     va_start(args, format);
-    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, format, (int)args);
+    g_stdioFormattedLength = Gfx_FormatArgumentList(&g_stdioFormatBuffer, format, (int)args);
     va_end(args);
-    return &D_8014D0D0;
+    return &g_stdioFormatBuffer;
 }
 #endif
 
@@ -46,34 +46,34 @@ s32 XStdio_PrintText(s32 fmt0, ...) {
     char *args;
 
     args = __builtin_next_arg(fmt0);
-    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, fmt0, (s32) args);
-    if (D_800CD91C != 0) {
-        ((s32 (*)(s32 *)) D_800CD91C)(&D_8014D0D0);
+    g_stdioFormattedLength = Gfx_FormatArgumentList(&g_stdioFormatBuffer, fmt0, (s32) args);
+    if (g_stdioScratchCallback != 0) {
+        ((s32 (*)(s32 *)) g_stdioScratchCallback)(&g_stdioFormatBuffer);
     }
-    return D_800CD918;
+    return g_stdioFormattedLength;
 }
 
-s32 XStdio_PrintTextWithArguments(s32 arg0, s32 arg1, s32 fmt0, ...) {
+s32 XStdio_PrintTextWithArguments(s32 stream, s32 writeContext, s32 fmt0, ...) {
     char *args;
 
     args = __builtin_next_arg(fmt0);
-    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, fmt0, (s32) args);
-    ((s32 (*)(s32 *, s32, s32)) D_800CD920_de)(&D_8014D0D0, arg0, arg1);
-    return D_800CD918;
+    g_stdioFormattedLength = Gfx_FormatArgumentList(&g_stdioFormatBuffer, fmt0, (s32) args);
+    ((s32 (*)(s32 *, s32, s32)) g_stdioArgumentWriteCallback)(&g_stdioFormatBuffer, stream, writeContext);
+    return g_stdioFormattedLength;
 }
 #endif
 
 /* resmgr_stream_io.CPP */
-/* Formats its arguments into the shared buffer D_8014D0D0 and writes the text to the stream through XStdio_WriteStreamNoop in runs, emitting the one-byte D_800CAEF0 before every newline, returning the number of bytes written. */
+/* Formats its arguments into the shared buffer g_stdioFormatBuffer and writes the text to the stream through XStdio_WriteStreamNoop in runs, emitting the one-byte k_stdioCarriageReturn before every newline, returning the number of bytes written. */
 
 
 
 /* Initializes and dispatches the resource on the first guarded call. */
 
-extern struct CartridgeReadWorker D_801011B8;
+extern struct CartridgeReadWorker g_cartridgeReadWorker;
 
 
-extern void func_8025637C_de(struct CartridgeReadWorker *worker, u32 source, s32 bytes, void *destination);
+extern void Cartridge_ReadChunksAndWait(struct CartridgeReadWorker *worker, u32 source, s32 bytes, void *destination);
 
 /* Callable open entry in the low-address resource callback table. */
 
@@ -81,7 +81,7 @@ extern void func_8025637C_de(struct CartridgeReadWorker *worker, u32 source, s32
 /* Callable seek entry in the low-address resource callback table. */
 
 inline static s32 *guard_address(void) {
-    return &D_800D2B80;
+    return &g_stdioResourceOpenCount;
 }
 
 inline static s32 increment_guard(s32 *counter) {
@@ -105,18 +105,18 @@ static inline void write_resource_buffer(u8 **buffer, void *allocation) {
 }
 
 static inline void clear_resource_state(void) {
-    D_800CD940_de.data = 0;
-    D_800CD940_de.opened = 0;
-    D_800CD940_de.ready = 0;
+    g_stdioResourceStream.data = 0;
+    g_stdioResourceStream.opened = 0;
+    g_stdioResourceStream.ready = 0;
 }
 
 typedef void (*FuncPtr)(void);
 
-extern ResourceOpenCallback D_800CD924_de;
+extern ResourceOpenCallback g_stdioOpenCallback;
 
-extern FuncPtr D_800CD928_de;
+extern FuncPtr g_stdioCloseCallback;
 
-extern ResourceReadCallback D_800CD92C_de;
+extern ResourceReadCallback g_stdioReadCallback;
 
 /** Pass the variadic tail address to the formatter and retain its result. */
 s32 XStdio_FormatBuffer(void *goal, s32 fmt0, ...) {
@@ -125,7 +125,7 @@ s32 XStdio_FormatBuffer(void *goal, s32 fmt0, ...) {
 
     args = __builtin_next_arg(fmt0);
     result = Gfx_FormatArgumentList(goal, fmt0, (s32)args);
-    D_800CD918 = result;
+    g_stdioFormattedLength = result;
     return result;
 }
 
@@ -135,8 +135,8 @@ s32 XStdio_PrintStream(void *stream, const char *format, ...) {
     s32 length;
     s32 total;
 
-    Gfx_FormatArgumentList((u8 *)&D_8014D0D0, format, __builtin_next_arg(format));
-    run = (u8 *)&D_8014D0D0;
+    Gfx_FormatArgumentList((u8 *)&g_stdioFormatBuffer, format, __builtin_next_arg(format));
+    run = (u8 *)&g_stdioFormatBuffer;
     p = run;
     length = 0;
     total = 0;
@@ -148,7 +148,7 @@ s32 XStdio_PrintStream(void *stream, const char *format, ...) {
                 length = 0;
                 run = p;
             }
-            XStdio_WriteStreamNoop(&D_800CAEF0, 1, 1, stream);
+            XStdio_WriteStreamNoop(&k_stdioCarriageReturn, 1, 1, stream);
             total++;
         }
     }
@@ -166,40 +166,40 @@ void XStdio_InitializeStreams(void) {
     if (increment_guard(guard_address()) != 0) {
         return;
     }
-    D_800D2B84 = 0x12345678;
+    g_stdioResourceReadyCookie = 0x12345678;
     one = 1;
-    if (read_resource_word(&D_800CD940_de.ready) != one) {
+    if (read_resource_word(&g_stdioResourceStream.ready) != one) {
 #if defined(VERSION_DE)
-        D_800CD940_de.size = 0x8BB01;
+        g_stdioResourceStream.size = 0x8BB01;
 #elif defined(VERSION_EU_X)
-        D_800CD940_de.size = 0x90385;
+        g_stdioResourceStream.size = 0x90385;
 #else
-        D_800CD940_de.size = 0x8B245;
+        g_stdioResourceStream.size = 0x8B245;
 #endif
-        v0 = Cache_AllocateMemory(read_resource_word(&D_800CD940_de.size));
-        write_resource_buffer(&D_800CD940_de.data, v0);
-        func_8025637C_de(&D_801011B8, 0x200000, read_resource_word(&D_800CD940_de.size), v0);
-        write_resource_word(&D_800CD940_de.opened,0);
-        D_800CD940_de.ready = one;
+        v0 = Cache_AllocateMemory(read_resource_word(&g_stdioResourceStream.size));
+        write_resource_buffer(&g_stdioResourceStream.data, v0);
+        Cartridge_ReadChunksAndWait(&g_cartridgeReadWorker, 0x200000, read_resource_word(&g_stdioResourceStream.size), v0);
+        write_resource_word(&g_stdioResourceStream.opened,0);
+        g_stdioResourceStream.ready = one;
     }
-    XStdio_SetStreamCallbacks((ResourceOpenCallback)&D_002A1158, (s32) &D_002A1188, (ResourceReadCallback)&D_002A1198, (s32) &D_002A11EC, (ResourceSeekCallback)&D_002A11F4, (s32) &D_002A1220, (s32) &D_002A1230);
+    XStdio_SetStreamCallbacks((ResourceOpenCallback)&g_stdioResourceOpenRomEntry, (s32) &g_stdioResourceCloseRomEntry, (ResourceReadCallback)&g_stdioResourceReadRomEntry, (s32) &g_stdioResourceWriteRomEntry, (ResourceSeekCallback)&g_stdioResourceSeekRomEntry, (s32) &g_stdioResourceTellRomEntry, (s32) &g_xStdioRomLinkTarget_002A1230);
 }
 
 void XStdio_ShutdownStreams(void) {
-    D_800D2B80--;
-    if (D_800CD940_de.data != 0) {
-        Cache_FreeMemory(D_800CD940_de.data);
+    g_stdioResourceOpenCount--;
+    if (g_stdioResourceStream.data != 0) {
+        Cache_FreeMemory(g_stdioResourceStream.data);
     }
     clear_resource_state();
 }
 
 /* Forward both open arguments and return the callback's stream handle. */
 s32 XStdio_OpenStream(const void *name, const void *mode) {
-    return D_800CD924_de(name, mode);
+    return g_stdioOpenCallback(name, mode);
 }
 
 void XStdio_CloseStream(void) {
-    D_800CD928_de();
+    g_stdioCloseCallback();
 }
 
 s32 XStdio_ReadStream(void *destination, s32 elementSize, s32 count, s32 handle) {
@@ -210,16 +210,16 @@ s32 XStdio_ReadStream(void *destination, s32 elementSize, s32 count, s32 handle)
     if (totalBytes == 0) {
         return 0;
     }
-    result = D_800CD92C_de(handle, destination, totalBytes);
+    result = g_stdioReadCallback(handle, destination, totalBytes);
     return result / elementSize;
 }
 
 /* resmgr_stream_callbacks.CPP */
 
 
-extern ResourceSeekCallback D_800CD934_de;
-extern FuncPtr D_800CD938_de;
-extern FuncPtr D_800CD93C_de;
+extern ResourceSeekCallback g_stdioSeekCallback;
+extern FuncPtr g_stdioTellCallback;
+extern FuncPtr g_stdioEndCallback;
 
 
 /* Allocates the resource once and marks its five-word state ready. */
@@ -231,29 +231,29 @@ s32 XStdio_WriteStreamNoop(const unsigned char *data, s32 size, s32 count, void 
 }
 
 /** Return the zero status used by callers. */
-int func_802A0F58_de(void) {
+int XStdio_ReadUnavailable(void) {
     return 0;
 }
 
 /* Forward every seek argument and return the configured callback status. */
 s32 XStdio_SeekStream(s32 handle, s32 offset, s32 origin) {
-    return D_800CD934_de(handle, offset, origin);
+    return g_stdioSeekCallback(handle, offset, origin);
 }
 
 void XStdio_QueryStreamPosition(void) {
-    D_800CD938_de();
+    g_stdioTellCallback();
 }
 
 void XStdio_QueryStreamEnd(void) {
-    extern FuncPtr D_800CD93C_de;
-    D_800CD93C_de();
+    extern FuncPtr g_stdioEndCallback;
+    g_stdioEndCallback();
 }
 
-s32 XStdio_ReadCharacter(s32 arg0) {
+s32 XStdio_ReadCharacter(s32 stream) {
     u8 sp10;
     s32 result;
 
-    if (D_800CD92C_de(arg0, &sp10, 1) != 0) {
+    if (g_stdioReadCallback(stream, &sp10, 1) != 0) {
         result = sp10;
     } else {
         result = -1;
@@ -261,54 +261,54 @@ s32 XStdio_ReadCharacter(s32 arg0) {
     return result;
 }
 
-int func_802A1004_de(void) {
+int XStdio_WriteUnavailable(void) {
     return 0;
 }
 
-s32 *XStdio_FormatScratchArgumentList(s32 fmt0, s32 arg1) {
-    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, fmt0, arg1);
-    return &D_8014D0D0;
+s32 *XStdio_FormatScratchArgumentList(s32 fmt0, s32 argumentList) {
+    g_stdioFormattedLength = Gfx_FormatArgumentList(&g_stdioFormatBuffer, fmt0, argumentList);
+    return &g_stdioFormatBuffer;
 }
 
-void XStdio_SetStreamCallbacks(ResourceOpenCallback arg0, s32 arg1, ResourceReadCallback arg2, s32 arg3, ResourceSeekCallback arg4, FuncPtr arg5, FuncPtr arg6) {
-    D_800CD924_de = arg0;
-    D_800CD928_de = (FuncPtr)arg1;
-    D_800CD92C_de = arg2;
-    D_800CD930_de = arg3;
-    D_800CD934_de = arg4;
-    D_800CD938_de = arg5;
-    D_800CD93C_de = arg6;
+void XStdio_SetStreamCallbacks(ResourceOpenCallback openCallback, s32 closeCallback, ResourceReadCallback readCallback, s32 writeCallback, ResourceSeekCallback seekCallback, FuncPtr tellCallback, FuncPtr endCallback) {
+    g_stdioOpenCallback = openCallback;
+    g_stdioCloseCallback = (FuncPtr)closeCallback;
+    g_stdioReadCallback = readCallback;
+    g_stdioWriteCallback = writeCallback;
+    g_stdioSeekCallback = seekCallback;
+    g_stdioTellCallback = tellCallback;
+    g_stdioEndCallback = endCallback;
 }
 
 void XStdio_LoadMemoryStream(void) {
     void *buffer;
-    IntegerState14_2 *stream;
-    if (D_800CD940_de.ready != 1) {
+    MemoryStreamBuffer *stream;
+    if (g_stdioResourceStream.ready != 1) {
 #if defined(VERSION_DE)
-        D_800CD940_de.size = 0x8BB01;
+        g_stdioResourceStream.size = 0x8BB01;
         buffer = Cache_AllocateMemory(0x8BB01);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        D_800CD940_de.size = 0x8B245;
+        g_stdioResourceStream.size = 0x8B245;
         buffer = Cache_AllocateMemory(0x8B245);
 #elif defined(VERSION_EU_X)
-        D_800CD940_de.size = 0x90385;
+        g_stdioResourceStream.size = 0x90385;
         buffer = Cache_AllocateMemory(0x90385);
 #endif
-        D_800CD940_de.data = buffer;
-        func_8025637C_de(&D_801011B8, 0x200000, D_800CD940_de.size, buffer);
-        stream = &D_800CD940_de;
+        g_stdioResourceStream.data = buffer;
+        Cartridge_ReadChunksAndWait(&g_cartridgeReadWorker, 0x200000, g_stdioResourceStream.size, buffer);
+        stream = &g_stdioResourceStream;
         stream->opened = 0;
-        D_800CD940_de.ready = 1;
+        g_stdioResourceStream.ready = 1;
     }
 }
 
 void XStdio_FreeMemoryStream(void) {
-    if (D_800CD940_de.data != 0) {
-        Cache_FreeMemory(D_800CD940_de.data);
+    if (g_stdioResourceStream.data != 0) {
+        Cache_FreeMemory(g_stdioResourceStream.data);
     }
-    D_800CD940_de.data = 0;
-    D_800CD940_de.opened = 0;
-    D_800CD940_de.ready = 0;
+    g_stdioResourceStream.data = 0;
+    g_stdioResourceStream.opened = 0;
+    g_stdioResourceStream.ready = 0;
 }
 
 /* Reset the memory stream and return its single valid handle. */
@@ -318,19 +318,19 @@ s32 XStdio_OpenMemoryStream(const void *name, const void *mode) {
         modeCursor++;
     }
     modeCursor++;
-    D_800CD940_de.cursor = 0;
-    D_800CD940_de.opened = 1;
+    g_stdioResourceStream.cursor = 0;
+    g_stdioResourceStream.opened = 1;
     return 1;
 }
 
 /** Clear the global word at VRAM 0x800D2BBC. */
 
 void XStdio_CloseMemoryStream(void) {
-    D_800CD940_de.opened = 0;
+    g_stdioResourceStream.opened = 0;
 }
 
 s32 XStdio_ReadMemoryStream(s32 handle, void *destination, s32 bytes) {
-    IntegerState14_2 *stream = &D_800CD940_de;
+    MemoryStreamBuffer *stream = &g_stdioResourceStream;
     XPlus_CopyBytes(destination, stream->data + stream->cursor, bytes);
     stream->cursor = stream->cursor + bytes;
     return 1;
@@ -344,30 +344,30 @@ int XStdio_WriteMemoryStreamNoop(void) {
 s32 XStdio_SeekMemoryStream(s32 handle, s32 offset, s32 origin) {
 
     if (origin == 0) {
-        D_800CD940_de.cursor = 0;
+        g_stdioResourceStream.cursor = 0;
     }
-    D_800CD940_de.cursor = D_800CD940_de.cursor + offset;
+    g_stdioResourceStream.cursor = g_stdioResourceStream.cursor + offset;
     return 0;
 }
 
 /** Return the first global state word. */
 unsigned int XStdio_TellMemoryStream(void) {
-    return D_800CD940_de.cursor;
+    return g_stdioResourceStream.cursor;
 }
 
 /* resmgr_stream_status.CPP */
 int XStdio_IsMemoryStreamAtEnd(void) {
-    return D_800CD940_de.cursor == D_800CD940_de.size;
+    return g_stdioResourceStream.cursor == g_stdioResourceStream.size;
 }
 
 /** Store two values in the paired global words. */
 void XStdio_SetTextOutputCallbacks(int first, int second) {
-    D_800CD91C = first;
-    D_800CD920_de = second;
+    g_stdioScratchCallback = first;
+    g_stdioArgumentWriteCallback = second;
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802A11A4[3] = {
+unsigned int k_XStdioEncodedWords[3] = {
     0x43000000, 0x10000B00, 0x00000000,
 };
 #endif

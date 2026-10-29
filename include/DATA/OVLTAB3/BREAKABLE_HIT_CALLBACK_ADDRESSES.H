@@ -1,0 +1,5 @@
+#ifndef DATA_OVLTAB3_BREAKABLE_HIT_CALLBACK_ADDRESSES_H
+#define DATA_OVLTAB3_BREAKABLE_HIT_CALLBACK_ADDRESSES_H
+extern char addrLow_Action_ResolveBreakableHit[];
+extern char addrLow_Action_DeactivateBreakable[];
+#endif

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJRECAT3CV2.H"
-#include "MATH/8029BBA0.H"
+#include "MATH/ROTATION_MATRIX_ELEMENT_VIEWS.H"
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -10,67 +10,67 @@
 #include "MATH/INVERTMATRIX.H"
 
 /* The values XMath_BuildYxzRotationMatrix loads by address:
- * 0x800CAC34 = 1.0 (float, D_800CAC34 in this cartridge's tables)
+ * 0x800CAC34 = 1.0 (float, k_xmathRotationMatrixHomogeneousUnit in this cartridge's tables)
  */
 
 /* Build a rotation matrix from the three Euler angles in arg1. */
-void XMath_BuildYxzRotationMatrix(ObjRecAt3CV2 *arg0, CVector3 *arg1) {
+void XMath_BuildYxzRotationMatrix(RotationMatrixWords *outputMatrix, CVector3 *angles) {
     f32 sinX;
     f32 cosX;
     f32 sinY;
     f32 cosY;
     f32 sinZ;
     f32 cosZ;
-    f32 p0;
-    f32 p1;
-    f32 p2;
-    f32 p3;
-    f32 p4;
-    f32 p5;
-    f32 p6;
-    f32 p7;
-    f32 p8;
-    float temp;
-    f32 p9;
-    f32 p10;
-    f32 p11;
-    float temp_2;
-    f32 p12;
-    f32 p13;
-    XMath_EvaluateSineCosine(arg1->x, &sinX, &cosX);
-    XMath_EvaluateSineCosine(arg1->y, &sinY, &cosY);
-    XMath_EvaluateSineCosine(arg1->z, &sinZ, &cosZ);
-    p0 = sinX * sinZ;
-    p1 = sinX * cosZ;
-    temp_2 = sinY * p0;
-    p2 = cosY * cosZ;
-    p3 = sinZ * cosY;
-    p4 = cosX * sinY;
-    temp = sinY * p1;
-    p5 = cosX * sinZ;
-    p6 = cosX * cosZ;
-    p7 = sinY * cosZ;
-    p8 = cosX * cosY;
-    p9 = temp_2;
-    p10 = temp;
-    p11 = cosY * p0;
-    p12 = sinY * sinZ;
-    p13 = cosY * sinZ;
-    arg0->unk24 = -sinX;
-    arg0->unk20 = p4;
-    arg0->unk4 = p5;
-    arg0->unk14 = p6;
-    arg0->unkC = arg0->unk1C = arg0->unk2C = arg0->unk30 = arg0->unk34 = arg0->unk38 = 0.0f;
-    arg0->unk28 = p8;
-    arg0->unk3C = D_800CAC34;
-    arg0->unk0 = p2 + p9;
-    arg0->unk10 = p10 - p3;
-    arg0->unk8 = p11 - p7;
-    arg0->unk18 = p12 + p1 * cosY;
+    f32 sinXSinZ;
+    f32 sinXCosZ;
+    f32 cosYCosZ;
+    f32 sinZCosY;
+    f32 cosXSinY;
+    f32 cosXSinZ;
+    f32 cosXCosZ;
+    f32 sinYCosZ;
+    f32 cosXCosY;
+    float sinYSinXCosZ;
+    f32 matrixXContribution;
+    f32 matrixYContribution;
+    f32 cosYSinXSinZ;
+    float sinYSinXSinZ;
+    f32 sinYSinZ;
+    f32 unusedCosYSinZ;
+    XMath_EvaluateSineCosine(angles->x, &sinX, &cosX);
+    XMath_EvaluateSineCosine(angles->y, &sinY, &cosY);
+    XMath_EvaluateSineCosine(angles->z, &sinZ, &cosZ);
+    sinXSinZ = sinX * sinZ;
+    sinXCosZ = sinX * cosZ;
+    sinYSinXSinZ = sinY * sinXSinZ;
+    cosYCosZ = cosY * cosZ;
+    sinZCosY = sinZ * cosY;
+    cosXSinY = cosX * sinY;
+    sinYSinXCosZ = sinY * sinXCosZ;
+    cosXSinZ = cosX * sinZ;
+    cosXCosZ = cosX * cosZ;
+    sinYCosZ = sinY * cosZ;
+    cosXCosY = cosX * cosY;
+    matrixXContribution = sinYSinXSinZ;
+    matrixYContribution = sinYSinXCosZ;
+    cosYSinXSinZ = cosY * sinXSinZ;
+    sinYSinZ = sinY * sinZ;
+    unusedCosYSinZ = cosY * sinZ;
+    outputMatrix->m21 = -sinX;
+    outputMatrix->m20 = cosXSinY;
+    outputMatrix->m01 = cosXSinZ;
+    outputMatrix->m11 = cosXCosZ;
+    outputMatrix->m03 = outputMatrix->m13 = outputMatrix->m23 = outputMatrix->m30 = outputMatrix->m31 = outputMatrix->m32 = 0.0f;
+    outputMatrix->m22 = cosXCosY;
+    outputMatrix->m33 = k_xmathRotationMatrixHomogeneousUnit;
+    outputMatrix->m00 = cosYCosZ + matrixXContribution;
+    outputMatrix->m10 = matrixYContribution - sinZCosY;
+    outputMatrix->m02 = cosYSinXSinZ - sinYCosZ;
+    outputMatrix->m12 = sinYSinZ + sinXCosZ * cosY;
 }
 
 
-void XMath_ExtractYxzAngles(InputRecAt28 *arg0, CVector3 *arg1) {
+void XMath_ExtractYxzAngles(RotationMatrixElementsView *inputMatrix, CVector3 *outputAngles) {
     f32 clamped;
     f32 magnitude;
     f32 polynomial;
@@ -81,55 +81,55 @@ void XMath_ExtractYxzAngles(InputRecAt28 *arg0, CVector3 *arg1) {
     f32 angle_temp;
     f32 out2;
     s32 negative;
-    clamped = arg0->f24;
-    if (D_800C5AA8_de < clamped) {
-        clamped = D_800C5AA8_de;
+    clamped = inputMatrix->f24;
+    if (k_yxzExtractionClampAndZero < clamped) {
+        clamped = k_yxzExtractionClampAndZero;
     }
-    if (clamped < *(&D_800C5AA8_de + 1)) {
-        clamped = *(&D_800C5AA8_de + 1);
+    if (clamped < *(&k_yxzExtractionClampAndZero + 1)) {
+        clamped = *(&k_yxzExtractionClampAndZero + 1);
     }
     magnitude = -clamped;
-    if (D_800C5AA8_de < magnitude) {
-        magnitude = D_800C5AA8_de;
+    if (k_yxzExtractionClampAndZero < magnitude) {
+        magnitude = k_yxzExtractionClampAndZero;
     }
-    if (magnitude < *(&D_800C5AA8_de + 1)) {
-        magnitude = *(&D_800C5AA8_de + 1);
+    if (magnitude < *(&k_yxzExtractionClampAndZero + 1)) {
+        magnitude = *(&k_yxzExtractionClampAndZero + 1);
     }
     negative = 0;
     if (magnitude < 0.0f) {
         negative = 1;
         magnitude = -magnitude;
     }
-    polynomial = (((((((((magnitude * D_800C5AB0_de) + *(&D_800C5AB0_de + 1)) * magnitude)
-        - D_800C5AB8_de) * magnitude) + *(&D_800C5AB8_de + 1)) * magnitude)
-        - D_800C5AC0_de) * magnitude) + *(&D_800C5AC0_de + 1);
-    delta = D_800C5AA8_de - magnitude;
+    polynomial = (((((((((magnitude * k_yxzExtractionPolynomialCoefficientsOne) + *(&k_yxzExtractionPolynomialCoefficientsOne + 1)) * magnitude)
+        - k_yxzExtractionPolynomialCoefficientsTwo) * magnitude) + *(&k_yxzExtractionPolynomialCoefficientsTwo + 1)) * magnitude)
+        - k_yxzExtractionPolynomialCoefficientsThree) * magnitude) + *(&k_yxzExtractionPolynomialCoefficientsThree + 1);
+    delta = k_yxzExtractionClampAndZero - magnitude;
     if (delta <= 0.0f) {
         root = 0.0f;
     } else {
         root = Gu_Sqrtf(delta);
     }
-    angle_temp = D_800C5AC8_de - (root * polynomial);
+    angle_temp = k_yxzExtractionHalfPi - (root * polynomial);
     if (negative != 0) {
         angle_temp = -angle_temp;
     }
     angle = angle_temp;
-    test = XMath_EvaluateSine(angle + D_800C5AC8_de);
-    if ((*(&D_800C5AC8_de + 1) < test) || (test < *(&D_800C5AC8_de + 1))) {
-        polynomial = XMath_EvaluateArcTangentTwo(arg0->f20, arg0->f28);
-        out2 = XMath_EvaluateArcTangentTwo(arg0->f04, arg0->f14);
+    test = XMath_EvaluateSine(angle + k_yxzExtractionHalfPi);
+    if ((*(&k_yxzExtractionHalfPi + 1) < test) || (test < *(&k_yxzExtractionHalfPi + 1))) {
+        polynomial = XMath_EvaluateArcTangentTwo(inputMatrix->f20, inputMatrix->f28);
+        out2 = XMath_EvaluateArcTangentTwo(inputMatrix->f04, inputMatrix->f14);
     } else {
         polynomial = 0.0f;
-        out2 = XMath_EvaluateArcTangentTwo(arg0->f08, arg0->f00);
+        out2 = XMath_EvaluateArcTangentTwo(inputMatrix->f08, inputMatrix->f00);
     }
-    arg1->x = angle;
-    arg1->y = polynomial;
-    arg1->z = out2;
+    outputAngles->x = angle;
+    outputAngles->y = polynomial;
+    outputAngles->z = out2;
 }
 /* Computes an arcsine-style angle from a clamped matrix element by polynomial approximation, then derives the other two Euler angles with atan2-style calls and writes the triple. Adapted from XMath_ExtractYxzAngles, with the source element, the zero test, the branch operands, and the stored order changed. */
 
 
-void XMath_ExtractZyxAngles(InputRecAt28 *arg0, CVector3 *arg1) {
+void XMath_ExtractZyxAngles(RotationMatrixElementsView *inputMatrix, CVector3 *outputAngles) {
     f32 clamped;
     f32 magnitude;
     f32 polynomial;
@@ -140,57 +140,57 @@ void XMath_ExtractZyxAngles(InputRecAt28 *arg0, CVector3 *arg1) {
     f32 angle_temp;
     f32 out2;
     s32 negative;
-    clamped = arg0->f08;
-    if (D_800C5AD0_de < clamped) {
-        clamped = D_800C5AD0_de;
+    clamped = inputMatrix->f08;
+    if (k_zyxExtractionClampAndZero < clamped) {
+        clamped = k_zyxExtractionClampAndZero;
     }
-    if (clamped < *(&D_800C5AD0_de + 1)) {
-        clamped = *(&D_800C5AD0_de + 1);
+    if (clamped < *(&k_zyxExtractionClampAndZero + 1)) {
+        clamped = *(&k_zyxExtractionClampAndZero + 1);
     }
     magnitude = -clamped;
-    if (D_800C5AD0_de < magnitude) {
-        magnitude = D_800C5AD0_de;
+    if (k_zyxExtractionClampAndZero < magnitude) {
+        magnitude = k_zyxExtractionClampAndZero;
     }
-    if (magnitude < *(&D_800C5AD0_de + 1)) {
-        magnitude = *(&D_800C5AD0_de + 1);
+    if (magnitude < *(&k_zyxExtractionClampAndZero + 1)) {
+        magnitude = *(&k_zyxExtractionClampAndZero + 1);
     }
     negative = 0;
     if (magnitude < 0.0f) {
         negative = 1;
         magnitude = -magnitude;
     }
-    polynomial = (((((((((magnitude * D_800C5AD8_de) + *(&D_800C5AD8_de + 1)) * magnitude)
-        - D_800C5AE0_de) * magnitude) + *(&D_800C5AE0_de + 1)) * magnitude)
-        - D_800C5AE8_de) * magnitude) + *(&D_800C5AE8_de + 1);
-    delta = D_800C5AD0_de - magnitude;
+    polynomial = (((((((((magnitude * k_zyxExtractionPolynomialCoefficientsOne) + *(&k_zyxExtractionPolynomialCoefficientsOne + 1)) * magnitude)
+        - k_zyxExtractionPolynomialCoefficientsTwo) * magnitude) + *(&k_zyxExtractionPolynomialCoefficientsTwo + 1)) * magnitude)
+        - k_zyxExtractionPolynomialCoefficientsThree) * magnitude) + *(&k_zyxExtractionPolynomialCoefficientsThree + 1);
+    delta = k_zyxExtractionClampAndZero - magnitude;
     if (delta <= 0.0f) {
         root = 0.0f;
     } else {
         root = Gu_Sqrtf(delta);
     }
-    angle_temp = D_800C5AF0_de - (root * polynomial);
+    angle_temp = k_zyxExtractionHalfPi - (root * polynomial);
     if (negative != 0) {
         angle_temp = -angle_temp;
     }
     angle = angle_temp;
-    test = XMath_EvaluateSine(angle + D_800C5AF0_de);
+    test = XMath_EvaluateSine(angle + k_zyxExtractionHalfPi);
     if ((0.0f < test) || (test < 0.0f)) {
-        polynomial = XMath_EvaluateArcTangentTwo(arg0->pad18, arg0->f28);
-        out2 = XMath_EvaluateArcTangentTwo(arg0->f04, arg0->f00);
+        polynomial = XMath_EvaluateArcTangentTwo(inputMatrix->pad18, inputMatrix->f28);
+        out2 = XMath_EvaluateArcTangentTwo(inputMatrix->f04, inputMatrix->f00);
     } else {
-        polynomial = XMath_EvaluateArcTangentTwo(-arg0->f24, arg0->f14);
+        polynomial = XMath_EvaluateArcTangentTwo(-inputMatrix->f24, inputMatrix->f14);
         out2 = 0.0f;
     }
-    arg1->x = polynomial;
-    arg1->y = angle;
-    arg1->z = out2;
+    outputAngles->x = polynomial;
+    outputAngles->y = angle;
+    outputAngles->z = out2;
 }
 
-void XMath_MultiplyMatrices(s32 matrix, s32 arg1, s32 arg2) {
+void XMath_MultiplyMatrices(s32 matrix, s32 leftMatrix, s32 rightMatrix) {
     Matrix temporary;
     Matrix *out = (Matrix *)matrix;
-    Matrix *a = (Matrix *)arg1;
-    Matrix *b = (Matrix *)arg2;
+    Matrix *a = (Matrix *)leftMatrix;
+    Matrix *b = (Matrix *)rightMatrix;
     s32 row;
 
     if (out == a) {
@@ -249,7 +249,7 @@ static inline f32 safe_sqrt(f32 x) {
 static inline void normalize_x(CVector3 *v) {
     f32 scale;
 
-    scale = D_800C5AF4 / safe_sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+    scale = k_xmathFirstNormalizeUnit / safe_sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
     v->x *= scale;
     v->y *= scale;
     v->z *= scale;
@@ -258,7 +258,7 @@ static inline void normalize_x(CVector3 *v) {
 static inline void normalize_y(CVector3 *v) {
     f32 scale;
 
-    scale = D_800C5AF8_de / safe_sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+    scale = k_xmathSecondNormalizeUnit / safe_sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
     v->x *= scale;
     v->y *= scale;
     v->z *= scale;
@@ -305,7 +305,7 @@ void XMath_OrthogonalizeMatrixBasis(PlaneEquation *m) {
 
 s32 XMath_InvertAffineMatrix(f32 *out, f32 *input)
 {
-  struct Shape_typemap_165 copy[4];
+  struct CacheResourceBlockView copy[4];
   f32 *m;
   f32 determinant;
   f32 absoluteDeterminant;
@@ -323,9 +323,9 @@ s32 XMath_InvertAffineMatrix(f32 *out, f32 *input)
   m = input;
   if (input == out)
   {
-    struct Shape_typemap_165 *dst = copy;
-    struct Shape_typemap_165 *src = (struct Shape_typemap_165 *) out;
-    struct Shape_typemap_165 *end = src + 4;
+    struct CacheResourceBlockView *dst = copy;
+    struct CacheResourceBlockView *src = (struct CacheResourceBlockView *) out;
+    struct CacheResourceBlockView *end = src + 4;
     do
     {
       *dst = *src;
@@ -350,9 +350,9 @@ s32 XMath_InvertAffineMatrix(f32 *out, f32 *input)
     absoluteDeterminant = -determinant;
   }
   result = 1;
-  if (!(absoluteDeterminant < D_800C5AFC))
+  if (!(absoluteDeterminant < k_xmathMatrixDeterminantTolerance))
   {
-    affineOne = D_800C5B00_de;
+    affineOne = k_xmathAffineMatrixUnit;
     reciprocal = affineOne / determinant;
     out[0] = reciprocal * minor0;
     negativeReciprocal = -reciprocal;

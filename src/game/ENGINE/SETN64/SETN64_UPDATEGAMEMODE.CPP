@@ -5,11 +5,11 @@
 #include "COMMON/ACTORRECAT5E0.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "RENDER/SESSION_HANDLER_AND_RENDER_STATE.H"
-#include "RENDER/802909E0.H"
+#include "RENDER/RECORD_OUTPUT_AND_TIMED_SESSION_VIEWS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/TRIPLE.H"
-extern f32 D_800C5498_de;
+extern f32 g_snapshotModeTransitionTimer;
 
 void SetN64_BeginModeTransition(GameSession *session, s32 targetMode) {
     s32 saved;
@@ -21,7 +21,7 @@ void SetN64_BeginModeTransition(GameSession *session, s32 targetMode) {
     session->target = targetMode;
     session->previousMode = saved;
     if (Control_IsSnapshotActive() != 0) {
-        session->timer = D_800C5498_de;
+        session->timer = g_snapshotModeTransitionTimer;
     }
 }
 
@@ -50,30 +50,30 @@ void SetN64_UpdateGameMode(void *session) {
     }
     Control_TickSnapshotCountdown();
     field = ((GameSession *)session)->mode;
-    fn = ((SessionHandlerRow *)D_800CD78C)[field].update;
+    fn = ((SessionHandlerRow *)g_sessionUpdateHandlers)[field].update;
     if (fn != 0) {
         fn(session);
         field = ((GameSession *)session)->mode;
     }
-    if (field != 0x14 && D_80142CA8 != 0) {
-        D_80142CA8 -= 1;
+    if (field != 0x14 && g_gameModeTransitionFrames != 0) {
+        g_gameModeTransitionFrames -= 1;
         SetN64_UpdateFrameTiming(session);
     }
-    D_800CD734 += 1;
+    g_sessionUpdateCount += 1;
 }
 
-s32 SetN64_CheckTimedSessionTransition(ObjRecAt26DC1 *arg0, f32 arg1, s32 eight, s32 arg3) {
-    s32 *flag = (s32 *)&D_8010B0E0.pressedButtons;
+s32 SetN64_CheckTimedSessionTransition(TimedSessionTransitionView *session, f32 duration, s32 eight, s32 inputTargetMode) {
+    s32 *flag = (s32 *)&g_combinedControllerProfile.pressedButtons;
 
-    if ((*flag != 0) && (arg3 != -1)) {
-        arg0->unk26DC1 = 2;
-        arg0->unk26DBC = arg3;
+    if ((*flag != 0) && (inputTargetMode != -1)) {
+        session->transitionPhase = 2;
+        session->transitionTarget = inputTargetMode;
         *flag = 0;
         return 1;
     }
-    if ((arg1 * D_800C549C) < arg0->unk26DB0) {
-        arg0->unk26DC1 = 2;
-        arg0->unk26DBC = eight;
+    if ((duration * g_timedTransitionDurationScale) < session->transitionTimer) {
+        session->transitionPhase = 2;
+        session->transitionTarget = eight;
         return 1;
     }
     return 0;

@@ -1,5 +1,5 @@
 #include "MENU/ITEMS/GAME_AND_PLAYER_OPTIONS.H"
-#include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "COMMON/GAME_SESSION.H"
 #include "OVLGAME/OVLGAME_INITIALIZEPLAYERPOOL.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -8,7 +8,7 @@
 #include "COMMON/S1.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "AI/NAV/SCALED_INITPLAYERSTATE.H"
 #include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 #include "FX/CONTPAD_INITCONTROLLERINPUT.H"
@@ -17,25 +17,25 @@
 #include "SYSTEM/LIST.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "CINEMA/CINEMA.H"
-extern void Cache_ReleaseResource(void *arg0, void *resource);
+extern void Cache_ReleaseResource(void *cache, void *resource);
 
-extern char D_8010F328[];
+extern char g_controllerProfiles[];
 
-extern char D_801462C8[];
+extern char g_gameSettings[];
 
-extern char D_801468A0[];
+extern char g_matchRoundCounters[];
 
 extern void Cache_DrainAndCompactResources(s32);
 
 
 extern void Player_AllocPlayerList(CPlayerPool *, s32);
-extern s32 D_800C9684[];
+extern s32 g_playerActionStateHandlers[];
 extern void Player_ResetPlayerForRound(void *actor, s32 character, s32 active);
 
 
 
 /* Resets a 0x44-byte record: clears it through XPlus_FillMemory, initialises the two lists at offsets
-   0xC and 0x20 through func_80255CA0_de with 0x16DC and 0x16E0, and clears the words at 0 to 8 and
+   0xC and 0x20 through List_InitializeIntrusive with 0x16DC and 0x16E0, and clears the words at 0 to 8 and
    0x34 to 0x40. */
 
 /* Refreshes every instance owned by the holder and clears their pending flag. */
@@ -83,11 +83,11 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
     char *global;
     char *state;
 
-    func_80255CA0_de(&pool->m_FreeList, 0x16DC, 0x16E0);
-    func_80255CA0_de(&pool->m_ActiveList, 0x16DC, 0x16E0);
+    List_InitializeIntrusive(&pool->m_FreeList, 0x16DC, 0x16E0);
+    List_InitializeIntrusive(&pool->m_ActiveList, 0x16DC, 0x16E0);
     Control_SetControllerMode(0);
     Cache_DrainAndCompactResources(0);
-    global = D_801462C8;
+    global = g_gameSettings;
 
     if (pool->m_pmePlayers != 0) {
         Cache_ReleaseResource(0, pool->m_pmePlayers);
@@ -102,7 +102,7 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
 
     Player_AllocPlayerList(pool, count);
     for (i = 0; i < pool->count; i++) {
-        func_80255D14_de(&pool->m_FreeList, pool->m_Players + i * 0x16E8);
+        List_AppendIntrusive(&pool->m_FreeList, pool->m_Players + i * 0x16E8);
     }
 
     for (i = 0; i < pool->count; i++) {
@@ -113,7 +113,7 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
     }
 
     entry = global + 0x3A;
-    if (((ObjectState1E_2 *)(global))->unk_1D != 0) {
+    if (((GameModeEnableView *)(global))->unk_1D != 0) {
         if (pool->count <= 0) {
             goto initialized;
         }
@@ -128,17 +128,17 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->remote = ((CPlayerOptions *)(entry))->isBot;
             ((struct Shared_ActorView *)(object))->actorState = 0;
             if (((struct Shared_ActorView *)(object))->remote != 0) {
-                ContPad_InitControllerInput(object + 0x688, D_8010EEB8);
+                ContPad_InitControllerInput(object + 0x688, g_botControllerProfile);
                 ((struct Shared_ActorView *)(object))->mode = ((CPlayerOptions *)(entry))->controller;
             } else {
-                ContPad_InitControllerInput(object + 0x688, D_8010F328 + attribute_offset);
+                ContPad_InitControllerInput(object + 0x688, g_controllerProfiles + attribute_offset);
                 ((struct Shared_ActorView *)(object))->mode = i;
             }
             owner = ((struct Shared_ActorView *)(object))->owner;
             ((struct Shared_ActorView *)(object))->controls = (Shared_ControlView *)entry;
             object_id = ((CPlayerOptions *)(entry))->characterSkin;
-            ((struct Shared_ActorView *)(object))->field11BC = 0;
-            ((struct Shared_ActorView *)(object))->field11C0 = 0;
+            ((struct Shared_ActorView *)(object))->weaponSoundHandle = 0;
+            ((struct Shared_ActorView *)(object))->weaponLoopSoundHandle = 0;
             ((struct Shared_ActorView *)(object))->spawn = 0;
             ((struct Shared_ActorView *)(object))->field5F0 = 0;
             ((struct Shared_ActorView *)(object))->field864 = 0;
@@ -149,7 +149,7 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->special = 0;
             ((struct Shared_ActorView *)(object))->projectileBase = player_index;
             ((struct Shared_ActorView *)(object))->projectileIndex = 0;
-            ((struct Shared_ActorView *)(object))->field122C = 0;
+            ((struct Shared_ActorView *)(object))->impulseFlags = 0;
             ((struct Shared_ActorView *)(object))->field11CC = 0;
             ((struct Shared_ActorView *)(object))->field1218 = 0;
             for (j = 0; j < 8; j++) {
@@ -160,16 +160,16 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->field12C4 = 0;
             ((struct Shared_ActorView *)(object))->field12C8 = 0;
             ((struct Shared_ActorView *)(object))->field1334 = 0;
-            ((struct Shared_ActorView *)(object))->field13B4 = D_800C9684;
+            ((struct Shared_ActorView *)(object))->animationStateTable = g_playerActionStateHandlers;
             ((struct Shared_ActorView *)(object))->field11E8 = 0;
-            func_8021A78C_de(object);
-            ((struct Shared_ActorView *)(object))->field16D4 = 0;
+            Playerai_InitializeMovementAndAim(object);
+            ((struct Shared_ActorView *)(object))->pickupEffectToggle = 0;
             ((struct Shared_ActorView *)(object))->field16D8 = 0;
             ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
             if (((CPlayerOptions *)(entry))->active != 0) {
                 Player_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, 1);
-                func_80255ED8_de(&pool->m_FreeList, object);
-                func_80255CB8_de(&pool->m_ActiveList, object);
+                List_RemoveIntrusive(&pool->m_FreeList, object);
+                List_PrependIntrusive(&pool->m_ActiveList, object);
             }
             player_index += 2;
             attribute_offset += 0x224;
@@ -184,17 +184,17 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->remote = ((CPlayerOptions *)(entry))->isBot;
         ((struct Shared_ActorView *)(object))->actorState = 0;
         if (((struct Shared_ActorView *)(object))->remote != 0) {
-            ContPad_InitControllerInput(object + 0x688, D_8010EEB8);
+            ContPad_InitControllerInput(object + 0x688, g_botControllerProfile);
             ((struct Shared_ActorView *)(object))->mode = ((CPlayerOptions *)(entry))->controller;
         } else {
-            ContPad_InitControllerInput(object + 0x688, D_8010F328 + roster_index * 0x224);
+            ContPad_InitControllerInput(object + 0x688, g_controllerProfiles + roster_index * 0x224);
             ((struct Shared_ActorView *)(object))->mode = roster_index;
         }
         owner = ((struct Shared_ActorView *)(object))->owner;
         ((struct Shared_ActorView *)(object))->controls = (Shared_ControlView *)entry;
         object_id = ((CPlayerOptions *)(entry))->characterSkin;
-        ((struct Shared_ActorView *)(object))->field11BC = 0;
-        ((struct Shared_ActorView *)(object))->field11C0 = 0;
+        ((struct Shared_ActorView *)(object))->weaponSoundHandle = 0;
+        ((struct Shared_ActorView *)(object))->weaponLoopSoundHandle = 0;
         ((struct Shared_ActorView *)(object))->spawn = 0;
         ((struct Shared_ActorView *)(object))->field5F0 = 0;
         ((struct Shared_ActorView *)(object))->field864 = 0;
@@ -205,7 +205,7 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->special = 0;
         ((struct Shared_ActorView *)(object))->projectileBase = roster_index * 2;
         ((struct Shared_ActorView *)(object))->projectileIndex = 0;
-        ((struct Shared_ActorView *)(object))->field122C = 0;
+        ((struct Shared_ActorView *)(object))->impulseFlags = 0;
         ((struct Shared_ActorView *)(object))->field11CC = 0;
         ((struct Shared_ActorView *)(object))->field1218 = 0;
         for (j = 0; j < 8; j++) {
@@ -216,27 +216,27 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->field12C4 = 0;
         ((struct Shared_ActorView *)(object))->field12C8 = 0;
         ((struct Shared_ActorView *)(object))->field1334 = 0;
-        ((struct Shared_ActorView *)(object))->field13B4 = D_800C9684;
+        ((struct Shared_ActorView *)(object))->animationStateTable = g_playerActionStateHandlers;
         ((struct Shared_ActorView *)(object))->field11E8 = 0;
-        func_8021A78C_de(object);
-        ((struct Shared_ActorView *)(object))->field16D4 = 0;
+        Playerai_InitializeMovementAndAim(object);
+        ((struct Shared_ActorView *)(object))->pickupEffectToggle = 0;
         ((struct Shared_ActorView *)(object))->field16D8 = 0;
         ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
         Player_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, force_active);
-        func_80255ED8_de(&pool->m_FreeList, object);
-        func_80255CB8_de(&pool->m_ActiveList, object);
+        List_RemoveIntrusive(&pool->m_FreeList, object);
+        List_PrependIntrusive(&pool->m_ActiveList, object);
     }
 
 initialized:
-    state = D_801468A0;
-    ((IntegerState88 *)(state))->unk_74 = 1;
-    ((IntegerState88 *)(state))->unk_84 = 3;
+    state = g_matchRoundCounters;
+    ((PlayerPoolModeStateView *)(state))->unk_74 = 1;
+    ((PlayerPoolModeStateView *)(state))->unk_84 = 3;
 }
 
 void Player_ResetMenuPool(struct RecordCode80447BB0 *record) {
     XPlus_FillMemory(record, 0, 0x44);
-    func_80255CA0_de(&record->m_FreeList, 0x16DC, 0x16E0);
-    func_80255CA0_de(&record->m_ActiveList, 0x16DC, 0x16E0);
+    List_InitializeIntrusive(&record->m_FreeList, 0x16DC, 0x16E0);
+    List_InitializeIntrusive(&record->m_ActiveList, 0x16DC, 0x16E0);
     record->m_pmePlayers = 0;
     record->m_Players = 0;
     record->word8 = 0;
@@ -271,9 +271,9 @@ void Player_RefreshActivePlayerSceneState(CPlayerPool *pool) {
                 Cinema_UpdateSequenceTrack(message);
             }
             model = actor->model;
-            model->field_4 = model->field_4 & ~4;
+            model->second = model->second & ~4;
             modelValue = actor->model;
-            modelValue->field_4 = modelValue->field_4 & ~4;
+            modelValue->second = modelValue->second & ~4;
             actor = actor->next;
         } while (actor != 0);
     }
@@ -288,16 +288,16 @@ void Player_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447BB
     ((Shared_ActorView *)player)->actorState = 0;
     ((Shared_ActorView *)player)->remote = computer;
     if (computer != 0) {
-        ContPad_InitControllerInput(player + 0x688, D_8010EEB8);
+        ContPad_InitControllerInput(player + 0x688, g_botControllerProfile);
         ((Shared_ActorView *)player)->mode = record->slot;
     } else {
-        ContPad_InitControllerInput(player + 0x688, D_8010F328 + slot * 0x224);
+        ContPad_InitControllerInput(player + 0x688, g_controllerProfiles + slot * 0x224);
         ((Shared_ActorView *)player)->mode = slot;
     }
     ((Shared_ActorView *)player)->controls = (void *)record;
     team = record->team;
-    ((Shared_ActorView *)player)->field11BC = 0;
-    ((Shared_ActorView *)player)->field11C0 = 0;
+    ((Shared_ActorView *)player)->weaponSoundHandle = 0;
+    ((Shared_ActorView *)player)->weaponLoopSoundHandle = 0;
     ((Shared_ActorView *)player)->spawn = 0;
     ((Shared_ActorView *)player)->field5F0 = 0;
     ((Shared_ActorView *)player)->field864 = 0;
@@ -308,7 +308,7 @@ void Player_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447BB
     ((Shared_ActorView *)player)->special = 0;
     ((Shared_ActorView *)player)->projectileBase = slot * 2;
     ((Shared_ActorView *)player)->projectileIndex = 0;
-    ((Shared_ActorView *)player)->field122C = 0;
+    ((Shared_ActorView *)player)->impulseFlags = 0;
     ((Shared_ActorView *)player)->field11CC = 0;
     ((Shared_ActorView *)player)->field1218 = 0;
     for (i = 0; i < 8; i++) {
@@ -319,10 +319,10 @@ void Player_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447BB
     ((Shared_ActorView *)player)->field12C4 = 0;
     ((Shared_ActorView *)player)->field12C8 = 0;
     ((Shared_ActorView *)player)->field1334 = 0;
-    ((Shared_ActorView *)player)->field13B4 = D_800C9684;
+    ((Shared_ActorView *)player)->animationStateTable = g_playerActionStateHandlers;
     ((Shared_ActorView *)player)->field11E8 = 0;
-    func_8021A78C_de(player);
-    ((Shared_ActorView *)player)->field16D4 = 0;
+    Playerai_InitializeMovementAndAim(player);
+    ((Shared_ActorView *)player)->pickupEffectToggle = 0;
     ((Shared_ActorView *)player)->field16D8 = 0;
     ItemMenu_ResetEntries(&((Shared_ActorView *)player)->record);
 }
@@ -331,5 +331,5 @@ void Player_ActivatePlayerAtSpawn(struct ActorCode80447BB0 *actor, s32 character
     actor->part->active = 1;
     Player_ResetPlayerForRound(actor, character, 1);
     Actor_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);
-    Player_PlacePlayerAtSpawnPoint(actor, D_8011FAC0.selector, 0, 1);
+    Player_PlacePlayerAtSpawnPoint(actor, g_gameSession.selector, 0, 1);
 }

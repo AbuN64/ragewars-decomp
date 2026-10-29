@@ -24,18 +24,18 @@ s32 CCollision_IntersectFrontPlaneFraction(void *poly, void *start, void *segmen
     f32 hitFraction;
     s32 result;
 
-    if (((struct MeasuredRecAt8V3 *)(poly))->value == 0) {
+    if (((struct CollisionPlaneEnabledView *)(poly))->value == 0) {
         return 0;
     }
     Graphu64_SubtractVectors(segmentDirection, segmentEnd, start);
-    normalDotDirection = (((struct MeasuredRecAt48V1 *)(poly))->value * segmentDirection[0]) + (((struct Measured *)(poly))->value * segmentDirection[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * segmentDirection[2]);
+    normalDotDirection = (((struct CollisionPlaneNormalXView *)(poly))->value * segmentDirection[0]) + (((struct Measured *)(poly))->value * segmentDirection[1]) + (((struct CollisionPlaneNormalZView *)(poly))->value * segmentDirection[2]);
     result = 0;
     if (!(normalDotDirection >= (f32)0)) {
         Graphu64_SubtractVectors(planeToStart, start, poly + 0x18);
         result = 1;
-        hitFraction = -((((struct MeasuredRecAt48V1 *)(poly))->value * planeToStart[0]) + (((struct Measured *)(poly))->value * planeToStart[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * planeToStart[2])) / normalDotDirection;
+        hitFraction = -((((struct CollisionPlaneNormalXView *)(poly))->value * planeToStart[0]) + (((struct Measured *)(poly))->value * planeToStart[1]) + (((struct CollisionPlaneNormalZView *)(poly))->value * planeToStart[2])) / normalDotDirection;
     } else {
-        hitFraction = D_800C3740_de;
+        hitFraction = g_frontPlaneIntersectionInitialFraction;
     }
     *outputFraction = hitFraction;
     return result;
@@ -48,18 +48,18 @@ s32 CCollision_IntersectFrontPlanePoint(void *contactPlane, void *segmentStart, 
     f32 normalDotDirection;
     s32 intersectsPlane;
 
-    if (((struct MeasuredRecAt8V3 *)(contactPlane))->value == 0) {
+    if (((struct CollisionPlaneEnabledView *)(contactPlane))->value == 0) {
         intersectsPlane = 0;
     } else {
         Graphu64_SubtractVectors(segmentDirection, segmentEnd, segmentStart);
-        normalDotDirection = (((struct MeasuredRecAt48V1 *)(contactPlane))->value * segmentDirection[0]) + (((struct Measured *)(contactPlane))->value * segmentDirection[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(contactPlane))->value * segmentDirection[2]);
+        normalDotDirection = (((struct CollisionPlaneNormalXView *)(contactPlane))->value * segmentDirection[0]) + (((struct Measured *)(contactPlane))->value * segmentDirection[1]) + (((struct CollisionPlaneNormalZView *)(contactPlane))->value * segmentDirection[2]);
         intersectsPlane = 0;
         if (normalDotDirection >= (f32)0) {
-            hitFraction = D_800C3744_de;
+            hitFraction = g_frontPlaneIntersectionFallbackFraction;
         } else {
             Graphu64_SubtractVectors(planeToStart, segmentStart, contactPlane + 0x18);
             intersectsPlane = 1;
-            hitFraction = -((((struct MeasuredRecAt48V1 *)(contactPlane))->value * planeToStart[0]) + (((struct Measured *)(contactPlane))->value * planeToStart[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(contactPlane))->value * planeToStart[2])) / normalDotDirection;
+            hitFraction = -((((struct CollisionPlaneNormalXView *)(contactPlane))->value * planeToStart[0]) + (((struct Measured *)(contactPlane))->value * planeToStart[1]) + (((struct CollisionPlaneNormalZView *)(contactPlane))->value * planeToStart[2])) / normalDotDirection;
         }
     }
     if (intersectsPlane != 0) {
@@ -70,7 +70,7 @@ s32 CCollision_IntersectFrontPlanePoint(void *contactPlane, void *segmentStart, 
 }
 
 /* extern */
-s32 CCollision_IsPointInsidePolygon(func_80204468_S3 *poly, void *testPoint) {
+s32 CCollision_IsPointInsidePolygon(LinkedWorldFlagsView *poly, void *testPoint) {
     f32 edgePlaneNormal[3];
     f32 edgeVector[3];
     f32 vertexToPoint[3];

@@ -6,7 +6,7 @@
 #include "COMMON/ALDELAY28.H"
 
 /* seqplayer_4.c */
-extern char D_800C7440;
+extern char g_sequencePlayerAssertText;
 extern char g_audioSeqplayerText;
 
 void *__lookupSoundQuick(void *seqPlayer, s32 noteKey, s32 noteVelocity, s32 channelNumber) {
@@ -23,7 +23,7 @@ void *__lookupSoundQuick(void *seqPlayer, s32 noteKey, s32 noteVelocity, s32 cha
     high = table->soundCount;
     low = 1;
     if (table == 0) {
-        Audio_Assert(&D_800C7440, &g_audioSeqplayerText, 0x376);
+        Audio_Assert(&g_sequencePlayerAssertText, &g_audioSeqplayerText, 0x376);
     }
 
     if (high > 0) {
@@ -127,7 +127,7 @@ void __initChanState(void *playerObject) {
         c7f = 0x7F;
         c5 = 5;
         cc8 = 0xC8;
-        val = D_800C74CC_de;
+        val = g_sequenceChannelInitialOscillatorValue;
         do {
             off = i << 4;
             player->chanState[i].instrument = 0;
@@ -155,5 +155,5 @@ void __resetPerfChanState(void *playerObject, s32 index) {
     player->chanState[index].priority = 5;
     player->chanState[index].sustain = 0;
     player->chanState[index].bendRange = 0xC8;
-    player->chanState[index].pitchBend = D_800C74D0_de;
+    player->chanState[index].pitchBend = g_sequenceInitialPitchBend;
 }

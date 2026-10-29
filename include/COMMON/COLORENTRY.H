@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern float D_800C52F8_de;
+extern float g_transitionAlphaUnsignedConversionBase;
 
 
 struct StateSceneUpdateStaticEventInstances;
@@ -13,9 +13,9 @@ struct StateSceneUpdateStaticEventInstances;
 struct StateSceneUpdateStaticEventInstances {
     char pad[0xB4C];
     s32 values[64];
-    s32 unkC4C;
+    s32 trackedInstanceCount;
     char padc50[0x1A6CC];
-    f32 unk1B31C;
+    f32 eventPhase;
 };
 
 
@@ -42,27 +42,27 @@ typedef struct ObjectCSceneStartEventClips ObjectCSceneStartEventClips;
 struct Container;
 typedef struct Container Container;
 
-struct RecordRecAtE4;
-typedef struct RecordRecAtE4 RecordRecAtE4;
+struct SceneActorMatchRecord;
+typedef struct SceneActorMatchRecord SceneActorMatchRecord;
 
-struct Sub18;
-struct Sub18 {
-    s32 unk0;
+struct SceneActorMatchDescriptor;
+struct SceneActorMatchDescriptor {
+    s32 kindId;
     char pad4[8];
-    s16 unkC;
+    s16 teamId;
 };
-struct RecordRecAtE4;
-struct Sub18;
-struct RecordRecAtE4 {
+struct SceneActorMatchRecord;
+struct SceneActorMatchDescriptor;
+struct SceneActorMatchRecord {
     char pad0[0x18];
-    struct Sub18 *unk18;
+    struct SceneActorMatchDescriptor *kindDescriptor;
     char pad1C[0xC8];
-    u16 unkE4;
+    u16 modelId;
     char padE6[0x2E8 - 0xE6];
 };
 
 struct Container;
-struct RecordRecAtE4;
+struct SceneActorMatchRecord;
 
 
 
@@ -81,34 +81,34 @@ typedef struct ColorEntry ColorEntry;
 
 
 
-struct ObjRecAt78V1;
+struct ScenePackSectionTableView;
 
-struct ObjRecAt10BC;
-typedef struct ObjRecAt10BC ObjRecAt10BC;
+struct SceneActiveResourceCountView;
+typedef struct SceneActiveResourceCountView SceneActiveResourceCountView;
 
-struct ObjRecAt10BC;
-
-
+struct SceneActiveResourceCountView;
 
 
 
 
-struct ObjRecAt7C;
 
 
-struct ObjRecAt78V1;
-typedef struct ObjRecAt78V1 ObjRecAt78V1;
+struct SceneNestedPackSectionTableView;
+
+
+struct ScenePackSectionTableView;
+typedef struct ScenePackSectionTableView ScenePackSectionTableView;
 
 
 
-extern float D_800C5300_de;
+extern float g_nearestRouteFrameAbsentIndex;
 
 struct OwnerSceneUnlockActiveSectionResources;
 
 
 
-struct ObjRecAt7C;
-typedef struct ObjRecAt7C ObjRecAt7C;
+struct SceneNestedPackSectionTableView;
+typedef struct SceneNestedPackSectionTableView SceneNestedPackSectionTableView;
 
 
 /* Clip section 1 has a stride/count header and 0x38-byte pose records.

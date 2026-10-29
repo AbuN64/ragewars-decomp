@@ -1,6 +1,6 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_decoder_quantizer_steps_us_rev1[64] = {
+unsigned int g_audioDecodetransformblockDataFloatConstantWords[64] = {
     0x379837F1, 0x37B504F3, 0x37D744FD, 0x38000000, 0x381837F0, 0x383504F3, 0x385744FD, 0x38800000,
     0x389837F0, 0x38B504F3, 0x38D744FD, 0x39000000, 0x393504F3, 0x391837F0, 0x395744FD, 0x39800000,
     0x399837F0, 0x39B504F3, 0x39D744FD, 0x3A000000, 0x3A1837F0, 0x3A3504F3, 0x3A5744FD, 0x3A800000,

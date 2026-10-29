@@ -1,6 +1,6 @@
 #ifndef FRONTEND_FRONTEND_HANDLETABOPTIONSSHORTCUT_H
 #define FRONTEND_FRONTEND_HANDLETABOPTIONSSHORTCUT_H
-#include "COMMON/RECRECAT4.H"
-extern s32 Frontend_DispatchCompactOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-extern s32 Frontend_DispatchTabOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
+extern s32 Frontend_DispatchCompactOptionsEvent(void *eventTarget, s32 eventId, s32 eventCode, s32 eventValue, s32 repeatCount);
+extern s32 Frontend_DispatchTabOptionsEvent(void *eventTarget, s32 eventId, s32 eventCode, s32 eventValue, s32 repeatCount);
 #endif

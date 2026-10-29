@@ -2,12 +2,12 @@
 
 /* 802BE040_29.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_802B9F48_eu_padding_BAB48[8] = { 0xAF, 0xBF, 0x00, 0x30, 0xAF, 0xB0, 0x00, 0x18 };
+unsigned char g_SiaccessTrailingBytesBlock2[8] = { 0xAF, 0xBF, 0x00, 0x30, 0xAF, 0xB0, 0x00, 0x18 };
 #endif
 
 /* DATA_802B5458.CPP */
 #if defined(VERSION_EU_X)
-unsigned char D_auto_func_802B2724_eu_x_padding_B3324[12] = { 0x8C, 0x44, 0x00, 0x0C, 0x8C, 0x82, 0x00, 0x08, 0x00, 0x40, 0xF8, 0x09 };
+unsigned char g_SiaccessTrailingBytes[12] = { 0x8C, 0x44, 0x00, 0x0C, 0x8C, 0x82, 0x00, 0x08, 0x00, 0x40, 0xF8, 0x09 };
 #endif
 
 /* DATA_802B5494.CPP */
@@ -18,7 +18,7 @@ char func_802B03C4_de_padding_B6094[12] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_802B03C4_de_padding_B6094 */
-unsigned int D_blob_phase2_34596ceade2f95c08377[3] = {
+unsigned int g_SiaccessEncodedWords[3] = {
     0x00431021, 0xA050000A, 0x8E510064,
 };
 #endif

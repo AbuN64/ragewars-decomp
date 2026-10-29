@@ -11,17 +11,17 @@
                                                   /* size = 0x18 */
 
 s32 Libsn_DisableInterrupts(void) {
-    s32 temp_v0;
+    s32 savedStatus;
 
-    temp_v0 = Libgultra_TrwGetSr();
-    Libgultra_TrwSetSr(temp_v0 & ~1);
-    return temp_v0 & 1;
+    savedStatus = Libgultra_TrwGetSr();
+    Libgultra_TrwSetSr(savedStatus & ~1);
+    return savedStatus & 1;
 }
 
                                                   /* size = 0x18 */
 
-void Libsn_RestoreInterruptEnable(s32 arg0) {
-    Libgultra_TrwSetSr(Libgultra_TrwGetSr() | arg0);
+void Libsn_RestoreInterruptEnable(s32 savedInterruptEnable) {
+    Libgultra_TrwSetSr(Libgultra_TrwGetSr() | savedInterruptEnable);
 }
 
 void Libsn_WritePortWord(s32 address, s32 value) {

@@ -1,4 +1,4 @@
-#include "COMMON/S1_6.H"
+#include "COMMON/RESERVED_SHARED_DECLARATIONS.H"
 #include "FRONTEND/FRONTEND_OPENGAMEPLAYFRONTEND.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -17,7 +17,7 @@ extern void InitFrontendMenus(void);
 extern void SmXlate_SwitchScreen(int);
 
 void Frontend_OpenGameplayFrontend(void) {
-    
+
 #if defined(VERSION_EU)
 Tsmos_InitializeEuropeanFrontend
 #else
@@ -28,7 +28,7 @@ InitFrontendMenus
 }
 
 /* Allocates menu state, selects the language-dependent title and enables the appropriate menu item. */
-extern s32 *D_800E5550;
+extern s32 *g_pauseMenuState;
 extern s32 *Cache_AllocateMemory(s32);
 extern void Tsmos_ActivateControllerState(void); extern void Widget_SetWidgetFlag100(s32, s32);
 extern s32 Frontend_GetScreenMode(void),ScenarioSetup_IsCupSelected(void);
@@ -38,10 +38,10 @@ enum { MENU_80435D14_62 = 62 };
 enum { MENU_80435D14_62 = 64 };
 #endif
 s32 Frontend_CreatePauseMenu(MenuWidget *root) {
-    s32 *temp_v0;
-    temp_v0 = Cache_AllocateMemory(0x14);
-    D_800E5550 = temp_v0;
-    *temp_v0 = 0;
+    s32 *pauseMenuState;
+    pauseMenuState = Cache_AllocateMemory(0x14);
+    g_pauseMenuState = pauseMenuState;
+    *pauseMenuState = 0;
     SoundElement_StopAudioExceptKey(-1);
     Control_SaveControllerSetup();
     if (Frontend_GetScreenMode() == 1) {
@@ -51,9 +51,9 @@ s32 Frontend_CreatePauseMenu(MenuWidget *root) {
         root->x = 0x69;
     }
     Tsmos_ActivateControllerState();
-    if ((D_801462C8.controllerMode != 0) || (ScenarioSetup_IsCupSelected() == 0)) {
+    if ((g_gameSettings.controllerMode != 0) || (ScenarioSetup_IsCupSelected() == 0)) {
         Widget_SetWidgetFlag100((s32)Node_FindWidgetByResourceId(root, MENU_80435D14_62), 1);
     }
-    D_8011FAC0.clockPaused = 1;
+    g_gameSession.clockPaused = 1;
     return 0;
 }

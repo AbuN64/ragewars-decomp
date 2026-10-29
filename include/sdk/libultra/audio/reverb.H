@@ -5,7 +5,7 @@ struct CallbackStateC {
     unsigned char padding_0[8];
     void (*callback)(void *, s32, s32);
 };
-struct IntegerState34 {
+struct AudioReverbParameterStateView {
     char pad0[0x18];
     s32 unk_18;
     char pad18[0x1C - 0x18 - sizeof(s32)];

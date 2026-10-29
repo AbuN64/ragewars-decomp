@@ -28,7 +28,7 @@
 
 
 
-extern void Node_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to);
+extern void Node_ReplaceNodeRefs(WidgetReferenceNodeView *node, void *from, void *to);
 extern void *Cache_AllocateMemory(s32 size);
 
 /* Appends to a menu: passes the next free 20-byte entry at offset 0x48, selected by the count at
@@ -39,7 +39,7 @@ extern void *Cache_AllocateMemory(s32 size);
 
 extern u8 *XPlus_CopyString(u8 *, u8 *);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3400, an actor kind at D_800E3404 and a handler at D_800E3408: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_listButtonEventIds, an actor kind at g_listButtonEventActorKinds and a handler at g_listButtonEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -56,7 +56,7 @@ extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, Qua
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct CacheResourceBlockView *clip);
 
 
 extern void Widget_DrawVisibleSiblings(void *, Args);
@@ -86,7 +86,7 @@ extern void Widget_DrawVisibleSiblings(void *, Args);
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3460, an actor kind at D_800E3464 and a handler at D_800E3468: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_buttonWidgetEventIds, an actor kind at g_buttonWidgetEventActorKinds and a handler at g_buttonWidgetEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -100,20 +100,20 @@ extern void Widget_DrawVisibleSiblings(void *, Args);
 /* Releases the supplied object through Cache_FreeMemory and returns zero. */
 
 
-MenuListWidget *SmpButton_CreateListWidget(s32 arg0, s32 arg1) {
+MenuListWidget *SmpButton_CreateListWidget(s32 listWidgetId, s32 itemWidgetId) {
     MenuListWidget *source;
     void *context;
     MenuListWidget *result;
     void *child;
 
-    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), listWidgetId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x118);
     XPlus_FillBytes(result, 0, 0x118);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB64;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    child = Node_FindWidgetByResourceId(context, arg1 & 0xFFFF);
+    child = Node_FindWidgetByResourceId(context, itemWidgetId & 0xFFFF);
     result->owner = child;
     result->index = 0;
     result->count = 0;
@@ -146,23 +146,23 @@ void SmpButton_AppendListText(struct MenuListWidget *menu, u8 *text) {
     menu->count++;
 }
 
-s32 SmpButton_DispatchListEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpButton_DispatchListEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E3408 != 0) {
+    if (g_listButtonEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E3408;
+        entry = (char *)&g_listButtonEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E3400)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3404)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_listButtonEventIds)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_listButtonEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
@@ -202,8 +202,8 @@ void SmpButton_DrawListWidget(Shared_Item *widget, Args args) {
 
 
 
-s32 SmpButton_DimListItems(struct MenuRecAt54 *menu) {
-    struct ItemRecAt10 *item;
+s32 SmpButton_DimListItems(struct SmpControlItemListView *menu) {
+    struct SmpControlItemView *item;
 
     for (item = menu->items; item != 0; item = item->next) {
         if (item->kind != 8) {
@@ -219,8 +219,8 @@ s32 SmpButton_DimListItems(struct MenuRecAt54 *menu) {
 
 
 
-s32 SmpButton_HighlightListItems(struct MenuRecAt54 *menu) {
-    struct ItemRecAt10 *item;
+s32 SmpButton_HighlightListItems(struct SmpControlItemListView *menu) {
+    struct SmpControlItemView *item;
 
     for (item = menu->items; item != 0; item = item->next) {
         if (item->kind != 8) {
@@ -230,11 +230,11 @@ s32 SmpButton_HighlightListItems(struct MenuRecAt54 *menu) {
     return 0;
 }
 
-s32 SmpButton_DimListItemsWithSound(struct MenuRecAt54 *arg0) {
-    struct ItemRecAt10 *p;
+s32 SmpButton_DimListItemsWithSound(struct SmpControlItemListView *list) {
+    struct SmpControlItemView *p;
 
     SoundElement_PlayFlatSound(0xE74);
-    p = arg0->items;
+    p = list->items;
     if (p != 0) {
         do {
             if (p->kind != 8) {
@@ -246,8 +246,8 @@ s32 SmpButton_DimListItemsWithSound(struct MenuRecAt54 *arg0) {
     return 0;
 }
 
-s32 SmpButton_SelectNextListEntry(struct MenuRecAt114 *menu, void *second, void *third, s32 active) {
-    struct OwnerRecAt38 *owner;
+s32 SmpButton_SelectNextListEntry(struct MenuKeyListView *menu, void *second, void *third, s32 active) {
+    struct SmpButtonOwnerView *owner;
 
     if (active == 1) {
         owner = menu->owner;
@@ -261,8 +261,8 @@ s32 SmpButton_SelectNextListEntry(struct MenuRecAt114 *menu, void *second, void 
     return 0;
 }
 
-s32 SmpButton_SelectPreviousListEntry(struct MenuRecAt114 *menu, void *second, void *third, s32 active) {
-    struct OwnerRecAt38 *owner;
+s32 SmpButton_SelectPreviousListEntry(struct MenuKeyListView *menu, void *second, void *third, s32 active) {
+    struct SmpButtonOwnerView *owner;
 
     if (active == 1) {
         owner = menu->owner;
@@ -282,15 +282,15 @@ s32 SmpButton_DestroyListController(void *allocation) {
 }
 
 void SmpButton_RegisterButtonClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB61, D_0041B340, D_0041B3D0, 3);
+    SmSmngr_RegisterElementHandlers(0xB61, g_SmpButton_DispatchButtonEventAddress, g_SmpButton_DrawButtonWidgetAddress, 3);
 }
 
-void SmpButton_WrapButtonWidget(s32 arg0) {
+void SmpButton_WrapButtonWidget(s32 widgetResourceId) {
     RecordSmpButtonWrapButtonWidget *source;
     void *context;
     RecordSmpButtonWrapButtonWidget *result;
 
-    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), widgetResourceId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x44);
     XPlus_FillBytes(result, 0, 0x44);
@@ -320,23 +320,23 @@ void SmpButton_EnsureButtonWrapper(RecordSmpButtonEnsureButtonWrapper *source) {
     Node_ReplaceNodeRefs(context, source, result);
 }
 
-s32 SmpButton_DispatchButtonEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpButton_DispatchButtonEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E3468 != 0) {
+    if (g_buttonWidgetEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E3468;
+        entry = (char *)&g_buttonWidgetEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E3460)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3464)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_buttonWidgetEventIds)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_buttonWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
@@ -376,8 +376,8 @@ void SmpButton_DrawButtonWidget(Shared_Item *widget, Args args) {
 
 
 
-s32 SmpButton_DimButtonItems(struct MenuRecAt54 *menu) {
-    struct ItemRecAt10 *item;
+s32 SmpButton_DimButtonItems(struct SmpControlItemListView *menu) {
+    struct SmpControlItemView *item;
 
     for (item = menu->items; item != 0; item = item->next) {
         if (item->kind != 8) {
@@ -393,8 +393,8 @@ s32 SmpButton_DimButtonItems(struct MenuRecAt54 *menu) {
 
 
 
-s32 SmpButton_HighlightButtonItems(struct MenuRecAt54 *menu) {
-    struct ItemRecAt10 *item;
+s32 SmpButton_HighlightButtonItems(struct SmpControlItemListView *menu) {
+    struct SmpControlItemView *item;
 
     for (item = menu->items; item != 0; item = item->next) {
         if (item->kind != 8) {
@@ -404,11 +404,11 @@ s32 SmpButton_HighlightButtonItems(struct MenuRecAt54 *menu) {
     return 0;
 }
 
-s32 SmpButton_DimButtonItemsWithSound(OwnerRecAt44 *arg0) {
+s32 SmpButton_DimButtonItemsWithSound(MenuOverlayOwnerView *button) {
     void *p;
 
     SoundElement_PlayFlatSound(0xE74);
-    p = arg0->root;
+    p = button->root;
     if (p != 0) {
         do {
             if ((u16)((NodeMenuCreateOverlayNode *)p)->kind != 8) {
@@ -427,7 +427,7 @@ int SmpButton_DestroyButtonController(void *object)
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_8041B65C[1] = {
+unsigned int k_SmpButtonEncodedWords[1] = {
     0x4D4F5645,
 };
 #endif

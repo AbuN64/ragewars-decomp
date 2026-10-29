@@ -1,5 +1,5 @@
 #include "COMMON/OBJRECAT18V6.H"
-#include "SYSTEM/802A6AC0.H"
+#include "SYSTEM/TIMED_EFFECT_AND_ITEM_MENU_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
@@ -7,11 +7,11 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/EXTERNS_18.H"
+#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/ALFXPARAM.H"
 #include "AUDIO/SIRAWWRITE.H"
 #include "RENDER/SETN64_STARTSESSIONTHREADS.H"
@@ -36,7 +36,7 @@ static inline void toggle(ToggleMenu *menu, MenuItem *item) {
     }
 }
 
-void ItemMenu_UpdateToggleMenu(ToggleMenu *menu, Input_func_802A65E0_de *input) {
+void ItemMenu_UpdateToggleMenu(ToggleMenu *menu, ToggleMenuPlayerInputView *input) {
     s16 bounce;
     s32 i;
     menu->frame++;
@@ -100,46 +100,46 @@ void ItemMenu_UpdateToggleMenu(ToggleMenu *menu, Input_func_802A65E0_de *input) 
 /* Clears a record: its four 0x38-byte entries through an inline per-entry clear, its two leading
    flag bytes and trailing words, and sets the word at 0xE6 to -5. */
 static inline void clear_entry(CItem *e) {
-    e->unk4 = 0;
-    e->unk0 = 0;
-    e->unkD = 0;
-    e->unk18 = 0;
-    e->unk1C = 0;
+    e->state = 0;
+    e->active = 0;
+    e->generation = 0;
+    e->transitionStep = 0;
+    e->transitionFrame = 0;
 }
 
-/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through SetN64_CompareByteStrings (recording the result in D_801470B0 and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from D_800E4000 to D_80166000, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through Audio_InitializeOperatingSystem and SetN64_StartSessionThreads. */
+/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through SetN64_CompareByteStrings (recording the result in g_systemBootMarkerComparison and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from g_graphicsTaskYieldBuffer to g_runtimeHeapStart, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through Audio_InitializeOperatingSystem and SetN64_StartSessionThreads. */
 
 extern char D_800F41F0;
 
-extern s32 D_800E4000;
+extern s32 g_graphicsTaskYieldBuffer;
 
-extern s32 D_80166000;
+extern s32 g_runtimeHeapStart;
 
 extern void SetN64_CopyString(char *marker, char *name);
 
 static inline s32 is_restorable(u32 address) {
-    if (address >= (u32)&D_800CDD10 && address < (u32)&D_800CDD10 + 0x10) {
+    if (address >= (u32)&g_systemBootMarker && address < (u32)&g_systemBootMarker + 0x10) {
         return 0;
     }
-    if (address == (u32)&D_801470B0) {
+    if (address == (u32)&g_systemBootMarkerComparison) {
         return 0;
     }
-    if (D_801470B0 != 0) {
+    if (g_systemBootMarkerComparison != 0) {
         return 1;
     }
-    if (address >= (u32)&D_8010BC40 && address < (u32)&D_8010BC40 + 0x430) {
+    if (address >= (u32)&g_controllerActorSnapshot && address < (u32)&g_controllerActorSnapshot + 0x430) {
         return 0;
     }
-    if (address >= (u32)&D_801462C8 && address < (u32)&D_801462C8 + 0x584) {
+    if (address >= (u32)&g_gameSettings && address < (u32)&g_gameSettings + 0x584) {
         return 0;
     }
-    if (address >= (u32)&D_800F91F0 && address < (u32)&D_800F91F0 + 0x5800) {
+    if (address >= (u32)&g_worldSnapshotNoteData && address < (u32)&g_worldSnapshotNoteData + 0x5800) {
         return 0;
     }
     if (address >= (u32)&D_800F41F0 && address < (u32)&D_800F41F0 + 0x5000) {
         return 0;
     }
-    if (address >= (u32)&D_801462C8 + 0x5D8 && address <= (u32)&D_801462C8 + 0x688) {
+    if (address >= (u32)&g_gameSettings + 0x5D8 && address <= (u32)&g_gameSettings + 0x688) {
         return 0;
     }
     return 1;
@@ -147,7 +147,7 @@ static inline s32 is_restorable(u32 address) {
 
 /* Draw active toggle-menu items in activation order, then draw the open menu
 * with a pulsing highlight on its selected item. */
-void ItemMenu_DrawEntries(ToggleMenu *panel, Input_func_802A65E0_de *player) {
+void ItemMenu_DrawEntries(ToggleMenu *panel, ToggleMenuPlayerInputView *player) {
     MenuItem *sorted[4];
     s32 width;
     s32 height;
@@ -278,7 +278,7 @@ void ItemMenu_ResetEntries(CItemMenu *rec) {
     for (i = 0; i < 4; i++) {
         clear_entry(&rec->entries[i]);
     }
-    rec->unk0 = 0;
+    rec->active = 0;
     rec->m_ModePos = 0;
     rec->m_LastItemPos = 0;
     rec->m_ItemAlphaFade = -5;
@@ -286,23 +286,23 @@ void ItemMenu_ResetEntries(CItemMenu *rec) {
 }
 
 /* Finds or allocates one of four records and updates its parameters. */
-s32 ItemMenu_SetEntry(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg5, s32 arg6, s32 arg7, s32 arg8) {
+s32 ItemMenu_SetEntry(char *menu, s32 entryValue, s32 entryKey, s32 imageResource, s32 imageFrame, f32 restoreValue, s32 restoreExtra, s32 selectCallbackAddress, s32 updateCallbackAddress) {
     s32 entryIndex;
     u32 key;
-    char *temp_v1;
-    CItem *var_v1;
-    CItem *var_v1_2;
+    char *entryStorage;
+    CItem *unusedPointer;
+    CItem *unusedPointer1;
     entryIndex = 0;
-    key = arg2 & 0xFFFF;
+    key = entryKey & 0xFFFF;
     for (entryIndex = 0; entryIndex < 4; entryIndex++) {
-        if (((CItemMenu *)arg0)->entries[entryIndex].unk0 != 0 &&
-            ((CItemMenu *)arg0)->entries[entryIndex].unkC == key) {
+        if (((CItemMenu *)menu)->entries[entryIndex].active != 0 &&
+            ((CItemMenu *)menu)->entries[entryIndex].key == key) {
             break;
         }
     }
     if (entryIndex == 4) {
         for (entryIndex = 0; entryIndex < 4; entryIndex++) {
-            if (((CItemMenu *)arg0)->entries[entryIndex].unk0 == 0) {
+            if (((CItemMenu *)menu)->entries[entryIndex].active == 0) {
                 break;
             }
         }
@@ -310,39 +310,39 @@ s32 ItemMenu_SetEntry(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 ar
             return 0;
         }
     }
-    temp_v1 = arg0 + ((entryIndex * 0x38) + 4);
-    ((CItemMenu *)arg0)->m_LastItemPos = entryIndex;
-    ((CItem *)(temp_v1))->unk0 = 1;
-    ((CItem *)(temp_v1))->unk8 = arg1;
-    ((CItem *)(temp_v1))->unkC = arg2;
-    ((CItem *)(temp_v1))->unk10 = arg3;
-    ((CItem *)(temp_v1))->unk14 = arg4;
-    ((CItem *)(temp_v1))->unk28 = arg5;
-    ((CItem *)(temp_v1))->unk2C = arg6;
-    ((CItem *)(temp_v1))->unk30 = arg7;
-    ((CItem *)(temp_v1))->unkD = (u8) (((CItem *)(temp_v1))->unkD + 1);
-    ((CItem *)(temp_v1))->unk34 = arg8;
+    entryStorage = menu + ((entryIndex * 0x38) + 4);
+    ((CItemMenu *)menu)->m_LastItemPos = entryIndex;
+    ((CItem *)(entryStorage))->active = 1;
+    ((CItem *)(entryStorage))->resource = entryValue;
+    ((CItem *)(entryStorage))->key = entryKey;
+    ((CItem *)(entryStorage))->imageResource = imageResource;
+    ((CItem *)(entryStorage))->imageFrameOrTextureHandle = imageFrame;
+    ((CItem *)(entryStorage))->restoreValue = restoreValue;
+    ((CItem *)(entryStorage))->restoreExtra = restoreExtra;
+    ((CItem *)(entryStorage))->selectCallbackAddress = selectCallbackAddress;
+    ((CItem *)(entryStorage))->generation = (u8) (((CItem *)(entryStorage))->generation + 1);
+    ((CItem *)(entryStorage))->updateCallbackOrTextureId = updateCallbackAddress;
     return 1;
 }
 
-s32 ItemMenu_IsSelectedEntryActive(void *arg0)
+s32 ItemMenu_IsSelectedEntryActive(void *menu)
 {
-  s32 var_a1;
-  s32 var_a2;
-  s8 *new_var;
-  var_a2 = 0;
-  var_a1 = 3;
+  s32 remainingEntries;
+  s32 activeEntryCount;
+  s8 *selectedEntry;
+  activeEntryCount = 0;
+  remainingEntries = 3;
   do
   {
-    new_var = ((s8 *) (arg0 + ((((struct OwnerRecAtE4 *)(arg0))->id) * 0x38))) + 4;
-    if ((*((s32 *) new_var)) != 0)
+    selectedEntry = ((s8 *) (menu + ((((struct ItemMenuSelectionView *)(menu))->id) * 0x38))) + 4;
+    if ((*((s32 *) selectedEntry)) != 0)
     {
-      var_a2 += 1;
+      activeEntryCount += 1;
     }
-    var_a1 -= 1;
+    remainingEntries -= 1;
   }
-  while (var_a1 >= 0);
-  return var_a2 != 0;
+  while (remainingEntries >= 0);
+  return activeEntryCount != 0;
 }
 
 /* Moves a menu's cursor at 0xE4 over its four 0x38-byte entries, forward when arg1 is zero and backward otherwise, wrapping around and skipping entries whose word at 0x4 is zero; returns the entry landed on. */
@@ -365,26 +365,26 @@ s32 ItemMenu_AdvanceSelection(MenuCode802A6AC0 *menu, s32 backward) {
     return cursor;
 }
 
-void ItemMenu_ClearEntry(CItem *arg0) {
-    arg0->unk4 = 0;
-    arg0->unk0 = 0;
-    arg0->unkD = 0;
-    arg0->unk18 = 0;
-    arg0->unk1C = 0;
+void ItemMenu_ClearEntry(CItem *entry) {
+    entry->state = 0;
+    entry->active = 0;
+    entry->generation = 0;
+    entry->transitionStep = 0;
+    entry->transitionFrame = 0;
 }
 
-void ItemMenu_ToggleEntry(void *arg0, void *arg1) {
-    s32 temp_v0;
-    temp_v0 = (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_4) == 0;
-    (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_4) = temp_v0;
-    if (temp_v0 != 0) {
-        (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_18) = 5;
-        (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_1C) = (s32) (((struct StateFrontendScrollResultsBackward *) ((s8 *) arg1))->count);
-        (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_20) = (f32) (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_28);
-        (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_24) = (s32) (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_2C);
+void ItemMenu_ToggleEntry(void *entry, void *menu) {
+    s32 enabled;
+    enabled = (((struct ItemMenuToggleStateView *) ((s8 *) entry))->state) == 0;
+    (((struct ItemMenuToggleStateView *) ((s8 *) entry))->state) = enabled;
+    if (enabled != 0) {
+        (((struct ItemMenuToggleStateView *) ((s8 *) entry))->transitionStep) = 5;
+        (((struct ItemMenuToggleStateView *) ((s8 *) entry))->transitionFrame) = (s32) (((struct StateFrontendScrollResultsBackward *) ((s8 *) menu))->count);
+        (((struct ItemMenuToggleStateView *) ((s8 *) entry))->value) = (f32) (((struct ItemMenuToggleStateView *) ((s8 *) entry))->restoreValue);
+        (((struct ItemMenuToggleStateView *) ((s8 *) entry))->extra) = (s32) (((struct ItemMenuToggleStateView *) ((s8 *) entry))->restoreExtra);
         return;
     }
-    (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_18) = -5;
+    (((struct ItemMenuToggleStateView *) ((s8 *) entry))->transitionStep) = -5;
 }
 
 s32 ItemMenu_RestoreBootMemory(void) {
@@ -396,13 +396,13 @@ s32 ItemMenu_RestoreBootMemory(void) {
     char name[16];
     *(MarkerItemMenuRestoreBootMemory *)name = s_systembootdoneText;
     XPlus_FillMemory(&name[15], 0, 1);
-    if (((s32 (*)(char *, char *))SetN64_CompareByteStrings)(&D_800CDD10, name) == 0) {
-        D_801470B0 = 0;
+    if (((s32 (*)(char *, char *))SetN64_CompareByteStrings)(&g_systemBootMarker, name) == 0) {
+        g_systemBootMarkerComparison = 0;
     } else {
-        D_801470B0 = 1;
-        SetN64_CopyString(&D_800CDD10, name);
+        g_systemBootMarkerComparison = 1;
+        SetN64_CopyString(&g_systemBootMarker, name);
     }
-    if (D_801470B0 == 0) {
+    if (g_systemBootMarkerComparison == 0) {
         src = (u32 *)0xB0001000;
         dst = (u32 *)0x80000400;
         piStatus = (u32 *)0xA4600010;
@@ -418,7 +418,7 @@ s32 ItemMenu_RestoreBootMemory(void) {
             src++;
         } while (count-- != 0);
     }
-    for (dst = (u32 *)&D_800E4000; (u32)dst < (u32)&D_80166000; dst++) {
+    for (dst = (u32 *)&g_graphicsTaskYieldBuffer; (u32)dst < (u32)&g_runtimeHeapStart; dst++) {
         if (is_restorable((u32)dst | 0x80000000)) {
             *dst = 0;
         }
@@ -433,25 +433,25 @@ void func_802A754C_de(void) {
 
 s32 ItemMenu_IsRestorableAddress(u32 address) {
     address |= 0x80000000;
-    if (((address) >= (u32)&(D_800CDD10) && (address) < (u32)&(D_800CDD10) + (0x10)) || address == (u32)&D_801470B0) {
+    if (((address) >= (u32)&(g_systemBootMarker) && (address) < (u32)&(g_systemBootMarker) + (0x10)) || address == (u32)&g_systemBootMarkerComparison) {
         return 0;
     }
-    if (D_801470B0 != 0) {
+    if (g_systemBootMarkerComparison != 0) {
         return 1;
     }
-    if (((address) >= (u32)&(D_8010BC40) && (address) < (u32)&(D_8010BC40) + (0x430))) {
+    if (((address) >= (u32)&(g_controllerActorSnapshot) && (address) < (u32)&(g_controllerActorSnapshot) + (0x430))) {
         return 0;
     }
-    if (((address) >= (u32)&(D_801462C8) && (address) < (u32)&(D_801462C8) + (0x584))) {
+    if (((address) >= (u32)&(g_gameSettings) && (address) < (u32)&(g_gameSettings) + (0x584))) {
         return 0;
     }
-    if (((address) >= (u32)&(D_800F91F0) && (address) < (u32)&(D_800F91F0) + (0x5800))) {
+    if (((address) >= (u32)&(g_worldSnapshotNoteData) && (address) < (u32)&(g_worldSnapshotNoteData) + (0x5800))) {
         return 0;
     }
     if (((address) >= (u32)&(D_800F41F0) && (address) < (u32)&(D_800F41F0) + (0x5000))) {
         return 0;
     }
-    if (address >= (u32)&D_801462C8.counters && address <= (u32)&D_801462C8.counters + 0xB0) {
+    if (address >= (u32)&g_gameSettings.counters && address <= (u32)&g_gameSettings.counters + 0xB0) {
         return 0;
     }
     return 1;

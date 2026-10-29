@@ -3,7 +3,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
 #include "TYPES.H"
@@ -11,8 +11,8 @@
 #include "ENGINE/SCENE_DRAWOPAQUEACTORS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-char *Scene_GetLinkedResourceSection(void *arg0, s32 resourceId) {
-    return SetN64_GetPackSection((((struct ObjectLinks74 *) ((s8 *) arg0))->unk_70), resourceId);
+char *Scene_GetLinkedResourceSection(void *world, s32 resourceId) {
+    return SetN64_GetPackSection((((struct ScenePackResourceView *) ((s8 *) world))->unk_70), resourceId);
 }
 
 /** Return an indexed record from the table at object offset 0xA0. */
@@ -34,7 +34,7 @@ extern Gfx *g_displayListCursor;
 
 extern void Gobjinst_DrawVisibleCachedActor(LevelActor *object, void *camera);
 
-void Scene_DrawOpaqueActors(SceneRecAt10C0 *scene, void *camera) {
+void Scene_DrawOpaqueActors(SceneActorUpdateLists *scene, void *camera) {
     LevelActor *object;
     s32 count;
     s32 i;
@@ -83,7 +83,7 @@ void Scene_DrawWorldParticles(s32 world, s32 view) {
     Geometry_FlushModelBatch();
 }
 
-s32 Scene_FindModelIdIndex(struct Shared_World *world, s32 arg1)
+s32 Scene_FindModelIdIndex(struct Shared_World *world, s32 modelId)
 {
   s32 count;
   s32 i;
@@ -91,14 +91,14 @@ s32 Scene_FindModelIdIndex(struct Shared_World *world, s32 arg1)
   void *base;
   s32 masked;
   base = world->modelIds;
-  count = ((struct TableRecAt8 *)(base))->count;
-  ptr = &((struct TableRecAt8 *)(base))->entries[0];
+  count = ((struct SceneModelIdTable *)(base))->count;
+  ptr = &((struct SceneModelIdTable *)(base))->entries[0];
   i = 0;
   if (count <= 0)
   {
     goto fail;
   }
-  masked = arg1 & 0xFFFF;
+  masked = modelId & 0xFFFF;
   loop_2:
   if ((*ptr) == masked)
   {
@@ -126,42 +126,42 @@ int Scene_GetModelIdAtIndex(void *world, int modelIndex) {
 
 
 extern void Gobjinst_LoadModel(ObjectSceneChangeInstanceModel *,s32,s32,s32);
-static inline s32 find(TableRecAt8 *table,u16 id) {
+static inline s32 find(SceneModelIdTable *table,u16 id) {
  s32 index=0,count; u16 *entry;entry=table->entries;count=table->count;
  if(count>0) { do {if(*entry==id) return index; index++;entry++;} while(index<count); }
  return -1;
 }
-void Scene_ChangeInstanceModel(BankRecAt94 *arg0,ObjectSceneChangeInstanceModel *draw,s32 modelId,s32 extra) {
+void Scene_ChangeInstanceModel(SceneModelBankView *modelBank,ObjectSceneChangeInstanceModel *draw,s32 modelId,s32 extra) {
  s32 index=0;
  if(draw->id!=modelId) {
- index=find(arg0->table,modelId);
- if(index!=-1){draw->index=index;draw->id=modelId;Gobjinst_LoadModel(draw,arg0->field54,arg0->field24,extra);}
+ index=find(modelBank->table,modelId);
+ if(index!=-1){draw->index=index;draw->id=modelId;Gobjinst_LoadModel(draw,modelBank->field54,modelBank->field24,extra);}
  }
 }
 
 
-void *Scene_GetModelRecordByIndexPointer(Shared_World *world, u16 *arg1) {
+void *Scene_GetModelRecordByIndexPointer(Shared_World *world, u16 *modelIndex) {
     s32 base;
     s32 idx;
 
-    if (arg1 == 0) {
+    if (modelIndex == 0) {
         return 0;
     }
     base = ((char *)SetN64_GetPackSection(world->modelSections, 0)) + 8;
-    idx = *arg1;
+    idx = *modelIndex;
     return (void *)(base + idx * 0x64);
 }
 
 
-u32 Scene_GetModelSectionTwoIndex(Shared_World *world, s32 arg1) {
+u32 Scene_GetModelSectionTwoIndex(Shared_World *world, s32 modelId) {
     s32 offset;
     s32 result;
 
-    if (arg1 == 0) {
+    if (modelId == 0) {
         return -1;
     }
     offset = ((char *)SetN64_GetPackSection(world->modelSections, 2)) + 8;
-    result = arg1 - offset;
+    result = modelId - offset;
     return (u32)result >> 5;
 }
 
@@ -171,16 +171,16 @@ u32 Scene_GetModelSectionTwoIndex(Shared_World *world, s32 arg1) {
 
 
 
-s32 Scene_GetModelSectionTwoRecord(void *world, s32 arg1) {
+s32 Scene_GetModelSectionTwoRecord(void *world, s32 modelId) {
     s32 raw;
     s32 base;
 
     raw = SetN64_GetPackSection(((Shared_World *)world)->modelSections, 2);
     base = raw + 8;
-    if (arg1 < 0 || arg1 >= ((StridedTable *)raw)->count) {
+    if (modelId < 0 || modelId >= ((StridedTable *)raw)->count) {
         return 0;
     }
-    return base + (arg1 << 5);
+    return base + (modelId << 5);
 }
 
 extern void SetN64_GetPackSectionSize(s32 table, s32 index);
@@ -188,7 +188,7 @@ extern void SetN64_GetPackSectionSize(s32 table, s32 index);
 
 
 
-void Scene_SetSecondaryLevelBit(struct Shared_World *world, s32 index, s32 arg2, s32 arg3) {
+void Scene_SetSecondaryLevelBit(struct Shared_World *world, s32 index, s32 bitIndex, s32 enabled) {
     void *table;
     u8 *base1;
     u8 *base2;
@@ -201,16 +201,16 @@ void Scene_SetSecondaryLevelBit(struct Shared_World *world, s32 index, s32 arg2,
     SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
-    mask = 1 << (arg2 & 7);
-    if (arg3 != 0) {
-        idx = arg2;
-        if (arg2 < 0) {
-            idx = arg2 + 7;
+    mask = 1 << (bitIndex & 7);
+    if (enabled != 0) {
+        idx = bitIndex;
+        if (bitIndex < 0) {
+            idx = bitIndex + 7;
         }
         base1[idx >> 3] |= mask;
         return;
     }
-    idx2 = arg2;
+    idx2 = bitIndex;
     if (idx2 < 0) {
         idx2 += 7;
     }
@@ -224,9 +224,9 @@ void func_8028B4C8_de(void) {
 
 
 
-void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32 enabled) {
-    void *field84;
-    s32 field1B40C;
+void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 bitIndex, s32 enabled) {
+    void *secondaryLevels;
+    s32 levelIndex;
     void *table;
     u8 *base1;
     u8 *base2;
@@ -234,23 +234,23 @@ void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32
     s32 idx;
     s32 idx2;
 
-    field84 = world->secondaryLevels;
-    field1B40C = world->level;
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field84, 0), field1B40C), 0);
+    secondaryLevels = world->secondaryLevels;
+    levelIndex = world->level;
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(secondaryLevels, 0), levelIndex), 0);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
-    mask = 1 << (arg1 & 7);
+    mask = 1 << (bitIndex & 7);
     if (enabled != 0) {
-        idx = arg1;
-        if (arg1 < 0) {
-            idx = arg1 + 7;
+        idx = bitIndex;
+        if (bitIndex < 0) {
+            idx = bitIndex + 7;
         }
         base1[idx >> 3] |= mask;
         return;
     }
-    idx2 = arg1;
+    idx2 = bitIndex;
     if (idx2 < 0) {
         idx2 += 7;
     }
@@ -262,16 +262,16 @@ void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32
 
 
 s32 Scene_TestCurrentSecondaryLevelBit(struct Shared_World *world, s32 bitIndex) {
-    void *field84;
-    s32 field1B40C;
+    void *secondaryLevels;
+    s32 levelIndex;
     void *table;
     u8 *stateBits;
     s32 mask;
     s32 i;
 
-    field84 = world->secondaryLevels;
-    field1B40C = world->level;
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field84, 0), field1B40C), 0);
+    secondaryLevels = world->secondaryLevels;
+    levelIndex = world->level;
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(secondaryLevels, 0), levelIndex), 0);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32) table, 1);
     stateBits = (u8 *) SetN64_GetPackSection(table, 1);

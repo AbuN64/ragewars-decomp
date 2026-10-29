@@ -1,6 +1,6 @@
 #include "COMMON/TARGET.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/802661FC.H"
+#include "SYSTEM/EVENT_DAMAGE_AND_IMPACT_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -9,11 +9,11 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "SYSTEM/EVENTS_COMPUTEDAMAGESCALE.H"
 extern void Events_ApplyDamageEvent(void *, s32, s32, Triple, struct IntPair, s32, s32, s32);
 
-/* Returns how strongly a blast at a position with a radius affects an actor: finds the shield covering the position (the held carrier shield D_801041F0 of the actor for an object target other than the two 0x402/0x404 types, otherwise Gobjinst_FindNearestBoneBounds's shield in D_80110570), reports it, scales by the shield factor unless friendly fire is off for team damage, and when falloff is asked returns zero for an invulnerable player's untouched full hit, zero beyond the radius plus the actor's width, or the scale times one minus the distance to the actor's body over that reach. */
+/* Returns how strongly a blast at a position with a radius affects an actor: finds the shield covering the position (the held carrier shield g_currentActorInstance of the actor for an object target other than the two 0x402/0x404 types, otherwise Gobjinst_FindNearestBoneBounds's shield in g_damageBoneBoundsShield), reports it, scales by the shield factor unless friendly fire is off for team damage, and when falloff is asked returns zero for an invulnerable player's untouched full hit, zero beyond the radius plus the actor's width, or the scale times one minus the distance to the actor's body over that reach. */
 
 
 
@@ -32,7 +32,7 @@ extern void Events_ApplyDamageEvent(void *, s32, s32, Triple, struct IntPair, s3
 
 
 
-extern Carrier D_801041F0;
+extern Carrier g_currentActorInstance;
 
 
 extern s32 Gobjinst_FindNearestBoneBounds(ActorEventsComputeDamageScale *, CVector3, Shield *);
@@ -43,7 +43,7 @@ extern f32 Gobjinst_GetActorRadius(ActorEventsComputeDamageScale *);
 
 extern f32 Graphu64_GetPointDistance(CVector3 *, CVector3 *);
 
-/* Spawns a hit effect when the target has a rider: turns the negated hit direction into the victim's frame through Player_TransformPointByViewOrOwnerMatrix, makes it relative to the victim rider's centre and converts it to a rotation, resolves the hit position on the attacker through InstHdr_CopyActorPositionAndModel, spawns effect 0xE9 there raised by D_800C9538 (size 3 for kind 5, otherwise 1), and starts effect 3 on the victim's emitter. */
+/* Spawns a hit effect when the target has a rider: turns the negated hit direction into the victim's frame through Player_TransformPointByViewOrOwnerMatrix, makes it relative to the victim rider's centre and converts it to a rotation, resolves the hit position on the attacker through InstHdr_CopyActorPositionAndModel, spawns effect 0xE9 there raised by k_playerEventClipHeightAndAngle (size 3 for kind 5, otherwise 1), and starts effect 3 on the victim's emitter. */
 
 
 
@@ -56,13 +56,13 @@ extern f32 Graphu64_GetPointDistance(CVector3 *, CVector3 *);
 
 
 
-extern f32 D_800C4450_de;
+extern f32 k_playerEventClipScale;
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 
 extern void Player_TransformPointByViewOrOwnerMatrix(SharedPlayer *, CVector3 *);
 
-extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(CVector3 *);
+extern struct CacheResourceBlockView Graphu64_BuildDirectionQuaternion(CVector3 *);
 
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32);
 
@@ -80,15 +80,15 @@ extern void CScene_StartEventClips(void *, void *, s32, Triple, f32, f32);
 
 
 
-extern void Events_UpdateNodeAtPosition(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern void Events_UpdateNodeAtPosition(s32 actor, s32 positionXWord, s32 positionYWord, s32 positionZWord, s32 enableNodeFlag);
 
-extern void *D_80140FE8_de;
+extern void *g_gameplayCameraList;
 
 extern s32 Gsky_ContainsVisiblePoint(NodeEventsStartCameraFadeAtPoint *cameraAddress, Triple testPoint);
 
 
 f32 Events_ComputeDamageScale(ActorEventsComputeDamageScale *self, Target *target, CVector3 position, f32 radius, s32 falloff, s32 flags, Shield **found) {
-    PlayerRecAt122C *player;
+    PlayerDamageFlagsView *player;
     s32 shielded;
     s32 scaled;
     s32 special;
@@ -103,32 +103,32 @@ f32 Events_ComputeDamageScale(ActorEventsComputeDamageScale *self, Target *targe
     special = 0;
     shielded = 1;
     player = 0;
-    scale = *(&D_800C46E8_eu + 1);
+    scale = *(&k_damageEuropeanFalloffScale + 1);
     scaled = 1;
     if (self->flags & 0x300000) {
         player = self->player;
     }
-    if (D_801462C8.local != 0 && (flags & 0x200)) {
+    if (g_gameSettings.local != 0 && (flags & 0x200)) {
         shielded = 0;
     }
     if (target->kind == 2) {
         if (target->type == 0x404 || target->type == 0x402) {
             special = 1;
         }
-        if (target->kind == 2 && D_801041F0.owner == self && D_801041F0.slot != -1 && !special) {
-            shield = &D_801041F0.shield;
+        if (target->kind == 2 && g_currentActorInstance.owner == self && g_currentActorInstance.slot != -1 && !special) {
+            shield = &g_currentActorInstance.shield;
             falloff = 0;
             goto have;
         }
     }
-    shield = Gobjinst_FindNearestBoneBounds(self, position, &D_80110570) ? &D_80110570 : 0;
+    shield = Gobjinst_FindNearestBoneBounds(self, position, &g_damageBoneBoundsShield) ? &g_damageBoneBoundsShield : 0;
 have:
     *found = shield;
     if (shielded && shield != 0) {
         scale *= shield->factor;
     }
     if (falloff != 0) {
-        if (player != 0 && (player->flags & 2) && scale == D_800C4440_de && (flags & 0x200)) {
+        if (player != 0 && (player->flags & 2) && scale == k_damageSpecialScale && (flags & 0x200)) {
             scale = 0.0f;
         } else {
             body = self->position;
@@ -159,7 +159,7 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
     CVector3 v;
     Triple point;
     Triple zero;
-    struct Shape_typemap_165 rotation;
+    struct CacheResourceBlockView rotation;
     s32 unused;
 
     if (target->views5DC.view5DC_5.rider == 0) {
@@ -176,15 +176,15 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
     rotation = Graphu64_BuildDirectionQuaternion(&v);
     InstHdr_CopyActorPositionAndModel(actor, position, &point, &unused, 0, 1);
     point = position;
-    ((CVector3 *)&point)->y += D_800C9538;
+    ((CVector3 *)&point)->y += k_playerEventClipHeightAndAngle;
     zero.x = 0;
     zero.y = 0;
     zero.z = 0;
-    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE9, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&point, 0, -1, kind == 5 ? 3 : 1);
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE9, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&point, 0, -1, kind == 5 ? 3 : 1);
     point.x = 0;
     point.y = 0;
     point.z = 0;
-    CScene_StartEventClips(&g_world, player->views5E8.view698_37.emitter + 0x140, 3, point, *(&D_800C9538 + 1), D_800C4450_de);
+    CScene_StartEventClips(&g_world, player->views5E8.view698_37.emitter + 0x140, 3, point, *(&k_playerEventClipHeightAndAngle + 1), k_playerEventClipScale);
 }
 
 void Events_ApplyDirectDamage(unsigned char *source, s32 target, s32 kind, Triple position, struct IntPair params) {
@@ -201,50 +201,50 @@ void Events_ApplyRadialDamageWithKnockback(s32 source, s32 target, s32 kind, Tri
     Events_ApplyDamageEvent((void *)source, target, kind, position, params, 1, 1, 0x80);
 }
 
-void Events_PreserveEventArgument(int unused0, int unused1, int unused2, int arg3) {
-    int *p = &arg3;
-    *p = arg3;
+void Events_PreserveEventArgument(int unused0, int unused1, int unused2, int eventArgument) {
+    int *p = &eventArgument;
+    *p = eventArgument;
 }
 
-void Events_RunFirstNodeOperation(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
+void Events_RunFirstNodeOperation(s32 actor, s32 unusedTarget, s32 unusedKind, s32 positionXWord, s32 positionYWord, s32 positionZWord)
 {
-  s32 *new_var2;
-  int new_var;
-  new_var2 = &arg3;
-  new_var = 1;
-  Events_UpdateNodeAtPosition(arg0, *new_var2, arg4, arg5, new_var);
+  s32 *positionXAddress;
+  int enableNodeFlag;
+  positionXAddress = &positionXWord;
+  enableNodeFlag = 1;
+  Events_UpdateNodeAtPosition(actor, *positionXAddress, positionYWord, positionZWord, enableNodeFlag);
 }
 
-void Events_RunSecondNodeOperation(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
+void Events_RunSecondNodeOperation(s32 actor, s32 unusedTarget, s32 unusedKind, s32 positionXWord, s32 positionYWord, s32 positionZWord)
 {
-  s32 *new_var2;
-  int new_var;
-  new_var2 = &arg3;
-  new_var = 0;
-  Events_UpdateNodeAtPosition(arg0, *new_var2, arg4, arg5, new_var);
+  s32 *positionXAddress;
+  int enableNodeFlag;
+  positionXAddress = &positionXWord;
+  enableNodeFlag = 0;
+  Events_UpdateNodeAtPosition(actor, *positionXAddress, positionYWord, positionZWord, enableNodeFlag);
 }
 
-void Events_StartCameraFadeAtPoint(s32 unused0, s32 unused1, s32 unused2, Triple testPoint, CEventValueFormat7a arg6) {
+void Events_StartCameraFadeAtPoint(s32 unused0, s32 unused1, s32 unused2, Triple testPoint, CEventValueFormat7a fadeParams) {
     NodeEventsStartCameraFadeAtPoint *node;
 
-    node = D_80140FE8_de;
+    node = g_gameplayCameraList;
     while (node != 0) {
         if (Gsky_ContainsVisiblePoint(node, testPoint) != 0) {
-            Gsky_StartFade(node, arg6.a, arg6.b, arg6.c, arg6.m_u8_Value4,
-                          arg6.m_u8_Value5, arg6.f, arg6.m_u8_Value7);
+            Gsky_StartFade(node, fadeParams.a, fadeParams.b, fadeParams.c, fadeParams.m_u8_Value4,
+                          fadeParams.m_u8_Value5, fadeParams.f, fadeParams.m_u8_Value7);
         }
         node = node->next;
     }
 }
 
-void Events_ConsumeEventArgument(int unused0, int unused1, int unused2, int arg3) {
-    int *p = &arg3;
-    *p = arg3;
+void Events_ConsumeEventArgument(int unused0, int unused1, int unused2, int eventArgument) {
+    int *p = &eventArgument;
+    *p = eventArgument;
 }
 
 /* Moves the target actor's linked player to the requested position, then raises the event on the actor. */
-void Events_RequestActorPosition(s32 source, void *target, s32 kind, CVector3 position, struct IntPair arg6) {
-    s32 mode = arg6.field_0;
+void Events_RequestActorPosition(s32 source, void *target, s32 kind, CVector3 position, struct IntPair positionParams) {
+    s32 mode = positionParams.first;
     LevelActor *actor = (LevelActor *)target;
     ((Player *)actor->controller)->requestedPosition = position;
     Weapon_SpawnTargetPlayerFireEffect(actor, (s32) &actor->behaviorFlags, mode);

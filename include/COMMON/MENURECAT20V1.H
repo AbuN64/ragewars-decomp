@@ -3,9 +3,9 @@
 #include "TYPES.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern float D_800E2810;
+extern float g_multiplayerNameEntryTimingLimits;
 
-struct MenuRecAt20V1;
+struct NameSpinnerMenu;
 
 struct ActorPakEnterPlayerOptions;
 struct ActorPakEnterPlayerOptions {
@@ -15,10 +15,10 @@ struct ActorPakEnterPlayerOptions {
     s32 maskA8;
 };
 struct ActorPakEnterPlayerOptions;
-struct PlayerRecAtC;
+struct PlayerOptionsEntry;
 
-struct PlayerRecAtC;
-typedef struct PlayerRecAtC PlayerRecAtC;
+struct PlayerOptionsEntry;
+typedef struct PlayerOptionsEntry PlayerOptionsEntry;
 
 
 struct Spinner;
@@ -27,16 +27,16 @@ typedef struct Spinner Spinner;
 struct StyleMultiDrawNameCursor;
 
 
-struct EntryRecAtCV2;
+struct NameSpinnerEntry;
 
 
 
-struct EntryRecAt1C;
+struct NameEditMenuContext;
 
 
 
-struct EntryRecAtCV2;
-typedef struct EntryRecAtCV2 EntryRecAtCV2;
+struct NameSpinnerEntry;
+typedef struct NameSpinnerEntry NameSpinnerEntry;
 
 struct LocalizedInputState;
 struct LocalizedInputState {
@@ -44,32 +44,32 @@ struct LocalizedInputState {
     u8 language;
 };
 
-extern float D_800DE7C8_de;
+extern float g_multiplayerNameCursorWidthScale;
 
 struct StyleMultiDrawNameCursor;
 typedef struct StyleMultiDrawNameCursor StyleMultiDrawNameCursor;
 
-struct TextEntryRecAtC;
-typedef struct TextEntryRecAtC TextEntryRecAtC;
+struct PlayerNameTextEntry;
+typedef struct PlayerNameTextEntry PlayerNameTextEntry;
 
 struct Spinner;
 
 
-struct MenuRecAt20V1;
-typedef struct MenuRecAt20V1 MenuRecAt20V1;
+struct NameSpinnerMenu;
+typedef struct NameSpinnerMenu NameSpinnerMenu;
 
 struct LocalizedInputState;
 typedef struct LocalizedInputState LocalizedInputState;
 
 
-struct TextEntryRecAtC;
+struct PlayerNameTextEntry;
 
-struct EntryRecAt1C;
-typedef struct EntryRecAt1C EntryRecAt1C;
+struct NameEditMenuContext;
+typedef struct NameEditMenuContext NameEditMenuContext;
 
 struct Field;
 
-extern u8 D_800E20AC[];
+extern u8 g_multiplayerSavedPlayerNames[];
 
 extern void Control_SaveControllerSetup(void);
 #endif

@@ -3,7 +3,7 @@
 /* 800E4610.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_menu_event_match_E5210_us_rev1.c */
-unsigned int D_blob_4e4d364a1a641e9d4004[2] = {
+unsigned int g_VimgrWords2[2] = {
     0x00000E06, 0x00000003,
 };
 #endif
@@ -11,24 +11,24 @@ unsigned int D_blob_4e4d364a1a641e9d4004[2] = {
 /* 800E4618.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E4604_unclaimed_E5210_unclaimed_E5218 */
-extern char D_00423C20[];
-unsigned int D_blob_cb6d726cbc0dcc8cc84c[1] = {
-    (unsigned int)D_00423C20,
+extern char g_Frontend_InitPlayModeMenuPackedAddress242[];
+unsigned int g_VimgrPointerWords1[1] = {
+    (unsigned int)g_Frontend_InitPlayModeMenuPackedAddress242,
 };
 
-extern char D_00424128[];
-extern char D_0042436C[];
-extern char D_004244B4[];
-extern char D_00424508[];
-unsigned int D_auto_src_rw_menu_event_handlers_E521C_us_rev1[15] = {
-    0x00000E03, 0x00000003, (unsigned int)D_0042436C, 0x00000002, 0x00000003, (unsigned int)D_00424508, 0x00000001, 0x00000003,
-    (unsigned int)D_00424128, 0x0000000A, 0x00000003, (unsigned int)D_004244B4, 0x00000000, 0x00000000, 0x00000000,
+extern char g_packedCodeAddress24_00424128[];
+extern char g_Frontend_DestroyPlayModeMenuPackedAddress242[];
+extern char g_Frontend_HandlePlayModeShortcutPackedAddress242[];
+extern char g_Frontend_ConsumePlayModeEventPackedAddress242[];
+unsigned int g_MenuEventHandlersPointerWords7[15] = {
+    0x00000E03, 0x00000003, (unsigned int)g_Frontend_DestroyPlayModeMenuPackedAddress242, 0x00000002, 0x00000003, (unsigned int)g_Frontend_ConsumePlayModeEventPackedAddress242, 0x00000001, 0x00000003,
+    (unsigned int)g_packedCodeAddress24_00424128, 0x0000000A, 0x00000003, (unsigned int)g_Frontend_HandlePlayModeShortcutPackedAddress242, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
 /* 800E4658.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_unresolved_800E4604_unclaimed_E5210_unclaimed_E5258[10] = {
+unsigned int g_VimgrWords1[10] = {
     0x00000E03, 0x00000020, 0x800D74F0, 0x800D74FC, 0x800D74F8, 0x800D74F4, 0x800D74F8, 0x800D74F4,
     0x800D74FC, 0x800D74F0,
 };

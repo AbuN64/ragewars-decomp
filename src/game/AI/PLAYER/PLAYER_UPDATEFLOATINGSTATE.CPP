@@ -1,13 +1,13 @@
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
 
 /* Runs a player's floating movement state for its body: sets the movement mode at 0x650 to 11 when
    still and 12 when moving (speed at 0x6C8), turns the view through Player_UpdateViewAngles with tuning
-   D_800CE874, sways the weapon on three sine waves of the state time at 0x658, moves the body through
-   func_802238E0_de with tuning D_800CE850, and once the state time passes 2 without the body's flag
+   g_playerSwimViewAngleParameters, sways the weapon on three sine waves of the state time at 0x658, moves the body through
+   Player_UpdateFlyingThrustAndBoost with tuning g_playerSwimMovementParameters, and once the state time passes 2 without the body's flag
    0x1000 it ends the state: clears the strokes at 0x938 and the body's 0x20, plays sound 0x2DE, clears
    0x840 and hands the player to Player_SetPlayerState (mode 2 when body flags 3 are set, else 10); it then
    picks the animation at 0x86C from the vertical speed at 0x6C0 (kept while idle animation 0x1144
@@ -23,8 +23,8 @@
 
 extern void Player_UpdateViewAngles(SharedPlayer *, BodyPlayerUpdateFloatingState *, char *);
 
-extern void func_802238E0_de(SharedPlayer *, BodyPlayerUpdateFloatingState *, Tuning *);
-extern void func_80218464_de(char *);
+extern void Player_UpdateFlyingThrustAndBoost(SharedPlayer *, BodyPlayerUpdateFloatingState *, Tuning *);
+extern void TeamSelect_EmptyWeaponWheelHook(char *);
 extern s32 SoundElement_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
 
 
@@ -36,13 +36,13 @@ void Player_UpdateFloatingState(SharedPlayer *player, BodyPlayerUpdateFloatingSt
     } else {
         player->views5E8.view650_18.mode = 0xC;
     }
-    Player_UpdateViewAngles(player, body, &D_800CE874);
+    Player_UpdateViewAngles(player, body, &g_playerSwimViewAngleParameters);
     player->views5E8.view730_79.sway[0] = 2.0f * Gu_Sinf(player->views5E8.view658_24.swimTime * 0.06981318f) * 0.017453294f;
     player->views5E8.view730_79.sway[1] = 2.0f * Gu_Sinf(player->views5E8.view658_24.swimTime * 0.08726647496f) * 0.017453294f;
     player->views5E8.view730_79.sway[2] = 2.0f * Gu_Sinf(player->views5E8.view658_24.swimTime * 0.10471976548f) * 0.017453294f;
-    func_802238E0_de(player, body, &D_800CE850);
+    Player_UpdateFlyingThrustAndBoost(player, body, &g_playerSwimMovementParameters);
     if (!(body->flags & 0x1000) && 2.0f < player->views5E8.view658_24.swimTime) {
-        func_80218464_de(player->views5E8.view938_129.strokes);
+        TeamSelect_EmptyWeaponWheelHook(player->views5E8.view938_129.strokes);
         body->stroke = 0;
         SoundElement_PlaySoundAtPosition(0x2DE, body->x, body->y, body->z, 0, -1);
         player->views5E8.view840_118.surfaced = 0;
@@ -56,7 +56,7 @@ void Player_UpdateFloatingState(SharedPlayer *player, BodyPlayerUpdateFloatingSt
     if (player->views5E8.view86C_127.animation == 0x1144) {
         idle = player->views1C.view10E_13.idle == 0;
     }
-    if (player->views1C.viewE4_7.kind == D_800CE47C) {
+    if (player->views1C.viewE4_7.kind == g_fragTagModelId) {
         player->views5E8.view86C_127.animation = 0x8A2;
     } else if (!idle) {
         if (1.024f <= player->views5E8.view6C0_52.climb) {
@@ -67,10 +67,10 @@ void Player_UpdateFloatingState(SharedPlayer *player, BodyPlayerUpdateFloatingSt
             player->views5E8.view86C_127.animation = 0x14;
         }
     }
-    player->views5E8.view11C4_144.soundTime += D_800D2988;
+    player->views5E8.view11C4_144.soundTime += g_frameElapsedTime;
     if (5.12f < player->views5E8.view6C8_57.speed && 45.0f < player->views5E8.view11C4_144.soundTime) {
         player->views5E8.view11C4_144.soundTime = Graphu64_RandomFloat(15.0f);
-        SoundElement_PlaySoundAtPosition(D_800CE850.strokeSound, body->x, body->y, body->z, 0, -1);
+        SoundElement_PlaySoundAtPosition(g_playerSwimMovementParameters.strokeSound, body->x, body->y, body->z, 0, -1);
         SoundElement_PlaySoundAtPosition(0x2E0, body->x, body->y, body->z, 0, -1);
     }
 }

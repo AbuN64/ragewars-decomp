@@ -31,8 +31,8 @@ typedef struct PakNoteText {
     char name[0x14];
     char size[0xA];
 } PakNoteText;
-struct Shared_Player_func_80433F14;
-struct Shared_Player_func_80433F14 {
+struct PakProfilePanelState;
+struct PakProfilePanelState {
     s32 state;
     s32 sub;
     s32 next;
@@ -80,8 +80,8 @@ struct Shared_Player_func_80433F14 {
     s32 profile;
 };
 
-struct Shared_Player_func_80433F14;
-typedef struct Shared_Player_func_80433F14 Shared_Player_func_80433F14;
+struct PakProfilePanelState;
+typedef struct PakProfilePanelState PakProfilePanelState;
 
 struct PakMenuController;
 /* One pak transfer link: a player's record slot picked as a copy source and its state. */
@@ -96,7 +96,7 @@ typedef struct PakSavePacket {
     s32 savedProfile; /* 0x640 */
     u32 checksum; /* 0x644 */
 } PakSavePacket;
-/* The pak and name-entry menu block (Scene memory) D_800E54A4 points to. */
+/* The pak and name-entry menu block (Scene memory) g_pakProfileScreenState points to. */
 struct PakMenuController {
     union {
         s32 field0;
@@ -122,7 +122,7 @@ struct PakMenuController {
     s32 ready; /* 0x4C */
     s32 timer; /* 0x50 */
     s32 phase; /* 0x54 */
-    Shared_Player_func_80433F14 players[4]; /* 0x58 */
+    PakProfilePanelState players[4]; /* 0x58 */
     PakMenuLink links[4]; /* 0x2DF8 */
     PakSavePacket packet; /* 0x2E28 */
     s32 focus; /* 0x3470 */
@@ -147,13 +147,13 @@ struct RecordPAKInterfaceReassignLocalProfiles {
 
 struct RecordPAKInterfaceReassignLocalProfiles;
 
-extern char *D_800E25A4[];
+extern char *g_pakProfileGameNames[];
 
 struct Shared_Item;
-struct func_8028469C_S2;
+struct WidgetLabelTextView;
 struct Shared_Item {
     char pad0[0x8];
-    struct func_8028469C_S2 * label;
+    struct WidgetLabelTextView * label;
     char padC[0x6];
     u16 flags;
     char pad14[0x24];
@@ -186,8 +186,8 @@ typedef struct MatchSetupGlobals MatchSetupGlobals;
 struct Blk;
 typedef struct Blk Blk;
 
-struct RowRecAtBA4;
-struct RowRecAtBA4 {
+struct PakPanelSelectionView;
+struct PakPanelSelectionView {
     char pad0[0x58];
     s32 state;
     char pad5C[0xB9C - 0x5C];
@@ -204,10 +204,10 @@ struct SlotsCode804196C0;
 
 
 struct ItemFrontendRelabelSlotRows;
-struct func_8028469C_S2;
+struct WidgetLabelTextView;
 struct ItemFrontendRelabelSlotRows {
     char pad[0x8];
-    struct func_8028469C_S2 *label;
+    struct WidgetLabelTextView *label;
 };
 
 
@@ -218,16 +218,16 @@ struct Blk {
     char p0[4];
     s32 unk4;
     char p1[0x24];
-    s32 unk2C;
+    s32 animationClock;
     char p2[0x28];
-    s32 unk58;
+    s32 panelState;
     char p3[0xAD4];
-    s32 unkB30;
-    s32 unkB34;
-    ResourceSmpFlickerCreateFlickerWidget *unkB38;
+    s32 selectedNote;
+    s32 noteScrollOffset;
+    ResourceSmpFlickerCreateFlickerWidget *noteLabel;
     char p4[0x64];
-    s32 unkBA0;
-    s32 unkBA4;
+    s32 nameEntryPhase;
+    s32 nameEntryTimer;
 };
 
 

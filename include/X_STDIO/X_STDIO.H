@@ -1,18 +1,18 @@
 #ifndef X_STDIO_X_STDIO_H
 #define X_STDIO_X_STDIO_H
-#include "COMMON/INTEGERSTATE14_2.H"
+#include "COMMON/MEMORY_STREAM_BUFFER.H"
 extern s32 XStdio_PrintStream(void *stream, const char *format, ...);
 extern void XStdio_InitializeStreams(void);
 extern void XStdio_ShutdownStreams(void);
 extern s32 XStdio_OpenStream(const void *name, const void *mode);
 extern s32 XStdio_ReadStream(void *destination, s32 elementSize, s32 count, s32 handle);
 extern s32 XStdio_WriteStreamNoop(const unsigned char *data, s32 size, s32 count, void *stream);
-extern int func_802A0F58_de(void);
+extern int XStdio_ReadUnavailable(void);
 extern s32 XStdio_SeekStream(s32 handle, s32 offset, s32 origin);
 extern void XStdio_QueryStreamPosition(void);
 extern void XStdio_QueryStreamEnd(void);
 extern s32 XStdio_ReadCharacter(s32);
-extern int func_802A1004_de(void);
+extern int XStdio_WriteUnavailable(void);
 extern s32 *XStdio_FormatScratchArgumentList(s32, s32);
 extern void XStdio_LoadMemoryStream(void);
 extern void XStdio_FreeMemoryStream(void);

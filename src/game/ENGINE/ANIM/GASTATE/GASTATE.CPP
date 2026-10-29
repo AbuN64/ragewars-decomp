@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/APPROACHLOCATION.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/MTX.H"
 #include "TYPES.H"
@@ -24,7 +24,7 @@ extern char g_animationText;
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 
-extern s32 func_802624D8_de(Anim *);
+extern s32 Gastate_IsAnimationResourceRetained(Anim *);
 
 
 static inline s32 load(Anim *anim, s32 table, s32 key, s32 id) {
@@ -37,8 +37,8 @@ static inline s32 load(Anim *anim, s32 table, s32 key, s32 id) {
         return 0;
     }
     clip = SetN64_LocatePackSection(table, key, id, &size);
-    anim->resource = Cache_RequestResource(0, clip, clip, size, 4, anim, &D_0025F56C, &g_animationText, 0);
-    if (func_802624D8_de(anim) == 0) {
+    anim->resource = Cache_RequestResource(0, clip, clip, size, 4, anim, &Gastate_AnimationResourceCallbackEntry, &g_animationText, 0);
+    if (Gastate_IsAnimationResourceRetained(anim) == 0) {
         return 0;
     }
     header = Polytrak2_GetResidentResource(anim);
@@ -50,15 +50,15 @@ static inline s32 load(Anim *anim, s32 table, s32 key, s32 id) {
 
 extern void Polytrak2_SampleVectorTrack(void *,s32,f32,CVector3 *);
 
-extern f32 D_800C41BC_de;
+extern f32 g_rootMotionAngleScale;
 
-extern f32 D_800C41C0_de;
+extern f32 g_rootMotionFrameAdvanceScale;
 
-extern f32 D_800C41F0_de;
+extern f32 g_rootMotionWrappedAngleScale;
 
-extern f32 D_800C41F4_de;
+extern f32 g_rootMotionCurrentAngleScale;
 
-extern f64 D_800C41C8_de,D_800C41D0_de,D_800C41D8_de,D_800C41E0_de,D_800C41E8_de;
+extern f64 g_rootMotionRestartUnsignedBias,g_rootMotionClampedRestartUnsignedBias,g_rootMotionEventRestartUnsignedBias,g_rootMotionPositionRestartUnsignedBias,g_rootMotionAngleRestartUnsignedBias;
 
 static __inline__ f64 unsignedDouble(u32 value,const f64 *bias) {
     f64 result=(f64)(s32)value;
@@ -74,7 +74,7 @@ static __inline__ f32 wrapAngle(CGameAnimateState_t *anim,f32 time) {
     next=first+1;
     last=anim->frames-1;
     if(next<last) last=next;
-    return Graphu64_InterpolateWrappedValue(time-(f32)first,(f32)keys[first]*D_800C41F0_de,(f32)keys[last]*D_800C41F0_de);
+    return Graphu64_InterpolateWrappedValue(time-(f32)first,(f32)keys[first]*g_rootMotionWrappedAngleScale,(f32)keys[last]*g_rootMotionWrappedAngleScale);
 }
 
 void Gastate_SwitchRequestedAnimation(Anim *anim, s32 table, s32 key, s32 blend, s32 *switched, Anim *previous) {
@@ -126,26 +126,26 @@ void Gastate_AdvanceRootMotion(CGameAnimateState_t *animationChannel, CVector3 *
     f32 wrappedFramePosition;
     f32 previousFramePosition;
     f32 startRootAngle;
-    f64 var_fa0;
+    f64 unusedFloat;
     f64 clampedLoopStart;
     f64 eventLoopStart;
     f64 positionLoopStart;
     f64 loopStartDouble;
     s32 followingAngleFrame;
     s32 followingEndAngleFrame;
-    s32 temp_a0_3;
+    s32 unusedValue;
     s32 followingCurrentAngleFrame;
     s16 *startAngleKeys;
     s16 *endAngleKeys;
-    s16 *temp_a2_3;
+    s16 *unusedPointer;
     s16 *currentAngleKeys;
     s32 startAngleFrame;
     s32 endAngleFrame;
-    s32 temp_fv1f_3;
+    s32 unusedValue1;
     s32 currentAngleFrame;
     s32 nextStartAngleFrame;
     s32 nextEndAngleFrame;
-    s32 var_v1_3;
+    s32 unusedValue2;
     s32 nextCurrentAngleFrame;
     RootClip *rootMotionClip;
     u16 loopStartFrame;
@@ -161,7 +161,7 @@ void Gastate_AdvanceRootMotion(CGameAnimateState_t *animationChannel, CVector3 *
     if (rootMotionActor->flags & 0x08000000) {
         forcedEndFrame = (f32) (animationChannel->frames - 1);
         animationChannel->time = forcedEndFrame;
-        func_802476C8_de((char *)rootMotionActor, animationChannel, 0.0f, forcedEndFrame);
+        Gobjinst_DispatchAnimationIntervalEvents((char *)rootMotionActor, animationChannel, 0.0f, forcedEndFrame);
         rootMotionActor->flags = (s32) (rootMotionActor->flags & 0xF7FFFFFF);
     }
     rootMotionClip = SetN64_GetPackSection(header,3);
@@ -175,13 +175,13 @@ void Gastate_AdvanceRootMotion(CGameAnimateState_t *animationChannel, CVector3 *
     if (followingAngleFrame < nextStartAngleFrame) {
         nextStartAngleFrame = followingAngleFrame;
     }
-    angleScale = D_800C41BC_de;
+    angleScale = g_rootMotionAngleScale;
     startRootAngle = Graphu64_InterpolateWrappedValue(angleSample - (f32) startAngleFrame, (f32) startAngleKeys[startAngleFrame] * angleScale, (f32) startAngleKeys[nextStartAngleFrame] * angleScale);
     previousFramePosition = animationChannel->time;
     if (!(rootMotionActor->flags & 0x08000000)) {
-        animationChannel->time = (f32) (previousFramePosition + (D_800D2988 * rootMotionClip->rate * D_800C41C0_de));
+        animationChannel->time = (f32) (previousFramePosition + (g_frameElapsedTime * rootMotionClip->rate * g_rootMotionFrameAdvanceScale));
     }
-    func_802476C8_de((char *)rootMotionActor, animationChannel, previousFramePosition, animationChannel->time);
+    Gobjinst_DispatchAnimationIntervalEvents((char *)rootMotionActor, animationChannel, previousFramePosition, animationChannel->time);
     lastFrameIndex = animationChannel->frames - 1;
     lastFramePosition = (f32) lastFrameIndex;
     if (lastFramePosition < animationChannel->time) {
@@ -202,21 +202,21 @@ void Gastate_AdvanceRootMotion(CGameAnimateState_t *animationChannel, CVector3 *
         if (loopStartFrame != 0xFFFF) {
             restartFrame = loopStartFrame;
         }
-        loopStartDouble = unsignedDouble(restartFrame, &D_800C41C8_de);
+        loopStartDouble = unsignedDouble(restartFrame, &g_rootMotionRestartUnsignedBias);
         wrappedFramePosition = ((f32) loopStartDouble + animationChannel->time) - lastFramePosition;
         animationChannel->time = wrappedFramePosition;
         if (lastFramePosition < wrappedFramePosition) {
-            clampedLoopStart = unsignedDouble(restartFrame, &D_800C41D0_de);
+            clampedLoopStart = unsignedDouble(restartFrame, &g_rootMotionClampedRestartUnsignedBias);
             animationChannel->time = (f32) clampedLoopStart;
         }
-        if ((restartFrame >= (u32)lastFrameIndex) && (animationChannel->current == animationChannel->next) && (func_802625C4_de(animationChannel) == 0)) {
+        if ((restartFrame >= (u32)lastFrameIndex) && (animationChannel->current == animationChannel->next) && (Gastate_GetAnimationEventCount(animationChannel) == 0)) {
             animationChannel->blending = 0;
         }
-        eventLoopStart = unsignedDouble(restartFrame, &D_800C41D8_de);
-        func_802476C8_de((char *)rootMotionActor, animationChannel, (f32) eventLoopStart, animationChannel->time);
-        positionLoopStart = unsignedDouble(restartFrame, &D_800C41E0_de);
+        eventLoopStart = unsignedDouble(restartFrame, &g_rootMotionEventRestartUnsignedBias);
+        Gobjinst_DispatchAnimationIntervalEvents((char *)rootMotionActor, animationChannel, (f32) eventLoopStart, animationChannel->time);
+        positionLoopStart = unsignedDouble(restartFrame, &g_rootMotionPositionRestartUnsignedBias);
         Polytrak2_SampleVectorTrack(animationChannel, 0, (f32) positionLoopStart, &startRootPosition);
-        startRootAngle = wrapAngle(animationChannel,(f32)unsignedDouble(restartFrame,&D_800C41E8_de));
+        startRootAngle = wrapAngle(animationChannel,(f32)unsignedDouble(restartFrame,&g_rootMotionAngleRestartUnsignedBias));
         animationChannel->active = 1;
     }
     Polytrak2_SampleVectorTrack(animationChannel, 0, animationChannel->time, &endRootPosition);
@@ -228,7 +228,7 @@ void Gastate_AdvanceRootMotion(CGameAnimateState_t *animationChannel, CVector3 *
     if (followingCurrentAngleFrame < nextCurrentAngleFrame) {
         nextCurrentAngleFrame = followingCurrentAngleFrame;
     }
-    angleSample = Graphu64_InterpolateWrappedValue(angleSample - (f32) currentAngleFrame, (f32) currentAngleKeys[currentAngleFrame] * D_800C41F4_de, (f32) currentAngleKeys[nextCurrentAngleFrame] * D_800C41F4_de);
+    angleSample = Graphu64_InterpolateWrappedValue(angleSample - (f32) currentAngleFrame, (f32) currentAngleKeys[currentAngleFrame] * g_rootMotionCurrentAngleScale, (f32) currentAngleKeys[nextCurrentAngleFrame] * g_rootMotionCurrentAngleScale);
     Graphu64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
     Graphu64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
     *angleDeltaOut += Graphu64_GetWrappedDifference(angleSample, startRootAngle);

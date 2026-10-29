@@ -11,5 +11,5 @@ struct Shared_ParticleLighting {
     s8 direction[3];
     u8 reserved13[5];
 } __attribute__((aligned(4)));
-extern Shared_ParticleLighting D_800D0EF8;
+extern Shared_ParticleLighting g_defaultParticleLighting;
 #endif

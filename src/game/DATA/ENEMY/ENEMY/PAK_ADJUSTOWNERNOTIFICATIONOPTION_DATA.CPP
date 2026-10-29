@@ -6,7 +6,7 @@
 struct {
     unsigned int words[9];
     unsigned char lights[20];
-} D_auto_rodata_writable_800D0EBC = {
+} g_enemyMixWordsAndLights = {
     { 0x00000001, 0x3F800000, 0x3F8067C9, 0x3F8041C9, 0x3F801BC1, 0x00000000, 0x3F7F9F36, 0x3F7F52FA,
       0x3F7F06B0 },
     { 0x38, 0x38, 0x38, 0x00, 0x38, 0x38, 0x38, 0x00, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0xFF, 0x00,
@@ -14,7 +14,7 @@ struct {
 };
 
 /* ROM-grounded data: rodata/unresolved/800D0EF4 */
-unsigned int D_blob_dfae6e4deae0ddb68fd7[1] = {
+unsigned int g_pakAdjustownernotificationoptionDataZeroWords[1] = {
     0x00000000,
 };
 #endif
@@ -25,7 +25,7 @@ unsigned int D_blob_dfae6e4deae0ddb68fd7[1] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int D_auto_data_unresolved_800D1CD8[978] = {
+unsigned int g_pakAdjustownernotificationoptionDataConstantWords[978] = {
     0x800D1CB4, 0x800CE2E8, 0x800CE2F8, 0x800CE2FC, 0x800CE300, 0x800CE308, 0x800CE310, 0x800CE31C,
     0x800CE328, 0x800CE334, 0x800CE340, 0x800CE34C, 0x800CE358, 0x800CE368, 0x800CE378, 0x800CE388,
     0x800CE398, 0x800CE3A8, 0x800CE3B4, 0x800CE3C8, 0x800CE3DC, 0x800CE3EC, 0x800CE3FC, 0x800CE40C,

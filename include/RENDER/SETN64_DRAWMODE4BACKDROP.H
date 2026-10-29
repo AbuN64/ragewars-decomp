@@ -4,7 +4,7 @@
 struct GameSession;
 extern void SetN64_DrawMode6(void);
 extern void SetN64_AdvanceToModeEight(struct GameSession *session);
-extern void SetN64_ResetMode11Items(s32 arg0);
+extern void SetN64_ResetMode11Items(s32 sessionAddress);
 extern void SetN64_ResetMode9Items(int sessionAddress);
 extern void SetN64_UpdateMode6(void);
 struct GameSession;
@@ -13,7 +13,7 @@ extern void SetN64_DrawMode9Session(void *session);
 extern void SetN64_HandleMode7Transition(struct GameSession *session);
 extern void SetN64_UpdateMode8(void);
 extern void SetN64_ResetMode4Effects(void);
-extern void SetN64_ResetMode5Items(s32 arg0);
+extern void SetN64_ResetMode5Items(s32 sessionAddress);
 extern void SetN64_SetMode7AudioState(void);
 extern void SetN64_InitializeMode6(void);
 extern void SetN64_DrawMode4Backdrop(void);

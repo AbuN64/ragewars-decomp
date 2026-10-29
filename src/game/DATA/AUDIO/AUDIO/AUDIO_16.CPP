@@ -2,12 +2,12 @@
 
 /* 802B7058_36.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_802BD1AC_eu_padding_BDDAC[4] = { 0xB8, 0x68, 0x00, 0x07 };
+unsigned char g_AudioTrailingBytesBlock19[4] = { 0xB8, 0x68, 0x00, 0x07 };
 #endif
 
 /* 802BE040_28.CPP */
 #if defined(VERSION_US)
-unsigned char D_auto_func_802B9EF8_us_padding_BAAF8[8] = { 0x00, 0x00, 0x08, 0x00, 0x06, 0x00, 0x00, 0x00 };
+unsigned char g_AudioTrailingBytesBlock9[8] = { 0x00, 0x00, 0x08, 0x00, 0x06, 0x00, 0x00, 0x00 };
 #endif
 
 /* 802BE040_59.CPP */

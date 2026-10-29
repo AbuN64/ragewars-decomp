@@ -16,12 +16,12 @@ void guLookAt(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux,
     f32 x, y, z, rx, ry, rz, vx, vy, vz, scale, one;
     guMtxIdentF(matrixPointer);
     x = ax - ex; y = ay - ey; z = az - ez;
-    scale = D_800C7870_de / Gu_Sqrtf((x*x + y*y) + z*z);
+    scale = g_lookAtInverseLengthScale / Gu_Sqrtf((x*x + y*y) + z*z);
     x *= scale; z *= scale; y *= scale;
     rx = uy*z - uz*y;
     ry = uz*x - ux*z;
     rz = ux*y - uy*x;
-    one = D_800C7874_de;
+    one = g_lookAtUnitValue;
     scale = one / Gu_Sqrtf((rx*rx + ry*ry) + rz*rz);
     rx *= scale; rz *= scale; ry *= scale;
     vx = y*rz - z*ry;
@@ -51,14 +51,14 @@ void guLookAtF(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
     lookX = atX - eyeX;
     lookY = atY - eyeY;
     lookZ = atZ - eyeZ;
-    scale = D_800C7878_de / Gu_Sqrtf(lookX * lookX + lookY * lookY + lookZ * lookZ);
+    scale = g_lookAtFloatInverseLengthScale / Gu_Sqrtf(lookX * lookX + lookY * lookY + lookZ * lookZ);
     lookX *= scale;
     lookZ *= scale;
     lookY *= scale;
     rightX = upY * lookZ - upZ * lookY;
     rightY = upZ * lookX - upX * lookZ;
     rightZ = upX * lookY - upY * lookX;
-    one = D_800C787C_de;
+    one = g_lookAtFloatUnitValue;
     scale = one / Gu_Sqrtf(rightX * rightX + rightY * rightY + rightZ * rightZ);
     rightX *= scale;
     rightZ *= scale;
@@ -89,18 +89,18 @@ void guLookAtF(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B6AA8[8] =
+char k_LookatEncodedBytes[8] =
     "ODER\000\000\001\000";
 #endif
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-const unsigned int D_802B6664_CD6C0[1] = {
+const unsigned int k_LookatEncodedWords[1] = {
     0xBF800000,
 };
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int D_802B6664_CD6C0[2] = {
+const unsigned int k_LookatEncodedWords[2] = {
     0xBF800000, 0x3F800000,
 };
 #endif
@@ -114,7 +114,7 @@ const unsigned int rodata_func_802B6664_de_800C7874[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const unsigned int D_blob_70cd42de207f8964de31[2] = {
+const unsigned int k_LookatSignedUnitBoundsWords[2] = {
     0xBF800000, 0x3F800000,
 };
 #endif

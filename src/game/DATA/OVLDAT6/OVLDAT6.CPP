@@ -2,12 +2,12 @@
 
 /* 800CF1CC_2.CPP */
 /* ROM-grounded data: rodata/writable/800CF1E4 */
-unsigned int D_blob_phase2_88dd293952021d89d2d4[2] = {
+unsigned int g_Ovldat6EncodedWords[2] = {
     0x00000000, 0x42CCCCCC,
 };
 
 /* 800CF1EC.CPP */
-unsigned int D_auto_rodata_unresolved_800CF1EC[15] = {
+unsigned int k_Ovldat6EncodedWords[15] = {
     0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
     0x00000001, 0x00000001, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
 };

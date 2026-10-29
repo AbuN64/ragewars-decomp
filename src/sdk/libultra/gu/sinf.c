@@ -10,12 +10,12 @@
    cartridge's tables, and the two 0.5 literals of ROUND are its own constants. */
 
 extern const f64 D_800C78D0_de[5]; /* P */
-extern const f64 D_800C78F8_de;    /* rpi */
-extern const f64 D_800C7900_de;    /* pihi */
-extern const f64 D_800C7908_de;    /* pilo */
-extern const f32 D_800C7910_de;    /* zero */
-extern const float D_800C7914_de; /* 0.5 */
-extern const float D_800C7918_de; /* 0.5 */
+extern const f64 g_sineInversePi;    /* rpi */
+extern const f64 g_sinePiHigh;    /* pihi */
+extern const f64 g_sinePiLow;    /* pilo */
+extern const f32 g_sineExceptionalResult;    /* zero */
+extern const float g_sinePositiveRoundingBias; /* 0.5 */
+extern const float g_sineNegativeRoundingBias; /* 0.5 */
 
 float Gu_Sinf(float x)
 {
@@ -50,13 +50,13 @@ float Gu_Sinf(float x)
     if (xpt < 0x136) {
         dx = x;
 
-        dn = dx * D_800C78F8_de;
+        dn = dx * g_sineInversePi;
 
-        n = (dn >= 0.0f) ? (int)(dn + D_800C7914_de) : (int)(dn - D_800C7918_de);
+        n = (dn >= 0.0f) ? (int)(dn + g_sinePositiveRoundingBias) : (int)(dn - g_sineNegativeRoundingBias);
         dn = n;
 
-        dx = dx - dn * D_800C7900_de;
-        dx = dx - dn * D_800C7908_de;
+        dx = dx - dn * g_sinePiHigh;
+        dx = dx - dn * g_sinePiLow;
 
         xsq = dx * dx;
 
@@ -75,17 +75,17 @@ float Gu_Sinf(float x)
         return -result;
     }
 
-    return D_800C7910_de;
+    return g_sineExceptionalResult;
 }
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_802B71DC[1] = {
+unsigned int k_SinfEncodedWordsBlock2[1] = {
     0x5F426F73,
 };
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-const unsigned int D_auto_src_rw_constants_802B7130_CD728_us_rev1[17] = {
+const unsigned int k_SinfEncodedWords[17] = {
     0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
     0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000, 0x3F000000,
     0x3F000000,
@@ -93,7 +93,7 @@ const unsigned int D_auto_src_rw_constants_802B7130_CD728_us_rev1[17] = {
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_EU)
-unsigned int rodata_unresolved_800C850C[1] = {
+unsigned int k_SinfEncodedWordsBlock1[1] = {
     0x4F000000,
 };
 #endif

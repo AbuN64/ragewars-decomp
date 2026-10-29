@@ -37,5 +37,5 @@ s32 Smp_CopyAndSwizzleImage(Image *dst, Image *src) {
 
 
 void Smp_SetImageStateWord(int value) {
-    D_800E32F0 = value;
+    g_imageSwizzleEnabled = value;
 }

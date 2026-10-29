@@ -7,8 +7,8 @@
 
 /* Draws an icon sprite for a view: icons 0x2DA, 0x2E4, 0x2BC and 0x2EF to 0x2F2 sit at the centre of
    the view's viewport, any other icon is placed at a world point projected through func_80239244_de when
-   the point lies in front of the view's plane and within 64 pixels of the screen D_800E28D0, remapped
-   into the viewport when D_801462E5 is set; the sprite is drawn back by its scaled size less one. */
+   the point lies in front of the view's plane and within 64 pixels of the screen g_hudReferenceViewportWidth, remapped
+   into the viewport when g_motionVisibilitySettings is set; the sprite is drawn back by its scaled size less one. */
 
 
 
@@ -16,7 +16,7 @@
 
 extern void Gsky_ProjectToScreen(View *, CVector3 *, f32 *, f32 *);
 
-void func_8021E08C_de(View *view, CVector3 *point, s32 icon, f32 frame, f32 scale, f32 size) {
+void Playerai_DrawProjectedAimIcon(View *view, CVector3 *point, s32 icon, f32 frame, f32 scale, f32 size) {
     f32 x;
     f32 y;
     f32 offset;
@@ -31,13 +31,13 @@ void func_8021E08C_de(View *view, CVector3 *point, s32 icon, f32 frame, f32 scal
             return;
         }
         Gsky_ProjectToScreen(view, point, &x, &y);
-        if (x < -64.0f || (f32) (D_800E28D0 + 0x40) < x || y < -64.0f
-            || (f32) (*(&D_800E28D0 + 1) + 0x40) < y) {
+        if (x < -64.0f || (f32) (g_hudReferenceViewportWidth + 0x40) < x || y < -64.0f
+            || (f32) (*(&g_hudReferenceViewportWidth + 1) + 0x40) < y) {
             return;
         }
-        if (D_801462C8.local != 0) {
-            x = view->viewport[2] + x / D_800E28D0 * view->viewport[0];
-            y = view->viewport[3] + y / *(&D_800E28D0 + 1) * view->viewport[1];
+        if (g_gameSettings.local != 0) {
+            x = view->viewport[2] + x / g_hudReferenceViewportWidth * view->viewport[0];
+            y = view->viewport[3] + y / *(&g_hudReferenceViewportWidth + 1) * view->viewport[1];
         }
     }
     offset = scale * size - 1.0f;

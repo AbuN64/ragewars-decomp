@@ -1,5 +1,5 @@
 #ifndef FRONTEND_FRONTEND_DISPATCHPAUSEMENUEVENT_H
 #define FRONTEND_FRONTEND_DISPATCHPAUSEMENUEVENT_H
-#include "COMMON/S1_6.H"
-extern s32 Frontend_DispatchPauseMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+#include "COMMON/RESERVED_SHARED_DECLARATIONS.H"
+extern s32 Frontend_DispatchPauseMenuEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2);
 #endif

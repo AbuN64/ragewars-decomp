@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/NUMBERPADSCREEN.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SCREEN.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -31,63 +31,63 @@ void Menu_AdvanceTextRows(void) {
     s32 line;
     s32 index;
 
-    line = D_800E4400->length;
-    index = D_800E4400->value;
+    line = g_extraOptionsScreen->length;
+    index = g_extraOptionsScreen->value;
     do {
-        text = D_800D3E14_de[0][index];
+        text = g_creditsLocalizedLines[0][index];
 
         if (text != 0) {
             index++;
         }
-        item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0);
+        item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0);
         switch (line) {
         case 0:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0);
             break;
         case 1:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 1);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0 + 1);
             break;
         case 2:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 2);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0 + 2);
             break;
         case 3:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 3);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0 + 3);
             break;
         case 4:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 4);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0 + 4);
             break;
         case 5:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 5);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0 + 5);
             break;
         case 6:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 6);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0 + 6);
             break;
         case 7:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 7);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0 + 7);
             break;
         case 8:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 8);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0 + 8);
             break;
         case 9:
-            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 9);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_ROW0 + 9);
             break;
         }
         item->text = text;
         line++;
     } while (line < 10);
-        if (D_800D3E14_de[0][D_800E4400->value] != 0)
+        if (g_creditsLocalizedLines[0][g_extraOptionsScreen->value] != 0)
 
     {
-        if (D_800E4400->length == 0) {
-            D_800E4400->value++;
+        if (g_extraOptionsScreen->length == 0) {
+            g_extraOptionsScreen->value++;
         }
     } else {
-        Widget_SetWidgetFlag08(D_800E4400->pad, 0);
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, ID_CLOSE), 1);
-        D_800E4400->cursor = 1;
+        Widget_SetWidgetFlag08(g_extraOptionsScreen->pad, 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, ID_CLOSE), 1);
+        g_extraOptionsScreen->cursor = 1;
     }
-    if (D_800E4400->length > 0) {
-        D_800E4400->length--;
+    if (g_extraOptionsScreen->length > 0) {
+        g_extraOptionsScreen->length--;
     }
 }
 #endif

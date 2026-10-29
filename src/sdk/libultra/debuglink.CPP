@@ -1,45 +1,45 @@
 #include "COMMON/RESPONSE.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/S1_4.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "TYPES.H"
 #include "TYPES.H"
 #include "sdk/OSINT/pigetstatus.H"
 
 #if defined(VERSION_US_REV1)
-extern s8 D_8014D3E0;
+extern s8 g_debugLinkDataByte;
 
 
 
 s32 Libultra_InitDebugLink(void) {
     u8 enabledControl;
 
-    D_8014D3E0 = 0;
-    D_8014D3E1 = 0;
-    D_8014D3E2 = 0;
-    D_8014D3E3 = 0;
-    D_8014D3E4 = 0;
+    g_debugLinkDataByte = 0;
+    g_debugLinkHandshakeControl = 0;
+    g_debugLinkTransferControl = 0;
+    g_debugLinkModeControl = 0;
+    g_debugLinkAuxiliaryControl = 0;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000000 = 0;
+    DEBUG_LINK_DATA_REGISTER = 0;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000004 = 0;
+    DEBUG_LINK_HANDSHAKE_REGISTER = 0;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000008 = 0;
+    DEBUG_LINK_TRANSFER_REGISTER = 0;
     do {
     } while (osPiGetStatus() & 3);
-    D_B200000C = 0;
+    DEBUG_LINK_MODE_REGISTER = 0;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000010 = 0;
+    DEBUG_LINK_AUXILIARY_REGISTER = 0;
     do {
     } while (osPiGetStatus() & 3);
-    enabledControl = D_8014D3E2 | 0x40;
-    D_8014D3E2 = enabledControl;
+    enabledControl = g_debugLinkTransferControl | 0x40;
+    g_debugLinkTransferControl = enabledControl;
     do {
     } while (osPiGetStatus() & 3);
-    D_B2000008 = enabledControl;
-    D_8014D3E8 = 0;
+    DEBUG_LINK_TRANSFER_REGISTER = enabledControl;
+    g_debugLinkTransferFailed = 0;
     return 1;
 }
 #endif

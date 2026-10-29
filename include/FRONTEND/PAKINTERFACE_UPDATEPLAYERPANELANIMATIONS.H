@@ -1,5 +1,5 @@
 #ifndef FRONTEND_PAKINTERFACE_UPDATEPLAYERPANELANIMATIONS_H
 #define FRONTEND_PAKINTERFACE_UPDATEPLAYERPANELANIMATIONS_H
 #include "COMMON/NAME.H"
-extern void PAKInterface_UpdatePlayerPanelAnimations(s32 arg0);
+extern void PAKInterface_UpdatePlayerPanelAnimations(s32 event);
 #endif

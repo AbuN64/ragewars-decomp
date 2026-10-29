@@ -3,11 +3,11 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 #include "TYPES.H"
-#include "COMMON/OBJECTLINKS150C.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
-#include "COMMON/EXTERNS_15.H"
-#include "RENDER/OBJECTSTATE8E.H"
+#include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
+#include "RENDER/PLAYER_CONTROLLER_RESET_VIEWS.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/TRIPLE.H"
@@ -86,7 +86,7 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     scale.z = SK_FIELD(src, s32, 0x20) * 2.38418579e-05f;
     SK_FIELD(self, f32, 0) = (f32)SK_FIELD(src, s32, 0x24) * 2 * 4.65661287e-10f;
     SK_FIELD(self, f32, 4) = (f32)SK_FIELD(src, s32, 0x28) * 2 * 4.65661287e-10f;
-    if (D_801462C8.flags & 0x4000) {
+    if (g_gameSettings.flags & 0x4000) {
         SK_FIELD(self, s32, 8) = 0;
         SK_FIELD(self, s32, 0xC) = 0;
         SK_FIELD(self, s32, 0x10) = 0;
@@ -127,102 +127,102 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     Region_ComputePointBounds(self + 0xA0, 8, corners);
 }
 
-s32 Lighting_EvaluateLocalVolume(ObjectRecAtBC *arg0, CVector3 arg1,
-                  CVector3 *vectorComponents, f32 *arg5) {
-    f32 temp_f0;
-    f32 var_f0;
-    f32 var_f1;
-    f32 var_f20;
-    f32 var_f3;
+s32 Lighting_EvaluateLocalVolume(SceneLightVolume *lightVolume, CVector3 localPosition,
+                  CVector3 *vectorComponents, f32 *intensity) {
+    f32 falloff;
+    f32 absoluteY;
+    f32 absoluteZ;
+    f32 volumeDistance;
+    f32 localX;
     u8 shapeValue;
 
-    var_f3 = arg1.x;
-    var_f20 = 0.0f;
-    if (!(D_800C4AC0_de <= var_f3) && !(var_f3 <= D_800C4AC4_de) &&
-        !(D_800C4AC0_de <= arg1.y) && !(arg1.y <= D_800C4AC4_de) &&
-        !(D_800C4AC0_de <= arg1.z) && !(arg1.z <= D_800C4AC4_de)) {
-        shapeValue = arg0->shape;
+    localX = localPosition.x;
+    volumeDistance = 0.0f;
+    if (!(g_lightVolumePositiveBound <= localX) && !(localX <= g_lightVolumeNegativeBound) &&
+        !(g_lightVolumePositiveBound <= localPosition.y) && !(localPosition.y <= g_lightVolumeNegativeBound) &&
+        !(g_lightVolumePositiveBound <= localPosition.z) && !(localPosition.z <= g_lightVolumeNegativeBound)) {
+        shapeValue = lightVolume->shape;
         switch (shapeValue) {
         case 0:
-            var_f20 = (var_f3 * var_f3) + (arg1.y * arg1.y) +
-                      (arg1.z * arg1.z);
-            if (!(D_800C4AC0_de < var_f20)) {
-                var_f20 = D_800CD3F8[(s32)(var_f20 * D_800C4AC8_de)];
+            volumeDistance = (localX * localX) + (localPosition.y * localPosition.y) +
+                      (localPosition.z * localPosition.z);
+            if (!(g_lightVolumePositiveBound < volumeDistance)) {
+                volumeDistance = g_lightVolumeSphereDistanceLookup[(s32)(volumeDistance * g_lightVolumeSphereLookupScale)];
                 goto shared;
             }
             goto fail;
         case 2:
-            if (!(var_f3 <= 0.0f)) {
-                var_f20 = (arg1.y * arg1.y) +
-                          (arg1.z * arg1.z);
-                if (!((var_f3 * var_f3) < var_f20)) {
-                    var_f20 = D_800CD4FC[(s32)(var_f20 * D_800C4ACC_de)];
-                    var_f20 /= var_f3;
+            if (!(localX <= 0.0f)) {
+                volumeDistance = (localPosition.y * localPosition.y) +
+                          (localPosition.z * localPosition.z);
+                if (!((localX * localX) < volumeDistance)) {
+                    volumeDistance = g_lightVolumeConeDistanceLookup[(s32)(volumeDistance * g_lightVolumeConeLookupScale)];
+                    volumeDistance /= localX;
                     goto shared;
                 }
             }
             goto fail;
         case 1:
-            if (var_f3 < 0.0f) {
-                var_f3 = -var_f3;
+            if (localX < 0.0f) {
+                localX = -localX;
             }
-            var_f0 = arg1.y;
-            arg1.x = var_f3;
-            if (var_f0 < 0.0f) {
-                var_f0 = -var_f0;
+            absoluteY = localPosition.y;
+            localPosition.x = localX;
+            if (absoluteY < 0.0f) {
+                absoluteY = -absoluteY;
             }
-            var_f1 = arg1.z;
-            arg1.y = var_f0;
-            if (var_f1 < 0.0f) {
-                var_f1 = -var_f1;
+            absoluteZ = localPosition.z;
+            localPosition.y = absoluteY;
+            if (absoluteZ < 0.0f) {
+                absoluteZ = -absoluteZ;
             }
-            arg1.z = var_f1;
-            var_f20 = var_f1;
-            if (!(var_f0 <= var_f20)) {
-                var_f20 = var_f0;
+            localPosition.z = absoluteZ;
+            volumeDistance = absoluteZ;
+            if (!(absoluteY <= volumeDistance)) {
+                volumeDistance = absoluteY;
             }
-            if (!(var_f3 <= var_f20)) {
-                var_f20 = var_f3;
+            if (!(localX <= volumeDistance)) {
+                volumeDistance = localX;
             }
             goto shared;
         default:
             goto shared;
         }
 shared:
-        var_f20 = D_800C4AD0_de - var_f20;
-        temp_f0 = arg0->falloff;
-        if (var_f20 < temp_f0) {
-            var_f20 /= temp_f0;
+        volumeDistance = g_lightVolumeUnitIntensity - volumeDistance;
+        falloff = lightVolume->falloff;
+        if (volumeDistance < falloff) {
+            volumeDistance /= falloff;
         } else {
-            var_f20 = D_800C4AD0_de;
+            volumeDistance = g_lightVolumeUnitIntensity;
         }
-        if (arg0->shape == 1) {
-            *vectorComponents = arg0->axis;
+        if (lightVolume->shape == 1) {
+            *vectorComponents = lightVolume->axis;
         } else {
-            *vectorComponents = arg1;
+            *vectorComponents = localPosition;
         }
         Graphu64_NormalizeVec3(vectorComponents);
-        *arg5 = var_f20;
+        *intensity = volumeDistance;
         return 1;
     } else {
 fail:
         vectorComponents->y = 0.0f;
         vectorComponents->z = 0.0f;
-        vectorComponents->x = D_800C4AD4_de;
-        *arg5 = 0.0f;
+        vectorComponents->x = g_lightVolumeDefaultDirectionX;
+        *intensity = 0.0f;
         return 0;
     }
 }
 
 /* 800C9BB0.CPP */
-const unsigned int D_auto_src_rw_pool_80277128_CA7B0_us_rev1[6] = {
+const unsigned int g_lightVolumeEvaluationConstantsUsRev1[6] = {
     0x3F800000, 0xBF800000, 0x42800000, 0x42800000, 0x3F800000, 0x3F800000,
 };
 
 /* 80277444_2.CPP */
 extern void Graphu64_TransformDirection(void *matrix, void *inputDirection, void *transformedDirection);
 
-s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *lightVolume, CVector3 worldPoint, CVector3 surfaceNormal, f32 *lightTransform,
+s32 Lighting_EvaluateLightVolume(SceneLightVolume *lightVolume, CVector3 worldPoint, CVector3 surfaceNormal, f32 *lightTransform,
                   CVector3 *lightContribution, f32 *contributionWeight) {
     CVector3 second;
     CVector3 first;
@@ -275,7 +275,7 @@ s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *lightVolume, CVector3 worldPoint
 }
 
 extern void Graphu64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
-void Lighting_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Vertices38 *mesh,
+void Lighting_AccumulateVertexLighting(SceneLightVolume **lights, s32 lightCount, Vertices38 *mesh,
                      PackedMatrixWords *matrices, CVector3 *output, s32 multiple)
 {
     f32 matrix[16];
@@ -285,7 +285,7 @@ void Lighting_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, V
     CVector3 *dest;
     u32 pattern;
     Vertex38 *vertex, *base;
-    ObjectRecAtBC *light;
+    SceneLightVolume *light;
 
     count = mesh->count;
     base = mesh->vertices;
@@ -377,7 +377,7 @@ void Lighting_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords 
     count = data->count;
     base = data->vertices;
     Graphu64_ConvertMatrixToFloat(matrix, matrices);
-    source = D_80137078;
+    source = g_sceneLightSources;
     light.x = source->x;
     light.y = source->y;
     light.z = source->z;
@@ -656,14 +656,14 @@ void Lighting_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
     VertexColor color;
     ColorVertex *vertex;
     s32 count, i, channelValue;
-    if (1.0f < (f32)D_801462C8.buttons * (1.0f / 255.0f)) {
+    if (1.0f < (f32)g_gameSettings.lightingGamma * (1.0f / 255.0f)) {
         whiteBlend = 1.0f;
     } else {
-        whiteBlend = (f32)D_801462C8.buttons * (1.0f / 255.0f);
+        whiteBlend = (f32)g_gameSettings.lightingGamma * (1.0f / 255.0f);
     }
     vertex = mesh->vertices;
     count = mesh->count;
-    if (D_801462C8.flags & 0x4000) {
+    if (g_gameSettings.flags & 0x4000) {
         for (i = 0; i < count; i++) {
             vertex[i].r &= colorMask;
             vertex[i].g &= colorMask;
@@ -690,9 +690,9 @@ void Lighting_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
     }
 }
 
-extern char D_800C4B1C_de[13]; /* "Lit Vertices": allocation tag */
-extern CVector3 D_80111D70[];
-extern s32 D_800D2850;
+extern char s_litVerticesAllocationTag[13]; /* "Lit Vertices": allocation tag */
+extern CVector3 g_vertexLightAccumulation[];
+extern s32 g_vertexLightingMode;
 extern s32 SetN64_GetSizedPackSection(s32 pack, s32 index, s32 *size);
 extern u8 **Cache_AllocateResource(s32, s32, u32, void *);
 
@@ -739,12 +739,12 @@ s32 Lighting_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bound
     model = (Vertices38 *)SetN64_GetSizedPackSection(modelResource, 0, &modelBytes);
     modelVertexCount = model->count;
     for (clearIndex = 0; clearIndex < modelVertexCount; clearIndex++) {
-        D_80111D70[clearIndex].x = 0;
-        D_80111D70[clearIndex].y = 0;
-        D_80111D70[clearIndex].z = 0;
+        g_vertexLightAccumulation[clearIndex].x = 0;
+        g_vertexLightAccumulation[clearIndex].y = 0;
+        g_vertexLightAccumulation[clearIndex].z = 0;
     }
     if (needsColors != 0) {
-        allocation = Cache_AllocateResource(0, modelBytes + 4 * sizeof(s32) + model->count * 4, 0, D_800C4B1C_de);
+        allocation = Cache_AllocateResource(0, modelBytes + 4 * sizeof(s32) + model->count * 4, 0, s_litVerticesAllocationTag);
         if (allocation == 0) {
             return 0;
         }
@@ -756,21 +756,21 @@ s32 Lighting_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bound
         pack[3] = 0xDEADBEEF;
         copiedModel = (Vertices38 *)(*allocation + pack[1]);
         colors = *allocation + pack[2];
-        func_802BD3A0_de(copiedModel, model, modelBytes);
+        Libc_CopyBytes(copiedModel, model, modelBytes);
     } else {
-        allocation = Cache_AllocateResource(0, modelBytes + 8, 0, D_800C4B1C_de);
+        allocation = Cache_AllocateResource(0, modelBytes + 8, 0, s_litVerticesAllocationTag);
         if (allocation == 0) {
             return 0;
         }
         ((s32 *)*allocation)[0] = 0;
         copiedModel = (Vertices38 *)(*allocation + 8);
-        func_802BD3A0_de(copiedModel, model, modelBytes);
+        Libc_CopyBytes(copiedModel, model, modelBytes);
     }
     table = SetN64_GetPackSection((void *)modelResource, 1);
     if (table->count != 0) {
         s32 *packed = table->packed;
         for (colorIndex = 0; colorIndex < modelVertexCount; colorIndex++) {
-            CVector3 *light = &D_80111D70[colorIndex];
+            CVector3 *light = &g_vertexLightAccumulation[colorIndex];
             s32 red, green, blue;
             packedColor = packed[colorIndex];
             red = ((s32)((u32)(packedColor & 0xFF0000) << 8)) >> 23;
@@ -781,8 +781,8 @@ s32 Lighting_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bound
             light->z += blue;
         }
     }
-    if (D_800D2850 == 0) {
-        Lighting_AccumulateDirectionalLighting(copiedModel, matrices, D_80111D70, skinned);
+    if (g_vertexLightingMode == 0) {
+        Lighting_AccumulateDirectionalLighting(copiedModel, matrices, g_vertexLightAccumulation, skinned);
     } else if (lightCount == 0) {
         Shared_World *world = &g_world;
         worldLightCount = 0;
@@ -790,12 +790,12 @@ s32 Lighting_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bound
             worldLightCount += ((HitBoxTable *)SetN64_GetPackSection(*(void **)world->sectors[sectorIndex].resource, 2))->count;
         }
         if (worldLightCount == 0) {
-            Lighting_AccumulateDirectionalLighting(copiedModel, matrices, D_80111D70, skinned);
+            Lighting_AccumulateDirectionalLighting(copiedModel, matrices, g_vertexLightAccumulation, skinned);
         }
     } else {
-        Lighting_AccumulateVertexLighting((ObjectRecAtBC **)lights, lightCount, copiedModel, matrices, D_80111D70, skinned);
+        Lighting_AccumulateVertexLighting((SceneLightVolume **)lights, lightCount, copiedModel, matrices, g_vertexLightAccumulation, skinned);
     }
-    Lighting_ApplyVertexColors((void *)copiedModel, (void *)D_80111D70);
+    Lighting_ApplyVertexColors((void *)copiedModel, (void *)g_vertexLightAccumulation);
     if (needsColors != 0) {
         s32 vertexCount = copiedModel->count;
         s32 colorSlot = 0;
@@ -811,12 +811,12 @@ s32 Lighting_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bound
 
 /* 800C9C0C_2.CPP */
 #if !(defined(VERSION_US_REV1))
-const char D_802784C0_CA80C[13] =
+const char s_litVerticesAllocationText[13] =
     "Lit Vertices\000";
 #endif
 
 #if defined(VERSION_US)
-unsigned char rodata_unresolved_800C4A59[7] = {
+unsigned char k_LightingEncodedBytes[7] = {
     0x11, 0x43, 0x43, 0x61, 0x6D, 0x65, 0x72,
 };
 #endif
@@ -826,7 +826,7 @@ unsigned char rodata_unresolved_800C4A59[7] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C4E19[7] = {
+unsigned char k_LightingEncodedBytesBlock3[7] = {
     0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 #endif
@@ -836,7 +836,7 @@ unsigned char rodata_unresolved_800C4E19[7] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C4DD9[7] = {
+unsigned char k_LightingEncodedBytesBlock2[7] = {
     0xE3, 0x18, 0x23, 0x00, 0x03, 0x18, 0x80,
 };
 #endif
@@ -846,7 +846,7 @@ unsigned char rodata_unresolved_800C4DD9[7] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C4B29[7] = {
+unsigned char k_LightingEncodedBytesBlock1[7] = {
     0x06, 0x34, 0x03, 0x8E, 0x84, 0x00, 0x38,
 };
 #endif

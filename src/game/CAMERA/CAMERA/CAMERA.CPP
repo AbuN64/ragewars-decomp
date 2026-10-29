@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VIEWFLAGS.H"
@@ -11,7 +11,7 @@
 #include "COMMON/APPROACHLOCATION.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "COMMON/WORLD.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -24,8 +24,8 @@
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_800CD8D0.H"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/g_defaultCameraSurfaceType.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "GAME/BUILDDIRECTIONMATRIX.H"
 #include "COMMON/GFX.H"
 #include "COMMON/VIDEO_DIMENSIONS.H"
@@ -36,14 +36,14 @@
 #include "CAMERA/CAMERA.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
-#include "COMMON/EXTERNS_10.H"
+#include "COMMON/TRIGGER_AND_FLOAT_VALUE_OPERATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/OBJB.H"
 #include "SYSTEM/LIST.H"
 #include "COMMON/CHANNEL.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "abi.h"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/S1.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
@@ -68,12 +68,12 @@ void Camera_AccumulateDistanceScaledShake(CShake *shake, CVector3 position, CVec
                              (position.y * position.y) +
                              (position.z * position.z));
     if (distance < shake->m_Radius) {
-        distance = Defs_CosineEase(D_800C3090_de - (distance / shake->m_Radius));
+        distance = Defs_CosineEase(g_cameraShakeDistanceComplement - (distance / shake->m_Radius));
 
         wave = &shake->x;
         if (wave->mode == 0) goto x_sine;
         if (wave->mode != 1) goto x_zero;
-        value = Gu_Sinf(wave->m_Angle * D_800C3094_de) * wave->m_Amp;
+        value = Gu_Sinf(wave->m_Angle * g_cameraShakeXAngleScale) * wave->m_Amp;
         goto x_done;
 x_sine:
         value = Graphu64_RandomBetween(-wave->m_Amp, wave->m_Amp);
@@ -86,7 +86,7 @@ x_done:
         wave = &shake->y;
         if (wave->mode == 0) goto y_sine;
         if (wave->mode != 1) goto y_zero;
-        value = Gu_Sinf(wave->m_Angle * D_800C3098_de) * wave->m_Amp;
+        value = Gu_Sinf(wave->m_Angle * g_cameraShakeYAngleScale) * wave->m_Amp;
         goto y_done;
 y_sine:
         value = Graphu64_RandomBetween(-wave->m_Amp, wave->m_Amp);
@@ -99,7 +99,7 @@ y_done:
         wave = &shake->z;
         if (wave->mode == 0) goto z_sine;
         if (wave->mode != 1) goto z_zero;
-        value = Gu_Sinf(wave->m_Angle * D_800C309C_de) * wave->m_Amp;
+        value = Gu_Sinf(wave->m_Angle * g_cameraShakeZAngleScale) * wave->m_Amp;
         goto z_done;
 z_sine:
         value = Graphu64_RandomBetween(-wave->m_Amp, wave->m_Amp);
@@ -114,11 +114,11 @@ z_done:
 /* Advances an overlay's fade: state 1 fades the alpha at 0x551 in over the 0x54B-frame duration up to the
  * maximum at 0x54A, state 2 holds the maximum for 0x54C frames, state 3 fades out over 0x54D frames and
  * returns to state 0; each state change restarts the timer at 0x538, which then advances by the frame
- * time D_800D2988. */
+ * time g_frameElapsedTime. */
 
 
 
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
 void Camera_AdvanceOverlayFade(Overlay *overlay) {
     switch (overlay->state) {
@@ -150,30 +150,30 @@ void Camera_AdvanceOverlayFade(Overlay *overlay) {
         overlay->alpha = (u32)(overlay->alphaMax - overlay->timer / (overlay->fadeOut + 1) * overlay->alphaMax);
         break;
     }
-    overlay->timer += D_800D2988;
+    overlay->timer += g_frameElapsedTime;
 }
 
-/* Finishes an entity for the frame: when a player in the D_80145060 list owns it, draws its rectangle
+/* Finishes an entity for the frame: when a player in the g_transientPlayerList list owns it, draws its rectangle
  * through SetN64_DrawColorRectangle if that player shows outlines (flag 0x1000), using the entity's colour (or the
- * override colour D_800FEAD8 when D_800C9FE4 is set, darkened when option 0x4000 is set); it then
- * notifies the player list through func_8022A398_de when Cinema_IsSequenceInWindow is clear and SetN64_IsModeThirteen is set,
+ * override colour g_playerSequenceSavedViewBytes when g_playerSequenceCompletionPending is set, darkened when option 0x4000 is set); it then
+ * notifies the player list through Playerai_UpdateViewPlayerProjection when Cinema_IsSequenceInWindow is clear and SetN64_IsModeThirteen is set,
  * and finishes the entity through Cinema_DrawSequenceOverlay. */
 
 
 
 
 
-extern u8 D_800FEAD8[4];
+extern u8 g_playerSequenceSavedViewBytes[4];
 extern void SetN64_DrawColorRectangle(void *, u8 *, s32, s32, s32, s32);
 extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 SetN64_IsModeThirteen(void);
-extern void func_8022A398_de(void *, View *);
+extern void Playerai_UpdateViewPlayerProjection(void *, View *);
 extern void Cinema_DrawSequenceOverlay(View *);
 
 static inline SharedPlayer *find_owner(View *entity) {
     SharedPlayer *player;
 
-    for (player = D_80145060.actorList; player != 0; player = player->views16E0.view16E0_1.next) {
+    for (player = g_transientPlayerList.actorList; player != 0; player = player->views16E0.view16E0_1.next) {
         if (player->views5DC.view5DC_4.entity == entity) {
             return player;
         }
@@ -195,55 +195,55 @@ void Camera_DrawViewportOverlays(View *entity) {
         color[1] = entity->color[1];
         color[2] = entity->color[2];
         color[3] = entity->color[3];
-        if (D_800C9FE4 != 0) {
+        if (g_playerSequenceCompletionPending != 0) {
             for (i = 0; i < 4; i++) {
-                color[i] = D_800FEAD8[i];
+                color[i] = g_playerSequenceSavedViewBytes[i];
             }
         }
-        if (D_801462C8.flags & 0x4000) {
+        if (g_gameSettings.flags & 0x4000) {
             color[0] >>= 3;
             color[1] >>= 3;
             color[2] >>= 3;
         }
-        SetN64_DrawColorRectangle(&D_8011FAC0, color, entity->viewport[2], entity->viewport[3], entity->viewport[2] + entity->viewport[0],
+        SetN64_DrawColorRectangle(&g_gameSession, color, entity->viewport[2], entity->viewport[3], entity->viewport[2] + entity->viewport[0],
                       entity->viewport[3] + entity->viewport[1]);
     }
     if (Cinema_IsSequenceInWindow() == 0 && SetN64_IsModeThirteen() != 0) {
-        func_8022A398_de(&D_80145040, entity);
+        Playerai_UpdateViewPlayerProjection(&g_playerViewRenderContext, entity);
     }
     Cinema_DrawSequenceOverlay(entity);
 }
 
 #if defined(VERSION_US)
-const unsigned int rodata_unresolved_800C2FE4[1] = {
+const unsigned int k_CameraZeroWordsVariant1[1] = {
     0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-const unsigned int rodata_unresolved_800C33A4[1] = {
+const unsigned int k_CameraZeroWordsVariant4[1] = {
     0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU)
-const unsigned int rodata_unresolved_800C3364[1] = {
+const unsigned int k_CameraZeroWordsVariant3[1] = {
     0x00000000,
 };
 #endif
 
 #if defined(VERSION_DE)
-const unsigned int rodata_unresolved_800C30B4[1] = {
+const unsigned int k_CameraZeroWordsVariant2[1] = {
     0x00000000,
 };
 #endif
 
 /* 80233920_2.CPP */
-extern u32 D_800CD730;
+extern u32 g_gameLoopFrameCount;
 
 /* Animate the shared light colors and direction, and both actor tint colors. */
 #if defined(VERSION_US_REV1)
-const unsigned int D_blob_45436944fabdef00bf64[1] = {
+const unsigned int k_CameraZeroWords[1] = {
     0x00000000,
 };
 #endif
@@ -266,34 +266,34 @@ void Camera_AnimateViewColorsAndLight(View *actor) {
     ambientScale = phaseScale;
     do {
         ambient = (ambientScale * (Gu_Sinf(
-            phaseScale * (f32) D_800CD730 * ((f32) (channel + 2) * 4.0f) *
+            phaseScale * (f32) g_gameLoopFrameCount * ((f32) (channel + 2) * 4.0f) *
             0.01745329424738884f) * 16.0f)) + 16.0f + 48.0f;
-        D_800CBC90[0].ambientCopy[channel] = D_800CBC90[0].ambient[channel] = (u32)ambient;
+        g_playerModelLighting[0].ambientCopy[channel] = g_playerModelLighting[0].ambient[channel] = (u32)ambient;
         diffuse = (((Gu_Sinf(
-            phaseScale * (f32) D_800CD730 * ((f32) (channel + 2) * 4.0f) *
+            phaseScale * (f32) g_gameLoopFrameCount * ((f32) (channel + 2) * 4.0f) *
             0.01745329424738884f) * 64.0f) + 255.0f) - 64.0f) - 1.0f;
-        D_800CBC90[0].diffuseCopy[channel] = D_800CBC90[0].diffuse[channel] = (u32)diffuse;
+        g_playerModelLighting[0].diffuseCopy[channel] = g_playerModelLighting[0].diffuse[channel] = (u32)diffuse;
         channel += 1;
     } while (channel < 3);
-    direction.x = Gu_Sinf((f32) (D_800CD730 * 6) * 0.01745329424738884f);
-    direction.y = Gu_Sinf((f32) (D_800CD730 * 8) * 0.01745329424738884f);
-    direction.z = Math_Cosf((f32) (D_800CD730 * 10) * 0.01745329424738884f);
+    direction.x = Gu_Sinf((f32) (g_gameLoopFrameCount * 6) * 0.01745329424738884f);
+    direction.y = Gu_Sinf((f32) (g_gameLoopFrameCount * 8) * 0.01745329424738884f);
+    direction.z = Math_Cosf((f32) (g_gameLoopFrameCount * 10) * 0.01745329424738884f);
     Graphu64_NormalizeVec3(&direction);
     direction.x *= 120.0f;
     direction.y *= 120.0f;
     direction.z *= 120.0f;
-    D_800CBC90[0].direction[0] = (u32)direction.x;
-    D_800CBC90[0].direction[1] = (u32)direction.y;
-    D_800CBC90[0].direction[2] = (u32)direction.z;
-    red = (Gu_Sinf(2.0f * (phaseScale * (f32) D_800CD730) * 0.06981317698955536f) * 64.0f) + 128.0f;
+    g_playerModelLighting[0].direction[0] = (u32)direction.x;
+    g_playerModelLighting[0].direction[1] = (u32)direction.y;
+    g_playerModelLighting[0].direction[2] = (u32)direction.z;
+    red = (Gu_Sinf(2.0f * (phaseScale * (f32) g_gameLoopFrameCount) * 0.06981317698955536f) * 64.0f) + 128.0f;
     redByte = (u32)red & 0xF8;
     actor->color[0] = redByte;
     actor->secondaryColor[0] = redByte;
-    green = (Gu_Sinf(phaseScale * (f32) D_800CD730 * 0.20943953096866608f) * 64.0f) + 128.0f;
+    green = (Gu_Sinf(phaseScale * (f32) g_gameLoopFrameCount * 0.20943953096866608f) * 64.0f) + 128.0f;
     greenByte = (u32)green & 0xF8;
     actor->color[1] = greenByte;
     actor->secondaryColor[1] = greenByte;
-    blue = (Gu_Sinf(phaseScale * (f32) D_800CD730 * 0.27925270795822144f) * 64.0f) + 128.0f;
+    blue = (Gu_Sinf(phaseScale * (f32) g_gameLoopFrameCount * 0.27925270795822144f) * 64.0f) + 128.0f;
     blueByte = (u32)blue & 0xF8;
     actor->color[2] = blueByte;
     actor->secondaryColor[2] = blueByte;
@@ -335,8 +335,8 @@ void Camera_BlendEnvironmentColors(View *self) {
     fadeA = hold;
     fadeB = hold;
     freeze = hold;
-    for (node = D_80145060.actorList; node != 0; node = node->views16E0.view16E0_1.next) {
-        if (node->views5DC.view5DC_0.unk5DC == self) {
+    for (node = g_transientPlayerList.actorList; node != 0; node = node->views16E0.view16E0_1.next) {
+        if (node->views5DC.view5DC_0.messageCamera == self) {
             ownerNode = node;
             goto found;
         }
@@ -346,7 +346,7 @@ void Camera_BlendEnvironmentColors(View *self) {
 found:
     if (node != 0) {
         hold = 0;
-        if ((ownerNode->views5E8.view664_27.unk664 & 0x40) ||
+        if ((ownerNode->views5E8.view664_27.timer & 0x40) ||
             (ownerNode->views1C.view38_3.flags & 0x1000)) {
             hold = 1;
         }
@@ -393,11 +393,11 @@ found:
         endB = rec->b;
     }
 
-    if (D_800CD730 == 0 || rec->period == 0.0f) {
+    if (g_gameLoopFrameCount == 0 || rec->period == 0.0f) {
         self->blendTime = 1.0f;
     } else {
         f32 progress;
-        progress = self->blendTime + D_800D2988 / (rec->period * 15.0f);
+        progress = self->blendTime + g_frameElapsedTime / (rec->period * 15.0f);
         if (1.0f < progress) {
             progress = 1.0f;
         }
@@ -444,7 +444,7 @@ found:
 #endif
 
 /* 80233920_4.CPP */
-extern s32 D_80141008;
+extern s32 g_fallbackScreenMessageEmitter;
 extern void MultiplyQuaternions(void*,void*,void*);
 extern u32 Weapon_UpdateShakeAxis(CShakeAxis*);
 extern void Graphu64_MultiplyAffineMatrices(f32*,f32*,f32*);
@@ -501,18 +501,18 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
         if (Cinema_IsSequenceInWindow() == 0) {
             Gsky_GetFloorSurfaceShake(cameraTransform, &viewMotionOffsets);
             adjustedRoll += viewMotionOffsets.z;
-            gameplayAngleScale = D_800C31F8_de;
+            gameplayAngleScale = g_cameraGameplayAngleScale;
             rollHalfAngle = adjustedRoll * gameplayAngleScale;
             adjustedPitch += viewMotionOffsets.x;
             rollHalfSine = Gu_Sinf(rollHalfAngle);
             pitchHalfAngle = adjustedPitch * gameplayAngleScale;
-            D_80115DEC = rollHalfSine;
+            g_turretAimSine = rollHalfSine;
             q38.word[0] = 0;
             q38.word[1] = 0;
             q38.f[2] = rollHalfSine;
             q38.f[3] = Math_Cosf(rollHalfAngle);
             pitchHalfSine = Gu_Sinf(pitchHalfAngle);
-            D_80115DEC = pitchHalfSine;
+            g_turretAimSine = pitchHalfSine;
             q18.f[0] = pitchHalfSine;
             q18.word[1] = 0;
             q18.word[2] = 0;
@@ -523,7 +523,7 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
             q28.f[1] = yawHalfSine;
             q28.word[2] = 0;
             cosineInput = ((actor->yaw + actor->extraYaw) * gameplayAngleScale);
-            D_80115DEC = yawHalfSine;
+            g_turretAimSine = yawHalfSine;
             baseQuaternion = actor->base.f;
             q28.f[3] = Math_Cosf(cosineInput);
             MultiplyQuaternions(q48.f, q18.f, q28.f);
@@ -541,8 +541,8 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
             Weapon_UpdateShakeAxis(&actor->effect.x);
             Weapon_UpdateShakeAxis(&actor->effect.y);
             Weapon_UpdateShakeAxis(&actor->effect.z);
-            if (cameraTransform != &D_80141008) {
-                effect = ((TransformWorld*)(void*)&D_80141008)->effects;
+            if (cameraTransform != &g_fallbackScreenMessageEmitter) {
+                effect = ((TransformWorld*)(void*)&g_fallbackScreenMessageEmitter)->effects;
                 if (effect != 0) {
                     do {
                         Camera_AccumulateDistanceScaledShake(effect, actor->position.value, &result);
@@ -562,27 +562,27 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
             Graphu64_MultiplyAffineMatrices(actor->matrix, matrix, m128);
         } else {
             cosineInput = actor->roll;
-            sequenceAngleScale = D_800C31FC_de;
+            sequenceAngleScale = g_cameraSequenceAngleScale;
             sequenceRollHalfSine = Gu_Sinf(cosineInput * sequenceAngleScale);
             q38.word[0] = 0;
             q38.word[1] = 0;
             q38.f[2] = sequenceRollHalfSine;
             cosineInput = (actor->roll * sequenceAngleScale);
-            D_80115DEC = sequenceRollHalfSine;
+            g_turretAimSine = sequenceRollHalfSine;
             q38.f[3] = Math_Cosf(cosineInput);
             sequencePitchHalfSine = Gu_Sinf(actor->pitch * sequenceAngleScale);
             q18.f[0] = sequencePitchHalfSine;
             q18.word[1] = 0;
             q18.word[2] = 0;
             cosineInput = (actor->pitch * sequenceAngleScale);
-            D_80115DEC = sequencePitchHalfSine;
+            g_turretAimSine = sequencePitchHalfSine;
             q18.f[3] = Math_Cosf(cosineInput);
             sequenceYawHalfSine = Gu_Sinf((actor->yaw + actor->extraYaw) * sequenceAngleScale);
             q28.word[0] = 0;
             q28.f[1] = sequenceYawHalfSine;
             q28.word[2] = 0;
             cosineInput = ((actor->yaw + actor->extraYaw) * sequenceAngleScale);
-            D_80115DEC = sequenceYawHalfSine;
+            g_turretAimSine = sequenceYawHalfSine;
             q28.f[3] = Math_Cosf(cosineInput);
             MultiplyQuaternions(q48.f, q18.f, q28.f);
             actor->combined=q48;
@@ -600,14 +600,14 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
 
 /* 800C82E8.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_802349C0_C8EE8[2] = {
+const unsigned int k_CameraEncodedWords[2] = {
     0x3F000000, 0x3F000000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802349C0_C8EE8_us_rev1.c */
-const unsigned int D_blob_996b819445e4357a0cbb[2] = {
+const unsigned int k_CameraEncodedWordsBlock7[2] = {
     0x3F000000, 0x3F000000,
 };
 #endif
@@ -644,13 +644,13 @@ void Camera_UpdateFrustumBounds(GameplayCamera *camera) {
     if (camera->dirty == 0) {
         return;
     }
-    if (D_801462C8.local == 0) {
+    if (g_gameSettings.local == 0) {
         radius = camera->farPlane /
-                 Math_Cosf(camera->unk530 * camera->aspect * D_800C3200_de[0]);
+                 Math_Cosf(camera->verticalFieldOfView * camera->aspect * g_cameraFrustumAngleConstants[0]);
         pts[0].x = 0.0f;
         pts[0].y = 0.0f;
         pts[0].z = 0.0f;
-        pts[1].x = radius * Gu_Sinf(camera->unk530 * camera->aspect * D_800C3200_de[0]);
+        pts[1].x = radius * Gu_Sinf(camera->verticalFieldOfView * camera->aspect * g_cameraFrustumAngleConstants[0]);
         pts[1].y = pts[1].x / camera->aspect;
         pts[1].z = -camera->farPlane;
         pts[2].x = -pts[1].x;
@@ -666,8 +666,8 @@ void Camera_UpdateFrustumBounds(GameplayCamera *camera) {
         pts[0].x = 0.0f;
         pts[0].y = 0.0f;
         pts[0].z = 0.0f;
-        pts[1].x = camera->farHalfWidth * D_800C3200_de[1];
-        pts[1].y = camera->farHalfHeight * D_800C3200_de[1];
+        pts[1].x = camera->farHalfWidth * g_cameraFrustumAngleConstants[1];
+        pts[1].y = camera->farHalfHeight * g_cameraFrustumAngleConstants[1];
         pts[1].z = -camera->farPlane;
         pts[2].x = -pts[1].x;
         pts[2].y = pts[1].y;
@@ -684,7 +684,7 @@ void Camera_UpdateFrustumBounds(GameplayCamera *camera) {
     Graphu64_TransformPoints(camera->viewOrient, pts, out, 5);
     Visdata_BuildFrustumPlanes(camera->clipPlanes, out, out + 1, out + 2, out + 3, out + 4);
     Region_ComputePointBounds(camera->clipBounds, 5, out);
-    height = radius * D_800C3208_de;
+    height = radius * g_cameraFrustumHeightScale;
     camera->volumeBounds[0].x = camera->corners[0].x - radius;
     camera->volumeBounds[1].x = camera->corners[0].x + radius;
     camera->volumeBounds[0].y = camera->corners[0].y - height;
@@ -695,14 +695,14 @@ void Camera_UpdateFrustumBounds(GameplayCamera *camera) {
 
 /* 800C82F0.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80234DE0_C8EF0[3] = {
+const unsigned int k_CameraEncodedWordsBlock1[3] = {
     0x3C0EFA36, 0x3F000000, 0x3FC00000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80234DE0_C8EF0_us_rev1.c */
-const unsigned int D_blob_c9148dba878eade1c83c[3] = {
+const unsigned int k_CameraEncodedWordsBlock8[3] = {
     0x3C0EFA36, 0x3F000000, 0x3FC00000,
 };
 #endif
@@ -732,7 +732,7 @@ f32 Region_GetPolygonHeight(void *, f32, f32);
 int Tsmos_IsFrontendActive(void);
 int Tsmos_GetModeOneFlag(void);
 
-void func_802B6F9C_de(float *, u16 *, float, float, float, float, float);
+void guPerspectiveF(float *, u16 *, float, float, float, float, float);
 
 f32 Gu_Sqrtf(f32);
 void Menu_UpdateDialogList(void *);
@@ -740,15 +740,15 @@ void Sky_UpdateSceneEffects(void *scene, void *host);                  /* extern
                /* extern */
 s32 guLookAtF(f32 *, f32, f32, f32, f32, f32, f32, f32, f32, f32); /* extern */
 
-extern s32 D_80141008;
-extern s32 D_800D297C;
-extern f32 D_800D2988;
-extern s32 D_800E28D0;
-typedef struct Shared_func_80234FDC_S1 func_80234FDC_S1;
-typedef struct Shared_func_80234FDC_S4 func_80234FDC_S4;
-typedef struct Shared_func_80234FDC_S5 SharedRecAt0V2;
-typedef struct Lights SharedRecAt1A;
-typedef struct Shared_func_80234FDC_S8 func_80234FDC_S8;
+extern s32 g_fallbackScreenMessageEmitter;
+extern s32 g_lightingBufferIndex;
+extern f32 g_frameElapsedTime;
+extern s32 g_hudReferenceViewportWidth;
+typedef struct SharedCameraOwnerView CameraOwnerView;
+typedef struct SharedCameraRenderView CameraGlobalRenderView;
+typedef struct CameraRuntimeMode CameraRuntimeModeView;
+typedef struct Lights CameraFrameLights;
+typedef struct CameraFloorSurfaceView CameraFloorPolygonView;
 
 
 
@@ -756,9 +756,9 @@ typedef struct Shared_func_80234FDC_S8 func_80234FDC_S8;
 
 
 
-typedef struct Shared_Func_80234FDC_Callback Func_80234FDC_Callback;
-extern Func_80234FDC_Callback D_800CB384_de[];
-extern func_80234FDC_S4 D_80140FF8;
+typedef struct Shared_Func_80234FDC_Callback CameraModeCallbackEntry;
+extern CameraModeCallbackEntry g_cameraModeCallbacks[];
+extern CameraGlobalRenderView g_playerWeaponClassMode;
 
 
 /* unable to generate initializer: unknown type; const */
@@ -768,7 +768,7 @@ extern func_80234FDC_S4 D_80140FF8;
 /* Updates the actor view and projection matrices and applies camera effects. */
 void Camera_UpdateViewProjectionAndEffects(GameplayCamera *camera) {
     f32 ground_x;
-    func_80234FDC_S8 *floorPolygon;
+    CameraFloorPolygonView *floorPolygon;
     f32 referenceViewMatrix[16];
     f32 composedViewMatrix[16];
     f32 halfTurnMatrix[16];
@@ -778,11 +778,11 @@ void Camera_UpdateViewProjectionAndEffects(GameplayCamera *camera) {
     f32 horizontalFlipMatrix[16];
     f32 matrix[16];
     f32 hudProjectionMatrix[16];
-    s32 (*temp_v0)(s8 *);
+    s32 (*modeCallback)(s8 *);
     f32 farPlaneDistance;
     f32 projectionOrFloorScale;
     f32 baseHorizontalSlope;
-    f32 div_stage; 
+    f32 div_stage;
     f32 horizontalSlope;
     f32 floorSampleZ;
     f32 fovSine;
@@ -790,9 +790,9 @@ void Camera_UpdateViewProjectionAndEffects(GameplayCamera *camera) {
     f32 fovy;
     f32 floorHeightOffset;
     f32 aspect;
-    f32 initial_zoom; 
+    f32 initial_zoom;
     f32 floorSampleY;
-    f32 temp_f24;
+    f32 zoomBlend;
     f32 kickStepDelta;
     f32 bobBlendLimit;
     f32 lightZeroDirectionX;
@@ -806,7 +806,7 @@ void Camera_UpdateViewProjectionAndEffects(GameplayCamera *camera) {
     f32 verticalStretch;
     s32 sequenceFarPlane;
     s32 fovOverrideState;
-    s32 captured_state; 
+    s32 captured_state;
     s32 kickStepOperand;
     s8 *viewProjectionMatrix;
     s8 *viewOrientationMatrix;
@@ -814,42 +814,42 @@ void Camera_UpdateViewProjectionAndEffects(GameplayCamera *camera) {
     u16 advancedKickStep;
     u16 clampedKickStep;
 
-    SharedRecAt1A *frameLights;
-    func_80234FDC_S1 *cameraOwner;
-    func_80234FDC_S1 *actorCursor;
-    SharedRecAt0V2 *state; 
+    CameraFrameLights *frameLights;
+    CameraOwnerView *cameraOwner;
+    CameraOwnerView *actorCursor;
+    CameraRuntimeModeView *state;
 
-    actorCursor = D_80145060.actorList;
+    actorCursor = g_transientPlayerList.actorList;
     while (actorCursor != 0) {
-        if (actorCursor->unk5DC == camera) {
+        if (actorCursor->camera == camera) {
             cameraOwner = actorCursor;
             goto actor_found;
         }
-        actorCursor = actorCursor->unk16E0;
+        actorCursor = actorCursor->nextActor;
     }
     cameraOwner = 0;
 actor_found:
-    camera->elapsed = (f32) (camera->elapsed + D_800D2988);
+    camera->elapsed = (f32) (camera->elapsed + g_frameElapsedTime);
     Camera_BlendEnvironmentColors((View *) camera);
     camera->dirty = 1;
     if (Cinema_IsSequenceInWindow() == 0) {
-        temp_v0 = D_800CB384_de[camera->mode].fn;
-        if (temp_v0 != 0) {
-            temp_v0(camera);
+        modeCallback = g_cameraModeCallbacks[camera->mode].fn;
+        if (modeCallback != 0) {
+            modeCallback(camera);
         }
     }
-    frameLights = &camera->lights[D_800D297C];
+    frameLights = &camera->lights[g_lightingBufferIndex];
     guLookAtF(referenceViewMatrix, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
-    if ((Cinema_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
+    if ((Cinema_IsSequenceInWindow() != 0) && (camera != &g_fallbackScreenMessageEmitter)) {
         Cinema_UpdateSequenceTrack(camera);
     }
-    temp_f24 = camera->zoomBlend;
+    zoomBlend = camera->zoomBlend;
     initial_zoom = camera->zoomFov;
     Camera_BuildShakenViewTransform(camera);
     if (Cinema_IsSequenceInWindow() == 0) {
-        Weapon_UpdateShakeAxis(camera->unkB8);
-        Weapon_UpdateShakeAxis(camera->unkCC);
-        Weapon_UpdateShakeAxis(camera->unkE0);
+        Weapon_UpdateShakeAxis(camera->shakeAxisX);
+        Weapon_UpdateShakeAxis(camera->shakeAxisY);
+        Weapon_UpdateShakeAxis(camera->shakeAxisZ);
     }
     viewOrientationMatrix = (s8 *)camera->viewOrient;
     Graphu64_GetMatrixTranslation(viewOrientationMatrix, &camera->position.x);
@@ -859,15 +859,15 @@ actor_found:
     Graphu64_InvertAffineMatrix(inverseRotatedView, composedViewMatrix);
     Graphu64_MultiplyAffineMatrices(worldToViewMatrix, inverseRotatedView, referenceViewMatrix);
     CopyMatrix(camera->worldToView, worldToViewMatrix);
-    if ((cameraOwner != 0) && (cameraOwner->unk664 & 0x40) && (camera->unk24 == 0) && (Cinema_IsSequenceInWindow() == 0)) {
-        f32 inverseBobRateBlend; 
+    if ((cameraOwner != 0) && (cameraOwner->movementFlags & 0x40) && (camera->bobSuppressed == 0) && (Cinema_IsSequenceInWindow() == 0)) {
+        f32 inverseBobRateBlend;
         horizontalStretch = (((camera->bobAmplitudeX * 0.5f * (Gu_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeX * 0.5f * (Gu_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f);
         camera->stretchX = horizontalStretch;
         verticalStretch = (((camera->bobAmplitudeY * 0.5f * (Gu_Sinf(camera->bobPhaseY) + 1.0f)) + 0.9f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeY * 0.5f * (Gu_Sinf(camera->bobPhaseY) + 1.0f)) + 0.9f);
         camera->stretchY = verticalStretch;
-        camera->bobPhaseX = (f32) (camera->bobPhaseX + (D_800D2988 * camera->bobRateX));
-        camera->bobPhaseY = (f32) (camera->bobPhaseY + (D_800D2988 * camera->bobRateY));
-        bobRateBlend = cameraOwner->unk6C8 * 2.5f;
+        camera->bobPhaseX = (f32) (camera->bobPhaseX + (g_frameElapsedTime * camera->bobRateX));
+        camera->bobPhaseY = (f32) (camera->bobPhaseY + (g_frameElapsedTime * camera->bobRateY));
+        bobRateBlend = cameraOwner->bobSpeed * 2.5f;
         bobBlendLimit = 0.0f;
         if ((bobRateBlend < 0.0f) || (bobBlendLimit = 1.0f, (bobRateBlend > 1.0f))) {
             bobRateBlend = bobBlendLimit;
@@ -882,10 +882,10 @@ actor_found:
         camera->stretchX = 1.0f;
     }
     previousKickStep = camera->kickStep;
-    kickStepOperand = 0x32; 
+    kickStepOperand = 0x32;
     if (previousKickStep != kickStepOperand) {
         camera->stretchY = (f32) (((f32) (kickStepOperand - previousKickStep) * 0.08f) + 1.0f);
-        kickStepDelta = D_800D2988 * 10.0f;
+        kickStepDelta = g_frameElapsedTime * 10.0f;
         if (!(kickStepDelta >= 2.1474836e9f)) {
             kickStepOperand = (s32) kickStepDelta;
         } else {
@@ -905,17 +905,17 @@ actor_found:
         fovOverrideState = Tsmos_IsFrontendActive();
         if ((fovOverrideState == 1) && (Tsmos_GetModeOneFlag() == fovOverrideState)) {
             fovy = 45.0f;
-        } else if (temp_f24 != 0.0f) {
-            fovy = (temp_f24 * (initial_zoom - 75.0f)) + 75.0f;
+        } else if (zoomBlend != 0.0f) {
+            fovy = (zoomBlend * (initial_zoom - 75.0f)) + 75.0f;
         } else {
             fovy = 75.0f;
         }
     }
-    if ((Cinema_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
+    if ((Cinema_IsSequenceInWindow() != 0) && (camera != &g_fallbackScreenMessageEmitter)) {
         aspect = camera->viewWidth / camera->viewHeight;
-    } else if (D_80140FF8.unk0 == 2) {
+    } else if (g_playerWeaponClassMode.renderMode == 2) {
         aspect = 0.6666667f;
-        if (D_80140FF8.unk122F == 0) {
+        if (g_playerWeaponClassMode.sequenceViewReady == 0) {
             aspect = 2.666666f;
         }
     } else {
@@ -928,9 +928,9 @@ actor_found:
     verticalSlope = baseHorizontalSlope / aspect;
     verticalSlope = verticalSlope / camera->stretchY;
     horizontalSlope = baseHorizontalSlope / camera->stretchX;
-    projectionOrFloorScale = 1.0f; 
+    projectionOrFloorScale = 1.0f;
     fovy = Graphu64_ArcCos(Gu_Sqrtf(projectionOrFloorScale / ((verticalSlope * verticalSlope) + 1.0f)));
-    fovy = fovy * 57.295776f; 
+    fovy = fovy * 57.295776f;
     farPlaneDistance = camera->farPlane;
     aspect = horizontalSlope / verticalSlope;
     camera->aspect = aspect;
@@ -943,16 +943,16 @@ actor_found:
             camera->farPlane = (f32) sequenceFarPlane;
         }
     }
-    func_802B6F9C_de(right, &camera->perspNorm, fovy, aspect, 16.0f, camera->farPlane, 1.0f - (temp_f24 * 0.95f));
+    guPerspectiveF(right, &camera->perspNorm, fovy, aspect, 16.0f, camera->farPlane, 1.0f - (zoomBlend * 0.95f));
     Graphu64_BuildScaleMatrix(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
     Graphu64_MultiplyMatrices(composedViewMatrix, worldToViewMatrix, (f32 *) right);
     viewProjectionMatrix = (s8 *)camera->viewProjection;
     Graphu64_MultiplyMatrices((f32 *) viewProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
     Graphu64_ClampMatrixToFixedRange((f32 *) viewProjectionMatrix);
-    GraphU64_PackFixedMatrix((f32 *) viewProjectionMatrix, camera->projection[D_800D297C]);
+    GraphU64_PackFixedMatrix((f32 *) viewProjectionMatrix, camera->projection[g_lightingBufferIndex]);
     CopyMatrix(matrix, worldToViewMatrix);
-    state = &D_80140FF8.state;
-    if (state->unk0 == 4) {
+    state = &g_playerWeaponClassMode.state;
+    if (state->mode == 4) {
         PitchMatrix(matrix, camera->elapsed * 0.010908309f);
         YawMatrix(matrix, camera->elapsed * 0.008726647f);
     }
@@ -1004,47 +1004,47 @@ actor_found:
     frameLights->light1CopyB = 0;
     frameLights->light1PadB = 0;
     Camera_UpdateFrustumBounds(camera);
-    MatrixFromQuaternion(&camera->unk150, camera->faceScreen);
+    MatrixFromQuaternion(&camera->billboardQuaternion, camera->faceScreen);
     BuildYawMatrix(camera->faceScreenUpright, camera->roll);
-    if (D_80140FF8.unk8 != 0) {
-        func_802B6F9C_de(right, &camera->hudPerspNorm, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);
+    if (g_playerWeaponClassMode.alternateViewEnabled != 0) {
+        guPerspectiveF(right, &camera->hudPerspNorm, 47.5f, (f32) ((s32) g_hudReferenceViewportWidth / g_hudReferenceViewportHeight), 16.0f, 7168.0f, 1.0f);
         Graphu64_IdentityMatrix(worldToViewMatrix);
         Graphu64_MultiplyMatrices(composedViewMatrix, worldToViewMatrix, (f32 *) right);
         Graphu64_BuildScaleMatrix(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
         Graphu64_MultiplyMatrices(hudProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
         Graphu64_ClampMatrixToFixedRange(hudProjectionMatrix);
-        GraphU64_PackFixedMatrix(hudProjectionMatrix, camera->hudProjection[D_800D297C]);
+        GraphU64_PackFixedMatrix(hudProjectionMatrix, camera->hudProjection[g_lightingBufferIndex]);
     }
     Sky_UpdateSceneEffects(&camera->sceneEffects, camera);
     Menu_UpdateDialogList(&camera->messageList);
     if (Cinema_IsSequenceInWindow() != 0) {
-        camera->floorPoly = ((void *(*)())Scene_FindFloorPolygon)(&g_world, &camera->unk38);
+        camera->floorPoly = ((void *(*)())Scene_FindFloorPolygon)(&g_world, &camera->floorSampleX);
     }
-    captured_state = D_800CD8D0;
+    captured_state = g_defaultCameraSurfaceType;
     camera->floorSurface = captured_state;
     floorPolygon = camera->floorPoly;
-    ground_x = camera->unk38;
-    floorSampleY = camera->unk3C;
-    floorSampleZ = camera->unk40;
-    floorHeightOffset = camera->unk44;
+    ground_x = camera->floorSampleX;
+    floorSampleY = camera->floorSampleY;
+    floorSampleZ = camera->floorSampleZ;
+    floorHeightOffset = camera->floorHeightOffset;
     if ((floorPolygon != 0) && (Cinema_IsSequenceInWindow() == 0)) {
         projectionOrFloorScale = ((floorSampleY + floorHeightOffset) - Region_GetPolygonHeight(floorPolygon, ground_x, floorSampleZ)) * 0.09765625f;
         if ((projectionOrFloorScale < 11.0f) && (projectionOrFloorScale > 5.0f)) {
-            camera->floorSurface = (s32) floorPolygon->unk1C;
+            camera->floorSurface = (s32) floorPolygon->surfaceType;
         }
     }
     if (Cinema_IsSequenceInWindow() != 0) {
-        camera->floorSurface = (s32) D_800CD8D0;
+        camera->floorSurface = (s32) g_defaultCameraSurfaceType;
     }
     if (camera->zoomBlend > 0.0f) {
-        camera->floorSurface = (s32) D_800CD8D0;
+        camera->floorSurface = (s32) g_defaultCameraSurfaceType;
     }
 }
 
-extern s32 D_800D297C;
-extern s32 D_800E28D0;
+extern s32 g_lightingBufferIndex;
+extern s32 g_hudReferenceViewportWidth;
 extern Gfx *g_displayListCursor;
-extern Shared_func_80234FDC_S4 D_80140FF8;
+extern SharedCameraRenderView g_playerWeaponClassMode;
 extern void Geometry_SetViewEffect(s32);
 extern void Textload_SetTextureEffect(unsigned int);
 extern void Geometry_SelectEffectModes(void);
@@ -1107,8 +1107,8 @@ void Camera_SetupViewportAndFog(RacerViewport *view) {
     if (lry > SCREEN_HT - 1) {
         lry = maxy;
     }
-    buffer = D_8011FAC0.ring.current;
-    frame = D_800D297C;
+    buffer = g_gameSession.ring.current;
+    frame = g_lightingBufferIndex;
     gSPMatrix((*gfx)++, view->projectionMatrices[frame], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPPerspNormalize((*gfx)++, view->perspectiveNorm);
     view->viewports[frame].vscale[0] = vx;
@@ -1120,7 +1120,7 @@ void Camera_SetupViewportAndFog(RacerViewport *view) {
     gSPLookAtX((*gfx)++, &view->lights[frame][0]);
     gSPLookAtY((*gfx)++, &view->lights[frame][4]);
     Geometry_SetViewEffect(view->effect);
-    if (view != &D_80140FF8.view) {
+    if (view != &g_playerWeaponClassMode.view) {
         Textload_SetTextureEffect(view->effect);
     }
     Geometry_SelectEffectModes();
@@ -1130,12 +1130,12 @@ void Camera_SetupViewportAndFog(RacerViewport *view) {
     if (Tsmos_IsFrontendActive() != 0) {
         flag = GetMenuScreenOwner() != 2;
     }
-    if (view != &D_80140FF8.view || D_80140FF8.unk0 == 0 || flag != 0) {
+    if (view != &g_playerWeaponClassMode.view || g_playerWeaponClassMode.renderMode == 0 || flag != 0) {
         Geometry_SetModePreset(20);
         gDPPipeSync(g_displayListCursor++);
-        SetN64_ClearDepthRect(&D_8011FAC0, ulx, lrx, uly, lry, view->effect);
+        SetN64_ClearDepthRect(&g_gameSession, ulx, lrx, uly, lry, view->effect);
         gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);
-        if (D_801462C8.flags & 0x4000) {
+        if (g_gameSettings.flags & 0x4000) {
             red = 0;
             green = 0;
             blue = 0;
@@ -1165,7 +1165,7 @@ void Camera_SetupViewportAndFog(RacerViewport *view) {
             gDPSetFillColor(g_displayListCursor++, (GPACK_RGBA5551(red, green, blue, 1) << 16) |
                                               GPACK_RGBA5551(red, green, blue, 1));
         }
-        if (view != &D_80140FF8.view || D_80140FF8.state.unk0 == 3) {
+        if (view != &g_playerWeaponClassMode.view || g_playerWeaponClassMode.state.mode == 3) {
             gDPFillRectangle(g_displayListCursor++, ulx, uly, lrx, lry);
         }
     }
@@ -1173,7 +1173,7 @@ void Camera_SetupViewportAndFog(RacerViewport *view) {
     Geometry_SetColorDither(0);
     gDPSetAlphaDither(g_displayListCursor++, G_AD_NOTPATTERN);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
-    if (view != &D_80140FF8.view) {
+    if (view != &g_playerWeaponClassMode.view) {
         Defs_SetupPointLights(view);
     }
     gDPPipeSync(g_displayListCursor++);
@@ -1190,18 +1190,18 @@ void Camera_SetupViewportAndFog(RacerViewport *view) {
 extern Gfx *g_displayListCursor;
 
 extern s32 Cinema_IsSequenceInWindow(void);
-extern void func_80228798_de(void *, char *);
+extern void Playerai_UpdateViewModelBounds(void *, char *);
 extern s32 SetN64_IsModeThirteen(void);
-extern void func_8022A2A0_de(void *, char *);
+extern void Playerai_DrawPlayersForView(void *, char *);
 extern void Scene_DrawOpaqueActors(char *, char *);
 extern void Fx_DrawBoundedParticleQuads(void *, char *);
 extern void Scene_DrawTransparentObjects(char *, char *);
-extern void func_80228958_de(ObjRecAt20V2 *, char *);
-extern void func_8023B3F8_de(char *, char *);
+extern void Playerai_DrawPlayerModelsForView(GamePlayerListView *, char *);
+extern void Sky_DrawDepthSortedSceneEffects(char *, char *);
 extern void Scene_DrawWorldParticles(char *, char *);
 extern void Fx_DrawLinkedGeometry(void *, char *);
 extern void Gsky_DrawObjectFlares(char *);
-extern void func_8022A328_de(void *, char *);
+extern void Playerai_DrawViewPlayer(void *, char *);
 
 
 
@@ -1215,26 +1215,26 @@ void Camera_DrawWorldViewLayers(char *view, char *world) {
     SetN64_OnWorldViewDraw();
     Scene_DrawVisibleInstances(world, view);
     if (Cinema_IsSequenceInWindow() == 0) {
-        func_80228798_de(&D_80145040, view);
+        Playerai_UpdateViewModelBounds(&g_playerViewRenderContext, view);
     }
     if (SetN64_IsModeThirteen() != 0) {
-        func_8022A2A0_de(&D_80145040, view);
+        Playerai_DrawPlayersForView(&g_playerViewRenderContext, view);
     }
     Scene_DrawOpaqueActors(world, view);
-    Fx_DrawBoundedParticleQuads(&D_801379C0, view);
+    Fx_DrawBoundedParticleQuads(&g_actorParticleScene, view);
     if (Cinema_IsSequenceInWindow() == 0) {
         SetN64_DrawVisibleEffects(world + 0x11778, view);
     }
     Scene_DrawTransparentObjects(world, view);
-    func_80228958_de(&D_80145040, view);
-    func_8023B3F8_de(view + 0x570, view);
+    Playerai_DrawPlayerModelsForView(&g_playerViewRenderContext, view);
+    Sky_DrawDepthSortedSceneEffects(view + 0x570, view);
     Scene_DrawWorldParticles(world, view);
-    Fx_DrawLinkedGeometry(&D_801379C0, view);
+    Fx_DrawLinkedGeometry(&g_actorParticleScene, view);
     Gsky_DrawObjectFlares(view);
     if (Cinema_IsSequenceInWindow() == 0 && SetN64_IsModeThirteen() != 0) {
-        func_8022A328_de(&D_80145040, view);
+        Playerai_DrawViewPlayer(&g_playerViewRenderContext, view);
     }
-    if (D_801462C8.flags & 0x200) {
+    if (g_gameSettings.flags & 0x200) {
         gDPPipeSync(g_displayListCursor++);
         gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
         gDPSetBlendColor(g_displayListCursor++, 255, 255, 255, 255);
@@ -1255,7 +1255,7 @@ void Camera_DrawWorldViewLayers(char *view, char *world) {
 const char g_camerasText[8] = "Cameras";
 
 /* 800C83CC.CPP */
-const unsigned char D_d0_f6a5694fb306509f[13] = {
+const unsigned char k_CameraEncodedBytes[13] = {
     0x43, 0x61, 0x6D, 0x65, 0x72, 0x61, 0x20, 0x54, 0x65, 0x78, 0x74, 0x73, 0x00,
 };
 
@@ -1266,14 +1266,14 @@ const unsigned char D_d0_f6a5694fb306509f[13] = {
 
 /* 800C83DC.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8044A370_C8FDC[1] = {
+const unsigned int k_CameraEncodedWordsBlock4[1] = {
     0x3F800000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8044A370_C8FDC_us_rev1.c */
-const unsigned int D_blob_de7c1109ec0ed1ed5e0e[1] = {
+const unsigned int k_CameraOneWords[1] = {
     0x3F800000,
 };
 #endif
@@ -1281,7 +1281,7 @@ const unsigned int D_blob_de7c1109ec0ed1ed5e0e[1] = {
 /* 8023660C.CPP */
 /* Eases a camera's four framing values at 0x29C, 0x2A0, 0x2A4 and 0x2A8 toward their targets by 16 each
  * frame, snapping to the targets when func_80264B6C_de reports a cut and recording the easing rate 30 in
- * D_800FF224_de whenever a value moves. Adapted from func_8023A294_de as a static helper.
+ * g_cameraFramingTransitionTimer whenever a value moves. Adapted from Gsky_StepValueTowardTarget as a static helper.
  */
 
 extern s32 Control_IsSnapshotActive(void);
@@ -1293,13 +1293,13 @@ static inline f32 Camera_ApproachValue(f32 value, f32 target, f32 step) {
     }
     if (value < target) {
         value += step;
-        D_800FF224_de = 30.0f;
+        g_cameraFramingTransitionTimer = 30.0f;
         if (target < value) {
             value = target;
         }
     } else if (target < value) {
         value -= step;
-        D_800FF224_de = 30.0f;
+        g_cameraFramingTransitionTimer = 30.0f;
         if (value < target) {
             value = target;
         }
@@ -1360,21 +1360,21 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
     Box *clip, *bounds;
     ViewFlags initialFlags;
 
-    right = (f32) D_800E28D0;
+    right = (f32) g_hudReferenceViewportWidth;
     top = 0.0f;
-    bottom = (f32) D_800E28D4;
+    bottom = (f32) g_hudReferenceViewportHeight;
     left = 0.0f;
     if ((u32) state->header.views.count >= 2U) {
-        top = D_800CB38C_de;
-        bottom -= D_800CB388;
-        left = D_800D05D0;
-        right -= D_800CB394;
+        top = g_cameraViewportTopInset;
+        bottom -= g_cameraViewportBottomInset;
+        left = g_cameraViewportLeftInset;
+        right -= g_cameraViewportRightInset;
     }
     width = right - left;
-    halfWidth = width * D_800C3320_de;
+    halfWidth = width * g_cameraViewportHalfScale;
     height = bottom - top;
-    halfHeight = height * D_800C3320_de;
-    effect = D_801421B4;
+    halfHeight = height * g_cameraViewportHalfScale;
+    effect = g_cameraShakeEffectList;
     view = &state->self;
     if (effect != 0) {
         do {
@@ -1387,15 +1387,15 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
                 finished = zDone > 0U;
             }
             if (finished != 0) {
-                func_80255ED8_de(&state->activeEffects, effect);
-                func_80255CB8_de(&state->freeEffects, effect);
+                List_RemoveIntrusive(&state->activeEffects, effect);
+                List_PrependIntrusive(&state->freeEffects, effect);
             }
             effect = nextEffect;
             view = &state->self;
         } while (effect != 0);
     }
-    view->viewWidth = (f32) D_800E28D0;
-    view->viewHeight = (f32) D_800E28D4;
+    view->viewWidth = (f32) g_hudReferenceViewportWidth;
+    view->viewHeight = (f32) g_hudReferenceViewportHeight;
     view->viewLeft = 0;
     view->viewTop = 0;
     if ((Cinema_IsSequenceInWindow() == 0) && (Cinema_IsSequenceActive() == 0)) {
@@ -1409,7 +1409,7 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
             view->viewTop = 0;
             break;
         case 2:
-            if (D_801462C8.unknown1F == 0) {
+            if (g_gameSettings.twoPlayerScreenPreference == 0) {
                 view->viewWidth = width;
                 view->viewHeight = halfHeight;
                 view->viewLeft = left;
@@ -1433,9 +1433,9 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
             }
             break;
         case 3:
-            layout = &D_801462C8.counters;
+            layout = &g_gameSettings.counters;
             if (layout->transitionActive == 0) {
-            settings = &D_801462C8;
+            settings = &g_gameSettings;
             if (settings->slots[0].enabled == 1) {
                 view->viewWidth = halfWidth;
                 view->viewHeight = halfHeight;
@@ -1512,29 +1512,29 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
 
         }
     }
-    memcpy(&D_800FF208, state->self.clipBounds, sizeof(D_800FF208));
-    memcpy(&D_801031F0, state->self.volumeBounds, sizeof(D_801031F0));
-    D_80103220.flags = D_800CD8D0;
+    memcpy(&g_cameraClipBounds, state->self.clipBounds, sizeof(g_cameraClipBounds));
+    memcpy(&g_cameraVolumeBounds, state->self.volumeBounds, sizeof(g_cameraVolumeBounds));
+    g_cameraRenderFlagState.flags = g_defaultCameraSurfaceType;
     Camera_UpdateViewProjectionAndEffects(&state->self);
     view = state->header.views.head;
     if (view != 0) {
-        if ((D_80145088.status[7] != 0) || (Cinema_GetPlaybackPauseState() != 0)) {
+        if ((g_frontendScreenStatus.status[7] != 0) || (Cinema_GetPlaybackPauseState() != 0)) {
             Camera_UpdateViewProjectionAndEffects(view);
         }
         if ((Cinema_IsSequenceInWindow() != 0) || (Cinema_IsSequenceActive() != 0)) {
             Camera_UpdateViewProjectionAndEffects(view);
         }
-        memcpy(&D_800FF208, view->clipBounds, sizeof(D_800FF208));
-        memcpy(&D_801031F0, view->volumeBounds, sizeof(D_801031F0));
+        memcpy(&g_cameraClipBounds, view->clipBounds, sizeof(g_cameraClipBounds));
+        memcpy(&g_cameraVolumeBounds, view->volumeBounds, sizeof(g_cameraVolumeBounds));
         initialFlags.flags = view->floorSurface;
-        D_80103220 = initialFlags;
+        g_cameraRenderFlagState = initialFlags;
         view = view->next;
         if (view != 0) {
-            clip = &D_800FF208;
-            bounds = &D_801031F0;
-            flags = &D_80103220;
+            clip = &g_cameraClipBounds;
+            bounds = &g_cameraVolumeBounds;
+            flags = &g_cameraRenderFlagState;
             do {
-                if ((D_80145088.status[7] != 0) || (Cinema_GetPlaybackPauseState() != 0)) {
+                if ((g_frontendScreenStatus.status[7] != 0) || (Cinema_GetPlaybackPauseState() != 0)) {
                     Camera_UpdateViewProjectionAndEffects(view);
                 }
                 clipMinX = view->clipBounds[0].x;
@@ -1616,31 +1616,31 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
 
 /* 800C8410.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80236874_C9010[1] = {
+const unsigned int k_CameraEncodedWordsBlock2[1] = {
     0x3F000000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80236874_C9010_us_rev1.c */
-const unsigned int D_blob_bd5ff3fcb842d6aa5d89[1] = {
+const unsigned int k_CameraHalfWords[1] = {
     0x3F000000,
 };
 #endif
 
 /* 80233920_9.CPP */
 extern Gfx *g_displayListCursor;
-extern s32 D_800E28D0;
-extern s32 D_800D297C;
-extern f32 D_800D2988;
+extern s32 g_hudReferenceViewportWidth;
+extern s32 g_lightingBufferIndex;
+extern f32 g_frameElapsedTime;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 extern void Cache_MarkResourceInUse(s32, s32);
 extern void Gsky_DrawViewportEffectNoOp(RacerViewport *, s32);
 extern void Menu_DispatchMenuListCallback(void *);
 extern s32 Cinema_IsSequenceInWindow(void);
-extern void func_8022A3F8_de(WorldCameraDrawActiveViews *, RacerViewport *);
-/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Cache_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before Geometry_InvalidateMaterialKeys, then updates every racer in the list until it ends or Cinema_IsSequenceActive or Cinema_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to Menu_DispatchMenuListCallback. */
+extern void Playerai_DrawViewMatchCountdown(WorldCameraDrawActiveViews *, RacerViewport *);
+/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Cache_MarkResourceInUse, runs the 30-frame flash timer (restarted while g_simpleObjectPauseState is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before Geometry_InvalidateMaterialKeys, then updates every racer in the list until it ends or Cinema_IsSequenceActive or Cinema_IsSequenceInWindow reports, updates the race's own racer, hands the list to Playerai_DrawViewMatchCountdown when the replay flag of g_playerViewRenderContext is set, and passes the own racer's block at 0x554 to Menu_DispatchMenuListCallback. */
 void Camera_DrawActiveViews(Race *race, s32 world)
 {
     RacerViewport *racer;
@@ -1650,28 +1650,28 @@ void Camera_DrawActiveViews(Race *race, s32 world)
     if (race->header.music != 0) {
         Cache_MarkResourceInUse(0, race->header.music);
     }
-    if (D_8011FAC0.clockPaused != 0 || race->header.views.count == 3) {
-        D_800FF224_de = 30.0f;
+    if (g_gameSession.clockPaused != 0 || race->header.views.count == 3) {
+        g_cameraFramingTransitionTimer = 30.0f;
     }
-    if (D_800FF224_de != 0.0f) {
-        D_800FF224_de -= D_800D2988;
+    if (g_cameraFramingTransitionTimer != 0.0f) {
+        g_cameraFramingTransitionTimer -= g_frameElapsedTime;
     }
-    if (D_800FF224_de < 0.0f) {
-        D_800FF224_de = 0.0f;
+    if (g_cameraFramingTransitionTimer < 0.0f) {
+        g_cameraFramingTransitionTimer = 0.0f;
     }
-    if (D_800FF224_de != 0.0f) {
+    if (g_cameraFramingTransitionTimer != 0.0f) {
         racer = race->header.views.head;
         if (racer != 0) {
             gDPPipeSync(g_displayListCursor++);
             gSPDisplayList(g_displayListCursor++, ((&D_800CBCC0)));
             gSPDisplayList(g_displayListCursor++, ((&D_800CBCF0_de)));
-            racer->viewports[D_800D297C].vscale[0] = SCREEN_WD;
-            racer->viewports[D_800D297C].vscale[1] = SCREEN_HT;
-            racer->viewports[D_800D297C].vtrans[0] = SCREEN_WD;
-            racer->viewports[D_800D297C].vtrans[1] = SCREEN_HT;
-            gSPMoveMem(g_displayListCursor++, G_MV_VIEWPORT, 0, 16, ((&racer->viewports[D_800D297C])));
+            racer->viewports[g_lightingBufferIndex].vscale[0] = SCREEN_WD;
+            racer->viewports[g_lightingBufferIndex].vscale[1] = SCREEN_HT;
+            racer->viewports[g_lightingBufferIndex].vtrans[0] = SCREEN_WD;
+            racer->viewports[g_lightingBufferIndex].vtrans[1] = SCREEN_HT;
+            gSPMoveMem(g_displayListCursor++, G_MV_VIEWPORT, 0, 16, ((&racer->viewports[g_lightingBufferIndex])));
             gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
-            gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, (u32)((D_8011BDC0->colorImage)));
+            gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, (u32)((g_currentRenderFrame->colorImage)));
             gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);
             gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);
             gDPSetRenderMode(g_displayListCursor++, ((0)), 0);
@@ -1701,10 +1701,10 @@ void Camera_DrawActiveViews(Race *race, s32 world)
         Camera_DrawViewportOverlays((View *) &race->self);
     }
     Camera_DrawAndAdvanceMessages(race, &race->self);
-    if (D_80145040.game.local != 0) {
+    if (g_playerViewRenderContext.game.local != 0) {
         racer = race->header.views.head;
         if (racer != 0) {
-            func_8022A3F8_de(&D_80145040, racer);
+            Playerai_DrawViewMatchCountdown(&g_playerViewRenderContext, racer);
         }
     }
     Menu_DispatchMenuListCallback(race->self.sound);
@@ -1751,16 +1751,16 @@ void Camera_DrawViewportBorder(RacerViewport *racer) {
 
 /* Posts a text as on-screen messages, one per line: when Cinema_IsSequenceActive reports it, the messages already in
  * the pool's list at 0xE40 are flagged kind 4 and the new ones get kind 1, otherwise kind 2; the text (or
- * D_800D7028 when given D_800D7034) is split at newlines and for each non-empty line the oldest message node
+ * g_screenMessageSubstitutionReplacement when given g_screenMessageSubstitutionSource) is split at newlines and for each non-empty line the oldest message node
  * of the owner's list at 0xF24 is recycled and set up centred horizontally 80 pixels above the bottom of the
  * screen at unit size. Returns the last message node. */
 
 
 
 
-extern func_80237E70_G1 D_800D7028;
+extern ScreenMessageTextView g_screenMessageSubstitutionReplacement;
 
-extern func_80237E70_G1 D_800D7034;
+extern ScreenMessageTextView g_screenMessageSubstitutionSource;
 
 
 
@@ -1780,8 +1780,8 @@ static inline CCameraText *recycle(struct ScreenMessageOwner *owner, struct Scre
     oldest = owner->activeMessages.head;
     if (oldest != 0) {
         Gsky_ClearScreenMessage(oldest);
-        func_80255ED8_de(&owner->activeMessages, oldest);
-        func_80255D14_de(&pool->freeMessages, oldest);
+        List_RemoveIntrusive(&owner->activeMessages, oldest);
+        List_AppendIntrusive(&pool->freeMessages, oldest);
     }
     return oldest;
 }
@@ -1796,8 +1796,8 @@ static inline CCameraText *post_lines(struct ScreenMessageOwner *owner, struct S
     if (pool == 0) {
         return message;
     }
-    if (text == D_800D7034.unk0) {
-        text = D_800D7028.unk0;
+    if (text == g_screenMessageSubstitutionSource.text) {
+        text = g_screenMessageSubstitutionReplacement.text;
     }
     p = text;
     line = p;
@@ -1818,8 +1818,8 @@ static inline CCameraText *post_lines(struct ScreenMessageOwner *owner, struct S
                     message->pad2C = 0;
                     message->m_XScale = 1.0f;
                     message->m_YScale = 1.0f;
-                    height = D_800E28D4;
-                    message->x = D_800E28D0 / 2;
+                    height = g_hudReferenceViewportHeight;
+                    message->x = g_hudReferenceViewportWidth / 2;
                     message->y = height - 80;
                 }
                 line = p + 1;
@@ -1864,7 +1864,7 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
         OnScreen_LoadTextTileModeTwo();
         node = pool->freeMessages.head;
         if (node != 0) {
-            node->y = (f32)D_800E28D4 * 0.81f;
+            node->y = (f32)g_hudReferenceViewportHeight * 0.81f;
             for (msg = node->next; msg != 0; msg = msg->next) {
                 msg->y = node->y + spacing;
                 node = msg;
@@ -1874,7 +1874,7 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
             Onscrn_DrawText(msg->text, (s32)msg->x, (s32)msg->y, msg->m_nAlpha, 1, 1, 1.0f, 1.0f);
         }
         for (msg = pool->freeMessages.tail; msg != 0; msg = msg->prev) {
-            fade = D_800D2988 * 0.06666667f;
+            fade = g_frameElapsedTime * 0.06666667f;
             node = msg;
             switch (msg->kind) {
             case 2:
@@ -1914,28 +1914,28 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
         for (msg = pool->freeMessages.tail; msg != 0; msg = node) {
             node = msg->prev;
             if (msg->kind == 0) {
-                func_80255ED8_de(&pool->freeMessages, msg);
-                func_80255CB8_de(&owner->activeMessages, msg);
+                List_RemoveIntrusive(&pool->freeMessages, msg);
+                List_PrependIntrusive(&owner->activeMessages, msg);
             }
         }
     }
 }
 
-extern float D_800C3414_de;
-extern float D_800C3418_de;
-extern float D_800C341C_de;
-extern float D_800C3420_de;
-extern float D_800C3424_de;
-extern float D_800C3428_de;
-extern float D_800C342C_de;
-extern float D_800C3430_de;
-extern float D_800C3434_de;
-extern float D_800C3438_de;
-extern float D_800C343C_de;
-extern float D_800C3440_de;
-extern float D_800C3444_de;
-extern float D_800C3448_de;
-extern s32 D_800E28D8;
+extern float g_cameraMessageResolutionScale;
+extern float g_cameraMessageHorizontalOffsetScale;
+extern float g_cameraMessageDropScale;
+extern float g_cameraMessageVerticalOffsetScale;
+extern float g_cameraMessageLargeTextScale;
+extern float g_cameraMessageSmallTextScale;
+extern float g_cameraMessageVerticalScale;
+extern float g_cameraMessageDefaultScale;
+extern float g_cameraMessageFadeInAngleScale;
+extern float g_cameraMessageFullAlpha;
+extern float g_cameraMessageFadeOutAngleScale;
+extern float g_cameraMessageFadeOutPhase;
+extern float g_cameraMessageFadeOutAmplitude;
+extern float g_cameraMessageLineOffsetScale;
+extern s32 g_frontendCurrentVideoModeIndex;
 extern void Onscrn_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
@@ -1957,20 +1957,20 @@ void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
         Camera_UpdateScreenMessages((struct ScreenMessageOwner *)race, (struct ScreenMessagePool *)racer);
         return;
     }
-    scale = D_800C3414_de;
+    scale = g_cameraMessageResolutionScale;
     height = racer->viewportHeight;
     width = racer->viewportWidth;
     x = racer->viewportX;
     y = racer->viewportY;
-    scaleY = height / (f32)D_800E28D4;
-    scaleX = width / (f32)D_800E28D0;
+    scaleY = height / (f32)g_hudReferenceViewportHeight;
+    scaleX = width / (f32)g_hudReferenceViewportWidth;
     small = 1;
     if (!(scaleX < scale) && !(scaleY < scale)) {
         small = 0;
     }
-    offsetXf = width * D_800C3418_de + x;
-    drop = scaleY * D_800C341C_de;
-    left = height * D_800C3420_de + y;
+    offsetXf = width * g_cameraMessageHorizontalOffsetScale + x;
+    drop = scaleY * g_cameraMessageDropScale;
+    left = height * g_cameraMessageVerticalOffsetScale + y;
     offsetY = left - drop;
     message = racer->activeMessages.tail;
     for (; message != 0; message = prev) {
@@ -1978,14 +1978,14 @@ void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
         if (message->kind != 0) {
             OnScreen_SetupTextRendering();
             if (small || message->pad20 != 0) {
-                scale = D_800C3424_de;
-                if (D_800E28D8 == 0) {
-                    scale = D_800C3428_de;
+                scale = g_cameraMessageLargeTextScale;
+                if (g_frontendCurrentVideoModeIndex == 0) {
+                    scale = g_cameraMessageSmallTextScale;
                 }
-                scaleY = D_800C342C_de;
+                scaleY = g_cameraMessageVerticalScale;
                 centered = 1;
             } else {
-                scale = D_800C3430_de;
+                scale = g_cameraMessageDefaultScale;
                 centered = 1;
             }
             Onscrn_DrawText(message->text, (s32)offsetXf, (s32)offsetY, message->m_nAlpha, centered, centered,
@@ -1998,20 +1998,20 @@ void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
                     message->kind = 3;
                     message->m_Time = message->m_DisplayTime;
                 }
-                message->alpha = Gu_Sinf((f32)message->m_nAlpha * D_800C3434_de);
+                message->alpha = Gu_Sinf((f32)message->m_nAlpha * g_cameraMessageFadeInAngleScale);
                 break;
             case 3:
-                message->m_Time -= D_800D2988;
+                message->m_Time -= g_frameElapsedTime;
                 left = message->m_Time;
                 message->m_nAlpha = 255;
-                message->alpha = D_800C3438_de;
+                message->alpha = g_cameraMessageFullAlpha;
                 if (left < 0.0f) {
                     message->kind = 4;
                     message->m_nAlpha = 128;
                 }
                 break;
             case 4:
-                message->alpha -= Gu_Sinf(D_800C3440_de - (f32)message->m_nAlpha * D_800C343C_de) * D_800C3444_de;
+                message->alpha -= Gu_Sinf(g_cameraMessageFadeOutPhase - (f32)message->m_nAlpha * g_cameraMessageFadeOutAngleScale) * g_cameraMessageFadeOutAmplitude;
                 if (message->alpha < 0.0f) {
                     message->alpha = 0.0f;
                 }
@@ -2024,23 +2024,23 @@ void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
             }
         }
         if (message->kind == 0) {
-            func_80255ED8_de(&racer->activeMessages, message);
-            func_80255CB8_de(&race->freeMessages, message);
+            List_RemoveIntrusive(&racer->activeMessages, message);
+            List_PrependIntrusive(&race->freeMessages, message);
         }
-        offsetY -= scaleY * D_800C3448_de / scale;
+        offsetY -= scaleY * g_cameraMessageLineOffsetScale / scale;
     }
 }
 
 /* 800C8504.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80238314_C9104[14] = {
+const unsigned int k_CameraEncodedWordsBlock3[14] = {
     0x3F800000, 0x3F000000, 0x41900000, 0x3F4CCCCD, 0x3F19999A, 0x3F000000, 0x3F4CCCCD, 0x3ECCCCCD,
     0x3BC9D9B5, 0x3F800000, 0x3C49D9B5, 0x437F0000, 0x3EAAAAAB, 0x41100000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int D_auto_src_rw_pool_80238314_C9104_us_rev1[14] = {
+const unsigned int k_CameraEncodedWordsBlock6[14] = {
     0x3F800000, 0x3F000000, 0x41900000, 0x3F4CCCCD, 0x3F19999A, 0x3F000000, 0x3F4CCCCD, 0x3ECCCCCD,
     0x3BC9D9B5, 0x3F800000, 0x3C49D9B5, 0x437F0000, 0x3EAAAAAB, 0x41100000,
 };

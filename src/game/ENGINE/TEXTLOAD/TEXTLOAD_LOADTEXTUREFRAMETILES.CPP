@@ -5,13 +5,13 @@
 #if defined(VERSION_US_REV1)
 /* Preserve the original SDK shift expression used by the texture commands. */
 #include "sdk/mbi.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/RESIDENTSTATE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern void Cache_MarkResourceInUse(s32 heap, void **resource);
-extern Gfx D_800D0FA0[], D_800D1020[], D_800D10A0[], D_800D1138[], D_800D11D0[];
+extern Gfx g_textureFrameDefaultDisplayList[], g_textureFrameWrappedDisplayList[], g_textureFrameAlternateDisplayList[], g_textureFramePaletteDisplayList[], g_enemyConstantWordsBlock5[];
 
 
 void Textload_LoadTextureFrameTiles(s32 *output, void **resource, s32 frame, s32 secondary, s32 scaleS, s32 scaleT, s32 wrapS, s32 wrapT, s32 mode) {
@@ -36,21 +36,21 @@ void Textload_LoadTextureFrameTiles(s32 *output, void **resource, s32 frame, s32
     if (*(s32 *)entries != 0) {
         palette = SetN64_GetPackSection(entries, secondary);
         paletteChanged = 0;
-        if (D_800CD890 != (s32)resource || D_8014D074 != secondary) paletteChanged = 1;
+        if (g_textureCacheResource != (s32)resource || g_textureFrameCacheVariation != secondary) paletteChanged = 1;
     } else {
         paletteChanged = 0;
         palette = 0;
     }
     changed = 0;
-    if (D_800CD890 != (s32)resource || D_8014D070 != frame || D_8014D078 != wrapS || D_8014D07C != wrapT) {
+    if (g_textureCacheResource != (s32)resource || g_textureFrameCacheFrame != frame || g_textureFrameCacheWrapS != wrapS || g_textureFrameCacheWrapT != wrapT) {
         changed = 1;
     }
     if (changed || paletteChanged) {
-        D_800CD890 = (s32)resource;
-        D_8014D070 = frame;
-        D_8014D074 = secondary;
-        D_8014D078 = wrapS;
-        D_8014D07C = wrapT;
+        g_textureCacheResource = (s32)resource;
+        g_textureFrameCacheFrame = frame;
+        g_textureFrameCacheVariation = secondary;
+        g_textureFrameCacheWrapS = wrapS;
+        g_textureFrameCacheWrapT = wrapT;
         maskS = 0;
         if (!(wrapS & G_TX_CLAMP)) {
             maskS = info[2];
@@ -102,20 +102,20 @@ void Textload_LoadTextureFrameTiles(s32 *output, void **resource, s32 frame, s32
                 switch (info[5]) {
                 case 2:
                 default:
-                    list = D_800D10A0;
+                    list = g_textureFrameAlternateDisplayList;
                     break;
                 case 3:
-                    list = D_800D1138;
+                    list = g_textureFramePaletteDisplayList;
                     break;
                 case 1:
                     gDPSetTextureDetail(g_displayListCursor++, G_TD_SHARPEN);
-                    list = D_800D0FA0;
-                    if (wrapS & 1) list = D_800D1020;
+                    list = g_textureFrameDefaultDisplayList;
+                    if (wrapS & 1) list = g_textureFrameWrappedDisplayList;
                     break;
                 case 0:
                     gDPSetTextureDetail(g_displayListCursor++, G_TD_CLAMP);
-                    list = D_800D0FA0;
-                    if (wrapS & 1) list = D_800D1020;
+                    list = g_textureFrameDefaultDisplayList;
+                    if (wrapS & 1) list = g_textureFrameWrappedDisplayList;
                     break;
                 }
                 gSPDisplayList(g_displayListCursor++, list);
@@ -125,7 +125,7 @@ void Textload_LoadTextureFrameTiles(s32 *output, void **resource, s32 frame, s32
             if (changed) {
                 gDPPipeSync(g_displayListCursor++);
                 gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, texture);
-                gSPDisplayList(g_displayListCursor++, D_800D11D0);
+                gSPDisplayList(g_displayListCursor++, g_enemyConstantWordsBlock5);
             }
             break;
         }

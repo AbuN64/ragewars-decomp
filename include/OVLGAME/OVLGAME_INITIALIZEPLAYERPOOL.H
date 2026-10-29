@@ -1,7 +1,7 @@
 #ifndef OVLGAME_OVLGAME_INITIALIZEPLAYERPOOL_H
 #define OVLGAME_OVLGAME_INITIALIZEPLAYERPOOL_H
 #include "TYPES.H"
-struct IntegerState88 {
+struct PlayerPoolModeStateView {
     char pad0[0x74];
     s32 unk_74;
     char pad74[0x84 - 0x74 - sizeof(s32)];

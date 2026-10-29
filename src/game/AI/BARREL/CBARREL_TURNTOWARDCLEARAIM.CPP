@@ -1,31 +1,31 @@
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "WEAPONS/BARREL_ADDACTORYAW.H"
 
-extern f32 Barrel_FindClearAimAngle(void *arg0, f32 arg1, f32 arg2, f32 arg3,
-                        void *arg4, f32 arg5);
+extern f32 Barrel_FindClearAimAngle(void *actor, f32 targetX, f32 targetY, f32 targetZ,
+                        void *target, f32 clearance);
 
 
-void Cbarrel_TurnTowardClearAim(void *actor, s32 arg1, CTeamSelectTeam *arg2, f32 arg3) {
+void Cbarrel_TurnTowardClearAim(void *actor, s32 unusedEvent, CTeamSelectTeam *target, f32 maximumTurn) {
     f32 f0;
     f32 f1;
     f32 f2;
     f32 f3;
 
-    if (arg2 != 0) {
-        f1 = Barrel_FindClearAimAngle(actor, arg2->x, arg2->y, arg2->z,
-                           arg2, D_800C21C8_de);
+    if (target != 0) {
+        f1 = Barrel_FindClearAimAngle(actor, target->x, target->y, target->z,
+                           target, g_barrelClearAimClearance);
         f3 = f1;
-        if (arg3 < f1) {
-            f1 = arg3;
+        if (maximumTurn < f1) {
+            f1 = maximumTurn;
         } else {
-            f0 = -arg3;
+            f0 = -maximumTurn;
             if (f1 < f0) {
                 f1 = f0;
             }
         }
-        f1 = f1 * D_800D2988;
+        f1 = f1 * g_frameElapsedTime;
         f2 = f1;
         if (f1 < 0.0f) {
             f2 = -f1;

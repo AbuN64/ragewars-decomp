@@ -7,7 +7,7 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D077C_us_rev1.c */
-unsigned short D_blob_bffee11025ffb4f4ffdf[] = {
+unsigned short g_WeaponRequirementItemIdD077CUsRev1[] = {
     0x041B,
 #if defined(VERSION_US_REV1)
     0x0032,
@@ -62,7 +62,7 @@ unsigned short g_weaponAmmoSlotCapacity17[2] = { 0x0002, 0x004B };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D0794_us_rev1.c */
-unsigned short D_blob_e3cece1db5f8da079ce8[] = {
+unsigned short g_WeaponRequirementItemIdD0794UsRev1[] = {
     0x03F7,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -101,7 +101,7 @@ unsigned short g_weaponAmmoSlotCapacity19[2] = { 0x0002, 0x004B };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D07A4_us_rev1.c */
-unsigned short D_blob_32288e3d8790fc66819a[] = {
+unsigned short g_WeaponRequirementItemIdD07A4UsRev1[] = {
     0x03EC,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -124,7 +124,7 @@ unsigned short g_weaponAmmoSlotCapacity20[2] = { 0x0002, 0x004B };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D07AC_us_rev1.c */
-unsigned short D_blob_8d01dd8926aa2a503724[] = {
+unsigned short g_WeaponRequirementItemIdD07ACUsRev1[] = {
     0x03EF,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -147,7 +147,7 @@ unsigned short g_weaponAmmoSlotCapacity21[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D07B4_us_rev1.c */
-unsigned short D_blob_5df2f301d6f0a32a4b44[] = {
+unsigned short g_WeaponRequirementItemIdD07B4UsRev1[] = {
     0x03FB,
 #if defined(VERSION_US_REV1)
     0x000A,
@@ -266,7 +266,7 @@ unsigned short g_weaponAmmoSlotCapacity28[2] = { 0x0004, 0x0014 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D07EC_us_rev1.c */
-unsigned short D_blob_a0fb7278288d965b94db[] = {
+unsigned short g_WeaponRequirementItemIdD07ECUsRev1[] = {
     0x040A,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -321,7 +321,7 @@ unsigned short g_weaponAmmoSlotCapacity31[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D0804_us_rev1.c */
-unsigned short D_blob_7e700407c79aa74884fb[] = {
+unsigned short g_WeaponRequirementItemIdD0804UsRev1[] = {
     0x04B0,
 #if defined(VERSION_US_REV1)
     0x000A,
@@ -360,7 +360,7 @@ unsigned short g_weaponAmmoSlotCapacity33[2] = { 0x0000, 0x00C8 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D0814_us_rev1.c */
-unsigned short D_blob_66b7e2ea84a9bb08cfc7[] = {
+unsigned short g_WeaponRequirementItemIdD0814UsRev1[] = {
     0x04BB,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -383,7 +383,7 @@ unsigned short g_weaponAmmoSlotCapacity34[2] = { 0x0000, 0x00C8 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D081C_us_rev1.c */
-unsigned short D_blob_69e0fd7e4b03a2bf926b[] = {
+unsigned short g_WeaponRequirementItemIdD081CUsRev1[] = {
     0x04BC,
 #if defined(VERSION_US_REV1)
     0x0019,
@@ -454,7 +454,7 @@ unsigned short g_weaponAmmoSlotCapacity38[2] = { 0x0000, 0x00C8 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D083C_us_rev1.c */
-unsigned short D_blob_3febbd4cad32b347f794[] = {
+unsigned short g_WeaponRequirementItemIdD083CUsRev1[] = {
     0x04C2,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -477,7 +477,7 @@ unsigned short g_weaponAmmoSlotCapacity39[2] = { 0x0000, 0x00C8 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D0844_us_rev1.c */
-unsigned short D_blob_3f3fda94da9cb37eda9f[] = {
+unsigned short g_WeaponRequirementItemIdD0844UsRev1[] = {
     0x04CB,
 #if defined(VERSION_US_REV1)
     0x0002,
@@ -500,7 +500,7 @@ unsigned short g_weaponAmmoSlotCapacity40[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D084C_us_rev1.c */
-unsigned short D_blob_f5872d691cc2a318ead0[] = {
+unsigned short g_WeaponRequirementItemIdD084CUsRev1[] = {
     0x04C5,
 #if defined(VERSION_US_REV1)
     0x000A,
@@ -539,7 +539,7 @@ unsigned short g_weaponAmmoSlotCapacity42[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D085C_us_rev1.c */
-unsigned short D_blob_bfec0c9efea072354fcd[] = {
+unsigned short g_WeaponRequirementItemIdD085CUsRev1[] = {
     0x04DA,
 #if defined(VERSION_US_REV1)
     0x0003,
@@ -562,7 +562,7 @@ unsigned short g_weaponAmmoSlotCapacity43[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D0864_us_rev1.c */
-unsigned short D_blob_025aee43d9ad81e0a028[] = {
+unsigned short g_WeaponRequirementItemIdD0864UsRev1[] = {
     0x04DD,
 #if defined(VERSION_US_REV1)
     0x0032,
@@ -617,7 +617,7 @@ unsigned short g_weaponAmmoSlotCapacity46[2] = { 0x0002, 0x004B };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D087C_us_rev1.c */
-unsigned short D_blob_1587686f907a8f1f9d65[] = {
+unsigned short g_WeaponRequirementItemIdD087CUsRev1[] = {
     0x04C9,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -640,7 +640,7 @@ unsigned short g_weaponAmmoSlotCapacity47[2] = { 0x0002, 0x004B };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D0884_us_rev1.c */
-unsigned short D_blob_032e02fc52f8146cc139[] = {
+unsigned short g_WeaponRequirementItemIdD0884UsRev1[] = {
     0x04CA,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -663,7 +663,7 @@ unsigned short g_weaponAmmoSlotCapacity48[2] = { 0x0002, 0x004B };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D088C_us_rev1.c */
-unsigned short D_blob_efd67de85cb207285dfa[] = {
+unsigned short g_WeaponRequirementItemIdD088CUsRev1[] = {
     0x04B4,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -686,7 +686,7 @@ unsigned short g_weaponAmmoSlotCapacity49[2] = { 0x0002, 0x004B };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D0894_us_rev1.c */
-unsigned short D_blob_36ce00523c7a48f10b53[] = {
+unsigned short g_WeaponRequirementItemIdD0894UsRev1[] = {
     0x03EF,
 #if defined(VERSION_US_REV1)
     0x0001,
@@ -709,7 +709,7 @@ unsigned short g_weaponAmmoSlotCapacity50[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D089C_us_rev1.c */
-unsigned short D_blob_19e77d01e311970008ed[] = {
+unsigned short g_WeaponRequirementItemIdD089CUsRev1[] = {
     0x04CD,
 #if defined(VERSION_US_REV1)
     0x000A,
@@ -732,7 +732,7 @@ unsigned short g_weaponAmmoSlotCapacity51[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D08A4_us_rev1.c */
-unsigned short D_blob_99e4c07438b01060aaf2[] = {
+unsigned short g_WeaponRequirementItemIdD08A4UsRev1[] = {
     0x04D0,
 #if defined(VERSION_US_REV1)
     0x0064,
@@ -755,7 +755,7 @@ unsigned short g_weaponAmmoSlotCapacity52[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D08AC_us_rev1.c */
-unsigned short D_blob_ac370b68948371e2a87e[] = {
+unsigned short g_WeaponRequirementItemIdD08ACUsRev1[] = {
     0x04E0,
 #if defined(VERSION_US_REV1)
     0x000A,
@@ -778,7 +778,7 @@ unsigned short g_weaponAmmoSlotCapacity53[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D08B4_us_rev1.c */
-unsigned short D_blob_1928a869076c0bdde7e4[] = {
+unsigned short g_WeaponRequirementItemIdD08B4UsRev1[] = {
     0x04E3,
 #if defined(VERSION_US_REV1)
     0x0032,
@@ -801,7 +801,7 @@ unsigned short g_weaponAmmoSlotCapacity54[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D08BC_us_rev1.c */
-unsigned short D_blob_827e6949fb532d0a8ce9[] = {
+unsigned short g_WeaponRequirementItemIdD08BCUsRev1[] = {
     0x04D1,
 #if defined(VERSION_US_REV1)
     0x0005,
@@ -824,7 +824,7 @@ unsigned short g_weaponAmmoSlotCapacity55[2] = { 0x0001, 0x0064 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D08C4_us_rev1.c */
-unsigned short D_blob_b17bae96f683e0d2e5ed[] = {
+unsigned short g_WeaponRequirementItemIdD08C4UsRev1[] = {
     0x04D3,
 #if defined(VERSION_US_REV1)
     0x0032,
@@ -863,7 +863,7 @@ unsigned short g_weaponAmmoSlotCapacity57[2] = { 0x0004, 0x0014 };
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D08D4_us_rev1.c */
-unsigned short D_blob_47bb64e904bbf0561e02[] = {
+unsigned short g_WeaponRequirementItemIdD08D4UsRev1[] = {
     0x040A,
 #if defined(VERSION_US_REV1)
     0x0001,

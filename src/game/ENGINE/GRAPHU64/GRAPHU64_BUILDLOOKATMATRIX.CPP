@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/PACKED.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -11,7 +11,7 @@
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "sdk/MATH/GUMTXIDENTF.H"
 extern u32 g_secondaryRandomSeed;
-extern f32 D_800C4960_de[2];
+extern f32 g_boundedIntegrationAndEaseConstants[2];
 
 
 
@@ -26,7 +26,7 @@ extern f32 D_800C4960_de[2];
 
 
 
-/* Returns the normalised cross product of a path node's two edge vectors, cached in D_80115E00 for the last node seen, with a default up vector for a null node. Adapted from Region_GetCachedCeilingNormal, which it inlines to compute the raw cross product, with the result normalised through func_8027207C_de and cached by a second last-node word; the inlined copy records its last node before copying its result. */
+/* Returns the normalised cross product of a path node's two edge vectors, cached in g_cachedSurfaceNormal for the last node seen, with a default up vector for a null node. Adapted from Region_GetCachedCeilingNormal, which it inlines to compute the raw cross product, with the result normalised through func_8027207C_de and cached by a second last-node word; the inlined copy records its last node before copying its result. */
 
 
 
@@ -43,10 +43,10 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
     char *q;
 
     if (node == 0) {
-        D_80111D30.x = 0;
-        D_80111D30.z = 0;
-        D_80111D30.y = D_800C49C4_de;
-    } else if ((int)node != D_800CD3E0) {
+        g_cachedCeilingCrossProduct.x = 0;
+        g_cachedCeilingCrossProduct.z = 0;
+        g_cachedCeilingCrossProduct.y = g_defaultCeilingNormalY;
+    } else if ((int)node != g_cachedCeilingCrossProductNode) {
         p = node->cur;
         q = node->prev;
         a.x = ((CollisionBuildVertex *)p)->x - ((CollisionBuildVertex *)q)->x;
@@ -65,10 +65,10 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        Graphu64_CrossVectors(&D_80111D30, &b, &a);
+        Graphu64_CrossVectors(&g_cachedCeilingCrossProduct, &b, &a);
     }
-    D_800CD3E0 = (int)node;
-    *out = D_80111D30;
+    g_cachedCeilingCrossProductNode = (int)node;
+    *out = g_cachedCeilingCrossProduct;
     return out;
 }
 
@@ -98,7 +98,7 @@ s32 Graphu64_NextRandomValue(void) {
     return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
 }
 
-/** LCG PRNG step scaled into [0, arg0 * D_800C9A38) as a float. */
+/** LCG PRNG step scaled into [0, arg0 * g_randomFloatRangeScale) as a float. */
 f32 Graphu64_RandomFloat(f32 range) {
     f64 value;
     s32 randomBits;
@@ -109,9 +109,9 @@ f32 Graphu64_RandomFloat(f32 range) {
     value = (f64)randomBits;
     g_primaryRandomSeed = seed;
     if (randomBits < 0) {
-        value = value + D_800C4940_de;
+        value = value + g_randomUnsignedFloatCorrection;
     }
-    return (f32)value * range * D_800C9A38;
+    return (f32)value * range * g_randomFloatRangeScale;
 }
 
 f32 Graphu64_ArcCos(f32 cosineValue) {
@@ -123,25 +123,25 @@ f32 Graphu64_ArcCos(f32 cosineValue) {
 
     negativeInput = 1;
     if (cosineValue < 0.0f) {
-        tableCoordinate = cosineValue * D_800C494C_de;
+        tableCoordinate = cosineValue * g_arcCosNegativeInputScale;
     } else {
-        tableCoordinate = cosineValue * D_800C4950_de;
+        tableCoordinate = cosineValue * g_arcCosPositiveInputScale;
         negativeInput = 0;
     }
     sampleIndex = (s32) tableCoordinate;
-    if ((f32) sampleIndex < D_800C4954_de) {
-        lowerSample = D_800CC3DC[sampleIndex];
-        interpolatedAngle = lowerSample + ((tableCoordinate - (f32) sampleIndex) * (D_800CC3E0[sampleIndex] - lowerSample));
+    if ((f32) sampleIndex < g_arcCosInterpolationLimit) {
+        lowerSample = g_arcCosLowerSamples[sampleIndex];
+        interpolatedAngle = lowerSample + ((tableCoordinate - (f32) sampleIndex) * (g_arcCosUpperSamples[sampleIndex] - lowerSample));
         if (negativeInput != 0) {
-            return D_800C4958_de - interpolatedAngle;
+            return g_arcCosNegativeAngleBase - interpolatedAngle;
         }
         return interpolatedAngle;
     }
     if (negativeInput != 0) {
-        tableCoordinate = D_800CD3D8;
-        return D_800C495C_de - tableCoordinate;
+        tableCoordinate = g_arcCosEndpoint;
+        return g_arcCosNegativeEndpointBase - tableCoordinate;
     }
-    return D_800CD3D8;
+    return g_arcCosEndpoint;
 }
 
 f32 Graphu64_IntegrateBoundedValue(f32 value, f32 velocity, f32 limit) {
@@ -157,9 +157,9 @@ f32 Graphu64_IntegrateBoundedValue(f32 value, f32 velocity, f32 limit) {
     }
     if ((value < 0.0f && 0.0f < velocity) ||
         (0.0f < value && velocity < 0.0f)) {
-        velocity *= D_800C4960_de[0];
+        velocity *= g_boundedIntegrationAndEaseConstants[0];
     }
-    value += velocity * D_800D2988;
+    value += velocity * g_frameElapsedTime;
     if (velocity < 0.0f) {
         if (value < -limit) {
             value = -limit;
@@ -175,12 +175,12 @@ f32 Graphu64_DecayToZero(f32 value, f32 rate) {
 
     zero = 0.0f;
     if (zero < value) {
-        value -= rate * D_800D2988;
+        value -= rate * g_frameElapsedTime;
         if (value < zero) {
             value = zero;
         }
     } else if (value < zero) {
-        value += rate * D_800D2988;
+        value += rate * g_frameElapsedTime;
         if (zero < value) {
             value = zero;
         }
@@ -192,13 +192,13 @@ f32 Graphu64_ApproachValue(f32 current, f32 target, f32 rate) {
     f32 value;
     value = current;
     if (value < target) {
-        value += rate * D_800D2988;
+        value += rate * g_frameElapsedTime;
         if (target < value) {
             value = target;
         }
     }
     else if (target < value) {
-        value -= rate * D_800D2988;
+        value -= rate * g_frameElapsedTime;
         if (value < target) {
             value = target;
         }
@@ -211,8 +211,8 @@ void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate) {
     f32 next;
 
     current = *value;
-    next = (target - current) * rate * D_800D2988;
-    if (rate == D_800C4960_de[1]) {
+    next = (target - current) * rate * g_frameElapsedTime;
+    if (rate == g_boundedIntegrationAndEaseConstants[1]) {
         *value = target;
     } else if (current < target) {
         *value += next;
@@ -227,60 +227,60 @@ void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate) {
     }
 }
 
-s32 Graphu64_IntegrateBoundedInteger(s32 arg0, s32 arg1, s32 arg2)
+s32 Graphu64_IntegrateBoundedInteger(s32 value, s32 velocity, s32 limit)
 {
-  f32 temp_f1;
-  s32 var_a0;
-  s32 var_a2;
-  s32 var_v0;
-  var_a2 = arg2;
-  temp_f1 = (f32) arg1;
-  var_a0 = arg0 + ((s32) (temp_f1 * D_800D2988));
-  if (temp_f1 < 0.0f)
+  f32 velocityFloat;
+  s32 nextValue;
+  s32 directionalLimit;
+  s32 exceedsLimit;
+  directionalLimit = limit;
+  velocityFloat = (f32) velocity;
+  nextValue = value + ((s32) (velocityFloat * g_frameElapsedTime));
+  if (velocityFloat < 0.0f)
   {
-    var_a2 = -var_a2;
-    var_v0 = var_a0 < var_a2;
+    directionalLimit = -directionalLimit;
+    exceedsLimit = nextValue < directionalLimit;
   }
   else
   {
-    var_v0 = var_a2 < var_a0;
+    exceedsLimit = directionalLimit < nextValue;
   }
-  if (var_v0 != 0)
+  if (exceedsLimit != 0)
   {
-    var_a2 = var_a2;
-    var_a0 = var_a2;
+    directionalLimit = directionalLimit;
+    nextValue = directionalLimit;
   }
-  if (var_a2)
+  if (directionalLimit)
   {
-    return var_a0;
+    return nextValue;
   }
   else
   {
-    return var_a0;
+    return nextValue;
   }
 }
 
-f32 Graphu64_NegateWrappedValue(f32 arg0)
+f32 Graphu64_NegateWrappedValue(f32 value)
 {
-  unsigned char new_var;
+  unsigned char lowerBoundIndex;
   f32 val;
-  val = arg0;
-  new_var = 0;
-  if (val < D_800C4968_de[new_var])
+  val = value;
+  lowerBoundIndex = 0;
+  if (val < g_wrappedValueLowerConstants[lowerBoundIndex])
   {
     do
     {
-      val += D_800C4968_de[1];
+      val += g_wrappedValueLowerConstants[1];
     }
-    while (val < D_800C4968_de[new_var]);
+    while (val < g_wrappedValueLowerConstants[lowerBoundIndex]);
   }
-  if (D_800C4970_de[new_var] < val)
+  if (g_wrappedValueUpperConstants[lowerBoundIndex] < val)
   {
     do
     {
-      val -= D_800C4970_de[1];
+      val -= g_wrappedValueUpperConstants[1];
     }
-    while (D_800C4970_de[new_var] < val);
+    while (g_wrappedValueUpperConstants[lowerBoundIndex] < val);
   }
   return -val;
 }
@@ -290,26 +290,26 @@ f32 Graphu64_GetNegatedWrappedDifference(f32 angleA, f32 angleB) {
     f32 wrappedB;
 
     wrappedB = angleB;
-    if (wrappedB < D_800C4978_de) {
+    if (wrappedB < g_wrappedAngleLowerConstants) {
         do {
-            wrappedB += *(&D_800C4978_de + 1);
-        } while (wrappedB < D_800C4978_de);
+            wrappedB += *(&g_wrappedAngleLowerConstants + 1);
+        } while (wrappedB < g_wrappedAngleLowerConstants);
     }
-    if (D_800C4980_de < wrappedB) {
+    if (g_wrappedAngleUpperConstants < wrappedB) {
         do {
-            wrappedB -= *(&D_800C4980_de + 1);
-        } while (D_800C4980_de < wrappedB);
+            wrappedB -= *(&g_wrappedAngleUpperConstants + 1);
+        } while (g_wrappedAngleUpperConstants < wrappedB);
     }
     difference = angleA - wrappedB;
-    if (difference < D_800C4988_de) {
+    if (difference < g_wrappedDifferenceLowerConstants) {
         do {
-            difference += *(&D_800C4988_de + 1);
-        } while (difference < D_800C4988_de);
+            difference += *(&g_wrappedDifferenceLowerConstants + 1);
+        } while (difference < g_wrappedDifferenceLowerConstants);
     }
-    if (D_800C4990_de < difference) {
+    if (g_wrappedDifferenceUpperConstants < difference) {
         do {
-            difference -= *(&D_800C4990_de + 1);
-        } while (D_800C4990_de < difference);
+            difference -= *(&g_wrappedDifferenceUpperConstants + 1);
+        } while (g_wrappedDifferenceUpperConstants < difference);
     }
     return -difference;
 }
@@ -322,44 +322,44 @@ f32 Graphu64_RandomBetween(f32 shakeMin, f32 shakeMax) {
     seed = (g_primaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
     randomValue = ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
     randomValue = randomValue % 10000;
-    blend = (f32)randomValue * D_800C4998_de;
+    blend = (f32)randomValue * g_randomBlendScale;
     g_primaryRandomSeed = seed;
-    return (blend * shakeMin) + ((D_800C499C_de - blend) * shakeMax);
+    return (blend * shakeMin) + ((g_randomBlendUnitScale - blend) * shakeMax);
 }
 
-s32 Graphu64_UpdateCountdown(f32 *arg0)
+s32 Graphu64_UpdateCountdown(f32 *countdown)
 {
-  f32 *new_var2;
-  float new_var3;
-  f32 *new_var;
-  f32 temp_f0;
-  temp_f0 = (*arg0) - D_800D2988;
-  *arg0 = temp_f0;
-  new_var = arg0;
-  new_var2 = new_var;
-  new_var3 = 0.0f;
-  if ((temp_f0 <= 0.0f) == 0)
+  f32 *expiredCountdown;
+  float zeroCountdown;
+  f32 *countdownPointer;
+  f32 remaining;
+  remaining = (*countdown) - g_frameElapsedTime;
+  *countdown = remaining;
+  countdownPointer = countdown;
+  expiredCountdown = countdownPointer;
+  zeroCountdown = 0.0f;
+  if ((remaining <= 0.0f) == 0)
   {
-    if (D_800D2988)
+    if (g_frameElapsedTime)
     {
-      temp_f0 = 0;
-      return temp_f0;
+      remaining = 0;
+      return remaining;
     }
     else
     {
-      temp_f0 = 0;
-      return temp_f0;
+      remaining = 0;
+      return remaining;
     }
   }
-  *new_var2 = new_var3;
+  *expiredCountdown = zeroCountdown;
   return 1;
 }
 
 /** Copy two 3-vectors, then derive an edge vector, its z-component twice, and a negated x. */
-void Graphu64_InitializeEdge(void *geometryEdge, void *arg1, void *arg2) {
+void Graphu64_InitializeEdge(void *geometryEdge, void *startPoint, void *endPoint) {
     GeometryEdge *dst = geometryEdge;
-    CVector3 *a = arg1;
-    CVector3 *b = arg2;
+    CVector3 *a = startPoint;
+    CVector3 *b = endPoint;
     f32 zdiff;
 
     dst->start = *a;
@@ -373,73 +373,73 @@ void Graphu64_InitializeEdge(void *geometryEdge, void *arg1, void *arg2) {
     dst->normal.x = zdiff;
 }
 
-void Graphu64_NormalizeEdgeHorizontal(void *arg0)
+void Graphu64_NormalizeEdgeHorizontal(void *geometryEdge)
 {
-    ObjRecAt2CV1 *o = arg0;
+    GeometryEdgeDirectionView *o = geometryEdge;
     f32 magSq;
     f32 mag;
     f32 zOut;
 
-    magSq = (o->unk18 * o->unk18) +
-            (o->unk20 * o->unk20);
+    magSq = (o->directionX * o->directionX) +
+            (o->directionZ * o->directionZ);
     zOut = 0.0f;
     if (magSq != 0.0f) {
         mag = Gu_Sqrtf(magSq);
-        magSq = *(f32 *)&D_800C49A0_de / mag;
-        o->unk24 = o->unk18 * magSq;
-        o->unk28 = o->unk1C * magSq;
-        zOut = o->unk20 * magSq;
+        magSq = *(f32 *)&g_horizontalEdgeNormalizeScale / mag;
+        o->unitDirectionX = o->directionX * magSq;
+        o->unitDirectionY = o->directionY * magSq;
+        zOut = o->directionZ * magSq;
     } else {
-        o->unk24 = 0.0f;
-        o->unk28 = 0.0f;
+        o->unitDirectionX = 0.0f;
+        o->unitDirectionY = 0.0f;
     }
-    o->unk2C = zOut;
+    o->unitDirectionZ = zOut;
 }
 
-void Graphu64_NormalizeEdgeDirection(void *arg0)
+void Graphu64_NormalizeEdgeDirection(void *geometryEdge)
 {
-    ObjRecAt2CV1 *o = arg0;
+    GeometryEdgeDirectionView *o = geometryEdge;
     f32 magSq;
     f32 mag;
     f32 zOut;
 
-    magSq = (o->unk18 * o->unk18) +
-            (o->unk1C * o->unk1C) +
-            (o->unk20 * o->unk20);
+    magSq = (o->directionX * o->directionX) +
+            (o->directionY * o->directionY) +
+            (o->directionZ * o->directionZ);
     zOut = 0.0f;
     if (magSq != 0.0f) {
         mag = Gu_Sqrtf(magSq);
-        magSq = D_800C49A4_de / mag;
-        o->unk24 = o->unk18 * magSq;
-        o->unk28 = o->unk1C * magSq;
-        zOut = o->unk20 * magSq;
+        magSq = g_edgeDirectionNormalizeScale / mag;
+        o->unitDirectionX = o->directionX * magSq;
+        o->unitDirectionY = o->directionY * magSq;
+        zOut = o->directionZ * magSq;
     } else {
-        o->unk24 = 0.0f;
-        o->unk28 = 0.0f;
+        o->unitDirectionX = 0.0f;
+        o->unitDirectionY = 0.0f;
     }
-    o->unk2C = zOut;
+    o->unitDirectionZ = zOut;
 }
 
-s32 Graphu64_GetHorizontalIntersectionParameter(f32 *arg0, f32 *arg1, f32 *arg2) {
+s32 Graphu64_GetHorizontalIntersectionParameter(f32 *edgePlane, f32 *intersectingEdge, f32 *parameterOutput) {
     CVector3 delta;
-    f32 temp_f3;
+    f32 directionDotNormal;
     s32 result;
 
-    delta.x = arg1[0] - arg0[0];
-    delta.z = arg1[2] - arg0[2];
-    temp_f3 = (arg1[6] * arg0[12]) + (arg1[8] * arg0[14]);
+    delta.x = intersectingEdge[0] - edgePlane[0];
+    delta.z = intersectingEdge[2] - edgePlane[2];
+    directionDotNormal = (intersectingEdge[6] * edgePlane[12]) + (intersectingEdge[8] * edgePlane[14]);
     result = 0;
-    if (temp_f3 != 0.0f) {
+    if (directionDotNormal != 0.0f) {
         result = 1;
-        *arg2 = ((delta.x * arg0[12]) + (delta.z * arg0[14])) / -temp_f3;
+        *parameterOutput = ((delta.x * edgePlane[12]) + (delta.z * edgePlane[14])) / -directionDotNormal;
     }
     return result;
 }
 
 /** Half-plane test: is arg1 on the positive side of arg0's normal (at +0x30)? */
-s32 Graphu64_IsPointOnPositiveEdgeSide(void *geometryEdge, void *arg1) {
+s32 Graphu64_IsPointOnPositiveEdgeSide(void *geometryEdge, void *pointPosition) {
     GeometryEdge *edge = geometryEdge;
-    CVector3 *point = arg1;
+    CVector3 *point = pointPosition;
     CVector3 normal;
     CVector3 delta;
     s32 result;
@@ -466,7 +466,7 @@ void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zE
     yLook = yAt - yEye;
     zLook = zAt - zEye;
 
-    len = D_800C49A8_de / Gu_Sqrtf(xLook * xLook + yLook * yLook + zLook * zLook);
+    len = g_lookAtNormalizeAndFallbackConstants / Gu_Sqrtf(xLook * xLook + yLook * yLook + zLook * zLook);
     xLook *= len;
     yLook *= len;
     zLook *= len;
@@ -475,9 +475,9 @@ void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zE
     yRight = zUp * xLook - xUp * zLook;
     zRight = xUp * yLook - yUp * xLook;
     if (xRight == 0.0f && yRight == 0.0f && zRight == 0.0f) {
-        xRight = (&D_800C49A8_de)[1];
+        xRight = (&g_lookAtNormalizeAndFallbackConstants)[1];
     }
-    one = D_800C49B0_de;
+    one = g_lookAtHomogeneousScale;
     len = one / Gu_Sqrtf(xRight * xRight + yRight * yRight + zRight * zRight);
     xRight *= len;
     yRight *= len;
@@ -514,15 +514,15 @@ void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zE
 
 CVector3 *Graphu64_GetCachedSurfaceNormal(CVector3 *out, Node75 *node) {
     if (node == 0) {
-        ((CVector3 *)&D_80115E00)->x = 0;
-        ((CVector3 *)&D_80115E00)->z = 0;
-        ((CVector3 *)&D_80115E00)->y = D_800C49C0_de;
-    } else if ((int)node != D_800CD3E4) {
-        cross_edges((CVector3 *)&D_80115E00, node);
-        Graphu64_NormalizeVec3((CVector3 *)&D_80115E00);
+        ((CVector3 *)&g_cachedSurfaceNormal)->x = 0;
+        ((CVector3 *)&g_cachedSurfaceNormal)->z = 0;
+        ((CVector3 *)&g_cachedSurfaceNormal)->y = g_cachedSurfaceDefaultNormalY;
+    } else if ((int)node != g_cachedSurfaceNormalNode) {
+        cross_edges((CVector3 *)&g_cachedSurfaceNormal, node);
+        Graphu64_NormalizeVec3((CVector3 *)&g_cachedSurfaceNormal);
     }
-    *out = *(CVector3 *)&D_80115E00;
-    D_800CD3E4 = (int)node;
+    *out = *(CVector3 *)&g_cachedSurfaceNormal;
+    g_cachedSurfaceNormalNode = (int)node;
     return out;
 }
 
@@ -537,7 +537,7 @@ f32 Graphu64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z) {
     if (node == 0) {
         return 0.0f;
     }
-    if ((int)node != D_800CD3E0) {
+    if ((int)node != g_cachedCeilingCrossProductNode) {
         p = node->cur;
         q = node->prev;
         a.x = ((CollisionBuildVertex *)p)->x - ((CollisionBuildVertex *)q)->x;
@@ -556,14 +556,14 @@ f32 Graphu64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        Graphu64_CrossVectors(&D_80111D30, &b, &a);
+        Graphu64_CrossVectors(&g_cachedCeilingCrossProduct, &b, &a);
     }
-    normal = D_80111D30;
-    D_800CD3E0 = (int)node;
+    normal = g_cachedCeilingCrossProduct;
+    g_cachedCeilingCrossProductNode = (int)node;
     if (normal.y == 0.0f) {
         return (((CollisionBuildVertex *)node->prev)->ceiling +
                 ((CollisionBuildVertex *)node->cur)->ceiling +
-                ((CollisionBuildVertex *)node->next)->ceiling) * D_800C49C8_de;
+                ((CollisionBuildVertex *)node->next)->ceiling) * g_cachedSurfaceCeilingAverageScale;
     }
     p = node->prev;
     point.x = ((CollisionBuildVertex *)p)->x;

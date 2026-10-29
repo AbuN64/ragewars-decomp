@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJRECAT3CV2.H"
-#include "COMMON/INTEGERSTATE14_2.H"
+#include "COMMON/MEMORY_STREAM_BUFFER.H"
 #include "COMMON/TEXTURE.H"
 #include "COMMON/GFX_INITIALIZEFRONTENDSERVICES.H"
 #include "MATH/XMATH_EVALUATEEXPONENTIALDOUBLE.H"
@@ -22,11 +22,11 @@ void Gfx_InitializeFrontendServices(void) {
 
 void Gfx_ShutdownFrontendServices(void) {
 #if defined(VERSION_US)
-    
+
 #if defined(VERSION_US)
 XMath_ShutdownMath
 #else
-func_8029D7E8_auto
+XMath_ShutdownMath
 #endif
 ();
 #elif defined(VERSION_DE)
@@ -42,6 +42,6 @@ func_8029D7E8_auto
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_80414428[8] =
+char s_InitOUNDequText[8] =
     "OUNDequ\202";
 #endif

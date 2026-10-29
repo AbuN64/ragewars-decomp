@@ -3,7 +3,7 @@
 
 /* DATA_800E58A0.CPP */
 /* ROM-grounded data: rodata/writable/800E58A0 */
-unsigned int D_blob_phase2_a5b1126a7bc6f87c820f[2] = {
+unsigned int g_MenuCreatesoundoptionsscreenWords1[2] = {
     0x00000000, 0x00000000,
 };
 
@@ -43,8 +43,8 @@ unsigned int D_src_3cb405cb[42] = {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
-unsigned int D_blob_db924ce98cb273cd46e4[6] = {
-    0x00000E07, 0x00000006, (unsigned int)D_004391F0, 0x00000E08, 0x00000006, (unsigned int)D_004391F8,
+unsigned int g_MenuCreatesoundoptionsscreenPointerWords1[6] = {
+    0x00000E07, 0x00000006, (unsigned int)g_packedCodeAddress24_004391F0, 0x00000E08, 0x00000006, (unsigned int)g_packedCodeAddress24_004391F8,
 };
 #endif
 

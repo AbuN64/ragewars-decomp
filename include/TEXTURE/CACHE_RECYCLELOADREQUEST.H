@@ -1,10 +1,10 @@
 #ifndef TEXTURE_CACHE_RECYCLELOADREQUEST_H
 #define TEXTURE_CACHE_RECYCLELOADREQUEST_H
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 struct EntryList {
     s32 pad0;
-    struct EntryRecAt18V3 *first;
+    struct CacheEvictionEntry *first;
 };
 /* Resource-loader thread, its request queue, message slots and stack. */
 typedef struct ResourceLoadWorker {

@@ -1,7 +1,7 @@
 #include "COMMON/TEXTURE.H"
 #include "abi.h"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -14,21 +14,21 @@
 #include "MENU/GFX/GFX_DRAWCLIPPEDGRADIENTQUAD.H"
 
 /* Makes palette the current texture lookup table for a texture of the given bit depth: returns 1
-   when it already is (D_800E32D8); otherwise records it, emits one pipeline sync if none is pending
+   when it already is (g_combineLoadedPalette); otherwise records it, emits one pipeline sync if none is pending
    and, for 4-bit and 8-bit textures, enables the RGBA16 lookup table and loads the 16 or 256
    palette entries (texture image, tile sync, tile, load sync, load TLUT, pipeline sync), or for
    16-bit textures turns the lookup table off; returns 0. */
 
 
 
-extern void *D_800E32D8;
+extern void *g_combineLoadedPalette;
 
 
 static inline void sync(void) {
     Gfx *cmd;
 
-    if (D_800E32E4 == 0) {
-        D_800E32E4 = 1;
+    if (g_combinePipelineSyncPending == 0) {
+        g_combinePipelineSyncPending = 1;
         cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
     }
@@ -38,33 +38,33 @@ extern s32 Frontend_GetImagePixelType(u8 *);
 
 static inline u32 blockWord16(void) {
    s32 num; s32 count;
-   num=(D_800DF254->stride/16>0 ? D_800DF254->stride/16+2047:2048);
-   count=((D_800DF254->stride*D_800DF254->rows+3)>>2)-1;
+   num=(g_combineBoundImage->stride/16>0 ? g_combineBoundImage->stride/16+2047:2048);
+   count=((g_combineBoundImage->stride*g_combineBoundImage->rows+3)>>2)-1;
    if(count>=2048) count=2047;
- return _SHIFTL(G_TX_LOADTILE,24,3) | _SHIFTL(count,12,12) | _SHIFTL(D_800DF254->stride/16>0 ? num/(D_800DF254->stride/16):num,0,12);
+ return _SHIFTL(G_TX_LOADTILE,24,3) | _SHIFTL(count,12,12) | _SHIFTL(g_combineBoundImage->stride/16>0 ? num/(g_combineBoundImage->stride/16):num,0,12);
 }
 
 static inline u32 blockWord8(void) {
    s32 num; s32 count;
-   num=(D_800DF254->stride/8>0 ? D_800DF254->stride/8+2047:2048);
-   count=((D_800DF254->stride*D_800DF254->rows+1)>>1)-1;
+   num=(g_combineBoundImage->stride/8>0 ? g_combineBoundImage->stride/8+2047:2048);
+   count=((g_combineBoundImage->stride*g_combineBoundImage->rows+1)>>1)-1;
    if(count>=2048) count=2047;
- return _SHIFTL(G_TX_LOADTILE,24,3) | _SHIFTL(count,12,12) | _SHIFTL(D_800DF254->stride/8>0 ? num/(D_800DF254->stride/8):num,0,12);
+ return _SHIFTL(G_TX_LOADTILE,24,3) | _SHIFTL(count,12,12) | _SHIFTL(g_combineBoundImage->stride/8>0 ? num/(g_combineBoundImage->stride/8):num,0,12);
 }
 
 static inline u32 blockWord4(void) {
    s32 num; s32 count;
-   num=(D_800DF254->stride/4>0 ? D_800DF254->stride/4+2047:2048);
-   count=D_800DF254->stride*D_800DF254->rows-1;
+   num=(g_combineBoundImage->stride/4>0 ? g_combineBoundImage->stride/4+2047:2048);
+   count=g_combineBoundImage->stride*g_combineBoundImage->rows-1;
    if(count>=2048) count=2047;
- return _SHIFTL(G_TX_LOADTILE,24,3) | _SHIFTL(count,12,12) | _SHIFTL(D_800DF254->stride/4>0 ? num/(D_800DF254->stride/4):num,0,12);
+ return _SHIFTL(G_TX_LOADTILE,24,3) | _SHIFTL(count,12,12) | _SHIFTL(g_combineBoundImage->stride/4>0 ? num/(g_combineBoundImage->stride/4):num,0,12);
 }
 
 static __inline__ void rectangleEmit(u32 w0, u32 w1) { Gfx *cmd = g_displayListCursor++; cmd->words.w0 = w0; cmd->words.w1 = w1; }
 
 static __inline__ void rectangleSync(void) {
  Gfx *cmd;
- if (D_800E32E4 == 0) { D_800E32E4 = 1; cmd = g_displayListCursor++; gDPPipeSync(cmd); }
+ if (g_combinePipelineSyncPending == 0) { g_combinePipelineSyncPending = 1; cmd = g_displayListCursor++; gDPPipeSync(cmd); }
 }
 
 static inline f32 scaleClip(f32 delta, f32 ratio) { return ratio * delta; }
@@ -73,8 +73,8 @@ s32 Combine_LoadPalette(s32 bits, void *palette) {
     s32 result;
 
     result = 1;
-    if (D_800E32D8 != palette) {
-        D_800E32D8 = palette;
+    if (g_combineLoadedPalette != palette) {
+        g_combineLoadedPalette = palette;
         sync();
         if (bits == 4) {
             gDPSetTextureLUT(g_displayListCursor++, G_TT_RGBA16);
@@ -98,212 +98,212 @@ s32 Combine_LoadPalette(s32 bits, void *palette) {
     return result;
 }
 
-void Combine_BindImageTexture(Texture *arg0) {
+void Combine_BindImageTexture(Texture *image) {
  s32 paletteSame,flags,size;
- Texture *tex=arg0;
- if (arg0 == 0) {
- D_800DF258=0; D_800DF25C=0; D_800DF254=0;
- D_800DF260_de=0; D_800DF264_de=0; D_800DF26C_de=0;
+ Texture *tex=image;
+ if (image == 0) {
+ g_combineBoundImageWidth=0; g_combineBoundImageHeight=0; g_combineBoundImage=0;
+ g_combineImageRequiresChunks=0; g_combineImageChunkState=0; g_combineBoundImageMaskComponent=0;
  } else {
- D_800DF254=tex; D_800DF264_de=0;
- D_800DF258=tex->width; D_800DF25C=tex->height;
- D_800DF268_de=Frontend_GetImagePixelType(&tex->unk0);
- D_800DF26C_de=Frontend_HasImageFormatMaskComponent(&D_800DF254->unk0);
+ g_combineBoundImage=tex; g_combineImageChunkState=0;
+ g_combineBoundImageWidth=tex->width; g_combineBoundImageHeight=tex->height;
+ g_combineBoundImagePixelType=Frontend_GetImagePixelType(&tex->unk0);
+ g_combineBoundImageMaskComponent=Frontend_HasImageFormatMaskComponent(&g_combineBoundImage->unk0);
  flags=tex->flags;size=tex->size;
- D_800DF260_de=0;
- if(flags>0 && size>2048) D_800DF260_de=1;
- if(flags==0 && size>4096) D_800DF260_de=1;
- paletteSame=Combine_LoadPalette(D_800DF268_de,D_800DF254->palette);
- if(D_800DF260_de==0) {
-  if(D_800DF268_de==4) {
-   gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,1,D_800DF254->data);
+ g_combineImageRequiresChunks=0;
+ if(flags>0 && size>2048) g_combineImageRequiresChunks=1;
+ if(flags==0 && size>4096) g_combineImageRequiresChunks=1;
+ paletteSame=Combine_LoadPalette(g_combineBoundImagePixelType,g_combineBoundImage->palette);
+ if(g_combineImageRequiresChunks==0) {
+  if(g_combineBoundImagePixelType==4) {
+   gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,1,g_combineBoundImage->data);
    gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
    gDPLoadSync(g_displayListCursor++);
    _GBI_CMD(g_displayListCursor++, _SHIFTL(G_LOADBLOCK,24,8), blockWord16());
    gDPPipeSync(g_displayListCursor++);
-   gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_4b,(((s16)(u16)D_800DF254->stride >> 1)+7)>>3,0,0,0,2,0,0,2,0,0);
-   gDPSetTileSize(g_displayListCursor++,0,0,0,(D_800DF254->stride-1)*4,(D_800DF254->rows-1)*4);
+   gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_4b,(((s16)(u16)g_combineBoundImage->stride >> 1)+7)>>3,0,0,0,2,0,0,2,0,0);
+   gDPSetTileSize(g_displayListCursor++,0,0,0,(g_combineBoundImage->stride-1)*4,(g_combineBoundImage->rows-1)*4);
   }
-  else if(D_800DF268_de==8) {
+  else if(g_combineBoundImagePixelType==8) {
    if(paletteSame==0) {
     gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
     gDPPipeSync(g_displayListCursor++);
    }
    gDPLoadSync(g_displayListCursor++);
-   gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_8b,(D_800DF254->stride+7)>>3,0,0,0,2,0,0,2,0,0);
-   gDPSetTileSize(g_displayListCursor++,0,0,0,(D_800DF254->stride-1)*4,(D_800DF254->rows-1)*4);
-   gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,1,D_800DF254->data);
+   gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_8b,(g_combineBoundImage->stride+7)>>3,0,0,0,2,0,0,2,0,0);
+   gDPSetTileSize(g_displayListCursor++,0,0,0,(g_combineBoundImage->stride-1)*4,(g_combineBoundImage->rows-1)*4);
+   gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,1,g_combineBoundImage->data);
    _GBI_CMD(g_displayListCursor++, _SHIFTL(G_LOADBLOCK,24,8), blockWord8());
   }
-  else if(D_800DF268_de==16) {
-   gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,1,D_800DF254->data);
+  else if(g_combineBoundImagePixelType==16) {
+   gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,1,g_combineBoundImage->data);
    gDPSetTile(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
    gDPLoadSync(g_displayListCursor++);
    _GBI_CMD(g_displayListCursor++, _SHIFTL(G_LOADBLOCK,24,8), blockWord4());
    gDPPipeSync(g_displayListCursor++);
-   gDPSetTile(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,(D_800DF254->stride*2+7)>>3,0,0,0,2,0,0,2,0,0);
-   gDPSetTileSize(g_displayListCursor++,0,0,0,(D_800DF254->stride-1)*4,(D_800DF254->rows-1)*4);
+   gDPSetTile(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,(g_combineBoundImage->stride*2+7)>>3,0,0,0,2,0,0,2,0,0);
+   gDPSetTileSize(g_displayListCursor++,0,0,0,(g_combineBoundImage->stride-1)*4,(g_combineBoundImage->rows-1)*4);
   }
  }
  }
 }
 
-void Combine_DrawClippedImageRectangle(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u32 arg9) {
+void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width, f32 height, f32 startU, f32 startV, f32 endU, f32 endV, u32 color) {
     s32 sp20;
     s32 sp24;
     s32 sp28;
     s32 sp2C;
-    Gfx *temp_a0;
-    Gfx *temp_a0_2;
-    Gfx *temp_a0_3;
-    Gfx *temp_a1;
-    Gfx *temp_v1;
-    Gfx *temp_v1_2;
-    Gfx *temp_v1_3;
-    Gfx *temp_v1_4;
-    Gfx *temp_v1_6;
-    Gfx *var_v1;
-    f32 temp_fs3;
-    f32 temp_fs3f;
-    f32 temp_fv0;
-    f32 temp_fv0_3;
+    Gfx *unusedDisplayListCursor1;
+    Gfx *unusedDisplayListCursor2;
+    Gfx *unusedDisplayListCursor3;
+    Gfx *unusedDisplayListCursor4;
+    Gfx *unusedDisplayListCursor5;
+    Gfx *unusedDisplayListCursor6;
+    Gfx *unusedDisplayListCursor7;
+    Gfx *unusedDisplayListCursor8;
+    Gfx *unusedDisplayListCursor9;
+    Gfx *unusedDisplayListCursor10;
+    f32 rectangleX;
+    f32 rectangleY;
+    f32 savedLeft;
+    f32 savedTop;
     f32 delta;
-    f32 temp_fv0f_2;
-    f32 var_fs1;
-    f32 var_fs1f;
-    f32 var_fs2;
-    f32 temp_fv0_2;
-    f32 temp_fv0_4;
+    f32 horizontalClipDelta;
+    f32 rightU;
+    f32 bottomV;
+    f32 rectangleHeight;
+    f32 savedStartU;
+    f32 savedStartV;
     s32 defaultMode;
-    s32 var_a0;
+    s32 textureRenderMode;
     s32 mode;
-    f32 var_fs0;
-    f32 var_fs0f;
-    f32 var_fs2f;
-    s32 var_s0;
-    s32 var_s1;
-    s32 var_s2;
-    s32 var_s3;
-    u32 temp_v1_5;
+    f32 leftU;
+    f32 topV;
+    f32 rectangleWidth;
+    s32 left;
+    s32 top;
+    s32 right;
+    s32 bottom;
+    u32 packedRgbColor;
 
-    var_fs2f = arg3;
-    var_fs2 = arg4;
-    var_fs0 = arg5;
-    var_fs0f = arg6;
-    var_fs1 = arg7;
-    temp_fs3 = arg0;
-    var_fs1f = arg8;
-    temp_fs3f = arg1;
+    rectangleWidth = width;
+    rectangleHeight = height;
+    leftU = startU;
+    topV = startV;
+    rightU = endU;
+    rectangleX = x;
+    bottomV = endV;
+    rectangleY = y;
     if ((D_80153F60.z == 0) || (D_80153F60.y == 0)) {
         D_800DF290 = 0;
-        D_800E32E4 = 0;
+        g_combinePipelineSyncPending = 0;
         Combine_SetRenderMode(0xC);
         Combine_SetCombineMode(5);
-        if (D_800DF274 != 7) {
-            D_800DF274 = 7;
+        if (g_combineTextureTileMode != 7) {
+            g_combineTextureTileMode = 7;
             rectangleSync();
             rectangleEmit(0xE3000C00, 0);
-            
+
         }
-        if (D_800DF280 != 0xE) {
-            D_800DF280 = 0xE;
+        if (g_combineTextureRenderMode != 0xE) {
+            g_combineTextureRenderMode = 0xE;
             rectangleSync();
             rectangleEmit(0xD7000000, 0x80008000);
-            
+
         }
         if (D_80153F60.x == 0) {
             Combine_SetPrimitiveVertexMode(9);
-            Combine_DrawClippedGradientQuad(temp_fs3, temp_fs3f, var_fs2f, var_fs2, (u32) arg9, (u32) arg9, (u32) arg9, (u32) arg9);
+            Combine_DrawClippedGradientQuad(rectangleX, rectangleY, rectangleWidth, rectangleHeight, (u32) color, (u32) color, (u32) color, (u32) color);
         }
     } else if (D_80153F60.x == 0) {
-        D_800E32E4 = 0;
+        g_combinePipelineSyncPending = 0;
         Combine_SetRenderMode(0xC);
         defaultMode = 0xD;
-        var_a0 = defaultMode;
+        textureRenderMode = defaultMode;
         if (D_80153F68 == 0) {
-            var_a0 = 0xE;
+            textureRenderMode = 0xE;
         }
-        if (var_a0 != D_800DF280) {
-            D_800DF280 = var_a0;
+        if (textureRenderMode != g_combineTextureRenderMode) {
+            g_combineTextureRenderMode = textureRenderMode;
             rectangleSync();
-            if (var_a0 == defaultMode) rectangleEmit(0xD7000002, 0x80008000);
-            else if (var_a0 == 0xE) rectangleEmit(0xD7000000, 0x80008000);
+            if (textureRenderMode == defaultMode) rectangleEmit(0xD7000002, 0x80008000);
+            else if (textureRenderMode == 0xE) rectangleEmit(0xD7000000, 0x80008000);
         }
-        if (arg9 != D_800DF28C) {
-            D_800DF28C = arg9;
-            temp_v1_5 = (((u32) arg9 >> 0x10) << 0x18) | ((arg9 & 0xFF00) << 8) | ((arg9 & 0xFF) << 8);
-            rectangleEmit(0xFB000000, temp_v1_5);
-            rectangleEmit(0xFA000000, temp_v1_5 | ((u32)arg9 >> 0x18));
+        if (color != g_combineRectangleColor) {
+            g_combineRectangleColor = color;
+            packedRgbColor = (((u32) color >> 0x10) << 0x18) | ((color & 0xFF00) << 8) | ((color & 0xFF) << 8);
+            rectangleEmit(0xFB000000, packedRgbColor);
+            rectangleEmit(0xFA000000, packedRgbColor | ((u32)color >> 0x18));
         }
-        if (D_800DF274 != 7) {
-            D_800DF274 = 7;
+        if (g_combineTextureTileMode != 7) {
+            g_combineTextureTileMode = 7;
             rectangleSync();
             rectangleEmit(0xE3000C00, 0);
-            
+
         }
         mode = 2;
-        if (D_800DF26C_de != 0) {
+        if (g_combineBoundImageMaskComponent != 0) {
             mode = 1;
         }
         Combine_SetCombineMode(mode);
-        var_s0 = (s32) temp_fs3;
-        var_s1 = (s32) temp_fs3f;
+        left = (s32) rectangleX;
+        top = (s32) rectangleY;
         D_800DF290 = 0x13;
-        var_s2 = (s32) ((temp_fs3 + var_fs2f) - D_800DD400_de);
-        var_s3 = (s32) ((temp_fs3f + var_fs2) - D_800DD400_de);
-        if (var_s2 < var_s0) {
-            temp_fv0 = (f32) var_s0;
-            var_s0 = var_s2;
-            var_s2 = (s32) temp_fv0;
-            temp_fv0_2 = var_fs0;
-            var_fs0 = var_fs1;
-            var_fs1 = temp_fv0_2;
-            var_fs2f = -var_fs2f;
+        right = (s32) ((rectangleX + rectangleWidth) - g_textureRectangleInclusivePixelOffset);
+        bottom = (s32) ((rectangleY + rectangleHeight) - g_textureRectangleInclusivePixelOffset);
+        if (right < left) {
+            savedLeft = (f32) left;
+            left = right;
+            right = (s32) savedLeft;
+            savedStartU = leftU;
+            leftU = rightU;
+            rightU = savedStartU;
+            rectangleWidth = -rectangleWidth;
         }
-        if (var_s3 < var_s1) {
-            temp_fv0_3 = (f32) var_s1;
-            var_s1 = var_s3;
-            var_s3 = (s32) temp_fv0_3;
-            temp_fv0_4 = var_fs0f;
-            var_fs0f = var_fs1f;
-            var_fs1f = temp_fv0_4;
-            var_fs2 = -var_fs2;
+        if (bottom < top) {
+            savedTop = (f32) top;
+            top = bottom;
+            bottom = (s32) savedTop;
+            savedStartV = topV;
+            topV = bottomV;
+            bottomV = savedStartV;
+            rectangleHeight = -rectangleHeight;
         }
         N64Eng_GetClipBounds(&sp20, &sp24, &sp28, &sp2C);
-        if ((sp28 < var_s2) || (var_s0 < sp20) || (sp2C < var_s3) || (var_s1 < sp24)) {
-            if ((sp28 >= var_s0) && (sp2C >= var_s1) && (var_s2 >= sp20) && (var_s3 >= sp24)) {
-                if (var_s1 < sp24) {
-                    delta = var_fs1f - var_fs0f;
-                    delta=scaleClip(delta, ((f32) (sp24 - var_s1) / var_fs2));
-                    var_s1 = sp24;
-                    var_fs2 = (f32) ((var_s3 - var_s1) + 1);
-                    var_fs0f = (var_fs0f + delta);
+        if ((sp28 < right) || (left < sp20) || (sp2C < bottom) || (top < sp24)) {
+            if ((sp28 >= left) && (sp2C >= top) && (right >= sp20) && (bottom >= sp24)) {
+                if (top < sp24) {
+                    delta = bottomV - topV;
+                    delta=scaleClip(delta, ((f32) (sp24 - top) / rectangleHeight));
+                    top = sp24;
+                    rectangleHeight = (f32) ((bottom - top) + 1);
+                    topV = (topV + delta);
                 }
-                if (sp2C < var_s3) {
-                    delta = ((f32) (sp2C - var_s1) / var_fs2) * (var_fs1f - var_fs0f);
-                    var_s3 = sp2C;
-                    var_fs1f = var_fs0f + delta;
+                if (sp2C < bottom) {
+                    delta = ((f32) (sp2C - top) / rectangleHeight) * (bottomV - topV);
+                    bottom = sp2C;
+                    bottomV = topV + delta;
                 }
-                if (var_s0 < sp20) {
-                    temp_fv0f_2 = var_fs1 - var_fs0;
-                    temp_fv0f_2=scaleClip(temp_fv0f_2, ((f32) (sp20 - var_s0) / var_fs2f));
-                    var_s0 = sp20;
-                    var_fs2f = (f32) ((var_s2 - var_s0) + 1);
-                    var_fs0 = (var_fs0 + temp_fv0f_2);
+                if (left < sp20) {
+                    horizontalClipDelta = rightU - leftU;
+                    horizontalClipDelta=scaleClip(horizontalClipDelta, ((f32) (sp20 - left) / rectangleWidth));
+                    left = sp20;
+                    rectangleWidth = (f32) ((right - left) + 1);
+                    leftU = (leftU + horizontalClipDelta);
                 }
-                if (sp28 < var_s2) {
-                    temp_fv0f_2 = ((f32) (sp28 - var_s0) / var_fs2f) * (var_fs1 - var_fs0);
-                    var_s2 = sp28;
-                    var_fs1 = var_fs0 + temp_fv0f_2;
+                if (sp28 < right) {
+                    horizontalClipDelta = ((f32) (sp28 - left) / rectangleWidth) * (rightU - leftU);
+                    right = sp28;
+                    rightU = leftU + horizontalClipDelta;
                 }
                 goto block_51;
             }
         } else {
 block_51:
-            if ((var_fs1 < var_fs0) || (var_fs1f < var_fs0f) || (D_800DF260_de != 0)) {
-                Combine_DrawTextureRectangleChunks(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
+            if ((rightU < leftU) || (bottomV < topV) || (g_combineImageRequiresChunks != 0)) {
+                Combine_DrawTextureRectangleChunks(left, top, right, bottom, leftU, topV, rightU, bottomV);
             } else {
-                Rect_EmitTextureRect(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
+                Rect_EmitTextureRect(left, top, right, bottom, leftU, topV, rightU, bottomV);
             }
         }
     }
@@ -336,10 +336,10 @@ void Combine_DrawTextureRectangleChunks(s32 x0, s32 y0, s32 x1, s32 y1, f32 u0, 
     s32 intH;
 
     started = 0;
-    if (D_800DF254->width == 0) {
+    if (g_combineBoundImage->width == 0) {
         return;
     }
-    if (D_800DF254->height == 0) {
+    if (g_combineBoundImage->height == 0) {
         return;
     }
     if (x0 == x1) {
@@ -348,62 +348,62 @@ void Combine_DrawTextureRectangleChunks(s32 x0, s32 y0, s32 x1, s32 y1, f32 u0, 
     if (y0 == y1) {
         return;
     }
-    w = D_800DF254->width;
+    w = g_combineBoundImage->width;
     dx = x1 - x0 + 1;
-    dsdx = (s32)((u1 - u0) * (f32)w * D_800DD404) / dx;
-    h = D_800DF254->height;
+    dsdx = (s32)((u1 - u0) * (f32)w * g_textureRectangleDerivativeScale) / dx;
+    h = g_combineBoundImage->height;
     fh = (v1 - v0) * (f32)h;
     dy = y1 - y0 + 1;
     intH = (s32)fh;
-    dtdy = (s32)(fh * D_800DD404) / dy;
-    stride = D_800DF254->stride;
-    bpp = D_800DF268_de;
-    D_800DF264_de = 0;
+    dtdy = (s32)(fh * g_textureRectangleDerivativeScale) / dy;
+    stride = g_combineBoundImage->stride;
+    bpp = g_combineBoundImagePixelType;
+    g_combineImageChunkState = 0;
     if (intH == 0) {
         scale = 1000;
     } else {
-        scale = (s32)((f32)dy * D_800DD404 / fh);
+        scale = (s32)((f32)dy * g_textureRectangleDerivativeScale / fh);
     }
     x0 = x0 << 10;
     y0 = y0 << 10;
     y1 = y1 << 10;
     x1 = x1 << 10;
-    vOff = (s32)(v0 * (f32)h * D_800DD408_de[0]);
+    vOff = (s32)(v0 * (f32)h * g_textureRectangleCoordinateScales[0]);
     switch (bpp) {
     case 4:
-        st4 = (s16)(u16)D_800DF254->stride;
+        st4 = (s16)(u16)g_combineBoundImage->stride;
         chunk = (0x1000 / st4) & ~1;
         rowBytes = st4 / 2;
         break;
     case 8:
-        chunk = (0x800 / D_800DF254->stride) & ~1;
-        rowBytes = D_800DF254->stride;
+        chunk = (0x800 / g_combineBoundImage->stride) & ~1;
+        rowBytes = g_combineBoundImage->stride;
         break;
     case 16:
-        rowBytes = D_800DF254->stride * 2;
-        chunk = (0x800 / D_800DF254->stride) & ~1;
+        rowBytes = g_combineBoundImage->stride * 2;
+        chunk = (0x800 / g_combineBoundImage->stride) & ~1;
         break;
     case 24:
-        rowBytes = D_800DF254->stride * 4;
-        chunk = (0x400 / D_800DF254->stride) & ~1;
+        rowBytes = g_combineBoundImage->stride * 4;
+        chunk = (0x400 / g_combineBoundImage->stride) & ~1;
         break;
     default:
         rowBytes = 0;
         chunk = 0;
         break;
     }
-    if (D_800DF254->height < chunk) {
-        chunk = D_800DF254->height;
+    if (g_combineBoundImage->height < chunk) {
+        chunk = g_combineBoundImage->height;
     }
-    rows = D_800DF254->height;
-    sStart = (s32)(u0 * (f32)w * D_800DD408_de[1]);
+    rows = g_combineBoundImage->height;
+    sStart = (s32)(u0 * (f32)w * g_textureRectangleCoordinateScales[1]);
     y = 0;
     if (rows >= 0) {
         do {
             yNext = y + chunk;
             yTop = y0 + (scale * (y * 0x400 - vOff) >> 10);
             yBot = y0 + (scale * (yNext * 0x400 - vOff) >> 10) - 0x400;
-            data = D_800DF254->data + y * rowBytes;
+            data = g_combineBoundImage->data + y * rowBytes;
             y = yNext;
             tOff = 0;
             if (yBot < yTop) {
@@ -420,7 +420,7 @@ void Combine_DrawTextureRectangleChunks(s32 x0, s32 y0, s32 x1, s32 y1, f32 u0, 
                 if (y1 < yBot) {
                     yBot = y1;
                 }
-                if (D_800DF260_de == 0) {
+                if (g_combineImageRequiresChunks == 0) {
                     switch (bpp) {
                     case 4:
                         gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, data);

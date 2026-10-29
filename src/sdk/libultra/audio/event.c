@@ -5,7 +5,7 @@
 #include "sdk/libgultra/alunlink.h"
 #include "include_asm.h"
 
-extern s32 func_802BD170_de(s32);
+extern s32 osSetIntMask(s32);
 
                   /* osSetIntMask */
 
@@ -39,7 +39,7 @@ s32 alEvtqNextEvent(void *eventQueue, s16 *outputEvent) {
     s32 saved;
     s32 result;
 
-    saved = func_802BD170_de(1);
+    saved = osSetIntMask(1);
     node = ((ALEventQueue *)eventQueue)->allocList.next;
     if (node != 0) {
         alUnlink(node);
@@ -50,7 +50,7 @@ s32 alEvtqNextEvent(void *eventQueue, s16 *outputEvent) {
         *outputEvent = -1;
         result = 0;
     }
-    func_802BD170_de(saved);
+    osSetIntMask(saved);
     return result;
 }
 
@@ -65,11 +65,11 @@ void alEvtqPostEvent(ALEventQueue *evtq, ALEvent *evt, s32 delta)
     s32 postAtEnd = 0;
     s32 mask;
 
-    mask = func_802BD170_de(1);
+    mask = osSetIntMask(1);
 
     item = (ALEventListItem *)evtq->freeList.next;
     if (!item) {
-        func_802BD170_de(mask);
+        osSetIntMask(mask);
         return;
     }
 
@@ -102,7 +102,7 @@ void alEvtqPostEvent(ALEventQueue *evtq, ALEvent *evt, s32 delta)
         }
     }
 
-    func_802BD170_de(mask);
+    osSetIntMask(mask);
 }
 
 void alEvtqFlush(void *previousNode) {
@@ -111,7 +111,7 @@ void alEvtqFlush(void *previousNode) {
     NodeGskyActivateMessagePool *next;
     s32 saved;
 
-    saved = func_802BD170_de(1);
+    saved = osSetIntMask(1);
     cur = queue->allocList.next;
     if (cur != 0) {
         do {
@@ -121,21 +121,21 @@ void alEvtqFlush(void *previousNode) {
             cur = next;
         } while (cur != 0);
     }
-    func_802BD170_de(saved);
+    osSetIntMask(saved);
 }
 
 
-void alEvtqFlushType(void *previousNode, s16 arg1) {
+void alEvtqFlushType(void *previousNode, s16 eventType) {
     s32 saved;
     char *cur;
     char *next;
 
-    saved = func_802BD170_de(1);
+    saved = osSetIntMask(1);
     cur = ((ALEventQueue *)previousNode)->allocList.next;
     if (cur != 0) {
         do {
             next = ((ALEventListItem *)cur)->node.next;
-            if (((ALEventListItem *)cur)->evt.type == arg1) {
+            if (((ALEventListItem *)cur)->evt.type == eventType) {
                 if (next != 0) {
                     ((ALEventListItem *)next)->delta = ((ALEventListItem *)next)->delta + ((ALEventListItem *)cur)->delta;
                 }
@@ -145,10 +145,10 @@ void alEvtqFlushType(void *previousNode, s16 arg1) {
             cur = next;
         } while (cur != 0);
     }
-    func_802BD170_de(saved);
+    osSetIntMask(saved);
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B0238[8] =
+char s_EventIzeBrighText[8] =
     "izeBrigh";
 #endif

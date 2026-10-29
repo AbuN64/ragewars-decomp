@@ -32,7 +32,7 @@ extern void alSynNew(void);
 void alInit(void *audioGlobals) {
     void **p;
 
-    p = (void **)&D_800D4070;
+    p = (void **)&g_audioGlobals;
     if (*p == 0) {
         *p = audioGlobals;
         alSynNew();
@@ -43,7 +43,7 @@ void alInit(void *audioGlobals) {
 void alClose(s32 *audioGlobals) {
     void **p;
 
-    p = (void **)&D_800D4070;
+    p = (void **)&g_audioGlobals;
     if (*p != 0) {
         alSynDelete(audioGlobals);
         *p = 0;

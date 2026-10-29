@@ -45,46 +45,46 @@ void Audio_InitializeMusicPlayer(struct AudioStateD844 *state, struct AudioRootD
 }
 
 void Audio_UpdateMusicFade(void *queue) {
-    ObjectState40 *o = queue;
-    f32 temp_f1;
+    MusicTrackVolumeView *o = queue;
+    f32 currentGain;
     f32 targetGain;
-    f32 var_f0;
-    s32 temp_f3;
+    f32 nextGain;
+    s32 nextVolume;
 
     if (o->flags & 2) {
         alCSPSetVol(o->unk_14, (s16)o->volume);
-        temp_f3 = (s32) ((f32) o->volume - o->fadeStep);
-        o->volume = temp_f3;
-        if (temp_f3 <= 0) {
+        nextVolume = (s32) ((f32) o->volume - o->fadeStep);
+        o->volume = nextVolume;
+        if (nextVolume <= 0) {
             o->volume = 0;
             alCSPStop(o->unk_14);
             o->flags |= 4;
         }
     } else if (o->unk_38 != 0) {
-        temp_f1 = o->unk_3C;
+        currentGain = o->unk_3C;
         targetGain = o->targetGain;
-        if (targetGain < temp_f1) {
-            var_f0 = temp_f1 - D_800C4000_de;
-            if (targetGain <= var_f0) {
+        if (targetGain < currentGain) {
+            nextGain = currentGain - g_musicFadeGainStep;
+            if (targetGain <= nextGain) {
                 goto store;
             }
             goto clamp;
         }
-        if (temp_f1 < targetGain) {
-            var_f0 = temp_f1 + (0.01666666753590107f);
-            if (var_f0 <= targetGain) {
+        if (currentGain < targetGain) {
+            nextGain = currentGain + (0.01666666753590107f);
+            if (nextGain <= targetGain) {
                 goto store;
             }
 clamp:
-            var_f0 = targetGain;
+            nextGain = targetGain;
 store:
-            o->unk_3C = var_f0;
+            o->unk_3C = nextGain;
         }
     }
 }
 
 /* 800C90F8.CPP */
 /* ROM-grounded data: src/rw_pool_8025DA10_C9CF8_us_rev1.c */
-const unsigned int D_blob_560856c23de34a446d94[1] = {
+const unsigned int g_audio_LoadMusicSequenceConstantWords[1] = {
     0x3DCCCCCD,
 };

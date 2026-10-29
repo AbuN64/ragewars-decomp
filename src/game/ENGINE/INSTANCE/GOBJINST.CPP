@@ -1,10 +1,10 @@
 #include "include_asm.h"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
@@ -13,7 +13,7 @@
  * GameObject_DrawBlobShadow; otherwise, once per frame the shadow model from Map_ReserveEntries is built for an object above
  * the ground: the light of the current view (direction from its signed bytes, strength from its colour)
  * is sampled at the object through Gdynlight_AccumulateLightDirections, the shadow alpha is 128 plus 56 per unit of light (faded
- * by D_800D15F0 during a fade), the light direction is kept at least 0.15 from horizontal, and the shadow
+ * by g_menuModelFillAlpha during a fade), the light direction is kept at least 0.15 from horizontal, and the shadow
  * is projected along it onto a plane just below the object (0.9 of its height up to 512), grown by 0.003
  * per unit of height, turned by the object's orientation and placed on the ground; the shadow is then
  * submitted through Gobjinst_DrawModelWithProjection. */
@@ -54,10 +54,10 @@ void GameObject_DrawActorShadow(char *obj, s32 unused, char *info) {
             }
             diff = ((struct LevelActor *)(obj))->position0.y - ground;
             height = (512.0f < diff) ? 512.0f : diff;
-            if ((((struct LevelActor *)(obj))->shadow = Map_ReserveEntries(&D_8011FFB0, 1)) == 0) {
+            if ((((struct LevelActor *)(obj))->shadow = Map_ReserveEntries(&g_actorMatrixPool, 1)) == 0) {
                 return;
             }
-            light = obj + (D_800D297C * 0x18 + 0x140);
+            light = obj + (g_lightingBufferIndex * 0x18 + 0x140);
             dir.x = ((struct Shared_ParticleLighting *)(light))->direction[0] * 0.007874016f;
             dir.y = ((struct Shared_ParticleLighting *)(light))->direction[1] * 0.007874016f;
             dir.z = ((struct Shared_ParticleLighting *)(light))->direction[2] * 0.007874016f;
@@ -65,13 +65,13 @@ void GameObject_DrawActorShadow(char *obj, s32 unused, char *info) {
                                          (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] +
                                          (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1]) *
                        -0.00090497744f;
-            Gdynlight_AccumulateLightDirections(&D_8013B1A8, ((Player *)(obj))->pos, &dir, &strength);
+            Gdynlight_AccumulateLightDirections(&g_dynamicLightPool, ((Player *)(obj))->pos, &dir, &strength);
             if (strength < -1.0f) {
                 strength = -1.0f;
             }
             alpha = strength * 56.0f + 128.0f;
-            if (D_800D15E0 == 1) {
-                alpha = alpha * D_800D15E4[3] * 0.003921569f;
+            if (g_menuModelFillEnabled == 1) {
+                alpha = alpha * g_menuModelFillColor[3] * 0.003921569f;
             }
             ((struct LevelActor *)(obj))->shadowAlpha = alpha;
             dir.y = 1.0f;
@@ -103,7 +103,7 @@ void GameObject_DrawActorShadow(char *obj, s32 unused, char *info) {
 }
 
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
@@ -128,7 +128,7 @@ void GameObject_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 r
     PackedMatrixWords *packed;
     u8 targetAlpha;
 
-    packed = Map_ReserveEntries(&D_8011FFB0, 1);
+    packed = Map_ReserveEntries(&g_actorMatrixPool, 1);
     if (packed != 0) {
         groundHeight = InstHdr_GetShadowGroundHeight(actor, 0);
         height = (actor->position0.y + actor->eyeHeight) - groundHeight;

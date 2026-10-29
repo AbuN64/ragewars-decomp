@@ -5,10 +5,10 @@
 #include "COMMON/ITEMRECAT20V1.H"
 struct ResidentState;
 struct ResidentState {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
+    s32 count;
+    s32 index;
+    s32 frame;
+    s32 changed;
 };
 
 struct ResidentSlot;
@@ -34,7 +34,7 @@ struct SelectionTextLoadApplyArtsendTextureOverride;
 extern void Tengine_UpdateArtsendTexturePreview(void);
 
 
-extern ResidentState D_8014AEB8;
+extern ResidentState g_artsendTextureSelection;
 
 
 
@@ -55,19 +55,19 @@ struct AnimationInfo;
 struct ResourceData80295B84;
 extern void Textload_PrepareTextureVariation(s32 index, struct ResourceData80295B84 *resource);
 
-extern s32 D_auto_800D2AE8;
+extern s32 g_artsendNextTextureHoldCount;
 
-extern s32 D_auto_800D2AE4;
+extern s32 g_artsendPreviousTextureHoldCount;
 
-extern s32 D_auto_800D2AF4;
+extern s32 g_artsendPreviousPageHoldCount;
 
-extern s32 D_auto_800D2AF8;
+extern s32 g_artsendNextPageHoldCount;
 
 extern void Tengine_LoadSelectedTexture(void);
 extern u8 s_artsendActivatedText[0x14];
 extern u8 s_artsendDeactivatedText[0x14];
-extern f32 D_auto_800CA634;
-extern s32 D_auto_800D2AFC;
+extern f32 g_artsendTextureTitleScale;
+extern s32 g_artsendToggleButtonHeld;
 
 
 /* Texture animation metadata returned to material and texture consumers. */
@@ -77,8 +77,8 @@ extern s32 D_auto_800D2AFC;
 
 extern void TextLoad_ApplyArtsendTextureOverride(s32 resource, s32 **data);
 extern void TextLoad_ApplyArtsendPaletteOverride(s32 resource, s32 **data);
-extern s32 D_8014D070;
-extern s32 D_8014D074;
-extern s32 D_8014D078;
-extern s32 D_8014D07C;
+extern s32 g_textureFrameCacheFrame;
+extern s32 g_textureFrameCacheVariation;
+extern s32 g_textureFrameCacheWrapS;
+extern s32 g_textureFrameCacheWrapT;
 #endif

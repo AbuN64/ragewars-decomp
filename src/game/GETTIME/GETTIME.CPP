@@ -1,7 +1,7 @@
 #include "COMMON/EXTERNS.H"
 #include "COMMON/OSTHREAD_S.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/os.h"
 
@@ -14,9 +14,9 @@ u64 Audio_ReadSystemTime(void) {
     u64 time;
 
     saved = __osDisableInt();
-    count = func_802BCF00_de();
-    elapsed = count - D_80149B90;
-    time = D_80149B98;
+    count = Util_ReadProcessorCount();
+    elapsed = count - __osBaseCounter;
+    time = __osCurrentTime;
     __osRestoreInt(saved);
     return time + elapsed;
 }

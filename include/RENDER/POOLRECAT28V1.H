@@ -5,54 +5,54 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-struct func_80285D00_S1;
-typedef struct func_80285D00_S1 func_80285D00_S1;
+struct RumbleSpatialPoolView;
+typedef struct RumbleSpatialPoolView RumbleSpatialPoolView;
 
 
-struct func_80285D00_S1;
-struct func_80285D00_S1 {
+struct RumbleSpatialPoolView;
+struct RumbleSpatialPoolView {
     char pad0[0x14];
-    IntrusiveList unk14;
+    IntrusiveList activeEffects;
     char pad14[0x28 - 0x14 - sizeof(IntrusiveList)];
     union { s32 unk28; f32 baseLevel; };
 };
 
 
 struct NodeCode8028469C;
-struct PoolRecAt28V1;
-/* PoolRecAt28V1 is shared with ControllerProfile in ITEMRECAT20V1.H. */
+struct RumbleNodePoolView;
+/* RumbleNodePoolView is shared with ControllerProfile in ITEMRECAT20V1.H. */
 
-extern float D_800C4ED0_de;
+extern float g_spatialEffectFalloffUnitGain;
 
 
 
-struct func_80285880_S1;
-struct func_80285880_S1 {
+struct RumbleSpatialEffectNode;
+struct RumbleSpatialEffectNode {
     char pad0[4];
-    struct func_80285880_S1 *next;
-    void * unk8;
+    struct RumbleSpatialEffectNode *next;
+    void * effectClip;
     char pad8[0xC - 0x8 - sizeof(void*)];
     union { Triple unkC; CVector3 position; };
     char padC[0x18 - 0xC - sizeof(Triple)];
-    f32 unk18;
+    f32 radius;
     char pad18[0x1C - 0x18 - sizeof(f32)];
-    f32 unk1C;
+    f32 strength;
     char pad1C[0x20 - 0x1C - sizeof(f32)];
     union {
         struct { unsigned int unk20; char pad20[8]; };
-        PlayerRecAt8 amplitudeCurve;
+        SampledEffectCurveState amplitudeCurve;
     };
     union {
         struct { unsigned int unk2C; char pad2C[8]; };
-        PlayerRecAt8 lifetimeCurve;
+        SampledEffectCurveState lifetimeCurve;
     };
-    void ** unk38;
+    void ** ownerSlot;
 };
 
-struct func_80285880_S1;
-typedef struct func_80285880_S1 func_80285880_S1;
+struct RumbleSpatialEffectNode;
+typedef struct RumbleSpatialEffectNode RumbleSpatialEffectNode;
 
-struct PoolRecAt28V1;
-typedef struct PoolRecAt28V1 PoolRecAt28V1;
+struct RumbleNodePoolView;
+typedef struct RumbleNodePoolView RumbleNodePoolView;
 
 #endif

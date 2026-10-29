@@ -12,5 +12,5 @@
 /* Measured 4-byte access at 0x14; storage view, complete object unknown. */
 
 /* Measured 4-byte access at 0x14; storage view, complete object unknown. */
-struct MeasuredRecAt14V5 { unsigned char padding[20]; void * * * value; };
+struct SceneLevelNameView { unsigned char padding[20]; void * * * value; };
 #endif

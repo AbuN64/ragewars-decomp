@@ -8,7 +8,7 @@ unsigned int func_80437304_de_padding_1A54E4[3] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_80437304_de_padding_1A54E4 */
-unsigned int D_blob_phase2_94cec25f741b8d3d4655[3] = {
+unsigned int g_MenuEncodedWordsBlock3[3] = {
     0x24020096, 0xA2220010, 0x82440080,
 };
 #endif

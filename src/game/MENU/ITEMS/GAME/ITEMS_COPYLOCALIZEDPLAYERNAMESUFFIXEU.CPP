@@ -2,12 +2,12 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-extern u8 *D_800E3B94[];
+extern u8 *g_playerNameSuffixByLanguage[];
 
 void Items_CopyLocalizedPlayerNameSuffixEu(Shared_PlayerSettingsRecord *record, s32 index) {
-    Shared_Game *settings = &D_801462C8;
+    Shared_Game *settings = &g_gameSettings;
     do {
-        record->name[index] = D_800E3B94[settings->language][index];
+        record->name[index] = g_playerNameSuffixByLanguage[settings->language][index];
         index++;
     } while (index < 8);
 }

@@ -3,20 +3,20 @@
 #include "RESMGR/STATEPAIR.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/TEXTURE.H"
 #include "RESMGR/TSMOS_SETIDLETIMER.H"
 
-/** Return the global word at D_800D2C98. */
+/** Return the global word at g_frontendActiveState. */
 
 
 
 
 /** Store a scalar and clear its associated global state word. */
 void Tsmos_SetIdleTimer(float value) {
-    D_800CDA30_de.value = value;
-    D_8011FAC0.transitionTime = 0;
+    g_frontendTimerState.value = value;
+    g_gameSession.transitionTime = 0;
 }

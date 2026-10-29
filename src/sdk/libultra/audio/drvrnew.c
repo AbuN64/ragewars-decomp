@@ -1,6 +1,6 @@
 #include "sdk/libgultra.h"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/ALDELAY28.H"
@@ -16,7 +16,7 @@
    give each section its optional resampler and low-pass filter. init_lpfilter's body is written
    out where the library's -O3 inlined it, against this function's own cartridge constants (a
    static inline helper kept 16384.0 in the inner loop instead of hoisting it into f20); the
-   parameter tables are the cartridge's D_800D4080..D_800D41E8 and the unsigned length
+   parameter tables are the cartridge's g_audioSmallRoomParameters..g_audioNoEffectParameters and the unsigned length
    conversion is written out in GCC's order. */
 
 
@@ -26,42 +26,42 @@ extern s32 alHeapDBAlloc(s32 file, s32 line, void *hp, s32 num, s32 size);
 
  /* alHeapDBAlloc */
 
-extern char D_002B60D8;
+extern char alFxParam_Address;
 
  /* alFxParam */
-extern char D_002B57F0;
+extern char alFxPull_Address;
 
  /* alFxPull */
-extern char D_002B5B94;
+extern char Audio_SetEffectParameter_Address;
 
  /* alFxParamHdl */
 
-extern s32 D_800D4080[];
+extern s32 g_audioSmallRoomParameters[];
 
  /* SMALLROOM_PARAMS */
-extern s32 D_800D40E8[];
+extern s32 g_audioBigRoomParameters[];
 
  /* BIGROOM_PARAMS */
-extern s32 D_800D4170_de[];
+extern s32 g_audioEchoParameters[];
 
  /* ECHO_PARAMS */
-extern s32 D_800D4198[];
+extern s32 g_audioChorusParameters[];
 
  /* CHORUS_PARAMS */
-extern s32 D_800D41C0[];
+extern s32 g_audioFlangeParameters[];
 
  /* FLANGE_PARAMS */
-extern s32 D_800D41E8[];
+extern s32 g_audioNoEffectParameters[];
 
  /* NULL_PARAMS */
 
  /* 16384.0 */
-extern const f32 D_800CC810;
+extern const f32 g_effectResampleIncrementScale;
 
  /* 1 / 1000 */
 
  /* 2^32 */
-extern const f32 D_800CC820;
+extern const f32 g_effectResampleDepthScale;
 
 typedef s32 (*FuncPtr)(void *);
 
@@ -82,18 +82,18 @@ void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
     ALFilter_s14 *f = &r->filter;
     ALDelay28 *d;
 
-    alFilterNew(f, 0, (s32)&D_002B60D8, 5);
-    f->handler = &D_002B57F0;
-    r->paramHdl = &D_002B5B94;
+    alFilterNew(f, 0, (s32)&alFxParam_Address, 5);
+    f->handler = &alFxPull_Address;
+    r->paramHdl = &Audio_SetEffectParameter_Address;
 
     switch (c->fxType) {
-      case 1: param = D_800D4080; break;
-      case 2: param = D_800D40E8; break;
-      case 5: param = D_800D4170_de; break;
-      case 3: param = D_800D4198; break;
-      case 4: param = D_800D41C0; break;
+      case 1: param = g_audioSmallRoomParameters; break;
+      case 2: param = g_audioBigRoomParameters; break;
+      case 5: param = g_audioEchoParameters; break;
+      case 3: param = g_audioChorusParameters; break;
+      case 4: param = g_audioFlangeParameters; break;
       case 6: param = c->params; break;
-      default: param = D_800D41E8; break;
+      default: param = g_audioNoEffectParameters; break;
     }
 
     j = 0;
@@ -122,16 +122,16 @@ void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
             f32 rsinc;
             f32 depth;
 
-            rsinc = (f32)param[j++] * D_800CC810;
+            rsinc = (f32)param[j++] * g_effectResampleIncrementScale;
             d->rsinc = (rsinc + rsinc) / c->outputRate;
 
             depth = (f32)param[j++];
             length = d->output - d->input;
             flength = length;
             if (length < 0)
-                flength += D_800C75C8_de;
-            d->rsgain = depth * ((f32)flength * D_800CC820);
-            d->rsval = D_800C75D4;
+                flength += g_effectDelayLengthUnsignedBias;
+            d->rsgain = depth * ((f32)flength * g_effectResampleDepthScale);
+            d->rsval = g_effectResamplerInitialValue;
             d->rsdelta = 0;
             d->rs = (void *)alHeapDBAlloc(0, 0, hp, 1, sizeof(struct ALResampler_s));
             ((struct ALResampler_s *)d->rs)->state = (void *)alHeapDBAlloc(0, 0, hp, 1, 32);
@@ -162,7 +162,7 @@ void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
                     lp->coefficients.taps[n] = 0;
 
                 lp->coefficients.taps[n++] = fc;
-                fcoef = ffc = (f64)fc * D_800C75D8_de;
+                fcoef = ffc = (f64)fc * g_effectLowPassCoefficientScale;
 
                 for (; n < 16; n++) {
                     fcoef *= ffc;
@@ -176,63 +176,63 @@ void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
     }
 }
 
-void alLoadNew(void *arg0, FuncPtr arg1, s32 arg2) {
-    alFilterNew(arg0, &D_002BE0D0, &D_002BEAA4, 0);
-    ((ALLoadFilter48_2 *)arg0)->state = alHeapDBAlloc(0, 0, arg2, 1, 0x20);
-    ((ALLoadFilter48_2 *)arg0)->lstate = alHeapDBAlloc(0, 0, arg2, 1, 0x20);
-    ((ALLoadFilter48_2 *)arg0)->dma = arg1(&((ALLoadFilter48_2 *)arg0)->dmaState);
-    ((ALLoadFilter48_2 *)arg0)->lastsam = 0;
-    ((ALLoadFilter48_2 *)arg0)->first = 1;
-    ((ALLoadFilter48_2 *)arg0)->memin = 0;
+void alLoadNew(void *loadFilter, FuncPtr createDma, s32 heap) {
+    alFilterNew(loadFilter, &alAdpcmPull_Address, &alLoadParam_Address, 0);
+    ((ALLoadFilter48_2 *)loadFilter)->state = alHeapDBAlloc(0, 0, heap, 1, 0x20);
+    ((ALLoadFilter48_2 *)loadFilter)->lstate = alHeapDBAlloc(0, 0, heap, 1, 0x20);
+    ((ALLoadFilter48_2 *)loadFilter)->dma = createDma(&((ALLoadFilter48_2 *)loadFilter)->dmaState);
+    ((ALLoadFilter48_2 *)loadFilter)->lastsam = 0;
+    ((ALLoadFilter48_2 *)loadFilter)->first = 1;
+    ((ALLoadFilter48_2 *)loadFilter)->memin = 0;
 }
 
-void alMainBusNew(void *arg0, s32 arg1, s32 arg2) {
-    alFilterNew(arg0, (s32) &D_002B5400, (s32) &D_002B5540, 7);
-    (((struct TextLayerRect *) ((s8 *) arg0))->x) = 0;
-    (((struct TextLayerRect *) ((s8 *) arg0))->right) = arg2;
-    (((struct TextLayerRect *) ((s8 *) arg0))->y) = arg1;
+void alMainBusNew(void *busFilter, s32 maxSources, s32 sources) {
+    alFilterNew(busFilter, (s32) &alMainBusPull_Address, (s32) &alMainBusParam_Address, 7);
+    (((struct TextLayerRect *) ((s8 *) busFilter))->x) = 0;
+    (((struct TextLayerRect *) ((s8 *) busFilter))->right) = sources;
+    (((struct TextLayerRect *) ((s8 *) busFilter))->y) = maxSources;
 }
 
-void alAuxBusNew(void *arg0, s32 arg1, s32 arg2) {
-    alFilterNew(arg0, (s32) &D_002B3E00, (s32) &D_002B3EDC, 6);
-    (((struct TextLayerRect *) ((s8 *) arg0))->x) = 0;
-    (((struct TextLayerRect *) ((s8 *) arg0))->right) = arg2;
-    (((struct TextLayerRect *) ((s8 *) arg0))->y) = arg1;
+void alAuxBusNew(void *busFilter, s32 maxSources, s32 sources) {
+    alFilterNew(busFilter, (s32) &alAuxBusPull_Address, (s32) &alAuxBusParam_Address, 6);
+    (((struct TextLayerRect *) ((s8 *) busFilter))->x) = 0;
+    (((struct TextLayerRect *) ((s8 *) busFilter))->right) = sources;
+    (((struct TextLayerRect *) ((s8 *) busFilter))->y) = maxSources;
 }
 
 s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
 
-void alResampleNew(ALResampler_s *arg0, s32 arg1) {
+void alResampleNew(ALResampler_s *resampler, s32 heap) {
     s32 result;
     f32 k;
 
-    alFilterNew(arg0, &D_002B5570, &D_002B5730, 1);
-    result = alHeapDBAlloc(0, 0, arg1, 1, 0x20);
-    k = D_800C75E0_de;
-    arg0->state = (void *)result;
-    arg0->delta = 0;
-    arg0->first = 1;
-    arg0->motion = 0;
-    arg0->upitch = 0;
-    arg0->ctrlList = 0;
-    arg0->ctrlTail = 0;
-    arg0->ratio = k;
+    alFilterNew(resampler, &alResamplePull_Address, &alResampleParam_Address, 1);
+    result = alHeapDBAlloc(0, 0, heap, 1, 0x20);
+    k = g_resamplerInitialRatio;
+    resampler->state = (void *)result;
+    resampler->delta = 0;
+    resampler->first = 1;
+    resampler->motion = 0;
+    resampler->upitch = 0;
+    resampler->ctrlList = 0;
+    resampler->ctrlTail = 0;
+    resampler->ratio = k;
 }
 
-void alSaveNew(ALSave *arg0) {
-    alFilterNew(arg0, (s32) &D_002B6380, (s32) &D_002B6480, 3);
-    arg0->dramout = 0;
-    arg0->first = 1;
+void alSaveNew(ALSave *saveFilter) {
+    alFilterNew(saveFilter, (s32) &alSavePull_Address, (s32) &alSaveParam_Address, 3);
+    saveFilter->dramout = 0;
+    saveFilter->first = 1;
 }
 
-extern char D_002B4730, D_002B51B8;
+extern char Audio_PullEnvelope_Address, alEnvmixerParam_Address;
 
-void alEnvmixerNew(ALEnvMixer *arg0, ALHeap *arg1) {
+void alEnvmixerNew(ALEnvMixer *envelopeMixer, ALHeap *heap) {
     s32 result;
-    ALEnvMixer *mixer = arg0;
+    ALEnvMixer *mixer = envelopeMixer;
 
-    alFilterNew(arg0, &D_002B4730, &D_002B51B8, 4);
-    result = alHeapDBAlloc(0, 0, arg1, 1, 0x50);
+    alFilterNew(envelopeMixer, &Audio_PullEnvelope_Address, &alEnvmixerParam_Address, 4);
+    result = alHeapDBAlloc(0, 0, heap, 1, 0x50);
     mixer->state = (void *)result;
     mixer->first = 1;
     mixer->motion = 0;
@@ -257,7 +257,7 @@ void alEnvmixerNew(ALEnvMixer *arg0, ALHeap *arg1) {
 
 /* _init_lpfilter, drafted from ultralib src/audio/drvrnew.c: derive the low-pass filter's gain and
    its sixteen coefficients from the configured cutoff. This object carries its own copies of the
-   1/16384 and 16384.0 double constants, at D_800CC838 and D_800CC840, distinct from the copies the
+   1/16384 and 16384.0 double constants, at g_lowPassCoefficientScale and g_lowPassFixedPointScale, distinct from the copies the
    inlined body in alFxNew uses. */
 
 
@@ -276,11 +276,11 @@ void init_lpfilter(AudioLowPassFilter *lp)
         lp->coefficients.taps[i] = 0;
 
     lp->coefficients.taps[i++] = fc;
-    fcoef = ffc = (f64)fc * D_800CC838;
+    fcoef = ffc = (f64)fc * g_lowPassCoefficientScale;
 
     for (; i < 16; i++) {
         fcoef *= ffc;
-        lp->coefficients.taps[i] = (s16)(fcoef * D_800CC840);
+        lp->coefficients.taps[i] = (s16)(fcoef * g_lowPassFixedPointScale);
     }
 }
 

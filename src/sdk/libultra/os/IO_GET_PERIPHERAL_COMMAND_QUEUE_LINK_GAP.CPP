@@ -1,0 +1,4 @@
+
+#if defined(VERSION_EU_X)
+unsigned char g_IoGetPeripheralCommandQueueLinkGapTrailingBytes[8] = { 0x00, 0x00, 0x00, 0x00, 0xAE, 0x02, 0x00, 0x10 };
+#endif

@@ -8,5 +8,5 @@ unsigned int func_8042204C_us_rev1[1] = { 0x8C440038U };
 
 /* 8044E2B8_2.CPP */
 #if defined(VERSION_US)
-unsigned char D_auto_func_8044DDCC_us_padding_1B1DCC[4] = { 0x48, 0x54, 0x00, 0x00 };
+unsigned char g_MenuTrailingBytesBlock10[4] = { 0x48, 0x54, 0x00, 0x00 };
 #endif

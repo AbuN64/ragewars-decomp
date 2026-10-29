@@ -3,7 +3,7 @@
 
 /* 800E5494_2.CPP */
 /* ROM-grounded data: rodata/writable/800E54A0 */
-unsigned int D_blob_phase2_4192682a3a0b99daac68[2] = {
+unsigned int g_FrontendDispatchpakprofileeventWords1[2] = {
     0x00000000, 0x00000000,
 };
 
@@ -43,9 +43,9 @@ unsigned int D_src_95297a43[42] = {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
-unsigned int D_blob_8e1913286f812ae02607[9] = {
-    0x00000E07, 0x00000013, (unsigned int)D_00435BA4, 0x00000E0A, 0x00000013, (unsigned int)D_0042F988, 0x00000E08, 0x00000013,
-    (unsigned int)D_0042FAFC,
+unsigned int g_FrontendDispatchpakprofileeventPointerWords1[9] = {
+    0x00000E07, 0x00000013, (unsigned int)g_packedCodeAddress24_00435BA4, 0x00000E0A, 0x00000013, (unsigned int)g_packedCodeAddress24_0042F988, 0x00000E08, 0x00000013,
+    (unsigned int)g_packedCodeAddress24_0042FAFC,
 };
 #endif
 

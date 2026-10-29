@@ -101,8 +101,8 @@ typedef struct ALSeqPlayer ALSeqPlayer;
 
 
 
-struct ObjectLinks88;
-typedef struct ObjectLinks88 ObjectLinks88;
+struct SequencePlayerEventView;
+typedef struct SequencePlayerEventView SequencePlayerEventView;
 
 struct ALSeqPlayer;
 
@@ -129,7 +129,7 @@ struct ALSeqPlayer;
 struct List802B663C;
 typedef struct List802B663C List802B663C;
 
-extern void alHeapInit(void *arg0, u8 *base, s32 arg2);
+extern void alHeapInit(void *heap, u8 *base, s32 byteCount);
 
 typedef signed int ( *Lane_ALOscUpdate)(void *, float *);
 
@@ -144,7 +144,7 @@ struct List802B663C {
 
 
 
-extern float D_800C74D0_de;
+extern float g_sequenceInitialPitchBend;
 
 struct ALVoice_s;
 
@@ -220,8 +220,8 @@ struct ALSound;
 struct ALVoiceState;
 
 
-struct ObjectLinks88;
-struct ObjectLinks88 {
+struct SequencePlayerEventView;
+struct SequencePlayerEventView {
     char pad0[0x18];
     void * unk_18;
     char pad18[0x24 - 0x18 - sizeof(void*)];
@@ -297,7 +297,7 @@ struct ALSeqPlayer {
 
 
 
-extern float D_800C74CC_de;
+extern float g_sequenceChannelInitialOscillatorValue;
 
 
 #endif

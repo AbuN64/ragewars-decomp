@@ -11,7 +11,7 @@ vram	name	basis
 0x802B69B4	__initFromBank	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/seqplayer.c; reviewed source correspondence (func_802B18E4_de)
 0x802B6A60	__initChanState	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/seqplayer.c; reviewed source correspondence (func_802B1990_de)
 0x802B6B10	__resetPerfChanState	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/seqplayer.c; reviewed source correspondence (func_802B1A40_de)
-0x802B6F20	__setUsptFromTempo	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/seqplayer.c; reviewed source correspondence (func_802B1E50_de)
+0x802B6F20	__setUsptFromTempo	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/seqplayer.c; reviewed source correspondence (Seqplayer_SetTempoMicrosecondsPerTick)
 0x802B75E0	alSndpAllocate	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/sndpallocate.c; reviewed source correspondence (func_802B2510_de)
 0x802B76A0	alSndpDeallocate	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/sndpdeallocate.c; reviewed source correspondence (func_802B25D0_de)
 0x802B76F0	alSndpGetState	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/sndpgetstate.c; reviewed source correspondence (func_802B2620_de)
@@ -33,7 +33,7 @@ vram	name	basis
 0x8028F89C	osScRemoveClient	machine code
 0x802B4ECC	__setUsptFromTempo	machine code
 0x802B53E0	alCopy	machine code
-0x802BCEE4	osMotorStart	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/motor.c; reviewed source identity and discriminating SDK operations (func_802B80F4_eu_x)
+0x802BCEE4	osMotorStart	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/motor.c; reviewed source identity and discriminating SDK operations (Control_StartMotorEuX)
 0x802BDEC0	osCreatePiManager	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/pimgr.c; reviewed source identity and discriminating SDK operations (func_802BDEC0_us_rev1)
 0x802B54A0	alSeqpNew	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/seqplayer.c:56; reviewed ordinary sequence-player constructor; distinct compressed constructor in csplayer.c
 0x802B9474	alLoadNew	machine code
@@ -54,7 +54,7 @@ vram	name	basis
 0x802BDB70	__osPackRamWriteData	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/contramwrite.c; reviewed source correspondence (func_802B8AA0_de)
 0x802BDD10	__osContAddressCrc	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/crc.c; reviewed source correspondence (func_802B8C40_de)
 0x802BDD58	__osContDataCrc	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/crc.c; reviewed source correspondence (func_802B8C88_de)
-0x802BCD20	osMotorStop	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/motor.c; reviewed source correspondence (func_802B7F30_eu_x)
+0x802BCD20	osMotorStop	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/motor.c; reviewed source correspondence (Control_StopMotorEuX)
 0x802BD0A8	osMotorInit	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/motor.c; reviewed source correspondence (func_802B7FD8_de)
 0x802BCC60	osDpSetNextBuffer	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/dpsetnextbuf.c; reviewed source correspondence (func_802B7B90_de)
 0x802BEE80	_VirtualToPhysicalTask	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/sptask.c; reviewed source correspondence (func_802B9D90_de)
@@ -75,10 +75,10 @@ vram	name	basis
 0x802B5410	alHeapDBAlloc	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/heapalloc.c; reviewed source correspondence (func_802B0340_de)
 0x802B388C	alCSeqTicksToSec	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cseq.c; reviewed source correspondence (func_802AE7BC_de)
 0x802B38F4	alCSeqSecToTicks	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cseq.c; reviewed source correspondence (func_802AE824_de)
-0x802C2410	sprintf	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/sprintf.c; reviewed source correspondence (func_802BD320_de)
-0x802C2490	memcpy	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/string.c; reviewed source correspondence (func_802BD3A0_de)
-0x802C24B8	strchr	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/string.c; reviewed source correspondence (func_802BD3C8_de)
-0x802C24F0	strlen	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/string.c; reviewed source correspondence (func_802BD400_de)
+0x802C2410	sprintf	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/sprintf.c; reviewed source correspondence (Libc_FormatString)
+0x802C2490	memcpy	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/string.c; reviewed source correspondence (Libc_CopyBytes)
+0x802C24B8	strchr	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/string.c; reviewed source correspondence (Libc_FindStringByte)
+0x802C24F0	strlen	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/string.c; reviewed source correspondence (Libc_StringLength)
 0x802C2A64	_Putfld	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/xprintf.c; reviewed source correspondence (func_802BD974_de)
 0x802BDEA0	osPiGetStatus	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/pigetstat.c; reviewed source correspondence (func_802BDEA0_us_rev1)
 0x802B8FAC	alAuxBusParam	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/auxbus.c; reviewed source correspondence (func_802B3EDC_de)

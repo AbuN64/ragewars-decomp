@@ -7,7 +7,7 @@
 struct ActorRec;
 typedef struct ActorRec ActorRec;
 
-extern float D_800C1DB8_de;
+extern float g_pointCentroidUnitScale;
 
 struct ObjNavComputeScaledPointCentroid;
 struct ObjNavComputeScaledPointCentroid {
@@ -20,7 +20,7 @@ struct ObjNavComputeScaledPointCentroid {
     s32 infoIndex;
 };
 
-extern float D_800C1E40_de;
+extern float g_ballisticInverseDistanceScale;
 
 struct NavigationStage;
 struct NavigationStage {
@@ -62,39 +62,39 @@ struct ActorRec;
 struct ActorRec {
     BallisticInstance *instance;
     u8 pad004[0x248 - 4];
-    f32 field248;
-    f32 field24C;
-    f32 field250;
-    f32 field254;
+    f32 initialPitch;
+    f32 previousPitch;
+    f32 pitchDelta;
+    f32 previousPitchDelta;
     union {
-        struct { f32 field258; f32 field25C; f32 field260; };
+        struct { f32 destinationX; f32 destinationY; f32 destinationZ; };
         CVector3 destination;
     };
-    f32 field264;
-    s32 field268;
-    s32 field26C;
-    s32 field270;
-    s32 field274;
-    f32 field278;
-    f32 field27C;
-    f32 field280;
-    s32 field284;
+    f32 trajectoryDistance;
+    s32 trajectoryInitialized;
+    s32 trajectoryMode;
+    s32 trajectoryPending;
+    s32 trajectoryComplete;
+    f32 targetPitch;
+    f32 upperPitchBound;
+    f32 lowerPitchBound;
+    s32 pitchSearchStep;
 };
 
 
 struct SelectionNavAppendDirectionalRouteStage;
 typedef struct SelectionNavAppendDirectionalRouteStage SelectionNavAppendDirectionalRouteStage;
 
-extern float D_800C1E48_de;
+extern float g_ballisticAccelerationScale;
 
 struct WeightSource;
 
-struct func_8020DCA0_S1;
-typedef struct func_8020DCA0_S1 func_8020DCA0_S1;
+struct WeightedAttackSelectionBrainView;
+typedef struct WeightedAttackSelectionBrainView WeightedAttackSelectionBrainView;
 
-extern float D_800C1E58_de;
+extern float g_teamMarkerSeekRandomRange;
 
-extern float D_800C1E44_de;
+extern float g_ballisticArcSampleRate;
 
 struct ObjNavFindSpecialLinkedCandidate;
 struct ObjNavFindSpecialLinkedCandidate {
@@ -107,7 +107,7 @@ struct ObjNavFindSpecialLinkedCandidate {
     int pending;
 };
 
-struct func_8020DCA0_S1;
+struct WeightedAttackSelectionBrainView;
 
 struct ObjNavFindSpecialLinkedCandidate;
 typedef struct ObjNavFindSpecialLinkedCandidate ObjNavFindSpecialLinkedCandidate;
@@ -115,7 +115,7 @@ typedef struct ObjNavFindSpecialLinkedCandidate ObjNavFindSpecialLinkedCandidate
 struct ObjNavComputeScaledPointCentroid;
 typedef struct ObjNavComputeScaledPointCentroid ObjNavComputeScaledPointCentroid;
 
-extern float D_800C1E50_de;
+extern float g_teamMarkerAggressionScale;
 
 struct WeightSource;
 typedef struct WeightSource WeightSource;
@@ -135,5 +135,5 @@ typedef struct BallisticResourceRecords {
     BallisticParamsHolder records[1];
 } BallisticResourceRecords;
 
-extern s32 *D_8013D534;
+extern s32 *g_ballisticParameterResource;
 #endif

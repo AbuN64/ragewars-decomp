@@ -1,16 +1,16 @@
 #include "COMMON/ACTORRESOURCEHEADER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "SYSTEM/POLYTRAK2_DECODESCALARSAMPLES_DATA.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "COMMON/LOCALDECODERANGE.H"
 #include "SCENE/CACHE_ALLOCATEMEMORY.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-typedef struct Shared_func_80261EB8_S1 SharedRecAt10V1;
+typedef struct PolytrakScalarSampleMetadata AnimationFramePreparationState;
 typedef StridedTable ObjRecV1;
 
-void Gastate_PrepareAnimationFrames(SharedRecAt10V1 *state, AnimInfo *frames) {
+void Gastate_PrepareAnimationFrames(AnimationFramePreparationState *state, AnimInfo *frames) {
     f32 frameScale;
     f32 scaledCurrentLoopStart;
     f32 scaledNextLoopStart;
@@ -36,20 +36,20 @@ void Gastate_PrepareAnimationFrames(SharedRecAt10V1 *state, AnimInfo *frames) {
     ObjRecV1 *positions;
     StridedTable *section;
 
-    animationHandle = state->unk10;
+    animationHandle = state->animationHandle;
     if (animationHandle == 0) {
         resourceReady = 0;
     } else {
         resourceReady = Cache_IsResourceRetained(animationHandle) != 0;
     }
     if (resourceReady != 0) {
-        resource = *state->unk10;
+        resource = *state->animationHandle;
         positions = SetN64_GetPackSection(resource, 1);
         channels = SetN64_GetPackSection(resource, 5);
         SetN64_GetPackSection(channels, 0);
-        loopStart = state->unkC;
-        framePosition = state->unk0;
-        frameCount = (f32) state->unk8;
+        loopStart = state->loopStart;
+        framePosition = state->framePosition;
+        frameCount = (f32) state->frameCount;
         frames->unk_0 = positions->data;
         section = SetN64_GetPackSection(resource, 2);
         frames->unk_4 = section->data;
@@ -93,7 +93,7 @@ block_8:
                 currentFrame = truncatedLoopedFrame - currentFrame;
             }
             if ((frameCount - 1.0f) <= (f32) currentFrame) {
-                currentRotationLoopStart = state->unkC;
+                currentRotationLoopStart = state->loopStart;
                 if (((f32) (u32) currentRotationLoopStart * frameScale) <= 0.0f) {
                     currentFrame = (s32) ((f32) (u32) currentRotationLoopStart * frameScale);
                 } else {
@@ -103,7 +103,7 @@ block_8:
             }
             nextFrame = currentFrame + 1;
             if ((frameCount - 1.0f) <= (f32) nextFrame) {
-                nextRotationLoopStart = state->unkC;
+                nextRotationLoopStart = state->loopStart;
                 if (((f32) (u32) nextRotationLoopStart * frameScale) <= 0.0f) {
                     nextFrame = (s32) ((f32) (u32) nextRotationLoopStart * frameScale);
                 } else {

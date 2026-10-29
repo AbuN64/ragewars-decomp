@@ -1,25 +1,25 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/NAME.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MENU/OPTION_AND_TEXT_LAYER_VIEWS.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/MENU_ABBDC_VERSIONS.H"
 
 u32 Defs_GetMemorySize(void);
 int SetN64_IsModeThirteen(void);
-u8 *func_8043F290(TextBoundsText *);
+u8 *Menu_GetDynamicItemText(TextBoundsText *);
 f32 Menu_MeasureLine(u8 *, f32, f32);
 void *Menu_GetListContext(s8 *);
-extern f32 D_800DE448;
-extern f32 D_800E247C;
-extern f32 D_800DE450_de;
-extern f32 D_800E2484;
-extern f32 D_800DE458;
-extern f32 D_800E248C;
-extern TextBoundsFont D_800E1E24_de[];
+extern f32 g_menuTextScreenHeightScale;
+extern f32 g_menuTextFontHeightPadding;
+extern f32 g_menuTextFontHeightScale;
+extern f32 g_menuTextAlternateFontHeightScale;
+extern f32 g_menuTextScreenWidthScale;
+extern f32 g_menuTextAlternateScreenHeightScale;
+extern TextBoundsFont g_menuFontStyles[];
 
 static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     s32 style = 0;
@@ -36,7 +36,7 @@ static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     default: style = 0; break;
     }
     style += MENU_LANGUAGE * 9;
-    return &D_800E1E24_de[style];
+    return &g_menuFontStyles[style];
 }
 
 /* Measures a text item into its metrics: size by kind (glyph run, image, three-part composite, box), then the scaled screen
@@ -52,8 +52,8 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
     f32 size, w, boxW, boxH, sx, sy, x, y;
 
     data = Menu_GetListContext(text->descriptor->unk_44);
-    metrics->m_ScaleY = D_800DE428;
-    metrics->m_ScaleX = D_800DE428;
+    metrics->m_ScaleY = g_menuTextDefaultScale;
+    metrics->m_ScaleX = g_menuTextDefaultScale;
     switch (text->mode) {
     case 0:
     case 5:
@@ -61,7 +61,7 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         if (font->kind == 0) {
             size = font->width;
             if (text->mode == 5) {
-                string = func_8043F290(text);
+                string = Menu_GetDynamicItemText(text);
             } else {
                 string = ((u8 **)text->text)[MENU_LANGUAGE];
             }
@@ -69,7 +69,7 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         } else {
             count = 0;
             if (text->mode == 5) {
-                string = func_8043F290(text);
+                string = Menu_GetDynamicItemText(text);
             } else {
                 string = ((u8 **)text->text)[MENU_LANGUAGE];
             }
@@ -81,22 +81,22 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         }
         metrics->width = w;
         if (text->flags & 0x08000000) {
-            metrics->height = D_800E28D4 * D_800DE448;
-        } else if (font->kind == 2 && D_800E28D4 >= 223) {
-            metrics->height = (font->height + D_800E247C) * D_800E28D4 * D_800DE450_de;
+            metrics->height = g_hudReferenceViewportHeight * g_menuTextScreenHeightScale;
+        } else if (font->kind == 2 && g_hudReferenceViewportHeight >= 223) {
+            metrics->height = (font->height + g_menuTextFontHeightPadding) * g_hudReferenceViewportHeight * g_menuTextFontHeightScale;
         } else {
-            metrics->height = font->height * D_800E28D4 * D_800DE450_de;
+            metrics->height = font->height * g_hudReferenceViewportHeight * g_menuTextFontHeightScale;
         }
-        metrics->width = metrics->width * D_800E28D0 / 284;
+        metrics->width = metrics->width * g_hudReferenceViewportWidth / 284;
         break;
     case 4:
         font = textBoundsFont(text);
         metrics->width = font->width;
-        metrics->height = font->height * D_800E28D4 * D_800E2484;
+        metrics->height = font->height * g_hudReferenceViewportHeight * g_menuTextAlternateFontHeightScale;
         break;
     case 1:
         if ((SetN64_IsModeThirteen() != 0 && (text->flags & 0x40000000)) ||
-            (D_80145088.settings.local != 0 && text->flags < 0 && Defs_GetMemorySize() == 0x400000)) {
+            (g_frontendScreenStatus.settings.local != 0 && text->flags < 0 && Defs_GetMemorySize() == 0x400000)) {
             metrics->width = 284;
             metrics->height = 222;
         } else {
@@ -106,8 +106,8 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
             sx = data->unk_29C / boxW;
             sy = data->unk_2A0 / boxH;
         } else {
-            sx = D_800E28D0 * D_800DE458;
-            sy = D_800E28D4 * D_800E248C;
+            sx = g_hudReferenceViewportWidth * g_menuTextScreenWidthScale;
+            sy = g_hudReferenceViewportHeight * g_menuTextAlternateScreenHeightScale;
         }
         metrics->m_ScaleX = sx;
         metrics->m_ScaleY = sy;
@@ -136,15 +136,15 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         break;
     case 3:
         box = text->text;
-        metrics->width = box->unk_24 * data->unk_29C / D_800E28D0;
-        metrics->height = box->unk_28 * data->unk_2A0 / D_800E28D4;
+        metrics->width = box->unk_24 * data->unk_29C / g_hudReferenceViewportWidth;
+        metrics->height = box->unk_28 * data->unk_2A0 / g_hudReferenceViewportHeight;
         break;
     default:
         metrics->width = 1;
         metrics->height = 1;
         break;
     }
-    x = text->x * D_800E28D0 / 284;
+    x = text->x * g_hudReferenceViewportWidth / 284;
     if (!(text->flags & 0x8000)) {
         if (text->flags & 0x4000) {
             metrics->left = metrics->right + x;
@@ -153,7 +153,7 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         }
     }
     metrics->right = metrics->left + metrics->width * metrics->m_ScaleX;
-    y = text->y * D_800E28D4 / 222;
+    y = text->y * g_hudReferenceViewportHeight / 222;
     if (!(text->flags & 0x20000)) {
         if (text->flags & 0x10000) {
             metrics->m_Top = metrics->m_Bottom + y;

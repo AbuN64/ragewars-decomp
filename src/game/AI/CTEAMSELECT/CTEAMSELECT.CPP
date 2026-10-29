@@ -5,15 +5,15 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "gbi.h"
 #include "COMMON/VECTOR4F.H"
-#include "COMMON/EXTERNS_6.H"
-#include "COMMON/OBJECTSTATE90.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
+#include "COMMON/PLAYER_RECORD_AND_FRAGTAG_VIEWS.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/GFX.H"
@@ -21,7 +21,7 @@
 #include "MENU/RESET_STORAGE.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
-#include "MENU/TEAM/80217388_4.H"
+#include "MENU/TEAM/TEAM_VIEW_UPDATE_CALLBACK.H"
 #include "MENU/TEAM/WEAPON_WHEEL_RESET_AND_ANGLE_STEP.H"
 
 extern s32 Playerai_PlayerHasAmmoForWeapon(void *, s32);
@@ -44,7 +44,7 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
     f32 *viewport;
     Item *item;
 
-    level = D_801462C8.hudFade + 0x40;
+    level = g_gameSettings.hudFade + 0x40;
     fade = menu->m_Alpha * (level < 0x100 ? level : 255.0f);
     item = items;
     while (--count != -1) {
@@ -79,7 +79,7 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
 /* Lays out a player's weapon menu when it is active: for each of the eight slots at 0x1C holding a
    weapon it eases the slot's scale toward its target (1.3 times larger under the cursor at 0x37C),
    turns an offset raised by the menu's opening by the slot's angle to place it, and lists it with its
-   weapon's icon from D_800D052C (no icon for weapons outside 0 to 21), then passes the list to
+   weapon's icon from g_weaponInfoByType (no icon for weapons outside 0 to 21), then passes the list to
    TeamSelect_DrawWeaponIcons. */
 
 extern f32 Graphu64_ApproachValue(f32, f32, f32);
@@ -88,7 +88,7 @@ extern void Graphu64_IdentityMatrix(Matrix *);
 
 extern void RollMatrix(Matrix *, f32);
 
-void func_80217928_de(CBarrel *menu, s32 arg1, s32 viewPlayer) {
+void TeamSelect_DrawWeaponWheel(CBarrel *menu, s32 unusedView, s32 viewPlayer) {
     Matrix matrix;
     CVector3 position;
     Item items[36];
@@ -111,12 +111,12 @@ void func_80217928_de(CBarrel *menu, s32 arg1, s32 viewPlayer) {
             slot = &menu->m_WeaponList[i];
             if (menu->m_WeaponList[i].m_Weapon != -1) {
                 if (i == menu->m_Selected) {
-                    target = *(&D_800C9138_de + 1) * 1.3f;
+                    target = *(&g_weaponWheelScalePoolPrefix + 1) * 1.3f;
                 } else {
-                    target = *(&D_800C9138_de + 1);
+                    target = *(&g_weaponWheelScalePoolPrefix + 1);
                 }
                 size = 1.0f;
-                slot->m_Scale = Graphu64_ApproachValue(slot->m_Scale, target, *(&D_800C9138_de + 1) * 0.1f);
+                slot->m_Scale = Graphu64_ApproachValue(slot->m_Scale, target, *(&g_weaponWheelScalePoolPrefix + 1) * 0.1f);
                 Graphu64_IdentityMatrix(&matrix);
                 RollMatrix(&matrix, slot->m_Rot);
                 Graphu64_TransformPoint(&matrix, &offset, &position);
@@ -134,7 +134,7 @@ void func_80217928_de(CBarrel *menu, s32 arg1, s32 viewPlayer) {
                     item->slot = i;
                     item->weapon = menu->m_WeaponList[i].m_Weapon;
                     item->position = position;
-                    item->icon = ((ObjRecAt6V1 *)D_800D052C[weapon])->unk6;
+                    item->icon = ((ResourceShortIdView *)g_weaponInfoByType[weapon])->resourceId;
                     item->width = size;
                     item->height = size;
                 }
@@ -152,8 +152,8 @@ void func_80217928_de(CBarrel *menu, s32 arg1, s32 viewPlayer) {
    60, a diagonal (1, 3, 5 or 7) when both axes are non-zero and their magnitudes differ by less than 46,
    otherwise 2 or 6 when the horizontal axis dominates and 0 or 4 when the vertical one does, reading
    the stick bytes at 0xC6 and 0xC7 of the controller at 0x698. */
-s32 func_80217B3C_de(PlayerRecAt698 *player) {
-    ControllerRecAtC7 *controller;
+s32 TeamSelect_GetEightWayStickSlot(TeamMenuPlayerControllerView *player) {
+    ControllerAxesView *controller;
     s8 x;
     s8 y;
     controller = player->controller;
@@ -185,16 +185,16 @@ s32 func_80217B3C_de(PlayerRecAt698 *player) {
 
 /* 80217388_6.CPP */
 /* Runs a player's weapon menu each frame: the menu button (0x8000 of the controller at 0x698) counts
-   only while func_8022C460_de allows and the controller is not paused through D_801468F4, which instead
+   only while Playerai_IsRoundEndState allows and the controller is not paused through g_resultExitPending, which instead
    closes the menu (state 3), as does holding the button while the value at 0x4 is positive; from a
    closed state holding it clears the pending weapon at 0xCC0, rebuilds the menu through TeamSelect_InitWeaponChoices
    and opens it, while releasing it with a weapon pending outside category 8 rebuilds it and marks it
-   open; with no category the slot under the cursor from func_80217B3C_de, when it changes, plays sound
+   open; with no category the slot under the cursor from TeamSelect_GetEightWayStickSlot, when it changes, plays sound
    0xD4D for an unowned weapon, forgets an empty slot, moves the cursor at 0x37C and requests the
    slot's weapon at 0x770 unless it is current, switching the slot to the weapon's alternate at 0xC of
-   its D_800D052C record when the player holds that one and input bit 0x1000 is clear. */
+   its g_weaponInfoByType record when the player holds that one and input bit 0x1000 is clear. */
 
-void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
+void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
     s32 held;
     s32 slot;
     s32 category;
@@ -203,11 +203,11 @@ void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
     s16 alternate;
     char *ammo;
 
-    held = ((struct ObjRecAtB0 *) ((ObjectLinks11B8 *) player)->unk_698)->unkB0 & 0x8000;
-    if (func_8022C460_de(player) != 0) {
+    held = ((struct ControllerButtonFlagsView *) ((TeamWeaponSelectionPlayerView *) player)->controller)->buttons & 0x8000;
+    if (Playerai_IsRoundEndState(player) != 0) {
         held = 0;
     }
-    if (D_801462C8.counters.m_bFragTagOn != 0 && ((struct ObjRecAt8F *) ((ObjectLinks11B8 *) player)->unk_5D8)->unk8F == 1) {
+    if (g_gameSettings.counters.m_bFragTagOn != 0 && ((struct FragTagProfileFlagView *) ((TeamWeaponSelectionPlayerView *) player)->options)->fragTagEnabled == 1) {
         held = 0;
         menu[0] = 3;
     }
@@ -216,22 +216,22 @@ void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
     }
     if (menu[0] == 0 || menu[0] == 3) {
         if (!held) {
-            if (((ObjectLinks11B8 *)(player))->unk_CC0 != -1 && menu[0x388 / 4] != 8) {
+            if (((TeamWeaponSelectionPlayerView *)(player))->pendingWeapon != -1 && menu[0x388 / 4] != 8) {
                 TeamSelect_InitWeaponChoices((CBarrel *)menu, 0, player);
                 menu[0] = 1;
             }
             return;
         }
-        ((ObjectLinks11B8 *)(player))->unk_CC0 = -1;
+        ((TeamWeaponSelectionPlayerView *)(player))->pendingWeapon = -1;
         TeamSelect_InitWeaponChoices((CBarrel *)menu, held, player);
-        ((ObjectLinks11B8 *)(player))->unk_11B4 = 1;
+        ((TeamWeaponSelectionPlayerView *)(player))->locked = 1;
         menu[0] = 1;
     }
     category = menu[0x388 / 4];
     if (category != -1) {
         return;
     }
-    slot = func_80217B3C_de(player);
+    slot = TeamSelect_GetEightWayStickSlot(player);
     if (slot == menu[0x390 / 4]) {
         return;
     }
@@ -249,13 +249,13 @@ void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
         if (slot != menu[0x37C / 4]) {
             menu[0x37C / 4] = slot;
         }
-        if (weapon == ((ObjectLinks11B8 *)(player))->unk_62E) {
+        if (weapon == ((TeamWeaponSelectionPlayerView *)(player))->selectedWeapon) {
             menu[0x390 / 4] = slot;
             return;
         }
-        ((ObjectLinks11B8 *)(player))->unk_770 = weapon;
-        if (!(((ObjectLinks11B8 *)(player))->unk_38 & 0x1000)) {
-            alternate = ((WeaponInfo *)(D_800D052C[weapon]))->alternate;
+        ((TeamWeaponSelectionPlayerView *)(player))->requestedWeapon = weapon;
+        if (!(((TeamWeaponSelectionPlayerView *)(player))->flags & 0x1000)) {
+            alternate = ((WeaponInfo *)(g_weaponInfoByType[weapon]))->alternate;
             if (alternate != category && (ammo = (char *) player + alternate * 2)[0x602] != 0) {
                 entry->weapon = alternate;
             }
@@ -276,14 +276,14 @@ typedef struct DraftPlayer17F4C {
     u8 pad11B8[0x20]; f32 delay; u8 pad11DC[0x14]; s32 word11F0;
     u8 pad11F4[4]; s32 word11F8;
 } DraftPlayer17F4C;
-typedef struct DraftState17F4C {
+typedef struct WeaponWheelDraftState {
     s32 state; f32 value, timer; u8 padC[8]; f32 angle;
     u8 pad18[0x380 - 0x18]; s32 mode; u8 pad384[4]; s32 selection;
-} DraftState17F4C;
+} WeaponWheelDraftState;
 
 s16 Weaponai_NextAvailableWeapon(void *);
 s32 Rumble_SetEffectOwnerSlot(s32, s32);
-void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32 unused2)
+void TeamSelect_UpdateDraftPanel(WeaponWheelDraftState *state, DraftPlayer17F4C *player, s32 unused2)
 {
     if ((u32)(player->type - 17) < 2) return;
     if (player->blocked) return;
@@ -296,7 +296,7 @@ void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *playe
     } else if ((player->input->held & 0x8000) && player->config->mode) {
         player->choice = Weaponai_NextAvailableWeapon(player);
     } else if (player->config->mode != 1 || (player->selection != -1 && state->selection != 8)) {
-        func_80217D74_de(&state->state, player, unused2);
+        TeamSelect_UpdateWeaponWheelInput(&state->state, player, unused2);
     }
     if (player->choice != player->oldChoice) {
         if (player->effect) {
@@ -307,7 +307,7 @@ void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *playe
     }
     switch (state->state) {
     case 1:
-        state->timer += D_800D2988 * 1.25f;
+        state->timer += g_frameElapsedTime * 1.25f;
         if (state->selection != -1) state->value = 16.0f;
         else state->value = 0.0f;
         if (state->timer >= 1.0f) {
@@ -316,14 +316,14 @@ void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *playe
         }
         break;
     case 2:
-        if (!func_8021846C_de(state, player)) break;
+        if (!TeamSelect_TryCloseWeaponWheel(state, player)) break;
         state->selection = -1; player->active = 0; state->state = 3;
     case 3:
-        state->timer -= D_800D2988 * 0.25f;
+        state->timer -= g_frameElapsedTime * 0.25f;
         if (state->timer <= 0.0f) { state->timer = 0.0f; state->state = 0; }
         break;
     }
-    if (state->state) state->angle += D_800D2988 * (RW_PI_F6 / 6);
+    if (state->state) state->angle += g_frameElapsedTime * (RW_PI_F6 / 6);
     else player->active = 0;
 }
 
@@ -338,9 +338,9 @@ struct TeamWeaponPlayer {
     CWeapon m_WeaponList[22];
     s16 m_CurrentWeapon;
 };
-extern f32 D_800C913C_de;
+extern f32 g_weaponWheelInitialSlotScale;
 /* Fills the first eight weapons of the barrel: a slot shows the weapon the player put in it when m_DisplaySlot
-   allows that slot (-1 every slot, 3, 7 or 4 only that slot, else that slot and the next), with its D_800D052C
+   allows that slot (-1 every slot, 3, 7 or 4 only that slot, else that slot and the next), with its g_weaponInfoByType
    record, whether the player has ammo for it and a rotation of 45 degrees per slot, and m_Selected lands on the
    current weapon; any other slot is empty (-1). */
 void TeamSelect_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponPlayer *player) {
@@ -374,11 +374,11 @@ void TeamSelect_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponP
             } else {
                 barrel->m_WeaponList[choice].m_Weapon = weapon;
                 if (player->m_CurrentWeapon == weapon) barrel->m_Selected = choice;
-                barrel->m_WeaponList[choice].m_pInfo = D_800D052C[weapon];
+                barrel->m_WeaponList[choice].m_pInfo = g_weaponInfoByType[weapon];
                 if (Playerai_PlayerHasAmmoForWeapon(player, weapon) != 0) barrel->m_WeaponList[choice].m_bEnabled = 1;
                 else barrel->m_WeaponList[choice].m_bEnabled = 0;
                 barrel->m_WeaponList[choice].m_Spin = 0.0f;
-                barrel->m_WeaponList[choice].m_Scale = D_800C913C_de;
+                barrel->m_WeaponList[choice].m_Scale = g_weaponWheelInitialSlotScale;
                 barrel->m_WeaponList[choice].m_Rot = (f32)choice * 0.785398245f;
             }
         }
@@ -389,7 +389,7 @@ void TeamSelect_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponP
 
 /* 80217388_7.CPP */
 /** Reset the weapon menu: closed, no cursor or hover, and its thirty-six slots fanned 30 degrees apart. */
-void func_8021836C_de(CBarrel *menu) {
+void TeamSelect_ResetWeaponWheel(CBarrel *menu) {
     s32 i;
 
     menu->m_Mode = 0;
@@ -404,33 +404,33 @@ void func_8021836C_de(CBarrel *menu) {
     menu->m_UnderwaterWhenSetup = 0;
     menu->m_WheelIndexLastFrame = -1;
     for (i = 0; i < 36; i++) {
-        menu->m_WeaponList[i].m_Rot = -(i * D_800C224C_de);
+        menu->m_WeaponList[i].m_Rot = -(i * g_weaponWheelResetAngleStep);
         menu->m_WeaponList[i].m_Spin = 0;
-        menu->m_WeaponList[i].m_Scale = D_800C913C_de;
+        menu->m_WeaponList[i].m_Scale = g_weaponWheelInitialSlotScale;
     }
 }
 
-void func_802183E8_de(s32 menu, s32 arg1, s32 player) {
+void TeamSelect_DrawWeaponWheelSprites(s32 menu, s32 unusedView, s32 player) {
     Gfx *cmd;
 
     Onscrn_SetupSpriteMode(0xFF);
     gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
-    func_80217928_de((CBarrel *)menu, arg1, player);
+    TeamSelect_DrawWeaponWheel((CBarrel *)menu, unusedView, player);
 }
 
 /** Preserve the empty hook at VRAM 0x80218464. */
-void func_80218464_de(void) {
+void TeamSelect_EmptyWeaponWheelHook(void) {
 }
 
-s32 func_8021846C_de(void *resetTimerStorage, void *resetOwnerStorage) {
+s32 TeamSelect_TryCloseWeaponWheel(void *resetTimerStorage, void *resetOwnerStorage) {
     f32 closeDelay;
 
-    closeDelay = ((ResetTimerStorage *)(resetTimerStorage))->unk4;
+    closeDelay = ((ResetTimerStorage *)(resetTimerStorage))->closeDelay;
     if (closeDelay > 0.0f) {
-        ((ResetTimerStorage *)(resetTimerStorage))->unk4 = closeDelay - D_800D2988;
+        ((ResetTimerStorage *)(resetTimerStorage))->closeDelay = closeDelay - g_frameElapsedTime;
         return 0;
     }
-    if (((ResetFlagsStorage *)((((ResetOwnerStorage *)(resetOwnerStorage))->unk698)))->unkB0 & 0x8000) {
+    if (((ResetFlagsStorage *)((((ResetOwnerStorage *)(resetOwnerStorage))->controller)))->buttons & 0x8000) {
         return 0;
     }
     ((ResetTimerStorage *)(resetTimerStorage))->unk37C = -1;
@@ -447,13 +447,13 @@ f32 CTeamSelect_ComputeDirectedAngleStep(f32 currentAngle, f32 targetAngle, s32 
     Graphu64_WrapPeriodicValue(&targetAngle);
     if (turnDirection > 0) {
         if (targetAngle < currentAngle) {
-            targetAngle += D_800C2250_de;
+            targetAngle += g_weaponWheelPositiveAnglePeriod;
         }
     } else if (targetAngle > currentAngle) {
-        targetAngle -= D_800C2254_de;
+        targetAngle -= g_weaponWheelNegativeAnglePeriod;
     }
     f3 = targetAngle - currentAngle;
-    f1 = f3 * approachRate * D_800D2988;
+    f1 = f3 * approachRate * g_frameElapsedTime;
     f2 = f1;
     if (f1 < 0.0f) {
         f2 = -f1;
@@ -477,30 +477,30 @@ clamp:
 
 /* 800C733C.CPP */
 /* ROM-grounded data: src/rw_pool_8021836C_C7F3C_us_rev1.c */
-const unsigned int D_blob_5c38d58e12f46481afc5[1] = {
+const unsigned int g_weaponWheelResetAngleStepBits[1] = {
     0x3E32B8C4,
 };
 
 /* 800C7340.CPP */
 /* ROM-grounded data: src/rw_pool_802184C0_C7F40_us_rev1.c */
-const unsigned int D_blob_32e5c09556bbd500697d[2] = {
+const unsigned int g_weaponWheelAnglePeriodBits[2] = {
     0x40C90FDC, 0x40C90FDC,
 };
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C2538[2] = {
+unsigned int k_CteamselectEncodedWordsBlock2[2] = {
     0x3D0EFA36, 0x3F800000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C24F8[2] = {
+unsigned int k_CteamselectEncodedWordsBlock1[2] = {
     0x00000000, 0x2129FFFF,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C2258[2] = {
+unsigned int k_CteamselectEncodedWords[2] = {
     0x65616D00, 0x437F0000,
 };
 #endif

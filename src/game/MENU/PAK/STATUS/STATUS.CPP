@@ -1,9 +1,9 @@
 #include "include_asm.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/ITEMRECAT24.H"
 #include "stddef.h"
-#include "MENU/80408CB0_10.H"
+#include "MENU/MENU_ACTION_TEXT_TABLES.H"
 #include "MENU/PAK/PROFILE_PREVIEW_AND_LINE_TEXT.H"
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
@@ -11,22 +11,22 @@
 #if !defined(VERSION_DE)
 /* Select the status text and right-align its nonblank characters. */
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
  /* const */
  /* const */
 s32 Status_FormatRightAlignedPreviewName(struct Field *item) {
-    s8 *temp_s0;
-    s8 *temp_s0_2;
-    s32 var_s1;
-    s32 var_v1;
+    s8 *outputCursor;
+    s8 *unusedTextCursor;
+    s32 nameLength;
+    s32 clearIndex;
     s32 space;
-    s32 var_v1_2;
-    s8 *var_v0;
-    u8 *var_a1;
-    u8 *var_s0;
-    u8 temp_v0;
-    var_s1 = 8;
-    if (D_80153774 != 0) {
+    s32 copyIndex;
+    s8 *clearCursor;
+    u8 *nameTail;
+    u8 *unusedNameCursor;
+    u8 nameCharacter;
+    nameLength = 8;
+    if (g_pakUseDefaultPreviewLabels != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         item->text = D_800E2984_eu;
 #else
@@ -38,27 +38,27 @@ s32 Status_FormatRightAlignedPreviewName(struct Field *item) {
 #else
         item->text = &D_800D2480;
 #endif
-        var_a1 = &D_8014B49B;
-        while (*var_a1-- == 0x20 && var_s1 != 0) var_s1--;
-        temp_s0 = RW_LOCALIZED_TEXT(*item->text, item->text, item->text, g_languageIndex);
-        temp_s0 = temp_s0 + (Menu_CountLineChars(item) - 8);
+        nameTail = &g_controllerPakPreviewNameLastCharacter;
+        while (*nameTail-- == 0x20 && nameLength != 0) nameLength--;
+        outputCursor = RW_LOCALIZED_TEXT(*item->text, item->text, item->text, g_languageIndex);
+        outputCursor = outputCursor + (Menu_CountLineChars(item) - 8);
         space = 0x20;
-        var_v1 = 7;
-        var_v0 = temp_s0 + 7;
+        clearIndex = 7;
+        clearCursor = outputCursor + 7;
         do {
-            *var_v0 = space;
-            var_v1 -= 1;
-            var_v0 -= 1;
-        } while (var_v1 >= 0);
-        temp_s0 = temp_s0 + (8 - var_s1);
-        var_v1_2 = 0;
-        if (var_s1 > 0) {
+            *clearCursor = space;
+            clearIndex -= 1;
+            clearCursor -= 1;
+        } while (clearIndex >= 0);
+        outputCursor = outputCursor + (8 - nameLength);
+        copyIndex = 0;
+        if (nameLength > 0) {
             do {
-                temp_v0 = D_8014B494[var_v1_2];
-                var_v1_2 += 1;
-                *(u8 *)temp_s0 = temp_v0;
-                temp_s0 += 1;
-            } while (var_v1_2 < var_s1);
+                nameCharacter = g_controllerPakPreviewName[copyIndex];
+                copyIndex += 1;
+                *(u8 *)outputCursor = nameCharacter;
+                outputCursor += 1;
+            } while (copyIndex < nameLength);
         }
     }
     return 0;
@@ -67,38 +67,38 @@ s32 Status_FormatRightAlignedPreviewName(struct Field *item) {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 #if defined(VERSION_US_REV1) || defined(NON_MATCHING)
-/* D_8014D490 is read through a struct view so the compiler keeps the load behind the preceding store. */
+/* g_pakPreviewNoteType is read through a struct view so the compiler keeps the load behind the preceding store. */
 typedef struct { s8 value; } PakModeByte;
-extern char *D_800D2484, *D_800D37D0;
-extern char *D_800D26A4, *D_800D26A8, *D_800D26BC, *D_800D26C4, *D_800D26C8;
+extern char *g_pakStatusLabelTemplate, *g_pakDefaultPreviewTypeLabel;
+extern char *g_pakDefaultStatusText, *g_pakStatusFiveText, *g_pakStatusThreeText, *g_pakStatusTwoText, *g_pakStatusFourteenText;
 /* Select the pak status label and right-align its eleven characters. */
 s32 Status_UpdateStatusText(struct Field *item) {
     char *src;
     char *dst;
     s32 i;
-    if (D_80153774 != 0) {
-        item->text = &D_800D37D0;
+    if (g_pakUseDefaultPreviewLabels != 0) {
+        item->text = &g_pakDefaultPreviewTypeLabel;
     } else {
-        item->text = &D_800D2484;
-        i = ((PakModeByte *)&D_8014D490)->value;
+        item->text = &g_pakStatusLabelTemplate;
+        i = ((PakModeByte *)&g_pakPreviewNoteType)->value;
         switch (i) {
         case 0:
         case 1:
         case 4:
         default:
-            src = D_800D26A4;
+            src = g_pakDefaultStatusText;
             break;
         case 5:
-            src = D_800D26A8;
+            src = g_pakStatusFiveText;
             break;
         case 3:
-            src = D_800D26BC;
+            src = g_pakStatusThreeText;
             break;
         case 2:
-            src = D_800D26C4;
+            src = g_pakStatusTwoText;
             break;
         case 14:
-            src = D_800D26C8;
+            src = g_pakStatusFourteenText;
             break;
         }
         dst = *item->text;

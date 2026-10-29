@@ -19,10 +19,10 @@ struct Callback {
 };
 
 
-struct NodeRecAt12;
-typedef struct NodeRecAt12 NodeRecAt12;
+struct ScreenEventTreeNode;
+typedef struct ScreenEventTreeNode ScreenEventTreeNode;
 
-extern float D_800C5688_de;
+extern float g_streamFloatPairInitialValue;
 
 
 
@@ -31,14 +31,14 @@ struct StreamBuffer;
 
 
 
-struct NodeRecAt12;
-struct NodeRecAt12 {
-    s32 unk0;
-    struct NodeRecAt12 *left;
-    struct NodeRecAt12 *right;
+struct ScreenEventTreeNode;
+struct ScreenEventTreeNode {
+    s32 headerWord;
+    struct ScreenEventTreeNode *left;
+    struct ScreenEventTreeNode *right;
     s16 value;
     u16 type;
-    u16 unk10;
+    u16 alphaAndPadding;
     u16 flags;
 };
 
@@ -57,5 +57,5 @@ typedef struct StreamBuffer {
     s32 readPosition;
     s32 writePosition;
 } StreamBuffer;
-extern Callback *D_8014D0B0;
+extern Callback *g_controllerEventState;
 #endif

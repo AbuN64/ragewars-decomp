@@ -1,5 +1,5 @@
 #ifndef COMMON_VIDEO_DIMENSIONS_H
 #define COMMON_VIDEO_DIMENSIONS_H
-#define SCREEN_WD D_800E28D0
-#define SCREEN_HT D_800E28D4
+#define SCREEN_WD g_hudReferenceViewportWidth
+#define SCREEN_HT g_hudReferenceViewportHeight
 #endif

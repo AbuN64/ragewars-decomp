@@ -44,22 +44,22 @@ struct Node438C {
 
 struct Node438C;
 
-struct ObjectLinks54;
+struct TexturedRibbonOwnerView;
 
 struct StateSmpUpdateRibbonLifetime;
 typedef struct StateSmpUpdateRibbonLifetime StateSmpUpdateRibbonLifetime;
 
 
-struct ObjectState68;
+struct RibbonFrameBufferView;
 
 struct Shade;
 typedef struct Shade Shade;
 
 struct Node802A697C;
-struct State802A697C;
-struct State802A697C {
+struct ParticleSwooshAttachment;
+struct ParticleSwooshAttachment {
     u8 pad0[4];
-    struct State802A697C *next;
+    struct ParticleSwooshAttachment *next;
     struct Node802A697C *node;
     u8 padC[0x10];
     void *object;
@@ -69,18 +69,18 @@ struct State802A697C {
     u32 flags;
 };
 struct Owner802A697C;
-struct State802A697C;
+struct ParticleSwooshAttachment;
 
-struct IntegerState6A94;
-typedef struct IntegerState6A94 IntegerState6A94;
+struct ParticleActorListView;
+typedef struct ParticleActorListView ParticleActorListView;
 
-struct ObjectState68;
-typedef struct ObjectState68 ObjectState68;
+struct RibbonFrameBufferView;
+typedef struct RibbonFrameBufferView RibbonFrameBufferView;
 
-struct FloatState50;
+struct ParticleRibbonLifetimeView;
 
-struct SceneRecAt95A8;
-typedef struct SceneRecAt95A8 SceneRecAt95A8;
+struct ParticleQuadPoolScene;
+typedef struct ParticleQuadPoolScene ParticleQuadPoolScene;
 
 struct Transform;
 struct Transform {
@@ -95,17 +95,17 @@ struct Transform {
 
 extern void Fx_RibbonNoop(void);
 
-extern void Fx_ResetEffectContribution(EffectContribution *arg0, s32 effectId);
+extern void Fx_ResetEffectContribution(EffectContribution *contribution, s32 effectId);
 
 
 struct Entity1DC;
 struct Entity1DC {
     char pad[0x118];
-    func_80204468_S3 *unk_118;
+    LinkedWorldFlagsView *renderDefinition;
     char p11c[0x1f];
-    u8 unk_13B;
+    u8 effectReferenceCount;
     char p13c[0x9d];
-    u8 unk_1D9;
+    u8 ribbonReferenceCount;
 };
 
 struct Entity1DC;
@@ -122,37 +122,37 @@ typedef struct ChildB4 ChildB4;
 
 struct DefC;
 struct DefC {
-    int unk_0;
-    f32 unk_4;
-    f32 unk_8;
+    int reservedDefinitionWord;
+    f32 minimumLifetime;
+    f32 segmentLifetime;
 };
 
 struct ChildB4;
 struct ChildB4 {
-    int unk_0;
-    struct ChildB4 *unk_4;
-    f32 unk_8;
+    int previousAddress;
+    struct ChildB4 *next;
+    f32 remainingLifetime;
     int pc;
     f32 pos[3];
     f32 rot[3];
     Matrix mat[2];
     f32 fraction; /* 0xA8 */
     f32 length; /* 0xAC */
-    Entity1DC *unk_B0;
+    Entity1DC *attachedEntity;
 };
 
 struct Node44;
 struct Node44 {
-    int unk_0;
-    struct Node44 *unk_4;
-    DefC *unk_8;
+    int previousAddress;
+    struct Node44 *next;
+    DefC *definition;
     char pc[0x10];
-    Entity1DC *unk_1C;
+    Entity1DC *attachedEntity;
     int p20;
-    f32 unk_24;
+    f32 lifetime;
     char p28[0x14];
-    int unk_3C;
-    ChildB4 *unk_40;
+    int flags;
+    ChildB4 *segments;
 };
 
 struct Node44;
@@ -160,7 +160,7 @@ typedef struct Node44 Node44;
 
 struct Root752C;
 
-extern float D_800C5DC0_de;
+extern float g_ribbonDistancePhaseScale;
 
 
 struct RibbonActor;
@@ -172,12 +172,12 @@ struct Root752C;
 typedef struct Root752C Root752C;
 
 
-struct ObjectLinks54;
-typedef struct ObjectLinks54 ObjectLinks54;
+struct TexturedRibbonOwnerView;
+typedef struct TexturedRibbonOwnerView TexturedRibbonOwnerView;
 
-struct func_802A68A0_S2;
+struct ParticleRibbonNodeView;
 
-extern float D_800C5E98_de;
+extern float g_particleRibbonActorScale;
 
 struct Morph;
 typedef struct Morph Morph;
@@ -200,7 +200,7 @@ struct Blend {
 };
 
 
-struct ObjectStateB0;
+struct TexturedRibbonSegmentView;
 
 
 
@@ -262,8 +262,8 @@ struct Nodes {
 struct Particle;
 
 struct Particle;
-struct SceneRecAt95A8;
-struct SceneRecAt95A8 {
+struct ParticleQuadPoolScene;
+struct ParticleQuadPoolScene {
     char pad0[0x94E0];
     IntrusiveList lists[10];
     char pad95A8[0x95A8 - 0x94E0 - 10 * 0x14];
@@ -271,11 +271,11 @@ struct SceneRecAt95A8 {
 };
 
 
-struct func_802A68A0_S2;
-typedef struct func_802A68A0_S2 func_802A68A0_S2;
+struct ParticleRibbonNodeView;
+typedef struct ParticleRibbonNodeView ParticleRibbonNodeView;
 
-struct FloatState50;
-typedef struct FloatState50 FloatState50;
+struct ParticleRibbonLifetimeView;
+typedef struct ParticleRibbonLifetimeView ParticleRibbonLifetimeView;
 
 
 
@@ -283,7 +283,7 @@ typedef struct FloatState50 FloatState50;
 struct Owner802A697C;
 typedef struct Owner802A697C Owner802A697C;
 
-struct ObjectLinksB4;
+struct TexturedRibbonStateView;
 
 struct Nodes;
 struct StateSmpUpdateRibbonLifetime;
@@ -305,29 +305,29 @@ struct StateSmpUpdateRibbonLifetime {
 };
 
 
-struct ObjectStateB0;
-typedef struct ObjectStateB0 ObjectStateB0;
+struct TexturedRibbonSegmentView;
+typedef struct TexturedRibbonSegmentView TexturedRibbonSegmentView;
 
 struct Blend;
 struct Key;
 struct Morph;
 
-extern float D_800C5E90_de;
+extern float g_particleQuadMatrixAxisScale;
 
-extern float D_800C5E9C_de;
+extern float g_particleRibbonSpecialActorScale;
 
-extern float D_800C5E94_de;
+extern float g_particleQuadMatrixScale;
 
 struct Vtx;
 typedef struct Vtx Vtx;
 
-struct ObjectState20;
+struct TexturedRibbonResourceView;
 
 extern void Fx_DetachEffectOwner(Owner802A697C *owner, int object);
 
 
-struct ObjectLinksB4;
-typedef struct ObjectLinksB4 ObjectLinksB4;
+struct TexturedRibbonStateView;
+typedef struct TexturedRibbonStateView TexturedRibbonStateView;
 
 
 
@@ -353,21 +353,21 @@ struct Nodes;
 typedef struct Nodes Nodes;
 
 
-extern float D_800C5E88_de;
+extern float g_effectUpQuaternionConstants;
 
 /* The ribbon vertex arena Fx_AllocateRibbonVertices allocates from; only passed through here. */
 struct VertexArena;
 
-struct IntegerState6A94;
+struct ParticleActorListView;
 
-struct ObjectState20;
-typedef struct ObjectState20 ObjectState20;
+struct TexturedRibbonResourceView;
+typedef struct TexturedRibbonResourceView TexturedRibbonResourceView;
 
 extern CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz);
 
 
-extern f32 D_800C5E28_de;
-extern f32 D_800C5E2C_de;
-extern f32 D_800C5E30_de;
-extern f32 D_800C5E34_de;
+extern f32 g_detachedRibbonActorScale;
+extern f32 g_detachedRibbonSpecialActorScale;
+extern f32 g_detachedRibbonEntityScale;
+extern f32 g_detachedRibbonSpecialEntityScale;
 #endif

@@ -43,31 +43,31 @@ struct Tree *Node_FindWidgetPredecessor(struct Tree *node, s32 id) {
 }
 
 /* Recursively replaces a node reference throughout a linked hierarchy and copies the old node links into its replacement. */
-void Node_ReplaceWidgetLinks(NodeFrontendReplaceWidgetLinks *arg0, NodeFrontendReplaceWidgetLinks *arg1, NodeFrontendReplaceWidgetLinks *arg2, NodeFrontendReplaceWidgetLinks *arg3) {
-    NodeFrontendReplaceWidgetLinks *temp_a0;
-    NodeFrontendReplaceWidgetLinks *temp_a0_2;
-    if (arg0 != NULL) {
-        temp_a0 = arg0->unk4;
-        if (temp_a0 != NULL) {
-            Node_ReplaceWidgetLinks(temp_a0,arg1,arg2,arg3);
+void Node_ReplaceWidgetLinks(NodeFrontendReplaceWidgetLinks *node, NodeFrontendReplaceWidgetLinks *parent, NodeFrontendReplaceWidgetLinks *oldWidget, NodeFrontendReplaceWidgetLinks *newWidget) {
+    NodeFrontendReplaceWidgetLinks *nextSibling;
+    NodeFrontendReplaceWidgetLinks *firstChild;
+    if (node != NULL) {
+        nextSibling = node->nextSibling;
+        if (nextSibling != NULL) {
+            Node_ReplaceWidgetLinks(nextSibling,parent,oldWidget,newWidget);
         }
-        temp_a0_2 = arg0->unk8;
-        if (temp_a0_2 != NULL) {
-            Node_ReplaceWidgetLinks(temp_a0_2, arg0, arg2, arg3);
+        firstChild = node->firstChild;
+        if (firstChild != NULL) {
+            Node_ReplaceWidgetLinks(firstChild, node, oldWidget, newWidget);
         }
-        if (arg0->unk0 == arg2) {
-            arg0->unk0 = arg3;
+        if (node->parent == oldWidget) {
+            node->parent = newWidget;
         }
-        if (arg0->unk4 == arg2) {
-            arg0->unk4 = arg3;
+        if (node->nextSibling == oldWidget) {
+            node->nextSibling = newWidget;
         }
-        if (arg0->unk8 == arg2) {
-            arg0->unk8 = arg3;
+        if (node->firstChild == oldWidget) {
+            node->firstChild = newWidget;
         }
-        if (arg0 == arg2) {
-            arg3->unk0 = (NodeFrontendReplaceWidgetLinks *) arg0->unk0;
-            arg3->unk4 = (NodeFrontendReplaceWidgetLinks *) arg0->unk4;
-            arg3->unk8 = (NodeFrontendReplaceWidgetLinks *) arg0->unk8;
+        if (node == oldWidget) {
+            newWidget->parent = (NodeFrontendReplaceWidgetLinks *) node->parent;
+            newWidget->nextSibling = (NodeFrontendReplaceWidgetLinks *) node->nextSibling;
+            newWidget->firstChild = (NodeFrontendReplaceWidgetLinks *) node->firstChild;
         }
     }
 }

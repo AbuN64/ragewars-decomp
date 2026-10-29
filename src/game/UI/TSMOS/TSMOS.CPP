@@ -1,26 +1,26 @@
 #include "COMMON/STATEPAIR.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/TEXTURE.H"
 #include "RESMGR/TSMOS.H"
 
-/** Set D_800D2C90 to one. */
+/** Set g_frontendShutdownState to one. */
 
 
 s32 GetMenuScreenOwner(void);
 
 
 void Tsmos_RequestFrontendShutdown(void) {
-    extern int D_800D2C90;
-    D_800D2C90 = 1;
+    extern int g_frontendShutdownState;
+    g_frontendShutdownState = 1;
 }
 
 void Tsmos_ScaleCurrentScreen(void) {
-    if (D_800E28D8 == 1) {
+    if (g_frontendCurrentVideoModeIndex == 1) {
         Tsmos_ScaleWidgetTree(Node_GetScreenData(GetMenuScreenOwner()), 0);
     }
 }

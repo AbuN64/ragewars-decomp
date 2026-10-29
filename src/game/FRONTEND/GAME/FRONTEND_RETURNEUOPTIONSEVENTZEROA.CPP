@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_20.H"
+#include "COMMON/FRONTEND_RESOURCE_LOAD_STATE.H"
 #include "TYPES.H"
 
 #if defined(VERSION_EU)

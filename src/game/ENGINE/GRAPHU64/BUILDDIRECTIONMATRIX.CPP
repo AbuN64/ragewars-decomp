@@ -7,7 +7,7 @@
 #include "GAME/BUILDDIRECTIONMATRIX.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "COMMON/POOLED_FLOATS.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/BALLISTICPARAMS.H"
 
 /* Builds an orientation matrix whose third row is the given direction: the first row is the cross product of the up vector D_800C97B4 with it, or the X axis when the direction is within the vertical thresholds, the second row is the cross product of the first row with it, all three rows are normalised and the rest is identity. */
@@ -25,17 +25,17 @@ extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 /* Copies a 4x4 float matrix while scaling its first three rows by three per-row factors, zeroing their fourth column and setting the last element to the canonical unit constant. Adapted from CopyMatrix with the row scaling, the zeroed column and the constant corner changed. */
 
-/* Expands a 4x4 transform into an affine 4x4 matrix with its second and third rows swapped, a zero last column and the pooled corner D_800C99F0[1]. */
+/* Expands a 4x4 transform into an affine 4x4 matrix with its second and third rows swapped, a zero last column and the pooled corner g_translationAndSwappedBasisUnitConstants[1]. */
 
 
 
-/* Expands a 4x4 transform into an affine 4x4 matrix with its second and third columns swapped, a zero last column and the pooled corner D_800C99F8. Adapted from Graphu64_CopySwappedMatrixBasis with the row swap replaced by a column swap and the corner taken from D_800C99F8. */
+/* Expands a 4x4 transform into an affine 4x4 matrix with its second and third columns swapped, a zero last column and the pooled corner g_swappedCoordinatesAndWrapConstants. Adapted from Graphu64_CopySwappedMatrixBasis with the row swap replaced by a column swap and the corner taken from g_swappedCoordinatesAndWrapConstants. */
 
 
 
-extern f32 D_800C4928_de;
+extern f32 g_wrappedApproachStep;
 
-extern f32 D_800C492C_de;
+extern f32 g_planeProjectionNormalScale;
 
 void CopyMatrix(float *destinationMatrix, float *sourceMatrix) {
     destinationMatrix[0] = sourceMatrix[0];
@@ -56,7 +56,7 @@ void CopyMatrix(float *destinationMatrix, float *sourceMatrix) {
     destinationMatrix[15] = sourceMatrix[15];
 }
 
-void Graphu64_TransposeMatrixBasis(f32 *arg0, f32 *arg1) {
+void Graphu64_TransposeMatrixBasis(f32 *destination, f32 *source) {
     char *a0;
     char *a2;
     char *v1;
@@ -65,31 +65,31 @@ void Graphu64_TransposeMatrixBasis(f32 *arg0, f32 *arg1) {
     s32 coloff;
     f32 last;
 
-    arg0[0] = arg1[0];
-    arg0[1] = arg1[1];
-    arg0[2] = arg1[2];
-    arg0[3] = arg1[3];
-    arg0[4] = arg1[4];
-    arg0[5] = arg1[5];
-    arg0[6] = arg1[6];
-    arg0[7] = arg1[7];
-    arg0[8] = arg1[8];
-    arg0[9] = arg1[9];
-    arg0[10] = arg1[10];
-    arg0[11] = arg1[11];
-    arg0[12] = arg1[12];
-    arg0[13] = arg1[13];
-    arg0[14] = arg1[14];
-    last = arg1[15];
+    destination[0] = source[0];
+    destination[1] = source[1];
+    destination[2] = source[2];
+    destination[3] = source[3];
+    destination[4] = source[4];
+    destination[5] = source[5];
+    destination[6] = source[6];
+    destination[7] = source[7];
+    destination[8] = source[8];
+    destination[9] = source[9];
+    destination[10] = source[10];
+    destination[11] = source[11];
+    destination[12] = source[12];
+    destination[13] = source[13];
+    destination[14] = source[14];
+    last = source[15];
     col = 0;
-    arg0[15] = last;
+    destination[15] = last;
 
-    a0 = (char *)arg0;
+    a0 = (char *)destination;
     do {
         row = 0;
         coloff = col * 4;
         a2 = a0;
-        v1 = (char *)arg1;
+        v1 = (char *)source;
         do {
             *(f32 *)a2 = *(f32 *)(coloff + (s32)v1);
             v1 += 0x10;
@@ -101,19 +101,19 @@ void Graphu64_TransposeMatrixBasis(f32 *arg0, f32 *arg1) {
     } while (col < 3);
 }
 
-void Graphu64_BuildPlaneProjectionMatrix(void *projection, void *arg1, f32 plane) {
-    CVector3 *direction = arg1;
+void Graphu64_BuildPlaneProjectionMatrix(void *projection, void *projectionDirection, f32 plane) {
+    CVector3 *direction = projectionDirection;
     Matrix *o = projection;
     f32 zero = 0.0f;
-    f32 temp_f0;
-    f32 temp_f1;
-    f32 temp_f2;
-    f32 temp_f3;
+    f32 unit;
+    f32 slopeZ;
+    f32 slopeX;
+    f32 inverseVertical;
 
-    temp_f0 = D_800C48E0_de;
-    o->m[15] = temp_f0;
-    o->m[10] = temp_f0;
-    o->m[0] = temp_f0;
+    unit = g_planeProjectionAndDirectionConstants;
+    o->m[15] = unit;
+    o->m[10] = unit;
+    o->m[0] = unit;
     o->m[14] = zero;
     o->m[13] = zero;
     o->m[12] = zero;
@@ -124,15 +124,15 @@ void Graphu64_BuildPlaneProjectionMatrix(void *projection, void *arg1, f32 plane
     o->m[3] = zero;
     o->m[2] = zero;
     o->m[1] = zero;
-    temp_f3 = temp_f0 / direction->y;
-    temp_f2 = direction->x * temp_f3;
-    temp_f1 = direction->z * temp_f3;
+    inverseVertical = unit / direction->y;
+    slopeX = direction->x * inverseVertical;
+    slopeZ = direction->z * inverseVertical;
     o->m[13] = plane;
     o->m[5] = zero;
-    o->m[4] = -temp_f2;
-    o->m[6] = -temp_f1;
-    o->m[12] = plane * temp_f2;
-    o->m[14] = plane * temp_f1;
+    o->m[4] = -slopeX;
+    o->m[6] = -slopeZ;
+    o->m[12] = plane * slopeX;
+    o->m[14] = plane * slopeZ;
 }
 
 void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
@@ -140,10 +140,10 @@ void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
     CVector3 *upVector = (void *)&D_800C46C0_de[0].y;
 
     up = *upVector;
-    if (direction->y < 0.0f ? (&D_800C48E0_de)[1] <= -direction->y : D_800C48E8_de.unk0 <= direction->y) {
+    if (direction->y < 0.0f ? (&g_planeProjectionAndDirectionConstants)[1] <= -direction->y : g_directionVerticalThreshold.value <= direction->y) {
         m->right.y = 0;
         m->right.z = 0;
-        m->right.x = D_800C48EC_de;
+        m->right.x = g_directionFallbackAxisScale;
     } else {
         Graphu64_CrossVectors(&m->right, &up, direction);
     }
@@ -153,7 +153,7 @@ void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
     Graphu64_NormalizeVec3(&m->up);
     Graphu64_NormalizeVec3(&m->forward);
     m->m03 = m->m13 = m->m23 = m->m30 = m->m31 = m->m32 = 0.0f;
-    m->m33 = D_800C48F0_de;
+    m->m33 = g_directionMatrixHomogeneousScale;
 }
 
 /** Copy the three floating components at offset 0x30. */
@@ -164,24 +164,24 @@ void Graphu64_GetMatrixTranslation(char *object, float *output) {
     output[2] = matrix->m[14];
 }
 
-void Graphu64_GetMatrixScale(void *matrix, f32 *arg1) {
+void Graphu64_GetMatrixScale(void *matrix, f32 *scaleOutput) {
     Matrix *m = matrix;
     CVector3 tmp;
 
     tmp.x = m->m[0];
     tmp.y = m->m[1];
     tmp.z = m->m[2];
-    arg1[0] = Gu_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
+    scaleOutput[0] = Gu_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 
     tmp.x = m->m[4];
     tmp.y = m->m[5];
     tmp.z = m->m[6];
-    arg1[1] = Gu_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
+    scaleOutput[1] = Gu_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 
     tmp.x = m->m[8];
     tmp.y = m->m[9];
     tmp.z = m->m[10];
-    arg1[2] = Gu_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
+    scaleOutput[2] = Gu_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 }
 
 void TranslateMatrixLocal(void *matrix, f32 tiltX, f32 lift, f32 translationZ) {
@@ -215,21 +215,21 @@ void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz) {
     o->m[10] = o->m[10] * sz;
 }
 
-void Graphu64_CopyScaledMatrix(f32 *arg0, f32 *arg1, f32 sx, f32 sy, f32 sz) {
-    arg0[0] = arg1[0] * sx;
-    arg0[1] = arg1[1] * sx;
-    arg0[2] = arg1[2] * sx;
-    arg0[4] = arg1[4] * sy;
-    arg0[5] = arg1[5] * sy;
-    arg0[6] = arg1[6] * sy;
-    arg0[8] = arg1[8] * sz;
-    arg0[9] = arg1[9] * sz;
-    arg0[10] = arg1[10] * sz;
-    arg0[12] = arg1[12];
-    arg0[13] = arg1[13];
-    arg0[14] = arg1[14];
-    arg0[3] = arg0[7] = arg0[11] = 0.0f;
-    arg0[15] = D_800C48F4_de;
+void Graphu64_CopyScaledMatrix(f32 *destination, f32 *source, f32 sx, f32 sy, f32 sz) {
+    destination[0] = source[0] * sx;
+    destination[1] = source[1] * sx;
+    destination[2] = source[2] * sx;
+    destination[4] = source[4] * sy;
+    destination[5] = source[5] * sy;
+    destination[6] = source[6] * sy;
+    destination[8] = source[8] * sz;
+    destination[9] = source[9] * sz;
+    destination[10] = source[10] * sz;
+    destination[12] = source[12];
+    destination[13] = source[13];
+    destination[14] = source[14];
+    destination[3] = destination[7] = destination[11] = 0.0f;
+    destination[15] = g_scaledMatrixHomogeneousScale;
 }
 
 /** Scale the xyz columns of a 4-row matrix by sx, sy, sz. */
@@ -259,7 +259,7 @@ void BuildPitchMatrix(void *rest, f32 pitchAngle) {
 
     sin_v = Gu_Sinf(pitchAngle);
     zero = 0;
-    identity = D_800C48F8_de[0];
+    identity = g_pitchAndRollMatrixUnitConstants[0];
     m->forward.y = -sin_v;
     m->up.z = sin_v;
     m->right.y = zero;
@@ -288,7 +288,7 @@ void BuildYawMatrix(void *matrixStorage, f32 yawAngle)
   f32 identity;
   zero = 0;
   sin_v = Gu_Sinf(yawAngle);
-  identity = D_800C48F8_de[1];
+  identity = g_pitchAndRollMatrixUnitConstants[1];
   m->forward.x = sin_v;
   m->right.y = zero;
   m->right.z = -sin_v;
@@ -317,7 +317,7 @@ void BuildRollMatrix(void *matrix, f32 rollAngle) {
 
     sin_v = Gu_Sinf(rollAngle);
     zero = (f32) 0;
-    one = D_800C99F0[0];
+    one = g_translationAndSwappedBasisUnitConstants[0];
     m->right.z = zero;
     m->forward.x = zero;
     m->up.z = zero;
@@ -523,7 +523,7 @@ void Graphu64_CopySwappedMatrixBasis(f32 *dst, f32 *src) {
     dst[13] = src[13];
     dst[14] = src[14];
     dst[3] = dst[7] = dst[11] = 0.0f;
-    dst[15] = D_800C99F0[1];
+    dst[15] = g_translationAndSwappedBasisUnitConstants[1];
 }
 
 /** Swap the two floats within each of the object's four 0x10-byte records. */
@@ -560,24 +560,24 @@ void Graphu64_CopySwappedMatrixCoordinates(f32 *dst, f32 *src) {
     dst[13] = src[14];
     dst[14] = src[13];
     dst[3] = dst[7] = dst[11] = 0.0f;
-    dst[15] = D_800C99F8[0];
+    dst[15] = g_swappedCoordinatesAndWrapConstants[0];
 }
 
 f32 Graphu64_InterpolateWrappedValue(f32 fraction, f32 first, f32 second) {
-    f32 var_f3;
+    f32 wrappedDifference;
     f32 result;
 
     Graphu64_WrapPeriodicValue(&first);
     Graphu64_WrapPeriodicValue(&second);
     if (first > second) {
-        var_f3 = second + D_800C99F8[1];
-        if ((var_f3 - first) < (first - second)) {
-            second = var_f3;
+        wrappedDifference = second + g_swappedCoordinatesAndWrapConstants[1];
+        if ((wrappedDifference - first) < (first - second)) {
+            second = wrappedDifference;
         }
     } else {
-        var_f3 = second - D_800C4910_de;
-        if ((first - var_f3) < (second - first)) {
-            second = var_f3;
+        wrappedDifference = second - g_wrappedInterpolationPeriod;
+        if ((first - wrappedDifference) < (second - first)) {
+            second = wrappedDifference;
         }
     }
     result = first + (fraction * (second - first));
@@ -585,23 +585,23 @@ f32 Graphu64_InterpolateWrappedValue(f32 fraction, f32 first, f32 second) {
     return result;
 }
 
-f32 Graphu64_GetWrappedDifference(f32 arg0, f32 arg1) {
-    f32 var_f3;
+f32 Graphu64_GetWrappedDifference(f32 firstValue, f32 secondValue) {
+    f32 wrappedSecond;
 
-    Graphu64_WrapPeriodicValue(&arg0);
-    Graphu64_WrapPeriodicValue(&arg1);
-    if (arg0 > arg1) {
-        var_f3 = arg1 + D_800C4914_de;
-        if ((var_f3 - arg0) < (arg0 - arg1)) {
-            arg1 = var_f3;
+    Graphu64_WrapPeriodicValue(&firstValue);
+    Graphu64_WrapPeriodicValue(&secondValue);
+    if (firstValue > secondValue) {
+        wrappedSecond = secondValue + g_wrappedDifferenceUpperPeriod;
+        if ((wrappedSecond - firstValue) < (firstValue - secondValue)) {
+            secondValue = wrappedSecond;
         }
     } else {
-        var_f3 = arg1 - D_800C4918_de[0];
-        if ((arg0 - var_f3) < (arg1 - arg0)) {
-            arg1 = var_f3;
+        wrappedSecond = secondValue - g_wrappedDifferenceAndApproachConstants[0];
+        if ((firstValue - wrappedSecond) < (secondValue - firstValue)) {
+            secondValue = wrappedSecond;
         }
     }
-    return arg0 - arg1;
+    return firstValue - secondValue;
 }
 
 void Graphu64_WrapPeriodicValue(f32 *value)
@@ -612,9 +612,9 @@ void Graphu64_WrapPeriodicValue(f32 *value)
         f32 step;
 
         val = *value;
-        limit = D_800C4918_de[1];
+        limit = g_wrappedDifferenceAndApproachConstants[1];
         if (val < limit) {
-            step = D_800C4920_de;
+            step = g_boundedApproachStepConstants;
             do {
                 val += step;
                 *value = val;
@@ -627,9 +627,9 @@ void Graphu64_WrapPeriodicValue(f32 *value)
         f32 step;
 
         val = *value;
-        limit = *(&D_800C4920_de + 1);
+        limit = *(&g_boundedApproachStepConstants + 1);
         if (limit <= val) {
-            step = D_800C4928_de;
+            step = g_wrappedApproachStep;
             do {
                 val -= step;
                 *value = val;
@@ -659,7 +659,7 @@ void Graphu64_NormalizeQuaternion(f32 *rotation) {
 
     mag = Gu_Sqrtf((rotation[0] * rotation[0]) + (rotation[1] * rotation[1]) + (rotation[2] * rotation[2]) + (rotation[3] * rotation[3]));
     if (mag != 0.0f) {
-        scale = D_800C492C_de / mag;
+        scale = g_planeProjectionNormalScale / mag;
         rotation[0] = rotation[0] * scale;
         rotation[1] = rotation[1] * scale;
         rotation[2] = rotation[2] * scale;
@@ -702,7 +702,7 @@ void MatrixFromQuaternion(f32 *q, f32 *m)
   m[12] = 0.0f;
   m[13] = 0.0f;
   m[14] = 0.0f;
-  m[15] = D_800C4930_de;
+  m[15] = g_axisAngleMatrixHomogeneousScale;
   m[0] = r0;
   m[1] = r1;
   m[2] = r2;
@@ -734,7 +734,7 @@ void Graphu64_ApproachQuaternion(CQuatern *rotation, CQuatern *target) {
 
     angle = Graphu64_ArcCos((rotation->x * target->x) + (rotation->y * target->y) + (rotation->z * target->z) + (rotation->w * target->w));
     if (angle != 0.0f) {
-        t = 1.0f - ((angle - (((angle * 0.1388889f) + 1.7453293e-4f) * D_800D2988)) / angle);
+        t = 1.0f - ((angle - (((angle * 0.1388889f) + 1.7453293e-4f) * g_frameElapsedTime)) / angle);
         if ((1.0f < t) || !(t < 0.0f)) {
             blend = 1.0f;
             if (!(blend < t)) {

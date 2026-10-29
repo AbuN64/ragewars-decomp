@@ -1,7 +1,7 @@
 #include "sdk/LIBC.H"
 #include "COMMON/ALFXPARAM.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/HARDWARE_IO.H"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/OSTASK_T.H"
@@ -12,7 +12,7 @@
 #include "sdk/OSINT/osyieldthread.H"
 
 /* _VirtualToPhysicalTask, drafted from ultralib src/io/sptask.c; this library's bcopy is the
-   destination-first copy func_802BD3A0_de. */
+   destination-first copy Libc_CopyBytes. */
 
 
 
@@ -24,16 +24,16 @@
 OSTask *_VirtualToPhysicalTask(OSTask *intp);
 
 
-extern void func_802BD280_de(OSTask *, s32);
+extern void osWritebackDCache(OSTask *, s32);
 
 
 
 OSTask *_VirtualToPhysicalTask(OSTask *intp)
 {
     OSTask *tp;
-    OSTask *task = &D_80148800;
+    OSTask *task = &g_signalProcessorTaskCopy;
     tp = task;
-    func_802BD3A0_de(task, intp, sizeof(OSTask));
+    Libc_CopyBytes(task, intp, sizeof(OSTask));
     if (task->t.ucode != 0) { task->t.ucode = (void *)osVirtualToPhysical(task->t.ucode); } (void)0;
     if (task->t.ucode_data != 0) { task->t.ucode_data = (void *)osVirtualToPhysical(task->t.ucode_data); } (void)0;
     if (task->t.dram_stack != 0) { task->t.dram_stack = (void *)osVirtualToPhysical(task->t.dram_stack); } (void)0;
@@ -57,10 +57,10 @@ void osSpTaskLoad(OSTask *intp) {
             block->t.ucode = (u64 *)IO_READ_WORD(((u32)intp->t.yield_data_ptr + 0xBFCU) | 0xA0000000U);
         }
     }
-    func_802BD280_de(block, 0x40);
+    osWritebackDCache(block, 0x40);
     Audio_WriteSignalProcessorStatus(0x2B00);
     do {
-        result = func_802BA0D0_de(0x04001000);
+        result = __osSpSetPc(0x04001000);
     } while (result == -1);
     do {
         result = __osSpRawStartDma(1, 0x04000FC0, (s32)block, 0x40);

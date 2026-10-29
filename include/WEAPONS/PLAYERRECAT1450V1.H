@@ -2,12 +2,12 @@
 #define WEAPONS_PLAYERRECAT1450V1_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/OBJECTLINKS14C.H"
-struct PlayerRecAt1450V1;
-typedef struct PlayerRecAt1450V1 PlayerRecAt1450V1;
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
+struct WeaponPlayerPermissionView;
+typedef struct WeaponPlayerPermissionView WeaponPlayerPermissionView;
 
-struct func_80232A38_S1;
-struct func_80232A38_S1 {
+struct WeaponSwitchActionView;
+struct WeaponSwitchActionView {
     char pad0[0x2C];
     char * unk2C;
     char pad2C[0x108 - 0x2C - sizeof(char*)];
@@ -23,7 +23,7 @@ struct func_80232A38_S1 {
     char pad12C[0x130 - 0x12C - sizeof(f32)];
     s32 unk130;
     char pad130[0x138 - 0x130 - sizeof(s32)];
-    s32 unk138;
+    s32 reservedWord;
     char pad138[0x13C - 0x138 - sizeof(s32)];
     s32 unk13C;
     char pad13C[0x144 - 0x13C - sizeof(s32)];
@@ -36,12 +36,12 @@ struct func_80232A38_S1 {
     s32 unk150;
 };
 
-extern float D_800C303C_de;
+extern float g_weaponSpinClampedFeedback;
 
-struct ObjectState140;
-typedef struct ObjectState140 ObjectState140;
+struct WeaponNormalFireActionView;
+typedef struct WeaponNormalFireActionView WeaponNormalFireActionView;
 
-extern float D_800C3018_de;
+extern float g_weaponFireInitialValue;
 
 struct SourceWeaponApplyScaledSideYaw;
 struct SourceWeaponApplyScaledSideYaw {
@@ -56,16 +56,16 @@ struct Event {
     struct SourceWeaponApplyScaledSideYaw *source;
 };
 
-extern float D_800C3028_de;
+extern float g_weaponSpinNegativeFeedbackLimit;
 
-extern float D_800C3038_de;
+extern float g_weaponSpinPositiveOutputScale;
 
-extern float D_800C302C_de;
+extern float g_weaponSpinPositiveFeedbackScale;
 
 
 
-struct PlayerRecAt1450V1;
-struct PlayerRecAt1450V1 {
+struct WeaponPlayerPermissionView;
+struct WeaponPlayerPermissionView {
     char pad0[0x5D4];
     int character;
     char pad5D8[4];
@@ -78,9 +78,9 @@ struct PlayerRecAt1450V1 {
     int isBot;
 };
 
-extern float D_800C2FC4_de;
+extern float g_chargedAlternateFirstMessageDuration;
 
-extern float D_800C301C_de;
+extern float g_weaponTriggerStunThreshold;
 
 extern void Weaponai_ApplyWeaponSwitch(void *part, void *body);
 
@@ -90,25 +90,25 @@ struct Event;
 typedef struct Event Event;
 
 
-struct func_80232A38_S1;
-typedef struct func_80232A38_S1 func_80232A38_S1;
+struct WeaponSwitchActionView;
+typedef struct WeaponSwitchActionView WeaponSwitchActionView;
 
-extern s32 Weapon_IsSpecialSwitchGroup(s32 arg0);
+extern s32 Weapon_IsSpecialSwitchGroup(s32 weaponId);
 
 struct Shared_ActorView;
 struct WeaponFireState;
 
 
-extern float D_800C3020_de;
+extern float g_weaponEightChargeRateScale;
 
 
 
-extern float D_800C8100;
+extern float g_weaponPermissionNoticeDuration;
 
-extern float D_800C8130;
+extern float g_weaponSideYawSpeedScale;
 
-struct ObjectState140;
-struct ObjectState140 {
+struct WeaponNormalFireActionView;
+struct WeaponNormalFireActionView {
     char pad0[0x64];
     f32 unk_64;
     char pad64[0x130 - 0x64 - sizeof(f32)];
@@ -117,18 +117,18 @@ struct ObjectState140 {
     s32 unk_13C;
 };
 
-extern s32 Weapon_IsPrimarySwitchGroup(s32 arg0);
+extern s32 Weapon_IsPrimarySwitchGroup(s32 weaponId);
 
 struct Dest;
 struct Lookup;
-extern void Weapon_DrawWeaponLookupModel(void *arg0, struct Dest *arg1, struct Lookup *lookup);
+extern void Weapon_DrawWeaponLookupModel(void *actor, struct Dest *weaponState, struct Lookup *lookup);
 
-extern float D_800C2FC8_de;
+extern float g_chargedAlternateSecondMessageDuration;
 
 extern void Weaponai_InitializeSwitchAndRequestIdle(void *actor, void *weaponFireState);
 
 
 extern void YawMatrixLocal(void *, float);
-extern void func_8022AEA0_de(struct Shared_ActorView *actor, s32 soundId);
+extern void Playerai_StartPrimaryAttachedSound(struct Shared_ActorView *actor, s32 soundId);
 extern void YawMatrixLocal(void *, f32);
 #endif

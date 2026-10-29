@@ -5,12 +5,12 @@
 #include "TYPES.H"
 #include "MATH/SM_SMNGR.H"
 #include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/CALLBACK.H"
 
 /* 800CA60C_5.CPP */
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const unsigned int D_blob_a8b599cb23bc51b717e6[2] = {
+const unsigned int k_SmSmngrEncodedWords[2] = {
     0x408F4000, 0x00000000,
 };
 
@@ -24,7 +24,7 @@ void MoveMenuFocus(s32 direction) {
     Widget **links;
     s32 id;
 
-    widget = (Widget *)D_8014D080->screens[D_8014D080->current].focus;
+    widget = (Widget *)g_screenManager->screens[g_screenManager->current].focus;
     id = -1;
     links = widget->links;
     if (widget == 0 || !(widget->flags & 0x10)) {
@@ -107,7 +107,7 @@ static inline s32 defaultElementEvent(Element *element, s32 event, s32 argument)
             }
             break;
         case 2:
-            if (D_8014D080->current > 0) Menu_ReturnToPreviousScreen();
+            if (g_screenManager->current > 0) Menu_ReturnToPreviousScreen();
             break;
         case 15:
             result = 0;
@@ -143,7 +143,7 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
     kindHandler = 0;
     direct = 0;
     if (event != 0xE09) g_menuEventCount++;
-    handled = &D_8014D080->handled;
+    handled = &g_screenManager->handled;
     category = eventCategory(event);
     owner = Node_GetScreenData(GetMenuScreenOwner());
     if (id == -1) {
@@ -168,7 +168,7 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
                     }
                     break;
                 case 2:
-                    if (D_8014D080->current > 0) Menu_ReturnToPreviousScreen();
+                    if (g_screenManager->current > 0) Menu_ReturnToPreviousScreen();
                     break;
                 case 15:
                     Widget_SetWidgetFlag40(element, 1);
@@ -214,7 +214,7 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
     return result;
 }
 
-extern void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *, s32, s32, s32, s32, s32);
+extern void Smos_DispatchDescendantScreenEvent(ScreenEventTreeNode *, s32, s32, s32, s32, s32);
 static inline s32 Menu_GetDispatchCategory(u32 code) {
     if (code < 0xE00) return 0;
     if (code - 0x1000 < 0x1000) return 1;
@@ -238,7 +238,7 @@ static inline s32 Menu_DispatchDefaultEvent(Element *element, s32 event, s32 arg
             }
             break;
         case 2:
-            if (D_8014D080->current > 0) Menu_ReturnToPreviousScreen();
+            if (g_screenManager->current > 0) Menu_ReturnToPreviousScreen();
             break;
         case 15: result = 0; Widget_SetWidgetFlag40(element, 1); break;
         case 16: result = 0; Widget_SetWidgetFlag40(element, 0); break;
@@ -262,7 +262,7 @@ static inline void Menu_DispatchChildEvents(Element *element, s32 event, s32 val
     s32 treeSaved;
     s32 *treeHandled;
     if (element != 0) {
-        tree = D_8014D080;
+        tree = g_screenManager;
         treeHandled = &tree->handled;
         treeSaved = tree->handled;
         tree->handled = 0;
@@ -275,7 +275,7 @@ static inline void Menu_DispatchChildEvents(Element *element, s32 event, s32 val
  * trees, restoring each dispatcher's handled flag; unhandled events get the default actions. */
 s32 DispatchCurrentScreenEvent(s32 recurse, s32 event, s32 value, s32 argument, s32 context)
 {
-    ScreenManager *table = D_8014D080;
+    ScreenManager *table = g_screenManager;
     s32 *handledFlag = &table->handled;
     Element *element = table->screens[table->current].primary;
     MenuElementHandler handler;
@@ -289,7 +289,7 @@ s32 DispatchCurrentScreenEvent(s32 recurse, s32 event, s32 value, s32 argument, 
         table->handled = saved;
         if (handled == 1) return result;
     }
-    handler = D_8014D080->screens[D_8014D080->current].primary->handler;
+    handler = g_screenManager->screens[g_screenManager->current].primary->handler;
     if (handler != 0) {
         saved = *handledFlag;
         *handledFlag = 0;
@@ -317,7 +317,7 @@ s32 DispatchCurrentScreenEvent(s32 recurse, s32 event, s32 value, s32 argument, 
 /* Sends an event to every screen from lowIndex to the current one: the menu callback first, then each screen's
  * primary element handler, its child trees (recurse) and the default actions, restoring the handled flags. */
 s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, s32 context) {
-    ScreenManager *table = D_8014D080;
+    ScreenManager *table = g_screenManager;
     s32 *handledFlag = &table->handled;
     Element *element;
     MenuElementHandler handler;
@@ -334,16 +334,16 @@ s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, 
         }
         table->handled = saved;
     }
-    first = D_8014D080->lowIndex;
-    last = D_8014D080->current;
+    first = g_screenManager->lowIndex;
+    last = g_screenManager->current;
     for (; first <= last; first++) {
         switch (event) {
         case 0xE01:
         case 0xE02:
-            value = (s32)&D_8014D080->screens[first].data;
+            value = (s32)&g_screenManager->screens[first].data;
             break;
         }
-        element = D_8014D080->screens[first].primary;
+        element = g_screenManager->screens[first].primary;
         handler = element->handler;
         if (handler != 0) {
             saved = *handledFlag;
@@ -356,7 +356,7 @@ s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, 
             *handledFlag = saved;
         }
         if (recurse != 0) {
-            g_dispatchingScreenOwner = D_8014D080->screens[first].owner;
+            g_dispatchingScreenOwner = g_screenManager->screens[first].owner;
             saved = *handledFlag;
             *handledFlag = 0;
             Menu_DispatchChildEvents(element, event, value, (s32)argument, context);

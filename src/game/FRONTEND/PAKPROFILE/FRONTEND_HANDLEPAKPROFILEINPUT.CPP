@@ -11,16 +11,16 @@ extern void PAKInterface_RefreshPlayerPanel(s32 player);
 s32 Frontend_HandlePakProfileInput(s32 a,s32 b,u32 event,s32 key){
     s32 index=event&65535;
     if((event>>16)==3){
-        switch(D_800E54A4->phase){
+        switch(g_pakProfileScreenState->phase){
             case 6:
             if(key==10){
                 s32 state;
-                state=D_800E54A4->players[index].state;
+                state=g_pakProfileScreenState->players[index].state;
                 if(state==4){
                     MarkMenuEventHandled();
-                    D_800E54A4->players[index].back=2;
-                    D_800E54A4->players[index].state=2;
-                    D_800E54A4->players[index].next=state;
+                    g_pakProfileScreenState->players[index].back=2;
+                    g_pakProfileScreenState->players[index].state=2;
+                    g_pakProfileScreenState->players[index].next=state;
                     PAKInterface_RefreshPlayerPanel(index);
                 }
             }
@@ -29,23 +29,23 @@ s32 Frontend_HandlePakProfileInput(s32 a,s32 b,u32 event,s32 key){
             switch(key){
                 case 11:
                 case 13:
-                if(D_800E54A4->players[index].state==0){
+                if(g_pakProfileScreenState->players[index].state==0){
                     MarkMenuEventHandled();
-                    D_800E54A4->players[index].back=2;
-                    D_800E54A4->players[index].state=2;
-                    D_800E54A4->players[index].next=4;
+                    g_pakProfileScreenState->players[index].back=2;
+                    g_pakProfileScreenState->players[index].state=2;
+                    g_pakProfileScreenState->players[index].next=4;
                     PAKInterface_RefreshPlayerPanel(index);
                 }
                 break;
                 case 10:
                 {
                     s32 state;
-                    state=D_800E54A4->players[index].state;
+                    state=g_pakProfileScreenState->players[index].state;
                     if(state==4){
                         MarkMenuEventHandled();
-                        D_800E54A4->players[index].back=2;
-                        D_800E54A4->players[index].state=2;
-                        D_800E54A4->players[index].next=state;
+                        g_pakProfileScreenState->players[index].back=2;
+                        g_pakProfileScreenState->players[index].state=2;
+                        g_pakProfileScreenState->players[index].next=state;
                         PAKInterface_RefreshPlayerPanel(index);
                     }
                     break;
@@ -54,37 +54,37 @@ s32 Frontend_HandlePakProfileInput(s32 a,s32 b,u32 event,s32 key){
             break;
             case 0:
             if(key==11||key==13){
-                if(D_800E54A4->players[index].state==0){
+                if(g_pakProfileScreenState->players[index].state==0){
                     MarkMenuEventHandled();
-                    D_800E54A4->players[index].back=2;
-                    D_800E54A4->players[index].state=2;
-                    D_800E54A4->players[index].next=12;
+                    g_pakProfileScreenState->players[index].back=2;
+                    g_pakProfileScreenState->players[index].state=2;
+                    g_pakProfileScreenState->players[index].next=12;
                     PAKInterface_RefreshPlayerPanel(index);
                 }
             }
             break;
             case 3:
             if(key==11||key==13){
-                if(D_800E54A4->players[index].state==0){
+                if(g_pakProfileScreenState->players[index].state==0){
                     MarkMenuEventHandled();
-                    D_800E54A4->players[index].back=2;
-                    D_800E54A4->players[index].state=2;
-                    D_800E54A4->players[index].next=13;
-                    D_800E54A4->players[index].sub=5;
+                    g_pakProfileScreenState->players[index].back=2;
+                    g_pakProfileScreenState->players[index].state=2;
+                    g_pakProfileScreenState->players[index].next=13;
+                    g_pakProfileScreenState->players[index].sub=5;
                     PAKInterface_RefreshPlayerPanel(index);
                 }
             }
             break;
             case 1:
             if(key==11||key==13){
-                if(D_800E54A4->players[index].state==0){
+                if(g_pakProfileScreenState->players[index].state==0){
                     MarkMenuEventHandled();
-                    D_800E54A4->players[index].state=14;
+                    g_pakProfileScreenState->players[index].state=14;
                     if(PAKInterface_FindReadyTransferPlayer()>=0){
-                        D_800E54A4->players[index].back=2;
-                        D_800E54A4->players[index].state=2;
-                        D_800E54A4->players[index].next=13;
-                        D_800E54A4->players[index].sub=6;
+                        g_pakProfileScreenState->players[index].back=2;
+                        g_pakProfileScreenState->players[index].state=2;
+                        g_pakProfileScreenState->players[index].next=13;
+                        g_pakProfileScreenState->players[index].sub=6;
                     }
                     PAKInterface_RefreshPlayerPanel(index);
                 }
@@ -92,14 +92,14 @@ s32 Frontend_HandlePakProfileInput(s32 a,s32 b,u32 event,s32 key){
             break;
             case 2:
             if(key==11||key==13){
-                if(D_800E54A4->players[index].state==0){
+                if(g_pakProfileScreenState->players[index].state==0){
                     MarkMenuEventHandled();
-                    D_800E54A4->players[index].state=14;
+                    g_pakProfileScreenState->players[index].state=14;
                     if(PAKInterface_FindReadyTransferPlayer()>=0){
-                        D_800E54A4->players[index].back=2;
-                        D_800E54A4->players[index].state=2;
-                        D_800E54A4->players[index].next=13;
-                        D_800E54A4->players[index].sub=3;
+                        g_pakProfileScreenState->players[index].back=2;
+                        g_pakProfileScreenState->players[index].state=2;
+                        g_pakProfileScreenState->players[index].next=13;
+                        g_pakProfileScreenState->players[index].sub=3;
                     }
                     PAKInterface_RefreshPlayerPanel(index);
                 }

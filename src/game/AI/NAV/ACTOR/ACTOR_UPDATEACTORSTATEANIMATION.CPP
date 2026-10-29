@@ -1,9 +1,9 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/FIELD_VEC_B0.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 
 
@@ -55,7 +55,7 @@ void Actor_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
                 s32 difference = src->counter - entry->threshold;
                 double converted = difference;
                 if (difference < 0) {
-                    converted += D_800C2130_de;
+                    converted += g_actorAnimationUnsignedConversionBias;
                 }
                 if ((f32)converted <= src->limit) {
                     dst->count++;
@@ -76,7 +76,7 @@ void Actor_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
         } else {
             factor = dst->scale * dst->entry_scale;
         }
-        D_800D2988 *= factor;
+        g_frameElapsedTime *= factor;
         Gobjinst_RequestAnimationIndex(src, dst->state_result, (dst->entry_flags >> 5) & 1);
         if ((dst->state_result != -1) && (src->previous_state != dst->state_result)) {
             dst->count = 0;

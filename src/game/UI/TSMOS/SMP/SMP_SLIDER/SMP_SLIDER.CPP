@@ -22,7 +22,7 @@
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3360, an actor kind at D_800E3364 and a handler at D_800E3368: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_sliderTransitionEventIds, an actor kind at g_sliderTransitionEventActorKinds and a handler at g_sliderTransitionEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -49,9 +49,9 @@ extern MenuSliderWidget *Cache_AllocateMemory(s32);
 
 
 
-extern void Node_ReplaceNodeRefs(s32 node, MenuSliderWidget *from, MenuSliderWidget *arg2);
+extern void Node_ReplaceNodeRefs(s32 node, MenuSliderWidget *from, MenuSliderWidget *newNode);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3390, an actor kind at D_800E3394 and a handler at D_800E3398: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_sliderWidgetEventIds, an actor kind at g_sliderWidgetEventActorKinds and a handler at g_sliderWidgetEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -68,7 +68,7 @@ extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, Qua
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct CacheResourceBlockView *clip);
 
 
 extern void Widget_DrawVisibleSiblings(void *, Args);
@@ -79,7 +79,7 @@ extern void Widget_DrawVisibleSiblings(void *, Args);
 
 extern void SmpSlider_SetSliderItem(struct Scroll *, s32);
 
-void SmpSlider_SetTransitionMode(struct func_8022FD9C_S4 *object, s32 mode) {
+void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode) {
     object->modeState = mode;
     switch (mode) {
     case 1:
@@ -111,23 +111,23 @@ void SmpSlider_DisableTransition(struct Access_s32_5C *object) {
     object->field = 0;
 }
 
-s32 SmpSlider_DispatchTransitionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpSlider_DispatchTransitionEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E3368 != 0) {
+    if (g_sliderTransitionEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E3368;
+        entry = (char *)&g_sliderTransitionEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E3360)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3364)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_sliderTransitionEventIds)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_sliderTransitionEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
@@ -156,26 +156,26 @@ s32 SmpSlider_DestroyController(void *allocation) {
 }
 
 void SmpSlider_RegisterSliderClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB63, D_0041A724, D_0041A7B4, 3);
+    SmSmngr_RegisterElementHandlers(0xB63, g_SmpSlider_DispatchSliderEventAddress, g_SmpSlider_DrawSliderWidgetAddress, 3);
 }
 
-MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 arg0, s32 arg1, s32 arg2) {
+MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 sliderWidgetId, s32 childWidgetId, s32 initialTransition) {
     MenuSliderWidget *source;
     s32 context;
     MenuSliderWidget *result;
     MenuSliderWidget *child;
 
-    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), sliderWidgetId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x58);
     XPlus_FillBytes(result, 0, 0x58);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB63;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    child = Node_FindWidgetByResourceId((void*)context, arg1 & 0xFFFF);
+    child = Node_FindWidgetByResourceId((void*)context, childWidgetId & 0xFFFF);
     result->field_44 = child;
     result->field_48 = child->field_18;
-    result->field_4C = arg2;
+    result->field_4C = initialTransition;
     result->field_50 = 0;
     result->field_54 = 2;
     Node_WrapNodeInParent(source, result);
@@ -198,26 +198,26 @@ s32 SmpSlider_GetSliderItem(s32 *record) {
 
 void SmpSlider_SetSliderItem(struct Scroll *scroll, s32 item) {
     scroll->item = item;
-    scroll->bar->field18 = (f32) item / (f32) scroll->count * (f32) scroll->length;
+    scroll->bar->ticksPerQuarter = (f32) item / (f32) scroll->count * (f32) scroll->length;
 }
 
-s32 SmpSlider_DispatchSliderEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpSlider_DispatchSliderEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800E3398 != 0) {
+    if (g_sliderWidgetEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800E3398;
+        entry = (char *)&g_sliderWidgetEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E3390)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3394)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_sliderWidgetEventIds)) + offset))->value == eventId) {
+                actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_sliderWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
@@ -270,8 +270,8 @@ void SmpSlider_IncrementSliderItem(struct Scroll *scroll) {
 
 
 
-s32 SmpSlider_DimSliderItems(struct MenuRecAt54 *menu) {
-    struct ItemRecAt10 *item;
+s32 SmpSlider_DimSliderItems(struct SmpControlItemListView *menu) {
+    struct SmpControlItemView *item;
 
     menu->state = 2;
     for (item = menu->items; item != 0; item = item->next) {
@@ -288,8 +288,8 @@ s32 SmpSlider_DimSliderItems(struct MenuRecAt54 *menu) {
 
 
 
-s32 SmpSlider_HighlightSliderItems(struct MenuRecAt54 *menu) {
-    struct ItemRecAt10 *item;
+s32 SmpSlider_HighlightSliderItems(struct SmpControlItemListView *menu) {
+    struct SmpControlItemView *item;
 
     menu->state = 2;
     for (item = menu->items; item != 0; item = item->next) {

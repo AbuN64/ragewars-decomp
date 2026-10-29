@@ -157,8 +157,8 @@ void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
     }
     default: {
         if(polygon.normal.y<0.0f) {
-            if(-polygon.normal.y<D_800C3774_de) goto flatFace;
-        } else if(polygon.normal.y<D_800C3778) {
+            if(-polygon.normal.y<g_collisionDownwardNormalThreshold) goto flatFace;
+        } else if(polygon.normal.y<g_collisionUpwardNormalThreshold) {
 flatFace:
             polygon.type=((ray->flags&0x1000) || !(mesh->flags&0x10000000)) ? 3 : 4;
             polygon.response=0.0f;

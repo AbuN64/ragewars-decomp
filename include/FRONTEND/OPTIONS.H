@@ -5,7 +5,7 @@
 
 
 
-extern s32 func_80428F08_de(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra);
+extern s32 CTrialCatalogue_DispatchOptionsEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra);
 
 struct MatchOptionsScreen;
 struct MatchOptionsScreen {

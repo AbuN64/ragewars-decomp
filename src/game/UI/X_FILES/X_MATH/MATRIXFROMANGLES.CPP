@@ -73,7 +73,7 @@ s32 XMath_ClipPolygonToPlane(CVector3 *out, s32 *outCount, CVector3 *in, s32 n, 
 }
 
 #include "COMMON/ITEMRECAT20V1.H"
-extern f32 D_800C5A90_de, D_800C5A94, D_800C5A98_de, D_800C5A9C, D_800C5AA0_de;
+extern f32 k_xmathFirstAngleMatrixUnit, k_xmathSecondAngleMatrixUnit, k_xmathThirdAngleMatrixUnit, k_xmathFourthAngleMatrixUnit, k_xmathAnglesMatrixHomogeneousUnit;
 
 void MatrixFromAngles(MatrixF *matrix, f32 *angles) {
     u16 mask = 0;
@@ -84,26 +84,26 @@ void MatrixFromAngles(MatrixF *matrix, f32 *angles) {
     switch (mask) {
     case 0:
         XPlus_FillBytes(matrix, 0, 64);
-        one = D_800C5A90_de;
+        one = k_xmathFirstAngleMatrixUnit;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         return;
     case 2:
         XPlus_FillBytes(matrix, 0, 64);
-        one = D_800C5A94;
+        one = k_xmathSecondAngleMatrixUnit;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         XMath_EvaluateSineCosine(angles[1], &sy, &cy);
         matrix->m[2][0] = sy; matrix->m[0][0] = cy; matrix->m[0][2] = -sy; matrix->m[2][2] = cy;
         return;
     case 4:
         XPlus_FillBytes(matrix, 0, 64);
-        one = D_800C5A98_de;
+        one = k_xmathThirdAngleMatrixUnit;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         XMath_EvaluateSineCosine(angles[0], &sx, &cx);
         matrix->m[1][1] = cx; matrix->m[2][1] = -sx; matrix->m[1][2] = sx; matrix->m[2][2] = cx;
         return;
     case 1:
         XPlus_FillBytes(matrix, 0, 64);
-        one = D_800C5A9C;
+        one = k_xmathFourthAngleMatrixUnit;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         XMath_EvaluateSineCosine(angles[2], &sz, &cz);
         matrix->m[0][0] = cz; matrix->m[1][0] = -sz; matrix->m[0][1] = sz; matrix->m[1][1] = cz;
@@ -126,6 +126,6 @@ void MatrixFromAngles(MatrixF *matrix, f32 *angles) {
         matrix->m[1][2] = sx * cy;
         matrix->m[2][2] = cx * cy;
         matrix->m[0][3] = matrix->m[1][3] = matrix->m[2][3] = matrix->m[3][0] = matrix->m[3][1] = matrix->m[3][2] = 0.0f;
-        matrix->m[3][3] = D_800C5AA0_de;
+        matrix->m[3][3] = k_xmathAnglesMatrixHomogeneousUnit;
     }
 }

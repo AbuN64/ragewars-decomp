@@ -19,16 +19,16 @@ f32 Barrel_GetSignedAngleToPoint(void *actor, CVector3 point) {
     f32 c;
     f32 dot;
     f32 angle;
-    dx = point.x - ((struct Actor_func_80214DD4_de *)actor)->pos.x;
-    dz = point.z - ((struct Actor_func_80214DD4_de *)actor)->pos.z;
+    dx = point.x - ((struct BarrelAnchorActorView *)actor)->pos.x;
+    dz = point.z - ((struct BarrelAnchorActorView *)actor)->pos.z;
     dist = Gu_Sqrtf(dx * dx + dz * dz);
     if (dist == 0.0f) {
         return 0.0f;
     }
     do {
-        s = Gu_Sinf(((struct Actor_func_80214DD4_de *)actor)->heading);
+        s = Gu_Sinf(((struct BarrelAnchorActorView *)actor)->heading);
     } while (0);
-    c = -Math_Cosf(((struct Actor_func_80214DD4_de *)actor)->heading);
+    c = -Math_Cosf(((struct BarrelAnchorActorView *)actor)->heading);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f))<((-1.0f))?((-1.0f)):(RW_MIN(dot, 1.0f)));
     angle = Graphu64_ArcCos(dot);

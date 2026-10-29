@@ -1,6 +1,6 @@
 #ifndef SCENARIOSETUPSCREEN_SCENARIOSETUPSCREEN_H
 #define SCENARIOSETUPSCREEN_SCENARIOSETUPSCREEN_H
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 extern void ScenarioSetup_SetCatalogueAlpha(s32 alpha);
 extern void ScenarioSetup_RefreshSelectedArenaLabel(void);
 extern void ScenarioSetup_StartSelectedScenario(void);

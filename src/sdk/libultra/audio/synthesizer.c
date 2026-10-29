@@ -10,7 +10,7 @@
 #include "sdk/libgultra/alunlink.h"
 #include "sdk/al_globals.h"
 #include "sdk/libgultra.h"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "include_asm.h"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "AUDIO/AUDIO_ASSERT.H"
@@ -59,10 +59,10 @@ extern s32 alSaveParam(void *, s32, ALFilter_s14 *);
 
  /* alGlobals */
 
-s32 _timeToSamplesNoRound(func_8022E694_S1 *arg0, s32 arg1);
+s32 _timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds);
 
          /* _timeToSamplesNoRound */
-void _collectPVoices(void *arg0);
+void _collectPVoices(void *synth);
 
 
                    /* alSaveParam */
@@ -149,7 +149,7 @@ Acmd *alAudioFrame(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
 {
     ALPlayer_s14 *client;
     ALFilter_sC *output;
-    ALSynth4C *drvr = &D_800D4070->drvr;
+    ALSynth4C *drvr = &g_audioGlobals->drvr;
     s16 tmp = 0;
     Acmd *cmdlEnd = cmdList;
     Acmd *cmdPtr;
@@ -193,53 +193,53 @@ void *Audio_AllocParam(void) {
     void *head;
     void *param;
 
-    head = D_800D4070->drvr.paramList;
+    head = g_audioGlobals->drvr.paramList;
     param = 0;
     if (head != 0) {
         param = head;
-        D_800D4070->drvr.paramList = *(void **)param;
+        g_audioGlobals->drvr.paramList = *(void **)param;
         *(void **)param = 0;
     }
     return param;
 }
 
-void Audio_FreeParam(void *arg0) {
-    struct ALParam_s1C *parameter = arg0;
-    ALGlobals *head = D_800D4070;
+void Audio_FreeParam(void *parameterStorage) {
+    struct ALParam_s1C *parameter = parameterStorage;
+    ALGlobals *head = g_audioGlobals;
     parameter->next = head->drvr.paramList;
-    head->drvr.paramList = arg0;
+    head->drvr.paramList = parameterStorage;
 }
 
-void _freePVoice(s32 arg0, s32 listLink) {
+void _freePVoice(s32 synth, s32 listLink) {
     alUnlink((ListLink *)listLink);
-    alLink(listLink, arg0 + 0x14);
+    alLink(listLink, synth + 0x14);
 }
 
-void _collectPVoices(void *arg0) {
+void _collectPVoices(void *synth) {
     void *node;
 
-    node = ((ALSynth4C *)arg0)->pLameList.next;
+    node = ((ALSynth4C *)synth)->pLameList.next;
     if (node != 0) {
         do {
             alUnlink(node);
-            alLink(node, (char *)arg0 + 4);
-            node = ((ALSynth4C *)arg0)->pLameList.next;
+            alLink(node, (char *)synth + 4);
+            node = ((ALSynth4C *)synth)->pLameList.next;
         } while (node != 0);
     }
 }
 
-s32 _timeToSamples(func_8022E694_S1 *arg0, s32 arg1) {
+s32 _timeToSamples(SynthOutputRateView *synth, s32 microseconds) {
     f32 v;
     int idx;
 
-    v = (f32)arg1 * (f32)arg0->unk44;
+    v = (f32)microseconds * (f32)synth->outputRate;
     idx = 0;
-    v = v * D_800C7588[idx];
-    v = v + D_800C7588[1];
+    v = v * g_audioRoundedSampleTimeConstants[idx];
+    v = v + g_audioRoundedSampleTimeConstants[1];
     return (s32)v & ~0xF;
 }
 
-extern char D_800C7570;
+extern char g_synthesizerNoClientAssertText;
 
 extern char s_audioSynthesizerText;
 
@@ -247,7 +247,7 @@ extern char s_audioSynthesizerText;
 s32 __nextSampleTime(ALSynth4C *drvr, ALPlayer_s14 **client) {
  s32 smallest = 0x7FFFFFFF;
  ALPlayer_s14 *scan;
- if (drvr->head == 0) Audio_Assert(&D_800C7570, &s_audioSynthesizerText, 0x133);
+ if (drvr->head == 0) Audio_Assert(&g_synthesizerNoClientAssertText, &s_audioSynthesizerText, 0x133);
  *client = 0;
  scan = drvr->head;
  if (scan != 0) {
@@ -262,14 +262,14 @@ s32 __nextSampleTime(ALSynth4C *drvr, ALPlayer_s14 **client) {
  return (*client)->samplesLeft;
 }
 
-s32 _timeToSamplesNoRound(func_8022E694_S1 *arg0, s32 arg1) {
+s32 _timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds) {
     f32 v;
     int idx;
 
-    v = (f32)arg1 * (f32)arg0->unk44;
+    v = (f32)microseconds * (f32)synth->outputRate;
     idx = 0;
-    v = v * D_800C7590[idx];
-    v = v + D_800C7590[1];
+    v = v * g_audioSampleTimeConstants[idx];
+    v = v + g_audioSampleTimeConstants[1];
     return (s32)v;
 }
 

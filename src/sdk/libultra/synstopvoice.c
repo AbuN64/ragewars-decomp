@@ -17,22 +17,22 @@
 
 void alSynStopVoice(struct AudioSynthParamSamplesView *synth, void *voice)
 {
-  int new_var;
-  void *Shared_func_802B36F0_de_v0;
+  int updateSampleTime;
+  void *controlUpdate;
   void *voiceFilter;
   SharedRecV12 fn;
   if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0)
   {
-    Shared_func_802B36F0_de_v0 = Audio_AllocParam();
-    if (Shared_func_802B36F0_de_v0 != 0)
+    controlUpdate = Audio_AllocParam();
+    if (controlUpdate != 0)
     {
-      new_var = (synth->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
-      ((AudioStopVoiceUpdate *)(Shared_func_802B36F0_de_v0))->type = AL_FILTER_STOP_VOICE;
-      ((AudioStopVoiceUpdate *)(Shared_func_802B36F0_de_v0))->next = 0;
-      ((AudioStopVoiceUpdate *)(Shared_func_802B36F0_de_v0))->delta = new_var;
+      updateSampleTime = (synth->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
+      ((AudioStopVoiceUpdate *)(controlUpdate))->type = AL_FILTER_STOP_VOICE;
+      ((AudioStopVoiceUpdate *)(controlUpdate))->next = 0;
+      ((AudioStopVoiceUpdate *)(controlUpdate))->delta = updateSampleTime;
       voiceFilter = ((struct Draw *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->model;
       fn = ((CallbackStateC_4 *)(voiceFilter))->callback;
-      fn(voiceFilter, AL_FILTER_ADD_UPDATE, Shared_func_802B36F0_de_v0);
+      fn(voiceFilter, AL_FILTER_ADD_UPDATE, controlUpdate);
     }
   }
 }

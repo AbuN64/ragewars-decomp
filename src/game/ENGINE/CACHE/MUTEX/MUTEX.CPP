@@ -12,7 +12,7 @@ typedef struct Object {
 } Object;
 
 
-void func_802566E8_de(Object *obj) {
+void Mutex_WaitUntilReleased(Object *obj) {
     s32 mask;
     s32 mask2;
 
@@ -36,7 +36,7 @@ void func_802566E8_de(Object *obj) {
 }
 #endif
 
-void func_802567A4_de(void *menuRules) {
+void Mutex_InitializeQueueLock(void *menuRules) {
     (((struct MenuRules *) ((s8 *) menuRules))->locked) = 0;
     osCreateMesgQueue(menuRules, menuRules + 0x18, 1);
 }

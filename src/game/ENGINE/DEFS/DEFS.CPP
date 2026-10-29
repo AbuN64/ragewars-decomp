@@ -10,131 +10,131 @@
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 /* 80265370.CPP */
-extern u32 D_80000318;
+extern u32 osMemSize;
 
-extern char D_800C8140_de;
+extern char g_staticDataRegionStart;
 
-extern char D_1087D;
+extern char g_staticDataRegionByteCount;
 
 extern char jtbl_800C19C0;
 
-extern char D_63F8;
+extern char g_staticJumpTableRegionByteCount;
 
-extern void *D_800E2830;
+extern void *g_cinemaSequenceState;
 
-extern char D_389E;
+extern char g_cinemaStateRegionByteCount;
 
 /* Returns whether an address lies in either of two resident memory ranges. */
-extern char D_800E4000, D_80166000, D_8014CEB0, D_8014DE3A;
+extern char g_graphicsTaskYieldBuffer, g_runtimeHeapStart, g_menuResidentRegionStart, g_menuResidentRegionEnd;
 
 /* Tests whether an address lies in either recognized resident range. */
-extern char D_00200500;
+extern char addrLow_Libsn_DisableInterrupts;
 
-extern char D_C0DA8;
+extern char g_mainCodeRegionByteCount;
 
-extern char D_00400000;
+extern char addrLow_Track_SolveSplineSecondDerivatives;
 
-extern char D_48B38;
+extern char g_overlayCodeRegionByteCount;
 
 /* Returns the s32 at a byte offset into a resource loaded from the cartridge, then releases it.
    The resource's ROM address is each cartridge's own, because the data before it differs in size. */
-extern char D_800C4388_de;
+extern char g_resourceWordRequestLabel;
 
 extern void Cache_UnlockResource(s32, void *);
 
-/* Loads the scene's point lights into the display list: with no light in D_8013B1A8 it clears geometry mode bit 0x80, otherwise it sets it and fills eight light slots from the light list, transforming each active light's position into the view, storing its negated view direction, its colour scaled by its intensity, its falloff and a fixed range, marking unused slots off, and emits the light-move command for each slot, then advances the light buffer. The first direction component is truncated into a local before negating. */
+/* Loads the scene's point lights into the display list: with no light in g_dynamicLightPool it clears geometry mode bit 0x80, otherwise it sets it and fills eight light slots from the light list, transforming each active light's position into the view, storing its negated view direction, its colour scaled by its intensity, its falloff and a fixed range, marking unused slots off, and emits the light-move command for each slot, then advances the light buffer. The first direction component is truncated into a local before negating. */
 extern Gfx *g_displayListCursor;
 
-extern s32 D_8010C4A0;
+extern s32 g_pointLightBufferOffset;
 
-extern UnitLight D_8010C0A0[];
+extern UnitLight g_pointLightBuffer[];
 
-extern char D_8013B1A8;
+extern char g_dynamicLightPool;
 
 extern LightNode *Gdynlight_GetFirstLight(void *);
 
 extern LightNode *Gdynlight_GetNextLight(void *, LightNode *);
 
 u32 Defs_GetMemorySize(void) {
-    if (D_80000318 > 0x7FFFFFU) {
+    if (osMemSize > 0x7FFFFFU) {
         return 0x700000;
     }
-    return D_80000318;
+    return osMemSize;
 }
 
-void Defs_MoveMemory(u8 *split, u8 *arg1, s32 arg2) {
-    u8 *var_a3;
-    u8 *var_a3_2;
-    s32 temp_v0;
+void Defs_MoveMemory(u8 *split, u8 *source, s32 byteCount) {
+    u8 *destinationCursor;
+    u8 *sourceCursor;
+    s32 lastByteOffset;
 
-    if (arg2 != 0) {
-        var_a3 = split;
-        if (((u32)arg1 | (u32)split | arg2) & 3) {
-            var_a3_2 = arg1;
-            if (split < arg1) {
+    if (byteCount != 0) {
+        destinationCursor = split;
+        if (((u32)source | (u32)split | byteCount) & 3) {
+            sourceCursor = source;
+            if (split < source) {
                 do {
-                    *var_a3 = *var_a3_2;
-                    var_a3_2++;
-                    arg2--;
-                    var_a3++;
-                } while (arg2 != 0);
+                    *destinationCursor = *sourceCursor;
+                    sourceCursor++;
+                    byteCount--;
+                    destinationCursor++;
+                } while (byteCount != 0);
             } else {
-                temp_v0 = arg2 - 1;
-                var_a3 = split + temp_v0;
-                var_a3_2 = arg1 + temp_v0;
+                lastByteOffset = byteCount - 1;
+                destinationCursor = split + lastByteOffset;
+                sourceCursor = source + lastByteOffset;
                 do {
-                    *var_a3 = *var_a3_2;
-                    var_a3_2--;
-                    arg2--;
-                    var_a3--;
-                } while (arg2 != 0);
+                    *destinationCursor = *sourceCursor;
+                    sourceCursor--;
+                    byteCount--;
+                    destinationCursor--;
+                } while (byteCount != 0);
             }
         } else {
-            if (split < arg1) {
-                arg2 >>= 2;
+            if (split < source) {
+                byteCount >>= 2;
                 do {
-                    *(u32 *)split = *(u32 *)arg1;
-                    arg1 += 4;
-                    arg2--;
+                    *(u32 *)split = *(u32 *)source;
+                    source += 4;
+                    byteCount--;
                     split += 4;
-                } while (arg2 != 0);
+                } while (byteCount != 0);
             } else {
-                arg2 >>= 2;
-                split += (arg2 * 4) - 4;
-                arg1 += (arg2 * 4) - 4;
+                byteCount >>= 2;
+                split += (byteCount * 4) - 4;
+                source += (byteCount * 4) - 4;
                 do {
-                    *(u32 *)split = *(u32 *)arg1;
-                    arg1 -= 4;
-                    arg2--;
+                    *(u32 *)split = *(u32 *)source;
+                    source -= 4;
+                    byteCount--;
                     split -= 4;
-                } while (arg2 != 0);
+                } while (byteCount != 0);
             }
         }
     }
 }
 
-s32 Defs_CompareMemory(u8 *arg0, u8 *arg1, s32 arg2) {
-    u8 *end = arg0 + arg2;
+s32 Defs_CompareMemory(u8 *leftBytes, u8 *rightBytes, s32 byteCount) {
+    u8 *end = leftBytes + byteCount;
 
-    if (arg2 >= 4 && !((u32)arg0 & 3) && !((u32)arg1 & 3)) {
+    if (byteCount >= 4 && !((u32)leftBytes & 3) && !((u32)rightBytes & 3)) {
         end -= 4;
-        if (end < arg0) {
+        if (end < leftBytes) {
             end += 4;
             goto byte_loop;
         }
 word_loop:
-        if (*(u32 *)arg0 != *(u32 *)arg1) {
+        if (*(u32 *)leftBytes != *(u32 *)rightBytes) {
             goto word_mismatch;
         }
-        arg0 += 4;
+        leftBytes += 4;
         goto word_continue;
 word_mismatch:
-        arg0 -= 4;
-        arg1 -= 4;
+        leftBytes -= 4;
+        rightBytes -= 4;
         goto word_done;
 word_continue:
-        arg1 += 4;
-        if (arg0 <= end) {
+        rightBytes += 4;
+        if (leftBytes <= end) {
             goto word_loop;
         }
 word_done:
@@ -142,9 +142,9 @@ word_done:
     }
 
 byte_loop:
-    while (arg0 < end) {
-        u8 left = *arg0;
-        u8 right = *arg1;
+    while (leftBytes < end) {
+        u8 left = *leftBytes;
+        u8 right = *rightBytes;
 
         if (left != right) {
             if (left < right) {
@@ -152,58 +152,58 @@ byte_loop:
             }
             return 1;
         }
-        arg0++;
-        arg1++;
+        leftBytes++;
+        rightBytes++;
     }
     return 0;
 }
 
-s32 Defs_FindSortedValue(void *entries, s32 arg1, s32 arg2) {
-    u32 temp_v1;
-    u32 var_a3;
+s32 Defs_FindSortedValue(void *entries, s32 entryCount, s32 value) {
+    u32 middleIndex;
+    u32 lowerIndex;
 
-    if (arg1 != 0) {
-        arg1--;
-        var_a3 = 0;
-        if (arg1 != 0) {
+    if (entryCount != 0) {
+        entryCount--;
+        lowerIndex = 0;
+        if (entryCount != 0) {
             do {
-                temp_v1 = (u32)(var_a3 + arg1) >> 1;
-                if ((u32)*((s32 *)entries + temp_v1) < (u32)arg2) {
-                    var_a3 = temp_v1 + 1;
+                middleIndex = (u32)(lowerIndex + entryCount) >> 1;
+                if ((u32)*((s32 *)entries + middleIndex) < (u32)value) {
+                    lowerIndex = middleIndex + 1;
                 } else {
-                    arg1 = temp_v1;
+                    entryCount = middleIndex;
                 }
-            } while (var_a3 < (u32)arg1);
+            } while (lowerIndex < (u32)entryCount);
         }
-        if (*((s32 *)entries + var_a3) == arg2) {
-            return (s32)var_a3;
+        if (*((s32 *)entries + lowerIndex) == value) {
+            return (s32)lowerIndex;
         }
         return -1;
     }
     return -1;
 }
 
-s32 Defs_FindSortedGroupRange(u32 *arg0, s32 arg1, u32 group, s32 *arg3, s32 *last) {
-    u32 temp_v1;
-    u32 var_a3;
-    s32 var_t0;
+s32 Defs_FindSortedGroupRange(u32 *keys, s32 entryCount, u32 group, s32 *firstOut, s32 *last) {
+    u32 middleIndex;
+    u32 lowerIndex;
+    s32 upperIndex;
     s32 found;
 
-    if (arg1 != 0) {
-        var_t0 = arg1 - 1;
-        var_a3 = 0;
-        if (var_t0 != 0) {
+    if (entryCount != 0) {
+        upperIndex = entryCount - 1;
+        lowerIndex = 0;
+        if (upperIndex != 0) {
             do {
-                temp_v1 = (u32)(var_a3 + var_t0) >> 1;
-                if (arg0[temp_v1] < group) {
-                    var_a3 = temp_v1 + 1;
+                middleIndex = (u32)(lowerIndex + upperIndex) >> 1;
+                if (keys[middleIndex] < group) {
+                    lowerIndex = middleIndex + 1;
                 } else {
-                    var_t0 = temp_v1;
+                    upperIndex = middleIndex;
                 }
-            } while (var_a3 < (u32)var_t0);
+            } while (lowerIndex < (u32)upperIndex);
         }
-        if (arg0[var_a3] == group) {
-            found = var_a3;
+        if (keys[lowerIndex] == group) {
+            found = lowerIndex;
         } else {
             found = -1;
         }
@@ -215,77 +215,77 @@ s32 Defs_FindSortedGroupRange(u32 *arg0, s32 arg1, u32 group, s32 *arg3, s32 *la
         return 0;
     }
 
-    var_t0 = found - 1;
-    while ((var_t0 != -1) && (arg0[var_t0] == group)) {
-        var_t0--;
+    upperIndex = found - 1;
+    while ((upperIndex != -1) && (keys[upperIndex] == group)) {
+        upperIndex--;
     }
-    *arg3 = var_t0 + 1;
+    *firstOut = upperIndex + 1;
 
     found++;
-    while ((found < arg1) && (arg0[found] == group)) {
+    while ((found < entryCount) && (keys[found] == group)) {
         found++;
     }
     *last = found - 1;
     return 1;
 }
 
-int Defs_GetBitArrayByteCount(int arg0) {
-    int result = arg0 + 7;
+int Defs_GetBitArrayByteCount(int bitCount) {
+    int result = bitCount + 7;
     if (result < 0) {
-        result = arg0 + 0xE;
+        result = bitCount + 0xE;
     }
     return result >> 3;
 }
 
-s32 Defs_TestBit(void *arg0, s32 arg1)
+s32 Defs_TestBit(void *bitArray, s32 index)
 {
-  s32 temp_a1;
-  s32 temp_v0;
-  s32 var_a1;
-  u8 *temp_a1_2;
-  int new_var;
-  var_a1 = arg1;
-  temp_v0 = var_a1;
-  if (temp_v0 < 0)
+  s32 byteIndex;
+  s32 bitIndex;
+  s32 roundedBitIndex;
+  u8 *byteAddress;
+  int bitMask;
+  roundedBitIndex = index;
+  bitIndex = roundedBitIndex;
+  if (bitIndex < 0)
   {
-    var_a1 = temp_v0 + 7;
+    roundedBitIndex = bitIndex + 7;
   }
-  temp_a1 = var_a1 >> 3;
-  new_var = 1 << (temp_v0 - (temp_a1 * 8));
-  temp_a1_2 = (u8 *)arg0 + temp_a1;
-  return (*temp_a1_2 & new_var) != 0;
+  byteIndex = roundedBitIndex >> 3;
+  bitMask = 1 << (bitIndex - (byteIndex * 8));
+  byteAddress = (u8 *)bitArray + byteIndex;
+  return (*byteAddress & bitMask) != 0;
 }
 
-void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 found) {
+void Defs_SetBitValue(u8 *bitArray, s32 index, s32 found) {
     s32 byteIdx;
     s32 mask;
 
-    byteIdx = arg1 / 8;
-    mask = 1 << (arg1 % 8);
+    byteIdx = index / 8;
+    mask = 1 << (index % 8);
     if (found != 0) {
-        arg0[byteIdx] |= mask;
+        bitArray[byteIdx] |= mask;
         return;
     }
-    arg0[byteIdx] &= ~mask;
+    bitArray[byteIdx] &= ~mask;
 }
 
-void Defs_ToggleBit(s32 arg0, s32 arg1)
+void Defs_ToggleBit(s32 bitArrayAddress, s32 index)
 {
-  s32 temp_a1;
-  s32 temp_v0;
-  s32 var_a1;
-  u8 *temp_a1_2;
-  int new_var;
-  var_a1 = arg1;
-  temp_v0 = var_a1;
-  if (temp_v0 < 0)
+  s32 byteIndex;
+  s32 bitIndex;
+  s32 roundedBitIndex;
+  u8 *byteAddress;
+  int bitMask;
+  roundedBitIndex = index;
+  bitIndex = roundedBitIndex;
+  if (bitIndex < 0)
   {
-    var_a1 = temp_v0 + 7;
+    roundedBitIndex = bitIndex + 7;
   }
-  temp_a1 = var_a1 >> 3;
-  new_var = 1 << (temp_v0 - (temp_a1 * 8));
-  temp_a1_2 = arg0 + temp_a1;
-  *temp_a1_2 ^= new_var;
+  byteIndex = roundedBitIndex >> 3;
+  bitMask = 1 << (bitIndex - (byteIndex * 8));
+  byteAddress = bitArrayAddress + byteIndex;
+  *byteAddress ^= bitMask;
 }
 
 f32 Defs_CosineEase(f32 fraction)
@@ -300,45 +300,45 @@ f32 Defs_CosineEase(f32 fraction)
   }
   else
   {
-    clampBound = D_800C4398_de;
+    clampBound = g_cosineEaseUpperBound;
     if (clampBound < clampedFraction)
     {
       clampedFraction = clampBound;
     }
   }
-  return (D_800C43A0_de - Math_Cosf(clampedFraction * D_800C439C_de)) * (((struct func_802077F4_S2 *) ((char *) (&D_800C43A0_de)))->unk4);
+  return (g_cosineEaseOutputConstants - Math_Cosf(clampedFraction * g_cosineEaseAngleScale)) * (((struct func_802077F4_S2 *) ((char *) (&g_cosineEaseOutputConstants)))->unk4);
 }
 
 /** Return whether an address lies within one of three recognized ranges. */
 int Defs_IsAddressInStaticRanges(u32 callback) {
-    if (callback >= (u32)&D_800C8140_de &&
-        callback < (u32)&D_800C8140_de + (u32)&D_1087D) {
+    if (callback >= (u32)&g_staticDataRegionStart &&
+        callback < (u32)&g_staticDataRegionStart + (u32)&g_staticDataRegionByteCount) {
         return 1;
     }
     if (callback >= (u32)&jtbl_800C19C0 &&
-        callback < (u32)&jtbl_800C19C0 + (u32)&D_63F8) {
+        callback < (u32)&jtbl_800C19C0 + (u32)&g_staticJumpTableRegionByteCount) {
         return 1;
     }
-    if (callback >= (u32)&D_800E2830 &&
-        callback < (u32)&D_800E2830 + (u32)&D_389E) {
+    if (callback >= (u32)&g_cinemaSequenceState &&
+        callback < (u32)&g_cinemaSequenceState + (u32)&g_cinemaStateRegionByteCount) {
         return 1;
     }
     return 0;
 }
 
 int Defs_IsAddressInBufferRanges(u32 address) {
-    if (address >= (u32)&D_800E4000 && address < (u32)&D_80166000) return 1;
-    if (address >= (u32)&D_8014CEB0 && address < (u32)&D_8014DE3A) return 1;
+    if (address >= (u32)&g_graphicsTaskYieldBuffer && address < (u32)&g_runtimeHeapStart) return 1;
+    if (address >= (u32)&g_menuResidentRegionStart && address < (u32)&g_menuResidentRegionEnd) return 1;
     return 0;
 }
 
 int Defs_IsAddressInCodeRanges(u32 callback) {
-    if (callback >= (u32)&D_00200500 &&
-        callback < (u32)&D_00200500 + (u32)&D_C0DA8) {
+    if (callback >= (u32)&addrLow_Libsn_DisableInterrupts &&
+        callback < (u32)&addrLow_Libsn_DisableInterrupts + (u32)&g_mainCodeRegionByteCount) {
         return 1;
     }
-    if (callback >= (u32)&D_00400000 &&
-        callback < (u32)&D_00400000 + (u32)&D_48B38) {
+    if (callback >= (u32)&addrLow_Track_SolveSplineSecondDerivatives &&
+        callback < (u32)&addrLow_Track_SolveSplineSecondDerivatives + (u32)&g_overlayCodeRegionByteCount) {
         return 1;
     }
     return 0;
@@ -349,33 +349,33 @@ void Defs_NoOperation(void) {
 
 /** Formats one value into buffer. */
 void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value) {
-    func_802BD320_de(buffer, format, value);
+    Libc_FormatString(buffer, format, value);
 }
 /** Formats one value into buffer. */
 void Defs_FormatSingleInteger(char *buffer, const char *format, s32 value) {
-    func_802BD320_de(buffer, format, value);
+    Libc_FormatString(buffer, format, value);
 }
 /** Formats three values into buffer. */
 void Defs_FormatThreeIntegers(char *buffer, const char *format, s32 a, s32 b, s32 c) {
-    func_802BD320_de(buffer, format, a, b, c);
+    Libc_FormatString(buffer, format, a, b, c);
 }
 /** Formats four values into buffer. */
 void Defs_FormatFourIntegers(char *buffer, const char *format, s32 a, s32 b, s32 c, s32 d) {
-    func_802BD320_de(buffer, format, a, b, c, d);
+    Libc_FormatString(buffer, format, a, b, c, d);
 }
 
-s32 Defs_ReadResourceWord(s32 arg0) {
+s32 Defs_ReadResourceWord(s32 byteOffset) {
     void **resource;
     s32 result;
 
 #if defined(VERSION_DE)
-    resource = Cache_RequestResource(0, 0x28BB00, 0x28BB00, 0x20, 0x10, 0, 0, &D_800C4388_de, 1);
+    resource = Cache_RequestResource(0, 0x28BB00, 0x28BB00, 0x20, 0x10, 0, 0, &g_resourceWordRequestLabel, 1);
 #elif defined(VERSION_EU_X)
-    resource = Cache_RequestResource(0, 0x290384, 0x290384, 0x20, 0x10, 0, 0, &D_800C4388_de, 1);
+    resource = Cache_RequestResource(0, 0x290384, 0x290384, 0x20, 0x10, 0, 0, &g_resourceWordRequestLabel, 1);
 #else
-    resource = Cache_RequestResource(0, 0x28B244, 0x28B244, 0x20, 0x10, 0, 0, &D_800C4388_de, 1);
+    resource = Cache_RequestResource(0, 0x28B244, 0x28B244, 0x20, 0x10, 0, 0, &g_resourceWordRequestLabel, 1);
 #endif
-    result = *(s32 *)((char *)*resource + arg0);
+    result = *(s32 *)((char *)*resource + byteOffset);
     Cache_UnlockResource(0, resource);
     return result;
 }
@@ -388,11 +388,11 @@ void Defs_SetupPointLights(char *view) {
     s32 i;
     s32 x;
 
-    node = Gdynlight_GetFirstLight(&D_8013B1A8);
+    node = Gdynlight_GetFirstLight(&g_dynamicLightPool);
     if (node == 0) {
         Gfx *g = g_displayListCursor++;
         gSPGeometryMode(g, 0x80, 0);
-        D_8010C4A0 += 8;
+        g_pointLightBufferOffset += 8;
         return;
     }
     gSPGeometryMode(g_displayListCursor++, 0, 0x80);
@@ -404,43 +404,43 @@ void Defs_SetupPointLights(char *view) {
             position[2] = node->position[2];
             Graphu64_TransformPoint(view + 0x220, position, out);
             x = out[0];
-            D_8010C0A0[i + D_8010C4A0].dir[0] = -x;
-            D_8010C0A0[i + D_8010C4A0].dir[1] = out[1];
-            D_8010C0A0[i + D_8010C4A0].dir[2] = -(s32)out[2];
-            D_8010C0A0[i + D_8010C4A0].color[3] = data->color[3] * node->intensity;
-            D_8010C0A0[i + D_8010C4A0].color[2] = data->color[0] * node->intensity;
-            D_8010C0A0[i + D_8010C4A0].color[1] = data->color[1] * node->intensity;
-            D_8010C0A0[i + D_8010C4A0].color[0] = data->color[2] * node->intensity;
-            D_8010C0A0[i + D_8010C4A0].falloff = data->falloff;
-            D_8010C0A0[i + D_8010C4A0].near = data->near;
-            D_8010C0A0[i + D_8010C4A0].range = 0x7F80;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].dir[0] = -x;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].dir[1] = out[1];
+            g_pointLightBuffer[i + g_pointLightBufferOffset].dir[2] = -(s32)out[2];
+            g_pointLightBuffer[i + g_pointLightBufferOffset].color[3] = data->color[3] * node->intensity;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].color[2] = data->color[0] * node->intensity;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].color[1] = data->color[1] * node->intensity;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].color[0] = data->color[2] * node->intensity;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].falloff = data->falloff;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].near = data->near;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].range = 0x7F80;
         } else {
-            D_8010C0A0[i + D_8010C4A0].falloff = -0x8000;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].falloff = -0x8000;
         }
         if (node != 0) {
-            node = Gdynlight_GetNextLight(&D_8013B1A8, node);
+            node = Gdynlight_GetNextLight(&g_dynamicLightPool, node);
         }
         {
             Gfx *g = g_displayListCursor++;
-            gSPMoveMem(g, 10, ((i + 1) * 2 + 10) * 8, 16, &D_8010C0A0[i + D_8010C4A0]);
+            gSPMoveMem(g, 10, ((i + 1) * 2 + 10) * 8, 16, &g_pointLightBuffer[i + g_pointLightBufferOffset]);
         }
     }
-    D_8010C4A0 += 8;
+    g_pointLightBufferOffset += 8;
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_800C42E4[12] =
+char s_DefsBFlagText[12] =
     "\000\000\000\000\010m_bFlag";
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C4664[3] = {
+unsigned int k_DefsEncodedWordsBlock2[3] = {
     0x24020001, 0xA4620000, 0x0C0AFC14,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C43B4[3] = {
+unsigned int k_DefsEncodedWordsBlock1[3] = {
     0x41A00000, 0x3F800000, 0x41200000,
 };
 #endif
@@ -448,7 +448,7 @@ unsigned int rodata_unresolved_800C43B4[3] = {
 /* DATA_800C9498.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C9498 */
-unsigned int D_blob_b4748ea260bef0e9dfa6[2] = {
+unsigned int g_DefsEncodedWords[2] = {
     0x40F00000, 0x42080000,
 };
 #endif

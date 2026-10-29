@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: rodata/shared/800E10E0 */
-const unsigned char D_blob_phase2_e6036f2dfb04ad707672[] = {
+const unsigned char s_frontendResourceBinaryReadModeStorage[] = {
     0x72, 0x62, 0x00,
 #if defined(VERSION_EU)
     0x4B,
@@ -12,7 +12,7 @@ const unsigned char D_blob_phase2_e6036f2dfb04ad707672[] = {
 };
 
 #if defined(VERSION_US)
-char rodata_unresolved_800DBD63[13] =
+char s_FrontendOpenresourcearchiveELINTRO4equText[13] =
     "EL_INTRO_4equ";
 #endif
 
@@ -21,7 +21,7 @@ char rodata_unresolved_800DBD63[13] =
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800E88F3[13] = {
+unsigned char k_FrontendOpenresourcearchiveEncodedBytesBlock1[13] = {
     0xF4, 0x00, 0x43, 0xD5, 0x14, 0x00, 0x43, 0xD5, 0x04, 0x00, 0x43, 0xD5, 0x34,
 };
 #endif
@@ -31,7 +31,7 @@ unsigned char rodata_unresolved_800E88F3[13] = {
 #endif
 
 #if defined(VERSION_DE)
-char rodata_unresolved_800DD0B3[13] =
+char k_FrontendOpenresourcearchiveEncodedBytes[13] =
     "s : %d ]\012\000\000\000\000";
 #endif
 

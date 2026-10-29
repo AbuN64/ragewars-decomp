@@ -2,5 +2,5 @@
 #define AI_EXTERNS_H
 #include "TYPES.H"
 
-extern f32 D_800CD3D8;
+extern f32 g_arcCosEndpoint;
 #endif

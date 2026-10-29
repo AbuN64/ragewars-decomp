@@ -1,15 +1,15 @@
 #include "COMMON/FRUSTUM.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "SYSTEM/TEXTLOAD_RESETTEXTURECACHE.H"
 
 /** Clear the global word at VRAM 0x800D2B00. */
 
 void TextLoad_ResetTextureCache(void) {
-    D_800CD890 = 0;
+    g_textureCacheResource = 0;
 }
 
 
 /** Replace the global state word. */
 void Textload_SetTextureEffect(unsigned int value) {
-    D_800CD894_de = value;
+    g_texturePaletteOverrideEnabled = value;
 }

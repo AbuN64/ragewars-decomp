@@ -3,7 +3,7 @@
 
 /* 800E449C_2.CPP */
 /* ROM-grounded data: rodata/writable/800E44A0 */
-unsigned int D_blob_phase2_9aae1fda5da144d428cc[1] = {
+unsigned int k_MenuDrawoptionsimagetransitionZeroWords[1] = {
     0x00000000,
 };
 
@@ -37,10 +37,10 @@ unsigned int D_src_d9561b8a[27] = {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int D_blob_1344574394ee8bcac553[24] = {
-    0x00000E06, 0x00000019, (unsigned int)D_00422260, 0x00000E03, 0x00000019, (unsigned int)D_004222A8, 0x00000002, 0x00000019,
-    (unsigned int)D_0042245C, 0x00000001, 0x00000019, (unsigned int)D_00422444, 0x00000E0A, 0x00000019, (unsigned int)D_004222D8, 0x00000E08,
-    0x00000019, (unsigned int)D_00422370, 0x0000000A, 0x00000019, (unsigned int)D_004223FC, 0x00000000, 0x00000000, 0x00000000,
+unsigned int g_MenuDrawoptionsimagetransitionEncodedWords[24] = {
+    0x00000E06, 0x00000019, (unsigned int)g_menu_CreateOptionsImageTransitionEntry, 0x00000E03, 0x00000019, (unsigned int)g_menu_DestroyOptionsImageTransitionEntry, 0x00000002, 0x00000019,
+    (unsigned int)g_menu_ConsumeOptionsTransitionEventEntry, 0x00000001, 0x00000019, (unsigned int)g_menu_RequestOptionsImageTransitionEntry, 0x00000E0A, 0x00000019, (unsigned int)g_menu_DrawOptionsImageTransitionEntry, 0x00000E08,
+    0x00000019, (unsigned int)g_menu_StartOptionsImageTransitionEntry, 0x0000000A, 0x00000019, (unsigned int)g_menu_HandleOptionsTransitionRequestEntry, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 

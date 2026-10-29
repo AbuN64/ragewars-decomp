@@ -2,16 +2,16 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "FRONTEND/PAKINTERFACE_GETRECORDSNOTESIZE.H"
 
-extern char *D_800D3758;
+extern char *g_pakDefaultNoteNameFixed;
 
-extern char D_800DDEC0[];
+extern char s_pakNoteSizeFormatEuropean[];
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800EE534[], D_800EE540[];
+extern char s_pakNoteExtendedLabelFormatEuropean[], s_pakNoteLabelFormatEuropean[];
 #else
 extern char g_noteInfoIntFormat[];
 
@@ -30,15 +30,15 @@ extern void PAKInterface_ScrollNoteList(s32, s32);
 enum { PAK_RESOURCE_2D7 = 750, PAK_RESOURCE_2D8 = 749, PAK_RESOURCE_2DB = 746, PAK_RESOURCE_2DC = 745, PAK_RESOURCE_2DD = 747 };
 #elif defined(VERSION_EU)
 
-extern u8 D_801462C8[];
+extern u8 g_gameSettings[];
 
-extern char *D_800E27B4[], *D_800E1394[];
+extern char *g_pakDefaultNoteNamesLocalized[], *g_slotSelectionTextReferenceShared7[];
 enum { PAK_RESOURCE_2D7 = 727, PAK_RESOURCE_2D8 = 728, PAK_RESOURCE_2DB = 731, PAK_RESOURCE_2DC = 732, PAK_RESOURCE_2DD = 733 };
 #elif defined(VERSION_EU_X)
 
-extern u8 D_801462C8[];
+extern u8 g_gameSettings[];
 
-extern char *D_800DE03C[], *D_800DD124[];
+extern char *g_pakUnnamedNoteTextsEuX[], *g_slotSelectionTextReferenceShared6[];
 
 enum { PAK_RESOURCE_2D7 = 753, PAK_RESOURCE_2D8 = 751, PAK_RESOURCE_2DB = 754, PAK_RESOURCE_2DC = 755, PAK_RESOURCE_2DD = 756 };
 #else
@@ -72,7 +72,7 @@ void PAKInterface_LoadNoteList(s32 player)
         note_status = Note_ReadNoteInfo(player, i, &status, name, ext, &size, extra1, extra2);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        settings = (GameLocalizationState *)D_801462C8;
+        settings = (GameLocalizationState *)g_gameSettings;
 
 #else
 #endif
@@ -80,30 +80,30 @@ void PAKInterface_LoadNoteList(s32 player)
             if (status == 1) {
                 if (Note_ContainsInvalidNameByte(name, 16) == 1) {
 #if defined(VERSION_EU)
-                    XPlus_CopyString(name, ((D_800E27B4)[settings->language]));
+                    XPlus_CopyString(name, ((g_pakDefaultNoteNamesLocalized)[settings->language]));
 #elif defined(VERSION_EU_X)
-                    XPlus_CopyString(name, ((D_800DE03C)[settings->language]));
+                    XPlus_CopyString(name, ((g_pakUnnamedNoteTextsEuX)[settings->language]));
 #else
-                    XPlus_CopyString(name, (D_800D3758));
+                    XPlus_CopyString(name, (g_pakDefaultNoteNameFixed));
 #endif
                 }
-                XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, name);
-                XStdio_FormatBuffer(D_800E54A4->players[player].noteTexts[i].size,
+                XPlus_CopyString(g_pakProfileScreenState->players[player].noteTexts[i].name, name);
+                XStdio_FormatBuffer(g_pakProfileScreenState->players[player].noteTexts[i].size,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-D_800DDEC0,
+s_pakNoteSizeFormatEuropean,
 #else
 g_noteInfoIntFormat,
 #endif
  size);
                 if (ext[0] != 0) {
-                    XStdio_FormatBuffer(D_800E54A4->players[player].noteTexts[i].label,
+                    XStdio_FormatBuffer(g_pakProfileScreenState->players[player].noteTexts[i].label,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-D_800EE534,
+s_pakNoteExtendedLabelFormatEuropean,
 #else
 controller_pak_note_label_format,
 #endif
  i + 1,
-                                  D_800E54A4->players[player].noteTexts[i].name, ext);
+                                  g_pakProfileScreenState->players[player].noteTexts[i].name, ext);
                     continue;
                 }
                 goto numbered;
@@ -112,64 +112,64 @@ controller_pak_note_label_format,
             failed = 1;
         }
 #if defined(VERSION_EU)
-        XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((D_800E1394)[settings->language]));
+        XPlus_CopyString(g_pakProfileScreenState->players[player].noteTexts[i].name, ((g_slotSelectionTextReferenceShared7)[settings->language]));
 #elif defined(VERSION_EU_X)
-        XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((D_800DD124)[settings->language]));
+        XPlus_CopyString(g_pakProfileScreenState->players[player].noteTexts[i].name, ((g_slotSelectionTextReferenceShared6)[settings->language]));
 #else
-        XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((char *)D_800D3250[0]));
+        XPlus_CopyString(g_pakProfileScreenState->players[player].noteTexts[i].name, ((char *)g_slotSelectionTextReferenceShared1[0]));
 #endif
-        XStdio_FormatBuffer(D_800E54A4->players[player].noteTexts[i].size,
+        XStdio_FormatBuffer(g_pakProfileScreenState->players[player].noteTexts[i].size,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-D_800DDEC0,
+s_pakNoteSizeFormatEuropean,
 #else
 g_noteInfoIntFormat,
 #endif
  0);
     numbered:
-        XStdio_FormatBuffer(D_800E54A4->players[player].noteTexts[i].label,
+        XStdio_FormatBuffer(g_pakProfileScreenState->players[player].noteTexts[i].label,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-D_800EE540,
+s_pakNoteLabelFormatEuropean,
 #else
-D_800DDEC0,
+s_pakNoteSizeFormatEuropean,
 #endif
  i + 1,
-                      D_800E54A4->players[player].noteTexts[i].name);
+                      g_pakProfileScreenState->players[player].noteTexts[i].name);
     }
     if (failed == 0) {
         /* the hub EC30 returns the item view; Label is this unit's text-bearing view of it */
-        item = (Label *)Node_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D8);
+        item = (Label *)Node_FindWidgetByResourceId(g_pakProfileScreenState->players[player].menuWidget, PAK_RESOURCE_2D8);
         if (Note_GetFreePages(player, &size) == 0) {
-            XStdio_FormatBuffer(D_800E54A4->players[player].freeText,
+            XStdio_FormatBuffer(g_pakProfileScreenState->players[player].freeText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-D_800DDEC0,
+s_pakNoteSizeFormatEuropean,
 #else
 g_noteInfoIntFormat,
 #endif
  size);
-            item->text = D_800E54A4->players[player].freeText;
-            item = (Label *)Node_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D7);
+            item->text = g_pakProfileScreenState->players[player].freeText;
+            item = (Label *)Node_FindWidgetByResourceId(g_pakProfileScreenState->players[player].menuWidget, PAK_RESOURCE_2D7);
             size = PAKInterface_GetRecordsNoteSize();
-            XStdio_FormatBuffer(D_800E54A4->players[player].usedText,
+            XStdio_FormatBuffer(g_pakProfileScreenState->players[player].usedText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-D_800DDEC0,
+s_pakNoteSizeFormatEuropean,
 #else
 g_noteInfoIntFormat,
 #endif
  Note_BytesToPakPages(size));
-            item->text = D_800E54A4->players[player].usedText;
+            item->text = g_pakProfileScreenState->players[player].usedText;
         } else {
             failed = 1;
         }
     }
     if (failed == 1) {
-        D_800E54A4->players[player].state = failed;
+        g_pakProfileScreenState->players[player].state = failed;
         PAKInterface_RefreshPlayerPanel(player, PAK_RESOURCE_2DB);
         return;
     }
-    D_800E54A4->players[player].slot = -1;
-    D_800E54A4->players[player].scroll = 0;
-    D_800E54A4->players[player].labels[0] = Node_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DB);
-    D_800E54A4->players[player].labels[1] = Node_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DC);
-    D_800E54A4->players[player].labels[2] = Node_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DD);
+    g_pakProfileScreenState->players[player].slot = -1;
+    g_pakProfileScreenState->players[player].scroll = 0;
+    g_pakProfileScreenState->players[player].labels[0] = Node_FindWidgetByResourceId(g_pakProfileScreenState->players[player].menuWidget, PAK_RESOURCE_2DB);
+    g_pakProfileScreenState->players[player].labels[1] = Node_FindWidgetByResourceId(g_pakProfileScreenState->players[player].menuWidget, PAK_RESOURCE_2DC);
+    g_pakProfileScreenState->players[player].labels[2] = Node_FindWidgetByResourceId(g_pakProfileScreenState->players[player].menuWidget, PAK_RESOURCE_2DD);
     PAKInterface_ScrollNoteList(player, 1);
 }

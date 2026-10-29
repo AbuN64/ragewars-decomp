@@ -10,9 +10,9 @@
 struct ObjRecV5;
 typedef struct ObjRecV5 ObjRecV5;
 
-extern float D_800C2B5C_de;
+extern float g_playerTargetFacingTurnThreshold;
 
-extern float D_800C2B64_de;
+extern float g_playerTargetFacingBodyYawPeriod;
 
 
 
@@ -24,44 +24,44 @@ struct Scores {
     char pad[0x1c];
     short score[8];
 };
-struct ObjRecAt16E0V1;
+struct FragTagPlayerListNode;
 struct Scores;
-struct ObjRecAt16E0V1 {
+struct FragTagPlayerListNode {
     char pad[0x5d4];
-    int unk5D4;
-    struct Scores *unk5D8;
+    int playerIndex;
+    struct Scores *scores;
     char pad5dc[0x1104];
-    struct ObjRecAt16E0V1 *unk16E0;
+    struct FragTagPlayerListNode *next;
 };
 
-struct ObjRecAt16E0V1;
+struct FragTagPlayerListNode;
 struct Root;
 struct Root {
     char pad[0x20];
-    struct ObjRecAt16E0V1 *unk20;
+    struct FragTagPlayerListNode *players;
 };
 
 struct Stats;
 typedef struct Stats Stats;
 
-struct Shape_typemap_165;
+struct CacheResourceBlockView;
 struct ObjRecV6;
 struct ObjRecV6 {
     char pad0[0x2F0];
-    Triple unk2F0;
+    Triple savedPosition;
     char pad2F0[0x2FC - 0x2F0 - sizeof(Triple)];
     s32 unk2FC;
     char pad2FC[0x344 - 0x2FC - sizeof(s32)];
-    struct Shape_typemap_165 unk344;
-    char pad344[0x354 - 0x344 - sizeof(struct Shape_typemap_165)];
+    struct CacheResourceBlockView unk344;
+    char pad344[0x354 - 0x344 - sizeof(struct CacheResourceBlockView)];
     f32 unk354;
     char pad354[0x3E8 - 0x354 - sizeof(f32)];
-    s32 unk3E8;
+    s32 savedFlags;
 };
 
-extern float D_800C2BE8_de;
+extern float g_playerMatchCountdownDigitLimit;
 
-extern float D_800C2B50_de;
+extern float g_playerTargetFacingPositiveWrapThreshold;
 
 struct HudGlobals;
 struct HudGlobals {
@@ -82,8 +82,8 @@ struct SubActor {
     u8 unk90;
 };
 
-struct ObjRecAt16E0V2;
-typedef struct ObjRecAt16E0V2 ObjRecAt16E0V2;
+struct FragTagLinkedActorView;
+typedef struct FragTagLinkedActorView FragTagLinkedActorView;
 
 struct PlayerCode80225D1080229FA0;
 struct PlayerCode80225D1080229FA0 {
@@ -91,22 +91,22 @@ struct PlayerCode80225D1080229FA0 {
     u8 unk92;
     u8 unk93;
 };
-struct Obj_func_80229FA0_de;
+struct TransientDamagePlayerView;
 struct PlayerCode80225D1080229FA0;
-struct Obj_func_80229FA0_de {
-    u8 unk0;
+struct TransientDamagePlayerView {
+    u8 actorKind;
     char pad1[227];
-    unsigned short unkE4;
+    unsigned short objectId;
     char pade6[26];
-    int unk100;
+    int flags;
     char pad104[40];
-    struct Obj_func_80229FA0_de * unk12C;
+    struct TransientDamagePlayerView * projectileOwner;
     char pad130[168];
-    struct Obj_func_80229FA0_de * unk1D8;
+    struct TransientDamagePlayerView * player;
     char pad1dc[1020];
-    struct PlayerCode80225D1080229FA0 * unk5D8;
+    struct PlayerCode80225D1080229FA0 * profile;
     char pad5dc[3700];
-    int unk1450;
+    int computerControlled;
 };
 
 struct Held;
@@ -118,10 +118,10 @@ struct Rules;
 struct Round;
 typedef struct Round Round;
 
-extern float D_800C2B60_de;
+extern float g_playerTargetFacingBodyYawThreshold;
 
-struct ObjectLinks16E4_2;
-struct ObjectLinks16E4_2 {
+struct TransientPlayerResetView;
+struct TransientPlayerResetView {
     char pad0[0x70];
     s32 unk_70;
     char pad70[0x358 - 0x70 - sizeof(s32)];
@@ -130,8 +130,8 @@ struct ObjectLinks16E4_2 {
     void * unk_16E0;
 };
 
-struct ObjectState5E8;
-struct ObjectState5E8 {
+struct PlayerDamageVisualState;
+struct PlayerDamageVisualState {
     char pad0[0x170];
     char unk_170;
     char pad170[0x5E4 - 0x170 - sizeof(char)];
@@ -139,7 +139,7 @@ struct ObjectState5E8 {
 };
 
 
-extern float D_800C2B58_de;
+extern float g_playerTargetFacingYawPeriod;
 
 struct WorldWeaponsUpdateWorldPlayers;
 struct WorldWeaponsUpdateWorldPlayers {
@@ -160,7 +160,7 @@ struct Receiver {
 };
 
 
-extern float D_800C2C08_de;
+extern float g_playerMatchCountdownDigitOffsets;
 
 struct CPlayerDamageOverTime_t;
 struct CPlayerDamageOverTime_t {
@@ -191,7 +191,7 @@ struct Model;
 struct Mount;
 struct Profile;
 struct Record;
-struct RecordRecAt94;
+struct PlayerProfileStatusView;
 struct Rider;
 struct Settings;
 struct Shared_Body;
@@ -204,8 +204,8 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 
-struct World_func_802283B8_de;
-struct World_func_802283B8_de {
+struct PlayerWorldActorTables;
+struct PlayerWorldActorTables {
     char pad0[0x20];
     SharedPlayer *players;
 };
@@ -213,7 +213,7 @@ struct World_func_802283B8_de {
 struct IntegerStateB4C;
 typedef struct IntegerStateB4C IntegerStateB4C;
 
-extern void func_80225F44_de();
+extern void Playerai_UpdateMountedMovement();
 
 struct ViewState;
 struct ViewState {
@@ -261,53 +261,53 @@ struct ActorNode {
 struct Receiver;
 typedef struct Receiver Receiver;
 
-struct ActorRecAt86C;
-typedef struct ActorRecAt86C ActorRecAt86C;
+struct FragTagSelectionActorView;
+typedef struct FragTagSelectionActorView FragTagSelectionActorView;
 
-struct ObjRecAt16E0V2;
-struct ObjRecAt16E0V2 {
+struct FragTagLinkedActorView;
+struct FragTagLinkedActorView {
     char pad0[0xC4];
     s32 unkC4;
     char padC4[0xD0 - 0xC4 - sizeof(s32)];
     s32 unkD0;
     char padD0[0x100 - 0xD0 - sizeof(s32)];
-    s32 unk100;
+    s32 flags;
     char pad100[0x2E8 - 0x100 - sizeof(s32)];
     char unk2E8;
     char pad2E8[0x5DC - 0x2E8 - sizeof(char)];
-    void * unk5DC;
+    void * owner;
     char pad5DC[0x16E0 - 0x5DC - sizeof(void*)];
-    void * unk16E0;
+    void * next;
 };
 
-extern float D_800C2B54_de;
+extern float g_playerTargetFacingNegativeWrapThreshold;
 
-struct IntegerState1230;
-typedef struct IntegerState1230 IntegerState1230;
+struct DamageSourceFlagsView;
+typedef struct DamageSourceFlagsView DamageSourceFlagsView;
 
-struct IntegerState948;
-struct IntegerState948 {
+struct TransientPlayerWorldCounts;
+struct TransientPlayerWorldCounts {
     char pad0[0x944];
     s32 itemCount1;
 };
 
-struct ObjectLinks94C;
-typedef struct ObjectLinks94C ObjectLinks94C;
+struct TransientWorldItemSlotView;
+typedef struct TransientWorldItemSlotView TransientWorldItemSlotView;
 
-struct IntegerState948;
-typedef struct IntegerState948 IntegerState948;
+struct TransientPlayerWorldCounts;
+typedef struct TransientPlayerWorldCounts TransientPlayerWorldCounts;
 
-extern float D_800C2BF0_de;
+extern float g_playerMatchCountdownCenterXScale;
 
-struct ObjectLinks16E4;
-typedef struct ObjectLinks16E4 ObjectLinks16E4;
+struct FragTagPlayerListView;
+typedef struct FragTagPlayerListView FragTagPlayerListView;
 
-struct ObjectLinks148;
-typedef struct ObjectLinks148 ObjectLinks148;
+struct TransientWorldPlayerSlotView;
+typedef struct TransientWorldPlayerSlotView TransientWorldPlayerSlotView;
 
 
-struct ObjectLinks16E4;
-struct ObjectLinks16E4 {
+struct FragTagPlayerListView;
+struct FragTagPlayerListView {
     char pad0[0x5D8];
     char * unk_5D8;
     char pad5D8[0x5DC - 0x5D8 - sizeof(char*)];
@@ -367,11 +367,11 @@ struct MenuWeaponsUpdateWorldPlayers {
     MenuRules rules;
 };
 
-struct Damage_func_80229FA0_de;
-struct Obj_func_80229FA0_de;
-struct Damage_func_80229FA0_de {
-    struct Obj_func_80229FA0_de *unk0;
-    int unk4;
+struct TransientPlayerDamagePacket;
+struct TransientDamagePlayerView;
+struct TransientPlayerDamagePacket {
+    struct TransientDamagePlayerView *source;
+    int amount;
 };
 
 struct WorldWeaponsUpdateWorldPlayers;
@@ -395,7 +395,7 @@ struct HudState {
 struct Player16C0;
 typedef struct Player16C0 Player16C0;
 
-extern float D_800C2BF4_de;
+extern float g_playerMatchCountdownSpriteScale;
 
 struct Player16C0;
 struct Player16C0 {
@@ -405,8 +405,8 @@ struct Player16C0 {
     UnitMtx markers[2];
 };
 
-struct ObjectLinks16E4_2;
-typedef struct ObjectLinks16E4_2 ObjectLinks16E4_2;
+struct TransientPlayerResetView;
+typedef struct TransientPlayerResetView TransientPlayerResetView;
 
 struct Body;
 struct Controller;
@@ -431,8 +431,8 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 
-struct ObjectLinks148;
-struct ObjectLinks148 {
+struct TransientWorldPlayerSlotView;
+struct TransientWorldPlayerSlotView {
     char pad0[0x144];
     void * unk_144;
 };
@@ -447,15 +447,15 @@ struct Inventory;
 typedef struct Inventory Inventory;
 
 
-struct ObjectLinks94C;
-struct ObjectLinks94C {
+struct TransientWorldItemSlotView;
+struct TransientWorldItemSlotView {
     unsigned char padding_0[2376];
     void *unk_948;
 };
 
 
-struct Damage_func_80229FA0_de;
-typedef struct Damage_func_80229FA0_de Damage_func_80229FA0_de;
+struct TransientPlayerDamagePacket;
+typedef struct TransientPlayerDamagePacket TransientPlayerDamagePacket;
 
 struct ViewState;
 typedef struct ViewState ViewState;
@@ -469,65 +469,65 @@ typedef struct MenuWeaponsUpdateWorldPlayers MenuWeaponsUpdateWorldPlayers;
 struct RulesWeaponsDrawTintedPlayer;
 typedef struct RulesWeaponsDrawTintedPlayer RulesWeaponsDrawTintedPlayer;
 
-struct Obj_func_80229FA0_de;
-typedef struct Obj_func_80229FA0_de Obj_func_80229FA0_de;
+struct TransientDamagePlayerView;
+typedef struct TransientDamagePlayerView TransientDamagePlayerView;
 
 struct CPlayerPool_t;
-extern s32 func_80229A80_de(struct CPlayerPool_t *game);
+extern s32 Playerai_FindHighestScoringPlayerIndex(struct CPlayerPool_t *game);
 
-extern float D_800C2BE0_de;
+extern float g_playerMatchCountdownDigitScales;
 
-extern float D_800C2BDC_de;
+extern float g_playerMatchCountdownTimeScale;
 
-union func_802285C4_S2_U11BC;
-typedef union func_802285C4_S2_U11BC func_802285C4_S2_U11BC;
+union PlayerResourceHandle;
+typedef union PlayerResourceHandle PlayerResourceHandle;
 
-union func_802285C4_S2_U11BC;
-union func_802285C4_S2_U11BC {
+union PlayerResourceHandle;
+union PlayerResourceHandle {
     void * v0;
     s32 v1;
 };
 
-struct Shape_typemap_165;
+struct CacheResourceBlockView;
 struct ObjRecV5;
 struct ObjRecV5 {
     char pad0[0x8];
-    Triple unk8;
+    Triple currentPosition;
     char pad8[0x14 - 0x8 - sizeof(Triple)];
     s32 unk14;
     char pad14[0x5C - 0x14 - sizeof(s32)];
-    struct Shape_typemap_165 unk5C;
-    char pad5C[0x6C - 0x5C - sizeof(struct Shape_typemap_165)];
+    struct CacheResourceBlockView unk5C;
+    char pad5C[0x6C - 0x5C - sizeof(struct CacheResourceBlockView)];
     f32 unk6C;
     char pad6C[0x10E - 0x6C - sizeof(f32)];
     u8 unk10E;
     char pad10E[0x2E8 - 0x10E - sizeof(u8)];
     Block unk2E8;
     char pad2E8[0x5DC - 0x2E8 - sizeof(Block)];
-    void * unk5DC;
+    void * view;
     char pad5DC[0x5EA - 0x5DC - sizeof(void*)];
     s16 unk5EA;
     char pad5EA[0x86C - 0x5EA - sizeof(s16)];
     s32 unk86C;
     char pad86C[0x11BC - 0x86C - sizeof(s32)];
-    func_802285C4_S2_U11BC unk11BC;
-    char pad11BC[0x11C0 - 0x11BC - sizeof(func_802285C4_S2_U11BC)];
-    func_802285C4_S2_U11BC unk11C0;
-    char pad11C0[0x11D8 - 0x11C0 - sizeof(func_802285C4_S2_U11BC)];
-    f32 unk11D8;
+    PlayerResourceHandle firstResourceHandle;
+    char pad11BC[0x11C0 - 0x11BC - sizeof(PlayerResourceHandle)];
+    PlayerResourceHandle secondResourceHandle;
+    char pad11C0[0x11D8 - 0x11C0 - sizeof(PlayerResourceHandle)];
+    f32 cooldown;
     char pad11D8[0x16E0 - 0x11D8 - sizeof(f32)];
-    char * unk16E0;
+    char * next;
 };
 
-struct World_func_802283B8_de;
-typedef struct World_func_802283B8_de World_func_802283B8_de;
+struct PlayerWorldActorTables;
+typedef struct PlayerWorldActorTables PlayerWorldActorTables;
 
 struct PlayerCode80225D10;
 struct PlayerCode80225D10 {
     char pad0[0xE4];
     u16 kind;
     char padE6[0x5D8 - 0xE6];
-    ObjRecAt8F *controls;
+    FragTagProfileFlagView *controls;
     struct GameplayCamera *camera;
     s32 state;
     s32 health;
@@ -548,11 +548,11 @@ struct PlayerCode80225D10 {
     s32 fixedAlpha;
 };
 
-struct ObjRecAt16E0V1;
-typedef struct ObjRecAt16E0V1 ObjRecAt16E0V1;
+struct FragTagPlayerListNode;
+typedef struct FragTagPlayerListNode FragTagPlayerListNode;
 
-struct IntegerState1230;
-struct IntegerState1230 {
+struct DamageSourceFlagsView;
+struct DamageSourceFlagsView {
     char pad0[0x100];
     s32 unk_100;
     char pad100[0x122C - 0x100 - sizeof(s32)];
@@ -567,14 +567,14 @@ struct RulesWeaponsDrawTintedPlayer {
     u8 colour;
 };
 
-extern float D_800C2BEC_de;
+extern float g_playerMatchCountdownFractionLimit;
 
 
-struct ObjectState5E8;
-typedef struct ObjectState5E8 ObjectState5E8;
+struct PlayerDamageVisualState;
+typedef struct PlayerDamageVisualState PlayerDamageVisualState;
 
-struct ActorRecAt86C;
-struct ActorRecAt86C {
+struct FragTagSelectionActorView;
+struct FragTagSelectionActorView {
     u8 pad000[0x3E8];
     s32 flags;
     u8 pad3EC[0x480];
@@ -598,30 +598,30 @@ struct ForcePlayer { u8 pad0[0x5D0]; s32 active; u8 pad5D4[0xC28]; f32 strength;
 typedef struct { u8 pad0[0x20]; ForcePlayer *head; } ForcePlayerList;
 typedef struct { u8 pad0[8]; CVector3 position; u8 pad14[8]; CVector3 velocity; u8 pad28[0x14C]; CVector3 direction; } ForceBody;
 
-extern char D_800C95D0;
-extern SharedMovement D_800C9510_de[2];
-extern CVector3 D_800C94D0_de;
+extern char g_playerRideViewAngleParameters;
+extern SharedMovement g_playerRideMovementParameters[2];
+extern CVector3 g_playerRideOffset;
 
 extern char s_playersText[];
 
-void func_8022C5AC_de(char *);
-void func_8022C5DC_de(void *);
-s32 func_8022C620_de(char *);
-extern f32 D_800C2BA0_de;
-extern f32 D_800C2BA4_de;
-extern f32 D_800C2BA8_de;
-extern f32 D_800C2BAC_de;
-extern f32 D_800C2BB0_de;
-extern f32 D_800C2BB4_de;
-extern f32 D_800C2BB8_de;
-extern f32 D_800C2BBC_de;
-extern s32 D_800C91B8_de;
+void Playerai_ClearPlayerResetFlags(char *);
+void Playerai_ResetAllPlayerHealth(void *);
+s32 Playerai_CountEligiblePlayers(char *);
+extern f32 g_fragTagRotatingBannerHalfWidth;
+extern f32 g_fragTagRotatingBannerSize;
+extern f32 g_fragTagRotatingViewCenterScale;
+extern f32 g_fragTagRotatingViewIconOffset;
+extern f32 g_fragTagChosenViewCenterScale;
+extern f32 g_fragTagChosenViewIconOffset;
+extern f32 g_fragTagChosenBannerHalfWidth;
+extern f32 g_fragTagChosenBannerSize;
+extern s32 g_pickupSavedMusicPlaybackEnabled;
 
 extern void Gobjinst_UpdateModelBounds(void *actorStorage, s32 model);
 
-extern void func_8022B60C_de(void *actor, f32 amount, void *source);
+extern void Playerai_AddReactionReserve(void *actor, f32 amount, void *source);
 
-extern void func_8022BC94_de(void *actorIn, s32 shadowMode);
+extern void Playerai_DrawCachedModelAndShadow(void *actorIn, s32 shadowMode);
 extern s32 Gobjinst_BuildAnimatedPose(void *actorStorage, s32 resourceRequestMode);
 struct WeaponMenuView;
 #endif

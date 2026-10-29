@@ -3,14 +3,14 @@
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
-struct StateRecAt34;
+struct MusicFadeState;
 
 extern void SoundElement_StopAudioByKey(s32 matchingKey);
 
 
-struct ObjectState40;
-struct ObjectState40 {
-    struct ContextRecAt2BC0 *context;
+struct MusicTrackVolumeView;
+struct MusicTrackVolumeView {
+    struct GameAudioContext *context;
     char pad4[0x10];
     s32 unk_14;
     char pad18[4];
@@ -29,25 +29,25 @@ struct ObjectState40 {
 
 extern void SoundElement_StopSoundsByIdentifier(s32 soundId);
 
-struct IntegerState2C_2;
+struct MusicStopState;
 
 extern void SoundElement_UpdateContext(void);
 
 
-extern float D_800C9108;
+extern float g_defaultMusicGain;
 
-extern float D_800C4000_de;
+extern float g_musicFadeGainStep;
 
 
-struct StateRecAt34;
-typedef struct StateRecAt34 StateRecAt34;
+struct MusicFadeState;
+typedef struct MusicFadeState MusicFadeState;
 
-extern float D_800C4038_de;
+extern float g_sequencerInitialVolumeScale;
 
 struct Track;
 
-struct IntegerState2C_2;
-typedef struct IntegerState2C_2 IntegerState2C_2;
+struct MusicStopState;
+typedef struct MusicStopState MusicStopState;
 
 
 
@@ -62,13 +62,13 @@ extern void SoundElement_InitializeContext(void);
 
 
 
-struct ObjectState40;
-typedef struct ObjectState40 ObjectState40;
+struct MusicTrackVolumeView;
+typedef struct MusicTrackVolumeView MusicTrackVolumeView;
 
-extern float D_800C4028_de;
+extern float g_sequencerVolumePercentScale;
 
-extern float D_800C4020_de;
-extern float D_800C4024_de;
+extern float g_sequencerVolumeScale;
+extern float g_sequencerOverrideVolumePercentScale;
 
 
 extern int SoundElement_PlayFlatInstrument(int index);
@@ -83,6 +83,6 @@ struct ALWaveTable_s;
 extern s32 alLoadParam(void *, s32, struct ALWaveTable_s *);
 extern s32 alEnvmixerParam(void *, s32, void *);
 
-struct ContextRecAt2BC0;
-extern s32 Sound_PlaySoundAtPosition(struct ContextRecAt2BC0 *, s32, CVector3, s32, s32);
+struct GameAudioContext;
+extern s32 Sound_PlaySoundAtPosition(struct GameAudioContext *, s32, CVector3, s32, s32);
 #endif

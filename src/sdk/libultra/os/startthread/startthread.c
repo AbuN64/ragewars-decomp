@@ -1,6 +1,6 @@
 #include "sdk/thread_queue.h"
 #include "include_asm.h"
-#include "COMMON/LONE/D_800D5268_de.H"
+#include "COMMON/LONE/OS_RUNNABLE_THREAD_QUEUE.H"
 #include "COMMON/NODERECAT1C.H"
 #include "COMMON/CTX.H"
 #include "TYPES.H"
@@ -10,52 +10,52 @@
 
 /* 802C0840_3.CPP */
 #if defined(VERSION_DE)
-unsigned char D_auto_func_802BB864_de_padding_BC464[12] = { 0x10, 0x40, 0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x54, 0x45, 0x00, 0x04 };
+unsigned char g_StartthreadTrailingBytes[12] = { 0x10, 0x40, 0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x54, 0x45, 0x00, 0x04 };
 #endif
 
 /* startthread.c */
-extern ThreadNode *D_800D5270;
+extern ThreadNode *g_osRunningThread;
 
 extern void func_802BC36C_de(ThreadNode **queue, ThreadNode *node);
 void osStartThread(void *thread) {
-    ThreadNode *arg0 = (ThreadNode *)thread;
+    ThreadNode *threadStorage = (ThreadNode *)thread;
     ThreadNode **sentinel;
     u32 token;
     token = __osDisableInt();
-    if (arg0->state == 1) {
+    if (threadStorage->state == 1) {
         goto state_one;
     }
-    if (arg0->state != 8) {
+    if (threadStorage->state != 8) {
         goto state_done;
     }
-    arg0->state = 2;
-    __osEnqueueThread((ThreadNode **)&D_800D5268_de, arg0);
+    threadStorage->state = 2;
+    __osEnqueueThread((ThreadNode **)&g_osRunnableThreadQueue, threadStorage);
     goto state_done;
 state_one:
-    if (arg0->queue == 0) {
+    if (threadStorage->queue == 0) {
         goto insert_arg;
     }
-    sentinel = (ThreadNode **)&D_800D5268_de;
-    if (arg0->queue == sentinel) {
+    sentinel = (ThreadNode **)&g_osRunnableThreadQueue;
+    if (threadStorage->queue == sentinel) {
 insert_arg:
-        arg0->state = 2;
-        __osEnqueueThread((ThreadNode **)&D_800D5268_de, arg0);
+        threadStorage->state = 2;
+        __osEnqueueThread((ThreadNode **)&g_osRunnableThreadQueue, threadStorage);
     } else {
-        arg0->state = 8;
-        __osEnqueueThread(arg0->queue, arg0);
-        __osEnqueueThread(sentinel, __osPopThread(arg0->queue));
+        threadStorage->state = 8;
+        __osEnqueueThread(threadStorage->queue, threadStorage);
+        __osEnqueueThread(sentinel, __osPopThread(threadStorage->queue));
     }
 state_done:
-    if (D_800D5270 == 0) {
-        func_802BC850_eu_x();
-    } else if (D_800D5270->priority < (*(ThreadNode **)&D_800D5268_de)->priority) {
-        D_800D5270->state = 2;
-        func_802BC36C_de((ThreadNode **)&D_800D5268_de, D_800D5270);
+    if (g_osRunningThread == 0) {
+        __osDispatchThread();
+    } else if (g_osRunningThread->priority < (*(ThreadNode **)&g_osRunnableThreadQueue)->priority) {
+        g_osRunningThread->state = 2;
+        func_802BC36C_de((ThreadNode **)&g_osRunnableThreadQueue, g_osRunningThread);
     }
     __osRestoreInt(token);
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802BB794[12] =
+char s_StartthreadEamTriangleMText[12] =
     "eamTriangleM";
 #endif

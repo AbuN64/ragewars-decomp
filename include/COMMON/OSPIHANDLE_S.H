@@ -40,5 +40,5 @@ struct OSPiHandle_s {
 
 struct OSPiHandle_s;
 
-extern OSPiHandle_s D_801486C0;
+extern OSPiHandle_s g_diskPiHandle;
 #endif

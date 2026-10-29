@@ -1,41 +1,41 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/EFFECTRENDER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "COMMON/RG.H"
 
 
 
 #if defined(VERSION_DE)
-typedef struct { char pad0[0x80]; s8 choice; } Func_8043DB50_Slot;
-typedef struct { char pad0[0x5D8]; Func_8043DB50_Slot *slot; s32 pad5DC; s32 style; } Func_8043DB50_Rec;
-typedef struct { char pad0[0x1C]; Func_8043DB50_Rec *rec; struct ControllerProfile *player; } Func_8043DB50_Obj;
-extern s16 D_auto_800E1DAA[][2];
-extern u8 D_auto_800C9237[][4];
-extern u8 D_auto_800C9233[][4];
+typedef struct { char pad0[0x80]; s8 choice; } CharacterPreviewChoiceView;
+typedef struct { char pad0[0x5D8]; CharacterPreviewChoiceView *slot; s32 pad5DC; s32 style; } CharacterPreviewPlayerView;
+typedef struct { char pad0[0x1C]; CharacterPreviewPlayerView *rec; struct ControllerProfile *player; } CharacterPreviewMenuContext;
+extern s16 g_characterPreviewStyleSounds[][2];
+extern u8 g_characterPreviewLeftChoices[][4];
+extern u8 g_characterPreviewRightChoices[][4];
 extern s32 Control_IsAButtonPressed(struct ControllerProfile *object);
 extern void Player_StartPlayerAnimation(void *rec, s32 choice);
 extern s32 SoundElement_PlayFlatSound(s32 id);
 extern void Menu_AllocateMenu(s32 a, void *obj, void *res);
 extern s32 Menu_StepValue(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
 extern void Menu_SelectPreviewModel(s32 a, s32 b, s32 c);
-/* Steps the choice byte at 0x80 of the slot the record at 0x1C of arg1 points to: while the player passes func_8026437C_de it plays the sound for the record's style and runs the resource D_0044FA6C; otherwise Menu_StepValue moves the choice and the remapping tables D_auto_800C9237 (Control_IsLeftPressed) and D_auto_800C9233 (Control_IsRightPressed or func_8026437C_de) are applied before the display is refreshed; returns 1 or 0. */
-s32 Items_HandleCharacterPreviewSelectionGerman(s32 widget, Func_8043DB50_Obj *arg1, s32 owner) {
-    Func_8043DB50_Rec *rec = arg1->rec;
-    Func_8043DB50_Slot *slot = rec->slot;
-    if (Control_IsAButtonPressed(arg1->player) != 0) {
+/* Steps the choice byte at 0x80 of the slot the record at 0x1C of arg1 points to: while the player passes func_8026437C_de it plays the sound for the record's style and runs the resource g_characterPreviewMenuRomResource; otherwise Menu_StepValue moves the choice and the remapping tables g_characterPreviewLeftChoices (Control_IsLeftPressed) and g_characterPreviewRightChoices (Control_IsRightPressed or func_8026437C_de) are applied before the display is refreshed; returns 1 or 0. */
+s32 Items_HandleCharacterPreviewSelectionGerman(s32 widget, CharacterPreviewMenuContext *menuContext, s32 owner) {
+    CharacterPreviewPlayerView *rec = menuContext->rec;
+    CharacterPreviewChoiceView *slot = rec->slot;
+    if (Control_IsAButtonPressed(menuContext->player) != 0) {
         Player_StartPlayerAnimation(rec, slot->choice);
-        SoundElement_PlayFlatSound(D_auto_800E1DAA[rec->style][0]);
-        Menu_AllocateMenu(owner, arg1, D_0044FA6C);
+        SoundElement_PlayFlatSound(g_characterPreviewStyleSounds[rec->style][0]);
+        Menu_AllocateMenu(owner, menuContext, g_characterPreviewMenuRomResource);
         return 1;
     }
-    slot->choice = Menu_StepValue(arg1, slot->choice, 1, 0, 0x12, 1);
-    if (Control_IsLeftPressed(arg1->player) != 0) {
-        slot->choice = D_auto_800C9237[slot->choice][0];
+    slot->choice = Menu_StepValue(menuContext, slot->choice, 1, 0, 0x12, 1);
+    if (Control_IsLeftPressed(menuContext->player) != 0) {
+        slot->choice = g_characterPreviewLeftChoices[slot->choice][0];
     }
-    if (Control_IsRightPressed(arg1->player) != 0 || Control_IsAButtonPressed(arg1->player) != 0) {
-        slot->choice = D_auto_800C9233[slot->choice][0];
+    if (Control_IsRightPressed(menuContext->player) != 0 || Control_IsAButtonPressed(menuContext->player) != 0) {
+        slot->choice = g_characterPreviewRightChoices[slot->choice][0];
     }
     Player_StartPlayerAnimation(rec, slot->choice);
     Menu_SelectPreviewModel(widget, 0xB, slot->choice);
@@ -43,66 +43,66 @@ s32 Items_HandleCharacterPreviewSelectionGerman(s32 widget, Func_8043DB50_Obj *a
 }
 #endif
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(NON_MATCHING)
-s32 Items_SelectToggleRowTextGerman(TextBoundsText *arg0) {
-    s32 temp_v0;
+s32 Items_SelectToggleRowTextGerman(TextBoundsText *textRow) {
+    s32 toggleRow;
 
-    temp_v0 = arg0->value;
-    switch (temp_v0) {
+    toggleRow = textRow->value;
+    switch (toggleRow) {
     case 2:
     default:
-        if (D_801462C8.menuToggles[0] != 0) {
-            arg0->text = &D_800D3D14;
+        if (g_gameSettings.menuToggles[0] != 0) {
+            textRow->text = &g_menuToggleRow2EnabledText;
         } else {
-            arg0->text = &D_800D3D18;
+            textRow->text = &g_menuToggleRow2DisabledText;
         }
         break;
     case 3:
-        if (D_801462C8.menuToggles[1] != 0) {
-            arg0->text = &D_800D3D1C;
+        if (g_gameSettings.menuToggles[1] != 0) {
+            textRow->text = &g_menuToggleRow3EnabledText;
         } else {
-            arg0->text = &D_800D3D20;
+            textRow->text = &g_menuToggleRow3DisabledText;
         }
         break;
     case 4:
-        if (D_801462C8.menuToggles[2] != 0) {
-            arg0->text = &D_800D3D24;
+        if (g_gameSettings.menuToggles[2] != 0) {
+            textRow->text = &g_menuToggleRow4EnabledText;
         } else {
-            arg0->text = &D_800D3D28;
+            textRow->text = &g_menuToggleRow4DisabledText;
         }
         break;
     case 5:
-        if (D_801462C8.menuToggles[3] != 0) {
-            arg0->text = &D_800D3D2C;
+        if (g_gameSettings.menuToggles[3] != 0) {
+            textRow->text = &g_menuToggleRow5EnabledText;
         } else {
-            arg0->text = &D_800D3D30;
+            textRow->text = &g_menuToggleRow5DisabledText;
         }
         break;
     case 6:
-        if (D_801462C8.menuToggles[4] != 0) {
-            arg0->text = &D_800D3D34;
+        if (g_gameSettings.menuToggles[4] != 0) {
+            textRow->text = &g_menuToggleRow6EnabledText;
         } else {
-            arg0->text = &D_800D3D38;
+            textRow->text = &g_menuToggleRow6DisabledText;
         }
         break;
     case 7:
-        if (D_801462C8.menuToggles[5] != 0) {
-            arg0->text = &D_800D3D3C;
+        if (g_gameSettings.menuToggles[5] != 0) {
+            textRow->text = &g_menuToggleRow7EnabledText;
         } else {
-            arg0->text = &D_800D3D40;
+            textRow->text = &g_menuToggleRow7DisabledText;
         }
         break;
     case 8:
-        if (D_801462C8.menuToggles[6] != 0) {
-            arg0->text = &D_800D3D44;
+        if (g_gameSettings.menuToggles[6] != 0) {
+            textRow->text = &g_menuToggleRow8EnabledText;
         } else {
-            arg0->text = &D_800D3D48;
+            textRow->text = &g_menuToggleRow8DisabledText;
         }
         break;
     case 9:
-        if (D_801462C8.menuToggles[8] != 0) {
-            arg0->text = &D_800D3D4C;
+        if (g_gameSettings.menuToggles[8] != 0) {
+            textRow->text = &g_menuToggleRow9EnabledText;
         } else {
-            arg0->text = &D_800D3D50;
+            textRow->text = &g_menuToggleRow9DisabledText;
         }
         break;
     }

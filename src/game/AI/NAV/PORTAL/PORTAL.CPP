@@ -5,178 +5,178 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/INTEGERSTATE2C.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "AI/NAV/PORTAL_LINKNAVIGATIONOBJECTS.H"
 #include "COMMON/LISTHEADER.H"
-#include "COMMON/OBJECTLINKS14.H"
+#include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
 
 /* 800C6E58.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8020BC50_C7A58[2] = {
+const unsigned int g_Portal_SearchRelatedGoalPathConstantWords_de_eu_eu_x_us[2] = {
     0xBF800000, 0xBF800000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8020BC50_C7A58_us_rev1.c */
-const unsigned int D_blob_74d7be23a8e853412850[2] = {
+const unsigned int g_Portal_SearchRelatedGoalPathConstantWords_us_rev1[2] = {
     0xBF800000, 0xBF800000,
 };
 #endif
 
 /* 800C6E60.CPP */
 /* ROM-grounded data: src/rw_pool_8020BE7C_C7A60_us_rev1.c */
-const unsigned int D_blob_785e6c1675c45c6d0eb6[1] = {
+const unsigned int g_Portal_FindPortalRouteConstantWords[1] = {
     0x4E6E6B28,
 };
 
 /* 800C6E64.CPP */
 /* ROM-grounded data: src/rw_pool_8020C078_C7A64_us_rev1.c */
-const unsigned int D_blob_8b2c36613f6e931f799c[1] = {
+const unsigned int g_Portal_SearchPortalRouteConstantWords[1] = {
     0x4B189680,
 };
 
 /* 800C6E68.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_8020C2E8_C7A68[2] = {
+const unsigned int g_Portal_EstimateGoalDistanceConstantWords_de_eu_eu_x_us[2] = {
     0xBF800000, 0xBF800000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8020C2E8_C7A68_us_rev1.c */
-const unsigned int D_blob_b5e321df298d67e78639[2] = {
+const unsigned int g_Portal_EstimateGoalDistanceConstantWords_us_rev1[2] = {
     0xBF800000, 0xBF800000,
 };
 #endif
 
 /* 800C6E70.CPP */
 /* ROM-grounded data: src/rw_pool_8020C5A0_C7A70_us_rev1.c */
-const unsigned int D_blob_346f9c890bf7cff82b8a[3] = {
+const unsigned int g_Portal_SearchPathConstantWords[3] = {
     0xBF800000, 0xBF800000, 0x47480000,
 };
 
 /* 800C6E7C.CPP */
 /* ROM-grounded data: src/rw_pool_8020CA10_C7A7C_us_rev1.c */
-const unsigned int D_blob_8d7cc47a80dd77f04129[2] = {
+const unsigned int g_Portal_InitSearchNodeConstantWords[2] = {
     0xBF800000, 0x41700000,
 };
 
 /* 800C6E84_6.CPP */
 /* ROM-grounded data: src/rw_pool_8020CD74_C7A84_us_rev1.c */
-const unsigned int D_blob_bfa68451c3e10a33f992[1] = {
+const unsigned int g_Portal_IsNodeMovementBlockedConstantWords[1] = {
     0x4275C28F,
 };
 
 /* 80208000_6.CPP */
-/** Returns the difference between the constant after D_800C6E20 and Scaled_GetDifficultyEngagementAdjustment's result, scaled by D_800C6E28. */
+/** Returns the difference between the constant after g_actionSettingsRandomRange and Scaled_GetDifficultyEngagementAdjustment's result, scaled by g_portalEngagementScale. */
 
 extern f32 Scaled_GetDifficultyEngagementAdjustment(AiController *controller);
 
-extern f32 D_800C1D34_de;
+extern f32 g_portalEngagementBase;
 
 /* Find the nearest world object matching each active target ID, clearing its active flag when no object is close enough. */
 
-f32 Graphu64_GetPointDistance(void *arg0, void *arg1);
+f32 Graphu64_GetPointDistance(void *firstPoint, void *secondPoint);
 
 s32 Scene_GetModelIdAtIndex(void *world, s16 modelIndex);
 
 /* Preserve the owning controller passed in a0 by the original MIPS. */
 f32 Portal_GetEngagementDistance(AiController *controller) {
-    return (D_800C1D34_de - Scaled_GetDifficultyEngagementAdjustment(controller)) * D_800C6E28;
+    return (g_portalEngagementBase - Scaled_GetDifficultyEngagementAdjustment(controller)) * g_portalEngagementScale;
 }
 
-void Portal_LinkNavigationObjects(Shared_Arg0 *arg0)
+void Portal_LinkNavigationObjects(Shared_Arg0 *graph)
 {
-  f32 temp_f0;
-  f32 var_f20;
-  f32 var_f21;
-  s32 *temp_a0;
-  s32 var_s2;
-  s32 var_s4;
-  u32 var_v0;
+  f32 candidateDistance;
+  f32 nearestDistance;
+  f32 emptyDistance;
+  s32 *pointStorage;
+  s32 actorByteOffset;
+  s32 actorIndex;
+  u32 candidateObjectId;
   u32 compare_id;
-  Shared_WeaponSlot *temp_s0;
-  NavigationPoint *temp_s1;
-  Shared_Node *var_s5;
-  Shared_WeaponSlot *var_s3;
+  Shared_WeaponSlot *candidateActor;
+  NavigationPoint *navigationPoint;
+  Shared_Node *searchNode;
+  Shared_WeaponSlot *nearestActor;
   Shared_World *ww;
-  var_s5 = arg0->unk24;
+  searchNode = graph->searchNodes;
   ww = &g_world;
-  if (var_s5 != 0)
+  if (searchNode != 0)
   {
-    var_f21 = g_navigationObjectLinkDistanceLimits[0];
+    emptyDistance = g_navigationObjectLinkDistanceLimits[0];
     do
     {
-      temp_a0 = arg0->unk0;
-      temp_s1 = (NavigationPoint *) (&((SharedRecAt0V1 *) temp_a0)->unk0[(var_s5->unk0 * (*temp_a0)) + 8]);
-      if (navigation_point_flags(temp_s1) & 1)
+      pointStorage = graph->pointStorage;
+      navigationPoint = (NavigationPoint *) (&((NavigationRawByteStorage *) pointStorage)->bytes[(searchNode->nodeKey * (*pointStorage)) + 8]);
+      if (navigation_point_flags(navigationPoint) & 1)
       {
-        var_f20 = g_navigationObjectLinkDistanceLimits[1];
-        var_s3 = 0;
-        if (navigation_point_object_id(temp_s1) != 0x653)
+        nearestDistance = g_navigationObjectLinkDistanceLimits[1];
+        nearestActor = 0;
+        if (navigation_point_object_id(navigationPoint) != 0x653)
         {
-          var_s4 = 0;
-          if (var_s4 < ww->actorCount)
+          actorIndex = 0;
+          if (actorIndex < ww->actorCount)
           {
-            var_s2 = 0;
+            actorByteOffset = 0;
             do
             {
-              temp_s0 = (Shared_WeaponSlot *) (&((SharedRecAt0V1 *) ww->actors)->unk0[var_s2]);
-              compare_id = navigation_point_object_id(temp_s1);
+              candidateActor = (Shared_WeaponSlot *) (&((NavigationRawByteStorage *) ww->actors)->bytes[actorByteOffset]);
+              compare_id = navigation_point_object_id(navigationPoint);
               if (compare_id == 0x64E)
               {
-                var_v0 = temp_s0->unkE4;
+                candidateObjectId = candidateActor->objectId;
                 goto compare;
               }
-              if (((u32) (temp_s0->unkE4 - 0x643)) >= 2U)
+              if (((u32) (candidateActor->objectId - 0x643)) >= 2U)
               {
                 goto advance;
               }
-              var_v0 = Scene_GetModelIdAtIndex(ww, temp_s0->unk18->unk28);
-              compare_id = navigation_point_object_id(temp_s1);
+              candidateObjectId = Scene_GetModelIdAtIndex(ww, candidateActor->model->modelIndex);
+              compare_id = navigation_point_object_id(navigationPoint);
               compare:
-              if (var_v0 == compare_id)
+              if (candidateObjectId == compare_id)
               {
-                temp_f0 = Graphu64_GetPointDistance(temp_s1, &temp_s0->unk8);
-                if ((temp_f0 < var_f20) || (var_f20 == var_f21))
+                candidateDistance = Graphu64_GetPointDistance(navigationPoint, &candidateActor->positionBytes);
+                if ((candidateDistance < nearestDistance) || (nearestDistance == emptyDistance))
                 {
-                  if (temp_s1)
+                  if (navigationPoint)
                   {
-                    var_f20 = temp_f0;
-                    var_s3 = temp_s0;
+                    nearestDistance = candidateDistance;
+                    nearestActor = candidateActor;
                   }
                   else
                   {
-                    var_f20 = temp_f0;
-                    var_s3 = temp_s0;
+                    nearestDistance = candidateDistance;
+                    nearestActor = candidateActor;
                   }
                 }
               }
 
               advance:
-              var_s2 += 0x2E8;
+              actorByteOffset += 0x2E8;
 
             }
-            while ((++var_s4) < ww->actorCount);
+            while ((++actorIndex) < ww->actorCount);
           }
-          if (var_s3 != 0)
+          if (nearestActor != 0)
           {
-            if (var_f20 < g_navigationObjectLinkDistanceLimits[2])
+            if (nearestDistance < g_navigationObjectLinkDistanceLimits[2])
             {
-              var_s5->unk34 = var_s3;
+              searchNode->linkedActor = nearestActor;
               goto next_node;
             }
           }
-          var_s5->unk34 = 0;
-          navigation_point_clear_flags(temp_s1, 1);
+          searchNode->linkedActor = 0;
+          navigation_point_clear_flags(navigationPoint, 1);
         }
       }
       next_node:
-      var_s5 = var_s5->unk10;
+      searchNode = searchNode->next;
 
     }
-    while (var_s5 != 0);
+    while (searchNode != 0);
   }
 }
 
@@ -204,8 +204,8 @@ void Portal_AssignPlatformEndpoints(CNavData *graph) {
         platforms[k] = 0;
     }
     count = 0;
-    for (n = 0; n < D_8011BF08; n++) {
-        candidate = &D_8011BF00[n];
+    for (n = 0; n < g_navigationPlatformActorCount; n++) {
+        candidate = &g_navigationPlatformActors[n];
         if (candidate->objectId == 0x642) {
             slot = &platforms[count];
             *slot = candidate;
@@ -268,7 +268,7 @@ void Portal_AssignPlatformEndpoints(CNavData *graph) {
 }
 
 typedef struct NavigationCollisionQuery { s32 flags, word4, word8, wordC, word10, word14, word18; } NavigationCollisionQuery;
-extern NavigationCollisionQuery D_80103FF0, D_80104050, D_80104070, D_801040D0;
+extern NavigationCollisionQuery g_portalDefaultCollisionQuery, g_portalModeCollisionQuery, g_portalNoModelFlagCollisionQuery, g_portalAlternateCollisionQuery;
 s32 InstHdr_GetActorMotionState(Player *);
 s32 Insthdr_GetModelCollisionFlag1(Player *);
 s32 Insthdr_IsInactiveOrCollisionOption4(Player *);
@@ -286,14 +286,14 @@ static __inline__ s32 navigationBlocked(Player *actor, CNavData *graph, s32 inde
     position = ((NavigationPoint *)navigationRecord(graph->points, index))->position;
     position.y += 61.44f;
     if (actor->kind == 1 && (actor->weaponFlags & 0x300000)) {
-        query = D_801040D0;
+        query = g_portalAlternateCollisionQuery;
     } else {
         mode = Insthdr_GetModelCollisionFlag1(actor);
         if (Insthdr_IsInactiveOrCollisionOption4(actor) == 0) {
-            if (mode != 0) query = D_80104050;
-            else query = D_801040D0;
-        } else if (Insthdr_GetModelCollisionFlag8(actor) == 0) query = D_80104070;
-        else query = D_80103FF0;
+            if (mode != 0) query = g_portalModeCollisionQuery;
+            else query = g_portalAlternateCollisionQuery;
+        } else if (Insthdr_GetModelCollisionFlag8(actor) == 0) query = g_portalNoModelFlagCollisionQuery;
+        else query = g_portalDefaultCollisionQuery;
     }
     query.flags = 0x4000;
     __builtin_memcpy(saved, actor, sizeof(saved));

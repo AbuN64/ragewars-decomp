@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/OBJECTLINKS14.H"
+#include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
 #include "COMMON/SELF.H"
 #include "TYPES.H"
 #include "AI/SHARED_PICKUPGOALNODE.H"
@@ -37,7 +37,7 @@ void Nav_SelectFarthestReachableNeighbor(AiController *object)
     s32 count;
     s32 i;
     Link *link;
-    void *graph = &D_8013B364;
+    void *graph = &g_navigationGraph;
 
     actor = object->target->player;
     actor_node = actor->controller->current;
@@ -47,7 +47,7 @@ void Nav_SelectFarthestReachableNeighbor(AiController *object)
         links[i] = -1;
     }
     linkCursor = links;
-    farthest = D_800C20C0_de[0];
+    farthest = g_navigationFarthestDistanceAndArrivalLimits[0];
     count = Portal_CollectIncidentLinks(graph, object->current, neighbors, linkCursor);
     best = -1;
     for (i = 0; i < count; i++) {
@@ -74,9 +74,9 @@ extern void Nav_RunBehaviorHandler(void *);
 
 extern void Nav_SteerAlongRoute(void *);
 
-extern f32 D_800C20C8_de;
+extern f32 g_navigationRetreatDistanceLimit;
 
-extern f32 D_800C20CC_de;
+extern f32 g_navigationNearbyGoalDistanceLimit;
 
 
 
@@ -90,15 +90,15 @@ extern void Nav_SelectPlayerState(void *controller);
 
 extern f32 Scaled_DistanceToNode(s32 *, s32);
 
-void func_802127F4_de(void *actor) {
+void Nav_InitCombatTargetApproach(void *actor) {
     void *brain;
-    brain = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) actor))->unk1D8))->unk1454);
-    (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk220) = 0;
+    brain = (((struct NavigationActorBrainView *) ((s8 *) ((struct ActorPlayerControllerView *) ((s8 *) actor))->player))->brain);
+    (((struct NavigationBrainView *) ((s8 *) brain))->unk220) = 0;
     Scaled_ResetBehaviorState(brain);
-    (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk2FC) = 0;
+    (((struct NavigationBrainView *) ((s8 *) brain))->unk2FC) = 0;
 }
 
-void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *arg0)
+void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *actor)
 {
     CloseAttackBrain *state;
     CloseAttackActor *peer;
@@ -106,7 +106,7 @@ void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *arg0)
     CloseAttackBrain *peer_state;
     s32 value;
 
-    state = arg0->self->brain;
+    state = actor->self->brain;
     peer = state->target;
     if (peer == 0) {
         Nav_RunBehaviorHandler(state);
@@ -119,7 +119,7 @@ void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *arg0)
     state->destination = value;
     if (value != state->node) {
         state->node = value;
-        if (!Route_GetRouteRelation(&D_8013B364, state->route, value)) {
+        if (!Route_GetRouteRelation(&g_navigationGraph, state->route, value)) {
             Scaled_SetBehaviourState(state, 1);
             return;
         }
@@ -129,14 +129,14 @@ void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *arg0)
     Nav_SteerAlongRoute(state);
     Nav_UpdateTargetSteering(state);
     if (Graphu64_GetSquaredDistance(&peer_actor->pos.x,
-                       &state->player->pos.x) < D_800C20C0_de[1] ||
+                       &state->player->pos.x) < g_navigationFarthestDistanceAndArrivalLimits[1] ||
         state->route == state->destination) {
         Scaled_SetBehaviourState(state, state->combat);
     }
 }
 
 /** Reset the inner record via Scaled_ResetBehaviorState, then override two of its fields. */
-void func_8021290C_de(LevelActor *actor) {
+void Nav_InitRetreatMovement(LevelActor *actor) {
     Shared_ActorView *level1 = actor->controller;
     CloseAttackBrain *inner = level1->owner;
     inner->state = 0;
@@ -167,7 +167,7 @@ void Nav_UpdateRetreatMovement(void *actorObject)
         }
     }
 
-    if (D_800C20C8_de < Graphu64_GetSquaredDistance(
+    if (g_navigationRetreatDistanceLimit < Graphu64_GetSquaredDistance(
             &brain->target->self->pos.x,
             &brain->player->pos.x)) {
         Scaled_SetBehaviourState(brain, brain->combat);
@@ -183,7 +183,7 @@ void Nav_UpdateRetreatMovement(void *actorObject)
 }
 
 /** Reset the inner record's flag fields, then clear its state via Scaled_ResetBehaviorState. */
-void func_80212A40_de(LevelActor *actor) {
+void Nav_InitNearbyUnrestrictedGoal(LevelActor *actor) {
     Shared_ActorView *level1 = actor->controller;
     CloseAttackBrain *inner = level1->owner;
     inner->state = 0;
@@ -203,11 +203,11 @@ void Nav_SeekNearbyUnrestrictedGoal(Shared_Actor *actor)
     u32 flags;
 
     state = ((Player *)actor->entity)->controller;
-    table = &D_8013B364;
+    table = &g_navigationGraph;
     if (state->mode == -1) {
         Portal_ResetSearchState(table);
         Route_ClearGoalList(table);
-        threshold = D_800C20CC_de;
+        threshold = g_navigationNearbyGoalDistanceLimit;
         index = 0;
         if (table->m_nNavNodes > 0) {
             do {
@@ -235,23 +235,23 @@ void Nav_SeekNearbyUnrestrictedGoal(Shared_Actor *actor)
     }
 }
 
-void func_80212BD0_de(void *actor) {
+void Nav_InitUnclaimedMarkerSearch(void *actor) {
     void *brain;
-    brain = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) actor))->unk1D8))->unk1454);
-    (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk220) = 0;
+    brain = (((struct NavigationActorBrainView *) ((s8 *) ((struct ActorPlayerControllerView *) ((s8 *) actor))->player))->brain);
+    (((struct NavigationBrainView *) ((s8 *) brain))->unk220) = 0;
     Scaled_ResetBehaviorState(brain);
-    (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk2FC) = 0;
+    (((struct NavigationBrainView *) ((s8 *) brain))->unk2FC) = 0;
 }
 
-void Nav_SeekUnclaimedMarker(void *arg0) {
+void Nav_SeekUnclaimedMarker(void *actorStorage) {
     s32 *rec;
     void *v0;
 
-    ObjRecAt1D8V1 *object = arg0;
-    ObjRecAt1454V1 *actor = object->unk1D8;
+    ActorPlayerControllerView *object = actorStorage;
+    NavigationActorWordBrainView *actor = object->player;
 
-    rec = actor->unk1454;
-    v0 = Playerai_FindPlayerWithMarker((char *)&D_80145040);
+    rec = actor->brainWords;
+    v0 = Playerai_FindPlayerWithMarker((char *)&g_playerViewRenderContext);
     if (v0 == (void *) *rec) {
         Scaled_SetBehaviourState(rec, 10);
         return;
@@ -268,29 +268,29 @@ void Nav_SeekUnclaimedMarker(void *arg0) {
 
 /* 800C6E84_18.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int D_80212670_C7DB0[4] = {
+const unsigned int g_Nav_SelectFarthestReachableNeighborConstantWords_de_eu_eu_x_us[4] = {
     0xBF800000, 0x484F5C28, 0x494F5C28, 0x49800000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80212670_C7DB0_us_rev1.c */
-const unsigned int D_blob_4f2a75997c6fd431e04d[1] = {
+const unsigned int g_Nav_SelectFarthestReachableNeighborConstantWords_us_rev1[1] = {
     0xBF800000,
 };
 
 /* ROM-grounded data: src/rw_pool_80212828_C7DB4_us_rev1.c */
-const unsigned int D_blob_9ef8a3e33b0bfbb47bad[1] = {
+const unsigned int g_Nav_ApproachCombatTargetAlongRouteConstantWords[1] = {
     0x484F5C28,
 };
 
 /* ROM-grounded data: src/rw_pool_80212948_C7DB8_us_rev1.c */
-const unsigned int D_blob_14757aafdd33202e41ee[1] = {
+const unsigned int g_Nav_UpdateRetreatMovementConstantWords[1] = {
     0x494F5C28,
 };
 
 /* ROM-grounded data: src/rw_pool_80212A7C_C7DBC_us_rev1.c */
-const unsigned int D_blob_1ac807a6a6e118c751da[1] = {
+const unsigned int g_Nav_SeekNearbyUnrestrictedGoalConstantWords[1] = {
     0x49800000,
 };
 #endif

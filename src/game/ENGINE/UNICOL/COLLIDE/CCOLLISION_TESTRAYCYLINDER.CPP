@@ -42,7 +42,7 @@ static inline s32 accepts(RayCCollisionTestRayCylinder *ray, PolygonCCollisionTe
     return 1;
 }
 
-extern CCollisionResults *D_80103FCC;
+extern CCollisionResults *g_collisionCurrentActor;
 
 s32 CCollision_TestRayCylinder(RayCCollisionTestRayCylinder *ray, CVector3 *center, f32 radius, f32 top, f32 bottom, s32 clip, PolygonCCollisionTestRayCylinder *poly, s32 keep) {
     CVector3 delta;
@@ -112,59 +112,59 @@ void CCollision_StoreContactResult(Input *contactInput) {
     }
     do {
     sw_type_1:
-        D_80103FCC->instance0 = contactInput->instance104;
+        g_collisionCurrentActor->instance0 = contactInput->instance104;
         if (contactInput->instance104 != 0) {
-            D_80103FCC->instanceValue4 = contactInput->instance104->field14;
+            g_collisionCurrentActor->instanceValue4 = contactInput->instance104->field14;
         } else {
-            D_80103FCC->instanceValue4 = 0;
+            g_collisionCurrentActor->instanceValue4 = 0;
         }
-        D_80103FCC->vec8 = contactInput->vec180;
-        D_80103FCC->field14 = -1;
+        g_collisionCurrentActor->vec8 = contactInput->vec180;
+        g_collisionCurrentActor->field14 = -1;
         break;
     sw_type_2:
         if (contactInput->instance104 != 0) {
-            D_80103FCC->fieldC4 = contactInput->instance104->field14;
+            g_collisionCurrentActor->fieldC4 = contactInput->instance104->field14;
         } else {
-            D_80103FCC->fieldC4 = 0;
+            g_collisionCurrentActor->fieldC4 = 0;
         }
-        D_80103FCC->vecC8 = contactInput->vec180;
-        D_80103FCC->fieldD4 = contactInput->fieldBC;
+        g_collisionCurrentActor->vecC8 = contactInput->vec180;
+        g_collisionCurrentActor->fieldD4 = contactInput->fieldBC;
         break;
     sw_type_3:
-        D_80103FCC->instance0 = contactInput->instance104;
-        D_80103FCC->instanceValue4 = contactInput->instance104->field14;
-        D_80103FCC->vec8 = contactInput->vec180;
-        D_80103FCC->field14 = -1;
+        g_collisionCurrentActor->instance0 = contactInput->instance104;
+        g_collisionCurrentActor->instanceValue4 = contactInput->instance104->field14;
+        g_collisionCurrentActor->vec8 = contactInput->vec180;
+        g_collisionCurrentActor->field14 = -1;
         break;
     sw_type_4:
-        D_80103FCC->instance0 = contactInput->instance104;
-        D_80103FCC->instanceValue4 = contactInput->instance104->field14;
-        D_80103FCC->vec8 = contactInput->vec180;
-        D_80103FCC->field14 = contactInput->field108;
-        D_80103FCC->block18 = contactInput->block10C;
+        g_collisionCurrentActor->instance0 = contactInput->instance104;
+        g_collisionCurrentActor->instanceValue4 = contactInput->instance104->field14;
+        g_collisionCurrentActor->vec8 = contactInput->vec180;
+        g_collisionCurrentActor->field14 = contactInput->field108;
+        g_collisionCurrentActor->block18 = contactInput->block10C;
         break;
     sw_type_5:
-        D_80103FCC->instance88 = contactInput->instance104;
-        D_80103FCC->instanceValue8C = contactInput->instance104->field14;
-        D_80103FCC->vec90 = contactInput->vec180;
+        g_collisionCurrentActor->instance88 = contactInput->instance104;
+        g_collisionCurrentActor->instanceValue8C = contactInput->instance104->field14;
+        g_collisionCurrentActor->vec90 = contactInput->vec180;
         break;
     sw_type_6:
     sw_type_7:
     sw_type_8:
     sw_type_9:
         break;
-    
+
     sw_type_default:;
     } while (0);
-    D_80103FCC->vecF0 = contactInput->vecF8;
-    D_80103FCC->vecE4 = contactInput->vec180;
-    D_80103FCC->typeFC = contactInput->type;
-    D_80103FCC->field100 = contactInput->fieldC0;
+    g_collisionCurrentActor->vecF0 = contactInput->vecF8;
+    g_collisionCurrentActor->vecE4 = contactInput->vec180;
+    g_collisionCurrentActor->typeFC = contactInput->type;
+    g_collisionCurrentActor->contactValue = contactInput->fieldC0;
 }
 
 /* Stores a range and its parameters in a record: the low bound at 8, a count at 0xC, the high
    bound at 0x10 and a fourth value at 0x14, and at 0x18 the larger bound plus the pooled constant
-   D_800C87B4. */
+   g_collisionCylinderRangeMargin. */
 
 
 
@@ -180,7 +180,7 @@ void CCollision_SetSweepRange(struct Range *range, f32 low, s32 count, f32 high,
     if (!(low <= high)) {
         larger = low;
     }
-    range->limit = larger + D_800C87B4;
+    range->limit = larger + g_collisionCylinderRangeMargin;
 }
 
 void CCollision_SetUniformSweepExtent(void *actorMotion, float extent) {

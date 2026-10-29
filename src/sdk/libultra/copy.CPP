@@ -20,6 +20,6 @@ s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B02B8[8] =
+char s_CopyOMParticText[8] =
     "OMPartic";
 #endif

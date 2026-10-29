@@ -4,7 +4,7 @@
 
 
 
-extern float D_800C1BA0_de;
+extern float k_motionOpenCompletionSpeed;
 
 
 

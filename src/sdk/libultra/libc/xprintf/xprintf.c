@@ -6,7 +6,7 @@
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int D_auto_data_unresolved_800C90B8[6] = {
+unsigned int g_printfFlagBitWordsEuX[6] = {
     0x00000001, 0x00000002, 0x00000004, 0x00000008, 0x00000010, 0x00000000,
 };
 #endif
@@ -17,14 +17,14 @@ unsigned int D_auto_data_unresolved_800C90B8[6] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int D_auto_data_unresolved_800C7A18[6] = {
+unsigned int g_printfFlagBitWordsDe[6] = {
     0x00000001, 0x00000002, 0x00000004, 0x00000008, 0x00000010, 0x00000000,
 };
 #endif
 
 /* 800C7CF8.CPP */
 #if defined(VERSION_DE)
-unsigned int D_auto_rodata_unresolved_800C7CF8[66] = {
+unsigned int k_XprintfEncodedWords[66] = {
     0x04040404, 0x04040404, 0x00010202, 0x03030303, 0x04040404, 0x04040404, 0x05050505, 0x05050505,
     0x05050505, 0x05050505, 0x06060606, 0x06060606, 0x06060606, 0x06060606, 0x06060606, 0x06060606,
     0x06060606, 0x06060606, 0x07070707, 0x07070707, 0x07070707, 0x07070707, 0x07070707, 0x07070707,
@@ -43,7 +43,7 @@ unsigned int D_auto_rodata_unresolved_800C7CF8[66] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int D_auto_data_unresolved_800C86E8[6] = {
+unsigned int g_printfFlagBitWordsEu[6] = {
     0x00000001, 0x00000002, 0x00000004, 0x00000008, 0x00000010, 0x00000000,
 };
 #endif

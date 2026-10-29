@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/WIDGETRECAT1A.H"
 #include "RESMGR/N64ENG_DRAWNUMERICWIDGETCHILDREN.H"
 #include "MATH/N64_ENG.H"
@@ -18,27 +18,27 @@ extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, Qua
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct CacheResourceBlockView *clip);
 
 extern void Widget_DrawVisibleSiblings(void *, Args);
 
-s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *eventTarget, s32 eventId, s32 eventCode, s32 eventValue, s32 repeatCount) {
     char *entry;
     s32 offset;
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
 
-    if (D_800CD9B8 != 0) {
+    if (g_numericWidgetEventHandlers != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800CD9B8;
+        entry = (char *)&g_numericWidgetEventHandlers;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800CD9B0)) + offset))->field_0 == arg1) {
-                actor_kind = arg0->id;
-                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800CD9B4)) + offset))->field_0;
+            if (((struct AnimationEventMaskView *) (((char *) (&g_numericWidgetEventIds)) + offset))->value == eventId) {
+                actor_kind = eventTarget->id;
+                table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_numericWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*(Handler802A2B50 *)entry)(eventTarget, eventId, eventCode, eventValue, repeatCount);
                 }
             }
             entry += 0xC;
@@ -72,74 +72,74 @@ void N64Eng_DrawNumericWidgetChildren(void *widget, Args args) {
     }
 }
 
-extern void N64Eng_SetNumericWidgetValue(void *widget, s32 arg1);
+extern void N64Eng_SetNumericWidgetValue(void *widget, s32 value);
 
-void N64Eng_DecrementNumericWidget(void *arg0)
+void N64Eng_DecrementNumericWidget(void *widgetStorage)
 {
-    RecordN64EngCreateNumericWidget *object = arg0;
-  s32 temp_a1;
-  s32 temp_v1;
-  s32 var_a1;
+    RecordN64EngCreateNumericWidget *object = widgetStorage;
+  s32 currentValue;
+  s32 wrappingValue;
+  s32 nextValue;
   if ((object->field_54) == 0)
   {
-    temp_a1 = object->field_58;
-    if ((object->field_50) < temp_a1)
+    currentValue = object->field_58;
+    if ((object->field_50) < currentValue)
     {
-      var_a1 = temp_a1 - 1;
+      nextValue = currentValue - 1;
       goto block_7;
     }
   }
   else
   {
-    temp_v1 = object->field_58;
-    if (temp_v1 == (object->field_50))
+    wrappingValue = object->field_58;
+    if (wrappingValue == (object->field_50))
     {
       object->field_58 = object->field_4C;
     }
     else
     {
-      object->field_58 = temp_v1 - 1;
+      object->field_58 = wrappingValue - 1;
     }
-    var_a1 = object->field_58;
+    nextValue = object->field_58;
     block_7:
-    N64Eng_SetNumericWidgetValue(object, var_a1);
+    N64Eng_SetNumericWidgetValue(object, nextValue);
 
   }
 }
 
 extern unsigned int Smos_GetControlRepeatLimit(void);
 
-void N64Eng_IncrementNumericWidget(void *arg0);
+void N64Eng_IncrementNumericWidget(void *widgetStorage);
 
-void N64Eng_IncrementNumericWidget(void *arg0)
+void N64Eng_IncrementNumericWidget(void *widgetStorage)
 {
-    RecordN64EngCreateNumericWidget *object = arg0;
-  s32 temp_a1;
-  s32 temp_v1;
-  s32 var_a1;
+    RecordN64EngCreateNumericWidget *object = widgetStorage;
+  s32 currentValue;
+  s32 wrappingValue;
+  s32 nextValue;
   if ((object->field_54) == 0)
   {
-    temp_a1 = object->field_58;
-    if (temp_a1 < (object->field_4C))
+    currentValue = object->field_58;
+    if (currentValue < (object->field_4C))
     {
-      var_a1 = temp_a1 + 1;
+      nextValue = currentValue + 1;
       goto block_7;
     }
   }
   else
   {
-    temp_v1 = object->field_58;
-    if (temp_v1 == (object->field_4C))
+    wrappingValue = object->field_58;
+    if (wrappingValue == (object->field_4C))
     {
       object->field_58 = object->field_50;
     }
     else
     {
-      object->field_58 = temp_v1 + 1;
+      object->field_58 = wrappingValue + 1;
     }
-    var_a1 = object->field_58;
+    nextValue = object->field_58;
     block_7:
-    N64Eng_SetNumericWidgetValue(object, var_a1);
+    N64Eng_SetNumericWidgetValue(object, nextValue);
   }
 }
 
@@ -188,34 +188,34 @@ s32 N64Eng_SetLinkedCommand100WithSound(struct CommandListController *commandLis
     return 0;
 }
 
-s32 N64Eng_HandleNumericIncrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 fifth) {
-    RecordN64EngCreateNumericWidget *object = arg0;
-    s32 temp_s0;
+s32 N64Eng_HandleNumericIncrement(void *widgetStorage, s32 unused1, s32 unused2, s32 eventValue, s32 fifth) {
+    RecordN64EngCreateNumericWidget *object = widgetStorage;
+    s32 repeatMagnitude;
 
-    temp_s0 = XMath_AbsoluteInteger(fifth);
-    if (temp_s0 < (s32)Smos_GetControlRepeatLimit()) {
+    repeatMagnitude = XMath_AbsoluteInteger(fifth);
+    if (repeatMagnitude < (s32)Smos_GetControlRepeatLimit()) {
         object->field_5C = 2;
         object->field_48 = 0;
     }
-    if (arg3 != 1) {
+    if (eventValue != 1) {
         return 0;
     }
-    object->field_5C = arg3;
+    object->field_5C = eventValue;
     N64Eng_IncrementNumericWidget(object);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 
-s32 N64Eng_HandleNumericDecrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 fifth) {
-    RecordN64EngCreateNumericWidget *object = arg0;
-    s32 temp_s0;
+s32 N64Eng_HandleNumericDecrement(void *widgetStorage, s32 unused1, s32 unused2, s32 eventValue, s32 fifth) {
+    RecordN64EngCreateNumericWidget *object = widgetStorage;
+    s32 repeatMagnitude;
 
-    temp_s0 = XMath_AbsoluteInteger(fifth);
-    if (temp_s0 < (s32)Smos_GetControlRepeatLimit()) {
+    repeatMagnitude = XMath_AbsoluteInteger(fifth);
+    if (repeatMagnitude < (s32)Smos_GetControlRepeatLimit()) {
         object->field_5C = 2;
         object->field_48 = 0;
     }
-    if (arg3 != 1) {
+    if (eventValue != 1) {
         return 0;
     }
     object->field_5C = 0;

@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "COMMON/DEVICE_IO.H"
 #include "COMMON/HARDWARE_IO.H"
 #include "COMMON/OSVISCALE.H"
@@ -9,31 +9,31 @@
 #include "RESMGR/X_PLUS.H"
 #include "sdk/libultra/audio/vi.h"
 
-extern __OSViContext_func_802BA910_de *D_800D8440;
-extern __OSViContext_func_802BA910_de *D_800D4414;
+extern ViSwapContextView *g_currentVideoInterfaceContext;
+extern ViSwapContextView *g_nextVideoInterfaceContext;
 
 void __osViInit(void)
 {
-    __OSViContext_func_802BA910_de *contexts = D_800D43B0;
+    ViSwapContextView *contexts = g_videoInterfaceContexts;
     s32 tv_type;
 
-    XPlus_FillMemory(contexts, 0, sizeof(D_800D43B0));
-    tv_type = D_80000300;
-    D_800D8440 = &contexts[0];
-    D_800D4414 = &contexts[1];
+    XPlus_FillMemory(contexts, 0, sizeof(g_videoInterfaceContexts));
+    tv_type = g_consoleTvType;
+    g_currentVideoInterfaceContext = &contexts[0];
+    g_nextVideoInterfaceContext = &contexts[1];
     contexts[1].retraceCount = 1;
     contexts[0].retraceCount = 1;
     contexts[1].framep = (void *)0x80000000U;
     contexts[0].framep = (void *)0x80000000U;
     if (tv_type == 0) {
-        contexts[1].modep = &D_800D4490;
+        contexts[1].modep = &g_videoInterfaceModeDefault;
     } else if (tv_type == 2) {
-        contexts[1].modep = &D_800D44E0;
+        contexts[1].modep = &g_videoInterfaceModeAlternate;
     } else {
         contexts[1].modep = &g_videoInterfaceModeTable;
     }
-    D_800D4414->state = 0x20;
-    D_800D4414->control = D_800D4414->modep->comRegs.ctrl;
+    g_nextVideoInterfaceContext->state = 0x20;
+    g_nextVideoInterfaceContext->control = g_nextVideoInterfaceContext->modep->comRegs.ctrl;
     while (IO_READ_WORD(0xA4400010U) > 10) {
     }
     IO_WRITE(0xA4400000U, 0);

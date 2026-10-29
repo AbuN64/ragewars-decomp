@@ -13,9 +13,9 @@
    records (clearing bytes 0x94 and 0x95 and, for human slots, the team byte 0x92) while counting
    active humans, clears the match counters, and outside mode 0 looks up the stage default for the
    first active player through Achieve_CopyPreset and resets the round state. It then runs the setup of
-   the current rule set D_8014DD98, copies each active human's name and the five profile bytes at 0x189
+   the current rule set g_currentResultMode, copies each active human's name and the five profile bytes at 0x189
    of their player record into status bytes 0x7B, 0x7D, 0x79, 0x7A and 0x82, sets the game mode (team mode 2 falls back to 1 with fewer than two
-   humans) and, when func_8025E2C4_de allows, picks a random arena 0x38 to 0x3B. */
+   humans) and, when SoundElement_GetMusicPlaybackEnabled allows, picks a random arena 0x38 to 0x3B. */
 
 
 
@@ -23,14 +23,14 @@
 
 
 
-extern struct RecordRecAt189 D_80102B00[];
+extern struct PlayerNameProfileRecord g_localPlayerProfiles[];
 /* The stage entry of the current match: seven opponent records from +5. */
 struct Stage {
     char pad0[5];
     u8 opponents[7][4];
 };
 extern struct Stage *D_800E4680;
-extern s32 D_8015402C;
+extern s32 g_selectedLevelId;
 
 extern void MarkMenuEventHandled(void);
 extern void SmXlate_SwitchScreen(s32);
@@ -46,7 +46,7 @@ extern void XPlus_CopyString(char *, char *);
 void Stage_StartConfiguredMatch(void) {
     u8 *settings;
     u8 *config;
-    struct StatusRecAt95 *status;
+    struct MatchPlayerStatus *status;
     s32 humans;
     s32 i;
     s32 first;
@@ -56,9 +56,9 @@ void Stage_StartConfiguredMatch(void) {
     SmXlate_SwitchScreen(2);
     Tsmos_RequestFrontendShutdown();
     humans = 0;
-    settings = (u8 *)&D_801462C8;
+    settings = (u8 *)&g_gameSettings;
     for (i = 0; i < 8; i++) {
-        status = (struct StatusRecAt95 *)(settings + 0xD0 + i * 0x96);
+        status = (struct MatchPlayerStatus *)(settings + 0xD0 + i * 0x96);
         status->lives = 0;
         status->score = 0;
         if (status->computer == 0) {
@@ -68,34 +68,34 @@ void Stage_StartConfiguredMatch(void) {
             humans++;
         }
     }
-    match = &D_801462C8.counters;
+    match = &g_gameSettings.counters;
     match->enabled = 0;
     match->m_bPhoenixRoomActive = 0;
     D_800E4680 = 0;
     if (settings[0xD] != 0) {
         first = 0;
-        while (((struct StatusRecAt95 *)(settings + 0xD0 + first * 0x96))->joined == 0) {
+        while (((struct MatchPlayerStatus *)(settings + 0xD0 + first * 0x96))->joined == 0) {
             first++;
         }
-        status = (struct StatusRecAt95 *)(settings + 0xD0 + first * 0x96);
+        status = (struct MatchPlayerStatus *)(settings + 0xD0 + first * 0x96);
         switch (settings[0xD]) {
         case 1:
-            D_800E4680 = Achieve_CopyPreset(D_8015402C, 0, status->kind);
+            D_800E4680 = Achieve_CopyPreset(g_selectedLevelId, 0, status->kind);
             break;
         case 2:
-            D_800E4680 = Achieve_CopyPreset(D_8015402C, 1, 0);
+            D_800E4680 = Achieve_CopyPreset(g_selectedLevelId, 1, 0);
             break;
         case 3:
-            D_800E4680 = Achieve_CopyPreset(D_8015402C, 3, 0);
+            D_800E4680 = Achieve_CopyPreset(g_selectedLevelId, 3, 0);
             break;
         case 4:
-            D_800E4680 = Achieve_CopyPreset(D_8015402C, 2, 0);
+            D_800E4680 = Achieve_CopyPreset(g_selectedLevelId, 2, 0);
             break;
         }
-        D_801462C8.counters.humanWon = 0;
+        g_gameSettings.counters.humanWon = 0;
         Stage_PlaceStageOpponents();
     }
-    switch (D_8014DD98.kind) {
+    switch (g_currentResultMode.kind) {
     case 0:
         Random_StartCaptureTheFlagMatch();
         break;
@@ -110,29 +110,29 @@ void Stage_StartConfiguredMatch(void) {
         break;
     }
     for (i = 0; i < 4; i++) {
-        status = (struct StatusRecAt95 *)(settings + 0xD0 + i * 0x96);
+        status = (struct MatchPlayerStatus *)(settings + 0xD0 + i * 0x96);
         if (status->joined == 1 && status->computer == 0) {
-            XPlus_CopyString(status->name, D_80102B00[i].name);
+            XPlus_CopyString(status->name, g_localPlayerProfiles[i].name);
             if (settings[0xD] != 0) {
                 status->team = 0;
             } else {
                 status->team = 0xFF;
             }
-            status->unk7B = D_80102B00[i].profile[0];
-            status->unk7D = D_80102B00[i].profile[1];
-            status->unk79 = D_80102B00[i].profile[2];
-            status->unk7A = D_80102B00[i].profile[3];
-            status->unk82 = D_80102B00[i].profile[4];
+            status->unk7B = g_localPlayerProfiles[i].profile[0];
+            status->unk7D = g_localPlayerProfiles[i].profile[1];
+            status->unk79 = g_localPlayerProfiles[i].profile[2];
+            status->unk7A = g_localPlayerProfiles[i].profile[3];
+            status->unk82 = g_localPlayerProfiles[i].profile[4];
         }
     }
-    config = (u8 *)&D_801462C8;
+    config = (u8 *)&g_gameSettings;
     if (config[0x580] == 2 && humans >= 2) {
         Frontend_RequestScreenMode(1);
     } else {
         Frontend_RequestScreenMode(config[0x580]);
     }
-    if (func_8025E2C4_de() != 0) {
-        func_8025E2D4_de(Graphu64_NextRandom() % 4 + 0x38);
+    if (SoundElement_GetMusicPlaybackEnabled() != 0) {
+        SoundElement_SetMusicPlaybackEnabled(Graphu64_NextRandom() % 4 + 0x38);
     }
 }
 
@@ -156,9 +156,9 @@ void Stage_PlaceStageOpponents(void) {
 
     boss = 0;
     escorted = 0;
-    match = &D_801462C8.counters;
+    match = &g_gameSettings.counters;
     for (i = 0; i < 8; i++) {
-        player = &D_801462C8.playerSettings[i];
+        player = &g_gameSettings.playerSettings[i];
         if (player->enabled == 1 && player->locked == player->enabled) {
             player->enabled = 0;
             player->locked = 0;
@@ -166,7 +166,7 @@ void Stage_PlaceStageOpponents(void) {
     }
     for (i = 0; i < 7; i++) {
         on = 1;
-        game = &D_801462C8;
+        game = &g_gameSettings;
         if (D_800E4680->opponents[i][0] == 0) {
             continue;
         }

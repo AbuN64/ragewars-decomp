@@ -9,26 +9,26 @@
 extern void MatrixFromAngles(f32 *matrix, f32 *angles);
 
 
-void XMath_SetMatrixElements(MatrixRecord *arg0, float arg1, float arg2, float arg3,
-                    float arg4, float arg5, float arg6, float arg7,
-                    float arg8, float arg9, float arg10, float arg11,
-                    float arg12, float arg13, float arg14, float arg15, float arg16) {
-    arg0->matrix.m[0] = arg1;
-    arg0->matrix.m[4] = arg2;
-    arg0->matrix.m[8] = arg3;
-    arg0->matrix.m[12] = arg4;
-    arg0->matrix.m[1] = arg5;
-    arg0->matrix.m[5] = arg6;
-    arg0->matrix.m[9] = arg7;
-    arg0->matrix.m[13] = arg8;
-    arg0->matrix.m[2] = arg9;
-    arg0->matrix.m[6] = arg10;
-    arg0->matrix.m[10] = arg11;
-    arg0->matrix.m[14] = arg12;
-    arg0->matrix.m[3] = arg13;
-    arg0->matrix.m[7] = arg14;
-    arg0->matrix.m[11] = arg15;
-    arg0->matrix.m[15] = arg16;
+void XMath_SetMatrixElements(MatrixRecord *matrix, float element00, float element01, float element02,
+                    float element03, float element10, float element11, float element12,
+                    float element13, float element20, float element21, float element22,
+                    float element23, float element30, float element31, float element32, float element33) {
+    matrix->matrix.m[0] = element00;
+    matrix->matrix.m[4] = element01;
+    matrix->matrix.m[8] = element02;
+    matrix->matrix.m[12] = element03;
+    matrix->matrix.m[1] = element10;
+    matrix->matrix.m[5] = element11;
+    matrix->matrix.m[9] = element12;
+    matrix->matrix.m[13] = element13;
+    matrix->matrix.m[2] = element20;
+    matrix->matrix.m[6] = element21;
+    matrix->matrix.m[10] = element22;
+    matrix->matrix.m[14] = element23;
+    matrix->matrix.m[3] = element30;
+    matrix->matrix.m[7] = element31;
+    matrix->matrix.m[11] = element32;
+    matrix->matrix.m[15] = element33;
 }
 
 void XMath_ClearMatrix(s32 destination) {
@@ -38,10 +38,10 @@ void XMath_ClearMatrix(s32 destination) {
 void XMath_SetIdentityMatrix(s32 matrixAddress)
 {
   XPlus_FillBytes(matrixAddress, 0, 0x40);
-  ((Matrix *)(matrixAddress))->m[15] = (((Matrix *)(matrixAddress))->m[10] = (((Matrix *)(matrixAddress))->m[5] = (((Matrix *)(matrixAddress))->m[0] = (f32) D_800C5CB8_de)));
+  ((Matrix *)(matrixAddress))->m[15] = (((Matrix *)(matrixAddress))->m[10] = (((Matrix *)(matrixAddress))->m[5] = (((Matrix *)(matrixAddress))->m[0] = (f32) k_xmathIdentityMatrixUnit)));
 }
 
-void XMath_TransposeMatrix(f32 *arg0) {
+void XMath_TransposeMatrix(f32 *matrix) {
     s32 i;
     s32 j;
     s32 offset1;
@@ -52,24 +52,24 @@ void XMath_TransposeMatrix(f32 *arg0) {
         for (j = i + 1; j < 4; j++) {
             offset2 = j * 16 + i * 4;
             offset1 = i * 16 + j * 4;
-            temp = *(f32 *)((u8 *)arg0 + offset2);
-            *(f32 *)((u8 *)arg0 + offset2) =
-                *(f32 *)((u8 *)arg0 + offset1);
-            *(f32 *)((u8 *)arg0 + offset1) = temp;
+            temp = *(f32 *)((u8 *)matrix + offset2);
+            *(f32 *)((u8 *)matrix + offset2) =
+                *(f32 *)((u8 *)matrix + offset1);
+            *(f32 *)((u8 *)matrix + offset1) = temp;
         }
     }
 }
 
 /** Scatter three floats from arg1 into arg0's fields. */
-void XMath_SetMatrixScaleDiagonal(Matrix *matrix, CVector3 *arg1) {
-    matrix->m[0] = arg1->x;
-    matrix->m[5] = arg1->y;
-    matrix->m[10] = arg1->z;
+void XMath_SetMatrixScaleDiagonal(Matrix *matrix, CVector3 *scale) {
+    matrix->m[0] = scale->x;
+    matrix->m[5] = scale->y;
+    matrix->m[10] = scale->z;
 }
 
-void XMath_ScaleMatrixRows(void *arg0, void *arg1) {
-    char *m = (char *) arg0;
-    char *v = (char *) arg1;
+void XMath_ScaleMatrixRows(void *matrix, void *scale) {
+    char *m = (char *) matrix;
+    char *v = (char *) scale;
 
     ((Matrix *)(m))->m[0] = ((Matrix *)(m))->m[0] * ((CVector3 *)(v))->x;
     ((Matrix *)(m))->m[4] = ((Matrix *)(m))->m[4] * ((CVector3 *)(v))->x;
@@ -92,24 +92,24 @@ void XMath_SetUniformMatrixScaleDiagonal(Matrix *matrix, float value) {
     matrix->m[10] = value;
 }
 
-void XMath_ScaleMatrixUniformly(void *arg0, f32 arg1) {
-    u8 *o = (u8 *)arg0;
+void XMath_ScaleMatrixUniformly(void *matrix, f32 scale) {
+    u8 *o = (u8 *)matrix;
 
-    ((Matrix *)(o))->m[0] = ((Matrix *)(o))->m[0] * arg1;
-    ((Matrix *)(o))->m[4] = ((Matrix *)(o))->m[4] * arg1;
-    ((Matrix *)(o))->m[8] = ((Matrix *)(o))->m[8] * arg1;
-    ((Matrix *)(o))->m[1] = ((Matrix *)(o))->m[1] * arg1;
-    ((Matrix *)(o))->m[5] = ((Matrix *)(o))->m[5] * arg1;
-    ((Matrix *)(o))->m[9] = ((Matrix *)(o))->m[9] * arg1;
-    ((Matrix *)(o))->m[2] = ((Matrix *)(o))->m[2] * arg1;
-    ((Matrix *)(o))->m[6] = ((Matrix *)(o))->m[6] * arg1;
-    ((Matrix *)(o))->m[10] = ((Matrix *)(o))->m[10] * arg1;
-    ((Matrix *)(o))->m[12] = ((Matrix *)(o))->m[12] * arg1;
-    ((Matrix *)(o))->m[13] = ((Matrix *)(o))->m[13] * arg1;
-    ((Matrix *)(o))->m[14] = ((Matrix *)(o))->m[14] * arg1;
+    ((Matrix *)(o))->m[0] = ((Matrix *)(o))->m[0] * scale;
+    ((Matrix *)(o))->m[4] = ((Matrix *)(o))->m[4] * scale;
+    ((Matrix *)(o))->m[8] = ((Matrix *)(o))->m[8] * scale;
+    ((Matrix *)(o))->m[1] = ((Matrix *)(o))->m[1] * scale;
+    ((Matrix *)(o))->m[5] = ((Matrix *)(o))->m[5] * scale;
+    ((Matrix *)(o))->m[9] = ((Matrix *)(o))->m[9] * scale;
+    ((Matrix *)(o))->m[2] = ((Matrix *)(o))->m[2] * scale;
+    ((Matrix *)(o))->m[6] = ((Matrix *)(o))->m[6] * scale;
+    ((Matrix *)(o))->m[10] = ((Matrix *)(o))->m[10] * scale;
+    ((Matrix *)(o))->m[12] = ((Matrix *)(o))->m[12] * scale;
+    ((Matrix *)(o))->m[13] = ((Matrix *)(o))->m[13] * scale;
+    ((Matrix *)(o))->m[14] = ((Matrix *)(o))->m[14] * scale;
 }
 
-void XMath_ResetMatrixRotation(Mtx3x4_8029FD54 *arg0) {
+void XMath_ResetMatrixRotation(Mtx3x4_8029FD54 *matrix) {
     s32 col;
     s32 row;
 
@@ -118,14 +118,14 @@ void XMath_ResetMatrixRotation(Mtx3x4_8029FD54 *arg0) {
     do {
         row = 0;
         do {
-            arg0->m[row][col] = 0;
+            matrix->m[row][col] = 0;
             row += 1;
         } while (row < 3);
         col += 1;
     } while (col < 3);
-    arg0->m[0][0] = D_800C5CBC_de;
-    arg0->m[1][1] = D_800C5CBC_de;
-    arg0->m[2][2] = D_800C5CBC_de;
+    matrix->m[0][0] = k_xmathRotationResetUnit;
+    matrix->m[1][1] = k_xmathRotationResetUnit;
+    matrix->m[2][2] = k_xmathRotationResetUnit;
 }
 
 void XMath_PremultiplyEulerRotation(s32 matrix, f32 *angles) {
@@ -134,29 +134,29 @@ void XMath_PremultiplyEulerRotation(s32 matrix, f32 *angles) {
     XMath_MultiplyMatrices(matrix, buf, matrix);
 }
 
-void XMath_PremultiplyPitchRotation(s32 arg0, f32 angle) {
+void XMath_PremultiplyPitchRotation(s32 destinationMatrix, f32 angle) {
     Matrix matrix;
-    f32 sp50;
-    f32 sp54;
+    f32 sineAngle;
+    f32 cosineAngle;
     Matrix *p;
 
     if (angle != 0.0f) {
-        XMath_EvaluateSineCosine(angle, &sp50, &sp54);
+        XMath_EvaluateSineCosine(angle, &sineAngle, &cosineAngle);
         p = &matrix;
         XPlus_FillBytes(p, 0, 0x40);
-        ((Matrix *)(p))->m[0] = D_800C5CC0_de;
+        ((Matrix *)(p))->m[0] = k_xmathPitchRotationUnit;
         {
-            f32 t54 = sp54;
-            f32 t50 = sp50;
-            ((Matrix *)(p))->m[5] = D_800C5CC0_de;
-            ((Matrix *)(p))->m[10] = D_800C5CC0_de;
-            ((Matrix *)(p))->m[15] = D_800C5CC0_de;
-            matrix.m[5] = t54;
-            matrix.m[9] = -t50;
-            matrix.m[6] = t50;
-            matrix.m[10] = t54;
+            f32 cosineValue = cosineAngle;
+            f32 sineValue = sineAngle;
+            ((Matrix *)(p))->m[5] = k_xmathPitchRotationUnit;
+            ((Matrix *)(p))->m[10] = k_xmathPitchRotationUnit;
+            ((Matrix *)(p))->m[15] = k_xmathPitchRotationUnit;
+            matrix.m[5] = cosineValue;
+            matrix.m[9] = -sineValue;
+            matrix.m[6] = sineValue;
+            matrix.m[10] = cosineValue;
         }
-        XMath_MultiplyMatrices(arg0, (s32) p, arg0);
+        XMath_MultiplyMatrices(destinationMatrix, (s32) p, destinationMatrix);
     }
 }
 
@@ -170,19 +170,19 @@ void XMath_PremultiplyYawRotation(s32 matrixAddress, f32 radians) {
         XMath_EvaluateSineCosine(radians, &sinAngle, &cosAngle);
         p = &matrix;
         XPlus_FillBytes(p, 0, 0x40);
-        ((Matrix *)(p))->m[0] = D_800C5CC4_de;
+        ((Matrix *)(p))->m[0] = k_xmathYawRotationUnit;
         {
-            f32 t54 = cosAngle;
-            f32 t50 = sinAngle;
-            f32 t50n;
-            ((Matrix *)(p))->m[5] = D_800C5CC4_de;
-            ((Matrix *)(p))->m[10] = D_800C5CC4_de;
-            ((Matrix *)(p))->m[15] = D_800C5CC4_de;
-            t50n = -t50;
-            matrix.m[8] = t50;
-            matrix.m[0] = t54;
-            matrix.m[2] = t50n;
-            matrix.m[10] = t54;
+            f32 cosineValue = cosAngle;
+            f32 sineValue = sinAngle;
+            f32 negativeSine;
+            ((Matrix *)(p))->m[5] = k_xmathYawRotationUnit;
+            ((Matrix *)(p))->m[10] = k_xmathYawRotationUnit;
+            ((Matrix *)(p))->m[15] = k_xmathYawRotationUnit;
+            negativeSine = -sineValue;
+            matrix.m[8] = sineValue;
+            matrix.m[0] = cosineValue;
+            matrix.m[2] = negativeSine;
+            matrix.m[10] = cosineValue;
         }
         XMath_MultiplyMatrices(matrixAddress, (s32) p, matrixAddress);
     }
@@ -198,19 +198,19 @@ void XMath_PremultiplyRollRotation(s32 matrixAddress, f32 radians) {
         XMath_EvaluateSineCosine(radians, &sinAngle, &cosAngle);
         p = &matrix;
         XPlus_FillBytes(p, 0, 0x40);
-        ((Matrix *)(p))->m[0] = D_800C5CC8_de;
+        ((Matrix *)(p))->m[0] = k_xmathRollRotationUnit;
         {
-            f32 t54 = cosAngle;
-            f32 t50 = sinAngle;
-            f32 t50n;
-            ((Matrix *)(p))->m[5] = D_800C5CC8_de;
-            ((Matrix *)(p))->m[10] = D_800C5CC8_de;
-            ((Matrix *)(p))->m[15] = D_800C5CC8_de;
-            t50n = -t50;
-            matrix.m[0] = t54;
-            matrix.m[4] = t50n;
-            matrix.m[1] = t50;
-            matrix.m[5] = t54;
+            f32 cosineValue = cosAngle;
+            f32 sineValue = sinAngle;
+            f32 negativeSine;
+            ((Matrix *)(p))->m[5] = k_xmathRollRotationUnit;
+            ((Matrix *)(p))->m[10] = k_xmathRollRotationUnit;
+            ((Matrix *)(p))->m[15] = k_xmathRollRotationUnit;
+            negativeSine = -sineValue;
+            matrix.m[0] = cosineValue;
+            matrix.m[4] = negativeSine;
+            matrix.m[1] = sineValue;
+            matrix.m[5] = cosineValue;
         }
         XMath_MultiplyMatrices(matrixAddress, (s32) p, matrixAddress);
     }
@@ -224,10 +224,10 @@ void XMath_ClearMatrixTranslation(Matrix *matrix) {
 }
 
 /** Copy a three-float vector into object offsets 0x30 through 0x38. */
-void XMath_SetMatrixTranslation(Matrix *matrix, float *arg1) {
-    matrix->m[12] = arg1[0];
-    matrix->m[13] = arg1[1];
-    matrix->m[14] = arg1[2];
+void XMath_SetMatrixTranslation(Matrix *matrix, float *translation) {
+    matrix->m[12] = translation[0];
+    matrix->m[13] = translation[1];
+    matrix->m[14] = translation[2];
 }
 
 /** Copy the three floating components at offset 0x30. */
@@ -237,62 +237,62 @@ void XMath_GetMatrixTranslation(char *object, float *output) {
     output[2] = ((Matrix *)(object))->m[14];
 }
 
-void XMath_AddMatrixTranslation(Matrix *matrix, void *arg1) {
-    (matrix->m[12]) = (f32) ((matrix->m[12]) + (((struct CVector3_t *) ((s8 *) arg1))->x));
-    (matrix->m[13]) = (f32) ((matrix->m[13]) + (((struct CVector3_t *) ((s8 *) arg1))->y));
-    (matrix->m[14]) = (f32) ((matrix->m[14]) + (((struct CVector3_t *) ((s8 *) arg1))->z));
+void XMath_AddMatrixTranslation(Matrix *matrix, void *translation) {
+    (matrix->m[12]) = (f32) ((matrix->m[12]) + (((struct CVector3_t *) ((s8 *) translation))->x));
+    (matrix->m[13]) = (f32) ((matrix->m[13]) + (((struct CVector3_t *) ((s8 *) translation))->y));
+    (matrix->m[14]) = (f32) ((matrix->m[14]) + (((struct CVector3_t *) ((s8 *) translation))->z));
 }
 
 /** Combine three column vectors into the first three matrix columns. */
-void XMath_SetMatrixRows(float *arg0, float *arg1, float *arg2, float *rowZ) {
-    arg0[0] = arg1[0];
-    arg0[4] = arg1[1];
-    arg0[8] = arg1[2];
-    arg0[1] = arg2[0];
-    arg0[5] = arg2[1];
-    arg0[9] = arg2[2];
-    arg0[2] = rowZ[0];
-    arg0[6] = rowZ[1];
-    arg0[10] = rowZ[2];
+void XMath_SetMatrixRows(float *matrix, float *rowX, float *rowY, float *rowZ) {
+    matrix[0] = rowX[0];
+    matrix[4] = rowX[1];
+    matrix[8] = rowX[2];
+    matrix[1] = rowY[0];
+    matrix[5] = rowY[1];
+    matrix[9] = rowY[2];
+    matrix[2] = rowZ[0];
+    matrix[6] = rowZ[1];
+    matrix[10] = rowZ[2];
 }
 
 /** Split the first three matrix columns into three vectors. */
-void XMath_GetMatrixRows(float *arg0, float *arg1, float *arg2, float *arg3) {
-    arg1[0] = arg0[0];
-    arg1[1] = arg0[4];
-    arg1[2] = arg0[8];
-    arg2[0] = arg0[1];
-    arg2[1] = arg0[5];
-    arg2[2] = arg0[9];
-    arg3[0] = arg0[2];
-    arg3[1] = arg0[6];
-    arg3[2] = arg0[10];
+void XMath_GetMatrixRows(float *inputMatrix, float *rowX, float *rowY, float *rowZ) {
+    rowX[0] = inputMatrix[0];
+    rowX[1] = inputMatrix[4];
+    rowX[2] = inputMatrix[8];
+    rowY[0] = inputMatrix[1];
+    rowY[1] = inputMatrix[5];
+    rowY[2] = inputMatrix[9];
+    rowZ[0] = inputMatrix[2];
+    rowZ[1] = inputMatrix[6];
+    rowZ[2] = inputMatrix[10];
 }
 
 /** Write three row vectors into the first three matrix rows. */
-void XMath_SetMatrixColumns(float *arg0, float *arg1, float *arg2, float *arg3) {
-    arg0[0] = arg1[0];
-    arg0[1] = arg1[1];
-    arg0[2] = arg1[2];
-    arg0[4] = arg2[0];
-    arg0[5] = arg2[1];
-    arg0[6] = arg2[2];
-    arg0[8] = arg3[0];
-    arg0[9] = arg3[1];
-    arg0[10] = arg3[2];
+void XMath_SetMatrixColumns(float *matrix, float *columnX, float *columnY, float *columnZ) {
+    matrix[0] = columnX[0];
+    matrix[1] = columnX[1];
+    matrix[2] = columnX[2];
+    matrix[4] = columnY[0];
+    matrix[5] = columnY[1];
+    matrix[6] = columnY[2];
+    matrix[8] = columnZ[0];
+    matrix[9] = columnZ[1];
+    matrix[10] = columnZ[2];
 }
 
 /** Split the first three matrix rows into three row vectors. */
-void XMath_GetMatrixColumns(float *arg0, float *arg1, float *arg2, float *arg3) {
-    arg1[0] = arg0[0];
-    arg1[1] = arg0[1];
-    arg1[2] = arg0[2];
-    arg2[0] = arg0[4];
-    arg2[1] = arg0[5];
-    arg2[2] = arg0[6];
-    arg3[0] = arg0[8];
-    arg3[1] = arg0[9];
-    arg3[2] = arg0[10];
+void XMath_GetMatrixColumns(float *inputMatrix, float *columnX, float *columnY, float *columnZ) {
+    columnX[0] = inputMatrix[0];
+    columnX[1] = inputMatrix[1];
+    columnX[2] = inputMatrix[2];
+    columnY[0] = inputMatrix[4];
+    columnY[1] = inputMatrix[5];
+    columnY[2] = inputMatrix[6];
+    columnZ[0] = inputMatrix[8];
+    columnZ[1] = inputMatrix[9];
+    columnZ[2] = inputMatrix[10];
 }
 
 /** Thin wrapper forwarding arg0 twice (as first and third args) to XMath_MultiplyMatrices. */
@@ -300,20 +300,20 @@ void XMath_PremultiplyMatrix(int destinationMatrix, int leftMatrix) {
     XMath_MultiplyMatrices(destinationMatrix, leftMatrix, destinationMatrix);
 }
 
-void XMath_PostmultiplyMatrix(s32 destinationMatrix, s32 arg1) {
-    XMath_MultiplyMatrices(destinationMatrix, destinationMatrix, arg1);
+void XMath_PostmultiplyMatrix(s32 destinationMatrix, s32 rightMatrix) {
+    XMath_MultiplyMatrices(destinationMatrix, destinationMatrix, rightMatrix);
 }
 
-void XMath_TransformPointArray(void *arg0, void *arg1, void *arg2, s32 arg3) {
-    u8 *m = (u8 *) arg0;
+void XMath_TransformPointArray(void *matrix, void *outputPoints, void *inputPoints, s32 pointCount) {
+    u8 *m = (u8 *) matrix;
     s32 i;
     f32 vx, vy, vz;
 
     i = 0;
-    if (arg3 > 0) {
+    if (pointCount > 0) {
         do {
-            u8 *v = (u8 *) arg2 + i * 0xC;
-            u8 *out = (u8 *) arg1 + i * 0xC;
+            u8 *v = (u8 *) inputPoints + i * 0xC;
+            u8 *out = (u8 *) outputPoints + i * 0xC;
 
             vx = ((CVector3 *)(v))->x;
             vy = ((CVector3 *)(v))->y;
@@ -322,11 +322,11 @@ void XMath_TransformPointArray(void *arg0, void *arg1, void *arg2, s32 arg3) {
             ((CVector3 *)(out))->y = (((Matrix *)(m))->m[1] * vx) + (((Matrix *)(m))->m[5] * vy) + (((Matrix *)(m))->m[9] * vz) + ((Matrix *)(m))->m[13];
             ((CVector3 *)(out))->z = (((Matrix *)(m))->m[2] * vx) + (((Matrix *)(m))->m[6] * vy) + (((Matrix *)(m))->m[10] * vz) + ((Matrix *)(m))->m[14];
             i += 1;
-        } while (i < arg3);
+        } while (i < pointCount);
     }
 }
 
-void XMath_BuildAxisAngleMatrix(struct MatrixF *matrixF, CVector3 *arg1, f32 radians) {
+void XMath_BuildAxisAngleMatrix(struct MatrixF *matrixF, CVector3 *axis, f32 radians) {
     f32 sine;
     f32 cosine;
     f32 cosine_value;
@@ -348,20 +348,20 @@ void XMath_BuildAxisAngleMatrix(struct MatrixF *matrixF, CVector3 *arg1, f32 rad
 
     XMath_EvaluateSineCosine(radians, &sine, &cosine);
     cosine_value = cosine;
-    one = D_800C5CCC_de;
+    one = k_xmathAxisAngleUnit;
     one_minus_cosine = one - cosine_value;
-    tx = one_minus_cosine * arg1->x;
-    ty = one_minus_cosine * arg1->y;
-    tz = one_minus_cosine * arg1->z;
-    txx = tx * arg1->x;
-    txy = tx * arg1->y;
-    txz = tx * arg1->z;
-    tyy = ty * arg1->y;
-    tyz = ty * arg1->z;
-    tzz = tz * arg1->z;
-    sx = sine * arg1->x;
-    sy = sine * arg1->y;
-    sz = sine * arg1->z;
+    tx = one_minus_cosine * axis->x;
+    ty = one_minus_cosine * axis->y;
+    tz = one_minus_cosine * axis->z;
+    txx = tx * axis->x;
+    txy = tx * axis->y;
+    txz = tx * axis->z;
+    tyy = ty * axis->y;
+    tyz = ty * axis->z;
+    tzz = tz * axis->z;
+    sx = sine * axis->x;
+    sy = sine * axis->y;
+    sz = sine * axis->z;
     zero = 0.0f;
     matrixF->m[3][2] = zero;
     matrixF->m[3][1] = zero;
@@ -381,21 +381,21 @@ void XMath_BuildAxisAngleMatrix(struct MatrixF *matrixF, CVector3 *arg1, f32 rad
     matrixF->m[2][2] = tzz + cosine_value;
 }
 
-void XMath_BuildScaleRotationTranslationMatrix(void *matrix, CVector3 *arg1, void *angles, CVector3 *arg3) {
+void XMath_BuildScaleRotationTranslationMatrix(void *matrix, CVector3 *scale, void *angles, CVector3 *translation) {
     Matrix *m = matrix;
 
     MatrixFromAngles(matrix, angles);
 
-    m->m[0] = m->m[0] * arg1->x;
-    m->m[1] = m->m[1] * arg1->x;
-    m->m[2] = m->m[2] * arg1->x;
-    m->m[4] = m->m[4] * arg1->y;
-    m->m[5] = m->m[5] * arg1->y;
-    m->m[6] = m->m[6] * arg1->y;
-    m->m[8] = m->m[8] * arg1->z;
-    m->m[9] = m->m[9] * arg1->z;
-    m->m[10] = m->m[10] * arg1->z;
-    m->m[12] = m->m[12] + arg3->x;
-    m->m[13] = m->m[13] + arg3->y;
-    m->m[14] = m->m[14] + arg3->z;
+    m->m[0] = m->m[0] * scale->x;
+    m->m[1] = m->m[1] * scale->x;
+    m->m[2] = m->m[2] * scale->x;
+    m->m[4] = m->m[4] * scale->y;
+    m->m[5] = m->m[5] * scale->y;
+    m->m[6] = m->m[6] * scale->y;
+    m->m[8] = m->m[8] * scale->z;
+    m->m[9] = m->m[9] * scale->z;
+    m->m[10] = m->m[10] * scale->z;
+    m->m[12] = m->m[12] + translation->x;
+    m->m[13] = m->m[13] + translation->y;
+    m->m[14] = m->m[14] + translation->z;
 }

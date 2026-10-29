@@ -8,7 +8,7 @@
 #include "COMMON/ACTIVE.H"
 #include "COMMON/RECTANGLE_DRAW.H"
 #include "COMMON/CONTROL.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "FRONTEND/RANDOM_SETUPRANDOMTEAMS.H"
 #include "FRONTEND/RANDOM_CHOOSERANDOMCHARACTER.H"
 
@@ -25,14 +25,14 @@ s32 Random_AddStageOpponent(u8 *request) {
     Shared_Game *settings;
 
     for (i = 7; i > 0; i--) {
-        settings = &D_801462C8;
+        settings = &g_gameSettings;
         if (settings->playerSettings[i].enabled != 1) {
             break;
         }
     }
     result = -1;
     if (i >= 0) {
-        player = &D_801462C8.playerSettings[i];
+        player = &g_gameSettings.playerSettings[i];
         player->locked = 1;
         player->enabled = 1;
         player->slot = i;
@@ -71,7 +71,7 @@ s32 Random_AddStageOpponent(u8 *request) {
 }
 
 /* Sets up the attract-mode demo match: shuffles the character/level tables, seats 2-4 random players (the first group of
- * 1-2 as unlocked, the rest locked) with random costumes and names, and picks the level goal in D_8014DD98.
+ * 1-2 as unlocked, the rest locked) with random costumes and names, and picks the level goal in g_currentResultMode.
  * The last loop looks for the last enabled seat and never uses the answer: flow deletes its store after loop.c has
  * hoisted the 1 and strength-reduced the seat offset, so the ROM keeps only the counter, a0=1 and the 0xD0+0x96*i offset. */
 void Random_SetupRandomTeams(void) {
@@ -102,7 +102,7 @@ void Random_SetupRandomTeams(void) {
     if (unlockedCount == 3) {
         unlockedCount = 2;
     }
-    game = &D_801462C8;
+    game = &g_gameSettings;
     for (i = 0; i < 8; i++) {
         player = &game->playerSettings[i];
         player->controlMode = 0;
@@ -134,13 +134,13 @@ void Random_SetupRandomTeams(void) {
             firstIndex = i;
         }
     }
-    D_801462C8.counters.transitionActive = 1;
+    g_gameSettings.counters.transitionActive = 1;
     game->local = 1;
     game->mode1E = 8;
     game->controllerMode = 0;
     game->laps = 0;
     game->players = 0;
-    levelGoal = &D_8014DD98;
+    levelGoal = &g_currentResultMode;
     levelGoal->kind = 2;
     levelGoal->goal = arenas[Graphu64_NextRandom() % 4];
 }

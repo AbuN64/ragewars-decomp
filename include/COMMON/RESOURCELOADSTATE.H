@@ -4,17 +4,17 @@
 #include "COMMON/AIPROFILE.H"
 
 
-extern float D_800C2E88_de;
+extern float g_playerMovementForwardAnimationThreshold;
 
-struct ActorRecAt16E0;
-typedef struct ActorRecAt16E0 ActorRecAt16E0;
+struct FragTagRespawnActorView;
+typedef struct FragTagRespawnActorView FragTagRespawnActorView;
 
-struct ActorRecAt16E0;
+struct FragTagRespawnActorView;
 
 
 
-struct func_8022ECBC_S1;
-typedef struct func_8022ECBC_S1 func_8022ECBC_S1;
+struct PlayerRespawnHealthView;
+typedef struct PlayerRespawnHealthView PlayerRespawnHealthView;
 
 
 
@@ -42,23 +42,23 @@ struct ObjCode8022E938;
 
 
 
-extern float D_800C2E2C_de;
+extern float g_playerSurfaceAudioBaseLevel;
 
 
 
 
-struct func_8022ECBC_S1;
+struct PlayerRespawnHealthView;
 
 
 
 
 
 
-extern float D_800C2E28_de;
+extern float g_playerSurfaceAudioHeightScale;
 
 
 
-extern float D_800C2E8C_de;
+extern float g_playerMovementReverseAnimationThreshold;
 
 
 
@@ -68,8 +68,8 @@ typedef struct ObjCode8022E938 ObjCode8022E938;
 
 struct ObjCode8022E938;
 
-extern float D_800C2E24_de;
+extern float g_playerSurfaceAudioHeightThreshold;
 
 
-extern void *D_800D052C[];
+extern void *g_weaponInfoByType[];
 #endif

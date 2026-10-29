@@ -8,17 +8,17 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 struct SharedPlayer;
 
-struct Actor_func_802238E0_de;
-struct Actor_func_802238E0_de {
+struct PlayerBodyMotionView;
+struct PlayerBodyMotionView {
     char pad0[0x8];
-    CVector3 unk8;
+    CVector3 position;
     char pad14[0xc];
-    f32 unk20;
+    f32 verticalSpeed;
     char pad24[0x14];
     s32 inputFlags;
 };
 
-extern float D_800C78BC;
+extern float g_movementHealthRegenerationSpeedScale;
 
 
 struct BodyPlayerUpdateStandingState;
@@ -28,7 +28,7 @@ struct BodyPlayerUpdateStandingState {
     s32 y;
     s32 z;
     char pad14[0x18 - 0x14];
-    func_80204468_S3 *surface;
+    LinkedWorldFlagsView *surface;
     char pad1C[0x20 - 0x1C];
     s32 stroke;
     char pad24[0x38 - 0x24];
@@ -37,8 +37,8 @@ struct BodyPlayerUpdateStandingState {
     f32 heading;
 };
 
-struct ObjectLinks854;
-struct ObjectLinks854 {
+struct PlayerSequenceActorView;
+struct PlayerSequenceActorView {
     char pad0[0x14];
     u16 * unk_14;
     char pad14[0x50 - 0x14 - sizeof(u16*)];
@@ -62,7 +62,7 @@ struct BodyPlayerUpdateWadingState {
     s32 y;
     s32 z;
     char pad14[0x18 - 0x14];
-    func_80204468_S3 *surface;
+    LinkedWorldFlagsView *surface;
     char pad1C[0x20 - 0x1C];
     s32 stroke;
     char pad24[0x38 - 0x24];
@@ -117,12 +117,12 @@ struct TeamInfo;
 struct View;
 /* This transition uses the canonical player record; its original fields have identical offsets. */
 
-struct BodyRecAt1C;
-struct BodyRecAt1C {
+struct PlayerRespawnBodyView;
+struct PlayerRespawnBodyView {
     char pad0[0x1C];
     s32 motion[3];
 };
-struct BodyRecAt1C;
+struct PlayerRespawnBodyView;
 struct Character;
 struct Controller;
 struct Controls;
@@ -144,12 +144,12 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 
-struct func_8021CD70_S1;
-struct func_8021CD70_S1 {
+struct TargetLockAttackerView;
+struct TargetLockAttackerView {
     char pad0[0x170];
-    s8 unk170;
+    s8 targetProbeState;
     char pad170[0x4BD];
-    s16 unk62E;
+    s16 weaponId;
 };
 
 
@@ -217,17 +217,17 @@ struct TeamInfo;
 struct View;
 
 
-struct ObjectState54;
-struct ObjectState54 {
+struct PlayerGroundContactView;
+struct PlayerGroundContactView {
     char pad0[0x30];
     f32 unk_30;
     char pad30[0x52 - 0x30 - sizeof(f32)];
     u16 unk_52;
 };
 
-extern float D_800C9FA0_de;
+extern float g_playerDebugThrowHeadingOffset;
 
-extern float D_800C2994_de;
+extern float g_playerFlyVerticalSpeedDecay;
 
 struct Tuning;
 struct Tuning {
@@ -238,7 +238,7 @@ struct Tuning {
 struct PlayerWeaponsUpdatePlayerCamera;
 typedef struct PlayerWeaponsUpdatePlayerCamera PlayerWeaponsUpdatePlayerCamera;
 
-extern float D_800C299C_de;
+extern float g_playerFlyNegativeYawPeriod;
 
 
 struct MovementDescriptor;
@@ -295,34 +295,34 @@ struct BodyWeaponsUpdatePlayerCamera {
     f32 heading;
 };
 
-struct BodyRecAt1C;
-typedef struct BodyRecAt1C BodyRecAt1C;
+struct PlayerRespawnBodyView;
+typedef struct PlayerRespawnBodyView PlayerRespawnBodyView;
 
 
 struct SharedMovement;
 typedef struct SharedMovement SharedMovement;
 
-extern float D_800C2960_de;
+extern float g_playerFlyYawInputScale;
 
-struct func_80224078_Arg1;
-typedef struct func_80224078_Arg1 func_80224078_Arg1;
+struct PlayerFlyBodyView;
+typedef struct PlayerFlyBodyView PlayerFlyBodyView;
 
 
 struct Tuning;
 typedef struct Tuning Tuning;
 
 
-struct func_80224078_Arg0;
-typedef struct func_80224078_Arg0 func_80224078_Arg0;
+struct PlayerFlyModeView;
+typedef struct PlayerFlyModeView PlayerFlyModeView;
 
 
-extern float D_800C2988_de;
+extern float g_playerFlyStrafeSpeedDecay;
 
 struct Shared_HudPlayer;
 typedef struct Shared_HudPlayer Shared_HudPlayer;
 
-struct ObjectState521;
-struct ObjectState521 {
+struct PlayerViewSavedBytes;
+struct PlayerViewSavedBytes {
     unsigned char padding_0[1312];
     u8 unk_520;
 };
@@ -332,8 +332,8 @@ typedef struct Desc Desc;
 
 
 
-struct ObjectState108;
-struct ObjectState108 {
+struct PlayerSequenceResourceView;
+struct PlayerSequenceResourceView {
     char pad0[0x44];
     u32 resourceFlagBits;
     char pad44[0xFC - 0x44 - sizeof(u32)];
@@ -344,30 +344,30 @@ struct ObjectState108 {
     f32 unk_104;
 };
 
-struct ObjectState108;
-typedef struct ObjectState108 ObjectState108;
+struct PlayerSequenceResourceView;
+typedef struct PlayerSequenceResourceView PlayerSequenceResourceView;
 
-struct func_8021CD70_S1;
-typedef struct func_8021CD70_S1 func_8021CD70_S1;
+struct TargetLockAttackerView;
+typedef struct TargetLockAttackerView TargetLockAttackerView;
 
-struct ObjectState54;
-typedef struct ObjectState54 ObjectState54;
+struct PlayerGroundContactView;
+typedef struct PlayerGroundContactView PlayerGroundContactView;
 
 struct Desc;
 
-extern float D_800C2998_de;
+extern float g_playerFlyPositiveYawPeriod;
 
-extern float D_800C2980_de;
+extern float g_playerFlyLeftSpeedScale;
 
-extern float D_800C78B8;
+extern float g_movementHealthRegenerationSpeedThreshold;
 
 
-struct func_8021CD70_S2;
-typedef struct func_8021CD70_S2 func_8021CD70_S2;
+struct TargetLockTargetView;
+typedef struct TargetLockTargetView TargetLockTargetView;
 
-extern float D_800C2978_de;
+extern float g_playerFlyForwardSpeedDecay;
 
-extern float D_800C2984_de;
+extern float g_playerFlyRightSpeedScale;
 
 struct Body;
 struct Character;
@@ -505,10 +505,10 @@ struct Shared_HudPlayer {
     s32 hideLives;
 };
 
-struct ObjectLinks854;
-typedef struct ObjectLinks854 ObjectLinks854;
+struct PlayerSequenceActorView;
+typedef struct PlayerSequenceActorView PlayerSequenceActorView;
 
-extern float D_800C2968_de;
+extern float g_playerFlyPitchInputScale;
 
 
 struct BodyPlayerUpdateStandingState;
@@ -534,7 +534,7 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 
-extern float D_800C298C_de;
+extern float g_playerFlyRiseAcceleration;
 
 struct View;
 
@@ -543,21 +543,21 @@ typedef struct BodyWeaponsUpdatePlayerCamera BodyWeaponsUpdatePlayerCamera;
 
 struct SharedMovement;
 struct SharedMovement {
-    f32 unk0;
-    f32 unk4;
-    f32 unk8;
-    f32 unkC;
-    f32 unk10;
-    f32 unk14;
-    f32 unk18;
-    f32 unk1C;
+    f32 acceleration;
+    f32 speedLimit;
+    f32 speedDecay;
+    f32 strafeAccelerationOrBoostSpeed;
+    f32 strafeLimitOrBoostDecay;
+    f32 strafeDecayOrLiftAcceleration;
+    f32 boostSpeedOrLiftLimit;
+    f32 boostDecayOrLiftImpulse;
     char pad20[0x2];
-    s16 unk22;
+    s16 boostSoundId;
 };
 
-extern float D_800CAB88_eu;
+extern float g_playerDebugThrowDistance;
 
-extern float D_800CAB78_eu[];
+extern float g_hudPlayerMarkerHorizontalOffsets[];
 
 struct BodyPlayerUpdateFloatingState;
 typedef struct BodyPlayerUpdateFloatingState BodyPlayerUpdateFloatingState;
@@ -585,7 +585,7 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 
-extern float D_800C2970_de;
+extern float g_playerFlyReverseSpeedScale;
 
 struct Body;
 struct Character;
@@ -610,66 +610,66 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 
-struct func_80224078_Arg0;
-struct func_80224078_Arg0 {
+struct PlayerFlyModeView;
+struct PlayerFlyModeView {
     char pad0[0x5DC];
-    void *unk5DC;
+    void *view;
     char pad5E0[0x650 - 0x5E0];
-    s16 unk650;
+    s16 action;
     char pad652[0x698 - 0x652];
-    void *unk698;
+    void *controller;
     char pad69C[0x6A4 - 0x69C];
-    f32 unk6A4;
-    f32 unk6A8;
-    s32 unk6AC;
-    s32 unk6B0;
+    f32 forwardInput;
+    f32 lateralInput;
+    s32 motionFlags;
+    s32 inputFlags;
     char pad6B4[0x6C0 - 0x6B4];
-    f32 unk6C0;
-    f32 unk6C4;
+    f32 forwardSpeed;
+    f32 lateralSpeed;
     char pad6C8[0x6E8 - 0x6C8];
-    CVector3 unk6E8;
+    CVector3 previousPosition;
     char pad6F4[0x724 - 0x6F4];
-    f32 unk724;
-    s32 unk728;
-    s32 unk72C;
+    f32 pitch;
+    s32 yawSway;
+    s32 lean;
 };
 
 
 
 
-struct func_8021CD70_S2;
-struct ObjRecAt14V3;
-struct func_8021CD70_S2 {
+struct TargetLockTargetView;
+struct ActorDefinitionFlagsView;
+struct TargetLockTargetView {
     char pad0[0x18];
-    struct ObjRecAt14V3 * unk18;
+    struct ActorDefinitionFlagsView * definition;
     char pad18[0xE4];
-    s32 unk100;
+    s32 renderFlags;
     char pad100[0x70];
-    s32 unk174;
+    s32 health;
     char pad174[0x2C];
-    s8 unk1A4;
+    s8 targetLockState;
     char pad1A4[0x437];
-    void * unk5DC;
+    void * view;
 };
 
-extern float D_800C297C_de;
+extern float g_playerFlyStrafeAcceleration;
 
-struct func_80224078_Arg1;
-struct func_80224078_Arg1 {
+struct PlayerFlyBodyView;
+struct PlayerFlyBodyView {
     char pad0[8];
-    char unk8;
+    char position;
     char pad9[0x14 - 9];
-    s32 unk14;
+    s32 model;
     char pad18[0x20 - 0x18];
-    f32 unk20;
+    f32 verticalSpeed;
     char pad24[0x6C - 0x24];
-    f32 unk6C;
+    f32 yaw;
 };
 
-extern float D_800C2974_de;
+extern float g_playerFlyForwardSpeedScale;
 
-struct ObjectState521;
-typedef struct ObjectState521 ObjectState521;
+struct PlayerViewSavedBytes;
+typedef struct PlayerViewSavedBytes PlayerViewSavedBytes;
 
 
 struct SharedPlayer;
@@ -677,8 +677,8 @@ struct SharedPlayer;
 
 
 
-struct Actor_func_802238E0_de;
-typedef struct Actor_func_802238E0_de Actor_func_802238E0_de;
+struct PlayerBodyMotionView;
+typedef struct PlayerBodyMotionView PlayerBodyMotionView;
 
 struct BodyPlayerUpdateStandingState;
 typedef struct BodyPlayerUpdateStandingState BodyPlayerUpdateStandingState;
@@ -690,7 +690,7 @@ struct ModelBlend;
 struct Object;
 
 
-extern float D_800C2990_de;
+extern float g_playerFlyFallAcceleration;
 
 
 #include "WEAPONS/AIM_TYPES.H"
@@ -700,8 +700,8 @@ extern float D_800C2990_de;
 
 
 
-extern const f32 D_800C23B4_de;
-extern const f32 D_800C23B8_de;
+extern const f32 g_playerAimSpringAcceleration;
+extern const f32 g_playerAimSpringDamping;
 
 typedef struct DraftAimPlayer {
     char pad0[8]; CVector3 position;
@@ -729,8 +729,8 @@ typedef struct ThrowPlayer {
 typedef struct ThrowPosition {
     char pad00[8]; CVector3 pos; char pad14[0x58]; f32 angle;
 } ThrowPosition;
-extern f32 D_800C2870_de;
-extern f32 D_800C2878_de;
+extern f32 g_playerHeavyThrowShakeStrength;
+extern f32 g_playerLightThrowShakeStrength;
 extern void Gsky_StartScaledShake(char *, f32, f32, f32, f32, s32, CVector3);
 
 typedef struct PowerHudAnimation {
@@ -744,11 +744,11 @@ typedef struct PowerHudPlayer {
     char padEE0[0x4D8]; s32 refreshA,refreshB,refreshC;
 } PowerHudPlayer;
 extern s32 Frontend_GetScreenMode(void);
-extern s32 func_8022AB9C_de(void *);
+extern s32 Playerai_GetSelectedAmmoIcon(void *);
 extern s32 OnScreen_StartMoverScript(void *,s32 *);
 extern void OnScreen_DrawSpriteNumber(s32,f32,f32,f32,f32,s32,s32,s32);
-extern s32 D_800C9288_de[];
-extern s32 D_800C9328_de[];
-extern s32 D_800C9368[];
-extern s32 D_800C9398_de[];
+extern s32 g_playerAmmoFirstMoverScript[];
+extern s32 g_playerAmmoSecondMoverScript[];
+extern s32 g_playerAmmoThirdMoverScriptStandard[];
+extern s32 g_playerAmmoThirdMoverScriptAlternate[];
 #endif

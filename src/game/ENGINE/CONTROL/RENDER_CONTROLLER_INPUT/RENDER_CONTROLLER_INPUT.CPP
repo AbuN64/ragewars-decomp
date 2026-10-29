@@ -1,30 +1,30 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/rw_pool_80264104_C9FF8_us_rev1.c */
-const unsigned int D_blob_f4126ef72f730e45faf9[1] = {
+const unsigned int k_RenderControllerInputOneWords[1] = {
     0x3F800000,
 };
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C423C[1] = {
+unsigned int k_RenderControllerInputEncodedWords[1] = {
     0x5F486569,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C45FC[1] = {
+unsigned int k_RenderControllerInputEncodedWordsBlock2[1] = {
     0x0044EDC0,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C45BC[1] = {
+unsigned int k_RenderControllerInputEncodedWordsBlock1[1] = {
     0x8FAA0028,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C430C[1] = {
+unsigned int k_RenderControllerInputSixteenWords[1] = {
     0x41800000,
 };
 #endif

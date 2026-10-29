@@ -11,8 +11,8 @@
  * through Unicol_SweepActorMotion and stores the wheel's reach as the XZ distance to whatever was hit (diagonals
  * scaled by 1/sqrt 2, components tested against the zeroed y), or the full ray length on a miss. */
 extern CVector3 g_actorRadialDirections[8];
-extern SweepHit *D_80103FCC;
-extern CCollisionInfo2_t D_80103FD0;
+extern SweepHit *g_collisionCurrentActor;
+extern CCollisionInfo2_t g_particleCollisionProbeResult;
 extern f32 InstHdr_GetActorReach(Player *);
 extern f32 Gobjinst_GetActorRadius(Player *);
 extern f32 Gobjinst_GetActorHeight(Player *);
@@ -37,8 +37,8 @@ void Wheel_MeasureWheelReach(Player *player, s32 wheel) {
     a = InstHdr_GetActorReach(player);
     b = Gobjinst_GetActorRadius(player);
     c = Gobjinst_GetActorHeight(player);
-    if (Unicol_SweepActorMotion(player, from, to, &D_80103FD0, a, b, c, InstHdr_GetActorBaseOffset(player))) {
-        delta = D_80103FCC->pos;
+    if (Unicol_SweepActorMotion(player, from, to, &g_particleCollisionProbeResult, a, b, c, InstHdr_GetActorBaseOffset(player))) {
+        delta = g_collisionCurrentActor->pos;
         delta.x -= from.x;
         delta.y = 0.0f;
         delta.z -= from.z;
@@ -110,11 +110,11 @@ void Wheel_MeasureWheelClearance(Player *player, s32 wheel) {
             storeClearance(player, wheel, i, reach);
             return;
         }
-        if (D_80103FCC->kind == 5 || D_80103FCC->kind == 6) {
+        if (g_collisionCurrentActor->kind == 5 || g_collisionCurrentActor->kind == 6) {
             storeClearance(player, wheel, i, reach);
             return;
         }
-        if (D_80103FCC->pos.y <= below.y - 100.0f) {
+        if (g_collisionCurrentActor->pos.y <= below.y - 100.0f) {
             storeClearance(player, wheel, i, reach);
             return;
         }
@@ -168,7 +168,7 @@ void Wheel_PrepareProbeSegments(AiController *controller) {
 void Wheel_MeasureWheelReach(Player *player, s32 wheel);
 void Wheel_MeasureWheelClearance(Player *player, s32 wheel);
 
-int Wheel_AdvanceWheelProbe(PlayerRecAt1CC *p) {
+int Wheel_AdvanceWheelProbe(WheelProbeClipState *p) {
     if (p == 0) {
         return 1;
     }
@@ -185,56 +185,56 @@ int Wheel_AdvanceWheelProbe(PlayerRecAt1CC *p) {
     return 1;
 }
 
-s32 Wheel_GetDirectionSector(f32 arg0) {
-    f32 var_f0;
+s32 Wheel_GetDirectionSector(f32 angle) {
+    f32 zeroBound;
 
-    arg0 += D_800C1FD8_de;
-    if (D_800C1FDC_de <= arg0) {
+    angle += g_wheelNegativeAngleWrap;
+    if (g_wheelPositiveAngleWrap <= angle) {
         do {
-            arg0 -= D_800C1FDC_de;
-        } while (D_800C1FDC_de <= arg0);
+            angle -= g_wheelPositiveAngleWrap;
+        } while (g_wheelPositiveAngleWrap <= angle);
     }
-    var_f0 = 0.0f;
-    if (arg0 < var_f0) {
+    zeroBound = 0.0f;
+    if (angle < zeroBound) {
         do {
-            arg0 += D_800C1FE0_de;
-        } while (arg0 < var_f0);
+            angle += g_wheelSectorAngleOffset;
+        } while (angle < zeroBound);
     }
-    if (D_800C1FE4_de < arg0) {
-        arg0 = D_800C1FE4_de;
+    if (g_wheelMaximumSectorAngle < angle) {
+        angle = g_wheelMaximumSectorAngle;
     }
-    if (arg0 < D_800C1FE8_de) {
-        arg0 = D_800C1FE8_de;
+    if (angle < g_wheelMinimumSectorAngle) {
+        angle = g_wheelMinimumSectorAngle;
     }
-    arg0 *= D_800C1FEC_de;
-    arg0 *= D_800C1FF0_de;
-    var_f0 = 0.0f;
-    if (arg0 < var_f0) {
-        arg0 = var_f0;
+    angle *= g_wheelAngleToSectorScale;
+    angle *= g_wheelSectorConversionLimits;
+    zeroBound = 0.0f;
+    if (angle < zeroBound) {
+        angle = zeroBound;
     }
-    if (D_800C1FF0_de <= arg0) {
-        arg0 = *(&D_800C1FF0_de + 1);
+    if (g_wheelSectorConversionLimits <= angle) {
+        angle = *(&g_wheelSectorConversionLimits + 1);
     }
-    return (s32)arg0;
+    return (s32)angle;
 }
 
-int Wheel_NextDirectionSector(int arg0) {
-    int result = arg0 + 1;
+int Wheel_NextDirectionSector(int sector) {
+    int result = sector + 1;
     if (result == 8) {
         result = 0;
     }
     return result;
 }
 
-int Wheel_PreviousDirectionSector(int arg0) {
-    int result = arg0 - 1;
-    if (arg0 == 0) {
+int Wheel_PreviousDirectionSector(int sector) {
+    int result = sector - 1;
+    if (sector == 0) {
         result = 7;
     }
     return result;
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_80211014[12] =
+char s_WheelSFXMAG60RText[12] =
     "SFX_MAG_60_R";
 #endif

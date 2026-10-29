@@ -2,25 +2,25 @@
 
 /* DATA_800E3724.CPP */
 #if defined(VERSION_US_REV1)
-extern char D_0041CEB0[];
-extern char D_0041D1A4[];
-extern char D_0041DC0C[];
-extern char D_0041DC3C[];
-extern char D_0041DD30[];
-extern char D_0041DE64[];
-extern char D_0041DECC[];
-extern char D_0041DF04[];
-unsigned int D_auto_src_ragewars_event_handlers_E4324_us_rev1[27] = {
-    0x00000E08, 0x00000010, (unsigned int)D_0041D1A4, 0x00000E07, 0x00000010, (unsigned int)D_0041DC3C, 0x0000000A, 0x00000010,
-    (unsigned int)D_0041DE64, 0x00000E0A, 0x00000010, (unsigned int)D_0041DD30, 0x00000E06, 0x00000010, (unsigned int)D_0041CEB0, 0x00000E03,
-    0x00000010, (unsigned int)D_0041DC0C, 0x00000002, 0x00000010, (unsigned int)D_0041DECC, 0x00000001, 0x00000010, (unsigned int)D_0041DF04,
+extern char g_Frontend_CreateSlotSelectionMenuAddress[];
+extern char g_Frontend_AnimateSlotSelectionMenuAddress[];
+extern char g_Focus_FreeMenuBlockAddress[];
+extern char g_Menu_PositionSelectionMenuModelAddress[];
+extern char g_Menu_DrawMenuBlockModelAddress[];
+extern char g_Menu_HandleNextProfileEventAddress[];
+extern char g_Menu_BeginSelectionMenuExitAddress[];
+extern char g_Menu_ConsumeSelectionMenuEventAddress[];
+unsigned int g_slotSelectionMenuEventHandlerRecordsUsRev1[27] = {
+    0x00000E08, 0x00000010, (unsigned int)g_Frontend_AnimateSlotSelectionMenuAddress, 0x00000E07, 0x00000010, (unsigned int)g_Menu_PositionSelectionMenuModelAddress, 0x0000000A, 0x00000010,
+    (unsigned int)g_Menu_HandleNextProfileEventAddress, 0x00000E0A, 0x00000010, (unsigned int)g_Menu_DrawMenuBlockModelAddress, 0x00000E06, 0x00000010, (unsigned int)g_Frontend_CreateSlotSelectionMenuAddress, 0x00000E03,
+    0x00000010, (unsigned int)g_Focus_FreeMenuBlockAddress, 0x00000002, 0x00000010, (unsigned int)g_Menu_BeginSelectionMenuExitAddress, 0x00000001, 0x00000010, (unsigned int)g_Menu_ConsumeSelectionMenuEventAddress,
     0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
 /* DATA_800E3790.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_d4_d3abb35991f02f9f[10] = {
+unsigned int g_rewardItemTierPairsUsRev1[10] = {
     0x00000063, 0x0000002E, 0x00000062, 0x0000002F, 0x00000061, 0x00000029, 0x0000005F, 0x0000002A,
     0x00000060, 0x00000030,
 };
@@ -55,7 +55,7 @@ unsigned int g_rewardItemTiers[102] = {
 /* DATA_800E39B4.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3594_unclaimed_E4390_unclaimed_E441C_unclaimed_E45B4 */
-unsigned int D_blob_ec212a60a6f0e4e76896[3] = {
+unsigned int g_rewardItemLabelPointerTailUsRev1[3] = {
     0x800D7490, 0x800D7494, 0x800D7498,
 };
 #endif

@@ -15,17 +15,17 @@ struct Vec4s;
 typedef struct Vec4s Vec4s;
 
 
-extern float D_800C442C_de;
+extern float k_clipEventFlagTwentyScale;
 
 
 struct ResourceManagerState;
 struct Triple;
 
 
-extern float D_800C4440_de;
+extern float k_damageSpecialScale;
 
 struct ActorEventsComputeDamageScale;
-struct PlayerRecAt122C;
+struct PlayerDamageFlagsView;
 struct ActorEventsComputeDamageScale {
     char pad0[8];
     CVector3 position;
@@ -34,7 +34,7 @@ struct ActorEventsComputeDamageScale {
     char pad74[0x100 - 0x74];
     s32 flags;
     char pad104[0x1D8 - 0x104];
-    struct PlayerRecAt122C *player;
+    struct PlayerDamageFlagsView *player;
 };
 
 
@@ -59,7 +59,7 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-struct func_8023945C_S1;
+struct PlayerEyePositionView;
 
 struct ActorEventsSpawnRiderImpactEffect;
 
@@ -69,7 +69,7 @@ typedef void ( *EventsDispatchCallbackCallback)(void *, void *, signed int, CVec
 
 struct EventCallbackEntry;
 
-extern float D_800C4424_de;
+extern float k_clipEventDefaultScale;
 
 
 
@@ -82,7 +82,7 @@ typedef struct ClipEventTargetView ClipEventTargetView;
 struct s_CEventValueFormat7a;
 typedef struct s_CEventValueFormat7a CEventValueFormat7a;
 
-extern float D_800C4420_de;
+extern float k_damageDefaultScale;
 
 
 
@@ -106,7 +106,7 @@ struct ClipEventTargetView;
 
 struct Vec4s;
 
-extern float D_800C9538;
+extern float k_playerEventClipHeightAndAngle;
 
 
 struct NodeEventsStartCameraFadeAtPoint;
@@ -116,17 +116,17 @@ struct NodeEventsStartCameraFadeAtPoint {
 };
 
 
-extern float D_800C46E8_eu;
+extern float k_damageEuropeanFalloffScale;
 
 struct s_CEventValueFormat7a;
 
 
-extern float D_800C4428_de;
+extern float k_clipEventFlagFortyScale;
 
 struct NodeEventsStartCameraFadeAtPoint;
 typedef struct NodeEventsStartCameraFadeAtPoint NodeEventsStartCameraFadeAtPoint;
 
-extern float D_800C4430_de;
+extern float k_weaponHitHeightScale;
 
 struct Target;
 typedef struct Target Target;

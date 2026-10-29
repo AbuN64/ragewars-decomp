@@ -54,34 +54,34 @@ struct Hit8 {
     f32 t;
 };
 
-extern float D_800C3744_de;
+extern float g_frontPlaneIntersectionFallbackFraction;
 
 struct RayEntryBlock;
 typedef struct RayEntryBlock RayEntryBlock;
 
-struct ActorRecAtB0;
-typedef struct ActorRecAtB0 ActorRecAtB0;
+struct PlatformSavedCollisionQueryView;
+typedef struct PlatformSavedCollisionQueryView PlatformSavedCollisionQueryView;
 
-struct OwnerRecAt18;
-typedef struct OwnerRecAt18 OwnerRecAt18;
+struct PlatformCollisionEntryOwner;
+typedef struct PlatformCollisionEntryOwner PlatformCollisionEntryOwner;
 
-struct OwnerRecAt18;
-struct OwnerRecAt18 {
+struct PlatformCollisionEntryOwner;
+struct PlatformCollisionEntryOwner {
     u8 pad0[0x18];
     u8 *entries;
 };
 
 struct ActorCPlatformCollisionTraceShape;
 struct ActorCPlatformCollisionTraceShape {
-    OwnerRecAt18 *owner;
+    PlatformCollisionEntryOwner *owner;
     u8 pad04[8];
-    f32 fieldC;
+    f32 radius;
     u8 pad10[0x30];
-    void *field40;
+    void *collisionShape;
     u8 pad44[0x18];
-    f32 field5C;
-    f32 field60;
-    f32 field64;
+    f32 movementX;
+    f32 movementY;
+    f32 movementZ;
 };
 
 struct InputCPlatformCollisionLiftActorToSurface;
@@ -90,8 +90,8 @@ typedef struct InputCPlatformCollisionLiftActorToSurface InputCPlatformCollision
 struct ContextB0;
 typedef struct ContextB0 ContextB0;
 
-struct FloatState68;
-typedef struct FloatState68 FloatState68;
+struct PlatformMovementView;
+typedef struct PlatformMovementView PlatformMovementView;
 
 
 struct Ray180;
@@ -107,8 +107,8 @@ struct EntryC {
     s32 unk_8;
 };
 
-struct ShapeRecAt18V1;
-struct ShapeRecAt18V1 {
+struct CollisionShapeDefinition;
+struct CollisionShapeDefinition {
     s32 flags;
     u16 kind;
     f32 radius;
@@ -118,15 +118,15 @@ struct ShapeRecAt18V1 {
     CVector3 center;
 };
 
-struct QueryRecAt58;
-struct QueryRecAt58 {
+struct PlatformCollisionQuery;
+struct PlatformCollisionQuery {
     s32 word0;
     s32 word4;
     s32 word8;
     s32 wordC;
     s32 word10;
     u8 pad14[0x40];
-    OwnerRecAt18 *owner;
+    PlatformCollisionEntryOwner *owner;
     s32 index;
     u8 pad5C[0x84];
 };
@@ -137,10 +137,10 @@ typedef struct ActorCPlatformCollisionTraceShape ActorCPlatformCollisionTraceSha
 struct Footprint;
 typedef struct Footprint Footprint;
 
-extern float D_800C3740_de;
+extern float g_frontPlaneIntersectionInitialFraction;
 
-struct FloatState20;
-struct FloatState20 {
+struct PlatformHeightView;
+struct PlatformHeightView {
     unsigned char padding_0[28];
     f32 unk_1C;
 };
@@ -168,8 +168,8 @@ struct ActorB0 {
 };
 
 
-struct FloatState68_2;
-struct FloatState68_2 {
+struct PlatformRadiusMovementView;
+struct PlatformRadiusMovementView {
     unsigned char padding_0[12];
     f32 unk_C;
     unsigned char padding_10[76];
@@ -178,13 +178,13 @@ struct FloatState68_2 {
     f32 unk_64;
 };
 
-struct QueryRecAt58;
-typedef struct QueryRecAt58 QueryRecAt58;
+struct PlatformCollisionQuery;
+typedef struct PlatformCollisionQuery PlatformCollisionQuery;
 
 struct IntPair;
 
-struct FloatState68;
-struct FloatState68 {
+struct PlatformMovementView;
+struct PlatformMovementView {
     unsigned char padding_0[92];
     f32 unk_5C;
     f32 unk_60;
@@ -196,21 +196,21 @@ struct RayCornerBounds {
     CVector3 corners[8];
 };
 
-struct EntryRecAt8V5;
-struct EntryRecAt8V5 {
+struct CollisionKindValueRecord;
+struct CollisionKindValueRecord {
     u8 pad0[4];
     u16 kind;
     u8 pad6[2];
     f32 value;
 };
 
-struct EntryRecAt8V5;
-typedef struct EntryRecAt8V5 EntryRecAt8V5;
+struct CollisionKindValueRecord;
+typedef struct CollisionKindValueRecord CollisionKindValueRecord;
 
 struct RayEntryBlock;
 struct RayEntryBlock {
     u8 pad[0x14];
-    EntryRecAt8V5 entry;
+    CollisionKindValueRecord entry;
 };
 
 struct SurfaceHit;
@@ -229,19 +229,19 @@ struct SurfaceHit {
     u8 pad5C[0x80];
 };
 
-struct ActorRecAtB0;
-struct ActorRecAtB0 {
+struct PlatformSavedCollisionQueryView;
+struct PlatformSavedCollisionQueryView {
     u8 pad00[0x3C];
     s32 flags;
     u8 pad40[0x70];
     SurfaceHit saved_query;
 };
 
-struct ObjRecAt34;
-typedef struct ObjRecAt34 ObjRecAt34;
+struct PlatformActivityPhaseView;
+typedef struct PlatformActivityPhaseView PlatformActivityPhaseView;
 
-struct EntryRecAt4V3;
-struct EntryRecAt4V3 {
+struct CollisionKindRecord;
+struct CollisionKindRecord {
     u8 pad0[4];
     u16 kind;
 };
@@ -271,12 +271,12 @@ struct ContextB0 {
     char padAC[0x4];
 };
 
-struct FloatState68_2;
-typedef struct FloatState68_2 FloatState68_2;
+struct PlatformRadiusMovementView;
+typedef struct PlatformRadiusMovementView PlatformRadiusMovementView;
 
 
 struct CollisionProbe;
-struct OwnerRecAt18;
+struct PlatformCollisionEntryOwner;
 struct CollisionProbe {
     u8 kind;
     u8 pad01[7];
@@ -286,16 +286,16 @@ struct CollisionProbe {
     u8 pad14[0xC];
     f32 floor;
     u8 pad24[0x10];
-    struct OwnerRecAt18 *owner;
+    struct PlatformCollisionEntryOwner *owner;
     s32 flags38;
     u8 pad3C[0xC4];
     s32 flags100;
 };
 
-struct EntryRecAt4V3;
-typedef struct EntryRecAt4V3 EntryRecAt4V3;
+struct CollisionKindRecord;
+typedef struct CollisionKindRecord CollisionKindRecord;
 
-extern float D_800C3760_de;
+extern float g_platformCollisionHeightClearance;
 
 struct QueryE0;
 struct QueryE0 {
@@ -322,8 +322,8 @@ struct ActorCPlatformCollisionPushActorFromBox {
     SurfaceHit saved_query;
 };
 
-struct ObjRecAt34;
-struct ObjRecAt34 {
+struct PlatformActivityPhaseView;
+struct PlatformActivityPhaseView {
     char pad0[0x4];
     s32 unk4;
     char pad4[0x34 - 0x4 - sizeof(s32)];
@@ -332,7 +332,7 @@ struct ObjRecAt34 {
 
 struct ActorCPlatformCollisionProcessRiderMotion;
 struct ActorCPlatformCollisionProcessRiderMotion {
-    OwnerRecAt18 *owner;
+    PlatformCollisionEntryOwner *owner;
     u8 pad04[0x3C];
     s32 *flags;
     Triple previous;
@@ -362,8 +362,8 @@ struct InputCPlatformCollisionLiftActorToSurface {
     s32 flags100;
 };
 
-struct FloatState20;
-typedef struct FloatState20 FloatState20;
+struct PlatformHeightView;
+typedef struct PlatformHeightView PlatformHeightView;
 
 struct ActorCPlatformCollisionPushActorFromBox;
 typedef struct ActorCPlatformCollisionPushActorFromBox ActorCPlatformCollisionPushActorFromBox;
@@ -372,8 +372,8 @@ typedef struct ActorCPlatformCollisionPushActorFromBox ActorCPlatformCollisionPu
 struct RayCornerBounds;
 typedef struct RayCornerBounds RayCornerBounds;
 
-struct ShapeRecAt18V1;
-typedef struct ShapeRecAt18V1 ShapeRecAt18V1;
+struct CollisionShapeDefinition;
+typedef struct CollisionShapeDefinition CollisionShapeDefinition;
 
 struct ModelF0;
 struct ModelF0 {
@@ -395,7 +395,7 @@ typedef struct CollisionVertex {
 
 extern void PolyCol_TraceMeshDisplayList(ContextB0 *context, void *resource);
 
-extern void D_00243814();
-extern void D_00243850();
+extern void CPolyCollision_SwapSortedHits();
+extern void CPolyCollision_CompareSortedHits();
 extern void Graphu64_ComputeViewMatrix(MatrixF *, CVector3 *, CVector3 *, CVector3 *);
 #endif

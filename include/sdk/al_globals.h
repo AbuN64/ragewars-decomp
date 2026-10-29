@@ -2,5 +2,5 @@
 #define SDK_AL_GLOBALS_H
 /* The audio library globals record (alGlobals), whose first member is the synth driver. */
 struct ALGlobals;
-extern struct ALGlobals *D_800D4070;
+extern struct ALGlobals *g_audioGlobals;
 #endif

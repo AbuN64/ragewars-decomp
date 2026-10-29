@@ -2,20 +2,20 @@
 #define AUDIO_LIST_AND_CHANNEL_VIEWS_H
 #include "TYPES.H"
 #include "COMMON/LISTNODE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 struct Lists {
     char pad0[4];
-    NodeRecAtAC first;
+    AudioPendingFlagsNode first;
     char padB4[0x24];
-    NodeRecAtAC second;
+    AudioPendingFlagsNode second;
 };
-struct ManagerRecAtD8V2 {
+struct AudioSpatialVoiceManagerView {
     struct SceneCode802591C0 *scene;
-    Link_func_80259784_de active;
+    AudioPendingSoundLinks active;
     char padC[0xCC];
-    Link_func_80259784_de free;
+    AudioPendingSoundLinks free;
 };
-struct ObjectLinks8 {
+struct AudioVoiceListLinks {
     void *unk_0;
     void *unk_4;
 };
@@ -28,7 +28,7 @@ struct CellCode802591C0 {
     char pad14[0x44 - 0x14];
     char data[1];
 };
-struct ManagerRecAtD8V1 {
+struct AudioPriorityQueueManagerView {
     s32 *scene;
     LinkAudioWorldQueuePrioritizedSound active;
     char padC[0xCC];
@@ -41,7 +41,7 @@ struct LinkPair {
 struct Bytes12 {
     char bytes[12];
 };
-struct ViewRecAtB0 {
+struct ChannelPitchMotionView {
     char pad0[0x10];
     Motion motion;
     Angles angles;

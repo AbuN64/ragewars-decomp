@@ -1,12 +1,12 @@
 #include "sdk/LIBC.H"
 #include "include_asm.h"
-#include "COMMON/LONE/D_800E28D4.H"
+#include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "TYPES.H"
 #include "stddef.h"
-#include "COMMON/EXTERNS_3.H"
+#include "COMMON/BOOT_TV_TYPE.H"
 #include "FRONTEND/SCREEN.H"
 #include "sdk/AUDIO/visetmode.H"
 #include "FRONTEND/SCREEN_VIDEO_MODE.H"
@@ -16,51 +16,51 @@
 s32 Defs_GetMemorySize(); /* extern */
                                  /* extern */
 void Frontend_SetVideoModeAndViewports(unsigned, int, int, int, int, int);
-extern s32 D_800CC374;
-extern s32 D_800E28D0;
-extern s32 D_800E28D8;
-extern ModeRecAt8 D_800DE8A8[2][5];
-extern struct ShapeRecAt18V2 D_800DE934[];
-extern RecGobjinstSampleBoneTranslation D_800DE9C0[];
-extern u8 D_80146848;
+extern s32 g_frontendVideoModeVariantBit;
+extern s32 g_hudReferenceViewportWidth;
+extern s32 g_frontendCurrentVideoModeIndex;
+extern FrontendVideoDimensions g_frontendRegionVideoModes[2][5];
+extern struct FrontendVideoModeParameters g_frontendDefaultVideoModes[];
+extern RecGobjinstSampleBoneTranslation g_frontendVideoModeRenderConfigs[];
+extern u8 g_frontendSavedVideoModeIndex;
 static inline void set_config(int a,int b,int c,int d,int e) {
-        D_800DE898 = a;
-        D_800CC370 = b;
-        D_800CC374 = c;
-        D_800CC378 = d;
-        D_800CC37C = e;
+        g_frontendViDitherFilterEnabled = a;
+        g_geometryAntialiasingEnabled = b;
+        g_frontendVideoModeVariantBit = c;
+        g_geometryTextureFilterOverride = d;
+        g_geometryTexturePerspectiveOverride = e;
 }
-static inline void set_mode(s32 *var_s0) {
-        D_800E28D0 = (s32) var_s0[0];
-        D_800E28D4 = (s32) var_s0[1];
-        Frontend_SetVideoModeAndViewports(var_s0[0], var_s0[1], var_s0[2], var_s0[3], var_s0[4], var_s0[5]);
+static inline void set_mode(s32 *videoMode) {
+        g_hudReferenceViewportWidth = (s32) videoMode[0];
+        g_hudReferenceViewportHeight = (s32) videoMode[1];
+        Frontend_SetVideoModeAndViewports(videoMode[0], videoMode[1], videoMode[2], videoMode[3], videoMode[4], videoMode[5]);
 }
 void Frontend_ApplyVideoMode(void) {
-    char *var_v0;
+    char *unusedPointer;
     s32 featureCommands;
-    s32 temp_v0;
-    s32 var_v1;
-    struct ShapeRecAt18V2 *var_s0;
-    var_s0 = NULL;
+    s32 unusedValue;
+    s32 unusedValue1;
+    struct FrontendVideoModeParameters *videoMode;
+    videoMode = NULL;
     g_frontendStartupState = 2;
-    if (D_800E28D8 == -1) {
+    if (g_frontendCurrentVideoModeIndex == -1) {
         if (Defs_GetMemorySize() != 0x400000) {
-            D_800E28D8 = 1;
+            g_frontendCurrentVideoModeIndex = 1;
         } else {
-            D_800E28D8 = 0;
+            g_frontendCurrentVideoModeIndex = 0;
         }
-        D_80146848 = (u8)D_800E28D8;
+        g_frontendSavedVideoModeIndex = (u8)g_frontendCurrentVideoModeIndex;
     }
-    switch(D_80000300) {
-    case 1: var_s0=&((struct ShapeRecAt18V2 *)D_800DE8A8)[D_800E28D8];break;
-    case 0:case 2:var_s0=&D_800DE934[D_800E28D8];break;
+    switch(g_consoleTvType) {
+    case 1: videoMode=&((struct FrontendVideoModeParameters *)g_frontendRegionVideoModes)[g_frontendCurrentVideoModeIndex];break;
+    case 0:case 2:videoMode=&g_frontendDefaultVideoModes[g_frontendCurrentVideoModeIndex];break;
     }
-    if (var_s0 != NULL) {
-        RecGobjinstSampleBoneTranslation config=D_800DE9C0[D_800E28D8];
+    if (videoMode != NULL) {
+        RecGobjinstSampleBoneTranslation config=g_frontendVideoModeRenderConfigs[g_frontendCurrentVideoModeIndex];
         set_config(config.x,config.y,config.z,config.pad0,config.pad1);
-        set_mode((s32 *)var_s0);
+        set_mode((s32 *)videoMode);
         featureCommands = 0x80;
-        if (D_800DE898 != 0) {
+        if (g_frontendViDitherFilterEnabled != 0) {
             featureCommands = 0x40;
         }
         osViSetSpecialFeatures(featureCommands);
@@ -71,7 +71,7 @@ void Frontend_ApplyVideoMode(void) {
 
 extern unsigned short g_frontendVideoModeId;
 extern Modep g_frontendVideoMode;
-extern Modep D_800D4530[];
+extern Modep g_videoModeLabels[];
 
 extern void osViSetMode(void *);
 /* VI start registers (hStart, vStart) hold the first pixel/line in the high half and the last in the low half. The
@@ -96,7 +96,7 @@ typedef union VideoHorizontal {
 #endif
     } edge;
 } VideoHorizontal;
-/* Resizes the selected VI mode (table D_800D4530[g_frontendVideoModeId], copied to g_frontendVideoMode) to width x height around its
+/* Resizes the selected VI mode (table g_videoModeLabels[g_frontendVideoModeId], copied to g_frontendVideoMode) to width x height around its
  * horizontal and field centres moved by (x, y), shrinks the active area by the borders, rescales X and Y, clamps the
  * last pixel and lines to the original mode and applies it. */
 void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX, s32 borderY) {
@@ -108,7 +108,7 @@ void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX,
     u32 scaleY;
     s32 centerX, scaleX;
 
-    func_802BD3A0_de(mode, &D_800D4530[(s16)g_frontendVideoModeId], 0x50);
+    Libc_CopyBytes(mode, &g_videoModeLabels[(s16)g_frontendVideoModeId], 0x50);
     horizontal.packed = mode->comRegs.hStart;
     vertical[0].packed = mode->fldRegs[0].vStart;
     originalHorizontal = horizontal;
@@ -150,8 +150,8 @@ void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX,
 
 /* 8040B45C_22.CPP */
 /* Cycles the video mode within the memory budget and chooses dimensions large enough for both active buffers. */
-extern int D_800E28DC;
-extern int D_800E28E4;
+extern int g_frontendActiveVideoModeIndex;
+extern int g_frontendKeepCurrentVideoModeOnce;
 void Frontend_AdvanceVideoMode(void)
 {
   int region = 0;
@@ -160,7 +160,7 @@ void Frontend_AdvanceVideoMode(void)
   int w;
   int h;
   int *mode;
-  switch (D_80000300)
+  switch (g_consoleTvType)
   {
     case 0:
     case 2:
@@ -169,142 +169,142 @@ void Frontend_AdvanceVideoMode(void)
     case 1:
       break;
   }
-  mode = (int *) (&D_800DE8A8[region][D_800E28D8]);
+  mode = (int *) (&g_frontendRegionVideoModes[region][g_frontendCurrentVideoModeIndex]);
   memory = Defs_GetMemorySize();
   budget = 0xF660;
   if (memory != 0x400000)
   {
     budget = 0x2A300;
   }
-  if (!D_800E28E4)
+  if (!g_frontendKeepCurrentVideoModeOnce)
   {
-    D_800E28D8 = (D_800E28D8 + 1) % D_800DE8A0[region];
+    g_frontendCurrentVideoModeIndex = (g_frontendCurrentVideoModeIndex + 1) % g_frontendVideoModeCounts[region];
     while ((mode[0] * mode[1]) > budget)
     {
-      D_800E28D8 = (D_800E28D8 + 1) % D_800DE8A0[region];
+      g_frontendCurrentVideoModeIndex = (g_frontendCurrentVideoModeIndex + 1) % g_frontendVideoModeCounts[region];
     }
   }
   else
   {
-    D_800E28E4 = 0;
+    g_frontendKeepCurrentVideoModeOnce = 0;
   }
-  memory = D_800DE8A8[region][D_800E28DC].width;
-  w = D_800DE8A8[region][D_800E28D8].width;
+  memory = g_frontendRegionVideoModes[region][g_frontendActiveVideoModeIndex].width;
+  w = g_frontendRegionVideoModes[region][g_frontendCurrentVideoModeIndex].width;
   if (w < memory)
   {
-    w = D_800DE8A8[region][D_800E28DC].width;
+    w = g_frontendRegionVideoModes[region][g_frontendActiveVideoModeIndex].width;
   }
-  D_800E28D0 = w;
-  h = D_800DE8A8[region][D_800E28D8].height;
-  if (h < D_800DE8A8[region][D_800E28DC].height)
+  g_hudReferenceViewportWidth = w;
+  h = g_frontendRegionVideoModes[region][g_frontendCurrentVideoModeIndex].height;
+  if (h < g_frontendRegionVideoModes[region][g_frontendActiveVideoModeIndex].height)
   {
-    h = D_800DE8A8[region][D_800E28DC].height;
+    h = g_frontendRegionVideoModes[region][g_frontendActiveVideoModeIndex].height;
   }
-  D_800E28D4 = h;
+  g_hudReferenceViewportHeight = h;
 }
-/* Stores its argument in D_800E28D8, which func_8040C474_de returns, and calls Frontend_ApplyVideoMode. */
+/* Stores its argument in g_frontendCurrentVideoModeIndex, which func_8040C474_de returns, and calls Frontend_ApplyVideoMode. */
 void Frontend_ApplyScreenModeValue(s32 value) {
-    D_800E28D8 = value;
+    g_frontendCurrentVideoModeIndex = value;
     Frontend_ApplyVideoMode();
 }
-/* Gives D_800E28E0 the value 0x14 when it is still zero. */
-extern s32 D_800E28E0;
+/* Gives g_selectionMessageStage the value 0x14 when it is still zero. */
+extern s32 g_selectionMessageStage;
 void Frontend_StartScreenModeFade(void) {
-    if (D_800E28E0 == 0) {
-        D_800E28E0 = 0x14;
+    if (g_selectionMessageStage == 0) {
+        g_selectionMessageStage = 0x14;
     }
 }
 /* Detects the storage configuration and updates the cached selection. */
  /* extern */
                                   /* extern */
 void Frontend_UpdateScreenMode(void) {
-    if (D_800E28D8 == -1) {
+    if (g_frontendCurrentVideoModeIndex == -1) {
         if (Defs_GetMemorySize() != 0x400000) {
-            D_800E28D8 = 1;
+            g_frontendCurrentVideoModeIndex = 1;
         } else {
-            D_800E28D8 = 0;
+            g_frontendCurrentVideoModeIndex = 0;
         }
-        D_80146848 = (u8)D_800E28D8;
+        g_frontendSavedVideoModeIndex = (u8)g_frontendCurrentVideoModeIndex;
     }
-    if ((D_800E28E0 < 5) && (D_800E28DC != D_800E28D8)) {
+    if ((g_selectionMessageStage < 5) && (g_frontendActiveVideoModeIndex != g_frontendCurrentVideoModeIndex)) {
         Frontend_ApplyVideoMode();
-        D_800E28DC = D_800E28D8;
+        g_frontendActiveVideoModeIndex = g_frontendCurrentVideoModeIndex;
     }
 }
-/* Returns the palette for the current screen mode D_800E28D8: modes 1, 2 and 3 have their own, mode 0
+/* Returns the palette for the current screen mode g_frontendCurrentVideoModeIndex: modes 1, 2 and 3 have their own, mode 0
    and anything else use the first. */
-extern int D_800D3610;
-extern int D_800D3614;
-extern int D_800D3618;
-extern int D_800D3620;
+extern int g_frontendScreenModePaletteDefault;
+extern int g_frontendScreenModePaletteOne;
+extern int g_frontendScreenModePaletteTwo;
+extern int g_frontendScreenModePaletteThree;
 int *Frontend_GetScreenModePalette(void) {
-    switch (D_800E28D8) {
+    switch (g_frontendCurrentVideoModeIndex) {
     case 0:
     default:
-        return &D_800D3610;
+        return &g_frontendScreenModePaletteDefault;
     case 1:
-        return &D_800D3614;
+        return &g_frontendScreenModePaletteOne;
     case 2:
-        return &D_800D3618;
+        return &g_frontendScreenModePaletteTwo;
     case 3:
-        return &D_800D3620;
+        return &g_frontendScreenModePaletteThree;
     }
 }
-/* Requests a new value when no change is pending: if D_800E28E0 is zero and the value differs from
-   D_800E28D8, remembers the old value in D_800E28DC, stores the new one, sets D_800E28E4 and starts
-   the 0x14-tick countdown D_800E28E0. */
+/* Requests a new value when no change is pending: if g_selectionMessageStage is zero and the value differs from
+   g_frontendCurrentVideoModeIndex, remembers the old value in g_frontendActiveVideoModeIndex, stores the new one, sets g_frontendKeepCurrentVideoModeOnce and starts
+   the 0x14-tick countdown g_selectionMessageStage. */
 void Frontend_RequestScreenMode(s32 value) {
-    if (D_800E28E0 == 0 && value != D_800E28D8) {
-        D_800E28E4 = 1;
-        D_800E28DC = D_800E28D8;
-        D_800E28D8 = value;
-        D_800E28E0 = 0x14;
+    if (g_selectionMessageStage == 0 && value != g_frontendCurrentVideoModeIndex) {
+        g_frontendKeepCurrentVideoModeOnce = 1;
+        g_frontendActiveVideoModeIndex = g_frontendCurrentVideoModeIndex;
+        g_frontendCurrentVideoModeIndex = value;
+        g_selectionMessageStage = 0x14;
     }
 }
-/* Returns the word held in D_800E28D8. */
+/* Returns the word held in g_frontendCurrentVideoModeIndex. */
 s32 Frontend_GetScreenMode(void) {
-    return D_800E28D8;
+    return g_frontendCurrentVideoModeIndex;
 }
 /* Selects the video mode and resets viewport dimensions on the linked views. */
-extern int D_80000300, D_800CC374;
+extern int g_consoleTvType, g_frontendVideoModeVariantBit;
 extern unsigned int VideoModeIds[3][8];
 struct VideoViewList {
-    NodeRecAt2A8 *head;
+    FrontendScreenViewport *head;
     char reserved[0x1C];
-    NodeRecAt2A8 defaultView;
+    FrontendScreenViewport defaultView;
 };
-extern struct VideoViewList D_80140FE8_de;
+extern struct VideoViewList g_gameplayCameraList;
 
-void Frontend_SetVideoModeAndViewports(unsigned width, int a1, int a2, int a3, int a4, int a5) {
+void Frontend_SetVideoModeAndViewports(unsigned width, int viewportHeight, int offsetX, int offsetY, int borderX, int borderY) {
     int flags = 0;
     int region = 0;
-    NodeRecAt2A8 *node;
+    FrontendScreenViewport *node;
     float height;
 
-    switch (D_80000300) {
+    switch (g_consoleTvType) {
     case 0: region = 1; break;
     case 1: break;
     case 2: region = 2; break;
     }
     if (width > 320) flags |= 4;
-    if (D_800CC374) flags |= 2;
+    if (g_frontendVideoModeVariantBit) flags |= 2;
     if (width > 320) flags |= 1;
     g_frontendVideoModeId = VideoModeIds[region][flags];
-    Frontend_SetVideoViewport(width, a1, a2, a3, a4, a5);
-    node = &D_80140FE8_de.defaultView;
+    Frontend_SetVideoViewport(width, viewportHeight, offsetX, offsetY, borderX, borderY);
+    node = &g_gameplayCameraList.defaultView;
     if (node) {
-        node->width = D_800E28D0;
-        height = D_800E28D4;
+        node->width = g_hudReferenceViewportWidth;
+        height = g_hudReferenceViewportHeight;
         node->x = 0;
         node->y = 0;
         node->height = height;
     }
-    node = D_80140FE8_de.head;
+    node = g_gameplayCameraList.head;
     while (node) {
         node->x = 0;
         node->y = 0;
-        node->width = D_800E28D0;
-        node->height = D_800E28D4;
+        node->width = g_hudReferenceViewportWidth;
+        node->height = g_hudReferenceViewportHeight;
         node = node->next;
     }
 }

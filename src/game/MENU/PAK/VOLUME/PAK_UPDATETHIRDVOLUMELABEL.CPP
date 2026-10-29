@@ -3,7 +3,7 @@
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -13,9 +13,9 @@
 #if defined(VERSION_DE) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-#define VOLUME_BYTE D_801462C8.volume[2]
+#define VOLUME_BYTE g_gameSettings.volume[2]
 #else
-#define VOLUME_BYTE D_801462C8.volume[2]
+#define VOLUME_BYTE g_gameSettings.volume[2]
 #endif
 /* Shows one of three fixed volume texts for steps zero, fifteen and minus
  * sixteen from the option byte D_801462E2. Other steps are formatted into
@@ -30,25 +30,25 @@ s32 Pak_UpdateThirdVolumeLabel(LayeredText *field) {
     char *text;
 
     if (step == 0) {
-        field->text = &D_800D3DB4;
+        field->text = &g_volumeTwoNeutralLabel;
     } else if (step == 15) {
-        field->text = &D_800D3DB0;
+        field->text = &g_volumeTwoMaximumLabel;
     } else if (step == -16) {
-        field->text = &D_800D7DD8;
+        field->text = &g_volumeTwoMinimumLabel;
     } else if (step > 0) {
-        field->text = (u8 **)&D_800D7DE4;
+        field->text = (u8 **)&g_volumeTwoValueLabel;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = (char *)field->text[D_801462C8.language];
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EEE10, step);
+        text = (char *)field->text[g_gameSettings.language];
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_volumePositiveStepFormat, step);
 #else
         text = (char *)*field->text;
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_pakFormatSpacedInt2, step);
 #endif
     } else {
-        field->text = (u8 **)&D_800D7DE4;
+        field->text = (u8 **)&g_volumeTwoValueLabel;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = (char *)field->text[D_801462C8.language];
-        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EEE18, step);
+        text = (char *)field->text[g_gameSettings.language];
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_volumeNegativeStepFormat, step);
 #else
         text = (char *)*field->text;
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_pakFormatSpacedInt3, step);

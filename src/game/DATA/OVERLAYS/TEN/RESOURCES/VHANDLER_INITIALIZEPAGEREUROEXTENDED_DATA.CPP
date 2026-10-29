@@ -12,7 +12,7 @@ u32 data_writable_800FF1B0[30] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800FF228[2] = {
+unsigned int k_VhandlerInitializepagereuroextendedEncodedWords[2] = {
     0xB2E01EF1, 0xE1CDFFF3,
 };
 #endif

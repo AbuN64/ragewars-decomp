@@ -4,7 +4,7 @@
 [[rule]]
 id = "word-array-byte-use"
 kind = "decl-use"
-why = "A 32-bit array read through a byte or halfword pointer: packed byte data typed as words swaps on a little-endian host (font pair lists D_800D2F94 and the AI light bytes, cycle 2)."
+why = "A 32-bit array read through a byte or halfword pointer: packed byte data typed as words swaps on a little-endian host (font pair lists g_hudSecondaryByteLookupSource and the AI light bytes, cycle 2)."
 trees = ["rw"]
 paths = ["src/**/*.CPP", "src/**/*.c", "src/**/*.C", "include/**/*.H", "include/**/*.h"]
 declare = '^(?P<local>static\s+)?(?:const\s+)?(?:extern\s+)?(?:unsigned int|unsigned long|u32|s32|int)\s+(?P<datum>[A-Za-z_]\w*)\s*\['
@@ -79,7 +79,7 @@ scalars = true
 [[rule]]
 id = "hook-called-without-arguments"
 kind = "pattern"
-why = "A function pointer typed with no parameters and called with none: the callee reads its arguments from the registers the wrapper happened to hold (Barrel_RunDamageHook ran its hook with the actor, state and damage record it had itself received); on a native host the arguments live on the stack and the hook reads garbage (func_80219A40_de, first seen in monkey-wl8-options-menu). Type the pointer with the parameters the hook takes and forward them."
+why = "A function pointer typed with no parameters and called with none: the callee reads its arguments from the registers the wrapper happened to hold (Barrel_RunDamageHook ran its hook with the actor, state and damage record it had itself received); on a native host the arguments live on the stack and the hook reads garbage (Playerai_ApplyDamagePacket, first seen in monkey-wl8-options-menu). Type the pointer with the parameters the hook takes and forward them."
 trees = ["rw"]
 paths = ["src/**/*.CPP", "src/**/*.c", "src/**/*.C"]
 match = '^\s*(?:\(\s*\*\s*)?\b(?:fn|cb|hook|callback|func|handler|end|cue)\b\s*\)?\s*\(\s*\)\s*;'

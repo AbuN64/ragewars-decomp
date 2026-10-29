@@ -2,7 +2,7 @@
 
 /* 802A6AC0_6.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_802A776C_eu_padding_A836C[4] = { 0x12, 0x20, 0x00, 0x12 };
+unsigned char g_ItemmenuTrailingBytes[4] = { 0x12, 0x20, 0x00, 0x12 };
 #endif
 
 /* 802A6AC0_8.CPP */

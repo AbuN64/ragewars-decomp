@@ -12,26 +12,26 @@
 #include "sdk/os.h"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "WORLD/SCENE_UNPACKIMAGESWITHHIGHBOOST.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
 /* Collects platform actors, records the special actor and selects one of three random states. */
 
-extern LevelActor *D_800F3CD0[];
-extern LevelActor *D_800F3D0C;
+extern LevelActor *g_sceneSpecialActorTables[];
+extern LevelActor *g_sceneSpecialModelBd6Actor;
 extern s32 XPlus_NextRandomInteger(void);
-void Scene_CollectSecondarySpecialActors(SceneRecAt140 *scene) {
+void Scene_CollectSecondarySpecialActors(LevelActorArrayView *scene) {
  s32 count=0,i=9,offset=36;LevelActor *actor=scene->actors;
- D_800F3D0C=0;
- do {*(LevelActor **)((char *)D_800F3CD0+offset)=0;i--;offset-=4;} while(i>=0);
+ g_sceneSpecialModelBd6Actor=0;
+ do {*(LevelActor **)((char *)g_sceneSpecialActorTables+offset)=0;i--;offset-=4;} while(i>=0);
  i=0;
  if(scene->count>0)do {
-  if(((struct Def *)actor->definition)->type==3) {if(((struct Def *)actor->definition)->id==0xBD6){if(scene->count)D_800F3D0C=actor;else D_800F3D0C=actor;}}
-  else if(((struct Def *)actor->definition)->type==10) {if(actor->type==0x64E)D_800F3CD0[count++]=actor;}
+  if(((struct Def *)actor->definition)->type==3) {if(((struct Def *)actor->definition)->id==0xBD6){if(scene->count)g_sceneSpecialModelBd6Actor=actor;else g_sceneSpecialModelBd6Actor=actor;}}
+  else if(((struct Def *)actor->definition)->type==10) {if(actor->type==0x64E)g_sceneSpecialActorTables[count++]=actor;}
   if(count>=10)return;
   actor++;
 
  }while(++i<scene->count);
- D_801462C8.counters.m_nFragTagSkin=XPlus_NextRandomInteger()%3;
+ g_gameSettings.counters.m_nFragTagSkin=XPlus_NextRandomInteger()%3;
 }
 
 /* Remaps every 4-bit pixel of every image in each of the 256 entries of a table through the given
@@ -75,8 +75,8 @@ void Scene_RemapFourBitImagePixels(void *unused0, void *table, u8 *remap) {
             columns = set->columns;
             columns--;
             for (; columns != end; columns--) {
-                width = image->field_0;
-                height = image->field_4;
+                width = image->first;
+                height = image->second;
                 count = (u32)(width * height) >> 1;
                 pixel = (u8 *)(image + 1);
                 while (count--) {
@@ -141,8 +141,8 @@ void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
                 columns = set->columns;
                 columns--;
                 for (; columns != end; columns--) {
-                    width = image->field_0;
-                    height = image->field_4;
+                    width = image->first;
+                    height = image->second;
                     count = (u32)(width * height) >> 1;
                     pixel = (u8 *)(image + 1);
                     while (count--) {
@@ -206,8 +206,8 @@ void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
                 columns = set->columns;
                 columns--;
                 for (; columns != end; columns--) {
-                    width = image->field_0;
-                    height = image->field_4;
+                    width = image->first;
+                    height = image->second;
                     count = (u32)(width * height) >> 1;
                     pixel = (u8 *)(image + 1);
                     while (count--) {
@@ -228,32 +228,32 @@ void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
 }
 
 /* ROM-grounded data: src/rw_pool_8028E78C_CB02C_us_rev1.c */
-const unsigned int D_blob_5ed4fa86953393fbfcea[1] = {
+const unsigned int g_scene_TestNearbyActiveActorConstantWords[1] = {
     0x4AC80000,
 };
 
-s32 Scene_TestSectorSectionTwoEntries(Shared_World *arg0)
+s32 Scene_TestSectorSectionTwoEntries(Shared_World *world)
 {
   Shared_World *elem;
   s32 i;
   void *field;
-  char *new_var;
+  char *unusedPointer1;
   void *ret;
   s32 count;
-  count = arg0->sectorCount;
+  count = world->sectorCount;
   if (count <= 0)
   {
     return 0;
   }
   i = 0;
-  elem = arg0;
+  elem = world;
   do
   {
-    field = arg0->sectors[i].resource;
+    field = world->sectors[i].resource;
     ret = SetN64_GetPackSection(*((s32 *) field), 2);
-    if ((((struct IntPair *)ret)->field_4) != 0)
+    if ((((struct IntPair *)ret)->second) != 0)
     {
-      if (arg0 || i)
+      if (world || i)
       {
         return 1;
       }
@@ -262,7 +262,7 @@ s32 Scene_TestSectorSectionTwoEntries(Shared_World *arg0)
         return 1;
       }
     }
-    count = arg0->sectorCount;
+    count = world->sectorCount;
     i += 1;
 
   }
@@ -279,37 +279,37 @@ void *Scene_GetStridedActorRecord(struct Shared_World *object, int index) {
 
 extern void Graphu64_SubtractVectors(CVector3 *difference, CVector3 *leftVector, CVector3 *rightVector);
 
-s32 Scene_TestNearbyActiveActor(struct ObjectRecAt1A4 *arg0, CVector3 *rightVector) {
+s32 Scene_TestNearbyActiveActor(struct SceneNearestActorView *actor, CVector3 *rightVector) {
     CVector3 vector;
     f32 magnitude;
     u16 type;
 
-    Graphu64_SubtractVectors(&vector, &arg0->x, rightVector);
+    Graphu64_SubtractVectors(&vector, &actor->x, rightVector);
     magnitude = (vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z);
-    if (*arg0->kind != 1) {
+    if (*actor->kind != 1) {
         return 0;
     }
-    type = arg0->team;
+    type = actor->team;
     if (type == 0x44E || type == 0x453 || type == 0x451 || type == 0x450 ||
         type == 0x454 || type == 0x455 || type == 0x456) {
         return 0;
     }
-    if (arg0->active == 0) {
+    if (actor->active == 0) {
         return 0;
     }
-    if (arg0->state == 0x3D) {
+    if (actor->state == 0x3D) {
         return 0;
     }
-    return magnitude <= D_800C533C_de;
+    return magnitude <= g_sceneImageVectorTolerance;
 }
 
-/* Reports whether arg1 is within range of arg0, using its type and state to pick the check. */
+/* Reports whether arg1 is within range of actor, using its type and state to pick the check. */
 
-s32 Scene_ClassifyNearbySpecialActor(ObjRecAtE4V2 *player, CVector3 *rightVector) {
+s32 Scene_ClassifyNearbySpecialActor(NearbySpecialActorView *player, CVector3 *rightVector) {
     CVector3 delta;
     u16 type;
 
-    if (player->unk0 == 1 && *player->unk18 == 7) {
+    if (player->kind == 1 && *player->definition == 7) {
         Graphu64_SubtractVectors(&delta, &((Player *)(player))->pos, rightVector);
         delta.y = 0;
         if (262144.0f < delta.x * delta.x + delta.z * delta.z) {
@@ -317,10 +317,10 @@ s32 Scene_ClassifyNearbySpecialActor(ObjRecAtE4V2 *player, CVector3 *rightVector
         }
         return 0xFF;
     }
-    if (*player->unk18 != 1) {
+    if (*player->definition != 1) {
         return 0;
     }
-    type = player->unkE4;
+    type = player->modelId;
     if (type == 0x44E || type == 0x453 || type == 0x451 || type == 0x450 ||
         type == 0x454 || type == 0x455 || type == 0x456) {
         return 0xFF;
@@ -334,13 +334,13 @@ unsigned int func_8028E860_de_padding_8F66C[1] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C55F4[3] = {
+unsigned int k_SceneUnpackimageswithhighboostEncodedWordsBlock1[3] = {
     0x24E7FFFF, 0x0065102B, 0x50400004,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C5344[3] = {
+unsigned int k_SceneUnpackimageswithhighboostEncodedWords[3] = {
     0x358637BD, 0x358637BD, 0x358637BD,
 };
 #endif

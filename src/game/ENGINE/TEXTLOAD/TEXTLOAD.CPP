@@ -1,7 +1,7 @@
 #include "COMMON/RESIDENTSTATE.H"
 #include "RENDER/RESIDENT_TEXTURE_MENU_VIEWS.H"
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TEXTURE/TEXTLOAD_RESETARTSENDTEXTURESTATE.H"
 #include "RESMGR/X_PLUS.H"
 #include "ENGINE/TENGINE.H"
@@ -17,32 +17,32 @@
 /* 80294C64_5.CPP */
 #if defined(VERSION_US_REV1)
 
-extern ResidentSlot D_8014AEC8;
-extern ResidentEntry D_8014AECC;
+extern ResidentSlot g_textloadConstantWords_8014AEC8;
+extern ResidentEntry g_artsendSelectedTextureResource;
 
 void TextLoad_ResetArtsendTextureState(void) {
-    s32 *base = &D_8014AEB8;
+    s32 *base = &g_artsendTextureSelection;
 
-    D_8014AEB0.alternateTitle = 0;
-    D_8014AEB1 = 0;
-    D_8014AEBC = 0;
-    D_8014AEC0 = 0;
+    g_artsendTextureViewer.alternateTitle = 0;
+    g_textloadConstantWords_8014AEB1 = 0;
+    g_artsendTextureSelectionIndex = 0;
+    g_artsendTextureFrameSelection = 0;
     *base = 1;
-    D_8014AEB4 = 0;
-    D_8014AEC4 = 0;
-    *(s32 *)&D_8014AECC = 0;
+    g_textloadConstantWords_8014AEB4 = 0;
+    g_artsendTextureSelectionChanged = 0;
+    *(s32 *)&g_artsendSelectedTextureResource = 0;
     D_8014AED4 = 0;
     D_8014AED8 = 0;
     D_8014AED0 = 0;
-    D_8014CFDC = 0;
-    D_8014CFE0 = 0;
-    D_8014CFE4 = 0;
-    D_8014D068 = 0;
+    g_textloadConstantWords_8014CFDC = 0;
+    g_textloadConstantWords_8014CFE0 = 0;
+    g_textloadConstantWords_8014CFE4 = 0;
+    g_textloadConstantWords_8014D068 = 0;
 
     XPlus_FillMemory((s32) ((char *) base + 0x24), 0, 0x2000);
     XPlus_FillMemory((s32) ((char *) base + 0x2024), 0xFF, 0x100);
 
-    *base = *D_8011FED8;
+    *base = *g_textureResourceSectionRoot;
 }
 #endif
 
@@ -56,8 +56,8 @@ void TextLoad_CloseArtsendTexturePreview(void) { TextLoad_ReleaseArtsendTextureR
 /** Report the global count only while its enable byte is set. */
 int TextLoad_IsArtsendTexturePreviewEnabled(void) {
     int result = 0;
-    if (D_8014AEB0.alternateTitle != 0) {
-        result = D_800D2AE0 != 0;
+    if (g_artsendTextureViewer.alternateTitle != 0) {
+        result = g_textureVariationBypassEnabled != 0;
     }
     return result;
 }
@@ -71,22 +71,22 @@ void TextLoad_ApplyArtsendTextureOverride(s32 resource, s32 **texture) {
     s32 enabled;
     s32 choose;
 
-    if ((D_800D2AE0 != 0) && (*texture != 0) && (*(s32 *)&D_8014AEC8 == 0)) {
+    if ((g_textureVariationBypassEnabled != 0) && (*texture != 0) && (*(s32 *)&g_textloadConstantWords_8014AEC8 == 0)) {
         enabled = 0;
-        if (D_8014AEB0.alternateTitle != 0) {
-            enabled = (u32)D_800D2AE0 > 0U;
+        if (g_artsendTextureViewer.alternateTitle != 0) {
+            enabled = (u32)g_textureVariationBypassEnabled > 0U;
         }
         if (enabled != 0) {
-            choose = (*(s32 *)((char *)&D_8014AEC8 + 0x21A0) % 10) < 3;
+            choose = (*(s32 *)((char *)&g_textloadConstantWords_8014AEC8 + 0x21A0) % 10) < 3;
         } else {
             choose = 1;
         }
-        if (resource == *(s32 *)&D_8014AECC) {
+        if (resource == *(s32 *)&g_artsendSelectedTextureResource) {
             if (choose != 0) {
-                *texture = &((SelectionTextLoadApplyArtsendTextureOverride *)&D_8014AECC)->alternative;
+                *texture = &((SelectionTextLoadApplyArtsendTextureOverride *)&g_artsendSelectedTextureResource)->alternative;
                 return;
             }
-            *texture = D_8014AEB0.textureOverride;
+            *texture = g_artsendTextureViewer.textureOverride;
         }
     }
 }
@@ -96,41 +96,41 @@ void TextLoad_ApplyArtsendTextureOverride(s32 resource, s32 **texture) {
 #if defined(VERSION_US_REV1)
 
 void TextLoad_ApplyArtsendPaletteOverride(s32 resource, s32 **palette) {
-    s32 var_v1;
-    s32 var_v1_2;
+    s32 paletteOverrideEnabled;
+    s32 paletteOverrideSelected;
 
-    if ((D_800D2AE0 != 0) && (*palette != 0)) {
-        if (*(s32 *)&D_8014AEC8 != 0) {
+    if ((g_textureVariationBypassEnabled != 0) && (*palette != 0)) {
+        if (*(s32 *)&g_textloadConstantWords_8014AEC8 != 0) {
             return;
         }
-        var_v1 = 0;
-        if (D_8014AEB0.alternateTitle != 0) {
-            var_v1 = (u32)D_800D2AE0 > 0U;
+        paletteOverrideEnabled = 0;
+        if (g_artsendTextureViewer.alternateTitle != 0) {
+            paletteOverrideEnabled = (u32)g_textureVariationBypassEnabled > 0U;
         }
-        if (var_v1 != 0) {
-            var_v1_2 = (*(s32 *)((char *)&D_8014AEC8 + 0x21A0) % 10) < 3;
+        if (paletteOverrideEnabled != 0) {
+            paletteOverrideSelected = (*(s32 *)((char *)&g_textloadConstantWords_8014AEC8 + 0x21A0) % 10) < 3;
         } else {
-            var_v1_2 = 1;
+            paletteOverrideSelected = 1;
         }
-        if (resource == *(s32 *)&D_8014AECC) {
-            if (var_v1_2 != 0) {
-                *palette = &D_8014AECC.unk2010;
+        if (resource == *(s32 *)&g_artsendSelectedTextureResource) {
+            if (paletteOverrideSelected != 0) {
+                *palette = &g_artsendSelectedTextureResource.unk2010;
                 return;
             }
-            *palette = D_8014AEB0.paletteOverride;
+            *palette = g_artsendTextureViewer.paletteOverride;
         }
     }
 }
 
 void TextLoad_SelectNextArtsendTexture(void) {
-    s32 temp_v1;
+    s32 requestedTexture;
 
-    if (D_auto_800D2AE8++ >= 3) {
-        temp_v1 = D_8014AEB8.unk4 + 1;
-        D_auto_800D2AE8 = 0;
-        D_8014AEB8.unkC = 1;
-        D_8014AEB8.unk4 = temp_v1;
-        D_8014AEB8.unk4 = temp_v1 % D_8014AEB8.unk0;
+    if (g_artsendNextTextureHoldCount++ >= 3) {
+        requestedTexture = g_artsendTextureSelection.index + 1;
+        g_artsendNextTextureHoldCount = 0;
+        g_artsendTextureSelection.changed = 1;
+        g_artsendTextureSelection.index = requestedTexture;
+        g_artsendTextureSelection.index = requestedTexture % g_artsendTextureSelection.count;
     }
 }
 #endif
@@ -139,42 +139,42 @@ void TextLoad_SelectNextArtsendTexture(void) {
 #if defined(VERSION_US_REV1)
 
 void TextLoad_SelectPreviousArtsendTexture(void) {
-    s32 temp_a0;
-    s32 temp_v0;
-    s32 var_v1;
+    s32 requestedTexture;
+    s32 positiveTexture;
+    s32 wrappedTexture;
     s32 *p;
     s32 old;
 
-    old = D_auto_800D2AE4++;
+    old = g_artsendPreviousTextureHoldCount++;
     if (old >= 3) {
-        p = &D_8014AEB0.selectionIndex;
-        temp_a0 = p[0] - 1;
-        temp_v0 = temp_a0 + p[-1];
-        var_v1 = temp_v0 % p[-1];
+        p = &g_artsendTextureViewer.selectionIndex;
+        requestedTexture = p[0] - 1;
+        positiveTexture = requestedTexture + p[-1];
+        wrappedTexture = positiveTexture % p[-1];
         p[2] = 1;
-        *(volatile s32 *)&p[0] = temp_a0;
-        p[0] = var_v1;
-        if ((f32) var_v1 < 0.0f) {
-            var_v1 = -var_v1;
+        *(volatile s32 *)&p[0] = requestedTexture;
+        p[0] = wrappedTexture;
+        if ((f32) wrappedTexture < 0.0f) {
+            wrappedTexture = -wrappedTexture;
         }
-        p[0] = var_v1;
-        D_auto_800D2AE4 = 0;
+        p[0] = wrappedTexture;
+        g_artsendPreviousTextureHoldCount = 0;
     }
 }
 
 void TextLoad_ReleaseArtsendTextureResource(void) {
-    if (D_8014AEB0.resource != 0) {
-        Cache_UnlockResource(0, D_8014AEB0.resource);
+    if (g_artsendTextureViewer.resource != 0) {
+        Cache_UnlockResource(0, g_artsendTextureViewer.resource);
     }
-    D_8014AEB0.resource = 0;
-    D_8014AEB0.textureOverride = 0;
-    D_8014AEB0.paletteOverride = 0;
-    D_8014AEB0.selector = 0;
+    g_artsendTextureViewer.resource = 0;
+    g_artsendTextureViewer.textureOverride = 0;
+    g_artsendTextureViewer.paletteOverride = 0;
+    g_artsendTextureViewer.selector = 0;
 }
 
 /** Reset the record's fields, marking slot 1 active. */
 void TextLoad_InitializeArtsendPreviewState(void) {
-    struct MenuGlobalRecAt21B8 *object = &D_8014AEB0;
+    struct ArtsendTextureMenuState *object = &g_artsendTextureViewer;
 
     object->alternateTitle = 0;
     object->state = 0;
@@ -198,13 +198,13 @@ void TextLoad_DecreaseArtsendSelectionValue(void) {
     s32 old;
     s32 count;
 
-    ptr = &D_800D2AEC;
+    ptr = &g_artsendPreviousFrameHoldCount;
     old = (*ptr)++;
     if (old >= 3) {
-        count = D_8014AEB0.selectionValue;
-        D_8014AEB0.titleWasShown = 1;
-        D_800D2AEC = 0;
-        D_8014AEB0.selectionValue = count - 1;
+        count = g_artsendTextureViewer.selectionValue;
+        g_artsendTextureViewer.titleWasShown = 1;
+        g_artsendPreviousFrameHoldCount = 0;
+        g_artsendTextureViewer.selectionValue = count - 1;
     }
 }
 
@@ -213,37 +213,37 @@ void TextLoad_IncreaseArtsendSelectionValue(void) {
     s32 old;
     s32 count;
 
-    ptr = &D_800D2AF0;
+    ptr = &g_artsendNextFrameHoldCount;
     old = (*ptr)++;
     if (old >= 3) {
-        count = D_8014AEB0.selectionValue;
-        D_8014AEB0.titleWasShown = 1;
-        D_800D2AF0 = 0;
-        D_8014AEB0.selectionValue = count + 1;
+        count = g_artsendTextureViewer.selectionValue;
+        g_artsendTextureViewer.titleWasShown = 1;
+        g_artsendNextFrameHoldCount = 0;
+        g_artsendTextureViewer.selectionValue = count + 1;
     }
 }
 
 void TextLoad_SelectPreviousArtsendPage(void) {
-    s32 temp_a0;
-    s32 temp_v0;
-    s32 var_v1;
+    s32 requestedPage;
+    s32 positivePage;
+    s32 wrappedPage;
     s32 *p;
     s32 old;
 
-    old = D_auto_800D2AF4++;
+    old = g_artsendPreviousPageHoldCount++;
     if (old >= 3) {
-        p = &D_8014AEB0.selectionIndex;
-        temp_a0 = p[0] - 5;
-        temp_v0 = temp_a0 + p[-1];
-        var_v1 = temp_v0 % p[-1];
-        *(volatile s32 *)&p[0] = temp_a0;
-        p[0] = var_v1;
-        if ((f32) var_v1 < 0.0f) {
-            var_v1 = -var_v1;
+        p = &g_artsendTextureViewer.selectionIndex;
+        requestedPage = p[0] - 5;
+        positivePage = requestedPage + p[-1];
+        wrappedPage = positivePage % p[-1];
+        *(volatile s32 *)&p[0] = requestedPage;
+        p[0] = wrappedPage;
+        if ((f32) wrappedPage < 0.0f) {
+            wrappedPage = -wrappedPage;
         }
-        p[0] = var_v1;
+        p[0] = wrappedPage;
         p[2] = 1;
-        D_auto_800D2AF4 = 0;
+        g_artsendPreviousPageHoldCount = 0;
     }
 }
 #endif
@@ -252,53 +252,53 @@ void TextLoad_SelectPreviousArtsendPage(void) {
 #if defined(VERSION_US_REV1)
 /** Return the texture override pointer of the menu state. */
 
-/* Handles one held press of the menu "next page" key: D_auto_800D2AF8 counts the held presses, and on the
- * fourth one the selection index D_8014AEB0.selectionIndex is stepped up by five modulo the menu item count; the
+/* Handles one held press of the menu "next page" key: g_artsendNextPageHoldCount counts the held presses, and on the
+ * fourth one the selection index g_artsendTextureViewer.selectionIndex is stepped up by five modulo the menu item count; the
  * pre-modulo index store is retained as the original emitted it, and the change flag word at +8 from
  * the index is set. Ported verbatim from the legacy branch source (byte-exact in that build). */
 
 void TextLoad_SelectNextArtsendPage(void) {
-    s32 temp_a0;
-    s32 temp_v0;
-    s32 var_v1;
+    s32 requestedPage;
+    s32 pageCount;
+    s32 wrappedPage;
     s32 *p;
     s32 old;
 
-    old = D_auto_800D2AF8++;
+    old = g_artsendNextPageHoldCount++;
     if (old >= 3) {
-        p = &D_8014AEB0.selectionIndex;
-        temp_a0 = p[0] + 5;
-        temp_v0 = p[-1];
-        var_v1 = temp_a0 % temp_v0;
-        D_auto_800D2AF8 = 0;
+        p = &g_artsendTextureViewer.selectionIndex;
+        requestedPage = p[0] + 5;
+        pageCount = p[-1];
+        wrappedPage = requestedPage % pageCount;
+        g_artsendNextPageHoldCount = 0;
         p[2] = 1;
-        *(volatile s32 *)&p[0] = temp_a0;
-        p[0] = var_v1;
+        *(volatile s32 *)&p[0] = requestedPage;
+        p[0] = wrappedPage;
     }
 }
 
 int TextLoad_GetArtsendTextureOverride(void) {
-    return (int)D_8014AEB0.textureOverride;
+    return (int)g_artsendTextureViewer.textureOverride;
 }
 
 int TextLoad_GetArtsendPaletteOverride(void) {
-    return (int)D_8014AEB0.paletteOverride;
+    return (int)g_artsendTextureViewer.paletteOverride;
 }
 
 /** Compute a bit mask from the byte at offset 2 of the global record. */
 int TextLoad_GetArtsendPrimaryButtonMask(void) {
-    return 1 << D_8014AEB0.selector->primaryButton;
+    return 1 << g_artsendTextureViewer.selector->primaryButton;
 }
 
 int TextLoad_GetArtsendSecondaryButtonMask(void) {
-    unsigned char shift = D_8014AEB0.selector->secondaryButton;
+    unsigned char shift = g_artsendTextureViewer.selector->secondaryButton;
     return 1 << shift;
 }
 
 /** Return the mode mask selected by the global record's leading byte. */
 int TextLoad_GetArtsendModeMask(void) {
     {
-        int sw_mode_value = D_8014AEB0.selector->mode;
+        int sw_mode_value = g_artsendTextureViewer.selector->mode;
         if ((unsigned int)sw_mode_value > 5) {
             goto sw_mode_default;
         }

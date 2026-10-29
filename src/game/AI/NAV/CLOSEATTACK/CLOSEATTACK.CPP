@@ -5,12 +5,12 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C2224[3] = {
+unsigned int k_CloseattackEncodedWords[3] = {
     0x00804021, 0x00854821, 0x0109082B,
 };
 #endif
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C2224[3] = {
+unsigned int k_CloseattackEncodedWords[3] = {
     0x3FE52EDF, 0x3F800000, 0x3FE52EDF,
 };
 #endif
@@ -19,7 +19,7 @@ unsigned int rodata_unresolved_800C2224[3] = {
 /* Route-following check for a computer driver's brain: when it has a target at 0x64, it calls UpdateCloseAttack if func_802099B4_de reports the target reached, and again when its route node at 0xC (unless -1) lies closer than 100 to the position Scaled_GetControllerPosition gives; always returns one. */
 
 
-extern char D_8013B364[];
+extern char g_navigationGraph[];
 
 extern s32 Scaled_HasLineOfSight(Brain *, void *);
 extern void UpdateCloseAttack(Brain *brainAddress);
@@ -40,7 +40,7 @@ s32 Nav_CheckCloseAttackRoute(Brain *brain) {
         return 1;
     }
     pos = Scaled_GetControllerPosition(brain);
-    if (Graphu64_GetPointDistance(pos, Portal_GetGraphPoint(D_8013B364, brain->destination)) < 100.0f) {
+    if (Graphu64_GetPointDistance(pos, Portal_GetGraphPoint(g_navigationGraph, brain->destination)) < 100.0f) {
         UpdateCloseAttack(brain);
     }
     return 1;

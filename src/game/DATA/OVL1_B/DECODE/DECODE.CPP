@@ -5,7 +5,7 @@
 struct {
     unsigned int w0[2];
     unsigned char b1[256];
-} D_auto_rodata_unresolved_800C92B8 = {
+} g_euXDecodeBitLengthTable = {
     {
         0x00000000, 0x00000000,
     },
@@ -40,7 +40,7 @@ unsigned int s_hicsText[1] = {
 
 /* DATA_800C942C.CPP */
 #if defined(VERSION_US)
-unsigned int D_auto_rodata_unresolved_800C942C[16] = {
+unsigned int k_DecodeEncodedWords[16] = {
     0x3FDD2F1C, 0x4030F27C, 0x41A5E354, 0x3F84B5DE, 0x00000000, 0x00000000, 0x00000000, 0x403851EC,
     0x41ACCCCC, 0x3F8A3D71, 0x3FDD2F1C, 0x414F5C2A, 0x3F25E355, 0x00000000, 0x00000000, 0x00000000,
 };
@@ -48,7 +48,7 @@ unsigned int D_auto_rodata_unresolved_800C942C[16] = {
 
 /* DATA_800C9D30.CPP */
 #if defined(VERSION_EU)
-unsigned int D_auto_rodata_unresolved_800C9D30[15] = {
+unsigned int k_DecodeEncodedWordsBlock1[15] = {
     0x3DB851EC, 0x3D4CCCCD, 0x3F000000, 0x30000000, 0x00010000, 0x00050000, 0x00040000, 0x000C0000,
     0x00080000, 0x000A0000, 0x00020000, 0x00030000, 0x41F00000, 0x42400000, 0x43020000,
 };

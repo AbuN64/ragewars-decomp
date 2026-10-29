@@ -1,6 +1,6 @@
 #include "COMMON/OBJRECAT5F14.H"
-#include "COMMON/LONE/D_800CD764_de.H"
-#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/SCREEN_IMAGE_RESOURCES_ENABLED.H"
+#include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WORLD.H"
@@ -40,8 +40,8 @@ static inline SceneEffect *take_effect(struct CAnimPool *scene, s32 *ref) {
     }
     effect = scene->FreeList.head;
     if (effect != 0) {
-        func_80255ED8_de(&scene->FreeList, effect);
-        func_80255CB8_de(&scene->UsedList, effect);
+        List_RemoveIntrusive(&scene->FreeList, effect);
+        List_PrependIntrusive(&scene->UsedList, effect);
         effect->ref = ref;
         if (ref != 0) {
             *ref += 1;
@@ -54,7 +54,7 @@ static inline SceneEffect *spawn_effect(struct CAnimPool *scene, s32 id, s32 var
                                    f32 scale, CVector3 direction, CVector3 color, s32 *ref) {
     SceneEffect *effect;
 
-    if (D_800CD764_de == 0) {
+    if (g_screenImageResourcesEnabled == 0) {
         return 0;
     }
     if (count == 0) {
@@ -73,7 +73,7 @@ static inline SceneEffect *spawn_effect(struct CAnimPool *scene, s32 id, s32 var
     if (effect == 0) {
         return 0;
     }
-    Gobjinst_InitializeActor(effect, id, variant, D_800CD8D0, count, -1, owner, scale, position, 0x80000, color, direction, 0);
+    Gobjinst_InitializeActor(effect, id, variant, g_defaultCameraSurfaceType, count, -1, owner, scale, position, 0x80000, color, direction, 0);
     Gobjinst_DispatchActorTypeUpdate(effect);
     return effect;
 }
@@ -91,6 +91,6 @@ s32 Animpool_ReleaseSceneEffect(struct SceneEffect *node) {
     if (counter != 0) {
         *counter -= 1;
     }
-    func_80255ED8_de(&D_80137064, node);
-    return func_80255D14_de(&D_80137050, node);
+    List_RemoveIntrusive(&g_spawnedActorList, node);
+    return List_AppendIntrusive(&g_sceneEffectSpawnList, node);
 }

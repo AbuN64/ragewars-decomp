@@ -3,7 +3,7 @@
 /* 801002EC.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
 #ifdef VERSION_DE
-unsigned int D_auto_rodata_unresolved_801002EC[61] = {
+unsigned int k_ResourcesEncodedWordsBlock4[61] = {
     0xEE25C3F1, 0x4132C220, 0xF10006EF, 0x1911AEC1, 0x1FD6270D, 0xE1DEFE1F, 0xC3FC1E1B, 0xC5311E02,
     0x2AB24F39, 0x9CA2FC75, 0xF094C0FF, 0x2E545E0C, 0xC220E0C3, 0x7FF1223B, 0x1D0FE515, 0xC20D5120,
     0x104EECA2, 0x2FC02F5E, 0xE4F4654A, 0x04FEB24D, 0x531DDBDA, 0xFFF73CC0, 0xE5FFB0F2, 0xFFF2DDC4,
@@ -15,7 +15,7 @@ unsigned int D_auto_rodata_unresolved_801002EC[61] = {
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_auto_rodata_unresolved_801002EC[61] = {
+unsigned int k_ResourcesEncodedWordsBlock4[61] = {
     0x00832021, 0x00041880, 0x00832021, 0x000418C0, 0x00431021, 0x24030002, 0xAC430058, 0x8FC40058,
     0x0C000000, 0x00000000, 0x8FC30044, 0x00601021, 0x08000000, 0x00000000, 0x03C0E821, 0x8FBF0054,
     0x8FBE0050, 0x27BD0058, 0x03E00008, 0x00000000, 0x27BDFFD0, 0xAFBF002C, 0xAFBE0028, 0x03A0F021,
@@ -42,7 +42,7 @@ unsigned int rodata_writable_801003E0[1] = {
 
 /* 801003E4.CPP */
 #if defined(VERSION_DE)
-unsigned int D_auto_rodata_unresolved_801003E4[7] = {
+unsigned int k_ResourcesEncodedWordsBlock5[7] = {
     0x01C332F2, 0x11D113F0, 0x17F3C0FE, 0xC15B2320, 0xF11FFFC1, 0x00DF00FE, 0x0DF7FF41,
 };
 #endif

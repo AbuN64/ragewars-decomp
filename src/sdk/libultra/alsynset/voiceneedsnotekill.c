@@ -7,7 +7,7 @@
 
 
 
-s32 __voiceNeedsNoteKill(void *arg0, s32 targetVoice, s32 releaseDeadline) {
+s32 __voiceNeedsNoteKill(void *sequencePlayer, s32 targetVoice, s32 releaseDeadline) {
     s32 amount;
     s32 total;
     s32 result;
@@ -15,7 +15,7 @@ s32 __voiceNeedsNoteKill(void *arg0, s32 targetVoice, s32 releaseDeadline) {
     char *cur;
 
     total = 0;
-    cur = ((ALSeqPlayer *)arg0)->evtq.allocList.next;
+    cur = ((ALSeqPlayer *)sequencePlayer)->evtq.allocList.next;
     result = 1;
     if (cur != 0) {
         do {
@@ -28,7 +28,7 @@ s32 __voiceNeedsNoteKill(void *arg0, s32 targetVoice, s32 releaseDeadline) {
                         ((ALEventListItem *)next)->delta = ((ALEventListItem *)next)->delta + amount;
                     }
                     alUnlink(cur);
-                    alLink(cur, &((ALSeqPlayer *)arg0)->evtq.freeList.next);
+                    alLink(cur, &((ALSeqPlayer *)sequencePlayer)->evtq.freeList.next);
                     goto done;
                 }
                 result = 0;

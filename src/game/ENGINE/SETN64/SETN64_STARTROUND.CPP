@@ -3,7 +3,7 @@
 #include "COMMON/OBJRECAT26DD8.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "COMMON/INTEGERSTATEB0.H"
@@ -28,7 +28,7 @@ extern void CCollision_Initialize(void);
 extern void Scene_SetSelection(void *state, s32 selection, s32 mode);
 
 
-extern s32 D_800CD730;
+extern s32 g_gameLoopFrameCount;
 
 extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
@@ -38,9 +38,9 @@ void SetN64_HandleMode11Input(s32 session) {
 
 void SetN64_DrawMode11Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
-void SetN64_ResetMode10Items(s32 arg0) {
+void SetN64_ResetMode10Items(s32 sessionAddress) {
     Scene_ResetTransitionViewport();
-    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x6F);
+    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(sessionAddress, 0x6F);
 }
 
 void SetN64_HandleMode10Input(s32 session) {
@@ -51,7 +51,7 @@ void SetN64_DrawMode10Session(void *session) { SetN64_DrawSessionWithAttractTime
 
 void SetN64_ResetMode12Items(int sessionAddress) {
     Scene_ResetTransitionViewport();
-    SetN64_ResetPlayerItems(sessionAddress, ((ObjRecAt26DD8 *)sessionAddress)->unk26DD8 + 0x259);
+    SetN64_ResetPlayerItems(sessionAddress, ((RoundSessionItemStateView *)sessionAddress)->unk26DD8 + 0x259);
 }
 
 void SetN64_HandleMode12Input(s32 session) {
@@ -65,8 +65,8 @@ void SetN64_ResumeSelectedSession(GameSession *unused) {
     s32 field;
     f32 f;
 
-    D_801462C8.counters.first = 0;
-    D_800CD730 = 0;
+    g_gameSettings.counters.first = 0;
+    g_gameLoopFrameCount = 0;
     SetN64_CommitSessionInputs(unused);
     CCollision_Initialize();
 #if defined(VERSION_US_REV1)
@@ -82,9 +82,9 @@ void SetN64_ResumeSelectedSession(GameSession *unused) {
 #if defined(VERSION_US_REV1)
     D_800D2970 = 0;
 #endif
-    D_800CD744_de = f;
-    D_800D298C = f;
-    D_800CD740_de = f;
+    g_skyRotorSpinScale = f;
+    g_roundTimerStep = f;
+    g_particleSimulationTimeScale = f;
     Scene_SetSelection(dst, field, 0);
     unused->mode = 0xD;
     D_80154048 = 0;
@@ -95,15 +95,15 @@ void SetN64_StartRound(GameSession *session) {
     CGameStatus *counters;
     Shared_Game *game;
 
-    D_800CD730 = 0;
+    g_gameLoopFrameCount = 0;
     SetN64_CommitSessionInputs(session);
     if (Control_IsSnapshotActive() != 0) {
         session->selector = Control_GetSnapshotActorId();
     }
-    counters = &D_801462C8.counters;
+    counters = &g_gameSettings.counters;
     counters->state = 0;
     counters->m_FragTagSelectionType = 3;
-    game = &D_801462C8;
+    game = &g_gameSettings;
     game->local = 1;
     game->mode1E = 8;
     SetN64_ResetSessionPlayerPools(session, session->arena, 0);
@@ -113,15 +113,15 @@ void SetN64_StartRound(GameSession *session) {
     CCollision_Initialize();
     resetRoundExtra();
     clearRoundExtra();
-    D_800CD744_de = roundTimerConstant();
-    D_800D298C = roundTimerConstant();
-    D_800CD740_de = roundTimerConstant();
+    g_skyRotorSpinScale = roundTimerConstant();
+    g_roundTimerStep = roundTimerConstant();
+    g_particleSimulationTimeScale = roundTimerConstant();
     Scene_InitPreview(&g_world, session->resource);
     Scene_SetSelection(&g_world, session->selector, 0);
 }
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int rodata_func_802946A4_de_800C54D8[1] = {
+const unsigned int g_Setn64StartroundWords1[1] = {
     0x3F800000,
 };
 #endif

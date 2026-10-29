@@ -18,28 +18,28 @@
 
 
 void alSynSetVol(void *synth, void *voice, s16 targetVolume, s32 rampTime) {
-    s32 new_var;
-    void *Shared_func_802B3480_de_v0;
+    s32 updateSampleTime;
+    void *controlUpdate;
     void *voiceFilter;
     SharedRecV10 fn;
 
     if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0) {
-        Shared_func_802B3480_de_v0 = Audio_AllocParam();
-        if (Shared_func_802B3480_de_v0 != 0) {
-            new_var = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
-            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->type = AL_FILTER_SET_VOLUME;
-            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->volume = (s32) targetVolume;
-            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->delta = new_var;
-            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->samples = _timeToSamples(synth, rampTime);
-            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->next = 0;
+        controlUpdate = Audio_AllocParam();
+        if (controlUpdate != 0) {
+            updateSampleTime = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
+            ((AudioVolumeControlUpdate *)(controlUpdate))->type = AL_FILTER_SET_VOLUME;
+            ((AudioVolumeControlUpdate *)(controlUpdate))->volume = (s32) targetVolume;
+            ((AudioVolumeControlUpdate *)(controlUpdate))->delta = updateSampleTime;
+            ((AudioVolumeControlUpdate *)(controlUpdate))->samples = _timeToSamples(synth, rampTime);
+            ((AudioVolumeControlUpdate *)(controlUpdate))->next = 0;
             voiceFilter = ((struct Draw *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->model;
             fn = ((CallbackStateC_4 *)(voiceFilter))->callback;
-            fn(voiceFilter, AL_FILTER_ADD_UPDATE, Shared_func_802B3480_de_v0);
+            fn(voiceFilter, AL_FILTER_ADD_UPDATE, controlUpdate);
         }
     }
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802B3468[8] =
+char s_AlsynsetvolETCROMText[8] =
     "e_t\022CROM";
 #endif

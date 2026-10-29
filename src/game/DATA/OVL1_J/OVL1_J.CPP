@@ -2,7 +2,7 @@
 
 /* 80408CB0_16.CPP */
 #if defined(VERSION_EU)
-unsigned char D_auto_func_804147E8_eu_padding_18A7E8[8] = { 0x27, 0xA5, 0x00, 0x48, 0x27, 0xA6, 0x00, 0x44 };
+unsigned char g_Ovl1JTrailingBytes[8] = { 0x27, 0xA5, 0x00, 0x48, 0x27, 0xA6, 0x00, 0x44 };
 #endif
 
 /* DATA_800E59E8.CPP */
@@ -29,7 +29,7 @@ unsigned short g_frontendLoadoutResourceHalfwords[150] = {
 
 /* DATA_800E5B14.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_rw_loadout_equipment_items_us_rev1[12] = {
+unsigned int g_LoadoutEquipmentItemsUsRev1[12] = {
     0x00000098, 0x00001397, 0x0000000A, 0x800D711C, 0x000000AD, 0x00001396, 0x0000000C, 0x800D7124,
     0x000000AF, 0x000013AD, 0x0000000B, 0x800D7120,
 };
@@ -47,7 +47,7 @@ unsigned int g_loadoutWeaponItems[32] = {
 
 /* DATA_800E5BC4.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_rw_loadout_abilities_items_us_rev1[16] = {
+unsigned int g_LoadoutAbilitiesItemsUsRev1[16] = {
     0x000000A9, 0x000013A7, 0x00000005, 0x800D7108, 0x000000AB, 0x0000139E, 0x00000003, 0x800D7100,
     0x000000AC, 0x00001393, 0x00000006, 0x800D710C, 0x000000B1, 0x0000138B, 0x00000004, 0x800D7104,
 };
@@ -55,35 +55,35 @@ unsigned int D_auto_src_rw_loadout_abilities_items_us_rev1[16] = {
 
 /* DATA_800E5C04.CPP */
 #if defined(VERSION_US_REV1)
-extern char D_0043A510[];
-extern char D_0043A7D8[];
-extern char D_0043AA70[];
-unsigned int D_auto_src_rw_menu_event_handlers_E6804_us_rev1[9] = {
-    0x00000E07, 0x00000008, (unsigned int)D_0043A510, 0x00000E08, 0x00000008, (unsigned int)D_0043A7D8, 0x00000E0A, 0x00000008,
-    (unsigned int)D_0043AA70,
+extern char addrLow_Player_StartFourPlayerResults[];
+extern char addrLow_Player_UpdateFourPlayerResults[];
+extern char addrLow_Player_DrawFourPlayerResults[];
+unsigned int g_MenuEventHandlersE6804UsRev1[9] = {
+    0x00000E07, 0x00000008, (unsigned int)addrLow_Player_StartFourPlayerResults, 0x00000E08, 0x00000008, (unsigned int)addrLow_Player_UpdateFourPlayerResults, 0x00000E0A, 0x00000008,
+    (unsigned int)addrLow_Player_DrawFourPlayerResults,
 };
 #endif
 
 /* DATA_800E5C28.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E59E6_unclaimed_E6828 */
-extern char D_0043A0B0[];
-unsigned int D_blob_0c73ec4bf0d0dab3b704[3] = {
-    0x00000E06, 0x00000008, (unsigned int)D_0043A0B0,
+extern char addrLow_Player_CreateFourPlayerResults[];
+unsigned int g_Ovl1JEncodedWords[3] = {
+    0x00000E06, 0x00000008, (unsigned int)addrLow_Player_CreateFourPlayerResults,
 };
 
-extern char D_0043AD20[];
-extern char D_0043BD50[];
-extern char D_0043BD90[];
-extern char D_0043BEA0[];
-extern char D_0043BF38[];
-extern char D_0043BFD0[];
-extern char D_0043C06C[];
-extern char D_0043C108[];
-unsigned int D_auto_src_rw_menu_event_handlers_E6834_us_rev1[27] = {
-    0x00000E03, 0x00000008, (unsigned int)D_0043BD50, 0x0000000A, 0x00000008, (unsigned int)D_0043BD90, 0x00000002, 0x00000008,
-    (unsigned int)D_0043C108, 0x00000001, 0x00000008, (unsigned int)D_0043AD20, 0x00000007, 0x00007530, (unsigned int)D_0043BFD0, 0x00000005,
-    0x00007530, (unsigned int)D_0043BEA0, 0x00000008, 0x00007530, (unsigned int)D_0043C06C, 0x00000006, 0x00007530, (unsigned int)D_0043BF38,
+extern char addrLow_Frontend_ConfirmEquipmentSelection[];
+extern char addrLow_Frontend_FreeEquipmentScreen[];
+extern char addrLow_Frontend_RestoreEquipmentSelections[];
+extern char addrLow_Frontend_SelectPreviousEquipmentColumn[];
+extern char addrLow_Frontend_SelectNextEquipmentColumn[];
+extern char addrLow_Frontend_SelectPreviousEquipmentChoice[];
+extern char addrLow_Frontend_SelectNextEquipmentChoice[];
+extern char addrLow_Frontend_CancelEquipmentSelection[];
+unsigned int g_MenuEventHandlersE6834UsRev1[27] = {
+    0x00000E03, 0x00000008, (unsigned int)addrLow_Frontend_FreeEquipmentScreen, 0x0000000A, 0x00000008, (unsigned int)addrLow_Frontend_RestoreEquipmentSelections, 0x00000002, 0x00000008,
+    (unsigned int)addrLow_Frontend_CancelEquipmentSelection, 0x00000001, 0x00000008, (unsigned int)addrLow_Frontend_ConfirmEquipmentSelection, 0x00000007, 0x00007530, (unsigned int)addrLow_Frontend_SelectPreviousEquipmentChoice, 0x00000005,
+    0x00007530, (unsigned int)addrLow_Frontend_SelectPreviousEquipmentColumn, 0x00000008, 0x00007530, (unsigned int)addrLow_Frontend_SelectNextEquipmentChoice, 0x00000006, 0x00007530, (unsigned int)addrLow_Frontend_SelectNextEquipmentColumn,
     0x00000000, 0x00000000, 0x00000000,
 };
 #endif

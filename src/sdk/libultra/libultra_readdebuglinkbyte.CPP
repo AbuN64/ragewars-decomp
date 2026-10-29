@@ -1,7 +1,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESPONSE.H"
-#include "COMMON/S1_4.H"
+#include "TYPES.H"
 #include "TYPES.H"
 #include "sdk/OSINT/pigetstatus.H"
 
@@ -21,27 +21,27 @@ s32 Libultra_ReadDebugLinkByte(u8 *receivedByte) {
     u8 final_control;
     u8 status;
 
-    initial_control = (D_8014D3E3 & 0xF8) | 2;
+    initial_control = (g_debugLinkModeControl & 0xF8) | 2;
     result = 0;
-    D_8014D3E3 = initial_control;
+    g_debugLinkModeControl = initial_control;
     do {
     } while (osPiGetStatus() & 3);
-    D_B200000C = initial_control;
-    control = D_8014D3E3 | 8;
-    D_8014D3E3 = control;
+    DEBUG_LINK_MODE_REGISTER = initial_control;
+    control = g_debugLinkModeControl | 8;
+    g_debugLinkModeControl = control;
     do {
     } while (osPiGetStatus() & 3);
 
     mask = 1;
     timeout = 0x4E20;
-    retries = D_800D3650;
+    retries = g_debugLinkRetryLimit;
     expected = 1;
-    D_B200000C = control;
-    D_8014D3E8 = 0;
+    DEBUG_LINK_MODE_REGISTER = control;
+    g_debugLinkTransferFailed = 0;
     do {
         do {
         } while (osPiGetStatus() & 3);
-        if ((D_B2000015 & mask) == expected) {
+        if ((DEBUG_LINK_TRANSMIT_STATUS_BYTE & mask) == expected) {
             goto first_done;
         }
         if (timeout-- == 0) {
@@ -49,26 +49,26 @@ s32 Libultra_ReadDebugLinkByte(u8 *receivedByte) {
             timeout = 0x4E20;
         }
     } while (retries > 0);
-    D_8014D3E8 = 1;
+    g_debugLinkTransferFailed = 1;
 first_done:
 
-    if (D_8014D3E8 == 0) {
+    if (g_debugLinkTransferFailed == 0) {
         do {
         } while (osPiGetStatus() & 3);
         *receivedByte = D_B2000001;
-        control = D_8014D3E3 & 0xF7;
-        D_8014D3E3 = control;
+        control = g_debugLinkModeControl & 0xF7;
+        g_debugLinkModeControl = control;
         do {
         } while (osPiGetStatus() & 3);
 
         expected = 1;
-        retries = D_800D3650;
+        retries = g_debugLinkRetryLimit;
         timeout = 0x4E20;
-        D_B200000C = control;
+        DEBUG_LINK_MODE_REGISTER = control;
         do {
             do {
             } while (osPiGetStatus() & 3);
-            status = D_B2000015 & expected;
+            status = DEBUG_LINK_TRANSMIT_STATUS_BYTE & expected;
             if (status == 0) {
                 goto second_done;
             }
@@ -77,15 +77,15 @@ first_done:
                 timeout = 0x4E20;
             }
         } while (retries > 0);
-        D_8014D3E8 = 1;
+        g_debugLinkTransferFailed = 1;
 second_done:
 
-        if (D_8014D3E8 == 0) {
-            final_control = D_8014D3E3 & 0xF8;
-            D_8014D3E3 = final_control;
+        if (g_debugLinkTransferFailed == 0) {
+            final_control = g_debugLinkModeControl & 0xF8;
+            g_debugLinkModeControl = final_control;
             do {
             } while (osPiGetStatus() & 3);
-            D_B200000C = final_control;
+            DEBUG_LINK_MODE_REGISTER = final_control;
             result = 1;
         }
     }

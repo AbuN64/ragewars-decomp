@@ -67,5 +67,5 @@ typedef struct SeqInitPlayer {
     void *loopStart, *loopEnd;
     s32 loopCount;
 } SeqInitPlayer;
-extern char D_002B0554;
+extern char Seqplayer_ProcessSequenceEvents_Address;
 #endif

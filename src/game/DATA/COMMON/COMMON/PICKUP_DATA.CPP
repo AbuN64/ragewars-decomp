@@ -4,7 +4,7 @@ struct {
     unsigned int w0;
     unsigned short h1[4];
     unsigned int w2;
-} D_auto_src_ragewars_pickup_targeted_us_rev1[16] = {
+} g_targetedPickupDataUsRev1[16] = {
     { 0x800D7094, { 0x0708, 0x0001, 0x012B, 0x0000 }, 0x002ADE28 },
     { 0x800D7098, { 0x0709, 0x0001, 0x012B, 0x0000 }, 0x002ADE28 },
     { 0x800D709C, { 0x070A, 0x0001, 0x012B, 0x0000 }, 0x002ADE28 },

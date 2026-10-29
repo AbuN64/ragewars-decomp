@@ -1,4 +1,4 @@
-#include "COMMON/OBJECTLINKS1458.H"
+#include "COMMON/NAVIGATION_ACTOR_SEARCH_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/S2.H"
@@ -16,9 +16,9 @@
 
 
 
-extern WeaponInfo *D_800D052C[];
+extern WeaponInfo *g_weaponInfoByType[];
 
-extern char D_8011D8D0[];
+extern char g_actorParticleEffectSystem[];
 
 extern void Nav_RequestRandomArmedWeapon(BrainCode8020EAE0 *);
 
@@ -63,14 +63,14 @@ void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *brain, s32 *ammo) {
                 brain->player->views5D8.view5D8_1.record->unk93 = 0;
                 break;
             }
-            if (*D_800D052C[weapon]->weaponClass == 1) {
+            if (*g_weaponInfoByType[weapon]->weaponClass == 1) {
                 continue;
             }
             if (weapon == 6) {
                 weapon = 5;
             }
         second:
-            if (*D_800D052C[weapon]->weaponClass == 2) {
+            if (*g_weaponInfoByType[weapon]->weaponClass == 2) {
                 continue;
             }
         }
@@ -84,7 +84,7 @@ void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *brain, s32 *ammo) {
         if (brain->player->views5E8.view62E_14.weapon == 4 && brain->player->views1C.view594_39.gear == 2) {
             return;
         }
-        if (Particle_CountOwnerListOneEffects(D_8011D8D0, brain->player) > 0) {
+        if (Particle_CountOwnerListOneEffects(g_actorParticleEffectSystem, brain->player) > 0) {
             return;
         }
         if (Graphu64_NextRandom() % 100 >= 21) {
@@ -101,35 +101,35 @@ void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *brain, s32 *ammo) {
     }
 }
 
-int func_80210018_de(void *controller) {
+int Nav_SelectWeaponFromFirstAmmoGroup(void *controller) {
     BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0x8C);
     return 1;
 }
 
-int func_80210040_de(void *controller) {
+int Nav_SelectWeaponFromSecondAmmoGroup(void *controller) {
     BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
     return 1;
 }
 
-int func_80210068_de(void *controller) {
+int Nav_SelectWeaponFromThirdAmmoGroup(void *controller) {
     BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0xCC);
     return 1;
 }
 
-int func_80210090_de(void *controller) {
+int Nav_SelectSecondAmmoGroupVariantOne(void *controller) {
     BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
     return 1;
 }
 
-int func_802100B8_de(void *controller) {
+int Nav_SelectSecondAmmoGroupVariantTwo(void *controller) {
     BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0xAC);

@@ -2,10 +2,10 @@
 #define COMMON_CACHE_ALLOCATERESOURCE_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 
-struct Shape_typemap_165 *Cache_AllocateResource(s32, s32, u32, void *);
+struct CacheResourceBlockView *Cache_AllocateResource(s32, s32, u32, void *);
 extern s32 g_pakPakStateNoteName;
 
-extern s32 D_800E2854;
+extern s32 g_controllerPakNoteLists;
 #endif

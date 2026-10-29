@@ -2,22 +2,22 @@
 #include "include_asm.h"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ARGB_COLOR.H"
 #include "FRONTEND/RESULTSOPTIONSSCREEN.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/LOADOUT.H"
 #include "COMMON/OWNERRECAT8V2.H"
 #include "COMMON/GROUP.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "COMMON/LIGHTDATA.H"
-#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/MTX.H"
-#include "COMMON/OBJECTLINKS1E8.H"
+#include "COMMON/PARTICLE_ATTACHMENT_AND_OWNER_VIEWS.H"
 #include "COMMON/COLORENTRY.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/RESULTS.H"
@@ -76,10 +76,10 @@ void Results_HideTrialCatalogueWidgets(void) {
     absentResource = -1;
     byteOffset = index;
 loop:
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->a & 0xFFFF), 0);
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->b & 0xFFFF), 0);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_trialCatalogueScreen->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->a & 0xFFFF), 0);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_trialCatalogueScreen->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->b & 0xFFFF), 0);
     if (((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->c.id != absentResource) {
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, (u16)*(u32 *)((u8 *)g_arenaCompatibilityTable + byteOffset + 8)), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_trialCatalogueScreen->root, (u16)*(u32 *)((u8 *)g_arenaCompatibilityTable + byteOffset + 8)), 0);
     }
     index += 1;
     byteOffset += 0xC;
@@ -88,14 +88,14 @@ loop:
     }
 }
 
-extern struct EntryRecAt0V1 D_800E4694[];
+extern struct ProfileWeaponRowEntry g_trialCatalogueStages[];
 extern void Defs_SetBitValue(u8 *, s32, s32);
 extern s32 Defs_TestBit(s32, s32);
 
 void Results_RefreshTrialCatalogueWidgets(void) {
     u8 availableFlags[8];
     Preset *unlockedPreset;
-    func_8041F2A0_Item *widget;
+    SlotSelectionWidget *widget;
     s32 entryIndex, unlockSlot, unlockIndex;
     s32 searchIndex;
     s32 unlockValue;
@@ -107,11 +107,11 @@ void Results_RefreshTrialCatalogueWidgets(void) {
         Defs_SetBitValue(availableFlags, entryIndex, 0);
     }
     Defs_SetBitValue(availableFlags, 0, 1);
-    settings = &D_801462C8;
+    settings = &g_gameSettings;
     if (settings->controllerMode == 1) {
         playerSettings = settings;
         for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-            unlockedPreset = Achieve_CopyPreset(entryIndex, 0, *(s8 *)((char *)playerSettings + D_800E4690->player * 0x96 + 0x150));
+            unlockedPreset = Achieve_CopyPreset(entryIndex, 0, *(s8 *)((char *)playerSettings + g_trialCatalogueScreen->player * 0x96 + 0x150));
             unlockValue = unlockedPreset->bytes[1];
             if (unlockValue > 0) Defs_SetBitValue(availableFlags, unlockValue - 1, 1);
             for (unlockSlot = 0; unlockSlot < 3; unlockSlot++) {
@@ -127,26 +127,26 @@ void Results_RefreshTrialCatalogueWidgets(void) {
     for (entryIndex = 0; entryIndex < 64; entryIndex++) {
         resourceKey = g_arenaCompatibilityTable[entryIndex].a;
         for (searchIndex = 0; searchIndex < 36; searchIndex++) {
-            if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found1; }
+            if (g_trialCatalogueStages[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found1; }
         }
         unlockIndex = 0;
 found1:;
         if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
-            widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].a);
+            widget = Node_FindWidgetByResourceId(g_trialCatalogueScreen->parent, (u16)g_arenaCompatibilityTable[entryIndex].a);
             Widget_SetWidgetFlag08(widget, 1);
             widget->alpha = 20;
             resourceKey = g_arenaCompatibilityTable[entryIndex].b;
             for (searchIndex = 0; searchIndex < 36; searchIndex++) {
-                if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found2; }
+                if (g_trialCatalogueStages[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found2; }
             }
             unlockIndex = 0;
 found2:;
             if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
-                widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].b);
+                widget = Node_FindWidgetByResourceId(g_trialCatalogueScreen->parent, (u16)g_arenaCompatibilityTable[entryIndex].b);
                 Widget_SetWidgetFlag08(widget, 1);
                 widget->alpha = 20;
                 if (g_arenaCompatibilityTable[entryIndex].c.id != -1) {
-                    widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].c.id);
+                    widget = Node_FindWidgetByResourceId(g_trialCatalogueScreen->parent, (u16)g_arenaCompatibilityTable[entryIndex].c.id);
                     Widget_SetWidgetFlag08(widget, 1);
                     widget->alpha = 20;
                 }
@@ -154,35 +154,35 @@ found2:;
         }
     }
     for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-        if (Defs_TestBit((s32)D_800E4690->owned, entryIndex) == 1) ((void (*)(s32))Results_MarkLinkedTrialsAvailable)(entryIndex);
+        if (Defs_TestBit((s32)g_trialCatalogueScreen->owned, entryIndex) == 1) ((void (*)(s32))Results_MarkLinkedTrialsAvailable)(entryIndex);
     }
     for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-        if (Defs_TestBit((s32)D_800E4690->pending, entryIndex) == 1) Defs_SetBitValue(D_800E4690->owned, entryIndex, 1);
+        if (Defs_TestBit((s32)g_trialCatalogueScreen->pending, entryIndex) == 1) Defs_SetBitValue(g_trialCatalogueScreen->owned, entryIndex, 1);
     }
     for (entryIndex = 0; entryIndex < 64; entryIndex++) {
         opacity = 170;
         resourceKey = g_arenaCompatibilityTable[entryIndex].a;
         for (searchIndex = 0; searchIndex < 36; searchIndex++) {
-            if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found3; }
+            if (g_trialCatalogueStages[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found3; }
         }
         unlockIndex = 0;
 found3:;
-        if (Defs_TestBit((s32)D_800E4690->owned, unlockIndex) == 1) {
-            widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].a);
-            if (Defs_TestBit((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
+        if (Defs_TestBit((s32)g_trialCatalogueScreen->owned, unlockIndex) == 1) {
+            widget = Node_FindWidgetByResourceId(g_trialCatalogueScreen->parent, (u16)g_arenaCompatibilityTable[entryIndex].a);
+            if (Defs_TestBit((s32)g_trialCatalogueScreen->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
             else widget->alpha = 170;
             resourceKey = g_arenaCompatibilityTable[entryIndex].b;
             for (searchIndex = 0; searchIndex < 36; searchIndex++) {
-                if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found4; }
+                if (g_trialCatalogueStages[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found4; }
             }
             unlockIndex = 0;
 found4:;
-            if (Defs_TestBit((s32)D_800E4690->owned, unlockIndex) == 1) {
-                widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].b);
-                if (Defs_TestBit((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
+            if (Defs_TestBit((s32)g_trialCatalogueScreen->owned, unlockIndex) == 1) {
+                widget = Node_FindWidgetByResourceId(g_trialCatalogueScreen->parent, (u16)g_arenaCompatibilityTable[entryIndex].b);
+                if (Defs_TestBit((s32)g_trialCatalogueScreen->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
                 else widget->alpha = 170;
                 if (g_arenaCompatibilityTable[entryIndex].c.id != -1) {
-                    widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].c.id);
+                    widget = Node_FindWidgetByResourceId(g_trialCatalogueScreen->parent, (u16)g_arenaCompatibilityTable[entryIndex].c.id);
                     widget->alpha = opacity;
                 }
             }
@@ -205,19 +205,19 @@ void Results_RefreshTrialCharacterPreview(void) {
     s32 index;
     u8 kind;
     struct EntryFrontendRefreshTrialCharacterPreview *entry;
-    PreviewSettings *settings = (PreviewSettings *)&D_801462C8;
+    PreviewSettings *settings = (PreviewSettings *)&g_gameSettings;
     if (settings->mode == 4) {
-        record = (*(ResultsOptionsScreen **)&D_800E4690)->selection;
-        entry = &((PreviewSettings *)&D_801462C8)->entries[(*(ResultsOptionsScreen **)&D_800E4690)->player];
+        record = (*(ResultsOptionsScreen **)&g_trialCatalogueScreen)->selection;
+        entry = &((PreviewSettings *)&g_gameSettings)->entries[(*(ResultsOptionsScreen **)&g_trialCatalogueScreen)->player];
         Results_FillTrialPresetWeaponRows(record, settings);
         kind = Scene_GetBlLevelData(&g_world, record)->kind;
         entry->kind = kind;
         index = Key_FindKeyIndex((s8)kind);
-        scale.x = D_800E3A58[index].scale[0];
-        scale.y = D_800E3A58[index].scale[0];
-        scale.z = D_800E3A58[index].scale[0];
-        Preview_InitModelPreview((Obj8041CAD8 *)(*(ResultsOptionsScreen **)&D_800E4690)->panels, 9, entry->kind + 0x38F, 0x4B, 0x5DC0, scale,
-                         D_800E3A58[index].position[0], D_800E3A58[index].distance[0],
-                         D_800E3A58[index].light[0]);
+        scale.x = g_characterPortraitRecords[index].scale[0];
+        scale.y = g_characterPortraitRecords[index].scale[0];
+        scale.z = g_characterPortraitRecords[index].scale[0];
+        Preview_InitModelPreview((Obj8041CAD8 *)(*(ResultsOptionsScreen **)&g_trialCatalogueScreen)->panels, 9, entry->kind + 0x38F, 0x4B, 0x5DC0, scale,
+                         g_characterPortraitRecords[index].position[0], g_characterPortraitRecords[index].distance[0],
+                         g_characterPortraitRecords[index].light[0]);
     }
 }

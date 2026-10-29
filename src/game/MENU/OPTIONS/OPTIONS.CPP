@@ -23,7 +23,7 @@ unsigned int func_8042250C_us_rev1_padding_19050C[1] = {
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 #include "MENU/SCROLL.H"
 #include "COMMON/OWNERRECAT8V1.H"
-#include "COMMON/RECRECAT4.H"
+#include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "TYPES.H"
 struct MenuFadeWidget;
 struct MenuResourceWidget;
@@ -33,7 +33,7 @@ extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 /* Builds the options-commit state: allocates its 0x28 bytes through Cache_AllocateMemory and keeps the
    record at g_optionsPage, creates the fade widget 0x4D/0x4E and the title object 0x4F/0x6E, then builds
    the three option lists 0x59/0x5A, 0x55/0x56 and 0x51/0x52, appends their localized labels, and
-   selects the entry named by the game settings D_801462C8 bytes 0x1B, 0x1F and 0x580 - the third list
+   selects the entry named by the game settings g_gameSettings bytes 0x1B, 0x1F and 0x580 - the third list
    gains the labels at 0x800D74B8 and 0x800D74BC only when Defs_GetMemorySize does not return 0x400000.
    The 0x80-step slider 0x53/0x54 is created and positioned at the settings' position byte, menu nodes
    0x57, 0x58 and 0x50 are released, and the record is finally armed with a selection value of -1 and
@@ -42,8 +42,8 @@ extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern OptionsCommitContext *g_optionsPage;
 /* Localized label pointers supplied to each option list. */
 extern u8 *D_800D3470_de[1];
-extern u8 *D_800D2124;
-extern u8 *D_800D2128;
+extern u8 *g_optionsFirstListPrimaryLabel;
+extern u8 *g_optionsFirstListSecondaryLabel;
 extern u8 *D_800D2134[1];
 extern u8 *D_800D2138;
 extern u8 *D_800D213C;
@@ -71,28 +71,28 @@ s32 Options_CreateOptionsPage(void) {
     SmpButton_WrapButtonWidget(0x57);
     SmpButton_WrapButtonWidget(0x58);
     firstList = SmpButton_CreateListWidget(0x59, 0x5A);
-    g_optionsPage->unk_C = firstList;
+    g_optionsPage->bloodModeList = firstList;
     SmpButton_AppendListText(firstList, D_800D3470_de[0]);
-    SmpButton_AppendListText(g_optionsPage->unk_C, D_800D2124);
-    SmpButton_AppendListText(g_optionsPage->unk_C, D_800D2128);
-    settings = &D_801462C8;
-    SmpButton_SelectListEntry(g_optionsPage->unk_C, settings->firstListMode);
+    SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListPrimaryLabel);
+    SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListSecondaryLabel);
+    settings = &g_gameSettings;
+    SmpButton_SelectListEntry(g_optionsPage->bloodModeList, settings->bloodMode);
     secondList = SmpButton_CreateListWidget(0x55, 0x56);
-    g_optionsPage->unk_10 = secondList;
-    SmpButton_AppendListText(secondList, D_auto_800D74AC[0]);
-    SmpButton_AppendListText(g_optionsPage->unk_10, D_auto_800D74B0);
-    SmpButton_SelectListEntry(g_optionsPage->unk_10, settings->unknown1F);
+    g_optionsPage->twoPlayerScreenList = secondList;
+    SmpButton_AppendListText(secondList, g_optionsPrimaryLocalizedLabels[0]);
+    SmpButton_AppendListText(g_optionsPage->twoPlayerScreenList, g_optionsSecondaryLocalizedLabels);
+    SmpButton_SelectListEntry(g_optionsPage->twoPlayerScreenList, settings->twoPlayerScreenPreference);
     thirdList = SmpButton_CreateListWidget(0x51, 0x52);
-    g_optionsPage->unk_14 = thirdList;
+    g_optionsPage->resolutionList = thirdList;
     SmpButton_AppendListText(thirdList, D_800D2134[0]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(g_optionsPage->unk_14, D_800D2138);
-        SmpButton_AppendListText(g_optionsPage->unk_14, D_800D213C);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D2138);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D213C);
     }
-    SmpButton_SelectListEntry(g_optionsPage->unk_14, settings->reserved580);
+    SmpButton_SelectListEntry(g_optionsPage->resolutionList, settings->resolution);
     slider = SmpSlider_CreateSliderWidget(0x53, 0x54, 0x80);
-    g_optionsPage->unk_8 = slider;
-    SmpSlider_SetSliderItem(slider, settings->buttons);
+    g_optionsPage->gammaSlider = slider;
+    SmpSlider_SetSliderItem(slider, settings->lightingGamma);
     SmpButton_WrapButtonWidget(0x50);
     title = SmpFlicker_CreateFlickerWidget(0x4F, 0x6E);
     g_optionsPage->state = 3;
@@ -106,8 +106,8 @@ s32 Options_CreateOptionsPage(void) {
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 #include "TYPES.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
-extern Shared_OptionsScreen *D_800E4518;
-extern Shared_MenuReply D_80154020;
+extern Shared_OptionsScreen *g_optionsShortcutScreen;
+extern Shared_MenuReply g_selectionMessageReply;
 extern void Widget_SetWidgetFlag08(void *, s32);
 extern void Widget_SetWidgetFlag100(void *, s32);
 extern void Tsmos_DeactivateControllerState(void);
@@ -127,60 +127,60 @@ s32 Options_OpenOptionsScreen(void *node) {
     s32 i;
     s32 rem;
 
-    D_800E4518 = Cache_AllocateMemory(0x6C);
-    D_800E4518->sound = func_8025E2C4_de();
-    func_8025E2D4_de(0x34);
+    g_optionsShortcutScreen = Cache_AllocateMemory(0x6C);
+    g_optionsShortcutScreen->sound = SoundElement_GetMusicPlaybackEnabled();
+    SoundElement_SetMusicPlaybackEnabled(0x34);
     SoundElement_DisableMusicGainOverride();
     SoundElement_StopAudioExceptKey(-1);
-    D_800E4518->page = 1;
-    D_800E4518->pages = 4;
-    D_800E4518->leftTab = Node_FindWidgetByResourceId(node, 0x381);
-    D_800E4518->leftTab->x -= D_800E4518->leftTab->width;
-    D_800E4518->leftStep = D_800E4518->leftTab->width / 4;
-    rem = D_800E4518->leftTab->width - D_800E4518->leftStep * 4;
-    D_800E4518->leftTab->x += rem;
-    D_800E4518->rightTab = Node_FindWidgetByResourceId(node, 0x388);
-    D_800E4518->rightTab->x += D_800E4518->rightTab->width;
-    D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
-    rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
-    D_800E4518->rightTab->x -= rem;
-    D_800E4518->title = SmpFlicker_CreateFlickerWidget(0x373, 0x6E);
+    g_optionsShortcutScreen->page = 1;
+    g_optionsShortcutScreen->pages = 4;
+    g_optionsShortcutScreen->leftTab = Node_FindWidgetByResourceId(node, 0x381);
+    g_optionsShortcutScreen->leftTab->x -= g_optionsShortcutScreen->leftTab->width;
+    g_optionsShortcutScreen->leftStep = g_optionsShortcutScreen->leftTab->width / 4;
+    rem = g_optionsShortcutScreen->leftTab->width - g_optionsShortcutScreen->leftStep * 4;
+    g_optionsShortcutScreen->leftTab->x += rem;
+    g_optionsShortcutScreen->rightTab = Node_FindWidgetByResourceId(node, 0x388);
+    g_optionsShortcutScreen->rightTab->x += g_optionsShortcutScreen->rightTab->width;
+    g_optionsShortcutScreen->rightStep = g_optionsShortcutScreen->rightTab->width / 4;
+    rem = g_optionsShortcutScreen->rightTab->width - g_optionsShortcutScreen->rightStep * 4;
+    g_optionsShortcutScreen->rightTab->x -= rem;
+    g_optionsShortcutScreen->title = SmpFlicker_CreateFlickerWidget(0x373, 0x6E);
     marker = Node_FindWidgetByResourceId(node, 0x372);
-    D_800E4518->marker = marker;
+    g_optionsShortcutScreen->marker = marker;
     Widget_SetWidgetFlag08(marker, 0);
     (Node_FindWidgetByResourceId(node, 0x386))->alpha = 0x6E;
     header = Node_FindWidgetByResourceId(node, 0x387);
-    D_800E4518->header = header;
+    g_optionsShortcutScreen->header = header;
     header->alpha = 0x8C;
-    D_800E4518->footer = Node_FindWidgetByResourceId(node, 0x370);
+    g_optionsShortcutScreen->footer = Node_FindWidgetByResourceId(node, 0x370);
     rumble = Node_FindWidgetByResourceId(node, 0x384);
-    D_800E4518->rumbleIcon = rumble;
+    g_optionsShortcutScreen->rumbleIcon = rumble;
     Widget_SetWidgetFlag08(rumble, 1);
     (Node_FindWidgetByResourceId(node, 0x385))->alpha = 0x6E;
     pak = Node_FindWidgetByResourceId(node, 0x374);
-    D_800E4518->pakIcon = pak;
+    g_optionsShortcutScreen->pakIcon = pak;
     Widget_SetWidgetFlag08(pak, 0);
     SmpButton_WrapButtonWidget(0x377);
     SmpButton_WrapButtonWidget(0x37C);
     firstListHandle = SmpButton_CreateListWidget(0x375, 0x376);
-    D_800E4518->firstList = firstListHandle;
+    g_optionsShortcutScreen->firstList = firstListHandle;
     SmpButton_AppendListText(firstListHandle, D_800D3470_de[0]);
-    SmpButton_AppendListText(D_800E4518->firstList, D_800D2124);
-    SmpButton_AppendListText(D_800E4518->firstList, D_800D2128);
-    settings = &D_801462C8;
-    SmpButton_SelectListEntry(D_800E4518->firstList, settings->firstListMode);
+    SmpButton_AppendListText(g_optionsShortcutScreen->firstList, g_optionsFirstListPrimaryLabel);
+    SmpButton_AppendListText(g_optionsShortcutScreen->firstList, g_optionsFirstListSecondaryLabel);
+    settings = &g_gameSettings;
+    SmpButton_SelectListEntry(g_optionsShortcutScreen->firstList, settings->bloodMode);
     secondListHandle = SmpButton_CreateListWidget(0x378, 0x379);
-    D_800E4518->secondList = secondListHandle;
+    g_optionsShortcutScreen->secondList = secondListHandle;
     SmpButton_AppendListText(secondListHandle, D_800D2134[0]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(D_800E4518->secondList, D_800D2138);
-        SmpButton_AppendListText(D_800E4518->secondList, D_800D213C);
+        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, D_800D2138);
+        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, D_800D213C);
     }
-    SmpButton_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
+    SmpButton_SelectListEntry(g_optionsShortcutScreen->secondList, settings->slots[7].secondListMode);
     slider = SmpSlider_CreateSliderWidget(0x37A, 0x37B, 0x80);
-    D_800E4518->slider = slider;
+    g_optionsShortcutScreen->slider = slider;
 
-    SmpSlider_SetSliderItem(slider, settings->buttons);
+    SmpSlider_SetSliderItem(slider, settings->lightingGamma);
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
@@ -207,19 +207,19 @@ s32 Options_OpenOptionsScreen(void *node) {
     SmpButton_WrapButtonWidget(0x37D);
     SmpButton_WrapButtonWidget(0x37E);
     SmpButton_WrapButtonWidget(0x37F);
-    D_800E4518->state = 0;
+    g_optionsShortcutScreen->state = 0;
     Tsmos_DeactivateControllerState();
-    Frontend_InitMenuImage(D_800E4518, 0x67, 0, 0, 0);
-    Frontend_StartMenuImageTransition(D_800E4518);
-    D_800E4518->cursor = 0;
-    D_800E4518->selection = -1;
+    Frontend_InitMenuImage(g_optionsShortcutScreen, 0x67, 0, 0, 0);
+    Frontend_StartMenuImageTransition(g_optionsShortcutScreen);
+    g_optionsShortcutScreen->cursor = 0;
+    g_optionsShortcutScreen->selection = -1;
     Widget_SetWidgetFlag08(node, 0);
-    D_8011FAC0.clockPaused = 1;
-    D_80154020.ready = 0;
-    D_80154020.value = -1;
+    g_gameSession.clockPaused = 1;
+    g_selectionMessageReply.ready = 0;
+    g_selectionMessageReply.value = -1;
     Menu_ConfigureOptionsCamera();
     prompt = Node_FindWidgetByResourceId(node, 0x371);
-    D_800E4518->prompt = prompt;
+    g_optionsShortcutScreen->prompt = prompt;
     Widget_SetWidgetFlag08(prompt, 1);
     return 0;
 }
@@ -234,12 +234,12 @@ s32 Options_OpenOptionsScreen(void *node) {
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 struct MenuResourceWidget;
 extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
-extern Shared_OptionsScreen *D_800E4518;
-extern Shared_MenuReply D_80154020;
+extern Shared_OptionsScreen *g_optionsShortcutScreen;
+extern Shared_MenuReply g_selectionMessageReply;
 /* Localized label pointers for the memory-mode list (rev1 D_800D2134..D_800D213C). */
-extern u8 *D_auto_800D3488[1];
-extern u8 *D_auto_800D348C;
-extern u8 *D_auto_800D3490;
+extern u8 *g_optionsSecondListPrimaryLabels[1];
+extern u8 *g_optionsSecondListSecondaryLabels;
+extern u8 *g_optionsSecondListTertiaryLabels;
 extern void *Cache_AllocateMemory(s32);
 extern void Widget_SetWidgetFlag08(void *, s32);
 extern void Widget_SetWidgetFlag100(void *, s32);
@@ -253,7 +253,7 @@ extern s32 ScenarioSetup_IsCupSelected(void);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(Shared_OptionsScreen *);
-/* German Options_OpenOptionsScreen: the same options screen without the first (language) list; the
+/* German Options_OpenOptionsScreen: the same options screen without the first (blood) list; the
    widget resource ids are 6..0x14 lower and settings is first taken after the memory-mode labels. */
 s32 Menu_OpenGameOptionsScreen(void *node) {
     Shared_Game *settings;
@@ -268,54 +268,54 @@ s32 Menu_OpenGameOptionsScreen(void *node) {
     s32 i;
     s32 rem;
 
-    D_800E4518 = Cache_AllocateMemory(0x6C);
-    D_800E4518->sound = func_8025E2C4_de();
-    func_8025E2D4_de(0x34);
+    g_optionsShortcutScreen = Cache_AllocateMemory(0x6C);
+    g_optionsShortcutScreen->sound = SoundElement_GetMusicPlaybackEnabled();
+    SoundElement_SetMusicPlaybackEnabled(0x34);
     SoundElement_DisableMusicGainOverride();
     SoundElement_StopAudioExceptKey(-1);
-    D_800E4518->page = 1;
-    D_800E4518->pages = 4;
-    D_800E4518->leftTab = Node_FindWidgetByResourceId(node, 0x37B);
-    D_800E4518->leftTab->x -= D_800E4518->leftTab->width;
-    D_800E4518->leftStep = D_800E4518->leftTab->width / 4;
-    rem = D_800E4518->leftTab->width - D_800E4518->leftStep * 4;
-    D_800E4518->leftTab->x += rem;
-    D_800E4518->rightTab = Node_FindWidgetByResourceId(node, 0x382);
-    D_800E4518->rightTab->x += D_800E4518->rightTab->width;
-    D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
-    rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
-    D_800E4518->rightTab->x -= rem;
-    D_800E4518->title = SmpFlicker_CreateFlickerWidget(0x36F, 0x6E);
+    g_optionsShortcutScreen->page = 1;
+    g_optionsShortcutScreen->pages = 4;
+    g_optionsShortcutScreen->leftTab = Node_FindWidgetByResourceId(node, 0x37B);
+    g_optionsShortcutScreen->leftTab->x -= g_optionsShortcutScreen->leftTab->width;
+    g_optionsShortcutScreen->leftStep = g_optionsShortcutScreen->leftTab->width / 4;
+    rem = g_optionsShortcutScreen->leftTab->width - g_optionsShortcutScreen->leftStep * 4;
+    g_optionsShortcutScreen->leftTab->x += rem;
+    g_optionsShortcutScreen->rightTab = Node_FindWidgetByResourceId(node, 0x382);
+    g_optionsShortcutScreen->rightTab->x += g_optionsShortcutScreen->rightTab->width;
+    g_optionsShortcutScreen->rightStep = g_optionsShortcutScreen->rightTab->width / 4;
+    rem = g_optionsShortcutScreen->rightTab->width - g_optionsShortcutScreen->rightStep * 4;
+    g_optionsShortcutScreen->rightTab->x -= rem;
+    g_optionsShortcutScreen->title = SmpFlicker_CreateFlickerWidget(0x36F, 0x6E);
     marker = Node_FindWidgetByResourceId(node, 0x36E);
-    D_800E4518->marker = marker;
+    g_optionsShortcutScreen->marker = marker;
     Widget_SetWidgetFlag08(marker, 0);
     (Node_FindWidgetByResourceId(node, 0x380))->alpha = 0x6E;
     header = Node_FindWidgetByResourceId(node, 0x381);
-    D_800E4518->header = header;
+    g_optionsShortcutScreen->header = header;
     header->alpha = 0x8C;
-    D_800E4518->footer = Node_FindWidgetByResourceId(node, 0x36C);
+    g_optionsShortcutScreen->footer = Node_FindWidgetByResourceId(node, 0x36C);
     rumble = Node_FindWidgetByResourceId(node, 0x37E);
-    D_800E4518->rumbleIcon = rumble;
+    g_optionsShortcutScreen->rumbleIcon = rumble;
     Widget_SetWidgetFlag08(rumble, 1);
     (Node_FindWidgetByResourceId(node, 0x37F))->alpha = 0x6E;
     pak = Node_FindWidgetByResourceId(node, 0x370);
-    D_800E4518->pakIcon = pak;
+    g_optionsShortcutScreen->pakIcon = pak;
     Widget_SetWidgetFlag08(pak, 0);
     SmpButton_WrapButtonWidget(0x379);
     SmpButton_WrapButtonWidget(0x37A);
     secondListHandle = SmpButton_CreateListWidget(0x377, 0x378);
-    D_800E4518->secondList = secondListHandle;
-    SmpButton_AppendListText(secondListHandle, D_auto_800D3488[0]);
+    g_optionsShortcutScreen->secondList = secondListHandle;
+    SmpButton_AppendListText(secondListHandle, g_optionsSecondListPrimaryLabels[0]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(D_800E4518->secondList, D_auto_800D348C);
-        SmpButton_AppendListText(D_800E4518->secondList, D_auto_800D3490);
+        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, g_optionsSecondListSecondaryLabels);
+        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, g_optionsSecondListTertiaryLabels);
     }
-    settings = &D_801462C8;
-    SmpButton_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
+    settings = &g_gameSettings;
+    SmpButton_SelectListEntry(g_optionsShortcutScreen->secondList, settings->slots[7].secondListMode);
     slider = SmpSlider_CreateSliderWidget(0x371, 0x372, 0x80);
-    D_800E4518->slider = slider;
+    g_optionsShortcutScreen->slider = slider;
 
-    SmpSlider_SetSliderItem(slider, settings->buttons);
+    SmpSlider_SetSliderItem(slider, settings->lightingGamma);
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
@@ -342,19 +342,19 @@ s32 Menu_OpenGameOptionsScreen(void *node) {
     SmpButton_WrapButtonWidget(0x373);
     SmpButton_WrapButtonWidget(0x374);
     SmpButton_WrapButtonWidget(0x375);
-    D_800E4518->state = 0;
+    g_optionsShortcutScreen->state = 0;
     Tsmos_DeactivateControllerState();
-    Frontend_InitMenuImage(D_800E4518, 0x67, 0, 0, 0);
-    Frontend_StartMenuImageTransition(D_800E4518);
-    D_800E4518->cursor = 0;
-    D_800E4518->selection = -1;
+    Frontend_InitMenuImage(g_optionsShortcutScreen, 0x67, 0, 0, 0);
+    Frontend_StartMenuImageTransition(g_optionsShortcutScreen);
+    g_optionsShortcutScreen->cursor = 0;
+    g_optionsShortcutScreen->selection = -1;
     Widget_SetWidgetFlag08(node, 0);
-    D_8011FAC0.clockPaused = 1;
-    D_80154020.ready = 0;
-    D_80154020.value = -1;
+    g_gameSession.clockPaused = 1;
+    g_selectionMessageReply.ready = 0;
+    g_selectionMessageReply.value = -1;
     Menu_ConfigureOptionsCamera();
     prompt = Node_FindWidgetByResourceId(node, 0x36D);
-    D_800E4518->prompt = prompt;
+    g_optionsShortcutScreen->prompt = prompt;
     Widget_SetWidgetFlag08(prompt, 1);
     return 0;
 }

@@ -3,7 +3,7 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
 
-void func_802B1E50_de(ALSeqPlayer *player, f32 tempo) {
+void Seqplayer_SetTempoMicrosecondsPerTick(ALSeqPlayer *player, f32 tempo) {
     ALSeq_s *sequence;
 
     sequence = player->target;

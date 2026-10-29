@@ -1,13 +1,13 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/PROBE.H"
 #include "TYPES.H"
 #include "particle/GAMEOBJECT_BUILDQUATERNIONTRANSLATIONMATRIX.H"
 #include "INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.H"
 
 /* 8024D018.CPP */
-/* Builds a 4x4 transform from a rotation quaternion (x, y, z, w) and a translation, with a zero fourth column and the corner set to the constant at D_800C8CA0. */
+/* Builds a 4x4 transform from a rotation quaternion (x, y, z, w) and a translation, with a zero fourth column and the corner set to the constant at g_actorAffineMatrixHomogeneousUnit. */
 
 void GameObject_BuildQuaternionTranslationMatrix(f32 *m, f32 *q, f32 *t)
 {
@@ -43,7 +43,7 @@ void GameObject_BuildQuaternionTranslationMatrix(f32 *m, f32 *q, f32 *t)
     m[3] = 0.0f;
     m[7] = 0.0f;
     m[11] = 0.0f;
-    m[15] = D_800C8CA0;
+    m[15] = g_actorAffineMatrixHomogeneousUnit;
 }
 
 extern int Lighting_BuildLitModel(int a, int b, void *c, void *d, int e, void *f);
@@ -57,7 +57,7 @@ void GameObject_BuildLitActorResource(void *levelActor, int **resourcePair) {
 
     deref1 = *resourcePair;
     deref2 = *deref1;
-    ret = Lighting_BuildLitModel(deref2, 0, &object->bounds, object->fieldB4, 1, levelActor);
+    ret = Lighting_BuildLitModel(deref2, 0, &object->bounds, object->animationMatrices, 1, levelActor);
     Cache_ReplaceResourcePairFirst(0, resourcePair, ret);
 }
 
@@ -68,7 +68,7 @@ typedef struct InteractionActor {
     char pad1C[0xE4]; s32 flags; char pad104[0x9C]; InteractionLink *attached;
     char pad1A4[0x34]; InteractionLink *player;
 } InteractionActor;
-s32 func_8024D160_de(InteractionActor *actor) {
+s32 InstHdr_CanActorReceiveInteraction(InteractionActor *actor) {
     s32 flags;
     InteractionLink *link;
     s32 bit;
@@ -76,7 +76,7 @@ s32 func_8024D160_de(InteractionActor *actor) {
     case 11:
         if (actor->kind == 1 && (actor->flags & 0x300000) != 0) {
             link = actor->player;
-            if (D_801462C8.local != 0 && link->linked != 0) return 0;
+            if (g_gameSettings.local != 0 && link->linked != 0) return 0;
         }
     case 8: return 1;
     case 0: return actor->descriptor->flags & 2;
@@ -144,7 +144,7 @@ f32 Gobjinst_GetActorRadius(Actor_u1 *actor)
     switch (actor->resource->kind) {
     case 11:
         if (actor->kind == 1 && (actor->flags & 0x300000) && actor->state->active) {
-            return D_800C3C7C_de;
+            return g_activePlayerActorRadius;
         }
         return actor->resource->valueEC;
     case 0: case 5: case 8: case 10: case 12: case 13: case 14:
@@ -159,7 +159,7 @@ f32 Gobjinst_GetActorRadius(Actor_u1 *actor)
             if (!(b <= a)) a = b;
             b = ((CollisionShapeResource *)resource)->depth;
             if (!(a <= b)) b = a;
-            return b * D_800C3C80_de;
+            return b * g_collisionShapeRadiusScale;
         }
         return ((CollisionShapeResource *)resource)->height;
     case 7:
@@ -170,7 +170,7 @@ f32 Gobjinst_GetActorRadius(Actor_u1 *actor)
 }
 
 #if defined(VERSION_DE)
-const unsigned int rodata_unresolved_800C3C7C[2] = {
+const unsigned int k_GameobjectGetactorheightEncodedWords[2] = {
     0x42F5C28F, 0x3FB5C28F,
 };
 #endif

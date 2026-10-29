@@ -34,7 +34,7 @@ extern void Node_ConfigureScrolledTableCell(GridList *list, UnitMtx *cell, u32 c
 extern void *Cache_AllocateMemory(s32);
 
 
-extern void Node_ReplaceWidgetLinks(s32 arg0, s32 arg1, MenuWidget *arg2, MenuWidget *arg3);
+extern void Node_ReplaceWidgetLinks(s32 node, s32 parent, MenuWidget *oldWidget, MenuWidget *newWidget);
 
 /* Looks up the entry with the given identifier among the list Node_GetScreenData returns for what GetMenuScreenOwner returns, through Node_FindWidgetByResourceId, and stores two words into the eight-byte cell at the given row and column of its cell table at 0x44, whose row width is the byte at 0x4B.
    Adapted from Node_SetGridBackgroundColors with the three byte stores replaced by the two cell-word stores changed. */
@@ -69,30 +69,30 @@ void Node_DrawGridListCells(GridList *gridList, sm_dldc style) {
     }
 }
 
-s32 Node_CreateGridListFromWidget(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6) {
+s32 Node_CreateGridListFromWidget(s32 widgetResourceId, u8 cellWidth, u8 cellHeight, u8 columnCount, u8 rowCount, u8 initialColumn, u8 initialRow) {
     MenuWidget *source;
     s32 context;
     MenuWidget *result;
     s32 size;
     void *cells;
 
-    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), widgetResourceId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x60);
     XPlus_FillBytes(result, 0, 0x60);
     *(Header44 *)result = *(Header44 *)source;
     result->kind = 0xB;
-    result->field_4B = arg4;
-    result->field_4A = arg3;
-    result->field_49 = arg2;
-    result->field_48 = arg1;
-    result->field_51 = arg6;
-    result->field_50 = arg5;
-    result->field_4F = arg6;
-    result->field_4E = arg5;
-    result->field_4D = arg6;
-    result->field_4C = arg5;
-    size = arg3 * arg4 * 8;
+    result->field_4B = rowCount;
+    result->field_4A = columnCount;
+    result->field_49 = cellHeight;
+    result->field_48 = cellWidth;
+    result->field_51 = initialRow;
+    result->field_50 = initialColumn;
+    result->field_4F = initialRow;
+    result->field_4E = initialColumn;
+    result->field_4D = initialRow;
+    result->field_4C = initialColumn;
+    size = columnCount * rowCount * 8;
     cells = Cache_AllocateMemory(size);
     result->field_44 = cells;
     XPlus_FillBytes(cells, 0, size);
@@ -103,15 +103,15 @@ s32 Node_CreateGridListFromWidget(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, 
 void Node_SetGridCellValues(s32 identifier, s32 row, s32 column, s32 first, s32 second) {
     EntryFrontendSetGridCellValues *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
-    entry->cells[row * entry->width + column].field_0 = first;
-    entry->cells[row * entry->width + column].field_4 = second;
+    entry->cells[row * entry->width + column].first = first;
+    entry->cells[row * entry->width + column].second = second;
 }
 
 void Node_GetGridCellValues(s32 identifier, s32 row, s32 column, s32 *first, s32 *second) {
     EntryFrontendSetGridCellValues *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
-    *first = entry->cells[row * entry->width + column].field_0;
-    *second = entry->cells[row * entry->width + column].field_4;
+    *first = entry->cells[row * entry->width + column].first;
+    *second = entry->cells[row * entry->width + column].second;
 }
 
 void Node_SetGridForegroundColors(s32 identifier, s32 first, s32 second, s32 third) {

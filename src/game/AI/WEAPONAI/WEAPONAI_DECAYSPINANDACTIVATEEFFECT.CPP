@@ -1,13 +1,13 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_800E0D44.H"
-#include "COMMON/LONE/D_800DCC68.H"
+#include "COMMON/LONE/WEAPON_LOCKED_NOTICE_TEXT_EU.H"
+#include "COMMON/LONE/WEAPON_LOCKED_NOTICE_TEXT_EU_X.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/MENU_TEXT.H"
-#include "COMMON/EXTERNS_6.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
@@ -23,9 +23,9 @@
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern char D_80102B00[];
-extern s32 D_800D30BC;
-extern char D_80145040[];
+extern char g_localPlayerProfiles[];
+extern s32 g_weaponLockedNoticeText;
+extern char g_playerViewRenderContext[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "WEAPONS/WEAPONAI_DECAYSPINANDACTIVATEEFFECT.H"
 
@@ -35,20 +35,20 @@ extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 static inline s32 can_fire(char *player) {
     s32 ammo;
-    if (((SharedPlayer *)(player))->views5E8.view11D8_147.unk11D8 > 0.0f) {
+    if (((SharedPlayer *)(player))->views5E8.view11D8_147.jumpCooldown > 0.0f) {
         return 0;
     }
-    if (((SharedPlayer *)(player))->views1450.view1450_0.unk1450 != 0) {
+    if (((SharedPlayer *)(player))->views1450.view1450_0.computerControlled != 0) {
         return 1;
     }
-    if (D_801462C8.controllerMode != 1) {
+    if (g_gameSettings.controllerMode != 1) {
         return 1;
     }
-    ammo = Player_GetProfileAchievementFlag(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4 * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
+    ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((SharedPlayer *)(player))->views1C.view5D4_45.playerIndex * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.selectedWeapon);
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
-        if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC, D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
+        if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
+            Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText, g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_languageIndex), Player_GetPlayerIndex(g_playerViewRenderContext, player),
                           1.0f);
         }
     }
@@ -61,7 +61,7 @@ void Weaponai_DecaySpinAndActivateEffect(Shared_Actor *actor, WeaponFireState *w
     if (weapon->variant != 4) {
         weapon->spin = Graphu64_DecayToZero(weapon->spin, 0.013613569f);
     }
-    weapon->spinStep += weapon->spin * D_800D2988 * 2.0f;
+    weapon->spinStep += weapon->spin * g_frameElapsedTime * 2.0f;
     model = ((SharedPlayer *)(player))->views5E8.view698_37.emitter;
     if (!(weapon->spin < 0.0f ? 1.0f < -weapon->spin * 1.7904929f
                                                    : 1.0f < weapon->spin * 1.7904929f)) {
@@ -73,7 +73,7 @@ void Weaponai_DecaySpinAndActivateEffect(Shared_Actor *actor, WeaponFireState *w
     } else {
         ((WeaponAnimationState *)(model))->speed = 1.0f;
     }
-    if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player) && ((SharedPlayer *)(player))->views5E8.chargeView.charge > 0) {
+    if ((((SharedPlayer *)(player))->views5E8.view6AC_45.inputFlags & 0x4000) && can_fire(player) && ((SharedPlayer *)(player))->views5E8.chargeView.charge > 0) {
         if (!(((SharedPlayer *)(player))->views122C.view122C_2.options & 0x18400)) {
             SoundElement_PlayFlatSound(0x7BC);
         }

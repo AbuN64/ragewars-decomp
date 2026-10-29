@@ -5,7 +5,7 @@
 #include "COMMON/MANAGER.H"
 #include "TYPES.H"
 #include "GAME/BUILDDIRECTIONMATRIX.H"
-extern s32 D_800D2978;
+extern s32 g_gameFrameCounter;
 
 /* Initialises a placed prop from its compact record: resets its state and owner, loads its model and
  * caches the squared model radius, places it on the grid by multiplying the record's byte cell
@@ -28,11 +28,11 @@ extern s32 D_800D2978;
 
 
 
-extern s32 D_800CD8D0[];
+extern s32 g_defaultCameraSurfaceType[];
 
 
 
-extern void Insthdr_ResetInstanceRenderIndices(PlacedProp *, RecordRecAt1A *, s32, char *);
+extern void Insthdr_ResetInstanceRenderIndices(PlacedProp *, PackedPlacedPropDefinition *, s32, char *);
 extern PropGeometry *Scene_GetActorDefinition(void *, s32);
 extern void ScaleMatrixLocal(char *, f32, f32, f32);
 extern void TranslateMatrix(char *, f32, f32, f32);
@@ -46,15 +46,15 @@ extern s32 InstHdr_GetActorType(void *);
 static inline s32 advancePropKey(void) {
     s32 next;
 
-    next = D_800D0910 + 1;
-    D_800D0910 = next;
+    next = g_staticObjectResourceSerial + 1;
+    g_staticObjectResourceSerial = next;
     if (next == 0x3FFFFF) {
-        D_800D0910 = 0x380000;
+        g_staticObjectResourceSerial = 0x380000;
     }
-    return D_800D0910;
+    return g_staticObjectResourceSerial;
 }
 
-void Statinst_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing) {
+void Statinst_InitializePlacedProp(PlacedProp *prop, PackedPlacedPropDefinition *record, s32 owner, char *segments, f32 spacing) {
     char matrix[0x40];
     CVector3 position;
     PropGeometry *model;
@@ -73,7 +73,7 @@ void Statinst_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 
     turn = 0.0f;
     prop->model = Scene_GetActorDefinition(&g_world, record->model);
     prop->fade = 16;
-    prop->fieldDC = 0;
+    prop->animationTimer = 0;
     model = prop->model;
     model->radiusSquared = model->radius * model->radius;
     x = record->cellX * spacing;
@@ -113,7 +113,7 @@ void Statinst_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 
         prop->max.x = position.x + 102.3999939f;
         prop->max.y = position.y + 102.3999939f;
         prop->max.z = position.z + 102.3999939f;
-        prop->fieldD4 = D_800CD8D0[0];
+        prop->fieldD4 = g_defaultCameraSurfaceType[0];
     } else {
         prop->min.x = position.x + record->extents[0] * 10.23999977f - 0.5f;
         prop->min.y = position.y + record->extents[2] * 10.23999977f - 0.5f;
@@ -132,7 +132,7 @@ void Statinst_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 
         prop->segment = segments + record->segment * 32;
     }
     prop->key = advancePropKey() << 10;
-    prop->colorFrame = (u8)D_800D2978 - 1;
+    prop->colorFrame = (u8)g_gameFrameCounter - 1;
 #if defined(VERSION_DE)
     if ((u32)(InstHdr_GetActorType(prop) - 9) < 2) {
         prop->flags |= 0x50;

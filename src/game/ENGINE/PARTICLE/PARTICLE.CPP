@@ -15,17 +15,17 @@
  * box, kills it or bounces it off its target when its type's rule says so (the German cartridge has a gentler rule
  * table), advances its spin and size (growing towards a capped target size, or dying when a size goes negative), lets
  * nearby players react to it, and when it moves or falls probes the ground through func_80243A90_de, orients itself to the
- * surface it hit and runs the collision responses its descriptor allows. D_800D2988 (the frame step) is restored on
+ * surface it hit and runs the collision responses its descriptor allows. g_frameElapsedTime (the frame step) is restored on
  * every exit after the early time check. */
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
-extern ParticleAttachmentState *D_80103FCC;
+extern ParticleAttachmentState *g_collisionCurrentActor;
 
-extern ParticleAttachmentState D_801041F0;
+extern ParticleAttachmentState g_currentActorInstance;
 
-extern char D_8011D8D0;
+extern char g_actorParticleEffectSystem;
 
-extern SharedPlayer *D_80145060;
+extern SharedPlayer *g_transientPlayerList;
 
 s32 Unicol_MoveActorWithCollision(Shared_Particle *particle, CVector3 pos, s32 *flags);
 
@@ -64,7 +64,7 @@ void Particle_SpawnInterpolatedTrail(Shared_Particle *particle);
 
 /* Squared distance from the particle to a player's position, raised by half the player's height unless the particle
  * is type 0x40F. */
-static inline f32 func_8027B790_distance(Shared_Particle *particle, SharedPlayer *player) {
+static inline f32 Particle_GetPlayerTargetDistanceSquared(Shared_Particle *particle, SharedPlayer *player) {
     CVector3 pos;
     pos = player->views0.view8_3.pos;
     if (particle->inst.type != 0x40F) {
@@ -73,14 +73,14 @@ static inline f32 func_8027B790_distance(Shared_Particle *particle, SharedPlayer
     return Graphu64_GetSquaredDistance(&particle->inst.pos, &pos);
 }
 
-extern CVector3 D_80100290;
+extern CVector3 g_particlePrimaryContactPosition;
 
-extern CVector3 D_801042C8;
+extern CVector3 g_particleZeroVector;
 
 extern s32 Region_GetModelBlendByte59(s32);
 
 extern void Events_DeliverContactEffect(void *, void *, u16, s32, CVector3, struct IntPair);
-extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(CVector3 *);
+extern struct CacheResourceBlockView Graphu64_BuildDirectionQuaternion(CVector3 *);
 
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 #include "ENGINE/PARTICLE.H"
@@ -89,15 +89,15 @@ extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 
 extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void Particle_Release(void *, void *);
-/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from Particle_HandleMaterialContact, with the slot chosen by a switch on D_801042C4 (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped Graphu64_ScaleVector call, and the final test changed. */
+/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from Particle_HandleMaterialContact, with the slot chosen by a switch on g_particleContactMode (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped Graphu64_ScaleVector call, and the final test changed. */
 
 
 
 
 
-extern CVector3 D_801002B8;
+extern CVector3 g_particleTertiaryContactPosition;
 
-extern CVector3 D_801002A8;
+extern CVector3 g_particleSecondaryContactPosition;
 
 extern s32 Region_TestPolygonSlopeFlag(s32);
 
@@ -124,13 +124,13 @@ void Particle_Update(Shared_Particle *particle) {
     s32 done;
     s8 newShake;
     owner = particle->owner;
-    savedStep = D_800D2988;
+    savedStep = g_frameElapsedTime;
     if (particle->time < 0.0f) {
         return;
     }
     if (owner != NULL && owner->kind == 1 && (owner->flags & 0x300000) && owner->player != NULL &&
         (owner->player->reactionFlags & 0x2000)) {
-        D_800D2988 = savedStep * 0.25f;
+        g_frameElapsedTime = savedStep * 0.25f;
     }
     extent = particle->size.z;
     boxSpan = particle->size.y * extent;
@@ -150,8 +150,8 @@ void Particle_Update(Shared_Particle *particle) {
     bounds.max.z = particle->inst.pos.z + halfExtent;
     if (particle->flags & 0x20000) {
         particle->time = 0.0f;
-        particle->life = particle->unk148 * 32.0f;
-        halfExtent = particle->quiver - D_800D2988 * 6.0f;
+        particle->life = particle->lifetime * 32.0f;
+        halfExtent = particle->quiver - g_frameElapsedTime * 6.0f;
         newShake = (halfExtent < 0.0f) ? 0 : (s32)halfExtent;
         particle->quiver = newShake;
     }
@@ -160,7 +160,7 @@ void Particle_Update(Shared_Particle *particle) {
         switch (particle->inst.type) {
             default:
                 particle->time = 0.0f;
-                particle->life = particle->unk148 * 32.0f;
+                particle->life = particle->lifetime * 32.0f;
             case 0x2D:
             case 0x4F:
                 die = 0;
@@ -264,7 +264,7 @@ void Particle_Update(Shared_Particle *particle) {
         }
     }
     if (particle->flags & 0x40000) {
-        if (Unicol_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4) && D_801041F0.unkB4 != 0) {
+        if (Unicol_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4) && g_currentActorInstance.unkB4 != 0) {
             particle->space = -3;
         }
         if (particle->inst.unk38 & 0x1000) {
@@ -275,44 +275,44 @@ void Particle_Update(Shared_Particle *particle) {
     }
     particle->prevPos = particle->inst.pos;
     /* frames advanced this step at the particle frame rate, scaled by the game speed (15 = normal) */
-    advance = D_800D2988 * particle->unk148;
-    speed = D_800CD740_de * 0.06666667f;
+    advance = g_frameElapsedTime * particle->lifetime;
+    speed = g_particleSimulationTimeScale * 0.06666667f;
     particle->frame += advance * speed;
     if (particle->desc->flags & 0x1000) {
-        growStep = D_800D2988 * 10.24f;
+        growStep = g_frameElapsedTime * 10.24f;
         particle->size.x += growStep * particle->growth.x;
         particle->size.y += growStep * particle->growth.y;
-        particle->size.z += D_800D2988 * particle->growth.z;
+        particle->size.z += g_frameElapsedTime * particle->growth.z;
         particle->size.x = (particle->size.x > 4096.0f) ? 4096.0f : particle->size.x;
         particle->size.y = (particle->size.y > 4096.0f) ? 4096.0f : particle->size.y;
         particle->size.z = (particle->size.z > 400.0f) ? 400.0f : particle->size.z;
     } else {
         goalSize = RW_MIN(particle->size.x * particle->growth.x, 4096.0f);
-        particle->size.x += (goalSize - particle->size.x) * D_800D2988;
+        particle->size.x += (goalSize - particle->size.x) * g_frameElapsedTime;
         goalSize = RW_MIN(particle->size.y * particle->growth.y, 4096.0f);
-        particle->size.y += (goalSize - particle->size.y) * D_800D2988;
+        particle->size.y += (goalSize - particle->size.y) * g_frameElapsedTime;
         goalSize = RW_MIN(particle->size.z * particle->growth.z, 400.0f);
-        particle->size.z += (goalSize - particle->size.z) * D_800D2988;
+        particle->size.z += (goalSize - particle->size.z) * g_frameElapsedTime;
         if (particle->size.x < 0.0f || particle->size.y < 0.0f || particle->size.z < 0.0f) {
             Particle_DispatchParticleContactEvents(particle);
-            Particle_Release(&D_8011D8D0, particle);
+            Particle_Release(&g_actorParticleEffectSystem, particle);
             ((void (*)(Shared_Particle *))Particle_StopSound)(particle);
-            D_800D2988 = savedStep;
+            g_frameElapsedTime = savedStep;
             return;
         }
     }
-    particle->rot.x += particle->rotSpeed.x * D_800D2988;
-    particle->rot.y += particle->rotSpeed.y * D_800D2988;
-    particle->rot.z += particle->rotSpeed.z * D_800D2988;
-    D_80103FCC->direction = particle->inst.velocity;
+    particle->rot.x += particle->rotSpeed.x * g_frameElapsedTime;
+    particle->rot.y += particle->rotSpeed.y * g_frameElapsedTime;
+    particle->rot.z += particle->rotSpeed.z * g_frameElapsedTime;
+    g_collisionCurrentActor->direction = particle->inst.velocity;
     Particle_DispatchSpatialContactEvents(particle);
-    influenceRange = particle->desc->unk10;
+    influenceRange = particle->desc->playerContactRadius;
     if (!(influenceRange <= 0.0f)) {
         influenceRange *= 10.24f;
         influenceRange *= influenceRange;
-        for (player = D_80145060; player != NULL;) {
+        for (player = g_transientPlayerList; player != NULL;) {
             done = 0;
-            if (func_8027B790_distance(particle, player) < influenceRange) {
+            if (Particle_GetPlayerTargetDistanceSquared(particle, player) < influenceRange) {
                 Particle_HandlePlayerContact(particle, player);
                 if (particle->inst.type == 0x40F) {
                     done = 1;
@@ -330,7 +330,7 @@ void Particle_Update(Shared_Particle *particle) {
         particle->inst.velocity.x * particle->inst.velocity.x + particle->inst.velocity.y * particle->inst.velocity.y +
                 particle->inst.velocity.z * particle->inst.velocity.z <
             0.001f) {
-        D_800D2988 = savedStep;
+        g_frameElapsedTime = savedStep;
         return;
     }
     if (!(particle->flags & 0x72000)) {
@@ -340,32 +340,32 @@ void Particle_Update(Shared_Particle *particle) {
         } else {
             particle->flags &= ~4;
         }
-        if (particle->inst.type == 0x68 && D_801041F0.current != NULL) {
-            particle->target = D_801041F0.current;
+        if (particle->inst.type == 0x68 && g_currentActorInstance.current != NULL) {
+            particle->target = g_currentActorInstance.current;
         }
         if (die) {
-            if (D_801041F0.current != NULL) {
-                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.origin);
-            } else if (D_801041F0.unk88 != 0) {
-                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unk90);
-            } else if (D_801041F0.unk9C != 0) {
-                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkA0);
-            } else if (D_801041F0.unkB4 != 0) {
-                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkB8);
+            if (g_currentActorInstance.current != NULL) {
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.origin);
+            } else if (g_currentActorInstance.unk88 != 0) {
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.unk90);
+            } else if (g_currentActorInstance.unk9C != 0) {
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.unkA0);
+            } else if (g_currentActorInstance.unkB4 != 0) {
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.unkB8);
                 if (particle->space == -7) {
                     particle->space = -3;
                 }
-            } else if (D_801041F0.unkC4 != 0) {
-                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkC8);
+            } else if (g_currentActorInstance.unkC4 != 0) {
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.unkC8);
             }
             Graphu64_NormalizeVec3(&particle->direction);
         }
         Particle_DispatchOwnerContactLinks(particle);
-        if (D_801041F0.unkC4 != 0) {
+        if (g_currentActorInstance.unkC4 != 0) {
             Particle_HandleTypedContact(particle);
         }
         if (particle->flags & 0x100) {
-            if (D_801041F0.unk9C != 0) {
+            if (g_currentActorInstance.unk9C != 0) {
                 if (!(particle->desc->flags & 0x10000000)) {
                     Particle_HandleInitialMaterialContact(particle);
                 }
@@ -374,8 +374,8 @@ void Particle_Update(Shared_Particle *particle) {
                 }
             }
             if (particle->flags & 0x100) {
-                if (D_801041F0.current != NULL) {
-                    if ((particle->unk1B4 & 0x4000) && D_801041F0.current->kind == 0) {
+                if (g_currentActorInstance.current != NULL) {
+                    if ((particle->unk1B4 & 0x4000) && g_currentActorInstance.current->kind == 0) {
                         Particle_ApplyImpactResponse(particle);
                     } else {
                         Particle_HitTarget(particle);
@@ -384,8 +384,8 @@ void Particle_Update(Shared_Particle *particle) {
                         particle->unk1B9 = 1;
                     }
                 }
-                if ((particle->flags & 0x100) && D_801041F0.unkB0 != 0 && !(particle->desc->flags & 0x20000000)) {
-                    if (D_801041F0.unkB0 == 1) {
+                if ((particle->flags & 0x100) && g_currentActorInstance.unkB0 != 0 && !(particle->desc->flags & 0x20000000)) {
+                    if (g_currentActorInstance.unkB0 == 1) {
                         Particle_HandleSelectedSurfaceContact(particle);
                     } else {
                         Particle_HandleMaterialContact(particle);
@@ -397,21 +397,21 @@ void Particle_Update(Shared_Particle *particle) {
     if ((particle->flags & 0x8100) == 0x100) {
         Particle_SpawnInterpolatedTrail(particle);
     }
-    D_800D2988 = savedStep;
+    g_frameElapsedTime = savedStep;
 }
 
 void Particle_HandleInitialMaterialContact(Shared_Particle *particle) {
     struct IntPair pair;
-    struct Shape_typemap_165 rotation;
+    struct CacheResourceBlockView rotation;
     CVector3 position;
-    s32 temp_a1;
+    s32 surfaceIndex;
     struct Shared_ParticleEvents *events;
-    s32 var_a0;
-    s32 temp_a2;
+    s32 surfaceKind;
+    s32 effectId;
     s32 kind;
     s32 sound;
     struct Shared_ParticleDesc *desc;
-    struct IntPair *temp_v0_2;
+    struct IntPair *eventParameters;
 
     if ((particle->flags & 0x400) != 0) {
         if ((particle->desc->flags & 0x800) != 0) {
@@ -419,38 +419,38 @@ void Particle_HandleInitialMaterialContact(Shared_Particle *particle) {
         }
     }
     {
-        var_a0 = Region_GetModelBlendByte59(0);
-        if (var_a0 == 10) {
-            var_a0 = 0;
+        surfaceKind = Region_GetModelBlendByte59(0);
+        if (surfaceKind == 10) {
+            surfaceKind = 0;
         }
         desc = particle->desc;
-        temp_a1 = var_a0;
+        surfaceIndex = surfaceKind;
         events = desc->events;
-        kind = events->particles[temp_a1];
-        temp_a2 = events->effects[temp_a1];
-        temp_v0_2 = &events->parameters[var_a0];
-        pair = *temp_v0_2;
-        sound = desc->events->sounds[temp_a1];
-        if (temp_a2 != 0xFFFF) {
-            Events_DeliverContactEffect(particle, particle, temp_a2, -1, D_80100290, pair);
+        kind = events->particles[surfaceIndex];
+        effectId = events->effects[surfaceIndex];
+        eventParameters = &events->parameters[surfaceKind];
+        pair = *eventParameters;
+        sound = desc->events->sounds[surfaceIndex];
+        if (effectId != 0xFFFF) {
+            Events_DeliverContactEffect(particle, particle, effectId, -1, g_particlePrimaryContactPosition, pair);
         }
         if (kind != 0xFFFF) {
             if ((particle->desc->flags & 0x10) != 0) {
-                position = D_801042C8;
+                position = g_particleZeroVector;
             } else {
                 position = particle->inst.velocity;
             }
             rotation = Graphu64_BuildDirectionQuaternion(&position);
-            Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)particle,
                           (struct EffectActor *)particle->owner,
                           (s32 *)particle->ownerId,
                           (s32)particle->target, kind,
-                          position, *(CQuatern *)&rotation, D_80100290, 0,
-                          D_8010029C,
+                          position, *(CQuatern *)&rotation, g_particlePrimaryContactPosition, 0,
+                          g_particlePrimaryContactRoom,
                           (particle->flags & 0x200006) | 1);
         }
         if (sound != 0xFFFF) {
-            SoundElement_PlaySoundAtPosition((s16)sound, D_80100290, 0, -1);
+            SoundElement_PlaySoundAtPosition((s16)sound, g_particlePrimaryContactPosition, 0, -1);
         }
     }
 skip_effects:
@@ -458,202 +458,202 @@ skip_effects:
                   particle->rotationScale);
     particle->flags |= 0x400;
     if (particle->unk1B9 == 1) {
-        Particle_Release(&D_8011D8D0, particle);
+        Particle_Release(&g_actorParticleEffectSystem, particle);
         Particle_StopSound(particle);
     }
 }
 
 void Particle_HandleTypedContact(Shared_Particle *particle) {
     struct IntPair pair;
-    struct Shape_typemap_165 rotation;
+    struct CacheResourceBlockView rotation;
     CVector3 position;
-    s32 temp_a1;
+    s32 surfaceIndex;
     struct Shared_ParticleEvents *events;
-    s32 var_a0;
-    s32 temp_a2;
+    s32 surfaceKind;
+    s32 effectId;
     s32 kind;
     s32 sound;
     struct Shared_ParticleDesc *desc;
-    struct IntPair *temp_v0_2;
+    struct IntPair *eventParameters;
 
-    switch (D_801042C4) {
+    switch (g_particleContactMode) {
     case 1:
     default:
-        var_a0 = 1;
+        surfaceKind = 1;
         break;
     case 7:
-        var_a0 = 7;
+        surfaceKind = 7;
         break;
     case 8:
-        var_a0 = 8;
+        surfaceKind = 8;
         break;
     }
     desc = particle->desc;
-    temp_a1 = var_a0;
+    surfaceIndex = surfaceKind;
     events = desc->events;
-    kind = events->particles[temp_a1];
-    temp_a2 = events->effects[temp_a1];
-    temp_v0_2 = &events->parameters[var_a0];
-    pair = *temp_v0_2;
-    sound = desc->events->sounds[temp_a1];
-    if (temp_a2 != 0xFFFF) {
-        Events_DeliverContactEffect(particle, particle, temp_a2, -1, D_801002B8, pair);
+    kind = events->particles[surfaceIndex];
+    effectId = events->effects[surfaceIndex];
+    eventParameters = &events->parameters[surfaceKind];
+    pair = *eventParameters;
+    sound = desc->events->sounds[surfaceIndex];
+    if (effectId != 0xFFFF) {
+        Events_DeliverContactEffect(particle, particle, effectId, -1, g_particleTertiaryContactPosition, pair);
     }
     if (kind != 0xFFFF) {
         if ((particle->desc->flags & 0x10) != 0) {
-            position = D_801042C8;
+            position = g_particleZeroVector;
         } else {
             position = particle->inst.velocity;
         }
         rotation = Graphu64_BuildDirectionQuaternion(&position);
-        Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+        Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
                       (s32)particle->target, kind,
-                      position, *(CQuatern *)&rotation, D_801002B8, 0,
+                      position, *(CQuatern *)&rotation, g_particleTertiaryContactPosition, 0,
                       -5,
                       (particle->flags & 0x200006) | 1);
     }
     if (sound != 0xFFFF) {
-        SoundElement_PlaySoundAtPosition((s16)sound, D_801002B8, 0, -1);
+        SoundElement_PlaySoundAtPosition((s16)sound, g_particleTertiaryContactPosition, 0, -1);
     }
     particle->flags |= 0x200;
     if ((particle->desc->flags & 0x20000) != 0) {
-        Particle_Release(&D_8011D8D0, particle);
+        Particle_Release(&g_actorParticleEffectSystem, particle);
         Particle_StopSound(particle);
     }
 }
 
 void Particle_HandleSelectedSurfaceContact(Shared_Particle *particle) {
     struct IntPair pair;
-    struct Shape_typemap_165 rotation;
+    struct CacheResourceBlockView rotation;
     CVector3 position;
-    s32 temp_a1;
+    s32 surfaceIndex;
     struct Shared_ParticleEvents *events;
-    s32 var_a0;
-    s32 temp_a2;
+    s32 surfaceKind;
+    s32 effectId;
     s32 kind;
     s32 sound;
     struct Shared_ParticleDesc *desc;
-    struct IntPair *temp_v0_2;
+    struct IntPair *eventParameters;
 
     if (Region_TestPolygonSlopeFlag(0) != 0) {
-        var_a0 = Region_GetModelBlendByte59(0);
+        surfaceKind = Region_GetModelBlendByte59(0);
     } else {
-        var_a0 = Region_GetModelBlendByte58(0);
+        surfaceKind = Region_GetModelBlendByte58(0);
     }
-    if (var_a0 == 10) {
-        var_a0 = 0;
+    if (surfaceKind == 10) {
+        surfaceKind = 0;
     }
     desc = particle->desc;
-    temp_a1 = var_a0;
+    surfaceIndex = surfaceKind;
     events = desc->events;
-    kind = events->particles[temp_a1];
-    temp_a2 = events->effects[temp_a1];
-    temp_v0_2 = &events->parameters[var_a0];
-    pair = *temp_v0_2;
-    sound = desc->events->sounds[temp_a1];
-    if (temp_a2 != 0xFFFF) {
-        Events_DeliverContactEffect(particle, particle, temp_a2, -1, D_801002A8, pair);
+    kind = events->particles[surfaceIndex];
+    effectId = events->effects[surfaceIndex];
+    eventParameters = &events->parameters[surfaceKind];
+    pair = *eventParameters;
+    sound = desc->events->sounds[surfaceIndex];
+    if (effectId != 0xFFFF) {
+        Events_DeliverContactEffect(particle, particle, effectId, -1, g_particleSecondaryContactPosition, pair);
     }
     if (kind != 0xFFFF) {
         if ((particle->desc->flags & 0x10) != 0) {
-            position = D_801042C8;
+            position = g_particleZeroVector;
         } else {
             position = particle->inst.velocity;
         }
         rotation = Graphu64_BuildDirectionQuaternion(&position);
-        Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+        Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
                       (s32)particle->target, kind,
-                      position, *(CQuatern *)&rotation, D_801002A8, 0,
+                      position, *(CQuatern *)&rotation, g_particleSecondaryContactPosition, 0,
                       -3,
                       (particle->flags & 0x200006) | 1);
     }
     if (sound != 0xFFFF) {
-        SoundElement_PlaySoundAtPosition((s16)sound, D_801002A8, 0, -1);
+        SoundElement_PlaySoundAtPosition((s16)sound, g_particleSecondaryContactPosition, 0, -1);
     }
     Graphu64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
     if (particle->unk1BA == 1) {
-        Particle_Release(&D_8011D8D0, particle);
+        Particle_Release(&g_actorParticleEffectSystem, particle);
         Particle_StopSound(particle);
     }
 }
 
 void Particle_HandleMaterialContact(Shared_Particle *particle) {
     struct IntPair pair;
-    struct Shape_typemap_165 rotation;
+    struct CacheResourceBlockView rotation;
     CVector3 position;
-    s32 temp_a1;
+    s32 surfaceIndex;
     struct Shared_ParticleEvents *events;
-    s32 var_a0;
-    s32 temp_a2;
+    s32 surfaceKind;
+    s32 effectId;
     s32 kind;
     s32 sound;
     struct Shared_ParticleDesc *desc;
-    struct IntPair *temp_v0_2;
+    struct IntPair *eventParameters;
 
-    var_a0 = Region_GetModelBlendByte59(0);
-    if (var_a0 == 10) {
-        var_a0 = 0;
+    surfaceKind = Region_GetModelBlendByte59(0);
+    if (surfaceKind == 10) {
+        surfaceKind = 0;
     }
     desc = particle->desc;
-    temp_a1 = var_a0;
+    surfaceIndex = surfaceKind;
     events = desc->events;
-    kind = events->particles[temp_a1];
-    temp_a2 = events->effects[temp_a1];
-    temp_v0_2 = &events->parameters[var_a0];
-    pair = *temp_v0_2;
-    sound = desc->events->sounds[temp_a1];
-    if (temp_a2 != 0xFFFF) {
-        Events_DeliverContactEffect(particle, particle, temp_a2, -1, D_801002A8, pair);
+    kind = events->particles[surfaceIndex];
+    effectId = events->effects[surfaceIndex];
+    eventParameters = &events->parameters[surfaceKind];
+    pair = *eventParameters;
+    sound = desc->events->sounds[surfaceIndex];
+    if (effectId != 0xFFFF) {
+        Events_DeliverContactEffect(particle, particle, effectId, -1, g_particleSecondaryContactPosition, pair);
     }
     if (kind != 0xFFFF) {
         if ((particle->desc->flags & 0x10) != 0) {
-            position = D_801042C8;
+            position = g_particleZeroVector;
         } else {
             position = particle->inst.velocity;
         }
         rotation = Graphu64_BuildDirectionQuaternion(&position);
-        Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+        Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
                       (s32)particle->target, kind,
-                      position, *(CQuatern *)&rotation, D_801002A8, 0,
+                      position, *(CQuatern *)&rotation, g_particleSecondaryContactPosition, 0,
                       -2,
                       (particle->flags & 0x200006) | 1);
     }
     if (sound != 0xFFFF) {
-        SoundElement_PlaySoundAtPosition((s16)sound, D_801002A8, 0, -1);
+        SoundElement_PlaySoundAtPosition((s16)sound, g_particleSecondaryContactPosition, 0, -1);
     }
     Graphu64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
     if (particle->unk1BA == 1) {
-        Particle_Release(&D_8011D8D0, particle);
+        Particle_Release(&g_actorParticleEffectSystem, particle);
         Particle_StopSound(particle);
     }
 }
 
 typedef struct ImpactContext { CVector3 position; char padC[0xE8 - 0xC]; CVector3 normal; } ImpactContext;
-extern ImpactContext D_801001F8;
-extern char D_801379C0, D_8013B1A8;
+extern ImpactContext g_particleContactState;
+extern char g_actorParticleScene, g_dynamicLightPool;
 extern s32 Barrel_GetImpactSlot(void *);
 extern void Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *, void *);
 extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
 #include "FX/PARTICLE_LIFECYCLE.H"
-extern LiveParticle *D_8013D538;
+extern LiveParticle *g_particleLinkedAttachmentEffect;
 
-s32 func_8024E2C4_de(void *);
+s32 InstHdr_UsesDefaultDefinitionHandling(void *);
 void Graphu64_ConvertMatrixToFloat(f32 *, void *);
-void func_80247F18_de(void *, void *, void *, CVector3, CVector3, s32);
+void Gobjinst_ApplyImpactBoneTwist(void *, void *, void *, CVector3, CVector3, s32);
 void Graphu64_InvertAffineMatrix(f32 *, f32 *);
 void Graphu64_TransformDirection(f32 *, CVector3 *, CVector3 *);
-s32 func_8024E140_de(void *);
+s32 InstHdr_ReturnUnusedActorStatus(void *);
 void PitchMatrixLocal(f32 *, f32);
 static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform, s32 action) {
     f32 localTransform[16];
@@ -661,20 +661,20 @@ static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform,
     CVector3 direction;
     Shared_ParticleTarget *attached;
     ParticleAttachmentState *scene;
-    attached=D_801041F0.current;
+    attached=g_currentActorInstance.current;
     if (transform) Graphu64_InvertAffineMatrix(inverse, transform);
     else {
-        Graphu64_ConvertMatrixToFloat(localTransform, &attached->drawMatrices[D_801041F0.frame]);
+        Graphu64_ConvertMatrixToFloat(localTransform, &attached->drawMatrices[g_currentActorInstance.frame]);
         Graphu64_InvertAffineMatrix(inverse, localTransform);
     }
-    scene=&D_801041F0;
+    scene=&g_currentActorInstance;
     Graphu64_TransformPoint(inverse, &scene->origin, &particle->attachmentPosition);
     direction=scene->direction;
     Graphu64_NormalizeVec3(&direction);
     Graphu64_TransformDirection(inverse, &direction, &particle->inst.velocity);
     particle->flags|=0x10000;
     particle->target=attached;
-    particle->collisionNode=D_801041F0.frame;
+    particle->collisionNode=g_currentActorInstance.frame;
     if (particle->inst.type==0x56 && action==2) particle->flags|=0x4000000;
 }
 #if defined(VERSION_DE)
@@ -708,25 +708,25 @@ void Particle_HitTarget(void *particle) {
     struct Shared_ParticleDesc *definition;
     s32 draw;
     owner=0;
-    source=D_801041F0.current;
+    source=g_currentActorInstance.current;
     enabled=1;
     special=0;
     hasMatrix=0;
     definition=actor->particle.desc;
-    if (func_8024E2C4_de(source)) mode=actor->particle.unk1B9;
+    if (InstHdr_UsesDefaultDefinitionHandling(source)) mode=actor->particle.unk1B9;
     else mode=actor->particle.mode0;
     if (!actor->particle.inst.unk14) actor->particle.inst.unk14=0;
-    if (D_801041F0.frame!=-1) {
+    if (g_currentActorInstance.frame!=-1) {
         action=Barrel_GetImpactSlot(source);
         if (action!=9) {
-            action=D_801041F0.mode;
+            action=g_currentActorInstance.mode;
             if (actor->particle.inst.type==13) action=4;
-            owner=D_801041F0.current;
+            owner=g_currentActorInstance.current;
             if (owner->flags&0x3000000) {
-                Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
+                Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[g_currentActorInstance.frame]);
                 hasMatrix=1;
                 if (owner->flags&0x1000000) {
-                    func_80247F18_de(owner, &owner->unk170, boneMatrix, D_801041F0.origin, D_801041F0.direction, D_801041F0.frame);
+                    Gobjinst_ApplyImpactBoneTwist(owner, &owner->unk170, boneMatrix, g_currentActorInstance.origin, g_currentActorInstance.direction, g_currentActorInstance.frame);
                 }
                 if (owner->flags&0x2000000) {
                     type=actor->particle.inst.type;
@@ -737,14 +737,14 @@ void Particle_HitTarget(void *particle) {
                         }
                     }
                     if (actor->particle.inst.type==0x56 || actor->particle.inst.type==2 || actor->particle.inst.type==0x126 || actor->particle.inst.type==15 ||
-                        special || (actor->particle.inst.type==11 && (D_8011026D&3)==1)) {
+                        special || (actor->particle.inst.type==11 && (g_particleAttachmentModeFlags&3)==1)) {
                         attachParticle(&actor->particle, boneMatrix, action);
                         if (actor->particle.drawWhenHidden) {
                             Particle_UpdateMatrix(actor);
-                            Fx_DetachParticleSwooshes(&D_801379C0, actor);
+                            Fx_DetachParticleSwooshes(&g_actorParticleScene, actor);
                         }
                         handle=actor->particle.handle;
-                        if (handle) { Gdynlight_ReleaseLight(&D_8013B1A8, handle); actor->particle.handle=0; }
+                        if (handle) { Gdynlight_ReleaseLight(&g_dynamicLightPool, handle); actor->particle.handle=0; }
                     }
                 }
             }
@@ -759,7 +759,7 @@ void Particle_HitTarget(void *particle) {
     if (source->kind==1) {
         owner=source;
         if (owner->callback) owner->callback(owner, &owner->unk170, actor);
-        if (func_8024E140_de(owner)) enabled=0;
+        if (InstHdr_ReturnUnusedActorStatus(owner)) enabled=0;
         if (owner->unk170&2) enabled=0;
     }
     if (effect!=0xffff) {
@@ -768,11 +768,11 @@ void Particle_HitTarget(void *particle) {
         }
         other=source;
         if (g_effectCallbackFlags[effect].flags&2) other=actor;
-        Events_DeliverContactEffect(other, actor, effect, -1, D_801001F8.position, primary.words);
+        Events_DeliverContactEffect(other, actor, effect, -1, g_particleContactState.position, primary.words);
     }
     if (action!=4) {
         draw=1;
-        if (D_801462C8.local) {
+        if (g_gameSettings.local) {
             draw=*source->category!=11;
             if (mode==actor->particle.unk1B9) draw=0;
         }
@@ -784,7 +784,7 @@ void Particle_HitTarget(void *particle) {
                 if (g_effectCallbackFlags[extraEffect].flags&4) {
                     other=source;
                     if (g_effectCallbackFlags[extraEffect].flags&2) other=actor;
-                    Events_DeliverContactEffect(other, actor, extraEffect, -1, D_801001F8.position, secondary.words);
+                    Events_DeliverContactEffect(other, actor, extraEffect, -1, g_particleContactState.position, secondary.words);
                 }
             }
         }
@@ -794,38 +794,38 @@ void Particle_HitTarget(void *particle) {
 #if defined(VERSION_DE)
         if (actor->particle.inst.type!=0x129)
 #endif
-            SoundElement_PlaySoundAtPosition((s16)sound, D_801001F8.position, 0, (s32)actor);
+            SoundElement_PlaySoundAtPosition((s16)sound, g_particleContactState.position, 0, (s32)actor);
 #if defined(VERSION_DE)
         else Particle_DispatchSurfaceContact(actor);
 #endif
     }
     if (!(actor->particle.flags&0x30000)) {
-        if (actor->particle.inst.type==0x3ef && D_8013D538 && owner->bones && D_8013D538->particle.inst.type==0x41e && action!=9) {
-            D_8013D538->particle.rot=D_80103FCC->point;
-            if (!hasMatrix) Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
+        if (actor->particle.inst.type==0x3ef && g_particleLinkedAttachmentEffect && owner->bones && g_particleLinkedAttachmentEffect->particle.inst.type==0x41e && action!=9) {
+            g_particleLinkedAttachmentEffect->particle.rot=g_collisionCurrentActor->point;
+            if (!hasMatrix) Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[g_currentActorInstance.frame]);
             PitchMatrixLocal(boneMatrix, 3.141593f);
-            if (D_80103FCC->current->kind==1) {
-                if (*D_80103FCC->current->category==2) Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
-                hit=D_80103FCC->current;
+            if (g_collisionCurrentActor->current->kind==1) {
+                if (*g_collisionCurrentActor->current->category==2) Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[g_currentActorInstance.frame]);
+                hit=g_collisionCurrentActor->current;
                 if (hit->kind==1 && (hit->flags&0x300000 || *hit->category==2)) {
-                    attachParticle(&D_8013D538->particle, boneMatrix, action);
+                    attachParticle(&g_particleLinkedAttachmentEffect->particle, boneMatrix, action);
                 }
             }
         }
         if (mode==1 || (effect!=0xffff && g_effectCallbackFlags[effect].flags&1)) {
-            Particle_Release(&D_8011D8D0, actor);
+            Particle_Release(&g_actorParticleEffectSystem, actor);
             Particle_StopSound(actor);
         }
     }
 }
 
-extern u32 D_801002F0;
+extern u32 g_particleOwnerEffectFlags;
 extern void Fx_SpawnImpactMark(void *, CVector3, CVector3, s32, s32);
 extern void Player_SetPlayerResetPosition(void *, CVector3 *);
 extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /* Reacts to a particle striking the current attachment target. The target picks the impact slot (slot 5 becomes slot 4
- * and sets flag 2). Under the controlled-impact mode (D_801462E5) descriptor slot 12 or 10 fires its event, particle
+ * and sets flag 2). Under the controlled-impact mode (g_motionVisibilitySettings) descriptor slot 12 or 10 fires its event, particle
  * and sound at the particle. Otherwise slots 0, 2 and 3 leave a mark when the descriptor has flag 0x800000; a particle
  * whose response byte is 8 is handed to a kind 1 owner (flag 0x20000) or expires; types 0x56, 0x126, 0xCD and 0xF move
  * to the impact point and release their swooshes and light; then the particle is pushed off the surface along the hit
@@ -844,14 +844,14 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
     struct IntPair controlledParams;
     Shared_ParticleOwner *owner;
 
-    target = D_801041F0.current;
+    target = g_currentActorInstance.current;
     desc = particle->desc;
     hit = Barrel_GetImpactSlot(target);
     if (hit == 5) {
         hit = 4;
         particle->flags |= 2;
     }
-    if (D_801462C8.local && Particle_HasSurfaceFlag(particle)) {
+    if (g_gameSettings.local && Particle_HasSurfaceFlag(particle)) {
         controlledDesc = particle->desc;
         event = Particle_HasSurfaceFlag(particle) ? 12 : 10;
         particleType = controlledDesc->events->particles[event];
@@ -873,15 +873,15 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
         case 2:
         case 3:
             if (desc->flags & 0x800000) {
-                Fx_SpawnImpactMark(&D_801379C0, D_801001F8.position, D_801001F8.normal, hit, 0);
+                Fx_SpawnImpactMark(&g_actorParticleScene, g_particleContactState.position, g_particleContactState.normal, hit, 0);
             }
             break;
         }
         if (particle->unk1B9 == 8 || particle->unk1BA == 8) {
-            if ((D_801002F0 & 0x1000000) && (owner = particle->owner) && owner->kind == 1 && (owner->flags & 0x300000)) {
+            if ((g_particleOwnerEffectFlags & 0x1000000) && (owner = particle->owner) && owner->kind == 1 && (owner->flags & 0x300000)) {
                 particle->flags |= 0x20000;
-                particle->inst.pos = D_801001F8.position;
-                particle->inst.velocity = D_801042C8;
+                particle->inst.pos = g_particleContactState.position;
+                particle->inst.velocity = g_particleZeroVector;
                 Player_SetPlayerResetPosition(particle->owner->player, &particle->inst.pos);
             } else {
                 particle->life = 1;
@@ -890,18 +890,18 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
         if (particle->inst.type == 0x56 || particle->inst.type == 0x126 || particle->inst.type == 0xCD ||
             particle->inst.type == 0xF) {
             particle->flags |= 0x20000;
-            particle->inst.pos = D_801001F8.position;
-            particle->inst.velocity = D_801042C8;
+            particle->inst.pos = g_particleContactState.position;
+            particle->inst.velocity = g_particleZeroVector;
             if (particle->drawWhenHidden) {
                 Particle_UpdateMatrix(particle);
-                Fx_DetachParticleSwooshes(&D_801379C0, particle);
+                Fx_DetachParticleSwooshes(&g_actorParticleScene, particle);
             }
             if (particle->handle) {
-                Gdynlight_ReleaseLight(&D_8013B1A8, particle->handle);
+                Gdynlight_ReleaseLight(&g_dynamicLightPool, particle->handle);
                 particle->handle = 0;
             }
         }
-        normal = D_801001F8.normal;
+        normal = g_particleContactState.normal;
         Graphu64_NormalizeVec3(&normal.x);
         Graphu64_ScaleVector(&normal, &normal, 1.024f);
         Graphu64_AddVec3(&particle->inst.pos, &particle->inst.pos, &normal);
@@ -914,13 +914,13 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
             if (g_effectCallbackFlags[effect].flags & 2) {
                 eventSource = particle;
             }
-            Events_DeliverContactEffect(eventSource, particle, effect, -1, D_801001F8.position, params);
+            Events_DeliverContactEffect(eventSource, particle, effect, -1, g_particleContactState.position, params);
         }
         if (model != 0xFFFF) {
             Particle_SpawnChildEffect(particle, model, -8, 1);
         }
         if (sound != 0xFFFF) {
-            SoundElement_PlaySoundAtPosition(sound, D_801001F8.position, 0, (s32)particle);
+            SoundElement_PlaySoundAtPosition(sound, g_particleContactState.position, 0, (s32)particle);
         }
         if (particle->flags & 0x30000) {
             return;
@@ -929,6 +929,6 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
             return;
         }
     }
-    Particle_Release(&D_8011D8D0, particle);
+    Particle_Release(&g_actorParticleEffectSystem, particle);
     Particle_StopSound(particle);
 }

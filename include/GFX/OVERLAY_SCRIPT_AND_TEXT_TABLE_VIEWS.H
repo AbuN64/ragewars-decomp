@@ -2,22 +2,22 @@
 #define GFX_OVERLAY_SCRIPT_AND_TEXT_TABLE_VIEWS_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct ObjectLinksC_2 {
+struct OverlayScriptTableView {
     unsigned char padding_0[4];
-    s32 *unk_4;
-    s32 unk_8;
+    s32 *script;
+    s32 state;
 };
-struct IntegerState48 {
+struct OverlayScriptPrimaryRangeView {
     unsigned char padding_0[60];
-    s32 unk_3C;
-    s32 unk_40;
-    s32 unk_44;
+    s32 target;
+    s32 owner;
+    s32 initialPercent;
 };
-struct IntegerState90 {
+struct OverlayScriptSecondaryRangeView {
     unsigned char padding_0[132];
-    s32 unk_84;
-    s32 unk_88;
-    s32 unk_8C;
+    s32 target;
+    s32 owner;
+    s32 initialPercent;
 };
 struct COverlay {
     s32 active;

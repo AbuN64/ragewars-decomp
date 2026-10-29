@@ -3,7 +3,7 @@
 
 /** Unlink an active node and return it to the container's free list. */
 void SetN64_RecycleEffectNode(void *container, ListNode80290528 *node) {
-    WorldRecAt3C08 *world = container;
+    EffectSlotPool *world = container;
     struct SceneEffect *actor = (struct SceneEffect *)node;
     struct SceneEffect *free_node;
 
@@ -32,6 +32,6 @@ void SetN64_RecycleEffectNode(void *container, ListNode80290528 *node) {
 }
 
 #if defined(VERSION_US)
-char rodata_unresolved_802908F4[12] =
+char s_SetnRecycleeffectnodeEENSPAUSESCText[12] =
     "EENS\\PAUSESC";
 #endif

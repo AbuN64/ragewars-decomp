@@ -1,9 +1,9 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80103FD0.H"
+#include "COMMON/LONE/PARTICLE_COLLISION_PROBE_RESULT.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/ACTORREC.H"
 #include "TYPES.H"
@@ -13,12 +13,12 @@
 
 
 
-f32 Rumble_SamplePackedFloatRange(s32 arg0);
+f32 Rumble_SamplePackedFloatRange(s32 packedRange);
 
 s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral);
 
 
-extern World *D_80103FCC;
+extern World *g_collisionCurrentActor;
 
 extern s32 CCollision_SweepPoint(InstanceHdr *actorStorage, CVector3 current, CVector3 desired,
                           void *collisionInfo);
@@ -32,54 +32,54 @@ s32 Nav_RefineBallisticAim(ActorRec *actor) {
     s32 keyCount;
     BallisticInstance *instance;
     BallisticInstance *activeInstance;
-    f32 temp_fs0_2;
+    f32 angleCosineSquared;
     f32 horizontalDistance;
     f32 heightDelta;
     f32 scale;
     f32 deltaX;
     f32 lateral;
-    f32 temp_fv0_4;
+    f32 angleCosine;
     f32 deltaZ;
-    f32 temp_fv0f_2;
-    f32 temp_fv1;
-    f32 temp_fv1_4;
-    f32 temp_fv1_5;
-    f32 temp_fv1f;
-    f32 temp_fv1f_2;
-    f32 temp_fv1f_3;
+    f32 trajectoryHeight;
+    f32 initialHeightDelta;
+    f32 currentDeltaZ;
+    f32 fallbackPitch;
+    f32 initialDeltaX;
+    f32 currentDeltaY;
+    f32 secondaryPitch;
     s32 trajectoryMode;
-    s32 *temp_s0_2;
-    s32 temp_v0_6;
-    s32 temp_v1;
-    s32 temp_v1_3;
-    s32 var_v0;
-    s32 var_v0_4;
-    s32 var_v0_5;
-    BallisticResourceKeys *temp_v0_2;
-    u32 var_s2;
-    BallisticParamsHolder *temp_s0_3;
-    BallisticParams *temp_v0_3;
-    BallisticParams *temp_v0_4;
+    s32 *ballisticResource;
+    s32 obstructedQuadrant;
+    s32 iterationState;
+    s32 nextIteration;
+    s32 initialQuadrant;
+    s32 secondaryQuadrant;
+    s32 fallbackQuadrant;
+    BallisticResourceKeys *resourceKeys;
+    u32 resourceKey;
+    BallisticParamsHolder *parameterRecord;
+    BallisticParams *speedParameters;
+    BallisticParams *gravityParameters;
 
     trajectoryMode = actor->instance->trajectoryMode;
-    var_s2 = 0;
-    if (trajectoryMode != actor->field26C) {
-        actor->field268 = 0;
-        actor->field26C = (s32) trajectoryMode;
+    resourceKey = 0;
+    if (trajectoryMode != actor->trajectoryMode) {
+        actor->trajectoryInitialized = 0;
+        actor->trajectoryMode = (s32) trajectoryMode;
     }
     if (actor != 0) {
-        temp_v1 = actor->field268;
-        if (temp_v1 == 0) {
+        iterationState = actor->trajectoryInitialized;
+        if (iterationState == 0) {
             instance = actor->instance;
             current = instance->header.spatial.position;
             delta = actor->destination;
-            temp_fv1f = delta.x - current.x;
-            temp_fv1 = delta.y - current.y;
+            initialDeltaX = delta.x - current.x;
+            initialHeightDelta = delta.y - current.y;
             deltaZ = delta.z - current.z;
-            delta.x = temp_fv1f;
-            delta.y = temp_fv1;
+            delta.x = initialDeltaX;
+            delta.y = initialHeightDelta;
             delta.z = deltaZ;
-            actor->field264 = Gu_Sqrtf((temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1) + (deltaZ * deltaZ));
+            actor->trajectoryDistance = Gu_Sqrtf((initialDeltaX * initialDeltaX) + (initialHeightDelta * initialHeightDelta) + (deltaZ * deltaZ));
             heightDelta = delta.y;
             delta.y = 0;
             horizontalDistance = Gu_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
@@ -87,220 +87,220 @@ s32 Nav_RefineBallisticAim(ActorRec *actor) {
                 switch (trajectoryMode) {
                 case 10:
                 case 12:
-                    actor->field268 = 1;
-                    actor->field270 = 1;
-                    actor->field274 = 0;
+                    actor->trajectoryInitialized = 1;
+                    actor->trajectoryPending = 1;
+                    actor->trajectoryComplete = 0;
                     break;
                 case 6:
                 case 8:
-                    actor->field268 = 0xB;
-                    actor->field270 = 0;
-                    actor->field274 = 1;
+                    actor->trajectoryInitialized = 0xB;
+                    actor->trajectoryPending = 0;
+                    actor->trajectoryComplete = 1;
                     break;
                 case 9:
-                    actor->field268 = 1;
-                    actor->field270 = 1;
-                    actor->field274 = 1;
+                    actor->trajectoryInitialized = 1;
+                    actor->trajectoryPending = 1;
+                    actor->trajectoryComplete = 1;
                     break;
                 default:
                 case 7:
                 case 11:
                 if (horizontalDistance == 0.0f) {
                     if (heightDelta < 0.0f) {
-                        actor->field248 = (f32) -90.0f;
+                        actor->initialPitch = (f32) -90.0f;
                     } else {
-                        actor->field248 = (f32) 90.0f;
+                        actor->initialPitch = (f32) 90.0f;
                     }
                 } else {
-                    actor->field248 = (f32) (XMath_EvaluateArcTangentTwo(heightDelta, horizontalDistance) * 57.2957764f);
+                    actor->initialPitch = (f32) (XMath_EvaluateArcTangentTwo(heightDelta, horizontalDistance) * 57.2957764f);
                 }
-                actor->field270 = 0;
-                actor->field274 = 0;
-                actor->field24C = actor->field248;
-                actor->field254 = actor->field250 = 0.0f;
+                actor->trajectoryPending = 0;
+                actor->trajectoryComplete = 0;
+                actor->previousPitch = actor->initialPitch;
+                actor->previousPitchDelta = actor->pitchDelta = 0.0f;
                 return 1;
                 }
                     if (horizontalDistance == 0.0f) {
                         if (heightDelta < 0.0f) {
-                            actor->field278 = -90.0f;
+                            actor->targetPitch = -90.0f;
                         } else {
-                            actor->field278 = 90.0f;
+                            actor->targetPitch = 90.0f;
                         }
                     } else {
-                        actor->field278 = XMath_EvaluateArcTangentTwo(heightDelta, horizontalDistance) * 57.2957764f;
+                        actor->targetPitch = XMath_EvaluateArcTangentTwo(heightDelta, horizontalDistance) * 57.2957764f;
                     }
-                    actor->field24C = actor->field278;
-                    if (45.0f < actor->field278) {
-                        actor->field284 = 0;
+                    actor->previousPitch = actor->targetPitch;
+                    if (45.0f < actor->targetPitch) {
+                        actor->pitchSearchStep = 0;
                     } else {
-                        var_v0 = 1;
-                        if (!(actor->field278 > 0.0f)) {
-                            var_v0 = 2;
-                            if (!(-45.0f < actor->field278)) {
-                                var_v0 = 3;
+                        initialQuadrant = 1;
+                        if (!(actor->targetPitch > 0.0f)) {
+                            initialQuadrant = 2;
+                            if (!(-45.0f < actor->targetPitch)) {
+                                initialQuadrant = 3;
                             }
                         }
-                        actor->field284 = var_v0;
+                        actor->pitchSearchStep = initialQuadrant;
                     }
-                    actor->field27C = 90.0f - ((f32) actor->field284 * 45.0f);
-                    actor->field280 = actor->field278;
-                    actor->field278 = (actor->field27C + actor->field280) * 0.5f;
-                    if (actor->field270 != 0) {
-                        actor->field24C = actor->field278;
+                    actor->upperPitchBound = 90.0f - ((f32) actor->pitchSearchStep * 45.0f);
+                    actor->lowerPitchBound = actor->targetPitch;
+                    actor->targetPitch = (actor->upperPitchBound + actor->lowerPitchBound) * 0.5f;
+                    if (actor->trajectoryPending != 0) {
+                        actor->previousPitch = actor->targetPitch;
                     }
                     return 0;
             }
         } else {
-            if (temp_v1 < 0xB) {
+            if (iterationState < 0xB) {
                 switch (trajectoryMode) {
-                case 2: var_s2 = 0x12E; break;
-                case 9: var_s2 = 0x12E; break;
-                case 10: var_s2 = 0x12E; break;
-                case 12: var_s2 = 0x12E; break;
+                case 2: resourceKey = 0x12E; break;
+                case 9: resourceKey = 0x12E; break;
+                case 10: resourceKey = 0x12E; break;
+                case 12: resourceKey = 0x12E; break;
                 }
-            } else if (temp_v1 < 0x15) {
-                actor->field270 = 0;
+            } else if (iterationState < 0x15) {
+                actor->trajectoryPending = 0;
                 switch (trajectoryMode) {
-                case 6: var_s2 = 0x12E; break;
-                case 8: var_s2 = 0x12E; break;
-                case 9: var_s2 = 0x12E; break;
+                case 6: resourceKey = 0x12E; break;
+                case 8: resourceKey = 0x12E; break;
+                case 9: resourceKey = 0x12E; break;
                 }
             } else {
                 goto block_88;
             }
             {
 block_43:
-                if (actor->field268 < 0x15) {
-                    temp_s0_2 = D_8013D534;
-                    temp_v0_2 = (void *)SetN64_GetPackSection(temp_s0_2, 1);
-                    keyCount = temp_v0_2->count;
-                    if (Defs_FindSortedGroupRange(temp_v0_2->keys, keyCount, var_s2, &first, &last) == 0) {
-                        actor->field270 = 0;
-                        actor->field274 = 0;
-                        actor->field268 = 0;
+                if (actor->trajectoryInitialized < 0x15) {
+                    ballisticResource = g_ballisticParameterResource;
+                    resourceKeys = (void *)SetN64_GetPackSection(ballisticResource, 1);
+                    keyCount = resourceKeys->count;
+                    if (Defs_FindSortedGroupRange(resourceKeys->keys, keyCount, resourceKey, &first, &last) == 0) {
+                        actor->trajectoryPending = 0;
+                        actor->trajectoryComplete = 0;
+                        actor->trajectoryInitialized = 0;
                         return 1;
                     }
                     {
-                        BallisticResourceRecords *records = (void *)SetN64_GetPackSection(temp_s0_2, 2);
-                        temp_s0_3 = records->records;
-                        temp_s0_3 += first;
+                        BallisticResourceRecords *records = (void *)SetN64_GetPackSection(ballisticResource, 2);
+                        parameterRecord = records->records;
+                        parameterRecord += first;
                     }
-                    temp_v0_3 = temp_s0_3->unk30;
-                    scale = Rumble_SamplePackedFloatRange((temp_v0_3->speedHi << 0x10) | temp_v0_3->speedLo);
-                    temp_v0_4 = temp_s0_3->unk30;
-                    lateral = Rumble_SamplePackedFloatRange((temp_v0_4->gravityHi << 0x10) | temp_v0_4->gravityLo);
+                    speedParameters = parameterRecord->parameters;
+                    scale = Rumble_SamplePackedFloatRange((speedParameters->speedHi << 0x10) | speedParameters->speedLo);
+                    gravityParameters = parameterRecord->parameters;
+                    lateral = Rumble_SamplePackedFloatRange((gravityParameters->gravityHi << 0x10) | gravityParameters->gravityLo);
                     activeInstance = actor->instance;
                     current = activeInstance->header.spatial.position;
                     delta = actor->destination;
                     deltaX = delta.x - current.x;
-                    temp_fv1f_2 = delta.y - current.y;
-                    temp_fv1_4 = delta.z - current.z;
+                    currentDeltaY = delta.y - current.y;
+                    currentDeltaZ = delta.z - current.z;
                     delta.x = deltaX;
-                    delta.y = temp_fv1f_2;
-                    delta.z = temp_fv1_4;
-                    actor->field264 = Gu_Sqrtf((deltaX * deltaX) + (temp_fv1f_2 * temp_fv1f_2) + (temp_fv1_4 * temp_fv1_4));
+                    delta.y = currentDeltaY;
+                    delta.z = currentDeltaZ;
+                    actor->trajectoryDistance = Gu_Sqrtf((deltaX * deltaX) + (currentDeltaY * currentDeltaY) + (currentDeltaZ * currentDeltaZ));
                     heightDelta = delta.y;
                     delta.y = 0;
                     horizontalDistance = Gu_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
-                    temp_fv0_4 = Math_Cosf(actor->field278 * 0.0174532942f);
-                    temp_fs0_2 = temp_fv0_4 * temp_fv0_4;
-                    temp_fv0f_2 = (XMath_EvaluateTangent(actor->field278 * 0.0174532942f) * horizontalDistance) + ((lateral * (horizontalDistance * horizontalDistance)) / (2.0f * (scale * scale) * temp_fs0_2));
-                    if (((heightDelta - 1.0f) <= temp_fv0f_2) && (temp_fv0f_2 <= (heightDelta + 1.0f))) {
+                    angleCosine = Math_Cosf(actor->targetPitch * 0.0174532942f);
+                    angleCosineSquared = angleCosine * angleCosine;
+                    trajectoryHeight = (XMath_EvaluateTangent(actor->targetPitch * 0.0174532942f) * horizontalDistance) + ((lateral * (horizontalDistance * horizontalDistance)) / (2.0f * (scale * scale) * angleCosineSquared));
+                    if (((heightDelta - 1.0f) <= trajectoryHeight) && (trajectoryHeight <= (heightDelta + 1.0f))) {
                         if (Nav_IsBallisticArcObstructed(actor, scale, lateral) != 0) {
-                            temp_v0_6 = actor->field284;
-                            if (temp_v0_6 > 0) {
-                                actor->field284--;
-                                actor->field27C = (f32) (90.0f - ((f32) actor->field284 * 45.0f));
-                                actor->field280 = (f32) (45.0f - ((f32) actor->field284 * 45.0f));
-                                if (actor->field270 != 0) {
-                                    actor->field268 = 1;
+                            obstructedQuadrant = actor->pitchSearchStep;
+                            if (obstructedQuadrant > 0) {
+                                actor->pitchSearchStep--;
+                                actor->upperPitchBound = (f32) (90.0f - ((f32) actor->pitchSearchStep * 45.0f));
+                                actor->lowerPitchBound = (f32) (45.0f - ((f32) actor->pitchSearchStep * 45.0f));
+                                if (actor->trajectoryPending != 0) {
+                                    actor->trajectoryInitialized = 1;
                                 } else {
-                                    actor->field268 = 0xB;
+                                    actor->trajectoryInitialized = 0xB;
                                 }
 block_54:
                                 return 0;
                             }
                         }
-                        if ((actor->field270 != 0) && (actor->field274 != 0)) {
-                            actor->field268 = 0xB;
-                            actor->field270 = 0;
-                            actor->field250 = (f32) (actor->field278 - actor->field248);
-                            temp_fv1f_3 = actor->field24C;
-                            if (45.0f < temp_fv1f_3) {
-                                actor->field284 = 0;
+                        if ((actor->trajectoryPending != 0) && (actor->trajectoryComplete != 0)) {
+                            actor->trajectoryInitialized = 0xB;
+                            actor->trajectoryPending = 0;
+                            actor->pitchDelta = (f32) (actor->targetPitch - actor->initialPitch);
+                            secondaryPitch = actor->previousPitch;
+                            if (45.0f < secondaryPitch) {
+                                actor->pitchSearchStep = 0;
                             } else {
-                                var_v0_4 = 1;
-                                if (!(temp_fv1f_3 > 0.0f)) {
-                                    var_v0_4 = 2;
-                                    if (!(-45.0f < temp_fv1f_3)) {
-                                        var_v0_4 = 3;
+                                secondaryQuadrant = 1;
+                                if (!(secondaryPitch > 0.0f)) {
+                                    secondaryQuadrant = 2;
+                                    if (!(-45.0f < secondaryPitch)) {
+                                        secondaryQuadrant = 3;
                                     }
                                 }
-                                actor->field284 = var_v0_4;
+                                actor->pitchSearchStep = secondaryQuadrant;
                             }
-                            actor->field27C = (f32) (90.0f - ((f32) actor->field284 * 45.0f));
-                            actor->field280 = (f32) (45.0f - ((f32) actor->field284 * 45.0f));
+                            actor->upperPitchBound = (f32) (90.0f - ((f32) actor->pitchSearchStep * 45.0f));
+                            actor->lowerPitchBound = (f32) (45.0f - ((f32) actor->pitchSearchStep * 45.0f));
                             return 0;
                         }
-                        actor->field270 = 0;
-                        actor->field274 = 0;
-                        actor->field268 = (s32) (actor->field268 + 1);
-                        actor->field250 = (f32) (actor->field278 - actor->field248);
+                        actor->trajectoryPending = 0;
+                        actor->trajectoryComplete = 0;
+                        actor->trajectoryInitialized = (s32) (actor->trajectoryInitialized + 1);
+                        actor->pitchDelta = (f32) (actor->targetPitch - actor->initialPitch);
                         return 1;
                     }
-                    temp_v1_3 = actor->field268 + 1;
-                    if (temp_v1_3 == 0xB) {
-                        temp_fv1_5 = actor->field24C;
-                        actor->field270 = 0;
-                        actor->field268 = (s32) (actor->field268 + 1);
-                        actor->field250 = (f32) (actor->field278 - actor->field248);
-                        if (45.0f < temp_fv1_5) {
-                            actor->field284 = 0;
+                    nextIteration = actor->trajectoryInitialized + 1;
+                    if (nextIteration == 0xB) {
+                        fallbackPitch = actor->previousPitch;
+                        actor->trajectoryPending = 0;
+                        actor->trajectoryInitialized = (s32) (actor->trajectoryInitialized + 1);
+                        actor->pitchDelta = (f32) (actor->targetPitch - actor->initialPitch);
+                        if (45.0f < fallbackPitch) {
+                            actor->pitchSearchStep = 0;
                         } else {
-                            var_v0_5 = 1;
-                            if (!(temp_fv1_5 > 0.0f)) {
-                                var_v0_5 = 2;
-                                if (!(-45.0f < temp_fv1_5)) {
-                                    var_v0_5 = 3;
+                            fallbackQuadrant = 1;
+                            if (!(fallbackPitch > 0.0f)) {
+                                fallbackQuadrant = 2;
+                                if (!(-45.0f < fallbackPitch)) {
+                                    fallbackQuadrant = 3;
                                 }
                             }
-                            actor->field284 = var_v0_5;
+                            actor->pitchSearchStep = fallbackQuadrant;
                         }
-                        actor->field27C = (f32) (90.0f - ((f32) actor->field284 * 45.0f));
-                        actor->field280 = (f32) (45.0f - ((f32) actor->field284 * 45.0f));
-                        if (actor->field274 == 0) {
-                            actor->field268 = 0;
+                        actor->upperPitchBound = (f32) (90.0f - ((f32) actor->pitchSearchStep * 45.0f));
+                        actor->lowerPitchBound = (f32) (45.0f - ((f32) actor->pitchSearchStep * 45.0f));
+                        if (actor->trajectoryComplete == 0) {
+                            actor->trajectoryInitialized = 0;
                         }
-                        return actor->field274 == 0;
+                        return actor->trajectoryComplete == 0;
                     }
-                    if (temp_v1_3 >= 0x15) {
-                        actor->field270 = 0;
-                        actor->field274 = 0;
-                        actor->field268 = (s32) (actor->field268 + 1);
-                        actor->field254 = (f32) (actor->field278 - actor->field24C);
+                    if (nextIteration >= 0x15) {
+                        actor->trajectoryPending = 0;
+                        actor->trajectoryComplete = 0;
+                        actor->trajectoryInitialized = (s32) (actor->trajectoryInitialized + 1);
+                        actor->previousPitchDelta = (f32) (actor->targetPitch - actor->previousPitch);
                         return 1;
                     }
-                    if (temp_fv0f_2 < (heightDelta - 1.0f)) {
-                        switch (actor->field284) {
-                        case 0: actor->field27C = actor->field278; break;
-                        case 1: case 2: case 3: actor->field280 = actor->field278; break;
+                    if (trajectoryHeight < (heightDelta - 1.0f)) {
+                        switch (actor->pitchSearchStep) {
+                        case 0: actor->upperPitchBound = actor->targetPitch; break;
+                        case 1: case 2: case 3: actor->lowerPitchBound = actor->targetPitch; break;
                         }
                     } else {
-                        switch (actor->field284) {
-                        case 0: actor->field280 = actor->field278; break;
-                        case 1: case 2: case 3: actor->field27C = actor->field278; break;
+                        switch (actor->pitchSearchStep) {
+                        case 0: actor->lowerPitchBound = actor->targetPitch; break;
+                        case 1: case 2: case 3: actor->upperPitchBound = actor->targetPitch; break;
                         }
                     }
-                    actor->field268 = (s32) (actor->field268 + 1);
-                    actor->field278 = (actor->field27C + actor->field280) * 0.5f;
+                    actor->trajectoryInitialized = (s32) (actor->trajectoryInitialized + 1);
+                    actor->targetPitch = (actor->upperPitchBound + actor->lowerPitchBound) * 0.5f;
                     return 0;
                 }
                 goto block_88;
             }
 block_88:
-            actor->field268 = 0;
-            actor->field270 = 0;
-            actor->field274 = 0;
+            actor->trajectoryInitialized = 0;
+            actor->trajectoryPending = 0;
+            actor->trajectoryComplete = 0;
             /* Duplicate return node #89. Try simplifying control flow for better match */
             return 1;
         }
@@ -325,33 +325,33 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral) {
     s32 count;
     s32 i;
 
-    if (actor == 0 || actor->field264 == 0.0f) {
+    if (actor == 0 || actor->trajectoryDistance == 0.0f) {
         return 0;
     }
 
-    invDuration = D_800C1E40_de / actor->field264;
-    delta.x = (actor->field258 - actor->instance->header.spatial.position.x) * invDuration;
-    delta.x *= scale * Math_Cosf(actor->field278);
-    delta.z = (actor->field260 - actor->instance->header.spatial.position.z) * invDuration;
-    delta.z *= scale * Math_Cosf(actor->field278);
-    delta.y = scale * Gu_Sinf(actor->field278);
+    invDuration = g_ballisticInverseDistanceScale / actor->trajectoryDistance;
+    delta.x = (actor->destinationX - actor->instance->header.spatial.position.x) * invDuration;
+    delta.x *= scale * Math_Cosf(actor->targetPitch);
+    delta.z = (actor->destinationZ - actor->instance->header.spatial.position.z) * invDuration;
+    delta.z *= scale * Math_Cosf(actor->targetPitch);
+    delta.y = scale * Gu_Sinf(actor->targetPitch);
 
     acceleration.x = 0.0f;
     acceleration.y = lateral;
     acceleration.z = 0.0f;
 
-    total = (scale * Math_Cosf(actor->field278)) / actor->field264;
+    total = (scale * Math_Cosf(actor->targetPitch)) / actor->trajectoryDistance;
     if (total == 0.0f) {
         return 0;
     }
-    count = (s32)(total * D_800C1E44_de);
+    count = (s32)(total * g_ballisticArcSampleRate);
     if (count == 0) {
         return 0;
     }
 
     segment = total / (f32)count;
     current = actor->instance->header.spatial.position;
-    accelScale = segment * segment * D_800C1E48_de;
+    accelScale = segment * segment * g_ballisticAccelerationScale;
     accelX = acceleration.x * accelScale;
     accelY = acceleration.y * accelScale;
     accelZ = acceleration.z * accelScale;
@@ -362,8 +362,8 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral) {
 
     elapsed = segment;
 
-    if (CCollision_SweepPoint(&actor->instance->header, current, desired, &D_80103FD0) != 0 &&
-        (unsigned)(D_80103FCC->state - 7) >= 2) {
+    if (CCollision_SweepPoint(&actor->instance->header, current, desired, &g_particleCollisionProbeResult) != 0 &&
+        (unsigned)(g_collisionCurrentActor->state - 7) >= 2) {
         return 1;
     }
 
@@ -379,8 +379,8 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral) {
         desired.y = current.y + delta.y * elapsed + accelY;
         desired.z = current.z + delta.z * elapsed + accelZ;
 
-        if (CCollision_SweepPoint(&actor->instance->header, current, desired, &D_80103FD0) != 0 &&
-            (unsigned)(D_80103FCC->state - 7) >= 2) {
+        if (CCollision_SweepPoint(&actor->instance->header, current, desired, &g_particleCollisionProbeResult) != 0 &&
+            (unsigned)(g_collisionCurrentActor->state - 7) >= 2) {
             return 1;
         }
 
@@ -394,7 +394,7 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral) {
 }
 
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_8020EA04[3] = {
+unsigned int k_BallisticEncodedWords[3] = {
     0x6F857BAC, 0x71EB24F7, 0xCE54520A,
 };
 #endif

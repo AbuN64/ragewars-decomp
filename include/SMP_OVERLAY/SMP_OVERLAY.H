@@ -4,7 +4,7 @@
 #include "COMMON/OWNERRECAT8V1.H"
 #include "COMMON/NAME.H"
 extern void SmpOverlay_RegisterOverlayClass(void);
-extern s32 SmpOverlay_CountUsedSlots(struct SlotsRecAt5CV2 *object);
+extern s32 SmpOverlay_CountUsedSlots(struct MenuCountedSlotValueArrayView *object);
 extern void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id);
 extern void SmpOverlay_SetObjectValue(struct Object6C *object, s32 value);
 extern s32 SmpOverlay_DispatchSlotEvent(void *, s32, s32, s32, s32);
@@ -16,5 +16,5 @@ extern s32 SmpOverlay_FollowSlotTarget38(struct sm_dlmultiuser_t *owner, s32 unu
 extern s32 SmpOverlay_FollowSlotTarget30(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind);
 extern int SmpOverlay_ForwardSlotEvent(Mixer *mixer, int unused, int channel, int value, int extra);
 extern s32 SmpOverlay_FreeEventObject(void *);
-extern int SmpOverlay_SetListWidgetFlag40(ListRecAt4C *list);
+extern int SmpOverlay_SetListWidgetFlag40(OverlayWidgetListView *list);
 #endif

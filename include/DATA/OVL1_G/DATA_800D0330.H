@@ -1,4 +1,4 @@
-#ifndef DATA_OVL1_G_DATA_800D0330_H
-#define DATA_OVL1_G_DATA_800D0330_H
-extern char D_002335DC[];
+#ifndef DATA_OVL1_G_WEAPON_ACTION_FIVE_SPIN_ADDRESS_H
+#define DATA_OVL1_G_WEAPON_ACTION_FIVE_SPIN_ADDRESS_H
+extern char g_weapon_EaseSpinForActionFiveEntry[];
 #endif

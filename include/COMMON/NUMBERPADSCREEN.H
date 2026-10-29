@@ -5,9 +5,9 @@
 #include "COMMON/ITEMRECAT20V1.H"
 extern void Menu_ApplyExtraOptionFlags(void);
 
-struct CellRecAt1A;
+struct ChoiceMenuCellView;
 
-extern float D_800DD600;
+extern float k_menuFadeInConstants;
 
 extern void Menu_ReleaseOptionsScene(void);
 
@@ -38,7 +38,7 @@ struct Meter {
 struct Meter;
 
 
-extern float D_800DD608;
+extern float k_menuFadeOutConstants;
 
 
 struct NumberPadScreen {
@@ -56,7 +56,7 @@ struct NumberPadScreen {
     union { s32 confirmed; s32 full; };
 };
 
-struct CellRecAt1A;
+struct ChoiceMenuCellView;
 
 
 struct Triple;

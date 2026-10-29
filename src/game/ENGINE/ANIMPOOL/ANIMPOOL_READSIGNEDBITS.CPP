@@ -7,18 +7,18 @@ void AnimPool_InitializeBitReader(s32 *value, s32 word) {
     value[1] = 0;
 }
 
-s32 CBitReader_ReadBits(BitReader *arg0, s32 arg1);
+s32 CBitReader_ReadBits(BitReader *reader, s32 bitCount);
 
-s32 AnimPool_ReadSignedBits(BitReader *arg0, s32 arg1) {
+s32 AnimPool_ReadSignedBits(BitReader *reader, s32 bitCount) {
     s32 val;
     s32 i;
     s32 mask;
 
-    val = CBitReader_ReadBits(arg0, arg1);
-    mask = 1 << (arg1 - 1);
+    val = CBitReader_ReadBits(reader, bitCount);
+    mask = 1 << (bitCount - 1);
     if (val & mask) {
-        i = arg1;
-        if (arg1 < 0x20) {
+        i = bitCount;
+        if (bitCount < 0x20) {
             do {
                 val |= 1 << i;
                 i += 1;
@@ -29,20 +29,20 @@ s32 AnimPool_ReadSignedBits(BitReader *arg0, s32 arg1) {
 }
 
 /** Reads arg1 bits (LSB first) from the bitstream at arg0, advancing its bit position. */
-s32 CBitReader_ReadBits(BitReader *arg0, s32 arg1) {
+s32 CBitReader_ReadBits(BitReader *reader, s32 bitCount) {
     s32 bitPos;
     s32 i;
     s32 result;
 
     i = 0;
     result = 0;
-    if (arg1 > 0) {
+    if (bitCount > 0) {
         do {
-            bitPos = arg0->bitPos;
-            result |= (((s32) *(arg0->data + (bitPos >> 3)) >> (bitPos & 7)) & 1) << i;
+            bitPos = reader->bitPos;
+            result |= (((s32) *(reader->data + (bitPos >> 3)) >> (bitPos & 7)) & 1) << i;
             i += 1;
-            arg0->bitPos = (s32) (bitPos + 1);
-        } while (i < arg1);
+            reader->bitPos = (s32) (bitPos + 1);
+        } while (i < bitCount);
     }
     return result;
 }

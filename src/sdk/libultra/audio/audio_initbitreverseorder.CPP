@@ -1,6 +1,6 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
 #include "sdk/AUDIO/audio_initbitreverseorder.H"
@@ -86,14 +86,14 @@ s16 Audio_QuantizeSampleS16(f32 sample) {
     f32 f12;
 
     if (sample >= 0.0f) {
-        f12 = sample + D_800C7CE8_de;
-        f0 = D_800C7CEC_de;
+        f12 = sample + g_audioSamplePositiveRoundingBias;
+        f0 = g_audioSampleMaximum;
         if (f0 < f12) {
             f12 = f0;
         }
     } else {
-        f12 = sample - D_800C7CF0_de;
-        f0 = D_800C7CF4_de;
+        f12 = sample - g_audioSampleNegativeRoundingBias;
+        f0 = g_audioSampleMinimum;
         if (f12 < f0) {
             f12 = f0;
         }
@@ -104,7 +104,7 @@ s16 Audio_QuantizeSampleS16(f32 sample) {
 /** Initialize the global decoder state and return its scaled period. */
 u32 Audio_InitDecodeStream(s32 *source, u32 divisor, s32 *first)
 {
-    DecodeState *state = &D_8014BA38_de;
+    DecodeState *state = &g_audioSampleDecodeState;
     state->source = source;
     state->cursor = source;
     state->first = *(s32 *)state->cursor;
@@ -115,7 +115,7 @@ u32 Audio_InitDecodeStream(s32 *source, u32 divisor, s32 *first)
     state->third = *(s32 *)state->cursor;
     state->cursor = (s32 *)state->cursor + 1;
     D_800D54BE = 0;
-    D_800D54C0_de = 0;
+    g_audioTransformTablesInitialized = 0;
     gPackedBitsLeft = 0;
     D_800D54BA = 0;
     D_800D54BC = 0;

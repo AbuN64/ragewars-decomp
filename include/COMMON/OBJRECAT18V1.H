@@ -4,11 +4,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 
-struct ObjRecAt18V1;
-typedef struct ObjRecAt18V1 ObjRecAt18V1;
+struct SequenceTicksPerQuarterView;
+typedef struct SequenceTicksPerQuarterView SequenceTicksPerQuarterView;
 
 
-extern double D_800C74E8_de;
+extern double g_sequenceTicksToSecondsUnsignedBias;
 
 struct ALEndEvent;
 
@@ -25,7 +25,7 @@ struct ALSeq_s;
 typedef struct ALSeq_s ALSeq_s;
 
 
-extern float D_800C74E0_de;
+extern float g_sequenceQuarterNoteUnit;
 
 
 

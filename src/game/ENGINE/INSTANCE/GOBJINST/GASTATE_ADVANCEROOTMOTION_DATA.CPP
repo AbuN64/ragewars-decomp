@@ -1,11 +1,11 @@
 #include "COMMON/WORLD.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
-#include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/OBJRECAT5F14.H"
@@ -22,26 +22,26 @@
 /* GOBJINST_4.CPP */
 extern void Gastate_SwitchRequestedAnimation(void *, s32, s32, s32, s32 *, void *);
 
-extern s32 func_802624D8_de(void *);
+extern s32 Gastate_IsAnimationResourceRetained(void *);
 
 extern void Gastate_AdvanceRootMotion(void *, CVector3 *, f32 *, void *);
 
-extern void *func_80262564_de(void *);
+extern void *Gastate_GetAnimationPoseSection(void *);
 
 extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
-extern f32 D_800D2988;
+extern f32 g_frameElapsedTime;
 
-extern char D_800C3930_de;
+extern char g_actorRotationBlendAndResourceTuning;
 
 /* Fires the effect events of an object's animation that fall within a frame window: only for the object's
  * own animation at 0x104 or an object flagged 0x4000000; each event whose frame lies in [from, to) is
  * placed from its local point through the object's matrix when it names no bone, otherwise through its
  * bone matrix (or at the object's position when it has none), and for models 0x44E, 0x451 and 0x453 an
  * effect flagged 4 fires only if its bone's hit box shares the object's mask; each fired event spawns its
- * effect through func_80265E10_de and is counted in D_800D06BC. */
+ * effect through func_80265E10_de and is counted in g_actorRootMotionSampleCount. */
 
-extern CROMEventEntry *func_80262598_de(void *);
+extern CROMEventEntry *Gastate_GetAnimationEventEntries(void *);
 
 extern s32 *Gobjinst_RequestAnimatedModelVariant(char *, s8);
 
@@ -53,14 +53,14 @@ extern void Events_DeliverContactEffect(char *, char *, u16, s32, CVector3, stru
  * weapon's orientation at 0x140, or from the player's own orientation from Player_BuildPlayerOrientation when unarmed; an
  * actor of kind 4 composes a pitch from 0x294 with a yaw from its heading 0x6C and applies them to its body
  * orientation from Turret_BuildPlaneRot; any other actor turns its orientation at 0x5C by its heading. Quaternions
- * are composed through MultiplyQuaternions, keeping the latest sine in D_80115DEC. */
+ * are composed through MultiplyQuaternions, keeping the latest sine in g_turretAimSine. */
 
 extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 
 extern void Player_BuildPlayerOrientation(void *, CQuatern *);
 
 /* Returns an actor's aim with auto-aim applied: with no assist cone the actor's aiming orientation from
- * func_8024796C_de is returned unchanged; otherwise, of the live entities other than the actor (not flagged 1,
+ * Gobjinst_BuildActorAimQuaternion is returned unchanged; otherwise, of the live entities other than the actor (not flagged 1,
  * with a body at 0x174), the one whose aim point (half its height above its top) lies most nearly along the
  * aim direction from the given point, within the cone (in degrees, halved), pulls the aim toward it by an
  * angle that fades with the fourth root of how far off-axis it is. The applied correction is also written
@@ -76,13 +76,13 @@ extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-/* Sways a model part: from the frame count D_800D2978, a per-part phase ((flags & 0x38) * 50, plus 40
- * unless flag 4 is set) and the part's time divided by 113, it reads a 120-step sine table at D_800D0720 to
+/* Sways a model part: from the frame count g_gameFrameCounter, a per-part phase ((flags & 0x38) * 50, plus 40
+ * unless flag 4 is set) and the part's time divided by 113, it reads a 120-step sine table at g_actorMatrixWobbleSamples to
  * build a rotation axis and angle for the part's sway mode (2: about a wobbling z/y axis, 0x82: doubled
  * about a wobbling x/y axis, 0x40: doubled about a fully wobbling axis, 1: 0.7 of the swing about y) and
  * applies that rotation to the part's matrix about its own origin; other modes leave it unchanged. */
 
-extern s32 D_800D2978;
+extern s32 g_gameFrameCounter;
 
 extern void CopyMatrix(f32 *, f32 *);
 
@@ -92,10 +92,10 @@ extern void Graphu64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
 extern void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
-const unsigned int D_blob_7feea27188c6a4b3e2db[2] = {
+const unsigned int g_actorRootMotionCubicCoefficients[2] = {
     0xC0000000, 0x40400000,
 };
-void func_802472F0_de(void *actor) {
+void Gobjinst_AdvanceActorRootMotion(void *actor) {
     CVector3 first;
     CVector3 second;
     CVector3 saved;
@@ -122,21 +122,21 @@ void func_802472F0_de(void *actor) {
 
     resource = Cache_RequestResource(0, ((Actor36 *)actor)->animationKey, ((Actor36 *)actor)->animationKey,
         ((((Actor36 *)actor)->animationCount * 4) + 0xF) & ~7, 4, 0, 0,
-        &D_800C3930_de + 4, 0);
+        &g_actorRotationBlendAndResourceTuning + 4, 0);
     if (resource == 0)
         return;
 
     track0 = &((Actor36 *)(actor))->currentTrack;
     track1 = &((Actor36 *)(actor))->previousTrack;
     Gastate_SwitchRequestedAnimation(track0, (s32)*resource, ((Actor36 *)actor)->animationKey, 1, &active, track1);
-    if (func_802624D8_de(track0) != 0) {
+    if (Gastate_IsAnimationResourceRetained(track0) != 0) {
         void *entry;
         Gastate_AdvanceRootMotion(track0, &first, &first_value, actor);
         value = first_value;
         saved = first;
         if (active != 0 && ((Anim *)track1)->current != -1) {
             u16 count;
-            entry = func_80262564_de(track0);
+            entry = Gastate_GetAnimationPoseSection(track0);
             if (((AnimationBlendEntry *)entry)->frames != 0) {
                 ((Actor36 *)actor)->flags |= 0x400;
                 count = ((AnimationBlendEntry *)entry)->frames;
@@ -150,10 +150,10 @@ void func_802472F0_de(void *actor) {
         }
         if (((Actor36 *)actor)->flags & 0x400) {
             Gastate_SwitchRequestedAnimation(track1, (s32)*resource, ((Actor36 *)actor)->animationKey, 0, 0, 0);
-            if (func_802624D8_de(track1) != 0) {
+            if (Gastate_IsAnimationResourceRetained(track1) != 0) {
                 f32 time;
                 f32 end;
-                time = ((Actor36 *)actor)->blendTime + D_800D2988;
+                time = ((Actor36 *)actor)->blendTime + g_frameElapsedTime;
                 end = (f32)((Actor36 *)actor)->blendFrames;
                 ((Actor36 *)actor)->blendTime = time;
                 if (end < time) {
@@ -161,19 +161,19 @@ void func_802472F0_de(void *actor) {
                 } else {
                     f32 a = (f32)((Actor36 *)actor)->blendEnd;
                     f32 b = (f32)((Actor36 *)actor)->blendStart;
-                    f32 t = time / (end + D_800D2988);
-                    ((Actor36 *)actor)->blend = (((a + D_800C3948_de + b) * t * t * t) +
-                        ((((&D_800C3948_de)[1] - a) - (2.0f * b)) * t * t) + (b * t));
+                    f32 t = time / (end + g_frameElapsedTime);
+                    ((Actor36 *)actor)->blend = (((a + g_actorRootMotionBlendCoefficients + b) * t * t * t) +
+                        ((((&g_actorRootMotionBlendCoefficients)[1] - a) - (2.0f * b)) * t * t) + (b * t));
                     Gastate_AdvanceRootMotion(&((Actor36 *)(actor))->previousTrack, &second, &second_value, actor);
                     Graphu64_InterpolateVector(&saved, ((Actor36 *)actor)->blend, &second, &first);
                     value = Graphu64_InterpolateWrappedValue(((Actor36 *)actor)->blend, second_value, first_value);
                 }
-                func_802624A8_de(track1);
+                Gastate_ReleaseAnimationResource(track1);
             } else {
                 ((Actor36 *)actor)->flags &= ~0x400;
             }
         }
-        func_802624A8_de(track0);
+        Gastate_ReleaseAnimationResource(track0);
         if (((Actor36 *)actor)->flags & 0x20000) {
             ((Actor36 *)actor)->heading -= value;
             Graphu64_WrapPeriodicValue(&((Actor36 *)(actor))->heading);
@@ -191,7 +191,7 @@ void func_802472F0_de(void *actor) {
     Cache_UnlockResource(0, resource);
 }
 
-void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
+void Gobjinst_DispatchAnimationIntervalEvents(char *obj, void *anim, f32 from, f32 to) {
     CVector3 pos;
     CVector3 local;
     f32 matrix[16];
@@ -201,12 +201,12 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
     s32 checkMask;
     s32 fire;
     s32 *resource;
-    struct Shape_typemap_13 *table;
+    struct ActorAnimationEventTable *table;
 
-    if (!(((struct ObjectLinks180 *) obj)->unk_100 & 0x4000000) && anim != obj + 0x104) {
+    if (!(((struct RootMotionActorView *) obj)->unk_100 & 0x4000000) && anim != obj + 0x104) {
         return;
     }
-    switch (((struct ObjectLinks180 *) obj)->unk_E4) {
+    switch (((struct RootMotionActorView *) obj)->unk_E4) {
     case 0x44E:
     case 0x451:
     case 0x453:
@@ -217,8 +217,8 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
         break;
     }
     table = 0;
-    events = func_80262598_de(anim);
-    count = func_802625C4_de(anim);
+    events = Gastate_GetAnimationEventEntries(anim);
+    count = Gastate_GetAnimationEventCount(anim);
     resource = 0;
     for (i = 0; i < count; i++) {
         if (from <= (f32)events[i].frame && (f32)events[i].frame < to) {
@@ -229,30 +229,30 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
                 local.z = events[i].local.y;
                 Graphu64_TransformPoint(obj + 0x74, &local, &pos);
             } else {
-                if (checkMask && (D_800CC134[events[i].effect].offset & 4)) {
+                if (checkMask && (g_animationEventEffectDescriptors[events[i].effect].offset & 4)) {
                     if (resource == 0) {
-                        resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct ObjectLinks180 *) obj)->unk_1);
+                        resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct RootMotionActorView *) obj)->unk_1);
                         if (resource == 0) {
                             goto masked;
                         }
                         table = SetN64_GetPackSection(*resource, 5);
                     }
-                    fire = ((struct Shape_typemap_3 *) (((char *) table) + ((events[i].bone * table->field_0) + 0x74)))->field_0 & ((struct ObjectLinks180 *) obj)->unk_17C;
+                    fire = ((struct AnimationEventMaskView *) (((char *) table) + ((events[i].bone * table->value) + 0x74)))->value & ((struct RootMotionActorView *) obj)->unk_17C;
                 }
             masked:
                 if (fire == 0) {
                     continue;
                 }
-                if (((struct ObjectLinks180 *) obj)->unk_B8 != 0) {
-                    Graphu64_ConvertMatrixToFloat(matrix, ((struct ObjectLinks180 *) obj)->unk_B8 + (events[i].bone << 6));
+                if (((struct RootMotionActorView *) obj)->unk_B8 != 0) {
+                    Graphu64_ConvertMatrixToFloat(matrix, ((struct RootMotionActorView *) obj)->unk_B8 + (events[i].bone << 6));
                     Graphu64_TransformPoint(matrix, &events[i].local, &pos);
                 } else {
-                    pos = ((struct ObjectLinks180 *) obj)->unk_8;
+                    pos = ((struct RootMotionActorView *) obj)->unk_8;
                 }
             }
             if (fire != 0) {
                 Events_DeliverContactEffect(obj, obj, events[i].effect, -1, pos, events[i].params);
-                D_800D06BC++;
+                g_actorRootMotionSampleCount++;
             }
         }
     }
@@ -261,7 +261,7 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
     }
 }
 
-CQuatern func_8024796C_de(char *actor) {
+CQuatern Gobjinst_BuildActorAimQuaternion(char *actor) {
     CQuatern result;
     CQuatern pitch;
     CQuatern yaw;
@@ -278,18 +278,18 @@ CQuatern func_8024796C_de(char *actor) {
         weapon = ((Shared_ActorView *)player)->message;
         if (weapon != 0) {
             angle = 1.5707964f;
-            D_80115DEC = Gu_Sinf(angle);
+            g_turretAimSine = Gu_Sinf(angle);
             yaw.x = 0.0f;
-            yaw.y = D_80115DEC;
+            yaw.y = g_turretAimSine;
             yaw.z = 0.0f;
             yaw.w = Math_Cosf(angle);
-            MultiplyQuaternions(&result, &yaw, &((SharedRecAt564V1 *)weapon)->orientation);
+            MultiplyQuaternions(&result, &yaw, &((PlayerCameraTargetView *)weapon)->orientation);
         } else {
             angle = 1.5707964f;
             Player_BuildPlayerOrientation(player, &own);
-            D_80115DEC = Gu_Sinf(angle);
+            g_turretAimSine = Gu_Sinf(angle);
             yaw.x = 0.0f;
-            yaw.y = D_80115DEC;
+            yaw.y = g_turretAimSine;
             yaw.z = 0.0f;
             yaw.w = Math_Cosf(angle);
             MultiplyQuaternions(&result, &yaw, &own);
@@ -300,14 +300,14 @@ CQuatern func_8024796C_de(char *actor) {
         pitch.y = 0.0f;
         pitch.z = 0.0f;
         angle = ((LevelActor *)actor)->pitch * 0.5f;
-        D_80115DEC = sine;
+        g_turretAimSine = sine;
         pitch.w = Math_Cosf(angle);
         sine = Gu_Sinf((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
         yaw.y = sine;
         yaw.z = 0.0f;
         angle = (((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f;
-        D_80115DEC = sine;
+        g_turretAimSine = sine;
         yaw.w = Math_Cosf(angle);
         MultiplyQuaternions(&both, &pitch, &yaw);
         Turret_BuildPlaneRot(&base, actor, (char *)actor + 0x170);
@@ -318,14 +318,14 @@ CQuatern func_8024796C_de(char *actor) {
         yaw.y = sine;
         yaw.z = 0.0f;
         angle = (((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f;
-        D_80115DEC = sine;
+        g_turretAimSine = sine;
         yaw.w = Math_Cosf(angle);
         MultiplyQuaternions(&result, &yaw, &((LevelActor *)actor)->rotation);
     }
     return result;
 }
 
-CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 cone) {
+CQuatern Gobjinst_BuildAssistedAimQuaternion(char *actor, CVector3 point, CQuatern *assist, f32 cone) {
     CVector3 dir;
     CVector3 local;
     CVector3 aim;
@@ -347,7 +347,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     local.x = 0.0f;
     local.y = 0.0f;
     local.z = 1.0f;
-    base = func_8024796C_de(actor);
+    base = Gobjinst_BuildActorAimQuaternion(actor);
     if (cone == 0.0f) {
         if (assist != 0) {
             assist->x = assist->y = assist->z = 0.0f;
@@ -362,7 +362,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     bestDot = Math_Cosf(cone * 0.008726647f);
     count = g_world.registeredCount;
     for (; i < count; i++) {
-        entity = D_8011CA18[i];
+        entity = g_playerAimCandidateActors[i];
         if (entity == actor || (((LevelActor *)(entity))->flags & 1) || ((LevelActor *)(entity))->active == 0) {
             continue;
         }
@@ -384,10 +384,10 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         angle = Graphu64_ArcCos(bestDot);
         angle *= Gu_Sqrtf(Gu_Sqrtf(1.0f - angle / (cone * 0.008726647f)));
         angle *= 0.5f;
-        D_80115DEC = Gu_Sinf(angle);
-        turn.x = axis.x * D_80115DEC;
-        turn.y = axis.y * D_80115DEC;
-        turn.z = axis.z * D_80115DEC;
+        g_turretAimSine = Gu_Sinf(angle);
+        turn.x = axis.x * g_turretAimSine;
+        turn.y = axis.y * g_turretAimSine;
+        turn.z = axis.z * g_turretAimSine;
         turn.w = Math_Cosf(angle);
         MultiplyQuaternions(&result, &base, &turn);
         if (assist != 0) {
@@ -402,7 +402,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     return base;
 }
 
-void func_80247F18_de(char *actor, char *twistState, char *boneMatrix, CVector3 impactPosition,
+void Gobjinst_ApplyImpactBoneTwist(char *actor, char *twistState, char *boneMatrix, CVector3 impactPosition,
                    CVector3 impactDirection, s32 hitBoneIndex) {
     CVector3 twistAxis;
     CVector3 boneOrigin;
@@ -454,7 +454,7 @@ void func_80247F18_de(char *actor, char *twistState, char *boneMatrix, CVector3 
     }
 }
 
-void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
+void Gobjinst_ApplyTimedMatrixWobble(s32 time, s32 flags, f32 *matrix) {
     f32 rotation[16];
     f32 inverse[16];
     CVector3 origin;
@@ -464,7 +464,7 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     f32 flip;
     s32 mode;
 
-    t = D_800D2978;
+    t = g_gameFrameCounter;
     t += (flags & 0x38) * 50;
     t += (u32)(time & 0xFFFF) / 113;
     if (!(flags & 4)) {
@@ -477,22 +477,22 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     if (mode == 2) {
         axis.z = 1.0f;
         axis.x = 0.0f;
-        angle = D_800D0720.value[t % 120] - 0.5f;
-        axis.y = D_800D0720.value[(t + 12) % 120];
+        angle = g_actorMatrixWobbleSamples.value[t % 120] - 0.5f;
+        axis.y = g_actorMatrixWobbleSamples.value[(t + 12) % 120];
     } else if (mode == 0x82) {
         axis.x = 1.0f;
         axis.z = 0.0f;
-        angle = D_800D0720.value[t % 120] - 0.5f;
-        axis.y = D_800D0720.value[(t + 12) % 120];
+        angle = g_actorMatrixWobbleSamples.value[t % 120] - 0.5f;
+        axis.y = g_actorMatrixWobbleSamples.value[(t + 12) % 120];
         angle *= 2.0f;
     } else if (mode == 0x40) {
-        angle = D_800D0720.value[(t + 30) % 120] - 0.5f;
-        axis.x = D_800D0720.value[(t + 12) % 120];
-        axis.y = D_800D0720.value[(t + 42) % 120];
-        axis.z = D_800D0720.value[(t + 110) % 120];
+        angle = g_actorMatrixWobbleSamples.value[(t + 30) % 120] - 0.5f;
+        axis.x = g_actorMatrixWobbleSamples.value[(t + 12) % 120];
+        axis.y = g_actorMatrixWobbleSamples.value[(t + 42) % 120];
+        axis.z = g_actorMatrixWobbleSamples.value[(t + 110) % 120];
         angle *= 2.0f;
     } else if (mode == 1) {
-        angle = D_800D0720.value[(t + 70) % 120] - 0.5f;
+        angle = g_actorMatrixWobbleSamples.value[(t + 70) % 120] - 0.5f;
         angle *= 0.7f;
     } else {
         return;

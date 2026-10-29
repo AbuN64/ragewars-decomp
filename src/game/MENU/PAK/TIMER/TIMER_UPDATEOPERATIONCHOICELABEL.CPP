@@ -3,13 +3,13 @@
 #include "MENU/PAK_PREVIEW_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-extern PakPreview *D_800E28BC;
-#include "COMMON/UNUSED.H"
+extern PakPreview *g_controllerPakSnapshotPayload;
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/PAK/TIMER_UPDATEOPERATIONCHOICELABEL.H"
 #include "SYSTEM/DEFS.H"
 
-extern s32 D_8015375C;
+extern s32 g_pakUseScannedChannel;
 
 
 
@@ -19,7 +19,7 @@ extern s32 D_8015375C;
 
 
 
-extern char *D_800D7E14[];
+extern char *g_unlockedLevelResultLabel[];
 
 
 /* Sets D_80153780 to one; Timer_DisableAlternatePrompt clears it. */
@@ -27,7 +27,7 @@ extern char *D_800D7E14[];
 
 
 /* Points the output record's table at 0x14 at the variant for the display depth at 0x90 of
-   D_800E28BC: 16 and 32 have their own, 8 and anything else use the default; returns 0. */
+   g_controllerPakSnapshotPayload: 16 and 32 have their own, 8 and anything else use the default; returns 0. */
 
 
 
@@ -40,7 +40,7 @@ extern char *D_800D7E14[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-/* Formats the word at offset 0x1C of the structure D_800E28BC points to, shifted down eight bits,
+/* Formats the word at offset 0x1C of the structure g_controllerPakSnapshotPayload points to, shifted down eight bits,
    into a field's text with the format D_800E0DA4, three bytes before the length Menu_CountLineChars
    reports, and returns zero. */
 
@@ -74,7 +74,7 @@ s32 Timer_UpdateOperationChoiceLabel(struct Field *field, s16 *option_ptr) {
             return 0;
         }
         if (option == 0x15) {
-            field->text = D_800D7E14;
+            field->text = g_unlockedLevelResultLabel;
         } else if (D_8014D4EC_de != 0) {
             field->text = D_800D3740;
         } else {
@@ -82,16 +82,16 @@ s32 Timer_UpdateOperationChoiceLabel(struct Field *field, s16 *option_ptr) {
         }
         goto done;
     }
-    if (D_8015375C != 0) {
+    if (g_pakUseScannedChannel != 0) {
         field->text = D_800D3760;
     }
 done:
     return 0;
 }
 
-s32 Timer_SetManagerHeading(struct ObjRecAt14V1 *record) {
-    if (D_8015375C != 0) {
-        record->unk14 = D_800D7794;
+s32 Timer_SetManagerHeading(struct MenuLabelPointerView *record) {
+    if (g_pakUseScannedChannel != 0) {
+        record->label = D_800D7794;
     }
     return 0;
 }
@@ -104,7 +104,7 @@ void Timer_DisableAlternatePrompt(void) {
     D_80153780 = 0;
 }
 
-s32 Timer_UpdateAlternatePromptLabel(struct FieldRecAt14 *field) {
+s32 Timer_UpdateAlternatePromptLabel(struct PakActionLabelView *field) {
     if (D_80153780 != 0) {
         field->text = g_pakNoteLabelSlots;
     } else {
@@ -113,24 +113,24 @@ s32 Timer_UpdateAlternatePromptLabel(struct FieldRecAt14 *field) {
     return 0;
 }
 
-int Timer_UpdatePreviewDepthLabel(ObjRecAt14V1 *out) {
-    switch (D_800E28BC->depth) {
+int Timer_UpdatePreviewDepthLabel(MenuLabelPointerView *out) {
+    switch (g_controllerPakSnapshotPayload->depth) {
     case 8:
     default:
-        out->unk14 = &D_800D37A8;
+        out->label = &g_pakPreviewDepthEightLabel;
         break;
     case 16:
-        out->unk14 = &D_800D37AC;
+        out->label = &g_pakPreviewDepthSixteenLabel;
         break;
     case 32:
-        out->unk14 = &D_800D37B0;
+        out->label = &g_pakPreviewDepthThirtyTwoLabel;
         break;
     }
     return 0;
 }
 
 s32 Timer_FormatPreviewPageCount(struct Field *field) {
-    s32 value = D_800E28BC->value >> 8;
+    s32 value = g_controllerPakSnapshotPayload->value >> 8;
     char *text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         field->text[g_languageIndex];

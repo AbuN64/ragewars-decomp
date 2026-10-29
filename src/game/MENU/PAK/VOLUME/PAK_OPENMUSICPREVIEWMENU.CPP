@@ -4,7 +4,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "SYSTEM/DEFS.H"
-#include "COMMON/UNUSED.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SOUNDINFO.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "COMMON/EXTERNS_21.H"
@@ -13,7 +13,7 @@
 
 /* 80444EC0_15.CPP */
 #if !defined(VERSION_US)
-/* Shows the fixed sound value text when D_800E63B8 is zero. Otherwise
+/* Shows the fixed sound value text when g_menuMusicPreviewSelection is zero. Otherwise
  * formats its current value into the alternate text (the current menu
  * language's line in the EU builds), two bytes before the line length
  * reported by the text item helper. */
@@ -32,7 +32,7 @@ extern char D_800EEE20[];
 
 s32 Pak_FormatMusicPreview(LayeredText *field) {
     char *text;
-    if (D_800E63B8 == 0) {
+    if (g_menuMusicPreviewSelection == 0) {
         field->text = &D_800D3DBC;
     } else {
         field->text = VALUE_TEXT;
@@ -42,7 +42,7 @@ s32 Pak_FormatMusicPreview(LayeredText *field) {
         text = (char *)*VALUE_TEXT;
 #endif
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2),
-                        VALUE_FORMAT, D_800E63B8);
+                        VALUE_FORMAT, g_menuMusicPreviewSelection);
     }
     return 0;
 }
@@ -53,32 +53,32 @@ s32 Pak_FormatMusicPreview(LayeredText *field) {
 
 s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
     SoundElement_DisablePeriodicSound();
-    D_800E63B0 = func_8025E2C4_de();
-    func_8025E2D4_de(D_800E63B8);
+    g_menuSavedAudioSelection = SoundElement_GetMusicPlaybackEnabled();
+    SoundElement_SetMusicPlaybackEnabled(g_menuMusicPreviewSelection);
     SoundElement_DisableMusicGainOverride();
     SoundElement_SetVoiceMixValue(1);
-    D_800E63B4 = 1;
+    g_musicPreviewMenuActive = 1;
     Control_ClearMenuControlFlag();
-    Menu_AllocateMenu(third, second, D_00451094);
+    Menu_AllocateMenu(third, second, g_musicPreviewMenuResource);
     return 1;
 }
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-/* Restarts sound: calls SoundElement_DisablePeriodicSound, records what func_8025E2C4_de returns in D_800E63B0, passes
-   D_800E63B8 to func_8025E2D4_de, calls SoundElement_DisableMusicGainOverride and SoundElement_SetVoiceMixValue with 1, sets D_800E63B4,
+/* Restarts sound: calls SoundElement_DisablePeriodicSound, records what SoundElement_GetMusicPlaybackEnabled returns in g_menuSavedAudioSelection, passes
+   g_menuMusicPreviewSelection to SoundElement_SetMusicPlaybackEnabled, calls SoundElement_DisableMusicGainOverride and SoundElement_SetVoiceMixValue with 1, sets g_musicPreviewMenuActive,
    calls Control_ClearMenuControlFlag and then Menu_AllocateMenu with the third argument, the second and D_451F58.
    Returns one. */
 
 s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
     SoundElement_DisablePeriodicSound();
-    D_800E63B0 = func_8025E2C4_de();
-    func_8025E2D4_de(D_800E63B8);
+    g_menuSavedAudioSelection = SoundElement_GetMusicPlaybackEnabled();
+    SoundElement_SetMusicPlaybackEnabled(g_menuMusicPreviewSelection);
     SoundElement_DisableMusicGainOverride();
     SoundElement_SetVoiceMixValue(1);
-    D_800E63B4 = 1;
+    g_musicPreviewMenuActive = 1;
     Control_ClearMenuControlFlag();
-    Menu_AllocateMenu(third, second, D_00451094);
+    Menu_AllocateMenu(third, second, g_musicPreviewMenuResource);
     return 1;
 }
 #endif
@@ -89,7 +89,7 @@ s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
    at 0x5D0, leaving any other state alone; returns zero. */
 
 s32 Pak_ToggleOwnerMode(void *unused, struct Holder *holder) {
-    struct OwnerRecAt5D0 *owner = holder->owner;
+    struct MusicPreviewOwnerView *owner = holder->owner;
 
     if (owner == 0) {
         return 0;
@@ -106,7 +106,7 @@ s32 Pak_ToggleOwnerMode(void *unused, struct Holder *holder) {
    word at 0x5D0 equal to one, and at D_800E60AC otherwise; returns zero, doing nothing without an
    owner. */
 
-s32 Pak_UpdateOwnerModeText(struct FieldRecAt14 *field, struct Holder *holder) {
+s32 Pak_UpdateOwnerModeText(struct PakActionLabelView *field, struct Holder *holder) {
     if (holder->owner == 0) {
         return 0;
     }
@@ -118,12 +118,12 @@ s32 Pak_UpdateOwnerModeText(struct FieldRecAt14 *field, struct Holder *holder) {
     return 0;
 }
 
-/* Replaces D_800D0EBC with what Menu_AdjustValue returns for the second argument, D_800D0EBC, 1, 0, 1 and 1,
+/* Replaces g_playerViewRenderingEnabled with what Menu_AdjustValue returns for the second argument, g_playerViewRenderingEnabled, 1, 0, 1 and 1,
    and returns zero. */
 extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 s32 Pak_AdjustOwnerNotificationOption(void *first, void *second) {
-    D_800D0EBC = Menu_AdjustValue(second, D_800D0EBC, 1, 0, 1, 1);
+    g_playerViewRenderingEnabled = Menu_AdjustValue(second, g_playerViewRenderingEnabled, 1, 0, 1, 1);
     return 0;
 }
 #endif

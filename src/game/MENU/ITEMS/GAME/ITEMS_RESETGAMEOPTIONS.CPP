@@ -4,7 +4,7 @@
 #include "MENU/ITEMS/GAME_AND_PLAYER_OPTIONS.H"
 
 #if defined(VERSION_DE)
-/* Resets the options record D_801462C8 (COptions_t) to its defaults: sound, opacity, cheats, battle
+/* Resets the options record g_gameSettings (COptions_t) to its defaults: sound, opacity, cheats, battle
    limits, the ten multiplayer weapons, the training levels and every player's options. */
 void Items_ResetGameOptions(COptions *options) {
     s32 i;

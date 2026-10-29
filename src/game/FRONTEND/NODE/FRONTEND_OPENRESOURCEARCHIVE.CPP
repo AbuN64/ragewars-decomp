@@ -1,7 +1,7 @@
 #include "COMMON/FRUSTUM.H"
 #include "MENU/GFX/IMAGE.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/LONE/D_800DEA60.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/LONE/FRONTEND_VIEWPORT_WIDTH.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
 #include "COMMON/NODERECAT2A8.H"
@@ -15,7 +15,7 @@
 #include "RESMGR/resmgr_stream_io.H"
 #include "MATH/N64_ENG.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
-extern s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *, sm_dldc *);
+extern s32 Widget_ComputeWidgetBounds(struct CacheResourceBlockView *, struct CacheResourceBlockView *, WidgetLayout *, sm_dldc *);
 #include "RESMGR/resmgr_string_memory.H"
 
 /* Puts a new node in a tree node's place, taking over its parent and next links and becoming the parent's first child or the successor of the predecessor Node_FindWidgetPredecessor's search finds, then makes the old node the new node's only child with its next link and the halfwords at 0x14 and 0x16 cleared.
@@ -43,7 +43,7 @@ static inline struct Tree *findPredecessor(struct Tree *node, s32 id) {
 }
 
 /* Measures the pixel width of a string of the given length in the given font by summing each character's signed width byte from the font record Node_GetGlyphBuffer returns, then adding the spacing Node_GetFontLetterSpacing reports once between each pair of characters.
-   Adapted from func_8025C8D8_de with the two clears and per-record call replaced by the font lookup, the width sum and the spacing term changed. */
+   Adapted from SoundVoicePool_Initialize with the two clears and per-record call replaced by the font lookup, the width sum and the spacing term changed. */
 
 
 
@@ -72,7 +72,7 @@ extern short Node_GetFontLetterSpacing(s32 index);
 
 extern void Widget_DrawWidget(struct Pair14 *image, Triple at, Style style);
 
-/* Draws the child at 0x8 of a window with the arguments passed by value after clearing D_800E2AB8 once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de, giving up when it fails, and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from func_8041BA00_de with D_800E2AB8 cleared before the rectangle is resolved, the resolved basis declared first, and a failed func_8040F488_de ending the function. */
+/* Draws the child at 0x8 of a window with the arguments passed by value after clearing g_frontendRenderStateInitialized once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de, giving up when it fails, and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from func_8041BA00_de with g_frontendRenderStateInitialized cleared before the rectangle is resolved, the resolved basis declared first, and a failed func_8040F488_de ending the function. */
 
 
 
@@ -82,20 +82,20 @@ extern void Widget_DrawWidget(struct Pair14 *image, Triple at, Style style);
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct CacheResourceBlockView *clip);
 
 
 extern void Widget_DrawVisibleSiblings(void *, Args);
 
 
 /* Records the last column and row of a width by height area: stores width - 1 and height - 1 in
-   D_800DEA60 and D_800E2AB4_de, and fills the rectangle D_8014D580 with zero to width - 1 and zero
+   g_frontendViewportWidth and g_frontendViewportHeight, and fills the rectangle g_frontendClipBounds with zero to width - 1 and zero
    to height - 1. */
 
 
 
 
-extern struct Shape_typemap_165 D_8014D580;
+extern struct CacheResourceBlockView g_frontendClipBounds;
 
 /* Releases every loaded slot of the active, referenced entries of the pool at g_frontendResourceFontCount: each
    loaded slot (flag 1) has its data released through Image_ReleaseImage, its flags and owner cleared and
@@ -129,7 +129,7 @@ extern s16 g_frontendResourceTextureCount;
 
 extern void Node_AcquireArchiveEntry(s32 index);
 
-static inline void func_8040F75C_resolve(UiWidget *widget) {
+static inline void Node_ResolveWidgetResourceReference(UiWidget *widget) {
     UiWidget *w;
     u32 index;
     s32 offset;
@@ -193,7 +193,7 @@ void Node_WrapNodeInParent(struct Tree *node, struct Tree *added) {
 
 
 
-void Node_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to) {
+void Node_ReplaceNodeRefs(WidgetReferenceNodeView *node, void *from, void *to) {
     if (node != 0) {
         if (node->left != 0) {
             Node_ReplaceNodeRefs(node->left, from, to);
@@ -230,11 +230,11 @@ void Node_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to) {
 
 
 
-void Node_SwapWidgetTreePositions(WidgetRecAtE *a, WidgetRecAtE *b) {
-    WidgetRecAtE *w;
-    WidgetRecAtE *cursorA;
-    WidgetRecAtE *cursorB;
-    WidgetRecAtE saved;
+void Node_SwapWidgetTreePositions(WidgetTreePositionView *a, WidgetTreePositionView *b) {
+    WidgetTreePositionView *w;
+    WidgetTreePositionView *cursorA;
+    WidgetTreePositionView *cursorB;
+    WidgetTreePositionView saved;
 
     cursorA = a;
 root:
@@ -309,20 +309,20 @@ void Node_SetRecordBytePair(struct Pair2C *record, u8 first, u8 second) {
 
 /** Store a word at offset 0x2c. */
 void Node_SetObjectWordAt2C(void *object, int value) {
-    ObjRecAt2CV2 *record = object;
-    record->unk2C = value;
+    FrontendArchiveHandleView *record = object;
+    record->archiveHandle = value;
 }
 
 /** Store a word at offset 0x2c. */
 void Node_AssignObjectWordAt2C(void *object, int value) {
-    ObjRecAt2CV2 *record = object;
-    record->unk2C = value;
+    FrontendArchiveHandleView *record = object;
+    record->archiveHandle = value;
 }
 
 /* Stores four values into the consecutive words at offsets 0x2C to 0x38 of a record. */
 
 
-void Node_SetRecordValueQuad(struct QuadRecAt2C *record, s32 first, s32 second, s32 third, s32 fourth) {
+void Node_SetRecordValueQuad(struct WidgetRecordValueQuadView *record, s32 first, s32 second, s32 third, s32 fourth) {
     record->values[0] = first;
     record->values[1] = second;
     record->values[2] = third;
@@ -334,7 +334,7 @@ void Node_DrawButtonImage(ButtonWidget *widget, Triple at, Style style) {
     Shared_Quad box1;
     struct Pair14 *image;
 
-    if (Widget_ComputeWidgetBounds((struct Shape_typemap_165 *)&box0, (struct Shape_typemap_165 *)&box1, (WidgetLayout *)widget, (sm_dldc *)&at) != 0) {
+    if (Widget_ComputeWidgetBounds((struct CacheResourceBlockView *)&box0, (struct CacheResourceBlockView *)&box1, (WidgetLayout *)widget, (sm_dldc *)&at) != 0) {
         if (at.z & 0x100) {
             image = widget->pressed;
         } else if (at.z & 0x40) {
@@ -359,8 +359,8 @@ void Node_DrawClippedChildren(WidgetLayout *widget, Args args) {
     UiWidget *window = widget;
 
     changed = 0;
-    D_800E2AB8 = 0;
-    if (Widget_ComputeWidgetBounds((struct Shape_typemap_165 *)&first, (struct Shape_typemap_165 *)&basis, widget, (sm_dldc *)&args) != 0) {
+    g_frontendRenderStateInitialized = 0;
+    if (Widget_ComputeWidgetBounds((struct CacheResourceBlockView *)&first, (struct CacheResourceBlockView *)&basis, widget, (sm_dldc *)&args) != 0) {
         if ((window->flags & 0x200) != 0) {
             N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
@@ -382,7 +382,7 @@ void Node_DrawClippedChildren(WidgetLayout *widget, Args args) {
 
 
 
-s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip) {
+s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct CacheResourceBlockView *clip) {
     s32 ok;
     s32 x0;
     s32 x1;
@@ -390,51 +390,51 @@ s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_16
     s32 y1;
     s32 v;
 
-    x0 = rect->field_0;
+    x0 = rect->first;
     ok = 1;
-    if (x0 < clip->field_0) {
-        x0 = clip->field_0;
+    if (x0 < clip->first) {
+        x0 = clip->first;
     }
-    x1 = rect->field_4;
-    rect->field_0 = x0;
-    if (clip->field_4 < x1) {
-        x1 = clip->field_4;
+    x1 = rect->second;
+    rect->first = x0;
+    if (clip->second < x1) {
+        x1 = clip->second;
     }
-    y0 = rect->field_8;
-    rect->field_4 = x1;
-    if (y0 < clip->field_8) {
-        y0 = clip->field_8;
+    y0 = rect->third;
+    rect->second = x1;
+    if (y0 < clip->third) {
+        y0 = clip->third;
     }
-    y1 = rect->field_C;
-    rect->field_8 = y0;
-    if (clip->field_C < y1) {
-        y1 = clip->field_C;
+    y1 = rect->fourth;
+    rect->third = y0;
+    if (clip->fourth < y1) {
+        y1 = clip->fourth;
     }
-    rect->field_C = y1;
-    v = rect->field_0 + 1;
-    if (rect->field_4 < v) {
-        rect->field_4 = v;
+    rect->fourth = y1;
+    v = rect->first + 1;
+    if (rect->second < v) {
+        rect->second = v;
         ok = 0;
     }
-    v = rect->field_8 + 1;
-    if (rect->field_C < v) {
-        rect->field_C = v;
+    v = rect->third + 1;
+    if (rect->fourth < v) {
+        rect->fourth = v;
         ok = 0;
     }
     return ok;
 }
 
 void Node_SetDisplayClipBounds(s32 width, s32 height) {
-    struct Shape_typemap_165 *rect = &D_8014D580;
+    struct CacheResourceBlockView *rect = &g_frontendClipBounds;
 
     width--;
     height--;
-    D_800DEA60 = width;
-    D_800E2AB4_de = height;
-    rect->field_8 = 0;
-    rect->field_0 = 0;
-    rect->field_4 = width;
-    rect->field_C = height;
+    g_frontendViewportWidth = width;
+    g_frontendViewportHeight = height;
+    rect->third = 0;
+    rect->first = 0;
+    rect->second = width;
+    rect->fourth = height;
 }
 
 /** Perform no work. */
@@ -453,11 +453,11 @@ void Node_ReleaseActiveChunkImages(void) {
     s32 e;
     s32 n;
     s32 i;
-    SlotRecAtCV2 *slot;
+    ArchiveOwnedImageSlot *slot;
 
     for (e = 0; e < g_frontendResourceFontCount.count; e++) {
         if (g_frontendResourceFontCount.entries[e].refCount != 0 && g_frontendResourceFontCount.entries[e].active != 0) {
-            for (n = 0; n < g_frontendResourceFontCount.entries[e].def->unkE; n++) {
+            for (n = 0; n < g_frontendResourceFontCount.entries[e].def->glyphCount; n++) {
                 slot = g_frontendResourceFontCount.entries[e].pages[n];
                 for (i = 0; i < 0x60; i++) {
                     if (slot[i].flags & 1) {
@@ -508,7 +508,7 @@ void Node_RelocateWidgetTree(UiWidget *widget, s32 base, s32 old) {
                 widget->words[3] = 0;
                 break;
             case 8:
-                func_8040F75C_resolve(widget);
+                Node_ResolveWidgetResourceReference(widget);
                 break;
         }
         if ((widget->name != 0 && (widget->next != 0 || widget->children != 0)) || widget->type != 2) {
@@ -580,7 +580,7 @@ void Node_LoadLanguageStrings(s32 languageIndex) {
 
 /* Opens the menu archive NAME: reads its table of contents, then its image table (with a fresh image
    and load state per entry), its text index (loading section 0), its resource map (with copies when
-   D_800E2AC4 is set) and its fonts with their bitmap pages and glyph rows; records the name and closes
+   g_frontendArchiveResident is set) and its fonts with their bitmap pages and glyph rows; records the name and closes
    the file. */
 void Node_OpenResourceArchive(u8 *name) {
     t_resource *res;
@@ -596,13 +596,13 @@ void Node_OpenResourceArchive(u8 *name) {
     s32 j;
 
     res = &g_frontendResourceState;
-    handle = XStdio_OpenStream(name, &D_800DD0B0);
+    handle = XStdio_OpenStream(name, &s_frontendResourceOpenMode);
     res->In = handle;
     XStdio_ReadStream(&g_frontendResourceState.Header, sizeof(t_res_header), 1, handle);
     g_frontendResourceState.NTextures = g_frontendResourceState.Header.TextureTableLen / sizeof(_sm_texture_element);
     if (g_frontendResourceState.NTextures > 0) {
         g_frontendResourceState.VramPool = Cache_AllocateMemory(g_frontendResourceState.NTextures * sizeof(struct OwnedImage));
-        g_frontendResourceState.TexTimer = Cache_AllocateMemory(g_frontendResourceState.NTextures * sizeof(struct ResourceRecAt6));
+        g_frontendResourceState.TexTimer = Cache_AllocateMemory(g_frontendResourceState.NTextures * sizeof(struct FrontendTextureTimerEntry));
         g_frontendResourceState.ChromaKey = Cache_AllocateMemory(g_frontendResourceState.NTextures * sizeof(void *));
         texture = g_frontendResourceState.Texture = Cache_AllocateMemory(g_frontendResourceState.Header.TextureTableLen);
         XStdio_SeekStream(res->In, g_frontendResourceState.Header.TextureTable, 0);
@@ -626,7 +626,7 @@ void Node_OpenResourceArchive(u8 *name) {
     g_frontendResourceState.NScreens = g_frontendResourceState.Header.ScreenTableLen / sizeof(ArchiveMapEntry);
     if (g_frontendResourceState.NScreens > 0) {
         g_frontendResourceState.Screen = Cache_AllocateMemory(g_frontendResourceState.Header.ScreenTableLen);
-        if (D_800E2AC4 != 0) {
+        if (g_frontendArchiveResident != 0) {
             g_frontendResourceState.ScreenOriginal = Cache_AllocateMemory(g_frontendResourceState.Header.ScreenTableLen);
             XPlus_FillBytes(g_frontendResourceState.ScreenOriginal, 0, g_frontendResourceState.Header.ScreenTableLen);
         }
