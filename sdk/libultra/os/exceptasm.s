@@ -877,7 +877,7 @@ LEAF(__osCleanupThread)
 #elif VERSION_US
     nop
     .word   0x00134348
-    daddiu  at, t3, 0x6C74
+    daddiu  AT, t3, 0x6C74
 #else
     beqz    v0, . + 4 + 8
     addiu   s0, zero, 0x20
