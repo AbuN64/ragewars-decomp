@@ -434,8 +434,8 @@ finished:
 extern f32 Graphu64_GetSquaredDistance(f32 *firstPosition, f32 *secondPosition);
 extern void Particle_HandlePlayerContact(void *particle, void *player);
 
-const unsigned int g_particleTrailSpacingAndOwnerHeightConstants[2] = {
-    0x4123D70A, 0x3F000000,
+const float g_particleTrailSpacingAndOwnerHeightConstants[2] = {
+    10.24f, 0.5f,
 };
 void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
     CVector3 point;

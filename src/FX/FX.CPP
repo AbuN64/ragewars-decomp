@@ -2,8 +2,8 @@
 
 /* 800CB018.CPP */
 /* ROM-grounded data: src/g_FxWords1_Fx.c */
-const unsigned int g_FxWords1[2] = {
-    0x3F800000, 0x3F000000,
+const float g_FxWords1[2] = {
+    1.0f, 0.5f,
 };
 
 /* 800CB020.CPP */

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_matrixFixedRangeLimits_GMatrixfixedrangelimits.c */
-const unsigned int g_matrixFixedRangeLimits[2] = {
-    0x46FFFE00, 0xC6FFFE00,
+const float g_matrixFixedRangeLimits[2] = {
+    32767.0f, -32767.0f,
 };

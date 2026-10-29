@@ -9,7 +9,9 @@ unsigned char g_BitarrayTrailingBytes[8] = { 0xAF, 0xBF, 0x00, 0x18, 0xAF, 0xB1,
 /* 802609CC_7.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_80261658_eu_x[2] = { 0x44820000U, 0x46800020U };
+float func_80261658_eu_x[2] = {
+    1.04e+03f, 16384.062f,
+};
 #endif
 
 /* 802AFEEC_8.CPP */

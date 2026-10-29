@@ -6,8 +6,8 @@ const char k_GAnimationsindextextEncodedBytes[33] =
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int k_GAnimationsindextextEncodedWords[4] = {
-    0x3F800000, 0x3E000000, 0x3D19999A, 0x3F800000,
+const float k_GAnimationsindextextEncodedWords[4] = {
+    1.0f, 0.125f, 0.0375f, 1.0f,
 };
 
 const char g_animationsIndexText[17] =

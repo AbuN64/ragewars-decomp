@@ -9,8 +9,8 @@ const unsigned int k_navUpdateobjectarrivalchaseDataFloatConstantWords[2] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_NavUpdateobjectarrivalchaseEncodedWordsBlock2[2] = {
-    0x42400000, 0x437F0000,
+float k_NavUpdateobjectarrivalchaseEncodedWordsBlock2[2] = {
+    48.0f, 255.0f,
 };
 #endif
 

@@ -8,20 +8,21 @@ const unsigned int k_XmathEvaluatereciprocalsquarerootOneWords[1] = {
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWords[6] = {
-    0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000,
+const float k_xmathEvaluatereciprocalsquarerootDataFloatConstantWords[6] = {
+    176.0f, 0.0f, 0.0f, 0.0f, 1.875f, 0.0f,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock1[8] = {
-    0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000, 0x3FF00000, 0x00000000,
+const float k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock1[8] = {
+    176.0f, 0.0f, 0.0f, 0.0f, 1.875f, 0.0f,
+    1.875f, 0.0f,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock2[6] = {
-    0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000,
+const float k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock2[6] = {
+    176.0f, 0.0f, 0.0f, 0.0f, 1.875f, 0.0f,
 };
 #endif
 
@@ -80,16 +81,17 @@ const unsigned int k_XmathEvaluatereciprocalsquarerootOneWordsVariant1[1] = {
     0x3F800000,
 };
 
-const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock3[6] = {
-    0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000,
+const float k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock3[6] = {
+    176.0f, 0.0f, 0.0f, 0.0f, 1.875f, 0.0f,
 };
 
-const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock4[8] = {
-    0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000, 0x3FF00000, 0x00000000,
+const float k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock4[8] = {
+    176.0f, 0.0f, 0.0f, 0.0f, 1.875f, 0.0f,
+    1.875f, 0.0f,
 };
 
-const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock5[6] = {
-    0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000,
+const float k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock5[6] = {
+    176.0f, 0.0f, 0.0f, 0.0f, 1.875f, 0.0f,
 };
 
 /* ROM-grounded data: src/k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock5_XmathEvaluatereciprocalsquarerootData.c */

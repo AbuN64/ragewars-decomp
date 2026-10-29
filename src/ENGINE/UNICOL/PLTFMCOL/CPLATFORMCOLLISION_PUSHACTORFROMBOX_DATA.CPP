@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CplatformcollisionPushactorfromboxEncodedWords[3] = {
-    0x3ED1B717, 0x3ED1B717, 0x3ED1B717,
+const float k_CplatformcollisionPushactorfromboxEncodedWords[3] = {
+    0.4096f, 0.4096f, 0.4096f,
 };
 #endif
 

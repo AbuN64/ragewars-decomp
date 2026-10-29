@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
-const unsigned int g_Defs_CosineEaseConstantWords[4] = {
-    0x3F800000, 0x40490FDC, 0x3F800000, 0x3F000000,
+const float g_Defs_CosineEaseConstantWords[4] = {
+    1.0f, 3.141593f, 1.0f, 0.5f,
 };
 
 #if defined(VERSION_US)
@@ -11,8 +11,8 @@ unsigned int k_DefsCosineeaseEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_DefsCosineeaseEncodedWordsBlock3[2] = {
-    0x40F00000, 0x42080000,
+float k_DefsCosineeaseEncodedWordsBlock3[2] = {
+    7.5f, 34.0f,
 };
 #endif
 

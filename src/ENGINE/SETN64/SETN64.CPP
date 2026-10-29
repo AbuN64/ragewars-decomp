@@ -505,6 +505,6 @@ const unsigned int g_EngineSetn64RetainedWords1[1] = {
 
 /* 800CA498.CPP */
 /* ROM-grounded data: src/g_EngineSetn64RetainedWords2_Setn64.c */
-const unsigned int g_EngineSetn64RetainedWords2[2] = {
-    0x40F00000, 0x42080000,
+const float g_EngineSetn64RetainedWords2[2] = {
+    7.5f, 34.0f,
 };

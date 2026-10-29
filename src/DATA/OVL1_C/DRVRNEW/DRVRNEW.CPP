@@ -19,8 +19,8 @@ unsigned int k_DrvrnewEncodedWordsBlock1[2] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_DrvrnewEncodedWordsBlock2[2] = {
-    0x3F800000, 0x3FE52EDF,
+float k_DrvrnewEncodedWordsBlock2[2] = {
+    1.0f, 1.7904929f,
 };
 #endif
 

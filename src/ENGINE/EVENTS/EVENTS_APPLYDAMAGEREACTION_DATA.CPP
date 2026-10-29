@@ -1,5 +1,6 @@
 #include "include_asm.h"
 
-const unsigned int k_eventsApplydamagereactionDataFloatConstantWords[8] = {
-    0x3F800000, 0x41A00000, 0x3F800000, 0x41200000, 0x41400000, 0x4123D70A, 0x3F800000, 0x3F000000,
+const float k_eventsApplydamagereactionDataFloatConstantWords[8] = {
+    1.0f, 2.0e+01f, 1.0f, 1.0e+01f, 12.0f, 10.24f,
+    1.0f, 0.5f,
 };

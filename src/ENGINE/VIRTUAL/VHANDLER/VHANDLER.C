@@ -742,6 +742,6 @@ const unsigned char s_virtualRegionText[15] =
 #endif
 
 /* VHANDLER_4.CPP */
-const unsigned int k_vhandlerConstantWords[4] = {
-    0x358637BD, 0x40000000, 0x358637BD, 0x40000000,
+const float k_vhandlerConstantWords[4] = {
+    1.0e-06f, 2.0f, 1.0e-06f, 2.0f,
 };

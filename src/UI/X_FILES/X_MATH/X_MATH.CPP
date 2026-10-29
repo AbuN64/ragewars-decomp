@@ -2,8 +2,8 @@
 #include "COMMON/OBJRECAT3CV2.H"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_xMathFloatConstantWords[5] = {
-    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000,
+const float k_xMathFloatConstantWords[5] = {
+    1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
 };
 #endif
 
@@ -28,21 +28,21 @@ const unsigned int k_xMathFloatConstantWordsBlock2[9] = {
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_xMathFloatConstantWordsBlock3[2] = {
-    0x3F800000, 0x3F800000,
+const float k_xMathFloatConstantWordsBlock3[2] = {
+    1.0f, 1.0f,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_xMathFloatConstantWordsBlock4[2] = {
-    0x38D1B717, 0x3F800000,
+const float k_xMathFloatConstantWordsBlock4[2] = {
+    0.0001f, 1.0f,
 };
 #endif
 
 
 #if defined(VERSION_US_REV1)
-const unsigned int k_xMathFloatConstantWordsBlock6[5] = {
-    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000,
+const float k_xMathFloatConstantWordsBlock6[5] = {
+    1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
 };
 
 /* ROM-grounded data: src/k_XMathOneWordsVariant1_XMath.c */
@@ -61,13 +61,13 @@ const unsigned int k_xMathFloatConstantWordsBlock8[9] = {
 };
 
 /* ROM-grounded data: src/k_xMathFloatConstantWordsBlock9_XMath.c */
-const unsigned int k_xMathFloatConstantWordsBlock9[2] = {
-    0x3F800000, 0x3F800000,
+const float k_xMathFloatConstantWordsBlock9[2] = {
+    1.0f, 1.0f,
 };
 
 /* ROM-grounded data: src/k_xMathFloatConstantWordsBlock10_XMath.c */
-const unsigned int k_xMathFloatConstantWordsBlock10[2] = {
-    0x38D1B717, 0x3F800000,
+const float k_xMathFloatConstantWordsBlock10[2] = {
+    0.0001f, 1.0f,
 };
 
 

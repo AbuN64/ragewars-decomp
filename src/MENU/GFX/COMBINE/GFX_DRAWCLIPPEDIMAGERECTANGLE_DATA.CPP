@@ -14,6 +14,6 @@ const unsigned int g_combine_DrawClippedImageRectangleConstantWords1[1] = {
 
 /* 800E1434.CPP */
 /* ROM-grounded data: src/g_combine_DrawClippedImageRectangleConstantWords2_GfxDrawclippedimagerectangleData.c */
-const unsigned int g_combine_DrawClippedImageRectangleConstantWords2[3] = {
-    0x44800000, 0x44800000, 0x44800000,
+const float g_combine_DrawClippedImageRectangleConstantWords2[3] = {
+    1024.0f, 1024.0f, 1024.0f,
 };

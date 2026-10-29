@@ -26,8 +26,8 @@ const unsigned int g_trackNormalizedVolumeScale[1] = {
 };
 
 /* ROM-grounded data: src/g_trackContextVolumePercentScales_TrackSequenceAndVolume.c */
-const unsigned int g_trackContextVolumePercentScales[2] = {
-    0x3C23D70A, 0x3C23D70A,
+const float g_trackContextVolumePercentScales[2] = {
+    0.01f, 0.01f,
 };
 
 extern f32 g_sequencerContextVolumeScale;
@@ -118,8 +118,8 @@ const unsigned int g_trackContextVolumeScale[1] = {
 };
 
 /* ROM-grounded data: src/g_trackSequenceVolumeFactors_TrackSequenceAndVolume.c */
-const unsigned int g_trackSequenceVolumeFactors[2] = {
-    0x3C23D70A, 0x46FFFE00,
+const float g_trackSequenceVolumeFactors[2] = {
+    0.01f, 32767.0f,
 };
 
 #if defined(VERSION_EU_X)

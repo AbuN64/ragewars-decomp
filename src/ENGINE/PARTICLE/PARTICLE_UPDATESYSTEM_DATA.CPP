@@ -2,12 +2,12 @@
 
 /* 800C9F3C.CPP */
 /* ROM-grounded data: src/g_Particle_UpdateSystemConstantsUsRev1_ParticleUpdatesystemData.c */
-const unsigned int g_Particle_UpdateSystemConstantsUsRev1[2] = {
-    0x3B808081, 0x47800000,
+const float g_Particle_UpdateSystemConstantsUsRev1[2] = {
+    0.003921569f, 65536.0f,
 };
 
 /* 800C9F44.CPP */
 /* ROM-grounded data: src/g_Particle_DrawRenderListConstantsUsRev1_ParticleUpdatesystemData.c */
-const unsigned int g_Particle_DrawRenderListConstantsUsRev1[2] = {
-    0x3FB504F3, 0x3F000000,
+const float g_Particle_DrawRenderListConstantsUsRev1[2] = {
+    1.4142135f, 0.5f,
 };

@@ -2,8 +2,9 @@
 #include "COMMON/ALFXPARAM.H"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_lookatFloatConstantWords[7] = {
-    0xBF800000, 0x3F800000, 0x3F800000, 0x47800000, 0x3F800000, 0x47800000, 0x37800000,
+const float k_lookatFloatConstantWords[7] = {
+    -1.0f, 1.0f, 1.0f, 65536.0f, 1.0f, 65536.0f,
+    1.5258789e-05f,
 };
 #endif
 
@@ -14,20 +15,20 @@ unsigned int k_LookatEncodedWordsBlock2[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_LookatEncodedWordsBlock1[3] = {
-    0x3F000000, 0xBF800000, 0x40000000,
+float k_LookatEncodedWordsBlock1[3] = {
+    0.5f, -1.0f, 2.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_LookatSignedUnitBoundsWordsVariant1_Lookat.c */
-const unsigned int k_LookatSignedUnitBoundsWordsVariant1[2] = {
-    0xBF800000, 0x3F800000,
+const float k_LookatSignedUnitBoundsWordsVariant1[2] = {
+    -1.0f, 1.0f,
 };
 
 /* ROM-grounded data: src/k_lookatFloatConstantWordsBlock1_Lookat.c */
-const unsigned int k_lookatFloatConstantWordsBlock1[2] = {
-    0x3F800000, 0x47800000,
+const float k_lookatFloatConstantWordsBlock1[2] = {
+    1.0f, 65536.0f,
 };
 
 /* ROM-grounded data: src/k_LookatOneWords_Lookat.c */

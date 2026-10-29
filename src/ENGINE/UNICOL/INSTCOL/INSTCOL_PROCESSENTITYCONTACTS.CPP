@@ -396,7 +396,7 @@ unsigned int k_InstcolProcessentitycontactsEncodedWordsBlock2[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_InstcolProcessentitycontactsEncodedWordsBlock1[3] = {
-    0x3F800000, 0xBF800000, 0x3F800000,
+float k_InstcolProcessentitycontactsEncodedWordsBlock1[3] = {
+    1.0f, -1.0f, 1.0f,
 };
 #endif

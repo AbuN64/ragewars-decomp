@@ -12,7 +12,7 @@ unsigned int g_xprintfConstantWords[22] = {
 /* 800C8554.CPP */
 #if defined(VERSION_EU)
 /* ROM-grounded data for eu; supplied-list member has no us-rev1 placement. */
-unsigned int g_xprintfFloatConstantWords[3] = {
-    0x42FE0000, 0x45E00000, 0x3DC80000,
+float g_xprintfFloatConstantWords[3] = {
+    127.0f, 7168.0f, 0.09765625f,
 };
 #endif

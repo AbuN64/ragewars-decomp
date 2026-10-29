@@ -2,9 +2,9 @@
 #include "COMMON/ALFXPARAM.H"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_saveFloatConstantWords[9] = {
-    0x41F00000, 0x00000000, 0x36C1D168, 0x47000000, 0x38000000, 0x3F800000, 0x40000000, 0x40800000,
-    0x3F800000,
+const float k_saveFloatConstantWords[9] = {
+    3.0e+01f, 0.0f, 5.7762263e-06f, 32768.0f, 3.0517578e-05f, 1.0f,
+    2.0f, 4.0f, 1.0f,
 };
 #endif
 
@@ -14,17 +14,17 @@ char s_SaveAudioSaveCText[12] =
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int k_saveFloatConstantWordsBlock1[3] = {
-    0x41F00000, 0x00000000, 0x36C1D168,
+const float k_saveFloatConstantWordsBlock1[3] = {
+    3.0e+01f, 0.0f, 5.7762263e-06f,
 };
 
 /* ROM-grounded data: src/k_saveFloatConstantWordsBlock2_Save.c */
-const unsigned int k_saveFloatConstantWordsBlock2[3] = {
-    0x47000000, 0x38000000, 0x3F800000,
+const float k_saveFloatConstantWordsBlock2[3] = {
+    32768.0f, 3.0517578e-05f, 1.0f,
 };
 
 /* ROM-grounded data: src/k_saveFloatConstantWordsBlock3_Save.c */
-const unsigned int k_saveFloatConstantWordsBlock3[3] = {
-    0x40000000, 0x40800000, 0x3F800000,
+const float k_saveFloatConstantWordsBlock3[3] = {
+    2.0f, 4.0f, 1.0f,
 };
 #endif

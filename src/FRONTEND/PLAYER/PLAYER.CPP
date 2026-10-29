@@ -24,8 +24,9 @@ const unsigned int g_PlayerWords2[1] = {
 #endif
 
 /* 800E1FC4.CPP */
-const unsigned int g_PlayerWords1[7] = {
-    0x3B656042, 0x40A00000, 0xC2C80000, 0x41E00000, 0x41400000, 0xC0400000, 0xC1900000,
+const float g_PlayerWords1[7] = {
+    0.0035f, 5.0f, -1.0e+02f, 28.0f, 12.0f, -3.0f,
+    -18.0f,
 };
 
 /* 8043A0B0_6.CPP */

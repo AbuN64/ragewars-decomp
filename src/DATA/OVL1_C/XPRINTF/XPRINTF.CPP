@@ -2,8 +2,8 @@
 
 /* 800CCF10.CPP */
 /* ROM-grounded data: src/k_xprintfFloatConstantWords_Xprintf.c */
-const unsigned int k_xprintfFloatConstantWords[4] = {
-    0x40800000, 0x3F800000, 0x3B490FDB, 0x3C490FDB,
+const float k_xprintfFloatConstantWords[4] = {
+    4.0f, 1.0f, 0.0030679617f, 0.012271847f,
 };
 
 /* 800CCF20.CPP */

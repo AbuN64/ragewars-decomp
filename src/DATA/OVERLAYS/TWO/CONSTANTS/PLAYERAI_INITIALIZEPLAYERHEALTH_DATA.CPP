@@ -208,8 +208,8 @@ u32 k_weaponStateRecordsUs[1026] = {
 /* 800CA434.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CA434 */
-unsigned int g_PlayeraiInitializeplayerhealthEncodedWordsBlock1[3] = {
-    0x43960000, 0x437F0000, 0x43960000,
+float g_PlayeraiInitializeplayerhealthEncodedWordsBlock1[3] = {
+    3.0e+02f, 255.0f, 3.0e+02f,
 };
 #endif
 

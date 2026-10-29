@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/k_barrelSpawneffectsfrommaskDataFloatConstantWords_BarrelSpawneffectsfrommaskData.c */
-const unsigned int k_barrelSpawneffectsfrommaskDataFloatConstantWords[2] = {
-    0x43E10000, 0x44160000,
+const float k_barrelSpawneffectsfrommaskDataFloatConstantWords[2] = {
+    4.5e+02f, 6.0e+02f,
 };
 
 #if defined(VERSION_US)

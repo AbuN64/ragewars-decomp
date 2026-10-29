@@ -4,7 +4,7 @@
 
 /* g_specialPickupShieldDurationEu_PickupApplyspecialpickupData.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int g_specialPickupShieldDurationEu[2] = {
-    0x42F00000, 0x42F00000,
+const float g_specialPickupShieldDurationEu[2] = {
+    1.2e+02f, 1.2e+02f,
 };
 #endif

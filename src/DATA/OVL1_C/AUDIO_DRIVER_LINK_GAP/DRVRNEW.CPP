@@ -2,14 +2,15 @@
 #include "COMMON/ALFXPARAM.H"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_alFxNewConstantWords_de_eu_eu_x_us[7] = {
-    0x41F00000, 0x00000000, 0x36C1D168, 0x3F800000, 0x3F100000, 0x00000000, 0x3F800000,
+const float g_alFxNewConstantWords_de_eu_eu_x_us[7] = {
+    3.0e+01f, 0.0f, 5.7762263e-06f, 1.0f, 0.5625f, 0.0f,
+    1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int g_alFxNewConstantWords_us_rev1[6] = {
-    0x41F00000, 0x00000000, 0x36C1D168, 0x3F800000, 0x3F100000, 0x00000000,
+const float g_alFxNewConstantWords_us_rev1[6] = {
+    3.0e+01f, 0.0f, 5.7762263e-06f, 1.0f, 0.5625f, 0.0f,
 };
 
 /* ROM-grounded data: src/k_alResampleNewConstantOne_us_rev1.c */

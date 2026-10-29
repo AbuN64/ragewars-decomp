@@ -108,16 +108,17 @@ unsigned int g_overlayOneIPreviewConstantWordsBlock2[1] = {
     0x00000016,
 };
 
-unsigned int g_overlayOneIPreviewFloatConstantWords[8] = {
-    0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x43200000, 0x43480000, 0x43200000, 0x43520000,
+float g_overlayOneIPreviewFloatConstantWords[8] = {
+    0.11f, 0.11f, 0.11f, 0.11f, 1.6e+02f, 2.0e+02f,
+    1.6e+02f, 2.1e+02f,
 };
 #endif
 
 /* g_overlayOneIPreviewFloatConstantWordsBlock1_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_overlayOneIPreviewFloatConstantWordsBlock1[12] = {
-    0x42240000, 0xC2140000, 0xC2C80000, 0xC2180000, 0xC2140000, 0xC2C80000, 0x42080000, 0xC2940000,
-    0xC2A00000, 0xC1F00000, 0xC2940000, 0xC2A00000,
+float g_overlayOneIPreviewFloatConstantWordsBlock1[12] = {
+    41.0f, -37.0f, -1.0e+02f, -38.0f, -37.0f, -1.0e+02f,
+    34.0f, -74.0f, -8.0e+01f, -3.0e+01f, -74.0f, -8.0e+01f,
 };
 #endif
 
@@ -148,16 +149,17 @@ unsigned int g_overlayOneIPreviewConstantWordsBlock5[1] = {
     0x0000001D,
 };
 
-unsigned int g_overlayOneIPreviewFloatConstantWordsBlock2[8] = {
-    0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x43200000, 0x43430000, 0x43200000, 0x43430000,
+float g_overlayOneIPreviewFloatConstantWordsBlock2[8] = {
+    0.14f, 0.14f, 0.14f, 0.14f, 1.6e+02f, 195.0f,
+    1.6e+02f, 195.0f,
 };
 #endif
 
 /* g_overlayOneIPreviewFloatConstantWordsBlock3_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_overlayOneIPreviewFloatConstantWordsBlock3[12] = {
-    0x42200000, 0xC2540000, 0xC2C80000, 0xC2200000, 0xC2540000, 0xC2C80000, 0x42000000, 0xC2B60000,
-    0xC2A00000, 0xC20C0000, 0xC2B60000, 0xC2A00000,
+float g_overlayOneIPreviewFloatConstantWordsBlock3[12] = {
+    4.0e+01f, -53.0f, -1.0e+02f, -4.0e+01f, -53.0f, -1.0e+02f,
+    32.0f, -91.0f, -8.0e+01f, -35.0f, -91.0f, -8.0e+01f,
 };
 #endif
 
@@ -188,16 +190,17 @@ unsigned int g_overlayOneIPreviewConstantWordsBlock8[1] = {
     0x0000001A,
 };
 
-unsigned int g_overlayOneIPreviewFloatConstantWordsBlock4[8] = {
-    0x3D851EB8, 0x3D851EB8, 0x3D851EB8, 0x3D851EB8, 0x43200000, 0x43480000, 0x43200000, 0x43480000,
+float g_overlayOneIPreviewFloatConstantWordsBlock4[8] = {
+    0.065f, 0.065f, 0.065f, 0.065f, 1.6e+02f, 2.0e+02f,
+    1.6e+02f, 2.0e+02f,
 };
 #endif
 
 /* g_overlayOneIPreviewFloatConstantWordsBlock5_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_overlayOneIPreviewFloatConstantWordsBlock5[12] = {
-    0x421C0000, 0xC20C0000, 0xC2C80000, 0xC21C0000, 0xC20C0000, 0xC2C80000, 0x42000000, 0xC2900000,
-    0xC2A00000, 0xC2000000, 0xC2900000, 0xC2A00000,
+float g_overlayOneIPreviewFloatConstantWordsBlock5[12] = {
+    39.0f, -35.0f, -1.0e+02f, -39.0f, -35.0f, -1.0e+02f,
+    32.0f, -72.0f, -8.0e+01f, -32.0f, -72.0f, -8.0e+01f,
 };
 #endif
 
@@ -228,16 +231,17 @@ unsigned int g_overlayOneIPreviewConstantWordsBlock11[1] = {
     0x00000014,
 };
 
-unsigned int g_overlayOneIPreviewFloatConstantWordsBlock6[8] = {
-    0x3D6147AE, 0x3D6147AE, 0x3D6147AE, 0x3D6147AE, 0x431B0000, 0x43480000, 0x43200000, 0x43480000,
+float g_overlayOneIPreviewFloatConstantWordsBlock6[8] = {
+    0.055f, 0.055f, 0.055f, 0.055f, 155.0f, 2.0e+02f,
+    1.6e+02f, 2.0e+02f,
 };
 #endif
 
 /* g_overlayOneIPreviewFloatConstantWordsBlock7_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_overlayOneIPreviewFloatConstantWordsBlock7[12] = {
-    0x42200000, 0xC20C0000, 0xC2C80000, 0xC2200000, 0xC20C0000, 0xC2C80000, 0x41F00000, 0xC2900000,
-    0xC2A00000, 0xC2040000, 0xC2900000, 0xC2A00000,
+float g_overlayOneIPreviewFloatConstantWordsBlock7[12] = {
+    4.0e+01f, -35.0f, -1.0e+02f, -4.0e+01f, -35.0f, -1.0e+02f,
+    3.0e+01f, -72.0f, -8.0e+01f, -33.0f, -72.0f, -8.0e+01f,
 };
 #endif
 

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US))
-const unsigned int k_ItemEncodedWords[3] = {
-    0x437F0000, 0x437F0000, 0x437F0000,
+const float k_ItemEncodedWords[3] = {
+    255.0f, 255.0f, 255.0f,
 };
 #endif
 

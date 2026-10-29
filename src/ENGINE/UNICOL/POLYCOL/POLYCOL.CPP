@@ -25,7 +25,7 @@ unsigned int k_PolycolEncodedWordsBlock2[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_PolycolEncodedWords_Polycol.c */
-const unsigned int k_PolycolEncodedWords[2] = {
-    0x3F333333, 0x3F333333,
+const float k_PolycolEncodedWords[2] = {
+    0.7f, 0.7f,
 };
 #endif

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CcollisionTestsegmentdiskEncodedWords[3] = {
-    0x4123D70A, 0x4123D70A, 0x4123D70A,
+const float k_CcollisionTestsegmentdiskEncodedWords[3] = {
+    10.24f, 10.24f, 10.24f,
 };
 #endif
 

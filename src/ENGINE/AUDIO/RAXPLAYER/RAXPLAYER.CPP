@@ -191,8 +191,8 @@ char s_RaxplayerEHAVIORText[8] =
 #endif
 
 /* ROM-grounded data: src/g_audio_LoadDialogMetadataConstantWords_Raxplayer.c */
-const unsigned int g_audio_LoadDialogMetadataConstantWords[3] = {
-    0x41F00000, 0x00000000, 0x3C23D70A,
+const float g_audio_LoadDialogMetadataConstantWords[3] = {
+    3.0e+01f, 0.0f, 0.01f,
 };
 
 #if defined(VERSION_EU)
@@ -202,7 +202,7 @@ unsigned int k_RaxplayerEncodedWordsBlock1[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_RaxplayerEncodedWords[3] = {
-    0x3C23D70A, 0x46FFFE00, 0x3C23D70A,
+float k_RaxplayerEncodedWords[3] = {
+    0.01f, 32767.0f, 0.01f,
 };
 #endif

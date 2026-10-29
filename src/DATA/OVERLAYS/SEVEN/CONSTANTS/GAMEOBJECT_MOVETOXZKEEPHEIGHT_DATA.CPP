@@ -30,6 +30,6 @@ unsigned int g_GameobjectMovetoxzkeepheightWords2[8] = {
 
 /* 800D0670.CPP */
 /* ROM-grounded data: src/k_moveToXzKeepHeightPoolPair_us_rev1.c */
-const unsigned int g_GameobjectMovetoxzkeepheightWords1[2] = {
-    0x3E99999A, 0x40400000,
+const float g_GameobjectMovetoxzkeepheightWords1[2] = {
+    0.3f, 3.0f,
 };

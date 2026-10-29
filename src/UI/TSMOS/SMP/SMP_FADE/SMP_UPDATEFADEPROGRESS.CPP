@@ -63,7 +63,8 @@ s32 Smp_UpdateFadeProgress(MenuFadeWidget *object) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-const unsigned int g_fadeProgressConstants[8] = {
-    0x3F800000, 0x3C23D70A, 0x3F99999A, 0x3D4CCCCD, 0x3F800000, 0x3C23D70A, 0x3F800000, 0x3C23D70A,
+const float g_fadeProgressConstants[8] = {
+    1.0f, 0.01f, 1.2f, 0.05f, 1.0f, 0.01f,
+    1.0f, 0.01f,
 };
 #endif

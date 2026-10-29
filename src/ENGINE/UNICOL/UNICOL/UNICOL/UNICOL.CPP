@@ -2,16 +2,16 @@
 
 /* 800C37E4.CPP */
 #if defined(VERSION_DE)
-unsigned int g_UnicolEncodedWordsBlock1[3] = {
-    0x40400000, 0x3F800000, 0x3C0EFA36,
+float g_UnicolEncodedWordsBlock1[3] = {
+    3.0f, 1.0f, 0.008726647f,
 };
 #endif
 
 /* 800C8710_15.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_UnicolEncodedWords[9] = {
-    0x3F000000, 0x3F000000, 0x3F800000, 0x3EB33333, 0x3F800000, 0x423E0000, 0x3F800000, 0x4123D70A,
-    0x3D888889,
+const float k_UnicolEncodedWords[9] = {
+    0.5f, 0.5f, 1.0f, 0.35f, 1.0f, 47.5f,
+    1.0f, 10.24f, 0.06666667f,
 };
 #endif
 
@@ -22,8 +22,8 @@ unsigned int k_UnicolEncodedWordsBlock7[3] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_UnicolEncodedWordsBlock11[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
+float k_UnicolEncodedWordsBlock11[3] = {
+    1.0f, 1.0f, 1.0f,
 };
 #endif
 
@@ -34,8 +34,8 @@ unsigned int k_UnicolEncodedWordsBlock9[3] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int k_UnicolEncodedWordsBlock2[4] = {
-    0x3F000000, 0x3F000000, 0x3F800000, 0x3EB33333,
+const float k_UnicolEncodedWordsBlock2[4] = {
+    0.5f, 0.5f, 1.0f, 0.35f,
 };
 
 /* ROM-grounded data: src/k_UnicolOneWords_Unicol.c */
@@ -44,8 +44,8 @@ const unsigned int k_UnicolOneWords[1] = {
 };
 
 /* ROM-grounded data: src/k_UnicolEncodedWordsBlock5_Unicol.c */
-const unsigned int k_UnicolEncodedWordsBlock5[2] = {
-    0x423E0000, 0x3F800000,
+const float k_UnicolEncodedWordsBlock5[2] = {
+    47.5f, 1.0f,
 };
 
 /* ROM-grounded data: src/k_UnicolEncodedWordsBlock3_Unicol.c */
@@ -61,7 +61,7 @@ const unsigned int k_UnicolEncodedWordsBlock4[1] = {
 
 /* 800C88D4.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_UnicolEncodedWordsBlock2[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
+float g_UnicolEncodedWordsBlock2[3] = {
+    1.0f, 1.0f, 1.0f,
 };
 #endif

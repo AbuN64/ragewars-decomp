@@ -2,16 +2,16 @@
 
 /* 800C9E9C.CPP */
 #if defined(VERSION_US)
-unsigned int k_SceneLoadlevelresourcesEncodedWords[6] = {
-    0xC3040000, 0x42800000, 0x42800000, 0x41C00000, 0xC1400000, 0xC2400000,
+float k_SceneLoadlevelresourcesEncodedWords[6] = {
+    -132.0f, 64.0f, 64.0f, 24.0f, -12.0f, -48.0f,
 };
 #endif
 
 /* 800C9F94.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C9F94 */
-unsigned int g_SceneLoadlevelresourcesEncodedWordsBlock1[3] = {
-    0x3F800000, 0x40480000, 0x00000000,
+float g_SceneLoadlevelresourcesEncodedWordsBlock1[3] = {
+    1.0f, 3.125f, 0.0f,
 };
 #endif
 

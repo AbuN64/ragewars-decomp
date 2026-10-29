@@ -36,8 +36,8 @@ extern void *Playerai_GetFirstPlayer(void *);
 
 extern s32 Scene_GetModelSectionTwoIndex(Shared_World *table, s32 id);
 
-const unsigned int k_ControlCycleactorsnapshotmodeEncodedWords[3] = {
-    0x3F800000, 0x3F800000, 0x3B808081,
+const float k_ControlCycleactorsnapshotmodeEncodedWords[3] = {
+    1.0f, 1.0f, 0.003921569f,
 };
 void Control_SetProfileMode(ControllerProfile *slot, s32 profileMode) {
     slot->mode = profileMode;

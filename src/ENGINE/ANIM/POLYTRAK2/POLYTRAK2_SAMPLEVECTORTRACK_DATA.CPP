@@ -2,10 +2,11 @@
 
 /* 800C9130.CPP */
 #if defined(VERSION_US_REV1)
-const unsigned int k_Polytrak2SamplevectortrackEncodedWords[21] = {
-    0x41F00000, 0x00000000, 0x41F00000, 0x00000000, 0x41F00000, 0x00000000, 0x41F00000, 0x00000000,
-    0x41F00000, 0x00000000, 0x41F00000, 0x00000000, 0x41F00000, 0x00000000, 0x41F00000, 0x00000000,
-    0x41F00000, 0x00000000, 0x41F00000, 0x00000000, 0x3F800000,
+const float k_Polytrak2SamplevectortrackEncodedWords[21] = {
+    3.0e+01f, 0.0f, 3.0e+01f, 0.0f, 3.0e+01f, 0.0f,
+    3.0e+01f, 0.0f, 3.0e+01f, 0.0f, 3.0e+01f, 0.0f,
+    3.0e+01f, 0.0f, 3.0e+01f, 0.0f, 3.0e+01f, 0.0f,
+    3.0e+01f, 0.0f, 1.0f,
 };
 #endif
 

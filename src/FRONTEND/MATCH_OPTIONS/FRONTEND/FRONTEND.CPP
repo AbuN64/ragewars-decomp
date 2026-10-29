@@ -8,8 +8,8 @@
 /* 80423280_2.CPP */
 /* 80423280_2.CPP */
 #if defined(VERSION_DE)
-unsigned int k_FrontendEncodedWordsBlock9[2] = {
-    0x41500000, 0xC2480000,
+float k_FrontendEncodedWordsBlock9[2] = {
+    13.0f, -5.0e+01f,
 };
 #endif
 

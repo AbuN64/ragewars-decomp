@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-unsigned int func_8042DBC8_us_rev1_padding_19BBC8[2] = {
-    0x494E4B2E, 0x481CEF00,
+float func_8042DBC8_us_rev1_padding_19BBC8[2] = {
+    844978.9f, 1.607e+05f,
 };
 #endif
 

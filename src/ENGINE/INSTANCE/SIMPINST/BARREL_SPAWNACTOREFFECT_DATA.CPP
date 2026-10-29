@@ -200,25 +200,25 @@ void Simpinst_BuildLitGeometryResource(void *wanted, s32 **resourcePair) {
 }
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_simpleObjectScaleTransitionConstants[4] = {
-    0x3D888889, 0x3F400000, 0x3EEEEEEF, 0x3EB33333,
+const float g_simpleObjectScaleTransitionConstants[4] = {
+    0.06666667f, 0.75f, 0.46666667f, 0.35f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int g_simpleObjectScaleTransitionConstantsUsRev1[4] = {
-    0x3D888889, 0x3F400000, 0x3EEEEEEF, 0x3EB33333,
+const float g_simpleObjectScaleTransitionConstantsUsRev1[4] = {
+    0.06666667f, 0.75f, 0.46666667f, 0.35f,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_simpleObjectAlternateScaleTransitionConstants[4] = {
-    0x3D888889, 0x3F400000, 0x3EEEEEEF, 0x3EB33333,
+const float g_simpleObjectAlternateScaleTransitionConstants[4] = {
+    0.06666667f, 0.75f, 0.46666667f, 0.35f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int g_simpleObjectAlternateScaleTransitionConstantsUsRev1[4] = {
-    0x3D888889, 0x3F400000, 0x3EEEEEEF, 0x3EB33333,
+const float g_simpleObjectAlternateScaleTransitionConstantsUsRev1[4] = {
+    0.06666667f, 0.75f, 0.46666667f, 0.35f,
 };
 #endif

@@ -1,12 +1,12 @@
 #include "include_asm.h"
 
 /* 800C9040.CPP */
-const unsigned int g_channel_UpdateDistancePitchFactorConstantWords[4] = {
-    0x3F800000, 0x3F800000, 0x3FB33333, 0x3F19999A,
+const float g_channel_UpdateDistancePitchFactorConstantWords[4] = {
+    1.0f, 1.0f, 1.4f, 0.6f,
 };
 
 /* 800C9050.CPP */
 /* ROM-grounded data: src/g_channel_UpdateVoicePitchConstantWords_Channel.c */
-const unsigned int g_channel_UpdateVoicePitchConstantWords[2] = {
-    0x45BB8000, 0x3C888889,
+const float g_channel_UpdateVoicePitchConstantWords[2] = {
+    6.0e+03f, 0.016666668f,
 };

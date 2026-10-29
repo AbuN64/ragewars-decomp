@@ -914,8 +914,8 @@ const unsigned int k_VoiceOneWords[1] = {
 
 /* 800C906C.CPP */
 /* ROM-grounded data: src/g_audio_InitializeVoicePoolConstantWordsUsRev1.c */
-const unsigned int g_audio_InitializeVoicePoolConstantWords[3] = {
-    0x3C360B61, 0x46FA0000, 0x3F800000,
+const float g_audio_InitializeVoicePoolConstantWords[3] = {
+    0.011111111f, 3.2e+04f, 1.0f,
 };
 
 /* 800C9078.CPP */
@@ -934,14 +934,14 @@ const unsigned int g_audio_ComputeDistanceAttenuationConstantWords2[1] = {
 
 /* 800C907C.CPP */
 /* ROM-grounded data: src/g_audio_InterpolatePitchTableConstantWordsUsRev1.c */
-const unsigned int g_audio_InterpolatePitchTableConstantWords[2] = {
-    0x45BB8000, 0x3C888889,
+const float g_audio_InterpolatePitchTableConstantWords[2] = {
+    6.0e+03f, 0.016666668f,
 };
 
 /* 800C9084.CPP */
 /* ROM-grounded data: src/g_audio_RandomizeScaledByteRangeConstantWordsUsRev1.c */
-const unsigned int g_audio_RandomizeScaledByteRangeConstantWords[2] = {
-    0x3C23D70A, 0x3F800000,
+const float g_audio_RandomizeScaledByteRangeConstantWords[2] = {
+    0.01f, 1.0f,
 };
 
 /* 800C908C.CPP */

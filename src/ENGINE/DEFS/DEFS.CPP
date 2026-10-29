@@ -440,15 +440,15 @@ unsigned int k_DefsEncodedWordsBlock2[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_DefsEncodedWordsBlock1[3] = {
-    0x41A00000, 0x3F800000, 0x41200000,
+float k_DefsEncodedWordsBlock1[3] = {
+    2.0e+01f, 1.0f, 1.0e+01f,
 };
 #endif
 
 /* g_DefsEncodedWords_Defs.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C9498 */
-unsigned int g_DefsEncodedWords[2] = {
-    0x40F00000, 0x42080000,
+float g_DefsEncodedWords[2] = {
+    7.5f, 34.0f,
 };
 #endif

@@ -1,7 +1,7 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int g_Setn64ResumeselectedsessionEncodedWords[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
+float g_Setn64ResumeselectedsessionEncodedWords[3] = {
+    1.0f, 1.0f, 1.0f,
 };
 
 /* ROM-grounded data: rodata/unresolved/800D2998 */

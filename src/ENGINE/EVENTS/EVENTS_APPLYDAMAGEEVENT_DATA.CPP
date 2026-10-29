@@ -1,9 +1,10 @@
 #include "include_asm.h"
 
 /* 800C94D0.CPP */
-const unsigned int k_eventsApplydamageeventDataFloatConstantWords[16] = {
-    0x3F000000, 0x3D23D70A, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3D23D70A, 0x42CCCCCC,
-    0x3F2AAAB0, 0x3E800000, 0x42960000, 0x41300000, 0x3F2AAAB0, 0x3E800000, 0x42960000, 0x41300000,
+const float k_eventsApplydamageeventDataFloatConstantWords[16] = {
+    0.5f, 0.04f, 1.0f, 1.0f, 1.0f, 1.0f,
+    0.04f, 102.399994f, 0.666667f, 0.25f, 75.0f, 11.0f,
+    0.666667f, 0.25f, 75.0f, 11.0f,
 };
 
 /* 800C9510.CPP */
@@ -13,6 +14,6 @@ const unsigned int k_EventsApplydamageeventOneWords[1] = {
 };
 
 /* 800C9514.CPP */
-const unsigned int k_eventsApplydamageeventDataFloatConstantWordsBlock1[3] = {
-    0x3F800000, 0x40200000, 0x3EB33333,
+const float k_eventsApplydamageeventDataFloatConstantWordsBlock1[3] = {
+    1.0f, 2.5f, 0.35f,
 };

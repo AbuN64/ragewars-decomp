@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CcollisionIntersectfrontplanefractionEncodedWords[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
+const float k_CcollisionIntersectfrontplanefractionEncodedWords[3] = {
+    1.0f, 1.0f, 1.0f,
 };
 #endif
 
@@ -24,8 +24,8 @@ unsigned int k_CcollisionIntersectfrontplanefractionEncodedWordsBlock2[2] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_CcollisionIntersectfrontplanefractionEncodedWordsBlock1[2] = {
-    0x3ED1B717, 0x3ED1B717,
+float k_CcollisionIntersectfrontplanefractionEncodedWordsBlock1[2] = {
+    0.4096f, 0.4096f,
 };
 #endif
 

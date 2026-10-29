@@ -333,8 +333,8 @@ const unsigned int g_LinkDispatchmatchingtriggersWords1[1] = {
 };
 
 #if defined(VERSION_DE)
-unsigned int k_LinkDispatchmatchingtriggersEncodedWords[3] = {
-    0x3F800000, 0x3F800000, 0x40E00000,
+float k_LinkDispatchmatchingtriggersEncodedWords[3] = {
+    1.0f, 1.0f, 7.0f,
 };
 #endif
 

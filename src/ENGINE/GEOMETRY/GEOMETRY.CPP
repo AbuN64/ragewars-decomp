@@ -58,8 +58,8 @@ const char s_simpModelText[11] =
 /* GEOMETRY_7.CPP */
 /* 800C9790.CPP */
 /* ROM-grounded data: src/g_geometryModelDistanceConstants_Geometry.c */
-const unsigned int g_geometryModelDistanceConstants[2] = {
-    0x42A00000, 0x43200000,
+const float g_geometryModelDistanceConstants[2] = {
+    8.0e+01f, 1.6e+02f,
 };
 
 /* 800C9798.CPP */

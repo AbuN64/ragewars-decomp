@@ -620,8 +620,8 @@ const unsigned int g_geometryInitialModelScale[1] = {
 #endif
 
 #if defined(VERSION_DE)
-const unsigned int g_geometryMaterialSetupConstantsDe[3] = {
-    0x41700000, 0x40A00000, 0x43800000,
+const float g_geometryMaterialSetupConstantsDe[3] = {
+    15.0f, 5.0f, 256.0f,
 };
 #endif
 

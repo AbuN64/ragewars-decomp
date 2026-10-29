@@ -7,8 +7,8 @@ unsigned int k_MenuModelPreviewTuningAndFragmentsEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_MenuModelPreviewTuningAndFragmentsEncodedWordsBlock2[2] = {
-    0x3C8EFA36, 0x3F800000,
+float k_MenuModelPreviewTuningAndFragmentsEncodedWordsBlock2[2] = {
+    0.017453294f, 1.0f,
 };
 #endif
 

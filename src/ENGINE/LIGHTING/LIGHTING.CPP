@@ -215,8 +215,8 @@ fail:
 }
 
 /* 800C9BB0.CPP */
-const unsigned int g_lightVolumeEvaluationConstantsUsRev1[6] = {
-    0x3F800000, 0xBF800000, 0x42800000, 0x42800000, 0x3F800000, 0x3F800000,
+const float g_lightVolumeEvaluationConstantsUsRev1[6] = {
+    1.0f, -1.0f, 64.0f, 64.0f, 1.0f, 1.0f,
 };
 
 /* 80277444_2.CPP */

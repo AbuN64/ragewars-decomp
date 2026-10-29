@@ -253,11 +253,11 @@ unsigned int k_BitarrayEncodedWords[2] = {
 #endif
 
 /* ROM-grounded data: rodata/unresolved/800C9290 */
-const unsigned int g_motionRotationQuantizationScale_StorageWords[2] = {
-    0xBF800000, 0x3F800000,
+const float g_motionRotationQuantizationScale_StorageWords[2] = {
+    -1.0f, 1.0f,
 };
 
 /* ROM-grounded data: src/g_motionQuantizationRangeAndUnit_StorageWords.c */
-const unsigned int g_motionQuantizationRangeAndUnit_StorageWords[2] = {
-    0x3F000000, 0x3F800000,
+const float g_motionQuantizationRangeAndUnit_StorageWords[2] = {
+    0.5f, 1.0f,
 };

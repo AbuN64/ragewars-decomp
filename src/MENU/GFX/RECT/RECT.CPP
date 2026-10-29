@@ -194,7 +194,7 @@ unsigned int k_RectEncodedWordsBlock1[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_RectEncodedWords[3] = {
-    0x3C23D70A, 0x3F99999A, 0x3D4CCCCD,
+float k_RectEncodedWords[3] = {
+    0.01f, 1.2f, 0.05f,
 };
 #endif

@@ -289,8 +289,8 @@ const char s_InstcolTEosTText[8] =
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-const unsigned int k_InstcolEncodedWordsBlock3[2] = {
-    0x3F800000, 0x3F800000,
+const float k_InstcolEncodedWordsBlock3[2] = {
+    1.0f, 1.0f,
 };
 #endif
 

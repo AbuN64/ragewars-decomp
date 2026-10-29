@@ -652,8 +652,9 @@ char s_UnicolCTERJUGGERNText[12] =
 #endif
 
 /* 800C8710_13.CPP */
-const unsigned int k_UnicolEncodedWordsBlock1[7] = {
-    0xBEE66666, 0xBF350481, 0x434CCCCC, 0x3F800000, 0x424CCCCC, 0x3F83126F, 0x424CCCCC,
+const float k_UnicolEncodedWordsBlock1[7] = {
+    -0.45f, -0.7071f, 204.79999f, 1.0f, 51.199997f, 1.024f,
+    51.199997f,
 };
 
 #if defined(VERSION_EU_X)

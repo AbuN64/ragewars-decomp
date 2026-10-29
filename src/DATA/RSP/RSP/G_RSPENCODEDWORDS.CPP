@@ -5,7 +5,7 @@
 #endif
 
 #if defined(VERSION_DE)
-unsigned int g_RspEncodedWords[3] = {
-    0x43480000, 0x43200000, 0x43480000,
+float g_RspEncodedWords[3] = {
+    2.0e+02f, 1.6e+02f, 2.0e+02f,
 };
 #endif

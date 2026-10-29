@@ -2,8 +2,8 @@
 
 /* 800C9538.CPP */
 /* ROM-grounded data: src/k_eventsFloatConstantWordsBlock1_Events.c */
-const unsigned int k_eventsFloatConstantWordsBlock1[3] = {
-    0x41400000, 0x4123D70A, 0x3F800000,
+const float k_eventsFloatConstantWordsBlock1[3] = {
+    12.0f, 10.24f, 1.0f,
 };
 
 /* 800C9544.CPP */
@@ -36,6 +36,6 @@ const unsigned int k_eventsFloatConstantWordsBlock6[1] = {
 
 /* 800C954C.CPP */
 /* ROM-grounded data: src/k_eventsFloatConstantWordsBlock4_Events.c */
-const unsigned int k_eventsFloatConstantWordsBlock4[2] = {
-    0x4123D70A, 0x3B808081,
+const float k_eventsFloatConstantWordsBlock4[2] = {
+    10.24f, 0.003921569f,
 };

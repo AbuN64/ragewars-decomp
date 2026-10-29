@@ -6,8 +6,8 @@ const unsigned int g_Particle_FindNearestForeignEffectDistanceConstantsUsRev1[1]
 };
 
 #if defined(VERSION_EU_X)
-unsigned int k_ParticleFindnearestforeigneffectdistanceEncodedWordsBlock1[3] = {
-    0x3F800000, 0x3C23D70A, 0x3E95CBEC,
+float k_ParticleFindnearestforeigneffectdistanceEncodedWordsBlock1[3] = {
+    1.0f, 0.01f, 0.29257143f,
 };
 #endif
 

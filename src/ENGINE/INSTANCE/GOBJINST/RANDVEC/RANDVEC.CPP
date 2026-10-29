@@ -5,18 +5,18 @@ const char s_calculateMatrixStackAnimInfoText[60] = "CGameObjectInstance__Calcul
 const char s_drawAnimObjectInfoText[44] = "CGameObjectInstance__Draw: anim object info";
 
 /* ROM-grounded data: src/g_Gobjinst_DrawActorModelWithViewEffectsConstantsUsRev1_Randvec.c */
-const unsigned int g_Gobjinst_DrawActorModelWithViewEffectsConstantsUsRev1[2] = {
-    0x3F000000, 0x3DCCCCCD,
+const float g_Gobjinst_DrawActorModelWithViewEffectsConstantsUsRev1[2] = {
+    0.5f, 0.1f,
 };
 
 /* ROM-grounded data: src/g_Gobjinst_DrawActorPartsWithViewEffectsConstantsUsRev1_Randvec.c */
-const unsigned int g_Gobjinst_DrawActorPartsWithViewEffectsConstantsUsRev1[2] = {
-    0x3F000000, 0x3DCCCCCD,
+const float g_Gobjinst_DrawActorPartsWithViewEffectsConstantsUsRev1[2] = {
+    0.5f, 0.1f,
 };
 
 /* ROM-grounded data: src/g_Gobjinst_DrawBlendPartsWithViewEffectsConstantsUsRev1_Randvec.c */
-const unsigned int g_Gobjinst_DrawBlendPartsWithViewEffectsConstantsUsRev1[2] = {
-    0x3F000000, 0x3DCCCCCD,
+const float g_Gobjinst_DrawBlendPartsWithViewEffectsConstantsUsRev1[2] = {
+    0.5f, 0.1f,
 };
 
 /* ROM-grounded data: src/s_maskedModelLitVerticesTagUsRev1_Randvec.c */

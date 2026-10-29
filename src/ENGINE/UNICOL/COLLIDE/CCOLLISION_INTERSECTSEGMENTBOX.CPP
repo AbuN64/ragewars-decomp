@@ -296,14 +296,15 @@ s32 CCollision_IntersectSegmentRectangle(Ray *ray, CQuatern *rect, f32 *t) {
     return 0;
 }
 
-const unsigned int k_CcollisionIntersectsegmentboxEncodedWordsBlock1[8] = {
-    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x4123D70A,
+const float k_CcollisionIntersectsegmentboxEncodedWordsBlock1[8] = {
+    1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+    1.0f, 10.24f,
 };
 
 /* 800C8710_5.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CcollisionIntersectsegmentboxEncodedWords[3] = {
-    0x4123D70A, 0x3F800000, 0x4123D70A,
+const float k_CcollisionIntersectsegmentboxEncodedWords[3] = {
+    10.24f, 1.0f, 10.24f,
 };
 #endif
 
@@ -314,8 +315,8 @@ const unsigned int k_CcollisionIntersectsegmentboxEncodedWordsBlock3[1] = {
 };
 
 /* ROM-grounded data: src/ccollisionIntersectsegmentboxEncodedWordsBlock2UsRev1.c */
-const unsigned int k_CcollisionIntersectsegmentboxEncodedWordsBlock2[2] = {
-    0x3F800000, 0x4123D70A,
+const float k_CcollisionIntersectsegmentboxEncodedWordsBlock2[2] = {
+    1.0f, 10.24f,
 };
 #endif
 

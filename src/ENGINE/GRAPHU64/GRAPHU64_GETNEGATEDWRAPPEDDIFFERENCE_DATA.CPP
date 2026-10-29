@@ -7,6 +7,6 @@ const unsigned int g_graphu64_NegateWrappedValueConstantWords_us_rev1[8] = {
 
 /* 800C9A88.CPP */
 /* ROM-grounded data: src/g_graphu64_RandomBetweenConstantWords_Graphu64GetnegatedwrappeddifferenceData.c */
-const unsigned int g_graphu64_RandomBetweenConstantWords[2] = {
-    0x38D1BC76, 0x3F800000,
+const float g_graphu64_RandomBetweenConstantWords[2] = {
+    0.00010001f, 1.0f,
 };

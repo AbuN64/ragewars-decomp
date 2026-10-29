@@ -61,7 +61,7 @@ CVector3 Track_EvaluateTrackColor(f32 t) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int g_trackCameraInterpolationUnitConstantsDe[2] = {
-    0x3F800000, 0x3F800000,
+const float g_trackCameraInterpolationUnitConstantsDe[2] = {
+    1.0f, 1.0f,
 };
 #endif

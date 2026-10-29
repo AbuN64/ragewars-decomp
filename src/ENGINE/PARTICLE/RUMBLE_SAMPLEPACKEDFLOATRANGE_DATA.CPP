@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_Rumble_SamplePackedFloatRangeConstantsUsRev1_RumbleSamplepackedfloatrangeData.c */
-const unsigned int g_Rumble_SamplePackedFloatRangeConstantsUsRev1[3] = {
-    0x41F00000, 0x00000000, 0x38000100,
+const float g_Rumble_SamplePackedFloatRangeConstantsUsRev1[3] = {
+    3.0e+01f, 0.0f, 3.051851e-05f,
 };
 
 #if defined(VERSION_US)

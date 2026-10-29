@@ -3,8 +3,8 @@
 #if defined(VERSION_EU_X) || defined(VERSION_US)
 #if defined(VERSION_EU_X)
 #if defined(VERSION_EU_X)
-const unsigned int k_GameobjectBuildtargetaimorientationEncodedWords[2] = {
-    0x42F5C28F, 0x3FB5C28F,
+const float k_GameobjectBuildtargetaimorientationEncodedWords[2] = {
+    122.88f, 1.42f,
 };
 #endif
 #if defined(VERSION_US)
@@ -15,8 +15,8 @@ const unsigned int k_GameobjectBuildtargetaimorientationEncodedWords[1] = {
 #endif
 #if defined(VERSION_US)
 #if defined(VERSION_EU_X)
-unsigned int k_GameobjectBuildtargetaimorientationEncodedWords[2] = {
-    0x42F5C28F, 0x3FB5C28F,
+float k_GameobjectBuildtargetaimorientationEncodedWords[2] = {
+    122.88f, 1.42f,
 };
 #endif
 #if defined(VERSION_US)

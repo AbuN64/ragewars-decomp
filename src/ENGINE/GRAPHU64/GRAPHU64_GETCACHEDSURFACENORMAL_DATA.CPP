@@ -2,8 +2,8 @@
 
 /* 800C9AB0.CPP */
 /* ROM-grounded data: src/g_graphu64_GetCachedSurfaceNormalConstantWords_Graphu64GetcachedsurfacenormalData.c */
-const unsigned int g_graphu64_GetCachedSurfaceNormalConstantWords[2] = {
-    0xBF800000, 0xBF800000,
+const float g_graphu64_GetCachedSurfaceNormalConstantWords[2] = {
+    -1.0f, -1.0f,
 };
 
 /* 800C9AB8.CPP */

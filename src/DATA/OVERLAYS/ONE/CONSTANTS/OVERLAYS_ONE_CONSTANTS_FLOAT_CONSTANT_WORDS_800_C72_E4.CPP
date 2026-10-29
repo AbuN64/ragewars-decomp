@@ -1,7 +1,7 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C72E4 */
-unsigned int g_overlaysOneConstantsFloatConstantWordsBlock5[3] = {
-    0x44800000, 0x3F000000, 0x3F000000,
+float g_overlaysOneConstantsFloatConstantWordsBlock5[3] = {
+    1024.0f, 0.5f, 0.5f,
 };
 #endif

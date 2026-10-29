@@ -125,7 +125,7 @@ unsigned int k_CpolycollisionTraceceilingtriangleEncodedWordsBlock2[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_CpolycollisionTraceceilingtriangleEncodedWordsBlock1[3] = {
-    0xBF350481, 0x434CCCCC, 0x3F800000,
+float k_CpolycollisionTraceceilingtriangleEncodedWordsBlock1[3] = {
+    -0.7071f, 204.79999f, 1.0f,
 };
 #endif

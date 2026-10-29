@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_actorMotionResetUnitConstants[2] = {
-    0x3F800000, 0x3F4CCCCD,
+const float g_actorMotionResetUnitConstants[2] = {
+    1.0f, 0.8f,
 };
 #endif
 

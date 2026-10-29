@@ -245,8 +245,8 @@ void Rumble_FreeAllPoolNodes(void *effectPool) {
 
 
 /* ROM-grounded data: src/g_rumble_EvaluateSpatialEffectNodeConstantWords_Rumble.c */
-const unsigned int g_rumble_EvaluateSpatialEffectNodeConstantWords[2] = {
-    0x3F800000, 0x3F800000,
+const float g_rumble_EvaluateSpatialEffectNodeConstantWords[2] = {
+    1.0f, 1.0f,
 };
 
 #if defined(VERSION_US)

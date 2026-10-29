@@ -25,7 +25,8 @@ char g_createDataTextFragment_eu[28] =
 #endif
 
 #if defined(VERSION_DE)
-unsigned int g_createDataUnitRangeWords_de[7] = {
-    0x3F7FFFEF, 0xBF7FFFEF, 0x3F800000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+float g_createDataUnitRangeWords_de[7] = {
+    0.999999f, -0.999999f, 1.0f, 0.0f, 0.0f, 0.0f,
+    0.0f,
 };
 #endif

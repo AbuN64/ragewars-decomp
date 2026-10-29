@@ -2,15 +2,15 @@
 
 /* 800C5670.CPP */
 #if defined(VERSION_EU)
-const unsigned int g_Setn64DrawfullscreenbackdropWords1[4] = {
-    0x437F0000, 0x3E32B8C4, 0x3ECCCCCD, 0x3F333333,
+const float g_Setn64DrawfullscreenbackdropWords1[4] = {
+    255.0f, 0.17453295f, 0.4f, 0.7f,
 };
 #endif
 
 /* 800CA4B0.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-const unsigned int g_Setn64DrawfullscreenbackdropWords4[4] = {
-    0x437F0000, 0x3E32B8C4, 0x3ECCCCCD, 0x3F333333,
+const float g_Setn64DrawfullscreenbackdropWords4[4] = {
+    255.0f, 0.17453295f, 0.4f, 0.7f,
 };
 #endif
 
@@ -23,15 +23,15 @@ void SetN64_EmptyBackdropHookUs(void) {
 
 /* 802909E0_15.CPP */
 #if defined(VERSION_EU_X)
-const unsigned int g_Setn64DrawfullscreenbackdropWords2[4] = {
-    0x437F0000, 0x3E32B8C4, 0x3ECCCCCD, 0x3F333333,
+const float g_Setn64DrawfullscreenbackdropWords2[4] = {
+    255.0f, 0.17453295f, 0.4f, 0.7f,
 };
 #endif
 
 /* SETN64_DRAWFULLSCREENBACKDROP_WORDS_US.CPP */
 #if defined(VERSION_US)
-const unsigned int g_Setn64DrawfullscreenbackdropWords5[4] = {
-    0x437F0000, 0x3E32B8C4, 0x3ECCCCCD, 0x3F333333,
+const float g_Setn64DrawfullscreenbackdropWords5[4] = {
+    255.0f, 0.17453295f, 0.4f, 0.7f,
 };
 char g_Setn64LoadingbackdropLeadText[8] = {'r', 'c', 'e', '\\', 'U', 'I', '\\', 'T'};
 #endif

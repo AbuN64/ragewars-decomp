@@ -1,15 +1,15 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CcollisionIntegrategravityanddragEncodedWords[11] = {
-    0x3D888889, 0x41700000, 0x3F800000, 0x3F000000, 0x3F800000, 0x4123D70A, 0x41F5C28F, 0x3E51B717,
-    0x3F800000, 0x4083126F, 0x3F8637BE,
+const float k_CcollisionIntegrategravityanddragEncodedWords[11] = {
+    0.06666667f, 15.0f, 1.0f, 0.5f, 1.0f, 10.24f,
+    30.72f, 0.2048f, 1.0f, 4.096f, 1.0485761f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int k_CcollisionIntegrategravityanddragEncodedWordsBlock1[4] = {
-    0x3D888889, 0x41700000, 0x3F800000, 0x3F000000,
+const float k_CcollisionIntegrategravityanddragEncodedWordsBlock1[4] = {
+    0.06666667f, 15.0f, 1.0f, 0.5f,
 };
 
 /* ROM-grounded data: src/ccollisionIntegrategravityanddragOneWordsUsRev1.c */
@@ -17,7 +17,7 @@ const unsigned int k_CcollisionIntegrategravityanddragOneWords[1] = {
     0x3F800000,
 };
 
-const unsigned int k_CcollisionIntegrategravityanddragEncodedWordsBlock2[6] = {
-    0x4123D70A, 0x41F5C28F, 0x3E51B717, 0x3F800000, 0x4083126F, 0x3F8637BE,
+const float k_CcollisionIntegrategravityanddragEncodedWordsBlock2[6] = {
+    10.24f, 30.72f, 0.2048f, 1.0f, 4.096f, 1.0485761f,
 };
 #endif

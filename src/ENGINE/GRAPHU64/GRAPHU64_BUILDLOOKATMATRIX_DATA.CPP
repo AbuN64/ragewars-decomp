@@ -2,8 +2,8 @@
 
 /* 800C9A98.CPP */
 /* ROM-grounded data: src/g_graphu64_IsPointOnPositiveEdgeSideConstantWords_us_rev1_Graphu64BuildlookatmatrixData.c */
-const unsigned int g_graphu64_IsPointOnPositiveEdgeSideConstantWords_us_rev1[3] = {
-    0xBF800000, 0x3F800000, 0x3F800000,
+const float g_graphu64_IsPointOnPositiveEdgeSideConstantWords_us_rev1[3] = {
+    -1.0f, 1.0f, 1.0f,
 };
 
 #if defined(VERSION_US)
@@ -24,8 +24,8 @@ unsigned int k_Graphu64BuildlookatmatrixEncodedWordsBlock1[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_Graphu64BuildlookatmatrixEncodedWords[3] = {
-    0xBF800000, 0x3EAAAAAB, 0x3F800000,
+float k_Graphu64BuildlookatmatrixEncodedWords[3] = {
+    -1.0f, 0.33333334f, 1.0f,
 };
 #endif
 

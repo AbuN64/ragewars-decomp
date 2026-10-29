@@ -337,8 +337,8 @@ void Scene_CacheBlLevelData(void *world, s32 sectionIndex) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-unsigned int k_SceneFindtrackedactorsEncodedWords[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
+float k_SceneFindtrackedactorsEncodedWords[3] = {
+    1.0f, 1.0f, 1.0f,
 };
 #endif
 

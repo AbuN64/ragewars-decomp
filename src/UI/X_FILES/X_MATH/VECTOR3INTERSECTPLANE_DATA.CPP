@@ -2,16 +2,16 @@
 #include "COMMON/OBJRECAT3CV2.H"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_vector3intersectplaneDataFloatConstantWords[9] = {
-    0x3A83126F, 0xBA83126F, 0x3F000000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000,
-    0x3F800000,
+const float k_vector3intersectplaneDataFloatConstantWords[9] = {
+    0.001f, -0.001f, 0.5f, 1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_vector3intersectplaneDataFloatConstantWordsBlock1_Vector3intersectplaneData.c */
-const unsigned int k_vector3intersectplaneDataFloatConstantWordsBlock1[3] = {
-    0x3A83126F, 0xBA83126F, 0x3F000000,
+const float k_vector3intersectplaneDataFloatConstantWordsBlock1[3] = {
+    0.001f, -0.001f, 0.5f,
 };
 
 /* ROM-grounded data: src/k_VectorIntersectplaneOneWords_Vector3intersectplaneData.c */

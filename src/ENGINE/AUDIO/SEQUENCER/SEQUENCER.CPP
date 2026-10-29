@@ -1,15 +1,15 @@
 #include "include_asm.h"
 
 /* 800C90C0.CPP */
-const unsigned int g_audio_UpdateMusicPlaybackConstantWords[10] = {
-    0x3DCCCCCD, 0x3C23D70A, 0x46FFFE00, 0x3C23D70A, 0x3C23D70A, 0x3F333333, 0x46FFFE00, 0x46FFFE00,
-    0x3DCCCCCD, 0x42700000,
+const float g_audio_UpdateMusicPlaybackConstantWords[10] = {
+    0.1f, 0.01f, 32767.0f, 0.01f, 0.01f, 0.7f,
+    32767.0f, 32767.0f, 0.1f, 6.0e+01f,
 };
 
 /* 800C90E8.CPP */
 /* ROM-grounded data: src/g_audio_InitializeMusicPlayerConstantWordsUsRev1.c */
-const unsigned int g_audio_InitializeMusicPlayerConstantWords[2] = {
-    0x3F800000, 0x42FA0000,
+const float g_audio_InitializeMusicPlayerConstantWords[2] = {
+    1.0f, 125.0f,
 };
 
 /* 800C90F0.CPP */

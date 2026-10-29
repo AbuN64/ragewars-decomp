@@ -502,9 +502,10 @@ struct {
     },
 };
 
-unsigned int g_cheatMenuAnimationStepSamples[16] = {
-    0xBF000000, 0xBECCCCCD, 0xBE99999A, 0xBE4CCCCD, 0xBDCCCCCD, 0x00000000, 0x3DCCCCCD, 0x3E4CCCCD,
-    0x3E99999A, 0x3ECCCCCD, 0x3F000000, 0x3F19999A, 0x3F333333, 0x3F4CCCCD, 0x3F666666, 0x3F800000,
+float g_cheatMenuAnimationStepSamples[16] = {
+    -0.5f, -0.4f, -0.3f, -0.2f, -0.1f, 0.0f,
+    0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f,
+    0.7f, 0.8f, 0.9f, 1.0f,
 };
 
 struct {

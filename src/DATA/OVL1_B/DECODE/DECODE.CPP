@@ -40,9 +40,10 @@ unsigned int s_hicsText[1] = {
 
 /* k_DecodeEncodedWords_Decode.CPP */
 #if defined(VERSION_US)
-unsigned int k_DecodeEncodedWords[16] = {
-    0x3FDD2F1C, 0x4030F27C, 0x41A5E354, 0x3F84B5DE, 0x00000000, 0x00000000, 0x00000000, 0x403851EC,
-    0x41ACCCCC, 0x3F8A3D71, 0x3FDD2F1C, 0x414F5C2A, 0x3F25E355, 0x00000000, 0x00000000, 0x00000000,
+float k_DecodeEncodedWords[16] = {
+    1.7280002f, 2.7648f, 20.736f, 1.0368001f, 0.0f, 0.0f,
+    0.0f, 2.88f, 21.599998f, 1.08f, 1.7280002f, 12.960001f,
+    0.64800006f, 0.0f, 0.0f, 0.0f,
 };
 #endif
 

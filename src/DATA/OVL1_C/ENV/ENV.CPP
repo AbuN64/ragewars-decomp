@@ -2,15 +2,15 @@
 #include "COMMON/ALFXPARAM.H"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_EnvWords1[2] = {
-    0x37800000, 0x3F800000,
+const float g_EnvWords1[2] = {
+    1.5258789e-05f, 1.0f,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_EnvWords2[10] = {
-    0x00000000, 0x00000000, 0x3FF00000, 0x00000000, 0x3FE00000, 0x00000000, 0x3FE00000, 0x00000000,
-    0x00000000, 0x00000000,
+const float g_EnvWords2[10] = {
+    0.0f, 0.0f, 1.875f, 0.0f, 1.75f, 0.0f,
+    1.75f, 0.0f, 0.0f, 0.0f,
 };
 #endif
 
@@ -32,12 +32,12 @@ unsigned int k_EnvEncodedWords[2] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_EnvWords4_Env.c */
-const unsigned int g_EnvWords4[2] = {
-    0x37800000, 0x3F800000,
+const float g_EnvWords4[2] = {
+    1.5258789e-05f, 1.0f,
 };
 
-const unsigned int g_EnvWords3[10] = {
-    0x00000000, 0x00000000, 0x3FF00000, 0x00000000, 0x3FE00000, 0x00000000, 0x3FE00000, 0x00000000,
-    0x00000000, 0x00000000,
+const float g_EnvWords3[10] = {
+    0.0f, 0.0f, 1.875f, 0.0f, 1.75f, 0.0f,
+    1.75f, 0.0f, 0.0f, 0.0f,
 };
 #endif

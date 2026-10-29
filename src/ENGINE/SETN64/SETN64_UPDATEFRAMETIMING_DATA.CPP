@@ -1,15 +1,15 @@
 #include "include_asm.h"
 
 /* 800CA538.CPP */
-const unsigned int g_Setn64UpdateframetimingWords1[9] = {
-    0x3F800000, 0x437F0000, 0x358637BD, 0x3DCCCCCD, 0x3F000000, 0x3F800000, 0xC0800000, 0x3F000000,
-    0x3F800000,
+const float g_Setn64UpdateframetimingWords1[9] = {
+    1.0f, 255.0f, 1.0e-06f, 0.1f, 0.5f, 1.0f,
+    -4.0f, 0.5f, 1.0f,
 };
 
 /* 800CA55C.CPP */
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const unsigned int g_Setn64UpdateframetimingWords2[2] = {
-    0x358637BD, 0x41700000,
+const float g_Setn64UpdateframetimingWords2[2] = {
+    1.0e-06f, 15.0f,
 };
 
 #if defined(VERSION_DE)

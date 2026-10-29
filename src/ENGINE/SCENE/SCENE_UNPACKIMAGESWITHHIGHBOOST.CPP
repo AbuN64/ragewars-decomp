@@ -340,7 +340,7 @@ unsigned int k_SceneUnpackimageswithhighboostEncodedWordsBlock1[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_SceneUnpackimageswithhighboostEncodedWords[3] = {
-    0x358637BD, 0x358637BD, 0x358637BD,
+float k_SceneUnpackimageswithhighboostEncodedWords[3] = {
+    1.0e-06f, 1.0e-06f, 1.0e-06f,
 };
 #endif

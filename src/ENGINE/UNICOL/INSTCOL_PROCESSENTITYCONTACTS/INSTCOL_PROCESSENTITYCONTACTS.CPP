@@ -18,7 +18,7 @@ unsigned int k_InstcolProcessentitycontactsEncodedWordsBlock3[1] = {
 
 /* 800C90A0.CPP */
 #if defined(VERSION_US)
-unsigned int s_gartText[4] = {
-    0x3DB851EC, 0x3D4CCCCD, 0x3F000000, 0x47415254,
+float s_gartText[4] = {
+    0.09f, 0.05f, 0.5f, 49490.33f,
 };
 #endif

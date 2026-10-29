@@ -61,8 +61,8 @@ void SmpFade_RegisterFadeClass(void) {
 
 /* 800E1470.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_fadeWidgetSecondaryProgressConstants[2] = {
-    0x3EAAAAAB, 0x3D4CCCCD,
+const float g_fadeWidgetSecondaryProgressConstants[2] = {
+    0.33333334f, 0.05f,
 };
 #endif
 
@@ -73,8 +73,8 @@ unsigned int k_SmpFadeEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_SmpFadeEncodedWordsBlock2[2] = {
-    0x3DDD67C9, 0x3F000000,
+float k_SmpFadeEncodedWordsBlock2[2] = {
+    0.10810811f, 0.5f,
 };
 #endif
 
@@ -94,7 +94,7 @@ unsigned int k_SmpFadeEncodedWordsBlock1[2] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_fadeWidgetProgressConstantsUsRev1_SmpFade.c */
-const unsigned int g_fadeWidgetProgressConstantsUsRev1[2] = {
-    0x3EAAAAAB, 0x3D4CCCCD,
+const float g_fadeWidgetProgressConstantsUsRev1[2] = {
+    0.33333334f, 0.05f,
 };
 #endif

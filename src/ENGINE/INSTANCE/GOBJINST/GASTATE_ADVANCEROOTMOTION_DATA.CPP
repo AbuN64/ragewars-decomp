@@ -92,8 +92,8 @@ extern void Graphu64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
 extern void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
-const unsigned int g_actorRootMotionCubicCoefficients[2] = {
-    0xC0000000, 0x40400000,
+const float g_actorRootMotionCubicCoefficients[2] = {
+    -2.0f, 3.0f,
 };
 void Gobjinst_AdvanceActorRootMotion(void *actor) {
     CVector3 first;

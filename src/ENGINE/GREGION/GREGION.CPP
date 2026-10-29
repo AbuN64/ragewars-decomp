@@ -651,29 +651,29 @@ void Region_ComputeHorizontalBounds(void *boundsStorage, s32 pointCount, void *p
 
 /* 800C9ACC.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_GregionEncodedWords[2] = {
-    0x3F800000, 0x3F000000,
+const float k_GregionEncodedWords[2] = {
+    1.0f, 0.5f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_GregionEncodedWordsBlock1Source.c */
-const unsigned int k_GregionEncodedWordsBlock1[2] = {
-    0x3F800000, 0x3F000000,
+const float k_GregionEncodedWordsBlock1[2] = {
+    1.0f, 0.5f,
 };
 #endif
 
 /* 800C9AD4.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Region_GetCachedUpQuatConstantWords[2] = {
-    0x3F800000, 0x3F000000,
+const float g_Region_GetCachedUpQuatConstantWords[2] = {
+    1.0f, 0.5f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_Region_TestPolygonSlopeFlagConstantWordsSource.c */
-const unsigned int g_Region_TestPolygonSlopeFlagConstantWords[2] = {
-    0x3F800000, 0x3F000000,
+const float g_Region_TestPolygonSlopeFlagConstantWords[2] = {
+    1.0f, 0.5f,
 };
 #endif
 
@@ -691,14 +691,14 @@ const unsigned int g_regionEdgeCrossDefaultUp_StorageWords[1] = {
 
 /* 800C9AE4.CPP */
 /* ROM-grounded data: src/g_regionNormalDefaultUp_StorageWordsSource.c */
-const unsigned int g_regionNormalDefaultUp_StorageWords[2] = {
-    0x3F800000, 0x3F800000,
+const float g_regionNormalDefaultUp_StorageWords[2] = {
+    1.0f, 1.0f,
 };
 
 /* 800C9AEC.CPP */
 /* ROM-grounded data: src/g_regionMissingPolygonHeight_StorageWordsSource.c */
-const unsigned int g_regionMissingPolygonHeight_StorageWords[2] = {
-    0xC6600000, 0x3EAAAAAB,
+const float g_regionMissingPolygonHeight_StorageWords[2] = {
+    -14336.0f, 0.33333334f,
 };
 
 /* 800C9AF4.CPP */
@@ -714,8 +714,8 @@ unsigned int k_GregionEncodedWordsBlock2[2] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_GregionEncodedWordsBlock5[2] = {
-    0xB58637BD, 0x358637BD,
+float k_GregionEncodedWordsBlock5[2] = {
+    -1.0e-06f, 1.0e-06f,
 };
 #endif
 

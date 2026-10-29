@@ -2,18 +2,18 @@
 
 /* 800C9C30.CPP */
 /* ROM-grounded data: src/g_Particle_UpdateSineMotionConstantsUsRev1Part3_ParticleUpdatesinemotionData.c */
-const unsigned int g_Particle_UpdateSineMotionConstantsUsRev1Part3[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
+const float g_Particle_UpdateSineMotionConstantsUsRev1Part3[3] = {
+    1.0f, 1.0f, 1.0f,
 };
 
 /* 800C9C3C.CPP */
-const unsigned int g_Particle_UpdateSineMotionConstantsUsRev1[11] = {
-    0x40E00000, 0x42CCCCCC, 0x3F800000, 0x43199999, 0x44800000, 0x434CCCCC, 0x3AA00000, 0x3F5C28F5,
-    0x3F800000, 0x3D23D70A, 0x3F800000,
+const float g_Particle_UpdateSineMotionConstantsUsRev1[11] = {
+    7.0f, 102.399994f, 1.0f, 153.59999f, 1024.0f, 204.79999f,
+    0.0012207031f, 0.85999995f, 1.0f, 0.04f, 1.0f,
 };
 
 /* 800C9C68.CPP */
-const unsigned int g_Particle_UpdateSineMotionConstantsUsRev1Part2[12] = {
-    0x41F00000, 0xC223D70A, 0x424CCCCC, 0x40A00000, 0x3F000000, 0x41200000, 0x42B40000, 0x3DCCCCCD,
-    0x40A00000, 0x3E99999A, 0x3F800000, 0x41F00000,
+const float g_Particle_UpdateSineMotionConstantsUsRev1Part2[12] = {
+    3.0e+01f, -40.96f, 51.199997f, 5.0f, 0.5f, 1.0e+01f,
+    9.0e+01f, 0.1f, 5.0f, 0.3f, 1.0f, 3.0e+01f,
 };

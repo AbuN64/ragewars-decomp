@@ -209,7 +209,8 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-const unsigned int k_SetupEncodedWords[7] = {
-    0x3C9374BC, 0x40A00000, 0x41500000, 0xC2480000, 0x3D23D70A, 0x41880000, 0xC1200000,
+const float k_SetupEncodedWords[7] = {
+    0.018f, 5.0f, 13.0f, -5.0e+01f, 0.04f, 17.0f,
+    -1.0e+01f,
 };
 #endif

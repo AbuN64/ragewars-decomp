@@ -28,8 +28,8 @@ const unsigned int k_AudioChooseweightedsoundvariantEncodedWords[2] = {
 };
 
 /* ROM-grounded data: src/k_AudioChooseweightedsoundvariantEncodedWordsBlock1UsRev1.c */
-const unsigned int k_AudioChooseweightedsoundvariantEncodedWordsBlock1[2] = {
-    0x3F800000, 0x42200000,
+const float k_AudioChooseweightedsoundvariantEncodedWordsBlock1[2] = {
+    1.0f, 4.0e+01f,
 };
 
 extern void Audio_StopVoicesByKey(void *record, s32 value);

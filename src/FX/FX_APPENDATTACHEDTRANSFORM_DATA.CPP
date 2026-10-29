@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/k_fxAppendattachedtransformDataFloatConstantWords_FxAppendattachedtransformData.c */
-const unsigned int k_fxAppendattachedtransformDataFloatConstantWords[2] = {
-    0x3C23D70A, 0x3E95CBEC,
+const float k_fxAppendattachedtransformDataFloatConstantWords[2] = {
+    0.01f, 0.29257143f,
 };
 
 #if defined(VERSION_US)
@@ -22,7 +22,7 @@ unsigned int k_FxAppendattachedtransformEncodedWordsBlock1[2] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_FxAppendattachedtransformEncodedWords[2] = {
-    0x3E800000, 0x3F400000,
+float k_FxAppendattachedtransformEncodedWords[2] = {
+    0.25f, 0.75f,
 };
 #endif

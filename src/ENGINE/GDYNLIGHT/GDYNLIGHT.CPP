@@ -103,6 +103,6 @@ int Gdynlight_GetNextLight(void *unused0, void *rangeNode) {
 }
 
 /* ROM-grounded data: src/g_dynamicLightDirectionConstants.c */
-const unsigned int g_dynamicLightDirectionConstants[2] = {
-    0x3F800000, 0x3ECCCCCD,
+const float g_dynamicLightDirectionConstants[2] = {
+    1.0f, 0.4f,
 };

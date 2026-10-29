@@ -170,7 +170,7 @@ f32 Gobjinst_GetActorRadius(Actor_u1 *actor)
 }
 
 #if defined(VERSION_DE)
-const unsigned int k_GameobjectGetactorheightEncodedWords[2] = {
-    0x42F5C28F, 0x3FB5C28F,
+const float k_GameobjectGetactorheightEncodedWords[2] = {
+    122.88f, 1.42f,
 };
 #endif
