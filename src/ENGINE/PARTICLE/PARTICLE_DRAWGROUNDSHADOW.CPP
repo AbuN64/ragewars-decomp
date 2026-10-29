@@ -201,7 +201,7 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
                             0, 0, &g_simpleModelResourceCallbackAddress, &s_simpPartModelText, 1);
     if (resource != 0) {
         Geometry_QueueModelInstance(resource, matrix, 0,
-                      (char *)particle + (((g_lightingBufferIndex * 3) << 3) + 0xE0), 0, -1);
+                      &particle->lighting[g_lightingBufferIndex], 0, -1);
         Cache_UnlockResource(0, resource);
     }
 }

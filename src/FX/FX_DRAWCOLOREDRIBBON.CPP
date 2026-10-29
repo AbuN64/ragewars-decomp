@@ -163,7 +163,7 @@ loop_4:
                                 if (ribbon->flags & 4) {
                                     Graphu64_GetMatrixScale(&localMatrix, segment->rot);
                                 } else {
-                                    Graphu64_ConvertMatrixToFixed(&localMatrix, (char *)segment + ((g_lightingBufferIndex << 6) + 0x28));
+                                    Graphu64_ConvertMatrixToFixed(&localMatrix, &segment->mat[g_lightingBufferIndex]);
                                 }
                             }
                             segment->remainingLifetime = (f32) ribbon->definition->segmentLifetime;

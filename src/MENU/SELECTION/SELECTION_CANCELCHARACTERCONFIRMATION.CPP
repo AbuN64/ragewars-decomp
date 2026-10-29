@@ -153,7 +153,7 @@ s32 Selection_ReadSelectionSlot(s32 unusedFirst, s32 unusedSecond, s32 packedPla
     entryIndex = packedPlayer & 0xFFFF;
     choice = SmpOverlay_GetSlotNodeId(g_characterSelectionMenu->slotOverlay, entryIndex);
     MarkMenuEventHandled();
-    characterSelectionRoot = (CharacterSelectionRoot *)((char *)g_characterSelectionMenu + (entryIndex * 0x4C8));
+    characterSelectionRoot = (CharacterSelectionRoot *)((char *)g_characterSelectionMenu + (entryIndex * sizeof(SelectionScreenPlayer)));
     if (characterSelectionRoot->phase == 1) {
         if (choice == SPECIAL_CHAR) Menu_ApplySlotValueGfx(entryIndex,characterSelectionRoot->choice);
         else if (Widget_ListHasFlag100(SmpOverlay_GetSlotValue(g_characterSelectionMenu->slotOverlay,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);

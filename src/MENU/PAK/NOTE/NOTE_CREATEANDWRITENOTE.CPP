@@ -30,7 +30,7 @@ extern s32 osPfsFileState(OSPfs *pfs, s32 file_no, NoteState *state);
 
 extern s32 osPfsFreeBlocks(OSPfs *pfs, s32 *free);
 
-static inline void *pak27(s32 ch) {return ((u8 *)g_controllerPakFileSystems)+ch*0x68;}
+static inline void *pak27(s32 ch) {return &g_controllerPakFileSystems[ch];}
 
 extern u8 g_controllerPakFrontendState;
 

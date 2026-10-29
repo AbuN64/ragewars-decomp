@@ -366,27 +366,14 @@ struct PlayerProfileStorage {
     u8 value16;
     char pad17;
     char slots[13];
-    u8 pad25;
-    u8 unk26[36];
-    u8 unk4A[7];
-    u8 unk51[3];
-    u8 unk54[3];
-    u8 unk57[20];
-    u8 pad6B;
+    u8 pad25[0x6C - 0x25];
     s32 totals[3]; /* 0x6C */
-    u8 unk78;
+    u8 unk78; /* individually cleared by Player_InitializeProfile */
     u8 unk79[2];
     u8 unk7B[2];
-    u8 unk7D;
-    u8 unk7E[5];
-    u8 unk83[5];
-    u8 unk88[5];
-    u8 unk8D[5];
-    u8 pad92[2];
+    u8 pad7D[0x94 - 0x7D];
     s32 counters[36]; /* 0x94 */
-    u8 unk124;
-    u8 unk125[100];
-    u8 pad189[7];
+    u8 pad124[0x190 - 0x124];
 };
 extern void Playerai_ResetMotionAndSelectIdleAnimation(FragTagRespawnActorView *actor);
 extern void Playerai_SelectMovementAnimation(FragTagRespawnActorView *object);

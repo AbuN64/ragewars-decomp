@@ -60,16 +60,16 @@ void Player_InitializeProfile(void *profileStorage) {
     ((PlayerProfileStorage *)object)->state = 0;
     object[12] = 0;
     ((PlayerProfileStorage *)object)->resetSentinelByte = -1;
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk26, 0, 36);
-    XPlus_FillMemory(&((PlayerProfileStorage *)object)->unk7D, 0, 1);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk51, 0, 3);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk125, 0, 100);
+    XPlus_FillMemory(((Profile *)object)->plays, 0, 36);
+    XPlus_FillMemory(&((Profile *)object)->groupFlags, 0, 1);
+    XPlus_FillMemory(&((Profile *)object)->achievementFlags[7], 0, 3);
+    XPlus_FillMemory(((Profile *)object)->slotLevels, 0, 100);
     Player_SetAchievementFlag7((s32)object, 0);
     Player_SetAchievementFlag7((s32)object, 5);
     Player_SetAchievementFlag7((s32)object, 7);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk57, 0, 20);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk54, 0, 3);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk4A, 0, 7);
+    XPlus_FillMemory(&((Profile *)object)->kindFlags[3], 0, 20);
+    XPlus_FillMemory(((Profile *)object)->kindFlags, 0, 3);
+    XPlus_FillMemory(((Profile *)object)->achievementFlags, 0, 7);
     XPlus_FillMemory(&((PlayerProfileStorage *)object)->unk78, 0, 1);
     XPlus_FillMemory(((PlayerProfileStorage *)object)->unk79, 0, 2);
     Player_SetAchievementFlag2F((s32)object, 0);
@@ -77,10 +77,10 @@ void Player_InitializeProfile(void *profileStorage) {
     Player_SetAchievementFlag2F((s32)object, 3);
     Player_SetAchievementFlag2F((s32)object, 4);
     XPlus_FillMemory(((PlayerProfileStorage *)object)->unk7B, 0, 2);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk7E, 0, 5);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk88, 0, 5);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk8D, 0, 5);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk83, 0, 5);
+    XPlus_FillMemory(((Profile *)object)->levelFlags[0], 0, 5);
+    XPlus_FillMemory(((Profile *)object)->levelFlags[2], 0, 5);
+    XPlus_FillMemory(((Profile *)object)->levelFlags[3], 0, 5);
+    XPlus_FillMemory(((Profile *)object)->levelFlags[1], 0, 5);
     i = 35;
     cursor = object + 0x8C;
     do {
@@ -88,7 +88,7 @@ void Player_InitializeProfile(void *profileStorage) {
         i--;
         cursor -= 4;
     } while (i >= 0);
-    XPlus_FillMemory(&((PlayerProfileStorage *)object)->unk124, 0, 1);
+    XPlus_FillMemory(&((Profile *)object)->trackFlags, 0, 1);
     object[394] = 1;
     object[395] = 134;
     object[393] = 0;
