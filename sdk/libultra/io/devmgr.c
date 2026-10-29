@@ -6,7 +6,6 @@
 #include "../../include/os.h"
 #include "RESMGR/X_PLUS.H"
 
-#if !(defined(VERSION_US))
 extern OSPiHandle_s *g_peripheralHandleList;
 
 OSPiHandle_s *osCartRomInit(void)
@@ -39,9 +38,8 @@ OSPiHandle_s *osCartRomInit(void)
 
     return h;
 }
-#endif
 
-#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1) || defined(VERSION_US)
 typedef struct PiRequest {
     u16 type;
     u8 priority, status;

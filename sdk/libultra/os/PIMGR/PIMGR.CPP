@@ -4,7 +4,7 @@
 #include "../../../include/libultra/os/pi_device_manager_operations.h"
 
 /* 802BDEA0.CPP */
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
+#if !defined(VERSION_US_REV1)
 #include "TYPES.H"
 #include "COMMON/OSVISCALE.H"
 #include "../../../include/os.h"
