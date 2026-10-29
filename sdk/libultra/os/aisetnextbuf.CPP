@@ -39,5 +39,5 @@ unsigned char g_AisetnextbufTrailingBytes[4] = { 0x8C, 0xA2, 0x00, 0x00 };
 #endif
 
 #if defined(VERSION_DE)
-void Audio_EmptyNextBufferHookDe(void) {}
+unsigned char g_AisetnextbufTrailingBytes[4] = { 0x03, 0xE0, 0x00, 0x08 };
 #endif

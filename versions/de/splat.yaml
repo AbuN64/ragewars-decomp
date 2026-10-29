@@ -2970,7 +2970,7 @@ segments:
       - [0xB7EE0, c, game_code]
       - [0xB7FF8, data, game_code/g_AisetfreqTrailingBytes]
       - [0xB8000, c, game_code]
-      - [0xB808C, c, game_code]
+      - [0xB808C, data, game_code/g_AisetnextbufTrailingBytes]
       - [0xB8090, c, game_code]
       - [0xB80A4, data, game_code/g_AudioAudioAudio26CppRetainedWords1]
       - [0xB80B0, c, game_code]
