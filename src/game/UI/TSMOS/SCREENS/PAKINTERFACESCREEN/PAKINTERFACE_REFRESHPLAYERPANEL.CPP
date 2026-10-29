@@ -43,7 +43,7 @@ struct SetupLinkedLabel {
     char pad8[0x4];
     u8 alpha;
     char pad10[0x27];
-    void* unk38;
+    void* nextLabel;
 };
 struct SetupRosterRecord {
     char pad0[0x64];
@@ -381,7 +381,7 @@ case22_selected:
             ((SetupLinkedLabel *)selectionOrLabel)->alpha = 0xFF;
             text_node = (s32)((SetupLinkedLabel *)selectionOrLabel)->textNode;
             ((MenuWidget *)text_node)->text = &g_pakProfileScreenState->players[playerIndex].name[characterIndex].available;
-            selectionOrLabel = (s32)((SetupLinkedLabel *)selectionOrLabel)->unk38;
+            selectionOrLabel = (s32)((SetupLinkedLabel *)selectionOrLabel)->nextLabel;
             characterIndex += 1;
         } while (selectionOrLabel != 0);
         playerLinkOffset = playerIndex * 8;

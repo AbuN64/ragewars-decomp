@@ -65,7 +65,7 @@ struct Shared_ReactionPlayer {
     char pad0[0x7];
     union {
         CVector3 position;
-        struct { f32 positionX, unkC, unk10; };
+        struct { f32 positionX, positionY, positionZ; };
     };
     u16* sourceModelHandles;
     char pad14[0xCC];

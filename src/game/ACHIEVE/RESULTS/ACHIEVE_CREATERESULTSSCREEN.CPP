@@ -390,8 +390,8 @@ void Preview_DrawMenuModelItem(MenuModelItem *item);
 void Achieve_ConfigureResultModelPreview(void);
 extern f32 g_resultPreviewDefaultAlpha;
 
-/* Advances the selected row's model preview animation one step: the preview scale (unk8) ramps up by 2
-   toward 0x96 in state 0, holds in state 2 while the countdown (unkC) runs, and ramps back down to 10 in
+/* Advances the selected row's model preview animation one step: the preview scale (fade) ramps up by 2
+   toward 0x96 in state 0, holds in state 2 while the countdown (holdTicks) runs, and ramps back down to 10 in
    state 1, then moves the selection on. */
 void Achieve_AdvanceResultModelPreview(void) {
     s32 selected;

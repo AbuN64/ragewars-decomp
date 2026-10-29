@@ -163,10 +163,10 @@ unsigned int System_RunPiManager_padding_BF098[2] = {
 };
 #endif
 #if VERSION_EU
-INCLUDE_DATA("span_1000", System_RunPiManager_padding_BA248);
+INCLUDE_DATA("game_code", System_RunPiManager_padding_BA248);
 #endif
 #if VERSION_DE
-INCLUDE_DATA("span_1000", System_RunPiManager_padding_B9FA8);
+INCLUDE_DATA("game_code", System_RunPiManager_padding_B9FA8);
 #endif
 
 #endif

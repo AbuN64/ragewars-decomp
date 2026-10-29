@@ -176,21 +176,21 @@ void XMath_ConvertYzxToZyxAngles(CVector3 *angles) {
 
 
 void XMath_ConvertYxzToZyxAngles(f32 *angles) {
-    f32 sp10;
-    f32 sp14;
-    f32 sp18;
-    f32 sp1C;
-    f32 sp20;
-    f32 sp24;
+    f32 sinFirstAngle;
+    f32 cosFirstAngle;
+    f32 sinSecondAngle;
+    f32 cosSecondAngle;
+    f32 sinThirdAngle;
+    f32 cosThirdAngle;
     f32 angle;
     f32 test;
     f32 out0;
     f32 out2;
 
-    XMath_EvaluateSineCosine(angles[0], &sp10, &sp14);
-    XMath_EvaluateSineCosine(angles[1], &sp18, &sp1C);
-    XMath_EvaluateSineCosine(angles[2], &sp20, &sp24);
-    test = (sp1C * sp10 * sp20) - (sp18 * sp24);
+    XMath_EvaluateSineCosine(angles[0], &sinFirstAngle, &cosFirstAngle);
+    XMath_EvaluateSineCosine(angles[1], &sinSecondAngle, &cosSecondAngle);
+    XMath_EvaluateSineCosine(angles[2], &sinThirdAngle, &cosThirdAngle);
+    test = (cosSecondAngle * sinFirstAngle * sinThirdAngle) - (sinSecondAngle * cosThirdAngle);
     if ((1.0f) < test) {
         test = (1.0f);
     }
@@ -200,16 +200,16 @@ void XMath_ConvertYxzToZyxAngles(f32 *angles) {
     angle = XMath_EvaluateArcSine(-test);
     test = ((f32 (*)(f32))XMath_EvaluateCosine)(angle);
     if (((9.9999997473787516e-05f) < test) || (test < (-9.9999997473787516e-05f))) {
-        f32 product = sp1C * sp24;
-        f32 cross = sp18 * sp20;
-        f32 first0 = cross + (sp10 * product);
-        f32 first1 = sp14 * sp1C;
-        f32 second0 = sp14 * sp20;
-        f32 second1 = product + (cross * sp10);
+        f32 product = cosSecondAngle * cosThirdAngle;
+        f32 cross = sinSecondAngle * sinThirdAngle;
+        f32 first0 = cross + (sinFirstAngle * product);
+        f32 first1 = cosFirstAngle * cosSecondAngle;
+        f32 second0 = cosFirstAngle * sinThirdAngle;
+        f32 second1 = product + (cross * sinFirstAngle);
         out0 = XMath_EvaluateArcTangentTwo(first0, first1);
         out2 = XMath_EvaluateArcTangentTwo(second0, second1);
     } else {
-        out0 = XMath_EvaluateArcTangentTwo(sp10, sp14 * sp24);
+        out0 = XMath_EvaluateArcTangentTwo(sinFirstAngle, cosFirstAngle * cosThirdAngle);
         out2 = 0.0f;
     }
     angles[0] = out0;

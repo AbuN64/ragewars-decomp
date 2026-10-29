@@ -89,7 +89,7 @@ struct LevelActor {
     u8 pad298[0xC];
     f32 restPitch; /* 0x2A4 */
     u8 pad2A8[4];
-    s32 field2AC; /* player actor offset 0x594 */
+    s32 gear; /* player actor offset 0x594 */
     u8 pad2B0[0x30];
     s32 renderFlags; /* 0x2E0 */
     s32 flags2E4;

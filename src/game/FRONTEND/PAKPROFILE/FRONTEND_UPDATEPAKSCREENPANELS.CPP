@@ -41,7 +41,7 @@ s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 event) {
             g_pakProfileScreenState->timer = openFramesLeft;
             if (openFramesLeft <= 0) {
                 SoundElement_PlayFlatSound(0xE79);
-                /* unk28 is the panel's item handle, kept untyped in the animation state */
+                /* title is the panel's item handle, kept untyped in the animation state */
                 Widget_SetWidgetFlag08((SlotSelectionWidget *) g_pakProfileScreenState->title, 1);
                 SmpFlicker_StartFlicker(g_pakProfileScreenState->music, 4);
                 g_pakProfileScreenState->ready = 4;

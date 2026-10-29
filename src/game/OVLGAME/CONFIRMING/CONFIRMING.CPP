@@ -148,7 +148,7 @@ void Confirming_SelectConfirmingController(MenuControllerSelectionView *menuOwne
     SoundElement_DisableMusicGainOverride();
 }
 
-/** Dispatches to Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog or Control_DisableControllerPakDe with a byte read from menuStorage->unk20->unk4, chosen by enabled. */
+/** Dispatches to Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog or Control_DisableControllerPakDe with a byte read from menuStorage->widget->controllerPort, chosen by enabled. */
 
 extern void Control_EnableControllerPak(s32 arg);
 extern void Control_DisableControllerPak(s32 arg);

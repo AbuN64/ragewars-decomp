@@ -65,11 +65,11 @@ s32 Frontend_GetMenuImageState(s32 *record) {
     return record[0x18 / 4];
 }
 #if VERSION_EU
-INCLUDE_DATA("ovl_frontendMenu", D_auto_Frontend_GetMenuImageState_padding_eu);
+INCLUDE_DATA("ovl_frontendMenu", Frontend_GetMenuImageState_padding_eu);
 #endif
 #if VERSION_EU_X
-INCLUDE_DATA("ovl_frontendMenu", D_auto_Menu_GetLocalizedEncodedResource_padding_12D324);
+INCLUDE_DATA("ovl_frontendMenu", Menu_GetLocalizedEncodedResource_padding_eu_x);
 #endif
 #if VERSION_US
-INCLUDE_DATA("ovl_frontendMenu", D_auto_Frontend_GetMenuImageState_padding_us);
+INCLUDE_DATA("ovl_frontendMenu", Frontend_GetMenuImageState_padding_us);
 #endif

@@ -217,7 +217,7 @@ void Scene_SetSecondaryLevelBit(struct Shared_World *world, s32 index, s32 bitIn
     base2[idx2 >> 3] &= ~mask;
 }
 
-void func_8028B4C8_de(void) {
+void Scene_EmptyHandlerAfterSetSecondaryLevelBit(void) {
 }
 
 

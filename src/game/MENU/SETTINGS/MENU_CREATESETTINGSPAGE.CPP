@@ -26,7 +26,7 @@ extern void SmpButton_SelectListEntry(struct MenuListWidget *, s32);
 extern MenuSliderWidget *SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(Scroll *, s32);
 /* German Options_CreateOptionsPage: the same options-commit page without the first (blood) list, so the
-   lists 0x51/0x52 and 0x53/0x54 fill unk_10 and unk_14 and the slider is 0x55/0x56. */
+   lists 0x51/0x52 and 0x53/0x54 fill twoPlayerScreenList and resolutionList and the slider is 0x55/0x56. */
 s32 Menu_CreateSettingsPage(void) {
     Shared_Game *settings;
     void *secondList;

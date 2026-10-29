@@ -1247,7 +1247,6 @@ extern u8 g_secondaryMenuByteOptions[];
 extern f32 g_encodedTextCursorTiming[];
 
 
-extern f32 D_801468B0;
 
 extern float g_audioResamplerFixedPointUnit;
 
@@ -3666,7 +3665,7 @@ struct Dest {
     u8 count;
     s8 secondaryLevel; /* 0xCC */
     u8 padCD[3];
-    s32 reservedD0, fieldD4;
+    s32 reservedD0, reservedWordBeforeTail;
     u8 reservedD8[0x24];
     struct CLoopingSoundData_t *sound; /* 0xFC */
     u8 pending; /* 0x100 */

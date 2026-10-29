@@ -35,7 +35,7 @@ extern struct List g_controllerPakEnabledDialogResource;
 extern void Control_EnableControllerPak(int controllerPort);
 
 /* Restarts a round for the player passed in dialog: clears the world timer flag g_pakPlayerMessagePending via
-   func_804097E8_de, then reallocates a fresh scoreboard entry via Menu_OpenDialog using dialog's fields
+   Timer_ClearTimerFlag, then reallocates a fresh scoreboard entry via Menu_OpenDialog using dialog's fields
    at 0x1C and 0x20 against the g_controllerPakReadyDialogResource_PakClosepromptbykind list, and always reports success. Sibling of
    CMenuProfile_OpenTimedPlayerDialog, which also fires SoundElement_StopAudioExceptKey(-1) and uses the g_profileDialogFixedLabel list instead. */
 
@@ -218,7 +218,7 @@ void Initial_SelectInitialController(void *unused0, struct GamePlayerListView *m
     g_initialMatchStartPending = 1;
 }
 
-/** Clears or sets bit 24 of item's record's flags depending on how many of Control_CountConnectedControllers_FrontendUpdateplayercountscreen's four slots are active, and demotes item->unk0 from state 2 to 1 in the low-count case. */
+/** Clears or sets bit 24 of item's record's flags depending on how many of Control_CountConnectedControllers_FrontendUpdateplayercountscreen's four slots are active, and demotes item->availability from state 2 to 1 in the low-count case. */
 s32 Initial_UpdateMultiplayerAvailability(void *unused0, MultiplayerAvailabilityItem *item) {
     if (Control_CountConnectedControllers() < 2) {
         item->widget->flags &= 0xFEFFFFFF;

@@ -60,7 +60,7 @@ struct ResourceSource {
     s32 flags;
     u16 id;
     u8 pad6[0x12];
-    u16 unk18;
+    u16 copiedHalfFirst;
     u16 copiedHalfSecond;
 };
 

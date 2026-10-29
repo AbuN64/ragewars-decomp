@@ -102,7 +102,7 @@ int Gdynlight_GetNextLight(void *unused0, void *rangeNode) {
     return (int)node->next;
 }
 
-/* ROM-grounded data: src/rw_pool_80268A40_CA180_us_rev1.c */
+/* ROM-grounded data: src/g_dynamicLightDirectionConstants.c */
 const unsigned int g_dynamicLightDirectionConstants[2] = {
     0x3F800000, 0x3ECCCCCD,
 };

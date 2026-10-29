@@ -232,7 +232,7 @@ typedef struct EffectList { void *head, *tail; s32 count; } EffectList;
 typedef struct EffectNode {
     struct EffectNode *previous, *next; EffectResource *resource;
     void *first, *second; f32 coordinates[2]; void *owner; s32 kind;
-    f32 value; s32 reservedWordAfterValue, field2C, field30, attachment, handle, flags;
+    f32 value; s32 reservedWordAfterValue, clearedWordAfterReserved, clearedWordBeforeAttachment, attachment, handle, flags;
     EffectList children; s32 reservedWordAfterChildren, reservedWordTrailing;
 } EffectNode;
 typedef struct EffectPool { EffectList free, used; } EffectPool;
@@ -288,8 +288,8 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
         node->attachment = resource->attachment;
         node->reservedWordAfterChildren = 0;
         node->reservedWordTrailing = 0;
-        node->field2C = 0;
-        node->field30 = 0;
+        node->clearedWordAfterReserved = 0;
+        node->clearedWordBeforeAttachment = 0;
         node->handle = -1;
         if (node->attachment != -1) {
             Textload_LocateTextureResource(node->coordinates, node->attachment);

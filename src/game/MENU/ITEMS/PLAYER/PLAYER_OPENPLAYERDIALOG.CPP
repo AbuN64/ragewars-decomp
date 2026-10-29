@@ -6,8 +6,8 @@
 #include "MENU/PAK/TIMER_CANCELPENDINGOPERATION.H"
 
 /* Loads the owner at offset 0x1C of the second argument into g_playerViewRenderContext through Player_GetPlayerIndexDe,
-   calls func_804097E8_de, and hands the owner, its word at 0x698 and a zero with the resource
-   D_44F0DC to Menu_OpenDialog for the block 0x5DC bytes into g_playerViewRenderContext. Returns one. */
+   calls Timer_ClearTimerFlag, and hands the owner, its word at 0x698 and a zero with the resource
+   g_playerMenuDialogRomResource to Menu_OpenDialog for the block 0x5DC bytes into g_playerViewRenderContext. Returns one. */
 
 
 

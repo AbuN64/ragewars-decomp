@@ -78,7 +78,7 @@ s32 Menu_DrawMenuBlockModel(void *window, void *item, s32 event) {
 }
 
 /* On event 3 with value 0, calls MarkMenuEventHandled, hands Focus_AdvanceActiveSlot_Menu the cursor word the hub
-   names unk268 at +0x10C of the menu block g_profileStatisticsScreen points to, calls Focus_ShowUnlockedEntries with 0x6E,
+   names activeSlot at +0x10C of the menu block g_profileStatisticsScreen points to, calls Focus_ShowUnlockedEntries with 0x6E,
    Focus_RefreshProfileStatistics and Focus_RefreshUnlockedFocusLabel, and clears the hub's focus word at +0x0EC. Returns zero. */
 
 extern void MarkMenuEventHandled();

@@ -147,7 +147,7 @@ void *Scene_FindActorDefinition(Shared_World *world, s32 selection, s32 modelKin
     return 0;
 }
 
-/* Collects up to max records of container (indices unk13C to unk140) whose modelId, unk18->unk0 and unk18->unkC match key0, key1 and key2 (each skipped when -1) into out, returning the count. */
+/* Collects up to max records of container (indices actorCursor to actorCount) whose modelId, kindDescriptor->kindId and kindDescriptor->teamId match key0, key1 and key2 (each skipped when -1) into out, returning the count. */
 s32 Scene_CollectMatchingLevelActors(Container *container, s32 key0, s32 key1, s32 key2, SceneActorMatchRecord **out, s32 max) {
     s32 i = container->actorCursor;
     s32 end = container->actorCount;

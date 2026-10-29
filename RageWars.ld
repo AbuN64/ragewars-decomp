@@ -2,11 +2,11 @@
 OUTPUT_ARCH(mips)
 SECTIONS
 {
-    .retained_0 0x00000000 : AT(0x0) SUBALIGN(1)
+    .rom_header_ipl3 0x00000000 : AT(0x0) SUBALIGN(1)
     {
-        assets/retained_0.bin.o(.data);
+        assets/rom_header_ipl3.bin.o(.data);
     }
-    .span_1000 0x80200400 : AT(0x1000) SUBALIGN(1)
+    .game_code 0x80200400 : AT(0x1000) SUBALIGN(1)
     {
 #if defined(VERSION_DE)
         src/sdk/boot/entry.s.o(.text);
@@ -10636,7 +10636,7 @@ SECTIONS
         src/sdk/libgcc/_floatdisf.CPP.o(.text);
 #endif
     }
-    .span_1000.bss (NOLOAD) :
+    .game_code.bss (NOLOAD) :
     {
 #if defined(VERSION_DE)
         src/sdk/boot/entry.s.o(.bss .sbss COMMON);
@@ -14616,15 +14616,15 @@ SECTIONS
 #endif
     }
 #if defined(VERSION_DE)
-    .data_800C 0x800C19C0 : AT(0xC25C0) SUBALIGN(1)
+    .game_data 0x800C19C0 : AT(0xC25C0) SUBALIGN(1)
 #elif defined(VERSION_EU)
-    .data_800C 0x800C1C60 : AT(0xC2860) SUBALIGN(1)
+    .game_data 0x800C1C60 : AT(0xC2860) SUBALIGN(1)
 #elif defined(VERSION_EU_X)
-    .data_800C 0x800C1CA0 : AT(0xC28A0) SUBALIGN(1)
+    .game_data 0x800C1CA0 : AT(0xC28A0) SUBALIGN(1)
 #elif defined(VERSION_US)
-    .data_800C 0x800C18F0 : AT(0xC24F0) SUBALIGN(1)
+    .game_data 0x800C18F0 : AT(0xC24F0) SUBALIGN(1)
 #elif defined(VERSION_US_REV1)
-    .data_800C 0x800C6AB0 : AT(0xC76B0) SUBALIGN(1)
+    .game_data 0x800C6AB0 : AT(0xC76B0) SUBALIGN(1)
 #endif
     {
 #if defined(VERSION_DE)
@@ -29514,7 +29514,7 @@ SECTIONS
         src/game/DATA/GFXDATA/GFXDATA.CPP.o(.data);
 #endif
     }
-    .data_800C.bss (NOLOAD) :
+    .game_data.bss (NOLOAD) :
     {
 #if defined(VERSION_DE)
         src/sdk/libsn/io_hostmemory/io_hostmemory.CPP.o(.bss .sbss COMMON);
@@ -42304,21 +42304,21 @@ SECTIONS
 #endif
     }
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    .retained_101000 0x00101000 : AT(0x101000) SUBALIGN(1)
+    .debug_symbols 0x00101000 : AT(0x101000) SUBALIGN(1)
     {
-        assets/retained_101000.bin.o(.data);
+        assets/debug_symbols.bin.o(.data);
     }
 #endif
 #if defined(VERSION_DE)
-    .data_8014 0x8014F2FC : AT(0x1B4144) SUBALIGN(1)
+    .ovl_frontendMenuData 0x8014F2FC : AT(0x1B4144) SUBALIGN(1)
 #elif defined(VERSION_EU)
-    .data_8014 0x801605CC : AT(0x1C5414) SUBALIGN(1)
+    .ovl_frontendMenuData 0x801605CC : AT(0x1C5414) SUBALIGN(1)
 #elif defined(VERSION_EU_X)
-    .data_8014 0x8015A6FC : AT(0x13F544) SUBALIGN(1)
+    .ovl_frontendMenuData 0x8015A6FC : AT(0x13F544) SUBALIGN(1)
 #elif defined(VERSION_US)
-    .data_8014 0x8014D46C : AT(0x1B22B4) SUBALIGN(1)
+    .ovl_frontendMenuData 0x8014D46C : AT(0x1B22B4) SUBALIGN(1)
 #elif defined(VERSION_US_REV1)
-    .data_8014 0x80153F4C : AT(0x1BCD94) SUBALIGN(1)
+    .ovl_frontendMenuData 0x80153F4C : AT(0x1BCD94) SUBALIGN(1)
 #endif
     {
 #if defined(VERSION_US_REV1)
@@ -42353,7 +42353,7 @@ SECTIONS
         src/game/DATA/OVERLAYS/TWO/OBJECTDATA/OBJECTDATA.CPP.o(.data);
 #endif
     }
-    .data_8014.bss (NOLOAD) :
+    .ovl_frontendMenuData.bss (NOLOAD) :
     {
 #if defined(VERSION_US_REV1)
         src/game/DATA/OVL3/OVL3.CPP.o(.bss .sbss COMMON);
@@ -42380,33 +42380,33 @@ SECTIONS
 #endif
     }
 #if defined(VERSION_EU_X)
-    .retained_142D20 0x00142D20 : AT(0x142D20) SUBALIGN(1)
+    .debug_symbols_and_assets 0x00142D20 : AT(0x142D20) SUBALIGN(1)
     {
-        assets/retained_142D20.bin.o(.data);
+        assets/debug_symbols_and_assets.bin.o(.data);
     }
 #endif
 #if defined(VERSION_US)
-    .retained_1B5A50 0x001B5A50 : AT(0x1B5A50) SUBALIGN(1)
+    .debug_symbols_and_assets 0x001B5A50 : AT(0x1B5A50) SUBALIGN(1)
     {
-        assets/retained_1B5A50.bin.o(.data);
+        assets/debug_symbols_and_assets.bin.o(.data);
     }
 #endif
 #if defined(VERSION_DE)
-    .retained_1B78D0 0x001B78D0 : AT(0x1B78D0) SUBALIGN(1)
+    .debug_symbols_and_assets 0x001B78D0 : AT(0x1B78D0) SUBALIGN(1)
     {
-        assets/retained_1B78D0.bin.o(.data);
+        assets/debug_symbols_and_assets.bin.o(.data);
     }
 #endif
 #if defined(VERSION_US_REV1)
-    .retained_1C0860 0x001C0860 : AT(0x1C0860) SUBALIGN(1)
+    .debug_symbols_and_assets 0x001C0860 : AT(0x1C0860) SUBALIGN(1)
     {
-        assets/retained_1C0860.bin.o(.data);
+        assets/debug_symbols_and_assets.bin.o(.data);
     }
 #endif
 #if defined(VERSION_EU)
-    .retained_1C8BF0 0x001C8BF0 : AT(0x1C8BF0) SUBALIGN(1)
+    .debug_symbols_and_assets 0x001C8BF0 : AT(0x1C8BF0) SUBALIGN(1)
     {
-        assets/retained_1C8BF0.bin.o(.data);
+        assets/debug_symbols_and_assets.bin.o(.data);
     }
 #endif
     /DISCARD/ : { *(.MIPS.abiflags .reginfo .pdr .mdebug* .options .debug* .comment .note* .gnu.attributes) }

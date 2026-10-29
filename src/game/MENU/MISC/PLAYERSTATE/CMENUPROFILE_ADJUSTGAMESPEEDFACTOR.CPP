@@ -13,7 +13,7 @@ s32 CMenuProfile_GameSpeedReturnZero(void) {
     return 0;
 }
 
-/* Returns 1 if any of g_matchRoundCounters's unk1C, unk20 or unk28 fields is nonzero, otherwise 0. */
+/* Returns 1 if any of g_matchRoundCounters's elapsed, state or round fields is nonzero, otherwise 0. */
 
 
 
@@ -29,7 +29,7 @@ s32 CMenuProfile_HasDialogRoundProgress(void) {
     return result;
 }
 
-/* Clears menuContext->unk1C's unk858 flag and its unk5D8's unk80, then forwards to Menu_OpenDialog. */
+/* Clears menuContext->selectionPlayer's alternateDialogFlag flag and its characterKindView's characterKind, then forwards to Menu_OpenDialog. */
 
 extern void Menu_OpenDialog(s32 parent, void *list, void *player, s32 controller, s32 dialogParameter);
 extern s32 g_playerMenuDialogTable;
@@ -50,7 +50,7 @@ s32 CMenuProfile_OpenPrimaryPlayerDialog(void *unused0, PlayerDialogMenuContext 
     return 1;
 }
 
-/* Sets menuContext->unk1C's unk858 flag and clears its unk5D8's unk80, then forwards to Menu_OpenDialog. */
+/* Sets menuContext->selectionPlayer's alternateDialogFlag flag and clears its characterKindView's characterKind, then forwards to Menu_OpenDialog. */
 
 
 

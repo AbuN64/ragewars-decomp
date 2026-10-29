@@ -86,14 +86,14 @@ extern void Widget_DrawVisibleSiblings(void *, Args);
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_buttonWidgetEventIds, an actor kind at g_buttonWidgetEventActorKinds and a handler at g_buttonWidgetEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_buttonWidgetEventIds, an actor kind at g_buttonWidgetEventActorKinds and a handler at g_buttonWidgetEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
 
 
 
-/* Calls SoundElement_PlayFlatSound with 0xE74 and sets the byte at 0x10 of every child in the list at 0x8 of arg0 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from N64Eng_SetLinkedCommand100WithSound with both stores to 0x5C and 0x48 removed. */
+/* Calls SoundElement_PlayFlatSound with 0xE74 and sets the byte at 0x10 of every child in the list at 0x8 of list whose halfword at 0xE is not 8 to 100, returning zero. Adapted from N64Eng_SetLinkedCommand100WithSound with both stores to 0x5C and 0x48 removed. */
 
 
 

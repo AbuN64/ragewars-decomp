@@ -436,7 +436,7 @@ s32 Graphu64_GetHorizontalIntersectionParameter(f32 *edgePlane, f32 *intersectin
     return result;
 }
 
-/** Half-plane test: is pointPosition on the positive side of arg0's normal (at +0x30)? */
+/** Half-plane test: is pointPosition on the positive side of geometryEdge's normal (at +0x30)? */
 s32 Graphu64_IsPointOnPositiveEdgeSide(void *geometryEdge, void *pointPosition) {
     GeometryEdge *edge = geometryEdge;
     CVector3 *point = pointPosition;

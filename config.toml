@@ -18,13 +18,13 @@ cartridge_id = "NUS-NRWD-0"
 region = "Germany"
 description = "Censored German release."
 segments = [
-  { name = "retained_0", rom = 0x0, kind = "bin" },
-  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
-  { name = "data_800C", rom = 0xC25C0, vram = 0x800C19C0 },
-  { name = "retained_101000", rom = 0x101000, kind = "bin" },
+  { name = "rom_header_ipl3", rom = 0x0, kind = "bin" },
+  { name = "game_code", rom = 0x1000, vram = 0x80200400 },
+  { name = "game_data", rom = 0xC25C0, vram = 0x800C19C0 },
+  { name = "debug_symbols", rom = 0x101000, kind = "bin" },
   { name = "ovl_frontendMenu", rom = 0x166000, vram = 0x80400000 },
-  { name = "data_8014", rom = 0x1B4144, vram = 0x8014F2FC },
-  { name = "retained_1B78D0", rom = 0x1B78D0, kind = "bin" },
+  { name = "ovl_frontendMenuData", rom = 0x1B4144, vram = 0x8014F2FC },
+  { name = "debug_symbols_and_assets", rom = 0x1B78D0, kind = "bin" },
 ]
 
 [version.eu]
@@ -34,13 +34,13 @@ cartridge_id = "NUS-NRWP-0"
 region = "Europe"
 description = "PAL release."
 segments = [
-  { name = "retained_0", rom = 0x0, kind = "bin" },
-  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
-  { name = "data_800C", rom = 0xC2860, vram = 0x800C1C60 },
-  { name = "retained_101000", rom = 0x101000, kind = "bin" },
+  { name = "rom_header_ipl3", rom = 0x0, kind = "bin" },
+  { name = "game_code", rom = 0x1000, vram = 0x80200400 },
+  { name = "game_data", rom = 0xC2860, vram = 0x800C1C60 },
+  { name = "debug_symbols", rom = 0x101000, kind = "bin" },
   { name = "ovl_frontendMenu", rom = 0x176000, vram = 0x80400000 },
-  { name = "data_8014", rom = 0x1C5414, vram = 0x801605CC },
-  { name = "retained_1C8BF0", rom = 0x1C8BF0, kind = "bin" },
+  { name = "ovl_frontendMenuData", rom = 0x1C5414, vram = 0x801605CC },
+  { name = "debug_symbols_and_assets", rom = 0x1C8BF0, kind = "bin" },
 ]
 
 [version."eu-x"]
@@ -50,12 +50,12 @@ cartridge_id = "NUS-NRWX-0"
 region = "Europe"
 description = "PAL multi-language release."
 segments = [
-  { name = "retained_0", rom = 0x0, kind = "bin" },
-  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
-  { name = "data_800C", rom = 0xC28A0, vram = 0x800C1CA0 },
+  { name = "rom_header_ipl3", rom = 0x0, kind = "bin" },
+  { name = "game_code", rom = 0x1000, vram = 0x80200400 },
+  { name = "game_data", rom = 0xC28A0, vram = 0x800C1CA0 },
   { name = "ovl_frontendMenu", rom = 0xF0000, vram = 0x80400000 },
-  { name = "data_8014", rom = 0x13F544, vram = 0x8015A6FC },
-  { name = "retained_142D20", rom = 0x142D20, kind = "bin" },
+  { name = "ovl_frontendMenuData", rom = 0x13F544, vram = 0x8015A6FC },
+  { name = "debug_symbols_and_assets", rom = 0x142D20, kind = "bin" },
 ]
 
 [version.us]
@@ -65,13 +65,13 @@ cartridge_id = "NUS-NRWE-0"
 region = "North America"
 description = "First NTSC release (black cartridge)."
 segments = [
-  { name = "retained_0", rom = 0x0, kind = "bin" },
-  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
-  { name = "data_800C", rom = 0xC24F0, vram = 0x800C18F0 },
-  { name = "retained_101000", rom = 0x101000, kind = "bin" },
+  { name = "rom_header_ipl3", rom = 0x0, kind = "bin" },
+  { name = "game_code", rom = 0x1000, vram = 0x80200400 },
+  { name = "game_data", rom = 0xC24F0, vram = 0x800C18F0 },
+  { name = "debug_symbols", rom = 0x101000, kind = "bin" },
   { name = "ovl_frontendMenu", rom = 0x164000, vram = 0x80400000 },
-  { name = "data_8014", rom = 0x1B22B4, vram = 0x8014D46C },
-  { name = "retained_1B5A50", rom = 0x1B5A50, kind = "bin" },
+  { name = "ovl_frontendMenuData", rom = 0x1B22B4, vram = 0x8014D46C },
+  { name = "debug_symbols_and_assets", rom = 0x1B5A50, kind = "bin" },
 ]
 
 [version."us-rev1"]
@@ -81,11 +81,11 @@ cartridge_id = "NUS-NRWE-1"
 region = "North America"
 description = "Revised NTSC release (grey cartridge)."
 segments = [
-  { name = "retained_0", rom = 0x0, kind = "bin" },
-  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
-  { name = "data_800C", rom = 0xC76B0, vram = 0x800C6AB0 },
+  { name = "rom_header_ipl3", rom = 0x0, kind = "bin" },
+  { name = "game_code", rom = 0x1000, vram = 0x80200400 },
+  { name = "game_data", rom = 0xC76B0, vram = 0x800C6AB0 },
   { name = "rsp_alignment", rom = 0xDD834, kind = "bin" },
-  { name = "data_800C", rom = 0xDD83C, vram = 0x800DCC3C },
+  { name = "game_data", rom = 0xDD83C, vram = 0x800DCC3C },
   { name = "rsp_boot", rom = 0xDD840, kind = "bin" },
   { name = "rsp_graphics_f3dex2_code", rom = 0xDD910, kind = "bin" },
   { name = "rsp_graphics_l3dex2_code", rom = 0xDECA0, kind = "bin" },
@@ -93,11 +93,11 @@ segments = [
   { name = "rsp_graphics_f3dex2_data", rom = 0xE0C50, kind = "bin" },
   { name = "rsp_graphics_l3dex2_data", rom = 0xE1070, kind = "bin" },
   { name = "rsp_audio_data", rom = 0xE1460, kind = "bin" },
-  { name = "data_800C", rom = 0xE1720, vram = 0x800E0B20 },
-  { name = "retained_101000", rom = 0x101000, kind = "bin" },
+  { name = "game_data", rom = 0xE1720, vram = 0x800E0B20 },
+  { name = "debug_symbols", rom = 0x101000, kind = "bin" },
   { name = "ovl_frontendMenu", rom = 0x16E000, vram = 0x80400000 },
-  { name = "data_8014", rom = 0x1BCD94, vram = 0x80153F4C },
-  { name = "retained_1C0860", rom = 0x1C0860, kind = "bin" },
+  { name = "ovl_frontendMenuData", rom = 0x1BCD94, vram = 0x80153F4C },
+  { name = "debug_symbols_and_assets", rom = 0x1C0860, kind = "bin" },
 ]
 
 [library."src/sdk/MATH/"]

@@ -449,7 +449,7 @@ block_47:
                                 specialHitStatistics->special_hits = (u16) (specialHitStatistics->special_hits + 1);
                             }
                             facingSine = Gu_Sinf(attacker->heading);
-                            sourceForwardProjection = ((damagedPlayer->positionX - reaction_source->positionX) * -facingSine) + ((damagedPlayer->unk10 - reaction_source->positionZ) * -Math_Cosf(attacker->heading));
+                            sourceForwardProjection = ((damagedPlayer->positionX - reaction_source->positionX) * -facingSine) + ((damagedPlayer->positionZ - reaction_source->positionZ) * -Math_Cosf(attacker->heading));
                             if (sourceForwardProjection < g_playerDamageRearProjectionThreshold) {
 
                                 damagedPlayer->hitDirection = 1;

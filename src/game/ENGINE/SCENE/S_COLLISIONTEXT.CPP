@@ -12,6 +12,6 @@ const char g_scene_LoadLevelResourcesConstantWords[12] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_80286AA8_CAE0C_us_rev1.c */
+/* ROM-grounded data: src/s_collisionText.c */
 const char s_collisionText[10] = "collision";
 #endif

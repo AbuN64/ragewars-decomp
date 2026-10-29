@@ -11,7 +11,7 @@ extern s8 Menu_AdjustValue(ProfileModeMenuContext *menu, s8 value, s32 step, s32
 
 extern void Menu_AllocateMenu(void *owner, void *params, void *list);
 
-/* Points modeLabel's unk14 field at g_profileModeZeroLabel or g_profileModeOneLabel when the mode byte at 0x7B of the owner's record is 0 or 1, and returns 0. */
+/* Points modeLabel's label field at g_profileModeZeroLabel or g_profileModeOneLabel when the mode byte at 0x7B of the owner's record is 0 or 1, and returns 0. */
 
 
 
@@ -23,7 +23,7 @@ extern void Menu_AllocateMenu(void *owner, void *params, void *list);
 
 
 
-/* Forwards pakMenu->unk20->unk4 to Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog and clears g_pakPlayerMessagePending. */
+/* Forwards pakMenu->widget->controllerPort to Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog and clears g_pakPlayerMessagePending. */
 
 
 
@@ -36,7 +36,7 @@ extern void Control_EnableControllerPak(s32 kind);
 
 
 /* Restarts a round for the player passed in menuContext: clears the world timer flag g_pakPlayerMessagePending via
-   func_804097E8_de, cancels the active countdown sound through SoundElement_StopAudioExceptKey, then reallocates a
+   Timer_ClearTimerFlag, cancels the active countdown sound through SoundElement_StopAudioExceptKey, then reallocates a
    fresh scoreboard entry via Menu_OpenDialog using menuContext's fields at 0x1C and 0x20, and always
    reports success. */
 

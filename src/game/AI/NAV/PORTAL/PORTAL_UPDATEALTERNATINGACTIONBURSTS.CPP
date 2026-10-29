@@ -59,7 +59,7 @@ void Portal_DispatchActorBehavior(void *controller)
         return;
     }
 
-    mode = actor->weapon.field2AC;
+    mode = actor->weapon.gear;
     type = actor->selectedAction;
     mode -= 1;
     {

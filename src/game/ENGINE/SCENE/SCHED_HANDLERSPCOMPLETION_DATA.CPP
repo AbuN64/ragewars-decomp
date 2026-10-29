@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800D299C.CPP */
+/* g_SchedHandlerspcompletionEncodedWordsBlock1.CPP */
 /* ROM-grounded data: rodata/writable/800D299C */
 #ifdef VERSION_DE
 unsigned int g_SchedHandlerspcompletionEncodedWordsBlock1[15] = {
@@ -33,7 +33,6 @@ unsigned int g_SchedHandlerspcompletionEncodedWordsBlock1[15] = {
 };
 #endif
 
-/* DATA_800D29D8.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 unsigned int D_src_55fe5453[63] = {
@@ -80,12 +79,12 @@ extern char g_setN64_ExitSessionAndDisablePaksEntry[];
 extern char g_setN64_DrawRoundTimeoutSessionEntry[];
 extern char g_setN64_ResetSceneForIntroEntry[];
 extern char g_setN64_AdvanceIntroForMemorySizeEntry[];
-extern char D_00293FE4[];
+extern char g_setN64_DrawIntroBackdropEntry[];
 extern char g_setN64_InitializeMode2Entry[];
 extern char g_setN64_AdvanceToModeFiveEntry[];
 extern char g_setN64_DrawCenteredIntroTextEntry[];
 unsigned int g_SchedHandlerspcompletionEncodedWords[9] = {
-    (unsigned int)g_setN64_InitializeFrontendScreenStateEntry, (unsigned int)g_setN64_ExitSessionAndDisablePaksEntry, (unsigned int)g_setN64_DrawRoundTimeoutSessionEntry, (unsigned int)g_setN64_ResetSceneForIntroEntry, (unsigned int)g_setN64_AdvanceIntroForMemorySizeEntry, (unsigned int)D_00293FE4, (unsigned int)g_setN64_InitializeMode2Entry, (unsigned int)g_setN64_AdvanceToModeFiveEntry,
+    (unsigned int)g_setN64_InitializeFrontendScreenStateEntry, (unsigned int)g_setN64_ExitSessionAndDisablePaksEntry, (unsigned int)g_setN64_DrawRoundTimeoutSessionEntry, (unsigned int)g_setN64_ResetSceneForIntroEntry, (unsigned int)g_setN64_AdvanceIntroForMemorySizeEntry, (unsigned int)g_setN64_DrawIntroBackdropEntry, (unsigned int)g_setN64_InitializeMode2Entry, (unsigned int)g_setN64_AdvanceToModeFiveEntry,
     (unsigned int)g_setN64_DrawCenteredIntroTextEntry,
 };
 #endif

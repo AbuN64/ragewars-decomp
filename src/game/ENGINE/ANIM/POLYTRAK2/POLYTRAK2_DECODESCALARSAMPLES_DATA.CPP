@@ -46,7 +46,7 @@ inline static void write_bits(u32 value, u32 bitAddress, u32 bitWidth)
   words->high = (words->high & (~fieldMask)) | highWordValue;
 }
 
-/* Decodes element arg1 of a packed bit-field float array into a float scaled into its range. Adapted from Polytrak2_ReadQuantizedFloatAtAddress, inlined as a helper (with the width held in a local) called with a base plus width-times-index bit address and the record's range. */
+/* Decodes element elementIndex of a packed bit-field float array into a float scaled into its range. Adapted from Polytrak2_ReadQuantizedFloatAtAddress, inlined as a helper (with the width held in a local) called with a base plus width-times-index bit address and the record's range. */
 
 static inline f32 decode(s32 bitAddress, Polytrak2QuantizationRange range) {
     s32 shift;
@@ -274,5 +274,4 @@ void Polytrak2_StoreWordAndTriple(void *destination, int wordValue, Triple tripl
     record->tripleValue = tripleValue;
 }
 
-/* DATA_800C926C.CPP */
 

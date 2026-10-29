@@ -7,7 +7,7 @@
 extern s32 Simppool_CheckSequencePromptRequest(SequencePromptRequestView *request);
 
 struct ResidentSlot {
-    s32 unk0;
+    s32 overridesDisabled;
     char pad4[0x21A0 - 0x4];
     s32 reservedWord;
 };

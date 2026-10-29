@@ -51,7 +51,7 @@ extern MenuSliderWidget *Cache_AllocateMemory(s32);
 
 extern void Node_ReplaceNodeRefs(s32 node, MenuSliderWidget *from, MenuSliderWidget *newNode);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_sliderWidgetEventIds, an actor kind at g_sliderWidgetEventActorKinds and a handler at g_sliderWidgetEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_sliderWidgetEventIds, an actor kind at g_sliderWidgetEventActorKinds and a handler at g_sliderWidgetEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 

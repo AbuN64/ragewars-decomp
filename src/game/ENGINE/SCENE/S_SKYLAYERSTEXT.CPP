@@ -12,7 +12,7 @@ const char g_skyLayersText[11] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_80286AA8_CAEA4_us_rev1.c */
+/* ROM-grounded data: src/s_skyLayersText.c */
 const unsigned char s_skyLayersText[11] = {
     0x73, 0x6B, 0x79, 0x20, 0x6C, 0x61, 0x79, 0x65, 0x72, 0x73, 0x00,
 };

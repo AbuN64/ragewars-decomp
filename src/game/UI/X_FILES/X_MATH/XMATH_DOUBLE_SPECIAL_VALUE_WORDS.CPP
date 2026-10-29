@@ -1,10 +1,10 @@
 #include "include_asm.h"
 #include "COMMON/OBJRECAT3CV2.H"
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", D_auto_rodata_DispatchControllerButtonEvent_800C55E4);
+INCLUDE_RODATA("game_data", k_dispatchControllerButtonEventJumpTableTrailingWords);
 #endif
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", D_auto_rodata_DispatchControllerButtonEvent_800C5954);
+INCLUDE_RODATA("game_data", k_dispatchControllerButtonEventJumpTableTrailingWords);
 #endif
 
 const unsigned int k_xMathConstantWords[6] = {

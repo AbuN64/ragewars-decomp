@@ -1,8 +1,8 @@
 #ifndef RENDER_RANGENODE_H
 #define RENDER_RANGENODE_H
 struct CAnimPool;
-#ifndef SPAN_1000_CODE_80268160_H
-#define SPAN_1000_CODE_80268160_H
+#ifndef RENDER_RANGENODE_DECLARATIONS_H
+#define RENDER_RANGENODE_DECLARATIONS_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -93,7 +93,7 @@ typedef struct ContextEventsStartActorEmitter ContextEventsStartActorEmitter;
 
 struct EventCounterParameters;
 struct EventCounterParameters {
-    s16 unk0;
+    s16 halfBeforeValue;
     s16 value;
     s32 team;
 };

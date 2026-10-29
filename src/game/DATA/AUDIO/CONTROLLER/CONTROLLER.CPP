@@ -11,7 +11,7 @@ unsigned char g_ControllerTrailingBytesBlock1[4] = { 0x02, 0x00, 0x28, 0x21 };
 unsigned int func_802BA46C_eu_x[1] = { 0xAFB10014U };
 #endif
 
-/* DATA_802BA794.CPP */
+/* g_ControllerEncodedWords.CPP */
 #if defined(VERSION_US)
 unsigned int g_ControllerEncodedWords[3] = {
     0x005C0800, 0x00080004, 0x00000000,

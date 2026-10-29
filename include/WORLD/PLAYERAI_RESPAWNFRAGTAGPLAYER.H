@@ -359,7 +359,7 @@ struct PlayerProfileStorage {
     s32 state; /* 0x08 */
     u8 reservedByteC;
     s8 resetSentinelByte;
-    u8 reservedByteE, fieldF;
+    u8 reservedByteE, reservedByteBeforeProgress;
     s32 progress;
     u8 value14;
     u8 value15;

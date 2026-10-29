@@ -30,7 +30,7 @@ const unsigned int g_MultiVariableRetainedBytes1[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_formats_8043F120_E2FC0_us_rev1.c */
+/* ROM-grounded data: src/g_MultiVariableRetainedBytes2.c */
 const unsigned char g_MultiVariableRetainedBytes2[3] = {
     0x25, 0x73, 0x00,
 };

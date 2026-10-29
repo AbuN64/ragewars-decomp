@@ -232,7 +232,7 @@ void Geometry_GroupModelInstances(void) {
                     item->modelParamFirst = param->first;
                     item->modelParamSecond = param->second;
                     item->modelParamThird = param->third;
-                    item->sourceHalfFirst = source->unk18;
+                    item->sourceHalfFirst = source->copiedHalfFirst;
                     item->sourceHalfSecond = source->copiedHalfSecond;
                     item->modelParamFourth = param->fourth;
                     item->next = ((void *) 0);

@@ -783,7 +783,7 @@ s32 Pak_SelectOperationDescription(struct PakActionLabelView *field) {
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "SYSTEM/DEFS.H"
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", D_auto_rodata_Status_UpdateStatusText_800DBAC4);
+INCLUDE_RODATA("game_data", k_statusUpdateStatusTextJumpTableTrailingZeroWord);
 #endif
 extern char g_pakTwoDigitValueFormat[];
 extern char *g_pakAlternateChannelLabelTexts[];

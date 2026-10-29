@@ -417,7 +417,7 @@ void Menu_GetScreenDrawOrigin(s32 *xOut, s32 *yOut) {
     *yOut = g_screenManager->eventArgument1;
 }
 
-/* ROM-grounded data: src/rw_pool_80298FE8_CB408_us_rev1.c */
+/* ROM-grounded data: src/g_Menu_DrawScreenStackConstantWords_de_eu_eu_x_us_us_rev1.c */
 const unsigned int g_Menu_DrawScreenStackConstantWords_de_eu_eu_x_us_us_rev1[1] = {
     0x3F800000,
 };

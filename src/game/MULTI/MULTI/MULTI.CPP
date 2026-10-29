@@ -9,7 +9,7 @@
 #include "include_asm.h"
 
 /* 8043E9A8_6.CPP */
-/* When the timer D_801468B0 has run out, calls Match_ResetMatchControllerState on g_gameSession and returns one;
+/* When the timer m_GameOverTimer has run out, calls Match_ResetMatchControllerState on g_gameSession and returns one;
    otherwise returns zero. */
 extern void Match_ResetMatchControllerState(void *);
 

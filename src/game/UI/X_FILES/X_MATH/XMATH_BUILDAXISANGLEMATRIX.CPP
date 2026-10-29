@@ -295,7 +295,7 @@ void XMath_GetMatrixColumns(float *inputMatrix, float *columnX, float *columnY, 
     columnZ[2] = inputMatrix[10];
 }
 
-/** Thin wrapper forwarding arg0 twice (as first and third args) to XMath_MultiplyMatrices. */
+/** Thin wrapper forwarding destinationMatrix twice (as first and third args) to XMath_MultiplyMatrices. */
 void XMath_PremultiplyMatrix(int destinationMatrix, int leftMatrix) {
     XMath_MultiplyMatrices(destinationMatrix, leftMatrix, destinationMatrix);
 }

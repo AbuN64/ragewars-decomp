@@ -7,7 +7,7 @@ const unsigned int k_cmenuprofileUpdategamespeedlabelDataConstantWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_8043E7AC_E2F28_us_rev1.c */
+/* ROM-grounded data: src/k_cmenuprofileUpdategamespeedlabelDataTextBytes.c */
 const unsigned char k_cmenuprofileUpdategamespeedlabelDataTextBytes[4] = {
     0x25, 0x33, 0x64, 0x00,
 };

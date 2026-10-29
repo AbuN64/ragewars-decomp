@@ -141,7 +141,7 @@ void Stage_StartConfiguredMatch(void) {
    nonzero kind places it through Random_AddStageOpponent and, by kind, sets the returned slot's controlMode
    and the match counters: kind 12 sets 2 with enabled, timer 100 and cooldown -1; 13 sets 1 with
    enabled; 16 sets 2; 14 sets 1 with enabled for the first such opponent and 0 afterwards; 15 sets 1
-   with enabled and clears unk9C; any other kind sets 0 and, once a kind 15 opponent was placed,
+   with enabled and clears m_nTalsetLives; any other kind sets 0 and, once a kind 15 opponent was placed,
    marks the slot active. */
 extern s32 Random_AddStageOpponent(u8 *);
 void Stage_PlaceStageOpponents(void) {

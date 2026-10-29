@@ -7,7 +7,7 @@ typedef struct AudioVolumeMix {
     s32 frame, reserved4;
     s32 left, right;
     u8 reserved10[0xC];
-    f32 attenuation, baseAttenuation, field24;
+    f32 attenuation, baseAttenuation, spareAfterBaseAttenuation;
     s16 priority, channel;
     u8 reserved2C[8];
     CVector3 position;

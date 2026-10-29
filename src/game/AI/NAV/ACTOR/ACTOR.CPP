@@ -155,7 +155,7 @@ void Actor_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *ca
     actor->state96 = bits;
     actor->count = 0;
     actor->reservedD0 = 0;
-    actor->fieldD4 = 0;
+    actor->reservedWordBeforeTail = 0;
     actor->reserved44 = 0;
     actor->state12 = 0;
     actor->reserved1C[0] = 0;

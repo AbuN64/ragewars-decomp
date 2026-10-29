@@ -11,7 +11,7 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "SYSTEM/BITARRAY.H"
 
-/* ROM-grounded data: src/rw_pool_802612A8_C9E88_us_rev1.c */
+/* ROM-grounded data: src/g_motionTranslationQuantizationScale_StorageWords.c */
 const unsigned int g_motionTranslationQuantizationScale_StorageWords[1] = {
     0xC4FA0000,
 };
@@ -65,7 +65,7 @@ void Bitarray_ExpandCurveSamples(char **stream, f32 *out, s32 frames)
 void Bitarray_ReadStridedFloatSamples(s32 bitCursor, void *sampleRecords, s32 sampleCount)
 {
   int firstSampleIndex;
-  s32 sp10;
+  s32 rawSampleBits;
   s32 sampleIndex;
   u8 *sampleOutput;
   firstSampleIndex = 0;
@@ -76,8 +76,8 @@ void Bitarray_ReadStridedFloatSamples(s32 bitCursor, void *sampleRecords, s32 sa
     do
     {
       sampleIndex += 1;
-      sp10 = Polytrak2_ReadBitsAndAdvance(bitCursor, 0x20);
-      *((f32 *) sampleOutput) = *((f32 *) (&sp10));
+      rawSampleBits = Polytrak2_ReadBitsAndAdvance(bitCursor, 0x20);
+      *((f32 *) sampleOutput) = *((f32 *) (&rawSampleBits));
       sampleOutput += 0x10;
     }
     while (sampleIndex < sampleCount);
@@ -257,7 +257,7 @@ const unsigned int g_motionRotationQuantizationScale_StorageWords[2] = {
     0xBF800000, 0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_8026154C_C9E98_us_rev1.c */
+/* ROM-grounded data: src/g_motionQuantizationRangeAndUnit_StorageWords.c */
 const unsigned int g_motionQuantizationRangeAndUnit_StorageWords[2] = {
     0x3F000000, 0x3F800000,
 };

@@ -102,13 +102,13 @@ void Link_DispatchActorLinks(struct Shared_Actor *actor, s32 event, void *contex
 }
 
 void Link_DispatchObjectLinks(s32 actorAddress, s32 event, void *actor) {
-    s32 sp20;
-    s32 sp24;
+    s32 triggers;
+    s32 triggerCount;
 
     if (actorAddress != 0) {
-        Scene_FindAlternateTriggerRange(&g_world, actorAddress, &sp20, &sp24);
-        if (sp24 != 0) {
-            Link_DispatchMatchingTriggers(sp20, sp24, 0, event & 0x7FF, event & 0x3800, 0x3800, actor);
+        Scene_FindAlternateTriggerRange(&g_world, actorAddress, &triggers, &triggerCount);
+        if (triggerCount != 0) {
+            Link_DispatchMatchingTriggers(triggers, triggerCount, 0, event & 0x7FF, event & 0x3800, 0x3800, actor);
         }
     }
 }
