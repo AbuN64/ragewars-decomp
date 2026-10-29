@@ -2,7 +2,7 @@
 #define COMMON_WORLDSORTENTRY_H
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "sdk/SCHED/SCHED.H"
+#include "../../sdk/include/SCHED/SCHED.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"

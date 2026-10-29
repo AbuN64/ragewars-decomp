@@ -1,5 +1,0 @@
-#ifndef DATA_OVLTAB5_PLAYER_RESETSTUNFLAGS_H
-#define DATA_OVLTAB5_PLAYER_RESETSTUNFLAGS_H
-extern char addrLow_Player_ResetStunFlags[];
-extern char g_playerStateCallbacks20SecondTargetUsRev1[];
-#endif

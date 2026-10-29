@@ -1,4 +1,0 @@
-#ifndef DATA_OVLDAT6_WEAPON_STATE_CALLBACK_ADDRESS_H
-#define DATA_OVLDAT6_WEAPON_STATE_CALLBACK_ADDRESS_H
-extern char addrLow_Weaponai_UpdateSpinAndAlternateFire[];
-#endif

@@ -1,5 +1,0 @@
-#ifndef DATA_OVLDAT9_SCENARIOSETUPSCREEN_H
-#define DATA_OVLDAT9_SCENARIOSETUPSCREEN_H
-#include "COMMON/RUNTIME_DECLARATIONS.H"
-extern ResourceBank g_scenarioResultRowWidgetIds[];
-#endif

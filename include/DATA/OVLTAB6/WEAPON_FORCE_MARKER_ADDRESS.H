@@ -1,4 +1,0 @@
-#ifndef DATA_OVLTAB6_WEAPON_FORCE_MARKER_ADDRESS_H
-#define DATA_OVLTAB6_WEAPON_FORCE_MARKER_ADDRESS_H
-extern char addrLow_Weaponai_UpdateForceMarkerTrigger[];
-#endif

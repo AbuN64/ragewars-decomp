@@ -1,0 +1,5 @@
+#ifndef DATA_SCENARIO_SETUP_SCENARIOSETUPSCREEN_H
+#define DATA_SCENARIO_SETUP_SCENARIOSETUPSCREEN_H
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+extern ResourceBank g_scenarioResultRowWidgetIds[];
+#endif

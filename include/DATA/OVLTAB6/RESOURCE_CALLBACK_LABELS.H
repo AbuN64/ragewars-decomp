@@ -1,4 +1,0 @@
-#ifndef DATA_OVLTAB6_RESOURCE_CALLBACK_LABELS_H
-#define DATA_OVLTAB6_RESOURCE_CALLBACK_LABELS_H
-extern char addrLow_Weapon_PlayStartupCue80C[];
-#endif

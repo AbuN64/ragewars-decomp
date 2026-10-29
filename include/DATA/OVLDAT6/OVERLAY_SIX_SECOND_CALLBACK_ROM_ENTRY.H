@@ -1,4 +1,0 @@
-#ifndef DATA_OVLDAT6_OVERLAY_SIX_SECOND_CALLBACK_ROM_ENTRY_H
-#define DATA_OVLDAT6_OVERLAY_SIX_SECOND_CALLBACK_ROM_ENTRY_H
-extern char Weaponai_UpdateChargeAndRepeatCue_Address[];
-#endif

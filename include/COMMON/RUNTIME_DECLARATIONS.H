@@ -1380,7 +1380,7 @@ extern f32 g_frameHeapLowAllocationStatLowerLimit;
 
 extern WidgetEventHandler g_overlaySlotEventHandlersUs;
 
-#include "sdk/SCHED/osscremoveclient.H"
+#include "../../sdk/include/SCHED/osscremoveclient.H"
 
 extern EffectPoolNode *g_effectPoolFreeHead;
 
@@ -2921,7 +2921,7 @@ typedef struct PickupGoalAvailabilityNode PickupGoalAvailabilityNode;
 struct OSPiHandle_s;
 
 struct OSTimer_s;
-#include "sdk/OS_TIMER.H"
+#include "../../sdk/include/OS_TIMER.H"
 
 
 struct DirectionalAccelerationParticle;

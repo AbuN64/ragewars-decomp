@@ -1,4 +1,0 @@
-#ifndef DATA_OVLDAT6_WEAPON_STARTUP_CUE_ADDRESS_H
-#define DATA_OVLDAT6_WEAPON_STARTUP_CUE_ADDRESS_H
-extern char addrLow_Weapon_PlayStartupCue9E2[];
-#endif

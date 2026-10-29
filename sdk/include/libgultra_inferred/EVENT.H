@@ -1,0 +1,10 @@
+#ifndef LIBGULTRA_INFERRED_EVENT_H
+#define LIBGULTRA_INFERRED_EVENT_H
+#include "TYPES.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/LISTNODE.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "COMMON/VECTOR4F.H"
+extern void Audio_PostPlayerStopEvent(s32);
+#endif

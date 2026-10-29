@@ -1,4 +1,0 @@
-#ifndef SDK_LIBGULTRA_INFERRED_IDENTIFIER_H
-#define SDK_LIBGULTRA_INFERRED_IDENTIFIER_H
-extern void Menu_EmptyResourceRangeHookEuX(void);
-#endif

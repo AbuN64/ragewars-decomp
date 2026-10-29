@@ -1,5 +1,5 @@
-#ifndef COMMON_EXTERNS_15_H
-#define COMMON_EXTERNS_15_H
+#ifndef COMMON_LIBSN_AND_RESIDENT_CALLBACKS_H
+#define COMMON_LIBSN_AND_RESIDENT_CALLBACKS_H
 #include "TYPES.H"
 
 extern void Libsn_WritePortByte(s32 address, s32 value);

@@ -1,5 +1,0 @@
-#ifndef DATA_OVLTAB3_BREAKABLE_PROXIMITY_AND_HEALTH_CALLBACK_ADDRESSES_H
-#define DATA_OVLTAB3_BREAKABLE_PROXIMITY_AND_HEALTH_CALLBACK_ADDRESSES_H
-extern char addrLow_Action_UpdateBreakableProximity[];
-extern char addrLow_Actionai_UpdateHealthFlag[];
-#endif

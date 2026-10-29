@@ -1,4 +1,0 @@
-#ifndef DATA_OVLTAB6_WEAPON_EVENT_CALLBACK_ADDRESS_H
-#define DATA_OVLTAB6_WEAPON_EVENT_CALLBACK_ADDRESS_H
-extern char addrLow_Weapon_ApproachSpinPhaseAndRelease[];
-#endif

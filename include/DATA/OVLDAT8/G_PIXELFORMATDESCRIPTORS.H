@@ -1,4 +1,0 @@
-#ifndef DATA_OVLDAT8_G_PIXELFORMATDESCRIPTORS_H
-#define DATA_OVLDAT8_G_PIXELFORMATDESCRIPTORS_H
-extern char g_pixelFormatPointerWordsCodeTarget[];
-#endif

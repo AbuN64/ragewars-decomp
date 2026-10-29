@@ -30,5 +30,5 @@ extern Acmd *alRaw16Pull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
 extern char alRaw16Pull_Address;
 extern char Audio_LoadDecodedSamples_Address;
 
-#include "sdk/AUDIO/audio_decodetransformblock.H"
+#include "../../sdk/include/AUDIO/audio_decodetransformblock.H"
 #endif

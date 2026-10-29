@@ -1,6 +1,0 @@
-#ifndef DATA_OVLDAT9_G_ARENACOMPATIBILITYTABLE_H
-#define DATA_OVLDAT9_G_ARENACOMPATIBILITYTABLE_H
-extern char g_Frontend_ClearLoadingHintsPackedAddress242[];
-extern char g_Frontend_HandleMatchMenuMessagePackedAddress242[];
-extern char g_Frontend_CloseMatchMenuPackedAddress242[];
-#endif

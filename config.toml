@@ -113,167 +113,168 @@ segments = [
   { name = "debug_symbols_and_assets", rom = 0x1C0860, kind = "bin" },
 ]
 
-[library."src/sdk/MATH/"]
+[library."sdk/MATH/"]
 origin = "unidentified library"
 
-[library."src/sdk/libgcc/"]
+[library."sdk/libgcc/"]
 origin = "gcc libgcc2"
 
-[library."src/sdk/libultra/"]
+[library."sdk/libultra/"]
 origin = "Nintendo libgultra"
 
-[library."src/sdk/rnc/"]
+[library."sdk/rnc/"]
 origin = "Rob Northen compression"
 
-[library."src/sdk/libsn/"]
+[library."sdk/libsn/"]
 origin = "SN Systems libsn"
 toolchain = "gcc-2.7.2-sn64"
 
-[file."src/sdk/libultra/gu/sqrtf.c"]
+[file."sdk/libultra/gu/sqrtf.c"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math", "-fno-delayed-branch"]
 omit = []
-[file."src/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP"]
+
+[file."sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-mfp32"]
 omit = []
 
-[file."src/sdk/libultra/audio/env.c"]
+[file."sdk/libultra/audio/env.c"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
-[file."src/game/UI/SMOS/SM_XLATE/SM_XLATE.CPP"]
+[file."src/UI/SMOS/SM_XLATE/SM_XLATE.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fno-thread-jumps", "-fno-rerun-cse-after-loop"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE.CPP"]
+[file."src/ENGINE/PARTICLE/PARTICLE.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_DRAWSPRITE.CPP"]
+[file."src/ENGINE/PARTICLE/PARTICLE_DRAWSPRITE.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP"]
+[file."src/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP"]
+[file."src/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_UPDATESYSTEM.CPP"]
+[file."src/ENGINE/PARTICLE/PARTICLE_UPDATESYSTEM.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP"]
+[file."src/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_BUILDMATRIX.CPP"]
+[file."src/ENGINE/PARTICLE/PARTICLE_BUILDMATRIX.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP"]
+[file."src/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_UPDATETYPEDMOTION.CPP"]
+[file."src/ENGINE/PARTICLE/PARTICLE_UPDATETYPEDMOTION.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/sdk/libultra/audio/decode.CPP"]
+[file."sdk/libultra/audio/decode.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
-[file."src/sdk/libultra/audio/audio_decodetransformblock.CPP"]
+[file."sdk/libultra/audio/audio_decodetransformblock.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
-[file."src/sdk/libultra/audio/audio_initbitreverseorder.CPP"]
+[file."sdk/libultra/audio/audio_initbitreverseorder.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
-[file."src/sdk/libultra/audio/audio_nextdecodedsampleblock.CPP"]
+[file."sdk/libultra/audio/audio_nextdecodedsampleblock.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
-[file."src/sdk/libultra/audio/_udivdi3.CPP"]
+[file."sdk/libultra/audio/_udivdi3.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-msplit-addresses"]
 omit = []
 
-[file."src/sdk/libultra/pfs/ospfschecker.CPP"]
+[file."sdk/libultra/pfs/ospfschecker.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
-[file."src/game/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP"]
+[file."src/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
-[file."src/sdk/libgcc/_floatdisf.CPP"]
+[file."sdk/libgcc/_floatdisf.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-mfp32"]
 omit = ["-mfp64"]
 
-[file."src/sdk/libultra/libc/longarith.CPP"]
+[file."sdk/libultra/libc/longarith.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-mfp32"]
 omit = []
 
-[file."src/sdk/libultra/libc/gfx_getconvertedcounterratio_data.CPP"]
+[file."sdk/libultra/libc/gfx_getconvertedcounterratio_data.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-mfp32"]
 omit = []
 
-[file."src/sdk/libsn/libsn_spindelay_data.CPP"]
+[file."sdk/libsn/libsn_spindelay_data.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = []
 
-[file."src/sdk/libsn/libsn_writememorybyte.CPP"]
+[file."sdk/libsn/libsn_writememorybyte.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = []
 
-[file."src/sdk/libsn/nav_isballisticarcobstructed_data.CPP"]
+[file."sdk/libsn/nav_isballisticarcobstructed_data.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = []
 
-[file."src/sdk/libultra/libc/_umoddi3.CPP"]
+[file."sdk/libultra/libc/_umoddi3.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-msplit-addresses"]
 omit = []
 hilo_nops = true
 
-[file."src/sdk/libultra/libc/_divdi3.CPP"]
+[file."sdk/libultra/libc/_divdi3.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-msplit-addresses"]
 omit = []
 hilo_nops = true
 
-[file."src/sdk/libultra/libc/_moddi3.CPP"]
+[file."sdk/libultra/libc/_moddi3.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-msplit-addresses"]
 omit = []
 hilo_nops = true
 
-[file."src/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP"]
+[file."sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = []
 

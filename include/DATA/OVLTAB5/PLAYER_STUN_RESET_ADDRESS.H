@@ -1,4 +1,0 @@
-#ifndef DATA_OVLTAB5_PLAYER_STUN_RESET_ADDRESS_H
-#define DATA_OVLTAB5_PLAYER_STUN_RESET_ADDRESS_H
-extern char addrLow_Player_ResetStunAndReleaseHandles[];
-#endif

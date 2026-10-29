@@ -5493,7 +5493,7 @@ segments:
   - name: rsp_alignment
     type: bin
     start: 0xDD834
-  - name: data_800C_DD83C
+  - name: game_data_DD83C
     type: code
     start: 0xDD83C
     vram: 0x800DCC3C
@@ -5520,7 +5520,7 @@ segments:
   - name: rsp_audio_data
     type: bin
     start: 0xE1460
-  - name: data_800C_E1720
+  - name: game_data_E1720
     type: code
     start: 0xE1720
     vram: 0x800E0B20

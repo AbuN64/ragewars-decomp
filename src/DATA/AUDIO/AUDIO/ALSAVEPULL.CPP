@@ -1,0 +1,33 @@
+#include "include_asm.h"
+
+/* 802B63E4_4.CPP */
+#if defined(VERSION_DE)
+unsigned char g_AlsavepullTrailingBytes[12] = { 0x8F, 0xA2, 0x00, 0x00, 0x00, 0x02, 0x15, 0x83, 0x30, 0x42, 0x01, 0xFF };
+#endif
+
+/* save_3.c */
+#if defined(VERSION_EU)
+#include "COMMON/ALFXPARAM.H"
+#include "abi.h"
+#include "COMMON/AUDIO_CALLBACKS.H"
+#include "COMMON/ALSEQUENCEPLAYER.H"
+#include "COMMON/ALDELAY28.H"
+#include "../../../../sdk/include/libultra/audio/save.H"
+#include "TYPES.H"
+#include "AUDIO/AUDIO_ASSERT.H"
+Acmd *alSavePull(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+{
+    Acmd *ptr = p;
+    ALFilter_u1 *source = filter->filter.source;
+
+    if (!source) {
+        Audio_Assert(g_audioSaveAssertConditionText, g_audioSaveText, 0x22);
+    }
+    ptr = source->handler(source, outp, outCount, sampleOffset, ptr);
+    aSetBuffer(ptr++, 0, 0, 0, outCount << 1);
+    aInterleave(ptr++, 0x440, 0x580);
+    aSetBuffer(ptr++, 0, 0, 0, outCount << 2);
+    aSaveBuffer(ptr++, filter->dramout);
+    return ptr;
+}
+#endif

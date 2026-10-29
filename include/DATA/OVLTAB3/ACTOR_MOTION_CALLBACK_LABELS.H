@@ -1,5 +1,0 @@
-#ifndef DATA_OVLTAB3_ACTOR_MOTION_CALLBACK_LABELS_H
-#define DATA_OVLTAB3_ACTOR_MOTION_CALLBACK_LABELS_H
-extern char addrLow_Actionai_SetDrawHandler[];
-extern char addrLow_Actionai_ClearMotionFlags[];
-#endif

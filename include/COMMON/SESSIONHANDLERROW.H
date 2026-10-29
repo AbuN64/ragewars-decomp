@@ -9,7 +9,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/DISPLAY.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
-#include "sdk/PFS/OVLGAME_INITIALIZERENDERDIRECTION.H"
+#include "../../sdk/include/PFS/OVLGAME_INITIALIZERENDERDIRECTION.H"
 
 
 
@@ -53,7 +53,7 @@ extern s32 g_schedulerThreadPriority;
 extern u32 g_renderFrameBufferCount;
 extern void *g_colorImageBuffers[];
 extern void Sched_InitializeSchedulerThread(Panel *, s32, s32, s32, u8);
-#include "sdk/SCHED/osscremoveclient.H"
+#include "../../sdk/include/SCHED/osscremoveclient.H"
 extern void guMtxIdent(s32 *);
 extern void Items_ResetGameOptions(void *);
 

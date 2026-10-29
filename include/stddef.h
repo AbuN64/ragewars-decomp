@@ -1,5 +1,5 @@
-#ifndef RAGEWARS_STDDEF_H
-#define RAGEWARS_STDDEF_H
+#ifndef STDDEF_H
+#define STDDEF_H
 
 typedef unsigned int size_t;
 

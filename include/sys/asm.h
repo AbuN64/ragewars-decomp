@@ -15,8 +15,8 @@ modified versions thereof.
  $Author: doseki $
 ************************************************************************/
 
-#ifndef __ASM_H__
-#define __ASM_H__
+#ifndef SYS_ASM_H
+#define SYS_ASM_H
 
 #ifdef __cplusplus
 extern "C" {

@@ -15,8 +15,8 @@ modified versions thereof.
  $Author: doseki $
 ************************************************************************/
 
-#ifndef __REGDEF_H__
-#define __REGDEF_H__
+#ifndef SYS_REGDEF_H
+#define SYS_REGDEF_H
 
 #ifdef __cplusplus
 extern "C" {

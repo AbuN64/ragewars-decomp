@@ -1,4 +1,0 @@
-#ifndef DATA_OVLDAT6_SECONDARY_ACTOR_CALLBACK_LABELS_H
-#define DATA_OVLDAT6_SECONDARY_ACTOR_CALLBACK_LABELS_H
-extern char Weapon_InitializeChargeAndStartupCues_Address[];
-#endif

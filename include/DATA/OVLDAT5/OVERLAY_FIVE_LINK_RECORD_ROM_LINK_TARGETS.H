@@ -1,5 +1,0 @@
-#ifndef DATA_OVLDAT5_OVERLAY_FIVE_LINK_RECORD_ROM_LINK_TARGETS_H
-#define DATA_OVLDAT5_OVERLAY_FIVE_LINK_RECORD_ROM_LINK_TARGETS_H
-extern char addrLow_Playerai_ClearPlayerWeaponLock[];
-extern char addrLow_Playerai_EnterMovingSequenceState[];
-#endif

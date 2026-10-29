@@ -1,5 +1,0 @@
-#ifndef SDK_AUDIO_AUDIO_NEXTDECODEDSAMPLEBLOCK_H
-#define SDK_AUDIO_AUDIO_NEXTDECODEDSAMPLEBLOCK_H
-#include "COMMON/LLDIVRESULT.H"
-extern void Audio_ClearDecodeFramesRemaining();
-#endif

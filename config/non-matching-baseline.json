@@ -2,7 +2,7 @@
   "schema": 1,
   "revision": "b321da793d3a963de347814a4e2778444ef71176",
   "files": {
-    "src/game/ANIM/80275E44_12.CPP": [
+    "src/ANIM/80275E44_12.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: func_80277128_de [736d81acb9876655a49278dd821b55bbb182cb1a893987a8e091408a88dae1f5]",
         "lines": [
@@ -10,7 +10,7 @@
         ]
       }
     ],
-    "src/game/FRONTEND/8040B45C_32.CPP": [
+    "src/FRONTEND/8040B45C_32.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: func_8040E8D8_de [0cab078b415c451b0593223a2263a173f64f023c8710e8d8d0112e4d2728a77f]",
         "lines": [
@@ -18,7 +18,7 @@
         ]
       }
     ],
-    "src/game/FRONTEND/80423280_8.CPP": [
+    "src/FRONTEND/80423280_8.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: CTrialCatalogue_SelectNeighborTwo [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
         "lines": [
@@ -44,7 +44,7 @@
         ]
       }
     ],
-    "src/game/RENDER/render_controller_input.CPP": [
+    "src/RENDER/render_controller_input.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: Render_ReadControllerStates [471cfeca1740c1bb88e8345e551331d28aa2fdc7006cb53c1f38e22f8f7a29a0]",
         "lines": [
@@ -52,7 +52,7 @@
         ]
       }
     ],
-    "src/sdk/libultra/libc/_divdi3.CPP": [
+    "sdk/libultra/libc/_divdi3.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: Libc_SignedDivide [3aef09f3fc23fbfd077a769507d2ec6ed77ddd769f8244423f49d8df56cbb947]",
         "lines": [
@@ -60,7 +60,7 @@
         ]
       }
     ],
-    "src/sdk/libultra/libc/_moddi3.CPP": [
+    "sdk/libultra/libc/_moddi3.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: Libc_SignedRemainder [f9c057bb5dac869ab759242d68bbbc042cc4f6a8a58fb187e8fbd7341503b774]",
         "lines": [
@@ -68,7 +68,7 @@
         ]
       }
     ],
-    "src/sdk/libultra/libc/_umoddi3.CPP": [
+    "sdk/libultra/libc/_umoddi3.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: Libc_UnsignedRemainder [7bc7e9a58c1cd882b4dffafa56da299a3cbe8ce411346afcfa39d5e2e5a9cfe3]",
         "lines": [

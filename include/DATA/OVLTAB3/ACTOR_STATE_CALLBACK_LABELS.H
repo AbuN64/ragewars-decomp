@@ -1,5 +1,0 @@
-#ifndef DATA_OVLTAB3_ACTOR_STATE_CALLBACK_LABELS_H
-#define DATA_OVLTAB3_ACTOR_STATE_CALLBACK_LABELS_H
-extern char addrLow_SpawnAI_DispatchSpawnChoice[];
-extern char addrLow_MovingAI_RequestInactiveOnEvent[];
-#endif

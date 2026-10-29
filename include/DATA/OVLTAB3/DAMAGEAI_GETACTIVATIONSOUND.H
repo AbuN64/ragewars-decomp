@@ -1,4 +1,0 @@
-#ifndef DATA_OVLTAB3_DAMAGEAI_GETACTIVATIONSOUND_H
-#define DATA_OVLTAB3_DAMAGEAI_GETACTIVATIONSOUND_H
-extern char addrLow_DamageAI_GetActivationSound[];
-#endif

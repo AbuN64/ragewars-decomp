@@ -1,4 +1,0 @@
-#ifndef DATA_OVLTAB6_OVERLAY_SIX_EFFECT_CALLBACK_ROM_ENTRY_H
-#define DATA_OVLTAB6_OVERLAY_SIX_EFFECT_CALLBACK_ROM_ENTRY_H
-extern char addrLow_Weapon_UpdateAlternateTriggerCompletion[];
-#endif

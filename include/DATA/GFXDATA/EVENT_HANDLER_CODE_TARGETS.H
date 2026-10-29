@@ -1,5 +1,5 @@
-#ifndef DATA_GFXDATA_S_TYPETEXT_H
-#define DATA_GFXDATA_S_TYPETEXT_H
+#ifndef DATA_GFXDATA_EVENT_HANDLER_CODE_TARGETS_H
+#define DATA_GFXDATA_EVENT_HANDLER_CODE_TARGETS_H
 extern char g_eventHandlerCodeTargetId5[];
 extern char g_eventHandlerCodeTargetId6[];
 extern char g_eventHandlerCodeTargetId7[];

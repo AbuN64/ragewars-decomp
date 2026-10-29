@@ -1,4 +1,0 @@
-#ifndef DATA_OVLDAT5_OVERLAY_FIVE_CALLBACK_ROM_ENTRY_H
-#define DATA_OVLDAT5_OVERLAY_FIVE_CALLBACK_ROM_ENTRY_H
-extern char g_playerStateCallbacks34FirstTargetUsRev1[];
-#endif

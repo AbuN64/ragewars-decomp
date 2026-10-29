@@ -1,5 +1,5 @@
-#ifndef COMMON_INTEGERSTATE14_2_H
-#define COMMON_INTEGERSTATE14_2_H
+#ifndef COMMON_MEMORY_STREAM_BUFFER_H
+#define COMMON_MEMORY_STREAM_BUFFER_H
 #include "TYPES.H"
 
 /* Memory stream buffer, byte cursor, size, open state, and ready flag. */

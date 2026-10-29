@@ -1,4 +1,0 @@
-#ifndef DATA_OVLDAT6_OVERLAY_SIX_FIRST_CALLBACK_ROM_ENTRY_H
-#define DATA_OVLDAT6_OVERLAY_SIX_FIRST_CALLBACK_ROM_ENTRY_H
-extern char addrLow_Weaponai_UpdateAlternateFire[];
-#endif
