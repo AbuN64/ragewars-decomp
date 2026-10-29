@@ -4704,6 +4704,8 @@ segments:
       - [0xFF324, c, game_data]
       - [0xFF3D0, c, game_data]
       - [0xFF578, data, game_data/k_Ovldat10EncodedWordsBlock14]
+      - [0xFF894, c, game_data]
+      - [0xFF90C, data, game_data/k_Ovldat10EncodedWordsBlock14Rest]
       - [0xFFD34, data, game_data/k_Ovldat10EncodedWordsBlock15]
       - [0xFFD40, data, game_data/k_Ovldat10EncodedWordsBlock3]
       - [0xFFD5C, data, game_data/k_Ovldat10EncodedWordsBlock16]

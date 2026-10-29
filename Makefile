@@ -183,6 +183,10 @@ $(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTOCCUPIED.CPP
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_ASSERTSLOTINDEX.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_ASSERTSLOTINDEX.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_ASSERTSLOTINDEX.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_ASSERTSLOTINDEX.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -313,6 +317,10 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTOCCUPI
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_ASSERTSLOTINDEX.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_ASSERTSLOTINDEX.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_ASSERTSLOTINDEX.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_ASSERTSLOTINDEX.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0

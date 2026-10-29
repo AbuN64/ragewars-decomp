@@ -8150,6 +8150,7 @@ PlayerSlots_CountLive = 0x800FE50C; // type:func rom:0xFF10C
 PlayerSlots_CountUnreleased = 0x800FE638; // type:func rom:0xFF238
 PlayerSlots_CountOccupied = 0x800FE724; // type:func rom:0xFF324
 PlayerSlots_FindStagedWhenIdle = 0x800FE7D0; // type:func rom:0xFF3D0
+PlayerSlots_AssertSlotIndex = 0x800FEC94; // type:func rom:0xFF894
 s_ActionUpdatebreakableproximityYObjectTText = 0x80202C98; // rom:0x3898
 func_80204868_de_padding_5468 = 0x80204868; // rom:0x5468
 func_802050B4_eu_x_padding_5C94 = 0x80205094; // rom:0x5C94

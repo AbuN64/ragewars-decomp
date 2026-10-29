@@ -239,6 +239,7 @@ k_ResourcesEncodedWordsBlock4 = 0x800FE2EC;
 k_Ovldat10EncodedWordsBlock5 = 0x800FE418;
 k_Ovldat10EncodedWordsBlock1 = 0x800FE438;
 k_Ovldat10EncodedWordsBlock14 = 0x800FE978;
+k_Ovldat10EncodedWordsBlock14Rest = 0x800FED0C;
 k_Ovldat10EncodedWordsBlock3 = 0x800FF140;
 k_Ovldat10EncodedWordsBlock4 = 0x800FF160;
 k_Ovldat10EncodedWordsBlock8 = 0x800FF17C;
