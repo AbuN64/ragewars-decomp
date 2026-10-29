@@ -133,10 +133,10 @@ void Tengine_UpdateArtsendTexturePreview(void) {
         if (g_controllerProfiles[0].buttons & 0x10) {
             if (g_artsendToggleButtonHeld == 0) {
                 if (g_artsendTextureViewer.alternateTitle == 0) {
-                    Camera_PostScreenMessage(&g_frontendScreenStatus, (u8 *)&g_frontendScreenStatus + 0x40, s_artsendActivatedText);
+                    Camera_PostScreenMessage(&g_frontendScreenStatus, &g_frontendScreenStatus.fallbackCamera, s_artsendActivatedText);
                     g_artsendTextureViewer.titleWasShown = 1;
                 } else {
-                    Camera_PostScreenMessage(&g_frontendScreenStatus, (u8 *)&g_frontendScreenStatus + 0x40, s_artsendDeactivatedText);
+                    Camera_PostScreenMessage(&g_frontendScreenStatus, &g_frontendScreenStatus.fallbackCamera, s_artsendDeactivatedText);
                 }
                 g_artsendToggleButtonHeld = 1;
                 g_artsendTextureViewer.alternateTitle = (u8) ((u8) g_artsendTextureViewer.alternateTitle < 1U);

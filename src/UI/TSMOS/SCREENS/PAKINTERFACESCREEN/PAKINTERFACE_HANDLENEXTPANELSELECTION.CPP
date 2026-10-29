@@ -20,17 +20,14 @@ extern void *SmpOverlay_GetSlotValue(s32 root, s32 player);
 
 s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 playerEntryId, s32 selectionPressed) {
     struct ResourceSmpFlickerCreateFlickerWidget *sound;
-    struct PakPanelSelectionView *row;
-    char *base;
+    PakProfilePanelState *row;
     u8 *mark;
     s32 index;
-    s32 offset;
     s32 state;
     s32 count;
 
     index = playerEntryId & 0xFFFF;
-    offset = index * 2920;
-    state = ((struct PakPanelSelectionView *)(offset + (char *)g_pakProfileScreenState))->state;
+    state = g_pakProfileScreenState->players[index].state;
     if (state == 13) {
         return 0;
     }
@@ -39,16 +36,14 @@ s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 playerEntr
     }
     if (state == 12 && selectionPressed == 1) {
         sound = SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, index);
-        row = (struct PakPanelSelectionView *)(index * 0xB68 + (char *)g_pakProfileScreenState);
-        row->phase = 2;
-        count = row->count;
-        row->timer = 0;
+        row = &g_pakProfileScreenState->players[index];
+        row->namePhase = 2;
+        count = row->nameCursor;
+        row->nameTimer = 0;
         if (count > 0) {
-            row->count = count - 1;
+            row->nameCursor = count - 1;
         }
-        base = (char *)g_pakProfileScreenState;
-        mark = (u8 *)(base + ((((struct PakPanelSelectionView *)(offset + base))->count * 2) +
-                              index * 0xB68) + 0xB8C);
+        mark = (u8 *)&row->name[row->nameCursor];
         if (*mark == 0) {
             *mark = 65;
         }

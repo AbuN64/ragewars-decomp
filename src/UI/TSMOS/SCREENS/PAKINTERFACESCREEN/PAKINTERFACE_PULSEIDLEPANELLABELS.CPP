@@ -13,7 +13,7 @@ extern struct ResourceSmpFlickerCreateFlickerWidget *Node_FindWidgetByResourceId
 void PAKInterface_PulseIdlePanelLabels(s32 index) {
     float f;
     u32 alpha;
-    struct EntryPAKInterfacePulseIdlePanelLabels *entry;
+    PakProfilePanelState *entry;
     f = Math_Cosf((float)index + (float)g_pakProfileScreenState->selected[index] * g_pakPanelPulsePhaseScale)
         * (*(&g_pakPanelPulsePhaseScale + 1)) + g_pakPanelPulseUnsignedThreshold;
     if (f >= (*(&g_pakPanelPulseUnsignedThreshold + 1))) {
@@ -25,20 +25,20 @@ large:
     alpha = (s32)(f - (*(&g_pakPanelPulseUnsignedThreshold + 1)));
     alpha |= 0x80000000;
 converted:
-    entry = (struct EntryPAKInterfacePulseIdlePanelLabels *)((char *)g_pakProfileScreenState + index * 0xB68);
+    entry = &g_pakProfileScreenState->players[index];
 #if defined(VERSION_DE)
-    Node_FindWidgetByResourceId(entry->window, 740)->value = alpha;
+    Node_FindWidgetByResourceId(entry->sprite, 740)->value = alpha;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Node_FindWidgetByResourceId(entry->window, 706)->value = alpha;
+    Node_FindWidgetByResourceId(entry->sprite, 706)->value = alpha;
 #elif defined(VERSION_EU_X)
-    Node_FindWidgetByResourceId(entry->window, 725)->value = alpha;
+    Node_FindWidgetByResourceId(entry->sprite, 725)->value = alpha;
 #endif
-    entry = (struct EntryPAKInterfacePulseIdlePanelLabels *)((char *)g_pakProfileScreenState + index * 0xB68);
+    entry = &g_pakProfileScreenState->players[index];
 #if defined(VERSION_DE)
-    Node_FindWidgetByResourceId(entry->window, 741)->value = alpha;
+    Node_FindWidgetByResourceId(entry->sprite, 741)->value = alpha;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Node_FindWidgetByResourceId(entry->window, 707)->value = alpha;
+    Node_FindWidgetByResourceId(entry->sprite, 707)->value = alpha;
 #elif defined(VERSION_EU_X)
-    Node_FindWidgetByResourceId(entry->window, 724)->value = alpha;
+    Node_FindWidgetByResourceId(entry->sprite, 724)->value = alpha;
 #endif
 }

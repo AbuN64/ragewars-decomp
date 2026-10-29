@@ -31,7 +31,7 @@ void Scene_SetLevelActorStateBit(void *world, s32 index, s32 actorIndex, s32 ena
         return;
     }
     if (((Shared_World *)world)->level == index) {
-        entry = (char *)((LevelActorArrayView *)world)->actors + (s32) actorIndex * 0x2E8;
+        entry = (char *)&((LevelActorArrayView *)world)->actors[(s32)actorIndex];
         cond = (struct Def *)((LevelActor *)entry)->definition;
         if ((u32) (cond->type - 9) < 2) {
             if (cond->flags & 0x200) {

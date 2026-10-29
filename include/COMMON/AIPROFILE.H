@@ -85,7 +85,7 @@ struct Player {
     s32 flags660; /* 0x660 */
     u8 pad664[0xC];
     f32 damageCooldown; /* 0x670 */
-    u8 pad674[4];
+    f32 unk674; /* Pickup_ApplySpecialPickup: second timed effect */
     f32 rangeTimer; /* 0x678: Player_UpdatePlayerEffectLights */
     struct RangeNode *rangeNodes[3]; /* 0x67C: created by Gdynlight_AllocateLightNode */
     u8 tuning[16]; /* 0x688 */

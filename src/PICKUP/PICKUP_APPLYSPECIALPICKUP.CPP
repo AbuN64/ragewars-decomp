@@ -691,10 +691,10 @@ s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pic
     f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
 
     switch ((s16)(pickup->id - 1800)) {
-    case 0: *(f32 *)((u8 *)player + 0x670) = g_specialPickupShieldDurationEu; break;
-    case 1: *(f32 *)((u8 *)player + 0x674) = k_pickupEuropeanSecondEffectValue; break;
+    case 0: player->damageCooldown = g_specialPickupShieldDurationEu; break;
+    case 1: player->unk674 = k_pickupEuropeanSecondEffectValue; break;
     case 2:
-    case 3: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
+    case 3: player->rangeTimer += data[3]; break;
     case 7: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 2045, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
     case 4:
     case 5:
@@ -704,7 +704,7 @@ s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pic
     text = pickup->text;
     sound = pickup->sound;
     event = pickup->event;
-    if (*(void **)((u8 *)player + 0x5DC) != 0) {
+    if (player->camera != 0) {
         Gsky_StartFade(player->camera, 128, 50, 50, 75, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&g_frontendScreenStatus, player->camera, ((char **)text)[g_languageIndex]);
     }
@@ -728,10 +728,10 @@ s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, voi
     f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
 
     switch ((s16)(pickup->id - 1800)) {
-    case 0: *(f32 *)((u8 *)player + 0x670) = g_specialPickupShieldDurationEu; break;
-    case 1: *(f32 *)((u8 *)player + 0x674) = k_pickupEuropeanSecondEffectValue; break;
+    case 0: player->damageCooldown = g_specialPickupShieldDurationEu; break;
+    case 1: player->unk674 = k_pickupEuropeanSecondEffectValue; break;
     case 2:
-    case 3: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
+    case 3: player->rangeTimer += data[3]; break;
     case 7: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 2045, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
     case 4:
     case 5:
@@ -741,7 +741,7 @@ s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, voi
     text = pickup->text;
     sound = pickup->sound;
     event = pickup->event;
-    if (*(void **)((u8 *)player + 0x5DC) != 0) {
+    if (player->camera != 0) {
         Gsky_StartFade(player->camera, 128, 50, 50, 75, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&g_frontendScreenStatus, player->camera, ((char **)text)[g_languageIndex]);
     }

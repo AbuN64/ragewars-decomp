@@ -16,20 +16,37 @@ typedef struct Brain {
     s32 w14;
     char pad18[0x64 - 0x18];
     struct Actor *target; /* 0x64 */
-    char pad68[0x1F0 - 0x68];
+    char pad68[0xBC - 0x68];
+    s32 unkBC;
+    char padC0[0x1BC - 0xC0];
+    s32 unk1BC;
+    char pad1C0[8];
+    s32 unk1C8;
+    char pad1CC[0x1F0 - 0x1CC];
     f32 clearance[8];
     char pad210[8];
     struct Behaviour *behaviour; /* 0x218 */
-    char pad21C[0x230 - 0x21C];
+    char pad21C[4];
+    s32 state; /* 0x220: close-attack state */
+    s32 unk224;
+    s32 unk228;
+    char pad22C[4];
     s32 combat;
-    char pad234[8];
+    char pad234[4];
+    s32 unk238;
     s32 w23C;
     s32 w240;
-    char pad244[0x2D8 - 0x244];
+    f32 tracking[8]; /* 0x244..0x260: reset together */
+    char pad264[0x28C - 0x264];
+    s32 unk28C;
+    char pad290[0x2D8 - 0x290];
     s32 timer;
     s32 pattern;
     s32 distance;
-    char pad2E4[0x318 - 0x2E4];
+    s32 unk2E4;
+    s32 unk2E8;
+    s32 unk2EC;
+    char pad2F0[0x318 - 0x2F0];
     s32 frames;
     s32 visible;
     s32 fireTimer;

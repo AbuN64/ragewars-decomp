@@ -98,9 +98,9 @@ run:
         switch (player->views5D8.view5D8_1.record->team) {
         case 0:
 #ifdef VERSION_EU
-            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team0SelectedNoticesEu[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team0SelectedNoticesEu[g_frontendScreenStatus.settings.language]);
 #elif defined(VERSION_EU_X)
-            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team0SelectedNoticesEuX[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team0SelectedNoticesEuX[g_frontendScreenStatus.settings.language]);
 #else
             Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team0SelectedNotice);
 #endif
@@ -108,9 +108,9 @@ run:
             break;
         case 1:
 #ifdef VERSION_EU
-            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team1SelectedNoticesEu[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team1SelectedNoticesEu[g_frontendScreenStatus.settings.language]);
 #elif defined(VERSION_EU_X)
-            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team1SelectedNoticesEuX[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team1SelectedNoticesEuX[g_frontendScreenStatus.settings.language]);
 #else
             Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team1SelectedNotice);
 #endif
@@ -118,9 +118,9 @@ run:
             break;
         case 2:
 #ifdef VERSION_EU
-            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team2SelectedNoticesEu[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team2SelectedNoticesEu[g_frontendScreenStatus.settings.language]);
 #elif defined(VERSION_EU_X)
-            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team2SelectedNoticesEuX[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team2SelectedNoticesEuX[g_frontendScreenStatus.settings.language]);
 #else
             Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team2SelectedNotice);
 #endif
@@ -128,9 +128,9 @@ run:
             break;
         case 3:
 #ifdef VERSION_EU
-            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team3SelectedNoticesEu[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team3SelectedNoticesEu[g_frontendScreenStatus.settings.language]);
 #elif defined(VERSION_EU_X)
-            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team3SelectedNoticesEuX[((u8 *) &g_frontendScreenStatus)[0x17C1]]);
+            Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team3SelectedNoticesEuX[g_frontendScreenStatus.settings.language]);
 #else
             Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team3SelectedNotice);
 #endif

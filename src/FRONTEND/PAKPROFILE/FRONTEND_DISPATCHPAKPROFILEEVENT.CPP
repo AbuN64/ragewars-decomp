@@ -45,11 +45,11 @@ s32 Frontend_DestroyPakProfileScreen(void) {
    timer; always returns 0. */
 
 int Frontend_ResetNameRepeatOnEvent(int unused0, int unused1, unsigned int message, int arg) {
-    PakNameRepeatView *p = (PakNameRepeatView *)((char *)g_pakProfileScreenState + (message & 0xFFFF) * 0xB68);
+    PakProfilePanelState *p = &g_pakProfileScreenState->players[message & 0xFFFF];
 
     if (p->state == 12 && (message >> 16) == 3 && arg < 6 && arg >= 4) {
-        p->timer = 0;
-        p->phase = 2;
+        p->nameTimer = 0;
+        p->namePhase = 2;
     }
     return 0;
 }

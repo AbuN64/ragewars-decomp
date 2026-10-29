@@ -25,7 +25,7 @@
 /* 80213ED4_19.CPP */
 void Barrel_AddActorYaw(void *actor, f32 yawDelta) {
     (((struct ActorYawView *) ((s8 *) actor))->yaw) = (f32) ((((struct ActorYawView *) ((s8 *) actor))->yaw) + yawDelta);
-    ((s32 (*)(void *))Graphu64_WrapPeriodicValue)(actor + 0x6C);
+    ((s32 (*)(void *))Graphu64_WrapPeriodicValue)(&((ActorYawView *)actor)->yaw);
 }
 
 /* 80213ED4_20.CPP */

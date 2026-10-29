@@ -29,6 +29,7 @@ extern void Scaled_ClearAuxiliaryBehaviorState(void *);
 void Nav_ResetPlayerState(s32 *state) {
     s32 i;
     s32 none;
+    Brain *brain = (Brain *)state;
 
     state[1] = -1;
     state[2] = -1;
@@ -42,45 +43,45 @@ void Nav_ResetPlayerState(s32 *state) {
         state[5 + i] = none;
     }
     state[10] = -1;
-    state[0x1BC / 4] = 0xFFFF;
-    state[0x220 / 4] = 0;
-    state[0x1C8 / 4] = 0;
+    brain->unk1BC = 0xFFFF;
+    brain->state = 0;
+    brain->unk1C8 = 0;
     state[14] = 1;
     state[15] = 0;
     state[25] = 0;
-    state[0x28C / 4] = 0;
+    brain->unk28C = 0;
     state[26] = 0;
-    state[0xBC / 4] = -1;
-    state[0x224 / 4] = -1;
-    state[0x228 / 4] = 0;
+    brain->unkBC = -1;
+    brain->unk224 = -1;
+    brain->unk228 = 0;
     for (i = 0; i < 10; i++) {
         state[15 + i] = 0;
         state[27 + i] = 0;
         state[37 + i] = 0;
     }
-    state[0x238 / 4] = 0;
+    brain->unk238 = 0;
     Scaled_SetBehaviorTable(state, &g_playerDefaultBehaviorTable, none);
     Scaled_SetBehaviourState(state, 2);
-    ((f32 *) state)[0x244 / 4] = 0.0f;
-    state[0x23C / 4] = 0;
-    state[0x240 / 4] = 0;
-    ((f32 *) state)[0x250 / 4] = ((f32 *) state)[0x254 / 4] = ((f32 *) state)[0x248 / 4] =
-        ((f32 *) state)[0x24C / 4] = ((f32 *) state)[0x258 / 4] = ((f32 *) state)[0x25C / 4] =
-        ((f32 *) state)[0x260 / 4] = ((f32 *) state)[0x244 / 4];
+    brain->tracking[0] = 0.0f;
+    brain->w23C = 0;
+    brain->w240 = 0;
+    brain->tracking[3] = brain->tracking[4] = brain->tracking[1] =
+        brain->tracking[2] = brain->tracking[5] = brain->tracking[6] =
+        brain->tracking[7] = brain->tracking[0];
     Nav_ResetWheelProbeState(state);
     Scaled_ResetBehaviorState(state);
     Scaled_ClearAuxiliaryBehaviorState(state);
-    state[0x318 / 4] = 0;
-    state[0x31C / 4] = 0;
-    state[0x320 / 4] = -1;
-    state[0x324 / 4] = 0;
+    brain->frames = 0;
+    brain->visible = 0;
+    brain->fireTimer = -1;
+    brain->cooldown = 0;
     state[0x328 / 4] = 0;
-    state[0x2D8 / 4] = 0;
-    state[0x2E4 / 4] = 0;
-    state[0x2EC / 4] = 0;
-    state[0x2E8 / 4] = 0;
-    state[0x2DC / 4] = 0;
-    state[0x2E0 / 4] = 0;
+    brain->timer = 0;
+    brain->unk2E4 = 0;
+    brain->unk2EC = 0;
+    brain->unk2E8 = 0;
+    brain->pattern = 0;
+    brain->distance = 0;
     state[0x32C / 4] = -1;
 }
 
