@@ -79,11 +79,6 @@ struct ViVerticalScaleView {
     f32 yScaleFactor;
 };
 
-struct OSViMode;
-struct OSViMode {
-    u8 type;
-    Awords comRegs;
-};
 
 struct OSViMode;
 struct ViModeContextView;
@@ -109,8 +104,7 @@ struct OSViFieldRegs {
     u32 vIntr;
 };
 
-struct Modep;
-struct Modep {
+struct OSViMode {
     u8 type;
     OSViCommonRegs comRegs;
     OSViFieldRegs fldRegs[2];
@@ -120,8 +114,7 @@ struct ViVerticalScaleView;
 typedef struct ViVerticalScaleView ViVerticalScaleView;
 
 
-struct Modep;
-typedef struct Modep Modep;
+typedef struct OSViMode Modep;
 
 struct OSViMode;
 typedef struct OSViMode OSViMode;
@@ -129,13 +122,12 @@ typedef struct OSViMode OSViMode;
 struct __OSViScale;
 typedef struct __OSViScale __OSViScale;
 
-struct Modep;
 struct ViSwapContextView;
 struct ViSwapContextView {
     u16 state;
     u16 retraceCount;
     void *framep;
-    struct Modep *modep;
+    struct OSViMode *modep;
     u32 control;
     void *msgq;
     void *msg;

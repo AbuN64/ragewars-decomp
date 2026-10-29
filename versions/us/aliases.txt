@@ -139,7 +139,6 @@ g_FxSpawnimpactmarkEncodedWords = 0x800CDAF8;
 g_onscreenFontGlyphIndexWords_us = 0x800CDC30;
 g_createDataZeroWords = 0x800D3040;
 g_viDataZeroWords = 0x800D3060;
-g_videoDeviceManager_us = 0x800D30D0;
 g_osaisetfrequencyDataConstantWords = 0x800D3F00;
 g_audioAbortdisktransferDataConstantWords = 0x800D3F08;
 g_audioInitdecodestreamDataConstantWords = 0x800D4168;

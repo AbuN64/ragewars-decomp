@@ -2525,6 +2525,7 @@ g_videoInterfaceContexts = 0x800D3060; // rom:0xD3C60
 __osViCurr = 0x800D30C0; // rom:0xD3CC0
 __osViNext = 0x800D30C4; // rom:0xD3CC4
 g_videoDeviceManager = 0x800D30D0; // rom:0xD3CD0
+g_videoDeviceManagerNextWord = 0x800D30EC; // rom:0xD3CEC
 g_videoInterfaceModeTable = 0x800D30F0; // rom:0xD3CF0
 g_videoInterfaceModeDefault = 0x800D3140; // rom:0xD3D40
 g_videoInterfaceModeAlternate = 0x800D3190; // rom:0xD3D90
