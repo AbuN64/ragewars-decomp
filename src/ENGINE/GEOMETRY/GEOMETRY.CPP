@@ -51,9 +51,8 @@ const char s_simpleModelText[11] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/s_simpModelText_Geometry.c */
-const unsigned char s_simpModelText[11] = {
-    0x73, 0x69, 0x6D, 0x70, 0x20, 0x6D, 0x6F, 0x64, 0x65, 0x6C, 0x00,
-};
+const char s_simpModelText[11] =
+    "simp model";
 #endif
 
 /* GEOMETRY_7.CPP */

@@ -6,8 +6,6 @@ const char s_gfxUppercaseHexDigits[20] =
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned char g_uppercaseHexDigitsUsRev1[17] = {
-    0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46,
-    0x00,
-};
+const char g_uppercaseHexDigitsUsRev1[17] =
+    "0123456789ABCDEF";
 #endif

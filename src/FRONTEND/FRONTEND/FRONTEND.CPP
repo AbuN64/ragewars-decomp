@@ -23,7 +23,8 @@ s32 Frontend_DispatchPakProfileEventUs(ActorDefinitionHeader *actor, s32 event, 
 #endif
 
 #if defined(VERSION_US)
-unsigned char g_FrontendTrailingBytesBlock7[8] = { 0x67, 0x48, 0x64, 0x72, 0x52, 0x00, 0x00, 0x00 };
+char g_FrontendTrailingBytesBlock7[8] =
+    "gHdrR\000\000";
 #endif
 
 #if defined(VERSION_US)

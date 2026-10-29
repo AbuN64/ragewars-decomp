@@ -44,8 +44,6 @@ unsigned char k_GAnimobjectinfotextEncodedBytes[11] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned char s_animObjectInfoText[17] = {
-    0x61, 0x6E, 0x69, 0x6D, 0x20, 0x6F, 0x62, 0x6A, 0x65, 0x63, 0x74, 0x20, 0x69, 0x6E, 0x66, 0x6F,
-    0x00,
-};
+const char s_animObjectInfoText[17] =
+    "anim object info";
 #endif

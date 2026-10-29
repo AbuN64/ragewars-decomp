@@ -6,7 +6,6 @@ const char s_intelligenceText[13] =
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned char g_intelligenceText[13] = {
-    0x69, 0x6E, 0x74, 0x65, 0x6C, 0x6C, 0x69, 0x67, 0x65, 0x6E, 0x63, 0x65, 0x00,
-};
+const char g_intelligenceText[13] =
+    "intelligence";
 #endif

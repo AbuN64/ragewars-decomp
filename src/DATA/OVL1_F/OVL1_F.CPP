@@ -13,8 +13,10 @@
 
 /* g_overlayOneFLinkRecordAddressWords_Ovl1F.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_overlayOneFLinkRecordAddressWords[8] = {
-    0x800CF298, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+extern char g_weaponFireStateCallbackTable[];
+void * g_overlayOneFLinkRecordAddressWords[8] = {
+    (void *)&g_weaponFireStateCallbackTable, 0, 0, 0,
+    0, 0, 0, 0,
 };
 #endif
 
@@ -96,9 +98,12 @@ unsigned int g_overlayOneFLinkRecordSentinelWords[1] = {
 
 /* g_overlayOneFLinkRecordAddressWordsBlock1_Ovl1F.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_overlayOneFLinkRecordAddressWordsBlock1[15] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x800CF298,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+extern char g_weaponFireStateCallbackTable[];
+void * g_overlayOneFLinkRecordAddressWordsBlock1[15] = {
+    0, 0, 0, 0,
+    0, 0, 0, (void *)&g_weaponFireStateCallbackTable,
+    0, 0, 0, 0,
+    0, 0, 0,
 };
 #endif
 
@@ -160,9 +165,12 @@ unsigned int g_overlayOneFLinkRecordSentinelWordsBlock1[1] = {
 
 /* g_overlayOneFLinkRecordAddressWordsBlock2_Ovl1F.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_overlayOneFLinkRecordAddressWordsBlock2[15] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x800CF298,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+extern char g_weaponFireStateCallbackTable[];
+void * g_overlayOneFLinkRecordAddressWordsBlock2[15] = {
+    0, 0, 0, 0,
+    0, 0, 0, (void *)&g_weaponFireStateCallbackTable,
+    0, 0, 0, 0,
+    0, 0, 0,
 };
 #endif
 
@@ -201,9 +209,12 @@ unsigned int g_overlayOneFLinkRecordSentinelWordsBlock2[1] = {
 /* g_overlayOneFLinkRecordAddressWordsBlock3_Ovl1F.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CF5C0_unclaimed_D01E8_unclaimed_D0200_unclaimed_D0208_unclaimed_D0220_unclaimed_D0228_unclaimed_D0240_unclaimed_D0244_unclaimed_D0288_unclaimed_D02A0_unclaimed_D02A8_unclaimed_D02C0_unclaimed_D02C4_unclaimed_D0308_unclaimed_D0320_unclaimed_D0324 */
-unsigned int g_overlayOneFLinkRecordAddressWordsBlock3[15] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x800CF298,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+extern char g_weaponFireStateCallbackTable[];
+void * g_overlayOneFLinkRecordAddressWordsBlock3[15] = {
+    0, 0, 0, 0,
+    0, 0, 0, (void *)&g_weaponFireStateCallbackTable,
+    0, 0, 0, 0,
+    0, 0, 0,
 };
 
 /* ROM-grounded data: src/rw_weapon_state_entry_D0360_us_rev1.c */

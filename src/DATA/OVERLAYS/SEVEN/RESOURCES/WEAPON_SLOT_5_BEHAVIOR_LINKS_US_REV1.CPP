@@ -1,6 +1,11 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int g_weaponSlot5BehaviorLinksUsRev1[7] = {
-    0x00000000, 0x800CFB3C, 0x800CFB44, 0x00000000, 0x800CFC24, 0x800CFC2C, 0x00000000,
+extern char g_weaponAmmoSlotCapacity6[];
+extern char g_weaponAmmoSlotCapacity7[];
+extern char g_weaponAmmoSlotCapacity35[];
+extern char g_weaponAmmoSlotCapacity36[];
+void * g_weaponSlot5BehaviorLinksUsRev1[7] = {
+    0, (void *)&g_weaponAmmoSlotCapacity6, (void *)&g_weaponAmmoSlotCapacity7, 0,
+    (void *)&g_weaponAmmoSlotCapacity35, (void *)&g_weaponAmmoSlotCapacity36, 0,
 };
 #endif

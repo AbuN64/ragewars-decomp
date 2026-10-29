@@ -6,8 +6,7 @@ const char g_playerMenuValueFormat[8] =
     "%04d\000\000\000\000";
 #endif
 #if defined(VERSION_EU_X)
-const unsigned char g_playerMenuValueFormat[5] = {
-    0x25, 0x30, 0x34, 0x64, 0x00,
-};
+const char g_playerMenuValueFormat[5] =
+    "%04d";
 #endif
 #endif

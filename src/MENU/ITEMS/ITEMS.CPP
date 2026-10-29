@@ -4,9 +4,8 @@
 
 /* 800DE794.CPP */
 #if defined(VERSION_DE)
-unsigned int g_itemsConstantWords[3] = {
-    0x64000000, 0x20253364, 0x00000000,
-};
+char g_itemsConstantWords[12] =
+    "d\000\000\000 %3d\000\000\000";
 #endif
 
 /* 8043EA40.CPP */

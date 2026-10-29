@@ -63,9 +63,8 @@ void Bound_DrawActorWithRedMenuEffect(ObjectItemsDrawActorWithRedMenuEffect *obj
 }
 
 #if defined(VERSION_US)
-unsigned int k_BoundEncodedWords[1] = {
-    0x71755200,
-};
+char k_BoundEncodedWords[4] =
+    "quR";
 #endif
 
 #if defined(VERSION_EU_X)

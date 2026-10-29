@@ -37,8 +37,9 @@ void Effect_InitEffectPool(EffectSlotPool *world) {
 }
 
 #if defined(VERSION_EU_X)
-unsigned int k_EffectEncodedWords[1] = {
-    0x0044309C,
+extern char g_Menu_DrawMenuItemLabelPackedAddress243[];
+void * k_EffectEncodedWords[1] = {
+    (void *)&g_Menu_DrawMenuItemLabelPackedAddress243,
 };
 #endif
 

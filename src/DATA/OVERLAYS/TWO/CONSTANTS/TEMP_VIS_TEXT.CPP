@@ -7,7 +7,6 @@ const char s_tempVisText[9] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_temporaryVisibilityText_TempVisText.c */
-const unsigned char g_temporaryVisibilityText[9] = {
-    0x74, 0x65, 0x6D, 0x70, 0x20, 0x76, 0x69, 0x73, 0x00,
-};
+const char g_temporaryVisibilityText[9] =
+    "temp vis";
 #endif

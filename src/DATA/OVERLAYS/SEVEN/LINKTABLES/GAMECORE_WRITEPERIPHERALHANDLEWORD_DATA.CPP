@@ -25,7 +25,9 @@ unsigned short D_src_af61b546[8] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int g_gamecoreWriteperipheralhandlewordDataAddressWords[2] = {
-    0x8014E950, 0x8014E9D0,
+extern char g_diskPiHandle[];
+extern char g_diskPeripheralHandle[];
+void * g_gamecoreWriteperipheralhandlewordDataAddressWords[2] = {
+    (void *)&g_diskPiHandle, (void *)&g_diskPeripheralHandle,
 };
 #endif

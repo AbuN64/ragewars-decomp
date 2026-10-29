@@ -1,9 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int k_pakFormatmusicpreviewDataConstantWords[1] = {
-    0x25326400,
-};
+const char k_pakFormatmusicpreviewDataConstantWords[4] =
+    "%2d";
 #endif
 
 #if defined(VERSION_EU_X)

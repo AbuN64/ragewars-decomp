@@ -1,6 +1,9 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int g_OverlaysSevenConstantsRetainedWords10[7] = {
-    0x00000000, 0x800CFBF4, 0x00000000, 0x00000000, 0x800CFCDC, 0x00000000, 0x00000000,
+extern char g_weaponAmmoSlotCapacity29[];
+extern char g_weaponAmmoSlotCapacity58[];
+void * g_OverlaysSevenConstantsRetainedWords10[7] = {
+    0, (void *)&g_weaponAmmoSlotCapacity29, 0, 0,
+    (void *)&g_weaponAmmoSlotCapacity58, 0, 0,
 };
 #endif

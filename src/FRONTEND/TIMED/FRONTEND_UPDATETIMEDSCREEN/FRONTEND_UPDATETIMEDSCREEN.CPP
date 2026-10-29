@@ -9,9 +9,8 @@ unsigned int g_FrontendUpdatetimedscreenEncodedWords[4] = {
 
 /* g_FrontendUpdatetimedscreenEncodedWordsBlock1_FrontendUpdatetimedscreen.CPP */
 #if defined(VERSION_DE)
-unsigned int g_FrontendUpdatetimedscreenEncodedWordsBlock1[3] = {
-    0x25640000, 0x25642525, 0x00000000,
-};
+char g_FrontendUpdatetimedscreenEncodedWordsBlock1[12] =
+    "%d\000\000%d%%\000\000\000";
 #endif
 
 /* 800E1F34.CPP */

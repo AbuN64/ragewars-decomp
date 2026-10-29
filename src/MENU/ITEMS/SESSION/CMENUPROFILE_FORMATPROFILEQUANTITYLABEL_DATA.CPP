@@ -11,7 +11,6 @@ const unsigned int k_cmenuprofileFormatprofilequantitylabelDataLinkGapWords[3] =
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned char k_cmenuprofileFormatprofilequantitylabelDataTextBytes[5] = {
-    0x25, 0x30, 0x32, 0x64, 0x00,
-};
+const char k_cmenuprofileFormatprofilequantitylabelDataTextBytes[5] =
+    "%02d";
 #endif

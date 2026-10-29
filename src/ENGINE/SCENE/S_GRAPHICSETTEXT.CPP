@@ -13,7 +13,6 @@ const char s_graphicsetText[11] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/s_graphicsetText_SGraphicsettext.c */
-const unsigned char k_SGraphicsettextEncodedBytes[11] = {
-    0x67, 0x72, 0x61, 0x70, 0x68, 0x69, 0x63, 0x73, 0x65, 0x74, 0x00,
-};
+const char k_SGraphicsettextEncodedBytes[11] =
+    "graphicset";
 #endif

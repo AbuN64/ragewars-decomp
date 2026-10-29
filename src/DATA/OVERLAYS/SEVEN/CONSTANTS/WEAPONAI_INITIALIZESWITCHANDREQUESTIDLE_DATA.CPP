@@ -5,10 +5,35 @@ unsigned int g_WeaponaiInitializeswitchandrequestidleWords1[7] = {
     0x00000000, 0x00000000, 0x3F800000, 0x3F800000, 0x800CF298, 0x00000000, 0x00000000,
 };
 
-unsigned int g_WeaponResourceDirectoryWords1[22] = {
-    0x800CFCEC, 0x800CFE0C, 0x800CFE6C, 0x800CFECC, 0x800CFF2C, 0x800CFF8C, 0x800CFFEC, 0x800D004C,
-    0x800D00AC, 0x800D010C, 0x800D016C, 0x800D01CC, 0x800D022C, 0x800D028C, 0x800D02EC, 0x800D034C,
-    0x800CFD4C, 0x800CFDAC, 0x800D03AC, 0x800D040C, 0x800D046C, 0x800D04CC,
+extern char g_weaponPresentationResource1219[];
+extern char g_weaponSlot2PresentationUsRev1[];
+extern char g_weaponSlot3PresentationUsRev1[];
+extern char g_weaponSlot4PresentationUsRev1[];
+extern char g_weaponSlot5PresentationUsRev1[];
+extern char g_weaponSlot6PresentationUsRev1[];
+extern char g_weaponSlot7PresentationUsRev1[];
+extern char g_weaponSlot8PresentationUsRev1[];
+extern char g_weaponPresentation6_us_rev1[];
+extern char g_weaponPresentation1_us_rev1[];
+extern char g_weaponPresentation2_us_rev1[];
+extern char g_weaponPresentation3_us_rev1[];
+extern char g_weaponPresentation4_us_rev1[];
+extern char g_weaponPresentation5_us_rev1[];
+extern char g_weaponPresentation7_us_rev1[];
+extern char g_weaponPresentation8_us_rev1[];
+extern char g_weaponPresentationResource1235[];
+extern char g_weaponSlot1PresentationUsRev1[];
+extern char g_weaponPresentationDescriptor0Rev1[];
+extern char g_weaponPresentationDescriptor1Rev1[];
+extern char g_weaponPresentationDescriptor2Rev1[];
+extern char g_weaponPresentationDescriptor3Rev1[];
+void * g_WeaponResourceDirectoryWords1[22] = {
+    (void *)&g_weaponPresentationResource1219, (void *)&g_weaponSlot2PresentationUsRev1, (void *)&g_weaponSlot3PresentationUsRev1, (void *)&g_weaponSlot4PresentationUsRev1,
+    (void *)&g_weaponSlot5PresentationUsRev1, (void *)&g_weaponSlot6PresentationUsRev1, (void *)&g_weaponSlot7PresentationUsRev1, (void *)&g_weaponSlot8PresentationUsRev1,
+    (void *)&g_weaponPresentation6_us_rev1, (void *)&g_weaponPresentation1_us_rev1, (void *)&g_weaponPresentation2_us_rev1, (void *)&g_weaponPresentation3_us_rev1,
+    (void *)&g_weaponPresentation4_us_rev1, (void *)&g_weaponPresentation5_us_rev1, (void *)&g_weaponPresentation7_us_rev1, (void *)&g_weaponPresentation8_us_rev1,
+    (void *)&g_weaponPresentationResource1235, (void *)&g_weaponSlot1PresentationUsRev1, (void *)&g_weaponPresentationDescriptor0Rev1, (void *)&g_weaponPresentationDescriptor1Rev1,
+    (void *)&g_weaponPresentationDescriptor2Rev1, (void *)&g_weaponPresentationDescriptor3Rev1,
 };
 
 unsigned int g_WeaponaiInitializeswitchandrequestidlePointerWords1[17] = {

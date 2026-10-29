@@ -19,7 +19,6 @@ unsigned char k_GStatmodeltextEncodedBytesBlock1[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/s_statModelText_GStatmodeltext.c */
-const unsigned char s_statModelText[11] = {
-    0x73, 0x74, 0x61, 0x74, 0x20, 0x6D, 0x6F, 0x64, 0x65, 0x6C, 0x00,
-};
+const char s_statModelText[11] =
+    "stat model";
 #endif

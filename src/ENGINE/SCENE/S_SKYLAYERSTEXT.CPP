@@ -13,7 +13,6 @@ const char g_skyLayersText[11] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/s_skyLayersText.c */
-const unsigned char s_skyLayersText[11] = {
-    0x73, 0x6B, 0x79, 0x20, 0x6C, 0x61, 0x79, 0x65, 0x72, 0x73, 0x00,
-};
+const unsigned char s_skyLayersText[11] =
+    "sky layers";
 #endif

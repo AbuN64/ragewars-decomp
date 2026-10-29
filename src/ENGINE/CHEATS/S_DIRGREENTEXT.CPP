@@ -1,7 +1,6 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_resident_strings_E6EA8_us_rev1.c */
-unsigned char s_dirGreenText[16] = {
-    0x64, 0x69, 0x72, 0x20, 0x67, 0x72, 0x65, 0x65, 0x6E, 0x20, 0x30, 0x30, 0x30, 0x00, 0x00, 0x00,
-};
+char s_dirGreenText[16] =
+    "dir green 000\000\000";
 #endif

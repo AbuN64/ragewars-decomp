@@ -7,7 +7,6 @@ const char g_matricesText[9] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/s_matricesTextSource.c */
-const unsigned char s_matricesText[9] = {
-    0x4D, 0x61, 0x74, 0x72, 0x69, 0x63, 0x65, 0x73, 0x00,
-};
+const unsigned char s_matricesText[9] =
+    "Matrices";
 #endif

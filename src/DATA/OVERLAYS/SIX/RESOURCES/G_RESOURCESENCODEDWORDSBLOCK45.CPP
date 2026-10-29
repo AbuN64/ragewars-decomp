@@ -5,8 +5,10 @@
 
 /* 800CF51C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int k_ResourcesEncodedWordsBlock3[8] = {
-    0x800CF298, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+extern char g_weaponFireStateCallbackTable[];
+void * k_ResourcesEncodedWordsBlock3[8] = {
+    (void *)&g_weaponFireStateCallbackTable, 0, 0, 0,
+    0, 0, 0, 0,
 };
 #endif
 

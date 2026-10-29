@@ -72,8 +72,8 @@ char s_bigCheatActivatedText[20] = "big cheat activated";
 /* janesCheatActivatedTextData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5CAC_unclaimed_E68DC */
-unsigned int g_GfxGetnormalizedcounterEncodedWords[1] = {
-    0x800E5CC8,
+void * g_GfxGetnormalizedcounterEncodedWords[1] = {
+    (void *)&s_bigCheatActivatedText,
 };
 
 char s_janesCheatActivatedText[24] = "janes cheat activated";

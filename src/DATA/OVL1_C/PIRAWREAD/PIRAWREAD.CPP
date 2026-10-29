@@ -40,7 +40,6 @@ char s_PirawreadIoSirawdmaText[13] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/s_pirawreadText_Pirawread.c */
-const unsigned char s_pirawreadText[15] = {
-    0x69, 0x6F, 0x2F, 0x70, 0x69, 0x72, 0x61, 0x77, 0x72, 0x65, 0x61, 0x64, 0x2E, 0x63, 0x00,
-};
+const char s_pirawreadText[15] =
+    "io/pirawread.c";
 #endif

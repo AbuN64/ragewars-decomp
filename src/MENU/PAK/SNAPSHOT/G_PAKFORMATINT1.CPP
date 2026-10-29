@@ -8,15 +8,13 @@ const unsigned int k_GPakformatint1EncodedWords[1] = {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int g_pakChannelNumberFormat_GPakformatint1[1] = {
-    0x25316400,
-};
+const char g_pakChannelNumberFormat_GPakformatint1[4] =
+    "%1d";
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int g_pakFormatInt2[1] = {
-    0x25326400,
-};
+const char g_pakFormatInt2[4] =
+    "%2d";
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -41,14 +39,12 @@ const unsigned int g_pakFormatInt1[1] = {
 
 /* 800E0DB0.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
-const unsigned int k_GPakformatint1EncodedWordsBlock1[1] = {
-    0x25326400,
-};
+const char k_GPakformatint1EncodedWordsBlock1[4] =
+    "%2d";
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_pakFormatInt2.c */
-const unsigned char k_GPakformatint1EncodedBytesBlock1[4] = {
-    0x25, 0x32, 0x64, 0x00,
-};
+const char k_GPakformatint1EncodedBytesBlock1[4] =
+    "%2d";
 #endif

@@ -2,9 +2,8 @@
 
 /* 800E0DCC.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
-const unsigned char k_GDigitdotformatEncodedBytes[5] = {
-    0x25, 0x31, 0x64, 0x2E, 0x00,
-};
+const char k_GDigitdotformatEncodedBytes[5] =
+    "%1d.";
 #endif
 
 #if defined(VERSION_US)
@@ -17,9 +16,8 @@ const unsigned char k_GDigitdotformatEncodedBytes[5] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_digitDotFormat_GDigitdotformat.c */
-const unsigned char g_digitDotFormat[5] = {
-    0x25, 0x31, 0x64, 0x2E, 0x00,
-};
+const char g_digitDotFormat[5] =
+    "%1d.";
 #endif
 
 /* 800E0DD1.CPP */

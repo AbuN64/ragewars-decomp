@@ -1,7 +1,6 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_resident_strings_E6E80_us_rev1.c */
-unsigned char s_ambBlueText[16] = {
-    0x61, 0x6D, 0x62, 0x20, 0x62, 0x6C, 0x75, 0x65, 0x20, 0x20, 0x30, 0x30, 0x30, 0x00, 0x00, 0x00,
-};
+char s_ambBlueText[16] =
+    "amb blue  000\000\000";
 #endif
