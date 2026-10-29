@@ -6,37 +6,37 @@
 #include "../../include/AUDIO/visetmode.H"
 #include "../../include/os.h"
 
-extern StateosViSetSpecialFeatures *g_nextVideoInterfaceContext;
+extern StateosViSetSpecialFeatures *__osViNext;
 
 void osViSetSpecialFeatures(s32 featureCommands) {
     u32 token;
 
     token = __osDisableInt();
     if (featureCommands & 1) {
-        g_nextVideoInterfaceContext->flags |= 8;
+        __osViNext->flags |= 8;
     }
     if (featureCommands & 2) {
-        g_nextVideoInterfaceContext->flags &= ~8;
+        __osViNext->flags &= ~8;
     }
     if (featureCommands & 4) {
-        g_nextVideoInterfaceContext->flags |= 4;
+        __osViNext->flags |= 4;
     }
     if (featureCommands & 8) {
-        g_nextVideoInterfaceContext->flags &= ~4;
+        __osViNext->flags &= ~4;
     }
     if (featureCommands & 0x10) {
-        g_nextVideoInterfaceContext->flags |= 0x10;
+        __osViNext->flags |= 0x10;
     }
     if (featureCommands & 0x20) {
-        g_nextVideoInterfaceContext->flags &= ~0x10;
+        __osViNext->flags &= ~0x10;
     }
     if (featureCommands & 0x40) {
-        g_nextVideoInterfaceContext->flags = (g_nextVideoInterfaceContext->flags | 0x10000) & ~0x300;
+        __osViNext->flags = (__osViNext->flags | 0x10000) & ~0x300;
     }
     if (featureCommands & 0x80) {
-        g_nextVideoInterfaceContext->flags &= ~0x10000;
-        g_nextVideoInterfaceContext->flags |= g_nextVideoInterfaceContext->inner->w1 & 0x300;
+        __osViNext->flags &= ~0x10000;
+        __osViNext->flags |= __osViNext->inner->w1 & 0x300;
     }
-    g_nextVideoInterfaceContext->status |= 8;
+    __osViNext->status |= 8;
     __osRestoreInt(token);
 }

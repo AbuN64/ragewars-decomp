@@ -12,16 +12,16 @@ unsigned char g_AlsavepullTrailingBytes[12] = { 0x8F, 0xA2, 0x00, 0x00, 0x00, 0x
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/ALDELAY28.H"
-#include "../../../../sdk/include/libultra/audio/save.H"
+#include "libultra/audio/save.H"
 #include "TYPES.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "libultra/debug/assert.h"
 Acmd *alSavePull(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     ALFilter_u1 *source = filter->filter.source;
 
     if (!source) {
-        Audio_Assert(g_audioSaveAssertConditionText, g_audioSaveText, 0x22);
+        __assert(g_audioSaveAssertConditionText, g_audioSaveText, 0x22);
     }
     ptr = source->handler(source, outp, outCount, sampleOffset, ptr);
     aSetBuffer(ptr++, 0, 0, 0, outCount << 1);

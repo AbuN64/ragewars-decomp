@@ -46,13 +46,13 @@ extern u8 g_libsnDmaRequest[],g_libsnDmaCompletionQueue[];
 
 struct OSIoMesg;
 struct Opaque_OSMesgQueue;
-extern s32 Io_StartPeripheralDma(struct OSIoMesg *,s32,s32,u32,void *,u32,struct Opaque_OSMesgQueue *);
+extern s32 osPiStartDma(struct OSIoMesg *,s32,s32,u32,void *,u32,struct Opaque_OSMesgQueue *);
 void Libsn_ReadPortBufferWithDma(u32 address,u8 *out,u32 count) {
  s32 status = -(g_staticDataRegionStart == 0); u32 word;
  while(count!=0 && (address&3)!=0) { *out++=Libsn_ReadTransferPortByte(address++); count--; }
  while(count>3) {
   if(count>=16 && ((((u32)out&15)==0) & (status!=-1))) {
-   status=Io_StartPeripheralDma(g_libsnDmaRequest,1,0,address,out,count,g_libsnDmaCompletionQueue);
+   status=osPiStartDma(g_libsnDmaRequest,1,0,address,out,count,g_libsnDmaCompletionQueue);
    if(status!=-1) { osRecvMesg(g_libsnDmaCompletionQueue,0,1); count=0; }
   } else {
    word=Libsn_ReadPortWord(address);

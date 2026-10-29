@@ -25,10 +25,10 @@ s32 __osLeoInterrupt(void) {
     if (pi_stat & 1) {
         blockInfo->errStatus = 29;
         {
-            s32 *maskp = &g_globalInterruptMask;
+            s32 *maskp = &__OSGlobalIntMask;
             *maskp = *maskp & ~0x00000800;
         }
-        Audio_PostDiskEventMessage();
+        __osLeoResume();
         return 1;
     }
 
@@ -56,10 +56,10 @@ s32 __osLeoInterrupt(void) {
         WAIT_ON_IOBUSY(pi_stat);
         stat = IO_READ(LEO_STATUS);
         blockInfo->errStatus = 22;
-        Audio_PostDiskEventMessage();
+        __osLeoResume();
         IO_WRITE(PI_STATUS_REG, 2);
         {
-            s32 *maskp = &g_globalInterruptMask;
+            s32 *maskp = &__OSGlobalIntMask;
             *maskp |= 0x00100401;
         }
         return 1;
@@ -69,17 +69,17 @@ s32 __osLeoInterrupt(void) {
         if ((stat & 0x40000000) == 0) {
             if (info->sectorNum + 1 != info->transferMode * 85) {
                 blockInfo->errStatus = 24;
-                Audio_AbortDiskTransfer();
+                __osLeoAbnormalResume();
                 return 1;
             }
 
             IO_WRITE(PI_STATUS_REG, 2);
             {
-            s32 *maskp = &g_globalInterruptMask;
+            s32 *maskp = &__OSGlobalIntMask;
             *maskp |= 0x00100401;
         }
             blockInfo->errStatus = 0;
-            Audio_PostDiskEventMessage();
+            __osLeoResume();
             return 1;
         } else {
             blockInfo->dramAddr = (void *)((u32)blockInfo->dramAddr + blockInfo->sectorSize);
@@ -91,13 +91,13 @@ s32 __osLeoInterrupt(void) {
         if (info->transferMode == 3) {
             if (info->sectorNum > (s32)blockInfo->C1ErrNum + 17) {
                 blockInfo->errStatus = 0;
-                Audio_AbortDiskTransfer();
+                __osLeoAbnormalResume();
                 return 1;
             }
 
             if ((stat & 0x40000000) == 0) {
                 blockInfo->errStatus = 23;
-                Audio_AbortDiskTransfer();
+                __osLeoAbnormalResume();
                 return 1;
             }
         } else {
@@ -109,7 +109,7 @@ s32 __osLeoInterrupt(void) {
             if (blockInfo->C1ErrNum > 3) {
                 if (info->transferMode != 3 || info->sectorNum > 0x52) {
                     blockInfo->errStatus = 23;
-                    Audio_AbortDiskTransfer();
+                    __osLeoAbnormalResume();
                     return 1;
                 }
             } else {
@@ -123,7 +123,7 @@ s32 __osLeoInterrupt(void) {
         if (stat & 0x10000000) {
             if (info->sectorNum + 1 != 88) {
                 blockInfo->errStatus = 24;
-                Audio_AbortDiskTransfer();
+                __osLeoAbnormalResume();
             }
 
             if (info->transferMode == 2 && info->blockNum == 0) {
@@ -135,7 +135,7 @@ s32 __osLeoInterrupt(void) {
             } else {
                 IO_WRITE(PI_STATUS_REG, 2);
                 {
-            s32 *maskp = &g_globalInterruptMask;
+            s32 *maskp = &__OSGlobalIntMask;
             *maskp |= 0x00100401;
         }
                 info->cmdType = 2;
@@ -151,19 +151,19 @@ s32 __osLeoInterrupt(void) {
             if (info->block[0].C1ErrNum == 0) {
                 if (((u32 *)bptr->C2Addr)[0] | ((u32 *)bptr->C2Addr)[1] | ((u32 *)bptr->C2Addr)[2] | ((u32 *)bptr->C2Addr)[3]) {
                     bptr->errStatus = 24;
-                    Audio_AbortDiskTransfer();
+                    __osLeoAbnormalResume();
                     return 1;
                 }
             }
 
             bptr->errStatus = 0;
-            Audio_PostDiskEventMessage();
+            __osLeoResume();
         }
         info->sectorNum++;
         if (stat & 0x40000000) {
             if (info->sectorNum > 0x54) {
                 blockInfo->errStatus = 24;
-                Audio_AbortDiskTransfer();
+                __osLeoAbnormalResume();
                 return 1;
             }
 
@@ -172,14 +172,14 @@ s32 __osLeoInterrupt(void) {
             return 1;
         } else if (info->sectorNum <= 0x54) {
             blockInfo->errStatus = 24;
-            Audio_AbortDiskTransfer();
+            __osLeoAbnormalResume();
             return 1;
         }
 
         return 1;
     } else {
         blockInfo->errStatus = 4;
-        Audio_AbortDiskTransfer();
+        __osLeoAbnormalResume();
         return 1;
     }
 }

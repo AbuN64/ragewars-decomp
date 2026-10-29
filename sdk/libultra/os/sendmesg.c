@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "../../include/os.h"
 
-extern OSThread_s *g_osRunningThread;
+extern OSThread_s *__osRunningThread;
 
 extern void __osEnqueueAndYield(void *queue_data);
 
@@ -19,7 +19,7 @@ s32 osSendMesg(OSMesgQueue *queue, OSMesg entry, s32 mode) {
             __osRestoreInt(saved);
             return -1;
         }
-        g_osRunningThread->state = 8;
+        __osRunningThread->state = 8;
         __osEnqueueAndYield(&queue->fullqueue);
     }
     queue->msg[(queue->first + queue->validCount) % queue->msgCount] = entry;

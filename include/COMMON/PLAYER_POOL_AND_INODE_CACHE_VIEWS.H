@@ -24,7 +24,7 @@ struct CPlayerPool_t {
 };
 
 
-extern void Items_DecodeControllerStatusReplies(u8 *valid, ControllerInitStatusBytes *data);
+extern void __osContGetInitData_pfs(u8 *valid, ControllerInitStatusBytes *data);
 
 struct PlayerPoolModeStateView;
 typedef struct PlayerPoolModeStateView PlayerPoolModeStateView;

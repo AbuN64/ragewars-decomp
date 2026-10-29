@@ -36,8 +36,8 @@ typedef struct OSPiHandle_leo {
 } OSPiHandle_leo;
 
 extern OSPiHandle_leo *g_currentDiskPeripheralHandle;
-extern s32 g_globalInterruptMask;
+extern s32 __OSGlobalIntMask;
 extern s32 __osEPiRawStartDma(OSPiHandle_leo *handle, s32 direction, u32 cartAddr, void *dramAddr, u32 size);
-extern void Audio_PostDiskEventMessage(void);
-extern void Audio_AbortDiskTransfer(void);
+extern void __osLeoResume(void);
+extern void __osLeoAbnormalResume(void);
 #endif

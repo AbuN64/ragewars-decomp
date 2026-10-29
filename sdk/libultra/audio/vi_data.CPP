@@ -9,8 +9,8 @@
 /* __osViSwapContext, drafted from ultralib src/io/viswapcontext.c (2.0I: vStart straight from the
    field registers). The unsigned-to-float and float-to-unsigned conversions of the y scale use the
    cartridge's 2^32 and 2^31 constants, so both are written out. */
-extern ViSwapContextView *g_currentVideoInterfaceContext;
-extern ViSwapContextView *g_nextVideoInterfaceContext;
+extern ViSwapContextView *__osViCurr;
+extern ViSwapContextView *__osViNext;
  /* 2^32 */
  /* 2^31 */
 void __osViSwapContext(void)
@@ -27,7 +27,7 @@ void __osViSwapContext(void)
     u32 *yscalep;
     ViSwapContextView **curr;
     field = 0;
-    vc = g_nextVideoInterfaceContext;
+    vc = __osViNext;
     vm = vc->modep;
     field = (*(volatile u32 *)(0xA4400010)) & 1;
     origin = osVirtualToPhysical(vc->framep) + (vm->fldRegs[field].origin);
@@ -83,10 +83,10 @@ void __osViSwapContext(void)
     IO_WRITE(0xA4400030, vc->x.scale);
     IO_WRITE(0xA4400034, vc->y.scale);
     IO_WRITE(0xA4400000, vc->control);
-    curr = &g_currentVideoInterfaceContext;
-    g_nextVideoInterfaceContext = *curr;
+    curr = &__osViCurr;
+    __osViNext = *curr;
     *curr = vc;
-    *g_nextVideoInterfaceContext = **curr;
+    *__osViNext = **curr;
 }
 
 #if defined(VERSION_US)

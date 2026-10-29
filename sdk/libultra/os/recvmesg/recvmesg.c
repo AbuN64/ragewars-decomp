@@ -10,7 +10,7 @@ unsigned char g_RecvmesgTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 0xAF, 0xBF
 #endif
 
 /* recvmesg.c */
-extern OSThread_s *g_osRunningThread;
+extern OSThread_s *__osRunningThread;
 extern void __osEnqueueAndYield(void *);
 
 s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
@@ -22,7 +22,7 @@ s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
             __osRestoreInt(mask);
             return -1;
         }
-        g_osRunningThread->state = 8;
+        __osRunningThread->state = 8;
         __osEnqueueAndYield(&queue->mtqueue);
     }
 

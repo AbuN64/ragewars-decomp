@@ -6,8 +6,8 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/OSTASK_T.H"
 #include "../../include/libultra/io/sprawdma.H"
-#include "AUDIO/SPSETPC.H"
-#include "AUDIO/SPSETSTAT.H"
+#include "../../include/libultra/io/spsetpc.h"
+#include "../../include/libultra/io/spsetstat.h"
 #include "../../include/libgultra/sp.h"
 #include "../../include/OSINT/osyieldthread.H"
 
@@ -58,7 +58,7 @@ void osSpTaskLoad(OSTask *intp) {
         }
     }
     osWritebackDCache(block, 0x40);
-    Audio_WriteSignalProcessorStatus(0x2B00);
+    __osSpSetStatus(0x2B00);
     do {
         result = __osSpSetPc(0x04001000);
     } while (result == -1);
@@ -76,5 +76,5 @@ void osSpTaskLoad(OSTask *intp) {
 void osSpTaskStartGo(void) {
     do {
     } while (__osSpDeviceBusy() != 0);
-    Audio_WriteSignalProcessorStatus(0x125U);
+    __osSpSetStatus(0x125U);
 }

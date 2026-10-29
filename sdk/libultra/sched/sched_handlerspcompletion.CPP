@@ -7,7 +7,7 @@
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
-#include "AUDIO/SPTASKYIELDED.H"
+#include "../../include/libultra/io/sptaskyielded.h"
 #include "SCENE/CACHE_SENDCOMPLETIONMESSAGE.H"
 #include "../../include/SCHED/osscremoveclient.H"
 #include "../../include/os.h"
@@ -25,7 +25,7 @@ void Sched_HandleRspCompletion(void *object) {
  scheduler->curRSPTask=0;
  taskState=task->state;
  nextRsp=0;nextRdp=0;
- if((taskState&0x10)&&Audio_CheckSignalProcessorTaskYield(&task->list)) {
+ if((taskState&0x10)&&osSpTaskYielded(&task->list)) {
   task->state|=0x20;
   if((task->flags&7)==3) {
    task->next=scheduler->gfxListHead;
@@ -33,7 +33,7 @@ void Sched_HandleRspCompletion(void *object) {
    if(!scheduler->gfxListTail) scheduler->gfxListTail=task;
   }
   if(task->flags&0x20) {
-   elapsed=((Audio_ReadSystemTime()-g_schedulerGraphicsTaskStartTime)<<6)/3;
+   elapsed=((osGetTime()-g_schedulerGraphicsTaskStartTime)<<6)/3;
    duration1=(f32)elapsed;
    g_schedulerAccumulatedGraphicsRspDuration+=duration1*g_schedulerAudioFirstDurationScale;
   }
@@ -42,11 +42,11 @@ void Sched_HandleRspCompletion(void *object) {
   if(task->list.type==1) {
    g_schedulerRetraceCount=0;
    if(task->flags&0x20) {
-    elapsed=((Audio_ReadSystemTime()-g_schedulerGraphicsTaskStartTime)<<6)/3;
+    elapsed=((osGetTime()-g_schedulerGraphicsTaskStartTime)<<6)/3;
     duration2=(f32)elapsed;
     g_schedulerAccumulatedGraphicsRspDuration=g_schedulerAccumulatedGraphicsRspDuration+duration2*g_schedulerAudioSecondDurationScale;
     g_schedulerAudioDuration=g_schedulerAccumulatedGraphicsRspDuration;
-    elapsed=((Audio_ReadSystemTime()-g_schedulerAudioTaskStartTime)<<6)/3;
+    elapsed=((osGetTime()-g_schedulerAudioTaskStartTime)<<6)/3;
     duration3=(f32)elapsed;
     g_schedulerTaskDuration=duration3*g_schedulerTaskFirstDurationScale;
     frame=g_gameSession.ring.frames;
@@ -58,7 +58,7 @@ void Sched_HandleRspCompletion(void *object) {
     if(osSendMesg(task->msgQ,task->msg,1)==-1) *((char *)NULL)=0;
    }
   } else {
-   elapsed=((Audio_ReadSystemTime()-g_schedulerAudioTaskStartTime)<<6)/3;
+   elapsed=((osGetTime()-g_schedulerAudioTaskStartTime)<<6)/3;
    duration4=(f32)elapsed;
    g_schedulerTaskDuration=duration4*g_schedulerTaskSecondDurationScale;
    if(osSendMesg(task->msgQ,task->msg,1)==-1) *((char *)NULL)=0;
@@ -100,7 +100,7 @@ void Sched_HandleRdpCompletion(OSSched *sc)
     task->state &= ~1;
     if (task->list.type == 1) {
         if ((task->flags & 0x20) != 0) {
-            g_schedulerElapsedFrameDuration = (f32)(((Audio_ReadSystemTime() - g_schedulerRdpTaskStartTime) << 6) / 3) * g_schedulerElapsedDurationScale;
+            g_schedulerElapsedFrameDuration = (f32)(((osGetTime() - g_schedulerRdpTaskStartTime) << 6) / 3) * g_schedulerElapsedDurationScale;
         }
         sc->curRDPTask = 0;
         if ((task->flags & 0x20) != 0) {

@@ -13,7 +13,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "include_asm.h"
 #include "COMMON/OSPIHANDLE_S.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../include/libultra/debug/assert.h"
 
 extern void *alHeapDBAlloc(u8 *, s32, ALHeap *, s32, s32);
 
@@ -27,7 +27,7 @@ extern void alAuxBusNew(ALAuxBus_s *, void *, s32);
 extern void alMainBusNew(ALMainBus_s *, void *, s32);
 
              /* alMainBusNew */
-extern void *Audio_AllocateSynthesizerEffect(ALSynth *, s16, ALSynConfig *, ALHeap *);
+extern void *alSynAllocFX(ALSynth *, s16, ALSynConfig *, ALHeap *);
 
  /* alSynAllocFX */
 extern s32 alMainBusParam(void *, s32, void *);
@@ -59,9 +59,9 @@ extern s32 alSaveParam(void *, s32, ALFilter_s14 *);
 
  /* alGlobals */
 
-s32 timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds);
+s32 _timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds);
 
-         /* timeToSamplesNoRound */
+         /* _timeToSamplesNoRound */
 void _collectPVoices(void *synth);
 
 
@@ -100,7 +100,7 @@ void alSynNew(ALSynth *drvr, ALSynConfig *c)
     alMainBusNew(drvr->mainBus, sources, c->maxPVoices);
 
     if (c->fxType != 0) {
-        Audio_AllocateSynthesizerEffect(drvr, 0, c, hp);
+        alSynAllocFX(drvr, 0, c, hp);
     } else
         alMainBusParam(drvr->mainBus, 2, &drvr->auxBus[0]); /* AL_FILTER_ADD_SOURCE */
 
@@ -161,11 +161,11 @@ Acmd *alAudioFrame(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
         return cmdList;
     }
 
-    for (drvr->paramSamples = nextSampleTime(drvr, &client);
+    for (drvr->paramSamples = __nextSampleTime(drvr, &client);
          drvr->paramSamples - drvr->curSamples < outLen;
-         drvr->paramSamples = nextSampleTime(drvr, &client)) {
+         drvr->paramSamples = __nextSampleTime(drvr, &client)) {
         drvr->paramSamples &= ~0xf;
-        client->samplesLeft += timeToSamplesNoRound(drvr, (*client->handler)(client));
+        client->samplesLeft += _timeToSamplesNoRound(drvr, (*client->handler)(client));
     }
     drvr->paramSamples &= ~0xf;
 
@@ -210,7 +210,7 @@ void Audio_FreeParam(void *parameterStorage) {
     head->drvr.paramList = parameterStorage;
 }
 
-void freePVoice(s32 synth, s32 listLink) {
+void _freePVoice(s32 synth, s32 listLink) {
     alUnlink((ListLink *)listLink);
     alLink(listLink, synth + 0x14);
 }
@@ -228,7 +228,7 @@ void _collectPVoices(void *synth) {
     }
 }
 
-s32 timeToSamples(SynthOutputRateView *synth, s32 microseconds) {
+s32 _timeToSamples(SynthOutputRateView *synth, s32 microseconds) {
     f32 v;
     int idx;
 
@@ -244,10 +244,10 @@ extern char g_synthesizerNoClientAssertText;
 extern char s_audioSynthesizerText;
 
 
-s32 nextSampleTime(ALSynth4C *drvr, ALPlayer_s14 **client) {
+s32 __nextSampleTime(ALSynth4C *drvr, ALPlayer_s14 **client) {
  s32 smallest = 0x7FFFFFFF;
  ALPlayer_s14 *scan;
- if (drvr->head == 0) Audio_Assert(&g_synthesizerNoClientAssertText, &s_audioSynthesizerText, 0x133);
+ if (drvr->head == 0) __assert(&g_synthesizerNoClientAssertText, &s_audioSynthesizerText, 0x133);
  *client = 0;
  scan = drvr->head;
  if (scan != 0) {
@@ -262,7 +262,7 @@ s32 nextSampleTime(ALSynth4C *drvr, ALPlayer_s14 **client) {
  return (*client)->samplesLeft;
 }
 
-s32 timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds) {
+s32 _timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds) {
     f32 v;
     int idx;
 

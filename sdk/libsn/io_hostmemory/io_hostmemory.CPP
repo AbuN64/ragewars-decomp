@@ -59,7 +59,7 @@ extern volatile s32 g_staticDataRegionStart;
 struct OSIoMesg;
 extern struct OSIoMesg g_libsnDmaRequest;
 extern OSMesgQueue g_libsnDmaCompletionQueue;
-extern s32 Io_StartPeripheralDma(struct OSIoMesg *, s32, s32, u32, void *, u32, OSMesgQueue *);
+extern s32 osPiStartDma(struct OSIoMesg *, s32, s32, u32, void *, u32, OSMesgQueue *);
 
 /* Write an arbitrary byte stream to the device, using DMA when aligned
  * and falling back to byte/word writes if the DMA request is unavailable. */
@@ -71,7 +71,7 @@ void Libsn_WritePortBufferWithDma(u32 address, u8 *source, u32 remaining) {
     }
     while (remaining >= 4) {
         if (remaining >= 16 && ((((u32)source & 15) == 0) & (dmaResult != -1))) {
-            dmaResult = Io_StartPeripheralDma(&g_libsnDmaRequest, 1, 1, address,
+            dmaResult = osPiStartDma(&g_libsnDmaRequest, 1, 1, address,
                 source, remaining, &g_libsnDmaCompletionQueue);
             if (dmaResult != -1) {
                 osRecvMesg(&g_libsnDmaCompletionQueue, 0, 1);

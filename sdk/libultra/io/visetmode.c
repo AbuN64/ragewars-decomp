@@ -13,13 +13,13 @@
 
 
 
-extern ViModeContextView *g_nextVideoInterfaceContext;
+extern ViModeContextView *__osViNext;
 
 void osViSetMode(OSViMode *modep) {
     register u32 saveMask = __osDisableInt();
 
-    g_nextVideoInterfaceContext->modep = modep;
-    g_nextVideoInterfaceContext->state = 1;
-    g_nextVideoInterfaceContext->control = g_nextVideoInterfaceContext->modep->comRegs.w0;
+    __osViNext->modep = modep;
+    __osViNext->state = 1;
+    __osViNext->control = __osViNext->modep->comRegs.w0;
     __osRestoreInt(saveMask);
 }

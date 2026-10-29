@@ -6,7 +6,7 @@
 #include "COMMON/ALDELAY28.H"
 #include "../../../include/libultra/audio/save.H"
 #include "TYPES.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../../include/libultra/debug/assert.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALAUXBUS_S.H"
 
@@ -23,7 +23,7 @@ Acmd *alSavePull(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
     ALFilter_u1 *source = filter->filter.source;
 
     if (!source) {
-        Audio_Assert(g_audioSaveAssertConditionText, g_audioSaveText, 0x22);
+        __assert(g_audioSaveAssertConditionText, g_audioSaveText, 0x22);
     }
     ptr = source->handler(source, outp, outCount, sampleOffset, ptr);
     aSetBuffer(ptr++, 0, 0, 0, outCount << 1);

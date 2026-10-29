@@ -4,14 +4,14 @@
 #include "TYPES.H"
 #include "../include/os.h"
 
-extern StateosViSetSpecialFeatures *g_nextVideoInterfaceContext;
+extern StateosViSetSpecialFeatures *__osViNext;
 
 void osViSwapBuffer(s32 framebuffer) {
     u32 savedMask;
 
     savedMask = __osDisableInt();
-    g_nextVideoInterfaceContext->word4 = framebuffer;
-    g_nextVideoInterfaceContext->status |= 0x10;
+    __osViNext->word4 = framebuffer;
+    __osViNext->status |= 0x10;
     __osRestoreInt(savedMask);
 }
 

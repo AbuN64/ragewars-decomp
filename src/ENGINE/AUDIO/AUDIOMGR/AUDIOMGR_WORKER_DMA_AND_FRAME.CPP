@@ -15,11 +15,11 @@
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "SYSTEM/SOUND_CONTEXT_LOCK_AND_ACTIVITY.H"
 #include "ENGINE/AUDIO/AUDIOMGR/AUDIOMGR_WORKER_DMA_AND_FRAME.H"
-#include "../../../../sdk/include/MATH/aigetlen.H"
-#include "../../../../sdk/include/libgultra/OSWRITEBACKDCACHEALL.H"
-#include "../../../../sdk/include/libgultra/alunlink.h"
-#include "../../../../sdk/include/OSINT/osyieldthread.H"
-#include "../../../../sdk/include/os.h"
+#include "MATH/aigetlen.H"
+#include "libgultra/OSWRITEBACKDCACHEALL.H"
+#include "libgultra/alunlink.h"
+#include "OSINT/osyieldthread.H"
+#include "os.h"
 
 
 extern u32 g_audioWorkerElapsedTicks;
@@ -54,9 +54,9 @@ void Audiomgr_RunAudioWorker(void) {
     previous = 0;
     osScAddClient(&g_systemScheduler, &client, &g_audioWorkerEventQueue);
     do {
-        g_audioWorkerElapsedTicks = ((Audio_ReadSystemTime() - previous) << 6) / 3000ULL;
+        g_audioWorkerElapsedTicks = ((osGetTime() - previous) << 6) / 3000ULL;
         osRecvMesg(&g_audioWorkerEventQueue, &event.message, 1);
-        previous = Audio_ReadSystemTime();
+        previous = osGetTime();
         switch (event.words[0]) {
         case 1:
             frame++;

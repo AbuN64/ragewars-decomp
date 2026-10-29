@@ -5,7 +5,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "GAMECORE/EXTERNS.H"
 #include "../../include/libultra/io/epirawread.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../include/libultra/debug/assert.h"
 
 extern OSPiHandle_s *g_peripheralDomainHandles[];
 
@@ -14,7 +14,7 @@ s32 osEPiRawReadIo(OSPiHandle_s *piHandle, u32 deviceOffset, u32 *outputWord) {
     s32 index;
 
     if (outputWord == 0) {
-        Audio_Assert(&g_extendedPeripheralReadAssertText, &s_epirawreadText, 0x2B);
+        __assert(&g_extendedPeripheralReadAssertText, &s_epirawreadText, 0x2B);
     }
     while (IO_READ_WORD(PI_STATUS_REG) & 3) {
     }

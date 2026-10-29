@@ -17,7 +17,7 @@ LEAF(__osExceptionPreamble)
     addiu   k0, k0, %lo(__osExceptionKuseg)
 #elif VERSION_EU_X || VERSION_US_REV1
     sw      v0, 0(s0)
-    jal     Audio_AbortDiskTransfer
+    jal     __osLeoAbnormalResume
     lui     k0, %hi(__osExceptionKuseg)
     addiu   k0, k0, %lo(__osExceptionKuseg)
 #elif VERSION_US
@@ -53,8 +53,8 @@ LEAF(__osExceptionPreamble)
     sw      zero, 0x18(k0)
     mfc0    t0, C0_CAUSE
     addu    t0, k0, zero
-    lui     k0, %hi(g_osRunningThread)
-    lw      k0, %lo(g_osRunningThread)(k0)
+    lui     k0, %hi(__osRunningThread)
+    lw      k0, %lo(__osRunningThread)(k0)
     ld      t1, 0x20(t0)
     ld      t2, 0x118(t0)
     sd      t1, 0x20(k0)
@@ -99,8 +99,8 @@ LEAF(__osExceptionPreamble)
     andi    t1, k1, 0xFF00
     beqz    t1, 1f
     nop
-    lui     t0, %hi(g_globalInterruptMask)
-    addiu   t0, t0, %lo(g_globalInterruptMask)
+    lui     t0, %hi(__OSGlobalIntMask)
+    addiu   t0, t0, %lo(__OSGlobalIntMask)
     lw      t0, 0(t0)
     nop
     li      AT, -0x1
@@ -124,8 +124,8 @@ LEAF(__osExceptionPreamble)
     nop
     beqz    t1, 2f
     nop
-    lui     t0, %hi(g_globalInterruptMask)
-    addiu   t0, t0, %lo(g_globalInterruptMask)
+    lui     t0, %hi(__OSGlobalIntMask)
+    addiu   t0, t0, %lo(__OSGlobalIntMask)
     lw      t0, 0(t0)
     nop
     srl     t0, t0, 16
@@ -316,8 +316,8 @@ LEAF(__osExceptionPreamble)
     nop
     lui     s1, 0xA430
     lw      s1, 0x8(s1)
-    lui     t0, %hi(g_globalInterruptMask)
-    addiu   t0, t0, %lo(g_globalInterruptMask)
+    lui     t0, %hi(__OSGlobalIntMask)
+    addiu   t0, t0, %lo(__OSGlobalIntMask)
     lw      t0, 0(t0)
     nop
     srl     t0, t0, 16
@@ -437,8 +437,8 @@ LEAF(__osExceptionPreamble)
     sw      t2, 0(t1)
     jal     send_mesg
     li      a0, 0x70
-    lui     t2, %hi(g_osRunnableThreadQueue)
-    lw      t2, %lo(g_osRunnableThreadQueue)(t2)
+    lui     t2, %hi(__osRunQueue)
+    lw      t2, %lo(__osRunQueue)(t2)
     li      AT, -0x1001
     and     s0, s0, AT
     lw      k1, 0x118(t2)
@@ -473,31 +473,31 @@ LEAF(__osExceptionPreamble)
     bgez    zero, 16f
     nop
 16:
-    lui     t2, %hi(g_osRunnableThreadQueue)
-    lw      t2, %lo(g_osRunnableThreadQueue)(t2)
+    lui     t2, %hi(__osRunQueue)
+    lw      t2, %lo(__osRunQueue)(t2)
     lw      t1, 0x4(k0)
     lw      t3, 0x4(t2)
     nop
     slt     AT, t1, t3
     beqz    AT, redispatch
     nop
-    lui     a0, %hi(g_osRunnableThreadQueue)
-    addiu   a0, a0, %lo(g_osRunnableThreadQueue)
+    lui     a0, %hi(__osRunQueue)
+    addiu   a0, a0, %lo(__osRunQueue)
     jal     __osEnqueueThread
     addu    a1, k0, zero
     j       __osDispatchThread
     nop
 redispatch:
-    lui     t1, %hi(g_osRunnableThreadQueue)
-    addiu   t1, t1, %lo(g_osRunnableThreadQueue)
+    lui     t1, %hi(__osRunQueue)
+    addiu   t1, t1, %lo(__osRunQueue)
     lw      t2, 0(t1)
     nop
     sw      t2, 0(k0)
     j       __osDispatchThread
     sw      k0, 0(t1)
 panic:
-    lui     AT, %hi(g_audioInterruptMask)
-    sw      k0, %lo(g_audioInterruptMask)(AT)
+    lui     AT, %hi(__osFaultedThread)
+    sw      k0, %lo(__osFaultedThread)(AT)
     li      t1, 0x1
     sh      t1, 0x10(k0)
     li      t1, 0x2
@@ -560,8 +560,8 @@ LEAF(send_mesg)
     jal     __osPopThread
     addu    a0, t1, zero
     addu    t2, v0, zero
-    lui     a0, %hi(g_osRunnableThreadQueue)
-    addiu   a0, a0, %lo(g_osRunnableThreadQueue)
+    lui     a0, %hi(__osRunQueue)
+    addiu   a0, a0, %lo(__osRunQueue)
     jal     __osEnqueueThread
     addu    a1, t2, zero
 3:
@@ -587,8 +587,8 @@ LEAF(handle_CpU)
 END(handle_CpU)
 
 LEAF(__osEnqueueAndYield)
-    lui     a1, %hi(g_osRunningThread)
-    lw      a1, %lo(g_osRunningThread)(a1)
+    lui     a1, %hi(__osRunningThread)
+    lw      a1, %lo(__osRunningThread)(a1)
     mfc0    t0, C0_SR
     nop
     ori     t0, t0, 0x2
@@ -656,8 +656,8 @@ LEAF(__osEnqueueAndYield)
     andi    t1, k1, 0xFF00
     beqz    t1, 2f
     nop
-    lui     t0, %hi(g_globalInterruptMask)
-    addiu   t0, t0, %lo(g_globalInterruptMask)
+    lui     t0, %hi(__OSGlobalIntMask)
+    addiu   t0, t0, %lo(__OSGlobalIntMask)
     nop
     lw      t0, 0(t0)
     nop
@@ -676,8 +676,8 @@ LEAF(__osEnqueueAndYield)
     nop
     beqz    k1, 3f
     nop
-    lui     k0, %hi(g_globalInterruptMask)
-    addiu   k0, k0, %lo(g_globalInterruptMask)
+    lui     k0, %hi(__OSGlobalIntMask)
+    addiu   k0, k0, %lo(__OSGlobalIntMask)
     lw      k0, 0(k0)
     nop
     srl     k0, k0, 16
@@ -731,18 +731,18 @@ LEAF(__osPopThread)
 END(__osPopThread)
 
 LEAF(__osDispatchThread)
-    lui     a0, %hi(g_osRunnableThreadQueue)
-    addiu   a0, a0, %lo(g_osRunnableThreadQueue)
+    lui     a0, %hi(__osRunQueue)
+    addiu   a0, a0, %lo(__osRunQueue)
     jal     __osPopThread
     nop
-    lui     AT, %hi(g_osRunningThread)
-    sw      v0, %lo(g_osRunningThread)(AT)
+    lui     AT, %hi(__osRunningThread)
+    sw      v0, %lo(__osRunningThread)(AT)
     li      t0, 0x4
     sh      t0, 0x10(v0)
     addu    k0, v0, zero
     lw      k1, 0x118(k0)
-    lui     t0, %hi(g_globalInterruptMask)
-    addiu   t0, t0, %lo(g_globalInterruptMask)
+    lui     t0, %hi(__OSGlobalIntMask)
+    addiu   t0, t0, %lo(__OSGlobalIntMask)
     lw      t0, 0(t0)
     nop
     andi    t0, t0, 0xFF00
@@ -840,8 +840,8 @@ LEAF(__osDispatchThread)
     ldc1    $f31, 0x228(k0)
 1:
     lw      k1, 0x128(k0)
-    lui     k0, %hi(g_globalInterruptMask)
-    addiu   k0, k0, %lo(g_globalInterruptMask)
+    lui     k0, %hi(__OSGlobalIntMask)
+    addiu   k0, k0, %lo(__OSGlobalIntMask)
     lw      k0, 0(k0)
     nop
     srl     k0, k0, 16
@@ -862,7 +862,7 @@ LEAF(__osDispatchThread)
 END(__osDispatchThread)
 
 LEAF(__osCleanupThread)
-    jal     Audio_DestroyThread
+    jal     osDestroyThread
     addu    a0, zero, zero
 /* alignment fill before leointerrupt.o: stale bytes of the original build, one value per version; they decode as
    instructions, but 0x00134348 is a jr with nonzero rt/rd/shamt fields, which no assembler mnemonic can encode */

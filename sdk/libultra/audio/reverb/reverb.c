@@ -12,7 +12,7 @@
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "../../../include/OSINT/osyieldthread.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../../include/libultra/debug/assert.h"
 
 /* reverb_Reverb.CPP */
 
@@ -42,12 +42,12 @@ extern char g_audioResamplerAssertTextEu[];
  /* "audio/reverb.c" */
 
  /* __assert */
-extern Acmd *Audio_LoadEffectOutput(struct ALFx *, ALDelay28 *, s32, s32, Acmd *);
+extern Acmd *_loadOutputBuffer(struct ALFx *, ALDelay28 *, s32, s32, Acmd *);
 
  /* _loadOutputBuffer */
 
- /* loadBuffer */
-extern Acmd *saveBuffer(struct ALFx *, s16 *, s32, s32, Acmd *);
+ /* _loadBuffer */
+extern Acmd *_saveBuffer(struct ALFx *, s16 *, s32, s32, Acmd *);
 
 s32 alMainBusParam(ALAuxBus_s *bus, s32 param, ALFilter_s14 *source) {
     ALFilter_s14 **sources = bus->sources;
@@ -173,7 +173,7 @@ s32 alResampleParam(void *resampler, s32 parameterId, s32 parameterValue) {
     return 0;
 }
 
- /* saveBuffer */
+ /* _saveBuffer */
 Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
@@ -185,15 +185,15 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
 
     if (!source)
 #if defined(VERSION_DE)
-        Audio_Assert(&g_audioResamplerAssertText, g_audioResamplerSourceText, 75);
+        __assert(&g_audioResamplerAssertText, g_audioResamplerSourceText, 75);
 #elif defined(VERSION_EU)
-        Audio_Assert(&g_audioResamplerAssertTextUsRev1, g_audioResamplerSourceText, 75);
+        __assert(&g_audioResamplerAssertTextUsRev1, g_audioResamplerSourceText, 75);
 #elif defined(VERSION_EU_X)
-        Audio_Assert(g_audioResamplerAssertTextEuX, g_audioResamplerSourceText, 75);
+        __assert(g_audioResamplerAssertTextEuX, g_audioResamplerSourceText, 75);
 #elif defined(VERSION_US)
-        Audio_Assert(&g_playerSecondLightRadius, g_audioResamplerSourceText, 75);
+        __assert(&g_playerSecondLightRadius, g_audioResamplerSourceText, 75);
 #else
-        Audio_Assert(g_audioResamplerAssertTextEu, g_audioResamplerSourceText, 75);
+        __assert(g_audioResamplerAssertTextEu, g_audioResamplerSourceText, 75);
 #endif
 
     ptr = (*source->handler)(source, outp, outCount, sampleOffset, p);
@@ -206,7 +206,7 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
     aSetBuffer(ptr++, 0, 0, 0, outCount << 1);
     aMix(ptr++, 0, 0xda83, 1728, input);
     aMix(ptr++, 0, 0x5a82, 2048, input);
-    ptr = saveBuffer(r, r->input, input, outCount, ptr);
+    ptr = _saveBuffer(r, r->input, input, outCount, ptr);
 
     aClearBuffer(ptr++, output, outCount << 1);
 
@@ -218,27 +218,27 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
         if (in_ptr == prev_out_ptr) {
             { s16 t = buff2; buff2 = buff1; buff1 = t; };
         } else {
-            ptr = loadBuffer(r, in_ptr, buff1, outCount, ptr);
+            ptr = _loadBuffer(r, in_ptr, buff1, outCount, ptr);
         }
-        ptr = Audio_LoadEffectOutput(r, d, buff2, outCount, ptr);
+        ptr = _loadOutputBuffer(r, d, buff2, outCount, ptr);
 
         if (d->ffcoef) {
             aMix(ptr++, 0, (u16)d->ffcoef, buff1, buff2);
             if (!d->rs && !d->lp) {
-                ptr = saveBuffer(r, out_ptr, buff2, outCount, ptr);
+                ptr = _saveBuffer(r, out_ptr, buff2, outCount, ptr);
             }
         }
 
         if (d->fbcoef) {
             aMix(ptr++, 0, (u16)d->fbcoef, buff2, buff1);
-            ptr = saveBuffer(r, in_ptr, buff1, outCount, ptr);
+            ptr = _saveBuffer(r, in_ptr, buff1, outCount, ptr);
         }
 
         if (d->lp)
-            ptr = filterBuffer(d->lp, buff2, outCount, ptr);
+            ptr = _filterBuffer(d->lp, buff2, outCount, ptr);
 
         if (!d->rs)
-            ptr = saveBuffer(r, out_ptr, buff2, outCount, ptr);
+            ptr = _saveBuffer(r, out_ptr, buff2, outCount, ptr);
 
         if (d->gain)
             aMix(ptr++, 0, (u16)d->gain, buff2, output);

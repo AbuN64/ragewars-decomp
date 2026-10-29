@@ -14,7 +14,7 @@ unsigned char g_StartthreadTrailingBytes[12] = { 0x10, 0x40, 0x00, 0x09, 0x00, 0
 #endif
 
 /* startthread.c */
-extern ThreadNode *g_osRunningThread;
+extern ThreadNode *__osRunningThread;
 
 extern void __osEnqueueAndYield(ThreadNode **queue, ThreadNode *node);
 void osStartThread(void *thread) {
@@ -29,28 +29,28 @@ void osStartThread(void *thread) {
         goto state_done;
     }
     threadStorage->state = 2;
-    __osEnqueueThread((ThreadNode **)&g_osRunnableThreadQueue, threadStorage);
+    __osEnqueueThread((ThreadNode **)&__osRunQueue, threadStorage);
     goto state_done;
 state_one:
     if (threadStorage->queue == 0) {
         goto insert_arg;
     }
-    sentinel = (ThreadNode **)&g_osRunnableThreadQueue;
+    sentinel = (ThreadNode **)&__osRunQueue;
     if (threadStorage->queue == sentinel) {
 insert_arg:
         threadStorage->state = 2;
-        __osEnqueueThread((ThreadNode **)&g_osRunnableThreadQueue, threadStorage);
+        __osEnqueueThread((ThreadNode **)&__osRunQueue, threadStorage);
     } else {
         threadStorage->state = 8;
         __osEnqueueThread(threadStorage->queue, threadStorage);
         __osEnqueueThread(sentinel, __osPopThread(threadStorage->queue));
     }
 state_done:
-    if (g_osRunningThread == 0) {
+    if (__osRunningThread == 0) {
         __osDispatchThread();
-    } else if (g_osRunningThread->priority < (*(ThreadNode **)&g_osRunnableThreadQueue)->priority) {
-        g_osRunningThread->state = 2;
-        __osEnqueueAndYield((ThreadNode **)&g_osRunnableThreadQueue, g_osRunningThread);
+    } else if (__osRunningThread->priority < (*(ThreadNode **)&__osRunQueue)->priority) {
+        __osRunningThread->state = 2;
+        __osEnqueueAndYield((ThreadNode **)&__osRunQueue, __osRunningThread);
     }
     __osRestoreInt(token);
 }

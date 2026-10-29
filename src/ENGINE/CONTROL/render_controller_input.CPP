@@ -6,10 +6,10 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "AUDIO/GETTHREADID.H"
-#include "../../../sdk/include/os.h"
+#include "libultra/os/getthreadid.h"
+#include "os.h"
 
-#include "../../../sdk/include/OS/controller.H"
+#include "OS/controller.H"
 /* Reads the four controllers once per frame and folds them into the combined input record g_combinedControllerProfile.
  * State 0 starts a read through the message queue, converts the pads to the four per-player input
  * records (Control_UpdateControllerInput), ORs their button words into the combined record, adds the stick
@@ -110,7 +110,7 @@ void Control_PollControllerPaks(void) {
     if (g_controllerInputReady != 0) {
         Rumble_RecycleFinishedEffectNodes(&g_controllerRumblePool);
         if ((locked = osRecvMesg(&g_controllerReadMessageQueue, 0, 0) == 0)) {
-            g_controllerAudioThreadId = Audio_GetThreadIdentifier(0);
+            g_controllerAudioThreadId = osGetThreadId(0);
         }
         if (locked) {
             Control_ReadControllerStates();

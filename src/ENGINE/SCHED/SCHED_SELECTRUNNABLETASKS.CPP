@@ -1,4 +1,4 @@
-#include "../../../sdk/include/thread_queue.h"
+#include "thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/VECTOR4F.H"
@@ -11,11 +11,11 @@
 #include "TYPES.H"
 #include "TYPES.H"
 #include "COMMON/BOOT_TV_TYPE.H"
-#include "../../../sdk/include/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
-#include "../../../sdk/include/SCHED/osscremoveclient.H"
-#include "../../../sdk/include/libgultra/OSWRITEBACKDCACHEALL.H"
-#include "../../../sdk/include/libgultra/sptaskyield.h"
-#include "../../../sdk/include/os.h"
+#include "AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
+#include "SCHED/osscremoveclient.H"
+#include "libgultra/OSWRITEBACKDCACHEALL.H"
+#include "libgultra/sptaskyield.h"
+#include "os.h"
 extern s32 g_schedulerPendingFramebuffer;
 extern s32 g_displayedFramebufferAndRefreshRate;
 /* Initialises a panel: marks it active, clears its counters, lays out its two eight-slot rows, binds text 0x29B to 0x29D and 0x29A with the given style byte to the first row, and builds its element list from the PanelElementTemplate template. */
@@ -25,7 +25,7 @@ extern s32 g_displayedFramebufferAndRefreshRate;
 
 extern void osSetEventMesg(s32 slot, char *row, s32 text);
 
-extern void System_SetVideoEvent(char *row, s32 text, s32 style);
+extern void osViSetEvent(char *row, s32 text, s32 style);
 
 extern void osCreateThread(char *list, s32 count, void *entryTemplate, Panel *owner, s32 stackPointer, s32 priority);
 
@@ -145,7 +145,7 @@ void Sched_InitializeSchedulerThread(Panel *panel, s32 threadStack, s32 priority
     osSetEventMesg(4, panel->row0, 0x29B);
     osSetEventMesg(9, panel->row0, 0x29C);
     osSetEventMesg(0xE, panel->row0, 0x29D);
-    System_SetVideoEvent(panel->row0, 0x29A, style);
+    osViSetEvent(panel->row0, 0x29A, style);
     osCreateThread(panel->elements, 7, &g_schedulerThreadEntryAddress, panel, threadStack, priority);
     osStartThread(panel->elements);
 }

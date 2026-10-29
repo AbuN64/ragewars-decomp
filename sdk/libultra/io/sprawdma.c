@@ -6,18 +6,18 @@
 #include "../../include/libultra/io/sprawdma.H"
 #include "../../include/libgultra/sp.h"
 #include "../../include/OSINT/osyieldthread.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../include/libultra/debug/assert.h"
 
 
 s32 __osSpRawStartDma(s32 direction, s32 deviceAddress, s32 dramAddress, s32 size) {
     if (deviceAddress & 7) {
-        Audio_Assert(&g_signalProcessorDmaAssertText, &s_sprawdmaText, 0x3A);
+        __assert(&g_signalProcessorDmaAssertText, &s_sprawdmaText, 0x3A);
     }
     if (dramAddress & 7) {
-        Audio_Assert(&g_signalProcessorDmaAssertText, &s_sprawdmaText, 0x3B);
+        __assert(&g_signalProcessorDmaAssertText, &s_sprawdmaText, 0x3B);
     }
     if (size & 7) {
-        Audio_Assert(&g_signalProcessorDmaAssertText, &s_sprawdmaText, 0x3C);
+        __assert(&g_signalProcessorDmaAssertText, &s_sprawdmaText, 0x3C);
     }
     if (__osSpDeviceBusy() != 0) {
         return -1;

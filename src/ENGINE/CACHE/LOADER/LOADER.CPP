@@ -1,4 +1,4 @@
-#include "../../../../sdk/include/thread_queue.h"
+#include "thread_queue.h"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "TEXTURE/CARTRIDGE_DMA_AND_AUDIO_TIMING_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -6,7 +6,7 @@
 #include "COMMON/S1.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "../../../../sdk/include/os.h"
+#include "os.h"
 #include "RESMGR/X_PLUS.H"
 #include "include_asm.h"
 #include "SYSTEM/LIST.H"
@@ -129,11 +129,11 @@ void Cartridge_SubmitReadChunks(struct CartridgeReadWorker *worker, u32 source, 
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
-#include "../../../../sdk/include/os.h"
+#include "os.h"
 /* Cartridge read thread loop: waits on the manager's request queue; a 0xBEEFDEAD message arms a
  * periodic timer that posts 0xDEADBEEF, a 0xDEADBEEF tick runs Libultra_RunDebugLinkCommands when TextLoad_IsArtsendTexturePreviewEnabled
  * reports work, and any other message is a read request whose buffer is invalidated, read from the
- * device through Gamecore_StartRawPeripheralDma, awaited on the completion queue, flushed, acknowledged to its reply
+ * device through __osPiRawStartDma, awaited on the completion queue, flushed, acknowledged to its reply
  * queue when one is given and finally retired through Cartridge_ReleaseReadRequest. */
 
 
@@ -144,7 +144,7 @@ extern void osSetTimer(void *, u64, u64, void *, void *);
 extern int TextLoad_IsArtsendTexturePreviewEnabled(void);
 extern void Libultra_RunDebugLinkCommands(void);
 extern void osWritebackDCache(void *, s32);
-extern s32 Gamecore_StartRawPeripheralDma(s32, u32, void *, u32);
+extern s32 __osPiRawStartDma(s32, u32, void *, u32);
 extern void osInvalDCache(void *, s32);
 extern void Cartridge_ReleaseReadRequest(s32, CartridgeReadRequest *);
 
@@ -165,7 +165,7 @@ void Cartridge_RunReadWorkerRev1(s32 cartridgeReadWorker) {
             }
         } else {
             osWritebackDCache(request->buffer, request->size);
-            Gamecore_StartRawPeripheralDma(0, request->devAddr, request->buffer, request->size);
+            __osPiRawStartDma(0, request->devAddr, request->buffer, request->size);
             osRecvMesg(&((struct CartridgeReadWorker *)(cartridgeReadWorker))->completionQueueStorage, &done, 1);
             osInvalDCache(request->buffer, request->size);
             if (request->replyQueue != 0) {
@@ -182,7 +182,7 @@ void Cartridge_RunReadWorkerRev1(s32 cartridgeReadWorker) {
  * handling belongs to the separate US-rev1 routine, which this item does not contain. */
 
 extern void osWritebackDCache(void *, s32);
-extern s32 Gamecore_StartRawPeripheralDma(s32, u32, void *, u32);
+extern s32 __osPiRawStartDma(s32, u32, void *, u32);
 extern void osInvalDCache(void *, s32);
 extern void Cartridge_ReleaseReadRequest(s32, CartridgeReadRequest *);
 
@@ -193,7 +193,7 @@ void Cartridge_RunReadWorker(CartridgeReadWorker *worker) {
     for (;;) {
         osRecvMesg(&worker->requestQueueStorage, &request, 1);
         osWritebackDCache(request->buffer, request->size);
-        Gamecore_StartRawPeripheralDma(0, request->devAddr, request->buffer, request->size);
+        __osPiRawStartDma(0, request->devAddr, request->buffer, request->size);
         osRecvMesg(&worker->completionQueueStorage, &done, 1);
         osInvalDCache(request->buffer, request->size);
         if (request->replyQueue != 0) {

@@ -25,7 +25,7 @@ extern OSMesg g_videoManagerEventMessages[5];
 
 extern void osSetEventMesg(s32 event, OSMesgQueue *mq, OSMesg msg);
 extern s32 osGetThreadPri(OSThread *t);
-extern void Scene_SetThreadPriority(OSThread *t, s32 pri);
+extern void osSetThreadPri(OSThread *t, s32 pri);
 
 
 void System_CreateVideoManager(s32 pri)
@@ -37,7 +37,7 @@ void System_CreateVideoManager(s32 pri)
     if (g_videoDeviceManager.active) {
         return;
     }
-    Util_InitializeTimerServices();
+    __osTimerServicesInit();
     osCreateMesgQueue(&g_videoManagerEventQueue, g_videoManagerEventMessages, 5);
     g_videoRetraceEvent.hdr.type = 13;
     g_videoRetraceEvent.hdr.pri = 0;
@@ -52,7 +52,7 @@ void System_CreateVideoManager(s32 pri)
 
     if (myPri < pri) {
         oldPri = myPri;
-        Scene_SetThreadPriority(0, pri);
+        osSetThreadPri(0, pri);
     }
 
     savedMask = __osDisableInt();
@@ -69,7 +69,7 @@ void System_CreateVideoManager(s32 pri)
     __osRestoreInt(savedMask);
 
     if (oldPri != -1) {
-        Scene_SetThreadPriority(0, oldPri);
+        osSetThreadPri(0, oldPri);
     }
 }
 #endif
@@ -81,7 +81,7 @@ void System_CreateVideoManager(s32 pri)
 #include "COMMON/NODERECAT1C.H"
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message);
 s32 osGetThreadPri(OSThread_s *thread);
-void Scene_SetThreadPriority(OSThread_s *thread, s32 priority);
+void osSetThreadPri(OSThread_s *thread, s32 priority);
 extern OSThread_s g_videoManagerThread;
 extern struct OSMesgQueue g_videoManagerEventQueue;
 extern void *g_videoManagerEventMessages[5];
@@ -94,7 +94,7 @@ void System_CreateVideoManagerEu(s32 managerPriority) {
 
     if (g_videoDeviceManager.active == 0) {
         restorePriority = -1;
-        Util_InitializeTimerServices();
+        __osTimerServicesInit();
         osCreateMesgQueue(&g_videoManagerEventQueue, g_videoManagerEventMessages, 5);
         g_videoRetraceEvent.hdr.type = 0xD;
         g_videoRetraceEvent.hdr.pri = 0;
@@ -107,7 +107,7 @@ void System_CreateVideoManagerEu(s32 managerPriority) {
         currentPriority = osGetThreadPri(0);
         if (currentPriority < managerPriority) {
             restorePriority = currentPriority;
-            Scene_SetThreadPriority(0, managerPriority);
+            osSetThreadPri(0, managerPriority);
         }
         savedInterruptMask = __osDisableInt();
         g_videoDeviceManager.active = 1;
@@ -122,7 +122,7 @@ void System_CreateVideoManagerEu(s32 managerPriority) {
         osStartThread(&g_videoManagerThread);
         __osRestoreInt(savedInterruptMask);
         if (restorePriority != -1) {
-            Scene_SetThreadPriority(0, restorePriority);
+            osSetThreadPri(0, restorePriority);
         }
     }
 }
@@ -134,9 +134,9 @@ void System_CreateVideoManagerEu(s32 managerPriority) {
 
 extern u16 g_videoManagerRetraceCountdown;
 
-extern struct __OSViContext *System_GetCurrentVideoContext(void);
+extern struct __OSViContext *__osViGetCurrentContext(void);
 
-extern void Util_HandleTimerInterrupt(void);
+extern void __osTimerInterrupt(void);
 
 static inline u16 *viRetrace(void)
 {
@@ -158,7 +158,7 @@ void System_RunVideoManager(struct OSDevMgr *arg)
 
     mb = 0;
     first = 0;
-    vc = System_GetCurrentVideoContext();
+    vc = __osViGetCurrentContext();
     retraceInit = &g_videoManagerRetraceCountdown;
     *retraceInit = vc->retraceCount;
     if (*retraceInit == 0) {
@@ -172,7 +172,7 @@ void System_RunVideoManager(struct OSDevMgr *arg)
             case 13:
                 __osViSwapContext();
                 if (--*viRetrace() == 0) {
-                    vc = System_GetCurrentVideoContext();
+                    vc = __osViGetCurrentContext();
                     if (vc->msgq != 0) {
                         osSendMesg(vc->msgq, vc->msg, 0);
                     }
@@ -196,7 +196,7 @@ void System_RunVideoManager(struct OSDevMgr *arg)
                 *currentTime = *currentTime + count;
                 break;
             case 14:
-                Util_HandleTimerInterrupt();
+                __osTimerInterrupt();
                 break;
             default:
                 break;

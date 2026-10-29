@@ -65,7 +65,7 @@ void Sched_RunEventLoopEu(OSSched *sc) {
 }
 #endif
 
-extern void Scene_SetThreadPriority(void *, s32);
+extern void osSetThreadPri(void *, s32);
 
 
 
@@ -93,7 +93,7 @@ void Sched_HandleRetrace(OSSched *sc) {
 
     if (g_resourceLoadPriorityBoost != 0) {
         g_resourceLoadPriorityBoost--;
-        if (g_resourceLoadPriorityBoost == 0) Scene_SetThreadPriority(&g_resourceCacheWorker, g_resourceLoadIdlePriority);
+        if (g_resourceLoadPriorityBoost == 0) osSetThreadPri(&g_resourceCacheWorker, g_resourceLoadIdlePriority);
     }
     sc->frameCount++;
     while (osRecvMesg(&sc->commandQueue, &event, 0) != -1) __scAppendList(sc, event);

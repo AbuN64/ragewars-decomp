@@ -6,7 +6,7 @@
 #include "../../include/libgultra/ai.h"
 #include "../../include/OSINT/osyieldthread.H"
 
-/* Queues an audio buffer for the AI DMA, backing the address up 0x2000 bytes after a buffer that ended on an 8 KiB boundary, returning -1 when __osAiDeviceBusy reports the interface busy and zero after writing the physical address from osVirtualToPhysical and the length to the AI registers (libultra osAiSetNextBuffer). Adapted from Audio_ReadSerialInterfaceWord with the argument checks replaced by the boundary flag byte g_audioDmaBoundaryWorkaroundFlag read through its array declaration, the busy test by __osAiDeviceBusy, and the uncached read by two AI register writes. */
+/* Queues an audio buffer for the AI DMA, backing the address up 0x2000 bytes after a buffer that ended on an 8 KiB boundary, returning -1 when __osAiDeviceBusy reports the interface busy and zero after writing the physical address from osVirtualToPhysical and the length to the AI registers (libultra osAiSetNextBuffer). Adapted from __osSiRawReadIo with the argument checks replaced by the boundary flag byte g_audioDmaBoundaryWorkaroundFlag read through its array declaration, the busy test by __osAiDeviceBusy, and the uncached read by two AI register writes. */
 
 
 s32 osAiSetNextBuffer(void *bufPtr, u32 size) {

@@ -17,7 +17,7 @@ int osSetTimer(OsTimerNode *node, u64 initialDelay, u64 repeatInterval, void *me
     node->msg = message;
     value = __osInsertTimer(node);
     if (*(void **)g_timerListSentinel == node) {
-        Util_SetTimerInterrupt(value);
+        __osSetTimerIntr(value);
     }
     return 0;
 }

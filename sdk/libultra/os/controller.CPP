@@ -148,7 +148,7 @@ s32 osContInit(s32 queue, s32 *valid, s32 connectedPatternOut) {
         return 0;
     }
     *initialized = 1;
-    value = Audio_ReadSystemTime();
+    value = osGetTime();
     if (value <= 0x0165A0BBULL) {
         osCreateMesgQueue(timerQueue, (s32)message, 1);
         osSetTimer(node, 0x0165A0BCULL - value, 0, timerQueue, message);

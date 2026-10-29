@@ -6,5 +6,5 @@
 #include "COMMON/LISTNODE.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/VECTOR4F.H"
-extern void Audio_PostPlayerStopEvent(s32);
+extern void alCSPPlay(s32);
 #endif

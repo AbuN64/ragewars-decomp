@@ -5,10 +5,10 @@
 #include "COMMON/DEVICE_IO.H"
 #include "TYPES.H"
 #include "../../include/libgultra.h"
-#include "AUDIO/SIRAW.H"
+#include "../../include/libultra/io/si.h"
 #include "../../include/os.h"
 #include "../../include/OSINT/osyieldthread.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../include/libultra/debug/assert.h"
 
 extern void osWritebackDCache(void *addr, s32 size);
 extern void osInvalDCache(void *addr, s32 size);
@@ -16,9 +16,9 @@ extern void osInvalDCache(void *addr, s32 size);
 
 s32 __osSiRawStartDma(s32 direction, void *dramAddr) {
     if ((u32)dramAddr & 3) {
-        Audio_Assert(&g_serialDmaAssertText, &s_sirawdmaText, 0x37);
+        __assert(&g_serialDmaAssertText, &s_sirawdmaText, 0x37);
     }
-    if (Audio_IsSerialInterfaceBusy() != 0) {
+    if (__osSiDeviceBusy() != 0) {
         return -1;
     }
     if (direction == 1) {

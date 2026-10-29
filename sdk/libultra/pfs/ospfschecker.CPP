@@ -179,7 +179,7 @@ s32 osPfsChecker(OSPfs *pfs)
                 }
 
                 if ((cc =
-Pfs_CountPageReferences
+corrupted
 (pfs, next_page, &cache) - cl) != 0) {
                     break;
                 }
@@ -331,7 +331,7 @@ s32 corrupted_init(OSPfs *pfs, __OSInodeCache *cache)
 /* corrupted: counts (up to 2) the inode-table slots of every bank that may hold the page key fpage,
    reading banks through the cache; returns the count, a read error, or PFS_ERR_NEW_PACK (2) once two
    slots hold it (the pak checker's duplicate-page test). The unit is built with -fforce-addr. */
-s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache) {
+s32 corrupted(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache) {
     int j;
     int n;
     int hit;

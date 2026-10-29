@@ -1,17 +1,17 @@
-#include "../../../../sdk/include/thread_queue.h"
+#include "thread_queue.h"
 #include "COMMON/OWNERRECAT8V2.H"
 #include "SCHED/SKY_POSTSCREENMESSAGE.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../../../sdk/include/libgultra/OSUNMAPTLBALL.H"
-#include "../../../../sdk/include/os.h"
+#include "libgultra/OSUNMAPTLBALL.H"
+#include "os.h"
 #include "RESMGR/X_PLUS.H"
 #include "ENGINE/VIRTUAL/VHANDLER.H"
 #include "include_asm.h"
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "AUDIO/GETTHREADID.H"
+#include "libultra/os/getthreadid.h"
 #include "SCHED/RESOURCE_PAGE_WORKER.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
@@ -223,7 +223,7 @@ void Vhandler_UnmapResourcePage(ResourcePageMapping *mapping) {
     mapping->slot = 0xFF;
 }
 
-u64 Audio_ReadSystemTime(void);
+u64 osGetTime(void);
 void *Virtual_FindRegionForPage(u32);
 void osWritebackDCacheAll(void);
 void osSetIntMask(s32);
@@ -273,7 +273,7 @@ void Vhandler_HandleResourcePageRequest(void) {
     f32 duration;
     f32 scale;
     f32 limit;
-    thread = Audio_GetInterruptMask();
+    thread = __osGetCurrFaultedThread();
     kind = thread->message & 0x7C;
     if (kind == 4 || kind == 8) {
         g_resourcePager.counters.requests++;
@@ -313,19 +313,19 @@ void Vhandler_HandleResourcePageRequest(void) {
             osSendMesg(&g_resourcePager.pending, job, 1);
             return;
         }
-        start = Audio_ReadSystemTime();
+        start = osGetTime();
         scale = k_pagerRequestStatisticScale;
         limit = k_pagerRequestStatisticLimit;
         do {
-            elapsed = ((Audio_ReadSystemTime() - start) << 6) / 3000;
+            elapsed = ((osGetTime() - start) << 6) / 3000;
             duration = elapsed;
         } while (duration * scale < limit);
     } else {
-        start = Audio_ReadSystemTime();
+        start = osGetTime();
         scale = k_pagerMissStatisticScale;
         limit = k_pagerMissStatisticLimit;
         do {
-            elapsed = ((Audio_ReadSystemTime() - start) << 6) / 3000;
+            elapsed = ((osGetTime() - start) << 6) / 3000;
             duration = elapsed;
         } while (duration * scale < limit);
     }

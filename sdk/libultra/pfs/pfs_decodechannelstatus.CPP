@@ -28,7 +28,7 @@
 
 
 /* Decodes the six-byte short controller status reply found one byte per preceding channel into g_controllerStatusPifBuffer for the given channel, recording its error bits and, without error, its type and status.
-   Adapted from Items_DecodeControllerStatusReplies with the per-channel loop over eight-byte replies changed to a single six-byte reply reached by skipping one byte per preceding channel. */
+   Adapted from __osContGetInitData with the per-channel loop over eight-byte replies changed to a single six-byte reply reached by skipping one byte per preceding channel. */
 
 
 

@@ -30,7 +30,7 @@
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "SYSTEM/TEXTLOAD_RESETTEXTURECACHE.H"
 #include "SYSTEM/DEFS_TOGGLESAVEDFLAG.H"
-#include "../../../sdk/include/os.h"
+#include "os.h"
 extern void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *);
 extern void SetN64_DrawColorRectangle(void *, u8 *, s32,s32,s32,s32);
 extern void SetN64_ClearDepthRect(void *, s32,s32,s32,s32,s32);
@@ -57,7 +57,7 @@ void SetN64_BuildAndSubmitSessionFrame(TimingWorld *world) {
     u64 startTime;
     u8 fadeMode;
 
-    start = Audio_ReadSystemTime();
+    start = osGetTime();
     previousMode = (u32) start;
     startTime = start;
     g_currentTaskFrame = g_gameSession.ring.current;
@@ -116,7 +116,7 @@ void SetN64_BuildAndSubmitSessionFrame(TimingWorld *world) {
     g_maximumDisplayListBytes = maxListBytes;
     g_currentTaskFrame->dual = 0;
     g_currentTaskFrame->ticks = (s32) g_frameTimingTicks;
-    end = Audio_ReadSystemTime();
+    end = osGetTime();
     duration = ((end - startTime) << 6) / 3;
     elapsed = (f32)duration;
     rwFrameBuildSeconds = elapsed * g_frameBuildTickScale;

@@ -3,11 +3,11 @@
 #include "TYPES.H"
 #include "../include/os.h"
 
-extern void *g_nextVideoInterfaceContext;
+extern void *__osViNext;
 void osViSetYScale(f32 yScale) {
     void *savedInterruptMask;
     savedInterruptMask = __osDisableInt();
-    (((struct ViVerticalScaleView *) ((s8 *) g_nextVideoInterfaceContext))->yScaleFactor) = yScale;
-    (((struct ViVerticalScaleView *) ((s8 *) g_nextVideoInterfaceContext))->state) = (u16) ((((struct ViVerticalScaleView *) ((s8 *) g_nextVideoInterfaceContext))->state) | 4);
+    (((struct ViVerticalScaleView *) ((s8 *) __osViNext))->yScaleFactor) = yScale;
+    (((struct ViVerticalScaleView *) ((s8 *) __osViNext))->state) = (u16) ((((struct ViVerticalScaleView *) ((s8 *) __osViNext))->state) | 4);
     __osRestoreInt(savedInterruptMask);
 }

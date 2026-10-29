@@ -13,7 +13,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/ALFXPARAM.H"
-#include "AUDIO/SIRAWWRITE.H"
+#include "libultra/os/initialize.h"
 #include "RENDER/SETN64_STARTSESSIONTHREADS.H"
 #include "ITEMMENU/ITEMMENU.H"
 #include "RESMGR/X_PLUS.H"
@@ -107,7 +107,7 @@ static inline void clear_entry(CItem *e) {
     e->transitionFrame = 0;
 }
 
-/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through SetN64_CompareByteStrings (recording the result in g_systemBootMarkerComparison and re-arming it through SetN64_CopyString_Itemmenu), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from g_graphicsTaskYieldBuffer to g_runtimeHeapStart, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through Audio_InitializeOperatingSystem and SetN64_StartSessionThreads. */
+/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through SetN64_CompareByteStrings (recording the result in g_systemBootMarkerComparison and re-arming it through SetN64_CopyString_Itemmenu), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from g_graphicsTaskYieldBuffer to g_runtimeHeapStart, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through osInitialize and SetN64_StartSessionThreads. */
 
 extern char g_sceneCollisionStorage;
 
@@ -423,7 +423,7 @@ s32 ItemMenu_RestoreBootMemory(void) {
             *dst = 0;
         }
     }
-    Audio_InitializeOperatingSystem();
+    osInitialize();
     SetN64_StartSessionThreads();
     return 0;
 }

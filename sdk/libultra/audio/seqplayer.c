@@ -17,7 +17,7 @@ static inline ALVoice_s *event_voice(ALEvent *event) {
     return (ALVoice_s *)event->msg.note.voice;
 }
 
-extern s32 alSeqNextDelta(void *sequence, s32 *deltaTicks);
+extern s32 __alSeqNextDelta(void *sequence, s32 *deltaTicks);
 
 extern s32 alSeqGetTicks(void *sequence);
 
@@ -72,7 +72,7 @@ void __seqpReleaseVoice(void *seqPlayer, void *releasedVoice, s32 releaseDuratio
     alEvtqPostEvent(&((ALSeqPlayer *)seqPlayer)->evtq, &entry, releaseDuration);
 }
 
-void seqpStopOsc(void *seqPlayer, void *voiceState) {
+void __seqpStopOsc(void *seqPlayer, void *voiceState) {
     ALEventListItem *cur;
     ALEventListItem *next;
     u16 type;
@@ -108,7 +108,7 @@ void seqpStopOsc(void *seqPlayer, void *voiceState) {
     }
 }
 
-void postNextSeqEventBase(void *seqPlayer) {
+void __postNextSeqEvent(void *seqPlayer) {
     ALEvent referenceEvent;
     s32 deltaTicks;
     s32 remainingLoops;
@@ -116,7 +116,7 @@ void postNextSeqEventBase(void *seqPlayer) {
 
     sequence = ((SequencePlayerEventView *)(seqPlayer))->sequence;
     if ((((SequencePlayerEventView *)(seqPlayer))->state == 1) && (sequence != 0) &&
-        (alSeqNextDelta(sequence, &deltaTicks) & 0xFF)) {
+        (__alSeqNextDelta(sequence, &deltaTicks) & 0xFF)) {
         if ((((SequencePlayerEventView *)(seqPlayer))->loopCount != 0) &&
             ((alSeqGetTicks(sequence) + deltaTicks) >=
              ((struct MenuTextOwnerView *) ((SequencePlayerEventView *) seqPlayer)->loopEnd)->flags)) {
@@ -134,7 +134,7 @@ void postNextSeqEventBase(void *seqPlayer) {
 
 extern void Seqplayer_SetTempoMicrosecondsPerTick(void *player, f32 tempo);
 
-void handleMetaMsg(void *player, void *metaEvent) {
+void __handleMetaMsg(void *player, void *metaEvent) {
     u8 *p = (u8 *)metaEvent;
     int pad[4];
 

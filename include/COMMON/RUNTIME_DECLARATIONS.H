@@ -83,7 +83,7 @@ extern char g_pakAllocateMenuFirstResource[];
 
 extern char *g_matchResult5012TextDe;
 
-extern int g_piManagerState;
+extern int __osPiDevMgr;
 
 extern s64 g_schedulerGraphicsFirstStartTime;
 
@@ -735,7 +735,7 @@ extern char s_headerText;
 
 extern char g_SelectPromptTextGroupTwoCase11Text[];
 
-extern u32 g_osInitializationStarted;
+extern u32 __osFinalrom;
 
 extern const double g_sinePiLow;
 
@@ -1256,7 +1256,7 @@ extern NodeGeometryGroupModelInstances g_materialGroups[];
 
 extern char *g_matchOptionLabelSlots[];
 
-extern s32 g_emptyThreadQueue;
+extern s32 __osThreadTail;
 
 extern char g_pakNoteIdRepairFailedDialogResource[];
 
@@ -1380,7 +1380,7 @@ extern f32 g_frameHeapLowAllocationStatLowerLimit;
 
 extern WidgetEventHandler g_overlaySlotEventHandlersUs;
 
-#include "../../sdk/include/SCHED/osscremoveclient.H"
+#include "SCHED/osscremoveclient.H"
 
 extern EffectPoolNode *g_effectPoolFreeHead;
 
@@ -1407,7 +1407,7 @@ extern s32 g_activeVoiceCount;
 
 extern WidgetEventHandler g_numericWidgetEventHandlers;
 
-extern int g_audioInterruptMask;
+extern int __osFaultedThread;
 
 extern FieldRow g_resultsActorEventKinds[];
 
@@ -1436,7 +1436,7 @@ extern char addrLow_Libsn_DisableInterrupts;
 
 extern Triple g_particleTertiaryContactPosition;
 
-extern char CSPVoiceHandler_Address;
+#include "libultra/audio/seqp.h"
 
 extern char *g_matchResult5052TextDe;
 
@@ -2921,7 +2921,7 @@ typedef struct PickupGoalAvailabilityNode PickupGoalAvailabilityNode;
 struct OSPiHandle_s;
 
 struct OSTimer_s;
-#include "../../sdk/include/OS_TIMER.H"
+#include "OS_TIMER.H"
 
 
 struct DirectionalAccelerationParticle;

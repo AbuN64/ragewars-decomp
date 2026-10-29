@@ -9,6 +9,6 @@ extern u32 __osDisableInt(void);
 
 
 extern u32 osGetCount(void);
-extern void Util_SetTimerInterrupt(u64 tim);
+extern void __osSetTimerIntr(u64 tim);
 extern u64 __osInsertTimer(OSTimer_s *t);
 #endif

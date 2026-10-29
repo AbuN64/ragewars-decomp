@@ -218,13 +218,12 @@ extern s32 Pickup_ApplyAmmoBundle(struct ActorPickupCanCollect *player, struct M
 
 extern void osUnmapTLB(int tlbIndex);
 
-extern void CSPHandleNextSeqEvent(void *rawPlayer);
+#include "libultra/audio/seqp.h"
 
-extern void CSPPostNextSeqEvent(void *sequencePlayer);
 
 extern void __setUsptFromTempo(void *sequencePlayer, f32 tempo);
 
-extern f32 Audio_CentsToPitchRatio(s32 cents);
+extern f32 alCents2Ratio(s32 cents);
 
 extern void alCSPSetBank(s32 player, s32 bank);
 
@@ -233,9 +232,7 @@ extern void alCSPSetVol(s32 player, s16 volume);
 
 extern void alCopy(unsigned char *source, unsigned char *destination, int count);
 
-extern s32 voiceNeedsNoteKill(void *voice, s32 targetVoice, s32 releaseDeadline);
 
-extern void seqpStopOsc(void *seqPlayer, void *voiceState);
 
 extern float Math_Cosf(float x);
 

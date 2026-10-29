@@ -304,7 +304,7 @@ void alCSeqGetLoc(ALCSeq_s *src, ALCSeqMarker *dst) {
     }
 }
 
-s32 alCSeqNextDelta(ALCSeq_s *seq, s32 *result) {
+s32 __alCSeqNextDelta(ALCSeq_s *seq, s32 *result) {
     u32 amount;
     u32 minimum;
     u32 i;

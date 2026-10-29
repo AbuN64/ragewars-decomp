@@ -5,11 +5,11 @@
 /* Advances streamed music through fade, retry, loading and playback states while updating volume. */
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
-#include "../../../sdk/include/libgultra_inferred/EVENT.H"
-#include "../../../sdk/include/libgultra_inferred/ALCSPGETSTATE.H"
-#include "../../../sdk/include/libgultra_inferred/ALCSPSETCHLFXMIX.H"
+#include "libgultra_inferred/EVENT.H"
+#include "libgultra_inferred/ALCSPGETSTATE.H"
+#include "libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "../../../sdk/include/libgultra_inferred/cseq.H"
+#include "libgultra_inferred/cseq.H"
 extern s32 Defs_FindSortedValue(s32,s32,s32);
 extern f32 Menu_ExpandFloatHighWord(u16);
 static inline f32 fade_rate(Track *track,f32 time,f32 rate) {track->fadeDuration=time;return (f32)track->fadeStartVolume/(time*rate);}
@@ -101,7 +101,7 @@ void Audio_UpdateMusicPlayback(Track *queue) {
             initialVolume = (f32) queue->baseVolume * (queue->context->volumePercent * *(&g_musicDefaultFadeAndVolumeScale+1));
             alCSPSetVol(queue->sequencePlayer, (s16) (s32) (initialVolume * g_musicVolumeAndFadeScale));
             queue->currentVolume = initialVolume;
-            Audio_PostPlayerStopEvent(queue->sequencePlayer);
+            alCSPPlay(queue->sequencePlayer);
             queue->playbackFlags = 0;
             queue->playbackState = 0x10;
             g_musicRequestedTrack = queue->requestedSequence;

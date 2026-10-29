@@ -1,9 +1,9 @@
 #include "include_asm.h"
 #include "COMMON/OSTASK_T.H"
-#include "AUDIO/SPSETSTAT.H"
+#include "../include/libultra/io/spsetstat.h"
 #include "../include/libgultra/sptaskyield.h"
 
-void osSpTaskYield(void) { Audio_WriteSignalProcessorStatus(0x400U); }
+void osSpTaskYield(void) { __osSpSetStatus(0x400U); }
 
 #if defined(VERSION_US)
 unsigned int k_SptaskyieldEncodedWords[1] = {

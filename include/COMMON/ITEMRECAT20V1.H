@@ -1838,7 +1838,7 @@ struct ResourceShortIdView;
 typedef struct ResourceShortIdView ResourceShortIdView;
 
 
-extern int g_globalInterruptMask;
+extern int __OSGlobalIntMask;
 
 
 struct SoundSlotHandleView;

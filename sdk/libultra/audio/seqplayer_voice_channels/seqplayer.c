@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALBANK_S.H"
 #include "TYPES.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../../include/libultra/debug/assert.h"
 #include "COMMON/ALDELAY28.H"
 
 /* seqplayer_4.c */
@@ -23,7 +23,7 @@ void *__lookupSoundQuick(void *seqPlayer, s32 noteKey, s32 noteVelocity, s32 cha
     high = table->soundCount;
     low = 1;
     if (table == 0) {
-        Audio_Assert(&g_sequencePlayerAssertText, &g_audioSeqplayerText, 0x376);
+        __assert(&g_sequencePlayerAssertText, &g_audioSeqplayerText, 0x376);
     }
 
     if (high > 0) {
@@ -114,7 +114,7 @@ void __initFromBank(void *seqPlayer, void *instrumentBank) {
     }
 }
 
-void initChanState(void *playerObject) {
+void __initChanState(void *playerObject) {
     ALSeqPlayer *player = playerObject;
     s32 i;
     s32 off;

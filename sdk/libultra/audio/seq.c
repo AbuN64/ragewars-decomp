@@ -198,7 +198,7 @@ void alSeqGetLoc(void *sequenceStorage, void *markerObject) {
     marker->lastTicks = sequence->lastTicks;
 }
 
-s32 alSeqNextDelta(ALSeq_s *sequence, s32 *deltaTicks) {
+s32 __alSeqNextDelta(ALSeq_s *sequence, s32 *deltaTicks) {
     u8 *savedCursor;
 
     savedCursor = sequence->curPtr;

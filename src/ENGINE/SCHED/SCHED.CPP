@@ -11,11 +11,11 @@
 #include "TYPES.H"
 #include "TYPES.H"
 #include "COMMON/BOOT_TV_TYPE.H"
-#include "../../../sdk/include/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
-#include "../../../sdk/include/SCHED/osscremoveclient.H"
-#include "../../../sdk/include/libgultra/OSWRITEBACKDCACHEALL.H"
-#include "../../../sdk/include/libgultra/sptaskyield.h"
-#include "../../../sdk/include/os.h"
+#include "AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
+#include "SCHED/osscremoveclient.H"
+#include "libgultra/OSWRITEBACKDCACHEALL.H"
+#include "libgultra/sptaskyield.h"
+#include "os.h"
 /* Switches a view to a new current and next scene: stamps the time of a pending next scene, starts the current scene (resetting its timer for mode 2, and stamping its start and, unless flagged 0x10, its first-start time for flag 0x20), clears its flags 0x30, runs its start and update hooks and records it, then when the next scene differs starts its music at its time and records it. */
 
 
@@ -28,7 +28,7 @@
 
 
 
-extern u64 Audio_ReadSystemTime(void);
+extern u64 osGetTime(void);
 
 extern void osSpTaskLoad(s32 *mode);
 
@@ -43,14 +43,14 @@ void Sched_StartSelectedTasks(OSSched *view, OSScTask_s *current, OSScTask_s *ne
     s64 now;
 
     if (next != 0 && (next->flags & 0x20) && !(next->state & 0x10)) {
-        g_schedulerRdpTaskStartTime = Audio_ReadSystemTime();
+        g_schedulerRdpTaskStartTime = osGetTime();
     }
     if (current != 0) {
         if (current->list.type == 2) {
             osWritebackDCacheAll();
-            g_schedulerAudioTaskStartTime = Audio_ReadSystemTime();
+            g_schedulerAudioTaskStartTime = osGetTime();
         } else if (current->flags & 0x20) {
-            now = Audio_ReadSystemTime();
+            now = osGetTime();
             g_schedulerGraphicsTaskStartTime = now;
             if (!(current->state & 0x10)) {
                 g_schedulerGraphicsFirstStartTime = now;

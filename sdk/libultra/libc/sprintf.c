@@ -5,9 +5,9 @@
 #include "TYPES.H"
 #include "../../include/EXTERNS.H"
 
-/* sprintf: formats into a buffer through Libc_FormatToCallback with the copying output routine, terminates the text when the length is not negative, and returns the length. */
+/* sprintf: formats into a buffer through _Printf with the copying output routine, terminates the text when the length is not negative, and returns the length. */
 s32 Libc_FormatString(char *buffer, const char *format, ...) {
-    s32 length = Libc_FormatToCallback(Libc_FormatStringOutputCallback, buffer, format, __builtin_next_arg(format));
+    s32 length = _Printf(Libc_FormatStringOutputCallback, buffer, format, __builtin_next_arg(format));
 
     if (length >= 0) {
         buffer[length] = 0;

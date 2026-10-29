@@ -74,7 +74,7 @@ STAMPS := tools/n64link/.stamp $(TOOLCHAIN_gcc_2_7_2_sn64) $(TOOLCHAIN_gcc_2_8_1
 ver = $(firstword $(filter-out nm nmraw,$(subst /, ,$1)))
 src = $(patsubst $(call ver,$1)/%,%,$(patsubst nmraw/%,%,$(patsubst nm/%,%,$1)))
 DEFINES = -D$(VMACRO_$(call ver,$*)) $(if $(filter nmraw/%,$*),-DNON_MATCHING)
-INCLUDES = -Iinclude -I$(dir $<)
+INCLUDES = -Iinclude -Isdk/include -I$(dir $<)
 ASINC = -Iasm/$(call ver,$*)
 # Every version macro for the assembler, 1 for the version built and 0 for the others: library assembly keeps the
 # lines its versions disagree on in `.if VERSION_A || VERSION_B` blocks
@@ -154,9 +154,9 @@ $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/libsn_spindelay_data.CPP.o): CFLAGS
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/libsn_writememorybyte.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/libsn_writememorybyte.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/libsn_writememorybyte.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
-$(foreach v,$(VERSIONS),build/$(v)/src/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/$(v)/sdk/libultra/pfs/pfschecker.c.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/sdk/libultra/pfs/pfschecker.c.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/sdk/libultra/pfs/pfschecker.c.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
@@ -262,9 +262,9 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/libsn_spindelay_data.CPP.o): 
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/libsn_writememorybyte.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/libsn_writememorybyte.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/libsn_writememorybyte.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libultra/pfs/pfschecker.c.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libultra/pfs/pfschecker.c.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libultra/pfs/pfschecker.c.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
@@ -1809,8 +1809,8 @@ build/%.i.ok: $$(call src,$$*) $$(pp_flags_changed) | $(STAMPS) $(HDRKEY) $(STAM
 OBJECT_ARGS = $@ $(call ver,$*) $(FACTS_NOW_$(call ver,$*)) $(call shq,$(filter-out %.i.ok,$?)$(flags_changed)) $(call shq,$(TEXTSIZE)) $(call shq,$(CC_FLAGS)) $(STAMPREC) $(filter-out %/.extracted,$(filter asm/%,$^)) -- $(COMPILE_$(TC))
 build/%.o: build/%.i.ok asm/$$(call ver,$$*)/.extracted $$(text_size_changed) $$(flags_changed) | $(STAMPS) $(STAMPREC)
 	$(Q)if [ -x $(STAMPREC) ]; then exec $(STAMPREC) object $(OBJECT_ARGS); fi; exec $(CCPY) --object $(OBJECT_ARGS)
-ASCPPFLAGS = -P -undef -nostdinc -x assembler-with-cpp -D_LANGUAGE_ASSEMBLY -Dmips=1 -D_MIPS_SIM=1 -Iinclude $(foreach w,$(VERSIONS),-D$(VMACRO_$(w))=$(if $(filter $(w),$(call ver,$*)),1,0))
-ASHEADERS = include/PR/R4300.h include/sys/asm.h include/sys/regdef.h
+ASCPPFLAGS = -P -undef -nostdinc -x assembler-with-cpp -D_LANGUAGE_ASSEMBLY -Dmips=1 -D_MIPS_SIM=1 -Iinclude -Isdk/include $(foreach w,$(VERSIONS),-D$(VMACRO_$(w))=$(if $(filter $(w),$(call ver,$*)),1,0))
+ASHEADERS = include/PR/R4300.h sdk/include/sys/asm.h sdk/include/sys/regdef.h
 build/%.s.o: $$(call src,$$*).s $(ASHEADERS) $$(text_size_changed) | $(STAMPS)
 	$(Q)mkdir -p $(@D)
 	$(Q)$(CPP) $(ASCPPFLAGS) $< -o $@.i

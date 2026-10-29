@@ -6,11 +6,11 @@
 #include "../../include/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "../../include/os.h"
 
-extern Field_void_4 *g_currentVideoInterfaceContext;
+extern Field_void_4 *__osViCurr;
 
 void *osViGetCurrentFramebuffer(void) {
     void *result = __osDisableInt();
-    void *saved = g_currentVideoInterfaceContext->value;
+    void *saved = __osViCurr->value;
     __osRestoreInt(result);
     return saved;
 }

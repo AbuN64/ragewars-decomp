@@ -10,8 +10,8 @@
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
-#include "AUDIO/GETTHREADID.H"
-#include "../../../sdk/include/os.h"
+#include "libultra/os/getthreadid.h"
+#include "os.h"
 
 /* 80263760_6.CPP */
 extern void Rumble_FreeAllPoolNodes(s32 *);
@@ -136,7 +136,7 @@ void Control_ResetControllerPak(ControllerProfile *pakProfile) {
 
     if (g_controllerInputReady != 0 && ((ControllerRumbleView *)address)->flags != 0) {
         if (osRecvMesg(&g_controllerReadMessageQueue, 0, 1) == 0) {
-            g_controllerAudioThreadId = Audio_GetThreadIdentifier(0);
+            g_controllerAudioThreadId = osGetThreadId(0);
         }
         Control_ReadControllerStates();
         g_controllerPakFrontendState = 2;
@@ -312,7 +312,7 @@ s32 Control_AcquireControllerLock(s32 block) {
 
     result = osRecvMesg(&g_controllerReadMessageQueue, 0, block) == 0;
     if (result != 0) {
-        g_controllerAudioThreadId = Audio_GetThreadIdentifier(0);
+        g_controllerAudioThreadId = osGetThreadId(0);
     }
     return result;
 }

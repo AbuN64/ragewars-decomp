@@ -17,7 +17,7 @@ struct OsTimerNode {
     void *msg;
 };
 
-extern void Util_InitializeTimerServices(void);
+extern void __osTimerServicesInit(void);
 
 
 

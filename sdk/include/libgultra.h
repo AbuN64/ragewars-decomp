@@ -27,9 +27,9 @@ extern f32 alSeqTicksToSec(SequenceTicksPerQuarterView *sequence, s32 ticks, s32
 extern u32 alSeqSecToTicks(SequenceTicksPerQuarterView *seq, f32 sec, u32 tempo);
 
 #include "COMMON/PARAMSRECAT8V3.H"
-extern void handleEvent(struct ALSndPlayer * sndp, union ALSndpEvent * event);
+extern void _handleEvent(struct ALSndPlayer * sndp, union ALSndpEvent * event);
 
-extern s32 sndpVoiceHandler(void *node);
+extern s32 _sndpVoiceHandler(void *node);
 
 extern s32 readVarLen(ALSeq_s *);
 extern const float g_sequenceMicrosecondsPerSecond;

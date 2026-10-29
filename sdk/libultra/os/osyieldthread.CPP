@@ -19,7 +19,7 @@ s32 osVirtualToPhysical(s32 virtualAddress) {
 }
 
 s32 __osEnqueueAndYield(s32 *, s32);
-extern void *g_osRunningThread;
+extern void *__osRunningThread;
 
 
 void osYieldThread(void)
@@ -29,8 +29,8 @@ void osYieldThread(void)
   s8 *runningThreadBytes;
   int runnableState;
   savedInterruptMask = __osDisableInt();
-  ((OSThread_s *)(runningThreadBytes = (s8 *) g_osRunningThread))->state = (runnableState = 2);
-  runnableQueue = &g_osRunnableThreadQueue;
+  ((OSThread_s *)(runningThreadBytes = (s8 *) __osRunningThread))->state = (runnableState = 2);
+  runnableQueue = &__osRunQueue;
   __osEnqueueAndYield(runnableQueue, runnableState);
   __osRestoreInt(savedInterruptMask);
 }

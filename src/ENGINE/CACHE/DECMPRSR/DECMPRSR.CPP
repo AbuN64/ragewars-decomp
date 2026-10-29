@@ -1,4 +1,4 @@
-#include "../../../../sdk/include/thread_queue.h"
+#include "thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/MANAGER.H"
@@ -8,7 +8,7 @@
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../../../sdk/include/os.h"
+#include "os.h"
 #include "RESMGR/X_PLUS.H"
 
 extern void osCreateThread(void *thread, s32 id, void *entry, void *argument, void *stack, s32 priority);
@@ -21,7 +21,7 @@ void Cache_StartResourceLoadWorker(ResourceLoadWorker *worker, s32 id) {
     osStartThread(worker);
 }
 
-extern s32 Scene_SetThreadPriority(void *, s32);
+extern s32 osSetThreadPri(void *, s32);
 extern s32 osJamMesg(OSMesgQueue *queue, void *message, s32 block);
 
 
@@ -40,7 +40,7 @@ s32 Cache_SubmitResourceLoadAndWait(ResourceLoadWorker *worker, ResourceLoadRequ
     busyPriority = g_resourceLoadBusyPriority;
     message->replyQueue = &completionQueue;
     g_resourceLoadPriorityBoost = 2;
-    Scene_SetThreadPriority(worker, busyPriority);
+    osSetThreadPri(worker, busyPriority);
     osJamMesg(&worker->requests, message, 1);
     osRecvMesg(&completionQueue, &completedRequest, 1);
     return 1;
@@ -59,10 +59,10 @@ s32 Cache_TrySubmitResourceLoad(ResourceLoadWorker *worker, ResourceRequest *req
 s32 Cache_WaitForResourceLoads(ResourceLoadWorker *resourceLoadWorker) {
     if (resourceLoadWorker->requests.validCount != 0) {
         do {
-            Scene_SetThreadPriority(resourceLoadWorker, g_resourceLoadBusyPriority);
+            osSetThreadPri(resourceLoadWorker, g_resourceLoadBusyPriority);
         } while (resourceLoadWorker->requests.validCount != 0);
     }
-    return Scene_SetThreadPriority(resourceLoadWorker, g_resourceLoadIdlePriority);
+    return osSetThreadPri(resourceLoadWorker, g_resourceLoadIdlePriority);
 }
 
 #if defined(VERSION_US)

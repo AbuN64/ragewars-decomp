@@ -9,8 +9,8 @@
 #include "RESMGR/X_PLUS.H"
 #include "../../include/libultra/audio/vi.h"
 
-extern ViSwapContextView *g_currentVideoInterfaceContext;
-extern ViSwapContextView *g_nextVideoInterfaceContext;
+extern ViSwapContextView *__osViCurr;
+extern ViSwapContextView *__osViNext;
 
 void __osViInit(void)
 {
@@ -19,8 +19,8 @@ void __osViInit(void)
 
     XPlus_FillMemory(contexts, 0, sizeof(g_videoInterfaceContexts));
     tv_type = g_consoleTvType;
-    g_currentVideoInterfaceContext = &contexts[0];
-    g_nextVideoInterfaceContext = &contexts[1];
+    __osViCurr = &contexts[0];
+    __osViNext = &contexts[1];
     contexts[1].retraceCount = 1;
     contexts[0].retraceCount = 1;
     contexts[1].framep = (void *)0x80000000U;
@@ -32,8 +32,8 @@ void __osViInit(void)
     } else {
         contexts[1].modep = &g_videoInterfaceModeTable;
     }
-    g_nextVideoInterfaceContext->state = 0x20;
-    g_nextVideoInterfaceContext->control = g_nextVideoInterfaceContext->modep->comRegs.ctrl;
+    __osViNext->state = 0x20;
+    __osViNext->control = __osViNext->modep->comRegs.ctrl;
     while (IO_READ_WORD(0xA4400010U) > 10) {
     }
     IO_WRITE(0xA4400000U, 0);

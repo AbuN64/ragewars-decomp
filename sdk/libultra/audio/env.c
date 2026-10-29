@@ -5,7 +5,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "../../include/OSINT/osyieldthread.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../include/libultra/debug/assert.h"
 #include "acmd.h"
 #include "../../include/al_globals.h"
 #include "../../include/VOICE_START_AND_PARAMETER_UPDATE_VIEWS.H"
@@ -22,7 +22,7 @@ extern char s_audioEnvText[]; /* "audio/env.c" */
 #define AL_MAX_RSP_SAMPLES 160
 
 /* The SDK's traditional-cpp assert: the expression string is the literal "EX". */
-#define assert_at(EX, line) ((EX) ? ((void)0) : Audio_Assert(g_audioEnvelopeSourceAssertText, s_audioEnvText, line))
+#define assert_at(EX, line) ((EX) ? ((void)0) : __assert(g_audioEnvelopeSourceAssertText, s_audioEnvText, line))
 
 Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p);
 
@@ -155,7 +155,7 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
             ALSynth4C *drvr = &g_audioGlobals->drvr;
             ALFreeParam *param = (ALFreeParam *)e->ctrlList;
             param->pvoice->offset = 0;
-            freePVoice(drvr, param->pvoice);
+            _freePVoice(drvr, param->pvoice);
         } break;
 
         default:
@@ -191,7 +191,7 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
 extern char s_audioEnvText[]; /* "audio/env.c" */
 
  /* __assert */
-  /* getRate */
+  /* _getRate */
 
 Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
@@ -202,7 +202,7 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
     if (e->motion != 1 || !outCount)
         return ptr;
 
-    ((source) ? ((void)0) : Audio_Assert(g_audioEnvelopeSourceAssertText, s_audioEnvText, 366));
+    ((source) ? ((void)0) : __assert(g_audioEnvelopeSourceAssertText, s_audioEnvText, 366));
 
     ptr = (*source->handler)(source, inp, outCount, sampleOffset, p);
 
@@ -213,9 +213,9 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
         e->first = 0;
 
         e->ltgt = (e->volume * g_audioEqualPowerPanTable[e->pan]) >> 15;
-        e->lratm = getRate((f64)e->cvolL, (f64)e->ltgt, e->segEnd, &(e->lratl));
+        e->lratm = _getRate((f64)e->cvolL, (f64)e->ltgt, e->segEnd, &(e->lratl));
         e->rtgt = (e->volume * g_audioEqualPowerPanTable[128 - e->pan - 1]) >> 15;
-        e->rratm = getRate((f64)e->cvolR, (f64)e->rtgt, e->segEnd, &(e->rratl));
+        e->rratm = _getRate((f64)e->cvolR, (f64)e->rtgt, e->segEnd, &(e->rratl));
 
         aSetVolume(ptr++, 0x02 | 0x04, e->cvolL, 0, 0);
         aSetVolume(ptr++, 0x00 | 0x04, e->cvolR, 0, 0);
@@ -233,9 +233,9 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
     return ptr;
 }
 
-/* getRate: approximate per-step volume scaling using the public ultralib log table and repeated squaring. */
+/* _getRate: approximate per-step volume scaling using the public ultralib log table and repeated squaring. */
 
-s16 getRate(f64 vol, f64 tgt, s32 count, u16 *ratel)
+s16 _getRate(f64 vol, f64 tgt, s32 count, u16 *ratel)
 {
   s16 s;
   f64 invn = (1.0f) / ((f32) count);
@@ -443,7 +443,7 @@ f64 frexp(f64 inputValue, s32 *exponentOut) {
     return value;
 }
 
-f64 ldexpf(f64 value, s32 shift) {
+f64 _ldexpf(f64 value, s32 shift) {
     if (shift != 0) {
         value = value * (f64)(1 << shift);
     }

@@ -12,8 +12,8 @@ unsigned char g_CreatemesgqueueTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 0x0
 
 /* createmesgqueue.c */
 void osCreateMesgQueue(OSMesgQueue *mq, OSMesg *msg, s32 msgCount) {
-    mq->mtqueue = (void **)&g_emptyThreadQueue;
-    mq->fullqueue = (void **)&g_emptyThreadQueue;
+    mq->mtqueue = (void **)&__osThreadTail;
+    mq->fullqueue = (void **)&__osThreadTail;
     mq->validCount = 0;
     mq->first = 0;
     mq->msgCount = msgCount;

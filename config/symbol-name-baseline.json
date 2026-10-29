@@ -37,7 +37,7 @@
       {
         "reason": "__setUsptFromTempo: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
         "lines": [
-          225
+          224
         ]
       }
     ],
@@ -62,14 +62,6 @@
         "reason": "__builtin_next_arg: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
         "lines": [
           9
-        ]
-      }
-    ],
-    "sdk/include/mbi.h": [
-      {
-        "reason": "_SHIFTL: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
-        "lines": [
-          10
         ]
       }
     ]

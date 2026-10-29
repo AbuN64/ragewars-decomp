@@ -13,7 +13,7 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "../../../include/libgultra/seqplayer.h"
 #include "../../../include/libgultra/__POSTNEXTSEQEVENT.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../../include/libultra/debug/assert.h"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/OBJRECAT4V6.H"
@@ -27,7 +27,7 @@
 #include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 #include "../../../include/al_globals.h"
 extern void *alHeapDBAlloc(s32, s32, void *, s32, s32);
-extern void initChanState(void *);
+extern void __initChanState(void *);
 extern void alEvtqNew(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);
 
@@ -58,7 +58,7 @@ void Seqplayer_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c
     seqp->base.nextEvent.type = 9;
     seqp->base.maxChannels = c->kind;
     seqp->base.chanState = alHeapDBAlloc(0, 0, heap, c->kind, sizeof(ALChanState));
-    initChanState(seqp);
+    __initChanState(seqp);
     voices = alHeapDBAlloc(0, 0, heap, c->count38, sizeof(ALVoiceState));
     seqp->base.vFreeList = 0;
     for (i = 0; i < c->count38; i++) {
@@ -109,7 +109,7 @@ void alSeqpNew(SeqInitPlayer *p, ALSeqpConfig *c) {
     p->eventType = 9;
     p->channels = c->channels;
     p->channelState = alHeapDBAlloc(0, 0, heap, c->channels, 16);
-    initChanState(p);
+    __initChanState(p);
     {
         SeqFreeVoice *base = alHeapDBAlloc(0, 0, heap, c->voices, 56);
         p->freeList = 0;
@@ -180,7 +180,7 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
             alSynFreeVoice(seqp->base.drvr, voice);
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
-                seqpStopOsc(&seqp->base, vs);
+                __seqpStopOsc(&seqp->base, vs);
             Seqplayer_ReleaseSequenceVoice(&seqp->base, voice);
             break;
         case 6: /* AL_SEQP_ENV_EVT */
@@ -225,12 +225,12 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
             Seqplayer_HandleSequenceMidiEvent(&seqp->base, &seqp->base.nextEvent);
             break;
         case 7: /* AL_SEQP_META_EVT */
-            handleMetaMsg(&seqp->base, &seqp->base.nextEvent);
+            __handleMetaMsg(&seqp->base, &seqp->base.nextEvent);
             break;
         case 15: /* AL_SEQP_PLAY_EVT */
             if (seqp->base.state != 1) {
                 seqp->base.state = 1;
-                postNextSeqEventBase(&seqp->base);
+                __postNextSeqEvent(&seqp->base);
             }
             break;
         case 16: /* AL_SEQP_STOP_EVT */
@@ -239,7 +239,7 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
                     alSynStopVoice(seqp->base.drvr, &vs->voice);
                     alSynFreeVoice(seqp->base.drvr, &vs->voice);
                     if (vs->flags)
-                        seqpStopOsc(&seqp->base, vs);
+                        __seqpStopOsc(&seqp->base, vs);
                     Seqplayer_ReleaseSequenceVoice(&seqp->base, &vs->voice);
                 }
                 seqp->base.curTime = 0;
@@ -251,7 +251,7 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
                 alEvtqFlushType(&seqp->base.evtq, 0);
                 alEvtqFlushType(&seqp->base.evtq, 2);
                 for (vs = seqp->base.vAllocHead; vs != 0; vs = vs->next) {
-                    if ((u8)voiceNeedsNoteKill(&seqp->base, &vs->voice, 50000))
+                    if ((u8)__voiceNeedsNoteKill(&seqp->base, &vs->voice, 50000))
                         __seqpReleaseVoice(&seqp->base, &vs->voice, 50000);
                 }
                 seqp->base.state = 2;
@@ -277,7 +277,7 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
             break;
         case 13: /* AL_SEQP_SEQ_EVT */
             if (seqp->base.state == 1)
-                Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 296);
+                __assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 296);
             seqp->base.target = seqp->base.nextEvent.msg.spseq.previous;
             Seqplayer_SetTempoMicrosecondsPerTick(&seqp->base, 500000.0f);
             if (seqp->base.bank)
@@ -285,14 +285,14 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
             break;
         case 14: /* AL_SEQP_BANK_EVT */
             if (seqp->base.state != 0)
-                Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 305);
+                __assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 305);
             seqp->base.bank = seqp->base.nextEvent.msg.spbank.previous;
             __initFromBank(&seqp->base, seqp->base.bank);
             break;
         case 4: /* AL_SEQ_END_EVT */
         case 3: /* AL_TEMPO_EVT */
         case 1: /* AL_SEQ_MIDI_EVT */
-            Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 315);
+            __assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 315);
             break;
         }
         seqp->base.nextDelta = alEvtqNextEvent(&seqp->base.evtq, &seqp->base.nextEvent);
@@ -373,7 +373,7 @@ void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
         break;
 
     case 3:     /* AL_TEMPO_EVT */
-        handleMetaMsg(&seqp->base, &evt);
+        __handleMetaMsg(&seqp->base, &evt);
         postNextSeqEvent(seqp);
         break;
 
@@ -384,7 +384,7 @@ void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
         break;
 
     default:
-        Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 412);
+        __assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 412);
     }
 }
 
@@ -406,7 +406,7 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
     ALVoiceState *vstate;
     u8 pan;
     if (!(event->type == 1 || event->type == 2)) /* AL_SEQ_MIDI_EVT, AL_SEQP_MIDI_EVT */
-        Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 436);
+        __assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 436);
     status = event->msg.midi.status & 0xF0;
     chan = event->msg.midi.status & 0x0F;
     byte1 = key = event->msg.midi.byte1;
@@ -443,7 +443,7 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             else
                 vstate->phase = 0;
             cents = (key - sound->keyMap->keyBase) * 100 + sound->keyMap->detune;
-            vstate->pitch = Audio_CentsToPitchRatio(cents);
+            vstate->pitch = alCents2Ratio(cents);
             vstate->envGain = sound->envelope->attackVolume;
             vstate->envEndTime = seqp->curTime + sound->envelope->attackTime;
             vstate->flags = 0;
@@ -591,7 +591,7 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
         break;
     case 0xC0: /* AL_MIDI_ProgramChange */
         if (seqp->bank == 0)
-            Audio_Assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 714);
+            __assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 714);
         if (key < seqp->bank->instCount) {
             ALInstrument *inst = seqp->bank->instArray[key];
             __setInstChanState(seqp, inst, chan);
@@ -604,7 +604,7 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             s32 cents;
             bendVal = ((byte2 << 7) + byte1) - 8192;
             cents = (seqp->chanState[chan].bendRange * bendVal) / 8192;
-            bendRatio = Audio_CentsToPitchRatio(cents);
+            bendRatio = alCents2Ratio(cents);
             seqp->chanState[chan].pitchBend = bendRatio;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next)
                 if (vs->channel == chan)

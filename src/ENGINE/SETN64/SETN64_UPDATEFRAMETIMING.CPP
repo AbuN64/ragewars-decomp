@@ -69,7 +69,7 @@ void SetN64_UpdateFrameTiming(TimingWorld *world) {
     u64 elapsedUnits;
     u64 unusedTimingTicks19;
 
-    nowTicks = Audio_ReadSystemTime();
+    nowTicks = osGetTime();
     elapsedUnits = __udivdi3((nowTicks-g_previousFrameSystemTime)<<6,3000);
 #if defined(VERSION_DE)
     scaledFrameTime = (f32)elapsedUnits * g_systemTimeFrameScale * g_systemTimeFrameRateDe;

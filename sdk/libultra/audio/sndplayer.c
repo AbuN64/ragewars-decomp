@@ -11,7 +11,7 @@
 #include "../../include/EXTERNS.H"
 #include "COMMON/TRIPLE.H"
 #include "../../include/libgultra/alunlink.h"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../include/libultra/debug/assert.h"
 
 /* alSndpNew, drafted from ultralib src/audio/sndplayer.c: sets up a sound player from its config,
    allocating the sound states and event items from the heap, registers its voice handler with the
@@ -59,7 +59,7 @@ extern void alSynAddPlayer(ALSynthalSndpNew *, ALPlayer_s14 *);
 extern s32 alEvtqNextEvent(ALEventQueue *, ALEvent *);
 
                 /* alEvtqNextEvent */
-/* sndpVoiceHandler (sndpVoiceHandler); the cartridge stores the handler by its 0x002B7C8C address. */
+/* _sndpVoiceHandler (_sndpVoiceHandler); the cartridge stores the handler by its 0x002B7C8C address. */
 
 
 extern s32 alSynAllocVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *, ALVoiceConfig_s *);
@@ -121,7 +121,7 @@ void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
 
        /* _removeEvents */
 
-void handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
+void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
 {
     ALVoiceConfig_s vc;
     ALSound_s *snd;
@@ -163,14 +163,14 @@ void handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             alSynSetFXMix(sndp->drvr, voice, state->fxMix);
             evt.common.type = 6; /* AL_SNDP_DECAY_EVT */
             evt.common.state = state;
-            delta = (s32)DivS32ByF32(snd->envelope->attackTime, state->pitch);
+            delta = (s32)_DivS32ByF32(snd->envelope->attackTime, state->pitch);
             alEvtqPostEvent(&sndp->evtq, (ALEvent *)&evt, delta);
             break;
 
         case 1: /* AL_SNDP_STOP_EVT */
             if (state->state != 1 || !snd)
                 return;
-            delta = (s32)DivS32ByF32(snd->envelope->releaseTime, state->pitch);
+            delta = (s32)_DivS32ByF32(snd->envelope->releaseTime, state->pitch);
             alSynSetVol(sndp->drvr, &state->voice, 0, delta);
             if (delta) {
                 evt.common.type = 7; /* AL_SNDP_END_EVT */
@@ -223,7 +223,7 @@ void handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
         case 6: /* AL_SNDP_DECAY_EVT */
             if (snd->envelope->decayTime != -1) {
                 vtmp = snd->envelope->decayVolume * state->vol / 127;
-                delta = (s32)DivS32ByF32(snd->envelope->decayTime, state->pitch);
+                delta = (s32)_DivS32ByF32(snd->envelope->decayTime, state->pitch);
                 alSynSetVol(sndp->drvr, &state->voice, (s16)vtmp, delta);
                 evt.common.type = 1; /* AL_SNDP_STOP_EVT */
                 evt.common.state = state;
@@ -243,7 +243,7 @@ void handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
     }
 }
 
-/* sndpVoiceHandler, drafted from ultralib src/audio/sndplayer.c: the sound player's synthesizer
+/* _sndpVoiceHandler, drafted from ultralib src/audio/sndplayer.c: the sound player's synthesizer
    callback; reposts the frame API event or handles the pending event until the next one is in
    the future, then advances the player's time by that delta. The pointer to the pending event
    is held in a local, standing in for the address register -fforce-addr kept for it. */
@@ -260,10 +260,10 @@ void handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
 
 
 
-   /* handleEvent */
+   /* _handleEvent */
        /* alEvtqNextEvent */
 
-s32 sndpVoiceHandler(void *node)
+s32 _sndpVoiceHandler(void *node)
 {
     ALSndPlayer *sndp = (ALSndPlayer *)node;
     ALSndpEvent evt;
@@ -276,7 +276,7 @@ s32 sndpVoiceHandler(void *node)
                 alEvtqPostEvent(&sndp->evtq, (ALEvent *)&evt, sndp->frameTime);
                 break;
             default:
-                handleEvent(sndp, next);
+                _handleEvent(sndp, next);
                 break;
         }
         sndp->nextDelta = alEvtqNextEvent(&sndp->evtq, &sndp->nextEvent);
@@ -318,13 +318,13 @@ void _removeEvents(ALEventQueue *eventQueue, void *soundState) {
     osSetIntMask(saved);
 }
 
-s32 DivS32ByF32(s32 val, f32 div) {
+s32 _DivS32ByF32(s32 val, f32 div) {
     f32 fval;
     f64 dresult;
     s32 result;
 
     if (div == 0.0f) {
-        Audio_Assert(g_soundPlayerAssertText, s_audioSndplayerText, 0x11D);
+        __assert(g_soundPlayerAssertText, s_audioSndplayerText, 0x11D);
     }
 
     result = 0x7FFFFFFF;

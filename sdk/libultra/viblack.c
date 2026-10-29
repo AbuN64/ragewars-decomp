@@ -4,7 +4,7 @@
 #include "../include/libgultra/viblack.h"
 #include "../include/os.h"
 
-extern void *g_nextVideoInterfaceContext;
+extern void *__osViNext;
 
 void osViBlack(s32 blackEnabled) {
     u32 savedInterruptMask;
@@ -13,10 +13,10 @@ void osViBlack(s32 blackEnabled) {
 
     savedInterruptMask = __osDisableInt();
     if (blackEnabled & 0xFF) {
-        ptr = (u16 *)g_nextVideoInterfaceContext;
+        ptr = (u16 *)__osViNext;
         v = *ptr | 0x20;
     } else {
-        ptr = (u16 *)g_nextVideoInterfaceContext;
+        ptr = (u16 *)__osViNext;
         v = *ptr & 0xFFDF;
     }
     *ptr = v;

@@ -2,7 +2,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/OSTHREAD_S.H"
 
-extern void *g_osRunningThread;
+extern void *__osRunningThread;
 
 
 
@@ -11,7 +11,7 @@ extern void *g_osRunningThread;
 int osGetThreadPri(void *thread) {
     OSThread_s *p = thread;
     if (p == 0) {
-        p = g_osRunningThread;
+        p = __osRunningThread;
     }
     return p->priority;
 }

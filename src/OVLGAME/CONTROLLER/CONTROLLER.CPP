@@ -11,12 +11,12 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/LEVEL_INPUT.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../../sdk/include/PFS/CONTROLLER.H"
-#include "../../../sdk/include/os.h"
+#include "PFS/CONTROLLER.H"
+#include "os.h"
 #include "COMMON/PAKQUEUESTATE.H"
-#include "AUDIO/GETTHREADID.H"
+#include "libultra/os/getthreadid.h"
 
-/* Resets the controller and profile state for a new session: reinitialises the input buffers and stream through Rumble_InitPoolNodes_Controller, osCreateMesgQueue, osSetEventMesg_Controller, osContInit, Audio_GetThreadIdentifier and osSendMesg_Mutex, then for slots 3 down to 0 clears the slot's three state words, refreshes its pad through Control_DisableControllerPakDe and counts the profiles Ovlgame_ResetControllerProfile accepts in g_connectedControllerProfileCount, remembering the lowest accepted slot in g_firstConnectedControllerPort; finally checks the profile just below slot 0 with mode 4, marks the session reset and returns the remembered slot. */
+/* Resets the controller and profile state for a new session: reinitialises the input buffers and stream through Rumble_InitPoolNodes_Controller, osCreateMesgQueue, osSetEventMesg_Controller, osContInit, osGetThreadId and osSendMesg_Mutex, then for slots 3 down to 0 clears the slot's three state words, refreshes its pad through Control_DisableControllerPakDe and counts the profiles Ovlgame_ResetControllerProfile accepts in g_connectedControllerProfileCount, remembering the lowest accepted slot in g_firstConnectedControllerPort; finally checks the profile just below slot 0 with mode 4, marks the session reset and returns the remembered slot. */
 
 
 extern char g_controllerRumblePool[];
@@ -41,7 +41,7 @@ s16 Ovlgame_InitializeControllerSession(void) {
     osCreateMesgQueue(&g_controllerReadMessageQueue, g_controllerAccessMessages, 1);
     osSetEventMesg(5, g_controllerSiMessageQueue, 1);
     osContInit(g_controllerSiMessageQueue, g_controllerPresenceBits, g_controllerQueryStatus);
-    Audio_GetThreadIdentifier(0);
+    osGetThreadId(0);
     g_controllerAudioThreadId = -1;
     osSendMesg(&g_controllerReadMessageQueue, 0, 1);
     g_firstConnectedControllerPort = -1;

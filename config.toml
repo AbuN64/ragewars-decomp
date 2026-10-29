@@ -4,7 +4,7 @@ title = "Turok: Rage Wars"
 toolchain = "gcc-2.8.1-sn64"
 names_from = "us-rev1"
 module_map = "docs/MODULES.tsv"
-cppflags = ["-DF3DEX_GBI_2", "-Isdk/libgcc"]
+cppflags = ["-DF3DEX_GBI_2", "-Isdk/libgcc", "-Isdk/include"]
 readme_map = "us-rev1"
 readme_map_link = "https://itsmo.me/attic/cake-unbake/"
 readme_map_repo = "ragewars-decomp"
@@ -122,6 +122,9 @@ origin = "gcc libgcc2"
 [library."sdk/libultra/"]
 origin = "Nintendo libgultra"
 
+[library."sdk/include/"]
+origin = "Nintendo libgultra and SGI headers"
+
 [library."sdk/rnc/"]
 origin = "Rob Northen compression"
 
@@ -224,11 +227,6 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
-[file."src/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-
 [file."sdk/libgcc/_floatdisf.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-mfp32"]
@@ -277,4 +275,9 @@ hilo_nops = true
 [file."sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = []
+
+[file."sdk/libultra/pfs/pfschecker.c"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
 

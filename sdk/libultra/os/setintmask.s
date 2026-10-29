@@ -8,8 +8,8 @@
 
 LEAF(osSetIntMask)
     mfc0    t4, C0_SR
-    lui     t0, %hi(g_globalInterruptMask)
-    addiu   t0, t0, %lo(g_globalInterruptMask)
+    lui     t0, %hi(__OSGlobalIntMask)
+    addiu   t0, t0, %lo(__OSGlobalIntMask)
     andi    v0, t4, 0xFF01
     lw      t3, 0(t0)
     nop

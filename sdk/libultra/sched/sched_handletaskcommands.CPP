@@ -18,7 +18,7 @@
 #include "../../include/os.h"
 
 extern s32 g_resourceLoadPriorityBoost;
-extern void Scene_SetThreadPriority(void *priority, s32 pri);
+extern void osSetThreadPri(void *priority, s32 pri);
 void __scYield(void *scheduler) {
     void *currentRspTask;
     currentRspTask = (((struct SchedulerCurrentRspTaskView *) ((s8 *) scheduler))->currentRspTask);
@@ -37,7 +37,7 @@ void Sched_HandleTaskCommands(void *scheduler) {
     while (osRecvMesg(&((OSSched *)scheduler)->commandQueue, &node, 0) != -1) {
         if (node->type == 1 && (node->flags & 0x20) && g_resourceLoadPriorityBoost == 0) {
             g_resourceLoadPriorityBoost = 2;
-            Scene_SetThreadPriority(&g_resourceCacheWorker, g_resourceLoadBusyPriority);
+            osSetThreadPri(&g_resourceCacheWorker, g_resourceLoadBusyPriority);
         }
         __scAppendList(scheduler, node);
     }

@@ -1,4 +1,4 @@
-#include "../../../sdk/include/thread_queue.h"
+#include "thread_queue.h"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
@@ -16,7 +16,7 @@ extern void osCreateThread(s32 thread, s32 threadId, void *entry, s32 arg, s32 s
 
 
 
-extern s32 Scene_SetThreadPriority(s32 *, s32);
+extern s32 osSetThreadPri(s32 *, s32);
 
 
 
@@ -43,7 +43,7 @@ void SetN64_StartGameThreadAndIdle(s32 *gameSession, s32 threadArgument) {
     {
         s32 schedulingPriority = g_videoFrameSchedulingMode;
         ((GameSession *)gameSession)->enabled = 0;
-        Scene_SetThreadPriority(0, schedulingPriority);
+        osSetThreadPri(0, schedulingPriority);
     }
 loop_1:
     goto loop_1;

@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/ALFXPARAM.H"
 #include "../../include/libultra/io/pirawread.H"
-#include "AUDIO/AUDIO_ASSERT.H"
+#include "../../include/libultra/debug/assert.h"
 
 
 
@@ -12,7 +12,7 @@ s32 osPiRawReadIo(s32 deviceOffset, s32 *outputWord) {
     u32 status;
 
     if (outputWord == 0) {
-        Audio_Assert(&g_peripheralReadAssertText, &s_pirawreadText, 0x3D);
+        __assert(&g_peripheralReadAssertText, &s_pirawreadText, 0x3D);
     }
     status = *(volatile u32 *)0xA4600010;
     while (status & 3) {
