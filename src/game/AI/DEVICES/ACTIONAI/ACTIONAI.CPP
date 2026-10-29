@@ -1,18 +1,8 @@
 #include "include_asm.h"
 
 /* 800C1D38.CPP */
-#if defined(VERSION_EU_X)
-const unsigned int k_actionaiConstantWords[5] = {
-    0x0020421C, 0x00204224, 0x0020422C, 0x00204234, 0x0020423C,
-};
-#endif
 
 /* TURRETAI_9.CPP */
-#if defined(VERSION_EU)
-const unsigned int k_actionaiFloatConstantWords[1] = {
-    0x42F5C28F,
-};
-#endif
 
 /* g_actionaiConstantWords_Actionai.CPP */
 #if defined(VERSION_DE)

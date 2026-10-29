@@ -1,11 +1,6 @@
 #include "include_asm.h"
 
 /* TURRETAI_10.CPP */
-#if defined(VERSION_EU_X)
-const unsigned int g_actionSettingsRandomRangeEuX[1] = {
-    0x42F5C28F,
-};
-#endif
 
 /* TURRETAI_11.CPP */
 

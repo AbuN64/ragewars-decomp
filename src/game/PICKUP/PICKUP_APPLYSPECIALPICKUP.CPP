@@ -678,7 +678,6 @@ s32 Pickup_HandlePowerWeaponPickup(struct Player *player, PowerupEntry *entry)
 }
 
 #if defined(VERSION_EU_X)
-#ifdef NON_MATCHING
 /* Pickup effect handler: applies the pickup's effect id (0x708..0x70F) to the player (two float settings, an accumulated float
    or a sound/effect spawn through ItemMenu_SetEntry) then shows the pickup text in the current language, plays its sound and
    raises its event. Returns one. */
@@ -686,17 +685,25 @@ extern f32 g_specialPickupShieldDurationEu, k_pickupEuropeanSecondEffectValue;
 extern char g_pickupEuropeanEffectUpdateRomEntry[], g_pickupEuropeanEffectDrawRomEntry[];
 extern void ItemMenu_SetEntry();
 s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pickup, void *obj) {
-    u8 **text = pickup->text;
-    s16 sound = pickup->sound;
-    s16 event = pickup->event;
+    u8 **text;
+    s32 sound;
+    s32 event;
     f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
 
     switch ((s16)(pickup->id - 0x708)) {
     case 0: *(f32 *)((u8 *)player + 0x670) = g_specialPickupShieldDurationEu; break;
     case 1: *(f32 *)((u8 *)player + 0x674) = k_pickupEuropeanSecondEffectValue; break;
-    case 2: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
-    case 3: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
+    case 2:
+    case 3: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
+    case 7: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
+    case 4:
+    case 5:
+    case 6:
+        break;
     }
+    text = pickup->text;
+    sound = pickup->sound;
+    event = pickup->event;
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
         Gsky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&g_frontendScreenStatus, player->camera, ((char **)text)[g_languageIndex]);
@@ -705,13 +712,9 @@ s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pic
     if (event) SoundElement_PlayDialogGroup(event);
     return 1;
 }
-#else
-INCLUDE_ASM("span_1000", Pickup_ApplyEuropeanExtendedPowerup);
-#endif
 #endif
 
 #if defined(VERSION_EU)
-#ifdef NON_MATCHING
 /* Pickup effect handler: applies the pickup's effect id (0x708..0x70F) to the player (two float settings, an accumulated float
    or a sound/effect spawn through ItemMenu_SetEntry) then shows the pickup text in the current language, plays its sound and
    raises its event. Returns one. */
@@ -719,17 +722,25 @@ extern f32 g_specialPickupShieldDurationEu, k_pickupEuropeanSecondEffectValue;
 extern char g_pickupEuropeanEffectUpdateRomEntry[], g_pickupEuropeanEffectDrawRomEntry[];
 extern void ItemMenu_SetEntry();
 s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, void *obj) {
-    u8 **text = pickup->text;
-    s16 sound = pickup->sound;
-    s16 event = pickup->event;
+    u8 **text;
+    s32 sound;
+    s32 event;
     f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
 
     switch ((s16)(pickup->id - 0x708)) {
     case 0: *(f32 *)((u8 *)player + 0x670) = g_specialPickupShieldDurationEu; break;
     case 1: *(f32 *)((u8 *)player + 0x674) = k_pickupEuropeanSecondEffectValue; break;
-    case 2: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
-    case 3: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
+    case 2:
+    case 3: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
+    case 7: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
+    case 4:
+    case 5:
+    case 6:
+        break;
     }
+    text = pickup->text;
+    sound = pickup->sound;
+    event = pickup->event;
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
         Gsky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&g_frontendScreenStatus, player->camera, ((char **)text)[g_languageIndex]);
@@ -738,9 +749,6 @@ s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, voi
     if (event) SoundElement_PlayDialogGroup(event);
     return 1;
 }
-#else
-INCLUDE_ASM("span_1000", Pickup_ApplyEuropeanPowerup);
-#endif
 #endif
 
 /* PICKUP_APPLYSPECIALPICKUP_DATA.CPP */

@@ -8,7 +8,6 @@
 #include "sdk/os_pif.h"
 
 #if !(defined(VERSION_EU_X) || defined(VERSION_US_REV1))
-#ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "TYPES.H"
@@ -17,64 +16,39 @@
 #include "sdk/os_pif.h"
 void __osPfsRequestData(u8 cmd);
 
-s32 Items_QueryControllerPresence(OSMesgQueue *queue, s8 *presentMask) {
-    ControllerInitStatusBytes controllerStatus;
-    void *receivedMessage;
-    u8 answerMask;
-    ControllerInitStatusBytes *retryStatus;
-    ControllerInitStatusBytes *presenceStatus;
-    s32 dmaResult;
-    s32 retryChannel;
-    s32 presenceChannel;
-    s32 retriesRemaining;
-    s8 connectedMask;
-
-    connectedMask = 0;
-    retriesRemaining = 3;
+s32 Items_QueryControllerPresence(OSMesgQueue *queue, u8 *pattern) {
+    ControllerInitStatusBytes data[4];
+    void *dummy;
+    u8 bitpattern;
+    s32 i;
+    u8 *count;
+    s32 ret;
+    s32 patternmask = 0;
+    s32 retry = 3;
     __osSiGetAccess();
     do {
-        __osPfsRequestData(0U);
-        __osSiRawStartDma(1, (u8 *)&g_controllerStatusPifBuffer);
-        osRecvMesg(queue, &receivedMessage, 1);
-        dmaResult = __osSiRawStartDma(0, (u8 *)&g_controllerStatusPifBuffer);
-        osRecvMesg(queue, &receivedMessage, 1);
-        Items_DecodeControllerStatusReplies(&answerMask, &controllerStatus);
-        retryChannel = 0;
-        if (g_controllerChannelCount[0] != 0) {
-            retryStatus = &controllerStatus;
-loop_3:
-            if (retryStatus->team & 4) {
-                retryChannel += 1;
-                retryStatus += 4;
-                if (retryChannel < (s32) g_controllerChannelCount[0]) {
-                    goto loop_3;
-                }
-            } else {
-                retriesRemaining -= 1;
+        __osPfsRequestData(0);
+        __osSiRawStartDma(1, &g_controllerStatusPifBuffer);
+        osRecvMesg(queue, &dummy, 1);
+        ret = __osSiRawStartDma(0, &g_controllerStatusPifBuffer);
+        osRecvMesg(queue, &dummy, 1);
+        Items_DecodeControllerStatusReplies(&bitpattern, data);
+        for (i = 0; i < g_controllerChannelCount[0]; i++) {
+            if (!(data[i].team & 4)) {
+                retry--;
+                break;
             }
         }
-        if (retryChannel == g_controllerChannelCount[0]) {
-            retriesRemaining = 0;
-        }
-    } while (retriesRemaining > 0);
-    presenceChannel = 0;
-    if (g_controllerChannelCount[0] != 0) {
-        presenceStatus = &controllerStatus;
-        do {
-            if ((presenceStatus->slot == 0) && (presenceStatus->team & 1)) {
-                connectedMask |= 1 << presenceChannel;
-            }
-            presenceChannel += 1;
-            presenceStatus += 4;
-        } while (presenceChannel < (s32) g_controllerChannelCount[0]);
+        if (i == g_controllerChannelCount[0]) retry = 0;
+    } while (retry > 0);
+    count = g_controllerChannelCount;
+    for (i = 0; i < *count; i++) {
+        if (data[i].slot == 0 && (data[i].team & 1)) patternmask |= 1 << i;
     }
     __osSiRelAccess();
-    *presentMask = connectedMask;
-    return dmaResult;
+    *pattern = patternmask;
+    return ret;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Items_QueryControllerPresence);
-#endif
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)

@@ -10,12 +10,6 @@
 #include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
 #include "sdk/os.h"
 
-#if (defined(VERSION_US)) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", Cache_RunCompactionPasses);
-#endif
-
-#if !(defined(VERSION_US)) || defined(NON_MATCHING)
-/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 extern OSMesgQueue g_resourceHeapLockQueue;
 extern ResourceManagerState g_resourceActivityState;
 
@@ -32,6 +26,20 @@ void Cache_RunCompactionPasses(s32 unused) {
     OSMesgQueue *send;
 
     resourceManager = &g_resourceActivityState;
+#if defined(VERSION_US)
+    if (resourceManager->active != 0) {
+        resourceManager->active--;
+    }
+    resourceManager->count++;
+    mask = __osDisableInt();
+    pendingPasses = g_resourceHeapLockUsers + 1;
+    g_resourceHeapLockUsers = pendingPasses;
+    if (pendingPasses != 1) {
+        __osRestoreInt(mask);
+        queueAddress = (char *)resourceManager - 0x3C;
+        receive = queueAddress;
+        osRecvMesg(receive, 0, 1);
+#else
     passIndex = 1;
     resourceManager->active = passIndex;
     resourceManager->count += passIndex;
@@ -43,6 +51,7 @@ void Cache_RunCompactionPasses(s32 unused) {
         queueAddress = (char *)resourceManager - 0x3C;
         receive = queueAddress;
         osRecvMesg(receive, 0, passIndex);
+#endif
         passIndex = 0;
     } else {
         __osRestoreInt(mask);
@@ -64,4 +73,3 @@ void Cache_RunCompactionPasses(s32 unused) {
         __osRestoreInt(interruptMask);
     }
 }
-#endif

@@ -1,189 +1,89 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
+#include "COMMON/MENURECAT20V1.H"
+#include "TYPES.H"
+#include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
+#include "MULTI/SETUP_SETUPNAMESPINNER.H"
 
 #if defined(VERSION_DE)
-#ifdef NON_MATCHING
-/* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void Setup_LoadNameEditBuffer(void) {
-    __asm__ volatile (
-        ".set noreorder\n"
-        ".set noat\n"
-        "addiu      $sp, $sp, -0x18\n"
-        "sw         $s0, 0x10($sp)\n"
-        "addu       $s0, $a0, $zero\n"
-        "sw         $ra, 0x14($sp)\n"
-        "lw         $a1, 0x1C($s0)\n"
-        "lui        $a0, %hi(g_playerViewRenderContext)\n"
-        "addiu      $a0, $a0, %lo(g_playerViewRenderContext)\n"
-        "jal        Player_GetPlayerIndex\n"
-        "nop\n"
-        "addu       $t3, $v0, $zero\n"
-        "addiu      $v0, $zero, 0x1\n"
-        "beq        $t3, $v0, .LloadNameEditBufferPlayerIndex1\n"
-        "slti      $v0, $t3, 0x2\n"
-        "bnez       $v0, .LloadNameEditBufferPlayerIndex0\n"
-        "addiu     $v0, $zero, 0x2\n"
-        "beq        $t3, $v0, .LloadNameEditBufferPlayerIndex2\n"
-        "addiu     $v0, $zero, 0x3\n"
-        "beq        $t3, $v0, .LloadNameEditBufferPlayerIndex3\n"
-        "lui       $v1, (0x1800000 >> 16)\n"
-        ".LloadNameEditBufferPlayerIndex0:\n"
-        "lw         $a0, 0xC($s0)\n"
-        "lw         $v0, 0x30($a0)\n"
-        "lui        $v1, (0x1800000 >> 16)\n"
-        "or         $v0, $v0, $v1\n"
-        "sw         $v0, 0x30($a0)\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lui        $a0, (0xFE7FFFFF >> 16)\n"
-        "lw         $v0, 0x58($v1)\n"
-        "ori        $a0, $a0, (0xFE7FFFFF & 0xFFFF)\n"
-        "and        $v0, $v0, $a0\n"
-        "sw         $v0, 0x58($v1)\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lw         $v0, 0x80($v1)\n"
-        "and        $v0, $v0, $a0\n"
-        "j          .LloadNameEditBufferClearPlayerIndex3Flag\n"
-        "sw        $v0, 0x80($v1)\n"
-        ".LloadNameEditBufferPlayerIndex1:\n"
-        "lw         $a0, 0xC($s0)\n"
-        "lw         $v0, 0x58($a0)\n"
-        "lui        $v1, (0x1800000 >> 16)\n"
-        "or         $v0, $v0, $v1\n"
-        "sw         $v0, 0x58($a0)\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lui        $a0, (0xFE7FFFFF >> 16)\n"
-        "lw         $v0, 0x30($v1)\n"
-        "ori        $a0, $a0, (0xFE7FFFFF & 0xFFFF)\n"
-        "and        $v0, $v0, $a0\n"
-        "sw         $v0, 0x30($v1)\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lw         $v0, 0x80($v1)\n"
-        "and        $v0, $v0, $a0\n"
-        "j          .LloadNameEditBufferClearPlayerIndex3Flag\n"
-        "sw        $v0, 0x80($v1)\n"
-        ".LloadNameEditBufferPlayerIndex2:\n"
-        "lw         $a0, 0xC($s0)\n"
-        "lw         $v0, 0x80($a0)\n"
-        "lui        $v1, (0x1800000 >> 16)\n"
-        "or         $v0, $v0, $v1\n"
-        "sw         $v0, 0x80($a0)\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lui        $a0, (0xFE7FFFFF >> 16)\n"
-        "lw         $v0, 0x30($v1)\n"
-        "ori        $a0, $a0, (0xFE7FFFFF & 0xFFFF)\n"
-        "and        $v0, $v0, $a0\n"
-        "sw         $v0, 0x30($v1)\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lw         $v0, 0x58($v1)\n"
-        "and        $v0, $v0, $a0\n"
-        "sw         $v0, 0x58($v1)\n"
-        ".LloadNameEditBufferClearPlayerIndex3Flag:\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lw         $v0, 0xA8($v1)\n"
-        "and        $v0, $v0, $a0\n"
-        "j          .LloadNameEditBufferResetEntry\n"
-        "sw        $v0, 0xA8($v1)\n"
-        ".LloadNameEditBufferPlayerIndex3:\n"
-        "lw         $a0, 0xC($s0)\n"
-        "lw         $v0, 0xA8($a0)\n"
-        "or         $v0, $v0, $v1\n"
-        "sw         $v0, 0xA8($a0)\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lui        $a0, (0xFE7FFFFF >> 16)\n"
-        "lw         $v0, 0x30($v1)\n"
-        "ori        $a0, $a0, (0xFE7FFFFF & 0xFFFF)\n"
-        "and        $v0, $v0, $a0\n"
-        "sw         $v0, 0x30($v1)\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lw         $v0, 0x58($v1)\n"
-        "and        $v0, $v0, $a0\n"
-        "sw         $v0, 0x58($v1)\n"
-        "lw         $v1, 0xC($s0)\n"
-        "lw         $v0, 0x80($v1)\n"
-        "and        $v0, $v0, $a0\n"
-        "sw         $v0, 0x80($v1)\n"
-        ".LloadNameEditBufferResetEntry:\n"
-        "sll        $v0, $t3, 1\n"
-        "addu       $v0, $v0, $t3\n"
-        "sll        $v0, $v0, 3\n"
-        "lui        $at, %hi(g_multiplayerNameEntryStatesTimer_de)\n"
-        "addu       $at, $at, $v0\n"
-        "sw         $zero, %lo(g_multiplayerNameEntryStatesTimer_de)($at)\n"
-        "lui        $v1, %hi(g_multiplayerSavedPlayerNames)\n"
-        "addiu      $v1, $v1, %lo(g_multiplayerSavedPlayerNames)\n"
-        "addu       $t2, $v0, $v1\n"
-        "sll        $v0, $t3, 2\n"
-        "addu       $v0, $v0, $t3\n"
-        "sll        $v1, $v0, 4\n"
-        "subu       $v1, $v1, $v0\n"
-        "sll        $v1, $v1, 1\n"
-        "lui        $v0, %hi(g_playerViewRenderContextPlayerNames_de)\n"
-        "addiu      $v0, $v0, %lo(g_playerViewRenderContextPlayerNames_de)\n"
-        "addu       $v1, $v1, $v0\n"
-        "addiu      $a0, $zero, 0x8\n"
-        "addu       $t1, $zero, $zero\n"
-        "addiu      $a1, $zero, 0x20\n"
-        ".LloadNameEditBufferTrimTrailingSpacesLoop:\n"
-        "addiu      $a0, $a0, -0x1\n"
-        "addu       $v0, $v1, $a0\n"
-        "lbu        $v0, 0x0($v0)\n"
-        "bne        $v0, $a1, .LloadNameEditBufferCompareDefaultName\n"
-        "addu      $a3, $v1, $zero\n"
-        "bgtz       $a0, .LloadNameEditBufferTrimTrailingSpacesLoop\n"
-        "addiu     $t1, $t1, 0x1\n"
-        "addu       $a3, $v1, $zero\n"
-        ".LloadNameEditBufferCompareDefaultName:\n"
-        "lui        $a1, %hi(g_defaultPlayerNameOne)\n"
-        "lw         $a1, %lo(g_defaultPlayerNameOne)($a1)\n"
-        "addiu      $a0, $zero, 0x6\n"
-        ".LloadNameEditBufferCompareDefaultNameLoop:\n"
-        "lbu        $t0, 0x0($a3)\n"
-        "addiu      $a3, $a3, 0x1\n"
-        "lbu        $a2, 0x0($a1)\n"
-        "addiu      $a1, $a1, 0x1\n"
-        "andi       $v0, $t0, 0xFF\n"
-        "bne        $v0, $a2, .LloadNameEditBufferCompareDone\n"
-        "addiu     $a0, $a0, -0x1\n"
-        "beqz       $v0, .LloadNameEditBufferCompareDone\n"
-        "nop\n"
-        "beqz       $a0, .LloadNameEditBufferCompareDefaultNameLoop\n"
-        "nop\n"
-        ".LloadNameEditBufferCompareDone:\n"
-        "beql       $t0, $a2, .LloadNameEditBufferComputeCopyLength\n"
-        "addiu     $t1, $zero, 0x8\n"
-        ".LloadNameEditBufferComputeCopyLength:\n"
-        "addiu      $v0, $zero, 0x8\n"
-        "subu       $v0, $v0, $t1\n"
-        "blez       $v0, .LloadNameEditBufferStoreLength\n"
-        "addu      $a0, $zero, $zero\n"
-        "addu       $a1, $v0, $zero\n"
-        ".LloadNameEditBufferCopyNameLoop:\n"
-        "lbu        $v0, 0x0($v1)\n"
-        "addiu      $v1, $v1, 0x1\n"
-        "addiu      $a0, $a0, 0x1\n"
-        "sb         $v0, 0x0($t2)\n"
-        "slt        $v0, $a0, $a1\n"
-        "bnez       $v0, .LloadNameEditBufferCopyNameLoop\n"
-        "addiu     $t2, $t2, 0x1\n"
-        ".LloadNameEditBufferStoreLength:\n"
-        "sll        $v1, $t3, 1\n"
-        "addu       $v1, $v1, $t3\n"
-        "sll        $v1, $v1, 3\n"
-        "addiu      $v0, $zero, 0x8\n"
-        "sb         $zero, 0x0($t2)\n"
-        "lw         $ra, 0x14($sp)\n"
-        "lw         $s0, 0x10($sp)\n"
-        "subu       $v0, $v0, $t1\n"
-        "lui        $at, %hi(g_multiplayerNameEntryStates)\n"
-        "addu       $at, $at, $v1\n"
-        "sw         $v0, %lo(g_multiplayerNameEntryStates)($at)\n"
-        "lui        $at, %hi(g_multiplayerNameEntryStatesCount)\n"
-        "addu       $at, $at, $v1\n"
-        "sw         $v0, %lo(g_multiplayerNameEntryStatesCount)($at)\n"
-        "jr         $ra\n"
-        "addiu     $sp, $sp, 0x18\n"
-    );
+extern char g_playerViewRenderContext[];
+extern Spinner g_multiplayerNameEntryStates[];
+extern s32 Player_GetPlayerIndex(char *, s32);
+extern u8 *g_defaultPlayerNameOne;
+/* Highlights the name slot Player_GetPlayerIndexDe finds for the menu (display flags 0x1800000 on its model part,
+   cleared on the other three), resets that spinner's timer and copies the slot's name (trailing blanks
+   dropped, none when it starts like the default name) into the spinner; value and max = its length. */
+void Setup_LoadNameEditBuffer(NameSpinnerMenu *menu) {
+    s32 index;
+    s32 trailing;
+    s32 i;
+    u8 *source;
+    u8 *defaultName;
+    u8 *name;
+    char *destination;
+    u8 defaultChar;
+    s32 remaining;
+    s32 nameChar;
+    index = Player_GetPlayerIndex(g_playerViewRenderContext, menu->id);
+    switch (index) {
+        default:
+        case 0:
+            menu->model->part[0].flags |= 0x1800000;
+            menu->model->part[1].flags &= ~0x1800000;
+            menu->model->part[2].flags &= ~0x1800000;
+            menu->model->part[3].flags &= ~0x1800000;
+            break;
+        case 1:
+            menu->model->part[1].flags |= 0x1800000;
+            menu->model->part[0].flags &= ~0x1800000;
+            menu->model->part[2].flags &= ~0x1800000;
+            menu->model->part[3].flags &= ~0x1800000;
+            break;
+        case 2:
+            menu->model->part[2].flags |= 0x1800000;
+            menu->model->part[0].flags &= ~0x1800000;
+            menu->model->part[1].flags &= ~0x1800000;
+            menu->model->part[3].flags &= ~0x1800000;
+            break;
+        case 3:
+            menu->model->part[3].flags |= 0x1800000;
+            menu->model->part[0].flags &= ~0x1800000;
+            menu->model->part[1].flags &= ~0x1800000;
+            menu->model->part[2].flags &= ~0x1800000;
+            break;
+    }
+    g_multiplayerNameEntryStates[index].timer = 0;
+    destination = g_multiplayerNameEntryStates[index].name;
+    source = g_gameSettings.playerSettings[index].name;
+    i = 8;
+    trailing = 0;
+    while (i > 0) {
+        i--;
+        if (source[i] != ' ') {
+            break;
+        }
+        trailing++;
+    }
+    name = source;
+    defaultName = g_defaultPlayerNameOne;
+    remaining = 6;
+    do {
+        nameChar = *name++;
+        defaultChar = *defaultName++;
+        remaining--;
+        if ((u8)nameChar != defaultChar || (u8)nameChar == 0) {
+            break;
+        }
+    } while (remaining == 0);
+    /* The ROM loops only while the count is 0, so this compares the first character. */
+    if (nameChar == defaultChar) {
+        trailing = 8;
+    }
+    for (i = 0; i < 8 - trailing; i++) {
+        *destination++ = *source++;
+    }
+    *destination = 0;
+    g_multiplayerNameEntryStates[index].value = 8 - trailing;
+    g_multiplayerNameEntryStates[index].max = 8 - trailing;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Setup_LoadNameEditBuffer);
-#endif
 #endif

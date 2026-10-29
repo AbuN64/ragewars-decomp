@@ -7,7 +7,6 @@
 #include "COMMON/RENDERSORTRECORD.H"
 #include "TYPES.H"
 
-#if !(defined(VERSION_EU))
 extern f32 Gobjinst_GetActorRadius(void *);
 extern f32 InstHdr_GetActorBaseOffset(void *);
 extern f32 Gobjinst_GetActorHeight(void *);
@@ -153,10 +152,6 @@ void Instcol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
         }
     }
 }
-#endif
-#if defined(VERSION_EU)
-INCLUDE_ASM("span_1000", Instcol_TestEntityContact);
-#endif
 
 typedef struct Query Query;
 /* Queries the registered entities an object may collide with: when the object's shape is enabled and is
@@ -287,11 +282,6 @@ void CInstanceCollision_BuildSweepQuery(ActorMotion *motion, f32 *queryStorage)
   ((Query *)queryStorage)->maxZ = value + ((Query *)queryStorage)->radius;
 }
 
-#if defined(VERSION_EU)
-const unsigned int k_InstcolEncodedWords[2] = {
-    0xBF800000, 0x3F800000,
-};
-#endif
 
 #if defined(VERSION_US)
 const char s_InstcolTEosTText[8] =

@@ -1,11 +1,6 @@
 #include "include_asm.h"
 
 /* 800C1CF4.CPP */
-#if defined(VERSION_EU)
-unsigned int k_Ovldat1EncodedWords[6] = {
-    0x00000000, 0x0020421C, 0x00204224, 0x0020422C, 0x00204234, 0x0020423C,
-};
-#endif
 
 /* 800C1E68.CPP */
 #if defined(VERSION_US)

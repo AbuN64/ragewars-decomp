@@ -1,7 +1,6 @@
 #include "include_asm.h"
 
 
-#if defined(VERSION_US_REV1)
 /* Maps an id from 1 to 33 to the address of its data block, returning 0 for any other id. */
 #include "TYPES.H"
 #include "MENU/EVENT.H"
@@ -77,10 +76,6 @@ void *Level_GetScreenEventTable(s32 id) {
         return 0;
     }
 }
-#endif
-#if VERSION_DE
-INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);
-#endif
 #if VERSION_US
 INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_us);
 #endif
@@ -92,13 +87,4 @@ INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_eu);
 #endif
 #if VERSION_DE
 INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_de);
-#endif
-#if VERSION_EU
-INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);
-#endif
-#if VERSION_EU_X
-INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);
-#endif
-#if VERSION_US
-INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);
 #endif

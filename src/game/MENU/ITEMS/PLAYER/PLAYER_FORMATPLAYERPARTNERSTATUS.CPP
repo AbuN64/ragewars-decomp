@@ -67,11 +67,41 @@ s32 Player_RestoreControlsOrCreateMenu(void *first, void *second, void *third) {
     return 1;
 }
 
-#if defined(VERSION_DE) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
-/* US, EU and EU-X keep their asm: US and EU share the jump table rodata with other tables, EU-X formats a different line. */
 #include "MENU/PLAYER_STATUS_TEXT.H"
 #include "TYPES.H"
 
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#undef playerStatusText0
+#define playerStatusText0() g_playerStatusMessage0Translations[g_languageIndex]
+#undef playerStatusText1
+#define playerStatusText1() g_playerStatusMessage1Translations[g_languageIndex]
+#undef playerStatusText2
+#define playerStatusText2() g_playerStatusMessage2Translations[g_languageIndex]
+#undef playerStatusText3
+#define playerStatusText3() g_playerStatusMessage3Translations[g_languageIndex]
+#undef playerStatusText4
+#define playerStatusText4() g_playerStatusMessage4Translations[g_languageIndex]
+#undef playerStatusText5
+#define playerStatusText5() g_playerStatusMessage5Translations[g_languageIndex]
+#undef playerStatusText6
+#define playerStatusText6() g_playerStatusMessage6Translations[g_languageIndex]
+#undef playerStatusText7
+#define playerStatusText7() g_playerStatusMessage7Translations[g_languageIndex]
+#undef playerStatusText8
+#define playerStatusText8() g_playerStatusMessage8Translations[g_languageIndex]
+#undef playerStatusText9
+#define playerStatusText9() g_playerStatusMessage9Translations[g_languageIndex]
+#undef playerStatusText10
+#define playerStatusText10() g_playerStatusMessage10Translations[g_languageIndex]
+#undef playerStatusText11
+#define playerStatusText11() g_playerStatusMessage11Translations[g_languageIndex]
+#undef playerStatusText12
+#define playerStatusText12() g_playerStatusMessage12Translations[g_languageIndex]
+#undef playerStatusText13
+#define playerStatusText13() g_playerStatusMessage13Translations[g_languageIndex]
+#undef playerStatusText14
+#define playerStatusText14() g_playerStatusMessage14Translations[g_languageIndex]
+#endif
 /* Formats a player's status line into a menu field's text through Libc_FormatString (sprintf): one message when the player is its own partner, otherwise a message chosen by the player's mode at 0x12F0 (0 to 6), naming the partner's character from 0x84 of its record at 0x5D8 when there is a partner. */
 typedef struct StatusPlayer {
     char pad0[0x5D8];
@@ -99,7 +129,11 @@ typedef struct {
 
 s32 Player_FormatPlayerPartnerStatus(Item *item, Owner *owner) {
     StatusPlayer *player = owner->player;
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+    char *text = item->field->text[g_languageIndex];
+#else
     char *text = *item->field->text;
+#endif
     if (player->partner == player) {
         Libc_FormatString(text, playerStatusText0());
     } else if (player->partner != 0) {
@@ -125,6 +159,3 @@ s32 Player_FormatPlayerPartnerStatus(Item *item, Owner *owner) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Player_FormatPlayerPartnerStatus);
-#endif

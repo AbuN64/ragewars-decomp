@@ -41,17 +41,7 @@ OSPiHandle_s *System_InitializeCartridgeHandle(void)
 }
 #endif
 
-#if defined(VERSION_DE) || defined(VERSION_EU)
-INCLUDE_ASM("span_1000", System_RunPiManager);
-#endif
-#if VERSION_EU
-INCLUDE_DATA("span_1000", System_RunPiManager_padding_BA248);
-#endif
-#if VERSION_DE
-INCLUDE_DATA("span_1000", System_RunPiManager_padding_B9FA8);
-#endif
-
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 typedef struct PiRequest {
     u16 type;
     u8 priority, status;
@@ -171,6 +161,12 @@ unsigned int System_RunPiManager_padding_BA288[2] = {
 unsigned int System_RunPiManager_padding_BF098[2] = {
     0x02202821, 0x3C068015,
 };
+#endif
+#if VERSION_EU
+INCLUDE_DATA("span_1000", System_RunPiManager_padding_BA248);
+#endif
+#if VERSION_DE
+INCLUDE_DATA("span_1000", System_RunPiManager_padding_B9FA8);
 #endif
 
 #endif

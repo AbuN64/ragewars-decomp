@@ -7,19 +7,12 @@
 /* 80406A88_20.CPP */
 
 /* 80408AC4_6.CPP */
-#if defined(VERSION_DE)
-const unsigned int g_Encoded_HandleUnlockedLevelSelectionConstantWords[35] = {
-    0x0043C6C4, 0x0043C6CC, 0x0043C6D4, 0x0043C6DC, 0x0043C6E4, 0x0043C6EC, 0x0043C6F4, 0x0043C6FC,
-    0x0043C704, 0x0043C70C, 0x0043C714, 0x00000000, 0x0043C820, 0x0043C828, 0x0043C830, 0x0043C838,
-    0x0043C840, 0x0043C848, 0x0043C850, 0x0043C858, 0x0043C860, 0x0043C868, 0x0043C870, 0x00000000,
-    0x0043C908, 0x0043C910, 0x0043C918, 0x0043C920, 0x0043C928, 0x0043C930, 0x0043C938, 0x0043C940,
-    0x0043C948, 0x0043C950, 0x0043C958,
-};
-#endif
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
+
+/* The asm is 4 words: the decrement is the jr delay slot and sits in the split-off first word of Level_GetScreenEventTable; the compiler drops it and fills the slot with the ori. */
 extern s32 g_menuFixedEncodedResource;
 
 s32 *Menu_GetFixedEncodedResource(s32 resourceId) {
@@ -41,13 +34,6 @@ INCLUDE_ASM("ovl_frontendMenu", Menu_GetFixedEncodedResource);
 #include "COMMON/GAME_SESSION.H"
 #include "OVLGAME/SHAREDRECAT224.H"
 
-extern s32 Control_IsAButtonPressed(s32 buttons);
-
-struct GameSession;
-extern void SetN64_SelectSpawnAndStartSession(struct GameSession *menu, s32 target);
-extern s32 SetN64_IsModeThirteen(void);
-
-extern void Scene_SetSelection(void *menu, s32 target, s32 mode);
 
 static inline s32 levelBit(s32 level) {
     s32 bit;
@@ -91,93 +77,10 @@ static inline s32 levelBit(s32 level) {
     return bit;
 }
 
-static inline s32 findUnlocked(s32 level, s32 step) {
-    s32 i;
+#include "MENU/HANDLE_UNLOCKED_LEVEL_SELECTION_BODY.H"
 
-    for (i = 0; i < 11; i++) {
-        level += step;
-        if (level >= 11) {
-            level = 0;
-        } else if (level < 0) {
-            level = 10;
-        }
-        if (g_gameSettings.unlockedLevels & levelBit(level)) {
-            return level;
-        }
-    }
-    return -1;
-}
-
-s32 Encoded_HandleUnlockedLevelSelection(s32 levelId, Shared_MenuInput *pad) {
-    s32 target;
-    Shared_Game *rules;
-
-    switch (g_encodedSelectedLevelIndex) {
-    default:
-    case 0:
-        target = 1000;
-        break;
-    case 1:
-        target = 2000;
-        break;
-    case 2:
-        target = 3000;
-        break;
-    case 3:
-        target = 4000;
-        break;
-    case 4:
-        target = 5000;
-        break;
-    case 5:
-        target = 6000;
-        break;
-    case 6:
-        target = 7401;
-        break;
-    case 7:
-        target = 7501;
-        break;
-    case 8:
-        target = 7601;
-        break;
-    case 9:
-        target = 7602;
-        break;
-    case 10:
-        target = 8000;
-        break;
-    }
-
-    if (Control_IsAButtonPressed(pad->buttons) != 0) {
-        if (target == 8000) {
-            g_gameSettings.mode1E = 1;
-            Confirming_SelectConfirmingController(pad);
-            SetN64_SetTransitionTarget(&g_gameSession, 0x11);
-            return 1;
-        }
-        if (SetN64_IsModeThirteen() != 0) {
-            Scene_SetSelection(&g_world, target, 2);
-            return 0;
-        }
-        rules = &g_gameSettings;
-        rules->local = 0;
-        rules->mode1E = 1;
-        Confirming_SelectConfirmingController(pad);
-        SetN64_SelectSpawnAndStartSession(&g_gameSession, target);
-        return 1;
-    }
-
-    if (((s32 (*)(s32))Control_IsLeftPressed)(pad->buttons) != 0) {
-        g_encodedSelectedLevelIndex = findUnlocked(g_encodedSelectedLevelIndex, -1);
-    } else if (((s32 (*)(s32))Control_IsRightPressed)(pad->buttons) != 0) {
-        g_encodedSelectedLevelIndex = findUnlocked(g_encodedSelectedLevelIndex, 1);
-    }
-    return 0;
-}
 #endif
 
 /* 8040C640_13.CPP */
 
 /* 8042FBEC_13.CPP */
-

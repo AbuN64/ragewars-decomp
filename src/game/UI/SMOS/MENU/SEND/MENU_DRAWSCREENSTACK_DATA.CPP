@@ -36,3 +36,15 @@ const unsigned int g_Stream_SetFloatPairToNegativeOneConstantWords_us_rev1[1] = 
     0xBF800000,
 };
 #endif
+
+#if defined(VERSION_EU)
+const unsigned int g_controllerButtonDispatchTableEu[1] = {
+    0x14C00009,
+};
+#endif
+
+#if defined(VERSION_US)
+const unsigned int g_controllerButtonDispatchTableUs[1] = {
+    0x40000000,
+};
+#endif

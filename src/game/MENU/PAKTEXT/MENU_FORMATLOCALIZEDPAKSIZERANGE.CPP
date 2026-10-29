@@ -38,7 +38,7 @@ s32 Menu_FormatLocalizedPakSizeRange(PakRangeTextEu *entry) {
     else if (v - 0xBB8 < 0x5DC) src = g_pakSizeUnder4500Text[g_languageIndex];
     else if (v - 0x1194 < 0x7D0) src = g_pakSizeUnder6500Text[g_languageIndex];
     else if (v - 0x1964 < 0xDAB) src = g_pakSizeUnder9999Text[g_languageIndex];
-    else if (v >= 0x270F) src = g_pakSizeAtLeast9999Text[g_languageIndex];
+    else if ((s32)v >= 0x270F) src = g_pakSizeAtLeast9999Text[g_languageIndex];
     dst = entry->text[g_languageIndex];
     dst += Menu_CountLineChars(entry) - 11;
     if (src != 0) {

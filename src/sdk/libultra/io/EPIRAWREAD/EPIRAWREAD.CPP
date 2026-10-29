@@ -9,8 +9,6 @@ const unsigned char s_epirawreadExText[3] = {
 
 /* 800CC694_37.CPP */
 /* ROM-grounded data: src/ragewars_resident_strings_CD7A4_us_rev1.c */
-const char s_epirawreadText[16] = "io/epirawread.c";
-
 #if defined(VERSION_US)
 unsigned int k_EpirawreadEncodedWords[3] = {
     0x66000000, 0x04000000, 0x0000082E,

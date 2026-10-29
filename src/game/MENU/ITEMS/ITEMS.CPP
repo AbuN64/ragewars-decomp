@@ -11,7 +11,6 @@ unsigned int g_itemsConstantWords[3] = {
 
 /* 8043EA40.CPP */
 #if defined(VERSION_EU)
-#ifdef NON_MATCHING
 extern u8 g_europeanMenuToggleRow2;
 extern u8 g_europeanMenuToggleRow3;
 extern u8 g_europeanMenuToggleRow4;
@@ -40,20 +39,66 @@ extern char *g_europeanMenuToggleRow9DisabledText[];
 typedef struct { s32 id; u8 pad4[0x10]; char ***text; } OptionRowEu;
 s32 Items_SelectOptionRowLabel(OptionRowEu *row) {
     switch (row->id) {
-    case 2: row->text = g_europeanMenuToggleRow2 ? g_europeanMenuToggleRow2EnabledText : g_europeanMenuToggleRow2DisabledText; break;
-    case 3: row->text = g_europeanMenuToggleRow3 ? g_europeanMenuToggleRow3EnabledText : g_europeanMenuToggleRow3DisabledText; break;
-    case 4: row->text = g_europeanMenuToggleRow4 ? g_europeanMenuToggleRow4EnabledText : g_europeanMenuToggleRow4DisabledText; break;
-    case 5: row->text = g_europeanMenuToggleRow5 ? g_europeanMenuToggleRow5EnabledText : g_europeanMenuToggleRow5DisabledText; break;
-    case 6: row->text = g_europeanMenuToggleRow6 ? g_europeanMenuToggleRow6EnabledText : g_europeanMenuToggleRow6DisabledText; break;
-    case 7: row->text = g_europeanMenuToggleRow7 ? g_europeanMenuToggleRow7EnabledText : g_europeanMenuToggleRow7DisabledText; break;
-    case 8: row->text = g_europeanMenuToggleRow8 ? g_europeanMenuToggleRow8EnabledText : g_europeanMenuToggleRow8DisabledText; break;
-    case 9: row->text = g_europeanMenuToggleRow9 ? g_europeanMenuToggleRow9EnabledText : g_europeanMenuToggleRow9DisabledText; break;
+    default:
+    case 2:
+        if (g_europeanMenuToggleRow2) {
+            row->text = g_europeanMenuToggleRow2EnabledText;
+        } else {
+            row->text = g_europeanMenuToggleRow2DisabledText;
+        }
+        break;
+    case 3:
+        if (g_europeanMenuToggleRow3) {
+            row->text = g_europeanMenuToggleRow3EnabledText;
+        } else {
+            row->text = g_europeanMenuToggleRow3DisabledText;
+        }
+        break;
+    case 4:
+        if (g_europeanMenuToggleRow4) {
+            row->text = g_europeanMenuToggleRow4EnabledText;
+        } else {
+            row->text = g_europeanMenuToggleRow4DisabledText;
+        }
+        break;
+    case 5:
+        if (g_europeanMenuToggleRow5) {
+            row->text = g_europeanMenuToggleRow5EnabledText;
+        } else {
+            row->text = g_europeanMenuToggleRow5DisabledText;
+        }
+        break;
+    case 6:
+        if (g_europeanMenuToggleRow6) {
+            row->text = g_europeanMenuToggleRow6EnabledText;
+        } else {
+            row->text = g_europeanMenuToggleRow6DisabledText;
+        }
+        break;
+    case 7:
+        if (g_europeanMenuToggleRow7) {
+            row->text = g_europeanMenuToggleRow7EnabledText;
+        } else {
+            row->text = g_europeanMenuToggleRow7DisabledText;
+        }
+        break;
+    case 8:
+        if (g_europeanMenuToggleRow8) {
+            row->text = g_europeanMenuToggleRow8EnabledText;
+        } else {
+            row->text = g_europeanMenuToggleRow8DisabledText;
+        }
+        break;
+    case 9:
+        if (g_europeanMenuToggleRow9) {
+            row->text = g_europeanMenuToggleRow9EnabledText;
+        } else {
+            row->text = g_europeanMenuToggleRow9DisabledText;
+        }
+        break;
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Items_SelectOptionRowLabel);
-#endif
 #endif
 
 /* 80443530.CPP */

@@ -196,6 +196,24 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     }
     TeamSelect_ResetWeaponWheel((char *)actor + 0x938);
     TeamSelect_ResetTeamWheel((char *)actor + 0xCCC);
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+    for (i = 1; i < 22; i++) {
+        FIELD(u8, actor, 0x602 + i * 2) = 0;
+        FIELD(s8, actor, 0x603 + i * 2) = -1;
+    }
+    FIELD(u8, actor, 0x602) = 1;
+    FIELD(u8, actor, 0x603) = 0;
+    FIELD(u8, actor, 0x606) = 1;
+    FIELD(u8, actor, 0x607) = 5;
+    FIELD(u8, actor, 0x608) = 1;
+    FIELD(u8, actor, 0x609) = 2;
+    FIELD(u8, actor, 0x60A) = 1;
+    FIELD(u8, actor, 0x60B) = 1;
+    FIELD(u8, actor, 0x616) = 1;
+    FIELD(u8, actor, 0x617) = 4;
+    FIELD(u8, actor, 0x61E) = 1;
+    FIELD(u8, actor, 0x61F) = 6;
+#endif
     FIELD(s16, actor, 0x5E8) = 0;
     i = 5;
     counterAddress = (unsigned long)actor + i;

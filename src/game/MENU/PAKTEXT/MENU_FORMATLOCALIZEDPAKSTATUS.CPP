@@ -6,8 +6,9 @@
 #include "MENU/PAK/PROFILE_PREVIEW_AND_LINE_TEXT.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
 #include "TYPES.H"
+/* g_pakPreviewNoteType is read through a struct view so the compiler keeps the load behind the preceding store. */
+typedef struct { s8 value; } PakModeByte;
 extern s8 g_pakPreviewNoteType;
 extern char *g_localizedPakStatusHeading[];
 extern char *g_pakStatusDefaultText[];
@@ -18,39 +19,41 @@ extern char *g_pakStatusStateFourText[];
 /* Pak status line: picks the 11-character status text for the state g_pakPreviewNoteType in the current language and copies it into
    the entry's line; with g_pakUseDefaultPreviewLabels set it only selects the heading table. */
 s32 Menu_FormatLocalizedPakStatus(struct Field *entry) {
-    char **table;
     char *src;
     char *dst;
     s32 i;
 
     if (g_pakUseDefaultPreviewLabels != 0) {
         entry->text = g_localizedPakStatusHeading;
-        return 0;
-    }
-    entry->text = g_localizedPakStatusLines;
-    switch (g_pakPreviewNoteType) {
-    case 1: table = g_pakStatusStateOneText; break;
-    case 2: table = g_pakStatusStateTwoText; break;
-    case 3: table = g_pakStatusStateThreeText; break;
-    case 4: table = g_pakStatusStateFourText; break;
-    default: table = g_pakStatusDefaultText; break;
-    }
-    src = table[g_languageIndex];
-    dst = entry->text[g_languageIndex];
-    dst += Menu_CountLineChars(entry) - 11;
-    for (i = 0; i < 11; i++) {
-        *dst++ = *src++;
+    } else {
+        entry->text = g_localizedPakStatusLines;
+        i = ((PakModeByte *)&g_pakPreviewNoteType)->value;
+        switch (i) {
+        case 0:
+        case 1:
+        case 4:
+        default:
+            src = g_pakStatusDefaultText[g_languageIndex];
+            break;
+        case 5:
+            src = g_pakStatusStateOneText[g_languageIndex];
+            break;
+        case 3:
+            src = g_pakStatusStateTwoText[g_languageIndex];
+            break;
+        case 2:
+            src = g_pakStatusStateThreeText[g_languageIndex];
+            break;
+        case 14:
+            src = g_pakStatusStateFourText[g_languageIndex];
+            break;
+        }
+        dst = entry->text[g_languageIndex];
+        dst += Menu_CountLineChars(entry) - 11;
+        for (i = 0; i < 11; i++) {
+            *dst++ = *src++;
+        }
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Menu_FormatLocalizedPakStatus);
-#endif
-#endif
-
-#if defined(VERSION_EU_X)
-const unsigned int g_noteTypeLabelJumpTableEuropean[15] = {
-    0x0040ACC8, 0x0040ACC8, 0x0040AD28, 0x0040AD08, 0x0040ACC8, 0x0040ACE8, 0x0040ACC8, 0x0040ACC8,
-    0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040AD48,
-};
 #endif

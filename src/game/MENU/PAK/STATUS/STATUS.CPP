@@ -66,7 +66,6 @@ s32 Status_FormatRightAlignedPreviewName(struct Field *item) {
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
-#if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 /* g_pakPreviewNoteType is read through a struct view so the compiler keeps the load behind the preceding store. */
 typedef struct { s8 value; } PakModeByte;
 extern char *g_pakStatusLabelTemplate, *g_pakDefaultPreviewTypeLabel;
@@ -109,7 +108,4 @@ s32 Status_UpdateStatusText(struct Field *item) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Status_UpdateStatusText);
-#endif
 #endif

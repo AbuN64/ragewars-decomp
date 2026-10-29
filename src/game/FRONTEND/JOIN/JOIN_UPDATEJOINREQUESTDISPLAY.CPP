@@ -8,16 +8,16 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 
-#if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_frontendMenu", Join_UpdateJoinRequestDisplay);
-#endif
-
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
-/* Fuzzy draft in EU and EU-X: their body differs (134 words). */
 extern void *g_courseOptionsScreen;
 extern struct TextEntry g_rewardItemTiers[][17];
 extern u8 *XPlus_CopyString(u8 *, u8 *);
-#if defined(VERSION_DE)
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+struct JoinNameEntry { u8 **names; s32 pad; };
+extern struct JoinNameEntry g_joinPlayerNamesLocalized[];
+#endif
+#if defined(VERSION_EU_X)
+enum { DRAW_ICON=913, DRAW_NAME=915, DRAW_VARIANT=914, DRAW_FIRST=916, DRAW_SECOND=917 };
+#elif defined(VERSION_DE)
 enum { DRAW_ICON=903, DRAW_NAME=905, DRAW_VARIANT=904, DRAW_FIRST=906, DRAW_SECOND=907 };
 #else
 enum { DRAW_ICON=909, DRAW_NAME=911, DRAW_VARIANT=910, DRAW_FIRST=912, DRAW_SECOND=913 };
@@ -28,6 +28,7 @@ void Join_UpdateJoinRequestDisplay(s32 index) {
     MenuWidget *widget;
     s32 model;
     char *name;
+    Shared_Game *game;
     void *widgetObject;
     void *variantObject;
     char ***variantSlot;
@@ -46,16 +47,25 @@ void Join_UpdateJoinRequestDisplay(s32 index) {
         widget->alpha = 125;
         model = Join_FindJoinModelIndex(g_joinRequestEntries[index].variant, g_joinRequestEntries[index].id);
     name = g_joinRequestEntries[index].name;
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+        game = &g_gameSettings;
+        XPlus_CopyString((u8 *)name, g_joinPlayerNamesLocalized[g_joinRequestEntries[index].variant * 17 + model].names[game->language]);
+#else
         XPlus_CopyString((u8 *)name,
           (u8 *)*g_rewardItemTiers[g_joinRequestEntries[index].variant][model].text
         );
+#endif
         widget->text = name;
         widgetObject = Node_FindWidgetByResourceId(window, DRAW_VARIANT);
         widget = widgetObject;
         widget->alpha = 125;
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+        widget->text = g_resultsRankTexts[g_joinRequestEntries[index].variant][game->language];
+#else
         variantObject = &g_resultsRankTexts[g_joinRequestEntries[index].variant];
         variantSlot = variantObject;
         widget->text = **variantSlot;
+#endif
         widgetObject = Node_FindWidgetByResourceId(window, DRAW_FIRST);
         widget = widgetObject;
         widget->alpha = 125;
@@ -66,7 +76,6 @@ void Join_UpdateJoinRequestDisplay(s32 index) {
         widget->value = g_joinRequestDrawPairs[g_joinRequestEntries[index].word8].second;
     }
 }
-#endif
 
 /* Seats the three join requests in free player settings slots, searching down from slot 7. */
 extern u8 *XPlus_CopyString(u8 *, u8 *);

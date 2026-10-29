@@ -47,7 +47,7 @@ extern s32 g_backdropTextLinesDe;
 extern s32 g_backdropTextLines;
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern f32 g_backdropTextScales[2];
+extern f32 g_backdropTextScales;
 #endif
 extern s32 Scene_FindModelIdIndex(void *, s32);
 extern s32 Scene_GetIndexedModelResource(void *, s32);
@@ -89,7 +89,7 @@ void LOAD_SETUP(TimedSessionTransitionView *state) {
         Geometry_QueueDirectModel(h2, VIEW_MATRICES + g_lightingBufferIndex * 64, &g_defaultParticleLighting, 0, -1);
         Geometry_FlushModelBatch();
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        SetN64_DrawTextLines(state, 0, (void *)((s32 **)&g_backdropTextScalePair)[g_languageIndex], g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScales[0], g_backdropTextScales[1]);
+        SetN64_DrawTextLines(state, 0, (void *)((s32 **)&g_backdropTextScalePair)[g_languageIndex], g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScales, (&g_backdropTextScales)[1]);
 #else
         SetN64_DrawTextLines(state, 0, (void *)g_backdropTextLines, g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScalePair, (&g_backdropTextScalePair)[1]);
 #endif

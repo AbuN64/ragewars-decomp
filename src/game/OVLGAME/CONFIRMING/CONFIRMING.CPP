@@ -11,9 +11,8 @@
 #include "MENU/MISC/CONFIRMING_SETMENUCONTROLLERPAKENABLED.H"
 
 #if defined(VERSION_EU)
-unsigned int g_confirmationDialogCallbackAddressWordsEu[9] = {
-    0x00000000, 0x0043EA68, 0x0043EA98, 0x0043EAC8, 0x0043EAF8, 0x0043EB28, 0x0043EB58, 0x0043EB88,
-    0x0043EBB8,
+unsigned int g_confirmationDialogCallbackAddressWordsEu[1] = {
+    0x00000000,
 };
 #endif
 

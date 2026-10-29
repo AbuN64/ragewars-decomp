@@ -4,23 +4,20 @@
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SCREEN.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
+
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int k_advanceTextRowsJumpTargets_eu_eu_x[10] = {
-    0x00421B24, 0x00421B38, 0x00421B4C, 0x00421B60, 0x00421B74, 0x00421B88, 0x00421B9C, 0x00421BB0,
-    0x00421BC4, 0x00421BD8,
-};
+#define CREDITS_LINES g_creditsLocalizedLines[g_languageIndex]
+#else
+#define CREDITS_LINES g_creditsLocalizedLines[0]
 #endif
-
-#if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_frontendMenu", Menu_AdvanceTextRows);
-#endif
-
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
-/* Fuzzy draft in EU and EU-X: their body differs. */
 #if defined(VERSION_DE)
 #define ID_ROW0 946
 #define ID_CLOSE 933
+#elif defined(VERSION_EU_X)
+#define ID_ROW0 956
+#define ID_CLOSE 943
 #else
 #define ID_ROW0 952
 #define ID_CLOSE 939
@@ -34,7 +31,7 @@ void Menu_AdvanceTextRows(void) {
     line = g_extraOptionsScreen->length;
     index = g_extraOptionsScreen->value;
     do {
-        text = g_creditsLocalizedLines[0][index];
+        text = CREDITS_LINES[index];
 
         if (text != 0) {
             index++;
@@ -75,7 +72,7 @@ void Menu_AdvanceTextRows(void) {
         item->text = text;
         line++;
     } while (line < 10);
-        if (g_creditsLocalizedLines[0][g_extraOptionsScreen->value] != 0)
+        if (CREDITS_LINES[g_extraOptionsScreen->value] != 0)
 
     {
         if (g_extraOptionsScreen->length == 0) {
@@ -90,4 +87,3 @@ void Menu_AdvanceTextRows(void) {
         g_extraOptionsScreen->length--;
     }
 }
-#endif

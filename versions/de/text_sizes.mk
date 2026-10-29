@@ -997,6 +997,7 @@ build/de/src/game/FRONTEND/PLAYER/PLAYER.CPP.o: FSPLIT := fsplit
 build/de/src/game/FRONTEND/PREVIEW/FRONTEND_DRAWMODELPREVIEW.CPP.o: FSPLIT := fsplit
 build/de/src/game/FRONTEND/WIDGET/WIDGET_DRAWTEXTWIDGET.CPP.o: FSPLIT := fsplit
 build/de/src/game/FX/FX_UPDATEANIMATORSCRIPT.CPP.o: FSPLIT := fsplit
+build/de/src/game/MENU/ENCODED/MENU_HANDLEUNLOCKEDLEVELSELECTION.CPP.o: FSPLIT := fsplit
 build/de/src/game/MENU/ITEMS/BOUND/BOUND.CPP.o: FSPLIT := fsplit
 build/de/src/game/MENU/PAK/MENU/pak_menu_entries.CPP.o: FSPLIT := fsplit
 build/de/src/game/ONSCRN/ONSCRN.CPP.o: FSPLIT := fsplit

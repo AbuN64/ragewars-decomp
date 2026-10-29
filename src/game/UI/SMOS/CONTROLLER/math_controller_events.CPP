@@ -9,16 +9,9 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 
-#if (defined(VERSION_US) || defined(VERSION_EU)) && !defined(NON_MATCHING)
-/* US and EU keep their asm: their jump table sits inside g_controllerButtonDispatchTableUs / g_controllerButtonDispatchTableEu_MathControllerEvents, which
- * have no unit split yet. */
-INCLUDE_ASM("span_1000", DispatchControllerButtonEvent);
-#endif
-
 extern s32 Smos_GetControlRepeatLimit(void);
 extern s32 GetMenuScreenOwner(void);
 
-#if (!(defined(VERSION_US) || defined(VERSION_EU)) || defined(NON_MATCHING))
 /* Turns one control event into manager events. Controls 4..7 and 11..12 first send their own event on a
  * press (controls 4..7 send it twice with amount 10000 when the control was not already held); then every control
  * sends event 10 (first press only) and 9 on a press, or 11 on a release. The per-device held-flag bit for the
@@ -94,7 +87,6 @@ void DispatchControllerButtonEvent(input_event *event) {
     }
     ControllerButtonSetHeld((u16)event->device, control, pressed);
 }
-#endif
 
 static inline ControllerAxisState *Controller_FindAxisState(s32 device, s16 control) {
     return &g_controllerEventState->axes[device][control];
@@ -303,19 +295,7 @@ void Controller_SendControllerStickEvent(s16 device, s32 stickX, s32 stickY) {
     Controller_DispatchControllerEvent(&m);
 }
 
-#if defined(VERSION_US)
-const unsigned int g_controllerButtonDispatchTableUs[13] = {
-    0x40000000, 0x00299F18, 0x00299F9C, 0x0029A020, 0x0029A0A4, 0x0029A134, 0x0029A134, 0x0029A134,
-    0x00299E38, 0x00299EA8, 0x00400000, 0x00020004, 0x00000004,
-};
-#endif
 
-#if defined(VERSION_EU)
-const unsigned int g_controllerButtonDispatchTableEu[13] = {
-    0x14C00009, 0x0029A0F8, 0x0029A17C, 0x0029A200, 0x0029A284, 0x0029A314, 0x0029A314, 0x0029A314,
-    0x0029A018, 0x0029A088, 0x00C81804, 0x00A91006, 0x00624025,
-};
-#endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
 /* class: switch jump table (9 entries: 5 monotonic cases + 3 shared default + 2 early cases)

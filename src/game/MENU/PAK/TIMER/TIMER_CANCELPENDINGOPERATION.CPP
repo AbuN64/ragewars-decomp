@@ -136,17 +136,13 @@ void Timer_ClearTimerFlag(void) {
 }
 
 #if defined(VERSION_US)
-const unsigned int k_TimerCancelpendingoperationEncodedWords[17] = {
-    0x00000000, 0x0040A988, 0x0040A988, 0x0040A9B8, 0x0040A9A8, 0x0040A988, 0x0040A998, 0x0040A988,
-    0x0040A988, 0x0040A988, 0x0040A988, 0x0040A988, 0x0040A988, 0x0040A988, 0x0040A988, 0x0040A9C8,
+const unsigned int k_TimerCancelpendingoperationEncodedWords[1] = {
     0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU)
-const unsigned int k_TimerCancelpendingoperationEncodedWordsBlock1[17] = {
-    0x00000000, 0x0040ACC8, 0x0040ACC8, 0x0040AD28, 0x0040AD08, 0x0040ACC8, 0x0040ACE8, 0x0040ACC8,
-    0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040AD48,
+const unsigned int k_TimerCancelpendingoperationEncodedWordsBlock1[1] = {
     0x00000000,
 };
 #endif

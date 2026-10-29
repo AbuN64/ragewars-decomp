@@ -20,17 +20,17 @@
 #include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
 
 /* 8020402C.CPP */
-#if defined(VERSION_EU_X) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", Action_UpdateBreakableProximityEuropeanExtended);
+#if defined(VERSION_EU_X)
+#define Action_UpdateBreakableProximity Action_UpdateBreakableProximityEuropeanExtended
+#elif defined(VERSION_EU)
+#define Action_UpdateBreakableProximity Action_UpdateBreakableProximityEuropean
 #endif
-
-#if defined(VERSION_EU) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", Action_UpdateBreakableProximityEuropean);
-#endif
-
-#if defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_US)
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern s32 g_breakableNotificationText[];
+#else
 extern s32 g_breakableNotificationText;
+#endif
 extern u8 *Playerai_FindTransientPlayer(u8 *);
 extern void Playerai_UpdateTeamScore(void *, void *, s32);
 extern void Camera_PostScreenMessage(u8 *, void *, s32);
@@ -47,6 +47,7 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
     u8 *record;
     u8 *node;
     LvDelta d;
+    u8 *settings, *status, *list;
     f32 distance;
     u32 t1;
     switch (kind) {
@@ -105,11 +106,25 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
                 SoundElement_PlayFlatSound(0x2EA);
                 break;
             }
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+            list = (u8 *)&g_transientPlayerList;
+            node = *(u8 **)list;
+            if (node != 0) {
+                status = list + 0x28;
+                settings = list + 0x1268;
+                for (; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
+                    if (LV_FIELD(node, void *, 0x5DC) != 0) {
+                        Camera_PostScreenMessage(status, LV_FIELD(node, void *, 0x5DC), g_breakableNotificationText[LV_FIELD(settings, u8, 0x581)]);
+                    }
+                }
+            }
+#else
             for (node = *(u8 **)&g_transientPlayerList; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
                 if (LV_FIELD(node, void *, 0x5DC) != 0) {
                     Camera_PostScreenMessage((u8 *)&g_frontendScreenStatus, LV_FIELD(node, void *, 0x5DC), g_breakableNotificationText);
                 }
             }
+#endif
         } else {
             return;
         }
@@ -128,7 +143,6 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
         }
     }
 }
-#endif
 
 typedef struct SoundParent { char pad0[0x5DC]; void *emitter; } SoundParent;
 typedef struct SoundActor {

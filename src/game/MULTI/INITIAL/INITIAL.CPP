@@ -286,7 +286,6 @@ s32 Initial_OpenDialog44FFEC(void *first, void *second, void *third) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -306,7 +305,4 @@ void Initial_ResetPlayerGameOverTimer(HolderMultiResetPlayerGameOverTimer *holde
     g_gameSettings.counters.m_GameOverTimer = 120.0f;
     holder->owner->flags &= 0xFBFFFFFF;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Initial_ResetPlayerGameOverTimer);
-#endif
 #endif

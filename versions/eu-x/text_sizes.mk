@@ -1005,6 +1005,7 @@ build/eu-x/src/game/FRONTEND/WIDGET/WIDGET_DRAWTEXTWIDGET.CPP.o: FSPLIT := fspli
 build/eu-x/src/game/FX/FX_UPDATEANIMATORSCRIPT.CPP.o: FSPLIT := fsplit
 build/eu-x/src/game/MENU/ITEMS/BOUND/BOUND.CPP.o: FSPLIT := fsplit
 build/eu-x/src/game/MENU/PAK/MENU/pak_menu_entries.CPP.o: FSPLIT := fsplit
+build/eu-x/src/game/MULTI/INITIAL/INITIAL.CPP.o: FSPLIT := fsplit
 build/eu-x/src/game/ONSCRN/ONSCRN.CPP.o: FSPLIT := fsplit
 build/eu-x/src/game/UI/SMOS/SM_SMNGR/SM_SMNGR.CPP.o: FSPLIT := fsplit
 build/eu-x/src/game/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_HANDLENEXTPANELSELECTION.CPP.o: FSPLIT := fsplit

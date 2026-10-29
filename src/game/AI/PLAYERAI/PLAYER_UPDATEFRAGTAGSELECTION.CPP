@@ -1106,9 +1106,8 @@ extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *),
    active language, otherwise it rebuilds the ring matrix at 0x1600 from the vectors at 0x1458/0x1470/0x1200 first. */
 void Playerai_ToggleForceMarkerEuropean(u8 *player, s32 flag) {
     u8 mtx[0x40];
-    f32 vec[3];
+    CVector3 vec;
     void *ui;
-    char *text;
 
     if (EUF(player, s32, 0x147C) == 0) {
         return;
@@ -1120,7 +1119,7 @@ void Playerai_ToggleForceMarkerEuropean(u8 *player, s32 flag) {
         if (ui == 0) {
             return;
         }
-        text = g_forceMarkerRemovedTextEuropean[((u8 *)&g_frontendScreenStatus)[0x17C1]];
+        Camera_PostScreenMessage(&g_frontendScreenStatus, ui, (char *)g_forceMarkerRemovedTextEuropean[g_frontendScreenStatus.settings.language]);
     } else {
         EUF(player, s32, 0x1200) = EUF(player, s32, 0x1458);
         EUF(player, s32, 0x1204) = EUF(player, s32, 0x145C);
@@ -1128,9 +1127,9 @@ void Playerai_ToggleForceMarkerEuropean(u8 *player, s32 flag) {
         EUF(player, s32, 0x120C) = flag;
         EUF(player, f32, 0x11FC) = 150.0f;
         BuildDirectionMatrix(mtx, player + 0x1470);
-        Graphu64_ScaleVector((void *)vec, (void *)(player + 0x1470), 5.12f);
-        Graphu64_AddVec3((CVector3 *)vec, (CVector3 *)vec, (CVector3 *)(player + 0x1200));
-        TranslateMatrix(mtx, vec[0], vec[1], vec[2]);
+        Graphu64_ScaleVector(&vec, (CVector3 *)(player + 0x1470), 5.12f);
+        Graphu64_AddVec3(&vec, &vec, (CVector3 *)(player + 0x1200));
+        TranslateMatrix(mtx, vec.x, vec.y, vec.z);
         SwapMatrixUpForward(mtx);
         Graphu64_ConvertMatrixToFixed(mtx, player + 0x1600);
         SoundElement_PlayFlatSound(0x578);
@@ -1138,9 +1137,12 @@ void Playerai_ToggleForceMarkerEuropean(u8 *player, s32 flag) {
         if (ui == 0) {
             return;
         }
-        text = flag ? g_forceMarkerAttractTextEuropean[((u8 *)&g_frontendScreenStatus)[0x17C1]] : g_forceMarkerRepulseTextEuropean[((u8 *)&g_frontendScreenStatus)[0x17C1]];
+        if (flag) {
+            Camera_PostScreenMessage(&g_frontendScreenStatus, ui, (char *)g_forceMarkerAttractTextEuropean[g_frontendScreenStatus.settings.language]);
+        } else {
+            Camera_PostScreenMessage(&g_frontendScreenStatus, ui, (char *)g_forceMarkerRepulseTextEuropean[g_frontendScreenStatus.settings.language]);
+        }
     }
-    Camera_PostScreenMessage(&g_frontendScreenStatus, ui, text);
 }
 #else
 INCLUDE_ASM("span_1000", Playerai_ToggleForceMarkerEuropean);
