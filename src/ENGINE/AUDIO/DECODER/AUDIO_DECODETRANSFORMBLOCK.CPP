@@ -6,7 +6,7 @@
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../../../include/AUDIO/audio_decodetransformblock.H"
+#include "AUDIO/audio_decodetransformblock.H"
 
 /* Builds the decoder's trigonometric tables: for 128 steps it stores the sine and cosine of
    (i * g_audioTransformCoefficientStep + g_audioTransformCoefficientOffset) * g_audioTransformPrimaryScale in g_audioTransformSines and g_audioTransformCosines and clears g_audioTransformZeros,

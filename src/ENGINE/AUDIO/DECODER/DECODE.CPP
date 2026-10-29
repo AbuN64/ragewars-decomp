@@ -2,7 +2,7 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
-#include "../../../../include/AUDIO/decode.H"
+#include "AUDIO/decode.H"
 
 
 static inline void Audio_SignExtend(u16 *value, u16 width, s16 signExtend) {

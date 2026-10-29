@@ -5,7 +5,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "AUDIO/AUDIO_LOADMUSICSEQUENCE.H"
 #include "TYPES.H"
-#include "../../../../include/OS/AUDIO_STOPMUSIC.H"
+#include "OS/AUDIO_STOPMUSIC.H"
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECAT18V3.H"
