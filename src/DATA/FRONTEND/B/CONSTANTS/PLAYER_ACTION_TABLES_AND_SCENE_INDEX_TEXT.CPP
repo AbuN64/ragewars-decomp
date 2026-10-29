@@ -208,7 +208,7 @@ u32 g_playerActionStateTableWordsUs[593] = {
 
 /* SceneEffectTuningEu.CPP */
 #if defined(VERSION_EU)
-unsigned int g_sceneEffectTuningEu[4] = {
-    0x3DB851EC, 0x3D4CCCCD, 0x3F000000, 0x42800000,
+float g_sceneEffectTuningEu[4] = {
+    0.09f, 0.05f, 0.5f, 64.0f,
 };
 #endif

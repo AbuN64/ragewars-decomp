@@ -15,7 +15,7 @@ unsigned int g_CreatemesgqueueEncodedWords[3] = {
 
 /* g_CreatemesgqueueEncodedWordsBlock1_Createmesgqueue.CPP */
 #if defined(VERSION_EU_X)
-unsigned int g_CreatemesgqueueEncodedWordsBlock1[3] = {
-    0x3ECCCCCD, 0x3F800000, 0x42960000,
+float g_CreatemesgqueueEncodedWordsBlock1[3] = {
+    0.4f, 1.0f, 75.0f,
 };
 #endif

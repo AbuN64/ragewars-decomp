@@ -6,8 +6,9 @@ const float g_pointCentroidUnitScale = 1.0f;
 
 
 #if defined(VERSION_DE)
-unsigned int k_NavComputescaledpointcentroidEncodedWords[1] = {
-    0x0020DF30,
+extern char addrLow_Nav_RefineBallisticAim[];
+void *k_NavComputescaledpointcentroidEncodedWords[1] = {
+    (void *)(addrLow_Nav_RefineBallisticAim + 336),
 };
 #endif
 

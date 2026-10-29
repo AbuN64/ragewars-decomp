@@ -9,10 +9,14 @@ unsigned int k_MenuCreatesixchoicemenuZeroWords[1] = {
 /* 800E4454.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
+extern char g_Menu_DispatchExtraOptionsEventAddress[];
+extern char g_Menu_DispatchSixChoiceEventAddress[];
 unsigned int D_src_3fb7e4b3[19] = {
-    0x00000E08, 0x0000001B, 0x00421BEC, 0x00000E06, 0x0000001B, 0x00421AF0, 0x00000E03, 0x0000001B,
-    0x00421BBC, 0x00000002, 0x0000001B, 0x00421D94, 0x00000001, 0x0000001B, 0x00421CE8, 0x00000000,
-    0x00000000, 0x00000000, 0x004221F0,
+    0xe08, 27, (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 404), 0xe06,
+    27, (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 152), 0xe03, 27,
+    (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 356), 2, 27, (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 828),
+    1, 27, (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 656), 0,
+    0, 0, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1056),
 };
 #endif
 #if defined(VERSION_EU)
@@ -23,10 +27,13 @@ unsigned int D_src_3fb7e4b3[19] = {
 };
 #endif
 #if defined(VERSION_EU_X)
+extern char g_Menu_DispatchExtraOptionsEventAddress[];
 unsigned int D_src_3fb7e4b3[19] = {
-    0x00000E08, 0x0000001B, 0x004220EC, 0x00000E06, 0x0000001B, 0x00421FF0, 0x00000E03, 0x0000001B,
-    0x004220BC, 0x00000002, 0x0000001B, 0x00422294, 0x00000001, 0x0000001B, 0x004221E8, 0x00000000,
-    0x00000000, 0x00000000, 0x00000007,
+    0xe08, 27, (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 404), 0xe06,
+    27, (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 152), 0xe03, 27,
+    (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 356), 2, 27, (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 828),
+    1, 27, (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 656), 0,
+    0, 0, 7,
 };
 #endif
 #endif

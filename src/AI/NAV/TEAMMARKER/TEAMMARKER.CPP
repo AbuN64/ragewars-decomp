@@ -57,13 +57,15 @@ unsigned int k_TeammarkerEncodedWords[1] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_TeammarkerEncodedWordsBlock2[1] = {
-    0x0022EC68,
+extern char g_Playerai_ApplyLinkedProjectileStatusAddressEuX[];
+void *k_TeammarkerEncodedWordsBlock2[1] = {
+    (void *)(g_Playerai_ApplyLinkedProjectileStatusAddressEuX + 2276),
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_TeammarkerEncodedWordsBlock1[1] = {
-    0x0020ED00,
+extern char addrLow_Nav_RebuildRequestedGoalRoute[];
+void *k_TeammarkerEncodedWordsBlock1[1] = {
+    (void *)(addrLow_Nav_RebuildRequestedGoalRoute + 544),
 };
 #endif

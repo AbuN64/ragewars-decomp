@@ -2,8 +2,9 @@
 
 /* g_playerMovementTuningProfileThreeUsRev1_OvlgameInitializeplayerpoolData.CPP */
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
-unsigned int g_playerMovementTuningProfileThreeUsRev1[8] = {
-    0x40F5C28F, 0x41B851EB, 0x40B851EB, 0x40F5C28F, 0x41D70A3E, 0x40B851EB, 0x4123D70A, 0x3F449BA6,
+float g_playerMovementTuningProfileThreeUsRev1[8] = {
+    7.68f, 23.039999f, 5.7599998f, 7.68f,
+    26.880001f, 5.7599998f, 10.24f, 0.768f,
 };
 #endif
 
@@ -25,8 +26,9 @@ unsigned int k_OvlgameInitializeplayerpoolEncodedWordsBlock1[1] = {
 
 /* g_playerMovementTuningProfileFourUsRev1_OvlgameInitializeplayerpoolData.CPP */
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
-unsigned int g_playerMovementTuningProfileFourUsRev1[8] = {
-    0x4003126F, 0x4175C28F, 0x3F83126F, 0x41A3D70A, 0x3FC49BA6, 0x41A3D70A, 0x43199999, 0x42CCCCCC,
+float g_playerMovementTuningProfileFourUsRev1[8] = {
+    2.048f, 15.36f, 1.024f, 20.48f,
+    1.536f, 20.48f, 153.59999f, 102.399994f,
 };
 #endif
 
@@ -42,23 +44,26 @@ unsigned int k_OvlgameInitializeplayerpoolEncodedWordsBlock2[1] = {
 
 /* g_playerViewTuningProfileThreeUsRev1_OvlgameInitializeplayerpoolData.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_playerViewTuningProfileThreeUsRev1[6] = {
-    0x3ECCCCCD, 0x3F000000, 0x3F800000, 0x3E800000, 0xBFC90FDC, 0x3FC90FDC,
+float g_playerViewTuningProfileThreeUsRev1[6] = {
+    0.4f, 0.5f, 1.0f, 0.25f,
+    -1.5707965f, 1.5707965f,
 };
 #endif
 
 /* g_playerViewTuningProfileFourUsRev1_OvlgameInitializeplayerpoolData.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_playerViewTuningProfileFourUsRev1[6] = {
-    0x3E4CCCCD, 0x3E800000, 0x3F000000, 0x3E000000, 0xBFC90FDC, 0x3FC90FDC,
+float g_playerViewTuningProfileFourUsRev1[6] = {
+    0.2f, 0.25f, 0.5f, 0.125f,
+    -1.5707965f, 1.5707965f,
 };
 #endif
 
 /* g_playerViewTuningProfileTailUsRev1_OvlgameInitializeplayerpoolData.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_playerViewTuningProfileTailUsRev1[9] = {
-    0x3F83126F, 0x40F5C28F, 0x3F03126F, 0x4123D70A, 0x3F449BA6, 0x4123D70A, 0x42999999, 0x424CCCCC,
-    0x00000000,
+float g_playerViewTuningProfileTailUsRev1[9] = {
+    1.024f, 7.68f, 0.512f, 10.24f,
+    0.768f, 10.24f, 76.799995f, 51.199997f,
+    0.0f,
 };
 #endif
 
@@ -75,8 +80,9 @@ unsigned int g_playerMovementProfileFiveStateFlagUsRev1[2] = {
 /* g_playerMovementProfileThreeStateFlagUsRev1_OvlgameInitializeplayerpoolData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0 */
-unsigned int g_playerMovementProfileThreeStateFlagUsRev1[1] = {
-    0x801044F8,
+extern char g_secondaryCollisionContext[];
+void *g_playerMovementProfileThreeStateFlagUsRev1[1] = {
+    (void *)(g_secondaryCollisionContext + 192),
 };
 #endif
 

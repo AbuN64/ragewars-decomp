@@ -10,11 +10,15 @@ unsigned int k_MenuDrawoptionsimagetransitionZeroWords[1] = {
 /* 800E44A4.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
+extern char g_Menu_DispatchSixChoiceEventAddress[];
 unsigned int D_src_d9561b8a[27] = {
-    0x00000E06, 0x00000019, 0x00422230, 0x00000E03, 0x00000019, 0x00422278, 0x00000002, 0x00000019,
-    0x0042242C, 0x00000001, 0x00000019, 0x00422414, 0x00000E0A, 0x00000019, 0x004222A8, 0x00000E08,
-    0x00000019, 0x00422340, 0x0000000A, 0x00000019, 0x004223CC, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000E08,
+    0xe06, 25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1120), 0xe03,
+    25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1192), 2, 25,
+    (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1628), 1, 25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1604),
+    0xe0a, 25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1240), 0xe08,
+    25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1392), 10, 25,
+    (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1532), 0, 0, 0,
+    0, 0, 0xe08,
 };
 #endif
 #if defined(VERSION_EU)

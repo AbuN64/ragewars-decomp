@@ -1,10 +1,30 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int k_ResourcesEncodedWordsBlock1[37] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x800CDBA0, 0x800CDBF0, 0x800CDC40,
-    0x800CDC90, 0x800CDCE0, 0x800CDD30, 0x800CDD80, 0x800CDDD0, 0x800CDE20, 0x800CDE70, 0x800CDEC0,
-    0x800CDF10, 0x800CDF60, 0x800CDFB0, 0x801043B8, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+extern char g_actorHandlerRun1_us_rev1[];
+extern char g_actorHandlerRun3_us_rev1[];
+extern char g_actorHandlerRun6_us_rev1[];
+extern char g_actorHandlerRun8_us_rev1[];
+extern char g_actorHandlerRun11_us_rev1[];
+extern char g_actorHandlerRun14_us_rev1[];
+extern char g_actorHandlerRun17_us_rev1[];
+extern char g_ResourcesEncodedWordsBlock44[];
+extern char g_ResourcesEncodedWordsBlock69[];
+extern char g_ResourcesEncodedWordsBlock67[];
+extern char g_ResourcesEncodedWordsBlock6[];
+extern char g_ResourcesEncodedWordsBlock73[];
+extern char g_ResourcesEncodedWordsBlock15[];
+extern char g_ResourcesEncodedWordsBlock51[];
+extern char g_supportingPlatformCollisionQuery[];
+void *k_ResourcesEncodedWordsBlock1[37] = {
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, g_actorHandlerRun1_us_rev1, g_actorHandlerRun3_us_rev1, g_actorHandlerRun6_us_rev1,
+    g_actorHandlerRun8_us_rev1, g_actorHandlerRun11_us_rev1, g_actorHandlerRun14_us_rev1, g_actorHandlerRun17_us_rev1,
+    g_ResourcesEncodedWordsBlock44, g_ResourcesEncodedWordsBlock69, g_ResourcesEncodedWordsBlock67, g_ResourcesEncodedWordsBlock6,
+    g_ResourcesEncodedWordsBlock73, g_ResourcesEncodedWordsBlock15, g_ResourcesEncodedWordsBlock51, (void *)(g_supportingPlatformCollisionQuery + 128),
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0,
 };
 #endif

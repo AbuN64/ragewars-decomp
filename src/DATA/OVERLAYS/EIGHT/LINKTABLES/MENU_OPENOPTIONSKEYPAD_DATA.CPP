@@ -10,10 +10,16 @@ unsigned int k_MenuOpenoptionskeypadZeroWords[1] = {
 /* 800E4404.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
+extern char Menu_UpdateExtraOptionsMenu_Address[];
+extern char Menu_OpenRuleToggleScreen_Address[];
+extern char Menu_DestroyExtraOptionsMenu_Address[];
+extern char g_Menu_DispatchExtraOptionsEventAddress[];
 unsigned int D_src_16391c30[19] = {
-    0x00000E08, 0x0000001C, 0x00421884, 0x00000E06, 0x0000001C, 0x00420E20, 0x00000E03, 0x0000001C,
-    0x00421854, 0x00000002, 0x0000001C, 0x004219E0, 0x00000001, 0x0000001C, 0x00421928, 0x00000000,
-    0x00000000, 0x00000000, 0x00421BAC,
+    0xe08, 28, (unsigned int)Menu_UpdateExtraOptionsMenu_Address, 0xe06,
+    28, (unsigned int)Menu_OpenRuleToggleScreen_Address, 0xe03, 28,
+    (unsigned int)Menu_DestroyExtraOptionsMenu_Address, 2, 28, (unsigned int)(Menu_UpdateExtraOptionsMenu_Address + 348),
+    1, 28, (unsigned int)(Menu_UpdateExtraOptionsMenu_Address + 164), 0,
+    0, 0, (unsigned int)(g_Menu_DispatchExtraOptionsEventAddress + 340),
 };
 #endif
 #if defined(VERSION_EU)
@@ -24,10 +30,13 @@ unsigned int D_src_16391c30[19] = {
 };
 #endif
 #if defined(VERSION_EU_X)
+extern char g_Selection_DispatchCharacterSelectionEventAddress[];
 unsigned int D_src_16391c30[19] = {
-    0x00000E08, 0x0000001C, 0x00421DCC, 0x00000E06, 0x0000001C, 0x004212D0, 0x00000E03, 0x0000001C,
-    0x00421D9C, 0x00000002, 0x0000001C, 0x00421F00, 0x00000001, 0x0000001C, 0x00421E70, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000,
+    0xe08, 28, (unsigned int)(g_Selection_DispatchCharacterSelectionEventAddress + 2956), 0xe06,
+    28, (unsigned int)(g_Selection_DispatchCharacterSelectionEventAddress + 144), 0xe03, 28,
+    (unsigned int)(g_Selection_DispatchCharacterSelectionEventAddress + 2908), 2, 28, (unsigned int)(g_Selection_DispatchCharacterSelectionEventAddress + 3264),
+    1, 28, (unsigned int)(g_Selection_DispatchCharacterSelectionEventAddress + 3120), 0,
+    0, 0, 0,
 };
 #endif
 #endif

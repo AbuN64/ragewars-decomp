@@ -6,7 +6,8 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: data/unresolved/800E10E4 */
-unsigned int g_overlaysNineConstantsConstantWords[3] = {
-    0x0043C6E4, 0x0043C6D4, 0x0043C704,
+extern char g_Level_GetScreenEventTableAddress[];
+void *g_overlaysNineConstantsConstantWords[3] = {
+    (void *)(g_Level_GetScreenEventTableAddress + 484), (void *)(g_Level_GetScreenEventTableAddress + 468), (void *)(g_Level_GetScreenEventTableAddress + 516),
 };
 #endif

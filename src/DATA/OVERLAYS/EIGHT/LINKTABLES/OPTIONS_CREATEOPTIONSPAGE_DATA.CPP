@@ -56,13 +56,24 @@ unsigned int g_OptionsCreateoptionspageEncodedWords[3] = {
 #endif
 
 #if defined(VERSION_US)
+extern char g_Menu_DispatchOptionsTransitionEventAddress[];
+extern char g_frontend_UpdateOptionsPageExitEntry[];
+extern char g_Frontend_DispatchOptionsPageEventAddress[];
+extern char g_Frontend_DispatchCompactOptionsEventAddress[];
 unsigned int g_optionsCreateOptionsPageEntryTriples[54] = {
-    0x00000E06, 0x00000004, 0x00422510, 0x00000E03, 0x00000004, 0x004233DC, 0x00000002, 0x00000004,
-    0x00423548, 0x00000001, 0x00000004, 0x00423488, 0x00000000, 0x00000000, 0x00000000, 0x00000E08,
-    0x0000000B, 0x004237F8, 0x00000E06, 0x0000000B, 0x0042362C, 0x00000E03, 0x0000000B, 0x004237C0,
-    0x00000002, 0x0000000B, 0x004238F8, 0x00000001, 0x0000000B, 0x0042382C, 0x00000000, 0x00000000,
-    0x00000000, 0x00000E08, 0x00000016, 0x00422E54, 0x00000E0A, 0x00000016, 0x00422C20, 0x00000E06,
-    0x00000016, 0x00422728, 0x00000E03, 0x00000016, 0x004239C0, 0x00000002, 0x00000016, 0x00423B68,
-    0x00000001, 0x00000016, 0x00423A00, 0x00000000, 0x00000000, 0x00000000,
+    0xe06, 4, (unsigned int)(g_Menu_DispatchOptionsTransitionEventAddress + 148), 0xe03,
+    4, (unsigned int)(g_Menu_DispatchOptionsTransitionEventAddress + 3936), 2, 4,
+    (unsigned int)(g_frontend_UpdateOptionsPageExitEntry + 316), 1, 4, (unsigned int)(g_frontend_UpdateOptionsPageExitEntry + 124),
+    0, 0, 0, 0xe08,
+    11, (unsigned int)(g_Frontend_DispatchOptionsPageEventAddress + 604), 0xe06, 11,
+    (unsigned int)(g_Frontend_DispatchOptionsPageEventAddress + 144), 0xe03, 11, (unsigned int)(g_Frontend_DispatchOptionsPageEventAddress + 548),
+    2, 11, (unsigned int)(g_Frontend_DispatchOptionsPageEventAddress + 860), 1,
+    11, (unsigned int)(g_Frontend_DispatchOptionsPageEventAddress + 656), 0, 0,
+    0, 0xe08, 22, (unsigned int)(g_Menu_DispatchOptionsTransitionEventAddress + 2520),
+    0xe0a, 22, (unsigned int)(g_Menu_DispatchOptionsTransitionEventAddress + 1956), 0xe06,
+    22, (unsigned int)(g_Menu_DispatchOptionsTransitionEventAddress + 684), 0xe03, 22,
+    (unsigned int)(g_Frontend_DispatchCompactOptionsEventAddress + 144), 2, 22, (unsigned int)(g_Frontend_DispatchCompactOptionsEventAddress + 568),
+    1, 22, (unsigned int)(g_Frontend_DispatchCompactOptionsEventAddress + 208), 0,
+    0, 0,
 };
 #endif

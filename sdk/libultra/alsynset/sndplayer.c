@@ -46,13 +46,15 @@ unsigned int k_SndplayerEncodedWordsBlock5[3] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_SndplayerEncodedWordsBlock3[3] = {
-    0x0022EC3C, 0x0022EC80, 0x0022EC3C,
+extern char g_Playerai_ApplyLinkedProjectileStatusAddressEu[];
+void *k_SndplayerEncodedWordsBlock3[3] = {
+    (void *)(g_Playerai_ApplyLinkedProjectileStatusAddressEu + 2276), (void *)(g_Playerai_ApplyLinkedProjectileStatusAddressEu + 2344), (void *)(g_Playerai_ApplyLinkedProjectileStatusAddressEu + 2276),
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_SndplayerEncodedWordsBlock2[3] = {
-    0x002B2908, 0x002B2978, 0x002B2A60,
+extern char Seqplayer_ProcessSequenceEvents_Address[];
+void *k_SndplayerEncodedWordsBlock2[3] = {
+    (void *)(Seqplayer_ProcessSequenceEvents_Address + 9140), (void *)(Seqplayer_ProcessSequenceEvents_Address + 9252), (void *)(Seqplayer_ProcessSequenceEvents_Address + 9484),
 };
 #endif

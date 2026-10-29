@@ -80,9 +80,10 @@ unsigned int D_src_567cc0c4[532] = {
 #endif
 
 #if !(defined(VERSION_DE))
-unsigned int g_characterPreviewPositionsUsRev1[11] = {
-    0xC2700000, 0xC2C80000, 0xC2200000, 0xC2700000, 0xC2C80000, 0x41E80000, 0xC2BE0000, 0xC28C0000,
-    0xC1E80000, 0xC2BE0000, 0xC28C0000,
+float g_characterPreviewPositionsUsRev1[11] = {
+    -60.0f, -100.0f, -40.0f, -60.0f,
+    -100.0f, 29.0f, -95.0f, -70.0f,
+    -29.0f, -95.0f, -70.0f,
 };
 #endif
 

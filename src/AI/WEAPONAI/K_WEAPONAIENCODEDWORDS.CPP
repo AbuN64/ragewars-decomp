@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
-unsigned int k_WeaponaiEncodedWords[3] = {
-    0x3F800000, 0x44800000, 0x3A800000,
+float k_WeaponaiEncodedWords[3] = {
+    1.0f, 1024.0f, 0.0009765625f,
 };
 #endif

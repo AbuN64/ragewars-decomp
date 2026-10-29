@@ -3,23 +3,47 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)
+extern char g_Menu_UpdateScrollingChoiceScreenPackedAddress242[];
+extern char g_Player_DispatchAlternatePlayerSettingsEventAddress[];
+extern char g_Menu_WrapScrollingChoiceNodesPackedAddress242[];
+extern char g_Menu_FreeScrollingChoiceScreenPackedAddress242[];
+extern char g_Menu_HandleScrollingChoicePackedAddress242[];
+extern char g_Menu_CancelScrollingChoiceScreenPackedAddress242[];
+extern char g_Menu_UpdateTitleButtonScreenPackedAddress242[];
+extern char g_Menu_CreateTitleButtonScreenPackedAddress242[];
+extern char g_Menu_WrapTitleButtonScreenNodesPackedAddress24[];
+extern char g_Menu_FreeTitleButtonScreenPackedAddress242[];
+extern char g_Menu_HandleTitleButtonChoicePackedAddress242[];
+extern char g_Menu_CancelTitleButtonScreenPackedAddress242[];
 unsigned int D_src_846838ea[42] = {
-    0x00000E08, 0x00000009, 0x00438274, 0x00000E06, 0x00000009, 0x00438140, 0x00000E07, 0x00000009,
-    0x00438244, 0x00000E03, 0x00000009, 0x00438214, 0x00000001, 0x00000009, 0x004383E0, 0x00000002,
-    0x00000009, 0x004383A4, 0x00000000, 0x00000000, 0x00000000, 0x00000E08, 0x0000001E, 0x00438640,
-    0x00000E06, 0x0000001E, 0x00438548, 0x00000E07, 0x0000001E, 0x00438618, 0x00000E03, 0x0000001E,
-    0x004385E8, 0x00000001, 0x0000001E, 0x00438760, 0x00000002, 0x0000001E, 0x00438724, 0x00000000,
-    0x00000000, 0x00000000,
+    0xe08, 9, (unsigned int)g_Menu_UpdateScrollingChoiceScreenPackedAddress242, 0xe06,
+    9, (unsigned int)(g_Player_DispatchAlternatePlayerSettingsEventAddress + 148), 0xe07, 9,
+    (unsigned int)g_Menu_WrapScrollingChoiceNodesPackedAddress242, 0xe03, 9, (unsigned int)g_Menu_FreeScrollingChoiceScreenPackedAddress242,
+    1, 9, (unsigned int)g_Menu_HandleScrollingChoicePackedAddress242, 2,
+    9, (unsigned int)g_Menu_CancelScrollingChoiceScreenPackedAddress242, 0, 0,
+    0, 0xe08, 30, (unsigned int)g_Menu_UpdateTitleButtonScreenPackedAddress242,
+    0xe06, 30, (unsigned int)g_Menu_CreateTitleButtonScreenPackedAddress242, 0xe07,
+    30, (unsigned int)g_Menu_WrapTitleButtonScreenNodesPackedAddress24, 0xe03, 30,
+    (unsigned int)g_Menu_FreeTitleButtonScreenPackedAddress242, 1, 30, (unsigned int)g_Menu_HandleTitleButtonChoicePackedAddress242,
+    2, 30, (unsigned int)g_Menu_CancelTitleButtonScreenPackedAddress242, 0,
+    0, 0,
 };
 #endif
 #if defined(VERSION_EU_X)
+extern char g_Player_DispatchAlternatePlayerSettingsEventAddress[];
+extern char g_Menu_DispatchScrollingChoiceEventAddress[];
 unsigned int D_src_846838ea[42] = {
-    0x00000E08, 0x00000009, 0x004383A4, 0x00000E06, 0x00000009, 0x00438270, 0x00000E07, 0x00000009,
-    0x00438374, 0x00000E03, 0x00000009, 0x00438344, 0x00000001, 0x00000009, 0x00438510, 0x00000002,
-    0x00000009, 0x004384D4, 0x00000000, 0x00000000, 0x00000000, 0x00000E08, 0x0000001E, 0x00438770,
-    0x00000E06, 0x0000001E, 0x00438678, 0x00000E07, 0x0000001E, 0x00438748, 0x00000E03, 0x0000001E,
-    0x00438718, 0x00000001, 0x0000001E, 0x00438890, 0x00000002, 0x0000001E, 0x00438854, 0x00000000,
-    0x00000000, 0x00000000,
+    0xe08, 9, (unsigned int)(g_Player_DispatchAlternatePlayerSettingsEventAddress + 456), 0xe06,
+    9, (unsigned int)(g_Player_DispatchAlternatePlayerSettingsEventAddress + 148), 0xe07, 9,
+    (unsigned int)(g_Player_DispatchAlternatePlayerSettingsEventAddress + 408), 0xe03, 9, (unsigned int)(g_Player_DispatchAlternatePlayerSettingsEventAddress + 360),
+    1, 9, (unsigned int)(g_Player_DispatchAlternatePlayerSettingsEventAddress + 820), 2,
+    9, (unsigned int)(g_Player_DispatchAlternatePlayerSettingsEventAddress + 760), 0, 0,
+    0, 0xe08, 30, (unsigned int)(g_Menu_DispatchScrollingChoiceEventAddress + 392),
+    0xe06, 30, (unsigned int)(g_Menu_DispatchScrollingChoiceEventAddress + 144), 0xe07,
+    30, (unsigned int)(g_Menu_DispatchScrollingChoiceEventAddress + 352), 0xe03, 30,
+    (unsigned int)(g_Menu_DispatchScrollingChoiceEventAddress + 304), 1, 30, (unsigned int)(g_Menu_DispatchScrollingChoiceEventAddress + 680),
+    2, 30, (unsigned int)(g_Menu_DispatchScrollingChoiceEventAddress + 620), 0,
+    0, 0,
 };
 #endif
 #endif

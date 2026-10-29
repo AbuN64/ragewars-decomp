@@ -2,8 +2,9 @@
 #include "../include/libgultra.h"
 
 #if defined(VERSION_DE) || defined(VERSION_EU)
-const unsigned int k_LongarithDataEncodedWordsBlock2[6] = {
-    0x41F00000, 0x00000000, 0x40F00000, 0x00000000, 0x41F00000, 0x00000000,
+const float k_LongarithDataEncodedWordsBlock2[6] = {
+    30.0f, 0.0f, 7.5f, 0.0f,
+    30.0f, 0.0f,
 };
 #endif
 

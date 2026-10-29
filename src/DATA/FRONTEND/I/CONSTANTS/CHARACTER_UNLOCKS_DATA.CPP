@@ -19,7 +19,7 @@ unsigned int g_characterPreviewEntryStateUsRev1[1] = {
 /* CHARACTER_PREVIEW_ENTRY_SCALES_US_REV1.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_scales_00_us_rev1.c */
-unsigned int g_characterPreviewEntryScalesUsRev1[4] = {
-    0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29,
+float g_characterPreviewEntryScalesUsRev1[4] = {
+    0.14f, 0.14f, 0.14f, 0.14f,
 };
 #endif

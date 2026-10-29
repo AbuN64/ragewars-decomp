@@ -5,7 +5,8 @@ unsigned int g_CharacterPreviewScaleDistance16UsRev1EncodedWords[1] = {
     0x00000024,
 };
 
-unsigned int g_characterPreviewScaleDistance16UsRev1[8] = {
-    0x3DB851EC, 0x3DB851EC, 0x3DB851EC, 0x3DB851EC, 0x432A0000, 0x43520000, 0x432A0000, 0x43520000,
+float g_characterPreviewScaleDistance16UsRev1[8] = {
+    0.09f, 0.09f, 0.09f, 0.09f,
+    170.0f, 210.0f, 170.0f, 210.0f,
 };
 #endif

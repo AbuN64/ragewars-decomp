@@ -14,8 +14,8 @@ const float k_DeviceUpdatetriggeredmotionOneWords[1] = {
 };
 
 #if defined(VERSION_EU_X)
-unsigned int k_DeviceUpdatetriggeredmotionEncodedWordsBlock1[3] = {
-    0x42000000, 0x3F000000, 0x42000000,
+float k_DeviceUpdatetriggeredmotionEncodedWordsBlock1[3] = {
+    32.0f, 0.5f, 32.0f,
 };
 #endif
 
@@ -28,7 +28,7 @@ unsigned int k_DeviceUpdatetriggeredmotionEncodedWords[3] = {
 /* 800C6C94.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C6C94 */
-unsigned int g_deviceUpdatetriggeredmotionFloatConstantWordsBlock1[3] = {
-    0x42000000, 0x3F000000, 0x42000000,
+float g_deviceUpdatetriggeredmotionFloatConstantWordsBlock1[3] = {
+    32.0f, 0.5f, 32.0f,
 };
 #endif

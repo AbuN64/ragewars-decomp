@@ -24,7 +24,8 @@ unsigned int k_SeqData1EncodedWordsBlock3[3] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_SeqData1EncodedWordsBlock2[3] = {
-    0x0022EC3C, 0x0022EC3C, 0x0022EC3C,
+extern char g_Playerai_ApplyLinkedProjectileStatusAddressEu[];
+void *k_SeqData1EncodedWordsBlock2[3] = {
+    (void *)(g_Playerai_ApplyLinkedProjectileStatusAddressEu + 2276), (void *)(g_Playerai_ApplyLinkedProjectileStatusAddressEu + 2276), (void *)(g_Playerai_ApplyLinkedProjectileStatusAddressEu + 2276),
 };
 #endif

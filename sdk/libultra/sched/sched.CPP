@@ -92,7 +92,7 @@ char s_SchedLILLYJIMText[12] =
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_SchedEncodedWordsBlock1[3] = {
-    0x4123D70A, 0x3F800000, 0x42A3D70A,
+float k_SchedEncodedWordsBlock1[3] = {
+    10.24f, 1.0f, 81.92f,
 };
 #endif

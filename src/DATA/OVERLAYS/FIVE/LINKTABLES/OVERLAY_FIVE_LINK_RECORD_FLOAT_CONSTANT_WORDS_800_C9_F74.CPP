@@ -6,7 +6,7 @@ const unsigned int k_overlayFiveLinkRecordFloatConstantWordsBlock2[1] = {
 };
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-unsigned int k_OverlayFiveLinkRecordFloatConstantWordsC9F74EncodedWords[3] = {
-    0x42940000, 0x42940000, 0xC2EC0000,
+float k_OverlayFiveLinkRecordFloatConstantWordsC9F74EncodedWords[3] = {
+    74.0f, 74.0f, -118.0f,
 };
 #endif

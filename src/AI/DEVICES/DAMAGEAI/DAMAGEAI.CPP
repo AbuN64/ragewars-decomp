@@ -205,8 +205,8 @@ void DamageAI_ApplyHitGerman(Damageable *obj, Health *health, Hit *hit)
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_DamageaiEncodedWords[2] = {
-    0x00205940, 0x00205940,
+void *k_DamageaiEncodedWords[2] = {
+    (void *)((char *)&g_deviceDrawRomEntry + 792), (void *)((char *)&g_deviceDrawRomEntry + 792),
 };
 #endif
 

@@ -7,8 +7,8 @@ const unsigned int g_musicPreviewTwoColumnFormatWords[1] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_PakFormatmusicpreviewEncodedWords[3] = {
-    0x40C00000, 0x3B66C2B4, 0x42800000,
+float k_PakFormatmusicpreviewEncodedWords[3] = {
+    6.0f, 0.0035211267f, 64.0f,
 };
 #endif
 

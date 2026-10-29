@@ -114,20 +114,20 @@ void Nav_SetPickupGoalWeights(void *arg) {
 /* 800C6E84_11.CPP */
 #if !(defined(VERSION_US_REV1))
 const float g_Nav_SetLinkedActorNodeCostsConstantWords_de_eu_eu_x_us[3] = {
-    5.12e+04f, 10.24f, -614.39996f,
+    51200.0f, 10.24f, -614.39996f,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_PickupgoalEncodedWords[2] = {
-    0x002301B0, 0x00230104,
+void *k_PickupgoalEncodedWords[2] = {
+    (void *)((char *)&Weapon_FireStateEnterCallbackEntry + 1120), (void *)((char *)&Weapon_FireStateEnterCallbackEntry + 948),
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/Nav_SetLinkedActorNodeCostsConstantWords_us_rev1.c */
 const float g_Nav_SetLinkedActorNodeCostsConstantWords_us_rev1[1] = {
-    5.12e+04f,
+    51200.0f,
 };
 
 /* ROM-grounded data: src/Nav_AccumulateNodeTickCostsConstantWords.c */

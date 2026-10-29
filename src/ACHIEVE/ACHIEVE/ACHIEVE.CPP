@@ -392,7 +392,8 @@ unsigned int k_AchieveEncodedWordsBlock3[1] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_AchieveEncodedWordsBlock2[1] = {
-    0x00426AB0,
+extern char g_Frontend_DispatchPlayModeEventAddress[];
+void *k_AchieveEncodedWordsBlock2[1] = {
+    (void *)(g_Frontend_DispatchPlayModeEventAddress + 10088),
 };
 #endif

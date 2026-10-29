@@ -15,7 +15,7 @@ unsigned int g_NavCheckcloseattackrouteEncodedWords[2] = {
 
 /* 80208000_28.CPP */
 #if defined(VERSION_EU_X)
-unsigned int k_NavCheckcloseattackrouteEncodedWordsBlock2[3] = {
-    0x3F000000, 0x3F83126F, 0xBF83126F,
+float k_NavCheckcloseattackrouteEncodedWordsBlock2[3] = {
+    0.5f, 1.024f, -1.024f,
 };
 #endif

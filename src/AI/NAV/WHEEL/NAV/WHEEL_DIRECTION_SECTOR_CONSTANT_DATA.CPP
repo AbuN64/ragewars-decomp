@@ -11,8 +11,9 @@ char s_WheelDirectionSectorConstantReSetRText[8] =
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_WheelDirectionSectorConstantEncodedWordsBlock1[2] = {
-    0x00232790, 0x00232788,
+extern char g_weaponai_UpdateHeldFireEntry[];
+void *k_WheelDirectionSectorConstantEncodedWordsBlock1[2] = {
+    (void *)(g_weaponai_UpdateHeldFireEntry + 752), (void *)(g_weaponai_UpdateHeldFireEntry + 744),
 };
 #endif
 

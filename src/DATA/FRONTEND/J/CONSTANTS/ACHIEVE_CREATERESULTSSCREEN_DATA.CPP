@@ -10,11 +10,15 @@ unsigned int g_AchieveCreateresultsscreenWords1[1] = {
 /* g_AchieveCreateresultsscreenPointerWords1_AchieveCreateresultsscreenData.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
+extern char g_Menu_DispatchTitleButtonEventAddress[];
 unsigned int D_src_e3e7c440[27] = {
-    0x00000E08, 0x00000012, 0x00438C84, 0x00000E07, 0x00000012, 0x00438AD4, 0x00000E06, 0x00000012,
-    0x00437A50, 0x00000E03, 0x00000012, 0x00438AA4, 0x00000002, 0x00000012, 0x00438E5C, 0x00000001,
-    0x00000012, 0x00438D94, 0x00000E0A, 0x00000012, 0x00438ADC, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000E07, 0x00000006,
+    0xe08, 18, (unsigned int)(g_Menu_DispatchTitleButtonEventAddress + 4812), 0xe07,
+    18, (unsigned int)(g_Menu_DispatchTitleButtonEventAddress + 4380), 0xe06, 18,
+    (unsigned int)(g_Menu_DispatchTitleButtonEventAddress + 152), 0xe03, 18, (unsigned int)(g_Menu_DispatchTitleButtonEventAddress + 4332),
+    2, 18, (unsigned int)(g_Menu_DispatchTitleButtonEventAddress + 5284), 1,
+    18, (unsigned int)(g_Menu_DispatchTitleButtonEventAddress + 5084), 0xe0a, 18,
+    (unsigned int)(g_Menu_DispatchTitleButtonEventAddress + 4388), 0, 0, 0,
+    0, 0xe07, 6,
 };
 #endif
 #if defined(VERSION_EU)

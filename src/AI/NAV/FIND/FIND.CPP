@@ -23,7 +23,7 @@ unsigned int k_FindEncodedWords[3] = {
 
 /* 800C6E94.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_FindEncodedWords[3] = {
-    0x3F83126F, 0xBF83126F, 0x40000000,
+float g_FindEncodedWords[3] = {
+    1.024f, -1.024f, 2.0f,
 };
 #endif

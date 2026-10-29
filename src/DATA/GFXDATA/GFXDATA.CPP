@@ -9,8 +9,9 @@ const unsigned int k_GfxdataEncodedWordsBlock1[1] = {
 
 /* 80414480_5.CPP */
 #if defined(VERSION_EU_X)
-const unsigned int k_GfxdataEncodedWordsBlock2[1] = {
-    0x0043F8DC,
+extern char g_Initial_ToggleMenuRowOptionPackedAddress24[];
+void *const k_GfxdataEncodedWordsBlock2[1] = {
+    (void *)(g_Initial_ToggleMenuRowOptionPackedAddress24 + 208),
 };
 #endif
 

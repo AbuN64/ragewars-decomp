@@ -2,100 +2,165 @@
 
 /* 800D7058.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int k_Ovltab8EncodedWords[6] = {
-    0x800D7034, 0x800D3668, 0x800D3678, 0x800D367C, 0x800D3680, 0x800D3688,
+extern char g_SkyPostscaledscreenmessageEncodedBytes[];
+extern char k_ConstantsEncodedWordsBlock22[];
+void *k_Ovltab8EncodedWords[6] = {
+    g_SkyPostscaledscreenmessageEncodedBytes, k_ConstantsEncodedWordsBlock22, (void *)(k_ConstantsEncodedWordsBlock22 + 16), (void *)(k_ConstantsEncodedWordsBlock22 + 20),
+    (void *)(k_ConstantsEncodedWordsBlock22 + 24), (void *)(k_ConstantsEncodedWordsBlock22 + 32),
 };
 #endif
 
 /* 800D7070.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_pickupLabelDirectory[103] = {
-    0x800D3690, 0x800D369C, 0x800D36A8, 0x800D36B4, 0x800D36C0, 0x800D36CC, 0x800D36D8, 0x800D36E8,
-    0x800D36F8, 0x800D3708, 0x800D3718, 0x800D3728, 0x800D3734, 0x800D3748, 0x800D375C, 0x800D376C,
-    0x800D377C, 0x800D378C, 0x800D3798, 0x800D37A8, 0x800D37BC, 0x800D37D0, 0x800D37E4, 0x800D37FC,
-    0x800D3810, 0x800D3824, 0x800D3834, 0x800D3848, 0x800D385C, 0x800D386C, 0x800D3880, 0x800D3898,
-    0x800D38A4, 0x800D38B0, 0x800D38BC, 0x800D38C8, 0x800D38D8, 0x800D38E0, 0x800D38E8, 0x800D38F8,
-    0x800D3900, 0x800D3910, 0x800D391C, 0x800D3928, 0x800D3934, 0x800D3940, 0x800D394C, 0x800D3958,
-    0x800D3964, 0x800D3974, 0x800D3984, 0x800D3990, 0x800D399C, 0x800D39AC, 0x800D39BC, 0x800D39CC,
-    0x800D39DC, 0x800D3C5C, 0x800D3C6C, 0x800D3C7C, 0x800D3C8C, 0x800D3C98, 0x800D3CAC, 0x800D3CBC,
-    0x800D3CD4, 0x800D3CE4, 0x800D3CF8, 0x800D3D14, 0x800D3D28, 0x800D3D3C, 0x800D3D50, 0x800D3D68,
-    0x800D3D7C, 0x800D39EC, 0x800D3A00, 0x800D3A14, 0x800D3A28, 0x800D3A3C, 0x800D3A54, 0x800D3A64,
-    0x800D3A74, 0x800D3A84, 0x800D3A98, 0x800D3AAC, 0x800D3ABC, 0x800D3ACC, 0x800D3AE0, 0x800D3AE8,
-    0x800D3AF4, 0x800D3B28, 0x800D3B0C, 0x800D3B14, 0x800D3B30, 0x800D3B44, 0x800D3B58, 0x800D3B64,
-    0x800D3B78, 0x800D3B88, 0x800D3B98, 0x800D3BA8, 0x800D3BB8, 0x800D3BCC, 0x800D3BE0,
+extern char g_itemMultiplayerAndAchievementTextPool[];
+void *g_pickupLabelDirectory[103] = {
+    g_itemMultiplayerAndAchievementTextPool, (void *)(g_itemMultiplayerAndAchievementTextPool + 12), (void *)(g_itemMultiplayerAndAchievementTextPool + 24), (void *)(g_itemMultiplayerAndAchievementTextPool + 36),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 48), (void *)(g_itemMultiplayerAndAchievementTextPool + 60), (void *)(g_itemMultiplayerAndAchievementTextPool + 72), (void *)(g_itemMultiplayerAndAchievementTextPool + 88),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 104), (void *)(g_itemMultiplayerAndAchievementTextPool + 120), (void *)(g_itemMultiplayerAndAchievementTextPool + 136), (void *)(g_itemMultiplayerAndAchievementTextPool + 152),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 164), (void *)(g_itemMultiplayerAndAchievementTextPool + 184), (void *)(g_itemMultiplayerAndAchievementTextPool + 204), (void *)(g_itemMultiplayerAndAchievementTextPool + 220),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 236), (void *)(g_itemMultiplayerAndAchievementTextPool + 252), (void *)(g_itemMultiplayerAndAchievementTextPool + 264), (void *)(g_itemMultiplayerAndAchievementTextPool + 280),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 300), (void *)(g_itemMultiplayerAndAchievementTextPool + 320), (void *)(g_itemMultiplayerAndAchievementTextPool + 340), (void *)(g_itemMultiplayerAndAchievementTextPool + 364),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 384), (void *)(g_itemMultiplayerAndAchievementTextPool + 404), (void *)(g_itemMultiplayerAndAchievementTextPool + 420), (void *)(g_itemMultiplayerAndAchievementTextPool + 440),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 460), (void *)(g_itemMultiplayerAndAchievementTextPool + 476), (void *)(g_itemMultiplayerAndAchievementTextPool + 496), (void *)(g_itemMultiplayerAndAchievementTextPool + 520),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 532), (void *)(g_itemMultiplayerAndAchievementTextPool + 544), (void *)(g_itemMultiplayerAndAchievementTextPool + 556), (void *)(g_itemMultiplayerAndAchievementTextPool + 568),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 584), (void *)(g_itemMultiplayerAndAchievementTextPool + 592), (void *)(g_itemMultiplayerAndAchievementTextPool + 600), (void *)(g_itemMultiplayerAndAchievementTextPool + 616),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 624), (void *)(g_itemMultiplayerAndAchievementTextPool + 640), (void *)(g_itemMultiplayerAndAchievementTextPool + 652), (void *)(g_itemMultiplayerAndAchievementTextPool + 664),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 676), (void *)(g_itemMultiplayerAndAchievementTextPool + 688), (void *)(g_itemMultiplayerAndAchievementTextPool + 700), (void *)(g_itemMultiplayerAndAchievementTextPool + 712),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 724), (void *)(g_itemMultiplayerAndAchievementTextPool + 740), (void *)(g_itemMultiplayerAndAchievementTextPool + 756), (void *)(g_itemMultiplayerAndAchievementTextPool + 768),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 780), (void *)(g_itemMultiplayerAndAchievementTextPool + 796), (void *)(g_itemMultiplayerAndAchievementTextPool + 812), (void *)(g_itemMultiplayerAndAchievementTextPool + 828),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 844), (void *)(g_itemMultiplayerAndAchievementTextPool + 1484), (void *)(g_itemMultiplayerAndAchievementTextPool + 1500), (void *)(g_itemMultiplayerAndAchievementTextPool + 1516),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1532), (void *)(g_itemMultiplayerAndAchievementTextPool + 1544), (void *)(g_itemMultiplayerAndAchievementTextPool + 1564), (void *)(g_itemMultiplayerAndAchievementTextPool + 1580),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1604), (void *)(g_itemMultiplayerAndAchievementTextPool + 1620), (void *)(g_itemMultiplayerAndAchievementTextPool + 1640), (void *)(g_itemMultiplayerAndAchievementTextPool + 1668),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1688), (void *)(g_itemMultiplayerAndAchievementTextPool + 1708), (void *)(g_itemMultiplayerAndAchievementTextPool + 1728), (void *)(g_itemMultiplayerAndAchievementTextPool + 1752),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1772), (void *)(g_itemMultiplayerAndAchievementTextPool + 860), (void *)(g_itemMultiplayerAndAchievementTextPool + 880), (void *)(g_itemMultiplayerAndAchievementTextPool + 900),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 920), (void *)(g_itemMultiplayerAndAchievementTextPool + 940), (void *)(g_itemMultiplayerAndAchievementTextPool + 964), (void *)(g_itemMultiplayerAndAchievementTextPool + 980),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 996), (void *)(g_itemMultiplayerAndAchievementTextPool + 1012), (void *)(g_itemMultiplayerAndAchievementTextPool + 1032), (void *)(g_itemMultiplayerAndAchievementTextPool + 1052),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1068), (void *)(g_itemMultiplayerAndAchievementTextPool + 1084), (void *)(g_itemMultiplayerAndAchievementTextPool + 1104), (void *)(g_itemMultiplayerAndAchievementTextPool + 1112),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1124), (void *)(g_itemMultiplayerAndAchievementTextPool + 1176), (void *)(g_itemMultiplayerAndAchievementTextPool + 1148), (void *)(g_itemMultiplayerAndAchievementTextPool + 1156),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1184), (void *)(g_itemMultiplayerAndAchievementTextPool + 1204), (void *)(g_itemMultiplayerAndAchievementTextPool + 1224), (void *)(g_itemMultiplayerAndAchievementTextPool + 1236),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1256), (void *)(g_itemMultiplayerAndAchievementTextPool + 1272), (void *)(g_itemMultiplayerAndAchievementTextPool + 1288), (void *)(g_itemMultiplayerAndAchievementTextPool + 1304),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1320), (void *)(g_itemMultiplayerAndAchievementTextPool + 1340), (void *)(g_itemMultiplayerAndAchievementTextPool + 1360),
 };
 #endif
 
 /* 800D720C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_itemLabelSlots[187] = {
-    0x800D3BEC, 0x800D3BF4, 0x800D3C04, 0x800D3C14, 0x800D3C24, 0x800D3C30, 0x800D3C40, 0x800D3C4C,
-    0x800D3D84, 0x800D3D8C, 0x800D3D98, 0x800D3DA0, 0x800D3DA8, 0x800D3DB0, 0x800D3DB8, 0x800D3DC0,
-    0x800D3DC8, 0x800D3DD4, 0x800D3DDC, 0x800D3DE8, 0x800D3DF0, 0x800D3DF8, 0x800D3E04, 0x800D3E10,
-    0x800D3E18, 0x800D3E20, 0x800D3E2C, 0x800D3E34, 0x800D4374, 0x800D437C, 0x800D438C, 0x800D4394,
-    0x800D439C, 0x800D43A4, 0x800D43AC, 0x800D43B4, 0x800D43C0, 0x800D43C8, 0x800D43D0, 0x800D43D8,
-    0x800D43E4, 0x800D43EC, 0x800D43F4, 0x800D43FC, 0x800D4404, 0x800D440C, 0x800D4418, 0x800D4420,
-    0x800D4428, 0x800D4430, 0x800D4438, 0x800D4440, 0x800D4448, 0x800D4450, 0x800D4458, 0x800D4464,
-    0x800D446C, 0x800D4474, 0x800D4480, 0x800D448C, 0x800D4494, 0x800D449C, 0x800D44A8, 0x800D44B0,
-    0x800D44B8, 0x800D44C0, 0x800D44C8, 0x800D44D0, 0x800D44D8, 0x800D44E0, 0x800D44E4, 0x800D44EC,
-    0x800D44F4, 0x800D44FC, 0x800D4508, 0x800D4510, 0x800D4520, 0x800D452C, 0x800D4538, 0x800D4548,
-    0x800D4550, 0x800D4564, 0x800D4570, 0x800D457C, 0x800D4588, 0x800D4598, 0x800D45A4, 0x800D45AC,
-    0x800D45B8, 0x800D45C0, 0x800D45C8, 0x800D45D8, 0x800D45F4, 0x800D4610, 0x800D462C, 0x800D4644,
-    0x800D465C, 0x800D4678, 0x800D4688, 0x800D469C, 0x800D46B4, 0x800D46CC, 0x800D46E4, 0x800D470C,
-    0x800D4734, 0x800D474C, 0x800D4764, 0x800D4774, 0x800D4784, 0x800D4790, 0x800D47A8, 0x800D3E40,
-    0x800D3E60, 0x800D3E80, 0x800D3E9C, 0x800D3EB8, 0x800D3ED4, 0x800D3EEC, 0x800D3F08, 0x800D3F28,
-    0x800D3F3C, 0x800D3F58, 0x800D3F74, 0x800D3F90, 0x800D3FA8, 0x800D3FC4, 0x800D3FE0, 0x800D3FF8,
-    0x800D4014, 0x800D4030, 0x800D4048, 0x800D4068, 0x800D4084, 0x800D409C, 0x800D40B8, 0x800D40D4,
-    0x800D40EC, 0x800D4108, 0x800D4124, 0x800D413C, 0x800D4154, 0x800D416C, 0x800D4188, 0x800D41A0,
-    0x800D41C0, 0x800D41DC, 0x800D41F8, 0x800D4214, 0x800D4234, 0x800D4254, 0x800D426C, 0x800D4288,
-    0x800D4298, 0x800D42AC, 0x800D42C8, 0x800D42E8, 0x800D4304, 0x800D4318, 0x800D4328, 0x800D433C,
-    0x800D4350, 0x800D47C4, 0x800D47CC, 0x800D47D4, 0x800D47DC, 0x800D47E0, 0x800D47E4, 0x800D47E8,
-    0x800D47F0, 0x800D47FC, 0x800D4808, 0x800D4810, 0x800D4818, 0x800D4824, 0x800D4828, 0x800D482C,
-    0x800D4834, 0x800D483C, 0x800D4844, 0x800D484C, 0x800D4854, 0x800D485C, 0x800D4864, 0x800D4868,
-    0x800D4870, 0x800D4880, 0x800D4884,
+extern char g_itemMultiplayerAndAchievementTextPool[];
+extern char g_MenuOnLabelStorage[];
+extern char g_colorOrientationResolutionTextPool[];
+extern char g_MenuNoLabelStorage[];
+extern char g_difficultyControllerMenuTextPool[];
+void *g_itemLabelSlots[187] = {
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1372), (void *)(g_itemMultiplayerAndAchievementTextPool + 1380), (void *)(g_itemMultiplayerAndAchievementTextPool + 1396), (void *)(g_itemMultiplayerAndAchievementTextPool + 1412),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1428), (void *)(g_itemMultiplayerAndAchievementTextPool + 1440), (void *)(g_itemMultiplayerAndAchievementTextPool + 1456), (void *)(g_itemMultiplayerAndAchievementTextPool + 1468),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1780), (void *)(g_itemMultiplayerAndAchievementTextPool + 1788), (void *)(g_itemMultiplayerAndAchievementTextPool + 1800), (void *)(g_itemMultiplayerAndAchievementTextPool + 1808),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1816), (void *)(g_itemMultiplayerAndAchievementTextPool + 1824), (void *)(g_itemMultiplayerAndAchievementTextPool + 1832), (void *)(g_itemMultiplayerAndAchievementTextPool + 1840),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1848), (void *)(g_itemMultiplayerAndAchievementTextPool + 1860), (void *)(g_itemMultiplayerAndAchievementTextPool + 1868), (void *)(g_itemMultiplayerAndAchievementTextPool + 1880),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1888), (void *)(g_itemMultiplayerAndAchievementTextPool + 1896), (void *)(g_itemMultiplayerAndAchievementTextPool + 1908), (void *)(g_itemMultiplayerAndAchievementTextPool + 1920),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 1928), (void *)(g_itemMultiplayerAndAchievementTextPool + 1936), (void *)(g_itemMultiplayerAndAchievementTextPool + 1948), (void *)(g_itemMultiplayerAndAchievementTextPool + 1956),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3300), (void *)(g_itemMultiplayerAndAchievementTextPool + 3308), (void *)(g_itemMultiplayerAndAchievementTextPool + 3324), (void *)(g_itemMultiplayerAndAchievementTextPool + 3332),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3340), (void *)(g_itemMultiplayerAndAchievementTextPool + 3348), (void *)(g_itemMultiplayerAndAchievementTextPool + 3356), (void *)(g_itemMultiplayerAndAchievementTextPool + 3364),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3376), (void *)(g_itemMultiplayerAndAchievementTextPool + 3384), (void *)(g_itemMultiplayerAndAchievementTextPool + 3392), (void *)(g_itemMultiplayerAndAchievementTextPool + 3400),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3412), (void *)(g_itemMultiplayerAndAchievementTextPool + 3420), (void *)(g_itemMultiplayerAndAchievementTextPool + 3428), (void *)(g_itemMultiplayerAndAchievementTextPool + 3436),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3444), (void *)(g_itemMultiplayerAndAchievementTextPool + 3452), (void *)(g_itemMultiplayerAndAchievementTextPool + 3464), (void *)(g_itemMultiplayerAndAchievementTextPool + 3472),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3480), (void *)(g_itemMultiplayerAndAchievementTextPool + 3488), (void *)(g_itemMultiplayerAndAchievementTextPool + 3496), (void *)(g_itemMultiplayerAndAchievementTextPool + 3504),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3512), (void *)(g_itemMultiplayerAndAchievementTextPool + 3520), (void *)(g_itemMultiplayerAndAchievementTextPool + 3528), (void *)(g_itemMultiplayerAndAchievementTextPool + 3540),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3548), (void *)(g_itemMultiplayerAndAchievementTextPool + 3556), (void *)(g_itemMultiplayerAndAchievementTextPool + 3568), (void *)(g_itemMultiplayerAndAchievementTextPool + 3580),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3588), (void *)(g_itemMultiplayerAndAchievementTextPool + 3596), (void *)(g_itemMultiplayerAndAchievementTextPool + 3608), (void *)(g_itemMultiplayerAndAchievementTextPool + 3616),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3624), (void *)(g_itemMultiplayerAndAchievementTextPool + 3632), (void *)(g_itemMultiplayerAndAchievementTextPool + 3640), (void *)(g_itemMultiplayerAndAchievementTextPool + 3648),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3656), (void *)(g_itemMultiplayerAndAchievementTextPool + 3664), (void *)(g_itemMultiplayerAndAchievementTextPool + 3668), (void *)(g_itemMultiplayerAndAchievementTextPool + 3676),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3684), (void *)(g_itemMultiplayerAndAchievementTextPool + 3692), (void *)(g_itemMultiplayerAndAchievementTextPool + 3704), (void *)(g_itemMultiplayerAndAchievementTextPool + 3712),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3728), (void *)(g_itemMultiplayerAndAchievementTextPool + 3740), (void *)(g_itemMultiplayerAndAchievementTextPool + 3752), (void *)(g_itemMultiplayerAndAchievementTextPool + 3768),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3776), (void *)(g_itemMultiplayerAndAchievementTextPool + 3796), (void *)(g_itemMultiplayerAndAchievementTextPool + 3808), (void *)(g_itemMultiplayerAndAchievementTextPool + 3820),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3832), (void *)(g_itemMultiplayerAndAchievementTextPool + 3848), (void *)(g_itemMultiplayerAndAchievementTextPool + 3860), (void *)(g_itemMultiplayerAndAchievementTextPool + 3868),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3880), (void *)(g_itemMultiplayerAndAchievementTextPool + 3888), (void *)(g_itemMultiplayerAndAchievementTextPool + 3896), (void *)(g_itemMultiplayerAndAchievementTextPool + 3912),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3940), (void *)(g_itemMultiplayerAndAchievementTextPool + 3968), (void *)(g_itemMultiplayerAndAchievementTextPool + 3996), (void *)(g_itemMultiplayerAndAchievementTextPool + 4020),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 4044), (void *)(g_itemMultiplayerAndAchievementTextPool + 4072), (void *)(g_itemMultiplayerAndAchievementTextPool + 4088), (void *)(g_itemMultiplayerAndAchievementTextPool + 4108),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 4132), (void *)(g_itemMultiplayerAndAchievementTextPool + 4156), (void *)(g_itemMultiplayerAndAchievementTextPool + 4180), (void *)(g_itemMultiplayerAndAchievementTextPool + 4220),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 4260), (void *)(g_itemMultiplayerAndAchievementTextPool + 4284), (void *)(g_itemMultiplayerAndAchievementTextPool + 4308), (void *)(g_itemMultiplayerAndAchievementTextPool + 4324),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 4340), (void *)(g_itemMultiplayerAndAchievementTextPool + 4352), (void *)(g_itemMultiplayerAndAchievementTextPool + 4376), (void *)(g_itemMultiplayerAndAchievementTextPool + 1968),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2000), (void *)(g_itemMultiplayerAndAchievementTextPool + 2032), (void *)(g_itemMultiplayerAndAchievementTextPool + 2060), (void *)(g_itemMultiplayerAndAchievementTextPool + 2088),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2116), (void *)(g_itemMultiplayerAndAchievementTextPool + 2140), (void *)(g_itemMultiplayerAndAchievementTextPool + 2168), (void *)(g_itemMultiplayerAndAchievementTextPool + 2200),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2220), (void *)(g_itemMultiplayerAndAchievementTextPool + 2248), (void *)(g_itemMultiplayerAndAchievementTextPool + 2276), (void *)(g_itemMultiplayerAndAchievementTextPool + 2304),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2328), (void *)(g_itemMultiplayerAndAchievementTextPool + 2356), (void *)(g_itemMultiplayerAndAchievementTextPool + 2384), (void *)(g_itemMultiplayerAndAchievementTextPool + 2408),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2436), (void *)(g_itemMultiplayerAndAchievementTextPool + 2464), (void *)(g_itemMultiplayerAndAchievementTextPool + 2488), (void *)(g_itemMultiplayerAndAchievementTextPool + 2520),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2548), (void *)(g_itemMultiplayerAndAchievementTextPool + 2572), (void *)(g_itemMultiplayerAndAchievementTextPool + 2600), (void *)(g_itemMultiplayerAndAchievementTextPool + 2628),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2652), (void *)(g_itemMultiplayerAndAchievementTextPool + 2680), (void *)(g_itemMultiplayerAndAchievementTextPool + 2708), (void *)(g_itemMultiplayerAndAchievementTextPool + 2732),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2756), (void *)(g_itemMultiplayerAndAchievementTextPool + 2780), (void *)(g_itemMultiplayerAndAchievementTextPool + 2808), (void *)(g_itemMultiplayerAndAchievementTextPool + 2832),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2864), (void *)(g_itemMultiplayerAndAchievementTextPool + 2892), (void *)(g_itemMultiplayerAndAchievementTextPool + 2920), (void *)(g_itemMultiplayerAndAchievementTextPool + 2948),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 2980), (void *)(g_itemMultiplayerAndAchievementTextPool + 3012), (void *)(g_itemMultiplayerAndAchievementTextPool + 3036), (void *)(g_itemMultiplayerAndAchievementTextPool + 3064),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3080), (void *)(g_itemMultiplayerAndAchievementTextPool + 3100), (void *)(g_itemMultiplayerAndAchievementTextPool + 3128), (void *)(g_itemMultiplayerAndAchievementTextPool + 3160),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3188), (void *)(g_itemMultiplayerAndAchievementTextPool + 3208), (void *)(g_itemMultiplayerAndAchievementTextPool + 3224), (void *)(g_itemMultiplayerAndAchievementTextPool + 3244),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 3264), (void *)(g_itemMultiplayerAndAchievementTextPool + 4404), (void *)(g_itemMultiplayerAndAchievementTextPool + 4412), (void *)(g_itemMultiplayerAndAchievementTextPool + 4420),
+    (void *)(g_itemMultiplayerAndAchievementTextPool + 4428), g_MenuOnLabelStorage, g_colorOrientationResolutionTextPool, (void *)(g_colorOrientationResolutionTextPool + 4),
+    (void *)(g_colorOrientationResolutionTextPool + 12), (void *)(g_colorOrientationResolutionTextPool + 24), (void *)(g_colorOrientationResolutionTextPool + 36), (void *)(g_colorOrientationResolutionTextPool + 44),
+    (void *)(g_colorOrientationResolutionTextPool + 52), g_MenuNoLabelStorage, g_difficultyControllerMenuTextPool, (void *)(g_difficultyControllerMenuTextPool + 4),
+    (void *)(g_difficultyControllerMenuTextPool + 12), (void *)(g_difficultyControllerMenuTextPool + 20), (void *)(g_difficultyControllerMenuTextPool + 28), (void *)(g_difficultyControllerMenuTextPool + 36),
+    (void *)(g_difficultyControllerMenuTextPool + 44), (void *)(g_difficultyControllerMenuTextPool + 52), (void *)(g_difficultyControllerMenuTextPool + 60), (void *)(g_difficultyControllerMenuTextPool + 64),
+    (void *)(g_difficultyControllerMenuTextPool + 72), (void *)(g_difficultyControllerMenuTextPool + 88), (void *)(g_difficultyControllerMenuTextPool + 92),
 };
 #endif
 
 /* 800D74F8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D80F8 */
-unsigned int g_Ovltab8EncodedWordsBlock6[2] = {
-    0x800D4888, 0x800D488C,
+extern char g_MenuAbbreviationsStorage[];
+void *g_Ovltab8EncodedWordsBlock6[2] = {
+    g_MenuAbbreviationsStorage, (void *)(g_MenuAbbreviationsStorage + 4),
 };
 #endif
 
 /* 800D7500.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_matchOptionLabelSlots[88] = {
-    0x800D4890, 0x800D489C, 0x800D48A8, 0x800D48B4, 0x800D48C0, 0x800D48E0, 0x800D4914, 0x800D4944,
-    0x800D4970, 0x800D499C, 0x800D49C8, 0x800D49F4, 0x800D4A14, 0x800D4A2C, 0x800D4A44, 0x800D4A70,
-    0x800D4A94, 0x800D4AB0, 0x800D4AD4, 0x800D4AEC, 0x800D4B08, 0x800D4B24, 0x800D4B40, 0x800D4B60,
-    0x800D4B88, 0x800D4BA4, 0x800D4BD0, 0x800D4BE4, 0x800D4C00, 0x800D4C14, 0x800D4C38, 0x800D4C50,
-    0x800D4C64, 0x800D4C80, 0x800D4C94, 0x800D4CB0, 0x800D4CC4, 0x800D4CF0, 0x800D4D18, 0x800D4D2C,
-    0x800D4D48, 0x800D4D6C, 0x800D4D84, 0x800D4D94, 0x800D4DB0, 0x800D4DB8, 0x800D4DC0, 0x800D4DC8,
-    0x800D4DD0, 0x800D4E00, 0x800D4E30, 0x800D4E38, 0x800D4E50, 0x800D4E68, 0x800D4E80, 0x800D4E98,
-    0x800D4EB0, 0x800D4EC8, 0x800D4EE0, 0x800D4EF8, 0x800D4F10, 0x800D4F28, 0x800D4F40, 0x800D4F58,
-    0x800D4F70, 0x800D4F88, 0x800D4FA0, 0x800D4FB8, 0x800D4FD0, 0x800D4FE8, 0x800D5000, 0x800D5018,
-    0x800D5030, 0x800D5048, 0x800D5060, 0x800D5078, 0x800D5090, 0x800D50A8, 0x800D50C0, 0x800D50D8,
-    0x800D50F0, 0x800D5108, 0x800D5120, 0x800D5138, 0x800D5150, 0x800D5168, 0x800D5180, 0x800D5198,
+extern char g_matchModeAndRewardTextPool[];
+void *g_matchOptionLabelSlots[88] = {
+    g_matchModeAndRewardTextPool, (void *)(g_matchModeAndRewardTextPool + 12), (void *)(g_matchModeAndRewardTextPool + 24), (void *)(g_matchModeAndRewardTextPool + 36),
+    (void *)(g_matchModeAndRewardTextPool + 48), (void *)(g_matchModeAndRewardTextPool + 80), (void *)(g_matchModeAndRewardTextPool + 132), (void *)(g_matchModeAndRewardTextPool + 180),
+    (void *)(g_matchModeAndRewardTextPool + 224), (void *)(g_matchModeAndRewardTextPool + 268), (void *)(g_matchModeAndRewardTextPool + 312), (void *)(g_matchModeAndRewardTextPool + 356),
+    (void *)(g_matchModeAndRewardTextPool + 388), (void *)(g_matchModeAndRewardTextPool + 412), (void *)(g_matchModeAndRewardTextPool + 436), (void *)(g_matchModeAndRewardTextPool + 480),
+    (void *)(g_matchModeAndRewardTextPool + 516), (void *)(g_matchModeAndRewardTextPool + 544), (void *)(g_matchModeAndRewardTextPool + 580), (void *)(g_matchModeAndRewardTextPool + 604),
+    (void *)(g_matchModeAndRewardTextPool + 632), (void *)(g_matchModeAndRewardTextPool + 660), (void *)(g_matchModeAndRewardTextPool + 688), (void *)(g_matchModeAndRewardTextPool + 720),
+    (void *)(g_matchModeAndRewardTextPool + 760), (void *)(g_matchModeAndRewardTextPool + 788), (void *)(g_matchModeAndRewardTextPool + 832), (void *)(g_matchModeAndRewardTextPool + 852),
+    (void *)(g_matchModeAndRewardTextPool + 880), (void *)(g_matchModeAndRewardTextPool + 900), (void *)(g_matchModeAndRewardTextPool + 936), (void *)(g_matchModeAndRewardTextPool + 960),
+    (void *)(g_matchModeAndRewardTextPool + 980), (void *)(g_matchModeAndRewardTextPool + 1008), (void *)(g_matchModeAndRewardTextPool + 1028), (void *)(g_matchModeAndRewardTextPool + 1056),
+    (void *)(g_matchModeAndRewardTextPool + 1076), (void *)(g_matchModeAndRewardTextPool + 1120), (void *)(g_matchModeAndRewardTextPool + 1160), (void *)(g_matchModeAndRewardTextPool + 1180),
+    (void *)(g_matchModeAndRewardTextPool + 1208), (void *)(g_matchModeAndRewardTextPool + 1244), (void *)(g_matchModeAndRewardTextPool + 1268), (void *)(g_matchModeAndRewardTextPool + 1284),
+    (void *)(g_matchModeAndRewardTextPool + 1312), (void *)(g_matchModeAndRewardTextPool + 1320), (void *)(g_matchModeAndRewardTextPool + 1328), (void *)(g_matchModeAndRewardTextPool + 1336),
+    (void *)(g_matchModeAndRewardTextPool + 1344), (void *)(g_matchModeAndRewardTextPool + 1392), (void *)(g_matchModeAndRewardTextPool + 1440), (void *)(g_matchModeAndRewardTextPool + 1448),
+    (void *)(g_matchModeAndRewardTextPool + 1472), (void *)(g_matchModeAndRewardTextPool + 1496), (void *)(g_matchModeAndRewardTextPool + 1520), (void *)(g_matchModeAndRewardTextPool + 1544),
+    (void *)(g_matchModeAndRewardTextPool + 1568), (void *)(g_matchModeAndRewardTextPool + 1592), (void *)(g_matchModeAndRewardTextPool + 1616), (void *)(g_matchModeAndRewardTextPool + 1640),
+    (void *)(g_matchModeAndRewardTextPool + 1664), (void *)(g_matchModeAndRewardTextPool + 1688), (void *)(g_matchModeAndRewardTextPool + 1712), (void *)(g_matchModeAndRewardTextPool + 1736),
+    (void *)(g_matchModeAndRewardTextPool + 1760), (void *)(g_matchModeAndRewardTextPool + 1784), (void *)(g_matchModeAndRewardTextPool + 1808), (void *)(g_matchModeAndRewardTextPool + 1832),
+    (void *)(g_matchModeAndRewardTextPool + 1856), (void *)(g_matchModeAndRewardTextPool + 1880), (void *)(g_matchModeAndRewardTextPool + 1904), (void *)(g_matchModeAndRewardTextPool + 1928),
+    (void *)(g_matchModeAndRewardTextPool + 1952), (void *)(g_matchModeAndRewardTextPool + 1976), (void *)(g_matchModeAndRewardTextPool + 2000), (void *)(g_matchModeAndRewardTextPool + 2024),
+    (void *)(g_matchModeAndRewardTextPool + 2048), (void *)(g_matchModeAndRewardTextPool + 2072), (void *)(g_matchModeAndRewardTextPool + 2096), (void *)(g_matchModeAndRewardTextPool + 2120),
+    (void *)(g_matchModeAndRewardTextPool + 2144), (void *)(g_matchModeAndRewardTextPool + 2168), (void *)(g_matchModeAndRewardTextPool + 2192), (void *)(g_matchModeAndRewardTextPool + 2216),
+    (void *)(g_matchModeAndRewardTextPool + 2240), (void *)(g_matchModeAndRewardTextPool + 2264), (void *)(g_matchModeAndRewardTextPool + 2288), (void *)(g_matchModeAndRewardTextPool + 2312),
 };
 #endif
 
 /* 800D7660.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int k_Ovltab8EncodedWordsBlock1[22] = {
-    0x800D51A0, 0x800D51A4, 0x800D51A8, 0x800D51AC, 0x800D51B0, 0x800D51B4, 0x800D51B8, 0x800D51BC,
-    0x800D51C0, 0x800D51C4, 0x800D51C8, 0x800D51CC, 0x800D51D0, 0x800D51D4, 0x800D51D8, 0x800D51DC,
-    0x800D51E0, 0x800D51E4, 0x800D51E8, 0x800D51EC, 0x800D51F0, 0x800D51F4,
+extern char g_matchModeAndRewardTextPool[];
+void *k_Ovltab8EncodedWordsBlock1[22] = {
+    (void *)(g_matchModeAndRewardTextPool + 2320), (void *)(g_matchModeAndRewardTextPool + 2324), (void *)(g_matchModeAndRewardTextPool + 2328), (void *)(g_matchModeAndRewardTextPool + 2332),
+    (void *)(g_matchModeAndRewardTextPool + 2336), (void *)(g_matchModeAndRewardTextPool + 2340), (void *)(g_matchModeAndRewardTextPool + 2344), (void *)(g_matchModeAndRewardTextPool + 2348),
+    (void *)(g_matchModeAndRewardTextPool + 2352), (void *)(g_matchModeAndRewardTextPool + 2356), (void *)(g_matchModeAndRewardTextPool + 2360), (void *)(g_matchModeAndRewardTextPool + 2364),
+    (void *)(g_matchModeAndRewardTextPool + 2368), (void *)(g_matchModeAndRewardTextPool + 2372), (void *)(g_matchModeAndRewardTextPool + 2376), (void *)(g_matchModeAndRewardTextPool + 2380),
+    (void *)(g_matchModeAndRewardTextPool + 2384), (void *)(g_matchModeAndRewardTextPool + 2388), (void *)(g_matchModeAndRewardTextPool + 2392), (void *)(g_matchModeAndRewardTextPool + 2396),
+    (void *)(g_matchModeAndRewardTextPool + 2400), (void *)(g_matchModeAndRewardTextPool + 2404),
 };
 #endif
 
 /* 800D76B8.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_inventoryLabelSlotWords[17] = {
-    0x800D51F8, 0x800D5200, 0x800D520C, 0x800D5218, 0x800D5224, 0x800D523C, 0x800D5254, 0x800D5268,
-    0x800D5270, 0x800D527C, 0x800D528C, 0x800D52A0, 0x800D52AC, 0x800D52B4, 0x800D52BC, 0x800D52C4,
-    0x800D52CC,
+extern char g_bloodScoreMenuTextPool[];
+void *g_inventoryLabelSlotWords[17] = {
+    g_bloodScoreMenuTextPool, (void *)(g_bloodScoreMenuTextPool + 8), (void *)(g_bloodScoreMenuTextPool + 20), (void *)(g_bloodScoreMenuTextPool + 32),
+    (void *)(g_bloodScoreMenuTextPool + 44), (void *)(g_bloodScoreMenuTextPool + 68), (void *)(g_bloodScoreMenuTextPool + 92), (void *)(g_bloodScoreMenuTextPool + 112),
+    (void *)(g_bloodScoreMenuTextPool + 120), (void *)(g_bloodScoreMenuTextPool + 132), (void *)(g_bloodScoreMenuTextPool + 148), (void *)(g_bloodScoreMenuTextPool + 168),
+    (void *)(g_bloodScoreMenuTextPool + 180), (void *)(g_bloodScoreMenuTextPool + 188), (void *)(g_bloodScoreMenuTextPool + 196), (void *)(g_bloodScoreMenuTextPool + 204),
+    (void *)(g_bloodScoreMenuTextPool + 212),
 };
 #endif
 
@@ -111,8 +176,9 @@ void *g_Ovltab8EncodedWordsBlock8[1] = {
 /* 800D7700.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_pak_game_title_slots_us_rev1.c */
-unsigned int g_Ovltab8EncodedWordsBlock2[2] = {
-    0x800D52DC, 0x800D52E8,
+extern char g_gameTitleLabelText[];
+void *g_Ovltab8EncodedWordsBlock2[2] = {
+    g_gameTitleLabelText, (void *)(g_gameTitleLabelText + 12),
 };
 #endif
 
@@ -164,10 +230,14 @@ unsigned int k_Ovltab8EncodedWordsBlock3[17] = {
 
 /* 800D77CC.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_pakNoteLabelSlots[22] = {
-    0x800D53C0, 0x800D53CC, 0x800D53D8, 0x800D53EC, 0x800D5400, 0x800D5414, 0x800D5428, 0x800D543C,
-    0x800D544C, 0x800D5458, 0x800D5464, 0x800D5470, 0x800D5488, 0x800D54A0, 0x800D54B4, 0x800D54C8,
-    0x800D54DC, 0x800D54F0, 0x800D54F8, 0x800D5500, 0x800D5508, 0x800D5510,
+extern char g_noteDifficultyMenuTextPool[];
+void *g_pakNoteLabelSlots[22] = {
+    g_noteDifficultyMenuTextPool, (void *)(g_noteDifficultyMenuTextPool + 12), (void *)(g_noteDifficultyMenuTextPool + 24), (void *)(g_noteDifficultyMenuTextPool + 44),
+    (void *)(g_noteDifficultyMenuTextPool + 64), (void *)(g_noteDifficultyMenuTextPool + 84), (void *)(g_noteDifficultyMenuTextPool + 104), (void *)(g_noteDifficultyMenuTextPool + 124),
+    (void *)(g_noteDifficultyMenuTextPool + 140), (void *)(g_noteDifficultyMenuTextPool + 152), (void *)(g_noteDifficultyMenuTextPool + 164), (void *)(g_noteDifficultyMenuTextPool + 176),
+    (void *)(g_noteDifficultyMenuTextPool + 200), (void *)(g_noteDifficultyMenuTextPool + 224), (void *)(g_noteDifficultyMenuTextPool + 244), (void *)(g_noteDifficultyMenuTextPool + 264),
+    (void *)(g_noteDifficultyMenuTextPool + 284), (void *)(g_noteDifficultyMenuTextPool + 304), (void *)(g_noteDifficultyMenuTextPool + 312), (void *)(g_noteDifficultyMenuTextPool + 320),
+    (void *)(g_noteDifficultyMenuTextPool + 328), (void *)(g_noteDifficultyMenuTextPool + 336),
 };
 #endif
 
@@ -207,9 +277,11 @@ unsigned int k_Ovltab8EncodedWordsBlock4[145] = {
 
 /* 800D7A6C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_confirmationLabelSlotWords[10] = {
-    0x800D579C, 0x800D57A8, 0x800D57B4, 0x800D57C0, 0x800D57CC, 0x800D57E0, 0x800D57F8, 0x800D5810,
-    0x800D5820, 0x800D582C,
+extern char g_multiplayerTagAndKillMessageText[];
+void *g_confirmationLabelSlotWords[10] = {
+    g_multiplayerTagAndKillMessageText, (void *)(g_multiplayerTagAndKillMessageText + 12), (void *)(g_multiplayerTagAndKillMessageText + 24), (void *)(g_multiplayerTagAndKillMessageText + 36),
+    (void *)(g_multiplayerTagAndKillMessageText + 48), (void *)(g_multiplayerTagAndKillMessageText + 68), (void *)(g_multiplayerTagAndKillMessageText + 92), (void *)(g_multiplayerTagAndKillMessageText + 116),
+    (void *)(g_multiplayerTagAndKillMessageText + 132), (void *)(g_multiplayerTagAndKillMessageText + 144),
 };
 #endif
 
@@ -224,43 +296,75 @@ void *g_Ovltab8EncodedWordsBlock3[1] = {
 
 /* 800D7A98.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_optionLabelSlots[224] = {
-    0x800D5834, 0x800D583C, 0x800D5844, 0x800D584C, 0x800D5858, 0x800D5864, 0x800D5870, 0x800D587C,
-    0x800D5884, 0x800D5890, 0x800D589C, 0x800D58A8, 0x800D58B0, 0x800D58C4, 0x800D58DC, 0x800D58F8,
-    0x800D5910, 0x800D592C, 0x800D5940, 0x800D5958, 0x800D596C, 0x800D5984, 0x800D59A8, 0x800D59C4,
-    0x800D59DC, 0x800D59F4, 0x800D5A10, 0x800D5A24, 0x800D5A3C, 0x800D5A5C, 0x800D5A74, 0x800D5A8C,
-    0x800D5AA4, 0x800D5ABC, 0x800D5AD4, 0x800D5AEC, 0x800D5B08, 0x800D5B28, 0x800D5B44, 0x800D5B64,
-    0x800D5B7C, 0x800D5B98, 0x800D5BB4, 0x800D5BD0, 0x800D5BEC, 0x800D5C08, 0x800D5C24, 0x800D5C40,
-    0x800D5C5C, 0x800D5C78, 0x800D5C94, 0x800D5CB0, 0x800D5CCC, 0x800D5CE8, 0x800D5D04, 0x800D5D20,
-    0x800D5D3C, 0x800D5D58, 0x800D5D74, 0x800D5D90, 0x800D5DAC, 0x800D5DC8, 0x800D5DE4, 0x800D5E00,
-    0x800D5E1C, 0x800D5E38, 0x800D5E54, 0x800D5E70, 0x800D5E8C, 0x800D5EA8, 0x800D5EC4, 0x800D5EE0,
-    0x800D5EFC, 0x800D5F18, 0x800D5F34, 0x800D5F50, 0x800D5F6C, 0x800D5F88, 0x800D5FA4, 0x800D5FC0,
-    0x800D5FDC, 0x800D5FF8, 0x800D6014, 0x800D6030, 0x800D603C, 0x800D6048, 0x800D6050, 0x800D6070,
-    0x800D6090, 0x800D60B0, 0x800D60D0, 0x800D60F0, 0x800D6110, 0x800D6130, 0x800D6140, 0x800D6160,
-    0x800D6180, 0x800D61A0, 0x800D61C0, 0x800D61D0, 0x800D61E0, 0x800D61F0, 0x800D6200, 0x800D6220,
-    0x800D6240, 0x800D6260, 0x800D6280, 0x800D6290, 0x800D62A0, 0x800D62B0, 0x800D62C0, 0x800D62E0,
-    0x800D6300, 0x800D6320, 0x800D6340, 0x800D6350, 0x800D6360, 0x800D6370, 0x800D6380, 0x800D638C,
-    0x800D6398, 0x800D63A4, 0x800D63B0, 0x800D63B8, 0x800D63C4, 0x800D63CC, 0x800D63D4, 0x800D63E0,
-    0x800D63F4, 0x800D6400, 0x800D640C, 0x800D6424, 0x800D643C, 0x800D6454, 0x800D646C, 0x800D6484,
-    0x800D649C, 0x800D64B4, 0x800D64CC, 0x800D64E4, 0x800D64FC, 0x800D6514, 0x800D652C, 0x800D6544,
-    0x800D655C, 0x800D6574, 0x800D658C, 0x800D65A4, 0x800D65BC, 0x800D65D4, 0x800D65EC, 0x800D6604,
-    0x800D661C, 0x800D6634, 0x800D664C, 0x800D6664, 0x800D667C, 0x800D6694, 0x800D66A0, 0x800D66A8,
-    0x800D66B4, 0x800D66C0, 0x800D66D8, 0x800D66F0, 0x800D6708, 0x800D6720, 0x800D6738, 0x800D6750,
-    0x800D6768, 0x800D6774, 0x800D6788, 0x800D67A0, 0x800D67B8, 0x800D67D0, 0x800D67E8, 0x800D6800,
-    0x800D6818, 0x800D6830, 0x800D6848, 0x800D6860, 0x800D6878, 0x800D6890, 0x800D68A8, 0x800D68C0,
-    0x800D68D8, 0x800D68F0, 0x800D6908, 0x800D6914, 0x800D692C, 0x800D6944, 0x800D695C, 0x800D6974,
-    0x800D698C, 0x800D6998, 0x800D69A0, 0x800D69A8, 0x800D69B0, 0x800D69B8, 0x800D69C4, 0x800D69D0,
-    0x800D69E0, 0x800D69F8, 0x800D6A10, 0x800D6A28, 0x800D6A40, 0x800D6A58, 0x800D6A70, 0x800D6A88,
-    0x800D6AA0, 0x800D6AB8, 0x800D6AD0, 0x800D6AE8, 0x800D6B00, 0x800D6B18, 0x800D6B30, 0x800D6B48,
-    0x800D6B60, 0x800D6B74, 0x800D6B84, 0x800D6B98, 0x800D6BB0, 0x800D6BC8, 0x800D6BD0, 0x800D6BDC,
+extern char g_cheatGameOptionsAndStatusTextPool[];
+extern char ragewars_menu_digit_labels_us_rev1_StorageWords[];
+void *g_optionLabelSlots[224] = {
+    g_cheatGameOptionsAndStatusTextPool, (void *)(g_cheatGameOptionsAndStatusTextPool + 8), (void *)(g_cheatGameOptionsAndStatusTextPool + 16), (void *)(g_cheatGameOptionsAndStatusTextPool + 24),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 36), (void *)(g_cheatGameOptionsAndStatusTextPool + 48), (void *)(g_cheatGameOptionsAndStatusTextPool + 60), (void *)(g_cheatGameOptionsAndStatusTextPool + 72),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 80), (void *)(g_cheatGameOptionsAndStatusTextPool + 92), (void *)(g_cheatGameOptionsAndStatusTextPool + 104), (void *)(g_cheatGameOptionsAndStatusTextPool + 116),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 124), (void *)(g_cheatGameOptionsAndStatusTextPool + 144), (void *)(g_cheatGameOptionsAndStatusTextPool + 168), (void *)(g_cheatGameOptionsAndStatusTextPool + 196),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 220), (void *)(g_cheatGameOptionsAndStatusTextPool + 248), (void *)(g_cheatGameOptionsAndStatusTextPool + 268), (void *)(g_cheatGameOptionsAndStatusTextPool + 292),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 312), (void *)(g_cheatGameOptionsAndStatusTextPool + 336), (void *)(g_cheatGameOptionsAndStatusTextPool + 372), (void *)(g_cheatGameOptionsAndStatusTextPool + 400),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 424), (void *)(g_cheatGameOptionsAndStatusTextPool + 448), (void *)(g_cheatGameOptionsAndStatusTextPool + 476), (void *)(g_cheatGameOptionsAndStatusTextPool + 496),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 520), (void *)(g_cheatGameOptionsAndStatusTextPool + 552), (void *)(g_cheatGameOptionsAndStatusTextPool + 576), (void *)(g_cheatGameOptionsAndStatusTextPool + 600),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 624), (void *)(g_cheatGameOptionsAndStatusTextPool + 648), (void *)(g_cheatGameOptionsAndStatusTextPool + 672), (void *)(g_cheatGameOptionsAndStatusTextPool + 696),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 724), (void *)(g_cheatGameOptionsAndStatusTextPool + 756), (void *)(g_cheatGameOptionsAndStatusTextPool + 784), (void *)(g_cheatGameOptionsAndStatusTextPool + 816),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 840), (void *)(g_cheatGameOptionsAndStatusTextPool + 868), (void *)(g_cheatGameOptionsAndStatusTextPool + 896), (void *)(g_cheatGameOptionsAndStatusTextPool + 924),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 952), (void *)(g_cheatGameOptionsAndStatusTextPool + 980), (void *)(g_cheatGameOptionsAndStatusTextPool + 1008), (void *)(g_cheatGameOptionsAndStatusTextPool + 1036),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 1064), (void *)(g_cheatGameOptionsAndStatusTextPool + 1092), (void *)(g_cheatGameOptionsAndStatusTextPool + 1120), (void *)(g_cheatGameOptionsAndStatusTextPool + 1148),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 1176), (void *)(g_cheatGameOptionsAndStatusTextPool + 1204), (void *)(g_cheatGameOptionsAndStatusTextPool + 1232), (void *)(g_cheatGameOptionsAndStatusTextPool + 1260),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 1288), (void *)(g_cheatGameOptionsAndStatusTextPool + 1316), (void *)(g_cheatGameOptionsAndStatusTextPool + 1344), (void *)(g_cheatGameOptionsAndStatusTextPool + 1372),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 1400), (void *)(g_cheatGameOptionsAndStatusTextPool + 1428), (void *)(g_cheatGameOptionsAndStatusTextPool + 1456), (void *)(g_cheatGameOptionsAndStatusTextPool + 1484),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 1512), (void *)(g_cheatGameOptionsAndStatusTextPool + 1540), (void *)(g_cheatGameOptionsAndStatusTextPool + 1568), (void *)(g_cheatGameOptionsAndStatusTextPool + 1596),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 1624), (void *)(g_cheatGameOptionsAndStatusTextPool + 1652), (void *)(g_cheatGameOptionsAndStatusTextPool + 1680), (void *)(g_cheatGameOptionsAndStatusTextPool + 1708),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 1736), (void *)(g_cheatGameOptionsAndStatusTextPool + 1764), (void *)(g_cheatGameOptionsAndStatusTextPool + 1792), (void *)(g_cheatGameOptionsAndStatusTextPool + 1820),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 1848), (void *)(g_cheatGameOptionsAndStatusTextPool + 1876), (void *)(g_cheatGameOptionsAndStatusTextPool + 1904), (void *)(g_cheatGameOptionsAndStatusTextPool + 1932),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 1960), (void *)(g_cheatGameOptionsAndStatusTextPool + 1988), (void *)(g_cheatGameOptionsAndStatusTextPool + 2016), (void *)(g_cheatGameOptionsAndStatusTextPool + 2044),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2056), (void *)(g_cheatGameOptionsAndStatusTextPool + 2068), (void *)(g_cheatGameOptionsAndStatusTextPool + 2076), (void *)(g_cheatGameOptionsAndStatusTextPool + 2108),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2140), (void *)(g_cheatGameOptionsAndStatusTextPool + 2172), (void *)(g_cheatGameOptionsAndStatusTextPool + 2204), (void *)(g_cheatGameOptionsAndStatusTextPool + 2236),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2268), (void *)(g_cheatGameOptionsAndStatusTextPool + 2300), (void *)(g_cheatGameOptionsAndStatusTextPool + 2316), (void *)(g_cheatGameOptionsAndStatusTextPool + 2348),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2380), (void *)(g_cheatGameOptionsAndStatusTextPool + 2412), (void *)(g_cheatGameOptionsAndStatusTextPool + 2444), (void *)(g_cheatGameOptionsAndStatusTextPool + 2460),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2476), (void *)(g_cheatGameOptionsAndStatusTextPool + 2492), (void *)(g_cheatGameOptionsAndStatusTextPool + 2508), (void *)(g_cheatGameOptionsAndStatusTextPool + 2540),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2572), (void *)(g_cheatGameOptionsAndStatusTextPool + 2604), (void *)(g_cheatGameOptionsAndStatusTextPool + 2636), (void *)(g_cheatGameOptionsAndStatusTextPool + 2652),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2668), (void *)(g_cheatGameOptionsAndStatusTextPool + 2684), (void *)(g_cheatGameOptionsAndStatusTextPool + 2700), (void *)(g_cheatGameOptionsAndStatusTextPool + 2732),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2764), (void *)(g_cheatGameOptionsAndStatusTextPool + 2796), (void *)(g_cheatGameOptionsAndStatusTextPool + 2828), (void *)(g_cheatGameOptionsAndStatusTextPool + 2844),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2860), (void *)(g_cheatGameOptionsAndStatusTextPool + 2876), (void *)(g_cheatGameOptionsAndStatusTextPool + 2892), (void *)(g_cheatGameOptionsAndStatusTextPool + 2904),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2916), (void *)(g_cheatGameOptionsAndStatusTextPool + 2928), (void *)(g_cheatGameOptionsAndStatusTextPool + 2940), (void *)(g_cheatGameOptionsAndStatusTextPool + 2948),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 2960), (void *)(g_cheatGameOptionsAndStatusTextPool + 2968), (void *)(g_cheatGameOptionsAndStatusTextPool + 2976), (void *)(g_cheatGameOptionsAndStatusTextPool + 2988),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3008), (void *)(g_cheatGameOptionsAndStatusTextPool + 3020), (void *)(g_cheatGameOptionsAndStatusTextPool + 3032), (void *)(g_cheatGameOptionsAndStatusTextPool + 3056),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3080), (void *)(g_cheatGameOptionsAndStatusTextPool + 3104), (void *)(g_cheatGameOptionsAndStatusTextPool + 3128), (void *)(g_cheatGameOptionsAndStatusTextPool + 3152),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3176), (void *)(g_cheatGameOptionsAndStatusTextPool + 3200), (void *)(g_cheatGameOptionsAndStatusTextPool + 3224), (void *)(g_cheatGameOptionsAndStatusTextPool + 3248),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3272), (void *)(g_cheatGameOptionsAndStatusTextPool + 3296), (void *)(g_cheatGameOptionsAndStatusTextPool + 3320), (void *)(g_cheatGameOptionsAndStatusTextPool + 3344),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3368), (void *)(g_cheatGameOptionsAndStatusTextPool + 3392), (void *)(g_cheatGameOptionsAndStatusTextPool + 3416), (void *)(g_cheatGameOptionsAndStatusTextPool + 3440),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3464), (void *)(g_cheatGameOptionsAndStatusTextPool + 3488), (void *)(g_cheatGameOptionsAndStatusTextPool + 3512), (void *)(g_cheatGameOptionsAndStatusTextPool + 3536),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3560), (void *)(g_cheatGameOptionsAndStatusTextPool + 3584), (void *)(g_cheatGameOptionsAndStatusTextPool + 3608), (void *)(g_cheatGameOptionsAndStatusTextPool + 3632),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3656), (void *)(g_cheatGameOptionsAndStatusTextPool + 3680), (void *)(g_cheatGameOptionsAndStatusTextPool + 3692), (void *)(g_cheatGameOptionsAndStatusTextPool + 3700),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3712), (void *)(g_cheatGameOptionsAndStatusTextPool + 3724), (void *)(g_cheatGameOptionsAndStatusTextPool + 3748), (void *)(g_cheatGameOptionsAndStatusTextPool + 3772),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3796), (void *)(g_cheatGameOptionsAndStatusTextPool + 3820), (void *)(g_cheatGameOptionsAndStatusTextPool + 3844), (void *)(g_cheatGameOptionsAndStatusTextPool + 3868),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3892), (void *)(g_cheatGameOptionsAndStatusTextPool + 3904), (void *)(g_cheatGameOptionsAndStatusTextPool + 3924), (void *)(g_cheatGameOptionsAndStatusTextPool + 3948),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 3972), (void *)(g_cheatGameOptionsAndStatusTextPool + 3996), (void *)(g_cheatGameOptionsAndStatusTextPool + 4020), (void *)(g_cheatGameOptionsAndStatusTextPool + 4044),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4068), (void *)(g_cheatGameOptionsAndStatusTextPool + 4092), (void *)(g_cheatGameOptionsAndStatusTextPool + 4116), (void *)(g_cheatGameOptionsAndStatusTextPool + 4140),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4164), (void *)(g_cheatGameOptionsAndStatusTextPool + 4188), (void *)(g_cheatGameOptionsAndStatusTextPool + 4212), (void *)(g_cheatGameOptionsAndStatusTextPool + 4236),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4260), (void *)(g_cheatGameOptionsAndStatusTextPool + 4284), (void *)(g_cheatGameOptionsAndStatusTextPool + 4308), (void *)(g_cheatGameOptionsAndStatusTextPool + 4320),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4344), (void *)(g_cheatGameOptionsAndStatusTextPool + 4368), (void *)(g_cheatGameOptionsAndStatusTextPool + 4392), (void *)(g_cheatGameOptionsAndStatusTextPool + 4416),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4440), (void *)(g_cheatGameOptionsAndStatusTextPool + 4452), (void *)(g_cheatGameOptionsAndStatusTextPool + 4460), (void *)(g_cheatGameOptionsAndStatusTextPool + 4468),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4476), (void *)(g_cheatGameOptionsAndStatusTextPool + 4484), (void *)(g_cheatGameOptionsAndStatusTextPool + 4496), (void *)(g_cheatGameOptionsAndStatusTextPool + 4508),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4524), (void *)(g_cheatGameOptionsAndStatusTextPool + 4548), (void *)(g_cheatGameOptionsAndStatusTextPool + 4572), (void *)(g_cheatGameOptionsAndStatusTextPool + 4596),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4620), (void *)(g_cheatGameOptionsAndStatusTextPool + 4644), (void *)(g_cheatGameOptionsAndStatusTextPool + 4668), (void *)(g_cheatGameOptionsAndStatusTextPool + 4692),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4716), (void *)(g_cheatGameOptionsAndStatusTextPool + 4740), (void *)(g_cheatGameOptionsAndStatusTextPool + 4764), (void *)(g_cheatGameOptionsAndStatusTextPool + 4788),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4812), (void *)(g_cheatGameOptionsAndStatusTextPool + 4836), (void *)(g_cheatGameOptionsAndStatusTextPool + 4860), (void *)(g_cheatGameOptionsAndStatusTextPool + 4884),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4908), (void *)(g_cheatGameOptionsAndStatusTextPool + 4928), (void *)(g_cheatGameOptionsAndStatusTextPool + 4944), (void *)(g_cheatGameOptionsAndStatusTextPool + 4964),
+    (void *)(g_cheatGameOptionsAndStatusTextPool + 4988), (void *)(g_cheatGameOptionsAndStatusTextPool + 5012), (void *)(g_cheatGameOptionsAndStatusTextPool + 5020), ragewars_menu_digit_labels_us_rev1_StorageWords,
 };
 #endif
 
 /* 800D7E18.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int k_Ovltab8EncodedWordsBlock5[10] = {
-    0x800D6BE0, 0x800D6BE4, 0x800D6BE8, 0x800D6BEC, 0x800D6BF0, 0x800D6BF4, 0x800D6BF8, 0x800D6BFC,
-    0x800D6C00, 0x800D6C04,
+extern char ragewars_menu_digit_labels_us_rev1_StorageWords[];
+void *k_Ovltab8EncodedWordsBlock5[10] = {
+    (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 4), (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 8), (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 12), (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 16),
+    (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 20), (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 24), (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 28), (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 32),
+    (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 36), (void *)(ragewars_menu_digit_labels_us_rev1_StorageWords + 40),
 };
 #endif
 

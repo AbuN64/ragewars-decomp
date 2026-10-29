@@ -1,7 +1,7 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C7034 */
-unsigned int g_NavCheckcloseattackrouteEncodedWordsBlock1[3] = {
-    0x3F800000, 0x3F800000, 0x41C80000,
+float g_NavCheckcloseattackrouteEncodedWordsBlock1[3] = {
+    1.0f, 1.0f, 25.0f,
 };
 #endif

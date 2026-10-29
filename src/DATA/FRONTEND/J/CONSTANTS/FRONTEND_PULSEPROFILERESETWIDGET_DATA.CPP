@@ -10,12 +10,19 @@ unsigned int g_FrontendPulseprofileresetwidgetWords1[1] = {
 /* g_FrontendPulseprofileresetwidgetPointerWords1_FrontendPulseprofileresetwidgetData.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU_X)
 #if defined(VERSION_DE)
+extern char g_Menu_DispatchSoundSliderEventAddress[];
+extern char Frontend_HandleProfileResetConfirm_Address[];
+extern char g_Frontend_DispatchProfileResetEventAddress[];
 unsigned int D_src_9d8a2047[35] = {
-    0x00000E08, 0x00000018, 0x00439628, 0x00000E06, 0x00000018, 0x004394E0, 0x00000E03, 0x00000018,
-    0x004395F8, 0x00000001, 0x00000018, 0x00439750, 0x00000002, 0x00000018, 0x00439730, 0x0000000A,
-    0x00000018, 0x004396F0, 0x00000000, 0x00000000, 0x00000000, 0x00439CF0, 0x00000002, 0x00000E06,
-    0x00000021, 0x00439D30, 0x00000002, 0x00000021, 0x00439E04, 0x00000001, 0x00000021, 0x00439D58,
-    0x00000000, 0x00000000, 0x00000000,
+    0xe08, 24, (unsigned int)(g_Menu_DispatchSoundSliderEventAddress + 476), 0xe06,
+    24, (unsigned int)(g_Menu_DispatchSoundSliderEventAddress + 148), 0xe03, 24,
+    (unsigned int)(g_Menu_DispatchSoundSliderEventAddress + 428), 1, 24, (unsigned int)(Frontend_HandleProfileResetConfirm_Address + 96),
+    2, 24, (unsigned int)(Frontend_HandleProfileResetConfirm_Address + 64), 10,
+    24, (unsigned int)Frontend_HandleProfileResetConfirm_Address, 0, 0,
+    0, (unsigned int)(g_Frontend_DispatchProfileResetEventAddress + 1432), 2, 0xe06,
+    33, (unsigned int)(g_Frontend_DispatchProfileResetEventAddress + 1496), 2, 33,
+    (unsigned int)(g_Frontend_DispatchProfileResetEventAddress + 1708), 1, 33, (unsigned int)(g_Frontend_DispatchProfileResetEventAddress + 1536),
+    0, 0, 0,
 };
 #endif
 #if defined(VERSION_EU_X)

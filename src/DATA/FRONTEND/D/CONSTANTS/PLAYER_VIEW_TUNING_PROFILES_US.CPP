@@ -1,7 +1,9 @@
 #if defined(VERSION_US)
-unsigned int g_playerViewTuningProfilesUs[19] = {
-    0x00000000, 0x3E800000, 0x3F666666, 0x3F19999A, 0x3E99999A, 0xBFC90FDC, 0x3FC90FDC, 0x3E800000,
-    0x3F666666, 0x3F19999A, 0x3E99999A, 0xBF490FDC, 0x3FC90FDC, 0x00000000, 0x00000000, 0x3F000000,
-    0x3E800000, 0xBD8EFA36, 0x3FC90FDC,
+float g_playerViewTuningProfilesUs[19] = {
+    0.0f, 0.25f, 0.9f, 0.6f,
+    0.3f, -1.5707965f, 1.5707965f, 0.25f,
+    0.9f, 0.6f, 0.3f, -0.78539824f,
+    1.5707965f, 0.0f, 0.0f, 0.5f,
+    0.25f, -0.06981318f, 1.5707965f,
 };
 #endif

@@ -12,7 +12,7 @@ unsigned int k_Udivdi3EncodedWords[3] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_Udivdi3EncodedWordsBlock1[3] = {
-    0x40400000, 0x40400000, 0x41B80000,
+float k_Udivdi3EncodedWordsBlock1[3] = {
+    3.0f, 3.0f, 23.0f,
 };
 #endif

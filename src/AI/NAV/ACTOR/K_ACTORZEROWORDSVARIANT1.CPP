@@ -10,8 +10,9 @@ unsigned int k_ActorZeroWordsVariant1[1] = {
 };
 #endif
 #if defined(VERSION_EU_X)
-unsigned int k_ActorZeroWordsVariant1[1] = {
-    0x0022EC68,
+extern char g_Playerai_ApplyLinkedProjectileStatusAddressEuX[];
+void *k_ActorZeroWordsVariant1[1] = {
+    (void *)(g_Playerai_ApplyLinkedProjectileStatusAddressEuX + 2276),
 };
 #endif
 #endif

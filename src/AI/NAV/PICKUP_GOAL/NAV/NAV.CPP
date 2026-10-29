@@ -1,8 +1,9 @@
 
 /* 800C1EE8.CPP */
 #if defined(VERSION_DE)
-unsigned int k_NavEncodedWordsBlock4[2] = {
-    0x0020F01C, 0x0020F028,
+extern char addrLow_Nav_SelectPickupGoal[];
+void *k_NavEncodedWordsBlock4[2] = {
+    (void *)(addrLow_Nav_SelectPickupGoal + 188), (void *)(addrLow_Nav_SelectPickupGoal + 200),
 };
 #endif
 /* 800C6E84_4.CPP */

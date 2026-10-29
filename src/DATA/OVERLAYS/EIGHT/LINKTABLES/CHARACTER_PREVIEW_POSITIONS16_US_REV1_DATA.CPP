@@ -1,7 +1,8 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int g_characterPreviewPositions16UsRev1[12] = {
-    0x42200000, 0x40000000, 0xC2C80000, 0xC2200000, 0x40000000, 0xC2C80000, 0x42000000, 0xC2040000,
-    0xC2A00000, 0xC1F80000, 0xC2040000, 0xC2A00000,
+float g_characterPreviewPositions16UsRev1[12] = {
+    40.0f, 2.0f, -100.0f, -40.0f,
+    2.0f, -100.0f, 32.0f, -33.0f,
+    -80.0f, -31.0f, -33.0f, -80.0f,
 };
 #endif

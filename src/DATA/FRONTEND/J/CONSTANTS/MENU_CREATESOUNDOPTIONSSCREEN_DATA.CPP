@@ -10,33 +10,64 @@ unsigned int g_MenuCreatesoundoptionsscreenWords1[2] = {
 /* g_MenuCreatesoundoptionsscreenPointerWords1_MenuCreatesoundoptionsscreenData.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
+extern char g_Achieve_DispatchResultsActorEventAddress[];
+extern char g_Menu_DispatchSoundOptionsEventAddress[];
 unsigned int D_src_3cb405cb[42] = {
-    0x00000E07, 0x00000006, 0x00439010, 0x00000E08, 0x00000006, 0x00439018, 0x00000E06, 0x00000006,
-    0x00438F10, 0x00000E03, 0x00000006, 0x00438FE0, 0x00000002, 0x00000006, 0x00439174, 0x00000001,
-    0x00000006, 0x00439128, 0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x0000000D, 0x00439300,
-    0x00000E08, 0x0000000D, 0x00439308, 0x00000E06, 0x0000000D, 0x00439240, 0x00000E03, 0x0000000D,
-    0x004392D0, 0x00000002, 0x0000000D, 0x00439404, 0x00000001, 0x0000000D, 0x004393A8, 0x00000000,
-    0x00000000, 0x00000000,
+    0xe07, 6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 404), 0xe08,
+    6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 412), 0xe06, 6,
+    (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 148), 0xe03, 6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 356),
+    2, 6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 760), 1,
+    6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 684), 0, 0,
+    0, 0xe07, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 336),
+    0xe08, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 344), 0xe06,
+    13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 144), 0xe03, 13,
+    (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 288), 2, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 596),
+    1, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 504), 0,
+    0, 0,
 };
 #endif
 #if defined(VERSION_EU)
+extern char g_Menu_SoundOptionsReturnZeroPackedAddress24[];
+extern char g_Menu_UpdateSoundOptionsScreenPackedAddress24[];
+extern char g_Menu_CreateSoundOptionsScreenPackedAddress24[];
+extern char g_Menu_FreeSoundOptionsScreenPackedAddress24[];
+extern char g_Menu_CancelSoundOptionsScreenPackedAddress24[];
+extern char g_Menu_ConfirmSoundOptionsScreenPackedAddress24[];
+extern char g_Menu_SoundSliderReturnZeroPackedAddress24[];
+extern char g_Menu_ApplySoundSlidersPackedAddress24[];
+extern char g_Menu_CreateSoundSlidersPackedAddress24[];
+extern char g_Menu_FreeSoundSlidersPackedAddress24[];
+extern char g_Menu_CancelSoundSliderPopupPackedAddress24[];
+extern char g_Menu_ConfirmSoundSliderPopupPackedAddress24[];
 unsigned int D_src_3cb405cb[42] = {
-    0x00000E07, 0x00000006, 0x00439EE0, 0x00000E08, 0x00000006, 0x00439EE8, 0x00000E06, 0x00000006,
-    0x00439DE0, 0x00000E03, 0x00000006, 0x00439EB0, 0x00000002, 0x00000006, 0x0043A044, 0x00000001,
-    0x00000006, 0x00439FF8, 0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x0000000D, 0x0043A1D0,
-    0x00000E08, 0x0000000D, 0x0043A1D8, 0x00000E06, 0x0000000D, 0x0043A110, 0x00000E03, 0x0000000D,
-    0x0043A1A0, 0x00000002, 0x0000000D, 0x0043A2D4, 0x00000001, 0x0000000D, 0x0043A278, 0x00000000,
-    0x00000000, 0x00000000,
+    0xe07, 6, (unsigned int)g_Menu_SoundOptionsReturnZeroPackedAddress24, 0xe08,
+    6, (unsigned int)g_Menu_UpdateSoundOptionsScreenPackedAddress24, 0xe06, 6,
+    (unsigned int)g_Menu_CreateSoundOptionsScreenPackedAddress24, 0xe03, 6, (unsigned int)g_Menu_FreeSoundOptionsScreenPackedAddress24,
+    2, 6, (unsigned int)g_Menu_CancelSoundOptionsScreenPackedAddress24, 1,
+    6, (unsigned int)g_Menu_ConfirmSoundOptionsScreenPackedAddress24, 0, 0,
+    0, 0xe07, 13, (unsigned int)g_Menu_SoundSliderReturnZeroPackedAddress24,
+    0xe08, 13, (unsigned int)g_Menu_ApplySoundSlidersPackedAddress24, 0xe06,
+    13, (unsigned int)g_Menu_CreateSoundSlidersPackedAddress24, 0xe03, 13,
+    (unsigned int)g_Menu_FreeSoundSlidersPackedAddress24, 2, 13, (unsigned int)g_Menu_CancelSoundSliderPopupPackedAddress24,
+    1, 13, (unsigned int)g_Menu_ConfirmSoundSliderPopupPackedAddress24, 0,
+    0, 0,
 };
 #endif
 #if defined(VERSION_EU_X)
+extern char g_Achieve_DispatchResultsActorEventAddress[];
+extern char g_Menu_DispatchSoundOptionsEventAddress[];
 unsigned int D_src_3cb405cb[42] = {
-    0x00000E07, 0x00000006, 0x0043A010, 0x00000E08, 0x00000006, 0x0043A018, 0x00000E06, 0x00000006,
-    0x00439F10, 0x00000E03, 0x00000006, 0x00439FE0, 0x00000002, 0x00000006, 0x0043A174, 0x00000001,
-    0x00000006, 0x0043A128, 0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x0000000D, 0x0043A300,
-    0x00000E08, 0x0000000D, 0x0043A308, 0x00000E06, 0x0000000D, 0x0043A240, 0x00000E03, 0x0000000D,
-    0x0043A2D0, 0x00000002, 0x0000000D, 0x0043A404, 0x00000001, 0x0000000D, 0x0043A3A8, 0x00000000,
-    0x00000000, 0x00000000,
+    0xe07, 6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 400), 0xe08,
+    6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 408), 0xe06, 6,
+    (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 144), 0xe03, 6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 352),
+    2, 6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 756), 1,
+    6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 680), 0, 0,
+    0, 0xe07, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 336),
+    0xe08, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 344), 0xe06,
+    13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 144), 0xe03, 13,
+    (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 288), 2, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 596),
+    1, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 504), 0,
+    0, 0,
 };
 #endif
 #endif
@@ -49,11 +80,18 @@ unsigned int g_MenuCreatesoundoptionsscreenPointerWords1[6] = {
 #endif
 
 #if defined(VERSION_US)
+extern char g_Achieve_DispatchResultsActorEventAddress[];
+extern char g_Menu_UpdateSoundOptionsScreenPackedAddress24_MenuCreatesoundoptionsscreenData[];
+extern char g_Menu_DispatchSoundOptionsEventAddress[];
 unsigned int g_MenuCreatesoundoptionsscreenPointerWordsTailUs[36] = {
-    0x00000E06, 0x00000006, 0x004390F0, 0x00000E03, 0x00000006, 0x004391C0, 0x00000002, 0x00000006,
-    0x00439354, 0x00000001, 0x00000006, 0x00439308, 0x00000000, 0x00000000, 0x00000000, 0x00000E07,
-    0x0000000D, 0x004394E0, 0x00000E08, 0x0000000D, 0x004394E8, 0x00000E06, 0x0000000D, 0x00439420,
-    0x00000E03, 0x0000000D, 0x004394B0, 0x00000002, 0x0000000D, 0x004395E4, 0x00000001, 0x0000000D,
-    0x00439588, 0x00000000, 0x00000000, 0x00000000,
+    0xe06, 6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 148), 0xe03,
+    6, (unsigned int)(g_Achieve_DispatchResultsActorEventAddress + 356), 2, 6,
+    (unsigned int)(g_Menu_UpdateSoundOptionsScreenPackedAddress24_MenuCreatesoundoptionsscreenData + 348), 1, 6, (unsigned int)(g_Menu_UpdateSoundOptionsScreenPackedAddress24_MenuCreatesoundoptionsscreenData + 272),
+    0, 0, 0, 0xe07,
+    13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 336), 0xe08, 13,
+    (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 344), 0xe06, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 144),
+    0xe03, 13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 288), 2,
+    13, (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 596), 1, 13,
+    (unsigned int)(g_Menu_DispatchSoundOptionsEventAddress + 504), 0, 0, 0,
 };
 #endif

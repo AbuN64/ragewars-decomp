@@ -3,8 +3,8 @@
 /* 800C6BD4.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C6BD4 */
-unsigned int g_aiDevicesFloatConstantWords[3] = {
-    0x40C90FDB, 0x3E4CCCCD, 0x3E4CCCCD,
+float g_aiDevicesFloatConstantWords[3] = {
+    6.2831855f, 0.2f, 0.2f,
 };
 #endif
 

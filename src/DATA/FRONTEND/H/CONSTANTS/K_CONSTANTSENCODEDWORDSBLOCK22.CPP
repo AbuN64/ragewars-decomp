@@ -1,7 +1,11 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int k_ConstantsEncodedWordsBlock22[10] = {
-    0x800CB564, 0x800CB560, 0x800CB550, 0x00000000, 0x00000000, 0x00000000, 0x800CB574, 0x00000000,
-    0x800CB588, 0x00000000,
+extern char g_residentStrings1_us_rev1[];
+extern char g_debuglinkTextBytes[];
+extern char s_controllerPakText[];
+void *k_ConstantsEncodedWordsBlock22[10] = {
+    g_residentStrings1_us_rev1, g_debuglinkTextBytes, s_controllerPakText, 0,
+    0, 0, (void *)(g_residentStrings1_us_rev1 + 16), 0,
+    (void *)(g_residentStrings1_us_rev1 + 36), 0,
 };
 #endif

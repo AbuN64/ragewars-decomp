@@ -2,8 +2,9 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_player_name_buffers_us_rev1.c */
-unsigned int g_PlayerNameBuffersWords1[4] = {
-    0x800E63CC, 0x800E63E4, 0x800E63FC, 0x800E6414,
+extern char g_multiplayerSavedPlayerNames[];
+void *g_PlayerNameBuffersWords1[4] = {
+    g_multiplayerSavedPlayerNames, (void *)(g_multiplayerSavedPlayerNames + 24), (void *)(g_multiplayerSavedPlayerNames + 48), (void *)(g_multiplayerSavedPlayerNames + 72),
 };
 #endif
 

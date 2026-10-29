@@ -12,8 +12,9 @@ char s_SndplayerTOptiText[8] =
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_SndplayerEncodedWordsBlock4[2] = {
-    0x00230180, 0x00230180,
+extern char Weapon_FireStateEnterCallbackEntry[];
+void *k_SndplayerEncodedWordsBlock4[2] = {
+    (void *)(Weapon_FireStateEnterCallbackEntry + 1120), (void *)(Weapon_FireStateEnterCallbackEntry + 1120),
 };
 #endif
 

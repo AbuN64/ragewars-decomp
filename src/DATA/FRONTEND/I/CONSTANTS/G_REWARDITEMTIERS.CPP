@@ -35,27 +35,43 @@ unsigned int g_rewardScoreBudgets[25] = {
 
 /* g_rewardItemTiers_GRewarditemtiers.CPP */
 #if defined(VERSION_US_REV1)
+extern char g_slotSelectionTextReferenceShared1[];
+extern char g_slotSelectionTextReferenceShared3[];
 unsigned int g_rewardItemTiers[102] = {
-    0x00000000, 0x800D7284, 0x00000001, 0x800D72CC, 0x00000002, 0x800D729C, 0x00000003, 0x800D72A8,
-    0x00000004, 0x800D72D8, 0x00000005, 0x800D7290, 0x00000006, 0x800D7300, 0x00000007, 0x800D730C,
-    0x00000008, 0x800D72F4, 0x00000009, 0x800D72C0, 0x0000000A, 0x800D7318, 0xFFFFFFFF, 0x800D72E4,
-    0xFFFFFFFF, 0x800D72EC, 0xFFFFFFFF, 0x800D72F0, 0xFFFFFFFF, 0x800D72E8, 0x00000011, 0x800D7324,
-    0x00000012, 0x800D72B4, 0x00000000, 0x800D7288, 0x00000001, 0x800D72D0, 0x00000002, 0x800D72A0,
-    0x00000003, 0x800D72AC, 0x00000004, 0x800D72DC, 0x00000005, 0x800D7294, 0x00000006, 0x800D7304,
-    0x00000007, 0x800D7310, 0x00000008, 0x800D72F8, 0x00000009, 0x800D72C4, 0x0000000A, 0x800D731C,
-    0xFFFFFFFF, 0x800D72E4, 0xFFFFFFFF, 0x800D72EC, 0xFFFFFFFF, 0x800D72F0, 0xFFFFFFFF, 0x800D72E8,
-    0x00000011, 0x800D7328, 0x00000012, 0x800D72B8, 0x00000000, 0x800D728C, 0x00000001, 0x800D72D4,
-    0x00000002, 0x800D72A4, 0x00000003, 0x800D72B0, 0x00000004, 0x800D72E0, 0x00000005, 0x800D7298,
-    0x00000006, 0x800D7308, 0x00000007, 0x800D7314, 0x00000008, 0x800D72FC, 0x00000009, 0x800D72C8,
-    0x0000000A, 0x800D7320, 0x0000000B, 0x800D72E4, 0x0000000C, 0x800D72EC, 0x0000000D, 0x800D72F0,
-    0x0000000E, 0x800D72E8, 0x00000011, 0x800D732C, 0x00000012, 0x800D72BC,
+    0, (unsigned int)(g_slotSelectionTextReferenceShared1 + 8), 1, (unsigned int)(g_slotSelectionTextReferenceShared1 + 80),
+    2, (unsigned int)(g_slotSelectionTextReferenceShared1 + 32), 3, (unsigned int)(g_slotSelectionTextReferenceShared1 + 44),
+    4, (unsigned int)(g_slotSelectionTextReferenceShared1 + 92), 5, (unsigned int)(g_slotSelectionTextReferenceShared1 + 20),
+    6, (unsigned int)(g_slotSelectionTextReferenceShared3 + 16), 7, (unsigned int)(g_slotSelectionTextReferenceShared3 + 28),
+    8, (unsigned int)(g_slotSelectionTextReferenceShared3 + 4), 9, (unsigned int)(g_slotSelectionTextReferenceShared1 + 68),
+    10, (unsigned int)(g_slotSelectionTextReferenceShared3 + 40), -1, (unsigned int)(g_slotSelectionTextReferenceShared1 + 104),
+    -1, (unsigned int)(g_slotSelectionTextReferenceShared1 + 112), -1, (unsigned int)g_slotSelectionTextReferenceShared3,
+    -1, (unsigned int)(g_slotSelectionTextReferenceShared1 + 108), 17, (unsigned int)(g_slotSelectionTextReferenceShared3 + 52),
+    18, (unsigned int)(g_slotSelectionTextReferenceShared1 + 56), 0, (unsigned int)(g_slotSelectionTextReferenceShared1 + 12),
+    1, (unsigned int)(g_slotSelectionTextReferenceShared1 + 84), 2, (unsigned int)(g_slotSelectionTextReferenceShared1 + 36),
+    3, (unsigned int)(g_slotSelectionTextReferenceShared1 + 48), 4, (unsigned int)(g_slotSelectionTextReferenceShared1 + 96),
+    5, (unsigned int)(g_slotSelectionTextReferenceShared1 + 24), 6, (unsigned int)(g_slotSelectionTextReferenceShared3 + 20),
+    7, (unsigned int)(g_slotSelectionTextReferenceShared3 + 32), 8, (unsigned int)(g_slotSelectionTextReferenceShared3 + 8),
+    9, (unsigned int)(g_slotSelectionTextReferenceShared1 + 72), 10, (unsigned int)(g_slotSelectionTextReferenceShared3 + 44),
+    -1, (unsigned int)(g_slotSelectionTextReferenceShared1 + 104), -1, (unsigned int)(g_slotSelectionTextReferenceShared1 + 112),
+    -1, (unsigned int)g_slotSelectionTextReferenceShared3, -1, (unsigned int)(g_slotSelectionTextReferenceShared1 + 108),
+    17, (unsigned int)(g_slotSelectionTextReferenceShared3 + 56), 18, (unsigned int)(g_slotSelectionTextReferenceShared1 + 60),
+    0, (unsigned int)(g_slotSelectionTextReferenceShared1 + 16), 1, (unsigned int)(g_slotSelectionTextReferenceShared1 + 88),
+    2, (unsigned int)(g_slotSelectionTextReferenceShared1 + 40), 3, (unsigned int)(g_slotSelectionTextReferenceShared1 + 52),
+    4, (unsigned int)(g_slotSelectionTextReferenceShared1 + 100), 5, (unsigned int)(g_slotSelectionTextReferenceShared1 + 28),
+    6, (unsigned int)(g_slotSelectionTextReferenceShared3 + 24), 7, (unsigned int)(g_slotSelectionTextReferenceShared3 + 36),
+    8, (unsigned int)(g_slotSelectionTextReferenceShared3 + 12), 9, (unsigned int)(g_slotSelectionTextReferenceShared1 + 76),
+    10, (unsigned int)(g_slotSelectionTextReferenceShared3 + 48), 11, (unsigned int)(g_slotSelectionTextReferenceShared1 + 104),
+    12, (unsigned int)(g_slotSelectionTextReferenceShared1 + 112), 13, (unsigned int)g_slotSelectionTextReferenceShared3,
+    14, (unsigned int)(g_slotSelectionTextReferenceShared1 + 108), 17, (unsigned int)(g_slotSelectionTextReferenceShared3 + 60),
+    18, (unsigned int)(g_slotSelectionTextReferenceShared1 + 64),
 };
 #endif
 
 /* g_rewardItemLabelPointerTailUsRev1_GRewarditemtiers.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3594_unclaimed_E4390_unclaimed_E441C_unclaimed_E45B4 */
-unsigned int g_rewardItemLabelPointerTailUsRev1[3] = {
-    0x800D7490, 0x800D7494, 0x800D7498,
+extern char g_slotSelectionTextReferenceShared4[];
+void *g_rewardItemLabelPointerTailUsRev1[3] = {
+    (void *)(g_slotSelectionTextReferenceShared4 + 204), (void *)(g_slotSelectionTextReferenceShared4 + 208), (void *)(g_slotSelectionTextReferenceShared4 + 212),
 };
 #endif

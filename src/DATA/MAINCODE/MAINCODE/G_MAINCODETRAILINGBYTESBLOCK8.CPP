@@ -10,5 +10,8 @@ unsigned char g_MaincodeTrailingBytesBlock8[4] = { 0x00, 0xA0, 0x88, 0x21 };
 /* 802ABDBC_7.CPP */
 #if defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802AC3EC_us_rev1[1] = { 0x00431021U };
+extern char g_PAKInterface_ActivatePlayerPanelActionPackedAddress242[];
+void *func_802AC3EC_us_rev1[1] = {
+    (void *)(g_PAKInterface_ActivatePlayerPanelActionPackedAddress242 + 1897),
+};
 #endif

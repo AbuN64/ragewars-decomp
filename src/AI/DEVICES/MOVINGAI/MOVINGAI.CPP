@@ -280,14 +280,14 @@ const float k_MovingaiOneWords[1] = {
 };
 
 #if defined(VERSION_EU_X)
-unsigned int k_MovingaiEncodedWordsBlock1[3] = {
-    0x40C90FDB, 0x3E4CCCCD, 0x3E4CCCCD,
+float k_MovingaiEncodedWordsBlock1[3] = {
+    6.2831855f, 0.2f, 0.2f,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_MovingaiEncodedWords[3] = {
-    0x00206BDC, 0x00206C9C, 0x00206B3C,
+void *k_MovingaiEncodedWords[3] = {
+    (void *)((char *)&g_triggeredVariantDrawRomEntry + 656), (void *)((char *)&g_triggeredVariantDrawRomEntry + 848), (void *)((char *)&g_triggeredVariantDrawRomEntry + 496),
 };
 #endif
 
