@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel __osSetFpcCsr
+LEAF(__osSetFpcCsr)
     cfc1    v0, $31
     ctc1    a0, $31
     jr      ra

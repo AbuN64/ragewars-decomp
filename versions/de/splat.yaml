@@ -3121,6 +3121,7 @@ segments:
       - [0xBD108, c, game_code]
       - [0xBD158, c, game_code]
       - [0xBD170, c, game_code]
+      - [0xBD380, c, game_code]
       - [0xBD890, c, game_code]
       - [0xBD964, c, game_code]
       - [0xBDA1C, data, game_code/g_AudioTrailingBytesBlock16]

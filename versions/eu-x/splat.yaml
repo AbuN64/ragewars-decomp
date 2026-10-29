@@ -3129,6 +3129,7 @@ segments:
       - [0xBD3E8, c, game_code]
       - [0xBD438, c, game_code]
       - [0xBD450, c, game_code]
+      - [0xBD660, c, game_code]
       - [0xBDB70, c, game_code]
       - [0xBDC44, c, game_code]
       - [0xBDCFC, data, game_code/func_802BD0FC_eu_x]

@@ -3205,6 +3205,7 @@ segments:
       - [0xC21F8, c, game_code]
       - [0xC2248, c, game_code]
       - [0xC2260, c, game_code]
+      - [0xC2470, c, game_code]
       - [0xC2980, c, game_code]
       - [0xC2A54, c, game_code]
       - [0xC2B0C, data, game_code/func_802BD0FC_eu_x]

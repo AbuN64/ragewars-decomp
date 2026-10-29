@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel osUnmapTLB
+LEAF(osUnmapTLB)
     mfc0    t0, C0_ENTRYHI
     mtc0    a0, C0_INX
     lui     t1, 0x8000

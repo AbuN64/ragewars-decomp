@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel osMapTLB
+LEAF(osMapTLB)
     lw      t8, 0x10(sp)
     addi    t0, zero, 0x7
     lw      t9, 0x14(sp)

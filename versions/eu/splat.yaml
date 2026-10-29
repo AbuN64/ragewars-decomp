@@ -3124,6 +3124,7 @@ segments:
       - [0xBD3A8, c, game_code]
       - [0xBD3F8, c, game_code]
       - [0xBD410, c, game_code]
+      - [0xBD620, c, game_code]
       - [0xBDB30, c, game_code]
       - [0xBDC04, c, game_code]
       - [0xBDCBC, data, game_code/g_AudioRuntimeSplitTextBlockATrailingBytesBlock3]

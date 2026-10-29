@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel Libgultra_CaptureTlbMappingTable
+LEAF(Libgultra_CaptureTlbMappingTable)
     add     v0, zero, zero
     addi    a1, zero, 0x1E
     lui     a0, %hi(g_capturedTlbMappings)

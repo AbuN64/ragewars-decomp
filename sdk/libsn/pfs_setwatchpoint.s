@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel Pfs_SetWatchpointAddress
+LEAF(Pfs_SetWatchpointAddress)
 #if VERSION_DE
     jr      ra
 #elif VERSION_US_REV1

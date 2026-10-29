@@ -9,7 +9,7 @@
 .set noreorder
 .set noat
 
-glabel Libgultra_ReturnFromDebugException
+LEAF(Libgultra_ReturnFromDebugException)
     lw      AT, 0x33C(k0)
     nop
     bnez    AT, 6f
@@ -106,7 +106,7 @@ glabel Libgultra_ReturnFromDebugException
     eret
 END(Libgultra_ReturnFromDebugException)
 
-glabel Libgultra_TrwExceptionTail1
+LEAF(Libgultra_TrwExceptionTail1)
     sd      zero, 0(k0)
     sd      AT, 0x8(k0)
     sd      v0, 0x10(k0)

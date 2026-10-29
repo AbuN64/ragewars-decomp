@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel Rnc_UnpackMethod2
+LEAF(Rnc_UnpackMethod2)
     addi    sp, sp, -0x48
     sw      a0, 0(sp)
     sw      a1, 0x4(sp)

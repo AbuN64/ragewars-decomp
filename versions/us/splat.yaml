@@ -3122,6 +3122,7 @@ segments:
       - [0xBD038, c, game_code]
       - [0xBD088, c, game_code]
       - [0xBD0A0, c, game_code]
+      - [0xBD2B0, c, game_code]
       - [0xBD7C0, c, game_code]
       - [0xBD894, c, game_code]
       - [0xBD94C, data, game_code/k_bitsLabelWord]

@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel Rnc_BuildHuffmanTable
+LEAF(Rnc_BuildHuffmanTable)
     addi    t0, zero, 0x1F
     addu    t8, ra, zero
     jal     Rnc_ReadBits

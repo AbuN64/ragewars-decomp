@@ -6687,6 +6687,7 @@ __osExceptionPreamble = 0x802BBF48; // type:func rom:0xBCB48
 send_mesg = 0x802BC548; // type:func rom:0xBD148
 __osEnqueueAndYield = 0x802BC64C; // type:func rom:0xBD24C
 __osDispatchThread = 0x802BC850; // type:func rom:0xBD450
+__osLeoInterrupt = 0x802BCA60; // type:func rom:0xBD660
 Audio_AbortDiskTransfer = 0x802BCF70; // type:func rom:0xBDB70
 Audio_PostDiskEventMessage = 0x802BD044; // type:func rom:0xBDC44
 func_802BD0FC_eu_x = 0x802BD0FC; // rom:0xBDCFC

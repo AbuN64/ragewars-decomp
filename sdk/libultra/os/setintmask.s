@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel osSetIntMask
+LEAF(osSetIntMask)
     mfc0    t4, C0_SR
     lui     t0, %hi(g_globalInterruptMask)
     addiu   t0, t0, %lo(g_globalInterruptMask)

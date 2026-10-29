@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel Boot_EntryPoint
+LEAF(Boot_EntryPoint)
     lui     sp, 0x803F
     ori     sp, sp, 0xFFC0
     li      a0, 0x1E

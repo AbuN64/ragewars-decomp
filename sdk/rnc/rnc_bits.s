@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel Rnc_ReadBits
+LEAF(Rnc_ReadBits)
     and     t0, t6, t0
     sub     t7, t7, t1
     bgez    t7, 1f
@@ -20,7 +20,7 @@ glabel Rnc_ReadBits
     srlv    t6, t6, t1
 END(Rnc_ReadBits)
 
-glabel Rnc_RefillBitBuffer
+LEAF(Rnc_RefillBitBuffer)
     add     t7, t7, t1
     srlv    t6, t6, t7
     addi    s3, s3, 0x4

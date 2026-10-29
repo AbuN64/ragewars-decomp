@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel __osProbeTLB
+LEAF(__osProbeTLB)
     mfc0    t0, C0_ENTRYHI
     nop
     andi    t1, t0, 0xFF

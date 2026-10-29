@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel osGetCount
+LEAF(osGetCount)
     mfc0    v0, C0_COUNT
     jr      ra
     nop

@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel __osDisableInt
+LEAF(__osDisableInt)
     mfc0    t0, C0_SR
     li      AT, -0x2
     and     t1, t0, AT
@@ -17,7 +17,7 @@ glabel __osDisableInt
     nop
 END(__osDisableInt)
 
-glabel __osRestoreInt
+LEAF(__osRestoreInt)
     mfc0    t0, C0_SR
     or      t0, t0, a0
     mtc0    t0, C0_SR

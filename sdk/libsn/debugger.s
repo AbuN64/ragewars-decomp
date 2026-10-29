@@ -10,7 +10,7 @@
 .set noat
 
 #if !VERSION_DE
-glabel Libgultra_DispatchExceptionVectors
+LEAF(Libgultra_DispatchExceptionVectors)
 #if VERSION_EU
     xori    v0, v1, 0x2561
     swr     a1, 0x7728(t1)
@@ -55,7 +55,7 @@ glabel Libgultra_DispatchExceptionVectors
 END(Libgultra_DispatchExceptionVectors)
 #endif
 
-glabel Libsn_InstallDebuggerExceptionHooks
+LEAF(Libsn_InstallDebuggerExceptionHooks)
     addi    sp, sp, -0x8
     sw      ra, 0(sp)
     lui     t0, %hi(Libgultra_DebugExceptionVectorTemplateAddress)
@@ -103,7 +103,7 @@ glabel Libsn_InstallDebuggerExceptionHooks
     addi    sp, sp, 0x8
 END(Libsn_InstallDebuggerExceptionHooks)
 
-glabel Libgultra_TrwCacheFlush0
+LEAF(Libgultra_TrwCacheFlush0)
     lui     t0, %hi(g_debugDataCacheLastIndex)
     addiu   t1, t0, %lo(g_debugDataCacheLastIndex)
 1:
@@ -114,7 +114,7 @@ glabel Libgultra_TrwCacheFlush0
     nop
 END(Libgultra_TrwCacheFlush0)
 
-glabel Libgultra_TrwCacheFlush1
+LEAF(Libgultra_TrwCacheFlush1)
     lui     t0, %hi(g_debugInstructionCacheLastIndex)
     addiu   t1, t0, %lo(g_debugInstructionCacheLastIndex)
 1:
@@ -125,19 +125,19 @@ glabel Libgultra_TrwCacheFlush1
     nop
 END(Libgultra_TrwCacheFlush1)
 
-glabel Libgultra_TrwGetSr
+LEAF(Libgultra_TrwGetSr)
     mfc0    v0, C0_SR
     jr      ra
     nop
 END(Libgultra_TrwGetSr)
 
-glabel Libgultra_TrwSetSr
+LEAF(Libgultra_TrwSetSr)
     mtc0    a0, C0_SR
     jr      ra
     nop
 END(Libgultra_TrwSetSr)
 
-glabel Libgultra_TrwReadTlbEntry
+LEAF(Libgultra_TrwReadTlbEntry)
     addi    sp, sp, -0x10
     sw      a0, 0(sp)
     sw      a1, 0x4(sp)
@@ -174,7 +174,7 @@ glabel Libgultra_TrwReadTlbEntry
     addi    sp, sp, 0x10
 END(Libgultra_TrwReadTlbEntry)
 
-glabel Libgultra_TrwExceptionHandler
+LEAF(Libgultra_TrwExceptionHandler)
     lui     k0, %hi(g_debugExceptionContext)
     addiu   k0, k0, %lo(g_debugExceptionContext)
     sd      AT, 0x328(k0)

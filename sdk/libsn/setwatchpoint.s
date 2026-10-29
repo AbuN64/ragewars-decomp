@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel Libgultra_SetWatchpoint
+LEAF(Libgultra_SetWatchpoint)
     sll     a0, a0, 4
     srl     a0, a0, 4
     addi    v0, zero, -0x8

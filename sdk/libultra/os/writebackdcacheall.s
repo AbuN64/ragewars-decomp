@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel osWritebackDCacheAll
+LEAF(osWritebackDCacheAll)
     lui     t0, 0x8000
     li      t2, 0x2000
     addu    t1, t0, t2

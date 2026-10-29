@@ -9,7 +9,7 @@
 .set noreorder
 .set noat
 
-glabel __osExceptionPreamble
+LEAF(__osExceptionPreamble)
 #if VERSION_EU
     addiu   sp, sp, 0x40
     addu    a2, zero, zero
@@ -512,7 +512,7 @@ END(__osExceptionPreamble)
 
 /* libultra exceptasm.s send_mesg: queue the message for the event in $a0 and wake a blocked receiver.
 Handwritten: the caller is parked in $s2 and the routine returns with jr $s2. */
-glabel send_mesg
+LEAF(send_mesg)
     addu    s2, ra, zero
     lui     t2, %hi(g_osEventMessageBindings)
     addiu   t2, t2, %lo(g_osEventMessageBindings)
@@ -569,7 +569,7 @@ glabel send_mesg
     nop
 END(send_mesg)
 
-glabel handle_CpU
+LEAF(handle_CpU)
     lui     AT, 0x3000
     and     t1, t0, AT
     srl     t1, t1, 28
@@ -586,7 +586,7 @@ glabel handle_CpU
     nop
 END(handle_CpU)
 
-glabel __osEnqueueAndYield
+LEAF(__osEnqueueAndYield)
     lui     a1, %hi(g_osRunningThread)
     lw      a1, %lo(g_osRunningThread)(a1)
     mfc0    t0, C0_SR
@@ -696,7 +696,7 @@ glabel __osEnqueueAndYield
     j       __osDispatchThread
 END(__osEnqueueAndYield)
 
-glabel __osEnqueueThread
+LEAF(__osEnqueueThread)
     addu    t9, a0, zero
     lw      t8, 0(a0)
     lw      t7, 0x4(a1)
@@ -721,7 +721,7 @@ glabel __osEnqueueThread
     sw      a0, 0x8(a1)
 END(__osEnqueueThread)
 
-glabel __osPopThread
+LEAF(__osPopThread)
     lw      v0, 0(a0)
     nop
     lw      t9, 0(v0)
@@ -730,7 +730,7 @@ glabel __osPopThread
     sw      t9, 0(a0)
 END(__osPopThread)
 
-glabel __osDispatchThread
+LEAF(__osDispatchThread)
     lui     a0, %hi(g_osRunnableThreadQueue)
     addiu   a0, a0, %lo(g_osRunnableThreadQueue)
     jal     __osPopThread
@@ -861,382 +861,27 @@ glabel __osDispatchThread
     eret
 END(__osDispatchThread)
 
-glabel __osCleanupThread
+LEAF(__osCleanupThread)
     jal     Audio_DestroyThread
     addu    a0, zero, zero
-/* alignment fill before leointerrupt.o: stale bytes of the original build, one value per version */
+/* alignment fill before leointerrupt.o: stale bytes of the original build, one value per version; they decode as
+   instructions, but 0x00134348 is a jr with nonzero rt/rd/shamt fields, which no assembler mnemonic can encode */
 #if VERSION_DE
-    .word   0x3C05A460
-    .word   0x3C038015
-    .word   0x8C6387B4
+    lui     a1, 0xA460
+    lui     v1, 0x8015
+    lw      v1, -0x784C(v1)
 #elif VERSION_EU
-    .word   0x241200FF
-    .word   0x1052001D
-    .word   0x00000000
+    addiu   s2, zero, 0xFF
+    beq     v0, s2, . + 4 + 0x74
+    nop
 #elif VERSION_US
-    .word   0x00000000
+    nop
     .word   0x00134348
-    .word   0x65616C74
+    daddiu  at, t3, 0x6C74
 #else
-    .word   0x10400002
-    .word   0x24100020
-    .word   0x02208021
+    beqz    v0, . + 4 + 8
+    addiu   s0, zero, 0x20
+    addu    s0, s1, zero
 #endif
 END(__osCleanupThread)
 
-glabel __osLeoInterrupt
-    addiu   sp, sp, -0x30
-    lui     a1, 0xA460
-    lui     v1, %hi(g_currentDiskPeripheralHandle)
-    lw      v1, %lo(g_currentDiskPeripheralHandle)(v1)
-    ori     a1, a1, 0x10
-    sw      ra, 0x2C(sp)
-    sw      s2, 0x28(sp)
-    sw      s1, 0x24(sp)
-    sw      s0, 0x20(sp)
-    lw      v0, 0(a1)
-    addiu   s1, v1, 0x14
-    sw      v0, 0x18(sp)
-    lhu     a0, 0x1A(v1)
-    lw      v1, 0x18(sp)
-    sll     v0, a0, 3
-    addu    v0, v0, a0
-    sll     v0, v0, 2
-    addiu   v0, v0, 0x18
-    andi    v1, v1, 0x1
-    beqz    v1, 1f
-    addu    s0, s1, v0
-    li      v0, 0x1D
-    lui     a0, %hi(g_globalInterruptMask)
-    addiu   a0, a0, %lo(g_globalInterruptMask)
-    sw      v0, 0(s0)
-    lw      v0, 0(a0)
-    li      v1, -0x801
-    and     v0, v0, v1
-    jal     Audio_PostDiskEventMessage
-    sw      v0, 0(a0)
-    j       30f
-    li      v0, 0x1
-1:
-    lw      v0, 0(a1)
-    sw      v0, 0x18(sp)
-    lw      v0, 0x18(sp)
-    andi    v0, v0, 0x3
-    beqz    v0, 3f
-    lui     v0, 0xA500
-    lui     v1, 0xA460
-    ori     v1, v1, 0x10
-2:
-    lw      v0, 0(v1)
-    sw      v0, 0x18(sp)
-    lw      v0, 0x18(sp)
-    andi    v0, v0, 0x3
-    bnez    v0, 2b
-    lui     v0, 0xA500
-3:
-    ori     v0, v0, 0x508
-    lw      s2, 0(v0)
-    lui     v0, 0x200
-    and     v0, s2, v0
-    beqz    v0, 6f
-    lui     v0, 0xA460
-    ori     v0, v0, 0x10
-    lw      v0, 0(v0)
-    sw      v0, 0x18(sp)
-    lw      v0, 0x18(sp)
-    andi    v0, v0, 0x3
-    beqz    v0, 5f
-    lui     v1, 0xA460
-    ori     v1, v1, 0x10
-4:
-    lw      v0, 0(v1)
-    sw      v0, 0x18(sp)
-    lw      v0, 0x18(sp)
-    andi    v0, v0, 0x3
-    bnez    v0, 4b
-    nop
-5:
-    lui     a1, 0xA500
-    ori     a1, a1, 0x510
-    lw      a0, 0x10(s1)
-    lui     v1, 0x100
-    sw      zero, 0(s0)
-    or      a0, a0, v1
-    sw      a0, 0(a1)
-    j       30f
-    addu    v0, zero, zero
-6:
-    lw      v1, 0(s1)
-    li      a2, 0x2
-    beq     v1, a2, 30f
-    li      v0, 0x1
-    lui     v0, 0x800
-    and     v0, s2, v0
-    beqz    v0, 9f
-    lui     v0, 0xA460
-    ori     v0, v0, 0x10
-    lw      v0, 0(v0)
-    sw      v0, 0x18(sp)
-    lw      v0, 0x18(sp)
-    andi    v0, v0, 0x3
-    beqz    v0, 8f
-    lui     v1, 0xA460
-    ori     v1, v1, 0x10
-7:
-    lw      v0, 0(v1)
-    sw      v0, 0x18(sp)
-    lw      v0, 0x18(sp)
-    andi    v0, v0, 0x3
-    bnez    v0, 7b
-    nop
-8:
-    lui     v0, 0xA500
-    ori     v0, v0, 0x508
-    lw      s2, 0(v0)
-    li      v0, 0x16
-    jal     Audio_PostDiskEventMessage
-    sw      v0, 0(s0)
-    lui     a3, 0xA460
-    ori     a3, a3, 0x10
-    lui     a2, 0x10
-    ori     a2, a2, 0x401
-    li      v0, 0x1
-    lui     a1, %hi(g_globalInterruptMask)
-    addiu   a1, a1, %lo(g_globalInterruptMask)
-    lw      v1, 0(a1)
-    li      a0, 0x2
-    sw      a0, 0(a3)
-    or      v1, v1, a2
-    j       30f
-    sw      v1, 0(a1)
-9:
-    li      v0, 0x1
-    bne     v1, v0, 11f
-    lui     v0, 0x4000
-    and     v0, s2, v0
-    bnez    v0, 10f
-    li      a1, 0x1
-    lw      a0, 0x8(s1)
-    lhu     v1, 0x4(s1)
-    addiu   a0, a0, 0x1
-    sll     v0, v1, 2
-    addu    v0, v0, v1
-    sll     v1, v0, 4
-    addu    v0, v0, v1
-    bne     a0, v0, 27f
-    li      v0, 0x18
-    lui     a0, 0xA460
-    ori     a0, a0, 0x10
-    lui     a1, 0x10
-    lui     v1, %hi(g_globalInterruptMask)
-    addiu   v1, v1, %lo(g_globalInterruptMask)
-    lw      v0, 0(v1)
-    ori     a1, a1, 0x401
-    sw      a2, 0(a0)
-    sw      zero, 0(s0)
-    or      v0, v0, a1
-    jal     Audio_PostDiskEventMessage
-    sw      v0, 0(v1)
-    j       30f
-    li      v0, 0x1
-10:
-    lw      v0, 0x4(s0)
-    lw      v1, 0xC(s0)
-    addu    v0, v0, v1
-    sw      v0, 0x4(s0)
-    lw      v0, 0x8(s1)
-    lui     a0, %hi(g_currentDiskPeripheralHandle)
-    lw      a0, %lo(g_currentDiskPeripheralHandle)(a0)
-    addu    v0, v0, a1
-    sw      v0, 0x8(s1)
-    lw      v0, 0xC(s0)
-    lui     a2, 0x500
-    sw      v0, 0x10(sp)
-    lw      a3, 0x4(s0)
-    jal     __osEPiRawStartDma
-    ori     a2, a2, 0x400
-    j       30f
-    li      v0, 0x1
-11:
-    bnez    v1, 27f
-    li      v0, 0x4
-    lhu     v1, 0x4(s1)
-    li      v0, 0x3
-    bne     v1, v0, 13f
-    nop
-    lw      v0, 0x10(s0)
-    lw      v1, 0x8(s1)
-    addiu   v0, v0, 0x11
-    slt     v0, v0, v1
-    beqz    v0, 12f
-    lui     v0, 0x4000
-    j       28f
-    sw      zero, 0(s0)
-12:
-    and     v0, s2, v0
-    bnez    v0, 14f
-    lui     v0, 0xA500
-    j       27f
-    li      v0, 0x17
-13:
-    lw      v0, 0x4(s0)
-    lw      v1, 0xC(s0)
-    addu    v0, v0, v1
-    sw      v0, 0x4(s0)
-    lui     v0, 0xA500
-14:
-    ori     v0, v0, 0x510
-    lw      a0, 0(v0)
-    lui     v1, 0x60
-    and     v0, a0, v1
-    beq     v0, v1, 15f
-    lui     v0, 0x200
-    and     v0, a0, v0
-    beqz    v0, 18f
-    lui     v0, 0x1000
-15:
-    lw      v1, 0x10(s0)
-    sltiu   v0, v1, 0x4
-    bnez    v0, 16f
-    sll     v1, v1, 2
-    lhu     v1, 0x4(s1)
-    li      v0, 0x3
-    bne     v1, v0, 27f
-    li      v0, 0x17
-    lw      v0, 0x8(s1)
-    slti    v0, v0, 0x53
-    bnez    v0, 17f
-    li      v0, 0x17
-    j       28f
-    sw      v0, 0(s0)
-16:
-    lw      v0, 0x8(s1)
-    addu    v1, s0, v1
-    addiu   v0, v0, 0x1
-    sw      v0, 0x14(v1)
-17:
-    lw      v0, 0x10(s0)
-    addiu   v0, v0, 0x1
-    sw      v0, 0x10(s0)
-    lui     v0, 0x1000
-18:
-    and     v0, s2, v0
-    beqz    v0, 22f
-    li      v1, 0x58
-    lw      v0, 0x8(s1)
-    addiu   v0, v0, 0x1
-    beq     v0, v1, 19f
-    li      v0, 0x18
-    jal     Audio_AbortDiskTransfer
-    sw      v0, 0(s0)
-19:
-    lw      v1, 0x4(s1)
-    lui     v0, 0x2
-    bne     v1, v0, 20f
-    lui     a1, 0xA460
-    lw      v1, 0x40(s1)
-    lw      a0, 0x48(s1)
-    li      v0, 0x1
-    sh      v0, 0x6(s1)
-    li      v0, -0x1
-    sw      v0, 0x8(s1)
-    li      v0, 0x16
-    subu    v1, v1, a0
-    sw      v1, 0x40(s1)
-    j       21f
-    sw      v0, 0(s0)
-20:
-    ori     a1, a1, 0x10
-    lui     a2, 0x10
-    ori     a2, a2, 0x401
-    lui     a0, %hi(g_globalInterruptMask)
-    addiu   a0, a0, %lo(g_globalInterruptMask)
-    lw      v1, 0(a0)
-    li      v0, 0x2
-    sw      v0, 0(a1)
-    sw      v0, 0(s1)
-    sw      zero, 0(s0)
-    or      v1, v1, a2
-    sw      v1, 0(a0)
-21:
-    addu    a1, zero, zero
-    lw      v0, 0xC(s0)
-    lui     a0, %hi(g_currentDiskPeripheralHandle)
-    lw      a0, %lo(g_currentDiskPeripheralHandle)(a0)
-    sll     v0, v0, 2
-    sw      v0, 0x10(sp)
-    lw      a3, 0x8(s0)
-    jal     __osEPiRawStartDma
-    lui     a2, 0x500
-    j       30f
-    li      v0, 0x1
-22:
-    lw      v1, 0x8(s1)
-    li      v0, -0x1
-    bne     v1, v0, 24f
-    lui     v1, 0x2
-    lw      v0, 0x4(s1)
-    ori     v1, v1, 0x1
-    bne     v0, v1, 24f
-    nop
-    lw      v0, 0x28(s1)
-    bnez    v0, 23f
-    addiu   a1, s1, 0x18
-    lw      v1, 0x8(a1)
-    lw      v0, 0(v1)
-    lw      a0, 0x4(v1)
-    or      v0, v0, a0
-    lw      a0, 0x8(v1)
-    lw      v1, 0xC(v1)
-    or      v0, v0, a0
-    or      v0, v0, v1
-    beqz    v0, 23f
-    li      v0, 0x18
-    j       28f
-    sw      v0, 0x18(s1)
-23:
-    jal     Audio_PostDiskEventMessage
-    sw      zero, 0(a1)
-24:
-    lw      v0, 0x8(s1)
-    addiu   v1, v0, 0x1
-    lui     v0, 0x4000
-    and     v0, s2, v0
-    beqz    v0, 26f
-    sw      v1, 0x8(s1)
-    slti    v0, v1, 0x55
-    bnez    v0, 25f
-    addu    a1, zero, zero
-    j       27f
-    li      v0, 0x18
-25:
-    lui     a0, %hi(g_currentDiskPeripheralHandle)
-    lw      a0, %lo(g_currentDiskPeripheralHandle)(a0)
-    lw      v0, 0xC(s0)
-    lui     a2, 0x500
-    sw      v0, 0x10(sp)
-    lw      a3, 0x4(s0)
-    jal     __osEPiRawStartDma
-    ori     a2, a2, 0x400
-    li      v0, 0x1
-    j       30f
-    sw      zero, 0(s0)
-26:
-    slti    v0, v1, 0x55
-    beqz    v0, 29f
-    li      v0, 0x18
-27:
-    sw      v0, 0(s0)
-28:
-    jal     Audio_AbortDiskTransfer
-    nop
-29:
-    li      v0, 0x1
-30:
-    lw      ra, 0x2C(sp)
-    lw      s2, 0x28(sp)
-    lw      s1, 0x24(sp)
-    lw      s0, 0x20(sp)
-    jr      ra
-    addiu   sp, sp, 0x30
-END(__osLeoInterrupt)

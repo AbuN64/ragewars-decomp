@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel Decompress_ExpandBackReferences
+LEAF(Decompress_ExpandBackReferences)
     li      t5, 0x0
     lui     t3, %hi(g_backReferenceOutputByteCount)
     addiu   t3, t3, %lo(g_backReferenceOutputByteCount)

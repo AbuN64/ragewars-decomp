@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel osInvalICache
+LEAF(osInvalICache)
     blez    a1, 2f
     li      t3, 0x4000
     sltu    AT, a1, t3

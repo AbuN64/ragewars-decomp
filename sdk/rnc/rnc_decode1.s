@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel Rnc_DecodeMethod1
+LEAF(Rnc_DecodeMethod1)
     addi    v1, zero, -0x1
     andi    v1, v1, 0xFF
     sll     a0, v1, 24
@@ -106,7 +106,7 @@ glabel Rnc_DecodeMethod1
     addi    sp, sp, 0x180
 END(Rnc_DecodeMethod1)
 
-glabel Rnc_ReadHuffmanValue
+LEAF(Rnc_ReadHuffmanValue)
 1:
     lhu     t0, 0(s0)
     addi    s0, s0, 0x2

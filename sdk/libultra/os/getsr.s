@@ -6,7 +6,7 @@
 .set noreorder
 .set noat
 
-glabel __osGetSR
+LEAF(__osGetSR)
     mfc0    v0, C0_SR
     jr      ra
     nop

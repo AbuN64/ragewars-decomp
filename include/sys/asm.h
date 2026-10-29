@@ -40,12 +40,6 @@ extern "C" {
 #define ASM_TYPE_FUNC(x)
 #endif
 
-/* unit entry the source scan of the build reads: a global label (LEAF without .align/.frame) */
-.macro glabel label
-    .globl  \label
-    .ent    \label, 0
-    \label:
-.endm
 #define LEAF(x)             \
     .globl  x              ;\
     .align  2              ;\
