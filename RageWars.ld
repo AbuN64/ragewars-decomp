@@ -1774,8 +1774,6 @@ SECTIONS
         src/DATA/AUDIO/AISETFREQ/AISETFREQ.CPP.o(.data);
         . = MAX(., 0xB7000);
         sdk/libultra/os/aisetnextbuf.CPP.o(.text);
-        . = MAX(., 0xB708C);
-        sdk/libultra/os/aisetnextbuf.CPP.o(.data);
         . = MAX(., 0xB7090);
         sdk/libultra/ai.c.o(.text);
         . = MAX(., 0xB70A4);
