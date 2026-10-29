@@ -4044,7 +4044,7 @@ segments:
       - [0xCB0A0, rodata, game_data/g_OvlgameInitializerenderdirectionWords2]
       - [0xCB0AC, data, game_data/g_EngineSetn64RetainedWords6]
       - [0xCB0B0, rodata, game_data/g_Setn64DrawfullscreenbackdropWords4]
-      - [0xCB0C0, rodata, game_data/literals_SetN64_SetupLoadingBackdropRev1]
+      - [0xCB0C0, rodata, game_data/literals_SetN64_DrawFullscreenBackdrop]
       - [0xCB0C4, rodata, game_data/literals_SetN64_DrawCreditsLines]
       - [0xCB0E0, rodata, game_data/g_CcreditsUpdatescrollWords1]
       - [0xCB0F0, rodata, game_data/g_gameThreadTwoStringFormat]
