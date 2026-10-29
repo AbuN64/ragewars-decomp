@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "FRONTEND/MENUIMAGE.H"
 
-#if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)
 #define Frontend_CreatePakProfileScreen Frontend_CreatePakProfileScreenEu
 #elif defined(VERSION_DE)
