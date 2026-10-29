@@ -7811,7 +7811,7 @@ SECTIONS
         src/UI/X_FILES/X_PLUS/X_PLUS.CPP.o(.data);
         . = MAX(., 0xA0608);
         src/UI/X_FILES/X_PLUS/XPLUS_PARSEDECIMALDOUBLE_DATA.CPP.o(.data);
-        . = MAX(., 0xA0748);
+        . = MAX(., 0xA0610);
         src/UI/X_FILES/X_STDIO/X_STDIO.CPP.o(.text);
         . = MAX(., 0xA0DA4);
         src/UI/X_FILES/X_STDIO/X_STDIO.CPP.o(.data);

@@ -16,7 +16,7 @@
 #include "X_STDIO/X_STDIO.H"
 
 /* 802A0888_6.CPP */
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || defined(VERSION_US)
 
 u8 *XStdio_FormatScratchBuffer(u8 *fmt0, ...) {
     va_list args;
@@ -40,8 +40,6 @@ int *XStdio_FormatGermanScratchBuffer(int format, ...) {
 }
 #endif
 
-#if !(defined(VERSION_US))
-
 s32 XStdio_PrintText(s32 fmt0, ...) {
     char *args;
 
@@ -61,7 +59,6 @@ s32 XStdio_PrintTextWithArguments(s32 stream, s32 writeContext, s32 fmt0, ...) {
     ((s32 (*)(s32 *, s32, s32)) g_stdioArgumentWriteCallback)(&g_stdioFormatBuffer, stream, writeContext);
     return g_stdioFormattedLength;
 }
-#endif
 
 /* resmgr_stream_io.CPP */
 /* Formats its arguments into the shared buffer g_stdioFormatBuffer and writes the text to the stream through XStdio_WriteStreamNoop in runs, emitting the one-byte k_stdioCarriageReturn before every newline, returning the number of bytes written. */

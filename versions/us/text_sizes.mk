@@ -944,7 +944,7 @@ build/us/src/UI/X_FILES/X_MATH/XMATH_EVALUATEHYPERBOLICTANGENT.CPP.o: TEXTSIZE :
 build/us/src/UI/X_FILES/X_MATH/XMATH_WRAPANGLECENTERED.CPP.o: TEXTSIZE := 0x188
 build/us/src/UI/X_FILES/X_MATH/math_double.CPP.o: TEXTSIZE := 0x820
 build/us/src/UI/X_FILES/X_PLUS/X_PLUS.CPP.o: TEXTSIZE := 0x1654
-build/us/src/UI/X_FILES/X_STDIO/X_STDIO.CPP.o: TEXTSIZE := 0x65C
+build/us/src/UI/X_FILES/X_STDIO/X_STDIO.CPP.o: TEXTSIZE := 0x794
 build/us/sdk/libultra/io/sprawdma_text.c.o: NOALIGN := 1
 build/us/sdk/libultra/libc/libc_formattocallback_data.CPP.o: NOALIGN := 1
 build/us/sdk/libultra/sirawdma.c.o: NOALIGN := 1
