@@ -168,3 +168,6 @@ INCLUDE_DATA("game_code", System_RunPiManager_padding_B9FA8);
 #endif
 
 #endif
+#if defined(VERSION_US)
+unsigned int System_RunPiManager_padding_B9ED8[2] = { 0x53535F48U, 0x4149525FU };
+#endif

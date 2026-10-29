@@ -1816,3 +1816,4 @@ literals_Status_UpdateStatusText = 0x800DBA88; // rom:0xDC688 size:0x3C
 literals_Polytrak2_DecodeAndSmoothSampleTracks = 0x800C4038; // rom:0xC4C38 size:0x4
 literals_Level_GetScreenEventTable = 0x800DCD00; // rom:0xDD900 size:0x84
 literals_Encoded_UpdateLevelSelectionAvailability = 0x800DCE38; // rom:0xDDA38 size:0x2C
+literals___osDevMgrMain = 0x800C7850; // rom:0xC8450 size:0x1C

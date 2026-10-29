@@ -58,6 +58,9 @@ void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
 }
 #endif
 
+#if defined(VERSION_US)
+unsigned int func_802B8E78_us_padding_B9A78[2] = { 0x00001B50U, 0x4C415945U };
+#endif
 #if defined(VERSION_EU)
 unsigned int func_802B8F48_de_padding_B9DE8[2] = {
     0xAFB1001C, 0xAFB00018,

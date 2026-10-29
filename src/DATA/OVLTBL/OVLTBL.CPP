@@ -2,9 +2,7 @@
 
 /* 800C7850.CPP */
 #if defined(VERSION_US)
-unsigned int g_OvltblOvltblCppRetainedWords2[8] = {
-    0x002B9284, 0x002B91A4, 0x002B91D8, 0x002B9294, 0x002B9294, 0x002B920C, 0x002B9248, 0x000F534D,
-};
+unsigned int g_OvltblOvltblCppRetainedWords2[1] = { 0x000F534DU };
 #endif
 
 /* 800C83F4.CPP */

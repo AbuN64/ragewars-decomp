@@ -8113,7 +8113,7 @@ SECTIONS
         sdk/libultra/audio/reverb.c.o(.data);
         . = MAX(., 0xB5EAC);
         src/DATA/AUDIO/AUDIO/K_AUDIOENCODEDWORDS.CPP.o(.data);
-        . = MAX(., 0xB5FB0);
+        . = MAX(., 0xB5EB0);
         sdk/libultra/audio/save/save.c.o(.text);
         . = MAX(., 0xB5FE4);
         src/DATA/AUDIO/SOUND_PLAYER_LINK_GAPS/SNDPLAYER.CPP.o(.data);
@@ -8209,6 +8209,14 @@ SECTIONS
         sdk/libultra/io/pigetcmdq.c.o(.text);
         . = MAX(., 0xB88F8);
         src/DATA/AUDIO/AUDIO/G_AUDIOAUDIOAUDIO25CPPRETAINEDWORDS1.CPP.o(.data);
+        . = MAX(., 0xB8900);
+        sdk/libultra/os/PIMGR/PIMGR.CPP.o(.text);
+        . = MAX(., 0xB8A78);
+        sdk/libultra/os/PIMGR/PIMGR.CPP.o(.data);
+        . = MAX(., 0xB8A80);
+        sdk/libultra/io/devmgr.c.o(.text);
+        . = MAX(., 0xB8ED8);
+        sdk/libultra/io/devmgr.c.o(.data);
         . = MAX(., 0xB8EE0);
         sdk/libultra/io/epirawdma.c.o(.text);
         . = MAX(., 0xB90B4);
@@ -13704,6 +13712,8 @@ SECTIONS
         sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK11.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/pigetcmdq.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AUDIO/G_AUDIOAUDIOAUDIO25CPPRETAINEDWORDS1.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/os/PIMGR/PIMGR.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/io/devmgr.c.o(.bss .sbss COMMON);
         sdk/libultra/io/epirawdma.c.o(.bss .sbss COMMON);
         sdk/libultra/io/epirawread.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AUDIO/G_AUDIOTRAILINGBYTESBLOCK20.CPP.o(.bss .sbss COMMON);
@@ -25285,6 +25295,9 @@ SECTIONS
         . = MAX(., 0x5F50);
         sdk/MATH/aisetfreq.CPP.o(.rodata .rdata);
         . = MAX(., 0x5F60);
+        . = ALIGN(8) /* sdk/libultra/io/devmgr.c.o */;
+        sdk/libultra/io/devmgr.c.o(.rodata .rdata);
+        . = MAX(., 0x5F7C);
         src/DATA/OVLTBL/OVLTBL.CPP.o(.data);
         . = MAX(., 0x5F80);
         sdk/libultra/io/EPIRAWREAD/EPIRAWREAD_STRINGS.CPP.o(.rodata .rdata);
@@ -33020,6 +33033,7 @@ SECTIONS
         src/DATA/FRONTEND/C/CONSTANTS/MATH_SINF_DATA.CPP.o(.bss .sbss COMMON);
         sdk/MATH/MATHDATA/MATHDATA.CPP.o(.bss .sbss COMMON);
         sdk/MATH/aisetfreq.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/io/devmgr.c.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/OVLTBL.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/EPIRAWREAD/EPIRAWREAD_STRINGS.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/EPIRAWREAD/EPIRAWREAD.CPP.o(.bss .sbss COMMON);

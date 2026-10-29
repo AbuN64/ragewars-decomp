@@ -15,6 +15,4 @@ unsigned int g_AudioAudioAudio25CppRetainedWords2[1] = { 0x02021025U };
 #if defined(VERSION_US)
 /* Data separated from executable functions by the legacy split layout. */
 unsigned int g_AudioAudioAudio25CppRetainedWords1[2] = { 0x10000B00U, 0x00000000U };
-unsigned int func_802B8E78_us_padding_B9A78[2] = { 0x00001B50U, 0x4C415945U };
-unsigned int System_RunPiManager_padding_B9ED8[2] = { 0x53535F48U, 0x4149525FU };
 #endif
