@@ -2513,6 +2513,7 @@ g_audioChorusParameters = 0x800D2E48; // rom:0xD3A48
 g_audioFlangeParameters = 0x800D2E70; // rom:0xD3A70
 g_audioNoEffectParameters = 0x800D2E98; // rom:0xD3A98
 g_audioEqualPowerPanTable = 0x800D2EC0; // rom:0xD3AC0
+g_audioGlobalsTailWordsUs = 0x800D2FC0; // rom:0xD3BC0
 g_audioDmaBoundaryWorkaroundFlag = 0x800D2FE0; // rom:0xD3BE0
 g_controllerInitialized = 0x800D2FF0; // rom:0xD3BF0
 g_controllerMotorInitialized = 0x800D3000; // rom:0xD3C00
