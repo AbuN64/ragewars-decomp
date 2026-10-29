@@ -29,7 +29,6 @@ extern char g_cartridgeReadWorker[];
 
 extern void Cartridge_ReadChunksAndWait(void *dst, void *rom, void *size, u32 extra);
 extern u32 Defs_GetMemorySize(void);
-extern void rw_boot_entry(void);
 extern void osMapTLB(s32 tlbIndex, s32 pageMask, s32 virtualAddress, u32 addr, s32 oddPhysicalAddress, s32 asid);
 extern void osCreateThread(void *queue, s32 count, void *entry, s32 arg, void *data, s32 priority);
 extern void osSetEventMesg(s32 count, void *list, s16 *message);
@@ -332,7 +331,7 @@ void Vhandler_HandleResourcePageRequest(void) {
     }
     osWritebackDCacheAll();
     osSetIntMask(1);
-    ((void (*)(void))&rw_boot_entry)();
+    ((void (*)(void))0x80000400)();
     g_pagerLastMappedSlot = -1;
     thread->state = 2;
     osStartThread(thread);
