@@ -1,5 +1,6 @@
 #include "include_asm.h"
-
+#include "gbi.h"
+#include "COMMON/EFFECTCONTRIBUTION.H"
 #if defined(VERSION_US)
 #if defined(VERSION_US)
 unsigned short D_src_b18a148a[48] = {
@@ -18,9 +19,18 @@ char s_FxDrawredparticlequadMPACTequText[8] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int g_fxDrawredparticlequadDataConstantWords[24] = {
-    0xE3001001, 0x00000000, 0xD7000002, 0x80008000, 0xD9F9FBFF, 0x00000000, 0xD9FFFFFF, 0x00210004,
-    0xFCFF97FF, 0xFFFDFE38, 0xE200001C, 0xC8104B50, 0xDB040004, 0x00000001, 0xDB04000C, 0x00000001,
-    0xDB040014, 0x0000FFFF, 0xDB04001C, 0x0000FFFF, 0x01004008, 0x801469A0, 0xDF000000, 0x00000000,
+Gfx g_fxDrawredparticlequadDataConstantWords[12] = {
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 14, 2, 0x00000000),
+    gsSPTexture(0x8000, 0x8000, 0, 0, 1),
+    gsSPGeometryMode(0x060400, 0x00000000),
+    gsSPGeometryMode(0x000000, 0x00210004),
+    gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    gsSPSetOtherMode(G_SETOTHERMODE_L, 3, 29, 0xC8104B50),
+    gsSPMoveWord(4, 0x0004, 0x00000001),
+    gsSPMoveWord(4, 0x000C, 0x00000001),
+    gsSPMoveWord(4, 0x0014, 0x0000FFFF),
+    gsSPMoveWord(4, 0x001C, 0x0000FFFF),
+    gsSPVertex(g_particleQuadVertices, 4, 0),
+    gsSPEndDisplayList(),
 };
 #endif
