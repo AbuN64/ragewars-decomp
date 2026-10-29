@@ -42,7 +42,7 @@ void MovingAI_ChooseTriggerDelay(void *levelActor, void *actorMotionState) {
     result = Graphu64_RandomBetween(base->delayMinimum, base->delayMaximum);
     motion->speed = result;
     ctx = (char *) &g_gameSettings;
-    if (((GameModeEnableView *)(ctx))->unk_1D != 0) {
+    if (((GameModeEnableView *)(ctx))->local != 0) {
         count = *(s32 *) (ctx - 0x1258);
         if ((u32) count >= 3) {
             count -= 2;
@@ -234,7 +234,7 @@ void MovingAI_InitializeMotionDispatch(LevelActor *actor, ActorMotionState *moti
     flags |= 0x02000000;
     flags2 = flags | 0x20000;
     actor->flags = flags2;
-    if (g_motionVisibilitySettings.unk0 == 0) {
+    if (g_motionVisibilitySettings.gameFlag == 0) {
         actor->flags = flags2 | 0x10000000;
     }
     if ((actor->type == 0x453) && (Cinema_GetSequenceRequest() == 0x6F)) {
@@ -246,7 +246,7 @@ void MovingAI_InitializeDeviceHealth(LevelActor *actor, Dest *deviceState) {
     deviceState->definitionHealth = ((ActorHealthDefinition *)actor->definition)->health;
     Actor_RequestActorState(actor, deviceState, 0);
     deviceState->charge = k_deviceInitialCharge;
-    deviceState->field12C = k_deviceInitialCharge;
+    deviceState->initialCharge = k_deviceInitialCharge;
     if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
         actor->flags &= ~0x2000;
         actor->flags &= ~0x100;

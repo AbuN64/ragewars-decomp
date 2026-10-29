@@ -119,9 +119,9 @@ struct MatchMenuApplySlotValueGfx;
 struct StateMenuCancelCharacterConfirmation;
 struct StateMenuCancelCharacterConfirmation {
     s32 a;
-    s32 unk4;
+    s32 reservedWordSecond;
     char p0[8];
-    s32 unk10;
+    s32 reservedWordFifth;
     s32 confirmationState;
     char p1[0x1320];
     s32 reservedWord;

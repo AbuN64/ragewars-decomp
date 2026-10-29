@@ -143,7 +143,7 @@ void AudioWorld_DispatchPendingSounds(Cache *cache) {
             if (--entry->delay == 0) {
                 entry->frame = cache->context->frame;
                 entry->sequence = cache->context->sequence++;
-                entry->fieldA8 = 0;
+                entry->reservedWordA8 = 0;
             }
             continue;
         }
@@ -183,8 +183,8 @@ void AudioWorld_DispatchPendingSounds(Cache *cache) {
 }
 
 void AudioWorld_InitializeVoiceListSentinel(void *sentinel, s32 owner) {
-    (((struct AudioVoiceListLinks *) ((s8 *) sentinel))->unk_4) = sentinel;
-    (((struct AudioVoiceListLinks *) ((s8 *) sentinel))->unk_0) = sentinel;
+    (((struct AudioVoiceListLinks *) ((s8 *) sentinel))->next) = sentinel;
+    (((struct AudioVoiceListLinks *) ((s8 *) sentinel))->prev) = sentinel;
     Audio_InitializeVoiceRecord(sentinel + 8, owner, -1);
 }
 
@@ -313,7 +313,7 @@ void AudioWorld_RecyclePendingSoundsByIdentifier(ChannelSet *channelSet, s32 sou
     }
 }
 
-/* Moves nodes whose key differs from arg1 (or every node when arg1 is -1) from the active list to the tail of the list rooted at offset 0xD8. Adapted from AudioWorld_RecyclePendingSoundsByKey, with the match test inverted, a -1 wildcard added, and the tail insertion written as a do-while(0) list macro. */
+/* Moves nodes whose key differs from retainedKey (or every node when retainedKey is -1) from the active list to the tail of the list rooted at offset 0xD8. Adapted from AudioWorld_RecyclePendingSoundsByKey, with the match test inverted, a -1 wildcard added, and the tail insertion written as a do-while(0) list macro. */
 
 
 void AudioWorld_RecyclePendingSoundsExceptKey(AudioPendingSoundListOwner *channelOwner, s32 retainedKey) {

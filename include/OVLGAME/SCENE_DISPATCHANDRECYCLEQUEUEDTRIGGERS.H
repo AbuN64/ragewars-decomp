@@ -12,33 +12,33 @@ struct Level {
     ItemOvlSceneDispatchSelectedEntityKinds *items[2];
 };
 struct SceneFrameItemBank {
-    s32 unk0;
+    s32 reservedWord;
     s32 count;
     struct SceneFrameItemReference items[1];
 };
 struct Ent {
     u32 kind;
     char pad4[0x24];
-    f32 unk28;
+    f32 scaledValueA;
     char pad2C[4];
-    f32 unk30;
-    f32 unk34;
+    f32 scaledValueB;
+    f32 scaledValueC;
     char pad38[0x18];
-    f32 unk50;
-    f32 unk54;
-    f32 unk58;
+    f32 scaledValueD;
+    f32 scaledValueE;
+    f32 scaledValueF;
     char pad5C[0x90];
-    f32 unkEC;
-    f32 unkF0;
+    f32 scaledKind11ValueA;
+    f32 scaledKind11ValueB;
 };
 struct ParticleEffectRelocationFrame {
-    s32 unk0;
+    s32 reservedWord;
     s32 count;
     char pad8[0xC];
     ParticleEffectRelocationSlot slots[1];
 };
 struct PieceGroup {
-    s32 unk0;
+    s32 reservedWord;
     s32 count;
     Piece pieces[1];
 };
@@ -52,6 +52,6 @@ struct SceneTriggerQueueOwner {
     char pad11DC[0x10];
     struct EntryOvlSceneDispatchAndRecycleQueuedTriggers *spare;
 };
-/** Release every active entry of arg0 and move it onto the spare list. */
+/** Release every active entry of owner and move it onto the spare list. */
 void Scene_DispatchAndRecycleQueuedTriggers(SceneTriggerQueueOwner *owner);
 #endif

@@ -37,7 +37,7 @@ struct {
         unsigned short widgets[8][2];
     } rows[3];
     unsigned int events[39];
-} D_auto_data_unresolved_800E0288 = {
+} g_characterSelectionMenuLayout_de = {
     { { 0, 0x007D }, { 0, 0x00C4 }, { 0, 0x00AB }, { 0, 0x00AD }, { 0, 0x00AF }, { 0, 0x00C2 }, { 0, 0x00C1 }, { 0, 0x00C0 } },
     {
         { 0x00000084, { { 0, 0x007C }, { 0, 0x00A7 }, { 0, 0x0092 }, { 0, 0x0094 }, { 0, 0x0096 }, { 0, 0x00A6 }, { 0, 0x00A5 }, { 0, 0x00A4 } } },

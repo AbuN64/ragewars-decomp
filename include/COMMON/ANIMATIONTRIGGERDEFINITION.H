@@ -242,11 +242,11 @@ typedef struct {
     char pad0[0x10];
     s32 sound; /* full descriptor +0x24 */
     char pad14[4];
-    s32 unk18;
-    s32 unk1C;
-    Word5324 unk20;
-    s32 unk24;
-    s32 unk28;
+    s32 activationMode;
+    s32 spawnEffectKind;
+    Word5324 soundIdWord;
+    s32 primaryEffectMask;
+    s32 secondaryEffectMask;
 } Rec5324;
 typedef struct {
     char pad0[0x14];
@@ -284,11 +284,11 @@ typedef union {
 } Word54E0;
 typedef struct {
     char pad0[0x2C];
-    s32 unk2C;
-    s32 unk30;
-    Word54E0 unk34;
-    s32 unk38;
-    s32 unk3C;
+    s32 activationMode;
+    s32 spawnEffectKind;
+    Word54E0 soundIdWord;
+    s32 primaryEffectMask;
+    s32 secondaryEffectMask;
 } Rec54E0;
 typedef struct {
     char pad0[0x14];

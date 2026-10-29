@@ -163,8 +163,8 @@ f32 Scaled_DistanceToNode(AiController *controller, s32 nodeId) {
 /** Reset three state words and set the final state to one. */
 void Scaled_ResetBehaviorState(void *object) {
     AiController *controller = object;
-    controller->unk2F4 = 0;
-    controller->unk2F8 = 0;
+    controller->behaviorStateWordA = 0;
+    controller->behaviorStateWordB = 0;
     controller->behaviorResetFlag = 1;
 }
 

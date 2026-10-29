@@ -22,9 +22,9 @@ struct CartridgeReadRequest {
     void *prev;
 };
 struct Item57BD4 {
-    s16 field0;
-    s16 field2;
-    s16 field4;
+    s16 exclusiveKey;
+    s16 priority;
+    s16 reservedHalf;
     u16 flags;
 };
 struct Window;

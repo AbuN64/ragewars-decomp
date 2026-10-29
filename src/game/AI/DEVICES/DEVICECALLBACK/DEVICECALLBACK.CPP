@@ -30,18 +30,18 @@ void Device_RespondToActivation(Obj54E0 *actor, void *responseContext) {
     rec = &actor->holder->r;
     actor->flags = actor->flags & 0xFFFEFFFF;
     Link_DispatchActorLinks(actor, 0x40000, actor);
-    if (rec->unk2C == 0) {
+    if (rec->activationMode == 0) {
         actor->flags &= ~0x2000;
         actor->flags &= ~0x100;
     }
     if (g_world.mode == 4) {
-        if (rec->unk34.whole != -1) {
-            SoundElement_PlaySoundAtPosition(rec->unk34.half.id, actor->pos.v, 0, -1);
+        if (rec->soundIdWord.whole != -1) {
+            SoundElement_PlaySoundAtPosition(rec->soundIdWord.half.id, actor->pos.v, 0, -1);
         }
-        if (rec->unk30 != -1) {
-            Barrel_SpawnActorEffect(actor, rec->unk30, actor->pos.t, 0);
+        if (rec->spawnEffectKind != -1) {
+            Barrel_SpawnActorEffect(actor, rec->spawnEffectKind, actor->pos.t, 0);
         }
-        Barrel_SpawnFlaggedEffects(actor, responseContext, 8, rec->unk38, rec->unk3C);
+        Barrel_SpawnFlaggedEffects(actor, responseContext, 8, rec->primaryEffectMask, rec->secondaryEffectMask);
     }
 }
 
@@ -50,7 +50,7 @@ void Device_ClearCollisionFlagsOnHit(void *levelActor, void *hitState) {
     LevelActor *object = levelActor;
     BreakableDefinition *nested = (void *)object->definition;
     BreakableHitStateView *state = hitState;
-    if (state->unk_CB != 0 &&
+    if (state->active != 0 &&
         (nested->flags & 0x20) != 0) {
         unsigned int flags = object->flags;
         flags &= ~0x2000;
@@ -67,7 +67,7 @@ void Device_DrawSpawnedModel(void *levelActor, void *spawnDispatchOwner, void *m
     Lookup *lookup = modelLookup;
 
     actor->mask = 1 << owner->spawn;
-    if (lookup->unk0 != 0) {
+    if (lookup->drawModel != 0) {
         Geometry_QueueModelInstance(lookup->value, actor->animationMatrices, 1,
                         &actor->lighting[g_lightingBufferIndex], 0, owner->remaining);
     }

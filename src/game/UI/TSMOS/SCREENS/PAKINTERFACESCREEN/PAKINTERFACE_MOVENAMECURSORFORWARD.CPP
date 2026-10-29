@@ -38,7 +38,7 @@ s32 PAKInterface_MoveNameCursorForward(s32 unusedA, s32 unusedB, s32 index, s32 
           g_pakProfileScreenState->players[slot].name[g_pakProfileScreenState->players[slot].nameCursor].available = 0x41;
         }
       }
-      ((struct WidgetFlagsView *)(handle))->field_10 = 0xFF;
+      ((struct WidgetFlagsView *)(handle))->alpha = 0xFF;
       SoundElement_PlayFlatSound(0xE74);
     }
   }

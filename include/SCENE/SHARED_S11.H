@@ -5,7 +5,7 @@
 typedef struct Shared_SceneLoadLevelResources Shared_SceneLoadLevelResources;
 struct Shared_SceneLoadLevelResources {
     char pad0[0x4];
-    s32 unk4; /* +0x4: src/Scene_LoadLevelResources_SceneResourceState.c */
+    s32 reservedWord; /* +0x4: src/Scene_LoadLevelResources_SceneResourceState.c */
 };
 typedef char Shared_SceneLoadLevelResources_size_check[(sizeof(Shared_SceneLoadLevelResources) == 0x8) ? 1 : -1];
 #endif

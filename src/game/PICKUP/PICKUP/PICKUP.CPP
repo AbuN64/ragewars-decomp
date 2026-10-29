@@ -5,9 +5,9 @@
 unsigned char g_PickupTrailingBytesBlock1[8] = { 0x8F, 0xB9, 0x00, 0x14, 0x20, 0x0F, 0xFF, 0xFF };
 #endif
 
-/* CODE_802AD2A0.CPP */
+/* Pickup_NoOp_de.CPP */
 #if defined(VERSION_DE)
-void func_802AD2A0_de(void) {}
+void Pickup_NoOp_de(void) {}
 #endif
 
 #if defined(VERSION_DE)

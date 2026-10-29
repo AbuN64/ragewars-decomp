@@ -38,7 +38,7 @@ void Encoded_DrawTextEntryCursor(void *menu, MenuLocalizedTextItemView *item, vo
     unsigned int bits;
 
     if (g_encodedTextEntryState.timer <= (6.0f)) {
-        width = Menu_GetWidgetStyle(menu, 0)->unk4 * (f32)g_hudReferenceViewportWidth * (0.0035211266949772835f);
+        width = Menu_GetWidgetStyle(menu, 0)->value * (f32)g_hudReferenceViewportWidth * (0.0035211266949772835f);
         x = (f32)item->x + (f32)g_encodedTextEntryState.value * width;
         g_multiplayerItemRenderState = -1;
         alpha = style->alpha * (style->fade * (128.0f));

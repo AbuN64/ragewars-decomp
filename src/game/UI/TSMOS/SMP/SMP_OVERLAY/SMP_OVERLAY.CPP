@@ -38,7 +38,7 @@ extern void Node_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuC
 
 /* Unless slot index is locked, hides the node in that slot and shows the given node through Widget_SetWidgetFlag40_EquipActivateequipmentpanel, storing it in that slot or, in shared mode, in all four slots. */
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_overlaySlotEventIds, an actor kind at g_overlaySlotEventActorKinds and a handler at g_overlaySlotEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_overlaySlotEventIds, an actor kind at g_overlaySlotEventActorKinds and a handler at g_overlaySlotEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 #if defined(VERSION_DE)
 #elif defined(VERSION_EU)
@@ -47,7 +47,7 @@ extern void Node_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuC
 #elif defined(VERSION_US_REV1)
 #endif
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
+/* Draws the child at 0x8 of window window with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
 extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 
@@ -72,7 +72,7 @@ NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(MenuOverlayOwnerView *ow
     node->value = value;
     node->owner = owner;
     node->tag = 0x7A51;
-    node->field_6C = 0;
+    node->reservedWord = 0;
     Node_InsertWidgetBefore(owner->root, node);
     return owner->overlay = node;
 }

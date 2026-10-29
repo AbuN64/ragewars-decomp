@@ -78,10 +78,10 @@ void Gobjinst_QueueAnimation(void *actorStorage, unsigned int animationIndex)
 }
 
 void Gobjinst_RestartAnimation(void *actorAnimationState) {
-    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_10F) = 1;
-    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_104) = 0;
-    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_10E) = 0;
-    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_100) = (s32) ((((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->unk_100) & ~0x400);
+    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->animationChanged) = 1;
+    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->animationTime) = 0;
+    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->animationPending) = 0;
+    (((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->flags) = (s32) ((((struct ActorAnimationResetState *) ((s8 *) actorAnimationState))->flags) & ~0x400);
 }
 
 extern s32 Gobjinst_ChooseAnimationVariant(void *, s32, s32);
@@ -166,12 +166,12 @@ s32 Gobjinst_BuildAnimatedPose(void *actorStorage, s32 resourceRequestMode)
 
 void Gobjinst_RotatePoseMatrixBuffers(void *actorRenderState) {
     s32 previousPoseMatrices;
-    previousPoseMatrices = (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_B4);
-    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_B4) = 0;
-    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_BC) = 0;
-    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_C0) = 0;
-    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_100) = (s32) ((((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_100) & ~0x200);
-    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->unk_B8) = previousPoseMatrices;
+    previousPoseMatrices = (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->poseMatrices);
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->poseMatrices) = 0;
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->clearedWordFirst) = 0;
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->clearedWordSecond) = 0;
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->flags) = (s32) ((((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->flags) & ~0x200);
+    (((struct ActorPoseBufferState *) ((s8 *) actorRenderState))->previousPoseMatrices) = previousPoseMatrices;
 }
 
 extern s32 g_lightingBufferIndex;

@@ -43,7 +43,7 @@ void Simpinst_UpdateModelAndScale(void *staticObject) {
     ((StaticObject *)(o))->model = Simpinst_SelectModelVariant(staticObject);
     ((StaticObject *)(o))->material = ((PropGeometry *)(((StaticObject *)(o))->type))->material;
 
-    if (g_simpleObjectPauseState.field0 == 0) {
+    if (g_simpleObjectPauseState.paused == 0) {
         char *state = ((StaticObject *)(o))->type;
         if (*(s32 *)state == 0xC) {
             ((StaticObject *)(o))->frameDelta = g_frameElapsedTime * ((PropGeometry *)(state))->speed;
@@ -131,7 +131,7 @@ extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 extern char g_simpleModelResourceCallbackAddress;
 
 void **Simpinst_RequestModelVariant(void *staticObject, s32 modelVariant) {
-    void *sp28;
+    void *modelIndexResource;
     void **resource;
     s32 key;
     s32 found;
@@ -143,10 +143,10 @@ void **Simpinst_RequestModelVariant(void *staticObject, s32 modelVariant) {
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource, ((Access_s32_50 *)(staticObject))->field, 1);
             Cache_ReleaseResource(0, resource);
-            found = Cache_RequestWordCountedResource(0, &sp28, key, g_simpModelsIndexText, 1);
+            found = Cache_RequestWordCountedResource(0, &modelIndexResource, key, g_simpModelsIndexText, 1);
             if (found != 0) {
-                ((StaticObject *)(staticObject))->resource = SetN64_LocatePackSection((s32)sp28, key,
-                                                    modelVariant % *(s32 *)sp28,
+                ((StaticObject *)(staticObject))->resource = SetN64_LocatePackSection((s32)modelIndexResource, key,
+                                                    modelVariant % *(s32 *)modelIndexResource,
                                                     &((Access_s32_5C *)(staticObject))->field);
                 ((SliderStepRecord *)(staticObject))->activeState = modelVariant;
                 Cache_ReleaseResource(0, (void *)found);

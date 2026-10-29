@@ -83,12 +83,12 @@ void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
         slots = &context->slots;
         alSndpDeallocate(((AudioOwnerView *)context)->sound, slots->ids[view->slot]);
         slots->ids[view->slot] = -1;
-        view->field38 = 0;
-        view->fieldC = -1;
-        view->field8 = -1;
+        view->reserved38 = 0;
+        view->reservedC = -1;
+        view->reserved8 = -1;
         view->trackId = -1;
-        view->field3A = -1;
-        view->fieldB4 = -1;
+        view->reserved3A = -1;
+        view->reservedB4 = -1;
         return;
     }
     if (view->tracked != 0) {

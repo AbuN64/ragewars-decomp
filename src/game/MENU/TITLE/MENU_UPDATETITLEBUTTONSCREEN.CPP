@@ -69,7 +69,7 @@ block_10:
         return 0;
     case 4:
         MarkMenuEventHandled();
-        nextScreen = g_titleButtonScreen->unk10;
+        nextScreen = g_titleButtonScreen->nextScreen;
         if (nextScreen == -1) {
             Menu_ReturnToPreviousScreen();
             return 0;
@@ -86,7 +86,7 @@ s32 Menu_CancelTitleButtonScreen(void) {
 
     MarkMenuEventHandled();
     state = g_titleButtonScreen;
-    state->unk10 = -1;
+    state->nextScreen = -1;
     SmpSlider_SetTransitionMode(state->slider, 2);
     return 0;
 }
@@ -98,10 +98,10 @@ s32 Menu_HandleTitleButtonChoice(void) {
     choice = Menu_GetFocusedElementId();
     switch (choice) {
     case TITLE_BUTTON_CHOICE_CLEAR_PENDING_SCREEN:
-        g_titleButtonScreen->unk10 = -1;
+        g_titleButtonScreen->nextScreen = -1;
         break;
     case TITLE_BUTTON_CHOICE_RESET_PLAYED_LEVELS:
-        g_titleButtonScreen->unk10 = 7;
+        g_titleButtonScreen->nextScreen = 7;
         XPlus_FillMemory(g_profileModeOnePlayedLevels, 0, 5);
         break;
     }

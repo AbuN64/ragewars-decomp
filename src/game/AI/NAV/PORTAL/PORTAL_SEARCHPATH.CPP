@@ -155,13 +155,13 @@ s32 Portal_SearchRelatedGoalPath(NavigationSearchGraphView *obj, s32 key, s32 re
         while (reset != 0) {
             reset->value = g_portalResetSearchValue;
             reset->state = -1;
-            reset->field18 = 0;
-            reset->field1C = 0;
-            reset->field20 = 0;
-            reset->field24 = 0;
-            reset->field28 = 0;
-            reset->field2C = 0;
-            reset->field30 = 0;
+            reset->extra = 0;
+            reset->cost = 0;
+            reset->estimate = 0;
+            reset->total = 0;
+            reset->open = 0;
+            reset->goal = 0;
+            reset->parent = 0;
             reset = reset->next;
         }
     }

@@ -78,17 +78,17 @@ typedef struct BarrelWordPair BarrelWordPair;
 struct ActorProfileImpulseFlagsView;
 struct ActorProfileImpulseFlagsView {
     char pad0[0x100];
-    u32 unk_100;
+    u32 profileFlags;
     char pad100[0x5D8 - 0x100 - sizeof(u32)];
-    char * unk_5D8;
+    char * characterProfile;
     char pad5D8[0x122C - 0x5D8 - sizeof(char*)];
-    u32 unk_122C;
+    u32 impulseFlags;
 };
 
 struct CTeamSelectTeam_t;
 struct CTeamSelectTeam_t {
-    s32 unk0;
-    s32 unk4;
+    s32 reservedWord0;
+    s32 reservedWord4;
     f32 x;
     f32 y;
     f32 z;

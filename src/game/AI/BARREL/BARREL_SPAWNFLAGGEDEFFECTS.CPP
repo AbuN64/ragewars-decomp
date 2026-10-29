@@ -98,7 +98,7 @@ void Barrel_RunDamageHook(void *actor, struct ActorDamageHookView *callbackState
 
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-/** Subtract obj->y from arg2 in-place via Graphu64_SubtractVectors, then return the squared length of (arg1, arg2', arg3). */
+/** Subtract obj->y from vectorY in-place via Graphu64_SubtractVectors, then return the squared length of (vectorX, vectorY', vectorZ). */
 f32 Barrel_GetEyeDistanceSquared(void *candidate, CVector3 v) {
     f32 eyeDeltaY;
 
@@ -214,16 +214,16 @@ void Barrel_ClearTargetInfo(Shared_ActorView *actorView, void *unused1, BarrelTa
     local2.y = 0;
     local2.z = 0;
     targetInfo->type = 3;
-    targetInfo->unk4 = 0;
-    targetInfo->unk8 = 0;
+    targetInfo->reservedWordA = 0;
+    targetInfo->reservedWordB = 0;
     targetInfo->first = local1;
     targetInfo->second = local2;
-    targetInfo->unk24 = 0;
+    targetInfo->reservedWordC = 0;
     local2.y = 0;
     local1.y = 0;
     targetInfo->third = local1;
     targetInfo->fourth = local2;
-    targetInfo->unk40 = 0;
+    targetInfo->reservedWordD = 0;
 }
 
 void Barrel_SpawnEffectsFromMask(Player *actor, s32 unused1, s32 effectMask, s32 *entry) {

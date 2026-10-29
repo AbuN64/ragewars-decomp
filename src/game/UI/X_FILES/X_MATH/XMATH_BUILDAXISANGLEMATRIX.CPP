@@ -60,7 +60,7 @@ void XMath_TransposeMatrix(f32 *matrix) {
     }
 }
 
-/** Scatter three floats from arg1 into arg0's fields. */
+/** Scatter three floats from scale into matrix's fields. */
 void XMath_SetMatrixScaleDiagonal(Matrix *matrix, CVector3 *scale) {
     matrix->m[0] = scale->x;
     matrix->m[5] = scale->y;

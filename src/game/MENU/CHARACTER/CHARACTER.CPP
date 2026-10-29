@@ -28,7 +28,7 @@ s32 CCharacterSelection_OpenCharacterSelectionScreen(s32 screen)
   s32 rest;
   g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
   g_characterSelectionMenu->screen = (void *) screen;
-  g_characterSelectionMenu->unk4 = SmpOverlay_CreateOverlayNode(screen, 4);
+  g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode(screen, 4);
   SmpOverlay_ShowSlotById(screen, 0, 0x7A);
   SmpOverlay_ShowSlotById(screen, 1, 0x7A);
   SmpOverlay_ShowSlotById(screen, 2, 0x7A);
@@ -40,12 +40,12 @@ s32 CCharacterSelection_OpenCharacterSelectionScreen(s32 screen)
   scale.z = 1.0f;
   for (i = 0; i < 4; i++)
   {
-    g_characterSelectionMenu->players[i].unk4 = 0;
+    g_characterSelectionMenu->players[i].slotOverlay = 0;
     g_characterSelectionMenu->players[i].kind = g_characterSelectionMenuEntries[i].kind;
     g_characterSelectionMenu->players[i].highlight = 0;
-    g_characterSelectionMenu->players[i].unkC = 0;
+    g_characterSelectionMenu->players[i].selectionState = 0;
     g_characterSelectionMenu->players[i].choice = 0;
-    g_characterSelectionMenu->players[i].unk4C0 = 0;
+    g_characterSelectionMenu->players[i].tintFramesLeft = 0;
     model = Key_GetCharacterPreviewModel(g_characterSelectionMenu->players[i].kind);
     row = Key_FindCharacterPreviewRow(g_characterSelectionMenu->players[i].kind);
     scale.x = g_characterPortraitRecords[row].scale[i];
@@ -121,7 +121,7 @@ s32 Character_CreateSelectionMenuUs(void *screen)
   s32 rest;
   g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
   g_characterSelectionMenu->screen = screen;
-  g_characterSelectionMenu->unk4 = SmpOverlay_CreateOverlayNode((s32) screen, 4);
+  g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode((s32) screen, 4);
   SmpOverlay_ShowSlotById((s32) screen, 0, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x7a);
@@ -133,12 +133,12 @@ s32 Character_CreateSelectionMenuUs(void *screen)
   scale.z = g_characterPreviewInitialScale;
   for (i = 0; i < 4; i++)
   {
-    g_characterSelectionMenu->players[i].unk4 = 0;
+    g_characterSelectionMenu->players[i].slotOverlay = 0;
     g_characterSelectionMenu->players[i].kind = g_characterSelectionMenuEntries[i].kind;
     g_characterSelectionMenu->players[i].highlight = 0;
-    g_characterSelectionMenu->players[i].unkC = 0;
+    g_characterSelectionMenu->players[i].selectionState = 0;
     g_characterSelectionMenu->players[i].choice = 0;
-    g_characterSelectionMenu->players[i].unk4C0 = 0;
+    g_characterSelectionMenu->players[i].tintFramesLeft = 0;
     model = Key_GetCharacterPreviewModel(g_characterSelectionMenu->players[i].kind);
     row = Key_FindCharacterPreviewRow(g_characterSelectionMenu->players[i].kind);
     scale.x = g_characterPortraitRecords[row].scale[i];
@@ -214,7 +214,7 @@ s32 Character_CreateSelectionMenuEuropean(void *screen)
   s32 rest;
   g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
   g_characterSelectionMenu->screen = screen;
-  g_characterSelectionMenu->unk4 = SmpOverlay_CreateOverlayNode((s32) screen, 4);
+  g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode((s32) screen, 4);
   SmpOverlay_ShowSlotById((s32) screen, 0, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x7a);
@@ -226,12 +226,12 @@ s32 Character_CreateSelectionMenuEuropean(void *screen)
   scale.z = g_characterPreviewInitialScale;
   for (i = 0; i < 4; i++)
   {
-    g_characterSelectionMenu->players[i].unk4 = 0;
+    g_characterSelectionMenu->players[i].slotOverlay = 0;
     g_characterSelectionMenu->players[i].kind = g_characterSelectionMenuEntries[i].kind;
     g_characterSelectionMenu->players[i].highlight = 0;
-    g_characterSelectionMenu->players[i].unkC = 0;
+    g_characterSelectionMenu->players[i].selectionState = 0;
     g_characterSelectionMenu->players[i].choice = 0;
-    g_characterSelectionMenu->players[i].unk4C0 = 0;
+    g_characterSelectionMenu->players[i].tintFramesLeft = 0;
     model = Key_GetCharacterPreviewModel(g_characterSelectionMenu->players[i].kind);
     row = Key_FindCharacterPreviewRow(g_characterSelectionMenu->players[i].kind);
     scale.x = g_characterPortraitRecords[row].scale[i];
@@ -307,7 +307,7 @@ s32 Character_CreateSelectionMenuEuropeanX(void *screen)
   s32 rest;
   g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
   g_characterSelectionMenu->screen = screen;
-  g_characterSelectionMenu->unk4 = SmpOverlay_CreateOverlayNode((s32) screen, 4);
+  g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode((s32) screen, 4);
   SmpOverlay_ShowSlotById((s32) screen, 0, 0x7e);
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x7e);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x7e);
@@ -319,12 +319,12 @@ s32 Character_CreateSelectionMenuEuropeanX(void *screen)
   scale.z = g_characterPreviewInitialScale;
   for (i = 0; i < 4; i++)
   {
-    g_characterSelectionMenu->players[i].unk4 = 0;
+    g_characterSelectionMenu->players[i].slotOverlay = 0;
     g_characterSelectionMenu->players[i].kind = g_characterSelectionMenuEntries[i].kind;
     g_characterSelectionMenu->players[i].highlight = 0;
-    g_characterSelectionMenu->players[i].unkC = 0;
+    g_characterSelectionMenu->players[i].selectionState = 0;
     g_characterSelectionMenu->players[i].choice = 0;
-    g_characterSelectionMenu->players[i].unk4C0 = 0;
+    g_characterSelectionMenu->players[i].tintFramesLeft = 0;
     model = Key_GetCharacterPreviewModel(g_characterSelectionMenu->players[i].kind);
     row = Key_FindCharacterPreviewRow(g_characterSelectionMenu->players[i].kind);
     scale.x = g_characterPortraitRecords[row].scale[i];
@@ -400,7 +400,7 @@ s32 Character_CreateSelectionMenuGerman(void *screen)
   s32 rest;
   g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
   g_characterSelectionMenu->screen = screen;
-  g_characterSelectionMenu->unk4 = SmpOverlay_CreateOverlayNode((s32) screen, 4);
+  g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode((s32) screen, 4);
   SmpOverlay_ShowSlotById((s32) screen, 0, 0x78);
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x78);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x78);
@@ -412,12 +412,12 @@ s32 Character_CreateSelectionMenuGerman(void *screen)
   scale.z = g_characterPreviewInitialScale;
   for (i = 0; i < 4; i++)
   {
-    g_characterSelectionMenu->players[i].unk4 = 0;
+    g_characterSelectionMenu->players[i].slotOverlay = 0;
     g_characterSelectionMenu->players[i].kind = g_characterSelectionMenuEntries[i].kind;
     g_characterSelectionMenu->players[i].highlight = 0;
-    g_characterSelectionMenu->players[i].unkC = 0;
+    g_characterSelectionMenu->players[i].selectionState = 0;
     g_characterSelectionMenu->players[i].choice = 0;
-    g_characterSelectionMenu->players[i].unk4C0 = 0;
+    g_characterSelectionMenu->players[i].tintFramesLeft = 0;
     model = Key_GetCharacterPreviewModel(g_characterSelectionMenu->players[i].kind);
     row = Key_FindCharacterPreviewRow(g_characterSelectionMenu->players[i].kind);
     scale.x = g_characterPortraitRecords[row].scale[i];
@@ -565,13 +565,13 @@ s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapse
             empty_slot = CHARACTER_EMPTY_SLOT;
             g_characterSelectionMenu->clock = (s32) (g_characterSelectionMenu->clock + elapsedTicks);
             do {
-                if (g_characterSelectionMenu->players[i].unkC == 1) {
+                if (g_characterSelectionMenu->players[i].selectionState == 1) {
                     if (g_characterSelectionMenu->players[i].highlight != 0) {
                         highlightAlpha = (Math_Cosf((f32) i + ((f32) g_characterSelectionMenu->clock * 0.0033333334f)) * 70.0f) + 170.0f;
                         highlight = g_characterSelectionMenu->players[i].highlight;
                         highlight->alpha=(unsigned int)highlightAlpha;
                     }
-                    widgetNode = SmpOverlay_GetSlotValue(g_characterSelectionMenu->unk4, i);
+                    widgetNode = SmpOverlay_GetSlotValue(g_characterSelectionMenu->slotOverlay, i);
                     highlightWidget = g_characterSelectionMenu->players[i].highlight;
                     if ((highlightWidget->x != (widgetNode->x - 2)) || (highlightWidget->y != (widgetNode->y - 2))) {
                         SoundElement_PlayFlatSound(0xE7F);

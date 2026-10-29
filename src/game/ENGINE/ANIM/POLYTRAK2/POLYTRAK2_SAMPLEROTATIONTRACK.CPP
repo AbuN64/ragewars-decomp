@@ -216,7 +216,7 @@ void Polytrak2_DecodeScalarSamples(u32 *stream, ScalarSampleOutput *out, s32 cou
 #if defined(VERSION_US)
 #ifdef NON_MATCHING
 extern char Bitarray_ExpandCurveSamples_Address[], Polytrak2_DecodeScalarSamples_Address[], Bitarray_ReadStridedFloatSamples_Address[];
-/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
+/* Builds the table table of trackCount rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with componentCount channels of values from the generator picked by sampleEncoding (0, 1 or 2 selects the callback); with 4 channels and a radius smoothingRadius the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
 void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *table, s32 trackCount, s32 componentCount, s32 smoothingRadius, s32 sampleEncoding) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
@@ -308,7 +308,7 @@ INCLUDE_ASM("span_1000", Polytrak2_DecodeTrackSectionsEu);
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 extern char Bitarray_ExpandCurveSamples_Address[], Polytrak2_DecodeScalarSamples_Address[], Bitarray_ReadStridedFloatSamples_Address[];
-/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
+/* Builds the table table of trackCount rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with componentCount channels of values from the generator picked by sampleEncoding (0, 1 or 2 selects the callback); with 4 channels and a radius smoothingRadius the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
 void Polytrak2_DecodeTrackSections(s32 unused0, s32 *table, s32 trackCount, s32 componentCount, s32 smoothingRadius, s32 sampleEncoding) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;

@@ -27,7 +27,7 @@ struct FragTagPlayerStateView {
     s32 spawnPoint; /* +0x5EC: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
     char pad5F0[0x348];
     char animationState[2172]; /* +0x938: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
-    s32 unk11B4; /* +0x11B4: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
+    s32 reserved11B4; /* +0x11B4: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
     char pad11B8[0x298];
     s32 computerControlled; /* +0x1450: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
 };
@@ -99,7 +99,7 @@ struct FragTagPlayerInputView {
     s32 spawnPoint; /* +0x5EC: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
     char pad5F0[0x348];
     char animationState[2172]; /* +0x938: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
-    s32 unk11B4; /* +0x11B4: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
+    s32 reserved11B4; /* +0x11B4: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
     char pad11B8[0x298];
     s32 computerControlled; /* +0x1450: src/Player_UpdateFragTagSelection_GameplayRoundRules.c */
 };

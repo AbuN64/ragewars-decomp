@@ -42,7 +42,7 @@ void Tengine_LoadSelectedTexture(void) {
     g_artsendTextureResetWordOne = 0;
     g_artsendTextureResetWordTwo = 0;
     g_artsendActionMappingSelection = 0;
-    key = SetN64_LocatePackSection(world->unk50, world->unk20, g_artsendTextureViewer.selectionIndex, &size);
+    key = SetN64_LocatePackSection(world->textureDirectory, world->textureBank, g_artsendTextureViewer.selectionIndex, &size);
     resource = Cache_RequestResource(0, key - 1, key, size, 9, -1, &g_artsendTextureResourceCallbackUsRev1, "Artsend Texture", 1);
     entries = (s32 *)resource->data;
     textures = SetN64_GetPackSection(entries, 1);

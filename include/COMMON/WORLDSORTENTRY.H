@@ -43,15 +43,15 @@ struct Panel {
     char row1[0x18];
     char row1Slots[0x20];
     char elements[0x2E0 - 0xB0];
-    s32 field2E0;
-    s32 field2E4;
-    s32 field2E8;
-    s32 field2EC;
-    s32 field2F0;
-    s32 field2F4;
-    s32 field2F8;
-    s32 field2FC;
-    s32 field300;
+    s32 clientList;
+    s32 audioListHead;
+    s32 gfxListHead;
+    s32 audioListTail;
+    s32 gfxListTail;
+    s32 curRSPTask;
+    s32 curRDPTask;
+    s32 frameCount;
+    s32 doAudio;
 };
 
 
@@ -61,7 +61,7 @@ extern int g_schedulerRdpBufferSetFlag;
 struct SchedulerCurrentRspTaskView;
 struct SchedulerCurrentRspTaskView {
     unsigned char padding_0[756];
-    void *unk_2F4;
+    void *currentRspTask;
 };
 
 struct LevelActor;
@@ -192,9 +192,9 @@ struct NodeSchedHandleTaskCommands {
 struct SchedulerTaskFlagsView;
 struct SchedulerTaskFlagsView {
     unsigned char padding_0[4];
-    s32 unk_4;
+    s32 state;
     unsigned char padding_8[8];
-    s32 unk_10;
+    s32 taskType;
 };
 
 

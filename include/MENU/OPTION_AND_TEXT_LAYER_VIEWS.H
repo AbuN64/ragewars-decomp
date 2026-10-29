@@ -15,11 +15,11 @@ typedef struct MenuOptionFade {
     u8 unobserved0[0x30];
     f32 fade;
     f32 alpha;
-    s32 field38;
+    s32 reservedWord;
     s32 highlighted;
 } MenuOptionFade;
 struct TextLayerMetrics {
-    int field0;
+    int entryIndex;
     int width;
     int height;
     int rest[7];
@@ -87,8 +87,8 @@ struct StyledMenuTextEntryView {
 };
 struct TextBoundsData {
     char pad0[0x29C];
-    f32 unk_29C;
-    f32 unk_2A0;
+    f32 width;
+    f32 height;
     f32 x; /* 0x2A4 */
     f32 y; /* 0x2A8 */
 };
@@ -100,7 +100,7 @@ struct TextBoundsFont {
 };
 struct TextBoundsRecord23 {
     char pad0[0x24];
-    s32 unk_24;
-    s32 unk_28;
+    s32 width;
+    s32 height;
 };
 #endif

@@ -12,7 +12,7 @@ extern void Widget_SetWidgetFlag08(void *, s32);
 extern void *Join_CountUsedSlots(void);
 extern void Tsmos_ActivateControllerState(void);
 extern void Join_UpdateJoinRequestDisplay(s32);
-/* Opens the 0x20-byte screen state g_courseOptionsScreen for owner arg0: a four-row list, the widgets 0x385, 0x386, 0x38F, 0x390 and three 0x38C rows (shown one by one through Join_UpdateJoinRequestDisplay); returns zero. */
+/* Opens the 0x20-byte screen state g_courseOptionsScreen for owner owner: a four-row list, the widgets 0x385, 0x386, 0x38F, 0x390 and three 0x38C rows (shown one by one through Join_UpdateJoinRequestDisplay); returns zero. */
 s32 Menu_CreateGermanCourseOptions(s32 owner) {
     u8 *widget;
     s32 i;

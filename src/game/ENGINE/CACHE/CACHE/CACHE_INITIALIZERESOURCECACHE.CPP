@@ -33,41 +33,41 @@ extern CMemEntry *g_resourceAllocationCandidate;
 /* The resource manager record at g_resourceCacheManager: node array, free-slot stack, link records, lists and its lock queue.
  * count (0xBDC) and stamp (0xC20) are the Pool fields used by Cache_AcquirePendingResourceEntry. */
 struct ResLink {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
+    s32 reservedWord0;
+    s32 reservedWord4;
+    s32 reservedWord8;
+    s32 reservedWordC;
     s32 owner;
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
+    s32 reservedWord14;
+    s32 reservedWord18;
+    s32 reservedWord1C;
+    s32 reservedWord20;
+    s32 nextLink;
+    s32 prevLink;
 };
 struct ResMgr {
     struct CMemEntry *nodes;
     struct CMemEntry **slots;
-    s32 unk8;
+    s32 reservedWord8;
     struct ResLink *links;
     IntrusiveList entries;
     IntrusiveList recent;
     s32 enabled0;
     s32 enabled1;
-    s32 unk40;
-    s32 unk44;
+    s32 reservedWord40;
+    s32 reservedWord44;
     s32 selected;
     char pad4C[0xB98 - 0x4C];
     IntrusiveList freeLinks;
     IntrusiveList listBAC;
     IntrusiveList listBC0;
-    s32 unkBD4;
-    s32 unkBD8;
+    s32 reservedWordBD4;
+    s32 reservedWordBD8;
     s32 count;
     char padBE0[0xC00 - 0xBE0];
     OSMesgQueue lock;
     OSMesg lockSlot[1];
-    s32 unkC1C;
+    s32 reservedWordC1C;
     s32 stamp;
 };
 extern s32 Heap_AllocateFromFront(void *, s32);
@@ -104,8 +104,8 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     g_resourceCacheManager.slots = (struct CMemEntry **)Heap_AllocateFromFront(&g_runtimeHeap, g_resourceCacheNodeCapacity * sizeof(void *));
     g_resourceCacheManager.links = (struct ResLink *)Heap_AllocateFromFront(&g_runtimeHeap, g_resourceCacheNodeCapacity * 0x2C);
     osCreateMesgQueue(&g_resourceCacheManager.lock, g_resourceCacheManager.lockSlot, 1);
-    g_resourceCacheManager.unk44 = 0;
-    g_resourceCacheManager.unk40 = 0;
+    g_resourceCacheManager.reservedWord44 = 0;
+    g_resourceCacheManager.reservedWord40 = 0;
     List_InitializeIntrusive(&g_resourceCacheManager.entries, 0x18, 0x1C);
     List_InitializeIntrusive(&g_resourceCacheManager.recent, 0x20, 0x24);
     g_resourceCacheManager.count = 0;
@@ -117,13 +117,13 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     }
     g_resourceCacheManager.enabled0 = g_resourceCacheManager.enabled1 = 1;
     g_resourceCacheManager.selected = -1;
-    g_resourceCacheManager.unkBD4 = 0;
-    g_resourceCacheManager.unkBD8 = 0;
-    g_resourceCacheManager.unk8 = 0;
+    g_resourceCacheManager.reservedWordBD4 = 0;
+    g_resourceCacheManager.reservedWordBD8 = 0;
+    g_resourceCacheManager.reservedWord8 = 0;
 #if defined(VERSION_US)
-    g_resourceCacheManager.unkC1C = 0;
+    g_resourceCacheManager.reservedWordC1C = 0;
 #else
-    g_resourceCacheManager.unkC1C = 1;
+    g_resourceCacheManager.reservedWordC1C = 1;
 #endif
     g_resourceCacheManager.stamp = 0;
     List_InitializeIntrusive(&g_resourceCacheManager.freeLinks, 0x28, 0x24);

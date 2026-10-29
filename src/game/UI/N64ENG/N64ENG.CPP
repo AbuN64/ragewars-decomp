@@ -35,20 +35,20 @@ RecordN64EngCreateNumericWidget *N64Eng_CreateNumericWidget(s32 sourceResourceId
     result = Cache_AllocateMemory(0x6C);
     XPlus_FillBytes(result, 0, 0x6C);
     *(Header44 *)result = *(Header44 *)source;
-    result->field_0E = 0xB65;
+    result->classId = 0xB65;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     child = Node_FindWidgetByResourceId((void*)context, childResourceId & 0xFFFF);
-    result->field_44 = child;
-    child->fields_2C[3] = (s32)&result->field_60;
-    result->field_4C = maximumValue;
-    result->field_50 = minimumValue;
-    result->field_58 = 0;
-    result->field_48 = 0;
-    result->field_54 = wrapEnabled;
+    result->childWidget = child;
+    child->fields_2C[3] = (s32)&result->valueText;
+    result->maximumValue = maximumValue;
+    result->minimumValue = minimumValue;
+    result->value = 0;
+    result->repeatCount = 0;
+    result->wrapEnabled = wrapEnabled;
     N64Eng_SetNumericWidgetValue(result, minimumValue);
-    result->field_5C = 2;
+    result->stepState = 2;
     Node_WrapNodeInParent(source, result);
-    source->field_0C = -1;
+    source->replacedMarker = -1;
     Node_ReplaceNodeRefs(context, source, result);
     return result;
 }
@@ -56,25 +56,25 @@ RecordN64EngCreateNumericWidget *N64Eng_CreateNumericWidget(s32 sourceResourceId
 /** Return the word at offset 0x58 in the supplied object. */
 int N64Eng_GetNumericWidgetValue(void *object) {
     RecordN64EngCreateNumericWidget *record = object;
-    return record->field_58;
+    return record->value;
 }
 
 extern s32 XStdio_FormatBuffer(void *, const char *, ...);
 
 /* Format the stream count into its existing inline state buffer. */
 void N64Eng_SetNumericWidgetValue(RecordN64EngCreateNumericWidget *widget, s32 value) {
-    widget->field_58 = value;
-    XStdio_FormatBuffer(widget->field_60, g_numericWidgetValueFormat, value);
+    widget->value = value;
+    XStdio_FormatBuffer(widget->valueText, g_numericWidgetValueFormat, value);
 }
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-const unsigned int D_802A1B24_CBB20[1] = {
+const unsigned int g_numericWidgetValueFormat_N64eng[1] = {
     0x25640044,
 };
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned char D_802A1B24_CBB20[3] = {
+const unsigned char g_numericWidgetValueFormat_N64eng[3] = {
     0x25, 0x64, 0x00,
 };
 #endif
@@ -110,7 +110,7 @@ unsigned char k_N64engEncodedBytesBlock2[13] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_formats_802A1B24_CBB20_us_rev1.c */
+/* ROM-grounded data: src/g_numericWidgetValueFormat_N64eng.c */
 const unsigned char k_N64engEncodedBytes[] = {
     0x25, 0x64, 0x00,
 #if defined(VERSION_US_REV1)

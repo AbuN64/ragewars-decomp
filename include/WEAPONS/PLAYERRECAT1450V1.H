@@ -9,31 +9,31 @@ typedef struct WeaponPlayerPermissionView WeaponPlayerPermissionView;
 struct WeaponSwitchActionView;
 struct WeaponSwitchActionView {
     char pad0[0x2C];
-    char * unk2C;
+    char * reservedPointerA;
     char pad2C[0x108 - 0x2C - sizeof(char*)];
-    char * unk108;
+    char * reservedPointerB;
     char pad108[0x10C - 0x108 - sizeof(char*)];
-    char * unk10C;
+    char * reservedPointerC;
     char pad10C[0x124 - 0x10C - sizeof(char*)];
-    s32 unk124;
+    s32 reservedWordB;
     char pad124[0x128 - 0x124 - sizeof(s32)];
-    s32 unk128;
+    s32 reservedWordC;
     char pad128[0x12C - 0x128 - sizeof(s32)];
-    f32 unk12C;
+    f32 reservedFloat;
     char pad12C[0x130 - 0x12C - sizeof(f32)];
-    s32 unk130;
+    s32 reservedWordD;
     char pad130[0x138 - 0x130 - sizeof(s32)];
     s32 reservedWord;
     char pad138[0x13C - 0x138 - sizeof(s32)];
-    s32 unk13C;
+    s32 singleRoundFlag;
     char pad13C[0x144 - 0x13C - sizeof(s32)];
-    s32 unk144;
+    s32 singleRoundFlagSecondary;
     char pad144[0x148 - 0x144 - sizeof(s32)];
-    s32 unk148;
+    s32 reservedWordE;
     char pad148[0x14C - 0x148 - sizeof(s32)];
-    s32 unk14C;
+    s32 reservedWordF;
     char pad14C[0x150 - 0x14C - sizeof(s32)];
-    s32 unk150;
+    s32 reservedWordG;
 };
 
 extern float g_weaponSpinClampedFeedback;
@@ -51,7 +51,7 @@ struct SourceWeaponApplyScaledSideYaw {
 struct Event;
 struct SourceWeaponApplyScaledSideYaw;
 struct Event {
-    int unk0;
+    int reservedWord;
     int side;
     struct SourceWeaponApplyScaledSideYaw *source;
 };
@@ -110,11 +110,11 @@ extern float g_weaponSideYawSpeedScale;
 struct WeaponNormalFireActionView;
 struct WeaponNormalFireActionView {
     char pad0[0x64];
-    f32 unk_64;
+    f32 reservedFloat;
     char pad64[0x130 - 0x64 - sizeof(f32)];
-    f32 unk_130;
+    f32 reservedFloatB;
     char pad130[0x13C - 0x130 - sizeof(f32)];
-    s32 unk_13C;
+    s32 fireRequestFlag;
 };
 
 extern s32 Weapon_IsPrimarySwitchGroup(s32 weaponId);

@@ -40,8 +40,8 @@ typedef struct HeapArenaBlock HeapArenaBlock;
 
 struct HeapArena_Entryrecat18v3;
 struct HeapArena_Entryrecat18v3 {
-    s32 unk0;
-    s32 unk4;
+    s32 reservedWord0;
+    s32 reservedWord4;
     HeapArenaBlock *head;
     HeapArenaBlock *tail;
 };

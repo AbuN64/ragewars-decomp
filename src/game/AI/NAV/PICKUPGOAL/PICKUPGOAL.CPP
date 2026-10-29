@@ -34,11 +34,11 @@ s32 Nav_RebuildRequestedGoalRoute(void *controller) {
     if (base == 0) {
         return 1;
     }
-    requested = ((NavigationRouteControllerView *)controller)->fieldC;
+    requested = ((NavigationRouteControllerView *)controller)->requestedGoalNode;
     if (requested == -1) {
         return 1;
     }
-    current = ((NavigationRouteControllerView *)controller)->field4;
+    current = ((NavigationRouteControllerView *)controller)->currentNode;
     if (current == requested) {
         return 1;
     }
@@ -65,13 +65,13 @@ s32 Nav_RebuildRequestedGoalRoute(void *controller) {
     }
     Nav_SetPickupGoalWeights(controller);
     Route_ClearGoalList(base);
-    Nav_AddGoalNode(base, ((NavigationRouteControllerView *)controller)->fieldC);
+    Nav_AddGoalNode(base, ((NavigationRouteControllerView *)controller)->requestedGoalNode);
     base[6] = -1;
-    Route_SearchPathByKey(base, ((NavigationRouteControllerView *)controller)->field4);
+    Route_SearchPathByKey(base, ((NavigationRouteControllerView *)controller)->currentNode);
     Route_ReconstructSearchPath(base, &((NavigationRouteControllerView *)controller)->links[0], 4);
     ((NavigationRouteControllerView *)controller)->linkState = 0;
     ((NavigationRouteControllerView *)controller)->selection = -1;
-    ((NavigationRouteControllerView *)controller)->committed = ((NavigationRouteControllerView *)controller)->fieldC;
+    ((NavigationRouteControllerView *)controller)->committed = ((NavigationRouteControllerView *)controller)->requestedGoalNode;
     return 1;
 }
 

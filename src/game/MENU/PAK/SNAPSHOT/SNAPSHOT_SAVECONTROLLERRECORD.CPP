@@ -6,7 +6,7 @@
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
 
-/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (g_pakPlayerMessagePending), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Snapshot_MarkSaveNotes when Note_GetStatus reports none, and shows the g_pakChannelReadyMessage_SnapshotCheckstatusprompt, g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability or g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt prompt according to Note_IsChannelReady_SnapshotEvaluatesavechannel and Note_NeedsIdRepair. */
+/* Enters pak menu mode 2: sets the mode flags, shows the g_controllerPakNotReadyDialogResource prompt when a message is pending (g_pakPlayerMessagePending), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Snapshot_MarkSaveNotes when Note_GetStatus reports none, and shows the g_pakChannelReadyMessage_SnapshotCheckstatusprompt, g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability or g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt prompt according to Note_IsChannelReady_SnapshotEvaluatesavechannel and Note_NeedsIdRepair. */
 
 
 
@@ -21,7 +21,7 @@
 extern s32 g_pakUseScannedChannel;
 extern s32 g_pakPlayerMessagePending;
 extern char g_matchEndingTeamWheelClose[];
-extern char D_0044FFA4[];
+extern char g_controllerPakNotReadyDialogResource[];
 extern unsigned char g_controllerPakReadyDialogResource[];
 extern char g_pakChannelReadyMessage_SnapshotCheckstatusprompt[];
 extern char g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt[];
@@ -48,7 +48,7 @@ void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
   if (g_pakPlayerMessagePending != 0)
   {
     g_pakMenuPromptAccepted = 1;
-    Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044FFA4, menu->player, menu->slot, 0);
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, g_controllerPakNotReadyDialogResource, menu->player, menu->slot, 0);
     return;
   }
   menu->items[20].flags &= ~0x01000000;
@@ -74,7 +74,7 @@ void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
     }
     else
     {
-      Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt, activeMenu->player, activeMenu->slot, D_0044FFA4);
+      Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt, activeMenu->player, activeMenu->slot, g_controllerPakNotReadyDialogResource);
     }
   }
 }

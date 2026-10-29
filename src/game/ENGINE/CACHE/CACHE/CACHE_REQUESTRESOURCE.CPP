@@ -76,7 +76,7 @@ static inline CachedResource *allocate(u32 size, u32 flags) {
         addref(node);
         node->data=Cache_AllocateHeapWithEviction(0,size,(flags>>5)&1,flags);
         if (node->data!=0) {
-            node->unk04=size;
+            node->dataSize=size;
             node->flags |= flags;
             Cache_InsertResourceByAddress(0,node);
         } else {

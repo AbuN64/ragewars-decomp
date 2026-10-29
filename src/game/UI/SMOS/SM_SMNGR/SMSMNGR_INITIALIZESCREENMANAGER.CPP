@@ -67,7 +67,7 @@ void SmSmngr_InitializeCurrentScreen(void) {
     param = g_screenManager->screens[current].owner;
     if (callback2Value != NULL) {
         value = callback2Value(param);
-        ((struct ObjRecAt40V1 *)g_screenManager->screens[current].primary)->unk40 = value;
+        ((struct ObjRecAt40V1 *)g_screenManager->screens[current].primary)->value = value;
     }
     DispatchCurrentScreenEvent(1, 0xE06, 0, 0, 0);
     DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);

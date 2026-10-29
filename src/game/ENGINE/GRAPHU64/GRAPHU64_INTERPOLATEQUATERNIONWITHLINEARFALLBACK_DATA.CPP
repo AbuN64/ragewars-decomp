@@ -1,26 +1,26 @@
 #include "include_asm.h"
 
 /* 800C98C0.CPP */
-/* ROM-grounded data: src/rw_pool_80270700_CA4C0_us_rev1.c */
-const unsigned int g_pool80270700_us_rev1[1] = {
+/* ROM-grounded data: src/g_graphu64_UnpackFixedMatrixConstantWords_us_rev1.c */
+const unsigned int g_graphu64_UnpackFixedMatrixConstantWords_us_rev1[1] = {
     0x37800000,
 };
 
 /* 800C98C4.CPP */
-/* ROM-grounded data: src/rw_pool_80270910_CA4C4_us_rev1.c */
-const unsigned int g_pool802709101_us_rev1[2] = {
+/* ROM-grounded data: src/g_graphu64_ConvertMatrixToFloatConstantWords_us_rev1.c */
+const unsigned int g_graphu64_ConvertMatrixToFloatConstantWords_us_rev1[2] = {
     0x37800000, 0x3F800000,
 };
 
 /* 800C98CC.CPP */
-/* ROM-grounded data: src/rw_pool_80270AAC_CA4CC_us_rev1.c */
-const unsigned int g_pool802709102_us_rev1[1] = {
+/* ROM-grounded data: src/g_graphu64_InterpolateQuaternionArcConstantWords_us_rev1.c */
+const unsigned int g_graphu64_InterpolateQuaternionArcConstantWords_us_rev1[1] = {
     0x3F800000,
 };
 
 /* 800C98D0.CPP */
-/* ROM-grounded data: src/rw_pool_80270CD0_CA4D0_us_rev1.c */
-const unsigned int g_pool802709103_us_rev1[2] = {
+/* ROM-grounded data: src/g_graphu64_InterpolateQuaternionWithLinearFallbackThresholdConstantWords_us_rev1.c */
+const unsigned int g_graphu64_InterpolateQuaternionWithLinearFallbackThresholdConstantWords_us_rev1[2] = {
     0x3F3504F3, 0x3F800000,
 };
 
@@ -45,8 +45,8 @@ const unsigned int g_graphu64_BlendRandomDirectionConstantWords2[2] = {
 #endif
 
 /* 800C98E4.CPP */
-/* ROM-grounded data: src/rw_pool_80271248_CA4E4_us_rev1.c */
-const unsigned int g_pool802712481_us_rev1[1] = {
+/* ROM-grounded data: src/g_graphu64_BlendRandomXDirectionConstantWords1_us_rev1.c */
+const unsigned int g_graphu64_BlendRandomXDirectionConstantWords1_us_rev1[1] = {
     0x38D1B717,
 };
 

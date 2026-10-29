@@ -80,10 +80,10 @@ void N64Eng_DecrementNumericWidget(void *widgetStorage)
   s32 currentValue;
   s32 wrappingValue;
   s32 nextValue;
-  if ((object->field_54) == 0)
+  if ((object->wrapEnabled) == 0)
   {
-    currentValue = object->field_58;
-    if ((object->field_50) < currentValue)
+    currentValue = object->value;
+    if ((object->minimumValue) < currentValue)
     {
       nextValue = currentValue - 1;
       goto block_7;
@@ -91,16 +91,16 @@ void N64Eng_DecrementNumericWidget(void *widgetStorage)
   }
   else
   {
-    wrappingValue = object->field_58;
-    if (wrappingValue == (object->field_50))
+    wrappingValue = object->value;
+    if (wrappingValue == (object->minimumValue))
     {
-      object->field_58 = object->field_4C;
+      object->value = object->maximumValue;
     }
     else
     {
-      object->field_58 = wrappingValue - 1;
+      object->value = wrappingValue - 1;
     }
-    nextValue = object->field_58;
+    nextValue = object->value;
     block_7:
     N64Eng_SetNumericWidgetValue(object, nextValue);
 
@@ -117,10 +117,10 @@ void N64Eng_IncrementNumericWidget(void *widgetStorage)
   s32 currentValue;
   s32 wrappingValue;
   s32 nextValue;
-  if ((object->field_54) == 0)
+  if ((object->wrapEnabled) == 0)
   {
-    currentValue = object->field_58;
-    if (currentValue < (object->field_4C))
+    currentValue = object->value;
+    if (currentValue < (object->maximumValue))
     {
       nextValue = currentValue + 1;
       goto block_7;
@@ -128,16 +128,16 @@ void N64Eng_IncrementNumericWidget(void *widgetStorage)
   }
   else
   {
-    wrappingValue = object->field_58;
-    if (wrappingValue == (object->field_4C))
+    wrappingValue = object->value;
+    if (wrappingValue == (object->maximumValue))
     {
-      object->field_58 = object->field_50;
+      object->value = object->minimumValue;
     }
     else
     {
-      object->field_58 = wrappingValue + 1;
+      object->value = wrappingValue + 1;
     }
-    nextValue = object->field_58;
+    nextValue = object->value;
     block_7:
     N64Eng_SetNumericWidgetValue(object, nextValue);
   }
@@ -194,13 +194,13 @@ s32 N64Eng_HandleNumericIncrement(void *widgetStorage, s32 unused1, s32 unused2,
 
     repeatMagnitude = XMath_AbsoluteInteger(fifth);
     if (repeatMagnitude < (s32)Smos_GetControlRepeatLimit()) {
-        object->field_5C = 2;
-        object->field_48 = 0;
+        object->stepState = 2;
+        object->repeatCount = 0;
     }
     if (eventValue != 1) {
         return 0;
     }
-    object->field_5C = eventValue;
+    object->stepState = eventValue;
     N64Eng_IncrementNumericWidget(object);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
@@ -212,13 +212,13 @@ s32 N64Eng_HandleNumericDecrement(void *widgetStorage, s32 unused1, s32 unused2,
 
     repeatMagnitude = XMath_AbsoluteInteger(fifth);
     if (repeatMagnitude < (s32)Smos_GetControlRepeatLimit()) {
-        object->field_5C = 2;
-        object->field_48 = 0;
+        object->stepState = 2;
+        object->repeatCount = 0;
     }
     if (eventValue != 1) {
         return 0;
     }
-    object->field_5C = 0;
+    object->stepState = 0;
     N64Eng_DecrementNumericWidget(object);
     SoundElement_PlayFlatSound(0xE81);
     return 0;

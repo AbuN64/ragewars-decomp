@@ -99,7 +99,7 @@ void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
                 if (Cinema_IsSequenceActive() != 0 || Cinema_HasSequenceResource() != 0) {
                     Cinema_RequestSequenceFade();
                 } else if (Tsmos_IsFrontendActive() == 0 && Menu_CountLiveNodes(&g_matchEndingTeamWheelClose) == 0 && player->views5E4.view5E4_3.alive != 0
-                           && player->views5DC.view5DC_2.view != 0 && player->views5DC.view5DC_2.view->unk564 == 0
+                           && player->views5DC.view5DC_2.view != 0 && player->views5DC.view5DC_2.view->shieldActive == 0
                            && ((&g_matchEndingTeamWheelClose.rules)->locked == 0 || g_matchEndingTeamWheelClose.allowed == 0)) {
                     g_matchEndingTeamWheelClose.open = 1;
                     SoundElement_EnableMusicGainOverride();

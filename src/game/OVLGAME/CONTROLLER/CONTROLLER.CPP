@@ -70,9 +70,9 @@ s32 Ovlgame_ResetControllerProfile(ControllerProfile *profile, s32 port) {
     profile->pakActive = 0;
     profile->mode = 0;
     profile->reset = 0;
-    profile->unk8 = 0;
-    profile->unkC = 0;
-    profile->unk10 = 0;
+    profile->reservedWordA = 0;
+    profile->reservedWordB = 0;
+    profile->reservedWordC = 0;
     profile->stickX = 0;
     profile->stickY = 0;
     profile->previousStickX = 0;

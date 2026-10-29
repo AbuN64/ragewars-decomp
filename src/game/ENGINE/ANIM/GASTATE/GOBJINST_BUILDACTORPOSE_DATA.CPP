@@ -17,13 +17,13 @@
 /** Initialize the compact record fields written by the VRAM 0x802624A0 leaf. */
 void Gastate_ResetAnimationReference(void *record) {
     AnimationPoseRecordView *record_record = record;
-    record_record->unk4 = -1;
-    record_record->unk6 = 0;
-    record_record->unk0 = 0;
-    record_record->unk8 = 0;
-    record_record->unkA = 0;
-    record_record->unkB = 1;
-    record_record->unk10 = 0;
+    record_record->id = -1;
+    record_record->frame = 0;
+    record_record->reservedWord = 0;
+    record_record->count = 0;
+    record_record->flag0 = 0;
+    record_record->flag1 = 1;
+    record_record->data = 0;
 }
 
 void Gastate_ReleaseAnimationResource(void *animationState) {
@@ -109,11 +109,11 @@ s32 Gastate_RequestAnimationResource(void *animationState, s32 resourceTable, s3
 
     resource = Polytrak2_GetResidentResource(animationState);
     entry = SetN64_GetPackSection(resource, 0);
-    value = entry->unk6;
+    value = entry->count;
     out->id = animationId;
     out->count = value;
     resource = SetN64_GetPackSection(resource, 3);
-    out->span = ((ResourceEntry *)SetN64_GetPackSection(resource, 0))->unk2;
+    out->span = ((ResourceEntry *)SetN64_GetPackSection(resource, 0))->span;
     return 1;
 }
 

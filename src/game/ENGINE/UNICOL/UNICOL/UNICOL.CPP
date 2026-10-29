@@ -95,44 +95,44 @@ s32 Unicol_MoveActorWithCollision(UnicolActor *actor, UnicolPosition pos, u32 *m
     f32 actorY;
     f32 savedY;
 
-    CCollision_ClearResultFlags(&frame.sp18);
+    CCollision_ClearResultFlags(&frame.actor);
     __builtin_memcpy(&g_collisionCurrentActor->x, &actor->room, 12);
     actor->flags = (u32) (actor->flags & ~0x18);
-    frame.sp18 = actor;
+    frame.actor = actor;
     motionContinuation = 0;
     if (actor->type == 1) {
         motionContinuation = (u32) motionContinuation < (actor->status & 0x300000);
     }
-    frame.sp1C = motionContinuation;
+    frame.motionContinuation = motionContinuation;
     actorReach = InstHdr_GetActorReach(actor);
     count = Gobjinst_GetActorRadius(actor);
     high = Gobjinst_GetActorHeight(actor);
-    CCollision_SetSweepRange(&frame.sp18, actorReach, count, high, InstHdr_GetActorBaseOffset(actor));
-    *(UnicolPosition *)&frame.sp5C = *(UnicolPosition *)&actor->x;
-    __builtin_memcpy(&frame.sp68, &pos, 12);
-    __builtin_memcpy(&frame.sp8C, &actor->room, 12);
-    frame.spC4 = actor->collision;
+    CCollision_SetSweepRange(&frame.actor, actorReach, count, high, InstHdr_GetActorBaseOffset(actor));
+    *(UnicolPosition *)&frame.startX = *(UnicolPosition *)&actor->x;
+    __builtin_memcpy(&frame.targetX, &pos, 12);
+    __builtin_memcpy(&frame.room, &actor->room, 12);
+    frame.surface = actor->collision;
     groundFollowEnabled = 0;
     if ((*motionSettings & 0x200) && (actor->velY <= 0.0f)) {
         groundFollowEnabled = 1;
     }
-    frame.sp3C = groundFollowEnabled;
-    frame.sp38 = ((u32) *motionSettings >> 1) & 1;
-    frame.sp40 = (((u32) actor->flags >> 2) ^ 1) & 1;
-    frame.sp44 = 1;
-    frame.sp54 = actor->flags;
-    frame.sp34 = frame.sp28 * k_collisionHeightMarginScale_de;
-    frame.sp50 = ((u32) *motionSettings >> 0x13) & 1;
-    frame.sp58 = motionSettings;
-    CCollision_IntegrateGravityAndDrag(&frame.sp18);
-    if ((frame.sp3C != 0) && (frame.sp54 & 7) && !(frame.sp54 & 0x2000)) {
-        __builtin_memcpy(&frame.sp210, &actor->contactX, 12);
-        frame.sp1E0 = actor->x;
-        frame.sp1E4 = actor->groundY;
-        frame.sp1E8 = actor->z;
-        CCollision_ProjectSegmentOntoSurface(&frame.sp18, &frame.sp1C8);
+    frame.groundFollowEnabled = groundFollowEnabled;
+    frame.motionSettingsBit1 = ((u32) *motionSettings >> 1) & 1;
+    frame.actorFlagsBit2Clear = (((u32) actor->flags >> 2) ^ 1) & 1;
+    frame.traceEnabled = 1;
+    frame.motionFlags = actor->flags;
+    frame.scaledSweepReach = frame.sweepReach * k_collisionHeightMarginScale_de;
+    frame.motionSettingsBit19 = ((u32) *motionSettings >> 0x13) & 1;
+    frame.motionSettings = motionSettings;
+    CCollision_IntegrateGravityAndDrag(&frame.actor);
+    if ((frame.groundFollowEnabled != 0) && (frame.motionFlags & 7) && !(frame.motionFlags & 0x2000)) {
+        __builtin_memcpy(&frame.previousContactX, &actor->contactX, 12);
+        frame.groundProbeX = actor->x;
+        frame.groundProbeY = actor->groundY;
+        frame.groundProbeZ = actor->z;
+        CCollision_ProjectSegmentOntoSurface(&frame.actor, &frame.segmentProjection);
     }
-    if ((frame.sp1C != 0) || (frame.sp5C != frame.sp68) || (frame.sp60 != frame.sp6C) || (unusedMovementState = 0, (frame.sp64 != frame.sp70))) {
+    if ((frame.motionContinuation != 0) || (frame.startX != frame.targetX) || (frame.startY != frame.targetY) || (unusedMovementState = 0, (frame.startZ != frame.targetZ))) {
         peakMoveCount = ++g_collisionMovementCount;
         if (peakMoveCount < g_collisionPeakMovementCount) {
             peakMoveCount = g_collisionPeakMovementCount;
@@ -140,17 +140,17 @@ s32 Unicol_MoveActorWithCollision(UnicolActor *actor, UnicolPosition pos, u32 *m
         g_collisionPeakMovementCount = peakMoveCount;
         if ((motionSettings != &g_supportingPlatformCollisionQuery) && (motionSettings != &g_collisionNoDetachSettingsSecond) && (motionSettings != &g_particleCollisionProbeResult) && (motionSettings != &g_collisionSurfaceExcludedFromTrace)) {
             actor->attached = 0;
-            frame.sp54 &= ~0x7B;
+            frame.motionFlags &= ~0x7B;
         }
-        frame.sp54 &= ~0x80;
+        frame.motionFlags &= ~0x80;
         if (actor->type == 1) {
-            frame.sp2C8 = actor->angle;
+            frame.heading = actor->angle;
         } else {
-            frame.sp2C8 = 0.0f;
+            frame.heading = 0.0f;
         }
-        headingSine = Gu_Sinf(frame.sp2C8);
-        headingCosine = Math_Cosf(frame.sp2C8);
-        frame.sp54 &= ~0x2000;
+        headingSine = Gu_Sinf(frame.heading);
+        headingCosine = Math_Cosf(frame.heading);
+        frame.motionFlags &= ~0x2000;
         settingsFlags = *motionSettings;
         if (settingsFlags & 4) {
             remainingIterations = 1;
@@ -164,119 +164,119 @@ s32 Unicol_MoveActorWithCollision(UnicolActor *actor, UnicolPosition pos, u32 *m
         if (remainingIterations >= 3) {
             horizontalResponseTicks = 2;
         }
-        frame.sp48 = horizontalResponseTicks;
+        frame.horizontalResponseTicks = horizontalResponseTicks;
         verticalResponseTicks = remainingIterations + 1;
         if (verticalResponseTicks >= 4) {
             verticalResponseTicks = 3;
         }
-        frame.sp4C = verticalResponseTicks;
-        CCollision_ResetContactNormal(&frame.sp18);
+        frame.verticalResponseTicks = verticalResponseTicks;
+        CCollision_ResetContactNormal(&frame.actor);
         collisionCount = 0;
         loopMask = 0x80000;
         collisionOne = 1;
 loop_34:
         if (*motionSettings & loopMask) {
-            frame.spC4 = Scene_ResolveFloorPolygon(frame.spC4, &frame.sp68);
+            frame.surface = Scene_ResolveFloorPolygon(frame.surface, &frame.targetX);
         }
-        collisionFound = CCollision_TraceActorMotion((s8 *) &frame.sp18);
+        collisionFound = CCollision_TraceActorMotion((s8 *) &frame.actor);
         motionContinuation = 0;
         if (collisionFound != 0) {
-            if (frame.spC8 != collisionOne) {
-                if (frame.spC8 == 4) {
-                    if (((frame.sp110 * -headingSine) + (frame.sp118 * -headingCosine)) < k_collisionWallFacingDotLimit_de) {
-                        frame.sp54 |= 0x80;
-                        CCollision_UpdateSurfaceResponseFlags(&frame.sp18, &frame.spC8);
+            if (frame.hitType != collisionOne) {
+                if (frame.hitType == 4) {
+                    if (((frame.contactX * -headingSine) + (frame.contactZ * -headingCosine)) < k_collisionWallFacingDotLimit_de) {
+                        frame.motionFlags |= 0x80;
+                        CCollision_UpdateSurfaceResponseFlags(&frame.actor, &frame.hitType);
                     }
                 } else {
                     goto block_42;
                 }
             } else {
-                frame.sp38 = 0;
+                frame.motionSettingsBit1 = 0;
 block_42:
-                frame.sp54 &= ~0x80;
+                frame.motionFlags &= ~0x80;
             }
-            CCollision_StoreContactResult(&frame.sp18);
+            CCollision_StoreContactResult(&frame.actor);
             collisionCount += 1;
-            motionContinuation = CCollision_ApplyMotionResponse(&frame.sp18);
-            __builtin_memcpy(&frame.sp5C, &frame.sp198, 12);
-            __builtin_memcpy(&frame.sp68, &frame.sp1B0, 12);
-            __builtin_memcpy(&frame.sp8C, &frame.sp1BC, 12);
+            motionContinuation = CCollision_ApplyMotionResponse(&frame.actor);
+            __builtin_memcpy(&frame.startX, &frame.resultX, 12);
+            __builtin_memcpy(&frame.targetX, &frame.resultTargetX, 12);
+            __builtin_memcpy(&frame.room, &frame.resultRoom, 12);
         } else {
-            __builtin_memcpy(&frame.sp5C, &frame.sp68, 12);
+            __builtin_memcpy(&frame.startX, &frame.targetX, 12);
         }
         remainingIterations -= 1;
         if (motionContinuation == 0) {
         } else if (remainingIterations != 0) {
             goto loop_34;
         }
-        __builtin_memcpy(&actor->x, &frame.sp5C, 12);
-        __builtin_memcpy(&actor->room, &frame.sp8C, 12);
-        frame.sp54 &= ~4;
+        __builtin_memcpy(&actor->x, &frame.startX, 12);
+        __builtin_memcpy(&actor->room, &frame.room, 12);
+        frame.motionFlags &= ~4;
         if (*motionSettings & 0x40000) {
-            __builtin_memcpy(&frame.sp68, &frame.sp5C, 12);
-            frame.sp44 = 0;
-            frame.sp48 = 0;
-            frame.sp4C = 0;
-            savedY = frame.sp6C;
+            __builtin_memcpy(&frame.targetX, &frame.startX, 12);
+            frame.traceEnabled = 0;
+            frame.horizontalResponseTicks = 0;
+            frame.verticalResponseTicks = 0;
+            savedY = frame.targetY;
             dropDistance = k_collisionFloorProbeDrop_de;
-            frame.sp6C = savedY - dropDistance;
-            __builtin_memcpy(&frame.sp2A8, &g_playerCollisionProbe, sizeof(g_playerCollisionProbe));
-            frame.sp58 = &frame.sp2A8;
-            floorProbeBaseFlags = frame.sp2A8 & 0xFFE7FFF7;
-            frame.sp2A8 = floorProbeBaseFlags;
-            frame.sp2A8 = floorProbeBaseFlags | (*motionSettings & 0x180008);
-            frame.sp50 = 0;
-            CCollision_ResetContactNormal(&frame.sp18);
+            frame.targetY = savedY - dropDistance;
+            __builtin_memcpy(&frame.probeFlags, &g_playerCollisionProbe, sizeof(g_playerCollisionProbe));
+            frame.motionSettings = &frame.probeFlags;
+            floorProbeBaseFlags = frame.probeFlags & 0xFFE7FFF7;
+            frame.probeFlags = floorProbeBaseFlags;
+            frame.probeFlags = floorProbeBaseFlags | (*motionSettings & 0x180008);
+            frame.motionSettingsBit19 = 0;
+            CCollision_ResetContactNormal(&frame.actor);
             actor->contactX = 0.0f;
             actor->contactZ = 0.0f;
             actor->contactBits = k_collisionUpNormalY_de;
             actor->groundY = (f32) (actor->y - dropDistance);
 loop_49:
-            if (CCollision_TraceActorMotion((s8 *) &frame.sp18) != 0) {
-                if (frame.spD0 == 7) {
-                    frame.sp3C = 0;
+            if (CCollision_TraceActorMotion((s8 *) &frame.actor) != 0) {
+                if (frame.probeHitType == 7) {
+                    frame.groundFollowEnabled = 0;
                 }
-                CCollision_ApplyMotionResponse(&frame.sp18);
+                CCollision_ApplyMotionResponse(&frame.actor);
                 repeatFloorProbe = 0;
-                actor->groundY = frame.sp19C;
-                __builtin_memcpy(&actor->contactX, &frame.sp110, 12);
+                actor->groundY = frame.resultY;
+                __builtin_memcpy(&actor->contactX, &frame.contactX, 12);
                 actorY = actor->y;
-                hitY = frame.sp19C;
+                hitY = frame.resultY;
                 groundSeparation = actorY - hitY;
-                if ((frame.sp3C != 0) && (groundSeparation < k_collisionGroundSnapDistance_de)) {
-                    frame.sp3C = 0;
+                if ((frame.groundFollowEnabled != 0) && (groundSeparation < k_collisionGroundSnapDistance_de)) {
+                    frame.groundFollowEnabled = 0;
                     actor->velY = 0.0f;
                     groundSeparation = actor->velY;
                     actor->y = hitY;
                 }
                 if ((actor->velY <= 0.0f) && (groundSeparation < k_collisionGroundContactDistance_de)) {
-                    if (frame.spC8 == 5) {
-                        frame.sp54 |= 0x2004;
-                        CCollision_UpdateMaterialFlags(&frame.sp18, &frame.spC8);
+                    if (frame.hitType == 5) {
+                        frame.motionFlags |= 0x2004;
+                        CCollision_UpdateMaterialFlags(&frame.actor, &frame.hitType);
                         repeatFloorProbe = 1;
-                        *frame.sp58 &= ~8;
+                        *frame.motionSettings &= ~8;
                     } else {
-                        if (frame.spC8 < 5) goto no_attach;
-                        if (frame.spC8 >= 0xA) goto no_attach;
-                        if (frame.spC8 < 7) goto no_attach;
-                        if (frame.sp11C->type != 1) goto no_attach;
-                        attachedActor = frame.sp11C;
+                        if (frame.hitType < 5) goto no_attach;
+                        if (frame.hitType >= 0xA) goto no_attach;
+                        if (frame.hitType < 7) goto no_attach;
+                        if (frame.hitActor->type != 1) goto no_attach;
+                        attachedActor = frame.hitActor;
                         actor->attached = attachedActor;
                         flags = attachedActor->flags;
                         attachedActor->flags = (s32) (flags | 0x20);
-                        if (frame.sp1C != 0) {
+                        if (frame.motionContinuation != 0) {
                             attachedActor->flags = (s32) (flags | 0x60);
                         }
-                        attachmentFlags = (frame.sp54 & ~3) | 2;
+                        attachmentFlags = (frame.motionFlags & ~3) | 2;
                         goto attach_done;
 no_attach:
-                        attachmentFlags = frame.sp54 | 4;
+                        attachmentFlags = frame.motionFlags | 4;
 attach_done:
-                        frame.sp54 = attachmentFlags;
+                        frame.motionFlags = attachmentFlags;
                     }
                 }
                 if (repeatFloorProbe != 0) {
-                    __builtin_memcpy(&frame.sp5C, &frame.sp198, 12);
+                    __builtin_memcpy(&frame.startX, &frame.resultX, 12);
                     goto block_71;
                 }
             } else {
@@ -289,51 +289,51 @@ block_71:
                 }
             }
         }
-        preProbeFlags = frame.sp54;
-        frame.sp54 = preProbeFlags & ~0x100;
-        if ((frame.sp38 != 0) || (preProbeFlags & 0x80)) {
-            __builtin_memcpy(&frame.sp5C, &actor->x, 12);
-            __builtin_memcpy(&frame.sp68, &actor->x, 12);
-            frame.sp44 = 0;
-            frame.sp48 = 0;
-            frame.sp4C = 0;
-            frame.sp58 = &g_playerCollisionProbe.flags;
-            frame.sp68 -= headingSine * k_collisionWallProbeReach_de;
-            frame.sp70 -= headingCosine * k_collisionWallProbeReach_de;
-            CCollision_ResetContactNormal(&frame.sp18);
-            if ((CCollision_TraceActorMotion((s8 *) &frame.sp18) != 0) && (frame.spC8 == 4)) {
-                if (frame.sp38 != 0) {
-                    CCollision_ApplyMotionResponse(&frame.sp18);
-                    actor->x = frame.sp198;
-                    actor->z = frame.sp1A0;
-                    frame.sp54 |= 0x100;
-                    CCollision_UpdateSurfaceResponseFlags(&frame.sp18, &frame.spC8);
+        preProbeFlags = frame.motionFlags;
+        frame.motionFlags = preProbeFlags & ~0x100;
+        if ((frame.motionSettingsBit1 != 0) || (preProbeFlags & 0x80)) {
+            __builtin_memcpy(&frame.startX, &actor->x, 12);
+            __builtin_memcpy(&frame.targetX, &actor->x, 12);
+            frame.traceEnabled = 0;
+            frame.horizontalResponseTicks = 0;
+            frame.verticalResponseTicks = 0;
+            frame.motionSettings = &g_playerCollisionProbe.flags;
+            frame.targetX -= headingSine * k_collisionWallProbeReach_de;
+            frame.targetZ -= headingCosine * k_collisionWallProbeReach_de;
+            CCollision_ResetContactNormal(&frame.actor);
+            if ((CCollision_TraceActorMotion((s8 *) &frame.actor) != 0) && (frame.hitType == 4)) {
+                if (frame.motionSettingsBit1 != 0) {
+                    CCollision_ApplyMotionResponse(&frame.actor);
+                    actor->x = frame.resultX;
+                    actor->z = frame.resultZ;
+                    frame.motionFlags |= 0x100;
+                    CCollision_UpdateSurfaceResponseFlags(&frame.actor, &frame.hitType);
                     if (actor->type == 1) {
-                        Graphu64_EaseValueToward(&frame.sp2C8, frame.sp2C8 - Graphu64_GetWrappedDifference(frame.sp2C8, CCollision_GetContactYaw((f32 *) &frame.spC8)), 0.9f);
-                        actor->angle = frame.sp2C8;
+                        Graphu64_EaseValueToward(&frame.heading, frame.heading - Graphu64_GetWrappedDifference(frame.heading, CCollision_GetContactYaw((f32 *) &frame.hitType)), 0.9f);
+                        actor->angle = frame.heading;
                     }
                 }
             } else {
-                frame.sp54 &= ~0x80;
+                frame.motionFlags &= ~0x80;
             }
         }
         if (*motionSettings & 0x80000) {
-            surface = Scene_ResolveFloorPolygon(frame.spC4, &actor->x);
-            frame.sp54 &= ~0x5000;
+            surface = Scene_ResolveFloorPolygon(frame.surface, &actor->x);
+            frame.motionFlags &= ~0x5000;
             if ((surface != 0) && ((((UnicolSurfaceRecord *)surface)->flags & 0x41) == 0x41) && (Region_GetPolygonHeight(surface, actor->x, actor->z) <= actor->y)) {
                 surfaceCeilingHeight = Graphu64_GetTrianglePlaneHeight(surface, actor->x, actor->z);
                 if (actor->y <= surfaceCeilingHeight) {
-                    frame.sp54 |= 0x4000;
+                    frame.motionFlags |= 0x4000;
                 }
-                surfaceCeilingHeight += frame.sp34;
+                surfaceCeilingHeight += frame.scaledSweepReach;
                 if (actor->y <= surfaceCeilingHeight) {
-                    frame.sp54 |= 0x1000;
+                    frame.motionFlags |= 0x1000;
                 }
-                CCollision_UpdateModelSurfaceFlags(&frame.sp18, surface);
+                CCollision_UpdateModelSurfaceFlags(&frame.actor, surface);
             }
             actor->collision = surface;
         }
-        actor->flags = frame.sp54;
+        actor->flags = frame.motionFlags;
         return collisionCount;
     }
     return 0;

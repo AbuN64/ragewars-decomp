@@ -3,7 +3,7 @@
 #include "COMMON/STATERECAT34.H"
 struct AudioInstrumentPackView {
     unsigned char padding_0[11084];
-    void *unk_2B4C;
+    void *instrumentPack;
 };
 extern s32 Audio_GetVoiceMixValue(struct GameAudioContext *context);
 extern void Audio_SetVoiceMixValue(struct GameAudioContext *context, s32 mixValue);

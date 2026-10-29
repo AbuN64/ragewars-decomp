@@ -166,7 +166,7 @@ void Focus_ShowUnlockedEntries(s32 style) {
     s32 i;
     for (i = 0; i < 50; i++) {
         node = Node_FindWidgetByResourceId(g_profileStatisticsScreen->root, (u16)g_focusUnlockEntries[i].id);
-        if (Defs_TestBit(&g_profileUnlockFlagBase[g_profileStatisticsScreen->unk268], i) == 1) {
+        if (Defs_TestBit(&g_profileUnlockFlagBase[g_profileStatisticsScreen->activeSlot], i) == 1) {
             Widget_SetWidgetFlag08(node, 1);
             node->alpha = style;
         } else {

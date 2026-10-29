@@ -88,8 +88,8 @@ found:
 
 s32 Route_GetRouteRelation(void *relationTable, s32 sourceNode, s32 destinationNode) {
     RouteRelationTableView *table = relationTable;
-    RouteRelationBytes *bytes = (RouteRelationBytes *)table->unk_10;
-    s32 index = (sourceNode * table->unk_4 + destinationNode) * bytes->stride;
+    RouteRelationBytes *bytes = (RouteRelationBytes *)table->relationBytes;
+    s32 index = (sourceNode * table->nodeCount + destinationNode) * bytes->stride;
     return *(index + bytes->entries);
 }
 

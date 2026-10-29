@@ -223,19 +223,19 @@ struct ALVoiceState;
 struct SequencePlayerEventView;
 struct SequencePlayerEventView {
     char pad0[0x18];
-    void * unk_18;
+    void * sequence;
     char pad18[0x24 - 0x18 - sizeof(void*)];
-    s32 unk_24;
+    s32 microsecondsPerTick;
     char pad24[0x2C - 0x24 - sizeof(s32)];
-    s32 unk_2C;
+    s32 state;
     char pad2C[0x48 - 0x2C - sizeof(s32)];
-    char unk_48;
+    char eventQueue;
     char pad48[0x7C - 0x48 - sizeof(char)];
-    void * unk_7C;
+    void * loopStart;
     char pad7C[0x80 - 0x7C - sizeof(void*)];
-    char * unk_80;
+    char * loopEnd;
     char pad80[0x84 - 0x80 - sizeof(char*)];
-    s32 unk_84;
+    s32 loopCount;
 };
 
 

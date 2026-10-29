@@ -380,9 +380,9 @@ void Menu_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefin
             menu->vertices[bank][i].tc[1] = 0;
         }
     }
-    input->field_B0 = 0;
-    input->field_B4 = 0;
-    input->field_BC = 0;
+    input->buttons = 0;
+    input->pressedButtons = 0;
+    input->history1 = 0;
     Menu_StopMenuPulse((struct Object1C8 *)menu);
     Menu_StartMenuPulse((struct Object1C8 *)menu);
     if (definition->initialize != 0) definition->initialize(menu, owner);

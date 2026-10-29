@@ -8,16 +8,16 @@ extern void Preview_SelectMatchingPreviewModel(struct ModelPreview *preview, s32
 extern void Preview_SetPreviewAngle(PreviewAngleView *preview, s32 angle);
 extern void Preview_SetPreviewPosition(PreviewPositionView *preview, CVector3 v);
 typedef struct PreviewActorDefinition {
-    s32 unk0;
-    s32 unk4;
-    f32 unk8;
-    s32 unkC;
+    s32 kind;
+    s32 gate;
+    f32 presetFloat;
+    s32 characterWord;
     char pad10[0x14 - 0x10];
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
+    s32 flags;
+    s32 boundsA;
+    s32 boundsB;
     char pad20[0x180 - 0x20];
-    s32 unk180;
+    s32 reservedWordLow;
     s32 reservedWord;
 } PreviewActorDefinition;
 typedef struct ModelPreviewActor {
@@ -52,7 +52,7 @@ typedef struct ModelPreviewActor {
     s32 eyeHeightBits;
     Matrix transform;
     s32 animationMatrixBufferAddress;
-    s32 unkB8;
+    s32 previousAnimationMatrixBufferAddress;
     s32 shadowAddress;
     char padC0[0xC4 - 0xC0];
     s32 resource;

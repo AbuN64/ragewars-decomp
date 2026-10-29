@@ -252,7 +252,7 @@ typedef struct VertexArena VertexArena;
 
 struct Nodes;
 struct Nodes {
-    s32 unk0;
+    s32 reservedWord;
     struct Nodes *next;
     f32 value;
 };

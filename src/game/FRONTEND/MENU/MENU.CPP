@@ -59,7 +59,7 @@ extern s32 g_hudReferenceViewportWidth;
  * colour g_menuModelFillColor to opaque white, scissors the display list to the full screen and, when the block record at
  * +0x08 holds a model, draws it once in fill mode 1 at alpha 210, then restores the fill state. Returns zero. */
 s32 Menu_DrawMenuBlockModel(void *window, void *item, s32 event) {
-    if (event == 1 && g_profileStatisticsScreen->unk216 == 3) {
+    if (event == 1 && g_profileStatisticsScreen->menuPhase == 3) {
         g_menuModelFillEnabled = 0;
         g_menuModelFillColor[0] = 255.0f;
         g_menuModelFillColor[1] = 255.0f;
@@ -87,7 +87,7 @@ extern void MarkMenuEventHandled();
 s32 Menu_HandleNextProfileEvent(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3 && value == 0) {
         MarkMenuEventHandled();
-        Focus_AdvanceActiveSlot(&g_profileStatisticsScreen->unk268);
+        Focus_AdvanceActiveSlot(&g_profileStatisticsScreen->activeSlot);
         Focus_ShowUnlockedEntries(0x6E);
         Focus_RefreshProfileStatistics();
         Focus_RefreshUnlockedFocusLabel();
@@ -98,8 +98,8 @@ s32 Menu_HandleNextProfileEvent(void *first, void *second, u32 event, s32 value)
 
 s32 Menu_BeginSelectionMenuExit(void) {
     MarkMenuEventHandled();
-    g_profileStatisticsScreen->unk216 = 5;
-    g_profileStatisticsScreen->unk220 = 4;
+    g_profileStatisticsScreen->menuPhase = 5;
+    g_profileStatisticsScreen->reservedWord = 4;
     return 0;
 }
 
@@ -110,7 +110,7 @@ s32 Menu_ConsumeSelectionMenuEvent(void) {
     return 0;
 }
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_selectionMenuHandlerEvents, an actor kind at g_selectionMenuHandlerKinds and a handler at g_selectionMenuHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event event through this file's 12-byte handler table, whose rows hold an event at g_selectionMenuHandlerEvents, an actor kind at g_selectionMenuHandlerKinds and a handler at g_selectionMenuHandlers: the first row whose event equals event and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 

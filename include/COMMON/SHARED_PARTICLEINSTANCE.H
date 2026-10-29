@@ -15,11 +15,11 @@ struct Shared_ParticleInstance {
     u16 type;
     char pad6[0x2];
     CVector3 pos;
-    s32 unk14;
+    s32 region;
     char pad18[0x4];
     CVector3 velocity;
     char pad28[0x10];
-    s32 unk38;
+    s32 instanceFlags;
     char pad3C[0x14];
 };
 
@@ -95,10 +95,10 @@ struct Shared_ParticleTarget {
     char padBC[0x44];
     s32 flags;
     char pad104[0x6C];
-    s32 unk170;
-    s32 unk174;
+    s32 stateFlags;
+    s32 health;
     char pad178[0x2C];
-    s8 unk1A4;
+    s8 typeCode;
     char reserved1A5[0xE3];
     void (*callback)(struct Shared_ParticleTarget *, s32 *, void *);
     char reserved28C[0x1158];
@@ -164,7 +164,7 @@ struct Shared_ParticleFade {
     s8 fadeIn;
     s8 fadeOut;
     char padB[0x3];
-    s8 unkE;
+    s8 modeSelector;
 };
 struct Shared_ParticleColors;
 struct Shared_ParticleDesc;
@@ -250,12 +250,12 @@ struct Shared_Particle {
     f32 sineAngleSpeedY;
     f32 sineAmplitudeX;
     f32 sineAmplitudeY;
-    s32 unk1B4;
+    s32 collisionFlags;
     s8 mode0;
-    s8 unk1B9;
-    s8 unk1BA;
+    s8 mode1;
+    s8 mode2;
     char pad1BB;
-    f32 unk1BC;
+    f32 restGate;
     char pad1C0[4];
     f32 rotationScale;
     char pad1C8[8];

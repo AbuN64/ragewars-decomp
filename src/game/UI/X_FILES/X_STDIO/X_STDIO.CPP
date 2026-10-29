@@ -250,11 +250,11 @@ void XStdio_QueryStreamEnd(void) {
 }
 
 s32 XStdio_ReadCharacter(s32 stream) {
-    u8 sp10;
+    u8 readByte;
     s32 result;
 
-    if (g_stdioReadCallback(stream, &sp10, 1) != 0) {
-        result = sp10;
+    if (g_stdioReadCallback(stream, &readByte, 1) != 0) {
+        result = readByte;
     } else {
         result = -1;
     }

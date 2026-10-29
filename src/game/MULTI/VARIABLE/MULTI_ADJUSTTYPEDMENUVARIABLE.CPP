@@ -47,7 +47,7 @@ s32 Multi_AdjustTypedMenuVariable(TypedMenuVariableView *widget, Shared_MenuInpu
     struct Variable *writeDescriptor;
 
     readDescriptor = widget->variable;
-    readValue = readDescriptor->unk18();
+    readValue = readDescriptor->accessor();
     readValueType = readDescriptor->valueType;
     switch (readValueType) {
     default:
@@ -85,7 +85,7 @@ s32 Multi_AdjustTypedMenuVariable(TypedMenuVariableView *widget, Shared_MenuInpu
         if (adjustedValue > readDescriptor->maximum) adjustedValue = readDescriptor->maximum;
     }
     writeDescriptor = widget->variable;
-    writeValue = writeDescriptor->unk18(widget);
+    writeValue = writeDescriptor->accessor(widget);
     writeValueType = writeDescriptor->valueType;
     switch (writeValueType) {
     case 0: *(float *)writeValue = adjustedValue; break;

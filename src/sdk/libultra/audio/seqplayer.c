@@ -23,7 +23,7 @@ extern s32 alSeqGetTicks(void *sequence);
 
 extern void alSeqSetLoc(void *sequence, void *marker);
 
-/** Store a new history slot (pointer + selected byte/word fields) into the ring buffer at arg0+0x60. */
+/** Store a new history slot (pointer + selected byte/word fields) into the ring buffer at seqPlayer+0x60. */
 void __setInstChanState(void *seqPlayer, void *selectedInstrument, s32 channelNumber) {
     s32 stride = channelNumber * 0x10;
 
@@ -114,21 +114,21 @@ void __postNextSeqEvent(void *seqPlayer) {
     s32 remainingLoops;
     void *sequence;
 
-    sequence = ((SequencePlayerEventView *)(seqPlayer))->unk_18;
-    if ((((SequencePlayerEventView *)(seqPlayer))->unk_2C == 1) && (sequence != 0) &&
+    sequence = ((SequencePlayerEventView *)(seqPlayer))->sequence;
+    if ((((SequencePlayerEventView *)(seqPlayer))->state == 1) && (sequence != 0) &&
         (__alSeqNextDelta(sequence, &deltaTicks) & 0xFF)) {
-        if ((((SequencePlayerEventView *)(seqPlayer))->unk_84 != 0) &&
+        if ((((SequencePlayerEventView *)(seqPlayer))->loopCount != 0) &&
             ((alSeqGetTicks(sequence) + deltaTicks) >=
-             ((struct MenuTextOwnerView *) ((SequencePlayerEventView *) seqPlayer)->unk_80)->flags)) {
-            alSeqSetLoc(sequence, ((SequencePlayerEventView *)(seqPlayer))->unk_7C);
-            remainingLoops = ((SequencePlayerEventView *)(seqPlayer))->unk_84;
+             ((struct MenuTextOwnerView *) ((SequencePlayerEventView *) seqPlayer)->loopEnd)->flags)) {
+            alSeqSetLoc(sequence, ((SequencePlayerEventView *)(seqPlayer))->loopStart);
+            remainingLoops = ((SequencePlayerEventView *)(seqPlayer))->loopCount;
             if (remainingLoops != -1) {
-                ((SequencePlayerEventView *)(seqPlayer))->unk_84 = remainingLoops - 1;
+                ((SequencePlayerEventView *)(seqPlayer))->loopCount = remainingLoops - 1;
             }
         }
         referenceEvent.type = 0;
-        alEvtqPostEvent(&((SequencePlayerEventView *)(seqPlayer))->unk_48, &referenceEvent,
-                      deltaTicks * ((SequencePlayerEventView *)(seqPlayer))->unk_24);
+        alEvtqPostEvent(&((SequencePlayerEventView *)(seqPlayer))->eventQueue, &referenceEvent,
+                      deltaTicks * ((SequencePlayerEventView *)(seqPlayer))->microsecondsPerTick);
     }
 }
 

@@ -52,7 +52,7 @@ void Nav_SelectAvailableWeapon(WeaponSelectBrain *brain, s32 *ammo) {
             continue;
         }
         if ((u32)weapon >= 2) {
-            switch (brain->player->views5D8.view5D8_1.record->unk93) {
+            switch (brain->player->views5D8.view5D8_1.record->difficulty) {
             case 1:
                 goto second;
             case 0:
@@ -60,7 +60,7 @@ void Nav_SelectAvailableWeapon(WeaponSelectBrain *brain, s32 *ammo) {
             case 2:
                 goto add;
             default:
-                brain->player->views5D8.view5D8_1.record->unk93 = 0;
+                brain->player->views5D8.view5D8_1.record->difficulty = 0;
                 break;
             }
             if (*g_weaponInfoByType[weapon]->weaponClass == 1) {

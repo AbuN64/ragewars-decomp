@@ -22,7 +22,7 @@ struct {
         unsigned short widgets[8][2];
     } rows[3];
     unsigned int events[39];
-} D_auto_data_unresolved_800DEF38 = {
+} g_characterSelectionScreenWidgetTable = {
     { { 0, 0x007F }, { 0, 0x00C6 }, { 0, 0x00AD }, { 0, 0x00AF }, { 0, 0x00B1 }, { 0, 0x00C4 }, { 0, 0x00C3 }, { 0, 0x00C2 } },
     {
         { 0x00000086, { { 0, 0x007E }, { 0, 0x00A9 }, { 0, 0x0094 }, { 0, 0x0096 }, { 0, 0x0098 }, { 0, 0x00A8 }, { 0, 0x00A7 }, { 0, 0x00A6 } } },

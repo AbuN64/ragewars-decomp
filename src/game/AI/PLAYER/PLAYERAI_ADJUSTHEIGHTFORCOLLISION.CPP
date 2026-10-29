@@ -153,7 +153,7 @@ void Playerai_UpdateCrouchClearance(Player *player, LevelActor *actor, s32 unuse
 }
 
 void Playerai_UpdateActionTransitionBlend(Shared_ActorView *actor) {
-    f32 sp10;
+    f32 easedBlend;
     f32 targetBlend;
     f32 blendStep;
 
@@ -161,9 +161,9 @@ void Playerai_UpdateActionTransitionBlend(Shared_ActorView *actor) {
     if ((u32)((u16)actor->action - 9) < 4U) {
         targetBlend = g_playerActionBlendTargetAndMinimumStep[0];
     }
-    sp10 = actor->transitionBlend;
-    Graphu64_EaseValueToward(&sp10, targetBlend, 0.25f);
-    blendStep = sp10 - actor->transitionBlend;
+    easedBlend = actor->transitionBlend;
+    Graphu64_EaseValueToward(&easedBlend, targetBlend, 0.25f);
+    blendStep = easedBlend - actor->transitionBlend;
     if (blendStep < 0.0f) {
         if (-blendStep < g_playerActionBlendTargetAndMinimumStep[1]) {
             goto clamp;
@@ -215,27 +215,27 @@ void Playerai_UpdateWeaponEffectBlend(void *player) {
     s32 state;
 
     target = 0.0f;
-    effect = &((PlayerWeaponChargeEffectView *)(player))->unk_878;
-    if (((struct WeaponChargeAmmunitionView *)(g_weaponInfoByType[((PlayerWeaponChargeEffectView *)(player))->unk_62E]))->field_8 <= 0
-        || ((PlayerWeaponChargeEffectView *)(player))->unk_7E8 == 0
-        || (g_gameSettings.counters.m_bFragTagOn != 0 && ((struct FragTagProfileFlagView *) ((PlayerWeaponChargeEffectView *) player)->unk_5D8)->fragTagEnabled != 0)) {
+    effect = &((PlayerWeaponChargeEffectView *)(player))->effect;
+    if (((struct WeaponChargeAmmunitionView *)(g_weaponInfoByType[((PlayerWeaponChargeEffectView *)(player))->weaponType]))->ammunition <= 0
+        || ((PlayerWeaponChargeEffectView *)(player))->chargeEnabled == 0
+        || (g_gameSettings.counters.m_bFragTagOn != 0 && ((struct FragTagProfileFlagView *) ((PlayerWeaponChargeEffectView *) player)->profile)->fragTagEnabled != 0)) {
         do {
-            ((PlayerWeaponChargeEffectView *)(player))->unk_7E8 = 0;
+            ((PlayerWeaponChargeEffectView *)(player))->chargeEnabled = 0;
             state = ((Shared_Effect *)(effect))->state;
         } while (0);
         if (state != 0 && state != 3) {
             ((Shared_Effect *)(effect))->state = 3;
         }
     }
-    if (((PlayerWeaponChargeEffectView *)(player))->unk_5E4 != 0 && ((PlayerWeaponChargeEffectView *)(player))->unk_7E8 != 0) {
+    if (((PlayerWeaponChargeEffectView *)(player))->chargeRequested != 0 && ((PlayerWeaponChargeEffectView *)(player))->chargeEnabled != 0) {
         target = g_playerWeaponChargeBlendTarget;
-        ((PlayerWeaponChargeEffectView *)(player))->unk_7E8 = 1;
+        ((PlayerWeaponChargeEffectView *)(player))->chargeEnabled = 1;
     }
-    ((PlayerWeaponChargeEffectView *)(player))->unk_7F0 = target;
-    Playerai_EmptyWeaponEffectHook(&((PlayerWeaponChargeEffectView *)(player))->unk_878, player);
-    Graphu64_EaseValueToward(&((PlayerWeaponChargeEffectView *)(player))->unk_7EC, target, 0.5f);
-    if (target == 0.0f && ((PlayerWeaponChargeEffectView *)(player))->unk_7EC < g_playerWeaponChargeBlendCutoff) {
-        ((PlayerWeaponChargeEffectView *)(player))->unk_7EC = 0.0f;
+    ((PlayerWeaponChargeEffectView *)(player))->chargeBlendTarget = target;
+    Playerai_EmptyWeaponEffectHook(&((PlayerWeaponChargeEffectView *)(player))->effect, player);
+    Graphu64_EaseValueToward(&((PlayerWeaponChargeEffectView *)(player))->chargeBlend, target, 0.5f);
+    if (target == 0.0f && ((PlayerWeaponChargeEffectView *)(player))->chargeBlend < g_playerWeaponChargeBlendCutoff) {
+        ((PlayerWeaponChargeEffectView *)(player))->chargeBlend = 0.0f;
     }
 }
 

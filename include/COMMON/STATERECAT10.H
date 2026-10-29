@@ -52,16 +52,16 @@ extern float g_weaponActionFiveNegativeFeedbackScale;
 struct WeaponSpecialFirePlayerView;
 struct WeaponSpecialFirePlayerView {
     char pad0[0x5D8];
-    char * unk_5D8;
+    char * controller;
     char pad5D8[0x62E - 0x5D8 - sizeof(char*)];
-    s16 unk_62E;
+    s16 ammoMode;
     char pad62E[0x650 - 0x62E - sizeof(s16)];
-    s16 unk_650;
+    s16 weaponActionIndex;
     char pad650[0x6AC - 0x650 - sizeof(s16)];
-    s32 unk_6AC;
+    s32 actionFlags;
     char pad6AC[0x770 - 0x6AC - sizeof(s32)];
-    s16 unk_770;
+    s16 nextUsableWeapon;
     char pad770[0x11D8 - 0x770 - sizeof(s16)];
-    f32 unk_11D8;
+    f32 delay;
 };
 #endif

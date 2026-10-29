@@ -9,8 +9,8 @@
 f32 Graphu64_ApproachValue(f32, f32, s32);
 
 void Playerai_UpdateReactionReserve(void *player) {
-    if ((((struct PlayerTintBlendStateView *) ((s8 *) player))->unk_5E4) != 0) {
-        (((struct PlayerTintBlendStateView *) ((s8 *) player))->unk_12C0) = Graphu64_ApproachValue((((struct PlayerTintBlendStateView *) ((s8 *) player))->unk_12C0), g_playerReactionReserveTarget, g_playerReactionReserveApproachRate);
+    if ((((struct PlayerTintBlendStateView *) ((s8 *) player))->health) != 0) {
+        (((struct PlayerTintBlendStateView *) ((s8 *) player))->reactionReserve) = Graphu64_ApproachValue((((struct PlayerTintBlendStateView *) ((s8 *) player))->reactionReserve), g_playerReactionReserveTarget, g_playerReactionReserveApproachRate);
     }
 }
 

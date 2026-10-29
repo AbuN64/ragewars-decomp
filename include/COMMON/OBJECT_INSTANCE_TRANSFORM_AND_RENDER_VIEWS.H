@@ -26,11 +26,11 @@ extern float g_actorPartsViewEffectTuning;
 struct ActorAnimationResetState;
 struct ActorAnimationResetState {
     unsigned char padding_0[256];
-    s32 unk_100;
-    s32 unk_104;
+    s32 flags;
+    s32 animationTime;
     unsigned char padding_108[6];
-    s8 unk_10E;
-    s8 unk_10F;
+    s8 animationPending;
+    s8 animationChanged;
 };
 
 extern int g_actorRootMotionSampleCount;
@@ -56,30 +56,30 @@ struct Box70 {
 struct ActorModelResourceView;
 struct ActorModelResourceView {
     char pad0[0x8];
-    CVector3 unk_8;
+    CVector3 position0;
     char pad8[0x14 - 0x8 - sizeof(CVector3)];
-    u16 * unk_14;
+    u16 * model;
     char pad14[0x18 - 0x14 - sizeof(u16*)];
-    s32 * unk_18;
+    s32 * definition;
     char pad18[0x100 - 0x18 - sizeof(s32*)];
-    s32 unk_100;
+    s32 flags;
     char pad100[0x1A0 - 0x100 - sizeof(s32)];
-    void * unk_1A0;
+    void * collisionResource;
     char pad1A0[0x1F4 - 0x1A0 - sizeof(void*)];
-    u16 * unk_1F4;
+    u16 * previousModel;
     char pad1F4[0x238 - 0x1F4 - sizeof(u16*)];
-    u16 unk_238;
+    u16 typeId;
 };
 
 struct ActorPoseBufferState;
 struct ActorPoseBufferState {
     unsigned char padding_0[180];
-    s32 unk_B4;
-    s32 unk_B8;
-    s32 unk_BC;
-    s32 unk_C0;
+    s32 poseMatrices;
+    s32 previousPoseMatrices;
+    s32 clearedWordFirst;
+    s32 clearedWordSecond;
     unsigned char padding_C4[60];
-    s32 unk_100;
+    s32 flags;
 };
 
 struct ActorModelLoadState;
@@ -94,8 +94,8 @@ struct ActorModelLoadState {
 
 struct Lookup;
 struct Lookup {
-    s32 unk0;
-    s32 unk4;
+    s32 drawModel;
+    s32 drawShadow;
     u32 pad8;
     void **value;
 };
@@ -105,14 +105,14 @@ struct Lookup {
 struct BoneBoundsActorView;
 struct BoneBoundsActorView {
     unsigned char padding_0[1];
-    s8 unk_1;
+    s8 team;
     unsigned char padding_2[178];
-    char *unk_B4;
-    char *unk_B8;
+    char *poseMatrices;
+    char *previousPoseMatrices;
     unsigned char padding_BC[68];
-    s32 unk_100;
+    s32 flags;
     unsigned char padding_104[120];
-    s32 unk_17C;
+    s32 boneMask;
 };
 
 struct LevelPlacedActorRecord;
@@ -202,17 +202,17 @@ typedef struct ActorCollisionResourceView ActorCollisionResourceView;
 struct RootMotionActorView;
 struct RootMotionActorView {
     unsigned char padding_0[1];
-    s8 unk_1;
+    s8 team;
     unsigned char padding_2[6];
-    CVector3 unk_8;
+    CVector3 position0;
     unsigned char padding_14[164];
-    char *unk_B8;
+    char *previousPoseMatrices;
     unsigned char padding_BC[40];
-    u16 unk_E4;
+    u16 type;
     unsigned char padding_E6[26];
-    s32 unk_100;
+    s32 flags;
     unsigned char padding_104[120];
-    s32 unk_17C;
+    s32 boneMask;
 };
 
 struct ActorModelCallbackView;
@@ -223,7 +223,7 @@ struct CollisionInfo;
 struct ActorCollisionResourceView;
 struct ActorCollisionResourceView {
     char pad0[0xC];
-    struct CollisionInfo * unk_C;
+    struct CollisionInfo * collisionInfo;
 };
 
 
@@ -233,7 +233,7 @@ typedef struct ActorModelResourceView ActorModelResourceView;
 struct ActorCollisionDataView;
 struct ActorCollisionDataView {
     char pad0[0x8];
-    func_80203908_S3_U124 unk_8;
+    func_80203908_S3_U124 collisionParams;
 };
 
 

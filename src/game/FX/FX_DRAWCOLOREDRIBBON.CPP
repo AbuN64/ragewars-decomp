@@ -232,8 +232,8 @@ typedef struct EffectList { void *head, *tail; s32 count; } EffectList;
 typedef struct EffectNode {
     struct EffectNode *previous, *next; EffectResource *resource;
     void *first, *second; f32 coordinates[2]; void *owner; s32 kind;
-    f32 value; s32 field28, field2C, field30, attachment, handle, flags;
-    EffectList children; s32 field4C, field50;
+    f32 value; s32 reservedWordAfterValue, field2C, field30, attachment, handle, flags;
+    EffectList children; s32 reservedWordAfterChildren, reservedWordTrailing;
 } EffectNode;
 typedef struct EffectPool { EffectList free, used; } EffectPool;
 typedef struct EffectWorld { char pad00[0x751C]; EffectPool pool; } EffectWorld;
@@ -284,10 +284,10 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
         node->first = first;
         node->second = second;
         node->value = resource->value;
-        node->field28 = 0;
+        node->reservedWordAfterValue = 0;
         node->attachment = resource->attachment;
-        node->field4C = 0;
-        node->field50 = 0;
+        node->reservedWordAfterChildren = 0;
+        node->reservedWordTrailing = 0;
         node->field2C = 0;
         node->field30 = 0;
         node->handle = -1;

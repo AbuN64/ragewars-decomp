@@ -42,8 +42,8 @@ void Rumble_ExpandMeshMaterial(MeshMaterial *dstData, CROMSection *section) {
 }
 
 f32 Rumble_SamplePackedFloatRange(s32 packedRange) {
-    s32 sp0;
-    s32 sp4;
+    s32 baseFloatBits;
+    s32 rangeFloatBits;
     u32 seed;
     s32 idx;
     f64 randomFraction;
@@ -52,11 +52,11 @@ f32 Rumble_SamplePackedFloatRange(s32 packedRange) {
     /* The halves are read by address below; a little-endian host holds them swapped. */
     packedRange = (s32) (((u32) packedRange << 16) | ((u32) packedRange >> 16));
 #endif
-    sp0 = (s32) (*(u16 *) &packedRange) << 16;
-    if (((struct PackedMaterialHalfwordView *) ((u16 *) (&packedRange)))->unk2 == 0) {
-        return *(f32 *) &sp0;
+    baseFloatBits = (s32) (*(u16 *) &packedRange) << 16;
+    if (((struct PackedMaterialHalfwordView *) ((u16 *) (&packedRange)))->spreadHighWord == 0) {
+        return *(f32 *) &baseFloatBits;
     }
-    sp4 = (s32) (((struct PackedMaterialHalfwordView *) ((u16 *) (&packedRange)))->unk2) << 16;
+    rangeFloatBits = (s32) (((struct PackedMaterialHalfwordView *) ((u16 *) (&packedRange)))->spreadHighWord) << 16;
     seed = (g_primaryRandomSeed * (s32) 0xA84A5B53) + (s32) 0x58348C2D;
     idx = (s32) ((seed >> 16) & 0x7FFF);
     randomFraction = (f64) idx;
@@ -64,7 +64,7 @@ f32 Rumble_SamplePackedFloatRange(s32 packedRange) {
     if (idx < 0) {
         randomFraction += g_packedFloatRandomBias;
     }
-    return *(f32 *) &sp0 + (((f32) randomFraction * *(f32 *) &sp4) * g_packedFloatRandomScale);
+    return *(f32 *) &baseFloatBits + (((f32) randomFraction * *(f32 *) &rangeFloatBits) * g_packedFloatRandomScale);
 }
 
 #if defined(VERSION_US)

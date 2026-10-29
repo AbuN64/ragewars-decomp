@@ -7,14 +7,14 @@ struct CallbackStateC {
 };
 struct AudioReverbParameterStateView {
     char pad0[0x18];
-    s32 unk_18;
+    s32 ratio;
     char pad18[0x1C - 0x18 - sizeof(s32)];
-    s32 unk_1C;
+    s32 upitch;
     char pad1C[0x20 - 0x1C - sizeof(s32)];
-    s32 unk_20;
+    s32 delta;
     char pad20[0x24 - 0x20 - sizeof(s32)];
-    s32 unk_24;
+    s32 first;
     char pad24[0x30 - 0x24 - sizeof(s32)];
-    s32 unk_30;
+    s32 motion;
 };
 #endif

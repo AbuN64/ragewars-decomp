@@ -74,7 +74,7 @@ s32 CCollision_TestSegmentDisk(CapsuleSweep *ray, PolygonCCollisionTestSegmentPo
 
 void CCollision_ClearResultFlags(void)
 {
-  g_collisionCurrentActor->unk100 = (g_collisionCurrentActor->state = (g_collisionCurrentActor->unkC4 = (g_collisionCurrentActor->unkB0 = (g_collisionCurrentActor->unk9C = (g_collisionCurrentActor->unk88 = (g_collisionCurrentActor->unk0 = 0))))));
+  g_collisionCurrentActor->resultFlagsF = (g_collisionCurrentActor->state = (g_collisionCurrentActor->resultFlagsE = (g_collisionCurrentActor->resultFlagsD = (g_collisionCurrentActor->resultFlagsC = (g_collisionCurrentActor->resultFlagsB = (g_collisionCurrentActor->resultFlagsA = 0))))));
 }
 
 void CCollision_UpdateSurfaceResponseFlags(ActorMotion *motion, MotionContactResult *contact) {
@@ -130,13 +130,13 @@ void CCollision_UpdateModelSurfaceFlags(void *motionStorage, u16 *surfaceKey)
   s32 currentMotionFlags;
   s32 updatedMotionFlags;
   void *surfaceRecord;
-  initialMotionFlags = ((Shared_CollisionMoveFrame *)o)->sp54;
+  initialMotionFlags = ((Shared_CollisionMoveFrame *)o)->motionFlags;
   if (initialMotionFlags & 0x1000)
   {
-    ((Shared_CollisionMoveFrame *)o)->sp54 = initialMotionFlags & (~0x2000);
+    ((Shared_CollisionMoveFrame *)o)->motionFlags = initialMotionFlags & (~0x2000);
   }
-  currentMotionFlags = ((Shared_CollisionMoveFrame *)o)->sp54;
-  ((Shared_CollisionMoveFrame *)o)->sp54 = currentMotionFlags & 0xFFFC7FFF;
+  currentMotionFlags = ((Shared_CollisionMoveFrame *)o)->motionFlags;
+  ((Shared_CollisionMoveFrame *)o)->motionFlags = currentMotionFlags & 0xFFFC7FFF;
   if (currentMotionFlags & 0x7000)
   {
     surfaceRecord = Scene_GetModelRecordByIndexPointer(&g_world, surfaceKey);
@@ -145,13 +145,13 @@ void CCollision_UpdateModelSurfaceFlags(void *motionStorage, u16 *surfaceKey)
       if ((((ModelBlend *)surfaceRecord)->collisionFlags) & 0x400000)
       {
         ;
-        ((Shared_CollisionMoveFrame *)o)->sp54 = (((Shared_CollisionMoveFrame *)o)->sp54) | 0x8000;
+        ((Shared_CollisionMoveFrame *)o)->motionFlags = (((Shared_CollisionMoveFrame *)o)->motionFlags) | 0x8000;
       }
       else
         if ((((ModelBlend *)surfaceRecord)->materialFlags) & 0x80)
       {
-        updatedMotionFlags = (((Shared_CollisionMoveFrame *)o)->sp54) | 0x10000;
-        ((Shared_CollisionMoveFrame *)o)->sp54 = updatedMotionFlags;
+        updatedMotionFlags = (((Shared_CollisionMoveFrame *)o)->motionFlags) | 0x10000;
+        ((Shared_CollisionMoveFrame *)o)->motionFlags = updatedMotionFlags;
       }
     }
   }

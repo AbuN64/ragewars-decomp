@@ -98,7 +98,7 @@ s32 Graphu64_NextRandomValue(void) {
     return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
 }
 
-/** LCG PRNG step scaled into [0, arg0 * g_randomFloatRangeScale) as a float. */
+/** LCG PRNG step scaled into [0, range * g_randomFloatRangeScale) as a float. */
 f32 Graphu64_RandomFloat(f32 range) {
     f64 value;
     s32 randomBits;
@@ -436,7 +436,7 @@ s32 Graphu64_GetHorizontalIntersectionParameter(f32 *edgePlane, f32 *intersectin
     return result;
 }
 
-/** Half-plane test: is arg1 on the positive side of arg0's normal (at +0x30)? */
+/** Half-plane test: is pointPosition on the positive side of arg0's normal (at +0x30)? */
 s32 Graphu64_IsPointOnPositiveEdgeSide(void *geometryEdge, void *pointPosition) {
     GeometryEdge *edge = geometryEdge;
     CVector3 *point = pointPosition;

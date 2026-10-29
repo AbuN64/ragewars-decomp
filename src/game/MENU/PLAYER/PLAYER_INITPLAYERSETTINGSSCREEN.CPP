@@ -59,7 +59,7 @@ s32 Player_InitPlayerSettingsScreen(s32 root) {
 INCLUDE_ASM("ovl_frontendMenu", Player_InitPlayerSettingsScreen);
 #endif
 
-/* Stores arg0 into its own g_playerSettingsSlotByteBase entry and pushes the five settings of slot arg0 of the g_profileSlotSettingsByte7B table into the objects g_playerSettingsScreen holds through SmpButton_SelectListEntry_PlayerInitplayersettingsscreen and SmpSlider_SetSliderItem. */
+/* Stores entryIndex into its own g_playerSettingsSlotByteBase entry and pushes the five settings of slot entryIndex of the g_profileSlotSettingsByte7B table into the objects g_playerSettingsScreen holds through SmpButton_SelectListEntry_PlayerInitplayersettingsscreen and SmpSlider_SetSliderItem. */
 
 
 extern struct StateMenuSelectPlayerSettingsEntry *g_playerSettingsScreen;
@@ -78,7 +78,7 @@ void Player_SelectPlayerSettingsEntry(s32 entryIndex) {
     SmpButton_SelectListEntry(g_playerSettingsScreen->e, g_profileSlotSettingsByte82[entryIndex * 0x190]);
 }
 
-/* Reads five settings from the objects g_playerSettingsScreen holds through SmpButton_GetListSelection and SmpSlider_GetSliderItem into slot arg0 of the g_profileSlotSettingsByte7B table and copies them into the matching bytes of the arg0 entry of g_playerSettings_Achieve. */
+/* Reads five settings from the objects g_playerSettingsScreen holds through SmpButton_GetListSelection and SmpSlider_GetSliderItem into slot entryIndex of the g_profileSlotSettingsByte7B table and copies them into the matching bytes of the entryIndex entry of g_playerSettings_Achieve. */
 
 
 extern u8 g_playerSettings[];

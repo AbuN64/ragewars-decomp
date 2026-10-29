@@ -51,7 +51,7 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
     s32 count, width;
     f32 size, w, boxW, boxH, sx, sy, x, y;
 
-    data = Menu_GetListContext(text->descriptor->unk_44);
+    data = Menu_GetListContext(text->descriptor->listContextKey);
     metrics->m_ScaleY = g_menuTextDefaultScale;
     metrics->m_ScaleX = g_menuTextDefaultScale;
     switch (text->mode) {
@@ -103,8 +103,8 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
             OnScreen_GetImageDimensions((s32)text->text, 0, &metrics->width, &metrics->height);
         }
         if ((text->flags & 0x10000000) && (boxW = metrics->width) != 0.0f && (boxH = metrics->height) != 0.0f) {
-            sx = data->unk_29C / boxW;
-            sy = data->unk_2A0 / boxH;
+            sx = data->width / boxW;
+            sy = data->height / boxH;
         } else {
             sx = g_hudReferenceViewportWidth * g_menuTextScreenWidthScale;
             sy = g_hudReferenceViewportHeight * g_menuTextAlternateScreenHeightScale;
@@ -136,8 +136,8 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         break;
     case 3:
         box = text->text;
-        metrics->width = box->unk_24 * data->unk_29C / g_hudReferenceViewportWidth;
-        metrics->height = box->unk_28 * data->unk_2A0 / g_hudReferenceViewportHeight;
+        metrics->width = box->width * data->width / g_hudReferenceViewportWidth;
+        metrics->height = box->height * data->height / g_hudReferenceViewportHeight;
         break;
     default:
         metrics->width = 1;

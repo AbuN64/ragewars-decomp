@@ -230,7 +230,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     break;
                                 }
                                 TeamSelect_EmptyWeaponWheelHook(&player->animationState);
-                                player->unk11B4 = 0;
+                                player->reserved11B4 = 0;
                                 Actor_RequestActorState(&player->bodyStateStorage, &player->weaponStateStorage, 1);
                                 Player_PlacePlayerAtSpawnPoint(player, player->spawnPoint, 0, 1);
                                 Playerai_InitializePlayerHealth(player);
@@ -304,7 +304,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                         break;
                     }
                     TeamSelect_EmptyWeaponWheelHook(&rotatingPlayer->animationState);
-                    rotatingPlayer->unk11B4 = 0;
+                    rotatingPlayer->reserved11B4 = 0;
                     Actor_RequestActorState(&rotatingPlayer->bodyStateStorage, &rotatingPlayer->weaponStateStorage, 1);
                     Player_PlacePlayerAtSpawnPoint(rotatingPlayer, rotatingPlayer->spawnPoint, 0, 1);
                     Playerai_InitializePlayerHealth(rotatingPlayer);
@@ -385,7 +385,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                         break;
                     }
                     TeamSelect_EmptyWeaponWheelHook(&chosenPlayer->animationState);
-                    chosenPlayer->unk11B4 = 0;
+                    chosenPlayer->reserved11B4 = 0;
                     Actor_RequestActorState(&chosenPlayer->bodyStateStorage, &chosenPlayer->weaponStateStorage, 1);
                     Player_PlacePlayerAtSpawnPoint(chosenPlayer, chosenPlayer->spawnPoint, 0, 1);
                     Playerai_InitializePlayerHealth(chosenPlayer);
@@ -468,7 +468,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     break;
                                 }
                                 TeamSelect_EmptyWeaponWheelHook(&flippedPlayer->animationState);
-                                flippedPlayer->unk11B4 = 0;
+                                flippedPlayer->reserved11B4 = 0;
                                 Actor_RequestActorState(&flippedPlayer->bodyStateStorage, &flippedPlayer->weaponStateStorage, 1);
                                 Player_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->spawnPoint, 0, 1);
                                 Playerai_InitializePlayerHealth(flippedPlayer);
@@ -528,7 +528,7 @@ static inline s32 Weapons_CountPlayersIn(Round *round) {
     ActorNode *node;
     s32 count = 0;
     for (node = round->players; node != 0; node = node->next) {
-        if (node->scores->unk90 == 0) {
+        if (node->scores->waitState == 0) {
             count += 1;
         }
     }
@@ -537,7 +537,7 @@ static inline s32 Weapons_CountPlayersIn(Round *round) {
 static inline ActorNode *Weapons_FindWaitingPlayer(Round *round) {
     ActorNode *node;
     for (node = round->players; node != 0; node = node->next) {
-        if ((node->scores->unk8F == 1) || (node->scores->unk90 == 1)) {
+        if ((node->scores->waitingRequest == 1) || (node->scores->waitState == 1)) {
             break;
         }
     }
@@ -562,7 +562,7 @@ void Player_ReleaseWaitingPlayer(Round *round) {
                 if (count > 0) {
                     node = Weapons_FindWaitingPlayer(round);
                     if (node != 0) {
-                        node->scores->unk90 = 0;
+                        node->scores->waitState = 0;
                         g_gameSettings.counters.m_CTFMode = 3;
                     }
                 } else {
@@ -573,7 +573,7 @@ void Player_ReleaseWaitingPlayer(Round *round) {
                 state->m_CTFMode = 2;
                 node = Weapons_FindWaitingPlayer(round);
                 if (node != 0) {
-                    node->scores->unk90 = 0;
+                    node->scores->waitState = 0;
                     Weapons_CountRelease(&node->scores->score);
                     g_ctfWaitingPlayerFlag = 0;
                 }
@@ -881,7 +881,7 @@ void Playerai_StopInactivePlayerSounds(char *game) {
     }
     actor = ((GamePlayerListView *)(game))->players;
     while (actor != 0) {
-        if (Cinema_IsSequenceInWindow() != 0 || ((ObjRecV5 *)(actor))->unk5EA == 0) {
+        if (Cinema_IsSequenceInWindow() != 0 || ((ObjRecV5 *)(actor))->voiceActive == 0) {
             void *work;
 
             work = SoundVoicePool_GetGlobalState();
@@ -897,7 +897,7 @@ void Playerai_StopInactivePlayerSounds(char *game) {
             if (owner == 0) {
                 blocked = 0;
             } else {
-                blocked = ((View *)(owner))->unk564 != 0;
+                blocked = ((View *)(owner))->shieldActive != 0;
             }
             if (blocked == 0) {
                 Block *base;
@@ -905,7 +905,7 @@ void Playerai_StopInactivePlayerSounds(char *game) {
                 s32 new_value;
                 f32 saved_value;
 
-                base = &((ObjRecV5 *)(actor))->unk2E8;
+                base = &((ObjRecV5 *)(actor))->actorBlock;
                 old_value = ((FragTagSelectionActorView *)actor)->value86C;
                 saved_value = g_frameElapsedTime;
                 ((FragTagSelectionActorView *)actor)->flags |= 0x200;
@@ -915,15 +915,15 @@ void Playerai_StopInactivePlayerSounds(char *game) {
                 if (((ObjRecV5 *)(actor))->cooldown <= 0.0f) {
                     Gobjinst_UpdateActorRootDisplacement((char *)base);
                 }
-                new_value = ((ObjRecV5 *)(actor))->unk86C;
+                new_value = ((ObjRecV5 *)(actor))->controllerState;
                 g_frameElapsedTime = saved_value;
                 if (old_value != new_value) {
-                    ((ObjRecV5 *)(actor))->unk10E = 0;
+                    ((ObjRecV5 *)(actor))->stateChangeClear = 0;
                 }
                 ((ObjRecV6 *)(actor))->savedPosition = ((ObjRecV5 *)(actor))->currentPosition;
-                ((ObjRecV6 *)(actor))->unk354 = ((ObjRecV5 *)(actor))->unk6C;
-                ((ObjRecV6 *)(actor))->unk2FC = ((ObjRecV5 *)(actor))->unk14;
-                ((ObjRecV6 *)(actor))->unk344 = ((ObjRecV5 *)(actor))->unk5C;
+                ((ObjRecV6 *)(actor))->savedYaw = ((ObjRecV5 *)(actor))->yaw;
+                ((ObjRecV6 *)(actor))->savedSourceHandle = ((ObjRecV5 *)(actor))->sourceHandle;
+                ((ObjRecV6 *)(actor))->savedResourceBlock = ((ObjRecV5 *)(actor))->resourceBlock;
                 ((ObjRecV6 *)(actor))->savedFlags &= ~0x200;
             }
         }
@@ -944,7 +944,7 @@ void Playerai_UpdateViewModelBounds(void *game, void *view) {
                 if (owner == view) {
                     void *actor;
 
-                    actor = &((FragTagLinkedActorView *)(node))->unk2E8;
+                    actor = &((FragTagLinkedActorView *)(node))->actorBlock;
                     if (((PlayerViewModeView *)(owner))->viewMode == 0) {
                         if (((CachedPlayerModelView *)(actor))->renderFlags & 0x40000) {
                             void *resource;
@@ -983,9 +983,9 @@ generic:
                         void *resource;
 
                         resource = Cache_RequestResource(
-                            0, ((FragTagLinkedActorView *)(node))->unkC4,
-                            ((FragTagLinkedActorView *)(node))->unkC4,
-                            ((FragTagLinkedActorView *)(node))->unkD0,
+                            0, ((FragTagLinkedActorView *)(node))->resourceKey,
+                            ((FragTagLinkedActorView *)(node))->resourceKey,
+                            ((FragTagLinkedActorView *)(node))->resourceFlags,
                             4, 0, 0, g_playerModelResourceTag, 1);
                         if (resource != 0) {
                             Gobjinst_UpdateModelBounds(node, (s32)SetN64_GetPackSection(*(void **)resource, 0));
@@ -1012,13 +1012,13 @@ void Playerai_DrawPlayerModelsForView(GamePlayerListView *game, s32 view) {
         team = ((struct Record *) ((struct PlayerSettingsOwnerView *) Gsky_FindScreenMessage(view))->settings)->team;
     }
     Geometry_BeginModelBatch();
-    for (player = game->players; player != 0; player = ((FragTagPlayerListView *)(player))->unk_16E0) {
+    for (player = game->players; player != 0; player = ((FragTagPlayerListView *)(player))->nextPlayer) {
         zoomed = 0;
-        if (((FragTagPlayerListView *)(player))->unk_11FC > 0.0f) {
+        if (((FragTagPlayerListView *)(player))->zoomLevel > 0.0f) {
             zoomed = 1;
         }
         if (zoomed) {
-            if (((FragTagPlayerListView *)(player))->unk_120C != 0) {
+            if (((FragTagPlayerListView *)(player))->zoomModelVariant != 0) {
                 model = Scene_FindModelIdIndex(&g_world, 0xC84);
             } else {
                 model = Scene_FindModelIdIndex(&g_world, 0xC85);
@@ -1027,11 +1027,11 @@ void Playerai_DrawPlayerModelsForView(GamePlayerListView *game, s32 view) {
                 Geometry_QueueDirectModel(Scene_GetIndexedModelResource(&g_world, model), player + 0x1600, &g_defaultParticleLighting, 0, -1);
             }
         }
-        if (((FragTagPlayerListView *)(player))->unk_5DC != 0 && ((FragTagPlayerListView *)(player))->unk_1210 != 0 && ((FragTagPlayerListView *)(player))->unk_5DC == view) {
+        if (((FragTagPlayerListView *)(player))->weaponHandle != 0 && ((FragTagPlayerListView *)(player))->alternateFireState != 0 && ((FragTagPlayerListView *)(player))->weaponHandle == view) {
             Weaponai_DrawRedMarkerQuad(player + 0x2E8, (char *)player + 0x458);
         }
         if ((g_gameSession.match.rules->teams != 0 || g_gameSession.match.rules->teamRule != 0)
-            && ((struct Record *) ((FragTagPlayerListView *) player)->unk_5D8)->team == team && Gsky_FindScreenMessage(view) != player) {
+            && ((struct Record *) ((FragTagPlayerListView *) player)->profile)->team == team && Gsky_FindScreenMessage(view) != player) {
             Playerai_DrawAimMarker(player);
         }
     }

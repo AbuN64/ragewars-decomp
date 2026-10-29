@@ -38,18 +38,18 @@ struct SkyEffectObjectListsView {
     IntrusiveList inactiveSceneEffects;
 };
 struct Reusable {
-    s32 unk0;
+    s32 reservedWord;
     char pad4[0x10];
     s32 collisionCounter;
     char pad18[0x70];
-    s32 unk88;
+    s32 reservedWord2;
     char pad8C[0x10];
-    s32 unk9C;
+    s32 reservedWord3;
     char padA0[0x10];
-    s32 unkB0;
-    s32 unkB4;
+    s32 reservedWord4;
+    s32 reservedWord5;
     char padB8[0xC];
-    s32 unkC4;
+    s32 reservedWord6;
 };
 struct BlockVirtualFreeVirtualRegion {
     s16 type;
@@ -93,7 +93,7 @@ struct Block10 {
 struct AnimationInfo {
     s32 frameCount;
     char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
+    s32 reservedWord;
     char pad4[0x8 - 0x4 - sizeof(s32)];
     void * frames;
 };

@@ -159,10 +159,10 @@ struct Shared_Emitter {
     CVector3 pos;
     struct Shared_Model * model;
     char pad18[0x28];
-    f32 unk40;
+    f32 reservedFloat;
     char pad44[0x18];
-    Shared_Quad unk5C;
-    f32 unk6C;
+    Shared_Quad rotation;
+    f32 yaw;
 };
 
 struct Shared_Effect;
@@ -179,7 +179,7 @@ struct Record {
     u8 fragTagEnabled;
     char pad90[0x92 - 0x90];
     u8 team;
-    u8 unk93;
+    u8 difficulty;
     u8 display;
 };
 
@@ -210,7 +210,7 @@ struct View {
     u32 previousN;
     char pad544[0x554 - 0x544];
     char menu[0x10]; /* 0x554 */
-    s32 unk564;
+    s32 shieldActive;
 };
 
 struct Shared_Body;
@@ -235,9 +235,9 @@ struct Shared_Input {
     s32 word20;
     s32 held;
     s32 pressed;
-    s32 unk2C;
-    s32 unk30;
-    s32 unk34;
+    s32 reservedWord;
+    s32 reservedWord1;
+    s32 reservedWord2;
 };
 
 struct Shared_Slot;
@@ -413,7 +413,7 @@ struct PakMenuSlot {
     char pad0[0x4];
     s8 controllerPort;
     char pad05[0xB0 - 5];
-    s32 unkB0; /* controller input flags used by Controller Pak selection */
+    s32 inputFlags; /* controller input flags used by Controller Pak selection */
 };
 
 struct ActorOwnerView;

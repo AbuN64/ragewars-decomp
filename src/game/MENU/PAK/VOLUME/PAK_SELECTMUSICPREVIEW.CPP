@@ -11,7 +11,7 @@
 
 s32 Pak_SelectMusicPreview(s32 unusedEvent, Shared_PakMenu *pThis) {
     s32 selection = g_menuMusicPreviewSelection;
-    if (pThis->owner->unkB0 & 0x20202) {
+    if (pThis->owner->inputFlags & 0x20202) {
         selection--;
         if (selection < 0) {
             selection = 22;
@@ -19,7 +19,7 @@ s32 Pak_SelectMusicPreview(s32 unusedEvent, Shared_PakMenu *pThis) {
             selection = 11;
         }
     }
-    if (pThis->owner->unkB0 & 0x4D101) {
+    if (pThis->owner->inputFlags & 0x4D101) {
         selection++;
         if (selection >= 23) {
             selection = 0;

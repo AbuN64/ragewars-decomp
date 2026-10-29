@@ -28,9 +28,9 @@ struct SceneNestedPackSectionTableView {
 };
 struct OwnerSceneUnlockActiveSectionResources {
     char pad0[0x944];
-    s32 unk944;
+    s32 reservedWord944;
     char pad948[0xC4C - 0x948];
-    s32 unkC4C;
+    s32 reservedWordC4C;
     char padC50[0x10BC - 0xC50];
     s32 activeResourceCount;
     char pad10C0[0x1500 - 0x10C0];

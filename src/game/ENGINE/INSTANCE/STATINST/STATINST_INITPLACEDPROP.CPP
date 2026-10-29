@@ -44,10 +44,10 @@ void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 own
     prop->state = 0;
     prop->id = record->id;
     prop->owner = owner;
-    prop->fieldA8 = -1;
-    prop->fieldAC = 0;
-    prop->fieldB0 = 0;
-    prop->fieldB4 = 0;
+    prop->reservedWord = -1;
+    prop->reservedWord1 = 0;
+    prop->reservedWord2 = 0;
+    prop->reservedWord3 = 0;
     prop->model = Scene_GetActorDefinition(&g_world, record->model);
     prop->fade = 16;
     prop->animationTimer = 0;
@@ -66,7 +66,7 @@ void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 own
     if (prop->flags & 0x40) {
         do { (prop->min).x = (record->position).x - (102.399994f); (prop->min).y = (record->position).y - (102.399994f); (prop->min).z = (record->position).z - (102.399994f); } while (0);
         do { (prop->max).x = (record->position).x + (102.399994f); (prop->max).y = (record->position).y + (102.399994f); (prop->max).z = (record->position).z + (102.399994f); } while (0);
-        prop->fieldD4 = g_defaultCameraSurfaceType;
+        prop->surfaceType = g_defaultCameraSurfaceType;
     } else {
         prop->min.x = RW_BITS_TO_FLOAT(record->extents[0]) + record->position.x - 0.5f;
         prop->min.y = RW_BITS_TO_FLOAT(record->extents[1]) + record->position.y - 0.5f;
@@ -74,7 +74,7 @@ void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 own
         prop->max.x = RW_BITS_TO_FLOAT(record->extents[3]) + record->position.x + 0.5f;
         prop->max.y = RW_BITS_TO_FLOAT(record->extents[4]) + record->position.y + 0.5f;
         prop->max.z = RW_BITS_TO_FLOAT(record->extents[5]) + record->position.z + 0.5f;
-        prop->fieldD4 = record->value;
+        prop->surfaceType = record->value;
     }
     CopyMatrix(prop->matrix, matrix);
     Graphu64_ConvertMatrixToFixed(matrix, prop->transform);

@@ -117,7 +117,7 @@ struct CapsuleSweep {
 struct Instance;
 struct Instance {
     u8 pad0[0x14];
-    s32 field14;
+    s32 value;
 };
 struct Input;
 struct Instance;
@@ -125,12 +125,12 @@ struct Input {
     u8 pad0[0xB0];
     s32 type;
     u8 padB4[8];
-    s32 fieldBC;
-    s32 fieldC0;
+    s32 contactAuxValue;
+    s32 contactValue;
     u8 padC4[0x34];
     Triple vecF8;
     struct Instance *instance104;
-    s32 field108;
+    s32 blockValue;
     Block70 block10C;
     s32 reservedWord;
     Triple vec180;
@@ -175,15 +175,15 @@ struct CCollisionResults {
     struct Instance *instance0;
     s32 instanceValue4;
     Triple vec8;
-    s32 field14;
+    s32 value;
     Block70 block18;
     struct Instance *instance88;
     s32 instanceValue8C;
     Triple vec90;
     u8 pad9C[0x28];
-    s32 fieldC4;
+    s32 instanceValueC4;
     Triple vecC8;
-    s32 fieldD4;
+    s32 contactAuxValue;
     u8 padD8[0xC];
     Triple vecE4;
     Triple vecF0;

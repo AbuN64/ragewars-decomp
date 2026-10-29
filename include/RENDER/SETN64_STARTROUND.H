@@ -5,7 +5,7 @@ struct RoundSessionItemStateView {
     char pad0[0x26DB8];
     s32 reservedWord;
     char pad26DB8[0x1C];
-    s32 unk26DD8;
+    s32 selectionKeyBase;
 };
 extern void SetN64_ResetMode10Items(s32 worldAddress);
 extern void SetN64_DrawMode11Session(void *session);

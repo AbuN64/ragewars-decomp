@@ -239,7 +239,7 @@ s32 Scene_GetTriggerCounterById(SceneTriggerCounterOwnerView *counterOwner, s32 
     s32 i;
     void *record;
     Table *list = counterOwner->list;
-    s32 count = list->unk4;
+    s32 count = list->count;
     s32 *ids = list->deltas;
 
     for (i = 0; i < count; i++) {

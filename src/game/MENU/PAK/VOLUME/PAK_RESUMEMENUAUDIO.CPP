@@ -29,15 +29,15 @@ s32 Pak_ReturnCallbackSuccess(void) {
 
 /* 80444EC0_7.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4514B4,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_pakAllocateMenuFirstResource,
    and returns one. */
 
 s32 Pak_AllocateMenuFirst(void *first, void *second, void *third) {
-    Menu_AllocateMenu(third, second, D_00450884);
+    Menu_AllocateMenu(third, second, g_pakAllocateMenuFirstResource);
     return 1;
 }
 
-/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_451AF0,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_initialDialogRowThreeResource,
    and returns one. */
 
 s32 Pak_AllocateMenuSecond(void *first, void *second, void *third) {
@@ -46,49 +46,49 @@ s32 Pak_AllocateMenuSecond(void *first, void *second, void *third) {
 #elif defined(VERSION_EU_X)
     Menu_AllocateMenu(third, second, g_pakAllocateMenuSecondResource_eu_x);
 #else
-    Menu_AllocateMenu(third, second, D_00450E9C);
+    Menu_AllocateMenu(third, second, g_initialDialogRowThreeResource);
 #endif
     return 1;
 }
 
-/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4500F4,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_initialDialogRowOneResource,
    and returns one. */
 
 s32 Pak_AllocateMenuThird(void *first, void *second, void *third) {
 #if defined(VERSION_EU)
-    Menu_AllocateMenu(third, second, D_00450E9C);
+    Menu_AllocateMenu(third, second, g_initialDialogRowThreeResource);
 #elif defined(VERSION_EU_X)
-    Menu_AllocateMenu(third, second, D_00450E9C);
+    Menu_AllocateMenu(third, second, g_initialDialogRowThreeResource);
 #else
-    Menu_AllocateMenu(third, second, D_0044F4A4);
+    Menu_AllocateMenu(third, second, g_initialDialogRowOneResource);
 #endif
     return 1;
 }
 
-/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4503E8,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_initialDialogRowTwoResource,
    and returns one. */
 
 s32 Pak_AllocateMenuFourth(void *first, void *second, void *third) {
 #if defined(VERSION_EU)
-    Menu_AllocateMenu(third, second, D_0044F4A4);
+    Menu_AllocateMenu(third, second, g_initialDialogRowOneResource);
 #elif defined(VERSION_EU_X)
-    Menu_AllocateMenu(third, second, D_0044F4A4);
+    Menu_AllocateMenu(third, second, g_initialDialogRowOneResource);
 #else
-    Menu_AllocateMenu(third, second, D_0044F798);
+    Menu_AllocateMenu(third, second, g_initialDialogRowTwoResource);
 #endif
     return 1;
 }
 
-/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_451BD4,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_pakAllocateMenuFifthResource,
    and returns one. */
 
 s32 Pak_AllocateMenuFifth(void *first, void *second, void *third) {
 #if defined(VERSION_EU)
-    Menu_AllocateMenu(third, second, D_0044F798);
+    Menu_AllocateMenu(third, second, g_initialDialogRowTwoResource);
 #elif defined(VERSION_EU_X)
-    Menu_AllocateMenu(third, second, D_0044F798);
+    Menu_AllocateMenu(third, second, g_initialDialogRowTwoResource);
 #else
-    Menu_AllocateMenu(third, second, D_00450F74);
+    Menu_AllocateMenu(third, second, g_pakAllocateMenuFifthResource);
 #endif
     return 1;
 }

@@ -72,7 +72,7 @@ extern void Cinema_ReleaseSequenceContext(void);
 
 extern s32 ScenarioSetup_StartRandomCupStage(void);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_tabOptionsEventKinds, an actor kind at g_tabOptionsActorKinds and a handler at g_tabOptionsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventKind through this file's 12-byte handler table, whose rows hold an event at g_tabOptionsEventKinds, an actor kind at g_tabOptionsActorKinds and a handler at g_tabOptionsEventHandlers: the first row whose event equals eventKind and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*TabOptionsEventHandler)(void *, s32, s32, s32, s32);
 
@@ -92,8 +92,8 @@ s32 Frontend_DestroyCompactOptionsPage(void) {
 s32 Frontend_ActivateCompactOptionsPage(void) {
     struct CompactOptionsPageView *state = g_gameOptionsScreenState;
 
-    if (state->unkC == 0) {
-        state->unkC = 1;
+    if (state->flagWord == 0) {
+        state->flagWord = 1;
         Tsmos_ActivateControllerState();
     }
     return 0;

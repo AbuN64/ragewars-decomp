@@ -226,7 +226,7 @@ void Weapon_DrawWeaponLookupModel(void *actorStorage, Dest *weaponState, Lookup 
     }
     state = ((Shared_ActorView *)actor)->selectedAction;
     one = 1;
-    if ((state == one) && (weaponState->field144 == 0)) {
+    if ((state == one) && (weaponState->fireEnabled == 0)) {
         return;
     }
     if ((state >= 0x12) && (Playerai_GetWeaponAmmo(actor, state) <= 0)) {
@@ -254,15 +254,15 @@ void Weapon_InitializeFireStateCallbacks(void *actor, void *fireState) {
     ((Dest *)fireState)->draw = &Weapon_FireStateDrawCallbackEntry;
     ((Dest *)fireState)->definitionHealth = 0;
     ((Dest *)fireState)->charge = 0;
-    ((Dest *)fireState)->field130 = 0;
+    ((Dest *)fireState)->reserved130 = 0;
     ((Dest *)fireState)->fireCounter = 0;
     ((Dest *)fireState)->fireMode = 1;
-    ((Dest *)fireState)->field12C = k;
+    ((Dest *)fireState)->initialCharge = k;
     ((LevelActor *)actor)->team = 0;
-    ((Dest *)fireState)->field148 = 0;
-    ((Dest *)fireState)->field144 = 1;
-    ((Dest *)fireState)->field14C = 0;
-    ((Dest *)fireState)->field150 = 0;
+    ((Dest *)fireState)->reserved148 = 0;
+    ((Dest *)fireState)->fireEnabled = 1;
+    ((Dest *)fireState)->reserved14C = 0;
+    ((Dest *)fireState)->reserved150 = 0;
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 Weapon_ApplySwitchAndRequestIdle
@@ -298,8 +298,8 @@ s32 Weapon_PickRandomArmedWeapon(void *player) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 void Weapon_ApplySwitchAndSetSingleRound(void *part, WeaponSwitchActionView *body) {
     Weaponai_ApplyWeaponSwitch(part, body);
-    body->unk13C = 1;
-    body->unk144 = 1;
+    body->singleRoundFlag = 1;
+    body->singleRoundFlagSecondary = 1;
 }
 #endif
 
@@ -414,7 +414,7 @@ void Weapon_ReleaseHandlesAndExitState39(void *weaponActor) {
 void Weapon_PlayStartupCue9E2(void *weaponActor) {
     void *weaponOwner;
     weaponOwner = (((struct ActorPlayerControllerView *) ((s8 *) weaponActor))->player);
-    if ((((struct PlayerStartupSoundView *) ((s8 *) weaponOwner))->unk_11C0) == 0) {
+    if ((((struct PlayerStartupSoundView *) ((s8 *) weaponOwner))->startupSoundNode) == 0) {
         Playerai_StartSecondaryAttachedSound(weaponOwner, 0x9E2);
     }
 }
@@ -454,7 +454,7 @@ void Weapon_AdvanceSpinAndTriggerMode(struct WeaponActorStateView *actor, void *
 void Weapon_ApplyScaledSideYaw(void *obj, Event *event) {
     float v = event->source->speed * g_weaponSideYawSpeedScale;
 
-    if (g_playerWeaponClassMode.first == 1) {
+    if (g_playerWeaponClassMode.classMode == 1) {
         if (event->side == 2) {
             YawMatrixLocal(obj, -v);
         }
@@ -476,7 +476,7 @@ void Weapon_UpdateNormalFireAction(void *actor, WeaponNormalFireActionView *atta
     if (Player_HasAmmoForMode(weaponOwner, ((Shared_ActorView *)weaponOwner)->selectedAction) == 0) {
         ((Shared_ActorView *)weaponOwner)->nextWeapon = Weaponai_FindNextUsableWeapon(weaponOwner);
     } else {
-        attack->unk_13C = 1;
+        attack->fireRequestFlag = 1;
         if (Weaponai_TryRequestFiringState(actor, attack) == 0 && !(((Shared_ActorView *)o)->flags & 0x400)) {
             Actor_RequestActorState(actor, attack, action);
         }
@@ -491,7 +491,7 @@ void Weapon_InitializeChargeAndStartupCues(Shared_ActorView *actorView, WeaponFi
     cueOwner = actorView->self;
     fireState->cueTimer = 0;
     if ((cueOwner->remote == 0) &&
-        (g_playerWeaponClassMode.first == 1)) {
+        (g_playerWeaponClassMode.classMode == 1)) {
         Playerai_DispatchWeaponFireEffect(actorView->self, 0x3F9);
     } else {
         Playerai_DispatchWeaponFireEffect(actorView->self, 0x4CB);
@@ -515,7 +515,7 @@ void Weapon_ApplySideDependentYaw(void *object, Event *event) {
     s32 mode;
 
     speed = event->source->speed;
-    mode = g_playerWeaponClassMode.first;
+    mode = g_playerWeaponClassMode.classMode;
     if (mode == 1) {
         switch (event->side) {
         case 1:
@@ -553,7 +553,7 @@ void Weapon_EnterChargeStateWithCues(Shared_ActorView *actor, WeaponFireState *f
     } else {
         fireState->cueTimer = g_weaponChargeEntryCueAndRate[0];
         if ((((Shared_ActorView *)player)->remote == 0) &&
-            (g_playerWeaponClassMode.first == 1)) {
+            (g_playerWeaponClassMode.classMode == 1)) {
             Playerai_DispatchWeaponFireEffect(actor->self, 0x3FB);
         } else {
             Playerai_DispatchWeaponFireEffect(actor->self, 0x4CD);
@@ -619,24 +619,24 @@ void Weapon_UpdateSpecialFireAndAmmo(void *weaponActor, void *attack) {
     s16 idx;
     s32 value;
 
-    actor = ((ActorAnimationResourceView *)weaponActor)->unk_1D8;
-    idx = ((WeaponSpecialFirePlayerView *)(actor))->unk_650;
+    actor = ((ActorAnimationResourceView *)weaponActor)->owner;
+    idx = ((WeaponSpecialFirePlayerView *)(actor))->weaponActionIndex;
     value = g_weaponActionRecords[idx].action;
 
-    if (((WeaponSpecialFirePlayerView *)(actor))->unk_11D8 <= 0.0f) {
-        if ((((struct Ctrl *) ((WeaponSpecialFirePlayerView *) actor)->unk_5D8)->flag == 0 ||
+    if (((WeaponSpecialFirePlayerView *)(actor))->delay <= 0.0f) {
+        if ((((struct Ctrl *) ((WeaponSpecialFirePlayerView *) actor)->controller)->flag == 0 ||
              g_gameSettings.counters.m_bFragTagOn == 0) &&
-            (((WeaponSpecialFirePlayerView *)(actor))->unk_6AC & 0x4000)) {
+            (((WeaponSpecialFirePlayerView *)(actor))->actionFlags & 0x4000)) {
             Player_ReleasePlayerParticleEmitters(actor);
         }
     }
 
-    if (Player_HasAmmoForMode(actor, ((WeaponSpecialFirePlayerView *)(actor))->unk_62E) == 0) {
+    if (Player_HasAmmoForMode(actor, ((WeaponSpecialFirePlayerView *)(actor))->ammoMode) == 0) {
         if (Particle_CountOwnerListOneEffects(&g_actorParticleEffectSystem, actor) == 0) {
-            ((WeaponSpecialFirePlayerView *)(actor))->unk_770 = Weaponai_FindNextUsableWeapon(actor);
+            ((WeaponSpecialFirePlayerView *)(actor))->nextUsableWeapon = Weaponai_FindNextUsableWeapon(actor);
         }
     } else if (Weaponai_TryRequestFiringState(weaponActor, attack) == 0 &&
-               !(((ActorAnimationResourceView *)weaponActor)->unk_100 & 0x400)) {
+               !(((ActorAnimationResourceView *)weaponActor)->flags & 0x400)) {
         Actor_RequestActorState(weaponActor, attack, value);
     }
 }
@@ -650,7 +650,7 @@ void Weapon_RequestReleaseOnEnabledEvent(void *a, struct WeaponEventSource *b) {
 void Weapon_PlayStartupCue80C(void *weaponActor) {
     void *weaponOwner;
     weaponOwner = (((struct ActorPlayerControllerView *) ((s8 *) weaponActor))->player);
-    if ((((struct PlayerStartupSoundView *) ((s8 *) weaponOwner))->unk_11C0) == 0) {
+    if ((((struct PlayerStartupSoundView *) ((s8 *) weaponOwner))->startupSoundNode) == 0) {
         Playerai_StartSecondaryAttachedSound(weaponOwner, 0x80C);
     }
 }

@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "FRONTEND/FRONTEND_DISPATCHOPTIONSPAGEEVENT.H"
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_gameOptionsEventKinds, an actor kind at g_gameOptionsActorKinds and a handler at g_gameOptionsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventKind through this file's 12-byte handler table, whose rows hold an event at g_gameOptionsEventKinds, an actor kind at g_gameOptionsActorKinds and a handler at g_gameOptionsEventHandlers: the first row whose event equals eventKind and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*GameOptionsEventHandler)(void *, s32, s32, s32, s32);
 

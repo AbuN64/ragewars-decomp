@@ -34,8 +34,8 @@ extern struct List g_controllerPakEnabledDialogResource;
 
 extern void Control_EnableControllerPak(int controllerPort);
 
-/* Restarts a round for the player passed in arg1: clears the world timer flag g_pakPlayerMessagePending via
-   func_804097E8_de, then reallocates a fresh scoreboard entry via Menu_OpenDialog using arg1's fields
+/* Restarts a round for the player passed in dialog: clears the world timer flag g_pakPlayerMessagePending via
+   func_804097E8_de, then reallocates a fresh scoreboard entry via Menu_OpenDialog using dialog's fields
    at 0x1C and 0x20 against the g_controllerPakReadyDialogResource_PakClosepromptbykind list, and always reports success. Sibling of
    CMenuProfile_OpenTimedPlayerDialog, which also fires SoundElement_StopAudioExceptKey(-1) and uses the g_profileDialogFixedLabel list instead. */
 
@@ -90,7 +90,7 @@ s32 Initial_ToggleMenuRowOption(s32 *optionValue) {
     return 0;
 }
 
-/** Forwards arg1 through and arg2 as the first parameter, adding the g_matchSetupMenuResource_Initial record. */
+/** Forwards menuOwner through and menuContext as the first parameter, adding the g_matchSetupMenuResource_Initial record. */
 s32 Initial_OpenMatchSetupMenu(void *unused0, void *menuOwner, void *menuContext) {
     Menu_AllocateMenu(menuContext, menuOwner, &g_matchSetupMenuResource);
     return 1;
@@ -116,7 +116,7 @@ struct List;
 extern void *Menu_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
 extern char g_matchEndingTeamWheelClose[];
 
-/** Marks arg1's inner record's byte tag via Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog, then hands the record and arg1's fields to Menu_OpenDialog; ignores arg0. */
+/** Marks dialog's inner record's byte tag via Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog, then hands the record and dialog's fields to Menu_OpenDialog; ignores unused0. */
 s32 Initial_OpenDialogWithControllerPak(void *unused0, ControllerPakDialogContext *dialog) {
     Control_EnableControllerPak(dialog->controller->controllerPort);
     Menu_OpenDialog(g_matchEndingTeamWheelClose, &g_controllerPakEnabledDialogResource, dialog->player, (s32) dialog->controller, 0);
@@ -143,7 +143,7 @@ const unsigned int k_InitialEncodedWords[8] = {
 };
 #endif
 
-/* Starts a match from the menu: clears byte 0x1D and sets byte 0x1E of g_gameSettings, clears the active byte 0x78 of its eight 150-byte status records, then gives the menu at 0x20 the first of the four 0x224-byte controller profiles of g_controllerProfiles that Control_IsAButtonPressed_Character reports active, marking the settings g_playerPartnerNameFallback at 0x78 and recording its index in D_801422C1, before calling SoundElement_DisableMusicGainOverride, resetting g_gameSession through Match_StartMatchTransition_Initial and setting g_initialMatchStartPending. */
+/* Starts a match from the menu: clears byte 0x1D and sets byte 0x1E of g_gameSettings, clears the active byte 0x78 of its eight 150-byte status records, then gives the menu at 0x20 the first of the four 0x224-byte controller profiles of g_controllerProfiles that Control_IsAButtonPressed_Character reports active, marking the settings g_playerPartnerNameFallback at 0x78 and recording its index in g_gameSettings.defaults.slot, before calling SoundElement_DisableMusicGainOverride, resetting g_gameSession through Match_StartMatchTransition_Initial and setting g_initialMatchStartPending. */
 
 extern struct Part g_playerPartnerNameFallback;
 
@@ -168,13 +168,13 @@ struct MenuCreationOwnerView;
 struct ParamsPakAllocateMenu;
 struct Dialog;
 
-/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_451AF0,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_initialDialogRowThreeResource,
    and returns one. */
 
-/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4500F4,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_initialDialogRowOneResource,
    and returns one. */
 
-/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4503E8,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_initialDialogRowTwoResource,
    and returns one. */
 
 /* Restarts sound: calls SoundElement_StopAudioExceptKey with -1, records what SoundElement_GetMusicPlaybackEnabled returns in g_menuSavedAudioSelection,
@@ -187,7 +187,7 @@ struct Dialog;
 
 extern void Control_ClearMenuControlFlag(void);
 
-/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_450C18,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_initialOpenDialogMenuResource,
    and returns one. */
 
 void Initial_SelectInitialController(void *unused0, struct GamePlayerListView *menu) {
@@ -218,15 +218,15 @@ void Initial_SelectInitialController(void *unused0, struct GamePlayerListView *m
     g_initialMatchStartPending = 1;
 }
 
-/** Clears or sets bit 24 of arg1's record's flags depending on how many of Control_CountConnectedControllers_FrontendUpdateplayercountscreen's four slots are active, and demotes arg1->unk0 from state 2 to 1 in the low-count case. */
+/** Clears or sets bit 24 of item's record's flags depending on how many of Control_CountConnectedControllers_FrontendUpdateplayercountscreen's four slots are active, and demotes item->unk0 from state 2 to 1 in the low-count case. */
 s32 Initial_UpdateMultiplayerAvailability(void *unused0, MultiplayerAvailabilityItem *item) {
     if (Control_CountConnectedControllers() < 2) {
-        item->widget->unk58 &= 0xFEFFFFFF;
+        item->widget->flags &= 0xFEFFFFFF;
         if (item->availability == 2) {
             item->availability = 1;
         }
     } else {
-        item->widget->unk58 |= 0x01000000;
+        item->widget->flags |= 0x01000000;
     }
     return 0;
 }
@@ -245,17 +245,17 @@ s32 Initial_OpenLocalPlayerSetup(void *first, void *second, void *third) {
 }
 
 s32 Initial_OpenDialog450E9C(void *first, void *second, void *third) {
-    Menu_AllocateMenu(third, second, D_00450E9C);
+    Menu_AllocateMenu(third, second, g_initialDialogRowThreeResource);
     return 1;
 }
 
 s32 Initial_OpenDialog44F4A4(void *first, void *second, void *third) {
-    Menu_AllocateMenu(third, second, D_0044F4A4);
+    Menu_AllocateMenu(third, second, g_initialDialogRowOneResource);
     return 1;
 }
 
 s32 Initial_OpenDialog44F798(void *first, void *second, void *third) {
-    Menu_AllocateMenu(third, second, D_0044F798);
+    Menu_AllocateMenu(third, second, g_initialDialogRowTwoResource);
     return 1;
 }
 
@@ -281,7 +281,7 @@ s32 Initial_RequestSessionTransition(void) {
 }
 
 s32 Initial_OpenDialog44FFEC(void *first, void *second, void *third) {
-    Menu_AllocateMenu(third, second, D_0044FFEC);
+    Menu_AllocateMenu(third, second, g_initialOpenDialogMenuResource);
     return 1;
 }
 

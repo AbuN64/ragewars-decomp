@@ -78,7 +78,7 @@ struct PortalLinkAvailabilityView {
 struct BreakableDamageScaleView;
 struct BreakableDamageScaleView {
     unsigned char padding_0[29];
-    s8 unk_1D;
+    s8 damageScale;
 };
 
 struct ActorDefinitionFlagsView;
@@ -231,7 +231,7 @@ struct ALEvent;
 
 struct EffectBoneNode;
 struct EffectBoneNode {
-    u32 unk0;
+    u32 reservedWord;
     f32 value;
     s32 childValue; /* 0x08 */
     s32 matrixIndex; /* 0x0C */
@@ -261,13 +261,13 @@ struct NavigationBrainView {
     char pad8[4];
     s32 nextNode;
     char pad10[0x210];
-    s32 unk220;
+    s32 state;
     char pad224[8];
     s32 goal;
     char pad230[0xC];
     s32 triggerLatch; /* 0x23C */
     char pad240[0xBC];
-    s32 unk2FC;
+    s32 postRouteInitReset;
     char pad300[0x14];
     s32 busy;
     char pad318[8];
@@ -277,14 +277,14 @@ struct NavigationBrainView {
 struct BarrelTargetInfo;
 struct BarrelTargetInfo {
     s32 type;
-    s32 unk4;
-    s32 unk8;
+    s32 reservedWordA;
+    s32 reservedWordB;
     Triple first;
     Triple second;
-    s32 unk24;
+    s32 reservedWordC;
     Triple third;
     Triple fourth;
-    s32 unk40;
+    s32 reservedWordD;
 };
 
 struct BarrelTargetInfo;
@@ -313,20 +313,20 @@ struct MenuWidget {
     char pad1C[0x2C - 0x1C];
     s32 value;
     struct MenuWidget *next;
-    s32 field34;
+    s32 reservedWord;
     union { void *text; s32 image; s32 word38; };
     char pad3C[0x8];
-    void *field_44;
-    u8 field_48;
-    u8 field_49;
-    u8 field_4A;
-    u8 field_4B;
-    u8 field_4C;
-    u8 field_4D;
-    u8 field_4E;
-    u8 field_4F;
-    u8 field_50;
-    u8 field_51;
+    void *cells;
+    u8 cellWidth;
+    u8 cellHeight;
+    u8 columnCount;
+    u8 rowCount;
+    u8 selectedColumn;
+    u8 selectedRow;
+    u8 initialColumn;
+    u8 initialRow;
+    u8 minimumColumn;
+    u8 minimumRow;
 };
 
 struct MenuWidget;
@@ -557,14 +557,14 @@ struct Handler {
 
 struct DialogPlayerState;
 struct DialogPlayerState {
-    int field_0;
-    int field_4;
-    int field_8;
-    int field_C;
-    int field_10;
-    int field_14;
-    int field_18;
-    int field_1C;
+    int resource;
+    int request;
+    int state;
+    int group;
+    int song;
+    int speed;
+    int volume;
+    int soundId;
 };
 
 
@@ -609,7 +609,7 @@ typedef struct ControllerInitStatusBytes ControllerInitStatusBytes;
 struct WidgetFlagsView;
 struct WidgetFlagsView {
     unsigned char padding_0[16];
-    unsigned char field_10;
+    unsigned char alpha;
 };
 
 struct NavigationActorBrainView;
@@ -734,7 +734,7 @@ typedef struct ParamsRecAt8V1 ParamsRecAt8V1;
 
 struct Node75;
 struct Node75 {
-    u16 field0;
+    u16 reservedHalf;
     u16 flags; /* +0x02: Scene_FindFloorPolygon, mask0x40 */
     CVector3 *prev;
     CVector3 *cur;
@@ -815,13 +815,13 @@ struct PulsingMenuSpriteView {
 struct CROMInitialOrientation_t;
 struct CROMInitialOrientation_t {
     CVector3 position;
-    s16 unk_C;
+    s16 m_RotX;
     char padC[0xE - 0xC - sizeof(s16)];
     s16 m_RotY;
     char padE[0x10 - 0xE - sizeof(s16)];
-    s16 unk_10;
+    s16 m_RotZ;
     char pad10[0x12 - 0x10 - sizeof(s16)];
-    s16 unk_12;
+    s16 m_RotW;
 };
 
 
@@ -886,8 +886,8 @@ struct MenuStyle {
     char pad20[0x30 - 0x20];
     f32 alpha; /* 0x30 */
     f32 fade; /* 0x34 */
-    s32 unk38;
-    s32 unk3C;
+    s32 shadowEnabled;
+    s32 panelDisablesShadow;
 };
 
 struct MusicPreviewOwnerView;
@@ -1015,7 +1015,7 @@ struct Field_Vec_18 {
 struct PackedMaterialHalfwordView;
 struct PackedMaterialHalfwordView {
     char pad0[0x2];
-    u16 unk2;
+    u16 spreadHighWord;
 };
 
 extern int g_primaryRandomSeed;
@@ -1055,7 +1055,7 @@ struct ChoiceMenuCellView;
 struct ChoiceMenuCellView {
     char pad[0x16];
     s16 transitionTimer;
-    s16 unk18;
+    s16 reservedHalf;
     s16 transitionDuration;
 };
 
@@ -1073,7 +1073,7 @@ struct ChoiceMenuState {
     s32 labelFlicker;
     struct ChoiceMenuCellView *transitionCell;
     s32 transitionTimer;
-    s32 unk10;
+    s32 nextScreen;
 };
 
 struct CachedPlayerModelView;
@@ -1091,7 +1091,7 @@ struct Access_s32_5C {
 struct GameModeEnableView;
 struct GameModeEnableView {
     char pad0[0x1D];
-    u8 unk_1D;
+    u8 local;
 };
 
 
@@ -1106,7 +1106,7 @@ typedef struct __OSDir __OSDir;
 struct FrontendResourceScreenEntryView;
 struct FrontendResourceScreenEntryView {
     char pad0[0x8];
-    void * unk8;
+    void * reservedPointer;
 };
 
 struct BufferPool;
@@ -1406,8 +1406,8 @@ struct MatchMenuObjects {
 
 struct ActorAnimationEventTable;
 struct ActorAnimationEventTable {
-    int field_0;
-    int field_4;
+    int entrySize;
+    int entryCount;
 };
 
 
@@ -1578,20 +1578,20 @@ struct TripleEventsFireWithinHeightRange;
 
 struct World;
 struct World {
-    s32 unk0;
+    s32 resultFlagsA;
     char pad4[0x84];
-    s32 unk88;
+    s32 resultFlagsB;
     char pad8C[0x4];
     signed int resource;
     char pad94[0x8];
-    s32 unk9C;
+    s32 resultFlagsC;
     char padA0[0x10];
-    s32 unkB0;
+    s32 resultFlagsD;
     char padB4[0x10];
-    s32 unkC4;
+    s32 resultFlagsE;
     char padC8[0x34];
     s32 state;
-    s32 unk100;
+    s32 resultFlagsF;
     char pad104[0x34];
     void *placedActors;
     signed int createdActorCount;
@@ -1760,8 +1760,8 @@ typedef struct ParticleRibbonStorageView ParticleRibbonStorageView;
 
 struct Table;
 struct Table {
-    s32 unk0;
-    s32 unk4;
+    s32 reservedWord;
+    s32 count;
     s32 deltas[1];
 };
 
@@ -1941,7 +1941,7 @@ struct MenuOptionLabelView {
 struct StateBlock;
 struct StateBlock {
     char pad0[0x84];
-    s32 unk84;
+    s32 flickerPending;
 };
 
 struct Shared_GameMode;
@@ -2072,18 +2072,18 @@ typedef struct MenuOptionLabelView MenuOptionLabelView;
 
 struct BoneRotationTrackView;
 struct BoneRotationTrackView {
-    char * unk_0;
+    char * boneIndexPairs;
     char pad0[0x4 - 0x0 - sizeof(char*)];
-    char * unk_4;
-    void * unk_8;
-    void * unk_C;
+    char * initialOrientations;
+    void * translationFrames;
+    void * rotationFrames;
     char padC[0x10 - 0xC - sizeof(void*)];
-    s32 unk_10;
+    s32 rotationFirst;
     char pad10[0x14 - 0x10 - sizeof(s32)];
-    s32 unk_14;
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
+    s32 rotationNext;
+    s32 translationFirst;
+    s32 translationNext;
+    s32 frameBlend;
 };
 
 
@@ -2141,7 +2141,7 @@ struct Pair14 {
 struct ObjRecAt40V1;
 struct ObjRecAt40V1 {
     char p[0x40];
-    s32 unk40;
+    s32 value;
 };
 
 
@@ -2210,9 +2210,9 @@ struct ControllerProfile {
     s32 connected; /* 0x00 */
     s8 port; /* 0x04 */
     u8 padding005[3];
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
+    s32 reservedWordA;
+    s32 reservedWordB;
+    s32 reservedWordC;
     s32 inputPreviousButtons;
     s32 inputButtons; /* 0x18 */
     u32 inputPressedButtons; /* 0x1C */
@@ -2321,7 +2321,7 @@ typedef struct Field_void_80 Field_void_80;
 struct CacheResourceNode;
 struct CacheResourceNode {
     s32 data;
-    s32 field4;
+    s32 reservedWord;
     s32 references;
     u32 flags;
 };
@@ -2398,9 +2398,9 @@ struct TextLayerRect {
 struct Shared_GameMode;
 struct Shared_GameMode {
     char pad0[0x1C];
-    s32 unk1C;
+    s32 sound;
     char pad20[0x8];
-    s32 unk28;
+    s32 state;
 };
 
 struct Query;
@@ -2455,8 +2455,8 @@ typedef struct AudioVoicePhysicalLinkView AudioVoicePhysicalLinkView;
 
 struct BarrelTrackActorView;
 struct BarrelTrackActorView {
-    s32 unk0;
-    s32 unk4;
+    s32 reservedWordA;
+    s32 reservedWordB;
     Triple vec;
 };
 
@@ -2531,7 +2531,7 @@ extern int g_geometryOpaqueRenderMode;
 struct ObjRecAt28V2;
 struct ObjRecAt28V2 {
     char pad0[0x28];
-    int unk28;
+    int state;
 };
 
 struct CROMEventEntry_t;

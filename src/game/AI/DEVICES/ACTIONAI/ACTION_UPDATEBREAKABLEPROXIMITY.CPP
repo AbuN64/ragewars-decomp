@@ -34,7 +34,7 @@ extern s32 g_breakableNotificationText;
 extern u8 *Playerai_FindTransientPlayer(u8 *);
 extern void Playerai_UpdateTeamScore(void *, void *, s32);
 extern void Camera_PostScreenMessage(u8 *, void *, s32);
-/* 182/182 words in us-rev1 and de (local j targets aside); not exact on the ROM path only because the switch jump table (D_auto_rodata_func_8020402C_us_rev1_800C6B48) still lives in a separate rodata file; us/eu/eu-x differ in prologue size */
+/* 182/182 words in us-rev1 and de (local j targets aside); not exact on the ROM path only because the switch jump table (k_actionUpdateBreakableProximityJumpTable) still lives in a separate rodata file; us/eu/eu-x differ in prologue size */
 typedef struct LvDelta {
     f32 x, y, z;
 } LvDelta;
@@ -214,7 +214,7 @@ void Actionai_InitBreakableMotion(LevelActor *actor, ActorMotionState *motionSta
     motionState->update = &g_actionUpdateRomEntry;
     motionState->animation = 0;
     motionState->remainingCount = 0;
-    motionState->unk12C = 0;
+    motionState->reservedWord12C = 0;
     if (((BreakableDefinition *)actor->definition)->flags & 1) {
         actor->flags = actor->flags | 0x10000;
         return;
@@ -264,7 +264,7 @@ void Action_ClearBreakableState(void *actor, void *actorMotionState) {
     ActorMotionState *state = actorMotionState;
     Rumble_SetActorStateBit(&g_world, actor, 0);
     Link_DispatchActorLinks(actor, 0x200000, actor);
-    state->unk12C = 0;
+    state->reservedWord12C = 0;
 }
 
 s32 Actionai_UpdateHealthFlag(LevelActor *actor) {

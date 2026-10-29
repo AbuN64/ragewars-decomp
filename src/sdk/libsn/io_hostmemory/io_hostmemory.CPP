@@ -301,7 +301,7 @@ void Libsn_ServiceHostCommands(void) {
 }
 
 /* 802013D8_2.CPP */
-/** Return strlen(arg0) + 1 (byte count including the terminating NUL). */
+/** Return strlen(string) + 1 (byte count including the terminating NUL). */
 s32 Libsn_MeasureTerminatedString(u8 *string) {
     u8 *cursor;
     u8 temp;

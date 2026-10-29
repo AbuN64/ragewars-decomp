@@ -566,17 +566,17 @@ void Triggered_InitializeMotionState(void *object, void *state)
     value = motionDefinition->speed;
     motionState->animation = 0;
     motionState->remainingCount = 0;
-    motionState->unk12C = 0;
-    motionState->unk130 = 0;
+    motionState->reservedWord12C = 0;
+    motionState->reservedWord130 = 0;
     motionState->speed = value;
     scaled = motionDefinition->speed;
-    motionState->unk140 = 0;
-    motionState->unk144 = 0;
+    motionState->reservedWord140 = 0;
+    motionState->reservedWord144 = 0;
     scaled = scaled * k;
-    motionState->unk148 = 0;
-    motionState->unk14C = 0;
-    motionState->unk168 = 0;
-    motionState->unk16C = 0;
+    motionState->reservedWord148 = 0;
+    motionState->reservedWord14C = 0;
+    motionState->reservedWord168 = 0;
+    motionState->openTimer = 0;
     motionState->progress = scaled;
     if (motionResource->motion.flags & 4) {
         actor->weaponFlags = actor->weaponFlags & ~0x2000;

@@ -68,7 +68,7 @@ extern float g_pickupCategoryNodeCost;
 struct NavigationActorSearchStateView;
 struct NavigationActorSearchStateView {
     char pad0[0x1454];
-    char * unk_1454;
+    char * resourceKeyRecord;
 };
 
 
@@ -102,10 +102,10 @@ struct Actor1DC {
 struct NavigationRouteControllerView;
 struct NavigationRouteControllerView {
     char pad0[4];
-    s32 field4;
+    s32 currentNode;
     char pad8[4];
-    s32 fieldC;
-    s32 field10;
+    s32 requestedGoalNode;
+    s32 destinationNode;
     s32 links[4]; /* 0x14 */
     char pad24[4];
     s32 committed; /* 0x28 */

@@ -52,16 +52,16 @@ void Audio_UpdateMusicFade(void *queue) {
     s32 nextVolume;
 
     if (o->flags & 2) {
-        alCSPSetVol(o->unk_14, (s16)o->volume);
+        alCSPSetVol(o->sequencePlayer, (s16)o->volume);
         nextVolume = (s32) ((f32) o->volume - o->fadeStep);
         o->volume = nextVolume;
         if (nextVolume <= 0) {
             o->volume = 0;
-            alCSPStop(o->unk_14);
+            alCSPStop(o->sequencePlayer);
             o->flags |= 4;
         }
-    } else if (o->unk_38 != 0) {
-        currentGain = o->unk_3C;
+    } else if (o->gainOverrideActive != 0) {
+        currentGain = o->currentGain;
         targetGain = o->targetGain;
         if (targetGain < currentGain) {
             nextGain = currentGain - g_musicFadeGainStep;
@@ -78,7 +78,7 @@ void Audio_UpdateMusicFade(void *queue) {
 clamp:
             nextGain = targetGain;
 store:
-            o->unk_3C = nextGain;
+            o->currentGain = nextGain;
         }
     }
 }

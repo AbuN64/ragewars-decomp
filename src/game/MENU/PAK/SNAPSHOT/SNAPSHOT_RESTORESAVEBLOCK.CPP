@@ -15,7 +15,7 @@
    0x8 (the game clock) into g_matchRoundCounters, g_controllerPakPreviewSeconds, g_controllerPakPreviewMinutes and g_controllerPakPreviewHours, the word at g_world_AchieveUpdateresultsscreen+0x44 as a byte
    count for the block at 0x60C copied into g_worldSnapshotNoteData - then shows the g_pakRestoreBlockPromptText prompt through
    Menu_OpenDialog; otherwise it retries Note_DeleteNote on note g_controllerPakOverwriteNoteIndex and shows the
-   D_0044EB70/D_0044EBDC result. Pak_ConfirmPendingOperation's state 4 flow with the load path added; returns 1. */
+   g_pakNoteDeleteSucceededDialogResource/g_pakNoteDeleteFailedDialogResource result. Pak_ConfirmPendingOperation's state 4 flow with the load path added; returns 1. */
 
 /* The persistent options block: the first 0x584 bytes of Shared_Game (g_gameSettings). */
 typedef struct PakSavedOptions {
@@ -101,9 +101,9 @@ s32 Snapshot_RestoreSaveBlock(void *unused, PakPromptContext *menu) {
         g_gameStateBlock[1] = 0;
         Menu_OpenDialog(&g_gameStateBlock[0x16A], g_pakRestoreBlockPromptText, owner, owner->slot698, 0);
     } else if (Note_DeleteNote(channel, g_controllerPakOverwriteNoteIndex) == 0) {
-        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EB70, menu->player, menu->slot, menu->prompt);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteDeleteSucceededDialogResource, menu->player, menu->slot, menu->prompt);
     } else {
-        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EBDC, menu->player, menu->slot, menu->prompt);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteDeleteFailedDialogResource, menu->player, menu->slot, menu->prompt);
     }
     return 1;
 }

@@ -22,7 +22,7 @@
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_sliderTransitionEventIds, an actor kind at g_sliderTransitionEventActorKinds and a handler at g_sliderTransitionEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_sliderTransitionEventIds, an actor kind at g_sliderTransitionEventActorKinds and a handler at g_sliderTransitionEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -58,7 +58,7 @@ extern void Node_ReplaceNodeRefs(s32 node, MenuSliderWidget *from, MenuSliderWid
 
 
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
+/* Draws the child at 0x8 of window window with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
 
 
@@ -170,16 +170,16 @@ MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 sliderWidgetId, s32 childWidg
     result = Cache_AllocateMemory(0x58);
     XPlus_FillBytes(result, 0, 0x58);
     *(Header44 *)result = *(Header44 *)source;
-    result->field_0E = 0xB63;
+    result->widgetKind = 0xB63;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     child = Node_FindWidgetByResourceId((void*)context, childWidgetId & 0xFFFF);
-    result->field_44 = child;
-    result->field_48 = child->field_18;
-    result->field_4C = initialTransition;
-    result->field_50 = 0;
-    result->field_54 = 2;
+    result->bar = child;
+    result->length = child->itemExtent;
+    result->count = initialTransition;
+    result->item = 0;
+    result->mode = 2;
     Node_WrapNodeInParent(source, result);
-    source->field_0C = -1;
+    source->activeKind = -1;
     Node_ReplaceNodeRefs(context, source, result);
     return result;
 }

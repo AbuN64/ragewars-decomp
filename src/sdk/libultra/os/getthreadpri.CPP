@@ -7,7 +7,7 @@ extern void *g_osRunningThread;
 
 
 
-/** Return field 0x4 of arg0, falling back to a global record when arg0 is null. */
+/** Return field 0x4 of thread, falling back to a global record when thread is null. */
 int osGetThreadPri(void *thread) {
     OSThread_s *p = thread;
     if (p == 0) {

@@ -102,7 +102,7 @@ static inline ParticleEffect *effect_spawn_allocate(EffectSystem *sys, u8 index)
     List_PrependIntrusive(list, effect);
     effect->list = list;
     effect->groupNext = 0;
-    effect->unk1F0 = 0;
+    effect->reserved1F0 = 0;
     effect->flags = 0x100;
     return effect;
 }
@@ -317,12 +317,12 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                         }
                         Graphu64_ConvertMatrixToFloat(&mtx, &source->u60.matrices[g_lightingBufferIndex]);
                         scale = 0.09765625f;
-                        if (source->model->unk14 != 0) {
+                        if (source->model->scaleModeFlag != 0) {
                             scale = 2.857143f;
                         }
                         ScaleMatrixLocal(&mtx, scale, scale, scale);
                         if (source->model->flags & 8) {
-                            TranslateMatrix(&mtx, 0.0f, -source->unk154 * source->unk158, 0.0f);
+                            TranslateMatrix(&mtx, 0.0f, -source->offsetBase * source->offsetScale, 0.0f);
                         }
                         break;
                     case 1:
@@ -356,8 +356,8 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 count++;
                 Textload_LocateTextureResource(&effect->textureAndLayer, entry->textureId);
                 GameObject_ResetActorMotion(effect);
-                effect->unk110 = 0;
-                effect->unk114 = 0;
+                effect->reserved110 = 0;
+                effect->reserved114 = 0;
                 effect->kind = kind;
                 effect->entry = entry;
                 effect->mode = mode;
@@ -373,7 +373,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     (*refCount)++;
                 }
                 effect->followedActor = followTarget;
-                effect->unk13C = 0;
+                effect->reserved13C = 0;
                 effect->flags = (effect->flags & ~0xE600) | (spawnFlags | extra);
                 bits = &effect->textureAndLayer;
                 layer = 0;
@@ -392,12 +392,12 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 } else {
                     effect->spreadAngle = -(f32) effect_spawn_random_count(spread);
                 }
-                effect->unk19C[0] = Rumble_SamplePackedFloatRange(entry->unk2C[2]) * g_particleAngularVelocityScale;
-                effect->unk19C[2] = Rumble_SamplePackedFloatRange(entry->unk2C[1]) * 0.41887906f;
-                effect->unk19C[4] = Rumble_SamplePackedFloatRange(entry->unk2C[0]);
-                effect->unk19C[1] = Rumble_SamplePackedFloatRange(entry->unk2C[5]) * g_particleAngularVelocityScale;
-                effect->unk19C[3] = Rumble_SamplePackedFloatRange(entry->unk2C[4]) * 0.41887906f;
-                effect->unk19C[5] = Rumble_SamplePackedFloatRange(entry->unk2C[3]);
+                effect->sampledAngularRates[0] = Rumble_SamplePackedFloatRange(entry->packedAngularRanges[2]) * g_particleAngularVelocityScale;
+                effect->sampledAngularRates[2] = Rumble_SamplePackedFloatRange(entry->packedAngularRanges[1]) * 0.41887906f;
+                effect->sampledAngularRates[4] = Rumble_SamplePackedFloatRange(entry->packedAngularRanges[0]);
+                effect->sampledAngularRates[1] = Rumble_SamplePackedFloatRange(entry->packedAngularRanges[5]) * g_particleAngularVelocityScale;
+                effect->sampledAngularRates[3] = Rumble_SamplePackedFloatRange(entry->packedAngularRanges[4]) * 0.41887906f;
+                effect->sampledAngularRates[5] = Rumble_SamplePackedFloatRange(entry->packedAngularRanges[3]);
                 if (entry->flags & 2) {
                     effect->initialLifeOffset = effect_spawn_random_count(life);
                 } else {
@@ -405,8 +405,8 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 }
                 effect->animationParameter = entry->params->animationParameter;
                 effect->life = life;
-                effect->unk14E = 0;
-                effect->unk14F = -1;
+                effect->reserved14E = 0;
+                effect->reserved14F = -1;
                 if (aim == 0) {
                     dir.x = Rumble_SamplePackedFloatRange(entry->direction[0]);
                     dir.y = Rumble_SamplePackedFloatRange(entry->direction[1]);
@@ -424,26 +424,26 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                         effect->direction = dirOut;
                     }
                 }
-                effect->unk150[0] = Rumble_SamplePackedFloatRange(entry->unk24[0]);
-                effect->unk150[1] = Rumble_SamplePackedFloatRange(entry->unk24[2]);
-                effect->unk150[2] = Rumble_SamplePackedFloatRange(entry->unk24[4]);
-                effect->unk150[3] = Rumble_SamplePackedFloatRange(entry->unk24[1]);
-                effect->unk150[4] = Rumble_SamplePackedFloatRange(entry->unk24[3]);
-                effect->unk150[5] = Rumble_SamplePackedFloatRange(entry->unk24[5]);
-                if (entry->unk14 != 0) {
-                    effect->unk180[0] = Rumble_SamplePackedFloatRange(entry->unk20[0]);
-                    effect->unk180[1] = Rumble_SamplePackedFloatRange(entry->unk20[2]);
-                    effect->unk180[2] = Rumble_SamplePackedFloatRange(entry->unk20[4]);
-                    effect->unk180[3] = Rumble_SamplePackedFloatRange(entry->unk20[1]);
-                    effect->unk180[4] = Rumble_SamplePackedFloatRange(entry->unk20[3]);
-                    effect->unk180[5] = Rumble_SamplePackedFloatRange(entry->unk20[5]);
+                effect->sampledRangesA[0] = Rumble_SamplePackedFloatRange(entry->packedRangesA[0]);
+                effect->sampledRangesA[1] = Rumble_SamplePackedFloatRange(entry->packedRangesA[2]);
+                effect->sampledRangesA[2] = Rumble_SamplePackedFloatRange(entry->packedRangesA[4]);
+                effect->sampledRangesA[3] = Rumble_SamplePackedFloatRange(entry->packedRangesA[1]);
+                effect->sampledRangesA[4] = Rumble_SamplePackedFloatRange(entry->packedRangesA[3]);
+                effect->sampledRangesA[5] = Rumble_SamplePackedFloatRange(entry->packedRangesA[5]);
+                if (entry->rangeModeFlag != 0) {
+                    effect->sampledRangesB[0] = Rumble_SamplePackedFloatRange(entry->packedRangesB[0]);
+                    effect->sampledRangesB[1] = Rumble_SamplePackedFloatRange(entry->packedRangesB[2]);
+                    effect->sampledRangesB[2] = Rumble_SamplePackedFloatRange(entry->packedRangesB[4]);
+                    effect->sampledRangesB[3] = Rumble_SamplePackedFloatRange(entry->packedRangesB[1]);
+                    effect->sampledRangesB[4] = Rumble_SamplePackedFloatRange(entry->packedRangesB[3]);
+                    effect->sampledRangesB[5] = Rumble_SamplePackedFloatRange(entry->packedRangesB[5]);
                 } else {
-                    effect->unk180[0] = Rumble_SamplePackedFloatRange(entry->unk20[0]);
-                    effect->unk180[1] = Rumble_SamplePackedFloatRange(entry->unk20[2]);
-                    effect->unk180[2] = Rumble_SamplePackedFloatRange(entry->unk20[4]);
-                    effect->unk180[3] = Rumble_SamplePackedFloatRange(entry->unk20[1]);
-                    effect->unk180[4] = Rumble_SamplePackedFloatRange(entry->unk20[3]);
-                    effect->unk180[5] = Rumble_SamplePackedFloatRange(entry->unk20[5]);
+                    effect->sampledRangesB[0] = Rumble_SamplePackedFloatRange(entry->packedRangesB[0]);
+                    effect->sampledRangesB[1] = Rumble_SamplePackedFloatRange(entry->packedRangesB[2]);
+                    effect->sampledRangesB[2] = Rumble_SamplePackedFloatRange(entry->packedRangesB[4]);
+                    effect->sampledRangesB[3] = Rumble_SamplePackedFloatRange(entry->packedRangesB[1]);
+                    effect->sampledRangesB[4] = Rumble_SamplePackedFloatRange(entry->packedRangesB[3]);
+                    effect->sampledRangesB[5] = Rumble_SamplePackedFloatRange(entry->packedRangesB[5]);
                 }
                 if ((entry->flags & 0x80000) && entry->alphaMode == 1) {
                     effect->alphaByte = 0;
@@ -452,7 +452,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     effect->alphaByte = 0xFF;
                     effect->alpha = 255.0f;
                 }
-                effect->unk14 = 0;
+                effect->reserved14 = 0;
                 effect->pos = pos;
                 offset.x = Rumble_SamplePackedFloatRange(entry->offset[0]);
                 offset.y = Rumble_SamplePackedFloatRange(entry->offset[1]);
@@ -576,7 +576,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                         effect_spawn_aim(effect, aimTarget, vel, sourceType);
                     }
                 }
-                effect->unk1E0 = g_particleInitialMotionValue;
+                effect->initialMotion = g_particleInitialMotionValue;
                 Particle_Attach((Shared_Particle *)effect, 0, 0);
                 if (entry->ribbonId != -1) {
                     Fx_AttachActorRibbon(&g_actorParticleScene, effect, entry->ribbonId);

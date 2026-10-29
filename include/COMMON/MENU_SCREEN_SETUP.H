@@ -18,15 +18,15 @@ typedef union SetupScreenModel {
 } SetupScreenModel;
 typedef struct SetupScreen {
     void *window;
-    s32 field4;
+    s32 reservedWord;
     SetupScreenModel models[5];
     void *list;
     MenuWidget *left;
     s32 leftCount;
     MenuWidget *right;
     s32 rightCount;
-    s32 unk3DC;
-    s32 unk3E0;
+    s32 screenState;
+    s32 stateCountdown;
     void *text3E4;
     MenuWidget *widget301;
     MenuWidget *label;
@@ -42,11 +42,11 @@ typedef struct SetupScreen {
     MenuWidget *widget2FE;
     MenuWidget *widget308;
     MenuWidget *widget300;
-    s32 unk45C;
-    s32 unk460;
-    s32 unk464;
-    s32 unk468;
-    s32 unk46C;
+    s32 pulsePhase;
+    s32 controllerActivated;
+    s32 reservedWord1;
+    s32 reservedWord2;
+    s32 reservedWord3;
 } SetupScreen;
 extern SetupScreen *g_setupScreen;
 /* The prior selection and pending-state words are one real two-word array. */

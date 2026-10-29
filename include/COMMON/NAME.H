@@ -99,7 +99,7 @@ typedef struct PakSavePacket {
 /* The pak and name-entry menu block (Scene memory) g_pakProfileScreenState points to. */
 struct PakMenuController {
     union {
-        s32 field0;
+        s32 windowAddress;
         void *window;
     };
     union {
@@ -216,7 +216,7 @@ struct ItemFrontendRelabelSlotRows {
 struct Blk;
 struct Blk {
     char p0[4];
-    s32 unk4;
+    s32 reservedWord4;
     char p1[0x24];
     s32 animationClock;
     char p2[0x28];

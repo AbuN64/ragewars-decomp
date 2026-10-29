@@ -132,7 +132,7 @@ void Confirming_SelectConfirmingController(MenuControllerSelectionView *menuOwne
     i = 7;
     status = (s8 *)&g_gameSettingsRecordActiveFlagBase[0];
     for (; i >= 0; i--) {
-        ((ConfirmingControllerStatusView *)status)->unk148 = 0;
+        ((ConfirmingControllerStatusView *)status)->confirmed = 0;
         status -= 0x96;
     }
     i = 0;
@@ -149,7 +149,7 @@ void Confirming_SelectConfirmingController(MenuControllerSelectionView *menuOwne
     SoundElement_DisableMusicGainOverride();
 }
 
-/** Dispatches to Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog or Control_DisableControllerPakDe with a byte read from arg0->unk20->unk4, chosen by arg1. */
+/** Dispatches to Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog or Control_DisableControllerPakDe with a byte read from menuStorage->unk20->unk4, chosen by enabled. */
 
 extern void Control_EnableControllerPak(s32 arg);
 extern void Control_DisableControllerPak(s32 arg);

@@ -18,9 +18,9 @@
 void __osPfsRequestData(u8 cmd);
 
 s32 Items_QueryControllerPresence(OSMesgQueue *queue, s8 *presentMask) {
-    ControllerInitStatusBytes sp10;
-    void *sp20;
-    u8 sp24;
+    ControllerInitStatusBytes controllerStatus;
+    void *receivedMessage;
+    u8 answerMask;
     ControllerInitStatusBytes *retryStatus;
     ControllerInitStatusBytes *presenceStatus;
     s32 dmaResult;
@@ -35,13 +35,13 @@ s32 Items_QueryControllerPresence(OSMesgQueue *queue, s8 *presentMask) {
     do {
         __osPfsRequestData(0U);
         __osSiRawStartDma(1, (u8 *)&g_controllerStatusPifBuffer);
-        osRecvMesg(queue, &sp20, 1);
+        osRecvMesg(queue, &receivedMessage, 1);
         dmaResult = __osSiRawStartDma(0, (u8 *)&g_controllerStatusPifBuffer);
-        osRecvMesg(queue, &sp20, 1);
-        Items_DecodeControllerStatusReplies(&sp24, &sp10);
+        osRecvMesg(queue, &receivedMessage, 1);
+        Items_DecodeControllerStatusReplies(&answerMask, &controllerStatus);
         retryChannel = 0;
         if (g_controllerChannelCount[0] != 0) {
-            retryStatus = &sp10;
+            retryStatus = &controllerStatus;
 loop_3:
             if (retryStatus->team & 4) {
                 retryChannel += 1;
@@ -59,7 +59,7 @@ loop_3:
     } while (retriesRemaining > 0);
     presenceChannel = 0;
     if (g_controllerChannelCount[0] != 0) {
-        presenceStatus = &sp10;
+        presenceStatus = &controllerStatus;
         do {
             if ((presenceStatus->slot == 0) && (presenceStatus->team & 1)) {
                 connectedMask |= 1 << presenceChannel;
@@ -124,7 +124,7 @@ s32 Items_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
 
 
 
-/* Decodes the controller status replies in g_controllerStatusPifBuffer for each of g_controllerChannelCount channels, recording the error bits from each reply's receive size and, for a channel without error, its type and status, and stores the mask of answering channels through arg0. Adapted from __osContGetInitData. */
+/* Decodes the controller status replies in g_controllerStatusPifBuffer for each of g_controllerChannelCount channels, recording the error bits from each reply's receive size and, for a channel without error, its type and status, and stores the mask of answering channels through cmd. Adapted from __osContGetInitData. */
 
 
 

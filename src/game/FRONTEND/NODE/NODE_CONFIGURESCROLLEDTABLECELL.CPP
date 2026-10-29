@@ -142,7 +142,7 @@ extern void Node_ReleaseRetainedImageSlot(s32 i);
 
 typedef struct List List;
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at s_typeText, an actor kind at g_typedWidgetEventActorKinds and a handler at g_typedWidgetEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at s_typeText, an actor kind at g_typedWidgetEventActorKinds and a handler at g_typedWidgetEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -156,16 +156,16 @@ void Node_ReleaseUnprotectedBuffers(s32 force) {
     s32 i;
 
     for (i = 0; i < g_frontendResourceScreenCount.count; i++) {
-        if (g_frontendResourceScreenCount.primary[i].unk8 != 0 && (!(g_frontendResourceScreenCount.flags[i] & 1) || force != 0)) {
+        if (g_frontendResourceScreenCount.primary[i].reservedPointer != 0 && (!(g_frontendResourceScreenCount.flags[i] & 1) || force != 0)) {
             g_frontendResourceScreenCount.refs[i] = 1;
             g_frontendResourceScreenCount.refs[i]--;
-            if (g_frontendResourceScreenCount.primary[i].unk8 != 0 && g_frontendResourceScreenCount.refs[i] == 0) {
-                Cache_FreeMemory(g_frontendResourceScreenCount.primary[i].unk8);
+            if (g_frontendResourceScreenCount.primary[i].reservedPointer != 0 && g_frontendResourceScreenCount.refs[i] == 0) {
+                Cache_FreeMemory(g_frontendResourceScreenCount.primary[i].reservedPointer);
                 if (g_frontendArchiveResident != 0 && g_frontendResourceScreenCount.secondary != 0 &&
-                    g_frontendResourceScreenCount.secondary[i].unk8 != 0) {
-                    Cache_FreeMemory(g_frontendResourceScreenCount.secondary[i].unk8);
+                    g_frontendResourceScreenCount.secondary[i].reservedPointer != 0) {
+                    Cache_FreeMemory(g_frontendResourceScreenCount.secondary[i].reservedPointer);
                 }
-                g_frontendResourceScreenCount.primary[i].unk8 = 0;
+                g_frontendResourceScreenCount.primary[i].reservedPointer = 0;
             }
         }
     }
@@ -241,15 +241,15 @@ short Node_GetFontBitmapCount(int index) {
 }
 
 short Node_GetFontLetterSpacing(int index) {
-    return g_frontendResourceState.Font[index].TableEntry->field_10;
+    return g_frontendResourceState.Font[index].TableEntry->letterSpacing;
 }
 
 short Node_GetFontMetricAtA(int index) {
-    return g_frontendResourceState.Font[index].TableEntry->field_A;
+    return g_frontendResourceState.Font[index].TableEntry->verticalOffset;
 }
 
 short Node_GetFontMetricAtC(int index) {
-    return g_frontendResourceState.Font[index].TableEntry->field_C;
+    return g_frontendResourceState.Font[index].TableEntry->lineHeight;
 }
 
 /** Report success. */
@@ -302,13 +302,13 @@ s32 Node_IsValidScreenIndex(s32 index) {
 
 void Node_ReleaseReferencedBuffer(s32 i) {
     g_frontendResourceScreenCount.refs[i]--;
-    if (g_frontendResourceScreenCount.primary[i].unk8 != 0 && g_frontendResourceScreenCount.refs[i] == 0) {
-        Cache_FreeMemory(g_frontendResourceScreenCount.primary[i].unk8);
+    if (g_frontendResourceScreenCount.primary[i].reservedPointer != 0 && g_frontendResourceScreenCount.refs[i] == 0) {
+        Cache_FreeMemory(g_frontendResourceScreenCount.primary[i].reservedPointer);
         if (g_frontendArchiveResident != 0 && g_frontendResourceScreenCount.secondary != 0 &&
-            g_frontendResourceScreenCount.secondary[i].unk8 != 0) {
-            Cache_FreeMemory(g_frontendResourceScreenCount.secondary[i].unk8);
+            g_frontendResourceScreenCount.secondary[i].reservedPointer != 0) {
+            Cache_FreeMemory(g_frontendResourceScreenCount.secondary[i].reservedPointer);
         }
-        g_frontendResourceScreenCount.primary[i].unk8 = 0;
+        g_frontendResourceScreenCount.primary[i].reservedPointer = 0;
     }
 }
 

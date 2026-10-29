@@ -85,7 +85,7 @@ struct Voice {
     u8 reserved20[0xC];
     f32 attenuation; /* probe 20261019T020116365530Z */
     f32 baseAttenuation;
-    f32 field34;
+    f32 reservedFloat34;
     s16 priority;
     s16 channel;
     u8 reserved3C[8];
@@ -103,9 +103,9 @@ struct Voice {
     s32 soundId;
     s32 releasePending;
     struct GameAudioContext *context; /* +0xB0; probe 20261019T012703451174Z */
-    s32 fieldB4;
+    s32 reservedWordB4;
     f32 reservedFloat;
-    s32 fieldBC, fixedPosition, musicGainScalingEnabled;
+    s32 reservedWordBC, fixedPosition, musicGainScalingEnabled;
     f32 volumeScale;
 };
 

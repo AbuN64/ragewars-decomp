@@ -99,11 +99,11 @@ extern float g_actorSceneMaskTwentyHealthScale;
 struct NavigationChaseResetView;
 struct NavigationChaseResetView {
     unsigned char padding_0[104];
-    s32 unk_68;
+    s32 target;
     unsigned char padding_6C[436];
-    s32 unk_220;
+    s32 resetWord220;
     unsigned char padding_224[20];
-    s32 unk_238;
+    s32 arrived;
 };
 
 extern float g_actorSceneMaskEightHealthLimits;

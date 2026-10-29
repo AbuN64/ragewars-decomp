@@ -13,7 +13,7 @@ struct Manager {
 };
 struct GeometryVariantByteView {
     unsigned char padding_0[18];
-    signed char unk_12;
+    signed char propModelIndex;
 };
 struct OwnerStaticInstanceDrawGeometryVariant {
     char pad0[0x20];
@@ -26,15 +26,15 @@ struct OwnerStaticInstanceDrawGeometryVariant {
 };
 struct ActorResourceStatusView {
     char pad0[0x18];
-    char * unk_18;
+    char * geometryVariant;
     char pad18[0xD8 - 0x18 - sizeof(char*)];
-    unsigned short unk_D8;
+    unsigned short statusFlags;
 };
 struct CacheAllocationNodeView {
-    int field_0;
-    int field_4;
-    int field_8;
-    int field_C;
+    int payload;
+    int reservedWord;
+    int reservedWord1;
+    int reservedWord2;
 };
 /* Shared object layout established by resource-binding consumers. */
 struct ResourceBinding {

@@ -138,7 +138,7 @@ void __osPackResetData(void) {
 
 s32 osContInit(s32 queue, s32 *valid, s32 connectedPatternOut) {
     s32 node[8];
-    s32 sp40[6];
+    s32 timerQueue[6];
     s32 message[2];
     u64 value;
     s32 result;
@@ -150,9 +150,9 @@ s32 osContInit(s32 queue, s32 *valid, s32 connectedPatternOut) {
     *initialized = 1;
     value = Audio_ReadSystemTime();
     if (value <= 0x0165A0BBULL) {
-        osCreateMesgQueue(sp40, (s32)message, 1);
-        osSetTimer(node, 0x0165A0BCULL - value, 0, sp40, message);
-        osRecvMesg(sp40, (s32)message, 1);
+        osCreateMesgQueue(timerQueue, (s32)message, 1);
+        osSetTimer(node, 0x0165A0BCULL - value, 0, timerQueue, message);
+        osRecvMesg(timerQueue, (s32)message, 1);
     }
     g_controllerChannelCount[0] = 4;
     __osPackRequestData(0);

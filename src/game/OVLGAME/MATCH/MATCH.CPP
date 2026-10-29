@@ -77,7 +77,7 @@ void Match_ResetMatchControllerState(char *match) {
     ((GameSession *)match)->target = 1;
 }
 
-/* Asks Scene_FindPlacedObjectsByKey_Match about g_world_AchieveUpdateresultsscreen with a minus-one selector, clears the words of g_matchRoundCounters and puts the object at arg0 into state 0xC with byte 0x26DC1 set to two and the selector, or zero when the lookup failed, stored at 0x26DD8. Adapted from SetN64_SelectSpawnAndStartSession with the selector fixed at minus one, the word at 0x26DDC cleared before the last word of g_matchRoundCounters instead of set after the selector, and the state 0xC instead of 0xD changed. */
+/* Asks Scene_FindPlacedObjectsByKey_Match about g_world_AchieveUpdateresultsscreen with a minus-one selector, clears the words of g_matchRoundCounters and puts the object at gameSession into state 0xC with byte 0x26DC1 set to two and the selector, or zero when the lookup failed, stored at 0x26DD8. Adapted from SetN64_SelectSpawnAndStartSession with the selector fixed at minus one, the word at 0x26DDC cleared before the last word of g_matchRoundCounters instead of set after the selector, and the state 0xC instead of 0xD changed. */
 
 
 

@@ -12,9 +12,9 @@ struct ResidentSlot {
     s32 reservedWord;
 };
 struct ResidentEntry {
-    s32 unk0;
+    s32 resource;
     char pad4[0x2010 - 0x4];
-    s32 unk2010;
+    s32 palette;
 };
 struct SelectionTextLoadApplyArtsendTextureOverride {
     s32 value;
@@ -35,7 +35,7 @@ struct ArtsendTextureMenuState {
     u8 alternateTitle; /* +0x0 */
     u8 state; /* +0x1 */
     u8 unused0[2];
-    s32 field4;
+    s32 reservedWord;
     s32 active; /* +0x8: item count, the selection modulus */
     s32 selectionIndex; /* +0xC */
     s32 selectionValue; /* +0x10 */

@@ -56,7 +56,7 @@ int Frontend_ResetNameRepeatOnEvent(int unused0, int unused1, unsigned int messa
 
 /* 8042E080_68.CPP */
 #if !(defined(VERSION_US))
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_pakProfileHandlerEvents, an actor kind at g_pakProfileHandlerKinds and a handler at g_pakProfileHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event event through this file's 12-byte handler table, whose rows hold an event at g_pakProfileHandlerEvents, an actor kind at g_pakProfileHandlerKinds and a handler at g_pakProfileHandlers: the first row whose event equals event and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*PakProfileEventHandler)(void *, s32, s32, s32, s32);
 

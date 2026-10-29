@@ -279,17 +279,17 @@ void Particle_AdvanceRandomWhenNonzero(f32 advanceCondition) {
 /** Return offset 0x180 only when the nested state word is zero. */
 float Particle_GetConditionalFirstValue(ParticleEffect *effect) {
     void *inner = effect->entry;
-    if (((EffectEntry *)inner)->unk14 != 0) {
+    if (((EffectEntry *)inner)->rangeModeFlag != 0) {
         return 0.0f;
     }
-    return effect->unk180[0];
+    return effect->sampledRangesB[0];
 }
 
 f32 Particle_GetConditionalSecondValue(ParticleEffect *effect) {
     f32 result;
     result = 0.0f;
-    if ((effect->entry->unk14) == 0) {
-        result = (effect->unk180[1]);
+    if ((effect->entry->rangeModeFlag) == 0) {
+        result = (effect->sampledRangesB[1]);
     }
     return result;
 }

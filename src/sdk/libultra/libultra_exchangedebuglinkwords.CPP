@@ -1094,44 +1094,44 @@ void Libultra_SetDebugLinkCallback(int callbackAddress) {
 }
 
 s32 Libultra_ReceiveDebugLinkHalfword(u16 *halfwordOut) {
-    u8 sp10;
+    u8 receivedByte;
     s32 result;
     u16 high;
 
-    Libultra_ReadDebugLinkByte(&sp10);
+    Libultra_ReadDebugLinkByte(&receivedByte);
     result = 0;
     if (g_debugLinkTransferFailed == 0) {
-        high = sp10 << 8;
-        Libultra_ReadDebugLinkByte(&sp10);
+        high = receivedByte << 8;
+        Libultra_ReadDebugLinkByte(&receivedByte);
         if (g_debugLinkTransferFailed == 0) {
             result = 1;
-            *halfwordOut = high | sp10;
+            *halfwordOut = high | receivedByte;
         }
     }
     return result;
 }
 
 s32 Libultra_ReceiveDebugLinkWord(s32 *wordOut) {
-    u8 sp10;
+    u8 receivedByte;
     s32 result;
     s32 word;
 
-    Libultra_ReadDebugLinkByte(&sp10);
+    Libultra_ReadDebugLinkByte(&receivedByte);
     result = 0;
     if (g_debugLinkTransferFailed == 0) {
-        word = sp10 << 8;
-        Libultra_ReadDebugLinkByte(&sp10);
+        word = receivedByte << 8;
+        Libultra_ReadDebugLinkByte(&receivedByte);
         if (g_debugLinkTransferFailed == 0) {
-            word |= sp10;
-            Libultra_ReadDebugLinkByte(&sp10);
+            word |= receivedByte;
+            Libultra_ReadDebugLinkByte(&receivedByte);
             word <<= 8;
             if (g_debugLinkTransferFailed == 0) {
-                word |= sp10;
-                Libultra_ReadDebugLinkByte(&sp10);
+                word |= receivedByte;
+                Libultra_ReadDebugLinkByte(&receivedByte);
                 word <<= 8;
                 if (g_debugLinkTransferFailed == 0) {
                     result = 1;
-                    word |= sp10;
+                    word |= receivedByte;
                     *wordOut = word;
                 }
             }

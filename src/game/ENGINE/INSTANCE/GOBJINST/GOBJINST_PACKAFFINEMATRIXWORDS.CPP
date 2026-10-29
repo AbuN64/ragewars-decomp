@@ -192,7 +192,7 @@ void Gobjinst_InterpolatePoseRotation(void *cQuatern, f32 t, void *a, void *b) {
 void Gobjinst_SampleBoneTranslation(void *poseTrack, s32 boneIndex, void *outTranslation) {
     AnimInfo *o = poseTrack;
     CVector3 *out = outTranslation;
-    BoneRotationIndexPair *indices = (void *)o->unk_0;
+    BoneRotationIndexPair *indices = (void *)o->boneIndexPairs;
     s16 idx;
     CROMInitialOrientation_t *recs;
     f32 *base;
@@ -201,7 +201,7 @@ void Gobjinst_SampleBoneTranslation(void *poseTrack, s32 boneIndex, void *outTra
 
     idx = indices[boneIndex].translation;
     if (idx == -1) {
-        recs = (void *)o->unk_4;
+        recs = (void *)o->initialOrientations;
         *out = recs[boneIndex].position;
         return;
     }
@@ -209,7 +209,7 @@ void Gobjinst_SampleBoneTranslation(void *poseTrack, s32 boneIndex, void *outTra
     a = base + o->translationFirst;
     base = base + o->translationNext;
 
-    scale = o->unk_20;
+    scale = o->frameBlend;
 
     out->x = a[0] + scale * (base[0] - a[0]);
     out->y = a[1] + scale * (base[1] - a[1]);
@@ -223,23 +223,23 @@ void Gobjinst_SampleBoneRotation(void *poseTrack, s32 boneIndex, CQuatern *outRo
     void *base;
     char *a;
 
-    idx = ((struct BoneRotationIndexPair *) (((AnimInfo *) o)->unk_0 + (boneIndex * 4)))->rotationIndex;
+    idx = ((struct BoneRotationIndexPair *) (((AnimInfo *) o)->boneIndexPairs + (boneIndex * 4)))->rotationIndex;
     if (idx == -1) {
         f32 scale;
-        rec = ((AnimInfo *)(o))->unk_4 + boneIndex * 0x14;
+        rec = ((AnimInfo *)(o))->initialOrientations + boneIndex * 0x14;
         scale = (3.0518509447574615e-05f);
-        outRotation->x = (f32)(((CROMInitialOrientation_t *)(rec))->unk_C) * scale;
+        outRotation->x = (f32)(((CROMInitialOrientation_t *)(rec))->m_RotX) * scale;
         outRotation->y = (f32)(((CROMInitialOrientation_t *)(rec))->m_RotY) * scale;
-        outRotation->z = (f32)(((CROMInitialOrientation_t *)(rec))->unk_10) * scale;
-        outRotation->w = (f32)(((CROMInitialOrientation_t *)(rec))->unk_12) * scale;
+        outRotation->z = (f32)(((CROMInitialOrientation_t *)(rec))->m_RotZ) * scale;
+        outRotation->w = (f32)(((CROMInitialOrientation_t *)(rec))->m_RotW) * scale;
         return;
     }
-    base = SetN64_GetPackSection(((AnimInfo *)(o))->unk_C, (s32)idx);
-    a = (char *)base + (((AnimInfo *)(o))->unk_10) * 4;
-    base = (char *)base + (((AnimInfo *)(o))->unk_14) * 4;
+    base = SetN64_GetPackSection(((AnimInfo *)(o))->rotationFrames, (s32)idx);
+    a = (char *)base + (((AnimInfo *)(o))->rotationFirst) * 4;
+    base = (char *)base + (((AnimInfo *)(o))->rotationNext) * 4;
     {
         f32 scale;
-        scale = ((AnimInfo *)(o))->unk_20;
+        scale = ((AnimInfo *)(o))->frameBlend;
         outRotation->x = ((CQuatern *)(a))->x + scale * (((CQuatern *)(base))->x - ((CQuatern *)(a))->x);
         outRotation->y = ((CQuatern *)(a))->y + scale * (((CQuatern *)(base))->y - ((CQuatern *)(a))->y);
         outRotation->z = ((CQuatern *)(a))->z + scale * (((CQuatern *)(base))->z - ((CQuatern *)(a))->z);
@@ -255,21 +255,21 @@ void Gobjinst_SampleInterpolatedBoneRotation(BoneRotationTrackView *animation, s
     void *base;
     f32 scale;
 
-    indices = (void *)o->unk_0;
+    indices = (void *)o->boneIndexPairs;
     idx = indices[boneIndex].rotationIndex;
     if (idx == -1) {
-        rec = (void *)(o->unk_4 + boneIndex * 0x14);
+        rec = (void *)(o->initialOrientations + boneIndex * 0x14);
         scale = g_maskedModelViewEffectScale;
-        rotationOut->x = (f32)rec->unk_C * scale;
+        rotationOut->x = (f32)rec->m_RotX * scale;
         rotationOut->y = (f32)rec->m_RotY * scale;
-        rotationOut->z = (f32)rec->unk_10 * scale;
-        rotationOut->w = (f32)rec->unk_12 * scale;
+        rotationOut->z = (f32)rec->m_RotZ * scale;
+        rotationOut->w = (f32)rec->m_RotW * scale;
         return;
     }
-    base = SetN64_GetPackSection(o->unk_C, (s32)idx);
-    Graphu64_InterpolateQuaternionArc(rotationOut, o->unk_20,
-                    (char *)base + o->unk_10 * 4,
-                    (char *)base + o->unk_14 * 4);
+    base = SetN64_GetPackSection(o->rotationFrames, (s32)idx);
+    Graphu64_InterpolateQuaternionArc(rotationOut, o->frameBlend,
+                    (char *)base + o->rotationFirst * 4,
+                    (char *)base + o->rotationNext * 4);
 }
 
 /* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from Graphu64_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the g_affinePackUnsignedThresholdsRowZero thresholds changed. */

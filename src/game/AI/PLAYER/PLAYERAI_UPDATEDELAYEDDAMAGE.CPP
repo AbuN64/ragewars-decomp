@@ -18,16 +18,16 @@ void Playerai_UpdateDelayedDamage(void *player) {
     f32 remainingDelay;
     f32 previousDelay;
 
-    previousDelay = ((PlayerWeaponDelayStateView *)(player))->unk_11E4;
+    previousDelay = ((PlayerWeaponDelayStateView *)(player))->delayedDamageTimer;
     if (previousDelay > 0.0f) {
         remainingDelay = previousDelay - g_frameElapsedTime;
-        ((PlayerWeaponDelayStateView *)(player))->unk_11E4 = remainingDelay;
+        ((PlayerWeaponDelayStateView *)(player))->delayedDamageTimer = remainingDelay;
         if ((remainingDelay <= 0.0f) && !(g_gameSettings & 1)) {
             Barrel_FillDamagePacket(&damage,
-                          ((PlayerWeaponDelayStateView *)(player))->unk_13E0,
-                          ((PlayerWeaponDelayStateView *)(player))->unk_174 + 0x1900,
+                          ((PlayerWeaponDelayStateView *)(player))->damageSource,
+                          ((PlayerWeaponDelayStateView *)(player))->delayedDamage + 0x1900,
                           25.599998f, 0x4000, 0);
-            Playerai_ApplyDamagePacket(player, &((PlayerWeaponDelayStateView *)(player))->unk_170, &damage);
+            Playerai_ApplyDamagePacket(player, &((PlayerWeaponDelayStateView *)(player))->damageState, &damage);
         }
     }
 }

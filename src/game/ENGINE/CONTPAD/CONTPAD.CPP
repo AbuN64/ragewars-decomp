@@ -222,9 +222,9 @@ void ContPad_ClearControllerInput(void *object) {
     input->word20 = 0;
     input->held = 0;
     input->pressed = 0;
-    input->unk2C = 0;
-    input->unk30 = 0;
-    input->unk34 = 0;
+    input->reservedWord = 0;
+    input->reservedWord1 = 0;
+    input->reservedWord2 = 0;
 }
 
 s32 ContPad_SwapButtonPairs(s32 buttons)

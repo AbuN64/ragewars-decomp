@@ -6,7 +6,7 @@
 /* Opens the screen g_setupScreen: allocates its 0x470-byte state for the window, sets up the list,
    the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and
    items of the window with their alpha and visibility, resets the selection and the counters at
-   D_80154024, clears the pending flag at 0x91 of the eight g_playerSettings_Achieve records, places the four
+   g_selectionMessageReply.ready, clears the pending flag at 0x91 of the eight g_playerSettings_Achieve records, places the four
    character models (ids 0xEA6 to 0xEA9, x 0, -6, -13, -19) and a fifth model 0xEA6, then issues
    request 0xE78 through SoundElement_PlayFlatSound and calls Menu_InitializeOptionsScene; returns zero. */
 #include "TYPES.H"
@@ -86,9 +86,9 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
     SmpOverlay_ShowSlotById(window, 1, ID_2FF);
     SmpOverlay_ShowSlotById(window, 2, ID_2FF);
     SmpOverlay_ShowSlotById(window, 3, ID_2FF);
-    g_setupScreen->unk3DC = 1;
-    g_setupScreen->unk45C = 0;
-    g_setupScreen->unk3E0 = 4;
+    g_setupScreen->screenState = 1;
+    g_setupScreen->pulsePhase = 0;
+    g_setupScreen->stateCountdown = 4;
 
     item1 = Node_FindWidgetByResourceId(window, ID_306);
     g_setupScreen->left = item1;
@@ -126,7 +126,7 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
     g_setupScreen->widget308 = Node_FindWidgetByResourceId(window, ID_308);
     opacityItem = Node_FindWidgetByResourceId(window, ID_309);
     opacityItem->alpha = 0x6E;
-    g_setupScreen->unk46C = 0;
+    g_setupScreen->reservedWord3 = 0;
     item5 = Node_FindWidgetByResourceId(window, ID_30B);
     g_setupScreen->widget30B = item5;
     item5->alpha = 0x8C;
@@ -143,9 +143,9 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
     g_setupScreen->widget300 = item8;
     Widget_SetWidgetFlag08(item8, 1);
     Tsmos_DeactivateControllerState();
-    g_setupScreen->unk460 = 0;
-    g_setupScreen->unk464 = 0;
-    g_setupScreen->unk468 = -1;
+    g_setupScreen->controllerActivated = 0;
+    g_setupScreen->reservedWord1 = 0;
+    g_setupScreen->reservedWord2 = -1;
 
     for (i = 0; i < 8; i++) {
         record = &g_playerSettings[i];

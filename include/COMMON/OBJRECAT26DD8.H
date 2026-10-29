@@ -11,8 +11,8 @@ typedef struct RoundSessionItemStateView RoundSessionItemStateView;
 
 struct SessionInitializeHandler {
     void (*callback)(void *sessionContext);
-    s32 field4;
-    s32 field8;
+    s32 reservedWordFirst;
+    s32 reservedWordSecond;
 };
 
 struct SessionInitializeHandler;

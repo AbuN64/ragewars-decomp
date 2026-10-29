@@ -25,10 +25,10 @@ void SetN64_SetFrameDirection(void *frame, void *directionStorage) {
 /** Copy four scalar fields from the source into output pointers. */
 void SetN64_GetRecordOutputs(void *source, int *word, float *third, float *fourth, float *second) {
     RecordOutputFieldsView *source_record = source;
-    *word = source_record->unk20;
-    *second = source_record->unk10;
-    *third = source_record->unk8;
-    *fourth = source_record->unkC;
+    *word = source_record->outputWord;
+    *second = source_record->secondScalar;
+    *third = source_record->thirdScalar;
+    *fourth = source_record->fourthScalar;
 }
 
 #if defined(VERSION_US)

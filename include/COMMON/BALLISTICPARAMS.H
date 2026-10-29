@@ -13,7 +13,7 @@ struct ParticleAttractionActorView {
     char pad0[0x8];
     CVector3 pos; /* +0x8: src/Particle_UpdateTypedMotion_Ballisticparams.c */
     char pad14[0x5C];
-    f32 unk70; /* +0x70: src/Particle_UpdateTypedMotion_Ballisticparams.c */
+    f32 baseHeightOffset; /* +0x70: src/Particle_UpdateTypedMotion_Ballisticparams.c */
     char pad74[0x166C];
     void * next; /* +0x16E0: src/Particle_UpdateTypedMotion_Ballisticparams.c */
 };
@@ -25,10 +25,10 @@ struct ParticleAttractionPositionView {
 };
 
 typedef struct BallisticParams BallisticParams;
-struct BallisticParams { u16 gravityHi; u16 gravityLo; u16 speedHi; u16 speedLo; char pad8[8]; u16 unk10; u16 unk12; };
+struct BallisticParams { u16 gravityHi; u16 gravityLo; u16 speedHi; u16 speedLo; char pad8[8]; u16 motionSpeedHi; u16 speedLimitHi; };
 
 typedef struct BallisticParamsHolder BallisticParamsHolder;
-struct BallisticParamsHolder { u32 flags; char pad4[0xA]; s16 unkE; char pad10[0x20]; BallisticParams *parameters; char pad34[8]; };
+struct BallisticParamsHolder { u32 flags; char pad4[0xA]; s16 steeringAngleLimit; char pad10[0x20]; BallisticParams *parameters; char pad34[8]; };
 
 /* Phase-1 candidate; target/descriptor layouts and helper ABI remain unresolved. */
 typedef struct ParticleAttractionActorView ParticleNearbyActorView;

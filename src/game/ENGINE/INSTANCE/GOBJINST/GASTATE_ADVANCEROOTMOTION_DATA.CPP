@@ -203,10 +203,10 @@ void Gobjinst_DispatchAnimationIntervalEvents(char *obj, void *anim, f32 from, f
     s32 *resource;
     struct ActorAnimationEventTable *table;
 
-    if (!(((struct RootMotionActorView *) obj)->unk_100 & 0x4000000) && anim != obj + 0x104) {
+    if (!(((struct RootMotionActorView *) obj)->flags & 0x4000000) && anim != obj + 0x104) {
         return;
     }
-    switch (((struct RootMotionActorView *) obj)->unk_E4) {
+    switch (((struct RootMotionActorView *) obj)->type) {
     case 0x44E:
     case 0x451:
     case 0x453:
@@ -231,23 +231,23 @@ void Gobjinst_DispatchAnimationIntervalEvents(char *obj, void *anim, f32 from, f
             } else {
                 if (checkMask && (g_animationEventEffectDescriptors[events[i].effect].offset & 4)) {
                     if (resource == 0) {
-                        resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct RootMotionActorView *) obj)->unk_1);
+                        resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct RootMotionActorView *) obj)->team);
                         if (resource == 0) {
                             goto masked;
                         }
                         table = SetN64_GetPackSection(*resource, 5);
                     }
-                    fire = ((struct AnimationEventMaskView *) (((char *) table) + ((events[i].bone * table->field_0) + 0x74)))->value & ((struct RootMotionActorView *) obj)->unk_17C;
+                    fire = ((struct AnimationEventMaskView *) (((char *) table) + ((events[i].bone * table->entrySize) + 0x74)))->value & ((struct RootMotionActorView *) obj)->boneMask;
                 }
             masked:
                 if (fire == 0) {
                     continue;
                 }
-                if (((struct RootMotionActorView *) obj)->unk_B8 != 0) {
-                    Graphu64_ConvertMatrixToFloat(matrix, ((struct RootMotionActorView *) obj)->unk_B8 + (events[i].bone << 6));
+                if (((struct RootMotionActorView *) obj)->previousPoseMatrices != 0) {
+                    Graphu64_ConvertMatrixToFloat(matrix, ((struct RootMotionActorView *) obj)->previousPoseMatrices + (events[i].bone << 6));
                     Graphu64_TransformPoint(matrix, &events[i].local, &pos);
                 } else {
-                    pos = ((struct RootMotionActorView *) obj)->unk_8;
+                    pos = ((struct RootMotionActorView *) obj)->position0;
                 }
             }
             if (fire != 0) {

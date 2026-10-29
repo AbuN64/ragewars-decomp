@@ -170,9 +170,9 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
     v.y = direction.y;
     v.z = direction.z;
     Player_TransformPointByViewOrOwnerMatrix(player, &v);
-    v.x -= player->views5DC.view5DC_5.rider->unk128.x;
-    v.y -= player->views5DC.view5DC_5.rider->unk128.y;
-    v.z -= player->views5DC.view5DC_5.rider->unk128.z;
+    v.x -= player->views5DC.view5DC_5.rider->position.x;
+    v.y -= player->views5DC.view5DC_5.rider->position.y;
+    v.z -= player->views5DC.view5DC_5.rider->position.z;
     rotation = Graphu64_BuildDirectionQuaternion(&v);
     InstHdr_CopyActorPositionAndModel(actor, position, &point, &unused, 0, 1);
     point = position;

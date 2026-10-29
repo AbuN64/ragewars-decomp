@@ -47,7 +47,7 @@ struct GlobalMode {
 };
 struct ScenePackResourceView {
     unsigned char padding_0[112];
-    void *unk_70;
+    void *pack;
 };
 typedef struct DraftStreamTable {
     s32 stride, count;

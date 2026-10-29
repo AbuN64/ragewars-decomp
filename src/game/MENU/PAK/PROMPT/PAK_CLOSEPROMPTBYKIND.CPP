@@ -15,7 +15,7 @@
    Playerai_FindPlayerByController_PakClosepromptbykind, copies the loaded profile (flags, four words and eight name bytes) into the
    player's profile, applies the loaded team through Player_StartPlayerAnimation_CmenuprofileUpdateplayeranimationchoice and shows the player's message
    through Menu_AllocateMenu; otherwise it deletes the chosen note through Note_DeleteNote and shows the
-   D_44F7C0 or D_44F82C result prompt. Returns 1. */
+   g_pakNoteDeleteSucceededDialogResource or g_pakNoteDeleteFailedDialogResource result prompt. Returns 1. */
 
 
 
@@ -62,7 +62,7 @@ extern s32 Note_DeleteNote(s32 ch, s32 index);
    hands the channel back through Control_DisableControllerPakDe and reopens the player's menu 0x5EC (load menu
    without a pending save) or returns to the main menu g_gameSession; kind 5 hands the channel back and
    reopens menu g_worldSelectionValueThree; kind 6 in the pak manager sets g_pakRecheckRequested; kinds 4 and 3 recheck the pak
-   and show g_controllerPakReadyDialogResource_PakClosepromptbykind or D_450BD0, or D_44F124, and any other kind shows the menu's pending prompt
+   and show g_controllerPakReadyDialogResource_PakClosepromptbykind or g_controllerPakNotReadyDialogResource, or g_pakAlternateReadyDialogResource, and any other kind shows the menu's pending prompt
    (clearing the placeholder 1) in the player's message box. Returns 1. */
 
 
@@ -85,9 +85,9 @@ extern s32 g_pakRecheckRequested;
 extern char g_playerMenuDialogRomResource[];
 
 
-extern char D_0044E4D4[];
+extern char g_pakAlternateReadyDialogResource[];
 
-extern char D_0044FFA4[];
+extern char g_controllerPakNotReadyDialogResource[];
 
 
 extern void Control_SetProfileMode(PakMenuSlot *slot, s32 mode);
@@ -150,9 +150,9 @@ s32 Pak_ConfirmProfileOrDeleteNote(void *unused, MenuPakConfirmProfileOrDeleteNo
         return 1;
     }
     if (Note_DeleteNote(ch, g_controllerPakOverwriteNoteIndex) == 0) {
-        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EB70, menu->player, menu->slot, menu->prompt);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteDeleteSucceededDialogResource, menu->player, menu->slot, menu->prompt);
     } else {
-        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EBDC, menu->player, menu->slot, menu->prompt);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteDeleteFailedDialogResource, menu->player, menu->slot, menu->prompt);
     }
     return 1;
 }
@@ -203,14 +203,14 @@ s32 Pak_ClosePromptByKind(void *owner, PakPromptContext *menu) {
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
             Menu_OpenDialog(g_matchEndingTeamWheelClose, g_controllerPakReadyDialogResource, menu->player, menu->slot, 0);
         } else {
-            Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044FFA4, menu->player, menu->slot, 0);
+            Menu_OpenDialog(g_matchEndingTeamWheelClose, g_controllerPakNotReadyDialogResource, menu->player, menu->slot, 0);
         }
     } else if (g_controllerPakPromptKind == 3 && g_pakAlternatePromptEnabled != 0) {
         Note_ProbeStatus(ch);
         status = Note_GetStatus(ch);
         connected = Control_TakePakChange(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
-            Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044E4D4, menu->player, menu->slot, 0);
+            Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakAlternateReadyDialogResource, menu->player, menu->slot, 0);
         }
     } else {
         if (menu->prompt == (char *)1) {
@@ -243,9 +243,9 @@ s32 Pak_ConfirmPendingOperation(void *owner, PakPromptContext *menu, void *arg) 
             }
             Note_ProbeStatus(ch);
             if (Note_DeleteNote(ch, g_controllerPakSelectedNoteIndex) == 0) {
-                Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EB70, menu->player, menu->slot, menu->prompt);
+                Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteDeleteSucceededDialogResource, menu->player, menu->slot, menu->prompt);
             } else {
-                Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EBDC, menu->player, menu->slot, menu->prompt);
+                Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteDeleteFailedDialogResource, menu->player, menu->slot, menu->prompt);
             }
             break;
         case 3:
@@ -264,7 +264,7 @@ s32 Pak_ConfirmPendingOperation(void *owner, PakPromptContext *menu, void *arg) 
                 Snapshot_SaveSnapshotAndClose(owner, menu, arg);
                 return 1;
             }
-            Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EBDC, menu->player, menu->slot, menu->prompt);
+            Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteDeleteFailedDialogResource, menu->player, menu->slot, menu->prompt);
             break;
         case 0:
             if (g_pakUseScannedChannel != 0) {

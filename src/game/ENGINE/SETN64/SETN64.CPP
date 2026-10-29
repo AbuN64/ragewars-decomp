@@ -91,7 +91,7 @@ int SetN64_GetRecordBlockSize(int *recordHeader) {
 
 void SetN64_GetChunkStorage(void *chunk, void **storageOut, s32 *sizeOut) {
     *storageOut = chunk;
-    *sizeOut = ((((struct ActorAnimationEventTable *) ((s8 *) chunk))->field_0) * (((struct ActorAnimationEventTable *) ((s8 *) chunk))->field_4)) + 8;
+    *sizeOut = ((((struct ActorAnimationEventTable *) ((s8 *) chunk))->entrySize) * (((struct ActorAnimationEventTable *) ((s8 *) chunk))->entryCount)) + 8;
 }
 
 /* 8028FD2C_11.CPP */
@@ -472,28 +472,28 @@ void *SetN64_AllocateActorFromPool(ActorPoolFreeListView *container)
   void *actor;
   void *node;
   struct EffectPoolNode *next;
-  if ((container->unk_3C00) == 0)
+  if ((container->freeHead) == 0)
   {
-    SetN64_RecycleEffectNode(container, container->unk_3C08);
+    SetN64_RecycleEffectNode(container, container->activeTail);
   }
-  node = container->unk_3C00;
+  node = container->freeHead;
   next = container->next;
-  container->unk_3C00 = ((VisibleEffectNodeLinks *)(node))->unk_1DC;
+  container->freeHead = ((VisibleEffectNodeLinks *)(node))->next;
   if (next != 0)
   {
     next->previous = node;
   }
   actor = container->next;
-  ((VisibleEffectNodeLinks *)(node))->unk_1D8 = 0;
-  ((VisibleEffectNodeLinks *)(node))->unk_1DC = actor;
+  ((VisibleEffectNodeLinks *)(node))->previous = 0;
+  ((VisibleEffectNodeLinks *)(node))->next = actor;
   container->next = node;
-  if ((container->unk_3C08) == 0)
+  if ((container->activeTail) == 0)
   {
-    container->unk_3C08 = node;
+    container->activeTail = node;
   }
-  ((VisibleEffectNodeLinks *)(node))->unk_1D0 |= 1;
+  ((VisibleEffectNodeLinks *)(node))->flags |= 1;
   GameObject_ResetActorMotion(node);
-  ((VisibleEffectNodeLinks *)(node))->unk_1C8 = 0;
+  ((VisibleEffectNodeLinks *)(node))->clearedWord = 0;
   return node;
 }
 

@@ -23,9 +23,9 @@ extern int InstHdr_GetTypeOneItemValue(void *actorStorage);
 struct ActorSurfaceHeightView;
 struct ActorSurfaceHeightView {
     unsigned char padding_0[12];
-    f32 unk_C;
+    f32 surfaceBaseHeight;
     unsigned char padding_10[4];
-    void *unk_14;
+    void *groundTriangle;
 };
 
 

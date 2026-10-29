@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 extern s32 g_pakScanActive;
 
-extern char D_0044EB70[];
+extern char g_pakNoteDeleteSucceededDialogResource[];
 
 extern int g_pakScoreAtLeast9999Title;
 
@@ -86,7 +86,7 @@ extern s32 g_pakNoteSelectProbesNote;
 
 extern int g_controllerPakOverwriteNoteIndex;
 
-extern char D_0044EBDC[];
+extern char g_pakNoteDeleteFailedDialogResource[];
 
 extern int g_pakScoreBelow2000Title;
 

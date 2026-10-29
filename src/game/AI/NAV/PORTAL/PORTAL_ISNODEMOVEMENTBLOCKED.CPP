@@ -272,13 +272,13 @@ void Portal_ResetSearchState(struct NavigationSearchGraphView *graph) {
         do {
             node->value = k;
             node->state = -1;
-            node->field18 = 0;
-            node->field1C = 0;
-            node->field20 = 0;
-            node->field24 = 0;
-            node->field28 = 0;
-            node->field2C = 0;
-            node->field30 = 0;
+            node->extra = 0;
+            node->cost = 0;
+            node->estimate = 0;
+            node->total = 0;
+            node->open = 0;
+            node->goal = 0;
+            node->parent = 0;
             node = node->next;
         } while (node != 0);
     }

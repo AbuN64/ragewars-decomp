@@ -29,7 +29,7 @@ struct Label;
 struct G;
 struct G {
     char pad0[0x3DC];
-    s32 unk3DC;
+    s32 reservedWord3DC;
     char pad3E0[0x3EC - 0x3E0];
     s32 reservedWord;
     s32 reservedWord1;

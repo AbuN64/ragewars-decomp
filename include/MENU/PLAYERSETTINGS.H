@@ -66,26 +66,26 @@ struct PlayerProfileMenuContext {
 struct GameSpeedMenuValue;
 struct GameSpeedMenuValue {
     unsigned char padding_0[32];
-    int field_20;
+    int controllerIndex;
 };
 
 struct Obj1C;
 struct Obj1C {
     char pad0[0x5D4];
-    s32 unk5D4;
-    PlayerCharacterKindView *unk5D8;
-    s32 unk5DC;
+    s32 dialogParameter;
+    PlayerCharacterKindView *characterKindView;
+    s32 dialogParentBase;
     char pad5E0[0x698 - 0x5E0];
-    s32 unk698;
+    s32 dialogController;
     char pad69C[0x858 - 0x69C];
-    s32 unk858;
+    s32 alternateDialogFlag;
 };
 
 struct PlayerDialogMenuContext;
 struct Obj1C;
 struct PlayerDialogMenuContext {
     char pad0[0x1C];
-    struct Obj1C *unk1C;
+    struct Obj1C *selectionPlayer;
 };
 
 
@@ -111,20 +111,20 @@ typedef struct StatusView StatusView;
 struct ProfileOptions;
 struct ProfileOptions {
     u8 pad0[0x7B];
-    s8 unk7B;
+    s8 profileMode;
 };
 
 struct ProfileModeSelectionPlayer;
 struct ProfileOptions;
 struct ProfileModeSelectionPlayer {
     u8 pad0[0x5D8];
-    struct ProfileOptions *unk5D8;
+    struct ProfileOptions *characterKindView;
 };
 struct ProfileModeSelectionPlayer;
 struct ProfileModeMenuContext;
 struct ProfileModeMenuContext {
     u8 pad0[0x1C];
-    struct ProfileModeSelectionPlayer *unk1C;
+    struct ProfileModeSelectionPlayer *selectionPlayer;
 };
 
 struct StatusStep;

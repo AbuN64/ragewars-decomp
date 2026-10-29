@@ -14,13 +14,13 @@ typedef struct RenderSortRecord {
 
 struct PlaneContactStorageView;
 struct PlaneContactStorageView {
-    s32 unk0;
+    s32 clearedWordFirst;
     char pad0[0x54 - 0x0 - sizeof(s32)];
-    s32 unk54;
+    s32 clearedWordSecond;
     char pad54[0x58 - 0x54 - sizeof(s32)];
-    s32 unk58;
+    s32 invalidContactIndex;
     char pad58[0xCC - 0x58 - sizeof(s32)];
-    f32 unkCC;
+    f32 contactDistance;
 };
 
 

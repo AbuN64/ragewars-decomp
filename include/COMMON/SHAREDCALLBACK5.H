@@ -155,8 +155,8 @@ typedef struct AiController {
     s32 actionDuration; /* 0x2E8 */
     s32 alternateCountdown; /* 0x2EC */
     u8 pad2F0[0x4];
-    s32 unk2F4; /* 0x2F4 */
-    s32 unk2F8; /* 0x2F8 */
+    s32 behaviorStateWordA; /* 0x2F4 */
+    s32 behaviorStateWordB; /* 0x2F8 */
     s32 behaviorResetFlag; /* 0x2FC */
     s32 routeComplete; /* 0x300 */
     s32 airPitchNode; /* 0x304 */

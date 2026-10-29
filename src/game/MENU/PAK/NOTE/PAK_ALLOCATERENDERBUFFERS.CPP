@@ -170,7 +170,7 @@ u32 Note_BytesToPakPages(u32 bytes) {
     return (bytes + 0xFF) >> 8;
 }
 
-/* Computes the CRC-32 with polynomial 0xEDB88320 of arg1 bytes at arg0, continuing from the running value arg2, from a 256-entry table built on the stack. Adapted from XPlus_UpdateCrc32. */
+/* Computes the CRC-32 with polynomial 0xEDB88320 of byteCount bytes at data, continuing from the running value initialCrc, from a 256-entry table built on the stack. Adapted from XPlus_UpdateCrc32. */
 
 u32 Note_Crc32(u8 *data, u32 byteCount, u32 initialCrc) {
     u32 table[256];

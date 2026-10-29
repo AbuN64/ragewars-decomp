@@ -215,7 +215,7 @@ s32 Track_LoadTrackSequence(s32 index) {
             first=context->callbackE4;
             second=context->callbackE8;
             context->pending=1;
-            context->field4C=0;
+            context->pendingStartFlag=0;
             context->callbackE4=0;
             context->callbackE8=0;
             context->mode=context->spec.flags&8;

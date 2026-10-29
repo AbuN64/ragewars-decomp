@@ -121,7 +121,7 @@ void Vector3Subtract(void *destination, void *leftVector, void *rightVector) {
     (((struct CVector3_t *) ((s8 *) destination))->z) = (f32) ((((struct CVector3_t *) ((s8 *) leftVector))->z) - (((struct CVector3_t *) ((s8 *) rightVector))->z));
 }
 
-/** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
+/** Scale a 3-vector (source) by a scalar (scaleFactor), store into destination. */
 void Vector3Scale(void *destination, void *source, f32 scaleFactor) {
     CVector3 *sourceVector = source;
     CVector3 *destinationVector = destination;

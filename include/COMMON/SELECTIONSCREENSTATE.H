@@ -10,20 +10,20 @@ typedef MenuWidget SlotSelectionWidget;
 
 struct SelectionScreenPlayer {
     SlotSelectionWidget *highlight;
-    s32 unk4;
+    s32 slotOverlay;
     s32 kind;
-    s32 unkC;
+    s32 selectionState;
     s32 choice;
     char pad14[4];
     char model[0x4C0 - 0x18];
-    s32 unk4C0;
+    s32 tintFramesLeft;
     s32 pad4C4;
 };
 typedef struct SelectionScreenPlayer SelectionScreenPlayer;
 
 struct SelectionScreenState {
     void *screen;
-    struct SmpOverlaySlotsView *unk4;
+    struct SmpOverlaySlotsView *slotOverlay;
     SelectionScreenPlayer players[4];
     SlotSelectionWidget *header;
     s32 headerStep;
@@ -84,20 +84,20 @@ struct SlotSelectionMenuBlock {
     s32 round492;
     SlotSelectionWidget *item491;
     s32 round491;
-    s32 unk216;
-    s32 unk220;
+    s32 menuPhase;
+    s32 reservedWord;
     s32 lookup486;
     SlotSelectionWidget *item486;
     SlotSelectionWidget *item563;
     s32 focus;
     SlotSelectionWidget *item510;
     SlotSelectionWidget *item512;
-    s32 unk248;
+    s32 reservedWord1;
     s32 style;
     SlotSelectionWidget *item511;
-    s32 unk260;
+    s32 reservedWord2;
     s32 player;
-    s32 unk268;
+    s32 activeSlot;
 };
 typedef struct SlotSelectionMenuBlock SlotSelectionMenuBlock;
 

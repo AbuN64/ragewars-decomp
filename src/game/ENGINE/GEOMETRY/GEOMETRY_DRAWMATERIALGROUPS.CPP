@@ -116,8 +116,8 @@ void Geometry_DrawMaterialGroups(void) {
 
 
 void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 textures, s32 pass, s32 direct) {
-        s32 *sp28;
-        s32 sp2C;
+        s32 *modelVariantTable;
+        s32 modelResourceSize;
         s32 **objectIndexResource;
         s32 **resource;
         s32 modelResourceKey;
@@ -131,12 +131,12 @@ void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 tex
         if (objectIndexResource != 0) {
                 directoryEntryResult = SetN64_GetDirectoryEntry(*objectIndexResource, modelIndex, 1);
                 Cache_UnlockResource(0, objectIndexResource);
-                modelIndexResource = Cache_RequestWordCountedResource(0, (void **) &sp28, directoryEntryResult, &s_simpModelsIndexText, 1);
+                modelIndexResource = Cache_RequestWordCountedResource(0, (void **) &modelVariantTable, directoryEntryResult, &s_simpModelsIndexText, 1);
                 if (modelIndexResource != 0) {
-                        modelVariantCount = *sp28;
-                        modelResourceKey = SetN64_LocatePackSection((s32) sp28, directoryEntryResult, textures % modelVariantCount, &sp2C);
+                        modelVariantCount = *modelVariantTable;
+                        modelResourceKey = SetN64_LocatePackSection((s32) modelVariantTable, directoryEntryResult, textures % modelVariantCount, &modelResourceSize);
                         Cache_UnlockResource(0, (void *) modelIndexResource);
-                        resource = Cache_RequestResource(0, modelResourceKey, modelResourceKey, sp2C, 0, 0, &g_simpleModelResourceCallbackAddress, &s_simpModelText, direct);
+                        resource = Cache_RequestResource(0, modelResourceKey, modelResourceKey, modelResourceSize, 0, 0, &g_simpleModelResourceCallbackAddress, &s_simpModelText, direct);
                         if (resource != 0) {
                                 packSectionResult = SetN64_GetPackSection(*resource, 0);
                                 if (g_modelBatchResource != resource || g_modelBatchPass != pass || g_modelInstanceQueueCount == 0x20) {

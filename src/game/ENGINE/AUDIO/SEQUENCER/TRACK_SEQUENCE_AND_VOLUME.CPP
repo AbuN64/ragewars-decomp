@@ -72,23 +72,23 @@ void Sequencer_UpdateTrackVolume(void *trackState) {
     f32 effectiveVolume;
     GameAudioContext *context;
 
-    if (o->unk_38 != 0) {
+    if (o->gainOverrideActive != 0) {
         f32 prod = o->context->green;
         prod = prod * g_sequencerOverrideVolumePercentScale;
-        effectiveVolume = (f32) (o->unk_24);
+        effectiveVolume = (f32) (o->baseVolume);
         effectiveVolume = effectiveVolume * prod;
-        effectiveVolume = effectiveVolume * o->unk_3C;
+        effectiveVolume = effectiveVolume * o->currentGain;
         goto do_update;
     }
     context = o->context;
-    effectiveVolume = (f32) (o->unk_24) * (context->green * g_sequencerVolumePercentScale);
+    effectiveVolume = (f32) (o->baseVolume) * (context->green * g_sequencerVolumePercentScale);
     if (context->dialogEnabled != 0) {
         effectiveVolume = effectiveVolume * (0.699999988079071f);
     }
-    if (effectiveVolume != o->unk_2C) {
+    if (effectiveVolume != o->appliedVolume) {
 do_update:
-        alCSPSetVol(o->unk_14, (s16) (s32) (effectiveVolume * g_sequencerContextVolumeScale));
-        o->unk_2C = effectiveVolume;
+        alCSPSetVol(o->sequencePlayer, (s16) (s32) (effectiveVolume * g_sequencerContextVolumeScale));
+        o->appliedVolume = effectiveVolume;
     }
 }
 

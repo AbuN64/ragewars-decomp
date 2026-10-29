@@ -5,7 +5,7 @@
 unsigned char g_FrontendLinkGapWordsB05E8TrailingBytes[4] = { 0x30, 0x82, 0x00, 0xFF };
 #endif
 
-/* DATA_802B53D8.CPP */
+/* g_frontendLinkGapWordsBlock1.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
 #if defined(VERSION_EU_X)

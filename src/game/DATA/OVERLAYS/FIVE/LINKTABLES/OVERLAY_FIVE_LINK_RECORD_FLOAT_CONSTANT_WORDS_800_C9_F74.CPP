@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_8021EEFC_CFDB8_us_rev1.c */
+/* ROM-grounded data: src/k_overlayFiveLinkRecordFloatConstantWordsBlock2.c */
 const unsigned int k_overlayFiveLinkRecordFloatConstantWordsBlock2[1] = {
     0xC2EC0000,
 };

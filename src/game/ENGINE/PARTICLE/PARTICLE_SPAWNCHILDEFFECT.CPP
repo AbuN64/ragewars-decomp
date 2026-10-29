@@ -29,28 +29,28 @@ void Particle_FinishActorEffects(void *actorStorage) {
     char *owner;
     char *resource;
 
-    if (((ParticleOwnerActorView *)(actor))->unk_4 != 0x414) {
-        if (((ParticleOwnerActorView *)(actor))->unk_4 == 0x42D) {
+    if (((ParticleOwnerActorView *)(actor))->kindId != 0x414) {
+        if (((ParticleOwnerActorView *)(actor))->kindId == 0x42D) {
             state = Particle_GetEffectResource(actor);
-            if (((ParticleAmmoRewardView *)(state))->unk_5A8 != 0 && Playerai_IsPlayerInactive(state) == 0) {
-                Player_GiveAmmoWithMessage(state, ((ParticleAmmoRewardView *)(state))->unk_5A4,
-                               ((ParticleAmmoRewardView *)(state))->unk_5A8);
+            if (((ParticleAmmoRewardView *)(state))->ammoAmount != 0 && Playerai_IsPlayerInactive(state) == 0) {
+                Player_GiveAmmoWithMessage(state, ((ParticleAmmoRewardView *)(state))->ammoType,
+                               ((ParticleAmmoRewardView *)(state))->ammoAmount);
             }
             goto reset_state;
         }
     } else {
 reset_state:
         state = Particle_GetEffectResource(actor);
-        ((ParticleAmmoRewardView *)(state))->unk_5A8 = 0;
+        ((ParticleAmmoRewardView *)(state))->ammoAmount = 0;
         if (Playerai_IsPlayerInactive(state) == 0) {
-            ((ParticleAmmoRewardView *)(state))->unk_59C = 1;
+            ((ParticleAmmoRewardView *)(state))->resetFlag = 1;
         }
     }
 
-    if (((ParticleOwnerActorView *)(actor))->unk_1B9 == 8 ||
-        ((ParticleOwnerActorView *)(actor))->unk_1BA == 8 ||
-        ((ParticleOwnerActorView *)(actor))->unk_1B8 == 8) {
-        resource = ((ParticleOwnerActorView *)(actor))->unk_12C;
+    if (((ParticleOwnerActorView *)(actor))->stateByte0 == 8 ||
+        ((ParticleOwnerActorView *)(actor))->stateByte1 == 8 ||
+        ((ParticleOwnerActorView *)(actor))->stateByte2 == 8) {
+        resource = ((ParticleOwnerActorView *)(actor))->owner;
         if (resource != 0 && *(u8 *)resource == 1 &&
             (((Shared_Actor *)(resource))->weaponFlags & 0x300000) != 0) {
             Player_SetPlayerState(((Shared_Actor *)(resource))->entity, resource, 2);
@@ -58,11 +58,11 @@ reset_state:
     }
 
     Particle_StopSound(actor);
-    owner = ((ParticleOwnerActorView *)(actor))->unk_118;
-    if (((struct ParticleFinishSoundView *) ((Owner *) owner)->track)->unk_BE != 0xFFFF) {
+    owner = ((ParticleOwnerActorView *)(actor))->def;
+    if (((struct ParticleFinishSoundView *) ((Owner *) owner)->track)->firstSoundId != 0xFFFF) {
         SoundElement_StopAudioBySecondaryValue((s32)actor);
     }
-    if (((struct ParticleFinishSoundView *) ((Owner *) owner)->track)->unk_C2 != 0xFFFF) {
+    if (((struct ParticleFinishSoundView *) ((Owner *) owner)->track)->secondSoundId != 0xFFFF) {
         SoundElement_StopAudioBySecondaryValue((s32)actor);
     }
 }

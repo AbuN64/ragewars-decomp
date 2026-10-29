@@ -23,9 +23,9 @@ unsigned int g_overlayOneCFloatConstantWords[4] = {
 };
 #endif
 
-/* DATA_800CCFB0.CPP */
+/* g_overlayOneCArcCosineTable.CPP */
 #if defined(VERSION_EU)
-f32 data_unresolved_800CCFB0[1026] = {
+f32 g_overlayOneCArcCosineTable[1026] = {
     0.0f, 1.0f, 0.0f, 1.57079637f, 1.56981885f, 1.56884134f,
     1.56786382f, 1.56688631f, 1.56590867f, 1.56493115f, 1.56395364f, 1.56297612f,
     1.56199861f, 1.56102097f, 1.56004345f, 1.55906582f, 1.5580883f, 1.55711067f,

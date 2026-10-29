@@ -51,7 +51,7 @@ void SetN64_DrawMode10Session(void *session) { SetN64_DrawSessionWithAttractTime
 
 void SetN64_ResetMode12Items(int sessionAddress) {
     Scene_ResetTransitionViewport();
-    SetN64_ResetPlayerItems(sessionAddress, ((RoundSessionItemStateView *)sessionAddress)->unk26DD8 + 0x259);
+    SetN64_ResetPlayerItems(sessionAddress, ((RoundSessionItemStateView *)sessionAddress)->selectionKeyBase + 0x259);
 }
 
 void SetN64_HandleMode12Input(s32 session) {

@@ -213,11 +213,11 @@ s32 Particle_GetRenderLayer(void *particle) {
 }
 
 void Particle_InitializeObjectLinks(void *particle) {
-    (((struct ParticleObjectLinkView *) ((s8 *) particle))->unk_18) = &g_particleActorDefinition;
+    (((struct ParticleObjectLinkView *) ((s8 *) particle))->actorDefinition) = &g_particleActorDefinition;
     (((struct ParticleObjectLinkView *) ((s8 *) particle))->kind) = 2;
-    (((struct ParticleObjectLinkView *) ((s8 *) particle))->unk_5C) = 0;
-    (((struct ParticleObjectLinkView *) ((s8 *) particle))->unk_1DC) = 0;
-    (((struct ParticleObjectLinkView *) ((s8 *) particle))->unk_1E4) = 0;
+    (((struct ParticleObjectLinkView *) ((s8 *) particle))->flags) = 0;
+    (((struct ParticleObjectLinkView *) ((s8 *) particle))->reservedWord1DC) = 0;
+    (((struct ParticleObjectLinkView *) ((s8 *) particle))->reservedWord1E4) = 0;
 }
 
 void Particle_ReleaseObjectAndSound(void *object) {
@@ -356,8 +356,8 @@ void Particle_ApplyDirectionalAcceleration(DirectionalAccelerationParticle *part
 }
 
 void Particle_FlagKind86ModeTwo(void *particle, s32 mode) {
-    if (((((struct ParticleKindFlagsView *) ((s8 *) particle))->unk_4) == 0x56) && (mode == 2)) {
-        (((struct ParticleKindFlagsView *) ((s8 *) particle))->unk_5C) = (s32) ((((struct ParticleKindFlagsView *) ((s8 *) particle))->unk_5C) | 0x04000000);
+    if (((((struct ParticleKindFlagsView *) ((s8 *) particle))->modelId) == 0x56) && (mode == 2)) {
+        (((struct ParticleKindFlagsView *) ((s8 *) particle))->flags) = (s32) ((((struct ParticleKindFlagsView *) ((s8 *) particle))->flags) | 0x04000000);
     }
 }
 
@@ -403,7 +403,7 @@ void Particle_AttachToCurrentTarget(void *particle, f32 *attachmentMatrix, s32 a
     }
 }
 
-/** Return arg0, but treat the sentinel value 0xA as 0. */
+/** Return eventId, but treat the sentinel value 0xA as 0. */
 s32 Particle_MapEventTenToZero(s32 eventId) {
     if (eventId == 0xA) {
         return 0;

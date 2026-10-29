@@ -80,15 +80,15 @@ void Scene_RelocateParticleEffectData(s32 world, void ***handle) {
                 } else {
                     piece[i].tag = Scene_GetIndexedModelResource(world, piece[i].tag);
                 }
-                piece[i].unk18 = base + piece[i].unk18;
-                piece[i].unk1C = base + piece[i].unk1C;
-                piece[i].unk20 = base + piece[i].unk20;
-                piece[i].unk24 = base + piece[i].unk24;
-                piece[i].unk28 = base + piece[i].unk28;
-                piece[i].unk2C = base + piece[i].unk2C;
-                piece[i].unk30 = base + piece[i].unk30;
-                piece[i].unk34 = base + piece[i].unk34;
-                piece[i].unk38 = base + piece[i].unk38;
+                piece[i].relocatedOffset18 = base + piece[i].relocatedOffset18;
+                piece[i].relocatedOffset1C = base + piece[i].relocatedOffset1C;
+                piece[i].relocatedOffset20 = base + piece[i].relocatedOffset20;
+                piece[i].relocatedOffset24 = base + piece[i].relocatedOffset24;
+                piece[i].relocatedOffset28 = base + piece[i].relocatedOffset28;
+                piece[i].relocatedOffset2C = base + piece[i].relocatedOffset2C;
+                piece[i].relocatedOffset30 = base + piece[i].relocatedOffset30;
+                piece[i].relocatedOffset34 = base + piece[i].relocatedOffset34;
+                piece[i].relocatedOffset38 = base + piece[i].relocatedOffset38;
                 i++;
             } while (i < count);
         }
@@ -110,16 +110,16 @@ void Scene_ScaleDefinitionFields(s32 unused0, void ***handle) {
             ent = SetN64_GetPackSection(obj, i);
             switch (ent->kind) {
             case 1:
-                ent->unk28 = ent->unk28 * scale;
-                ent->unk30 = ent->unk30 * scale;
-                ent->unk34 = ent->unk34 * scale;
-                ent->unk50 = ent->unk50 * scale;
-                ent->unk54 = ent->unk54 * scale;
-                ent->unk58 = ent->unk58 * scale;
+                ent->scaledValueA = ent->scaledValueA * scale;
+                ent->scaledValueB = ent->scaledValueB * scale;
+                ent->scaledValueC = ent->scaledValueC * scale;
+                ent->scaledValueD = ent->scaledValueD * scale;
+                ent->scaledValueE = ent->scaledValueE * scale;
+                ent->scaledValueF = ent->scaledValueF * scale;
                 break;
             case 11:
-                ent->unkEC = ent->unkEC * scale;
-                ent->unkF0 = ent->unkF0 * scale;
+                ent->scaledKind11ValueA = ent->scaledKind11ValueA * scale;
+                ent->scaledKind11ValueB = ent->scaledKind11ValueB * scale;
                 break;
             case 0:
             case 2:

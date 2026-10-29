@@ -2,7 +2,7 @@
 #include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
 #include "IO/libsn_writememorybyte.H"
 
-/* Updates the selected byte in the aligned word addressed by arg0. */
+/* Updates the selected byte in the aligned word addressed by address. */
 
 void Libsn_WriteMemoryByte(s32 address, s32 byteValue) {
     int shiftedByte;

@@ -501,7 +501,7 @@ void Sky_ReleaseEffectNode(s32 sceneAddress, s32 effectNode) {
     List_PrependIntrusive(sceneAddress + 0x8A0, effectNode);
 }
 
-/** Swap the two words pointed to by arg0 and arg1. */
+/** Swap the two words pointed to by leftEntry and rightEntry. */
 void Sky_SwapEntries(int *leftEntry, int *rightEntry) {
     int savedEntry;
 

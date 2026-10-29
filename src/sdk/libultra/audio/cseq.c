@@ -233,7 +233,7 @@ f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQu
     if (microsecondsPerQuarter < 0) {
         angle += g_compressedTicksToSecondsTempoUnsignedBias;
     }
-    ticksPerQuarter = ((ObjRecAt40V1 *)((*sequenceHandle)))->unk40;
+    ticksPerQuarter = ((ObjRecAt40V1 *)((*sequenceHandle)))->value;
     scaled = arg1f * (f32)angle;
     val = (f64)ticksPerQuarter;
     if (ticksPerQuarter < 0) {
@@ -242,7 +242,7 @@ f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQu
     return scaled / ((f32)val * g_compressedTicksToSecondsMicrosecondScale);
 }
 
-/* Scales the float argument by the unsigned rate at offset 0x40 of the object behind arg0 times a constant, divides by the unsigned third argument, and returns the quotient converted to unsigned. Adapted from alCSeqTicksToSec with the second argument changed to a float, the product and quotient reordered so the rate term multiplies and the third argument divides, and the result converted to u32 with the explicit 2^31 split. */
+/* Scales the float argument by the unsigned rate at offset 0x40 of the object behind sequenceHandle times a constant, divides by the unsigned third argument, and returns the quotient converted to unsigned. Adapted from alCSeqTicksToSec with the second argument changed to a float, the product and quotient reordered so the rate term multiplies and the third argument divides, and the result converted to u32 with the explicit 2^31 split. */
 
 u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuarter) {
     f64 val;
@@ -253,7 +253,7 @@ u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuar
     s32 ticksPerQuarter;
     s32 converted;
 
-    ticksPerQuarter = ((ObjRecAt40V1 *)((*sequenceHandle)))->unk40;
+    ticksPerQuarter = ((ObjRecAt40V1 *)((*sequenceHandle)))->value;
     arg1f = seconds;
     val = (f64)ticksPerQuarter;
     if (ticksPerQuarter < 0) {

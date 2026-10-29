@@ -180,42 +180,42 @@ void Control_RefreshControllerConnection(void *profile) {
     s32 bit2;
     s32 i;
 
-    type = ((ControllerInputRenderView *)(o))->unk_4;
+    type = ((ControllerInputRenderView *)(o))->port;
     bit = ((g_controllerReadStatusBytes[type * 4] >> 3) ^ 1) & 1;
-    if (bit != 0 && ((ControllerInputRenderView *)(o))->unk_0 == 0) {
+    if (bit != 0 && ((ControllerInputRenderView *)(o))->connected == 0) {
         i = 0;
-        ((ControllerInputRenderView *)(o))->unk_4 = type;
-        ((ControllerInputRenderView *)(o))->unk_0 = 0;
-        ((ControllerInputRenderView *)(o))->unk_C8 = 0;
-        ((ControllerInputRenderView *)(o))->unk_CC = 0;
-        ((ControllerInputRenderView *)(o))->unk_220 = 0;
-        ((ControllerInputRenderView *)(o))->unk_8 = 0;
-        ((ControllerInputRenderView *)(o))->unk_C = 0;
-        ((ControllerInputRenderView *)(o))->unk_10 = 0;
-        ((ControllerInputRenderView *)(o))->unk_C4 = 0;
-        ((ControllerInputRenderView *)(o))->unk_C5 = 0;
-        ((ControllerInputRenderView *)(o))->unk_C6 = 0;
-        ((ControllerInputRenderView *)(o))->unk_C7 = 0;
-        ((ControllerInputRenderView *)(o))->unk_14 = 0;
-        ((ControllerInputRenderView *)(o))->unk_18 = 0;
-        ((ControllerInputRenderView *)(o))->unk_1C = 0;
-        ((ControllerInputRenderView *)(o))->unk_20 = 0;
-        ((ControllerInputRenderView *)(o))->unk_24 = 0;
-        ((ControllerInputRenderView *)(o))->unk_28 = 0;
+        ((ControllerInputRenderView *)(o))->port = type;
+        ((ControllerInputRenderView *)(o))->connected = 0;
+        ((ControllerInputRenderView *)(o))->pakActive = 0;
+        ((ControllerInputRenderView *)(o))->mode = 0;
+        ((ControllerInputRenderView *)(o))->reset = 0;
+        ((ControllerInputRenderView *)(o))->connectResetWord1 = 0;
+        ((ControllerInputRenderView *)(o))->connectResetWord2 = 0;
+        ((ControllerInputRenderView *)(o))->connectResetWord3 = 0;
+        ((ControllerInputRenderView *)(o))->stickX = 0;
+        ((ControllerInputRenderView *)(o))->stickY = 0;
+        ((ControllerInputRenderView *)(o))->previousStickX = 0;
+        ((ControllerInputRenderView *)(o))->previousStickY = 0;
+        ((ControllerInputRenderView *)(o))->inputPreviousButtons = 0;
+        ((ControllerInputRenderView *)(o))->inputButtons = 0;
+        ((ControllerInputRenderView *)(o))->inputPressedButtons = 0;
+        ((ControllerInputRenderView *)(o))->inputHistory1 = 0;
+        ((ControllerInputRenderView *)(o))->inputHistory2 = 0;
+        ((ControllerInputRenderView *)(o))->inputHistory3 = 0;
         do {
-            ((struct ControllerInputByteStateView *) (o + (i * 4)))->unk_2C = 0;
-            ((struct ControllerInputByteStateView *) (o + (i * 4)))->unk_2D = 0;
-            ((struct ControllerInputByteStateView *) (o + (i * 4)))->unk_2E = 0x30;
-            ((struct ControllerInputByteStateView *) (o + (i * 4)))->unk_2F = 0;
+            ((struct ControllerInputByteStateView *) (o + (i * 4)))->taps = 0;
+            ((struct ControllerInputByteStateView *) (o + (i * 4)))->age = 0;
+            ((struct ControllerInputByteStateView *) (o + (i * 4)))->repeat = 0x30;
+            ((struct ControllerInputByteStateView *) (o + (i * 4)))->held = 0;
             i += 1;
         } while (i < 0x20);
         bit2 = ((g_controllerReadStatusBytes[type * 4] >> 3) ^ 1) & 1;
-        ((ControllerInputRenderView *)(o))->unk_D0 = 0;
-        ((ControllerInputRenderView *)(o))->unk_D4 = 0;
-        ((ControllerInputRenderView *)(o))->unk_0 = bit2;
+        ((ControllerInputRenderView *)(o))->pakAmount = 0;
+        ((ControllerInputRenderView *)(o))->pakTimer = 0;
+        ((ControllerInputRenderView *)(o))->connected = bit2;
         Rumble_InitPoolNodes(o + 0x140, o + 0x16C, 3);
     }
-    ((ControllerInputRenderView *)(o))->unk_0 = bit;
+    ((ControllerInputRenderView *)(o))->connected = bit;
 }
 
 void Control_UpdateControllerInput(ControllerProfile *state, s8 x, s8 y, u32 buttons) {

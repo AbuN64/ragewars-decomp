@@ -319,10 +319,10 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 allowTransition) {
         playerActor = Playerai_GetPlayerByIndex(&g_playerViewRenderContext, initializationIndex);
         if (playerActor != 0) {
             playerProfile = playerActor->profile;
-            if ((((struct LevelResourceLoadFlags *)playerProfile)->unk78 == 1) && (((struct LevelResourceLoadFlags *)playerProfile)->unk91 == 1)) {
+            if ((((struct LevelResourceLoadFlags *)playerProfile)->loadFlagFirst == 1) && (((struct LevelResourceLoadFlags *)playerProfile)->loadFlagSecond == 1)) {
                 Nav_ResetPlayerState(playerActor->controllerState);
             }
-            if ((((struct SceneSpecialActorModeView *)(&g_matchRoundCounters))->unk98) != 0) {
+            if ((((struct SceneSpecialActorModeView *)(&g_matchRoundCounters))->statusBarsEnabled) != 0) {
                 playerHudProfile = playerActor->profile;
                 statusBarKind = (((struct SceneStatusBarModeView *)(playerHudProfile))->statusBarMode);
                 if (statusBarKind != 0) {
@@ -331,7 +331,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 allowTransition) {
                     } else if (statusBarKind == 2) {
                         OnScreen_StartSecondStatusBar(&g_tutorialStatusBars, playerActor, &((struct SceneStatusBarModeView *)playerHudProfile)->address84);
                     }
-                    if (playerActor->profile->unk80 == 0xB) {
+                    if (playerActor->profile->characterKind == 0xB) {
                         OnScreen_StartFirstStatusBar(&g_tutorialStatusBars, playerActor, g_firstStatusBarTarget);
                     }
                 }
@@ -528,7 +528,7 @@ scene_size_done:
     resetCursor = &((struct SceneResourceStateView *)table)->selectionClearCursorAnchor;
     (((struct SceneResourceStateView *)(table))->selectedActorCount) = 0;
     do {
-        (((struct SceneSelectedActorSlotView *)(resetCursor))->unk1B664) = 0;
+        (((struct SceneSelectedActorSlotView *)(resetCursor))->selectedActor) = 0;
         actorIterationIndex -= 1;
         resetCursor -= 4;
     } while (actorIterationIndex >= 0);

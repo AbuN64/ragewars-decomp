@@ -5,7 +5,7 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #if defined(VERSION_US_REV1)
 extern s32 g_textureVariationBypassEnabled;
-extern char D_auto_00295B90;
+extern char addrLow_Textload_PrepareTextureVariation_us_rev1;
 extern char s_textureText[];
 #else
 extern char addrLow_Textload_PrepareTextureVariation;
@@ -18,10 +18,10 @@ static __inline__ void *rw_request_texture(s32 *resource, s32 variation, s32 wai
     if (g_textureVariationBypassEnabled == 0) {
         return Cache_RequestResource(0, resource[0] + variation + g_texturePaletteOverrideEnabled * 128,
                               resource[0], resource[1], 0, variation,
-                              &D_auto_00295B90, s_textureText, wait);
+                              &addrLow_Textload_PrepareTextureVariation_us_rev1, s_textureText, wait);
     }
     return Cache_RequestResource(0, resource[0] - 1, resource[0], resource[1],
-                          0, -1, &D_auto_00295B90, s_textureText, wait);
+                          0, -1, &addrLow_Textload_PrepareTextureVariation_us_rev1, s_textureText, wait);
 #else
     return Cache_RequestResource(0, resource[0] + variation + g_texturePaletteOverrideEnabled * 128,
                           resource[0], resource[1], 0, variation,
@@ -36,10 +36,10 @@ static __inline__ void **rw_request_texture_sync(s32 *resource, s32 variation)
     if (g_textureVariationBypassEnabled == 0) {
         return Cache_RequestResource(0, resource[0] + variation + g_texturePaletteOverrideEnabled * 128,
                               resource[0], resource[1], 0, variation,
-                              &D_auto_00295B90, s_textureText, 1);
+                              &addrLow_Textload_PrepareTextureVariation_us_rev1, s_textureText, 1);
     }
     return Cache_RequestResource(0, resource[0] - 1, resource[0], resource[1],
-                          0, -1, &D_auto_00295B90, s_textureText, 1);
+                          0, -1, &addrLow_Textload_PrepareTextureVariation_us_rev1, s_textureText, 1);
 #else
     return Cache_RequestResource(0, resource[0] + variation + g_texturePaletteOverrideEnabled * 128,
                           resource[0], resource[1], 0, variation,

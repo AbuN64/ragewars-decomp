@@ -16,6 +16,6 @@
 void PAKInterface_RestoreSavePacket(s32 index) {
     s32 offset = index * 2920;
 
-    XPlus_CopyBytes(&((PakSavePacketView *)((offset + (s32) g_pakProfileScreenState)))->unk_70, &g_pakProfileScreenState->packet, 0x640);
-    ((struct IntegerStateBC0 *) ((char *)g_pakProfileScreenState + offset))->unk_BBC = g_pakProfileScreenState->packet.savedProfile;
+    XPlus_CopyBytes(&((PakSavePacketView *)((offset + (s32) g_pakProfileScreenState)))->savePacketStart, &g_pakProfileScreenState->packet, 0x640);
+    ((struct IntegerStateBC0 *) ((char *)g_pakProfileScreenState + offset))->savedProfile = g_pakProfileScreenState->packet.savedProfile;
 }

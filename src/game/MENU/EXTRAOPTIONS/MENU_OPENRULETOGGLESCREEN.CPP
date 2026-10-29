@@ -10,7 +10,7 @@ INCLUDE_ASM("ovl_frontendMenu", Menu_OpenRuleToggleScreen);
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 /* Fuzzy draft in EU and EU-X: their body differs. */
-/* Opens the options screen: allocates its 0x3C-byte state into g_extraOptionsScreen for window arg0, builds
+/* Opens the options screen: allocates its 0x3C-byte state into g_extraOptionsScreen for window window, builds
    its title, heading and the four toggle buttons 0x3B4, 0x3B1, 0x3AD and 0x3AF set from bits of
    g_gameSettings, creates the item list and refreshes the limit markers through Menu_RefreshExtraOptionLocks. */
 
@@ -85,9 +85,9 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
 
     SmpButton_WrapButtonWidget(ID(0x3AC));
     g_extraOptionsScreen->cursor = (OptionsOpenItem *) Node_FindWidgetByResourceId(window, ID(0x3B7));
-    g_extraOptionsScreen->unk_28 = 0;
-    g_extraOptionsScreen->unk_2C = 0;
-    g_extraOptionsScreen->unk_34 = 1;
+    g_extraOptionsScreen->length = 0;
+    g_extraOptionsScreen->mode = 0;
+    g_extraOptionsScreen->open = 1;
     /* the hub publishes the list builder as returning the word naming the list; the member stores it */
     g_extraOptionsScreen->list = (void *) SmpFlicker_CreateFlickerWidget(ID(0x3AA), 0x6E);
     Menu_RefreshExtraOptionLocks();

@@ -303,7 +303,7 @@ s32 Scene_TestNearbyActiveActor(struct SceneNearestActorView *actor, CVector3 *r
     return magnitude <= g_sceneImageVectorTolerance;
 }
 
-/* Reports whether arg1 is within range of actor, using its type and state to pick the check. */
+/* Reports whether rightVector is within range of actor, using its type and state to pick the check. */
 
 s32 Scene_ClassifyNearbySpecialActor(NearbySpecialActorView *player, CVector3 *rightVector) {
     CVector3 delta;

@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "FRONTEND/PAKINTERFACE_LOADLINKEDPLAYERPROFILE.H"
 
-/* Copies the block's chosen 400-byte record for the place at slot arg0 into g_localPlayerProfiles[arg0]: when
+/* Copies the block's chosen 400-byte record for the place at slot linkIndex into g_localPlayerProfiles[linkIndex]: when
    the place is claimed (id != -1), copies the owning player's chosen slot into the record and marks
    the record's owned-slot byte, then always stamps the record's place-id byte. */
 

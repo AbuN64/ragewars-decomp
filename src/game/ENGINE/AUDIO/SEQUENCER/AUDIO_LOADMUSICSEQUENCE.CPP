@@ -81,6 +81,6 @@ void Audio_DisableMusicGainOverride(Track *track) {
 
 s32 alCSPStop(s32);
 void Audio_StopMusic(s32 a) {
-    (((struct MusicStopState *) ((s8 *) a))->unk_28) = -1;
-    alCSPStop((((struct MusicStopState *) ((s8 *) a))->unk_14));
+    (((struct MusicStopState *) ((s8 *) a))->stopSentinel) = -1;
+    alCSPStop((((struct MusicStopState *) ((s8 *) a))->sequencePlayer));
 }

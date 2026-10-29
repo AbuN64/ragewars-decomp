@@ -267,7 +267,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
         {
             gSPTextureL(g_displayListCursor++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
         }
-    } else if ((desc->flags & 0x400) && desc->fade->unkE != 4) {
+    } else if ((desc->flags & 0x400) && desc->fade->modeSelector != 4) {
         Geometry_SetModePreset(0xF);
     } else if (desc->flags & 0x4000) {
         Geometry_SetModePreset(!(g_gameSettings & 0x200) ? 0xD : 0x11);

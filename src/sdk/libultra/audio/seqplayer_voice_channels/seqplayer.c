@@ -68,7 +68,7 @@ s16 __vsVol(ALVoiceState *vs, ALSeqPlayer *seqp)
     return (s16)t1;
 }
 
-/** Clamp (record - arg1) at a lower bound of 0x3E8 for negative results. */
+/** Clamp (record - currentTime) at a lower bound of 0x3E8 for negative results. */
 int __vsDelta(void *voiceObject, int currentTime) {
     struct ALVoiceState *voice = voiceObject;
     int v = voice->envEndTime - currentTime;

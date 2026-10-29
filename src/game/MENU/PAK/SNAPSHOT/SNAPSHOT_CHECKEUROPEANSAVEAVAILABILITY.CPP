@@ -158,7 +158,7 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
     error = Note_NeedsIdRepair(g_introSelectedItem);
     if (error == 0) {
         SetN64_CommitSessionInputs((s32) &g_gameSession);
-        if ((menu->slot->unkB0 & 0x1000) && (g_pakStartButtonLatched == 0)) {
+        if ((menu->slot->inputFlags & 0x1000) && (g_pakStartButtonLatched == 0)) {
             g_pakRequestLatched = 1;
             g_pakStartButtonLatched = 1;
         }
@@ -302,6 +302,6 @@ void Snapshot_BeginSnapshotSave(Shared_PakMenu *menu) {
     if (Note_IsChannelReady(channel)) {
         Menu_OpenDialog(player->owner + 0x554, g_pakDialogDamagedPak, (s32)player, (s32)player->controller, 1);
     } else if (Note_NeedsIdRepair(channel)) {
-        Menu_OpenDialog(&g_matchEndingTeamWheelClose, &g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability, (s32)player, (s32)player->controller, (s32)D_0044E4D4);
+        Menu_OpenDialog(&g_matchEndingTeamWheelClose, &g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability, (s32)player, (s32)player->controller, (s32)g_pakAlternateReadyDialogResource);
     }
 }

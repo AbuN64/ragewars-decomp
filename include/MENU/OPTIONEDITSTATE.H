@@ -15,21 +15,21 @@ struct OptionsPakAdjustPackedButtonOption {
 struct OptionEditState;
 struct OptionEditState {
     char p[20];
-    s32 *unk_14;
+    s32 *textAddressPointer;
     char q[4];
-    struct OptionEditState *unk_1C;
-    s32 unk_20;
+    struct OptionEditState *selectedObject;
+    s32 controller;
     char r[52];
-    s32 unk_58;
+    s32 modelIndex;
     char a[1408];
-    struct OptionEditState *unk_5DC;
+    struct OptionEditState *modelOwner;
 };
 
 struct OptionEditContext;
 struct ActorAnimationEventTable;
 struct OptionEditContext {
     char pad0[0x8];
-    struct ActorAnimationEventTable unk_8;
+    struct ActorAnimationEventTable modelRecords;
 };
 
 

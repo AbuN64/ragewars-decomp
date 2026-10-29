@@ -4,7 +4,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
 
-/* Marks the pair ending at D_80154024 as set by storing one there, and stores its argument in the
+/* Marks the pair ending at g_selectionMessageReply.ready as set by storing one there, and stores its argument in the
    word before it; Random_SetSelectedStage fills the pair ending at g_selectedLevelId. */
 
 void Random_SetMenuChoiceResult(s32 value) {
@@ -15,7 +15,7 @@ void Random_SetMenuChoiceResult(s32 value) {
 }
 
 /* Stores a pair of words: the second argument in g_selectedLevelId and the first in the word before
-   it; Random_SetMenuChoiceResult does the same for the pair ending at D_80154024. */
+   it; Random_SetMenuChoiceResult does the same for the pair ending at g_selectionMessageReply.ready. */
 
 void Random_SetSelectedStage(s32 first, s32 second) {
     s32 *pair = &g_selectedLevelId;
@@ -140,7 +140,7 @@ void Random_InitGameStatus(f32 duration, s32 mode, s32 fragTagLimit, s32 otherLi
     s32 i;
     GameCounters()->m_FragTagLimit = fragTagLimit;
     GameCounters()->m_CTFPlayerWithFlag = 0;
-    GameCounters()->unk7C = otherLimit;
+    GameCounters()->otherLimit = otherLimit;
     GameCounters()->m_bFragTagOn = fragTagOn;
     GameCounters()->teams = teams;
     GameCounters()->m_bCTFOn = ctfOn;

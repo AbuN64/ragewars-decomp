@@ -89,7 +89,7 @@ extern void Actor_ApplySupportingPlatformMotion(SourceBarrelUpdateActorControlle
 extern void Actor_UpdateActorStateAnimation(SourceBarrelUpdateActorController *, DestBarrelUpdateActorController *);
 
 void Barrel_UpdateActorController(SourceBarrelUpdateActorController *src, DestBarrelUpdateActorController *dst) {
-    if ((dst->aux != 0) && (dst->aux->unkC == -1)) {
+    if ((dst->aux != 0) && (dst->aux->flagWord == -1)) {
         Barrel_StopActorLoopingSound();
     }
     if (dst->timer != 0) {

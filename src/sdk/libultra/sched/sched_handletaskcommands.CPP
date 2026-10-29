@@ -21,9 +21,9 @@ extern s32 g_resourceLoadPriorityBoost;
 extern void Scene_SetThreadPriority(void *priority, s32 pri);
 void __scYield(void *scheduler) {
     void *currentRspTask;
-    currentRspTask = (((struct SchedulerCurrentRspTaskView *) ((s8 *) scheduler))->unk_2F4);
-    if ((((struct SchedulerTaskFlagsView *) ((s8 *) currentRspTask))->unk_10) == 1) {
-        (((struct SchedulerTaskFlagsView *) ((s8 *) currentRspTask))->unk_4) = (s32) ((((struct SchedulerTaskFlagsView *) ((s8 *) currentRspTask))->unk_4) | 0x10);
+    currentRspTask = (((struct SchedulerCurrentRspTaskView *) ((s8 *) scheduler))->currentRspTask);
+    if ((((struct SchedulerTaskFlagsView *) ((s8 *) currentRspTask))->taskType) == 1) {
+        (((struct SchedulerTaskFlagsView *) ((s8 *) currentRspTask))->state) = (s32) ((((struct SchedulerTaskFlagsView *) ((s8 *) currentRspTask))->state) | 0x10);
         osSpTaskYield();
     }
 }

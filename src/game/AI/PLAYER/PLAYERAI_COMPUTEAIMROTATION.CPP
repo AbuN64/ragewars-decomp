@@ -22,7 +22,7 @@ static inline s32 Weapons_TargetShielded(TargetLockTargetView *target) {
     if (view == NULL) {
         return 0;
     }
-    return view->unk564 != 0;
+    return view->shieldActive != 0;
 }
 /* Checks whether the player's current weapon can lock onto the target. Kind 0 and 7 targets never lock. */
 s32 Playerai_CanLockTarget(TargetLockAttackerView *attacker, TargetLockTargetView *target) {

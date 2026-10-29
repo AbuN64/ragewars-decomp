@@ -6,26 +6,26 @@ unsigned int g_GEmactextEncodedWords[1] = {
     0x00000001,
 };
 
-/* DATA_800D2934.CPP */
+/* g_emacText.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-unsigned int rodata_unresolved_800D2934[7] = {
+unsigned int g_emacText[7] = {
     0x00000000, 0x00000000, 0x3FC00000, 0x00000000, 0x41700000, 0x0000FF00, 0x00000014,
 };
 #endif
 #if defined(VERSION_EU)
-unsigned short rodata_unresolved_800D2934[14] = {
+unsigned short g_emacText[14] = {
     0x0000, 0x0000, 0x0000, 0x0000, 0x3FC0, 0x0000, 0x0000, 0x0000, 0x4170, 0x0000, 0x0000, 0xFF00,
     0x8011, 0x00B0,
 };
 #endif
 #if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800D2934[7] = {
+unsigned int g_emacText[7] = {
     0x00000000, 0x00000000, 0x3FC00000, 0x00000000, 0x41700000, 0x0000FF00, 0x00000000,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800D2934[7] = {
+unsigned int g_emacText[7] = {
     0x00000000, 0x00000000, 0x3FC00000, 0x00000000, 0x41700000, 0x0000FF00, 0x4852494E,
 };
 #endif

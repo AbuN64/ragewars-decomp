@@ -136,10 +136,10 @@ s32 alResampleParam(void *resampler, s32 parameterId, s32 parameterValue) {
         *(s32 *)resampler = parameterValue;
         break;
     sw_message_4:
-        ((AudioReverbParameterStateView *)(node))->unk_20 = 0;
-        ((AudioReverbParameterStateView *)(node))->unk_24 = 1;
-        ((AudioReverbParameterStateView *)(node))->unk_30 = 0;
-        ((AudioReverbParameterStateView *)(node))->unk_1C = 0;
+        ((AudioReverbParameterStateView *)(node))->delta = 0;
+        ((AudioReverbParameterStateView *)(node))->first = 1;
+        ((AudioReverbParameterStateView *)(node))->motion = 0;
+        ((AudioReverbParameterStateView *)(node))->upitch = 0;
         target = *(void **)resampler;
         if (target != 0) {
             callback = ((struct CallbackStateC *) ((char *) target))->callback;
@@ -147,7 +147,7 @@ s32 alResampleParam(void *resampler, s32 parameterId, s32 parameterValue) {
         }
         break;
     sw_message_9:
-        ((AudioReverbParameterStateView *)(node))->unk_30 = 1;
+        ((AudioReverbParameterStateView *)(node))->motion = 1;
         target = *(void **)resampler;
         if (target != 0) {
             callback = ((struct CallbackStateC *) ((char *) target))->callback;
@@ -155,10 +155,10 @@ s32 alResampleParam(void *resampler, s32 parameterId, s32 parameterValue) {
         }
         break;
     sw_message_7:
-        ((AudioReverbParameterStateView *)(node))->unk_18 = parameterValue;
+        ((AudioReverbParameterStateView *)(node))->ratio = parameterValue;
         break;
     sw_message_8:
-        ((AudioReverbParameterStateView *)(node))->unk_1C = 1;
+        ((AudioReverbParameterStateView *)(node))->upitch = 1;
         break;
     sw_message_default:
         target = *(void **)resampler;

@@ -180,7 +180,7 @@ void GameObject_MoveToXZKeepHeight(Shared_ParticleInstance *actor, f32 x, f32 z)
     s32 keep;
     f32 height;
 
-    height = actor->pos.y - Region_GetPolygonHeight(actor->unk14, actor->pos.x, actor->pos.z);
+    height = actor->pos.y - Region_GetPolygonHeight(actor->region, actor->pos.x, actor->pos.z);
     saved = actor->velocity;
     actor->velocity.x = actor->velocity.y = actor->velocity.z = 0.0f;
     position.x = x;
@@ -190,5 +190,5 @@ void GameObject_MoveToXZKeepHeight(Shared_ParticleInstance *actor, f32 x, f32 z)
     Unicol_MoveActorWithCollision(actor, position, g_portalAlternateCollisionQuery.w);
     g_portalAlternateCollisionQuery.w[0] = keep;
     actor->velocity = saved;
-    actor->pos.y = Region_GetPolygonHeight(actor->unk14, actor->pos.x, actor->pos.z) + height;
+    actor->pos.y = Region_GetPolygonHeight(actor->region, actor->pos.x, actor->pos.z) + height;
 }

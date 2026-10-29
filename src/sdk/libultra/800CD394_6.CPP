@@ -6,7 +6,7 @@ struct {
     unsigned char b1[32];
     unsigned int w2[12];
     unsigned short h3[64];
-} D_auto_rodata_unresolved_800CCC64 = {
+} g_libultraByteLinkHalfwordTables = {
     {
         0x00000000, 0x00000000, 0x00000000,
     },

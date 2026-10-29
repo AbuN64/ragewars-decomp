@@ -186,7 +186,7 @@ void Channel_InitializeVoiceMix(Voice *voice, SoundDescriptor *control, s32 unus
         preset = Audio_GetMetadataSectionThreeEntry(voice->context, control->pitchPresetId);
         *(SoundEnvelope *)voice->envelope = *preset;
     } else {
-        envelope->flags = Menu_GetFloatHighWord((f32)control->fieldF);
+        envelope->flags = Menu_GetFloatHighWord((f32)control->envelopeFlag);
     }
     if (!(control->flags & 0x800) && voice->fixedPosition != 1 && voice->context->listenerCamera != 0) {
         minimumGain = (f32)gainRange[0] * g_voiceGainPercentScale;

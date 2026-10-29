@@ -115,7 +115,7 @@ done:
     return result;
 }
 
-/* Waits for bit 0 of the cartridge-domain status byte DEBUG_LINK_TRANSMIT_STATUS_BYTE to equal arg0, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after g_debugLinkRetryLimit retries of two polls each, setting g_debugLinkTransferFailed and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the timeout reload 0x4E20 changed to 1 and the mask held as a byte. */
+/* Waits for bit 0 of the cartridge-domain status byte DEBUG_LINK_TRANSMIT_STATUS_BYTE to equal expectedStatus, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after g_debugLinkRetryLimit retries of two polls each, setting g_debugLinkTransferFailed and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the timeout reload 0x4E20 changed to 1 and the mask held as a byte. */
 
 
 
@@ -152,7 +152,7 @@ done:
     return result;
 }
 
-/* Waits for bit 6 of the cartridge-domain status byte DEBUG_LINK_TRANSMIT_STATUS_BYTE to equal arg0, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after g_debugLinkRetryLimit retries of 0x4E21 polls each, setting g_debugLinkTransferFailed and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
+/* Waits for bit 6 of the cartridge-domain status byte DEBUG_LINK_TRANSMIT_STATUS_BYTE to equal expectedStatus, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after g_debugLinkRetryLimit retries of 0x4E21 polls each, setting g_debugLinkTransferFailed and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
 
 
 
@@ -189,7 +189,7 @@ done:
     return result;
 }
 
-/* Waits for bit 6 of the cartridge-domain status byte DEBUG_LINK_RECEIVE_STATUS_BYTE to equal arg0, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after g_debugLinkRetryLimit retries of 0x4E21 polls each, setting g_debugLinkTransferFailed and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
+/* Waits for bit 6 of the cartridge-domain status byte DEBUG_LINK_RECEIVE_STATUS_BYTE to equal expectedStatus, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after g_debugLinkRetryLimit retries of 0x4E21 polls each, setting g_debugLinkTransferFailed and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
 
 
 
@@ -226,7 +226,7 @@ done:
     return result;
 }
 
-/* Waits for bit 1 of the cartridge-domain status byte DEBUG_LINK_TRANSMIT_STATUS_BYTE to equal arg0, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after g_debugLinkRetryLimit retries of 0x4E21 polls each, setting g_debugLinkTransferFailed and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 1 and the expected value held as a byte. */
+/* Waits for bit 1 of the cartridge-domain status byte DEBUG_LINK_TRANSMIT_STATUS_BYTE to equal expectedStatus, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after g_debugLinkRetryLimit retries of 0x4E21 polls each, setting g_debugLinkTransferFailed and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 1 and the expected value held as a byte. */
 
 
 
@@ -485,15 +485,15 @@ s32 Libultra_ReadDebugLinkMemoryByte(void) {
 
 
 s32 Libultra_HandshakeDebugLink(void) {
-    u8 sp10;
+    u8 receivedByte;
     s32 result;
 
     Libultra_WriteDebugLinkByte(0x10);
     result = 0;
     if (g_debugLinkTransferFailed == 0) {
-        Libultra_ReadDebugLinkByte(&sp10);
+        Libultra_ReadDebugLinkByte(&receivedByte);
         if (g_debugLinkTransferFailed == 0) {
-            result = sp10 == 0x11;
+            result = receivedByte == 0x11;
         }
     }
     return result;

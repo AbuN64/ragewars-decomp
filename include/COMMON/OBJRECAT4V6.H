@@ -216,7 +216,7 @@ struct AudioVoiceControlSlotView {
     s32 index;
     s32 state;
     s32 used;
-    s32 fieldC;
+    s32 releaseMarker;
     s32 key;
     char pad14[0x24];
     s16 priority;
@@ -228,7 +228,7 @@ struct AudioVoiceControlSlotView {
     s32 value;
     s32 active;
     AudioSoundPlayerOwnerView *owner;
-    s32 fieldB4;
+    s32 releaseMarkerB;
     char padB8[0x14];
 };
 

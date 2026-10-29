@@ -63,21 +63,21 @@ void Gobjinst_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void 
     CVector3 turned;
     CVector3 target;
 
-    if (((ActorAnimationResourceView *)(actor))->unk_100 & 0x300000) {
+    if (((ActorAnimationResourceView *)(actor))->flags & 0x300000) {
         char *parent;
 
         offset.x = -offset.x;
         offset.z = -offset.z;
-        parent = ((struct ActorOwnerView *) ((ActorAnimationResourceView *) actor)->unk_1D8)->owner;
+        parent = ((struct ActorOwnerView *) ((ActorAnimationResourceView *) actor)->owner)->owner;
         if (parent != 0) {
             Graphu64_TransformPoint(parent + 0x160, &offset, &target);
         } else {
             Gobjinst_TransformVectorByActorAim(&turned, actor, offset);
-            Graphu64_AddVec3(&target, &((ActorAnimationResourceView *)(actor))->unk_8, &turned);
+            Graphu64_AddVec3(&target, &((ActorAnimationResourceView *)(actor))->position, &turned);
         }
     } else {
         Gobjinst_TransformVectorByActorAim(&turned, actor, offset);
-        Graphu64_AddVec3(&target, &((ActorAnimationResourceView *)(actor))->unk_8, &turned);
+        Graphu64_AddVec3(&target, &((ActorAnimationResourceView *)(actor))->position, &turned);
     }
     InstHdr_CopyActorPositionAndModel(actor, target, positionOut, modelOut, 1, 1);
 }
@@ -159,7 +159,7 @@ float Gobjinst_GetActorOffsetDefault(void) {
     return g_actorDefaultOffsetValue;
 }
 
-/** Thin wrapper forwarding arg0 and an offset of it to Barrel_UpdateActorController. */
+/** Thin wrapper forwarding base and an offset of it to Barrel_UpdateActorController. */
 void Gobjinst_UpdateActorController(void *base) {
     Barrel_UpdateActorController(base, (char *)base + 0x170);
 }

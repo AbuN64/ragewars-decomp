@@ -124,16 +124,16 @@ typedef struct ActorAnimationResourceView ActorAnimationResourceView;
 struct ActorAnimationResourceView;
 struct ActorAnimationResourceView {
     char pad0[0x8];
-    CVector3 unk_8;
+    CVector3 position;
     char pad14[0xC4 - 0x14];
     s32 resource;
     char padC8[8];
     s32 resourceFlags;
     char padD4[0x100 - 0xD4];
-    s32 unk_100;
+    s32 flags;
     f32 animationTime;
     char pad108[0x1D8 - 0x108];
-    char * unk_1D8;
+    char * owner;
 };
 
 struct ResourceLookupPointerView;
@@ -157,18 +157,18 @@ struct RecGobjinstSampleBoneTranslation;
 
 struct AnimInfo;
 struct AnimInfo {
-    char * unk_0;
+    char * boneIndexPairs;
     char pad0[0x4 - 0x0 - sizeof(char*)];
-    char * unk_4;
+    char * initialOrientations;
     void *translationFrames; /* 0x8 */
-    void * unk_C;
+    void * rotationFrames;
     char padC[0x10 - 0xC - sizeof(void*)];
-    s32 unk_10;
+    s32 rotationFirst;
     char pad10[0x14 - 0x10 - sizeof(s32)];
-    s32 unk_14;
+    s32 rotationNext;
     s32 translationFirst; /* 0x18 */
     s32 translationNext; /* 0x1C */
-    f32 unk_20;
+    f32 frameBlend;
 };
 
 

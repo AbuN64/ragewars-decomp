@@ -103,7 +103,7 @@ void Scene_CopyLevelName(Shared_World *world, s32 type, void *levelName, s32 max
     resourceKey = SetN64_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, type);
     levelIndexHandle = Cache_RequestWordCountedResourcePinned(0, &specialTable, resourceKey, g_levelIndexText);
     node = Cache_RequestPackSection(0, specialTable, 8, resourceKey, (s32)world, 0, &g_sceneLevelNameRequestTagDe + 4);
-    count = node->unk04;
+    count = node->dataSize;
     if (maximumBytes < count) {
         count = maximumBytes;
     }
@@ -115,7 +115,7 @@ void Scene_CopyLevelName(Shared_World *world, s32 type, void *levelName, s32 max
 }
 
 void *Scene_GetBlLevelData(void *world, s32 record) {
-    s32 sp28;
+    s32 sectionSize;
     void **resource;
     s32 key;
     s32 size;
@@ -132,10 +132,10 @@ void *Scene_GetBlLevelData(void *world, s32 record) {
                                      g_sceneResourceRequestSpareDe, one);
             if (resource != 0) {
                 key = SetN64_LocatePackSection((s32)*resource, ((struct WorldResourceKeyView *)(world))->value,
-                                    record, &sp28);
+                                    record, &sectionSize);
                 Cache_ReleaseResource(0, resource);
                 if ((((struct WorldResourceHandleView *)(world))->value =
-                     Cache_RequestResource(0, key, key, sp28, size, 0,
+                     Cache_RequestResource(0, key, key, sectionSize, size, 0,
                                    &g_cResource_UnpackRequestEntry, g_sceneUnpackRequestSpare, one)) != 0) {
                     ((struct WorldTrackedRecordView *)(world))->value = record;
                 } else {
@@ -244,8 +244,8 @@ s32 Scene_GetLevelActorIndex(void *container, void *actorStorage) {
 }
 
 void Scene_FindSelectedTriggerRange(char *world, s32 useAlternateRecords, s32 group, s32 *recordsOutput, s32 *countOutput) {
-    s32 sp18;
-    s32 sp1C;
+    s32 firstRecordIndex;
+    s32 lastRecordIndex;
     s32 recordIndex;
     s32 recordCount;
     s32 offset;
@@ -257,14 +257,14 @@ void Scene_FindSelectedTriggerRange(char *world, s32 useAlternateRecords, s32 gr
         recordIndex = (s32)((Shared_World *)world)->recordIndex;
         recordCount = ((Shared_World *)world)->recordCount;
     }
-    if (Defs_FindSortedGroupRange(recordIndex, recordCount, group, &sp18, &sp1C) != 0) {
-        offset = sp18 * 0x14;
+    if (Defs_FindSortedGroupRange(recordIndex, recordCount, group, &firstRecordIndex, &lastRecordIndex) != 0) {
+        offset = firstRecordIndex * 0x14;
         if (useAlternateRecords != 0) {
             *recordsOutput = (s32)((Shared_World *)world)->alternateRecordArray + offset;
         } else {
             *recordsOutput = (s32)((Shared_World *)world)->recordArray + offset;
         }
-        *countOutput = (sp1C - sp18) + 1;
+        *countOutput = (lastRecordIndex - firstRecordIndex) + 1;
     } else {
         *recordsOutput = 0;
         *countOutput = 0;
@@ -283,8 +283,8 @@ void Scene_UnlockActiveSectionResources(OwnerSceneUnlockActiveSectionResources *
         Cache_UnlockResource(0, entries[i].x);
     }
     count = owner->count;
-    owner->unk944 = 0;
-    owner->unkC4C = 0;
+    owner->reservedWord944 = 0;
+    owner->reservedWordC4C = 0;
     owner->activeResourceCount = 0;
     owner->count = 0;
     owner->prevCount = count;

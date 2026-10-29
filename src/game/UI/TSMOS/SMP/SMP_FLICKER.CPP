@@ -255,7 +255,7 @@ MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int own
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_flickerWidgetEventIds, an actor kind at g_flickerWidgetEventActorKinds and a handler at g_flickerWidgetEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_flickerWidgetEventIds, an actor kind at g_flickerWidgetEventActorKinds and a handler at g_flickerWidgetEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -268,7 +268,7 @@ MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int own
 
 
 void SmpFlicker_EnableFlicker(struct StateBlock *object) {
-    object->unk84 = 1;
+    object->flickerPending = 1;
 }
 
 /* Copies the byte at offset 0x83 of an object into offset 0x10 of the object at 0x78, and clears

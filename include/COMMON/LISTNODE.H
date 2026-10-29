@@ -201,7 +201,7 @@ struct EntryAudioWorldDispatchPendingSounds {
     s16 pad46;
     s32 sequence;
     char pad4C[0xA8 - 0x4C];
-    s32 fieldA8;
+    s32 reservedWordA8;
 };
 
 struct AudioQueuedSoundNode;

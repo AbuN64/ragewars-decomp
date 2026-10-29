@@ -23,13 +23,13 @@ typedef struct PakCancelActionView PakCancelActionView;
 
 struct FrontendVideoModeParameters;
 struct FrontendVideoModeParameters {
-    int field_0;
-    int field_4;
-    int field_8;
-    int field_C;
-    int field_10;
-    int field_14;
-    int field_18;
+    int width;
+    int viewportHeight;
+    int offsetX;
+    int offsetY;
+    int borderX;
+    int borderY;
+    int reservedWord;
 };
 
 extern int g_frontendVideoModeCounts[];
@@ -60,9 +60,9 @@ struct FrontendScreenViewport {
 struct PakCancelActionView;
 struct PakCancelActionView {
     char a[0x1C];
-    ActorOwnerView *unk1C;
-    s32 unk20;
-    s32 unk24;
+    ActorOwnerView *player;
+    s32 controller;
+    s32 dialogList;
 };
 
 

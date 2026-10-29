@@ -61,10 +61,10 @@ static inline void spawn(LevelActor *actor) {
 void Gobjinst_DrawActorModelWithViewEffects(FadedActorRenderView *actor, void *context, Lookup *lookup) {
     s32 one;
 
-    if (lookup->unk4 != 0) {
+    if (lookup->drawShadow != 0) {
         GameObject_DrawActorShadow(actor, context, lookup);
     }
-    if (lookup->unk0 != 0) {
+    if (lookup->drawModel != 0) {
         one = 1;
         Geometry_DrawModelResource(lookup->value, actor->animation, one,
                       &actor->lighting[g_lightingBufferIndex],
@@ -122,10 +122,10 @@ void Gobjinst_DrawBlendPartsWithViewEffects(TintedPlayerRenderActor *actor, s32 
     f32 scale;
     s32 *node;
 
-    if (params->unk4 != 0) {
+    if (params->drawShadow != 0) {
         GameObject_DrawActorShadow(actor, animationContext, params);
     }
-    if (params->unk0 != 0) {
+    if (params->drawModel != 0) {
         Geometry_DrawBlendParts(params->value, drawView, actor->poseMatrices, 1, &actor->blocks[g_lightingBufferIndex], 0, actor->renderVariant);
         if (Geometry_GetViewEffect() != 0) {
             node = SetN64_GetPackSection(*params->value, 2);

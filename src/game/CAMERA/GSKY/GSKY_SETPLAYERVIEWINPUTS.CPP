@@ -6,7 +6,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 
-/* Stores its parameters into the object at arg0 offsets 0x24 through 0x60, then refreshes the object's ground reference and picks its surface value at 0x64 from the ground under it. Adapted from Gsky_UpdateFloorSurface with the parameter block stores added and the k_cameraInputSurfaceDistanceScale thresholds changed. */
+/* Stores its parameters into the object at camera offsets 0x24 through 0x60, then refreshes the object's ground reference and picks its surface value at 0x64 from the ground under it. Adapted from Gsky_UpdateFloorSurface with the parameter block stores added and the k_cameraInputSurfaceDistanceScale thresholds changed. */
 
 
 

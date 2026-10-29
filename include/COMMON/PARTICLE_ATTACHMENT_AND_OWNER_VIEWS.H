@@ -41,13 +41,13 @@ struct ParticleObjectLinkView;
 struct ParticleObjectLinkView {
     s8 kind;
     unsigned char padding_1[23];
-    s32 *unk_18;
+    s32 *actorDefinition;
     unsigned char padding_1C[64];
-    s32 unk_5C;
+    s32 flags;
     unsigned char padding_60[380];
-    s32 unk_1DC;
+    s32 reservedWord1DC;
     unsigned char padding_1E0[4];
-    s32 unk_1E4;
+    s32 reservedWord1E4;
 };
 
 struct TrailActor;
@@ -70,9 +70,9 @@ struct ParamsParticleInitializeAttachmentsAndSound {
 struct ParticleKindFlagsView;
 struct ParticleKindFlagsView {
     unsigned char padding_0[4];
-    u16 unk_4;
+    u16 modelId;
     unsigned char padding_6[86];
-    s32 unk_5C;
+    s32 flags;
 };
 
 struct ObjParticleInitializeAttachmentsAndSound;

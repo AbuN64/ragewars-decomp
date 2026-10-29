@@ -122,7 +122,7 @@ void Nav_InitRoamingWithJumps(Shared_Actor *actorStorage)
 {
     void *actor = ((Shared_ActorView *)(actorStorage->entity))->owner;
 
-    ((NavigationBrainView *)(actor))->unk220 = 0;
+    ((NavigationBrainView *)(actor))->state = 0;
     {
         void *data = ((Shared_ActorView *)(*(void **)actor))->controls;
         if (((PlayerProfileStatusView *)(data))->display && ((PlayerProfileStatusView *)(data))->kind == 12) {

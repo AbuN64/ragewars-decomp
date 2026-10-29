@@ -20,7 +20,7 @@ struct PakPlayerPanelView {
 struct PakSavePacketView;
 struct PakSavePacketView {
     char pad0[0x70];
-    char unk_70;
+    char savePacketStart;
 };
 
 
@@ -92,7 +92,7 @@ extern int g_pakProfileRequestedPhase;
 struct IntegerStateBC0;
 struct IntegerStateBC0 {
     unsigned char padding_0[3004];
-    s32 unk_BBC;
+    s32 savedProfile;
 };
 
 extern float g_pakPanelPulseUnsignedThreshold;

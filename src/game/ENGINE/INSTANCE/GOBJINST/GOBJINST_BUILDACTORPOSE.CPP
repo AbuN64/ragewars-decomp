@@ -119,8 +119,8 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         turn.x = cur[3][0];
         turn.y = cur[3][1];
         turn.z = cur[3][2];
-        axis = part->unk_18;
-        angle = g_boneTwistImpulseCurve[0x19 - part->unk_12] * 0.5f;
+        axis = part->twistAxis;
+        angle = g_boneTwistImpulseCurve[0x19 - part->twistStep] * 0.5f;
         angle *= 0.3f;
         angle *= (n == 5 ? -2.0f : (f32)n);
         CopyMatrix(inv, cur);
@@ -130,8 +130,8 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         Graphu64_MultiplyAffineMatrices(cur, inv, rotm);
         Graphu64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(cur, turn.x, turn.y, turn.z);
-        if (part->unk_14[0] == i) {
-            part->unk_12--;
+        if (part->twistJoints[0] == i) {
+            part->twistStep--;
         }
     }
 }
@@ -306,15 +306,15 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
     ret = 0;
     isRoot = actor->flags & 1;
     isKind9 = actor->model->kind == 9;
-    mem = Cache_RequestResource(0, actor->unk_C8, actor->unk_C8, ((actor->unk_E6 * 4) + 0xF) & ~7, 4, 0, 0, &g_actorRotationBlendAndResourceTuning + 4, 0);
+    mem = Cache_RequestResource(0, actor->animationResourceId, actor->animationResourceId, ((actor->animationResourceUnits * 4) + 0xF) & ~7, 4, 0, 0, &g_actorRotationBlendAndResourceTuning + 4, 0);
     skip = ret;
     if (mem != 0) {
         animA = &actor->animA;
         animB = &actor->animB;
-        Gastate_SwitchRequestedAnimation(animA, *mem, actor->unk_C8, 0, 0, 0);
+        Gastate_SwitchRequestedAnimation(animA, *mem, actor->animationResourceId, 0, 0, 0);
         if (Gastate_IsAnimationResourceRetained(animA)) {
             if (actor->flags & 0x400) {
-                Gastate_SwitchRequestedAnimation(animB, *mem, actor->unk_C8, 0, 0, 0);
+                Gastate_SwitchRequestedAnimation(animB, *mem, actor->animationResourceId, 0, 0, 0);
                 f.blend = Gastate_IsAnimationResourceRetained(animB);
             } else {
                 f.blend = 0;
@@ -357,7 +357,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                     f.frame = 0;
                 }
             }
-            if (!Cinema_IsSequenceInWindow() && ((animA->unk_B == 0 && animB->unk_B == 0) || kind == 1)) {
+            if (!Cinema_IsSequenceInWindow() && ((animA->activeFlag == 0 && animB->activeFlag == 0) || kind == 1)) {
                 f.mode = 0;
             } else {
                 f.mode = 1;
@@ -422,13 +422,13 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                     trackPos(&tracks[1], i, &posB);
                     trackRot(&tracks[1], i, &rotB, f.mode);
                     {
-                        f32 t = actor->unk_130;
+                        f32 t = actor->blendFactor;
 
                         trans.x = posB.x + t * (posA.x - posB.x);
                         trans.y = posB.y + t * (posA.y - posB.y);
                         trans.z = posB.z + t * (posA.z - posB.z);
                     }
-                    Graphu64_InterpolateQuaternionArc(&rot, actor->unk_130, &rotB, &rotA);
+                    Graphu64_InterpolateQuaternionArc(&rot, actor->blendFactor, &rotB, &rotA);
                 } else {
                     trans = posA;
                     rot = rotA;
@@ -442,33 +442,33 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                     ((PoseCallback)actor->callback)(m, &ctx);
                 }
                 Graphu64_MultiplyAffineMatrices(*cur, m, *parent);
-                if (actor->part.unk_12) {
+                if (actor->part.twistStep) {
                     s32 n = 0;
-                    if (actor->part.unk_14[0] == i) {
+                    if (actor->part.twistJoints[0] == i) {
                         n = 4;
                     }
-                    if (actor->part.unk_14[1] == i) {
+                    if (actor->part.twistJoints[1] == i) {
                         n = 3;
                     }
-                    if (actor->part.unk_14[2] == i) {
+                    if (actor->part.twistJoints[2] == i) {
                         n = 2;
                     }
-                    if (actor->part.unk_14[3] == i) {
+                    if (actor->part.twistJoints[3] == i) {
                         n = 1;
                     }
                     if (n != 0 && actor->callback != 0) {
                         twistPart(&actor->part, *cur, n, i);
                     }
-                } else if (i != 0 && world != 0 && world->unk_1218 != 0 && ctx.part != 0 &&
+                } else if (i != 0 && world != 0 && world->impactTwistPending != 0 && ctx.part != 0 &&
                            ctx.part->u.f.kind == 1 && ctx.part->u.f.sway == 0) {
-                    if ((actor->flags & 0x1000000) && actor->unk_B8 != 0) {
+                    if ((actor->flags & 0x1000000) && actor->boneMatrixData != 0) {
                         PoseMatrix bone;
                         CVector3 r = randVec();
 
-                        Graphu64_ConvertMatrixToFloat(bone, actor->unk_B8 + i * 64);
+                        Graphu64_ConvertMatrixToFloat(bone, actor->boneMatrixData + i * 64);
                         Gobjinst_ApplyImpactBoneTwist(actor, &actor->part, bone, actor->pos, r, i);
                     }
-                    world->unk_1218 = 0;
+                    world->impactTwistPending = 0;
                 }
                 if (actor->flags & 0x800000) {
                     Gobjinst_ApplyTimedMatrixWobble(actor, partFlags, *cur);
@@ -517,37 +517,37 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
             Gastate_ReleaseAnimationResource(animA);
             switch (kind) {
                 case 4:
-                    actor->unk_70 = actor->model->unk_38;
+                    actor->verticalOffset = actor->model->verticalOffset;
                     break;
                 case 1:
                 case 11: {
                     f32 h = Gobjinst_GetActorHeight(actor);
 
-                    actor->unk_70 = mtx[1][3][1] * (1.0f / 65536.0f) - actor->pos.y - h * 0.5f;
-                    if (actor->unk_70 < 0.0f) {
-                        actor->unk_70 = 0.0f;
+                    actor->verticalOffset = mtx[1][3][1] * (1.0f / 65536.0f) - actor->pos.y - h * 0.5f;
+                    if (actor->verticalOffset < 0.0f) {
+                        actor->verticalOffset = 0.0f;
                     }
                     if ((actor->flags & 0x20000000) && actor->surface != 0 && (actor->surface->flags & 0x40)) {
                         f32 ground = Graphu64_GetTrianglePlaneHeight(actor->surface, actor->pos.x, actor->pos.z);
-                        f32 d = actor->pos.y + actor->unk_70 + h;
+                        f32 d = actor->pos.y + actor->verticalOffset + h;
 
                         d -= ground;
 
                         if (d > 0.0f) {
                             mtx[1][3][1] -= d * 65536.0f;
-                            actor->unk_70 -= d;
+                            actor->verticalOffset -= d;
                         }
                     }
                     break;
                 }
                 default:
-                    actor->unk_70 = 0.0f;
+                    actor->verticalOffset = 0.0f;
                     break;
             }
-            if (actor->unk_2E0 != 0) {
-                s32 bit = 1 << actor->unk_1;
+            if (actor->attachmentEffectsFlag != 0) {
+                s32 bit = 1 << actor->partBitIndex;
 
-                if (actor->part.unk_C & bit) {
+                if (actor->part.effectPartMask & bit) {
                     Shared_PosePartTable *table = SetN64_GetPackSection(modelPack, 3);
                     s32 n = table->count;
 
@@ -563,9 +563,9 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
             }
             if (!(actor->flags & 8)) {
                 pos = actor->pos;
-                pos.y += actor->unk_70;
+                pos.y += actor->verticalOffset;
                 pos.y += Gobjinst_GetActorHeight(actor) * 0.5f;
-                Scene_SampleWorldLighting(&g_world, &pos, actor->unk_140[g_lightingBufferIndex]);
+                Scene_SampleWorldLighting(&g_world, &pos, actor->sampledLighting[g_lightingBufferIndex]);
             }
             ret = 1;
             actor->flags |= 0x200;

@@ -69,17 +69,17 @@ void Scene_FreeSceneResources(SceneResourceOwnerView *sceneToFree) {
     SoundVoicePool_StopAll(SoundVoicePool_GetGlobalState());
     SoundElement_ClearVoiceFlags();
     SoundElement_StopAudioByMask(0x1000);
-    Cache_ReleaseResource(NULL, sceneToFree->unk100);
-    Cache_ReleaseResource(NULL, sceneToFree->unkB8);
-    Cache_ReleaseResource(NULL, sceneToFree->unkBC);
-    Cache_ReleaseResource(NULL, sceneToFree->unkC0);
-    Cache_ReleaseResource(NULL, sceneToFree->unkC4);
-    Cache_ReleaseResource(NULL, sceneToFree->unkC8);
-    Cache_ReleaseResource(NULL, sceneToFree->unkD0);
-    Cache_ReleaseResource(NULL, sceneToFree->unkD4);
-    Cache_ReleaseResource(NULL, sceneToFree->unkEC);
-    Cache_ReleaseResource(NULL, sceneToFree->unkCC);
-    Cache_ReleaseResource(NULL, sceneToFree->unkE8);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle11);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle1);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle2);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle3);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle4);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle5);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle7);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle8);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle10);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle6);
+    Cache_ReleaseResource(NULL, sceneToFree->sceneResourceHandle9);
     firstOptionalResource = sceneToFree->firstOptionalResource;
     if (firstOptionalResource != NULL) {
         Cache_ReleaseResource(NULL, firstOptionalResource);

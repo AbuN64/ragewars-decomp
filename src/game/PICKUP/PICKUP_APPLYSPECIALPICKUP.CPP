@@ -150,7 +150,7 @@ struct Shared_FullPlayerMenuGlobals {
     struct SpecialPickupLinkedPlayerView * entries; /* +0x0: player records */
     s32 count; /* +0x4 */
     u8 pad8[0x14];
-    struct SpecialPickupLinkedPlayerView * players; /* +0x1C: active players, linked through unk16E0 */
+    struct SpecialPickupLinkedPlayerView * players; /* +0x1C: active players, linked through nextPlayer */
     u8 pad20[0x24];
     union {
         MenuMatchGlobals match; /* +0x44: g_frontendScreenStatus */
@@ -223,7 +223,7 @@ typedef Shared_FullPlayerMenuGlobals FullPlayerMenuGlobals;
 #define PICKUP_CONTEXT (&g_frontendScreenStatus)
 #define PICKUP_TEXT(table) ((table)[0])
 #endif
-/* Special pickup handler; arg1 is the pickup row (text per language, id, sound, event). The id selects the effect:
+/* Special pickup handler; pickupRow is the pickup row (text per language, id, sound, event). The id selects the effect:
    match-mode switches (0xBD6, 0xBD7, which tells every other player), a random reaction (0xBD8: one of 13 flags
    with its tint, duration and message), level progress (0x1389, 0x138A) and health or ammunition bonuses
    (0x1398..0x13C1). A handled pickup then flashes the view, posts the row text, plays its sound and raises its

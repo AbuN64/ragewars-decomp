@@ -8,8 +8,8 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/STATERECAT34.H"
 struct HeapArena_Heap {
-    s32 unk0;
-    s32 unk4;
+    s32 reservedWord0;
+    s32 reservedWord4;
     struct HeapArenaBlock *head;
     struct HeapArenaBlock *tail;
     struct HeapArenaBlock *anchor;

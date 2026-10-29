@@ -91,7 +91,7 @@ s32 Option_ToggleOptionBit2(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x4 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x4 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit2EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit2DisabledText otherwise; returns zero. */
 
@@ -119,7 +119,7 @@ s32 Option_ToggleOptionBit3(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x8 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x8 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit3EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit3DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -147,7 +147,7 @@ s32 Option_ToggleOptionBit4(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x10 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x10 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit4EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit4DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -175,7 +175,7 @@ s32 Option_ToggleOptionBit5(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x20 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x20 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit5EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit5DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -203,7 +203,7 @@ s32 Option_ToggleOptionBit6(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x40 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x40 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit6EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit6DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -231,7 +231,7 @@ s32 Option_ToggleOptionBit7(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x80 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x80 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit7EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit7DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -259,7 +259,7 @@ s32 Option_ToggleOptionBit8(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x100 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x100 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit8EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit8DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -287,7 +287,7 @@ s32 Option_ToggleOptionBit9(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x200 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x200 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit9EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit9DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -315,7 +315,7 @@ s32 Option_ToggleOptionBit10(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x400 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x400 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit10EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit10DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -343,7 +343,7 @@ s32 Option_ToggleOptionBit11(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x800 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x800 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit11EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit11DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -371,7 +371,7 @@ s32 Option_ToggleOptionBit12(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x1000 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x1000 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit12EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit12DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -399,7 +399,7 @@ s32 Option_ToggleOptionBit13(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x2000 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x2000 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit13EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit13DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -427,7 +427,7 @@ s32 Option_ToggleOptionBit14(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x4000 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x4000 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit14EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit14DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 
@@ -455,7 +455,7 @@ s32 Option_ToggleOptionBit15(void) {
     return 0;
 }
 
-/* Refreshes option item arg0 from bit 0x8000 of the option words: the item's flag 0x1000000 at 0x8
+/* Refreshes option item item from bit 0x8000 of the option words: the item's flag 0x1000000 at 0x8
    follows the bit in g_menuOptionAvailabilityFlags, and its text pointer at 0x14 becomes g_menuOptionBit15EnabledText when the bit is
    set in g_gameSettings and g_menuOptionBit15DisabledText otherwise; returns zero. Adapted from Option_UpdateOptionBit2Item with the bit changed. */
 

@@ -130,22 +130,22 @@ void Playerai_SetRunEndFlag(struct SharedPlayer *player) {
 void Playerai_UpdateRunEndTransition(void *runEndPlayer)
 {
   f32 elapsedTime;
-  elapsedTime = ((PlayerSequenceRunEndActorView *)(runEndPlayer))->unk_658;
+  elapsedTime = ((PlayerSequenceRunEndActorView *)(runEndPlayer))->poseTimer;
   if (g_playerRunEndTransitionDelay < elapsedTime)
   {
-    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->unk_13C8 = 1;
-    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->unk_1238 = -1;
-    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->unk_1230 = 0;
-    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->unk_122C = (((PlayerSequenceRunEndActorView *)(runEndPlayer))->unk_122C) & (~0x20);
+    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->overkill = 1;
+    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->tintMode = -1;
+    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->tintTime = 0;
+    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->reactionFlags = (((PlayerSequenceRunEndActorView *)(runEndPlayer))->reactionFlags) & (~0x20);
     Player_UpdateRunEndPlayer(runEndPlayer);
-    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->unk_50 = g_playerRunEndModelScale;
-    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->unk_54 = g_playerRunEndModelScale;
-    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->unk_58 = g_playerRunEndModelScale;
+    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->scaleX = g_playerRunEndModelScale;
+    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->scaleY = g_playerRunEndModelScale;
+    ((PlayerSequenceRunEndActorView *)(runEndPlayer))->scaleZ = g_playerRunEndModelScale;
     return;
   }
   ContPad_ClearControllerInput(((Shared_ActorView *)runEndPlayer)->profile);
-  ((struct PlayerSequenceRunEndStateView *) ((char *) ((PlayerSequenceRunEndActorView *) runEndPlayer)->unk_1454))->unk_23C = 0;
-  ((struct PlayerSequenceRunEndStateView *) ((char *) ((PlayerSequenceRunEndActorView *) runEndPlayer)->unk_1454))->unk_240 = 0;
+  ((struct PlayerSequenceRunEndStateView *) ((char *) ((PlayerSequenceRunEndActorView *) runEndPlayer)->controller))->burstRequest = 0;
+  ((struct PlayerSequenceRunEndStateView *) ((char *) ((PlayerSequenceRunEndActorView *) runEndPlayer)->controller))->actionFlagFrames = 0;
 }
 
 void Playerai_RequestTrackFifty(s32 requestValue) {

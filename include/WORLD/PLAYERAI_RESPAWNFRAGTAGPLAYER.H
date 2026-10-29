@@ -357,9 +357,9 @@ struct PlayerRespawnHealthView {
 struct PlayerProfileStorage {
     char pad[8];
     s32 state; /* 0x08 */
-    u8 fieldC;
-    s8 fieldD;
-    u8 fieldE, fieldF;
+    u8 reservedByteC;
+    s8 resetSentinelByte;
+    u8 reservedByteE, fieldF;
     s32 progress;
     u8 value14;
     u8 value15;

@@ -82,16 +82,16 @@ void *Level_GetScreenEventTable(s32 id) {
 INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);
 #endif
 #if VERSION_US
-INCLUDE_DATA("ovl_frontendMenu", D_auto_func_8043C730_us_rev1_padding_1A072C);
+INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_us);
 #endif
 #if VERSION_EU_X
-INCLUDE_DATA("ovl_frontendMenu", D_auto_func_8043C730_us_rev1_padding_12D55C);
+INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_eu_x);
 #endif
 #if VERSION_EU
-INCLUDE_DATA("ovl_frontendMenu", D_auto_func_8043C730_us_rev1_padding_1B342C);
+INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_eu);
 #endif
 #if VERSION_DE
-INCLUDE_DATA("ovl_frontendMenu", D_auto_func_8043C730_us_rev1_padding_1A254C);
+INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_de);
 #endif
 #if VERSION_EU
 INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);

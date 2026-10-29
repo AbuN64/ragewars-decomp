@@ -433,7 +433,7 @@ typedef struct HitBox {
 } HitBox;
 
 typedef struct HitBoxTable {
-    s32 unk0;
+    s32 reservedWord;
     s32 count;
     HitBox boxes[1];
 } HitBoxTable;
@@ -538,13 +538,13 @@ s32 Lighting_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     return flag;
 }
 
-/* Filters the 0xC0-byte hit records held in table slot 2 of arg1: keeps those whose box
+/* Filters the 0xC0-byte hit records held in table slot 2 of table: keeps those whose box
    (six floats at record offset 0xA0) intersects the given bounds, and which either have no
-   byte set at record offset 0xBD, are paired with arg4, or list the key that
-   Statinst_FindPlacedPropIndex(arg4, arg1) finds inside the id list at slot arg1-table index of the list
-   table in slot 3. Writes the accepted record pointers into arg2 (at most 0x40 of them),
-   reports their number through arg3, and returns 1 when any accepted record has its byte at
-   record offset 0xBA set. With no table (arg1 null) it defers to Lighting_QueryWorldLightVolumes. */
+   byte set at record offset 0xBD, are paired with wanted, or list the key that
+   Statinst_FindPlacedPropIndex(wanted, table) finds inside the id list at slot table-table index of the list
+   table in slot 3. Writes the accepted record pointers into out (at most 0x40 of them),
+   reports their number through countOut, and returns 1 when any accepted record has its byte at
+   record offset 0xBA set. With no table (table null) it defers to Lighting_QueryWorldLightVolumes. */
 
 extern s32 Statinst_FindPlacedPropIndex(void *wanted, void *table);
 

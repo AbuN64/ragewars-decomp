@@ -82,7 +82,7 @@ void Graphu64_SubtractVectors(CVector3 *difference, CVector3 *leftVector, CVecto
     difference->z = leftVector->z - rightVector->z;
 }
 
-/** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
+/** Scale a 3-vector (inputVector) by a scalar (scaleFactor), store into scaledVector. */
 void Graphu64_ScaleVector(void *scaledVector, void *inputVector, f32 scaleFactor) {
     ((CVector3 *)(scaledVector))->x = ((CVector3 *)(inputVector))->x * scaleFactor;
     ((CVector3 *)(scaledVector))->y = ((CVector3 *)(inputVector))->y * scaleFactor;

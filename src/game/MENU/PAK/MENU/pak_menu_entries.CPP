@@ -271,8 +271,8 @@ void Menu_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     }
     /* fakematch: the split source keeps the leading half-scale constant separate
        so the following double literal retains its ROM alignment. */
-    centerX = data->x + data->unk_29C * g_menuCenterFraction + menu->x;
-    centerY = data->y + data->unk_2A0 * g_menuCenterFraction + menu->y;
+    centerX = data->x + data->width * g_menuCenterFraction + menu->x;
+    centerY = data->y + data->height * g_menuCenterFraction + menu->y;
     bounds.left = centerX - bounds.width / 2;
     bounds.right = centerX + bounds.width / 2;
     bounds.m_Top = centerY - bounds.height / 2;
@@ -287,7 +287,7 @@ void Menu_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     for (i = 0; i < menu->count; i++) {
         entry = &menu->entries[i];
         if (entry->flags & 0x800000) {
-            metrics.field0 = i;
+            metrics.entryIndex = i;
             if (entry->flags & 0x20000000) {
                 Menu_MeasureMenuText(entry, &metrics);
                 metrics.width = 0;
@@ -396,7 +396,7 @@ void Menu_DrawMenuPanel(StyledMenuTextPanel *menu, TextBoundsText *text, s32 rel
     if (panel.width < 0 || panel.height < 0) {
         return;
     }
-    centerX = data->x + data->unk_29C * 0.5f + menu->x;
+    centerX = data->x + data->width * 0.5f + menu->x;
     panel.width = SCREEN_WD;
     panel.left = centerX - panel.width / 2;
     panel.right = centerX + panel.width / 2;

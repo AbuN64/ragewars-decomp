@@ -75,8 +75,8 @@ void SetN64_ResetSceneForIntro(void *owner) {
     SoundElement_SetMusicPlaybackEnabled(0);
     memoryBytes = 0x5D8;
     p1 = ((s8 *)(&g_matchRoundCounters)) - memoryBytes;
-    ((struct IntegerStateB0 *) ((char *) (&g_matchRoundCounters)))->unk_AC = 0;
-    ((struct IntegerStateB0 *) ((char *) (&g_matchRoundCounters)))->unk_88 = 0;
+    ((struct IntegerStateB0 *) ((char *) (&g_matchRoundCounters)))->transitionActive = 0;
+    ((struct IntegerStateB0 *) ((char *) (&g_matchRoundCounters)))->first = 0;
     p1[0xB2] = 1;
     p1[0x1D] = 0;
     p1[0x1E] = 1;
@@ -84,7 +84,7 @@ void SetN64_ResetSceneForIntro(void *owner) {
     Scene_LoadLevelResources(&g_world, 0, 0);
     p2 = ((s8 *)(&g_matchRoundCounters)) - 0x1818;
     Pools_ResetActorPools(p2, 1);
-    ((IntroBackdropStateView *)(p2))->unk_160 = 0;
+    ((IntroBackdropStateView *)(p2))->poolClearedWord = 0;
     Textload_SetTextureEffect(0);
 }
 

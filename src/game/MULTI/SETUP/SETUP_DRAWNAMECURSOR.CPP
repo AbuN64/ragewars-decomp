@@ -34,7 +34,7 @@ void Setup_DrawNameCursor(void *menu, MenuLocalizedTextItemView *item, void *thi
 
     i = Player_GetPlayerIndex(&g_playerViewRenderContext, style->id);
     if (g_multiplayerNameEntryStates[i].timer <= *(&g_multiplayerNameEntryTimingLimits + 1)) {
-        width = Menu_GetWidgetStyle(menu, 0)->unk4 * (f32)g_hudReferenceViewportWidth * g_multiplayerNameCursorWidthScale;
+        width = Menu_GetWidgetStyle(menu, 0)->value * (f32)g_hudReferenceViewportWidth * g_multiplayerNameCursorWidthScale;
         x = (f32)item->x + (f32)g_multiplayerNameEntryStates[i].value * width;
         g_multiplayerItemRenderState = -1;
         alpha = style->alpha * (style->fade * (64.0f));

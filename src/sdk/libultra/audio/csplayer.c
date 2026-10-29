@@ -619,13 +619,13 @@ void __CSPHandleMetaMsg(void *sequencePlayer, CompressedSequenceMetaEvent *metaE
     s32 scale;
     CompressedSequenceEventNode *node;
     CompressedSequenceEventNode *next;
-    if (metaEvent->unk_8 == 0xFF) {
-        if (metaEvent->unk_9 != 0x51) {
+    if (metaEvent->status == 0xFF) {
+        if (metaEvent->metaType != 0x51) {
             return;
         }
-        scale = ((CompressedSequenceTempoAndQueueView *)(sequencePlayer))->unk_24;
+        scale = ((CompressedSequenceTempoAndQueueView *)(sequencePlayer))->uspt;
         __setUsptFromTempo(sequencePlayer,
-                      (f32)((metaEvent->unk_B << 16) | (metaEvent->unk_C << 8) | metaEvent->unk_D));
+                      (f32)((metaEvent->tempoHigh << 16) | (metaEvent->tempoMid << 8) | metaEvent->tempoLow));
         node = ((struct CompressedSequenceAllocatedEventsView *) ((char *) sequencePlayer))->link;
         while (node != 0) {
             next = ((struct CompressedSequenceEventLink *) ((char *) node))->link;
@@ -652,8 +652,8 @@ void __CSPHandleMetaMsg(void *sequencePlayer, CompressedSequenceMetaEvent *metaE
         node = head;
         while (node != 0) {
             next = node->prev;
-            node->value = (node->value / scale) * ((CompressedSequenceTempoAndQueueView *)(sequencePlayer))->unk_24;
-            __CSPRepostEvent(&((CompressedSequenceTempoAndQueueView *)(sequencePlayer))->unk_48, node);
+            node->value = (node->value / scale) * ((CompressedSequenceTempoAndQueueView *)(sequencePlayer))->uspt;
+            __CSPRepostEvent(&((CompressedSequenceTempoAndQueueView *)(sequencePlayer))->evtq, node);
             node = next;
         }
     }
@@ -661,15 +661,15 @@ void __CSPHandleMetaMsg(void *sequencePlayer, CompressedSequenceMetaEvent *metaE
 
 void __CSPPostNextSeqEvent(void *sequencePlayer) {
     struct ALSeqPlayer *player = sequencePlayer;
-    ALEvent sp10;
+    ALEvent event;
     s32 result;
     ALCSeq_s *sequence;
 
     if (player->state == 1) {
         sequence = player->target;
         if (sequence != 0 && (__alCSeqNextDelta(sequence, &result) & 0xFF)) {
-            sp10.type = 0;
-            alEvtqPostEvent(&player->evtq, &sp10, result * player->uspt);
+            event.type = 0;
+            alEvtqPostEvent(&player->evtq, &event, result * player->uspt);
         }
     }
 }

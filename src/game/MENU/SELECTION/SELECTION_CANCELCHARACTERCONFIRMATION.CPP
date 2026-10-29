@@ -62,7 +62,7 @@ enum { SPECIAL_CHAR = 133 };
 enum { SPECIAL_CHAR = 129 };
 #endif
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_characterSelectionEventIds, an actor kind at g_characterSelectionEventActorKinds and a handler at g_characterSelectionEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_characterSelectionEventIds, an actor kind at g_characterSelectionEventActorKinds and a handler at g_characterSelectionEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -136,7 +136,7 @@ s32 Selection_CancelCharacterConfirmation(s32 unused0, s32 unused1, s32 entryId)
         break;
     case 3:
         selectionEntry->confirmationState = 1;
-        SmpOverlay_SetSlotValue(g_characterSelectionMenu->unk4, entryIndex, 0, selectionEntry);
+        SmpOverlay_SetSlotValue(g_characterSelectionMenu->slotOverlay, entryIndex, 0, selectionEntry);
         Preview_SetPreviewTransformUpdate(&((PanelRecord *)(entryOffset + (s32)g_characterSelectionMenu))->target, 1);
         Menu_RefreshPlayerCharacterVariants(entryIndex);
         break;
@@ -151,12 +151,12 @@ s32 Selection_ReadSelectionSlot(s32 unusedFirst, s32 unusedSecond, s32 packedPla
     CharacterSelectionRoot *characterSelectionRoot;
 
     entryIndex = packedPlayer & 0xFFFF;
-    choice = SmpOverlay_GetSlotNodeId(g_characterSelectionMenu->unk4, entryIndex);
+    choice = SmpOverlay_GetSlotNodeId(g_characterSelectionMenu->slotOverlay, entryIndex);
     MarkMenuEventHandled();
     characterSelectionRoot = (CharacterSelectionRoot *)((char *)g_characterSelectionMenu + (entryIndex * 0x4C8));
     if (characterSelectionRoot->phase == 1) {
         if (choice == SPECIAL_CHAR) Menu_ApplySlotValueGfx(entryIndex,characterSelectionRoot->choice);
-        else if (Widget_ListHasFlag100(SmpOverlay_GetSlotValue(g_characterSelectionMenu->unk4,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);
+        else if (Widget_ListHasFlag100(SmpOverlay_GetSlotValue(g_characterSelectionMenu->slotOverlay,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);
     }
     return 0;
 }

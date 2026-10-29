@@ -96,13 +96,13 @@ void *Scene_GetEffectCurveRecord(Shared_World *world, s32 index) {
 }
 
 void CScene_StartEventClips(ObjectCSceneStartEventClips *scene,s32 resource,s32 group,Triple pos,ScalarPair scale) {
- s32 sp20,sp24; void *data; s32 count; StridedTable *clipRecords; s32 i; StridedTable *clipGroups;
+ s32 groupFirstIndex,groupLastIndex; void *data; s32 count; StridedTable *clipRecords; s32 i; StridedTable *clipGroups;
  f32 firstValue,secondValue;
  clipGroups=scene->clipGroupKeys;
  firstValue=scale.first;secondValue=scale.second;
  data=clipGroups->data;count=clipGroups->count;
- if(Defs_FindSortedGroupRange(data,count,group,&sp20,&sp24)) {
-  for(i=sp20;i<=sp24;i++) {
+ if(Defs_FindSortedGroupRange(data,count,group,&groupFirstIndex,&groupLastIndex)) {
+  for(i=groupFirstIndex;i<=groupLastIndex;i++) {
    clipRecords=scene->clipDefinitions;
    Rumble_AllocatePoolNode(resource,(char *)clipRecords+(i*clipRecords->stride+8),pos,firstValue,secondValue,0);
   }
@@ -147,7 +147,7 @@ void *Scene_FindActorDefinition(Shared_World *world, s32 selection, s32 modelKin
     return 0;
 }
 
-/* Collects up to max records of arg0 (indices unk13C to unk140) whose unkE4, unk18->unk0 and unk18->unkC match key0, key1 and key2 (each skipped when -1) into out, returning the count. */
+/* Collects up to max records of container (indices unk13C to unk140) whose modelId, unk18->unk0 and unk18->unkC match key0, key1 and key2 (each skipped when -1) into out, returning the count. */
 s32 Scene_CollectMatchingLevelActors(Container *container, s32 key0, s32 key1, s32 key2, SceneActorMatchRecord **out, s32 max) {
     s32 i = container->actorCursor;
     s32 end = container->actorCount;

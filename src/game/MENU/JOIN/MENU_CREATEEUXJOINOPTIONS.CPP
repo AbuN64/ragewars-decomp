@@ -2,7 +2,7 @@
 
 #if defined(VERSION_EU_X)
 #include "TYPES.H"
-typedef struct EuxDrawScreen { void *window; s32 overlayNodeId; void *roots[3]; s32 selection; s32 unk18; s32 count; } EuxDrawScreen;
+typedef struct EuxDrawScreen { void *window; s32 overlayNodeId; void *roots[3]; s32 selection; s32 reservedWord; s32 count; } EuxDrawScreen;
 typedef struct { u8 pad0[0x10]; u8 alpha; } EuxDrawItem;
 extern EuxDrawScreen *g_courseOptionsScreen;
 extern void *Cache_AllocateMemory(s32);
@@ -35,7 +35,7 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         Widget_SetWidgetFlag08(item, 0);
     }
-    g_courseOptionsScreen->unk18 = 0;
+    g_courseOptionsScreen->reservedWord = 0;
     g_courseOptionsScreen->selection = 0;
     g_courseOptionsScreen->roots[0] = Node_FindWidgetByResourceId(window, 0x390);
     g_courseOptionsScreen->roots[1] = Node_FindWidgetByResourceId(window, 0x399);

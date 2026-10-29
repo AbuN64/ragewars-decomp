@@ -16,17 +16,17 @@ s32 Volume_AllocateMenuTwo_eu(void *first, void *second, void *third) {
 }
 
 s32 Volume_AllocateMenuThree_eu(void *first, void *second, void *third) {
-    Menu_AllocateMenu(third, second, D_00450E9C);
+    Menu_AllocateMenu(third, second, g_initialDialogRowThreeResource);
     return 1;
 }
 
 s32 Volume_AllocateMenuFour_eu(void *first, void *second, void *third) {
-    Menu_AllocateMenu(third, second, D_0044F4A4);
+    Menu_AllocateMenu(third, second, g_initialDialogRowOneResource);
     return 1;
 }
 
 s32 Volume_AllocateMenuFive_eu(void *first, void *second, void *third) {
-    Menu_AllocateMenu(third, second, D_0044F798);
+    Menu_AllocateMenu(third, second, g_initialDialogRowTwoResource);
     return 1;
 }
 

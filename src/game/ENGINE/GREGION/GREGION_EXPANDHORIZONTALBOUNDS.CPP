@@ -3,7 +3,7 @@
 #include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 #include "TYPES.H"
 
-/** Expand the four-float X/Z bounds in arg0 over arg1 packed vectors. */
+/** Expand the four-float X/Z bounds in bounds over pointCount packed vectors. */
 void Gregion_ExpandHorizontalBounds(f32 *bounds, s32 pointCount, CVector3 *points)
 {
     f32 value;

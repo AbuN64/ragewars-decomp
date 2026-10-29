@@ -10,7 +10,7 @@ extern void MarkMenuEventHandled(void *);
 extern void *Node_FindWidgetByResourceId(void *, s32);
 extern s32 SoundElement_PlayFlatSound(s32);
 typedef struct { u8 pad0[0x38]; char *text; } LangItemEu;
-/* Language selector, previous entry: on the confirm press (arg3 == 1) steps the language byte down (0 wraps to 2), shows the
+/* Language selector, previous entry: on the confirm press (press == 1) steps the language byte down (0 wraps to 2), shows the
    new language's label in item 0x5E and plays sound 0xE81. */
 s32 Frontend_SelectPreviousLanguage(void *window, s32 b, s32 c, s32 press) {
     MarkMenuEventHandled(window);

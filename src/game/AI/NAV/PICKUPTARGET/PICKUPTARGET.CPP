@@ -207,7 +207,7 @@ s32 Nav_SelectStationaryObjectGoal(AiController *controller) {
     return 1;
 }
 
-/** Return whether arg0 is within the range [0x6BA, 0x6BC). */
+/** Return whether objectId is within the range [0x6BA, 0x6BC). */
 s32 Nav_IsPickupObjectInPairCategory(s32 objectId) {
     if (objectId < 0x6BC) {
         if (objectId >= 0x6BA) {
@@ -217,7 +217,7 @@ s32 Nav_IsPickupObjectInPairCategory(s32 objectId) {
     return 0;
 }
 
-/** Return whether arg0 is within the range [0xBC4, 0xBCA). */
+/** Return whether objectId is within the range [0xBC4, 0xBCA). */
 s32 Nav_IsPickupObjectInSixEntryCategory(s32 objectId) {
     if (objectId < 0xBCA) {
         if (objectId >= 0xBC4) {

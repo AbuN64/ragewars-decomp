@@ -59,7 +59,7 @@ void Player_InitializeProfile(void *profileStorage) {
     object[0x25] = 0;
     ((PlayerProfileStorage *)object)->state = 0;
     object[0xC] = 0;
-    ((PlayerProfileStorage *)object)->fieldD = -1;
+    ((PlayerProfileStorage *)object)->resetSentinelByte = -1;
     XPlus_FillMemory((s32)((char *)object + 0x26), 0, 0x24);
     XPlus_FillMemory((s32)((char *)object + 0x7D), 0, 1);
     XPlus_FillMemory((s32)((char *)object + 0x51), 0, 3);
@@ -389,8 +389,8 @@ void Player_BuildWeaponHandTransform(char *weaponActor) {
     char *object;
     char *orientation;
 
-    object = ((PlayerProfileAttachmentView *)(weaponActor))->unk_1D8;
-    handOffset = ((struct WeaponHandOffsetView *) g_weaponInfoByType[((PlayerProfileWeaponView *) object)->unk_62E])->unk_38;
+    object = ((PlayerProfileAttachmentView *)(weaponActor))->owner;
+    handOffset = ((struct WeaponHandOffsetView *) g_weaponInfoByType[((PlayerProfileWeaponView *) object)->selectedAction])->handOffset;
     if (g_weaponHandMirrorX != 0) {
         handOffset.x = -handOffset.x;
     }
@@ -400,12 +400,12 @@ void Player_BuildWeaponHandTransform(char *weaponActor) {
     if (g_weaponHandMirrorZ != 0) {
         handOffset.z = -handOffset.z;
     }
-    Graphu64_ScaleVector(&scaledOffset, &((PlayerProfileAttachmentView *)(weaponActor))->unk_50, 0.1f);
+    Graphu64_ScaleVector(&scaledOffset, &((PlayerProfileAttachmentView *)(weaponActor))->scale, 0.1f);
     Graphu64_BuildScaleMatrix(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
     Graphu64_ScaleVector(&handOffset, &handOffset, -10.24f);
-    if (((PlayerProfileWeaponView *)(object))->unk_5DC.v0 != 0) {
-        Graphu64_GetMatrixTranslation(((PlayerProfileWeaponView *)(object))->unk_5DC.v1 + 0x160, &position);
-        MatrixFromQuaternion((CQuatern *)(((PlayerProfileWeaponView *)(object))->unk_5DC.v1 + 0x140),
+    if (((PlayerProfileWeaponView *)(object))->camera.v0 != 0) {
+        Graphu64_GetMatrixTranslation(((PlayerProfileWeaponView *)(object))->camera.v1 + 0x160, &position);
+        MatrixFromQuaternion((CQuatern *)(((PlayerProfileWeaponView *)(object))->camera.v1 + 0x140),
                       &worldMatrix);
     } else {
         Player_BuildPlayerViewTransform(object, &viewMatrix);

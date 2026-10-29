@@ -13,13 +13,13 @@ s32 Nav_SelectPickupGoal(PickupGoalControllerView *controller) {
     u32 sel;
     s32 *key;
 
-    if (controller->unk_68 == 0) {
+    if (controller->goal == 0) {
         base = &g_navigationGraph;
         for (count = 29; count >= 0; count--) {
             buffer[count] = 0;
         }
 
-        switch (controller->unk_BC) {
+        switch (controller->goalSet) {
         case 0:
             buffer[0] = 0xBC6;
             buffer[1] = 0xBC7;
@@ -66,10 +66,10 @@ s32 Nav_SelectPickupGoal(PickupGoalControllerView *controller) {
             Portal_ResetSearchState(base);
             Route_ClearGoalList(base);
 
-            key = &controller->unk_4;
+            key = &controller->searchKey;
             if (Nav_AddPickupGoalsByObjectIds(buffer) == 0) {
-                controller->unk_68 = 0;
-                controller->unk_BC = -1U;
+                controller->goal = 0;
+                controller->goalSet = -1U;
                 return 1;
             }
 
@@ -79,16 +79,16 @@ s32 Nav_SelectPickupGoal(PickupGoalControllerView *controller) {
             sel = base->selected;
             if (sel != -1U) {
                 record = Portal_FindSearchNode(base, sel);
-                controller->unk_C = base->selected;
-                controller->unk_68 = record->goal;
+                controller->selectedNode = base->selected;
+                controller->goal = record->goal;
                 Route_ReconstructSearchPath(base, controller->history, 4);
                 return 1;
             }
-            controller->unk_68 = 0;
-            controller->unk_BC = sel;
+            controller->goal = 0;
+            controller->goalSet = sel;
         } else {
-            controller->unk_68 = 0;
-            controller->unk_BC = -1U;
+            controller->goal = 0;
+            controller->goalSet = -1U;
         }
     }
 
@@ -107,13 +107,13 @@ int Nav_SelectPickupGoalEu(void *self) {
     u32 sel;
     s32 *key;
 
-    if (controller->unk_68 == 0) {
+    if (controller->goal == 0) {
         base = &g_navigationGraph;
         for (count = 29; count >= 0; count--) {
             buffer[count] = 0;
         }
 
-        switch (controller->unk_BC) {
+        switch (controller->goalSet) {
         case 0:
             buffer[0] = 0xBC6;
             buffer[1] = 0xBC7;
@@ -160,10 +160,10 @@ int Nav_SelectPickupGoalEu(void *self) {
             Portal_ResetSearchState(base);
             Route_ClearGoalList(base);
 
-            key = &controller->unk_4;
+            key = &controller->searchKey;
             if (Nav_AddPickupGoalsByObjectIds(buffer) == 0) {
-                controller->unk_68 = 0;
-                controller->unk_BC = -1U;
+                controller->goal = 0;
+                controller->goalSet = -1U;
                 return 1;
             }
 
@@ -173,16 +173,16 @@ int Nav_SelectPickupGoalEu(void *self) {
             sel = base->selected;
             if (sel != -1U) {
                 record = Portal_FindSearchNode(base, sel);
-                controller->unk_C = base->selected;
-                controller->unk_68 = record->goal;
+                controller->selectedNode = base->selected;
+                controller->goal = record->goal;
                 Route_ReconstructSearchPath(base, controller->history, 4);
                 return 1;
             }
-            controller->unk_68 = 0;
-            controller->unk_BC = sel;
+            controller->goal = 0;
+            controller->goalSet = sel;
         } else {
-            controller->unk_68 = 0;
-            controller->unk_BC = -1U;
+            controller->goal = 0;
+            controller->goalSet = -1U;
         }
     }
 

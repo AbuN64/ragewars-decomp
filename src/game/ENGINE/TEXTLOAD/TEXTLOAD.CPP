@@ -114,7 +114,7 @@ void TextLoad_ApplyArtsendPaletteOverride(s32 resource, s32 **palette) {
         }
         if (resource == *(s32 *)&g_artsendSelectedTextureResource) {
             if (paletteOverrideSelected != 0) {
-                *palette = &g_artsendSelectedTextureResource.unk2010;
+                *palette = &g_artsendSelectedTextureResource.palette;
                 return;
             }
             *palette = g_artsendTextureViewer.paletteOverride;
@@ -181,7 +181,7 @@ void TextLoad_InitializeArtsendPreviewState(void) {
     object->selectionIndex = 0;
     object->selectionValue = 0;
     object->active = 1;
-    object->field4 = 0;
+    object->reservedWord = 0;
     object->titleWasShown = 0;
     object->resource = 0;
     object->textureOverride = 0;

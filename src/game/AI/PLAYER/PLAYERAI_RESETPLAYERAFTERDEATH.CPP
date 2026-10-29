@@ -10,7 +10,7 @@
    every active player among the first eight is out the team is revived through Player_PlacePlayerForRound (every
    active player in mode 2 when the mode 14 leader is down, and the leader in modes below 3); in
    multiplayer the view shows the respawn menu, g_playerRespawnCountDialog when the player has a respawn count at 0x5EA
-   or D_450DA8 otherwise. */
+   or g_playerRespawnDialog otherwise. */
 
 
 
@@ -21,7 +21,7 @@
 
 
 extern char g_playerRespawnCountDialog_de;
-extern char D_00450178;
+extern char g_playerRespawnDialog;
 extern char g_playerDeathDialogSlotFirst;
 extern char g_playerDeathDialogSlotSecond;
 extern char g_playerDeathDialogSlotThird;
@@ -97,7 +97,7 @@ void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, PlayerRespawnBodyView 
         if (player->views5E8.view5EA_3.respawns != 0) {
             Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &g_playerRespawnCountDialog_de, player, player->views5E8.view698_36.controller, 0);
         } else {
-            Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450178, player, player->views5E8.view698_36.controller, 0);
+            Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &g_playerRespawnDialog, player, player->views5E8.view698_36.controller, 0);
         }
     }
 }
@@ -129,8 +129,8 @@ void Playerai_TryStartPlayerSequence(PlayerSequenceActorView *playerActor, void 
     enabled = 1;
     resource_flags = 0;
 
-    if (playerActor->unk_14 != 0) {
-        resource = Scene_GetModelRecordByIndexPointer(&g_world, playerActor->unk_14);
+    if (playerActor->modelRecordIndexPointer != 0) {
+        resource = Scene_GetModelRecordByIndexPointer(&g_world, playerActor->modelRecordIndexPointer);
         if (resource != 0) {
             resource_flags = ((PlayerSequenceResourceView *)(resource))->resourceFlagBits;
         }
@@ -139,7 +139,7 @@ void Playerai_TryStartPlayerSequence(PlayerSequenceActorView *playerActor, void 
     if (g_world.visibilityEnabled != 0) {
         enabled = 0;
     }
-    if (playerActor->unk_664 & 0x8000) {
+    if (playerActor->stateFlags & 0x8000) {
         enabled = 0;
     }
     if (g_world.visibilityEnabled != 0) {
@@ -151,7 +151,7 @@ void Playerai_TryStartPlayerSequence(PlayerSequenceActorView *playerActor, void 
     if (sequenceType == 12) {
         enabled = 0;
     }
-    if (playerActor->unk_664 & 0x8000) {
+    if (playerActor->stateFlags & 0x8000) {
         enabled = 0;
     }
     if (resource_flags & 0x1000000) {
@@ -162,16 +162,16 @@ void Playerai_TryStartPlayerSequence(PlayerSequenceActorView *playerActor, void 
         enabled = 0;
     }
 
-    playerActor->unk_850 = enabled;
+    playerActor->sequenceEnabled = enabled;
     if (enabled != 0) {
         if (sequenceType == 50) {
             void *data;
 
-            data = playerActor->unk_5DC;
+            data = playerActor->view;
             g_playerSequenceCompletionPending = 1;
             if (data != 0) {
                 for (i = 0; i < 4; i++) {
-                    g_playerSequenceSavedViewBytes[i] = ((struct PlayerViewSavedBytes *) (((u8 *) playerActor->unk_5DC) + i))->unk_520;
+                    g_playerSequenceSavedViewBytes[i] = ((struct PlayerViewSavedBytes *) (((u8 *) playerActor->view) + i))->savedByte;
                 }
             }
         }
@@ -182,8 +182,8 @@ void Playerai_TryStartPlayerSequence(PlayerSequenceActorView *playerActor, void 
 
     resource = Scene_FindActorDefinition(&g_world, -1, 0xC45);
     if (resource != 0) {
-        playerActor->unk_50 = ((PlayerSequenceResourceView *)(resource))->unk_FC;
-        playerActor->unk_54 = ((PlayerSequenceResourceView *)(resource))->unk_100;
-        playerActor->unk_58 = ((PlayerSequenceResourceView *)(resource))->unk_104;
+        playerActor->scaleX = ((PlayerSequenceResourceView *)(resource))->scaleX;
+        playerActor->scaleY = ((PlayerSequenceResourceView *)(resource))->scaleY;
+        playerActor->scaleZ = ((PlayerSequenceResourceView *)(resource))->scaleZ;
     }
 }

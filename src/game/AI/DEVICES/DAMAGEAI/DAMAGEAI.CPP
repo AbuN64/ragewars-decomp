@@ -254,7 +254,7 @@ int DamageAI_GetActivationSound(void *owner) {
 }
 
 int DamageAI_GetActivationMode(void *actor) {
-    return ((Obj5324 *)actor)->holder->r.unk18;
+    return ((Obj5324 *)actor)->holder->r.activationMode;
 }
 
 void DamageAI_ActivateActor(Obj5324 *actor, s32 *activationContext) {
@@ -269,19 +269,19 @@ void DamageAI_ActivateActor(Obj5324 *actor, s32 *activationContext) {
     if (activationContext[1] == 0) {
         actor->flags = actor->flags & 0xFFFEFFFF;
     }
-    if (rec->unk18 == 0) {
+    if (rec->activationMode == 0) {
         actor->flags &= ~0x2000;
         actor->flags &= ~0x100;
     }
     mode = pFlag->mode;
     if (mode == 4) {
-        if (rec->unk20.whole != -1) {
-            SoundElement_PlaySoundAtPosition(rec->unk20.half.id, actor->pos.v, 0, -1);
+        if (rec->soundIdWord.whole != -1) {
+            SoundElement_PlaySoundAtPosition(rec->soundIdWord.half.id, actor->pos.v, 0, -1);
         }
-        if (rec->unk1C != -1) {
-            Barrel_SpawnActorEffect(actor, rec->unk1C, actor->pos.t, 0);
+        if (rec->spawnEffectKind != -1) {
+            Barrel_SpawnActorEffect(actor, rec->spawnEffectKind, actor->pos.t, 0);
         }
-        Barrel_SpawnFlaggedEffects(actor, activationContext, 4, rec->unk24, rec->unk28);
+        Barrel_SpawnFlaggedEffects(actor, activationContext, 4, rec->primaryEffectMask, rec->secondaryEffectMask);
         /* Fx_RecycleOwnerParticles unlinks the walker by the object's 32-bit identity;
          * the registry holds those identities as s32. */
         Fx_RecycleOwnerParticles(&g_actorParticleScene, (s32)actor);
@@ -296,13 +296,13 @@ block_10:
 
 /** Clear two flags when the controlling byte and nested flag are set. */
 void DamageAI_ClearCollisionFlagsOnHit(BreakableHitContext *breakableHitContext, BreakableHitStateView *hitState) {
-    char *nested = breakableHitContext->unk_18;
-    if (hitState->unk_CB != 0 &&
+    char *nested = breakableHitContext->descriptor;
+    if (hitState->active != 0 &&
         (((struct Descriptor *)nested)->damage.flags & 0x4) != 0) {
-        unsigned int flags = breakableHitContext->unk_100;
+        unsigned int flags = breakableHitContext->flags;
         flags &= ~0x2000;
         flags &= ~0x100;
-        breakableHitContext->unk_100 = flags;
+        breakableHitContext->flags = flags;
     }
 }
 

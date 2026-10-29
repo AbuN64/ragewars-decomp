@@ -2,7 +2,7 @@
 #define ENGINE_VIRTUAL_VIRTUAL_REGION_OWNER_STATE_H
 #include "TYPES.H"
 struct VirtualRegionOwnerState {
-    s32 unk0;
+    s32 reservedWord;
     u32 handle;
     s32 queue;
 };

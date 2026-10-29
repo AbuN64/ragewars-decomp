@@ -164,17 +164,17 @@ s32 Menu_RenderPlayerCharacterPreviews(void *unusedObject, void *unusedContext, 
         g_menuModelFillColor[2] = 255.0f;
         g_menuModelFillColor[3] = 255.0f;
         for (i = 0; i < 4; i++) {
-            if (g_characterSelectionMenu->players[i].unkC == 1 || g_characterSelectionMenu->players[i].unkC == 3) {
+            if (g_characterSelectionMenu->players[i].selectionState == 1 || g_characterSelectionMenu->players[i].selectionState == 3) {
                 if (g_characterSelectionMenu->players[i].kind != -1) {
                     gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, g_menuPlayerScissorRects[i].first, g_menuPlayerScissorRects[i].second, g_menuPlayerScissorRects[i].third, g_menuPlayerScissorRects[i].fourth);
-                    if (g_characterSelectionMenu->players[i].unk4C0 > 0) {
+                    if (g_characterSelectionMenu->players[i].tintFramesLeft > 0) {
                         g_menuModelFillColor[0] = 150.0f;
                         g_menuModelFillColor[1] = 0.0f;
                         g_menuModelFillColor[2] = 0.0f;
                         g_menuModelFillColor[3] = 100.0f;
                         g_menuModelFillColor[4] = 100.0f;
                         g_menuModelFillEnabled = 3;
-                        g_characterSelectionMenu->players[i].unk4C0--;
+                        g_characterSelectionMenu->players[i].tintFramesLeft--;
                     } else {
                         g_menuModelFillEnabled = 0;
                         g_menuModelFillColor[0] = 255.0f;
@@ -272,7 +272,7 @@ void Menu_ShowPlayerCharacterSelection(s32 player) {
     g_characterSelectionMenu->players[player].highlight->x = frame->x - 2;
     g_characterSelectionMenu->players[player].highlight->y = frame->y - 2;
     Widget_SetWidgetFlag08(g_characterSelectionMenu->players[player].highlight, 1);
-    g_characterSelectionMenu->players[player].unkC = 1;
+    g_characterSelectionMenu->players[player].selectionState = 1;
     Menu_RefreshPlayerCharacterVariants(player);
     Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[player].title), 0);
 }
@@ -313,9 +313,9 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
     ListScreenRecord *slot;
     int kind;
 
-    g_characterSelectionMenu->players[player].unkC = 3;
-    SmpOverlay_SetSlotValue(g_characterSelectionMenu->unk4, player, 1);
-    g_characterSelectionMenu->players[player].unk4C0 = 1;
+    g_characterSelectionMenu->players[player].selectionState = 3;
+    SmpOverlay_SetSlotValue(g_characterSelectionMenu->slotOverlay, player, 1);
+    g_characterSelectionMenu->players[player].tintFramesLeft = 1;
     for (i = 0; i < 3; i++) {
         Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuOptionCells[player][i].id), 1);
     }
@@ -325,7 +325,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
 
     count = 0;
     for (j = 0; j < 4; j++) {
-        if (g_characterSelectionMenu->players[j].unkC == 1 || g_characterSelectionMenu->players[j].unkC == 2) {
+        if (g_characterSelectionMenu->players[j].selectionState == 1 || g_characterSelectionMenu->players[j].selectionState == 2) {
             count++;
         }
     }
@@ -336,7 +336,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
     slot = g_gameSettings->roster;
     for (i = 0; i < 8; i++) {
         slot[i].active = 0;
-        if (g_characterSelectionMenu->players[i].unkC == 3) {
+        if (g_characterSelectionMenu->players[i].selectionState == 3) {
             slot[i].m_IsBot = 0;
             slot[i].active = 1;
             slot[i].m_nController = i;
@@ -400,7 +400,7 @@ s32 Menu_CountPendingCharacterSelections(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if ((u32) (g_characterSelectionMenu->players[i].unkC - 1) < 2) {
+        if ((u32) (g_characterSelectionMenu->players[i].selectionState - 1) < 2) {
             count++;
         }
     }

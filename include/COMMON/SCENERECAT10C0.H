@@ -102,9 +102,9 @@ struct SceneModelBankView;
 struct SceneModelIdTable;
 struct SceneModelBankView {
     char pad0[0x24];
-    s32 field24;
+    s32 directoryBank;
     char pad28[0x2C];
-    s32 field54;
+    s32 modelDirectory;
     char pad58[0x3C];
     struct SceneModelIdTable *table;
 };

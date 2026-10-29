@@ -164,12 +164,12 @@ struct CompressedSequenceMetaEvent;
 struct CompressedSequenceMetaEvent {
     s16 type;
     u8 pad2[6];
-    u8 unk_8;
-    u8 unk_9;
+    u8 status;
+    u8 metaType;
     u8 padA;
-    u8 unk_B;
-    u8 unk_C;
-    u8 unk_D;
+    u8 tempoHigh;
+    u8 tempoMid;
+    u8 tempoLow;
     u8 padE[2];
 };
 
@@ -189,9 +189,9 @@ extern double g_compressedSecondsToTicksDivisionUnsignedBias;
 struct CompressedSequenceTempoAndQueueView;
 struct CompressedSequenceTempoAndQueueView {
     char pad0[0x24];
-    s32 unk_24;
+    s32 uspt;
     char pad24[0x48 - 0x24 - sizeof(s32)];
-    char unk_48;
+    char evtq;
 };
 
 #endif

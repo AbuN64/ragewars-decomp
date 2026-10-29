@@ -2,7 +2,7 @@
 
 #if defined(VERSION_EU)
 #include "TYPES.H"
-typedef struct { void *list; s32 resourceWidget; void *item; s32 playerCount; s32 unk10; char text14[12]; s32 selectionChanged; } SliderPopupEu;
+typedef struct { void *list; s32 resourceWidget; void *item; s32 playerCount; s32 reservedWord; char text14[12]; s32 selectionChanged; } SliderPopupEu;
 typedef struct { u8 pad0[0x10]; u8 alpha; u8 pad11[0x27]; void *text; } SliderItemEu;
 extern SliderPopupEu *g_playerCountScreen;
 extern char s_playerCountFormat[];

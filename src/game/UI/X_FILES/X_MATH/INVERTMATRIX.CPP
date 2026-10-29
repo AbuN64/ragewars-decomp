@@ -13,7 +13,7 @@
  * 0x800CAC34 = 1.0 (float, k_xmathRotationMatrixHomogeneousUnit in this cartridge's tables)
  */
 
-/* Build a rotation matrix from the three Euler angles in arg1. */
+/* Build a rotation matrix from the three Euler angles in angles. */
 void XMath_BuildYxzRotationMatrix(RotationMatrixWords *outputMatrix, CVector3 *angles) {
     f32 sinX;
     f32 cosX;

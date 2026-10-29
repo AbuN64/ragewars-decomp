@@ -5,11 +5,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 struct Packed;
 struct Packed {
-    unsigned short unk0;
-    unsigned short unk2;
+    unsigned short kind;
+    unsigned short flags;
     unsigned short first[3];
     unsigned short second[3];
-    int unk10;
+    int mask;
 };
 
 struct Packed;
@@ -20,11 +20,11 @@ extern CVector3 g_regionCachedUnitNormal;
 
 struct CGameRegion_t;
 struct CGameRegion_t {
-    short unk0;
-    short unk2;
+    short kind;
+    short flags;
     void *first[3];
     void *second[3];
-    int unk1C;
+    int mask;
 };
 
 struct CGameRegion_t;

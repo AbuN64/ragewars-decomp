@@ -18,7 +18,7 @@ typedef struct SetupRosterRecord SetupRosterRecord;
 struct SetupTextNode {
     char pad0[0x34];
     s32 stringTableIndex;
-    void* unk38;
+    void* nameText;
 };
 struct SetupRosterChoice {
     char pad0[0x64];
@@ -165,7 +165,7 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
     }
     Widget_SetWidgetFlag40(SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, playerIndex), 0);
     /* the published B6E8 takes the controller handle as a plain scalar */
-    SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->field0, playerIndex, SETUP_LABEL_ID);
+    SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->windowAddress, playerIndex, SETUP_LABEL_ID);
     panelState = g_pakProfileScreenState->players[playerIndex].state;
     switch (panelState) {                              /* switch 1 */
     case 0:                                         /* switch 1 */
@@ -174,7 +174,7 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
         g_pakProfileScreenState->players[playerIndex].menuWidget = idlePanel;
         Widget_SetWidgetFlag08(idlePanel, 1);
         text_node = (s32)Node_FindWidgetByResourceId(g_pakProfileScreenState->players[playerIndex].menuWidget, PANEL_TEXT_ID);
-        ((SetupTextNode *)text_node)->unk38 = g_pakProfileScreenState->players[playerIndex].nameText;
+        ((SetupTextNode *)text_node)->nameText = g_pakProfileScreenState->players[playerIndex].nameText;
         screenPhase = g_pakProfileScreenState->phase;
 
         switch (screenPhase) {                        /* switch 2 */
@@ -292,7 +292,7 @@ case22_two:
 case22_three:
         slotLabelId = SLOT_3_ID;
 case22_selected:
-        SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->field0, playerIndex, slotLabelId);
+        SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->windowAddress, playerIndex, slotLabelId);
         PAKInterface_RelabelSlotRows(playerIndex);
         playerLinkOffset = playerIndex * 8;
         break;
@@ -397,7 +397,7 @@ case22_selected:
         break;
     case 14:                                        /* switch 1 */
     case 17:                                        /* switch 1 */
-        SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->field0, playerIndex, SETUP_LABEL_ID);
+        SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->windowAddress, playerIndex, SETUP_LABEL_ID);
         SmpOverlay_SetSlotValue(g_pakProfileScreenState->root, playerIndex, 1);
 
         readyPanel = Node_FindWidgetByResourceId(g_pakProfileScreenState->players[playerIndex].sprite, UI_CASE_17_2A5);
@@ -496,13 +496,13 @@ block_61:
         SmpOverlay_ShowSlotNode(g_pakProfileScreenState->root, playerIndex, Node_FindWidgetByResourceId(g_pakProfileScreenState->players[playerIndex].menuWidget, UI_CASE_26_2A7));
         break;
 case27_found:
-        SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->field0, playerIndex, slotLabelId);
+        SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->windowAddress, playerIndex, slotLabelId);
         goto case27_done;
     case 27:                                        /* switch 1 */
         Widget_SetWidgetFlag08((SlotSelectionWidget *) g_pakProfileScreenState->players[playerIndex].menuWidget, 1);
         itemIndex = 0;
 
-        SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->field0, playerIndex, CHECK_0_ID);
+        SmpOverlay_ShowSlotById((s32) g_pakProfileScreenState->windowAddress, playerIndex, CHECK_0_ID);
         do {
 loop_69:
         if (itemIndex == 1) {

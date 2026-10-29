@@ -16,8 +16,8 @@ struct AudioSpatialVoiceManagerView {
     AudioPendingSoundLinks free;
 };
 struct AudioVoiceListLinks {
-    void *unk_0;
-    void *unk_4;
+    void *prev;
+    void *next;
 };
 struct AudioSoundCell {
     s32 index;

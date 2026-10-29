@@ -33,18 +33,18 @@ struct LayeredText {
     short mode;
     short reserved;
     int flags;
-    int fieldC;
-    int field10;
+    int reservedWord1;
+    int reservedWord2;
     int *text;
-    int field18;
+    int reservedWord3;
     int spacing;
-    int field20;
-    int field24;
+    int reservedWord4;
+    int reservedWord5;
 };
 
 struct StyledMenuTextPanel;
 struct StyledMenuTextPanel {
-    s16 unk0;
+    s16 selectedIndex;
     s16 x; /* 0x02 */
     s16 y; /* 0x04 */
     char pad6[6];
@@ -53,18 +53,18 @@ struct StyledMenuTextPanel {
     char pad14[0x1C];
     f32 alpha; /* 0x30 */
     f32 fade; /* 0x34 */
-    s32 unk38;
-    s32 unk3C;
+    s32 shadowEnabled;
+    s32 shadowClearRequest;
     struct TextBoundsData *data; /* 0x40 */
 };
 
 struct PakMenuInputStateView;
 struct PakMenuInputStateView {
     char pad00[0xB0];
-    s32 field_B0;
-    s32 field_B4;
+    s32 buttons;
+    s32 pressedButtons;
     char padB8[0xBC - 0xB8];
-    s32 field_BC;
+    s32 history1;
 };
 
 

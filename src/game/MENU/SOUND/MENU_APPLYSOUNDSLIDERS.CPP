@@ -21,7 +21,7 @@ extern void MarkMenuEventHandled();
 
 extern void SmpSlider_SetTransitionMode(void *, s32);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_soundOptionsEventIds, an actor kind at g_soundOptionsEventKinds and a handler at g_soundOptionsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event event through this file's 12-byte handler table, whose rows hold an event at g_soundOptionsEventIds, an actor kind at g_soundOptionsEventKinds and a handler at g_soundOptionsEventHandlers: the first row whose event equals event and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*SoundOptionsEventHandler)(void *, s32, s32, s32, s32);
 

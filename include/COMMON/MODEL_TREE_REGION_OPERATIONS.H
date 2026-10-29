@@ -46,17 +46,17 @@ union RegionVertexReference {
 struct RegionTriangleVertexView;
 struct RegionTriangleVertexView {
     char pad0[0x4];
-    char * unk_4;
+    char * firstVertex;
     char pad4[0x8 - 0x4 - sizeof(char*)];
-    char * unk_8;
+    char * secondVertex;
     char pad8[0xC - 0x8 - sizeof(char*)];
-    char * unk_C;
+    char * thirdVertex;
     char padC[0x10 - 0xC - sizeof(char*)];
-    RegionVertexReference unk_10;
+    RegionVertexReference firstBranch;
     char pad10[0x14 - 0x10 - sizeof(RegionVertexReference)];
-    RegionVertexReference unk_14;
+    RegionVertexReference secondBranch;
     char pad14[0x18 - 0x14 - sizeof(RegionVertexReference)];
-    RegionVertexReference unk_18;
+    RegionVertexReference thirdBranch;
 };
 
 

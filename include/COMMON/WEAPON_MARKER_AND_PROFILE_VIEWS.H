@@ -10,9 +10,9 @@ struct WeaponMarkerControllerView {
     char pad0[0x30];
     void * callback_owner;
     char pad30[0x130 - 0x30 - sizeof(void*)];
-    f32 unk_130;
+    f32 timeRemainingB;
     char pad130[0x148 - 0x130 - sizeof(f32)];
-    f32 unk_148;
+    f32 timeRemainingA;
 };
 
 
@@ -33,9 +33,9 @@ typedef union PlayerProfileOwnerReference PlayerProfileOwnerReference;
 struct PlayerProfileWeaponView;
 struct PlayerProfileWeaponView {
     char pad0[0x5DC];
-    PlayerProfileOwnerReference unk_5DC;
+    PlayerProfileOwnerReference camera;
     char pad5DC[0x62E - 0x5DC - sizeof(PlayerProfileOwnerReference)];
-    s16 unk_62E;
+    s16 selectedAction;
 };
 
 
@@ -49,9 +49,9 @@ typedef struct ObjectWeaponsNextAvailableWeapon ObjectWeaponsNextAvailableWeapon
 struct WeaponMarkerActorContext;
 struct WeaponMarkerActorContext {
     char pad0[0x1];
-    u8 unk_1;
+    u8 stateFlag;
     char pad1[0x1D8 - 0x1 - sizeof(u8)];
-    void * unk_1D8;
+    void * owner;
 };
 
 extern int g_weaponHandMirrorX;
@@ -79,7 +79,7 @@ struct ObjectWeaponsNextAvailableWeapon {
 struct WeaponHandOffsetView;
 struct WeaponHandOffsetView {
     unsigned char padding_0[56];
-    CVector3 unk_38;
+    CVector3 handOffset;
 };
 
 struct PlayerProfileWeaponView;
@@ -96,17 +96,17 @@ typedef struct WeaponMarkerControllerView WeaponMarkerControllerView;
 struct WeaponMarkerActorView;
 struct WeaponMarkerActorView {
     char pad0[0x62E];
-    s16 unk_62E;
+    s16 selectedAction;
     char pad62E[0x650 - 0x62E - sizeof(s16)];
-    s16 unk_650;
+    s16 pose;
     char pad650[0x770 - 0x650 - sizeof(s16)];
-    s16 unk_770;
+    s16 weapon;
     char pad770[0x7E8 - 0x770 - sizeof(s16)];
-    s32 unk_7E8;
+    s32 state7E8;
     char pad7E8[0x11D8 - 0x7E8 - sizeof(s32)];
-    f32 unk_11D8;
+    f32 cooldown;
     char pad11D8[0x122C - 0x11D8 - sizeof(f32)];
-    s32 unk_122C;
+    s32 reactionFlags;
 };
 
 extern float g_ammoCostSecondMessageDuration;
@@ -160,9 +160,9 @@ extern int g_weaponHandMirrorY;
 struct PlayerProfileAttachmentView;
 struct PlayerProfileAttachmentView {
     char pad0[0x50];
-    CVector3 unk_50;
+    CVector3 scale;
     char pad50[0x1D8 - 0x50 - sizeof(CVector3)];
-    char * unk_1D8;
+    char * owner;
 };
 
 

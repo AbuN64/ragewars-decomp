@@ -130,15 +130,15 @@ s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **rspTaskOut, OSScT
 
 void Sched_InitializeSchedulerThread(Panel *panel, s32 threadStack, s32 priority, s32 unusedVideoMode, unsigned char style) {
     panel->active = 1;
-    panel->field2F4 = 0;
-    panel->field2F8 = 0;
-    panel->field2E0 = 0;
-    panel->field2FC = 0;
-    panel->field2E4 = 0;
-    panel->field2E8 = 0;
-    panel->field2EC = 0;
-    panel->field2F0 = 0;
-    panel->field300 = 0;
+    panel->curRSPTask = 0;
+    panel->curRDPTask = 0;
+    panel->clientList = 0;
+    panel->frameCount = 0;
+    panel->audioListHead = 0;
+    panel->gfxListHead = 0;
+    panel->audioListTail = 0;
+    panel->gfxListTail = 0;
+    panel->doAudio = 0;
     panel->mode = 4;
     osCreateMesgQueue(panel->row0, panel->row0Slots, 8);
     osCreateMesgQueue(panel->row1, panel->row1Slots, 8);

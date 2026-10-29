@@ -97,5 +97,5 @@ s32 Nav_HasOpenSearchNodes(CNavData *cNavData) {
 /** Clear the word at offset 0x28. */
 void Nav_ClearSearchNodeStatus(void *controller) {
     ObjRecAt28V2 *record = controller;
-    record->unk28 = 0;
+    record->state = 0;
 }

@@ -62,7 +62,7 @@ extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, Resour
 s32 Statinst_UpdateDistanceFade(void *prop, s32 cameraAddress) {
     OwnerStaticInstanceDrawDistanceFadedModel *owner = prop;
     GameplayCamera *camera = (void *)cameraAddress;
-    CVector3 sp10;
+    CVector3 cameraOffset;
     f32 distanceSquared;
     f32 threshold;
     s32 unsignedDistanceSquared;
@@ -73,9 +73,9 @@ s32 Statinst_UpdateDistanceFade(void *prop, s32 cameraAddress) {
     u8 next_timer;
     StaticModelAnimationDescriptor *descriptor;
 
-    Graphu64_SubtractVectors(&sp10, &camera->position,
+    Graphu64_SubtractVectors(&cameraOffset, &camera->position,
                   &owner->position);
-    distanceSquared = sp10.x * sp10.x + sp10.y * sp10.y + sp10.z * sp10.z;
+    distanceSquared = cameraOffset.x * cameraOffset.x + cameraOffset.y * cameraOffset.y + cameraOffset.z * cameraOffset.z;
     threshold = g_staticObjectFadeThresholdAndAlpha[0];
     if (!(threshold <= distanceSquared)) {
         unsignedDistanceSquared = (s32)distanceSquared;

@@ -128,8 +128,8 @@ s32 Link_SumWorldSectionCounts(void) {
     s32 i;
     char *base = (char *)&g_world;
 
-    for (i = 0; i < ((WorldSectionCountView *)(base))->unk_1500; i++) {
-        total += ((struct ActorAnimationEventTable *)SetN64_GetPackSection(*((struct WorldSectionResourceView *) (base + (i * 0xC)))->unk_1508, 2))->field_4;
+    for (i = 0; i < ((WorldSectionCountView *)(base))->sectorCount; i++) {
+        total += ((struct ActorAnimationEventTable *)SetN64_GetPackSection(*((struct WorldSectionResourceView *) (base + (i * 0xC)))->resource, 2))->entryCount;
     }
     return total;
 }
@@ -146,7 +146,7 @@ void Link_ApplyPackedVertexDeltas(s32 table, s32 count, CVector3 *vtx) {
     s32 dz;
 
     t = SetN64_GetPackSection(table, 1);
-    if (t->unk4 != 0) {
+    if (t->count != 0) {
         zero = 0;
         i = zero;
         d = t->deltas;

@@ -20,7 +20,7 @@ extern void Polytrak2_DecodeCubicSegment(Curve *compressedCurve);
 extern int Polytrak2_ReadBitsAtAddress(s32, unsigned int);
 
 static inline void seek(Stream *compressedCurve, u32 sampleIndex) {
-    u32 sp10[64];
+    u32 segmentSampleCounts[64];
     s32 segmentSampleCount;
     s32 segmentBitOffset;
     s32 firstSegmentBitAddress;
@@ -56,8 +56,8 @@ static inline void seek(Stream *compressedCurve, u32 sampleIndex) {
             segmentBitCursor += segmentBitStride;
             segmentIndex++;
             segmentStartSample=segmentEndSample;
-            sp10[segmentIndex]=Polytrak2_ReadBitsAtAddress(segmentBitCursor,6);
-            segmentEndSample+=sp10[segmentIndex];
+            segmentSampleCounts[segmentIndex]=Polytrak2_ReadBitsAtAddress(segmentBitCursor,6);
+            segmentEndSample+=segmentSampleCounts[segmentIndex];
         }
     }
 }

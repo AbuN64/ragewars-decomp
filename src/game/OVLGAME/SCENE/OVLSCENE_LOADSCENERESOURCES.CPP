@@ -39,17 +39,17 @@ void Scene_LoadSceneResources(SceneLoadResourcesView *sceneToLoad, s32 cartridge
     s32 sectionTwelveData;
 
     Scene_ClearSceneObjectCounts(sceneToLoad);
-    sceneToLoad->unk0 = 0;
+    sceneToLoad->reservedWord = 0;
     Scene_ResetSelectionState((char *)sceneToLoad);
-    sceneToLoad->unk4 = 0;
-    sceneToLoad->unk8 = 0;
+    sceneToLoad->reservedWord1 = 0;
+    sceneToLoad->reservedWord2 = 0;
     sceneToLoad->visibilityGroup = -1;
-    sceneToLoad->unk1B31C = 0;
-    sceneToLoad->unk1B308 = 0;
+    sceneToLoad->reservedWord13 = 0;
+    sceneToLoad->reservedWord12 = 0;
     sceneToLoad->spawnOffsetX = 0;
     sceneToLoad->spawnOffsetY = 0;
     sceneToLoad->spawnOffsetZ = 0;
-    sceneToLoad->unk1B660 = 0;
+    sceneToLoad->reservedWord14 = 0;
     sceneToLoad->selectedActorCount = 0;
     sceneToLoad->sceneLoadResetState = 0;
     /* The global is the holder storage; its canonical scalar declaration is incomplete. */
@@ -97,8 +97,8 @@ void Scene_LoadSceneResources(SceneLoadResourcesView *sceneToLoad, s32 cartridge
     linkGroupTypeData = (s32) *Cache_RequestPackSection(0, (s32)cartridgeDirectory, 0x13, cartridgeBankKey, (s32)sceneToLoad, (s32)&g_cResource_UnpackRequestEntry, &g_linkGroupTypes);
     sceneToLoad->bloodlustDirectoryKey = 0;
     sceneToLoad->bloodlustDirectorySize = 0;
-    sceneToLoad->unk14 = 0;
-    sceneToLoad->unk18 = -1;
+    sceneToLoad->reservedWord3 = 0;
+    sceneToLoad->reservedWord4 = -1;
     sceneToLoad->linkGroupTypes = linkGroupTypeData;
     if (*cartridgeDirectory >= 0x16) {
         sceneToLoad->bloodlustDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 0x15);
@@ -123,12 +123,12 @@ void Scene_LoadSceneResources(SceneLoadResourcesView *sceneToLoad, s32 cartridge
     Scene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x78, 0xDAE);
     Scene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x94, 0xDAF);
     Scene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0xB0, 0xDB0);
-    sceneToLoad->unkF0 = 0;
-    sceneToLoad->unkF4 = 0;
-    sceneToLoad->unkFC = 0;
-    sceneToLoad->unkF8 = 0;
-    sceneToLoad->unk88 = 0;
-    sceneToLoad->unk120 = 0;
-    sceneToLoad->unk124 = 0;
+    sceneToLoad->reservedWord6 = 0;
+    sceneToLoad->reservedWord7 = 0;
+    sceneToLoad->reservedWord9 = 0;
+    sceneToLoad->reservedWord8 = 0;
+    sceneToLoad->reservedWord5 = 0;
+    sceneToLoad->reservedWord10 = 0;
+    sceneToLoad->reservedWord11 = 0;
     Scene_LoadLevelResources(sceneToLoad, 0, 0);
 }

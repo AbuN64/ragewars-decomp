@@ -506,7 +506,7 @@ s32 XPlus_NextRandomInteger(void) {
     return (nextState >> 0x10) & 0x7FFF;
 }
 
-/** Return strlen(arg0) (byte count not including the terminating NUL). */
+/** Return strlen(string) (byte count not including the terminating NUL). */
 s32 XPlus_StringLength(u8 *string) {
     u8 *cursor;
     u8 c;
@@ -540,7 +540,7 @@ u8 *XPlus_CopyString(u8 *destination, u8 *source) {
     return destination;
 }
 
-/** strncpy: copy up to arg2 bytes from arg1 to arg0, NUL-padding the remainder. */
+/** strncpy: copy up to count bytes from source to destination, NUL-padding the remainder. */
 u8 *XPlus_CopyStringBounded(u8 *destination, u8 *source, s32 count) {
     s32 remaining;
     u8 *start;
@@ -835,7 +835,7 @@ void *XPlus_CopyBytes(void *destination, const void *source, s32 bytes) {
     return result;
 }
 
-/* Fills arg2 bytes at arg0 with the byte arg1, storing single bytes up to word alignment, replicated words through the middle and single bytes at the tail, and returns arg0. Adapted from XPlus_FillMemory. */
+/* Fills count bytes at destination with the byte value, storing single bytes up to word alignment, replicated words through the middle and single bytes at the tail, and returns destination. Adapted from XPlus_FillMemory. */
 void *XPlus_FillBytes(void *destination, int value, u32 count) {
     u8 *start;
     u8 *end;
@@ -956,7 +956,7 @@ block_17:
     return 0;
 }
 
-/** Compute a CRC-32 over arg1 bytes, continuing from arg2. */
+/** Compute a CRC-32 over length bytes, continuing from crc. */
 u32 XPlus_UpdateCrc32(u8 *data, u32 length, u32 crc) {
     u32 table[256];
     u32 i;

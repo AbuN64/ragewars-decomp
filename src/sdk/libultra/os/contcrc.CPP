@@ -4,7 +4,7 @@
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
 
-/** CRC-5-style bit-shuffle: 16 rounds folding bit 10 of arg0 with a rotating tap. */
+/** CRC-5-style bit-shuffle: 16 rounds folding bit 10 of blockAddress with a rotating tap. */
 int __osContAddressCrc(unsigned int blockAddress) {
     int crcRegister;
     int feedbackPolynomial;

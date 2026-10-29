@@ -108,7 +108,7 @@ struct Node_Weapons_EndRound {
 struct IntegerStateD4;
 struct IntegerStateD4 {
     unsigned char padding_0[208];
-    s32 unk_D0;
+    s32 clearedWord;
 };
 
 
@@ -192,10 +192,10 @@ typedef struct PlayerViewRenderListNode PlayerViewRenderListNode;
 struct GlobalState;
 struct GlobalState {
     u8 pad0[0x1C];
-    s32 field1C;
+    s32 reservedWordFirst;
     s32 primaryFireMode;
     s32 alternateFireMode;
-    s32 field28;
+    s32 reservedWordSecond;
     u8 pad2C[0x28];
     s32 restricted; /* 0x54 */
     u8 pad58[0x10];

@@ -58,8 +58,8 @@ s32 Frontend_CreateSlotSelectionMenu(void *menuTree) {
      * the pool stored at +0x004 and carries it through unchanged. */
     SmpOverlay_SetObjectValue((struct Object6C *) g_profileStatisticsScreen->list, 1);
 
-    g_profileStatisticsScreen->unk216 = 1;
-    g_profileStatisticsScreen->unk220 = 4;
+    g_profileStatisticsScreen->menuPhase = 1;
+    g_profileStatisticsScreen->reservedWord = 4;
     g_profileStatisticsScreen->item492 = Node_FindWidgetByResourceId(menuTree, slotRes(492));
     g_profileStatisticsScreen->item492->x = g_profileStatisticsScreen->item492->x - g_profileStatisticsScreen->item492->w;
     shift = g_profileStatisticsScreen->item492->w;
@@ -99,19 +99,19 @@ s32 Frontend_CreateSlotSelectionMenu(void *menuTree) {
     Widget_SetWidgetFlag08(item, 0);
 
     g_profileStatisticsScreen->style = 0;
-    g_profileStatisticsScreen->unk248 = 27;
+    g_profileStatisticsScreen->reservedWord1 = 27;
     item = Node_FindWidgetByResourceId(menuTree, slotRes(511));
     g_profileStatisticsScreen->item511 = item;
     Widget_SetWidgetFlag08(item, 0);
 
     g_profileStatisticsScreen->item511->alpha = 0;
-    g_profileStatisticsScreen->unk260 = 25;
+    g_profileStatisticsScreen->reservedWord2 = 25;
     item = Node_FindWidgetByResourceId(menuTree, slotRes(510));
     g_profileStatisticsScreen->item510 = item;
 
     g_profileStatisticsScreen->player = 0;
-    g_profileStatisticsScreen->unk268 = -1;
-    Focus_AdvanceActiveSlot(&g_profileStatisticsScreen->unk268);
+    g_profileStatisticsScreen->activeSlot = -1;
+    Focus_AdvanceActiveSlot(&g_profileStatisticsScreen->activeSlot);
     Focus_RefreshProfileStatistics();
     Focus_ShowUnlockedEntries(g_profileStatisticsScreen->style);
     Node_FindWidgetByResourceId(menuTree, slotRes(493))->alpha = 110;

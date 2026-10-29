@@ -162,8 +162,8 @@ extern void Geometry_SetCombineMode(u32);
 #if defined(VERSION_EU_X)
 void OnScreen_GetImageDimensions(s32 resourceId, s32 frameIndex, s32 *widthOutput, s32 *heightOutput)
 {
-  void *sp10;
-  s32 sp14;
+  void *imageEntry;
+  s32 entryTag;
   void *imageData;
   s32 resourceHandle;
   if (g_screenImageResourcesEnabled != 0)
@@ -171,9 +171,9 @@ void OnScreen_GetImageDimensions(s32 resourceId, s32 frameIndex, s32 *widthOutpu
     resourceHandle = Scene_StartWorldEffect(&g_world, resourceId, 0, 1);
     if (resourceHandle != 0)
     {
-      OnScreen_GetImageEntry(resourceHandle, frameIndex, &sp10, &sp14);
-      imageData = sp10;
-      *widthOutput = ((ImageSet *)sp10)->width;
+      OnScreen_GetImageEntry(resourceHandle, frameIndex, &imageEntry, &entryTag);
+      imageData = imageEntry;
+      *widthOutput = ((ImageSet *)imageEntry)->width;
       *heightOutput = ((ImageSet *)imageData)->height;
       Cache_UnlockResource(0, resourceHandle);
     }

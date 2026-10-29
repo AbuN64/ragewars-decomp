@@ -79,7 +79,7 @@ struct OSIoMesg {
 extern char g_hudLivesMoverScript;
 
 extern char g_systemBootMarker;
-extern char D_00450884[];
+extern char g_pakAllocateMenuFirstResource[];
 
 extern char *g_matchResult5012TextDe;
 
@@ -102,7 +102,7 @@ extern FftTables g_audioTransformBandTables;
 
 extern f32 g_actorModelViewEffectConstants[];
 
-extern char D_00450E9C[];
+extern char g_initialDialogRowThreeResource[];
 
 extern char g_SelectPromptTextGroupFiveCase13Text[];
 
@@ -288,7 +288,7 @@ extern char *g_matchResult5002UnplayedTextDe;
 
 extern FieldRow g_alternatePlayerSettingsEventActorKinds[];
 
-extern char D_0044E4D4[];
+extern char g_pakAlternateReadyDialogResource[];
 
 extern char g_sceneUnpackRequestSpare[];
 
@@ -514,7 +514,7 @@ extern f32 g_playerMatchCountdownAlternatePosition[];
 
 extern float g_attachmentParticleLifetimeScale;
 
-extern char D_0044FFEC[];
+extern char g_initialOpenDialogMenuResource[];
 
 extern char g_SelectPromptTextGroupFiveCase12Text[];
 
@@ -847,7 +847,7 @@ extern s32 g_pagerStatisticBuffer[];
 extern char *g_matchResult5011TextEuX[];
 
 
-extern char D_00450F74[];
+extern char g_pakAllocateMenuFifthResource[];
 
 extern Texture *g_combineBoundImage;
 
@@ -875,7 +875,7 @@ extern u32 g_destinationBlueMask;
 
 extern const f32 g_cameraFrustumHeightScale;
 
-extern char D_0044F4A4[];
+extern char g_initialDialogRowOneResource[];
 
 extern f32 k_xmathAtanQuadrantOffsets[4];
 
@@ -911,7 +911,7 @@ extern float g_scaledMatrixHomogeneousScale;
 
 extern int g_frontendScreenModePaletteDefault;
 
-extern char D_0044FFA4[];
+extern char g_controllerPakNotReadyDialogResource[];
 
 extern u16 g_trialCatalogueStageIdLowHalves[];
 
@@ -1707,7 +1707,7 @@ extern char g_playerDefaultBehaviorTable;
 
 extern s32 g_trialCatalogueNeighborZero[];
 
-extern char D_0044F798[];
+extern char g_initialDialogRowTwoResource[];
 
 
 extern s32 g_pointLightSavedBufferOffset;
@@ -1778,7 +1778,7 @@ extern s32 g_textBatchCount;
 
 extern char g_SelectPromptTextGroupTwoCase15Text[];
 
-extern s32 D_004518A4;
+extern s32 g_profilePrimaryMenuResource;
 
 extern FieldRow g_soundSliderEventKinds[];
 
@@ -2158,7 +2158,7 @@ extern void *g_slotSelectionTextReferenceShared1[];
 
 extern char g_SelectPromptTextGroupThreeCase6Text[];
 
-extern char D_00451D18[];
+extern char g_pakAdjustMenuChoiceResourceFirst[];
 
 extern s32 g_menuEventCount;
 
@@ -2217,7 +2217,7 @@ extern int g_frontendModeOneState;
 
 extern char g_playerFlag82OnText[];
 
-extern char D_00450178;
+extern char g_playerRespawnDialog;
 
 extern s16 DEBUG_LINK_TRANSFER_REGISTER;
 
@@ -2270,7 +2270,7 @@ extern FieldRow g_titleButtonColumnEventActorKinds[];
 
 extern int g_controlMenuControlFlag;
 
-extern char D_00451E38[];
+extern char g_pakAdjustMenuChoiceResourceSecond[];
 
 extern char *g_matchResult5002UnplayedTextEu[];
 
@@ -2425,7 +2425,7 @@ extern f32 g_ribbonNodeTransformCutoffConstants[];
 extern char g_SelectPromptTextGroupOneCase2Text[];
 
 
-extern s32 D_0044F994_de;
+extern s32 g_profileSecondaryMenuResource;
 
 extern s32 s_binaryBlockText;
 
@@ -3594,9 +3594,9 @@ struct SoundDescriptor {
     u16 flags; /* 0x06: pan and sound flags */
     s16 pitchPresetId;
     s16 preset; /* 0x0A */
-    s16 fieldC;
+    s16 reservedHalf;
     s8 pitch; /* 0x0E */
-    s8 fieldF;
+    s8 envelopeFlag;
     s16 yaw; /* 0x10 */
     s16 x; /* 0x12 */
     s16 y; /* 0x14 */
@@ -3631,7 +3631,7 @@ struct Dest {
     u8 state12, state13;
     s8 state14[4];
     f32 initialScale; /* +0x18 */
-    s32 field1C[4];
+    s32 reserved1C[4];
     void *table; /* 0x2C */
     StateEntry *entry;
     s8 state;
@@ -3641,14 +3641,14 @@ struct Dest {
     u32 old_entry_flags;
     u32 entry_flags;
     s32 stateTimer; /* 0x40 */
-    s32 field44;
+    s32 reserved44;
     CVector3 initialPosition; /* +0x48 */
     CVector3 previousPosition; /* +0x54 */
     f32 initialHeight; /* +0x60 */
     f32 cueTimer; /* 0x64 */
     void *animation; /* saved across the 0x170-byte clear; pointee unresolved */
     s32 animationCount[3];
-    s32 field78[5];
+    s32 reserved78[5];
     f32 height8C;
     f32 height90;
     u8 state94, state95;
@@ -3666,7 +3666,7 @@ struct Dest {
     u8 count;
     s8 secondaryLevel; /* 0xCC */
     u8 padCD[3];
-    s32 fieldD0, fieldD4;
+    s32 reservedD0, fieldD4;
     u8 reservedD8[0x24];
     struct CLoopingSoundData_t *sound; /* 0xFC */
     u8 pending; /* 0x100 */
@@ -3681,12 +3681,12 @@ struct Dest {
     u8 reserved120[4];
     s32 definitionHealth;
     f32 charge; /* 0x128 */
-    f32 field12C;
-    s32 field130;
+    f32 initialCharge;
+    s32 reserved130;
     f32 restPitch; /* 0x134 */
     s32 fireCounter, fireMode;
     u8 pad140[4];
-    s32 field144, field148, field14C, field150;
+    s32 fireEnabled, reserved148, reserved14C, reserved150;
     u8 reserved154[0x1C];
 };
 typedef void *( *StateCallback)(struct Source110 *, struct Dest *);
@@ -3709,7 +3709,7 @@ struct EffectActorModel;
 struct EffectActorModel {
     u32 flags;
     char pad4[0x10];
-    s32 unk14;
+    s32 scaleModeFlag;
 };
 struct EffectActor;
 struct EffectActorModel;
@@ -3733,8 +3733,8 @@ struct EffectActor {
     char pad104[0x14];
     struct EffectActorModel *model;
     char pad11C[0x38];
-    f32 unk154;
-    f32 unk158;
+    f32 offsetBase;
+    f32 offsetScale;
     char pad15C[0x18];
     CVector3 followDirection;
     char pad180[0x50];
@@ -3800,20 +3800,20 @@ struct EffectEntry {
     char padE[4];
     u8 playerMask;
     char pad13;
-    s32 unk14;
+    s32 rangeModeFlag;
     struct EffectModel *model;
     CharacterScreenCell *offset;
-    CharacterScreenCell *unk20;
-    CharacterScreenCell *unk24;
+    CharacterScreenCell *packedRangesB;
+    CharacterScreenCell *packedRangesA;
     CharacterScreenCell *direction;
-    CharacterScreenCell *unk2C;
+    CharacterScreenCell *packedAngularRanges;
     struct EffectMotion *motion;
     struct CROMParticleColor_t *color;
     struct EffectParams *params;
 };
 struct EffectBlock;
 struct EffectBlock {
-    s32 unk0;
+    s32 reservedWord;
     s32 count;
     EffectEntry entries[1];
 };
@@ -3826,15 +3826,15 @@ struct ParticleEffect {
     u16 kind;
     char pad6[2];
     CVector3 pos;
-    s32 unk14;
+    s32 reserved14;
     char pad18[4];
     CVector3 velocity;
     char pad28[0x28];
     CVector3 startPosition;
     u32 flags;
     char pad60[0xB0];
-    s32 unk110;
-    s32 unk114;
+    s32 reserved110;
+    s32 reserved114;
     struct EffectEntry *entry;
     u32 textureAndLayer;
     char pad120[4];
@@ -3844,19 +3844,19 @@ struct ParticleEffect {
     s32 *refCount;
     s32 followedActor;
     s32 lightHandle;
-    s32 unk13C;
+    s32 reserved13C;
     f32 spreadAngle;
     f32 initialLifeOffset;
     f32 animationParameter;
     s16 life;
-    u8 unk14E;
-    s8 unk14F;
-    f32 unk150[6];
+    u8 reserved14E;
+    s8 reserved14F;
+    f32 sampledRangesA[6];
     CVector3 previousPosition;
     CVector3 direction;
-    f32 unk180[6];
+    f32 sampledRangesB[6];
     f32 alpha;
-    f32 unk19C[6];
+    f32 sampledAngularRates[6];
     CCollisionInfo2_t render;
     s8 mode;
     u8 boundMatrixIndex;
@@ -3865,11 +3865,11 @@ struct ParticleEffect {
     u8 alphaByte;
     u8 releaseRequested;
     char pad1DA[6];
-    f32 unk1E0;
+    f32 initialMotion;
     IntrusiveList *list;
     char pad1E8[4];
     struct ParticleEffect *next;
-    s32 unk1F0;
+    s32 reserved1F0;
     struct ParticleEffect *groupNext;
 };
 struct EffectSystem;
@@ -3940,15 +3940,15 @@ struct Piece;
 struct Piece {
     char pad0[0x14];
     s32 tag;
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-    s32 unk2C;
-    s32 unk30;
-    s32 unk34;
-    s32 unk38;
+    s32 relocatedOffset18;
+    s32 relocatedOffset1C;
+    s32 relocatedOffset20;
+    s32 relocatedOffset24;
+    s32 relocatedOffset28;
+    s32 relocatedOffset2C;
+    s32 relocatedOffset30;
+    s32 relocatedOffset34;
+    s32 relocatedOffset38;
 };
 struct PieceGroup;
 struct PakMenuSlot;
@@ -3960,7 +3960,7 @@ struct HudCue {
     s32 cue0;
     s32 cue1;
     char pad10[4];
-    s32 unk14;
+    s32 reserved14;
     s32 state;
 };
 struct Init;
@@ -4020,7 +4020,7 @@ struct ListScreenScreen {
     ListScreenItem *right;
     s32 rightCount;
     s32 reservedWord;
-    s32 unk_3E0;
+    s32 countdown;
     s32 text3E4;
     ListScreenItem *reservedPointer;
     ListScreenItem *label;
@@ -4055,13 +4055,13 @@ struct MatchRewardsRecord {
 };
 struct Variable;
 struct Variable {
-    int unk0;
+    int reservedWord;
     unsigned int valueType;
     float minimum;
     float maximum;
     float step;
-    int unk14;
-    void *(*unk18)();
+    int reserved14;
+    void *(*accessor)();
 };
 struct TypedMenuVariableView;
 struct Variable;
@@ -4105,7 +4105,7 @@ struct CacheEvictionNode;
 struct CacheEvictionNode {
     u32 start;
     u32 end;
-    s32 unk_8;
+    s32 reserved8;
     u32 flags;
     s32 stamp; /* 0x10: last-use tick */
     char pad14[0x10];
@@ -4151,10 +4151,10 @@ struct OptionsOpenScreen {
     char pad1C[0x20 - 0x1C];
     struct OptionsOpenItem *cursor;
     char pad24[0x28 - 0x24];
-    s32 unk_28;
-    s32 unk_2C;
+    s32 length;
+    s32 mode;
     char pad30[0x34 - 0x30];
-    s32 unk_34;
+    s32 open;
     s32 full;
 };
 struct Label;
@@ -4227,23 +4227,23 @@ struct PickupGoalNodeList {
 struct PickupGoalControllerView;
 struct PickupGoalControllerView {
     u8 pad0[4];
-    s32 unk_4;
+    s32 searchKey;
     u8 pad8[4];
-    u32 unk_C;
+    u32 selectedNode;
     u8 pad10[4];
     s32 history[4];
     u8 pad24[0x44];
-    s32 unk_68;
+    s32 goal;
     u8 pad6C[0x50];
-    u32 unk_BC;
+    u32 goalSet;
 };
 struct TrackerAimActorView;
 struct Plan;
 struct Plan {
     s32 p0;
-    s32 unk4;
+    s32 aimTargetFlag;
     char p8[0x28];
-    CompactOptionsPageView *unk30;
+    CompactOptionsPageView *probeParams;
     char p34[0x34];
     struct TrackerAimActorView *currentTarget;
     char p6C[0x14];
@@ -4252,7 +4252,7 @@ struct Plan {
     s32 p88;
     f32 aimYaw;
     f32 aimHeight;
-    signed char unk94;
+    signed char routeCursor;
     char p95[0x1B];
     CVector3 pos;
     s32 aimRoom;
@@ -4333,7 +4333,7 @@ struct ResourceRequest;
 struct ResourceHandleView;
 struct ResourceHandleView {
     s32 **handle;
-    s32 unk4;
+    s32 reserved4;
     u32 flags;
 };
 struct ResultsHeadingName;
@@ -4458,7 +4458,7 @@ struct FragTagProfileFlagView;
 struct Shared_AnimState;
 struct Shared_AnimState {
     char pad0[0xB];
-    s8 unk_B;
+    s8 activeFlag;
     char padC[0x8];
 };
 struct Shared_GlobalFlowState;
@@ -4510,23 +4510,23 @@ struct Shared_PoseModel;
 struct Shared_PoseModel {
     s32 kind;
     char pad4[0x34];
-    f32 unk_38;
+    f32 verticalOffset;
 };
 struct Shared_PosePart;
 struct Shared_PosePart {
     char pad0[0xC];
-    s32 unk_C;
+    s32 effectPartMask;
     char pad10[0x2];
-    s8 unk_12;
+    s8 twistStep;
     char pad13[0x1];
-    s8 unk_14[4];
-    CVector3 unk_18;
+    s8 twistJoints[4];
+    CVector3 twistAxis;
     char pad24[0x44];
 };
 struct Shared_PoseWorld;
 struct Shared_PoseWorld {
     char pad0[0x1218];
-    s32 unk_1218;
+    s32 impactTwistPending;
     char pad121C[0xA4];
     f32 scale;
 };
@@ -4534,36 +4534,36 @@ struct Shared_PoseActor;
 struct Shared_PoseContext;
 struct Shared_PoseActor {
     char pad0[0x1];
-    s8 unk_1;
+    s8 partBitIndex;
     char pad2[0x6];
     CVector3 pos;
     StateFlags *surface;
     Shared_PoseModel *model;
     char pad1C[0x54];
-    f32 unk_70;
+    f32 verticalOffset;
     Mtx mtx;
     s32 handle;
-    u8 *unk_B8;
+    u8 *boneMatrixData;
     char padBC[0xC];
-    s32 unk_C8;
+    s32 animationResourceId;
     char padCC[0x1A];
-    s8 unk_E6;
+    s8 animationResourceUnits;
     char padE7[0x19];
     s32 flags;
     Shared_AnimState animA;
     Shared_AnimState animB;
     char pad12C[0x4];
-    f32 unk_130;
+    f32 blendFactor;
     char pad134[0x7];
     u8 effectReferenceCount;
     char pad13C[0x4];
-    u8 unk_140[2][24];
+    u8 sampledLighting[2][24];
     Shared_PosePart part;
     Shared_PoseWorld *world;
     char pad1DC[0xB4];
     void (*callback)(Mtx, struct Shared_PoseContext *);
     char pad294[0x4C];
-    s32 unk_2E0;
+    s32 attachmentEffectsFlag;
 };
 struct Shared_PoseContext {
     Shared_PosePartEntry *part;
@@ -4637,12 +4637,12 @@ struct TextBoundsData;
 struct TextBoundsDescriptor;
 struct TextBoundsDescriptor {
     char pad0[0x44];
-    s8 * unk_44;
+    s8 * listContextKey;
 };
 struct TextBoundsFont;
 struct CItemInfo_t;
 struct CItemInfo_t {
-    s32 field0;
+    s32 entryIndex;
     s32 width;
     s32 height;
     f32 m_ScaleX; /* 0x0C */
@@ -4665,11 +4665,11 @@ struct TextBoundsText {
     s32 flags;
     s16 x; /* 0x0C */
     s16 y; /* 0x0E */
-    s32 field10;
+    s32 reserved10;
     void *text;
     struct TextBoundsHandlers *handlers;
     s32 spacing;
-    s32 field20;
+    s32 reserved20;
     struct TextBoundsDescriptor *descriptor; /* 0x24 */
 };
 struct ItemDef;

@@ -29,7 +29,7 @@ struct {
     unsigned char b1[32];
     unsigned int w2[12];
     unsigned short h3[64];
-} D_auto_rodata_unresolved_800C8604 = {
+} g_decodeRodataTables_eu = {
     {
         0x4F000000, 0x40000000, 0x4F000000,
     },

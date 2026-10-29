@@ -26,9 +26,9 @@ struct OwnerStaticInstanceDrawDistanceFadedModel {
     s8 fade;
 };
 struct ModelEffectSpawnState {
-    s32 field0;
+    s32 paused;
     u8 pad4[0x18];
-    s32 field1C;
+    s32 reservedWord1C;
 };
 struct StaticObject {
     u8 state;

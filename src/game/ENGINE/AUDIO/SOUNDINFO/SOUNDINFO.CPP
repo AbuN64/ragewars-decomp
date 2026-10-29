@@ -48,7 +48,7 @@ signed char SoundInfo_GetPitch(void *desc) {
 
 /** Read the signed object byte at offset 0xF. */
 signed char SoundInfo_GetByteF_de(void *object) {
-    return ((SoundDescriptor *)object)->fieldF;
+    return ((SoundDescriptor *)object)->envelopeFlag;
 }
 
 /** Return the signed halfword stored at offset 0x10. */
@@ -71,7 +71,7 @@ int SoundInfo_GetY(SoundDescriptor *object) {
 
 /** Return the signed halfword at offset twelve. */
 int SoundInfo_GetHalfwordC_de(void *soundDescriptor) {
-    return ((SoundDescriptor *)soundDescriptor)->fieldC;
+    return ((SoundDescriptor *)soundDescriptor)->reservedHalf;
 }
 
 #if defined(VERSION_US)

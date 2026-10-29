@@ -157,7 +157,7 @@ void Gobjinst_UpdateActorGroundRotation(ActorModelLoadState *actor) {
     void *rotationDestination;
     actorFlags = actor->flags;
     flags = actorFlags & 0x300000;
-    if (!(actorFlags & 1) && (rotationState = InstHdr_GetActorMotionState(actor), (actor->modelHeader != NULL)) && (vec = Insthdr_BuildActorGroundRotation(actor), resetRotationFlag = actor->modelHeader->unk2 & 1, (InstHdr_UsesGroundRotation(actor) != 0))) {
+    if (!(actorFlags & 1) && (rotationState = InstHdr_GetActorMotionState(actor), (actor->modelHeader != NULL)) && (vec = Insthdr_BuildActorGroundRotation(actor), resetRotationFlag = actor->modelHeader->spreadHighWord & 1, (InstHdr_UsesGroundRotation(actor) != 0))) {
         if (resetRotationFlag != 0) {
             vec.x = vec.y = vec.z = 0.0f;
             vec.w = g_actorGroundRotationUnitW;
@@ -189,29 +189,29 @@ void Gobjinst_MoveActorWithContactCallback(char *actor, CVector3 *destination) {
     f32 saved;
     void (*callback)(void *, void *, CollisionInfo *);
 
-    if ((((ActorModelResourceView *)(actor))->unk_100 & 0x10000) && ((ActorModelResourceView *)(actor))->unk_1A0 != 0) {
-        collision = ((ActorCollisionResourceView *)(((ActorModelResourceView *)(actor))->unk_1A0))->unk_C;
+    if ((((ActorModelResourceView *)(actor))->flags & 0x10000) && ((ActorModelResourceView *)(actor))->collisionResource != 0) {
+        collision = ((ActorCollisionResourceView *)(((ActorModelResourceView *)(actor))->collisionResource))->collisionInfo;
         if (collision == 0) {
             collision = &g_defaultActorCollisionInfo;
         }
-        saved = ((ActorCollisionDataView *)(collision))->unk_8.v0;
-        if ((u32)(((ActorModelResourceView *)(actor))->unk_238 - 0x2B0C) < 8) {
-            ((ActorCollisionDataView *)(collision))->unk_8.v1 = 0;
+        saved = ((ActorCollisionDataView *)(collision))->collisionParams.v0;
+        if ((u32)(((ActorModelResourceView *)(actor))->typeId - 0x2B0C) < 8) {
+            ((ActorCollisionDataView *)(collision))->collisionParams.v1 = 0;
         }
-        old_contact = ((ActorModelResourceView *)(actor))->unk_14;
+        old_contact = ((ActorModelResourceView *)(actor))->model;
         collided = Unicol_MoveActorWithCollision(actor, *destination, collision);
-        if (old_contact != ((ActorModelResourceView *)(actor))->unk_14) {
-            ((ActorModelResourceView *)(actor))->unk_1F4 = old_contact;
+        if (old_contact != ((ActorModelResourceView *)(actor))->model) {
+            ((ActorModelResourceView *)(actor))->previousModel = old_contact;
         }
-        ((ActorCollisionDataView *)(collision))->unk_8.v0 = saved;
-        if (old_contact != 0 && ((ActorModelResourceView *)(actor))->unk_14 != 0 &&
-                *old_contact != *((ActorModelResourceView *)(actor))->unk_14 &&
-                *((ActorModelResourceView *)(actor))->unk_18 == 1) {
+        ((ActorCollisionDataView *)(collision))->collisionParams.v0 = saved;
+        if (old_contact != 0 && ((ActorModelResourceView *)(actor))->model != 0 &&
+                *old_contact != *((ActorModelResourceView *)(actor))->model &&
+                *((ActorModelResourceView *)(actor))->definition == 1) {
             Link_DispatchObjectLinks((s32)old_contact, 0x80, actor);
-            Link_DispatchObjectLinks((s32)((ActorModelResourceView *)(actor))->unk_14, 0x40, actor);
+            Link_DispatchObjectLinks((s32)((ActorModelResourceView *)(actor))->model, 0x40, actor);
         }
-        if (collided != 0 && !(((ActorModelResourceView *)(actor))->unk_100 & 0x300000) &&
-                *((ActorModelResourceView *)(actor))->unk_18 == 1 && g_currentActorInstance.text != 0 &&
+        if (collided != 0 && !(((ActorModelResourceView *)(actor))->flags & 0x300000) &&
+                *((ActorModelResourceView *)(actor))->definition == 1 && g_currentActorInstance.text != 0 &&
                 *g_currentActorInstance.text == 1) {
             Link_DispatchActorLinks(g_currentActorInstance.text, 0x20, actor);
         }
@@ -220,6 +220,6 @@ void Gobjinst_MoveActorWithContactCallback(char *actor, CVector3 *destination) {
             callback(actor, actor + 0x170, collision);
         }
     } else {
-        ((ActorModelResourceView *)(actor))->unk_8 = *destination;
+        ((ActorModelResourceView *)(actor))->position0 = *destination;
     }
 }

@@ -4,7 +4,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 typedef struct MenuOptionBox {
-    s32 field0;
+    s32 reservedWord;
     s32 width;
     s32 height;
     f32 scaleX;

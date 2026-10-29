@@ -33,32 +33,32 @@ typedef struct BreakableContactState {
 
 /* Apply the descriptor hit rule, then update the contact response timer. */
 void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *hit) {
-    BreakableContactRule *rule = (BreakableContactRule *)(ctx->unk_18 + 0x14);
+    BreakableContactRule *rule = (BreakableContactRule *)(ctx->descriptor + 0x14);
     ResourceManagerState eventState;
     f32 damageScale;
     s32 triggerResponse;
     s8 team;
     if (rule->damageFactor != -1) {
         damageScale = rule->damageFactor * (1.0f / 127.0f);
-        if (ctx->unk_E6 == 1) {
+        if (ctx->forced == 1) {
             triggerResponse = 1;
         } else {
             team = hit->team;
-            if (ctx->unk_108 != team || ctx->unk_10A != team) {
+            if (ctx->teamIdFirst != team || ctx->teamIdSecond != team) {
                 triggerResponse = 0;
-            } else if (hit->active != 0 && !(ctx->unk_100 & 0x400)) {
+            } else if (hit->active != 0 && !(ctx->flags & 0x400)) {
                 triggerResponse = 1;
             } else {
-                if (ctx->unk_10C < 3 && (ctx->unk_100 & 0x400)) {
-                    triggerResponse = ctx->unk_12C * damageScale <= ctx->unk_134;
+                if (ctx->hitCount < 3 && (ctx->flags & 0x400)) {
+                    triggerResponse = ctx->flaggedHitCount * damageScale <= ctx->flaggedHitLimit;
                 } else {
-                    triggerResponse = ctx->unk_10C * damageScale <= ctx->unk_104;
+                    triggerResponse = ctx->hitCount * damageScale <= ctx->hitLimit;
                 }
             }
         }
         if (triggerResponse) {
             eventState.active = 0;
-            Events_DispatchCallback(ctx, ctx, 6, ctx->unk_8, eventState);
+            Events_DispatchCallback(ctx, ctx, 6, ctx->position, eventState);
             Rumble_SetActorStateBit(&g_world, ctx, 1);
         }
     }
@@ -109,28 +109,28 @@ void Action_ResolveBreakableHit(void *breakableHitContext, BreakableHitStateView
     s32 destroy;
     s8 team;
 
-    factor = ((struct BreakableDamageScaleView *) ((BreakableHitContext *) breakableHitContext)->unk_18)->unk_1D;
+    factor = ((struct BreakableDamageScaleView *) ((BreakableHitContext *) breakableHitContext)->descriptor)->damageScale;
     if (factor == -1) {
         return;
     }
     scale = factor * k_breakableDamageScale;
-    if (((BreakableHitContext *)(breakableHitContext))->unk_E6 == 1) {
+    if (((BreakableHitContext *)(breakableHitContext))->forced == 1) {
         destroy = 1;
     } else {
-        team = hitState->unk_CA;
-        if (((BreakableHitContext *)(breakableHitContext))->unk_108 != team || ((BreakableHitContext *)(breakableHitContext))->unk_10A != team) {
+        team = hitState->team;
+        if (((BreakableHitContext *)(breakableHitContext))->teamIdFirst != team || ((BreakableHitContext *)(breakableHitContext))->teamIdSecond != team) {
             destroy = 0;
-        } else if (hitState->unk_CB != 0 && !(((BreakableHitContext *)(breakableHitContext))->unk_100 & 0x400)) {
+        } else if (hitState->active != 0 && !(((BreakableHitContext *)(breakableHitContext))->flags & 0x400)) {
             destroy = 1;
-        } else if (((BreakableHitContext *)(breakableHitContext))->unk_10C < 3 && (((BreakableHitContext *)(breakableHitContext))->unk_100 & 0x400)) {
-            destroy = ((BreakableHitContext *)(breakableHitContext))->unk_12C * scale <= ((BreakableHitContext *)(breakableHitContext))->unk_134;
+        } else if (((BreakableHitContext *)(breakableHitContext))->hitCount < 3 && (((BreakableHitContext *)(breakableHitContext))->flags & 0x400)) {
+            destroy = ((BreakableHitContext *)(breakableHitContext))->flaggedHitCount * scale <= ((BreakableHitContext *)(breakableHitContext))->flaggedHitLimit;
         } else {
-            destroy = ((BreakableHitContext *)(breakableHitContext))->unk_10C * scale <= ((BreakableHitContext *)(breakableHitContext))->unk_104;
+            destroy = ((BreakableHitContext *)(breakableHitContext))->hitCount * scale <= ((BreakableHitContext *)(breakableHitContext))->hitLimit;
         }
     }
     if (destroy) {
         local.active = 0;
-        Events_DispatchCallback(breakableHitContext, breakableHitContext, 7, ((BreakableHitContext *)(breakableHitContext))->unk_8, local);
+        Events_DispatchCallback(breakableHitContext, breakableHitContext, 7, ((BreakableHitContext *)(breakableHitContext))->position, local);
         Rumble_SetActorStateBit(&g_world, breakableHitContext, 0);
     }
 }
@@ -188,8 +188,8 @@ void Action_DeactivateBreakable(BreakableHitContext *breakableHitContext) {
     Fx_RecycleOwnerParticles(&g_actorParticleScene, (s32)breakableHitContext);
     if (flag->mode != 4) {
         Events_DispatchCallback(breakableHitContext, breakableHitContext, 7,
-                      breakableHitContext->unk_8, local);
-        breakableHitContext->unk_100 |= 0x08000000;
+                      breakableHitContext->position, local);
+        breakableHitContext->flags |= 0x08000000;
     }
 }
 

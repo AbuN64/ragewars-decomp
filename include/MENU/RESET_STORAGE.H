@@ -5,7 +5,7 @@ typedef struct {
     u8 padding_0[4];
     f32 closeDelay;
     u8 padding_8[884];
-    s32 unk37C;
+    s32 selectedIndex;
 } ResetTimerStorage;
 typedef struct {
     u8 padding_0[1688];

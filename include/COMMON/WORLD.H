@@ -33,7 +33,7 @@ typedef struct Shared_World {
     void **resourceHandle; /* 0x14 */
     s32 resourceKey; /* 0x18 */
     s32 resourceBank; /* 0x1C */
-    s32 unk20;
+    s32 textureBank;
     s32 indexedBank; /* 0x24 */
     s32 lookupBank; /* 0x28 */
     s32 resourceKindBank; /* +0x2C: Scene_StartWorldEffect */
@@ -43,7 +43,7 @@ typedef struct Shared_World {
     s32 noteCount; /* 0x44: MENU/PAK 80409AC0, 80408870 */
     u8 unknown48[4];
     s32 *resourceDirectory; /* 0x4C */
-    s32 unk50;
+    s32 textureDirectory;
     s32 *indexedDirectory; /* 0x54 */
     s32 *lookupDirectory; /* 0x58 */
     s32 *resourceKindDirectory; /* +0x5C: Scene_StartWorldEffect */

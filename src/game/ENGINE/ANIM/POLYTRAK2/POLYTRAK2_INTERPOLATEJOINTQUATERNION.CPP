@@ -21,7 +21,7 @@ void *Polytrak2_GetResidentResource(void *object) {
 
 void Polytrak2_InterpolateJointTranslation(void *animationLinks, s32 jointIndex, void *translationOut) {
     BoneRotationTrackView *o = animationLinks;
-    BoneRotationIndexPair *indices = (void *)o->unk_0;
+    BoneRotationIndexPair *indices = (void *)o->boneIndexPairs;
     s16 idx;
     RecGobjinstSampleBoneTranslation *recs;
     void *base;
@@ -29,20 +29,20 @@ void Polytrak2_InterpolateJointTranslation(void *animationLinks, s32 jointIndex,
 
     idx = indices[jointIndex].translation;
     if (idx == -1) {
-        recs = (void *)o->unk_4;
+        recs = (void *)o->initialOrientations;
         __builtin_memcpy(out, &recs[jointIndex], sizeof(*out));
         return;
     }
-    base = SetN64_GetPackSection(o->unk_8, (s32) idx);
-    Graphu64_InterpolateVector(translationOut, o->unk_20,
-                  (char *)base + (o->unk_18) * 4,
-                  (char *)base + (o->unk_1C) * 4);
+    base = SetN64_GetPackSection(o->translationFrames, (s32) idx);
+    Graphu64_InterpolateVector(translationOut, o->frameBlend,
+                  (char *)base + (o->translationFirst) * 4,
+                  (char *)base + (o->translationNext) * 4);
 }
 
 void Polytrak2_InterpolateJointQuaternion(void *animationLinks, s32 jointIndex, void *cQuatern) {
     BoneRotationTrackView *o = animationLinks;
     CQuatern *out = cQuatern;
-    BoneRotationIndexPair *indices = (void *)o->unk_0;
+    BoneRotationIndexPair *indices = (void *)o->boneIndexPairs;
     s16 idx;
     CROMInitialOrientation_t *rec;
     void *base;
@@ -50,18 +50,18 @@ void Polytrak2_InterpolateJointQuaternion(void *animationLinks, s32 jointIndex, 
 
     idx = indices[jointIndex].rotationIndex;
     if (idx == -1) {
-        rec = (void *)(o->unk_4 + jointIndex * 0x14);
+        rec = (void *)(o->initialOrientations + jointIndex * 0x14);
         scale = g_jointInterpolationAngleScale;
-        out->x = (f32)(rec->unk_C) * scale;
+        out->x = (f32)(rec->m_RotX) * scale;
         out->y = (f32)(rec->m_RotY) * scale;
-        out->z = (f32)(rec->unk_10) * scale;
-        out->w = (f32)(rec->unk_12) * scale;
+        out->z = (f32)(rec->m_RotZ) * scale;
+        out->w = (f32)(rec->m_RotW) * scale;
         return;
     }
-    base = SetN64_GetPackSection(o->unk_C, (s32) idx);
-    Graphu64_InterpolateQuaternionArc(cQuatern, o->unk_20,
-                  (char *)base + (o->unk_10) * 4,
-                  (char *)base + (o->unk_14) * 4);
+    base = SetN64_GetPackSection(o->rotationFrames, (s32) idx);
+    Graphu64_InterpolateQuaternionArc(cQuatern, o->frameBlend,
+                  (char *)base + (o->rotationFirst) * 4,
+                  (char *)base + (o->rotationNext) * 4);
 }
 
 /** Scale a value by the maximum integer represented by a bit count. */

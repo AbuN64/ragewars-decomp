@@ -64,7 +64,7 @@ extern void Widget_SetWidgetFlag08(void *, s32);
 /* Runs the screen g_resultsModelPreviewScreen each frame until stage 1 of g_selectionMessageStage: on its first frame it marks
    the word at 0x90, passes 0x272 to Menu_SetFocusedElement, or 0x273 when Widget_ListHasFlag100_AchieveUpdateresultsscreen
    reports zero for item 0x273 of the window argument, also 0x272 when g_campaignCompletionMenuEnabled is clear, and calls Tsmos_ActivateControllerState; then, once the
-   reply pair ending at D_80154024 is marked, it clears the mark and either hides the item at 0x24,
+   reply pair ending at g_selectionMessageReply.ready is marked, it clears the mark and either hides the item at 0x24,
    clears the word at 0x1C0, calls MarkMenuEventHandled and leaves through SmXlate_SwitchScreen with the reply,
    or for a reply of -1 shows the item again and sets 0x1C0 to one. Returns zero. Written from the
    assembly; the conditional tests the zero case first. */

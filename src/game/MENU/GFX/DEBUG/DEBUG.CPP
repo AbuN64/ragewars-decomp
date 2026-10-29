@@ -72,6 +72,6 @@ unsigned int k_DebugEncodedWords[4] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_804142AC_E1D00_us_rev1.c */
-const char s_gfxDebugUnknownTextRev1[8] = "UNKNOWN";
+/* ROM-grounded data: src/s_gfxDebugUNKNOWNLabelRev1.c */
+const char s_gfxDebugUNKNOWNLabelRev1[8] = "UNKNOWN";
 #endif

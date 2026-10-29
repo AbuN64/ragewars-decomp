@@ -306,7 +306,7 @@ f32 Defs_CosineEase(f32 fraction)
       clampedFraction = clampBound;
     }
   }
-  return (g_cosineEaseOutputConstants - Math_Cosf(clampedFraction * g_cosineEaseAngleScale)) * (((struct PaddedFloatView *) ((char *) (&g_cosineEaseOutputConstants)))->unk4);
+  return (g_cosineEaseOutputConstants - Math_Cosf(clampedFraction * g_cosineEaseAngleScale)) * (((struct PaddedFloatView *) ((char *) (&g_cosineEaseOutputConstants)))->value);
 }
 
 /** Return whether an address lies within one of three recognized ranges. */

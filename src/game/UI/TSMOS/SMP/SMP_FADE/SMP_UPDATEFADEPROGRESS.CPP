@@ -20,14 +20,14 @@ s32 Smp_UpdateFadeProgress(MenuFadeWidget *object) {
                     frame->progressX = result;
                 } else frame->progressX = value - g_fadeProgressRetreatStep;
             } else {
-                value = frame->field_24;
+                value = frame->progressY;
                 if (value != target) {
                     if (value < target) {
-                        frame->field_24 = value + object->scaleY;
+                        frame->progressY = value + object->scaleY;
                         object = object->frame;
-                        if (target < object->field_24) object->field_24 = g_fadeProgressMinimum;
+                        if (target < object->progressY) object->progressY = g_fadeProgressMinimum;
                     } else {
-                        frame->field_24 = target;
+                        frame->progressY = target;
                         object->phase = 3;
                     }
                 }
@@ -36,14 +36,14 @@ s32 Smp_UpdateFadeProgress(MenuFadeWidget *object) {
         case 2:
             frame = object->frame;
             target = g_fadeProgressAlternateTarget;
-            value = frame->field_24;
+            value = frame->progressY;
             if (target < value - target) {
                 if (target < value) {
                     result = value - object->scaleY;
                     if (result < target) result = target;
                     else if (g_fadeProgressHorizontalMaximum < result) result = g_fadeProgressHorizontalMaximum;
-                    frame->field_24 = result;
-                } else frame->field_24 = value + g_fadeProgressAdvanceStep;
+                    frame->progressY = result;
+                } else frame->progressY = value + g_fadeProgressAdvanceStep;
             } else {
                 value = frame->progressX;
                 if (value != 0.0f) {

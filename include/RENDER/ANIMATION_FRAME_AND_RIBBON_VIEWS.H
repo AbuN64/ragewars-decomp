@@ -86,7 +86,7 @@ struct ParticleActorListView {
     s32 particleActors;
 };
 struct Animator {
-    s32 unk0;
+    s32 reservedWord;
     s32 mode;
     f32 time;
     f32 *loop;

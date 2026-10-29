@@ -23,7 +23,7 @@ typedef struct CGameStatus_t {
     s32 m_nFragTagSkin; /* +0x70: lw in Player_BeginJump, lbu at +0x73 in Player_DrawTintedPlayer_Rendercounters */
     s32 m_FragTagMode;
     s32 m_bCTFOn;
-    s32 unk7C;
+    s32 otherLimit;
     s32 m_CTFPlayerWithFlag;
     s32 m_CTFMode;
     s32 first, m_bCreditsSeenOnce;

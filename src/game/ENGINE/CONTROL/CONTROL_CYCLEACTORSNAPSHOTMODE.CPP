@@ -227,7 +227,7 @@ void Control_RestoreActorSnapshot(void) {
         actor->block = snapshot->blocks[i];
         if (snapshot->mode == 1) {
             actor->position = snapshot->positions[i];
-            actor->field6C = snapshot->values[i];
+            actor->yaw = snapshot->values[i];
             actor->id = Scene_GetModelSectionTwoRecord(&g_world, snapshot->handles[i]);
         }
     }
@@ -257,7 +257,7 @@ void Control_SaveActorSnapshot(void) {
         actor = &list->actors[i];
         snapshot->blocks[i] = actor->block;
         snapshot->positions[i] = actor->position;
-        snapshot->values[i] = actor->field6C;
+        snapshot->values[i] = actor->yaw;
         snapshot->handles[i] = Scene_GetModelSectionTwoIndex(&g_world, actor->id);
         list = (ActorList *)&g_playerViewRenderContext;
     }

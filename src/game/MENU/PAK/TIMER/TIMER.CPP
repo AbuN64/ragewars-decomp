@@ -31,7 +31,7 @@ s32 Timer_MatchesGameIdentity(char *code, char *name) {
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-/* Reports whether the two-character code arg0 and the four-character name arg1 are the pair g_pakCompanyCodeFixed and g_pakLegacySnapshotGameNameFixed, measuring them with XPlus_StringLength and comparing them with XPlus_CompareStrings; returns one on a match and zero otherwise. */
+/* Reports whether the two-character code code and the four-character name name are the pair g_pakCompanyCodeFixed and g_pakLegacySnapshotGameNameFixed, measuring them with XPlus_StringLength and comparing them with XPlus_CompareStrings; returns one on a match and zero otherwise. */
 
 extern char *g_pakLegacySnapshotGameNameFixed;
 
@@ -78,7 +78,7 @@ char *Timer_GetSaveBlockByteCount(s32 block) {
 }
 
 void Timer_SetSaveTrailerValue(s32 offset, s32 value) {
-    ((struct PlayerPakTimerView *) (g_worldSnapshotNoteBytes + offset))->unk_60C = value;
+    ((struct PlayerPakTimerView *) (g_worldSnapshotNoteBytes + offset))->trailerValue = value;
 }
 
 /* Returns the last word of a self-sized block: the first word holds the block's byte length and

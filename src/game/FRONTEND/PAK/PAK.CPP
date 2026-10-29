@@ -91,10 +91,10 @@ s32 Pak_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     }
     if (Snapshot_CheckStatusPrompt(menu, channel, 1) != 0) {
         g_pakMenuPromptAccepted = 1;
-        Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->unk24, menu->player, menu->owner, 0);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->dialogText, menu->player, menu->owner, 0);
         return 1;
     }
-    Menu_OpenDialog(g_matchEndingTeamWheelClose, &g_pakChannelFallbackDialogText, menu->player, menu->owner, menu->unk24);
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, &g_pakChannelFallbackDialogText, menu->player, menu->owner, menu->dialogText);
     return 1;
 }
 
@@ -115,10 +115,10 @@ s32 Pak_OpenPakStatusPrompt(void *menuContext, Shared_PakMenu *menu) {
         } else {
             buffer = g_matchEndingTeamWheelClose;
         }
-        Menu_OpenDialog(buffer, menu->unk24, menu->player, menu->owner, 0);
+        Menu_OpenDialog(buffer, menu->dialogText, menu->player, menu->owner, 0);
         return 1;
     }
-    Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->unk24, menu->player, menu->owner, 0);
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->dialogText, menu->player, menu->owner, 0);
     return 1;
 }
 
@@ -130,13 +130,13 @@ s32 Pak_CancelPakAction(s32 unused0, PakCancelActionView *action) {
     if (g_pakUseScannedChannel != 0) {
         g_pakRecheckRequested = 1;
     } else {
-        actionOwner = action->unk1C;
+        actionOwner = action->player;
         if (actionOwner != NULL) {
             dialogOwner = actionOwner->owner + 0x554;
         } else {
             dialogOwner = g_matchEndingTeamWheelClose;
         }
-        Menu_OpenDialog(dialogOwner, (void *)action->unk24, (void *)action->unk1C, (void *)action->unk20, 0);
+        Menu_OpenDialog(dialogOwner, (void *)action->dialogList, (void *)action->player, (void *)action->controller, 0);
     }
     return 1;
 }

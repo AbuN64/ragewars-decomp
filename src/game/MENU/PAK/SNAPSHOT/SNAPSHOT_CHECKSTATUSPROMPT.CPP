@@ -156,7 +156,7 @@ static __inline__ char *pakPrompt(s32 *channel) {
 #include "COMMON/RECORDRECAT1C.H"
 #include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 extern s32 g_pakSaveMenuActiveDe, g_pakProfileLoadMode_de, g_pakUseScannedChannel, g_pakProfileLoadActive, g_pakMenuPromptAccepted, g_introSelectedItem;
-extern char g_matchEndingTeamWheelClose[], D_0044FFA4[], g_pakStatusPromptAlternate[];
+extern char g_matchEndingTeamWheelClose[], g_controllerPakNotReadyDialogResource[], g_pakStatusPromptAlternate[];
 extern char g_pakChangeBusyDialog[], g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt[], g_pakChannelReadyMessage_SnapshotCheckstatusprompt[], g_pakDialogDamagedPak[], g_pakScannedChannelReadyMessage[];
 extern void Note_ProbeStatus(s32);
 extern s32 Note_GetStatus(s32), Note_IsChannelReady(s32), Note_NeedsIdRepair(s32), Control_TakePakChange(s32);
@@ -176,7 +176,7 @@ s32 Snapshot_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 q
             sel = pakPrompt(&slot);
         }
     } else if (g_pakProfileLoadActive) {
-        sel = D_0044FFA4;
+        sel = g_controllerPakNotReadyDialogResource;
         if (g_pakProfileLoadMode_de) sel = g_pakStatusPromptAlternate;
     } else if (g_pakUseScannedChannel) sel = g_pakDialogPromptScannedChannel;
     prompt = sel;

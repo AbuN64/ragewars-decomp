@@ -233,18 +233,18 @@ void Audio_StopVoiceSlot(s32 voicePoolAddress, s16 slotIndex) {
 
     base = (slotIndex * 0xCC) + voicePoolAddress;
     base = base + 4;
-    a0 = ((struct IntegerStateB4 *) base)->unk_B0;
-    ((struct IntegerStateB4 *) base)->unk_AC = 1;
-    ((struct IntegerStateB4 *) base)->unk_50 = 0;
+    a0 = ((struct IntegerStateB4 *) base)->context;
+    ((struct IntegerStateB4 *) base)->done = 1;
+    ((struct IntegerStateB4 *) base)->tracked = 0;
     s1 = (void *)(a0 + 0x84);
-    if (((struct IntegerStateB4 *) base)->unk_10 != ((struct VoiceMatchingKeyView *) a0)->voiceKey) {
-        s32 idx = ((struct IntegerStateB4 *) base)->unk_0;
+    if (((struct IntegerStateB4 *) base)->frame != ((struct VoiceMatchingKeyView *) a0)->voiceKey) {
+        s32 idx = ((struct IntegerStateB4 *) base)->slotIndex;
         s32 addr = a0 + idx * 2;
         alSndpSetSound(s1, ((struct SoundSlotHandleView *) addr)->soundId);
         if (alSndpGetState(s1) != 0) {
             alSndpStop(s1);
         }
-        ((struct IntegerStateB4 *) base)->unk_4 = -1;
+        ((struct IntegerStateB4 *) base)->handle = -1;
     }
 }
 
@@ -617,11 +617,11 @@ void Audio_DeallocateVoiceSlot(AudioVoiceControlSlotView *voiceRecord) {
     alSndpDeallocate(((AudioSoundPlayerOwnerView *)base)->sound, arrayBase->ids[voiceRecord->index]);
     arrayBase->ids[voiceRecord->index] = -1;
     voiceRecord->priority = 0;
-    voiceRecord->fieldC = -1;
+    voiceRecord->releaseMarker = -1;
     voiceRecord->used = -1;
     voiceRecord->value = -1;
     voiceRecord->channel = -1;
-    voiceRecord->fieldB4 = -1;
+    voiceRecord->releaseMarkerB = -1;
 }
 
 typedef struct {
@@ -729,11 +729,11 @@ int Audio_DeallocatePoolVoice(AudioVoiceFlagsPoolView *pool, short index) {
     alSndpDeallocate(entry->owner->sound, slot_id(slots, entry->index));
     slots->ids[entry->index] = -1;
     entry->priority = 0;
-    entry->fieldC = -1;
+    entry->releaseMarker = -1;
     entry->used = -1;
     entry->value = -1;
     entry->channel = -1;
-    entry->fieldB4 = -1;
+    entry->releaseMarkerB = -1;
     return 0;
 }
 

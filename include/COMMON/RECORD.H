@@ -24,19 +24,19 @@ extern int g_n64UiFrameCounter;
 struct RecordN64EngCreateNumericWidget;
 struct RecordN64EngCreateNumericWidget {
     s32 words_00[3];
-    s16 field_0C;
-    s16 field_0E;
+    s16 replacedMarker;
+    s16 classId;
     s32 words_10[7];
     s32 fields_2C[5];
     s32 reservedWord;
-    struct RecordN64EngCreateNumericWidget *field_44;
-    s32 field_48;
-    s32 field_4C;
-    s32 field_50;
-    s32 field_54;
-    s32 field_58;
-    s32 field_5C;
-    s32 field_60[3];
+    struct RecordN64EngCreateNumericWidget *childWidget;
+    s32 repeatCount;
+    s32 maximumValue;
+    s32 minimumValue;
+    s32 wrapEnabled;
+    s32 value;
+    s32 stepState;
+    s32 valueText[3];
 };
 
 

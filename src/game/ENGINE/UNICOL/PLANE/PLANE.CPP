@@ -125,11 +125,11 @@ void CPlane_ResetContact(void *contactStorage)
   int invalidContact;
   f32 initialContactDistance;
   initialContactDistance = (f32) g_planeInitialContactDistance;
-  contact->unk0 = 0;
-  contact->unk54 = 0;
+  contact->clearedWordFirst = 0;
+  contact->clearedWordSecond = 0;
   invalidContact = -1;
-  contact->unk58 = invalidContact;
-  contact->unkCC = initialContactDistance;
+  contact->invalidContactIndex = invalidContact;
+  contact->contactDistance = initialContactDistance;
 }
 
 /* 802406C0_2.CPP */

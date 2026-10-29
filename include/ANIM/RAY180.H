@@ -104,7 +104,7 @@ struct EntryC;
 struct EntryC {
     void **resource;
     CQuatern *rect;
-    s32 unk_8;
+    s32 reservedWord;
 };
 
 struct CollisionShapeDefinition;
@@ -142,7 +142,7 @@ extern float g_frontPlaneIntersectionInitialFraction;
 struct PlatformHeightView;
 struct PlatformHeightView {
     unsigned char padding_0[28];
-    f32 unk_1C;
+    f32 cylinderRadius;
 };
 
 struct ModelF0;
@@ -171,11 +171,11 @@ struct ActorB0 {
 struct PlatformRadiusMovementView;
 struct PlatformRadiusMovementView {
     unsigned char padding_0[12];
-    f32 unk_C;
+    f32 radius;
     unsigned char padding_10[76];
-    f32 unk_5C;
-    f32 unk_60;
-    f32 unk_64;
+    f32 movementX;
+    f32 movementY;
+    f32 movementZ;
 };
 
 struct PlatformCollisionQuery;
@@ -186,9 +186,9 @@ struct IntPair;
 struct PlatformMovementView;
 struct PlatformMovementView {
     unsigned char padding_0[92];
-    f32 unk_5C;
-    f32 unk_60;
-    f32 unk_64;
+    f32 movementX;
+    f32 movementY;
+    f32 movementZ;
 };
 
 struct RayCornerBounds;
@@ -325,9 +325,9 @@ struct ActorCPlatformCollisionPushActorFromBox {
 struct PlatformActivityPhaseView;
 struct PlatformActivityPhaseView {
     char pad0[0x4];
-    s32 unk4;
+    s32 top;
     char pad4[0x34 - 0x4 - sizeof(s32)];
-    f32 unk34;
+    f32 bottom;
 };
 
 struct ActorCPlatformCollisionProcessRiderMotion;
@@ -377,7 +377,7 @@ typedef struct CollisionShapeDefinition CollisionShapeDefinition;
 
 struct ModelF0;
 struct ModelF0 {
-    s32 unk_0;
+    s32 reservedWord;
     s32 count;
     ElementE8 elements[1];
 };

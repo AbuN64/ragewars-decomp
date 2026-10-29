@@ -47,7 +47,7 @@ struct Shared_ActorView {
     s16 fraction; /* 0x5E8 */
     s16 lives; /* 0x5EA */
     s32 spawn; /* 0x5EC */
-    s32 field5F0; /* 0x5F0 */
+    s32 reservedWord5F0; /* 0x5F0 */
     s16 ammo[3]; /* +0x5F4: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     char pad5FA[4];
     s16 actionEnabled; /* 0x5FE */
@@ -105,8 +105,8 @@ struct Shared_ActorView {
     s32 unk_0x0850;
     u8 pad854[0xC];
     s32 unk_0x0860;
-    s32 field864;
-    s32 field868;
+    s32 reservedWord864;
+    s32 reservedWord868;
     s32 effectId; /* 0x86C */
     u8 pad870[0x938 - 0x870];
     union {
@@ -123,13 +123,13 @@ struct Shared_ActorView {
     s32 weaponSoundHandle;
     s32 weaponLoopSoundHandle;
     u8 pad11C4[8];
-    s32 field11CC;
+    s32 reservedWord11CC;
     u8 pad11D0[8];
     f32 stun; /* +0x11D8: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     f32 impulse; /* 0x11DC */
     char pad11E0[4];
     f32 pending; /* +0x11E4: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
-    s32 field11E8;
+    s32 reservedWord11E8;
     f32 impactTimer; /* 0x11EC */
     u8 pad11F0[8];
     s32 unk_0x11F8;
@@ -138,26 +138,26 @@ struct Shared_ActorView {
     s32 attract; /* 0x120C: the force marker pulls (1) or pushes (0) */
     s32 targeting; /* 0x1210 */
     u8 pad1214[4];
-    s32 field1218; /* +0x1218: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
+    s32 reservedWord1218; /* +0x1218: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     s32 projectileBase; /* +0x121C: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     s32 projectileIndex; /* +0x1220: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     void * projectiles[2]; /* +0x1224: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     s32 impulseFlags; /* +0x122C: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
-    s32 field1230; /* +0x1230: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
-    s32 field1234; /* +0x1234: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
-    s32 field1238; /* +0x1238: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
+    s32 reservedWord1230; /* +0x1230: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
+    s32 reservedWord1234; /* +0x1234: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
+    s32 reservedWord1238; /* +0x1238: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     char pad123C[0x4];
-    s32 field1240; /* +0x1240: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
+    s32 reservedWord1240; /* +0x1240: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     u8 pad1244[0x12C0 - 0x1244];
     f32 reserve; /* 0x12C0 */
-    s32 field12C4;
-    s32 field12C8;
+    s32 reservedWord12C4;
+    s32 reservedWord12C8;
     s32 reset12CC[8];
     u8 pad12EC[8];
     s32 reset12F4[8];
     u8 pad1314[0x20];
-    s32 field1334;
-    s32 field1338;
+    s32 reservedWord1334;
+    s32 reservedWord1338;
     u8 pad133C[8];
     u8 messageHistory[5][0x15]; /* 0x1344 */
     u8 pad13AD[3];
@@ -185,7 +185,7 @@ struct Shared_ActorView {
     CVector3 resetPosition; /* 0x16C4: previous reset position */
     u8 pad16D0[4];
     s32 pickupEffectToggle;
-    s16 field16D8;
+    s16 reservedHalf16D8;
     u8 pad16DA[6];
     struct Shared_ActorView * next; /* +0x16E0: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
 };
@@ -258,9 +258,9 @@ struct Shared_PickupAmmoDefinition {
     char pad0[4];
     s16 id; /* 0x04, lookup key */
     char pad6[6];
-    s16 unkC; /* +0xC: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
-    s16 unkE; /* +0xE: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
-    s16 unk10; /* +0x10: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
+    s16 firstAmmoDrop; /* +0xC: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
+    s16 secondAmmoDrop; /* +0xE: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
+    s16 thirdAmmoDrop; /* +0x10: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     char pad12[0x6];
 };
 extern Shared_PickupAmmoDefinition g_pickupAmmoDefinitions[15]; /* item records, looked up by id */

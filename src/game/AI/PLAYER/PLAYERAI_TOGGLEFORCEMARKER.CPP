@@ -40,11 +40,11 @@ void Player_TransformPointByViewOrOwnerMatrix(void *player, CVector3 *point) {
 
     input = *point;
     input_ptr = &input;
-    matrix_ptr = object->unk5DC;
+    matrix_ptr = object->transformOwner;
 
     if (matrix_ptr != 0) {
         owner = (void *)matrix_ptr;
-        matrix_ptr = &owner->unk160;
+        matrix_ptr = &owner->viewMatrix;
     } else {
         Player_BuildPlayerViewTransform(player, &matrix);
         matrix_ptr = &matrix;
@@ -55,13 +55,13 @@ void Player_TransformPointByViewOrOwnerMatrix(void *player, CVector3 *point) {
 void Playerai_AddCappedEventCounter(void *player, s32 increment) {
     u16 wrappedSum;
     u16 cappedCounter;
-    wrappedSum = (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->unk_16D8) + increment;
+    wrappedSum = (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->eventCounter) + increment;
     cappedCounter = wrappedSum;
-    (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->unk_16D8) = wrappedSum;
+    (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->eventCounter) = wrappedSum;
     if ((u32) (cappedCounter & 0xFFFF) >= 0x65U) {
         cappedCounter = 0x64;
     }
-    (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->unk_16D8) = cappedCounter;
+    (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->eventCounter) = cappedCounter;
 }
 
 void Player_GetPlayerViewTranslation(void *player, f32 *origin) {

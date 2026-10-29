@@ -50,12 +50,12 @@ void Gastate_PrepareAnimationFrames(AnimationFramePreparationState *state, AnimI
         loopStart = state->loopStart;
         framePosition = state->framePosition;
         frameCount = (f32) state->frameCount;
-        frames->unk_0 = positions->data;
+        frames->boneIndexPairs = positions->data;
         section = SetN64_GetPackSection(resource, 2);
-        frames->unk_4 = section->data;
+        frames->initialOrientations = section->data;
         frames->translationFrames = SetN64_GetPackSection(channels, 1);
         frameScale = 1.0f;
-        frames->unk_C = SetN64_GetPackSection(channels, 2);
+        frames->rotationFrames = SetN64_GetPackSection(channels, 2);
         if (framePosition >= 0.0f) {
             floorFrameIndex = (s32) framePosition;
             goto block_8;
@@ -67,7 +67,7 @@ void Gastate_PrepareAnimationFrames(AnimationFramePreparationState *state, AnimI
 block_8:
             floorFramePosition = (f32) floorFrameIndex;
         }
-        frames->unk_20 = (f32) (framePosition - floorFramePosition);
+        frames->frameBlend = (f32) (framePosition - floorFramePosition);
         if (loopStart == 0xFFFF) {
             loopStart = 0;
             if (framePosition >= 0.0f) {
@@ -112,8 +112,8 @@ block_8:
                 }
             }
         }
-        frames->unk_10 = (s32) (currentFrame * 4);
-        frames->unk_14 = (s32) (nextFrame * 4);
+        frames->rotationFirst = (s32) (currentFrame * 4);
+        frames->rotationNext = (s32) (nextFrame * 4);
         if (framePosition >= 0.0f) {
             currentFrame = (s32) framePosition;
         } else {

@@ -28,7 +28,7 @@ s32 AnimPool_ReadSignedBits(BitReader *reader, s32 bitCount) {
     return val;
 }
 
-/** Reads arg1 bits (LSB first) from the bitstream at arg0, advancing its bit position. */
+/** Reads bitCount bits (LSB first) from the bitstream at reader, advancing its bit position. */
 s32 CBitReader_ReadBits(BitReader *reader, s32 bitCount) {
     s32 bitPos;
     s32 i;

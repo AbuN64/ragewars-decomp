@@ -40,10 +40,10 @@ void Gobjinst_DrawTeamMaskedModel(LevelActor *actor, s32 unusedShadowContext, Lo
     char *data;
 
     actor->mask = 1 << actor->team;
-    if (params->unk4 != 0) {
+    if (params->drawShadow != 0) {
         GameObject_DrawActorShadow(actor, unusedShadowContext, params);
     }
-    if (params->unk0 == 0) {
+    if (params->drawModel == 0) {
         return;
     }
     resource = Cache_RequestPairedResource(0, actor->flags2E4 | g_litGeometryResourceKeyFlags, params->value, 0, 0,

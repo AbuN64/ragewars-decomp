@@ -107,8 +107,8 @@ void Combine_BindImageTexture(Texture *image) {
  } else {
  g_combineBoundImage=tex; g_combineImageChunkState=0;
  g_combineBoundImageWidth=tex->width; g_combineBoundImageHeight=tex->height;
- g_combineBoundImagePixelType=Frontend_GetImagePixelType(&tex->unk0);
- g_combineBoundImageMaskComponent=Frontend_HasImageFormatMaskComponent(&g_combineBoundImage->unk0);
+ g_combineBoundImagePixelType=Frontend_GetImagePixelType(&tex->format);
+ g_combineBoundImageMaskComponent=Frontend_HasImageFormatMaskComponent(&g_combineBoundImage->format);
  flags=tex->flags;size=tex->size;
  g_combineImageRequiresChunks=0;
  if(flags>0 && size>2048) g_combineImageRequiresChunks=1;
@@ -149,10 +149,10 @@ void Combine_BindImageTexture(Texture *image) {
 }
 
 void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width, f32 height, f32 startU, f32 startV, f32 endU, f32 endV, u32 color) {
-    s32 sp20;
-    s32 sp24;
-    s32 sp28;
-    s32 sp2C;
+    s32 clipLeft;
+    s32 clipTop;
+    s32 clipRight;
+    s32 clipBottom;
     Gfx *unusedDisplayListCursor1;
     Gfx *unusedDisplayListCursor2;
     Gfx *unusedDisplayListCursor3;
@@ -269,31 +269,31 @@ void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width,
             bottomV = savedStartV;
             rectangleHeight = -rectangleHeight;
         }
-        N64Eng_GetClipBounds(&sp20, &sp24, &sp28, &sp2C);
-        if ((sp28 < right) || (left < sp20) || (sp2C < bottom) || (top < sp24)) {
-            if ((sp28 >= left) && (sp2C >= top) && (right >= sp20) && (bottom >= sp24)) {
-                if (top < sp24) {
+        N64Eng_GetClipBounds(&clipLeft, &clipTop, &clipRight, &clipBottom);
+        if ((clipRight < right) || (left < clipLeft) || (clipBottom < bottom) || (top < clipTop)) {
+            if ((clipRight >= left) && (clipBottom >= top) && (right >= clipLeft) && (bottom >= clipTop)) {
+                if (top < clipTop) {
                     delta = bottomV - topV;
-                    delta=scaleClip(delta, ((f32) (sp24 - top) / rectangleHeight));
-                    top = sp24;
+                    delta=scaleClip(delta, ((f32) (clipTop - top) / rectangleHeight));
+                    top = clipTop;
                     rectangleHeight = (f32) ((bottom - top) + 1);
                     topV = (topV + delta);
                 }
-                if (sp2C < bottom) {
-                    delta = ((f32) (sp2C - top) / rectangleHeight) * (bottomV - topV);
-                    bottom = sp2C;
+                if (clipBottom < bottom) {
+                    delta = ((f32) (clipBottom - top) / rectangleHeight) * (bottomV - topV);
+                    bottom = clipBottom;
                     bottomV = topV + delta;
                 }
-                if (left < sp20) {
+                if (left < clipLeft) {
                     horizontalClipDelta = rightU - leftU;
-                    horizontalClipDelta=scaleClip(horizontalClipDelta, ((f32) (sp20 - left) / rectangleWidth));
-                    left = sp20;
+                    horizontalClipDelta=scaleClip(horizontalClipDelta, ((f32) (clipLeft - left) / rectangleWidth));
+                    left = clipLeft;
                     rectangleWidth = (f32) ((right - left) + 1);
                     leftU = (leftU + horizontalClipDelta);
                 }
-                if (sp28 < right) {
-                    horizontalClipDelta = ((f32) (sp28 - left) / rectangleWidth) * (rightU - leftU);
-                    right = sp28;
+                if (clipRight < right) {
+                    horizontalClipDelta = ((f32) (clipRight - left) / rectangleWidth) * (rightU - leftU);
+                    right = clipRight;
                     rightU = leftU + horizontalClipDelta;
                 }
                 goto block_51;

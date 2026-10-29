@@ -253,7 +253,7 @@ void MarkMenuEventHandled(void) {
 }
 
 void Menu_SetElementUserData(s32 elementId, s32 userData) {
-    ((ObjRecAt40V1 *)FindMenuElement(elementId))->unk40 = userData;
+    ((ObjRecAt40V1 *)FindMenuElement(elementId))->value = userData;
 }
 
 void Menu_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handler)

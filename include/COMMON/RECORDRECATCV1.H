@@ -53,7 +53,7 @@ extern void Note_ProbeStatus(s32);
 void Note_ProbeStatus(s32);
 s32 Note_GetStatus(s32);
 
-extern char D_800DCD80[];
+extern char g_pakFormatInt2_TimerFormatpreviewvalue[];
 
 extern char g_pakFormatDottedTriple[];
 

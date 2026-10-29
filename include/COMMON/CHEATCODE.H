@@ -4,7 +4,7 @@
 struct CheatCode;
 struct CheatCode {
     u8 *code;
-    s32 unk4;
+    s32 reservedWord;
     s32 flags;
     s32 sound;
 };

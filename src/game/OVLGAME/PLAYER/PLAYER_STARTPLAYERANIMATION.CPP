@@ -50,7 +50,7 @@ void Player_StartPlayerAnimation(Player *animatedPlayer, s32 animationState) {
     } else if (g_resultExitPending != 0 && ((Shared_ControlView *)animatedPlayer->profile)->transientFlag != 0) {
         modelResource = g_fragTagModelId;
     } else {
-        modelResource = g_characterModelIds[((Shared_PickupAmmoDefinition *)animatedPlayer->definition)->unkC];
+        modelResource = g_characterModelIds[((Shared_PickupAmmoDefinition *)animatedPlayer->definition)->firstAmmoDrop];
         animatedPlayer->playerId = ((Shared_ControlView *)animatedPlayer->profile)->playerId;
     }
     ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, animatedPlayer, modelResource, animatedPlayer->animation);

@@ -70,7 +70,7 @@ s32 Achieve_MatchQualifies(void) {
     RosterSlot *slot;
 
     match = &g_gameSettings;
-    if (match->unk24 <= 0 && match->unk25 <= 0) {
+    if (match->matchQualifierFirst <= 0 && match->matchQualifierSecond <= 0) {
         return 0;
     }
     result = 1;

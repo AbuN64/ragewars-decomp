@@ -387,7 +387,7 @@ void Vhandler_UpdatePagerStatistics(void) {
     *ordered = allocatedBytes;
     ordered[-3] = maximumAge;
     ordered[-2] = minimumAge;
-    __builtin_memcpy(&out[-1], &((CompactOptionsPageView *)g_pagerLruHead)->unkC, sizeof(s32));
+    __builtin_memcpy(&out[-1], &((CompactOptionsPageView *)g_pagerLruHead)->flagWord, sizeof(s32));
 }
 
 void Vhandler_MapBootstrapAddressRange(void) {

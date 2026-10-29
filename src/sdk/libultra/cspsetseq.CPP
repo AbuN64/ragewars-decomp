@@ -13,11 +13,11 @@ struct SeqpSetSeqEvent {
 extern void alEvtqPostEvent(void *, s16 *, s32);
 
 void alCSPSetSeq(s32 player, ALCSeq_s *sequence) {
-    struct SeqpSetSeqEvent sp10;
+    struct SeqpSetSeqEvent setSeqEvent;
 
-    sp10.sequence = sequence;
-    sp10.count = 0xD;
-    alEvtqPostEvent(player + 0x48, &sp10, 0);
+    setSeqEvent.sequence = sequence;
+    setSeqEvent.count = 0xD;
+    alEvtqPostEvent(player + 0x48, &setSeqEvent, 0);
 }
 
 

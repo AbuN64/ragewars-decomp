@@ -37,16 +37,16 @@ void Barrel_UpdateTrackGoals(BarrelTrackActorView *actor, void *trackerState, Ba
         second.y = 0;
         second.z = 0;
         out->type = 3;
-        out->unk4 = 0;
-        out->unk8 = 0;
+        out->reservedWordA = 0;
+        out->reservedWordB = 0;
         out->first = first;
         out->second = second;
-        out->unk24 = 0;
+        out->reservedWordC = 0;
         second.y = 0;
         first.y = 0;
         out->third = first;
         out->fourth = second;
-        out->unk40 = 0;
+        out->reservedWordD = 0;
     }
     if (updateAnchorTarget != 0) {
         Barrel_FillAnchorTargetInfo(actor, tracker, (s32)tracker->anchor, targetInfos);
@@ -57,14 +57,14 @@ void Barrel_UpdateTrackGoals(BarrelTrackActorView *actor, void *trackerState, Ba
     second.y = 0;
     second.z = 0;
     targetInfos->type = 3;
-    targetInfos->unk4 = 0;
-    targetInfos->unk8 = 0;
+    targetInfos->reservedWordA = 0;
+    targetInfos->reservedWordB = 0;
     targetInfos->first = first;
     targetInfos->second = second;
-    targetInfos->unk24 = 0;
+    targetInfos->reservedWordC = 0;
     second.y = 0;
     first.y = 0;
     targetInfos->third = first;
     targetInfos->fourth = second;
-    targetInfos->unk40 = 0;
+    targetInfos->reservedWordD = 0;
 }

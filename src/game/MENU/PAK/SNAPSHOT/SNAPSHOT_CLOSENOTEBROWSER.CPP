@@ -107,7 +107,7 @@ s32 Snapshot_CloseNoteBrowser(void *unused, PakNoteBrowserContext *menu) {
         target = Playerai_FindPlayerByController(g_playerViewRenderContext, menu->slot);
         if (g_pakProfileLoadActive != 0) {
             g_pakMenuPromptAccepted = 1;
-            Menu_OpenDialog(g_playerViewRenderContext + 0x5DC, D_0044FFA4, target, target->views5E8.view698_38.title, channel);
+            Menu_OpenDialog(g_playerViewRenderContext + 0x5DC, g_controllerPakNotReadyDialogResource, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
         if (g_pakSaveMenuActiveDe != 0) {

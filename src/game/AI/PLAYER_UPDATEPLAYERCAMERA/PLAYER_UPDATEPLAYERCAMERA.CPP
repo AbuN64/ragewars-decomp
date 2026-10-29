@@ -827,13 +827,13 @@ void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
   {
     if ((!((g_playerAlternateActionModifierEnabled != 0) && (player->views5E8.view688_43.input.held & 0x20))) && (player->views5E8.view688_43.input.pressed & 0x800))
     {
-      if (player->unk13D4 != 0)
+      if (player->toggleState != 0)
       {
-        player->unk13D4 = 0;
+        player->toggleState = 0;
       }
       else
       {
-        player->unk13D4 = 1;
+        player->toggleState = 1;
       }
     }
     if ((((g_frontendScreenStatus.settings.local == 0) && (!((player->views5E8.viewCB8_163.weaponLocked != 0) && (player->views5E8.view938_162.weaponWheel != 0)))) && (!((g_playerAlternateActionModifierEnabled != 0) && (player->views5E8.view688_43.input.held & 0x20)))) && (player->views5E8.view688_43.input.pressed & 0x200))
@@ -1007,7 +1007,7 @@ void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
           }
           player->views5E8.view854_147.effectCountdown = material->timer;
         }
-        player->unk12EC = 0;
+        player->reservedWord12EC = 0;
       }
     }
     held = actor->views1C.view38_2.flags & 0xC0000;
@@ -1116,7 +1116,7 @@ void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
     oldModel = actor->views0.view14_6.model;
     prev = actor->views0.view8_3.pos;
     before = InstHdr_FindActorModelEntry(actor);
-    if (player->views5E8.view5EA_2.unk5EA != 0)
+    if (player->views5E8.view5EA_2.moveEnabled != 0)
     {
       actor->views1C.view100_8.flags |= 0x10000;
       if (player->views5E8.view11D8_147.jumpCooldown > 0.0f)
@@ -1217,9 +1217,9 @@ void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
     }
 
     player->views5E8.view688_43.input.pressed = 0;
-    player->views5E8.view688_43.input.unk2C = 0;
-    player->views5E8.view688_43.input.unk30 = 0;
-    player->views5E8.view688_43.input.unk34 = 0;
+    player->views5E8.view688_43.input.reservedWord = 0;
+    player->views5E8.view688_43.input.reservedWord1 = 0;
+    player->views5E8.view688_43.input.reservedWord2 = 0;
   }
 
   player->views5E8.view688_43.input = saved;
@@ -1316,9 +1316,9 @@ void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
   }
   player->views1C.view2E8_37.emitter.pos = player->views0.view8_3.pos;
   player->views1C.view2E8_37.emitter.model = player->views0.view14_6.model;
-  player->views1C.view2E8_37.emitter.unk40 = player->views1C.view40_5.unk40;
-  player->views1C.view2E8_37.emitter.unk6C = player->views1C.view6C_9.yaw;
-  player->views1C.view2E8_37.emitter.unk5C = player->views1C.view5C_6.unk5C;
+  player->views1C.view2E8_37.emitter.reservedFloat = player->views1C.view40_5.emitterFloat;
+  player->views1C.view2E8_37.emitter.yaw = player->views1C.view6C_9.yaw;
+  player->views1C.view2E8_37.emitter.rotation = player->views1C.view5C_6.emitterQuad;
   player->views5E8.view774_115.requestedPosition = player->views0.view8_3.pos;
   if ((g_gameSettings.flags & 8) || ((g_gameSettings.counters.enabled != 0) && (player->views5D8.view5D8_9.profile->counts != 0)))
   {
@@ -1614,8 +1614,8 @@ void Player_UpdateMovementSpeedFactor(void *actorView, void *bodyActor, PlayerGr
         ((Shared_ActorView *)actorView)->speedFactor *= ((Shared_Game *)options)->speedFactor;
     }
     if (!(((PlayerCameraMotionView *)(bodyActor))->flags & 3) && ground != 0
-        && (InstHdr_GetActorMotionState(bodyActor) != 0 || (ground->unk_52 & 0x800))) {
-        ((Shared_ActorView *)actorView)->speedFactor *= ground->unk_30;
+        && (InstHdr_GetActorMotionState(bodyActor) != 0 || (ground->flags & 0x800))) {
+        ((Shared_ActorView *)actorView)->speedFactor *= ground->speedFactor;
     }
 }
 

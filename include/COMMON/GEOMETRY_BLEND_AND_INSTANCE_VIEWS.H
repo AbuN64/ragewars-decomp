@@ -45,13 +45,13 @@ struct Group18 {
 struct GeometryModelInstanceEntry;
 struct GeometryModelInstanceEntry {
     s32 *data;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    u16 unk10;
-    u16 unk12;
-    s32 unk14;
-    s32 unk18;
+    s32 modelParamFirst;
+    s32 modelParamSecond;
+    s32 modelParamThird;
+    u16 sourceHalfFirst;
+    u16 sourceHalfSecond;
+    s32 modelParamFourth;
+    s32 reservedWord;
     struct GeometryModelInstanceEntry *next;
 };
 
@@ -61,7 +61,7 @@ struct ResourceSource {
     u16 id;
     u8 pad6[0x12];
     u16 unk18;
-    u16 unk1A;
+    u16 copiedHalfSecond;
 };
 
 struct GeometryModelInstanceEntry;

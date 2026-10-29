@@ -19,7 +19,7 @@ struct PlayerItemInventoryView;
 struct Flagged;
 struct Flagged {
     u8 pad0[0x58];
-    u32 unk58;
+    u32 flags;
 };
 struct Flagged;
 struct MultiplayerAvailabilityItem;

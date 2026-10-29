@@ -289,9 +289,9 @@ void Region_ScaleWordsToFloats(void *wordStorage) {
 void Region_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base, int unused, char *extra) {
     int i;
 
-    dst->unk0 = src->unk0;
-    dst->unk2 = src->unk2;
-    dst->unk1C = src->unk10;
+    dst->kind = src->kind;
+    dst->flags = src->flags;
+    dst->mask = src->mask;
     for (i = 0; i < 3; i++) {
         dst->first[i] = base + src->first[i] * 16;
         if (src->second[i] == 0xFFFF) {
@@ -553,21 +553,21 @@ f32 Region_SetMatchingVertexHeights(u16 *modelTreeNode, f32 height, u16 modelId)
     u16 id = modelId;
 
     if (*node == id) {
-        if (((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_4)->unk4 != height ||
-            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_8)->unk4 != height ||
-            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_C)->unk4 != height) {
-            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_4)->unk4 = height;
-            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_8)->unk4 = height;
-            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_C)->unk4 = height;
+        if (((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->firstVertex)->value != height ||
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->secondVertex)->value != height ||
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->thirdVertex)->value != height) {
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->firstVertex)->value = height;
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->secondVertex)->value = height;
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->thirdVertex)->value = height;
 
-            if (((RegionTriangleVertexView *)(node))->unk_10.v0 != 0) {
-                Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->unk_10.v1, height, id);
+            if (((RegionTriangleVertexView *)(node))->firstBranch.v0 != 0) {
+                Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->firstBranch.v1, height, id);
             }
-            if (((RegionTriangleVertexView *)(node))->unk_14.v0 != 0) {
-                Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->unk_14.v1, height, id);
+            if (((RegionTriangleVertexView *)(node))->secondBranch.v0 != 0) {
+                Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->secondBranch.v1, height, id);
             }
-            if (((RegionTriangleVertexView *)(node))->unk_18.v0 != 0) {
-                Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->unk_18.v1, height, id);
+            if (((RegionTriangleVertexView *)(node))->thirdBranch.v0 != 0) {
+                Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->thirdBranch.v1, height, id);
             }
         }
     }

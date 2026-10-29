@@ -74,17 +74,17 @@ void Menu_DrawStyledMenuText(MenuTextOwnerView *option, StyledMenuTextEntryView 
         }
     } else {
 block_5:
-        menu->unk38 = 0;
+        menu->shadowEnabled = 0;
     }
     if (option->flags & 0x08000000) {
-        if (menu->unk3C != 0) {
-            menu->unk38 = 0;
+        if (menu->shadowClearRequest != 0) {
+            menu->shadowEnabled = 0;
         }
         Menu_DrawMenuPanel(menu, (TextBoundsText *)option, 1);
         Menu_DrawMenuPanel(menu, (TextBoundsText *)option, 0);
         shadowOffset = 0;
     }
-    if (menu->unk38 == 0) {
+    if (menu->shadowEnabled == 0) {
         shadowOffset = 0;
     }
     styleFlags = option->flags & 0x3FE0;
@@ -130,7 +130,7 @@ block_5:
         }
         g_multiplayerItemRenderState = renderMode;
     }
-    if (entry->index == menu->unk0) {
+    if (entry->index == menu->selectedIndex) {
         colorScale = 1.25f;
     } else if (!(option->flags & 0x01000000)) {
         colorScale = 0.25f;

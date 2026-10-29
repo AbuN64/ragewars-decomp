@@ -32,7 +32,7 @@ extern void Cache_ReleaseResource(void *cache, void *resource);
 
 extern Group g_transientPlayerList;
 
-extern struct { struct GameplayCamera *unk0; } g_gameplayCameraList;
+extern struct { struct GameplayCamera *camera; } g_gameplayCameraList;
 
 extern char g_controllerRumblePool;
 
@@ -120,7 +120,7 @@ void CCinema_EnterSequenceScene(void) {
     g_cinemaSequenceState->sequenceAdvanceRequested = 1;
     g_cinemaSequenceState->targetD8 = -1;
     g_cinemaSequenceState->sequenceStarted = 1;
-    camera = g_gameplayCameraList.unk0;
+    camera = g_gameplayCameraList.camera;
     if (camera != 0) {
         camera->viewWidth = g_cinemaSequenceState->loopBounds[1];
         camera->viewHeight = g_cinemaSequenceState->loopBounds[2];

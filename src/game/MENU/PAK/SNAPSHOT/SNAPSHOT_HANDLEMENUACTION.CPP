@@ -292,7 +292,7 @@ s32 Snapshot_HandleMenuAction(s32 unused, Shared_PakMenu *menu, s32 unusedEvent)
     } else if (g_pakSaveMenuActiveDe != 0) {
         hasNote = findNote(use, &g_controllerPakOverwriteNoteIndex);
         if (hasNote != 0 && g_controllerPakOverwriteNoteIndex >= 0 && g_controllerPakOverwriteNoteIndex < 16) {
-            Menu_OpenDialog(g_matchEndingTeamWheelClose, PAK_OVERWRITE_NOTE_DIALOG, menu->player, menu->owner, D_0044E4D4);
+            Menu_OpenDialog(g_matchEndingTeamWheelClose, PAK_OVERWRITE_NOTE_DIALOG, menu->player, menu->owner, g_pakAlternateReadyDialogResource);
             return 1;
         }
         Snapshot_SaveSnapshotAndClose(unused, menu, unusedEvent);

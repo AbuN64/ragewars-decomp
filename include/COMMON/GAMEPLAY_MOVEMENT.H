@@ -6,7 +6,7 @@
 
 typedef struct Shared_Model Shared_Model;
 struct Shared_Model {
-    u16 unk0; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    u16 reservedWord; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     u16 flags; /* +0x2: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
@@ -19,7 +19,7 @@ struct Shared_Model {
 
 typedef struct Shared_StateInfo Shared_StateInfo;
 struct Shared_StateInfo {
-    s32 unk0; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s32 reservedWord; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     void (*update)(void *, void *); /* +0x4: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     s32 * flags; /* +0x8: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     s32 pad0C[3]; /* +0xC: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
@@ -126,27 +126,27 @@ struct Shared_Voice {
 
 /* The per-character stride sound halfword has distinct auto symbols in each ROM. */
 #if defined(VERSION_DE)
-extern s16 D_auto_800C9FAA[];
+extern s16 g_strideSoundHalfwords_de[];
 #elif defined(VERSION_EU)
-extern s16 D_auto_800CAB8E[];
+extern s16 g_strideSoundHalfwords_eu[];
 #elif defined(VERSION_EU_X)
-extern s16 D_auto_800CB55E[];
+extern s16 g_strideSoundHalfwords_eu_x[];
 #elif defined(VERSION_US)
-extern s16 D_auto_800C9EBE[];
+extern s16 g_strideSoundHalfwords_us[];
 #else
-extern s16 D_auto_800CF1EE[];
+extern s16 g_strideSoundHalfwords_us_rev1[];
 #endif
 static inline s32 strideSound(s32 index) {
 #if defined(VERSION_DE)
-    return (s16)((s32 *)((char *)D_auto_800C9FAA - 2))[index];
+    return (s16)((s32 *)((char *)g_strideSoundHalfwords_de - 2))[index];
 #elif defined(VERSION_EU)
-    return (s16)((s32 *)((char *)D_auto_800CAB8E - 2))[index];
+    return (s16)((s32 *)((char *)g_strideSoundHalfwords_eu - 2))[index];
 #elif defined(VERSION_EU_X)
-    return (s16)((s32 *)((char *)D_auto_800CB55E - 2))[index];
+    return (s16)((s32 *)((char *)g_strideSoundHalfwords_eu_x - 2))[index];
 #elif defined(VERSION_US)
-    return (s16)((s32 *)((char *)D_auto_800C9EBE - 2))[index];
+    return (s16)((s32 *)((char *)g_strideSoundHalfwords_us - 2))[index];
 #else
-    return (s16)((s32 *)((char *)D_auto_800CF1EE - 2))[index];
+    return (s16)((s32 *)((char *)g_strideSoundHalfwords_us_rev1 - 2))[index];
 #endif
 }
 

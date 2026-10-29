@@ -24,13 +24,13 @@ typedef struct ArchiveTextIndexEntry {
 typedef struct ArchiveFontRecord {
     u8 unused0[8];
     s16 glyphWidth;
-    s16 field_A;
-    s16 field_C;
+    s16 verticalOffset;
+    s16 lineHeight;
     s16 bitmapCount;
-    s16 field_10;
+    s16 letterSpacing;
     s16 unused12;
     s32 glyphTableOffset;
-    s32 field_18;
+    s32 bitmapSizesOffset;
     s32 unused1C;
 } ArchiveFontRecord;
 /* Records of the menu resource file (original names from the debug type catalog). */

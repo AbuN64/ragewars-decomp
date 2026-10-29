@@ -22,7 +22,7 @@ extern int g_primitiveRenderFlagSelect30000;
 
 struct Texture;
 struct Texture {
-    u8 unk0;
+    u8 format;
     char pad1[3];
     s16 width;
     s16 height;

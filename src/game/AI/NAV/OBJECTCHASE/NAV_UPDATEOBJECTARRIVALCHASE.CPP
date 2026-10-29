@@ -83,9 +83,9 @@ void Nav_UpdateObjectArrivalChase(RouteChaseActor *actor)
 void Nav_ResetObjectArrivalChase(void *actor) {
     void *brain;
     brain = (((struct NavigationActorBrainView *) ((s8 *) ((struct ActorPlayerControllerView *) ((s8 *) actor))->player))->brain);
-    (((struct NavigationChaseResetView *) ((s8 *) brain))->unk_68) = 0;
-    (((struct NavigationChaseResetView *) ((s8 *) brain))->unk_238) = 0;
-    (((struct NavigationChaseResetView *) ((s8 *) brain))->unk_220) = 0;
+    (((struct NavigationChaseResetView *) ((s8 *) brain))->target) = 0;
+    (((struct NavigationChaseResetView *) ((s8 *) brain))->arrived) = 0;
+    (((struct NavigationChaseResetView *) ((s8 *) brain))->resetWord220) = 0;
     Scaled_ResetBehaviorState(brain);
 }
 

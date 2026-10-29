@@ -185,8 +185,8 @@ void Node_WrapNodeInParent(struct Tree *node, struct Tree *added) {
     }
     node->next = 0;
     node->parent = added;
-    node->field_14 = 0;
-    node->field_16 = 0;
+    node->reservedHalfwordFirst = 0;
+    node->reservedHalfwordSecond = 0;
 }
 
 /* Walks a node tree recursively, replacing every reference to one pointer with another in each node's link fields. */

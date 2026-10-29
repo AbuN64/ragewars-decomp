@@ -412,28 +412,28 @@ typedef struct RespawnPlayer {
     char pad674[0x698 - 0x674];
     void *anim;
     char pad69C[0x11B4 - 0x69C];
-    int field11B4;
+    int reservedWordA;
     int movementBlocked;
     char pad11BC[0x11D8 - 0x11BC];
     int recoil;
     char pad11DC[0x11E4 - 0x11DC];
-    int field11E4;
+    int reservedWordB;
     LevelActor *carried;
-    int field11EC;
+    int reservedWordC;
     char pad11F0[0x11FC - 0x11F0];
-    int field11FC;
+    int reservedWordD;
     char pad1200[0x1210 - 0x1200];
-    int field1210;
+    int reservedWordE;
     char pad1214[0x12C0 - 0x1214];
     float fade;
     char pad12C4[0x13C8 - 0x12C4];
     int sequenceRunEndActive;
     char pad13CC[0x13D4 - 0x13CC];
-    int field13D4;
+    int reservedWordF;
     int heldActor;
-    int field13DC;
-    int field13E0;
-    int field13E4;
+    int reservedWordG;
+    int reservedWordH;
+    int reservedWordI;
     char pad13E8[0x1450 - 0x13E8];
     int isBot;
     void *brain;
@@ -484,22 +484,22 @@ void Player_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     player->bob = g_respawnPlayerInitialBob;
     Playerai_InitializeMovementAndAim(player);
     player->recoil = 0;
-    player->field11FC = 0;
-    player->field13E0 = 0;
-    player->field1210 = 0;
-    player->field11EC = 0;
-    player->field11E4 = 0;
+    player->reservedWordD = 0;
+    player->reservedWordH = 0;
+    player->reservedWordE = 0;
+    player->reservedWordC = 0;
+    player->reservedWordB = 0;
     player->heldActor = 0;
-    player->field13DC = 0;
-    player->field13E4 = 0;
-    player->field13D4 = 0;
+    player->reservedWordG = 0;
+    player->reservedWordI = 0;
+    player->reservedWordF = 0;
     if (SetN64_IsModeThirteen() != 0 && g_frontendScreenStatus.settings.local == 0 && g_gameLoopFrameCount > 10 && player->state < 11) {
         SoundElement_PlayDialogGroup(g_playerStateDialogGroups[player->state]);
     }
     if (isOnline()) {
         Player_ResetPlayerWeapons(player);
     }
-    player->field11B4 = 0;
+    player->reservedWordA = 0;
     player->movementBlocked = 0;
     player->sequenceRunEndActive = 0;
     if (player->isBot != 0) {

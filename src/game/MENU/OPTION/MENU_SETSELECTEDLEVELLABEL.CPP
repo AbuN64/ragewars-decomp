@@ -29,7 +29,7 @@ extern s32 g_selectedLevel10Label;
 
 extern s32 g_unlockedLevelResultLabel;
 
-/* Toggles the bits arg1 names in the settings flag word g_gameSettings and returns 0. */
+/* Toggles the bits optionMask names in the settings flag word g_gameSettings and returns 0. */
 s32 Menu_ToggleGameOptionBits(s32 unused0, s32 optionMask) {
     s32 *flags = g_gameSettings;
 

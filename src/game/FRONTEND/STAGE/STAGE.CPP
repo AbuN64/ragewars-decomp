@@ -118,11 +118,11 @@ void Stage_StartConfiguredMatch(void) {
             } else {
                 status->team = 0xFF;
             }
-            status->unk7B = g_localPlayerProfiles[i].profile[0];
-            status->unk7D = g_localPlayerProfiles[i].profile[1];
-            status->unk79 = g_localPlayerProfiles[i].profile[2];
-            status->unk7A = g_localPlayerProfiles[i].profile[3];
-            status->unk82 = g_localPlayerProfiles[i].profile[4];
+            status->profileFirst = g_localPlayerProfiles[i].profile[0];
+            status->profileSecond = g_localPlayerProfiles[i].profile[1];
+            status->profileThird = g_localPlayerProfiles[i].profile[2];
+            status->profileFourth = g_localPlayerProfiles[i].profile[3];
+            status->profileFifth = g_localPlayerProfiles[i].profile[4];
         }
     }
     config = (u8 *)&g_gameSettings;

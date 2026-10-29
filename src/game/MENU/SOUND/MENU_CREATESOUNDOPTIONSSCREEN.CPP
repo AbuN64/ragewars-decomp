@@ -47,7 +47,7 @@ s32 Menu_CreateSoundOptionsScreen(void) {
 #endif
     g_soundOptionsScreen->state = 3;
     g_soundOptionsScreen->ambient = cue;
-    g_soundOptionsScreen->unk14 = -1;
+    g_soundOptionsScreen->reserved14 = -1;
     return 0;
 }
 #endif
@@ -85,7 +85,7 @@ s32 Menu_CreateSoundOptionsScreen(void) {
     cue = SmpFlicker_CreateFlickerWidget(0x6E, 0x6E);
     g_soundOptionsScreen->state = 3;
     g_soundOptionsScreen->ambient = cue;
-    g_soundOptionsScreen->unk14 = -1;
+    g_soundOptionsScreen->reserved14 = -1;
     return 0;
 }
 #endif

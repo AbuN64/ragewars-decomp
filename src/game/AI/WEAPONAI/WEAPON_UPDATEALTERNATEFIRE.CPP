@@ -50,7 +50,7 @@ struct AttackTriggerPlayer {
     char pad0[0x5D4];
     s32 playerIndex;
     char pad5D4[0x5DC - 0x5D4 - sizeof(s32)];
-    void* unk5DC;
+    void* camera;
     char pad5DC[0x62E - 0x5DC - sizeof(void*)];
     s16 weaponMode;
     char pad62E[0x6AC - 0x62E - sizeof(s16)];
@@ -60,13 +60,13 @@ struct AttackTriggerPlayer {
     char pad11D8[0x1450 - 0x11D8 - sizeof(f32)];
     s32 computerControlled;
     char pad1450[0x1454 - 0x1450 - sizeof(s32)];
-    char* unk1454;
+    char* control;
 };
 struct AttackTriggerActor {
     char pad0[0x100];
     s32 flags;
     char pad100[0x1D8 - 0x100 - sizeof(s32)];
-    char* unk1D8;
+    char* player;
 };
 struct AttackTriggerControl {
     char pad0[0x23C];
@@ -95,8 +95,8 @@ static inline s32 can_fire(char *player) {
     ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((AttackTriggerPlayer *)(player))->playerIndex], ((AttackTriggerPlayer *)(player))->weaponMode);
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
-        if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
-            Gsky_PostTargetedScreenMessage(&g_playerViewRenderContext.object, ((AttackTriggerPlayer *)(player))->unk5DC, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_languageIndex),
+        if (((AttackTriggerPlayer *)(player))->camera != 0) {
+            Gsky_PostTargetedScreenMessage(&g_playerViewRenderContext.object, ((AttackTriggerPlayer *)(player))->camera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_languageIndex),
                           Player_GetPlayerIndex(&g_playerViewRenderContext, player), g_alternateFireMessageDuration);
         }
     }
@@ -108,12 +108,12 @@ s32 Weaponai_TryRequestFiringState(void *actor, void *attack) {
     s32 trigger;
     char *control;
 
-    player = ((AttackTriggerActor *)(actor))->unk1D8;
+    player = ((AttackTriggerActor *)(actor))->player;
     if (((AttackTriggerPlayer *)(player))->cooldown > g_weaponTriggerCooldownLimit) {
         return 0;
     }
     if ((((AttackTriggerActor *)(actor))->flags & 0x300000) && ((AttackTriggerPlayer *)(player))->computerControlled != 0) {
-        control = ((AttackTriggerPlayer *)(player))->unk1454;
+        control = ((AttackTriggerPlayer *)(player))->control;
         trigger = ((AttackTriggerControl *)(control))->fireRequested;
         ((AttackTriggerControl *)(control))->fireRequested = 0;
     } else {
@@ -157,7 +157,7 @@ static inline s32 can_toggle_mode(Player *player) {
     return allowed;
 }
 void Weaponai_UpdateAlternateFire(void *actor, void *attack) {
-    Player *player = (Player *)((AttackTriggerActor *)actor)->unk1D8;
+    Player *player = (Player *)((AttackTriggerActor *)actor)->player;
     s32 action = g_weaponActionRecords[player->pose * 12];
     AlternateModeInfo *info = (AlternateModeInfo *)g_weaponInfoByType[player->selectedAction];
     if (!Player_HasAmmoForMode(player, player->selectedAction)) {

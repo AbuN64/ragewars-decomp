@@ -5,11 +5,11 @@
 struct WeaponUnlockProfileView;
 struct WeaponUnlockProfileView {
     char p[0x78];
-    u8 unk78;
+    u8 present;
     char p2[6];
     s8 profileIndex;
     char p3[17];
-    u8 unk91;
+    u8 locked;
 };
 
 struct PresetRow;

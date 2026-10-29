@@ -205,17 +205,17 @@ typedef struct ActorMotionState {
     u8 pad120[0x4];
     s32 animation; /* 0x124 */
     s32 remainingCount; /* 0x128 */
-    s32 unk12C; /* 0x12C */
-    s32 unk130; /* 0x130 */
+    s32 reservedWord12C; /* 0x12C */
+    s32 reservedWord130; /* 0x130 */
     f32 yaw; /* 0x134 */
     f32 pitch; /* 0x138 */
     f32 progress; /* 0x13C */
-    s32 unk140; /* 0x140 */
-    s32 unk144; /* 0x144 */
-    s32 unk148; /* 0x148 */
-    s32 unk14C; /* 0x14C */
+    s32 reservedWord140; /* 0x140 */
+    s32 reservedWord144; /* 0x144 */
+    s32 reservedWord148; /* 0x148 */
+    s32 reservedWord14C; /* 0x14C */
     u8 pad150[0x18];
-    s32 unk168; /* 0x168 */
-    s32 unk16C; /* 0x16C */
+    s32 reservedWord168; /* 0x168 */
+    s32 openTimer; /* 0x16C */
 } ActorMotionState;
 #endif

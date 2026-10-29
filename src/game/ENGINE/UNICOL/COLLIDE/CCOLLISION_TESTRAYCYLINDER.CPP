@@ -114,38 +114,38 @@ void CCollision_StoreContactResult(Input *contactInput) {
     sw_type_1:
         g_collisionCurrentActor->instance0 = contactInput->instance104;
         if (contactInput->instance104 != 0) {
-            g_collisionCurrentActor->instanceValue4 = contactInput->instance104->field14;
+            g_collisionCurrentActor->instanceValue4 = contactInput->instance104->value;
         } else {
             g_collisionCurrentActor->instanceValue4 = 0;
         }
         g_collisionCurrentActor->vec8 = contactInput->vec180;
-        g_collisionCurrentActor->field14 = -1;
+        g_collisionCurrentActor->value = -1;
         break;
     sw_type_2:
         if (contactInput->instance104 != 0) {
-            g_collisionCurrentActor->fieldC4 = contactInput->instance104->field14;
+            g_collisionCurrentActor->instanceValueC4 = contactInput->instance104->value;
         } else {
-            g_collisionCurrentActor->fieldC4 = 0;
+            g_collisionCurrentActor->instanceValueC4 = 0;
         }
         g_collisionCurrentActor->vecC8 = contactInput->vec180;
-        g_collisionCurrentActor->fieldD4 = contactInput->fieldBC;
+        g_collisionCurrentActor->contactAuxValue = contactInput->contactAuxValue;
         break;
     sw_type_3:
         g_collisionCurrentActor->instance0 = contactInput->instance104;
-        g_collisionCurrentActor->instanceValue4 = contactInput->instance104->field14;
+        g_collisionCurrentActor->instanceValue4 = contactInput->instance104->value;
         g_collisionCurrentActor->vec8 = contactInput->vec180;
-        g_collisionCurrentActor->field14 = -1;
+        g_collisionCurrentActor->value = -1;
         break;
     sw_type_4:
         g_collisionCurrentActor->instance0 = contactInput->instance104;
-        g_collisionCurrentActor->instanceValue4 = contactInput->instance104->field14;
+        g_collisionCurrentActor->instanceValue4 = contactInput->instance104->value;
         g_collisionCurrentActor->vec8 = contactInput->vec180;
-        g_collisionCurrentActor->field14 = contactInput->field108;
+        g_collisionCurrentActor->value = contactInput->blockValue;
         g_collisionCurrentActor->block18 = contactInput->block10C;
         break;
     sw_type_5:
         g_collisionCurrentActor->instance88 = contactInput->instance104;
-        g_collisionCurrentActor->instanceValue8C = contactInput->instance104->field14;
+        g_collisionCurrentActor->instanceValue8C = contactInput->instance104->value;
         g_collisionCurrentActor->vec90 = contactInput->vec180;
         break;
     sw_type_6:
@@ -159,7 +159,7 @@ void CCollision_StoreContactResult(Input *contactInput) {
     g_collisionCurrentActor->vecF0 = contactInput->vecF8;
     g_collisionCurrentActor->vecE4 = contactInput->vec180;
     g_collisionCurrentActor->typeFC = contactInput->type;
-    g_collisionCurrentActor->contactValue = contactInput->fieldC0;
+    g_collisionCurrentActor->contactValue = contactInput->contactValue;
 }
 
 /* Stores a range and its parameters in a record: the low bound at 8, a count at 0xC, the high
@@ -186,8 +186,8 @@ void CCollision_SetSweepRange(struct Range *range, f32 low, s32 count, f32 high,
 void CCollision_SetUniformSweepExtent(void *actorMotion, float extent) {
     ActorMotion *motion = actorMotion;
     motion->bottom = 0.0f;
-    motion->field08 = extent;
+    motion->sweepExtentFirst = extent;
     motion->radius = extent;
     motion->height = extent;
-    motion->field18 = extent;
+    motion->sweepExtentLast = extent;
 }

@@ -281,7 +281,7 @@ void PlayerMatrix_EnableCollisionFlags(void *object) {
 void PlayerMatrix_MarkOpenAndResetTimer(LevelActor *actor, ActorMotionState *motionState) {
     motionState->flags = (s32) (motionState->flags | 0x10000);
     actor->flags = (s32) (actor->flags | 0x2100);
-    motionState->unk16C = 0;
+    motionState->openTimer = 0;
 }
 
 /** Set the fixed flags on the supplied object and word. */

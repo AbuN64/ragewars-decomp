@@ -16,9 +16,9 @@ struct PreviewTextValue { char pad[0x22]; s16 value; };
 extern struct PreviewTextValue *g_controllerPakSnapshotPayload;
 extern s32 Menu_CountLineChars(struct Field *);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#define PREVIEW_VALUE_FORMAT D_800ED400
+#define PREVIEW_VALUE_FORMAT g_pakFormatInt2
 #else
-#define PREVIEW_VALUE_FORMAT D_800DCD80
+#define PREVIEW_VALUE_FORMAT g_pakFormatInt2_TimerFormatpreviewvalue
 #endif
 
 s32 Timer_FormatPreviewValue(struct Field *field) {

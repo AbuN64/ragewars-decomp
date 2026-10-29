@@ -31,14 +31,14 @@ s32 Pak_AdjustModelField(OptionEditState *label, OptionEditState *menu, s32 thir
     ResourceManagerState *resourceManager;
     char *modelRecord;
     fieldValue = 0;
-    if (Control_IsStartPressed(menu->unk_20) != 0) {
+    if (Control_IsStartPressed(menu->controller) != 0) {
         return Menu_TryCreateMenu(label, menu, third);
     }
-    selectedObject = menu->unk_1C;
+    selectedObject = menu->selectedObject;
     if (selectedObject != NULL) {
-        modelOwner = selectedObject->unk_5DC;
+        modelOwner = selectedObject->modelOwner;
         if (modelOwner != NULL) {
-            modelIndex = modelOwner->unk_58;
+            modelIndex = modelOwner->modelIndex;
             if (modelIndex != 0) {
                 fieldAddress = Scene_GetModelRecordByIndexPointer(&g_world, modelIndex) + fieldOffset;
                 switch (wrap) { /* irregular */
@@ -59,7 +59,7 @@ s32 Pak_AdjustModelField(OptionEditState *label, OptionEditState *menu, s32 thir
                     *(f32 *)fieldAddress = fieldValue;
                     break;
                 }
-                textAddress = *label->unk_14;
+                textAddress = *label->textAddressPointer;
                 length=Menu_CountLineChars(label);
                 length-=6;
                 Libc_FormatString(textAddress + length, &g_pakFormatInt06, (s32) ((f32) fieldValue / displayDivisor));
@@ -67,7 +67,7 @@ s32 Pak_AdjustModelField(OptionEditState *label, OptionEditState *menu, s32 thir
                     resourceManager = SetN64_GetPackSection(g_modelEditPack, 0);
                     modelRecordIndexOrLimit = 0;
                     countValue = resourceManager->count;
-                    resourceManager=&((OptionEditContext *)(resourceManager))->unk_8;
+                    resourceManager=&((OptionEditContext *)(resourceManager))->modelRecords;
                     if (countValue > 0) {
                         do {
                             modelRecord = (char *)resourceManager + modelRecordIndexOrLimit * 100;

@@ -82,7 +82,7 @@ struct MovingPlatformTrackView {
     struct CPlatformIntelligence segment;
 };
 struct MovingActorGameFlagView {
-    u8 unk0;
+    u8 gameFlag;
 };
 struct MovingPlatformActorView {
     char pad0[8];

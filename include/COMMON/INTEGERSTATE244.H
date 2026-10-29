@@ -59,8 +59,8 @@ extern float g_playerLateralLeapDuration;
 struct PlayerSequenceRunEndStateView;
 struct PlayerSequenceRunEndStateView {
     unsigned char padding_0[572];
-    s32 unk_23C;
-    s32 unk_240;
+    s32 burstRequest;
+    s32 actionFlagFrames;
 };
 
 extern float g_playerLateralLeapNegativeInputSpeed;
@@ -106,23 +106,23 @@ extern void Player_EmptyHandlerBeforeAimPreviousPositionAtReset_de(void);
 struct PlayerSequenceRunEndActorView;
 struct PlayerSequenceRunEndActorView {
     char pad0[0x50];
-    f32 unk_50;
+    f32 scaleX;
     char pad50[0x54 - 0x50 - sizeof(f32)];
-    f32 unk_54;
+    f32 scaleY;
     char pad54[0x58 - 0x54 - sizeof(f32)];
-    f32 unk_58;
+    f32 scaleZ;
     char pad58[0x658 - 0x58 - sizeof(f32)];
-    f32 unk_658;
+    f32 poseTimer;
     char pad658[0x122C - 0x658 - sizeof(f32)];
-    s32 unk_122C;
+    s32 reactionFlags;
     char pad122C[0x1230 - 0x122C - sizeof(s32)];
-    s32 unk_1230;
+    s32 tintTime;
     char pad1230[0x1238 - 0x1230 - sizeof(s32)];
-    s32 unk_1238;
+    s32 tintMode;
     char pad1238[0x13C8 - 0x1238 - sizeof(s32)];
-    s32 unk_13C8;
+    s32 overkill;
     char pad13C8[0x1454 - 0x13C8 - sizeof(s32)];
-    void * unk_1454;
+    void * controller;
 };
 
 
@@ -132,9 +132,9 @@ extern float g_playerFloatReverseAnimationThreshold;
 struct PlayerStrafeVelocityView;
 struct PlayerStrafeVelocityView {
     unsigned char padding_0[1700];
-    f32 unk_6A4;
+    f32 strafe;
     unsigned char padding_6A8[28];
-    f32 unk_6C4;
+    f32 lateralLeapSpeed;
 };
 
 

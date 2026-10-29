@@ -3,6 +3,6 @@
 #include "TYPES.H"
 struct PlayerMovementScalarView {
     char pad0[0x20];
-    f32 unk20;
+    f32 scalar;
 };
 #endif

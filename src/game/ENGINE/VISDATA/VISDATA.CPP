@@ -185,11 +185,11 @@ void Visdata_BuildFrustumPlanes(PlaneEquation *planes, CVector3 *eye, CVector3 *
 void Visdata_BuildPlaneFromPoints(void *planeEquation, void *rightVector, void *middleVector, void *leftVector) {
     PlaneEquation *plane = planeEquation;
     CVector3 *point = rightVector;
-    CVector3 sp10;
-    CVector3 sp20;
-    Graphu64_SubtractVectors(&sp10, middleVector, rightVector);
-    Graphu64_SubtractVectors(&sp20, leftVector, middleVector);
-    Graphu64_CrossVectors(planeEquation, &sp20, &sp10);
+    CVector3 edgeRightToMiddle;
+    CVector3 edgeMiddleToLeft;
+    Graphu64_SubtractVectors(&edgeRightToMiddle, middleVector, rightVector);
+    Graphu64_SubtractVectors(&edgeMiddleToLeft, leftVector, middleVector);
+    Graphu64_CrossVectors(planeEquation, &edgeMiddleToLeft, &edgeRightToMiddle);
     Graphu64_NormalizeVec3(planeEquation);
     plane->distance = (plane->normal.x * point->x)
                                   + (plane->normal.y * point->y)

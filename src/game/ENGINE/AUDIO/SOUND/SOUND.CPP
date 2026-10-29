@@ -501,11 +501,11 @@ s32 Sound_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *posi
             return -1;
         }
     }
-    if (soundRecord->field2 != 0) {
+    if (soundRecord->priority != 0) {
         return AudioWorld_QueuePrioritizedSound(&((GameAudioContext *)(context))->view[0], soundRecord, position, playbackValue, extra);
     }
     if (soundRecord->flags & 0x40) {
-        Audio_ReleaseMatchingExclusiveVoice(&((GameAudioContext *)(context))->menu[0], ((GameAudioContext *)(context))->selectedSound, soundRecord->field0);
+        Audio_ReleaseMatchingExclusiveVoice(&((GameAudioContext *)(context))->menu[0], ((GameAudioContext *)(context))->selectedSound, soundRecord->exclusiveKey);
     }
     node = Channel_StartNoteVoice(&((GameAudioContext *)(context))->menu[0], soundRecord, playbackValue, voiceUserData);
     if (node == 0) {

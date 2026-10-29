@@ -93,9 +93,9 @@ extern f32 Scaled_DistanceToNode(s32 *, s32);
 void Nav_InitCombatTargetApproach(void *actor) {
     void *brain;
     brain = (((struct NavigationActorBrainView *) ((s8 *) ((struct ActorPlayerControllerView *) ((s8 *) actor))->player))->brain);
-    (((struct NavigationBrainView *) ((s8 *) brain))->unk220) = 0;
+    (((struct NavigationBrainView *) ((s8 *) brain))->state) = 0;
     Scaled_ResetBehaviorState(brain);
-    (((struct NavigationBrainView *) ((s8 *) brain))->unk2FC) = 0;
+    (((struct NavigationBrainView *) ((s8 *) brain))->postRouteInitReset) = 0;
 }
 
 void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *actor)
@@ -238,9 +238,9 @@ void Nav_SeekNearbyUnrestrictedGoal(Shared_Actor *actor)
 void Nav_InitUnclaimedMarkerSearch(void *actor) {
     void *brain;
     brain = (((struct NavigationActorBrainView *) ((s8 *) ((struct ActorPlayerControllerView *) ((s8 *) actor))->player))->brain);
-    (((struct NavigationBrainView *) ((s8 *) brain))->unk220) = 0;
+    (((struct NavigationBrainView *) ((s8 *) brain))->state) = 0;
     Scaled_ResetBehaviorState(brain);
-    (((struct NavigationBrainView *) ((s8 *) brain))->unk2FC) = 0;
+    (((struct NavigationBrainView *) ((s8 *) brain))->postRouteInitReset) = 0;
 }
 
 void Nav_SeekUnclaimedMarker(void *actorStorage) {

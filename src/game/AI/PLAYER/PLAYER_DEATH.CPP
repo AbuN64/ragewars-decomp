@@ -157,7 +157,7 @@ void Playerai_HandlePlayerDeath(struct Shared_ActorView *player, void *attacker,
     if (((struct Shared_ActorView *)player)->action == 0x27) {
         Player_SetPlayerState(player, attacker, 2);
     }
-    ((struct Shared_ActorView *)player)->field1218 = 0;
+    ((struct Shared_ActorView *)player)->reservedWord1218 = 0;
     Link_DispatchActorLinks(attacker, 1, attacker);
     Player_ReleaseObjectHandles(player);
     Playerai_ResetDamageTimers((s32)player);
@@ -279,9 +279,9 @@ case 7:
                         if (firstAmmoDrop != 0) {
                             hasAmmoDrop = 1;
                             firstAmmoDropRecord = &g_pickupAmmoDefinitions[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
-                            firstAmmoDropRecord->unkC = (s16) firstAmmoDrop;
-                            firstAmmoDropRecord->unkE = 0;
-                            firstAmmoDropRecord->unk10 = 0;
+                            firstAmmoDropRecord->firstAmmoDrop = (s16) firstAmmoDrop;
+                            firstAmmoDropRecord->secondAmmoDrop = 0;
+                            firstAmmoDropRecord->thirdAmmoDrop = 0;
                         }
                         break;
                     case 1:                         /* switch 2 */
@@ -301,9 +301,9 @@ case 7:
                         if (secondAmmoDrop != 0) {
                             hasAmmoDrop = 1;
                             secondAmmoDropRecord = &g_pickupAmmoDefinitions[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
-                            secondAmmoDropRecord->unkE = (s16) secondAmmoDrop;
-                            secondAmmoDropRecord->unkC = 0;
-                            secondAmmoDropRecord->unk10 = 0;
+                            secondAmmoDropRecord->secondAmmoDrop = (s16) secondAmmoDrop;
+                            secondAmmoDropRecord->firstAmmoDrop = 0;
+                            secondAmmoDropRecord->thirdAmmoDrop = 0;
                         }
                         break;
                     case 2:                         /* switch 2 */
@@ -323,9 +323,9 @@ case 7:
                         if (thirdAmmoDrop != 0) {
                             hasAmmoDrop = 1;
                             thirdAmmoDropRecord = &g_pickupAmmoDefinitions[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
-                            thirdAmmoDropRecord->unk10 = (s16) thirdAmmoDrop;
-                            thirdAmmoDropRecord->unkC = 0;
-                            thirdAmmoDropRecord->unkE = 0;
+                            thirdAmmoDropRecord->thirdAmmoDrop = (s16) thirdAmmoDrop;
+                            thirdAmmoDropRecord->firstAmmoDrop = 0;
+                            thirdAmmoDropRecord->secondAmmoDrop = 0;
                         }
                         break;
                     }
@@ -388,10 +388,10 @@ case 7:
                 } while (childActor != 0);
             }
         }
-        ((struct Shared_ActorView *)player)->field1238 = -1;
-        ((struct Shared_ActorView *)player)->field1230 = 0;
-        ((struct Shared_ActorView *)player)->field1234 = 0;
-        ((struct Shared_ActorView *)player)->field1240 = 0;
+        ((struct Shared_ActorView *)player)->reservedWord1238 = -1;
+        ((struct Shared_ActorView *)player)->reservedWord1230 = 0;
+        ((struct Shared_ActorView *)player)->reservedWord1234 = 0;
+        ((struct Shared_ActorView *)player)->reservedWord1240 = 0;
         ((struct Shared_ActorView *)player)->impulseFlags = (s32) (((struct Shared_ActorView *)player)->impulseFlags & 0xFFFF0000);
         if (damageFlags & 0x4000) {
             if ((u32) (((struct Shared_ActorView *)player)->state - 0x11) < 2U) {

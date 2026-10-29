@@ -54,7 +54,7 @@ extern u8 g_profileModeOnePlayedLevels[];
 
 /* Starts the ambient track for the current stage g_selectedLevelId (stage 4, 9, 22 and 35 select tracks
    0 to 3): returns -1 when the stage has no track or when Defs_TestBit reports the slot busy,
-   otherwise starts it on arg0's 400-byte slot of g_profileMilestoneCompletionBits through Defs_SetBitValue and returns
+   otherwise starts it on profileIndex's 400-byte slot of g_profileMilestoneCompletionBits through Defs_SetBitValue and returns
    0x13BC. */
 
 
@@ -364,9 +364,9 @@ void Achieve_ApplyProfileWeaponUnlocks(WeaponUnlockPlayerView *player) {
     Model *model;
     s32 profileByteOffset;
     profile = player->profile;
-    if (profile->unk91 != 1) {
+    if (profile->locked != 1) {
         i = 0;
-        if (profile->unk78 != 0) {
+        if (profile->present != 0) {
             model = (Model *)player->model;
             profileByteOffset = profile->profileIndex * 0x190;
                         do {

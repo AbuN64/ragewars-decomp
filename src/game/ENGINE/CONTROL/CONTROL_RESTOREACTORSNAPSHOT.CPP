@@ -5,7 +5,7 @@
 struct {
     unsigned int w0[3];
     unsigned char b1[88];
-} D_auto_rodata_unresolved_800C4254 = {
+} g_threadLabelWordsUs = {
     {
         0x00000000, 0x116D5F46, 0x61646554,
     },
@@ -30,7 +30,7 @@ char g_ControlRestoreactorsnapshotEncodedBytes[12] = "\000\000\000\000binaries";
 struct {
     unsigned int w0[3];
     unsigned char b1[88];
-} D_auto_rodata_unresolved_800C45D4 = {
+} g_threadLabelWordsEuropean = {
     {
         0x24420010, 0xA7C20000, 0x00111400,
     },

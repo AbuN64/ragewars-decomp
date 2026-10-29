@@ -36,12 +36,12 @@ extern s32 Control_IsAButtonPressed(ControllerProfile *slot);
 
 void Playerai_EndRound(void *roundContext);
 
-/* Sets arg0's unk14 field to the address of g_profileFirstConfirmationLabel and returns 0. */
+/* Sets labelItem's unk14 field to the address of g_profileFirstConfirmationLabel and returns 0. */
 
 
 
 
-/* Sets arg0's unk14 field to the address of g_profileSecondConfirmationLabel and returns 0. */
+/* Sets labelItem's unk14 field to the address of g_profileSecondConfirmationLabel and returns 0. */
 
 
 
@@ -65,7 +65,7 @@ extern void Control_SetProfileMode(PakMenuSlot *, s32);
 
 
 
-/** Runs Menu_AdjustValue on a byte in arg1->unk1C->unk5D8[0x83] and writes the result back into that byte. */
+/** Runs Menu_AdjustValue on a byte in menuContext->unk1C->unk5D8[0x83] and writes the result back into that byte. */
 
 extern s32 Menu_AdjustValue(void *menu, s32 value, s32 step, s32 minimum, s32 maximum, s32 wrap);
 

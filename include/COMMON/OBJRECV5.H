@@ -50,11 +50,11 @@ struct ObjRecV6 {
     char pad0[0x2F0];
     Triple savedPosition;
     char pad2F0[0x2FC - 0x2F0 - sizeof(Triple)];
-    s32 unk2FC;
+    s32 savedSourceHandle;
     char pad2FC[0x344 - 0x2FC - sizeof(s32)];
-    struct CacheResourceBlockView unk344;
+    struct CacheResourceBlockView savedResourceBlock;
     char pad344[0x354 - 0x344 - sizeof(struct CacheResourceBlockView)];
-    f32 unk354;
+    f32 savedYaw;
     char pad354[0x3E8 - 0x354 - sizeof(f32)];
     s32 savedFlags;
 };
@@ -78,8 +78,8 @@ struct SubActor {
     char pad0[4];
     s16 score; /* +0x04: Player_CheckScoreLimit tests it against the score limit */
     char pad6[0x8F - 6];
-    u8 unk8F;
-    u8 unk90;
+    u8 waitingRequest;
+    u8 waitState;
 };
 
 struct FragTagLinkedActorView;
@@ -88,8 +88,8 @@ typedef struct FragTagLinkedActorView FragTagLinkedActorView;
 struct PlayerProfileView;
 struct PlayerProfileView {
     char pad0[146];
-    u8 unk92;
-    u8 unk93;
+    u8 reservedByte;
+    u8 difficulty;
 };
 struct TransientDamagePlayerView;
 struct PlayerProfileView;
@@ -123,19 +123,19 @@ extern float g_playerTargetFacingBodyYawThreshold;
 struct TransientPlayerResetView;
 struct TransientPlayerResetView {
     char pad0[0x70];
-    s32 unk_70;
+    s32 floorClearance;
     char pad70[0x358 - 0x70 - sizeof(s32)];
-    s32 unk_358;
+    s32 scanClearedWord;
     char pad358[0x16E0 - 0x358 - sizeof(s32)];
-    void * unk_16E0;
+    void * nextPlayer;
 };
 
 struct PlayerDamageVisualState;
 struct PlayerDamageVisualState {
     char pad0[0x170];
-    char unk_170;
+    char damageState;
     char pad170[0x5E4 - 0x170 - sizeof(char)];
-    s32 unk_5E4;
+    s32 health;
 };
 
 
@@ -267,13 +267,13 @@ typedef struct FragTagSelectionActorView FragTagSelectionActorView;
 struct FragTagLinkedActorView;
 struct FragTagLinkedActorView {
     char pad0[0xC4];
-    s32 unkC4;
+    s32 resourceKey;
     char padC4[0xD0 - 0xC4 - sizeof(s32)];
-    s32 unkD0;
+    s32 resourceFlags;
     char padD0[0x100 - 0xD0 - sizeof(s32)];
     s32 flags;
     char pad100[0x2E8 - 0x100 - sizeof(s32)];
-    char unk2E8;
+    char actorBlock;
     char pad2E8[0x5DC - 0x2E8 - sizeof(char)];
     void * owner;
     char pad5DC[0x16E0 - 0x5DC - sizeof(void*)];
@@ -309,17 +309,17 @@ typedef struct TransientWorldPlayerSlotView TransientWorldPlayerSlotView;
 struct FragTagPlayerListView;
 struct FragTagPlayerListView {
     char pad0[0x5D8];
-    char * unk_5D8;
+    char * profile;
     char pad5D8[0x5DC - 0x5D8 - sizeof(char*)];
-    s32 unk_5DC;
+    s32 weaponHandle;
     char pad5DC[0x11FC - 0x5DC - sizeof(s32)];
-    f32 unk_11FC;
+    f32 zoomLevel;
     char pad11FC[0x120C - 0x11FC - sizeof(f32)];
-    s32 unk_120C;
+    s32 zoomModelVariant;
     char pad120C[0x1210 - 0x120C - sizeof(s32)];
-    s32 unk_1210;
+    s32 alternateFireState;
     char pad1210[0x16E0 - 0x1210 - sizeof(s32)];
-    char * unk_16E0;
+    char * nextPlayer;
 };
 
 struct HudGlobals;
@@ -434,7 +434,7 @@ struct View;
 struct TransientWorldPlayerSlotView;
 struct TransientWorldPlayerSlotView {
     char pad0[0x144];
-    void * unk_144;
+    void * itemSlots;
 };
 
 struct Inventory;
@@ -450,7 +450,7 @@ typedef struct Inventory Inventory;
 struct TransientWorldItemSlotView;
 struct TransientWorldItemSlotView {
     unsigned char padding_0[2376];
-    void *unk_948;
+    void *secondItemSlots;
 };
 
 
@@ -494,21 +494,21 @@ struct ObjRecV5 {
     char pad0[0x8];
     Triple currentPosition;
     char pad8[0x14 - 0x8 - sizeof(Triple)];
-    s32 unk14;
+    s32 sourceHandle;
     char pad14[0x5C - 0x14 - sizeof(s32)];
-    struct CacheResourceBlockView unk5C;
+    struct CacheResourceBlockView resourceBlock;
     char pad5C[0x6C - 0x5C - sizeof(struct CacheResourceBlockView)];
-    f32 unk6C;
+    f32 yaw;
     char pad6C[0x10E - 0x6C - sizeof(f32)];
-    u8 unk10E;
+    u8 stateChangeClear;
     char pad10E[0x2E8 - 0x10E - sizeof(u8)];
-    Block unk2E8;
+    Block actorBlock;
     char pad2E8[0x5DC - 0x2E8 - sizeof(Block)];
     void * view;
     char pad5DC[0x5EA - 0x5DC - sizeof(void*)];
-    s16 unk5EA;
+    s16 voiceActive;
     char pad5EA[0x86C - 0x5EA - sizeof(s16)];
-    s32 unk86C;
+    s32 controllerState;
     char pad86C[0x11BC - 0x86C - sizeof(s32)];
     PlayerResourceHandle firstResourceHandle;
     char pad11BC[0x11C0 - 0x11BC - sizeof(PlayerResourceHandle)];
@@ -554,9 +554,9 @@ typedef struct FragTagPlayerListNode FragTagPlayerListNode;
 struct DamageSourceFlagsView;
 struct DamageSourceFlagsView {
     char pad0[0x100];
-    s32 unk_100;
+    s32 flags;
     char pad100[0x122C - 0x100 - sizeof(s32)];
-    s32 unk_122C;
+    s32 statusFlags;
 };
 
 struct RulesWeaponsDrawTintedPlayer;

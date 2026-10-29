@@ -40,19 +40,19 @@ struct BodyPlayerUpdateStandingState {
 struct PlayerSequenceActorView;
 struct PlayerSequenceActorView {
     char pad0[0x14];
-    u16 * unk_14;
+    u16 * modelRecordIndexPointer;
     char pad14[0x50 - 0x14 - sizeof(u16*)];
-    f32 unk_50;
+    f32 scaleX;
     char pad50[0x54 - 0x50 - sizeof(f32)];
-    f32 unk_54;
+    f32 scaleY;
     char pad54[0x58 - 0x54 - sizeof(f32)];
-    f32 unk_58;
+    f32 scaleZ;
     char pad58[0x5DC - 0x58 - sizeof(f32)];
-    void * unk_5DC;
+    void * view;
     char pad5DC[0x664 - 0x5DC - sizeof(void*)];
-    u32 unk_664;
+    u32 stateFlags;
     char pad664[0x850 - 0x664 - sizeof(u32)];
-    s32 unk_850;
+    s32 sequenceEnabled;
 };
 
 struct BodyPlayerUpdateWadingState;
@@ -220,9 +220,9 @@ struct View;
 struct PlayerGroundContactView;
 struct PlayerGroundContactView {
     char pad0[0x30];
-    f32 unk_30;
+    f32 speedFactor;
     char pad30[0x52 - 0x30 - sizeof(f32)];
-    u16 unk_52;
+    u16 flags;
 };
 
 extern float g_playerDebugThrowHeadingOffset;
@@ -324,7 +324,7 @@ typedef struct Shared_HudPlayer Shared_HudPlayer;
 struct PlayerViewSavedBytes;
 struct PlayerViewSavedBytes {
     unsigned char padding_0[1312];
-    u8 unk_520;
+    u8 savedByte;
 };
 
 struct Desc;
@@ -337,11 +337,11 @@ struct PlayerSequenceResourceView {
     char pad0[0x44];
     u32 resourceFlagBits;
     char pad44[0xFC - 0x44 - sizeof(u32)];
-    f32 unk_FC;
+    f32 scaleX;
     char padFC[0x100 - 0xFC - sizeof(f32)];
-    f32 unk_100;
+    f32 scaleY;
     char pad100[0x104 - 0x100 - sizeof(f32)];
-    f32 unk_104;
+    f32 scaleZ;
 };
 
 struct PlayerSequenceResourceView;

@@ -82,19 +82,19 @@ s32 Node_CreateGridListFromWidget(s32 widgetResourceId, u8 cellWidth, u8 cellHei
     XPlus_FillBytes(result, 0, 0x60);
     *(Header44 *)result = *(Header44 *)source;
     result->kind = 0xB;
-    result->field_4B = rowCount;
-    result->field_4A = columnCount;
-    result->field_49 = cellHeight;
-    result->field_48 = cellWidth;
-    result->field_51 = initialRow;
-    result->field_50 = initialColumn;
-    result->field_4F = initialRow;
-    result->field_4E = initialColumn;
-    result->field_4D = initialRow;
-    result->field_4C = initialColumn;
+    result->rowCount = rowCount;
+    result->columnCount = columnCount;
+    result->cellHeight = cellHeight;
+    result->cellWidth = cellWidth;
+    result->minimumRow = initialRow;
+    result->minimumColumn = initialColumn;
+    result->initialRow = initialRow;
+    result->initialColumn = initialColumn;
+    result->selectedRow = initialRow;
+    result->selectedColumn = initialColumn;
     size = columnCount * rowCount * 8;
     cells = Cache_AllocateMemory(size);
-    result->field_44 = cells;
+    result->cells = cells;
     XPlus_FillBytes(cells, 0, size);
     Node_ReplaceWidgetLinks(context, 0, source, result);
     return 1;
@@ -140,8 +140,8 @@ void Node_SetGridDimensionArrays(s32 identifier, s32 first, s32 second) {
 void Node_GetGridSelection(s32 identifier, s32 *first, s32 *second) {
     struct MenuWidget *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
-    *first = entry->field_4C;
-    *second = entry->field_4D;
+    *first = entry->selectedColumn;
+    *second = entry->selectedRow;
 }
 
 s32 Node_SelectPreviousGridRow(u8 *entry, void *second, void *third, s32 active) {

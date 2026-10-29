@@ -55,18 +55,18 @@ typedef struct EffectAnimPoolUpdateSceneEffects EffectAnimPoolUpdateSceneEffects
 
 struct AnimationPoseRecordView;
 struct AnimationPoseRecordView {
-    int unk0;
-    short unk4;
+    int reservedWord;
+    short id;
     char pad4[0x6 - 0x4 - sizeof(short)];
-    short unk6;
+    short frame;
     char pad6[0x8 - 0x6 - sizeof(short)];
-    short unk8;
+    short count;
     char pad8[0xA - 0x8 - sizeof(short)];
-    unsigned char unkA;
+    unsigned char flag0;
     char padA[0xB - 0xA - sizeof(unsigned char)];
-    unsigned char unkB;
+    unsigned char flag1;
     char padB[0x10 - 0xB - sizeof(unsigned char)];
-    int unk10;
+    int data;
 };
 
 struct Six;
@@ -138,10 +138,10 @@ struct ResourceBitGrid {
 
 struct ResourceEntry;
 struct ResourceEntry {
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
+    u16 reservedHalf;
+    u16 span;
+    u16 reservedHalf2;
+    u16 count;
 };
 
 struct Six;

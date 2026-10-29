@@ -90,13 +90,13 @@ extern void Barrel_StopActorLoopingSound(void);
 extern void Animpool_ReleaseSceneEffect(struct Shared_Actor *node);
 
 void Link_DispatchActorLinks(struct Shared_Actor *actor, s32 event, void *context) {
-    s32 sp20;
-    s32 sp24;
+    s32 triggers;
+    s32 triggerCount;
 
     if (!(actor->weaponFlags & 0x80000)) {
-        Scene_FindActorTriggerRange(&g_world, actor, &sp20, &sp24);
-        if (sp24 != 0) {
-            Link_DispatchMatchingTriggers(sp20, sp24, 0, event & 0x3FC1FF, event & 0x400000, 0x400000, context);
+        Scene_FindActorTriggerRange(&g_world, actor, &triggers, &triggerCount);
+        if (triggerCount != 0) {
+            Link_DispatchMatchingTriggers(triggers, triggerCount, 0, event & 0x3FC1FF, event & 0x400000, 0x400000, context);
         }
     }
 }
@@ -165,11 +165,11 @@ void Link_RequestGlobalTrack(s32 trackId) {
 }
 
 void Link_CaptureActorTransform(void *actor, void *transform) {
-    (((struct TriggerActorTransformView *) ((s8 *) actor))->unk_100) = (s32) ((((struct TriggerActorTransformView *) ((s8 *) actor))->unk_100) | 0x40000000);
-    (((struct TriggerTargetTransformView *) ((s8 *) transform))->unk_48) = (f32) (((struct TriggerActorTransformView *) ((s8 *) actor))->unk_8);
-    (((struct TriggerTargetTransformView *) ((s8 *) transform))->unk_4C) = (f32) (((struct TriggerActorTransformView *) ((s8 *) actor))->unk_C);
-    (((struct TriggerTargetTransformView *) ((s8 *) transform))->unk_50) = (f32) (((struct TriggerActorTransformView *) ((s8 *) actor))->unk_10);
-    (((struct TriggerTargetTransformView *) ((s8 *) transform))->unk_60) = (f32) (((struct TriggerActorTransformView *) ((s8 *) actor))->unk_6C);
+    (((struct TriggerActorTransformView *) ((s8 *) actor))->flags) = (s32) ((((struct TriggerActorTransformView *) ((s8 *) actor))->flags) | 0x40000000);
+    (((struct TriggerTargetTransformView *) ((s8 *) transform))->capturedPositionX) = (f32) (((struct TriggerActorTransformView *) ((s8 *) actor))->positionX);
+    (((struct TriggerTargetTransformView *) ((s8 *) transform))->capturedPositionY) = (f32) (((struct TriggerActorTransformView *) ((s8 *) actor))->positionY);
+    (((struct TriggerTargetTransformView *) ((s8 *) transform))->capturedPositionZ) = (f32) (((struct TriggerActorTransformView *) ((s8 *) actor))->positionZ);
+    (((struct TriggerTargetTransformView *) ((s8 *) transform))->capturedYaw) = (f32) (((struct TriggerActorTransformView *) ((s8 *) actor))->yaw);
 }
 
 void Link_DispatchTriggerAudio(s32 actorAddress, s32 event, Trigger *trigger) {

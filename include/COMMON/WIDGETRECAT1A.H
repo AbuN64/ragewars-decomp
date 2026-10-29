@@ -118,8 +118,8 @@ struct Tree {
     struct Tree *child;
     short id;
     char pad0E[0x6];
-    short field_14;
-    short field_16;
+    short reservedHalfwordFirst;
+    short reservedHalfwordSecond;
 };
 typedef struct Tree Tree;
 

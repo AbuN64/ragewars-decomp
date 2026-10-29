@@ -13,7 +13,7 @@ unsigned int g_ResourcesEncodedWordsBlock39[1] = {
 struct {
     unsigned int w0[2];
     unsigned char b1[256];
-} D_auto_rodata_unresolved_800C88E8 = {
+} g_byteBitLengthLookupWithConstants_eu = {
     {
         0x41F5C28F, 0x3E51B717,
     },

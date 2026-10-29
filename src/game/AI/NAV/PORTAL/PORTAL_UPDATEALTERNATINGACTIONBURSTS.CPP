@@ -86,7 +86,7 @@ case_1:
         Portal_UpdateHeldActionBurst(state, &g_actorBehaviorActionConfigs + type * 0x38 + mode * 0x1C);
         goto dispatched;
 case_2:
-        ((CountedEffectActionState *)state)->unk_240 = 1;
+        ((CountedEffectActionState *)state)->actionFlagFrames = 1;
         goto dispatched;
 case_3:
         Portal_UpdateAlternatingActionBursts(state, &g_actorBehaviorActionConfigs + type * 0x38);
@@ -101,10 +101,10 @@ case_7:
 case_8:
 dispatched:
 
-    if (((CountedEffectActionState *)state)->unk_240 > 0) {
+    if (((CountedEffectActionState *)state)->actionFlagFrames > 0) {
         ((Shared_ActorView *)(*(void **)state))->unk_0x06B0 |= 0x4000;
         ((Shared_ActorView *)(*(void **)state))->actionFlags |= 0x4000;
-        ((CountedEffectActionState *)state)->unk_240 -= 1;
+        ((CountedEffectActionState *)state)->actionFlagFrames -= 1;
     }
 }
 
@@ -192,42 +192,42 @@ void Portal_UpdateCountedEffectAction(CountedEffectActionState *controller, Coun
     f32 range;
     f32 scale;
 
-    if (controller->unk_2E4 > 0) {
+    if (controller->phaseCountdown > 0) {
         scale = g_timedActionWaitRandomScale;
-        controller->unk_2E8 = config->unk_8;
-        controller->unk_2E8 =
-            (f32) controller->unk_2E8
-            + Graphu64_RandomFloat(scale) * (f32) config->unk_C;
-        controller->unk_2E4 -= 1;
+        controller->waitTimer = config->firstWaitBase;
+        controller->waitTimer =
+            (f32) controller->waitTimer
+            + Graphu64_RandomFloat(scale) * (f32) config->firstWaitSpread;
+        controller->phaseCountdown -= 1;
         return;
     }
-    if (controller->unk_2E4 == 0) {
+    if (controller->phaseCountdown == 0) {
         count = Particle_CountOwnerListOneEffects(&g_actorParticleEffectSystem, *(void **) controller);
         if (count == 3) {
-            controller->unk_2E8 = count;
+            controller->waitTimer = count;
         }
-        if (count < controller->unk_2E8) {
-            controller->unk_23C = 1;
+        if (count < controller->waitTimer) {
+            controller->effectCountShortfallFlag = 1;
             return;
         }
-        controller->unk_2E4 = -1;
+        controller->phaseCountdown = -1;
         scale = g_alternatingActionWaitRandomScale;
-        controller->unk_2E8 = config->unk_24;
-        controller->unk_2E8 =
-            (f32) controller->unk_2E8
-            + Graphu64_RandomFloat(scale) * (f32) config->unk_28;
+        controller->waitTimer = config->secondWaitBase;
+        controller->waitTimer =
+            (f32) controller->waitTimer
+            + Graphu64_RandomFloat(scale) * (f32) config->secondWaitSpread;
         return;
     }
-    controller->unk_2E8 -= 1;
-    target = ((struct ActionTargetPlayerView *) controller->unk_64)->player;
+    controller->waitTimer -= 1;
+    target = ((struct ActionTargetPlayerView *) controller->targetView)->player;
     Particle_AverageOwnerEffectPositions(&g_actorParticleEffectSystem, *(void **) controller, &pos);
     range = g_alternatingActionTargetRange;
     pos.y = ((Player *)target)->pos.y;
     if (Graphu64_GetSquaredDistance(&pos, &((Player *)(target))->pos) < range) {
-        controller->unk_2E8 = 0;
+        controller->waitTimer = 0;
     }
-    if (controller->unk_2E8 == 0) {
-        controller->unk_240 = 1;
+    if (controller->waitTimer == 0) {
+        controller->actionFlagFrames = 1;
         Portal_InitializeRandomActionSettings(controller, config);
     }
 }

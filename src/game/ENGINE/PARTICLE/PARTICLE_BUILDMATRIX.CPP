@@ -126,7 +126,7 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
                 }
                 break;
         }
-        particle->inst.unk14 = 0;
+        particle->inst.region = 0;
     }
     if (particle->flags & 0x400000) {
         owner = particle->owner;

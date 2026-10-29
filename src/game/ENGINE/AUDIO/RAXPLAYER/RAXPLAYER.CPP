@@ -88,13 +88,13 @@ s32 Audio_StartDialogGroup(DialogGroupPlayer *player, s32 group, f32 scale, int 
 
 void Audio_InitializeDialogPlayer(struct DialogPlayerState *record, s32 resource) {
     extern char g_dialogDefaultSample[];
-    record->field_0 = resource;
-    record->field_4 = -1;
-    record->field_C = -1;
-    record->field_8 = 0;
-    record->field_14 = 0;
-    record->field_18 = 0x40;
-    record->field_1C = alSndpAllocate(Audio_GetSoundPlayer(record->field_0), g_dialogDefaultSample);
+    record->resource = resource;
+    record->request = -1;
+    record->group = -1;
+    record->state = 0;
+    record->speed = 0;
+    record->volume = 0x40;
+    record->soundId = alSndpAllocate(Audio_GetSoundPlayer(record->resource), g_dialogDefaultSample);
 }
 
 void Audio_StopDialogPlayer(void *dialogPlayer) {

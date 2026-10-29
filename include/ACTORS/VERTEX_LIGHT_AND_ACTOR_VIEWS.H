@@ -7,21 +7,21 @@ struct TriggerSoundIdView {
 };
 struct TriggerActorTransformView {
     unsigned char padding_0[8];
-    f32 unk_8;
-    f32 unk_C;
-    f32 unk_10;
+    f32 positionX;
+    f32 positionY;
+    f32 positionZ;
     unsigned char padding_14[88];
-    f32 unk_6C;
+    f32 yaw;
     unsigned char padding_70[144];
-    s32 unk_100;
+    s32 flags;
 };
 struct TriggerTargetTransformView {
     unsigned char padding_0[72];
-    f32 unk_48;
-    f32 unk_4C;
-    f32 unk_50;
+    f32 capturedPositionX;
+    f32 capturedPositionY;
+    f32 capturedPositionZ;
     unsigned char padding_54[12];
-    f32 unk_60;
+    f32 capturedYaw;
 };
 struct TriggerActivationView {
     char pad0[0xE];

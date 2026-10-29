@@ -6,13 +6,13 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char *D_auto_800E1CA4[];
-extern char *D_auto_800E1CB4[];
-extern char *D_auto_800E1CC4[];
-extern char *D_auto_800E1CD4[];
+extern char *g_matchOptionsSelectLabelFirstByLanguage[];
+extern char *g_matchOptionsSelectLabelSecondByLanguage[];
+extern char *g_matchOptionsCursorLabelFirstByLanguage[];
+extern char *g_matchOptionsCursorLabelSecondByLanguage[];
 extern char *g_matchOptionsCursorLabelThirdByLanguage[];
-extern char *D_auto_800E1CF4[];
-extern char *D_auto_800E1D04[];
+extern char *g_matchOptionsCursorLabelFourthByLanguage[];
+extern char *g_matchOptionsCursorLabelFifthByLanguage[];
 #define MO_TEXT(i, fixed, eu) ((eu)[settings->language])
 #else
 #define MO_TEXT(i, fixed, eu) (fixed)
@@ -78,15 +78,15 @@ s32 Frontend_CreateMatchOptions(void *root) {
     selectList = SmpButton_CreateListWidget(OPTIONS_TEXT + 8, OPTIONS_TEXT + 9);
     {void **slot = &g_matchOptionsScreen->selectWidget; *slot = selectList;}
     settings = &g_gameSettings;
-    SmpButton_AppendListText(selectList, MO_TEXT(0, g_matchOptionsSelectLabelFirst, D_auto_800E1CA4));
-    SmpButton_AppendListText(g_matchOptionsScreen->selectWidget, MO_TEXT(1, g_matchOptionsSelectLabelSecond, D_auto_800E1CB4));
+    SmpButton_AppendListText(selectList, MO_TEXT(0, g_matchOptionsSelectLabelFirst, g_matchOptionsSelectLabelFirstByLanguage));
+    SmpButton_AppendListText(g_matchOptionsScreen->selectWidget, MO_TEXT(1, g_matchOptionsSelectLabelSecond, g_matchOptionsSelectLabelSecondByLanguage));
     cursorList = SmpButton_CreateListWidget(OPTIONS_TEXT + 15, OPTIONS_TEXT + 16);
     {void **slot = &g_matchOptionsScreen->cursorWidget; *slot = cursorList;}
-    SmpButton_AppendListText(cursorList, MO_TEXT(2, g_matchOptionsCursorLabelFirst, D_auto_800E1CC4));
-    SmpButton_AppendListText(g_matchOptionsScreen->cursorWidget, MO_TEXT(3, g_matchOptionsCursorLabelSecond, D_auto_800E1CD4));
+    SmpButton_AppendListText(cursorList, MO_TEXT(2, g_matchOptionsCursorLabelFirst, g_matchOptionsCursorLabelFirstByLanguage));
+    SmpButton_AppendListText(g_matchOptionsScreen->cursorWidget, MO_TEXT(3, g_matchOptionsCursorLabelSecond, g_matchOptionsCursorLabelSecondByLanguage));
     SmpButton_AppendListText(g_matchOptionsScreen->cursorWidget, MO_TEXT(4, g_matchOptionsCursorLabelThird, g_matchOptionsCursorLabelThirdByLanguage));
-    SmpButton_AppendListText(g_matchOptionsScreen->cursorWidget, MO_TEXT(5, g_matchOptionsCursorLabelFourth, D_auto_800E1CF4));
-    SmpButton_AppendListText(g_matchOptionsScreen->cursorWidget, MO_TEXT(6, g_matchOptionsCursorLabelFifth, D_auto_800E1D04));
+    SmpButton_AppendListText(g_matchOptionsScreen->cursorWidget, MO_TEXT(5, g_matchOptionsCursorLabelFourth, g_matchOptionsCursorLabelFourthByLanguage));
+    SmpButton_AppendListText(g_matchOptionsScreen->cursorWidget, MO_TEXT(6, g_matchOptionsCursorLabelFifth, g_matchOptionsCursorLabelFifthByLanguage));
     SmpButton_WrapButtonWidget(OPTIONS_TEXT + 10);
     SmpButton_WrapButtonWidget(OPTIONS_TEXT + 11);
     SmpButton_WrapButtonWidget(OPTIONS_TEXT + 12);

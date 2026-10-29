@@ -46,7 +46,7 @@ int Playerai_HasActiveView(void *object) {
     LinkedActorOwnerView *object_record = object;
     View *nested = object_record->owner;
     if (nested != 0) {
-        return nested->unk564 != 0;
+        return nested->shieldActive != 0;
     }
     return 0;
 }
@@ -76,9 +76,9 @@ void Playerai_LoadActorModel(void *actor) {
             ((Shared_ActorView *)actor)->model = result;
         }
     }
-    ((LevelActor *)actor)->scale.x = ((PlayerSequenceResourceView *)result)->unk_FC;
-    ((LevelActor *)actor)->scale.y = ((PlayerSequenceResourceView *)result)->unk_100;
-    ((LevelActor *)actor)->scale.z = ((PlayerSequenceResourceView *)result)->unk_104;
+    ((LevelActor *)actor)->scale.x = ((PlayerSequenceResourceView *)result)->scaleX;
+    ((LevelActor *)actor)->scale.y = ((PlayerSequenceResourceView *)result)->scaleY;
+    ((LevelActor *)actor)->scale.z = ((PlayerSequenceResourceView *)result)->scaleZ;
 }
 
 void Playerai_UpdateCharacterModel(void *actor) {
@@ -120,17 +120,17 @@ void Playerai_DrawCachedModelAndShadow(void *actorIn, s32 shadowMode) {
     PlayerCameraTargetView *message;
     ActorAnimationResourceView *object = actorIn;
 
-    if (object->unk_100 & 0x40000) {
+    if (object->flags & 0x40000) {
         animationResource = Cache_RequestResource(0, object->resource, object->resource, object->resourceFlags, 4, 0, 0, g_playerModelResourceTag, 1);
         if (animationResource != 0) {
-            actor = object->unk_1D8;
+            actor = object->owner;
             Gobjinst_UpdateModelBounds(actorIn, (s32)SetN64_GetPackSection(*(void **)animationResource, 0));
             if (shadowMode != 0) {
                 message = actor->message;
                 if (message != 0) {
-                    viewOffset.x = message->position.x - object->unk_8.x;
+                    viewOffset.x = message->position.x - object->position.x;
                     viewOffset.y = 0.0f;
-                    viewOffset.z = ((PlayerCameraTargetView *)actor->message)->position.z - object->unk_8.z;
+                    viewOffset.z = ((PlayerCameraTargetView *)actor->message)->position.z - object->position.z;
                     GameObject_DrawBlobShadow(actorIn, &viewOffset, shadowMode);
                 }
             }
@@ -153,7 +153,7 @@ void Playerai_SetInheritedMotionFlags(void *player, void *source, s32 enabled) {
         flag_8000 = flags & 0x8000;
         flag_10000 = flags & 0x10000;
         if (flag_1000 == 0) {
-            object->unk840 = 0;
+            object->effectTimer = 0;
         } else {
             Playerai_ApplyDamageOverTime(player, source);
         }

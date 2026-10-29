@@ -21,15 +21,15 @@ struct VoiceKeyTable {
     AudioVoiceKeySlotView slots[17];
 };
 struct IntegerStateB4 {
-    s32 unk_0;
-    s32 unk_4;
+    s32 slotIndex;
+    s32 handle;
     unsigned char padding_8[8];
-    s32 unk_10;
+    s32 frame;
     unsigned char padding_14[60];
-    s32 unk_50;
+    s32 tracked;
     unsigned char padding_54[88];
-    s32 unk_AC;
-    s32 unk_B0;
+    s32 done;
+    s32 context;
 };
 struct VoiceKeyPairTable {
     AudioSelectedHandleView *owner;
@@ -46,8 +46,8 @@ typedef struct SoundEnvelope {
 struct ViewChannelUpdateVoicePlayback {
     s32 slot;
     s32 handle;
-    s32 field8;
-    s32 fieldC;
+    s32 reserved8;
+    s32 reservedC;
     s32 frame;
     char pad14[4];
     s32 finished;
@@ -56,8 +56,8 @@ struct ViewChannelUpdateVoicePlayback {
     u8 pad2A[2];
     f32 time;
     char pad30[0x38 - 0x30];
-    s16 field38;
-    s16 field3A;
+    s16 reserved38;
+    s16 reserved3A;
     char pad3C[0x44 - 0x3C];
     Triple position;
     Triple *tracked;
@@ -80,7 +80,7 @@ struct ViewChannelUpdateVoicePlayback {
     s32 trackId;
     s32 done;
     struct AudioVoiceContextView *context;
-    s32 fieldB4;
+    s32 reservedB4;
     char padB8[4];
     s32 followTrack;
     s32 fixed; /* 0xC0 */

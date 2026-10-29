@@ -76,7 +76,7 @@ SceneDefinitionActorView *Scene_FindSwitchByDefinitionId(World *world, s32 id) {
 }
 
 void Scene_LocateTextureResource(void *world, s32 sectionIndex, s32 *resourceAddressOutput, s32 *sectionSizeOut) {
-    *resourceAddressOutput = SetN64_LocatePackSection((((struct SceneCounterPairView *) ((s8 *) world))->unk_50), (((struct SceneCounterPairView *) ((s8 *) world))->unk_20), sectionIndex, sectionSizeOut);
+    *resourceAddressOutput = SetN64_LocatePackSection((((struct SceneCounterPairView *) ((s8 *) world))->packDirectory), (((struct SceneCounterPairView *) ((s8 *) world))->packBankOffset), sectionIndex, sectionSizeOut);
 }
 
 s32 Scene_GetIndexedModelResource(Shared_World *world, s32 type) {
@@ -89,18 +89,18 @@ s32 Scene_GetIndexedModelResource(Shared_World *world, s32 type) {
 }
 
 s32 Scene_FindAlternateTriggerRange(char *world, u16 *triggerIds, s32 *firstIndex, s32 *lastIndex) {
-    s32 sp18;
-    s32 sp1C;
+    s32 groupFirst;
+    s32 groupLast;
     s32 matchCount;
-    s32 field_cc;
-    s32 field_c4;
+    s32 alternateRecordIndex;
+    s32 alternateRecordCount;
 
-    matchCount = Defs_FindSortedGroupRange(field_cc, field_c4, *triggerIds,
-        (field_cc = (s32)((Shared_World *)world)->alternateRecordIndex,
-         field_c4 = ((Shared_World *)world)->alternateRecordCount, &sp18), &sp1C);
+    matchCount = Defs_FindSortedGroupRange(alternateRecordIndex, alternateRecordCount, *triggerIds,
+        (alternateRecordIndex = (s32)((Shared_World *)world)->alternateRecordIndex,
+         alternateRecordCount = ((Shared_World *)world)->alternateRecordCount, &groupFirst), &groupLast);
     if (matchCount != 0) {
-        *firstIndex = (s32)((Shared_World *)world)->alternateRecordArray + (sp18 * 0x14);
-        matchCount = (sp1C - sp18) + 1;
+        *firstIndex = (s32)((Shared_World *)world)->alternateRecordArray + (groupFirst * 0x14);
+        matchCount = (groupLast - groupFirst) + 1;
         *lastIndex = matchCount;
     } else {
         *firstIndex = 0;
@@ -110,14 +110,14 @@ s32 Scene_FindAlternateTriggerRange(char *world, u16 *triggerIds, s32 *firstInde
 }
 
 void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *firstIndex, s32 *lastIndex) {
-    s32 sp18;
+    s32 groupFirst;
     s32 last;
     s32 index;
     u32 first;
     s32 lastOffset;
     s32 sortedGroupRangeResult;
-    s32 field_c8;
-    s32 field_c0;
+    s32 recordIndex;
+    s32 recordCount;
 
     if (!(((LevelActor *)levelActor)->flags & 0x80000)) {
         first = (u32)((Shared_World *)world)->actors;
@@ -136,12 +136,12 @@ void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *firstIndex,
         *lastIndex = 0;
         return;
     }
-    sortedGroupRangeResult = Defs_FindSortedGroupRange(field_c8, field_c0, index,
-        (field_c8 = (s32)((Shared_World *)world)->recordIndex,
-         field_c0 = ((Shared_World *)world)->recordCount, &sp18), &last);
+    sortedGroupRangeResult = Defs_FindSortedGroupRange(recordIndex, recordCount, index,
+        (recordIndex = (s32)((Shared_World *)world)->recordIndex,
+         recordCount = ((Shared_World *)world)->recordCount, &groupFirst), &last);
     if (sortedGroupRangeResult != 0) {
-        *firstIndex = (s32)((Shared_World *)world)->recordArray + (sp18 * 0x14);
-        *lastIndex = (last - sp18) + 1;
+        *firstIndex = (s32)((Shared_World *)world)->recordArray + (groupFirst * 0x14);
+        *lastIndex = (last - groupFirst) + 1;
     } else {
         *firstIndex = 0;
         *lastIndex = 0;

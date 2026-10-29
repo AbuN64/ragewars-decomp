@@ -6,13 +6,13 @@
 struct CountedEffectActionConfig;
 struct CountedEffectActionConfig {
     char pad0[0x8];
-    s32 unk_8;
+    s32 firstWaitBase;
     char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unk_C;
+    s32 firstWaitSpread;
     char padC[0x24 - 0xC - sizeof(s32)];
-    s32 unk_24;
+    s32 secondWaitBase;
     char pad24[0x28 - 0x24 - sizeof(s32)];
-    s32 unk_28;
+    s32 secondWaitSpread;
 };
 
 
@@ -62,15 +62,15 @@ extern float g_aiAttackRangeEasyScale;
 struct CountedEffectActionState;
 struct CountedEffectActionState {
     char pad0[0x64];
-    char * unk_64;
+    char * targetView;
     char pad64[0x23C - 0x64 - sizeof(char*)];
-    s32 unk_23C;
+    s32 effectCountShortfallFlag;
     char pad23C[0x240 - 0x23C - sizeof(s32)];
-    s32 unk_240;
+    s32 actionFlagFrames;
     char pad240[0x2E4 - 0x240 - sizeof(s32)];
-    s32 unk_2E4;
+    s32 phaseCountdown;
     char pad2E4[0x2E8 - 0x2E4 - sizeof(s32)];
-    s32 unk_2E8;
+    s32 waitTimer;
 };
 
 extern float g_aiAggressionEasyScale;

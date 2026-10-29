@@ -112,7 +112,7 @@ struct GameplayCamera {
     char pad11C[4];
     s32 monochrome; /* 0x120: ribbons draw grey while set */
     u16 kickStep; /* +0x124: src/Camera_UpdateViewProjectionAndEffects_GameplayCamera.c */
-    s16 unk126;
+    s16 reservedHalf;
     CVector3 position; /* +0x128: camera position */
     char pad134[0x4];
     f32 roll; /* +0x138: src/Camera_UpdateViewProjectionAndEffects_GameplayCamera.c */
@@ -139,25 +139,25 @@ struct GameplayCamera {
     char pad442[0x6];
     char hudProjection[3][64]; /* +0x448: src/Camera_UpdateViewProjectionAndEffects_GameplayCamera.c */
     char pad508[0x10];
-    s32 unk518;
-    f32 unk51C;
-    u8 unk520;
-    u8 unk521;
-    u8 unk522;
-    u8 unk523;
-    u8 unk524;
-    u8 unk525;
-    u8 unk526;
-    u8 unk527;
+    s32 reservedWord;
+    f32 reservedFloat;
+    u8 reservedByteA;
+    u8 reservedByteB;
+    u8 reservedByteC;
+    u8 reservedByteD;
+    u8 reservedByteE;
+    u8 reservedByteF;
+    u8 reservedByteG;
+    u8 reservedByteH;
     f32 farPlane; /* +0x528: src/Camera_UpdateViewProjectionAndEffects_GameplayCamera.c */
-    f32 unk52C;
+    f32 reservedFloatB;
     f32 verticalFieldOfView;
-    f32 unk534;
+    f32 reservedFloatC;
     s32 fadeCounter; /* 0x538 */
     s32 fogNear; /* 0x53C */
-    s32 unk540;
+    s32 reservedWordB;
     s32 fadeEnabled; /* 0x544 */
-    u8 unk548;
+    u8 reservedByteI;
     u8 pad549;
     s8 fadeMode; /* 0x54A */
     s8 fadeRed, fadeGreen, fadeBlue;
@@ -178,7 +178,7 @@ struct GameplayCamera {
 typedef struct SharedCameraRenderView SharedCameraRenderView;
 struct SharedCameraRenderView {
     s32 renderMode; /* +0x0: src/Camera_UpdateViewProjectionAndEffects_GameplayCamera.c */
-    s32 unk4; /* +0x4: src/Camera_UpdateViewProjectionAndEffects_GameplayCamera.c */
+    s32 reservedWord; /* +0x4: src/Camera_UpdateViewProjectionAndEffects_GameplayCamera.c */
     s32 alternateViewEnabled; /* +0x8: src/Camera_UpdateViewProjectionAndEffects_GameplayCamera.c */
     char padC[4];
     RacerViewport view; /* +0x10: g_fallbackScreenMessageEmitter, the render view embedded in g_playerWeaponClassMode */

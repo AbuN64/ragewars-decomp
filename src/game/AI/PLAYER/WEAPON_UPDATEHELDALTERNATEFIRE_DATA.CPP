@@ -16,12 +16,12 @@ void Playerai_BeginHeldAlternateFire(struct SharedPlayer *actor) {
 
 /* 8022AE90_11.CPP */
 void Playerai_EndHeldAlternateFire(void *actor) {
-    if ((((struct PlayerAlternateFireStateView *) ((s8 *) actor))->unk_1210) != 0) {
-        if ((((struct PlayerAlternateFireStateView *) ((s8 *) actor))->unk_5E4) != 0) {
+    if ((((struct PlayerAlternateFireStateView *) ((s8 *) actor))->alternateFireMarker) != 0) {
+        if ((((struct PlayerAlternateFireStateView *) ((s8 *) actor))->health) != 0) {
             Player_SetPlayerState(actor, actor, 2);
         }
-        (((struct PlayerAlternateFireStateView *) ((s8 *) actor))->unk_1210) = 0;
-        (((struct PlayerAlternateFireStateView *) ((s8 *) actor))->unk_1214) = 0;
+        (((struct PlayerAlternateFireStateView *) ((s8 *) actor))->alternateFireMarker) = 0;
+        (((struct PlayerAlternateFireStateView *) ((s8 *) actor))->alternateFireMarkerState) = 0;
     }
 }
 

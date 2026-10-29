@@ -51,7 +51,7 @@ static __inline__ void *menuPrompt(MenuPakBeginProfileLoad *menu) {
                 prompt = pakPrompt(&channel);
             }
         } else if (g_pakProfileLoadActive) {
-            prompt = D_0044FFA4;
+            prompt = g_controllerPakNotReadyDialogResource;
             if (g_pakProfileLoadMode_de) prompt = g_pakStatusPromptAlternate;
         }
     return prompt;

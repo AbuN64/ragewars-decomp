@@ -65,9 +65,9 @@ struct Shared_ReactionPlayer {
     char pad0[0x7];
     union {
         CVector3 position;
-        struct { f32 unk8, unkC, unk10; };
+        struct { f32 positionX, unkC, unk10; };
     };
-    u16* unk14;
+    u16* sourceModelHandles;
     char pad14[0xCC];
     u16 type;
     char padE4[0x1A];
@@ -94,13 +94,13 @@ struct Shared_ReactionPlayer {
     char pad11DC[4];
     f32 stun;
     char pad11E4[0x34];
-    s32 unk1218;
+    s32 damageToggle;
     char pad121C[0x10];
     s32 reactionFlags;
     char pad1230[0x90];
     f32 reserve; /* 0x12C0: reaction reserve */
-    Shared_ReactionPlayer *unk12C4;
-    Shared_ReactionPlayer *unk12C8;
+    Shared_ReactionPlayer *lastCountRuleVictim;
+    Shared_ReactionPlayer *lastSquadVictim;
     Shared_ReactionPlayer *killHistory[8];
     Shared_ReactionPlayer *lastKiller;
     s32 deathReactionVariant;
@@ -162,7 +162,7 @@ struct Shared_ReactionStatistics {
 
 struct Shared_ReactionPlayerRecord {
     char pad0[0x4];
-    s32 unk4;
+    s32 searchNodeKey;
     char pad8[0x31C];
     s32 attackerMemoryTicks;
     Shared_ReactionPlayer *lastAttacker;

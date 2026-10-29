@@ -206,40 +206,40 @@ void Weaponai_UpdateCallbacksAndTimers(void *actorStorage, void *stateController
     void *callback_owner;
     void (*callback)(void *, void *);
 
-    actor = ((WeaponMarkerActorContext *)(actorStorage))->unk_1D8;
-    index = ((WeaponMarkerActorView *)(actor))->unk_650;
+    actor = ((WeaponMarkerActorContext *)(actorStorage))->owner;
+    index = ((WeaponMarkerActorView *)(actor))->pose;
     value = g_weaponActionRecords[index].action;
 
-    if (0.0f < ((WeaponMarkerActorView *)(actor))->unk_11D8) {
+    if (0.0f < ((WeaponMarkerActorView *)(actor))->cooldown) {
         return;
     }
 
     old_delta = g_frameElapsedTime;
     scaled_delta = old_delta * g_weaponMarkerDeltaScale;
-    if (actor != 0 && (((WeaponMarkerActorView *)(actor))->unk_122C & 0x2000)) {
+    if (actor != 0 && (((WeaponMarkerActorView *)(actor))->reactionFlags & 0x2000)) {
         g_frameElapsedTime = scaled_delta;
     } else {
         g_frameElapsedTime = old_delta;
     }
 
-    timer = ((WeaponMarkerControllerView *)(stateController))->unk_148;
+    timer = ((WeaponMarkerControllerView *)(stateController))->timeRemainingA;
     zero = 0.0f;
     if (zero < timer) {
-        ((WeaponMarkerControllerView *)(stateController))->unk_148 = timer - g_frameElapsedTime;
-        ((WeaponMarkerActorContext *)(actorStorage))->unk_1 = 0;
+        ((WeaponMarkerControllerView *)(stateController))->timeRemainingA = timer - g_frameElapsedTime;
+        ((WeaponMarkerActorContext *)(actorStorage))->stateFlag = 0;
     } else {
-        ((WeaponMarkerActorContext *)(actorStorage))->unk_1 = 0;
+        ((WeaponMarkerActorContext *)(actorStorage))->stateFlag = 0;
     }
 
-    if (zero < ((WeaponMarkerControllerView *)(stateController))->unk_130) {
-        ((WeaponMarkerControllerView *)(stateController))->unk_130 -= g_frameElapsedTime;
+    if (zero < ((WeaponMarkerControllerView *)(stateController))->timeRemainingB) {
+        ((WeaponMarkerControllerView *)(stateController))->timeRemainingB -= g_frameElapsedTime;
     }
 
     if (value == 1) {
         Actor_RequestActorState(actorStorage, stateController, 1);
     }
-    if (((WeaponMarkerActorView *)(actor))->unk_770 != ((WeaponMarkerActorView *)(actor))->unk_62E) {
-        ((WeaponMarkerActorView *)(actor))->unk_7E8 = 0;
+    if (((WeaponMarkerActorView *)(actor))->weapon != ((WeaponMarkerActorView *)(actor))->selectedAction) {
+        ((WeaponMarkerActorView *)(actor))->state7E8 = 0;
         Actor_RequestActorState(actorStorage, stateController, 1);
     }
 
@@ -251,7 +251,7 @@ void Weaponai_UpdateCallbacksAndTimers(void *actorStorage, void *stateController
         }
     }
 
-    callback = ((struct WeaponMarkerCallbackView *) ((char *) g_weaponInfoByType[((WeaponMarkerActorView *) actor)->unk_62E]))->callback;
+    callback = ((struct WeaponMarkerCallbackView *) ((char *) g_weaponInfoByType[((WeaponMarkerActorView *) actor)->selectedAction]))->callback;
     if (callback != 0) {
         callback(actorStorage, stateController);
     }

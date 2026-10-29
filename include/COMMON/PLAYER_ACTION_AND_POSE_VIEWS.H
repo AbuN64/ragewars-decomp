@@ -16,7 +16,7 @@ extern s32 Playerai_IsSpeedAboveThreshold(struct Shared_ActorView *actor);
 struct WeaponChargeAmmunitionView;
 struct WeaponChargeAmmunitionView {
     unsigned char padding_0[8];
-    short field_8;
+    short ammunition;
 };
 
 struct Marker;
@@ -156,19 +156,19 @@ extern float g_playerActionBlendMinimumRise;
 struct PlayerWeaponChargeEffectView;
 struct PlayerWeaponChargeEffectView {
     char pad0[0x5D8];
-    char * unk_5D8;
+    char * profile;
     char pad5D8[0x5E4 - 0x5D8 - sizeof(char*)];
-    s32 unk_5E4;
+    s32 chargeRequested;
     char pad5E4[0x62E - 0x5E4 - sizeof(s32)];
-    s16 unk_62E;
+    s16 weaponType;
     char pad62E[0x7E8 - 0x62E - sizeof(s16)];
-    s32 unk_7E8;
+    s32 chargeEnabled;
     char pad7E8[0x7EC - 0x7E8 - sizeof(s32)];
-    f32 unk_7EC;
+    f32 chargeBlend;
     char pad7EC[0x7F0 - 0x7EC - sizeof(f32)];
-    f32 unk_7F0;
+    f32 chargeBlendTarget;
     char pad7F0[0x878 - 0x7F0 - sizeof(f32)];
-    char unk_878;
+    char effect;
 };
 
 

@@ -71,10 +71,10 @@ void Statinst_RegisterGeometryResources(void *owner) {
 
 /** Return the nested signed byte unless flag 0x40 suppresses it. */
 int Statinst_GetPropModelIndex(char *object) {
-    if (((ActorResourceStatusView *)(object))->unk_D8 & 0x40) {
+    if (((ActorResourceStatusView *)(object))->statusFlags & 0x40) {
         return 0;
     }
-    return ((struct GeometryVariantByteView *) ((ActorResourceStatusView *) object)->unk_18)->unk_12;
+    return ((struct GeometryVariantByteView *) ((ActorResourceStatusView *) object)->geometryVariant)->propModelIndex;
 }
 
 /** Read the signed byte at offset 0xE from the object's linked record. */

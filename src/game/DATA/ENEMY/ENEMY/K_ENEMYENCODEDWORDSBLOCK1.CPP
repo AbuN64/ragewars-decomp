@@ -8,9 +8,9 @@ unsigned int k_EnemyEncodedWords[1] = {
 
 #if defined(VERSION_EU_X)
 #if defined(VERSION_EU_X)
-extern char D_auto_rodata_unresolved_800C65C8[];
+extern char g_pickupTrailingRodataEuX[];
 unsigned int k_EnemyEncodedWordsBlock1[1] = {
-    (unsigned int)D_auto_rodata_unresolved_800C65C8 + 0x18,
+    (unsigned int)g_pickupTrailingRodataEuX + 0x18,
 };
 #endif
 #endif

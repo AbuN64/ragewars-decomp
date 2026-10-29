@@ -16,25 +16,25 @@ extern float k_breakableDamageScale;
 struct BreakableHitContext;
 struct BreakableHitContext {
     char pad0[0x8];
-    CVector3 unk_8;
+    CVector3 position;
     char pad8[0x18 - 0x8 - sizeof(CVector3)];
-    char * unk_18;
+    char * descriptor;
     char pad18[0xE6 - 0x18 - sizeof(char*)];
-    s8 unk_E6;
+    s8 forced;
     char padE6[0x100 - 0xE6 - sizeof(s8)];
-    s32 unk_100;
+    s32 flags;
     char pad100[0x104 - 0x100 - sizeof(s32)];
-    f32 unk_104;
+    f32 hitLimit;
     char pad104[0x108 - 0x104 - sizeof(f32)];
-    s16 unk_108;
+    s16 teamIdFirst;
     char pad108[0x10A - 0x108 - sizeof(s16)];
-    s16 unk_10A;
+    s16 teamIdSecond;
     char pad10A[0x10C - 0x10A - sizeof(s16)];
-    s16 unk_10C;
+    s16 hitCount;
     char pad10C[0x12C - 0x10C - sizeof(s16)];
-    s16 unk_12C;
+    s16 flaggedHitCount;
     char pad12C[0x134 - 0x12C - sizeof(s16)];
-    f32 unk_134;
+    f32 flaggedHitLimit;
 };
 
 
@@ -47,9 +47,9 @@ struct BreakableHitContext {
 struct BreakableHitStateView;
 struct BreakableHitStateView {
     char pad0[0xCA];
-    s8 unk_CA;
+    s8 team;
     char padCA[0xCB - 0xCA - sizeof(s8)];
-    s8 unk_CB;
+    s8 active;
 };
 
 struct Dest;

@@ -69,7 +69,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
         if (gameStatus->m_FragTagFlipTimer > 0) {
             if (controller->state != 2) {
                 Scaled_SetBehaviourState(controller, 2);
-                return controller->unk2F8 = controller->unk2F4 = 1;
+                return controller->behaviorStateWordB = controller->behaviorStateWordA = 1;
             }
             return 1;
         }

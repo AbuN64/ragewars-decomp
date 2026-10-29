@@ -3,13 +3,13 @@
 #include "TYPES.H"
 struct RecordOutputFieldsView {
     char pad0[0x8];
-    float unk8;
+    float thirdScalar;
     char pad8[0xC - 0x8 - sizeof(float)];
-    float unkC;
+    float fourthScalar;
     char padC[0x10 - 0xC - sizeof(float)];
-    float unk10;
+    float secondScalar;
     char pad10[0x20 - 0x10 - sizeof(float)];
-    int unk20;
+    int outputWord;
 };
 typedef struct TimedSessionTransitionView {
     char pad0[0x26DB0];

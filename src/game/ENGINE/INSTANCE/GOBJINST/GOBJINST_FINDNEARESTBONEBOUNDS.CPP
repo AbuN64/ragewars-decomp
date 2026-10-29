@@ -65,24 +65,24 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
     f32 dist;
     f32 bestDist;
 
-    bones = ((struct BoneBoundsActorView *) obj)->unk_B4;
+    bones = ((struct BoneBoundsActorView *) obj)->poseMatrices;
     if (bones == 0) {
-        bones = ((struct BoneBoundsActorView *) obj)->unk_B8;
+        bones = ((struct BoneBoundsActorView *) obj)->previousPoseMatrices;
         if (bones == 0) {
             return 0;
         }
     }
-    resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct BoneBoundsActorView *) obj)->unk_1);
+    resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct BoneBoundsActorView *) obj)->team);
     if (resource == 0) {
         return 0;
     }
     table = SetN64_GetPackSection(*resource, 5);
-    count = table->field_4;
+    count = table->entryCount;
     bestDist = 3.4028235e38f;
     best = 0;
     for (i = 0; i < count; i++) {
-        box = (Box70 *)((char *)table + (i * table->field_0 + 8));
-        if (box->mask & ((struct BoneBoundsActorView *) obj)->unk_17C) {
+        box = (Box70 *)((char *)table + (i * table->entrySize + 8));
+        if (box->mask & ((struct BoneBoundsActorView *) obj)->boneMask) {
             center = box->corners[0];
             for (j = 1; j < 8; j++) {
                 Graphu64_AddVec3(&center, &center, &box->corners[j]);
@@ -100,7 +100,7 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
     }
     if (best != 0) {
         *out = *best;
-        if ((((struct BoneBoundsActorView *) obj)->unk_100 & 0x300000) && g_gameSettings.local == 0) {
+        if ((((struct BoneBoundsActorView *) obj)->flags & 0x300000) && g_gameSettings.local == 0) {
             ((struct Shield *) ((char *) out))->factor = 1.0f;
         }
     }

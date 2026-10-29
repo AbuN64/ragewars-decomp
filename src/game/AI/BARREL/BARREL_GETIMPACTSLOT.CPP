@@ -39,13 +39,13 @@ s32 Barrel_GetImpactSlot(void *actorObject)
     case 1123:
     case 1126:
         if (*(u8 *)actor == 1) {
-            if ((((ActorProfileImpulseFlagsView *)(actor))->unk_100 & 0x300000) != 0) {
-                if ((((ActorProfileImpulseFlagsView *)(actor))->unk_122C & 0x18400) != 0) {
+            if ((((ActorProfileImpulseFlagsView *)(actor))->profileFlags & 0x300000) != 0) {
+                if ((((ActorProfileImpulseFlagsView *)(actor))->impulseFlags & 0x18400) != 0) {
                     return 9;
                 }
                 audio = &g_gameSettings.counters;
                 if (audio->enabled != 0 &&
-                    ((struct PlayerCharacterKindView *) ((ActorProfileImpulseFlagsView *) actor)->unk_5D8)->characterKind == 0xB &&
+                    ((struct PlayerCharacterKindView *) ((ActorProfileImpulseFlagsView *) actor)->characterProfile)->characterKind == 0xB &&
                     audio->m_nBastilleShield > 0) {
                     return 9;
                 }

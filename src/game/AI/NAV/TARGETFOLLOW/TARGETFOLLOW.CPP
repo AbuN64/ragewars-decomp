@@ -12,9 +12,9 @@
 void Nav_InitTargetFollowing(struct TargetFollowingActorView *actor) {
     NavigationBrainView *brain = actor->player->brain;
 
-    brain->unk220 = 0;
+    brain->state = 0;
     Scaled_ResetBehaviorState(brain);
-    brain->unk2FC = 0;
+    brain->postRouteInitReset = 0;
 }
 #endif
 

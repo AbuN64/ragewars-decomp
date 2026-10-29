@@ -24,13 +24,13 @@ void CCollision_Initialize(void) {
 /** Reset the selected fields of the current global record. */
 void CCollision_ResetResult(void) {
     Reusable *record = g_collisionCurrentActor;
-    record->unk0 = 0;
+    record->reservedWord = 0;
     record->collisionCounter = -1;
-    record->unk88 = 0;
-    record->unk9C = 0;
-    record->unkB0 = 0;
-    record->unkB4 = 0;
-    record->unkC4 = 0;
+    record->reservedWord2 = 0;
+    record->reservedWord3 = 0;
+    record->reservedWord4 = 0;
+    record->reservedWord5 = 0;
+    record->reservedWord6 = 0;
 }
 
 /* 8023A284_32.CPP */
@@ -45,13 +45,13 @@ void CCollision_ApplySetupTable(CCollisionSetup_t *setupTable)
         do {
             CCollisionInfo2_t *info = setup->m_pCollInfo;
 
-            ((Reusable *)g_collisionCurrentActor)->unk0 = 0;
+            ((Reusable *)g_collisionCurrentActor)->reservedWord = 0;
             ((Reusable *)g_collisionCurrentActor)->collisionCounter = counter;
-            ((Reusable *)g_collisionCurrentActor)->unk88 = 0;
-            ((Reusable *)g_collisionCurrentActor)->unk9C = 0;
-            ((Reusable *)g_collisionCurrentActor)->unkB0 = 0;
-            ((Reusable *)g_collisionCurrentActor)->unkB4 = 0;
-            ((Reusable *)g_collisionCurrentActor)->unkC4 = 0;
+            ((Reusable *)g_collisionCurrentActor)->reservedWord2 = 0;
+            ((Reusable *)g_collisionCurrentActor)->reservedWord3 = 0;
+            ((Reusable *)g_collisionCurrentActor)->reservedWord4 = 0;
+            ((Reusable *)g_collisionCurrentActor)->reservedWord5 = 0;
+            ((Reusable *)g_collisionCurrentActor)->reservedWord6 = 0;
 
             info->dwFlags = setup->m_dwFlags;
             info->InstanceBehavior = setup->m_InstanceBehavior;

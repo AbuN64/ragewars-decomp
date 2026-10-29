@@ -500,7 +500,7 @@ void Events_ApplyDamageEvent(Shared_ReactionActor *source, Shared_ReactionActor 
                     damage = 0.0f;
                 }
                 if ((damage > 0.0f) && (attacker != NULL)) {
-                    attacker->unk1218 = (s32) (attacker->unk1218 == 0);
+                    attacker->damageToggle = (s32) (attacker->damageToggle == 0);
                 }
             }
             if (damage != 0.0f) {

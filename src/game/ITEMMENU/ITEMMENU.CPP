@@ -345,7 +345,7 @@ s32 ItemMenu_IsSelectedEntryActive(void *menu)
   return activeEntryCount != 0;
 }
 
-/* Moves a menu's cursor at 0xE4 over its four 0x38-byte entries, forward when arg1 is zero and backward otherwise, wrapping around and skipping entries whose word at 0x4 is zero; returns the entry landed on. */
+/* Moves a menu's cursor at 0xE4 over its four 0x38-byte entries, forward when backward is zero and backward otherwise, wrapping around and skipping entries whose word at 0x4 is zero; returns the entry landed on. */
 s32 ItemMenu_AdvanceSelection(ItemMenuCursorState *menu, s32 backward) {
     u16 cursor;
     if (backward == 0) {

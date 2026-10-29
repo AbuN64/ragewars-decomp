@@ -185,7 +185,7 @@ void Controller_DispatchControllerEvent(input_event *event) {
  * Dispatch the first controller-button edge since the previous sample.
  *
  * @name CInput__DispatchButtonEdges
- * @param arg0 Per-controller input context. Offset 0x04 is the controller
+ * @param controllerProfile Per-controller input context. Offset 0x04 is the controller
  *             port identifier carried by emitted events; 0xB0 and 0xAC are
  *             the current and previous button bitfields; 0xC4 and 0xC5 are
  *             the current analog-stick X and Y samples.
@@ -320,7 +320,7 @@ const unsigned int g_controllerButtonDispatchTableEu[13] = {
 #if !(defined(VERSION_EU) || defined(VERSION_US))
 /* class: switch jump table (9 entries: 5 monotonic cases + 3 shared default + 2 early cases)
  * semantic proposal: k_controllerButtonDispatchJumpTable
- * member=rodata/DispatchControllerButtonEvent/800CA820 rom=0xC6290(de)+36B rom=0xC6570(eu-x)+36B rom=0xCB420(us-rev1)+36B vram=0x800CA820 sect=rodata seg=span_C76B0 status=open symbol=D_auto_rodata_func_80299E80_de_800CA820(legacy-src)
+ * member=rodata/DispatchControllerButtonEvent/800CA820 rom=0xC6290(de)+36B rom=0xC6570(eu-x)+36B rom=0xCB420(us-rev1)+36B vram=0x800CA820 sect=rodata seg=span_C76B0 status=open symbol=k_controllerButtonDispatchJumpTable_de(legacy-src)
  * cart rows: de 0xC6290->0xC62B4 = 36 B; eu-x 0xC6570->0xC6594 = 36 B; us-rev1 0xCB420->0xCB444 = 36 B. eu/us hold no row; parent withholds. Branch targets lie inside landed sibling funcs 0x80299EF8..0x8029A1F4 (de), 0x8029A048..0x8029A344 (eu-x), 0x8029AEF8..0x8029B1F4 (us-rev1). Values verbatim from src/rodata.DispatchControllerButtonEvent.800CA820.c with VERSION_US_REV -> VERSION_US_REV1 fixed. */
 #endif
 

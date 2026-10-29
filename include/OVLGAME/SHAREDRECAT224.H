@@ -18,7 +18,7 @@ extern void Confirming_SelectConfirmingController(MenuControllerSelectionView *m
 struct ConfirmingControllerStatusView;
 struct ConfirmingControllerStatusView {
     char pad0[0x148];
-    s8 unk148;
+    s8 confirmed;
 };
 
 struct ConfirmingControllerSettingsView;

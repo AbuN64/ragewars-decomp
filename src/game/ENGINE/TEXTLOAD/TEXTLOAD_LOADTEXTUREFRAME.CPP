@@ -14,7 +14,7 @@ extern void Cache_ReplaceResourceBlock(s32, void *, s32 **);
 
 typedef struct {
     s32 **handle;
-    s32 unk4;
+    s32 reservedWord;
     u32 flags;
 } Resource;
 

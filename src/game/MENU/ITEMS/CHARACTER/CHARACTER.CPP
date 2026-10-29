@@ -20,7 +20,7 @@ extern s32 SoundElement_PlayFlatSound(s32 id);
 extern void Menu_AllocateMenu(s32 a, void *obj, void *res);
 extern s32 Menu_StepValue(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
 extern void Menu_SelectPreviewModel(s32 a, s32 b, s32 c);
-/* Steps the choice byte at 0x80 of the slot the record at 0x1C of arg1 points to: while the player passes Control_IsAButtonPressed_Character it plays the sound for the record's style and runs the resource g_characterPreviewMenuRomResource; otherwise Menu_StepValue moves the choice and the remapping tables g_characterPreviewLeftChoices (Control_IsLeftPressed) and g_characterPreviewRightChoices (Control_IsRightPressed or Control_IsAButtonPressed_Character) are applied before the display is refreshed; returns 1 or 0. */
+/* Steps the choice byte at 0x80 of the slot the record at 0x1C of menuContext points to: while the player passes Control_IsAButtonPressed_Character it plays the sound for the record's style and runs the resource g_characterPreviewMenuRomResource; otherwise Menu_StepValue moves the choice and the remapping tables g_characterPreviewLeftChoices (Control_IsLeftPressed) and g_characterPreviewRightChoices (Control_IsRightPressed or Control_IsAButtonPressed_Character) are applied before the display is refreshed; returns 1 or 0. */
 s32 Items_HandleCharacterPreviewSelectionGerman(s32 widget, CharacterPreviewMenuContext *menuContext, s32 owner) {
     CharacterPreviewPlayerView *rec = menuContext->rec;
     CharacterPreviewChoiceView *slot = rec->slot;

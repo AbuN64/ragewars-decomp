@@ -7,7 +7,7 @@
 struct FlickerUpdateState;
 struct FlickerUpdateState {
     char pad0[0x4];
-    u8 unk4;
+    u8 reservedByte;
     char pad4[0x3F];
     s32 flickering;
     s32 entryCount;
@@ -23,13 +23,13 @@ struct FlickerUpdateState {
 struct MenuFadeWidget;
 struct MenuFadeWidget {
     char pad0[0xC];
-    s16 field_0C;
-    s16 field_0E;
+    s16 kindA;
+    s16 kindB;
     char pad10[0x12 - 0x10];
-    s16 field_12;
+    s16 flags;
     char pad14[0x20 - 0x14];
-    union { s32 field_20; f32 progressX; };
-    f32 field_24;
+    union { s32 progressXWord; f32 progressX; };
+    f32 progressY;
     char pad28[0x2C - 0x28];
     u32 colours[4];
     char pad3C[0x44 - 0x3C];
@@ -80,9 +80,9 @@ struct Animation {
     s32 *frames;
     char pad4C[4];
     s32 count;
-    s32 unk54;
+    s32 reservedWordA;
     char pad58[4];
-    s32 unk5C;
+    s32 reservedWordB;
     char pad60[4];
 };
 

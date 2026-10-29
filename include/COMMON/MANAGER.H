@@ -40,7 +40,7 @@ struct CachedResource;
 struct ResourceLoadRequest;
 struct CachedResource {
     void *data;
-    s32 unk04;
+    s32 dataSize;
     s32 count;
     s32 flags;
     s32 stamp;

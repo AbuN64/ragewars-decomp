@@ -12,18 +12,18 @@ struct MusicTrackVolumeView;
 struct MusicTrackVolumeView {
     struct GameAudioContext *context;
     char pad4[0x10];
-    s32 unk_14;
+    s32 sequencePlayer;
     char pad18[4];
     s32 flags; /* 0x1C */
     s32 volume; /* 0x20 */
-    s32 unk_24;
+    s32 baseVolume;
     char pad24[0x2C - 0x24 - sizeof(s32)];
-    f32 unk_2C;
+    f32 appliedVolume;
     char pad30[4];
     f32 fadeStep; /* 0x34 */
-    s32 unk_38;
+    s32 gainOverrideActive;
     char pad38[0x3C - 0x38 - sizeof(s32)];
-    f32 unk_3C;
+    f32 currentGain;
     f32 targetGain; /* 0x40 */
 };
 

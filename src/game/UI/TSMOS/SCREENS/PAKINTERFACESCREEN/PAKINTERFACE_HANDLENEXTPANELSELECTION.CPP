@@ -10,7 +10,7 @@
 #include "FRONTEND/PAKINTERFACE_COUNTACTIVEPLAYERPANELS.H"
 
 /* 8042E080_27.CPP */
-/* Cancels player arg2's pickup when the state at 0x58 of its 2920-byte record is 12 and arg3 asks:
+/* Cancels player playerEntryId's pickup when the state at 0x58 of its 2920-byte record is 12 and selectionPressed asks:
    sets the word at 0xBA0 to 2, clears 0xBA4, drops one from the count at 0xB9C, stamps 0x41 on
    that count's two-byte slot at 0xB8C when the slot is free, silences the sound handle taken from
    the player's entry of the slot array at 4 of the block, and reports the cancel through

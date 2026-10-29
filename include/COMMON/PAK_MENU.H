@@ -21,7 +21,7 @@ typedef struct Shared_PakMenu {
         PakMenuSlot *owner;
         PakMenuSlot *slot;
     };
-    void *unk24;
+    void *dialogText;
 } Shared_PakMenu;
 void Snapshot_MarkSaveNotes(Shared_PakMenu *menu);
 #endif

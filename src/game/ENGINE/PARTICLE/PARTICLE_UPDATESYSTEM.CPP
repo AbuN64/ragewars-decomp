@@ -323,7 +323,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
         for (node = world->render.head; node != 0; node = node->next) {
             visible = 0;
             built = node->particle.flags & 0x100000;
-            if (node->particle.inst.unk14 == 0) {
+            if (node->particle.inst.region == 0) {
                 if (!(node->particle.flags & 0x400000) && node->particle.desc->renderModel == 0) {
                     zScale = node->particle.size.z;
                     xyScale = node->particle.size.y * zScale;

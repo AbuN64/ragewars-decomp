@@ -66,10 +66,10 @@ void Statinst_InitializePlacedProp(PlacedProp *prop, PackedPlacedPropDefinition 
     prop->state = 0;
     prop->id = record->id;
     prop->owner = owner;
-    prop->fieldA8 = -1;
-    prop->fieldAC = 0;
-    prop->fieldB0 = 0;
-    prop->fieldB4 = 0;
+    prop->reservedWord = -1;
+    prop->reservedWord1 = 0;
+    prop->reservedWord2 = 0;
+    prop->reservedWord3 = 0;
     turn = 0.0f;
     prop->model = Scene_GetActorDefinition(&g_world, record->model);
     prop->fade = 16;
@@ -113,7 +113,7 @@ void Statinst_InitializePlacedProp(PlacedProp *prop, PackedPlacedPropDefinition 
         prop->max.x = position.x + 102.3999939f;
         prop->max.y = position.y + 102.3999939f;
         prop->max.z = position.z + 102.3999939f;
-        prop->fieldD4 = g_defaultCameraSurfaceType[0];
+        prop->surfaceType = g_defaultCameraSurfaceType[0];
     } else {
         prop->min.x = position.x + record->extents[0] * 10.23999977f - 0.5f;
         prop->min.y = position.y + record->extents[2] * 10.23999977f - 0.5f;
@@ -121,7 +121,7 @@ void Statinst_InitializePlacedProp(PlacedProp *prop, PackedPlacedPropDefinition 
         prop->max.x = position.x + record->extents[1] * 10.23999977f + 0.5f;
         prop->max.y = position.y + record->extents[3] * 10.23999977f + 0.5f;
         prop->max.z = position.z + record->extents[5] * 10.23999977f + 0.5f;
-        prop->fieldD4 = record->value;
+        prop->surfaceType = record->value;
     }
     CopyMatrix(prop->matrix, matrix);
     Graphu64_ConvertMatrixToFixed(matrix, prop->transform);

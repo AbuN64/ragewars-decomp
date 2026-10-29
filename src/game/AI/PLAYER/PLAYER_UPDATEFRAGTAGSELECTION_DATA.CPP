@@ -97,12 +97,12 @@ void Playerai_UpdateModelBlend(void *actorView, void *bodyActor) {
 void Playerai_UpdateCountdown(void *player) {
     f32 remainingTime;
     f32 previousTime;
-    previousTime = (((struct PlayerTimedPowerupView *) ((s8 *) player))->unk_678);
+    previousTime = (((struct PlayerTimedPowerupView *) ((s8 *) player))->countdownSeconds);
     if (previousTime > 0.0f) {
         remainingTime = previousTime - g_frameElapsedTime;
-        (((struct PlayerTimedPowerupView *) ((s8 *) player))->unk_678) = remainingTime;
+        (((struct PlayerTimedPowerupView *) ((s8 *) player))->countdownSeconds) = remainingTime;
         if (remainingTime < 0.0f) {
-            (((struct PlayerTimedPowerupView *) ((s8 *) player))->unk_678) = 0.0f;
+            (((struct PlayerTimedPowerupView *) ((s8 *) player))->countdownSeconds) = 0.0f;
         }
     }
 }

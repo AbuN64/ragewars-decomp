@@ -31,6 +31,6 @@ struct Spawn {
 };
 struct EffectSpawnModeView {
     char pad0[0x1];
-    s8 unk1;
+    s8 team;
 };
 #endif

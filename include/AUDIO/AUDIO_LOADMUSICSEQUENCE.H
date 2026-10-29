@@ -14,8 +14,8 @@ struct MusicFadeState {
 };
 struct MusicStopState {
     unsigned char padding_0[20];
-    s32 unk_14;
+    s32 sequencePlayer;
     unsigned char padding_18[16];
-    s32 unk_28;
+    s32 stopSentinel;
 };
 #endif

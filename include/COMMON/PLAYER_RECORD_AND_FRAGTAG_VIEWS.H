@@ -50,7 +50,7 @@ typedef struct PlayerDamageOverTimeView PlayerDamageOverTimeView;
 struct PlayerTimedPowerupView;
 struct PlayerTimedPowerupView {
     unsigned char padding_0[1656];
-    f32 unk_678;
+    f32 countdownSeconds;
 };
 
 extern float g_playerJumpInputDelayLimit;
@@ -74,7 +74,7 @@ typedef struct PlayerTimedPowerupView PlayerTimedPowerupView;
 struct PlayerDamageOverTimeView;
 struct PlayerDamageOverTimeView {
     char pad0[0x840];
-    s32 unk840;
+    s32 effectTimer;
 };
 
 extern float g_playerHudSprite201HeightScale;

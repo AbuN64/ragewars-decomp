@@ -122,11 +122,11 @@ s32 Cbarrel_UpdateTrackerAim(TrackerAimActorView *actor, Plan *tracker, TrackerA
     ApproachLocation *approachLocation;
     Runtime *runtime;
 
-    if (tracker->unk4 == 0) {
+    if (tracker->aimTargetFlag == 0) {
         targetKind = 6;
     } else if (candidate == 0) {
         targetKind = 3;
-        if (tracker->unk94 != 0) {
+        if (tracker->routeCursor != 0) {
             targetKind = 4;
         }
     } else {
@@ -148,7 +148,7 @@ s32 Cbarrel_UpdateTrackerAim(TrackerAimActorView *actor, Plan *tracker, TrackerA
         room = actor->room;
         break;
     case 4:
-        approachLocation = Playerai_GetRouteCursorPoint(&tracker->unk94);
+        approachLocation = Playerai_GetRouteCursorPoint(&tracker->routeCursor);
         pos = approachLocation->pos;
         room = approachLocation->room;
         break;
@@ -160,7 +160,7 @@ s32 Cbarrel_UpdateTrackerAim(TrackerAimActorView *actor, Plan *tracker, TrackerA
         approach(actor,candidate,tracker->approachTarget,&pos,&room);
         break;
     case 1:
-        resolvedRoom = CCollision_CopyPositionAndGetModelFlags(actor, tracker->collisionMask, candidate->pos, candidate->room, tracker->unk30->unkC, &pos);
+        resolvedRoom = CCollision_CopyPositionAndGetModelFlags(actor, tracker->collisionMask, candidate->pos, candidate->room, tracker->probeParams->flagWord, &pos);
         room = resolvedRoom;
         if (resolvedRoom == 0) {
         default:
@@ -169,7 +169,7 @@ s32 Cbarrel_UpdateTrackerAim(TrackerAimActorView *actor, Plan *tracker, TrackerA
         }
         break;
     }
-    if (CCollision_CopyProbePosition(actor, pos, room, tracker->unk30->unkC, &hit) != 0) {
+    if (CCollision_CopyProbePosition(actor, pos, room, tracker->probeParams->flagWord, &hit) != 0) {
         if (Region_IsPointInTriangleXZ(actor->room, hit.x, hit.z) != 0) {
             tracker->aimHeight = hit.y;
         } else {

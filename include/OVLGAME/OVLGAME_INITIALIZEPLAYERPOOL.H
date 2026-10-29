@@ -3,9 +3,9 @@
 #include "TYPES.H"
 struct PlayerPoolModeStateView {
     char pad0[0x74];
-    s32 unk_74;
+    s32 fragTagMode;
     char pad74[0x84 - 0x74 - sizeof(s32)];
-    s32 unk_84;
+    s32 ctfMode;
 };
 struct PlayerSpawnActivationActor {
     char pad[0x2E8];

@@ -110,7 +110,7 @@ extern s32 Menu_GetFocusedElementId(void);
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object g_sixChoiceMenuState points to to -1 and
    calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_sixChoiceMenuEventKinds, an actor kind at g_sixChoiceMenuActorKinds and a handler at g_sixChoiceMenuEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventKind through this file's 12-byte handler table, whose rows hold an event at g_sixChoiceMenuEventKinds, an actor kind at g_sixChoiceMenuActorKinds and a handler at g_sixChoiceMenuEventHandlers: the first row whose event equals eventKind and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 /* Advances a filling or draining bar by the step and writes its level byte at 0x10 of the bar at
    0xC: while rising it scales the amount for the display and, at or above the wrap point, stores
@@ -159,7 +159,7 @@ block_12:
         return 0;
     case 4:
         MarkMenuEventHandled();
-        nextScreen = g_sixChoiceMenuState->unk10;
+        nextScreen = g_sixChoiceMenuState->nextScreen;
         if (nextScreen == -1) {
             nextScreen = 3;
         }
@@ -217,10 +217,10 @@ option_2:
     option = 2;
 choose:
     PAKInterface_SetScreenPhase(option);
-    g_sixChoiceMenuState->unk10 = 0x13;
+    g_sixChoiceMenuState->nextScreen = 0x13;
     goto close;
 cancel:
-    g_sixChoiceMenuState->unk10 = -1;
+    g_sixChoiceMenuState->nextScreen = -1;
 close:
     SmpSlider_SetTransitionMode(g_sixChoiceMenuState->slider, 2);
 done:
@@ -232,7 +232,7 @@ s32 Menu_CancelSixChoiceMenu(void) {
 
     MarkMenuEventHandled();
     state = g_sixChoiceMenuState;
-    state->unk10 = -1;
+    state->nextScreen = -1;
     SmpSlider_SetTransitionMode(state->slider, 2);
     return 0;
 }

@@ -100,7 +100,7 @@ extern void Graphu64_ScaleVector(void *, void *, f32);
 extern void Graphu64_ConvertMatrixToFixed(void *, f32 *);
 
 void *Linked_AppendRibbonSegment(void *effectSystem, void *ribbon, void *local) {
-    CVector3 sp10;
+    CVector3 segmentDelta;
     f32 segmentDistance;
     f32 previousSegmentDistance;
     f32 accumulatedDistance;
@@ -111,43 +111,43 @@ void *Linked_AppendRibbonSegment(void *effectSystem, void *ribbon, void *local) 
     ribbonSegmentResult = Fx_AllocateRibbonSegment(effectSystem, (s32)ribbon);
     segment = ribbonSegmentResult;
     if (ribbonSegmentResult != 0) {
-        ((TexturedRibbonOwnerView *)(ribbon))->unk_50 = 0;
-        ((TexturedRibbonStateView *)(segment))->unk_8 = ((struct TexturedRibbonResourceView *) ((TexturedRibbonOwnerView *) ribbon)->unk_8)->unk_8;
-        ((TexturedRibbonStateView *)(segment))->unk_B0 = 0;
-        Graphu64_GetMatrixTranslation(local, &((TexturedRibbonStateView *)(segment))->unk_10.v0);
-        if (((TexturedRibbonOwnerView *)(ribbon))->unk_3C & 4) {
-            Graphu64_GetMatrixScale(local, &((TexturedRibbonStateView *)(segment))->unk_1C);
+        ((TexturedRibbonOwnerView *)(ribbon))->clearedWord = 0;
+        ((TexturedRibbonStateView *)(segment))->value = ((struct TexturedRibbonResourceView *) ((TexturedRibbonOwnerView *) ribbon)->track)->total;
+        ((TexturedRibbonStateView *)(segment))->clearedWord = 0;
+        Graphu64_GetMatrixTranslation(local, &((TexturedRibbonStateView *)(segment))->position.v0);
+        if (((TexturedRibbonOwnerView *)(ribbon))->flags & 4) {
+            Graphu64_GetMatrixScale(local, &((TexturedRibbonStateView *)(segment))->scale);
         } else {
-            Graphu64_ConvertMatrixToFixed(local, &((TexturedRibbonStateView *)(segment))->unk_28);
-            Graphu64_ConvertMatrixToFixed(local, &((TexturedRibbonStateView *)(segment))->unk_68);
+            Graphu64_ConvertMatrixToFixed(local, &((TexturedRibbonStateView *)(segment))->fixedMatrixFirst);
+            Graphu64_ConvertMatrixToFixed(local, &((TexturedRibbonStateView *)(segment))->fixedMatrixSecond);
         }
         previousSegment = *(void **)segment;
-        ((TexturedRibbonStateView *)(segment))->unk_AC.v0 = 0;
-        ((TexturedRibbonStateView *)(segment))->unk_A8 = 0.0f;
+        ((TexturedRibbonStateView *)(segment))->segmentLength.v0 = 0;
+        ((TexturedRibbonStateView *)(segment))->phase = 0.0f;
         if (previousSegment != 0) {
-            Graphu64_SubtractVectors(&sp10, &((TexturedRibbonStateView *)(segment))->unk_10.v1, &((TexturedRibbonSegmentView *)(previousSegment))->unk_10);
-            segmentDistance = Gu_Sqrtf((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
-            ((TexturedRibbonSegmentView *)(previousSegment))->unk_AC = segmentDistance;
-            ((TexturedRibbonOwnerView *)(ribbon))->unk_4C += segmentDistance;
+            Graphu64_SubtractVectors(&segmentDelta, &((TexturedRibbonStateView *)(segment))->position.v1, &((TexturedRibbonSegmentView *)(previousSegment))->position);
+            segmentDistance = Gu_Sqrtf((segmentDelta.x * segmentDelta.x) + (segmentDelta.y * segmentDelta.y) + (segmentDelta.z * segmentDelta.z));
+            ((TexturedRibbonSegmentView *)(previousSegment))->segmentLength = segmentDistance;
+            ((TexturedRibbonOwnerView *)(ribbon))->length += segmentDistance;
         }
-        if (((struct TexturedRibbonResourceView *) ((TexturedRibbonOwnerView *) ribbon)->unk_8)->unk_1C == 0) {
-            if (((TexturedRibbonOwnerView *)(ribbon))->unk_4C > 0.0f) {
+        if (((struct TexturedRibbonResourceView *) ((TexturedRibbonOwnerView *) ribbon)->track)->kind == 0) {
+            if (((TexturedRibbonOwnerView *)(ribbon))->length > 0.0f) {
                 accumulatedDistance = 0.0f;
-                segment = ((TexturedRibbonOwnerView *)(ribbon))->unk_40;
+                segment = ((TexturedRibbonOwnerView *)(ribbon))->firstSegment;
                 if (segment != 0) {
                     do {
-                        ((TexturedRibbonStateView *)(segment))->unk_A8 = accumulatedDistance / ((TexturedRibbonOwnerView *)(ribbon))->unk_4C;
-                        previousSegmentDistance = ((TexturedRibbonStateView *)(segment))->unk_AC.v1;
-                        segment = ((TexturedRibbonStateView *)(segment))->unk_4;
+                        ((TexturedRibbonStateView *)(segment))->phase = accumulatedDistance / ((TexturedRibbonOwnerView *)(ribbon))->length;
+                        previousSegmentDistance = ((TexturedRibbonStateView *)(segment))->segmentLength.v1;
+                        segment = ((TexturedRibbonStateView *)(segment))->next;
                         accumulatedDistance += previousSegmentDistance;
                     } while (segment != 0);
                 }
             }
         } else {
             if (previousSegment != 0) {
-                ((TexturedRibbonOwnerView *)(ribbon))->unk_28 += ((TexturedRibbonSegmentView *)(previousSegment))->unk_AC * g_ribbonDistancePhaseScale;
+                ((TexturedRibbonOwnerView *)(ribbon))->phase += ((TexturedRibbonSegmentView *)(previousSegment))->segmentLength * g_ribbonDistancePhaseScale;
             }
-            ((TexturedRibbonStateView *)(segment))->unk_A8 = ((TexturedRibbonOwnerView *)(ribbon))->unk_28;
+            ((TexturedRibbonStateView *)(segment))->phase = ((TexturedRibbonOwnerView *)(ribbon))->phase;
         }
     }
     return ribbonSegmentResult;

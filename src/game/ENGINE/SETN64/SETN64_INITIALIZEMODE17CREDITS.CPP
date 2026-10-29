@@ -44,7 +44,7 @@ void SetN64_SelectSpawnAfterCredits(void *scene, s32 spawnIndex) {
     object->target = 0xE;
 }
 
-/* Initializes the game state for a new game phase with arg0 as the phase identifier. */
+/* Initializes the game state for a new game phase with sessionAddress as the phase identifier. */
 void SetN64_InitializeMode16Credits(s32 sessionAddress) {
     g_creditsReturnToFrontend = 0;
     g_creditsCurrentLine = 0;
@@ -77,7 +77,7 @@ void SetN64_DrawMode16Credits(s32 session) {
     CCredits_UpdateScroll(session);
 }
 
-/* Initializes the game state for a new game phase with arg0 and updates the game state flag. */
+/* Initializes the game state for a new game phase with sessionAddress and updates the game state flag. */
 void SetN64_InitializeMode17Credits(s32 sessionAddress) {
     Shared_Game *game = &g_playerViewRenderContext.game;
 

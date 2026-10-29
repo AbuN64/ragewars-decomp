@@ -262,8 +262,8 @@ extern void XStdio_FormatBuffer(char *, char *, ...);
 extern char g_resultPreviewNumberFormatDe[];
 #define PREVIEW_NUMBER_FORMAT g_resultPreviewNumberFormatDe
 #elif defined(VERSION_US)
-extern char rodata_func_8043829C_de_800DCBC4[];
-#define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800DCBC4
+extern char g_resultPreviewNumberFormatUs[];
+#define PREVIEW_NUMBER_FORMAT g_resultPreviewNumberFormatUs
 #elif defined(VERSION_US_REV1)
 extern char k_AchieveEncodedBytes[];
 #define PREVIEW_NUMBER_FORMAT k_AchieveEncodedBytes

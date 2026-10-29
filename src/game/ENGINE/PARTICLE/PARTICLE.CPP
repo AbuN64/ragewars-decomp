@@ -178,7 +178,7 @@ void Particle_Update(Shared_Particle *particle) {
 #if defined(VERSION_DE)
                 bounce = 1;
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-                if (target->unk174 == 0) {
+                if (target->health == 0) {
                     bounce = 1;
                 }
 #endif
@@ -209,22 +209,22 @@ void Particle_Update(Shared_Particle *particle) {
                 } else if (!(target->flags & 0x100)) {
                     die = 1;
                 } else if (target->flags & 0x300000) {
-                    die = (f32)target->unk174 <= 0.0f;
+                    die = (f32)target->health <= 0.0f;
                 } else {
-                    die = target->unk170 & 0x20;
+                    die = target->stateFlags & 0x20;
                 }
 #endif
                 bounce = 0;
                 break;
             case 0xB:
                 die = 0;
-                if (target->unk1A4 != 0x21 || !(target->flags & 0x100)) {
+                if (target->typeCode != 0x21 || !(target->flags & 0x100)) {
                     bounce = 1;
                 }
                 break;
             case 4:
                 die = 0;
-                if (target->unk1A4 != 0x20 || !(target->flags & 0x100)) {
+                if (target->typeCode != 0x20 || !(target->flags & 0x100)) {
                     bounce = 1;
                 }
                 break;
@@ -256,18 +256,18 @@ void Particle_Update(Shared_Particle *particle) {
                 particle->inst.velocity.x = 0.0f;
                 particle->inst.velocity.z = 0.0f;
             }
-            particle->inst.unk14 = 0;
-            particle->unk1B4 &= ~0x4000;
+            particle->inst.region = 0;
+            particle->collisionFlags &= ~0x4000;
             if (bounce) {
                 particle->life = 1;
             }
         }
     }
     if (particle->flags & 0x40000) {
-        if (Unicol_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4) && g_currentActorInstance.unkB4 != 0) {
+        if (Unicol_MoveActorWithCollision(particle, particle->inst.pos, &particle->collisionFlags) && g_currentActorInstance.spaceHit != 0) {
             particle->space = -3;
         }
-        if (particle->inst.unk38 & 0x1000) {
+        if (particle->inst.instanceFlags & 0x1000) {
             particle->flags |= 4;
         } else {
             particle->flags &= ~4;
@@ -326,7 +326,7 @@ void Particle_Update(Shared_Particle *particle) {
         }
     }
     Particle_UpdateTypedMotion(particle);
-    if ((particle->unk1BC == 0.0f || (particle->inst.pos.y == 0.0f && particle->unk1BC < 0.0f)) &&
+    if ((particle->restGate == 0.0f || (particle->inst.pos.y == 0.0f && particle->restGate < 0.0f)) &&
         particle->inst.velocity.x * particle->inst.velocity.x + particle->inst.velocity.y * particle->inst.velocity.y +
                 particle->inst.velocity.z * particle->inst.velocity.z <
             0.001f) {
@@ -334,8 +334,8 @@ void Particle_Update(Shared_Particle *particle) {
         return;
     }
     if (!(particle->flags & 0x72000)) {
-        die = Unicol_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4);
-        if (particle->inst.unk38 & 0x1000) {
+        die = Unicol_MoveActorWithCollision(particle, particle->inst.pos, &particle->collisionFlags);
+        if (particle->inst.instanceFlags & 0x1000) {
             particle->flags |= 4;
         } else {
             particle->flags &= ~4;
@@ -346,46 +346,46 @@ void Particle_Update(Shared_Particle *particle) {
         if (die) {
             if (g_currentActorInstance.current != NULL) {
                 Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.origin);
-            } else if (g_currentActorInstance.unk88 != 0) {
-                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.unk90);
-            } else if (g_currentActorInstance.unk9C != 0) {
-                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.unkA0);
-            } else if (g_currentActorInstance.unkB4 != 0) {
-                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.unkB8);
+            } else if (g_currentActorInstance.pointHit != 0) {
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.pointHitPosition);
+            } else if (g_currentActorInstance.materialHit != 0) {
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.materialHitPosition);
+            } else if (g_currentActorInstance.spaceHit != 0) {
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.spaceHitPosition);
                 if (particle->space == -7) {
                     particle->space = -3;
                 }
-            } else if (g_currentActorInstance.unkC4 != 0) {
-                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.unkC8);
+            } else if (g_currentActorInstance.typedHit != 0) {
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.typedHitPosition);
             }
             Graphu64_NormalizeVec3(&particle->direction);
         }
         Particle_DispatchOwnerContactLinks(particle);
-        if (g_currentActorInstance.unkC4 != 0) {
+        if (g_currentActorInstance.typedHit != 0) {
             Particle_HandleTypedContact(particle);
         }
         if (particle->flags & 0x100) {
-            if (g_currentActorInstance.unk9C != 0) {
+            if (g_currentActorInstance.materialHit != 0) {
                 if (!(particle->desc->flags & 0x10000000)) {
                     Particle_HandleInitialMaterialContact(particle);
                 }
                 if (particle->desc->flags & 0x800) {
-                    particle->unk1B9 = 1;
+                    particle->mode1 = 1;
                 }
             }
             if (particle->flags & 0x100) {
                 if (g_currentActorInstance.current != NULL) {
-                    if ((particle->unk1B4 & 0x4000) && g_currentActorInstance.current->kind == 0) {
+                    if ((particle->collisionFlags & 0x4000) && g_currentActorInstance.current->kind == 0) {
                         Particle_ApplyImpactResponse(particle);
                     } else {
                         Particle_HitTarget(particle);
                     }
                     if (particle->desc->flags & 0x800) {
-                        particle->unk1B9 = 1;
+                        particle->mode1 = 1;
                     }
                 }
-                if ((particle->flags & 0x100) && g_currentActorInstance.unkB0 != 0 && !(particle->desc->flags & 0x20000000)) {
-                    if (g_currentActorInstance.unkB0 == 1) {
+                if ((particle->flags & 0x100) && g_currentActorInstance.surfaceHitKind != 0 && !(particle->desc->flags & 0x20000000)) {
+                    if (g_currentActorInstance.surfaceHitKind == 1) {
                         Particle_HandleSelectedSurfaceContact(particle);
                     } else {
                         Particle_HandleMaterialContact(particle);
@@ -457,7 +457,7 @@ skip_effects:
     Graphu64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x400;
-    if (particle->unk1B9 == 1) {
+    if (particle->mode1 == 1) {
         Particle_Release(&g_actorParticleEffectSystem, particle);
         Particle_StopSound(particle);
     }
@@ -577,7 +577,7 @@ void Particle_HandleSelectedSurfaceContact(Shared_Particle *particle) {
     Graphu64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
-    if (particle->unk1BA == 1) {
+    if (particle->mode2 == 1) {
         Particle_Release(&g_actorParticleEffectSystem, particle);
         Particle_StopSound(particle);
     }
@@ -632,7 +632,7 @@ void Particle_HandleMaterialContact(Shared_Particle *particle) {
     Graphu64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
-    if (particle->unk1BA == 1) {
+    if (particle->mode2 == 1) {
         Particle_Release(&g_actorParticleEffectSystem, particle);
         Particle_StopSound(particle);
     }
@@ -713,9 +713,9 @@ void Particle_HitTarget(void *particle) {
     special=0;
     hasMatrix=0;
     definition=actor->particle.desc;
-    if (InstHdr_UsesDefaultDefinitionHandling(source)) mode=actor->particle.unk1B9;
+    if (InstHdr_UsesDefaultDefinitionHandling(source)) mode=actor->particle.mode1;
     else mode=actor->particle.mode0;
-    if (!actor->particle.inst.unk14) actor->particle.inst.unk14=0;
+    if (!actor->particle.inst.region) actor->particle.inst.region=0;
     if (g_currentActorInstance.frame!=-1) {
         action=Barrel_GetImpactSlot(source);
         if (action!=9) {
@@ -726,7 +726,7 @@ void Particle_HitTarget(void *particle) {
                 Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[g_currentActorInstance.frame]);
                 hasMatrix=1;
                 if (owner->flags&0x1000000) {
-                    Gobjinst_ApplyImpactBoneTwist(owner, &owner->unk170, boneMatrix, g_currentActorInstance.origin, g_currentActorInstance.direction, g_currentActorInstance.frame);
+                    Gobjinst_ApplyImpactBoneTwist(owner, &owner->stateFlags, boneMatrix, g_currentActorInstance.origin, g_currentActorInstance.direction, g_currentActorInstance.frame);
                 }
                 if (owner->flags&0x2000000) {
                     type=actor->particle.inst.type;
@@ -758,9 +758,9 @@ void Particle_HitTarget(void *particle) {
     sound=definition->events->sounds[action];
     if (source->kind==1) {
         owner=source;
-        if (owner->callback) owner->callback(owner, &owner->unk170, actor);
+        if (owner->callback) owner->callback(owner, &owner->stateFlags, actor);
         if (InstHdr_ReturnUnusedActorStatus(owner)) enabled=0;
-        if (owner->unk170&2) enabled=0;
+        if (owner->stateFlags&2) enabled=0;
     }
     if (effect!=0xffff) {
         if (g_effectCallbackFlags[effect].flags&4) {
@@ -774,7 +774,7 @@ void Particle_HitTarget(void *particle) {
         draw=1;
         if (g_gameSettings.local) {
             draw=*source->category!=11;
-            if (mode==actor->particle.unk1B9) draw=0;
+            if (mode==actor->particle.mode1) draw=0;
         }
         if (draw) {
             extraActions=definition->events;
@@ -877,7 +877,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
             }
             break;
         }
-        if (particle->unk1B9 == 8 || particle->unk1BA == 8) {
+        if (particle->mode1 == 8 || particle->mode2 == 8) {
             if ((g_particleOwnerEffectFlags & 0x1000000) && (owner = particle->owner) && owner->kind == 1 && (owner->flags & 0x300000)) {
                 particle->flags |= 0x20000;
                 particle->inst.pos = g_particleContactState.position;
@@ -925,7 +925,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
         if (particle->flags & 0x30000) {
             return;
         }
-        if (particle->unk1B9 != 1) {
+        if (particle->mode1 != 1) {
             return;
         }
     }

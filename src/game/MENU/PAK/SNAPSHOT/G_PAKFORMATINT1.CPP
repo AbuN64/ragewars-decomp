@@ -14,7 +14,7 @@ const unsigned int g_pakChannelNumberFormat_GPakformatint1[1] = {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int rodata_func_8040A58C_de_800ED400[1] = {
+const unsigned int g_pakFormatInt2[1] = {
     0x25326400,
 };
 #endif
@@ -47,7 +47,7 @@ const unsigned int k_GPakformatint1EncodedWordsBlock1[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_8040A58C_E19B0_us_rev1.c */
+/* ROM-grounded data: src/g_pakFormatInt2.c */
 const unsigned char k_GPakformatint1EncodedBytesBlock1[4] = {
     0x25, 0x32, 0x64, 0x00,
 };

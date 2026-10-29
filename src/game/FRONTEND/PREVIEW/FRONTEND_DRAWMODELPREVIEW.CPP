@@ -195,12 +195,12 @@ void *Preview_InitModelPreview(ModelPreview *self, s32 id, s32 modelKind, s32 pr
     self->copy4 = *source;
     self->position = position;
     self->facing = facing;
-    self->copy4.unk0 = 0;
-    self->copy4.unk4 = 0;
-    self->copy4.unk14 = 0;
-    self->copy4.unk18 = 0;
-    self->copy4.unk1C = 0;
-    self->copy4.unk8 = 10240.0f;
+    self->copy4.kind = 0;
+    self->copy4.gate = 0;
+    self->copy4.flags = 0;
+    self->copy4.boundsA = 0;
+    self->copy4.boundsB = 0;
+    self->copy4.presetFloat = 10240.0f;
     ratio = view->width / (f32)g_hudReferenceViewportWidth;
     scales.x = self->position.x * ratio;
     scales.z = self->position.z * ratio;
@@ -237,7 +237,7 @@ void Preview_SetPreviewFacing(PreviewFacingView *preview, CVector3 v) {
     preview->facing = v;
 }
 
-/* Stores arg1 into the word at 0x498 of the object arg0. */
+/* Stores angle into the word at 0x498 of the object preview. */
 
 
 

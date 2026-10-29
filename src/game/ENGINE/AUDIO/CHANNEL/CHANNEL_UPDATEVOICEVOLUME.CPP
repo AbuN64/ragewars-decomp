@@ -37,9 +37,9 @@ typedef struct AudioVolumeVoice {
     u8 reserved88[0x18];
     s32 pending, flags, soundId, releasePending;
     GameAudioContext *context;
-    s32 fieldB4;
+    s32 reservedWordA;
     f32 reservedFloat;
-    s32 fieldBC, fixedPosition, musicGainScalingEnabled;
+    s32 reservedWordB, fixedPosition, musicGainScalingEnabled;
     f32 volumeScale;
 } AudioVolumeVoice;
 

@@ -97,7 +97,7 @@ CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
         angle = Graphu64_ArcCos((axis.x * *(f32 *)&bx) +
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));
-        angle *= ((struct PaddedFloatView *) ((f32 *) (&g_effectUpQuaternionConstants)))->unk4;
+        angle *= ((struct PaddedFloatView *) ((f32 *) (&g_effectUpQuaternionConstants)))->value;
         trig = Gu_Sinf(angle);
         result.x = cross.x * trig;
         result.y = cross.y * trig;

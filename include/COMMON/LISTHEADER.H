@@ -78,17 +78,17 @@ typedef struct ParticleOwnerActorView ParticleOwnerActorView;
 struct ParticleOwnerActorView;
 struct ParticleOwnerActorView {
     char pad0[0x4];
-    u16 unk_4;
+    u16 kindId;
     char pad4[0x118 - 0x4 - sizeof(u16)];
-    char * unk_118;
+    char * def;
     char pad118[0x12C - 0x118 - sizeof(char*)];
-    char * unk_12C;
+    char * owner;
     char pad12C[0x1B8 - 0x12C - sizeof(char*)];
-    s8 unk_1B8;
+    s8 stateByte2;
     char pad1B8[0x1B9 - 0x1B8 - sizeof(s8)];
-    s8 unk_1B9;
+    s8 stateByte0;
     char pad1B9[0x1BA - 0x1B9 - sizeof(s8)];
-    s8 unk_1BA;
+    s8 stateByte1;
 };
 
 struct ParticleFinishSoundView;
@@ -119,9 +119,9 @@ extern void Lists_InitFromPool(ListHeader *lists, void *pool, s32 stride, s32 co
 struct ParticleFinishSoundView;
 struct ParticleFinishSoundView {
     unsigned char padding_0[190];
-    u16 unk_BE;
+    u16 firstSoundId;
     unsigned char padding_C0[2];
-    u16 unk_C2;
+    u16 secondSoundId;
 };
 
 
@@ -161,11 +161,11 @@ typedef struct WeightedTable WeightedTable;
 struct ParticleAmmoRewardView;
 struct ParticleAmmoRewardView {
     char pad0[0x59C];
-    s32 unk_59C;
+    s32 resetFlag;
     char pad59C[0x5A4 - 0x59C - sizeof(s32)];
-    s32 unk_5A4;
+    s32 ammoType;
     char pad5A4[0x5A8 - 0x5A4 - sizeof(s32)];
-    s32 unk_5A8;
+    s32 ammoAmount;
 };
 
 

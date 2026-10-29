@@ -119,9 +119,9 @@ extern SceneDefinitionActorView *Scene_FindTypeFourteenActorByDefinitionId(Scene
 struct SceneCounterPairView;
 struct SceneCounterPairView {
     unsigned char padding_0[32];
-    s32 unk_20;
+    s32 packBankOffset;
     unsigned char padding_24[44];
-    s32 unk_50;
+    s32 packDirectory;
 };
 
 

@@ -42,7 +42,7 @@ struct PlayerRespawnMenuActor {
     char pad0[4928];
     s32 respawnDelayFrames;
     char pad1344[268];
-    s32 unk1450;
+    s32 computerControlled;
 };
 
 struct PlayerRespawnMenuActor;

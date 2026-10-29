@@ -29,7 +29,7 @@ s32 CMenuProfile_HasDialogRoundProgress(void) {
     return result;
 }
 
-/* Clears arg1->unk1C's unk858 flag and its unk5D8's unk80, then forwards to Menu_OpenDialog. */
+/* Clears menuContext->unk1C's unk858 flag and its unk5D8's unk80, then forwards to Menu_OpenDialog. */
 
 extern void Menu_OpenDialog(s32 parent, void *list, void *player, s32 controller, s32 dialogParameter);
 extern s32 g_playerMenuDialogTable;
@@ -43,14 +43,14 @@ extern s32 g_playerMenuDialogTable;
 s32 CMenuProfile_OpenPrimaryPlayerDialog(void *unused0, PlayerDialogMenuContext *menuContext) {
     Obj1C *selectionPlayer;
 
-    selectionPlayer = menuContext->unk1C;
-    selectionPlayer->unk858 = 0;
-    selectionPlayer->unk5D8->characterKind = 0;
-    Menu_OpenDialog(selectionPlayer->unk5DC + 0x554, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->unk698, selectionPlayer->unk5D4);
+    selectionPlayer = menuContext->selectionPlayer;
+    selectionPlayer->alternateDialogFlag = 0;
+    selectionPlayer->characterKindView->characterKind = 0;
+    Menu_OpenDialog(selectionPlayer->dialogParentBase + 0x554, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->dialogController, selectionPlayer->dialogParameter);
     return 1;
 }
 
-/* Sets arg1->unk1C's unk858 flag and clears its unk5D8's unk80, then forwards to Menu_OpenDialog. */
+/* Sets menuContext->unk1C's unk858 flag and clears its unk5D8's unk80, then forwards to Menu_OpenDialog. */
 
 
 
@@ -62,10 +62,10 @@ s32 CMenuProfile_OpenPrimaryPlayerDialog(void *unused0, PlayerDialogMenuContext 
 s32 CMenuProfile_OpenAlternatePlayerDialog(void *unused0, PlayerDialogMenuContext *menuContext) {
     Obj1C *selectionPlayer;
 
-    selectionPlayer = menuContext->unk1C;
-    selectionPlayer->unk858 = 1;
-    selectionPlayer->unk5D8->characterKind = 0;
-    Menu_OpenDialog(selectionPlayer->unk5DC + 0x554, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->unk698, selectionPlayer->unk5D4);
+    selectionPlayer = menuContext->selectionPlayer;
+    selectionPlayer->alternateDialogFlag = 1;
+    selectionPlayer->characterKindView->characterKind = 0;
+    Menu_OpenDialog(selectionPlayer->dialogParentBase + 0x554, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->dialogController, selectionPlayer->dialogParameter);
     return 1;
 }
 
@@ -89,7 +89,7 @@ s32 CMenuProfile_AdjustGameSpeedFactor(void *menuItem, struct GameSpeedMenuValue
     f32 scale;
 
     g_profileGameSpeedSelection = Menu_AdjustValue(obj, g_profileGameSpeedSelection, 1, 0, 15, 0);
-    if (((s32 (*)(s32))Control_IsRightPressed)(obj->field_20) != 0 || Control_IsAButtonPressed(obj->field_20) != 0) {
+    if (((s32 (*)(s32))Control_IsRightPressed)(obj->controllerIndex) != 0 || Control_IsAButtonPressed(obj->controllerIndex) != 0) {
         Menu_AdjustValue(obj, g_profileGameSpeedSelection, 1, 0, 15, 0);
     }
     scale = k_gameSpeedSelectionOffsets[g_profileGameSpeedSelection] + g_profileGameSpeedPreview.scale;

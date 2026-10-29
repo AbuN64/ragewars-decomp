@@ -9,7 +9,7 @@ struct {
     unsigned char b3[4];
     unsigned int w4[2];
     unsigned short h5[64];
-} D_auto_rodata_unresolved_800C7934 = {
+} g_overlayOneLinkTargetTableUs = {
     {
         0x0010000B, 0x00000000, 0x0013534D,
     },

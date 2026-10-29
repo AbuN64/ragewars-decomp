@@ -211,7 +211,7 @@ void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
         held = 0;
         menu[0] = 3;
     }
-    if (held && ((struct PaddedFloatView *) menu)->unk4 > 0.0f) {
+    if (held && ((struct PaddedFloatView *) menu)->value > 0.0f) {
         menu[0] = 3;
     }
     if (menu[0] == 0 || menu[0] == 3) {
@@ -433,7 +433,7 @@ s32 TeamSelect_TryCloseWeaponWheel(void *resetTimerStorage, void *resetOwnerStor
     if (((ResetFlagsStorage *)((((ResetOwnerStorage *)(resetOwnerStorage))->controller)))->buttons & 0x8000) {
         return 0;
     }
-    ((ResetTimerStorage *)(resetTimerStorage))->unk37C = -1;
+    ((ResetTimerStorage *)(resetTimerStorage))->selectedIndex = -1;
     return 1;
 }
 

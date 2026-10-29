@@ -29,8 +29,8 @@ void Playerai_StartPrimaryAttachedSound(Shared_ActorView *actor, s32 soundId) {
 }
 
 void Playerai_StopPrimaryAttachedSound(void *player) {
-    SoundVoicePool_StopNode(SoundVoicePool_GetGlobalState(), (void *)(((struct PlayerLoopingSoundHandleView *) ((s8 *) player))->unk_11BC));
-    (((struct PlayerLoopingSoundHandleView *) ((s8 *) player))->unk_11BC) = 0;
+    SoundVoicePool_StopNode(SoundVoicePool_GetGlobalState(), (void *)(((struct PlayerLoopingSoundHandleView *) ((s8 *) player))->primarySoundHandle));
+    (((struct PlayerLoopingSoundHandleView *) ((s8 *) player))->primarySoundHandle) = 0;
 }
 
 void Playerai_StartSecondaryAttachedSound(Shared_ActorView *actor, s32 soundId) {
@@ -50,11 +50,11 @@ void Playerai_StartSecondaryAttachedSound(Shared_ActorView *actor, s32 soundId) 
 }
 
 void Playerai_StopSecondaryAttachedSound(void *player) {
-    SoundVoicePool_StopNode(SoundVoicePool_GetGlobalState(), (void *)(((struct PlayerStartupSoundView *) ((s8 *) player))->unk_11C0));
-    (((struct PlayerStartupSoundView *) ((s8 *) player))->unk_11C0) = 0;
+    SoundVoicePool_StopNode(SoundVoicePool_GetGlobalState(), (void *)(((struct PlayerStartupSoundView *) ((s8 *) player))->startupSoundNode));
+    (((struct PlayerStartupSoundView *) ((s8 *) player))->startupSoundNode) = 0;
 }
 
 void Playerai_StartTransitionState(void *player, s32 transitionParameter) {
-    (((struct PlayerWeaponTransitionParameterView *) ((s8 *) player))->unk_16D0) = transitionParameter;
+    (((struct PlayerWeaponTransitionParameterView *) ((s8 *) player))->transitionParameter) = transitionParameter;
     Player_SetPlayerState(player, player, 0x10);
 }

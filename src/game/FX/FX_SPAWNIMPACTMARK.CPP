@@ -312,7 +312,7 @@ void Fx_UpdateChildTransform(Node44 *parentNode, void *childNode) {
         } else {
             Graphu64_ConvertMatrixToFloat(local, entry + ((g_lightingBufferIndex << 6) + 0x60));
             scale = g_childTransformDefaultScale;
-            if (((ParticleEffect *)entry)->entry->unk14 != 0) {
+            if (((ParticleEffect *)entry)->entry->rangeModeFlag != 0) {
                 scale = g_childTransformAlternateScale;
             }
             ScaleMatrixLocal(local, scale, scale, scale);

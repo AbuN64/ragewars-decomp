@@ -87,7 +87,7 @@ void Actor_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Sourc
     actor->maxHealth = actor->health;
 }
 
-/* Builds an actor record from its source object: clears the record (keeping field68), applies the
+/* Builds an actor record from its source object: clears the record (keeping animation), applies the
  * definition, installs this version's two behaviour tables, seeds the position, height and scale copies,
  * the sentinel indices (-1) and the unit scales, clears the attach count and its flag bit, runs the
  * optional spawn callback, and sets the attach count when the source has bit 27 of its flags. */
@@ -121,11 +121,11 @@ void Actor_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *ca
     actor->animationCount[2] = 0;
     actor->initialHeight = source->height;
     actor->cueTimer = 0;
-    actor->field78[0] = 0;
-    actor->field78[1] = 0;
-    actor->field78[2] = 0;
-    actor->field78[3] = 0;
-    actor->field78[4] = 0;
+    actor->reserved78[0] = 0;
+    actor->reserved78[1] = 0;
+    actor->reserved78[2] = 0;
+    actor->reserved78[3] = 0;
+    actor->reserved78[4] = 0;
     actor->height8C = source->height;
     actor->height90 = source->position.y;
     actor->height9C = source->height;
@@ -154,14 +154,14 @@ void Actor_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *ca
     actor->channel = bits;
     actor->state96 = bits;
     actor->count = 0;
-    actor->fieldD0 = 0;
+    actor->reservedD0 = 0;
     actor->fieldD4 = 0;
-    actor->field44 = 0;
+    actor->reserved44 = 0;
     actor->state12 = 0;
-    actor->field1C[0] = 0;
-    actor->field1C[1] = 0;
-    actor->field1C[2] = 0;
-    actor->field1C[3] = 0;
+    actor->reserved1C[0] = 0;
+    actor->reserved1C[1] = 0;
+    actor->reserved1C[2] = 0;
+    actor->reserved1C[3] = 0;
     actor->pending = 0;
     actor->state94 = 0;
     actor->sound = NULL;

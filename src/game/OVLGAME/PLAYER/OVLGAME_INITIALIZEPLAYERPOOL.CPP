@@ -113,7 +113,7 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
     }
 
     entry = global + 0x3A;
-    if (((GameModeEnableView *)(global))->unk_1D != 0) {
+    if (((GameModeEnableView *)(global))->local != 0) {
         if (pool->count <= 0) {
             goto initialized;
         }
@@ -140,9 +140,9 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->weaponSoundHandle = 0;
             ((struct Shared_ActorView *)(object))->weaponLoopSoundHandle = 0;
             ((struct Shared_ActorView *)(object))->spawn = 0;
-            ((struct Shared_ActorView *)(object))->field5F0 = 0;
-            ((struct Shared_ActorView *)(object))->field864 = 0;
-            ((struct Shared_ActorView *)(object))->field868 = 0;
+            ((struct Shared_ActorView *)(object))->reservedWord5F0 = 0;
+            ((struct Shared_ActorView *)(object))->reservedWord864 = 0;
+            ((struct Shared_ActorView *)(object))->reservedWord868 = 0;
             ((struct Shared_ActorView *)(object))->self = object;
             ((struct Shared_ActorView *)(object))->id = object_id;
             Scaled_InitPlayerState(owner, object);
@@ -150,21 +150,21 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->projectileBase = player_index;
             ((struct Shared_ActorView *)(object))->projectileIndex = 0;
             ((struct Shared_ActorView *)(object))->impulseFlags = 0;
-            ((struct Shared_ActorView *)(object))->field11CC = 0;
-            ((struct Shared_ActorView *)(object))->field1218 = 0;
+            ((struct Shared_ActorView *)(object))->reservedWord11CC = 0;
+            ((struct Shared_ActorView *)(object))->reservedWord1218 = 0;
             for (j = 0; j < 8; j++) {
                 ((Shared_ActorView *)object)->reset12CC[j] = 0;
                 ((Shared_ActorView *)object)->reset12F4[j] = 0;
             }
-            ((struct Shared_ActorView *)(object))->field1338 = -1;
-            ((struct Shared_ActorView *)(object))->field12C4 = 0;
-            ((struct Shared_ActorView *)(object))->field12C8 = 0;
-            ((struct Shared_ActorView *)(object))->field1334 = 0;
+            ((struct Shared_ActorView *)(object))->reservedWord1338 = -1;
+            ((struct Shared_ActorView *)(object))->reservedWord12C4 = 0;
+            ((struct Shared_ActorView *)(object))->reservedWord12C8 = 0;
+            ((struct Shared_ActorView *)(object))->reservedWord1334 = 0;
             ((struct Shared_ActorView *)(object))->animationStateTable = g_playerActionStateHandlers;
-            ((struct Shared_ActorView *)(object))->field11E8 = 0;
+            ((struct Shared_ActorView *)(object))->reservedWord11E8 = 0;
             Playerai_InitializeMovementAndAim(object);
             ((struct Shared_ActorView *)(object))->pickupEffectToggle = 0;
-            ((struct Shared_ActorView *)(object))->field16D8 = 0;
+            ((struct Shared_ActorView *)(object))->reservedHalf16D8 = 0;
             ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
             if (((CPlayerOptions *)(entry))->active != 0) {
                 Player_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, 1);
@@ -196,9 +196,9 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->weaponSoundHandle = 0;
         ((struct Shared_ActorView *)(object))->weaponLoopSoundHandle = 0;
         ((struct Shared_ActorView *)(object))->spawn = 0;
-        ((struct Shared_ActorView *)(object))->field5F0 = 0;
-        ((struct Shared_ActorView *)(object))->field864 = 0;
-        ((struct Shared_ActorView *)(object))->field868 = 0;
+        ((struct Shared_ActorView *)(object))->reservedWord5F0 = 0;
+        ((struct Shared_ActorView *)(object))->reservedWord864 = 0;
+        ((struct Shared_ActorView *)(object))->reservedWord868 = 0;
         ((struct Shared_ActorView *)(object))->self = object;
         ((struct Shared_ActorView *)(object))->id = object_id;
         Scaled_InitPlayerState(owner, object);
@@ -206,21 +206,21 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->projectileBase = roster_index * 2;
         ((struct Shared_ActorView *)(object))->projectileIndex = 0;
         ((struct Shared_ActorView *)(object))->impulseFlags = 0;
-        ((struct Shared_ActorView *)(object))->field11CC = 0;
-        ((struct Shared_ActorView *)(object))->field1218 = 0;
+        ((struct Shared_ActorView *)(object))->reservedWord11CC = 0;
+        ((struct Shared_ActorView *)(object))->reservedWord1218 = 0;
         for (j = 0; j < 8; j++) {
             ((Shared_ActorView *)object)->reset12CC[j] = 0;
             ((Shared_ActorView *)object)->reset12F4[j] = 0;
         }
-        ((struct Shared_ActorView *)(object))->field1338 = -1;
-        ((struct Shared_ActorView *)(object))->field12C4 = 0;
-        ((struct Shared_ActorView *)(object))->field12C8 = 0;
-        ((struct Shared_ActorView *)(object))->field1334 = 0;
+        ((struct Shared_ActorView *)(object))->reservedWord1338 = -1;
+        ((struct Shared_ActorView *)(object))->reservedWord12C4 = 0;
+        ((struct Shared_ActorView *)(object))->reservedWord12C8 = 0;
+        ((struct Shared_ActorView *)(object))->reservedWord1334 = 0;
         ((struct Shared_ActorView *)(object))->animationStateTable = g_playerActionStateHandlers;
-        ((struct Shared_ActorView *)(object))->field11E8 = 0;
+        ((struct Shared_ActorView *)(object))->reservedWord11E8 = 0;
         Playerai_InitializeMovementAndAim(object);
         ((struct Shared_ActorView *)(object))->pickupEffectToggle = 0;
-        ((struct Shared_ActorView *)(object))->field16D8 = 0;
+        ((struct Shared_ActorView *)(object))->reservedHalf16D8 = 0;
         ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
         Player_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, force_active);
         List_RemoveIntrusive(&pool->m_FreeList, object);
@@ -229,8 +229,8 @@ initialize_object:
 
 initialized:
     state = g_matchRoundCounters;
-    ((PlayerPoolModeStateView *)(state))->unk_74 = 1;
-    ((PlayerPoolModeStateView *)(state))->unk_84 = 3;
+    ((PlayerPoolModeStateView *)(state))->fragTagMode = 1;
+    ((PlayerPoolModeStateView *)(state))->ctfMode = 3;
 }
 
 void Player_ResetMenuPool(struct MenuPlayerPoolRecord *record) {
@@ -299,9 +299,9 @@ void Player_InitializePlayerFromRecord(char *player, s32 slot, PlayerSettingsRec
     ((Shared_ActorView *)player)->weaponSoundHandle = 0;
     ((Shared_ActorView *)player)->weaponLoopSoundHandle = 0;
     ((Shared_ActorView *)player)->spawn = 0;
-    ((Shared_ActorView *)player)->field5F0 = 0;
-    ((Shared_ActorView *)player)->field864 = 0;
-    ((Shared_ActorView *)player)->field868 = 0;
+    ((Shared_ActorView *)player)->reservedWord5F0 = 0;
+    ((Shared_ActorView *)player)->reservedWord864 = 0;
+    ((Shared_ActorView *)player)->reservedWord868 = 0;
     ((Shared_ActorView *)player)->self = player;
     player[3] = team;
     Scaled_InitPlayerState((s32)((Shared_ActorView *)player)->owner, player);
@@ -309,21 +309,21 @@ void Player_InitializePlayerFromRecord(char *player, s32 slot, PlayerSettingsRec
     ((Shared_ActorView *)player)->projectileBase = slot * 2;
     ((Shared_ActorView *)player)->projectileIndex = 0;
     ((Shared_ActorView *)player)->impulseFlags = 0;
-    ((Shared_ActorView *)player)->field11CC = 0;
-    ((Shared_ActorView *)player)->field1218 = 0;
+    ((Shared_ActorView *)player)->reservedWord11CC = 0;
+    ((Shared_ActorView *)player)->reservedWord1218 = 0;
     for (i = 0; i < 8; i++) {
         ((Shared_ActorView *)player)->reset12CC[i] = 0;
         ((Shared_ActorView *)player)->reset12F4[i] = 0;
     }
-    ((Shared_ActorView *)player)->field1338 = -1;
-    ((Shared_ActorView *)player)->field12C4 = 0;
-    ((Shared_ActorView *)player)->field12C8 = 0;
-    ((Shared_ActorView *)player)->field1334 = 0;
+    ((Shared_ActorView *)player)->reservedWord1338 = -1;
+    ((Shared_ActorView *)player)->reservedWord12C4 = 0;
+    ((Shared_ActorView *)player)->reservedWord12C8 = 0;
+    ((Shared_ActorView *)player)->reservedWord1334 = 0;
     ((Shared_ActorView *)player)->animationStateTable = g_playerActionStateHandlers;
-    ((Shared_ActorView *)player)->field11E8 = 0;
+    ((Shared_ActorView *)player)->reservedWord11E8 = 0;
     Playerai_InitializeMovementAndAim(player);
     ((Shared_ActorView *)player)->pickupEffectToggle = 0;
-    ((Shared_ActorView *)player)->field16D8 = 0;
+    ((Shared_ActorView *)player)->reservedHalf16D8 = 0;
     ItemMenu_ResetEntries(&((Shared_ActorView *)player)->record);
 }
 

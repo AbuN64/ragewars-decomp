@@ -14,10 +14,10 @@ extern s32 SmpOverlay_DispatchSlotEvent(void *actor, s32 event, s32 itemId, s32 
 struct RecordSmpButtonEnsureButtonWrapper;
 struct RecordSmpButtonEnsureButtonWrapper {
     s32 words_00[3];
-    s16 field_0C;
-    u16 field_0E;
+    s16 resource;
+    u16 kind;
     s32 words_10[2];
-    s16 field_18;
+    s16 width;
     s16 reservedWord;
     s32 words_1C[4];
     s32 fields_2C[5];
@@ -43,7 +43,7 @@ struct NodeMenuCreateOverlayNode {
     struct MenuOverlayOwnerView *owner;
     s32 value;
     s32 words_4C[8];
-    s32 field_6C;
+    s32 reservedWord;
 };
 
 struct MenuOverlayOwnerView {
@@ -139,10 +139,10 @@ struct MenuMultiUserOwnerView {
 struct RecordSmpButtonWrapButtonWidget;
 struct RecordSmpButtonWrapButtonWidget {
     s32 words_00[3];
-    s16 field_0C;
-    s16 field_0E;
+    s16 resource;
+    s16 kind;
     s32 words_10[2];
-    s16 field_18;
+    s16 width;
     s16 reservedWord2;
     s32 words_1C[4];
     s32 fields_2C[5];

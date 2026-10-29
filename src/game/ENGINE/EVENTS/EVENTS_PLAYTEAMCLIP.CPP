@@ -119,7 +119,7 @@ void Events_SpawnFilteredActorEffect(void *actor, Filter *filter, s32 unusedEven
     EffectSpawnModeView *object = actor;
     switch (filter->type) {
     case 0:
-        if (object->unk1 != effectParams.second) {
+        if (object->team != effectParams.second) {
             return;
         }
         break;

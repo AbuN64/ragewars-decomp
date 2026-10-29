@@ -10,11 +10,11 @@ unsigned int k_CurveDecodethreebitsamplesEncodedWords[20] = {
 };
 #endif
 #if defined(VERSION_EU)
-extern char D_auto_rodata_unresolved_800C45D4[];
+extern char g_threadLabelWordsEuropean[];
 unsigned int k_CurveDecodethreebitsamplesEncodedWords[20] = {
     0x00000000, 0x0000F000, 0x0001E800, 0x0001CC00, 0x00000000, 0x00000000, 0xFFFF1000, 0xFFFF3000,
-    (unsigned int)D_auto_rodata_unresolved_800C45D4 + 0x5C, (unsigned int)D_auto_rodata_unresolved_800C45D4 + 0x54, (unsigned int)D_auto_rodata_unresolved_800C45D4 + 0x4C, (unsigned int)D_auto_rodata_unresolved_800C45D4 + 0x3C, (unsigned int)D_auto_rodata_unresolved_800C45D4 + 0x34, (unsigned int)D_auto_rodata_unresolved_800C45D4 + 0x2C, (unsigned int)D_auto_rodata_unresolved_800C45D4 + 0x20, (unsigned int)D_auto_rodata_unresolved_800C45D4 + 0x14,
-    (unsigned int)D_auto_rodata_unresolved_800C45D4 + 0xC, 0x00000000, 0xFFFFFFFF, 0x46414D49,
+    (unsigned int)g_threadLabelWordsEuropean + 0x5C, (unsigned int)g_threadLabelWordsEuropean + 0x54, (unsigned int)g_threadLabelWordsEuropean + 0x4C, (unsigned int)g_threadLabelWordsEuropean + 0x3C, (unsigned int)g_threadLabelWordsEuropean + 0x34, (unsigned int)g_threadLabelWordsEuropean + 0x2C, (unsigned int)g_threadLabelWordsEuropean + 0x20, (unsigned int)g_threadLabelWordsEuropean + 0x14,
+    (unsigned int)g_threadLabelWordsEuropean + 0xC, 0x00000000, 0xFFFFFFFF, 0x46414D49,
 };
 #endif
 #if defined(VERSION_EU_X)
@@ -26,11 +26,11 @@ unsigned int k_CurveDecodethreebitsamplesEncodedWords[20] = {
 };
 #endif
 #if defined(VERSION_US)
-extern char D_auto_rodata_unresolved_800C4254[];
+extern char g_threadLabelWordsUs[];
 unsigned int k_CurveDecodethreebitsamplesEncodedWords[20] = {
     0x00000000, 0x0000F000, 0x0001E800, 0x0001CC00, 0x00000000, 0x00000000, 0xFFFF1000, 0xFFFF3000,
-    (unsigned int)D_auto_rodata_unresolved_800C4254 + 0x5C, (unsigned int)D_auto_rodata_unresolved_800C4254 + 0x54, (unsigned int)D_auto_rodata_unresolved_800C4254 + 0x4C, (unsigned int)D_auto_rodata_unresolved_800C4254 + 0x3C, (unsigned int)D_auto_rodata_unresolved_800C4254 + 0x34, (unsigned int)D_auto_rodata_unresolved_800C4254 + 0x2C, (unsigned int)D_auto_rodata_unresolved_800C4254 + 0x20, (unsigned int)D_auto_rodata_unresolved_800C4254 + 0x14,
-    (unsigned int)D_auto_rodata_unresolved_800C4254 + 0xC, 0x00000000, 0xFFFFFFFF, 0x494E495F,
+    (unsigned int)g_threadLabelWordsUs + 0x5C, (unsigned int)g_threadLabelWordsUs + 0x54, (unsigned int)g_threadLabelWordsUs + 0x4C, (unsigned int)g_threadLabelWordsUs + 0x3C, (unsigned int)g_threadLabelWordsUs + 0x34, (unsigned int)g_threadLabelWordsUs + 0x2C, (unsigned int)g_threadLabelWordsUs + 0x20, (unsigned int)g_threadLabelWordsUs + 0x14,
+    (unsigned int)g_threadLabelWordsUs + 0xC, 0x00000000, 0xFFFFFFFF, 0x494E495F,
 };
 #endif
 #endif

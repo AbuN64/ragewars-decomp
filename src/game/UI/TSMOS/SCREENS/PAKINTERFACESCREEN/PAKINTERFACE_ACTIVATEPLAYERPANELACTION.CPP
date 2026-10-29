@@ -18,7 +18,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
-/* Steps player arg2's menu state machine at 0x58 of its 0xB68-byte record in the block g_pakProfileScreenState points to
+/* Steps player playerEntryId's menu state machine at 0x58 of its 0xB68-byte record in the block g_pakProfileScreenState points to
    on the event SmpOverlay_GetSlotNodeId reports: each state accepts its events, moves to the next state (by the game
    mode at 0x54 where it matters), updates the player's name records, and refreshes the player through
    PAKInterface_RefreshPlayerPanel_PakinterfaceActivateplayerpanelaction. Returns zero. */

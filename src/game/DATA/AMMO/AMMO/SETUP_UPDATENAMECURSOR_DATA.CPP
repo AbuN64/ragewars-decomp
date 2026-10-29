@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
-/* DATA_800E20A0.CPP */
+/* g_germanStringPool_de.CPP */
 #if defined(VERSION_DE)
-char data_unresolved_800E20A0[8032] =
+char g_germanStringPool_de[8032] =
     "\0"
     "\0"
     "\0"
@@ -2243,8 +2243,8 @@ char data_unresolved_800E20A0[8032] =
     "vier";
 #endif
 
-/* DATA_800E4000.CPP */
+/* g_germanStringPoolTrailer_de.CPP */
 #if defined(VERSION_DE)
-const char rodata_shared_800E4000[12] =
+const char g_germanStringPoolTrailer_de[12] =
     "    :0000\000\000\000";
 #endif

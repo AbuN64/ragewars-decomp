@@ -33,9 +33,9 @@ void Events_StopActorLoopingSound(void *unused, u8 *object, s32 third, struct In
 }
 
 /* Damages the owner of a live actor (kind 1 with either blast bit of 0x300000 set) that is inside
-   the blast: the radius is arg6 scaled by k_nearbyPlayerBlastConstants[1], and when the squared radius still covers
-   the squared distance from the owner's position at 8 to arg1's position at 8, the remaining
-   fraction of the squared radius times arg7 is applied through Playerai_AddCappedEventCounter. */
+   the blast: the radius is blastRadius scaled by k_nearbyPlayerBlastConstants[1], and when the squared radius still covers
+   the squared distance from the owner's position at 8 to player's position at 8, the remaining
+   fraction of the squared radius times blastDamage is applied through Playerai_AddCappedEventCounter. */
 
 
 

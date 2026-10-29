@@ -2,8 +2,8 @@
 #include "COMMON/ALFXPARAM.H"
 
 /* 800CC694_36.CPP */
-/* ROM-grounded data: src/rw_formats_802B9590_CD7A0_us_rev1.c */
-const unsigned char g_Formats802B9590CD7A0Storage[3] = {
+/* ROM-grounded data: src/s_epirawreadExText.c */
+const unsigned char s_epirawreadExText[3] = {
     0x45, 0x58, 0x00,
 };
 

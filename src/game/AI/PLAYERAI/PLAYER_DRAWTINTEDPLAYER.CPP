@@ -135,19 +135,19 @@ void Playerai_UpdateDamageTimers(void *actor) {
             }
             damageSource = ((CPlayerDamageOverTime *)(damageEffect))->m_pDamageSource;
             if (damageSource != 0 && *(u8 *)damageSource == 1 &&
-                (((DamageSourceFlagsView *)(damageSource))->unk_100 & 0x300000) &&
-                (((DamageSourceFlagsView *)(damageSource))->unk_122C & 0x200)) {
+                (((DamageSourceFlagsView *)(damageSource))->flags & 0x300000) &&
+                (((DamageSourceFlagsView *)(damageSource))->statusFlags & 0x200)) {
                 frameDamage *= g_playerDamageTimerFrameScale.value;
             }
             if (((CPlayerDamageOverTime *)(damageEffect))->m_bIsInflator != 0) {
                 Playerai_AddReactionReserve(actor, 0.0933333337f, ((CPlayerDamageOverTime *)(damageEffect))->m_pDamageSource);
-                if ((f32)((PlayerDamageVisualState *)(actor))->unk_5E4 <= frameDamage) {
+                if ((f32)((PlayerDamageVisualState *)(actor))->health <= frameDamage) {
                     frameDamage = g_playerDamageTimerFrameDefault.value;
                 }
             }
             Barrel_FillDamagePacket((void *)&damage, (s32)((CPlayerDamageOverTime *)(damageEffect))->m_pDamageSource,
                           (s32)frameDamage, 25.599998f, 0x100080, 0);
-            Playerai_ApplyDamagePacket(actor, &((PlayerDamageVisualState *)(actor))->unk_170, (void *)&damage);
+            Playerai_ApplyDamagePacket(actor, &((PlayerDamageVisualState *)(actor))->damageState, (void *)&damage);
         }
         i++;
         damageEffectOffset += 0x18;

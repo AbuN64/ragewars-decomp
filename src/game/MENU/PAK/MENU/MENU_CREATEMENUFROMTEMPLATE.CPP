@@ -286,9 +286,9 @@ void Menu_UpdateDialogList(MessageList *list) {
                     node->table->handler(node, list);
                 }
                 state = node->state;
-                state->field_B0 = 0;
-                state->field_B4 = 0;
-                state->field_BC = 0;
+                state->buttons = 0;
+                state->pressedButtons = 0;
+                state->history1 = 0;
                 List_RemoveIntrusive(list, node);
                 Cache_ReleaseResource(0, node->handle);
             }

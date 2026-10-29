@@ -65,7 +65,7 @@ struct Shared_MenuContext {
     u32 sequenceStarted;
     s32 initialized44;
     s32 closed;
-    s32 field4C;
+    s32 pendingStartFlag;
     s32 sequenceAdvanceRequested;
     s32 pending;
     s32 pendingTrackId;

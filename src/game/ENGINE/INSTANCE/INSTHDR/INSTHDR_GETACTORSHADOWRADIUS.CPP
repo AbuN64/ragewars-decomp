@@ -188,13 +188,13 @@ void InstHdr_ProjectPositionToActorGround(void *actor, void *position, void *pos
     CVector3 *source = position;
     CVector3 *output = positionOut;
     ActorSurfaceSampleVector t;
-    s32 sp30;
+    s32 groundNode;
 
     t.a = source->x;
     t.b = 0;
     t.c = source->z;
-    InstHdr_CopyActorPositionAndModel(actor, *(Triple *)&t, positionOut, &sp30, 0, 0);
-    output->y = Region_GetPolygonHeight((struct Node75 *)sp30, output->x, output->z);
+    InstHdr_CopyActorPositionAndModel(actor, *(Triple *)&t, positionOut, &groundNode, 0, 0);
+    output->y = Region_GetPolygonHeight((struct Node75 *)groundNode, output->x, output->z);
 }
 
 /** Return offset 0x34 only when the type byte at offset 0 is 1. */
@@ -305,7 +305,7 @@ f32 InstHdr_GetModelRecordValue20(struct ActorSurfaceKeyView *object) {
     if (object->key != 0 && (object->key->flags & 1)) {
         entry = Scene_GetModelRecordByIndexPointer(&g_world, object->key);
         if (entry != 0) {
-            return entry->unk20;
+            return entry->scalar;
         }
     }
     return 0.0f;
@@ -321,17 +321,17 @@ f32 InstHdr_GetActorTriangleTopOffset(void *actor) {
     f32 upperPairHeight;
     f32 highestVertexHeight;
     void *groundTriangle;
-    groundTriangle = (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_14);
-    upperPairHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->unk4);
-    previousVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->unk4);
+    groundTriangle = (((struct ActorSurfaceHeightView *) ((s8 *) actor))->groundTriangle);
+    upperPairHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->value);
+    previousVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->value);
     if (!(previousVertexHeight <= upperPairHeight)) {
         upperPairHeight = previousVertexHeight;
     }
-    highestVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->unk4);
+    highestVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->value);
     if (!(upperPairHeight <= highestVertexHeight)) {
         highestVertexHeight = upperPairHeight;
     }
-    return highestVertexHeight - (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_C);
+    return highestVertexHeight - (((struct ActorSurfaceHeightView *) ((s8 *) actor))->surfaceBaseHeight);
 }
 
 f32 InstHdr_GetActorTriangleBottomOffset(void *actor) {
@@ -339,17 +339,17 @@ f32 InstHdr_GetActorTriangleBottomOffset(void *actor) {
     f32 lowerPairHeight;
     f32 lowestVertexHeight;
     void *groundTriangle;
-    groundTriangle = (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_14);
-    lowerPairHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->unk4);
-    previousVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->unk4);
+    groundTriangle = (((struct ActorSurfaceHeightView *) ((s8 *) actor))->groundTriangle);
+    lowerPairHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->value);
+    previousVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->value);
     if (!(lowerPairHeight <= previousVertexHeight)) {
         lowerPairHeight = previousVertexHeight;
     }
-    lowestVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->unk4);
+    lowestVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->value);
     if (!(lowestVertexHeight <= lowerPairHeight)) {
         lowestVertexHeight = lowerPairHeight;
     }
-    return (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_C) - lowestVertexHeight;
+    return (((struct ActorSurfaceHeightView *) ((s8 *) actor))->surfaceBaseHeight) - lowestVertexHeight;
 }
 
 s32 InstHdr_HasTypeOneFlagOne(void *actorStorage)

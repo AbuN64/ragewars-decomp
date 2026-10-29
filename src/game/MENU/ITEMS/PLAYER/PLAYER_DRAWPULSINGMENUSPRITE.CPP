@@ -10,7 +10,7 @@
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 extern void Player_PlacePlayerForRound(void *player);
-/* Forwards arg1's word at 0x1C to Player_PlacePlayerForRound and always reports success. */
+/* Forwards menuState's word at 0x1C to Player_PlacePlayerForRound and always reports success. */
 
 
 
@@ -116,7 +116,7 @@ s32 Player_UpdatePlayerRespawnDelay(PlayerRespawnMenuContext *menuState) {
     s32 roundFinished;
     PlayerRespawnMenuActor *player;
     player = menuState->actor;
-    if ((player->unk1450 == 0) && (Playerai_IsPlayerInactive(player) != 0)) {
+    if ((player->computerControlled == 0) && (Playerai_IsPlayerInactive(player) != 0)) {
         respawnFrames = player->respawnDelayFrames + 1;
         player->respawnDelayFrames = respawnFrames;
         if (respawnFrames >= 0x4C) {

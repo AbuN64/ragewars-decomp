@@ -485,11 +485,11 @@ s32 Audio_ChooseWeightedSoundVariant(AudioWeightedVariantView *scene, s16 id, s1
 }
 
 void Audio_ResolveInstrumentSectionZero(void *audioContext, s16 index) {
-    SetN64_GetPackSection(SetN64_GetPackSection((((struct AudioInstrumentPackView *) ((s8 *) audioContext))->unk_2B4C), (s32) index), 0);
+    SetN64_GetPackSection(SetN64_GetPackSection((((struct AudioInstrumentPackView *) ((s8 *) audioContext))->instrumentPack), (s32) index), 0);
 }
 
 void Audio_ResolveInstrumentSectionOne(void *audioContext, s16 index) {
-    SetN64_GetPackSection(SetN64_GetPackSection((((struct AudioInstrumentPackView *) ((s8 *) audioContext))->unk_2B4C), (s32) index), 1);
+    SetN64_GetPackSection(SetN64_GetPackSection((((struct AudioInstrumentPackView *) ((s8 *) audioContext))->instrumentPack), (s32) index), 1);
 }
 
 /* Returns 1 when the object's owner at 0x102 is set, or when the id is below 256 and at least six of

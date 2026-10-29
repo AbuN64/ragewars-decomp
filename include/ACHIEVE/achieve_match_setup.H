@@ -11,8 +11,8 @@ struct MatchMenuApplySlotValueGfx {
     char pad00[0xD];
     unsigned char mode;
     char pad0E[0x16];
-    s8 unk24;
-    s8 unk25;
+    s8 matchQualifierFirst;
+    s8 matchQualifierSecond;
     char pad26[0xAA];
     RosterSlot slots[8];
 };

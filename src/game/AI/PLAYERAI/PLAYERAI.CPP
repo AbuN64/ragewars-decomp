@@ -99,10 +99,10 @@ void Playerai_AdvanceRouteCursor(Cursor *cursor) {
 extern s16 Scene_FindNearestRouteFrame(char *world);
 
 void Playerai_InitializeRouteCursor(RouteCursorState *cursorState, s8 initialState) {
-    cursorState->field0 = 1;
-    cursorState->field1 = initialState;
-    cursorState->field2 = Scene_FindNearestRouteFrame(&g_world);
-    cursorState->field4 = 0;
+    cursorState->state = 1;
+    cursorState->clip = initialState;
+    cursorState->frame = Scene_FindNearestRouteFrame(&g_world);
+    cursorState->previous = 0;
 }
 
 extern void *Scene_GetPlatformRoutePoint(char *a, unsigned char b, short c);
@@ -318,7 +318,7 @@ void Playerai_ApplyDamagePacket(struct Shared_ReactionActor *attacker, void *dam
     kind = -1;
     if ((Cinema_IsSequenceInWindow() == 0) && (Cinema_IsSequenceActive() == 0) && !(g_gameSettings.flags & 1)) {
         damagedPlayer = attacker->player;
-        sourceHandle = damagedPlayer->unk14;
+        sourceHandle = damagedPlayer->sourceModelHandles;
         wasAlive = damagedPlayer->health > 0;
         if (sourceHandle == 0) {
             goto flag_clear;
@@ -347,7 +347,7 @@ flag_done:
             kind = 0x20;
         }
         if (packet != 0) {
-            interactionObject = packet->unk0;
+            interactionObject = packet->sourceObject;
             if ((interactionObject != 0) && (interactionObject->category == 2)) {
                 interactionType = interactionObject->type;
                 if (interactionType == 0x432) {
@@ -428,7 +428,7 @@ block_47:
             Playerai_CreditDamageSource(damagedPlayer, packet);
             Player_ApplyPlayerDamage(damagedPlayer, attacker, packet->damage, packet->damageFlags, kind);
 
-            damageSource = packet->unk0;
+            damageSource = packet->sourceObject;
             if (damageSource != 0) {
                 sourceKind = damageSource->kind;
                 if (sourceKind != 1) {
@@ -449,7 +449,7 @@ block_47:
                                 specialHitStatistics->special_hits = (u16) (specialHitStatistics->special_hits + 1);
                             }
                             facingSine = Gu_Sinf(attacker->heading);
-                            sourceForwardProjection = ((damagedPlayer->unk8 - reaction_source->positionX) * -facingSine) + ((damagedPlayer->unk10 - reaction_source->positionZ) * -Math_Cosf(attacker->heading));
+                            sourceForwardProjection = ((damagedPlayer->positionX - reaction_source->positionX) * -facingSine) + ((damagedPlayer->unk10 - reaction_source->positionZ) * -Math_Cosf(attacker->heading));
                             if (sourceForwardProjection < g_playerDamageRearProjectionThreshold) {
 
                                 damagedPlayer->hitDirection = 1;
@@ -473,7 +473,7 @@ block_69:
             }
             if (creditedPlayer != 0) {
                 if (packet != 0) {
-                    attributionSource = packet->unk0;
+                    attributionSource = packet->sourceObject;
                     projectile_present = attributionSource != 0;
                     do {
                       if (!projectile_present) { break; }
@@ -574,14 +574,14 @@ block_88:
                             } else {
                                 victimDeathStatistics = (void *)damagedPlayer->statistics;
                                 victimDeathStatistics->deaths_other = (u16) (victimDeathStatistics->deaths_other + 1);
-                                actorStatisticsNode = Portal_FindSearchNode(&g_navigationGraph, damagedPlayer->botRecord->unk4);
+                                actorStatisticsNode = Portal_FindSearchNode(&g_navigationGraph, damagedPlayer->botRecord->searchNodeKey);
                                 actorStatisticsNode->primaryReactionCount = (s32) (actorStatisticsNode->primaryReactionCount + 1);
-                                actorStatisticsNode = Portal_FindSearchNode(&g_navigationGraph, creditedPlayer->botRecord->unk4);
+                                actorStatisticsNode = Portal_FindSearchNode(&g_navigationGraph, creditedPlayer->botRecord->searchNodeKey);
                                 actorStatisticsNode->secondaryReactionCount = (s32) (actorStatisticsNode->secondaryReactionCount + 1);
                                 if (damagedPlayer->statistics->isHuman == 1) {
                                     if (g_matchRoundCounters->countRule != 0) {
                                         specialKillStatistics = (void *)creditedPlayer->statistics;
-                                        creditedPlayer->unk12C4 = damagedPlayer;
+                                        creditedPlayer->lastCountRuleVictim = damagedPlayer;
                                         specialKillStatistics->special_kills = (u16) (specialKillStatistics->special_kills + 1);
                                         specialScoreStatistics = (void *)creditedPlayer->statistics;
                                         statisticsValue = specialScoreStatistics->score + 1;
@@ -606,7 +606,7 @@ block_88:
                                             }
                                         }
                                     } else if (g_matchRoundCounters->squads != 0) {
-                                        creditedPlayer->unk12C8 = damagedPlayer;
+                                        creditedPlayer->lastSquadVictim = damagedPlayer;
                                     } else {
                                         goto block_124;
                                     }
@@ -745,10 +745,10 @@ void Playerai_InitializeMovementAndAim(void *playerObject) {
     f32 tail_value;
     CVector3 *tail_vector;
     s32 type;
-    if (((PlayerControllerReleaseView *)(object))->unk_1450 != 0) {
+    if (((PlayerControllerReleaseView *)(object))->computerControlled != 0) {
         attributes = g_botControllerProfile;
     } else {
-        s32 index = ((PlayerControllerReleaseView *)(object))->unk_5D4;
+        s32 index = ((PlayerControllerReleaseView *)(object))->playerIndex;
         attributes = (void *)(index << 4);
         attributes = (char *)attributes + index;
         attributes = (void *)((s32)attributes << 3);
@@ -757,87 +757,87 @@ void Playerai_InitializeMovementAndAim(void *playerObject) {
         attributes = g_controllerProfiles + (s32)attributes;
     }
     ContPad_InitControllerInput(state, attributes);
-    ((PlayerControllerReleaseView *)(object))->unk_6C0 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_6C4 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_6C8 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_6CC = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_6D0 = 1;
-    ((PlayerControllerReleaseView *)(object))->unk_6D4 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_6D8 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_6DC = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_6E4 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_758 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_75C = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_11B4 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_11B8 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_708 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_70C = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_710 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_714 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_724 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_728 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_72C = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_730 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_734 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_738 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_73C = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_740 = Playerai_GetObjectOwnerHeight(object);
+    ((PlayerControllerReleaseView *)(object))->forwardSpeed = 0;
+    ((PlayerControllerReleaseView *)(object))->lateralSpeed = 0;
+    ((PlayerControllerReleaseView *)(object))->landing = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord6CC = 0;
+    ((PlayerControllerReleaseView *)(object))->active = 1;
+    ((PlayerControllerReleaseView *)(object))->reservedWord6D4 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord6D8 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord6DC = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord6E4 = 0;
+    ((PlayerControllerReleaseView *)(object))->bobStrength = 0;
+    ((PlayerControllerReleaseView *)(object))->bobSpeed = 0;
+    ((PlayerControllerReleaseView *)(object))->locked = 0;
+    ((PlayerControllerReleaseView *)(object))->lockState = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord708 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord70C = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord710 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord714 = 0;
+    ((PlayerControllerReleaseView *)(object))->pitchOffset = 0;
+    ((PlayerControllerReleaseView *)(object))->kickYaw = 0;
+    ((PlayerControllerReleaseView *)(object))->kickRoll = 0;
+    ((PlayerControllerReleaseView *)(object))->swayPitch = 0;
+    ((PlayerControllerReleaseView *)(object))->swayYaw = 0;
+    ((PlayerControllerReleaseView *)(object))->swayRoll = 0;
+    ((PlayerControllerReleaseView *)(object))->sideOffset = 0;
+    ((PlayerControllerReleaseView *)(object))->weaponHeight = Playerai_GetObjectOwnerHeight(object);
     default_value = g_playerInitialMotionScale;
-    ((PlayerControllerReleaseView *)(object))->unk_744 = 0;
-    (&((PlayerControllerReleaseView *)(object))->unk_748)->x = (&((PlayerControllerReleaseView *)(object))->unk_748)->y = (&((PlayerControllerReleaseView *)(object))->unk_748)->z = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_754 = default_value;
-    ((PlayerControllerReleaseView *)(object))->unk_780 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_784 = default_value;
-    ((PlayerControllerReleaseView *)(object))->unk_6E8 = ((PlayerControllerReleaseView *)(object))->unk_8;
-    ((PlayerControllerReleaseView *)(object))->unk_6F8 = ((PlayerControllerReleaseView *)(object))->unk_8;
-    ((PlayerControllerReleaseView *)(object))->unk_658 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_668 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_66C = 0;
-    if (((PlayerControllerReleaseView *)(object))->unk_18.v0 != 0) {
-        ((PlayerControllerReleaseView *)(object))->unk_6F4.v0 = ((struct ModelBlend *) ((PlayerControllerReleaseView *) object)->unk_18.v1)->height;
+    ((PlayerControllerReleaseView *)(object))->forwardOffset = 0;
+    (&((PlayerControllerReleaseView *)(object))->velocity)->x = (&((PlayerControllerReleaseView *)(object))->velocity)->y = (&((PlayerControllerReleaseView *)(object))->velocity)->z = 0;
+    ((PlayerControllerReleaseView *)(object))->velocityScale = default_value;
+    ((PlayerControllerReleaseView *)(object))->cameraOffset = 0;
+    ((PlayerControllerReleaseView *)(object))->cameraScale = default_value;
+    ((PlayerControllerReleaseView *)(object))->previousPosition = ((PlayerControllerReleaseView *)(object))->position;
+    ((PlayerControllerReleaseView *)(object))->previousTarget = ((PlayerControllerReleaseView *)(object))->position;
+    ((PlayerControllerReleaseView *)(object))->stride = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord668 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord66C = 0;
+    if (((PlayerControllerReleaseView *)(object))->model.v0 != 0) {
+        ((PlayerControllerReleaseView *)(object))->heightDelta.v0 = ((struct ModelBlend *) ((PlayerControllerReleaseView *) object)->model.v1)->height;
     } else {
-        ((PlayerControllerReleaseView *)(object))->unk_6F4.v1 = 0;
+        ((PlayerControllerReleaseView *)(object))->heightDelta.v1 = 0;
     }
-    tail_vector = &((PlayerControllerReleaseView *)(object))->unk_7D8;
-    ((PlayerControllerReleaseView *)(object))->unk_7B0.v0 = 0;
-    zero = ((PlayerControllerReleaseView *)(object))->unk_7B0.v1;
+    tail_vector = &((PlayerControllerReleaseView *)(object))->reservedVector7D8;
+    ((PlayerControllerReleaseView *)(object))->reservedWord7B0.v0 = 0;
+    zero = ((PlayerControllerReleaseView *)(object))->reservedWord7B0.v1;
     tail_value = g_playerInitialAimScale;
     type = 2;
-    ((PlayerControllerReleaseView *)(object))->unk_718 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_71C = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_720 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_7EC = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_7F0 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_7E8 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_788 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_78C = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_790 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_794 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_798 = -1;
-    ((PlayerControllerReleaseView *)(object))->unk_79C = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_7A0 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_7A4 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_7A8 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_7AC = 0;
+    ((PlayerControllerReleaseView *)(object))->crouchDepth = 0;
+    ((PlayerControllerReleaseView *)(object))->forceCrouch = 0;
+    ((PlayerControllerReleaseView *)(object))->eyeOffset = 0;
+    ((PlayerControllerReleaseView *)(object))->weaponChargeBlend = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord7F0 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord7E8 = 0;
+    ((PlayerControllerReleaseView *)(object))->controllerMode = 0;
+    ((PlayerControllerReleaseView *)(object))->controllerTimer = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord790 = 0;
+    ((PlayerControllerReleaseView *)(object))->controllerOwner = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord798 = -1;
+    ((PlayerControllerReleaseView *)(object))->reservedWord79C = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord7A0 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord7A4 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord7A8 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord7AC = 0;
     tail_vector->x = tail_vector->y = tail_vector->z = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_7E4 = tail_value;
-    ((PlayerControllerReleaseView *)(object))->unk_7B4 = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_7B8 = -1;
-    ((PlayerControllerReleaseView *)(object))->unk_7C0 = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_7C4 = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_7C8 = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_7CC = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_7D0 = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_7D4 = zero;
+    ((PlayerControllerReleaseView *)(object))->aimScale = tail_value;
+    ((PlayerControllerReleaseView *)(object))->reservedWord7B4 = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedWord7B8 = -1;
+    ((PlayerControllerReleaseView *)(object))->reservedFloat7C0 = zero;
+    ((PlayerControllerReleaseView *)(object))->reservedFloat7C4 = zero;
+    ((PlayerControllerReleaseView *)(object))->reservedFloat7C8 = zero;
+    ((PlayerControllerReleaseView *)(object))->reservedFloat7CC = zero;
+    ((PlayerControllerReleaseView *)(object))->reservedFloat7D0 = zero;
+    ((PlayerControllerReleaseView *)(object))->reservedFloat7D4 = zero;
     Player_SetPlayerState(object, object, type);
-    ((PlayerControllerReleaseView *)(object))->unk_80C = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_838 = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_83C = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_840 = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_848 = 0;
-    ((struct PlayerControllerResetStateView *) ((PlayerControllerReleaseView *) object)->unk_5D8)->state = 0;
-    ((PlayerControllerReleaseView *)(object))->unk_704 = zero;
-    ((PlayerControllerReleaseView *)(object))->unk_16D4 = 0;
+    ((PlayerControllerReleaseView *)(object))->controllerEnabled = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedFloat838 = zero;
+    ((PlayerControllerReleaseView *)(object))->reservedFloat83C = zero;
+    ((PlayerControllerReleaseView *)(object))->recoveryTime = zero;
+    ((PlayerControllerReleaseView *)(object))->collisionState = 0;
+    ((struct PlayerControllerResetStateView *) ((PlayerControllerReleaseView *) object)->profile)->state = 0;
+    ((PlayerControllerReleaseView *)(object))->reservedFloat704 = zero;
+    ((PlayerControllerReleaseView *)(object))->score = 0;
 }
 
 extern s32 g_playerWeaponClassMode;
@@ -1083,8 +1083,8 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     Control_SetProfileMode(((Shared_ActorView *)player)->controller, 0);
     world = &g_world;
     if (reset) {
-        ((Shared_ActorView *)player)->field864 = 0;
-        ((Shared_ActorView *)player)->field868 = 0;
+        ((Shared_ActorView *)player)->reservedWord864 = 0;
+        ((Shared_ActorView *)player)->reservedWord868 = 0;
     }
     if (g_frontendScreenStatus.settings.local) {
         count = Scene_FindPlacedObjectsByKey(world, -1, model, points, 32);

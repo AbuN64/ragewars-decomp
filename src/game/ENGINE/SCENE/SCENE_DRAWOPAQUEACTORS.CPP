@@ -12,7 +12,7 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 char *Scene_GetLinkedResourceSection(void *world, s32 resourceId) {
-    return SetN64_GetPackSection((((struct ScenePackResourceView *) ((s8 *) world))->unk_70), resourceId);
+    return SetN64_GetPackSection((((struct ScenePackResourceView *) ((s8 *) world))->pack), resourceId);
 }
 
 /** Return an indexed record from the table at object offset 0xA0. */
@@ -135,7 +135,7 @@ void Scene_ChangeInstanceModel(SceneModelBankView *modelBank,ObjectSceneChangeIn
  s32 index=0;
  if(draw->id!=modelId) {
  index=find(modelBank->table,modelId);
- if(index!=-1){draw->index=index;draw->id=modelId;Gobjinst_LoadModel(draw,modelBank->field54,modelBank->field24,extra);}
+ if(index!=-1){draw->index=index;draw->id=modelId;Gobjinst_LoadModel(draw,modelBank->modelDirectory,modelBank->directoryBank,extra);}
  }
 }
 

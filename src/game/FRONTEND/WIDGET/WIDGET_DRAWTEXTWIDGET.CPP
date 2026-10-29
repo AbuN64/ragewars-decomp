@@ -366,7 +366,7 @@ typedef struct DraftWidget {
     struct DraftWidget *child;
     s16 id;
     u16 type;
-    u16 unk10;
+    u16 reservedHalfword;
     u16 flags;
     s16 x;
     s16 y;

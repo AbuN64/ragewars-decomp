@@ -20,15 +20,15 @@ static inline void makeImpulse(CVector3 *input,f32 scale,CVector3 *out){Graphu64
 static inline void addImpulse(CVector3 *v,CVector3 *impulse){Graphu64_AddVec3(v,v,impulse);}
 void Particle_SteerSoundTrackingParticle(void *particle) {
     SteeringParticle *steeringParticle=particle;
-    CVector3 sp18;
-    CVector3 sp28;
-    CVector3 sp38;
-    CQuatern sp48;
-    CQuatern sp58;
-    CQuatern sp68;
-    Matrix sp78;
-    CVector3 spB8;
-    CVector3 spC8;
+    CVector3 targetPosition;
+    CVector3 offsetToTarget;
+    CVector3 basisPoint;
+    CQuatern currentDirectionQuaternion;
+    CQuatern wantedDirectionQuaternion;
+    CQuatern steeredDirectionQuaternion;
+    Matrix steeringMatrix;
+    CVector3 impulseVector;
+    CVector3 accelerationDirection;
     CVector3 *acceleratedVelocity;
     CVector3 *direction;
     CVector3 *unusedPointer;
@@ -70,32 +70,32 @@ block_7:
         target = steeringParticle->target;
         if ((target != 0) && (steeringParticle->time > g_particleAttractionDelay)) {
             direction = &steeringParticle->direction;
-            sp48 = Graphu64_BuildDirectionQuaternion(direction);
+            currentDirectionQuaternion = Graphu64_BuildDirectionQuaternion(direction);
             initialVelocityX = steeringParticle->velocity.x;
             initialVelocityY = steeringParticle->velocity.y;
             initialVelocityZ = steeringParticle->velocity.z;
             initialSpeed = Gu_Sqrtf((initialVelocityX * initialVelocityX) + (initialVelocityY * initialVelocityY) + (initialVelocityZ * initialVelocityZ));
 
-            sp18 = target->position;
-            Graphu64_SubtractVectors(&sp28, &sp18, &steeringParticle->position);
-            amount = Gu_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
+            targetPosition = target->position;
+            Graphu64_SubtractVectors(&offsetToTarget, &targetPosition, &steeringParticle->position);
+            amount = Gu_Sqrtf((offsetToTarget.x * offsetToTarget.x) + (offsetToTarget.y * offsetToTarget.y) + (offsetToTarget.z * offsetToTarget.z));
             if (amount < g_particleAttractionMinimumDistance) {
-                sp68 = Graphu64_BuildDirectionQuaternion(&sp28);
-                MatrixFromQuaternion(&sp68.x, sp78.m);
-                sp38.x = 0;
-                sp38.y = 0;
-                sp38.z = g_particleAttractionBasisZ;
-                Graphu64_TransformPoint(&sp78, &sp38, direction);
+                steeredDirectionQuaternion = Graphu64_BuildDirectionQuaternion(&offsetToTarget);
+                MatrixFromQuaternion(&steeredDirectionQuaternion.x, steeringMatrix.m);
+                basisPoint.x = 0;
+                basisPoint.y = 0;
+                basisPoint.z = g_particleAttractionBasisZ;
+                Graphu64_TransformPoint(&steeringMatrix, &basisPoint, direction);
                 Graphu64_ScaleVector(&steeringParticle->velocity, direction, initialSpeed);
                 return;
             }
             if (g_particleAttractionFarDistance < amount) {
-                sp18.y += g_particleAttractionMinimumDistance;
-                Graphu64_SubtractVectors(&sp28, &sp18, &steeringParticle->position);
-                amount = Gu_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
+                targetPosition.y += g_particleAttractionMinimumDistance;
+                Graphu64_SubtractVectors(&offsetToTarget, &targetPosition, &steeringParticle->position);
+                amount = Gu_Sqrtf((offsetToTarget.x * offsetToTarget.x) + (offsetToTarget.y * offsetToTarget.y) + (offsetToTarget.z * offsetToTarget.z));
             }
-            Graphu64_NormalizeVec3(&sp28.x);
-            sp58 = Graphu64_BuildDirectionQuaternion(&sp28);
+            Graphu64_NormalizeVec3(&offsetToTarget.x);
+            wantedDirectionQuaternion = Graphu64_BuildDirectionQuaternion(&offsetToTarget);
             if (amount < g_particleAttractionNearDistance) {
                 attractionDistanceOffset = amount - g_particleAttractionDistanceOffset;
                 if (attractionDistanceOffset < 0.0f) {
@@ -107,24 +107,24 @@ block_7:
             } else {
                 amount = g_particleAttractionMaximumStrength;
             }
-            Graphu64_NormalizeQuaternion(&sp58.x);
-            Graphu64_NormalizeQuaternion(&sp48.x);
-            Graphu64_InterpolateQuaternionWithLinearFallback(&sp68, amount, &sp48, &sp58);
-            MatrixFromQuaternion(&sp68.x, sp78.m);
+            Graphu64_NormalizeQuaternion(&wantedDirectionQuaternion.x);
+            Graphu64_NormalizeQuaternion(&currentDirectionQuaternion.x);
+            Graphu64_InterpolateQuaternionWithLinearFallback(&steeredDirectionQuaternion, amount, &currentDirectionQuaternion, &wantedDirectionQuaternion);
+            MatrixFromQuaternion(&steeredDirectionQuaternion.x, steeringMatrix.m);
             steeredDirection = &steeringParticle->direction;
-            sp38.x = 0;
-            sp38.y = 0;
-            sp38.z = g_particleAttractionDirectionZ;
-            Graphu64_TransformPoint(&sp78, &sp38, steeredDirection);
+            basisPoint.x = 0;
+            basisPoint.y = 0;
+            basisPoint.z = g_particleAttractionDirectionZ;
+            Graphu64_TransformPoint(&steeringMatrix, &basisPoint, steeredDirection);
             Graphu64_ScaleVector(&steeringParticle->velocity, steeredDirection, initialSpeed);
             goto block_21;
         }
 block_21:
         scale = Menu_ExpandFloatHighWord((s32) steeringParticle->descriptor->motion->acceleration);
         if (scale != 0.0f) {
-            spC8 = steeringParticle->direction;
-            makeImpulse(&spC8,scale,&spB8);
-            addImpulse(&steeringParticle->velocity,&spB8);
+            accelerationDirection = steeringParticle->direction;
+            makeImpulse(&accelerationDirection,scale,&impulseVector);
+            addImpulse(&steeringParticle->velocity,&impulseVector);
             acceleratedVelocity=&steeringParticle->velocity;
             acceleratedVelocityX = steeringParticle->velocity.x;
             acceleratedVelocityY = steeringParticle->velocity.y;
@@ -132,7 +132,7 @@ block_21:
             acceleratedSpeed = Gu_Sqrtf((acceleratedVelocityX * acceleratedVelocityX) + (acceleratedVelocityY * acceleratedVelocityY) + (acceleratedVelocityZ * acceleratedVelocityZ));
             speedLimit = Menu_ExpandFloatHighWord((s32) steeringParticle->descriptor->motion->speed);
             if (scale > 0.0f) {if (!(speedLimit < acceleratedSpeed)) goto after_clamp;} else {if (!(acceleratedSpeed < speedLimit)) goto after_clamp;}
-            Graphu64_ScaleVector(acceleratedVelocity, &spC8, speedLimit);
+            Graphu64_ScaleVector(acceleratedVelocity, &accelerationDirection, speedLimit);
             after_clamp:;
         }
         Particle_UpdateSineMotion(steeringParticle, 1.0f);
@@ -404,18 +404,18 @@ done:;
 
 void Particle_UpdateTypedMotion(Shared_Particle *particle)
 {
-  CVector3 sp10;
-  CVector3 sp20;
-  CVector3 sp30;
-  CVector3 sp40;
-  CVector3 sp50;
-  CQuatern sp60;
-  CQuatern sp70;
-  CQuatern sp80;
-  Matrix sp90;
-  CVector3 spD0;
+  CVector3 offsetToTarget;
+  CVector3 targetPosition;
+  CVector3 currentDirection;
+  CVector3 directionToTarget;
+  CVector3 basisPoint;
+  CQuatern currentDirectionQuaternion;
+  CQuatern wantedDirectionQuaternion;
+  CQuatern steeredDirectionQuaternion;
+  Matrix steeringMatrix;
+  CVector3 motionVectorStorage;
 
-  CVector3 spE0;
+  CVector3 directionCopy;
   CVector3 *nearby_position;
   CVector3 *steeringDirection;
   f32 unusedFloat;
@@ -520,7 +520,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *particle)
 
   if (nearbyActorCursor != ((void *) 0))
   {
-    nearby_position = &sp20;
+    nearby_position = &targetPosition;
     velocity = (void *) (&particle->inst.velocity.x);
     do {
       nearby_scale = g_particleNeighborScale;
@@ -529,19 +529,19 @@ void Particle_UpdateTypedMotion(Shared_Particle *particle)
     nearbyActor = nearbyActorCursor;
     do
     {
-      nearby_height = nearbyActor->unk70;
-      sp20 = nearbyActor->pos;
-      sp20.y += nearby_height;
-      sp20.y += Gobjinst_GetActorHeight(nearbyActorCursor) * nearby_scale;
-      Graphu64_SubtractVectors(&sp10, nearby_position, &particle->inst.pos);
-      neighborInfluence = Gu_Sqrtf(((sp10.x * sp10.x) + (sp10.y * sp10.y)) + (sp10.z * sp10.z));
+      nearby_height = nearbyActor->baseHeightOffset;
+      targetPosition = nearbyActor->pos;
+      targetPosition.y += nearby_height;
+      targetPosition.y += Gobjinst_GetActorHeight(nearbyActorCursor) * nearby_scale;
+      Graphu64_SubtractVectors(&offsetToTarget, nearby_position, &particle->inst.pos);
+      neighborInfluence = Gu_Sqrtf(((offsetToTarget.x * offsetToTarget.x) + (offsetToTarget.y * offsetToTarget.y)) + (offsetToTarget.z * offsetToTarget.z));
       if (neighborInfluence < g_particleNeighborInfluenceThreshold)
       {
         neighborInfluence = g_particleNeighborInfluenceBase - (neighborInfluence * g_particleNeighborInfluenceScale);
-        sp10.x *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
-        sp10.y *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
-        sp10.z *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
-        Graphu64_SubtractVectors(velocity, velocity, &sp10);
+        offsetToTarget.x *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
+        offsetToTarget.y *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
+        offsetToTarget.z *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
+        Graphu64_SubtractVectors(velocity, velocity, &offsetToTarget);
       }
       nearbyActorCursor = nearbyActor->next;
       nearbyActor = nearbyActorCursor;
@@ -550,20 +550,20 @@ void Particle_UpdateTypedMotion(Shared_Particle *particle)
   }
   attractionTarget = particle->target;
   attractionTargetHeight = InstHdr_GetActorBaseOffset(attractionTarget);
-  sp20 = attractionTarget->pos;
-  sp20.y += attractionTargetHeight;
-  Graphu64_SubtractVectors(&sp10, &sp20, &particle->inst.pos);
+  targetPosition = attractionTarget->pos;
+  targetPosition.y += attractionTargetHeight;
+  Graphu64_SubtractVectors(&offsetToTarget, &targetPosition, &particle->inst.pos);
   tracking_min = g_particleTrackingMinimum;
   tracking_max = g_particleTrackingMaximum;
-  sp10.x *= Graphu64_RandomBetween(tracking_min, tracking_max);
-  sp10.y *= Graphu64_RandomBetween(tracking_min, tracking_max);
-  sp10.z *= Graphu64_RandomBetween(tracking_min, tracking_max);
+  offsetToTarget.x *= Graphu64_RandomBetween(tracking_min, tracking_max);
+  offsetToTarget.y *= Graphu64_RandomBetween(tracking_min, tracking_max);
+  offsetToTarget.z *= Graphu64_RandomBetween(tracking_min, tracking_max);
   motionVector = (void *) (&particle->inst.velocity.x);
-  Graphu64_AddVec3(motionVector, motionVector, &sp10);
+  Graphu64_AddVec3(motionVector, motionVector, &offsetToTarget);
 #if defined(VERSION_EU)
-  Graphu64_ClampMotionLength(motionVector, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12));
+  Graphu64_ClampMotionLength(motionVector, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->speedLimitHi));
 #else
-  Graphu64_ClampMotionLength(motionVector, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12));
+  Graphu64_ClampMotionLength(motionVector, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->speedLimitHi));
 #endif
   return;
   block_24:
@@ -578,25 +578,25 @@ void Particle_UpdateTypedMotion(Shared_Particle *particle)
   Playerai_ApplyPlayerForces(&g_playerViewRenderContext, particle);
 
 #if defined(VERSION_EU)
-  targetMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk10);
+  targetMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->motionSpeedHi);
 #else
-  targetMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk10);
+  targetMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->motionSpeedHi);
 #endif
   if (targetMotionSpeed != 0.0f)
   {
-    motionVector = &spD0;
-    spE0 = particle->direction;
-    Graphu64_ScaleVector(motionVector, &spE0, targetMotionSpeed);
+    motionVector = &motionVectorStorage;
+    directionCopy = particle->direction;
+    Graphu64_ScaleVector(motionVector, &directionCopy, targetMotionSpeed);
     motionVector = (void *) (&particle->inst.velocity.x);
-    Graphu64_AddVec3(motionVector, motionVector, &spD0);
+    Graphu64_AddVec3(motionVector, motionVector, &motionVectorStorage);
     specialVelocityX = particle->inst.velocity.x;
     specialVelocityY = particle->inst.velocity.y;
     specialVelocityZ = particle->inst.velocity.z;
     specialSpeed = Gu_Sqrtf(((specialVelocityX * specialVelocityX) + (specialVelocityY * specialVelocityY)) + (specialVelocityZ * specialVelocityZ));
 #if defined(VERSION_EU)
-    specialSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12);
+    specialSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->speedLimitHi);
 #else
-    specialSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12);
+    specialSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->speedLimitHi);
 #endif
     if (targetMotionSpeed > 0.0f)
     {
@@ -610,7 +610,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *particle)
     {
       goto after_special_clamp;
     }
-    Graphu64_ScaleVector(motionVector, &spE0, specialSpeedLimit);
+    Graphu64_ScaleVector(motionVector, &directionCopy, specialSpeedLimit);
     after_special_clamp:
     ;
 
@@ -622,61 +622,61 @@ void Particle_UpdateTypedMotion(Shared_Particle *particle)
   targetValue = particle->target;
 
   particleDescriptor = particle->desc;
-  if (((targetValue != ((void *) 0)) && (particle->desc->flags & 0x40000)) && (((BallisticParamsHolder *)particle->desc)->unkE != 0))
+  if (((targetValue != ((void *) 0)) && (particle->desc->flags & 0x40000)) && (((BallisticParamsHolder *)particle->desc)->steeringAngleLimit != 0))
   {
     targetBaseOffset = InstHdr_GetActorBaseOffset(targetValue);
-    sp20 = targetValue->pos;
-    sp20.y += targetBaseOffset;
-    sp20.y += Gobjinst_GetActorHeight(targetValue) * g_particleTrackingTargetHeightScale;
-    Graphu64_SubtractVectors(&sp40, &sp20, &particle->inst.pos);
-    Graphu64_NormalizeVec3(&sp40);
-    sp70 = Graphu64_BuildDirectionQuaternion(&sp40);
+    targetPosition = targetValue->pos;
+    targetPosition.y += targetBaseOffset;
+    targetPosition.y += Gobjinst_GetActorHeight(targetValue) * g_particleTrackingTargetHeightScale;
+    Graphu64_SubtractVectors(&directionToTarget, &targetPosition, &particle->inst.pos);
+    Graphu64_NormalizeVec3(&directionToTarget);
+    wantedDirectionQuaternion = Graphu64_BuildDirectionQuaternion(&directionToTarget);
     steeringDirection = &particle->direction;
-    sp60 = Graphu64_BuildDirectionQuaternion(steeringDirection);
-    sp30 = particle->direction;
-    Graphu64_NormalizeVec3(&sp30);
+    currentDirectionQuaternion = Graphu64_BuildDirectionQuaternion(steeringDirection);
+    currentDirection = particle->direction;
+    Graphu64_NormalizeVec3(&currentDirection);
     steeringVelocityX = particle->inst.velocity.x;
     steeringVelocityY = particle->inst.velocity.y;
     steeringVelocityZ = particle->inst.velocity.z;
     steeringSpeed = Gu_Sqrtf(((steeringVelocityX * steeringVelocityX) + (steeringVelocityY * steeringVelocityY)) + (steeringVelocityZ * steeringVelocityZ));
-    steeringAngle = Graphu64_ArcCos(((sp30.x * sp40.x) + (sp30.y * sp40.y)) + (sp30.z * sp40.z));
-    steeringAngleLimit = ((f32) ((BallisticParamsHolder *)particle->desc)->unkE) * g_particleBallisticParameterScale;
+    steeringAngle = Graphu64_ArcCos(((currentDirection.x * directionToTarget.x) + (currentDirection.y * directionToTarget.y)) + (currentDirection.z * directionToTarget.z));
+    steeringAngleLimit = ((f32) ((BallisticParamsHolder *)particle->desc)->steeringAngleLimit) * g_particleBallisticParameterScale;
     steeringBlend = g_particleBallisticDefaultValue;
     if (steeringAngleLimit < steeringAngle)
     {
       steeringBlend = steeringAngleLimit / steeringAngle;
     }
-    Graphu64_InterpolateQuaternionWithLinearFallback(&sp80, steeringBlend, &sp60, &sp70);
-    MatrixFromQuaternion(&sp80, &sp90);
-    sp50.x = 0;
-    sp50.y = 0;
-    sp50.z = g_particleBallisticBasisZ;
+    Graphu64_InterpolateQuaternionWithLinearFallback(&steeredDirectionQuaternion, steeringBlend, &currentDirectionQuaternion, &wantedDirectionQuaternion);
+    MatrixFromQuaternion(&steeredDirectionQuaternion, &steeringMatrix);
+    basisPoint.x = 0;
+    basisPoint.y = 0;
+    basisPoint.z = g_particleBallisticBasisZ;
     transformedDirection = steeringDirection;
-    Graphu64_TransformPoint(&sp90, &sp50, transformedDirection);
+    Graphu64_TransformPoint(&steeringMatrix, &basisPoint, transformedDirection);
     Graphu64_ScaleVector(&particle->inst.velocity.x, transformedDirection, steeringSpeed);
   }
   if (!(particle->flags & 0x70000))
   {
 #if defined(VERSION_EU)
-    ballisticMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk10);
+    ballisticMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->motionSpeedHi);
 #else
-    ballisticMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk10);
+    ballisticMotionSpeed = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->motionSpeedHi);
 #endif
     if (ballisticMotionSpeed != 0.0f)
     {
-      motionVector = &spD0;
-    spE0 = particle->direction;
-      Graphu64_ScaleVector(motionVector, &spE0, ballisticMotionSpeed);
+      motionVector = &motionVectorStorage;
+    directionCopy = particle->direction;
+      Graphu64_ScaleVector(motionVector, &directionCopy, ballisticMotionSpeed);
       motionVector = (void *) (&particle->inst.velocity.x);
-      Graphu64_AddVec3(motionVector, motionVector, &spD0);
+      Graphu64_AddVec3(motionVector, motionVector, &motionVectorStorage);
       acceleratedVelocityX = particle->inst.velocity.x;
       acceleratedVelocityY = particle->inst.velocity.y;
       acceleratedVelocityZ = particle->inst.velocity.z;
       acceleratedSpeed = Gu_Sqrtf(((acceleratedVelocityX * acceleratedVelocityX) + (acceleratedVelocityY * acceleratedVelocityY)) + (acceleratedVelocityZ * acceleratedVelocityZ));
 #if defined(VERSION_EU)
-      acceleratedSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12);
+      acceleratedSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->speedLimitHi);
 #else
-      acceleratedSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->unk12);
+      acceleratedSpeedLimit = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)particle->desc)->parameters->speedLimitHi);
 #endif
       if (ballisticMotionSpeed > 0.0f)
       {
@@ -690,7 +690,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *particle)
       {
         goto after_normal_clamp;
       }
-      Graphu64_ScaleVector(motionVector, &spE0, acceleratedSpeedLimit);
+      Graphu64_ScaleVector(motionVector, &directionCopy, acceleratedSpeedLimit);
       after_normal_clamp:
       ;
 

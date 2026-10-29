@@ -21,7 +21,7 @@ struct Element {
     struct ScreenEventTreeNode *right; /* 0x8 */
     s16 id;
     u16 kind;
-    u16 field10;
+    u16 reservedHalfword10;
     u16 flags;
     u8 unobserved14[0x3C - 0x14];
     s32 linked_id;
@@ -77,7 +77,7 @@ struct Widget {
     struct Widget *child;
     s16 id;
     u16 kind;
-    u16 field10;
+    u16 reservedHalfword10;
     u16 flags;
     s16 x, y, width, height;
     s16 offsetX, offsetY;

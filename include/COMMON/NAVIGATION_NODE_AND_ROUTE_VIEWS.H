@@ -8,16 +8,16 @@ struct NavigationSearchNodeView {
     s32 key;
     f32 value;
     s32 state;
-    s32 fieldC;
+    s32 flags;
     struct NavigationSearchNodeView *next;
-    s32 field14;
-    s32 field18;
-    s32 field1C;
-    s32 field20;
-    s32 field24;
-    s32 field28;
-    s32 field2C;
-    s32 field30;
+    s32 wait;
+    s32 extra;
+    s32 cost;
+    s32 estimate;
+    s32 total;
+    s32 open;
+    s32 goal;
+    s32 parent;
     char * owner;
 };
 
@@ -68,9 +68,9 @@ typedef struct NavigationSearchGraphView NavigationSearchGraphView;
 struct RouteRelationTableView;
 struct RouteRelationTableView {
     char pad0[0x4];
-    int unk_4;
+    int nodeCount;
     char pad4[0x10 - 0x4 - sizeof(int)];
-    char * unk_10;
+    char * relationBytes;
 };
 
 struct NavigationLinkListView;

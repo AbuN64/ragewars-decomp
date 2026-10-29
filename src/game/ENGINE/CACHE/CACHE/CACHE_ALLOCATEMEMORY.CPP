@@ -101,7 +101,7 @@ Record *Cache_AllocateMemory(s32 size) {
         }
     }
     if (current != 0) {
-        payload = current->field_0;
+        payload = current->payload;
         result = (Record *)(payload + 0x10);
         *(struct CacheAllocationNodeView **)payload = current;
         return result;

@@ -95,7 +95,7 @@ s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 unusedEventId, s32 phase
             return 0;
         }
         g_setupScreen->widget30C->alpha = 0xFF;
-        g_setupScreen->unk3DC = 9;
+        g_setupScreen->screenState = 9;
         if (g_setupScreen->selection == 0) {
             Widget_SetWidgetFlag08(g_setupScreen->widget30B, 1);
             flagWidget = g_setupScreen->widget35D;
@@ -108,21 +108,21 @@ s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 unusedEventId, s32 phase
         goto block_7;
     }
 block_7:
-    transitionStateOrAlpha = g_setupScreen->unk3DC;
+    transitionStateOrAlpha = g_setupScreen->screenState;
     switch (transitionStateOrAlpha) {
     case 1:
         openLeft = g_setupScreen->left;
         openLeft->x = (u16) (openLeft->x + (u16)g_setupScreen->leftCount);
         openRight = g_setupScreen->right;
         openRight->x = (u16) (openRight->x - (u16)g_setupScreen->rightCount);
-        exitCountdown = g_setupScreen->unk3E0 - 1;
-        g_setupScreen->unk3E0 = exitCountdown;
+        exitCountdown = g_setupScreen->stateCountdown - 1;
+        g_setupScreen->stateCountdown = exitCountdown;
         if (exitCountdown <= 0) {
             SoundElement_PlayFlatSound(0xE79);
             Widget_SetWidgetFlag08(g_setupScreen->widget301, 1);
             SmpFlicker_StartFlicker(g_setupScreen->text3E4, 4);
-            g_setupScreen->unk3DC = 4;
-            g_setupScreen->unk3E0 = 4;
+            g_setupScreen->screenState = 4;
+            g_setupScreen->stateCountdown = 4;
         }
         break;
     case 2:
@@ -130,39 +130,39 @@ block_7:
         closeLeft->x = (u16) (closeLeft->x - (u16)g_setupScreen->leftCount);
         closeRight = g_setupScreen->right;
         closeRight->x = (u16) (closeRight->x + (u16)g_setupScreen->rightCount);
-        entryCountdown = g_setupScreen->unk3E0 - 1;
-        g_setupScreen->unk3E0 = entryCountdown;
+        entryCountdown = g_setupScreen->stateCountdown - 1;
+        g_setupScreen->stateCountdown = entryCountdown;
         if (entryCountdown <= 0) {
-            g_setupScreen->unk3DC = 3;
+            g_setupScreen->screenState = 3;
             MarkMenuEventHandled();
             SmXlate_SwitchScreen(8);
             return 0;
         }
         break;
     case 3:
-        if (g_setupScreen->unk460 == 0) {
+        if (g_setupScreen->controllerActivated == 0) {
             Tsmos_ActivateControllerState();
             enabled = 0;
             visibilityWidget = g_setupScreen->widget300;
-            g_setupScreen->unk460 = 1;
+            g_setupScreen->controllerActivated = 1;
             Widget_SetWidgetFlag08(visibilityWidget, enabled);
         }
         break;
     case 4:
         countdown = g_setupScreen;
-        previousCountdown = countdown->unk_3E0;
+        previousCountdown = countdown->countdown;
         decrementedCountdown = previousCountdown - 1;
         if (decrementedCountdown >= 0) {
             clampedCountdown = previousCountdown - (previousCountdown >= decrementedCountdown);
         } else {
             clampedCountdown = 0;
         }
-        countdown->unk_3E0 = clampedCountdown;
+        countdown->countdown = clampedCountdown;
 
-        if ((((ListScreenScreen *) g_setupScreen)->unk_3E0 <= 0) && (SmpFlicker_IsFlickerIdle(g_setupScreen->text3E4) != 0)) {
+        if ((((ListScreenScreen *) g_setupScreen)->countdown <= 0) && (SmpFlicker_IsFlickerIdle(g_setupScreen->text3E4) != 0)) {
             SmpFlicker_RestoreFlickerValue(g_setupScreen->text3E4);
             ScenarioSetup_SetCatalogueAlpha(0xA);
-            g_setupScreen->unk3DC = 9;
+            g_setupScreen->screenState = 9;
         }
         break;
     case 5:
@@ -170,8 +170,8 @@ block_7:
         Widget_SetWidgetFlag08(g_setupScreen->widget301, 0);
         ScenarioSetup_ResetSelectionIndicators();
         ScenarioSetup_SetCatalogueAlpha(0);
-        g_setupScreen->unk3DC = 2;
-        g_setupScreen->unk3E0 = 4;
+        g_setupScreen->screenState = 2;
+        g_setupScreen->stateCountdown = 4;
         Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
         SoundElement_PlayFlatSound(0xE78);
         break;
@@ -180,7 +180,7 @@ block_7:
         catalogueAlpha = transitionStateOrAlpha >> 1;
         ScenarioSetup_SetCatalogueAlpha(catalogueAlpha);
         if (catalogueAlpha < 0xA) {
-            g_setupScreen->unk3DC = 3;
+            g_setupScreen->screenState = 3;
             Random_SetMenuChoiceResult(0xB);
             return 0;
         }
@@ -190,7 +190,7 @@ block_7:
         catalogueAlpha = (catalogueAlpha + 1) * 2;
         if (catalogueAlpha >= 0x42) {
             catalogueAlpha = 0x41;
-            g_setupScreen->unk3DC = 3;
+            g_setupScreen->screenState = 3;
         }
         ScenarioSetup_SetCatalogueAlpha(catalogueAlpha);
         enabled = 1;
@@ -202,9 +202,9 @@ block_7:
     default:
         break;
     }
-    if (g_setupScreen->unk3DC == 3) {
-            updatedPulsePhase = g_setupScreen->unk45C + phaseStep;
-            g_setupScreen->unk45C = updatedPulsePhase;
+    if (g_setupScreen->screenState == 3) {
+            updatedPulsePhase = g_setupScreen->pulsePhase + phaseStep;
+            g_setupScreen->pulsePhase = updatedPulsePhase;
             if (g_selectionMessageReply.value == -1) {
                 if (g_setupScreen->selection == 0) {
                     pulseAlpha = (Math_Cosf((f32) updatedPulsePhase * 0.0033333334f) * 100.0f) + 150.0f;
@@ -249,7 +249,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
             return 0;
         }
         g_setupScreen->widget30C->alpha = 0xFF;
-        g_setupScreen->unk3DC = 9;
+        g_setupScreen->screenState = 9;
         if (g_setupScreen->selection == 0) {
             Widget_SetWidgetFlag08(g_setupScreen->widget30B, 1);
             item = g_setupScreen->widget35D;
@@ -258,48 +258,48 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         Widget_SetWidgetFlag08(g_setupScreen->label, 1);
         Widget_SetWidgetFlag08(g_setupScreen->widget310, 1);
     }
-    switch (g_setupScreen->unk3DC) {
+    switch (g_setupScreen->screenState) {
     case 1:
         g_setupScreen->left->x += (u16)g_setupScreen->leftCount;
         g_setupScreen->right->x -= (u16)g_setupScreen->rightCount;
-        if (--g_setupScreen->unk3E0 <= 0) {
+        if (--g_setupScreen->stateCountdown <= 0) {
             SoundElement_PlayFlatSound(0xE79);
             Widget_SetWidgetFlag08(g_setupScreen->widget301, 1);
             SmpFlicker_StartFlicker(g_setupScreen->text3E4, 4);
-            g_setupScreen->unk3DC = 4;
-            g_setupScreen->unk3E0 = 4;
+            g_setupScreen->screenState = 4;
+            g_setupScreen->stateCountdown = 4;
         }
         break;
     case 2:
         g_setupScreen->left->x -= (u16)g_setupScreen->leftCount;
         g_setupScreen->right->x += (u16)g_setupScreen->rightCount;
-        if (--g_setupScreen->unk3E0 <= 0) {
-            g_setupScreen->unk3DC = 3;
+        if (--g_setupScreen->stateCountdown <= 0) {
+            g_setupScreen->screenState = 3;
             MarkMenuEventHandled();
             SmXlate_SwitchScreen(8);
             return 0;
         }
         break;
     case 3:
-        if (g_setupScreen->unk460 == 0) {
+        if (g_setupScreen->controllerActivated == 0) {
             Tsmos_ActivateControllerState();
-            g_setupScreen->unk460 = 1;
+            g_setupScreen->controllerActivated = 1;
             Widget_SetWidgetFlag08(g_setupScreen->widget300, 0);
         }
         break;
     case 4:
         countdown = g_setupScreen;
-        previous = countdown->unk3E0;
+        previous = countdown->stateCountdown;
         count = previous - 1;
         /* fakematch: preserve the target's comparison-based decrement,
          * which a normal saturating countdown would simplify to max(previous - 1, 0). */
         if (count >= 0) count = previous - (previous >= count);
         else count = 0;
-        countdown->unk3E0 = count;
-        if (g_setupScreen->unk3E0 <= 0 && SmpFlicker_IsFlickerIdle(g_setupScreen->text3E4)) {
+        countdown->stateCountdown = count;
+        if (g_setupScreen->stateCountdown <= 0 && SmpFlicker_IsFlickerIdle(g_setupScreen->text3E4)) {
             SmpFlicker_RestoreFlickerValue(g_setupScreen->text3E4);
             ScenarioSetup_SetCatalogueAlpha(10);
-            g_setupScreen->unk3DC = 9;
+            g_setupScreen->screenState = 9;
         }
         break;
     case 5:
@@ -307,8 +307,8 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         Widget_SetWidgetFlag08(g_setupScreen->widget301, 0);
         ScenarioSetup_ResetSelectionIndicators();
         ScenarioSetup_SetCatalogueAlpha(0);
-        g_setupScreen->unk3DC = 2;
-        g_setupScreen->unk3E0 = 4;
+        g_setupScreen->screenState = 2;
+        g_setupScreen->stateCountdown = 4;
         Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
         SoundElement_PlayFlatSound(0xE78);
         break;
@@ -318,7 +318,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         fade = level >> 1;
         ScenarioSetup_SetCatalogueAlpha(fade);
         if (fade < 10) {
-            g_setupScreen->unk3DC = 3;
+            g_setupScreen->screenState = 3;
             Random_SetMenuChoiceResult(11);
             return 0;
         }
@@ -326,20 +326,20 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
     case 9:
         fade = Node_FindWidgetByResourceId(root, 0x312)->alpha;
         fade = (fade + 1) * 2;
-        if (fade > 65) { fade = 65; g_setupScreen->unk3DC = 3; }
+        if (fade > 65) { fade = 65; g_setupScreen->screenState = 3; }
         ScenarioSetup_SetCatalogueAlpha(fade);
         if (g_setupScreen->selection == 0) Widget_SetWidgetFlag08(g_setupScreen->widget35D, 1);
         break;
     }
-    if (g_setupScreen->unk3DC == 3) {
-        g_setupScreen->unk45C += delta;
+    if (g_setupScreen->screenState == 3) {
+        g_setupScreen->pulsePhase += delta;
         if (g_selectionMessageReply.value == -1) {
             if (g_setupScreen->selection == 0) {
-                alpha = Math_Cosf((f32)g_setupScreen->unk45C * 0.0033333334f) * 100.0f + 150.0f;
+                alpha = Math_Cosf((f32)g_setupScreen->pulsePhase * 0.0033333334f) * 100.0f + 150.0f;
                 item = g_setupScreen->widget35D;
                 item->alpha = (u32)alpha;
             } else {
-                alpha = Math_Cosf((f32)g_setupScreen->unk45C * 0.0033333334f) * 100.0f + 150.0f;
+                alpha = Math_Cosf((f32)g_setupScreen->pulsePhase * 0.0033333334f) * 100.0f + 150.0f;
                 item = g_setupScreen->item;
                 item->alpha = (u32)alpha;
             }
@@ -823,7 +823,7 @@ void ScenarioSetup_ResetSelectionIndicators(void) {
     g_setupScreen->widget2FE->alpha = 0xFF;
     Widget_SetWidgetFlag08(g_setupScreen->widget2FE, 1);
     Widget_SetWidgetFlag08(g_setupScreen->widget308, 1);
-    g_setupScreen->unk46C = 0;
+    g_setupScreen->reservedWord3 = 0;
 }
 
 extern void Defs_SetBitValue(void *, s32, s32);
@@ -856,7 +856,7 @@ s32 ScenarioSetup_ReturnSetupEventZeroAlt(void) {
 /** Begin setup confirmation when the pending state and input event permit it. */
 s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 {
-    s32 v = g_setupScreen->unk3DC;
+    s32 v = g_setupScreen->screenState;
 
     if (v != 3) {
         return 0;
@@ -872,7 +872,7 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
     }
 
     MarkMenuEventHandled();
-    g_setupScreen->unk3DC = 8;
+    g_setupScreen->screenState = 8;
     ScenarioSetup_SetCatalogueAlpha(0x41);
 
     Widget_SetWidgetFlag08(g_setupScreen->widget30B, 0);
@@ -978,8 +978,8 @@ moved:
     }
     SoundElement_PlayFlatSound(0xE7D);
     ScenarioSetup_ResetSelectionIndicators();
-    g_setupScreen->unk45C = 0;
-    g_setupScreen->unk464 = 0;
+    g_setupScreen->pulsePhase = 0;
+    g_setupScreen->reservedWord1 = 0;
     g_setupScreen->item->alpha = 0x41;
     ScenarioSetup_RefreshSelectedArenaLabel();
     Widget_SetWidgetFlag08(g_setupScreen->widget30B, 0);
@@ -1079,9 +1079,9 @@ s32 ScenarioSetup_SelectNextCatalogueCategory(void *unused0, void *unused1, void
 
 s32 ScenarioSetup_EndSetupInput(void) {
     MarkMenuEventHandled();
-    if (g_setupScreen->unk3DC == 3) {
-        g_setupScreen->unk3DC = 5;
-        g_setupScreen->unk3E0 = 4;
+    if (g_setupScreen->screenState == 3) {
+        g_setupScreen->screenState = 5;
+        g_setupScreen->stateCountdown = 4;
         return 0;
     }
     return 0;
@@ -1089,14 +1089,14 @@ s32 ScenarioSetup_EndSetupInput(void) {
 
 /* Calls ScenarioSetup_StartSelectedScenario while the setup screen g_setupScreen is in mode 3, and returns zero. */
 s32 ScenarioSetup_RefreshSetupScreen(void) {
-    if (g_setupScreen->unk3DC == 3) {
+    if (g_setupScreen->screenState == 3) {
         ScenarioSetup_StartSelectedScenario();
         return 0;
     }
     return 0;
 }
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_scenarioCatalogueEventIds, an actor kind at g_scenarioCatalogueEventActorKinds and a handler at g_scenarioCatalogueEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_scenarioCatalogueEventIds, an actor kind at g_scenarioCatalogueEventActorKinds and a handler at g_scenarioCatalogueEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*ScenarioCatalogueEventHandler)(void *, s32, s32, s32, s32);
 
@@ -1479,7 +1479,7 @@ void ScenarioSetup_SortResultsPlayers(void) {
 }
 
 #ifdef NON_MATCHING
-/* Looks up entry arg1 of the table chosen by arg0 and returns field 0xC of the first of the forty records at g_scenarioCatalogueWidgetPairs whose first word equals it, or zero. */
+/* Looks up entry arg1 of the table chosen by gameMode and returns field 0xC of the first of the forty records at g_scenarioCatalogueWidgetPairs whose first word equals it, or zero. */
 
 /* Sets the byte at offset 0x10 of the two objects at offsets 0x454 and 0x450 of the structure g_setupScreen
    points to to 0xFF, shows both through Widget_SetWidgetFlag08_EquipActivateequipmentpanel and clears the word at 0x46C. */

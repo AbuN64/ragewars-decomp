@@ -60,12 +60,12 @@ s32 CPolyCollision_TraceBoxFaces(void *ray, void *unusedPlatform, void *corners,
     s32 result;
 
     result = 0;
-    if (((struct PlatformMovementView *) ray)->unk_60 > 0.0f) {
+    if (((struct PlatformMovementView *) ray)->movementY > 0.0f) {
         *quad = 2;
         Plane_BuildBoxFace1(quad, corners);
         result = CCollision_TestSegmentPolygon(ray, quad, 1);
     }
-    if ((((struct PlatformMovementView *) ray)->unk_5C != 0.0f) || (((struct PlatformMovementView *) ray)->unk_64 != 0.0f)) {
+    if ((((struct PlatformMovementView *) ray)->movementX != 0.0f) || (((struct PlatformMovementView *) ray)->movementZ != 0.0f)) {
         *quad = 3;
         Plane_BuildBoxFace2(quad, corners);
         result |= CCollision_TestSegmentPolygon(ray, quad, 1);
@@ -76,7 +76,7 @@ s32 CPolyCollision_TraceBoxFaces(void *ray, void *unusedPlatform, void *corners,
         Plane_BuildBoxFace5(quad, corners);
         result |= CCollision_TestSegmentPolygon(ray, quad, 1);
     }
-    if (((struct PlatformMovementView *) ray)->unk_60 < 0.0f) {
+    if (((struct PlatformMovementView *) ray)->movementY < 0.0f) {
         *quad = 9;
         Plane_BuildBoxFace0(quad, corners);
         result |= CCollision_TestSegmentPolygon(ray, quad, 1);
@@ -91,17 +91,17 @@ s32 CPolyCollision_TraceCylinderFaces(void *ray, void *platform, void *corners, 
 
     hitFound = 0;
     point = platform + 8;
-    radius = ((struct PlatformHeightView *) ((struct ActorDefinitionPointerView *) platform)->definition)->unk_1C + ((struct PlatformRadiusMovementView *) ray)->unk_C;
-    if ((((struct PlatformRadiusMovementView *) ray)->unk_5C != 0.0f) || (((struct PlatformRadiusMovementView *) ray)->unk_64 != 0.0f)) {
+    radius = ((struct PlatformHeightView *) ((struct ActorDefinitionPointerView *) platform)->definition)->cylinderRadius + ((struct PlatformRadiusMovementView *) ray)->radius;
+    if ((((struct PlatformRadiusMovementView *) ray)->movementX != 0.0f) || (((struct PlatformRadiusMovementView *) ray)->movementZ != 0.0f)) {
         *contactPolygon = 3;
-        hitFound = CCollision_TestRayCylinder(ray, point, radius, ((struct PlatformActivityPhaseView *) corners)->unk4, ((struct PlatformActivityPhaseView *) corners)->unk34, 1, contactPolygon, 1);
+        hitFound = CCollision_TestRayCylinder(ray, point, radius, ((struct PlatformActivityPhaseView *) corners)->top, ((struct PlatformActivityPhaseView *) corners)->bottom, 1, contactPolygon, 1);
     }
-    if (((struct PlatformRadiusMovementView *) ray)->unk_60 > 0.0f) {
+    if (((struct PlatformRadiusMovementView *) ray)->movementY > 0.0f) {
         *contactPolygon = 2;
         Plane_BuildBoxFace1(contactPolygon, corners);
         hitFound |= CCollision_TestSegmentDisk(ray, contactPolygon, point, radius, 1);
     }
-    if (((struct PlatformRadiusMovementView *) ray)->unk_60 < 0.0f) {
+    if (((struct PlatformRadiusMovementView *) ray)->movementY < 0.0f) {
         *contactPolygon = 9;
         Plane_BuildBoxFace0(contactPolygon, corners);
         hitFound |= CCollision_TestSegmentDisk(ray, contactPolygon, point, radius, 1);

@@ -24,14 +24,14 @@ s32 Nav_UpdateRouteIntermediateGoal(NavigationRouteControllerView *owner) {
 
     base = &g_navigationGraph;
     if (base != 0) {
-        if (owner->field10 == -1) {
+        if (owner->destinationNode == -1) {
             return 1;
         }
-        if (owner->field4 == owner->field10) {
+        if (owner->currentNode == owner->destinationNode) {
             return 1;
         }
-        if (Route_GetRouteRelation(base, owner->field4, owner->field10) == 0) {
-            owner->fieldC = Portal_SearchRelatedGoalPath(base, owner->field4, owner->field10, owner);
+        if (Route_GetRouteRelation(base, owner->currentNode, owner->destinationNode) == 0) {
+            owner->requestedGoalNode = Portal_SearchRelatedGoalPath(base, owner->currentNode, owner->destinationNode, owner);
         }
     }
     return 1;
@@ -47,7 +47,7 @@ void Nav_SetLinkedActorNodeCosts(char *actor) {
         for (i = 0; i < 10; i++) {
             Actor1DC *a = ((struct NavigationActorListEntryView *) (actor + (i * 4)))->actor;
             if (a != 0) {
-                ((struct NavigationNodeCostView *) Portal_FindSearchNode(table, ((struct ResourceKeyView *) ((NavigationActorSearchStateView *) a->info)->unk_1454)->key))->cost = value;
+                ((struct NavigationNodeCostView *) Portal_FindSearchNode(table, ((struct ResourceKeyView *) ((NavigationActorSearchStateView *) a->info)->resourceKeyRecord)->key))->cost = value;
             }
         }
     }

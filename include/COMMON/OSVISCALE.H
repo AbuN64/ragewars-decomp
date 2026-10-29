@@ -74,9 +74,9 @@ struct VideoContextEventView;
 
 struct ViVerticalScaleView;
 struct ViVerticalScaleView {
-    u16 unk_0;
+    u16 state;
     unsigned char padding_2[34];
-    f32 unk_24;
+    f32 yScaleFactor;
 };
 
 struct OSViMode;

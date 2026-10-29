@@ -331,12 +331,12 @@ void Playerai_CreditDamageSource(TransientDamagePlayerView *damagedPlayer, Trans
     }
     if (creditedPlayer != 0) {
         if (creditedPlayer->computerControlled != 0) {
-            difficulty = creditedPlayer->profile->unk93;
+            difficulty = creditedPlayer->profile->difficulty;
             switch (difficulty) { /* irregular */
             case 2:
                 break;
             default:
-                creditedPlayer->profile->unk93 = 0U;
+                creditedPlayer->profile->difficulty = 0U;
                 /* fallthrough */
             case 0:
                 scaledDamage = (f32) damagePacket->amount * g_playerDamagePrimaryFixedPointScale;
@@ -351,7 +351,7 @@ void Playerai_CreditDamageSource(TransientDamagePlayerView *damagedPlayer, Trans
             }
         }
         { CGameStatus *state=(&g_gameSettings.counters);
-        if ((state->teams != 0) && (((unsigned char *)state)[-0x5B0] == 0) && ((creditedPlayer->computerControlled == 0) || (damagedPlayer->computerControlled == 0)) && (damagedPlayer->profile->unk92 == creditedPlayer->profile->unk92)) {
+        if ((state->teams != 0) && (((unsigned char *)state)[-0x5B0] == 0) && ((creditedPlayer->computerControlled == 0) || (damagedPlayer->computerControlled == 0)) && (damagedPlayer->profile->reservedByte == creditedPlayer->profile->reservedByte)) {
             damagePacket->amount = 0;
         }}
     }
@@ -390,8 +390,8 @@ void Playerai_UpdatePlayerRenderResources(struct CPlayerPool_t *playerPool, void
     node = playerPool->m_ActiveList.head;
     if (node != 0) {
         do {
-            ((TransientPlayerResetView *)(node))->unk_70 = 0;
-            ((TransientPlayerResetView *)(node))->unk_358 = 0;
+            ((TransientPlayerResetView *)(node))->floorClearance = 0;
+            ((TransientPlayerResetView *)(node))->scanClearedWord = 0;
             if (InstHdr_CanActorReceiveInteraction(node) != 0) {
                 if (node) {
                     count1 = ((TransientPlayerWorldCounts *)(world))->itemCount1;
@@ -400,17 +400,17 @@ void Playerai_UpdatePlayerRenderResources(struct CPlayerPool_t *playerPool, void
                 }
                 if (count1 != 0x200) {
                     scale = 4;
-                    ((TransientWorldPlayerSlotView *)(((s32)world + count1 * scale)))->unk_144 = node;
+                    ((TransientWorldPlayerSlotView *)(((s32)world + count1 * scale)))->itemSlots = node;
                     ((TransientPlayerWorldCounts *)(world))->itemCount1 = count1 + 1;
                 }
                 count1 = 0xB48;
                 count2 = ((IntegerStateB4C *)world)->itemCount2;
                 if (count2 != 0x80) {
-                    ((struct TransientWorldItemSlotView *) (entry = (char *) (((s32) world) + (count2 * 4))))->unk_948 = node;
+                    ((struct TransientWorldItemSlotView *) (entry = (char *) (((s32) world) + (count2 * 4))))->secondItemSlots = node;
                     ((IntegerStateB4C *)world)->itemCount2 = count2 + 1;
                 }
             }
-            node = ((TransientPlayerResetView *)(node))->unk_16E0;
+            node = ((TransientPlayerResetView *)(node))->nextPlayer;
         } while (node != 0);
     }
 }
@@ -477,7 +477,7 @@ void Playerai_DrawViewPlayer(void *world, void *view) {
 #endif
 }
 
-/* Notifies the entity list associated with arg0 about arg1 and calls a handler for each owner. */
+/* Notifies the entity list associated with roundContext about entity and calls a handler for each owner. */
 void Playerai_UpdateViewPlayerProjection(void *roundContext, void *entity) {
     Round *round = roundContext;
     Shared_ActorView *viewPlayer;

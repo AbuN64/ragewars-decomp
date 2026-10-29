@@ -224,7 +224,7 @@ char *Timer_GetPromptText(struct Shared_PakMenu *menu) {
         Pak_GetPromptChannel(menu, &channel);
         text = Pak_GetChannelPrompt(channel);
     } else if (g_pakProfileLoadActive != 0) {
-        text = D_0044FFA4;
+        text = g_controllerPakNotReadyDialogResource;
         if (g_pakProfileLoadMode_de != 0) {
             text = g_pakStatusPromptAlternate;
         }

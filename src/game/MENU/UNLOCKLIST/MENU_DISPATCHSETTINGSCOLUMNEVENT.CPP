@@ -7,9 +7,9 @@
 
 #if defined(VERSION_DE)
 #if defined(VERSION_DE)
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_settingsColumnEventIds, an actor kind at g_settingsColumnEventKinds and a handler at g_settingsColumnEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_settingsColumnEventIds, an actor kind at g_settingsColumnEventKinds and a handler at g_settingsColumnEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 #else
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_scrollingChoiceEventIds, an actor kind at g_scrollingChoiceEventKinds and a handler at g_settingsColumnEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_scrollingChoiceEventIds, an actor kind at g_scrollingChoiceEventKinds and a handler at g_settingsColumnEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 #endif
 
 

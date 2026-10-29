@@ -16,7 +16,7 @@ struct PakNoteBrowserContext {
 };
 struct PlayerPakTimerView {
     unsigned char padding_0[1548];
-    s32 unk_60C;
+    s32 trailerValue;
 };
 struct PakNoteTextEntry {
     s32 id;

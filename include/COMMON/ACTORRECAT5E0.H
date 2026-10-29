@@ -9,7 +9,7 @@ struct SnapshotActorView {
     Triple position;
     s32 id;
     char pad18[0x6C - 0x18];
-    f32 field6C;
+    f32 yaw;
     char pad70[0x5E0 - 0x70];
     Block70 block;
     char pad650[0x16E8 - 0x650];

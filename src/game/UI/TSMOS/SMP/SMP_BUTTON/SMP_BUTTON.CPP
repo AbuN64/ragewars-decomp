@@ -39,14 +39,14 @@ extern void *Cache_AllocateMemory(s32 size);
 
 extern u8 *XPlus_CopyString(u8 *, u8 *);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_listButtonEventIds, an actor kind at g_listButtonEventActorKinds and a handler at g_listButtonEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_listButtonEventIds, an actor kind at g_listButtonEventActorKinds and a handler at g_listButtonEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
 
 
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
+/* Draws the child at 0x8 of window widget with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
 
 
@@ -111,14 +111,14 @@ MenuListWidget *SmpButton_CreateListWidget(s32 listWidgetId, s32 itemWidgetId) {
     result = Cache_AllocateMemory(0x118);
     XPlus_FillBytes(result, 0, 0x118);
     *(Header44 *)result = *(Header44 *)source;
-    result->field_0E = 0xB64;
+    result->widgetKind = 0xB64;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     child = Node_FindWidgetByResourceId(context, itemWidgetId & 0xFFFF);
     result->owner = child;
     result->index = 0;
     result->count = 0;
     Node_WrapNodeInParent(source, result);
-    source->field_0C = -1;
+    source->activeKind = -1;
     Node_ReplaceNodeRefs(context, source, result);
     return result;
 }
@@ -295,10 +295,10 @@ void SmpButton_WrapButtonWidget(s32 widgetResourceId) {
     result = Cache_AllocateMemory(0x44);
     XPlus_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
-    result->field_0E = 0xB61;
+    result->kind = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     Node_WrapNodeInParent(source, result);
-    source->field_0C = -1;
+    source->resource = -1;
     Node_ReplaceNodeRefs(context, source, result);
 }
 
@@ -306,17 +306,17 @@ void SmpButton_EnsureButtonWrapper(RecordSmpButtonEnsureButtonWrapper *source) {
     void *context;
     RecordSmpButtonEnsureButtonWrapper *result;
 
-    if (source->field_0E == 0xB61) {
+    if (source->kind == 0xB61) {
         return;
     }
     context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x44);
     XPlus_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
-    result->field_0E = 0xB61;
+    result->kind = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     Node_WrapNodeInParent(source, result);
-    source->field_0C = -1;
+    source->resource = -1;
     Node_ReplaceNodeRefs(context, source, result);
 }
 

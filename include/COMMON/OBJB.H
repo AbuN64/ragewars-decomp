@@ -176,12 +176,12 @@ typedef struct MenuEntryPoolCountView MenuEntryPoolCountView;
 
 struct Floats;
 struct Floats {
-    f32 unk0;
-    f32 unk4;
-    f32 unk8;
-    f32 unkC;
-    f32 unk10;
-    f32 unk14;
+    f32 reservedFloat;
+    f32 floatAt4;
+    f32 floatAt8;
+    f32 floatAtC;
+    f32 floatAt10;
+    f32 floatAt14;
 };
 
 

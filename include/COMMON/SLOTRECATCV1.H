@@ -162,7 +162,7 @@ struct ArchiveTextureEntry {
     s16 width;
     s16 height;
     s16 paletteCount;
-    s32 unk10;
+    s32 reservedWord;
     s32 pixelOffset;
     s32 paletteOffset;
 };

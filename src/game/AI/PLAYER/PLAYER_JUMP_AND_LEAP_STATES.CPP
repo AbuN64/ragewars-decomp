@@ -213,12 +213,12 @@ set_value:
 }
 
 void Player_BeginLateralLeap(void *movementState, void *actorMotion) {
-    if ((((struct PlayerStrafeVelocityView *) ((s8 *) movementState))->unk_6A4) < 0.0f) {
-        (((struct PlayerStrafeVelocityView *) ((s8 *) movementState))->unk_6C4) = (f32) g_playerLateralLeapNegativeInputSpeed;
+    if ((((struct PlayerStrafeVelocityView *) ((s8 *) movementState))->strafe) < 0.0f) {
+        (((struct PlayerStrafeVelocityView *) ((s8 *) movementState))->lateralLeapSpeed) = (f32) g_playerLateralLeapNegativeInputSpeed;
     } else {
-        (((struct PlayerStrafeVelocityView *) ((s8 *) movementState))->unk_6C4) = (f32) g_playerLateralLeapPositiveInputSpeed;
+        (((struct PlayerStrafeVelocityView *) ((s8 *) movementState))->lateralLeapSpeed) = (f32) g_playerLateralLeapPositiveInputSpeed;
     }
-    (((struct PlayerMovementScalarView *) ((s8 *) actorMotion))->unk20) = (f32) g_playerLateralLeapInitialVerticalSpeed;
+    (((struct PlayerMovementScalarView *) ((s8 *) actorMotion))->scalar) = (f32) g_playerLateralLeapInitialVerticalSpeed;
 }
 
 void Player_UpdateLateralLeap(void *player, LevelActor *actor) {
