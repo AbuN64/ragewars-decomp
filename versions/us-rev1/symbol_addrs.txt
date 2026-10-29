@@ -3400,7 +3400,6 @@ g_profilePlayerAnimationChoices = 0x800E5DFA; // rom:0xE69FA
 g_profileGameSpeedSelection = 0x800E5E48; // rom:0xE6A48
 g_multiplayerItemRenderState = 0x800E5E70; // rom:0xE6A70
 g_menuFontStyles = 0x800E5E74; // rom:0xE6A74
-g_debugMenuLocalizedLabelStorageEu = 0x800E5F87; // rom:0xE6B87
 g_textureVariationBypassEnabledLabels = 0x800E6058; // rom:0xE6C58
 g_textureVariationBypassDisabledLabels = 0x800E6074; // rom:0xE6C74
 g_ownerModeOneText = 0x800E6090; // rom:0xE6C90

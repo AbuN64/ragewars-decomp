@@ -711,7 +711,6 @@ g_signedRemainderLeadingZeroTable_StorageWords = 0x800CD050;
 g_longLongHighWordUnsignedBias_StorageWords = 0x800CD350;
 g_LibsnInitializepollinghostDataEncodedWords = 0x800CD394;
 k_TurretConstructDataEncodedWords = 0x800CD3C0;
-D_blob_96d79d4199c526c371fb = 0x800CD3E0;
 g_LibultraEncodedWordsBlock6 = 0x800CD3EC;
 g_LibultraEncodedWordsBlock12 = 0x800CD3F4;
 k_ActionActivatebreakablestateDataZeroWords = 0x800CD4C0;

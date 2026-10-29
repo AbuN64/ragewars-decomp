@@ -1,6 +1,5 @@
 #include "include_asm.h"
 #include "MENU/MENU_BOX.H"
-#include "DATA/OVL1_J/G_MENUBOXCORNERS.H"
 
 /* GMenuboxcornersWords1.CPP */
 /* ROM-grounded data: rodata/writable/800E5E48 */
@@ -60,11 +59,11 @@ MenuBoxCorner g_menuBoxCorners[8] = {
 };
 unsigned int g_GMenuboxcornersLevelTextWords1[45] = {
     0x00000000, 0x00000000, 0xC4098000, 0x20203A20, 0x6C657665, 0x6C202020, 0x20202020, 0x20203A20,
-    0x20202020, 0x20000000, (unsigned int)g_debugMenuLabelStorageDe + 0x1C, 0x6C6F6420, 0x63686720, 0x64697374, 0x20203A20, 0x20202020,
-    0x20000000, (unsigned int)g_debugMenuLabelStorageDe + 0x38, 0x676C6F62, 0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000,
-    (unsigned int)g_debugMenuLabelStorageDe + 0x54, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_debugMenuLabelStorageDe + 0x70,
+    0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords1 + 0x10, 0x6C6F6420, 0x63686720, 0x64697374, 0x20203A20, 0x20202020,
+    0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords1 + 0x2C, 0x676C6F62, 0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000,
+    (unsigned int)g_GMenuboxcornersLevelTextWords1 + 0x48, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_GMenuboxcornersLevelTextWords1 + 0x64,
     0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
-    0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLabelStorageDe + 0x8C,
+    0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords1 + 0x80,
 };
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
@@ -95,11 +94,11 @@ MenuBoxCorner g_menuBoxCorners[8] = {
 };
 unsigned int g_GMenuboxcornersOurclevelTextWords1[45] = {
     0x00000000, 0x00000000, 0xC4098000, 0x6F757263, 0x6C657665, 0x6C202020, 0x20202020, 0x20203A20,
-    0x20202020, 0x20000000, (unsigned int)g_debugMenuLabelPrefixStorageUs + 0x8C, 0x6C6F6420, 0x63686720, 0x64697374, 0x20203A20, 0x20202020,
-    0x20000000, (unsigned int)g_debugMenuLabelSuffixStorageUs + 0xC, 0x676C6F62, 0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000,
-    (unsigned int)g_debugMenuLabelSuffixStorageUs + 0x28, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_debugMenuLabelSuffixStorageUs + 0x44,
+    0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersOurclevelTextWords1 + 0x10, 0x6C6F6420, 0x63686720, 0x64697374, 0x20203A20, 0x20202020,
+    0x20000000, (unsigned int)g_GMenuboxcornersOurclevelTextWords1 + 0x2C, 0x676C6F62, 0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000,
+    (unsigned int)g_GMenuboxcornersOurclevelTextWords1 + 0x48, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_GMenuboxcornersOurclevelTextWords1 + 0x64,
     0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
-    0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLabelSuffixStorageUs + 0x60,
+    0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersOurclevelTextWords1 + 0x80,
 };
 #endif
 #endif
@@ -144,20 +143,19 @@ MenuBoxCorner g_menuBoxCorners[8] = {
 };
 unsigned int g_GMenuboxcornersLevelTextWords2[59] = {
     0x00000000, 0x00000000, 0xC4098000, 0x6C657665, 0x6C202020, 0x20202020, 0x20203A20, 0x20202020,
-    0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xB0, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xB0, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xB0, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xB0, 0x6C6F6420, 0x63686720, 0x64697374,
-    0x20203A20, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xD8, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xD8, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xD8, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0xD8, 0x676C6F62,
-    0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x100, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x100, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x100,
-    (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x100, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x128,
-    (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x128, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x128, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x128, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
-    0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x150,
-    (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x150, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x150, (unsigned int)g_debugMenuLocalizedLabelStorageEuX + 0x150,
+    0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0xC, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0xC, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0xC, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0xC, 0x6C6F6420, 0x63686720, 0x64697374,
+    0x20203A20, 0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x34, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x34, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x34, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x34, 0x676C6F62,
+    0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x5C, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x5C, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x5C,
+    (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x5C, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x84,
+    (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x84, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x84, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0x84, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
+    0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0xAC,
+    (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0xAC, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0xAC, (unsigned int)g_GMenuboxcornersLevelTextWords2 + 0xAC,
 };
 #endif
 #endif
 
 #if defined(VERSION_EU)
 #if defined(VERSION_EU)
-extern char g_debugMenuLocalizedLabelStorageEu[];
 unsigned int g_floatRecordWordsEu[189] = {
     0x00000000, 0x41900000, 0x41C00000, 0x3F400000, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000001,
     0x41040000, 0x41200000, 0x3F2CCCCC, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000000, 0x412CCCCD,
@@ -196,13 +194,13 @@ MenuBoxCorner g_menuBoxCorners[8] = {
 };
 unsigned int g_GMenuboxcornersLevelTextWords3[59] = {
     0x00000000, 0x00000000, 0xC4098000, 0x6C657665, 0x6C202020, 0x20202020, 0x20203A20, 0x20202020,
-    0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xB5, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xB5, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xB5, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xB5, 0x6C6F6420, 0x63686720, 0x64697374,
-    0x20203A20, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xDD, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xDD, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xDD, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0xDD, 0x676C6F62,
-    0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x105, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x105, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x105,
-    (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x105, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x12D,
-    (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x12D, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x12D, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x12D, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
-    0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x155,
-    (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x155, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x155, (unsigned int)g_debugMenuLocalizedLabelStorageEu + 0x155,
+    0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0xC, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0xC, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0xC, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0xC, 0x6C6F6420, 0x63686720, 0x64697374,
+    0x20203A20, 0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x34, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x34, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x34, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x34, 0x676C6F62,
+    0x616C2073, 0x63616C65, 0x72203A20, 0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x5C, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x5C, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x5C,
+    (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x5C, 0x6D757369, 0x63202020, 0x20202020, 0x20203A20, 0x206E6F6E, 0x65000000, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x84,
+    (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x84, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x84, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0x84, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020,
+    0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20202020, 0x20000000, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0xAC,
+    (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0xAC, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0xAC, (unsigned int)g_GMenuboxcornersLevelTextWords3 + 0xAC,
 };
 #endif
 #endif

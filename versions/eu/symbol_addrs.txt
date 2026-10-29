@@ -3022,7 +3022,6 @@ g_profilePlayerAnimationChoices = 0x800F246A; // rom:0xF306A
 g_profileGameSpeedSelection = 0x800F24B8; // rom:0xF30B8
 g_multiplayerItemRenderState = 0x800F24E0; // rom:0xF30E0
 g_menuFontStyles = 0x800F24E4; // rom:0xF30E4
-g_debugMenuLocalizedLabelStorageEu = 0x800F28EB; // rom:0xF34EB
 g_menuSavedAudioSelection = 0x800F2A80; // rom:0xF3680
 g_musicPreviewMenuActive = 0x800F2A84; // rom:0xF3684
 g_menuMusicPreviewSelection = 0x800F2A88; // rom:0xF3688
