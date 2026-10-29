@@ -161,10 +161,10 @@ unsigned int System_RunPiManager_padding_BF098[2] = {
 };
 #endif
 #if VERSION_EU
-INCLUDE_DATA("game_code", System_RunPiManager_padding_BA248);
+unsigned int System_RunPiManager_padding_BA248[2] = { 0xAFB00018, 0x00808021 };
 #endif
 #if VERSION_DE
-INCLUDE_DATA("game_code", System_RunPiManager_padding_B9FA8);
+unsigned int System_RunPiManager_padding_B9FA8[2] = { 0x00808021, 0xAFB10014 };
 #endif
 
 #endif

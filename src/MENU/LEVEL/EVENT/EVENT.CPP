@@ -78,14 +78,14 @@ void *Level_GetScreenEventTable(s32 id) {
     }
 }
 #if VERSION_US
-INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_us);
+unsigned int g_screenEventTablePadding_us[1] = { 0x6B540000 };
 #endif
 #if VERSION_EU_X
-INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_eu_x);
+unsigned int g_screenEventTablePadding_eu_x[1] = { 0x00431025 };
 #endif
 #if VERSION_EU
-INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_eu);
+unsigned int g_screenEventTablePadding_eu[1] = { 0x3C03800F };
 #endif
 #if VERSION_DE
-INCLUDE_DATA("ovl_frontendMenu", g_screenEventTablePadding_de);
+unsigned int g_screenEventTablePadding_de[1] = { 0x3C020001 };
 #endif

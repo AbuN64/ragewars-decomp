@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 #if defined(VERSION_EU)
-INCLUDE_RODATA("game_data", k_systemRunPiManagerJumpTableTrailingWord);
+const unsigned int k_systemRunPiManagerJumpTableTrailingWord = 0x41800000U;
 #endif
 
 const unsigned char s_epirawreadExText[3] = {

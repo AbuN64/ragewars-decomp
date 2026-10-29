@@ -105,5 +105,5 @@ s32 Setup_HasActiveGameCounters(void) {
     return ret;
 }
 #if VERSION_US
-INCLUDE_DATA("ovl_frontendMenu", func_8044609C_us_padding_1AA09C);
+unsigned int func_8044609C_us_padding_1AA09C[1] = { 0x43436163 };
 #endif

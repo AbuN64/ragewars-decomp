@@ -65,14 +65,14 @@ s32 Frontend_GetMenuImageState(s32 *record) {
     return record[0x18 / 4];
 }
 #if VERSION_EU
-INCLUDE_DATA("ovl_frontendMenu", Frontend_GetMenuImageState_padding_eu);
+unsigned int Frontend_GetMenuImageState_padding_eu[3] = { 0xAC83000C, 0x2403FFFF, 0xAC830010 };
 #endif
 #if VERSION_EU_X
-INCLUDE_DATA("ovl_frontendMenu", Menu_GetLocalizedEncodedResource_padding_eu_x);
+unsigned int Menu_GetLocalizedEncodedResource_padding_eu_x[3] = { 0x8C42C20C, 0x30420002, 0x10400004 };
 #endif
 #if VERSION_DE
-INCLUDE_DATA("ovl_frontendMenu", Frontend_GetMenuImageState_padding_de);
+unsigned int Frontend_GetMenuImageState_padding_de[3] = { 0x3C020043, 0x244260EC, 0x03E00008 };
 #endif
 #if VERSION_US
-INCLUDE_DATA("ovl_frontendMenu", Frontend_GetMenuImageState_padding_us);
+unsigned int Frontend_GetMenuImageState_padding_us[3] = { 0x2E313133, 0x66616B65, 0x042E656F };
 #endif
