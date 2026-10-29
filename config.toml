@@ -286,3 +286,23 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
+[file."src/MULTI/SLOTS/PLAYERSLOTS_COUNTLIVE.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/MULTI/SLOTS/PLAYERSLOTS_COUNTOCCUPIED.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/MULTI/SLOTS/PLAYERSLOTS_FINDSTAGEDWHENIDLE.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true

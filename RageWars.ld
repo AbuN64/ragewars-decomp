@@ -26308,6 +26308,16 @@ SECTIONS
         src/DATA/OVERLAYS/TEN/RESOURCES/K_RESOURCESENCODEDWORDSBLOCK4.CPP.o(.data);
         . = MAX(., 0x3CAF4);
         src/DATA/OVERLAY_CODE_IMAGE/OVERLAY_CODE_IMAGE.CPP.o(.data);
+        . = MAX(., 0x3CC1C);
+        src/MULTI/SLOTS/PLAYERSLOTS_COUNTLIVE.CPP.o(.text);
+        . = MAX(., 0x3CD48);
+        src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o(.text);
+        . = MAX(., 0x3CE34);
+        src/MULTI/SLOTS/PLAYERSLOTS_COUNTOCCUPIED.CPP.o(.text);
+        . = MAX(., 0x3CEE0);
+        src/MULTI/SLOTS/PLAYERSLOTS_FINDSTAGEDWHENIDLE.CPP.o(.text);
+        . = MAX(., 0x3D088);
+        src/DATA/OVERLAY_CODE_IMAGE/OVERLAY_CODE_IMAGE_TAIL.CPP.o(.data);
 #endif
 #if defined(VERSION_US_REV1)
         . = ALIGN(8) /* sdk/libsn/io_hostmemory/io_hostmemory.CPP.o */;
@@ -33441,6 +33451,11 @@ SECTIONS
         sdk/libsn/nav_isballisticarcobstructed_data.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/TEN/RESOURCES/K_RESOURCESENCODEDWORDSBLOCK4.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAY_CODE_IMAGE/OVERLAY_CODE_IMAGE.CPP.o(.bss .sbss COMMON);
+        src/MULTI/SLOTS/PLAYERSLOTS_COUNTLIVE.CPP.o(.bss .sbss COMMON);
+        src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o(.bss .sbss COMMON);
+        src/MULTI/SLOTS/PLAYERSLOTS_COUNTOCCUPIED.CPP.o(.bss .sbss COMMON);
+        src/MULTI/SLOTS/PLAYERSLOTS_FINDSTAGEDWHENIDLE.CPP.o(.bss .sbss COMMON);
+        src/DATA/OVERLAY_CODE_IMAGE/OVERLAY_CODE_IMAGE_TAIL.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_US_REV1)
         sdk/libsn/io_hostmemory/io_hostmemory.CPP.o(.bss .sbss COMMON);
