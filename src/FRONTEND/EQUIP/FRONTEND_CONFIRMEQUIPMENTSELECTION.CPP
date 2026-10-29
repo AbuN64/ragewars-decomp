@@ -39,7 +39,7 @@ s32 Frontend_ConfirmEquipmentSelection(void *unused0, void *unused1, s32 event) 
             screen = g_equipmentAndResultsScreen;
             screen->state = 5;
             screen->next = 4;
-            switch (settings[-0xC3]) {
+            switch (settings[-195]) {
             case 0: delay = 20; break;
             case 3: delay = 10; break;
             case 2: delay = 15; break;

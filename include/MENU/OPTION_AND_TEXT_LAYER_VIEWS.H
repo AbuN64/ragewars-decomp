@@ -12,7 +12,7 @@ typedef struct MenuOption {
     s32 resource;
 } MenuOption;
 typedef struct MenuOptionFade {
-    u8 unobserved0[0x30];
+    u8 unobserved0[48];
     f32 fade;
     f32 alpha;
     s32 reservedWord;

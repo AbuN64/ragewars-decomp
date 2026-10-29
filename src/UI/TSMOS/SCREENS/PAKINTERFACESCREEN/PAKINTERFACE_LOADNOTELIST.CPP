@@ -51,7 +51,7 @@ static const char controller_pak_note_label_format[] = "%d.%s.%s";
 
 void PAKInterface_LoadNoteList(s32 player)
 {
-    char name[0x18];
+    char name[24];
     u8 ext[8];
     char extra1[8];
     char extra2[8];

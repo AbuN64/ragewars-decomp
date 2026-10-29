@@ -27,284 +27,284 @@ extern s32 g_pakDialogProbeStateEuX;
 extern s32 g_pakDialogProbeStateUsRev1;
 #endif
 #if defined(VERSION_DE)
-enum { SETUP_LABEL_ID = 0x281 };
-enum { PANEL_ROOT_ID = 0x2E1 };
-enum { PANEL_TEXT_ID = 0x2E3 };
-enum { MODE_DEFAULT_ID = 0x35E };
-enum { MODE_17_ID = 0x362 };
-enum { MODE_2_ID = 0x360 };
-enum { MODE_3_ID = 0x361 };
-enum { MODE_46_ID = 0x363 };
-enum { MODE_5_ID = 0x35F };
-enum { MODE_HIDE_ID = 0x2E2 };
-enum { SLOT_DEFAULT_ID = 0x28C };
-enum { SLOT_1_ID = 0x28E };
-enum { SLOT_2_ID = 0x290 };
-enum { SLOT_3_ID = 0x292 };
-enum { CHECK_0_ID = 0x296 };
-enum { CHECK_1_ID = 0x298 };
-enum { CHECK_2_ID = 0x29A };
-enum { CHECK_DEFAULT_ID = 0x29C };
+enum { SETUP_LABEL_ID = 641 };
+enum { PANEL_ROOT_ID = 737 };
+enum { PANEL_TEXT_ID = 739 };
+enum { MODE_DEFAULT_ID = 862 };
+enum { MODE_17_ID = 866 };
+enum { MODE_2_ID = 864 };
+enum { MODE_3_ID = 865 };
+enum { MODE_46_ID = 867 };
+enum { MODE_5_ID = 863 };
+enum { MODE_HIDE_ID = 738 };
+enum { SLOT_DEFAULT_ID = 652 };
+enum { SLOT_1_ID = 654 };
+enum { SLOT_2_ID = 656 };
+enum { SLOT_3_ID = 658 };
+enum { CHECK_0_ID = 662 };
+enum { CHECK_1_ID = 664 };
+enum { CHECK_2_ID = 666 };
+enum { CHECK_DEFAULT_ID = 668 };
 #elif defined(VERSION_EU_X)
-enum { SETUP_LABEL_ID = 0x28A };
-enum { PANEL_ROOT_ID = 0x2D1 };
-enum { PANEL_TEXT_ID = 0x2D3 };
-enum { MODE_DEFAULT_ID = 0x36D };
-enum { MODE_17_ID = 0x371 };
-enum { MODE_2_ID = 0x36F };
-enum { MODE_3_ID = 0x370 };
-enum { MODE_46_ID = 0x372 };
-enum { MODE_5_ID = 0x36E };
-enum { MODE_HIDE_ID = 0x2D2 };
-enum { SLOT_DEFAULT_ID = 0x294 };
-enum { SLOT_1_ID = 0x296 };
-enum { SLOT_2_ID = 0x298 };
-enum { SLOT_3_ID = 0x29A };
-enum { CHECK_0_ID = 0x29F };
-enum { CHECK_1_ID = 0x2A1 };
-enum { CHECK_2_ID = 0x2A3 };
-enum { CHECK_DEFAULT_ID = 0x2A5 };
+enum { SETUP_LABEL_ID = 650 };
+enum { PANEL_ROOT_ID = 721 };
+enum { PANEL_TEXT_ID = 723 };
+enum { MODE_DEFAULT_ID = 877 };
+enum { MODE_17_ID = 881 };
+enum { MODE_2_ID = 879 };
+enum { MODE_3_ID = 880 };
+enum { MODE_46_ID = 882 };
+enum { MODE_5_ID = 878 };
+enum { MODE_HIDE_ID = 722 };
+enum { SLOT_DEFAULT_ID = 660 };
+enum { SLOT_1_ID = 662 };
+enum { SLOT_2_ID = 664 };
+enum { SLOT_3_ID = 666 };
+enum { CHECK_0_ID = 671 };
+enum { CHECK_1_ID = 673 };
+enum { CHECK_2_ID = 675 };
+enum { CHECK_DEFAULT_ID = 677 };
 #else
-enum { SETUP_LABEL_ID = 0x285 };
-enum { PANEL_ROOT_ID = 0x2C1 };
-enum { PANEL_TEXT_ID = 0x2C5 };
-enum { MODE_DEFAULT_ID = 0x344 };
-enum { MODE_17_ID = 0x348 };
-enum { MODE_2_ID = 0x346 };
-enum { MODE_3_ID = 0x347 };
-enum { MODE_46_ID = 0x349 };
-enum { MODE_5_ID = 0x345 };
-enum { MODE_HIDE_ID = 0x2C4 };
-enum { SLOT_DEFAULT_ID = 0x28B };
-enum { SLOT_1_ID = 0x28D };
-enum { SLOT_2_ID = 0x28F };
-enum { SLOT_3_ID = 0x291 };
-enum { CHECK_0_ID = 0x299 };
-enum { CHECK_1_ID = 0x29B };
-enum { CHECK_2_ID = 0x29D };
-enum { CHECK_DEFAULT_ID = 0x29F };
+enum { SETUP_LABEL_ID = 645 };
+enum { PANEL_ROOT_ID = 705 };
+enum { PANEL_TEXT_ID = 709 };
+enum { MODE_DEFAULT_ID = 836 };
+enum { MODE_17_ID = 840 };
+enum { MODE_2_ID = 838 };
+enum { MODE_3_ID = 839 };
+enum { MODE_46_ID = 841 };
+enum { MODE_5_ID = 837 };
+enum { MODE_HIDE_ID = 708 };
+enum { SLOT_DEFAULT_ID = 651 };
+enum { SLOT_1_ID = 653 };
+enum { SLOT_2_ID = 655 };
+enum { SLOT_3_ID = 657 };
+enum { CHECK_0_ID = 665 };
+enum { CHECK_1_ID = 667 };
+enum { CHECK_2_ID = 669 };
+enum { CHECK_DEFAULT_ID = 671 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_1_2EC = 0x2CF };
-enum { UI_CASE_1_2EE = 0x2D1 };
+enum { UI_CASE_1_2EC = 719 };
+enum { UI_CASE_1_2EE = 721 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_1_2EC = 0x2E8 };
-enum { UI_CASE_1_2EE = 0x2EA };
+enum { UI_CASE_1_2EC = 744 };
+enum { UI_CASE_1_2EE = 746 };
 #else
-enum { UI_CASE_1_2EC = 0x2EC };
-enum { UI_CASE_1_2EE = 0x2EE };
+enum { UI_CASE_1_2EC = 748 };
+enum { UI_CASE_1_2EE = 750 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_2_2D4 = 0x2A0 };
+enum { UI_CASE_2_2D4 = 672 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_2_2D4 = 0x2D0 };
+enum { UI_CASE_2_2D4 = 720 };
 #else
-enum { UI_CASE_2_2D4 = 0x2D4 };
+enum { UI_CASE_2_2D4 = 724 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_3_2BB = 0x2D5 };
-enum { UI_CASE_3_2BC = 0x2D7 };
+enum { UI_CASE_3_2BB = 725 };
+enum { UI_CASE_3_2BC = 727 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_3_2BB = 0x2DC };
-enum { UI_CASE_3_2BC = 0x2DD };
+enum { UI_CASE_3_2BB = 732 };
+enum { UI_CASE_3_2BC = 733 };
 #else
-enum { UI_CASE_3_2BB = 0x2BB };
-enum { UI_CASE_3_2BC = 0x2BC };
+enum { UI_CASE_3_2BB = 699 };
+enum { UI_CASE_3_2BC = 700 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_4_2D5 = 0x2E6 };
-enum { UI_CASE_4_2DA = 0x2E8 };
+enum { UI_CASE_4_2D5 = 742 };
+enum { UI_CASE_4_2DA = 744 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_4_2D5 = 0x2EE };
-enum { UI_CASE_4_2DA = 0x2F5 };
+enum { UI_CASE_4_2D5 = 750 };
+enum { UI_CASE_4_2DA = 757 };
 #else
-enum { UI_CASE_4_2D5 = 0x2D5 };
-enum { UI_CASE_4_2DA = 0x2DA };
+enum { UI_CASE_4_2D5 = 725 };
+enum { UI_CASE_4_2DA = 730 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_6_2E4 = 0x2A9 };
-enum { UI_CASE_6_2E8 = 0x2AF };
+enum { UI_CASE_6_2E4 = 681 };
+enum { UI_CASE_6_2E8 = 687 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_6_2E4 = 0x2C5 };
-enum { UI_CASE_6_2E8 = 0x2C9 };
+enum { UI_CASE_6_2E4 = 709 };
+enum { UI_CASE_6_2E8 = 713 };
 #else
-enum { UI_CASE_6_2E4 = 0x2E4 };
-enum { UI_CASE_6_2E8 = 0x2E8 };
+enum { UI_CASE_6_2E4 = 740 };
+enum { UI_CASE_6_2E8 = 744 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_7_2CA = 0x2EF };
-enum { UI_CASE_7_2CC = 0x2F1 };
-enum { UI_CASE_7_2CB = 0x2F2 };
+enum { UI_CASE_7_2CA = 751 };
+enum { UI_CASE_7_2CC = 753 };
+enum { UI_CASE_7_2CB = 754 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_7_2CA = 0x2E4 };
-enum { UI_CASE_7_2CC = 0x2E5 };
-enum { UI_CASE_7_2CB = 0x2E3 };
+enum { UI_CASE_7_2CA = 740 };
+enum { UI_CASE_7_2CC = 741 };
+enum { UI_CASE_7_2CB = 739 };
 #else
-enum { UI_CASE_7_2CA = 0x2CA };
-enum { UI_CASE_7_2CC = 0x2CC };
-enum { UI_CASE_7_2CB = 0x2CB };
+enum { UI_CASE_7_2CA = 714 };
+enum { UI_CASE_7_2CC = 716 };
+enum { UI_CASE_7_2CB = 715 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_8_2CE = 0x2F3 };
-enum { UI_CASE_8_2CF = 0x2F5 };
-enum { UI_CASE_8_2CB = 0x2F2 };
+enum { UI_CASE_8_2CE = 755 };
+enum { UI_CASE_8_2CF = 757 };
+enum { UI_CASE_8_2CB = 754 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_8_2CE = 0x2E0 };
-enum { UI_CASE_8_2CF = 0x2E1 };
-enum { UI_CASE_8_2CB = 0x2E3 };
+enum { UI_CASE_8_2CE = 736 };
+enum { UI_CASE_8_2CF = 737 };
+enum { UI_CASE_8_2CB = 739 };
 #else
-enum { UI_CASE_8_2CE = 0x2CE };
-enum { UI_CASE_8_2CF = 0x2CF };
-enum { UI_CASE_8_2CB = 0x2CB };
+enum { UI_CASE_8_2CE = 718 };
+enum { UI_CASE_8_2CF = 719 };
+enum { UI_CASE_8_2CB = 715 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_9_2C6 = 0x2B0 };
-enum { UI_CASE_9_2C8 = 0x2B2 };
-enum { UI_CASE_9_2C7 = 0x2B3 };
+enum { UI_CASE_9_2C6 = 688 };
+enum { UI_CASE_9_2C8 = 690 };
+enum { UI_CASE_9_2C7 = 691 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_9_2C6 = 0x2A9 };
-enum { UI_CASE_9_2C8 = 0x2AC };
-enum { UI_CASE_9_2C7 = 0x2AA };
+enum { UI_CASE_9_2C6 = 681 };
+enum { UI_CASE_9_2C8 = 684 };
+enum { UI_CASE_9_2C7 = 682 };
 #else
-enum { UI_CASE_9_2C6 = 0x2C6 };
-enum { UI_CASE_9_2C8 = 0x2C8 };
-enum { UI_CASE_9_2C7 = 0x2C7 };
+enum { UI_CASE_9_2C6 = 710 };
+enum { UI_CASE_9_2C8 = 712 };
+enum { UI_CASE_9_2C7 = 711 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_10_2A4 = 0x2C6 };
+enum { UI_CASE_10_2A4 = 710 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_10_2A4 = 0x2AD };
+enum { UI_CASE_10_2A4 = 685 };
 #else
-enum { UI_CASE_10_2A4 = 0x2A4 };
+enum { UI_CASE_10_2A4 = 676 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_11_2D1 = 0x2D2 };
-enum { UI_CASE_11_2D2 = 0x2D3 };
+enum { UI_CASE_11_2D1 = 722 };
+enum { UI_CASE_11_2D2 = 723 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_11_2D1 = 0x2D6 };
-enum { UI_CASE_11_2D2 = 0x2D8 };
+enum { UI_CASE_11_2D1 = 726 };
+enum { UI_CASE_11_2D2 = 728 };
 #else
-enum { UI_CASE_11_2D1 = 0x2D1 };
-enum { UI_CASE_11_2D2 = 0x2D2 };
+enum { UI_CASE_11_2D1 = 721 };
+enum { UI_CASE_11_2D2 = 722 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_12_2F2 = 0x2D9 };
-enum { UI_CASE_12_2F3 = 0x2DA };
+enum { UI_CASE_12_2F2 = 729 };
+enum { UI_CASE_12_2F3 = 730 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_12_2F2 = 0x2B1 };
-enum { UI_CASE_12_2F3 = 0x2B2 };
+enum { UI_CASE_12_2F2 = 689 };
+enum { UI_CASE_12_2F3 = 690 };
 #else
-enum { UI_CASE_12_2F2 = 0x2F2 };
-enum { UI_CASE_12_2F3 = 0x2F3 };
+enum { UI_CASE_12_2F2 = 754 };
+enum { UI_CASE_12_2F3 = 755 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_13_2AF = 0x2C7 };
-enum { UI_CASE_13_2B6 = 0x2CE };
+enum { UI_CASE_13_2AF = 711 };
+enum { UI_CASE_13_2B6 = 718 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_13_2AF = 0x2F7 };
-enum { UI_CASE_13_2B6 = 0x2FE };
+enum { UI_CASE_13_2AF = 759 };
+enum { UI_CASE_13_2B6 = 766 };
 #else
-enum { UI_CASE_13_2AF = 0x2AF };
-enum { UI_CASE_13_2B6 = 0x2B6 };
+enum { UI_CASE_13_2AF = 687 };
+enum { UI_CASE_13_2B6 = 694 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_17_2A5 = 0x2C2 };
+enum { UI_CASE_17_2A5 = 706 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_17_2A5 = 0x2E7 };
+enum { UI_CASE_17_2A5 = 743 };
 #else
-enum { UI_CASE_17_2A5 = 0x2A5 };
+enum { UI_CASE_17_2A5 = 677 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_15_2EF = 0x2C3 };
-enum { UI_CASE_15_2F1 = 0x2C5 };
+enum { UI_CASE_15_2EF = 707 };
+enum { UI_CASE_15_2F1 = 709 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_15_2EF = 0x2EB };
-enum { UI_CASE_15_2F1 = 0x2ED };
+enum { UI_CASE_15_2EF = 747 };
+enum { UI_CASE_15_2F1 = 749 };
 #else
-enum { UI_CASE_15_2EF = 0x2EF };
-enum { UI_CASE_15_2F1 = 0x2F1 };
+enum { UI_CASE_15_2EF = 751 };
+enum { UI_CASE_15_2F1 = 753 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_16_2B7 = 0x2B4 };
-enum { UI_CASE_16_2B9 = 0x2B5 };
-enum { UI_CASE_16_2BA = 0x2AA };
+enum { UI_CASE_16_2B7 = 692 };
+enum { UI_CASE_16_2B9 = 693 };
+enum { UI_CASE_16_2BA = 682 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_16_2B7 = 0x2C1 };
-enum { UI_CASE_16_2B9 = 0x2C3 };
-enum { UI_CASE_16_2BA = 0x2C2 };
+enum { UI_CASE_16_2B7 = 705 };
+enum { UI_CASE_16_2B9 = 707 };
+enum { UI_CASE_16_2BA = 706 };
 #else
-enum { UI_CASE_16_2B7 = 0x2B7 };
-enum { UI_CASE_16_2B9 = 0x2B9 };
-enum { UI_CASE_16_2BA = 0x2BA };
+enum { UI_CASE_16_2B7 = 695 };
+enum { UI_CASE_16_2B9 = 697 };
+enum { UI_CASE_16_2BA = 698 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_21_2E1 = 0x2A6 };
-enum { UI_CASE_21_2E2 = 0x2A8 };
+enum { UI_CASE_21_2E1 = 678 };
+enum { UI_CASE_21_2E2 = 680 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_21_2E1 = 0x2D9 };
-enum { UI_CASE_21_2E2 = 0x2DB };
+enum { UI_CASE_21_2E1 = 729 };
+enum { UI_CASE_21_2E2 = 731 };
 #else
-enum { UI_CASE_21_2E1 = 0x2E1 };
-enum { UI_CASE_21_2E2 = 0x2E2 };
+enum { UI_CASE_21_2E1 = 737 };
+enum { UI_CASE_21_2E2 = 738 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_23_2AC = 0x2B7 };
-enum { UI_CASE_23_2AE = 0x2B9 };
+enum { UI_CASE_23_2AC = 695 };
+enum { UI_CASE_23_2AE = 697 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_23_2AC = 0x2BE };
-enum { UI_CASE_23_2AE = 0x2C0 };
+enum { UI_CASE_23_2AC = 702 };
+enum { UI_CASE_23_2AE = 704 };
 #else
-enum { UI_CASE_23_2AC = 0x2AC };
-enum { UI_CASE_23_2AE = 0x2AE };
+enum { UI_CASE_23_2AC = 684 };
+enum { UI_CASE_23_2AE = 686 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_24_2A9 = 0x2BC };
-enum { UI_CASE_24_2AA = 0x2BD };
+enum { UI_CASE_24_2A9 = 700 };
+enum { UI_CASE_24_2AA = 701 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_24_2A9 = 0x2AE };
-enum { UI_CASE_24_2AA = 0x2AF };
+enum { UI_CASE_24_2A9 = 686 };
+enum { UI_CASE_24_2AA = 687 };
 #else
-enum { UI_CASE_24_2A9 = 0x2A9 };
-enum { UI_CASE_24_2AA = 0x2AA };
+enum { UI_CASE_24_2A9 = 681 };
+enum { UI_CASE_24_2AA = 682 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_25_2EA = 0x2BA };
-enum { UI_CASE_25_2EB = 0x2BB };
+enum { UI_CASE_25_2EA = 698 };
+enum { UI_CASE_25_2EB = 699 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_25_2EA = 0x2BC };
-enum { UI_CASE_25_2EB = 0x2BD };
+enum { UI_CASE_25_2EA = 700 };
+enum { UI_CASE_25_2EB = 701 };
 #else
-enum { UI_CASE_25_2EA = 0x2EA };
-enum { UI_CASE_25_2EB = 0x2EB };
+enum { UI_CASE_25_2EA = 746 };
+enum { UI_CASE_25_2EB = 747 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_26_2A6 = 0x2BF };
-enum { UI_CASE_26_2A7 = 0x2C0 };
+enum { UI_CASE_26_2A6 = 703 };
+enum { UI_CASE_26_2A7 = 704 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_26_2A6 = 0x2B9 };
-enum { UI_CASE_26_2A7 = 0x2BA };
+enum { UI_CASE_26_2A6 = 697 };
+enum { UI_CASE_26_2A7 = 698 };
 #else
-enum { UI_CASE_26_2A6 = 0x2A6 };
-enum { UI_CASE_26_2A7 = 0x2A7 };
+enum { UI_CASE_26_2A6 = 678 };
+enum { UI_CASE_26_2A7 = 679 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_28_2DE = 0x2A1 };
-enum { UI_CASE_28_2DF = 0x2A2 };
+enum { UI_CASE_28_2DE = 673 };
+enum { UI_CASE_28_2DF = 674 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_28_2DE = 0x2CD };
-enum { UI_CASE_28_2DF = 0x2CF };
+enum { UI_CASE_28_2DE = 717 };
+enum { UI_CASE_28_2DF = 719 };
 #else
-enum { UI_CASE_28_2DE = 0x2DE };
-enum { UI_CASE_28_2DF = 0x2DF };
+enum { UI_CASE_28_2DE = 734 };
+enum { UI_CASE_28_2DF = 735 };
 #endif
 #if defined(VERSION_DE)
-enum { UI_CASE_29_2BF = 0x2A4 };
-enum { UI_CASE_29_2C0 = 0x2A5 };
+enum { UI_CASE_29_2BF = 676 };
+enum { UI_CASE_29_2C0 = 677 };
 #elif defined(VERSION_EU_X)
-enum { UI_CASE_29_2BF = 0x2CB };
-enum { UI_CASE_29_2C0 = 0x2CC };
+enum { UI_CASE_29_2BF = 715 };
+enum { UI_CASE_29_2C0 = 716 };
 #else
-enum { UI_CASE_29_2BF = 0x2BF };
-enum { UI_CASE_29_2C0 = 0x2C0 };
+enum { UI_CASE_29_2BF = 703 };
+enum { UI_CASE_29_2C0 = 704 };
 #endif
 #endif

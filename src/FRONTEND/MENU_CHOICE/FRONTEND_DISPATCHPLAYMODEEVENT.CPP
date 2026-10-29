@@ -24,10 +24,10 @@ extern PlayModeEventHandler g_playModeEventHandlers;
 s32 Frontend_HandlePlayModeShortcut(void *first, void *second, u32 event, s32 value) {
     struct StateFrontendHandlePlayModeShortcut *state;
 
-    if ((event >> 16) == 3 && value == 0xA) {
+    if ((event >> 16) == 3 && value == 10) {
         MarkMenuEventHandled();
         state = g_playModeMenuState;
-        state->value = 0x1C;
+        state->value = 28;
         SmpSlider_SetTransitionMode(state->first, 2);
     }
     return 0;
@@ -47,7 +47,7 @@ s32 Frontend_DispatchPlayModeEvent(void *eventTarget, s32 event, s32 itemId, s32
     MenuActorInputView *actor;
 
     if (g_playModeEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_playModeEventHandlers;
         index = 0;
         do {

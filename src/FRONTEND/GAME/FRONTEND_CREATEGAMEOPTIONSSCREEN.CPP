@@ -25,7 +25,7 @@ s32 Frontend_DispatchOptionsPageEvent(void *menuActor, s32 eventKind, s32 eventD
     MenuActorInputView *actor;
 
     if (g_gameOptionsEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_gameOptionsEventHandlers;
         index = 0;
         do {
@@ -82,11 +82,11 @@ s32 Frontend_CreateGameOptionsScreen(void) {
     s32 list;
     s32 slider;
 
-    g_gameOptionsScreenState = Cache_AllocateMemory(0x10);
-    SmpButton_WrapButtonWidget((0x1BD - OPTIONS_RESOURCE_SHIFT));
-    SmpButton_WrapButtonWidget((0x1C2 - OPTIONS_RESOURCE_SHIFT));
+    g_gameOptionsScreenState = Cache_AllocateMemory(16);
+    SmpButton_WrapButtonWidget((445 - OPTIONS_RESOURCE_SHIFT));
+    SmpButton_WrapButtonWidget((450 - OPTIONS_RESOURCE_SHIFT));
     if (OPTIONS_HAS_FIRST_LIST) {
-    list = SmpButton_CreateListWidget(0x1BB, 0x1BC);
+    list = SmpButton_CreateListWidget(443, 444);
     {s32 *handle = &g_gameOptionsScreenState->first_list; *handle = list;}
     SmpButton_AppendListText(g_gameOptionsScreenState->first_list, gameOptionsLabel(0));
     SmpButton_AppendListText(g_gameOptionsScreenState->first_list, gameOptionsLabel(1));
@@ -94,7 +94,7 @@ s32 Frontend_CreateGameOptionsScreen(void) {
     settings = &g_gameSettings;
     SmpButton_SelectListEntry(g_gameOptionsScreenState->first_list, settings->first);
     }
-    list = SmpButton_CreateListWidget((0x1BE - OPTIONS_RESOURCE_SHIFT), (0x1BF - OPTIONS_RESOURCE_SHIFT));
+    list = SmpButton_CreateListWidget((446 - OPTIONS_RESOURCE_SHIFT), (447 - OPTIONS_RESOURCE_SHIFT));
     {s32 *handle = &g_gameOptionsScreenState->second_list; *handle = list;}
     SmpButton_AppendListText(g_gameOptionsScreenState->second_list, gameOptionsLabel(3));
     if (Defs_GetMemorySize() != 0x400000) {
@@ -103,12 +103,12 @@ s32 Frontend_CreateGameOptionsScreen(void) {
     }
     if (!OPTIONS_HAS_FIRST_LIST) settings = &g_gameSettings;
     SmpButton_SelectListEntry(g_gameOptionsScreenState->second_list, settings->second);
-    slider = SmpSlider_CreateSliderWidget((0x1C0 - OPTIONS_RESOURCE_SHIFT), (0x1C1 - OPTIONS_RESOURCE_SHIFT), 0x80);
+    slider = SmpSlider_CreateSliderWidget((448 - OPTIONS_RESOURCE_SHIFT), (449 - OPTIONS_RESOURCE_SHIFT), 128);
     g_gameOptionsScreenState->slider = slider;
 
     SmpSlider_SetSliderItem(slider, settings->value);
-    SmpButton_WrapButtonWidget((0x1C3 - OPTIONS_RESOURCE_SHIFT));
-    SmpButton_WrapButtonWidget((0x1C4 - OPTIONS_RESOURCE_SHIFT));
+    SmpButton_WrapButtonWidget((451 - OPTIONS_RESOURCE_SHIFT));
+    SmpButton_WrapButtonWidget((452 - OPTIONS_RESOURCE_SHIFT));
     g_gameOptionsScreenState->state = 0;
     Tsmos_DeactivateControllerState();
     return 0;

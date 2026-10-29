@@ -175,11 +175,11 @@ extern void Menu_SetFocusedElement(s32);
 extern void Tsmos_ActivateControllerState(void);
 
 #if defined(VERSION_DE)
-enum { CONFIRM_MESSAGE = 0x234, FALLBACK_MESSAGE = 0x233 };
+enum { CONFIRM_MESSAGE = 564, FALLBACK_MESSAGE = 563 };
 #elif defined(VERSION_EU_X)
-enum { CONFIRM_MESSAGE = 0x23D, FALLBACK_MESSAGE = 0x23C };
+enum { CONFIRM_MESSAGE = 573, FALLBACK_MESSAGE = 572 };
 #else
-enum { CONFIRM_MESSAGE = 0x238, FALLBACK_MESSAGE = 0x237 };
+enum { CONFIRM_MESSAGE = 568, FALLBACK_MESSAGE = 567 };
 #endif
 
 void Frontend_InitMatchResultsMenu(void) {
@@ -191,7 +191,7 @@ InitFrontendMenus
 #endif
 ();
     Tsmos_DeactivateControllerState();
-    SmXlate_SwitchScreen(0x11);
+    SmXlate_SwitchScreen(17);
 }
 
 void Frontend_ContinueCupOrOpenResults(void) {
@@ -200,7 +200,7 @@ void Frontend_ContinueCupOrOpenResults(void) {
     state->m_bCTFOn = 0;
     state->m_bFragTagOn = 0;
     if (ScenarioSetup_IsCupSelected() == 0 || ScenarioSetup_StartRandomCupStage() == 0) {
-        SmXlate_SwitchScreen(0x14);
+        SmXlate_SwitchScreen(20);
     } else {
         Stage_StartConfiguredMatch();
     }
@@ -211,7 +211,7 @@ void Frontend_OpenControllerModeResults(void) {
 
     state->m_bCTFOn = 0;
     state->m_bFragTagOn = 0;
-    SmXlate_SwitchScreen(0xF);
+    SmXlate_SwitchScreen(15);
 }
 
 s32 Frontend_GetMatchEndReason(void) {
@@ -317,64 +317,64 @@ void Frontend_ShowResultRankBadge(s32 player, s32 kind, unsigned short group) {
     case 0:
     default:
 #if defined(VERSION_DE)
-        id = 0x268;
+        id = 616;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x26D;
+        id = 621;
 #elif defined(VERSION_EU_X)
-        id = 0x271;
+        id = 625;
 #endif
         break;
     case 1:
 #if defined(VERSION_DE)
-        id = 0x267;
+        id = 615;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x26C;
+        id = 620;
 #elif defined(VERSION_EU_X)
-        id = 0x270;
+        id = 624;
 #endif
         break;
     case 2:
 #if defined(VERSION_DE)
-        id = 0x266;
+        id = 614;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x26B;
+        id = 619;
 #elif defined(VERSION_EU_X)
-        id = 0x26F;
+        id = 623;
 #endif
         break;
     case 3:
 #if defined(VERSION_DE)
-        id = 0x265;
+        id = 613;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x26A;
+        id = 618;
 #elif defined(VERSION_EU_X)
-        id = 0x26E;
+        id = 622;
 #endif
         break;
     }
     item = Node_FindWidgetByResourceId(parent, id);
     Widget_SetWidgetFlag08(item, 1);
-    item->alpha = 0x96;
+    item->alpha = 150;
     rank = record->rank;
     switch (rank) {
     case 0:
-        frame = 0x63;
+        frame = 99;
         break;
     case 1:
-        frame = 0x62;
+        frame = 98;
         break;
     case 2:
-        frame = 0x61;
+        frame = 97;
         break;
     case 3:
-        frame = 0x5F;
+        frame = 95;
         break;
     case 4:
-        frame = 0x60;
+        frame = 96;
         break;
     default:
         Widget_SetWidgetFlag08(item, 0);
-        frame = 0x60;
+        frame = 96;
         break;
     }
     item->value = frame;
@@ -442,11 +442,11 @@ s32 Frontend_UpdateMatchResultsTransition(void *window, void *unused1, s32 event
                     Stage_StartConfiguredMatch();
                     return 0;
                 }
-                next = 0x14;
+                next = 20;
             } else {
                 g_resultReplayPending = 0;
                 g_resultExitPending = 0;
-                next = 0xF;
+                next = 15;
             }
             SmXlate_SwitchScreen(next);
             return 0;

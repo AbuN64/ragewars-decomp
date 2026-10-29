@@ -60,7 +60,7 @@ struct StateFrontendInitModelPreviewTransform {
 
 struct MenuModelScreen;
 struct MenuModelScreen {
-    char p0[0x28];
+    char p0[40];
     f32 heading;
     char p2C[0x160 - 0x2C];
     Matrix camera;

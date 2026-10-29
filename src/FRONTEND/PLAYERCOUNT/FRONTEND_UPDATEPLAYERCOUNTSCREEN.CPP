@@ -169,7 +169,7 @@ s32 Frontend_IncreasePlayerCount(void *a0, void *a1, void *a2, s32 press) {
         }
     }
     XStdio_FormatBuffer(g_playerCountScreen->text, s_playerCountFormat, g_playerCountScreen->count);
-    SoundElement_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 
@@ -185,7 +185,7 @@ s32 Frontend_DecreasePlayerCount(void *first, void *second, void *third, s32 fou
         g_playerCountScreen->count = value - 1;
     }
     XStdio_FormatBuffer(g_playerCountScreen->text, s_playerCountFormat, g_playerCountScreen->count);
-    SoundElement_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 
@@ -198,7 +198,7 @@ s32 Frontend_DispatchPlayerCountEvent(void *widget, s32 eventId, s32 eventData0,
     MenuActorInputView *actor;
 
     if (g_playerCountEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_playerCountEventHandlers;
         index = 0;
         do {

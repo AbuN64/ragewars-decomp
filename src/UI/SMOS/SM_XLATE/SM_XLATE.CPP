@@ -161,12 +161,12 @@ block_search_check:
             g_screenDefaultFocus = newDefinition->defaultFocus;
             currentDefinition = newDefinition;
             SmSmngr_InitializeCurrentScreen();
-            if (((u16) currentDefinition->flags >> 0xC) & 1) {
+            if (((u16) currentDefinition->flags >> 12) & 1) {
 
                 load_flag = 1;
                 current = g_screenManager->current;
 loop_18:
-                if ((((u16) currentDefinition->flags >> 0xC) & 1) == load_flag) {
+                if ((((u16) currentDefinition->flags >> 12) & 1) == load_flag) {
                     currentScreenIndex = --g_screenManager->current;
                     g_screenManager->lowIndex = currentScreenIndex;
 
@@ -198,7 +198,7 @@ block_found_trampoline:
                 if (callback != 0) {
                     handled = g_screenManager->handled;
                     g_screenManager->handled = 0;
-                    callback(0xE07, 0, 0, 0);
+                    callback(3591, 0, 0, 0);
                     callback_status = g_screenManager->handled;
                     if (callback_status == 1) {
                         refreshFocus = 0;
@@ -207,7 +207,7 @@ block_found_trampoline:
                     }
                     g_screenManager->handled = handled;
                 }
-                DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
+                DispatchCurrentScreenEvent(1, 3591, 0, 0, 0);
                 goto block_27;
             } else {
 block_27:
@@ -219,14 +219,14 @@ after_found_callback:
     }
 block_not_found:
     Node_AcquireArchiveEntry(index);
-    if (((u16) (((Shared_MenuDefinition *)(Node_GetScreenData(index)))->flags) >> 0xC) & 1) {
+    if (((u16) (((Shared_MenuDefinition *)(Node_GetScreenData(index)))->flags) >> 12) & 1) {
         focus = g_screenManager->screens[g_screenManager->current].focus;
         if ((focus != 0) && ((oldFocusOwner = focus->ownerId, (Node_IsValidScreenIndex((s32) oldFocusOwner) == 0)) || (oldFocusOwner == g_screenManager->screens[g_screenManager->current].owner)) && ((focus_index = g_screenManager->current), (oldFocusOwner != g_screenManager->focus)) && ((currentOrInvalidIndex = -1), (focus_index != currentOrInvalidIndex))) {
             focusLeaveCallback = g_screenManager->callback;
             if (focusLeaveCallback != 0) {
                 savedFocusLeaveHandled = g_screenManager->handled;
                 g_screenManager->handled = 0;
-                focusLeaveCallback(0x10, 0, 0, 0);
+                focusLeaveCallback(16, 0, 0, 0);
                 callback_status = g_screenManager->handled;
                 if (callback_status == 1) {
                     g_screenManager->handled = savedFocusLeaveHandled;
@@ -235,9 +235,9 @@ block_not_found:
                 g_screenManager->handled = savedFocusLeaveHandled;
             }
             if (oldFocusOwner == (((Shared_MenuDefinition *)(g_screenManager->screens[g_screenManager->current].primary))->ownerId)) {
-                SmSmngr_DispatchPrimaryScreenEvent(0x10, 0, 0, 0);
+                SmSmngr_DispatchPrimaryScreenEvent(16, 0, 0, 0);
             } else {
-                DispatchElementEvent(oldFocusOwner, 0x10, 0, 0, 0);
+                DispatchElementEvent(oldFocusOwner, 16, 0, 0, 0);
             }
         }
 after_focus10:
@@ -261,7 +261,7 @@ after_focus10:
             if (pushLoadCallback != 0) {
                 savedPushLoadHandled = g_screenManager->handled;
                 g_screenManager->handled = 0;
-                pushLoadCallback(0xE06, 0, 0, 0);
+                pushLoadCallback(3590, 0, 0, 0);
                 callback_status_5 = g_screenManager->handled;
                 if (callback_status_5 == 1) {
                     g_screenManager->handled = savedPushLoadHandled;
@@ -269,7 +269,7 @@ after_focus10:
                 }
                 g_screenManager->handled = savedPushLoadHandled;
             }
-            DispatchCurrentScreenEvent(1, 0xE06, 0, 0, 0);
+            DispatchCurrentScreenEvent(1, 3590, 0, 0, 0);
         }
 after_e06:
         if (((ScreenManager *)g_screenManager)->current != -1) {
@@ -277,7 +277,7 @@ after_e06:
             if (pushReadyCallback != 0) {
                 savedPushReadyHandled = g_screenManager->handled;
                 g_screenManager->handled = 0;
-                pushReadyCallback(0xE07, 0, 0, 0);
+                pushReadyCallback(3591, 0, 0, 0);
                 callback_status = g_screenManager->handled;
                 if (callback_status == 1) {
                     g_screenManager->handled = savedPushReadyHandled;
@@ -285,7 +285,7 @@ after_e06:
                 }
                 g_screenManager->handled = savedPushReadyHandled;
             }
-            DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
+            DispatchCurrentScreenEvent(1, 3591, 0, 0, 0);
         }
         goto block_78;
     }
@@ -294,7 +294,7 @@ after_e06:
         if (pushBeginCallback != 0) {
             savedPushBeginHandled = g_screenManager->handled;
             g_screenManager->handled = 0;
-            pushBeginCallback(0xE01, 0, 0, 0);
+            pushBeginCallback(3585, 0, 0, 0);
             callback_status = g_screenManager->handled;
             if (callback_status == 1) {
                 g_screenManager->handled = savedPushBeginHandled;
@@ -302,7 +302,7 @@ after_e06:
             }
             g_screenManager->handled = savedPushBeginHandled;
         }
-        SmSmngr_DispatchPrimaryScreenEvent(0xE01, 0, 0, 0);
+        SmSmngr_DispatchPrimaryScreenEvent(3585, 0, 0, 0);
     }
 after_e01:
     Stream_DrainResourceWork();
@@ -312,7 +312,7 @@ after_e01:
         if (pushOwnerCallback != 0) {
             savedPushOwnerHandled = g_screenManager->handled;
             g_screenManager->handled = 0;
-            pushOwnerCallback(0xE03, index, 0, 0);
+            pushOwnerCallback(3587, index, 0, 0);
             callback_status = g_screenManager->handled;
             if (callback_status == 1) {
                 g_screenManager->handled = savedPushOwnerHandled;
@@ -320,7 +320,7 @@ after_e01:
             }
             g_screenManager->handled = savedPushOwnerHandled;
         }
-        SmSmngr_DispatchPrimaryScreenEvent(0xE03, e03_arg_copy, 0, 0);
+        SmSmngr_DispatchPrimaryScreenEvent(3587, e03_arg_copy, 0, 0);
     }
 after_e03:
     releaseManager = g_screenManager;
@@ -338,7 +338,7 @@ after_e03:
                 releaseIndex += 1;
             } while (g_screenManager->current >= releaseCursor);
         }
-        remainingHandlerCount = 0x3F;
+        remainingHandlerCount = 63;
         handlerCursor = g_screenManager->handlers;
         do {
             handlerCursor->override_handler = 0;
@@ -369,7 +369,7 @@ after_e03:
         if (replaceLoadCallback != 0) {
             savedReplaceLoadHandled = g_screenManager->handled;
             g_screenManager->handled = 0;
-            replaceLoadCallback(0xE06, 0, 0, 0);
+            replaceLoadCallback(3590, 0, 0, 0);
             callback_status = g_screenManager->handled;
             if (callback_status == 1) {
                 g_screenManager->handled = savedReplaceLoadHandled;
@@ -377,7 +377,7 @@ after_e03:
             }
             g_screenManager->handled = savedReplaceLoadHandled;
         }
-        DispatchCurrentScreenEvent(1, 0xE06, 0, 0, 0);
+        DispatchCurrentScreenEvent(1, 3590, 0, 0, 0);
     }
 after_e06_second:
     if (((ScreenManager *)g_screenManager)->current != -1) {
@@ -385,7 +385,7 @@ after_e06_second:
         if (replaceReadyCallback != 0) {
             savedReplaceReadyHandled = g_screenManager->handled;
             g_screenManager->handled = 0;
-            replaceReadyCallback(0xE07, 0, 0, 0);
+            replaceReadyCallback(3591, 0, 0, 0);
             callback_status = g_screenManager->handled;
             if (callback_status == 1) {
                 g_screenManager->handled = savedReplaceReadyHandled;
@@ -393,7 +393,7 @@ after_e06_second:
             }
             g_screenManager->handled = savedReplaceReadyHandled;
         }
-        DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
+        DispatchCurrentScreenEvent(1, 3591, 0, 0, 0);
     }
 after_e07_second:
     if (GetMenuScreenOwner() != index) {
@@ -420,7 +420,7 @@ block_78:
         if (focusEnterCallback != 0) {
             savedFocusEnterHandled = g_screenManager->handled;
             g_screenManager->handled = 0;
-            focusEnterCallback(0xF, 0, 0, 0);
+            focusEnterCallback(15, 0, 0, 0);
             callback_status = g_screenManager->handled;
             if (callback_status == 1) {
                 g_screenManager->handled = savedFocusEnterHandled;
@@ -429,9 +429,9 @@ block_78:
             g_screenManager->handled = savedFocusEnterHandled;
         }
         if (newFocusOwner == (((Shared_MenuDefinition *)(g_screenManager->screens[g_screenManager->current].primary))->ownerId)) {
-            SmSmngr_DispatchPrimaryScreenEvent(0xF, 0, 0, 0);
+            SmSmngr_DispatchPrimaryScreenEvent(15, 0, 0, 0);
         } else {
-            DispatchElementEvent(newFocusOwner, 0xF, 0, 0, 0);
+            DispatchElementEvent(newFocusOwner, 15, 0, 0, 0);
         }
     }
 after_focus:
@@ -440,7 +440,7 @@ after_focus:
         if (switchCompleteCallback != 0) {
             savedSwitchCompleteHandled = g_screenManager->handled;
             g_screenManager->handled = 0;
-            switchCompleteCallback(0xE08, 0, 0, 0);
+            switchCompleteCallback(3592, 0, 0, 0);
             callback_status = g_screenManager->handled;
             if (callback_status == 1) {
                 g_screenManager->handled = savedSwitchCompleteHandled;
@@ -449,7 +449,7 @@ after_focus:
             g_screenManager->handled = savedSwitchCompleteHandled;
         }
         argument = (s32)(N64Eng_GetTimeSeconds() * 1000.0);
-        DispatchCurrentScreenEvent(1, 0xE08, argument - g_screenManager->frames, argument, 0);
+        DispatchCurrentScreenEvent(1, 3592, argument - g_screenManager->frames, argument, 0);
     }
 after_e08:
 }

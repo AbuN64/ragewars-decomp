@@ -59,12 +59,12 @@ void Frontend_ApplyVideoMode(void) {
         RecGobjinstSampleBoneTranslation config=g_frontendVideoModeRenderConfigs[g_frontendCurrentVideoModeIndex];
         set_config(config.x,config.y,config.z,config.pad0,config.pad1);
         set_mode((s32 *)videoMode);
-        featureCommands = 0x80;
+        featureCommands = 128;
         if (g_frontendViDitherFilterEnabled != 0) {
-            featureCommands = 0x40;
+            featureCommands = 64;
         }
         osViSetSpecialFeatures(featureCommands);
-        osViSetSpecialFeatures(0x20);
+        osViSetSpecialFeatures(32);
         osViSetSpecialFeatures(2);
     }
 }
@@ -108,7 +108,7 @@ void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX,
     u32 scaleY;
     s32 centerX, scaleX;
 
-    Libc_CopyBytes(mode, &g_videoModeLabels[(s16)g_frontendVideoModeId], 0x50);
+    Libc_CopyBytes(mode, &g_videoModeLabels[(s16)g_frontendVideoModeId], 80);
     horizontal.packed = mode->comRegs.hStart;
     vertical[0].packed = mode->fldRegs[0].vStart;
     originalHorizontal = horizontal;
@@ -171,10 +171,10 @@ void Frontend_AdvanceVideoMode(void)
   }
   mode = (int *) (&g_frontendRegionVideoModes[region][g_frontendCurrentVideoModeIndex]);
   memory = Defs_GetMemorySize();
-  budget = 0xF660;
+  budget = 63072;
   if (memory != 0x400000)
   {
-    budget = 0x2A300;
+    budget = 172800;
   }
   if (!g_frontendKeepCurrentVideoModeOnce)
   {
@@ -211,7 +211,7 @@ void Frontend_ApplyScreenModeValue(s32 value) {
 extern s32 g_selectionMessageStage;
 void Frontend_StartScreenModeFade(void) {
     if (g_selectionMessageStage == 0) {
-        g_selectionMessageStage = 0x14;
+        g_selectionMessageStage = 20;
     }
 }
 /* Detects the storage configuration and updates the cached selection. */
@@ -258,7 +258,7 @@ void Frontend_RequestScreenMode(s32 value) {
         g_frontendKeepCurrentVideoModeOnce = 1;
         g_frontendActiveVideoModeIndex = g_frontendCurrentVideoModeIndex;
         g_frontendCurrentVideoModeIndex = value;
-        g_selectionMessageStage = 0x14;
+        g_selectionMessageStage = 20;
     }
 }
 /* Returns the word held in g_frontendCurrentVideoModeIndex. */

@@ -89,7 +89,7 @@ typedef struct AudioSoundPlayerOwnerView AudioSoundPlayerOwnerView;
 struct AudioSoundPlayerOwnerView;
 struct AudioSoundPlayerOwnerView {
     char pad[0x84];
-    char sound[0x58];
+    char sound[88];
     s16 samples[20];
     char pad2[(0x104 - 0xDC) - 40];
     s32 key;
@@ -122,7 +122,7 @@ struct AudioVoiceSoundSlotView {
     s32 flags;
     char padaC[8];
     char *owner;
-    char end[0x14];
+    char end[20];
 };
 
 struct AudioVoiceSecondarySlotView;

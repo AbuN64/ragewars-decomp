@@ -20,8 +20,8 @@ s32 Frontend_SelectPreviousLanguage(void *window, s32 b, s32 c, s32 press) {
         Shared_Game *g = &g_gameSettings;
         if (g->language == 0) g->language = 2; else g->language--;
     }
-    ((LangItemEu *)Node_FindWidgetByResourceId(window, 0x5E))->text = g_optionsLocalizedShortcutText[g_languageIndex];
-    SoundElement_PlayFlatSound(0xE81);
+    ((LangItemEu *)Node_FindWidgetByResourceId(window, 94))->text = g_optionsLocalizedShortcutText[g_languageIndex];
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 #endif
@@ -37,8 +37,8 @@ s32 Frontend_SelectNextLanguage(void *window, s32 b, s32 c, s32 press) {
         Shared_Game *g = &g_gameSettings;
         if (g->language == 2) g->language = 0; else g->language++;
     }
-    ((LangItemEu *)Node_FindWidgetByResourceId(window, 0x5E))->text = g_optionsLocalizedShortcutText[g_languageIndex];
-    SoundElement_PlayFlatSound(0xE81);
+    ((LangItemEu *)Node_FindWidgetByResourceId(window, 94))->text = g_optionsLocalizedShortcutText[g_languageIndex];
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 #endif

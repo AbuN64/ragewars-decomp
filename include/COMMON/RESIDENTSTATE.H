@@ -64,8 +64,8 @@ extern s32 g_artsendPreviousPageHoldCount;
 extern s32 g_artsendNextPageHoldCount;
 
 extern void Tengine_LoadSelectedTexture(void);
-extern u8 s_artsendActivatedText[0x14];
-extern u8 s_artsendDeactivatedText[0x14];
+extern u8 s_artsendActivatedText[20];
+extern u8 s_artsendDeactivatedText[20];
 extern f32 g_artsendTextureTitleScale;
 extern s32 g_artsendToggleButtonHeld;
 

@@ -28,7 +28,7 @@ typedef struct NodeSetN64CollectVisibleEffectNodes NodeSetN64CollectVisibleEffec
 struct Results;
 struct Results {
     char pad0[0x144];
-    NodeSetN64CollectVisibleEffectNodes *nodes[0x200];
+    NodeSetN64CollectVisibleEffectNodes *nodes[512];
     s32 count;
 };
 
@@ -157,7 +157,7 @@ typedef struct EffectPoolNode EffectPoolNode;
 
 struct EffectPoolNode;
 struct EffectPoolNode {
-    char instanceStorage[0x1D0];
+    char instanceStorage[464];
     unsigned int flags;
     int *reference_count;
     struct EffectPoolNode *previous;

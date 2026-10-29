@@ -138,7 +138,7 @@ struct VoiceChannelUpdateVoicePan {
     s32 index;
     char pad4[0xC];
     VoiceVolumeParameters params;
-    char position[0x44];
+    char position[68];
     s32 sweeping;
     char pad8C[4];
     u16 target;

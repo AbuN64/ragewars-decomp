@@ -4,7 +4,7 @@
 /* Section one of the resource selected by an actor's resource key. */
 /* Section zero of the resource selected by an actor's resource key. */
 typedef struct ActorResourceHeader {
-    u8 headerPrefix[0x1E];
+    u8 headerPrefix[30];
     u16 particleScale; /* Float encoded in its high sixteen bits. */
 } ActorResourceHeader;
 #include "COMMON/SHAREDPLAYER.H"
@@ -79,7 +79,7 @@ struct Scratch {
     f32 out[4];
     CVector3 position;
     f32 positionPadding;
-    char matrix[0x40];
+    char matrix[64];
 };
 
 struct BoneTwistSourceView;

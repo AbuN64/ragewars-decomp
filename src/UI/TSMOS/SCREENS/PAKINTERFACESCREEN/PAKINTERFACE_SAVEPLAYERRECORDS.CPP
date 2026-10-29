@@ -113,14 +113,14 @@ s32 PAKInterface_SavePlayerRecords(s32 channel)
         success = 0;
         if (Note_FindFreeNoteExtension(channel, extension) == 0) {
             staged = pakRecordSave()->packet.saved;
-            XPlus_CopyBytes(staged, pakRecordSave()->players[channel].records, 0x640);
+            XPlus_CopyBytes(staged, pakRecordSave()->players[channel].records, 1600);
             pakRecordSave()->packet.savedProfile = pakRecordSave()->players[channel].profile;
-            checksum = Note_Crc32(staged, 0x640, 7);
+            checksum = Note_Crc32(staged, 1600, 7);
             pakRecordSave()->packet.checksum = checksum;
             data = pakRecordSave()->packet.saved;
             for (i = 0; i < 16; i++) name[i] = 0;
             XPlus_CopyString(name, RW_PAK_RECORD_TITLE);
-            if (Note_SaveNote(channel, 0x648, data, name, extension, RECORDS_NOTE_CODE) == 0) success = 1;
+            if (Note_SaveNote(channel, 1608, data, name, extension, RECORDS_NOTE_CODE) == 0) success = 1;
         }
     }
     if (!success) {

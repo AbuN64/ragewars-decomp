@@ -9,13 +9,13 @@
  * These are persistent state fields, with the actual root storage between. */
 /* Match game-mode switches: the reaction messages pick their text from these. */
 typedef struct MatchModes {
-    u8 unobserved0[0x54];
+    u8 unobserved0[84];
     s32 tag; /* +0x54: tag match (US-rev1 0x801468F4) */
     u8 unobserved58[0x78 - 0x58];
     s32 captureFlag; /* +0x78: capture-the-flag match (US-rev1 0x80146918) */
 } MatchModes;
 typedef struct MenuMatchGlobals {
-    u8 unobserved0[0x20];
+    u8 unobserved0[32];
     GameplayCamera *cameras; /* 0x20 */
     u8 unobserved24[0x40 - 0x24];
     GameplayCamera fallbackCamera; /* 0x40 */

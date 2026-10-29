@@ -24,7 +24,7 @@ extern void PolyCol_TraceMeshTriangle(ContextB0 *, CollisionVertex **);
  * triangle before falling through to TRI1. */
 #define TRACE_TRIANGLE(context, vertices, triangle, command, reverse, saved) \
     triangle[0] = &vertices[((*(command)) & 0xFE0000) >> 17]; \
-    triangle[1] = &vertices[((*(command)) & 0xFE00) >> 9]; \
+    triangle[1] = &vertices[((*(command)) & 65024) >> 9]; \
     triangle[2] = &vertices[((*(command)) & 0xFF) >> 1]; \
     if ((triangle[0]->clipFlags & \
          triangle[1]->clipFlags & \

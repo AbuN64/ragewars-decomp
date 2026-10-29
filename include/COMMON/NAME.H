@@ -9,7 +9,7 @@
 struct Name;
 struct Name {
     u8 flags[2];
-    u8 code[0x14];
+    u8 code[20];
     u8 text[0x46 - 0x16];
 };
 
@@ -18,7 +18,7 @@ typedef struct PakDisplayName PakDisplayName;
 
 struct PakDisplayName;
 struct PakDisplayName {
-    char text[0x3C];
+    char text[60];
     char code[70 - 0x3C];
 };
 
@@ -27,9 +27,9 @@ typedef struct Name Name;
 
 /* One pak note line of the note list: its label, the note name and its size text. */
 typedef struct PakNoteText {
-    char label[0x28];
-    char name[0x14];
-    char size[0xA];
+    char label[40];
+    char name[20];
+    char size[10];
 } PakNoteText;
 struct PakProfilePanelState;
 struct PakProfilePanelState {
@@ -51,9 +51,9 @@ struct PakProfilePanelState {
     union {
         u8 codes[3][0xA]; /* 0xAB8 */
         struct {
-            char code0[0xA];
-            char usedText[0xA];
-            char freeText[0xA];
+            char code0[10];
+            char usedText[10];
+            char freeText[10];
         };
     };
     char padAD6[0xAD8 - 0xAD6];
@@ -217,15 +217,15 @@ struct Blk;
 struct Blk {
     char p0[4];
     s32 reservedWord4;
-    char p1[0x24];
+    char p1[36];
     s32 animationClock;
-    char p2[0x28];
+    char p2[40];
     s32 panelState;
-    char p3[0xAD4];
+    char p3[2772];
     s32 selectedNote;
     s32 noteScrollOffset;
     ResourceSmpFlickerCreateFlickerWidget *noteLabel;
-    char p4[0x64];
+    char p4[100];
     s32 nameEntryPhase;
     s32 nameEntryTimer;
 };

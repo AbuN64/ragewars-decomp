@@ -11,12 +11,12 @@ void PAKInterface_DecrementNameCharacter(s32 player) {
     g_pakProfileScreenState->selected[player] = 0;
     SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, player);
     if (g_pakProfileScreenState->players[player].name[g_pakProfileScreenState->players[player].nameCursor].available == 0) {
-        g_pakProfileScreenState->players[player].name[g_pakProfileScreenState->players[player].nameCursor].available = 0x41;
+        g_pakProfileScreenState->players[player].name[g_pakProfileScreenState->players[player].nameCursor].available = 65;
     }
     value = g_pakProfileScreenState->players[player].name[g_pakProfileScreenState->players[player].nameCursor].available;
     value--;
-    if (value < 0x20) {
-        value = 0x5A;
+    if (value < 32) {
+        value = 90;
     }
     g_pakProfileScreenState->players[player].name[g_pakProfileScreenState->players[player].nameCursor].available = value;
 }

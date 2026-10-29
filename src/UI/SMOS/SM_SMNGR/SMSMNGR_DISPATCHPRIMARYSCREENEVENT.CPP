@@ -11,9 +11,9 @@
 
 static inline s32 menuCategory(s32 event) {
     s32 category;
-    if ((u32)event < 0xE00) category=0;
+    if ((u32)event < 3584) category=0;
     else if ((u32)(event-0x1000)<0x1000) category=1;
-    else if ((u32)(event-0xE00)<0x200) category=2;
+    else if ((u32)(event-3584)<0x200) category=2;
     else if ((u32)(event-0x4000)<0x4000) category=3;
     else category=0;
     return category;
@@ -40,7 +40,7 @@ s32 SmSmngr_DispatchPrimaryScreenEvent(s32 event,s32 value,s32 amount,s32 contex
         result=DispatchElementEvent(focusId,event,value,amount,context);
         break;
     case 2:
-        if(event==0xE08) {
+        if(event==3592) {
             ticks=(s32)(N64Eng_GetTimeSeconds()*g_primaryScreenEventTickScale);
             value=ticks-g_screenManager->frames;
             amount=ticks;

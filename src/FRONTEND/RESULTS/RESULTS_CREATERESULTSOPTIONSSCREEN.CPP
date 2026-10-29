@@ -62,38 +62,38 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
     MenuWidget *wRight;
     MenuWidget *wHead;
     MenuWidget *wItem;
-    screen = Cache_AllocateMemory(0xA80);
+    screen = Cache_AllocateMemory(2688);
     g_trialCatalogueScreen = screen;
     screen->root = rootWidget;
     g_trialCatalogueScreen->nodes = SmpOverlay_CreateOverlayNode(rootWidget, 4);
-    SmpOverlay_ShowSlotById(rootWidget, 0, resultsRes(0x13E));
-    SmpOverlay_ShowSlotById(rootWidget, 1, resultsRes(0x13E));
-    SmpOverlay_ShowSlotById(rootWidget, 2, resultsRes(0x13E));
-    SmpOverlay_ShowSlotById(rootWidget, 3, resultsRes(0x13E));
-    for (i = 0; i < 0x24; i++) {
+    SmpOverlay_ShowSlotById(rootWidget, 0, resultsRes(318));
+    SmpOverlay_ShowSlotById(rootWidget, 1, resultsRes(318));
+    SmpOverlay_ShowSlotById(rootWidget, 2, resultsRes(318));
+    SmpOverlay_ShowSlotById(rootWidget, 3, resultsRes(318));
+    for (i = 0; i < 36; i++) {
         Defs_SetBitValue(g_trialCatalogueScreen->owned, i, 0);
         Defs_SetBitValue(g_trialCatalogueScreen->pending, i, 0);
     }
     g_trialCatalogueScreen->state = 1;
     g_trialCatalogueScreen->slideFrames = 4;
-    wLeft = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x145));
+    wLeft = Node_FindWidgetByResourceId(rootWidget, resultsRes(325));
     g_trialCatalogueScreen->leftPanel = wLeft;
     wLeft->x -= wLeft->width;
     g_trialCatalogueScreen->leftStep = g_trialCatalogueScreen->leftPanel->width / 4;
     d = g_trialCatalogueScreen->leftPanel->width - g_trialCatalogueScreen->leftStep * 4;
     g_trialCatalogueScreen->leftPanel->x += d;
-    wRight = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x144));
+    wRight = Node_FindWidgetByResourceId(rootWidget, resultsRes(324));
     g_trialCatalogueScreen->rightPanel = wRight;
     wRight->x += wRight->width;
     g_trialCatalogueScreen->rightStep = g_trialCatalogueScreen->rightPanel->width / 4;
     d = g_trialCatalogueScreen->rightPanel->width - g_trialCatalogueScreen->rightStep * 4;
     g_trialCatalogueScreen->rightPanel->x -= d;
-    g_trialCatalogueScreen->resource = SmpFlicker_CreateFlickerWidget(resultsRes(0x141), 0x6E);
-    wHead = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x13F));
+    g_trialCatalogueScreen->resource = SmpFlicker_CreateFlickerWidget(resultsRes(321), 110);
+    wHead = Node_FindWidgetByResourceId(rootWidget, resultsRes(319));
     g_trialCatalogueScreen->focusItem = wHead;
     Widget_SetWidgetFlag08(wHead, 0);
-    g_trialCatalogueScreen->owner = (void *)Node_FindWidgetByResourceId(rootWidget, resultsRes(0x154));
-    g_trialCatalogueScreen->item155 = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x155));
+    g_trialCatalogueScreen->owner = (void *)Node_FindWidgetByResourceId(rootWidget, resultsRes(340));
+    g_trialCatalogueScreen->item155 = Node_FindWidgetByResourceId(rootWidget, resultsRes(341));
     g_trialCatalogueScreen->player = 0;
     for (i = 0; i < 4; i++) {
         if (((struct Status *)g_playerSettings)[i].active == 1) {
@@ -113,8 +113,8 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
     Results_RefreshTrialSelectionLabel();
     g_selectionMessageReply.ready = 0;
     g_selectionMessageReply.value = -1;
-    Frontend_InitMenuImage((s32 *)g_trialCatalogueScreen, 0x67, 0, 0, 0);
-    wItem = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x151));
+    Frontend_InitMenuImage((s32 *)g_trialCatalogueScreen, 103, 0, 0, 0);
+    wItem = Node_FindWidgetByResourceId(rootWidget, resultsRes(337));
     g_trialCatalogueScreen->item = wItem;
     wItem->alpha = 0xFF;
     g_trialCatalogueScreen->modeFlag = 0;
@@ -132,10 +132,10 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
     case 1:
     case 3:
     case 4:
-        g_trialCatalogueScreen->bannerShadow = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x13D));
+        g_trialCatalogueScreen->bannerShadow = Node_FindWidgetByResourceId(rootWidget, resultsRes(317));
         Menu_InitializeOptionsScene();
-        g_trialCatalogueScreen->banner = Node_FindWidgetByResourceId(rootWidget, resultsRes(0x147));
-        Node_FindWidgetByResourceId(rootWidget, resultsRes(0x148))->alpha = 0x6E;
+        g_trialCatalogueScreen->banner = Node_FindWidgetByResourceId(rootWidget, resultsRes(327));
+        Node_FindWidgetByResourceId(rootWidget, resultsRes(328))->alpha = 110;
         break;
     case 2:
         break;
@@ -154,7 +154,7 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
     if (g_gameOptions.mode != 2) {
         Results_UpdateResultsHeading();
     }
-    SoundElement_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(3704);
     return 0;
 }
 #endif
@@ -193,7 +193,7 @@ s32 Results_ShowResultsPlayerModels(void) {
     layout = 0;
     i = 0;
     offset = 0;
-    view = 0x20;
+    view = 32;
     g_trialCatalogueScreen->wordA58 = 0;
 next:
     status = (struct Status *)((char *)g_playerSettings + offset);
@@ -203,10 +203,10 @@ next:
         scale.x = g_characterPortraitRecords[row].scale[layout];
         scale.y = g_characterPortraitRecords[row].scale[layout];
         scale.z = g_characterPortraitRecords[row].scale[layout];
-        Preview_InitModelPreview((char *)g_trialCatalogueScreen + view, 9, status->kind + 0x38F, 0x4B, 0x5DC0, scale,
+        Preview_InitModelPreview((char *)g_trialCatalogueScreen + view, 9, status->kind + 911, 75, 24000, scale,
                       g_characterPortraitRecords[row].position[layout], g_characterPortraitRecords[row].distance[layout],
                       g_characterPortraitRecords[row].light[layout]);
-        view += 0x4A8;
+        view += 1192;
         layout = 2;
         if (shown >= layout) {
             goto done;

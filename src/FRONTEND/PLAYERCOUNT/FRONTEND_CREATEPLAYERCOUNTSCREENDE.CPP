@@ -7,7 +7,7 @@ typedef struct PlayerCountScreenStateDe {
     void *item;
     s32 playerCount;
     char pad10[4];
-    char text14[0xC];
+    char text14[12];
     s32 selectionChanged;
 } PlayerCountScreenStateDe;
 typedef struct { char pad0[0x10]; u8 flags; char pad11[0x27]; void *text; } PlayerCountScreenPartView;
@@ -24,17 +24,17 @@ extern void XStdio_FormatBuffer(void *a, void *b, s32 c);
 /* Builds the 0x24-byte state g_playerCountScreen from the resources 0x392 to 0x397, hooks its list at 0x14 into the part Node_FindWidgetByResourceId returns for 0x397 and registers it with XStdio_FormatBuffer; returns zero. */
 s32 Frontend_CreatePlayerCountScreenDe(s32 root) {
     PlayerCountScreenPartView *part;
-    g_playerCountScreen = (PlayerCountScreenStateDe *)Cache_AllocateMemory(0x24);
+    g_playerCountScreen = (PlayerCountScreenStateDe *)Cache_AllocateMemory(36);
     Tsmos_ActivateControllerState();
-    g_playerCountScreen->list = SmpFade_CreateFadeWidget(0x392, 0x393);
+    g_playerCountScreen->list = SmpFade_CreateFadeWidget(914, 915);
     SmpSlider_EnableTransition(g_playerCountScreen->list);
-    SmpButton_WrapButtonWidget(0x396);
-    part = (PlayerCountScreenPartView *)Node_FindWidgetByResourceId(root, 0x394);
+    SmpButton_WrapButtonWidget(918);
+    part = (PlayerCountScreenPartView *)Node_FindWidgetByResourceId(root, 916);
     g_playerCountScreen->item = part;
     part->flags = 0xF;
-    g_playerCountScreen->resourceWidget = SmpFlicker_CreateFlickerWidget(0x395, 0x6E);
+    g_playerCountScreen->resourceWidget = SmpFlicker_CreateFlickerWidget(917, 110);
     g_playerCountScreen->playerCount = 3;
-    part = (PlayerCountScreenPartView *)Node_FindWidgetByResourceId(root, 0x397);
+    part = (PlayerCountScreenPartView *)Node_FindWidgetByResourceId(root, 919);
     part->text = g_playerCountScreen->text14;
     g_playerCountScreen->selectionChanged = 1;
     XStdio_FormatBuffer(g_playerCountScreen->text14, s_playerCountFormat, 1);

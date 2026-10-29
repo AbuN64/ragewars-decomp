@@ -27,9 +27,9 @@ s32 PAKInterface_ReadRecordsNote(s32 player, s32 channel) {
 
     received = 0;
     packet = &g_pakProfileScreenState->packet;
-    if (Note_ReadNoteData(player, channel, packet, 0x648) == 0) {
-        if (Note_Crc32(packet, 0x640, 7) == packet->checksum) {
-            XPlus_CopyBytes(g_pakProfileScreenState->players[player].slots, &g_pakProfileScreenState->packet, 0x640);
+    if (Note_ReadNoteData(player, channel, packet, 1608) == 0) {
+        if (Note_Crc32(packet, 1600, 7) == packet->checksum) {
+            XPlus_CopyBytes(g_pakProfileScreenState->players[player].slots, &g_pakProfileScreenState->packet, 1600);
             received = 1;
             g_pakProfileScreenState->players[player].profile = g_pakProfileScreenState->packet.savedProfile;
         } else {

@@ -16,7 +16,7 @@ struct OwnerStaticInstanceDrawDistanceFadedModel {
     char pad1C[4];
     s32 pairedResource;
     char pad24[4];
-    char transform[0xA8];
+    char transform[168];
     s32 flagsD0;
     char padD4[4];
     u16 flagsD8;
@@ -51,14 +51,14 @@ struct StaticObject {
     char pad168[0xC];
     f32 angle;
     char pad178[4];
-    char effect[0x18];
+    char effect[24];
     f32 scale;
     f32 height;
     u16 flags;
     char pad19E[2];
     f32 scaleTime;
     f32 frameDelta;
-    char lights[0x18];
+    char lights[24];
     s32 scene;
     Gfx *cached;
 };
@@ -68,7 +68,7 @@ struct ModelOwner {
     char pad1C[4];
     s32 pairedResource;
     char pad24[4];
-    char transform[0xA8];
+    char transform[168];
     s32 flagsD0;
     char padD4[4];
     u16 flagsD8;

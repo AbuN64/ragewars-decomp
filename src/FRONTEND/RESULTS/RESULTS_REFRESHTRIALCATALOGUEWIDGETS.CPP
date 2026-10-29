@@ -82,8 +82,8 @@ loop:
         Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_trialCatalogueScreen->root, (u16)*(u32 *)((u8 *)g_arenaCompatibilityTable + byteOffset + 8)), 0);
     }
     index += 1;
-    byteOffset += 0xC;
-    if (index < 0x40) {
+    byteOffset += 12;
+    if (index < 64) {
         goto loop;
     }
 }
@@ -216,7 +216,7 @@ void Results_RefreshTrialCharacterPreview(void) {
         scale.x = g_characterPortraitRecords[index].scale[0];
         scale.y = g_characterPortraitRecords[index].scale[0];
         scale.z = g_characterPortraitRecords[index].scale[0];
-        Preview_InitModelPreview((ModelPreview *)(*(ResultsOptionsScreen **)&g_trialCatalogueScreen)->panels, 9, entry->kind + 0x38F, 0x4B, 0x5DC0, scale,
+        Preview_InitModelPreview((ModelPreview *)(*(ResultsOptionsScreen **)&g_trialCatalogueScreen)->panels, 9, entry->kind + 911, 75, 24000, scale,
                          g_characterPortraitRecords[index].position[0], g_characterPortraitRecords[index].distance[0],
                          g_characterPortraitRecords[index].light[0]);
     }

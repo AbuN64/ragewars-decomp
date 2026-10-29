@@ -71,7 +71,7 @@ struct Shared_Quad {
 /* A mount's embedded animation record and current animation selector. */
 struct Mount {
     char pad0[0x170];
-    char animation[0x34];
+    char animation[52];
     s8 animationId;
 };
 
@@ -80,7 +80,7 @@ struct Rider {
     char pad0[0x37];
     s8 direction;
     char pad38[0x1C];
-    char frame[0x10];
+    char frame[16];
     f32 throttle;
     char pad68[0x38];
     CVector3 base;
@@ -114,7 +114,7 @@ struct Profile {
     u8 count;
     u8 levelProgress[13]; /* +0x18: completion count for levels 0-10 and bonuses 17-18. */
     u8 rank;
-    u8 plays[0x24]; /* +0x26: per-character match count */
+    u8 plays[36]; /* +0x26: per-character match count */
     u8 achievementFlags[0x54 - 0x4A]; /* +0x4A: one bit per achievement */
     u8 kindFlags[0x6C - 0x54]; /* +0x54: one bit per character kind finished with */
     char pad6C[0x7D - 0x6C];
@@ -209,7 +209,7 @@ struct View {
     u32 blendN;
     u32 previousN;
     char pad544[0x554 - 0x544];
-    char menu[0x10]; /* 0x554 */
+    char menu[16]; /* 0x554 */
     s32 shieldActive;
 };
 

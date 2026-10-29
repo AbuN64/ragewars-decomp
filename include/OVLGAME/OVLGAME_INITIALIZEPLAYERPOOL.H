@@ -9,8 +9,8 @@ struct PlayerPoolModeStateView {
 };
 struct PlayerSpawnActivationActor {
     char pad[0x2E8];
-    char firstEffect[0x170]; /* 0x2E8 */
-    char secondEffect[0x180]; /* 0x458 */
+    char firstEffect[368]; /* 0x2E8 */
+    char secondEffect[384]; /* 0x458 */
     struct Part *part;
 };
 /* A 0x44-byte record: three leading words, two lists of 0x16DC/0x16E0-linked nodes, four trailing words. */

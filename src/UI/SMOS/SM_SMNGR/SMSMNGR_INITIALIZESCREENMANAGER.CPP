@@ -69,10 +69,10 @@ void SmSmngr_InitializeCurrentScreen(void) {
         value = callback2Value(param);
         ((struct ObjRecAt40V1 *)g_screenManager->screens[current].primary)->value = value;
     }
-    DispatchCurrentScreenEvent(1, 0xE06, 0, 0, 0);
-    DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
+    DispatchCurrentScreenEvent(1, 3590, 0, 0, 0);
+    DispatchCurrentScreenEvent(1, 3591, 0, 0, 0);
     g_screenManager->screens[current].data.readPosition = 0;
-    DispatchCurrentScreenEvent(1, 0xE02, &g_screenManager->screens[current].data, 0, 0);
+    DispatchCurrentScreenEvent(1, 3586, &g_screenManager->screens[current].data, 0, 0);
     StreamBufferFree(&g_screenManager->screens[current].data);
 }
 
@@ -81,7 +81,7 @@ int SmSmngr_DeactivateCurrentScreen(int screenOwner) {
  index=g_screenManager->current;
  if(index>=0 && g_screenManager->screenChangePending) {
  item=(MenuActorInputView *)g_screenManager->screens[index].focus;
- if(item) Menu_RouteElementEvent(item->input,0x10,0,0,0);
+ if(item) Menu_RouteElementEvent(item->input,16,0,0,0);
  event=screenOwner;
  Stream_DrainResourceWork();
  if(g_screenManager->current != -1) {
@@ -89,12 +89,12 @@ int SmSmngr_DeactivateCurrentScreen(int screenOwner) {
  if(callback) {
  screenOwner=g_screenManager->handled;
  g_screenManager->handled=0;
- callback(0xE03,event,0,0);
+ callback(3587,event,0,0);
  result=g_screenManager->handled;
  if(result==1) { g_screenManager->handled=screenOwner; goto done; }
  g_screenManager->handled=screenOwner;
  }
- DispatchCurrentScreenEvent(1,0xE03,event,0,0);
+ DispatchCurrentScreenEvent(1,3587,event,0,0);
  }
  done:
  g_screenManager->screenChangePending=0;
@@ -112,8 +112,8 @@ void SmSmngr_InitializeScreenManager(s32 screenCount, s32 value) {
     Node_SetDisplayClipBounds(g_screenDrawWidth, g_screenDrawHeight);
     Controller_AllocateControllerContext();
     g_menuEventCount = 0;
-    g_screenManager = Cache_AllocateMemory(0x544);
-    XPlus_FillBytes(g_screenManager, 0, 0x544);
+    g_screenManager = Cache_AllocateMemory(1348);
+    XPlus_FillBytes(g_screenManager, 0, 1348);
     g_screenManager->callback2 = (s32 (*)(s32))value;
     g_screenManager->limit = 4000;
     {
@@ -126,8 +126,8 @@ void SmSmngr_InitializeScreenManager(s32 screenCount, s32 value) {
             slot->draw_handler = 0;
         }
     }
-    g_screenManager->cache = Cache_AllocateMemory(0x384);
-    XPlus_FillBytes(g_screenManager->cache, 0, 0x384);
+    g_screenManager->cache = Cache_AllocateMemory(900);
+    XPlus_FillBytes(g_screenManager->cache, 0, 900);
     g_screenManager->cacheCount = 0;
     frames = N64Eng_GetTimeSeconds() * g_screenManagerFrameScale;
     g_screenManager->screenCount = screenCount;

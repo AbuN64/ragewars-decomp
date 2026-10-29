@@ -41,7 +41,7 @@ struct ControllerRumbleView {
     s32 state;
     f32 amount;
     f32 timer;
-    char status[0x68];
+    char status[104];
     char object[1];
 };
 

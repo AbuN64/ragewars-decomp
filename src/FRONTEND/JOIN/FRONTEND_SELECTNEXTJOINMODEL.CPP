@@ -61,7 +61,7 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
         return 0;
     }
     MarkMenuEventHandled();
-    if (Menu_GetPreviousScreenOwner(0) == 0x16) {
+    if (Menu_GetPreviousScreenOwner(0) == 22) {
         return 0;
     }
     variant = g_joinRequestEntries[g_courseOptionsScreen->flags].variant;
@@ -88,7 +88,7 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
     );
     g_joinRequestEntries[g_courseOptionsScreen->flags].variantC = variant;
     Join_UpdateJoinRequestDisplay(g_courseOptionsScreen->flags);
-    SoundElement_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 
@@ -112,7 +112,7 @@ s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s3
         return 0;
     }
     MarkMenuEventHandled();
-    if (Menu_GetPreviousScreenOwner(0) == 0x16) {
+    if (Menu_GetPreviousScreenOwner(0) == 22) {
         return 0;
     }
     variant = g_joinRequestEntries[g_courseOptionsScreen->flags].variant;
@@ -140,7 +140,7 @@ s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s3
     g_joinRequestEntries[g_courseOptionsScreen->flags].variantC = variant;
     id = g_courseOptionsScreen->flags;
     Join_UpdateJoinRequestDisplay(id);
-    SoundElement_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 #endif

@@ -296,7 +296,7 @@ typedef struct Actor36 {
     u8 blendStart;
     u8 blendEnd;
     u8 pad13A[0x36];
-    u8 state[0x54];
+    u8 state[84];
     CVector3 displacement;
     u8 pad1D0[0xBC];
     void (*update)(void *, void *);

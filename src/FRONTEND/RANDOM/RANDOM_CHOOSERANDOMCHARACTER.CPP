@@ -19,7 +19,7 @@
 extern struct StateFlags *Scene_GetBlLevelData(void *, s32);
 
 s32 Random_GetStageTransitionResource(void) {
-    return (g_gameSettings.controllerMode == 1 ? Scene_GetBlLevelData(&g_world, g_selectedLevelId)->flags : g_selectedLevelId) * 10 + 0xBC2;
+    return (g_gameSettings.controllerMode == 1 ? Scene_GetBlLevelData(&g_world, g_selectedLevelId)->flags : g_selectedLevelId) * 10 + 3010;
 }
 
 extern Shared_PlayerSettingsRecord g_playerSettings[];

@@ -14,7 +14,7 @@ s32 PAKInterface_CountPendingPlayerPanels(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (g_pakProfileScreenState->players[i].state != 0 && g_pakProfileScreenState->players[i].state != 0xE && g_pakProfileScreenState->players[i].state != 0x11) {
+        if (g_pakProfileScreenState->players[i].state != 0 && g_pakProfileScreenState->players[i].state != 14 && g_pakProfileScreenState->players[i].state != 17) {
             count++;
         }
     }

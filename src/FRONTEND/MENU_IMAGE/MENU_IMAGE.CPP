@@ -127,19 +127,19 @@ void Frontend_ResetEquipmentFromCharacter(void) {
 
     for (player = 0; player < 4; player++) {
         record = &g_playerSettings[player * 150];
-        i = 0x15;
+        i = 21;
         entry = record + 0x15;
         do {
-            entry[0x4C] = 0;
+            entry[76] = 0;
             i -= 1;
             entry -= 1;
         } while (i >= 0);
-        if (record[0x78] == 1) {
-            model = Scene_FindActorDefinition(&g_world, 0xB, (s8) record[0x80]);
+        if (record[120] == 1) {
+            model = Scene_FindActorDefinition(&g_world, 11, (s8) record[128]);
             for (i = 0; i < 8; i++) {
                 id = model->slots[i];
-                if (id >= 0x4C3) {
-                    (record + (id - 0x4C3))[0x4C] = 1;
+                if (id >= 1219) {
+                    (record + (id - 0x4C3))[76] = 1;
                 }
             }
             Equip_LoadEquipmentSelections(player);
@@ -168,7 +168,7 @@ void Frontend_SelectEquipmentColumn(s32 player, s32 column) {
     }
     item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentSecondaryWidgetIds[player][column].value);
     Widget_SetWidgetFlag40(item, 1);
-    item->value = 0x96;
+    item->value = 150;
     g_equipmentAndResultsScreen->panels[player].selection = column;
     Equip_ShowEquipChoice(player, column, g_equipmentAndResultsScreen->panels[player].values[column]);
 }
@@ -202,7 +202,7 @@ s32 Frontend_RestoreEquipmentSelections(void *first, void *second, u32 event, s3
     }
     Equip_ShowEquipChoice(index, g_equipmentAndResultsScreen->panels[index].selection,
                   g_equipmentAndResultsScreen->panels[index].values[g_equipmentAndResultsScreen->panels[index].selection]);
-    SoundElement_PlayFlatSound(0xE7C);
+    SoundElement_PlayFlatSound(3708);
     return 0;
 }
 
@@ -213,7 +213,7 @@ s32 Frontend_SelectPreviousEquipmentColumn(void *first, void *second, s32 slot, 
     if (active == 1) {
         index = slot;
         if (g_equipmentAndResultsScreen->panels[index].mode != 0 && g_equipmentAndResultsScreen->panels[index].state == active) {
-            SoundElement_PlayFlatSound(0xE7B);
+            SoundElement_PlayFlatSound(3707);
             Equip_MoveEquipmentColumn(index, 1);
             return 0;
         }
@@ -228,7 +228,7 @@ s32 Frontend_SelectNextEquipmentColumn(void *first, void *second, s32 slot, s32 
     if (active == 1) {
         index = slot;
         if (g_equipmentAndResultsScreen->panels[index].mode != 0 && g_equipmentAndResultsScreen->panels[index].state == active) {
-            SoundElement_PlayFlatSound(0xE7B);
+            SoundElement_PlayFlatSound(3707);
             Equip_MoveEquipmentColumn(index, -1);
             return 0;
         }
@@ -243,7 +243,7 @@ s32 Frontend_SelectPreviousEquipmentChoice(void *first, void *second, s32 slot, 
     if (active == 1) {
         index = slot;
         if (g_equipmentAndResultsScreen->panels[index].mode == 2 && g_equipmentAndResultsScreen->panels[index].state == active) {
-            SoundElement_PlayFlatSound(0xE7B);
+            SoundElement_PlayFlatSound(3707);
             Equip_CycleEquipmentChoice(index, -1);
             return 0;
         }
@@ -258,7 +258,7 @@ s32 Frontend_SelectNextEquipmentChoice(void *first, void *second, s32 slot, s32 
     if (active == 1) {
         index = slot;
         if (g_equipmentAndResultsScreen->panels[index].mode == 2 && g_equipmentAndResultsScreen->panels[index].state == active) {
-            SoundElement_PlayFlatSound(0xE7B);
+            SoundElement_PlayFlatSound(3707);
             Equip_CycleEquipmentChoice(index, 1);
             return 0;
         }
@@ -284,7 +284,7 @@ s32 Frontend_DispatchEquipmentEvent(void *eventTarget, s32 eventId, s32 eventCod
     MenuActorInputView *actor;
 
     if (g_equipmentEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_equipmentEventHandlers;
         index = 0;
         do {
@@ -328,7 +328,7 @@ void Frontend_DrawMenuImage(MenuImage *menu) {
         frame = menu->frame;
         screen = g_fallbackScreenMessageEmitter;
         OnScreen_SetupTextRendering();
-        Geometry_SetModePreset(0x15);
+        Geometry_SetModePreset(21);
         b = 1.0f;
         a = b;
         switch (g_frontendCurrentVideoModeIndex) {
@@ -346,7 +346,7 @@ void Frontend_DrawMenuImage(MenuImage *menu) {
         }
         gDPSetEnvColor(g_displayListCursor++, (u8)menu->red, (u8)menu->green, (u8)menu->blue, 0xFF);
         gDPSetPrimColor(g_displayListCursor++, 0, 0, 0xE0, 0, 0, 0xFF);
-        OnScreen_DrawSpriteResource(menu->image, frame, (s16)(s32)screen[0xA9], (s16)(s32)screen[0xAA],
+        OnScreen_DrawSpriteResource(menu->image, frame, (s16)(s32)screen[169], (s16)(s32)screen[170],
                          a * 9.0f, b * 4.0f, 1);
     }
 }

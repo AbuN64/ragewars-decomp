@@ -14,7 +14,7 @@ s32 PAKInterface_CountUnfinishedPlayerPanels(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (g_pakProfileScreenState->players[i].state != 0 && g_pakProfileScreenState->players[i].state != 0x11) {
+        if (g_pakProfileScreenState->players[i].state != 0 && g_pakProfileScreenState->players[i].state != 17) {
             count++;
         }
     }

@@ -3,11 +3,11 @@
 #include "COMMON/MANAGER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 struct Manager {
-    char queue[0x92C];
+    char queue[2348];
     IntrusiveList pending;
     IntrusiveList active;
     char padActive[0x20 - sizeof(IntrusiveList)];
-    char lock[0x18];
+    char lock[24];
     char reservedBytes[0x24];
     s32 mask;
 };
@@ -19,7 +19,7 @@ struct OwnerStaticInstanceDrawGeometryVariant {
     char pad0[0x20];
     s32 resourceDescriptor;
     char pad24[4];
-    char transform[0xA8];
+    char transform[168];
     s32 flagsD0;
     char padD4[6];
     u8 colorFrame;
@@ -43,9 +43,9 @@ struct ResourceBinding {
     u8 padding002[0x1E];
     s32 *resource; /* 0x20: loaded resource descriptor */
     u8 padding024[4];
-    u8 transform[0x8C]; /* 0x28 */
+    u8 transform[140]; /* 0x28 */
     void *loadedResource; /* 0xB4 */
-    u8 runtimeState[0x18]; /* 0xB8 */
+    u8 runtimeState[24]; /* 0xB8 */
     s32 registrationFlags; /* 0xD0 */
     u8 padding0D4[4];
     u16 status; /* 0xD8 */

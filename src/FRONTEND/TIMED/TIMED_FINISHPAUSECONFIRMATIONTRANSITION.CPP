@@ -39,7 +39,7 @@ s32 Timed_FinishPauseConfirmationTransition(s32 unused0, s32 unused1, s32 event)
         *pause = 0;
         Pools_ResetActorPools((char *)pause - 0x180C, 0);
         Player_InitializePlayerPool((char *)pause - 0x1854, 0, 0);
-        Scene_LoadLevelResources(&g_world, 0x24, 0);
+        Scene_LoadLevelResources(&g_world, 36, 0);
         if (Cache_GetResourceActivityState() == 0) {
             Cache_SetResourceActivityState(1);
         }

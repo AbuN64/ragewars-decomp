@@ -83,10 +83,10 @@ void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode) 
     object->modeState = mode;
     switch (mode) {
     case 1:
-        SoundElement_PlayFlatSound(0xE77);
+        SoundElement_PlayFlatSound(3703);
         break;
     case 2:
-        SoundElement_PlayFlatSound(0xE76);
+        SoundElement_PlayFlatSound(3702);
         break;
     }
 }
@@ -119,7 +119,7 @@ s32 SmpSlider_DispatchTransitionEvent(void *widget, s32 eventId, s32 eventData0,
     s32 table_kind;
 
     if (g_sliderTransitionEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_sliderTransitionEventHandlers;
         offset = 0;
         do {
@@ -131,7 +131,7 @@ s32 SmpSlider_DispatchTransitionEvent(void *widget, s32 eventId, s32 eventData0,
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
@@ -156,7 +156,7 @@ s32 SmpSlider_DestroyController(void *allocation) {
 }
 
 void SmpSlider_RegisterSliderClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB63, g_SmpSlider_DispatchSliderEventAddress, g_SmpSlider_DrawSliderWidgetAddress, 3);
+    SmSmngr_RegisterElementHandlers(2915, g_SmpSlider_DispatchSliderEventAddress, g_SmpSlider_DrawSliderWidgetAddress, 3);
 }
 
 MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 sliderWidgetId, s32 childWidgetId, s32 initialTransition) {
@@ -167,10 +167,10 @@ MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 sliderWidgetId, s32 childWidg
 
     source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), sliderWidgetId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
-    result = Cache_AllocateMemory(0x58);
-    XPlus_FillBytes(result, 0, 0x58);
+    result = Cache_AllocateMemory(88);
+    XPlus_FillBytes(result, 0, 88);
     *(Header44 *)result = *(Header44 *)source;
-    result->widgetKind = 0xB63;
+    result->widgetKind = 2915;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     child = Node_FindWidgetByResourceId((void*)context, childWidgetId & 0xFFFF);
     result->bar = child;
@@ -209,7 +209,7 @@ s32 SmpSlider_DispatchSliderEvent(void *widget, s32 eventId, s32 eventData0, s32
     s32 table_kind;
 
     if (g_sliderWidgetEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_sliderWidgetEventHandlers;
         offset = 0;
         do {
@@ -221,7 +221,7 @@ s32 SmpSlider_DispatchSliderEvent(void *widget, s32 eventId, s32 eventData0, s32
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;

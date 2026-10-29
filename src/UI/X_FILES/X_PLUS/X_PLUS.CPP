@@ -99,55 +99,55 @@ f64 XPlus_ParseDecimalDouble(u8 *text) {
     sign = k_decimalInitialSign;
     fraction = k_decimalInitialFraction;
     divisor = sign;
-    if (*text == 0x20) {
+    if (*text == 32) {
         do {
             text++;
-        } while (*text == 0x20);
+        } while (*text == 32);
     }
-    if (*text == 0x2D) {
+    if (*text == 45) {
         text++;
         sign = k_decimalNegativeSign;
     }
-    if (*text == 0x2B) {
+    if (*text == 43) {
         text++;
     }
 
     value = k_decimalInitialInteger;
-    if ((u32)(*text - 0x30) < 10) {
+    if ((u32)(*text - 48) < 10) {
         do {
-            value = value * k_decimalIntegerRadix + (f64)(*text - 0x30);
+            value = value * k_decimalIntegerRadix + (f64)(*text - 48);
             text++;
-        } while ((u32)(*text - 0x30) < 10);
+        } while ((u32)(*text - 48) < 10);
     }
 
-    if (*text == 0x2E) {
+    if (*text == 46) {
         text++;
         fraction = k_decimalFractionZero;
-        if ((u32)(*text - 0x30) < 10) {
+        if ((u32)(*text - 48) < 10) {
             do {
                 divisor *= k_decimalFractionRadix;
-                fraction = fraction * k_decimalFractionRadix + (f64)(*text - 0x30);
+                fraction = fraction * k_decimalFractionRadix + (f64)(*text - 48);
                 text++;
-            } while ((u32)(*text - 0x30) < 10);
+            } while ((u32)(*text - 48) < 10);
         }
     }
 
-    if (*text == 0x65 || *text == 0x45) {
+    if (*text == 101 || *text == 69) {
         text++;
         exponentSign = k_decimalInitialExponentSign;
-        if (*text == 0x2D) {
+        if (*text == 45) {
             text++;
             exponentSign = k_decimalNegativeExponentSign;
         }
-        if (*text == 0x2B) {
+        if (*text == 43) {
             text++;
         }
         exponent = k_decimalInitialExponent;
-        if ((u32)(*text - 0x30) < 10) {
+        if ((u32)(*text - 48) < 10) {
             do {
-                exponent = exponent * k_decimalExponentRadix + (f64)(*text - 0x30);
+                exponent = exponent * k_decimalExponentRadix + (f64)(*text - 48);
                 text++;
-            } while ((u32)(*text - 0x30) < 10);
+            } while ((u32)(*text - 48) < 10);
         }
         if (exponent < k_decimalDirectExponentLimit) {
             threshold = k_decimalExponentLoopLimit;
@@ -259,7 +259,7 @@ void XPlus_SplitPath(u8 *path, u8 *drive, u8 *dir, u8 *name, u8 *ext) {
     } else {
         if (name != 0) {
             n = p - path;
-            if (n >= 0x101) {
+            if (n >= 257) {
                 n = 0x100;
             }
             copy_part(name, path, n);
@@ -503,7 +503,7 @@ s32 XPlus_NextRandomInteger(void) {
 
     nextState = (g_xplusRandomState * 0x343FD) + 0x269EC3;
     g_xplusRandomState = nextState;
-    return (nextState >> 0x10) & 0x7FFF;
+    return (nextState >> 16) & 0x7FFF;
 }
 
 /** Return strlen(string) (byte count not including the terminating NUL). */
@@ -654,21 +654,21 @@ s32 XPlus_CompareStringsIgnoreCase(u8 *a, u8 *b)
   s32 c1;
   c2 = *b;
   b += 1;
-  letterA = 0x41;
+  letterA = 65;
   if (c2 >= letterA)
   {
-    if (c2 < 0x5B)
+    if (c2 < 91)
     {
-      c2 += 0x20;
+      c2 += 32;
     }
   }
   c1 = *a;
   a += 1;
   if (c1 >= letterA)
   {
-    if (c1 < 0x5B)
+    if (c1 < 91)
     {
-      c1 += 0x20;
+      c1 += 32;
     }
   }
   if (c2 != 0)
@@ -710,8 +710,8 @@ u8 *XPlus_UppercaseString(u8 *string) {
     if (*string != 0) {
         do {
             c = *cursor;
-            if ((u32)(c - 0x61) < 0x1AU) {
-                *cursor = c - 0x20;
+            if ((u32)(c - 97) < 26U) {
+                *cursor = c - 32;
             }
             cursor += 1;
         } while (*cursor != 0);
@@ -730,8 +730,8 @@ u8 *XPlus_LowercaseString(u8 *string) {
     if (*string != 0) {
         do {
             c = *cursor;
-            if ((u32)(c - 0x41) < 0x1AU) {
-                *cursor = c + 0x20;
+            if ((u32)(c - 65) < 26U) {
+                *cursor = c + 32;
             }
             cursor += 1;
         } while (*cursor != 0);
@@ -1000,7 +1000,7 @@ void XPlus_BuildPath(u8 *path, u8 *drive, u8 *directory, u8 *name, u8 *extension
         driveLetter = *drive;
         if (driveLetter != 0) {
             *out++ = driveLetter;
-            *out++ = 0x3A;
+            *out++ = 58;
         }
     }
     if ((cursor != 0) && (*cursor != 0)) {
@@ -1011,8 +1011,8 @@ void XPlus_BuildPath(u8 *path, u8 *drive, u8 *directory, u8 *name, u8 *extension
             out += 1;
         } while (cursor[0] != 0);
         lastDirChar = cursor[-1];
-        if ((lastDirChar != 0x2F) && (lastDirChar != 0x5C)) {
-            *out = 0x5C;
+        if ((lastDirChar != 47) && (lastDirChar != 92)) {
+            *out = 92;
             out += 1;
         }
     }
@@ -1032,8 +1032,8 @@ void XPlus_BuildPath(u8 *path, u8 *drive, u8 *directory, u8 *name, u8 *extension
         cursor = extension;
         extFirst = *cursor;
         if (extFirst != 0) {
-            if (extFirst != 0x2E) {
-                *out = 0x2E;
+            if (extFirst != 46) {
+                *out = 46;
                 out += 1;
             }
             extChar = *cursor;
@@ -1057,7 +1057,7 @@ void XPlus_InitializeSemaphore(void *messageSemaphore) {
 }
 
 void XPlus_AcquireSemaphore(s32 queue) {
-    osRecvMesg(queue, queue + 0x18, 1);
+    osRecvMesg(queue, queue + 24, 1);
 }
 
 void XPlus_ReleaseSemaphore(s32 *queue) {

@@ -20,10 +20,10 @@ static inline char *resultsThirdHeading(void) { return g_resultTrialModeText; }
 static inline char *resultsFourthHeading(void) { return g_resultChallengeModeText; }
 #endif
 #if defined(VERSION_DE)
-enum { RESULTS_HEADING1=0x237, RESULTS_HEADING2=0x236 };
+enum { RESULTS_HEADING1=567, RESULTS_HEADING2=566 };
 #elif defined(VERSION_EU_X)
-enum { RESULTS_HEADING1=0x23F, RESULTS_HEADING2=0x240 };
+enum { RESULTS_HEADING1=575, RESULTS_HEADING2=576 };
 #else
-enum { RESULTS_HEADING1=0x23A, RESULTS_HEADING2=0x23B };
+enum { RESULTS_HEADING1=570, RESULTS_HEADING2=571 };
 #endif
 #endif

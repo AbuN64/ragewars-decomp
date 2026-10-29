@@ -158,60 +158,60 @@ s32 Frontend_ResetMatchOptionOnEvent(s32 unused0, s32 unused1, u32 eventData, s3
     void *widget;
     s32 value;
 
-    kind = eventData >> 0x10;
+    kind = eventData >> 16;
     if ((kind == 3) && (eventValue == 2)) {
         MarkMenuEventHandled();
         switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_DE)
-        case 0x35F:
+        case 863:
 #elif defined(VERSION_EU_X)
-        case 0x367:
+        case 871:
 #else
-        case 0x363:
+        case 867:
 #endif
             widget = g_matchOptionsScreen->widget24;
             value = 0;
             N64Eng_SetNumericWidgetValue(widget, value);
             break;
 #if defined(VERSION_DE)
-        case 0x35D:
+        case 861:
 #elif defined(VERSION_EU_X)
-        case 0x365:
+        case 869:
 #else
-        case 0x361:
+        case 865:
 #endif
             widget = g_matchOptionsScreen->widget28;
             value = 0;
             N64Eng_SetNumericWidgetValue(widget, value);
             break;
 #if defined(VERSION_DE)
-        case 0x35B:
+        case 859:
 #elif defined(VERSION_EU_X)
-        case 0x363:
+        case 867:
 #else
-        case 0x35F:
+        case 863:
 #endif
             widget = g_matchOptionsScreen->widget2C;
             value = 0;
             N64Eng_SetNumericWidgetValue(widget, value);
             break;
 #if defined(VERSION_DE)
-        case 0x361:
+        case 865:
 #elif defined(VERSION_EU_X)
-        case 0x369:
+        case 873:
 #else
-        case 0x365:
+        case 869:
 #endif
             widget = g_matchOptionsScreen->widget30;
             value = 0;
             N64Eng_SetNumericWidgetValue(widget, value);
             break;
 #if defined(VERSION_DE)
-        case 0x368:
+        case 872:
 #elif defined(VERSION_EU_X)
-        case 0x370:
+        case 880:
 #else
-        case 0x36C:
+        case 876:
 #endif
             widget = g_matchOptionsScreen->widget34;
             value = g_matchOptionsScreen->countDefault;
@@ -229,41 +229,41 @@ s32 Frontend_ActivateMatchOptionAction(void) {
     }
     switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_DE)
-    case 0x367:
+    case 871:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x36B:
+    case 875:
 #elif defined(VERSION_EU_X)
-    case 0x36F:
+    case 879:
 #endif
         Frontend_StoreMatchOptionWidgets();
         Random_SetMenuChoiceResult(-1);
         Menu_ReturnToPreviousScreen();
         break;
 #if defined(VERSION_DE)
-    case 0x365:
+    case 869:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x369:
+    case 873:
 #elif defined(VERSION_EU_X)
-    case 0x36D:
+    case 877:
 #endif
         if (N64Eng_GetNumericWidgetValue(g_matchOptionsScreen->widget34) > 0) {
             Frontend_StoreMatchOptionWidgets();
             Frontend_SyncMatchJoinSlots(0);
-            Random_SetMenuChoiceResult(0x17);
+            Random_SetMenuChoiceResult(23);
             Menu_ReturnToPreviousScreen();
         }
         break;
 #if defined(VERSION_DE)
-    case 0x366:
+    case 870:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x36A:
+    case 874:
 #elif defined(VERSION_EU_X)
-    case 0x36E:
+    case 878:
 #endif
         Frontend_StoreMatchOptionWidgets();
         Frontend_SyncMatchJoinSlots(0);
         Join_SeatJoinRequests();
-        Random_SetMenuChoiceResult(0x19);
+        Random_SetMenuChoiceResult(25);
         Menu_ReturnToPreviousScreen();
         Tsmos_DeactivateControllerState();
         break;
@@ -307,7 +307,7 @@ s32 Frontend_DispatchMatchOptionsEvent(void *object, s32 event, s32 eventData, s
     MenuActorInputView *actor;
 
     if (g_matchOptionsEventCallbacks != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_matchOptionsEventCallbacks;
         index = 0;
         do {

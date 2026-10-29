@@ -23,7 +23,7 @@ s32 Frontend_DispatchConfirmationEvent(void *eventTarget, s32 eventId, s32 event
     MenuActorInputView *actor;
 
     if (g_confirmationMenuEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_confirmationMenuEventHandlers;
         index = 0;
         do {
@@ -53,14 +53,14 @@ extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern s32 Frontend_GetScreenMode(void);
 
 s32 Frontend_CreateTimedMenu(struct Pair14 *window) {
-    g_residentChoiceScreen = Cache_AllocateMemory(0x1C);
+    g_residentChoiceScreen = Cache_AllocateMemory(28);
     Tsmos_ActivateControllerState();
-    Frontend_InitMenuImage(g_residentChoiceScreen, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(g_residentChoiceScreen, 103, 0, 0, 0);
     if (Frontend_GetScreenMode() == 1) {
-        window->first = 0x62;
-        window->second = 0x45;
+        window->first = 98;
+        window->second = 69;
     } else if (Frontend_GetScreenMode() == 2) {
-        window->first = 0x69;
+        window->first = 105;
     }
     return 0;
 }

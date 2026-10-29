@@ -127,7 +127,7 @@ struct CacheEntry {
     u16 state;
     u16 size;
     s32 padC;
-    char data[0x80];
+    char data[128];
 };
 
 

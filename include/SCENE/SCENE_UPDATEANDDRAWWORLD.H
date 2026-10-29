@@ -63,7 +63,7 @@ typedef struct DraftStreamWorld {
     DraftStreamEntry entries[128];
     char pad1B08[0x1B2FC - 0x1B08]; f32 maximumHeight;
     char pad1B300[0x1B6B0 - 0x1B300]; DraftStreamHandle *special;
-    char specialState[0x25C];
+    char specialState[604];
     f32 originX, originZ, cellX, cellZ;
     char pad1B920[8]; s32 specialPresent, specialEnabled;
 } DraftStreamWorld;

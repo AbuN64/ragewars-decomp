@@ -61,7 +61,7 @@ struct PakRecord;
 struct PakRecord {
     u8 present;
     char pad[7];
-    char pak[0x68];
+    char pak[104];
 };
 
 

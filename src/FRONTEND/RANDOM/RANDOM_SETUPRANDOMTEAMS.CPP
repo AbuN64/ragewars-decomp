@@ -88,7 +88,7 @@ void Random_SetupRandomTeams(void) {
     characters[3] = 5;
     arenas[0] = 0;
     arenas[1] = 3;
-    arenas[2] = 0x1B;
+    arenas[2] = 27;
     arenas[3] = 1;
     for (i = 0; i < 100; i++) {
         firstIndex = Graphu64_NextRandom() % 4;

@@ -27,18 +27,18 @@ large:
 converted:
     entry = (struct EntryPAKInterfacePulseIdlePanelLabels *)((char *)g_pakProfileScreenState + index * 0xB68);
 #if defined(VERSION_DE)
-    Node_FindWidgetByResourceId(entry->window, 0x2E4)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 740)->value = alpha;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Node_FindWidgetByResourceId(entry->window, 0x2C2)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 706)->value = alpha;
 #elif defined(VERSION_EU_X)
-    Node_FindWidgetByResourceId(entry->window, 0x2D5)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 725)->value = alpha;
 #endif
     entry = (struct EntryPAKInterfacePulseIdlePanelLabels *)((char *)g_pakProfileScreenState + index * 0xB68);
 #if defined(VERSION_DE)
-    Node_FindWidgetByResourceId(entry->window, 0x2E5)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 741)->value = alpha;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Node_FindWidgetByResourceId(entry->window, 0x2C3)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 707)->value = alpha;
 #elif defined(VERSION_EU_X)
-    Node_FindWidgetByResourceId(entry->window, 0x2D4)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 724)->value = alpha;
 #endif
 }

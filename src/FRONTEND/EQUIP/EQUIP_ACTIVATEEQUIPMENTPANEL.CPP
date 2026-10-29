@@ -72,7 +72,7 @@ void Equip_MoveEquipmentColumn(s32 player, s32 direction) {
     column = g_equipmentAndResultsScreen->panels[player].selection;
     item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentSecondaryWidgetIds[player][column].value);
     Widget_SetWidgetFlag40(item, 0);
-    item->alpha = 0x23;
+    item->alpha = 35;
     if (column != 5) {
         Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentPrimaryWidgetIds[player][column].value), 0);
     }
@@ -177,20 +177,20 @@ void Equip_ActivateEquipmentPanel(s32 player) {
         Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentOptionWidgetIds[player][5].value), 0);
         item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentSecondaryWidgetIds[player][5].value);
         Widget_SetWidgetFlag08(item, 1);
-        item->alpha = 0x23;
+        item->alpha = 35;
         break;
     case 1:
         for (i = 0; i < 3; i++) {
             Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentOptionWidgetIds[player][i].value), 0);
             item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentSecondaryWidgetIds[player][i].value);
             Widget_SetWidgetFlag08(item, 1);
-            item->alpha = 0x23;
+            item->alpha = 35;
             Equip_ShowEquipChoice(player, i, g_equipmentAndResultsScreen->panels[player].values[i]);
         }
         Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentOptionWidgetIds[player][5].value), 0);
         item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentSecondaryWidgetIds[player][5].value);
         Widget_SetWidgetFlag08(item, 1);
-        item->alpha = 0x23;
+        item->alpha = 35;
         Widget_SetWidgetFlag08(g_equipmentAndResultsScreen->panels[player].item, 0);
         break;
     case 2:
@@ -199,7 +199,7 @@ void Equip_ActivateEquipmentPanel(s32 player) {
             Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentOptionWidgetIds[player][i].value), 0);
             item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentSecondaryWidgetIds[player][i].value);
             Widget_SetWidgetFlag08(item, 1);
-            item->alpha = 0x23;
+            item->alpha = 35;
             Equip_ShowEquipChoice(player, i, g_equipmentAndResultsScreen->panels[player].values[i]);
         }
         break;
@@ -207,12 +207,12 @@ void Equip_ActivateEquipmentPanel(s32 player) {
     for (i = 0; i < 5; i++) {
         item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentPrimaryWidgetIds[player][i].value);
         Widget_SetWidgetFlag08(item, 0);
-        item->alpha = 0x37;
+        item->alpha = 55;
     }
     item = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window,
                          g_equipmentSecondaryWidgetIds[player][g_equipmentAndResultsScreen->panels[player].selection].value);
     Widget_SetWidgetFlag40(item, 1);
-    item->alpha = 0x96;
+    item->alpha = 150;
 }
 
 /* Redraws player p's equipment row for the chosen column: shows the panel item, picks the column's

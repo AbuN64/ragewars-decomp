@@ -14,7 +14,7 @@ typedef union SetupScreenModel {
     StateFrontendInitModelPreviewTransform initial;
     struct PreviewRotationView rotation;
     struct ModelPreviewRotationSpeedView offset;
-    u8 record[0xC0];
+    u8 record[192];
 } SetupScreenModel;
 typedef struct SetupScreen {
     void *window;
@@ -31,7 +31,7 @@ typedef struct SetupScreen {
     MenuWidget *widget301;
     MenuWidget *label;
     MenuWidget *widget310;
-    char text[0x40];
+    char text[64];
     s32 category;
     s32 selection;
     MenuWidget *item;

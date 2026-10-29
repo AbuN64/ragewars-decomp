@@ -78,7 +78,7 @@ struct PathMotionWaypoint {
     f32 pauseDuration;
 };
 struct MovingPlatformTrackView {
-    char prefix[0x14];
+    char prefix[20];
     struct CPlatformIntelligence segment;
 };
 struct MovingActorGameFlagView {

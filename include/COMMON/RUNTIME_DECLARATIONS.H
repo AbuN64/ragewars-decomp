@@ -3422,7 +3422,7 @@ struct Opaque_ALSeq_s;
 typedef struct Opaque_ALSeq_s Opaque_ALSeq;
 struct ALSeqPlayer88;
 struct ALSeqPlayer88 {
-    char node[0x14];
+    char node[20];
     void *drvr;
     Opaque_ALSeq *target;
     s32 curTime;
@@ -3508,19 +3508,19 @@ struct TrackerAimActorView {
     CVector3 pos;
     s32 room;
     s32 *definition;
-    char p1C[0x50];
+    char p1C[80];
     f32 heading;
-    char p70[0x74];
+    char p70[116];
     u16 objectId;
-    char pE6[0x1A];
+    char pE6[26];
     s32 flags;
-    char p104[0xD4];
+    char p104[212];
     struct Runtime *player;
-    char p1DC[0x104];
+    char p1DC[260];
     s32 targetFlags;
 };
 struct Runtime {
-    char p0[0x788];
+    char p0[1928];
     s32 weaponState;
     char p78C[8];
     struct TrackerAimActorView *target;
@@ -4005,7 +4005,7 @@ struct ListScreenItem {
 };
 struct ListScreenModel;
 struct ListScreenModel {
-    char data[0xC0];
+    char data[192];
 };
 struct ListScreenScreen;
 struct ListScreenScreen {
@@ -4044,7 +4044,7 @@ struct PlayerCountSettingsSlotView;
 struct MatchRewardsRecord;
 struct MatchRewardsRecord {
     char pad0[0x26];
-    u8 plays[0x24];
+    u8 plays[36];
     u8 unlocks[0x6C - 0x4A];
     s32 total1;
     char pad70[0x74 - 0x70];
@@ -4081,7 +4081,7 @@ struct JumpRoutePlayerView {
 union ModelPreviewScreen;
 typedef struct ModelPreviewRow { s32 model; s32 state; s32 fade; s32 holdTicks; s32 image; } ModelPreviewRow;
 union ModelPreviewScreen {
-    struct { char pad0[0x1C]; s32 cursor; void *window; MenuWidget *item24; char killsText[10], scoreText[10], ratioText[10], otherText[10]; char nameText[0x40]; s32 started, player, badge; ModelPreviewRow rows[10]; char padAfter[0x188 - 0x9C - 10 * sizeof(ModelPreviewRow)]; s32 selected; char resultText[0x1C0 - 0x18C]; s32 ready; char pad1C4[0x1C8 - 0x1C4]; };
+    struct { char pad0[0x1C]; s32 cursor; void *window; MenuWidget *item24; char killsText[10], scoreText[10], ratioText[10], otherText[10]; char nameText[64]; s32 started, player, badge; ModelPreviewRow rows[10]; char padAfter[0x188 - 0x9C - 10 * sizeof(ModelPreviewRow)]; s32 selected; char resultText[0x1C0 - 0x18C]; s32 ready; char pad1C4[0x1C8 - 0x1C4]; };
     struct { char padC8[0xC8]; char modelWorkspace; };
 };
 struct Motion;
@@ -4159,7 +4159,7 @@ struct Label;
 struct AudioOwnerView;
 struct AudioOwnerView {
     char pad0[0x84];
-    char sound[0x58];
+    char sound[88];
     s16 samples[20];
     char pad2[0x2B98 - 0xDC - 40];
     void *listener;
@@ -4240,18 +4240,18 @@ struct Plan;
 struct Plan {
     s32 p0;
     s32 aimTargetFlag;
-    char p8[0x28];
+    char p8[40];
     CompactOptionsPageView *probeParams;
-    char p34[0x34];
+    char p34[52];
     struct TrackerAimActorView *currentTarget;
-    char p6C[0x14];
+    char p6C[20];
     struct TrackerAimActorView *approachTarget;
     s32 collisionMask;
     s32 p88;
     f32 aimYaw;
     f32 aimHeight;
     signed char routeCursor;
-    char p95[0x1B];
+    char p95[27];
     CVector3 pos;
     s32 aimRoom;
 };
@@ -4354,8 +4354,8 @@ struct ResultsHeadingScreen {
     char pad0[0x970];
     void *window;
     char pad974[0x9A0 - 0x974];
-    char heading[0x32];
-    char time[0x32];
+    char heading[50];
+    char time[50];
     char padA04[0xA44 - 0xA04];
     s32 stage;
     char padA48[0xA5C - 0xA48];
@@ -4605,13 +4605,13 @@ struct PlayerCountScreenState {
     void *window;
     s32 delay;
     s32 target;
-    char text[0xC];
+    char text[12];
     s32 value;
 };
 struct ItemsPreviewStateA;
 struct StyleNextState;
 struct StyleNextState {
-    char a[0x14];
+    char a[20];
     s32 item;
     Label *label;
     char text[1];

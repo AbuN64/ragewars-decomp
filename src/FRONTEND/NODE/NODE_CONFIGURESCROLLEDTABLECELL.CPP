@@ -362,7 +362,7 @@ void Node_ReleaseUnretainedTextureEntries(void) {
                     Node_ReleaseRetainedImageSlot(i);
                 }
             }
-            offset += 0x1C;
+            offset += 28;
         } while (++i < g_frontendResourceTextureCount);
     }
 }
@@ -544,7 +544,7 @@ s32 Node_DispatchTypedWidgetEvent(void *widget, s32 eventId, s32 eventData0, s32
     s32 table_kind;
 
     if (g_typedWidgetEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_typedWidgetEventHandlers;
         offset = 0;
         do {
@@ -556,7 +556,7 @@ s32 Node_DispatchTypedWidgetEvent(void *widget, s32 eventId, s32 eventData0, s32
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;

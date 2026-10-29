@@ -30,7 +30,7 @@ s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
    if(timer<=0 && Graphu64_NextRandom()%100<2) {
     widgetOwner->flickering=1;
     widgetOwner->target->value=widgetOwner->entryValues[widgetOwner->entryIndex];
-    SoundElement_PlayFlatSound(0xe75);
+    SoundElement_PlayFlatSound(3701);
    }
   } else {
    flicker->target->value=flicker->restoreValue;
@@ -44,7 +44,7 @@ s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
      flicker->timer=50;
     } else {
      widgetOwner->target->value=widgetOwner->entryValues[next];
-     SoundElement_PlayFlatSound(0xe75);
+     SoundElement_PlayFlatSound(3701);
     }
    }
   }
@@ -78,7 +78,7 @@ s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
    if(timer<=0 && Graphu64_NextRandom()%100<2) {
     widgetOwner->flickering=1;
     widgetOwner->target->value=widgetOwner->entryValues[widgetOwner->entryIndex];
-    SoundElement_PlayFlatSound(0xe75);
+    SoundElement_PlayFlatSound(3701);
    }
   } else {
    flicker->target->value=flicker->restoreValue;
@@ -92,7 +92,7 @@ s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
      flicker->timer=50;
     } else {
      widgetOwner->target->value=widgetOwner->entryValues[next];
-     SoundElement_PlayFlatSound(0xe75);
+     SoundElement_PlayFlatSound(3701);
     }
    }
   }
@@ -117,7 +117,7 @@ s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
    if(timer<=0 && Graphu64_NextRandom()%100<2) {
     widgetOwner->flickering=1;
     widgetOwner->target->value=widgetOwner->entryValues[widgetOwner->entryIndex];
-    SoundElement_PlayFlatSound(0xe75);
+    SoundElement_PlayFlatSound(3701);
    }
   } else {
    flicker->target->value=flicker->restoreValue;
@@ -131,7 +131,7 @@ s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
      flicker->timer=50;
     } else {
      widgetOwner->target->value=widgetOwner->entryValues[next];
-     SoundElement_PlayFlatSound(0xe75);
+     SoundElement_PlayFlatSound(3701);
     }
    }
   }
@@ -156,7 +156,7 @@ s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
    if(timer<=0 && Graphu64_NextRandom()%100<2) {
     widgetOwner->flickering=1;
     widgetOwner->target->value=widgetOwner->entryValues[widgetOwner->entryIndex];
-    SoundElement_PlayFlatSound(0xe75);
+    SoundElement_PlayFlatSound(3701);
    }
   } else {
    flicker->target->value=flicker->restoreValue;
@@ -170,7 +170,7 @@ s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
      flicker->timer=50;
     } else {
      widgetOwner->target->value=widgetOwner->entryValues[next];
-     SoundElement_PlayFlatSound(0xe75);
+     SoundElement_PlayFlatSound(3701);
     }
    }
   }
@@ -218,7 +218,7 @@ void SmpFlicker_InitFlicker(FlickerUpdateState *flicker, s32 sampleCount) {
 }
 
 void SmpFlicker_RegisterFlickerClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB62, g_SmpFlicker_DispatchEventAddress, g_SmpFlicker_IgnoreEventAddress, 3);
+    SmSmngr_RegisterElementHandlers(2914, g_SmpFlicker_DispatchEventAddress, g_SmpFlicker_IgnoreEventAddress, 3);
 }
 
 MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue)
@@ -228,9 +228,9 @@ MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int own
   int kind;
   r = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), widgetResourceId & 65535);
   Node_GetScreenData(GetMenuScreenOwner());
-  p = Cache_AllocateMemory(0x88);
-  XPlus_FillBytes(p, 0, 0x88);
-  p->b = (kind = 0xB62);
+  p = Cache_AllocateMemory(136);
+  XPlus_FillBytes(p, 0, 136);
+  p->b = (kind = 2914);
   p->resource = r;
   p->owner.value = ownerValue;
   p->c = 8;
@@ -315,7 +315,7 @@ s32 SmpFlicker_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 even
     s32 table_kind;
 
     if (g_flickerWidgetEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_flickerWidgetEventHandlers;
         offset = 0;
         do {
@@ -327,7 +327,7 @@ s32 SmpFlicker_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 even
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;

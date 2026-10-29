@@ -38,10 +38,10 @@ struct Panel {
     char pad2[0x20 - 2];
     s16 mode;
     char pad22[0x40 - 0x22];
-    char row0[0x18];
-    char row0Slots[0x20];
-    char row1[0x18];
-    char row1Slots[0x20];
+    char row0[24];
+    char row0Slots[32];
+    char row1[24];
+    char row1Slots[32];
     char elements[0x2E0 - 0xB0];
     s32 clientList;
     s32 audioListHead;

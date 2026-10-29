@@ -123,10 +123,10 @@ struct StateMenuCancelCharacterConfirmation {
     char p0[8];
     s32 reservedWordFifth;
     s32 confirmationState;
-    char p1[0x1320];
+    char p1[4896];
     s32 reservedWord;
     s32 reservedWord1;
-    char p2[0x14];
+    char p2[20];
     s32 reservedWord2;
 };
 

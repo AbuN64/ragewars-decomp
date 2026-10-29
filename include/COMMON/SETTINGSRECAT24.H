@@ -87,7 +87,7 @@ struct MatchScoreScreen {
     union { s32 players[8]; void *data; };
     s32 icons[8][2];
     char killText[4][25], scoreText[4][25], ratioText[4][25], valueText[4][25];
-    char name[0x40];
+    char name[64];
     s32 phase, mode, dirty, selection;
 };
 
@@ -128,10 +128,10 @@ extern void Frontend_InitMatchResultsMenu(void);
 
 /* Results-screen group identifiers from each native menu resource set. */
 #if defined(VERSION_DE)
-enum { RESULTS_RANK_GROUP = 0x264, RESULTS_SECONDARY_GROUP = 0x269, RESULTS_MENU_SHIFT=-4, RESULTS_RIGHT_ITEM=0x26A };
+enum { RESULTS_RANK_GROUP = 612, RESULTS_SECONDARY_GROUP = 617, RESULTS_MENU_SHIFT=-4, RESULTS_RIGHT_ITEM=618 };
 #elif defined(VERSION_EU_X)
-enum { RESULTS_RANK_GROUP = 0x26D, RESULTS_SECONDARY_GROUP = 0x272, RESULTS_MENU_SHIFT=5, RESULTS_RIGHT_ITEM=0x273 };
+enum { RESULTS_RANK_GROUP = 621, RESULTS_SECONDARY_GROUP = 626, RESULTS_MENU_SHIFT=5, RESULTS_RIGHT_ITEM=627 };
 #else
-enum { RESULTS_RANK_GROUP = 0x269, RESULTS_SECONDARY_GROUP = 0x26E, RESULTS_MENU_SHIFT=0, RESULTS_RIGHT_ITEM=0x267 };
+enum { RESULTS_RANK_GROUP = 617, RESULTS_SECONDARY_GROUP = 622, RESULTS_MENU_SHIFT=0, RESULTS_RIGHT_ITEM=615 };
 #endif
 #endif

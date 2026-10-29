@@ -30,7 +30,7 @@ void Tsmos_InitializeEuropeanFrontend(void) {
     Cache_DrainAndCompactResources(0);
     Gfx_InitializeFrontendServices();
     ESmem_InitializeFrameHeaps(0x3000);
-    SmSmngr_InitializeScreenManager(0x23, (s32)g_Level_GetScreenEventTableAddress);
+    SmSmngr_InitializeScreenManager(35, (s32)g_Level_GetScreenEventTableAddress);
     Node_OpenResourceArchive(s_frontendResourceArchiveNameEuX);
     SmpOverlay_RegisterOverlayClass();
     SmpFrameAnim_RegisterFrameAnimClass();
@@ -40,7 +40,7 @@ void Tsmos_InitializeEuropeanFrontend(void) {
     SmpSlider_RegisterSliderClass();
     SmpList_RegisterListClass();
     N64Eng_RegisterNumericWidgetClass();
-    g_frontendTransitionCountdown = 0x3C;
+    g_frontendTransitionCountdown = 60;
     Tsmos_SetIdleTimer(0.0f);
     Tsmos_SetTimerState(1);
     selected = &g_frontendShutdownState.z;

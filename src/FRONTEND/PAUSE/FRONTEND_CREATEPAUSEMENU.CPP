@@ -39,16 +39,16 @@ enum { PAUSE_MENU_FLAGGED_WIDGET_ID = 64 };
 #endif
 s32 Frontend_CreatePauseMenu(MenuWidget *root) {
     s32 *pauseMenuState;
-    pauseMenuState = Cache_AllocateMemory(0x14);
+    pauseMenuState = Cache_AllocateMemory(20);
     g_pauseMenuState = pauseMenuState;
     *pauseMenuState = 0;
     SoundElement_StopAudioExceptKey(-1);
     Control_SaveControllerSetup();
     if (Frontend_GetScreenMode() == 1) {
-        root->x = 0x62;
-        root->y = 0x45;
+        root->x = 98;
+        root->y = 69;
     } else if (Frontend_GetScreenMode() == 2) {
-        root->x = 0x69;
+        root->x = 105;
     }
     Tsmos_ActivateControllerState();
     if ((g_gameSettings.controllerMode != 0) || (ScenarioSetup_IsCupSelected() == 0)) {

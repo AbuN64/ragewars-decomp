@@ -19,7 +19,7 @@ s32 Match_DispatchEuxMatchMenuEvent(void *eventObject, s32 eventId, s32 eventPay
     s32 table_kind;
 
     if (g_matchMenuEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_matchMenuEventHandlers;
         offset = 0;
         do {
@@ -31,7 +31,7 @@ s32 Match_DispatchEuxMatchMenuEvent(void *eventObject, s32 eventId, s32 eventPay
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
@@ -55,8 +55,8 @@ unsigned int g_matchPackedCodeAddresses_de[3] = {
 #include "COMMON/OWNERRECAT8V1.H"
 
 s32 Match_ClearGermanLoadingHints(void) {
-    SmpButton_WrapButtonWidget(0x1D5);
-    SmpButton_WrapButtonWidget(0x1D6);
+    SmpButton_WrapButtonWidget(469);
+    SmpButton_WrapButtonWidget(470);
     return 0;
 }
 #endif
@@ -87,7 +87,7 @@ s32 Match_HandleMatchMessage(void) {
     default:
         return 0;
     case MATCH_MENU_ELEMENT_LOAD_LEVEL_RESOURCES:
-        if (Menu_GetPreviousScreenOwner(0) == 0x16) {
+        if (Menu_GetPreviousScreenOwner(0) == 22) {
             Pools_ResetActorPools(&g_playerViewRenderContext.object, 0);
             Player_InitializePlayerPool(&g_playerViewRenderContext, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);

@@ -40,7 +40,7 @@ s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 event) {
             openFramesLeft = g_pakProfileScreenState->timer - 1;
             g_pakProfileScreenState->timer = openFramesLeft;
             if (openFramesLeft <= 0) {
-                SoundElement_PlayFlatSound(0xE79);
+                SoundElement_PlayFlatSound(3705);
                 /* title is the panel's item handle, kept untyped in the animation state */
                 Widget_SetWidgetFlag08((SlotSelectionWidget *) g_pakProfileScreenState->title, 1);
                 SmpFlicker_StartFlicker(g_pakProfileScreenState->music, 4);
@@ -73,7 +73,7 @@ s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 event) {
             }
             break;
         case 5:
-            SoundElement_PlayFlatSound(0xE78);
+            SoundElement_PlayFlatSound(3704);
             g_pakProfileScreenState->ready = 2;
             g_pakProfileScreenState->timer = 4;
             Widget_SetWidgetFlag08((SlotSelectionWidget *) g_pakProfileScreenState->title, 0);

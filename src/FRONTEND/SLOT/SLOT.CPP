@@ -143,7 +143,7 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 animationSte
         ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->left->x += ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->leftStep;
         ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->right->x -= ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->rightStep;
         if (--((FrontendPanelTransitionView *) g_profileStatisticsScreen)->timer <= 0) {
-            SoundElement_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(3705);
             /* NodeFrontendAnimateSlotSelectionMenu is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
                E8D8 speaks Item, so the node slots cast to it here. */
             Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupA, 1);
@@ -172,7 +172,7 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 animationSte
         }
         break;
     case 5:
-        SoundElement_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(3704);
         ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->state = 2;
         ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->timer = 4;
         Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupB, 0);
@@ -185,7 +185,7 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 animationSte
         Focus_ShowUnlockedEntries(((FrontendPanelTransitionView *) g_profileStatisticsScreen)->styleValue);
         if (--((FrontendPanelTransitionView *) g_profileStatisticsScreen)->timer <= 0) {
             ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->groupC->style = 100;
-            Focus_ShowUnlockedEntries(0x6E);
+            Focus_ShowUnlockedEntries(110);
             ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->state = 3;
             Widget_SetWidgetFlag08((SlotSelectionWidget *) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->cursor, 1);
         }
@@ -199,12 +199,12 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 animationSte
         ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->cursor->style = Math_Cosf((f32) ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->clock * 0.0033333334f) * 30.0f + 220.0f;
         node = SmpOverlay_GetSlotValue(((FrontendPanelTransitionView *) g_profileStatisticsScreen)->handle, 0);
         if (node != ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->focus) {
-            SoundElement_PlayFlatSound(0xE7E);
+            SoundElement_PlayFlatSound(3710);
             if (((FrontendPanelTransitionView *) g_profileStatisticsScreen)->focus != 0) {
-                ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->focus->style = 0x6E;
+                ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->focus->style = 110;
             }
             ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->focus = node;
-            node->style = 0xE1;
+            node->style = 225;
             Focus_RefreshUnlockedFocusLabel();
             Focus_UpdateFocusCaption();
             ((FrontendPanelTransitionView *) g_profileStatisticsScreen)->cursor->x = node->x - 2;

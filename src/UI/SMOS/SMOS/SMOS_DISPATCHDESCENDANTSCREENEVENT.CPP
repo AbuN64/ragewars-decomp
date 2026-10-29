@@ -28,8 +28,8 @@ void Smos_DispatchDescendantScreenEvent(ScreenEventTreeNode *node, s32 event, s3
             if ((context->handled == 0) && (depth > 0) && (node->value != -1) &&
                 (node->type >= 9U)) {
                 valid = 1;
-                if (((event == 0xE08) && ((node->flags | 2) == 0)) ||
-                    ((event == 0xE09) && ((node->flags | 4) == 0))) {
+                if (((event == 3592) && ((node->flags | 2) == 0)) ||
+                    ((event == 3593) && ((node->flags | 4) == 0))) {
                     valid = 0;
                 }
                 if (valid != 0) {

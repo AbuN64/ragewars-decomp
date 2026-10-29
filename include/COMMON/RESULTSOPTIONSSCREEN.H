@@ -24,7 +24,7 @@ struct ResultsOptionsScreen {
     struct WidgetLabelTextView *owner;
     MenuWidget *item155;
     char pad9A0[0xA04 - 0x9A0];
-    char text[0x40];
+    char text[64];
     s32 selection;
     MenuWidget *window;
     s32 modeFlag;
@@ -113,7 +113,7 @@ struct EntryFrontendRefreshTrialCharacterPreview;
 struct EntryFrontendRefreshTrialCharacterPreview {
     char pad[0x80];
     s8 kind;
-    char tail[0x15];
+    char tail[21];
 };
 
 struct EntryFrontendRefreshTrialCharacterPreview;

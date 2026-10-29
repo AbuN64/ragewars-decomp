@@ -66,11 +66,11 @@ s32 Frontend_ActivateResultsAction(void) {
     *paused = 0;
     switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_DE)
-    case 0x235 - 2:
+    case 565 - 2:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x239 - 2:
+    case 569 - 2:
 #elif defined(VERSION_EU_X)
-    case 0x23E - 2:
+    case 574 - 2:
 #endif
         if (((u8 *)paused)[-0x5BF] == 0) {
             Frontend_StartMenuImageTransition(g_matchResultBadgeScreen);
@@ -78,34 +78,34 @@ s32 Frontend_ActivateResultsAction(void) {
         } else {
             g_resultReplayPending = 0;
             g_resultExitPending = 0;
-            SmXlate_SwitchScreen(0xF);
+            SmXlate_SwitchScreen(15);
         }
         break;
 #if defined(VERSION_DE)
-    case 0x235 - 1:
+    case 565 - 1:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x239 - 1:
+    case 569 - 1:
 #elif defined(VERSION_EU_X)
-    case 0x23E - 1:
+    case 574 - 1:
 #endif
         PAKInterface_SetScreenPhase(5);
-        SmXlate_SwitchScreen(0x13);
+        SmXlate_SwitchScreen(19);
         break;
 #if defined(VERSION_DE)
-    case 0x235 + 3:
+    case 565 + 3:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x239 + 3:
+    case 569 + 3:
 #elif defined(VERSION_EU_X)
-    case 0x23E + 3:
+    case 574 + 3:
 #endif
         if (ScenarioSetup_IsCupSelected() == 1) {
-            Random_SetMenuChoiceResult(0x21);
+            Random_SetMenuChoiceResult(33);
             return 0;
         }
         if (((u8 *)paused)[-0x5BF] == 0) {
-            SmXlate_SwitchScreen(0x14);
+            SmXlate_SwitchScreen(20);
         } else {
-            SmXlate_SwitchScreen(0xF);
+            SmXlate_SwitchScreen(15);
         }
         break;
     default:
@@ -160,7 +160,7 @@ s32 Frontend_DispatchResultsEvent(void *eventObject, s32 eventId, s32 eventPaylo
     MenuActorInputView *actor;
 
     if (g_resultsEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_resultsEventHandlers;
         index = 0;
         do {

@@ -78,7 +78,7 @@ void Equip_LoadEquipmentSelections(s32 player) {
             }
         }
         for (i = 0; i < count; i++) {
-            if ((record + source[i].third)[0x4C] == 1) {
+            if ((record + source[i].third)[76] == 1) {
                 g_equipmentAndResultsScreen->entries[player].values[slot++] = i;
             }
         }
@@ -105,15 +105,15 @@ void Equip_ApplySelectedPlayerLoadouts(void) {
 
     for (i = 0; i < 4; i++) {
         record = &g_playerSettings[i * 150];
-        if (record[0x78] != 1) {
+        if (record[120] != 1) {
             continue;
         }
         if (g_equipmentAndResultsScreen->entries[i].mode != 2) {
             continue;
         }
         for (column = 0; column < 22; column++) {
-            (record + column)[0x4C] = 0;
-            (record + column)[0x62] = 0;
+            (record + column)[76] = 0;
+            (record + column)[98] = 0;
         }
         for (column = 0; column < 6; column++) {
             switch (column) {
@@ -136,11 +136,11 @@ void Equip_ApplySelectedPlayerLoadouts(void) {
             }
             item = source[g_equipmentAndResultsScreen->entries[i].values[column]].third;
             row = source + g_equipmentAndResultsScreen->entries[i].values[column];
-            (record + item)[0x4C] = 1;
-            (record + row->third)[0x62] = level;
+            (record + item)[76] = 1;
+            (record + row->third)[98] = level;
         }
-        record[0x4C] = 1;
-        record[0x62] = 0;
+        record[76] = 1;
+        record[98] = 0;
     }
 }
 

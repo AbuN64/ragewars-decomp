@@ -7,7 +7,7 @@ struct ArchiveChunkImageSlot {
     char pad0[8];
     u16 flags;
     char padA[2];
-    char data[0x20];
+    char data[32];
 };
 
 struct ArchiveChunkImageEntry;
@@ -15,7 +15,7 @@ struct ArchiveChunkImageSlot;
 struct ArchiveChunkImageEntry {
     s32 active;
     char pad4[0x300];
-    void *buffers[0x60];
+    void *buffers[96];
     struct ArchiveChunkImageSlot **ns;
     char pad488[4];
     FontGlyphCountView *def;
@@ -42,7 +42,7 @@ struct ArchiveOwnedImageSlot {
     s32 owner;
     u16 flags;
     char padA[2];
-    char data[0x20];
+    char data[32];
 };
 
 
@@ -51,7 +51,7 @@ struct ArchiveChunkImageListsView {
     char pad[0x484];
     void **primary;
     void **optional;
-    char rest[0x10];
+    char rest[16];
 };
 
 
@@ -112,7 +112,7 @@ struct ArchiveOwnedImageSlot;
 struct ArchiveOwnedImageEntry {
     s32 active;
     char pad4[0x300];
-    void *buffers[0x60];
+    void *buffers[96];
     struct ArchiveOwnedImageSlot **pages;
     char pad488[4];
     FontGlyphCountView *def;

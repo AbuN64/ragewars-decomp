@@ -84,11 +84,11 @@ struct ProfileStatisticsScreen {
     void *handle;
     char pad4[0x10C - 4];
     s32 index;
-    char kills[0x32];
-    char wins[0x32];
-    char deaths[0x32];
-    char score[0x32];
-    char count[0x32];
+    char kills[50];
+    char wins[50];
+    char deaths[50];
+    char score[50];
+    char count[50];
 };
 
 

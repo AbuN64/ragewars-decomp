@@ -72,7 +72,7 @@ s32 Frontend_DispatchPakProfileEvent(void *eventTarget, s32 event, s32 eventValu
     MenuActorInputView *actor;
 
     if (g_pakProfileHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_pakProfileHandlers;
         index = 0;
         do {

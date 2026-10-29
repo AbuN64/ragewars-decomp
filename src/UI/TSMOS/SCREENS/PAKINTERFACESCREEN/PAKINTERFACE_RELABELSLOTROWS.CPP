@@ -25,38 +25,38 @@ void PAKInterface_RelabelSlotRows(s32 player) {
         switch (i) {
         case 0:
 #if defined(VERSION_DE)
-            id = 0x28C;
+            id = 652;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            id = 0x28B;
+            id = 651;
 #elif defined(VERSION_EU_X)
-            id = 0x294;
+            id = 660;
 #endif
             break;
         case 1:
 #if defined(VERSION_DE)
-            id = 0x28C + 2;
+            id = 652 + 2;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            id = 0x28B + 2;
+            id = 651 + 2;
 #elif defined(VERSION_EU_X)
-            id = 0x294 + 2;
+            id = 660 + 2;
 #endif
             break;
         case 2:
 #if defined(VERSION_DE)
-            id = 0x28C + 4;
+            id = 652 + 4;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            id = 0x28B + 4;
+            id = 651 + 4;
 #elif defined(VERSION_EU_X)
-            id = 0x294 + 4;
+            id = 660 + 4;
 #endif
             break;
         default:
 #if defined(VERSION_DE)
-            id = 0x28C + 6;
+            id = 652 + 6;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            id = 0x28B + 6;
+            id = 651 + 6;
 #elif defined(VERSION_EU_X)
-            id = 0x294 + 6;
+            id = 660 + 6;
 #endif
             break;
         }

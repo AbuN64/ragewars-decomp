@@ -100,9 +100,9 @@ extern RecordFrontendFillTrialPresetWeaponRows *Scene_GetBlLevelData(void *table
 extern void Results_SetTrialWeaponRow(u32 slot, s32 item, s32 amount);
 
 void Results_RefreshTrialSelectionLabel(void) {
-    char buffer[0x40];
+    char buffer[64];
 
-    Scene_CopyLevelName(&g_world, g_trialCatalogueScreen->selection, buffer, 0x3F);
+    Scene_CopyLevelName(&g_world, g_trialCatalogueScreen->selection, buffer, 63);
     XPlus_CopyString(g_trialCatalogueScreen->text, XPlus_UppercaseString(buffer));
     g_trialCatalogueScreen->owner->text = g_trialCatalogueScreen->text;
 }
@@ -110,7 +110,7 @@ void Results_RefreshTrialSelectionLabel(void) {
 s32 Results_FindTrialValueIndex(s32 id) {
     s32 i;
 
-    for (i = 0; i < 0x24; i++) {
+    for (i = 0; i < 36; i++) {
         if (g_trialCatalogueStages[i].value == id) {
             return i;
         }
@@ -153,7 +153,7 @@ void Results_FillTwoPlayerWeaponRows(void) {
     for (n = 0; n < 4; n++) {
         if (st->playerSettings[n].enabled == 1) {
             j = 0;
-            for (i = 0; i < 0x16; i++) {
+            for (i = 0; i < 22; i++) {
                 if (((base = &g_gameSettings)->playerSettings[n].weapons[i] == 1) && (i != 0)) {
                     Results_SetTrialWeaponRow(j, i, k);
                     j++;
@@ -176,12 +176,12 @@ void Results_FillProfileWeaponRows(void) {
 
     CTrialCatalogue_ShowTrialOptionChildren();
     player = g_trialCatalogueScreen->player;
-    model = Scene_FindActorDefinition(&g_world, 0xB, g_gameSettings.playerSettings[player].character);
+    model = Scene_FindActorDefinition(&g_world, 11, g_gameSettings.playerSettings[player].character);
     row = 0;
     for (i = 0; i < 8; i++) {
         id = model->slots[i];
-        if (id >= 0x4C3) {
-            id -= 0x4C3;
+        if (id >= 1219) {
+            id -= 1219;
             if (Player_HasProfileUnlockFlag(&g_localPlayerProfiles[player * 400], id) == 1 && id != 0) {
                 Results_SetTrialWeaponRow(row, id, 0);
                 row++;
@@ -197,8 +197,8 @@ void Results_FillSelectedPlayerWeaponRows(void) {
 
     CTrialCatalogue_ShowTrialOptionChildren();
     count = 0;
-    base = g_trialCatalogueScreen->player * 0x96;
-    for (weapon = 0; weapon < 0x16; weapon++) {
+    base = g_trialCatalogueScreen->player * 150;
+    for (weapon = 0; weapon < 22; weapon++) {
         if (((ProfileWeaponOwnedView *)(weapon + base + (u8 *)&g_gameSettings))->owned == 1) {
             if (weapon != 0) {
                 Results_SetTrialWeaponRow(count, weapon, 0);
@@ -219,8 +219,8 @@ void Results_FillTrialPresetWeaponRows(s32 key) {
     count = 0;
     for (i = 0; i < 8; i++) {
         item = record->items[i];
-        if (item >= 0x4C3) {
-            item -= 0x4C3;
+        if (item >= 1219) {
+            item -= 1219;
             if (item != 0) {
                 Results_SetTrialWeaponRow(count, item, 0);
                 count++;

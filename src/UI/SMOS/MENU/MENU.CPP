@@ -125,11 +125,11 @@ void Menu_DrawScreenStack(void) {
     }
     delta = now - s_smackFormat;
     s_smackFormat = now;
-    DispatchScreenRangeEvent(0, 0xE0A, 0, &args, delta);
+    DispatchScreenRangeEvent(0, 3594, 0, &args, delta);
 
     index = g_screenManager->lowIndex;
     if (g_screenManager->current >= index) {
-        offset = index * 0x1C;
+        offset = index * 28;
         do {
             index++;
             N64Eng_RenderNoop();
@@ -138,10 +138,10 @@ void Menu_DrawScreenStack(void) {
             N64Eng_ResetRenderState();
             Widget_ComputeWidgetBounds(&first, &basis,
                           *(void **)(offset + (s32)g_screenManager->screens), &args);
-            offset += 0x1C;
+            offset += 28;
         } while (g_screenManager->current >= index);
     }
-    DispatchScreenRangeEvent(0, 0xE0A, 1, 0, delta);
+    DispatchScreenRangeEvent(0, 3594, 1, 0, delta);
     g_menuElementLoadCount = 0;
 }
 
@@ -153,10 +153,10 @@ void Menu_SetFocusedElement(s32 id) {
     }
     previous = g_screenManager->screens[g_screenManager->current].focus;
     if (previous != 0) {
-        send_event(previous->id, 0x10,0,0,0);
+        send_event(previous->id, 16,0,0,0);
     }
     g_screenManager->screens[g_screenManager->current].focus = FindMenuElement(id);
-    send_event(id, 0xF,0,0,0);
+    send_event(id, 15,0,0,0);
 }
 
 void Menu_DestroyScreenManager(void) {
@@ -175,7 +175,7 @@ void Menu_DestroyScreenManager(void) {
         } while (manager->current >= lowIndex);
     }
     if (g_screenManager->callback != 0) {
-        g_screenManager->callback(0xE05, 0, 0, 0);
+        g_screenManager->callback(3589, 0, 0, 0);
     }
     if (g_screenManager->cache != 0) {
         Cache_FreeMemory(g_screenManager->cache);
@@ -191,7 +191,7 @@ void Menu_DestroyScreenManager(void) {
 void Menu_SetEventCallback(FuncPtr callback) {
     g_screenManager->callback = callback;
     if (callback != 0) {
-        callback(0xE04, 0, 0, 0);
+        callback(3588, 0, 0, 0);
     }
 }
 
@@ -317,7 +317,7 @@ s32 Menu_GetElementHandlerFlags(s32 kind)
   count += 1;
 
   ptr += 1;
-  if (count < 0x40)
+  if (count < 64)
   {
     if (ptr)
     {
@@ -342,7 +342,7 @@ void Menu_SetKindHandlerFlags(s32 kind, s32 flags) {
         }
         i += 1;
         handler++;
-    } while (i < 0x40);
+    } while (i < 64);
 }
 
 void Menu_ReturnToPreviousScreen(void) {

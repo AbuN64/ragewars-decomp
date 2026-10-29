@@ -123,7 +123,7 @@ struct RacerViewport {
     s8 mode548; /* 0x548 */
     s8 mode549; /* 0x549 */
     char pad54A[0xA];
-    char sound[0x40];
+    char sound[64];
     char pad594[0xE40 - 0x594];
     IntrusiveList activeMessages; /* 0xE40 */
 };

@@ -32,10 +32,10 @@ RecordN64EngCreateNumericWidget *N64Eng_CreateNumericWidget(s32 sourceResourceId
 
     source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), sourceResourceId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
-    result = Cache_AllocateMemory(0x6C);
-    XPlus_FillBytes(result, 0, 0x6C);
+    result = Cache_AllocateMemory(108);
+    XPlus_FillBytes(result, 0, 108);
     *(Header44 *)result = *(Header44 *)source;
-    result->classId = 0xB65;
+    result->classId = 2917;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     child = Node_FindWidgetByResourceId((void*)context, childResourceId & 0xFFFF);
     result->childWidget = child;

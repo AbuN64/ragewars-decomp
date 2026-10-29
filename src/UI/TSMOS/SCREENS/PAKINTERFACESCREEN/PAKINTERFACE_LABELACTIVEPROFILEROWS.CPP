@@ -25,38 +25,38 @@ void PAKInterface_LabelActiveProfileRows(s32 player) {
         switch (row) {
         case 0:
 #if defined(VERSION_DE)
-            id = 0x2AA;
+            id = 682;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            id = 0x2BA;
+            id = 698;
 #elif defined(VERSION_EU_X)
-            id = 0x2C2;
+            id = 706;
 #endif
             break;
         case 1:
 #if defined(VERSION_DE)
-            id = 0x2AB;
+            id = 683;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            id = 0x2E5;
+            id = 741;
 #elif defined(VERSION_EU_X)
-            id = 0x2C6;
+            id = 710;
 #endif
             break;
         case 2:
 #if defined(VERSION_DE)
-            id = 0x2AC;
+            id = 684;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            id = 0x2E6;
+            id = 742;
 #elif defined(VERSION_EU_X)
-            id = 0x2C7;
+            id = 711;
 #endif
             break;
         default:
 #if defined(VERSION_DE)
-            id = 0x2AC + 1;
+            id = 684 + 1;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            id = 0x2E6 + 1;
+            id = 742 + 1;
 #elif defined(VERSION_EU_X)
-            id = 0x2C7 + 1;
+            id = 711 + 1;
 #endif
             break;
         }

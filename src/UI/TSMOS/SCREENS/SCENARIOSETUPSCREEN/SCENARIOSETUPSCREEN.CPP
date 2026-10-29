@@ -88,7 +88,7 @@ s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 unusedEventId, s32 phase
     if (g_selectionMessageReply.ready == 1) {
         g_selectionMessageReply.ready = 0;
         if (g_selectionMessageReply.value != -1) {
-            g_setupScreen->widget30C->alpha = 0x5A;
+            g_setupScreen->widget30C->alpha = 90;
             MarkMenuEventHandled();
             SmXlate_SwitchScreen(g_selectionMessageReply.value);
             return 0;
@@ -117,7 +117,7 @@ block_7:
         exitCountdown = g_setupScreen->stateCountdown - 1;
         g_setupScreen->stateCountdown = exitCountdown;
         if (exitCountdown <= 0) {
-            SoundElement_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(3705);
             Widget_SetWidgetFlag08(g_setupScreen->widget301, 1);
             SmpFlicker_StartFlicker(g_setupScreen->text3E4, 4);
             g_setupScreen->screenState = 4;
@@ -160,7 +160,7 @@ block_7:
 
         if ((((ListScreenScreen *) g_setupScreen)->countdown <= 0) && (SmpFlicker_IsFlickerIdle(g_setupScreen->text3E4) != 0)) {
             SmpFlicker_RestoreFlickerValue(g_setupScreen->text3E4);
-            ScenarioSetup_SetCatalogueAlpha(0xA);
+            ScenarioSetup_SetCatalogueAlpha(10);
             g_setupScreen->screenState = 9;
         }
         break;
@@ -172,23 +172,23 @@ block_7:
         g_setupScreen->screenState = 2;
         g_setupScreen->stateCountdown = 4;
         Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
-        SoundElement_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(3704);
         break;
     case 8:
-        transitionStateOrAlpha = ((ListScreenItem *)Node_FindWidgetByResourceId(root, setupRes(0x316)))->alpha;
+        transitionStateOrAlpha = ((ListScreenItem *)Node_FindWidgetByResourceId(root, setupRes(790)))->alpha;
         catalogueAlpha = transitionStateOrAlpha >> 1;
         ScenarioSetup_SetCatalogueAlpha(catalogueAlpha);
-        if (catalogueAlpha < 0xA) {
+        if (catalogueAlpha < 10) {
             g_setupScreen->screenState = 3;
-            Random_SetMenuChoiceResult(0xB);
+            Random_SetMenuChoiceResult(11);
             return 0;
         }
         break;
     case 9:
-        catalogueAlpha = ((ListScreenItem *)Node_FindWidgetByResourceId(root, setupRes(0x316)))->alpha;
+        catalogueAlpha = ((ListScreenItem *)Node_FindWidgetByResourceId(root, setupRes(790)))->alpha;
         catalogueAlpha = (catalogueAlpha + 1) * 2;
-        if (catalogueAlpha >= 0x42) {
-            catalogueAlpha = 0x41;
+        if (catalogueAlpha >= 66) {
+            catalogueAlpha = 65;
             g_setupScreen->screenState = 3;
         }
         ScenarioSetup_SetCatalogueAlpha(catalogueAlpha);
@@ -242,7 +242,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
     if (g_selectionMessageReply.ready == 1) {
         g_selectionMessageReply.ready = 0;
         if (g_selectionMessageReply.value != -1) {
-            g_setupScreen->widget30C->alpha = 0x5A;
+            g_setupScreen->widget30C->alpha = 90;
             MarkMenuEventHandled();
             SmXlate_SwitchScreen(g_selectionMessageReply.value);
             return 0;
@@ -262,7 +262,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         g_setupScreen->left->x += (u16)g_setupScreen->leftCount;
         g_setupScreen->right->x -= (u16)g_setupScreen->rightCount;
         if (--g_setupScreen->stateCountdown <= 0) {
-            SoundElement_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(3705);
             Widget_SetWidgetFlag08(g_setupScreen->widget301, 1);
             SmpFlicker_StartFlicker(g_setupScreen->text3E4, 4);
             g_setupScreen->screenState = 4;
@@ -309,11 +309,11 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         g_setupScreen->screenState = 2;
         g_setupScreen->stateCountdown = 4;
         Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
-        SoundElement_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(3704);
         break;
     case 6: case 7: break;
     case 8:
-        level = Node_FindWidgetByResourceId(root, 0x312)->alpha;
+        level = Node_FindWidgetByResourceId(root, 786)->alpha;
         fade = level >> 1;
         ScenarioSetup_SetCatalogueAlpha(fade);
         if (fade < 10) {
@@ -323,7 +323,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         }
         break;
     case 9:
-        fade = Node_FindWidgetByResourceId(root, 0x312)->alpha;
+        fade = Node_FindWidgetByResourceId(root, 786)->alpha;
         fade = (fade + 1) * 2;
         if (fade > 65) { fade = 65; g_setupScreen->screenState = 3; }
         ScenarioSetup_SetCatalogueAlpha(fade);
@@ -477,7 +477,7 @@ void ScenarioSetup_SetCatalogueAlpha(s32 alpha) {
 
 void ScenarioSetup_RefreshSelectedArenaLabel(void) {
     s32 *table;
-    char buffer[0x40];
+    char buffer[64];
     switch (g_setupScreen->category) {
     case 3:
         table = g_cupCategoryZeroArenaControls;
@@ -504,7 +504,7 @@ void ScenarioSetup_RefreshSelectedArenaLabel(void) {
     } else {
         Scene_CopyLevelName(&g_world,
                       ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(g_setupScreen->category), g_setupScreen->selection),
-                      buffer, 0x3F);
+                      buffer, 63);
         XPlus_CopyString(g_setupScreen->text, XPlus_UppercaseString(buffer));
     }
     g_setupScreen->label->text = g_setupScreen->text;
@@ -525,7 +525,7 @@ void ScenarioSetup_StartSelectedScenario(void) {
         }
     }
     Random_SetSelectedStage(category, list);
-    Random_SetMenuChoiceResult(0x15);
+    Random_SetMenuChoiceResult(21);
     Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)g_setupScreen)->widgetC, 0);
     Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)g_setupScreen)->widgetE, 0);
     Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)g_setupScreen)->widgetD, 0);
@@ -693,7 +693,7 @@ void ScenarioSetup_SetCupStageCount(s32 value) {
 }
 
 void ScenarioSetup_LoadSetupArenaLabel(void) {
-    char buffer[0x40];
+    char buffer[64];
 
     if (g_setupScreen->selection == 0) {
         XPlus_CopyString(g_setupScreen->text,
@@ -705,7 +705,7 @@ g_matchOptionLabelSlots[0]
 );
     } else {
         Scene_CopyLevelName(&g_world, ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(g_setupScreen->category), g_setupScreen->selection),
-                      buffer, 0x3F);
+                      buffer, 63);
         XPlus_CopyString(g_setupScreen->text, XPlus_UppercaseString(buffer));
     }
     g_setupScreen->label->text = g_setupScreen->text;
@@ -722,13 +722,13 @@ void ScenarioSetup_HideArenaCatalogueWidgets(void) {
     s32 index;
     index = 0;
     do {
-        offset = index * 0x10;
+        offset = index * 16;
         Widget_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)g_setupScreen->window, (u16)*(s32 *)(&g_scenarioCatalogueFirstWidgetIds - 2 + offset)), 0);
         if (*(s32 *)(&g_scenarioCatalogueLinkedWidgetIds + offset) != -1) {
             Widget_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)g_setupScreen->window, (u16)*(s32 *)(&g_scenarioCatalogueSecondWidgetIds - 2 + offset)), 0);
         }
             index += 1;
-    } while (index < 0x28);
+    } while (index < 40);
 }
 
 /* Maps a selection index to its code: 0 gives 5, 1 gives 7, 2 gives 17, 3 gives 11 and anything else
@@ -788,7 +788,7 @@ s32 ScenarioSetup_ResolveArenaFromSelection(s32 gameMode, s32 arenaSelection) {
             result = g_scenarioArenaSelectionTable[i * 4];
         }
         i++;
-    } while ((i < 0x28) && (found == 0));
+    } while ((i < 40) && (found == 0));
     return result;
 }
 
@@ -831,7 +831,7 @@ extern void Defs_SetBitValue(void *, s32, s32);
 void ScenarioSetup_ClearFlagBits(void) {
     s32 i;
 
-    for (i = 0; i < 0x28; i++) {
+    for (i = 0; i < 40; i++) {
         Defs_SetBitValue(g_scenarioCupProgress.played, i, 0);
     }
 }
@@ -872,7 +872,7 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 
     MarkMenuEventHandled();
     g_setupScreen->screenState = 8;
-    ScenarioSetup_SetCatalogueAlpha(0x41);
+    ScenarioSetup_SetCatalogueAlpha(65);
 
     Widget_SetWidgetFlag08(g_setupScreen->widget30B, 0);
     Widget_SetWidgetFlag08(g_setupScreen->widget30D, 0);
@@ -880,8 +880,8 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
     Widget_SetWidgetFlag08(g_setupScreen->label, 0);
     Widget_SetWidgetFlag08(g_setupScreen->widget310, 0);
 
-    g_setupScreen->widget30C->alpha = 0x5A;
-    SoundElement_PlayFlatSound(0xE7C);
+    g_setupScreen->widget30C->alpha = 90;
+    SoundElement_PlayFlatSound(3708);
 
     return 0;
 }
@@ -914,20 +914,20 @@ s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void
     if (changed != 1) {
         return 0;
     }
-    SoundElement_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(3709);
     ScenarioSetup_ResetSelectionIndicators();
     SCR4D4->word45C = 0;
     SCR4D4->word464 = 0;
-    SCR4D4->item->alpha = 0x41;
+    SCR4D4->item->alpha = 65;
     ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR4D4->selection != 0) {
         return 0;
     }
     Widget_SetWidgetFlag08(SCR4D4->left, 1);
     Widget_SetWidgetFlag08(SCR4D4->marker, 1);
-    SCR4D4->marker->x = SCR4D4->category * 34 + 0x7C;
+    SCR4D4->marker->x = SCR4D4->category * 34 + 124;
     Widget_SetWidgetFlag08(SCR4D4->right, 0);
-    Model_SetPreviewModel(SCR4D4->view, SCR4D4->category + 0xEA6);
+    Model_SetPreviewModel(SCR4D4->view, SCR4D4->category + 3750);
     return 0;
 }
 #undef SCR4D4
@@ -975,11 +975,11 @@ moved:
     if (changed != 1) {
         return 0;
     }
-    SoundElement_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(3709);
     ScenarioSetup_ResetSelectionIndicators();
     g_setupScreen->pulsePhase = 0;
     g_setupScreen->reservedWord1 = 0;
-    g_setupScreen->item->alpha = 0x41;
+    g_setupScreen->item->alpha = 65;
     ScenarioSetup_RefreshSelectedArenaLabel();
     Widget_SetWidgetFlag08(g_setupScreen->widget30B, 0);
     Widget_SetWidgetFlag08(g_setupScreen->widget30D, 1);
@@ -1011,20 +1011,20 @@ s32 ScenarioSetup_SelectPreviousCatalogueCategory(void *unused0, void *unused1, 
     if (changed != 1) {
         return 0;
     }
-    SoundElement_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(3709);
     ScenarioSetup_ResetSelectionIndicators();
     SCR78C->word45C = 0;
     SCR78C->word464 = 0;
-    SCR78C->item->alpha = 0x41;
+    SCR78C->item->alpha = 65;
     count = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(SCR78C->category));
     if (SCR78C->selection >= count) {
         SCR78C->selection = count - 1;
     }
     ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR78C->selection == 0) {
-        Model_SetPreviewModel(SCR78C->view, SCR78C->category + 0xEA6);
+        Model_SetPreviewModel(SCR78C->view, SCR78C->category + 3750);
         Widget_SetWidgetFlag08(SCR78C->marker, 1);
-        SCR78C->marker->x = SCR78C->category * 34 + 0x7C;
+        SCR78C->marker->x = SCR78C->category * 34 + 124;
     }
     return 0;
 }
@@ -1057,20 +1057,20 @@ s32 ScenarioSetup_SelectNextCatalogueCategory(void *unused0, void *unused1, void
     if (changed != 1) {
         return 0;
     }
-    SoundElement_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(3709);
     ScenarioSetup_ResetSelectionIndicators();
     SCR904->word45C = 0;
     SCR904->word464 = 0;
-    SCR904->item->alpha = 0x41;
+    SCR904->item->alpha = 65;
     count = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(SCR904->category));
     if (SCR904->selection >= count) {
         SCR904->selection = count - 1;
     }
     ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR904->selection == 0) {
-        Model_SetPreviewModel(SCR904->view, SCR904->category + 0xEA6);
+        Model_SetPreviewModel(SCR904->view, SCR904->category + 3750);
         Widget_SetWidgetFlag08(SCR904->marker, 1);
-        SCR904->marker->x = SCR904->category * 34 + 0x7C;
+        SCR904->marker->x = SCR904->category * 34 + 124;
     }
     return 0;
 }
@@ -1109,7 +1109,7 @@ s32 ScenarioSetup_DispatchCatalogueEvent(void *widget, s32 eventId, s32 eventDat
     MenuActorInputView *actor;
 
     if (g_scenarioCatalogueEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_scenarioCatalogueEventHandlers;
         index = 0;
         do {
@@ -1150,15 +1150,15 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     Shared_PlayerSettingsRecord *config;
     s32 i, offset;
 
-    g_matchResultBadgeScreen = (void *)Cache_AllocateMemory(0x330);
+    g_matchResultBadgeScreen = (void *)Cache_AllocateMemory(816);
     g_matchResultBadgeScreen->window = root;
     Widget_SetWidgetFlag08(root, 0);
-    Frontend_InitMenuImage(g_matchResultBadgeScreen->transition, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(g_matchResultBadgeScreen->transition, 103, 0, 0, 0);
     Frontend_StartMenuImageTransition(g_matchResultBadgeScreen->transition);
     g_matchResultBadgeScreen->active = 1;
-    Node_FindWidgetByResourceId(root, 0x234 + RESULTS_MENU_SHIFT)->alpha = 110;
-    Node_FindWidgetByResourceId(root, 0x239 + RESULTS_MENU_SHIFT)->alpha = 20;
-    Node_FindWidgetByResourceId(root, 0x236 + RESULTS_MENU_SHIFT)->alpha = 20;
+    Node_FindWidgetByResourceId(root, 564 + RESULTS_MENU_SHIFT)->alpha = 110;
+    Node_FindWidgetByResourceId(root, 569 + RESULTS_MENU_SHIFT)->alpha = 20;
+    Node_FindWidgetByResourceId(root, 566 + RESULTS_MENU_SHIFT)->alpha = 20;
     Frontend_AccumulatePlayerStatistics();
     screen = g_matchResultBadgeScreen;
     for (i = 0; i < 8; i++) {
@@ -1196,7 +1196,7 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
             screen->first = 0;
             screen->count = 0;
             ScenarioSetup_HideResultCatalogueWidgets();
-            item = Node_FindWidgetByResourceId(root, 0x266 + RESULTS_MENU_SHIFT);
+            item = Node_FindWidgetByResourceId(root, 614 + RESULTS_MENU_SHIFT);
             Widget_SetWidgetFlag08(item, 1);
             item->alpha = 115;
             item->text = resultsUnavailable(slot);
@@ -1212,22 +1212,22 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
         }
         break;
     }
-    SmpButton_WrapButtonWidget(0x237 + RESULTS_MENU_SHIFT);
-    SmpButton_WrapButtonWidget(0x238 + RESULTS_MENU_SHIFT);
-    SmpButton_WrapButtonWidget(0x23C + RESULTS_MENU_SHIFT);
-    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 1);
+    SmpButton_WrapButtonWidget(567 + RESULTS_MENU_SHIFT);
+    SmpButton_WrapButtonWidget(568 + RESULTS_MENU_SHIFT);
+    SmpButton_WrapButtonWidget(572 + RESULTS_MENU_SHIFT);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, 568 + RESULTS_MENU_SHIFT), 1);
     i = 0;
     offset = 0;
     do {
         i++;
         if (g_profileSlotIndices[offset] >= 0 && g_profileSlotEnabledFlags[offset] == 0) {
-            Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 0);
+            Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, 568 + RESULTS_MENU_SHIFT), 0);
             break;
         }
         offset += 400;
     } while (i < 4);
-    if (Widget_ListHasFlag100(Node_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && ScenarioSetup_IsCupSelected() == 1 && ScenarioSetup_ReturnResultsGateTrue() == 0) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 1);
+    if (Widget_ListHasFlag100(Node_FindWidgetByResourceId(root, 568 + RESULTS_MENU_SHIFT)) == 0 && ScenarioSetup_IsCupSelected() == 1 && ScenarioSetup_ReturnResultsGateTrue() == 0) {
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, 568 + RESULTS_MENU_SHIFT), 1);
     }
     item = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, RESULTS_HEADING1);
     if (g_currentResultMode.kind == 0) item->text = resultsFirstHeading();
@@ -1239,11 +1239,11 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     case 1:
     default: item->text = resultsThirdHeading(); break;
     }
-    item = Node_FindWidgetByResourceId(root, 0x235 + RESULTS_MENU_SHIFT);
+    item = Node_FindWidgetByResourceId(root, 565 + RESULTS_MENU_SHIFT);
     Scene_CopyLevelName(&g_world, g_selectedLevelId, buffer, 63);
     XPlus_CopyString(g_matchResultBadgeScreen->name, XPlus_UppercaseString(buffer));
     item->text = g_matchResultBadgeScreen->name;
-    g_matchResultBadgeScreen->buttonAddress = (s32)Node_FindWidgetByResourceId(root, 0x23D + RESULTS_MENU_SHIFT);
+    g_matchResultBadgeScreen->buttonAddress = (s32)Node_FindWidgetByResourceId(root, 573 + RESULTS_MENU_SHIFT);
     g_matchResultBadgeScreen->dirty = 1;
     g_frontendScreenStatus.status[7] = 1;
     g_matchResultBadgeScreen->phase = 0;
@@ -1271,16 +1271,16 @@ void ScenarioSetup_FillResultRows(void) {
 
         widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[0]);
         Widget_SetWidgetFlag08(widget, 1);
-        widget->alpha = 0x96;
+        widget->alpha = 150;
         pending = widget;
         pending->value = g_characterPortraitRecords[Key_FindKeyIndex(record->kind)].portrait;
 
         widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[2]);
         Widget_SetWidgetFlag08(widget, 1);
-        widget->alpha = 0x19;
+        widget->alpha = 25;
 
         widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[4]);
-        widget->alpha = 0xAF;
+        widget->alpha = 175;
         Widget_SetWidgetFlag08(widget, 1);
         if (record->out == 0) {
             widget->text = g_localPlayerProfiles[player].name;
@@ -1291,19 +1291,19 @@ void ScenarioSetup_FillResultRows(void) {
         }
 
         widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[6]);
-        widget->alpha = 0x73;
+        widget->alpha = 115;
         Widget_SetWidgetFlag08(widget, 1);
         if (record->out == 0) widget->text = Match_UpdateRankText(player);
         else widget->text = resultsRankText(record->rank);
 
         widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[8]);
-        widget->alpha = 0xAF;
+        widget->alpha = 175;
         Widget_SetWidgetFlag08(widget, 1);
         XStdio_FormatBuffer(g_matchResultBadgeScreen->killText[row], resultsNumberFormat(), record->kills);
         widget->text = g_matchResultBadgeScreen->killText[row];
 
         widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[10]);
-        widget->alpha = 0xAF;
+        widget->alpha = 175;
         Widget_SetWidgetFlag08(widget, 1);
         XStdio_FormatBuffer(g_matchResultBadgeScreen->scoreText[row], resultsNumberFormat(), record->score + record->total);
         *&widget->text = g_matchResultBadgeScreen->scoreText[row];
@@ -1313,7 +1313,7 @@ void ScenarioSetup_FillResultRows(void) {
             Frontend_ShowResultRankBadge(player, row, RESULTS_RANK_GROUP);
         } else {
             widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[12]);
-            widget->alpha = 0xAF;
+            widget->alpha = 175;
             Widget_SetWidgetFlag08(widget, 1);
             attempts = g_playerCountedShots[player];
             percent = 0;
@@ -1327,7 +1327,7 @@ void ScenarioSetup_FillResultRows(void) {
             Frontend_ShowResultRankBadge(player, row, RESULTS_SECONDARY_GROUP);
         } else {
             widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[14]);
-            widget->alpha = 0xAF;
+            widget->alpha = 175;
             Widget_SetWidgetFlag08(widget, 1);
             pending = widget;
             switch (g_currentResultMode.kind) {
@@ -1346,10 +1346,10 @@ void ScenarioSetup_FillResultRows(void) {
 
         widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[16]);
         Widget_SetWidgetFlag08(widget, 0);
-        widget->alpha = 0x96;
+        widget->alpha = 150;
         widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[18]);
         Widget_SetWidgetFlag08(widget, 0);
-        widget->alpha = 0x96;
+        widget->alpha = 150;
         if (record->out == 0) {
             if (g_matchResultBadgeScreen->icons[player][0] != -1) {
                 widget = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[row].ids[16]);
@@ -1508,19 +1508,19 @@ void ScenarioSetup_HideResultCatalogueWidgets(void)
         Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(g_matchResultBadgeScreen->window, g_scenarioResultRowWidgetIds[bank].ids[18]);
         Widget_SetWidgetFlag08(resource, 0);
-        offset += 0x28;
+        offset += 40;
         bank++;
     } while (bank < 4);
 
 #if defined(VERSION_DE)
-    Frontend_HideResultBadgeGroup(0x264);
-    Frontend_HideResultBadgeGroup(0x269);
+    Frontend_HideResultBadgeGroup(612);
+    Frontend_HideResultBadgeGroup(617);
 #elif defined(VERSION_EU_X)
-    Frontend_HideResultBadgeGroup(0x26D);
-    Frontend_HideResultBadgeGroup(0x272);
+    Frontend_HideResultBadgeGroup(621);
+    Frontend_HideResultBadgeGroup(626);
 #else
-    Frontend_HideResultBadgeGroup(0x269);
-    Frontend_HideResultBadgeGroup(0x26E);
+    Frontend_HideResultBadgeGroup(617);
+    Frontend_HideResultBadgeGroup(622);
 #endif
 }
 
@@ -1547,14 +1547,14 @@ void ScenarioSetup_InitResultModelPreview(void) {
     CVector3 position;
     if (PREVIEW_SCREEN->model != -1) {
 #if defined(VERSION_DE)
-        item = Node_FindWidgetByResourceId(PREVIEW_SCREEN->window, 0x263);
+        item = Node_FindWidgetByResourceId(PREVIEW_SCREEN->window, 611);
 #elif defined(VERSION_EU_X)
-        item = Node_FindWidgetByResourceId(PREVIEW_SCREEN->window, 0x26C);
+        item = Node_FindWidgetByResourceId(PREVIEW_SCREEN->window, 620);
 #else
-        item = Node_FindWidgetByResourceId(PREVIEW_SCREEN->window, 0x268);
+        item = Node_FindWidgetByResourceId(PREVIEW_SCREEN->window, 616);
 #endif
         Widget_SetWidgetFlag08(item, 1);
-        item->alpha = 0xAF;
+        item->alpha = 175;
         item->image = previewModelImage();
         scale.x = g_scenarioPreviewScale;
         scale.y = g_scenarioPreviewScale;

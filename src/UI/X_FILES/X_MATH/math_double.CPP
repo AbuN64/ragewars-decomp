@@ -21,10 +21,10 @@ f64 ScaleDoubleExponent(f64 value, s32 shift) {
     exponent = high >> 20;
     exponent &= 0x7FF;
     if (exponent != 0) {
-        if ((u32)exponent < 0x7FF) {
+        if ((u32)exponent < 2047) {
             exponent = (s32)((u32)exponent + (u32)shift);
             if (exponent != 0) {
-                if ((u32)exponent < 0x7FF) {
+                if ((u32)exponent < 2047) {
                     bits->w.hi = (high & 0x800FFFFF) | ((exponent & 0x7FF) << 20);
                     return value;
                 }
@@ -69,7 +69,7 @@ static inline f64 Frexp(f64 value, s32 *exponent) {
 
     if (value != 0.0) {
         bits.d = value;
-        *exponent = ((bits.w.hi >> 20) & 0x7FF) - 0x3FE;
+        *exponent = ((bits.w.hi >> 20) & 0x7FF) - 1022;
         bits.w.hi = (bits.w.hi & 0x800FFFFF) | 0x3FE00000;
         return bits.d;
     }

@@ -51,7 +51,7 @@ struct Player {
     u8 pad104[0xA];
     s8 animationDone; /* 0x10E */
     u8 pad10F[0x61];
-    u8 motion[0x170]; /* 0x170 */
+    u8 motion[368]; /* 0x170 */
     u8 pad2E0[8];
     struct ObjectSceneChangeInstanceModel weaponModel; /* 0x2E8 */
     u8 pad3CE[0xB6];
@@ -88,7 +88,7 @@ struct Player {
     u8 pad674[4];
     f32 rangeTimer; /* 0x678: Player_UpdatePlayerEffectLights */
     struct RangeNode *rangeNodes[3]; /* 0x67C: created by Gdynlight_AllocateLightNode */
-    u8 tuning[0x10]; /* 0x688 */
+    u8 tuning[16]; /* 0x688 */
     void *weaponAnimation; /* 0x698 */
     f32 steer; /* 0x69C */
     f32 pitch; /* 0x6A0 */

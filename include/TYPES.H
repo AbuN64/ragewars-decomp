@@ -258,7 +258,7 @@ struct OSMesgQueue;
 typedef struct Block40 Block40;
 
 struct Block40 {
-    u8 bytes[0x28];
+    u8 bytes[40];
 };
 
 

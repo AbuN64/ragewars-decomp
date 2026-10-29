@@ -51,7 +51,7 @@ s32 Frontend_HandlePage67Choice(void) {
         Tsmos_DeactivateControllerState();
         if (ScenarioSetup_StartRandomCupStage() == 0) {
             Frontend_RequestScreenMode(0);
-            SmXlate_SwitchScreen(0x14);
+            SmXlate_SwitchScreen(20);
         } else {
             Frontend_StartMenuImageTransition(g_residentChoiceScreen);
         }
@@ -79,7 +79,7 @@ s32 Frontend_DispatchResidentActorEvent(void *menuActor, s32 eventKind, s32 even
     MenuActorInputView *actor;
 
     if (g_residentActorEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_residentActorEventHandlers;
         index = 0;
         do {

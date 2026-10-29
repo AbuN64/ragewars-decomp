@@ -81,9 +81,9 @@ extern void MarkMenuEventHandled(void);
 extern void SmXlate_SwitchScreen(s32);
 
 static inline s32 eventCategory(u32 event) {
-    if (event < 0xE00) return 0;
+    if (event < 3584) return 0;
     if (event - 0x1000 < 0x1000) return 1;
-    if (event - 0xE00 < 0x200) return 2;
+    if (event - 3584 < 0x200) return 2;
     if (event - 0x4000 < 0x4000) return 3;
     return 0;
 }
@@ -142,7 +142,7 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
     element = 0;
     kindHandler = 0;
     direct = 0;
-    if (event != 0xE09) g_menuEventCount++;
+    if (event != 3593) g_menuEventCount++;
     handled = &g_screenManager->handled;
     category = eventCategory(event);
     owner = Node_GetScreenData(GetMenuScreenOwner());
@@ -216,9 +216,9 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
 
 extern void Smos_DispatchDescendantScreenEvent(ScreenEventTreeNode *, s32, s32, s32, s32, s32);
 static inline s32 Menu_GetDispatchCategory(u32 code) {
-    if (code < 0xE00) return 0;
+    if (code < 3584) return 0;
     if (code - 0x1000 < 0x1000) return 1;
-    if (code - 0xE00 < 0x200) return 2;
+    if (code - 3584 < 0x200) return 2;
     if (code - 0x4000 < 0x4000) return 3;
     return 0;
 }
@@ -338,8 +338,8 @@ s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, 
     last = g_screenManager->current;
     for (; first <= last; first++) {
         switch (event) {
-        case 0xE01:
-        case 0xE02:
+        case 3585:
+        case 3586:
             value = (s32)&g_screenManager->screens[first].data;
             break;
         }

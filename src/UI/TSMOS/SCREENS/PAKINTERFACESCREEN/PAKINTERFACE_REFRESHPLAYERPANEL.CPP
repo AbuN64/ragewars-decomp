@@ -366,7 +366,7 @@ case22_selected:
 
         do {
             if (itemIndex == 0) {
-                g_pakProfileScreenState->players[playerIndex].name[itemIndex].available = 0x41;
+                g_pakProfileScreenState->players[playerIndex].name[itemIndex].available = 65;
             } else {
                 g_pakProfileScreenState->players[playerIndex].name[itemIndex].available = 0;
             }
@@ -424,7 +424,7 @@ mode_five:
             goto mode_end;
 mode_six:
             {
-                PAKInterface_BeginScreenExit(0x1D);
+                PAKInterface_BeginScreenExit(29);
                 if (g_pakProfileOperationPhase == 1) {
                     g_pakProfileControllerPort -= 1;
                 }
@@ -434,7 +434,7 @@ mode_six:
                 goto mode_end;
             }
 mode_default:
-            PAKInterface_BeginScreenExit(0x1B);
+            PAKInterface_BeginScreenExit(27);
 mode_end:;
         }
         playerLinkOffset = playerIndex * 8;
@@ -561,5 +561,5 @@ block_84:
         playerLinkOffset = playerIndex * 8;
         break;
     }
-    ((SetupLinkedLabel *)g_pakProfileScreenState->players[playerIndex].menuWidget)->alpha = 0x96;
+    ((SetupLinkedLabel *)g_pakProfileScreenState->players[playerIndex].menuWidget)->alpha = 150;
 }

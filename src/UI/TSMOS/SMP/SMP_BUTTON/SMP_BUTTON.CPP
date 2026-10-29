@@ -108,10 +108,10 @@ MenuListWidget *SmpButton_CreateListWidget(s32 listWidgetId, s32 itemWidgetId) {
 
     source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), listWidgetId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
-    result = Cache_AllocateMemory(0x118);
-    XPlus_FillBytes(result, 0, 0x118);
+    result = Cache_AllocateMemory(280);
+    XPlus_FillBytes(result, 0, 280);
     *(Header44 *)result = *(Header44 *)source;
-    result->widgetKind = 0xB64;
+    result->widgetKind = 2916;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     child = Node_FindWidgetByResourceId(context, itemWidgetId & 0xFFFF);
     result->owner = child;
@@ -154,7 +154,7 @@ s32 SmpButton_DispatchListEvent(void *widget, s32 eventId, s32 eventData0, s32 e
     s32 table_kind;
 
     if (g_listButtonEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_listButtonEventHandlers;
         offset = 0;
         do {
@@ -166,7 +166,7 @@ s32 SmpButton_DispatchListEvent(void *widget, s32 eventId, s32 eventData0, s32 e
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
@@ -233,12 +233,12 @@ s32 SmpButton_HighlightListItems(struct SmpControlItemListView *menu) {
 s32 SmpButton_DimListItemsWithSound(struct SmpControlItemListView *list) {
     struct SmpControlItemView *p;
 
-    SoundElement_PlayFlatSound(0xE74);
+    SoundElement_PlayFlatSound(3700);
     p = list->items;
     if (p != 0) {
         do {
             if (p->kind != 8) {
-                p->alpha = 0x64;
+                p->alpha = 100;
             }
             p = p->next;
         } while (p != 0);
@@ -255,7 +255,7 @@ s32 SmpButton_SelectNextListEntry(struct MenuKeyListView *menu, void *second, vo
             menu->index = 0;
         }
         owner->selected = &menu->entries[menu->index];
-        SoundElement_PlayFlatSound(0xE81);
+        SoundElement_PlayFlatSound(3713);
         return 0;
     }
     return 0;
@@ -270,7 +270,7 @@ s32 SmpButton_SelectPreviousListEntry(struct MenuKeyListView *menu, void *second
             menu->index = menu->count - 1;
         }
         owner->selected = &menu->entries[menu->index];
-        SoundElement_PlayFlatSound(0xE81);
+        SoundElement_PlayFlatSound(3713);
         return 0;
     }
     return 0;
@@ -282,7 +282,7 @@ s32 SmpButton_DestroyListController(void *allocation) {
 }
 
 void SmpButton_RegisterButtonClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB61, g_SmpButton_DispatchButtonEventAddress, g_SmpButton_DrawButtonWidgetAddress, 3);
+    SmSmngr_RegisterElementHandlers(2913, g_SmpButton_DispatchButtonEventAddress, g_SmpButton_DrawButtonWidgetAddress, 3);
 }
 
 void SmpButton_WrapButtonWidget(s32 widgetResourceId) {
@@ -292,10 +292,10 @@ void SmpButton_WrapButtonWidget(s32 widgetResourceId) {
 
     source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), widgetResourceId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
-    result = Cache_AllocateMemory(0x44);
-    XPlus_FillBytes(result, 0, 0x44);
+    result = Cache_AllocateMemory(68);
+    XPlus_FillBytes(result, 0, 68);
     *(Header44 *)result = *(Header44 *)source;
-    result->kind = 0xB61;
+    result->kind = 2913;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     Node_WrapNodeInParent(source, result);
     source->resource = -1;
@@ -306,14 +306,14 @@ void SmpButton_EnsureButtonWrapper(RecordSmpButtonEnsureButtonWrapper *source) {
     void *context;
     RecordSmpButtonEnsureButtonWrapper *result;
 
-    if (source->kind == 0xB61) {
+    if (source->kind == 2913) {
         return;
     }
     context = Node_GetScreenData(GetMenuScreenOwner());
-    result = Cache_AllocateMemory(0x44);
-    XPlus_FillBytes(result, 0, 0x44);
+    result = Cache_AllocateMemory(68);
+    XPlus_FillBytes(result, 0, 68);
     *(Header44 *)result = *(Header44 *)source;
-    result->kind = 0xB61;
+    result->kind = 2913;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
     Node_WrapNodeInParent(source, result);
     source->resource = -1;
@@ -328,7 +328,7 @@ s32 SmpButton_DispatchButtonEvent(void *widget, s32 eventId, s32 eventData0, s32
     s32 table_kind;
 
     if (g_buttonWidgetEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_buttonWidgetEventHandlers;
         offset = 0;
         do {
@@ -340,7 +340,7 @@ s32 SmpButton_DispatchButtonEvent(void *widget, s32 eventId, s32 eventData0, s32
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
@@ -407,12 +407,12 @@ s32 SmpButton_HighlightButtonItems(struct SmpControlItemListView *menu) {
 s32 SmpButton_DimButtonItemsWithSound(MenuOverlayOwnerView *button) {
     void *p;
 
-    SoundElement_PlayFlatSound(0xE74);
+    SoundElement_PlayFlatSound(3700);
     p = button->root;
     if (p != 0) {
         do {
             if ((u16)((NodeMenuCreateOverlayNode *)p)->kind != 8) {
-                ((NodeMenuCreateOverlayNode *)p)->alpha = 0x64;
+                ((NodeMenuCreateOverlayNode *)p)->alpha = 100;
             }
             p = (NodeMenuCreateOverlayNode *)((NodeMenuCreateOverlayNode *)p)->words_00[1];
         } while (p != 0);

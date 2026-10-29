@@ -81,7 +81,7 @@ s32 Results_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta)
     if (g_selectionMessageReply[1] == 1) {
         g_selectionMessageReply[1] = 0;
         if (g_selectionMessageReply[0] != -1) {
-            g_trialCatalogueScreen->banner->alpha = 0x5A;
+            g_trialCatalogueScreen->banner->alpha = 90;
             MarkMenuEventHandled();
             SmXlate_SwitchScreen(g_selectionMessageReply[0]);
             return 0;
@@ -96,7 +96,7 @@ s32 Results_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta)
         if (--g_trialCatalogueScreen->timer > 0) {
             break;
         }
-        SoundElement_PlayFlatSound(0xE79);
+        SoundElement_PlayFlatSound(3705);
         Widget_SetWidgetFlag08(g_trialCatalogueScreen->button, 1);
         SmpFlicker_StartFlicker(g_trialCatalogueScreen->prompt, 4);
         g_trialCatalogueScreen->state = 4;
@@ -130,7 +130,7 @@ s32 Results_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta)
         }
         break;
     case 5:
-        SoundElement_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(3704);
         Widget_SetWidgetFlag08(g_trialCatalogueScreen->button, 0);
         switch (g_gameSettings.controllerMode) {
         case 1:
@@ -145,7 +145,7 @@ s32 Results_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta)
     case 8:
         g_trialCatalogueScreen->state = 3;
         Results_HideTrialCatalogueWidgets();
-        Random_SetMenuChoiceResult(0xB);
+        Random_SetMenuChoiceResult(11);
         return 0;
     case 9:
         g_trialCatalogueScreen->state = 3;

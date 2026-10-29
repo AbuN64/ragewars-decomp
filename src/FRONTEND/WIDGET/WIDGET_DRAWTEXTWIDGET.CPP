@@ -137,7 +137,7 @@ void Widget_FlushTextBatches(void) {
     if (g_textBatchCount == 0) {
         return;
     }
-    first = 0x60;
+    first = 96;
     last = 0;
     if (g_widgetTextBatchMode != 0x53333 || g_frontendRenderStateInitialized == 0) {
         g_widgetTextBatchMode = 0x53333;
@@ -335,7 +335,7 @@ void Widget_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     count=0;
 
     for (i=0; i<length; i++) {
-        glyphId=*text-0x20;
+        glyphId=*text-32;
         sprite->glyph=glyphId;
         glyph=&g_textGlyphBuffer->glyphs[glyphId];
         sprite->color=color;

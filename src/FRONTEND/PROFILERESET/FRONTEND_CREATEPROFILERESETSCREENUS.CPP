@@ -41,7 +41,7 @@ s32 Frontend_CreateProfileResetScreenUs(MenuWidget *tree) {
         i--;
         record--;
     } while (i >= 0);
-    g_profileResetScreen->widget = Node_FindWidgetByResourceId(tree, 0x397);
+    g_profileResetScreen->widget = Node_FindWidgetByResourceId(tree, 919);
     g_profileResetScreen->phase = 0;
     settings = &g_gameSettings;
     settings->laps = 10;

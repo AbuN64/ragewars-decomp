@@ -35,7 +35,7 @@ struct VectorPair {
     char pad[8];
 };
 struct CollisionSweepWork {
-    char data[0x1B8];
+    char data[440];
 };
 struct UnicolCurrentActorRoom {
     u8 pad[216]; /* +0x0: src/Unicol_MoveActorWithCollision_CollisionSweepViews.c */

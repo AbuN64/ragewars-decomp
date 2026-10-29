@@ -17,7 +17,7 @@ void PAKInterface_BuildSavePacket(s32 index) {
     s32 offset = index * 2920;
     char *recordTemplate = (char *)&g_pakProfileScreenState->packet;
 
-    XPlus_CopyBytes(recordTemplate, (void *)(offset + (s32)g_pakProfileScreenState + 0x70), 0x640);
+    XPlus_CopyBytes(recordTemplate, (void *)(offset + (s32)g_pakProfileScreenState + 112), 1600);
     g_pakProfileScreenState->packet.savedProfile = ((struct IntegerStateBC0 *) ((char *)g_pakProfileScreenState + offset))->savedProfile;
-    g_pakProfileScreenState->packet.checksum = Note_Crc32(recordTemplate, 0x640, 7);
+    g_pakProfileScreenState->packet.checksum = Note_Crc32(recordTemplate, 1600, 7);
 }

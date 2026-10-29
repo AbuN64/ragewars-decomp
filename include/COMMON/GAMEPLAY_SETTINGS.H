@@ -12,7 +12,7 @@ struct Shared_PlayerSettingsRecord {
     s16 resultScore; /* +0x06: results ordering score */
     s16 resultAlternate; /* +0x08: alternate results ordering score */
     char padA[0x4C - 0xA];
-    u8 weapons[0x16]; /* +0x4C: owned flag per weapon id (results weapon menu) */
+    u8 weapons[22]; /* +0x4C: owned flag per weapon id (results weapon menu) */
     char pad62[0x78 - 0x62];
     u8 enabled; /* +0x78: Frontend_ApplyModeChoice ROM joining-player stores */
     char pad79[6];

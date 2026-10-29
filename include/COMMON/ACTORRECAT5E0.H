@@ -33,7 +33,7 @@ struct Snapshot {
 struct SampledCurve;
 struct SampledCurve {
     int type;
-    unsigned char samples[0x10];
+    unsigned char samples[16];
     float length;
 };
 

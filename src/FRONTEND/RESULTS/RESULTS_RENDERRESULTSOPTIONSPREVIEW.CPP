@@ -83,11 +83,11 @@ s32 Results_RenderResultsOptionsPreview(void *unused0, void *unused1, s32 event)
             Preview_DrawModelPreview(g_trialCatalogueScreen->panels[i]);
             gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         }
-        if (g_gameSettings.controllerMode != 2 && GetMenuScreenOwner() != 0x19) {
+        if (g_gameSettings.controllerMode != 2 && GetMenuScreenOwner() != 25) {
             if (g_trialCatalogueScreen->frames < 20) {
                 if (++g_trialCatalogueScreen->frames == 20) {
                     k = g_trialCatalogueScreen->selection;
-                    Menu_SetOptionsSceneSelection(k + 0x259);
+                    Menu_SetOptionsSceneSelection(k + 601);
                     g_trialCatalogueScreen->blinkDelay = 0;
                 }
             }

@@ -30,11 +30,11 @@ MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
 
     frame = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), frameId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
-    result = Cache_AllocateMemory(0x7C);
-    XPlus_FillBytes(result, 0, 0x7C);
-    result->kindB = 0xB60;
+    result = Cache_AllocateMemory(124);
+    XPlus_FillBytes(result, 0, 124);
+    result->kindB = 2912;
     result->flags = 8;
-    result->kindA = 0xB60;
+    result->kindA = 2912;
     result->frame = frame;
     result->item = Node_FindWidgetByResourceId((void*)context, itemId & 0xFFFF);
     result->scaleX = g_fadeWidgetInitialScale;
@@ -56,7 +56,7 @@ MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
 }
 
 void SmpFade_RegisterFadeClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB60, g_SmpSlider_DispatchTransitionEventAddress, g_SmpSlider_IgnoreFormattedMessageAddress, 3);
+    SmSmngr_RegisterElementHandlers(2912, g_SmpSlider_DispatchTransitionEventAddress, g_SmpSlider_IgnoreFormattedMessageAddress, 3);
 }
 
 /* 800E1470.CPP */

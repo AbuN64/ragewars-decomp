@@ -1671,7 +1671,7 @@ struct ConversionImageView {
 
 struct Header;
 struct Header {
-    u8 data[0xCC];
+    u8 data[204];
 };
 
 
@@ -1893,7 +1893,7 @@ struct Work56EC8 {
     void *owner;
     s16 id;
     char pad6[2];
-    char payload[0x40];
+    char payload[64];
     void *base;
     s32 offset;
 };
@@ -2140,7 +2140,7 @@ struct Pair14 {
 
 struct ObjRecAt40V1;
 struct ObjRecAt40V1 {
-    char p[0x40];
+    char p[64];
     s32 value;
 };
 
@@ -2493,7 +2493,7 @@ struct ArchiveTextureDataEntryView;
 struct ArchiveTextureDataEntryView {
     s32 unused;
     s32 flags;
-    char rest[0x14];
+    char rest[20];
 };
 
 struct HudStatusShared_Settings;
@@ -2600,7 +2600,7 @@ extern int g_sessionOptionResetMode;
 
 struct PlayerRecord;
 struct PlayerRecord {
-    char data[0x190];
+    char data[400];
 };
 
 

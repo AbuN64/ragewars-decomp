@@ -587,7 +587,7 @@ void Linked_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCa
     gDPPipeSync(g_displayListCursor++);
     switch (info.frame->kind) {
     case 3:
-        Geometry_SetCombineMode(0x29);
+        Geometry_SetCombineMode(41);
         if (camera->monochrome) {
             grey = track->env[0] + track->env[1] + track->env[2];
             gDPSetEnvColor(g_displayListCursor++, 0, 0, grey / 3, 255);
@@ -600,10 +600,10 @@ void Linked_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCa
         break;
     case 0:
     case 1:
-        Geometry_SetCombineMode(0x28);
+        Geometry_SetCombineMode(40);
         break;
     }
-    Geometry_SetModePreset(0xD);
+    Geometry_SetModePreset(13);
     clock = actor->clock;
     count = track->count;
     next = clock->next;

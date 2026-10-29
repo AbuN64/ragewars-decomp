@@ -41,15 +41,15 @@ extern void Menu_ReturnToPreviousScreen(void);
 extern void MarkMenuEventHandled(void),Widget_SetWidgetFlag08(MenuWidget *,int);
 
 #if defined(VERSION_DE)
-enum { MENU_RESOURCE = 0x38c };
+enum { MENU_RESOURCE = 908 };
 #elif defined(VERSION_EU)
-enum { MENU_RESOURCE = 0x392 };
+enum { MENU_RESOURCE = 914 };
 #elif defined(VERSION_EU_X)
-enum { MENU_RESOURCE = 0x396 };
+enum { MENU_RESOURCE = 918 };
 #elif defined(VERSION_US)
-enum { MENU_RESOURCE = 0x392 };
+enum { MENU_RESOURCE = 914 };
 #elif defined(VERSION_US_REV1)
-enum { MENU_RESOURCE = 0x392 };
+enum { MENU_RESOURCE = 914 };
 #endif
 
 /* Advances the selected menu item and updates its display state. */
@@ -153,7 +153,7 @@ s32 Join_ScoreJoinRequestEntries(void) {
 s32 Join_FindJoinModelIndex(s32 row, s32 id) {
     s32 i;
 
-    for (i = 0; i < 0x11; i++) {
+    for (i = 0; i < 17; i++) {
         if (g_rewardItemTiers[row][i].first == id) {
             return i;
         }
@@ -171,11 +171,11 @@ s32 Join_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta) {
     MenuWidget *node;
     g_courseOptionsScreen->timer += delta;
 #if defined(VERSION_DE)
-    node = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x38C);
+    node = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 908);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    node = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x392);
+    node = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 914);
 #elif defined(VERSION_EU_X)
-    node = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x396);
+    node = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 918);
 #endif
     node->alpha = (u32)(Math_Cosf(g_courseOptionsScreen->timer * 0.0033333334f) * 100.0f + 150.0f);
     return 0;
@@ -183,14 +183,14 @@ s32 Join_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta) {
 
 s32 Join_RequestJoinOptionsExit(void) {
     MarkMenuEventHandled();
-    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0x15);
+    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 22 ? -1 : 21);
     Menu_ReturnToPreviousScreen();
     return 0;
 }
 
 s32 Join_RequestJoinOptionsExitAlternate(void) {
     MarkMenuEventHandled();
-    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0x15);
+    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 22 ? -1 : 21);
     Menu_ReturnToPreviousScreen();
     return 0;
 }
@@ -204,11 +204,11 @@ s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 eventV
         MarkMenuEventHandled();
         idx = g_courseOptionsScreen->selection;
 #if defined(VERSION_DE)
-        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x38C);
+        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 908);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x392);
+        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 914);
 #elif defined(VERSION_EU_X)
-        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x396);
+        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 918);
 #endif
         oldItem->alpha = 0xFF;
         Widget_SetWidgetFlag08(oldItem, 0);
@@ -219,16 +219,16 @@ s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 eventV
         }
         idx = g_courseOptionsScreen->selection;
 #if defined(VERSION_DE)
-        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x38C);
+        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 908);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x392);
+        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 914);
 #elif defined(VERSION_EU_X)
-        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x396);
+        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 918);
 #endif
         newItem->alpha = 0xFF;
         Widget_SetWidgetFlag08(newItem, 1);
         g_courseOptionsScreen->timer = 0;
-        SoundElement_PlayFlatSound(0xE80);
+        SoundElement_PlayFlatSound(3712);
         return 0;
     }
     return 0;
@@ -254,7 +254,7 @@ s32 Join_SelectNextJoinRow(s32 unusedObject, s32 unusedEvent, s32 unusedEventDat
         newItem->alpha = 0xFF;
         Widget_SetWidgetFlag08(newItem, 1);
         g_courseOptionsScreen->timer = 0;
-        SoundElement_PlayFlatSound(0xE80);
+        SoundElement_PlayFlatSound(3712);
         return 0;
     }
     return 0;
@@ -265,13 +265,13 @@ s32 Join_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 eventData, s32 event
     s32 selectedRow;
     u32 eventKind;
 
-    eventKind = eventData >> 0x10;
+    eventKind = eventData >> 16;
     if ((eventKind == 3) && (eventValue == 0)) {
         MarkMenuEventHandled();
-        rowByteOffset = g_courseOptionsScreen->selection * 0x1C;
+        rowByteOffset = g_courseOptionsScreen->selection * 28;
         *(s32 *)((char *)g_joinRequestRanks + rowByteOffset) = (*(s32 *)((char *)g_joinRequestRanks + rowByteOffset) + 1) % 5;
         Join_UpdateJoinRequestDisplay(g_courseOptionsScreen->selection);
-        if (Menu_GetPreviousScreenOwner(0) == 0x16) {
+        if (Menu_GetPreviousScreenOwner(0) == 22) {
             selectedRow = g_courseOptionsScreen->selection;
             g_gameSettings.playerSettings[7 - selectedRow].rank = *(g_joinRequestRankBytes + (selectedRow * 0x1C));
         }

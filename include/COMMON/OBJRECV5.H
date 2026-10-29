@@ -217,7 +217,7 @@ extern void Playerai_UpdateMountedMovement();
 
 struct ViewState;
 struct ViewState {
-    u8 bytes[0x29C];
+    u8 bytes[668];
     f32 width;
     f32 height;
 };

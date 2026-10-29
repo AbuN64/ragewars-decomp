@@ -19,12 +19,12 @@ extern char *g_matchOptionsCursorLabelFifthByLanguage[];
 #endif
 
 #if defined(VERSION_DE)
-enum { OPTIONS_TEXT = 0x35B };
+enum { OPTIONS_TEXT = 859 };
 #else
 #if defined(VERSION_EU_X)
-enum { OPTIONS_TEXT = 0x363 };
+enum { OPTIONS_TEXT = 867 };
 #else
-enum { OPTIONS_TEXT = 0x35F };
+enum { OPTIONS_TEXT = 863 };
 #endif
 #endif
 
@@ -46,9 +46,9 @@ s32 Frontend_CreateMatchOptions(void *root) {
     void *selectList;
     void *cursorList;
 
-    screen = Cache_AllocateMemory(0x40);
+    screen = Cache_AllocateMemory(64);
     g_matchOptionsScreen = screen;
-    Frontend_InitMenuImage(screen->transition, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(screen->transition, 103, 0, 0, 0);
     g_matchOptionsScreen->countCap = Join_CountOpenPlayerSlots();
     switch (g_currentResultMode.kind) {
     case 1:

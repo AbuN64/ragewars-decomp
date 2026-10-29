@@ -5,11 +5,11 @@
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "COMMON/SHAREDPLAYER.H"
 struct AnimationFrameDefinition {
-    u8 definition_prefix[0x1E];
+    u8 definition_prefix[30];
     u8 mode;
 };
 struct AnimationFrameState {
-    u8 node_prefix[0x2C];
+    u8 node_prefix[44];
     f32 endpoint;
     f32 frame;
     u8 state_between_frame_and_cache[4];

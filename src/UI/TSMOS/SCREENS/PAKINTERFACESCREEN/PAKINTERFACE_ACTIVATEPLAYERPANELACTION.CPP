@@ -67,22 +67,22 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 1:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2D0:
+        case 720:
 #elif defined(VERSION_EU_X)
-        case 0x2E9:
+        case 745:
 #else
-        case 0x2ED:
+        case 749:
 #endif
             g_pakProfileScreenState->players[p].back = 2;
             g_pakProfileScreenState->players[p].state = 2;
             PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
-        case 0x2D1:
+        case 721:
 #elif defined(VERSION_EU_X)
-        case 0x2EA:
+        case 746:
 #else
-        case 0x2EE:
+        case 750:
 #endif
             switch (g_pakProfileScreenState->phase) {
             case 0:
@@ -91,19 +91,19 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             case 4:
             case 5:
             case 6:
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 2:
                 if (g_pakProfileScreenState->players[p].host == 1) {
                     PAKInterface_BeginLinkedProfileTransfer(p);
                 } else {
-                    g_pakProfileScreenState->players[p].state = 0xE;
+                    g_pakProfileScreenState->players[p].state = 14;
                 }
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 7:
-                g_pakProfileScreenState->players[p].state = 0x1A;
+                g_pakProfileScreenState->players[p].state = 26;
                 g_pakProfileScreenState->players[p].next = 1;
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
@@ -114,11 +114,11 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 3:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2D8:
+        case 728:
 #elif defined(VERSION_EU_X)
-        case 0x2DF:
+        case 735:
 #else
-        case 0x2BD:
+        case 701:
 #endif
             switch (g_pakProfileScreenState->phase) {
             case 0:
@@ -127,11 +127,11 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             case 4:
             case 5:
             case 6:
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 7:
-                g_pakProfileScreenState->players[p].state = 0x1A;
+                g_pakProfileScreenState->players[p].state = 26;
                 g_pakProfileScreenState->players[p].next = 1;
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
@@ -139,28 +139,28 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
                 if (g_pakProfileScreenState->players[p].host == 1) {
                     PAKInterface_BeginLinkedProfileTransfer(p);
                 } else {
-                    g_pakProfileScreenState->players[p].state = 0xE;
+                    g_pakProfileScreenState->players[p].state = 14;
                 }
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
             }
             break;
 #if defined(VERSION_DE)
-        case 0x2D7:
+        case 727:
 #elif defined(VERSION_EU_X)
-        case 0x2DD:
+        case 733:
 #else
-        case 0x2BC:
+        case 700:
 #endif
-            g_pakProfileScreenState->players[p].state = 0x1C;
+            g_pakProfileScreenState->players[p].state = 28;
             PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
-        case 0x2D6:
+        case 726:
 #elif defined(VERSION_EU_X)
-        case 0x2DE:
+        case 734:
 #else
-        case 0x2BE:
+        case 702:
 #endif
             g_pakProfileScreenState->players[p].back = 2;
             g_pakProfileScreenState->players[p].state = 2;
@@ -171,17 +171,17 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 15:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2C4:
+        case 708:
 #elif defined(VERSION_EU_X)
-        case 0x2EC:
+        case 748:
 #else
-        case 0x2F0:
+        case 752:
 #endif
             if (PAKInterface_CheckRecordsNoteCapacity(p, &answer) == 0) {
                 if (answer == 1) {
-                    g_pakProfileScreenState->players[p].state = 0xC;
+                    g_pakProfileScreenState->players[p].state = 12;
                 } else {
-                    g_pakProfileScreenState->players[p].state = 0xB;
+                    g_pakProfileScreenState->players[p].state = 11;
                 }
             } else {
                 g_pakProfileScreenState->players[p].back = 2;
@@ -190,17 +190,17 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
-        case 0x2C5:
+        case 709:
 #elif defined(VERSION_EU_X)
-        case 0x2ED:
+        case 749:
 #else
-        case 0x2F1:
+        case 753:
 #endif
             if (g_pakProfileScreenState->phase == 7) {
-                g_pakProfileScreenState->players[p].state = 0x1A;
-                g_pakProfileScreenState->players[p].next = 0xF;
+                g_pakProfileScreenState->players[p].state = 26;
+                g_pakProfileScreenState->players[p].next = 15;
             } else {
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
             }
             PAKInterface_RefreshPlayerPanel(p);
             break;
@@ -209,30 +209,30 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 16:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2B6:
+        case 694:
 #elif defined(VERSION_EU_X)
-        case 0x2C4:
+        case 708:
 #else
-        case 0x2B8:
+        case 696:
 #endif
             g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].owner = (u8) g_pakProfileScreenState->players[p].record;
             g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].player = p;
             g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].time = g_pakProfileScreenState->players[p].profile;
             if (g_pakProfileScreenState->phase == 7) {
                 settings = g_playerSettings;
-                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[0] = settings[0x7B];
-                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[1] = settings[0x7D];
-                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[2] = settings[0x79];
-                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[3] = settings[0x7A];
-                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[4] = settings[0x82];
+                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[0] = settings[123];
+                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[1] = settings[125];
+                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[2] = settings[121];
+                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[3] = settings[122];
+                g_pakProfileScreenState->players[p].records[g_pakProfileScreenState->players[p].record].setting[4] = settings[130];
             }
             if (PAKInterface_SavePlayerRecords(p) == 1) {
                 switch (g_pakProfileScreenState->phase) {
                 case 0:
                     if (PAKInterface_FindEmptyProfileSlot(p) >= 0) {
-                        g_pakProfileScreenState->players[p].state = 0x17;
+                        g_pakProfileScreenState->players[p].state = 23;
                     } else {
-                        g_pakProfileScreenState->players[p].state = 0xE;
+                        g_pakProfileScreenState->players[p].state = 14;
                     }
                     break;
                 case 7:
@@ -242,31 +242,31 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
                     PAKInterface_BeginScreenExit(9);
                     return 0;
                 default:
-                    g_pakProfileScreenState->players[p].state = 0xD;
+                    g_pakProfileScreenState->players[p].state = 13;
                     break;
                 }
                 PAKInterface_RefreshPlayerPanel(p);
             }
             break;
 #if defined(VERSION_DE)
-        case 0x2B5:
+        case 693:
 #elif defined(VERSION_EU_X)
-        case 0x2C3:
+        case 707:
 #else
-        case 0x2B9:
+        case 697:
 #endif
             switch (g_pakProfileScreenState->phase) {
             case 0:
-                g_pakProfileScreenState->players[p].state = 0x17;
+                g_pakProfileScreenState->players[p].state = 23;
                 break;
             case 1:
-                g_pakProfileScreenState->players[p].state = 0x17;
+                g_pakProfileScreenState->players[p].state = 23;
                 break;
             case 7:
-                g_pakProfileScreenState->players[p].state = 0x17;
+                g_pakProfileScreenState->players[p].state = 23;
                 break;
             default:
-                g_pakProfileScreenState->players[p].state = 0xD;
+                g_pakProfileScreenState->players[p].state = 13;
                 break;
             }
             PAKInterface_RefreshPlayerPanel(p);
@@ -277,11 +277,11 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
         slot = PAKInterface_FindEmptyProfileSlot(p);
         if (slot >= 0) {
 #if defined(VERSION_DE)
-            node = Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].menu, 0x2DA);
+            node = Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].menu, 730);
 #elif defined(VERSION_EU_X)
-            node = Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].menu, 0x2B2);
+            node = Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].menu, 690);
 #else
-            node = Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].menu, 0x2F3);
+            node = Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].menu, 755);
 #endif
             for (j = 0; ((Shared_Item *) node)->flags & 0x10; j++) {
                 g_pakProfileScreenState->players[p].records[slot].name[j] = *(u8 *) ((Shared_Item *) node)->label->text;
@@ -298,7 +298,7 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
                 }
                 g_pakProfileScreenState->players[p].records[slot].name[j] = 0;
             }
-            g_pakProfileScreenState->players[p].state = 0x10;
+            g_pakProfileScreenState->players[p].state = 16;
             g_pakProfileScreenState->players[p].record = slot;
         } else {
             g_pakProfileScreenState->players[p].state = 3;
@@ -308,21 +308,21 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 11:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2D3:
+        case 723:
 #elif defined(VERSION_EU_X)
-        case 0x2D8:
+        case 728:
 #else
-        case 0x2D2:
+        case 722:
 #endif
             g_pakProfileScreenState->players[p].state = 4;
             PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
-        case 0x2D4:
+        case 724:
 #elif defined(VERSION_EU_X)
-        case 0x2D7:
+        case 727:
 #else
-        case 0x2D3:
+        case 723:
 #endif
             switch (g_pakProfileScreenState->phase) {
             case 0:
@@ -330,20 +330,20 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             case 3:
             case 4:
             case 5:
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 2:
                 if (g_pakProfileScreenState->players[p].host == 1) {
                     PAKInterface_BeginLinkedProfileTransfer(p);
                 } else {
-                    g_pakProfileScreenState->players[p].state = 0xE;
+                    g_pakProfileScreenState->players[p].state = 14;
                 }
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 7:
-                g_pakProfileScreenState->players[p].state = 0x1A;
-                g_pakProfileScreenState->players[p].next = 0xB;
+                g_pakProfileScreenState->players[p].state = 26;
+                g_pakProfileScreenState->players[p].next = 11;
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
             }
@@ -353,15 +353,15 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 4:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2E8:
+        case 744:
 #elif defined(VERSION_EU_X)
-        case 0x2F5:
+        case 757:
 #else
-        case 0x2DA:
+        case 730:
 #endif
             switch (g_pakProfileScreenState->phase) {
             case 0:
-                g_pakProfileScreenState->players[p].state = 0xF;
+                g_pakProfileScreenState->players[p].state = 15;
                 break;
             case 2:
                 g_pakProfileScreenState->players[p].back = 2;
@@ -374,17 +374,17 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             case 1:
             case 4:
             case 6:
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
                 break;
             }
             PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
-        case 0x2E7:
+        case 743:
 #elif defined(VERSION_EU_X)
-        case 0x2F6:
+        case 758:
 #else
-        case 0x2D9:
+        case 729:
 #endif
             i = g_pakProfileScreenState->players[p].slot;
             if (XPlus_ParseDecimalInteger(g_pakProfileScreenState->players[p].names[i].text) > 0) {
@@ -397,11 +397,11 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 8:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2F4:
+        case 756:
 #elif defined(VERSION_EU_X)
-        case 0x2E2:
+        case 738:
 #else
-        case 0x2D0:
+        case 720:
 #endif
             if (Note_DeleteNote(p, g_pakProfileScreenState->players[p].slot) == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -425,11 +425,11 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             }
             break;
 #if defined(VERSION_DE)
-        case 0x2F5:
+        case 757:
 #elif defined(VERSION_EU_X)
-        case 0x2E1:
+        case 737:
 #else
-        case 0x2CF:
+        case 719:
 #endif
             g_pakProfileScreenState->players[p].state = 4;
             PAKInterface_RefreshPlayerPanel(p);
@@ -439,11 +439,11 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 7:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2F0:
+        case 752:
 #elif defined(VERSION_EU_X)
-        case 0x2E6:
+        case 742:
 #else
-        case 0x2CD:
+        case 717:
 #endif
             i = g_pakProfileScreenState->players[p].choice;
             other = Frontend_FindProfileOwner(g_pakProfileScreenState->players[p].profile, g_pakProfileScreenState->players[p].records[i].owner);
@@ -457,7 +457,7 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
                     case 0:
                         g_pakProfileScreenState->players[p].back = 2;
                         g_pakProfileScreenState->players[p].state = 2;
-                        g_pakProfileScreenState->players[p].next = 0xC;
+                        g_pakProfileScreenState->players[p].next = 12;
                         g_pakProfileScreenState->players[p].sub = 0;
                         break;
                     case 2:
@@ -467,23 +467,23 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
                         g_pakProfileScreenState->players[p].sub = 3;
                         break;
                     default:
-                        g_pakProfileScreenState->players[p].state = 0xD;
+                        g_pakProfileScreenState->players[p].state = 13;
                         break;
                     }
                 } else {
-                    g_pakProfileScreenState->players[p].state = 0xD;
+                    g_pakProfileScreenState->players[p].state = 13;
                 }
                 PAKInterface_RefreshPlayerPanel(p);
             }
             break;
 #if defined(VERSION_DE)
-        case 0x2F1:
+        case 753:
 #elif defined(VERSION_EU_X)
-        case 0x2E5:
+        case 741:
 #else
-        case 0x2CC:
+        case 716:
 #endif
-            g_pakProfileScreenState->players[p].state = 0xD;
+            g_pakProfileScreenState->players[p].state = 13;
             PAKInterface_RefreshPlayerPanel(p);
             break;
         }
@@ -491,17 +491,17 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 9:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2B1:
+        case 689:
 #elif defined(VERSION_EU_X)
-        case 0x2AB:
+        case 683:
 #else
-        case 0x2C9:
+        case 713:
 #endif
             slot = PAKInterface_FindEmptyProfileSlot(p);
             if (slot >= 0) {
                 XPlus_CopyBytes(&g_pakProfileScreenState->players[p].records[slot],
                                  &g_pakProfileScreenState->players[g_pakProfileScreenState->links[0].player].records[g_pakProfileScreenState->links[0].entry],
-                                 0x190);
+                                 400);
                 g_pakProfileScreenState->players[p].record = slot;
                 g_pakProfileScreenState->players[p].records[slot].owner = slot;
                 g_pakProfileScreenState->players[p].records[slot].time = g_pakProfileScreenState->players[p].profile;
@@ -511,29 +511,29 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
                     if (g_pakProfileScreenState->players[p].host == 1) {
                         PAKInterface_BeginLinkedProfileTransfer(p);
                     } else {
-                        g_pakProfileScreenState->players[p].state = 0xE;
+                        g_pakProfileScreenState->players[p].state = 14;
                     }
                 } else {
-                    g_pakProfileScreenState->players[p].state = 0xD;
+                    g_pakProfileScreenState->players[p].state = 13;
                 }
                 PAKInterface_RefreshPlayerPanel(p);
             }
             break;
 #if defined(VERSION_DE)
-        case 0x2B2:
+        case 690:
 #elif defined(VERSION_EU_X)
-        case 0x2AC:
+        case 684:
 #else
-        case 0x2C8:
+        case 712:
 #endif
             if (g_pakProfileScreenState->phase == 2) {
                 if (g_pakProfileScreenState->players[p].host == 1) {
                     PAKInterface_BeginLinkedProfileTransfer(p);
                 } else {
-                    g_pakProfileScreenState->players[p].state = 0xE;
+                    g_pakProfileScreenState->players[p].state = 14;
                 }
             } else {
-                g_pakProfileScreenState->players[p].state = 0xD;
+                g_pakProfileScreenState->players[p].state = 13;
             }
             PAKInterface_RefreshPlayerPanel(p);
             break;
@@ -541,21 +541,21 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
         break;
     case 13:
 #if defined(VERSION_DE)
-        if (event == 0x2CD) {
+        if (event == 717) {
 #elif defined(VERSION_EU_X)
-        if (event == 0x2FD) {
+        if (event == 765) {
 #else
-        if (event == 0x2B5) {
+        if (event == 693) {
 #endif
             sub = g_pakProfileScreenState->players[p].sub;
             switch (sub) {
             case 3:
-                g_pakProfileScreenState->players[p].state = 0x11;
+                g_pakProfileScreenState->players[p].state = 17;
                 q = ((int (*)(u8 *)) PAKInterface_FindReadyTransferPlayer)((u8 *) g_pakProfileScreenState + p * sizeof(PakProfilePanelState));
                 if (q >= 0) {
                     g_pakProfileScreenState->players[q].back = 2;
                     g_pakProfileScreenState->players[q].state = 2;
-                    g_pakProfileScreenState->players[q].next = 0xD;
+                    g_pakProfileScreenState->players[q].next = 13;
                     g_pakProfileScreenState->players[q].sub = 3;
                     PAKInterface_RefreshPlayerPanel(q);
                 }
@@ -563,35 +563,35 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             case 6:
                 switch (g_pakProfileScreenState->phase) {
                 case 1:
-                    g_pakProfileScreenState->players[p].state = 0x11;
+                    g_pakProfileScreenState->players[p].state = 17;
                     q = ((int (*)(u8 *)) PAKInterface_FindReadyTransferPlayer)((u8 *) g_pakProfileScreenState + p * sizeof(PakProfilePanelState));
                     if (q >= 0) {
                         g_pakProfileScreenState->players[q].back = 2;
                         g_pakProfileScreenState->players[q].state = 2;
-                        g_pakProfileScreenState->players[q].next = 0xD;
+                        g_pakProfileScreenState->players[q].next = 13;
                         g_pakProfileScreenState->players[q].sub = sub;
                         PAKInterface_RefreshPlayerPanel(q);
                     }
                     break;
                 case 7:
-                    g_pakProfileScreenState->players[p].state = 0x1A;
-                    g_pakProfileScreenState->players[p].next = 0xD;
+                    g_pakProfileScreenState->players[p].state = 26;
+                    g_pakProfileScreenState->players[p].next = 13;
                     break;
                 }
                 break;
             case 0:
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
                 break;
             case 5:
                 mode = g_pakProfileScreenState->phase;
                 switch (mode) {
                 case 3:
-                    g_pakProfileScreenState->players[p].state = 0xE;
+                    g_pakProfileScreenState->players[p].state = 14;
                     break;
                 case 0:
                     g_pakProfileScreenState->players[p].back = 2;
                     g_pakProfileScreenState->players[p].state = 2;
-                    g_pakProfileScreenState->players[p].next = 0xC;
+                    g_pakProfileScreenState->players[p].next = 12;
                     g_pakProfileScreenState->players[p].sub = 0;
                     break;
                 case 2:
@@ -609,29 +609,29 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
         i = 0;
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2CB:
+        case 715:
 #elif defined(VERSION_EU_X)
-        case 0x2F8:
+        case 760:
 #else
-        case 0x2B3:
+        case 691:
 #endif
             i = 1;
             break;
 #if defined(VERSION_DE)
-        case 0x2CC:
+        case 716:
 #elif defined(VERSION_EU_X)
-        case 0x2FC:
+        case 764:
 #else
-        case 0x2B0:
+        case 688:
 #endif
             i = 2;
             break;
 #if defined(VERSION_DE)
-        case 0x2C8:
+        case 712:
 #elif defined(VERSION_EU_X)
-        case 0x2FB:
+        case 763:
 #else
-        case 0x2B4:
+        case 692:
 #endif
             i = 3;
             break;
@@ -643,7 +643,7 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             if (g_pakProfileScreenState->players[p].used[i] == 1) {
                 Frontend_SetPlayerProfileLink(p, i, 0);
                 g_pakProfileScreenState->players[p].choice = i;
-                g_pakProfileScreenState->players[p].state = 0x1B;
+                g_pakProfileScreenState->players[p].state = 27;
                 PAKInterface_RefreshPlayerPanel(p);
             }
             break;
@@ -652,7 +652,7 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             case 1:
                 if (g_pakProfileScreenState->players[p].used[i] == 1) {
                     g_pakProfileScreenState->players[p].choice = i;
-                    g_pakProfileScreenState->players[p].state = 0x16;
+                    g_pakProfileScreenState->players[p].state = 22;
                     PAKInterface_RefreshPlayerPanel(p);
                 }
                 break;
@@ -685,47 +685,47 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 22:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x28C:
+        case 652:
 #elif defined(VERSION_EU_X)
-        case 0x294:
+        case 660:
 #else
-        case 0x28B:
+        case 651:
 #endif
             i = 0;
             break;
 #if defined(VERSION_DE)
-        case 0x28E:
+        case 654:
 #elif defined(VERSION_EU_X)
-        case 0x296:
+        case 662:
 #else
-        case 0x28D:
+        case 653:
 #endif
             i = 1;
             break;
 #if defined(VERSION_DE)
-        case 0x290:
+        case 656:
 #elif defined(VERSION_EU_X)
-        case 0x298:
+        case 664:
 #else
-        case 0x28F:
+        case 655:
 #endif
             i = 2;
             break;
 #if defined(VERSION_DE)
-        case 0x292:
+        case 658:
 #elif defined(VERSION_EU_X)
-        case 0x29A:
+        case 666:
 #else
-        case 0x291:
+        case 657:
 #endif
             i = 3;
             break;
 #if defined(VERSION_DE)
-        case 0x28B:
+        case 651:
 #elif defined(VERSION_EU_X)
-        case 0x293:
+        case 659:
 #else
-        case 0x28A:
+        case 650:
 #endif
             PAKInterface_BeginScreenExit(3);
             return 0;
@@ -733,63 +733,63 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
         Frontend_SetPlayerProfileLink(p, g_pakProfileScreenState->players[p].choice, i);
         PAKInterface_LoadLinkedPlayerProfile(i);
 #if defined(VERSION_DE)
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].notes[g_pakProfileScreenState->players[p].choice], 0x2C9), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].notes[g_pakProfileScreenState->players[p].choice], 713), 1);
 #elif defined(VERSION_EU_X)
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].notes[g_pakProfileScreenState->players[p].choice], 0x2F9), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].notes[g_pakProfileScreenState->players[p].choice], 761), 1);
 #else
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].notes[g_pakProfileScreenState->players[p].choice], 0x2B1), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)g_pakProfileScreenState->players[p].notes[g_pakProfileScreenState->players[p].choice], 689), 1);
 #endif
         g_pakProfileScreenState->players[p].used[g_pakProfileScreenState->players[p].choice] = 0;
         g_pakProfileScreenState->links[i].state = 0;
         g_pakProfileScreenState->players[p].port = i;
         PAKInterface_RelabelSlotRows(p);
-        g_pakProfileScreenState->players[p].state = 0xD;
+        g_pakProfileScreenState->players[p].state = 13;
         PAKInterface_RefreshPlayerPanel(p);
         break;
     case 27:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x295:
+        case 661:
 #elif defined(VERSION_EU_X)
-        case 0x29E:
+        case 670:
 #else
-        case 0x298:
+        case 664:
 #endif
             PAKInterface_BeginScreenExit(3);
             return 0;
 #if defined(VERSION_DE)
-        case 0x296:
+        case 662:
 #elif defined(VERSION_EU_X)
-        case 0x29F:
+        case 671:
 #else
-        case 0x299:
+        case 665:
 #endif
             i = 0;
             break;
 #if defined(VERSION_DE)
-        case 0x298:
+        case 664:
 #elif defined(VERSION_EU_X)
-        case 0x2A1:
+        case 673:
 #else
-        case 0x29B:
+        case 667:
 #endif
             i = 1;
             break;
 #if defined(VERSION_DE)
-        case 0x29A:
+        case 666:
 #elif defined(VERSION_EU_X)
-        case 0x2A3:
+        case 675:
 #else
-        case 0x29D:
+        case 669:
 #endif
             i = 2;
             break;
 #if defined(VERSION_DE)
-        case 0x29C:
+        case 668:
 #elif defined(VERSION_EU_X)
-        case 0x2A5:
+        case 677:
 #else
-        case 0x29F:
+        case 671:
 #endif
             i = 3;
             break;
@@ -810,25 +810,25 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 6:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2AE:
+        case 686:
 #elif defined(VERSION_EU_X)
-        case 0x2CA:
+        case 714:
 #else
-        case 0x2E9:
+        case 745:
 #endif
-            g_pakProfileScreenState->players[p].state = 0xE;
+            g_pakProfileScreenState->players[p].state = 14;
             PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
-        case 0x2AF:
+        case 687:
 #elif defined(VERSION_EU_X)
-        case 0x2C9:
+        case 713:
 #else
-        case 0x2E8:
+        case 744:
 #endif
             PAKInterface_CopyActiveProfilesToPakSlots(p);
             if (PAKInterface_SavePlayerRecords(p) == 1) {
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
                 PAKInterface_RefreshPlayerPanel(p);
             }
             break;
@@ -837,11 +837,11 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 21:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2A8:
+        case 680:
 #elif defined(VERSION_EU_X)
-        case 0x2DB:
+        case 731:
 #else
-        case 0x2E2:
+        case 738:
 #endif
             switch (g_pakProfileScreenState->phase) {
             case 0:
@@ -850,17 +850,17 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             case 3:
             case 4:
             case 5:
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
                 PAKInterface_RefreshPlayerPanel(p);
                 break;
             }
             break;
 #if defined(VERSION_DE)
-        case 0x2A7:
+        case 679:
 #elif defined(VERSION_EU_X)
-        case 0x2DA:
+        case 730:
 #else
-        case 0x2E3:
+        case 739:
 #endif
             g_pakProfileScreenState->players[p].back = 2;
             g_pakProfileScreenState->players[p].state = 2;
@@ -871,27 +871,27 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 23:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2B8:
+        case 696:
 #elif defined(VERSION_EU_X)
-        case 0x2BF:
+        case 703:
 #else
-        case 0x2AD:
+        case 685:
 #endif
-            g_pakProfileScreenState->players[p].state = 0xC;
+            g_pakProfileScreenState->players[p].state = 12;
             PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
-        case 0x2B9:
+        case 697:
 #elif defined(VERSION_EU_X)
-        case 0x2C0:
+        case 704:
 #else
-        case 0x2AE:
+        case 686:
 #endif
             if (g_pakProfileScreenState->phase == 7) {
-                g_pakProfileScreenState->players[p].state = 0x1A;
-                g_pakProfileScreenState->players[p].next = 0x17;
+                g_pakProfileScreenState->players[p].state = 26;
+                g_pakProfileScreenState->players[p].next = 23;
             } else {
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
             }
             PAKInterface_RefreshPlayerPanel(p);
             break;
@@ -900,27 +900,27 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 24:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2BE:
+        case 702:
 #elif defined(VERSION_EU_X)
-        case 0x2B0:
+        case 688:
 #else
-        case 0x2AB:
+        case 683:
 #endif
-            g_pakProfileScreenState->players[p].state = 0xD;
+            g_pakProfileScreenState->players[p].state = 13;
             g_pakProfileScreenState->players[p].sub = 5;
             PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
-        case 0x2BD:
+        case 701:
 #elif defined(VERSION_EU_X)
-        case 0x2AF:
+        case 687:
 #else
-        case 0x2AA:
+        case 682:
 #endif
             if (g_pakProfileScreenState->players[p].host == 1) {
                 PAKInterface_BeginLinkedProfileTransfer(p);
             } else {
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
             }
             PAKInterface_RefreshPlayerPanel(p);
             break;
@@ -928,16 +928,16 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
         break;
     case 25:
 #if defined(VERSION_DE)
-        if (event == 0x2BB) {
+        if (event == 699) {
 #elif defined(VERSION_EU_X)
-        if (event == 0x2BD) {
+        if (event == 701) {
 #else
-        if (event == 0x2EB) {
+        if (event == 747) {
 #endif
             if (g_pakProfileScreenState->players[p].host == 1) {
                 PAKInterface_BeginLinkedProfileTransfer(p);
             } else {
-                g_pakProfileScreenState->players[p].state = 0xE;
+                g_pakProfileScreenState->players[p].state = 14;
             }
             PAKInterface_RefreshPlayerPanel(p);
         }
@@ -945,24 +945,24 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 26:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2C0:
+        case 704:
 #elif defined(VERSION_EU_X)
-        case 0x2BA:
+        case 698:
 #else
-        case 0x2A7:
+        case 679:
 #endif
             g_pakProfileScreenState->players[0].back = 2;
             g_pakProfileScreenState->players[0].state = 2;
-            g_pakProfileScreenState->players[0].next = 0xD;
+            g_pakProfileScreenState->players[0].next = 13;
             g_pakProfileScreenState->players[0].sub = 6;
             PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
-        case 0x2C1:
+        case 705:
 #elif defined(VERSION_EU_X)
-        case 0x2BB:
+        case 699:
 #else
-        case 0x2A8:
+        case 680:
 #endif
             Player_InitializeProfileSlot(0);
             MarkMenuEventHandled();
@@ -977,24 +977,24 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
     case 28:
         switch (event) {
 #if defined(VERSION_DE)
-        case 0x2A2:
+        case 674:
             g_pakProfileScreenState->players[p].back = 2;
             g_pakProfileScreenState->players[p].state = 2;
             PAKInterface_RefreshPlayerPanel(p);
             break;
-        case 0x2A3:
+        case 675:
 #elif defined(VERSION_EU_X)
-        case 0x2CE:
+        case 718:
 #else
-        case 0x2DF:
+        case 735:
             g_pakProfileScreenState->players[p].back = 2;
             g_pakProfileScreenState->players[p].state = 2;
             PAKInterface_RefreshPlayerPanel(p);
             break;
-        case 0x2E0:
+        case 736:
 #endif
             if (Note_RepairId(p) != 0) {
-                g_pakProfileScreenState->players[p].state = 0x1D;
+                g_pakProfileScreenState->players[p].state = 29;
                 PAKInterface_RefreshPlayerPanel(p);
             } else {
                 g_pakProfileScreenState->players[p].back = 2;
@@ -1003,7 +1003,7 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
             }
             break;
 #if defined(VERSION_EU_X)
-        case 0x2CF:
+        case 719:
             g_pakProfileScreenState->players[p].back = 2;
             g_pakProfileScreenState->players[p].state = 2;
             PAKInterface_RefreshPlayerPanel(p);
@@ -1018,11 +1018,11 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 playerE
 #endif
     case 29:
 #if defined(VERSION_DE)
-        if (event == 0x2A5) {
+        if (event == 677) {
 #elif defined(VERSION_EU_X)
-        if (event == 0x2CC) {
+        if (event == 716) {
 #else
-        if (event == 0x2C0) {
+        if (event == 704) {
 #endif
             g_pakProfileScreenState->players[p].back = 2;
             g_pakProfileScreenState->players[p].state = 2;

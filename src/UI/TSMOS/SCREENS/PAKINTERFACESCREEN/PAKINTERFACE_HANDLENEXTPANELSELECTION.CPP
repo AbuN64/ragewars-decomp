@@ -29,15 +29,15 @@ s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 playerEntr
     s32 count;
 
     index = playerEntryId & 0xFFFF;
-    offset = index * 0xB68;
+    offset = index * 2920;
     state = ((struct PakPanelSelectionView *)(offset + (char *)g_pakProfileScreenState))->state;
-    if (state == 0xD) {
+    if (state == 13) {
         return 0;
     }
-    if (state >= 0xE) {
+    if (state >= 14) {
         return 0;
     }
-    if (state == 0xC && selectionPressed == 1) {
+    if (state == 12 && selectionPressed == 1) {
         sound = SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, index);
         row = (struct PakPanelSelectionView *)(index * 0xB68 + (char *)g_pakProfileScreenState);
         row->phase = 2;
@@ -50,10 +50,10 @@ s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 playerEntr
         mark = (u8 *)(base + ((((struct PakPanelSelectionView *)(offset + base))->count * 2) +
                               index * 0xB68) + 0xB8C);
         if (*mark == 0) {
-            *mark = 0x41;
+            *mark = 65;
         }
         sound->value = 0xFF;
-        SoundElement_PlayFlatSound(0xE74);
+        SoundElement_PlayFlatSound(3700);
     }
     return 0;
 }
@@ -88,7 +88,7 @@ s32 PAKInterface_HandleNextPanelSelection(s32 unusedWidget, s32 unusedEventId, s
             MarkMenuEventHandled();
             PAKInterface_DecrementNameCharacter(player);
             g_pakProfileScreenState->players[player].namePhase = 0;
-            SoundElement_PlayFlatSound(0xE81);
+            SoundElement_PlayFlatSound(3713);
             return 0;
         }
         return 0;
@@ -97,7 +97,7 @@ s32 PAKInterface_HandleNextPanelSelection(s32 unusedWidget, s32 unusedEventId, s
             MarkMenuEventHandled();
             PAKInterface_ScrollNoteList(player, 1);
             g_pakProfileScreenState->selected[player] = 0;
-            SoundElement_PlayFlatSound(0xE74);
+            SoundElement_PlayFlatSound(3700);
             return 0;
         }
         return 0;
@@ -111,7 +111,7 @@ loop_11:
                 goto loop_11;
             }
             SmpOverlay_ShowSlotNode((g_pakProfileScreenState->root), player, nextCharacterWidget);
-            SoundElement_PlayFlatSound(0xE74);
+            SoundElement_PlayFlatSound(3700);
             return 0;
         }
         return 0;
@@ -162,7 +162,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
             MarkMenuEventHandled();
             g_pakProfileScreenState->players[player].namePhase = pressState;
             PAKInterface_IncrementNameCharacter(player);
-            SoundElement_PlayFlatSound(0xE81);
+            SoundElement_PlayFlatSound(3713);
         }
         return 0;
     case 4:
@@ -170,7 +170,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
             MarkMenuEventHandled();
             PAKInterface_ScrollNoteList(player, 0);
             g_pakProfileScreenState->selected[player] = 0;
-            SoundElement_PlayFlatSound(0xE74);
+            SoundElement_PlayFlatSound(3700);
         }
         return 0;
     case 13:
@@ -182,7 +182,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
                 node = node->ref2C;
             }
             SmpOverlay_ShowSlotNode(g_pakProfileScreenState->root, player, node);
-            SoundElement_PlayFlatSound(0xE74);
+            SoundElement_PlayFlatSound(3700);
         }
         return 0;
     case 22:
@@ -237,22 +237,22 @@ s32 PAKInterface_HandlePlayerPanelBack(void *unused0, void *unused1, u16 player)
             return 0;
         }
         MarkMenuEventHandled();
-        PAKInterface_BeginScreenExit(0x1B);
+        PAKInterface_BeginScreenExit(27);
         return 0;
-    case 0xC:
+    case 12:
         MarkMenuEventHandled();
         g_pakProfileScreenState->players[player].name[g_pakProfileScreenState->players[player].nameCursor].available = ' ';
         break;
-    case 0x16:
+    case 22:
         MarkMenuEventHandled();
         PAKInterface_RelabelSlotRows(-1);
-        g_pakProfileScreenState->players[player].state = 0xD;
+        g_pakProfileScreenState->players[player].state = 13;
         PAKInterface_RefreshPlayerPanel(player);
         break;
-    case 0x1B:
+    case 27:
         MarkMenuEventHandled();
         PAKInterface_UpdatePlayerControlRows(-1);
-        g_pakProfileScreenState->players[player].state = 0xD;
+        g_pakProfileScreenState->players[player].state = 13;
         PAKInterface_RefreshPlayerPanel(player);
         break;
     default:

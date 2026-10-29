@@ -59,7 +59,7 @@ struct FrontendScreenViewport {
 
 struct PakCancelActionView;
 struct PakCancelActionView {
-    char a[0x1C];
+    char a[28];
     ActorOwnerView *player;
     s32 controller;
     s32 dialogList;

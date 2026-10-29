@@ -19,7 +19,7 @@ s32 Frontend_CheckOwnedProfileIds(s32 player) {
             allMatch = 0;
         }
         profileIndex += 1;
-        profileOffset += 0x190;
+        profileOffset += 400;
     } while (profileIndex < 4);
     return allMatch;
 }

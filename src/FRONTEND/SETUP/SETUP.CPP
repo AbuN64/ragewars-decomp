@@ -14,56 +14,56 @@
 #include "SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.H"
 
 #if defined(VERSION_DE)
-#define ID_2FE 0x2FA
-#define ID_2FF 0x2FC
-#define ID_300 0x2FB
-#define ID_301 0x2FD
-#define ID_303 0x2FF
-#define ID_306 0x302
-#define ID_308 0x304
-#define ID_309 0x305
-#define ID_30A 0x307
-#define ID_30B 0x308
-#define ID_30C 0x306
-#define ID_30D 0x309
-#define ID_30E 0x30A
-#define ID_30F 0x30B
-#define ID_310 0x30C
-#define ID_35D 0x359
+#define ID_2FE 762
+#define ID_2FF 764
+#define ID_300 763
+#define ID_301 765
+#define ID_303 767
+#define ID_306 770
+#define ID_308 772
+#define ID_309 773
+#define ID_30A 775
+#define ID_30B 776
+#define ID_30C 774
+#define ID_30D 777
+#define ID_30E 778
+#define ID_30F 779
+#define ID_310 780
+#define ID_35D 857
 #elif defined(VERSION_EU_X)
-#define ID_2FE 0x303
-#define ID_2FF 0x304
-#define ID_300 0x238
-#define ID_301 0x305
-#define ID_303 0x307
-#define ID_306 0x30A
-#define ID_308 0x30C
-#define ID_309 0x30D
-#define ID_30A 0x30F
-#define ID_30B 0x310
-#define ID_30C 0x30E
-#define ID_30D 0x311
-#define ID_30E 0x313
-#define ID_30F 0x312
-#define ID_310 0x314
-#define ID_35D 0x361
+#define ID_2FE 771
+#define ID_2FF 772
+#define ID_300 568
+#define ID_301 773
+#define ID_303 775
+#define ID_306 778
+#define ID_308 780
+#define ID_309 781
+#define ID_30A 783
+#define ID_30B 784
+#define ID_30C 782
+#define ID_30D 785
+#define ID_30E 787
+#define ID_30F 786
+#define ID_310 788
+#define ID_35D 865
 #else
-#define ID_2FE 0x2FE
-#define ID_2FF 0x2FF
-#define ID_300 0x300
-#define ID_301 0x301
-#define ID_303 0x303
-#define ID_306 0x306
-#define ID_308 0x308
-#define ID_309 0x309
-#define ID_30A 0x30A
-#define ID_30B 0x30B
-#define ID_30C 0x30C
-#define ID_30D 0x30D
-#define ID_30E 0x30E
-#define ID_30F 0x30F
-#define ID_310 0x310
-#define ID_35D 0x35D
+#define ID_2FE 766
+#define ID_2FF 767
+#define ID_300 768
+#define ID_301 769
+#define ID_303 771
+#define ID_306 774
+#define ID_308 776
+#define ID_309 777
+#define ID_30A 778
+#define ID_30B 779
+#define ID_30C 780
+#define ID_30D 781
+#define ID_30E 782
+#define ID_30F 783
+#define ID_310 784
+#define ID_35D 861
 #endif
 
 s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
@@ -105,12 +105,12 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
     g_setupScreen->right->x -= x;
 
     opacityItem = Node_FindWidgetByResourceId(window, ID_30A);
-    opacityItem->alpha = 0x6E;
+    opacityItem->alpha = 110;
     item3 = Node_FindWidgetByResourceId(window, ID_35D);
     g_setupScreen->widget35D = item3;
-    item3->alpha = 0x41;
+    item3->alpha = 65;
     Widget_SetWidgetFlag08(g_setupScreen->widget35D, 0);
-    g_setupScreen->text3E4 = SmpFlicker_CreateFlickerWidget(ID_303, 0x6E);
+    g_setupScreen->text3E4 = SmpFlicker_CreateFlickerWidget(ID_303, 110);
     item4 = Node_FindWidgetByResourceId(window, ID_301);
     g_setupScreen->widget301 = item4;
     Widget_SetWidgetFlag08(item4, 0);
@@ -125,15 +125,15 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
     g_selectionMessageReply.value = -1;
     g_setupScreen->widget308 = Node_FindWidgetByResourceId(window, ID_308);
     opacityItem = Node_FindWidgetByResourceId(window, ID_309);
-    opacityItem->alpha = 0x6E;
+    opacityItem->alpha = 110;
     g_setupScreen->reservedWord3 = 0;
     item5 = Node_FindWidgetByResourceId(window, ID_30B);
     g_setupScreen->widget30B = item5;
-    item5->alpha = 0x8C;
+    item5->alpha = 140;
     Widget_SetWidgetFlag08(g_setupScreen->widget30B, 1);
     item6 = Node_FindWidgetByResourceId(window, ID_30D);
     g_setupScreen->widget30D = item6;
-    item6->alpha = 0x8C;
+    item6->alpha = 140;
     Widget_SetWidgetFlag08(g_setupScreen->widget30D, 0);
     item7 = Node_FindWidgetByResourceId(window, ID_30C);
     g_setupScreen->widget30C = item7;
@@ -171,19 +171,19 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
         switch (i) {
         case 0:
             x = 0;
-            id = 0xEA6;
+            id = 3750;
             break;
         case 1:
             x = -6;
-            id = 0xEA7;
+            id = 3751;
             break;
         case 2:
             x = -13;
-            id = 0xEA8;
+            id = 3752;
             break;
         case 3:
             x = -19;
-            id = 0xEA9;
+            id = 3753;
             break;
         }
         position.value.x = x;
@@ -200,10 +200,10 @@ s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
     position.value.z = z;
     position.value.x = g_setupSecondPreviewX;
     position.value.y = g_setupSecondPreviewY;
-    Frontend_InitModelPreviewTransform(&g_setupScreen->models[4].initial, 0xEA6, scale.words, position.words);
+    Frontend_InitModelPreviewTransform(&g_setupScreen->models[4].initial, 3750, scale.words, position.words);
     Frontend_SetPreviewRotation(&g_setupScreen->models[4].rotation, rotation.words);
     Frontend_SetPreviewRotationSpeed(&g_setupScreen->models[4].offset, offset.words);
-    SoundElement_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(3704);
     Menu_InitializeOptionsScene();
     return 0;
 }

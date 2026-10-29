@@ -55,14 +55,14 @@ extern void Tsmos_ActivateControllerState(void);
 /* Construct the four-player results/loadout menu and animate its panels into view. */
 s32 Player_CreateFourPlayerResults(void *window) {
 #if defined(VERSION_DE)
-    enum { slotResource = 0xC6, leftResource = 0xCC, rightResource = 0xF4,
-           titleResource = 0xC9, messageResource = 0xC7 };
+    enum { slotResource = 198, leftResource = 204, rightResource = 244,
+           titleResource = 201, messageResource = 199 };
 #elif defined(VERSION_EU_X)
-    enum { slotResource = 0xCC, leftResource = 0xD2, rightResource = 0xFA,
-           titleResource = 0xCF, messageResource = 0xCD };
+    enum { slotResource = 204, leftResource = 210, rightResource = 250,
+           titleResource = 207, messageResource = 205 };
 #else
-    enum { slotResource = 0xC8, leftResource = 0xCE, rightResource = 0xF6,
-           titleResource = 0xCB, messageResource = 0xC9 };
+    enum { slotResource = 200, leftResource = 206, rightResource = 246,
+           titleResource = 203, messageResource = 201 };
 #endif
     s32 player;
     s32 delta;
@@ -89,17 +89,17 @@ s32 Player_CreateFourPlayerResults(void *window) {
         g_equipmentAndResultsScreen->panels[player].selection = 5;
         bar = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentPanelWidgetIds[player][1].value);
         g_equipmentAndResultsScreen->panels[player].item = bar;
-        bar->alpha = 0x64;
+        bar->alpha = 100;
         Widget_SetWidgetFlag08(bar, 0);
         widget = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_equipmentPanelWidgetIds[player][0].value);
-        widget->alpha = 0x6E;
+        widget->alpha = 110;
         config = &g_playerSettings[player];
         if (config->enabled == 1) {
             row = Key_FindKeyIndex(config->character);
             scale.x = g_characterPortraitRecords[row].scale[player];
             scale.y = g_characterPortraitRecords[row].scale[player];
             scale.z = g_characterPortraitRecords[row].scale[player];
-            Preview_InitModelPreview(&g_equipmentAndResultsScreen->panels[player], 9, config->character + 0x38F, 0x4B, 0x5DC0, scale, g_characterPortraitRecords[row].position[player], g_characterPortraitRecords[row].distance[player], g_characterPortraitRecords[row].light[player]);
+            Preview_InitModelPreview(&g_equipmentAndResultsScreen->panels[player], 9, config->character + 911, 75, 24000, scale, g_characterPortraitRecords[row].position[player], g_characterPortraitRecords[row].distance[player], g_characterPortraitRecords[row].light[player]);
         }
     }
     g_equipmentAndResultsScreen->state = 1;
@@ -114,7 +114,7 @@ s32 Player_CreateFourPlayerResults(void *window) {
     g_equipmentAndResultsScreen->rightStep = g_equipmentAndResultsScreen->rightArrow->width / 4;
     delta = g_equipmentAndResultsScreen->rightArrow->width - g_equipmentAndResultsScreen->rightStep * 4;
     g_equipmentAndResultsScreen->rightArrow->x = (u16)g_equipmentAndResultsScreen->rightArrow->x - delta;
-    Node_FindWidgetByResourceId(window, titleResource)->alpha = 0x6E;
+    Node_FindWidgetByResourceId(window, titleResource)->alpha = 110;
     g_equipmentAndResultsScreen->resource = SmpFlicker_CreateFlickerWidget(messageResource, 0xFF);
     widget = Node_FindWidgetByResourceId(window, messageResource);
     g_equipmentAndResultsScreen->message = widget;
@@ -213,9 +213,9 @@ s32 Player_StartFourPlayerResults(void) {
     for (i = 0; i < 4; i++) {
         config = &g_playerSettings[i];
         if (config->enabled == 1) {
-            widget = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_fourPlayerResultsWidgetIds[i * 0x26]);
+            widget = Node_FindWidgetByResourceId(g_equipmentAndResultsScreen->window, g_fourPlayerResultsWidgetIds[i * 38]);
             Widget_SetWidgetFlag40(widget, 0);
-            widget->alpha = 0x23;
+            widget->alpha = 35;
             screen = g_equipmentAndResultsScreen;
             switch (screen->panels[i].mode) {
             case 0:
@@ -232,7 +232,7 @@ s32 Player_StartFourPlayerResults(void) {
             }
         }
     }
-    SoundElement_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(3704);
     return 0;
 }
 
@@ -249,7 +249,7 @@ s32 Player_UpdateFourPlayerResults(void) {
         g_equipmentAndResultsScreen->rightArrow->x = (u16)g_equipmentAndResultsScreen->rightArrow->x - (u16)g_equipmentAndResultsScreen->rightStep;
         g_equipmentAndResultsScreen->timer--;
         if (g_equipmentAndResultsScreen->timer <= 0) {
-            SoundElement_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(3705);
             Widget_SetWidgetFlag08(g_equipmentAndResultsScreen->message, 1);
             SmpFlicker_StartFlicker(g_equipmentAndResultsScreen->resource, 4);
             g_equipmentAndResultsScreen->state = 4;
@@ -288,7 +288,7 @@ s32 Player_UpdateFourPlayerResults(void) {
         }
         return 0;
     case 5:
-        SoundElement_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(3704);
         g_equipmentAndResultsScreen->state = 2;
         g_equipmentAndResultsScreen->timer = 4;
         Widget_SetWidgetFlag08(g_equipmentAndResultsScreen->message, 0);

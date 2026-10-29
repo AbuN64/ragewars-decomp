@@ -17,39 +17,39 @@ s32 Join_CreateUsJoinOptionsMenu(void *root) {
     MenuWidget *item;
     s32 row;
 
-    { void *memory = Cache_AllocateMemory(0x20); g_courseOptionsScreen = memory; }
+    { void *memory = Cache_AllocateMemory(32); g_courseOptionsScreen = memory; }
     g_courseOptionsScreen->handle = root;
     g_courseOptionsScreen->mode = SmpOverlay_CreateOverlayNode((s32) root, 4);
-    SmpOverlay_ShowSlotById((s32) root, 0, 0x389);
-    SmpOverlay_ShowSlotById((s32) root, 1, 0x389);
-    SmpOverlay_ShowSlotById((s32) root, 2, 0x389);
-    SmpOverlay_ShowSlotById((s32) root, 3, 0x389);
+    SmpOverlay_ShowSlotById((s32) root, 0, 905);
+    SmpOverlay_ShowSlotById((s32) root, 1, 905);
+    SmpOverlay_ShowSlotById((s32) root, 2, 905);
+    SmpOverlay_ShowSlotById((s32) root, 3, 905);
 
-    item = Node_FindWidgetByResourceId(root, 0x38B);
-    item->alpha = 0x8C;
+    item = Node_FindWidgetByResourceId(root, 907);
+    item->alpha = 140;
     if (Menu_GetPreviousScreenOwner(0) == 22) {
         Widget_SetWidgetFlag08(item, 0);
     }
 
     g_courseOptionsScreen->timer = 0;
     g_courseOptionsScreen->selection = 0;
-    item = Node_FindWidgetByResourceId(root, 0x38C);
+    item = Node_FindWidgetByResourceId(root, 908);
     g_courseOptionsScreen->rows[0] = item;
-    item = Node_FindWidgetByResourceId(root, 0x395);
+    item = Node_FindWidgetByResourceId(root, 917);
     g_courseOptionsScreen->rows[1] = item;
-    item = Node_FindWidgetByResourceId(root, 0x396);
+    item = Node_FindWidgetByResourceId(root, 918);
     g_courseOptionsScreen->rows[2] = item;
     g_courseOptionsScreen->step = Join_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
         Join_UpdateJoinRequestDisplay(row);
-        item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[row], 0x392);
+        item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[row], 914);
         Widget_SetWidgetFlag08(item, 0);
     }
 
     Tsmos_ActivateControllerState();
 
-    item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x392);
+    item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 914);
     Widget_SetWidgetFlag08(item, 1);
     return 0;
 }
@@ -67,7 +67,7 @@ s32 Join_SelectPreviousUsJoinModel(void *sender, void *context, void *argument, 
 
     if (event != 1) return 0;
     MarkMenuEventHandled();
-    if (Menu_GetPreviousScreenOwner(0) == 0x16) return 0;
+    if (Menu_GetPreviousScreenOwner(0) == 22) return 0;
     variant = g_joinRequestEntries[g_courseOptionsScreen->selection].variant;
     model = Join_FindJoinModelIndex(variant, g_joinRequestEntries[g_courseOptionsScreen->selection].id);
     do {
@@ -85,7 +85,7 @@ s32 Join_SelectPreviousUsJoinModel(void *sender, void *context, void *argument, 
                     *g_rewardItemTiers[variant][id].text);
     g_joinRequestEntries[g_courseOptionsScreen->selection].variantC = variant;
     Join_UpdateJoinRequestDisplay(g_courseOptionsScreen->selection);
-    SoundElement_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 #endif
@@ -104,7 +104,7 @@ s32 CJoinCharacter_CycleModelSelection(void *unused0, void *unused1, void *unuse
         return 0;
     }
     MarkMenuEventHandled();
-    if (Menu_GetPreviousScreenOwner(0) == 0x16) {
+    if (Menu_GetPreviousScreenOwner(0) == 22) {
         return 0;
     }
     variant = g_joinRequestEntries[g_courseOptionsScreen->selection].variant;
@@ -126,7 +126,7 @@ s32 CJoinCharacter_CycleModelSelection(void *unused0, void *unused1, void *unuse
     g_joinRequestEntries[g_courseOptionsScreen->selection].variantC = variant;
     id = g_courseOptionsScreen->selection;
     Join_UpdateJoinRequestDisplay(id);
-    SoundElement_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 #endif

@@ -26,7 +26,7 @@ void Tsmos_UpdateFrontend(void) {
     if (g_frontendActiveState == 1) {
         ESmem_SwapFrameHeap();
         mode = GetMenuScreenOwner();
-        Menu_RouteElementEvent(mode, 0xE08, 0, 0, 0);
+        Menu_RouteElementEvent(mode, 3592, 0, 0, 0);
         Menu_DrawScreenStack();
         Node_EvictExpiredImages();
         N64Eng_AdvanceFrameCounter();
@@ -36,7 +36,7 @@ void Tsmos_UpdateFrontend(void) {
         if (mode == 3) {
             goto mode_three;
         }
-        if (mode != 0x18) {
+        if (mode != 24) {
             goto mode_inactive;
         }
         value = 20;

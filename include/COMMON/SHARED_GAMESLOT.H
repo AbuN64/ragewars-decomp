@@ -10,13 +10,13 @@ struct Shared_GameSlot {
     u8 controlOptionBytes[6];
     u8 slot;
     s8 kind;
-    u8 appearanceAndMatchBytes[0x10];
+    u8 appearanceAndMatchBytes[16];
     u8 controller;
     u8 team; u8 botSkill;
     u8 role;
     u8 escort;
     u8 secondListMode;
-    u8 slotStridePadding[0x77];
+    u8 slotStridePadding[119];
 };
 typedef struct Shared_Game Shared_Game;
 struct Shared_Game {

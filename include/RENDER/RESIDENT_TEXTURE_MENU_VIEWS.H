@@ -45,12 +45,12 @@ struct ArtsendTextureMenuState {
     FrontendInputSelector *selector; /* +0x20 */
     s32 *textureOverride; /* +0x24 */
     s32 *paletteOverride; /* +0x28 */
-    s32 textureData[0x2000 / 4]; /* +0x2C */
-    s32 paletteData[0x100 / 4]; /* +0x202C */
+    s32 textureData[8192 / 4]; /* +0x2C */
+    s32 paletteData[256 / 4]; /* +0x202C */
     s32 *entryTable; /* +0x212C */
     s32 *textureTable; /* +0x2130 */
     s32 *paletteTable; /* +0x2134 */
-    char displayData[0x80]; /* +0x2138 */
+    char displayData[128]; /* +0x2138 */
     s32 frameCount; /* +0x21B8 */
 };
 extern struct ArtsendTextureMenuState g_artsendTextureViewer;

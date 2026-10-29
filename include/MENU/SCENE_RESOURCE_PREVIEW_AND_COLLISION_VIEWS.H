@@ -13,7 +13,7 @@ typedef struct LevelBlock {
     LevelActor objects[1];
 } LevelBlock;
 struct ItemsPendingState {
-    char p[0x11C0];
+    char p[4544];
     s32 firstPendingCount;
     s32 secondPendingCount;
     char q[8];

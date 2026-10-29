@@ -59,7 +59,7 @@ struct TrackOverlayNamedEntry {
     s32 id8;
     s32 flags;
     char pad10[8];
-    char name[0x34];
+    char name[52];
 };
 
 extern void Menu_AssignBit(u8 *bits, s32 n, s32 set);

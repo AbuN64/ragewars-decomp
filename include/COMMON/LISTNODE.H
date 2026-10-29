@@ -191,7 +191,7 @@ struct EntryAudioWorldDispatchPendingSounds;
 struct EntryAudioWorldDispatchPendingSounds {
     struct EntryAudioWorldDispatchPendingSounds *prev;
     struct EntryAudioWorldDispatchPendingSounds *next;
-    char body[0x10];
+    char body[16];
     s32 frame;
     s32 delay;
     char pad20[0x40 - 0x20];

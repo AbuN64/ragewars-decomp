@@ -33,7 +33,7 @@ s32 Timed_UpdateTimedScreen(void) {
         return 0;
     case TIMED_MENU_ELEMENT_START_TRANSITION:
         if (SoundElement_GetMusicPlaybackEnabled() != 0) {
-            SoundElement_SetMusicPlaybackEnabled(0x34);
+            SoundElement_SetMusicPlaybackEnabled(52);
         }
         Tsmos_DeactivateControllerState();
         switch (g_gameSettings.controllerMode) {

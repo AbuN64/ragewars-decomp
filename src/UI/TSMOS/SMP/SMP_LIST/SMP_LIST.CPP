@@ -40,12 +40,12 @@ s32 SmpList_ResetEntryCommands(struct CommandListMenu *commandListMenu) {
     struct LinkedCommandEntry *p;
 
     commandListMenu->state = 2;
-    SoundElement_PlayFlatSound(0xE74);
+    SoundElement_PlayFlatSound(3700);
     p = commandListMenu->entries;
     if (p != 0) {
         do {
             if (p->kind != 8) {
-                p->command = 0x64;
+                p->command = 100;
             }
             p = p->next;
         } while (p != 0);
@@ -111,5 +111,5 @@ s32 SmpList_DestroyController(void *allocation) {
 }
 
 void SmpList_RegisterListClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB64, g_SmpButton_DispatchListEventAddress, g_SmpButton_DrawListWidgetAddress, 3);
+    SmSmngr_RegisterElementHandlers(2916, g_SmpButton_DispatchListEventAddress, g_SmpButton_DrawListWidgetAddress, 3);
 }

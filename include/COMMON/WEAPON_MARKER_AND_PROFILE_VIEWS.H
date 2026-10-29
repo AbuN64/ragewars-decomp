@@ -71,7 +71,7 @@ extern void Weaponai_InitializeSwitchForSingleRound(void *actor, WeaponFireState
 struct ObjectWeaponsNextAvailableWeapon;
 struct ObjectWeaponsNextAvailableWeapon {
     s8 pad603[0x603];
-    s8 values[0x2B];
+    s8 values[43];
     s16 selected;
 };
 

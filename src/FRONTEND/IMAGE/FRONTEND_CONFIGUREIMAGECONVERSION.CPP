@@ -194,7 +194,7 @@ void Frontend_ConfigureImageConversion(ImageDescriptor *destination, ImageDescri
 }
 
 void Frontend_ClearOwnedImage(int value) {
-    XPlus_FillBytes(value, 0, 0x20);
+    XPlus_FillBytes(value, 0, 32);
 }
 
 void Frontend_ReleaseOwnedImageBuffers(OwnedImage *res) {
@@ -221,7 +221,7 @@ s32 Frontend_CopyOwnedImage(OwnedImage *dst, OwnedImage *src) {
     if ((dst->flags & 2) && dst->paletteCount > 0) {
         Cache_FreeMemory(dst->palette);
     }
-    XPlus_FillBytes(dst, 0, 0x20);
+    XPlus_FillBytes(dst, 0, 32);
     *dst = *src;
     if (dst->paletteCount == 0) {
         dst->palette = 0;
@@ -239,7 +239,7 @@ s32 Frontend_CopyOwnedImage(OwnedImage *dst, OwnedImage *src) {
         size = Frontend_GetImagePaletteByteCount(src);
         if ((dst->palette = Cache_AllocateMemory(size)) == 0) {
             Cache_FreeMemory(dst->pixels);
-            XPlus_FillBytes(dst, 0, 0x20);
+            XPlus_FillBytes(dst, 0, 32);
             return 1;
         }
         XPlus_CopyBytes(dst->palette, src->palette, size);

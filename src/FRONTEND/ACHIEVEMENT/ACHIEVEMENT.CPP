@@ -42,7 +42,7 @@ void Frontend_AwardMatchAchievements(s32 player, s32 *awarded) {
     if (status->out != 0) {
         return;
     }
-    for (i = 0; i < 0x24; i++) {
+    for (i = 0; i < 36; i++) {
         if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, i) == 0 && g_localPlayerProfiles[player].plays[i] >= 2) {
             Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, i, 1);
             if (count < 2) {
@@ -50,7 +50,7 @@ void Frontend_AwardMatchAchievements(s32 player, s32 *awarded) {
             }
         }
     }
-    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 0x24) == 0) {
+    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 36) == 0) {
         ok = 0;
         if ((g_matchAchievementQualificationFlagA - 1U < 5 && status->kills >= 15) ||
             ((rules = &g_gameSettings.counters)->timeLimit >= 0.0f && status->kills >= 15 &&
@@ -60,13 +60,13 @@ void Frontend_AwardMatchAchievements(s32 player, s32 *awarded) {
             ok = 1;
         }
         if (ok == 1) {
-            Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 0x24, 1);
+            Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 36, 1);
             if (count < 2) {
-                awarded[count++] = 0x24;
+                awarded[count++] = 36;
             }
         }
     }
-    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 0x25) == 0) {
+    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 37) == 0) {
         ok = 0;
         if ((g_matchAchievementQualificationFlagA - 1U < 10 && status->kills >= 25) ||
             ((rules = &g_gameSettings.counters)->timeLimit >= 0.0f && status->kills >= 25 &&
@@ -76,26 +76,26 @@ void Frontend_AwardMatchAchievements(s32 player, s32 *awarded) {
             ok = 1;
         }
         if (ok == 1) {
-            Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 0x25, 1);
+            Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 37, 1);
             if (count < 2) {
-                awarded[count++] = 0x25;
+                awarded[count++] = 37;
             }
         }
     }
-    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 0x26) == 0 && status->kills == 0 &&
+    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 38) == 0 && status->kills == 0 &&
         (globals = &g_gameSettings)->laps >= 10 && globals->players >= 20) {
-        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 0x26, 1);
+        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 38, 1);
         if (count < 2) {
-            awarded[count++] = 0x26;
+            awarded[count++] = 38;
         }
     }
-    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 0x27) == 0 && status->total >= 5) {
-        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 0x27, 1);
+    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 39) == 0 && status->total >= 5) {
+        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 39, 1);
         if (count < 2) {
-            awarded[count++] = 0x27;
+            awarded[count++] = 39;
         }
     }
-    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 0x28) == 0 && (globals = &g_gameSettings)->players >= 20) {
+    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 40) == 0 && (globals = &g_gameSettings)->players >= 20) {
         score = status->kills;
         ok = 1;
         for (i = 0; i < 4; i++) {
@@ -108,36 +108,36 @@ void Frontend_AwardMatchAchievements(s32 player, s32 *awarded) {
             }
         }
         if (ok == 1) {
-            Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 0x28, 1);
+            Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 40, 1);
             if (count < 2) {
-                awarded[count++] = 0x28;
+                awarded[count++] = 40;
             }
         }
     }
-    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 0x29) == 0 && g_localPlayerProfiles[player].statistics.wins > 1000) {
-        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 0x29, 1);
+    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 41) == 0 && g_localPlayerProfiles[player].statistics.wins > 1000) {
+        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 41, 1);
         if (count < 2) {
-            awarded[count++] = 0x29;
+            awarded[count++] = 41;
         }
     }
-    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 0x2A) == 0 && g_localPlayerProfiles[player].statistics.deaths > 1000) {
-        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 0x2A, 1);
+    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 42) == 0 && g_localPlayerProfiles[player].statistics.deaths > 1000) {
+        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 42, 1);
         if (count < 2) {
-            awarded[count++] = 0x2A;
+            awarded[count++] = 42;
         }
     }
-    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 0x2B) == 0 && status->rewardStatistic >= 10 &&
+    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 43) == 0 && status->rewardStatistic >= 10 &&
         (globals = &g_gameSettings)->laps >= 10 && globals->players >= 20) {
-        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 0x2B, 1);
+        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 43, 1);
         if (count < 2) {
-            awarded[count++] = 0x2B;
+            awarded[count++] = 43;
         }
     }
-    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 0x2C) == 0 && status->score == 0 &&
+    if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 44) == 0 && status->score == 0 &&
         (globals = &g_gameSettings)->laps >= 10 && globals->players >= 20) {
-        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 0x2C, 1);
+        Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 44, 1);
         if (count < 2) {
-            awarded[count] = 0x2C;
+            awarded[count] = 44;
         }
     }
 }

@@ -1626,7 +1626,7 @@ typedef struct Info Info;
 
 struct Info;
 struct Info {
-    unsigned char raw[0x14];
+    unsigned char raw[20];
     f32 scale; /* 0x14: waypoint response scale */
 };
 

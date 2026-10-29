@@ -5,5 +5,5 @@
 /* Returns 0x648, the byte size PAKInterface_CheckRecordsNoteCapacity passes on to Note_BytesToPakPages for the object it
    creates when it has none. */
 s32 PAKInterface_GetRecordsNoteSize(void) {
-    return 0x648;
+    return 1608;
 }

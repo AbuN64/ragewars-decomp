@@ -293,7 +293,7 @@ s32 Node_MeasureTextPrefix(s32 font, u8 *text, s32 length) {
     record = Node_GetGlyphBuffer(font);
     total = 0;
     for (i = 0; i < length; i++) {
-        total += record->glyphs[*text++ - 0x20].width;
+        total += record->glyphs[*text++ - 32].width;
     }
     total += Node_GetFontLetterSpacing(font) * (length - 1);
     return total;
@@ -459,7 +459,7 @@ void Node_ReleaseActiveChunkImages(void) {
         if (g_frontendResourceFontCount.entries[e].refCount != 0 && g_frontendResourceFontCount.entries[e].active != 0) {
             for (n = 0; n < g_frontendResourceFontCount.entries[e].def->glyphCount; n++) {
                 slot = g_frontendResourceFontCount.entries[e].pages[n];
-                for (i = 0; i < 0x60; i++) {
+                for (i = 0; i < 96; i++) {
                     if (slot[i].flags & 1) {
                         Image_ReleaseImage((struct OwnedImage *)slot[i].data);
                         slot[i].flags = 0;
@@ -658,7 +658,7 @@ void Node_OpenResourceArchive(u8 *name) {
             entry = g_frontendResourceState.Font[n].TableEntry;
             font = &g_frontendResourceState.Font[n];
             XStdio_SeekStream(res->In, g_frontendResourceState.Header.FontData + entry->glyphTableOffset, 0);
-            XStdio_ReadStream(font->CharInfo, 8, 0x60, res->In);
+            XStdio_ReadStream(font->CharInfo, 8, 96, res->In);
             font->Char = Cache_AllocateMemory(entry->bitmapCount * sizeof(t_char *));
             font->Char[0] = Cache_AllocateMemory(entry->bitmapCount * 96 * sizeof(t_char));
             XPlus_FillBytes(font->Char[0], 0, entry->bitmapCount * 96 * sizeof(t_char));

@@ -10,7 +10,7 @@ extern void Tsmos_RequestFrontendShutdown(void);
 
 s32 Frontend_ResumeMatchOnInput(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3) {
-        if (value != 0xD) {
+        if (value != 13) {
             return 0;
         }
         g_gameSession.clockPaused = 0;

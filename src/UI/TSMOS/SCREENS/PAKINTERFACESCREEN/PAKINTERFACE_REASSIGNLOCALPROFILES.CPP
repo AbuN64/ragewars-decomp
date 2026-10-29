@@ -27,7 +27,7 @@ void PAKInterface_ReassignLocalProfiles(void) {
     s32 j;
 
     size = 400;
-    XPlus_CopyBytes(g_pakProfileScreenState->packet.saved, g_localPlayerProfiles, 0x640);
+    XPlus_CopyBytes(g_pakProfileScreenState->packet.saved, g_localPlayerProfiles, 1600);
     for (i = 0; i < 4; i++) {
         Player_InitializeProfile(&g_localPlayerProfiles[i]);
         used[i] = 0;

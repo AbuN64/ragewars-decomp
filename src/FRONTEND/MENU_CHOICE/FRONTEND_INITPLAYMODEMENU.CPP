@@ -63,29 +63,29 @@ extern void SmpSlider_DisableTransition(void *);
 extern MenuWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern u32 Menu_GetBlockedScreenOwner(void);
 #if defined(VERSION_EU_X)
-#define WID_42 0x44
-#define WID_43 0x45
-#define WID_44 0x46
-#define WID_45 0x47
-#define WID_46 0x48
-#define WID_47 0x4b
-#define WID_48 0x4d
-#define WID_4A 0x4e
-#define WID_4B 0x49
-#define WID_4C 0x4a
-#define WID_49 0x4c
+#define WID_42 68
+#define WID_43 69
+#define WID_44 70
+#define WID_45 71
+#define WID_46 72
+#define WID_47 75
+#define WID_48 77
+#define WID_4A 78
+#define WID_4B 73
+#define WID_4C 74
+#define WID_49 76
 #else
-#define WID_4A 0x4A
-#define WID_4B 0x4B
-#define WID_4C 0x4C
-#define WID_42 0x42
-#define WID_43 0x43
-#define WID_44 0x44
-#define WID_45 0x45
-#define WID_46 0x46
-#define WID_47 0x47
-#define WID_48 0x48
-#define WID_49 0x49
+#define WID_4A 74
+#define WID_4B 75
+#define WID_4C 76
+#define WID_42 66
+#define WID_43 67
+#define WID_44 68
+#define WID_45 69
+#define WID_46 70
+#define WID_47 71
+#define WID_48 72
+#define WID_49 73
 #endif
 /* Builds the options screen: clears the per-player settings, retires bots that are no longer wanted, allocates
  * the screen record in g_playModeMenuState and picks the button layout. The layout is 3 when any human is on a pad
@@ -121,7 +121,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         }
         XPlus_FillMemory((char *)&g_localPlayerProfiles[i] + 0x83, 0, 5);
     }
-    g_playModeMenuState = Cache_AllocateMemory(0x1C);
+    g_playModeMenuState = Cache_AllocateMemory(28);
     Tsmos_ActivateControllerState();
     groupA = 0;
     groupB = 0;
@@ -150,14 +150,14 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         widget = Node_FindWidgetByResourceId(menu, WID_4A);
         Widget_SetWidgetFlag100(widget, 1);
         Widget_SetWidgetFlag08(widget, 0);
-        title->y = 0x33;
-        title->height = 0x78;
+        title->y = 51;
+        title->height = 120;
         break;
     case 3:
         SmpButton_WrapButtonWidget(WID_4A);
         SmpButton_WrapButtonWidget(WID_48);
-        title->y = 0x2A;
-        title->height = 0x88;
+        title->y = 42;
+        title->height = 136;
         break;
     default:
         widget = Node_FindWidgetByResourceId(menu, WID_48);
@@ -166,8 +166,8 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         widget = Node_FindWidgetByResourceId(menu, WID_4A);
         Widget_SetWidgetFlag100(widget, 1);
         Widget_SetWidgetFlag08(widget, 0);
-        title->y = 0x3C;
-        title->height = 0x68;
+        title->y = 60;
+        title->height = 104;
         break;
     }
     i = -1;
@@ -179,7 +179,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     if (mode != 1 || Control_IsControllerConnected(1) != mode) {
         Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(menu, WID_49), 1);
     }
-    g_playModeMenuState->music = SmpFade_CreateFadeWidget(WID_42, 0x24);
+    g_playModeMenuState->music = SmpFade_CreateFadeWidget(WID_42, 36);
     SmpSlider_DisableTransition(g_playModeMenuState->music);
     SmpButton_WrapButtonWidget(WID_45);
     SmpButton_WrapButtonWidget(WID_46);
@@ -188,8 +188,8 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     SmpButton_WrapButtonWidget(WID_4C);
     SmpButton_WrapButtonWidget(WID_47);
     g_playModeMenuState->title = Node_FindWidgetByResourceId(menu, WID_43);
-    g_playModeMenuState->title->alpha = 0xF;
-    g_playModeMenuState->prompt = SmpFlicker_CreateFlickerWidget(WID_44, 0x6E);
+    g_playModeMenuState->title->alpha = 15;
+    g_playModeMenuState->prompt = SmpFlicker_CreateFlickerWidget(WID_44, 110);
     if (Menu_GetBlockedScreenOwner() == 2) {
         g_playModeMenuState->mode = 9;
     } else {
@@ -209,17 +209,17 @@ s32 Frontend_ApplyModeChoice(void) {
     MarkMenuEventHandled();
     switch (Menu_GetFocusedElementId()) {
     #if defined(VERSION_EU_X)
-    case 0x47:
+    case 71:
 #else
-    case 0x45:
+    case 69:
 #endif
-        g_playModeMenuState->nextScreen = 0x1A;
+        g_playModeMenuState->nextScreen = 26;
         g_gameSettings.controllerMode = 0;
         break;
     #if defined(VERSION_EU_X)
-    case 0x4C:
+    case 76:
 #else
-    case 0x49:
+    case 73:
 #endif
         settings = &g_gameSettings;
         status = settings->playerSettings;
@@ -234,43 +234,43 @@ s32 Frontend_ApplyModeChoice(void) {
         }
         break;
     #if defined(VERSION_EU_X)
-    case 0x48:
+    case 72:
 #else
-    case 0x46:
+    case 70:
 #endif
         status = g_gameSettings.playerSettings;
         status->enabled = 1;
         status[0].slot = 0;
         Player_InitializeProfile((char *)g_localPlayerProfiles);
         PAKInterface_SetScreenPhase(7);
-        g_playModeMenuState->nextScreen = 0x13;
+        g_playModeMenuState->nextScreen = 19;
         g_gameSettings.controllerMode = 1;
         break;
     #if defined(VERSION_EU_X)
-    case 0x49:
+    case 73:
 #else
-    case 0x4B:
+    case 75:
 #endif
-        g_playModeMenuState->nextScreen = 0x1B;
+        g_playModeMenuState->nextScreen = 27;
         break;
     #if defined(VERSION_EU_X)
-    case 0x4B:
+    case 75:
 #else
-    case 0x47:
+    case 71:
 #endif
         g_playModeMenuState->nextScreen = 4;
         break;
     #if defined(VERSION_EU_X)
-    case 0x4A:
+    case 74:
 #else
-    case 0x4C:
+    case 76:
 #endif
-        g_playModeMenuState->nextScreen = 0x10;
+        g_playModeMenuState->nextScreen = 16;
         break;
     #if defined(VERSION_EU_X)
-    case 0x4D:
+    case 77:
 #else
-    case 0x48:
+    case 72:
 #endif
         status = g_gameSettings.playerSettings;
         g_playModeMenuState->nextScreen = 7;
@@ -285,12 +285,12 @@ s32 Frontend_ApplyModeChoice(void) {
         g_gameSettings.controllerMode = 3;
         break;
     #if defined(VERSION_EU_X)
-    case 0x4E:
+    case 78:
 #else
-    case 0x4A:
+    case 74:
 #endif
         status = g_gameSettings.playerSettings;
-        g_playModeMenuState->nextScreen = 0xA;
+        g_playModeMenuState->nextScreen = 10;
         status->enabled = 1;
         status[0].slot = 0;
         if (g_localPlayerProfiles[0].player < 0) {

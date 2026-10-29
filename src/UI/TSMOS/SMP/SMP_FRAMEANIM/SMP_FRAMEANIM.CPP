@@ -36,11 +36,11 @@ s32 SmpFrameAnim_UpdateFrameSequence(struct FrameSequence *sequence, s32 unused,
             if (SmpFrameAnim_HasSequenceFlags(sequence, 1)) {
                 if (sequence->frame < sequence->count - 1) {
                     sequence->frame++;
-                } else if (SmpFrameAnim_HasSequenceFlags(sequence, 0x10)) {
+                } else if (SmpFrameAnim_HasSequenceFlags(sequence, 16)) {
                     SmpFrameAnim_ClearSequenceFlags(sequence, 1);
                     SmpFrameAnim_AddSequenceFlags(sequence, 2);
                     SmpFrameAnim_SetSequenceFrame(sequence, sequence->count - 2);
-                } else if (SmpFrameAnim_HasSequenceFlags(sequence, 0x20)) {
+                } else if (SmpFrameAnim_HasSequenceFlags(sequence, 32)) {
                     if (sequence->loops > 0) {
                         sequence->loops--;
                         SmpFrameAnim_SetSequenceFrame(sequence, 0);
@@ -51,11 +51,11 @@ s32 SmpFrameAnim_UpdateFrameSequence(struct FrameSequence *sequence, s32 unused,
             } else {
                 if (sequence->frame > 0) {
                     sequence->frame--;
-                } else if (SmpFrameAnim_HasSequenceFlags(sequence, 0x10)) {
+                } else if (SmpFrameAnim_HasSequenceFlags(sequence, 16)) {
                     SmpFrameAnim_ClearSequenceFlags(sequence, 2);
                     SmpFrameAnim_AddSequenceFlags(sequence, 1);
                     SmpFrameAnim_SetSequenceFrame(sequence, 1);
-                } else if (SmpFrameAnim_HasSequenceFlags(sequence, 0x20)) {
+                } else if (SmpFrameAnim_HasSequenceFlags(sequence, 32)) {
                     if (sequence->loops > 0) {
                         sequence->loops--;
                         SmpFrameAnim_SetSequenceFrame(sequence, sequence->count - 1);
@@ -92,7 +92,7 @@ void SmpFrameAnim_SetLoopCount(struct FrameSequence *sequence, s32 loops);
 extern void Node_InsertWidgetBefore(s32 widget, Animation *anim);
 
 void SmpFrameAnim_RegisterFrameAnimClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB5F, g_SmpFrameAnim_DispatchEventAddress, g_SmpFrameAnim_IgnoreEventAddress, 3);
+    SmSmngr_RegisterElementHandlers(2911, g_SmpFrameAnim_DispatchEventAddress, g_SmpFrameAnim_IgnoreEventAddress, 3);
 }
 
 Animation *SmpFrameAnim_CreateFrameSequence(s32 id, s32 *frames) {
@@ -101,11 +101,11 @@ Animation *SmpFrameAnim_CreateFrameSequence(s32 id, s32 *frames) {
 
     widget = (s32)Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)id);
     Node_GetScreenData(GetMenuScreenOwner());
-    anim = Cache_AllocateMemory(0x64);
-    XPlus_FillBytes(anim, 0, 0x64);
-    anim->kindB = 0xB5F;
+    anim = Cache_AllocateMemory(100);
+    XPlus_FillBytes(anim, 0, 100);
+    anim->kindB = 2911;
     anim->flags = 8;
-    anim->kindA = 0xB5F;
+    anim->kindA = 2911;
     anim->widget = widget;
     anim->reservedWordA = 0;
     anim->frames = frames;
@@ -209,7 +209,7 @@ s32 SmpFrameAnim_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 ev
     s32 table_kind;
 
     if (g_frameAnimationEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_frameAnimationEventHandlers;
         offset = 0;
         do {
@@ -221,7 +221,7 @@ s32 SmpFrameAnim_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 ev
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;

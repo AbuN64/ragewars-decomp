@@ -20,18 +20,18 @@ s32 Frontend_CreatePlayerCountScreenEu(void *window) {
     SliderItemEu *item;
     void *title;
 
-    g_playerCountScreen = Cache_AllocateMemory(0x24);
+    g_playerCountScreen = Cache_AllocateMemory(36);
     Tsmos_ActivateControllerState();
-    title = SmpFade_CreateFadeWidget(0x398, 0x399);
+    title = SmpFade_CreateFadeWidget(920, 921);
     g_playerCountScreen->list = title;
     SmpSlider_EnableTransition(title);
-    SmpButton_WrapButtonWidget(0x39C);
-    item = Node_FindWidgetByResourceId(window, 0x39A);
+    SmpButton_WrapButtonWidget(924);
+    item = Node_FindWidgetByResourceId(window, 922);
     g_playerCountScreen->item = item;
-    item->alpha = 0xF;
-    g_playerCountScreen->resourceWidget = SmpFlicker_CreateFlickerWidget(0x39B, 0x6E);
+    item->alpha = 15;
+    g_playerCountScreen->resourceWidget = SmpFlicker_CreateFlickerWidget(923, 110);
     g_playerCountScreen->playerCount = 3;
-    item = Node_FindWidgetByResourceId(window, 0x39D);
+    item = Node_FindWidgetByResourceId(window, 925);
     item->text = g_playerCountScreen->text14;
     g_playerCountScreen->selectionChanged = 1;
     XStdio_FormatBuffer(g_playerCountScreen->text14, s_playerCountFormat, 1);

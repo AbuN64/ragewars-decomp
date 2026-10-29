@@ -65,7 +65,7 @@ void N64Eng_AdvanceFrameCounter(void) {
 }
 
 void N64Eng_RegisterNumericWidgetClass(void) {
-    SmSmngr_RegisterElementHandlers(0xB65, N64Eng_DispatchNumericWidgetEvent_Address, N64Eng_DrawNumericWidgetChildren_Address, 3);
+    SmSmngr_RegisterElementHandlers(2917, N64Eng_DispatchNumericWidgetEvent_Address, N64Eng_DrawNumericWidgetChildren_Address, 3);
 }
 
 /* ROM-grounded data: rodata/writable/800D2C18 */

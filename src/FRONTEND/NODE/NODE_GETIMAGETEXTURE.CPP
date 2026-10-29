@@ -134,7 +134,7 @@ void Node_CloseResourceArchive(void) {
                     Node_ReleaseRetainedImageSlot(i);
                 }
             }
-            offset += 0x1C;
+            offset += 28;
         } while (++i < g_frontendResourceTextureCount);
     }
     Node_ReleaseActiveChunkImages();
@@ -156,7 +156,7 @@ void Node_CloseResourceArchive(void) {
             i_chunks++;
             Cache_FreeMemory(*((struct ArchiveChunkImageListsView *)(offset_chunks + (s32)g_frontendResourceFonts))->primary);
             block = ((struct ArchiveChunkImageListsView *)(offset_chunks + (s32)g_frontendResourceFonts))->primary;
-            offset_chunks += 0x49C;
+            offset_chunks += 1180;
             Cache_FreeMemory(block);
         } while (i_chunks < g_frontendResourceFontCount);
     }
@@ -175,7 +175,7 @@ void Node_CloseResourceArchive(void) {
     if (tables[7]) Cache_FreeMemory(tables[7]);
     if (first[5]) Cache_FreeMemory(first[5]);
     if (second[3]) Cache_FreeMemory(second[3]);
-    XPlus_FillBytes((char *)tables - 0x26C, 0, 0x2A8);
+    XPlus_FillBytes((char *)tables - 0x26C, 0, 680);
 }
 
 void Node_EvictExpiredImages(void) {
@@ -204,7 +204,7 @@ void Node_EvictExpiredImages(void) {
         if (g_frontendResourceState.chunks[i].live != 0 && g_frontendResourceState.chunks[i].active != 0) {
             for (j = 0; j < g_frontendResourceState.chunks[i].header->glyphCount; j++) {
                 slots = g_frontendResourceState.chunks[i].slots[j];
-                for (k = 0; k < 0x60; k++) {
+                for (k = 0; k < 96; k++) {
                     slot = &slots[k];
                     if ((slot->flags & 1) && slot->owner < now) {
                         Image_ReleaseImage((struct OwnedImage *)slot->data);

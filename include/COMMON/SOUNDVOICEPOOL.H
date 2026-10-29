@@ -113,7 +113,7 @@ struct AudioPlaybackContextView {
     char p54[12];
     s32 resourceIndexTable;
     s32 resourceIndexCount;
-    char p68[0x3C];
+    char p68[60];
     f32 volumePercent;
     char pa8[16];
     s32 musicAttenuated;

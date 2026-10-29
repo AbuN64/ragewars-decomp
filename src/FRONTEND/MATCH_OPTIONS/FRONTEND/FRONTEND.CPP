@@ -17,7 +17,7 @@ float k_FrontendEncodedWordsBlock9[2] = {
 #if defined(VERSION_EU_X)
 extern void SmpButton_WrapButtonWidget(int id);
 
-int Frontend_ClearEuxLoadingHints(void) { SmpButton_WrapButtonWidget(0x1DD); SmpButton_WrapButtonWidget(0x1DE); return 0; }
+int Frontend_ClearEuxLoadingHints(void) { SmpButton_WrapButtonWidget(477); SmpButton_WrapButtonWidget(478); return 0; }
 #endif
 
 /* 80408CB0_33.CPP */
@@ -27,8 +27,8 @@ int Frontend_ClearEuxLoadingHints(void) { SmpButton_WrapButtonWidget(0x1DD); Smp
 #include "COMMON/OWNERRECAT8V1.H"
 
 s32 Frontend_ClearEuLoadingHints(void) {
-    SmpButton_WrapButtonWidget(0x1D9);
-    SmpButton_WrapButtonWidget(0x1DA);
+    SmpButton_WrapButtonWidget(473);
+    SmpButton_WrapButtonWidget(474);
     return 0;
 }
 #endif
@@ -38,8 +38,8 @@ s32 Frontend_ClearEuLoadingHints(void) {
 /* Marks two loading-screen hint slots (0x1D9 and 0x1DA) unused. */
 
 s32 Frontend_ClearLoadingHints(void) {
-    SmpButton_WrapButtonWidget(0x1D9);
-    SmpButton_WrapButtonWidget(0x1DA);
+    SmpButton_WrapButtonWidget(473);
+    SmpButton_WrapButtonWidget(474);
     return 0;
 }
 #endif

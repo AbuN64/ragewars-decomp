@@ -10,9 +10,9 @@
 
 /* 8042E080_78.CPP */
 #if defined(VERSION_EU_X)
-enum { START_MATCH = 0x43, RETURN_MENU = 0x3E, WAIT_SHORT = 0x42, WAIT_LONG = 0x40 };
+enum { START_MATCH = 67, RETURN_MENU = 62, WAIT_SHORT = 66, WAIT_LONG = 64 };
 #else
-enum { START_MATCH = 0x40, RETURN_MENU = 0x3C, WAIT_SHORT = 0x41, WAIT_LONG = 0x3E };
+enum { START_MATCH = 64, RETURN_MENU = 60, WAIT_SHORT = 65, WAIT_LONG = 62 };
 #endif
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x40 clears g_simpleObjectPauseState and
@@ -38,10 +38,10 @@ s32 Frontend_ActivatePauseMenuAction(void) {
         Menu_RequestOptionsScreen22();
         return 0;
     case WAIT_SHORT:
-        time = 0x1F;
+        time = 31;
         goto wait;
     case WAIT_LONG:
-        time = 0x20;
+        time = 32;
     wait:
         SmXlate_SwitchScreen(time);
         return 0;
@@ -67,7 +67,7 @@ s32 Frontend_DispatchPauseMenuEvent(void *eventTarget, s32 eventId, s32 eventCod
     MenuActorInputView *actor;
 
     if (g_pauseMenuEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_pauseMenuEventHandlers;
         index = 0;
         do {
@@ -99,15 +99,15 @@ extern void Frontend_InitMenuImage(struct MenuRules *, s32, s32, s32, s32);
 extern s32 Frontend_GetScreenMode(void);
 
 s32 Frontend_CreatePauseConfirmation(struct Pair14 *window) {
-    g_pauseTimedMenu = Cache_AllocateMemory(0x20);
+    g_pauseTimedMenu = Cache_AllocateMemory(32);
     Tsmos_ActivateControllerState();
     g_pauseTimedMenu->locked = -1;
-    Frontend_InitMenuImage(g_pauseTimedMenu, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(g_pauseTimedMenu, 103, 0, 0, 0);
     if (Frontend_GetScreenMode() == 1) {
-        window->first = 0x62;
-        window->second = 0x45;
+        window->first = 98;
+        window->second = 69;
     } else if (Frontend_GetScreenMode() == 2) {
-        window->first = 0x69;
+        window->first = 105;
     }
     return 0;
 }

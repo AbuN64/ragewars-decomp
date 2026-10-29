@@ -61,7 +61,7 @@ struct Shared_ActorView {
     char pad65C[8];
     s32 unk_0x0664;
     char pad668[0x688 - 0x668];
-    char profile[0x10]; /* 0x688 */
+    char profile[16]; /* 0x688 */
     void *controller; /* +0x698: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     char pad69C[8];
     f32 lateralInput; /* 0x6A4 */
@@ -172,7 +172,7 @@ struct Shared_ActorView {
     char pad13CC[0x14];
     void * parent; /* +0x13E0: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     u8 pad13E4[8];
-    u8 effectPayload[0x64]; /* 0x13EC */
+    u8 effectPayload[100]; /* 0x13EC */
     s32 remote; /* 0x1450 */
     void *owner; /* 0x1454 */
     CVector3 aimPoint; /* 0x1458: where the aim ray hit */

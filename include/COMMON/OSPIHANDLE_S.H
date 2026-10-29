@@ -5,7 +5,7 @@ typedef struct PiDiskBlock {
     s32 error;
     u8 *dramAddress;
     u32 c2Address, sectorSize;
-    u8 remaining[0x14];
+    u8 remaining[20];
 } PiDiskBlock;
 
 typedef struct PiDiskTransfer {
@@ -27,7 +27,7 @@ struct OSPiHandle_s {
     u8 domain;
     u32 baseAddress;
     u32 speed;
-    union { u8 bytes[0x60]; PiDiskTransfer transfer; } transferInfo;
+    union { u8 bytes[96]; PiDiskTransfer transfer; } transferInfo;
 };
 
 

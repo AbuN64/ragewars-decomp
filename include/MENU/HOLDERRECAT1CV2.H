@@ -6,7 +6,7 @@
 /* A player's option record: the record an owner holds at 0x5D8, or the defaults g_playerPartnerNameFallback. */
 struct PlayerOptions;
 struct PlayerOptions {
-    char text[0x79]; /* +0x00: shown as the name when there is no owner */
+    char text[121]; /* +0x00: shown as the name when there is no owner */
     u8 option79;
     u8 option7A;
     s8 option7B;

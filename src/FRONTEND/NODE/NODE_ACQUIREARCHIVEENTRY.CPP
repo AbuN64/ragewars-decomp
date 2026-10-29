@@ -33,7 +33,7 @@ void Node_ReleaseChunkImages(s32 index) {
 
     for (n = 0; n < g_frontendResourceFontCount.entries[index].def->glyphCount; n++) {
         slot = g_frontendResourceFontCount.entries[index].ns[n];
-        for (i = 0; i < 0x60; i++) {
+        for (i = 0; i < 96; i++) {
             if (slot[i].flags & 1) {
                 Image_ReleaseImage((struct OwnedImage *)slot[i].data);
                 slot[i].flags &= ~1;
@@ -43,7 +43,7 @@ void Node_ReleaseChunkImages(s32 index) {
     if (g_frontendResourceFontCount.entries[index].buffers[0] != 0) {
         Cache_FreeMemory(g_frontendResourceFontCount.entries[index].buffers[0]);
         g_frontendResourceFontCount.entries[index].buffers[0] = 0;
-        for (n = 0; n < 0x60; n++) {
+        for (n = 0; n < 96; n++) {
             g_frontendResourceFontCount.entries[index].buffers[n] = 0;
         }
     }

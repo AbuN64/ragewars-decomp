@@ -32,12 +32,12 @@ void XMath_SetMatrixElements(MatrixRecord *matrix, float element00, float elemen
 }
 
 void XMath_ClearMatrix(s32 destination) {
-    XPlus_FillBytes(destination, 0, 0x40);
+    XPlus_FillBytes(destination, 0, 64);
 }
 
 void XMath_SetIdentityMatrix(s32 matrixAddress)
 {
-  XPlus_FillBytes(matrixAddress, 0, 0x40);
+  XPlus_FillBytes(matrixAddress, 0, 64);
   ((Matrix *)(matrixAddress))->m[15] = (((Matrix *)(matrixAddress))->m[10] = (((Matrix *)(matrixAddress))->m[5] = (((Matrix *)(matrixAddress))->m[0] = (f32) k_xmathIdentityMatrixUnit)));
 }
 
@@ -143,7 +143,7 @@ void XMath_PremultiplyPitchRotation(s32 destinationMatrix, f32 angle) {
     if (angle != 0.0f) {
         XMath_EvaluateSineCosine(angle, &sineAngle, &cosineAngle);
         p = &matrix;
-        XPlus_FillBytes(p, 0, 0x40);
+        XPlus_FillBytes(p, 0, 64);
         ((Matrix *)(p))->m[0] = k_xmathPitchRotationUnit;
         {
             f32 cosineValue = cosineAngle;
@@ -169,7 +169,7 @@ void XMath_PremultiplyYawRotation(s32 matrixAddress, f32 radians) {
     if (radians != 0.0f) {
         XMath_EvaluateSineCosine(radians, &sinAngle, &cosAngle);
         p = &matrix;
-        XPlus_FillBytes(p, 0, 0x40);
+        XPlus_FillBytes(p, 0, 64);
         ((Matrix *)(p))->m[0] = k_xmathYawRotationUnit;
         {
             f32 cosineValue = cosAngle;
@@ -197,7 +197,7 @@ void XMath_PremultiplyRollRotation(s32 matrixAddress, f32 radians) {
     if (radians != 0.0f) {
         XMath_EvaluateSineCosine(radians, &sinAngle, &cosAngle);
         p = &matrix;
-        XPlus_FillBytes(p, 0, 0x40);
+        XPlus_FillBytes(p, 0, 64);
         ((Matrix *)(p))->m[0] = k_xmathRollRotationUnit;
         {
             f32 cosineValue = cosAngle;

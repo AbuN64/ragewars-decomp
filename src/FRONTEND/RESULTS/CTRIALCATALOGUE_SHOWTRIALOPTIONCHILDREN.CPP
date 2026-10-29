@@ -179,8 +179,8 @@ s32 CTrialCatalogue_HandleTrialOptionRelease(void *first, void *second, u32 even
         MarkMenuEventHandled();
         state = g_trialCatalogueScreen;
         state->state = 8;
-        state->item->alpha = 0x5A;
-        SoundElement_PlayFlatSound(0xE7C);
+        state->item->alpha = 90;
+        SoundElement_PlayFlatSound(3708);
     }
     return 0;
 }
@@ -202,22 +202,22 @@ s32 CTrialCatalogue_SelectNeighborTwo(void *parent, s32 unused1, s32 unused2, s3
     if (set != 1) {
         return 0;
     }
-    SoundElement_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(3709);
     if (Defs_TestBit(g_trialCatalogueScreen->pending, g_trialCatalogueScreen->selection) == set) {
-        g_trialCatalogueScreen->window->alpha = 0x46;
+        g_trialCatalogueScreen->window->alpha = 70;
     } else {
-        g_trialCatalogueScreen->window->alpha = 0xAA;
+        g_trialCatalogueScreen->window->alpha = 170;
     }
     g_trialCatalogueScreen->selection = next;
     g_trialCatalogueScreen->window = Node_FindWidgetByResourceId(parent, entryWindowKey(next));
     Results_RefreshTrialSelectionLabel();
     options = g_gameSettings;
-    if (options[0xD] != 2) {
+    if (options[13] != 2) {
         Results_ShowTrialPreviewBanner();
         g_trialCatalogueScreen->frames = 0;
         Results_UpdateResultsHeading();
     }
-    if (options[0xD] == 4) {
+    if (options[13] == 4) {
         Results_RefreshTrialCharacterPreview();
     }
     return 0;
@@ -240,22 +240,22 @@ s32 CTrialCatalogue_SelectNeighborThree(void *parent, s32 unused1, s32 unused2, 
     if (set != 1) {
         return 0;
     }
-    SoundElement_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(3709);
     if (Defs_TestBit(g_trialCatalogueScreen->pending, g_trialCatalogueScreen->selection) == set) {
-        g_trialCatalogueScreen->window->alpha = 0x46;
+        g_trialCatalogueScreen->window->alpha = 70;
     } else {
-        g_trialCatalogueScreen->window->alpha = 0xAA;
+        g_trialCatalogueScreen->window->alpha = 170;
     }
     g_trialCatalogueScreen->selection = next;
     g_trialCatalogueScreen->window = Node_FindWidgetByResourceId(parent, entryWindowKey(next));
     Results_RefreshTrialSelectionLabel();
     options = g_gameSettings;
-    if (options[0xD] != 2) {
+    if (options[13] != 2) {
         Results_ShowTrialPreviewBanner();
         g_trialCatalogueScreen->frames = 0;
         Results_UpdateResultsHeading();
     }
-    if (options[0xD] == 4) {
+    if (options[13] == 4) {
         Results_RefreshTrialCharacterPreview();
     }
     return 0;
@@ -278,22 +278,22 @@ s32 CTrialCatalogue_SelectNeighborOne(void *parent, s32 unused1, s32 unused2, s3
     if (set != 1) {
         return 0;
     }
-    SoundElement_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(3709);
     if (Defs_TestBit(g_trialCatalogueScreen->pending, g_trialCatalogueScreen->selection) == set) {
-        g_trialCatalogueScreen->window->alpha = 0x46;
+        g_trialCatalogueScreen->window->alpha = 70;
     } else {
-        g_trialCatalogueScreen->window->alpha = 0xAA;
+        g_trialCatalogueScreen->window->alpha = 170;
     }
     g_trialCatalogueScreen->selection = next;
     g_trialCatalogueScreen->window = Node_FindWidgetByResourceId(parent, entryWindowKey(next));
     Results_RefreshTrialSelectionLabel();
     options = g_gameSettings;
-    if (options[0xD] != 2) {
+    if (options[13] != 2) {
         Results_ShowTrialPreviewBanner();
         g_trialCatalogueScreen->frames = 0;
         Results_UpdateResultsHeading();
     }
-    if (options[0xD] == 4) {
+    if (options[13] == 4) {
         Results_RefreshTrialCharacterPreview();
     }
     return 0;
@@ -316,22 +316,22 @@ s32 CTrialCatalogue_SelectNeighborZero(void *parent, s32 unused1, s32 unused2, s
     if (set != 1) {
         return 0;
     }
-    SoundElement_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(3709);
     if (Defs_TestBit(g_trialCatalogueScreen->pending, g_trialCatalogueScreen->selection) == set) {
-        g_trialCatalogueScreen->window->alpha = 0x46;
+        g_trialCatalogueScreen->window->alpha = 70;
     } else {
-        g_trialCatalogueScreen->window->alpha = 0xAA;
+        g_trialCatalogueScreen->window->alpha = 170;
     }
     g_trialCatalogueScreen->selection = next;
     g_trialCatalogueScreen->window = Node_FindWidgetByResourceId(parent, entryWindowKey(next));
     Results_RefreshTrialSelectionLabel();
     options = g_gameSettings;
-    if (options[0xD] != 2) {
+    if (options[13] != 2) {
         Results_ShowTrialPreviewBanner();
         g_trialCatalogueScreen->frames = 0;
         Results_UpdateResultsHeading();
     }
-    if (options[0xD] == 4) {
+    if (options[13] == 4) {
         Results_RefreshTrialCharacterPreview();
     }
     return 0;
@@ -340,7 +340,7 @@ s32 CTrialCatalogue_SelectNeighborZero(void *parent, s32 unused1, s32 unused2, s
 s32 CTrialCatalogue_ExitTrialCatalogue(void) {
     MarkMenuEventHandled();
     Results_HideTrialCatalogueWidgets();
-    Random_SetMenuChoiceResult(0xE);
+    Random_SetMenuChoiceResult(14);
     return 0;
 }
 
@@ -351,7 +351,7 @@ s32 CTrialCatalogue_ConfirmTrialStage(void) {
     Results_HideTrialCatalogueWidgets();
     selection = g_trialCatalogueScreen->selection;
     Random_SetSelectedStage(g_trialCatalogueStages[selection].first, g_trialCatalogueStages[selection].second);
-    Random_SetMenuChoiceResult(0x19);
+    Random_SetMenuChoiceResult(25);
     return 0;
 }
 
@@ -364,7 +364,7 @@ s32 CTrialCatalogue_DispatchCatalogueEvent(void *eventObject, s32 eventId, s32 e
     MenuActorInputView *actor;
 
     if (g_trialCatalogueEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_trialCatalogueEventHandlers;
         index = 0;
         do {
@@ -392,7 +392,7 @@ s32 CTrialCatalogue_DispatchOptionsEvent(void *eventObject, s32 eventId, s32 eve
     MenuActorInputView *actor;
 
     if (g_trialOptionsEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_trialOptionsEventHandlers;
         index = 0;
         do {

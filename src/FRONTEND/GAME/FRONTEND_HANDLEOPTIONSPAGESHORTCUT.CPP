@@ -21,9 +21,9 @@ extern void SmXlate_SwitchScreen(s32);
 extern void Menu_ReturnToPreviousScreen(void);
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-enum { SHORTCUT_RESET = 0x50, SHORTCUT_SIX = 0x57, SHORTCUT_FIVE = 0x58 };
+enum { SHORTCUT_RESET = 80, SHORTCUT_SIX = 87, SHORTCUT_FIVE = 88 };
 #elif defined(VERSION_EU_X)
-enum { SHORTCUT_RESET = 0x5C, SHORTCUT_SIX = 0x52, SHORTCUT_FIVE = 0x55 };
+enum { SHORTCUT_RESET = 92, SHORTCUT_SIX = 82, SHORTCUT_FIVE = 85 };
 #endif
 
 /* Handles the menu shortcut codes by selecting an entry and refreshing the screen. */

@@ -34,11 +34,11 @@ extern struct ResultsHeadingCharacter g_resultCharacterHeadingTranslations[];
    its name phrase 0x6B, its time phrase 0x3F and its time item 0x154; on eu-x 0x157, 0x6C, 0x40 and
    0x15A. eu and eu-x pick the heading and character name strings by language (RES_* above). */
 #if defined(VERSION_DE)
-enum { HEADING_ITEM = 0x151, NAME_PHRASE = 0x6B, TIME_PHRASE = 0x3F, TIME_ITEM = 0x154 };
+enum { HEADING_ITEM = 337, NAME_PHRASE = 107, TIME_PHRASE = 63, TIME_ITEM = 340 };
 #elif defined(VERSION_EU_X)
-enum { HEADING_ITEM = 0x157, NAME_PHRASE = 0x6C, TIME_PHRASE = 0x40, TIME_ITEM = 0x15A };
+enum { HEADING_ITEM = 343, NAME_PHRASE = 108, TIME_PHRASE = 64, TIME_ITEM = 346 };
 #else
-enum { HEADING_ITEM = 0x153, NAME_PHRASE = 0x69, TIME_PHRASE = 0x3D, TIME_ITEM = 0x156 };
+enum { HEADING_ITEM = 339, NAME_PHRASE = 105, TIME_PHRASE = 61, TIME_ITEM = 342 };
 #endif
 
 extern struct ResultsHeadingScreen *g_trialCatalogueScreen;

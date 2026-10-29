@@ -248,7 +248,7 @@ f64 XMath_SplitDoubleExponent(f64 value, s32 *exponent) {
 normal:
     u.d = value;
 
-    *exponent = ((u.w.hi >> 20) & 0x7FF) - 0x3FE;
+    *exponent = ((u.w.hi >> 20) & 0x7FF) - 1022;
     u.w.hi = (u.w.hi & 0x800FFFFF) | 0x3FE00000;
     return u.d;
 }

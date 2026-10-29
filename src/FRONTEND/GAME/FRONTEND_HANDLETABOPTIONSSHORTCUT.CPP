@@ -105,38 +105,38 @@ s32 Frontend_HandleCompactOptionsShortcut(void) {
     handled = 1;
     switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_DE)
-    case 0x1BF:
+    case 447:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x1C3:
+    case 451:
 #elif defined(VERSION_EU_X)
-    case 0x1C7:
+    case 455:
 #endif
         Random_SetMenuChoiceResult(-1);
         break;
 #if defined(VERSION_DE)
-    case 0x1B9:
+    case 441:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x1BD:
+    case 445:
 #elif defined(VERSION_EU_X)
-    case 0x1C1:
+    case 449:
 #endif
         Random_SetMenuChoiceResult(13);
         break;
 #if defined(VERSION_DE)
-    case 0x1BE:
+    case 446:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x1C2:
+    case 450:
 #elif defined(VERSION_EU_X)
-    case 0x1C6:
+    case 454:
 #endif
         Random_SetMenuChoiceResult(12);
         break;
 #if defined(VERSION_DE)
-    case 0x1C0:
+    case 448:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x1C4:
+    case 452:
 #elif defined(VERSION_EU_X)
-    case 0x1C8:
+    case 456:
 #endif
         Random_SetMenuChoiceResult(14);
         break;
@@ -168,7 +168,7 @@ s32 Frontend_DispatchCompactOptionsEvent(void *menuActor, s32 eventKind, s32 eve
     s32 table_kind;
 
     if (g_compactOptionsEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_compactOptionsEventHandlers;
         index = 0;
         do {
@@ -202,11 +202,11 @@ s32 Frontend_HandleTabOptionsShortcut(void) {
     handled = 1;
     message = Menu_GetFocusedElementId() -
 #if defined(VERSION_DE)
-        0x373;
+        883;
 #elif defined(VERSION_EU_X)
-        0x37B;
+        891;
 #else
-        0x377;
+        887;
 #endif
     if (message >=
 #if defined(VERSION_DE)
@@ -250,7 +250,7 @@ reopen:
     Cinema_ReleaseSequenceContext();
     goto done;
 code_17:
-    Random_SetMenuChoiceResult(0x17);
+    Random_SetMenuChoiceResult(23);
     goto done;
 retry:
     Tsmos_DeactivateControllerState();
@@ -296,7 +296,7 @@ s32 Frontend_DispatchTabOptionsEvent(void *menuActor, s32 eventKind, s32 eventDa
     MenuActorInputView *actor;
 
     if (g_tabOptionsEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_tabOptionsEventHandlers;
         index = 0;
         do {

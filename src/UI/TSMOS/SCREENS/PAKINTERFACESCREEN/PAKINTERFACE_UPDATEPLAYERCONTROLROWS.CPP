@@ -19,48 +19,48 @@ void PAKInterface_UpdatePlayerControlRows(s32 player) {
         if (i < 2) {
             if (i == 0) goto row_zero;
 #if defined(VERSION_DE)
-            id = 0x296 + 6;
+            id = 662 + 6;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            id = 0x299 + 6;
+            id = 665 + 6;
 #elif defined(VERSION_EU_X)
-            id = 0x29F + 6;
+            id = 671 + 6;
 #endif
             goto row_done;
         }
         if (i == 2) goto row_two;
 #if defined(VERSION_DE)
-        id = 0x296 + 6;
+        id = 662 + 6;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x299 + 6;
+        id = 665 + 6;
 #elif defined(VERSION_EU_X)
-        id = 0x29F + 6;
+        id = 671 + 6;
 #endif
         goto row_done;
     row_zero:
 #if defined(VERSION_DE)
-        id = 0x296;
+        id = 662;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x299;
+        id = 665;
 #elif defined(VERSION_EU_X)
-        id = 0x29F;
+        id = 671;
 #endif
         goto row_done;
     row_one:
 #if defined(VERSION_DE)
-        id = 0x296 + 2;
+        id = 662 + 2;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x299 + 2;
+        id = 665 + 2;
 #elif defined(VERSION_EU_X)
-        id = 0x29F + 2;
+        id = 671 + 2;
 #endif
         goto row_done;
     row_two:
 #if defined(VERSION_DE)
-        id = 0x296 + 4;
+        id = 662 + 4;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x299 + 4;
+        id = 665 + 4;
 #elif defined(VERSION_EU_X)
-        id = 0x29F + 4;
+        id = 671 + 4;
 #endif
     row_done:
         item = Node_FindWidgetByResourceId(g_pakProfileScreenState->window, id);

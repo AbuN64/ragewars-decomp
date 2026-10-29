@@ -16,116 +16,116 @@
 #endif
 /* Sprite ids of the setup screen: the first column is the id in the US rev 1 and EU builds. */
 #if defined(VERSION_DE)
-#define SPRITE_285 0x281
+#define SPRITE_285 641
 #elif defined(VERSION_EU_X)
-#define SPRITE_285 0x28A
+#define SPRITE_285 650
 #else
-#define SPRITE_285 0x285
+#define SPRITE_285 645
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_2FB 0x29E
+#define SPRITE_2FB 670
 #elif defined(VERSION_EU_X)
-#define SPRITE_2FB 0x300
+#define SPRITE_2FB 768
 #else
-#define SPRITE_2FB 0x2FB
+#define SPRITE_2FB 763
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_2A2 0x2F7
+#define SPRITE_2A2 759
 #elif defined(VERSION_EU_X)
-#define SPRITE_2A2 0x2A7
+#define SPRITE_2A2 679
 #else
-#define SPRITE_2A2 0x2A2
+#define SPRITE_2A2 674
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_286 0x282
+#define SPRITE_286 642
 #elif defined(VERSION_EU_X)
-#define SPRITE_286 0x28B
+#define SPRITE_286 651
 #else
-#define SPRITE_286 0x286
+#define SPRITE_286 646
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_287 0x283
+#define SPRITE_287 643
 #elif defined(VERSION_EU_X)
-#define SPRITE_287 0x28C
+#define SPRITE_287 652
 #else
-#define SPRITE_287 0x287
+#define SPRITE_287 647
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_2FC 0x29F
+#define SPRITE_2FC 671
 #elif defined(VERSION_EU_X)
-#define SPRITE_2FC 0x301
+#define SPRITE_2FC 769
 #else
-#define SPRITE_2FC 0x2FC
+#define SPRITE_2FC 764
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_2A3 0x2F8
+#define SPRITE_2A3 760
 #elif defined(VERSION_EU_X)
-#define SPRITE_2A3 0x2A8
+#define SPRITE_2A3 680
 #else
-#define SPRITE_2A3 0x2A3
+#define SPRITE_2A3 675
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_2FD 0x2F6
+#define SPRITE_2FD 758
 #elif defined(VERSION_EU_X)
-#define SPRITE_2FD 0x302
+#define SPRITE_2FD 770
 #else
-#define SPRITE_2FD 0x2FD
+#define SPRITE_2FD 765
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_2FA 0x2F9
+#define SPRITE_2FA 761
 #elif defined(VERSION_EU_X)
-#define SPRITE_2FA 0x2FF
+#define SPRITE_2FA 767
 #else
-#define SPRITE_2FA 0x2FA
+#define SPRITE_2FA 762
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_293 0x289
+#define SPRITE_293 649
 #elif defined(VERSION_EU_X)
-#define SPRITE_293 0x28D
+#define SPRITE_293 653
 #else
-#define SPRITE_293 0x293
+#define SPRITE_293 659
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_296 0x287
+#define SPRITE_296 647
 #elif defined(VERSION_EU_X)
-#define SPRITE_296 0x290
+#define SPRITE_296 656
 #else
-#define SPRITE_296 0x296
+#define SPRITE_296 662
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_288 0x284
+#define SPRITE_288 644
 #elif defined(VERSION_EU_X)
-#define SPRITE_288 0x28E
+#define SPRITE_288 654
 #else
-#define SPRITE_288 0x288
+#define SPRITE_288 648
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_2A1 0x288
+#define SPRITE_2A1 648
 #elif defined(VERSION_EU_X)
-#define SPRITE_2A1 0x28F
+#define SPRITE_2A1 655
 #else
-#define SPRITE_2A1 0x2A1
+#define SPRITE_2A1 673
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_295 0x285
+#define SPRITE_295 645
 #elif defined(VERSION_EU_X)
-#define SPRITE_295 0x291
+#define SPRITE_295 657
 #else
-#define SPRITE_295 0x295
+#define SPRITE_295 661
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_289 0x28A
+#define SPRITE_289 650
 #elif defined(VERSION_EU_X)
-#define SPRITE_289 0x292
+#define SPRITE_289 658
 #else
-#define SPRITE_289 0x289
+#define SPRITE_289 649
 #endif
 #if defined(VERSION_DE)
-#define SPRITE_297 0x294
+#define SPRITE_297 660
 #elif defined(VERSION_EU_X)
-#define SPRITE_297 0x29D
+#define SPRITE_297 669
 #else
-#define SPRITE_297 0x297
+#define SPRITE_297 663
 #endif
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -175,7 +175,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     block = Cache_AllocateMemory(sizeof(PakMenuController));
     g_pakProfileScreenState = block;
     block->window = screen;
-    Frontend_InitMenuImage(block->menu, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(block->menu, 103, 0, 0, 0);
     g_pakProfileScreenState->list = SmpOverlay_CreateOverlayNode(screen, 4);
     SmpOverlay_ShowSlotById(screen, 0, SPRITE_285);
     SmpOverlay_ShowSlotById(screen, 1, SPRITE_285);
@@ -196,7 +196,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     g_pakProfileScreenState->bottomStep = g_pakProfileScreenState->bottom->w / 4;
     rest = g_pakProfileScreenState->bottom->w - g_pakProfileScreenState->bottomStep * 4;
     g_pakProfileScreenState->bottom->x -= rest;
-    Node_FindWidgetByResourceId(screen, SPRITE_286)->alpha = 0x6E;
+    Node_FindWidgetByResourceId(screen, SPRITE_286)->alpha = 110;
     g_pakProfileScreenState->music = SmpFlicker_CreateFlickerWidget(SPRITE_287, 0xFF);
     g_pakProfileScreenState->title = Node_FindWidgetByResourceId(screen, SPRITE_287);
     Widget_SetWidgetFlag08(g_pakProfileScreenState->title, 0);
@@ -273,12 +273,12 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
             Player_InitializeProfile(&g_pakProfileScreenState->players[i].records[j]);
         }
         for (j = 0; j < 16; j++) {
-            XPlus_FillMemory(g_pakProfileScreenState->players[i].noteTexts[j].name, 0, 0x14);
-            XPlus_FillMemory(g_pakProfileScreenState->players[i].noteTexts[j].size, 0, 0xA);
+            XPlus_FillMemory(g_pakProfileScreenState->players[i].noteTexts[j].name, 0, 20);
+            XPlus_FillMemory(g_pakProfileScreenState->players[i].noteTexts[j].size, 0, 10);
         }
-        XPlus_FillMemory(g_pakProfileScreenState->players[i].codes[2], 0, 0xA);
-        XPlus_FillMemory(g_pakProfileScreenState->players[i].codes[1], 0, 0xA);
-        XPlus_FillMemory(g_pakProfileScreenState->players[i].codes[0], 0, 0xA);
+        XPlus_FillMemory(g_pakProfileScreenState->players[i].codes[2], 0, 10);
+        XPlus_FillMemory(g_pakProfileScreenState->players[i].codes[1], 0, 10);
+        XPlus_FillMemory(g_pakProfileScreenState->players[i].codes[0], 0, 10);
         g_pakProfileScreenState->players[i].slot = 0;
         g_pakProfileScreenState->players[i].choice = 0;
         for (j = 0; j < 4; j++) {
@@ -296,7 +296,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     switch (g_pakProfileScreenState->phase) {
     case 5:
         for (i = 0; i < 4; i++) {
-            g_pakProfileScreenState->players[i].state = 0xE;
+            g_pakProfileScreenState->players[i].state = 14;
         }
         for (i = 0; i < 4; i++) {
             globals = &g_gameSettings;
@@ -345,7 +345,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     case 7:
         g_pakProfileScreenState->players[0].back = 2;
         g_pakProfileScreenState->players[0].state = 2;
-        g_pakProfileScreenState->players[0].next = 0xD;
+        g_pakProfileScreenState->players[0].next = 13;
         g_pakProfileScreenState->players[0].sub = 6;
         PAKInterface_RefreshPlayerPanel(0);
         break;
@@ -353,7 +353,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     Frontend_RequestScreenMode(0);
     Tsmos_DeactivateControllerState();
     Tsmos_SetTimerState(0);
-    SoundElement_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(3704);
     return 0;
 }
 #endif

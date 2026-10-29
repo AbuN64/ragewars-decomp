@@ -58,20 +58,20 @@ extern s32 Node_ClampRectToClip(struct CacheResourceBlockView *rect, struct Cach
 extern void Widget_DrawVisibleSiblings(void *, Args);
 
 void SmpOverlay_RegisterOverlayClass(void) {
-    SmSmngr_RegisterElementHandlers(0x7D5, g_SmpOverlay_DispatchSlotEventAddress, g_SmpOverlay_DrawOverlayWidgetAddress, 3);
+    SmSmngr_RegisterElementHandlers(2005, g_SmpOverlay_DispatchSlotEventAddress, g_SmpOverlay_DrawOverlayWidgetAddress, 3);
 }
 
 NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(MenuOverlayOwnerView *owner, s32 value) {
     NodeMenuCreateOverlayNode *node;
 
-    node = (NodeMenuCreateOverlayNode *)Cache_AllocateMemory(0x70);
-    XPlus_FillBytes(node, 0, 0x70);
+    node = (NodeMenuCreateOverlayNode *)Cache_AllocateMemory(112);
+    XPlus_FillBytes(node, 0, 112);
     *(Header44 *)node = *(Header44 *)owner->root;
-    node->kind = 0x7D5;
+    node->kind = 2005;
     node->flags = 8;
     node->value = value;
     node->owner = owner;
-    node->tag = 0x7A51;
+    node->tag = 31313;
     node->reservedWord = 0;
     Node_InsertWidgetBefore(owner->root, node);
     return owner->overlay = node;
@@ -85,10 +85,10 @@ void SmpOverlay_ShowSlotById(MenuMultiUserOwnerView *owner, s32 index, s32 id) {
     context = owner->context;
     if (context->locked[index] == 0) {
         if (context->shown[index] != 0) {
-            Menu_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
+            Menu_RouteElementEvent(context->shown[index]->id, 16, 0, 0, 0);
         }
         node = (NodeMenuShowSlotById *)Node_FindWidgetByResourceId(context->root, id & 0xFFFF);
-        Menu_RouteElementEvent(node->id, 0xF, 0, 0, 0);
+        Menu_RouteElementEvent(node->id, 15, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;
         } else {
@@ -142,10 +142,10 @@ void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id) {
 
     if (context->locked[index] == 0) {
         if (context->shown[index] != 0) {
-            Menu_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
+            Menu_RouteElementEvent(context->shown[index]->id, 16, 0, 0, 0);
         }
         node = (NodeMenuShowSlotById *)Node_FindWidgetByResourceId(context->root, id & 0xFFFF);
-        Menu_RouteElementEvent(node->id, 0xF, 0, 0, 0);
+        Menu_RouteElementEvent(node->id, 15, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;
         } else {
@@ -201,7 +201,7 @@ g_overlaySlotEventHandlersUs
 g_overlaySlotEventHandlers
 #endif
  != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&
 #if defined(VERSION_DE)
 g_overlaySlotEventHandlersDe
@@ -225,7 +225,7 @@ g_overlaySlotEventHandlers
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
@@ -582,7 +582,7 @@ void SmpOverlay_RefreshPakDialog(void) {
 #endif
         }
         PAKInterface_SetScreenPhase(6);
-        SmXlate_SwitchScreen(0x13);
+        SmXlate_SwitchScreen(19);
         return;
     }
     if (hasCapacity == 1) {
@@ -649,41 +649,41 @@ void SmpOverlay_AdvancePakDialogPort(void) {
 s32 SmpOverlay_CreatePakDialog(void *parent) {
     void *window;
     char *resources;
-    g_pakDialog = Cache_AllocateMemory(0x2C);
+    g_pakDialog = Cache_AllocateMemory(44);
     g_pakDialog->root = parent;
 #if defined(VERSION_DE)
-    window = Node_FindWidgetByResourceId(parent, 0x3BE);
+    window = Node_FindWidgetByResourceId(parent, 958);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = Node_FindWidgetByResourceId(parent, 0x3C3);
+    window = Node_FindWidgetByResourceId(parent, 963);
 #elif defined(VERSION_EU_X)
-    window = Node_FindWidgetByResourceId(parent, 0x3CC);
+    window = Node_FindWidgetByResourceId(parent, 972);
 #endif
     g_pakDialog->main = window;
     Widget_SetWidgetFlag08(window, 1);
 #if defined(VERSION_DE)
-    window = Node_FindWidgetByResourceId(parent, 0x3C3);
+    window = Node_FindWidgetByResourceId(parent, 963);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = Node_FindWidgetByResourceId(parent, 0x3C9);
+    window = Node_FindWidgetByResourceId(parent, 969);
 #elif defined(VERSION_EU_X)
-    window = Node_FindWidgetByResourceId(parent, 0x3CD);
+    window = Node_FindWidgetByResourceId(parent, 973);
 #endif
     g_pakDialog->absent = window;
     Widget_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
-    window = Node_FindWidgetByResourceId(parent, 0x3BD);
+    window = Node_FindWidgetByResourceId(parent, 957);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = Node_FindWidgetByResourceId(parent, 0x3C4);
+    window = Node_FindWidgetByResourceId(parent, 964);
 #elif defined(VERSION_EU_X)
-    window = Node_FindWidgetByResourceId(parent, 0x3C6);
+    window = Node_FindWidgetByResourceId(parent, 966);
 #endif
     g_pakDialog->unavailable = window;
     Widget_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
-    window = Node_FindWidgetByResourceId(parent, 0x3BF);
+    window = Node_FindWidgetByResourceId(parent, 959);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = Node_FindWidgetByResourceId(parent, 0x3C5);
+    window = Node_FindWidgetByResourceId(parent, 965);
 #elif defined(VERSION_EU_X)
-    window = Node_FindWidgetByResourceId(parent, 0x3C8);
+    window = Node_FindWidgetByResourceId(parent, 968);
 #endif
     g_pakDialog->prompt = window;
     Widget_SetWidgetFlag08(window, 0);
@@ -738,39 +738,39 @@ s32 SmpOverlay_HandlePakDialogChoice(void) {
     MarkMenuEventHandled();
     switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_EU_X)
-    case 0x3CF:
+    case 975:
 #elif defined(VERSION_DE)
-    case 0x3C4:
+    case 964:
 #else
-    case 0x3CB:
+    case 971:
 #endif
         Widget_SetWidgetFlag08(g_pakDialog->absent, 0);
         SmpOverlay_RefreshPakDialog();
         break;
 #if defined(VERSION_EU_X)
-    case 0x3CE:
+    case 974:
 #elif defined(VERSION_DE)
-    case 0x3C5:
+    case 965:
 #else
-    case 0x3CA:
+    case 970:
 #endif
         SmpOverlay_FinishPakDialog();
         break;
 #if defined(VERSION_EU_X)
-    case 0x3CA:
+    case 970:
 #elif defined(VERSION_DE)
-    case 0x3C2:
+    case 962:
 #else
-    case 0x3C7:
+    case 967:
 #endif
         SmpOverlay_AdvancePakDialogPort();
         break;
 #if defined(VERSION_EU_X)
-    case 0x3C9:
+    case 969:
 #elif defined(VERSION_DE)
-    case 0x3C1:
+    case 961:
 #else
-    case 0x3C6:
+    case 966:
 #endif
         g_pakRequestLatched = 1;
         g_pakStartButtonLatched = 1;
@@ -787,7 +787,7 @@ s32 SmpOverlay_HandlePakDialogChoice(void) {
         g_pakDialogProbeStateUsRev1 = 1;
 #endif
         PAKInterface_SetScreenPhase(6);
-        SmXlate_SwitchScreen(0x13);
+        SmXlate_SwitchScreen(19);
         break;
     }
     return 0;
@@ -801,7 +801,7 @@ s32 SmpOverlay_DispatchPakDialogEvent(void *widget, s32 eventId, s32 eventData0,
     s32 table_kind;
 
     if (g_pakDialogEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_pakDialogEventHandlers;
         offset = 0;
         do {
@@ -813,7 +813,7 @@ s32 SmpOverlay_DispatchPakDialogEvent(void *widget, s32 eventId, s32 eventData0,
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;

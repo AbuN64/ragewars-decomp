@@ -49,7 +49,7 @@ s32 Frontend_CreateProfileResetScreenGerman(MenuWidget *tree) {
         i--;
         record--;
     } while (i >= 0);
-    g_profileResetScreen->widget = Node_FindWidgetByResourceId(tree, 0x391);
+    g_profileResetScreen->widget = Node_FindWidgetByResourceId(tree, 913);
     g_profileResetScreen->phase = 0;
     settings = &g_gameSettings;
     settings->laps = 10;
@@ -93,7 +93,7 @@ s32 Frontend_PulseProfileResetWidget(s32 unused0, s32 unused1, s32 phaseStep) {
 
 s32 Frontend_HandleProfileResetConfirm(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3) {
-        if (value != 0xD) {
+        if (value != 13) {
             return 0;
         }
         MarkMenuEventHandled();
@@ -123,7 +123,7 @@ s32 Frontend_DispatchProfileResetEvent(Shared_Body *widget, s32 eventId, s32 eve
     s32 table_kind;
 
     if (g_profileResetEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_profileResetEventHandlers;
         index = 0;
         do {

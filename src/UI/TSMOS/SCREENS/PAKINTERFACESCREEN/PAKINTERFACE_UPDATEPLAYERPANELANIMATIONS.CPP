@@ -38,7 +38,7 @@ void PAKInterface_UpdatePlayerPanelAnimations(s32 phaseStep) {
         case 0:
             PAKInterface_PulseIdlePanelLabels(player);
             break;
-        case 0xC:
+        case 12:
             animatedLabel = SmpOverlay_GetSlotValue(g_pakProfileScreenState->root, player);
             selectedPhaseStorage = (Blk *)((char *)g_pakProfileScreenState + (player * 4));
             bobValue = (Math_Cosf((f32)player + ((f32)selectedPhaseStorage->animationClock * 0.005f)) * 100.0f) + 150.0f;
@@ -65,7 +65,7 @@ void PAKInterface_UpdatePlayerPanelAnimations(s32 phaseStep) {
             }
             break;
         case 4:
-            selectedLabelOffset = ((playerPanel->selectedNote - playerPanel->noteScrollOffset) * 4) + (player * 0xB68);
+            selectedLabelOffset = ((playerPanel->selectedNote - playerPanel->noteScrollOffset) * 4) + (player * 2920);
             animatedLabel = ((Blk *)((char *)g_pakProfileScreenState + selectedLabelOffset))->noteLabel;
             idlePhaseStorage = (Blk *)((char *)g_pakProfileScreenState + (player * 4));
             bobValue = (Math_Cosf((f32)player + ((f32)idlePhaseStorage->animationClock * 0.005f)) * 100.0f) + 150.0f;

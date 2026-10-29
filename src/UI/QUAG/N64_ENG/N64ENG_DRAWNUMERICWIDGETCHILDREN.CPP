@@ -30,7 +30,7 @@ s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *eventTarget, s32 eventId, s32
     s32 table_kind;
 
     if (g_numericWidgetEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_numericWidgetEventHandlers;
         offset = 0;
         do {
@@ -42,7 +42,7 @@ s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *eventTarget, s32 eventId, s32
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
@@ -175,12 +175,12 @@ s32 N64Eng_SetLinkedCommand100WithSound(struct CommandListController *commandLis
 
     commandListController->state = 2;
     commandListController->progress = 0;
-    SoundElement_PlayFlatSound(0xE74);
+    SoundElement_PlayFlatSound(3700);
     p = commandListController->entries;
     if (p != 0) {
         do {
             if (p->kind != 8) {
-                p->command = 0x64;
+                p->command = 100;
             }
             p = p->next;
         } while (p != 0);
@@ -202,7 +202,7 @@ s32 N64Eng_HandleNumericIncrement(void *widgetStorage, s32 unused1, s32 unused2,
     }
     object->stepState = eventValue;
     N64Eng_IncrementNumericWidget(object);
-    SoundElement_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 
@@ -220,7 +220,7 @@ s32 N64Eng_HandleNumericDecrement(void *widgetStorage, s32 unused1, s32 unused2,
     }
     object->stepState = 0;
     N64Eng_DecrementNumericWidget(object);
-    SoundElement_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(3713);
     return 0;
 }
 

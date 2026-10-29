@@ -34,7 +34,7 @@ s32 Frontend_HandleMatchMenuMessage(void) {
     default:
         return 0;
     case MATCH_MENU_ELEMENT_LOAD_LEVEL_RESOURCES:
-        if (Menu_GetPreviousScreenOwner(0) == 0x16) {
+        if (Menu_GetPreviousScreenOwner(0) == 22) {
             Pools_ResetActorPools(&g_playerViewRenderContext.object, 0);
             Player_InitializePlayerPool(&g_playerViewRenderContext, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
@@ -82,7 +82,7 @@ s32 Frontend_HandleMatchMenuMessage(void) {
 
 s32 Frontend_CloseMatchMenu(void) {
     MarkMenuEventHandled();
-    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0xB ? 0xB : -1);
+    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 11 ? 11 : -1);
     Menu_ReturnToPreviousScreen();
     return 0;
 }
@@ -108,7 +108,7 @@ s32 Frontend_DispatchMatchMenuEvent(void *eventObject, s32 eventId, s32 eventPay
     MenuActorInputView *actor;
 
     if (g_matchMenuEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_matchMenuEventHandlers;
         index = 0;
         do {

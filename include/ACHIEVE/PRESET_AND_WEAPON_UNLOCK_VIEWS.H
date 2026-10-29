@@ -8,11 +8,11 @@ struct PresetTable {
     PresetRow rows[1];
 };
 struct WeaponUnlockPlayerView {
-    char p[0x18];
+    char p[24];
     WeaponUnlockModelView *model;
-    char p2[0x5bc];
+    char p2[1468];
     struct WeaponUnlockProfileView *profile;
-    char p3[0x26];
+    char p3[38];
     InventorySlot slots[8];
 };
 #endif

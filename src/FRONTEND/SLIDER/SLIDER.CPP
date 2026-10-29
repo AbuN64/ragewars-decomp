@@ -55,23 +55,23 @@ s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 valueOrUpperBound,
             result = widget->value;
             goto end;
 
-        case 0x1002:
+        case 4098:
             result = widget->min;
             goto end;
 
-        case 0x1003:
+        case 4099:
             result = widget->max;
             goto end;
 
-        case 0x1006:
+        case 4102:
             result = widget->step;
             goto end;
 
-        case 0x1008:
+        case 4104:
             result = widget->flags;
             goto end;
 
-        case 0x1005:
+        case 4101:
             if (valueOrUpperBound < widget->min) {
                 goto post;
             }
@@ -81,7 +81,7 @@ s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 valueOrUpperBound,
             widget->value = valueOrUpperBound;
             goto post;
 
-        case 0x1004:
+        case 4100:
             if (widget->min < valueOrUpperBound) {
                 widget->max = valueOrUpperBound;
             }
@@ -90,13 +90,13 @@ s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 valueOrUpperBound,
             }
             goto post;
 
-        case 0x1007:
+        case 4103:
             if (valueOrUpperBound < (widget->max - widget->min)) {
                 widget->step = valueOrUpperBound;
             }
             goto post;
 
-        case 0x1009:
+        case 4105:
             widget->flags = valueOrUpperBound;
             goto post;
 
@@ -107,7 +107,7 @@ s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 valueOrUpperBound,
 
 post:
     Frontend_UpdateSliderGeometry((Slider *)widget);
-    Menu_RouteElementEvent(GetMenuScreenOwner(), 0x100A, slider->parentId, widget->value, 0);
+    Menu_RouteElementEvent(GetMenuScreenOwner(), 4106, slider->parentId, widget->value, 0);
     MarkMenuEventHandled();
     result = 0;
 

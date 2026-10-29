@@ -45,7 +45,7 @@ s32 Menu_PositionSelectionMenuModel(void) {
     Frontend_InitModelPreviewTransform(((FrontendPreviewMenuView *) g_profileStatisticsScreen)->model, 0, scale, position);
     Frontend_SetPreviewRotation(((FrontendPreviewMenuView *) g_profileStatisticsScreen)->model, rotation);
     Frontend_SetPreviewRotationSpeed(((FrontendPreviewMenuView *) g_profileStatisticsScreen)->model, offset);
-    SoundElement_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(3704);
     return 0;
 }
 
@@ -88,7 +88,7 @@ s32 Menu_HandleNextProfileEvent(void *first, void *second, u32 event, s32 value)
     if ((event >> 16) == 3 && value == 0) {
         MarkMenuEventHandled();
         Focus_AdvanceActiveSlot(&g_profileStatisticsScreen->activeSlot);
-        Focus_ShowUnlockedEntries(0x6E);
+        Focus_ShowUnlockedEntries(110);
         Focus_RefreshProfileStatistics();
         Focus_RefreshUnlockedFocusLabel();
         g_profileStatisticsScreen->focus = 0;
@@ -126,7 +126,7 @@ s32 Menu_DispatchSelectionMenuEvent(void *actor, s32 event, s32 eventValue, s32 
     s32 table_kind;
 
     if (g_selectionMenuHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_selectionMenuHandlers;
         offset = 0;
         do {
@@ -138,7 +138,7 @@ s32 Menu_DispatchSelectionMenuEvent(void *actor, s32 event, s32 eventValue, s32 
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;

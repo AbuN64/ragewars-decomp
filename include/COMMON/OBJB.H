@@ -143,7 +143,7 @@ struct SceneVisibilityGeometryView {
     struct Face *edges;
     IntrusiveList listA;
     IntrusiveList listB;
-    CActiveLink buckets[0x30];
+    CActiveLink buckets[48];
     char pad1500[0x1B40C - 0x1500];
     s32 group;
 };

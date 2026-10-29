@@ -14,7 +14,7 @@ extern void *SetN64_LocatePackSection(void *, void *, s32, s32 *);
 extern void *Scene_GetActorDefinition(void *, u16);
 extern void Gobjinst_LoadModel(void *, void *, void *, s32);
 typedef struct FrontendModelHeader {
-    u8 prefix[0x1C];
+    u8 prefix[28];
     u16 definitionIndex;
 } FrontendModelHeader;
 /* Scans the world's preview model id table for entries equal to id. For each one it loads the model's index and info
@@ -40,7 +40,7 @@ void Preview_SelectMatchingPreviewModel(ModelPreview *preview, s32 id, s32 extra
 
         if (entries[i] == id) {
             modelName = SetN64_GetDirectoryEntry(world->indexedDirectory, (void *)world->indexedBank, i);
-            indexResource = Cache_RequestResource(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, "anim object index", 1);
+            indexResource = Cache_RequestResource(0, (u32)modelName, (u32)modelName, 24, 0, 0, 0, "anim object index", 1);
             if (indexResource != 0) {
                 modelData = SetN64_LocatePackSection(*indexResource, modelName, 0, &modelSize);
                 modelResource = Cache_RequestResource(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, "anim object info", 1);

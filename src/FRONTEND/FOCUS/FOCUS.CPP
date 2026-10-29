@@ -85,7 +85,7 @@ void Focus_UpdateFocusCaption(void) {
                 case 47: text = 3712; break;
                 case 48: text = 3713; break;
                 case 49: text = 3714; break;
-                default: text = 0xE74; count = index; break;
+                default: text = 3700; count = index; break;
                 }
                 Model_SetPreviewModel(record32(), text);
                 Model_SetPreviewRenderFlags(record32(), count);

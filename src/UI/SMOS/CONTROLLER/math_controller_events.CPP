@@ -109,7 +109,7 @@ void DispatchControllerAxisEvents(input_event *event) {
     xValue = 0;
     range = (u16)(dimensions - 3);
     hasZ = (s16)dimensions == 4;
-    state = Controller_FindAxisState(device, event->control - 0x160);
+    state = Controller_FindAxisState(device, event->control - 352);
     state->oldX = state->x;
     if (range < 2) state->oldY = state->y;
     if (hasZ) state->oldZ = state->z;
@@ -154,7 +154,7 @@ void Controller_DispatchControllerEvent(input_event *event) {
     switch (event->kind) {
     case 0:
         source = ((u16)event->source << 16) | (u16)event->device;
-        Menu_RouteElementEvent(GetMenuScreenOwner(), 0x11, source, event->pressed, event->control);
+        Menu_RouteElementEvent(GetMenuScreenOwner(), 17, source, event->pressed, event->control);
         break;
     case 1:
         if (event->source == 4) {
@@ -243,7 +243,7 @@ void Controller_ClearControllerFlags(void) {
             context->flags[idx] = 0;
         } while (i < 4);
         j += 1;
-    } while (j < 0x10);
+    } while (j < 16);
 }
 
 /** Store a word through the global pointer at g_controllerEventState. */
@@ -255,9 +255,9 @@ void *Cache_AllocateMemory(s32);
 
 void Controller_AllocateControllerContext(void) {
     Callback *callback;
-    callback = Cache_AllocateMemory(0xC44);
+    callback = Cache_AllocateMemory(3140);
     g_controllerEventState = callback;
-    XPlus_FillBytes(callback, 0, 0xC44);
+    XPlus_FillBytes(callback, 0, 3140);
 }
 
 void Controller_FreeControllerContext(void) {
@@ -285,12 +285,12 @@ void Controller_SendControllerStickEvent(s16 device, s32 stickX, s32 stickY) {
 
     m.source = 4;
     m.kind = 3;
-    m.control = 0x162;
-    m.x = stickX * 0x64;
+    m.control = 354;
+    m.x = stickX * 100;
     m.device = device;
     m.reserved08 = 0;
     m.pressed = 0;
-    m.y = stickY * 0x64;
+    m.y = stickY * 100;
     m.z = 0;
     Controller_DispatchControllerEvent(&m);
 }

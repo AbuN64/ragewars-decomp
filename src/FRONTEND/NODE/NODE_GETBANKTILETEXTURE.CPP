@@ -67,8 +67,8 @@ typedef struct {
 } Image;
 typedef struct {
     s32 loaded;
-    Tile tiles[0x60];
-    u8 *offsets[0x60];
+    Tile tiles[96];
+    u8 *offsets[96];
     TextureSlot **slotsByPass;
     s32 **listsByPass;
     Image *image;
@@ -103,7 +103,7 @@ extern void Smp_CopyAndSwizzleImage(Texture *into, Texture *from);
 extern void Smp_SetImageStateWord(s32 flag);
 
 void *Node_GetBankTileTexture(u8 which, s32 group, s32 pass) {
-    s32 sizes[0x60];
+    s32 sizes[96];
     Texture scratch;
     Texture *texture;
     Texture *into;
@@ -126,7 +126,7 @@ void *Node_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     {
     if (slots[index].flags & 1) {
         Bank *cachedBank;
-        stamp = N64Eng_GetFrameCounter() + 0xA;
+        stamp = N64Eng_GetFrameCounter() + 10;
         slots[index].stamp = stamp;
         cachedBank = &g_frontendResourceState.tables.banks[group];
         if (cachedBank->held == 0 && cachedBank->stamp != -1) {
@@ -148,23 +148,23 @@ void *Node_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     Frontend_ClearOwnedImage(texture);
     into = texture;
     if (image->depth == 0) {
-        code = 0x20;
-    } else if (image->depth < 0x11) {
+        code = 32;
+    } else if (image->depth < 17) {
         code = 4;
-    } else if (image->depth < 0x101) {
+    } else if (image->depth < 257) {
         code = 8;
     }
     if (image->depth > 0) {
-        kind = 0x14;
+        kind = 20;
         if (code == 8) {
-            kind = 0x1E;
+            kind = 30;
         }
-    } else if (code == 0x10) {
-        kind = 0x1C;
-    } else if (code == 0x18) {
+    } else if (code == 16) {
+        kind = 28;
+    } else if (code == 24) {
         kind = 8;
-    } else if (code == 0x20) {
-        kind = 0xC;
+    } else if (code == 32) {
+        kind = 12;
     }
     if (g_frontendResourceState.tables.banks[group].loaded == 0) {
         Tables *tables = &g_frontendResourceState.tables;
@@ -181,7 +181,7 @@ void *Node_GetBankTileTexture(u8 which, s32 group, s32 pass) {
             sizes[i] = sizes[i] * code / 8;
             bank->offsets[i] = bank->offsets[0] + (bank->tiles[i].offset - bank->image->base);
             i += 1;
-        } while (i < 0x60);
+        } while (i < 96);
         threshold = 0x1000;
         if (image->depth > 0) {
             threshold = 0x800;
@@ -199,7 +199,7 @@ void *Node_GetBankTileTexture(u8 which, s32 group, s32 pass) {
                 Frontend_ReleaseOwnedImageBuffers(&scratch);
             }
             i += 1;
-        } while (i < 0x60);
+        } while (i < 96);
         XStdio_CloseStream(g_frontendResourceState.handle);
         g_frontendResourceState.handle = 0;
         bank->loaded = 1;
@@ -212,7 +212,7 @@ void *Node_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     Smp_CopyAndSwizzleImage(into, texture);
     Smp_SetImageStateWord(1);
     N64Eng_GetTimeSeconds();
-    slot->stamp = N64Eng_GetFrameCounter() + 0xA;
+    slot->stamp = N64Eng_GetFrameCounter() + 10;
     g_frontendResourceState.tables.banks[group].loads += 1;
     slot->flags |= 1;
     return &slot->texture;

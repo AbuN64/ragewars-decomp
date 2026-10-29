@@ -69,7 +69,7 @@ typedef struct Shared_World {
     u8 reservedBytes7[0x34];
     s32 counter120;
     s32 counter124;
-    u8 system128[0x10];
+    u8 system128[16];
     struct LevelActor *actors; /* 0x138 */
     s32 actorCapacity; /* 0x13C */
     s32 actorCount; /* 0x140 */

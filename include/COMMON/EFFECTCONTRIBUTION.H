@@ -102,9 +102,9 @@ struct Entity1DC;
 struct Entity1DC {
     char pad[0x118];
     LinkedWorldFlagsView *renderDefinition;
-    char p11c[0x1f];
+    char p11c[31];
     u8 effectReferenceCount;
-    char p13c[0x9d];
+    char p13c[157];
     u8 ribbonReferenceCount;
 };
 
@@ -146,11 +146,11 @@ struct Node44 {
     int previousAddress;
     struct Node44 *next;
     DefC *definition;
-    char pc[0x10];
+    char pc[16];
     Entity1DC *attachedEntity;
     int p20;
     f32 lifetime;
-    char p28[0x14];
+    char p28[20];
     int flags;
     ChildB4 *segments;
 };

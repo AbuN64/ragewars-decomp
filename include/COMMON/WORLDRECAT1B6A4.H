@@ -23,7 +23,7 @@ typedef struct ObjectSceneRegisterActorInSceneLists ObjectSceneRegisterActorInSc
 struct SceneActorLinkGroupView;
 struct SceneActorLinkGroupView {
     char pad[0xC50];
-    ActorLinkedControllerView *actors[0x80];
+    ActorLinkedControllerView *actors[128];
     int count;
 };
 
@@ -139,7 +139,7 @@ struct ScenePositionEntry;
 struct SceneListedEntryOwnerView;
 struct SceneListedEntryOwnerView {
     char pad[0x1024];
-    struct ScenePositionEntry *entries[0x20];
+    struct ScenePositionEntry *entries[32];
     s32 count;
 };
 

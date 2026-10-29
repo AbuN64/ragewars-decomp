@@ -72,13 +72,13 @@ void Stage_StartConfiguredMatch(void) {
     match->enabled = 0;
     match->m_bPhoenixRoomActive = 0;
     g_currentStagePreset = 0;
-    if (settings[0xD] != 0) {
+    if (settings[13] != 0) {
         first = 0;
         while (((struct MatchPlayerStatus *)(settings + 0xD0 + first * 0x96))->joined == 0) {
             first++;
         }
         status = (struct MatchPlayerStatus *)(settings + 0xD0 + first * 0x96);
-        switch (settings[0xD]) {
+        switch (settings[13]) {
         case 1:
             g_currentStagePreset = Achieve_CopyPreset(g_selectedLevelId, 0, status->kind);
             break;
@@ -113,7 +113,7 @@ void Stage_StartConfiguredMatch(void) {
         status = (struct MatchPlayerStatus *)(settings + 0xD0 + i * 0x96);
         if (status->joined == 1 && status->computer == 0) {
             XPlus_CopyString(status->name, g_localPlayerProfiles[i].name);
-            if (settings[0xD] != 0) {
+            if (settings[13] != 0) {
                 status->team = 0;
             } else {
                 status->team = 0xFF;
@@ -126,13 +126,13 @@ void Stage_StartConfiguredMatch(void) {
         }
     }
     config = (u8 *)&g_gameSettings;
-    if (config[0x580] == 2 && humans >= 2) {
+    if (config[1408] == 2 && humans >= 2) {
         Frontend_RequestScreenMode(1);
     } else {
-        Frontend_RequestScreenMode(config[0x580]);
+        Frontend_RequestScreenMode(config[1408]);
     }
     if (SoundElement_GetMusicPlaybackEnabled() != 0) {
-        SoundElement_SetMusicPlaybackEnabled(Graphu64_NextRandom() % 4 + 0x38);
+        SoundElement_SetMusicPlaybackEnabled(Graphu64_NextRandom() % 4 + 56);
     }
 }
 

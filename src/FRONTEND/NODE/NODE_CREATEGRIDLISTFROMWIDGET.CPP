@@ -78,10 +78,10 @@ s32 Node_CreateGridListFromWidget(s32 widgetResourceId, u8 cellWidth, u8 cellHei
 
     source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), widgetResourceId & 0xFFFF);
     context = Node_GetScreenData(GetMenuScreenOwner());
-    result = Cache_AllocateMemory(0x60);
-    XPlus_FillBytes(result, 0, 0x60);
+    result = Cache_AllocateMemory(96);
+    XPlus_FillBytes(result, 0, 96);
     *(Header44 *)result = *(Header44 *)source;
-    result->kind = 0xB;
+    result->kind = 11;
     result->rowCount = rowCount;
     result->columnCount = columnCount;
     result->cellHeight = cellHeight;
@@ -117,17 +117,17 @@ void Node_GetGridCellValues(s32 identifier, s32 row, s32 column, s32 *first, s32
 void Node_SetGridForegroundColors(s32 identifier, s32 first, s32 second, s32 third) {
     u8 *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
-    entry[0x54] = second;
-    entry[0x56] = third;
-    entry[0x52] = first;
+    entry[84] = second;
+    entry[86] = third;
+    entry[82] = first;
 }
 
 void Node_SetGridBackgroundColors(s32 identifier, s32 first, s32 second, s32 third) {
     u8 *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
-    entry[0x55] = second;
-    entry[0x57] = third;
-    entry[0x53] = first;
+    entry[85] = second;
+    entry[87] = third;
+    entry[83] = first;
 }
 
 void Node_SetGridDimensionArrays(s32 identifier, s32 first, s32 second) {
@@ -145,10 +145,10 @@ void Node_GetGridSelection(s32 identifier, s32 *first, s32 *second) {
 }
 
 s32 Node_SelectPreviousGridRow(u8 *entry, void *second, void *third, s32 active) {
-    s32 value = entry[0x4C];
+    s32 value = entry[76];
 
-    if (active && entry[0x50] < value) {
-        entry[0x4C] = value - 1;
+    if (active && entry[80] < value) {
+        entry[76] = value - 1;
     }
     Node_ClampListCursorAndScroll(entry);
     MarkMenuEventHandled();
@@ -156,10 +156,10 @@ s32 Node_SelectPreviousGridRow(u8 *entry, void *second, void *third, s32 active)
 }
 
 s32 Node_SelectNextGridRow(u8 *entry, void *second, void *third, s32 active) {
-    u8 value = entry[0x4C];
+    u8 value = entry[76];
 
-    if (active && value < entry[0x4A] - 1) {
-        entry[0x4C] = value + 1;
+    if (active && value < entry[74] - 1) {
+        entry[76] = value + 1;
     }
     Node_ClampListCursorAndScroll(entry);
     MarkMenuEventHandled();
@@ -167,10 +167,10 @@ s32 Node_SelectNextGridRow(u8 *entry, void *second, void *third, s32 active) {
 }
 
 s32 Node_SelectPreviousGridColumn(u8 *entry, void *second, void *third, s32 active) {
-    s32 value = entry[0x4D];
+    s32 value = entry[77];
 
-    if (active && entry[0x51] < value) {
-        entry[0x4D] = value - 1;
+    if (active && entry[81] < value) {
+        entry[77] = value - 1;
     }
     Node_ClampListCursorAndScroll(entry);
     MarkMenuEventHandled();
@@ -178,10 +178,10 @@ s32 Node_SelectPreviousGridColumn(u8 *entry, void *second, void *third, s32 acti
 }
 
 s32 Node_SelectNextGridColumn(u8 *entry, void *second, void *third, s32 active) {
-    u8 value = entry[0x4D];
+    u8 value = entry[77];
 
-    if (active && value < entry[0x4B] - 1) {
-        entry[0x4D] = value + 1;
+    if (active && value < entry[75] - 1) {
+        entry[77] = value + 1;
     }
     Node_ClampListCursorAndScroll(entry);
     MarkMenuEventHandled();

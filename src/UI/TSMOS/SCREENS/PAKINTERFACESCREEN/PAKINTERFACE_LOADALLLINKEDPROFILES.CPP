@@ -23,7 +23,7 @@ s32 PAKInterface_CountActivePlayerPanels(void) {
     return count;
 }
 
-typedef struct { char pad[12]; s8 profileEntryIndex, linkedPlayerIndex; char rest[0x182]; } MatchProfile58;
+typedef struct { char pad[12]; s8 profileEntryIndex, linkedPlayerIndex; char rest[386]; } MatchProfile58;
 extern MatchProfile58 g_localPlayerProfiles[];
 
 void PAKInterface_LoadAllLinkedProfiles(void) {
@@ -32,7 +32,7 @@ void PAKInterface_LoadAllLinkedProfiles(void) {
         s32 player = g_pakProfileScreenState->links[i].player;
         s32 entry = g_pakProfileScreenState->links[i].entry;
         MatchProfile58 *dst = &g_localPlayerProfiles[i];
-        if (player != none) { XPlus_CopyBytes(dst, g_pakProfileScreenState->players[player].slots[entry], 0x190); dst->profileEntryIndex = entry; }
+        if (player != none) { XPlus_CopyBytes(dst, g_pakProfileScreenState->players[player].slots[entry], 400); dst->profileEntryIndex = entry; }
         else { dst->linkedPlayerIndex = player; }
         i++;
     } while (i < 4);

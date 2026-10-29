@@ -53,7 +53,7 @@ s32 Frontend_DrawSetupResultPanels(void *unused0, void *unused1, s32 event) {
         g_menuModelFillColor[3] = 255.0f;
         gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, g_hudReferenceViewportWidth - 1, g_hudReferenceViewportHeight - 1);
         g_menuModelFillColor[3] = 210.0f;
-        if (GetMenuScreenOwner() == 0x14 && g_selectionMessageReply.ready == 0) {
+        if (GetMenuScreenOwner() == 20 && g_selectionMessageReply.ready == 0) {
             for (i = 0; i < 4; i++) {
 #if defined(VERSION_DE)
 
@@ -96,10 +96,10 @@ Preview_DrawMenuModelItem_Setupresults
         g_menuModelFillEnabled = 0;
         g_menuModelFillColor[3] = 255.0f;
     }
-    if (event == 0 && GetMenuScreenOwner() != 0x19) {
+    if (event == 0 && GetMenuScreenOwner() != 25) {
         if (g_setupScreen->frames < 20) {
             if (++g_setupScreen->frames == 20 && g_setupScreen->winner > 0) {
-                Menu_SetOptionsSceneSelection(ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(g_setupScreen->winnerSlot), g_setupScreen->winner) + 0x259);
+                Menu_SetOptionsSceneSelection(ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(g_setupScreen->winnerSlot), g_setupScreen->winner) + 601);
                 g_setupScreen->blinkDelay = 0;
             }
         }

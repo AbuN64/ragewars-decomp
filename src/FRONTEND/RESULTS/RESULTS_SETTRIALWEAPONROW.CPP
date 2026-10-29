@@ -19,45 +19,45 @@ void Results_SetTrialWeaponRow(u32 row, s32 weaponId, s32 amount) {
 
     switch (row) {
     case 0:
-        id = 0x1DF + ID_SHIFT;
+        id = 479 + ID_SHIFT;
         if (amount == 0) {
-            id = 0x149 + OPTION_SHIFT;
+            id = 329 + OPTION_SHIFT;
         }
         break;
     case 1:
-        id = 0x1E0 + ID_SHIFT;
+        id = 480 + ID_SHIFT;
         if (amount == 0) {
-            id = 0x14C + OPTION_SHIFT;
+            id = 332 + OPTION_SHIFT;
         }
         break;
     case 2:
-        id = 0x1E1 + ID_SHIFT;
+        id = 481 + ID_SHIFT;
         if (amount == 0) {
-            id = 0x14D + OPTION_SHIFT;
+            id = 333 + OPTION_SHIFT;
         }
         break;
     case 3:
-        id = 0x1E2 + ID_SHIFT;
+        id = 482 + ID_SHIFT;
         if (amount == 0) {
-            id = 0x14E + OPTION_SHIFT;
+            id = 334 + OPTION_SHIFT;
         }
         break;
     case 4:
-        id = 0x1E3 + ID_SHIFT;
+        id = 483 + ID_SHIFT;
         if (amount == 0) {
-            id = 0x14F + OPTION_SHIFT;
+            id = 335 + OPTION_SHIFT;
         }
         break;
     default:
-        id = 0x149 + OPTION_SHIFT;
+        id = 329 + OPTION_SHIFT;
         break;
     }
     /* the hub's Item view shares the MenuWidget prefix; this unit reads alpha and value through it */
     element = (MenuWidget *) Node_FindWidgetByResourceId(g_trialCatalogueScreen->root, id);
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(element, 0x14B + OPTION_SHIFT), 0);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(element, 331 + OPTION_SHIFT), 0);
     value = Results_GetWeaponIconValue(weaponId);
-    field = (MenuWidget *) Node_FindWidgetByResourceId(element, 0x14A + OPTION_SHIFT);
-    field->alpha = 0x64;
+    field = (MenuWidget *) Node_FindWidgetByResourceId(element, 330 + OPTION_SHIFT);
+    field->alpha = 100;
     field->value = value;
 }
 

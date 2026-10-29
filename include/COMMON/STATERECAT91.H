@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 struct WeaponUnlockProfileView;
 struct WeaponUnlockProfileView {
-    char p[0x78];
+    char p[120];
     u8 present;
     char p2[6];
     s8 profileIndex;
@@ -17,7 +17,7 @@ typedef struct PresetRow PresetRow;
 
 struct Preset;
 struct Preset {
-    u8 bytes[0x2A];
+    u8 bytes[42];
 };
 
 struct Preset;

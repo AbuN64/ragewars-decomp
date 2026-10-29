@@ -12,7 +12,7 @@
 #if defined(VERSION_EU_X)
 extern void SmpButton_WrapButtonWidget(int id);
 
-int Frontend_WrapNodePairExtended(void) { SmpButton_WrapButtonWidget(0x3DE); SmpButton_WrapButtonWidget(0x3DF); return 0; }
+int Frontend_WrapNodePairExtended(void) { SmpButton_WrapButtonWidget(990); SmpButton_WrapButtonWidget(991); return 0; }
 #endif
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x3DA waits through
@@ -90,7 +90,7 @@ s32 Frontend_DispatchNodePairMenuEvent(struct Tree *eventTarget, s32 eventId, s3
     s32 table_kind;
 
     if (g_nodePairMenuEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_nodePairMenuEventHandlers;
         index = 0;
         do {

@@ -90,8 +90,8 @@ struct PlacedProp {
     struct PropGeometry *model;
     s32 owner;
     char pad20[8];
-    char transform[0x40];
-    char matrix[0x40];
+    char transform[64];
+    char matrix[64];
     s32 reservedWord;
     s32 reservedWord1;
     s32 reservedWord2;

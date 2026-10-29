@@ -19,9 +19,9 @@ extern void *SmpOverlay_GetSlotValue(s32, s32);
 s32 PAKInterface_MoveNameCursorForward(s32 unusedA, s32 unusedB, s32 index, s32 mode)
 {
   s32 slot = index & 0xFFFF;
-  s32 offset = slot * 0xB68;
+  s32 offset = slot * 2920;
   void *handle;
-  if ((g_pakProfileScreenState->players[slot].state) == 0xC)
+  if ((g_pakProfileScreenState->players[slot].state) == 12)
   {
     handle = SmpOverlay_GetSlotValue((s32)g_pakProfileScreenState->list, slot);
     g_pakProfileScreenState->players[slot].nameTimer = 0;
@@ -35,11 +35,11 @@ s32 PAKInterface_MoveNameCursorForward(s32 unusedA, s32 unusedB, s32 index, s32 
       }
       {
         if (g_pakProfileScreenState->players[slot].name[g_pakProfileScreenState->players[slot].nameCursor].available == 0) {
-          g_pakProfileScreenState->players[slot].name[g_pakProfileScreenState->players[slot].nameCursor].available = 0x41;
+          g_pakProfileScreenState->players[slot].name[g_pakProfileScreenState->players[slot].nameCursor].available = 65;
         }
       }
       ((struct WidgetFlagsView *)(handle))->alpha = 0xFF;
-      SoundElement_PlayFlatSound(0xE74);
+      SoundElement_PlayFlatSound(3700);
     }
   }
  do { return 0; } while (0);

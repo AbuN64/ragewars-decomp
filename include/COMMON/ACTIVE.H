@@ -8,7 +8,7 @@ typedef struct Active Active;
 
 struct PlayerNameProfileRecord;
 struct PlayerNameProfileRecord {
-    char name[0x189];
+    char name[393];
     u8 profile[5];
     char pad18E[2];
 };

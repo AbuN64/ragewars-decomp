@@ -75,7 +75,7 @@ struct PagerState {
     Channels channels[8];
     ResourcePageMapping *head; /* pager LRU list (head, tail), appended by Virtual_AppendPageChainNode; = g_pagerLruHead */
     union { s32 fBF4; ResourcePageMapping *tail; };
-    u8 lookup[0x100];
+    u8 lookup[256];
     ControllerInitStatusBytes entries[24];
     struct Region regions; /* the first page region: ROM pages at source, slot map lookup */
     s16 fD70;

@@ -152,7 +152,7 @@ typedef struct Six Six;
 
 /* Shared object layout established by effect-pool consumers. */
 struct CAnimPool {
-    SceneEffect DynAnims[0x20]; /* 0x0000 */
+    SceneEffect DynAnims[32]; /* 0x0000 */
     IntrusiveList FreeList; /* 0x5F00 */
     IntrusiveList UsedList; /* 0x5F14 */
 };

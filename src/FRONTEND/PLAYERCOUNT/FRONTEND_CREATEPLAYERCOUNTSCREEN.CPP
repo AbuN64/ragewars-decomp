@@ -23,23 +23,23 @@ s32 Frontend_CreatePlayerCountScreen(s32 screenData) {
     void *text;
 
     /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own state type */
-    g_playerCountScreen = (struct PlayerCountScreenState *) Cache_AllocateMemory(0x24);
+    g_playerCountScreen = (struct PlayerCountScreenState *) Cache_AllocateMemory(36);
     Tsmos_ActivateControllerState();
-    handle = SmpFade_CreateFadeWidget(0x398, 0x399);
+    handle = SmpFade_CreateFadeWidget(920, 921);
     state = g_playerCountScreen;
     state->menu = handle;
     SmpSlider_EnableTransition(handle);
-    SmpButton_WrapButtonWidget(0x39C);
+    SmpButton_WrapButtonWidget(924);
     /* the MenuWidget view names the alpha byte at +0x10 and the text pointer at +0x34 that the hub's Item omits */
-    node = (struct MenuWidget *) Node_FindWidgetByResourceId((void *) screenData, 0x39A);
+    node = (struct MenuWidget *) Node_FindWidgetByResourceId((void *) screenData, 922);
     state = g_playerCountScreen;
     state->window = node;
-    node->alpha = 0xF;
-    handle = SmpFlicker_CreateFlickerWidget(0x39B, 0x6E);
+    node->alpha = 15;
+    handle = SmpFlicker_CreateFlickerWidget(923, 110);
     state = g_playerCountScreen;
     state->button = handle;
     state->delay = 3;
-    node = (struct MenuWidget *) Node_FindWidgetByResourceId((void *) screenData, 0x39D);
+    node = (struct MenuWidget *) Node_FindWidgetByResourceId((void *) screenData, 925);
     state = g_playerCountScreen;
     text = &state->text;
     node->text = text;
