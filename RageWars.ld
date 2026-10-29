@@ -7295,7 +7295,7 @@ SECTIONS
         src/ENGINE/CACHE/LOADER/LOADER.CPP.o(.text);
         . = MAX(., 0x56288);
         src/ENGINE/CACHE/LOADER/LOADER.CPP.o(.data);
-        . = MAX(., 0x56344);
+        . = MAX(., 0x56290);
         src/ENGINE/CACHE/MUTEX/MUTEX.CPP.o(.text);
         . = MAX(., 0x56368);
         src/ENGINE/UNICOL/ACCEPTS/G_ACCEPTSTRAILINGBYTESBLOCK1.CPP.o(.data);

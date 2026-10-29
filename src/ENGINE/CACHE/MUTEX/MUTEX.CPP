@@ -4,7 +4,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 
-#if !defined(VERSION_US)
 /* Steps an object's nesting count at 0x1C up and back down while it is nonzero, each step bracketed by __osDisableInt_Mutex and __osRestoreInt: going up past one calls osRecvMesg_Mutex, and coming down to anything but zero calls osSendMesg_Mutex. */
 typedef struct Object {
     char pad0[0x1C];
@@ -34,7 +33,6 @@ void Mutex_WaitUntilReleased(Object *obj) {
     }
     __osRestoreInt(mask2);
 }
-#endif
 
 void Mutex_InitializeQueueLock(void *menuRules) {
     (((struct MenuRules *) ((s8 *) menuRules))->locked) = 0;

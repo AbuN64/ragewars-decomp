@@ -1330,7 +1330,7 @@ segments:
       - [0x571BC, c, game_code]
       - [0x57228, c, game_code]
       - [0x57288, data, game_code/func_80256688_de_padding_57288]
-      - [0x5728C, data, game_code/g_LoaderWords1]
+      - [0x57290, c, game_code]
       - [0x57344, c, game_code]
       - [0x57368, data, game_code/g_AcceptsTrailingBytesBlock2]
       - [0x57370, c, game_code]
