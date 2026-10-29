@@ -119,13 +119,13 @@ void Rumble_SetEffectOwnerSlot(void *effectNode, int ownerSlotAddress) {
     record->flags = ownerSlotAddress;
 }
 
-s32 Rumble_TestEffectHandleCompletion(s32 effectNodeAddress) {
+s32 Rumble_TestEffectHandleCompletion(RumbleEffectNode *effectNode) {
     s32 result;
 
     result = 0;
-    if (Control_AdvanceEffectCurve((s32)&((struct RumbleEffectNode *)effectNodeAddress)->amplitudeHandle) != 0) {
+    if (Control_AdvanceEffectCurve(&effectNode->amplitudeHandle) != 0) {
         result = 1;
-    } else if (Control_AdvanceEffectCurve((s32)&((struct RumbleEffectNode *)effectNodeAddress)->lifetimeHandle) != 0) {
+    } else if (Control_AdvanceEffectCurve(&effectNode->lifetimeHandle) != 0) {
         result = 1;
     }
     return result;

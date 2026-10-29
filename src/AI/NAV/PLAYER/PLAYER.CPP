@@ -29,7 +29,6 @@ extern void Scaled_ClearAuxiliaryBehaviorState(void *);
 void Nav_ResetPlayerState(s32 *state) {
     s32 i;
     s32 none;
-    Brain *brain = (Brain *)state;
 
     state[1] = -1;
     state[2] = -1;
@@ -43,45 +42,45 @@ void Nav_ResetPlayerState(s32 *state) {
         state[5 + i] = none;
     }
     state[10] = -1;
-    brain->unk1BC = 0xFFFF;
-    brain->state = 0;
-    brain->unk1C8 = 0;
+    ((Brain *)state)->unk1BC = 0xFFFF;
+    ((Brain *)state)->state = 0;
+    ((Brain *)state)->unk1C8 = 0;
     state[14] = 1;
     state[15] = 0;
     state[25] = 0;
-    brain->unk28C = 0;
+    ((Brain *)state)->unk28C = 0;
     state[26] = 0;
-    brain->unkBC = -1;
-    brain->unk224 = -1;
-    brain->unk228 = 0;
+    ((Brain *)state)->unkBC = -1;
+    ((Brain *)state)->unk224 = -1;
+    ((Brain *)state)->unk228 = 0;
     for (i = 0; i < 10; i++) {
         state[15 + i] = 0;
         state[27 + i] = 0;
         state[37 + i] = 0;
     }
-    brain->unk238 = 0;
+    ((Brain *)state)->unk238 = 0;
     Scaled_SetBehaviorTable(state, &g_playerDefaultBehaviorTable, none);
     Scaled_SetBehaviourState(state, 2);
-    brain->tracking[0] = 0.0f;
-    brain->w23C = 0;
-    brain->w240 = 0;
-    brain->tracking[3] = brain->tracking[4] = brain->tracking[1] =
-        brain->tracking[2] = brain->tracking[5] = brain->tracking[6] =
-        brain->tracking[7] = brain->tracking[0];
+    ((Brain *)state)->tracking[0] = 0.0f;
+    ((Brain *)state)->w23C = 0;
+    ((Brain *)state)->w240 = 0;
+    ((Brain *)state)->tracking[3] = ((Brain *)state)->tracking[4] = ((Brain *)state)->tracking[1] =
+        ((Brain *)state)->tracking[2] = ((Brain *)state)->tracking[5] = ((Brain *)state)->tracking[6] =
+        ((Brain *)state)->tracking[7] = ((Brain *)state)->tracking[0];
     Nav_ResetWheelProbeState(state);
     Scaled_ResetBehaviorState(state);
     Scaled_ClearAuxiliaryBehaviorState(state);
-    brain->frames = 0;
-    brain->visible = 0;
-    brain->fireTimer = -1;
-    brain->cooldown = 0;
+    ((Brain *)state)->frames = 0;
+    ((Brain *)state)->visible = 0;
+    ((Brain *)state)->fireTimer = -1;
+    ((Brain *)state)->cooldown = 0;
     state[0x328 / 4] = 0;
-    brain->timer = 0;
-    brain->unk2E4 = 0;
-    brain->unk2EC = 0;
-    brain->unk2E8 = 0;
-    brain->pattern = 0;
-    brain->distance = 0;
+    ((Brain *)state)->timer = 0;
+    ((Brain *)state)->unk2E4 = 0;
+    ((Brain *)state)->unk2EC = 0;
+    ((Brain *)state)->unk2E8 = 0;
+    ((Brain *)state)->pattern = 0;
+    ((Brain *)state)->distance = 0;
     state[0x32C / 4] = -1;
 }
 

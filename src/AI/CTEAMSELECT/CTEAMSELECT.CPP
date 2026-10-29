@@ -202,7 +202,6 @@ void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
     s16 weapon;
     s16 alternate;
     char *ammo;
-    CBarrel *wheel = (CBarrel *)menu;
 
     held = ((struct ControllerButtonFlagsView *) ((TeamWeaponSelectionPlayerView *) player)->controller)->buttons & 0x8000;
     if (Playerai_IsRoundEndState(player) != 0) {
@@ -217,7 +216,7 @@ void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
     }
     if (menu[0] == 0 || menu[0] == 3) {
         if (!held) {
-            if (((TeamWeaponSelectionPlayerView *)(player))->pendingWeapon != -1 && wheel->m_DisplaySlot != 8) {
+            if (((TeamWeaponSelectionPlayerView *)(player))->pendingWeapon != -1 && ((CBarrel *)menu)->m_DisplaySlot != 8) {
                 TeamSelect_InitWeaponChoices((CBarrel *)menu, 0, player);
                 menu[0] = 1;
             }
@@ -228,12 +227,12 @@ void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
         ((TeamWeaponSelectionPlayerView *)(player))->locked = 1;
         menu[0] = 1;
     }
-    category = wheel->m_DisplaySlot;
+    category = ((CBarrel *)menu)->m_DisplaySlot;
     if (category != -1) {
         return;
     }
     slot = TeamSelect_GetEightWayStickSlot(player);
-    if (slot == wheel->m_WheelIndexLastFrame) {
+    if (slot == ((CBarrel *)menu)->m_WheelIndexLastFrame) {
         return;
     }
     if (slot != category) {
@@ -244,14 +243,14 @@ void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
             return;
         }
         if (weapon < 0) {
-            wheel->m_WheelIndexLastFrame = category;
+            ((CBarrel *)menu)->m_WheelIndexLastFrame = category;
             return;
         }
-        if (slot != wheel->m_Selected) {
-            wheel->m_Selected = slot;
+        if (slot != ((CBarrel *)menu)->m_Selected) {
+            ((CBarrel *)menu)->m_Selected = slot;
         }
         if (weapon == ((TeamWeaponSelectionPlayerView *)(player))->selectedWeapon) {
-            wheel->m_WheelIndexLastFrame = slot;
+            ((CBarrel *)menu)->m_WheelIndexLastFrame = slot;
             return;
         }
         ((TeamWeaponSelectionPlayerView *)(player))->requestedWeapon = weapon;
@@ -262,7 +261,7 @@ void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
             }
         }
     }
-    wheel->m_WheelIndexLastFrame = slot;
+    ((CBarrel *)menu)->m_WheelIndexLastFrame = slot;
 }
 
 typedef struct DraftConfig17F4C { u8 pad[0x82]; u8 mode; } DraftConfig17F4C;

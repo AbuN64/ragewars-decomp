@@ -24,16 +24,16 @@ void PAKInterface_UpdatePlayerPanelAnimations(s32 phaseStep) {
     s32 selectedLabelOffset;
     ResourceSmpFlickerCreateFlickerWidget *animatedLabel;
     s32 player;
-    PakProfilePanelState *playerPanel;
-    PakProfilePanelState *characterPanel;
+    Blk *playerPanel;
+    Blk *characterPanel;
     Blk *panelPhaseStorage;
     Blk *selectedPhaseStorage;
     Blk *idlePhaseStorage;
 
     player = 0;
     do {
-        playerPanel = &g_pakProfileScreenState->players[player];
-        panelState = playerPanel->state;
+        playerPanel = (Blk *)((char *)g_pakProfileScreenState + (player * sizeof(PakProfilePanelState)));
+        panelState = playerPanel->panelState;
         switch (panelState) {
         case 0:
             PAKInterface_PulseIdlePanelLabels(player);
@@ -43,19 +43,19 @@ void PAKInterface_UpdatePlayerPanelAnimations(s32 phaseStep) {
             selectedPhaseStorage = (Blk *)((char *)g_pakProfileScreenState + (player * 4));
             bobValue = (Math_Cosf((f32)player + ((f32)selectedPhaseStorage->animationClock * 0.005f)) * 100.0f) + 150.0f;
             animatedLabel->value = bobValue;
-            characterPanel = &g_pakProfileScreenState->players[player];
-            characterAnimationState = characterPanel->namePhase;
+            characterPanel = (Blk *)((char *)g_pakProfileScreenState + (player * sizeof(PakProfilePanelState)));
+            characterAnimationState = characterPanel->nameEntryPhase;
             switch (characterAnimationState) {
             case 0:
-                nextCharacterAnimationFrame = characterPanel->nameTimer + 1;
-                characterPanel->nameTimer = nextCharacterAnimationFrame;
+                nextCharacterAnimationFrame = characterPanel->nameEntryTimer + 1;
+                characterPanel->nameEntryTimer = nextCharacterAnimationFrame;
                 if (nextCharacterAnimationFrame >= 6) {
                     PAKInterface_DecrementNameCharacter(player);
                 }
                 break;
             case 1:
-                nextRosterAnimationFrame = characterPanel->nameTimer + 1;
-                characterPanel->nameTimer = nextRosterAnimationFrame;
+                nextRosterAnimationFrame = characterPanel->nameEntryTimer + 1;
+                characterPanel->nameEntryTimer = nextRosterAnimationFrame;
                 if (nextRosterAnimationFrame >= 6) {
                     PAKInterface_IncrementNameCharacter(player);
                 }
@@ -65,7 +65,7 @@ void PAKInterface_UpdatePlayerPanelAnimations(s32 phaseStep) {
             }
             break;
         case 4:
-            selectedLabelOffset = ((playerPanel->slot - playerPanel->scroll) * 4) + (player * 2920);
+            selectedLabelOffset = ((playerPanel->selectedNote - playerPanel->noteScrollOffset) * 4) + (player * 2920);
             animatedLabel = ((Blk *)((char *)g_pakProfileScreenState + selectedLabelOffset))->noteLabel;
             idlePhaseStorage = (Blk *)((char *)g_pakProfileScreenState + (player * 4));
             bobValue = (Math_Cosf((f32)player + ((f32)idlePhaseStorage->animationClock * 0.005f)) * 100.0f) + 150.0f;

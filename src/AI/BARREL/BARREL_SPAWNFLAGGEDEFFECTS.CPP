@@ -23,9 +23,9 @@
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 /* 80213ED4_19.CPP */
-void Barrel_AddActorYaw(void *actor, f32 yawDelta) {
-    (((struct ActorYawView *) ((s8 *) actor))->yaw) = (f32) ((((struct ActorYawView *) ((s8 *) actor))->yaw) + yawDelta);
-    ((s32 (*)(void *))Graphu64_WrapPeriodicValue)(&((ActorYawView *)actor)->yaw);
+void Barrel_AddActorYaw(ActorYawView *actor, f32 yawDelta) {
+    actor->yaw = (f32) (actor->yaw + yawDelta);
+    ((s32 (*)(void *))Graphu64_WrapPeriodicValue)(&actor->yaw);
 }
 
 /* 80213ED4_20.CPP */

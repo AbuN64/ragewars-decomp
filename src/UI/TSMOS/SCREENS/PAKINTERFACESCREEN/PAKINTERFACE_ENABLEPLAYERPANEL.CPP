@@ -10,10 +10,10 @@
 
 
 void PAKInterface_EnablePlayerPanel(s32 index) {
-    PakProfilePanelState *entry;
+    struct PakPlayerPanelView *entry;
 
     g_gameSettings.playerSettings[index].enabled = 1;
-    entry = &g_pakProfileScreenState->players[index];
-    entry->back = 2;
-    entry->state = 2;
+    entry = (struct PakPlayerPanelView *)((char *)g_pakProfileScreenState + index * sizeof(PakProfilePanelState));
+    entry->second = 2;
+    entry->first = 2;
 }
