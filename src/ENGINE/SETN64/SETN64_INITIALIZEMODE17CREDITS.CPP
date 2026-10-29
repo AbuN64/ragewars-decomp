@@ -113,9 +113,7 @@ void SetN64_DrawMode17Credits(s32 session) {
 }
 
 #if defined(VERSION_US)
-const unsigned int g_Setn64Initializemode17creditsWords1[1] = {
-    0x3F800000,
-};
+const float g_Setn64Initializemode17creditsWords1 = 1.0f;
 #endif
 
 #if defined(VERSION_DE)
