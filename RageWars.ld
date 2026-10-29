@@ -1774,6 +1774,8 @@ SECTIONS
         src/DATA/AUDIO/AISETFREQ/AISETFREQ.CPP.o(.data);
         . = MAX(., 0xB7000);
         sdk/libultra/os/aisetnextbuf.CPP.o(.text);
+        . = MAX(., 0xB708C);
+        sdk/libultra/os/aisetnextbuf.CPP.o(.data);
         . = MAX(., 0xB7090);
         sdk/libultra/ai.c.o(.text);
         . = MAX(., 0xB70A4);
@@ -2092,8 +2094,12 @@ SECTIONS
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.data);
         . = MAX(., 0xBDCD0);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.text);
+        . = MAX(., 0xBE498);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.text);
+        . = MAX(., 0xBE6A4);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.text);
         . = MAX(., 0xBE9AC);
-        sdk/libultra/audio/LOAD/LOAD.CPP.o(.data);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.data);
         . = MAX(., 0xBE9B0);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.text);
         . = MAX(., 0xBF114);
@@ -4209,8 +4215,12 @@ SECTIONS
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.data);
         . = MAX(., 0xBDF70);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.text);
+        . = MAX(., 0xBE738);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.text);
+        . = MAX(., 0xBE944);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.text);
         . = MAX(., 0xBEC4C);
-        sdk/libultra/audio/LOAD/LOAD.CPP.o(.data);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.data);
         . = MAX(., 0xBEC50);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.text);
         . = MAX(., 0xBF3B4);
@@ -6179,7 +6189,7 @@ SECTIONS
         . = MAX(., 0xBA7F0);
         sdk/libultra/audio/vi_data.CPP.o(.text);
         . = MAX(., 0xBAB2C);
-        sdk/libultra/io/visetmode_tail.CPP.o(.data);
+        sdk/libultra/audio/vi_data.CPP.o(.data);
         . = MAX(., 0xBAB30);
         sdk/libultra/debug/assert.c.o(.text);
         . = MAX(., 0xBAB38);
@@ -6334,8 +6344,12 @@ SECTIONS
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.data);
         . = MAX(., 0xBDFB0);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.text);
+        . = MAX(., 0xBE778);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.text);
+        . = MAX(., 0xBE984);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.text);
         . = MAX(., 0xBEC8C);
-        sdk/libultra/audio/LOAD/LOAD.CPP.o(.data);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.data);
         . = MAX(., 0xBEC90);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.text);
         . = MAX(., 0xBF3F4);
@@ -8461,8 +8475,12 @@ SECTIONS
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.data);
         . = MAX(., 0xBDC00);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.text);
+        . = MAX(., 0xBE3C8);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.text);
+        . = MAX(., 0xBE5D4);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.text);
         . = MAX(., 0xBE8DC);
-        sdk/libultra/audio/LOAD/LOAD.CPP.o(.data);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.data);
         . = MAX(., 0xBE8E0);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.text);
         . = MAX(., 0xBF044);
@@ -10459,7 +10477,7 @@ SECTIONS
         . = MAX(., 0xBF600);
         sdk/libultra/audio/vi_data.CPP.o(.text);
         . = MAX(., 0xBF93C);
-        sdk/libultra/io/visetmode_tail.CPP.o(.data);
+        sdk/libultra/audio/vi_data.CPP.o(.data);
         . = MAX(., 0xBF940);
         sdk/libultra/debug/assert.c.o(.text);
         . = MAX(., 0xBF948);
@@ -10614,8 +10632,12 @@ SECTIONS
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.data);
         . = MAX(., 0xC2DC0);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.text);
+        . = MAX(., 0xC3588);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.text);
+        . = MAX(., 0xC3794);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.text);
         . = MAX(., 0xC3A9C);
-        sdk/libultra/audio/LOAD/LOAD.CPP.o(.data);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.data);
         . = MAX(., 0xC3AA0);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.text);
         . = MAX(., 0xC4204);
@@ -11428,6 +11450,8 @@ SECTIONS
         sdk/libultra/libc/LLDIV/LLDIV.CPP.o(.bss .sbss COMMON);
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.bss .sbss COMMON);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFORMBLOCK.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_INITBITREVERSEORDER.CPP.o(.bss .sbss COMMON);
@@ -12235,6 +12259,8 @@ SECTIONS
         sdk/libultra/libc/LLDIV/LLDIV.CPP.o(.bss .sbss COMMON);
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.bss .sbss COMMON);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFORMBLOCK.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_INITBITREVERSEORDER.CPP.o(.bss .sbss COMMON);
@@ -12972,7 +12998,6 @@ SECTIONS
         sdk/libultra/viswapbuf.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/ALSNDPSETVOL.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/vi_data.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/io/visetmode_tail.CPP.o(.bss .sbss COMMON);
         sdk/libultra/debug/assert.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/VIDEO_MODE_INSTRUCTION_FRAGMENTS/VISETMODE.CPP.o(.bss .sbss COMMON);
         sdk/libultra/createmesgqueue/createmesgqueue.c.o(.bss .sbss COMMON);
@@ -13047,6 +13072,8 @@ SECTIONS
         sdk/libultra/libc/LLDIV/LLDIV.CPP.o(.bss .sbss COMMON);
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.bss .sbss COMMON);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFORMBLOCK.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_INITBITREVERSEORDER.CPP.o(.bss .sbss COMMON);
@@ -13784,6 +13811,8 @@ SECTIONS
         sdk/libultra/libc/lldiv.c.o(.bss .sbss COMMON);
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.bss .sbss COMMON);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFORMBLOCK.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_INITBITREVERSEORDER.CPP.o(.bss .sbss COMMON);
@@ -14551,7 +14580,6 @@ SECTIONS
         sdk/libultra/viswapbuf.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/VISWAPBUF/VISWAPBUF.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/vi_data.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/io/visetmode_tail.CPP.o(.bss .sbss COMMON);
         sdk/libultra/debug/assert.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/VIDEO_MODE_INSTRUCTION_FRAGMENTS/VISETMODE.CPP.o(.bss .sbss COMMON);
         sdk/libultra/createmesgqueue/createmesgqueue.c.o(.bss .sbss COMMON);
@@ -14627,6 +14655,8 @@ SECTIONS
         sdk/libultra/libc/LLDIV/LLDIV.CPP.o(.bss .sbss COMMON);
         sdk/libultra/libc/XLDTOB/XLDTOB.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/LOAD/LOAD.CPP.o(.bss .sbss COMMON);
+        src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/audio/LOAD/LOADPARAM.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/DECODE.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFORMBLOCK.CPP.o(.bss .sbss COMMON);
         src/ENGINE/AUDIO/DECODER/AUDIO_INITBITREVERSEORDER.CPP.o(.bss .sbss COMMON);

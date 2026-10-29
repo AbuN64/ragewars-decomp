@@ -3078,7 +3078,7 @@ segments:
       - [0xBB7A0, c, game_code]
       - [0xBB7E4, data, game_code/g_AlsndpsetvolTrailingBytesBlock4]
       - [0xBB7F0, c, game_code]
-      - [0xBBB2C, data, game_code/func_802BAF2C_eu_x]
+      - [0xBBB2C, data, game_code/g_ViTrailingBytesBlock1]
       - [0xBBB30, c, game_code]
       - [0xBBB38, data, game_code/g_visetmodeLinkGapWords]
       - [0xBBB40, c, game_code]

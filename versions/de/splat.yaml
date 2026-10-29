@@ -3072,7 +3072,7 @@ segments:
       - [0xBB4C0, c, game_code]
       - [0xBB504, data, game_code/g_ViswapbufTrailingBytesBlock1]
       - [0xBB510, c, game_code]
-      - [0xBB84C, data, game_code/func_802BA910_de_padding_BB84C]
+      - [0xBB84C, data, game_code/g_ViTrailingBytesBlock1]
       - [0xBB850, c, game_code]
       - [0xBB858, data, game_code/g_AudioAssertTrailingBytes]
       - [0xBB860, c, game_code]

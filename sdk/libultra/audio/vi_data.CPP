@@ -96,7 +96,10 @@ unsigned int k_ViDataEncodedWords[1] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int func_802BA910_de_padding_BB84C[1] = {
+unsigned int g_ViTrailingBytesBlock1[1] = {
     0x00000000,
 };
+#endif
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+unsigned char g_ViTrailingBytesBlock1[4] = { 0xA4, 0x65, 0x00, 0x10 };
 #endif

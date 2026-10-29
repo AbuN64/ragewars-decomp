@@ -266,6 +266,11 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
+[file."src/ENGINE/AUDIO/DECODER/AUDIO_LOADDECODEDSAMPLES.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
 [file."src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFORMBLOCK.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]

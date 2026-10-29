@@ -3154,7 +3154,7 @@ segments:
       - [0xC05B0, c, game_code]
       - [0xC05F4, data, game_code/g_ViswapbufTrailingBytes]
       - [0xC0600, c, game_code]
-      - [0xC093C, data, game_code/func_802BAF2C_eu_x]
+      - [0xC093C, data, game_code/g_ViTrailingBytesBlock1]
       - [0xC0940, c, game_code]
       - [0xC0948, data, game_code/g_visetmodeLinkGapWords]
       - [0xC0950, c, game_code]
