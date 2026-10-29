@@ -10531,7 +10531,6 @@ s_dinosoidsText = 0x800C6038; // rom:0xC6C38
 g_pickupDispatchAndScaleWordsEuX = 0x800C6598; // rom:0xC7198
 g_pickupTrailingRodataEuX = 0x800C65C8; // rom:0xC71C8
 g_specialPickupShieldDurationEu = 0x800C65B8; // rom:0xC71B8
-D_auto_rodata_unresolved_800C65C8 = 0x800C65C8; // rom:0xC71C8
 g_ResourcesEncodedWordsBlock71 = 0x800C8DA4; // rom:0xC99A4
 g_Ovldat2EncodedWords = 0x800C8DC4; // rom:0xC99C4
 g_Math_CosfConstantWords_eu_x = 0x800C8DD8; // rom:0xC99D8
