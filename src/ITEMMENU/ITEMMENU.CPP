@@ -21,6 +21,8 @@
 #include "COMMON/ACTORRECAT5E0.H"
 #include "include_asm.h"
 
+extern void rw_boot_entry(void);
+
 /* 802A6AC0_4.CPP */
 /* Steps a four-item toggle menu: counts frames, and once ItemMenu_IsSelectedEntryActive allows input opens the menu on button 0x20 or, on release, closes it after running the selected item's select callback (toggling it when that reports 1, or directly when it has none); each frame it settles every item's bounce animation toward zero, toggles the selected item off when an enabled item's update callback fails, advances the blink counter twice, and then either finishes opening, finishes closing, or moves the selection through ItemMenu_AdvanceSelection on buttons 0x100 and 0x200. Toggling an item starts its bounce at +5 with the current frame and its restore values, or at -5 when switching off. */
 
@@ -404,9 +406,9 @@ s32 ItemMenu_RestoreBootMemory(void) {
     }
     if (g_systemBootMarkerComparison == 0) {
         src = (u32 *)0xB0001000;
-        dst = (u32 *)0x80000400;
+        dst = (u32 *)&rw_boot_entry;
         piStatus = (u32 *)0xA4600010;
-        count = 0x3FFFF;
+        count = 262143;
         do {
             status = *piStatus & 3;
             while (status != 0) {

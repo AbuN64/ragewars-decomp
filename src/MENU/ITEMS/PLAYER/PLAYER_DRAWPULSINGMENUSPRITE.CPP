@@ -75,8 +75,8 @@ void Player_DrawPulsingMenuSprite(PulsingMenuSpriteView *spriteState, CaptionEnt
     f32 scale;
     f32 sx;
     phase = spriteState->pulsePhase = (spriteState->pulsePhase + 20) % 512;
-    if (phase >= 0x100) {
-        amount = (s32) ((f32) (0x200 - phase) * menuStyle->alpha * menuStyle->fade);
+    if (phase >= 256) {
+        amount = (s32) ((f32) (512 - phase) * menuStyle->alpha * menuStyle->fade);
     } else {
         amount = (s32) ((f32) phase * menuStyle->alpha * menuStyle->fade);
     }

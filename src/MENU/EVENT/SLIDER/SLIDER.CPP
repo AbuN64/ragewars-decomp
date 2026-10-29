@@ -43,7 +43,7 @@ s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 value, s32 inputState
             }
             goto post;
 
-        case 0x1000:
+        case 4096:
             result = widget->value;
             goto end;
 

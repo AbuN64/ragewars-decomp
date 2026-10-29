@@ -139,22 +139,22 @@ block_5:
     }
     scaledRed = (s32) ((f32) fontInfo->color0 * colorScale);
     red = 0xFF;
-    if (scaledRed < 0x100) {
+    if (scaledRed < 256) {
         red = scaledRed;
     }
     scaledGreen = (s32) ((f32) fontInfo->color1 * colorScale);
     green = 0xFF;
-    if (scaledGreen < 0x100) {
+    if (scaledGreen < 256) {
         green = scaledGreen;
     }
     scaledBlue = (s32) ((f32) fontInfo->color2 * colorScale);
     blue = 0xFF;
-    if (scaledBlue < 0x100) {
+    if (scaledBlue < 256) {
         blue = scaledBlue;
     }
     scaledShadowRed = (s32) ((f32) fontInfo->color3 * colorScale);
     shadowRed = 0xFF;
-    if (scaledShadowRed < 0x100) {
+    if (scaledShadowRed < 256) {
         shadowRed = scaledShadowRed;
     }
     OnScreen_SetTextColors(red, green, blue, shadowRed,

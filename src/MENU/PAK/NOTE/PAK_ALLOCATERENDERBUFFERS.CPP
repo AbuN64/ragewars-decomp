@@ -281,7 +281,7 @@ int Note_AllocateRenderBuffers(struct RenderBufferResources *record) {
             g_colorImageBuffers[i] = (u8 *)frameBuffers->data + i * bufferBytes;
         }
     } else {
-        bufferBytes = 0x1ECC0;
+        bufferBytes = 126144;
         memoryEnd = 0x80400000;
         buffers = Cache_AllocateResourceAt(NULL, memoryEnd - (g_renderFrameBufferCount + 1) * bufferBytes,
                                            (g_renderFrameBufferCount + 1) * bufferBytes, s_colorFramesAndZBufferText);

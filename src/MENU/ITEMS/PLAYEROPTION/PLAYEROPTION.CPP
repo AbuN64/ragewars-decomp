@@ -108,7 +108,7 @@ s32 Items_AdjustPackedGameOption(void *first, void *second) {
     u16 *option = &g_gamePackedOptions;
     u8 limited;
 
-    *option = Menu_AdjustValue(second, *option, 16, 0, 0x100, 0);
+    *option = Menu_AdjustValue(second, *option, 16, 0, 256, 0);
     limited = 0xFF;
     if (*option < 0xFF) {
         limited = ((u8 *) option)[1];

@@ -182,7 +182,7 @@ s32 Menu_UpdateMenuEntries(PakMenu *menu, void *context) {
         } else if (buttons & 0x40101) {
             entry->value += 2;
             allowRepeat = 0;
-            if (entry->value >= 0x100) {
+            if (entry->value >= 256) {
                 entry->value = 0xFF;
             }
         }

@@ -21,8 +21,8 @@ s32 Menu_CreateSoundOptionsScreen(void) {
     g_soundOptionsScreen->handle = SmpFade_CreateFadeWidget(112, 113);
     cue = SmpSlider_CreateSliderWidget(115, 116, 0xFF);
 #else
-    g_soundOptionsScreen->handle = SmpFade_CreateFadeWidget(0x6C, 0x6D);
-    cue = SmpSlider_CreateSliderWidget(0x6F, 0x70, 0xFF);
+    g_soundOptionsScreen->handle = SmpFade_CreateFadeWidget(108, 109);
+    cue = SmpSlider_CreateSliderWidget(111, 112, 0xFF);
 #endif
     g_soundOptionsScreen->cue0 = cue;
     SmpSlider_SetSliderItem(cue, g_gameSettings.volume[0]);
@@ -31,7 +31,7 @@ s32 Menu_CreateSoundOptionsScreen(void) {
 #elif defined(VERSION_EU_X)
     cue = SmpSlider_CreateSliderWidget(117, 118, 0xFF);
 #else
-    cue = SmpSlider_CreateSliderWidget(0x71, 0x72, 0xFF);
+    cue = SmpSlider_CreateSliderWidget(113, 114, 0xFF);
 #endif
     g_soundOptionsScreen->cue1 = cue;
     SmpSlider_SetSliderItem(cue, g_gameSettings.volume[1]);
@@ -42,8 +42,8 @@ s32 Menu_CreateSoundOptionsScreen(void) {
     SmpButton_WrapButtonWidget(119);
     cue = SmpFlicker_CreateFlickerWidget(114, 110);
 #else
-    SmpButton_WrapButtonWidget(0x73);
-    cue = SmpFlicker_CreateFlickerWidget(0x6E, 0x6E);
+    SmpButton_WrapButtonWidget(115);
+    cue = SmpFlicker_CreateFlickerWidget(110, 110);
 #endif
     g_soundOptionsScreen->state = 3;
     g_soundOptionsScreen->ambient = cue;
