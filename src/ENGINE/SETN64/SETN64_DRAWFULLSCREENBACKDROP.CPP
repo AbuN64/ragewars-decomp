@@ -14,7 +14,6 @@
 #include "RENDER/VIEW_MATRICES.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
-#if !(defined(VERSION_US))
 /* Clears the screen: clears the depth buffer over the whole screen through SetN64_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through OnScreen_DrawSpriteResource after Onscrn_SetupSpriteMode_Setn64Drawfullscreenbackdrop(255). Written with libultra-style display-list macros and the screen size read from g_hudReferenceViewportWidth and g_hudReferenceViewportHeight. */
 #include "COMMON/DISPLAY.H"
 extern void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
@@ -40,4 +39,3 @@ void SetN64_DrawFullscreenBackdrop(void *unused) {
         OnScreen_DrawSpriteResource(0x386, 0, 0, 0, (f32)SCREEN_WD / (f32)width, (f32)SCREEN_HT / (f32)height, 1);
     }
 }
-#endif
