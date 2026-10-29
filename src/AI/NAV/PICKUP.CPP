@@ -131,12 +131,12 @@ s32 Nav_InsertPickupRouteNode(SelectionNavAppendDirectionalRouteStage *sel) {
     count = sel->objectCount;
     if (best == count) {
         sel->failed = 0;
-        sel->stageCount += 0x14;
+        sel->stageCount += 20;
         return 1;
     }
     if (sel->stages[best].to < 0) {
         sel->failed = 0;
-        sel->stageCount += 0x14;
+        sel->stageCount += 20;
         return 1;
     }
     for (i = 0; i < 3; i++) {
@@ -148,7 +148,7 @@ s32 Nav_InsertPickupRouteNode(SelectionNavAppendDirectionalRouteStage *sel) {
     if (next == -1 || Portal_FindLinkIndex(list, sel->id, sel->stages[best].to) == -1 ||
         Portal_FindLinkIndex(list, next, sel->stages[best].to) == -1) {
         sel->failed = 0;
-        sel->stageCount += 0x14;
+        sel->stageCount += 20;
         return 1;
     }
     for (i = 3; i > 0; i--) {

@@ -46,7 +46,7 @@ void Player_UpdateWadingState(SharedPlayer *player, BodyPlayerUpdateWadingState 
     if (player->views5E8.view6C8_57.speed == 0.0f) {
         player->views5E8.view650_18.mode = 9;
     } else {
-        player->views5E8.view650_18.mode = 0xA;
+        player->views5E8.view650_18.mode = 10;
     }
     Graphu64_EaseValueToward(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
     Player_UpdateViewAngles(player, body, &g_playerAirViewAngleParameters);
@@ -67,18 +67,18 @@ void Player_UpdateWadingState(SharedPlayer *player, BodyPlayerUpdateWadingState 
     player->views5E8.view730_79.sway[2] = Gu_Sinf(player->views5E8.view658_24.swimTime * 0.10471976548f) * 0.043633237f;
     if (!try_jump(player, body)) {
         idle = 0;
-        if (player->views5E8.view86C_127.animation == 0x1144) {
+        if (player->views5E8.view86C_127.animation == 4420) {
             idle = player->views1C.view10E_13.idle == 0;
         }
         if (player->views1C.viewE4_7.kind == g_fragTagModelId) {
-            player->views5E8.view86C_127.animation = 0x8A2;
+            player->views5E8.view86C_127.animation = 2210;
         } else if (!idle) {
             if (1.024f <= player->views5E8.view6C0_52.climb) {
-                player->views5E8.view86C_127.animation = 0x8A2;
+                player->views5E8.view86C_127.animation = 2210;
             } else if (player->views5E8.view6C0_52.climb <= -1.024f) {
-                player->views5E8.view86C_127.animation = 0x8A7;
+                player->views5E8.view86C_127.animation = 2215;
             } else {
-                player->views5E8.view86C_127.animation = 0x14;
+                player->views5E8.view86C_127.animation = 20;
             }
         }
         player->views5E8.view11C4_144.soundTime += g_frameElapsedTime;

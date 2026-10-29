@@ -250,7 +250,7 @@ int DamageAI_GetActivationSound(void *owner) {
     if (activationSound != 0) {
         return activationSound;
     }
-    return 0x5334;
+    return 21300;
 }
 
 int DamageAI_GetActivationMode(void *actor) {

@@ -101,7 +101,7 @@ void Match_ResetGameClockAndSelectSpawn(GameSession *gameSession) {
     g_gameSettings.counters.first = 0;
     gameSession->phase = 2;
     gameSession->selector = spawnSelector;
-    gameSession->target = 0xC;
+    gameSession->target = 12;
 }
 
 /* Starts the fade out of the session into the match: keeps key as the session selector when

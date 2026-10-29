@@ -42,7 +42,7 @@ void Match_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
             rec = &g_playerSettings[i];
             if (rec->active == 1) {
                 if (rec->team != rec->active) {
-                    if (g_playerCountedShots[i] >= 0x4C) {
+                    if (g_playerCountedShots[i] >= 76) {
                         count++;
                     }
                 }

@@ -65,7 +65,7 @@ void Barrel_SpawnActorEffect(void *actor, s32 kind, Triple input, s32 unused0) {
     Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, eventValue, kind,
                   position, rotation, *(CVector3 *)&copiedInput, 0, -1, mode);
 
-    if ((((CActor_t *)actor)->type == 1) && (typedActor->objectId == 0x40C)) {
+    if ((((CActor_t *)actor)->type == 1) && (typedActor->objectId == 1036)) {
         value = typedActor->eventCount - 1;
         if (value < 0) {
             value = 0;

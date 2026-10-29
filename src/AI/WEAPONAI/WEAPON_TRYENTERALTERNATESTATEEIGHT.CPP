@@ -46,7 +46,7 @@ static inline s32 can_fire(char *player) {
     }
     ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((SharedPlayer *)(player))->views1C.view5D4_45.playerIndex], ((SharedPlayer *)(player))->views5E8.view62E_13.selectedWeapon);
     if (ammo == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
 #if defined(VERSION_EU)
             Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, ((g_weaponLockedNoticeTextEu)[g_languageIndex]), Player_GetPlayerIndex(&g_playerViewRenderContext, player),

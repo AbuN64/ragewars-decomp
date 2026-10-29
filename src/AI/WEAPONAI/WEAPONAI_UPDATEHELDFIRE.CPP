@@ -55,7 +55,7 @@ static inline s32 can_fire(char *player, f32 *scale) {
     }
     ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((SharedPlayer *)(player))->views1C.view5D4_45.playerIndex], ((SharedPlayer *)(player))->views5E8.view62E_13.selectedWeapon);
     if (ammo == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
 #if defined(VERSION_EU)
             Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, ((g_weaponLockedNoticeTextEu)[g_languageIndex]), Player_GetPlayerIndex(&g_playerViewRenderContext, player),
@@ -159,10 +159,10 @@ void Weaponai_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
         } else {
             if (state->mode == 5) {
                 Playerai_StopSecondaryAttachedSound(state);
-                SoundElement_PlaySoundAtPosition(0x460, state->position, &state->position, -1);
+                SoundElement_PlaySoundAtPosition(1120, state->position, &state->position, -1);
             }
             if (state->mode == 3 && can_fire((char *)state, &k_heldFireLockedNoticeScale) != 0 && state->mode594 == 2) {
-                Actor_RequestActorState(actor, attack, 0xB);
+                Actor_RequestActorState(actor, attack, 11);
                 Playerai_BeginHeldAlternateFire(state);
             } else {
                 Actor_RequestActorState(actor, attack, 2);

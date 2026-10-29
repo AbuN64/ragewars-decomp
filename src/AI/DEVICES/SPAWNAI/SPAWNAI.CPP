@@ -85,7 +85,7 @@ static __inline__ s32 spawnBlocked(void) {
 
 static __inline__ s32 available(s32 id) {
     SpawnDispatchActor *actor;
-    if (id == 0x84F) {
+    if (id == 2127) {
         actor = g_spawnedActorList.head;
         while (actor) {
             if (*actor->definition == 4) {
@@ -100,7 +100,7 @@ static __inline__ s32 available(s32 id) {
 
 static __inline__ s32 availableChoice(s32 id) {
     SpawnDispatchActor *actor;
-    if (id != 0x84F) {
+    if (id != 2127) {
         id = 1;
         goto done;
     }
@@ -127,12 +127,12 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
         CVector3 position, SpawnDispatchOwner *owner, void *world) {
     SpawnDispatchActor *actor;
     id = copySpawnId(id);
-    if (id == 0xBD7 && g_gameSettings.counters.m_bCTFOn && spawnBlocked()) {
+    if (id == 3031 && g_gameSettings.counters.m_bCTFOn && spawnBlocked()) {
         return;
     }
-    if (id == 0x1388 && g_gameSettings.controllerMode == 1) {
-        id = *g_currentStagePreset + 0x1388;
-        if (id == 0x1388) {
+    if (id == 5000 && g_gameSettings.controllerMode == 1) {
+        id = *g_currentStagePreset + 5000;
+        if (id == 5000) {
             return;
         }
     }
@@ -141,19 +141,19 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
     if (actor) {
         actor->state = 0;
         owner->remaining--;
-        Barrel_SpawnActorEffect(actor, 0x11D, actor->position, 0);
+        Barrel_SpawnActorEffect(actor, 285, actor->position, 0);
     }
 }
 
 static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchOwner *owner, s32 id,
         void *world, CVector3 position) {
     SpawnDispatchActor *actor;
-    if (id == 0xBD7 && g_gameSettings.counters.m_bCTFOn && spawnBlocked()) {
+    if (id == 3031 && g_gameSettings.counters.m_bCTFOn && spawnBlocked()) {
         return;
     }
-    if (id == 0x1388 && g_gameSettings.controllerMode == 1) {
-        id = *g_currentStagePreset + 0x1388;
-        if (id == 0x1388) {
+    if (id == 5000 && g_gameSettings.controllerMode == 1) {
+        id = *g_currentStagePreset + 5000;
+        if (id == 5000) {
             return;
         }
     }
@@ -162,7 +162,7 @@ static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchO
     if (actor) {
         actor->state = 0;
         owner->remaining--;
-        Barrel_SpawnActorEffect(actor, 0x11D, actor->position, 0);
+        Barrel_SpawnActorEffect(actor, 285, actor->position, 0);
     }
 }
 
@@ -320,7 +320,7 @@ void SpawnAI_InitializeActorDispatch(void *levelActor, void *actorMotionState) {
 
     state->table = &g_spawnActorDispatchTable;
     state->update = &g_spawnCallbackRomEntry;
-    if ((actor->type == 0x644) ||
+    if ((actor->type == 1604) ||
         (inner->flags & 8)) {
         actor->flags &= ~0x2000;
     }
@@ -336,7 +336,7 @@ void SpawnAI_InitializeActionDelay(ActorTriggerDescriptorView *actor, Action *ac
     action->delay = Graphu64_RandomBetween(k_spawnActionMinimumDelay, k_spawnActionMaximumDelay);
     action->timer = 0;
     action->duration = info->duration;
-    if (actor->model == 0x644 || (info->flags & 8)) actor->flags &= ~0x2000;
+    if (actor->model == 1604 || (info->flags & 8)) actor->flags &= ~0x2000;
     Actor_RequestActorState(actor, action, 0);
     if (!(info->flags & 0x10) || g_gameSettings.mode1E == 1) return;
     actor->flags &= ~0x100;

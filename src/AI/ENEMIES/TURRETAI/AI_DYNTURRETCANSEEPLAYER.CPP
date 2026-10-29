@@ -121,7 +121,7 @@ void Turret_DecreaseHealth(void *actor, Dest *state, CDamageInfo *damage) {
     }
     state->health = health;
     if (health == 0) {
-        Actor_RequestActorState(actor, state, 0x40);
+        Actor_RequestActorState(actor, state, 64);
     }
 }
 

@@ -70,7 +70,7 @@ void Actor_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Sourc
                 }
                 pitch = scaled;
                 break;
-            case 0x20:
+            case 32:
                 level2 = g_actorSceneMaskTwentySecondaryLevel;
                 pitch *= g_actorSceneMaskTwentyHealthScale;
                 break;
@@ -140,7 +140,7 @@ void Actor_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *ca
     scale = 1.0f;
     value = -1;
     actor->state_result = value;
-    value = 0x14;
+    value = 20;
     actor->state13 = value;
     value = 0xFF;
     actor->state95 = value;

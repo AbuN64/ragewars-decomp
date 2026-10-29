@@ -66,10 +66,10 @@ s32 Match_ApplyLevelCompletionReward(s32 index) {
     s32 *key = &g_selectedLevelId;
     u32 code;
 
-    if (Defs_TestBit(&player->achievementFlags[0xDB + player->slot * 5], *key) != 0) {
+    if (Defs_TestBit(&player->achievementFlags[219 + player->slot * 5], *key) != 0) {
         goto done;
     }
-    Defs_SetBitValue(&player->achievementFlags[0xDB + player->slot * 5], *key, 1);
+    Defs_SetBitValue(&player->achievementFlags[219 + player->slot * 5], *key, 1);
     code = *g_currentStagePreset;
     result = code + 5000;
     do {

@@ -25,7 +25,7 @@ s32 Cbarrel_ClassifyTrackTarget(LevelActor *actor, RouteChaseBot *routeChaseBot,
     if (target->definition->kind == 5) {
         return 5;
     }
-    if (target->type == 0x64F) {
+    if (target->type == 1615) {
         return 7;
     }
     if (g_world.visibilityEnabled == 0) {
@@ -37,7 +37,7 @@ s32 Cbarrel_ClassifyTrackTarget(LevelActor *actor, RouteChaseBot *routeChaseBot,
             }
         }
         if (actor->renderFlags & 2) {
-            if (actor->type != 0xCA) {
+            if (actor->type != 202) {
                 return 1;
             }
         }

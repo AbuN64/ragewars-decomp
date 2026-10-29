@@ -178,5 +178,5 @@ block_25:
     *eyey = motionIntermediate;
     actorKindOrAnimation = g_fragTagModelId;
     surfaceFlagsOrActorKind = player->views1C.viewE4_7.kind;
-    if (surfaceFlagsOrActorKind != actorKindOrAnimation) { if (player->views5E8.view6C0_51.movementSpeed > 0.0f) { if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) player->views5E8.view86C_125.animationId = 0xA46; else player->views5E8.view86C_125.animationId = 0x5E28; } else { if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) player->views5E8.view86C_125.animationId = 0xA3C; else player->views5E8.view86C_125.animationId = 0x5E27; } } else { actorKindOrAnimation = 0xA46; player->views5E8.view86C_125.animationId = actorKindOrAnimation; }
+    if (surfaceFlagsOrActorKind != actorKindOrAnimation) { if (player->views5E8.view6C0_51.movementSpeed > 0.0f) { if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) player->views5E8.view86C_125.animationId = 2630; else player->views5E8.view86C_125.animationId = 24104; } else { if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) player->views5E8.view86C_125.animationId = 2620; else player->views5E8.view86C_125.animationId = 24103; } } else { actorKindOrAnimation = 2630; player->views5E8.view86C_125.animationId = actorKindOrAnimation; }
 }}

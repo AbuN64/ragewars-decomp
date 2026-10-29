@@ -32,7 +32,7 @@ void Nav_ResetPlayerState(s32 *state) {
 
     state[1] = -1;
     state[2] = -1;
-    state[3] = 0xB;
+    state[3] = 11;
     state[4] = -1;
     state[11] = 0;
     state[12] = 0;
@@ -166,7 +166,7 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
         }
     }
     player = brain->player;
-    if (player->views5E8.view650_16.state == 0x12) {
+    if (player->views5E8.view650_16.state == 18) {
         player->views1340.view1340_1.stalls++;
         Scaled_HandlePlayerTimeout(brain, player);
     }
@@ -481,7 +481,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
             Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
             player->forward = g_playerSteeringAirForward;
         }
-        if (controller->player->pose == 0xF) {
+        if (controller->player->pose == 15) {
             if (position->y > controller->destination.y) {
                 player->forward = g_playerSteeringDescendingPoseForward;
             } else {
@@ -587,7 +587,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
             player->forward = g_targetSteeringAirForward;
         }
-        if (controller->player->pose == 0xF) {
+        if (controller->player->pose == 15) {
             if (position->y > controller->destination.y) {
                 player->forward = g_targetSteeringDescendingPoseForward;
             } else {

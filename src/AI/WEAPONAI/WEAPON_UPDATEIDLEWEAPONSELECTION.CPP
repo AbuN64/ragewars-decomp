@@ -52,17 +52,17 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *levelActor, void *weaponFireSt
             mode = audio->m_nFragTagSkin;
             switch (mode) {
             case 0:
-                SoundElement_PlaySoundAtPosition(0x18A1,
+                SoundElement_PlaySoundAtPosition(6305,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 1:
-                SoundElement_PlaySoundAtPosition(0x1969,
+                SoundElement_PlaySoundAtPosition(6505,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 2:
-                SoundElement_PlaySoundAtPosition(0x1905,
+                SoundElement_PlaySoundAtPosition(6405,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;

@@ -26,51 +26,51 @@ extern void Playerai_UpdateMountedMovement(void *, void *);
 
 void Playerai_UpdateSequence50Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence50(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0x32); }
+void Playerai_StartSequence50(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 50); }
 
 void Playerai_UpdateSequence30Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence30(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0x1E); }
+void Playerai_StartSequence30(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 30); }
 
 void Playerai_UpdateSequence40Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence40(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0x28); }
+void Playerai_StartSequence40(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 40); }
 
 void Playerai_UpdateSequence11Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence11(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0xB); }
+void Playerai_StartSequence11(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 11); }
 
 void Playerai_UpdateSequence12Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence12(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0xC); }
+void Playerai_StartSequence12(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 12); }
 
 void Playerai_UpdateSequence13Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence13(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0xD); }
+void Playerai_StartSequence13(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 13); }
 
 void Playerai_UpdateSequence14Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence14(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0xE); }
+void Playerai_StartSequence14(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 14); }
 
 void Playerai_UpdateSequence15Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence15(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0xF); }
+void Playerai_StartSequence15(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 15); }
 
 void Playerai_UpdateSequence20Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence20(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0x14); }
+void Playerai_StartSequence20(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 20); }
 
 void Playerai_UpdateSequence70Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartSequence70(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0x46); }
+void Playerai_StartSequence70(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 70); }
 
 void Playerai_UpdateSequence60Wait(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartPlayerSequence60(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0x3C); }
+void Playerai_StartPlayerSequence60(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 60); }
 
 void Playerai_UpdateSequence60RunEndPose(void *sequencePlayer) { Playerai_UpdateSequenceWait(sequencePlayer); }
 
-void Playerai_StartPlayerSequence71(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 0x47); }
+void Playerai_StartPlayerSequence71(void *player, void *sequenceActor) { Playerai_TryStartPlayerSequence(player, sequenceActor, 71); }
 
 /** Thin wrapper around Playerai_UpdateSequenceWait. */
 void Playerai_UpdateSequence71RunEndPose(void *sequencePlayer) {
@@ -79,7 +79,7 @@ void Playerai_UpdateSequence71RunEndPose(void *sequencePlayer) {
 
 /** Thin wrapper around Playerai_TryStartPlayerSequence with player fixed third argument. */
 void Playerai_StartPlayerSequence72(void *player, void *sequenceActor) {
-    Playerai_TryStartPlayerSequence(player, sequenceActor, 0x48);
+    Playerai_TryStartPlayerSequence(player, sequenceActor, 72);
 }
 
 /** Thin wrapper around Playerai_UpdateSequenceWait. */
@@ -89,7 +89,7 @@ void Playerai_UpdateSequence72RunEndPose(void *sequencePlayer) {
 
 /** Thin wrapper around Playerai_TryStartPlayerSequence with player fixed third argument. */
 void Playerai_StartPlayerSequence73(void *player, void *sequenceActor) {
-    Playerai_TryStartPlayerSequence(player, sequenceActor, 0x49);
+    Playerai_TryStartPlayerSequence(player, sequenceActor, 73);
 }
 
 /** Thin wrapper around Playerai_UpdateSequenceWait. */
@@ -99,7 +99,7 @@ void Playerai_UpdateSequence73RunEndPose(void *sequencePlayer) {
 
 /** Thin wrapper around Playerai_TryStartPlayerSequence with player fixed third argument. */
 void Playerai_StartPlayerSequence74(void *player, void *sequenceActor) {
-    Playerai_TryStartPlayerSequence(player, sequenceActor, 0x4A);
+    Playerai_TryStartPlayerSequence(player, sequenceActor, 74);
 }
 
 /** Thin wrapper around Playerai_UpdateSequenceWait. */
@@ -142,7 +142,7 @@ void Playerai_EnterMovingSequenceState(void *player, void *body) {
 
     Playerai_UpdateMountedMovement(player, body);
     if (a0->views5E8.view6C0_51.movementSpeed != 0.0f) {
-        Player_SetPlayerState(a0, a1, 0x25);
+        Player_SetPlayerState(a0, a1, 37);
     }
 }
 
@@ -158,7 +158,7 @@ void Playerai_EnterStoppedSequenceState(void *player, void *body) {
 
     Playerai_UpdateMountedMovement(player, body);
     if (a0->views5E8.view6C0_51.movementSpeed == 0.0f) {
-        Player_SetPlayerState(a0, a1, 0x24);
+        Player_SetPlayerState(a0, a1, 36);
     }
 }
 

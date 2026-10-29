@@ -315,11 +315,11 @@ void Portal_LoadCollisionTable(void *resourcePack) {
             dst = (char *)(s1 + (s32)tbl);
             *(CollisionQuery *)dst = *src;
             s0 += 1;
-            s1 += 0x1C;
+            s1 += 28;
         } while (s0 < 2);
         s2 += 1;
-        s4 += 0x38;
-    } while (s2 < 0x16);
+        s4 += 56;
+    } while (s2 < 22);
 }
 
 void Portal_UpdateTimedActionBurst(void *controller, void *settings) {
@@ -422,7 +422,7 @@ void Portal_InitializeRandomActionSettings(void *object, void *settings) {
     controller->actionDelay = (s32) ((f32) controller->actionDelay + (Graphu64_RandomFloat(k) * (f32) aiConfig->primaryDelaySpread));
     controller->actionDuration = aiConfig->primaryDurationBase;
     controller->actionDuration = (s32) ((f32) controller->actionDuration + (Graphu64_RandomFloat(k) * (f32) aiConfig->primaryDurationSpread));
-    if (aiConfig->pulseChancePercent == 0x64) {
+    if (aiConfig->pulseChancePercent == 100) {
         controller->actionFlagFrames = 1;
     }
 }

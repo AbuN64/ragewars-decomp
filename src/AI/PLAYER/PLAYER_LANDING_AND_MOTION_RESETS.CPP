@@ -60,9 +60,9 @@ void Player_AbsorbImpact(void *player, LevelActor *actor) {
     TeamSelect_EmptyWeaponWheelHook(((FragTagPlayerStateView *)player)->animationState);
 
     if (actor->motionState & 0x8000) {
-        SoundElement_PlaySoundAtPosition(0x2DA, actor->position0, 0, -1);
+        SoundElement_PlaySoundAtPosition(730, actor->position0, 0, -1);
     } else {
-        SoundElement_PlaySoundAtPosition(0x2DC, actor->position0, 0, -1);
+        SoundElement_PlaySoundAtPosition(732, actor->position0, 0, -1);
     }
 }
 
@@ -90,26 +90,26 @@ void Player_UpdateFloatPose(void *playerState, LevelActor *actor) {
 
     player = playerState;
     if (player->landing == 0.0f) {
-        player->pose = 0xD;
+        player->pose = 13;
     } else {
-        player->pose = 0xE;
+        player->pose = 14;
     }
     Player_UpdateViewAngles(player, actor, &g_playerFloatViewAngleParameters);
     Player_UpdateFlyingThrustAndBoost(player, actor, &g_playerFloatMovementParameters);
     busy = 0;
-    if (player->animation == 0x1144) {
+    if (player->animation == 4420) {
         busy = player->animationDone == 0;
     }
     if (player->objectId == g_fragTagModelId) {
-        player->animation = 0x8A2;
+        player->animation = 2210;
     } else if (!busy) {
         x = player->stick;
         if (g_playerFloatForwardAnimationThreshold <= x) {
-            player->animation = 0x8A2;
+            player->animation = 2210;
         } else if (x <= g_playerFloatReverseAnimationThreshold) {
-            player->animation = 0x8A7;
+            player->animation = 2215;
         } else {
-            player->animation = 0x14;
+            player->animation = 20;
         }
     }
     if (!(actor->motionState & 0x20000) && player->poseTimer > g_playerFloatPoseMinimumDuration) {

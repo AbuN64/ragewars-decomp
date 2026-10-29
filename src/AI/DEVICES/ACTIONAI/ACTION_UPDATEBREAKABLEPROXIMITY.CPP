@@ -39,8 +39,8 @@ typedef struct LvDelta {
     f32 x, y, z;
 } LvDelta;
 void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
-    u8 *state = LV_FIELD(self, u8 *, 0x18) + 0x14;
-    u16 kind = LV_FIELD(self, u16, 0xE4);
+    u8 *state = LV_FIELD(self, u8 *, 24) + 0x14;
+    u16 kind = LV_FIELD(self, u16, 228);
     u8 *player;
     u8 *table;
     u8 *table2;
@@ -51,59 +51,59 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
     f32 distance;
     u32 t1;
     switch (kind) {
-    case 0x64E:
+    case 1614:
         player = Playerai_FindTransientPlayer((u8 *)&g_playerViewRenderContext);
-        if (player != 0 && LV_FIELD(player, s32, 0x5E4) != 0 && LV_FIELD(hit, s8, 0x36) != LV_FIELD(hit, s8, 0x34)) {
+        if (player != 0 && LV_FIELD(player, s32, 1508) != 0 && LV_FIELD(hit, s8, 54) != LV_FIELD(hit, s8, 52)) {
             table = (u8 *)&g_playerViewRenderContext + 0x1860;
-            if (LV_FIELD(table, s32, 0x68) == 0 && LV_FIELD(hit, s32, 0x12C) == 0) {
-                if (LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) == 1) {
-                    LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) = 0;
-                    LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
-                    LV_FIELD(table, s32, 0x74) = 1;
-                    LV_FIELD(hit, s32, 0x12C) = 1;
-                    SoundElement_PlayFlatSound(0xE0D);
+            if (LV_FIELD(table, s32, 104) == 0 && LV_FIELD(hit, s32, 300) == 0) {
+                if (LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 143) == 1) {
+                    LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 143) = 0;
+                    LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 144) = 1;
+                    LV_FIELD(table, s32, 116) = 1;
+                    LV_FIELD(hit, s32, 300) = 1;
+                    SoundElement_PlayFlatSound(3597);
                 }
             }
         }
         break;
-    case 0x653:
-    case 0x654:
-    case 0x655:
-    case 0x656:
-        if (LV_FIELD(hit, s8, 0x36) == LV_FIELD(hit, s8, 0x34)) {
+    case 1619:
+    case 1620:
+    case 1621:
+    case 1622:
+        if (LV_FIELD(hit, s8, 54) == LV_FIELD(hit, s8, 52)) {
             return;
         }
         player = Playerai_FindTransientPlayer((u8 *)&g_playerViewRenderContext);
-        if (player == 0 || LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) == 0) {
+        if (player == 0 || LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 143) == 0) {
             return;
         }
         d.x = LV_FIELD(player, f32, 8) - LV_FIELD(self, f32, 8);
-        d.y = LV_FIELD(player, f32, 0xC) - LV_FIELD(self, f32, 0xC);
-        d.z = LV_FIELD(player, f32, 0x10) - LV_FIELD(self, f32, 0x10);
+        d.y = LV_FIELD(player, f32, 12) - LV_FIELD(self, f32, 12);
+        d.z = LV_FIELD(player, f32, 16) - LV_FIELD(self, f32, 16);
         distance = Gu_Sqrtf(d.x * d.x + d.y * d.y + d.z * d.z);
         if ((f32)(s32)distance < 122.88f) {
-            LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) = 0;
-            LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
-            LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u16, 8) += 1;
+            LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 143) = 0;
+            LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 144) = 1;
+            LV_FIELD(LV_FIELD(player, u8 *, 1496), u16, 8) += 1;
             Playerai_UpdateTeamScore(player, player, 3);
             table2 = (u8 *)&g_playerViewRenderContext + 0x1860;
-            LV_FIELD(table2, s32, 0x84) = 0;
-            LV_FIELD(table2, s32, 0x80) = 0;
-            switch (LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x92)) {
+            LV_FIELD(table2, s32, 132) = 0;
+            LV_FIELD(table2, s32, 128) = 0;
+            switch (LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 146)) {
             case 0:
-                SoundElement_PlayFlatSound(0x2E6);
+                SoundElement_PlayFlatSound(742);
                 break;
             case 1:
-                SoundElement_PlayFlatSound(0x2E4);
+                SoundElement_PlayFlatSound(740);
                 break;
             case 2:
-                SoundElement_PlayFlatSound(0x2E8);
+                SoundElement_PlayFlatSound(744);
                 break;
             case 3:
-                SoundElement_PlayFlatSound(0x2EC);
+                SoundElement_PlayFlatSound(748);
                 break;
             case 4:
-                SoundElement_PlayFlatSound(0x2EA);
+                SoundElement_PlayFlatSound(746);
                 break;
             }
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -112,16 +112,16 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
             if (node != 0) {
                 status = list + 0x28;
                 settings = list + 0x1268;
-                for (; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
-                    if (LV_FIELD(node, void *, 0x5DC) != 0) {
-                        Camera_PostScreenMessage(status, LV_FIELD(node, void *, 0x5DC), g_breakableNotificationText[LV_FIELD(settings, u8, 0x581)]);
+                for (; node != 0; node = LV_FIELD(node, u8 *, 5856)) {
+                    if (LV_FIELD(node, void *, 1500) != 0) {
+                        Camera_PostScreenMessage(status, LV_FIELD(node, void *, 1500), g_breakableNotificationText[LV_FIELD(settings, u8, 1409)]);
                     }
                 }
             }
 #else
-            for (node = *(u8 **)&g_transientPlayerList; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
-                if (LV_FIELD(node, void *, 0x5DC) != 0) {
-                    Camera_PostScreenMessage((u8 *)&g_frontendScreenStatus, LV_FIELD(node, void *, 0x5DC), g_breakableNotificationText);
+            for (node = *(u8 **)&g_transientPlayerList; node != 0; node = LV_FIELD(node, u8 *, 5856)) {
+                if (LV_FIELD(node, void *, 1500) != 0) {
+                    Camera_PostScreenMessage((u8 *)&g_frontendScreenStatus, LV_FIELD(node, void *, 1500), g_breakableNotificationText);
                 }
             }
 #endif
@@ -130,15 +130,15 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
         }
         break;
     }
-    if (LV_FIELD(hit, s8, 0xCB) != 0) {
+    if (LV_FIELD(hit, s8, 203) != 0) {
         if (LV_FIELD(state, u32, 0) & 2) {
             t1 = LV_FIELD(self, u32, 0x100) & ~0x2000;
             LV_FIELD(self, u32, 0x100) = t1 & ~0x100;
         }
-        if (LV_FIELD(hit, s32, 0x128) != 0) {
+        if (LV_FIELD(hit, s32, 296) != 0) {
             Actor_RequestActorState(self, hit, 0);
         }
-        if (LV_FIELD(self, u16, 0xE4) == 0x64C) {
+        if (LV_FIELD(self, u16, 228) == 1612) {
             Actor_RequestActorState(self, hit, 2);
         }
     }
@@ -213,12 +213,12 @@ void Actionai_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
     if (hook != 0 && hook->fn != 0) {
         hook->fn(ownerRecord, eventRecord);
     }
-    if (eventRecord[0x34] == 0) {
-        ownerRecord[1] = base[0xE];
-        ownerRecord[3] = base[0xF];
+    if (eventRecord[52] == 0) {
+        ownerRecord[1] = base[14];
+        ownerRecord[3] = base[15];
     } else {
-        ownerRecord[1] = base[0x1A];
-        ownerRecord[3] = base[0x1B];
+        ownerRecord[1] = base[26];
+        ownerRecord[3] = base[27];
     }
 }
 
@@ -242,12 +242,12 @@ void Action_ActivateBreakableState(SharedPlayer *actor, void *state) {
     if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
         Actor_RequestActorState(actor, state, 1);
         switch (actor->views1C.viewE4_7.kind) {
-        case 0x64C:
+        case 1612:
             flags = actor->views1C.view100_9.flags & ~0x2000;
             actor->views1C.view100_9.flags = flags & ~0x100;
             break;
-        case 0x64B:
-        case 0x64E:
+        case 1611:
+        case 1614:
             actor->views1C.view100_9.flags &= 0xF7FFFFFF;
             break;
         }
@@ -337,14 +337,14 @@ void Actionai_ClearMotionFlags(LevelActor *object) {
 }
 
 void Action_RequestStateOn(void *a, void *b) {
-    Actor_RequestActorState(a, b, 0x1); }
+    Actor_RequestActorState(a, b, 1); }
 
 void Actionai_EnableTrigger(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void Action_RequestStateOff(void *a, void *b) {
-    Actor_RequestActorState(a, b, 0x0); }
+    Actor_RequestActorState(a, b, 0); }
 
 void Actionai_DisableTrigger(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);

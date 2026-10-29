@@ -190,7 +190,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
             case 2:
                 if (eligiblePlayerCount > 0) {
                     (case2_rules = &g_gameSettings.counters)->m_FragTagMode = 5;
-                    case2_rules->m_FragTagFlipTimer = 0xE1;
+                    case2_rules->m_FragTagFlipTimer = 225;
                     case2_rules->m_FragTagPlayerPos = (s32) case2_rules->m_FragTagPlayerChosen;
                 }
                 Playerai_ResetAllPlayerHealth(world);
@@ -214,18 +214,18 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     scaled5y = allPlayersViewHeight * banner_half;
                                     allPlayersScaleX = allPlayersViewWidth / (f32) g_hudReferenceViewportWidth;
                                     allPlayersScaleY = allPlayersViewHeight / (f32) g_hudReferenceViewportHeight;
-                                    OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((allPlayersView->viewportX + scaled5x) - (allPlayersScaleX * banner_size)), (s16) (s32) ((allPlayersView->viewportY + scaled5y) - (allPlayersScaleY * banner_size)), allPlayersScaleX, allPlayersScaleY, 1);
+                                    OnScreen_DrawSpriteResource(507, 0, (s16) (s32) ((allPlayersView->viewportX + scaled5x) - (allPlayersScaleX * banner_size)), (s16) (s32) ((allPlayersView->viewportY + scaled5y) - (allPlayersScaleY * banner_size)), allPlayersScaleX, allPlayersScaleY, 1);
                                 }
                                 player->profile->fragTagEnabled = 1;
                                 switch (g_fragTagSelectSoundVariant) {
                                 case 0:
-                                    SoundElement_PlaySoundAtPosition(0x18A1, player->position, (s32)&player->position, -1);
+                                    SoundElement_PlaySoundAtPosition(6305, player->position, (s32)&player->position, -1);
                                     break;
                                 case 1:
-                                    SoundElement_PlaySoundAtPosition(0x1969, player->position, (s32)&player->position, -1);
+                                    SoundElement_PlaySoundAtPosition(6505, player->position, (s32)&player->position, -1);
                                     break;
                                 case 2:
-                                    SoundElement_PlaySoundAtPosition(0x1905, player->position, (s32)&player->position, -1);
+                                    SoundElement_PlaySoundAtPosition(6405, player->position, (s32)&player->position, -1);
                                     break;
                                 }
                                 TeamSelect_EmptyWeaponWheelHook(&player->animationState);
@@ -242,9 +242,9 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     } else if (initialCharacter == 12) {
                                     restoredHealth = 0x19000;
                                     } else if (initialCharacter == 14) {
-                                    restoredHealth = 0x12C00;
+                                    restoredHealth = 76800;
                                     } else if (initialCharacter == 13) {
-                                    restoredHealth = 0x12C00;
+                                    restoredHealth = 76800;
                                     } else {
                                         restoredHealth = player->model->modelId << 8;
                                     }
@@ -282,24 +282,24 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     scaled_x = rotatingViewWidth * g_fragTagRotatingViewCenterScale;
                     scaled_y = rotatingViewHeight * g_fragTagRotatingViewCenterScale;
                     rotatingScaleY = rotatingViewHeight / (f32) g_hudReferenceViewportHeight;
-                    OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((rotatingView->viewportX + scaled_x) - ((rotatingViewWidth / (f32) g_hudReferenceViewportWidth) * g_fragTagRotatingViewIconOffset)), (s16) (s32) ((rotatingView->viewportY + scaled_y) - (rotatingScaleY * g_fragTagRotatingViewIconOffset)), (rotatingViewWidth / (f32) g_hudReferenceViewportWidth), rotatingScaleY, 1);
+                    OnScreen_DrawSpriteResource(507, 0, (s16) (s32) ((rotatingView->viewportX + scaled_x) - ((rotatingViewWidth / (f32) g_hudReferenceViewportWidth) * g_fragTagRotatingViewIconOffset)), (s16) (s32) ((rotatingView->viewportY + scaled_y) - (rotatingScaleY * g_fragTagRotatingViewIconOffset)), (rotatingViewWidth / (f32) g_hudReferenceViewportWidth), rotatingScaleY, 1);
                 }
                 rules = &g_gameSettings.counters;
                 nextRotatingPosition = rules->m_FragTagPlayerPos + 1;
                 rules->m_FragTagPlayerPos = nextRotatingPosition;
-                if (nextRotatingPosition >= (((5 - eligiblePlayerCount) * 0x14) - rules->m_FragTagPlayerChosen)) {
+                if (nextRotatingPosition >= (((5 - eligiblePlayerCount) * 20) - rules->m_FragTagPlayerChosen)) {
                     Playerai_ClearPlayerResetFlags(world);
                     rules->m_FragTagMode = 7;
                     rotatingPlayer->profile->fragTagEnabled = 1U;
                     switch (g_fragTagSelectSoundVariant) {
                     case 0:
-                        SoundElement_PlaySoundAtPosition(0x18A1, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(6305, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
                     case 1:
-                        SoundElement_PlaySoundAtPosition(0x1969, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(6505, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
                     case 2:
-                        SoundElement_PlaySoundAtPosition(0x1905, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(6405, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
                     }
                     TeamSelect_EmptyWeaponWheelHook(&rotatingPlayer->animationState);
@@ -324,9 +324,9 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     } else if (ruleOrRandomValue == 12) {
                                     restoredHealth = 0x19000;
                                     } else if (ruleOrRandomValue == 14) {
-                                    restoredHealth = 0x12C00;
+                                    restoredHealth = 76800;
                                     } else if (ruleOrRandomValue == 13) {
-                                    restoredHealth = 0x12C00;
+                                    restoredHealth = 76800;
                                     } else {
                                         restoredHealth = rotatingPlayer->model->modelId << 8;
                                     }
@@ -363,24 +363,24 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     scaled_x4 = chosenViewWidth * g_fragTagChosenViewCenterScale;
                     scaled_y4 = chosenViewHeight * g_fragTagChosenViewCenterScale;
                     chosenScaleY = chosenViewHeight / (f32) g_hudReferenceViewportHeight;
-                    OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((chosenView->viewportX + scaled_x4) - ((chosenViewWidth / (f32) g_hudReferenceViewportWidth) * g_fragTagChosenViewIconOffset)), (s16) (s32) ((chosenView->viewportY + scaled_y4) - (chosenScaleY * g_fragTagChosenViewIconOffset)), (chosenViewWidth / (f32) g_hudReferenceViewportWidth), chosenScaleY, 1);
+                    OnScreen_DrawSpriteResource(507, 0, (s16) (s32) ((chosenView->viewportX + scaled_x4) - ((chosenViewWidth / (f32) g_hudReferenceViewportWidth) * g_fragTagChosenViewIconOffset)), (s16) (s32) ((chosenView->viewportY + scaled_y4) - (chosenScaleY * g_fragTagChosenViewIconOffset)), (chosenViewWidth / (f32) g_hudReferenceViewportWidth), chosenScaleY, 1);
                 }
                 rules = &g_gameSettings.counters;
                 nextChosenPosition = rules->m_FragTagPlayerPos + 1;
                 rules->m_FragTagPlayerPos = nextChosenPosition;
-                if (nextChosenPosition >= (((5 - eligiblePlayerCount) * 0x14) - rules->m_FragTagPlayerChosen)) {
+                if (nextChosenPosition >= (((5 - eligiblePlayerCount) * 20) - rules->m_FragTagPlayerChosen)) {
                     Playerai_ClearPlayerResetFlags(world);
                     rules->m_FragTagMode = 7;
                     chosenPlayer->profile->fragTagEnabled = 1U;
                     switch (g_fragTagSelectSoundVariant) {
                     case 0:
-                        SoundElement_PlaySoundAtPosition(0x18A1, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(6305, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
                     case 1:
-                        SoundElement_PlaySoundAtPosition(0x1969, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(6505, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
                     case 2:
-                        SoundElement_PlaySoundAtPosition(0x1905, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(6405, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
                     }
                     TeamSelect_EmptyWeaponWheelHook(&chosenPlayer->animationState);
@@ -405,9 +405,9 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     } else if (ruleOrRandomValue == 12) {
                                     restoredHealth = 0x19000;
                                     } else if (ruleOrRandomValue == 14) {
-                                    restoredHealth = 0x12C00;
+                                    restoredHealth = 76800;
                                     } else if (ruleOrRandomValue == 13) {
-                                    restoredHealth = 0x12C00;
+                                    restoredHealth = 76800;
                                     } else {
                                         restoredHealth = chosenPlayer->model->modelId << 8;
                                     }
@@ -452,18 +452,18 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     scaled6y = flippedViewHeight * banner_half;
                                     flippedScaleX = flippedViewWidth / (f32) g_hudReferenceViewportWidth;
                                     flippedScaleY = flippedViewHeight / (f32) g_hudReferenceViewportHeight;
-                                    OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((flippedView->viewportX + scaled6x) - (flippedScaleX * banner_size)), (s16) (s32) ((flippedView->viewportY + scaled6y) - (flippedScaleY * banner_size)), flippedScaleX, flippedScaleY, 1);
+                                    OnScreen_DrawSpriteResource(507, 0, (s16) (s32) ((flippedView->viewportX + scaled6x) - (flippedScaleX * banner_size)), (s16) (s32) ((flippedView->viewportY + scaled6y) - (flippedScaleY * banner_size)), flippedScaleX, flippedScaleY, 1);
                                 }
                                 flippedPlayer->profile->fragTagEnabled = 1U;
                                 switch (g_fragTagSelectSoundVariant) {
                                 case 0:
-                                    SoundElement_PlaySoundAtPosition(0x18A1, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
+                                    SoundElement_PlaySoundAtPosition(6305, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
                                 case 1:
-                                    SoundElement_PlaySoundAtPosition(0x1969, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
+                                    SoundElement_PlaySoundAtPosition(6505, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
                                 case 2:
-                                    SoundElement_PlaySoundAtPosition(0x1905, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
+                                    SoundElement_PlaySoundAtPosition(6405, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
                                 }
                                 TeamSelect_EmptyWeaponWheelHook(&flippedPlayer->animationState);
@@ -489,9 +489,9 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     } else if (flippedCharacter == 12) {
                                     restoredHealth = 0x19000;
                                     } else if (flippedCharacter == 14) {
-                                    restoredHealth = 0x12C00;
+                                    restoredHealth = 76800;
                                     } else if (flippedCharacter == 13) {
-                                    restoredHealth = 0x12C00;
+                                    restoredHealth = 76800;
                                     } else {
                                         restoredHealth = flippedPlayer->model->modelId << 8;
                                     }
@@ -753,7 +753,7 @@ s32 Player_CheckTotalScoreWin(Root *root) {
    if(i!=skip) {
     sum+=node->scores->score[i];
     if(sum>=state->totalScoreTarget) {
-     { unsigned char trialKind=settings[0xD]; if(trialKind) {
+     { unsigned char trialKind=settings[13]; if(trialKind) {
       if(node->playerIndex<4) {state->humanWon=1;return 1;}
       state->humanWon=0;
       if(trialKind==1) continue;
@@ -851,7 +851,7 @@ void Playerai_UpdateRoundLimits(PlayerWorldActorTables *world) {
                     if (player->views5E4.view5E4_3.alive == 0) {
                         out++;
                     }
-                    if (player->views5D8.view5D8_1.record->characterId == 0xE) {
+                    if (player->views5D8.view5D8_1.record->characterId == 14) {
                         special = 1;
                     }
                 }
@@ -908,7 +908,7 @@ void Playerai_StopInactivePlayerSounds(char *game) {
                 old_value = ((FragTagSelectionActorView *)actor)->value86C;
                 saved_value = g_frameElapsedTime;
                 ((FragTagSelectionActorView *)actor)->flags |= 0x200;
-                base->value = 0x10;
+                base->value = 16;
                 base->flags &= 0xFFFDFFFF;
                 Gobjinst_UpdateActorController(base);
                 if (((ObjRecV5 *)(actor))->cooldown <= 0.0f) {
@@ -1018,9 +1018,9 @@ void Playerai_DrawPlayerModelsForView(GamePlayerListView *game, s32 view) {
         }
         if (zoomed) {
             if (((FragTagPlayerListView *)(player))->zoomModelVariant != 0) {
-                model = Scene_FindModelIdIndex(&g_world, 0xC84);
+                model = Scene_FindModelIdIndex(&g_world, 3204);
             } else {
-                model = Scene_FindModelIdIndex(&g_world, 0xC85);
+                model = Scene_FindModelIdIndex(&g_world, 3205);
             }
             if (model != -1) {
                 Geometry_QueueDirectModel(Scene_GetIndexedModelResource(&g_world, model), player + 0x1600, &g_defaultParticleLighting, 0, -1);
@@ -1118,7 +1118,7 @@ void Playerai_ToggleForceMarkerEuropean(Shared_ActorView *player, s32 attract) {
     if (player->aimTarget != 0) {
         if (player->marker.time > 0.0f) {
             player->marker.time = 0;
-            SoundElement_PlayFlatSound(0x578);
+            SoundElement_PlayFlatSound(1400);
             screen = player->message;
             if (screen == 0) return;
             Camera_PostScreenMessage((void *)&g_frontendScreenStatus, screen, (u8 *)g_forceMarkerRemovedTextEuropean[g_frontendScreenStatus.settings.language]);
@@ -1127,7 +1127,7 @@ void Playerai_ToggleForceMarkerEuropean(Shared_ActorView *player, s32 attract) {
             player->attract = attract;
             player->marker.time = g_forceMarkerDurationEuropean;
             buildForceMarkerTransform(player, attract, &player->aimNormal);
-            SoundElement_PlayFlatSound(0x578);
+            SoundElement_PlayFlatSound(1400);
             screen = player->message;
             if (screen == 0) return;
             if (attract != 0) Camera_PostScreenMessage((void *)&g_frontendScreenStatus, screen, (u8 *)g_forceMarkerAttractTextEuropean[g_frontendScreenStatus.settings.language]);

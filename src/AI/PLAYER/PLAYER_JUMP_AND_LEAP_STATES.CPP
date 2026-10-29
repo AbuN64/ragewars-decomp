@@ -75,7 +75,7 @@ void Player_UpdateGroundMoveState(struct SharedPlayer *player, void *bodyActor) 
     if (!(player->views5E8.view6AC_45.inputFlags & 0x10)) {
         Player_SetPlayerState(player, bodyActor, 2);
         if (player->views13B4.view13B4_3.character == &g_playerSpecialAnimationTable) {
-            player->views5E8.view86C_125.animationId = 0x5E24;
+            player->views5E8.view86C_125.animationId = 24100;
         } else {
             player->views5E8.view86C_125.animationId = 1;
         }
@@ -85,17 +85,17 @@ void Player_UpdateGroundMoveState(struct SharedPlayer *player, void *bodyActor) 
             y = player->views5E8.view6C4_54.sideSpeed;
             if (x < y) {
                 if (zero < y) {
-                    player->views5E8.view86C_125.animationId = 0xA67;
+                    player->views5E8.view86C_125.animationId = 2663;
                 } else {
-                    player->views5E8.view86C_125.animationId = 0xA66;
+                    player->views5E8.view86C_125.animationId = 2662;
                 }
             } else if (zero < x) {
-                player->views5E8.view86C_125.animationId = 0xA65;
+                player->views5E8.view86C_125.animationId = 2661;
             } else {
-                player->views5E8.view86C_125.animationId = 0xA68;
+                player->views5E8.view86C_125.animationId = 2664;
             }
         } else {
-            player->views5E8.view86C_125.animationId = 0xA64;
+            player->views5E8.view86C_125.animationId = 2660;
         }
     }
 }
@@ -109,7 +109,7 @@ void Player_BeginJump(Player *player, void *bodyActor) {
     CGameStatus *audio;
 
     scale = g_playerJumpInitialSpeedScale;
-    if (g_activeActorKind == 0x1DB1) {
+    if (g_activeActorKind == 7601) {
         scale = g_playerJumpInitialSpeedScaleSpecial;
     }
     ((LevelActor *)bodyActor)->position1.y =
@@ -128,17 +128,17 @@ void Player_BeginJump(Player *player, void *bodyActor) {
             mode = audio->m_nFragTagSkin;
             switch (mode) {
         case 0:
-            SoundElement_PlaySoundAtPosition(0x18A1,
+            SoundElement_PlaySoundAtPosition(6305,
                           player->pos,
                           (s32)&player->pos, -1);
             break;
         case 1:
-            SoundElement_PlaySoundAtPosition(0x1969,
+            SoundElement_PlaySoundAtPosition(6505,
                           player->pos,
                           (s32)&player->pos, -1);
             break;
         case 2:
-            SoundElement_PlaySoundAtPosition(0x1905,
+            SoundElement_PlaySoundAtPosition(6405,
                           player->pos,
                           (s32)&player->pos, -1);
             break;
@@ -151,7 +151,7 @@ void Player_UpdateJumpAscent(void *player, LevelActor *actor) {
     f32 scale;
 
     scale = g_playerJumpAscentSpeedScale;
-    if (g_activeActorKind == 0x1DB1) {
+    if (g_activeActorKind == 7601) {
         scale = g_playerJumpAscentSpeedScaleSpecial;
     }
     if (((Player *)player)->computer != 0) {
@@ -204,9 +204,9 @@ void Player_UpdateJumpAirMotion(void *player, void *body) {
         } else if (InstHdr_GetShadowGroundHeight(body, 0) < g_playerJumpLandingHeightLimits[1]) {
 set_value:
             if (((Player *)player)->animationTable == &g_playerSpecialAnimationTable) {
-                ((Player *)player)->animation = 0x5E2E;
+                ((Player *)player)->animation = 24110;
             } else {
-                ((Player *)player)->animation = 0x7F8;
+                ((Player *)player)->animation = 2040;
             }
         }
     }
@@ -236,7 +236,7 @@ void Player_UpdateLateralLeap(void *player, LevelActor *actor) {
 }
 
 void Player_UpdateLeapMotion(s32 player, s32 body) {
-    Graphu64_EaseValueToward(player + 0x72C, 0.0f, 0.25f);
+    Graphu64_EaseValueToward(player + 1836, 0.0f, 0.25f);
     Player_UpdateViewAngles((void *)player, (void *)body, &g_playerAirViewAngleParameters);
     Player_UpdateGroundThrustAndBoost((void *)player, (void *)body, &g_playerLeapMovementParameters);
     if (((LevelActor *)body)->position1.y <= 0.0f) {

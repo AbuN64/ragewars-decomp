@@ -31,13 +31,13 @@ s32 Playerai_CanLockTarget(TargetLockAttackerView *attacker, TargetLockTargetVie
     s32 canLock;
 
     weapon = attacker->weaponId;
-    if (weapon == 0x12) {
+    if (weapon == 18) {
         if (target->renderFlags & 0x300000) {
             if (!(target->definition->flags & 0x20)) {
                 return 0;
             }
             mode = target->targetLockState;
-            if (mode == 0x26 || mode == weapon || target->health == 0) {
+            if (mode == 38 || mode == weapon || target->health == 0) {
                 return 0;
             }
             if (!Weapons_TargetShielded(target)) {
@@ -50,7 +50,7 @@ s32 Playerai_CanLockTarget(TargetLockAttackerView *attacker, TargetLockTargetVie
                 return 0;
             }
             mode = target->targetLockState;
-            if (mode == 0x21 || mode == 0x34 || mode == 0x3C || mode == 0x3D) {
+            if (mode == 33 || mode == 52 || mode == 60 || mode == 61) {
                 return 0;
             }
             if (target->health != 0) {
@@ -71,7 +71,7 @@ s32 Playerai_CanLockTarget(TargetLockAttackerView *attacker, TargetLockTargetVie
     case 11:
         canLock = 0;
         mode = target->targetLockState;
-        if (mode != 0x26 && mode != 0x12 && target->health != 0 && !Weapons_TargetShielded(target)) {
+        if (mode != 38 && mode != 18 && target->health != 0 && !Weapons_TargetShielded(target)) {
             canLock = 1;
         }
         return canLock;
@@ -126,7 +126,7 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
         if (*enable) {
             other = ((AimGlobals *)(enable - 0x1285))->head;
             if (other) {
-                firstSpecial = 0x12;
+                firstSpecial = 18;
                 scale = g_playerAimPrimaryTurnScale;
                 do {
                 if (Playerai_CanLockTarget((void *)player, (void *)other) && other != player) {
@@ -152,7 +152,7 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
         count = g_world.registeredCount;
         i = 0;
         if (i < count) {
-            secondSpecial = 0x12;
+            secondSpecial = 18;
             scale = g_playerAimSecondaryTurnScale;
             do {
             other = (void *)g_playerAimCandidateActors[i];

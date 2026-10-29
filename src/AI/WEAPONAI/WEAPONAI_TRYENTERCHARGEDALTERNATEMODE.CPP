@@ -45,9 +45,9 @@ static inline s32 can_fire(char *player) {
     if (g_gameSettings.controllerMode != 1) {
         return 1;
     }
-    ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((SharedPlayer *)(player))->views1C.view5D4_45.playerIndex * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.selectedWeapon);
+    ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((SharedPlayer *)(player))->views1C.view5D4_45.playerIndex * 400], ((SharedPlayer *)(player))->views5E8.view62E_13.selectedWeapon);
     if (ammo == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
             Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_languageIndex), Player_GetPlayerIndex(g_playerViewRenderContext, player),
                           g_chargedAlternateFirstMessageDuration);
@@ -74,13 +74,13 @@ void Weaponai_TryEnterChargedAlternateMode(Shared_Actor *actor, WeaponFireState 
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.actionFlags & 0x4000) && can_fire(player) && (type = fireState->mode) == 1) {
         fireState->mode = 2;
-        if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 0x32) {
-            SoundElement_PlaySoundAtPosition(0xB23, pos[0], pos[1], pos[2], pos, player);
+        if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 50) {
+            SoundElement_PlaySoundAtPosition(2851, pos[0], pos[1], pos[2], pos, player);
             Actor_RequestActorState(actor, fireState, 5);
         } else {
-            SoundElement_PlayFlatSound(0xD4D);
+            SoundElement_PlayFlatSound(3405);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
-                Gsky_PostTargetedScreenMessage(g_playerViewRenderContext + 0x48, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, (u8)g_playerViewRenderContext[0x1809]),
+                Gsky_PostTargetedScreenMessage(g_playerViewRenderContext + 0x48, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, (u8)g_playerViewRenderContext[6153]),
                               Player_GetPlayerIndex(g_playerViewRenderContext, player), g_chargedAlternateSecondMessageDuration);
             }
             fireState->mode = type;

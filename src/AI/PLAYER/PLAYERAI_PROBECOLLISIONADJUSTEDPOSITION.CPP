@@ -171,11 +171,11 @@ s32 Playerai_IsStateThreeUpperAnimationGroup(struct SharedPlayer *player) {
 
     if (player->views5E8.view650_15.actionState == 3) {
         type = player->views5E8.view86C_125.animationId;
-        if (type == 0x5E2A || type == 0x5E5A) {
+        if (type == 24106 || type == 24154) {
             return 1;
         }
     }
-    return player->views5E8.view650_15.actionState == 3 && player->views5E8.view86C_125.animationId >= 0x7DF && player->views5E8.view86C_125.animationId < 0x7E4;
+    return player->views5E8.view650_15.actionState == 3 && player->views5E8.view86C_125.animationId >= 2015 && player->views5E8.view86C_125.animationId < 2020;
 }
 
 /* Returns whether a record in state 3 carries type 0x5E29 or 0x5E59, or a type in the range 0x7DA to 0x7DE. Adapted from Playerai_IsStateThreeUpperAnimationGroup with the type constants changed. */
@@ -185,13 +185,13 @@ s32 Playerai_IsStateThreeLowerAnimationGroup(struct SharedPlayer *player) {
 
     if (player->views5E8.view650_15.actionState == 3) {
         type = player->views5E8.view86C_125.animationId;
-        if (type == 0x5E29 || type == 0x5E59) {
+        if (type == 24105 || type == 24153) {
             return 1;
         }
     }
-    return player->views5E8.view650_15.actionState == 3 && player->views5E8.view86C_125.animationId >= 0x7DA && player->views5E8.view86C_125.animationId < 0x7DF;
+    return player->views5E8.view650_15.actionState == 3 && player->views5E8.view86C_125.animationId >= 2010 && player->views5E8.view86C_125.animationId < 2015;
 }
 
 int Playerai_IsStateFifteen(struct SharedPlayer *player) {
-    return player->views5E8.view650_15.actionState == 0xF;
+    return player->views5E8.view650_15.actionState == 15;
 }

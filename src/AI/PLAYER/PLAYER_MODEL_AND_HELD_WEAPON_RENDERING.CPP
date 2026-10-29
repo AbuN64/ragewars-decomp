@@ -45,7 +45,7 @@ void Player_DrawPlayerModel(void *player, void *camera) {
     Scene_SampleWorldLighting(&g_world, &pos,
                   &((LevelActor *)player)->lighting[g_lightingBufferIndex]);
 
-    value = 0x66;
+    value = 102;
     if (g_gameSettings.local != 0) {
         if ((g_resultExitPending != 0) &&
             (((Shared_ActorView *)player)->controls->transientFlag != 0)) {

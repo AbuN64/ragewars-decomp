@@ -83,7 +83,7 @@ s32 Playerai_FindHighestScoringPlayerIndex(struct CPlayerPool_t *game) {
     total1 = 0;
     total0 = 0;
     for (player = game->m_ActiveList.head; player != 0; player = (char *)((struct Shared_ActorView *)(player))->next) {
-        self = (u32) (player - game->m_Players) / 0x16E8;
+        self = (u32) (player - game->m_Players) / 5864;
         for (other = 0; other < 8; other++) {
             if (other == self) {
                 continue;
@@ -146,23 +146,23 @@ s32 Playerai_SelectCharacterSound(struct Shared_ActorView *player, s32 baseSound
     if (type == types[0]) {
         switch (g_gameSettings.counters.m_nFragTagSkin) {
         case 0:
-            offset = 0x514;
+            offset = 1300;
             break;
         case 1:
-            offset = 0x5DC;
+            offset = 1500;
             break;
         case 2:
-            offset = 0x578;
+            offset = 1400;
             break;
         default:
             g_gameSettings.counters.m_nFragTagSkin = 0;
-            offset = 0x514;
+            offset = 1300;
             break;
         }
     } else if (type == types[-2]) {
-        offset = 0x190;
+        offset = 400;
     } else if (type == types[-1]) {
-        offset = 0x3E8;
+        offset = 1000;
     } else {
         state = (char *)player->controls;
         switch (((struct Shared_ControlView *)(state))->mode) {
@@ -172,48 +172,48 @@ s32 Playerai_SelectCharacterSound(struct Shared_ActorView *player, s32 baseSound
             offset = 0;
             break;
         case 1:
-            offset = 0x44C;
+            offset = 1100;
             break;
         case 2:
-            offset = 0xC8;
+            offset = 200;
             break;
         case 3:
-            offset = 0x12C;
+            offset = 300;
             break;
         case 4:
-            offset = 0x4B0;
+            offset = 1200;
             break;
         case 5:
-            offset = 0x64;
+            offset = 100;
             break;
         case 6:
-            offset = 0x258;
+            offset = 600;
             break;
         case 7:
-            offset = 0x384;
+            offset = 900;
             break;
         case 8:
-            offset = 0x320;
+            offset = 800;
             break;
         case 9:
         case 15:
-            offset = 0x2BC;
+            offset = 700;
             break;
         case 10:
-            offset = 0x1F4;
+            offset = 500;
             break;
         case 11:
-            offset = 0x640;
+            offset = 1600;
             break;
         case 12:
-            offset = 0x6A4;
+            offset = 1700;
             break;
         case 13:
         case 16:
-            offset = 0x708;
+            offset = 1800;
             break;
         case 14:
-            offset = 0x76C;
+            offset = 1900;
             break;
         }
     }
@@ -232,8 +232,8 @@ void Playerai_DrawAimMarker(Player16C0 *player) {
         }
         gDPPipeSync(g_displayListCursor++);
         Geometry_InvalidateMaterialKeys();
-        Geometry_SetModePreset(0xE);
-        Geometry_SetCombineMode(0x1C);
+        Geometry_SetModePreset(14);
+        Geometry_SetCombineMode(28);
         green = 200;
         alpha = 150;
         gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
@@ -318,7 +318,7 @@ void Playerai_CreditDamageSource(TransientDamagePlayerView *damagedPlayer, Trans
                         if (creditedPlayer == damagedPlayer) {
                             damagePacket->amount = (s32) ((f32) damagePacket->amount * g_playerDamageFixedPointScale * g_playerDamageBaseScale * g_playerDamageDifficultyScale);
                         }
-                    } else if (projectileOwner->objectId == 0x40C) {
+                    } else if (projectileOwner->objectId == 1036) {
                         creditedPlayer = projectileOwner->player;
                     }
                 }
@@ -372,7 +372,7 @@ void Playerai_RotatePlayerPoseBuffers(struct CPlayerPool_t *playerPool) {
             Gobjinst_RotatePoseMatrixBuffers(node);
             Gobjinst_RotatePoseMatrixBuffers(&((struct Shared_ActorView *)(node))->weapon);
             Playerai_DrawCachedModelAndShadow(node, 0);
-            if (base[0x1D] != 0) {
+            if (base[29] != 0) {
                 Gobjinst_BuildAnimatedPose(node, 1);
             }
             node = ((struct Shared_ActorView *)(node))->next;
@@ -403,9 +403,9 @@ void Playerai_UpdatePlayerRenderResources(struct CPlayerPool_t *playerPool, void
                     ((TransientWorldPlayerSlotView *)(((s32)world + count1 * scale)))->itemSlots = node;
                     ((TransientPlayerWorldCounts *)(world))->itemCount1 = count1 + 1;
                 }
-                count1 = 0xB48;
+                count1 = 2888;
                 count2 = ((IntegerStateB4C *)world)->itemCount2;
-                if (count2 != 0x80) {
+                if (count2 != 128) {
                     ((struct TransientWorldItemSlotView *) (entry = (char *) (((s32) world) + (count2 * 4))))->secondItemSlots = node;
                     ((IntegerStateB4C *)world)->itemCount2 = count2 + 1;
                 }

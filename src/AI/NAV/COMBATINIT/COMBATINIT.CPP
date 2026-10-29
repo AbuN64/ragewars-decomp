@@ -17,7 +17,7 @@ void Nav_InitRangedCombat(CloseAttackActor *actor) {
     Scaled_ResetBehaviorState(inner);
 
     r1 = Graphu64_NextRandom();
-    inner->timer = r1 % 4 + 0xC;
+    inner->timer = r1 % 4 + 12;
 
     r2 = Graphu64_NextRandom();
     inner->pattern = r2 % 2;
@@ -43,7 +43,7 @@ void Nav_InitCloseCombat(CloseAttackActor *actor) {
     inner->pattern = r2 % 2;
 
     r3 = Graphu64_NextRandom();
-    inner->distance = r3 % 32400 + 0x2710;
+    inner->distance = r3 % 32400 + 10000;
 
     Scaled_ResetBehaviorState(inner);
 
@@ -61,7 +61,7 @@ void Nav_InitVisiblePursuit(CloseAttackActor *actor) {
     Scaled_ResetBehaviorState(inner);
 
     r1 = Graphu64_NextRandom();
-    inner->timer = r1 % 4 + 0xC;
+    inner->timer = r1 % 4 + 12;
 
     r2 = Graphu64_NextRandom();
     inner->pattern = r2 % 2;

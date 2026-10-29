@@ -10,10 +10,10 @@ void Nav_RequestRandomArmedWeapon(void *brain) {
     AiController *controller = brain;
     s32 chosenWeapon;
 
-    if ((Graphu64_NextRandom() % 100) < 0x15) {
+    if ((Graphu64_NextRandom() % 100) < 21) {
         do {
             chosenWeapon = Weapon_PickRandomArmedWeapon(controller->player);
-        } while (chosenWeapon >= 0x10);
+        } while (chosenWeapon >= 16);
         ((Shared_ActorView *)controller->player)->nextWeapon = chosenWeapon;
         if (chosenWeapon != ((Shared_ActorView *)controller->player)->selectedAction) {
             controller->actionDelay = 0;

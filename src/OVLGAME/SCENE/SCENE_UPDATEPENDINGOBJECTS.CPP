@@ -12,7 +12,7 @@ void Scene_SetSelection(ItemsSelectionState *state,int selection,int mode) {
  state->active=1;
  state->mode=mode;
  state->selection=selection;
- if(mode==2 && selection!=999)SoundElement_PlayFlatSound(0x21C);
+ if(mode==2 && selection!=999)SoundElement_PlayFlatSound(540);
 }
 void Scene_LoadSelectionLighting(ItemsSelectionState *state) {
  Scene_LoadSceneLight();

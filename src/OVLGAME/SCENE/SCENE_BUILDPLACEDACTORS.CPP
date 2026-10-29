@@ -142,10 +142,10 @@ void Scene_BuildPlacedActors(World *world, struct CacheResourceBlockView **handl
             for (i = 0; i < n; i++) {
                 rec = &records[i];
                 obj = &objects[i];
-                specialSet = 0xC1D;
+                specialSet = 3101;
                 Gobjinst_InitializePlacedActor(obj, rec, mode, i);
                 definition = Scene_GetActorDefinition(world, rec->resource22);
-                if (*definition != 0xB && i != 0) {
+                if (*definition != 11 && i != 0) {
                     continue;
                 }
                 world->createdActorCount++;
@@ -158,7 +158,7 @@ void Scene_BuildPlacedActors(World *world, struct CacheResourceBlockView **handl
                     do {
                         player = &g_gamePlayerAndMenuState[playerIndex];
                         if (nspawns != 0) {
-                            if (slot->kind == 0xC && player->views1450.view1450_1.computer != 0 && world->placedObjectGroup == 9) {
+                            if (slot->kind == 12 && player->views1450.view1450_1.computer != 0 && world->placedObjectGroup == 9) {
                                 Scene_FindPlacedObjectsByKey(world, 9, specialSet, &extra, 1);
                                 spawn = &extra;
                             } else {
@@ -306,7 +306,7 @@ void Scene_InitPreview(Shared_World *world, s32 level) {
     Scene_LoadPreviewBufferA((ItemsPreviewStateA *)world);
     Scene_LoadPreviewBufferB((char *)world);
     world->previewState = 0;
-    world->previewTimer = 0x15;
+    world->previewTimer = 21;
     world->previewStart = g_menuOptionAvailabilityFlags.value;
 }
 
@@ -328,7 +328,7 @@ void Scene_LoadPreviewBufferA(ItemsPreviewStateA *previewToLoad) {
 
     if (Control_IsSnapshotActive() == 0) {
         persistentDataResource = Cache_RequestResource(0, previewToLoad->directoryKey, previewToLoad->directoryKey, previewToLoad->resourceFlags, 0, 0, &g_cResource_UnpackRequestEntry, &g_loadSavePersistentData, 1);
-        Libc_CopyBytes(&g_worldSnapshotNoteData, (const void *)*persistentDataResource, 0x5800);
+        Libc_CopyBytes(&g_worldSnapshotNoteData, (const void *)*persistentDataResource, 22528);
         Cache_ReleaseResource(0, persistentDataResource);
         previewToLoad->loaded = 1;
     }

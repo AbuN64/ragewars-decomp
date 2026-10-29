@@ -114,7 +114,7 @@ void Portal_LinkNavigationObjects(Shared_Arg0 *graph)
       {
         nearestDistance = g_navigationObjectLinkDistanceLimits[1];
         nearestActor = 0;
-        if (navigation_point_object_id(navigationPoint) != 0x653)
+        if (navigation_point_object_id(navigationPoint) != 1619)
         {
           actorIndex = 0;
           if (actorIndex < ww->actorCount)
@@ -124,12 +124,12 @@ void Portal_LinkNavigationObjects(Shared_Arg0 *graph)
             {
               candidateActor = (Shared_WeaponSlot *) (&((NavigationRawByteStorage *) ww->actors)->bytes[actorByteOffset]);
               compare_id = navigation_point_object_id(navigationPoint);
-              if (compare_id == 0x64E)
+              if (compare_id == 1614)
               {
                 candidateObjectId = candidateActor->objectId;
                 goto compare;
               }
-              if (((u32) (candidateActor->objectId - 0x643)) >= 2U)
+              if (((u32) (candidateActor->objectId - 1603)) >= 2U)
               {
                 goto advance;
               }
@@ -155,7 +155,7 @@ void Portal_LinkNavigationObjects(Shared_Arg0 *graph)
               }
 
               advance:
-              actorByteOffset += 0x2E8;
+              actorByteOffset += 744;
 
             }
             while ((++actorIndex) < ww->actorCount);
@@ -206,7 +206,7 @@ void Portal_AssignPlatformEndpoints(CNavData *graph) {
     count = 0;
     for (n = 0; n < g_navigationPlatformActorCount; n++) {
         candidate = &g_navigationPlatformActors[n];
-        if (candidate->objectId == 0x642) {
+        if (candidate->objectId == 1602) {
             slot = &platforms[count];
             *slot = candidate;
             count++;
@@ -281,7 +281,7 @@ void Graphu64_SubtractVectors(CVector3 *, void *, CVector3 *);
 static __inline__ s32 navigationBlocked(Player *actor, CNavData *graph, s32 index) {
     CVector3 position;
     NavigationCollisionQuery query;
-    u8 saved[0x50];
+    u8 saved[80];
     s32 mode, result;
     position = ((NavigationPoint *)navigationRecord(graph->points, index))->position;
     position.y += 61.44f;

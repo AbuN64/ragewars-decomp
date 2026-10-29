@@ -41,7 +41,7 @@ void Cteamselect_DrawTeamIcons(struct TeamMenu *menu, TeamMenuIconView *items, s
     TeamMenuIconView *item;
 
     titleView = player->view;
-    level = g_gameSettings.hudFade + 0x40;
+    level = g_gameSettings.hudFade + 64;
     fade = menu->open * (level < 0x100 ? level : 255.0f);
     item = items;
     while (--count != -1) {
@@ -76,10 +76,10 @@ void Cteamselect_DrawTeamIcons(struct TeamMenu *menu, TeamMenuIconView *items, s
     scaleX = titleView->viewport[0] / g_hudReferenceViewportWidth;
     OnScreen_SetupTextRendering();
     OnScreen_SetTextScale(0.6f, 0.6f);
-    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 200, 200, 200);
     x = viewport[2] + viewport[0] * 0.5f;
     y = viewport[3] + viewport[1] * 0.5f;
-    Onscrn_DrawText(s_selectTeamText, x, y, 0xC8, 1, 1, scaleX, scaleY);
+    Onscrn_DrawText(s_selectTeamText, x, y, 200, 1, 1, scaleX, scaleY);
 }
 
 /* Returns the cardinal team-menu slot, or -1 inside the deadzone/diagonals. */

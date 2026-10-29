@@ -32,9 +32,9 @@ void Player_UpdateFloatingState(SharedPlayer *player, BodyPlayerUpdateFloatingSt
     s32 idle;
 
     if (player->views5E8.view6C8_57.speed == 0.0f) {
-        player->views5E8.view650_18.mode = 0xB;
+        player->views5E8.view650_18.mode = 11;
     } else {
-        player->views5E8.view650_18.mode = 0xC;
+        player->views5E8.view650_18.mode = 12;
     }
     Player_UpdateViewAngles(player, body, &g_playerSwimViewAngleParameters);
     player->views5E8.view730_79.sway[0] = 2.0f * Gu_Sinf(player->views5E8.view658_24.swimTime * 0.06981318f) * 0.017453294f;
@@ -44,33 +44,33 @@ void Player_UpdateFloatingState(SharedPlayer *player, BodyPlayerUpdateFloatingSt
     if (!(body->flags & 0x1000) && 2.0f < player->views5E8.view658_24.swimTime) {
         TeamSelect_EmptyWeaponWheelHook(player->views5E8.view938_129.strokes);
         body->stroke = 0;
-        SoundElement_PlaySoundAtPosition(0x2DE, body->x, body->y, body->z, 0, -1);
+        SoundElement_PlaySoundAtPosition(734, body->x, body->y, body->z, 0, -1);
         player->views5E8.view840_118.surfaced = 0;
         if (body->flags & 3) {
             Player_SetPlayerState(player, body, 2);
         } else {
-            Player_SetPlayerState(player, body, 0xA);
+            Player_SetPlayerState(player, body, 10);
         }
     }
     idle = 0;
-    if (player->views5E8.view86C_127.animation == 0x1144) {
+    if (player->views5E8.view86C_127.animation == 4420) {
         idle = player->views1C.view10E_13.idle == 0;
     }
     if (player->views1C.viewE4_7.kind == g_fragTagModelId) {
-        player->views5E8.view86C_127.animation = 0x8A2;
+        player->views5E8.view86C_127.animation = 2210;
     } else if (!idle) {
         if (1.024f <= player->views5E8.view6C0_52.climb) {
-            player->views5E8.view86C_127.animation = 0x8A2;
+            player->views5E8.view86C_127.animation = 2210;
         } else if (player->views5E8.view6C0_52.climb <= -1.024f) {
-            player->views5E8.view86C_127.animation = 0x8A7;
+            player->views5E8.view86C_127.animation = 2215;
         } else {
-            player->views5E8.view86C_127.animation = 0x14;
+            player->views5E8.view86C_127.animation = 20;
         }
     }
     player->views5E8.view11C4_144.soundTime += g_frameElapsedTime;
     if (5.12f < player->views5E8.view6C8_57.speed && 45.0f < player->views5E8.view11C4_144.soundTime) {
         player->views5E8.view11C4_144.soundTime = Graphu64_RandomFloat(15.0f);
         SoundElement_PlaySoundAtPosition(g_playerSwimMovementParameters.strokeSound, body->x, body->y, body->z, 0, -1);
-        SoundElement_PlaySoundAtPosition(0x2E0, body->x, body->y, body->z, 0, -1);
+        SoundElement_PlaySoundAtPosition(736, body->x, body->y, body->z, 0, -1);
     }
 }

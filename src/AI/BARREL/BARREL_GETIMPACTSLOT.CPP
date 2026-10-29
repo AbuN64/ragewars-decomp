@@ -45,7 +45,7 @@ s32 Barrel_GetImpactSlot(void *actorObject)
                 }
                 audio = &g_gameSettings.counters;
                 if (audio->enabled != 0 &&
-                    ((struct PlayerCharacterKindView *) ((ActorProfileImpulseFlagsView *) actor)->characterProfile)->characterKind == 0xB &&
+                    ((struct PlayerCharacterKindView *) ((ActorProfileImpulseFlagsView *) actor)->characterProfile)->characterKind == 11 &&
                     audio->m_nBastilleShield > 0) {
                     return 9;
                 }

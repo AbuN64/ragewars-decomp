@@ -85,7 +85,7 @@ void Weaponai_UpdateSpinAndRepeatCue(Shared_Actor *actor, WeaponFireState *attac
         Actor_RequestActorState(actor, attack, 2);
         Playerai_StopPrimaryAttachedSound(player);
         Playerai_StopSecondaryAttachedSound(player);
-        SoundElement_PlaySoundAtPosition(0x978, *position, (s32)position, -1);
+        SoundElement_PlaySoundAtPosition(2424, *position, (s32)position, -1);
         return;
     }
     Graphu64_EaseValueToward(&attack->spin, (f32)g_weaponChargeSpinTarget * g_weaponChargeSpinScale, 0.4f);
@@ -93,9 +93,9 @@ void Weaponai_UpdateSpinAndRepeatCue(Shared_Actor *actor, WeaponFireState *attac
     if (attack->cueTimer <= 0.0f) {
         attack->cueTimer = g_weaponChargeCueInterval;
         if (player->computer == 0 && g_playerWeaponClassMode == 1) {
-            Playerai_DispatchWeaponFireEffect(actor->entity, 0x3FB);
+            Playerai_DispatchWeaponFireEffect(actor->entity, 1019);
         } else {
-            Playerai_DispatchWeaponFireEffect(actor->entity, 0x4CD);
+            Playerai_DispatchWeaponFireEffect(actor->entity, 1229);
         }
     }
 }
@@ -182,9 +182,9 @@ static inline s32 can_fire(Player *player) {
     if (g_gameSettings.controllerMode != 1) {
         return 1;
     }
-    ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[player->slot * 0x190], player->selectedAction);
+    ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[player->slot * 400], player->selectedAction);
     if (ammo == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (player->camera != 0) {
             Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, player->camera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_languageIndex), Player_GetPlayerIndex(&g_playerViewRenderContext, player),
                           1.0f);
@@ -214,7 +214,7 @@ void Weaponai_UpdateAnimatedFiringMode(Shared_Actor *actor, WeaponFireState *fir
         if (fireState->mode == single) {
             fireState->mode = 2;
             if (Player_HasAmmoForMode(player, player->selectedAction) == 0) {
-                SoundElement_PlayFlatSound(0xD4D);
+                SoundElement_PlayFlatSound(3405);
                 if (player->camera != 0) {
                     Gsky_PostTargetedScreenMessage(&g_playerViewRenderContext.object, player->camera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_playerViewRenderContext.object.language),
                                   Player_GetPlayerIndex(&g_playerViewRenderContext, player), 1.0f);

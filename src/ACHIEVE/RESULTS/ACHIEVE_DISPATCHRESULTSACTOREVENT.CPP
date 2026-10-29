@@ -37,7 +37,7 @@ s32 Achieve_DispatchResultsActorEvent(ActorDefinitionHeader *actor, s32 event, s
     s32 table_kind;
 
     if (g_resultsActorEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_resultsActorEventHandlers;
         index = 0;
         do {

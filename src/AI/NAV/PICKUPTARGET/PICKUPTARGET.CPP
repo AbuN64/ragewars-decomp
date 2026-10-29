@@ -105,7 +105,7 @@ s32 Nav_SelectCloseAttackPickupGoal(CloseAttackBrain *closeAttackBrain) {
         count--;
         cursor--;
     } while (count >= 0);
-    data[0] = 0xBD7;
+    data[0] = 3031;
     if (Nav_AddPickupGoalsByObjectIds(data) == 0) {
         closeAttackBrain->routeObject = 0;
         closeAttackBrain->routeState = -1;
@@ -145,7 +145,7 @@ s32 Nav_SelectChaseObjectGoal(void *controller) {
         count--;
         cursor--;
     } while (count >= 0);
-    data[0] = 0x653;
+    data[0] = 1619;
     if (Nav_AddPickupGoalsByObjectIds(data) == 0) {
         ((RouteChaseBot *)controller)->target = 0;
         ((RouteChaseBot *)controller)->targetId = -1;
@@ -179,7 +179,7 @@ s32 Nav_SelectStationaryObjectGoal(AiController *controller) {
     node = g_pickupNavigationGoalList;
     scanbase = global;
     if (node != 0) {
-        type = 0x64E;
+        type = 1614;
         do {
             result = Portal_GetGraphPoint(scanbase, node->key);
             if ((navigation_point_flags(result) & 1) &&
@@ -209,8 +209,8 @@ s32 Nav_SelectStationaryObjectGoal(AiController *controller) {
 
 /** Return whether objectId is within the range [0x6BA, 0x6BC). */
 s32 Nav_IsPickupObjectInPairCategory(s32 objectId) {
-    if (objectId < 0x6BC) {
-        if (objectId >= 0x6BA) {
+    if (objectId < 1724) {
+        if (objectId >= 1722) {
             return 1;
         }
     }
@@ -219,8 +219,8 @@ s32 Nav_IsPickupObjectInPairCategory(s32 objectId) {
 
 /** Return whether objectId is within the range [0xBC4, 0xBCA). */
 s32 Nav_IsPickupObjectInSixEntryCategory(s32 objectId) {
-    if (objectId < 0xBCA) {
-        if (objectId >= 0xBC4) {
+    if (objectId < 3018) {
+        if (objectId >= 3012) {
             return 1;
         }
     }
@@ -263,7 +263,7 @@ s32 Nav_AddInactiveObjectGoals(void) {
         do {
             result = Portal_GetGraphPoint(base, node->key);
             if ((navigation_point_flags((NavigationPoint *)result) & 1) &&
-                navigation_point_object_id((NavigationPoint *)result) == 0x64E &&
+                navigation_point_object_id((NavigationPoint *)result) == 1614 &&
                 (s8)((LevelActor *)node->object)->pad1A4 == 0) {
                 Nav_AddGoalNode(base, node->key);
                 count += 1;

@@ -532,7 +532,7 @@ void Portal_SearchPath(CNavData *graph, NavigationSearchNode *start) {
             graph->result = current->key;
             return;
         }
-        for (index = 0; index < 0x40; index++) {
+        for (index = 0; index < 64; index++) {
             neighbors[index] = -1;
             portals[index] = -1;
         }
@@ -555,8 +555,8 @@ void Portal_SearchPath(CNavData *graph, NavigationSearchNode *start) {
             }
             if (reversible == 0 && portal->first != current->key) continue;
             edgeKind = portal->kind;
-            if (edgeKind == 0xA) continue;
-            if (edgeKind == 0xB) continue;
+            if (edgeKind == 10) continue;
+            if (edgeKind == 11) continue;
             if (edgeKind == 9) {
                 distance = 0.0f;
             } else {

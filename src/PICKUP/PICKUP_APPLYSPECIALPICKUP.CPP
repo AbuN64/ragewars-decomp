@@ -273,22 +273,22 @@ s32 Pickup_ApplySpecialPickup(ObjRecV4 *recipientActor, ObjRecV9 *pickupActor) {
     if (recipientActor->health > 0) {
         pickupId = pickupActor->id;
         {
-            if (pickupId < 0x139F) {
-                if (pickupId < 0x1399) {
-                    if (pickupId == 0x1389) goto case_1389;
-                    if (pickupId < 0x138A) {
-                        if (pickupId == 0xBD7) goto case_BD7;
-                        if (pickupId < 0xBD8) {
-                            if (pickupId == 0xBD6) goto case_BD6;
+            if (pickupId < 5023) {
+                if (pickupId < 5017) {
+                    if (pickupId == 5001) goto case_1389;
+                    if (pickupId < 5002) {
+                        if (pickupId == 3031) goto case_BD7;
+                        if (pickupId < 3032) {
+                            if (pickupId == 3030) goto case_BD6;
                             goto command_done;
                         }
-                        if (pickupId == 0xBD8) goto case_BD8;
-                        if (pickupId == 0x1388) goto mark_handled;
+                        if (pickupId == 3032) goto case_BD8;
+                        if (pickupId == 5000) goto mark_handled;
                         goto command_done;
                     }
-                    if (pickupId < 0x1398) {
+                    if (pickupId < 5016) {
                         handled = 1;
-                        if (pickupId >= 0x138B) goto mark_handled;
+                        if (pickupId >= 5003) goto mark_handled;
                         goto block_126;
                     }
                     goto case_1398;
@@ -296,22 +296,22 @@ s32 Pickup_ApplySpecialPickup(ObjRecV4 *recipientActor, ObjRecV9 *pickupActor) {
                 handled = 1;
                 goto command_done;
             }
-            if (pickupId < 0x13AB) {
-                if (pickupId < 0x13A9) {
-                    if (pickupId == 0x13A0) goto case_13A0;
-                    if (pickupId < 0x13A0) goto case_139F;
-                    if (pickupId < 0x13A8) handled = 1;
+            if (pickupId < 5035) {
+                if (pickupId < 5033) {
+                    if (pickupId == 5024) goto case_13A0;
+                    if (pickupId < 5024) goto case_139F;
+                    if (pickupId < 5032) handled = 1;
                     goto command_done;
                 }
                 goto mark_handled;
             }
-            if (pickupId == 0x13BC) { handled = 1; goto command_done; }
-            if (pickupId < 0x13BD) {
-                if (pickupId == 0x13AD) goto mark_handled;
+            if (pickupId == 5052) { handled = 1; goto command_done; }
+            if (pickupId < 5053) {
+                if (pickupId == 5037) goto mark_handled;
                 goto command_done;
             }
-            if (pickupId == 0x13BD) goto case_13BD;
-            if (pickupId == 0x13C1) goto case_13C1;
+            if (pickupId == 5053) goto case_13BD;
+            if (pickupId == 5057) goto case_13C1;
             goto command_done;
 case_BD6:
                 playerOptions = recipientActor->options;
@@ -322,7 +322,7 @@ case_BD6:
                     commandMenuData->flagReturnState = 2;
                     g_pickupSavedMusicPlaybackEnabled = SoundElement_GetMusicPlaybackEnabled();
                     if (SoundElement_GetMusicPlaybackEnabled() != 0) {
-                        SoundElement_SetMusicPlaybackEnabled(0x3D);
+                        SoundElement_SetMusicPlaybackEnabled(61);
                     }
                     handled = 1;
                 }
@@ -387,8 +387,8 @@ case_BD8:
                     }
                     reactionFlags = recipientActor->reactionFlags;
                     switch (reactionFlags) {            /* switch 3; irregular */
-                    case 0x1:                       /* switch 3 */
-                        SoundElement_PlayDialogGroup(0x15E);
+                    case 1:                       /* switch 3 */
+                        SoundElement_PlayDialogGroup(350);
                         playerIndex = 0;
                         if (playerIndex < g_gamePlayerAndMenuState.count) {
                             menuGlobals = &g_gamePlayerAndMenuState;
@@ -408,9 +408,9 @@ case_BD8:
                             } while (++playerIndex < g_gamePlayerAndMenuState.count);
                         }
                         break;
-                    case 0x2:                       /* switch 3 */
+                    case 2:                       /* switch 3 */
                         recipientActor->reactionDuration = 300.0f;
-                        SoundElement_PlayDialogGroup(0x164);
+                        SoundElement_PlayDialogGroup(356);
                         messageCamera4 = recipientActor->messageCamera;
                         if (messageCamera4 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera4, PICKUP_TEXT(g_pickupReactionTwoText));
@@ -419,17 +419,17 @@ case_BD8:
                         flashDuration = recipientActor->reactionDuration;
                         recipientActor->tintRed = 0xFF;
                         goto block_115;
-                    case 0x4:                       /* switch 3 */
+                    case 4:                       /* switch 3 */
                         recipientActor->reactionDuration = 225.0f;
-                        SoundElement_PlayDialogGroup(0x15F);
+                        SoundElement_PlayDialogGroup(351);
                         messageCamera11 = recipientActor->messageCamera;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(g_pickupReactionFourText));
                         }
                         break;
-                    case 0x8:                       /* switch 3 */
+                    case 8:                       /* switch 3 */
                         recipientActor->reactionDuration = 150.0f;
-                        SoundElement_PlayDialogGroup(0x165);
+                        SoundElement_PlayDialogGroup(357);
                         messageCamera5 = recipientActor->messageCamera;
                         if (messageCamera5 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera5, PICKUP_TEXT(g_pickupReactionEightText));
@@ -440,9 +440,9 @@ case_BD8:
 block_114:
                         recipientActor->tintGreen = 0xFF;
                         goto block_115;
-                    case 0x10:                      /* switch 3 */
+                    case 16:                      /* switch 3 */
                         recipientActor->reactionDuration = 150.0f;
-                        SoundElement_PlayDialogGroup(0x160);
+                        SoundElement_PlayDialogGroup(352);
                         messageCamera6 = recipientActor->messageCamera;
                         if (messageCamera6 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera6, PICKUP_TEXT(g_pickupReactionSixteenText));
@@ -452,25 +452,25 @@ block_114:
                         recipientActor->tintRed = 0xFF;
                         recipientActor->tintBlue = 0xFF;
                         goto block_115;
-                    case 0x20:                      /* switch 3 */
+                    case 32:                      /* switch 3 */
                         recipientActor->reactionDuration = 180.0f;
-                        SoundElement_PlayDialogGroup(0x166);
+                        SoundElement_PlayDialogGroup(358);
                         messageCamera11 = recipientActor->messageCamera;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(g_pickupReactionThirtyTwoText));
                         }
                         break;
-                    case 0x40:                      /* switch 3 */
+                    case 64:                      /* switch 3 */
                         recipientActor->reactionDuration = 225.0f;
-                        SoundElement_PlayDialogGroup(0x161);
+                        SoundElement_PlayDialogGroup(353);
                         messageCamera11 = recipientActor->messageCamera;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(g_pickupReactionSixtyFourText));
                         }
                         break;
-                    case 0x80:                      /* switch 3 */
+                    case 128:                      /* switch 3 */
                         recipientActor->reactionDuration = 225.0f;
-                        SoundElement_PlayDialogGroup(0x169);
+                        SoundElement_PlayDialogGroup(361);
                         messageCamera11 = recipientActor->messageCamera;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(g_pickupReactionOneTwentyEightText));
@@ -478,7 +478,7 @@ block_114:
                         break;
                     case 0x100:                     /* switch 3 */
                         recipientActor->reactionDuration = 450.0f;
-                        SoundElement_PlayDialogGroup(0x162);
+                        SoundElement_PlayDialogGroup(354);
                         messageCamera11 = recipientActor->messageCamera;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(g_pickupReactionTwoFiftySixText));
@@ -486,7 +486,7 @@ block_114:
                         break;
                     case 0x200:                     /* switch 3 */
                         recipientActor->reactionDuration = 270.0f;
-                        SoundElement_PlayDialogGroup(0x16A);
+                        SoundElement_PlayDialogGroup(362);
                         messageCamera7 = recipientActor->messageCamera;
                         if (messageCamera7 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera7, PICKUP_TEXT(g_pickupReactionFiveTwelveText));
@@ -497,7 +497,7 @@ block_114:
                         goto block_116;
                     case 0x400:                     /* switch 3 */
                         recipientActor->reactionDuration = 180.0f;
-                        SoundElement_PlayDialogGroup(0x163);
+                        SoundElement_PlayDialogGroup(355);
                         messageCamera8 = recipientActor->messageCamera;
                         if (messageCamera8 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera8, PICKUP_TEXT(g_pickupReactionOneThousandTwentyFourText));
@@ -510,7 +510,7 @@ block_114:
                         goto block_115;
                     case 0x800:                     /* switch 3 */
                         recipientActor->reactionDuration = 300.0f;
-                        SoundElement_PlayDialogGroup(0x168);
+                        SoundElement_PlayDialogGroup(360);
                         messageCamera9 = recipientActor->messageCamera;
                         if (messageCamera9 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera9, PICKUP_TEXT(g_pickupReactionTwoThousandFortyEightText));
@@ -521,7 +521,7 @@ block_114:
                         goto block_115;
                     case 0x1000:                    /* switch 3 */
                         recipientActor->reactionDuration = 300.0f;
-                        SoundElement_PlayDialogGroup(0x15F);
+                        SoundElement_PlayDialogGroup(351);
                         messageCamera10 = recipientActor->messageCamera;
                         if (messageCamera10 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera10, PICKUP_TEXT(g_pickupReactionFourThousandNinetySixText));
@@ -549,42 +549,42 @@ block_after_alpha:
                 }
                 goto command_done;
 case_1398:
-                unusedAmmoProfileOffset = recipientActor->playerIndex * 0x190;
+                unusedAmmoProfileOffset = recipientActor->playerIndex * 400;
                 handled = 1;
-                g_playerAmmoBonusProfileCounters[recipientActor->playerIndex].value += 0xA;
-                recipientActor->ammoBonusCount = (u16) (recipientActor->ammoBonusCount + 0xA);
-                Track_RequestTrackByKey(0x1F5);
+                g_playerAmmoBonusProfileCounters[recipientActor->playerIndex].value += 10;
+                recipientActor->ammoBonusCount = (u16) (recipientActor->ammoBonusCount + 10);
+                Track_RequestTrackByKey(501);
                 goto command_done;
 case_13A0:
-            unusedFirstBonusProfileOffset = recipientActor->playerIndex * 0x190;
+            unusedFirstBonusProfileOffset = recipientActor->playerIndex * 400;
             handled = 1;
-            g_playerFirstBonusProfileCounters[recipientActor->playerIndex].value += 0x32;
-            recipientActor->firstBonusCount = (u16) (recipientActor->firstBonusCount + 0x32);
-            Track_RequestTrackByKey(0x1F7);
+            g_playerFirstBonusProfileCounters[recipientActor->playerIndex].value += 50;
+            recipientActor->firstBonusCount = (u16) (recipientActor->firstBonusCount + 50);
+            Track_RequestTrackByKey(503);
             goto command_done;
 case_139F:
             handled = 1;
-            unusedSecondBonusProfileOffset = recipientActor->playerIndex * 0x190;
-            g_playerSecondBonusProfileCounters[recipientActor->playerIndex].value += 0x32;
-            recipientActor->secondBonusCount = (u16) (recipientActor->secondBonusCount + 0x32);
-            Track_RequestTrackByKey(0x1F6);
+            unusedSecondBonusProfileOffset = recipientActor->playerIndex * 400;
+            g_playerSecondBonusProfileCounters[recipientActor->playerIndex].value += 50;
+            recipientActor->secondBonusCount = (u16) (recipientActor->secondBonusCount + 50);
+            Track_RequestTrackByKey(502);
             goto command_done;
 case_13C1:
             handled = 1;
-            unusedHealthProfileOffset = recipientActor->playerIndex * 0x190;
-            g_characterHealthBonuses[recipientActor->playerIndex].value += 0x500;
-            recipientActor->health = (s32) (recipientActor->health + 0x500);
-            Track_RequestTrackByKey(0x1F8);
+            unusedHealthProfileOffset = recipientActor->playerIndex * 400;
+            g_characterHealthBonuses[recipientActor->playerIndex].value += 1280;
+            recipientActor->health = (s32) (recipientActor->health + 1280);
+            Track_RequestTrackByKey(504);
             goto command_done;
 case_1389:
                 Player_IncrementLevelProgress(&g_localPlayerProfiles[recipientActor->playerIndex], (s32) recipientActor->definition->levelProgressId);
 block_126:
                 handled = 1;
                 Player_IncrementLevelProgress(&g_localPlayerProfiles[recipientActor->playerIndex], (s32) recipientActor->definition->levelProgressId);
-                Track_RequestTrackByKey(0x1F4);
+                Track_RequestTrackByKey(500);
                 goto command_done;
 case_13BD:
-            unusedCounterProfileOffset = recipientActor->playerIndex * 0x190;
+            unusedCounterProfileOffset = recipientActor->playerIndex * 400;
             handled = 1;
             g_playerPickupProfileCounters[recipientActor->playerIndex].value += 1;
             goto command_done;
@@ -600,7 +600,7 @@ command_done:
         soundId = pickupActor->sound;
         feedbackDialogId = pickupActor->event;
         if (recipientActor->messageCamera != 0) {
-            Gsky_StartFade(recipientActor->messageCamera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+            Gsky_StartFade(recipientActor->messageCamera, 128, 50, 50, 75, 0, 0, 2);
             if (feedbackText != 0) {
                 Camera_PostScreenMessage(&g_frontendScreenStatus, recipientActor->messageCamera, feedbackText[MENU_LANGUAGE]);
             }
@@ -639,7 +639,7 @@ static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
     s32 sound = entry->sound;
     s32 event = entry->event;
     if (player->camera) {
-        Gsky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Gsky_StartFade(player->camera, 128, 50, 50, 75, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&g_frontendScreenStatus, player->camera, text[MENU_LANGUAGE]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
@@ -690,12 +690,12 @@ s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pic
     s32 event;
     f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
 
-    switch ((s16)(pickup->id - 0x708)) {
+    switch ((s16)(pickup->id - 1800)) {
     case 0: *(f32 *)((u8 *)player + 0x670) = g_specialPickupShieldDurationEu; break;
     case 1: *(f32 *)((u8 *)player + 0x674) = k_pickupEuropeanSecondEffectValue; break;
     case 2:
     case 3: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
-    case 7: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
+    case 7: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 2045, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
     case 4:
     case 5:
     case 6:
@@ -705,7 +705,7 @@ s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pic
     sound = pickup->sound;
     event = pickup->event;
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        Gsky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Gsky_StartFade(player->camera, 128, 50, 50, 75, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&g_frontendScreenStatus, player->camera, ((char **)text)[g_languageIndex]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
@@ -727,12 +727,12 @@ s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, voi
     s32 event;
     f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
 
-    switch ((s16)(pickup->id - 0x708)) {
+    switch ((s16)(pickup->id - 1800)) {
     case 0: *(f32 *)((u8 *)player + 0x670) = g_specialPickupShieldDurationEu; break;
     case 1: *(f32 *)((u8 *)player + 0x674) = k_pickupEuropeanSecondEffectValue; break;
     case 2:
     case 3: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
-    case 7: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
+    case 7: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 2045, 0, 0, 0, g_pickupEuropeanEffectUpdateRomEntry, g_pickupEuropeanEffectDrawRomEntry); break;
     case 4:
     case 5:
     case 6:
@@ -742,7 +742,7 @@ s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, voi
     sound = pickup->sound;
     event = pickup->event;
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        Gsky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Gsky_StartFade(player->camera, 128, 50, 50, 75, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&g_frontendScreenStatus, player->camera, ((char **)text)[g_languageIndex]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);

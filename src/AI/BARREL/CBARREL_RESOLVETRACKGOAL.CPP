@@ -83,13 +83,13 @@ void Cbarrel_ResolveTrackGoal(BarrelAnchorActorView *actor, Tracker *tracker, s3
             kind = 2;
         } else if (*target->kind == 5) {
             kind = 5;
-        } else if (target->id == 0x64F) {
+        } else if (target->id == 1615) {
             kind = 7;
         } else if (g_world.visibilityEnabled != 0) {
             kind = 0;
         } else if (((target->flags100 & 0x300000) && target->controller->owner == actor &&
                     target->controller->state == 2) ||
-                   ((actor->flags2E0 & 2) && actor->id != 0xCA)) {
+                   ((actor->flags2E0 & 2) && actor->id != 202)) {
             kind = 1;
         } else {
             kind = 0;

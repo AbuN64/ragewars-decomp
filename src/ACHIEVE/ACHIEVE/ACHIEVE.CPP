@@ -81,87 +81,87 @@ s32 Achieve_AwardCharacterCompletionUnlock(s32 p) {
     record = &g_localPlayerProfiles[p];
     settings = &g_gameSettings;
     given = -1;
-    if (settings->controllerMode == 1 && settings->humanWon == 1 && g_selectedLevelId >= 0x23) {
+    if (settings->controllerMode == 1 && settings->humanWon == 1 && g_selectedLevelId >= 35) {
         switch (settings->slots[p].kind) {
         case 0:
-            if (Player_TestAchievementFlag7(record, 0x11) == 0) {
-                Player_SetAchievementFlag7(record, 0x11);
-                given = 0x11;
+            if (Player_TestAchievementFlag7(record, 17) == 0) {
+                Player_SetAchievementFlag7(record, 17);
+                given = 17;
             }
             break;
         case 1:
-            if (Player_TestAchievementFlag7(record, 0x6) == 0) {
-                Player_SetAchievementFlag7(record, 0x6);
-                given = 0x6;
+            if (Player_TestAchievementFlag7(record, 6) == 0) {
+                Player_SetAchievementFlag7(record, 6);
+                given = 6;
             }
             break;
         case 2:
-            if (Player_TestAchievementFlag7(record, 0x3) == 0) {
-                Player_SetAchievementFlag7(record, 0x3);
-                given = 0x3;
+            if (Player_TestAchievementFlag7(record, 3) == 0) {
+                Player_SetAchievementFlag7(record, 3);
+                given = 3;
             }
             break;
         case 3:
-            if (Player_TestAchievementFlag7(record, 0x4) == 0) {
-                Player_SetAchievementFlag7(record, 0x4);
-                given = 0x4;
+            if (Player_TestAchievementFlag7(record, 4) == 0) {
+                Player_SetAchievementFlag7(record, 4);
+                given = 4;
             }
             break;
         case 4:
-            if (Player_TestAchievementFlag7(record, 0xE) == 0) {
-                Player_SetAchievementFlag7(record, 0xE);
+            if (Player_TestAchievementFlag7(record, 14) == 0) {
+                Player_SetAchievementFlag7(record, 14);
             }
             break;
         case 5:
-            if (Player_TestAchievementFlag7(record, 0x1) == 0) {
-                Player_SetAchievementFlag7(record, 0x1);
-                given = 0x1;
+            if (Player_TestAchievementFlag7(record, 1) == 0) {
+                Player_SetAchievementFlag7(record, 1);
+                given = 1;
             }
             break;
         case 6:
-            if (Player_TestAchievementFlag7(record, 0x12) == 0) {
-                Player_SetAchievementFlag7(record, 0x12);
-                given = 0x12;
+            if (Player_TestAchievementFlag7(record, 18) == 0) {
+                Player_SetAchievementFlag7(record, 18);
+                given = 18;
             }
             break;
         case 7:
-            if (Player_TestAchievementFlag7(record, 0x8) == 0) {
-                Player_SetAchievementFlag7(record, 0x8);
-                given = 0x8;
+            if (Player_TestAchievementFlag7(record, 8) == 0) {
+                Player_SetAchievementFlag7(record, 8);
+                given = 8;
             }
             break;
         case 8:
-            if (Player_TestAchievementFlag7(record, 0x9) == 0) {
-                Player_SetAchievementFlag7(record, 0x9);
-                given = 0x9;
+            if (Player_TestAchievementFlag7(record, 9) == 0) {
+                Player_SetAchievementFlag7(record, 9);
+                given = 9;
             }
             break;
         case 9:
-            if (Player_TestAchievementFlag7(record, 0xA) == 0) {
-                Player_SetAchievementFlag7(record, 0xA);
-                given = 0xA;
+            if (Player_TestAchievementFlag7(record, 10) == 0) {
+                Player_SetAchievementFlag7(record, 10);
+                given = 10;
             }
             break;
         case 17:
-            if (Player_TestAchievementFlag7(record, 0x2) == 0) {
-                Player_SetAchievementFlag7(record, 0x2);
-                given = 0x2;
+            if (Player_TestAchievementFlag7(record, 2) == 0) {
+                Player_SetAchievementFlag7(record, 2);
+                given = 2;
             }
             break;
         case 18:
             break;
         }
-        if (Player_TestAchievementFlag7(record, 0x11) == 1 && Player_TestAchievementFlag7(record, 1) == 1 &&
-            Player_TestAchievementFlag7(record, 8) == 1 && Player_TestAchievementFlag7(record, 0xB) == 0) {
-            Player_SetAchievementFlag7(record, 0xB);
+        if (Player_TestAchievementFlag7(record, 17) == 1 && Player_TestAchievementFlag7(record, 1) == 1 &&
+            Player_TestAchievementFlag7(record, 8) == 1 && Player_TestAchievementFlag7(record, 11) == 0) {
+            Player_SetAchievementFlag7(record, 11);
         }
         if (Player_TestAchievementFlag7(record, 2) == 1 && Player_TestAchievementFlag7(record, 6) == 1 &&
-            Player_TestAchievementFlag7(record, 9) == 1 && Player_TestAchievementFlag7(record, 0xC) == 0) {
-            Player_SetAchievementFlag7(record, 0xC);
+            Player_TestAchievementFlag7(record, 9) == 1 && Player_TestAchievementFlag7(record, 12) == 0) {
+            Player_SetAchievementFlag7(record, 12);
         }
-        if (Player_TestAchievementFlag7(record, 3) == 1 && Player_TestAchievementFlag7(record, 0x12) == 1 &&
-            Player_TestAchievementFlag7(record, 0xA) == 1 && Player_TestAchievementFlag7(record, 0xD) == 0) {
-            Player_SetAchievementFlag7(record, 0xD);
+        if (Player_TestAchievementFlag7(record, 3) == 1 && Player_TestAchievementFlag7(record, 18) == 1 &&
+            Player_TestAchievementFlag7(record, 10) == 1 && Player_TestAchievementFlag7(record, 13) == 0) {
+            Player_SetAchievementFlag7(record, 13);
         }
     }
     return given;
@@ -174,79 +174,79 @@ void Achieve_UpdateUnlockTiers(s32 index) {
     record = &g_localPlayerProfiles[index];
     count = count_achievements(index);
     if (count >= 2) {
-        record->achievementFlags[0xD] = 2;
+        record->achievementFlags[13] = 2;
     }
     if (count >= 4) {
-        record->achievementFlags[0x12] = 2;
+        record->achievementFlags[18] = 2;
     }
     if (count >= 6) {
-        record->achievementFlags[0xE] = 2;
+        record->achievementFlags[14] = 2;
     }
     if (count >= 8) {
-        record->achievementFlags[0x16] = 2;
+        record->achievementFlags[22] = 2;
     }
     if (count >= 10) {
-        record->achievementFlags[0xF] = 2;
+        record->achievementFlags[15] = 2;
     }
     if (count >= 12) {
-        record->achievementFlags[0x10] = 2;
+        record->achievementFlags[16] = 2;
     }
     if (count >= 14) {
-        record->achievementFlags[0x17] = 2;
+        record->achievementFlags[23] = 2;
     }
     if (count >= 16) {
-        record->achievementFlags[0x13] = 2;
+        record->achievementFlags[19] = 2;
     }
     if (count >= 18) {
-        record->achievementFlags[0x1E] = 2;
+        record->achievementFlags[30] = 2;
     }
     if (count >= 20) {
-        record->achievementFlags[0x14] = 2;
+        record->achievementFlags[20] = 2;
     }
     if (count >= 22) {
-        record->achievementFlags[0x11] = 2;
+        record->achievementFlags[17] = 2;
     }
     if (count >= 24) {
-        record->achievementFlags[0x15] = 2;
+        record->achievementFlags[21] = 2;
     }
     if (count >= 26) {
-        record->achievementFlags[0x1F] = 2;
+        record->achievementFlags[31] = 2;
     }
     if (count >= 28) {
-        record->achievementFlags[0xD] = 3;
+        record->achievementFlags[13] = 3;
     }
     if (count >= 30) {
-        record->achievementFlags[0x12] = 3;
+        record->achievementFlags[18] = 3;
     }
     if (count >= 32) {
-        record->achievementFlags[0xE] = 3;
+        record->achievementFlags[14] = 3;
     }
     if (count >= 34) {
-        record->achievementFlags[0x16] = 3;
+        record->achievementFlags[22] = 3;
     }
     if (count >= 36) {
-        record->achievementFlags[0xF] = 3;
+        record->achievementFlags[15] = 3;
     }
     if (count >= 38) {
-        record->achievementFlags[0x10] = 3;
+        record->achievementFlags[16] = 3;
     }
     if (count >= 40) {
-        record->achievementFlags[0x17] = 3;
+        record->achievementFlags[23] = 3;
     }
     if (count >= 42) {
-        record->achievementFlags[0x1E] = 3;
+        record->achievementFlags[30] = 3;
     }
     if (count >= 44) {
-        record->achievementFlags[0x14] = 3;
+        record->achievementFlags[20] = 3;
     }
     if (count >= 46) {
-        record->achievementFlags[0x11] = 3;
+        record->achievementFlags[17] = 3;
     }
     if (count >= 48) {
-        record->achievementFlags[0x15] = 3;
+        record->achievementFlags[21] = 3;
     }
     if (count >= 50) {
-        record->achievementFlags[0x1F] = 3;
+        record->achievementFlags[31] = 3;
     }
 }
 
@@ -264,16 +264,16 @@ Preset *Achieve_CopyPreset(s32 key, s32 row, s32 column) {
 void Achieve_MarkLevelPlayed(s32 slot) {
     switch (g_gameSettings.controllerMode) {
     case 1:
-        Defs_SetBitValue(&g_profileModeOnePlayedLevels[slot * 0x190], g_selectedLevelId, 1);
+        Defs_SetBitValue(&g_profileModeOnePlayedLevels[slot * 400], g_selectedLevelId, 1);
         return;
     case 2:
-        Defs_SetBitValue(&g_profileModeTwoPlayedLevels[slot * 0x190], g_selectedLevelId, 1);
+        Defs_SetBitValue(&g_profileModeTwoPlayedLevels[slot * 400], g_selectedLevelId, 1);
         return;
     case 3:
-        Defs_SetBitValue(&g_profileModeThreePlayedLevels[slot * 0x190], g_selectedLevelId, 1);
+        Defs_SetBitValue(&g_profileModeThreePlayedLevels[slot * 400], g_selectedLevelId, 1);
         return;
     case 4:
-        Defs_SetBitValue(&g_profileModeFourPlayedLevels[slot * 0x190], g_selectedLevelId, 1);
+        Defs_SetBitValue(&g_profileModeFourPlayedLevels[slot * 400], g_selectedLevelId, 1);
         return;
     }
 }
@@ -291,10 +291,10 @@ s32 Achieve_AwardMilestoneCompletion(s32 profileIndex) {
     case 9:
         track = 1;
         break;
-    case 0x16:
+    case 22:
         track = 2;
         break;
-    case 0x23:
+    case 35:
         track = 3;
         break;
     default:
@@ -302,9 +302,9 @@ s32 Achieve_AwardMilestoneCompletion(s32 profileIndex) {
         break;
     }
     if (track != -1) {
-        slot = &g_profileMilestoneCompletionBits[profileIndex * 0x190];
+        slot = &g_profileMilestoneCompletionBits[profileIndex * 400];
         if (Defs_TestBit(slot, track) == 0) {
-            result = 0x13BC;
+            result = 5052;
             Defs_SetBitValue(slot, track, 1);
         }
     }
@@ -318,8 +318,8 @@ void Achieve_AwardAllMilestoneAchievement(s32 player, s32 *award) {
 
     record = &g_playerSettings[player * 150];
     all = 1;
-    if (record[0x78] == 1 && record[0x91] == 0) {
-        if (Defs_TestBit(&g_localPlayerProfiles->name[player * 400] + 0x4A, 0x31) == 0) {
+    if (record[120] == 1 && record[145] == 0) {
+        if (Defs_TestBit(&g_localPlayerProfiles->name[player * 400] + 0x4A, 49) == 0) {
             for (i = 0; i < 4; i++) {
                 if (all != 1) {
                     return;
@@ -329,8 +329,8 @@ void Achieve_AwardAllMilestoneAchievement(s32 player, s32 *award) {
                 }
             }
             if (all == 1) {
-                Defs_SetBitValue(&g_localPlayerProfiles->name[player * 400] + 0x4A, 0x31, 1);
-                *award = 0x31;
+                Defs_SetBitValue(&g_localPlayerProfiles->name[player * 400] + 0x4A, 49, 1);
+                *award = 49;
             }
         }
     }
@@ -344,7 +344,7 @@ s32 Achieve_CountEarnedAchievements(s32 index) {
     void *record;
     count = 0;
     slot = 0;
-    recordOffset = index * 0x190;
+    recordOffset = index * 400;
     record = recordOffset + g_profileUnlockFlagBase;
     do {
         if (Defs_TestBit(recordOffset + g_profileUnlockFlagBase, slot) == 1) {
@@ -352,7 +352,7 @@ s32 Achieve_CountEarnedAchievements(s32 index) {
         }
         slot += 1;
         record = recordOffset + g_profileUnlockFlagBase;
-    } while (slot < 0x32);
+    } while (slot < 50);
     return count;
 }
 
@@ -368,11 +368,11 @@ void Achieve_ApplyProfileWeaponUnlocks(WeaponUnlockPlayerView *player) {
         i = 0;
         if (profile->present != 0) {
             model = (Model *)player->model;
-            profileByteOffset = profile->profileIndex * 0x190;
+            profileByteOffset = profile->profileIndex * 400;
                         do {
                 item = model->slots[i];
-                if (item >= 0x4C3) {
-                    item = item - 0x4C3;
+                if (item >= 1219) {
+                    item = item - 1219;
                     unlockAvailable = Player_HasProfileUnlockFlag(profileByteOffset + g_localPlayerProfiles->name, item);
                     if (unlockAvailable == 1) {
                         player->slots[item].available = unlockAvailable;

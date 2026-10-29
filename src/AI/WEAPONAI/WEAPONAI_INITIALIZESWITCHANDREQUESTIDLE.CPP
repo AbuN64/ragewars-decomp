@@ -116,7 +116,7 @@ s32 Weaponai_CanStartFiring(void *owner, void *slot) {
         break;
     case 8:
         if (weaponSlot->timer148 > 0.0f && weaponSlot->mode13C == 2) return 0;
-        if (player->ammo < 0x32 && weaponSlot->mode13C == 2) return 0;
+        if (player->ammo < 50 && weaponSlot->mode13C == 2) return 0;
         if (player->ammo < 10) {
             if (weaponSlot->mode13C == 1) return 0;
         }

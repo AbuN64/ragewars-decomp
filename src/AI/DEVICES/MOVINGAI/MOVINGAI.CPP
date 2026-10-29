@@ -47,7 +47,7 @@ void MovingAI_ChooseTriggerDelay(void *levelActor, void *actorMotionState) {
         if ((u32) count >= 3) {
             count -= 2;
             scaled = result * k_triggerDelayPercentScale;
-            delayPercent = 0x64 - count * 25;
+            delayPercent = 100 - count * 25;
             unsignedDelayPercent = (f64) delayPercent;
             if (delayPercent < 0) {
                 unsignedDelayPercent += (4294967296.0);
@@ -99,7 +99,7 @@ void MovingAI_UpdateTriggerDelay(LevelActor *actor, ActorMotionState *motionStat
 
 void MovingAI_RequestInactiveOnEvent(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
-        Actor_RequestActorState(a, b, 0x0);
+        Actor_RequestActorState(a, b, 0);
     }
 }
 
@@ -155,15 +155,15 @@ void MovingAI_SpawnConfiguredModelEffect(LevelActor *actor, ActorMotionState *ow
     SpawnDispatchActor *node;
     CGameStatus *settings;
 
-    if (kind == 0xBD7) {
+    if (kind == 3031) {
         settings = &g_gameSettings.counters;
         if (settings->m_bCTFOn != 0 && settings->m_CTFPlayerWithFlag != 0) {
             return;
         }
     }
-    if (kind == 0x1388 && g_gameSettings.controllerMode == 1) {
-        kind = *g_currentStagePreset + 0x1388;
-        if (kind == 0x1388) {
+    if (kind == 5000 && g_gameSettings.controllerMode == 1) {
+        kind = *g_currentStagePreset + 5000;
+        if (kind == 5000) {
             return;
         }
     }
@@ -172,7 +172,7 @@ void MovingAI_SpawnConfiguredModelEffect(LevelActor *actor, ActorMotionState *ow
     if (node != 0) {
         node->state = 0;
         owner->remainingCount -= 1;
-        Barrel_SpawnActorEffect(node, 0x11D, node->position, 0);
+        Barrel_SpawnActorEffect(node, 285, node->position, 0);
     }
 }
 
@@ -202,7 +202,7 @@ void MovingAI_SpawnSceneEffectAtPosition(void *actor, ActorMotionState *spawnSta
 s32 MovingAI_CanSpawnActorKind(s32 actorKind) {
     SpawnDispatchActor *node;
 
-    if (actorKind == 0x84F) {
+    if (actorKind == 2127) {
         node = g_spawnedActorList.head;
         while (node != 0) {
             if (*node->definition == 4) {
@@ -237,7 +237,7 @@ void MovingAI_InitializeMotionDispatch(LevelActor *actor, ActorMotionState *moti
     if (g_motionVisibilitySettings.gameFlag == 0) {
         actor->flags = flags2 | 0x10000000;
     }
-    if ((actor->type == 0x453) && (Cinema_GetSequenceRequest() == 0x6F)) {
+    if ((actor->type == 1107) && (Cinema_GetSequenceRequest() == 111)) {
         motionState->secondaryUpdate = &g_triggeredVariantDrawRomEntry;
     }
 }

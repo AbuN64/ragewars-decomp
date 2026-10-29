@@ -18,13 +18,13 @@ void Ovlgame_InitializeDynamicLightPool(struct CGameDynamicLight_t *lightPool) {
     List_InitializeIntrusive(&lightPool->m_ActiveList, 0, 4);
     List_InitializeIntrusive(&lightPool->m_FreeList, 0, 4);
     i = 0;
-    lightByteOffset = 0x28;
+    lightByteOffset = 40;
     initialFade = 1.0f;
     do {
         base = lightPool;
         light = base + lightByteOffset;
         List_AppendIntrusive(&lightPool->m_FreeList, light);
-        lightByteOffset += 0x18;
+        lightByteOffset += 24;
         i += 1;
         light->m_pROMLight = 0;
         light->m_ColorFade = initialFade;

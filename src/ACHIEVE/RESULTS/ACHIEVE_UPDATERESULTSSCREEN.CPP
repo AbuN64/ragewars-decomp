@@ -142,7 +142,7 @@ s32 Achieve_UpdateResultsScreen(void *window, void *unused1, s32 event) {
                     break;
                 }
             } else {
-                next = 0xA;
+                next = 10;
             }
             SmXlate_SwitchScreen(next);
             return 0;
@@ -162,19 +162,19 @@ s32 Achieve_UpdateResultSelectionMessage(void *window) {
     if (g_resultsModelPreviewScreen->started == 0) {
         g_resultsModelPreviewScreen->started = 1;
 #if defined(VERSION_DE)
-        Menu_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x26F)) == 0 ? 0x26F : 0x26E);
+        Menu_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 623)) == 0 ? 623 : 622);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        Menu_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x273)) == 0 ? 0x273 : 0x272);
+        Menu_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 627)) == 0 ? 627 : 626);
 #elif defined(VERSION_EU_X)
-        Menu_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x278)) == 0 ? 0x278 : 0x277);
+        Menu_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 632)) == 0 ? 632 : 631);
 #endif
         if (g_gameSettings.counters.humanWon == 0) {
 #if defined(VERSION_DE)
-            Menu_SetFocusedElement(0x26E);
+            Menu_SetFocusedElement(622);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            Menu_SetFocusedElement(0x272);
+            Menu_SetFocusedElement(626);
 #elif defined(VERSION_EU_X)
-            Menu_SetFocusedElement(0x277);
+            Menu_SetFocusedElement(631);
 #endif
         }
         Tsmos_ActivateControllerState();
@@ -197,11 +197,11 @@ s32 Achieve_UpdateResultSelectionMessage(void *window) {
 }
 
 #if defined(VERSION_DE)
-enum { MSG_BACK = 0x26F, MSG_HIDE = 0x26E, MSG_LEAVE = 0x273 };
+enum { MSG_BACK = 623, MSG_HIDE = 622, MSG_LEAVE = 627 };
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-enum { MSG_BACK = 0x273, MSG_HIDE = 0x272, MSG_LEAVE = 0x277 };
+enum { MSG_BACK = 627, MSG_HIDE = 626, MSG_LEAVE = 631 };
 #else
-enum { MSG_BACK = 0x278, MSG_HIDE = 0x277, MSG_LEAVE = 0x27C };
+enum { MSG_BACK = 632, MSG_HIDE = 631, MSG_LEAVE = 636 };
 #endif
 extern void PAKInterface_SetScreenPhase(s32);
 extern void Frontend_StartMenuImageTransition(void *);
@@ -217,10 +217,10 @@ s32 Achieve_HandleResultsMenuChoice(void) {
             break;
         case MSG_BACK:
             PAKInterface_SetScreenPhase(5);
-            SmXlate_SwitchScreen(0x13);
+            SmXlate_SwitchScreen(19);
             return 0;
         case MSG_LEAVE:
-            Random_SetMenuChoiceResult(0x21);
+            Random_SetMenuChoiceResult(33);
             break;
         default:
             return 0;

@@ -22,30 +22,30 @@ typedef struct ActorWorld {
     char pad4[0x2588 - 4];
     s32 cursor;                                /* +0x2588 */
     char pad258C[4];
-    char actors[0x60][0xB8];                   /* +0x2590 */
-    char actorList[0xC];                       /* +0x6A90 */
-    char shapePool[0x20 * 0x54];               /* +0x6A9C */
-    char shapeLists[0x18];                     /* +0x751C */
-    char tailPool[3 * 0x1C];                   /* +0x7534 */
-    char tailLists[0x18];                      /* +0x7588 */
-    char records[0x64][0x50];                  /* +0x75A0 */
+    char actors[96][0xB8];                   /* +0x2590 */
+    char actorList[12];                       /* +0x6A90 */
+    char shapePool[32 * 84];               /* +0x6A9C */
+    char shapeLists[24];                     /* +0x751C */
+    char tailPool[3 * 28];                   /* +0x7534 */
+    char tailLists[24];                      /* +0x7588 */
+    char records[100][0x50];                  /* +0x75A0 */
     char cells[10][0x14];                      /* +0x94E0 */
-    char recordList[0x14];                     /* +0x95A8 */
+    char recordList[20];                     /* +0x95A8 */
 } ActorWorld;
 
 typedef struct HudTables {
     char pad0[0x90];
     s32 words[4];                              /* +0x90 */
     char padA0[0xC8 - 0xA0];
-    unsigned char tableA[0x100];               /* +0xC8 */
-    unsigned char tableB[0x100];               /* +0x1C8 */
+    unsigned char tableA[256];               /* +0xC8 */
+    unsigned char tableB[256];               /* +0x1C8 */
 } HudTables;
 
 typedef struct PanelMovers {
-    char first[0x40];                          /* +0x0 */
+    char first[64];                          /* +0x0 */
     s32 firstTarget;                           /* +0x40 */
     char pad44[4];
-    char second[0x40];                         /* +0x48 */
+    char second[64];                         /* +0x48 */
     s32 secondTarget;                          /* +0x88 */
 } PanelMovers;
 
@@ -55,17 +55,17 @@ typedef struct PanelMovers {
 void Hud_InitializeWorldActorPools(ActorWorld *world) {
     s32 i;
 
-    Lists_InitFromPool(world->shapeLists, world->shapePool, 0x54, 0x20);
-    Lists_InitFromPool(world->tailLists, world->tailPool, 0x1C, 3);
+    Lists_InitFromPool(world->shapeLists, world->shapePool, 84, 32);
+    Lists_InitFromPool(world->tailLists, world->tailPool, 28, 3);
     Lists_ClearHeader(world->actorList);
-    for (i = 0; i < 0x60; i++) {
+    for (i = 0; i < 96; i++) {
         Lists_Append(world->actorList, world->actors[i]);
     }
     List_InitializeIntrusive(world->recordList, 0, 4);
     for (i = 0; i < 10; i++) {
         List_InitializeIntrusive(world->cells[i], 0, 4);
     }
-    for (i = 0; i < 0x64; i++) {
+    for (i = 0; i < 100; i++) {
         List_AppendIntrusive(world->recordList, world->records[i]);
     }
     world->mode = 0;
@@ -77,9 +77,9 @@ void Hud_InitializeWorldActorPools(ActorWorld *world) {
  * 0x100-byte tables at 0xC8 and 0x1C8 from the pair lists g_hudPrimaryByteLookupSource and g_hudSecondaryByteLookupSource (0x75 pairs each, 0x5C in de). */
 void Hud_ResetHudCharTables(HudTables *hud) {
 #if defined(VERSION_DE)
-    s32 pairs = 0x5C;
+    s32 pairs = 92;
 #else
-    s32 pairs = 0x75;
+    s32 pairs = 117;
 #endif
     hud->words[0] = 0;
     hud->words[1] = 0;
@@ -97,9 +97,9 @@ void Hud_EmptyCallback(void) {
  * given its frame table (g_hudFirstPanelMoverScript, g_hudSecondPanelMoverScript) through OnScreen_StartMoverScript. */
 void Hud_StartPanelMovers(PanelMovers *panel) {
     panel->firstTarget = 0;
-    OnScreen_InitMover(panel->first, 0, -0x28);
+    OnScreen_InitMover(panel->first, 0, -40);
     OnScreen_StartMoverScript(panel->first, &g_hudFirstPanelMoverScript);
     panel->secondTarget = 0;
-    OnScreen_InitMover(panel->second, 0, -0x14);
+    OnScreen_InitMover(panel->second, 0, -20);
     OnScreen_StartMoverScript(panel->second, &g_hudSecondPanelMoverScript);
 }

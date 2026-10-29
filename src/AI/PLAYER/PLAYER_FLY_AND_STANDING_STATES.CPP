@@ -177,13 +177,13 @@ void Player_UpdateStandingState(SharedPlayer *player, BodyPlayerUpdateStandingSt
         Player_SetPlayerState(player, body, 3);
     }
     animate = 1;
-    if ((player->views5E8.view86C_127.animation == 0x1130 || player->views5E8.view86C_127.animation == 0x1135) && player->views1C.view10E_13.idle == 0) {
+    if ((player->views5E8.view86C_127.animation == 4400 || player->views5E8.view86C_127.animation == 4405) && player->views1C.view10E_13.idle == 0) {
         animate = 0;
     }
-    if ((player->views5E8.view86C_127.animation == 0x5E56 || player->views5E8.view86C_127.animation == 0x5E5E) && player->views1C.view10E_13.idle == 0) {
+    if ((player->views5E8.view86C_127.animation == 24150 || player->views5E8.view86C_127.animation == 24158) && player->views1C.view10E_13.idle == 0) {
         animate = 0;
     }
-    if ((player->views5E8.view86C_127.animation == 0xFA0 || player->views5E8.view86C_127.animation == 0x1004) && player->views1C.view10E_13.idle == 0) {
+    if ((player->views5E8.view86C_127.animation == 4000 || player->views5E8.view86C_127.animation == 4100) && player->views1C.view10E_13.idle == 0) {
         animate = 0;
     }
     if (animate) {
@@ -197,21 +197,21 @@ void Player_UpdateStandingState(SharedPlayer *player, BodyPlayerUpdateStandingSt
             }
         } else if (player->views13B4.view13B4_3.character == &g_playerSpecialAnimationTable) {
             if (body->flags & 0xC0000) {
-                player->views5E8.view86C_127.animation = 0xA28;
+                player->views5E8.view86C_127.animation = 2600;
             } else if (0.017453294f < heading) {
-                player->views5E8.view86C_127.animation = 0x5E26;
+                player->views5E8.view86C_127.animation = 24102;
             } else if (heading < -0.017453294f) {
-                player->views5E8.view86C_127.animation = 0x5E25;
+                player->views5E8.view86C_127.animation = 24101;
             } else {
-                player->views5E8.view86C_127.animation = 0x5E24;
+                player->views5E8.view86C_127.animation = 24100;
             }
         } else {
             if (body->flags & 0xC0000) {
-                player->views5E8.view86C_127.animation = 0xA28;
+                player->views5E8.view86C_127.animation = 2600;
             } else if (0.017453294f < heading) {
-                player->views5E8.view86C_127.animation = 0xB5E;
+                player->views5E8.view86C_127.animation = 2910;
             } else if (heading < -0.017453294f) {
-                player->views5E8.view86C_127.animation = 0xB54;
+                player->views5E8.view86C_127.animation = 2900;
             } else {
                 player->views5E8.view86C_127.animation = 1;
             }

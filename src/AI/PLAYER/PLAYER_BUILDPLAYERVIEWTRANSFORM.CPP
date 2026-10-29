@@ -25,12 +25,12 @@ extern void **Cache_AllocateResource(int, int, int, char *);
 
 void Player_AllocPlayerList(PlayerList *list, int count) {
     int playerSize = count * sizeof(Players);
-    int stateSize = count * 0x330;
+    int stateSize = count * 816;
     char *states;
     void **handle;
     int i;
 
-    handle = Cache_AllocateResource(0, playerSize + stateSize, 0x23, s_playersText);
+    handle = Cache_AllocateResource(0, playerSize + stateSize, 35, s_playersText);
     list->handle = handle;
     list->count = count;
     list->players = *handle;
@@ -74,7 +74,7 @@ void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
     SharedPlayer *player;
     Rules *rules;
 
-    if (g_gameplayRoundState.state != 0xB && g_gameplayRoundState.state != 8) {
+    if (g_gameplayRoundState.state != 11 && g_gameplayRoundState.state != 8) {
         frameTime = g_frameElapsedTime;
         world->spin += 5;
         if (world->spin >= 360) {

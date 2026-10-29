@@ -93,7 +93,7 @@ s32 Nav_RefineBallisticAim(ActorRec *actor) {
                     break;
                 case 6:
                 case 8:
-                    actor->trajectoryInitialized = 0xB;
+                    actor->trajectoryInitialized = 11;
                     actor->trajectoryPending = 0;
                     actor->trajectoryComplete = 1;
                     break;
@@ -151,26 +151,26 @@ s32 Nav_RefineBallisticAim(ActorRec *actor) {
                     return 0;
             }
         } else {
-            if (iterationState < 0xB) {
+            if (iterationState < 11) {
                 switch (trajectoryMode) {
-                case 2: resourceKey = 0x12E; break;
-                case 9: resourceKey = 0x12E; break;
-                case 10: resourceKey = 0x12E; break;
-                case 12: resourceKey = 0x12E; break;
+                case 2: resourceKey = 302; break;
+                case 9: resourceKey = 302; break;
+                case 10: resourceKey = 302; break;
+                case 12: resourceKey = 302; break;
                 }
-            } else if (iterationState < 0x15) {
+            } else if (iterationState < 21) {
                 actor->trajectoryPending = 0;
                 switch (trajectoryMode) {
-                case 6: resourceKey = 0x12E; break;
-                case 8: resourceKey = 0x12E; break;
-                case 9: resourceKey = 0x12E; break;
+                case 6: resourceKey = 302; break;
+                case 8: resourceKey = 302; break;
+                case 9: resourceKey = 302; break;
                 }
             } else {
                 goto block_88;
             }
             {
 block_43:
-                if (actor->trajectoryInitialized < 0x15) {
+                if (actor->trajectoryInitialized < 21) {
                     ballisticResource = g_ballisticParameterResource;
                     resourceKeys = (void *)SetN64_GetPackSection(ballisticResource, 1);
                     keyCount = resourceKeys->count;
@@ -186,9 +186,9 @@ block_43:
                         parameterRecord += first;
                     }
                     speedParameters = parameterRecord->parameters;
-                    scale = Rumble_SamplePackedFloatRange((speedParameters->speedHi << 0x10) | speedParameters->speedLo);
+                    scale = Rumble_SamplePackedFloatRange((speedParameters->speedHi << 16) | speedParameters->speedLo);
                     gravityParameters = parameterRecord->parameters;
-                    lateral = Rumble_SamplePackedFloatRange((gravityParameters->gravityHi << 0x10) | gravityParameters->gravityLo);
+                    lateral = Rumble_SamplePackedFloatRange((gravityParameters->gravityHi << 16) | gravityParameters->gravityLo);
                     activeInstance = actor->instance;
                     current = activeInstance->header.spatial.position;
                     delta = actor->destination;
@@ -215,14 +215,14 @@ block_43:
                                 if (actor->trajectoryPending != 0) {
                                     actor->trajectoryInitialized = 1;
                                 } else {
-                                    actor->trajectoryInitialized = 0xB;
+                                    actor->trajectoryInitialized = 11;
                                 }
 block_54:
                                 return 0;
                             }
                         }
                         if ((actor->trajectoryPending != 0) && (actor->trajectoryComplete != 0)) {
-                            actor->trajectoryInitialized = 0xB;
+                            actor->trajectoryInitialized = 11;
                             actor->trajectoryPending = 0;
                             actor->pitchDelta = (f32) (actor->targetPitch - actor->initialPitch);
                             secondaryPitch = actor->previousPitch;
@@ -249,7 +249,7 @@ block_54:
                         return 1;
                     }
                     nextIteration = actor->trajectoryInitialized + 1;
-                    if (nextIteration == 0xB) {
+                    if (nextIteration == 11) {
                         fallbackPitch = actor->previousPitch;
                         actor->trajectoryPending = 0;
                         actor->trajectoryInitialized = (s32) (actor->trajectoryInitialized + 1);
@@ -273,7 +273,7 @@ block_54:
                         }
                         return actor->trajectoryComplete == 0;
                     }
-                    if (nextIteration >= 0x15) {
+                    if (nextIteration >= 21) {
                         actor->trajectoryPending = 0;
                         actor->trajectoryComplete = 0;
                         actor->trajectoryInitialized = (s32) (actor->trajectoryInitialized + 1);

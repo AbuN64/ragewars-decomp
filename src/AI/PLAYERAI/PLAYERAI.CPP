@@ -153,8 +153,8 @@ void Playerai_DrawAnimatedSprite(char *object, char *camera) {
         return;
     }
 
-    Geometry_SetColorDither(0xC0);
-    Geometry_SetPrimitiveAlphaOverride(1, 0x20);
+    Geometry_SetColorDither(192);
+    Geometry_SetPrimitiveAlphaOverride(1, 32);
 
     command = g_displayListCursor++;
     gDPSetTexturePersp(command, G_TP_PERSP);
@@ -182,18 +182,18 @@ void Playerai_DrawAnimatedSprite(char *object, char *camera) {
         Graphu64_ScaleMatrixWorld(matrix, g_playerAnimatedSpriteScaleX, g_playerAnimatedSpriteScaleYZ, g_playerAnimatedSpriteScaleYZ);
     }
     {
-        s32 offset = (g_lightingBufferIndex << 6) + 0x10;
+        s32 offset = (g_lightingBufferIndex << 6) + 16;
         Graphu64_ConvertMatrixToFixed(matrix, object + offset);
     }
     Graphu64_TransformPoint(first, object + 0xA8, output);
     {
-        s32 offset = (g_lightingBufferIndex << 6) + 0x10;
+        s32 offset = (g_lightingBufferIndex << 6) + 16;
         Geometry_QueueDirectModel(((AnimationSprite *)(object))->model, (s32)(object + offset),
                        (s32)&g_playerModelLighting, 0, -1);
     }
     Geometry_FlushModelBatch();
     Geometry_SetColorDither(0);
-    Geometry_SetPrimitiveAlphaOverride(0, 0x20);
+    Geometry_SetPrimitiveAlphaOverride(0, 32);
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -341,49 +341,49 @@ flag_clear:
 flag_done:
 
         if (hasSpecialSourceFlag != 0) {
-            kind = 0x17;
+            kind = 23;
         }
-        if (damagedPlayer->action == 0x20) {
-            kind = 0x20;
+        if (damagedPlayer->action == 32) {
+            kind = 32;
         }
         if (packet != 0) {
             interactionObject = packet->sourceObject;
             if ((interactionObject != 0) && (interactionObject->category == 2)) {
                 interactionType = interactionObject->type;
-                if (interactionType == 0x432) {
+                if (interactionType == 1074) {
                     goto block_45;
                 }
-                if (interactionType < 0x433) {
-                    if (interactionType == 0x405) {
+                if (interactionType < 1075) {
+                    if (interactionType == 1029) {
                         goto block_33;
                     }
-                    if (interactionType < 0x406) {
-                        if ((interactionType == 0x402) || (interactionType == 0x404)) {
+                    if (interactionType < 1030) {
+                        if ((interactionType == 1026) || (interactionType == 1028)) {
                             goto block_38;
                         }
                         goto block_47;
                     }
-                    if (interactionType < 0x41E) {
-                        if (interactionType < 0x41B) {
+                    if (interactionType < 1054) {
+                        if (interactionType < 1051) {
                             goto block_47;
                         }
                         goto block_early_return;
                     }
                     goto block_46;
                 }
-                if (interactionType < 0x4E0) {
-                    if (interactionType >= 0x4DD) {
+                if (interactionType < 1248) {
+                    if (interactionType >= 1245) {
                         goto block_early_return;
                     }
-                    if (interactionType == 0x43C) {
+                    if (interactionType == 1084) {
                         goto block_38;
                     }
-                    if (interactionType == 0x4DA) {
+                    if (interactionType == 1242) {
                         goto block_33;
                     }
                     goto block_47;
                 }
-                if (interactionType == 0x4E3) {
+                if (interactionType == 1251) {
                     goto block_45;
                 }
                 goto block_47;
@@ -439,12 +439,12 @@ block_47:
                             if (projectileOwner->category == 1) {
                                 if (projectileOwner->flags & 0x300000) {
                                     creditedPlayer = projectileOwner;
-                                } else if (projectileOwner->type == 0x40C) {
+                                } else if (projectileOwner->type == 1036) {
                                     creditedPlayer = projectileOwner->player;
                                 }
                             }
                             projectileType = reaction_source->type;
-                            if (((projectileType == 0x3EB) || (projectileType == 0x416)) && (wasAlive != 0) && (Playerai_IsPlayerInactive(damagedPlayer) != 0)) {
+                            if (((projectileType == 1003) || (projectileType == 1046)) && (wasAlive != 0) && (Playerai_IsPlayerInactive(damagedPlayer) != 0)) {
                                 specialHitStatistics = (void *)creditedPlayer->statistics;
                                 specialHitStatistics->special_hits = (u16) (specialHitStatistics->special_hits + 1);
                             }
@@ -480,11 +480,11 @@ block_69:
                       if (attributionSource->kind == 2) {
                         hitCounterIndex = attributionSource->type;
                         switch (hitCounterIndex) {
-                            case 0x404:
-                            case 0x40F:
+                            case 1028:
+                            case 1039:
                                 goto block_88;
-                            case 0x402:
-                            case 0x427:
+                            case 1026:
+                            case 1063:
                                 goto block_87;
                             default:
                                 if (!(packet->damageFlags & 0x100000)) {
@@ -511,7 +511,7 @@ block_87:
 block_88:
                     if ((creditedPlayer != damagedPlayer) && (damagedPlayer->isBot != 0)) {
                         damagedPlayer->botRecord->lastAttacker = creditedPlayer;
-                        damagedPlayer->botRecord->attackerMemoryTicks = 0x1F4;
+                        damagedPlayer->botRecord->attackerMemoryTicks = 500;
                     }
                     if ((creditedPlayer != 0) && (damagedPlayer->health == 0)) {
                         countedDeathStatistics = (void *)damagedPlayer->statistics;
@@ -685,15 +685,15 @@ void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 animationContext, Dra
                        &actor->lighting[g_lightingBufferIndex], 0, actor->renderPass);
         g_menuModelFillEnabled = 0;
         if (temporaryFlag) player->flags &= ~0x8000;
-        if ((u32)(player->state - 0x11) < 2) return;
+        if ((u32)(player->state - 17) < 2) return;
     if (player->state == 15) return;
     if (player->controls->fragTagEnabled && g_frontendScreenStatus.modes.tag) return;
     if (player->health == 0) return;
     if (player->kind == g_fragTagModelId) return;
     if (player->flags & 0x20) return;
     { s32 weaponModel = ((WeaponInfo *)g_weaponInfoByType[player->selectedWeapon])->model;
-    model = weaponModel - 0x4B3;
-    if (player->selectedWeapon >= 16) model = weaponModel - 0x4B5; }
+    model = weaponModel - 1203;
+    if (player->selectedWeapon >= 16) model = weaponModel - 1205; }
         goto weapon;
     } else {
         if (g_frontendScreenStatus.settings.local) {
@@ -714,14 +714,14 @@ void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 animationContext, Dra
             }
         }
     }
-    if ((u32)(player->state - 0x11) < 2) return;
+    if ((u32)(player->state - 17) < 2) return;
     if (player->state == 15) return;
     if (player->controls->fragTagEnabled && g_frontendScreenStatus.modes.tag) return;
     if (player->health == 0) return;
     if (player->kind == g_fragTagModelId) return;
     if (player->flags & 0x20) return;
     model = ((WeaponInfo *)g_weaponInfoByType[player->selectedWeapon])->model;
-    model -= 0x4B3;
+    model -= 1203;
     if (player->selectedWeapon >= 16) model -= 2;
 weapon:
     if (model >= 0) {
@@ -867,23 +867,23 @@ void Playerai_DispatchWeaponFireEffect(AimPlayer *aimPlayer, s32 effect) {
     f32 amount;
     s16 *ammo;
     weapon = aimPlayer->view;
-    if (aimPlayer->state < 2 || (s16)aimPlayer->state == 0x10 || (s16)aimPlayer->state == 0x11) return;
+    if (aimPlayer->state < 2 || (s16)aimPlayer->state == 16 || (s16)aimPlayer->state == 17) return;
     aim = Gobjinst_BuildActorAimQuaternion(aimPlayer);
-    if (effect == 0x439 || effect == 0x4C4 || effect == 0x432 || effect == 0x4E3 ||
-        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) aimPlayer->weaponActionMode = 2;
+    if (effect == 1081 || effect == 1220 || effect == 1074 || effect == 1251 ||
+        effect == 1049 || effect == 1235 || effect == 1061 || effect == 1226) aimPlayer->weaponActionMode = 2;
     mode = Playerai_GetWeaponFireMode(aimPlayer, aimPlayer->selectedWeapon);
-    if (effect == 0x439 || effect == 0x4C4 || effect == 0x432 || effect == 0x4E3 ||
-        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) aimPlayer->weaponActionMode = 1;
+    if (effect == 1081 || effect == 1220 || effect == 1074 || effect == 1251 ||
+        effect == 1049 || effect == 1235 || effect == 1061 || effect == 1226) aimPlayer->weaponActionMode = 1;
     if (mode) {
         WeaponInfo *table = g_weaponInfoByType[aimPlayer->selectedWeapon];
         if (!aimPlayer->controlled && g_playerWeaponClassMode == 1) entries=&table->weaponClass;
         else entries=table->computerClasses;
         if (containsFire(entries,effect)) goto fire;
     }
-    if (aimPlayer->selectedWeapon != 0 && aimPlayer->selectedWeapon != 0x10) goto spawn;
+    if (aimPlayer->selectedWeapon != 0 && aimPlayer->selectedWeapon != 16) goto spawn;
 fire:
     if (weapon) aim = aimPlayer->rotation;
-    if (aimPlayer->selectedWeapon != 0 && aimPlayer->selectedWeapon != 0x10) {
+    if (aimPlayer->selectedWeapon != 0 && aimPlayer->selectedWeapon != 16) {
         ammo = &aimPlayer->ammo[mode[0]];
         *ammo -= (u16)mode[3];
         if (*ammo < 0) *ammo = 0;
@@ -894,38 +894,38 @@ fire:
             }
         }
     }
-    if (aimPlayer->equippedKind == 0x11) {
-        if (aimPlayer->animation == 0x1004) {timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1004Duration;}
+    if (aimPlayer->equippedKind == 17) {
+        if (aimPlayer->animation == 4100) {timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1004Duration;}
         else if (aimPlayer->animation == 4000) {timer=aimPlayer->animationTimer; amount = g_playerWeaponFireFA0Duration;}
         else {
-            if (aimPlayer->weaponKind == 8) aimPlayer->animation = 0x1004;
+            if (aimPlayer->weaponKind == 8) aimPlayer->animation = 4100;
             else aimPlayer->animation = 4000;
             goto clear;
         }
         goto consume;
     }
-    if (aimPlayer->animation == 1) aimPlayer->animation = 0x1130;
-    else if (aimPlayer->animation == 0x1130) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1130Duration; goto consume; }
-    else if (aimPlayer->animation == 0xA28) aimPlayer->animation = 0x1135;
-    else if (aimPlayer->animation == 0x1135) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1135Duration; goto consume; }
-    else if (aimPlayer->animation == 0x14) aimPlayer->animation = 0x1144;
-    else if (aimPlayer->animation == 0x1144) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1144Duration; goto consume; }
-    else if (aimPlayer->selectedWeapon == 0 && aimPlayer->weaponKind == 8) aimPlayer->animation = 0x5E5E;
+    if (aimPlayer->animation == 1) aimPlayer->animation = 4400;
+    else if (aimPlayer->animation == 4400) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1130Duration; goto consume; }
+    else if (aimPlayer->animation == 2600) aimPlayer->animation = 4405;
+    else if (aimPlayer->animation == 4405) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1135Duration; goto consume; }
+    else if (aimPlayer->animation == 20) aimPlayer->animation = 4420;
+    else if (aimPlayer->animation == 4420) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire1144Duration; goto consume; }
+    else if (aimPlayer->selectedWeapon == 0 && aimPlayer->weaponKind == 8) aimPlayer->animation = 24158;
     else {
-            if (aimPlayer->animation == 0x5E5E) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire5E5EDuration; goto consume; }
-        if ((u32)(aimPlayer->animation - 0x5E24) < 3) aimPlayer->animation = 0x5E56;
-        else if (aimPlayer->animation == 0x5E56) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
-        else if (aimPlayer->animation == 0x5E29) aimPlayer->animation = 0x5E59;
-        else if (aimPlayer->animation == 0x5E59) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
-        else if (aimPlayer->animation == 0x5E2A) aimPlayer->animation = 0x5E5A;
-        else if (aimPlayer->animation == 0x5E5A) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire5E5ADuration; goto consume; }
-        else if (aimPlayer->animation == 0x5E2B) aimPlayer->animation = 0x5E5B;
-        else if (aimPlayer->animation == 0x5E5B) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
-        else if (aimPlayer->animation == 0x5E2C) aimPlayer->animation = 0x5E5C;
+            if (aimPlayer->animation == 24158) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire5E5EDuration; goto consume; }
+        if ((u32)(aimPlayer->animation - 24100) < 3) aimPlayer->animation = 24150;
+        else if (aimPlayer->animation == 24150) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
+        else if (aimPlayer->animation == 24105) aimPlayer->animation = 24153;
+        else if (aimPlayer->animation == 24153) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
+        else if (aimPlayer->animation == 24106) aimPlayer->animation = 24154;
+        else if (aimPlayer->animation == 24154) { timer=aimPlayer->animationTimer; amount = g_playerWeaponFire5E5ADuration; goto consume; }
+        else if (aimPlayer->animation == 24107) aimPlayer->animation = 24155;
+        else if (aimPlayer->animation == 24155) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
+        else if (aimPlayer->animation == 24108) aimPlayer->animation = 24156;
         else {
-                    if (aimPlayer->animation == 0x5E5C) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
-            if (aimPlayer->animation == 0x5E2D) aimPlayer->animation = 0x5E5D;
-            else if (aimPlayer->animation == 0x5E5D) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
+                    if (aimPlayer->animation == 24156) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
+            if (aimPlayer->animation == 24109) aimPlayer->animation = 24157;
+            else if (aimPlayer->animation == 24157) { timer=aimPlayer->animationTimer; amount=g_playerWeaponFireDefaultDuration; goto consume; }
             else { aimPlayer->firing = 0; goto spawn; }
         }
     }
@@ -945,12 +945,12 @@ spawn:
     if (aimPlayer->lockState == 2) extra = aimPlayer->lockedTarget;
     Particle_SpawnEffectGroup(&g_actorParticleEffectSystem, aimPlayer, aimPlayer, 0, extra, effect, position, aim,
                      direction, &aimPlayer->aim, -1, (aimPlayer->movementFlags&0x1000)?5:1);
-    if (effect == 0x414 || effect == 0x42D) {
+    if (effect == 1044 || effect == 1069) {
         s32 shots = aimPlayer->shots - 1;
         if (shots < 0) shots = 0;
         aimPlayer->shots = shots;
     }
-    if (aimPlayer->selectedWeapon != 9 && aimPlayer->selectedWeapon != 0x15 && aimPlayer->selectedWeapon != 0x14)
+    if (aimPlayer->selectedWeapon != 9 && aimPlayer->selectedWeapon != 21 && aimPlayer->selectedWeapon != 20)
         g_playerCountedShots[aimPlayer->playerIndex]++;
 }
 
@@ -1024,7 +1024,7 @@ void Player_ResetPlayerWeapons(struct Player *player) {
         if (player->computer != 0) {
             definition = player->definition;
             if (definition != 0 && definition->loadout != 0) {
-                player->weapon = (u16)definition->loadout[1] - 0x4C3;
+                player->weapon = (u16)definition->loadout[1] - 1219;
                 player->selectedAction = player->weapon;
             } else {
                 player->weapon = 0;

@@ -46,7 +46,7 @@ static inline s32 Barrel_ClassifyAnchorTarget(BarrelAnchorActorView *self, Track
     if (*target->kind == 5) {
         return 5;
     }
-    if (target->id == 0x64F) {
+    if (target->id == 1615) {
         return 7;
     }
     if (g_world.visibilityEnabled == 0) {
@@ -54,7 +54,7 @@ static inline s32 Barrel_ClassifyAnchorTarget(BarrelAnchorActorView *self, Track
             && target->controller->state == 2) {
             return 1;
         }
-        if ((self->flags2E0 & 2) && self->id != 0xCA) {
+        if ((self->flags2E0 & 2) && self->id != 202) {
             return 1;
         }
     }
@@ -70,7 +70,7 @@ void Barrel_FillAnchorTargetInfo(BarrelAnchorActorView *actor, Tracker *tracker,
     if ((tracker->team == g_world.kind1Cursor) && !(actor->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->lockedTarget != 0))) {
         tracker->anchor = Cbarrel_SelectCombatTarget(actor, tracker, 1, 0);
     }
-    if ((*actor->kind == 1) && (tracker->mode == 0xB)
+    if ((*actor->kind == 1) && (tracker->mode == 11)
         && Barrel_ClassifyAnchorTarget(actor, tracker, tracker->target) == 4) {
         target = tracker->target;
         kind = 4;
@@ -250,12 +250,12 @@ s32 Barrel_GetFacingSide(BarrelAnchorActorView *self, void *unused, BarrelAnchor
     } else {
         switch (*target->kind) {
         case 1:
-            if (target->animType < 0x10CC) {
+            if (target->animType < 4300) {
                 return 0;
             }
             break;
         case 4:
-            if (target->aiMode != 0x3F) {
+            if (target->aiMode != 63) {
                 return 0;
             }
             break;

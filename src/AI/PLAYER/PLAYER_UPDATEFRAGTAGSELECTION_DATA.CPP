@@ -75,7 +75,7 @@ static inline float getYaw(void) {
 extern void Playerai_InitializePlayerHealth(void *player);
 
 void Playerai_ApplyPeriodicHazardDamage(s32 player, s32 unused) {
-    Playerai_ApplyPeriodicDamage(player, unused, 5, 0x1B);
+    Playerai_ApplyPeriodicDamage(player, unused, 5, 27);
 }
 
 void Playerai_UpdateModelBlend(void *actorView, void *bodyActor) {
@@ -150,7 +150,7 @@ void Playerai_DrawHudSprite1FC(char *player, char *view) {
     screenX = t1 + bx;
     screenY = t2 + by;
 
-    OnScreen_DrawSpriteResource(0x1FC, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, sy, 1);
+    OnScreen_DrawSpriteResource(508, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, sy, 1);
 }
 
 void Playerai_DrawHudSprite1FB(void *unusedPlayer, struct ScreenRectangle *viewport)
@@ -176,7 +176,7 @@ void Playerai_DrawHudSprite1FB(void *unusedPlayer, struct ScreenRectangle *viewp
   by = sy * g_playerHudSprite1FBOffset;
   screenX = ((viewport->width) + ax) - bx;
   screenY = ((viewport->height) + ay) - by;
-  OnScreen_DrawSpriteResource(0x1FB, 0, (s16) ((s32) (((viewport->width) + ax) - bx)), (s16) ((s32) screenY), sx, sy, 1);
+  OnScreen_DrawSpriteResource(507, 0, (s16) ((s32) (((viewport->width) + ax) - bx)), (s16) ((s32) screenY), sx, sy, 1);
 }
 
 void Playerai_DrawHudSprite201(char *player, char *view) {
@@ -206,7 +206,7 @@ void Playerai_DrawHudSprite201(char *player, char *view) {
     screenX = t1 + bx;
     screenY = t2 + by;
 
-    OnScreen_DrawSpriteResource(0x201, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, cz, 1);
+    OnScreen_DrawSpriteResource(513, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, cz, 1);
 }
 
 void *Playerai_ResetProfileState(void *actorObject) {
@@ -220,7 +220,7 @@ s32 Playerai_IsRoundEndState(void *actorObject) {
     Shared_ActorView *player = actorObject;
     s16 action;
     action = player->action;
-    if ((action == 0x15) || (action == 0x13) || (action == 0x14)) {
+    if ((action == 21) || (action == 19) || (action == 20)) {
         return 1;
     }
     return 0;

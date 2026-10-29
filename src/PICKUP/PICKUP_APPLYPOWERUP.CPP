@@ -99,7 +99,7 @@ void *Pickup_FindTargetedEntry(s32 pickupId) {
     s32 i;
 
     v1 = &g_pickupTargetedDefinitions;
-    i = 0xF;
+    i = 15;
     do {
         i -= 1;
         if (((struct PowerupIdEntry *)(v1))->id != pickupId) {
@@ -188,7 +188,7 @@ s32 Pickup_ApplyAmmo(void *player, void *pickupEntry) {
     callback = ((struct PowerupIdEntry *)(pickupEntry))->callback;
     if (((struct ActorPickupCanCollect *)(player))->owner != 0) {
         Gsky_StartFade(((struct ActorPickupCanCollect *)(player))->owner,
-                      0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+                      128, 50, 50, 75, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&g_frontendScreenStatus,
                           ((struct ActorPickupCanCollect *)(player))->owner,
@@ -242,7 +242,7 @@ s32 Pickup_ApplyHealth(void *player, void *pickup) {
         callback = ((struct TimedItemEffect *)(pickup))->callback;
         if (((struct ActorPickupCanCollect *)(player))->owner != 0) {
             Gsky_StartFade(((struct ActorPickupCanCollect *)(player))->owner,
-                          0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+                          128, 50, 50, 75, 0, 0, 2);
             if (resource != 0) {
                 Camera_PostScreenMessage(&g_frontendScreenStatus,
                               ((struct ActorPickupCanCollect *)(player))->owner,
@@ -293,7 +293,7 @@ s32 Pickup_ApplyLifePoints(void *player, void *pickup) {
     callback = ((struct PowerupIdEntry *)(pickup))->callback;
     if (((struct ActorPickupCanCollect *)(player))->owner != 0) {
         Gsky_StartFade(((struct ActorPickupCanCollect *)(player))->owner,
-                      0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+                      128, 50, 50, 75, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&g_frontendScreenStatus,
                           ((struct ActorPickupCanCollect *)(player))->owner,
@@ -367,7 +367,7 @@ s32 Pickup_ApplyPowerup(ActivationActor *player, ActivationSlot *pickup, PickupP
     s16 command;
 
     state_value = &effectDefinition->payloadRecord->payload;
-    command = pickup->pickupId - 0x708;
+    command = pickup->pickupId - 1800;
     switch (command) {
     case 0:
         player->powerupTimerOne = 120.0f;
@@ -380,7 +380,7 @@ s32 Pickup_ApplyPowerup(ActivationActor *player, ActivationSlot *pickup, PickupP
         player->powerupAmount += state_value->amount;
         break;
     case 7:
-        ItemMenu_SetEntry(&player->itemMenu, 1, 0, 0x7FD,
+        ItemMenu_SetEntry(&player->itemMenu, 1, 0, 2045,
                        0, 0, 0, addrLow_Pickup_ToggleEffectAndFlash, addrLow_Pickup_HandleItemUpdate);
         break;
 
@@ -392,7 +392,7 @@ s32 Pickup_ApplyPowerup(ActivationActor *player, ActivationSlot *pickup, PickupP
     callback = pickup->dialogGroupId;
     if (player->messageCamera != 0) {
         Gsky_StartFade(player->messageCamera,
-                      0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+                      128, 50, 50, 75, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&g_frontendScreenStatus,
                           player->messageCamera,

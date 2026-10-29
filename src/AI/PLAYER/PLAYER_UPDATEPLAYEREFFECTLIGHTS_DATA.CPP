@@ -21,8 +21,8 @@ void Playerai_DrawProjectedAimIcon(View *view, CVector3 *point, s32 icon, f32 fr
     f32 y;
     f32 offset;
 
-    if (icon == 0x2DA || icon == 0x2E4 || icon == 0x2BC || icon == 0x2EF || icon == 0x2F0
-        || icon == 0x2F1 || icon == 0x2F2) {
+    if (icon == 730 || icon == 740 || icon == 700 || icon == 751 || icon == 752
+        || icon == 753 || icon == 754) {
         x = view->viewport[2] + view->viewport[0] * 0.5f;
         y = view->viewport[3] + view->viewport[1] * 0.5f;
     } else {
@@ -31,8 +31,8 @@ void Playerai_DrawProjectedAimIcon(View *view, CVector3 *point, s32 icon, f32 fr
             return;
         }
         Gsky_ProjectToScreen(view, point, &x, &y);
-        if (x < -64.0f || (f32) (g_hudReferenceViewportWidth + 0x40) < x || y < -64.0f
-            || (f32) (*(&g_hudReferenceViewportWidth + 1) + 0x40) < y) {
+        if (x < -64.0f || (f32) (g_hudReferenceViewportWidth + 64) < x || y < -64.0f
+            || (f32) (*(&g_hudReferenceViewportWidth + 1) + 64) < y) {
             return;
         }
         if (g_gameSettings.local != 0) {

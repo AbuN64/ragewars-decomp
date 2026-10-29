@@ -25,7 +25,7 @@ void Player_SetPlayerResetPosition(void *actorObject, CVector3 *newResetPosition
   void *positionRecord;
   player->resetPosition = *newResetPosition;
   positionRecord = actorObject;
-  Player_SetPlayerState(positionRecord, positionRecord, 0x11);
+  Player_SetPlayerState(positionRecord, positionRecord, 17);
 }
 
 extern void Player_BuildPlayerViewTransform(void *, MatrixF *);
@@ -58,8 +58,8 @@ void Playerai_AddCappedEventCounter(void *player, s32 increment) {
     wrappedSum = (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->eventCounter) + increment;
     cappedCounter = wrappedSum;
     (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->eventCounter) = wrappedSum;
-    if ((u32) (cappedCounter & 0xFFFF) >= 0x65U) {
-        cappedCounter = 0x64;
+    if ((u32) (cappedCounter & 0xFFFF) >= 101U) {
+        cappedCounter = 100;
     }
     (((struct PlayerForceMarkerCounterView *) ((s8 *) player))->eventCounter) = cappedCounter;
 }
@@ -115,7 +115,7 @@ void Playerai_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
     if (player->aimTarget != 0) {
         if (player->marker.time > 0.0f) {
             player->marker.time = 0;
-            SoundElement_PlayFlatSound(0x578);
+            SoundElement_PlayFlatSound(1400);
             screen = player->message;
             if (screen == 0) return;
             text = g_forceMarkerRemovedText;
@@ -124,7 +124,7 @@ void Playerai_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
             player->attract = attract;
             player->marker.time = 150.0f;
             buildForceMarkerTransform(player, attract, &player->aimNormal);
-            SoundElement_PlayFlatSound(0x578);
+            SoundElement_PlayFlatSound(1400);
             screen = player->message;
             if (screen == 0) return;
             if (attract != 0) text = g_forceMarkerAttractText;

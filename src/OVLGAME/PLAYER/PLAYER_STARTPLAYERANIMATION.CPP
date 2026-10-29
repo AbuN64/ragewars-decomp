@@ -46,7 +46,7 @@ void Player_StartPlayerAnimation(Player *animatedPlayer, s32 animationState) {
     Playerai_InitializePlayerHealth(animatedPlayer);
     Player_ResetPlayerWeapons(animatedPlayer);
     if (g_gameSettings.local == 0) {
-        modelResource = 0x66;
+        modelResource = 102;
     } else if (g_resultExitPending != 0 && ((Shared_ControlView *)animatedPlayer->profile)->transientFlag != 0) {
         modelResource = g_fragTagModelId;
     } else {

@@ -260,7 +260,7 @@ void Playerai_ApplyRangedPitchToMatrix(void *matrix, void *poseEvent) {
     object = event->actor;
     actor = object->player;
     amount = -actor->rangedPitch;
-    if (actor->action == 0xF) {
+    if (actor->action == 15) {
         amount += g_playerStateFifteenPitchOffset;
     }
     PitchMatrix(matrix, amount / (f32)range->pitchDivisor);

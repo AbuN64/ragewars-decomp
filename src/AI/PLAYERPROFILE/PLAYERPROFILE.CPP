@@ -33,7 +33,7 @@ void Player_InitializeProfile(void *profileStorage) {
     u8 *cursor;
 
     XPlus_FillMemory((s32)object, 0, 8);
-    object[0xE] = 0;
+    object[14] = 0;
     Player_SetProfileValue14(object, 0);
     Player_SetProfileValue15(object, 0);
     Player_SetProfileValue16(object, 0);
@@ -48,26 +48,26 @@ void Player_InitializeProfile(void *profileStorage) {
     Player_SetProfileSlotValue(object, 7, 2);
     Player_SetProfileSlotValue(object, 8, 2);
     Player_SetProfileSlotValue(object, 9, 2);
-    Player_SetProfileSlotValue(object, 0xA, 2);
-    Player_SetProfileSlotValue(object, 0x11, 2);
-    Player_SetProfileSlotValue(object, 0x12, 2);
-    object[0x17] = 0;
-    object[0xF] = 0;
+    Player_SetProfileSlotValue(object, 10, 2);
+    Player_SetProfileSlotValue(object, 17, 2);
+    Player_SetProfileSlotValue(object, 18, 2);
+    object[23] = 0;
+    object[15] = 0;
     ((PlayerProfileStorage *)object)->totals[2] = 0;
     ((PlayerProfileStorage *)object)->totals[0] = 0;
     ((PlayerProfileStorage *)object)->totals[1] = 0;
-    object[0x25] = 0;
+    object[37] = 0;
     ((PlayerProfileStorage *)object)->state = 0;
-    object[0xC] = 0;
+    object[12] = 0;
     ((PlayerProfileStorage *)object)->resetSentinelByte = -1;
-    XPlus_FillMemory((s32)((char *)object + 0x26), 0, 0x24);
+    XPlus_FillMemory((s32)((char *)object + 0x26), 0, 36);
     XPlus_FillMemory((s32)((char *)object + 0x7D), 0, 1);
     XPlus_FillMemory((s32)((char *)object + 0x51), 0, 3);
-    XPlus_FillMemory((s32)((char *)object + 0x125), 0, 0x64);
+    XPlus_FillMemory((s32)((char *)object + 0x125), 0, 100);
     Player_SetAchievementFlag7((s32)object, 0);
     Player_SetAchievementFlag7((s32)object, 5);
     Player_SetAchievementFlag7((s32)object, 7);
-    XPlus_FillMemory((s32)((char *)object + 0x57), 0, 0x14);
+    XPlus_FillMemory((s32)((char *)object + 0x57), 0, 20);
     XPlus_FillMemory((s32)((char *)object + 0x54), 0, 3);
     XPlus_FillMemory((s32)((char *)object + 0x4A), 0, 7);
     XPlus_FillMemory((s32)((char *)object + 0x78), 0, 1);
@@ -81,7 +81,7 @@ void Player_InitializeProfile(void *profileStorage) {
     XPlus_FillMemory((s32)((char *)object + 0x88), 0, 5);
     XPlus_FillMemory((s32)((char *)object + 0x8D), 0, 5);
     XPlus_FillMemory((s32)((char *)object + 0x83), 0, 5);
-    i = 0x23;
+    i = 35;
     cursor = object + 0x8C;
     do {
         ((PlayerProfileStorage *)object)->counters[i] = 0;
@@ -89,11 +89,11 @@ void Player_InitializeProfile(void *profileStorage) {
         cursor -= 4;
     } while (i >= 0);
     XPlus_FillMemory((s32)((char *)object + 0x124), 0, 1);
-    object[0x18A] = 1;
-    object[0x18B] = 0x86;
-    object[0x189] = 0;
-    object[0x18C] = 0x84;
-    object[0x18D] = 0;
+    object[394] = 1;
+    object[395] = 134;
+    object[393] = 0;
+    object[396] = 132;
+    object[397] = 0;
 }
 
 extern u8 g_localPlayerProfiles[];
@@ -117,7 +117,7 @@ void Player_InitializeProfileSlot(s32 profileSlot) {
     u8 *entry;
     u8 *config;
 
-    offset = profileSlot * 0x190;
+    offset = profileSlot * 400;
     entry = g_localPlayerProfiles + offset;
     Player_InitializeProfile(entry);
     *(s32 *)(g_profileSlotResetWord + offset) = 0;
@@ -126,11 +126,11 @@ void Player_InitializeProfileSlot(s32 profileSlot) {
     g_profileSlotEnabledFlags[offset] = 1;
     XStdio_FormatBuffer(entry, g_profileSlotNameFormat, profileSlot + 1);
     config = g_playerSettings + profileSlot * 0x96;
-    g_profileSlotSettingsByte7B[offset] = config[0x7B];
-    g_profileSlotSettingsByte7D[offset] = config[0x7D];
-    g_profileSlotSettingsByte79[offset] = config[0x79];
-    g_profileSlotSettingsByte7A[offset] = config[0x7A];
-    g_profileSlotSettingsByte82[offset] = config[0x82];
+    g_profileSlotSettingsByte7B[offset] = config[123];
+    g_profileSlotSettingsByte7D[offset] = config[125];
+    g_profileSlotSettingsByte79[offset] = config[121];
+    g_profileSlotSettingsByte7A[offset] = config[122];
+    g_profileSlotSettingsByte82[offset] = config[130];
 }
 
 void Player_SetProfileValue14(void *profileStorage, unsigned char value) {
@@ -153,7 +153,7 @@ void Player_SetProfileValue15(void *object, unsigned char value) {
 }
 
 int Player_AddFiftyToProfileValue15(void *player) {
-    int v = ((PlayerProfileStorage *)player)->value15 + 0x32;
+    int v = ((PlayerProfileStorage *)player)->value15 + 50;
     ((PlayerProfileStorage *)player)->value15 = (unsigned char)v;
     return v;
 }
@@ -168,7 +168,7 @@ void Player_SetProfileValue16(void *object, unsigned char value) {
 }
 
 int Player_AddFiftyToProfileValue16(void *player) {
-    int v = ((PlayerProfileStorage *)player)->value16 + 0x32;
+    int v = ((PlayerProfileStorage *)player)->value16 + 50;
     ((PlayerProfileStorage *)player)->value16 = (unsigned char)v;
     return v;
 }
@@ -184,7 +184,7 @@ void Player_SetProfileProgress(void *profileStorage, int progress) {
 
 /** Advance the word at offset 0x10 by 0x500. */
 void Player_AdvanceProfileProgress(void *object) {
-    ((PlayerProfileStorage *)object)->progress += 0x500;
+    ((PlayerProfileStorage *)object)->progress += 1280;
 }
 
 /** Return the word stored at offset 0x10. */
@@ -306,16 +306,16 @@ extern void Graphu64_MultiplyAffineMatrices(void *, void *, void *);
 extern s32 Defs_TestBit(void *, s32);
 extern void Defs_SetBitValue(u8 *, s32, s32);
 void Player_SetAchievementFlag2F(Profile *player, s32 achievementIndex) {
-    Defs_SetBitValue(&player->achievementFlags[0x2F], achievementIndex, 1);
+    Defs_SetBitValue(&player->achievementFlags[47], achievementIndex, 1);
 }
 
 s32 Player_HasProfileUnlockFlag(u8 *profileBytes, s32 unlockIndex)
 {
-  if (unlockIndex == 0x10)
+  if (unlockIndex == 16)
   {
     return 1;
   }
-  if (unlockIndex == 0x11)
+  if (unlockIndex == 17)
   {
     if (unlockIndex || profileBytes)
     {
@@ -335,15 +335,15 @@ void Player_SetAchievementFlagByIndex(Profile *player, s32 achievementIndex) {
 
     switch (mappedAchievementIndex) {
     case 16:
-        achievementBits = &player->achievementFlags[0x2E];
+        achievementBits = &player->achievementFlags[46];
         mappedAchievementIndex = 0;
         break;
     case 17:
-        achievementBits = &player->achievementFlags[0x2E];
+        achievementBits = &player->achievementFlags[46];
         mappedAchievementIndex = 1;
         break;
     default:
-        achievementBits = &player->achievementFlags[0x31];
+        achievementBits = &player->achievementFlags[49];
         break;
     }
     Defs_SetBitValue(achievementBits, mappedAchievementIndex, 1);
@@ -355,15 +355,15 @@ s32 Player_GetProfileAchievementFlag(Profile *profile, s32 achievementIndex) {
 
     switch (index) {
     case 16:
-        achievementBits = &profile->achievementFlags[0x2E];
+        achievementBits = &profile->achievementFlags[46];
         index = 0;
         break;
     case 17:
-        achievementBits = &profile->achievementFlags[0x2E];
+        achievementBits = &profile->achievementFlags[46];
         index = 1;
         break;
     default:
-        achievementBits = &profile->achievementFlags[0x31];
+        achievementBits = &profile->achievementFlags[49];
         break;
     }
     return Defs_TestBit(achievementBits, index);

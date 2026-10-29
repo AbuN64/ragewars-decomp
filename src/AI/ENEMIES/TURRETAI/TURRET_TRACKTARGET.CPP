@@ -93,10 +93,10 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
     Graphu64_WrapPeriodicValue(&work.heading);
     actorKind = actor->player.views1C.viewE4_6.kind;
     switch (actorKind) {                              /* irregular */
-    case 0x40B:
+    case 1035:
         Barrel_UpdateTrackGoals(&actor->input, riderState, &work.result.output, 0, 1);
         break;
-    case 0x40C:
+    case 1036:
         AI_DynTurretGetTargetInfo(&actor->player,&riderState->target,&work.result.result);
         break;
     }
@@ -160,7 +160,7 @@ block_12:
     } else if(k_turretPositiveAimTolerance < aimError) goto changed;
     if(riderState->nav.speed != desiredSpeed) {
 changed:
-        Barrel_SetLoopingSound(actor,riderState,0xC3F);
+        Barrel_SetLoopingSound(actor,riderState,3135);
     } else Barrel_StopActorLoopingSound(actor,riderState);
     /* The second ABI word is the actual rider pointer, used as such by this callee. */
     ((void (*)(void *,void *,f32,f32))Barrel_ApplyClampedTurn)(actor,riderState, turret->rate, aimError);
@@ -183,11 +183,11 @@ void Turret_Construct(struct ItemMenuSelectionView *owner, struct TurretSetupSta
     record->second = Turret_DecreaseHealthRomEntry;
     record->third = Turret_CalcOrientMtxRomEntry;
     record->fourth = Turret_SpecialEffectsRomEntry;
-    if (owner->id == 0x40C) {
+    if (owner->id == 1036) {
         record->a = 0;
         record->b = 0;
         record->fourth = Turret_SpecialEffectsRomEntry;
-        record->rate = 0xC8;
+        record->rate = 200;
         record->c = 0;
         record->range = k_turretInitialRange;
         record->speed = k_turretInitialSpeeds;
@@ -199,7 +199,7 @@ void Turret_Setup(LevelActor *actor, struct TurretSetupState *turret) {
     ActorMotionDefinition *record;
 
     record = &((ActorMotionResource *)actor->definition)->motion;
-    if (actor->type == 0x40C) {
+    if (actor->type == 1036) {
         turret->speed = (&k_turretInitialSpeeds)[1];
     } else {
         turret->speed = 0.0f;
@@ -221,7 +221,7 @@ void Turret_Setup(LevelActor *actor, struct TurretSetupState *turret) {
             Actor_RequestActorState(actor, turret, 1);
         }
     } else {
-        Actor_RequestActorState(actor, turret, 0x40);
+        Actor_RequestActorState(actor, turret, 64);
     }
     turret->state = 0;
 }
@@ -230,10 +230,10 @@ void Turret_Advance(char *actor, Obj *state) {
     if (state->hook != 0 && state->hook->fn != 0) {
         state->hook->fn(actor, state);
     }
-    if (((struct ItemMenuSelectionView *)(actor))->id == 0x40C) {
+    if (((struct ItemMenuSelectionView *)(actor))->id == 1036) {
         state->timer += g_frameElapsedTime;
         if (k_turretStateTimeout < state->timer || state->count <= 0) {
-            Actor_RequestActorState(actor, state, 0x40);
+            Actor_RequestActorState(actor, state, 64);
         }
     }
 }
@@ -244,11 +244,11 @@ int Turret_Anim_ACTIVATE(struct Owner *owner) {
     if (activationAnimation != 0) {
         return activationAnimation;
     }
-    return 0x2F44;
+    return 12100;
 }
 
 void Turret_Code_ACTIVATE(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
-        Actor_RequestActorState(a, b, 0x3E);
+        Actor_RequestActorState(a, b, 62);
     }
 }

@@ -93,7 +93,7 @@ void Playerai_UpdateMountedMovement(SharedPlayer *player,PlayerBodyPositionYawVi
     Player_UpdateViewAngles(player,body,&g_playerRideViewAngleParameters);
     offset=0;
     if(player->views5E8.view6B8_50.input&8) {
-        Actor_RequestActorState(mount,&mount->animation,0x2e);
+        Actor_RequestActorState(mount,&mount->animation,46);
         player->views5E8.view704_68.lift=g_playerRideDefaultLift;
         player->views5E8.view6C0_51.movementSpeed=g_playerRideInitialSpeedHalf+g_playerRideInitialSpeedHalf;
     }
@@ -113,7 +113,7 @@ void Playerai_UpdateMountedMovement(SharedPlayer *player,PlayerBodyPositionYawVi
     player->views5E8.view83C_116.bump=result;
     if(g_playerRideBumpThreshold<result) {
         player->views5E8.view83C_116.bump=result-g_playerRideBumpThreshold;
-        if(mount->animationId!=0x2e) {
+        if(mount->animationId!=46) {
             player->views5E8.view6C0_51.movementSpeed*=g_playerRideSpeedDamping;
             player->views5E8.view6C4_54.sideSpeed*=g_playerRideSpeedDamping;
         }
@@ -127,7 +127,7 @@ void Playerai_UpdateMountedMovement(SharedPlayer *player,PlayerBodyPositionYawVi
     else Player_UpdateGroundThrustAndBoost(player,body,&g_playerRideMovementParameters[1]);
     forward=player->views5E8.view6C0_51.movementSpeed;
     if(forward<0.0f ? g_playerRideReverseLiftThreshold < -forward : g_playerRideForwardLiftThreshold < forward)player->views5E8.view704_68.lift=g_playerRideRaisedLift;
-    if(player->views5E8.view810_110.kind==0x136) {
+    if(player->views5E8.view810_110.kind==310) {
         offset=&g_playerRideOffset;
         player->views5E8.view814_112.offset=g_playerRideBaseOffset;
     }

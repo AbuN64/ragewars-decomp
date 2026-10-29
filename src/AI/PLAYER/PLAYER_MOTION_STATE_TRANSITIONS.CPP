@@ -45,7 +45,7 @@ s32 Playerai_TryEnterMotionFlagState(void *player, void *bodyActor) {
     s16 state = ((Shared_ActorView *)player)->action;
     s32 blocked;
 
-    if ((state == 0x15) || (state == 0x13) || (state == 0x14)) {
+    if ((state == 21) || (state == 19) || (state == 20)) {
         blocked = 1;
     } else {
         blocked = 0;
@@ -54,13 +54,13 @@ s32 Playerai_TryEnterMotionFlagState(void *player, void *bodyActor) {
         if ((((LevelActor *)bodyActor)->motionState & 0x20000) == 0) {
             return 0;
         }
-        if (((Shared_ActorView *)player)->action == 0xD) {
+        if (((Shared_ActorView *)player)->action == 13) {
             return 0;
         }
-        if (((Shared_ActorView *)player)->action == 0xE) {
+        if (((Shared_ActorView *)player)->action == 14) {
             return 0;
         }
-        Player_SetPlayerState(player, bodyActor, 0xD);
+        Player_SetPlayerState(player, bodyActor, 13);
         return 1;
     }
     return 0;
@@ -71,14 +71,14 @@ s32 Playerai_TryEnterBodyFlagState(void *player, void *bodyActor) {
     s32 blocked;
     s32 flags;
 
-    if ((state == 0x15) || (state == 0x13) || (state == 0x14)) {
+    if ((state == 21) || (state == 19) || (state == 20)) {
         blocked = 1;
     } else {
         blocked = 0;
     }
     if (blocked == 0) {
         if (((MovementDescriptor *)((LevelActor *)bodyActor)->definition)->body.header.flags & 1) {
-            if (((Shared_ActorView *)player)->action == 0x26) {
+            if (((Shared_ActorView *)player)->action == 38) {
                 return 0;
             }
             if (((Shared_ActorView *)player)->unk_0x0664 & 0x8000) {
@@ -94,7 +94,7 @@ s32 Playerai_TryEnterBodyFlagState(void *player, void *bodyActor) {
     return 0;
 fire:
     ((LevelActor *)bodyActor)->motionState = flags | 0x100;
-    Player_SetPlayerState(player, bodyActor, 0xF);
+    Player_SetPlayerState(player, bodyActor, 15);
     return 1;
 }
 

@@ -48,8 +48,8 @@ void Achieve_EnableLevelWeapons(WeaponPlayer *player) {
         entries = table;
         do {
             id = entries[3];
-            if (id >= 0x4C3) {
-                id -= 0x4C3;
+            if (id >= 1219) {
+                id -= 1219;
                 player->weapons[id][0] = active;
                 player->weapons[id][1] = i;
             }

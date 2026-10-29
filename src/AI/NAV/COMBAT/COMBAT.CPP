@@ -84,7 +84,7 @@ void Nav_UpdateRangedCombat(CloseAttackActor *actor) {
             if (movementTimer <= 0) {
                 brain->timer=Graphu64_NextRandom()%4+12;
                 brain->pattern = Graphu64_NextRandom() % 2;
-                brain->distance = (Graphu64_NextRandom() % 250000) + 0x57E40;
+                brain->distance = (Graphu64_NextRandom() % 250000) + 360000;
             }
             targetPosition = &targetActor->pos;
             Nav_SteerTowardPoint(brain, targetPosition, 2.0f, Scaled_UpdateDifficultyAimJitter(brain));
@@ -172,7 +172,7 @@ block_41:
                 playerValue->buttons |= 0x10;
             }
             if (brain->fireTimer < 0) {
-                brain->fireTimer = ((Graphu64_NextRandom() % 2) + 2) * 0xF;
+                brain->fireTimer = ((Graphu64_NextRandom() % 2) + 2) * 15;
             }
             Portal_DispatchActorBehavior(brain);
         } else {
@@ -320,7 +320,7 @@ halt:
                 brain->player->buttons |= 0x10;
             }
             if (brain->fireTimer < 0) {
-                brain->fireTimer = ((Graphu64_NextRandom() % 1) + 2) * 0xF;
+                brain->fireTimer = ((Graphu64_NextRandom() % 1) + 2) * 15;
             }
             Portal_DispatchActorBehavior(brain);
         } else {
@@ -437,7 +437,7 @@ void Nav_InitPursuitStrafe(void *closeAttackActor) {
     Scaled_ResetBehaviorState(inner);
 
     r1 = Graphu64_NextRandom();
-    inner->timer = r1 % 4 + 0xC;
+    inner->timer = r1 % 4 + 12;
 
     r2 = Graphu64_NextRandom();
     inner->pattern = r2 % 2;

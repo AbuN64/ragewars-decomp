@@ -28,7 +28,7 @@ void Playerai_ApplyStun(SharedPlayer *player, f32 amount) {
 #if defined(VERSION_DE) || defined(VERSION_EU_X)
             && player->views5D8.view5D8_2.controls->team != 0
 #endif
-            && player->views5D8.view5D8_2.controls->mode == 0xB && g_matchRoundCounters->protect > 0)
+            && player->views5D8.view5D8_2.controls->mode == 11 && g_matchRoundCounters->protect > 0)
         && !(player->views122C.view122C_2.options & 0x8000)) {
         stun = player->views5E8.view11D8_149.stun + amount * 15.0f;
         if (75.0f < stun) {
@@ -46,7 +46,7 @@ void Playerai_ApplyStun(SharedPlayer *player, f32 amount) {
         player->views1C.view100_9.flags &= ~0x01000000;
         if (player->views5DC.view5DC_2.view != 0) {
             if (((PlayerFlashView *)player->views5DC.view5DC_2.view)->flash == 0) {
-                Gsky_StartFade((PlayerFlashView *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) Graphu64_RandomFloat(7.5f), 0,
+                Gsky_StartFade((PlayerFlashView *)player->views5DC.view5DC_2.view, 128, 0, 0, 250, (u8) (u32) Graphu64_RandomFloat(7.5f), 0,
                               (u8) (u32) ((player->views5E8.view11D8_149.stun * 0.06666667f - 1.5f) * 15.0f));
             } else {
                 ((PlayerFlashView *)player->views5DC.view5DC_2.view)->flash = 3;

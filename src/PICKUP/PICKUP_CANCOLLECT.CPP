@@ -41,7 +41,7 @@ s32 Pickup_CanCollect(s32 prop, ActorPickupCanCollect *actor) {
         if (g_gameSettings.counters.m_bFragTagOn != 0 && player->model->fragTagEnabled != 0) {
             return 1;
         }
-        powerup = find_entry(&g_pickupPowerupDefinitions, 3, 0x18, id);
+        powerup = find_entry(&g_pickupPowerupDefinitions, 3, 24, id);
         if (powerup != 0) {
             noState3 = 1;
             noState7 = 1;
@@ -63,7 +63,7 @@ s32 Pickup_CanCollect(s32 prop, ActorPickupCanCollect *actor) {
             }
             return 0;
         }
-        weapon = find_entry(&g_pickupWeaponDefinitions, 5, 0x14, id);
+        weapon = find_entry(&g_pickupWeaponDefinitions, 5, 20, id);
         if (weapon != 0) {
             level = Player_GetAmmoCapacity(player, weapon->index, 0);
             if (player->team == g_playerSpecialModelIds[0] || player->team == g_playerSpecialModelIds[1]) {
@@ -71,20 +71,20 @@ s32 Pickup_CanCollect(s32 prop, ActorPickupCanCollect *actor) {
             }
             return player->levels[weapon->index] < level;
         }
-        item = find_entry(&g_pickupHealthDefinitions, 7, 0x18, id);
+        item = find_entry(&g_pickupHealthDefinitions, 7, 24, id);
         if (item != 0) {
             return player->count < Player_GetMaxHealth(player, id);
         }
-        bonus = find_entry((char *)g_pickupAmmoDefinitions, 15, 0x18, id);
+        bonus = find_entry((char *)g_pickupAmmoDefinitions, 15, 24, id);
         if (bonus != 0) {
             return 1;
         }
-        special = find_entry(&g_pickupSpecialDefinitions, 2, 0x10, id);
+        special = find_entry(&g_pickupSpecialDefinitions, 2, 16, id);
         if (special != 0) {
-            if ((player->team == g_playerSpecialModelIds[0] || player->team == g_playerSpecialModelIds[1]) && special->id != 0xBD6) {
+            if ((player->team == g_playerSpecialModelIds[0] || player->team == g_playerSpecialModelIds[1]) && special->id != 3030) {
                 return 1;
             }
-            return special->id != 0xBD6;
+            return special->id != 3030;
         }
         return 0;
     }
@@ -113,35 +113,35 @@ s32 Pickup_DispatchHandler(Other *actor, s32 target, s32 id) {
     s32 result;
     result = 0;
     if (actor->enabled != 0) {
-        entry = find_handler(&g_pickupPowerupDefinitions, 3, 0x18, id);
+        entry = find_handler(&g_pickupPowerupDefinitions, 3, 24, id);
         if (entry != 0) {
             result = entry->handle14(actor, entry);
         }
         if (result != 0) {
             return result;
         }
-        entry = find_handler(&g_pickupWeaponDefinitions, 5, 0x14, id);
+        entry = find_handler(&g_pickupWeaponDefinitions, 5, 20, id);
         if (entry != 0) {
             result = entry->handle10(actor, entry);
         }
         if (result != 0) {
             return result;
         }
-        entry = find_handler(&g_pickupHealthDefinitions, 7, 0x18, id);
+        entry = find_handler(&g_pickupHealthDefinitions, 7, 24, id);
         if (entry != 0) {
             result = entry->handle14(actor, entry);
         }
         if (result != 0) {
             return result;
         }
-        entry = find_handler(&g_pickupSingleDefinitions, 1, 0x14, id);
+        entry = find_handler(&g_pickupSingleDefinitions, 1, 20, id);
         if (entry != 0) {
             result = entry->handle10(actor, entry);
         }
         if (result != 0) {
             return result;
         }
-        entry = find_handler((char *)g_pickupAmmoDefinitions, 15, 0x18, id);
+        entry = find_handler((char *)g_pickupAmmoDefinitions, 15, 24, id);
         if (entry != 0) {
             result = entry->handle14(actor, entry);
         }
@@ -155,14 +155,14 @@ s32 Pickup_DispatchHandler(Other *actor, s32 target, s32 id) {
         if (result != 0) {
             return result;
         }
-        entry = find_handler(&g_pickupTargetedDefinitions, 15, 0x10, id);
+        entry = find_handler(&g_pickupTargetedDefinitions, 15, 16, id);
         if (entry != 0) {
             result = entry->handleC.targeted(actor, entry, target);
         }
         if (result != 0) {
             return result;
         }
-        entry = find_handler(&g_pickupSpecialDefinitions, 2, 0x10, id);
+        entry = find_handler(&g_pickupSpecialDefinitions, 2, 16, id);
         if (entry != 0) {
             result = entry->handleC.plain(actor, entry);
         }
@@ -214,7 +214,7 @@ s32 Pickup_ApplyWeaponPickup(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)
     }
     label = pickup->label; sound = pickup->sound; event = pickup->event;
     if (player->ui) {
-        Gsky_StartFade(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Gsky_StartFade(player->ui, 128, 50, 50, 75, 0, 0, 2);
         if (label != 0) Camera_PostScreenMessage(&g_frontendScreenStatus, player->ui, label[MENU_LANGUAGE]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->position, 0, -1);

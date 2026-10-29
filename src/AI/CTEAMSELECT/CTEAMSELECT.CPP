@@ -44,7 +44,7 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
     f32 *viewport;
     Item *item;
 
-    level = g_gameSettings.hudFade + 0x40;
+    level = g_gameSettings.hudFade + 64;
     fade = menu->m_Alpha * (level < 0x100 ? level : 255.0f);
     item = items;
     while (--count != -1) {
@@ -124,7 +124,7 @@ void TeamSelect_DrawWeaponWheel(CBarrel *menu, s32 unusedView, s32 viewPlayer) {
                 if (weapon < 0) {
                     goto no_icon;
                 }
-                if (weapon >= 0x16) {
+                if (weapon >= 22) {
                 no_icon:
                     item->icon = item->width = 0;
                     item->slot = i;
@@ -239,7 +239,7 @@ void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
         entry = (Entry34 *)&((Block24 *)menu)[slot];
         weapon = entry->weapon;
         if (entry->owned == 0) {
-            SoundElement_PlayFlatSound(0xD4D);
+            SoundElement_PlayFlatSound(3405);
             return;
         }
         if (weapon < 0) {

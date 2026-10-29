@@ -42,7 +42,7 @@ void Cteamselect_DrawTeamWheel(MenuCteamselectDrawTeamWheel *menu, s32 unused1, 
             Graphu64_TransformPoint(&matrix, &offset, &position);
             item->slot = i;
             item->position = position;
-            item->icon = i + 0xC1C;
+            item->icon = i + 3100;
             item->width = 1.0f;
             item->height = 1.0f;
             item++;

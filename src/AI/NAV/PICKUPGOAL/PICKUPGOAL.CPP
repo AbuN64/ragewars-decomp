@@ -93,15 +93,15 @@ void Nav_SetPickupGoalWeights(void *arg) {
     for (i = 0; i < 3; i++) {
         for (node = *(u8 **)(tbl + 0xFC28 + i * 0x14); node != 0; node = *(u8 **)(node + 0x1EC)) {
             switch (*(u16 *)(node + 4)) {
-            case 0x41E:
+            case 1054:
                 link = *(u8 **)(node + 0x12C);
                 if (link == 0 || *link != 1 || !(*(s32 *)(link + 0x100) & 0x300000) || link == (u8 *)*(s32 **)arg) {
                     break;
                 }
-            case 0x402:
-            case 0x404:
-            case 0x40B:
-            case 0x40F:
+            case 1026:
+            case 1028:
+            case 1035:
+            case 1039:
                 navigationSetGoalWeight(ctrl, node + 8, 51200.0f);
                 break;
             default:

@@ -62,13 +62,13 @@ void Playerai_LoadActorModel(void *actor) {
 
     modelKind = ((Shared_ActorView *)actor)->state;
     if (g_gameSettings.counters.m_bFragTagOn != 0 && ((Shared_ActorView *)actor)->controls->transientFlag == 1) {
-        modelKind = 0x13;
+        modelKind = 19;
     }
-    result = Scene_FindActorDefinition(&g_world, 0xB, modelKind);
+    result = Scene_FindActorDefinition(&g_world, 11, modelKind);
     if (result != 0) {
         ((Shared_ActorView *)actor)->model = result;
     } else {
-        result = Scene_FindActorDefinition(&g_world, 0xB, -1);
+        result = Scene_FindActorDefinition(&g_world, 11, -1);
         if (result != 0) {
             ((Shared_ActorView *)actor)->model = result;
         } else {
@@ -87,7 +87,7 @@ void Playerai_UpdateCharacterModel(void *actor) {
 
     base = &g_gameSettings;
     if (base->local == 0) {
-        modelKind = 0x66;
+        modelKind = 102;
     } else if (base->fragTagEnabled != 0 && ((Shared_ActorView *)actor)->controls->transientFlag != 0) {
         modelKind = g_fragTagModelId;
     } else {
@@ -102,11 +102,11 @@ void Playerai_UpdateHeldWeaponModel(Player *actor) {
 
     if (actor->computer != 0) {
         if (g_gameSettings.counters.transitionActive == 0) {
-            modelOffset = 0x17;
+            modelOffset = 23;
             goto after;
         }
     }
-    modelOffset = (g_playerWeaponClassMode == 1) ? 0 : 0x17;
+    modelOffset = (g_playerWeaponClassMode == 1) ? 0 : 23;
 after:
     ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, &actor->weaponModel,
         ((WeaponInfo *)g_weaponInfoByType[actor->selectedAction])->model + modelOffset,
@@ -197,7 +197,7 @@ void Playerai_ApplyDamageOverTime(Shared_ActorView *player, void *source) {
             }
         }
         player->collisionState = 1;
-        Player_ApplyPlayerDamage(player, source, amount << 8, 0, 0x1F);
+        Player_ApplyPlayerDamage(player, source, amount << 8, 0, 31);
         player->recoveryTime -= 22.5f;
     }
 }

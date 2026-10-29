@@ -44,9 +44,9 @@ static inline s32 can_fire(char *player) {
     if (g_gameSettings.controllerMode != 1) {
         return 1;
     }
-    ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((SharedPlayer *)(player))->views1C.view5D4_45.playerIndex * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.selectedWeapon);
+    ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((SharedPlayer *)(player))->views1C.view5D4_45.playerIndex * 400], ((SharedPlayer *)(player))->views5E8.view62E_13.selectedWeapon);
     if (ammo == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
             Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText, g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_languageIndex), Player_GetPlayerIndex(g_playerViewRenderContext, player),
                           1.0f);
@@ -75,7 +75,7 @@ void Weaponai_DecaySpinAndActivateEffect(Shared_Actor *actor, WeaponFireState *w
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.inputFlags & 0x4000) && can_fire(player) && ((SharedPlayer *)(player))->views5E8.chargeView.charge > 0) {
         if (!(((SharedPlayer *)(player))->views122C.view122C_2.options & 0x18400)) {
-            SoundElement_PlayFlatSound(0x7BC);
+            SoundElement_PlayFlatSound(1980);
         }
         ((SharedPlayer *)(player))->views122C.view122C_2.options |= 0x18400;
         ((SharedPlayer *)(player))->fxTime = 25.0f;

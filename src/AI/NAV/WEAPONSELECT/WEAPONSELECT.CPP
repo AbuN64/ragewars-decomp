@@ -47,7 +47,7 @@ void Nav_SelectAvailableWeapon(WeaponSelectBrain *brain, s32 *ammo) {
     holding = count = 0;
     for (i = count; i < 8; i++) {
         weapon = brain->player->views18.view18_2.model->slots[i];
-        weapon -= 0x4C3;
+        weapon -= 1219;
         if (weapon < 0 || ammo[i] == 0 || Playerai_PlayerHasAmmoForWeapon(brain->player, weapon) == 0) {
             continue;
         }

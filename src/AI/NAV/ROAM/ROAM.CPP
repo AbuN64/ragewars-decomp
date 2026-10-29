@@ -85,7 +85,7 @@ store_c:
     }
     if (--((NavigationBrainView *)(actor))->jumpTimer == 0) {
         player = *(void **) actor;
-        state = ((Shared_ActorView *)(player))->action != 0xF;
+        state = ((Shared_ActorView *)(player))->action != 15;
         busy = ((NavigationBrainView *)(actor))->busy != 0;
         held = (((Shared_ActorView *)(player))->unk_0x0038 & 0x3000) != 0;
         if (state && !held && !busy) {

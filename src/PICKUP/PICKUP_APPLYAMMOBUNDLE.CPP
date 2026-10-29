@@ -35,7 +35,7 @@ s32 Pickup_ApplyAmmoBundle(ActorPickupCanCollect *player, MultiChannelItemEffect
     callback = ammoBundle->effect.callback;
     if (player->owner != 0) {
         Gsky_StartFade(player->owner,
-                      0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+                      128, 50, 50, 75, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&g_frontendScreenStatus,
                           player->owner,
@@ -62,7 +62,7 @@ void *Pickup_FindBonusEntry(s32 bonusId) {
     Shared_PickupAmmoDefinition *record;
 
     v1 = (char *)g_pickupAmmoDefinitions;
-    i = 0xF;
+    i = 15;
     do {
         record = (Shared_PickupAmmoDefinition *)v1;
         i -= 1;
@@ -79,7 +79,7 @@ void *Pickup_FindBonusEntry(s32 bonusId) {
 void Pickup_ShowFeedback(void *recipientActor, void *resource, s32 sound, s32 callback) {
     if (((Shared_ActorView *)recipientActor)->message != 0) {
         Gsky_StartFade(((Shared_ActorView *)recipientActor)->message,
-                      0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+                      128, 50, 50, 75, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&g_frontendScreenStatus,
                           ((Shared_ActorView *)recipientActor)->message,

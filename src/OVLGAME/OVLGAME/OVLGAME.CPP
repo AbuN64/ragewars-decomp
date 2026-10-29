@@ -8,15 +8,15 @@ void Ovlgame_InitializeSceneEffectPool(struct CAnimPool *animationPool) {
     SceneEffect *sceneEffect;
     s32 i;
 
-    List_InitializeIntrusive(&animationPool->FreeList, 0x2E8, 0x2EC);
-    List_InitializeIntrusive(&animationPool->UsedList, 0x2E8, 0x2EC);
+    List_InitializeIntrusive(&animationPool->FreeList, 744, 748);
+    List_InitializeIntrusive(&animationPool->UsedList, 744, 748);
     i = 0;
     sceneEffect = animationPool->DynAnims;
     do {
         List_AppendIntrusive(&animationPool->FreeList, sceneEffect);
         i += 1;
         sceneEffect += 1;
-    } while (i < 0x20);
+    } while (i < 32);
 }
 
 #if defined(VERSION_US)

@@ -46,7 +46,7 @@ void Player_PlacePlayerForRound(SharedPlayer *player) {
     Player_ResetRespawnedPlayer(player);
     player->views5E8.view85C_120.w85C = 0;
     if (player->views5DC.view5E0_9.state == 12 && player->views1450.view1450_1.computer != 0 && g_activeLinkSequenceId == 9) {
-        Player_PlacePlayerAtSpawnPoint(player, 0xC1D, scale, 1);
+        Player_PlacePlayerAtSpawnPoint(player, 3101, scale, 1);
     } else {
         Player_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_6.model, scale, 1);
     }
@@ -79,13 +79,13 @@ void Player_UpdateRunEndPlayer(struct Player *player)
                 if (game->local && player->animationDone == 0 && player->profile->bonus == 0) {
                     return;
                 }
-                Player_SetPlayerState(player, player, 0x12);
+                Player_SetPlayerState(player, player, 18);
             } else {
                 Player_PlacePlayerAtSpawnPoint(player, player->model, modelScale, 1);
                 Player_ResetRespawnedPlayer(player);
             }
         } else {
-            Player_SetPlayerState(player, player, 0x12);
+            Player_SetPlayerState(player, player, 18);
         }
         player->resetState = 0;
     }

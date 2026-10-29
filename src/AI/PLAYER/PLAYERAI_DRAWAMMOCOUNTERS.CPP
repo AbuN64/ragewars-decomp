@@ -41,7 +41,7 @@ void Playerai_DrawAmmoCounters(PowerHudPlayer *player, Shared_HudView *view) {
             x=player->a.x*sx+view->x;
             y=player->a.y*sy+view->y+view->height;
             x+=offset;
-            OnScreen_DrawSpriteResource(0xBEA,0,(s16)(x-halfWidth),(s16)(y-sy*g_playerAmmoFirstIconYOffset),sx,sy,1);
+            OnScreen_DrawSpriteResource(3050,0,(s16)(x-halfWidth),(s16)(y-sy*g_playerAmmoFirstIconYOffset),sx,sy,1);
             x-=sx*g_playerAmmoFirstNumberXOffset;
             y-=sy*g_playerAmmoFirstNumberYOffset;
             OnScreen_DrawSpriteNumber(player->first,x,y,sx*numberScale,sy,1,0,0);
@@ -50,7 +50,7 @@ void Playerai_DrawAmmoCounters(PowerHudPlayer *player, Shared_HudView *view) {
             x=player->b.x*sx+view->x;
             y=player->b.y*sy+view->y+view->height;
             x+=offset;
-            OnScreen_DrawSpriteResource(0xBEB,0,(s16)(x-halfWidth),(s16)(y-sy*g_playerAmmoSecondIconYOffset),sx,sy,1);
+            OnScreen_DrawSpriteResource(3051,0,(s16)(x-halfWidth),(s16)(y-sy*g_playerAmmoSecondIconYOffset),sx,sy,1);
             x-=sx*g_playerAmmoSecondNumberXOffset;
             y-=sy*g_playerAmmoSecondNumberYOffset;
             OnScreen_DrawSpriteNumber(player->second,x,y,sx*numberScale,sy,1,0,0);
@@ -59,7 +59,7 @@ void Playerai_DrawAmmoCounters(PowerHudPlayer *player, Shared_HudView *view) {
             x=player->c.x*sx+view->x;
             y=player->c.y*sy+view->y+view->height;
             x+=offset;
-            OnScreen_DrawSpriteResource(0xBEC,0,(s16)(x-halfWidth),(s16)(y-sy*g_playerAmmoThirdIconYOffset),sx,sy,1);
+            OnScreen_DrawSpriteResource(3052,0,(s16)(x-halfWidth),(s16)(y-sy*g_playerAmmoThirdIconYOffset),sx,sy,1);
             x-=sx*g_playerAmmoThirdNumberXOffset;
             y-=sy*g_playerAmmoThirdNumberYOffset;
             OnScreen_DrawSpriteNumber(player->third,x,y,sx*numberScale,sy,1,0,0);

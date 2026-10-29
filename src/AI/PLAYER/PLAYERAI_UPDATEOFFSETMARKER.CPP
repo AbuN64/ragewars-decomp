@@ -37,10 +37,10 @@ extern LinkedWorldFlagsView *g_weaponInfoByType[];
 u8 Playerai_GetImpactSoundEnabled(s32 unused0, s32 soundId) {
     u8 *ptr;
 
-    if (soundId == 0x2DA) {
+    if (soundId == 730) {
         ptr = &g_gameSettings.local;
         if (*ptr != 0) {
-            return ptr[0xE];
+            return ptr[14];
         }
     }
     return 1;

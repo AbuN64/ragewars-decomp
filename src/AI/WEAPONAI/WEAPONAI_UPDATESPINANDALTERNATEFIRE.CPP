@@ -63,9 +63,9 @@ static inline s32 can_fire(char *player) {
     if (g_gameSettings.controllerMode != 1) {
         return 1;
     }
-    ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((SharedPlayer *)(player))->views1C.view5D4_45.playerIndex * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.selectedWeapon);
+    ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((SharedPlayer *)(player))->views1C.view5D4_45.playerIndex * 400], ((SharedPlayer *)(player))->views5E8.view62E_13.selectedWeapon);
     if (ammo == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
             Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_languageIndex), Player_GetPlayerIndex(g_playerViewRenderContext, player),
                           1.0f);
@@ -128,9 +128,9 @@ void Weaponai_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *f
             Actor_RequestActorState(actor, fire, 5);
             fire->mode = 2;
         } else {
-            SoundElement_PlayFlatSound(0xD4D);
+            SoundElement_PlayFlatSound(3405);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
-                Gsky_PostTargetedScreenMessage((g_playerViewRenderContext + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, (u8)g_playerViewRenderContext[0x1809]),
+                Gsky_PostTargetedScreenMessage((g_playerViewRenderContext + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, (u8)g_playerViewRenderContext[6153]),
                               Player_GetPlayerIndex(g_playerViewRenderContext, player), 1.0f);
             }
             fire->mode = 1;
@@ -216,7 +216,7 @@ void Weaponai_UpdateChargeAndRepeatCue(LevelActor *actor, Dest *attack) {
         Actor_RequestActorState(actor, attack, 2);
         Playerai_StopPrimaryAttachedSound(player);
         Playerai_StopSecondaryAttachedSound(player);
-        SoundElement_PlaySoundAtPosition(0x794, *position, position, -1);
+        SoundElement_PlaySoundAtPosition(1940, *position, position, -1);
         Graphu64_EaseValueToward(&attack->charge, (f32)g_weaponActionFiveSpinTarget * g_weaponFirstAlternateChargeScale, 0.4f);
         return;
     }
@@ -225,9 +225,9 @@ void Weaponai_UpdateChargeAndRepeatCue(LevelActor *actor, Dest *attack) {
     if (attack->cueTimer <= 0.0f) {
         attack->cueTimer += g_weaponAlternateChargeCueInterval;
         if (((Shared_ActorView *)player)->remote == 0 && g_playerWeaponClassMode == 1) {
-            Playerai_DispatchWeaponFireEffect(actor->controller, 0x3F9);
+            Playerai_DispatchWeaponFireEffect(actor->controller, 1017);
         } else {
-            Playerai_DispatchWeaponFireEffect(actor->controller, 0x4CB);
+            Playerai_DispatchWeaponFireEffect(actor->controller, 1227);
         }
     }
 }

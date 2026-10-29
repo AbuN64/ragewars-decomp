@@ -194,14 +194,14 @@ void Action_DeactivateBreakable(BreakableHitContext *breakableHitContext) {
 }
 
 void Action_RequestInactiveState(void *a, void *b) {
-    Actor_RequestActorState(a, b, 0x0); }
+    Actor_RequestActorState(a, b, 0); }
 
 void Action_EnableTriggerActor(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void Action_RequestActiveState(void *a, void *b) {
-    Actor_RequestActorState(a, b, 0x1); }
+    Actor_RequestActorState(a, b, 1); }
 
 void Action_DisableTriggerActor(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);

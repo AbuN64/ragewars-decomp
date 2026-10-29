@@ -108,14 +108,14 @@ block_15:
         player->aim2 = desired;
     }
     if (player->selectedWeapon == 1 && player->weaponActionMode == 2) {
-        aimIcon = 0x2C6;
+        aimIcon = 710;
     } else {
         weapon=g_weaponInfoByType[player->selectedWeapon]; aimIcon=weapon->idle;
     }
     selectedWeapon = player->selectedWeapon;
-    lockedIcon = aimIcon + 0x64;
+    lockedIcon = aimIcon + 100;
     allowFallbackLock = 1;
-    if ((selectedWeapon == 1) || (selectedWeapon == 0x12)) {
+    if ((selectedWeapon == 1) || (selectedWeapon == 18)) {
         targetSwitchDelay = g_playerAimLockDelay;
         initialLockDelay = targetSwitchDelay;
     } else {
@@ -125,18 +125,18 @@ block_15:
     switch (player->selectedWeapon) {
     case 7:
         if (player->alternateAimMode != 0) {
-            aimIcon = 0x2E4;
+            aimIcon = 740;
             lockedIcon = -1;
         }
         break;
     case 2:
         if (player->alternateAimMode != 0) {
-            aimIcon = 0x2BC;
+            aimIcon = 700;
             lockedIcon = -1;
         }
         break;
     case 1:
-    case 0x12:
+    case 18:
         aimRotation = Playerai_ComputeAimRotation(player, &lockedTarget, &aimResult.words);
         allowFallbackLock = 0;
         break;
@@ -192,7 +192,7 @@ block_15:
     Graphu64_AddVec3(smoothPosition, smoothPosition, smoothVelocity);
     Graphu64_ScaleVector(smoothVelocity, smoothVelocity, springDamping * smoothingFactor);
     if (lockedTarget != NULL) {
-        weapon=g_weaponInfoByType[player->selectedWeapon]; player->lockedAimModelResource=weapon->locked+0x64;
+        weapon=g_weaponInfoByType[player->selectedWeapon]; player->lockedAimModelResource=weapon->locked+100;
     } else {
         player->lockedAimModelResource = lockedIcon;
     }
@@ -227,7 +227,7 @@ block_15:
                     player->lockState = 1;
                     player->lockTimer = 0.0f;
                 }
-                if (player->selectedWeapon == 0x12) {
+                if (player->selectedWeapon == 18) {
                     aimResult.xyz = lockedTarget->focus;
                 } else {
                     aimResult.xyz = lockedTarget->pos;
@@ -235,7 +235,7 @@ block_15:
                     aimResult.xyz.y += Gobjinst_GetActorHeight(lockedTarget) * g_playerAimTargetHeightScale;
                 }
                 if (player->selectedWeapon == 1 && player->weaponActionMode == 2) {
-                    aimIcon = 0x2C7;
+                    aimIcon = 711;
                 } else {
                     weapon=g_weaponInfoByType[player->selectedWeapon]; aimIcon=weapon->locked;
                 }

@@ -56,5 +56,5 @@ void Playerai_StopSecondaryAttachedSound(void *player) {
 
 void Playerai_StartTransitionState(void *player, s32 transitionParameter) {
     (((struct PlayerWeaponTransitionParameterView *) ((s8 *) player))->transitionParameter) = transitionParameter;
-    Player_SetPlayerState(player, player, 0x10);
+    Player_SetPlayerState(player, player, 16);
 }

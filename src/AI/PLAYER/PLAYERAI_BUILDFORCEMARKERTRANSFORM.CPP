@@ -79,9 +79,9 @@ void Playerai_DrawForceMarker(char *player) {
     s32 index;
 
     if (object->forceMarkerModelSelector != 0) {
-        index = Scene_FindModelIdIndex(&g_world, 0xC84);
+        index = Scene_FindModelIdIndex(&g_world, 3204);
     } else {
-        index = Scene_FindModelIdIndex(&g_world, 0xC85);
+        index = Scene_FindModelIdIndex(&g_world, 3205);
     }
     if (index != -1) {
         Geometry_QueueDirectModel(Scene_GetIndexedModelResource(&g_world, index),
@@ -93,7 +93,7 @@ void Playerai_ClearDamageTimers(s32 player) {
     s32 effectIndex;
     void *effectBase;
     effectIndex = 4;
-    effectBase = player + 0x60;
+    effectBase = player + 96;
     do {
         (((struct PlayerForceMarkerStateView *) ((s8 *) effectBase))->remainingTime) = 0;
         effectIndex -= 1;

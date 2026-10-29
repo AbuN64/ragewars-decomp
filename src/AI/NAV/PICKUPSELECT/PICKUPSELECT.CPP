@@ -21,44 +21,44 @@ s32 Nav_SelectPickupGoal(PickupGoalControllerView *controller) {
 
         switch (controller->goalSet) {
         case 0:
-            buffer[0] = 0xBC6;
-            buffer[1] = 0xBC7;
-            buffer[2] = 0xBC4;
-            buffer[3] = 0xBC5;
-            buffer[4] = 0xBC8;
-            buffer[5] = 0xBC9;
-            buffer[6] = 0x6BA;
-            buffer[7] = 0x6BB;
+            buffer[0] = 3014;
+            buffer[1] = 3015;
+            buffer[2] = 3012;
+            buffer[3] = 3013;
+            buffer[4] = 3016;
+            buffer[5] = 3017;
+            buffer[6] = 1722;
+            buffer[7] = 1723;
             break;
         case 1:
-            buffer[0] = 0x6BA;
-            buffer[1] = 0x6BB;
+            buffer[0] = 1722;
+            buffer[1] = 1723;
             break;
         case 2:
-            buffer[0] = 0x6BA;
+            buffer[0] = 1722;
             break;
         case 3:
-            buffer[0] = 0x6BB;
+            buffer[0] = 1723;
             break;
         case 4:
-            buffer[0] = 0xBC6;
-            buffer[1] = 0xBC7;
-            buffer[2] = 0xBC4;
-            buffer[3] = 0xBC5;
-            buffer[4] = 0xBC8;
-            buffer[5] = 0xBC9;
+            buffer[0] = 3014;
+            buffer[1] = 3015;
+            buffer[2] = 3012;
+            buffer[3] = 3013;
+            buffer[4] = 3016;
+            buffer[5] = 3017;
             break;
         case 5:
-            buffer[0] = 0xBC6;
-            buffer[1] = 0xBC7;
+            buffer[0] = 3014;
+            buffer[1] = 3015;
             break;
         case 6:
-            buffer[0] = 0xBC4;
-            buffer[1] = 0xBC5;
+            buffer[0] = 3012;
+            buffer[1] = 3013;
             break;
         case 7:
-            buffer[0] = 0xBC8;
-            buffer[1] = 0xBC9;
+            buffer[0] = 3016;
+            buffer[1] = 3017;
             break;
         }
 
@@ -115,44 +115,44 @@ int Nav_SelectPickupGoalEu(void *self) {
 
         switch (controller->goalSet) {
         case 0:
-            buffer[0] = 0xBC6;
-            buffer[1] = 0xBC7;
-            buffer[2] = 0xBC4;
-            buffer[3] = 0xBC5;
-            buffer[4] = 0xBC8;
-            buffer[5] = 0xBC9;
-            buffer[6] = 0x6BA;
-            buffer[7] = 0x6BB;
+            buffer[0] = 3014;
+            buffer[1] = 3015;
+            buffer[2] = 3012;
+            buffer[3] = 3013;
+            buffer[4] = 3016;
+            buffer[5] = 3017;
+            buffer[6] = 1722;
+            buffer[7] = 1723;
             break;
         case 1:
-            buffer[0] = 0x6BA;
-            buffer[1] = 0x6BB;
+            buffer[0] = 1722;
+            buffer[1] = 1723;
             break;
         case 2:
-            buffer[0] = 0x6BA;
+            buffer[0] = 1722;
             break;
         case 3:
-            buffer[0] = 0x6BB;
+            buffer[0] = 1723;
             break;
         case 4:
-            buffer[0] = 0xBC6;
-            buffer[1] = 0xBC7;
-            buffer[2] = 0xBC4;
-            buffer[3] = 0xBC5;
-            buffer[4] = 0xBC8;
-            buffer[5] = 0xBC9;
+            buffer[0] = 3014;
+            buffer[1] = 3015;
+            buffer[2] = 3012;
+            buffer[3] = 3013;
+            buffer[4] = 3016;
+            buffer[5] = 3017;
             break;
         case 5:
-            buffer[0] = 0xBC6;
-            buffer[1] = 0xBC7;
+            buffer[0] = 3014;
+            buffer[1] = 3015;
             break;
         case 6:
-            buffer[0] = 0xBC4;
-            buffer[1] = 0xBC5;
+            buffer[0] = 3012;
+            buffer[1] = 3013;
             break;
         case 7:
-            buffer[0] = 0xBC8;
-            buffer[1] = 0xBC9;
+            buffer[0] = 3016;
+            buffer[1] = 3017;
             break;
         }
 

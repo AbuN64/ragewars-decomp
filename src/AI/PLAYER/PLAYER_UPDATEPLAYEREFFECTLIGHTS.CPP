@@ -23,7 +23,7 @@ void Playerai_DrawAimHud(SharedPlayer *player, void *view) {
     if (player->views5D8.view5D8_9.profile->remote == 1 && g_gameSettings.counters.m_bFragTagOn != 0) {
         return;
     }
-    if (player->views5E8.view650_17.action == 0x27) {
+    if (player->views5E8.view650_17.action == 39) {
         return;
     }
     if (player->views1C.view594_40.mode == 2 && player->views5E8.view62E_14.weapon == 3) {
@@ -32,10 +32,10 @@ void Playerai_DrawAimHud(SharedPlayer *player, void *view) {
     if (Tsmos_IsFrontendActive() != 0) {
         return;
     }
-    if (player->views5E8.view798_96.carried == 0x2DA) {
+    if (player->views5E8.view798_96.carried == 730) {
         if (player->views1C.view594_40.mode == 1) {
             if (player->views1C.viewE4_7.kind != g_playerSpecialModelIds[0] && player->views1C.viewE4_7.kind != g_playerSpecialModelIds[1]) {
-                player->views5E8.view798_96.carried = 0x2EF;
+                player->views5E8.view798_96.carried = 751;
                 if ((u8) player->views1C.view48C_35.state - 2U < 2) {
                     player->views5E8.view7BC_102.timer = 0.0f;
                 } else if (player->views1C.view523_37.busy != 0) {
@@ -45,10 +45,10 @@ void Playerai_DrawAimHud(SharedPlayer *player, void *view) {
                 }
             }
         } else if (player->views1C.viewE4_7.kind != g_playerSpecialModelIds[0] && player->views1C.viewE4_7.kind != g_playerSpecialModelIds[1]) {
-            player->views5E8.view798_96.carried = 0x2F1;
+            player->views5E8.view798_96.carried = 753;
             if (player->views5E8.view62E_14.weapon == 9 && player->views1C.view5A0_42.charge > 0.0f) {
                 player->views5E8.view7BC_102.timer = 1.0f;
-            } else if (player->views1C.view48C_35.state == 0xB || player->views1C.view48C_35.state == 3 || player->views1C.view48C_35.state == 2) {
+            } else if (player->views1C.view48C_35.state == 11 || player->views1C.view48C_35.state == 3 || player->views1C.view48C_35.state == 2) {
                 player->views5E8.view7BC_102.timer = 0.0f;
             } else if (player->views1C.view523_37.busy != 0) {
                 player->views5E8.view7BC_102.timer = 0.0f;
@@ -56,7 +56,7 @@ void Playerai_DrawAimHud(SharedPlayer *player, void *view) {
                 player->views5E8.view7BC_102.timer = 1.0f;
             }
         } else {
-            player->views5E8.view798_96.carried = 0x302;
+            player->views5E8.view798_96.carried = 770;
             player->views5E8.view7BC_102.timer = 0.0f;
         }
     }
@@ -64,26 +64,26 @@ void Playerai_DrawAimHud(SharedPlayer *player, void *view) {
 
     icon = player->views5E8.view7B8_100.target;
     show = 1;
-    if (icon == 0x2DA && g_frontendScreenStatus.settings.local != 0) {
+    if (icon == 730 && g_frontendScreenStatus.settings.local != 0) {
         show = g_playerAimHudEnabled;
     }
     if (icon != -1) {
         switch (icon) {
-        case 0x2DA:
-        case 0x2EF:
-        case 0x2F0:
+        case 730:
+        case 751:
+        case 752:
             scale = 8.0f;
             break;
-        case 0x2BC:
-        case 0x2E4:
-        case 0x2F1:
-        case 0x2F2:
-        case 0x302:
-        case 0x320:
-        case 0x32A:
-        case 0x32B:
-        case 0x35C:
-        case 0x35D:
+        case 700:
+        case 740:
+        case 753:
+        case 754:
+        case 770:
+        case 800:
+        case 810:
+        case 811:
+        case 860:
+        case 861:
             scale = 32.0f;
             break;
         default:
@@ -97,26 +97,26 @@ void Playerai_DrawAimHud(SharedPlayer *player, void *view) {
 
     icon = player->views5E8.view798_96.carried;
     show = 1;
-    if (icon == 0x2DA && g_frontendScreenStatus.settings.local != 0) {
+    if (icon == 730 && g_frontendScreenStatus.settings.local != 0) {
         show = g_playerAimHudEnabled;
     }
     if (icon != -1) {
         switch (icon) {
-        case 0x2DA:
-        case 0x2EF:
-        case 0x2F0:
+        case 730:
+        case 751:
+        case 752:
             scale = 8.0f;
             break;
-        case 0x2BC:
-        case 0x2E4:
-        case 0x2F1:
-        case 0x2F2:
-        case 0x302:
-        case 0x320:
+        case 700:
+        case 740:
+        case 753:
+        case 754:
+        case 770:
+        case 800:
             scale = 32.0f;
             break;
-        case 0x2F3:
-        case 0x2F4:
+        case 755:
+        case 756:
         default:
             scale = 16.0f;
             break;

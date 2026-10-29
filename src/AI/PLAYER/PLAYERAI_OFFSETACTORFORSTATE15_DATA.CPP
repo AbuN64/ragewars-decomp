@@ -50,7 +50,7 @@ void Playerai_BeginRoundEndWait(Shared_ActorView *widget) {
     widget->marker.word = 0;
     widget->flags = clearedActorFlags | 0x01000000;
     if (widget->animationStateTable == &g_playerSpecialAnimationTable) {
-        widget->effectId = 0x5E24;
+        widget->effectId = 24100;
     } else {
         widget->effectId = 1;
     }
@@ -69,7 +69,7 @@ void Playerai_UpdateRoundEndWait(Shared_ActorView *player) {
     player->marker.word = 0;
     player->flags |= 0x01000000;
     if (player->animationStateTable == &g_playerSpecialAnimationTable) {
-        player->effectId = 0x5E24;
+        player->effectId = 24100;
     } else {
         player->effectId = 1;
     }
@@ -82,9 +82,9 @@ void Playerai_UpdateRoundEndWait(Shared_ActorView *player) {
     if ((mode = &g_gameSettings.counters)->round != 0 && mode->elapsed != 0) {
         fire:
         if ((mode = &g_gameSettings.counters)->round != 0 && 0 == mode->elapsed) {
-            Player_SetPlayerState(player, player, 0x14);
+            Player_SetPlayerState(player, player, 20);
         } else {
-            Player_SetPlayerState(player, player, 0x13);
+            Player_SetPlayerState(player, player, 19);
         }
 
     }
@@ -150,7 +150,7 @@ void Playerai_UpdateRunEndTransition(void *runEndPlayer)
 
 void Playerai_RequestTrackFifty(s32 requestValue) {
     g_playerTrackFiftyRequest = requestValue;
-    CCinema_RequestTrackWithCallbacks(0x50, 0, &g_playerTrackFiftyCallbacks);
+    CCinema_RequestTrackWithCallbacks(80, 0, &g_playerTrackFiftyCallbacks);
 }
 
 void Playerai_UpdateSequenceWait(void *player) {
@@ -169,4 +169,4 @@ void Playerai_UpdateSequenceWait(void *player) {
     }
 }
 
-void Playerai_StartSequenceTen(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0xA); }
+void Playerai_StartSequenceTen(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 10); }

@@ -63,7 +63,7 @@ void Nav_AccumulateNodeTickCosts(void) {
         do {
             node->extra =
                 node->extra +
-                (f32) (node->ticks * 0x1E) * k;
+                (f32) (node->ticks * 30) * k;
             node = node->next;
         } while (node != 0);
     }

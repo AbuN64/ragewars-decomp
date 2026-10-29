@@ -104,7 +104,7 @@ run:
 #else
             Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team0SelectedNotice);
 #endif
-            SoundElement_PlayFlatSound(0x2E6);
+            SoundElement_PlayFlatSound(742);
             break;
         case 1:
 #ifdef VERSION_EU
@@ -114,7 +114,7 @@ run:
 #else
             Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team1SelectedNotice);
 #endif
-            SoundElement_PlayFlatSound(0x2E4);
+            SoundElement_PlayFlatSound(740);
             break;
         case 2:
 #ifdef VERSION_EU
@@ -124,7 +124,7 @@ run:
 #else
             Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team2SelectedNotice);
 #endif
-            SoundElement_PlayFlatSound(0x2E8);
+            SoundElement_PlayFlatSound(744);
             break;
         case 3:
 #ifdef VERSION_EU
@@ -134,7 +134,7 @@ run:
 #else
             Camera_PostScreenMessage(&g_frontendScreenStatus, player->views5DC.view5DC_1.view, g_team3SelectedNotice);
 #endif
-            SoundElement_PlayFlatSound(0x2EC);
+            SoundElement_PlayFlatSound(748);
             break;
         }
         /* fall through */

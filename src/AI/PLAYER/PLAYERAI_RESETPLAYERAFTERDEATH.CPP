@@ -74,7 +74,7 @@ void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, PlayerRespawnBodyView 
                             out++;
                         }
                     }
-                    if (other->views5D8.view5D8_2.controls->mode == 0xE) {
+                    if (other->views5D8.view5D8_2.controls->mode == 14) {
                         leader = other;
                     }
                 }
@@ -180,7 +180,7 @@ void Playerai_TryStartPlayerSequence(PlayerSequenceActorView *playerActor, void 
         CCinema_RequestTrackWithCallbacks(sequenceType, 0, (VoidCallback)&g_playerSequenceCallbacks);
     }
 
-    resource = Scene_FindActorDefinition(&g_world, -1, 0xC45);
+    resource = Scene_FindActorDefinition(&g_world, -1, 3141);
     if (resource != 0) {
         playerActor->scaleX = ((PlayerSequenceResourceView *)(resource))->scaleX;
         playerActor->scaleY = ((PlayerSequenceResourceView *)(resource))->scaleY;

@@ -83,8 +83,8 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
     char *global;
     char *state;
 
-    List_InitializeIntrusive(&pool->m_FreeList, 0x16DC, 0x16E0);
-    List_InitializeIntrusive(&pool->m_ActiveList, 0x16DC, 0x16E0);
+    List_InitializeIntrusive(&pool->m_FreeList, 5852, 5856);
+    List_InitializeIntrusive(&pool->m_ActiveList, 5852, 5856);
     Control_SetControllerMode(0);
     Cache_DrainAndCompactResources(0);
     global = g_gameSettings;
@@ -120,7 +120,7 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
         i = 0;
         player_index = i;
         attribute_offset = i;
-        entry_offset = 0xD0;
+        entry_offset = 208;
         object_offset = i;
 initialize_object:
             entry = global + entry_offset;
@@ -172,9 +172,9 @@ initialize_object:
                 List_PrependIntrusive(&pool->m_ActiveList, object);
             }
             player_index += 2;
-            attribute_offset += 0x224;
-            entry_offset += 0x96;
-            object_offset += 0x16E8;
+            attribute_offset += 548;
+            entry_offset += 150;
+            object_offset += 5864;
             if (++i < pool->count) {
                 goto initialize_object;
             }
@@ -234,9 +234,9 @@ initialized:
 }
 
 void Player_ResetMenuPool(struct MenuPlayerPoolRecord *record) {
-    XPlus_FillMemory(record, 0, 0x44);
-    List_InitializeIntrusive(&record->m_FreeList, 0x16DC, 0x16E0);
-    List_InitializeIntrusive(&record->m_ActiveList, 0x16DC, 0x16E0);
+    XPlus_FillMemory(record, 0, 68);
+    List_InitializeIntrusive(&record->m_FreeList, 5852, 5856);
+    List_InitializeIntrusive(&record->m_ActiveList, 5852, 5856);
     record->m_pmePlayers = 0;
     record->m_Players = 0;
     record->word8 = 0;

@@ -14,27 +14,27 @@ void Pickup_NoOp_de(void) {}
 #include "TYPES.H"
 
 s32 Pickup_ClassifyMenuCode(s32 menuCode) {
-    if ((menuCode == 0x7CF) || (menuCode == 0xBB7) || (menuCode == 0xF9F) ||
-        (menuCode == 0x1387) || (menuCode == 0x176F) || (menuCode == 0x1B57) ||
-        (menuCode == 0x63)) {
+    if ((menuCode == 1999) || (menuCode == 2999) || (menuCode == 3999) ||
+        (menuCode == 4999) || (menuCode == 5999) || (menuCode == 6999) ||
+        (menuCode == 99)) {
         return 0;
     }
-    if ((u32)(menuCode - 0x3E8) < 0x3E8) {
+    if ((u32)(menuCode - 1000) < 1000) {
         return 1;
     }
-    if ((u32)(menuCode - 0x7D0) < 0x3E8) {
+    if ((u32)(menuCode - 2000) < 1000) {
         return 2;
     }
-    if ((u32)(menuCode - 0xBB8) < 0x3E8) {
+    if ((u32)(menuCode - 3000) < 1000) {
         return 3;
     }
-    if ((u32)(menuCode - 0xFA0) < 0x3E8) {
+    if ((u32)(menuCode - 4000) < 1000) {
         return 4;
     }
-    if ((u32)(menuCode - 0x1388) < 0x3E8) {
+    if ((u32)(menuCode - 5000) < 1000) {
         return 5;
     }
-    if ((u32)(menuCode - 0x1770) < 0x3E8) {
+    if ((u32)(menuCode - 6000) < 1000) {
         return 6;
     }
     return -1;

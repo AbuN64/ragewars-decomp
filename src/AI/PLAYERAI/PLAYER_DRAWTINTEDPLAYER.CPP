@@ -114,7 +114,7 @@ void Playerai_UpdateDamageTimers(void *actor) {
     zero = 0.0f;
     damageUnitScale = g_playerDamageTimerConstants[1];
     i = 0;
-    damageEffectOffset = 0x1248;
+    damageEffectOffset = 4680;
     do {
         damageEffect = (char *)actor + damageEffectOffset;
         remainingFrames = ((CPlayerDamageOverTime *)(damageEffect))->m_FramesRemaining;
@@ -149,7 +149,7 @@ void Playerai_UpdateDamageTimers(void *actor) {
             Playerai_ApplyDamagePacket(actor, &((PlayerDamageVisualState *)(actor))->damageState, (void *)&damage);
         }
         i++;
-        damageEffectOffset += 0x18;
+        damageEffectOffset += 24;
     } while (i < 5);
 }
 

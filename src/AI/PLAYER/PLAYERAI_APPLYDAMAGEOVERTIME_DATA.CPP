@@ -48,7 +48,7 @@ void Playerai_ApplyPeriodicDamage(void *player, s32 unused, s32 period, s32 kind
     if (((SharedPlayer *)(player))->views5E8.view80C_107.mount != 0) {
         period /= 5;
     }
-    if (((SharedPlayer *)(player))->views5E8.view670_30.shield > 0.0f && kind != 0x20) {
+    if (((SharedPlayer *)(player))->views5E8.view670_30.shield > 0.0f && kind != 32) {
         return;
     }
     tick = (((SharedPlayer *)(player))->views5E8.view84C_149.periodicTick + 1) % period;

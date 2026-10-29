@@ -150,7 +150,7 @@ void Scene_UnpackVisibilityGeometry(SceneVisibilityGeometryView *world, void ***
         world->nedges = count;
         List_InitializeIntrusive(&world->listA, 0, 4);
         List_InitializeIntrusive(&world->listB, 0, 4);
-        for (k = 0; k < 0x30; k++) {
+        for (k = 0; k < 48; k++) {
             List_AppendIntrusive(&world->listB, &world->buckets[k]);
         }
         n = world->nfaces;

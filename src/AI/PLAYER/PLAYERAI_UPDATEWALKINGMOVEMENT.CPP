@@ -63,17 +63,17 @@ void Playerai_UpdateWalkingMovement(void *playerContext, void *bodyContext) {
         }
         kind = player->views1C.viewE4_7.kind;
         if (kind == g_playerSpecialModelIds[2]) {
-            if (player->views5E8.view86C_125.animationId == 0x7DA && player->views1C.view104_11.idleTime >= g_playerWalkAnimationSwapTime) player->views5E8.view86C_125.animationId = 0x7DB; else player->views5E8.view86C_125.animationId = 0x7DA;
+            if (player->views5E8.view86C_125.animationId == 2010 && player->views1C.view104_11.idleTime >= g_playerWalkAnimationSwapTime) player->views5E8.view86C_125.animationId = 2011; else player->views5E8.view86C_125.animationId = 2010;
             return;
         }
         if (kind == g_playerSpecialModelIds[0]) {
             currentFireAnimation = player->views5E8.view86C_125.animationId;
-            if (currentFireAnimation == 0xFA0 && player->views1C.view104_11.idleTime < g_playerWalkFireFA0Duration) return;
-            if (currentFireAnimation == 0x1004 && player->views1C.view104_11.idleTime < g_playerWalkFire1004Duration) return;
+            if (currentFireAnimation == 4000 && player->views1C.view104_11.idleTime < g_playerWalkFireFA0Duration) return;
+            if (currentFireAnimation == 4100 && player->views1C.view104_11.idleTime < g_playerWalkFire1004Duration) return;
         }
         if (body->flags & 0xC0000) {
-            if (player->views5E8.view6C0_51.movementSpeed >= 0.0f) player->views5E8.view86C_125.animationId = 0xA32;
-            else player->views5E8.view86C_125.animationId = 0xA37;
+            if (player->views5E8.view6C0_51.movementSpeed >= 0.0f) player->views5E8.view86C_125.animationId = 2610;
+            else player->views5E8.view86C_125.animationId = 2615;
             return;
         }
         forwardSpeedMagnitude = player->views5E8.view6C0_51.movementSpeed;
@@ -86,57 +86,57 @@ void Playerai_UpdateWalkingMovement(void *playerContext, void *bodyContext) {
         if (forwardSpeedMagnitude < strafeSpeed) {
 sideways:
             if (player->views5E8.view6C4_54.sideSpeed < 0.0f) {
-                if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) { player->views5E8.view86C_125.animationId = 0x802; return; }
+                if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) { player->views5E8.view86C_125.animationId = 2050; return; }
                 leftStrafeAnimation = player->views5E8.view86C_125.animationId;
-                if ((u32)(leftStrafeAnimation - 0x5E56) < 7U) {
-                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E5BDuration) player->views5E8.view86C_125.animationId = 0x5E2B;
+                if ((u32)(leftStrafeAnimation - 24150) < 7U) {
+                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E5BDuration) player->views5E8.view86C_125.animationId = 24107;
                     return;
                 }
-                if (leftStrafeAnimation == 0x5E5E) {
-                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E56Duration) player->views5E8.view86C_125.animationId = 0x5E2B;
+                if (leftStrafeAnimation == 24158) {
+                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E56Duration) player->views5E8.view86C_125.animationId = 24107;
                     return;
                 }
-                player->views5E8.view86C_125.animationId = 0x5E2B;
+                player->views5E8.view86C_125.animationId = 24107;
             } else {
-                if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) { player->views5E8.view86C_125.animationId = 0x80C; return; }
+                if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) { player->views5E8.view86C_125.animationId = 2060; return; }
                 rightStrafeAnimation = player->views5E8.view86C_125.animationId;
-                if ((u32)(rightStrafeAnimation - 0x5E56) < 7U) {
-                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E5CDuration) player->views5E8.view86C_125.animationId = 0x5E2C;
+                if ((u32)(rightStrafeAnimation - 24150) < 7U) {
+                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E5CDuration) player->views5E8.view86C_125.animationId = 24108;
                     return;
                 }
-                if (rightStrafeAnimation == 0x5E5E) {
-                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E57Duration) player->views5E8.view86C_125.animationId = 0x5E2C;
+                if (rightStrafeAnimation == 24158) {
+                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E57Duration) player->views5E8.view86C_125.animationId = 24108;
                     return;
                 }
-                player->views5E8.view86C_125.animationId = 0x5E2C;
+                player->views5E8.view86C_125.animationId = 24108;
             }
         } else {
 forward:
             if (player->views5E8.view6C0_51.movementSpeed >= 0.0f) {
-                if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) { player->views5E8.view86C_125.animationId = 0x7DA; return; }
+                if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) { player->views5E8.view86C_125.animationId = 2010; return; }
                 forwardAnimation = player->views5E8.view86C_125.animationId;
-                if ((u32)(forwardAnimation - 0x5E56) < 9U) {
-                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E59Duration) player->views5E8.view86C_125.animationId = 0x5E29;
+                if ((u32)(forwardAnimation - 24150) < 9U) {
+                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E59Duration) player->views5E8.view86C_125.animationId = 24105;
                     return;
                 }
-                if (forwardAnimation == 0x5E5E) {
-                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E54Duration) player->views5E8.view86C_125.animationId = 0x5E29;
+                if (forwardAnimation == 24158) {
+                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E54Duration) player->views5E8.view86C_125.animationId = 24105;
                     return;
                 }
-                player->views5E8.view86C_125.animationId = 0x5E29;
+                player->views5E8.view86C_125.animationId = 24105;
             } else {
-                if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) { player->views5E8.view86C_125.animationId = 0x7DF; return; }
+                if (player->views13B4.view13B4_3.character != &g_playerSpecialAnimationTable) { player->views5E8.view86C_125.animationId = 2015; return; }
                 backwardAnimation = player->views5E8.view86C_125.animationId;
-                if ((u32)(backwardAnimation - 0x5E56) < 7U) {
-                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E5ADuration) player->views5E8.view86C_125.animationId = 0x5E2A;
+                if ((u32)(backwardAnimation - 24150) < 7U) {
+                    if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E5ADuration) player->views5E8.view86C_125.animationId = 24106;
                     return;
                 }
-                nextAnimation = 0x5E5E;
+                nextAnimation = 24158;
                 if (backwardAnimation != nextAnimation) {
-                    nextAnimation = 0x5E2A;
+                    nextAnimation = 24106;
                     player->views5E8.view86C_125.animationId = nextAnimation;
                 } else {
-                    nextAnimation = 0x5E2A;
+                    nextAnimation = 24106;
                     if (player->views1C.view104_11.idleTime >= g_playerWalkFire5E55Duration) player->views5E8.view86C_125.animationId = nextAnimation;
                 }
             }

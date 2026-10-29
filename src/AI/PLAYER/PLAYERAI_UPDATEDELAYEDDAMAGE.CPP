@@ -25,7 +25,7 @@ void Playerai_UpdateDelayedDamage(void *player) {
         if ((remainingDelay <= 0.0f) && !(g_gameSettings & 1)) {
             Barrel_FillDamagePacket(&damage,
                           ((PlayerWeaponDelayStateView *)(player))->damageSource,
-                          ((PlayerWeaponDelayStateView *)(player))->delayedDamage + 0x1900,
+                          ((PlayerWeaponDelayStateView *)(player))->delayedDamage + 6400,
                           25.599998f, 0x4000, 0);
             Playerai_ApplyDamagePacket(player, &((PlayerWeaponDelayStateView *)(player))->damageState, &damage);
         }

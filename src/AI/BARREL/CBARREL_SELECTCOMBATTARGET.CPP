@@ -133,11 +133,11 @@ s32 Cbarrel_UpdateTrackerAim(TrackerAimActorView *actor, Plan *tracker, TrackerA
         targetKind = 2;
         if (candidate != tracker->currentTarget) {
             if (*candidate->definition == 5) targetKind=5;
-            else if(candidate->objectId==0x64F) targetKind=7;
+            else if(candidate->objectId==1615) targetKind=7;
             else {
                 targetKind=0;
                 if(!g_world.visibilityEnabled) {
-                    if((!(candidate->flags&0x300000) || candidate->player->target!=actor || (targetKind=1,candidate->player->weaponState!=2)) && (!(actor->targetFlags&2) || (targetKind=1,actor->objectId==0xCA))) targetKind=0;
+                    if((!(candidate->flags&0x300000) || candidate->player->target!=actor || (targetKind=1,candidate->player->weaponState!=2)) && (!(actor->targetFlags&2) || (targetKind=1,actor->objectId==202))) targetKind=0;
                 }
             }
         }

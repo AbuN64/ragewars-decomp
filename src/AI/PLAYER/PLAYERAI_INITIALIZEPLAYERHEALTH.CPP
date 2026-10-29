@@ -59,9 +59,9 @@ void Playerai_UpdateHazardDamage(SharedPlayer *player) {
         player->views1C.view100_9.flags &= ~0x800000;
         Player_SetPlayerState(player, player, 2);
         if (owner->options & 0x200) {
-            Barrel_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 0x30200, 25.599998f, 0x80, 0);
+            Barrel_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 0x30200, 25.599998f, 128, 0);
         } else {
-            Barrel_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 0x4600, 25.599998f, 0x80, 0);
+            Barrel_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 17920, 25.599998f, 128, 0);
         }
         player->views13D8.view13D8_1.held = 0;
         Playerai_ApplyDamagePacket(player, player->views1C.view170_16.body, &hit);
@@ -167,10 +167,10 @@ static inline s32 startHealth(BonusPlayer *player) {
     s8 kind;
     if (optionEnabled((GameOption *)&g_gameSettings.counters.enabled) && player->info->boosted != 0) {
         kind = player->info->kind;
-        if (kind == 0xB) health = 0x19000;
-        else if (kind == 0xC) health = 0x19000;
-        else if (kind == 0xE) health = 0x12C00;
-        else if (kind == 0xD) health = 0x12C00;
+        if (kind == 11) health = 0x19000;
+        else if (kind == 12) health = 0x19000;
+        else if (kind == 14) health = 76800;
+        else if (kind == 13) health = 76800;
         else health = player->model->health << 8;
     } else {
         health = player->model->health << 8;
@@ -182,17 +182,17 @@ void Playerai_InitializePlayerHealth(BonusPlayer *player) {
     ActorTemplate *model;
     s32 id;
     id = player->modelId;
-    if (optionEnabled((GameOption *)&g_gameSettings.counters.m_bFragTagOn) && player->info->special == 1) id = 0x13;
-    model = findModel(0xB, id);
+    if (optionEnabled((GameOption *)&g_gameSettings.counters.m_bFragTagOn) && player->info->special == 1) id = 19;
+    model = findModel(11, id);
     if (model == 0) {
-        model = findModel(0xB, -1);
+        model = findModel(11, -1);
         if (model == 0) model = findModel(-1, -1);
     }
     player->model = model;
     player->x = model->x; player->y = model->y; player->z = model->z;
     if (optionEnabled((GameOption *)&g_gameSettings.counters.m_bFragTagOn) && player->info->special != 0) {
-        player->maxHealth = 0xA00;
-        player->health = 0xA00;
+        player->maxHealth = 2560;
+        player->health = 2560;
         return;
     }
     player->maxHealth = startHealth(player);

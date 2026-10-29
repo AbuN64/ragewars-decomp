@@ -28,7 +28,7 @@ InitFrontendMenus
 #endif
 ();
     Tsmos_DeactivateControllerState();
-    SmXlate_SwitchScreen(0x12);
+    SmXlate_SwitchScreen(18);
 }
 
 void Achieve_SelectPostResultScreen(void) {

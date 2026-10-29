@@ -113,7 +113,7 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
     s32 w;
     s32 width;
     s32 level;
-    if (g_gameSettings.state != 0xB && g_gameSettings.state != 8) {
+    if (g_gameSettings.state != 11 && g_gameSettings.state != 8) {
         OnScreen_UpdateMoverScript(player->anim0);
         OnScreen_UpdateMoverScript(player->anim1);
         OnScreen_UpdateMoverScript(player->anim2);
@@ -177,9 +177,9 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                     g = 198.0f - fade * 0.792f;
                     b = 34.0f - fade * 0.136f;
                 } else {
-                    r = 0x7D;
-                    g = 0xC6;
-                    b = 0x22;
+                    r = 125;
+                    g = 198;
+                    b = 34;
                 }
             } else {
                 if (fade != 0.0f) {
@@ -188,16 +188,16 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                     b = 179.0f - fade * 0.716f;
                 } else {
                     r = 0;
-                    g = 0x69;
-                    b = 0xB3;
+                    g = 105;
+                    b = 179;
                 }
             }
             y = view->x + view->width * 0.5f;
             x = view->y + view->height * 0.5f;
-            Onscrn_SetupSpriteMode(0xFA);
+            Onscrn_SetupSpriteMode(250);
             gDPSetEnvColor(g_displayListCursor++, (r), (g), (b), 250);
             for (k = 0; k < 4; k++) {
-                OnScreen_DrawSpriteResource(0x208, k, y + scaleX * g_hudSpriteVerticalOffsets[k + 4], x + scaleY * g_hudSpriteHorizontalOffsets[k + 4], sx,
+                OnScreen_DrawSpriteResource(520, k, y + scaleX * g_hudSpriteVerticalOffsets[k + 4], x + scaleY * g_hudSpriteHorizontalOffsets[k + 4], sx,
                               scaleY * 1.5f, 1);
             }
             player->flashState = 0;
@@ -214,7 +214,7 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                 b = 0;
                 gDPSetEnvColor(g_displayListCursor++, (r), (g), (b), (player->flashAlpha));
                 for (k = 0; k < 4; k++) {
-                    OnScreen_DrawSpriteResource(0x208, k, y + scaleX * g_hudSpriteVerticalOffsets[k + 4], x + scaleY * g_hudSpriteHorizontalOffsets[k + 4], sx,
+                    OnScreen_DrawSpriteResource(520, k, y + scaleX * g_hudSpriteVerticalOffsets[k + 4], x + scaleY * g_hudSpriteHorizontalOffsets[k + 4], sx,
                                   scaleY * 1.5f, 1);
                 }
             } else {
@@ -237,8 +237,8 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
             if (player->livesAnim != 0 && player->livesShown != 0) {
                 x = player->livesX * sx + view->x;
                 y = player->livesY * sy + view->y;
-                OnScreen_DrawSpriteResource(0x12C, 0, x + sx * 18.0f, y + sy * 28.0f, sx, sy, 1);
-                OnScreen_DrawSpriteResource(0x1F6, 0, x, y, sx, sy, 1);
+                OnScreen_DrawSpriteResource(300, 0, x + sx * 18.0f, y + sy * 28.0f, sx, sy, 1);
+                OnScreen_DrawSpriteResource(502, 0, x, y, sx, sy, 1);
                 OnScreen_DrawSpriteNumber(player->lives, x + sx * 30.0f, y + sy * 24.0f, sx, sy, 1, 0, 0);
             }
         } else if ((g_gameSettings.controllerMode == 1 || g_gameSettings.controllerMode == 4) && player->hideLives == 0) {
@@ -250,9 +250,9 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
             y = player->livesY * scaleY + view->y;
             Onscrn_SetupSpriteMode(player->alpha);
             OnScreen_DrawSpriteNumber(n, x, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
-            OnScreen_DrawSpriteResource(0x1F6, 0, x + scaleX * 20.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
+            OnScreen_DrawSpriteResource(502, 0, x + scaleX * 20.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
             if (g_gameSettings.counters.enabled != 0) {
-                OnScreen_DrawSpriteResource(0x203, 0, x + scaleX * 40.0f, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
+                OnScreen_DrawSpriteResource(515, 0, x + scaleX * 40.0f, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
             }
         }
         if (hudRules()->state == 0 && g_gameSettings.local != 0) {
@@ -281,9 +281,9 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
             if (player->scoreAnim != 0 && player->scoreState != 0) {
                 frames = 1;
                 if (g_gameSettings.counters.teams != 0) {
-                    res = Scene_StartWorldEffect(&g_world, 0x204, 0, 1);
+                    res = Scene_StartWorldEffect(&g_world, 516, 0, 1);
                 } else {
-                    res = Scene_StartWorldEffect(&g_world, 0x1FA, 0, 1);
+                    res = Scene_StartWorldEffect(&g_world, 506, 0, 1);
                 }
                 if (res != NULL) {
                     frames = (*res != NULL) ? **res : 1;
@@ -298,12 +298,12 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                 OnScreen_DrawSpriteNumber(player->scoreLast, x + scaleX * 48.0f, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
                 if (player->scoreState < 2) {
                     if (hudRules()->enabled != 0) {
-                        OnScreen_DrawSpriteResource(0x202, 0, x, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
+                        OnScreen_DrawSpriteResource(514, 0, x, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
                     }
                     if (hudRules()->teams != 0) {
-                        OnScreen_DrawSpriteResource(0x204, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
+                        OnScreen_DrawSpriteResource(516, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
                     } else {
-                        OnScreen_DrawSpriteResource(0x1FA, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
+                        OnScreen_DrawSpriteResource(506, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
                     }
                     player->nameHead = 0;
                     player->nameTail = 0;
@@ -323,13 +323,13 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                         }
                     }
                     if (hudRules()->enabled != 0) {
-                        OnScreen_DrawSpriteResource(0x202, 0, x, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
+                        OnScreen_DrawSpriteResource(514, 0, x, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
                     }
                     if (hudRules()->teams != 0) {
-                        OnScreen_DrawSpriteResource(0x204, player->scoreFrame % frames, x + scaleX * 8.0f, y + scaleY * 16.0f,
+                        OnScreen_DrawSpriteResource(516, player->scoreFrame % frames, x + scaleX * 8.0f, y + scaleY * 16.0f,
                                       scaleX, scaleY * 1.5f, 1);
                     } else {
-                        OnScreen_DrawSpriteResource(0x1FA, player->scoreFrame % frames, x + scaleX * 8.0f, y + scaleY * 16.0f,
+                        OnScreen_DrawSpriteResource(506, player->scoreFrame % frames, x + scaleX * 8.0f, y + scaleY * 16.0f,
                                       scaleX, scaleY * 1.5f, 1);
                     }
                     OnScreen_SetupTextRendering();
@@ -340,7 +340,7 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                             if (player->names[i] != NULL) {
                                 if (g_frontendCurrentVideoModeIndex == 0 && g_playerWeaponClassMode == 1) {
                                     nameZoom = 0.75f;
-                                    indent = 0xF;
+                                    indent = 15;
                                 } else {
                                     nameZoom = 1.0f;
                                     indent = 0;
@@ -394,7 +394,7 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                 player->countAnim = 1;
                 if (player->countState != 0) {
                     n = 1;
-                    res = Scene_StartWorldEffect(&g_world, 0x1FD, 0, 1);
+                    res = Scene_StartWorldEffect(&g_world, 509, 0, 1);
                     if (res != NULL) {
                         if (*res != NULL) {
                             n = **res;
@@ -410,13 +410,13 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                     OnScreen_DrawSpriteNumber(player->owner->count, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1,
                                   0, 0);
                     if (player->countState < 2) {
-                        OnScreen_DrawSpriteResource(0x1FD, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY, 1);
+                        OnScreen_DrawSpriteResource(509, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY, 1);
                     } else {
                         if (++player->countFrame >= n * 4) {
                             player->countFrame = 0;
                             player->countState = 1;
                         }
-                        OnScreen_DrawSpriteResource(0x1FD, player->countFrame % n, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX,
+                        OnScreen_DrawSpriteResource(509, player->countFrame % n, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX,
                                       scaleY, 1);
                     }
                 }
@@ -439,7 +439,7 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                 player->squadAnim = 1;
                 if (player->squadState != 0) {
                     frames = 1;
-                    res = Scene_StartWorldEffect(&g_world, 0x201, 0, 1);
+                    res = Scene_StartWorldEffect(&g_world, 513, 0, 1);
                     if (res != NULL) {
                         if (*res != NULL) {
                             frames = **res;
@@ -454,13 +454,13 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                     Onscrn_SetupSpriteMode(player->alpha);
                     OnScreen_DrawSpriteNumber(score, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1, 0, 0);
                     if (player->squadState < 2) {
-                        OnScreen_DrawSpriteResource(0x201, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
+                        OnScreen_DrawSpriteResource(513, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
                     } else {
                         if (++player->squadFrame >= frames * 4) {
                             player->squadFrame = 0;
                             player->squadState = 1;
                         }
-                        OnScreen_DrawSpriteResource(0x201, player->squadFrame % frames, x + scaleX * 8.0f, y + scaleY * 16.0f,
+                        OnScreen_DrawSpriteResource(513, player->squadFrame % frames, x + scaleX * 8.0f, y + scaleY * 16.0f,
                                       scaleX, scaleY * 1.5f, 1);
                     }
                 }
@@ -480,7 +480,7 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                     x = view->x + view->width * 0.5f;
                     y = view->y + view->height * 0.5f;
                     Onscrn_SetupSpriteMode(icon);
-                    OnScreen_DrawSpriteResource(0x209, 0, x - scaleX * 31.0f, y - scaleY * 32.0f, scaleX, scaleY, 1);
+                    OnScreen_DrawSpriteResource(521, 0, x - scaleX * 31.0f, y - scaleY * 32.0f, scaleX, scaleY, 1);
                 } else {
                     player->iconState = 0;
                 }
@@ -518,7 +518,7 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                         level = 1;
                     }
                     Onscrn_SetupSpriteMode(player->statusAlpha);
-                    OnScreen_DrawSpriteResource(0x20C, level, x - scaleX * 70.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
+                    OnScreen_DrawSpriteResource(524, level, x - scaleX * 70.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
                 } else {
                     /* Clears the icon state, not the status state. */
                     player->iconState = 0;
@@ -541,7 +541,7 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                 level = 0;
             }
             Onscrn_SetupSpriteMode(0xFF);
-            OnScreen_DrawSpriteResource(0x20B, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
+            OnScreen_DrawSpriteResource(523, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         } else if (zoom > 1.0f) {
             stepOut = (g_playerReserveBounds_de[0] - 1.0f) * 0.25f;
             y = view->y + view->height;
@@ -556,9 +556,9 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
                 level = 0;
             }
             Onscrn_SetupSpriteMode(0xFF);
-            OnScreen_DrawSpriteResource(0x20A, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
+            OnScreen_DrawSpriteResource(522, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         }
-        if (player->weapon == 0xC && player->kind != g_fragTagModelId) {
+        if (player->weapon == 12 && player->kind != g_fragTagModelId) {
             ammo = 3 - Particle_CountOwnerListOneEffects(&g_actorParticleEffectSystem, player);
             if (player->ammo < ammo) {
                 ammo = player->ammo;
@@ -566,8 +566,8 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
             x = view->x + view->width * 0.5f;
             y = view->y + view->height * 0.5f;
             for (i = 0; i < 3; i++, ammo--) {
-                Onscrn_SetupSpriteMode(ammo > 0 ? 0xFF : 0x40);
-                OnScreen_DrawSpriteResource(0x2F4, 0, x + g_hudPlayerMarkerHorizontalOffsets[i] * scaleX, y + scaleY * 64.0f, scaleX, scaleY, 1);
+                Onscrn_SetupSpriteMode(ammo > 0 ? 0xFF : 64);
+                OnScreen_DrawSpriteResource(756, 0, x + g_hudPlayerMarkerHorizontalOffsets[i] * scaleX, y + scaleY * 64.0f, scaleX, scaleY, 1);
             }
         }
         if (hudRules()->state == 0) {
@@ -1208,7 +1208,7 @@ void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
             {
               world->offset = diff;
             }
-            SoundElement_PlaySoundAtPosition(0x230, player->views0.view8_3.pos, 0, -1);
+            SoundElement_PlaySoundAtPosition(560, player->views0.view8_3.pos, 0, -1);
             Player_PlacePlayerAtSpawnPoint(player, def->item, 0, 0);
             break;
           }
@@ -1542,7 +1542,7 @@ s32 Player_SetPlayerState(SharedPlayer *player, void *stateContext, s32 state) {
     void (*enter)(void *, void *);
     s32 parameter;
 
-    if (g_gameSettings.local != 0 && Playerai_IsRoundEndState(player) != 0 && state != 0x15 && state != 0x13 && state != 0x14) {
+    if (g_gameSettings.local != 0 && Playerai_IsRoundEndState(player) != 0 && state != 21 && state != 19 && state != 20) {
         return 0;
     }
     player->views5E8.view652_20.previous = player->views5E8.view650_16.state;
@@ -1610,7 +1610,7 @@ void Player_UpdateMovementSpeedFactor(void *actorView, void *bodyActor, PlayerGr
         }
     }
     options = (u8 *)&g_gameSettings;
-    if (options[0x1D] != 0) {
+    if (options[29] != 0) {
         ((Shared_ActorView *)actorView)->speedFactor *= ((Shared_Game *)options)->speedFactor;
     }
     if (!(((PlayerCameraMotionView *)(bodyActor))->flags & 3) && ground != 0
@@ -1785,12 +1785,12 @@ s32 Player_TryEnterHitReactionState(void *player, void *bodyActor) {
 
     if (((PlayerBodyMotionView *)(bodyActor))->inputFlags & 0x1000) {
         state = ((Shared_ActorView *)(player))->action;
-        if (state != 0xB) {
-            if (state != 0xC) {
+        if (state != 11) {
+            if (state != 12) {
                 if (state != 9) {
-                    if (state != 0xA) {
-                        if (state != 0x26) {
-                            if (state == 0x15 || state == 0x13 || state == 0x14) {
+                    if (state != 10) {
+                        if (state != 38) {
+                            if (state == 21 || state == 19 || state == 20) {
                                 hit = 1;
                             } else {
                                 hit = 0;
@@ -1799,7 +1799,7 @@ s32 Player_TryEnterHitReactionState(void *player, void *bodyActor) {
                                 ((Shared_ActorView *)(player))->unk_0x0038 |= 0x1000;
                                 return 0;
                             }
-                            Player_SetPlayerState(player, bodyActor, 0xC);
+                            Player_SetPlayerState(player, bodyActor, 12);
                             return 1;
                         }
                     }
@@ -1808,7 +1808,7 @@ s32 Player_TryEnterHitReactionState(void *player, void *bodyActor) {
         }
     }
     state = ((Shared_ActorView *)(player))->action;
-    if (state == 0x15 || state == 0x13 || state == 0x14) {
+    if (state == 21 || state == 19 || state == 20) {
         hit = 1;
     } else {
         hit = 0;
@@ -1826,22 +1826,22 @@ s32 Player_TryEnterHitReactionState(void *player, void *bodyActor) {
         return 0;
     }
     state = ((Shared_ActorView *)(player))->action;
-    if (state == 0xB) {
+    if (state == 11) {
         return 0;
     }
-    if (state == 0xC) {
+    if (state == 12) {
         return 0;
     }
     if (state == 9) {
         return 0;
     }
-    if (state == 0xA) {
+    if (state == 10) {
         return 0;
     }
-    if (state == 0x26) {
+    if (state == 38) {
         return 0;
     }
-    Player_SetPlayerState(player, bodyActor, 0xA);
+    Player_SetPlayerState(player, bodyActor, 10);
     return 1;
 }
 
@@ -1869,9 +1869,9 @@ s32 Player_TryThrowSelectedActor(void *playerObject, void *positionObject, s32 *
         actor->vz = player->speed * Math_Cosf(position->angle + offset) * scale;
         if (player->effect)
             Gsky_StartScaledShake(player->effect, g_playerHeavyThrowShakeStrength, 100.0f, g_playerHeavyThrowShakeStrength, g_playerHeavyThrowShakeDuration, kind, position->pos);
-        if (selected->state.kind == 0x2E) actor->state.flags |= 0x200;
+        if (selected->state.kind == 46) actor->state.flags |= 0x200;
         actor->state.timer = -1;
-        Actor_RequestActorState(actor, &actor->state, 0x34);
+        Actor_RequestActorState(actor, &actor->state, 52);
     } else if (player->effect)
         Gsky_StartScaledShake(player->effect, g_playerLightThrowShakeStrength, 60.0f, g_playerLightThrowShakeStrength, g_playerLightThrowShakeDuration, kind, position->pos);
     return 1;

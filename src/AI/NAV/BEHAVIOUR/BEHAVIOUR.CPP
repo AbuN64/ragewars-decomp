@@ -20,7 +20,7 @@ void Nav_RunBehaviorHandler(void *aiController) {
     s32 result;
 
     origIdx = ((AiController *)aiController)->state;
-    if ((u32)origIdx >= 0xE) {
+    if ((u32)origIdx >= 14) {
         ((AiController *)aiController)->state = 0;
     }
     idx = ((AiController *)aiController)->state;

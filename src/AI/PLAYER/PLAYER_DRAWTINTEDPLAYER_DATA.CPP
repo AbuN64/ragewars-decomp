@@ -29,7 +29,7 @@ void Playerai_AddReactionReserve(Shared_ReactionPlayer *actor, f32 amount, s32 s
     }
     actor->reserve = limited;
     if (gReactionReserveMaximum <= limited) {
-        Barrel_FillDamagePacket(&packet, source, 0x40000, 25.599998f, 0x80, 0);
+        Barrel_FillDamagePacket(&packet, source, 0x40000, 25.599998f, 128, 0);
         Playerai_ApplyDamagePacket((Shared_ReactionActor *)actor, &actor->damageState, &packet);
     }
 }

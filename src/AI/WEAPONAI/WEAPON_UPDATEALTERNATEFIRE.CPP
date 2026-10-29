@@ -94,7 +94,7 @@ static inline s32 can_fire(char *player) {
     }
     ammo = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[((AttackTriggerPlayer *)(player))->playerIndex], ((AttackTriggerPlayer *)(player))->weaponMode);
     if (ammo == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (((AttackTriggerPlayer *)(player))->camera != 0) {
             Gsky_PostTargetedScreenMessage(&g_playerViewRenderContext.object, ((AttackTriggerPlayer *)(player))->camera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_languageIndex),
                           Player_GetPlayerIndex(&g_playerViewRenderContext, player), g_alternateFireMessageDuration);
@@ -148,7 +148,7 @@ static inline s32 can_toggle_mode(Player *player) {
     if (g_gameSettings.controllerMode != 1) return 1;
     allowed = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[player->slot], player->selectedAction);
     if (allowed == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (player->camera) {
             Gsky_PostTargetedScreenMessage(&g_playerViewRenderContext.object, player->camera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_languageIndex),
                                              Player_GetPlayerIndex(&g_playerViewRenderContext, player), 1.0f);
@@ -176,7 +176,7 @@ void Weaponai_UpdateAlternateFire(void *actor, void *attack) {
         if (((AttackTriggerAction *)attack)->fireMode == 1) {
             ((AttackTriggerAction *)attack)->fireMode = 2;
             if (!Player_HasAmmoForMode(player, player->selectedAction)) {
-                SoundElement_PlayFlatSound(0xD4D);
+                SoundElement_PlayFlatSound(3405);
                 if (player->camera) {
                     Gsky_PostTargetedScreenMessage(&g_playerViewRenderContext.object, player->camera,
                                                      RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, g_playerViewRenderContext.game.language),
@@ -256,17 +256,17 @@ void Weaponai_UpdateAfterAmmoModeChange(LevelActor *levelActor, void *weaponSlot
             mode = audio->m_nFragTagSkin;
             switch (mode) {
             case 0:
-                SoundElement_PlaySoundAtPosition(0x18A1,
+                SoundElement_PlaySoundAtPosition(6305,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 1:
-                SoundElement_PlaySoundAtPosition(0x1969,
+                SoundElement_PlaySoundAtPosition(6505,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 2:
-                SoundElement_PlaySoundAtPosition(0x1905,
+                SoundElement_PlaySoundAtPosition(6405,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;

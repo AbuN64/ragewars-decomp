@@ -96,8 +96,8 @@ case_default:
 }
 
 s32 Weapon_IsSpecialSwitchGroup(s32 weaponType) {
-    if (weaponType < 0xD) {
-        if (weaponType >= 0xA) {
+    if (weaponType < 13) {
+        if (weaponType >= 10) {
             return 1;
         }
     }
@@ -127,7 +127,7 @@ s32 Weapon_CheckProfileFirePermission(WeaponPlayerPermissionView *pThis) {
     }
     result = Player_GetProfileAchievementFlag(&g_localPlayerProfiles[pThis->character], pThis->weapon);
     if (result == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (pThis->hud != 0) {
             s32 player = Player_GetPlayerIndex(&g_playerViewRenderContext, pThis);
             Gsky_PostTargetedScreenMessage(&g_playerViewRenderContext.object, pThis->hud,
@@ -177,7 +177,7 @@ int Weapon_CheckSinglePlayerFirePermission(WeaponPlayerPermissionView *player) {
     }
     result = Player_GetProfileAchievementFlag((char *)&g_localPlayerProfiles[player->character], player->weapon);
     if (result == 0) {
-        SoundElement_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(3405);
         if (player->hud != 0) {
             Gsky_PostTargetedScreenMessage((char *)rules - 0x1240, player->hud, g_weaponLockedNoticeText,
                           Player_GetPlayerIndex((char *)rules - 0x1288, player), g_weaponPermissionNoticeDuration);
@@ -198,7 +198,7 @@ void Weapon_InitializeChargeForWeaponFive(Shared_ActorView *actorView, WeaponFir
     idx = weaponOwner->selectedAction;
     fireState->charge = ((WeaponInfo *)g_weaponInfoByType[idx])->chargeRate * g_weaponFiveChargeRateScale;
     if ((weaponOwner->selectedAction == 5) && (weaponOwner->weaponLoopSoundHandle == 0)) {
-        Playerai_StartSecondaryAttachedSound(weaponOwner, 0x46A);
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 1130);
     }
 }
 
@@ -229,11 +229,11 @@ void Weapon_DrawWeaponLookupModel(void *actorStorage, Dest *weaponState, Lookup 
     if ((state == one) && (weaponState->fireEnabled == 0)) {
         return;
     }
-    if ((state >= 0x12) && (Playerai_GetWeaponAmmo(actor, state) <= 0)) {
+    if ((state >= 18) && (Playerai_GetWeaponAmmo(actor, state) <= 0)) {
         return;
     }
     state = ((Shared_ActorView *)actor)->selectedAction;
-    if ((state == 0xE) || (state == one) || (state == 0)) {
+    if ((state == 14) || (state == one) || (state == 0)) {
         result = ((Shared_ActorView *)actor)->unk_0x11F8;
     }
     Geometry_DrawModelResource(lookup->value,
@@ -283,7 +283,7 @@ s32 Weapon_PickRandomArmedWeapon(void *player) {
     if (remainingArmedSteps >= 0) {
         do {
             weapon += 1;
-            if (weapon >= 0x10) {
+            if (weapon >= 16) {
                 weapon = 0;
             }
             if (Playerai_PlayerHasAmmoForWeapon(player, weapon) != 0) {
@@ -357,7 +357,7 @@ void Weapon_InitializeChargeForWeaponEight(Shared_ActorView *actorView, WeaponFi
     idx = ((Shared_ActorView *)weaponOwner)->selectedAction;
     fireState->charge = ((WeaponInfo *)g_weaponInfoByType[idx])->chargeRate * g_weaponEightChargeRateScale;
     if ((((Shared_ActorView *)weaponOwner)->selectedAction == 8) && (((Shared_ActorView *)weaponOwner)->weaponLoopSoundHandle == 0)) {
-        Playerai_StartSecondaryAttachedSound(weaponOwner, 0xA3C);
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 2620);
     }
 }
 
@@ -372,7 +372,7 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
         } else {
             switch (state->selectedAction) {
             case 8:
-                SoundElement_PlaySoundAtPosition(0xA3E, state->pos,
+                SoundElement_PlaySoundAtPosition(2622, state->pos,
                               (s32)&state->pos, -1);
             case 0:
             case 14:
@@ -406,7 +406,7 @@ void Weapon_ReleaseHandlesAndExitState39(void *weaponActor) {
     s32 weaponOwner;
     weaponOwner = (((struct ActorLinkedControllerView *) ((s8 *) weaponActor))->link);
     Player_ReleaseObjectHandles(weaponOwner);
-    if ((((struct PlayerWeaponStateView *) ((s8 *) weaponOwner))->action) == 0x27) {
+    if ((((struct PlayerWeaponStateView *) ((s8 *) weaponOwner))->action) == 39) {
         Player_SetPlayerState((void *) weaponOwner, (void *) weaponOwner, 2);
     }
 }
@@ -415,7 +415,7 @@ void Weapon_PlayStartupCue9E2(void *weaponActor) {
     void *weaponOwner;
     weaponOwner = (((struct ActorPlayerControllerView *) ((s8 *) weaponActor))->player);
     if ((((struct PlayerStartupSoundView *) ((s8 *) weaponOwner))->startupSoundNode) == 0) {
-        Playerai_StartSecondaryAttachedSound(weaponOwner, 0x9E2);
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 2530);
     }
 }
 
@@ -492,12 +492,12 @@ void Weapon_InitializeChargeAndStartupCues(Shared_ActorView *actorView, WeaponFi
     fireState->cueTimer = 0;
     if ((cueOwner->remote == 0) &&
         (g_playerWeaponClassMode.classMode == 1)) {
-        Playerai_DispatchWeaponFireEffect(actorView->self, 0x3F9);
+        Playerai_DispatchWeaponFireEffect(actorView->self, 1017);
     } else {
-        Playerai_DispatchWeaponFireEffect(actorView->self, 0x4CB);
+        Playerai_DispatchWeaponFireEffect(actorView->self, 1227);
     }
-    Playerai_StartPrimaryAttachedSound(cueOwner, 0x78A);
-    Playerai_StartSecondaryAttachedSound(cueOwner, 0x780);
+    Playerai_StartPrimaryAttachedSound(cueOwner, 1930);
+    Playerai_StartSecondaryAttachedSound(cueOwner, 1920);
 
     weaponOwner = actorView->self;
     index = weaponOwner->selectedAction;
@@ -506,7 +506,7 @@ void Weapon_InitializeChargeAndStartupCues(Shared_ActorView *actorView, WeaponFi
         g_weaponStartupChargeRateScale;
     if ((weaponOwner->selectedAction == 8) &&
         (weaponOwner->weaponLoopSoundHandle == 0)) {
-        Playerai_StartSecondaryAttachedSound(weaponOwner, 0xA3C);
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 2620);
     }
 }
 
@@ -554,13 +554,13 @@ void Weapon_EnterChargeStateWithCues(Shared_ActorView *actor, WeaponFireState *f
         fireState->cueTimer = g_weaponChargeEntryCueAndRate[0];
         if ((((Shared_ActorView *)player)->remote == 0) &&
             (g_playerWeaponClassMode.classMode == 1)) {
-            Playerai_DispatchWeaponFireEffect(actor->self, 0x3FB);
+            Playerai_DispatchWeaponFireEffect(actor->self, 1019);
         } else {
-            Playerai_DispatchWeaponFireEffect(actor->self, 0x4CD);
+            Playerai_DispatchWeaponFireEffect(actor->self, 1229);
         }
         Actor_RequestActorState(actor, fireState, 4);
-        Playerai_StartPrimaryAttachedSound(player, 0x977);
-        Playerai_StartSecondaryAttachedSound(player, 0x974);
+        Playerai_StartPrimaryAttachedSound(player, 2423);
+        Playerai_StartSecondaryAttachedSound(player, 2420);
 
         weaponOwner = actor->self;
         index = ((Shared_ActorView *)weaponOwner)->selectedAction;
@@ -569,7 +569,7 @@ void Weapon_EnterChargeStateWithCues(Shared_ActorView *actor, WeaponFireState *f
             g_weaponChargeEntryCueAndRate[1];
         if ((((Shared_ActorView *)weaponOwner)->selectedAction == 8) &&
             (((Shared_ActorView *)weaponOwner)->weaponLoopSoundHandle == 0)) {
-            Playerai_StartSecondaryAttachedSound(weaponOwner, 0xA3C);
+            Playerai_StartSecondaryAttachedSound(weaponOwner, 2620);
         }
     }
 }
@@ -651,7 +651,7 @@ void Weapon_PlayStartupCue80C(void *weaponActor) {
     void *weaponOwner;
     weaponOwner = (((struct ActorPlayerControllerView *) ((s8 *) weaponActor))->player);
     if ((((struct PlayerStartupSoundView *) ((s8 *) weaponOwner))->startupSoundNode) == 0) {
-        Playerai_StartSecondaryAttachedSound(weaponOwner, 0x80C);
+        Playerai_StartSecondaryAttachedSound(weaponOwner, 2060);
     }
 }
 

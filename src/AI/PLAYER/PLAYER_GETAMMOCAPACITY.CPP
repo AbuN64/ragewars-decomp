@@ -226,7 +226,7 @@ void Playerai_EndRound(void *roundContext) {
             state->round = 1;
             node = (Node_Weapons_EndRound *)round->players;
             while (node != 0) {
-                Player_SetPlayerState(node, node, 0x15);
+                Player_SetPlayerState(node, node, 21);
                 node = node->next;
             }
         }
@@ -234,7 +234,7 @@ void Playerai_EndRound(void *roundContext) {
         state->elapsed = 1;
         node = (Node_Weapons_EndRound *)round->players;
         while (node != 0) {
-            Player_SetPlayerState(node, node, 0x15);
+            Player_SetPlayerState(node, node, 21);
             node = node->next;
         }
     }
@@ -243,7 +243,7 @@ void Playerai_EndRound(void *roundContext) {
     node = (Node_Weapons_EndRound *)round->players;
     while (node != 0) {
         node->roundEndTimer = 0;
-        node->state[0x8E] = 1;
+        node->state[142] = 1;
         node = node->next;
     }
 }
@@ -434,14 +434,14 @@ s32 Player_GetMaxHealth(void *player) {
 
     if (g_gameSettings.counters.enabled != 0 && ((struct PlayerProfileStatusView *) ((PlayerHealthDefinitionView *) o)->options)->display != 0) {
         type = ((struct PlayerProfileStatusView *) ((PlayerHealthDefinitionView *) o)->options)->kind;
-        if (type == 0xB) {
+        if (type == 11) {
             value = 0x19000;
-        } else if (type == 0xC) {
+        } else if (type == 12) {
             value = 0x19000;
-        } else if (type == 0xE) {
-            value = 0x12C00;
-        } else if (type == 0xD) {
-            value = 0x12C00;
+        } else if (type == 14) {
+            value = 76800;
+        } else if (type == 13) {
+            value = 76800;
         } else {
             value = ((ActorHealthDefinition *)((PlayerHealthDefinitionView *)o)->definition)->health << 8;
         }
@@ -479,7 +479,7 @@ int Player_GetAmmoCapacity(PlayerWeaponsGetAmmoCapacity *player, int slot) {
 
 /** Report whether the signed word at byte offset 0x5E4 is below 0x6400. */
 int Playerai_IsHealthBelowThreshold(struct SharedPlayer *object, s32 unused1) {
-    return object->views5E4.view5E4_0.health < 0x6400;
+    return object->views5E4.view5E4_0.health < 25600;
 }
 
 f32 Playerai_GetObjectOwnerHeight(void *actorObject) {

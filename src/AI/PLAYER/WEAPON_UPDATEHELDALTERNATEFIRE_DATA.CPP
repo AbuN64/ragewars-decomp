@@ -8,7 +8,7 @@
 /* 8022AE90_10.CPP */
 void Playerai_BeginHeldAlternateFire(struct SharedPlayer *actor) {
     if (actor->views5E8.view1210_152.marker == 0) {
-        Player_SetPlayerState(actor, actor, 0x27);
+        Player_SetPlayerState(actor, actor, 39);
         actor->views5E8.view1210_152.marker = 1;
         actor->views5E8.view1214_154.markerState = 0;
     }

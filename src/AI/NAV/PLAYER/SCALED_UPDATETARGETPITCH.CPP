@@ -210,7 +210,7 @@ s32 Scaled_MatchesBehaviorStateFilter(AiController *controller) {
     }
     goto ret0;
 ge_8:
-    if (state != 0xD) {
+    if (state != 13) {
         goto ret0;
     }
 ret1:
@@ -352,13 +352,13 @@ void Scaled_HandlePlayerTimeout(SharedPlayer **brain) {
 
     if (g_gameSettings.counters.enabled != 0) {
         mode = (*brain)->views5D8.view5D8_2.controls->mode;
-        if (mode == 0xC || mode == 0xF) {
-            limit = 0x384;
+        if (mode == 12 || mode == 15) {
+            limit = 900;
         } else {
-            limit = 0x1E;
+            limit = 30;
         }
     } else {
-        limit = 0x1E;
+        limit = 30;
     }
     if (limit < (*brain)->views1340.view1340_2.timer) {
         session = &g_gameSettings.counters;
@@ -373,7 +373,7 @@ void Scaled_HandlePlayerTimeout(SharedPlayer **brain) {
                 }
             } else {
                 mode = controls->mode;
-                if (mode == 0xC || mode == 0xF) {
+                if (mode == 12 || mode == 15) {
                     Player_PlacePlayerForRound(*brain);
                 }
             }

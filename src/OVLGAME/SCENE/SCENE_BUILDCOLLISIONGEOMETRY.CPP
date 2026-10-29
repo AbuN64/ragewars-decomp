@@ -78,9 +78,9 @@ void Scene_BuildCollisionGeometry(CollisionBuildWorld *world, CollisionBuildMesh
         ntris = flist->count;
         chunk = ((void *(*)(int *,s32,s32 *))SetN64_GetSizedPackSection)(node, 3, &size3);
         tableSize = (ntris << 5) | 8;
-        block = (void*)Cache_AllocResourceBlock(0, handle, size0 + 0x18 + size1 + tableSize + size3);
+        block = (void*)Cache_AllocResourceBlock(0, handle, size0 + 24 + size1 + tableSize + size3);
         if (block != 0) {
-            offset = 0x18;
+            offset = 24;
             hdr = block->payload.data;
             i = 0;
             hdr->count = 0;
@@ -98,7 +98,7 @@ void Scene_BuildCollisionGeometry(CollisionBuildWorld *world, CollisionBuildMesh
             SetN64_TransposeRecords(flist, dst, 1);
             face = flist->items;
             copiedTriangles=(void*)dst;
-            copiedTriangles->kind = 0x20;
+            copiedTriangles->kind = 32;
             copiedTriangles->count = ntris;
             base = (char *) hdr;
             tris = copiedTriangles->items;

@@ -34,8 +34,8 @@ void Weaponai_DrawRedMarkerQuad(void *object, void *unused) {
         gSPMatrix(g_displayListCursor++, (u32)&node->matrices[g_lightingBufferIndex], G_MTX_LOAD);
         gDPPipeSync(g_displayListCursor++);
         Geometry_InvalidateMaterialKeys();
-        Geometry_SetModePreset(0xE);
-        Geometry_SetCombineMode(0x1C);
+        Geometry_SetModePreset(14);
+        Geometry_SetCombineMode(28);
         red=200; alpha=150;
         gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
         gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_SHADING_SMOOTH);
@@ -190,7 +190,7 @@ s32 Weaponai_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
         }
         number++;
     }
-    SoundElement_PlayFlatSound(0xD4D);
+    SoundElement_PlayFlatSound(3405);
     result = player->selected;
     return result;
 }

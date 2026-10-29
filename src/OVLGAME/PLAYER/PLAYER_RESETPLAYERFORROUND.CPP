@@ -183,37 +183,37 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     s32 openFlag = 0;
     char *globals;
     Control_IsSnapshotActive();
-    FIELD(s32, actor, 0x5D0) = 1;
-    FIELD(s32, actor, 0x5E0) = character;
-    if (FIELD(s32, actor, 0x1450) == 0) {
-        FIELD(void *, actor, 0x5DC) = Pools_RecycleModel(&g_frontendScreenStatus);
-        if (FIELD(s32, &g_frontendScreenStatus, 0x18C4) != 0) {
-            FIELD(s32, actor, 0x1450) = 1;
+    FIELD(s32, actor, 1488) = 1;
+    FIELD(s32, actor, 1504) = character;
+    if (FIELD(s32, actor, 5200) == 0) {
+        FIELD(void *, actor, 1500) = Pools_RecycleModel(&g_frontendScreenStatus);
+        if (FIELD(s32, &g_frontendScreenStatus, 6340) != 0) {
+            FIELD(s32, actor, 5200) = 1;
         }
     } else {
-        FIELD(s32, actor, 0x5DC) = 0;
+        FIELD(s32, actor, 1500) = 0;
     }
     TeamSelect_ResetWeaponWheel((char *)actor + 0x938);
     TeamSelect_ResetTeamWheel((char *)actor + 0xCCC);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     for (i = 1; i < 22; i++) {
-        FIELD(u8, actor, 0x602 + i * 2) = 0;
-        FIELD(s8, actor, 0x603 + i * 2) = -1;
+        FIELD(u8, actor, 1538 + i * 2) = 0;
+        FIELD(s8, actor, 1539 + i * 2) = -1;
     }
-    FIELD(u8, actor, 0x602) = 1;
-    FIELD(u8, actor, 0x603) = 0;
-    FIELD(u8, actor, 0x609) = 2;
-    FIELD(u8, actor, 0x60A) = 1;
-    FIELD(u8, actor, 0x60B) = 1;
-    FIELD(u8, actor, 0x608) = 1;
-    FIELD(u8, actor, 0x616) = 1;
-    FIELD(u8, actor, 0x606) = 1;
-    FIELD(u8, actor, 0x617) = 4;
-    FIELD(u8, actor, 0x607) = 5;
-    FIELD(u8, actor, 0x61E) = 1;
-    FIELD(u8, actor, 0x61F) = 6;
+    FIELD(u8, actor, 1538) = 1;
+    FIELD(u8, actor, 1539) = 0;
+    FIELD(u8, actor, 1545) = 2;
+    FIELD(u8, actor, 1546) = 1;
+    FIELD(u8, actor, 1547) = 1;
+    FIELD(u8, actor, 1544) = 1;
+    FIELD(u8, actor, 1558) = 1;
+    FIELD(u8, actor, 1542) = 1;
+    FIELD(u8, actor, 1559) = 4;
+    FIELD(u8, actor, 1543) = 5;
+    FIELD(u8, actor, 1566) = 1;
+    FIELD(u8, actor, 1567) = 6;
 #endif
-    FIELD(s16, actor, 0x5E8) = 0;
+    FIELD(s16, actor, 1512) = 0;
     i = 5;
     counterAddress = (unsigned long)actor + i;
     do {
@@ -227,65 +227,65 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
         counterAddress2--;
     } while (--i >= 0);
     if (g_frontendScreenStatus.settings.local != 0) {
-        if (g_gameControllerMode == 1 && FIELD(s32, actor, 0x1450) == 0) {
-            u32 value = Player_GetLevelProgress(g_localPlayerProfiles + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
-            FIELD(s32, actor, 0x133C) = ((value & 0xFF) >> 1) + 1;
+        if (g_gameControllerMode == 1 && FIELD(s32, actor, 5200) == 0) {
+            u32 value = Player_GetLevelProgress(g_localPlayerProfiles + FIELD(s32, actor, 1492) * 0x190, FIELD(s8, FIELD(void *, actor, 1496), 128));
+            FIELD(s32, actor, 4924) = ((value & 0xFF) >> 1) + 1;
         }
-        if (g_gameControllerMode == 4 && FIELD(s32, actor, 0x1450) == 0 && g_currentStagePreset != 0) {
-            FIELD(s32, actor, 0x133C) = FIELD(u8, g_currentStagePreset, 0x28);
+        if (g_gameControllerMode == 4 && FIELD(s32, actor, 5200) == 0 && g_currentStagePreset != 0) {
+            FIELD(s32, actor, 4924) = FIELD(u8, g_currentStagePreset, 40);
         }
-        FIELD(s16, actor, 0x5EA) = 1;
+        FIELD(s16, actor, 1514) = 1;
     } else {
-        FIELD(s16, actor, 0x5EA) = 3;
+        FIELD(s16, actor, 1514) = 3;
     }
-    FIELD(s32, actor, 0x13C8) = 0;
+    FIELD(s32, actor, 5064) = 0;
     Player_ResetPlayerWeapons((struct RespawnPlayer *)actor);
-    FIELD(s32, actor, 0x670) = 0;
-    FIELD(s32, actor, 0x674) = 0;
-    FIELD(s32, actor, 0x86C) = -1;
-    FIELD(s32, actor, 0x870) = -1;
+    FIELD(s32, actor, 1648) = 0;
+    FIELD(s32, actor, 1652) = 0;
+    FIELD(s32, actor, 2156) = -1;
+    FIELD(s32, actor, 2160) = -1;
     for (i = 0; i < 8; i++) {
         ((PlayerRoundReset *)actor)->stats->counts[2][i] = 0;
         ((PlayerRoundReset *)actor)->stats->counts[3][i] = 0;
         ((PlayerRoundReset *)actor)->stats->counts[0][i] = 0;
         ((PlayerRoundReset *)actor)->stats->counts[1][i] = 0;
     }
-    FIELD(s16, FIELD(void *, actor, 0x5D8), 0x0) = 0;
-    FIELD(s16, FIELD(void *, actor, 0x5D8), 0x2) = 0;
-    FIELD(s16, FIELD(void *, actor, 0x5D8), 0x4) = 0;
-    FIELD(s16, FIELD(void *, actor, 0x5D8), 0x6) = 0;
-    FIELD(s16, FIELD(void *, actor, 0x5D8), 0xA) = 0;
-    FIELD(s16, FIELD(void *, actor, 0x5D8), 0x8) = 0;
-    FIELD(u8, FIELD(void *, actor, 0x5D8), 0x8D) = 0;
-    FIELD(u8, FIELD(void *, actor, 0x5D8), 0x8E) = 0;
-    FIELD(u8, FIELD(void *, actor, 0x5D8), 0x8F) = 0;
-    FIELD(u8, FIELD(void *, actor, 0x5D8), 0x90) = 0;
-    FIELD(s32, actor, 0x638) = 0;
-    FIELD(s32, actor, 0x63C) = 1;
-    FIELD(s32, actor, 0x640) = 0;
-    FIELD(s32, actor, 0x868) = 1;
+    FIELD(s16, FIELD(void *, actor, 1496), 0) = 0;
+    FIELD(s16, FIELD(void *, actor, 1496), 2) = 0;
+    FIELD(s16, FIELD(void *, actor, 1496), 4) = 0;
+    FIELD(s16, FIELD(void *, actor, 1496), 6) = 0;
+    FIELD(s16, FIELD(void *, actor, 1496), 10) = 0;
+    FIELD(s16, FIELD(void *, actor, 1496), 8) = 0;
+    FIELD(u8, FIELD(void *, actor, 1496), 141) = 0;
+    FIELD(u8, FIELD(void *, actor, 1496), 142) = 0;
+    FIELD(u8, FIELD(void *, actor, 1496), 143) = 0;
+    FIELD(u8, FIELD(void *, actor, 1496), 144) = 0;
+    FIELD(s32, actor, 1592) = 0;
+    FIELD(s32, actor, 1596) = 1;
+    FIELD(s32, actor, 1600) = 0;
+    FIELD(s32, actor, 2152) = 1;
     Player_ResetRespawnedPlayer((struct RespawnPlayer *)actor);
     globals = (char *)&g_gameSettings;
-    if (FIELD(u8, globals, 0x1D) != 0) {
-        FIELD(s32, actor, 0x13E8) = 0;
+    if (FIELD(u8, globals, 29) != 0) {
+        FIELD(s32, actor, 5096) = 0;
     }
     if (openFlag != 0) {
         char *table;
-        if (FIELD(u8, globals, 0x1D) != 0) {
-            FIELD(u8, FIELD(void *, actor, 0x5D8), 0x80) = 0;
-            FIELD(s32, actor, 0x5E0) = 0;
-            FIELD(s32, actor, 0x85C) = 1;
+        if (FIELD(u8, globals, 29) != 0) {
+            FIELD(u8, FIELD(void *, actor, 1496), 128) = 0;
+            FIELD(s32, actor, 1504) = 0;
+            FIELD(s32, actor, 2140) = 1;
             table = g_roundStartModeSpecificDialogTable;
-            if (FIELD(s32, globals, 0x5FC) == 0) {
+            if (FIELD(s32, globals, 1532) == 0) {
                 table = g_playerMenuDialogTable;
             }
         } else {
             table = g_roundStartDefaultDialogTable;
         }
-        Menu_OpenDialog((char *)FIELD(void *, actor, 0x5DC) + 0x554, table, actor, FIELD(s32, actor, 0x698), FIELD(s32, actor, 0x5D4));
+        Menu_OpenDialog((char *)FIELD(void *, actor, 1500) + 0x554, table, actor, FIELD(s32, actor, 1688), FIELD(s32, actor, 1492));
     }
-    g_playerHitCounts[FIELD(s32, actor, 0x5D4)] = 0;
-    g_playerCountedShots[FIELD(s32, actor, 0x5D4)] = 0;
+    g_playerHitCounts[FIELD(s32, actor, 1492)] = 0;
+    g_playerCountedShots[FIELD(s32, actor, 1492)] = 0;
 
 }
 
@@ -308,70 +308,70 @@ void Player_InitActorHudState(void *actor) {
     char *hud;
     char *widget;
     s32 enabled;
-    if (FIELD(u8, session, 0x1D) != 0) {
+    if (FIELD(u8, session, 29) != 0) {
         Playerai_LoadActorModel(actor);
         Playerai_UpdateCharacterModel(actor);
-        if (FIELD(u8, FIELD(void *, actor, 0x5D8), 0x91) == 0 && FIELD(u8, session, 0xD) == 1) {
+        if (FIELD(u8, FIELD(void *, actor, 1496), 145) == 0 && FIELD(u8, session, 13) == 1) {
             Achieve_ApplyProfileWeaponUnlocks(actor);
         }
     }
     hud = (char *)actor + 0x878;
-    FIELD(s32, hud, 0xB4) = 0;
-    FIELD(s32, hud, 0x8) = 0;
-    FIELD(s32, hud, 0xB8) = 0;
-    FIELD(s32, hud, 0x4) = -1;
-    FIELD(s32, actor, 0x878) = -1;
-    FIELD(s32, hud, 0xA8) = 0;
-    FIELD(s32, hud, 0x9C) = 0;
-    FIELD(s32, hud, 0xA4) = 0;
-    FIELD(f32, hud, 0xAC) = 437.5f;
-    FIELD(f32, hud, 0xB0) = (-675.0f);
-    FIELD(f32, hud, 0x90) = 0.25f;
-    FIELD(f32, hud, 0x94) = 0.1875f;
-    FIELD(f32, hud, 0x98) = 0.25f;
-    FIELD(f32, hud, 0xA0) = 1.5707965f;
-    FIELD(s32, actor, 0x11B0) = 0;
-    Control_SetProfileMode((void *)FIELD(s32, actor, 0x698), 1);
-    FIELD(s32, actor, 0x678) = 0;
-    FIELD(s32, actor, 0x67C) = 0;
-    FIELD(s32, actor, 0x680) = 0;
-    FIELD(s32, actor, 0x684) = 0;
+    FIELD(s32, hud, 180) = 0;
+    FIELD(s32, hud, 8) = 0;
+    FIELD(s32, hud, 184) = 0;
+    FIELD(s32, hud, 4) = -1;
+    FIELD(s32, actor, 2168) = -1;
+    FIELD(s32, hud, 168) = 0;
+    FIELD(s32, hud, 156) = 0;
+    FIELD(s32, hud, 164) = 0;
+    FIELD(f32, hud, 172) = 437.5f;
+    FIELD(f32, hud, 176) = (-675.0f);
+    FIELD(f32, hud, 144) = 0.25f;
+    FIELD(f32, hud, 148) = 0.1875f;
+    FIELD(f32, hud, 152) = 0.25f;
+    FIELD(f32, hud, 160) = 1.5707965f;
+    FIELD(s32, actor, 4528) = 0;
+    Control_SetProfileMode((void *)FIELD(s32, actor, 1688), 1);
+    FIELD(s32, actor, 1656) = 0;
+    FIELD(s32, actor, 1660) = 0;
+    FIELD(s32, actor, 1664) = 0;
+    FIELD(s32, actor, 1668) = 0;
     widget = (char *)actor + 0xE2C;
-    OnScreen_InitMover(widget, 0x78, 0x60);
+    OnScreen_InitMover(widget, 120, 96);
     OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptOne);
     widget = (char *)actor + 0xE68;
-    OnScreen_InitMover(widget, 0xBE, 0x60);
+    OnScreen_InitMover(widget, 190, 96);
     OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptTwo);
     widget = (char *)actor + 0xEA4;
-    OnScreen_InitMover(widget, 0x104, 0x60);
+    OnScreen_InitMover(widget, 260, 96);
     OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptThree);
     widget = (char *)actor + 0xEE0;
-    OnScreen_InitMover(widget, 0x1C, 0x60);
+    OnScreen_InitMover(widget, 28, 96);
     OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptFour);
     widget = (char *)actor + 0xF1C;
-    OnScreen_InitMover(widget, -0x40, 0x10);
+    OnScreen_InitMover(widget, -64, 16);
     OnScreen_StartMoverScript(widget, g_hudLivesInitialMoverScript);
     widget = (char *)actor + 0xF58;
-    OnScreen_InitMover(widget, 0x28, 0x10);
+    OnScreen_InitMover(widget, 40, 16);
     OnScreen_StartMoverScript(widget, k_PlaceplayerlightEncodedWords);
     widget = (char *)actor + 0x1048;
-    OnScreen_InitMover(widget, -0x52, 0x10);
+    OnScreen_InitMover(widget, -82, 16);
     OnScreen_StartMoverScript(widget, g_hudScoreInitialMoverScript);
     widget = (char *)actor + 0x1084;
-    FIELD(f32, actor, 0x107C) = 255.0f;
-    OnScreen_InitMover(widget, -0x52, 0x44);
+    FIELD(f32, actor, 4220) = 255.0f;
+    OnScreen_InitMover(widget, -82, 68);
     OnScreen_StartMoverScript(widget, g_hudCountInitialMoverScript);
     widget = (char *)actor + 0x10C0;
-    OnScreen_InitMover(widget, -0x52, 0x44);
+    OnScreen_InitMover(widget, -82, 68);
     OnScreen_StartMoverScript(widget, g_hudSquadInitialMoverScript);
-    OnScreen_InitMover((char *)actor + 0xFD0, 0x18, (s16)((u16)g_hudReferenceViewportHeight + 0x60));
-    OnScreen_InitMover((char *)actor + 0x100C, 0x18, (s16)((u16)g_hudReferenceViewportHeight + 0x60));
-    OnScreen_InitMover((char *)actor + 0x10FC, 0x64, 0x64);
-    FIELD(s32, actor, 0x11C4) = 0;
-    FIELD(s32, actor, 0x7BC) = 0;
-    FIELD(s32, actor, 0x1134) = FIELD(s32, actor, 0x5E4);
-    if (FIELD(void *, actor, 0x5DC) != 0) {
-        *(HudQuad *)((char *)actor + 0x760) = *(HudQuad *)((char *)FIELD(void *, actor, 0x5DC) + 0x140);
+    OnScreen_InitMover((char *)actor + 0xFD0, 24, (s16)((u16)g_hudReferenceViewportHeight + 96));
+    OnScreen_InitMover((char *)actor + 0x100C, 24, (s16)((u16)g_hudReferenceViewportHeight + 96));
+    OnScreen_InitMover((char *)actor + 0x10FC, 100, 100);
+    FIELD(s32, actor, 4548) = 0;
+    FIELD(s32, actor, 1980) = 0;
+    FIELD(s32, actor, 4404) = FIELD(s32, actor, 1508);
+    if (FIELD(void *, actor, 1500) != 0) {
+        *(HudQuad *)((char *)actor + 0x760) = *(HudQuad *)((char *)FIELD(void *, actor, 1500) + 0x140);
     }
     Playerai_InitializeMovementAndAim(actor);
     enabled = 0;
@@ -382,13 +382,13 @@ void Player_InitActorHudState(void *actor) {
         enabled = 1;
     }
     if (enabled != 0) {
-        FIELD(s32, actor, 0x5EC) = g_activeActorKind;
+        FIELD(s32, actor, 1516) = g_activeActorKind;
     }
-    FIELD(s32, actor, 0x1228) = 0;
-    FIELD(s32, actor, 0x1224) = 0;
+    FIELD(s32, actor, 4648) = 0;
+    FIELD(s32, actor, 4644) = 0;
     Cinema_ClearPlaybackFlag();
-    if (FIELD(void *, actor, 0x14) != 0) {
-        Link_DispatchObjectLinks(FIELD(void *, actor, 0x14), 1, actor);
+    if (FIELD(void *, actor, 20) != 0) {
+        Link_DispatchObjectLinks(FIELD(void *, actor, 20), 1, actor);
     }
     Cinema_SetPlaybackFlag();
 }
@@ -489,9 +489,9 @@ void Player_ResetRespawnedPlayer(struct RespawnPlayer *player) {
         Playerai_InitializePlayerHealth(player);
     } else {
         if (player->isBot == 0) {
-            player->health = g_characterHealthBonuses[player->character].value + 0x6400;
+            player->health = g_characterHealthBonuses[player->character].value + 25600;
         } else {
-            player->health = 0x6400;
+            player->health = 25600;
         }
         player->maxHealth = player->health;
     }

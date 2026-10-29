@@ -34,8 +34,8 @@ void Player_DrawRedMarkerPrism(PlayerMarkerPrismView *player) {
         gSPMatrix(g_displayListCursor++, &player->views[g_lightingBufferIndex], G_MTX_LOAD);
         gDPPipeSync(g_displayListCursor++);
         Geometry_InvalidateMaterialKeys();
-        Geometry_SetModePreset(0xE);
-        Geometry_SetCombineMode(0x1C);
+        Geometry_SetModePreset(14);
+        Geometry_SetCombineMode(28);
         red = 200;
         low = 100;
         high = 150;

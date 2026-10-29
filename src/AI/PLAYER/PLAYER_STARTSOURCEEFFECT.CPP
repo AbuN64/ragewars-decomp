@@ -62,7 +62,7 @@ void Player_StartSourceEffect(void *actor, void *effectSource) {
         return;
     }
 
-    SoundElement_PlayFlatSound(0xB45);
+    SoundElement_PlayFlatSound(2885);
     state->pending = g_playerSourceEffectDuration;
     state->parent = source;
     owner = state->message;

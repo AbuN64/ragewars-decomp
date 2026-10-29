@@ -33,7 +33,7 @@ void Player_DrainReserveAndDamage(void *actor, f32 amount, void *damageSource) {
     reserveValue = g_playerReserveBounds_de[1];
     ((Shared_ActorView *)actor)->reserve = clampedReserve;
     if (clampedReserve <= reserveValue) {
-        Barrel_FillDamagePacket(&damage, damageSource, ((LevelActor *)actor)->active + 0x1900, 25.599998f, 0x80, 0);
+        Barrel_FillDamagePacket(&damage, damageSource, ((LevelActor *)actor)->active + 6400, 25.599998f, 128, 0);
         Playerai_ApplyDamagePacket(actor, &((LevelActor *)actor)->behaviorFlags, &damage);
     }
 }

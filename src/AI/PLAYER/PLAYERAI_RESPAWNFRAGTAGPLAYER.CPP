@@ -229,24 +229,24 @@ void Playerai_SelectMovementAnimation(FragTagRespawnActorView *object) {
     int suppress = 0;
     float value;
 
-    if (object->unk_0x086C == 0x1144) {
+    if (object->unk_0x086C == 4420) {
         suppress = object->unk_0x010E == 0;
     }
     if (object->ownerId == g_fragTagModelId) {
-        object->unk_0x086C = 0x8A2;
+        object->unk_0x086C = 2210;
         return;
     }
     if (!suppress) {
         value = object->unk_0x06C0;
         if (g_playerMovementForwardAnimationThreshold <= value) {
-            object->unk_0x086C = 0x8A2;
+            object->unk_0x086C = 2210;
             return;
         }
         if (value <= g_playerMovementReverseAnimationThreshold) {
-            object->unk_0x086C = 0x8A7;
+            object->unk_0x086C = 2215;
             return;
         }
-        object->unk_0x086C = 0x14;
+        object->unk_0x086C = 20;
     }
 }
 
@@ -258,7 +258,7 @@ void Playerai_AdvanceCurrentRunEndState(void) {
     if (g_playerSequenceActor->health == 1) {
         Player_UpdateRunEndPlayer((s32)g_playerSequenceActor);
     } else {
-        Player_SetPlayerState(g_playerSequenceActor, g_playerSequenceActor, 0x22);
+        Player_SetPlayerState(g_playerSequenceActor, g_playerSequenceActor, 34);
     }
     g_playerSequenceWindowEnabled = 1;
     g_playerSequenceCompletionPending = 0;
@@ -282,7 +282,7 @@ void Playerai_ResetMotionAndSelectIdleAnimation(FragTagRespawnActorView *player)
   player->flags = clearedActorFlags | 0x01000000;
   if (player->unk_0x13B4 == (&g_playerSpecialAnimationTable))
   {
-    player->unk_0x086C = 0x5E24;
+    player->unk_0x086C = 24100;
     return;
   }
   player->unk_0x086C = 1;
@@ -313,17 +313,17 @@ void Playerai_RespawnFragTagPlayer(void *player) {
     mode = g_gameSettings.counters.m_nFragTagSkin;
     switch (mode) {
     case 0:
-        SoundElement_PlaySoundAtPosition(0x18A1,
+        SoundElement_PlaySoundAtPosition(6305,
                       ((Shared_ActorView *)player)->position.vector,
                       (s32)((char *)player + 8), -1);
         break;
     case 1:
-        SoundElement_PlaySoundAtPosition(0x1969,
+        SoundElement_PlaySoundAtPosition(6505,
                       ((Shared_ActorView *)player)->position.vector,
                       (s32)((char *)player + 8), -1);
         break;
     case 2:
-        SoundElement_PlaySoundAtPosition(0x1905,
+        SoundElement_PlaySoundAtPosition(6405,
                       ((Shared_ActorView *)player)->position.vector,
                       (s32)((char *)player + 8), -1);
         break;
@@ -341,7 +341,7 @@ s32 Playerai_CountTrailingSpaces(s32 textAddress, s32 length) {
     s32 space;
 
     result = 0;
-    space = 0x20;
+    space = 32;
     characterIndex = length;
 loop_1:
     characterIndex -= 1;
