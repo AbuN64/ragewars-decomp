@@ -45,7 +45,7 @@ void Simpinst_UpdateModelAndScale(void *staticObject) {
 
     if (g_simpleObjectPauseState.paused == 0) {
         char *state = ((StaticObject *)(o))->type;
-        if (*(s32 *)state == 0xC) {
+        if (*(s32 *)state == 12) {
             ((StaticObject *)(o))->frameDelta = g_frameElapsedTime * ((PropGeometry *)(state))->speed;
         } else if (((StaticObject *)(o))->flags & 0x10) {
             elapsedScaleTime = ((StaticObject *)(o))->scaleTime + g_frameElapsedTime * g_simpleObjectScaleTransitionTiming;
@@ -138,7 +138,7 @@ void **Simpinst_RequestModelVariant(void *staticObject, s32 modelVariant) {
 
     if (modelVariant != ((SliderStepRecord *)(staticObject))->activeState) {
         resource = Cache_RequestResource(0, ((Access_s32_50 *)(staticObject))->field,
-                                ((Access_s32_50 *)(staticObject))->field, 0x18,
+                                ((Access_s32_50 *)(staticObject))->field, 24,
                                 0, 0, 0, &g_simpleObjectModelResourceTagData + 4, 1);
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource, ((Access_s32_50 *)(staticObject))->field, 1);
@@ -171,14 +171,14 @@ s32 Simpinst_SelectModelVariant(StaticObject *staticObject) {
     s32 index;
 
     obj = staticObject->type;
-    if (*(s32 *)obj == 0xC) {
+    if (*(s32 *)obj == 12) {
         return 0;
     }
 
     value = ((PropGeometry *)(obj))->variant;
     index = Scene_GetModelIdAtIndex(&g_world, staticObject->id);
-    if (index < 0x6AB) {
-        if (index < 0x6A9) {
+    if (index < 1707) {
+        if (index < 1705) {
             return value;
         }
         if (g_gameSettings & 0x800) {

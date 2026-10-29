@@ -93,7 +93,7 @@ s32 CInstanceCollision_TestBoxFaces(BoxContactRay *ray, void *unused, BoxContact
         if (transform) ray->nearest.transform = *transform;
         found = 1;
         projectile = ray->projectile;
-        if (projectile->type != 2 || (projectile->kind != 0x414 && projectile->kind != 0x42D)) continue;
+        if (projectile->type != 2 || (projectile->kind != 1044 && projectile->kind != 1069)) continue;
         if (projectile->owner == actor) {
             Player_ReleaseObjectHandles(actor->widget);
             ray->projectile->contactState = found;
@@ -108,7 +108,7 @@ s32 CInstanceCollision_TestBoxFaces(BoxContactRay *ray, void *unused, BoxContact
         style.green = ray->projectile->color.y;
         style.blue = ray->projectile->color.z;
         Events_DeliverContactEffect(actor, ray->projectile, 2, -1, effectPosition, style);
-        if (*actor->kind == 11 && ray->projectile->kind == 0x42D) {
+        if (*actor->kind == 11 && ray->projectile->kind == 1069) {
             Particle_GetEffectResource(ray->projectile);
             Player_AddImpulse(actor, 2.0f);
         }
@@ -308,8 +308,8 @@ extern void PpDecom_QuickSortRecords();
 extern void CInstanceCollision_BuildSweepQuery(void *, void *);
 void InstCol_ProcessEntityContacts(HitSelf *self) {
     HitState *state = self->state;
-    u8 scratch[0x30];
-    SortedCandidate list[0x20];
+    u8 scratch[48];
+    SortedCandidate list[32];
     SortedCandidate *entry;
     u8 *ownerPosition;
     HitOwner *owner;
@@ -331,7 +331,7 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
     world = &g_world;
     total = world->moverCount;
     for (; i < total; i++) {
-        if (count >= 0x20) break;
+        if (count >= 32) break;
         candidate = world->movers[i];
         if ((LevelActor *)owner == candidate) {
             continue;
@@ -339,7 +339,7 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
         if (state->mode == 7 && *g_collisionCurrentActor == candidate) {
             continue;
         }
-        if ((state->flags & 0x8000) && candidate->type == 0x64F) {
+        if ((state->flags & 0x8000) && candidate->type == 1615) {
             continue;
         }
         if (owner->kind == 2 && owner->target == candidate) {

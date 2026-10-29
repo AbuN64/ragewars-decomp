@@ -259,6 +259,6 @@ void CCinema_UpdateSequence(void) {
     }
     CCinema_ProcessPendingTrack();
     if (g_cinemaSequenceState->active != 0) {
-        Cache_SetResourceActivityState(0xA);
+        Cache_SetResourceActivityState(10);
     }
 }

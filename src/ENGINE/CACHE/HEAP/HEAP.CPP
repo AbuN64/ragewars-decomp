@@ -25,7 +25,7 @@ s32 Heap_AllocateAtAddress(s8 *arena, void *requestedAddress, s32 requestedBytes
     void *firstFreeBlock;
     void *allocationHeader;
     void *containingBlock;
-    alignedBlockBytes = (requestedBytes + 0x2F) & ~0xF;
+    alignedBlockBytes = (requestedBytes + 47) & ~0xF;
     firstFreeBlock = ((struct HeapFirstFreeBlockView *)(arena))->value;
     if (firstFreeBlock != NULL) {
         containingBlock = firstFreeBlock;
@@ -199,8 +199,8 @@ void Heap_InitializeArena(struct Heap *heap, char *start, s32 size) {
     block->prevFree = 0;
     block->next = 0;
     block->prev = 0;
-    block->size = 0x20;
-    block->free = size - 0x20;
+    block->size = 32;
+    block->free = size - 32;
     heap->first = block;
     if (block->free != 0) {
         heap->last = block;
@@ -229,7 +229,7 @@ void *Heap_AllocateFromFront(HeapFreeBlockList *heap, s32 request) {
     HeapAllocationBlock *split;
     u32 size;
 
-    size = (request + 0x2F) & ~0xF;
+    size = (request + 47) & ~0xF;
     for (block = heap->head; block != 0; block = block->nextFree) {
         if (block->free >= size) {
             { u8 *cursor = (u8 *)block; cursor += block->size; split = (HeapAllocationBlock *)cursor; }
@@ -291,7 +291,7 @@ void *Heap_AllocateFromBack(HeapFreeBlockList *heap, s32 request)
     HeapAllocationBlock *split;
     u32 size;
 
-    size = (request + 0x2F) & ~0xF;
+    size = (request + 47) & ~0xF;
     for (block = heap->tail; block != 0; block = block->prevFree) {
         if (block->free >= size) {
             { u8 *cursor = (u8 *)block; cursor += block->size; cursor += block->free; cursor -= size; split = (HeapAllocationBlock *)cursor; }
@@ -394,7 +394,7 @@ merge:
             arena->tail = header->prev;
         }
     }
-    return block->size - 0x20;
+    return block->size - 32;
 }
 
 void Heap_GetFreeByteCounts(HeapArena_Entryrecat18v3 *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut) {

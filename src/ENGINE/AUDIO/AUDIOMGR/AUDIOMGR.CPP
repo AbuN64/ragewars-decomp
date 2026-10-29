@@ -67,8 +67,8 @@ extern AudioCacheEntry g_audioDmaCacheEntries[60];
 extern AudioWork *g_audioFrameTasks[3];
 extern s16 *g_audioCommandBuffers[2];
 extern u32 g_audioTaskCompletionMessages[10], g_audioWorkerEventMessages[10], g_audioDmaCompletionMessages[60];
-extern u8 g_audioWorkerThread[], g_audioWorkerStack[0x2800];
-extern u8 rspbootTextStart[0xD0], g_audioMicrocodeText[0x1000], g_audioMicrocodeData[0x800];
+extern u8 g_audioWorkerThread[], g_audioWorkerStack[10240];
+extern u8 rspbootTextStart[208], g_audioMicrocodeText[4096], g_audioMicrocodeData[2048];
 extern u8 g_graphicsMicrocodeText[];
 extern char g_audioDmaInitializerEntry, g_audioWorkerEntry;
 s32 osAiSetFrequency(u32);
@@ -93,9 +93,9 @@ void Audiomgr_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInit
     g_audioDmaCacheEntries[0].next = 0;
     for (i = 0; i < 59; i++) {
         alLink(&g_audioDmaCacheEntries[i+1], &g_audioDmaCacheEntries[i]);
-        g_audioDmaCacheEntries[i].buffer = alHeapDBAlloc(0, 0, config->heap, 1, 0x300);
+        g_audioDmaCacheEntries[i].buffer = alHeapDBAlloc(0, 0, config->heap, 1, 768);
     }
-    g_audioDmaCacheEntries[i].buffer = alHeapDBAlloc(0, 0, config->heap, 1, 0x300);
+    g_audioDmaCacheEntries[i].buffer = alHeapDBAlloc(0, 0, config->heap, 1, 768);
     for (i = 0; i < 2; i++) g_audioCommandBuffers[i] = alHeapDBAlloc(0, 0, config->heap, 1, timing->samples * 8);
     g_audioCommandBufferSamples = timing->samples;
     for (i = 0; i < 3; i++) {

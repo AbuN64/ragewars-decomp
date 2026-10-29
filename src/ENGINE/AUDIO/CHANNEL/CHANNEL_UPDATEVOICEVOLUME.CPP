@@ -205,7 +205,7 @@ void Channel_UpdateVoicePan(VoiceChannelUpdateVoicePan *voice) {
 
     params = &voice->params;
     if (Audio_GetSpatialPanMode(voice->owner) == 0) {
-        apply_pan(voice, 0x40);
+        apply_pan(voice, 64);
         return;
     }
     if (voice->sweeping != 0) {
@@ -237,7 +237,7 @@ clamp_done:
         apply_pan(voice, params->pan);
         return;
     }
-    params->pan = 0x40;
+    params->pan = 64;
 }
 
 /* Fades emitter 0x8AC with the listener's distance: optionally resets its level, stores the squared
@@ -253,7 +253,7 @@ void Channel_UpdateDistancePitchFactor(Emitter *emitter) {
     f32 level;
     f32 current;
 
-    if (emitter->id != 0x8AC) {
+    if (emitter->id != 2220) {
         return;
     }
     if (emitter->reset != 0) {

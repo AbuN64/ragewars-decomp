@@ -132,10 +132,10 @@ void Audio_InitializeVoicePool(s32 *voicePool, s32 ownerAddress) {
     do {
         t = (f32)i * k1;
         p = t * t * t * t * t * k2;
-        idx = 0x5A - i;
+        idx = 90 - i;
         i += 1;
         g_voiceAttenuationTable[idx] = (s16)(s32)p;
-    } while (i < 0x5B);
+    } while (i < 91);
 
     negone = -1;
     i = 0;
@@ -165,8 +165,8 @@ void Audio_InitializeVoicePool(s32 *voicePool, s32 ownerAddress) {
         rec->fBC = 0;
         rec->fC0 = 0;
         rec->fC4 = one;
-        off += 0xCC;
-    } while (i < 0x11);
+        off += 204;
+    } while (i < 17);
 }
 
 s32 Audio_GetVoiceSoundState(AudioVoiceSoundSlotView *voicePool, s16 slotIndex)
@@ -176,7 +176,7 @@ s32 Audio_GetVoiceSoundState(AudioVoiceSoundSlotView *voicePool, s16 slotIndex)
   void *soundPlayer;
   AudioVoiceRecordView *slot;
   AudioSoundPlayerOwnerView *owner;
-  voiceAddress = (slotIndex * 0xCC) + (s32)voicePool;
+  voiceAddress = (slotIndex * 204) + (s32)voicePool;
   voiceAddress = voiceAddress + 4;
   slot = (AudioVoiceRecordView *)voiceAddress;
   ownerAddress = slot->owner;
@@ -231,12 +231,12 @@ void Audio_StopVoiceSlot(s32 voicePoolAddress, s16 slotIndex) {
     s32 a0;
     void *s1;
 
-    base = (slotIndex * 0xCC) + voicePoolAddress;
+    base = (slotIndex * 204) + voicePoolAddress;
     base = base + 4;
     a0 = ((struct IntegerStateB4 *) base)->context;
     ((struct IntegerStateB4 *) base)->done = 1;
     ((struct IntegerStateB4 *) base)->tracked = 0;
-    s1 = (void *)(a0 + 0x84);
+    s1 = (void *)(a0 + 132);
     if (((struct IntegerStateB4 *) base)->frame != ((struct VoiceMatchingKeyView *) a0)->voiceKey) {
         s32 idx = ((struct IntegerStateB4 *) base)->slotIndex;
         s32 addr = a0 + idx * 2;
@@ -252,7 +252,7 @@ void Audio_ClearVoiceFlags(s32 a) {
     s32 remainingSlots;
     void *slotCursor;
     slotCursor = a + 4;
-    remainingSlots = 0x10;
+    remainingSlots = 16;
     do {
         ((SlotCC *)slotCursor)->flag = 0;
         remainingSlots -= 1;
@@ -277,7 +277,7 @@ void Audio_InitializeVoiceParameters(void *voiceRecord, void *desc, s32 extra) {
 
     Channel_InitializeVoicePitchMotion(voiceRecord, desc, extra);
     Channel_InitializeVoiceMix(voiceRecord, desc, extra);
-    ((struct ViewChannelUpdateVoicePlayback *)(voiceRecord))->priority = 0x40;
+    ((struct ViewChannelUpdateVoicePlayback *)(voiceRecord))->priority = 64;
     index = ((struct Shared_Body *)(desc))->kind;
     if (index != -1) {
         record = Audio_GetMetadataSectionFiveEntry(((struct ViewChannelUpdateVoicePlayback *)(voiceRecord))->context, index);
@@ -325,7 +325,7 @@ void Audio_UpdateVoicePool(void **voicePool) {
         }
         i += 1;
         view += 0xCC;
-    } while (i < 0x10);
+    } while (i < 16);
     g_activeVoiceCount = activeVoiceCount;
     if (g_peakActiveVoiceCount < activeVoiceCount) {
         g_peakActiveVoiceCount = activeVoiceCount;
@@ -340,8 +340,8 @@ int Audio_FindVoiceByKeyPair(VoiceKeyPairTable *obj, int keyA, int keyB) {
     int *keys = &obj->slots[0].keyB;
 
     for (i = 0; i < 16; i++) {
-        if (keys[i * 0x33 - 43] != -1 && obj->owner->local != i && keys[i * 0x33 - 3] == keyA &&
-            keys[i * 0x33] == keyB) {
+        if (keys[i * 51 - 43] != -1 && obj->owner->local != i && keys[i * 51 - 3] == keyA &&
+            keys[i * 51] == keyB) {
             return i;
         }
     }
@@ -594,7 +594,7 @@ void Audio_StopVoiceForDifferentKey(AudioVoiceControlSlotView *voiceRecord) {
     ownerValue = voiceRecord->owner;
     voiceRecord->active = 1;
     voiceRecord->flag = 0;
-    s1 = (void *)(ownerValue + 0x84);
+    s1 = (void *)(ownerValue + 132);
     if (voiceRecord->key != ((AudioSoundPlayerOwnerView *)ownerValue)->key) {
         s32 idx = voiceRecord->index;
         s32 addr = ownerValue + idx * 2;
@@ -675,7 +675,7 @@ void Audio_InitVoiceVolume(VoicePanEnvelopeState *voiceRecord, SoundPanEnvelopeD
     s16 value;
     VoiceEnvelopeBlock *record;
 
-    voiceRecord->pan = 0x40;
+    voiceRecord->pan = 64;
     index = soundDescriptor->panEnvelopeIndex;
     if (index != -1) {
         record = Audio_GetMetadataSectionFiveEntry(voiceRecord->context, index);

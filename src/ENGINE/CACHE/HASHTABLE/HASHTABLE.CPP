@@ -86,7 +86,7 @@ void HashTable_RemoveResourceByKey(s32 resourceKey) {
 
     key = resourceKey;
     entryToClear = g_resourceHashBuckets + (((key << 5) ^ ((u32)key >> 1) ^
-                            ((u32)key >> 9) ^ ((u32)key >> 0x11)) &
+                            ((u32)key >> 9) ^ ((u32)key >> 17)) &
                            g_resourceHashEvenIndexMask);
     previousEntry = 0;
     if (entryToClear->key != key) {
@@ -137,7 +137,7 @@ s32 HashTable_RoundCapacityToPowerOfTwo(s32 mask) {
             highestBit = bit;
         }
         bit += 1;
-    } while (bit < 0x20);
+    } while (bit < 32);
     if (bitCount != 1) {
         highestBit += 1;
     }

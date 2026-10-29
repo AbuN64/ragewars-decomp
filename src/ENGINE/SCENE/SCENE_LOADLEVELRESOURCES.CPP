@@ -82,20 +82,20 @@ void Scene_CollectLevelSwitches(SceneLevelSwitchCollectionView *world) {
     }
     for (i = 0; i < world->count; object++, i++) {
         descriptor = object->descriptor;
-        if (descriptor->type == 0xD) {
-            if (g_currentStagePreset != 0 && (unsigned)(descriptor->kind - 0xD34) < 4) {
+        if (descriptor->type == 13) {
+            if (g_currentStagePreset != 0 && (unsigned)(descriptor->kind - 3380) < 4) {
                 switch (descriptor->model) {
-                case 0xD2B:
+                case 3371:
                     if (g_currentStagePreset[1] == 0) {
                         descriptor->flags |= 4;
                     } else {
                         descriptor->flags &= ~4;
                     }
                     break;
-                case 0xD2C:
-                case 0xD2D:
-                case 0xD2E:
-                    if (g_currentStagePreset[object->descriptor->model - 0xD2A] == 0) {
+                case 3372:
+                case 3373:
+                case 3374:
+                    if (g_currentStagePreset[object->descriptor->model - 3370] == 0) {
                         object->descriptor->flags |= 4;
                         break;
                     }
@@ -289,8 +289,8 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 allowTransition) {
     if ((Cinema_IsSequenceActive() == 0) && (transitionAllowed != 0) && ((((struct SceneResourceStateView *)(table))->gameplayStarted) != 0) && (g_gameSettings.counters.transitionActive == 0)) {
         Scene_ResetTransitionViewport();
         previousStageId = (((struct SceneResourceStateView *)(table))->spawnPlacementKey);
-        if ((u32) (previousStageId - 0xBC2) < 0x15FU) {
-            Menu_TriggerTrackEvent(((previousStageId - 0xBC2) / 10) + 0x259);
+        if ((u32) (previousStageId - 3010) < 351U) {
+            Menu_TriggerTrackEvent(((previousStageId - 3010) / 10) + 601);
         }
         Scene_ShowResultsGoal();
     }
@@ -313,7 +313,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 allowTransition) {
     Hud_InitializeWorldActorPools(&g_tutorialStatusBars.actors);
     CCollision_Initialize();
     Ovlgame_InitializeDynamicLightPool(&((struct SceneResourceStateView *)table)->dynamicLightPool);
-    SoundVoicePool_Initialize(&g_soundVoicePoolGlobalState, &g_spatialSoundPoolNodes, 0xF);
+    SoundVoicePool_Initialize(&g_soundVoicePoolGlobalState, &g_spatialSoundPoolNodes, 15);
     Hud_StartPanelMovers(&g_tutorialStatusBars);
     do {
         playerActor = Playerai_GetPlayerByIndex(&g_playerViewRenderContext, initializationIndex);
@@ -331,7 +331,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 allowTransition) {
                     } else if (statusBarKind == 2) {
                         OnScreen_StartSecondStatusBar(&g_tutorialStatusBars, playerActor, &((struct SceneStatusBarModeView *)playerHudProfile)->address84);
                     }
-                    if (playerActor->profile->characterKind == 0xB) {
+                    if (playerActor->profile->characterKind == 11) {
                         OnScreen_StartFirstStatusBar(&g_tutorialStatusBars, playerActor, g_firstStatusBarTarget);
                     }
                 }
@@ -348,12 +348,12 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 allowTransition) {
     if (transitionAllowed == 0) {
         (((struct SceneResourceStateView *)(table))->gameplayStarted) = 0;
     }
-    Scene_CopyLevelName(table, levelSelection, &((struct SceneResourceStateView *)table)->levelNameBuffer, 0x3F);
+    Scene_CopyLevelName(table, levelSelection, &((struct SceneResourceStateView *)table)->levelNameBuffer, 63);
     stageIdForFlags = (((struct SceneResourceStateView *)(table))->spawnPlacementKey);
-    if (stageIdForFlags < 0x1CEA) {
-        if (stageIdForFlags < 0x1CE8) {
+    if (stageIdForFlags < 7402) {
+        if (stageIdForFlags < 7400) {
             if (stageIdForFlags != 0x1BBC) {
-                if (stageIdForFlags < 0x1BBD) {
+                if (stageIdForFlags < 7101) {
                     if (stageIdForFlags == 0x123A) {
                         goto scene_flag_on;
                     }
@@ -367,14 +367,14 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 allowTransition) {
             }
         }
     } else {
-        if (stageIdForFlags < 0x1D4C) {
+        if (stageIdForFlags < 7500) {
             goto scene_flag_off;
         }
-        if (stageIdForFlags >= 0x1D4E) {
-            if (stageIdForFlags >= 0x1DB3) {
+        if (stageIdForFlags >= 7502) {
+            if (stageIdForFlags >= 7603) {
                 goto scene_flag_off;
             }
-            if (stageIdForFlags < 0x1DB1) {
+            if (stageIdForFlags < 7601) {
                 goto scene_flag_off;
             }
         }
@@ -386,21 +386,21 @@ scene_flag_off:
     (((struct SceneResourceStateView *)(table))->specialSceneEnabled) = 0;
 scene_flag_done:
     stageIdForPoolSize = (((struct SceneResourceStateView *)(table))->spawnPlacementKey);
-    if (stageIdForPoolSize < 0x1CEA) {
-        if (stageIdForPoolSize < 0x1CE8) {
-            if (stageIdForPoolSize != 0x1BBC) {
-                if (stageIdForPoolSize < 0x1BBD) {
-                    count = 0x320;
-                    if (stageIdForPoolSize == 0x123A) {
+    if (stageIdForPoolSize < 7402) {
+        if (stageIdForPoolSize < 7400) {
+            if (stageIdForPoolSize != 7100) {
+                if (stageIdForPoolSize < 7101) {
+                    count = 800;
+                    if (stageIdForPoolSize == 4666) {
                         goto scene_size_c80;
                     }
                     goto scene_size_done;
                 }
-                if (stageIdForPoolSize == 0x1C20) {
+                if (stageIdForPoolSize == 7200) {
                     goto scene_size_c80;
                 }
-                count = 0x320;
-                if (stageIdForPoolSize == 0x1C84) {
+                count = 800;
+                if (stageIdForPoolSize == 7300) {
                     goto scene_size_c80;
                 }
                 goto scene_size_done;
@@ -408,32 +408,32 @@ scene_flag_done:
         }
         goto scene_size_c80;
     }
-    if (stageIdForPoolSize == 0x1DB1) {
+    if (stageIdForPoolSize == 7601) {
         goto scene_size_4b0;
     }
-    if (stageIdForPoolSize < 0x1DB2) {
-        if (stageIdForPoolSize < 0x1D4E) {
-            count = 0x320;
-            if (stageIdForPoolSize < 0x1D4C) {
+    if (stageIdForPoolSize < 7602) {
+        if (stageIdForPoolSize < 7502) {
+            count = 800;
+            if (stageIdForPoolSize < 7500) {
                 goto scene_size_done;
             }
             goto scene_size_c80;
         }
         goto scene_size_320;
     }
-    count = 0x320;
-    if (stageIdForPoolSize == 0x1DB2) {
+    count = 800;
+    if (stageIdForPoolSize == 7602) {
         goto scene_size_c80;
     }
     goto scene_size_done;
 scene_size_c80:
-    count = 0xC80;
+    count = 3200;
     goto scene_size_done;
 scene_size_4b0:
-    count = 0x4B0;
+    count = 1200;
     goto scene_size_done;
 scene_size_320:
-    count = 0x320;
+    count = 800;
 scene_size_done:
     if (g_frontendScreenStatus.settings.local != 0) {
         count += 0x200;
@@ -453,8 +453,8 @@ scene_size_done:
     sceneDirectoryEntry = SetN64_GetDirectoryEntry((((struct SceneResourceStateView *)(table))->sceneResources), resourceKey, 5);
     (((struct SceneResourceStateView *)(table))->sceneDirectoryKey) = sceneDirectoryEntry;
     (((struct SceneResourceStateView *)(table))->sceneIndexResourceHandle) = Cache_RequestWordCountedResourcePinned(0, &((struct SceneResourceStateView *)table)->sceneIndexDataSlot, sceneDirectoryEntry, &g_sceneIndexResourceTag);
-    if (*(((struct SceneResourceStateView *)(table))->sceneResources) >= 0xD) {
-        visibilityResourceKey = SetN64_GetDirectoryEntry((((struct SceneResourceStateView *)(table))->sceneResources), resourceKey, 0xC);
+    if (*(((struct SceneResourceStateView *)(table))->sceneResources) >= 13) {
+        visibilityResourceKey = SetN64_GetDirectoryEntry((((struct SceneResourceStateView *)(table))->sceneResources), resourceKey, 12);
         (((struct SceneResourceStateView *)(table))->visibilityResourceKey) = visibilityResourceKey;
         (((struct SceneResourceStateView *)(table))->visibilityResourceHandle) = Cache_RequestWordCountedResourcePinned(0, &((struct SceneResourceStateView *)table)->visibilityTable, visibilityResourceKey, &s_visibilityText);
         sceneResourceHandle = Cache_RequestPackSection(0, (((struct SceneResourceStateView *)(table))->visibilityTable), 0, (((struct SceneResourceStateView *)(table))->visibilityResourceKey), table, 0, &g_visibilityHeaderResourceTag);
@@ -483,15 +483,15 @@ scene_size_done:
         navigationPoints = *navigationPointsHandle;
         (((struct SceneResourceStateView *)(table))->navPointSet) = navigationPoints;
         (((struct SceneResourceStateView *)(table))->navPointCount) = (s32) navigationPoints->key;
-        navigationLinksHandle = Cache_RequestPackSection(0, (((struct SceneResourceStateView *)(table))->sceneResources), 0xA, resourceKey, table, &g_cResource_UnpackRequestEntry, &g_navigationLinksResourceName);
+        navigationLinksHandle = Cache_RequestPackSection(0, (((struct SceneResourceStateView *)(table))->sceneResources), 10, resourceKey, table, &g_cResource_UnpackRequestEntry, &g_navigationLinksResourceName);
         (((struct SceneResourceStateView *)(table))->navLinksResourceHandle) = navigationLinksHandle;
         navigationLinks = *navigationLinksHandle;
         (((struct SceneResourceStateView *)(table))->navLinkSet) = navigationLinks;
         (((struct SceneResourceStateView *)(table))->navLinkCount) = (s32) navigationLinks->key;
-        List_InitializeIntrusive(&((struct SceneResourceStateView *)table)->navigationSearchNodes, 0xC, 0x10);
+        List_InitializeIntrusive(&((struct SceneResourceStateView *)table)->navigationSearchNodes, 12, 16);
         navigationPointCount = (((struct SceneResourceStateView *)(table))->navPointCount);
         if (navigationPointCount > 0) {
-            record = Cache_AllocateMemory(navigationPointCount * 0x50);
+            record = Cache_AllocateMemory(navigationPointCount * 80);
 
             initializationIndex = 0;
             if ((((struct SceneResourceStateView *)(table))->navPointCount) > 0) {
@@ -503,8 +503,8 @@ scene_size_done:
             }
         }
     }
-    if (*(((struct SceneResourceStateView *)(table))->sceneResources) >= 0xC) {
-        navigationVisionHandle = Cache_RequestPackSection(0, (((struct SceneResourceStateView *)(table))->sceneResources), 0xB, resourceKey, table, &g_cResource_UnpackRequestEntry, &s_levelNavVisionText);
+    if (*(((struct SceneResourceStateView *)(table))->sceneResources) >= 12) {
+        navigationVisionHandle = Cache_RequestPackSection(0, (((struct SceneResourceStateView *)(table))->sceneResources), 11, resourceKey, table, &g_cResource_UnpackRequestEntry, &s_levelNavVisionText);
         (((struct SceneResourceStateView *)(table))->navVisionResourceHandle) = navigationVisionHandle;
         navigationVision = *navigationVisionHandle;
         (((struct SceneResourceStateView *)(table))->navVisionSet) = navigationVision;
@@ -522,7 +522,7 @@ scene_size_done:
     Scene_CollectLevelSwitches(table);
 
     i = 0;
-    actorIterationIndex = 0xF;
+    actorIterationIndex = 15;
 
     actorScanCursor = (s32)(((struct SceneResourceStateView *)(table))->levelActors);
     resetCursor = &((struct SceneResourceStateView *)table)->selectionClearCursorAnchor;
@@ -536,16 +536,16 @@ scene_size_done:
     actorIterationIndex = 0;
 
     if ((((struct SceneResourceStateView *)(table))->levelActorCount) > 0) {
-        first_actor_kind = 0xE;
+        first_actor_kind = 14;
         selectedActorSlot = (void *)(i * sizeof(void *) + (u32)table);
 loop_81:
         if (*(((struct ActorKindDefinitionPointerView *)((void *)actorScanCursor))->definition) == first_actor_kind) {
             (((struct SceneLoadedResourceView *)(selectedActorSlot))->loadedResource) = (void *)actorScanCursor;
             selectedActorSlot += 4;
             i += 1;
-            hasSelectedActorCapacity = i < 0x10;
+            hasSelectedActorCapacity = i < 16;
         } else {
-            hasSelectedActorCapacity = i < 0x10;
+            hasSelectedActorCapacity = i < 16;
         }
         if (hasSelectedActorCapacity != 0) {
             actorScanCursor = (s32)NEXT_SCENE_ACTOR((void *)actorScanCursor);
@@ -559,7 +559,7 @@ loop_81:
     actorIndex = 3;
     scene_actor_ptr = (((struct SceneResourceStateView *)(table))->levelActors);
     actor_type3 = 3;
-    actor_kind_bd7 = 0xBD7;
+    actor_kind_bd7 = 3031;
     primarySlotByteOffset = 3 * sizeof(void *);
 
     (((struct SceneResourceStateView *)(table))->selectedActorCount) = i;
@@ -571,11 +571,11 @@ loop_81:
     } while (actorIndex >= 0);
     actorIndex = 0;
     if ((((struct SceneResourceStateView *)(table))->levelActorCount) > 0) {
-        kind_actor = 0xA;
-        kind_654 = 0x654;
-        kind_653 = 0x653;
-        kind_655 = 0x655;
-        kind_656 = 0x656;
+        kind_actor = 10;
+        kind_654 = 1620;
+        kind_653 = 1619;
+        kind_655 = 1621;
+        kind_656 = 1622;
         primaryActorKind = &((struct SceneActorKindView *)scene_actor_ptr)->kind;
 loop_89:
         primaryActorDefinition = ((struct Shared_SceneActorPrefix *)primaryActorKind)[-1].definition;
@@ -592,7 +592,7 @@ loop_89:
                 if (kind == kind_654) {
                     goto actor_kind_654;
                 }
-                if (kind < 0x655) {
+                if (kind < 1621) {
                     if (kind == kind_653) {
                         goto actor_kind_653;
                     }
@@ -644,9 +644,9 @@ block_109:
     actorScanCursor = 0;
     if ((((struct SceneResourceStateView *)(table))->levelActorCount) > 0) {
         second_type3 = 3;
-        second_kind_bd6 = 0xBD6;
-        second_type10 = 0xA;
-        second_kind_64e = 0x64E;
+        second_kind_bd6 = 3030;
+        second_type10 = 10;
+        second_kind_64e = 1614;
         secondaryActorKind = &((struct SceneActorKindView *)secondaryActor)->kind;
 loop_114:
         secondaryActorDefinition = ((struct Shared_SceneActorPrefix *)secondaryActorKind)[-1].definition;
@@ -661,7 +661,7 @@ loop_114:
                 j += 1;
             }
         }
-        hasSecondaryActorCapacity = j < 0xA;
+        hasSecondaryActorCapacity = j < 10;
         if (hasSecondaryActorCapacity != 0) {
             secondaryActorKind = NEXT_SCENE_ACTOR(secondaryActorKind);
             secondaryActor = NEXT_SCENE_ACTOR(secondaryActor);
@@ -790,7 +790,7 @@ typedef struct SimpleInstance {
 
 /* A light volume as the level resource stores it. */
 typedef struct LightVolumeRecord {
-    u8 data[0x4C];
+    u8 data[76];
 } LightVolumeRecord;
 
 extern s32 SetN64_GetPackSize(void *table);
@@ -879,10 +879,10 @@ void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
         volumeSize = ALIGN8(volumeCount * sizeof(SceneLightVolume) + sizeof(RecordSet));
         bitSet = SetN64_GetPackSection(source, 4);
         bitSize = ALIGN8(bitSet->count * sizeof(s32) + sizeof(RecordSet));
-        block = Cache_AllocResourceBlock(0, handle, staticSize + 0x18 + simpleSize + volumeSize + bitSize);
+        block = Cache_AllocResourceBlock(0, handle, staticSize + 24 + simpleSize + volumeSize + bitSize);
         if (block != 0) {
             n = 0;
-            offset = 0x18;
+            offset = 24;
             blocks = *block;
             dst = (char *)blocks + offset;
             blocks->count = n++;
@@ -1074,27 +1074,27 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
             if (InstHdr_CanActorReceiveInteraction(actor) && world->interactiveCount != 0x200) {
                 world->interactive[world->interactiveCount++] = actor;
             }
-            if (InstHdr_HasEnabledMotionHooks(actor) && world->moverCount != 0x80) {
+            if (InstHdr_HasEnabledMotionHooks(actor) && world->moverCount != 128) {
                 world->movers[world->moverCount++] = actor;
             }
-            if (world->registeredCount < 0x80) {
+            if (world->registeredCount < 128) {
                 world->registered[world->registeredCount++] = actor;
             }
-            if (world->kind1Count < 0x40 && actor->definition->kind == 1) {
+            if (world->kind1Count < 64 && actor->definition->kind == 1) {
                 world->kind1[world->kind1Count] = actor;
                 /* byte 0x23E of the word actionReady holds the slot */
                 ((u8 *)&actor->actionReady)[2] = world->kind1Count++;
             }
-            if (world->flaggedCount < 0x20 && (actor->flags & 2)) {
+            if (world->flaggedCount < 32 && (actor->flags & 2)) {
                 world->flagged[world->flaggedCount++] = actor;
             }
-            if (world->kind5Count < 0x10 && actor->definition->kind == 5) {
+            if (world->kind5Count < 16 && actor->definition->kind == 5) {
                 world->kind5[world->kind5Count++] = actor;
             }
-            if (world->model64FCount < 0x20 && actor->type == 0x64F) {
+            if (world->model64FCount < 32 && actor->type == 1615) {
                 world->model64F[world->model64FCount++] = actor;
             }
-            if (actor->type == 0x64D && world->model64DCount < 4) {
+            if (actor->type == 1613 && world->model64DCount < 4) {
                 world->model64D[world->model64DCount++] = actor;
             }
         } else {

@@ -88,7 +88,7 @@ u8 *SetN64_CopyString(u8 *destination, u8 *source)
 }
 
 int SetN64_IsModeThirteen(void) {
-    return g_gameSession.mode == 0xD;
+    return g_gameSession.mode == 13;
 }
 
 void SetN64_RunBootstrapThread(s32 threadArgument) {
@@ -141,7 +141,7 @@ void SetN64_UpdateFadeTransition(GameSession *session) {
         }
         if (session->timer < -4.0f) {
             s32 saved = session->mode;
-            session->mode = 0x14;
+            session->mode = 20;
             session->timer = 0.0f;
             session->phase = 1;
             session->previousMode = saved;

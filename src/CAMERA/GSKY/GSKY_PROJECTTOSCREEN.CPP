@@ -14,7 +14,7 @@ void Gsky_ProjectToScreen(s32 view, s32 point, f32 *screenX, f32 *screenY) {
     CVector3 value;
     f32 half;
 
-    Graphu64_ProjectPoint(view + 0x1E0, point, &value);
+    Graphu64_ProjectPoint(view + 480, point, &value);
     half = (f32)(g_hudReferenceViewportWidth / 2);
     *screenX = value.x * half + half;
     *screenY = value.y * (f32)(-g_hudReferenceViewportHeight / 2) +

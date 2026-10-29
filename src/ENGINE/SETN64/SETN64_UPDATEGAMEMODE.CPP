@@ -17,7 +17,7 @@ void SetN64_BeginModeTransition(GameSession *session, s32 targetMode) {
     saved = session->mode;
     session->phase = 1;
     session->timer = 0;
-    session->mode = 0x14;
+    session->mode = 20;
     session->target = targetMode;
     session->previousMode = saved;
     if (Control_IsSnapshotActive() != 0) {
@@ -55,7 +55,7 @@ void SetN64_UpdateGameMode(void *session) {
         fn(session);
         field = ((GameSession *)session)->mode;
     }
-    if (field != 0x14 && g_gameModeTransitionFrames != 0) {
+    if (field != 20 && g_gameModeTransitionFrames != 0) {
         g_gameModeTransitionFrames -= 1;
         SetN64_UpdateFrameTiming(session);
     }

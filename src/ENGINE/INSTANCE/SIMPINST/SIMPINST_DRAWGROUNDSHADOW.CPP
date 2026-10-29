@@ -79,7 +79,7 @@ void Simpinst_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor, void 
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
             position.y += Gobjinst_GetActorHeight(actor) * *(&g_simpleObjectViewEffectRotationAndHeight + 1);
-            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 148,
                           actor->position1, rotation, position, 0, -1, 0);
             effect = Particle_GetLastSpawnedEffect(&g_actorParticleEffectSystem);
             if (effect != 0) {
@@ -114,7 +114,7 @@ void Simpinst_DrawGroundShadow(void *actor) {
     ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, position.x, position.y, position.z);
     Graphu64_ConvertMatrixToFixed(matrix, (char *)actor + ((g_lightingBufferIndex << 6) + 0xE8));
-    Geometry_DrawIntensityMask((char *)actor + ((g_lightingBufferIndex << 6) + 0xE8), 1, 0x96);
+    Geometry_DrawIntensityMask((char *)actor + ((g_lightingBufferIndex << 6) + 0xE8), 1, 150);
 }
 
 void Simpinst_RefreshModelResourceUsage(StaticObject *staticObject) {
@@ -127,7 +127,7 @@ void Simpinst_RefreshModelResourceUsage(StaticObject *staticObject) {
     index = staticObject->model;
     if (index != staticObject->animation) {
         resource = Cache_RequestResource(0, staticObject->animationKey,
-                                staticObject->animationKey, 0x18,
+                                staticObject->animationKey, 24,
                                 0, 0, 0, &g_simpleObjectModelResourceTagData + 4, 1);
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource, staticObject->animationKey, 1);

@@ -39,14 +39,14 @@ void Gobjinst_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directoryBa
     ((LevelActor *)actorStorage)->resourceWindow = 0;
     ((LevelActor *)actorStorage)->flags &= 0xFFFBFFFF;
     key = SetN64_GetDirectoryEntry(modelDirectory, directoryBank, (u16)((LevelActor *)actorStorage)->modelIndex);
-    resource1 = Cache_RequestResource(0, key, key, 0x18, 0, 0, 0, &g_gameObjectAnimIndexText, 1);
+    resource1 = Cache_RequestResource(0, key, key, 24, 0, 0, 0, &g_gameObjectAnimIndexText, 1);
     if (resource1 != 0) {
         entry = *resource1;
         ((LevelActor *)actorStorage)->animationKey = SetN64_GetDirectoryEntry(entry, key, 1);
         found = Cache_RequestWordCountedResource(0, &animationMetadata, ((LevelActor *)actorStorage)->animationKey, &s_animModelsIndexText, 1);
         if (found != 0) {
             ((LevelActor *)actorStorage)->stateE7 = (u8)*animationMetadata;
-            ((LevelActor *)actorStorage)->resourceAlignment = ((*animationMetadata * 4) + 0xF) & ~7;
+            ((LevelActor *)actorStorage)->resourceAlignment = ((*animationMetadata * 4) + 15) & ~7;
             Cache_UnlockResource(0, (void *)found);
         }
         ((LevelActor *)actorStorage)->resource = SetN64_LocatePackSection((s32)entry, key, 0, &((LevelActor *)actorStorage)->resourceFlags);
@@ -195,7 +195,7 @@ void Gobjinst_MoveActorWithContactCallback(char *actor, CVector3 *destination) {
             collision = &g_defaultActorCollisionInfo;
         }
         saved = ((ActorCollisionDataView *)(collision))->collisionParams.v0;
-        if ((u32)(((ActorModelResourceView *)(actor))->typeId - 0x2B0C) < 8) {
+        if ((u32)(((ActorModelResourceView *)(actor))->typeId - 11020) < 8) {
             ((ActorCollisionDataView *)(collision))->collisionParams.v1 = 0;
         }
         old_contact = ((ActorModelResourceView *)(actor))->model;
@@ -207,13 +207,13 @@ void Gobjinst_MoveActorWithContactCallback(char *actor, CVector3 *destination) {
         if (old_contact != 0 && ((ActorModelResourceView *)(actor))->model != 0 &&
                 *old_contact != *((ActorModelResourceView *)(actor))->model &&
                 *((ActorModelResourceView *)(actor))->definition == 1) {
-            Link_DispatchObjectLinks((s32)old_contact, 0x80, actor);
-            Link_DispatchObjectLinks((s32)((ActorModelResourceView *)(actor))->model, 0x40, actor);
+            Link_DispatchObjectLinks((s32)old_contact, 128, actor);
+            Link_DispatchObjectLinks((s32)((ActorModelResourceView *)(actor))->model, 64, actor);
         }
         if (collided != 0 && !(((ActorModelResourceView *)(actor))->flags & 0x300000) &&
                 *((ActorModelResourceView *)(actor))->definition == 1 && g_currentActorInstance.text != 0 &&
                 *g_currentActorInstance.text == 1) {
-            Link_DispatchActorLinks(g_currentActorInstance.text, 0x20, actor);
+            Link_DispatchActorLinks(g_currentActorInstance.text, 32, actor);
         }
         callback = ((struct ActorModelCallbackView *) ((char *) actor))->callback;
         if (callback != 0) {

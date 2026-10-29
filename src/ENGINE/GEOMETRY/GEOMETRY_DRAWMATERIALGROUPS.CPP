@@ -127,7 +127,7 @@ void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 tex
         s32 instanceCount;
         s8 *packSectionResult;
         QueuedModelInstance *queuedInstance;
-        objectIndexResource = Cache_RequestResource(0, modelIndex, modelIndex, 0x18, 0, 0, 0, &s_simpObjectIndexText, 1);
+        objectIndexResource = Cache_RequestResource(0, modelIndex, modelIndex, 24, 0, 0, 0, &s_simpObjectIndexText, 1);
         if (objectIndexResource != 0) {
                 directoryEntryResult = SetN64_GetDirectoryEntry(*objectIndexResource, modelIndex, 1);
                 Cache_UnlockResource(0, objectIndexResource);
@@ -139,7 +139,7 @@ void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 tex
                         resource = Cache_RequestResource(0, modelResourceKey, modelResourceKey, modelResourceSize, 0, 0, &g_simpleModelResourceCallbackAddress, &s_simpModelText, direct);
                         if (resource != 0) {
                                 packSectionResult = SetN64_GetPackSection(*resource, 0);
-                                if (g_modelBatchResource != resource || g_modelBatchPass != pass || g_modelInstanceQueueCount == 0x20) {
+                                if (g_modelBatchResource != resource || g_modelBatchPass != pass || g_modelInstanceQueueCount == 32) {
                                         Geometry_GroupModelInstances();
                                         if (g_modelBatchResourceCount != 0x100) {
                                                 Cache_LockResource(0, resource);

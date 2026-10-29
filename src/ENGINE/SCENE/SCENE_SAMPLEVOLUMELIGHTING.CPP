@@ -317,7 +317,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
         return;
     }
     kind = actor->definition->kind;
-    isKindB = kind == 0xB;
+    isKindB = kind == 11;
     isKind1 = kind == 1;
     bottom = actor->position0.y + InstHdr_GetActorBaseOffset(actor);
     top = bottom + Gobjinst_GetActorHeight(actor);
@@ -575,7 +575,7 @@ static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level)
     if (world->resourceHandle == 0 || world->resourceKey != level) {
         Scene_ReleaseCachedLevelData(world);
         if (world->challengeFile != 0) {
-            mode = 0x10;
+            mode = 16;
             direct = 1;
             index = Cache_RequestResource(0, world->challengeFile, world->challengeFile, world->challengeFileSize, mode,
                                      0, 0, g_sceneResourceRequestSpareDe, direct);

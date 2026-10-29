@@ -102,7 +102,7 @@ u32 Sound_GetCachedAudioBlockAddress(void *block, s32 size) {
         }
     }
     if (unused == 0) {
-        unused = (CacheEntry *)alHeapDBAlloc(0, 0, g_audioHeap, 1, 0x90);
+        unused = (CacheEntry *)alHeapDBAlloc(0, 0, g_audioHeap, 1, 144);
         unused->next = g_audioCacheCountdownHead;
         g_audioCacheCountdownHead = unused;
         g_audioCacheEntryAllocCount++;
@@ -162,7 +162,7 @@ u32 Sound_GetSampleDmaWindowAddress(s32 offset, s32 length) {
     window->frame = g_audioTaskFrameIndex;
     word = window->buffer;
     g_audioDmaPendingReadCount++;
-    Cartridge_SubmitReadChunks(&g_cartridgeReadWorker, address, 0x300, word, &g_audioDmaCompletionQueue, 0, 1);
+    Cartridge_SubmitReadChunks(&g_cartridgeReadWorker, address, 768, word, &g_audioDmaCompletionQueue, 0, 1);
     return osVirtualToPhysical(word) + odd;
 }
 
@@ -221,12 +221,12 @@ void Sound_InitializeContext(GameAudioContext *ctx) {
     LockEnter(&ctx->lock);
     ctx->soundState = 0;
     alHeapInit(ctx->frames, g_audioContextHeapBuffer, g_audioContextHeapBytes);
-    config.maxVVoices = 0x25;
-    config.maxPVoices = 0x25;
+    config.maxVVoices = 37;
+    config.maxPVoices = 37;
     config.maxUpdates = 0x100;
     config.fxType = 6;
     config.params = &g_audioFxConfigParams;
-    timing.frequency = 0x5622;
+    timing.frequency = 22050;
     timing.frameTime = 1;
     config.dmaproc = 0;
     config.heap = ctx->frames;
@@ -250,8 +250,8 @@ void Sound_InitializeContext(GameAudioContext *ctx) {
             }
         }
     }
-    ctx->maximumSoundCount = 0x11;
-    ctx->eventCount = 0xC0;
+    ctx->maximumSoundCount = 17;
+    ctx->eventCount = 192;
     ctx->soundHeap = ctx->frames;
     alSndpNew(ctx->list, &ctx->maximumSoundCount);
     {
@@ -266,7 +266,7 @@ void Sound_InitializeContext(GameAudioContext *ctx) {
     ctx->soundCounter = 0;
     ctx->frame = 0;
     ctx->selectedEntry = 0;
-    ctx->randomPan = 0x40;
+    ctx->randomPan = 64;
     ctx->listenerCamera = 0;
     ctx->dialogEnabled = 0;
     ctx->effectMixOffset = 0;
@@ -296,8 +296,8 @@ void Sound_LoadSoundAndSequenceTables(GameAudioContext *ctx) {
     s32 *group;
     void *section;
 
-    total = Defs_ReadResourceWord(0x14) - Defs_ReadResourceWord(0x10);
-    ctx->soundData = Vhandler_AllocateVirtualRegion(total, 0, Defs_ReadResourceWord(0x10));
+    total = Defs_ReadResourceWord(20) - Defs_ReadResourceWord(16);
+    ctx->soundData = Vhandler_AllocateVirtualRegion(total, 0, Defs_ReadResourceWord(16));
     section = SetN64_GetPackSection(ctx->soundData, 0);
     SetN64_GetPackSection(ctx->soundData, 1);
     tables = SetN64_GetPackSection(section, 0);

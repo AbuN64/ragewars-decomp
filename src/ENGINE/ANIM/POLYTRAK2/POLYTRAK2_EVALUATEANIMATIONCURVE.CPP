@@ -74,8 +74,8 @@ void Polytrak2_InitializePackedCurve(PackedCurveSegment *curve, u32 *stream) {
     bits = *stream;
     curve->segmentCount = Polytrak2_ReadBitsAndAdvance(&bits, 6);
     if (g_motionTrackDecodeTranslation != 0) {
-        first = Polytrak2_ReadBitsAndAdvance(&bits, 0x20);
-        second = Polytrak2_ReadBitsAndAdvance(&bits, 0x20);
+        first = Polytrak2_ReadBitsAndAdvance(&bits, 32);
+        second = Polytrak2_ReadBitsAndAdvance(&bits, 32);
         lo = *(f32 *)&first;
         hi = *(f32 *)&second;
     } else {
@@ -130,7 +130,7 @@ inline static void write_bits(u32 value, u32 bitAddress, u32 width)
   else
   {
     lowMask = highMask << offset;
-    remaining = 0x20 - offset;
+    remaining = 32 - offset;
     highMask >>= remaining;
     low = value << offset;
     high = value >> remaining;

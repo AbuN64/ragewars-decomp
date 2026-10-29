@@ -60,8 +60,8 @@ void Cache_ClearResourceSlotProtection(s32 unusedCache, s32 resourceSlot)
     {
       lockUsers = offset + g_resourceCacheManager;
       count += 1;
-      *((s32 *) (lockUsers + 0xC)) &= mask;
-      offset += 0x28;
+      *((s32 *) (lockUsers + 12)) &= mask;
+      offset += 40;
     }
     while (count < nodeLimit);
   }
@@ -140,7 +140,7 @@ void Cache_AcknowledgeResourceSlotRelease(s32 unused, s32 request) {
             lockUsers = offset + g_resourceCacheManager;
             count += 1;
             *(s32 *)&((CacheEvictionNode *)lockUsers)->flags &= mask;
-            offset += 0x28;
+            offset += 40;
         } while (count < nodeLimit);
     }
     do { g_resourceSlotActivity[request] = 0; } while (0);

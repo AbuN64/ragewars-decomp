@@ -199,7 +199,7 @@ s32 Lists_AppendWeightedEntry(WeightedTable *table, s16 value, s16 weight)
 {
   s16 entryIndex;
   entryIndex = table->count;
-  if (entryIndex == 0x18)
+  if (entryIndex == 24)
   {
     return 0;
   }

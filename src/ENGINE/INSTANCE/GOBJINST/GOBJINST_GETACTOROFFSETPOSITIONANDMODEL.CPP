@@ -45,14 +45,14 @@ void Gobjinst_DrawModelWithProjection(void *actor, Camera *camera, f32 *transfor
         mtx = Map_ReserveEntries(&g_actorMatrixPool, 1);
         if (mtx != 0) {
             matrices = camera->matrices;
-            Graphu64_MultiplyMatrices(mf, transform, (f32 *)(matrices + 0x1E0));
+            Graphu64_MultiplyMatrices(mf, transform, (f32 *)(matrices + 480));
             Graphu64_ClampMatrixToFixedRange(mf);
             GraphU64_PackFixedMatrix(mf, mtx);
             gSPMatrix(g_displayListCursor++, mtx, G_MTX_LOAD | G_MTX_PROJECTION);
             Geometry_DrawResourceModel(layer, camera->style, object->animationMatrices, 1,
                           &object->lighting[g_lightingBufferIndex], 0, object->renderPass);
             restore = g_displayListCursor++;
-            offset = (g_lightingBufferIndex << 6) + 0x380;
+            offset = (g_lightingBufferIndex << 6) + 896;
             gSPMatrix(restore, matrices + offset, G_MTX_LOAD | G_MTX_PROJECTION);
         }
     }

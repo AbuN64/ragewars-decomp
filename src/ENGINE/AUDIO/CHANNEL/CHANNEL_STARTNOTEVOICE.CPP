@@ -149,7 +149,7 @@ s16 Channel_SelectVoiceSlot(RecordD90 *record, s32 variant, s32 count, s16 prior
 typedef struct SoundBankState {
     ALBank_s *bank;
     char pad4[4];
-    char pool[0x58];
+    char pool[88];
     s16 slots[16];
     u16 allocated;
     char pad82[4];
@@ -258,7 +258,7 @@ SoundVoice *Channel_StartNoteVoice(SoundPlayer *player, SoundDescriptor *note, s
         goto fail;
     }
     voice = &player->voices[index];
-    if (index == 0x10) {
+    if (index == 16) {
         voice->userData = userData;
         voice->serial = player->engine->serial++;
         voice->slot = 99;
@@ -307,11 +307,11 @@ fail:
     voice->f_B8 = player->engine->f2BBC;
     parameters = &voice->parameters;
     parameters->priority = priority;
-    parameters->reachCopy = 0x7D00;
-    parameters->reach = 0x7D00;
+    parameters->reachCopy = 32000;
+    parameters->reach = 32000;
     parameters->zero24 = 0;
     notePitch = note->pitch;
-    parameters->pan = 0x40;
+    parameters->pan = 64;
     parameters->note = count;
     parameters->variant = variant;
     parameters->pitchOffset = notePitch;

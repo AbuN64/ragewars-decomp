@@ -14,7 +14,7 @@
 extern void osCreateThread(void *thread, s32 id, void *entry, void *argument, void *stack, s32 priority);
 
 void Cache_StartResourceLoadWorker(ResourceLoadWorker *worker, s32 id) {
-    osCreateMesgQueue(&worker->requests, worker->messages, 0x80);
+    osCreateMesgQueue(&worker->requests, worker->messages, 128);
     XPlus_FillMemory(worker->stack, id, 0x1000);
     osCreateThread(worker, id, &g_Cache_RunResourceLoadWorkerPackedAddress24, worker,
                      worker->stack + sizeof(worker->stack), g_resourceLoadIdlePriority);

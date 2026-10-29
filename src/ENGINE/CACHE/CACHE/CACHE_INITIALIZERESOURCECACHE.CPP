@@ -102,12 +102,12 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     }
     g_resourceCacheManager.nodes = (struct CMemEntry *)Heap_AllocateFromFront(&g_runtimeHeap, g_resourceCacheNodeCapacity * sizeof(struct CMemEntry));
     g_resourceCacheManager.slots = (struct CMemEntry **)Heap_AllocateFromFront(&g_runtimeHeap, g_resourceCacheNodeCapacity * sizeof(void *));
-    g_resourceCacheManager.links = (struct ResLink *)Heap_AllocateFromFront(&g_runtimeHeap, g_resourceCacheNodeCapacity * 0x2C);
+    g_resourceCacheManager.links = (struct ResLink *)Heap_AllocateFromFront(&g_runtimeHeap, g_resourceCacheNodeCapacity * 44);
     osCreateMesgQueue(&g_resourceCacheManager.lock, g_resourceCacheManager.lockSlot, 1);
     g_resourceCacheManager.reservedWord44 = 0;
     g_resourceCacheManager.reservedWord40 = 0;
-    List_InitializeIntrusive(&g_resourceCacheManager.entries, 0x18, 0x1C);
-    List_InitializeIntrusive(&g_resourceCacheManager.recent, 0x20, 0x24);
+    List_InitializeIntrusive(&g_resourceCacheManager.entries, 24, 28);
+    List_InitializeIntrusive(&g_resourceCacheManager.recent, 32, 36);
     g_resourceCacheManager.count = 0;
     for (i = 0; i < g_resourceCacheNodeCapacity; i++) {
         struct CMemEntry *node = &g_resourceCacheManager.nodes[i];
@@ -126,16 +126,16 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     g_resourceCacheManager.reservedWordC1C = 1;
 #endif
     g_resourceCacheManager.stamp = 0;
-    List_InitializeIntrusive(&g_resourceCacheManager.freeLinks, 0x28, 0x24);
-    List_InitializeIntrusive(&g_resourceCacheManager.listBAC, 0x28, 0x24);
-    List_InitializeIntrusive(&g_resourceCacheManager.listBC0, 0x28, 0x24);
+    List_InitializeIntrusive(&g_resourceCacheManager.freeLinks, 40, 36);
+    List_InitializeIntrusive(&g_resourceCacheManager.listBAC, 40, 36);
+    List_InitializeIntrusive(&g_resourceCacheManager.listBC0, 40, 36);
     for (i = 0; i < g_resourceCacheNodeCapacity; i++) {
         struct ResLink *link = &g_resourceCacheManager.links[i];
         link->owner = 0;
         List_AppendIntrusive(&g_resourceCacheManager.freeLinks, link);
     }
     HashTable_InitializeResourceTable(g_resourceCacheNodeCapacity);
-    osCreateMesgQueue((OSMesgQueue *)g_resourceRequestManager.queue, (OSMesg *)(g_resourceRequestManager.queue + 0x18), 0x40);
+    osCreateMesgQueue((OSMesgQueue *)g_resourceRequestManager.queue, (OSMesg *)(g_resourceRequestManager.queue + 0x18), 64);
     unlockMask = __osDisableInt();
     g_resourceHeapLockUsers -= 1;
     if (g_resourceHeapLockUsers != 0) {
@@ -346,7 +346,7 @@ void Cache_CompactResourceHeap(s32 unused, s32 compactAll) {
     s32 *arena;
     s32 *pool;
 
-    List_InitializeIntrusive(&queue, 0x20, 0x24);
+    List_InitializeIntrusive(&queue, 32, 36);
     if (compactAll != 0 || ((s32 *)&g_resourceAllocationCandidate)[0] == 0) {
         ((s32 *)&g_resourceAllocationCandidate)[0] = ((s32 *)&g_resourceAllocationCandidate)[7];
         if (((s32 *)&g_resourceAllocationCandidate)[7] == 0) {
@@ -360,7 +360,7 @@ void Cache_CompactResourceHeap(s32 unused, s32 compactAll) {
     do {
         node = (CacheEvictionNode *)pool[0];
         pool[0] = *(s32 *)&node->next;
-        if (!(*(s32 *)&node->flags & 0x701) && (u32)(*arena_end + 0x20) < node->start) {
+        if (!(*(s32 *)&node->flags & 0x701) && (u32)(*arena_end + 32) < node->start) {
             Heap_FreeAllocation(arena, node->start);
             split = Heap_AllocateFromFront(arena, node->end);
             if (split < node->start) {
@@ -419,7 +419,7 @@ void *Cache_RetainResourceByKey(s32 unusedCache, s32 resourceKey) {
     out = &value;
     node = (HashNode *)((s32)g_resourceHashBuckets +
         ((((resourceKey << 5) ^ ((u32)resourceKey >> 1) ^ ((u32)resourceKey >> 9) ^
-           ((u32)resourceKey >> 17)) & g_resourceHashEvenIndexMask.value) * 0x10));
+           ((u32)resourceKey >> 17)) & g_resourceHashEvenIndexMask.value) * 16));
     if (node->key != resourceKey) {
         goto not_initial;
     }

@@ -134,8 +134,8 @@ void *Animpool_AcquireSceneEffect(s32 effectPool, s32 *referenceCount) {
     if ((g_world.visibilityEnabled != 0) || ((u32)((struct CAnimPool *) effectPool)->UsedList.count < 3)) {
         acquiredEffect = ((struct CAnimPool *) effectPool)->FreeList.head;
         if (acquiredEffect != 0) {
-            List_RemoveIntrusive((void *)(effectPool + 0x5F00), acquiredEffect);
-            List_PrependIntrusive((void *)(effectPool + 0x5F14), acquiredEffect);
+            List_RemoveIntrusive((void *)(effectPool + 24320), acquiredEffect);
+            List_PrependIntrusive((void *)(effectPool + 24340), acquiredEffect);
             ((SceneEffect *)(acquiredEffect))->ref = referenceCount;
             if (referenceCount != 0) {
                 *referenceCount += 1;

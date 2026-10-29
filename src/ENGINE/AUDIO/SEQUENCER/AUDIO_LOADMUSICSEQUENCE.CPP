@@ -58,7 +58,7 @@ void Audio_FadeOutMusic(MusicFadeState *musicState) {
 
     fadeDuration = musicState->fadeDuration;
     musicState->fadeMode = 2;
-    musicState->playbackState = 0x20;
+    musicState->playbackState = 32;
     musicState->currentMidiVolume = (s32) (musicState->volume * 32767.0f);
     if (!(fadeDuration >= 0.1f)) {
         fadeDuration = 0.1f;

@@ -257,7 +257,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     Geometry_FlushModelBatch();
     /* Cache blob: header {3 sections, offsets}, then the resource list, the prop list and the display list, each 8-aligned. */
     resourceBytes = (u8 *)nextResource - (u8 *)resources;
-    offset = ((resourceBytes + 7) & ~7) + 0x18;
+    offset = ((resourceBytes + 7) & ~7) + 24;
     propBytes = (u8 *)nextProp - (u8 *)props;
     size = propBytes + 7;
     size &= ~7;
@@ -270,7 +270,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     cache = handle->data;
     world->cache = cache;
     cache[0] = 3;
-    world->cache[1] = 0x18;
+    world->cache[1] = 24;
     world->cache[2] = count;
     world->cache[3] = offset;
     Libc_CopyBytes(SetN64_GetPackSection(world->cache, 0), resources, resourceBytes);
@@ -392,7 +392,7 @@ typedef struct CScene_t {
     CActiveGridSection_t m_ActiveGridSections[128];
     char pad1B08[0x1B6B0 - 0x1B08];
     struct CacheResourceNode *m_pmeVisibilityData;
-    char m_VisData[0x25C]; /* CVisibilityData_t */
+    char m_VisData[604]; /* CVisibilityData_t */
     char pad1B910[0x1B928 - 0x1B910];
     s32 m_bVisibilityValid;
     char pad1B92C[0x1B930 - 0x1B92C];
@@ -414,7 +414,7 @@ static __inline__ s32 SceneFindShip(SceneModelIdTable *table) {
     s32 count = table->count;
     u16 *p = table->entries;
     for (i = 0; i < count; i++) {
-        if (p[i] == 0x33) {
+        if (p[i] == 51) {
             return i;
         }
     }

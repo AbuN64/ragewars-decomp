@@ -150,7 +150,7 @@ extern s32 CCollision_TestSegmentDisk(void *, void *, void *, f32, s32);
 extern s32 CCollision_TestSegmentPolygon(void *, void *, s32);
 extern s32 CCollision_TestRayCylinder(void *, void *, f32, f32, f32, s32, void *, s32);
 void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox *actor, PlatformCollisionEntryOwner *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
-    u8 collision[0x108];
+    u8 collision[264];
     CVector3 next;
     f32 hit_y;
     f32 extent0;
@@ -222,7 +222,7 @@ void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox
 }
 
 void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFromBox *actor, PlatformCollisionEntryOwner *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
-    u8 collision[0x108];
+    u8 collision[264];
     CVector3 next;
     f32 hit_y;
     f32 extent0;
@@ -415,7 +415,7 @@ void CPlatformCollision_ProcessRiderMotion(ActorCPlatformCollisionProcessRiderMo
 struct CCollisionInfo2_t;
 
 void CPlatformCollision_LiftActorToSurface(PlatformSavedCollisionQueryView *actor, void *owner, InputCPlatformCollisionLiftActorToSurface *input, SurfaceHit *query) {
-    u8 collision[0x108];
+    u8 collision[264];
     CVector3 next;
     f32 hit_y;
     f32 extent0;

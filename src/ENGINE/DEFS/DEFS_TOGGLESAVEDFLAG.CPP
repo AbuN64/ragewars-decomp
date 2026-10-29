@@ -7,7 +7,7 @@
 void Defs_ToggleSavedFlag(void) {
     g_pointLightBufferOffset = g_pointLightSavedBufferOffset;
     if (g_pointLightSavedBufferOffset == 0) {
-        g_pointLightSavedBufferOffset = 0x20;
+        g_pointLightSavedBufferOffset = 32;
         return;
     }
     g_pointLightSavedBufferOffset = 0;

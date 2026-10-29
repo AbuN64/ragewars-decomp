@@ -37,7 +37,7 @@ void Particle_RecycleReleasedEffects(void *recycleSystem) {
 
     i = 0;
     clear_mask = 0xFDFFFEFF;
-    remove_offset = 0xFC00;
+    remove_offset = 64512;
     active_mask = 0x01000000;
     flagged_offset = 0xFC14;
     do {

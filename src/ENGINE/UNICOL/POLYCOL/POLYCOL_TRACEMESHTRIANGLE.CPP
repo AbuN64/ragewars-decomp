@@ -113,7 +113,7 @@ void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
     i=0;
     base=&polygon;
     /* Vertex storage starts at 0x18 in the shared collision query. */
-    byteOffset=0x18;
+    byteOffset=24;
     cursor=points;
     ray=mesh->ray;
     polygon.vertexCount=3;

@@ -33,10 +33,10 @@ extern void Graphu64_ConvertMatrixToFixed(void *, void *);
 extern void Geometry_QueueDirectModel(s32, void *, void *, s32, s32);
 void SetN64_SetupLoadingBackdropEu(TimedSessionTransitionView *state) {
     s32 handle, h2;
-    u8 matrix[0x40];
+    u8 matrix[64];
 
     g_geometryFogEffectEnabled = 0;
-    handle = Scene_FindModelIdIndex(&g_world, 0xE10);
+    handle = Scene_FindModelIdIndex(&g_world, 3600);
     g_menuModelFillEnabled = 0;
     g_menuModelFillColor[0] = g_backdropModelFillValue;
     g_menuModelFillColor[1] = g_backdropModelFillValue;
@@ -52,7 +52,7 @@ void SetN64_SetupLoadingBackdropEu(TimedSessionTransitionView *state) {
         Geometry_BeginModelBatch();
         Geometry_QueueDirectModel(h2, VIEW_MATRICES + g_lightingBufferIndex * 64, &g_defaultParticleLighting, 0, -1);
         Geometry_FlushModelBatch();
-        SetN64_DrawTextLines(state, 0, (void *)g_backdropTextLinesByLanguage[g_languageIndex], g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScalePair, (&g_backdropTextScalePair)[1]);
+        SetN64_DrawTextLines(state, 0, (void *)g_backdropTextLinesByLanguage[g_languageIndex], g_hudReferenceViewportWidth / 2, 190, 10, g_backdropTextScalePair, (&g_backdropTextScalePair)[1]);
     }
 }
 #endif

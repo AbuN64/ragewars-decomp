@@ -43,21 +43,21 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     f32 x;
     f32 y;
     f32 z;
-    SK_FIELD(self, u8, 0xBB) = SK_FIELD(src, u8, 0x2F);
+    SK_FIELD(self, u8, 187) = SK_FIELD(src, u8, 47);
     translation.x = SK_FIELD(src, s32, 0) * 2.38418579e-05f;
     translation.y = SK_FIELD(src, s32, 4) * 2.38418579e-05f;
     translation.z = SK_FIELD(src, s32, 8) * 2.38418579e-05f;
-    if (SK_FIELD(self, u8, 0xBB) != 1) {
-        rotation.x = SK_FIELD(src, s32, 0xC) * 9.31322575e-09f;
-        rotation.y = SK_FIELD(src, s32, 0x10) * 9.31322575e-09f;
-        rotation.z = SK_FIELD(src, s32, 0x14) * 9.31322575e-09f;
+    if (SK_FIELD(self, u8, 187) != 1) {
+        rotation.x = SK_FIELD(src, s32, 12) * 9.31322575e-09f;
+        rotation.y = SK_FIELD(src, s32, 16) * 9.31322575e-09f;
+        rotation.z = SK_FIELD(src, s32, 20) * 9.31322575e-09f;
     } else {
         up.x = 0;
         up.y = (-1.0f);
         up.z = 0;
-        tilt.x = SK_FIELD(src, s32, 0xC) * 9.31322575e-09f;
-        tilt.y = SK_FIELD(src, s32, 0x10) * 9.31322575e-09f;
-        tilt.z = SK_FIELD(src, s32, 0x14) * 9.31322575e-09f;
+        tilt.x = SK_FIELD(src, s32, 12) * 9.31322575e-09f;
+        tilt.y = SK_FIELD(src, s32, 16) * 9.31322575e-09f;
+        tilt.z = SK_FIELD(src, s32, 20) * 9.31322575e-09f;
         matrix = self + 0x60;
         Graphu64_IdentityMatrix(matrix);
         RollMatrix(matrix, tilt.x);
@@ -77,28 +77,28 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     if (((rotation.z < 0) ? -rotation.z : rotation.z) > 0.00999999978f) {
         inside = 0;
     }
-    SK_FIELD(self, u8, 0xB9) = 0;
+    SK_FIELD(self, u8, 185) = 0;
     if (inside != 0) {
-        SK_FIELD(self, u8, 0xB9) = 1;
+        SK_FIELD(self, u8, 185) = 1;
     }
-    scale.x = SK_FIELD(src, s32, 0x18) * 2.38418579e-05f;
-    scale.y = SK_FIELD(src, s32, 0x1C) * 2.38418579e-05f;
-    scale.z = SK_FIELD(src, s32, 0x20) * 2.38418579e-05f;
-    SK_FIELD(self, f32, 0) = (f32)SK_FIELD(src, s32, 0x24) * 2 * 4.65661287e-10f;
-    SK_FIELD(self, f32, 4) = (f32)SK_FIELD(src, s32, 0x28) * 2 * 4.65661287e-10f;
+    scale.x = SK_FIELD(src, s32, 24) * 2.38418579e-05f;
+    scale.y = SK_FIELD(src, s32, 28) * 2.38418579e-05f;
+    scale.z = SK_FIELD(src, s32, 32) * 2.38418579e-05f;
+    SK_FIELD(self, f32, 0) = (f32)SK_FIELD(src, s32, 36) * 2 * 4.65661287e-10f;
+    SK_FIELD(self, f32, 4) = (f32)SK_FIELD(src, s32, 40) * 2 * 4.65661287e-10f;
     if (g_gameSettings.flags & 0x4000) {
         SK_FIELD(self, s32, 8) = 0;
-        SK_FIELD(self, s32, 0xC) = 0;
-        SK_FIELD(self, s32, 0x10) = 0;
+        SK_FIELD(self, s32, 12) = 0;
+        SK_FIELD(self, s32, 16) = 0;
     } else {
-        SK_FIELD(self, f32, 8) = (f32)SK_FIELD(src, u32, 0x3C) * 2.37487257e-06f;
-        SK_FIELD(self, f32, 0xC) = (f32)SK_FIELD(src, u32, 0x40) * 2.37487257e-06f;
-        SK_FIELD(self, f32, 0x10) = (f32)SK_FIELD(src, u32, 0x44) * 2.37487257e-06f;
+        SK_FIELD(self, f32, 8) = (f32)SK_FIELD(src, u32, 60) * 2.37487257e-06f;
+        SK_FIELD(self, f32, 12) = (f32)SK_FIELD(src, u32, 64) * 2.37487257e-06f;
+        SK_FIELD(self, f32, 16) = (f32)SK_FIELD(src, u32, 68) * 2.37487257e-06f;
     }
     matrix = self + 0x60;
-    SK_FIELD(self, u8, 0xB8) = SK_FIELD(src, u8, 0x37);
-    SK_FIELD(self, u8, 0xBA) = SK_FIELD(src, u8, 0x3B);
-    SK_FIELD(self, u8, 0xBD) = SK_FIELD(src, u8, 0x4B);
+    SK_FIELD(self, u8, 184) = SK_FIELD(src, u8, 55);
+    SK_FIELD(self, u8, 186) = SK_FIELD(src, u8, 59);
+    SK_FIELD(self, u8, 189) = SK_FIELD(src, u8, 75);
     Graphu64_IdentityMatrix(matrix);
     Graphu64_ScaleMatrixWorld(matrix, scale.x, scale.y, scale.z);
     RollMatrix(matrix, rotation.z);
@@ -443,7 +443,7 @@ typedef struct HitBoxTable {
    duplicates across sectors dropped by their summed signature words). Writes their number to
    outCount and returns 1 when any accepted box has flagBA set. */
 s32 Lighting_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
-    u32 keys[0x40];
+    u32 keys[64];
     /* A query may intersect every world sector; accepted volumes are capped at 64. */
     WorldSector *sectors[128];
     s32 flag;
@@ -483,7 +483,7 @@ s32 Lighting_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
                 if (entry->flagBA != 0) {
                     flag = 1;
                 }
-                if (count == 0x40) {
+                if (count == 64) {
                     break;
                 }
             }
@@ -524,7 +524,7 @@ s32 Lighting_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
                         if (entry->flagBA != 0) {
                             flag = 1;
                         }
-                        if (count == 0x40) {
+                        if (count == 64) {
                             *outCount = count;
                             return flag;
                         }
@@ -595,12 +595,12 @@ s32 Lighting_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *cou
                         key = Statinst_FindPlacedPropIndex(wanted, table);
                         for (n = 0; n < len; n++) {
                             id = *ids;
-                            if (id >= 0x1770) {
-                                id -= 0x1770;
-                            } else if (id >= 0xFA0) {
-                                id -= 0xFA0;
-                            } else if (id >= 0x7D0) {
-                                id -= 0x7D0;
+                            if (id >= 6000) {
+                                id -= 6000;
+                            } else if (id >= 4000) {
+                                id -= 4000;
+                            } else if (id >= 2000) {
+                                id -= 2000;
                             }
                             if (id == key) {
                                 found = 1;
@@ -619,7 +619,7 @@ s32 Lighting_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *cou
                 if (box->flagBA != 0) {
                     result = 1;
                 }
-                if (foundCount == 0x40) {
+                if (foundCount == 64) {
                     break;
                 }
             }
@@ -711,9 +711,9 @@ typedef struct LitColorTable {
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
 #define MAX(X,Y) ((X) > (Y) ? (X) : (Y))
 static inline void clampLitColor(u8 *dest, LitVertex *vertex) {
-    dest[0] = MAX((u8)MIN(vertex->color[0], 0xE1), 0x1E);
-    dest[1] = MAX((u8)MIN(vertex->color[1], 0xE1), 0x1E);
-    dest[2] = MAX((u8)MIN(vertex->color[2], 0xE1), 0x1E);
+    dest[0] = MAX((u8)MIN(vertex->color[0], 225), 30);
+    dest[1] = MAX((u8)MIN(vertex->color[1], 225), 30);
+    dest[2] = MAX((u8)MIN(vertex->color[2], 225), 30);
 }
 /* Builds a lit copy of a model pack section 0: clears the per-vertex light accumulators, copies the model into a new
  * allocation (with a colour trailer section when the bounds query found light volumes that need it), adds the model's
@@ -721,7 +721,7 @@ static inline void clampLitColor(u8 *dest, LitVertex *vertex) {
  * stores each vertex colour clamped to 30..225. Returns the allocation handle, or 0 when allocation fails. */
 s32 Lighting_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds, PackedMatrixWords *matrices, s32 skinned,
                          u8 *wanted) {
-    void *lights[0x40];
+    void *lights[64];
     s32 lightCount;
     s32 needsColors;
     s32 modelBytes;
@@ -751,8 +751,8 @@ s32 Lighting_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bound
         /* section pack: last section index, section offsets, 0xDEADBEEF end marker */
         pack = (s32 *)*allocation;
         pack[0] = 1;
-        pack[1] = 0x10;
-        pack[2] = modelBytes + 0x10;
+        pack[1] = 16;
+        pack[2] = modelBytes + 16;
         pack[3] = 0xDEADBEEF;
         copiedModel = (Vertices38 *)(*allocation + pack[1]);
         colors = *allocation + pack[2];

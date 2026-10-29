@@ -26,7 +26,7 @@ void CCredits_UpdateScroll(void *session) {
             Playerai_GetFirstPlayer(&g_playerViewRenderContext);
             if (g_creditsSelectSpawnOnExit != 0) {
                 if (g_creditsReturnToFrontend == 0) {
-                    SetN64_SelectSpawnAfterCredits(session, 0x7CF);
+                    SetN64_SelectSpawnAfterCredits(session, 1999);
                     return;
                 }
                 goto block_6;
@@ -38,7 +38,7 @@ block_6:
             }
         }
     } else {
-        if (g_hudReferenceViewportHeight >= 0xDF) {
+        if (g_hudReferenceViewportHeight >= 223) {
             g_creditsScrollPosition -= g_creditsNormalScrollStep;
         } else {
             g_creditsScrollPosition -= g_creditsFastScrollStep;

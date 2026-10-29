@@ -108,7 +108,7 @@ void Link_DispatchObjectLinks(s32 actorAddress, s32 event, void *actor) {
     if (actorAddress != 0) {
         Scene_FindAlternateTriggerRange(&g_world, actorAddress, &triggers, &triggerCount);
         if (triggerCount != 0) {
-            Link_DispatchMatchingTriggers(triggers, triggerCount, 0, event & 0x7FF, event & 0x3800, 0x3800, actor);
+            Link_DispatchMatchingTriggers(triggers, triggerCount, 0, event & 0x7FF, event & 0x3800, 14336, actor);
         }
     }
 }
@@ -129,8 +129,8 @@ void Link_DispatchTriggerExit(Record14 *trigger) {
     Record14 copy;
     u8 *bytes = (u8 *)trigger;
 
-    bytes[0xE] |= 0x20;
-    if (bytes[0x11] == 1) {
+    bytes[14] |= 0x20;
+    if (bytes[17] == 1) {
         copy = *trigger;
         ((u8 *)&copy)[0x12] = 2;
         ((u8 *)&copy)[0x10] = 0;
@@ -317,7 +317,7 @@ s32 Link_CheckTriggerMessage(void *trigger, struct Player *player) {
     if (object->sequenceId == g_activeLinkSequenceId) {
         if (player != 0) {
             platform = &g_navigationPlatformActors[object->platformIndex];
-            if ((object->messageKind == 0xA) && (object->messageState == 1)) {
+            if ((object->messageKind == 10) && (object->messageState == 1)) {
                 return Action_ShowTriggerMessage(platform, &platform->motion, player);
             }
         }

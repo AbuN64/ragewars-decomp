@@ -12,5 +12,5 @@
 #define LINES_TEXT g_introTextLines
 #endif
 void SetN64_DrawCenteredIntroText(void *state) {
-    SetN64_DrawTextLines(state, 1, LINES_TEXT, g_hudReferenceViewportWidth / 2, 5, 0xA, 0.75f, 1.0f);
+    SetN64_DrawTextLines(state, 1, LINES_TEXT, g_hudReferenceViewportWidth / 2, 5, 10, 0.75f, 1.0f);
 }

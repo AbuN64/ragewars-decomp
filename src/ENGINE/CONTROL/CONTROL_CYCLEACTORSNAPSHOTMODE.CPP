@@ -91,7 +91,7 @@ void Control_SaveControllerSetup(void)
   do
   {
     profileValue = *((s32 *) ((&g_controllerProfileModeBase) + profileByteOffset));
- do { savedValueOffset = profileIndex * 4; profileIndex += 1; *((s32 *) (((u8 *) g_controllerSnapshotProfileValues) + savedValueOffset)) = profileValue; profileByteOffset += 0x224; } while (0);
+ do { savedValueOffset = profileIndex * 4; profileIndex += 1; *((s32 *) (((u8 *) g_controllerSnapshotProfileValues) + savedValueOffset)) = profileValue; profileByteOffset += 548; } while (0);
   }
   while (profileIndex < 4);
   profilesReset = 0;
@@ -128,7 +128,7 @@ void Control_RestoreControllerSetup(void) {
             savedProfileValue = g_controllerSnapshotProfileValues[j];
             j += 1;
             *(s32 *)(&g_controllerProfileModeBase + profileByteOffset) = savedProfileValue;
-            profileByteOffset += 0x224;
+            profileByteOffset += 548;
         } while (j < 4);
         Rumble_FreeAllPoolNodes(&g_controllerRumblePool);
         g_controllerSetupSaved = 0;
@@ -178,7 +178,7 @@ void Control_CycleActorSnapshotMode(void) {
             if (player != 0) {
                 if (snapshot->mode == 1 &&
                     (g_activeActorKind != ((Shared_ActorView *)player)->spawn ||
-                     (u16)(((Shared_ActorView *)player)->action - 0x16) < 12)) {
+                     (u16)(((Shared_ActorView *)player)->action - 22) < 12)) {
                     snapshot->mode = 2;
                 }
                 snapshot->savedActorId = ((Shared_ActorView *)player)->spawn;
@@ -188,7 +188,7 @@ void Control_CycleActorSnapshotMode(void) {
         snapshot->mode = 0;
     }
     if (snapshot->mode != 0) {
-        snapshot->countdown = 0xF0;
+        snapshot->countdown = 240;
         snapshot->active = 1;
     } else {
         snapshot->countdown = 0;

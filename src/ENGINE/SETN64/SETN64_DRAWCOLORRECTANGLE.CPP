@@ -19,8 +19,8 @@ void SetN64_DrawColorRectangle(void *unused, u8 *color, s32 left, s32 top, s32 r
     if (color[3] != 0) {
         gDPPipeSync(g_displayListCursor++);
         gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
-        Geometry_SetModePreset(0x13);
-        Geometry_SetCombineMode(0x19);
+        Geometry_SetModePreset(19);
+        Geometry_SetCombineMode(25);
         gDPSetPrimColor(g_displayListCursor++, 255, 255, color[0], color[1], color[2], color[3]);
         {
             Gfx *cmd = g_displayListCursor++;
@@ -64,7 +64,7 @@ void SetN64_SelectSpawnAndStartSession(GameSession *gameSession, s32 target) {
     gameSession->phase = 2;
     gameSession->selector = selectionValues;
     gameSession->selectionActive = 1;
-    gameSession->target = 0xD;
+    gameSession->target = 13;
 }
 
 void SetN64_ResetSessionPlayerPools(void *owner, s32 count, s32 force_active) {

@@ -481,9 +481,9 @@ CVector3 Graphu64_BlendRandomDirection(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((Graphu64_NextRandom() % 20000) - 0x2710);
-    random.y = (f32)((Graphu64_NextRandom() % 20000) - 0x2710);
-    random.z = (f32)((Graphu64_NextRandom() % 20000) - 0x2710);
+    random.x = (f32)((Graphu64_NextRandom() % 20000) - 10000);
+    random.y = (f32)((Graphu64_NextRandom() % 20000) - 10000);
+    random.z = (f32)((Graphu64_NextRandom() % 20000) - 10000);
     randomPtr = &random;
 
     randomMagnitude = Gu_Sqrtf((randomPtr->x * randomPtr->x) +
@@ -522,7 +522,7 @@ CVector3 Graphu64_BlendRandomXDirection(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((Graphu64_NextRandom() % 20000) - 0x2710) *
+    random.x = (f32)((Graphu64_NextRandom() % 20000) - 10000) *
                *(&g_inputDirectionNormalizeScale + 1);
     random.y = in->y;
     random.z = in->z;

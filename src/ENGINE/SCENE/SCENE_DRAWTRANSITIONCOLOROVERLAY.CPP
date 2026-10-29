@@ -51,7 +51,7 @@ void Scene_SetTypeThreeActorStateBits(void *world) {
                 Rumble_SetActorStateBit(world, entry, 1);
                 i += 1;
             }
-            offset += 0x2E8;
+            offset += 744;
         } while (i < count);
     }
 }
@@ -81,7 +81,7 @@ void Scene_ClearTypeThreeActorStateBits(void *world) {
                 Rumble_SetActorStateBit(world, entry, 0);
                 i += 1;
             }
-            offset += 0x2E8;
+            offset += 744;
         } while (i < count);
     }
 }

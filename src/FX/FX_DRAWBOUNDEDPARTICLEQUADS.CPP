@@ -231,7 +231,7 @@ void Fx_ResetRibbonVertexPool(void *object) {
     struct RibbonVertexPool *pool = object;
     u32 index = g_lightingBufferIndex;
     pool->state = 0;
-    pool->remaining = 0x12C;
+    pool->remaining = 300;
     pool->next = pool->vertices[index];
 }
 
@@ -240,7 +240,7 @@ s32 Fx_AllocateRibbonSegment(void *ribbonWorld, s32 ribbon) {
     actors = (((struct ParticleActorListView *) ((s8 *) ribbonWorld))->particleActors);
     if (actors != 0) {
         Lists_Remove(ribbonWorld + 0x6A90, (ListLink *)actors);
-        Lists_Append(ribbon + 0x40, actors);
+        Lists_Append(ribbon + 64, actors);
     }
     return actors;
 }
@@ -248,7 +248,7 @@ s32 Fx_AllocateRibbonSegment(void *ribbonWorld, s32 ribbon) {
 void Fx_FreeRibbonSegment(s32 ribbonWorld, void *ribbon, void *actors) {
     (((struct ParticleRibbonLifetimeView *) ((s8 *) ribbon))->length) = (f32) ((((struct ParticleRibbonLifetimeView *) ((s8 *) ribbon))->length) - (((struct FloatStateB0 *) ((s8 *) actors))->segmentLength));
     Lists_Remove(ribbon + 0x40, actors);
-    Lists_Append(ribbonWorld + 0x6A90, actors);
+    Lists_Append(ribbonWorld + 27280, actors);
 }
 
 void Fx_RibbonNoop(void) {

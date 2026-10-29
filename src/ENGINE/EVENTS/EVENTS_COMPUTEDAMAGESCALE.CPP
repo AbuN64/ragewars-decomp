@@ -112,7 +112,7 @@ f32 Events_ComputeDamageScale(ActorEventsComputeDamageScale *self, Target *targe
         shielded = 0;
     }
     if (target->kind == 2) {
-        if (target->type == 0x404 || target->type == 0x402) {
+        if (target->type == 1028 || target->type == 1026) {
             special = 1;
         }
         if (target->kind == 2 && g_currentActorInstance.owner == self && g_currentActorInstance.slot != -1 && !special) {
@@ -180,7 +180,7 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
     zero.x = 0;
     zero.y = 0;
     zero.z = 0;
-    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE9, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&point, 0, -1, kind == 5 ? 3 : 1);
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 233, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&point, 0, -1, kind == 5 ? 3 : 1);
     point.x = 0;
     point.y = 0;
     point.z = 0;
@@ -189,16 +189,16 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
 
 void Events_ApplyDirectDamage(unsigned char *source, s32 target, s32 kind, Triple position, struct IntPair params) {
     if (*source == 1) {
-        Events_ApplyDamageEvent(source, target, kind, position, params, 0, 0, 0x80);
+        Events_ApplyDamageEvent(source, target, kind, position, params, 0, 0, 128);
     }
 }
 
 void Events_ApplyRadialDamage(s32 source, s32 target, s32 kind, Triple position, struct IntPair params) {
-    Events_ApplyDamageEvent((void *)source, target, kind, position, params, 1, 0, 0x80);
+    Events_ApplyDamageEvent((void *)source, target, kind, position, params, 1, 0, 128);
 }
 
 void Events_ApplyRadialDamageWithKnockback(s32 source, s32 target, s32 kind, Triple position, struct IntPair params) {
-    Events_ApplyDamageEvent((void *)source, target, kind, position, params, 1, 1, 0x80);
+    Events_ApplyDamageEvent((void *)source, target, kind, position, params, 1, 1, 128);
 }
 
 void Events_PreserveEventArgument(int unused0, int unused1, int unused2, int eventArgument) {

@@ -164,11 +164,11 @@ void Cache_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
 
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
-    Geometry_SetCombineMode(0x19);
-    Geometry_SetModePreset(0x15);
+    Geometry_SetCombineMode(25);
+    Geometry_SetModePreset(21);
     gDPSetPrimColor(g_displayListCursor++, 0, 0, 0xA0, 0xA0, 0xA0, 0x00);
     gDPFillRectangle(g_displayListCursor++, left - 1, top - 1, right + 1, bottom + 1);
-    Geometry_SetModePreset(0x1B);
+    Geometry_SetModePreset(27);
     gDPSetPrimColor(g_displayListCursor++, 0, 0, 0xA0, 0xA0, 0xA0, 0xFF);
     gDPFillRectangle(g_displayListCursor++, left, top, right, bottom);
 
@@ -203,7 +203,7 @@ void Cache_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
 
             gDPSetPrimColor(g_displayListCursor++, 0, 0, r, g, b, 0xFF);
             hi = bottom - ((u32)(((node->start + node->end) - base) * (bottom - top)) / total) - 1;
-            lo = bottom - ((u32)(((node->start - base) - 0x20) * (bottom - top)) / total) - 1;
+            lo = bottom - ((u32)(((node->start - base) - 32) * (bottom - top)) / total) - 1;
             if (hi < lo) {
                 gDPFillRectangle(g_displayListCursor++, left, hi, right, lo);
             }

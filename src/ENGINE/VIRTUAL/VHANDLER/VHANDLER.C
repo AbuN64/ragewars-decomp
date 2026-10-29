@@ -66,7 +66,7 @@ void Vhandler_InitializePagerEuroExtended(void) {
         Virtual_AppendPageChainNode((Field_void_4 *)&g_resourcePager.head, &g_resourcePager.slots[i]);
         g_resourcePager.slots[i].index = i;
     }
-    osCreateMesgQueue(&g_resourcePager.completion, g_resourcePager.list0Data, 0x21);
+    osCreateMesgQueue(&g_resourcePager.completion, g_resourcePager.list0Data, 33);
     osCreateMesgQueue(&g_resourcePager.jobs, g_resourcePager.list1Data, 8);
     osCreateMesgQueue(&g_resourcePager.pending, g_resourcePager.list2Data, 8);
     g_resourcePager.regions.start = 0x400;
@@ -87,9 +87,9 @@ void Vhandler_InitializePagerEuroExtended(void) {
         osSendMesg(&g_resourcePager.jobs, &g_resourcePager.channels[i], 1);
     }
     g_resourcePager.f20 = 0;
-    osSetEventMesg(0xC, &g_resourcePager.completion, &g_resourcePager.f20);
-    XPlus_FillMemory(g_resourcePager.pool, 0x63, 0x200);
-    osCreateThread(g_resourcePager.queue, 0x63, g_pagerWorkerRomEntry, 0, g_resourcePager.queueData, 0x93);
+    osSetEventMesg(12, &g_resourcePager.completion, &g_resourcePager.f20);
+    XPlus_FillMemory(g_resourcePager.pool, 99, 0x200);
+    osCreateThread(g_resourcePager.queue, 99, g_pagerWorkerRomEntry, 0, g_resourcePager.queueData, 147);
     osStartThread(g_resourcePager.queue);
 }
 
@@ -370,7 +370,7 @@ void Vhandler_UpdatePagerStatistics(void) {
         *slotAge = age + 1;
         slotIndex += 1;
         slotAge += 4;
-    } while (slotIndex < 0x18);
+    } while (slotIndex < 24);
 
     region = &g_pagerFirstRegion;
     allocatedBytes = 0;
@@ -378,7 +378,7 @@ void Vhandler_UpdatePagerStatistics(void) {
         do {
             pagesValue = region->pages;
             region = region->next;
-            allocatedBytes += pagesValue << 0xC;
+            allocatedBytes += pagesValue << 12;
         } while (region != 0);
     }
 
@@ -391,12 +391,12 @@ void Vhandler_UpdatePagerStatistics(void) {
 }
 
 void Vhandler_MapBootstrapAddressRange(void) {
-    osMapTLB(0x1F, 0x1FE000, 0x200000, 0, 0x100000, 7);
+    osMapTLB(31, 0x1FE000, 0x200000, 0, 0x100000, 7);
 }
 
 void *Vhandler_AllocateVirtualRegion(s32 sourceAddress, s32 unusedArgument, s32 regionLabel)
 {
-  char completionQueueStorage[0x18];
+  char completionQueueStorage[24];
   int pageTableBytes;
   Block10 blk;
   s32 completionMessage;
@@ -406,7 +406,7 @@ void *Vhandler_AllocateVirtualRegion(s32 sourceAddress, s32 unusedArgument, s32 
   void **resourceResult;
   Draw *regionAllocation;
   int evenPageCount;
-  pageCount = ((u32) (sourceAddress + 0xFFF)) >> 0xC;
+  pageCount = ((u32) (sourceAddress + 0xFFF)) >> 12;
   evenPageCount = (pageCount + 1) & (~1);
   if (1)
   {
@@ -415,7 +415,7 @@ void *Vhandler_AllocateVirtualRegion(s32 sourceAddress, s32 unusedArgument, s32 
     blk.f2C = sourceAddress;
     blk.f34 = (void **) completionQueueStorage;
     pageTableBytes = pageCount * 4;
-    rounded = evenPageCount + 0x18;
+    rounded = evenPageCount + 24;
     resourceResult = Cache_AllocateResource(0, pageTableBytes + rounded, 3, &s_virtualRegionText);
     regionAllocation = *resourceResult;
     blk.f30 = regionAllocation;
@@ -428,7 +428,7 @@ void *Vhandler_AllocateVirtualRegion(s32 sourceAddress, s32 unusedArgument, s32 
 }
 
 void Vhandler_FreeVirtualRegion(s32 regionHandle) {
-    char completionQueueStorage[0x18];
+    char completionQueueStorage[24];
     BlockVirtualFreeVirtualRegion block;
     s32 completionMessage;
     void *unusedPointer;
@@ -455,8 +455,8 @@ extern char g_pagerDispatcherRomEntry[];
 void Vhandler_RunPagerDispatcher(void) {
     OSMesg request;
 
-    XPlus_FillMemory(g_resourcePager.pool2, 0x62, sizeof(g_resourcePager.pool2));
-    osCreateThread(g_resourcePager.queueData, 0x62, g_pagerDispatcherRomEntry, 0, g_resourcePager.pool2 + sizeof(g_resourcePager.pool2), 0x94);
+    XPlus_FillMemory(g_resourcePager.pool2, 98, sizeof(g_resourcePager.pool2));
+    osCreateThread(g_resourcePager.queueData, 98, g_pagerDispatcherRomEntry, 0, g_resourcePager.pool2 + sizeof(g_resourcePager.pool2), 148);
     osStartThread(g_resourcePager.queueData);
     for (;;) {
         osRecvMesg(&g_resourcePager.completion, &request, 1);
@@ -652,7 +652,7 @@ void Virtual_AssignVirtualRegion(RegionDesc *desc)
     s32 fill;
 
     start = 0;
-    pages = (desc->size + 0xFFF) / 0x1000;
+    pages = (desc->size + 4095) / 0x1000;
     p = &g_pagerFirstRegion;
     prev = 0;
     r = desc->region;

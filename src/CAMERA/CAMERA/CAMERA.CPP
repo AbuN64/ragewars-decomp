@@ -882,7 +882,7 @@ actor_found:
         camera->stretchX = 1.0f;
     }
     previousKickStep = camera->kickStep;
-    kickStepOperand = 0x32;
+    kickStepOperand = 50;
     if (previousKickStep != kickStepOperand) {
         camera->stretchY = (f32) (((f32) (kickStepOperand - previousKickStep) * 0.08f) + 1.0f);
         kickStepDelta = g_frameElapsedTime * 10.0f;
@@ -894,8 +894,8 @@ actor_found:
         advancedKickStep = camera->kickStep + kickStepOperand;
         clampedKickStep = advancedKickStep;
         camera->kickStep = advancedKickStep;
-        if ((u32) (clampedKickStep & 0xFFFF) >= 0x33U) {
-            clampedKickStep = 0x32;
+        if ((u32) (clampedKickStep & 0xFFFF) >= 51U) {
+            clampedKickStep = 50;
         }
         camera->kickStep = clampedKickStep;
     }
@@ -996,11 +996,11 @@ actor_found:
     frameLights->light0CopyB = 0;
     frameLights->light0PadB = 0;
     frameLights->light1R = 0;
-    frameLights->light1G = 0x80;
+    frameLights->light1G = 128;
     frameLights->light1B = 0;
     frameLights->light1PadA = 0;
     frameLights->light1CopyR = 0;
-    frameLights->light1CopyG = 0x80;
+    frameLights->light1CopyG = 128;
     frameLights->light1CopyB = 0;
     frameLights->light1PadB = 0;
     Camera_UpdateFrustumBounds(camera);
@@ -1240,7 +1240,7 @@ void Camera_DrawWorldViewLayers(char *view, char *world) {
         gDPSetBlendColor(g_displayListCursor++, 255, 255, 255, 255);
         gDPSetPrimDepth(g_displayListCursor++, 65535, 65535);
         gDPSetDepthSource(g_displayListCursor++, G_ZS_PRIM);
-        Geometry_SetModePreset(0x16);
+        Geometry_SetModePreset(22);
         {
             Gfx *_g;
 

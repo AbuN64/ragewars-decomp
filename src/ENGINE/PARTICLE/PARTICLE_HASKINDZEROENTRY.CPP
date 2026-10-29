@@ -52,7 +52,7 @@ s32 Particle_HasKindZeroEntry(ParticleKindListView *obj) {
     s32 j;
     ParticleKindIdEntry *entry;
 
-    if (obj->kind == 0x427) return 1;
+    if (obj->kind == 1063) return 1;
     for (i = 0; i < 22; i++) {
         for (j = 0; j < 3; j++) {
             entry = g_weaponInfoByType[i]->first[j];
@@ -137,23 +137,23 @@ void Particle_HandlePlayerContact(void *particle, void *player) {
     void *eventParameterAddress;
     void *eventHalfwordAddress;
 
-    XPlus_FillMemory(&scratch, 0, 0xC);
-    if (((Shared_Particle *)particle)->inst.type == 0x40F) {
-        SoundElement_PlaySoundAtPosition(0xCDA, ((Shared_ActorView *)player)->position.vector,
+    XPlus_FillMemory(&scratch, 0, 12);
+    if (((Shared_Particle *)particle)->inst.type == 1039) {
+        SoundElement_PlaySoundAtPosition(3290, ((Shared_ActorView *)player)->position.vector,
                       (s32)&((Shared_ActorView *)player)->position.vector, -1);
         Playerai_StartDamageTimer(player, 30.0f, 3.0f,
                      ((Shared_Particle *)particle)->owner, 0);
         CScene_StartEventClips(&g_world,
                       (char *)((Shared_ActorView *)player)->controller + 0x140,
-                      0x14, scratch, g_particleOwnerImpactRadiusAndStrength[1], g_particleOwnerImpactDuration);
+                      20, scratch, g_particleOwnerImpactRadiusAndStrength[1], g_particleOwnerImpactDuration);
         ((Shared_ActorView *)player)->impactTimer = (&g_particleOwnerImpactDuration)[1];
     }
 
     particleDescription = ((Shared_Particle *)particle)->desc;
     if (Particle_HasSurfaceFlag(particle) != 0) {
-        contactEventIndex = 0xC;
+        contactEventIndex = 12;
     } else {
-        contactEventIndex = 0xA;
+        contactEventIndex = 10;
     }
     eventHalfwordOffset = contactEventIndex * 2;
     events = particleDescription->events;
@@ -192,5 +192,5 @@ void Particle_EncodeRenderLayer(void *actor, s32 *renderFlags) {
             result = 1;
         }
     }
-    *renderFlags |= result << 0x1E;
+    *renderFlags |= result << 30;
 }

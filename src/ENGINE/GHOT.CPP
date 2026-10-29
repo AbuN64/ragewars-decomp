@@ -50,22 +50,22 @@ void Ghot_DispatchAttachmentEffects(ModelAttachmentEffect *effectAttachments, s3
                 attachmentMask = effectBinding->effectMask;
                 switch (attachmentMask) {                  /* irregular */
 #if !defined(VERSION_DE)
-                case 0x2:
-                    Barrel_SpawnActorEffect(actor, 0x51, pos, attachmentEffectFlags);
+                case 2:
+                    Barrel_SpawnActorEffect(actor, 81, pos, attachmentEffectFlags);
                     break;
-                case 0x8:
-                    Barrel_SpawnActorEffect(actor, 0x5C, pos, attachmentEffectFlags);
+                case 8:
+                    Barrel_SpawnActorEffect(actor, 92, pos, attachmentEffectFlags);
                     break;
 #endif
-                case 0x1:
-                case 0x4:
-                case 0x10:
-                case 0x20:
+                case 1:
+                case 4:
+                case 16:
+                case 32:
                     break;
-                case 0x40:
+                case 64:
                     actor->attachmentPosition = pos;
                     actorDefinitionKind = *actor->definition;
-                    if (((actorDefinitionKind == 1) && (actor->action == 0x21)) || ((actorDefinitionKind == 0xB) && (actor->player->action == 0x26))) {
+                    if (((actorDefinitionKind == 1) && (actor->action == 33)) || ((actorDefinitionKind == 11) && (actor->player->action == 38))) {
                         InstHdr_CopyActorPositionAndModel(actor, pos, &mapped, &room, 0, 1);
                         rotation = Graphu64_BuildDirectionQuaternion(&actor->attachmentDirection);
                         zero.x = 0;
@@ -84,70 +84,70 @@ void Ghot_DispatchAttachmentEffects(ModelAttachmentEffect *effectAttachments, s3
                             g_attachmentParticleEmissionThreshold
 #endif
                         ) {
-                            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE6, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
+                            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 230, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
                         }
-                        Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x8A, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
+                        Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 138, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
                     }
                     break;
-                case 0x80:
-                    Barrel_SpawnActorEffect(actor, 0xAC, pos, attachmentEffectFlags);
+                case 128:
+                    Barrel_SpawnActorEffect(actor, 172, pos, attachmentEffectFlags);
                     break;
                 case 0x100:
-                    Barrel_SpawnActorEffect(actor, 0xAD, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 173, pos, attachmentEffectFlags);
                     break;
                 case 0x200:
-                    Barrel_SpawnActorEffect(actor, 0xAE, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 174, pos, attachmentEffectFlags);
                     break;
                 case 0x400:
-                    Barrel_SpawnActorEffect(actor, 0xAF, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 175, pos, attachmentEffectFlags);
                     break;
                 case 0x800:
-                    Barrel_SpawnActorEffect(actor, 0xB0, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 176, pos, attachmentEffectFlags);
                     break;
                 case 0x1000:
-                    Barrel_SpawnActorEffect(actor, 0xB1, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 177, pos, attachmentEffectFlags);
                     break;
                 case 0x2000:
-                    Barrel_SpawnActorEffect(actor, 0xB2, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 178, pos, attachmentEffectFlags);
                     break;
                 case 0x4000:
-                    Barrel_SpawnActorEffect(actor, 0xB3, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 179, pos, attachmentEffectFlags);
                     break;
                 case 0x8000:
-                    Barrel_SpawnActorEffect(actor, 0xB4, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 180, pos, attachmentEffectFlags);
                     break;
                 case 0x10000:
-                    Barrel_SpawnActorEffect(actor, 0xB5, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 181, pos, attachmentEffectFlags);
                     break;
                 case 0x20000:
-                    Barrel_SpawnActorEffect(actor, 0xB6, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 182, pos, attachmentEffectFlags);
                     break;
                 case 0x40000:
-                    Barrel_SpawnActorEffect(actor, 0xB7, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 183, pos, attachmentEffectFlags);
                     break;
                 case 0x80000:
-                    Barrel_SpawnActorEffect(actor, 0xB8, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 184, pos, attachmentEffectFlags);
                     break;
                 case 0x100000:
-                    Barrel_SpawnActorEffect(actor, 0xB9, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 185, pos, attachmentEffectFlags);
                     break;
                 case 0x200000:
-                    Barrel_SpawnActorEffect(actor, 0xBA, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 186, pos, attachmentEffectFlags);
                     break;
                 case 0x400000:
-                    Barrel_SpawnActorEffect(actor, 0xBB, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 187, pos, attachmentEffectFlags);
                     break;
                 case 0x20000000:
-                    Barrel_SpawnActorEffect(actor, 0x1E9, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 489, pos, attachmentEffectFlags);
                     break;
                 case 0x40000000:
-                    Barrel_SpawnActorEffect(actor, 0x1EA, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 490, pos, attachmentEffectFlags);
                     break;
                 case 0x80000000:
-                    Barrel_SpawnActorEffect(actor, 0x1EB, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 491, pos, attachmentEffectFlags);
                     break;
                 case 0x8000000:
-                    Barrel_SpawnActorEffect(actor, 0x11C, pos, attachmentEffectFlags);
+                    Barrel_SpawnActorEffect(actor, 284, pos, attachmentEffectFlags);
                     break;
                 case 0x10000000:
                     actor->secondaryAttachmentPosition = pos;
@@ -156,13 +156,13 @@ void Ghot_DispatchAttachmentEffects(ModelAttachmentEffect *effectAttachments, s3
                     particleLifeRange = 5;
                     break;
                 case 0x1000000:
-                    particleLifeRange = 0xA;
+                    particleLifeRange = 10;
                     break;
                 case 0x2000000:
-                    particleLifeRange = 0xF;
+                    particleLifeRange = 15;
                     break;
                 case 0x4000000:
-                    particleLifeRange = 0x14;
+                    particleLifeRange = 20;
                     break;
                 }
                 if (particleLifeRange != 0) {

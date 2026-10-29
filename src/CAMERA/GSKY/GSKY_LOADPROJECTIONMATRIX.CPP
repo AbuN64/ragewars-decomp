@@ -10,6 +10,6 @@ void Gsky_LoadProjectionMatrix(u32 cameraAddress) {
     Gfx *cmd;
     u32 offset;
 
-    offset = (g_lightingBufferIndex << 6) + 0x448;
+    offset = (g_lightingBufferIndex << 6) + 1096;
     gSPMatrix(g_displayListCursor++, cameraAddress + offset, G_MTX_LOAD | G_MTX_PROJECTION);
 }

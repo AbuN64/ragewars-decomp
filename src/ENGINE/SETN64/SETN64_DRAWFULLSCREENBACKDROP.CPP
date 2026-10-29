@@ -33,9 +33,9 @@ void SetN64_DrawFullscreenBackdrop(void *unused) {
     gDPSetRenderMode(g_displayListCursor++, ((0)), 0);
     gDPSetFillColor(g_displayListCursor++, ((0x10001)));
     gDPFillRectangle(g_displayListCursor++, 0, 0, (SCREEN_WD), (SCREEN_HT));
-    OnScreen_GetImageDimensions(0x386, 0, &width, &height);
+    OnScreen_GetImageDimensions(902, 0, &width, &height);
     if (width != 0 && height != 0) {
         Onscrn_SetupSpriteMode(0xFF);
-        OnScreen_DrawSpriteResource(0x386, 0, 0, 0, (f32)SCREEN_WD / (f32)width, (f32)SCREEN_HT / (f32)height, 1);
+        OnScreen_DrawSpriteResource(902, 0, 0, 0, (f32)SCREEN_WD / (f32)width, (f32)SCREEN_HT / (f32)height, 1);
     }
 }

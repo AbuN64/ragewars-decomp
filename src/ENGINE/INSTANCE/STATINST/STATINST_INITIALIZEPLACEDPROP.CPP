@@ -55,7 +55,7 @@ static inline s32 advancePropKey(void) {
 }
 
 void Statinst_InitializePlacedProp(PlacedProp *prop, PackedPlacedPropDefinition *record, s32 owner, char *segments, f32 spacing) {
-    char matrix[0x40];
+    char matrix[64];
     CVector3 position;
     PropGeometry *model;
     f32 turn;

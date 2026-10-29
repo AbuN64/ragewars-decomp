@@ -27,7 +27,7 @@ static inline void spawn(LevelActor *actor) {
 
     position = actor->position0;
     position.y += Gobjinst_GetActorHeight(actor) * g_actorModelViewEffectHeightScale;
-    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 148,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 

@@ -24,7 +24,7 @@ s32 Simppool_CheckSequencePromptRequest(SequencePromptRequestView *request) {
     Prompt *prompt;
 
     if ((Menu_CountLiveNodes(&g_matchEndingTeamWheelClose) == 0) && (Cinema_IsSequenceInWindow() != 0)) {
-        if (Cinema_GetSequenceRequest() == 0x78) {
+        if (Cinema_GetSequenceRequest() == 120) {
             prompt = &g_matchEndingTeamWheelClose.prompt;
             if (prompt->opened == 0) {
                 if (request->suppressPrompt == 0) {

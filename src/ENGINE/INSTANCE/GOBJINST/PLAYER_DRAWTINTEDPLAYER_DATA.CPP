@@ -37,7 +37,7 @@ static inline void Gobjinst_SpawnViewEffectForModel(FadedActorRenderView *actor,
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
             position.y += Gobjinst_GetActorHeight(actor) * g_actorModelViewEffectConstants[1];
-            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+            Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 148,
                           actor->position1, actor->rotation, position, 0, -1, 0);
             effect = Particle_GetLastSpawnedEffect(&g_actorParticleEffectSystem);
             if (effect != 0) {
@@ -54,7 +54,7 @@ static inline void spawn(LevelActor *actor) {
 
     position = actor->position0;
     position.y += Gobjinst_GetActorHeight(actor) * *(&g_actorPartsViewEffectTuning + 1);
-    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 148,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 
@@ -113,7 +113,7 @@ static inline void spawn_blend_effect(TintedPlayerRenderActor *actor) {
 
     position = actor->position0;
     position.y += Gobjinst_GetActorHeight(actor) * *(&g_actorBlendedViewEffectTuning + 1);
-    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 148,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 

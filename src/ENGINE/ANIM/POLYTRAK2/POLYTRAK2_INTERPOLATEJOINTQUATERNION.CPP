@@ -102,10 +102,10 @@ int Polytrak2_ReadBitsAtAddress(int bitAddress, unsigned int width) {
     next = word[1];
     if (shift != 0) {
         value >>= shift;
-        next <<= 0x20 - shift;
+        next <<= 32 - shift;
         value |= next;
     }
-    if (width < 0x20U) {
+    if (width < 32U) {
         value &= (1 << width) - 1;
     }
     return value;
@@ -133,7 +133,7 @@ void Polytrak2_WriteBitsAtAddress(u32 bitAddress, u32 bitCount, u32 fieldValue) 
         overflowValue = 0;
     } else {
         firstWordMask = overflowMask << writeShift;
-        remainingWordBits = 0x20 - writeShift;
+        remainingWordBits = 32 - writeShift;
         overflowMask >>= remainingWordBits;
         firstWordValue = maskedValue << writeShift;
         overflowValue = maskedValue >> remainingWordBits;
@@ -158,10 +158,10 @@ u32 Polytrak2_ReadBitsAndAdvance(u32 *stream, u32 width) {
     next = word[1];
     if (shift != 0) {
         value >>= shift;
-        next <<= 0x20 - shift;
+        next <<= 32 - shift;
         value |= next;
     }
-    if (width < 0x20U) {
+    if (width < 32U) {
         value &= (1 << width) - 1;
     }
     *stream = bitAddress + width;
@@ -192,7 +192,7 @@ void Polytrak2_WriteBitsAndAdvance(u32 *bitCursor, u32 bitCount, u32 fieldValue)
         overflowValue = 0;
     } else {
         firstWordMask = overflowMask << writeShift;
-        remainingWordBits = 0x20 - writeShift;
+        remainingWordBits = 32 - writeShift;
         overflowMask >>= remainingWordBits;
         firstWordValue = maskedValue << writeShift;
         overflowValue = maskedValue >> remainingWordBits;
@@ -234,7 +234,7 @@ Polytrak2QuantizationRange Polytrak2_ComputeQuantizationRange(f32 minimumValue, 
             highest = bit;
         }
         bit += 1;
-    } while (bit < 0x20U);
+    } while (bit < 32U);
     value = highest;
     if (count >= 2U) {
         value += 1;

@@ -33,7 +33,7 @@ Record *Cache_AllocateMemory(s32 size) {
     u32 token3;
     u32 token4;
 
-    allocation_size = size + 0x10;
+    allocation_size = size + 16;
     token = __osDisableInt();
     counter = g_resourceHeapLockUsers + 1;
     g_resourceHeapLockUsers = counter;
@@ -43,7 +43,7 @@ Record *Cache_AllocateMemory(s32 size) {
     } else {
         __osRestoreInt(token);
     }
-    node = Cache_AllocateResourceNodeStorage(0, allocation_size, 0x33U, &s_allocText);
+    node = Cache_AllocateResourceNodeStorage(0, allocation_size, 51U, &s_allocText);
     token2 = __osDisableInt();
     counter2 = g_resourceHeapLockUsers - 1;
     g_resourceHeapLockUsers = counter2;
@@ -87,7 +87,7 @@ Record *Cache_AllocateMemory(s32 size) {
         } else {
             __osRestoreInt(token3);
         }
-        node = Cache_AllocateResourceNodeStorage(0, allocation_size, 0x33U, &s_allocText);
+        node = Cache_AllocateResourceNodeStorage(0, allocation_size, 51U, &s_allocText);
         token2 = __osDisableInt();
         counter2 = g_resourceHeapLockUsers - 1;
         g_resourceHeapLockUsers = counter2;
@@ -102,7 +102,7 @@ Record *Cache_AllocateMemory(s32 size) {
     }
     if (current != 0) {
         payload = current->payload;
-        result = (Record *)(payload + 0x10);
+        result = (Record *)(payload + 16);
         *(struct CacheAllocationNodeView **)payload = current;
         return result;
     }

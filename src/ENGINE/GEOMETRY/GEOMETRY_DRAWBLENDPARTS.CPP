@@ -266,7 +266,7 @@ void Geometry_QueueModelInstance(void **a, void *b, s32 c, void *d, void *e, s32
     if (vertexBase == 0) {
         vertexBase = SetN64_GetPackSection(modelHeader, 0);
     }
-    if ((g_modelBatchResource != (s32)a) || (g_modelBatchPass != f) || (g_modelInstanceQueueCount == 0x20)) {
+    if ((g_modelBatchResource != (s32)a) || (g_modelBatchPass != f) || (g_modelInstanceQueueCount == 32)) {
         Geometry_GroupModelInstances();
         if (g_modelBatchResourceCount != 0x100) {
             Cache_LockResource(0, (s32)a);

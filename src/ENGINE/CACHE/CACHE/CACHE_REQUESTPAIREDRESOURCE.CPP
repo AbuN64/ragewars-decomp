@@ -160,7 +160,7 @@ CachedResource *Cache_RequestPairedResource(s32 unused, s32 key, CachedResource 
     out = &found;
     node = (ResourceHashEntry *)((s32)g_resourceHashBuckets +
         ((((key << 5) ^ ((u32)key >> 1) ^ ((u32)key >> 9) ^
-           ((u32)key >> 17)) & g_resourceHashEvenIndexMask) * 0x10));
+           ((u32)key >> 17)) & g_resourceHashEvenIndexMask) * 16));
     if (node->key != key) {
         goto not_initial;
     }

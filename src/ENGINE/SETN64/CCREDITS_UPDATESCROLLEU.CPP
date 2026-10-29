@@ -24,7 +24,7 @@ void CCredits_UpdateScroll(void *object) {
             Playerai_GetFirstPlayer(&g_playerViewRenderContext);
             if (g_creditsSelectSpawnOnExit != 0) {
                 if (g_creditsReturnToFrontend == 0) {
-                    SetN64_SelectSpawnAfterCredits(object, 0x7CF);
+                    SetN64_SelectSpawnAfterCredits(object, 1999);
                     return;
                 }
                 goto advance;

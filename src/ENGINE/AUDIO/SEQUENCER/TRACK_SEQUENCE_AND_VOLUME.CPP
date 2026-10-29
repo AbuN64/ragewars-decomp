@@ -104,7 +104,7 @@ void Sequencer_AttachTrackSequence(Track *track) {
     do {
         alCSPSetChlFXMix(track->sequencePlayer, i & 0xFF, 0);
         i++;
-    } while (i < 0x14);
+    } while (i < 20);
 
     scaled = (f32)track->baseVolume *
              (track->context->volumePercent * (&g_sequencerContextVolumeScale)[1]);

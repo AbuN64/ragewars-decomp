@@ -482,10 +482,10 @@ int InstHdr_IsDefinitionKindOne(LevelActor *actor) {
 
 int InstHdr_UsesDefaultDefinitionHandling(LevelActor *source) {
     switch (source->definition->kind) {
-        case 0: case 2: case 3: case 5: case 6: case 7: case 8: case 0xA: case 0xC: case 0xD: case 0xE:
+        case 0: case 2: case 3: case 5: case 6: case 7: case 8: case 10: case 12: case 13: case 14:
         default:
             return 1;
-        case 1: case 4: case 9: case 0xB:
+        case 1: case 4: case 9: case 11:
             return 0;
     }
 }

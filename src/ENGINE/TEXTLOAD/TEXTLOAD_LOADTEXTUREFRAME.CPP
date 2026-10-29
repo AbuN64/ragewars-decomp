@@ -96,13 +96,13 @@ void Textload_PrepareTextureVariation(s32 textureResource, Resource *handle) {
         return;
     }
     len0 = SetN64_GetPackSectionSize(obj, 0);
-    len1 = SetN64_GetPackSectionSize(list1, rem1) + 0x10;
+    len1 = SetN64_GetPackSectionSize(list1, rem1) + 16;
     if (count != 0) {
-        len2 = SetN64_GetPackSectionSize(list2, rem2) + 0x10;
+        len2 = SetN64_GetPackSectionSize(list2, rem2) + 16;
     } else {
         len2 = 8;
     }
-    total = ((len0 + 7) & ~7) + 0x18;
+    total = ((len0 + 7) & ~7) + 24;
     off1 = total;
     total += (len1 + 7) & ~7;
     off2 = total;
@@ -111,18 +111,18 @@ void Textload_PrepareTextureVariation(s32 textureResource, Resource *handle) {
     if (res != 0) {
         hdr = *res;
         hdr[0] = 3;
-        hdr[1] = 0x18;
+        hdr[1] = 24;
         hdr[2] = off1;
         hdr[3] = off2;
         Libc_CopyBytes(SetN64_GetPackSection(hdr, 0), SetN64_GetPackSection(obj, 0), SetN64_GetPackSectionSize(obj, 0));
         entry = SetN64_GetPackSection(hdr, 1);
         entry[0] = 1;
-        entry[1] = 0x10;
+        entry[1] = 16;
         Libc_CopyBytes(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list1, rem1), SetN64_GetPackSectionSize(list1, rem1));
         entry = SetN64_GetPackSection(hdr, 2);
         if (count != 0) {
             entry[0] = 1;
-            entry[1] = 0x10;
+            entry[1] = 16;
             Libc_CopyBytes(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list2, rem2), SetN64_GetPackSectionSize(list2, rem2));
         } else {
             entry[0] = 0;

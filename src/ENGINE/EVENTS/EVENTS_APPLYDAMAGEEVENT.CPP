@@ -74,7 +74,7 @@ s32 Events_CanDamageActor(DamageActor *source, DamageActor *target) {
                     return 0;
                 }
             }
-            if (standIn->kind == 0x14 && source->definition->kind == 1 && source->team == 0xCA) {
+            if (standIn->kind == 20 && source->definition->kind == 1 && source->team == 202) {
                 return 0;
             }
         }
@@ -166,10 +166,10 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
         zero.x = 0.0f; zero.y = 0.0f; zero.z = 0.0f;
         Particle_SpawnEffectGroup((struct EffectSystem *)&g_actorParticleEffectSystem,
                          (struct EffectActor *)target, (struct EffectActor *)target,
-                         0, 0, 0xE9, zero, rotation, effectPosition, 0, -1,
+                         0, 0, 233, zero, rotation, effectPosition, 0, -1,
                          effectKind == 5 ? 3 : 1);
         effectPosition.x = 0.0f; effectPosition.y = 0.0f; effectPosition.z = 0.0f;
-        CScene_StartEventClips(&g_world, player->sound + 0x140, 3,
+        CScene_StartEventClips(&g_world, player->sound + 320, 3,
                          effectPosition, k_damageEffectFirstScale, k_damageEffectSecondScale);
     }
 }
@@ -203,7 +203,7 @@ void Events_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
             impulse.x = 0.0f; impulse.y = 0.0f; impulse.z = 0.0f;
         }
         if ((victim->flags & 0x300000) && (hitFlags & 0x200)) {
-            Link_DispatchActorLinks((struct Shared_Actor *)source, 0x10, victim);
+            Link_DispatchActorLinks((struct Shared_Actor *)source, 16, victim);
         }
     }
     if (source->definition->kind == 1 || source->definition->kind == 11) {
@@ -265,7 +265,7 @@ static inline s32 adjustHit(Shared_ReactionActor *target, CVector3 *position) {
         adjusted = 0;
         if ((target->category == 1) && (target->flags & 0x300000)) {
             owner = target->player;
-            if (((void *)target == (void *)&owner->actor2E8) && ((ownerState = owner->weaponIndex, (ownerState == 0)) || (ownerState == 0x11) || (ownerState == 0x10))) {
+            if (((void *)target == (void *)&owner->actor2E8) && ((ownerState = owner->weaponIndex, (ownerState == 0)) || (ownerState == 17) || (ownerState == 16))) {
                 body = (*position);
                 origin = owner->position;
                 Graphu64_InterpolateVector(&(*position), 0.75f, &body, &origin);
@@ -329,7 +329,7 @@ static inline f32 scaleHit(Shared_ReactionActor *self, Shared_ReactionActor *tar
         shielded = 0;
     }
     if (target->category == 2) {
-        if (target->type == 0x404 || target->type == 0x402) {
+        if (target->type == 1028 || target->type == 1026) {
             special = 1;
         }
         if (target->category == 2 && g_currentActorInstance == (void *)self && g_damageShieldSelection != -1 && !special) {
@@ -448,9 +448,9 @@ void Events_ApplyDamageEvent(Shared_ReactionActor *source, Shared_ReactionActor 
                             damage *= k_damageEventScaleConstants[11];
                             Barrel_FillDamagePacket(&hit, target, (s32)damage, radius, flags, shield);
                         }
-                    } else if (target->type == 0x427) {
+                    } else if (target->type == 1063) {
                         carrier = NULL;
-                        if (owner->team == 0x40C) {
+                        if (owner->team == 1036) {
                             carrier = owner->player;
                         }
                         if ((carrier != NULL) && (carrier->reactionFlags & 0x200)) {
@@ -617,7 +617,7 @@ s32 Events_AdjustWeaponHitPosition(void *levelActor, CVector3 *hitPosition) {
         actor = object->controller;
         if (levelActor == &actor->weapon) {
             state = actor->selectedAction;
-            if ((state == 0) || (state == 0x11) || (state == 0x10)) {
+            if ((state == 0) || (state == 17) || (state == 16)) {
                 first = *hitPosition;
                 second = ((LevelActor *)actor)->position0;
                 Graphu64_InterpolateVector(hitPosition, 0.75f, &first, &second);
@@ -664,9 +664,9 @@ typedef struct PushStrength { u16 value; u16 pad; } PushStrength;
 typedef struct PushScale { s8 value; u8 pad[3]; } PushScale;
 extern f32 k_damageRadiusScale;
 void Events_ComputeRadialImpulse(struct Player *actor, u8 *other, PushStrength strength, PushScale scale, CVector3 *out) {
-    char frame[0x10];
+    char frame[16];
     CVector3 offset;
-    char scratch[0x50];
+    char scratch[80];
     f32 radius;
     f32 distance;
     radius = (f32)strength.value * k_damageRadiusScale;

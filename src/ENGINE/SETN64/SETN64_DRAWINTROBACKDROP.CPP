@@ -52,7 +52,7 @@ void SetN64_InitializeFrontendScreenState(GameSession *gameSession) {
     g_pakStartButtonLatched = 1;
     g_pakScanActive = 0;
     gameSession->timer = g_introInitialFadeTimer;
-    SmXlate_SwitchScreen(0x1D);
+    SmXlate_SwitchScreen(29);
 }
 
 void SetN64_ExitSessionAndDisablePaks(void *session) {
@@ -73,13 +73,13 @@ void SetN64_ResetSceneForIntro(void *owner) {
     int memoryBytes;
 
     SoundElement_SetMusicPlaybackEnabled(0);
-    memoryBytes = 0x5D8;
+    memoryBytes = 1496;
     p1 = ((s8 *)(&g_matchRoundCounters)) - memoryBytes;
     ((struct IntegerStateB0 *) ((char *) (&g_matchRoundCounters)))->transitionActive = 0;
     ((struct IntegerStateB0 *) ((char *) (&g_matchRoundCounters)))->first = 0;
-    p1[0xB2] = 1;
-    p1[0x1D] = 0;
-    p1[0x1E] = 1;
+    p1[178] = 1;
+    p1[29] = 0;
+    p1[30] = 1;
     SetN64_ResetSessionPlayerPools(owner, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     p2 = ((s8 *)(&g_matchRoundCounters)) - 0x1818;
@@ -119,10 +119,10 @@ void SetN64_DrawIntroBackdrop(void) {
     width = 0;
     height = 0;
     gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, g_hudReferenceViewportWidth, (u32)g_currentRenderFrame->colorImage);
-    OnScreen_GetImageDimensions(0x388, 0, &width, &height);
+    OnScreen_GetImageDimensions(904, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
-        Onscrn_SetupSpriteMode(0xFA);
-        OnScreen_DrawSpriteResource(0x388, 0, 0, 0, (f32)g_hudReferenceViewportWidth / (f32)width, (f32)g_hudReferenceViewportHeight / (f32)height, 1);
+        Onscrn_SetupSpriteMode(250);
+        OnScreen_DrawSpriteResource(904, 0, 0, 0, (f32)g_hudReferenceViewportWidth / (f32)width, (f32)g_hudReferenceViewportHeight / (f32)height, 1);
     }
 }
 

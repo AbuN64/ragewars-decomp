@@ -52,7 +52,7 @@ void Particle_MarkCrowdedActor(s32 unused, ActorParticleMarkCrowdedActor *actor,
         }
     }
     for (i = 0; i < count; i++) {
-        if (others[i] != actor && (others[i]->type == 0xC || others[i]->type == 0x22)) {
+        if (others[i] != actor && (others[i]->type == 12 || others[i]->type == 34)) {
             Graphu64_SubtractVectors(&delta, &others[i]->position, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 262144.0f) {
                 actor->crowded = 1;
@@ -199,7 +199,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
         if (p->m_cFrame < (f32)p->m_nFrames && p->m_nFrames != 1 && !(p->m_dwFlags & 0x1000)) {
             if ((g_cameraVolumeBounds.max.x > p->m_vPos.x && g_cameraVolumeBounds.max.y > p->m_vPos.y && g_cameraVolumeBounds.max.z > p->m_vPos.z &&
                  g_cameraVolumeBounds.min.x <= p->m_vPos.x && g_cameraVolumeBounds.min.y <= p->m_vPos.y && g_cameraVolumeBounds.min.z <= p->m_vPos.z) ||
-                p->m_nObjType == 0x41E) {
+                p->m_nObjType == 1054) {
                 Particle_Update(p);
                 light = p->m_pDLight;
                 if (light) {
@@ -317,7 +317,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
     if (world->render.head != 0) {
         gDPPipeSync(g_displayListCursor++);
         gDPSetAlphaDither(g_displayListCursor++, G_AD_NOISE);
-        Geometry_SetColorDither(0x80);
+        Geometry_SetColorDither(128);
         gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
         gSPGeometryMode(g_displayListCursor++, 0x60400, 0);
         for (node = world->render.head; node != 0; node = node->next) {
@@ -413,7 +413,7 @@ typedef struct DraftActor827C8 {
     u8 pad13C[0x94]; s8 animation; u8 pad1D1[8]; u8 linked;
     u8 pad1DA[0xA]; void *list; u8 pad1E8[4]; struct DraftActor827C8 *next;
 } DraftActor827C8;
-typedef struct DraftWorld827C8 { u8 pad[0xFC00]; u8 freeList[0x14], activeList[0x14], padFC28[0x14]; DraftActor827C8 *actors; } DraftWorld827C8;
+typedef struct DraftWorld827C8 { u8 pad[0xFC00]; u8 freeList[20], activeList[20], padFC28[0x14]; DraftActor827C8 *actors; } DraftWorld827C8;
 extern void Particle_SpawnChildEffect(void *, s32, s32, s32), Particle_FinishActorEffects(void *), Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *, void *);
 void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
@@ -432,7 +432,7 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
   while (actor)
   {
     next = actor->next;
-    if (((actor->type == 0x41E) && (actor->flags & 0x100)) && (actor->owner == owner))
+    if (((actor->type == 1054) && (actor->flags & 0x100)) && (actor->owner == owner))
     {
       model = actor->model;
       actor->flags &= ~0x100;
@@ -491,8 +491,8 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
 
   if (count)
   {
-    SoundElement_PlayFlatSound(0x91A);
-    SoundElement_PlayFlatSound(0x91A);
+    SoundElement_PlayFlatSound(2330);
+    SoundElement_PlayFlatSound(2330);
   }
 }
 
@@ -534,7 +534,7 @@ void Particle_RetireOwnedActors(ActorWorld *world, void *owner) {
     actor = world->head;
     while (actor != 0) {
         next = actor->next;
-        if ((actor->kind == 0x41E || actor->kind == 0x3EF) &&
+        if ((actor->kind == 1054 || actor->kind == 1007) &&
             (actor->flags & 0x100) && actor->owner == owner) {
             definition = actor->definition;
             index = Particle_HasSurfaceFlag(actor) ? 12 : 10;

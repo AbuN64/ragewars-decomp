@@ -300,10 +300,10 @@ s32 Particle_IsKind2Or86Or273Or294(ParticleEffect *effect) {
 
     kind = effect->kind;
     val = kind;
-    if (val == 0x56) {
+    if (val == 86) {
         goto ret1;
     }
-    if (val >= 0x57) {
+    if (val >= 87) {
         goto ge_e;
     }
     if (val == 2) {
@@ -311,10 +311,10 @@ s32 Particle_IsKind2Or86Or273Or294(ParticleEffect *effect) {
     }
     goto ret0;
 ge_e:
-    if (val == 0x111) {
+    if (val == 273) {
         goto ret1;
     }
-    if (val != 0x126) {
+    if (val != 294) {
         goto ret0;
     }
 ret1:
@@ -329,10 +329,10 @@ s32 Particle_IsKind5To7Or9Or17Or19Or26Or257Or272(ParticleEffect *effect) {
 
     kind = effect->kind;
     val = kind;
-    if (val == 0x11) {
+    if (val == 17) {
         goto ret1;
     }
-    if (val >= 0x12) {
+    if (val >= 18) {
         goto ge_12;
     }
     if (val < 5) {
@@ -346,21 +346,21 @@ s32 Particle_IsKind5To7Or9Or17Or19Or26Or257Or272(ParticleEffect *effect) {
     }
     goto ret0;
 ge_12:
-    if (val == 0x1A) {
+    if (val == 26) {
         goto ret1;
     }
-    if (val >= 0x1B) {
+    if (val >= 27) {
         goto ge_1b;
     }
-    if (val == 0x13) {
+    if (val == 19) {
         goto ret1;
     }
     goto ret0;
 ge_1b:
-    if (val == 0x101) {
+    if (val == 257) {
         goto ret1;
     }
-    if (val != 0x110) {
+    if (val != 272) {
         goto ret0;
     }
 ret1:
@@ -375,10 +375,10 @@ s32 Particle_IsKind8Or13Or18(ParticleEffect *effect) {
 
     kind = effect->kind;
     val = kind;
-    if (val == 0xD) {
+    if (val == 13) {
         goto ret1;
     }
-    if (val >= 0xE) {
+    if (val >= 14) {
         goto ge_e;
     }
     if (val == 8) {
@@ -386,7 +386,7 @@ s32 Particle_IsKind8Or13Or18(ParticleEffect *effect) {
     }
     goto ret0;
 ge_e:
-    if (val != 0x12) {
+    if (val != 18) {
         goto ret0;
     }
 ret1:
@@ -460,7 +460,7 @@ void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
     }
 
     point_ptr = &point;
-    actor_id = 0x40F;
+    actor_id = 1039;
     height_scale = (&g_particleNearestEffectDistanceTuning)[1];
     do {
         point = ((Shared_ActorView *)node)->position.vector;
@@ -538,9 +538,9 @@ void Particle_UpdateNearbyObjectFlags(int context,ObjParticleMarkNearbyObjects *
  for(i=0;i<count;i++) {
   obj=objects[i];
   switch(obj->flags) {
-   case 0xC: break;
-   case 0x22: Particle_MarkCrowdedActor(context,obj,objects,count); break;
-   case 0x57: nearby(context,obj,objects,count); break;
+   case 12: break;
+   case 34: Particle_MarkCrowdedActor(context,obj,objects,count); break;
+   case 87: nearby(context,obj,objects,count); break;
   }
  }
 }
@@ -559,7 +559,7 @@ void Particle_AverageOwnerEffectPositions(EffectSystem *effectSystem, s32 ownerI
     if (record != 0) {
         do {
             v = ((ParticleEffect *)record)->kind;
-            if (((v == 0x41E) || (v == 0x3EF)) &&
+            if (((v == 1054) || (v == 1007)) &&
                 (((ParticleEffect *)record)->owner == ownerId) &&
                 (((ParticleEffect *)record)->flags & 0x100)) {
                 averagePositionOut->x += ((ParticleEffect *)record)->pos.x;

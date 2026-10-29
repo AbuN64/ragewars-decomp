@@ -79,7 +79,7 @@ void Scene_DrawWorldParticles(s32 world, s32 view) {
     cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFF);
     Geometry_BeginModelBatch();
-    Particle_DrawRenderList(world + 0x1B08, view);
+    Particle_DrawRenderList(world + 6920, view);
     Geometry_FlushModelBatch();
 }
 
@@ -149,7 +149,7 @@ void *Scene_GetModelRecordByIndexPointer(Shared_World *world, u16 *modelIndex) {
     }
     base = ((char *)SetN64_GetPackSection(world->modelSections, 0)) + 8;
     idx = *modelIndex;
-    return (void *)(base + idx * 0x64);
+    return (void *)(base + idx * 100);
 }
 
 

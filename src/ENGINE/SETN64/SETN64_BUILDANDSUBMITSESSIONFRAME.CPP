@@ -92,10 +92,10 @@ void SetN64_BuildAndSubmitSessionFrame(TimingWorld *world) {
         SetN64_DrawColorRectangle(world, &color[0], 0, 0, g_hudReferenceViewportWidth, g_hudReferenceViewportHeight);
     }
     if (g_selectionMessageStage != 0) {
-        if (g_selectionMessageStage == 0x14) {
+        if (g_selectionMessageStage == 20) {
             Frontend_AdvanceVideoMode();
         }
-        SetN64_ClearDepthRect(world, 0, 0x1E0, 0, 0x168, 0);
+        SetN64_ClearDepthRect(world, 0, 480, 0, 360, 0);
         gDPSetScissorFrac(g_displayListCursor++,0,0,0,0x77C,0x59C);
         gDPSetColorImage(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,480,g_currentTaskFrame->colorImage);
         gDPSetCycleType(g_displayListCursor++,G_CYC_FILL);
@@ -146,7 +146,7 @@ void SetN64_BuildAndSubmitSessionFrame(TimingWorld *world) {
                 }
                 if (world->fade < g_sessionFrameFadeTransitionThreshold) {
                     previousMode = world->currentMode;
-                    world->currentMode = 0x14;
+                    world->currentMode = 20;
                     world->fade = 0;
                     world->fadeMode = 1;
                     world->previousMode = previousMode;

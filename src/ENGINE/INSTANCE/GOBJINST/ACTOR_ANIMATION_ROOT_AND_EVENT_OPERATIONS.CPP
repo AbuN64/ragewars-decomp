@@ -42,7 +42,7 @@ extern void Polytrak2_SampleVectorTrack(CGameAnimateState_t *, s32, f32, f32 *);
 
 void *Gobjinst_GetAnimationRootOffset(Triple *outOffset, void *actor, CGameAnimateState_t *anim) {
     char *o1 = (char *) actor;
-    char mtx[0x40];
+    char mtx[64];
     f32 spVec[3];
     f32 inVec[3];
     f32 outVec[3];

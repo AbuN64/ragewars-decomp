@@ -36,24 +36,24 @@ void Cartridge_StartReadWorker(s32 workerAddress, s32 count) {
     osCreateMesgQueue(workerAddress + 0x230, workerAddress + 0x248, 0x200);
     s0 = workerAddress + 0xA48;
     osCreateMesgQueue(s0, workerAddress + 0xA60, 1);
-    osSetEventMesg(8, s0, 0x7D1);
-    List_InitializeIntrusive(workerAddress + 0x5068, 0x18, 0x1C);
-    List_InitializeIntrusive(workerAddress + 0x507C, 0x18, 0x1C);
+    osSetEventMesg(8, s0, 2001);
+    List_InitializeIntrusive(workerAddress + 0x5068, 24, 28);
+    List_InitializeIntrusive(workerAddress + 0x507C, 24, 28);
     s1 = 0;
-    s0 = 0xE68;
+    s0 = 3688;
     do {
         ((struct LinkedWorldFlagsView *) (workerAddress + s0))->flags = 0;
         List_AppendIntrusive(workerAddress + 0x5068, workerAddress + s0);
         s1 += 1;
-        s0 += 0x20;
-    } while (s1 < 0x210);
+        s0 += 32;
+    } while (s1 < 528);
     XPlus_FillMemory(workerAddress + 0xA68, count, 0x400);
     osCreateThread(workerAddress, count, &g_Cartridge_RunReadWorkerPackedAddress24, workerAddress, workerAddress + 0xE68, g_cartridgeReadWorkerPriority);
     osStartThread((void *)workerAddress);
 }
 
 void Cartridge_ReadChunksAndWait(struct CartridgeReadWorker *cartridgeReadWorker, u32 sourceAddress, s32 byteCount, void *extra) {
-    char queue[0x18];
+    char queue[24];
     s32 queue_init;
     s32 completed;
     s32 remaining;
@@ -70,7 +70,7 @@ void Cartridge_ReadChunksAndWait(struct CartridgeReadWorker *cartridgeReadWorker
         }
         chunk->source = sourceAddress + (byteCount - remaining);
         chunk->destination = (char *) extra + (byteCount - remaining);
-        if ((u32) remaining < 0x2001U) {
+        if ((u32) remaining < 8193U) {
             length = remaining;
         }
         chunk->length = length;
@@ -107,7 +107,7 @@ void Cartridge_SubmitReadChunks(struct CartridgeReadWorker *worker, u32 source, 
             }
             chunk->source = source + (length - remaining);
             chunk->destination = (char *)destination + (length - remaining);
-            if ((u32)remaining < 0x2001U) {
+            if ((u32)remaining < 8193U) {
                 chunk_length = remaining;
             }
             remaining -= chunk_length;
@@ -158,7 +158,7 @@ void Cartridge_RunReadWorkerRev1(s32 cartridgeReadWorker) {
     for (;;) {
         osRecvMesg(&((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, &request, 1);
         if (request == (struct CartridgeReadRequest *)0xBEEFDEAD) {
-            osSetTimer(&timer, 0, 0x393870, &((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, (void *)0xDEADBEEF);
+            osSetTimer(&timer, 0, 3750000, &((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, (void *)0xDEADBEEF);
         } else if (request == (struct CartridgeReadRequest *)0xDEADBEEF) {
             if (TextLoad_IsArtsendTexturePreviewEnabled() != 0) {
                 Libultra_RunDebugLinkCommands();

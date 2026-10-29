@@ -391,7 +391,7 @@ void Sky_DrawDepthSortedSceneEffects(Scene *scene, ClipView *view) {
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 28, (u32)((0xFFFE)));
     gSPGeometryMode(g_displayListCursor++, G_FOG, 0);
     gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
-    Geometry_SetModePreset(0xD);
+    Geometry_SetModePreset(13);
     gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_LIGHTING | G_TEXTURE_GEN, 0);
     gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_SHADING_SMOOTH);
     gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);

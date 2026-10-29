@@ -22,7 +22,7 @@ void *Statinst_AcquireGeometry(ResourceOwner *owner,s32 index) {
         return owner->resource;
     }
     if (index != owner->index) {
-        block = Cache_RequestResource(0,owner->key,owner->key,0x18,0,0,0,g_statObjectIndexText,1);
+        block = Cache_RequestResource(0,owner->key,owner->key,24,0,0,0,g_statObjectIndexText,1);
         if (block != 0) {
             key = SetN64_GetDirectoryEntry(*block,owner->key,1);
             Cache_ReleaseResource(0,block);

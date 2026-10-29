@@ -40,10 +40,10 @@ static inline f32 decode(u32 *stream, Polytrak2QuantizationRange range) {
     next = word[1];
     if (shift != 0) {
         value >>= shift;
-        next <<= 0x20 - shift;
+        next <<= 32 - shift;
         value |= next;
     }
-    if (width < 0x20U) {
+    if (width < 32U) {
         value &= (1 << width) - 1;
     }
     converted = (s32) value;
@@ -90,10 +90,10 @@ unsigned int Polytrak2_ReadCursorBits(unsigned int *bitCursor, unsigned int bitC
     next = word[1];
     if (shift != 0) {
         value >>= shift;
-        next <<= 0x20 - shift;
+        next <<= 32 - shift;
         value |= next;
     }
-    if (bitCount < 0x20U) {
+    if (bitCount < 32U) {
         value &= (1 << bitCount) - 1;
     }
     *bitCursor = bitAddress + bitCount;
@@ -117,7 +117,7 @@ void Polytrak2_InitializeOutputPack(void *packBuffer, s32 sectionCount) {
 
     count = 1;
     pack->count = sectionCount;
-    pack->offsets[0] = ((sectionCount * 4) + 0xF) & ~7;
+    pack->offsets[0] = ((sectionCount * 4) + 15) & ~7;
     if (sectionCount > 0) {
         magic = 0xDEADBEEF;
         ptr = pack->offsets;

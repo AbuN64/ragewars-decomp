@@ -29,8 +29,8 @@ void Particle_FinishActorEffects(void *actorStorage) {
     char *owner;
     char *resource;
 
-    if (((ParticleOwnerActorView *)(actor))->kindId != 0x414) {
-        if (((ParticleOwnerActorView *)(actor))->kindId == 0x42D) {
+    if (((ParticleOwnerActorView *)(actor))->kindId != 1044) {
+        if (((ParticleOwnerActorView *)(actor))->kindId == 1069) {
             state = Particle_GetEffectResource(actor);
             if (((ParticleAmmoRewardView *)(state))->ammoAmount != 0 && Playerai_IsPlayerInactive(state) == 0) {
                 Player_GiveAmmoWithMessage(state, ((ParticleAmmoRewardView *)(state))->ammoType,
@@ -107,7 +107,7 @@ void Particle_SpawnChildEffect(ParticleChildEffectActorView *actor, s32 model, s
     CVector3 point;
     CVector3 moved;
     f32 matrix[16];
-    char scratch[0x108];
+    char scratch[264];
     void *parent;
 
     if (actor->def->kind & 0x10) {

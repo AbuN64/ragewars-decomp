@@ -232,7 +232,7 @@ s32 Defs_FindSortedGroupRange(u32 *keys, s32 entryCount, u32 group, s32 *firstOu
 int Defs_GetBitArrayByteCount(int bitCount) {
     int result = bitCount + 7;
     if (result < 0) {
-        result = bitCount + 0xE;
+        result = bitCount + 14;
     }
     return result >> 3;
 }
@@ -369,11 +369,11 @@ s32 Defs_ReadResourceWord(s32 byteOffset) {
     s32 result;
 
 #if defined(VERSION_DE)
-    resource = Cache_RequestResource(0, 0x28BB00, 0x28BB00, 0x20, 0x10, 0, 0, &g_resourceWordRequestLabel, 1);
+    resource = Cache_RequestResource(0, 0x28BB00, 0x28BB00, 32, 16, 0, 0, &g_resourceWordRequestLabel, 1);
 #elif defined(VERSION_EU_X)
-    resource = Cache_RequestResource(0, 0x290384, 0x290384, 0x20, 0x10, 0, 0, &g_resourceWordRequestLabel, 1);
+    resource = Cache_RequestResource(0, 0x290384, 0x290384, 32, 16, 0, 0, &g_resourceWordRequestLabel, 1);
 #else
-    resource = Cache_RequestResource(0, 0x28B244, 0x28B244, 0x20, 0x10, 0, 0, &g_resourceWordRequestLabel, 1);
+    resource = Cache_RequestResource(0, 0x28B244, 0x28B244, 32, 16, 0, 0, &g_resourceWordRequestLabel, 1);
 #endif
     result = *(s32 *)((char *)*resource + byteOffset);
     Cache_UnlockResource(0, resource);
@@ -413,7 +413,7 @@ void Defs_SetupPointLights(char *view) {
             g_pointLightBuffer[i + g_pointLightBufferOffset].color[0] = data->color[2] * node->intensity;
             g_pointLightBuffer[i + g_pointLightBufferOffset].falloff = data->falloff;
             g_pointLightBuffer[i + g_pointLightBufferOffset].near = data->near;
-            g_pointLightBuffer[i + g_pointLightBufferOffset].range = 0x7F80;
+            g_pointLightBuffer[i + g_pointLightBufferOffset].range = 32640;
         } else {
             g_pointLightBuffer[i + g_pointLightBufferOffset].falloff = -0x8000;
         }

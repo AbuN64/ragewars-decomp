@@ -31,11 +31,11 @@ s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *liste
     f32 pan;
 
     if (listener == 0) {
-        return 0x40;
+        return 64;
     }
     Graphu64_SubtractVectors(&offset, &listener->position, position);
     if (offset.x * offset.x + offset.z * offset.z < g_listenerPanCenterRadiusConstants) {
-        return 0x40;
+        return 64;
     }
     Graphu64_TransformDirectionTranspose(listener->viewOrient, &offset, &local);
     local.y = 0.0f;
@@ -44,7 +44,7 @@ s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *liste
     Graphu64_NormalizeVec3(&local.x);
     pan = Gu_Sinf(Graphu64_ArcCos(local.x * forward.x + local.y * forward.y + local.z * forward.z));
     if (local.x == 0.0f) {
-        return 0x40;
+        return 64;
     }
     if (0.0f < local.x) {
         if (pan < 0.0f) {
@@ -171,7 +171,7 @@ void Channel_InitializeVoiceMix(Voice *voice, SoundDescriptor *control, s32 unus
     gainRange = voice->context->selectedEntry;
     voice->volumeScale = g_voiceDefaultVolumeScale;
     if (voice->soundId < 0x100) {
-        for (i = 0; i < 0x1F; i++) {
+        for (i = 0; i < 31; i++) {
             if (voice->soundId == (s32)g_soundVolumeScales[i].soundId) {
                 voice->volumeScale = g_soundVolumeScales[i].scale;
                 break;

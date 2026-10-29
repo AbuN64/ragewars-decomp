@@ -32,10 +32,10 @@ void Audio_InitializeMusicPlayer(struct AudioStateD844 *state, struct AudioRootD
     params.value10 = 0;
     params.value14 = 0;
     params.value18 = 0;
-    player = alHeapDBAlloc(0, 0, &state->root->heap, 1, 0x7C);
+    player = alHeapDBAlloc(0, 0, &state->root->heap, 1, 124);
     state->player = player;
     alCSPNew(player, &params);
-    state->allocation = alHeapDBAlloc(0, 0, &state->root->heap, 1, 0xF8);
+    state->allocation = alHeapDBAlloc(0, 0, &state->root->heap, 1, 248);
     state->timer = 50;
     state->counter = 0;
     state->first = k_musicPlayerInitialUnitValue_de;

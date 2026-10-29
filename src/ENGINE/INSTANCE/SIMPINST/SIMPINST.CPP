@@ -28,7 +28,7 @@ void Simpinst_RegisterModelVariantResources(struct ObjB *object, s32 unused) {
     s32 index;
     index = obj->type;
     if (index != obj->loadedType) {
-        resource = Cache_RequestResource(0, obj->model, obj->model, 0x18, 0, 0, 0, g_simpObjectIndexText, 1);
+        resource = Cache_RequestResource(0, obj->model, obj->model, 24, 0, 0, 0, g_simpObjectIndexText, 1);
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource, obj->model, 1);
             Cache_ReleaseResource(0, resource);

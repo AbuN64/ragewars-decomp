@@ -63,9 +63,9 @@ s32 Tengine_QueryArtsendOverride(s32 overrideSelector) {
         sw_inner_5:
             return 4;
         sw_inner_2:
-            return 0x20;
+            return 32;
         sw_inner_4:
-            return 0x10;
+            return 16;
     } while (0);
     sw_outer_0x106:
         g_artsendTextureViewer.overridesOff = 1;

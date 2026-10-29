@@ -67,7 +67,7 @@ void Particle_SpawnInterpolatedTrail(Shared_Particle *particle);
 static inline f32 Particle_GetPlayerTargetDistanceSquared(Shared_Particle *particle, SharedPlayer *player) {
     CVector3 pos;
     pos = player->views0.view8_3.pos;
-    if (particle->inst.type != 0x40F) {
+    if (particle->inst.type != 1039) {
         pos.y += Gobjinst_GetActorHeight(player) * 0.5f;
     }
     return Graphu64_GetSquaredDistance(&particle->inst.pos, &pos);
@@ -161,19 +161,19 @@ void Particle_Update(Shared_Particle *particle) {
             default:
                 particle->time = 0.0f;
                 particle->life = particle->lifetime * 32.0f;
-            case 0x2D:
-            case 0x4F:
+            case 45:
+            case 79:
                 die = 0;
                 break;
-            case 0xB:
-            case 0x41E:
+            case 11:
+            case 1054:
                 die = 0;
                 break;
         }
         bounce = die;
         switch (particle->inst.type) {
-            case 0x12A:
-            case 0x132:
+            case 298:
+            case 306:
                 die = 0;
 #if defined(VERSION_DE)
                 bounce = 1;
@@ -185,25 +185,25 @@ void Particle_Update(Shared_Particle *particle) {
                 break;
             case 2:
 #if defined(VERSION_DE)
-            case 0x111:
-            case 0x3F5:
+            case 273:
+            case 1013:
                 bounce = 1;
-            case 0x41E:
+            case 1054:
                 die = 0;
                 break;
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #endif
-            case 0xF:
-            case 0x56:
+            case 15:
+            case 86:
 #if defined(VERSION_DE)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            case 0x111:
+            case 273:
 #endif
-            case 0x126:
+            case 294:
 #if defined(VERSION_DE)
                 die = 1;
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            case 0x3F5:
+            case 1013:
                 if (particle->flags & 0x4000000) {
                     die = 1;
                 } else if (!(target->flags & 0x100)) {
@@ -216,25 +216,25 @@ void Particle_Update(Shared_Particle *particle) {
 #endif
                 bounce = 0;
                 break;
-            case 0xB:
+            case 11:
                 die = 0;
-                if (target->typeCode != 0x21 || !(target->flags & 0x100)) {
+                if (target->typeCode != 33 || !(target->flags & 0x100)) {
                     bounce = 1;
                 }
                 break;
             case 4:
                 die = 0;
-                if (target->typeCode != 0x20 || !(target->flags & 0x100)) {
+                if (target->typeCode != 32 || !(target->flags & 0x100)) {
                     bounce = 1;
                 }
                 break;
-            case 0x2D:
-            case 0x4F:
+            case 45:
+            case 79:
                 bounce = !(target->flags & 0x100);
 #if defined(VERSION_DE)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
                 break;
-            case 0x41E:
+            case 1054:
                 die = 0;
 #endif
                 break;
@@ -314,7 +314,7 @@ void Particle_Update(Shared_Particle *particle) {
             done = 0;
             if (Particle_GetPlayerTargetDistanceSquared(particle, player) < influenceRange) {
                 Particle_HandlePlayerContact(particle, player);
-                if (particle->inst.type == 0x40F) {
+                if (particle->inst.type == 1039) {
                     done = 1;
                 }
             }
@@ -340,7 +340,7 @@ void Particle_Update(Shared_Particle *particle) {
         } else {
             particle->flags &= ~4;
         }
-        if (particle->inst.type == 0x68 && g_currentActorInstance.current != NULL) {
+        if (particle->inst.type == 104 && g_currentActorInstance.current != NULL) {
             particle->target = g_currentActorInstance.current;
         }
         if (die) {
@@ -675,7 +675,7 @@ static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform,
     particle->flags|=0x10000;
     particle->target=attached;
     particle->collisionNode=g_currentActorInstance.frame;
-    if (particle->inst.type==0x56 && action==2) particle->flags|=0x4000000;
+    if (particle->inst.type==86 && action==2) particle->flags|=0x4000000;
 }
 #if defined(VERSION_DE)
 /* This cartridge routes type 0x129 through its surface-contact event. */
@@ -730,13 +730,13 @@ void Particle_HitTarget(void *particle) {
                 }
                 if (owner->flags&0x2000000) {
                     type=actor->particle.inst.type;
-                    if (type==0x12a || type==0x132) {
+                    if (type==298 || type==306) {
                         if (*owner->category==11) {
                             special=owner->extraUses<1;
                             if (special) owner->extraUses++;
                         }
                     }
-                    if (actor->particle.inst.type==0x56 || actor->particle.inst.type==2 || actor->particle.inst.type==0x126 || actor->particle.inst.type==15 ||
+                    if (actor->particle.inst.type==86 || actor->particle.inst.type==2 || actor->particle.inst.type==294 || actor->particle.inst.type==15 ||
                         special || (actor->particle.inst.type==11 && (g_particleAttachmentModeFlags&3)==1)) {
                         attachParticle(&actor->particle, boneMatrix, action);
                         if (actor->particle.drawWhenHidden) {
@@ -764,7 +764,7 @@ void Particle_HitTarget(void *particle) {
     }
     if (effect!=0xffff) {
         if (g_effectCallbackFlags[effect].flags&4) {
-            if (actor->particle.inst.type==0x56) primary.control.lower=primary.control.lower*actor->scale;
+            if (actor->particle.inst.type==86) primary.control.lower=primary.control.lower*actor->scale;
         }
         other=source;
         if (g_effectCallbackFlags[effect].flags&2) other=actor;
@@ -792,7 +792,7 @@ void Particle_HitTarget(void *particle) {
     if (model!=0xffff) Particle_SpawnChildEffect(actor, model, -8, enabled);
     if (sound!=0xffff) {
 #if defined(VERSION_DE)
-        if (actor->particle.inst.type!=0x129)
+        if (actor->particle.inst.type!=297)
 #endif
             SoundElement_PlaySoundAtPosition((s16)sound, g_particleContactState.position, 0, (s32)actor);
 #if defined(VERSION_DE)
@@ -800,7 +800,7 @@ void Particle_HitTarget(void *particle) {
 #endif
     }
     if (!(actor->particle.flags&0x30000)) {
-        if (actor->particle.inst.type==0x3ef && g_particleLinkedAttachmentEffect && owner->bones && g_particleLinkedAttachmentEffect->particle.inst.type==0x41e && action!=9) {
+        if (actor->particle.inst.type==1007 && g_particleLinkedAttachmentEffect && owner->bones && g_particleLinkedAttachmentEffect->particle.inst.type==1054 && action!=9) {
             g_particleLinkedAttachmentEffect->particle.rot=g_collisionCurrentActor->point;
             if (!hasMatrix) Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[g_currentActorInstance.frame]);
             PitchMatrixLocal(boneMatrix, 3.141593f);
@@ -887,8 +887,8 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
                 particle->life = 1;
             }
         }
-        if (particle->inst.type == 0x56 || particle->inst.type == 0x126 || particle->inst.type == 0xCD ||
-            particle->inst.type == 0xF) {
+        if (particle->inst.type == 86 || particle->inst.type == 294 || particle->inst.type == 205 ||
+            particle->inst.type == 15) {
             particle->flags |= 0x20000;
             particle->inst.pos = g_particleContactState.position;
             particle->inst.velocity = g_particleZeroVector;

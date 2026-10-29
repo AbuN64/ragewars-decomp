@@ -30,10 +30,10 @@ void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 enabled) {
         first = (u32)world->actors;
         index = -1;
         if ((u32) actor >= first) {
-            lastOffset = world->actorCount * 0x2E8;
-            lastOffset -= 0x2E8;
+            lastOffset = world->actorCount * 744;
+            lastOffset -= 744;
             if (first + lastOffset >= (u32) actor) {
-                index = ((u32) actor - first) / 0x2E8;
+                index = ((u32) actor - first) / 744;
             }
         }
     } else {
@@ -92,10 +92,10 @@ s32 Rumble_TestActorStateBit(void *worldState, void *actorPointer) {
         first = ((u32)world->actors);
         index = -1;
         if ((u32) actorPointer >= first) {
-            lastOffset = world->actorCount * 0x2E8;
-            lastOffset -= 0x2E8;
+            lastOffset = world->actorCount * 744;
+            lastOffset -= 744;
             if (first + lastOffset >= (u32) actorPointer) {
-                index = ((u32) actorPointer - first) / 0x2E8;
+                index = ((u32) actorPointer - first) / 744;
             }
         }
     } else {

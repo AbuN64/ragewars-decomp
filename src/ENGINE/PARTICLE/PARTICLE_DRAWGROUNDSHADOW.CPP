@@ -177,7 +177,7 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
 
     if (particle->resource == 0) {
         resource = Cache_RequestResource(0, particle->desc->renderModel,
-                                particle->desc->renderModel, 0x18,
+                                particle->desc->renderModel, 24,
                                 0, 0, 0, &s_particleModelResourceTag, 1);
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource,

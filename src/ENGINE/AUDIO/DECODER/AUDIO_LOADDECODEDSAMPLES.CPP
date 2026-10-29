@@ -54,7 +54,7 @@ Acmd *Audio_LoadDecodedSamples(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCoun
             } else {
                 dmemAlign = 0;
             }
-            aSetBuffer(ptr++, 0, op + dmemAlign, 0, nbytes + 8 - (nbytes & 0x7));
+            aSetBuffer(ptr++, 0, op + dmemAlign, 0, nbytes + 8 - (nbytes & 7));
             aLoadBuffer(ptr++, (g_audioTransformInputStream & 0x1FFFFFFF) - dramAlign);
             if (dramAlign || dmemAlign) {
                 aDMEMMove(ptr++, op + dramAlign + dmemAlign, op, nSam << 1);

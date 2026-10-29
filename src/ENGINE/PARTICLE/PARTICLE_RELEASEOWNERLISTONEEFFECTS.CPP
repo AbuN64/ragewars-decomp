@@ -94,7 +94,7 @@ void Particle_ReleaseOwnerListOneEffects(struct EffectSystem *effectSystem, s32 
         do {
             kind = effect->kind;
             next = effect->next;
-            if ((kind == 0x41E) || (kind == 0x3EF)) {
+            if ((kind == 1054) || (kind == 1007)) {
                 flags = effect->flags;
                 if ((flags & 0x100) && (effect->owner == (void *)ownerAddress) && !(flags & 0x800)) {
                     Particle_FinishActorEffects(effect);
@@ -135,7 +135,7 @@ s32 Particle_CountOwnerListOneEffects(struct EffectSystem *effectSystem, s32 own
     if (record != 0) {
         do {
             v = record->kind;
-            if (((v == 0x3EF) || (v == 0x41E)) && (record->owner == (void *)ownerAddress)) {
+            if (((v == 1007) || (v == 1054)) && (record->owner == (void *)ownerAddress)) {
                 count += 1;
             }
             record = record->next;
@@ -157,7 +157,7 @@ void Particle_ReleaseOwnerListTwoEffects(struct EffectSystem *effectSystem, s32 
         do {
             kind = effect->kind;
             next = effect->next;
-            if (((kind == 0x414) || (kind == 0x42D)) &&
+            if (((kind == 1044) || (kind == 1069)) &&
                 (effect->owner == (void *)ownerAddress)) {
                 flags = effect->flags;
                 if (flags & 0x100) {
@@ -315,7 +315,7 @@ void Particle_InitializeAttachmentsAndSound(ObjParticleInitializeAttachmentsAndS
     actor->soundHandle = lightType == -1 ? 0 : Gdynlight_AllocateWorldLight(&g_dynamicLightPool, lightType);
     if (!(actor->flags & 0x200000) && (soundId = parameters->soundId, (soundId != 0))) {
         switch(actor->modelId) {
-        case 0x22: case 0x5f: case 0x60:
+        case 34: case 95: case 96:
             Particle_PlayAttachedSound(actor,soundId); break;
         default:
             SoundElement_PlaySoundAtPosition(soundId, *(CVector3 *)&actor->positionX, 0, -1); break;
@@ -356,7 +356,7 @@ void Particle_ApplyDirectionalAcceleration(DirectionalAccelerationParticle *part
 }
 
 void Particle_FlagKind86ModeTwo(void *particle, s32 mode) {
-    if (((((struct ParticleKindFlagsView *) ((s8 *) particle))->modelId) == 0x56) && (mode == 2)) {
+    if (((((struct ParticleKindFlagsView *) ((s8 *) particle))->modelId) == 86) && (mode == 2)) {
         (((struct ParticleKindFlagsView *) ((s8 *) particle))->flags) = (s32) ((((struct ParticleKindFlagsView *) ((s8 *) particle))->flags) | 0x04000000);
     }
 }
@@ -398,14 +398,14 @@ void Particle_AttachToCurrentTarget(void *particle, f32 *attachmentMatrix, s32 a
     ((Shared_Particle *)actor)->target = current;
     ((Shared_Particle *)actor)->flags |= 0x10000;
     ((Shared_Particle *)actor)->collisionNode = scene->actor_byte;
-    if (((Shared_Particle *)actor)->inst.type == 0x56 && mode == 2) {
+    if (((Shared_Particle *)actor)->inst.type == 86 && mode == 2) {
         ((Shared_Particle *)actor)->flags |= 0x04000000;
     }
 }
 
 /** Return eventId, but treat the sentinel value 0xA as 0. */
 s32 Particle_MapEventTenToZero(s32 eventId) {
-    if (eventId == 0xA) {
+    if (eventId == 10) {
         return 0;
     }
     return eventId;
@@ -425,9 +425,9 @@ void Particle_DispatchActorContactEvents(void *actor) {
 
     particleDescription = ((Shared_Particle *)actor)->desc;
     if (Particle_HasSurfaceFlag(actor) != 0) {
-        surfaceEventIndex = 0xC;
+        surfaceEventIndex = 12;
     } else {
-        surfaceEventIndex = 0xA;
+        surfaceEventIndex = 10;
     }
     surfaceIndexBytes = surfaceEventIndex * 2;
     events = particleDescription->events;
@@ -464,9 +464,9 @@ void Particle_DispatchSpatialContactEvents(void *particle) {
 
     particleDescription = ((Shared_Particle *)particle)->desc;
     if (Particle_HasSurfaceFlag(particle) != 0) {
-        surfaceEventIndex = 0xD;
+        surfaceEventIndex = 13;
     } else {
-        surfaceEventIndex = 0xB;
+        surfaceEventIndex = 11;
     }
     surfaceIndexBytes = surfaceEventIndex * 2;
     events = particleDescription->events;
@@ -504,9 +504,9 @@ void Particle_DispatchParticleContactEvents(void *particle) {
 
     particleDescription = ((Shared_Particle *)particle)->desc;
     if (Particle_HasSurfaceFlag(particle) != 0) {
-        surfaceEventIndex = 0xC;
+        surfaceEventIndex = 12;
     } else {
-        surfaceEventIndex = 0xA;
+        surfaceEventIndex = 10;
     }
     surfaceIndexBytes = surfaceEventIndex * 2;
     events = particleDescription->events;

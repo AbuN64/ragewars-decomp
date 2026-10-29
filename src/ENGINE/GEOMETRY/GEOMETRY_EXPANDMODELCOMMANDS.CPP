@@ -74,7 +74,7 @@ void Geometry_SetupIntensityPass(void) {
     cmd = g_displayListCursor++;
     gSPGeometryMode(cmd, 0, g_geometryEffectGeometryMode | 0x00260404);
 
-    Geometry_SetModePreset(0x1D);
+    Geometry_SetModePreset(29);
 }
 
 /* Expand packed geometry commands into display lists while rebuilding resource offsets. */
@@ -136,9 +136,9 @@ void Geometry_ExpandModelCommands(s32 unused, struct CacheResourceBlockView **re
                     } else {
                         countTag &= 0x60;
                         switch (countTag) {
-                        case 0x20: input += 2; commandSize += 8; break;
-                        case 0x40: input += 2; commandSize += 8; break;
-                        case 0x60: input += 5; commandSize += 8; break;
+                        case 32: input += 2; commandSize += 8; break;
+                        case 64: input += 2; commandSize += 8; break;
+                        case 96: input += 5; commandSize += 8; break;
                         }
                     }
                 }
@@ -220,7 +220,7 @@ void Geometry_ExpandModelCommands(s32 unused, struct CacheResourceBlockView **re
                                 }
                             } else {
                                 switch (commandSize) {
-                                case 0x20:
+                                case 32:
                                     value = *input++ << 8;
                                     value |= *input++;
                                     vertexSlot = (s32)value >> 5 & 31;
@@ -231,7 +231,7 @@ void Geometry_ExpandModelCommands(s32 unused, struct CacheResourceBlockView **re
                                     gSPVertex(output++, (vertexData + vertexOffset * 16 - vertices) + vertexSegment, n, vertexSlot);
                                     vertexCount += n;
                                     break;
-                                case 0x40:
+                                case 64:
                                     input++;
                                     {
                                         s32 matrixIndex = *input++;
@@ -240,7 +240,7 @@ void Geometry_ExpandModelCommands(s32 unused, struct CacheResourceBlockView **re
                                                   G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
                                     }
                                     break;
-                                case 0x60:
+                                case 96:
                                     vertexSlot = tag & 31;
                                     input++;
                                     value = *input++;
@@ -364,7 +364,7 @@ void Geometry_DrawActorModelParts(void **resource, struct Player *owner, void *m
     settings = &g_matchRoundCounters;
     if (settings->enabled != 0) {
         AiProfile *state = owner->profile;
-        if (state->character == 0xB && state->enabled != 0) {
+        if (state->character == 11 && state->enabled != 0) {
             hide = 0 < settings->m_nBastilleShield;
         }
     }
@@ -399,15 +399,15 @@ void Geometry_DrawActorModelParts(void **resource, struct Player *owner, void *m
             Geometry_ApplyMaterialLighting(matrix, lights, material);
         }
         state = owner->profile;
-        if (state->character == 0x12 && (g_matchRoundCounters.m_bFragTagOn == 0 || state->bonus == 0)) {
+        if (state->character == 18 && (g_matchRoundCounters.m_bFragTagOn == 0 || state->bonus == 0)) {
             u32 bits;
             u32 wanted;
             if (state->variant == 0) {
-                wanted = 0x28;
+                wanted = 40;
             } else if (state->variant == 1) {
-                wanted = 0x20;
+                wanted = 32;
             } else {
-                wanted = 0x18;
+                wanted = 24;
             }
             bits = material->mode & 0x38;
             if (bits == wanted || (bits == 0x38 && hide != 0) || (bits == 0x30 && bonus != 0)) {

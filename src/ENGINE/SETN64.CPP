@@ -122,9 +122,9 @@ void SetN64_RunGameLoop(GameSession *session) {
     s16 *msg;
     Audiomgr_InitHeap();
 #if defined(VERSION_EU)
-    System_CreateVideoManagerEu(0xFE);
+    System_CreateVideoManagerEu(254);
 #else
-    System_CreateVideoManager(0xFE);
+    System_CreateVideoManager(254);
 #endif
     osViBlack(1);
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -168,7 +168,7 @@ void SetN64_RunGameLoop(GameSession *session) {
     Pools_ResetPlayers(session->players);
     Player_ResetMenuPool(session->menu);
     CCollision_Initialize();
-    session->resource = Defs_ReadResourceWord(0x18) & 0x3FFFFFFF;
+    session->resource = Defs_ReadResourceWord(24) & 0x3FFFFFFF;
     Pools_ResetActorPools(session->players, 0);
     Player_InitializePlayerPool(session->menu, 0, 0);
     Scene_LoadSceneResources(&g_world, session->resource);
@@ -204,7 +204,7 @@ void SetN64_RunGameLoop(GameSession *session) {
             } else if (msg == &session->ring.frames[2].done.type) {
                 g_currentTaskFrame = &session->ring.frames[2];
             }
-            if (session->mode == 0x14) {
+            if (session->mode == 20) {
                 g_gameModeTransitionFrames++;
             } else {
                 SetN64_UpdateFrameTiming(session);
@@ -220,7 +220,7 @@ void SetN64_RunGameLoop(GameSession *session) {
             Control_SetControllerMode(0);
             session->fastFade = 1;
             session->transitionBlocked = 1;
-            SetN64_SetTransitionTarget(session, 0x14);
+            SetN64_SetTransitionTarget(session, 20);
             break;
         }
     }
@@ -251,7 +251,7 @@ void SetN64_BeginFrameDisplayList(void *world) {
     gDPSetDepthImage(g_displayListCursor++, g_depthImageBuffer);
     viewport->vscale[0] = SCREEN_WD * 2;
     viewport->vscale[1] = SCREEN_HT * 2;
-    viewport->vscale[2] = 0x3FF;
+    viewport->vscale[2] = 1023;
     viewport->vscale[3] = 0;
     viewport->vtrans[0] = SCREEN_WD * 2;
     viewport->vtrans[1] = SCREEN_HT * 2;
@@ -285,7 +285,7 @@ void SetN64_SubmitFrameTasks(Display *display, Frame *frame)
         task->list.ucode_size = 0x1000;
         task->list.ucode_data_size = 0x800;
         task->list.yield_data_ptr = g_graphicsTaskYieldBuffer;
-        task->list.yield_data_size = 0xC00;
+        task->list.yield_data_size = 3072;
         task->list.ucode = g_graphicsMicrocodeText;
         task->list.ucode_data = g_graphicsMicrocodeData;
         task->list.flags = 0;
@@ -314,7 +314,7 @@ void SetN64_SubmitFrameTasks(Display *display, Frame *frame)
         task->list.ucode_size = 0x1000;
         task->list.ucode_data_size = 0x800;
         task->list.yield_data_ptr = g_graphicsTaskYieldBuffer;
-        task->list.yield_data_size = 0xC00;
+        task->list.yield_data_size = 3072;
         task->list.ucode = g_alternateGraphicsMicrocodeText;
         task->list.ucode_data = g_alternateGraphicsMicrocodeData;
         task->list.flags = 0;

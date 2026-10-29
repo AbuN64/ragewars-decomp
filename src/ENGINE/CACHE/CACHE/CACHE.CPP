@@ -163,7 +163,7 @@ void Cache_TouchResourceByKey(s32 unusedCache, s32 resourceKey) {
     out = &value;
     node = (HashNode *)((s32)g_resourceHashBuckets +
         ((((resourceKey << 5) ^ ((u32)resourceKey >> 1) ^ ((u32)resourceKey >> 9) ^
-           ((u32)resourceKey >> 17)) & g_resourceHashEvenIndexMask) * 0x10));
+           ((u32)resourceKey >> 17)) & g_resourceHashEvenIndexMask) * 16));
     if (node->key != resourceKey) {
         goto not_initial;
     }
@@ -235,7 +235,7 @@ void **Cache_RequestWordCountedResource(s32 unusedCache, void **resourceHandle, 
         } else {
             __osRestoreInt(token2);
         }
-        resource = Cache_RequestResource(0, resourceKey, resourceKey, ((size * 4) + 0xF) & ~7,
+        resource = Cache_RequestResource(0, resourceKey, resourceKey, ((size * 4) + 15) & ~7,
                                  0, 0, 0, loadTag, direct);
         if (resource != 0) {
             *resourceHandle = *resource;
@@ -255,7 +255,7 @@ s32 Cache_RequestWordCountedResourcePinned(s32 unusedCache, void **handle, s32 r
     u32 token2;
     s32 one = 1;
 
-    resource = Cache_RequestResource(0, resourceKey, resourceKey, 4, 0x1B, 0, 0, &s_headerText, one);
+    resource = Cache_RequestResource(0, resourceKey, resourceKey, 4, 27, 0, 0, &s_headerText, one);
     size = **(s32 **)resource;
     token = __osDisableInt();
     counter = g_resourceHeapLockUsers + one;
@@ -276,7 +276,7 @@ s32 Cache_RequestWordCountedResourcePinned(s32 unusedCache, void **handle, s32 r
     } else {
         __osRestoreInt(token2);
     }
-    resource = Cache_RequestResource(0, resourceKey, resourceKey, ((size * 4) + 0xF) & ~7, 0x1B, 0, 0, loadTag, 1);
+    resource = Cache_RequestResource(0, resourceKey, resourceKey, ((size * 4) + 15) & ~7, 27, 0, 0, loadTag, 1);
     *handle = *resource;
     return (s32)resource;
 }
@@ -286,5 +286,5 @@ void **Cache_RequestPackSection(s32 unusedCache, void *handle, s32 sectionSelect
     s32 sectionSource;
 
     sectionSource = SetN64_LocatePackSection(handle, resourceKey, sectionSelector, &sectionByteCount);
-    return (void **)Cache_RequestResource(0, sectionSource, sectionSource, sectionByteCount, 0x1B, world, resourceTag, loadTag, 1);
+    return (void **)Cache_RequestResource(0, sectionSource, sectionSource, sectionByteCount, 27, world, resourceTag, loadTag, 1);
 }

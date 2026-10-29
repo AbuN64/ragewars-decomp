@@ -434,7 +434,7 @@ a = Graphu64_NextRandom() % info.count;
                     case 4:
                     case 5:
                         gDPSetEnvColor(g_displayListCursor++, mat->environmentRed, mat->environmentGreen, mat->environmentBlue, mat->environmentAlpha);
-                        Geometry_SetCombineMode(0x23);
+                        Geometry_SetCombineMode(35);
                         break;
                     default:
                         Geometry_SetCombineMode(5);
@@ -461,7 +461,7 @@ a = Graphu64_NextRandom() % info.count;
                         break;
                     case 6:
                         gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->primitiveRed, mat->primitiveGreen, mat->primitiveBlue, g_menuModelFillColor[4]);
-                        Geometry_SetCombineMode(0xB);
+                        Geometry_SetCombineMode(11);
                         break;
                     default:
                         break;
@@ -473,38 +473,38 @@ a = Graphu64_NextRandom() % info.count;
                 switch (info.frame->materialCombineKind) {
                     case 4:
                         gDPSetEnvColor(g_displayListCursor++, mat->environmentRed, mat->environmentGreen, mat->environmentBlue, mat->environmentAlpha);
-                        Geometry_SetCombineMode(0x25);
+                        Geometry_SetCombineMode(37);
                         break;
                     case 5:
                         gDPSetEnvColor(g_displayListCursor++, mat->environmentRed, mat->environmentGreen, mat->environmentBlue, mat->environmentAlpha);
-                        Geometry_SetCombineMode(0x24);
+                        Geometry_SetCombineMode(36);
                         break;
                     default:
-                        Geometry_SetCombineMode(0xC);
+                        Geometry_SetCombineMode(12);
                         break;
                 }
             } else if (g_menuModelFillEnabled == 0) {
-                Geometry_SetCombineMode(0xD);
+                Geometry_SetCombineMode(13);
             } else {
                 gDPSetEnvColor(g_displayListCursor++, g_menuModelFillColor[0], g_menuModelFillColor[1], g_menuModelFillColor[2], g_menuModelFillColor[3]);
                 switch (g_menuModelFillEnabled) {
                     case 1:
                     case 2:
-                        Geometry_SetCombineMode(0xE);
+                        Geometry_SetCombineMode(14);
                         break;
                     case 3:
-                        Geometry_SetCombineMode(0xF);
+                        Geometry_SetCombineMode(15);
                         break;
                     case 7:
                         Geometry_SetCombineMode(9);
                         break;
                     case 4:
                     case 5:
-                        Geometry_SetCombineMode(0x10);
+                        Geometry_SetCombineMode(16);
                         break;
                     case 6:
                         gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->primitiveRed, mat->primitiveGreen, mat->primitiveBlue, g_menuModelFillColor[4]);
-                        Geometry_SetCombineMode(0x11);
+                        Geometry_SetCombineMode(17);
                         break;
                     default:
                         break;
@@ -533,29 +533,29 @@ a = Graphu64_NextRandom() % info.count;
         }
         gSPTexture(g_displayListCursor++, 0, 0, 0, 0, 0);
         if (flags & 2) {
-            Geometry_SetCombineMode(0x12);
+            Geometry_SetCombineMode(18);
         } else if (g_menuModelFillEnabled == 0) {
-            Geometry_SetCombineMode(0x13);
+            Geometry_SetCombineMode(19);
         } else {
             gDPSetEnvColor(g_displayListCursor++, g_menuModelFillColor[0], g_menuModelFillColor[1], g_menuModelFillColor[2], g_menuModelFillColor[3]);
             switch (g_menuModelFillEnabled) {
                 case 1:
                 case 2:
-                    Geometry_SetCombineMode(0x14);
+                    Geometry_SetCombineMode(20);
                     break;
                 case 3:
-                    Geometry_SetCombineMode(0x15);
+                    Geometry_SetCombineMode(21);
                     break;
                 case 7:
-                    Geometry_SetCombineMode(0x16);
+                    Geometry_SetCombineMode(22);
                     break;
                 case 4:
                 case 5:
-                    Geometry_SetCombineMode(0x17);
+                    Geometry_SetCombineMode(23);
                     break;
                 case 6:
                     gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->primitiveRed, mat->primitiveGreen, mat->primitiveBlue, g_menuModelFillColor[4]);
-                    Geometry_SetCombineMode(0x11);
+                    Geometry_SetCombineMode(17);
                     break;
                 default:
                     break;
@@ -588,7 +588,7 @@ a = Graphu64_NextRandom() % info.count;
                     tailEnum = 8;
                 }
             } else {
-                tailEnum = 0xB;
+                tailEnum = 11;
                 if (g_geometryTexturePerspectiveOverride != 0) {
                     tailEnum = 10;
                 }

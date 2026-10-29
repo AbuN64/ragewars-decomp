@@ -87,7 +87,7 @@ s32 Graphu64_NextRandom(void) {
 
     seed = (g_primaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
     g_primaryRandomSeed = seed;
-    return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
+    return ((seed << 16) | (seed >> 16)) & 0x7FFFFFFF;
 }
 
 s32 Graphu64_NextRandomValue(void) {
@@ -95,7 +95,7 @@ s32 Graphu64_NextRandomValue(void) {
 
     seed = (g_secondaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
     g_secondaryRandomSeed = seed;
-    return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
+    return ((seed << 16) | (seed >> 16)) & 0x7FFFFFFF;
 }
 
 /** LCG PRNG step scaled into [0, range * g_randomFloatRangeScale) as a float. */
@@ -105,7 +105,7 @@ f32 Graphu64_RandomFloat(f32 range) {
     u32 seed;
 
     seed = (g_primaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
-    randomBits = (s32)((seed >> 0x10) & 0x7FFF);
+    randomBits = (s32)((seed >> 16) & 0x7FFF);
     value = (f64)randomBits;
     g_primaryRandomSeed = seed;
     if (randomBits < 0) {
@@ -320,7 +320,7 @@ f32 Graphu64_RandomBetween(f32 shakeMin, f32 shakeMax) {
     s32 randomValue;
 
     seed = (g_primaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
-    randomValue = ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
+    randomValue = ((seed << 16) | (seed >> 16)) & 0x7FFFFFFF;
     randomValue = randomValue % 10000;
     blend = (f32)randomValue * g_randomBlendScale;
     g_primaryRandomSeed = seed;

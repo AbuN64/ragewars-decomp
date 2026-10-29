@@ -120,7 +120,7 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         turn.y = cur[3][1];
         turn.z = cur[3][2];
         axis = part->twistAxis;
-        angle = g_boneTwistImpulseCurve[0x19 - part->twistStep] * 0.5f;
+        angle = g_boneTwistImpulseCurve[25 - part->twistStep] * 0.5f;
         angle *= 0.3f;
         angle *= (n == 5 ? -2.0f : (f32)n);
         CopyMatrix(inv, cur);
@@ -306,7 +306,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
     ret = 0;
     isRoot = actor->flags & 1;
     isKind9 = actor->model->kind == 9;
-    mem = Cache_RequestResource(0, actor->animationResourceId, actor->animationResourceId, ((actor->animationResourceUnits * 4) + 0xF) & ~7, 4, 0, 0, &g_actorRotationBlendAndResourceTuning + 4, 0);
+    mem = Cache_RequestResource(0, actor->animationResourceId, actor->animationResourceId, ((actor->animationResourceUnits * 4) + 15) & ~7, 4, 0, 0, &g_actorRotationBlendAndResourceTuning + 4, 0);
     skip = ret;
     if (mem != 0) {
         animA = &actor->animA;
@@ -364,10 +364,10 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
             }
             if (!(actor->flags & 0x200000) && (kind == 1 || kind == 11)) {
                 if (g_gameSettings & 0x100) {
-                    id0 = 0xC3;
-                    id1 = 0xC7;
-                    id2 = 0xC2;
-                    id3 = 0xC6;
+                    id0 = 195;
+                    id1 = 199;
+                    id2 = 194;
+                    id3 = 198;
                 } else {
                     id0 = -1;
                     id1 = -1;

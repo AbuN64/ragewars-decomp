@@ -150,7 +150,7 @@ first_pass_done:
         Player_UpdateWorldPlayers(&g_playerViewRenderContext);
     }
     if (Playerai_BeginRoundEnd(&g_playerViewRenderContext)) {
-        SoundElement_SetMusicPlaybackEnabled(0x34);
+        SoundElement_SetMusicPlaybackEnabled(52);
         {
         s32 sw_mode_value = ((GlobalMode *)&g_playerViewRenderContext)->mode;
         if ((unsigned int)sw_mode_value > 4) {
@@ -217,7 +217,7 @@ typedef struct SceneStaticBounds {
 } SceneStaticBounds;
 void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     LevelActor *object;
-    SortEntry entries[0x800];
+    SortEntry entries[2048];
     CVector3 jitter;
     s32 count;
     s32 i;

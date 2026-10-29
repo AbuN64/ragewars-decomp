@@ -127,7 +127,7 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
         effect->followedActor = (s32) targetActor;
         effect->flags |= 0x10000;
         effect->boundMatrixIndex = g_currentActorInstance.matrixIndex;
-        if (effect->kind == 0x56 && targetTeam == sourceType) {
+        if (effect->kind == 86 && targetTeam == sourceType) {
             effect->flags |= 0x4000000;
         }
     }
@@ -536,7 +536,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                         Playerai_StartTransitionState(effect->owner->player, effect);
                     }
                 }
-                if (kind == 0x101 || kind == 0x128) {
+                if (kind == 257 || kind == 296) {
                     render->dwFlags |= 4;
                 }
                 if (entry->flags & 0x100000) {
@@ -565,12 +565,12 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     }
                     effect->flags |= 0x1000000;
                 }
-                if ((g_effectCallbackFlags[entry->model->callbackKind].flags & 1) || kind == 0x68) {
+                if ((g_effectCallbackFlags[entry->model->callbackKind].flags & 1) || kind == 104) {
                     render->dwFlags |= 0x20000;
                 }
                 vel = &effect->velocity;
                 Graphu64_ScaleVector(vel, vel, g_particleInitialVelocityScale);
-                if ((kind == 0x2D || kind == 0x4F) && (sourceType = source->type) == 2) {
+                if ((kind == 45 || kind == 79) && (sourceType = source->type) == 2) {
                     aimTarget = &g_currentActorInstance;
                     if (aimTarget->actor != 0) {
                         effect_spawn_aim(effect, aimTarget, vel, sourceType);
@@ -588,9 +588,9 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 }
                 if (!(effect->flags & 0x200000) && (sound = entry->sound) != 0) {
                     switch (effect->kind) {
-                        case 0x22:
-                        case 0x5F:
-                        case 0x60:
+                        case 34:
+                        case 95:
+                        case 96:
                             Particle_PlayAttachedSound(effect, sound);
                             break;
                         default:

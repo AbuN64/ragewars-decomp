@@ -76,7 +76,7 @@ s32 Audio_StartDialogGroup(DialogGroupPlayer *player, s32 group, f32 scale, int 
     request = ++player->request;
     pick(player->bank, (s16)player->group);
     player->speed = scale * *(&g_dialogPlaybackTimingConstants + 1);
-    player->volume = 0x40;
+    player->volume = 64;
     if (player->state == 3 || player->state == 1) {
         restart(player);
     } else {
@@ -93,7 +93,7 @@ void Audio_InitializeDialogPlayer(struct DialogPlayerState *record, s32 resource
     record->group = -1;
     record->state = 0;
     record->speed = 0;
-    record->volume = 0x40;
+    record->volume = 64;
     record->soundId = alSndpAllocate(Audio_GetSoundPlayer(record->resource), g_dialogDefaultSample);
 }
 

@@ -137,9 +137,9 @@ void Fx_RecycleOwnerParticles(ParticleQuadPoolScene *particlePool, s32 ownerId) 
     Particle *node;
     Particle *next;
 
-    if (particlePool->free.count != 0x64) {
+    if (particlePool->free.count != 100) {
         count = 0;
-        offset = 0x94E0;
+        offset = 38112;
         do {
             slot = &particlePool->lists[count].head;
             node = *slot;
@@ -154,8 +154,8 @@ void Fx_RecycleOwnerParticles(ParticleQuadPoolScene *particlePool, s32 ownerId) 
                 } while (node != 0);
             }
             count += 1;
-            offset += 0x14;
-        } while (count < 0xA);
+            offset += 20;
+        } while (count < 10);
     }
 }
 
@@ -172,14 +172,14 @@ void Fx_UpdateAttachedEffects(RibbonWorld *owner) {
                 object = state->object;
                 if (object != 0) {
                     if (state->flags & 1) {
-                        if (object[0x13B] != 0) {
-                            object[0x13B]--;
+                        if (object[315] != 0) {
+                            object[315]--;
                         }
                     }
                     if (state->flags & 2) {
                         object = state->object;
-                        if (object[0x1D9] != 0) {
-                            object[0x1D9]--;
+                        if (object[473] != 0) {
+                            object[473]--;
                         }
                     }
                 }
@@ -251,14 +251,14 @@ void Fx_DetachEffectObject(AttachedEffectDetachState *state) {
     object = state->object;
     if (object != 0) {
         if (state->flags & 1) {
-            if (object[0x13B] != 0) {
-                object[0x13B]--;
+            if (object[315] != 0) {
+                object[315]--;
             }
         }
         if (state->flags & 2) {
             object = state->object;
-            if (object[0x1D9] != 0) {
-                object[0x1D9]--;
+            if (object[473] != 0) {
+                object[473]--;
             }
         }
     }

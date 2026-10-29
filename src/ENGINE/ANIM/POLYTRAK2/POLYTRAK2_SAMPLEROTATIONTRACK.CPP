@@ -178,8 +178,8 @@ void Polytrak2_DecodeScalarSamples(u32 *stream, ScalarSampleOutput *out, s32 cou
 
     decode.stream = *stream;
     if (g_motionTrackDecodeTranslation != 0) {
-        decode.first_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 0x20);
-        decode.second_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 0x20);
+        decode.first_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 32);
+        decode.second_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 32);
         first = *(f32 *)&decode.first_bits;
         second = *(f32 *)&decode.second_bits;
     } else {
@@ -259,7 +259,7 @@ s32 Polytrak2_DecodeAndSmoothSampleTracks(s32 source, AnimationSampleTable *buff
             if (channels > 0) {
                 out = values;
                 do {
-                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 0x1F);
+                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 31);
                     decode(cursor, out, g_motionTrackSourceFrameCount);
                     out += 1;
                     j++;
@@ -350,7 +350,7 @@ s32 Polytrak2_DecodeTrackSectionsEuX(s32 source, AnimationSampleTable *buffer, s
             if (channels > 0) {
                 out = values;
                 do {
-                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 0x1F);
+                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 31);
                     decode(cursor, out, g_motionTrackSourceFrameCount);
                     out += 1;
                     j++;
@@ -441,7 +441,7 @@ s32 Polytrak2_DecodeTrackSectionsEu(s32 source, AnimationSampleTable *buffer, s3
             if (channels > 0) {
                 out = values;
                 do {
-                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 0x1F);
+                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 31);
                     decode(cursor, out, g_motionTrackSourceFrameCount);
                     out += 1;
                     j++;
@@ -532,7 +532,7 @@ s32 Polytrak2_DecodeTrackSections(s32 source, AnimationSampleTable *buffer, s32 
             if (channels > 0) {
                 out = values;
                 do {
-                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 0x1F);
+                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 31);
                     decode(cursor, out, g_motionTrackSourceFrameCount);
                     out += 1;
                     j++;
@@ -630,7 +630,7 @@ s32 Polytrak2_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s3
             if (channels > 0) {
                 out = values;
                 do {
-                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 0x1F);
+                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 31);
                     decode(cursor, out, g_motionTrackSourceFrameCount);
                     out += 1;
                     j++;

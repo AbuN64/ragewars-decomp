@@ -38,7 +38,7 @@ void Events_SpawnAttachedEffect(EffectSpawnSourceView *source, Shared_ParticleOw
     EffectEventsSpawnAttachedEffect *partner;
 
 #if defined(VERSION_DE)
-    if (spawn.kind == 0x321) {
+    if (spawn.kind == 801) {
         return;
     }
 #endif
@@ -53,7 +53,7 @@ void Events_SpawnAttachedEffect(EffectSpawnSourceView *source, Shared_ParticleOw
     scale.x = spawn.size;
     scale.y = spawn.size;
     scale.z = spawn.size;
-    if (spawn.kind == 0x40C) {
+    if (spawn.kind == 1036) {
         spawn.position = g_collisionCurrentActor->position;
         velocity.x = 0;
         velocity.y = 0;
@@ -64,12 +64,12 @@ void Events_SpawnAttachedEffect(EffectSpawnSourceView *source, Shared_ParticleOw
     if (effect == 0) {
         return;
     }
-    if (spawn.kind == 0x40C) {
+    if (spawn.kind == 1036) {
         effect->target = Particle_GetEffectResource(host);
         effect->offset.x = g_collisionCurrentActor->offset.x;
         effect->offset.y = g_collisionCurrentActor->offset.y;
         effect->offset.z = g_collisionCurrentActor->offset.z;
-    } else if ((unsigned)(spawn.kind - 0x474) < 4) {
+    } else if ((unsigned)(spawn.kind - 1140) < 4) {
         if (host->kind == 1 && (host->flags & 0x300000)) {
             partner = host->player;
             if (partner != 0) {

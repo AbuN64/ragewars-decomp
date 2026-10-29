@@ -22,7 +22,7 @@ void SetN64_HandleSessionTransitionInput(GameSession *session, s32 cancelTarget,
 
     flags = (s32 *)&g_combinedControllerProfile.pressedButtons;
     pending = *flags & 0x1000;
-    if ((unsigned)(session->mode - 0xB) < 2) {
+    if ((unsigned)(session->mode - 11) < 2) {
         pending = 0;
     }
     if (pending != 0 && target != -1) {
@@ -36,7 +36,7 @@ void SetN64_HandleSessionTransitionInput(GameSession *session, s32 cancelTarget,
 
         session->phase = 1;
         session->timer = 0;
-        session->mode = 0x14;
+        session->mode = 20;
         session->target = cancelTarget;
         session->previousMode = mode;
         if (Control_IsSnapshotActive() != 0) {

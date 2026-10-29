@@ -248,7 +248,7 @@ void Statinst_DispatchAttachmentEvents(void *object, s32 all) {
     s32 count;
     s32 i;
 
-    model = Cache_RequestResource(0, ((PlacedProp *)object)->owner, ((PlacedProp *)object)->owner, 0x18, 4, 0, 0,
+    model = Cache_RequestResource(0, ((PlacedProp *)object)->owner, ((PlacedProp *)object)->owner, 24, 4, 0, 0,
                           &g_statObjectIndexText, 0);
     if (model == 0) {
         return;

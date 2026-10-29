@@ -87,11 +87,11 @@ struct CacheResourceBlockView *Cache_AllocatePinnedResourceBlock(s32 unused0, s3
     } else {
         __osRestoreInt(token);
     }
-    node = Cache_AcquireResourceNodeWithEviction(0, 0x22U);
+    node = Cache_AcquireResourceNodeWithEviction(0, 34U);
     if (node != 0) {
         node->third++;
         node->fourth |= 0x100;
-        result = ((s32 (*)(s32, s32, s32, u32))Cache_AllocateHeapWithEviction)(0, byteCount, 1, 0x22U);
+        result = ((s32 (*)(s32, s32, s32, u32))Cache_AllocateHeapWithEviction)(0, byteCount, 1, 34U);
         node->first = result;
         if (result != 0) {
             node->second = byteCount;

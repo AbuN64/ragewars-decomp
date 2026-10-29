@@ -246,8 +246,8 @@ void Tengine_UpdateArtsendTexturePreview(void) {
         scale = g_artsendTextureTitleScale;
         OnScreen_LoadTextTileModeOne();
         OnScreen_SetTextScale(scale, scale);
-        OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-        Onscrn_DrawText((char *)&g_artsendTextureViewer.displayData, 0x10, g_hudReferenceViewportHeight - 0x30, 0xFF, 0, 0, scale, scale);
+        OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 200, 200, 200);
+        Onscrn_DrawText((char *)&g_artsendTextureViewer.displayData, 16, g_hudReferenceViewportHeight - 48, 0xFF, 0, 0, scale, scale);
     }
 }
 #endif

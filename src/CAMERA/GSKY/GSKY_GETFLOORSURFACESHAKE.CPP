@@ -106,9 +106,9 @@ void Gsky_AllocateMessageBuffer(void *messageBuffer, s32 count) {
     s32 bytes;
     s32 firstBlock;
 
-    bytes = count * 0xED8;
+    bytes = count * 3800;
     buffer->count = count;
-    allocation = Cache_AllocateResource(0, bytes, 0x23, (char *)&g_messageBufferAllocationLabelStorage + 4);
+    allocation = Cache_AllocateResource(0, bytes, 35, (char *)&g_messageBufferAllocationLabelStorage + 4);
     buffer->allocation = allocation;
     firstBlock = *allocation;
     buffer->first = firstBlock;
@@ -122,7 +122,7 @@ void Gsky_AllocateScreenMessageStorage(void *screenMessageOwner, int count) {
     int firstBlock;
     bytes = count << 6;
     owner->storage.count = count;
-    allocation = Cache_AllocateResource(0, bytes, 0x23, &g_screenMessageAllocationLabel);
+    allocation = Cache_AllocateResource(0, bytes, 35, &g_screenMessageAllocationLabel);
     owner->storage.allocation = allocation;
     firstBlock = *allocation;
     owner->storage.first = firstBlock;

@@ -153,7 +153,7 @@ void Gsky_DrawObjectFlares(FlareActor *view) {
     s32 mask = 8 << view->index;
 
     Onscrn_SetupSpriteMode(100);
-    Geometry_SetModePreset(0x1A);
+    Geometry_SetModePreset(26);
     g = *gfx;
     gDPSetTextureFilter(g++, G_TF_BILERP);
     *gfx = g;

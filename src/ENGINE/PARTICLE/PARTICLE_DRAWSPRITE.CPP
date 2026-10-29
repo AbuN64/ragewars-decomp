@@ -125,7 +125,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     }
     desc = particle->desc;
     if ((desc->flags & 0x80000) && desc->playback == 1) {
-        if (particle->inst.type != 0x60) {
+        if (particle->inst.type != 96) {
             particle->time = 0.0f;
         }
         hit = Particle_IsSpriteOccluded(particle, view);
@@ -256,23 +256,23 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     switch (info.frame->kind) {
         case 0:
         case 1:
-            Geometry_SetCombineMode(0x18);
+            Geometry_SetCombineMode(24);
             break;
         case 3:
-            Geometry_SetCombineMode(0x1D);
+            Geometry_SetCombineMode(29);
             break;
     }
     if (textured) {
-        Geometry_SetModePreset(0xF);
+        Geometry_SetModePreset(15);
         {
             gSPTextureL(g_displayListCursor++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
         }
     } else if ((desc->flags & 0x400) && desc->fade->modeSelector != 4) {
-        Geometry_SetModePreset(0xF);
+        Geometry_SetModePreset(15);
     } else if (desc->flags & 0x4000) {
-        Geometry_SetModePreset(!(g_gameSettings & 0x200) ? 0xD : 0x11);
+        Geometry_SetModePreset(!(g_gameSettings & 0x200) ? 13 : 17);
     } else {
-        Geometry_SetModePreset((g_gameSettings & 0x200) ? 0x12 : 0x13);
+        Geometry_SetModePreset((g_gameSettings & 0x200) ? 18 : 19);
     }
 
     alpha = 0xFF;

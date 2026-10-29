@@ -31,7 +31,7 @@ extern int g_gameLoopFrameCount;
 
 
 void SetN64_StartBootstrapThread(void) {
-    XPlus_FillMemory((s32)g_bootstrapThreadStack, 0, 0x80);
+    XPlus_FillMemory((s32)g_bootstrapThreadStack, 0, 128);
     osCreateThread((s32)g_bootstrapThread, 0, g_SetN64_RunBootstrapThreadPackedAddress24, 0, (s32)(g_bootstrapThreadStack + 0x80), g_bootstrapThreadPriority);
     osStartThread(g_bootstrapThread);
 }

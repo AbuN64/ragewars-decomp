@@ -86,7 +86,7 @@ void SetN64_UpdateFrameTiming(TimingWorld *world) {
     }
     if (g_initialMatchStartPending != 0) {
         sessionMode = world->currentMode;
-        if (sessionMode == 0xB) {
+        if (sessionMode == 11) {
             world->menuNodeCount = 1;
             goto block_10;
         }
@@ -107,7 +107,7 @@ block_10:
  }
  }
  }
-    g_frameElapsedTime = (f32) (g_frameTimingTicks * 0xF) / g_displayedFramebufferAndRefreshRate[1];
+    g_frameElapsedTime = (f32) (g_frameTimingTicks * 15) / g_displayedFramebufferAndRefreshRate[1];
     if (Cinema_IsSequenceInWindow() != 0) {
         g_frameElapsedTime = scaledFrameTime;
     }
@@ -122,8 +122,8 @@ block_10:
     world->elapsedTime = world->elapsedTime + g_frameElapsedTime;
     SetN64_AdvanceGameClock(world);
     idle=idlePause(world);
-    if ((idle != 0) && (world->currentMode != 0x10) && (world->pendingMode != 0x10)) {
+    if ((idle != 0) && (world->currentMode != 16) && (world->pendingMode != 16)) {
         world->fadeMode = 2;
-        world->pendingMode = 0x10;
+        world->pendingMode = 16;
     }
 }

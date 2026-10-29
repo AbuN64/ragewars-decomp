@@ -18,11 +18,11 @@ s32 AnimPool_ReadSignedBits(BitReader *reader, s32 bitCount) {
     mask = 1 << (bitCount - 1);
     if (val & mask) {
         i = bitCount;
-        if (bitCount < 0x20) {
+        if (bitCount < 32) {
             do {
                 val |= 1 << i;
                 i += 1;
-            } while (i < 0x20);
+            } while (i < 32);
         }
     }
     return val;

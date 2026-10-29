@@ -142,10 +142,10 @@ void Sched_InitializeSchedulerThread(Panel *panel, s32 threadStack, s32 priority
     panel->mode = 4;
     osCreateMesgQueue(panel->row0, panel->row0Slots, 8);
     osCreateMesgQueue(panel->row1, panel->row1Slots, 8);
-    osSetEventMesg(4, panel->row0, 0x29B);
-    osSetEventMesg(9, panel->row0, 0x29C);
-    osSetEventMesg(0xE, panel->row0, 0x29D);
-    osViSetEvent(panel->row0, 0x29A, style);
+    osSetEventMesg(4, panel->row0, 667);
+    osSetEventMesg(9, panel->row0, 668);
+    osSetEventMesg(14, panel->row0, 669);
+    osViSetEvent(panel->row0, 666, style);
     osCreateThread(panel->elements, 7, &g_schedulerThreadEntryAddress, panel, threadStack, priority);
     osStartThread(panel->elements);
 }

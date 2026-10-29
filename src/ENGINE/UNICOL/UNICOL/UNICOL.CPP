@@ -122,7 +122,7 @@ s32 Unicol_MoveActorWithCollision(UnicolActor *actor, UnicolPosition pos, u32 *m
     frame.traceEnabled = 1;
     frame.motionFlags = actor->flags;
     frame.scaledSweepReach = frame.sweepReach * k_collisionHeightMarginScale_de;
-    frame.motionSettingsBit19 = ((u32) *motionSettings >> 0x13) & 1;
+    frame.motionSettingsBit19 = ((u32) *motionSettings >> 19) & 1;
     frame.motionSettings = motionSettings;
     CCollision_IntegrateGravityAndDrag(&frame.actor);
     if ((frame.groundFollowEnabled != 0) && (frame.motionFlags & 7) && !(frame.motionFlags & 0x2000)) {
@@ -257,7 +257,7 @@ loop_49:
                         *frame.motionSettings &= ~8;
                     } else {
                         if (frame.hitType < 5) goto no_attach;
-                        if (frame.hitType >= 0xA) goto no_attach;
+                        if (frame.hitType >= 10) goto no_attach;
                         if (frame.hitType < 7) goto no_attach;
                         if (frame.hitActor->type != 1) goto no_attach;
                         attachedActor = frame.hitActor;

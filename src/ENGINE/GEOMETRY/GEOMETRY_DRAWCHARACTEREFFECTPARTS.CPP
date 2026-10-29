@@ -170,7 +170,7 @@ void Geometry_DrawCharacterEffectParts(void **resource, struct Player *owner, vo
     settings = &g_matchRoundCounters;
     if (settings->enabled != 0) {
         AiProfile *state = owner->profile;
-        if (state->character == 0xB && state->enabled != 0) {
+        if (state->character == 11 && state->enabled != 0) {
             hide = 0 < settings->m_nBastilleShield;
         }
     }
@@ -227,7 +227,7 @@ void Geometry_DrawCharacterEffectParts(void **resource, struct Player *owner, vo
                 Geometry_ApplyMaterialLighting(matrix, lights, material);
             }
             state = owner->profile;
-            if (state->character == 0x12 && (g_matchRoundCounters.m_bFragTagOn == 0 || state->bonus == 0)) {
+            if (state->character == 18 && (g_matchRoundCounters.m_bFragTagOn == 0 || state->bonus == 0)) {
                 switch (state->variant) {
                 case 0:
                     if ((material->mode & 0x38) == 0x28) {
@@ -295,14 +295,14 @@ void Geometry_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 seg
     XPlus_NextRandomInteger();
     shared = (MeshMaterial *)&g_tintedModelSharedMaterial;
     flags = shared->flags;
-    shared->secondaryColor[0] = 0x80;
-    shared->secondaryColor[1] = 0x5F;
-    shared->secondaryColor[2] = 0x22;
-    shared->secondaryColor[3] = 0xF0;
-    shared->primaryColor[0] = 0xDB;
-    shared->primaryColor[1] = 0xB8;
-    shared->primaryColor[2] = 0x77;
-    shared->primaryColor[3] = 0x40;
+    shared->secondaryColor[0] = 128;
+    shared->secondaryColor[1] = 95;
+    shared->secondaryColor[2] = 34;
+    shared->secondaryColor[3] = 240;
+    shared->primaryColor[0] = 219;
+    shared->primaryColor[1] = 184;
+    shared->primaryColor[2] = 119;
+    shared->primaryColor[3] = 64;
     shared->flags = flags | 0x400;
     g_menuModelFillColor[3] = g_geometryOpaqueTintAlpha;
     shared->flags = flags | 0x1402;

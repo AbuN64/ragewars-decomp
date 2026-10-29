@@ -150,7 +150,7 @@ void Insthdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volum
     up.z = 0.0f;
     dir.x = dir.y = dir.z = up.x;
     Graphu64_NormalizeVec3(&dir);
-    if (sound != 0xBD7) {
+    if (sound != 3031) {
         Graphu64_ScaleVector(&velocity, &dir, 409.59998f);
     }
     SetN64_SpawnModelEffect((s32)&g_modelEffectPool, 0, sound, velocity, at, request.owner, volume);
@@ -290,7 +290,7 @@ s32 Insthdr_HasActorTerritory(void *actorStorage)
 s32 Insthdr_IsKindElevenEnabledForLocalMode(void *actorStorage) {
     void *actorDefinition;
     actorDefinition = (((struct ActorDefinitionPointerView *) ((s8 *) actorStorage))->definition);
-    if ((((struct ActorDefinitionFlagsView *) ((s8 *) actorDefinition))->kind) == 0xB) {
+    if ((((struct ActorDefinitionFlagsView *) ((s8 *) actorDefinition))->kind) == 11) {
         if (g_gameSettings.local != 0) {
             return (((struct ActorDefinitionFlagsView *) ((s8 *) actorDefinition))->flags) & 1;
         }
@@ -318,7 +318,7 @@ s32 Insthdr_IsInactiveOrCollisionOption2(LevelActor *actor) {
     s32 actorKind = ((ModelBlend *)definition)->kind;
 
     if (actorKind != 1) {
-        if (actorKind != 0xB) {
+        if (actorKind != 11) {
             goto ret0;
         }
         return 1;
@@ -478,7 +478,7 @@ s32 Insthdr_GetModelCollisionFlag2000(void *actorStorage)
       return 0;
     }
   }
-  propertyByteOffset = 0x4C;
+  propertyByteOffset = 76;
   return (actorDefinition->flags4C) & 0x2000;
 }
 

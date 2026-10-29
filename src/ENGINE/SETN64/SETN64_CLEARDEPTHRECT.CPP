@@ -29,7 +29,7 @@ void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32
     s32 y;
 
     gDPPipeSync(g_displayListCursor++);
-    Geometry_SetModePreset(0x14);
+    Geometry_SetModePreset(20);
     gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, g_hudReferenceViewportWidth, (u32)((g_depthImageBuffer)));
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);
@@ -83,10 +83,10 @@ void SetN64_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s3
         gDPFillRectangle(g_displayListCursor++, 0, 0, g_hudReferenceViewportWidth, g_hudReferenceViewportHeight);
     }
     OnScreen_SetupTextRendering();
-    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 200, 200, 200);
     scaleX = scaleX * g_hudReferenceViewportWidth * (1.0f / 284.0f);
     scaleY = scaleY * g_hudReferenceViewportHeight * (1.0f / 222.0f);
-    scaleX *= (g_hudReferenceViewportHeight >= 0xDF) ? 0.8f : 0.85f;
+    scaleX *= (g_hudReferenceViewportHeight >= 223) ? 0.8f : 0.85f;
     scaleY *= 0.5f;
     OnScreen_SetTextScale(scaleX, scaleY);
     g_tutorialStatusBars.shadowX = 1;

@@ -33,35 +33,35 @@ void Audio_UpdateMusicPlayback(Track *queue) {
     struct ALCMidiHdr *selectedSequence;
     playbackState = queue->playbackState;
     switch (playbackState) { /* irregular */
-    case 0x20:
+    case 32:
         if (queue->playbackFlags & 4) {
             queue->playbackFlags = 0;
             g_musicRequestedTrack = -1;
             if (queue->requestedSequence >= 0) {
-                queue->playbackState = 0x40;
+                queue->playbackState = 64;
                 return;
             }
-            queue->playbackState = 0x10;
+            queue->playbackState = 16;
             return;
         }
         return;
     case 0x100:
         if (queue->playbackFlags & 8) {
-            queue->playbackState = 0x80;
+            queue->playbackState = 128;
             queue->playbackFlags = 0;
             return;
         }
         startupFrames = g_musicStartupFrameCount + 1;
         g_musicStartupFrameCount = startupFrames;
-        if (startupFrames >= 0xA) {
+        if (startupFrames >= 10) {
             g_musicRequestedTrack = -1;
-            queue->playbackState = 0x40;
+            queue->playbackState = 64;
             return;
         }
         break;
-    case 0x40:
+    case 64:
         requestedSequence = queue->requestedSequence;
-        nextPlaybackState = 0x10;
+        nextPlaybackState = 16;
         if (requestedSequence != -1) {
             sequenceContext = queue->context;
             sortedValueResult = Defs_FindSortedValue(sequenceContext->resourceIndexTable, sequenceContext->resourceIndexCount, requestedSequence);
@@ -87,9 +87,9 @@ void Audio_UpdateMusicPlayback(Track *queue) {
                 queue->playbackFlags = 0;
                 return;
             }
-            queue->playbackState = 0x80;
+            queue->playbackState = 128;
             queue->sequenceLoaded = 1;
-        case 0x80:
+        case 128:
             i = 0;
             alCSeqNew(queue->sequence, queue->midiHeader);
             alCSPSetSeq(queue->sequencePlayer, queue->sequence);
@@ -97,18 +97,18 @@ void Audio_UpdateMusicPlayback(Track *queue) {
             do {
                 alCSPSetChlFXMix(queue->sequencePlayer, i & 0xFF, 0);
                 i += 1;
-            } while (i < 0x14);
+            } while (i < 20);
             initialVolume = (f32) queue->baseVolume * (queue->context->volumePercent * *(&g_musicDefaultFadeAndVolumeScale+1));
             alCSPSetVol(queue->sequencePlayer, (s16) (s32) (initialVolume * g_musicVolumeAndFadeScale));
             queue->currentVolume = initialVolume;
             alCSPPlay(queue->sequencePlayer);
             queue->playbackFlags = 0;
-            queue->playbackState = 0x10;
+            queue->playbackState = 16;
             g_musicRequestedTrack = queue->requestedSequence;
             return;
         }
         goto block_44;
-    case 0x10:
+    case 16:
     default:
         if ((g_musicRequestedTrack > 0) && (alCSPGetState((void *)queue->sequencePlayer) == 0)) {
             g_musicRequestedTrack = 0;
@@ -135,7 +135,7 @@ block_37:
             if (g_musicRequestedTrack > 0) {
                 fadeDuration = queue->fadeDuration;
                 queue->playbackFlags = 2;
-                queue->playbackState = 0x20;
+                queue->playbackState = 32;
                 queue->fadeStartVolume = (s32) (queue->currentVolume * g_musicCurrentVolumeToMidiScale);
                 if (!(fadeDuration >= g_musicFadeDurationLimits)) {
                     fadeDuration = g_musicFadeDurationLimits;
@@ -143,7 +143,7 @@ block_37:
                 queue->fadeStep = fade_rate(queue,fadeDuration,*(&g_musicFadeDurationLimits+1));
                 return;
             }
-            nextPlaybackState = 0x40;
+            nextPlaybackState = 64;
             queue->playbackFlags = 0;
 block_44:
             queue->playbackState = nextPlaybackState;

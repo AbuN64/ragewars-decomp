@@ -133,7 +133,7 @@ void Gsky_ActivateAllMessagePools(s32 messageOwner) {
     void *embeddedPool;
     void *poolCursor;
 
-    embeddedPool = (void *)(messageOwner + 0x40);
+    embeddedPool = (void *)(messageOwner + 64);
     if (embeddedPool != 0) {
         embeddedMessage = ((struct ScreenMessagePool *)embeddedPool)->freeMessages.tail;
         if (embeddedMessage != 0) {
@@ -183,8 +183,8 @@ void *Gsky_RecycleFirstScreenMessage(void *screenMessageOwner, struct ScreenMess
 }
 
 void Gsky_ActivateScreenMessage(s32 destinationOwner, s32 sourcePool, s32 messageNode) {
-    List_RemoveIntrusive(sourcePool + 0xE40, messageNode);
-    List_PrependIntrusive(destinationOwner + 0xF24, messageNode);
+    List_RemoveIntrusive(sourcePool + 3648, messageNode);
+    List_PrependIntrusive(destinationOwner + 3876, messageNode);
 }
 
 void Gsky_ClearScreenMessage(void *screenMessage) {
@@ -290,9 +290,9 @@ s32 Gsky_UpdateShakeRecord(s32 waveRecord) {
     u32 firstChannelDone;
     u32 thirdChannelDone;
 
-    firstChannelDone = Weapon_UpdateShakeAxis(waveRecord + 0x18);
-    secondChannelDone = Weapon_UpdateShakeAxis(waveRecord + 0x2C);
-    thirdChannelDone = Weapon_UpdateShakeAxis(waveRecord + 0x40);
+    firstChannelDone = Weapon_UpdateShakeAxis(waveRecord + 24);
+    secondChannelDone = Weapon_UpdateShakeAxis(waveRecord + 44);
+    thirdChannelDone = Weapon_UpdateShakeAxis(waveRecord + 64);
     result = 0;
     if ((firstChannelDone != 0) && (secondChannelDone != 0)) {
         result = thirdChannelDone > 0U;

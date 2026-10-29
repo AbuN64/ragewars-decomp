@@ -7,7 +7,7 @@
 
 s16 Audio_DecodeFrame();
 u32 Audio_DecodeFrameOk(void) {
-    return (u32) ~Audio_DecodeFrame() >> 0x1F;
+    return (u32) ~Audio_DecodeFrame() >> 31;
 }
 
 /* Fills the first N words of an index table with 0..N-1, then applies the bit-reversal
@@ -73,7 +73,7 @@ void Audio_RotateComplexSamples(float *samples, float *rotationReal, float *rota
         samples[i * 2] = re * a - im * b;
         samples[i * 2 + 1] = re * b + im * a;
         i++;
-    } while (i < 0x80);
+    } while (i < 128);
 }
 
 

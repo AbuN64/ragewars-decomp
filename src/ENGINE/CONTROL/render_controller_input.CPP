@@ -205,10 +205,10 @@ void Control_RefreshControllerConnection(void *profile) {
         do {
             ((struct ControllerInputByteStateView *) (o + (i * 4)))->taps = 0;
             ((struct ControllerInputByteStateView *) (o + (i * 4)))->age = 0;
-            ((struct ControllerInputByteStateView *) (o + (i * 4)))->repeat = 0x30;
+            ((struct ControllerInputByteStateView *) (o + (i * 4)))->repeat = 48;
             ((struct ControllerInputByteStateView *) (o + (i * 4)))->held = 0;
             i += 1;
-        } while (i < 0x20);
+        } while (i < 32);
         bit2 = ((g_controllerReadStatusBytes[type * 4] >> 3) ^ 1) & 1;
         ((ControllerInputRenderView *)(o))->pakAmount = 0;
         ((ControllerInputRenderView *)(o))->pakTimer = 0;

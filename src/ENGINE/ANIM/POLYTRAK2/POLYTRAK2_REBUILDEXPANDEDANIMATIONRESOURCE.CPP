@@ -140,19 +140,19 @@ void Polytrak2_RebuildExpandedAnimationResource(s32 unused, ResourceHandle **han
         }
         rotationBytes = motion_storage(header->translations, g_motionTrackRotationFrameCount);
         translationBytes = motion_storage(header->rotations, g_motionTrackRotationFrameCount);
-        motionBytes = translationBytes + rotationBytes + 0x38;
+        motionBytes = translationBytes + rotationBytes + 56;
         output = Cache_AllocResourceBlock(0, handle, sourceBytes - bytes5 + motionBytes + bytes6);
         if (output != 0) {
             result = output->block;
-            resource_begin(result, 7, 0x28);
+            resource_begin(result, 7, 40);
             resource_copy(result, section0, bytes0);
             resource_copy(result, section1, bytes1);
             resource_copy(result, section2, bytes2);
             resource_copy(result, section3, bytes3);
             resource_copy(result, section4, bytes4);
             newMotion = (ResourceBlock *)resource_reserve(result, motionBytes);
-            resource_begin(newMotion, 3, 0x18);
-            resource_copy(newMotion, header, 0x20);
+            resource_begin(newMotion, 3, 24);
+            resource_copy(newMotion, header, 32);
             resource_reserve(newMotion, rotationBytes);
             resource_reserve(newMotion, translationBytes);
             resource_copy(result, section6, bytes6);
@@ -220,13 +220,13 @@ void Polytrak2_DecodeCubicSegment(Curve *compressedCurve)
   thirdSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
   fourthSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
   constantCoefficient = (f32) firstSample;
-  weightedFirstSample=firstSample*0x15;
+  weightedFirstSample=firstSample*21;
   secondSampleTimes32 = secondSample << 5;
-  linearCoefficient = (f32) (((secondSampleTimes32 - weightedFirstSample) - (thirdSample * 0xC)) + fourthSample);
+  linearCoefficient = (f32) (((secondSampleTimes32 - weightedFirstSample) - (thirdSample * 12)) + fourthSample);
   linearCoefficient *= 0.33333334f;
-  quadraticCoefficient = (f32) ((((firstSample * 0xE) - secondSampleTimes32) + (thirdSample * 0x14)) - (fourthSample * 2));
-  weightedFirstSample = firstSample * 0x18;
-  cubicCoefficient = (f32) ((((secondSample << 6) - weightedFirstSample) - (thirdSample * 0x30)) + (fourthSample * 8));
+  quadraticCoefficient = (f32) ((((firstSample * 14) - secondSampleTimes32) + (thirdSample * 20)) - (fourthSample * 2));
+  weightedFirstSample = firstSample * 24;
+  cubicCoefficient = (f32) ((((secondSample << 6) - weightedFirstSample) - (thirdSample * 48)) + (fourthSample * 8));
   cubicCoefficient *= 0.33333334f;
   if (valueBitWidth != 0)
   {

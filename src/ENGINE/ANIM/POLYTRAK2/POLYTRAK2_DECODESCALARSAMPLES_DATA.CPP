@@ -35,7 +35,7 @@ inline static void write_bits(u32 value, u32 bitAddress, u32 bitWidth)
   else
   {
     lowWordMask = fieldMask << bitShift;
-    highWordShift = 0x20 - bitShift;
+    highWordShift = 32 - bitShift;
     fieldMask >>= highWordShift;
     lowWordValue = maskedValue << bitShift;
     highWordValue = maskedValue >> highWordShift;
@@ -65,10 +65,10 @@ static inline f32 decode(s32 bitAddress, Polytrak2QuantizationRange range) {
     next = word[1];
     if (shift != 0) {
         value >>= shift;
-        next <<= 0x20 - shift;
+        next <<= 32 - shift;
         value |= next;
     }
-    if (width < 0x20U) {
+    if (width < 32U) {
         value &= (1 << width) - 1;
     }
     converted = (s32) value;
@@ -97,10 +97,10 @@ f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Polytrak2QuantizationR
     next = word[1];
     if (shift != 0) {
         value >>= shift;
-        next <<= 0x20 - shift;
+        next <<= 32 - shift;
         value |= next;
     }
-    if (range.value < 0x20U) {
+    if (range.value < 32U) {
         value &= (1 << range.value) - 1;
     }
     converted = (s32) value;
@@ -169,10 +169,10 @@ f32 Polytrak2_ReadQuantizedFloatAndAdvance(u32 *stream, Polytrak2QuantizationRan
     next = word[1];
     if (shift != 0) {
         value >>= shift;
-        next <<= 0x20 - shift;
+        next <<= 32 - shift;
         value |= next;
     }
-    if (width < 0x20U) {
+    if (width < 32U) {
         value &= (1 << width) - 1;
     }
     converted = (s32) value;
@@ -224,10 +224,10 @@ int Polytrak2_GetUnsignedArrayElement(BitFieldSource *packedArray, int elementIn
     next = word[1];
     if (shift != 0) {
         value >>= shift;
-        next <<= 0x20 - shift;
+        next <<= 32 - shift;
         value |= next;
     }
-    if (width < 0x20U) {
+    if (width < 32U) {
         value &= (1 << width) - 1;
     }
     return value;
@@ -258,10 +258,10 @@ int Polytrak2_GetPackedHighBitsSetElement(BitFieldSource *packedArray, int eleme
     next = word[1];
     if (shift != 0) {
         value >>= shift;
-        next <<= 0x20 - shift;
+        next <<= 32 - shift;
         value |= next;
     }
-    if (width < 0x20U) {
+    if (width < 32U) {
         value &= (1 << width) - 1;
     }
     return value | (-1 << width);

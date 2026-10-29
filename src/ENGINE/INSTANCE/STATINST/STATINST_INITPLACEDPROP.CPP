@@ -37,7 +37,7 @@ static inline s32 advancePropKey(void) {
 
 void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments) {
     f32 rotation[4];
-    char matrix[0x40];
+    char matrix[64];
     PropGeometry *model;
 
     Insthdr_ResetInstanceRenderIndices(prop, record, owner, segments);

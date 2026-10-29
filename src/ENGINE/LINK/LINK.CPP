@@ -23,7 +23,7 @@ f32 Link_GetLightAnimationOffset(void *link)
   u32 animationSeedValue;
   s32 idx;
   animationSeedValue = volume->animationSeed;
-  idx = g_gameFrameCounter + ((((animationSeedValue % 7) & 0xFF) + 1) * 0x10);
+  idx = g_gameFrameCounter + ((((animationSeedValue % 7) & 0xFF) + 1) * 16);
   idx = idx % 90;
   return (f32) g_lightAnimationOffsetTable[idx];
 }

@@ -25,8 +25,8 @@ void Scene_CollectSecondarySpecialActors(LevelActorArrayView *scene) {
  do {*(LevelActor **)((char *)g_sceneSpecialActorTables+offset)=0;i--;offset-=4;} while(i>=0);
  i=0;
  if(scene->count>0)do {
-  if(((struct Def *)actor->definition)->type==3) {if(((struct Def *)actor->definition)->id==0xBD6){if(scene->count)g_sceneSpecialModelBd6Actor=actor;else g_sceneSpecialModelBd6Actor=actor;}}
-  else if(((struct Def *)actor->definition)->type==10) {if(actor->type==0x64E)g_sceneSpecialActorTables[count++]=actor;}
+  if(((struct Def *)actor->definition)->type==3) {if(((struct Def *)actor->definition)->id==3030){if(scene->count)g_sceneSpecialModelBd6Actor=actor;else g_sceneSpecialModelBd6Actor=actor;}}
+  else if(((struct Def *)actor->definition)->type==10) {if(actor->type==1614)g_sceneSpecialActorTables[count++]=actor;}
   if(count>=10)return;
   actor++;
 
@@ -290,14 +290,14 @@ s32 Scene_TestNearbyActiveActor(struct SceneNearestActorView *actor, CVector3 *r
         return 0;
     }
     type = actor->team;
-    if (type == 0x44E || type == 0x453 || type == 0x451 || type == 0x450 ||
-        type == 0x454 || type == 0x455 || type == 0x456) {
+    if (type == 1102 || type == 1107 || type == 1105 || type == 1104 ||
+        type == 1108 || type == 1109 || type == 1110) {
         return 0;
     }
     if (actor->active == 0) {
         return 0;
     }
-    if (actor->state == 0x3D) {
+    if (actor->state == 61) {
         return 0;
     }
     return magnitude <= g_sceneImageVectorTolerance;
@@ -321,8 +321,8 @@ s32 Scene_ClassifyNearbySpecialActor(NearbySpecialActorView *player, CVector3 *r
         return 0;
     }
     type = player->modelId;
-    if (type == 0x44E || type == 0x453 || type == 0x451 || type == 0x450 ||
-        type == 0x454 || type == 0x455 || type == 0x456) {
+    if (type == 1102 || type == 1107 || type == 1105 || type == 1104 ||
+        type == 1108 || type == 1109 || type == 1110) {
         return 0xFF;
     }
     return 0;

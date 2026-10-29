@@ -79,7 +79,7 @@ SceneEffect *Animpool_SpawnAnimationObject(struct CAnimPool *scene, s32 variant,
     id = Scene_FindModelIdIndex(&g_world, variant);
     if (id != -1) {
         key = SetN64_GetDirectoryEntry((s32)g_world.indexedDirectory, g_world.indexedBank, id);
-        descriptor = Cache_RequestResource(0, key, key, 0x18, 0, 0, 0, &s_animObjectIndexText, 1);
+        descriptor = Cache_RequestResource(0, key, key, 24, 0, 0, 0, &s_animObjectIndexText, 1);
         if (descriptor != 0) {
             clip = SetN64_LocatePackSection(*descriptor, key, 0, &size);
             resource = Cache_RequestResource(0, clip, clip, size, 0, 0, 0, &s_animObjectInfoText, 1);

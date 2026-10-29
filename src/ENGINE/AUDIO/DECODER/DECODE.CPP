@@ -98,7 +98,7 @@ s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCoun
                     if (mask == 0 || mask == 0xF00) {
                         samples[(s16)output] = value;
                         output++;
-                    } else if ((s16)value == 0x900) {
+                    } else if ((s16)value == 2304) {
                         value = g_audioDecodeBitBuffer;
                         if (Audio_ReadPackedSamples(&g_audioDecodeBitBuffer, table->width, 1, 0, stream) == 0) {
                             return -1;
@@ -156,7 +156,7 @@ s32 Audio_DecodeFrame(DecodeState *stream) {
         if ((s16)Audio_ReadPackedSamples(stream->frame, 6, 16, 0, stream) <= 0) {
             return -1;
         }
-        block->offset += 0x60;
+        block->offset += 96;
         for (i = 0; i < 16; i++) {
             g_audioDecodeScaleTable[i] = stream->frame[i];
         }

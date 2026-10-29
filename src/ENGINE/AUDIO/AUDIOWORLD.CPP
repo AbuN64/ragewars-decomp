@@ -94,8 +94,8 @@ s32 AudioWorld_QueuePrioritizedSound(AudioPriorityQueueManagerView *manager, voi
         node->pan = SoundInfo_GetPan(desc);
         node->flags = SoundInfo_GetFlags(desc);
         node->pitch = SoundInfo_GetPitch(desc);
-        node->gainB = 0x7D00;
-        node->gainA = 0x7D00;
+        node->gainB = 32000;
+        node->gainA = 32000;
         node->time = 0;
         node->frame = manager->scene[0x104 / 4];
         node->position = *position;
@@ -167,7 +167,7 @@ void AudioWorld_DispatchPendingSounds(Cache *cache) {
             break;
         }
         cell = (AudioSoundCell *)(cache->context->cells + 4 + slot * 0xCC);
-        Libc_CopyBytes(cell, entry->body, 0xCC);
+        Libc_CopyBytes(cell, entry->body, 204);
         cell->sequence = entry->sequence;
         cell->texture = *cursor;
         cell->frame = cache->context->frame;
@@ -261,7 +261,7 @@ void AudioWorld_StartSpatialVoice(AudioSpatialVoiceManagerView *manager, s32 ind
         first->prev->next = first->next;
         first->next->prev = first->prev;
         node = first;
-        Libc_CopyBytes(node->pad8, entry, 0xCC);
+        Libc_CopyBytes(node->pad8, entry, 204);
         node->owner = owner;
         node->position.x = position->x;
         node->position.y = position->y;

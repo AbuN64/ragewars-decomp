@@ -121,7 +121,7 @@ void Gobjinst_AdvanceActorRootMotion(void *actor) {
     }
 
     resource = Cache_RequestResource(0, ((Actor36 *)actor)->animationKey, ((Actor36 *)actor)->animationKey,
-        ((((Actor36 *)actor)->animationCount * 4) + 0xF) & ~7, 4, 0, 0,
+        ((((Actor36 *)actor)->animationCount * 4) + 15) & ~7, 4, 0, 0,
         &g_actorRotationBlendAndResourceTuning + 4, 0);
     if (resource == 0)
         return;
@@ -183,7 +183,7 @@ void Gobjinst_AdvanceActorRootMotion(void *actor) {
             Graphu64_TransformPoint(&matrix, &saved, &moved);
             ((Actor36 *)actor)->position.x += moved.x * ((Actor36 *)actor)->scaleX;
             ((Actor36 *)actor)->position.z += moved.z * ((Actor36 *)actor)->scaleZ;
-        } else if (!(((Actor36 *)actor)->flags & 0x300000) && ((Actor36 *)actor)->ownerId == 0x137) {
+        } else if (!(((Actor36 *)actor)->flags & 0x300000) && ((Actor36 *)actor)->ownerId == 311) {
             ((Actor36 *)actor)->heading -= value;
             Graphu64_WrapPeriodicValue(&((Actor36 *)(actor))->heading);
         }
@@ -207,9 +207,9 @@ void Gobjinst_DispatchAnimationIntervalEvents(char *obj, void *anim, f32 from, f
         return;
     }
     switch (((struct RootMotionActorView *) obj)->type) {
-    case 0x44E:
-    case 0x451:
-    case 0x453:
+    case 1102:
+    case 1105:
+    case 1107:
         checkMask = 1;
         break;
     default:
@@ -413,8 +413,8 @@ void Gobjinst_ApplyImpactBoneTwist(char *actor, char *twistState, char *boneMatr
     s32 chainSlot;
     char *boneEntry;
 
-    if (twistState[0x34] != 0x3C) {
-      if (twistState[0x12] < 0x17) {
+    if (twistState[52] != 60) {
+      if (twistState[18] < 23) {
        modelResource = Gobjinst_RequestAnimatedModelVariant(actor, actor[1]);
        if (modelResource != 0) {
         boneTable = SetN64_GetPackSection((void *)*modelResource, 5);
@@ -427,14 +427,14 @@ void Gobjinst_ApplyImpactBoneTwist(char *actor, char *twistState, char *boneMatr
         chainSlot = 0;
         do {
             *(twistState + chainSlot + 0x14) = ancestorBoneIndex;
-            ancestorBoneIndex = boneEntry[0x64];
+            ancestorBoneIndex = boneEntry[100];
             chainSlot++;
             if (ancestorBoneIndex != -1) {
                 boneEntry = (char *)boneTable + ((ancestorBoneIndex * *boneTable) + 8);
             }
         } while (chainSlot < 4);
         Cache_UnlockResource(0, modelResource);
-        twistState[0x12] = 0x19;
+        twistState[18] = 25;
         boneOrigin.x = ((Matrix *)boneMatrix)->m[12];
         boneOrigin.y = ((Matrix *)boneMatrix)->m[13];
         boneOrigin.z = ((Matrix *)boneMatrix)->m[14];
@@ -479,13 +479,13 @@ void Gobjinst_ApplyTimedMatrixWobble(s32 time, s32 flags, f32 *matrix) {
         axis.x = 0.0f;
         angle = g_actorMatrixWobbleSamples.value[t % 120] - 0.5f;
         axis.y = g_actorMatrixWobbleSamples.value[(t + 12) % 120];
-    } else if (mode == 0x82) {
+    } else if (mode == 130) {
         axis.x = 1.0f;
         axis.z = 0.0f;
         angle = g_actorMatrixWobbleSamples.value[t % 120] - 0.5f;
         axis.y = g_actorMatrixWobbleSamples.value[(t + 12) % 120];
         angle *= 2.0f;
-    } else if (mode == 0x40) {
+    } else if (mode == 64) {
         angle = g_actorMatrixWobbleSamples.value[(t + 30) % 120] - 0.5f;
         axis.x = g_actorMatrixWobbleSamples.value[(t + 12) % 120];
         axis.y = g_actorMatrixWobbleSamples.value[(t + 42) % 120];

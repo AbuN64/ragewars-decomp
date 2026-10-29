@@ -400,7 +400,7 @@ int Audio_PlayDialogGroup(GameAudioContext *audioContext, int group) {
     if (!(scale < blue)) {
         scale = blue;
     }
-    return Audio_StartDialogGroup(&audioContext->dialog[0], group, scale, 0x40);
+    return Audio_StartDialogGroup(&audioContext->dialog[0], group, scale, 64);
 }
 
 /** Thin wrapper forwarding an offset argument to Audio_StopDialogPlayer. */

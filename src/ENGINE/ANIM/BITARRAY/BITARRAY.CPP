@@ -76,7 +76,7 @@ void Bitarray_ReadStridedFloatSamples(s32 bitCursor, void *sampleRecords, s32 sa
     do
     {
       sampleIndex += 1;
-      rawSampleBits = Polytrak2_ReadBitsAndAdvance(bitCursor, 0x20);
+      rawSampleBits = Polytrak2_ReadBitsAndAdvance(bitCursor, 32);
       *((f32 *) sampleOutput) = *((f32 *) (&rawSampleBits));
       sampleOutput += 0x10;
     }
@@ -239,7 +239,7 @@ u32 Bitarray_GetRequiredBitCount(s32 value) {
             highestSetBit = bitIndex;
         }
         bitIndex += 1;
-    } while (bitIndex < 0x20U);
+    } while (bitIndex < 32U);
     if (setBitCount >= 2U) {
         return highestSetBit + 1;
     }

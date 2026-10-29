@@ -24,22 +24,22 @@ void CCinema_DrawMessages(void)
   {
     s32 messageLineHeight;
     s32 messageCenterX;
-    messageLineHeight = 0x1A;
+    messageLineHeight = 26;
     messageCenterX = g_hudReferenceViewportWidth / 2;
     OnScreen_SetupTextRendering();
     screenScaleX = (f32) (g_hudReferenceViewportWidth / 284);
     messageScaleY = (f32) (g_hudReferenceViewportHeight / 222);
     screenHeight = g_hudReferenceViewportHeight;
-    if (screenHeight >= 0xDF)
+    if (screenHeight >= 223)
     {
-      messageY = 0xB4;
+      messageY = 180;
       resolutionScale = g_cinemaHighResolutionMessageScale;
       messageScaleX = screenScaleX * resolutionScale;
       messageScaleY *= resolutionScale;
     }
     else
     {
-      messageY = 0x6E;
+      messageY = 110;
       resolutionScale = g_cinemaLowResolutionMessageScale;
       messageScaleX = screenScaleX * resolutionScale;
       messageScaleY *= resolutionScale;

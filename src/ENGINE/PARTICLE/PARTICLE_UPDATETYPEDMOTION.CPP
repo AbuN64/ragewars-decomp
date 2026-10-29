@@ -57,7 +57,7 @@ void Particle_SteerSoundTrackingParticle(void *particle) {
             steeringParticle->sound = 0;
         }
     } else {
-        id=0x730;sound = steeringParticle->sound;
+        id=1840;sound = steeringParticle->sound;
         if (sound != 0) {
             if ((sound->id != id) || (sound->handle == -1)) {
                 Particle_StopSound(steeringParticle);
@@ -65,7 +65,7 @@ void Particle_SteerSoundTrackingParticle(void *particle) {
             }
         } else {
 block_7:
-            steeringParticle->sound = SoundVoicePool_PlaySpatialSound(SoundVoicePool_GetGlobalState(), 0x730, &steeringParticle->position, &steeringParticle->position, -1);
+            steeringParticle->sound = SoundVoicePool_PlaySpatialSound(SoundVoicePool_GetGlobalState(), 1840, &steeringParticle->position, &steeringParticle->position, -1);
         }
         target = steeringParticle->target;
         if ((target != 0) && (steeringParticle->time > g_particleAttractionDelay)) {
@@ -180,8 +180,8 @@ void Particle_SteerHoming(void *particle) {
     q78 = Graphu64_BuildDirectionQuaternion(&homingParticle->direction);
     speed = Gu_Sqrtf(homingParticle->velocity.x * homingParticle->velocity.x + homingParticle->velocity.y * homingParticle->velocity.y +
                              homingParticle->velocity.z * homingParticle->velocity.z);
-    owner = FIELD(void *, FIELD(void *, homingParticle, 0x12C), 0x1D8);
-    id = 0x8AC;
+    owner = FIELD(void *, FIELD(void *, homingParticle, 300), 472);
+    id = 2220;
     sound = homingParticle->sound;
     if (sound != 0) {
         if ((sound->id != id) || (sound->handle == -1)) {
@@ -190,14 +190,14 @@ void Particle_SteerHoming(void *particle) {
         }
     } else {
 create_sound:
-        homingParticle->sound = SoundVoicePool_PlaySpatialSound(SoundVoicePool_GetGlobalState(), 0x8AC, &homingParticle->position, &homingParticle->position, -1);
+        homingParticle->sound = SoundVoicePool_PlaySpatialSound(SoundVoicePool_GetGlobalState(), 2220, &homingParticle->position, &homingParticle->position, -1);
     }
-    if (FIELD(void *, homingParticle, 0x134) != 0) {
+    if (FIELD(void *, homingParticle, 308) != 0) {
         if (homingParticle->time >= g_homingParticleSteeringStartTime) {
-            FIELD(void *, homingParticle, 0x134) = 0;
+            FIELD(void *, homingParticle, 308) = 0;
         }
     }
-    if (FIELD(void *, homingParticle, 0x134) == 0) {
+    if (FIELD(void *, homingParticle, 308) == 0) {
         v58.x = 0;
         v58.y = 0;
         v58.z = g_homingParticleForwardZ;
@@ -211,8 +211,8 @@ create_sound:
             return;
         }
     } else {
-        v18 = FIELD(CVector3, FIELD(void *, homingParticle, 0x134), 0x8);
-        v18.y += Gobjinst_GetActorHeight(FIELD(void *, homingParticle, 0x134)) * g_homingParticleTargetHeightScale;
+        v18 = FIELD(CVector3, FIELD(void *, homingParticle, 308), 8);
+        v18.y += Gobjinst_GetActorHeight(FIELD(void *, homingParticle, 308)) * g_homingParticleTargetHeightScale;
         Graphu64_SubtractVectors(&v68, &v18, &homingParticle->position);
     }
     v28 = v68;
@@ -227,7 +227,7 @@ create_sound:
     rate = 0.0f;
     if (!(homingParticle->time < g_homingParticleTrackingDelay)) {
         rate = g_homingParticleAcquiredTurnRate;
-        if ((angle < g_homingParticleSteeringAngleThreshold && g_homingParticleAcquisitionDelay < homingParticle->time) || FIELD(void *, homingParticle, 0x134) != 0) {
+        if ((angle < g_homingParticleSteeringAngleThreshold && g_homingParticleAcquisitionDelay < homingParticle->time) || FIELD(void *, homingParticle, 308) != 0) {
             rate = g_homingParticleDefaultTurnRate;
         }
     }
@@ -241,8 +241,8 @@ create_sound:
     velocity = &homingParticle->velocity;
     Graphu64_ScaleVector(velocity, direction, speed);
     if (homingParticle->time >= g_homingParticleMotionStartTime) {
-        FIELD(s8, homingParticle, 0x1B9) = 0;
-        FIELD(s8, homingParticle, 0x1BA) = 0;
+        FIELD(s8, homingParticle, 441) = 0;
+        FIELD(s8, homingParticle, 442) = 0;
     }
     accel = Menu_ExpandFloatHighWord((s32)homingParticle->descriptor->motion->acceleration);
     if (accel != 0.0f) {
@@ -338,9 +338,9 @@ extern void Link_DispatchActorLinks(ActorEmitterSource *state, s32 bits, ActorPa
 static inline s32 is_group_a(ActorParticleDispatchOwnerContactLinks *actor) {
     switch (actor->type) {
         case 2:
-        case 0x56:
-        case 0x111:
-        case 0x126:
+        case 86:
+        case 273:
+        case 294:
             return 1;
     }
     return 0;
@@ -352,11 +352,11 @@ static inline s32 is_group_b(ActorParticleDispatchOwnerContactLinks *actor) {
         case 6:
         case 7:
         case 9:
-        case 0x11:
-        case 0x13:
-        case 0x1A:
-        case 0x101:
-        case 0x110:
+        case 17:
+        case 19:
+        case 26:
+        case 257:
+        case 272:
             return 1;
     }
     return 0;
@@ -365,8 +365,8 @@ static inline s32 is_group_b(ActorParticleDispatchOwnerContactLinks *actor) {
 static inline s32 is_group_c(ActorParticleDispatchOwnerContactLinks *actor) {
     switch (actor->type) {
         case 8:
-        case 0xD:
-        case 0x12:
+        case 13:
+        case 18:
             return 1;
     }
     return 0;
@@ -458,11 +458,11 @@ void Particle_UpdateTypedMotion(Shared_Particle *particle)
   void *nearbyActorCursor;
   ParticleNearbyActorView *nearbyActor;
   particleType = particle->inst.type;
-  if (particleType == 0x127)
+  if (particleType == 295)
   {
     goto block_26;
   }
-  if (particleType < 0x128)
+  if (particleType < 296)
   {
     if (particleType == 46)
     {
@@ -490,27 +490,27 @@ void Particle_UpdateTypedMotion(Shared_Particle *particle)
     }
     goto block_common;
   }
-  if (particleType == 0x414)
+  if (particleType == 1044)
   {
     goto block_540;
   }
-  if (particleType < 0x415)
+  if (particleType < 1045)
   {
-    if (particleType == 0x129)
+    if (particleType == 297)
     {
       goto block_24;
     }
-    if (particleType == 0x3EC)
+    if (particleType == 1004)
     {
       goto block_26;
     }
     goto block_common;
   }
-  if (particleType == 0x42D)
+  if (particleType == 1069)
   {
     goto block_540;
   }
-  if (particleType == 0x4B4)
+  if (particleType == 1204)
   {
     goto block_26;
   }
@@ -718,14 +718,14 @@ void Particle_DispatchOwnerContactLinks(ActorParticleDispatchOwnerContactLinks *
             Link_DispatchActorLinks(g_currentActorInstance, 4, actor);
         }
         if (is_group_c(actor)) {
-            Link_DispatchActorLinks(g_currentActorInstance, 0x10, actor);
+            Link_DispatchActorLinks(g_currentActorInstance, 16, actor);
         }
     } else if (actor->descriptor->value == 1 || actor->descriptor->value == 4) {
         if (is_group_a(actor)) {
-            Link_DispatchActorLinks(g_currentActorInstance, 0x80, actor);
+            Link_DispatchActorLinks(g_currentActorInstance, 128, actor);
         }
         if (is_group_b(actor)) {
-            Link_DispatchActorLinks(g_currentActorInstance, 0x40, actor);
+            Link_DispatchActorLinks(g_currentActorInstance, 64, actor);
         }
         if (is_group_c(actor)) {
             Link_DispatchActorLinks(g_currentActorInstance, 0x100, actor);

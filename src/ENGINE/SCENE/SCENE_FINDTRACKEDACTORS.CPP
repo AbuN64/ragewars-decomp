@@ -124,7 +124,7 @@ void *Scene_GetBlLevelData(void *world, s32 record) {
     if (((struct RegionFreeBlockSizeView *)(world))->value == 0 || ((struct WorldTrackedRecordView *)(world))->value != record) {
         Scene_ReleaseCachedLevelData(world);
         if (((struct WorldResourceKeyView *)(world))->value != 0) {
-            size = 0x10;
+            size = 16;
             one = 1;
             resource = Cache_RequestResource(0, ((struct WorldResourceKeyView *)(world))->value,
                                      ((struct WorldResourceKeyView *)(world))->value,
@@ -238,7 +238,7 @@ s32 Scene_GetLevelActorIndex(void *container, void *actorStorage) {
     base = scene->actors;
     if (actorStorage >= base &&
         (char *)actorStorage <= (char *)base + ((u32)scene->actorCount * 0x2E8 - 0x2E8)) {
-        return ((u32)actorStorage - (u32)base) / 0x2E8;
+        return ((u32)actorStorage - (u32)base) / 744;
     }
     return -1;
 }
@@ -258,7 +258,7 @@ void Scene_FindSelectedTriggerRange(char *world, s32 useAlternateRecords, s32 gr
         recordCount = ((Shared_World *)world)->recordCount;
     }
     if (Defs_FindSortedGroupRange(recordIndex, recordCount, group, &firstRecordIndex, &lastRecordIndex) != 0) {
-        offset = firstRecordIndex * 0x14;
+        offset = firstRecordIndex * 20;
         if (useAlternateRecords != 0) {
             *recordsOutput = (s32)((Shared_World *)world)->alternateRecordArray + offset;
         } else {
@@ -296,12 +296,12 @@ void Scene_ResetTransitionViewport(void) {
 
     Cinema_SetLoopMode(0);
     Cinema_SetResponse(g_sceneTransitionCinemaResponseDe);
-    viewportWidth = 0x1E0;
+    viewportWidth = 480;
     if (g_frontendCurrentVideoModeIndex == 0) {
-        viewportWidth = 0x17C;
-        viewportHeight = 0xDC;
+        viewportWidth = 380;
+        viewportHeight = 220;
     } else {
-        viewportHeight = 0x168;
+        viewportHeight = 360;
     }
     Cinema_SetViewport(viewportWidth, viewportHeight, 0, 0);
 }
@@ -316,7 +316,7 @@ void Scene_CacheBlLevelData(void *world, s32 sectionIndex) {
     if (((struct RegionFreeBlockSizeView *)(world))->value == 0 || ((struct WorldTrackedRecordView *)(world))->value != sectionIndex) {
         Scene_ReleaseCachedLevelData(world);
         if (((struct WorldResourceKeyView *)(world))->value != 0) {
-            size = 0x10;
+            size = 16;
             one = 1;
             resource = Cache_RequestResource(0, ((struct WorldResourceKeyView *)(world))->value,
                                      ((struct WorldResourceKeyView *)(world))->value,
@@ -592,22 +592,22 @@ void Scene_FindTrackedActors(Shared_World *world) {
     for (i = 0; i < world->actorCount; actor++, i++) {
         struct Def *def = (struct Def *)actor->definition;
         if (def->type == 3) {
-            if (Scene_GetModelIdAtIndex(&g_world, def->id) == 0xBD7) {
+            if (Scene_GetModelIdAtIndex(&g_world, def->id) == 3031) {
                 g_fragTagObjectiveActor = actor;
                 return;
             }
         } else if (def->type == 10) {
             switch (actor->type) {
-            case 0x653:
+            case 1619:
                 g_sceneTrackedActors[0] = actor;
                 break;
-            case 0x654:
+            case 1620:
                 g_sceneTrackedActors[1] = actor;
                 break;
-            case 0x655:
+            case 1621:
                 g_sceneTrackedActors[2] = actor;
                 break;
-            case 0x656:
+            case 1622:
                 g_sceneTrackedActors[3] = actor;
                 break;
             }

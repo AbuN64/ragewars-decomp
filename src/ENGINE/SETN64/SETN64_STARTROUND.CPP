@@ -33,18 +33,18 @@ extern s32 g_gameLoopFrameCount;
 extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
 void SetN64_HandleMode11Input(s32 session) {
-    SetN64_HandleSessionTransitionInput(session, 0xC, 0xC);
+    SetN64_HandleSessionTransitionInput(session, 12, 12);
 }
 
 void SetN64_DrawMode11Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
 void SetN64_ResetMode10Items(s32 sessionAddress) {
     Scene_ResetTransitionViewport();
-    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(sessionAddress, 0x6F);
+    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(sessionAddress, 111);
 }
 
 void SetN64_HandleMode10Input(s32 session) {
-    SetN64_HandleSessionTransitionInput(session, 0xD, 8);
+    SetN64_HandleSessionTransitionInput(session, 13, 8);
 }
 
 void SetN64_DrawMode10Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
@@ -55,7 +55,7 @@ void SetN64_ResetMode12Items(int sessionAddress) {
 }
 
 void SetN64_HandleMode12Input(s32 session) {
-    SetN64_HandleSessionTransitionInput(session, 0xD, 0xD);
+    SetN64_HandleSessionTransitionInput(session, 13, 13);
 }
 
 void SetN64_DrawMode12Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
@@ -86,7 +86,7 @@ void SetN64_ResumeSelectedSession(GameSession *unused) {
     g_roundTimerStep = f;
     g_particleSimulationTimeScale = f;
     Scene_SetSelection(dst, field, 0);
-    unused->mode = 0xD;
+    unused->mode = 13;
     g_initialMatchStartPending = 0;
 }
 

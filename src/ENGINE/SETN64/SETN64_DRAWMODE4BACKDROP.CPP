@@ -62,16 +62,16 @@ void SetN64_DrawMode4Backdrop(void) {
     width = 0;
     height = 0;
     gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, g_hudReferenceViewportWidth, (u32)g_currentRenderFrame->colorImage);
-    OnScreen_GetImageDimensions(0x389, 0, &width, &height);
+    OnScreen_GetImageDimensions(905, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
-        Onscrn_SetupSpriteMode(0xFA);
-        OnScreen_DrawSpriteResource(0x389, 0, 0, 0, (f32)g_hudReferenceViewportWidth / (f32)width, (f32)g_hudReferenceViewportHeight / (f32)height, 1);
+        Onscrn_SetupSpriteMode(250);
+        OnScreen_DrawSpriteResource(905, 0, 0, 0, (f32)g_hudReferenceViewportWidth / (f32)width, (f32)g_hudReferenceViewportHeight / (f32)height, 1);
     }
 }
 
 void SetN64_ResetMode5Items(s32 sessionAddress) {
     Scene_ResetTransitionViewport();
-    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(sessionAddress, 0x5A);
+    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(sessionAddress, 90);
 }
 
 void SetN64_HandleMode5Input(s32 session) {
@@ -97,7 +97,7 @@ void SetN64_DrawMode6(void) {
 
 /** Thin wrapper calling SoundElement_SetMusicPlaybackEnabled with a fixed argument. */
 void SetN64_SetMode7AudioState(void) {
-    SoundElement_SetMusicPlaybackEnabled(0x10);
+    SoundElement_SetMusicPlaybackEnabled(16);
 }
 
 void SetN64_HandleMode7Transition(struct GameSession *session) {
@@ -108,8 +108,8 @@ void SetN64_InitializeMode8Scene(void *owner) {
     SetN64_ResetSessionPlayerPools(owner, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     g_gameSettings.counters.transitionActive = 0;
-    SmXlate_SwitchScreen(0x18);
-    SoundElement_SetMusicPlaybackEnabled(0x34);
+    SmXlate_SwitchScreen(24);
+    SoundElement_SetMusicPlaybackEnabled(52);
 }
 
 void SetN64_UpdateMode8(void) {
@@ -129,7 +129,7 @@ void SetN64_ResetMode9Items(s32 sessionAddress) {
     g_modeFourFrameCounter += 1;
     Scene_ResetTransitionViewport();
     Cinema_SetResponse(0.5f);
-    SetN64_ResetPlayerItems(sessionAddress, 0x6F);
+    SetN64_ResetPlayerItems(sessionAddress, 111);
 }
 
 void SetN64_HandleMode9Input(s32 session) {
@@ -142,5 +142,5 @@ void SetN64_DrawMode9Session(void *session) {
 
 void SetN64_ResetMode11Items(s32 sessionAddress) {
     Scene_ResetTransitionViewport();
-    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(sessionAddress, 0x6F);
+    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(sessionAddress, 111);
 }

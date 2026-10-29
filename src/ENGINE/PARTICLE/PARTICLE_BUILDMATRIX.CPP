@@ -104,15 +104,15 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
         target = particle->target;
         switch (particle->inst.type) {
             case 2:
-            case 0xB:
-            case 0xF:
-            case 0x2D:
-            case 0x4F:
-            case 0x56:
-            case 0x126:
-            case 0x12A:
-            case 0x132:
-            case 0x41E:
+            case 11:
+            case 15:
+            case 45:
+            case 79:
+            case 86:
+            case 294:
+            case 298:
+            case 306:
+            case 1054:
                 drawMatrices = target->drawMatrices;
                 if (drawMatrices != 0) {
                     Graphu64_ConvertMatrixToFloat(matrix, &drawMatrices[particle->collisionNode]);
@@ -382,7 +382,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         type = particle->inst.type;
         unit = scale * particle->size.z * PARTICLE_MODEL_SCALE;
         /* These models are built inside out (0x40B is tested twice in the ROM). */
-        if ((type == 0x40B) || (type == 0x40F) || (type == 0x41E) || (type == 0x40B) || (type == 0x436)) {
+        if ((type == 1035) || (type == 1039) || (type == 1054) || (type == 1035) || (type == 1078)) {
             ScaleMatrixLocal(local, -1.0f, -1.0f, -1.0f);
         }
         ScaleMatrixLocal(local, particle->size.x * unit, particle->size.y * unit, unit * PARTICLE_DEPTH_STRETCH);

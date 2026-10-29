@@ -99,7 +99,7 @@ s32 Scene_FindAlternateTriggerRange(char *world, u16 *triggerIds, s32 *firstInde
         (alternateRecordIndex = (s32)((Shared_World *)world)->alternateRecordIndex,
          alternateRecordCount = ((Shared_World *)world)->alternateRecordCount, &groupFirst), &groupLast);
     if (matchCount != 0) {
-        *firstIndex = (s32)((Shared_World *)world)->alternateRecordArray + (groupFirst * 0x14);
+        *firstIndex = (s32)((Shared_World *)world)->alternateRecordArray + (groupFirst * 20);
         matchCount = (groupLast - groupFirst) + 1;
         *lastIndex = matchCount;
     } else {
@@ -123,10 +123,10 @@ void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *firstIndex,
         first = (u32)((Shared_World *)world)->actors;
         index = -1;
         if ((u32)levelActor >= first) {
-            lastOffset = ((Shared_World *)world)->actorCount * 0x2E8;
-            lastOffset -= 0x2E8;
+            lastOffset = ((Shared_World *)world)->actorCount * 744;
+            lastOffset -= 744;
             if (first + lastOffset >= (u32)levelActor) {
-                index = ((u32)levelActor - first) / 0x2E8;
+                index = ((u32)levelActor - first) / 744;
             }
         }
     } else {
@@ -140,7 +140,7 @@ void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *firstIndex,
         (recordIndex = (s32)((Shared_World *)world)->recordIndex,
          recordCount = ((Shared_World *)world)->recordCount, &groupFirst), &last);
     if (sortedGroupRangeResult != 0) {
-        *firstIndex = (s32)((Shared_World *)world)->recordArray + (groupFirst * 0x14);
+        *firstIndex = (s32)((Shared_World *)world)->recordArray + (groupFirst * 20);
         *lastIndex = (last - groupFirst) + 1;
     } else {
         *firstIndex = 0;

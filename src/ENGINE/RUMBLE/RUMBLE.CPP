@@ -79,8 +79,8 @@ static inline void init(RumbleEffectNode *node, Clip *key, CVector3 position, f3
     if (owner != 0) {
         *owner = node;
     }
-    bind(node, 0x20, key->mode);
-    bind(node, 0x2C, key->frames);
+    bind(node, 32, key->mode);
+    bind(node, 44, key->frames);
 }
 
 static inline IntrusiveList *active_list(RumbleNodePoolView *pool) {

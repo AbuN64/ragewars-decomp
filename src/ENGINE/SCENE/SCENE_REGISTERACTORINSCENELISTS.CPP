@@ -285,12 +285,12 @@ void Scene_RegisterActorInSceneLists(SceneActorCategoryListsView *world, ObjectS
     }
     {
         s32 n = world->count64F;
-        if (n < 32 && object->model == 0x64F) {
+        if (n < 32 && object->model == 1615) {
             world->model64F[n] = object;
             world->count64F = n + 1;
         }
     }
-    if (object->model == 0x64D) {
+    if (object->model == 1613) {
         s32 n = world->count64D;
         if (n < 4) {
             world->model64D[n] = object;

@@ -41,7 +41,7 @@ void SetN64_SelectSpawnAfterCredits(void *scene, s32 spawnIndex) {
     }
     object->phase = 2;
     object->selector = selectionValues;
-    object->target = 0xE;
+    object->target = 14;
 }
 
 /* Initializes the game state for a new game phase with sessionAddress as the phase identifier. */
@@ -53,7 +53,7 @@ void SetN64_InitializeMode16Credits(s32 sessionAddress) {
     Playerai_GetFirstPlayer(&g_playerViewRenderContext);
     g_creditsSelectSpawnOnExit = 0;
     Scene_ResetTransitionViewport();
-    SetN64_ResetPlayerItems(sessionAddress, 0x82);
+    SetN64_ResetPlayerItems(sessionAddress, 130);
 }
 
 void SetN64_HandleMode16CreditsInput(s32 session) {
@@ -89,7 +89,7 @@ void SetN64_InitializeMode17Credits(s32 sessionAddress) {
     Playerai_GetFirstPlayer(&g_playerViewRenderContext);
     g_creditsSelectSpawnOnExit = 0;
     Scene_ResetTransitionViewport();
-    SetN64_ResetPlayerItems(sessionAddress, 0x82);
+    SetN64_ResetPlayerItems(sessionAddress, 130);
     g_creditsReturnToFrontend = 1;
     g_creditsSelectSpawnOnExit = 0;
 }

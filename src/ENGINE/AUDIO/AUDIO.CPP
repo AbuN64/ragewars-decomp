@@ -79,7 +79,7 @@ void Audio_UpdateDialogPlayer(DialogPlaybackPlayer *player) {
             player->volume = header->volume;
             sequence = SetN64_GetPackSection(player->bank->songs, index | 1);
             ((void **)g_dialogDecodeStreamRecord)[-1] = sequence;
-            g_dialogDefaultSample->key = Audio_InitDecodeStream(sequence, 0x5622, &rate);
+            g_dialogDefaultSample->key = Audio_InitDecodeStream(sequence, 22050, &rate);
             player->state = 3;
             alSndpSetSound(channel, player->id);
             alSndpSetPitch(channel, rate * 4.5351473e-05f);

@@ -319,9 +319,9 @@ int TextLoad_GetArtsendModeMask(void) {
     sw_mode_5:
         return 4;
     sw_mode_2:
-        return 0x20;
+        return 32;
     sw_mode_4:
-        return 0x10;
+        return 16;
     sw_mode_default:
         return 0;
 
