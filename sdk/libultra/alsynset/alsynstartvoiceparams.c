@@ -47,7 +47,7 @@ void alSynStartVoiceParams(AudioSynthVoiceAllocatorView *s, ALVoice_s *v, void *
         update->volume = vol;
         update->fxMix = fxmix;
         update->pitch = pitch;
-        update->samples = _timeToSamples(s, t);
+        update->samples = timeToSamples(s, t);
         update->wave = w;
 
         f = v->pvoice->channelKnob;

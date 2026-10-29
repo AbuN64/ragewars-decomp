@@ -218,9 +218,9 @@ extern s32 Pickup_ApplyAmmoBundle(struct ActorPickupCanCollect *player, struct M
 
 extern void osUnmapTLB(int tlbIndex);
 
-extern void __CSPHandleNextSeqEvent(void *rawPlayer);
+extern void CSPHandleNextSeqEvent(void *rawPlayer);
 
-extern void __CSPPostNextSeqEvent(void *sequencePlayer);
+extern void CSPPostNextSeqEvent(void *sequencePlayer);
 
 extern void __setUsptFromTempo(void *sequencePlayer, f32 tempo);
 
@@ -233,9 +233,9 @@ extern void alCSPSetVol(s32 player, s16 volume);
 
 extern void alCopy(unsigned char *source, unsigned char *destination, int count);
 
-extern s32 __voiceNeedsNoteKill(void *voice, s32 targetVoice, s32 releaseDeadline);
+extern s32 voiceNeedsNoteKill(void *voice, s32 targetVoice, s32 releaseDeadline);
 
-extern void __seqpStopOsc(void *seqPlayer, void *voiceState);
+extern void seqpStopOsc(void *seqPlayer, void *voiceState);
 
 extern float Math_Cosf(float x);
 

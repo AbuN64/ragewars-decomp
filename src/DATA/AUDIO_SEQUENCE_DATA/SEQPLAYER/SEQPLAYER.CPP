@@ -24,13 +24,13 @@ const unsigned int k_SeqplayerEncodedWords[3] = {
     0x42FE0000, 0x4F000000, 0x3F800000,
 };
 
-/* ROM-grounded data: src/g___initChanStateConstantWords_Seqplayer.c */
-const unsigned int g___initChanStateConstantWords[1] = {
+/* ROM-grounded data: src/g_initChanStateConstantWords_Seqplayer.c */
+const unsigned int g_initChanStateConstantWords[1] = {
     0x3F800000,
 };
 
-/* ROM-grounded data: src/g___resetPerfChanStateConstantWords_Seqplayer.c */
-const unsigned int g___resetPerfChanStateConstantWords[1] = {
+/* ROM-grounded data: src/g_resetPerfChanStateConstantWords_Seqplayer.c */
+const unsigned int g_resetPerfChanStateConstantWords[1] = {
     0x3F800000,
 };
 #endif

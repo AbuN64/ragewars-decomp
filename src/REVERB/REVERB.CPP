@@ -20,12 +20,12 @@
 
  /* 2^32 */
 
-/* _saveBuffer, drafted from ultralib src/audio/reverb.c: write count samples from the DMEM buffer
+/* saveBuffer, drafted from ultralib src/audio/reverb.c: write count samples from the DMEM buffer
    buff back into the delay line at curr_ptr, wrapping the write back to r->base when it would run
    past the end of the line. The wrapped arm ends with its own set-buffer command, which the
    straight arm does not emit. */
 
-/* _loadBuffer, drafted from ultralib src/audio/reverb.c: load count samples of the delay line at
+/* loadBuffer, drafted from ultralib src/audio/reverb.c: load count samples of the delay line at
    curr_ptr into the DMEM buffer buff, wrapping the read back to r->base when it would run past
    the end of the line. The wrapped arm emits its two loads as a pair of set-buffer and load-buffer
    commands against this function's own cartridge command words. */
@@ -97,7 +97,7 @@ Acmd *Audio_LoadEffectOutput(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd 
 
     if (d->rs) {
         length = d->output - d->input;
-        delta = _getDelta(d, incount);
+        delta = getDelta(d, incount);
         delta /= length;
         unity = g_reverbUnityRatio;
         delta = (s32)(delta * unity);
@@ -111,7 +111,7 @@ Acmd *Audio_LoadEffectOutput(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd 
         out_ptr = &r->input[-(d->output - d->rsdelta)];
         ramalign = ((s32)out_ptr & 0x7) >> 1;
 
-        ptr = _loadBuffer(r, out_ptr - ramalign, rbuff, count + ramalign, ptr);
+        ptr = loadBuffer(r, out_ptr - ramalign, rbuff, count + ramalign, ptr);
 
         ratio = (s32)(fratio * unity);
         aSetBuffer(ptr++, 0, rbuff + (ramalign << 1), buff, incount << 1);
@@ -121,7 +121,7 @@ Acmd *Audio_LoadEffectOutput(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd 
         d->rsdelta += count - incount;
     } else {
         out_ptr = &r->input[-d->output];
-        ptr = _loadBuffer(r, out_ptr, buff, incount, ptr);
+        ptr = loadBuffer(r, out_ptr, buff, incount, ptr);
     }
 
     return ptr;
@@ -129,7 +129,7 @@ Acmd *Audio_LoadEffectOutput(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd 
 
  /* osVirtualToPhysical */
 
-Acmd *_saveBuffer(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
+Acmd *saveBuffer(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
 {
     Acmd *ptr = p;
     s32 after_end, before_end;
@@ -167,7 +167,7 @@ int alFxParam(int *filter, int paramId, int param) {
 
  /* osVirtualToPhysical */
 
-Acmd *_loadBuffer(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
+Acmd *loadBuffer(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
 {
     Acmd *ptr = p;
     s32 after_end, before_end;
@@ -197,7 +197,7 @@ Acmd *_loadBuffer(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
     return ptr;
 }
 
-void *_filterBuffer(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount, void *awords) {
+void *filterBuffer(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount, void *awords) {
     AudioLowPassFilter *o = audioLowPassFilter;
     Awords *d = awords;
     void *ret;
@@ -221,7 +221,7 @@ void *_filterBuffer(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount, v
 }
 
  /* RANGE/2 */
-f32 _getDelta(ALDelay28 *d, s32 count)
+f32 getDelta(ALDelay28 *d, s32 count)
 {
     f32 val;
     d->rsval += d->rsinc * count;

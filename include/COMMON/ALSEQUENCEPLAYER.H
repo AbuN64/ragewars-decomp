@@ -24,8 +24,8 @@ struct ALSequenceLoopEvent {
 
 extern void alSeqNextEvent(struct ALSeq_s *, ALEvent *);                 /* alSeqNextEvent */
 extern void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *, ALEvent *);           /* __handleMIDIMsg */
-extern void __handleMetaMsg(ALSeqPlayer *, ALEvent *);           /* __handleMetaMsg */
-extern u8 __alSeqNextDelta(struct ALSeq_s *, s32 *);                       /* __alSeqNextDelta (char; unsigned in this build) */
+extern void handleMetaMsg(ALSeqPlayer *, ALEvent *);           /* handleMetaMsg */
+extern u8 alSeqNextDelta(struct ALSeq_s *, s32 *);                       /* alSeqNextDelta (char; unsigned in this build) */
 extern int alSeqGetTicks(struct ALSeq_s *sequence);                             /* alSeqGetTicks */
 extern void alSeqSetLoc(struct ALSeq_s *, ALSeqMarker *);             /* alSeqSetLoc */
 extern void alEvtqPostEvent(ALEventQueue *, ALEvent *, ALMicroTime);  /* alEvtqPostEvent */
@@ -40,7 +40,7 @@ static inline void postNextSeqEvent(struct ALSequencePlayer *seqp)
     if ((seqp->base.state != 1) || (seq == 0))
         return;
 
-    if (!__alSeqNextDelta(seq, &deltaTicks))
+    if (!alSeqNextDelta(seq, &deltaTicks))
         return;
 
     if (seqp->loopCount) {

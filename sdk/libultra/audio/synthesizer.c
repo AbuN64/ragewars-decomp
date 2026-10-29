@@ -59,9 +59,9 @@ extern s32 alSaveParam(void *, s32, ALFilter_s14 *);
 
  /* alGlobals */
 
-s32 _timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds);
+s32 timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds);
 
-         /* _timeToSamplesNoRound */
+         /* timeToSamplesNoRound */
 void _collectPVoices(void *synth);
 
 
@@ -161,11 +161,11 @@ Acmd *alAudioFrame(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
         return cmdList;
     }
 
-    for (drvr->paramSamples = __nextSampleTime(drvr, &client);
+    for (drvr->paramSamples = nextSampleTime(drvr, &client);
          drvr->paramSamples - drvr->curSamples < outLen;
-         drvr->paramSamples = __nextSampleTime(drvr, &client)) {
+         drvr->paramSamples = nextSampleTime(drvr, &client)) {
         drvr->paramSamples &= ~0xf;
-        client->samplesLeft += _timeToSamplesNoRound(drvr, (*client->handler)(client));
+        client->samplesLeft += timeToSamplesNoRound(drvr, (*client->handler)(client));
     }
     drvr->paramSamples &= ~0xf;
 
@@ -210,7 +210,7 @@ void Audio_FreeParam(void *parameterStorage) {
     head->drvr.paramList = parameterStorage;
 }
 
-void _freePVoice(s32 synth, s32 listLink) {
+void freePVoice(s32 synth, s32 listLink) {
     alUnlink((ListLink *)listLink);
     alLink(listLink, synth + 0x14);
 }
@@ -228,7 +228,7 @@ void _collectPVoices(void *synth) {
     }
 }
 
-s32 _timeToSamples(SynthOutputRateView *synth, s32 microseconds) {
+s32 timeToSamples(SynthOutputRateView *synth, s32 microseconds) {
     f32 v;
     int idx;
 
@@ -244,7 +244,7 @@ extern char g_synthesizerNoClientAssertText;
 extern char s_audioSynthesizerText;
 
 
-s32 __nextSampleTime(ALSynth4C *drvr, ALPlayer_s14 **client) {
+s32 nextSampleTime(ALSynth4C *drvr, ALPlayer_s14 **client) {
  s32 smallest = 0x7FFFFFFF;
  ALPlayer_s14 *scan;
  if (drvr->head == 0) Audio_Assert(&g_synthesizerNoClientAssertText, &s_audioSynthesizerText, 0x133);
@@ -262,7 +262,7 @@ s32 __nextSampleTime(ALSynth4C *drvr, ALPlayer_s14 **client) {
  return (*client)->samplesLeft;
 }
 
-s32 _timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds) {
+s32 timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds) {
     f32 v;
     int idx;
 

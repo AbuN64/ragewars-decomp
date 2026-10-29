@@ -46,8 +46,8 @@ extern Acmd *Audio_LoadEffectOutput(struct ALFx *, ALDelay28 *, s32, s32, Acmd *
 
  /* _loadOutputBuffer */
 
- /* _loadBuffer */
-extern Acmd *_saveBuffer(struct ALFx *, s16 *, s32, s32, Acmd *);
+ /* loadBuffer */
+extern Acmd *saveBuffer(struct ALFx *, s16 *, s32, s32, Acmd *);
 
 s32 alMainBusParam(ALAuxBus_s *bus, s32 param, ALFilter_s14 *source) {
     ALFilter_s14 **sources = bus->sources;
@@ -173,7 +173,7 @@ s32 alResampleParam(void *resampler, s32 parameterId, s32 parameterValue) {
     return 0;
 }
 
- /* _saveBuffer */
+ /* saveBuffer */
 Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
@@ -206,7 +206,7 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
     aSetBuffer(ptr++, 0, 0, 0, outCount << 1);
     aMix(ptr++, 0, 0xda83, 1728, input);
     aMix(ptr++, 0, 0x5a82, 2048, input);
-    ptr = _saveBuffer(r, r->input, input, outCount, ptr);
+    ptr = saveBuffer(r, r->input, input, outCount, ptr);
 
     aClearBuffer(ptr++, output, outCount << 1);
 
@@ -218,27 +218,27 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
         if (in_ptr == prev_out_ptr) {
             { s16 t = buff2; buff2 = buff1; buff1 = t; };
         } else {
-            ptr = _loadBuffer(r, in_ptr, buff1, outCount, ptr);
+            ptr = loadBuffer(r, in_ptr, buff1, outCount, ptr);
         }
         ptr = Audio_LoadEffectOutput(r, d, buff2, outCount, ptr);
 
         if (d->ffcoef) {
             aMix(ptr++, 0, (u16)d->ffcoef, buff1, buff2);
             if (!d->rs && !d->lp) {
-                ptr = _saveBuffer(r, out_ptr, buff2, outCount, ptr);
+                ptr = saveBuffer(r, out_ptr, buff2, outCount, ptr);
             }
         }
 
         if (d->fbcoef) {
             aMix(ptr++, 0, (u16)d->fbcoef, buff2, buff1);
-            ptr = _saveBuffer(r, in_ptr, buff1, outCount, ptr);
+            ptr = saveBuffer(r, in_ptr, buff1, outCount, ptr);
         }
 
         if (d->lp)
-            ptr = _filterBuffer(d->lp, buff2, outCount, ptr);
+            ptr = filterBuffer(d->lp, buff2, outCount, ptr);
 
         if (!d->rs)
-            ptr = _saveBuffer(r, out_ptr, buff2, outCount, ptr);
+            ptr = saveBuffer(r, out_ptr, buff2, outCount, ptr);
 
         if (d->gain)
             aMix(ptr++, 0, (u16)d->gain, buff2, output);

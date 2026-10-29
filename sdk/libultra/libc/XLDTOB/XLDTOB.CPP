@@ -6,7 +6,7 @@
 
 /* 802C31B0.CPP */
 /* This hook intentionally ignores both supplied words. */
-void _Ldtob(void *unused_state, unsigned char unused_code)
+void Ldtob(void *unused_state, unsigned char unused_code)
 {
 }
 

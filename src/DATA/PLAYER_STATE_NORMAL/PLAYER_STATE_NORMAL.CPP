@@ -23,7 +23,7 @@ unsigned int g_playerStateNormalCallbacks01Words[2] = {
 /* 800CE8E8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8 */
-unsigned int g_PlayerStateNormalCallbacks01Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks01TrailWords[1] = {
     0x801044F8,
 };
 #endif
@@ -39,7 +39,7 @@ unsigned int g_playerStateNormalTiming01Words[2] = {
 /* 800CE8F4.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4 */
-unsigned int g_PlayerStateNormalTiming01Words[1] = {
+unsigned int g_PlayerStateNormalTiming01TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -57,7 +57,7 @@ unsigned int g_playerStateNormalCallbacks02Words[2] = {
 /* 800CE900.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500 */
-unsigned int g_PlayerStateNormalCallbacks02Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks02TrailWords[1] = {
     0x80104458,
 };
 #endif
@@ -73,7 +73,7 @@ unsigned int g_playerStateNormalTiming02Words[2] = {
 /* 800CE90C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C */
-unsigned int g_PlayerStateNormalTiming02Words[1] = {
+unsigned int g_PlayerStateNormalTiming02TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -91,7 +91,7 @@ unsigned int g_playerStateNormalCallbacks03Words[2] = {
 /* 800CE918.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518 */
-unsigned int g_PlayerStateNormalCallbacks03Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks03TrailWords[1] = {
     0x80104458,
 };
 #endif
@@ -107,7 +107,7 @@ unsigned int g_playerStateNormalTiming03Words[2] = {
 /* 800CE924.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524 */
-unsigned int g_PlayerStateNormalTiming03Words[1] = {
+unsigned int g_PlayerStateNormalTiming03TrailWords[1] = {
     0x00030000,
 };
 #endif
@@ -125,7 +125,7 @@ unsigned int g_playerStateNormalCallbacks04Words[2] = {
 /* 800CE930.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530 */
-unsigned int g_PlayerStateNormalCallbacks04Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks04TrailWords[1] = {
     0x80104458,
 };
 #endif
@@ -141,7 +141,7 @@ unsigned int g_PlayerStateNormalTiming04Words[2] = {
 /* 800CE93C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C */
-unsigned int g_playerStateNormalTiming04Words[1] = {
+unsigned int g_playerStateNormalTiming04TrailWords[1] = {
     0x00030000,
 };
 #endif
@@ -157,7 +157,7 @@ unsigned int g_PlayerStateNormalCallbacks05Words[2] = {
 /* 800CE948.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548 */
-unsigned int g_playerStateNormalCallbacks05Words[1] = {
+unsigned int g_playerStateNormalCallbacks05TrailWords[1] = {
     0x80104190,
 };
 #endif
@@ -173,7 +173,7 @@ unsigned int g_playerStateNormalTiming05Words[2] = {
 /* 800CE954.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554 */
-unsigned int g_PlayerStateNormalTiming05Words[1] = {
+unsigned int g_PlayerStateNormalTiming05TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -189,7 +189,7 @@ unsigned int g_PlayerStateNormalCallbacks06Words[2] = {
 /* 800CE960.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560 */
-unsigned int g_playerStateNormalCallbacks06Words[1] = {
+unsigned int g_playerStateNormalCallbacks06TrailWords[1] = {
     0x80104190,
 };
 #endif
@@ -205,7 +205,7 @@ unsigned int g_PlayerStateNormalTiming06Words[2] = {
 /* 800CE96C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C */
-unsigned int g_playerStateNormalTiming06Words[1] = {
+unsigned int g_playerStateNormalTiming06TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -221,7 +221,7 @@ unsigned int g_PlayerStateNormalCallbacks07Words[2] = {
 /* 800CE978.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578 */
-unsigned int g_playerStateNormalCallbacks07Words[1] = {
+unsigned int g_playerStateNormalCallbacks07TrailWords[1] = {
     0x80104458,
 };
 #endif
@@ -237,7 +237,7 @@ unsigned int g_PlayerStateNormalTiming07Words[2] = {
 /* 800CE984.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584 */
-unsigned int g_playerStateNormalTiming07Words[1] = {
+unsigned int g_playerStateNormalTiming07TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -253,7 +253,7 @@ unsigned int g_playerStateNormalCallbacks08Words[2] = {
 /* 800CE990.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590 */
-unsigned int g_PlayerStateNormalCallbacks08Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks08TrailWords[1] = {
     0x80104458,
 };
 #endif
@@ -269,7 +269,7 @@ unsigned int g_playerStateNormalTiming08Words[2] = {
 /* 800CE99C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C */
-unsigned int g_PlayerStateNormalTiming08Words[1] = {
+unsigned int g_PlayerStateNormalTiming08TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -287,7 +287,7 @@ unsigned int g_playerStateNormalCallbacks09Words[2] = {
 /* 800CE9A8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8 */
-unsigned int g_PlayerStateNormalCallbacks09Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks09TrailWords[1] = {
     0x80104418,
 };
 #endif
@@ -303,7 +303,7 @@ unsigned int g_playerStateNormalTiming09Words[2] = {
 /* 800CE9B4.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4 */
-unsigned int g_PlayerStateNormalTiming09Words[1] = {
+unsigned int g_PlayerStateNormalTiming09TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -321,7 +321,7 @@ unsigned int g_playerStateNormalCallbacks10Words[2] = {
 /* 800CE9C0.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0 */
-unsigned int g_PlayerStateNormalCallbacks10Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks10TrailWords[1] = {
     0x80104418,
 };
 #endif
@@ -337,7 +337,7 @@ unsigned int g_playerStateNormalTiming10Words[2] = {
 /* 800CE9CC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC */
-unsigned int g_PlayerStateNormalTiming10Words[1] = {
+unsigned int g_PlayerStateNormalTiming10TrailWords[1] = {
     0x00030000,
 };
 #endif
@@ -355,7 +355,7 @@ unsigned int g_playerStateNormalCallbacks11Words[2] = {
 /* 800CE9D8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8 */
-unsigned int g_PlayerStateNormalCallbacks11Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks11TrailWords[1] = {
     0x80103FB0,
 };
 #endif
@@ -371,7 +371,7 @@ unsigned int g_PlayerStateNormalTiming11Words[2] = {
 /* 800CE9E4.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4 */
-unsigned int g_playerStateNormalTiming11Words[1] = {
+unsigned int g_playerStateNormalTiming11TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -389,7 +389,7 @@ unsigned int g_playerStateNormalCallbacks12Words[2] = {
 /* 800CE9F0.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4_unclaimed_CF5F0 */
-unsigned int g_PlayerStateNormalCallbacks12Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks12TrailWords[1] = {
     0x80103FB0,
 };
 #endif
@@ -405,7 +405,7 @@ unsigned int g_PlayerStateNormalTiming12Words[2] = {
 /* 800CE9FC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4_unclaimed_CF5F0_unclaimed_CF5FC */
-unsigned int g_playerStateNormalTiming12Words[1] = {
+unsigned int g_playerStateNormalTiming12TrailWords[1] = {
     0x00030000,
 };
 #endif
@@ -423,7 +423,7 @@ unsigned int g_playerStateNormalCallbacks13Words[2] = {
 /* 800CEA08.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4_unclaimed_CF5F0_unclaimed_CF5FC_unclaimed_CF608 */
-unsigned int g_PlayerStateNormalCallbacks13Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks13TrailWords[1] = {
     0x801041B0,
 };
 #endif
@@ -439,7 +439,7 @@ unsigned int g_playerStateNormalTiming13Words[2] = {
 /* 800CEA14.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4_unclaimed_CF5F0_unclaimed_CF5FC_unclaimed_CF608_unclaimed_CF614 */
-unsigned int g_PlayerStateNormalTiming13Words[1] = {
+unsigned int g_PlayerStateNormalTiming13TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -457,7 +457,7 @@ unsigned int g_playerStateNormalCallbacks14Words[2] = {
 /* 800CEA20.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4_unclaimed_CF5F0_unclaimed_CF5FC_unclaimed_CF608_unclaimed_CF614_unclaimed_CF620 */
-unsigned int g_PlayerStateNormalCallbacks14Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks14TrailWords[1] = {
     0x801041B0,
 };
 #endif
@@ -473,7 +473,7 @@ unsigned int g_PlayerStateNormalTiming14Words[2] = {
 /* 800CEA2C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4_unclaimed_CF5F0_unclaimed_CF5FC_unclaimed_CF608_unclaimed_CF614_unclaimed_CF620_unclaimed_CF62C */
-unsigned int g_playerStateNormalTiming14Words[1] = {
+unsigned int g_playerStateNormalTiming14TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -491,7 +491,7 @@ unsigned int g_playerStateNormalCallbacks15Words[2] = {
 /* 800CEA38.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4_unclaimed_CF5F0_unclaimed_CF5FC_unclaimed_CF608_unclaimed_CF614_unclaimed_CF620_unclaimed_CF62C_unclaimed_CF638 */
-unsigned int g_PlayerStateNormalCallbacks15Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks15TrailWords[1] = {
     0x80104358,
 };
 #endif
@@ -507,7 +507,7 @@ unsigned int g_PlayerStateNormalTiming15Words[2] = {
 /* 800CEA44.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4_unclaimed_CF5F0_unclaimed_CF5FC_unclaimed_CF608_unclaimed_CF614_unclaimed_CF620_unclaimed_CF62C_unclaimed_CF638_unclaimed_CF644 */
-unsigned int g_playerStateNormalTiming15Words[1] = {
+unsigned int g_playerStateNormalTiming15TrailWords[1] = {
     0x00020000,
 };
 #endif
@@ -525,7 +525,7 @@ unsigned int g_playerStateNormalCallbacks16Words[2] = {
 /* 800CEA50.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0_unclaimed_CF4DC_unclaimed_CF4E8_unclaimed_CF4F4_unclaimed_CF500_unclaimed_CF50C_unclaimed_CF518_unclaimed_CF524_unclaimed_CF530_unclaimed_CF53C_unclaimed_CF548_unclaimed_CF554_unclaimed_CF560_unclaimed_CF56C_unclaimed_CF578_unclaimed_CF584_unclaimed_CF590_unclaimed_CF59C_unclaimed_CF5A8_unclaimed_CF5B4_unclaimed_CF5C0_unclaimed_CF5CC_unclaimed_CF5D8_unclaimed_CF5E4_unclaimed_CF5F0_unclaimed_CF5FC_unclaimed_CF608_unclaimed_CF614_unclaimed_CF620_unclaimed_CF62C_unclaimed_CF638_unclaimed_CF644_unclaimed_CF650 */
-unsigned int g_PlayerStateNormalCallbacks16Words[1] = {
+unsigned int g_PlayerStateNormalCallbacks16TrailWords[1] = {
     0x80104458,
 };
 #endif

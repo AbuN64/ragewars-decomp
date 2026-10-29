@@ -17,7 +17,7 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
-#include "PARTICLE/PARTICLE_SPAWNINTERPOLATEDTRAIL.H"
+#include "particle/PARTICLE_SPAWNINTERPOLATEDTRAIL.H"
 
 /* Particle_UpdateMatrix_ParticleSpawninterpolatedtrail.CPP */
 extern s32 SoundVoicePool_StopNode(void *work, void *wantedNode);

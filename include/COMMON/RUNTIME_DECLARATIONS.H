@@ -1436,7 +1436,7 @@ extern char addrLow_Libsn_DisableInterrupts;
 
 extern Triple g_particleTertiaryContactPosition;
 
-extern char __CSPVoiceHandler_Address;
+extern char CSPVoiceHandler_Address;
 
 extern char *g_matchResult5052TextDe;
 

@@ -7,7 +7,7 @@
 
 
 
-s32 __voiceNeedsNoteKill(void *sequencePlayer, s32 targetVoice, s32 releaseDeadline) {
+s32 voiceNeedsNoteKill(void *sequencePlayer, s32 targetVoice, s32 releaseDeadline) {
     s32 amount;
     s32 total;
     s32 result;

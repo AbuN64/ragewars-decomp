@@ -2,22 +2,22 @@
   "schema": 1,
   "revision": "d144d6d1b5a0ba6b7492a0f783a81e21c9df8d2e",
   "files": {
+    "include/COMMON/RUNTIME_DECLARATIONS.H": [
+      {
+        "reason": "_Pft: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
+        "lines": [
+          3285,
+          3286,
+          4708,
+          4709
+        ]
+      }
+    ],
     "include/COMMON/UNSIGNED_QUOTIENT.H": [
       {
         "reason": "__udivdi3: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
         "lines": [
           6
-        ]
-      }
-    ],
-    "include/COMMON/RUNTIME_DECLARATIONS.H": [
-      {
-        "reason": "_Pft: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
-        "lines": [
-          3836,
-          3837,
-          17510,
-          17511
         ]
       }
     ],
@@ -57,14 +57,6 @@
         ]
       }
     ],
-    "sdk/include/mbi.h": [
-      {
-        "reason": "_SHIFTL: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
-        "lines": [
-          10
-        ]
-      }
-    ],
     "include/stdarg.h": [
       {
         "reason": "__builtin_next_arg: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
@@ -73,33 +65,11 @@
         ]
       }
     ],
-    "src/AUDIO_3/802B8840.CPP": [
+    "sdk/include/mbi.h": [
       {
-        "reason": "_collectPVoices: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
+        "reason": "_SHIFTL: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
         "lines": [
-          60
-        ]
-      },
-      {
-        "reason": "_freePVoice: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
-        "lines": [
-          208
-        ]
-      }
-    ],
-    "src/FRONTEND/8040B45C_35.CPP": [
-      {
-        "reason": "_sm_font: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
-        "lines": [
-          566,
-          575
-        ]
-      },
-      {
-        "reason": "_sm_texture_element: reserved identifier (elf-gcc, coff-mingw, macho-clang, android-clang, msvc)",
-        "lines": [
-          542,
-          553
+          10
         ]
       }
     ]

@@ -1,8 +1,4 @@
-/* The German fixed-resource getter leaves a0 decremented in its return delay slot; a write C would drop as dead
-   survives when a0 is a global register variable. It must precede every function definition. */
-#if defined(VERSION_DE)
-register int g_firstArgument __asm__("$4");
-#endif
+#include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/WORLD.H"
@@ -13,15 +9,10 @@ register int g_firstArgument __asm__("$4");
 /* 80408AC4_6.CPP */
 
 #if defined(VERSION_DE)
-extern s32 g_menuFixedEncodedResource;
-
-s32 *Menu_GetFixedEncodedResource(s32 resourceId) {
-    s32 *resource = &g_menuFixedEncodedResource;
-    g_firstArgument = g_firstArgument - 1;
-    return resource;
-}
+/* The German getter leaves a0 decremented in its return delay slot, a write plain C drops as dead
+   (16 variants tried, see lanes/AUDIT-NAMES/RESULT.md), so its bytes come from the extracted asm. */
+INCLUDE_ASM("ovl_frontendMenu", Menu_GetFixedEncodedResource);
 #endif
-
 #if !(defined(VERSION_DE))
 #include "COMMON/SHARED_MENUSELECTION.H"
 

@@ -36,6 +36,6 @@ struct ALSynth {
 };
 extern void*Audio_AllocParam(void);
 extern void Audio_FreeParam(void*parameterStorage);
-extern void _freePVoice(s32 synthesizer, s32 listLink);
-extern s32 _timeToSamples(SynthOutputRateView*synth, s32 microseconds);
+extern void freePVoice(s32 synthesizer, s32 listLink);
+extern s32 timeToSamples(SynthOutputRateView*synth, s32 microseconds);
 #endif

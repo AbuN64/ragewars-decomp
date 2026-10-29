@@ -36,7 +36,7 @@ void alSynFreeVoice(void *synth, void *voice) {
                 ((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0 = 0;
             }
         } else {
-            _freePVoice((s32) synth, ((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0);
+            freePVoice((s32) synth, ((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0);
             ((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0 = 0;
         }
     }

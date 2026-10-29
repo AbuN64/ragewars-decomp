@@ -114,7 +114,7 @@ void __initFromBank(void *seqPlayer, void *instrumentBank) {
     }
 }
 
-void __initChanState(void *playerObject) {
+void initChanState(void *playerObject) {
     ALSeqPlayer *player = playerObject;
     s32 i;
     s32 off;

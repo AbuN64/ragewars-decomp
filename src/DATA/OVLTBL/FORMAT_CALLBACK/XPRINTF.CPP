@@ -101,7 +101,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
             x.qual = 0x4C;
             ++s;
         }
-        _Putfld(&x, &ap, *s, ac);
+        Putfld(&x, &ap, *s, ac);
         x.width -= x.n0 + x.nz0 + x.n1 + x.nz1 + x.n2 + x.nz2;
         if (!(x.flags & 4)) {
             PRINTF_PAD(32, g_printfPaddingCharacters, x.width);
@@ -121,7 +121,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
 
 
 
-void _Putfld(_Pft *px, va_list *pap, int code, unsigned char *ac)
+void Putfld(_Pft *px, va_list *pap, int code, unsigned char *ac)
 {
     px->n0 = px->nz0 = px->n1 = px->nz1 = px->n2 =
         px->nz2 = 0;
@@ -205,7 +205,7 @@ case_e:
         ac[px->n0++] = ' ';
 
     px->s = (unsigned char *)&ac[px->n0];
-    _Ldtob(px, (unsigned char)code);
+    Ldtob(px, (unsigned char)code);
     return;
 case_n:
     if (px->qual == 'h') {

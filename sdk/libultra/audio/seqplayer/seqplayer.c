@@ -27,7 +27,7 @@
 #include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 #include "../../../include/al_globals.h"
 extern void *alHeapDBAlloc(s32, s32, void *, s32, s32);
-extern void __initChanState(void *);
+extern void initChanState(void *);
 extern void alEvtqNew(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);
 
@@ -58,7 +58,7 @@ void Seqplayer_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c
     seqp->base.nextEvent.type = 9;
     seqp->base.maxChannels = c->kind;
     seqp->base.chanState = alHeapDBAlloc(0, 0, heap, c->kind, sizeof(ALChanState));
-    __initChanState(seqp);
+    initChanState(seqp);
     voices = alHeapDBAlloc(0, 0, heap, c->count38, sizeof(ALVoiceState));
     seqp->base.vFreeList = 0;
     for (i = 0; i < c->count38; i++) {
@@ -109,7 +109,7 @@ void alSeqpNew(SeqInitPlayer *p, ALSeqpConfig *c) {
     p->eventType = 9;
     p->channels = c->channels;
     p->channelState = alHeapDBAlloc(0, 0, heap, c->channels, 16);
-    __initChanState(p);
+    initChanState(p);
     {
         SeqFreeVoice *base = alHeapDBAlloc(0, 0, heap, c->voices, 56);
         p->freeList = 0;
@@ -180,7 +180,7 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
             alSynFreeVoice(seqp->base.drvr, voice);
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
-                __seqpStopOsc(&seqp->base, vs);
+                seqpStopOsc(&seqp->base, vs);
             Seqplayer_ReleaseSequenceVoice(&seqp->base, voice);
             break;
         case 6: /* AL_SEQP_ENV_EVT */
@@ -225,12 +225,12 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
             Seqplayer_HandleSequenceMidiEvent(&seqp->base, &seqp->base.nextEvent);
             break;
         case 7: /* AL_SEQP_META_EVT */
-            __handleMetaMsg(&seqp->base, &seqp->base.nextEvent);
+            handleMetaMsg(&seqp->base, &seqp->base.nextEvent);
             break;
         case 15: /* AL_SEQP_PLAY_EVT */
             if (seqp->base.state != 1) {
                 seqp->base.state = 1;
-                __postNextSeqEvent(&seqp->base);
+                postNextSeqEventBase(&seqp->base);
             }
             break;
         case 16: /* AL_SEQP_STOP_EVT */
@@ -239,7 +239,7 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
                     alSynStopVoice(seqp->base.drvr, &vs->voice);
                     alSynFreeVoice(seqp->base.drvr, &vs->voice);
                     if (vs->flags)
-                        __seqpStopOsc(&seqp->base, vs);
+                        seqpStopOsc(&seqp->base, vs);
                     Seqplayer_ReleaseSequenceVoice(&seqp->base, &vs->voice);
                 }
                 seqp->base.curTime = 0;
@@ -251,7 +251,7 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
                 alEvtqFlushType(&seqp->base.evtq, 0);
                 alEvtqFlushType(&seqp->base.evtq, 2);
                 for (vs = seqp->base.vAllocHead; vs != 0; vs = vs->next) {
-                    if ((u8)__voiceNeedsNoteKill(&seqp->base, &vs->voice, 50000))
+                    if ((u8)voiceNeedsNoteKill(&seqp->base, &vs->voice, 50000))
                         __seqpReleaseVoice(&seqp->base, &vs->voice, 50000);
                 }
                 seqp->base.state = 2;
@@ -373,7 +373,7 @@ void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
         break;
 
     case 3:     /* AL_TEMPO_EVT */
-        __handleMetaMsg(&seqp->base, &evt);
+        handleMetaMsg(&seqp->base, &evt);
         postNextSeqEvent(seqp);
         break;
 

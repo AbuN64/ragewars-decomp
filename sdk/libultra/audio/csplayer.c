@@ -75,7 +75,7 @@ void alCSPNew(void *sequencePlayer, InitParams *config) {
     obj->nextEvent.type = 9;
     obj->maxChannels = params->kind;
     obj->chanState = alHeapDBAlloc(0, 0, (void *)context, params->kind, 0x10);
-    __initChanState(obj);
+    initChanState(obj);
 
     allocation = alHeapDBAlloc(0, 0, (void *)context, params->count38, 0x38);
     obj->vFreeList = 0;
@@ -99,7 +99,7 @@ void alCSPNew(void *sequencePlayer, InitParams *config) {
     {
         ALPlayer_s *node = &obj->node;
         node->next = 0;
-        node->handler = &__CSPVoiceHandler_Address;
+        node->handler = &CSPVoiceHandler_Address;
         node->clientData = node;
         alSynAddPlayer(g_audioGlobals, node);
     }
@@ -124,7 +124,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
     do {
         switch (seqp->nextEvent.type) {
         case 0: /* AL_SEQ_REF_EVT */
-            __CSPHandleNextSeqEvent(seqp);
+            CSPHandleNextSeqEvent(seqp);
             break;
         case 9: /* AL_SEQP_API_EVT */
             evt.type = 9;
@@ -136,7 +136,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             alSynFreeVoice(seqp->drvr, voice);
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
-                __seqpStopOsc(seqp, vs);
+                seqpStopOsc(seqp, vs);
             Seqplayer_ReleaseSequenceVoice((SeqplayerVoicePool *)seqp, voice);
             break;
         case 6: /* AL_SEQP_ENV_EVT */
@@ -179,7 +179,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             break;
         case 2:  /* AL_SEQP_MIDI_EVT */
         case 21: /* AL_CSP_NOTEOFF_EVT */
-            __CSPHandleMIDIMsg(seqp, (ALEvent *)&seqp->nextEvent);
+            CSPHandleMIDIMsg(seqp, (ALEvent *)&seqp->nextEvent);
             break;
         case 7: /* AL_SEQP_META_EVT */
             __CSPHandleMetaMsg(seqp, (CompressedSequenceMetaEvent *)&seqp->nextEvent);
@@ -194,7 +194,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
         case 15: /* AL_SEQP_PLAY_EVT */
             if (seqp->state != 1) {
                 seqp->state = 1;
-                __CSPPostNextSeqEvent(seqp);
+                CSPPostNextSeqEvent(seqp);
             }
             break;
         case 16: /* AL_SEQP_STOP_EVT */
@@ -203,7 +203,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
                     alSynStopVoice(seqp->drvr, &vs->voice);
                     alSynFreeVoice(seqp->drvr, &vs->voice);
                     if (vs->flags)
-                        __seqpStopOsc(seqp, vs);
+                        seqpStopOsc(seqp, vs);
                     Seqplayer_ReleaseSequenceVoice((SeqplayerVoicePool *)seqp, &vs->voice);
                 }
                 seqp->state = 0;
@@ -215,7 +215,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
                 alEvtqFlushType(&seqp->evtq, 21);
                 alEvtqFlushType(&seqp->evtq, 2);
                 for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
-                    if ((u8)__voiceNeedsNoteKill(seqp, (s32)&vs->voice, 50000))
+                    if ((u8)voiceNeedsNoteKill(seqp, (s32)&vs->voice, 50000))
                         __seqpReleaseVoice(seqp, &vs->voice, 50000);
                 }
                 seqp->state = 2;
@@ -283,7 +283,7 @@ extern void alSynSetFXMix(void *, void *, u8);
 extern void __setInstChanState(void *, void *, s32);
 
 /** Dispatch the current object message and forward any resulting value. */
-void __CSPHandleNextSeqEvent(void *rawPlayer) {
+void CSPHandleNextSeqEvent(void *rawPlayer) {
     struct ALSeqPlayer *sequencePlayer = rawPlayer;
     ALEvent message;
     ALEvent output;
@@ -325,10 +325,10 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
     }
     do {
         sw_message_0:
-            __CSPHandleMIDIMsg(sequencePlayer, &message);
+            CSPHandleMIDIMsg(sequencePlayer, &message);
             if (sequencePlayer->state == 1) {
                 sequence = sequencePlayer->target;
-                if (sequence != 0 && (__alCSeqNextDelta(sequence, &value1) & 0xFF)) {
+                if (sequence != 0 && (alCSeqNextDelta(sequence, &value1) & 0xFF)) {
                     output.type = 0;
                     value = value1;
                     goto send_value;
@@ -339,7 +339,7 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
             __CSPHandleMetaMsg(sequencePlayer, &message);
             if (sequencePlayer->state == 1) {
                 sequence = sequencePlayer->target;
-                if (sequence != 0 && (__alCSeqNextDelta(sequence, &value2) & 0xFF)) {
+                if (sequence != 0 && (alCSeqNextDelta(sequence, &value2) & 0xFF)) {
                     output.type = 0;
                     value = value2;
                     goto send_value;
@@ -356,7 +356,7 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
         sw_message_19:
             if (sequencePlayer->state == 1) {
                 sequence = sequencePlayer->target;
-                if (sequence != 0 && (__alCSeqNextDelta(sequence, &value3) & 0xFF)) {
+                if (sequence != 0 && (alCSeqNextDelta(sequence, &value3) & 0xFF)) {
                     output.type = 0;
                     value = value3;
 send_value:
@@ -375,7 +375,7 @@ send_value:
 
 /* Apply one compact-sequence MIDI message. The existing event storage and
  * callee-specific voice/player views share their measured O32 prefixes. */
-void __CSPHandleMIDIMsg(void *object, ALEvent *message)
+void CSPHandleMIDIMsg(void *object, ALEvent *message)
 {
     ALSeqPlayer *seqp = object;
     ALEvent *event = (ALEvent *)message;
@@ -659,7 +659,7 @@ void __CSPHandleMetaMsg(void *sequencePlayer, CompressedSequenceMetaEvent *metaE
     }
 }
 
-void __CSPPostNextSeqEvent(void *sequencePlayer) {
+void CSPPostNextSeqEvent(void *sequencePlayer) {
     struct ALSeqPlayer *player = sequencePlayer;
     ALEvent event;
     s32 result;
@@ -667,7 +667,7 @@ void __CSPPostNextSeqEvent(void *sequencePlayer) {
 
     if (player->state == 1) {
         sequence = player->target;
-        if (sequence != 0 && (__alCSeqNextDelta(sequence, &result) & 0xFF)) {
+        if (sequence != 0 && (alCSeqNextDelta(sequence, &result) & 0xFF)) {
             event.type = 0;
             alEvtqPostEvent(&player->evtq, &event, result * player->uspt);
         }
@@ -751,8 +751,8 @@ unsigned int k_CsplayerEncodedWordsBlock2[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/g___CSPHandleMIDIMsgConstantWords_Csplayer.c */
-const unsigned int g___CSPHandleMIDIMsgConstantWords[3] = {
+/* ROM-grounded data: src/g_CSPHandleMIDIMsgConstantWords_Csplayer.c */
+const unsigned int g_CSPHandleMIDIMsgConstantWords[3] = {
     0x42FE0000, 0x4F000000, 0x3F800000,
 };
 #endif

@@ -24,7 +24,7 @@ extern "C" {
 
 #ifdef mips
 
-#if (_MIPS_SIM == _MIPS_SIM_ABI32)
+#if (_MIPS_SIM == MIPS_SIM_ABI32)
 #define zero	$0
 #define AT	$at
 #define v0	$2
@@ -65,7 +65,7 @@ extern "C" {
 #define ra	$31
 #endif
 
-#if (_MIPS_SIM == _MIPS_SIM_ABI64)
+#if (_MIPS_SIM == MIPS_SIM_ABI64)
 #define zero	$0
 #define AT	$at
 #define v0	$2
@@ -106,7 +106,7 @@ extern "C" {
 #define ra	$31
 #endif
 
-#if (_MIPS_SIM == _MIPS_SIM_ABI32)
+#if (_MIPS_SIM == MIPS_SIM_ABI32)
 #define fv0	$f0
 #define fv0f	$f1
 #define fv1	$f2
@@ -141,7 +141,7 @@ extern "C" {
 #define fs5f	$f31
 #endif
 
-#if (_MIPS_SIM == _MIPS_SIM_ABI64)
+#if (_MIPS_SIM == MIPS_SIM_ABI64)
 #define fv0	$f0
 #define fv1	$f2
 #define fa0	$f12

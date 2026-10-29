@@ -50,7 +50,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
     nframes = (tsam + 16 - 1) >> 4;
     nbytes = nframes * 9;
     if (looped) {
-        ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, *outp, inp, f->first);
+        ptr = decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, *outp, inp, f->first);
         if (f->lastsam)
             *outp += (f->lastsam << 1);
         else
@@ -71,7 +71,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
             if (tsam < 0) tsam = 0;
             nframes = (tsam + 16 - 1) >> 4;
             nbytes = nframes * 9;
-            ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, op, inp, f->first | 0x02);
+            ptr = decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, op, inp, f->first | 0x02);
             aDMEMMove(ptr++, op + (f->lastsam << 1), bEnd, nSam << 1);
         }
         f->lastsam = (outCount + f->lastsam) & 0xf;
@@ -89,7 +89,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
     nbytes -= overFlow;
     if ((nOver - (nOver & 0xf)) < outCount) {
         decoded = 1;
-        ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, nSam - nOver, nbytes, *outp, inp, f->first);
+        ptr = decodeChunk(ptr, (ALLoadFilter48_2 *)f, nSam - nOver, nbytes, *outp, inp, f->first);
         if (f->lastsam)
             *outp += (f->lastsam << 1);
         else
@@ -158,7 +158,7 @@ Acmd *alAdpcmPull(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleO
 
     if (looped) {
 
-        ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, *outp, inp, f->first);
+        ptr = decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, *outp, inp, f->first);
 
         if (f->lastsam)
             *outp += (f->lastsam << 1);
@@ -187,7 +187,7 @@ Acmd *alAdpcmPull(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleO
             if (tsam < 0) tsam = 0;
             nframes = (tsam + 16 - 1) >> 4;
             nbytes = nframes * 9;
-            ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, op, inp, f->first | 0x02);
+            ptr = decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, op, inp, f->first | 0x02);
 
             aDMEMMove(ptr++, op + (f->lastsam << 1), bEnd, nSam << 1);
         }
@@ -211,7 +211,7 @@ Acmd *alAdpcmPull(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleO
 
     if ((nOver - (nOver & 0xf)) < outCount) {
         decoded = 1;
-        ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, nSam - nOver, nbytes, *outp, inp, f->first);
+        ptr = decodeChunk(ptr, (ALLoadFilter48_2 *)f, nSam - nOver, nbytes, *outp, inp, f->first);
 
         if (f->lastsam)
             *outp += (f->lastsam << 1);
@@ -286,7 +286,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 
     if (looped){
 
-        ptr = _decodeChunk(ptr, f, tsam, nbytes, *outp, inp, f->first);
+        ptr = decodeChunk(ptr, f, tsam, nbytes, *outp, inp, f->first);
 
 
         if (f->lastsam)
@@ -321,7 +321,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
             if (tsam<0) tsam = 0;
             nframes = (tsam+16-1)>>4;
             nbytes =  nframes*9;
-            ptr = _decodeChunk(ptr, f, tsam, nbytes, op, inp, f->first | 2);
+            ptr = decodeChunk(ptr, f, tsam, nbytes, op, inp, f->first | 2);
 
             aDMEMMove(ptr++, op+(f->lastsam<<1), bEnd, nSam<<1);
 
@@ -350,7 +350,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 
     if ((nOver - (nOver & 0xf))< outCount){
         decoded = 1;
-        ptr = _decodeChunk(ptr, f, nSam - nOver, nbytes, *outp, inp, f->first);
+        ptr = decodeChunk(ptr, f, nSam - nOver, nbytes, *outp, inp, f->first);
 
         if (f->lastsam)
             *outp += (f->lastsam<<1);
@@ -603,10 +603,10 @@ s32 alLoadParam(void *filter, s32 paramID, struct ALWaveTable_s *param)
     }
 }
 
-/* _decodeChunk, libultra's ADPCM chunk decoder called by alAdpcmPull (alAdpcmPull): DMA the next
+/* decodeChunk, libultra's ADPCM chunk decoder called by alAdpcmPull (alAdpcmPull): DMA the next
    ADPCM bytes into DMEM aligned down to 8 bytes, set the loop state when looping, and queue the ADPCM
    decode of tsam samples. */
-Acmd *_decodeChunk(Acmd *ptr, ALLoadFilter48_2 *f, s32 tsam, s32 nbytes, s16 outp, s16 inp, u32 flags)
+Acmd *decodeChunk(Acmd *ptr, ALLoadFilter48_2 *f, s32 tsam, s32 nbytes, s16 outp, s16 inp, u32 flags)
 {
     s32 dramAlign, dramLoc;
 

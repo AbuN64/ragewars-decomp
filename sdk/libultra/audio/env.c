@@ -155,7 +155,7 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
             ALSynth4C *drvr = &g_audioGlobals->drvr;
             ALFreeParam *param = (ALFreeParam *)e->ctrlList;
             param->pvoice->offset = 0;
-            _freePVoice(drvr, param->pvoice);
+            freePVoice(drvr, param->pvoice);
         } break;
 
         default:
@@ -191,7 +191,7 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
 extern char s_audioEnvText[]; /* "audio/env.c" */
 
  /* __assert */
-  /* _getRate */
+  /* getRate */
 
 Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
@@ -213,9 +213,9 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
         e->first = 0;
 
         e->ltgt = (e->volume * g_audioEqualPowerPanTable[e->pan]) >> 15;
-        e->lratm = _getRate((f64)e->cvolL, (f64)e->ltgt, e->segEnd, &(e->lratl));
+        e->lratm = getRate((f64)e->cvolL, (f64)e->ltgt, e->segEnd, &(e->lratl));
         e->rtgt = (e->volume * g_audioEqualPowerPanTable[128 - e->pan - 1]) >> 15;
-        e->rratm = _getRate((f64)e->cvolR, (f64)e->rtgt, e->segEnd, &(e->rratl));
+        e->rratm = getRate((f64)e->cvolR, (f64)e->rtgt, e->segEnd, &(e->rratl));
 
         aSetVolume(ptr++, 0x02 | 0x04, e->cvolL, 0, 0);
         aSetVolume(ptr++, 0x00 | 0x04, e->cvolR, 0, 0);
@@ -233,9 +233,9 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
     return ptr;
 }
 
-/* _getRate: approximate per-step volume scaling using the public ultralib log table and repeated squaring. */
+/* getRate: approximate per-step volume scaling using the public ultralib log table and repeated squaring. */
 
-s16 _getRate(f64 vol, f64 tgt, s32 count, u16 *ratel)
+s16 getRate(f64 vol, f64 tgt, s32 count, u16 *ratel)
 {
   s16 s;
   f64 invn = (1.0f) / ((f32) count);
@@ -443,7 +443,7 @@ f64 frexp(f64 inputValue, s32 *exponentOut) {
     return value;
 }
 
-f64 _ldexpf(f64 value, s32 shift) {
+f64 ldexpf(f64 value, s32 shift) {
     if (shift != 0) {
         value = value * (f64)(1 << shift);
     }
