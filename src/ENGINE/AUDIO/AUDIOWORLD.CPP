@@ -83,8 +83,8 @@ s32 AudioWorld_QueuePrioritizedSound(AudioPriorityQueueManagerView *manager, voi
         first->next->prev = first->prev;
         scene = manager->scene;
         node = first;
-        node->handle = scene[0x108 / 4];
-        scene[0x108 / 4] = node->handle + 1;
+        node->handle = ((GameAudioContext *)scene)->soundCounter;
+        ((GameAudioContext *)scene)->soundCounter = node->handle + 1;
         node->volume = volume;
         node->voice = -1;
         node->volume16 = volume;
@@ -97,12 +97,12 @@ s32 AudioWorld_QueuePrioritizedSound(AudioPriorityQueueManagerView *manager, voi
         node->gainB = 32000;
         node->gainA = 32000;
         node->time = 0;
-        node->frame = manager->scene[0x104 / 4];
+        node->frame = ((GameAudioContext *)manager->scene)->frame;
         node->position = *position;
         node->pad58 = 0;
         node->padB4 = 0;
         Audio_SetVoiceTrackId(node->channel, ((struct GameAudioContext *)manager->scene)->selectedSound);
-        node->mix = manager->scene[0x2BAC / 4];
+        node->mix = ((GameAudioContext *)manager->scene)->voiceMixValue;
         Audio_InitializeVoiceParameters(node->channel, desc, extra);
         at = manager->active.next;
         priority = node->priority;

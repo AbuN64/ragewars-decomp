@@ -463,7 +463,7 @@ typedef struct LinkNode802A {
     f32 value;                   /* 0x08 */
     char padC[4];
     CVector3 pos;                /* 0x10 */
-    char pad1C[0x0C];
+    CVector3 scale; /* 0x1C: Graphu64_GetMatrixScale output */
     Matrix matrices[2];         /* 0x28, double buffered */
     char pad_A8[4];
     f32 length;                  /* 0xAC */
@@ -472,7 +472,9 @@ typedef struct LinkNode802A {
 typedef struct LinkOwner802A {
     char pad0[8];
     f32 *range;      /* 0x08 */
-    char pad0C[0x30];
+    char pad0C[0x18];
+    f32 unk24; /* set to range[0] when a source transform changes */
+    char pad28[0x14];
     u32 flags;        /* 0x3C */
     LinkNode802A *head; /* 0x40 */
     char pad44[8];
@@ -492,7 +494,7 @@ static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A 
     Graphu64_ClampMatrixToFixedRange(matrix);
     Graphu64_GetMatrixTranslation((char *)matrix, &node->pos.x);
     if (owner->flags & 4) {
-        Graphu64_GetMatrixScale(matrix, (f32 *)((char *)node + 0x1C));
+        Graphu64_GetMatrixScale(matrix, &node->scale.x);
     } else {
         Graphu64_ConvertMatrixToFixed(matrix, node->matrices[g_lightingBufferIndex].m);
     }
@@ -526,7 +528,7 @@ void Linked_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
         }
     }
     if (changed) {
-        *(f32 *)((char *)owner + 0x24) = owner->range[0];
+        owner->unk24 = owner->range[0];
     }
 }
 

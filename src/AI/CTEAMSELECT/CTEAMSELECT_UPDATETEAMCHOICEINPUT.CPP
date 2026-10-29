@@ -37,7 +37,7 @@ void Cteamselect_UpdateTeamChoiceInput(char *menu, void *player) {
     result = Cteamselect_GetFourWayStickSlot(player);
     if (result != ((TeamMenuSelectionPairView *)(menu))->hover) {
         if (result != -1) {
-            entry = (char *)menu + result * 0x14;
+            entry = (char *)menu + result * sizeof(TeamMenuSlotView);
             value = ((Entry *)(entry))->team;
             if (((Entry *)(entry))->enabled != 0) {
                 if ((s16)value < 0) {

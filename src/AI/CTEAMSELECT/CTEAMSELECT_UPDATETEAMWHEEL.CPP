@@ -63,7 +63,7 @@ void Cteamselect_UpdateTeamWheel(TeamMenu *menu, SharedPlayer *player, void *unu
     slot = Cteamselect_GetFourWayStickSlot(player);
     if (slot != menu->hover) {
         if (slot != -1) {
-            entry = (Entry *) ((char *) menu + slot * 0x14);
+            entry = (Entry *) ((char *) menu + slot * sizeof(TeamMenuSlotView));
             team = entry->team;
             if (entry->enabled == 0) {
                 goto run;

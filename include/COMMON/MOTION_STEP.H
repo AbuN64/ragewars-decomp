@@ -48,7 +48,8 @@ typedef struct ActorMotion {
     s32 contactCount;
     CVector3 contacts[4];
     CVector3 normal;
-    u8 reserved104[0x78];
+    struct LevelActor *unk104; /* compared with the special collision candidate */
+    u8 reserved108[0x74];
     f32 blend;
     CVector3 interpolated;
     u8 reserved18C[12];

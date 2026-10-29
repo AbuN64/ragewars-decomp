@@ -11,6 +11,7 @@
 #include "ENGINE/AUDIO/AUDIOWORLD.H"
 #include "DEFS/DEFS.H"
 #include "COMMON/AUDIO_CONTEXT.H"
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/AUDIO_INITIALIZE.H"
@@ -491,7 +492,7 @@ s32 Sound_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *posi
         if (Audio_HasVoiceWithKey(&((GameAudioContext *)(context))->menu[0], ((GameAudioContext *)(context))->selectedSound) != 0) {
             return -1;
         }
-        if (Audio_ComputeDistanceAttenuation(position, (char *)((GameAudioContext *)(context))->listenerCamera + 0x128) == 0.0f) {
+        if (Audio_ComputeDistanceAttenuation(position, &((GameAudioContext *)context)->listenerCamera->position) == 0.0f) {
             return -1;
         }
     }

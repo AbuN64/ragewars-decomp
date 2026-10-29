@@ -132,8 +132,8 @@ void Link_DispatchTriggerExit(Record14 *trigger) {
     bytes[14] |= 0x20;
     if (bytes[17] == 1) {
         copy = *trigger;
-        ((u8 *)&copy)[0x12] = 2;
-        ((u8 *)&copy)[0x10] = 0;
+        copy.mode = 2;
+        copy.state = 0;
         Link_DispatchTrigger(&copy);
     }
 }

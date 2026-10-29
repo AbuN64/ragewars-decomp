@@ -138,7 +138,7 @@ void Instcol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
     contact.kind = special != 0 ? 7 : surface->InstanceBehavior;
     CCollision_TestRayCylinder(motion, &entity->position0, radius,
                     top - sweep->bottom, bottom - sweep->top, 1, &contact, 1);
-    if (special != 0 && *(LevelActor **)((u8 *)motion + 0x104) != entity &&
+    if (special != 0 && motion->unk104 != entity &&
         sweep->bottom1 <= top && bottom < sweep->top1) {
         deltaX = entityX - ownerX;
         deltaZ = entityZ - ownerZ;

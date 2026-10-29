@@ -85,9 +85,9 @@ void Preview_DrawMenuModelItem(MenuModelItem *item) {
   scale.z=item->scale.z*ratio;
   scale.y=item->scale.y*(g_fallbackScreenMessageEmitter[0].height/(f32)*(&g_hudReferenceViewportWidth+1));
   ScaleMatrixLocal(&matrix,scale.x,scale.y,scale.z);SwapMatrixUpForward(&matrix);
-  Graphu64_ConvertMatrixToFixed(&matrix,(char *)item+((g_lightingBufferIndex<<6)+0x38));
+  Graphu64_ConvertMatrixToFixed(&matrix,item->matrices+(g_lightingBufferIndex<<6));
   model=Scene_GetIndexedModelResource(&g_world,item->model);Geometry_BeginModelBatch();
-  Geometry_QueueDirectModel(model,(char *)item+((g_lightingBufferIndex<<6)+0x38),&g_defaultParticleLighting,0,item->flags);
+  Geometry_QueueDirectModel(model,item->matrices+(g_lightingBufferIndex<<6),&g_defaultParticleLighting,0,item->flags);
   Geometry_FlushModelBatch();
  }
  g_geometryFogEffectEnabled=saved;
