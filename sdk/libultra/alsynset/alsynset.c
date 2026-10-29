@@ -24,7 +24,7 @@ void alSynSetFXMix(void *synth, void *voice, s8 effectMix) {
     SharedRecV4 fn;
 
     if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0) {
-        controlUpdate = Audio_AllocParam();
+        controlUpdate = __allocParam();
         if (controlUpdate != 0) {
             updateSampleTime = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
             ((AudioIntegerControlUpdate *)(controlUpdate))->type = AL_FILTER_SET_FXAMT;
@@ -61,7 +61,7 @@ void alSynSetPan(void *synth, void *voice, u8 pan) {
     SharedRecV5 fn;
 
     if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0) {
-        controlUpdate = Audio_AllocParam();
+        controlUpdate = __allocParam();
         if (controlUpdate != 0) {
             updateSampleTime = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
             ((AudioIntegerControlUpdate *)(controlUpdate))->type = AL_FILTER_SET_PAN;
@@ -93,7 +93,7 @@ void alSynSetPitch(void *synth, void *voice, f32 pitchRatio) {
     SharedRecV7 fn;
 
     if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0) {
-        controlUpdate = Audio_AllocParam();
+        controlUpdate = __allocParam();
         if (controlUpdate != 0) {
             updateSampleTime = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
             ((AudioPitchControlUpdate *)(controlUpdate))->type = AL_FILTER_SET_PITCH;

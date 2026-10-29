@@ -3,7 +3,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
-#include "../../include/AUDIO/audio_initbitreverseorder.H"
+#include "../../../../include/AUDIO/audio_initbitreverseorder.H"
 
 s16 Audio_DecodeFrame();
 u32 Audio_DecodeFrameOk(void) {

@@ -110,7 +110,7 @@ void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
     sndp->drvr = &g_audioGlobals->drvr;
 
     sndp->node.next = 0;
-    sndp->node.handler = Audio_SoundPlayerVoiceHandlerEntry;
+    sndp->node.handler = _sndpVoiceHandler_Address;
     sndp->node.clientData = sndp;
     alSynAddPlayer(sndp->drvr, &sndp->node);
 

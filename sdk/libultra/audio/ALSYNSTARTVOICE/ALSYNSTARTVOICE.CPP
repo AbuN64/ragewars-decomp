@@ -15,7 +15,7 @@ void alSynStartVoice(void *synth, void *voice, s32 waveTable) {
     SharedRecV3 fn;
 
     if ((((AudioVoiceStartView *)(voice))->pvoice.v0) != 0) {
-        controlUpdate = Audio_AllocParam();
+        controlUpdate = __allocParam();
         if (controlUpdate != 0) {
             updateSampleTime = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoiceStartView *) voice)->pvoice.v1)->offset);
             ((AudioStartVoiceUpdate *)(controlUpdate))->type = AL_FILTER_START_VOICE;

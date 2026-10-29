@@ -23,7 +23,7 @@ void alSynStopVoice(struct AudioSynthParamSamplesView *synth, void *voice)
   SharedRecV12 fn;
   if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0)
   {
-    controlUpdate = Audio_AllocParam();
+    controlUpdate = __allocParam();
     if (controlUpdate != 0)
     {
       updateSampleTime = (synth->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);

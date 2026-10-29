@@ -24,7 +24,7 @@ void alSynSetVol(void *synth, void *voice, s16 targetVolume, s32 rampTime) {
     SharedRecV10 fn;
 
     if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0) {
-        controlUpdate = Audio_AllocParam();
+        controlUpdate = __allocParam();
         if (controlUpdate != 0) {
             updateSampleTime = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
             ((AudioVolumeControlUpdate *)(controlUpdate))->type = AL_FILTER_SET_VOLUME;

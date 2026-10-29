@@ -24,7 +24,7 @@ void alSynFreeVoice(void *synth, void *voice) {
 
     if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0) {
         if ((((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset) != 0) {
-            controlUpdate = Audio_AllocParam();
+            controlUpdate = __allocParam();
             if (controlUpdate != 0) {
                 updateSampleTime = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
                 ((AudioFreeVoiceUpdateView *)(controlUpdate))->type = AL_FILTER_FREE_VOICE;

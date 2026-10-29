@@ -4102,7 +4102,7 @@ segments:
       - [0xC8118, data, game_data/k_DrvrnewEncodedWordsBlock1]
       - [0xC8120, rodata, game_data/k_AudioPullenvelopeEncodedBytes]
       - [0xC8124, rodata, game_data/s_audioEnvText]
-      - [0xC8130, rodata, game_data/literals_Audio_PullEnvelope]
+      - [0xC8130, rodata, game_data/literals_alEnvmixerPull]
       - [0xC8228, rodata, game_data/g_EnvWords1]
       - [0xC8230, rodata, game_data/g_EnvWords2]
       - [0xC8258, data, game_data/s_EnvTGamText]

@@ -2,7 +2,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
-#include "../../include/AUDIO/audio_nextdecodedsampleblock.H"
+#include "../../../../include/AUDIO/audio_nextdecodedsampleblock.H"
 
 extern void Audio_DecodeFrame(void *stream);
 

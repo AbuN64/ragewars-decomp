@@ -454,7 +454,7 @@ extern char g_SelectPromptTextGroupFiveCase8Text[];
 
 extern char g_frontendVideoModeRenderConfigsFirstZ;
 
-extern int Audio_SoundPlayerVoiceHandlerEntry(void * soundPlayer);
+extern int _sndpVoiceHandler_Address(void * soundPlayer);
 
 
 extern char *g_playerAimCandidateActors[];

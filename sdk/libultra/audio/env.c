@@ -24,12 +24,12 @@ extern char s_audioEnvText[]; /* "audio/env.c" */
 /* The SDK's traditional-cpp assert: the expression string is the literal "EX". */
 #define assert_at(EX, line) ((EX) ? ((void)0) : __assert(g_audioEnvelopeSourceAssertText, s_audioEnvText, line))
 
-Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p);
+Acmd *_pullSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p);
 
 /* alEnvmixerPull: walk the envelope mixer's control list up to outCount samples, pulling the
    source for the span before each update, applying it (voice start/stop/free, volume, pan, fx
    mix, or passing it down the chain), freeing it, then pulling the remainder of the frame. */
-Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *alEnvmixerPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     ALEnvMixer *e = (ALEnvMixer *)filter;
@@ -97,7 +97,7 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
         case AL_FILTER_SET_FXAMT:
         case AL_FILTER_SET_PAN:
         case AL_FILTER_SET_VOLUME:
-            ptr = Audio_PullEnvelopeSubFrame(e, &inp, &loutp, samples, sampleOffset, ptr);
+            ptr = _pullSubFrame(e, &inp, &loutp, samples, sampleOffset, ptr);
 
             if (e->delta >= e->segEnd) {
                 /* Target reached (or segEnd was 0): settle on it. */
@@ -108,8 +108,8 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
                 e->cvolR = e->rtgt;
             } else {
                 /* Estimate the current volume along the ramp. */
-                e->cvolL = Audio_GetEnvelopeVolume(e->cvolL, e->delta, e->lratm, e->lratl);
-                e->cvolR = Audio_GetEnvelopeVolume(e->cvolR, e->delta, e->rratm, e->rratl);
+                e->cvolL = _getVol(e->cvolL, e->delta, e->lratm, e->lratl);
+                e->cvolR = _getVol(e->cvolR, e->delta, e->rratm, e->rratl);
             }
 
             /* A zero volume would never ramp anywhere. */
@@ -147,7 +147,7 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
         } break;
 
         case AL_FILTER_STOP_VOICE: {
-            ptr = Audio_PullEnvelopeSubFrame(e, &inp, &loutp, samples, sampleOffset, ptr);
+            ptr = _pullSubFrame(e, &inp, &loutp, samples, sampleOffset, ptr);
             (*e->filter.setParam)(&e->filter, AL_FILTER_RESET, 0);
         } break;
 
@@ -160,7 +160,7 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
 
         default:
             /* Pull up to the update, then pass it down the chain. */
-            ptr = Audio_PullEnvelopeSubFrame(e, &inp, &loutp, samples, sampleOffset, ptr);
+            ptr = _pullSubFrame(e, &inp, &loutp, samples, sampleOffset, ptr);
             (*e->filter.setParam)(&e->filter, e->ctrlList->type, (void *)e->ctrlList->data.i);
             break;
         }
@@ -173,10 +173,10 @@ Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
         if (e->ctrlList == 0)
             e->ctrlTail = 0;
 
-        Audio_FreeParam(thisParam);
+        __freeParam(thisParam);
     }
 
-    ptr = Audio_PullEnvelopeSubFrame(e, &inp, &loutp, outCount, sampleOffset, ptr);
+    ptr = _pullSubFrame(e, &inp, &loutp, outCount, sampleOffset, ptr);
 
     /* Prevent overflow in e->delta. */
     if (e->delta > e->segEnd)
@@ -193,7 +193,7 @@ extern char s_audioEnvText[]; /* "audio/env.c" */
  /* __assert */
   /* _getRate */
 
-Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *_pullSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     struct ALEnvMixer_s *e = (struct ALEnvMixer_s *)filter;
@@ -384,7 +384,7 @@ s32 alEnvmixerParam(void *filter, s32 paramID, void *param)
     return 0;
 }
 
-f32 Audio_GetEnvelopeVolume(f32 initialVolume, s32 sampleCount, s32 rateInteger, s32 rateFraction)
+f32 _getVol(f32 initialVolume, s32 sampleCount, s32 rateInteger, s32 rateFraction)
 {
     f32 base;
     f32 result;

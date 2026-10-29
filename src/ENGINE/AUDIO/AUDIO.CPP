@@ -7,7 +7,7 @@
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../../sdk/include/AUDIO/audio_nextdecodedsampleblock.H"
+#include "../../../include/AUDIO/audio_nextdecodedsampleblock.H"
 #include "TEXTURE/SOUND_UPDATEAUDIOCONTEXT.H"
 #include "AUDIO/AUDIO_CHOOSEWEIGHTEDSOUNDVARIANT.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"

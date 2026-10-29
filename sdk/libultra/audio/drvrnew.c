@@ -32,7 +32,7 @@ extern char alFxParam_Address;
 extern char alFxPull_Address;
 
  /* alFxPull */
-extern char Audio_SetEffectParameter_Address;
+extern char alFxParamHdl_Address;
 
  /* alFxParamHdl */
 
@@ -84,7 +84,7 @@ void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
 
     alFilterNew(f, 0, (s32)&alFxParam_Address, 5);
     f->handler = &alFxPull_Address;
-    r->paramHdl = &Audio_SetEffectParameter_Address;
+    r->paramHdl = &alFxParamHdl_Address;
 
     switch (c->fxType) {
       case 1: param = g_audioSmallRoomParameters; break;
@@ -225,13 +225,13 @@ void alSaveNew(ALSave *saveFilter) {
     saveFilter->first = 1;
 }
 
-extern char Audio_PullEnvelope_Address, alEnvmixerParam_Address;
+extern char alEnvmixerPull_Address, alEnvmixerParam_Address;
 
 void alEnvmixerNew(ALEnvMixer *envelopeMixer, ALHeap *heap) {
     s32 result;
     ALEnvMixer *mixer = envelopeMixer;
 
-    alFilterNew(envelopeMixer, &Audio_PullEnvelope_Address, &alEnvmixerParam_Address, 4);
+    alFilterNew(envelopeMixer, &alEnvmixerPull_Address, &alEnvmixerParam_Address, 4);
     result = alHeapDBAlloc(0, 0, heap, 1, 0x50);
     mixer->state = (void *)result;
     mixer->first = 1;

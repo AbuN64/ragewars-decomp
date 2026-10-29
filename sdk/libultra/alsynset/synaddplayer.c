@@ -64,14 +64,14 @@ s32 alSynAllocVoice(AudioSynthVoiceAllocatorView *drvr, ALVoice_s *voice, ALVoic
             pvoice->offset = 512;
             pvoice->vvoice->pvoice = 0;
 
-            update = Audio_AllocParam();
+            update = __allocParam();
             update->delta = drvr->paramSamples;
             update->type = AL_FILTER_SET_VOLUME; /* AL_FILTER_SET_VOLUME */
             update->data.i = 0;
             update->moredata.i = pvoice->offset - 64;
             (*f->setParam)(f, AL_FILTER_ADD_UPDATE, update); /* AL_FILTER_ADD_UPDATE */
 
-            update = Audio_AllocParam();
+            update = __allocParam();
             if (update) {
                 update->delta = drvr->paramSamples + pvoice->offset;
                 update->type = AL_FILTER_STOP_VOICE; /* AL_FILTER_STOP_VOICE */

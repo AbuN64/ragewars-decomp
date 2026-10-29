@@ -189,7 +189,7 @@ Acmd *alAudioFrame(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
     return cmdlEnd;
 }
 
-void *Audio_AllocParam(void) {
+void *__allocParam(void) {
     void *head;
     void *param;
 
@@ -203,7 +203,7 @@ void *Audio_AllocParam(void) {
     return param;
 }
 
-void Audio_FreeParam(void *parameterStorage) {
+void __freeParam(void *parameterStorage) {
     struct ALParam_s1C *parameter = parameterStorage;
     ALGlobals *head = g_audioGlobals;
     parameter->next = head->drvr.paramList;

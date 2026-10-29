@@ -32,7 +32,7 @@ void alSynStartVoiceParams(AudioSynthVoiceAllocatorView *s, ALVoice_s *v, void *
     AudioVoiceChannelFilterView *f;
 
     if (v->pvoice) {
-        update = (ALStartParamAlt *)Audio_AllocParam();
+        update = (ALStartParamAlt *)__allocParam();
         if (update == 0) { return; };
 
         if (fxmix < 0) {

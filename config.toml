@@ -197,26 +197,6 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."sdk/libultra/audio/decode.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-
-[file."sdk/libultra/audio/audio_decodetransformblock.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-
-[file."sdk/libultra/audio/audio_initbitreverseorder.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-
-[file."sdk/libultra/audio/audio_nextdecodedsampleblock.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-
 [file."sdk/libultra/audio/_udivdi3.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-msplit-addresses"]
@@ -277,6 +257,26 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = []
 
 [file."sdk/libultra/pfs/pfschecker.c"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
+[file."src/ENGINE/AUDIO/DECODER/DECODE.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
+[file."src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFORMBLOCK.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
+[file."src/ENGINE/AUDIO/DECODER/AUDIO_INITBITREVERSEORDER.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
+[file."src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []

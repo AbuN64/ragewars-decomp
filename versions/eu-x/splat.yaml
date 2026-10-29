@@ -4111,7 +4111,7 @@ segments:
       - [0xC97B0, rodata, game_data/g_lowPassFixedPointScale_StorageWords]
       - [0xC97C0, rodata, game_data/k_AudioPullenvelopeEncodedBytes]
       - [0xC97C4, rodata, game_data/s_audioEnvText]
-      - [0xC97D0, rodata, game_data/literals_Audio_PullEnvelope]
+      - [0xC97D0, rodata, game_data/literals_alEnvmixerPull]
       - [0xC98C8, rodata, game_data/g_EnvWords1]
       - [0xC98D0, rodata, game_data/g_EnvWords2]
       - [0xC9900, rodata, game_data/g_audioResamplerMaximumRatio_StorageWords]

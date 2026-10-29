@@ -16,7 +16,7 @@
 #include "AUDIO/VOICE.H"
 #include "AUDIO/AUDIO_CHOOSEWEIGHTEDSOUNDVARIANT.H"
 #include "AUDIO/RAXPLAYER.H"
-#include "../../../../sdk/include/OS/AUDIO_STOPMUSIC.H"
+#include "../../../../include/OS/AUDIO_STOPMUSIC.H"
 #include "../../../../sdk/include/os.h"
 #include "SYSTEM/DEFS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
