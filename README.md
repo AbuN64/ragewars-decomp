@@ -46,6 +46,6 @@ For detailed instructions please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 <!-- dependencies -->
 - [GCC 2.8.1](https://github.com/pmret/gcc-papermario)
-- [n64link](https://github.com/AbuN64/mas-n64)
+- [abumas](https://github.com/AbuN64/mas-n64)
 <!-- /dependencies -->
 
