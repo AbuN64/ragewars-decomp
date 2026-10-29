@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "TYPES.H"
@@ -7,7 +9,6 @@
 #include "COMMON/TEXTURE_REQUEST.H"
 
 /* 804453C4_7.CPP */
-#if !(defined(VERSION_US))
 /* Sets bit 23 of the flag word at offset 8 of a record unless Defs_GetMemorySize reports 0x400000 for
    it, in which case the bit is cleared; then stores what Frontend_GetScreenModePalette_Playeroption returns at offset 0x14.
    Returns zero. */
@@ -31,7 +32,6 @@ s32 Pak_StartScreenModeFade(void) {
     Frontend_StartScreenModeFade();
     return 0;
 }
-#endif
 
 /* 804453C4_8.CPP */
 #if defined(VERSION_US_REV1)

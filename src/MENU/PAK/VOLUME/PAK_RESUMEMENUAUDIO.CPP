@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
 #include "COMMON/SOUNDINFO.H"
@@ -7,7 +9,6 @@
 #include "COMMON/VOLUME_MENU_RESOURCES.H"
 
 /* 80444EC0_6.CPP */
-#if !(defined(VERSION_US))
 /* Passes what SoundVoicePool_GetGlobalState returns to SoundVoicePool_Resume, then calls SoundElement_DisableMusicGainOverride and SoundElement_EnablePeriodicSound,
    and returns one. */
 extern s32 SoundVoicePool_GetGlobalState();
@@ -25,10 +26,9 @@ s32 Pak_ResumeMenuAudio(void) {
 s32 Pak_ReturnCallbackSuccess(void) {
     return 1;
 }
-#endif
 
 /* 80444EC0_7.CPP */
-#if defined(VERSION_DE) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource g_pakAllocateMenuFirstResource,
    and returns one. */
 

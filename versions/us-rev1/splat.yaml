@@ -5762,7 +5762,6 @@ segments:
       - [0xE33F0, rodata, game_data/g_musicPreviewTwoColumnFormat]
       - [0xE33F4, rodata, game_data/literals_Pak_AdjustModelByteZero]
       - [0xE340C, data, game_data/g_PakEncodedWords]
-      - [0xE3410, rodata, game_data/g_multiplayerNameEntryTimingLimits_SetupSetupnamespinner]
       - [0xE3414, rodata, game_data/g_multiplayerNameCursorConstantWordsUsRev1]
       - [0xE341C, rodata, game_data/literals_Setup_DrawNameCursor]
       - [0xE3424, data, game_data/k_MultiDrawnamecursorEncodedWordsBlock1]

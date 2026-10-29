@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "COMMON/MENURECAT20V1.H"
 #include "MULTI/SETUP_SETUPNAMESPINNER.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -5,7 +7,6 @@
 #include "TYPES.H"
 #include "MULTI/SETUP_COMPAREBYTESEQUENCE.H"
 
-#if !(defined(VERSION_US))
 /* Append one selected character to an eight-character entry buffer. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 extern char g_playerViewRenderContext;
@@ -51,4 +52,3 @@ s32 Setup_CompareByteSequence(u8 *a, u8 *b, s32 count) {
     } while (c == d && c != 0 && count == 0);
     return c == d;
 }
-#endif

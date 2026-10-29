@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/OPTIONEDITSTATE.H"
@@ -88,7 +90,6 @@ s32 Pak_AdjustModelField(OptionEditState *label, OptionEditState *menu, s32 thir
 }
 #endif
 
-#if !(defined(VERSION_US))
 /* Calls SoundElement_SetMusicPlaybackEnabled with -1, SoundElement_DisableMusicGainOverride, SoundElement_StopMusic and Match_ResetMatchControllerState on g_gameSession, and
    returns one. */
 #include "COMMON/GAME_SESSION.H"
@@ -107,7 +108,6 @@ s32 Pak_StopMusicAndResetMatch(void) {
 void Pak_SetRecordTypeFour(s16 *record) {
     record[0] = 4;
 }
-#endif
 
 #if defined(VERSION_US_REV1)
 /* Forwards its three arguments to Pak_AdjustModelField with 0, 0, 1, 0xFF and the pooled constant (1.0f). */

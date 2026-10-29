@@ -7,7 +7,6 @@
 #include "MENU/PAK/pak_menu_entries.H"
 #include "MULTI/PAK_ENTERPLAYEROPTIONS.H"
 
-#if !(defined(VERSION_US))
 /* Sets a player state to 2, then in multiplayer (g_motionVisibilitySettings) clears and otherwise sets bit 0x800000 in both of its actor's visibility masks at 0x80 and 0xA8, and refreshes the audio state through SoundVoicePool_GetGlobalState and SoundVoicePool_Pause with that mask. */
 
 
@@ -45,7 +44,6 @@ void Pak_RestoreControllerSetup(void) {
 void Pak_RenderMenuEntryCallback(struct MenuStyle *menu, s8 *member) {
     Menu_DrawMenuEntries(menu, member);
 }
-#endif
 
 #if defined(VERSION_EU_X)
 unsigned int func_80446A4C_eu_x_padding_136A4C[1] = {

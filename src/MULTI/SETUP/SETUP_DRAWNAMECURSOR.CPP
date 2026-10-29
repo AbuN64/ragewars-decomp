@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
@@ -6,7 +8,6 @@
 #include "TYPES.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
-#if !(defined(VERSION_US))
 /* Draws a menu spinner: during the first half of its blink period (the timer of its g_multiplayerNameEntryStates entry up to the float after g_multiplayerNameEntryTimingLimits) it fills a two-pixel white bar under the digit its value selects, placed from the item's x at 0x14 by the character width Menu_GetWidgetStyle_EncodedDrawtextentrycursor reports scaled to the screen, with the style's alpha at 0x30 and 0x34, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
 
 
@@ -44,4 +45,3 @@ void Setup_DrawNameCursor(void *menu, MenuLocalizedTextItemView *item, void *thi
     }
     Menu_DrawLocalizedMenuItemText(menu, item, third, style);
 }
-#endif

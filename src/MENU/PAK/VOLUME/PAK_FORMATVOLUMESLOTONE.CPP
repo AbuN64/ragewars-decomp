@@ -35,7 +35,7 @@ s32 Pak_FormatVolumeSlotOne(struct Field *field) {
 }
 #endif
 
-#if defined(VERSION_DE) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Points a field's text at one of g_volumeOneNeutralLabel, g_volumeOneMaximumLabel or g_volumeOneMinimumLabel when the option byte g_soundEffectsVolumeOption measured from 0x80 in steps of eight is zero, fifteen or minus sixteen, and otherwise at g_volumeOneValueLabel with the step formatted into it, returning zero. Adapted from Pak_UpdateThirdVolumeLabel with g_soundEffectsVolumeOption_PakFormatvolumeslotone changed to g_soundEffectsVolumeOption and the text slots g_volumeTwoMinimumLabel..g_volumeTwoValueLabel changed to g_volumeOneMinimumLabel..g_volumeOneValueLabel. */
 
 extern s32 Menu_CountLineChars(struct Field *);

@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "MENU/OPTIONEDITSTATE.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
@@ -6,7 +8,6 @@
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 extern s32 Menu_AdjustValue(void *,s32,s32,s32,s32,s32);
 
-#if !(defined(VERSION_US))
 /* Adjusts the volume in steps of eight and starts a sound preview when no preview is playing. */
 
 s32 Pak_AdjustVolumeSlotZero(void *unused, void *menu) {
@@ -20,4 +21,3 @@ s32 Pak_AdjustVolumeSlotZero(void *unused, void *menu) {
     }
     return 0;
 }
-#endif

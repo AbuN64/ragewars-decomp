@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "COMMON/MENURECAT20V1.H"
 #include "MULTI/SETUP_SETUPNAMESPINNER.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -7,7 +9,6 @@
 #include "COMMON/RENDERCOUNTERS.H"
 #include "MULTI/SETUP_HASACTIVEGAMECOUNTERS.H"
 
-#if !(defined(VERSION_US))
 /* Deletes the final character of the selected player's text entry: resets its cursor and, when the entry holds characters, decrements the count and length and clears the character at the new end. */
 
 
@@ -103,4 +104,6 @@ s32 Setup_HasActiveGameCounters(void) {
     }
     return ret;
 }
+#if VERSION_US
+INCLUDE_DATA("ovl_frontendMenu", func_8044609C_us_padding_1AA09C);
 #endif

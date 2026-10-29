@@ -14,7 +14,7 @@ s32 Pak_RestoreAudioAndCloseMenu(void *first, void *second, void *third) { Sound
 s32 Pak_AdjustVolumeSlotTwo(void *first, void *second) { u8 *option = &g_gameSettings.volume[2]; s32 value = *option; value = Menu_AdjustValue(second, value, 8, 0, 0xFF, 0); if (value == 0xF7) { value = 0xF8; } *option = value; return 0; }
 #endif
 
-#if defined(VERSION_DE) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Stops sound for a menu: calls SoundElement_StopAudioExceptKey with -1 and SoundElement_SetVoiceMixValue with zero, calls
    SoundElement_EnableMusicGainOverride when g_musicPreviewMenuActive is set, passes g_menuSavedAudioSelection to SoundElement_SetMusicPlaybackEnabled, calls Control_SetMenuControlFlag and
    returns what Menu_TryCreateMenu gives for the three arguments. */

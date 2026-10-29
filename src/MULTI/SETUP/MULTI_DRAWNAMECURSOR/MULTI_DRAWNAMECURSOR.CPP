@@ -27,3 +27,9 @@ unsigned int k_MultiDrawnamecursorEncodedWords[5] = {
     0x00000000, 0x00000001, 0x00000000, 0x8014CEB0, 0x00000000,
 };
 #endif
+
+#if defined(VERSION_US)
+unsigned int k_MultiDrawnamecursorEncodedWordsBlock4[5] = {
+    0x75520000, 0x6A010000, 0x10000B00, 0x8014AEB0, 0x00000000,
+};
+#endif

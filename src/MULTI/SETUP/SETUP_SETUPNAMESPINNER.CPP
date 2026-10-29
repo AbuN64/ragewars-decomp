@@ -5,7 +5,7 @@
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "MULTI/SETUP_SETUPNAMESPINNER.H"
 
-#if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_EU_X)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char g_playerViewRenderContext[];
 extern Spinner g_multiplayerNameEntryStates[];
 extern s32 Player_GetPlayerIndex(char *, s32);
@@ -136,13 +136,14 @@ s32 Setup_UpdateNameCursor(void *unused, NameSpinnerMenu *menu) {
 }
 #endif
 
-#if defined(VERSION_US_REV1)
-const unsigned int g_multiplayerNameEntryTimingLimits_SetupSetupnamespinner[1] = {
-    0x41700000,
+#if defined(VERSION_US)
+unsigned int g_SetupSpinnerWordsUs[3] = {
+    0x65520000, 0x00000000, 0x08000500,
 };
 #endif
 
-#if defined(VERSION_US_REV1)
+
+#if defined(VERSION_US) || defined(VERSION_US_REV1)
 s32 Setup_UpdateNameCursor(void *unused, NameSpinnerMenu *menu) {
     s32 i;
     f32 t;
@@ -150,8 +151,8 @@ s32 Setup_UpdateNameCursor(void *unused, NameSpinnerMenu *menu) {
     i = Player_GetPlayerIndex(g_playerViewRenderContext, menu->id);
     t = g_multiplayerNameEntryStates[i].timer + g_frameElapsedTime;
     g_multiplayerNameEntryStates[i].timer = t;
-    if (t >= g_multiplayerNameEntryTimingLimits) {
-        g_multiplayerNameEntryStates[i].timer = t - g_multiplayerNameEntryTimingLimits;
+    if (t >= 15.0f) {
+        g_multiplayerNameEntryStates[i].timer = t - 15.0f;
     }
     if (menu->state == 1) {
         if (((s32 (*)(s32))Control_IsLeftPressed)(menu->input) != 0 && g_multiplayerNameEntryStates[i].value > 0) {
@@ -167,3 +168,4 @@ s32 Setup_UpdateNameCursor(void *unused, NameSpinnerMenu *menu) {
     return 0;
 }
 #endif
+

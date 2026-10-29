@@ -10,7 +10,7 @@
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "SYSTEM/DEFS.H"
 
-#if defined(VERSION_DE) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_EU_X)
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
 #define VOLUME_BYTE g_gameSettings.volume[2]

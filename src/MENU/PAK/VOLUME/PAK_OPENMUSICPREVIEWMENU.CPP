@@ -12,7 +12,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 /* 80444EC0_15.CPP */
-#if !defined(VERSION_US)
 /* Shows the fixed sound value text when g_menuMusicPreviewSelection is zero. Otherwise
  * formats its current value into the alternate text (the current menu
  * language's line in the EU builds), two bytes before the line length
@@ -46,7 +45,6 @@ s32 Pak_FormatMusicPreview(LayeredText *field) {
     }
     return 0;
 }
-#endif
 
 /* 80444EC0_16.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -64,7 +62,7 @@ s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
 }
 #endif
 
-#if defined(VERSION_DE) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Restarts sound: calls SoundElement_DisablePeriodicSound, records what SoundElement_GetMusicPlaybackEnabled returns in g_menuSavedAudioSelection, passes
    g_menuMusicPreviewSelection to SoundElement_SetMusicPlaybackEnabled, calls SoundElement_DisableMusicGainOverride and SoundElement_SetVoiceMixValue with 1, sets g_musicPreviewMenuActive,
    calls Control_ClearMenuControlFlag and then Menu_AllocateMenu with the third argument, the second and g_musicPreviewMenuResource_PakOpenmusicpreviewmenu.

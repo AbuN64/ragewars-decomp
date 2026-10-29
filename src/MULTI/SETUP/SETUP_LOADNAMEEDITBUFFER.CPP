@@ -87,3 +87,4 @@ void Setup_LoadNameEditBuffer(NameSpinnerMenu *menu) {
     g_multiplayerNameEntryStates[index].max = 8 - trailing;
 }
 #endif
+

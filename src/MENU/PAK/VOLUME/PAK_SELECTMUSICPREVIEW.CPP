@@ -33,7 +33,7 @@ s32 Pak_SelectMusicPreview(s32 unusedEvent, Shared_PakMenu *pThis) {
 }
 #endif
 
-#if defined(VERSION_DE) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Cycles a menu selection from directional input while skipping reserved entries. */
  /* extern */
 s32 Pak_SelectMusicPreview(s32 unused, struct PakControllerRequestView *menu) {
