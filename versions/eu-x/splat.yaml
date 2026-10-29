@@ -3466,7 +3466,7 @@ segments:
       - [0xC3D70, rodata, data_800C/k_PlayeraiSelectmovementanimationEncodedWords]
       - [0xC3D78, data, data_800C/s_PlayeraiSelectmovementanimationElsIndeText]
       - [0xC3D80, rodata, data_800C/g_Weaponai_UpdateCallbacksAndTimersConstantWords]
-      - [0xC3D88, rodata, data_800C/k_WeaponUpdateidleweaponselectionEncodedWords]
+      - [0xC3D88, rodata, data_800C/literals_Weaponai_CanStartFiring]
       - [0xC3DD0, rodata, data_800C/k_WeaponUpdatealternatefireEncodedWords]
       - [0xC3DD8, rodata, data_800C/literals_Weaponai_UpdateAlternateFire]
       - [0xC3DE0, rodata, data_800C/literals_Weaponai_UpdateSpinAndAlternateFire]

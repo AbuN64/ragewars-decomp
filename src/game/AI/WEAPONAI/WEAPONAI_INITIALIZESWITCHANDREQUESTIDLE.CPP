@@ -86,7 +86,6 @@ void Weaponai_InitializeSwitchForSingleRound(void *actor, WeaponFireState *fireS
 }
 #endif
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #include "TYPES.H"
 #include "WEAPONS/PLAYER_INVENTORY.H"
 
@@ -131,6 +130,3 @@ s32 Weaponai_CanStartFiring(void *owner, void *slot) {
     }
     return 1;
 }
-#else
-INCLUDE_ASM("span_1000", Weaponai_CanStartFiring);
-#endif

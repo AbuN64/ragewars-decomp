@@ -11,20 +11,7 @@
 
 /* 800C3144.CPP */
 #if defined(VERSION_EU)
-const unsigned int k_WeaponUpdateidleweaponselectionEncodedWordsBlock1[19] = {
-    0x00000000, 0x00230174, 0x00230180, 0x00230180, 0x00230180, 0x00230180, 0x00230180, 0x00230180,
-    0x00230180, 0x002300EC, 0x00230180, 0x002300BC, 0x00230150, 0x00230180, 0x00230180, 0x00230180,
-    0x00230180, 0x00230180, 0x002300D4,
-};
-#endif
-
-/* 8022F3E8_15.CPP */
-#if defined(VERSION_EU_X)
-const unsigned int k_WeaponUpdateidleweaponselectionEncodedWords[18] = {
-    0x002301A4, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0,
-    0x0023011C, 0x002301B0, 0x002300EC, 0x00230180, 0x002301B0, 0x002301B0, 0x002301B0, 0x002301B0,
-    0x002301B0, 0x00230104,
-};
+const unsigned int k_WeaponUpdateidleweaponselectionEncodedWordsBlock1[1] = { 0x00000000 };
 #endif
 
 /* 8022F3E8_6.CPP */

@@ -85,7 +85,6 @@ void Equip_LoadEquipmentSelections(s32 player) {
     }
 }
 
-#if !(defined(VERSION_EU) || defined(VERSION_US)) || defined(NON_MATCHING)
 #include "TYPES.H"
 
 /* Rebuilds the loadout of every active player whose entry on the screen g_equipmentAndResultsScreen is in mode 2:
@@ -95,8 +94,6 @@ void Equip_LoadEquipmentSelections(s32 player) {
    value for that column selects as owned at that level, and finally marks item 0 owned at level
    0. */
 
-/* US and EU keep their asm: their jump table sits inside literals_Equip_MoveEquipmentColumn's rodata, which has no
- * unit of its own yet. */
 void Equip_ApplySelectedPlayerLoadouts(void) {
     u8 *record;
     struct CacheResourceBlockView *source;
@@ -146,6 +143,4 @@ void Equip_ApplySelectedPlayerLoadouts(void) {
         record[0x62] = 0;
     }
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Equip_ApplySelectedPlayerLoadouts);
-#endif
+

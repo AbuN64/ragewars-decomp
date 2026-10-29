@@ -18121,6 +18121,9 @@ SECTIONS
         src/game/AI/WEAPONAI/WEAPONAI_UPDATECALLBACKSANDTIMERS_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x14E4);
         src/game/AI/WEAPONAI/WEAPON_UPDATEIDLEWEAPONSELECTION.CPP.o(.rodata .rdata);
+        . = MAX(., 0x14E8);
+        . = ALIGN(8) /* src/game/AI/WEAPONAI/WEAPONAI_INITIALIZESWITCHANDREQUESTIDLE.CPP.o */;
+        src/game/AI/WEAPONAI/WEAPONAI_INITIALIZESWITCHANDREQUESTIDLE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1530);
         src/game/AI/WEAPONAI/WEAPON_UPDATEALTERNATEFIRE_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x1538);
@@ -20148,6 +20151,9 @@ SECTIONS
         . = ALIGN(8) /* src/game/FRONTEND/EQUIP/EQUIP_ACTIVATEEQUIPMENTPANEL.CPP.o */;
         src/game/FRONTEND/EQUIP/EQUIP_ACTIVATEEQUIPMENTPANEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x2CA30);
+        . = ALIGN(8) /* src/game/FRONTEND/EQUIP/EQUIP.CPP.o */;
+        src/game/FRONTEND/EQUIP/EQUIP.CPP.o(.rodata .rdata);
+        . = MAX(., 0x2CA44);
         src/game/FRONTEND/EQUIP/G_EQUIPMENTSELECTIONRETAINEDDATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2CA50);
         . = ALIGN(8) /* src/game/FRONTEND/MENU_IMAGE/MENU_IMAGE.CPP.o */;
@@ -20996,7 +21002,8 @@ SECTIONS
         . = MAX(., 0x14E0);
         src/game/AI/WEAPONAI/WEAPONAI_UPDATECALLBACKSANDTIMERS_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x14E8);
-        src/game/AI/WEAPONAI/WEAPON_UPDATEIDLEWEAPONSELECTION.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/WEAPONAI/WEAPONAI_INITIALIZESWITCHANDREQUESTIDLE.CPP.o */;
+        src/game/AI/WEAPONAI/WEAPONAI_INITIALIZESWITCHANDREQUESTIDLE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1530);
         src/game/AI/WEAPONAI/WEAPON_UPDATEALTERNATEFIRE_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x1538);
@@ -25890,6 +25897,9 @@ SECTIONS
         . = ALIGN(8) /* src/game/FRONTEND/EQUIP/EQUIP_ACTIVATEEQUIPMENTPANEL.CPP.o */;
         src/game/FRONTEND/EQUIP/EQUIP_ACTIVATEEQUIPMENTPANEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x1B3D0);
+        . = ALIGN(8) /* src/game/FRONTEND/EQUIP/EQUIP.CPP.o */;
+        src/game/FRONTEND/EQUIP/EQUIP.CPP.o(.rodata .rdata);
+        . = MAX(., 0x1B3E4);
         src/game/FRONTEND/EQUIP/G_EQUIPMENTSELECTIONRETAINEDDATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x1B3F0);
         . = ALIGN(8) /* src/game/FRONTEND/MENU_IMAGE/MENU_IMAGE.CPP.o */;
