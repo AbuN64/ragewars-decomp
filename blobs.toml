@@ -12123,6 +12123,86 @@ stored_size = 33
 rom."de" = [[0x1ff6e1, 0x1ff702]]
 evidence = [{ artifact = "stale-code-cut.json", sha256 = "c2518793f2b2e121a9e881887c4fdf3f6fdafccd9b85fe454c274b6db3f8159b", pointer = "/rows/0" }]
 
+[blob."leftover.de.copy.ef6e0"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 88
+decoded_size = 88
+rom."de" = [[0xef6e0, 0xef738]]
+evidence = [{ artifact = "blobs-spans-stale-scan.json", sha256 = "adeccf466b8a3c9dbb19562508da683312c048d5c03f3d6a787b6c568dd4edc5", pointer = "/rows/1" }]
+
+[blob."leftover.de.copy.ef800"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 120
+decoded_size = 120
+rom."de" = [[0xef800, 0xef878]]
+evidence = [{ artifact = "blobs-spans-stale-scan.json", sha256 = "adeccf466b8a3c9dbb19562508da683312c048d5c03f3d6a787b6c568dd4edc5", pointer = "/rows/2" }]
+
+[blob."leftover.de.copy.ef880"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 111
+decoded_size = 111
+rom."de" = [[0xef880, 0xef8ef]]
+evidence = [{ artifact = "blobs-spans-stale-scan.json", sha256 = "adeccf466b8a3c9dbb19562508da683312c048d5c03f3d6a787b6c568dd4edc5", pointer = "/rows/3" }]
+
+[blob."leftover.de.copy.ef8f0"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 95
+decoded_size = 95
+rom."de" = [[0xef8f0, 0xef94f]]
+evidence = [{ artifact = "blobs-spans-stale-scan.json", sha256 = "adeccf466b8a3c9dbb19562508da683312c048d5c03f3d6a787b6c568dd4edc5", pointer = "/rows/4" }]
+
+[blob."leftover.de.copy.ef950"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 772
+decoded_size = 772
+rom."de" = [[0xef950, 0xefc54]]
+evidence = [{ artifact = "blobs-spans-stale-scan.json", sha256 = "adeccf466b8a3c9dbb19562508da683312c048d5c03f3d6a787b6c568dd4edc5", pointer = "/rows/5" }]
+
+[blob."leftover.de.copy.efc70"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 51
+decoded_size = 51
+rom."de" = [[0xefc70, 0xefca3]]
+evidence = [{ artifact = "blobs-spans-stale-scan.json", sha256 = "adeccf466b8a3c9dbb19562508da683312c048d5c03f3d6a787b6c568dd4edc5", pointer = "/rows/6" }]
+
+[blob."leftover.de.copy.efcc0"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 8
+decoded_size = 8
+rom."de" = [[0xefcc0, 0xefcc8]]
+evidence = [{ artifact = "blobs-spans-stale-scan.json", sha256 = "adeccf466b8a3c9dbb19562508da683312c048d5c03f3d6a787b6c568dd4edc5", pointer = "/rows/8" }]
+
+[blob."leftover.de.copy.efcd0"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 560
+decoded_size = 560
+rom."de" = [[0xefcd0, 0xeff00]]
+evidence = [{ artifact = "blobs-spans-stale-scan.json", sha256 = "adeccf466b8a3c9dbb19562508da683312c048d5c03f3d6a787b6c568dd4edc5", pointer = "/rows/7" }]
+
 [blob."leftover.de.copy.eff00"]
 type = "leftover"
 format = "copy"
@@ -14973,6 +15053,16 @@ stored_size = 84
 decoded_size = 84
 rom."de" = [[0x1de1d8, 0x1de22c]]
 evidence = [{ artifact = "blobs-spans-ident-copies.json", sha256 = "f9cf671e0bf9eee8a8fda359589accd831a075ae0836f2058a7b0c82e96ab782", pointer = "/rows/222" }]
+
+[blob."leftover.de.obj-code.ef738"]
+type = "leftover"
+format = "earlier-link"
+codec = "none"
+state = "decoded"
+stored_size = 200
+decoded_size = 200
+rom."de" = [[0xef738, 0xef800]]
+evidence = [{ artifact = "blobs-spans-stale-scan.json", sha256 = "adeccf466b8a3c9dbb19562508da683312c048d5c03f3d6a787b6c568dd4edc5", pointer = "/rows/0" }]
 
 [blob."leftover.de.rnc-copy.1e4dbe"]
 type = "leftover"
