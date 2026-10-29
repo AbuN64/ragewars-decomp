@@ -28,19 +28,19 @@ static inline s32 unlockRes(s32 id) {
 s32 Menu_CreateUnlockGatedListScreen(void *window) {
     void *obj;
 
-    g_unlockGatedListScreen = (Shared_MenuWidgetState *)Cache_AllocateMemory(0x18);
-    g_unlockGatedListScreen->list = SmpFade_CreateFadeWidget(unlockRes(0x136), unlockRes(0x137));
+    g_unlockGatedListScreen = (Shared_MenuWidgetState *)Cache_AllocateMemory(24);
+    g_unlockGatedListScreen->list = SmpFade_CreateFadeWidget(unlockRes(310), unlockRes(311));
     g_unlockGatedListScreen->seen = 0;
 
     if (Defs_TestBit(g_profileModeOnePlayedLevels, 0) == 0) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(window, unlockRes(0x13A)), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(window, unlockRes(314)), 1);
     }
 
-    g_unlockGatedListScreen->resourceWidget = SmpFlicker_CreateFlickerWidget(unlockRes(0x139), 0x6E);
+    g_unlockGatedListScreen->resourceWidget = SmpFlicker_CreateFlickerWidget(unlockRes(313), 110);
 
-    obj = Node_FindWidgetByResourceId(window, unlockRes(0x138));
+    obj = Node_FindWidgetByResourceId(window, unlockRes(312));
     g_unlockGatedListScreen->item = obj;
-    ((ListScreenItem *)obj)->alpha = 0xF;
+    ((ListScreenItem *)obj)->alpha = 15;
 
     g_unlockGatedListScreen->scrollDelay = 3;
     g_unlockGatedListScreen->nextScreen = -1;

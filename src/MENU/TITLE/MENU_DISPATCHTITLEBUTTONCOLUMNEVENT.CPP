@@ -20,7 +20,7 @@ s32 Menu_DispatchTitleButtonOffsetEvent(void *widget, s32 eventId, s32 eventData
     s32 table_kind;
 
     if (g_titleButtonEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_titleButtonEventHandlers;
         offset = 0;
         do {
@@ -32,7 +32,7 @@ s32 Menu_DispatchTitleButtonOffsetEvent(void *widget, s32 eventId, s32 eventData
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
@@ -66,7 +66,7 @@ s32 Menu_DispatchTitleButtonColumnEvent(void *widget, s32 eventId, s32 eventData
     s32 table_kind;
 
     if (g_titleButtonColumnEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_titleButtonColumnEventHandlers;
         index = 0;
         do {

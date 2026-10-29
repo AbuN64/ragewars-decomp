@@ -24,9 +24,9 @@ extern TextBoundsFont g_menuFontStyles[];
 static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     s32 style = 0;
     switch ((u32)text->flags & 0x3FE0) {
-    case 0x20: style = 0; break;
-    case 0x40: style = 1; break;
-    case 0x80: style = 2; break;
+    case 32: style = 0; break;
+    case 64: style = 1; break;
+    case 128: style = 2; break;
     case 0x100: style = 3; break;
     case 0x200: style = 4; break;
     case 0x400: style = 5; break;

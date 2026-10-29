@@ -197,7 +197,7 @@ void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width,
     if ((g_combineRenderSwitches.z == 0) || (g_combineRenderSwitches.y == 0)) {
         g_combineTexturedRectangleState = 0;
         g_combinePipelineSyncPending = 0;
-        Combine_SetRenderMode(0xC);
+        Combine_SetRenderMode(12);
         Combine_SetCombineMode(5);
         if (g_combineTextureTileMode != 7) {
             g_combineTextureTileMode = 7;
@@ -205,8 +205,8 @@ void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width,
             rectangleEmit(0xE3000C00, 0);
 
         }
-        if (g_combineTextureRenderMode != 0xE) {
-            g_combineTextureRenderMode = 0xE;
+        if (g_combineTextureRenderMode != 14) {
+            g_combineTextureRenderMode = 14;
             rectangleSync();
             rectangleEmit(0xD7000000, 0x80008000);
 
@@ -217,23 +217,23 @@ void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width,
         }
     } else if (g_combineRenderSwitches.x == 0) {
         g_combinePipelineSyncPending = 0;
-        Combine_SetRenderMode(0xC);
-        defaultMode = 0xD;
+        Combine_SetRenderMode(12);
+        defaultMode = 13;
         textureRenderMode = defaultMode;
         if (g_combineTexturingEnabled == 0) {
-            textureRenderMode = 0xE;
+            textureRenderMode = 14;
         }
         if (textureRenderMode != g_combineTextureRenderMode) {
             g_combineTextureRenderMode = textureRenderMode;
             rectangleSync();
             if (textureRenderMode == defaultMode) rectangleEmit(0xD7000002, 0x80008000);
-            else if (textureRenderMode == 0xE) rectangleEmit(0xD7000000, 0x80008000);
+            else if (textureRenderMode == 14) rectangleEmit(0xD7000000, 0x80008000);
         }
         if (color != g_combineRectangleColor) {
             g_combineRectangleColor = color;
-            packedRgbColor = (((u32) color >> 0x10) << 0x18) | ((color & 0xFF00) << 8) | ((color & 0xFF) << 8);
+            packedRgbColor = (((u32) color >> 16) << 24) | ((color & 0xFF00) << 8) | ((color & 0xFF) << 8);
             rectangleEmit(0xFB000000, packedRgbColor);
-            rectangleEmit(0xFA000000, packedRgbColor | ((u32)color >> 0x18));
+            rectangleEmit(0xFA000000, packedRgbColor | ((u32)color >> 24));
         }
         if (g_combineTextureTileMode != 7) {
             g_combineTextureTileMode = 7;
@@ -248,7 +248,7 @@ void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width,
         Combine_SetCombineMode(mode);
         left = (s32) rectangleX;
         top = (s32) rectangleY;
-        g_combineTexturedRectangleState = 0x13;
+        g_combineTexturedRectangleState = 19;
         right = (s32) ((rectangleX + rectangleWidth) - g_textureRectangleInclusivePixelOffset);
         bottom = (s32) ((rectangleY + rectangleHeight) - g_textureRectangleInclusivePixelOffset);
         if (right < left) {

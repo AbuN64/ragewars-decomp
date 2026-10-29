@@ -21,7 +21,7 @@ s32 Menu_DispatchSettingsColumnEvent(void *eventObject, s32 eventId, s32 eventPa
     s32 table_kind;
 
     if (g_settingsColumnEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_settingsColumnEventHandlers;
         index = 0;
         do {

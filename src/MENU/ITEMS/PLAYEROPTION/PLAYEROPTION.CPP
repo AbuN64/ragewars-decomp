@@ -108,7 +108,7 @@ s32 Items_AdjustPackedGameOption(void *first, void *second) {
     u16 *option = &g_gamePackedOptions;
     u8 limited;
 
-    *option = Menu_AdjustValue(second, *option, 0x10, 0, 0x100, 0);
+    *option = Menu_AdjustValue(second, *option, 16, 0, 0x100, 0);
     limited = 0xFF;
     if (*option < 0xFF) {
         limited = ((u8 *) option)[1];
@@ -123,7 +123,7 @@ s32 Items_AdjustPlayerOption79(void *first, struct PlayerSettingsTextHolder *hol
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option79 = Menu_AdjustValue(holder, settings->option79, 8, 8, 0xF8, 0);
+    settings->option79 = Menu_AdjustValue(holder, settings->option79, 8, 8, 248, 0);
     return 0;
 }
 
@@ -184,7 +184,7 @@ s32 Items_AdjustPlayerOption7A(void *first, struct PlayerSettingsTextHolder *hol
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option7A = Menu_AdjustValue(holder, settings->option7A, 8, 8, 0xF8, 0);
+    settings->option7A = Menu_AdjustValue(holder, settings->option7A, 8, 8, 248, 0);
     return 0;
 }
 

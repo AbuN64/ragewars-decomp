@@ -65,13 +65,13 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
         if (g_optionsShortcutScreen->choice == 0) {
             Frontend_RequestScreenMode(0);
             Widget_SetWidgetFlag08(item, 1);
-            Track_RequestTrackByKey(g_selectedLevelId + 0x259);
+            Track_RequestTrackByKey(g_selectedLevelId + 601);
             g_cinemaSequenceState->resourceHandle = -1;
             g_cinemaSequenceState->motionIndex = state;
         } else {
             MarkMenuEventHandled();
             if (g_optionsShortcutScreen->arena == 0 && SoundElement_GetMusicPlaybackEnabled() != 0) {
-                SoundElement_SetMusicPlaybackEnabled(Graphu64_NextRandom() % 4 + 0x38);
+                SoundElement_SetMusicPlaybackEnabled(Graphu64_NextRandom() % 4 + 56);
             } else {
                 SoundElement_SetMusicPlaybackEnabled(g_optionsShortcutScreen->arena);
             }

@@ -72,8 +72,8 @@ void Track_DrawLetterboxBands(void) {
     height = height * fade;
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
-    Geometry_SetModePreset(0x13);
-    Geometry_SetCombineMode(0x19);
+    Geometry_SetModePreset(19);
+    Geometry_SetCombineMode(25);
     gDPSetPrimColor(g_displayListCursor++, 255, 255, 0, 0, 0, 255);
     gDPFillRectangle(g_displayListCursor++, 0, 0, MENU_CLAMP_PIXEL(g_hudReferenceViewportWidth), MENU_CLAMP_PIXEL((s32)height));
     gDPFillRectangle(g_displayListCursor++, 0, (u32)MENU_CLAMP_HEIGHT((f32)g_hudReferenceViewportHeight - height), MENU_CLAMP_PIXEL(g_hudReferenceViewportWidth), MENU_CLAMP_PIXEL(g_hudReferenceViewportHeight));

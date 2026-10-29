@@ -17,11 +17,11 @@ s32 Menu_HandleEuxExtraOptionsChoice(void) {
     } else {
         message = Menu_GetFocusedElementId();
         switch (message) {
-        case 0x3BA:
+        case 954:
             SmpSlider_SetTransitionMode(g_extraOptionsScreen->dialog, 2);
             Menu_ApplyExtraOptionFlags();
             break;
-        case 0x3B2:
+        case 946:
             Menu_OpenOptionsKeypad();
             break;
         }
@@ -33,7 +33,7 @@ s32 Menu_HandleEuxExtraOptionsChoice(void) {
 /* 80408AC4_23.CPP */
 #if defined(VERSION_DE)
 #if defined(VERSION_DE)
-enum { menu_id_3ac = 0x3A6, menu_id_3b6 = 0x3B0 };
+enum { menu_id_3ac = 934, menu_id_3b6 = 944 };
 #endif
 
 /* After MarkMenuEventHandled, opens screen g_extraOptionsScreen through Menu_ShowExtraOptionsPanel while its word at 0x34 is

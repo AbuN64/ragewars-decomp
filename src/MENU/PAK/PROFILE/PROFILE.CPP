@@ -258,27 +258,27 @@ void Pak_SelectPromptKindNinePending(void) {
 }
 
 void Pak_SelectPromptKindTen(void) {
-    g_controllerPakPromptKind = 0xA;
+    g_controllerPakPromptKind = 10;
 }
 
 void Pak_SelectPromptKindEleven(void) {
-    g_controllerPakPromptKind = 0xB;
+    g_controllerPakPromptKind = 11;
 }
 
 void Pak_SelectPromptKindTwelve(void) {
-    g_controllerPakPromptKind = 0xC;
+    g_controllerPakPromptKind = 12;
 }
 
 void Pak_SelectPromptKindThirteen(void) {
-    g_controllerPakPromptKind = 0xD;
+    g_controllerPakPromptKind = 13;
 }
 
 void Pak_SelectPromptKindFourteen(void) {
-    g_controllerPakPromptKind = 0xE;
+    g_controllerPakPromptKind = 14;
 }
 
 void Pak_SelectPromptKindFifteen(void) {
-    g_controllerPakPromptKind = 0xF;
+    g_controllerPakPromptKind = 15;
 }
 
 s32 Pak_SelectPromptActionHeading(struct PakActionLabelView *field) {

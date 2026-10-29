@@ -46,11 +46,11 @@ extern void SmXlate_SwitchScreen(s32);
 void Menu_ShowExtraOptionsPanel(void) {
     Widget_SetWidgetFlag08(g_extraOptionsScreen->pad, 0);
 #if defined(VERSION_DE)
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3A5), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 933), 1);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3AB), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 939), 1);
 #elif defined(VERSION_EU_X)
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3AF), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 943), 1);
 #endif
     g_extraOptionsScreen->open = 1;
 }
@@ -64,11 +64,11 @@ void Menu_ScrollOptionsKeypad(void) {
     g_extraOptionsScreen->mode = currentMode;
     if (currentMode <= 0) {
 #if defined(VERSION_DE)
-        textRow = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3B2);
+        textRow = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 946);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        textRow = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3B8);
+        textRow = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 952);
 #elif defined(VERSION_EU_X)
-        textRow = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 0x3BC);
+        textRow = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, 956);
 #endif
         scrollingPad = g_extraOptionsScreen->pad;
         scrollingPad->y = (u16) (scrollingPad->y - 1);

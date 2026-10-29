@@ -9,11 +9,11 @@ s32 Menu_HandleExtraOptionsChoice(void) {
         Menu_ShowExtraOptionsPanel();
     } else {
         switch (Menu_GetFocusedElementId()) {
-        case 0x3AC:
+        case 940:
             SmpSlider_SetTransitionMode(g_extraOptionsScreen->dialog, 2);
             Menu_ApplyExtraOptionFlags();
             break;
-        case 0x3B6:
+        case 950:
             Menu_OpenOptionsKeypad();
             break;
         }

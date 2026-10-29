@@ -127,7 +127,7 @@ void Track_RequestTrackByIds(struct SharedTrackObject *owner, TrackRequestIds *o
         if (key == 0) {
             table = 0;
         } else {
-            table = Cache_RequestResource(0, key, key, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
+            table = Cache_RequestResource(0, key, key, size, 51, 0, 0, g_cinemaDirectoryText, 1);
         }
         n = *g_trackResourceDirectory - 1;
         entry = (TrackOverlayIdEntry *)(*table + 2);
@@ -161,7 +161,7 @@ s32 Track_RequestTrackByKey(s32 key) {
     if (loaded == 0) {
         table = 0;
     } else {
-        table = Cache_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
+        table = Cache_RequestResource(0, loaded, loaded, size, 51, 0, 0, g_cinemaDirectoryText, 1);
     }
     i = 0;
     entries = (TrackResourceEntry *)(*table + 2);
@@ -196,7 +196,7 @@ void Track_RequestTrackByName(char *name) {
         if (loaded == 0) {
             table = 0;
         } else {
-            table = Cache_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
+            table = Cache_RequestResource(0, loaded, loaded, size, 51, 0, 0, g_cinemaDirectoryText, 1);
         }
         i = 0;
         entries = (TrackOverlayNamedEntry *)(*table + 2);

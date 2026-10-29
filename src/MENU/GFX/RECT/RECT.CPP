@@ -52,15 +52,15 @@ void Rect_DrawRect(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color) {
 void Rect_DrawGradientRectangle(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8) {
     g_combineTexturedRectangleState = 0;
     g_combinePipelineSyncPending = 0;
-    Combine_SetRenderMode(0xC);
+    Combine_SetRenderMode(12);
     Combine_SetCombineMode(5);
     if (g_combineTextureTileMode != 7) {
         g_combineTextureTileMode = 7;
         sync();
         emit(0xE3000C00, 0);
     }
-    if (g_combineTextureRenderMode != 0xE) {
-        g_combineTextureRenderMode = 0xE;
+    if (g_combineTextureRenderMode != 14) {
+        g_combineTextureRenderMode = 14;
         sync();
         emit(0xD7000000, 0x80008000);
     }

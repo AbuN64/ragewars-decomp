@@ -77,7 +77,7 @@ void Track_BuildWeightedSpline(s32 count, CVector3 *points, f32 *weights, Spline
     d2 = Cache_AllocateMemory(count * 4);
     nodes = spline->nodes;
     length = 0.0f;
-    spline->nodeSize = 0x24;
+    spline->nodeSize = 36;
     spline->count = count;
     if (count == 1) {
         spline->nodes[0].p.x = points->x;

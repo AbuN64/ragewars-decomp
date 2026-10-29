@@ -59,13 +59,13 @@ static inline void Note_EncodeUppercaseFilename(u8 *dst, u8 *src, s32 n) {
 
     for (i = 0; i < n; i++) {
         src[i] = XPlus_UppercaseCharacter(src[i]);
-        for (j = 0; j < 0x42; j++) {
+        for (j = 0; j < 66; j++) {
             if (src[i] == g_controllerPakFilenameAlphabet[j]) {
                 dst[i] = j;
                 break;
             }
         }
-        if (j == 0x42) {
+        if (j == 66) {
             dst[i] = 0;
         }
     }

@@ -31,11 +31,11 @@ void Note_AllocateScratchBuffer(void) {
     struct CacheResourceBlockView *block;
     s32 buffer;
 
-    block = Cache_AllocateResource(0, 0x810, 0x23, &g_pakPakStateNoteName);
+    block = Cache_AllocateResource(0, 2064, 35, &g_pakPakStateNoteName);
     buffer = block->first;
     g_controllerPakProbeResource = (s32 *)block;
     g_controllerPakNoteLists = buffer;
-    XPlus_FillMemory((void *)buffer, 0, 0x810);
+    XPlus_FillMemory((void *)buffer, 0, 2064);
     g_controllerPakProbeActive = 1;
 }
 

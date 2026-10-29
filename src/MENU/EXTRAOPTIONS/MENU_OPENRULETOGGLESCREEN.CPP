@@ -36,34 +36,34 @@ extern void SmpButton_SelectListEntry(void *, s32);
 
 #if defined(VERSION_DE)
 #define ID(n) ((n) - 6)
-#define COLOR 0x86
+#define COLOR 134
 #elif defined(VERSION_EU_X)
 /* EU-X numbers the same widgets in a different order. */
-#define ID(n) ((n) == 0x3A8 ? 0x3AC : (n) == 0x3A9 ? 0x3AD : (n) == 0x3AA ? 0x3AE : (n) == 0x3AC ? 0x3BA : \
-               (n) == 0x3AD ? 0x3B6 : (n) == 0x3AE ? 0x3B7 : (n) == 0x3AF ? 0x3B8 : (n) == 0x3B0 ? 0x3B9 : \
-               (n) == 0x3B1 ? 0x3B3 : (n) == 0x3B2 ? 0x3B4 : (n) == 0x3B4 ? 0x3B0 : (n) == 0x3B5 ? 0x3B1 : \
-               (n) == 0x3B6 ? 0x3B2 : 0x3BB)
-#define COLOR 0x86
+#define ID(n) ((n) == 936 ? 940 : (n) == 937 ? 941 : (n) == 938 ? 942 : (n) == 940 ? 954 : \
+               (n) == 941 ? 950 : (n) == 942 ? 951 : (n) == 943 ? 952 : (n) == 944 ? 953 : \
+               (n) == 945 ? 947 : (n) == 946 ? 948 : (n) == 948 ? 944 : (n) == 949 ? 945 : \
+               (n) == 950 ? 946 : 955)
+#define COLOR 134
 #else
 #define ID(n) (n)
-#define COLOR 0x88
+#define COLOR 136
 #endif
 s32 Menu_OpenRuleToggleScreen(void *window) {
     struct OptionsOpenScreen *screen;
     void *button;
     SETTINGS_DECL
 
-    screen = (struct OptionsOpenScreen *) Cache_AllocateMemory(0x3C);
+    screen = (struct OptionsOpenScreen *) Cache_AllocateMemory(60);
     g_extraOptionsScreen = screen;
     screen->window = window;
     screen->full = 0;
     /* the hub's item type carries no color; this unit's options view names the byte at +0x1A */
-    ((OptionsOpenItem *) Node_FindWidgetByResourceId(window, ID(0x3A8)))->color = COLOR;
-    g_extraOptionsScreen->title = SmpFade_CreateFadeWidget(ID(0x3A8), ID(0x3A9));
-    SmpButton_WrapButtonWidget(ID(0x3B6));
+    ((OptionsOpenItem *) Node_FindWidgetByResourceId(window, ID(936)))->color = COLOR;
+    g_extraOptionsScreen->title = SmpFade_CreateFadeWidget(ID(936), ID(937));
+    SmpButton_WrapButtonWidget(ID(950));
 
     SETTINGS_INIT
-    SmpButton_AppendListText(g_extraOptionsScreen->buttons[0] = SmpButton_CreateListWidget(ID(0x3B4), ID(0x3B5)), LABEL0);
+    SmpButton_AppendListText(g_extraOptionsScreen->buttons[0] = SmpButton_CreateListWidget(ID(948), ID(949)), LABEL0);
     SmpButton_AppendListText(g_extraOptionsScreen->buttons[0], LABEL1);
     if (SETTINGS_FLAGS & 0x8000000) {
         SmpButton_SelectListEntry(g_extraOptionsScreen->buttons[0], 1);
@@ -72,7 +72,7 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
     }
 
     SETTINGS_INIT
-    SmpButton_AppendListText(g_extraOptionsScreen->buttons[1] = SmpButton_CreateListWidget(ID(0x3B1), ID(0x3B2)), LABEL0);
+    SmpButton_AppendListText(g_extraOptionsScreen->buttons[1] = SmpButton_CreateListWidget(ID(945), ID(946)), LABEL0);
     SmpButton_AppendListText(g_extraOptionsScreen->buttons[1], LABEL1);
     if (SETTINGS_FLAGS & 0x10000000) {
         SmpButton_SelectListEntry(g_extraOptionsScreen->buttons[1], 1);
@@ -81,7 +81,7 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
     }
 
     SETTINGS_INIT
-    SmpButton_AppendListText(g_extraOptionsScreen->buttons[2] = SmpButton_CreateListWidget(ID(0x3AD), ID(0x3AE)), LABEL0);
+    SmpButton_AppendListText(g_extraOptionsScreen->buttons[2] = SmpButton_CreateListWidget(ID(941), ID(942)), LABEL0);
     SmpButton_AppendListText(g_extraOptionsScreen->buttons[2], LABEL1);
     if (SETTINGS_FLAGS & 0x8) {
         SmpButton_SelectListEntry(g_extraOptionsScreen->buttons[2], 1);
@@ -90,7 +90,7 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
     }
 
     SETTINGS_INIT
-    SmpButton_AppendListText(g_extraOptionsScreen->buttons[3] = SmpButton_CreateListWidget(ID(0x3AF), ID(0x3B0)), LABEL0);
+    SmpButton_AppendListText(g_extraOptionsScreen->buttons[3] = SmpButton_CreateListWidget(ID(943), ID(944)), LABEL0);
     SmpButton_AppendListText(g_extraOptionsScreen->buttons[3], LABEL1);
     if (SETTINGS_FLAGS & 0x20000000) {
         SmpButton_SelectListEntry(g_extraOptionsScreen->buttons[3], 1);
@@ -98,13 +98,13 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
         SmpButton_SelectListEntry(g_extraOptionsScreen->buttons[3], 0);
     }
 
-    SmpButton_WrapButtonWidget(ID(0x3AC));
-    g_extraOptionsScreen->cursor = (OptionsOpenItem *) Node_FindWidgetByResourceId(window, ID(0x3B7));
+    SmpButton_WrapButtonWidget(ID(940));
+    g_extraOptionsScreen->cursor = (OptionsOpenItem *) Node_FindWidgetByResourceId(window, ID(951));
     g_extraOptionsScreen->length = 0;
     g_extraOptionsScreen->mode = 0;
     g_extraOptionsScreen->open = 1;
     /* the hub publishes the list builder as returning the word naming the list; the member stores it */
-    g_extraOptionsScreen->list = (void *) SmpFlicker_CreateFlickerWidget(ID(0x3AA), 0x6E);
+    g_extraOptionsScreen->list = (void *) SmpFlicker_CreateFlickerWidget(ID(938), 110);
     Menu_RefreshExtraOptionLocks();
     return 0;
 }

@@ -24,7 +24,7 @@ s32 Menu_DispatchGermanMatchMenuEvent(void *eventObject, s32 eventId, s32 eventP
     s32 table_kind;
 
     if (g_germanMatchMenuEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_germanMatchMenuEventHandlers;
         index = 0;
         do {

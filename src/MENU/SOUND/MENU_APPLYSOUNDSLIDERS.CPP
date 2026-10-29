@@ -74,7 +74,7 @@ s32 Menu_DispatchSoundOptionsEvent(void *eventTarget, s32 event, s32 itemId, s32
     MenuActorInputView *actor;
 
     if (g_soundOptionsEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_soundOptionsEventHandlers;
         index = 0;
         do {
@@ -98,30 +98,30 @@ s32 Menu_CreateSoundSliders(void) {
     void *slider;
     g_soundOptionSliders = Cache_AllocateMemory(8);
 #if defined(VERSION_DE)
-    slider = SmpSlider_CreateSliderWidget(0x1D1, 0x1D1 + 1, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(465, 465 + 1, 0xFF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    slider = SmpSlider_CreateSliderWidget(0x1D5, 0x1D5 + 1, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(469, 469 + 1, 0xFF);
 #elif defined(VERSION_EU_X)
-    slider = SmpSlider_CreateSliderWidget(0x1D8, 0x1D8 + 1, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(472, 472 + 1, 0xFF);
 #endif
     options = g_gameSettings.volume;
     g_soundOptionSliders[0] = slider;
     SmpSlider_SetSliderItem(slider, options[0]);
 #if defined(VERSION_DE)
-    slider = SmpSlider_CreateSliderWidget(0x1D1 + 2, 0x1D1 + 3, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(465 + 2, 465 + 3, 0xFF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    slider = SmpSlider_CreateSliderWidget(0x1D5 + 2, 0x1D5 + 3, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(469 + 2, 469 + 3, 0xFF);
 #elif defined(VERSION_EU_X)
-    slider = SmpSlider_CreateSliderWidget(0x1D8 + 2, 0x1D8 + 3, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(472 + 2, 472 + 3, 0xFF);
 #endif
     g_soundOptionSliders[1] = slider;
     SmpSlider_SetSliderItem(slider, options[1]);
 #if defined(VERSION_DE)
-    SmpButton_WrapButtonWidget(0x1CF);
+    SmpButton_WrapButtonWidget(463);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    SmpButton_WrapButtonWidget(0x1D3);
+    SmpButton_WrapButtonWidget(467);
 #elif defined(VERSION_EU_X)
-    SmpButton_WrapButtonWidget(0x1DC);
+    SmpButton_WrapButtonWidget(476);
 #endif
     return 0;
 }
@@ -145,12 +145,12 @@ int Menu_ApplySoundSliders(void) {
  int sound;
  value=SmpSlider_GetSliderItem(g_soundOptionSliders[1]);
  options=g_soundEffectsVolumeOption;
- if(value!=options[0]){options[0]=value;SoundElement_PlayFlatSound(0x460);}
+ if(value!=options[0]){options[0]=value;SoundElement_PlayFlatSound(1120);}
  value=SmpSlider_GetSliderItem(g_soundOptionSliders[0]);
  if(value!=options[-1]){
   options[-1]=value;
   if((unsigned char)value<5) sound=0;
-  else {if(SoundElement_GetMusicPlaybackEnabled()!=0)goto end; sound=0x34;}
+  else {if(SoundElement_GetMusicPlaybackEnabled()!=0)goto end; sound=52;}
   SoundElement_SetMusicPlaybackEnabled(sound);
  }
  end: return 0;

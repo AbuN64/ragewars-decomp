@@ -41,8 +41,8 @@ typedef struct PoolSlot {
 
 typedef struct SlotPool {
     PoolSlot slots[128];                /* +0x0 */
-    char freeList[0x14];                       /* +0xFC00 */
-    char liveList[0x14];                       /* +0xFC14 */
+    char freeList[20];                       /* +0xFC00 */
+    char liveList[20];                       /* +0xFC14 */
     char groups[3][0x14];                      /* +0xFC28 */
     s32 owner;                                 /* +0xFC64 */
     s32 count;                                 /* +0xFC68 */
@@ -56,7 +56,7 @@ void Batch_InitEntryBatch(EntryBlock *batch, s32 *entries, s32 count) {
     batch->entries = entries;
     batch->half = count / 2;
     for (i = 0; i < count; i++) {
-        guMtxIdent(&entries[i * 0x10]);
+        guMtxIdent(&entries[i * 16]);
     }
     Map_ResetFramePool(batch);
 }
@@ -76,13 +76,13 @@ void Batch_InitSlotPool(SlotPool *pool, s32 owner) {
         pool->slots[i].word1DC = 0;
         pool->slots[i].word1E4 = 0;
     }
-    List_InitializeIntrusive(pool->freeList, 0x1E8, 0x1EC);
+    List_InitializeIntrusive(pool->freeList, 488, 492);
     for (i = 0; i < 128; i++) {
         List_AppendIntrusive(pool->freeList, &pool->slots[i]);
     }
-    List_InitializeIntrusive(pool->liveList, 0x1F0, 0x1F4);
+    List_InitializeIntrusive(pool->liveList, 496, 500);
     for (i = 0; i < 3; i++) {
-        List_InitializeIntrusive(pool->groups[i], 0x1E8, 0x1EC);
+        List_InitializeIntrusive(pool->groups[i], 488, 492);
     }
     Playerai_InitializeCompactAnimationState(&g_particleActorDefinition);
     for (corner = 0; corner < 4; corner++) {

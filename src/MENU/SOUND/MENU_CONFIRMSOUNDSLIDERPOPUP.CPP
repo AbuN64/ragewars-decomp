@@ -76,13 +76,13 @@
 s32 Menu_ConfirmSoundSliderPopup(void) {
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (Menu_GetFocusedElementId() == 0x1CF) {
+    if (Menu_GetFocusedElementId() == 463) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (Menu_GetFocusedElementId() == 0x1D3) {
+    if (Menu_GetFocusedElementId() == 467) {
 #elif defined(VERSION_EU_X)
-    if (Menu_GetFocusedElementId() == 0x1DC) {
+    if (Menu_GetFocusedElementId() == 476) {
 #endif
-        Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+        Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 22 ? -1 : 11);
         Menu_ReturnToPreviousScreen();
     }
     return 0;
@@ -90,7 +90,7 @@ s32 Menu_ConfirmSoundSliderPopup(void) {
 
 s32 Menu_CancelSoundSliderPopup(void) {
     MarkMenuEventHandled();
-    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 22 ? -1 : 11);
     Menu_ReturnToPreviousScreen();
     return 0;
 }

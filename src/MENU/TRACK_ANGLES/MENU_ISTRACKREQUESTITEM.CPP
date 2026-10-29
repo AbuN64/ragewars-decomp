@@ -45,7 +45,7 @@ int Menu_RequestTrackBundle(void) {
     if (res == 0) {
         return 0;
     }
-    return Cache_RequestResource(0, res, res, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
+    return Cache_RequestResource(0, res, res, size, 51, 0, 0, g_cinemaDirectoryText, 1);
 }
 
 f32 Menu_BlendCubic(f32 from, f32 to, f32 t) {

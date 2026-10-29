@@ -65,12 +65,12 @@ void Combine_ConfigurePrimitiveRenderFlags(s32 flags) {
             cycle2 = 0x104240;
             break;
         case 2:
-            cycle1 = 0x442230;
+            cycle1 = 4465200;
             cycle2 = 0x112230;
             break;
         case 3:
             cycle1 = 0x404A50;
-            cycle2 = 0x104A50;
+            cycle2 = 1067600;
             break;
     }
     g_combineRenderStateEnabled = 1;

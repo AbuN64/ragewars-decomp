@@ -21,12 +21,12 @@ s32 Menu_FormatRightAlignedName(RightAlignedNameLabelView *labelWidget) {
     } else {
         last = g_pakDisplayNameLastByte;
         labelWidget->text = (char **)g_pakPreviewNameLabelBuffer;
-        if (*last == 0x20) {
+        if (*last == 32) {
             last--;
             for (;;) {
                 if (n != 0) {
                     n--;
-                    if (*last-- == 0x20) {
+                    if (*last-- == 32) {
                         continue;
                     }
                 }
@@ -35,7 +35,7 @@ s32 Menu_FormatRightAlignedName(RightAlignedNameLabelView *labelWidget) {
         }
         dst = (char *)*labelWidget->text;
         dst += 0xC;
-        blank = 0x20;
+        blank = 32;
         fill = dst + 7;
         for (i = 7; i >= 0; i--) {
             *fill-- = blank;

@@ -71,15 +71,15 @@ void *Menu_CreateMenuFromParameters(struct MenuCreationOwnerView *owner, struct 
         b = params->b;
         c = params->c;
         d = params->d;
-        size = list->count * 40 + 0x1D8;
+        size = list->count * 40 + 472;
         for (i = 0; i < list->count; i++) {
             s32 extra = 0;
             if (list->entries[i].type == 3) {
-                extra = 0x480;
+                extra = 1152;
             }
             size += extra;
         }
-        block = Cache_AllocateResource(0, size, 0x3B, g_menuText);
+        block = Cache_AllocateResource(0, size, 59, g_menuText);
         if (block == 0) {
             return 0;
         }

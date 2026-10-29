@@ -29,7 +29,7 @@ s32 Menu_DispatchTitleButtonEvent(void *widget, s32 eventId, s32 eventData0, s32
     MenuActorInputView *actor;
 
     if (g_titleButtonEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_titleButtonEventHandlers;
         index = 0;
         do {

@@ -39,10 +39,10 @@ s32 Status_FormatRightAlignedPreviewName(struct Field *item) {
         item->text = &g_pakPreviewNameText;
 #endif
         nameTail = &g_controllerPakPreviewNameLastCharacter;
-        while (*nameTail-- == 0x20 && nameLength != 0) nameLength--;
+        while (*nameTail-- == 32 && nameLength != 0) nameLength--;
         outputCursor = RW_LOCALIZED_TEXT(*item->text, item->text, item->text, g_languageIndex);
         outputCursor = outputCursor + (Menu_CountLineChars(item) - 8);
-        space = 0x20;
+        space = 32;
         clearIndex = 7;
         clearCursor = outputCursor + 7;
         do {

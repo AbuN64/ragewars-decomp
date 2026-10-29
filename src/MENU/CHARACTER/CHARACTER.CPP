@@ -26,13 +26,13 @@ s32 CCharacterSelection_OpenCharacterSelectionScreen(s32 screen)
   SlotSelectionPlayerConfig *config;
   SlotSelectionWidget *item;
   s32 rest;
-  g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
+  g_characterSelectionMenu = Cache_AllocateMemory(4952);
   g_characterSelectionMenu->screen = (void *) screen;
   g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode(screen, 4);
-  SmpOverlay_ShowSlotById(screen, 0, 0x7A);
-  SmpOverlay_ShowSlotById(screen, 1, 0x7A);
-  SmpOverlay_ShowSlotById(screen, 2, 0x7A);
-  SmpOverlay_ShowSlotById(screen, 3, 0x7A);
+  SmpOverlay_ShowSlotById(screen, 0, 122);
+  SmpOverlay_ShowSlotById(screen, 1, 122);
+  SmpOverlay_ShowSlotById(screen, 2, 122);
+  SmpOverlay_ShowSlotById(screen, 3, 122);
   Random_SetSelectedStage(0, 0);
   g_characterSelectionMenu->clock = 0;
   scale.x = 1.0f;
@@ -51,11 +51,11 @@ s32 CCharacterSelection_OpenCharacterSelectionScreen(s32 screen)
     scale.x = g_characterPortraitRecords[row].scale[i];
     scale.y = g_characterPortraitRecords[row].scale[i];
     scale.z = g_characterPortraitRecords[row].scale[i];
-    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
-    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 0x6E;
+    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 911, 75, 24000, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
+    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 110;
     for (j = 0; j < 3; j++)
     {
-      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 0x50;
+      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 80;
       Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].options[j].id), 1);
     }
 
@@ -63,26 +63,26 @@ s32 CCharacterSelection_OpenCharacterSelectionScreen(s32 screen)
 
   g_characterSelectionMenu->phase = 1;
   g_characterSelectionMenu->timer = 4;
-  g_characterSelectionMenu->header = Node_FindWidgetByResourceId((void *) screen, 0xAC);
+  g_characterSelectionMenu->header = Node_FindWidgetByResourceId((void *) screen, 172);
   g_characterSelectionMenu->header->x -= g_characterSelectionMenu->header->w;
   g_characterSelectionMenu->headerStep = g_characterSelectionMenu->header->w / 4;
   rest = g_characterSelectionMenu->header->w - (g_characterSelectionMenu->headerStep * 4);
   g_characterSelectionMenu->header->x += rest;
-  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId((void *) screen, 0x93);
+  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId((void *) screen, 147);
   g_characterSelectionMenu->footer->x += g_characterSelectionMenu->footer->w;
   g_characterSelectionMenu->footerStep = g_characterSelectionMenu->footer->w / 4;
   rest = g_characterSelectionMenu->footer->w - (g_characterSelectionMenu->footerStep * 4);
   g_characterSelectionMenu->footer->x -= rest;
-  Node_FindWidgetByResourceId((void *) screen, 0x76)->alpha = 0x6E;
-  Node_FindWidgetByResourceId((void *) screen, 0x79)->alpha = 0x19;
-  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(0x74, 0xFF);
-  item = Node_FindWidgetByResourceId((void *) screen, 0x74);
+  Node_FindWidgetByResourceId((void *) screen, 118)->alpha = 110;
+  Node_FindWidgetByResourceId((void *) screen, 121)->alpha = 25;
+  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(116, 0xFF);
+  item = Node_FindWidgetByResourceId((void *) screen, 116);
   g_characterSelectionMenu->promptItem = item;
   Widget_SetWidgetFlag08(item, 0);
-  g_characterSelectionMenu->pulse = Node_FindWidgetByResourceId((void *) screen, 0x7B);
+  g_characterSelectionMenu->pulse = Node_FindWidgetByResourceId((void *) screen, 123);
   Widget_SetWidgetFlag08(g_characterSelectionMenu->pulse, 0);
   g_characterSelectionMenu->pulse->alpha = 0;
-  g_characterSelectionMenu->pulseStep = 0x32;
+  g_characterSelectionMenu->pulseStep = 50;
   Menu_RefreshCharacterUnlocks();
   config = g_playerSettings;
   for (i = 0; i < 4; i++)
@@ -119,13 +119,13 @@ s32 Character_CreateSelectionMenuUs(void *screen)
   SlotSelectionPlayerConfig *config;
   SlotSelectionWidget *item;
   s32 rest;
-  g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
+  g_characterSelectionMenu = Cache_AllocateMemory(4952);
   g_characterSelectionMenu->screen = screen;
   g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode((s32) screen, 4);
-  SmpOverlay_ShowSlotById((s32) screen, 0, 0x7a);
-  SmpOverlay_ShowSlotById((s32) screen, 1, 0x7a);
-  SmpOverlay_ShowSlotById((s32) screen, 2, 0x7a);
-  SmpOverlay_ShowSlotById((s32) screen, 3, 0x7a);
+  SmpOverlay_ShowSlotById((s32) screen, 0, 122);
+  SmpOverlay_ShowSlotById((s32) screen, 1, 122);
+  SmpOverlay_ShowSlotById((s32) screen, 2, 122);
+  SmpOverlay_ShowSlotById((s32) screen, 3, 122);
   Random_SetSelectedStage(0, 0);
   g_characterSelectionMenu->clock = 0;
   scale.x = g_characterPreviewInitialScale;
@@ -144,11 +144,11 @@ s32 Character_CreateSelectionMenuUs(void *screen)
     scale.x = g_characterPortraitRecords[row].scale[i];
     scale.y = g_characterPortraitRecords[row].scale[i];
     scale.z = g_characterPortraitRecords[row].scale[i];
-    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
-    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 0x6E;
+    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 911, 75, 24000, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
+    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 110;
     for (j = 0; j < 3; j++)
     {
-      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 0x50;
+      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 80;
       Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].options[j].id), 1);
     }
 
@@ -156,26 +156,26 @@ s32 Character_CreateSelectionMenuUs(void *screen)
 
   g_characterSelectionMenu->phase = 1;
   g_characterSelectionMenu->timer = 4;
-  g_characterSelectionMenu->header = Node_FindWidgetByResourceId(screen, 0xac);
+  g_characterSelectionMenu->header = Node_FindWidgetByResourceId(screen, 172);
   g_characterSelectionMenu->header->x -= g_characterSelectionMenu->header->w;
   g_characterSelectionMenu->headerStep = g_characterSelectionMenu->header->w / 4;
   rest = g_characterSelectionMenu->header->w - (g_characterSelectionMenu->headerStep * 4);
   g_characterSelectionMenu->header->x += rest;
-  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId(screen, 0x93);
+  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId(screen, 147);
   g_characterSelectionMenu->footer->x += g_characterSelectionMenu->footer->w;
   g_characterSelectionMenu->footerStep = g_characterSelectionMenu->footer->w / 4;
   rest = g_characterSelectionMenu->footer->w - (g_characterSelectionMenu->footerStep * 4);
   g_characterSelectionMenu->footer->x -= rest;
-  Node_FindWidgetByResourceId(screen, 0x76)->alpha = 0x6E;
-  Node_FindWidgetByResourceId(screen, 0x79)->alpha = 0x19;
-  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(0x74, 0xFF);
-  item = Node_FindWidgetByResourceId(screen, 0x74);
+  Node_FindWidgetByResourceId(screen, 118)->alpha = 110;
+  Node_FindWidgetByResourceId(screen, 121)->alpha = 25;
+  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(116, 0xFF);
+  item = Node_FindWidgetByResourceId(screen, 116);
   g_characterSelectionMenu->promptItem = item;
   Widget_SetWidgetFlag08(item, 0);
-  g_characterSelectionMenu->pulse = Node_FindWidgetByResourceId(screen, 0x7b);
+  g_characterSelectionMenu->pulse = Node_FindWidgetByResourceId(screen, 123);
   Widget_SetWidgetFlag08(g_characterSelectionMenu->pulse, 0);
   g_characterSelectionMenu->pulse->alpha = 0;
-  g_characterSelectionMenu->pulseStep = 0x32;
+  g_characterSelectionMenu->pulseStep = 50;
   Menu_RefreshCharacterUnlocks();
   config = g_playerSettings;
   for (i = 0; i < 4; i++)
@@ -212,13 +212,13 @@ s32 Character_CreateSelectionMenuEuropean(void *screen)
   SlotSelectionPlayerConfig *config;
   SlotSelectionWidget *item;
   s32 rest;
-  g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
+  g_characterSelectionMenu = Cache_AllocateMemory(4952);
   g_characterSelectionMenu->screen = screen;
   g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode((s32) screen, 4);
-  SmpOverlay_ShowSlotById((s32) screen, 0, 0x7a);
-  SmpOverlay_ShowSlotById((s32) screen, 1, 0x7a);
-  SmpOverlay_ShowSlotById((s32) screen, 2, 0x7a);
-  SmpOverlay_ShowSlotById((s32) screen, 3, 0x7a);
+  SmpOverlay_ShowSlotById((s32) screen, 0, 122);
+  SmpOverlay_ShowSlotById((s32) screen, 1, 122);
+  SmpOverlay_ShowSlotById((s32) screen, 2, 122);
+  SmpOverlay_ShowSlotById((s32) screen, 3, 122);
   Random_SetSelectedStage(0, 0);
   g_characterSelectionMenu->clock = 0;
   scale.x = g_characterPreviewInitialScale;
@@ -237,11 +237,11 @@ s32 Character_CreateSelectionMenuEuropean(void *screen)
     scale.x = g_characterPortraitRecords[row].scale[i];
     scale.y = g_characterPortraitRecords[row].scale[i];
     scale.z = g_characterPortraitRecords[row].scale[i];
-    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
-    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 0x6E;
+    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 911, 75, 24000, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
+    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 110;
     for (j = 0; j < 3; j++)
     {
-      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 0x50;
+      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 80;
       Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].options[j].id), 1);
     }
 
@@ -249,26 +249,26 @@ s32 Character_CreateSelectionMenuEuropean(void *screen)
 
   g_characterSelectionMenu->phase = 1;
   g_characterSelectionMenu->timer = 4;
-  g_characterSelectionMenu->header = Node_FindWidgetByResourceId(screen, 0xac);
+  g_characterSelectionMenu->header = Node_FindWidgetByResourceId(screen, 172);
   g_characterSelectionMenu->header->x -= g_characterSelectionMenu->header->w;
   g_characterSelectionMenu->headerStep = g_characterSelectionMenu->header->w / 4;
   rest = g_characterSelectionMenu->header->w - (g_characterSelectionMenu->headerStep * 4);
   g_characterSelectionMenu->header->x += rest;
-  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId(screen, 0x93);
+  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId(screen, 147);
   g_characterSelectionMenu->footer->x += g_characterSelectionMenu->footer->w;
   g_characterSelectionMenu->footerStep = g_characterSelectionMenu->footer->w / 4;
   rest = g_characterSelectionMenu->footer->w - (g_characterSelectionMenu->footerStep * 4);
   g_characterSelectionMenu->footer->x -= rest;
-  Node_FindWidgetByResourceId(screen, 0x76)->alpha = 0x6E;
-  Node_FindWidgetByResourceId(screen, 0x79)->alpha = 0x19;
-  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(0x74, 0xFF);
-  item = Node_FindWidgetByResourceId(screen, 0x74);
+  Node_FindWidgetByResourceId(screen, 118)->alpha = 110;
+  Node_FindWidgetByResourceId(screen, 121)->alpha = 25;
+  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(116, 0xFF);
+  item = Node_FindWidgetByResourceId(screen, 116);
   g_characterSelectionMenu->promptItem = item;
   Widget_SetWidgetFlag08(item, 0);
-  g_characterSelectionMenu->pulse = Node_FindWidgetByResourceId(screen, 0x7b);
+  g_characterSelectionMenu->pulse = Node_FindWidgetByResourceId(screen, 123);
   Widget_SetWidgetFlag08(g_characterSelectionMenu->pulse, 0);
   g_characterSelectionMenu->pulse->alpha = 0;
-  g_characterSelectionMenu->pulseStep = 0x32;
+  g_characterSelectionMenu->pulseStep = 50;
   Menu_RefreshCharacterUnlocks();
   config = g_playerSettings;
   for (i = 0; i < 4; i++)
@@ -305,13 +305,13 @@ s32 Character_CreateSelectionMenuEuropeanX(void *screen)
   SlotSelectionPlayerConfig *config;
   SlotSelectionWidget *item;
   s32 rest;
-  g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
+  g_characterSelectionMenu = Cache_AllocateMemory(4952);
   g_characterSelectionMenu->screen = screen;
   g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode((s32) screen, 4);
-  SmpOverlay_ShowSlotById((s32) screen, 0, 0x7e);
-  SmpOverlay_ShowSlotById((s32) screen, 1, 0x7e);
-  SmpOverlay_ShowSlotById((s32) screen, 2, 0x7e);
-  SmpOverlay_ShowSlotById((s32) screen, 3, 0x7e);
+  SmpOverlay_ShowSlotById((s32) screen, 0, 126);
+  SmpOverlay_ShowSlotById((s32) screen, 1, 126);
+  SmpOverlay_ShowSlotById((s32) screen, 2, 126);
+  SmpOverlay_ShowSlotById((s32) screen, 3, 126);
   Random_SetSelectedStage(0, 0);
   g_characterSelectionMenu->clock = 0;
   scale.x = g_characterPreviewInitialScale;
@@ -330,11 +330,11 @@ s32 Character_CreateSelectionMenuEuropeanX(void *screen)
     scale.x = g_characterPortraitRecords[row].scale[i];
     scale.y = g_characterPortraitRecords[row].scale[i];
     scale.z = g_characterPortraitRecords[row].scale[i];
-    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
-    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 0x6E;
+    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 911, 75, 24000, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
+    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 110;
     for (j = 0; j < 3; j++)
     {
-      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 0x50;
+      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 80;
       Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].options[j].id), 1);
     }
 
@@ -342,26 +342,26 @@ s32 Character_CreateSelectionMenuEuropeanX(void *screen)
 
   g_characterSelectionMenu->phase = 1;
   g_characterSelectionMenu->timer = 4;
-  g_characterSelectionMenu->header = Node_FindWidgetByResourceId(screen, 0xb0);
+  g_characterSelectionMenu->header = Node_FindWidgetByResourceId(screen, 176);
   g_characterSelectionMenu->header->x -= g_characterSelectionMenu->header->w;
   g_characterSelectionMenu->headerStep = g_characterSelectionMenu->header->w / 4;
   rest = g_characterSelectionMenu->header->w - (g_characterSelectionMenu->headerStep * 4);
   g_characterSelectionMenu->header->x += rest;
-  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId(screen, 0x97);
+  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId(screen, 151);
   g_characterSelectionMenu->footer->x += g_characterSelectionMenu->footer->w;
   g_characterSelectionMenu->footerStep = g_characterSelectionMenu->footer->w / 4;
   rest = g_characterSelectionMenu->footer->w - (g_characterSelectionMenu->footerStep * 4);
   g_characterSelectionMenu->footer->x -= rest;
-  Node_FindWidgetByResourceId(screen, 0x7a)->alpha = 0x6E;
-  Node_FindWidgetByResourceId(screen, 0x7d)->alpha = 0x19;
-  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(0x78, 0xFF);
-  item = Node_FindWidgetByResourceId(screen, 0x78);
+  Node_FindWidgetByResourceId(screen, 122)->alpha = 110;
+  Node_FindWidgetByResourceId(screen, 125)->alpha = 25;
+  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(120, 0xFF);
+  item = Node_FindWidgetByResourceId(screen, 120);
   g_characterSelectionMenu->promptItem = item;
   Widget_SetWidgetFlag08(item, 0);
   g_characterSelectionMenu->pulse = Node_FindWidgetByResourceId(screen, 0x7f);
   Widget_SetWidgetFlag08(g_characterSelectionMenu->pulse, 0);
   g_characterSelectionMenu->pulse->alpha = 0;
-  g_characterSelectionMenu->pulseStep = 0x32;
+  g_characterSelectionMenu->pulseStep = 50;
   Menu_RefreshCharacterUnlocks();
   config = g_playerSettings;
   for (i = 0; i < 4; i++)
@@ -398,13 +398,13 @@ s32 Character_CreateSelectionMenuGerman(void *screen)
   SlotSelectionPlayerConfig *config;
   SlotSelectionWidget *item;
   s32 rest;
-  g_characterSelectionMenu = Cache_AllocateMemory(0x1358);
+  g_characterSelectionMenu = Cache_AllocateMemory(4952);
   g_characterSelectionMenu->screen = screen;
   g_characterSelectionMenu->slotOverlay = SmpOverlay_CreateOverlayNode((s32) screen, 4);
-  SmpOverlay_ShowSlotById((s32) screen, 0, 0x78);
-  SmpOverlay_ShowSlotById((s32) screen, 1, 0x78);
-  SmpOverlay_ShowSlotById((s32) screen, 2, 0x78);
-  SmpOverlay_ShowSlotById((s32) screen, 3, 0x78);
+  SmpOverlay_ShowSlotById((s32) screen, 0, 120);
+  SmpOverlay_ShowSlotById((s32) screen, 1, 120);
+  SmpOverlay_ShowSlotById((s32) screen, 2, 120);
+  SmpOverlay_ShowSlotById((s32) screen, 3, 120);
   Random_SetSelectedStage(0, 0);
   g_characterSelectionMenu->clock = 0;
   scale.x = g_characterPreviewInitialScale;
@@ -423,11 +423,11 @@ s32 Character_CreateSelectionMenuGerman(void *screen)
     scale.x = g_characterPortraitRecords[row].scale[i];
     scale.y = g_characterPortraitRecords[row].scale[i];
     scale.z = g_characterPortraitRecords[row].scale[i];
-    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
-    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 0x6E;
+    Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, model + 911, 75, 24000, scale, g_characterPortraitRecords[row].position[i], g_characterPortraitRecords[row].distance[i], g_characterPortraitRecords[row].light[i]);
+    Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].title)->alpha = 110;
     for (j = 0; j < 3; j++)
     {
-      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 0x50;
+      Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].cells[j].id)->alpha = 80;
       Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[i].options[j].id), 1);
     }
 
@@ -435,26 +435,26 @@ s32 Character_CreateSelectionMenuGerman(void *screen)
 
   g_characterSelectionMenu->phase = 1;
   g_characterSelectionMenu->timer = 4;
-  g_characterSelectionMenu->header = Node_FindWidgetByResourceId(screen, 0xaa);
+  g_characterSelectionMenu->header = Node_FindWidgetByResourceId(screen, 170);
   g_characterSelectionMenu->header->x -= g_characterSelectionMenu->header->w;
   g_characterSelectionMenu->headerStep = g_characterSelectionMenu->header->w / 4;
   rest = g_characterSelectionMenu->header->w - (g_characterSelectionMenu->headerStep * 4);
   g_characterSelectionMenu->header->x += rest;
-  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId(screen, 0x91);
+  g_characterSelectionMenu->footer = Node_FindWidgetByResourceId(screen, 145);
   g_characterSelectionMenu->footer->x += g_characterSelectionMenu->footer->w;
   g_characterSelectionMenu->footerStep = g_characterSelectionMenu->footer->w / 4;
   rest = g_characterSelectionMenu->footer->w - (g_characterSelectionMenu->footerStep * 4);
   g_characterSelectionMenu->footer->x -= rest;
-  Node_FindWidgetByResourceId(screen, 0x74)->alpha = 0x6E;
-  Node_FindWidgetByResourceId(screen, 0x77)->alpha = 0x19;
-  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(0x72, 0xFF);
-  item = Node_FindWidgetByResourceId(screen, 0x72);
+  Node_FindWidgetByResourceId(screen, 116)->alpha = 110;
+  Node_FindWidgetByResourceId(screen, 119)->alpha = 25;
+  g_characterSelectionMenu->prompt = SmpFlicker_CreateFlickerWidget(114, 0xFF);
+  item = Node_FindWidgetByResourceId(screen, 114);
   g_characterSelectionMenu->promptItem = item;
   Widget_SetWidgetFlag08(item, 0);
-  g_characterSelectionMenu->pulse = Node_FindWidgetByResourceId(screen, 0x79);
+  g_characterSelectionMenu->pulse = Node_FindWidgetByResourceId(screen, 121);
   Widget_SetWidgetFlag08(g_characterSelectionMenu->pulse, 0);
   g_characterSelectionMenu->pulse->alpha = 0;
-  g_characterSelectionMenu->pulseStep = 0x32;
+  g_characterSelectionMenu->pulseStep = 50;
   Menu_RefreshCharacterUnlocks();
   config = g_playerSettings;
   for (i = 0; i < 4; i++)
@@ -507,7 +507,7 @@ s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapse
         enterTicksRemaining = g_characterSelectionMenu->timer - 1;
         g_characterSelectionMenu->timer = enterTicksRemaining;
         if (enterTicksRemaining <= 0) {
-            SoundElement_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(3705);
             Widget_SetWidgetFlag08(g_characterSelectionMenu->promptItem, 1);
             SmpFlicker_StartFlicker(g_characterSelectionMenu->prompt, 4);
             g_characterSelectionMenu->phase = 4;
@@ -542,7 +542,7 @@ s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapse
         }
         break;
     case 5:
-        SoundElement_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(3704);
         g_characterSelectionMenu->phase = 2;
         g_characterSelectionMenu->timer = 4;
         Widget_SetWidgetFlag08(g_characterSelectionMenu->promptItem, 0);
@@ -555,7 +555,7 @@ s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapse
         fadeTicksRemaining = g_characterSelectionMenu->timer - 1;
         g_characterSelectionMenu->timer = fadeTicksRemaining;
         if (fadeTicksRemaining <= 0) {
-            g_characterSelectionMenu->pulse->alpha = 0xC8;
+            g_characterSelectionMenu->pulse->alpha = 200;
             g_characterSelectionMenu->phase = 3;
         }
         break;
@@ -574,7 +574,7 @@ s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapse
                     widgetNode = SmpOverlay_GetSlotValue(g_characterSelectionMenu->slotOverlay, i);
                     highlightWidget = g_characterSelectionMenu->players[i].highlight;
                     if ((highlightWidget->x != (widgetNode->x - 2)) || (highlightWidget->y != (widgetNode->y - 2))) {
-                        SoundElement_PlayFlatSound(0xE7F);
+                        SoundElement_PlayFlatSound(3711);
                         if (Widget_ListHasFlag100(widgetNode) == 0) {
                             resource = widgetNode->resource;
                             if (resource != empty_slot) {
@@ -584,7 +584,7 @@ s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapse
                                 scale.x = g_characterPortraitRecords[entryIndex].scale[i];
                                 scale.y = g_characterPortraitRecords[entryIndex].scale[i];
                                 scale.z = g_characterPortraitRecords[entryIndex].scale[i];
-                                Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, previewModelOffset + 0x38F, 0x4B, 0x5DC0, scale, g_characterPortraitRecords[entryIndex].position[i], g_characterPortraitRecords[entryIndex].distance[i], g_characterPortraitRecords[entryIndex].light[i]);
+                                Preview_InitModelPreview(g_characterSelectionMenu->players[i].model, 9, previewModelOffset + 911, 75, 24000, scale, g_characterPortraitRecords[entryIndex].position[i], g_characterPortraitRecords[entryIndex].distance[i], g_characterPortraitRecords[entryIndex].light[i]);
                             } else {
                                 Menu_RandomizeCharacterPreview(i);
                             }

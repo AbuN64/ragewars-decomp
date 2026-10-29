@@ -207,7 +207,7 @@ void Menu_RefreshCharacterUnlocks(void) {
     for (i = 0; i < 17; i++) {
         found = 0;
         for (j = 0; j < 4 && !found; j++) {
-            if (g_profileSlotIndices[j * 0x190] >= 0) {
+            if (g_profileSlotIndices[j * 400] >= 0) {
                 found = found || Player_TestAchievementFlag7(g_localPlayerProfiles[j], g_frontendKeyUnlockEntries[i][0]);
             }
         }
@@ -251,7 +251,7 @@ void Menu_CyclePlayerCharacterVariant(s32 player) {
     choice = g_characterSelectionMenu->players[player].choice;
     item = Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[player].cells[choice].id);
     Widget_SetWidgetFlag40(item, 0);
-    item->alpha = 0x50;
+    item->alpha = 80;
     count = g_profileCharacterUnlockCounts[player][Key_GetCharacterPreviewModel(g_characterSelectionMenu->players[player].kind)];
     if (count <= 0) {
         count = 1;
@@ -259,7 +259,7 @@ void Menu_CyclePlayerCharacterVariant(s32 player) {
     choice = (choice + 1) % count;
     item = Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuEntries[player].cells[choice].id);
     Widget_SetWidgetFlag40(item, 1);
-    item->alpha = 0x96;
+    item->alpha = 150;
     g_characterSelectionMenu->players[player].choice = choice;
 }
 
@@ -288,7 +288,7 @@ void Menu_RefreshPlayerCharacterVariants(s32 player) {
     item = Node_FindWidgetByResourceId(g_characterSelectionMenu->screen,
                          g_characterSelectionMenuEntries[player].cells[g_characterSelectionMenu->players[player].choice].id);
     Widget_SetWidgetFlag40(item, 0);
-    item->alpha = 0x50;
+    item->alpha = 80;
     g_characterSelectionMenu->players[player].choice = 0;
     if (g_characterSelectionMenu->players[player].kind == -1) {
         return;
@@ -303,7 +303,7 @@ void Menu_RefreshPlayerCharacterVariants(s32 player) {
     item = Node_FindWidgetByResourceId(g_characterSelectionMenu->screen,
                          g_characterSelectionMenuEntries[player].cells[g_characterSelectionMenu->players[player].choice].id);
     Widget_SetWidgetFlag40(item, 1);
-    item->alpha = 0x96;
+    item->alpha = 150;
 }
 
 void Menu_ApplySlotValueGfx(int player, int choice) {
@@ -343,7 +343,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
             kind = Key_GetCharacterPreviewModel(g_characterSelectionMenu->players[i].kind);
             slot[i].m_nCharacter = kind;
             if (g_gameSettings->trialKind == 1) {
-                g_profileCharacterSelections[i * 0x190] = kind;
+                g_profileCharacterSelections[i * 400] = kind;
             }
             slot[i].variant = (u8)g_characterSelectionMenu->players[i].choice;
         }
@@ -367,11 +367,11 @@ void Menu_RandomizeCharacterPreview(s32 player) {
             done = 1;
         } else if (++tries > 5000) {
 #if defined(VERSION_DE)
-            id = 0x90;
+            id = 144;
 #elif defined(VERSION_EU_X)
-            id = 0x96;
+            id = 150;
 #else
-            id = 0x92;
+            id = 146;
 #endif
             done = 1;
         }
@@ -384,7 +384,7 @@ void Menu_RandomizeCharacterPreview(s32 player) {
         scale.x = g_frontendKeyEntries[index].scale[player];
         scale.y = g_frontendKeyEntries[index].scale[player];
         scale.z = g_frontendKeyEntries[index].scale[player];
-        Preview_InitModelPreview(g_characterSelectionMenu->players[player].model, 9, kind + 0x38F, 75, 24000, scale,
+        Preview_InitModelPreview(g_characterSelectionMenu->players[player].model, 9, kind + 911, 75, 24000, scale,
                       g_frontendKeyEntries[index].m_vPos[player], g_frontendKeyEntries[index].m_fRotY[player],
                       g_frontendKeyEntries[index].flags[player]);
     }

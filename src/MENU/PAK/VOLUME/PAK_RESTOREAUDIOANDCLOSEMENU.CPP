@@ -11,7 +11,7 @@
 
 s32 Pak_RestoreAudioAndCloseMenu(void *first, void *second, void *third) { SoundElement_StopAudioExceptKey(-1); SoundElement_SetVoiceMixValue(0); if (g_musicPreviewMenuActive != 0) { SoundElement_EnableMusicGainOverride(); } SoundElement_SetMusicPlaybackEnabled(g_menuSavedAudioSelection); Control_SetMenuControlFlag(); return Menu_TryCreateMenu(first, second, third); }
 
-s32 Pak_AdjustVolumeSlotTwo(void *first, void *second) { u8 *option = &g_gameSettings.volume[2]; s32 value = *option; value = Menu_AdjustValue(second, value, 8, 0, 0xFF, 0); if (value == 0xF7) { value = 0xF8; } *option = value; return 0; }
+s32 Pak_AdjustVolumeSlotTwo(void *first, void *second) { u8 *option = &g_gameSettings.volume[2]; s32 value = *option; value = Menu_AdjustValue(second, value, 8, 0, 0xFF, 0); if (value == 247) { value = 248; } *option = value; return 0; }
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -42,8 +42,8 @@ s32 Pak_AdjustVolumeSlotTwo(void *first, void *second) {
     s32 value = *option;
 
     value = Menu_AdjustValue(second, value, 8, 0, 0xFF, 0);
-    if (value == 0xF7) {
-        value = 0xF8;
+    if (value == 247) {
+        value = 248;
     }
     *option = value;
     return 0;

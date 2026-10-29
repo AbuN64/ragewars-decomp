@@ -13,38 +13,38 @@
 
 /* 80420E90_14.CPP */
 #if defined(VERSION_DE)
-#define ID_SCREEN 0x398
-#define ID_SCREEN_B 0x399
-#define ID_ROW0 0x39F
-#define ID_ROW1 0x39E
-#define ID_ROW2 0x3A1
-#define ID_ROW3 0x39D
-#define ID_ROW4 0x39C
-#define ID_ROW5 0x3A0
-#define ID_WINDOW 0x39A
-#define ID_LABEL 0x39B
+#define ID_SCREEN 920
+#define ID_SCREEN_B 921
+#define ID_ROW0 927
+#define ID_ROW1 926
+#define ID_ROW2 929
+#define ID_ROW3 925
+#define ID_ROW4 924
+#define ID_ROW5 928
+#define ID_WINDOW 922
+#define ID_LABEL 923
 #elif defined(VERSION_EU_X)
-#define ID_SCREEN 0x3A2
-#define ID_SCREEN_B 0x3A3
-#define ID_ROW0 0x3AB
-#define ID_ROW1 0x3A7
-#define ID_ROW2 0x3AA
-#define ID_ROW3 0x3A8
-#define ID_ROW4 0x3A9
-#define ID_ROW5 0x3A6
-#define ID_WINDOW 0x3A4
-#define ID_LABEL 0x3A5
+#define ID_SCREEN 930
+#define ID_SCREEN_B 931
+#define ID_ROW0 939
+#define ID_ROW1 935
+#define ID_ROW2 938
+#define ID_ROW3 936
+#define ID_ROW4 937
+#define ID_ROW5 934
+#define ID_WINDOW 932
+#define ID_LABEL 933
 #else
-#define ID_SCREEN 0x39E
-#define ID_SCREEN_B 0x39F
-#define ID_ROW0 0x3A5
-#define ID_ROW1 0x3A4
-#define ID_ROW2 0x3A7
-#define ID_ROW3 0x3A3
-#define ID_ROW4 0x3A2
-#define ID_ROW5 0x3A6
-#define ID_WINDOW 0x3A0
-#define ID_LABEL 0x3A1
+#define ID_SCREEN 926
+#define ID_SCREEN_B 927
+#define ID_ROW0 933
+#define ID_ROW1 932
+#define ID_ROW2 935
+#define ID_ROW3 931
+#define ID_ROW4 930
+#define ID_ROW5 934
+#define ID_WINDOW 928
+#define ID_LABEL 929
 #endif
 
 extern void Tsmos_ActivateControllerState(void);
@@ -58,7 +58,7 @@ s32 Menu_CreateSixChoiceMenu(s32 root) {
     s32 screen;
     MenuWidget *window;
 
-    g_sixChoiceMenuState = (ChoiceMenuState *) Cache_AllocateMemory(0x14);
+    g_sixChoiceMenuState = (ChoiceMenuState *) Cache_AllocateMemory(20);
     Tsmos_ActivateControllerState();
     screen = SmpFade_CreateFadeWidget(ID_SCREEN, ID_SCREEN_B);
     g_sixChoiceMenuState->slider = (struct ObjMenuUpdateSixChoiceMenu *) screen;
@@ -71,8 +71,8 @@ s32 Menu_CreateSixChoiceMenu(s32 root) {
     SmpButton_WrapButtonWidget(ID_ROW5);
     window = Node_FindWidgetByResourceId(root, ID_WINDOW);
     g_sixChoiceMenuState->transitionCell = (struct ChoiceMenuCellView *) window;
-    window->alpha = 0xF;
-    g_sixChoiceMenuState->labelFlicker = SmpFlicker_CreateFlickerWidget(ID_LABEL, 0x6E);
+    window->alpha = 15;
+    g_sixChoiceMenuState->labelFlicker = SmpFlicker_CreateFlickerWidget(ID_LABEL, 110);
     g_sixChoiceMenuState->transitionTimer = 3;
     return 0;
 }
@@ -175,11 +175,11 @@ s32 Menu_ChooseSixChoiceOption(void) {
     u32 message;
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    message = Menu_GetFocusedElementId() - 0x39C;
+    message = Menu_GetFocusedElementId() - 924;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    message = Menu_GetFocusedElementId() - 0x3A2;
+    message = Menu_GetFocusedElementId() - 930;
 #elif defined(VERSION_EU_X)
-    message = Menu_GetFocusedElementId() - 0x3A6;
+    message = Menu_GetFocusedElementId() - 934;
 #endif
     if (message >= 6) {
         return 0;
@@ -217,7 +217,7 @@ option_2:
     option = 2;
 choose:
     PAKInterface_SetScreenPhase(option);
-    g_sixChoiceMenuState->nextScreen = 0x13;
+    g_sixChoiceMenuState->nextScreen = 19;
     goto close;
 cancel:
     g_sixChoiceMenuState->nextScreen = -1;
@@ -245,7 +245,7 @@ s32 Menu_DispatchSixChoiceEvent(void *menuActor, s32 eventKind, s32 eventDataOne
     s32 table_kind;
 
     if (g_sixChoiceMenuEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_sixChoiceMenuEventHandlers;
         offset = 0;
         do {
@@ -257,7 +257,7 @@ s32 Menu_DispatchSixChoiceEvent(void *menuActor, s32 eventKind, s32 eventDataOne
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
@@ -291,7 +291,7 @@ s32 Menu_AdvanceFadeMeter(struct Meter *meter, s32 step) {
 
     if (meter->done == 0) {
         if (meter->falling == 0) {
-            if (meter->amount < 0x3E8) {
+            if (meter->amount < 1000) {
                 value = (f32)meter->amount * k_menuFadeInConstants;
                 bar = meter->bar;
                 if (!(value >= *(&k_menuFadeInConstants + 1))) {

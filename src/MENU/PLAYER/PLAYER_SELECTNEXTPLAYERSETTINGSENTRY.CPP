@@ -78,7 +78,7 @@ s32 Player_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, 
         Player_SelectPlayerSettingsEntry(g_playerSettingsScreen->item);
         XStdio_FormatBuffer(g_playerSettingsScreen->text, RW_LOCALIZED_TEXT(g_playerSettingsSlotNumberFormat, g_playerSettingsSlotNumberTranslations, g_playerSettingsSlotNumberTranslations, g_languageIndex), g_playerSettingsScreen->item + 1);
         g_playerSettingsScreen->label->text = (void *) (g_playerSettingsScreen->text);
-        SoundElement_PlayFlatSound(0xE81);
+        SoundElement_PlayFlatSound(3713);
         return 0;
     }
     return 0;
@@ -98,7 +98,7 @@ s32 Player_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unuse
         Player_SelectPlayerSettingsEntry(g_playerSettingsScreen->item);
         XStdio_FormatBuffer(g_playerSettingsScreen->text, RW_LOCALIZED_TEXT(g_playerSettingsSlotNumberFormat, g_playerSettingsSlotNumberTranslations, g_playerSettingsSlotNumberTranslations, g_languageIndex), g_playerSettingsScreen->item + 1);
         g_playerSettingsScreen->label->text = (void *) (g_playerSettingsScreen->text);
-        SoundElement_PlayFlatSound(0xE81);
+        SoundElement_PlayFlatSound(3713);
         return 0;
     }
     return 0;
@@ -113,7 +113,7 @@ s32 Player_DispatchPlayerSettingsEvent(void *eventTarget, s32 eventId, s32 event
     MenuActorInputView *actor;
 
     if (g_playerSettingsEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_playerSettingsEventHandlers;
         index = 0;
         do {

@@ -75,7 +75,7 @@ void Onscrn_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shad
             break;
         }
         width = Menu_MeasureLine(text, size, spacing);
-        limit = g_hudReferenceViewportWidth - 0x2C;
+        limit = g_hudReferenceViewportWidth - 44;
         if (limit < width) {
             ratio = limit / width;
             scaleX *= ratio;
@@ -108,8 +108,8 @@ extern s32 Geometry_SetModePreset(s32 tailEnum);
 void Onscrn_SetupSpriteMode(s32 color) {
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
-    Geometry_SetCombineMode(0x1B);
-    Geometry_SetModePreset(0x19);
+    Geometry_SetCombineMode(27);
+    Geometry_SetModePreset(25);
     {
         Gfx *cmd = g_displayListCursor++;
         gDPSetEnvColor(cmd, 255, 255, 255, color);

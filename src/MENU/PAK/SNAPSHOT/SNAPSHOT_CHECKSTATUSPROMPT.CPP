@@ -22,7 +22,7 @@ extern void XPlus_FillMemory(void *, s32, s32);
 /* eu-x splits this function one word late (its leading lui sits in the
  * preceding data blob), so that version keeps the split asm. */
 void Snapshot_CreateSaveSnapshot(u8 *player) {
-    s32 snapshotSize = g_worldSnapshotNoteBytes + 0x610;
+    s32 snapshotSize = g_worldSnapshotNoteBytes + 1552;
     s32 allocationSize;
     SaveSnapshot **snapshotHandle;
     SaveSnapshot *snapshot;
@@ -30,8 +30,8 @@ void Snapshot_CreateSaveSnapshot(u8 *player) {
         Cache_DrainAndCompactResources(0);
         Cache_ReleaseResource(0, g_pakSnapshotResourceHandle);
     }
-    allocationSize = g_worldSnapshotNoteBytes + 0x610;
-    snapshotHandle = Cache_AllocateResource(0, allocationSize, 0x33, g_pakSingleSaveBlockName);
+    allocationSize = g_worldSnapshotNoteBytes + 1552;
+    snapshotHandle = Cache_AllocateResource(0, allocationSize, 51, g_pakSingleSaveBlockName);
     g_pakSaveSnapshot = *snapshotHandle;
     g_pakSnapshotResourceHandle = snapshotHandle;
     XPlus_FillMemory(g_pakSaveSnapshot, 0, allocationSize);
@@ -267,7 +267,7 @@ void Snapshot_BeginProfileSave(Shared_PakMenu *menu) {
         for (i = 0; i < 8; i++) {
             g_controllerPakPreviewProfileName[i] = profile->name[i];
         }
-        g_pakControllerRecord.checksum = Note_Crc32(&g_pakControllerRecord, 0x14, 4);
+        g_pakControllerRecord.checksum = Note_Crc32(&g_pakControllerRecord, 20, 4);
         Snapshot_MarkSaveNotes(menu);
         return;
     }

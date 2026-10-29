@@ -152,7 +152,7 @@ check:
     if (result == 0) {
         result = Note_CountFreeNotes(g_introSelectedItem, &noteCount);
         if (result == 0) {
-            need = Note_BytesToPakPages(g_worldSnapshotNoteBytes + 0x610);
+            need = Note_BytesToPakPages(g_worldSnapshotNoteBytes + 1552);
             if (noteCount == 0 || freeSpace < need) {
                 if (*bestScore < need) {
                     *bestScore = need;

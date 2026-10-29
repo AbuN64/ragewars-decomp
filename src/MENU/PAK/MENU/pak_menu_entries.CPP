@@ -189,20 +189,20 @@ s32 Menu_UpdateMenuEntries(PakMenu *menu, void *context) {
     }
     if (selectionFlags == 0) {
         if (Control_IsLeftPressed(menu->input) != 0) {
-            Menu_MoveMenuCursor(menu, 0x10);
+            Menu_MoveMenuCursor(menu, 16);
         }
         if (Control_IsRightPressed(menu->input) != 0) {
-            Menu_MoveMenuCursor(menu, 0x11);
+            Menu_MoveMenuCursor(menu, 17);
         }
     } else if (menu->input->buttons & 0x60303) {
         allowRepeat = 0;
     }
     if (allowRepeat != 0) {
         if (Control_IsNavUp(menu->input) != 0) {
-            Menu_MoveMenuCursor(menu, 0x12);
+            Menu_MoveMenuCursor(menu, 18);
         }
         if (Control_IsNavDown(menu->input) != 0) {
-            Menu_MoveMenuCursor(menu, 0x13);
+            Menu_MoveMenuCursor(menu, 19);
         }
     }
     if (menu->state != 2) {
@@ -349,9 +349,9 @@ extern TextBoundsFont g_menuFontStyles[];
 static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     s32 style = 0;
     switch ((u32)text->flags & 0x3FE0) {
-    case 0x20: style = 0; break;
-    case 0x40: style = 1; break;
-    case 0x80: style = 2; break;
+    case 32: style = 0; break;
+    case 64: style = 1; break;
+    case 128: style = 2; break;
     case 0x100: style = 3; break;
     case 0x200: style = 4; break;
     case 0x400: style = 5; break;

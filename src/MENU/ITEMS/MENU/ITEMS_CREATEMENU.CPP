@@ -30,7 +30,7 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 extern char g_menuText[];
 
 void *Items_CreateMenu(struct MenuCreationOwnerView *owner, struct Dialog *list, s32 a, s32 b, s32 c, s32 d) {
-    s32 size = list->count * 40 + 0x1D8;
+    s32 size = list->count * 40 + 472;
     s32 i;
     void **block;
     void *first;
@@ -38,11 +38,11 @@ void *Items_CreateMenu(struct MenuCreationOwnerView *owner, struct Dialog *list,
     for (i = 0; i < list->count; i++) {
         s32 extra = 0;
         if (list->entries[i].type == 3) {
-            extra = 0x480;
+            extra = 1152;
         }
         size += extra;
     }
-    block = Cache_AllocateResource(0, size, 0x3B, g_menuText);
+    block = Cache_AllocateResource(0, size, 59, g_menuText);
     if (block == 0) {
         return 0;
     }

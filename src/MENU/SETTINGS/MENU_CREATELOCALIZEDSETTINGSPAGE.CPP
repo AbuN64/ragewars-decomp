@@ -39,23 +39,23 @@ s32 Menu_CreateLocalizedSettingsPage(void *node) {
     void *thirdList;
     void *title;
     void *slider;
-    g_optionsPage = Cache_AllocateMemory(0x28);
-    g_optionsPage->menu = SmpFade_CreateFadeWidget(0x4F, 0x50);
-    SmpButton_WrapButtonWidget(0x52);
-    SmpButton_WrapButtonWidget(0x55);
-    firstList = SmpButton_CreateListWidget(0x53, 0x54);
+    g_optionsPage = Cache_AllocateMemory(40);
+    g_optionsPage->menu = SmpFade_CreateFadeWidget(79, 80);
+    SmpButton_WrapButtonWidget(82);
+    SmpButton_WrapButtonWidget(85);
+    firstList = SmpButton_CreateListWidget(83, 84);
     settings = &g_gameSettings;
     g_optionsPage->bloodModeList = firstList;
     SmpButton_AppendListText(firstList, g_optionsFirstChoiceLabels[settings->language]);
     SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListChoiceZeroLabels[settings->language]);
     SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListChoiceOneLabels[settings->language]);
     SmpButton_SelectListEntry(g_optionsPage->bloodModeList, settings->bloodMode);
-    secondList = SmpButton_CreateListWidget(0x56, 0x57);
+    secondList = SmpButton_CreateListWidget(86, 87);
     g_optionsPage->twoPlayerScreenList = secondList;
     SmpButton_AppendListText(secondList, g_optionsSecondListChoiceZeroLabels[settings->language]);
     SmpButton_AppendListText(g_optionsPage->twoPlayerScreenList, g_optionsSecondListChoiceOneLabels[settings->language]);
     SmpButton_SelectListEntry(g_optionsPage->twoPlayerScreenList, settings->twoPlayerScreenPreference);
-    thirdList = SmpButton_CreateListWidget(0x58, 0x59);
+    thirdList = SmpButton_CreateListWidget(88, 89);
     g_optionsPage->resolutionList = thirdList;
     SmpButton_AppendListText(thirdList, g_optionsResolutionFirstChoiceLabels[settings->language]);
     if (Defs_GetMemorySize() != 0x400000) {
@@ -63,13 +63,13 @@ s32 Menu_CreateLocalizedSettingsPage(void *node) {
         SmpButton_AppendListText(g_optionsPage->resolutionList, g_optionsResolutionThirdChoiceLabels[settings->language]);
     }
     SmpButton_SelectListEntry(g_optionsPage->resolutionList, settings->resolution);
-    slider = SmpSlider_CreateSliderWidget(0x5A, 0x5B, 0x80);
+    slider = SmpSlider_CreateSliderWidget(90, 91, 128);
     g_optionsPage->gammaSlider = slider;
     SmpSlider_SetSliderItem(slider, settings->lightingGamma);
-    SmpButton_WrapButtonWidget(0x5D);
-    Node_FindWidgetByResourceId(node, 0x5E)->text = g_optionsLocalizedShortcutText[settings->language];
-    SmpButton_WrapButtonWidget(0x5C);
-    title = SmpFlicker_CreateFlickerWidget(0x51, 0x6E);
+    SmpButton_WrapButtonWidget(93);
+    Node_FindWidgetByResourceId(node, 94)->text = g_optionsLocalizedShortcutText[settings->language];
+    SmpButton_WrapButtonWidget(92);
+    title = SmpFlicker_CreateFlickerWidget(81, 110);
     g_optionsPage->state = 3;
     g_optionsPage->title = title;
     g_optionsPage->value = -1;
@@ -120,30 +120,30 @@ extern void Tsmos_ActivateControllerState(void);
 s32 Menu_CreateEuJoinOptions(void *handle) {
     MenuWidget *widget;
     s32 i;
-    g_courseOptionsScreen = Cache_AllocateMemory(0x20);
+    g_courseOptionsScreen = Cache_AllocateMemory(32);
     g_courseOptionsScreen->handle = handle;
     g_courseOptionsScreen->mode = SmpOverlay_CreateOverlayNode(handle, 4);
-    SmpOverlay_ShowSlotById(handle, 0, 0x389);
-    SmpOverlay_ShowSlotById(handle, 1, 0x389);
-    SmpOverlay_ShowSlotById(handle, 2, 0x389);
-    SmpOverlay_ShowSlotById(handle, 3, 0x389);
-    widget = Node_FindWidgetByResourceId(handle, 0x38B);
-    widget->alpha = 0x8C;
-    if (Menu_GetPreviousScreenOwner(0) == 0x16) {
+    SmpOverlay_ShowSlotById(handle, 0, 905);
+    SmpOverlay_ShowSlotById(handle, 1, 905);
+    SmpOverlay_ShowSlotById(handle, 2, 905);
+    SmpOverlay_ShowSlotById(handle, 3, 905);
+    widget = Node_FindWidgetByResourceId(handle, 907);
+    widget->alpha = 140;
+    if (Menu_GetPreviousScreenOwner(0) == 22) {
         Widget_SetWidgetFlag08(widget, 0);
     }
     g_courseOptionsScreen->timer = 0;
     g_courseOptionsScreen->selection = 0;
-    g_courseOptionsScreen->rows[0] = Node_FindWidgetByResourceId(handle, 0x38C);
-    g_courseOptionsScreen->rows[1] = Node_FindWidgetByResourceId(handle, 0x395);
-    g_courseOptionsScreen->rows[2] = Node_FindWidgetByResourceId(handle, 0x396);
+    g_courseOptionsScreen->rows[0] = Node_FindWidgetByResourceId(handle, 908);
+    g_courseOptionsScreen->rows[1] = Node_FindWidgetByResourceId(handle, 917);
+    g_courseOptionsScreen->rows[2] = Node_FindWidgetByResourceId(handle, 918);
     g_courseOptionsScreen->step = Join_CountUsedSlots();
     for (i = 0; i < 3; i++) {
         Join_UpdateJoinRequestDisplay(i);
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[i], 0x392), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[i], 914), 0);
     }
     Tsmos_ActivateControllerState();
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x392), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 914), 1);
     return 0;
 }
 #endif

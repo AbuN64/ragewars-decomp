@@ -94,5 +94,5 @@ void Pickup_SetupPickupText(void) {
     OnScreen_SetupTextRendering();
     OnScreen_LoadTextTileModeOne();
     OnScreen_SetTextScale((0.699999988079071f), (0.699999988079071f));
-    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 200, 200, 200);
 }

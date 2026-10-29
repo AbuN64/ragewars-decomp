@@ -60,18 +60,18 @@ void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
     case 1:
         bar = &hud->bars[0];
         target = (f32) hud->bars[0].target;
-        red = 0x1D;
-        green = 0x53;
-        blue = 0xE2;
-        offset = 0x1F;
+        red = 29;
+        green = 83;
+        blue = 226;
+        offset = 31;
         break;
     case 2:
         bar = &hud->bars[1];
         target = (f32) hud->bars[1].target;
-        red = 0x8B;
-        green = 0xB9;
-        blue = 0x46;
-        offset = 0x30;
+        red = 139;
+        green = 185;
+        blue = 70;
+        offset = 48;
         break;
     default:
         return;
@@ -96,8 +96,8 @@ void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
             }
         }
     }
-    left = x + 0x50;
-    inset = x - 0x70;
+    left = x + 80;
+    inset = x - 112;
     right = inset + g_hudReferenceViewportWidth;
     fade = &g_gameSettings.hudFade;
     OnScreen_FillRectangle(left, (s32) ((f32) y + scale * 9.0f),
@@ -107,16 +107,16 @@ void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
     Onscrn_SetupSpriteMode(*fade);
     if (which == 1) {
         shift = scale * 27.0f;
-        OnScreen_DrawSpriteResource(0x202, 0, (s16) (x + 0x46), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
-        OnScreen_DrawSpriteResource(0x203, 0, (s16) (g_hudReferenceViewportWidth + x - 0x6D), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
+        OnScreen_DrawSpriteResource(514, 0, (s16) (x + 70), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
+        OnScreen_DrawSpriteResource(515, 0, (s16) (g_hudReferenceViewportWidth + x - 109), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
         OnScreen_SetupTextRendering();
         OnScreen_SetTextScale(0.4f, scale * 0.4f);
-        OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+        OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 200, 200, 200);
         Onscrn_DrawText(hud->bars[0].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
     } else {
         OnScreen_SetupTextRendering();
         OnScreen_SetTextScale(0.4f, scale * 0.4f);
-        OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+        OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 200, 200, 200);
         Onscrn_DrawText(hud->bars[1].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
     }
 }
@@ -145,8 +145,8 @@ void OnScreen_UpdateMoverScript(COverlay *m) {
     s32 bottom;
     s32 right;
 
-    bottom = g_hudReferenceViewportHeight + 0x60;
-    right = g_hudReferenceViewportWidth + 0x60;
+    bottom = g_hudReferenceViewportHeight + 96;
+    right = g_hudReferenceViewportWidth + 96;
     do {
         next = 0;
         switch (m->state) {
@@ -267,7 +267,7 @@ void OnScreen_DrawSpriteNumber(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s3
     f32 width;
     f32 scale;
 
-    sprites = Scene_StartWorldEffect(&g_world, 4, 0x10, 1);
+    sprites = Scene_StartWorldEffect(&g_world, 4, 16, 1);
     if (sprites == 0) {
         return;
     }
@@ -352,8 +352,8 @@ void OnScreen_SetupTextRendering(void) {
             gDPSetCycleType(cmd, G_CYC_2CYCLE);
         }
 
-        Geometry_SetCombineMode(0x1A);
-        Geometry_SetModePreset(0x15);
+        Geometry_SetCombineMode(26);
+        Geometry_SetModePreset(21);
 
         g_creditsTextDrawingEnabled = 0;
         {
@@ -386,7 +386,7 @@ void OnScreen_SetupTextRendering(void) {
         gDPSetTileSize(cmd, 1, 0, 0, 60, 60);
         }
 
-        OnScreen_SetTextColors(0x8C, 0x8C, 0x8C, 0x8C, 0x8C, 0x8C);
+        OnScreen_SetTextColors(140, 140, 140, 140, 140, 140);
         OnScreen_SetTextScale(g_onscreenDefaultTextScale, g_onscreenDefaultTextScale);
         g_tutorialStatusBars.shadowX = 2;
         g_tutorialStatusBars.shadowY = 2;

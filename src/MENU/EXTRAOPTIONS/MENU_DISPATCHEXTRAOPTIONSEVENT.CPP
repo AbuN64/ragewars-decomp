@@ -20,7 +20,7 @@ s32 Menu_DispatchExtraOptionsEvent(void *object, s32 event, s32 eventData, s32 e
     s32 table_kind;
 
     if (g_extraOptionsEventCallbacks != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_extraOptionsEventCallbacks;
         offset = 0;
         do {
@@ -32,7 +32,7 @@ s32 Menu_DispatchExtraOptionsEvent(void *object, s32 event, s32 eventData, s32 e
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;

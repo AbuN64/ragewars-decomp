@@ -6,8 +6,8 @@
 /* Calls SmpButton_WrapButtonWidget with 0x3D0 and then 0x3D1, and returns zero. */
 s32 Menu_WrapSettingsNodePair(void) {
 #if defined(VERSION_DE)
-    SmpButton_WrapButtonWidget(0x3CA);
-    SmpButton_WrapButtonWidget(0x3CB);
+    SmpButton_WrapButtonWidget(970);
+    SmpButton_WrapButtonWidget(971);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
     SmpButton_WrapButtonWidget(0x3D0);
     SmpButton_WrapButtonWidget(0x3D1);

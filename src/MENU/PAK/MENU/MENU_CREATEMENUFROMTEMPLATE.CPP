@@ -32,35 +32,35 @@ f32 Menu_GetGlyphAdvance(s32 ch, u8 next_ch, f32 scale, f32 special_advance) {
     cur = ch & 0xFF;
     factor = 1.0f;
     switch (cur) {
-    case 0x24:
-    case 0x26:
-    case 0x7E:
+    case 36:
+    case 38:
+    case 126:
         return special_advance;
-    case 0x49:
-    case 0x69:
+    case 73:
+    case 105:
         factor = 0.5f;
     default:
         break;
-    case 0x4C:
-    case 0x6C:
+    case 76:
+    case 108:
         next_a = next_ch & 0xFF;
-        if ((next_a == 0x74) || (next_a == 0x54)) {
+        if ((next_a == 116) || (next_a == 84)) {
             factor = 0.7f;
         }
         break;
-    case 0x41:
-    case 0x61:
+    case 65:
+    case 97:
         next_b = next_ch & 0xFF;
-        if ((next_b == 0x74) || (next_b == 0x54)) {
+        if ((next_b == 116) || (next_b == 84)) {
             factor = 0.8f;
         }
         break;
-    case 0x4D:
-    case 0x6D:
+    case 77:
+    case 109:
         factor = 1.2f;
         break;
-    case 0x21:
-    case 0x2E:
+    case 33:
+    case 46:
         factor = 0.4f;
         break;
     }
@@ -153,7 +153,7 @@ s32 Menu_StepValue(MenuValueStepView *menu, s32 value, s32 step, s32 minimum, s3
 
 
 void Menu_InitMenuMessageList(void *object) {
-    List_InitializeIntrusive(object, 0x1D0, 0x1D4);
+    List_InitializeIntrusive(object, 464, 468);
     ((MessageList *)object)->rotation = 0;
 }
 
@@ -164,7 +164,7 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 void *Menu_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controller, s32 d) {
     struct MenuCreationOwnerView *owner;
-    s32 size = list->count * 40 + 0x1D8;
+    s32 size = list->count * 40 + 472;
     s32 i;
     void **block;
     void *first;
@@ -172,11 +172,11 @@ void *Menu_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 control
     for (i = 0; i < list->count; i++) {
         s32 extra = 0;
         if (list->entries[i].type == 3) {
-            extra = 0x480;
+            extra = 1152;
         }
         size += extra;
     }
-    block = Cache_AllocateResource(0, size, 0x3B, g_menuText);
+    block = Cache_AllocateResource(0, size, 59, g_menuText);
     if (block == 0) {
         return 0;
     }
@@ -200,7 +200,7 @@ void *Menu_CreateMenuFromTemplate(struct MenuCreationOwnerView *owner, struct Me
     s32 b = params->b;
     s32 c = params->c;
     s32 d = params->d;
-    s32 size = list->count * 40 + 0x1D8;
+    s32 size = list->count * 40 + 472;
     s32 i;
     void **block;
     void *first;
@@ -208,11 +208,11 @@ void *Menu_CreateMenuFromTemplate(struct MenuCreationOwnerView *owner, struct Me
     for (i = 0; i < list->count; i++) {
         s32 extra = 0;
         if (list->entries[i].type == 3) {
-            extra = 0x480;
+            extra = 1152;
         }
         size += extra;
     }
-    block = Cache_AllocateResource(0, size, 0x3B, g_menuText);
+    block = Cache_AllocateResource(0, size, 59, g_menuText);
     if (block == 0) {
         return 0;
     }
@@ -235,7 +235,7 @@ void *Menu_AllocateMenu(struct MenuCreationOwnerView *owner, struct ParamsPakAll
     s32 b = params->b;
     s32 c = params->c;
     s32 d = params->d;
-    s32 size = list->count * 40 + 0x1D8;
+    s32 size = list->count * 40 + 472;
     s32 i;
     void **block;
     void *first;
@@ -243,11 +243,11 @@ void *Menu_AllocateMenu(struct MenuCreationOwnerView *owner, struct ParamsPakAll
     for (i = 0; i < list->count; i++) {
         s32 extra = 0;
         if (list->entries[i].type == 3) {
-            extra = 0x480;
+            extra = 1152;
         }
         size += extra;
     }
-    block = Cache_AllocateResource(0, size, 0x3B, g_menuText);
+    block = Cache_AllocateResource(0, size, 59, g_menuText);
     if (block == 0) {
         return 0;
     }

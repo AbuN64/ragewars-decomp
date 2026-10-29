@@ -14,7 +14,7 @@ s32 Pak_AdjustVolumeSlotZero(void *unused, void *menu) {
     s32 volume;
     volume = g_gameSettings.volume[0];
     volume = Menu_AdjustValue(menu, volume, 8, 0, 0xFF, 0);
-    if(volume==0xF7)volume=0xF8;
+    if(volume==247)volume=248;
     g_gameSettings.volume[0]=volume;
     if (SoundElement_GetMusicPlaybackEnabled() <= 0) {
         SoundElement_SetMusicPlaybackEnabled(1);

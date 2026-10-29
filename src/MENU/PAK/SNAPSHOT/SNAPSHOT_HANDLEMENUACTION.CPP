@@ -58,7 +58,7 @@ extern s32 Note_GetFreePages(s32 ch, s32 *freeSpace);
 
 extern u32 Note_BytesToPakPages(u32 size);
 
-static inline int space_required(int size) {size += 0x610; return Note_BytesToPakPages(size);}
+static inline int space_required(int size) {size += 1552; return Note_BytesToPakPages(size);}
 
 extern char g_matchEndingTeamWheelClose[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -221,7 +221,7 @@ s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *men
     if (g_pakSaveMenuActiveDe != 0) {
         entry->text = &g_pakSpaceLabelText;
         if (Note_GetFreePages(ch, &freeSpace) == 0) {
-            if (g_pakProfileLoadMode_de) need=Note_BytesToPakPages(0x18); else need=space_required(g_worldSnapshotNoteBytes);
+            if (g_pakProfileLoadMode_de) need=Note_BytesToPakPages(24); else need=space_required(g_worldSnapshotNoteBytes);
             text = ENTRY_TEXT(entry);
             Defs_FormatIntegerValue(digits.c, g_pakFormatInt3, freeSpace);
             text += 14;
@@ -242,7 +242,7 @@ s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *men
     fill:
         entry->text = header;
         result = Note_GetFreePages(ch, &freeSpace);
-        need = Note_BytesToPakPages(g_worldSnapshotNoteBytes + 0x610);
+        need = Note_BytesToPakPages(g_worldSnapshotNoteBytes + 1552);
         text = ENTRY_TEXT(entry);
         if (result == 0) {
             text += 14;

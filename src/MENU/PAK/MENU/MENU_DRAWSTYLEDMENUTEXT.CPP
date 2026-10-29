@@ -90,9 +90,9 @@ block_5:
     styleFlags = option->flags & 0x3FE0;
     styleIndex = 0;
     switch (styleFlags) {
-    case 0x20: styleIndex = 0; break;
-    case 0x40: styleIndex = 1; break;
-    case 0x80: styleIndex = 2; break;
+    case 32: styleIndex = 0; break;
+    case 64: styleIndex = 1; break;
+    case 128: styleIndex = 2; break;
     case 0x100: styleIndex = 3; break;
     case 0x200: styleIndex = 4; break;
     case 0x400: styleIndex = 5; break;
@@ -192,14 +192,14 @@ void Menu_DrawMenuOptionSprite(MenuOption *option, MenuOptionBox *box, s32 dir, 
         active = &g_frontendScreenStatus.status[7];
         if (*active != 0) {
             if (g_frontendScreenStatus.settings.local == 0) {
-                boxAlpha = 0x80;
+                boxAlpha = 128;
             } else if (option->flags < 0) {
                 boxAlpha = 0xFF;
             } else {
-                boxAlpha = 0xC0;
+                boxAlpha = 192;
             }
         } else {
-            boxAlpha = 0x80;
+            boxAlpha = 128;
         }
         OnScreen_DrawBevelBox(box->left, box->top, (s32)right, (s32)bottom, 1, 0, 0, 0, 0, boxAlpha);
         return;

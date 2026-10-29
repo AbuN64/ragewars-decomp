@@ -68,8 +68,8 @@ void Pools_InitializeGameplayCamera(GameplayCamera *camera) {
     camera->reservedByteD = 0;
     camera->reservedByteH = 0;
     camera->reservedFloat = unitValue;
-    camera->fogNear = 0x3E3;
-    camera->reservedWordB = 0x3E3;
+    camera->fogNear = 995;
+    camera->reservedWordB = 995;
     camera->reservedByteI = 0;
     camera->dirty = 0;
     camera->pixelXScale = unitValue;
@@ -106,7 +106,7 @@ void Pools_InitializeGameplayCamera(GameplayCamera *camera) {
     for (viewportIndex = 0; viewportIndex < 2; viewportIndex++) {
         ((RacerViewport *)camera)->viewports[viewportIndex].vscale[0] = viewportExtent;
         ((RacerViewport *)camera)->viewports[viewportIndex].vscale[1] = viewportExtent;
-        ((RacerViewport *)camera)->viewports[viewportIndex].vscale[2] = 0x3FF;
+        ((RacerViewport *)camera)->viewports[viewportIndex].vscale[2] = 1023;
         ((RacerViewport *)camera)->viewports[viewportIndex].vscale[3] = 0;
         ((RacerViewport *)camera)->viewports[viewportIndex].vtrans[0] = viewportExtent;
         ((RacerViewport *)camera)->viewports[viewportIndex].vtrans[1] = viewportExtent;
@@ -118,7 +118,7 @@ void Pools_InitializeGameplayCamera(GameplayCamera *camera) {
     Graphu64_IdentityMatrix(((GameplayCamera *)camera)->faceScreenUpright);
     camera->fadeEnabled = 0;
     camera->monochrome = 0;
-    camera->kickStep = 0x32;
+    camera->kickStep = 50;
     camera->reservedHalf = 0;
     g_cameraFramingTransitionTimer = 0;
     List_InitializeIntrusive(&((GameplayCamera *)camera)->objects, 0, 4);
@@ -128,8 +128,8 @@ void Pools_InitializeGameplayCamera(GameplayCamera *camera) {
 #include "TYPES.H"
 typedef struct DraftListA370 { void *head, *tail; s32 count, a, b; } DraftListA370;
 typedef struct DraftEntryA370 { void *next, *prev; s32 a, b, c; f32 value; DraftListA370 lists[3]; } DraftEntryA370;
-typedef struct DraftActorA370 { void *next, *prev; s32 index; u8 rest[0xECC]; } DraftActorA370;
-typedef struct DraftSmallA370 { u8 data[0x40]; } DraftSmallA370;
+typedef struct DraftActorA370 { void *next, *prev; s32 index; u8 rest[3788]; } DraftActorA370;
+typedef struct DraftSmallA370 { u8 data[64]; } DraftSmallA370;
 typedef struct DraftOwnerA370 {
     DraftActorA370 **handle, *actors; s32 count;
     DraftListA370 active, free;
@@ -197,9 +197,9 @@ void Pools_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     }
     if (actorCount) {
         owner->count = actorCount;
-        owner->handle = Cache_AllocateResource(0, actorCount * 0xED8, 0x23, g_camerasText);
+        owner->handle = Cache_AllocateResource(0, actorCount * 3800, 35, g_camerasText);
         owner->actors = *owner->handle;
-        XPlus_FillMemory(owner->actors, 0, actorCount * 0xED8);
+        XPlus_FillMemory(owner->actors, 0, actorCount * 3800);
         for (i = 0; i < owner->count; i++) {
             owner->actors[i].index = i;
             List_AppendIntrusive(&owner->active, &owner->actors[i]);
@@ -208,7 +208,7 @@ void Pools_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
         owner->empty = 0;
     }
     owner->smallCount = 16;
-    owner->smallHandle = Cache_AllocateResource(0, 0x400, 0x23, g_screenMessageAllocationLabel);
+    owner->smallHandle = Cache_AllocateResource(0, 0x400, 35, g_screenMessageAllocationLabel);
     owner->small = *owner->smallHandle;
     XPlus_FillMemory(owner->small, 0, 0x400);
     for (i = 0; i < owner->smallCount; i++) {
@@ -234,7 +234,7 @@ extern void Pool_InitEntryPool(char *);
 void Pools_ResetPlayers(MenuPlayerPoolView *actor) {
     char *parts;
 
-    XPlus_FillMemory(actor, 0, 0x1208);
+    XPlus_FillMemory(actor, 0, 4616);
     List_InitializeIntrusive(&actor->active, 0, 4);
     List_InitializeIntrusive(&actor->available, 0, 4);
     List_InitializeIntrusive(&actor->auxiliaryEntries, 0, 4);
@@ -255,7 +255,7 @@ void Pools_InitGroupPools(Triple *group) {
     int i;
 
     for (i = 0; i < group->z; i++) {
-        Pool_InitEntryPool((char *)(i * 0xED8 + group->y + 0x570));
+        Pool_InitEntryPool((char *)(i * 3800 + group->y + 1392));
     }
     Pool_InitEntryPool((char *)group + 0x5B0);
 }

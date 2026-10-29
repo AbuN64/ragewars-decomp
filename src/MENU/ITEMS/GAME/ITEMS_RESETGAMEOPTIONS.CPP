@@ -9,13 +9,13 @@
 void Items_ResetGameOptions(COptions *options) {
     s32 i;
     options->stereo = 1;
-    options->musicVolume = 0x80;
-    options->sfxVolume = 0xFA;
+    options->musicVolume = 128;
+    options->sfxVolume = 250;
     options->speechVolume = 0xFF;
-    options->realOpacity = 0x80;
+    options->realOpacity = 128;
     options->opacity = options->realOpacity;
     options->lightingGamma = 0;
-    options->difficulty = 0x10;
+    options->difficulty = 16;
     options->cheatFlags = 0;
     options->cheatEnabledFlags = 0;
     options->cheatFlags = 0x04000000;

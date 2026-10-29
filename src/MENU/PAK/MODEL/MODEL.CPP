@@ -132,19 +132,19 @@ void Pak_AdjustModelByteTwo(void *first, void *second, void *third) {
 /* Forwards its three arguments to Pak_AdjustModelField with 1, 8, 0xA, 0x7D0 and the pooled constant (1.0f). */
 
 void Pak_AdjustModelWordAt08(void *first, void *second, void *third) {
-    Pak_AdjustModelField(first, second, third, 1, 8, 0xA, 0x7D0, (1.0f));
+    Pak_AdjustModelField(first, second, third, 1, 8, 10, 2000, (1.0f));
 }
 
 /* Forwards its three arguments to Pak_AdjustModelField with 2, 0x10, 0x66, 0xA000 and the pooled constant (10.239999771118164f). */
 
 void Pak_AdjustModelFloatAt10(void *first, void *second, void *third) {
-    Pak_AdjustModelField(first, second, third, 2, 0x10, 0x66, 0xA000, (10.239999771118164f));
+    Pak_AdjustModelField(first, second, third, 2, 16, 102, 0xA000, (10.239999771118164f));
 }
 
 /* Forwards its three arguments to Pak_AdjustModelField with 2, 0x14, 1, 0xB4 and the pooled constant
    (1.0f). */
 
 void Pak_AdjustModelFloatAt14(void *first, void *second, void *third) {
-    Pak_AdjustModelField(first, second, third, 2, 0x14, 1, 0xB4, (1.0f));
+    Pak_AdjustModelField(first, second, third, 2, 20, 1, 180, (1.0f));
 }
 #endif

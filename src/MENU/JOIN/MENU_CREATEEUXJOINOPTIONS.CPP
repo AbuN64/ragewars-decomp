@@ -22,31 +22,31 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     EuxDrawItem *item;
     s32 i;
 
-    screen = Cache_AllocateMemory(0x20);
+    screen = Cache_AllocateMemory(32);
     g_courseOptionsScreen = screen;
     screen->window = window;
     g_courseOptionsScreen->overlayNodeId = SmpOverlay_CreateOverlayNode(window, 4);
-    SmpOverlay_ShowSlotById(window, 0, 0x38D);
-    SmpOverlay_ShowSlotById(window, 1, 0x38D);
-    SmpOverlay_ShowSlotById(window, 2, 0x38D);
-    SmpOverlay_ShowSlotById(window, 3, 0x38D);
-    item = Node_FindWidgetByResourceId(window, 0x38F);
-    item->alpha = 0x8C;
-    if (Menu_GetPreviousScreenOwner(0) == 0x16) {
+    SmpOverlay_ShowSlotById(window, 0, 909);
+    SmpOverlay_ShowSlotById(window, 1, 909);
+    SmpOverlay_ShowSlotById(window, 2, 909);
+    SmpOverlay_ShowSlotById(window, 3, 909);
+    item = Node_FindWidgetByResourceId(window, 911);
+    item->alpha = 140;
+    if (Menu_GetPreviousScreenOwner(0) == 22) {
         Widget_SetWidgetFlag08(item, 0);
     }
     g_courseOptionsScreen->reservedWord = 0;
     g_courseOptionsScreen->selection = 0;
-    g_courseOptionsScreen->roots[0] = Node_FindWidgetByResourceId(window, 0x390);
-    g_courseOptionsScreen->roots[1] = Node_FindWidgetByResourceId(window, 0x399);
-    g_courseOptionsScreen->roots[2] = Node_FindWidgetByResourceId(window, 0x39A);
+    g_courseOptionsScreen->roots[0] = Node_FindWidgetByResourceId(window, 912);
+    g_courseOptionsScreen->roots[1] = Node_FindWidgetByResourceId(window, 921);
+    g_courseOptionsScreen->roots[2] = Node_FindWidgetByResourceId(window, 922);
     g_courseOptionsScreen->count = Join_CountUsedSlots();
     for (i = 0; i < 3; i++) {
         Join_UpdateJoinRequestDisplay(i);
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->roots[i], 0x396), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->roots[i], 918), 0);
     }
     Tsmos_ActivateControllerState();
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->roots[g_courseOptionsScreen->selection], 0x396), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->roots[g_courseOptionsScreen->selection], 918), 1);
     return 0;
 }
 #endif

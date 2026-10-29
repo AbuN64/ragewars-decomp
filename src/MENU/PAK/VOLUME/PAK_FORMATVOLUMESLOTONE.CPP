@@ -13,7 +13,7 @@
 #include "SYSTEM/DEFS.H"
 
 s32 Pak_FormatVolumeSlotOne(struct Field *field) {
-    s32 step = (g_gameSettings.volume[1] - 0x80) / 8;
+    s32 step = (g_gameSettings.volume[1] - 128) / 8;
     char *text;
 
     if (step == 0) {
@@ -41,7 +41,7 @@ s32 Pak_FormatVolumeSlotOne(struct Field *field) {
 extern s32 Menu_CountLineChars(struct Field *);
 
 s32 Pak_FormatVolumeSlotOne(struct Field *field) {
-    s32 step = (g_gameSettings.volume[1] - 0x80) / 8;
+    s32 step = (g_gameSettings.volume[1] - 128) / 8;
     char *text;
 
     if (step == 0) {

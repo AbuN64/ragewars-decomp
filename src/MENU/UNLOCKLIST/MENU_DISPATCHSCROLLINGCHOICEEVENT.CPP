@@ -25,7 +25,7 @@ s32 Menu_DispatchScrollingChoiceEvent(void *eventObject, s32 eventId, s32 eventP
     MenuActorInputView *actor;
 
     if (g_scrollingChoiceEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_scrollingChoiceEventHandlers;
         index = 0;
         do {

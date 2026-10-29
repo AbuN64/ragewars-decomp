@@ -29,7 +29,7 @@ s32 Items_HandleCharacterPreviewSelectionGerman(s32 widget, CharacterPreviewMenu
         Menu_AllocateMenu(owner, menuContext, g_characterPreviewMenuRomResource);
         return 1;
     }
-    slot->choice = Menu_StepValue(menuContext, slot->choice, 1, 0, 0x12, 1);
+    slot->choice = Menu_StepValue(menuContext, slot->choice, 1, 0, 18, 1);
     if (Control_IsLeftPressed(menuContext->player) != 0) {
         slot->choice = g_characterPreviewLeftChoices[slot->choice][0];
     }
@@ -37,7 +37,7 @@ s32 Items_HandleCharacterPreviewSelectionGerman(s32 widget, CharacterPreviewMenu
         slot->choice = g_characterPreviewRightChoices[slot->choice][0];
     }
     Player_StartPlayerAnimation(rec, slot->choice);
-    Menu_SelectPreviewModel(widget, 0xB, slot->choice);
+    Menu_SelectPreviewModel(widget, 11, slot->choice);
     return 0;
 }
 #endif

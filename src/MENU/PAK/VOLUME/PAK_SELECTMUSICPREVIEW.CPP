@@ -42,17 +42,17 @@ s32 Pak_SelectMusicPreview(s32 unused, struct PakControllerRequestView *menu) {
     if (menu->inner->buttons & 0x20202) {
         musicSelection -= 1;
         if (musicSelection < 0) {
-            musicSelection = 0x16;
-        } else if (musicSelection == 0xE) {
-            musicSelection = 0xB;
+            musicSelection = 22;
+        } else if (musicSelection == 14) {
+            musicSelection = 11;
         }
     }
     if (menu->inner->buttons & 0x4D101) {
         musicSelection += 1;
-        if (musicSelection >= 0x17) {
+        if (musicSelection >= 23) {
             musicSelection = 0;
-        } else if (musicSelection == 0xC) {
-            musicSelection = 0xF;
+        } else if (musicSelection == 12) {
+            musicSelection = 15;
         }
     }
     g_menuMusicPreviewSelection = musicSelection;

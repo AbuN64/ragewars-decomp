@@ -30,7 +30,7 @@ struct PakSaveBlock {
     f32 hours;
     Block70 block18;
     PakSavedOptions options;
-    u8 notes[0x1000];
+    u8 notes[4096];
 };
 
 struct PakSaveOwner {
@@ -99,7 +99,7 @@ s32 Snapshot_RestoreSaveBlock(void *unused, PakPromptContext *menu) {
         }
         g_gameStateBlock[0] = 0;
         g_gameStateBlock[1] = 0;
-        Menu_OpenDialog(&g_gameStateBlock[0x16A], g_pakRestoreBlockPromptText, owner, owner->slot698, 0);
+        Menu_OpenDialog(&g_gameStateBlock[362], g_pakRestoreBlockPromptText, owner, owner->slot698, 0);
     } else if (Note_DeleteNote(channel, g_controllerPakOverwriteNoteIndex) == 0) {
         Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteDeleteSucceededDialogResource, menu->player, menu->slot, menu->prompt);
     } else {

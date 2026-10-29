@@ -23,7 +23,7 @@ s32 Selection_DestroyCharacterSelectionMenu(void) {
 
 s32 Selection_ActivateCharacterSelectionMode(void) {
     Tsmos_SetModeOneFlag(1);
-    SoundElement_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(3704);
     return 0;
 }
 #endif

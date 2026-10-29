@@ -17,11 +17,11 @@ extern void *Cache_AllocateMemory(s32 size);
 extern void Frontend_InitMenuImage(s32 *, s32, s32, s32, s32);
 
 s32 Menu_CreateOptionsImageTransition(void) {
-    s32 *record = Cache_AllocateMemory(0x24);
+    s32 *record = Cache_AllocateMemory(36);
     g_optionsImageTransition = record;
     record[7] = 0;
     record[8] = 0;
-    Frontend_InitMenuImage(record, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(record, 103, 0, 0, 0);
     return 0;
 }
 
@@ -137,7 +137,7 @@ s32 Menu_StartOptionsImageTransition(void) {
 }
 
 s32 Menu_HandleOptionsTransitionRequest(void *first, void *second, u32 event, s32 value) {
-    if ((event >> 16) == 3 && value == 0xB) {
+    if ((event >> 16) == 3 && value == 11) {
         MarkMenuEventHandled();
         g_optionsImageTransition[8] = 1;
     }
@@ -162,7 +162,7 @@ s32 Menu_DispatchOptionsTransitionEvent(void *object, s32 event, s32 eventData, 
     s32 table_kind;
 
     if (g_optionsTransitionEventCallbacks != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_optionsTransitionEventCallbacks;
         offset = 0;
         do {
@@ -174,7 +174,7 @@ s32 Menu_DispatchOptionsTransitionEvent(void *object, s32 event, s32 eventData, 
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;

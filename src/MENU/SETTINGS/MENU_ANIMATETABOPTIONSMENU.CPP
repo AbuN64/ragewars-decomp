@@ -58,7 +58,7 @@ s32 Menu_AnimateTabOptionsMenu(void) {
             }
             Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(g_optionsShortcutScreen))->pakIcon), 1);
             Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(g_optionsShortcutScreen))->header), 1);
-            Menu_SetFocusedElement(tabRes(0x37D));
+            Menu_SetFocusedElement(tabRes(893));
             goto block_11;
         }
 block_11:
@@ -120,7 +120,7 @@ block_11:
             }
             break;
         case 5:
-            SoundElement_PlayFlatSound(0xE78);
+            SoundElement_PlayFlatSound(3704);
             Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(g_optionsShortcutScreen))->marker), 0);
             Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(g_optionsShortcutScreen))->pakIcon), 0);
             Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(g_optionsShortcutScreen))->footer), 1);

@@ -128,7 +128,7 @@ loop_1:
     }
     rosterRecord += 0x96;
     controllerIndex += 1;
-    controllerOffset += 0x224;
+    controllerOffset += 548;
     if (controllerIndex >= 4) {
         return connectedCount;
     }
@@ -214,7 +214,7 @@ s32 CMenuProfile_AdjustControllerSelection(void *menuItem, void *menuContext) {
 
     p = (void *)((PlayerProfileMenuContext *)menuContext)->owner;
     bytep = &p->controls->selection;
-    result = Menu_AdjustValue(menuContext, *bytep, 1, 0, 0xA, 0);
+    result = Menu_AdjustValue(menuContext, *bytep, 1, 0, 10, 0);
     *bytep = (u8)result;
     return 0;
 }

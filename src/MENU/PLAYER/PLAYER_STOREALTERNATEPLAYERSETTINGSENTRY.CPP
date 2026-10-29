@@ -58,29 +58,29 @@ void Player_SelectAlternatePlayerSettingsEntry(s32 entryIndex) {
     u8 *slot = &g_gameSettings.playerSettings[entryIndex].slot;
 
     *slot = entryIndex;
-    SmpButton_SelectListEntry(g_alternatePlayerSettingsScreen->a, g_profileSlotSettingsByte7B[entryIndex * 0x190]);
-    SmpButton_SelectListEntry(g_alternatePlayerSettingsScreen->b, g_profileSlotSettingsByte7D[entryIndex * 0x190]);
-    SmpSlider_SetSliderItem(g_alternatePlayerSettingsScreen->c, g_profileSlotSettingsByte79[entryIndex * 0x190]);
-    SmpSlider_SetSliderItem(g_alternatePlayerSettingsScreen->d, g_profileSlotSettingsByte7A[entryIndex * 0x190]);
-    SmpButton_SelectListEntry(g_alternatePlayerSettingsScreen->e, g_profileSlotSettingsByte82[entryIndex * 0x190]);
+    SmpButton_SelectListEntry(g_alternatePlayerSettingsScreen->a, g_profileSlotSettingsByte7B[entryIndex * 400]);
+    SmpButton_SelectListEntry(g_alternatePlayerSettingsScreen->b, g_profileSlotSettingsByte7D[entryIndex * 400]);
+    SmpSlider_SetSliderItem(g_alternatePlayerSettingsScreen->c, g_profileSlotSettingsByte79[entryIndex * 400]);
+    SmpSlider_SetSliderItem(g_alternatePlayerSettingsScreen->d, g_profileSlotSettingsByte7A[entryIndex * 400]);
+    SmpButton_SelectListEntry(g_alternatePlayerSettingsScreen->e, g_profileSlotSettingsByte82[entryIndex * 400]);
 }
 
 void Player_StoreAlternatePlayerSettingsEntry(s32 entryIndex) {
     u8 *config;
 
     config = g_playerSettings + entryIndex * 0x96;
-    g_profileSlotSettingsByte7B[entryIndex * 0x190] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->a);
+    g_profileSlotSettingsByte7B[entryIndex * 400] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->a);
     do {
-        g_profileSlotSettingsByte7D[entryIndex * 0x190] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->b);
-        g_profileSlotSettingsByte79[entryIndex * 0x190] = SmpSlider_GetSliderItem(g_alternatePlayerSettingsScreen->c);
-        g_profileSlotSettingsByte7A[entryIndex * 0x190] = SmpSlider_GetSliderItem(g_alternatePlayerSettingsScreen->d);
-        g_profileSlotSettingsByte82[entryIndex * 0x190] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->e);
+        g_profileSlotSettingsByte7D[entryIndex * 400] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->b);
+        g_profileSlotSettingsByte79[entryIndex * 400] = SmpSlider_GetSliderItem(g_alternatePlayerSettingsScreen->c);
+        g_profileSlotSettingsByte7A[entryIndex * 400] = SmpSlider_GetSliderItem(g_alternatePlayerSettingsScreen->d);
+        g_profileSlotSettingsByte82[entryIndex * 400] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->e);
     } while (0);
-    config[0x7B] = g_profileSlotSettingsByte7B[entryIndex * 0x190];
-    config[0x7D] = g_profileSlotSettingsByte7D[entryIndex * 0x190];
-    config[0x79] = g_profileSlotSettingsByte79[entryIndex * 0x190];
-    config[0x7A] = g_profileSlotSettingsByte7A[entryIndex * 0x190];
-    config[0x82] = g_profileSlotSettingsByte82[entryIndex * 0x190];
+    config[123] = g_profileSlotSettingsByte7B[entryIndex * 400];
+    config[125] = g_profileSlotSettingsByte7D[entryIndex * 400];
+    config[121] = g_profileSlotSettingsByte79[entryIndex * 400];
+    config[122] = g_profileSlotSettingsByte7A[entryIndex * 400];
+    config[130] = g_profileSlotSettingsByte82[entryIndex * 400];
 }
 
 s32 Player_FreePlayerSettingsScreen(void) {
@@ -121,11 +121,11 @@ s32 Player_ConfirmPlayerSettingsEntry(void) {
     struct MenuStepState *state;
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (Menu_GetFocusedElementId() == 0x5E) {
+    if (Menu_GetFocusedElementId() == 94) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (Menu_GetFocusedElementId() == 0x60) {
+    if (Menu_GetFocusedElementId() == 96) {
 #elif defined(VERSION_EU_X)
-    if (Menu_GetFocusedElementId() == 0x64) {
+    if (Menu_GetFocusedElementId() == 100) {
 #endif
         Player_StorePlayerSettingsEntry(g_playerSettingsScreen->item);
         state = g_playerSettingsScreen;

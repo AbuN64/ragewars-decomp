@@ -7,5 +7,5 @@ extern void SmXlate_SwitchScreen(int);
 
 void Menu_RequestOptionsScreen22(void) {
     Tsmos_DeactivateControllerState();
-    SmXlate_SwitchScreen(0x16);
+    SmXlate_SwitchScreen(22);
 }

@@ -26,7 +26,7 @@ void Scene_CopySimpleModelHeader(void *level, void *buffer, s32 name) {
         ((u32 *)buffer)[2] = 0;
     } else {
         size = Scene_GetIndexedModelResource(level, index);
-        header = Cache_RequestResource(0, size, size, 0x18, 0, 0, 0, g_constructMapObjectIndex, 1);
+        header = Cache_RequestResource(0, size, size, 24, 0, 0, 0, g_constructMapObjectIndex, 1);
         if (header != 0) {
             key = SetN64_GetDirectoryEntry(*header, size, 1);
             resource = Cache_RequestWordCountedResource(0, &table, key, g_constructMapSimpModelsIndex, 1);

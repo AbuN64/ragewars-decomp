@@ -25,7 +25,7 @@ enum { k_altPlayerSettingsButtonFirstWrapId = 454, k_altPlayerSettingsWindowWidg
 s32 Player_BuildItemLabelList(void *parent) {
     void *list;
 
-    g_alternatePlayerSettingsScreen = Cache_AllocateMemory(0x50);
+    g_alternatePlayerSettingsScreen = Cache_AllocateMemory(80);
     SmpButton_WrapButtonWidget(k_altPlayerSettingsButtonFirstWrapId);
     list = SmpButton_CreateListWidget(k_altPlayerSettingsListAFirstId, k_altPlayerSettingsListASecondId);
     g_alternatePlayerSettingsScreen->listA = list;

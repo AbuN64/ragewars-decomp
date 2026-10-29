@@ -186,10 +186,10 @@ s32 Items_SelectSceneMaskText(SceneMaskLabelItem *item) {
     case 8:
         item->table = g_sceneMaskLabelTable8;
         break;
-    case 0x10:
+    case 16:
         item->table = g_sceneMaskLabelTable0x10;
         break;
-    case 0x20:
+    case 32:
         item->table = g_sceneMaskLabelTable0x20;
         break;
     }

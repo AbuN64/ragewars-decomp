@@ -9,7 +9,7 @@ extern void guMtxF2L(void *, void *);
 extern struct Command *g_displayListCursor;
 
 void Image_EmitMatrix(void *source) {
-    void *allocation = ESmem_AllocateFrameHeapHigh(0x40);
+    void *allocation = ESmem_AllocateFrameHeapHigh(64);
     struct Command *command;
 
     guMtxF2L(source, allocation);

@@ -100,7 +100,7 @@ void Timer_AllocateSaveBlock(void ***handle, void **data, s32 units) {
     } else {
         units = (s32)(g_worldSnapshotNoteBytes + 0x610);
     }
-    block = Cache_AllocateResource(0, units, 0x33, g_pakSingleSaveBlockName);
+    block = Cache_AllocateResource(0, units, 51, g_pakSingleSaveBlockName);
     *handle = block;
     first = *block;
     *data = first;

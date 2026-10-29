@@ -108,7 +108,7 @@ s32 Note_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
   {
     Cache_SetResourceActivityState(one);
   }
-  buf = Cache_AllocateResource(0, size, 0x23, g_pakReadScratchNoteName);
+  buf = Cache_AllocateResource(0, size, 35, g_pakReadScratchNoteName);
   addr = *buf;
   ((void (*)(s32))Control_AcquireControllerLock)(1);
   Control_ReadControllerStates();

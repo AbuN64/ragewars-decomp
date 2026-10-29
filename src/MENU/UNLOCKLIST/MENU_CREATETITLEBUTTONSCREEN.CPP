@@ -24,22 +24,22 @@ extern struct ResourceSmpFlickerCreateFlickerWidget *Node_FindWidgetByResourceId
 
 s32 Menu_CreateTitleButtonScreen(void *list) {
     struct ResourceSmpFlickerCreateFlickerWidget *item;
-    g_titleButtonScreen = Cache_AllocateMemory(0x14);
+    g_titleButtonScreen = Cache_AllocateMemory(20);
 #if defined(VERSION_DE)
-    g_titleButtonScreen->title = SmpFade_CreateFadeWidget(0x3C6, 0x3C6 + 1);
-    g_titleButtonScreen->button = SmpFlicker_CreateFlickerWidget(0x3C6 + 3, 0x6E);
-    item = Node_FindWidgetByResourceId(list, 0x3C6 + 2);
+    g_titleButtonScreen->title = SmpFade_CreateFadeWidget(966, 966 + 1);
+    g_titleButtonScreen->button = SmpFlicker_CreateFlickerWidget(966 + 3, 110);
+    item = Node_FindWidgetByResourceId(list, 966 + 2);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    g_titleButtonScreen->title = SmpFade_CreateFadeWidget(0x3CC, 0x3CC + 1);
-    g_titleButtonScreen->button = SmpFlicker_CreateFlickerWidget(0x3CC + 3, 0x6E);
-    item = Node_FindWidgetByResourceId(list, 0x3CC + 2);
+    g_titleButtonScreen->title = SmpFade_CreateFadeWidget(972, 972 + 1);
+    g_titleButtonScreen->button = SmpFlicker_CreateFlickerWidget(972 + 3, 110);
+    item = Node_FindWidgetByResourceId(list, 972 + 2);
 #elif defined(VERSION_EU_X)
-    g_titleButtonScreen->title = SmpFade_CreateFadeWidget(0x3D0, 0x3D0 + 1);
-    g_titleButtonScreen->button = SmpFlicker_CreateFlickerWidget(0x3D0 + 3, 0x6E);
-    item = Node_FindWidgetByResourceId(list, 0x3D0 + 2);
+    g_titleButtonScreen->title = SmpFade_CreateFadeWidget(976, 976 + 1);
+    g_titleButtonScreen->button = SmpFlicker_CreateFlickerWidget(976 + 3, 110);
+    item = Node_FindWidgetByResourceId(list, 976 + 2);
 #endif
     g_titleButtonScreen->item = item;
-    item->value = 0xF;
+    item->value = 15;
     g_titleButtonScreen->count = 3;
     g_titleButtonScreen->selection = -1;
     return 0;
@@ -57,8 +57,8 @@ s32 Menu_FreeTitleButtonScreen(void) {
 extern void SmpButton_WrapButtonWidget(s32);
 
 s32 Menu_WrapTitleButtonScreenNodes(void) {
-    SmpButton_WrapButtonWidget(0x3D0);
-    SmpButton_WrapButtonWidget(0x3D1);
+    SmpButton_WrapButtonWidget(976);
+    SmpButton_WrapButtonWidget(977);
     return 0;
 }
 #endif

@@ -129,7 +129,7 @@ void Menu_StartMenuPulse(struct Object1C8 *object) {
 
 void Menu_StepSpriteFrame(struct Object1C8 *object) {
     object->first += object->second;
-    if (object->first >= 0x30) {
+    if (object->first >= 48) {
         object->first = 0;
         object->second = 0;
     }
@@ -142,10 +142,10 @@ void Menu_StepSpriteFrame(struct Object1C8 *object) {
 s32 Menu_GetMirroredMenuFrame(struct MenuItemCountView *object) {
     s32 count = object->count;
 
-    if (count < 0x18) {
+    if (count < 24) {
         return count;
     }
-    return 0x2F - count;
+    return 47 - count;
 }
 
 void Menu_DrawAnimatedMenuSprite(MenuSpriteElement *e) {
@@ -156,13 +156,13 @@ void Menu_DrawAnimatedMenuSprite(MenuSpriteElement *e) {
     f32 h;
 
     if (e->active != 0) {
-        if (e->frame < 0x18) {
+        if (e->frame < 24) {
             frame = e->frame;
         } else {
-            frame = 0x2F - e->frame;
+            frame = 47 - e->frame;
         }
         OnScreen_SetupTextRendering();
-        Geometry_SetModePreset(0x15);
+        Geometry_SetModePreset(21);
         o = e->owner;
         gfx = g_displayListCursor++;
         w = o->width;
@@ -170,7 +170,7 @@ void Menu_DrawAnimatedMenuSprite(MenuSpriteElement *e) {
         gDPSetEnvColor(gfx, 255, 0, 0, 255);
         gfx = g_displayListCursor++;
         gDPSetPrimColor(gfx, 0, 0, 224, 0, 0, 255);
-        OnScreen_DrawSpriteResource(0x67, frame, e->owner->x, e->owner->y,
+        OnScreen_DrawSpriteResource(103, frame, e->owner->x, e->owner->y,
                       w / (f32)g_hudReferenceViewportWidth * 5.0f, h / (f32)g_hudReferenceViewportHeight * 4.0f, 1);
     }
 }
@@ -178,7 +178,7 @@ void Menu_DrawAnimatedMenuSprite(MenuSpriteElement *e) {
 /* Returns 0x480 when the halfword a record starts with is 3, otherwise zero. */
 s32 Menu_GetMenuItemExtraSize(s16 *record) {
     if (*record == 3) {
-        return 0x480;
+        return 1152;
     }
     return 0;
 }
@@ -204,11 +204,11 @@ void Menu_InitMenuItemFromDescriptor(CMenuItem *w, WidgetDescriptor *d, char **a
  w->id=id; w->type=d->type; w->flags=d->flags|0x1800000;
  w->x=d->x; w->y=d->y; w->r=d->r; w->g=d->g; w->b=d->b; w->a=d->a;
  w->value=d->value; w->desc=d; w->index=-1; w->m_pMenu=arg;
- size=0; if(d->type==3) size=0x480;
+ size=0; if(d->type==3) size=1152;
  if(size) {
  w->extra=*arena;
  extra=*arena; if(d->type==3) ((struct MenuItemVisibilityFlagView *)(extra))->flag=1;
- { int step=0; if(d->type==3) step=0x480;
+ { int step=0; if(d->type==3) step=1152;
  *arena+=step; }
  }
 }
@@ -216,9 +216,9 @@ void Menu_InitMenuItemFromDescriptor(CMenuItem *w, WidgetDescriptor *d, char **a
 void *Menu_GetWidgetStyle(MenuItemFlagsView *widget) {
  s32 index=0;
  switch(widget->flags & 0x3fe0) {
- case 0x20: break;
- case 0x40: index=1; break;
- case 0x80: index=2; break;
+ case 32: break;
+ case 64: index=1; break;
+ case 128: index=2; break;
  case 0x100: index=3; break;
  case 0x200: index=4; break;
  case 0x400: index=5; break;

@@ -28,7 +28,7 @@ void Menu_InitializeOptionsScene(void) {
     object = &g_frontendScreenStatus;
     Pools_ResetActorPools(object, 1);
     Player_InitializePlayerPool(object - 0x48, 1, 0);
-    Scene_SetSelection(&g_world, ~Track_RequestTrackByKey(0x27D), 0);
+    Scene_SetSelection(&g_world, ~Track_RequestTrackByKey(637), 0);
     if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
     }
@@ -40,5 +40,5 @@ void Menu_InitializeOptionsScene(void) {
 void Menu_ConfigureOptionsCamera(void) {
     Cinema_SetLoopMode(1);
     Cinema_SetResponse((45.0f));
-    Cinema_SetViewport(0x43, 0x4F, 0x12, 0x80);
+    Cinema_SetViewport(67, 79, 18, 128);
 }

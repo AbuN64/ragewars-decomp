@@ -141,7 +141,7 @@ s32 Track_LoadTrackSequence(s32 index) {
     else {
         if(g_cinemaSequenceState->active!=0)Cinema_ReleaseSequenceContext();
         loaded=SetN64_LocatePackSection(resources->trackBundle,resources->trackLookup,index+1,&size);
-        owner=Cache_RequestResource(0,loaded,loaded,size,0x33,0,g_Track_BuildTrackResourceSplinesAddress,s_cinemaText,1);
+        owner=Cache_RequestResource(0,loaded,loaded,size,51,0,g_Track_BuildTrackResourceSplinesAddress,s_cinemaText,1);
         if(owner==0)goto failed;
         g_cinemaSequenceState->owner=owner;
         g_cinemaSequenceState->resource=*owner;
@@ -178,7 +178,7 @@ s32 Track_LoadTrackSequence(s32 index) {
         previous=g_cinemaSequenceState->spec.id8;
         loaded=SetN64_LocatePackSection(g_trackResourceDirectory,g_trackResourceDirectoryKey,0,&size2);
         if(loaded==0)table=0;
-        else table=Cache_RequestResource(0,loaded,loaded,size2,0x33,0,0,g_cinemaDirectoryText,1);
+        else table=Cache_RequestResource(0,loaded,loaded,size2,51,0,0,g_cinemaDirectoryText,1);
          {
             Shared_TrackTable *entries=*table;
             TrackResourceEntry *base=entries->entries;
@@ -221,7 +221,7 @@ s32 Track_LoadTrackSequence(s32 index) {
             context->mode=context->spec.flags&8;
             context->onClose=first;
             context->callback10=second;
-            if(context->requestE0-10U<0x47U)context->mode=0;
+            if(context->requestE0-10U<71U)context->mode=0;
             if(g_cinemaSequenceState->requestE0-400U<4U)g_cinemaSequenceState->mode=0;
         }
         else {
@@ -229,7 +229,7 @@ s32 Track_LoadTrackSequence(s32 index) {
             g_cinemaSequenceState->pending=0;
             g_cinemaSequenceState->time=g_cinemaSequenceState->start;
         }
-        if(g_cinemaSequenceState->spec.id8==0x9F)g_cinemaSequenceState->mode=0;
+        if(g_cinemaSequenceState->spec.id8==159)g_cinemaSequenceState->mode=0;
         return 1;
     }
 }

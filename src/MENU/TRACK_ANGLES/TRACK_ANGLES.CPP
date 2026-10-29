@@ -136,7 +136,7 @@ void Menu_TriggerTrackEvent(int event) {
     unsigned char *bits = g_transientPlayerList;
     int index;
     if (g_cinemaPlaybackFlag != 0) {
-        index = event - 0x259;
+        index = event - 601;
         if ((unsigned int)index < 6 && bits != 0) {
             if (test_bit(bits + 0x638, index)) return;
             set_bit(bits + 0x638, index);
@@ -242,5 +242,5 @@ s32 Menu_GetTrackSplineStorageSize(void *object) {
     struct IntPair *second = SetN64_GetPackSection(object, 2);
     s32 size = first->second * 36;
 
-    return size + second->second * 36 + 0x30;
+    return size + second->second * 36 + 48;
 }

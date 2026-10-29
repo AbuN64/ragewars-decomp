@@ -27,7 +27,7 @@
 extern s32 Menu_CountLineChars(LayeredText *);
 
 s32 Pak_UpdateFirstVolumeLabel(LayeredText *field) {
-    s32 step = (VOLUME_BYTE - 0x80) / 8;
+    s32 step = (VOLUME_BYTE - 128) / 8;
     char *text;
 
     if (step == 0) {

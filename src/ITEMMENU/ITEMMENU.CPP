@@ -118,7 +118,7 @@ extern s32 g_runtimeHeapStart;
 extern void SetN64_CopyString(char *marker, char *name);
 
 static inline s32 is_restorable(u32 address) {
-    if (address >= (u32)&g_systemBootMarker && address < (u32)&g_systemBootMarker + 0x10) {
+    if (address >= (u32)&g_systemBootMarker && address < (u32)&g_systemBootMarker + 16) {
         return 0;
     }
     if (address == (u32)&g_systemBootMarkerComparison) {
@@ -127,19 +127,19 @@ static inline s32 is_restorable(u32 address) {
     if (g_systemBootMarkerComparison != 0) {
         return 1;
     }
-    if (address >= (u32)&g_controllerActorSnapshot && address < (u32)&g_controllerActorSnapshot + 0x430) {
+    if (address >= (u32)&g_controllerActorSnapshot && address < (u32)&g_controllerActorSnapshot + 1072) {
         return 0;
     }
-    if (address >= (u32)&g_gameSettings && address < (u32)&g_gameSettings + 0x584) {
+    if (address >= (u32)&g_gameSettings && address < (u32)&g_gameSettings + 1412) {
         return 0;
     }
-    if (address >= (u32)&g_worldSnapshotNoteData && address < (u32)&g_worldSnapshotNoteData + 0x5800) {
+    if (address >= (u32)&g_worldSnapshotNoteData && address < (u32)&g_worldSnapshotNoteData + 22528) {
         return 0;
     }
     if (address >= (u32)&g_sceneCollisionStorage && address < (u32)&g_sceneCollisionStorage + 0x5000) {
         return 0;
     }
-    if (address >= (u32)&g_gameSettings + 0x5D8 && address <= (u32)&g_gameSettings + 0x688) {
+    if (address >= (u32)&g_gameSettings + 1496 && address <= (u32)&g_gameSettings + 1672) {
         return 0;
     }
     return 1;
@@ -433,25 +433,25 @@ void ItemMenu_RestoreBootMemoryNoOp(void) {
 
 s32 ItemMenu_IsRestorableAddress(u32 address) {
     address |= 0x80000000;
-    if (((address) >= (u32)&(g_systemBootMarker) && (address) < (u32)&(g_systemBootMarker) + (0x10)) || address == (u32)&g_systemBootMarkerComparison) {
+    if (((address) >= (u32)&(g_systemBootMarker) && (address) < (u32)&(g_systemBootMarker) + (16)) || address == (u32)&g_systemBootMarkerComparison) {
         return 0;
     }
     if (g_systemBootMarkerComparison != 0) {
         return 1;
     }
-    if (((address) >= (u32)&(g_controllerActorSnapshot) && (address) < (u32)&(g_controllerActorSnapshot) + (0x430))) {
+    if (((address) >= (u32)&(g_controllerActorSnapshot) && (address) < (u32)&(g_controllerActorSnapshot) + (1072))) {
         return 0;
     }
-    if (((address) >= (u32)&(g_gameSettings) && (address) < (u32)&(g_gameSettings) + (0x584))) {
+    if (((address) >= (u32)&(g_gameSettings) && (address) < (u32)&(g_gameSettings) + (1412))) {
         return 0;
     }
-    if (((address) >= (u32)&(g_worldSnapshotNoteData) && (address) < (u32)&(g_worldSnapshotNoteData) + (0x5800))) {
+    if (((address) >= (u32)&(g_worldSnapshotNoteData) && (address) < (u32)&(g_worldSnapshotNoteData) + (22528))) {
         return 0;
     }
     if (((address) >= (u32)&(g_sceneCollisionStorage) && (address) < (u32)&(g_sceneCollisionStorage) + (0x5000))) {
         return 0;
     }
-    if (address >= (u32)&g_gameSettings.counters && address <= (u32)&g_gameSettings.counters + 0xB0) {
+    if (address >= (u32)&g_gameSettings.counters && address <= (u32)&g_gameSettings.counters + 176) {
         return 0;
     }
     return 1;

@@ -129,7 +129,7 @@ s32 Snapshot_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 u
     selectedPlayer = pakRecordChannel(menu, &channel);
     player = selectedPlayer;
     if (g_pakSaveMenuActiveDe != 0) {
-        required = Note_BytesToPakPages(0x18);
+        required = Note_BytesToPakPages(24);
         status = Note_GetFreePages(channel, &freeBytes);
         if (status == 0) {
             if (required <= freeBytes) {
@@ -139,7 +139,7 @@ s32 Snapshot_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 u
                     status = Note_FindFreeNoteExtension(channel, extension);
                     if (status == 0) {
                         attempted = 1;
-                        status = Note_SaveNote(channel, 0x18, g_pakControllerRecord,
+                        status = Note_SaveNote(channel, 24, g_pakControllerRecord,
                                               RW_PAK_RECORD_TITLE, extension, RW_PAK_GAME_CODE);
                     }
                 }

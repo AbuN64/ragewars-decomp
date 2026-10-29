@@ -57,7 +57,7 @@ void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 
     case 4: case 5: resource = 5; break;
     case 6: resource = 7; break;
     }
-    font = Scene_StartWorldEffect(&g_world, resource, 0x10, 1);
+    font = Scene_StartWorldEffect(&g_world, resource, 16, 1);
     if (font) {
         while (text && (ch = *text) && ch != 10) {
             next = text[1];
@@ -98,7 +98,7 @@ void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 
             }
             sx = width;
             sy = height;
-            if (special && (glyph == 0x25 || glyph == 0x2B || glyph == 0x3D)) {
+            if (special && (glyph == 37 || glyph == 43 || glyph == 61)) {
                 sx = g_hudReferenceViewportWidth * (1.0f / 284.0f);
                 sy = g_hudReferenceViewportHeight * (1.0f / 222.0f);
             }

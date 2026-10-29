@@ -51,14 +51,14 @@ s32 OnScreen_StartMoverScript(void *widget, s32 *script) {
 s32 OnScreen_StartFirstStatusBar(void *widget, s32 owner, s32 target) {
     (((struct OverlayScriptPrimaryRangeView *) ((s8 *) widget))->owner) = owner;
     (((struct OverlayScriptPrimaryRangeView *) ((s8 *) widget))->target) = target;
-    (((struct OverlayScriptPrimaryRangeView *) ((s8 *) widget))->initialPercent) = 0x64;
+    (((struct OverlayScriptPrimaryRangeView *) ((s8 *) widget))->initialPercent) = 100;
     return OnScreen_StartMoverScript(widget, &g_firstStatusBarMoverScript);
 }
 
 void OnScreen_StartSecondStatusBar(void *hud, s32 owner, s32 target) {
     (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->owner) = owner;
     (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->target) = target;
-    (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->initialPercent) = 0x64;
+    (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->initialPercent) = 100;
     OnScreen_StartMoverScript(hud + 0x48, &g_secondStatusBarMoverScript);
 }
 
@@ -84,7 +84,7 @@ void OnScreen_DrawStatusBars(void *playerHud) {
     OnScreen_SetupTextRendering();
     OnScreen_LoadTextTileModeOne();
     OnScreen_SetTextScale(g_hudStatusBarTextScale, g_hudStatusBarTextScale);
-    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 200, 200, 200);
     Onscrn_SetupSpriteMode(g_gameSettings.hudFade);
     if (((Hud *)playerHud)->bars[0].enabled != 0) {
         OnScreen_DrawStatusBar(playerHud, 1);
@@ -190,8 +190,8 @@ void OnScreen_SetupFillMode(void) {
     gDPPipeSync(gfx);
     gfx = g_displayListCursor++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
-    Geometry_SetModePreset(0x15);
-    Geometry_SetCombineMode(0x19);
+    Geometry_SetModePreset(21);
+    Geometry_SetCombineMode(25);
 }
 #endif
 
@@ -271,8 +271,8 @@ void OnScreen_SetupFillMode(void) {
     gDPPipeSync(gfx);
     gfx = g_displayListCursor++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
-    Geometry_SetModePreset(0x15);
-    Geometry_SetCombineMode(0x19);
+    Geometry_SetModePreset(21);
+    Geometry_SetCombineMode(25);
 }
 
 void OnScreen_FillRectangle(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
@@ -311,7 +311,7 @@ s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 x, s16 y, f32 sca
 
     s32 resourceHandle;
 
-    if ((u32)(g_displayListCapacityUsRev1 - (((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) >> 3)) < 0x3E8
+    if ((u32)(g_displayListCapacityUsRev1 - (((u32)g_displayListCursor - (u32)g_gameSession.ring.current->commands) >> 3)) < 1000
         || g_screenImageResourcesEnabled == 0
         || (resourceHandle = Scene_StartWorldEffect(&g_world, resourceId, 0, 1), resourceHandle == 0)) {
         return 0;
@@ -321,7 +321,7 @@ s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 x, s16 y, f32 sca
     return 1;
 }
 
-extern u8 g_onScreenFontTextureStorage[0x90];
+extern u8 g_onScreenFontTextureStorage[144];
 
 typedef struct ResourceView {
     u8 *data;
@@ -352,7 +352,7 @@ void OnScreen_LoadFontTexture(void) {
         if (view.data != 0) {
             view.data += 0x10;
         }
-        Libc_CopyBytes(g_onScreenFontTextureStorage, view.data, 0x90);
+        Libc_CopyBytes(g_onScreenFontTextureStorage, view.data, 144);
         Cache_UnlockResource(0, handle);
         g_onScreenFontTexture = g_onScreenFontTextureStorage;
     }

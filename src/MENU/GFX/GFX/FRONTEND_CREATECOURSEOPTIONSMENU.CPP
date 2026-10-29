@@ -19,39 +19,39 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
     SlotSelectionWidget *item;
     s32 row;
 
-    { void *memory = Cache_AllocateMemory(0x20); g_courseOptionsScreen = memory; }
+    { void *memory = Cache_AllocateMemory(32); g_courseOptionsScreen = memory; }
     g_courseOptionsScreen->handle = root;
     g_courseOptionsScreen->mode = SmpOverlay_CreateOverlayNode((s32) root, 4);
-    SmpOverlay_ShowSlotById((s32) root, 0, 0x389);
-    SmpOverlay_ShowSlotById((s32) root, 1, 0x389);
-    SmpOverlay_ShowSlotById((s32) root, 2, 0x389);
-    SmpOverlay_ShowSlotById((s32) root, 3, 0x389);
+    SmpOverlay_ShowSlotById((s32) root, 0, 905);
+    SmpOverlay_ShowSlotById((s32) root, 1, 905);
+    SmpOverlay_ShowSlotById((s32) root, 2, 905);
+    SmpOverlay_ShowSlotById((s32) root, 3, 905);
 
-    item = Node_FindWidgetByResourceId(root, 0x38B);
-    item->alpha = 0x8C;
+    item = Node_FindWidgetByResourceId(root, 907);
+    item->alpha = 140;
     if (Menu_GetPreviousScreenOwner(0) == 22) {
         Widget_SetWidgetFlag08(item, 0);
     }
 
     g_courseOptionsScreen->timer = 0;
     g_courseOptionsScreen->selection = 0;
-    item = Node_FindWidgetByResourceId(root, 0x38C);
+    item = Node_FindWidgetByResourceId(root, 908);
     g_courseOptionsScreen->rows[0] = item;
-    item = Node_FindWidgetByResourceId(root, 0x395);
+    item = Node_FindWidgetByResourceId(root, 917);
     g_courseOptionsScreen->rows[1] = item;
-    item = Node_FindWidgetByResourceId(root, 0x396);
+    item = Node_FindWidgetByResourceId(root, 918);
     g_courseOptionsScreen->rows[2] = item;
     g_courseOptionsScreen->step = Join_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
         Join_UpdateJoinRequestDisplay(row);
-        item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[row], 0x392);
+        item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[row], 914);
         Widget_SetWidgetFlag08(item, 0);
     }
 
     Tsmos_ActivateControllerState();
 
-    item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x392);
+    item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 914);
     Widget_SetWidgetFlag08(item, 1);
     return 0;
 }
@@ -78,18 +78,18 @@ s32 Frontend_CreatePlayerCountScreenEux(void *window) {
     SliderItemEu *item;
     void *title;
 
-    g_playerCountScreen = Cache_AllocateMemory(0x24);
+    g_playerCountScreen = Cache_AllocateMemory(36);
     Tsmos_ActivateControllerState();
-    title = SmpFade_CreateFadeWidget(0x39C, 0x39D);
+    title = SmpFade_CreateFadeWidget(924, 925);
     g_playerCountScreen->list = title;
     SmpSlider_EnableTransition(title);
-    SmpButton_WrapButtonWidget(0x3A0);
-    item = Node_FindWidgetByResourceId(window, 0x39E);
+    SmpButton_WrapButtonWidget(928);
+    item = Node_FindWidgetByResourceId(window, 926);
     g_playerCountScreen->item = item;
-    item->alpha = 0xF;
-    g_playerCountScreen->resourceWidget = SmpFlicker_CreateFlickerWidget(0x39F, 0x6E);
+    item->alpha = 15;
+    g_playerCountScreen->resourceWidget = SmpFlicker_CreateFlickerWidget(927, 110);
     g_playerCountScreen->scrollDelay = 3;
-    item = Node_FindWidgetByResourceId(window, 0x3A1);
+    item = Node_FindWidgetByResourceId(window, 929);
     item->text = g_playerCountScreen->text14;
     g_playerCountScreen->playerCount = 1;
     XStdio_FormatBuffer(g_playerCountScreen->text14, s_playerCountFormat, 1);

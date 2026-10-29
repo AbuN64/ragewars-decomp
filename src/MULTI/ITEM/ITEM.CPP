@@ -27,7 +27,7 @@ void Multi_DrawPlayerItemAvailability(struct MultiplayerItemAvailabilityView *it
     struct PlayerItemInventoryView *player = context->player;
     s32 available = 0;
     switch (type) {
-    case 0x10FE:
+    case 4350:
         if (index >= 0) {
             if (index < 3) goto low;
             if (index < 6) goto high;
@@ -40,7 +40,7 @@ void Multi_DrawPlayerItemAvailability(struct MultiplayerItemAvailabilityView *it
             available = available < player->count64E;
         }
         break;
-    case 0x1194:
+    case 4500:
         available = player->flags[index] != 0;
         break;
     }
@@ -80,7 +80,7 @@ s32 Multi_IsPlayerItemAvailable(struct MultiplayerItemAvailabilityView *item, st
     s32 result = 0;
 
     switch (type) {
-    case 0x10FE:
+    case 4350:
         if (index >= 0) {
             if (index < 3) {
                 goto low;
@@ -97,7 +97,7 @@ s32 Multi_IsPlayerItemAvailable(struct MultiplayerItemAvailabilityView *item, st
             result = result < player->count64E;
         }
         break;
-    case 0x1194:
+    case 4500:
         result = player->flags[index] != 0;
         break;
     }

@@ -72,7 +72,7 @@ s32 Setup_CommitPlayerName(s32 first, NameEditMenuContext *second, s32 third) {
         character = *sourceName;
         sourceName += 1;
         if (character == 0) {
-            character = 0x20;
+            character = 32;
         } else {
             nonemptyCharacters += 1;
         }

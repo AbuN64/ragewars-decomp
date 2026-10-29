@@ -15,27 +15,27 @@ void Menu_EmptyResourceRangeHookUs(void) {
 
 #if !(defined(VERSION_DE))
 s32 Menu_ClassifyResourceRange(s32 resourceId) {
-    if ((resourceId == 0x7CF) || (resourceId == 0xBB7) || (resourceId == 0xF9F) ||
-        (resourceId == 0x1387) || (resourceId == 0x176F) || (resourceId == 0x1B57) ||
-        (resourceId == 0x63)) {
+    if ((resourceId == 1999) || (resourceId == 2999) || (resourceId == 3999) ||
+        (resourceId == 4999) || (resourceId == 5999) || (resourceId == 6999) ||
+        (resourceId == 99)) {
         return 0;
     }
-    if ((u32)(resourceId - 0x3E8) < 0x3E8) {
+    if ((u32)(resourceId - 1000) < 1000) {
         return 1;
     }
-    if ((u32)(resourceId - 0x7D0) < 0x3E8) {
+    if ((u32)(resourceId - 2000) < 1000) {
         return 2;
     }
-    if ((u32)(resourceId - 0xBB8) < 0x3E8) {
+    if ((u32)(resourceId - 3000) < 1000) {
         return 3;
     }
-    if ((u32)(resourceId - 0xFA0) < 0x3E8) {
+    if ((u32)(resourceId - 4000) < 1000) {
         return 4;
     }
-    if ((u32)(resourceId - 0x1388) < 0x3E8) {
+    if ((u32)(resourceId - 5000) < 1000) {
         return 5;
     }
-    if ((u32)(resourceId - 0x1770) < 0x3E8) {
+    if ((u32)(resourceId - 6000) < 1000) {
         return 6;
     }
     return -1;

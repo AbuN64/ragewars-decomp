@@ -28,7 +28,7 @@ extern PakDirectory *g_controllerPakNoteLists;
 
 extern u8 g_controllerPakFrontendState;
 
-extern u8 g_controllerPakFilenameAlphabet[0x42];
+extern u8 g_controllerPakFilenameAlphabet[66];
 
 extern void Control_ReadControllerStates(void);
 
@@ -50,7 +50,7 @@ static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
     }
     started = 0;
     for (i = 0; i < n; i++) {
-        if (src[i] < 0x42) {
+        if (src[i] < 66) {
             if (src[i] == 0 && !started) {
                 dst[i] = ' ';
             } else {
@@ -110,7 +110,7 @@ static inline s32 Note_ReadFileIntoBuffer(s32 ch, s32 file_no, void *dst, s32 si
     if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
     }
-    handle = Cache_AllocateResource(0, blocks, 0x23, g_pakReadScratchNoteName);
+    handle = Cache_AllocateResource(0, blocks, 35, g_pakReadScratchNoteName);
     buf = *handle;
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
@@ -196,7 +196,7 @@ s32 Note_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
     }
-    handle = Cache_AllocateResource(0, blocks, 0x23, g_pakWriteScratchNoteName);
+    handle = Cache_AllocateResource(0, blocks, 35, g_pakWriteScratchNoteName);
     buf = *handle;
     for (tries = 0; tries < 4; tries++) {
         result = Note_CreateAndWriteNote(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(g_pakCompanyCodeFixed, g_pakCompanyCodes, g_pakCompanyCodes, g_languageIndex), code);

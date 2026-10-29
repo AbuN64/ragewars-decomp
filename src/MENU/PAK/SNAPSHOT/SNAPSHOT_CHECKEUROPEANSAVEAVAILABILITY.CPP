@@ -208,7 +208,7 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
                 error = Note_CountFreeNotes(g_introSelectedItem, &freeNotes);
                 if (error == 0) {
                     maxBytes = Note_BytesToPakPages(g_worldSnapshotNoteBytes + sizeof(SaveSnapshot));
-                    minBytes = Note_BytesToPakPages(0x18U);
+                    minBytes = Note_BytesToPakPages(24U);
                     if (freeNotes != 0) {
                         if (freeBytes >= (s32)minBytes && freeBytes < (s32)maxBytes) {
                             g_pakMenuPromptAccepted = 1;
@@ -294,7 +294,7 @@ void Snapshot_BeginSnapshotSave(Shared_PakMenu *menu) {
     }
     if (!Note_GetStatus(channel)) {
         Snapshot_CreateSaveSnapshot(player);
-        pakSetChecksum((s32)g_pakSaveSnapshot, Note_Crc32(g_pakSaveSnapshot, g_worldSnapshotNoteBytes + 0x60C, 11));
+        pakSetChecksum((s32)g_pakSaveSnapshot, Note_Crc32(g_pakSaveSnapshot, g_worldSnapshotNoteBytes + 1548, 11));
         Snapshot_MarkSaveNotes(menu);
         return;
     }

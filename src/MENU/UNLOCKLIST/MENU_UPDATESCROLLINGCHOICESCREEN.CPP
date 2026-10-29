@@ -11,13 +11,13 @@ extern s32 Defs_TestBit(void *, s32);
 /* Releases the object g_unlockGatedListScreen holds through Cache_FreeMemory, clears g_unlockGatedListScreen and returns zero. */
 
 #if defined(VERSION_DE)
-enum { MENU_RESOURCE = 0x139 };
+enum { MENU_RESOURCE = 313 };
 #elif defined(VERSION_EU)
-enum { MENU_RESOURCE = 0x13b };
+enum { MENU_RESOURCE = 315 };
 #elif defined(VERSION_EU_X)
-enum { MENU_RESOURCE = 0x13f };
+enum { MENU_RESOURCE = 319 };
 #elif defined(VERSION_US_REV1) || defined(VERSION_US)
-enum { MENU_RESOURCE = 0x13b };
+enum { MENU_RESOURCE = 315 };
 #endif
 
 /* Runs the screen g_unlockGatedListScreen each frame: when its menu reports 1 for the first time it marks the
@@ -64,17 +64,17 @@ s32 Menu_FreeScrollingChoiceScreen(void) {
 /* Calls SmpButton_WrapButtonWidget with 0x13B, 0x13A and 0x13C in turn and returns zero. */
 s32 Menu_WrapScrollingChoiceNodes(void) {
 #if defined(VERSION_DE)
-    SmpButton_WrapButtonWidget(0x139);
-    SmpButton_WrapButtonWidget(0x138);
-    SmpButton_WrapButtonWidget(0x13A);
+    SmpButton_WrapButtonWidget(313);
+    SmpButton_WrapButtonWidget(312);
+    SmpButton_WrapButtonWidget(314);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    SmpButton_WrapButtonWidget(0x13B);
-    SmpButton_WrapButtonWidget(0x13A);
-    SmpButton_WrapButtonWidget(0x13C);
+    SmpButton_WrapButtonWidget(315);
+    SmpButton_WrapButtonWidget(314);
+    SmpButton_WrapButtonWidget(316);
 #elif defined(VERSION_EU_X)
-    SmpButton_WrapButtonWidget(0x13F);
-    SmpButton_WrapButtonWidget(0x13E);
-    SmpButton_WrapButtonWidget(0x140);
+    SmpButton_WrapButtonWidget(319);
+    SmpButton_WrapButtonWidget(318);
+    SmpButton_WrapButtonWidget(320);
 #endif
     return 0;
 }
@@ -134,36 +134,36 @@ s32 Menu_HandleScrollingChoice(void) {
     focusedElementIdResult = Menu_GetFocusedElementId();
     switch (focusedElementIdResult) { /* irregular */
 #if defined(VERSION_DE)
-    case 0x138 + 2:
+    case 312 + 2:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x13A + 2:
+    case 314 + 2:
 #elif defined(VERSION_EU_X)
-    case 0x13E + 2:
+    case 318 + 2:
 #endif
         g_unlockGatedListScreen->target = -1;
         break;
 #if defined(VERSION_DE)
-    case 0x138 + 1:
+    case 312 + 1:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x13A + 1:
+    case 314 + 1:
 #elif defined(VERSION_EU_X)
-    case 0x13E + 1:
+    case 318 + 1:
 #endif
         if (Defs_TestBit(&g_profileModeOnePlayedLevels, 0) == 0) {
             g_unlockGatedListScreen->target = 7;
         } else {
-            g_unlockGatedListScreen->target = 0x1E;
+            g_unlockGatedListScreen->target = 30;
         }
         break;
 #if defined(VERSION_DE)
-    case 0x138:
+    case 312:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x13A:
+    case 314:
 #elif defined(VERSION_EU_X)
-    case 0x13E:
+    case 318:
 #endif
         g_activeProfileCharacterSelections = g_profileCharacterSelections;
-        g_unlockGatedListScreen->target = 0xA;
+        g_unlockGatedListScreen->target = 10;
         break;
     }
     SmpSlider_SetTransitionMode(g_unlockGatedListScreen->menu, 2);

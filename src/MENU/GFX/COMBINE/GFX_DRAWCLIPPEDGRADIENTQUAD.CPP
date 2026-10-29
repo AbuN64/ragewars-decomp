@@ -170,7 +170,7 @@ void Combine_SetPrimitiveVertexMode(s32 mode) {
         point.z = g_gradientQuadProjectionDepth;
         Graphu64_TransformPoint(&g_uiPointTransform, &point, &projected);
         count = 4;
-        vertices = ESmem_AllocateFrameHeapHigh(0x40);
+        vertices = ESmem_AllocateFrameHeapHigh(64);
         for (i = 0; i < count; i++) {
             vertices[i].v.ob[0] = projected.x;
             vertices[i].v.ob[1] = projected.y;

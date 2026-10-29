@@ -74,17 +74,17 @@ void Player_DrawPulsingMenuSprite(PulsingMenuSpriteView *spriteState, CaptionEnt
     s32 drop;
     f32 scale;
     f32 sx;
-    phase = spriteState->pulsePhase = (spriteState->pulsePhase + 0x14) % 512;
+    phase = spriteState->pulsePhase = (spriteState->pulsePhase + 20) % 512;
     if (phase >= 0x100) {
         amount = (s32) ((f32) (0x200 - phase) * menuStyle->alpha * menuStyle->fade);
     } else {
         amount = (s32) ((f32) phase * menuStyle->alpha * menuStyle->fade);
     }
     Onscrn_SetupSpriteMode(amount);
-    drop = 0x50;
+    drop = 80;
     half = caption->width >> 1;
     if (g_frontendCurrentVideoModeIndex == 0) {
-        drop = 0x2D;
+        drop = 45;
     }
     sx = caption->scaleX;
     scale = *(&k_playerMenuSpriteScaleConstants + 1);
@@ -119,7 +119,7 @@ s32 Player_UpdatePlayerRespawnDelay(PlayerRespawnMenuContext *menuState) {
     if ((player->computerControlled == 0) && (Playerai_IsPlayerInactive(player) != 0)) {
         respawnFrames = player->respawnDelayFrames + 1;
         player->respawnDelayFrames = respawnFrames;
-        if (respawnFrames >= 0x4C) {
+        if (respawnFrames >= 76) {
             Player_PlacePlayerForRound(menuState->actor);
             return 1;
         }

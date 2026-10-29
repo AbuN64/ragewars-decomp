@@ -16,7 +16,7 @@ extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 s32 Pak_AdjustPackedButtonOption(void *first, void *second) {
     struct OptionsPakAdjustPackedButtonOption *options = &g_gameSettings;
 
-    options->value = Menu_AdjustValue(second, options->value, 0x10, 0, 0x80, 0);
+    options->value = Menu_AdjustValue(second, options->value, 16, 0, 128, 0);
     return 0;
 }
 

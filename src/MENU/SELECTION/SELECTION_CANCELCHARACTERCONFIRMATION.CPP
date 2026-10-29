@@ -80,7 +80,7 @@ int Selection_HandleCharacterVariantCycle(int unused0, int unused1, unsigned int
         e = &((CharacterVariantSelectionEntry *)g_characterSelectionMenu)[index];
         if (e->active == 1 && e->target != -1) {
             Menu_CyclePlayerCharacterVariant(index, e);
-            SoundElement_PlayFlatSound(0xE7C);
+            SoundElement_PlayFlatSound(3708);
         }
     }
     return 0;
@@ -123,7 +123,7 @@ s32 Selection_CancelCharacterConfirmation(s32 unused0, s32 unused1, s32 entryId)
 
     MarkMenuEventHandled();
     entryIndex = entryId & 0xFFFF;
-    entryOffset = entryIndex * 0x4C8;
+    entryOffset = entryIndex * 1224;
     selectionEntry = (StateMenuCancelCharacterConfirmation *)&((PanelRecord *)g_characterSelectionMenu)[entryIndex];
     confirmationState = selectionEntry->confirmationState;
     switch (confirmationState) {
@@ -169,7 +169,7 @@ s32 Selection_DispatchCharacterSelectionEvent(void *widget, s32 eventId, s32 eve
     s32 table_kind;
 
     if (g_characterSelectionEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = (char *)&g_characterSelectionEventHandlers;
         offset = 0;
         do {
@@ -181,7 +181,7 @@ s32 Selection_DispatchCharacterSelectionEvent(void *widget, s32 eventId, s32 eve
                 }
             }
             entry += 0xC;
-            offset += 0xC;
+            offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;

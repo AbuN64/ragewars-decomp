@@ -25,18 +25,18 @@ s32 Menu_FormatLocalizedPakSizeRange(PakRangeTextEu *entry) {
     char *dst;
     s32 i;
 
-    if (v < 0x32) src = g_pakSizeUnder50Text[g_languageIndex];
-    else if (v - 0x32 < 0x64) src = g_pakSizeUnder150Text[g_languageIndex];
-    else if (v - 0x96 < 0x96) src = g_pakSizeUnder300Text[g_languageIndex];
-    else if (v - 0x12C < 0xC8) src = g_pakSizeUnder500Text[g_languageIndex];
-    else if (v - 0x1F4 < 0x12C) src = g_pakSizeUnder800Text[g_languageIndex];
-    else if (v - 0x320 < 0x1F4) src = g_pakSizeUnder1300Text[g_languageIndex];
-    else if (v - 0x514 < 0x2BC) src = g_pakSizeUnder2000Text[g_languageIndex];
-    else if (v - 0x7D0 < 0x3E8) src = g_pakSizeUnder3000Text[g_languageIndex];
-    else if (v - 0xBB8 < 0x5DC) src = g_pakSizeUnder4500Text[g_languageIndex];
-    else if (v - 0x1194 < 0x7D0) src = g_pakSizeUnder6500Text[g_languageIndex];
-    else if (v - 0x1964 < 0xDAB) src = g_pakSizeUnder9999Text[g_languageIndex];
-    else if ((s32)v >= 0x270F) src = g_pakSizeAtLeast9999Text[g_languageIndex];
+    if (v < 50) src = g_pakSizeUnder50Text[g_languageIndex];
+    else if (v - 50 < 100) src = g_pakSizeUnder150Text[g_languageIndex];
+    else if (v - 150 < 150) src = g_pakSizeUnder300Text[g_languageIndex];
+    else if (v - 300 < 200) src = g_pakSizeUnder500Text[g_languageIndex];
+    else if (v - 500 < 300) src = g_pakSizeUnder800Text[g_languageIndex];
+    else if (v - 800 < 500) src = g_pakSizeUnder1300Text[g_languageIndex];
+    else if (v - 1300 < 700) src = g_pakSizeUnder2000Text[g_languageIndex];
+    else if (v - 2000 < 1000) src = g_pakSizeUnder3000Text[g_languageIndex];
+    else if (v - 3000 < 1500) src = g_pakSizeUnder4500Text[g_languageIndex];
+    else if (v - 4500 < 2000) src = g_pakSizeUnder6500Text[g_languageIndex];
+    else if (v - 6500 < 3499) src = g_pakSizeUnder9999Text[g_languageIndex];
+    else if ((s32)v >= 9999) src = g_pakSizeAtLeast9999Text[g_languageIndex];
     dst = entry->text[g_languageIndex];
     dst += Menu_CountLineChars(entry) - 11;
     if (src != 0) {

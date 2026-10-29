@@ -28,7 +28,7 @@ extern s32 g_encodedCheatCharacterIndex;
 
 
 
-extern u8 g_encodedCheatCode[0x64];
+extern u8 g_encodedCheatCode[100];
 
 /* Draws the g_encodedTextEntryState spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width Menu_GetWidgetStyle_EncodedDrawtextentrycursor reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
 void Encoded_DrawTextEntryCursor(void *menu, MenuLocalizedTextItemView *item, void *third, MenuStyle *style) {
@@ -83,11 +83,11 @@ s32 Encoded_InsertTextEntryCharacter(TextEntryBufferView *textEntry) {
 
     g_encodedCheatCharacterIndex = -1;
     g_encodedTextEntryState.timer = 0;
-    if (g_encodedTextEntryState.count == 0x16) {
+    if (g_encodedTextEntryState.count == 22) {
         return 0;
     }
-    index = 0x16;
-    if (g_encodedTextEntryState.value < 0x16) {
+    index = 22;
+    if (g_encodedTextEntryState.value < 22) {
         do {
             g_encodedTextEntryState.text[index] = g_encodedTextEntryState.text[index - 1];
             index--;
@@ -119,12 +119,12 @@ s32 Encoded_DeletePreviousTextEntryCharacter(void) {
         return 0;
     }
     index = g_encodedTextEntryState.value - 1;
-    if (index < 0x17) {
+    if (index < 23) {
         do {
             next = index + 1;
             g_encodedTextEntryState.text[index] = g_encodedTextEntryState.text[next];
             index = next;
-        } while (index < 0x17);
+        } while (index < 23);
     }
     g_encodedTextEntryState.value--;
     g_encodedTextEntryState.count--;

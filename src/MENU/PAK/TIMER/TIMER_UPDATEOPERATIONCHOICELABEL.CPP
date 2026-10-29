@@ -73,7 +73,7 @@ s32 Timer_UpdateOperationChoiceLabel(struct Field *field, s16 *option_ptr) {
             field->text = g_pakSaveMenuNoteSlotChoiceLabels;
             return 0;
         }
-        if (option == 0x15) {
+        if (option == 21) {
             field->text = g_unlockedLevelResultLabel;
         } else if (g_pakProfileLoadMode_de != 0) {
             field->text = g_pakSaveMenuProfileChoiceLabels;

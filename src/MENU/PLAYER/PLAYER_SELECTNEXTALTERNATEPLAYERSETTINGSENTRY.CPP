@@ -125,14 +125,14 @@ s32 Player_EmptyAlternateSettingsExitHook(void) {
 s32 Player_ConfirmAlternatePlayerSettingsEntry(void) {
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (Menu_GetFocusedElementId() == 0x1C4) {
+    if (Menu_GetFocusedElementId() == 452) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (Menu_GetFocusedElementId() == 0x1C8) {
+    if (Menu_GetFocusedElementId() == 456) {
 #elif defined(VERSION_EU_X)
-    if (Menu_GetFocusedElementId() == 0x1CC) {
+    if (Menu_GetFocusedElementId() == 460) {
 #endif
         Player_StoreAlternatePlayerSettingsEntry(g_alternatePlayerSettingsScreen->item);
-        Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+        Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 22 ? -1 : 11);
         Menu_ReturnToPreviousScreen();
     }
     return 0;
@@ -140,7 +140,7 @@ s32 Player_ConfirmAlternatePlayerSettingsEntry(void) {
 
 s32 Player_CancelAlternatePlayerSettingsEntry(void) {
     MarkMenuEventHandled();
-    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 22 ? -1 : 11);
     Menu_ReturnToPreviousScreen();
     return 0;
 }
@@ -192,7 +192,7 @@ s32 Player_DispatchAlternatePlayerSettingsEvent(void *eventObject, s32 eventId, 
     MenuActorInputView *actor;
 
     if (g_alternatePlayerSettingsEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_alternatePlayerSettingsEventHandlers;
         index = 0;
         do {

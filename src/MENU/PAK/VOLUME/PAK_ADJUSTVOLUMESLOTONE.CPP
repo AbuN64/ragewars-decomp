@@ -13,8 +13,8 @@ s32 Pak_AdjustVolumeSlotOne(void *first, void *second) {
     s32 value = *option;
 
     value = Menu_AdjustValue(second, value, 8, 0, 0xFF, 0);
-    if (value == 0xF7) {
-        value = 0xF8;
+    if (value == 247) {
+        value = 248;
     }
     *option = value;
     return 0;

@@ -26,7 +26,7 @@ s32 Menu_DispatchSoundSliderEvent(void *eventTarget, s32 event, s32 itemId, s32 
     MenuActorInputView *actor;
 
     if (g_soundSliderEventHandlers != 0) {
-        wildcard = 0x7530;
+        wildcard = 30000;
         entry = &g_soundSliderEventHandlers;
         index = 0;
         do {

@@ -157,7 +157,7 @@ void Menu_OpenOptionsKeypad(void) {
             item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit0);
             break;
         }
-        item->alpha = 0x96;
+        item->alpha = 150;
         item->word38 = 0;
     }
     Menu_AdvanceTextRows();

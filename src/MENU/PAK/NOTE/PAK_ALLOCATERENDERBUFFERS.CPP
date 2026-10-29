@@ -99,7 +99,7 @@ void Note_DecodeNoteText(u8 *encodedText, u8 *noteText, s32 characterCount) {
 
     started = 0;
     for (i = started; i < characterCount; i++, encodedText++) {
-        if (*encodedText < 0x42) {
+        if (*encodedText < 66) {
             if (*encodedText == 0 && !started) {
                 noteText[i] = ' ';
             } else {
@@ -121,7 +121,7 @@ void Note_DecodeNoteText(u8 *encodedText, u8 *noteText, s32 characterCount) {
 }
 
 extern int XPlus_UppercaseCharacter(int);
-extern u8 g_controllerPakFilenameAlphabet[0x42];
+extern u8 g_controllerPakFilenameAlphabet[66];
 
 /* Maps input bytes through a lookup table and stores results. */
 void Note_EncodeNoteText(u8 *text, s8 *encodedText, s32 characterCount) {
@@ -133,12 +133,12 @@ void Note_EncodeNoteText(u8 *text, s8 *encodedText, s32 characterCount) {
 
     i = 0;
     if (characterCount > 0) {
-        alphabetSize = 0x42;
+        alphabetSize = 66;
         encodedCursor = encodedText;
         textCursor = text;
         do {
             *textCursor = XPlus_UppercaseCharacter(*textCursor);
-            for (j = 0; j < 0x42; j += 1) {
+            for (j = 0; j < 66; j += 1) {
                 if (*textCursor == g_controllerPakFilenameAlphabet[j]) {
                     *encodedCursor = (s8)j;
                     break;
@@ -266,14 +266,14 @@ int Note_AllocateRenderBuffers(struct RenderBufferResources *record) {
     }
 
     if (Defs_GetMemorySize() >= 6 * megabyte) {
-        bufferBytes = 0x54600;
+        bufferBytes = 345600;
         memoryEnd = Defs_GetMemorySize() | 0x80000000;
         g_renderFrameBufferCount = 3;
-        zBuffer = Cache_AllocateResourceAt(NULL, memoryEnd - megabyte, 0x54600, s_bufferText);
+        zBuffer = Cache_AllocateResourceAt(NULL, memoryEnd - megabyte, 345600, s_bufferText);
         frameBuffers = Cache_AllocateResourceAt(NULL, memoryEnd - 2 * megabyte, g_renderFrameBufferCount * bufferBytes,
                                                 s_displayBufferText);
-        XPlus_FillMemory(frameBuffers->data, 0, 0xFD200);
-        XPlus_FillMemory(zBuffer->data, 0, 0x54600);
+        XPlus_FillMemory(frameBuffers->data, 0, 1036800);
+        XPlus_FillMemory(zBuffer->data, 0, 345600);
         record->zBuffer = zBuffer;
         record->frameBuffers[0] = frameBuffers;
         g_depthImageBuffer = record->zBuffer->data;
@@ -296,9 +296,9 @@ int Note_AllocateRenderBuffers(struct RenderBufferResources *record) {
     }
     XPlus_FillMemory(g_depthImageBuffer, 0, bufferBytes);
 
-    record->displayLists = Cache_AllocateResource(0, (g_displayListCapacityUsRev1 + g_secondaryDisplayListCapacity) * 2 * sizeof(Gfx), 0x23, s_displayListsText);
-    record->fifo = Cache_AllocateResource(0, 0x8000, 0x23, s_fifoText);
-    record->audioHeap = Cache_AllocateResource(0, 0x22000, 0x23, s_audioHeapText);
+    record->displayLists = Cache_AllocateResource(0, (g_displayListCapacityUsRev1 + g_secondaryDisplayListCapacity) * 2 * sizeof(Gfx), 35, s_displayListsText);
+    record->fifo = Cache_AllocateResource(0, 0x8000, 35, s_fifoText);
+    record->audioHeap = Cache_AllocateResource(0, 0x22000, 35, s_audioHeapText);
     g_graphicsMicrocodeTextSize = 0x8000;
     g_audioContextHeapBytes = 0x22000;
     g_displayListBufferZero = record->displayLists->data;

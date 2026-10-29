@@ -171,7 +171,7 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     f32 ratioX;
     f32 ratioY;
     f32 wobble, opacity;
-    XPlus_FillMemory(&zero, 0, 0xC);
+    XPlus_FillMemory(&zero, 0, 12);
     selectedWidget = entry->state;
     if (selectedWidget == 0) return;
     widget = selectedWidget;
@@ -214,7 +214,7 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
     }
-    if (widget->selection == 0xB) {
+    if (widget->selection == 11) {
         Scene_ChangeInstanceModel(&g_world, draw, g_characterModelIds[draw->definition->character], 1);
     }
     if (g_multiplayerItemRenderState != 4) {
@@ -306,7 +306,7 @@ struct MenuBuildState {
 /* Private block size of an item: type 3 items own 0x480 bytes (inline copy of Menu_GetMenuItemExtraSize). */
 static inline s32 menuItemExtraSize(MenuBuildItem *definition) {
     s32 size = 0;
-    if (definition->type == 3) size = 0x480;
+    if (definition->type == 3) size = 1152;
     return size;
 }
 /* Fills one entry from its item and hands it the next private block (inline copy of

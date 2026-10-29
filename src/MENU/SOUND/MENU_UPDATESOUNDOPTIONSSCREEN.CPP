@@ -71,7 +71,7 @@ s32 Menu_UpdateSoundOptionsScreen(void) {
     options = &g_gameSettings.volume[1];
     if (value != options[0]) {
         options[0] = value;
-        SoundElement_PlayFlatSound(0x460);
+        SoundElement_PlayFlatSound(1120);
     }
     value = SmpSlider_GetSliderItem(g_soundOptionsScreen->music);
     if (value != options[-1]) {
@@ -81,7 +81,7 @@ s32 Menu_UpdateSoundOptionsScreen(void) {
             if (SoundElement_GetMusicPlaybackEnabled() != 0) {
                 return 0;
             }
-            track = 0x34;
+            track = 52;
         }
         SoundElement_SetMusicPlaybackEnabled(track);
     }
@@ -92,11 +92,11 @@ s32 Menu_ConfirmSoundOptionsScreen(void) {
     struct SoundOptionsScreen *state;
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (Menu_GetFocusedElementId() == 0x71) {
+    if (Menu_GetFocusedElementId() == 113) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (Menu_GetFocusedElementId() == 0x73) {
+    if (Menu_GetFocusedElementId() == 115) {
 #elif defined(VERSION_EU_X)
-    if (Menu_GetFocusedElementId() == 0x77) {
+    if (Menu_GetFocusedElementId() == 119) {
 #endif
         state = g_soundOptionsScreen;
         state->target = -1;

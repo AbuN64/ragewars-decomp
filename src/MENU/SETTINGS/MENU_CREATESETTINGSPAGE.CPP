@@ -33,17 +33,17 @@ s32 Menu_CreateSettingsPage(void) {
     void *thirdList;
     void *title;
     void *slider;
-    g_optionsPage = Cache_AllocateMemory(0x28);
-    g_optionsPage->menu = SmpFade_CreateFadeWidget(0x4D, 0x4E);
-    SmpButton_WrapButtonWidget(0x57);
-    SmpButton_WrapButtonWidget(0x58);
-    secondList = SmpButton_CreateListWidget(0x51, 0x52);
+    g_optionsPage = Cache_AllocateMemory(40);
+    g_optionsPage->menu = SmpFade_CreateFadeWidget(77, 78);
+    SmpButton_WrapButtonWidget(87);
+    SmpButton_WrapButtonWidget(88);
+    secondList = SmpButton_CreateListWidget(81, 82);
     g_optionsPage->twoPlayerScreenList = secondList;
     SmpButton_AppendListText(secondList, g_settingsPagePrimaryLocalizedLabels[0]);
     SmpButton_AppendListText(g_optionsPage->twoPlayerScreenList, g_settingsPageSecondaryLocalizedLabels);
     settings = &g_gameSettings;
     SmpButton_SelectListEntry(g_optionsPage->twoPlayerScreenList, settings->twoPlayerScreenPreference);
-    thirdList = SmpButton_CreateListWidget(0x53, 0x54);
+    thirdList = SmpButton_CreateListWidget(83, 84);
     g_optionsPage->resolutionList = thirdList;
     SmpButton_AppendListText(thirdList, g_optionsSecondListPrimaryLabels[0]);
     if (Defs_GetMemorySize() != 0x400000) {
@@ -51,11 +51,11 @@ s32 Menu_CreateSettingsPage(void) {
         SmpButton_AppendListText(g_optionsPage->resolutionList, g_optionsSecondListTertiaryLabels);
     }
     SmpButton_SelectListEntry(g_optionsPage->resolutionList, settings->resolution);
-    slider = SmpSlider_CreateSliderWidget(0x55, 0x56, 0x80);
+    slider = SmpSlider_CreateSliderWidget(85, 86, 128);
     g_optionsPage->gammaSlider = slider;
     SmpSlider_SetSliderItem(slider, settings->lightingGamma);
-    SmpButton_WrapButtonWidget(0x50);
-    title = SmpFlicker_CreateFlickerWidget(0x4F, 0x6E);
+    SmpButton_WrapButtonWidget(80);
+    title = SmpFlicker_CreateFlickerWidget(79, 110);
     g_optionsPage->state = 3;
     g_optionsPage->title = title;
     g_optionsPage->value = -1;
