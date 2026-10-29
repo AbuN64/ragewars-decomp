@@ -11,6 +11,7 @@
 #include "../../include/VOICE_START_AND_PARAMETER_UPDATE_VIEWS.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "../../include/libultra/audio/synthesizer.h"
+#include "../../include/libultra/audio/env.h"
 
 /* libultra audio/env.c, built with -fforce-addr (config.toml): the eqpower base stays in a register. */
 extern s16 g_audioEqualPowerPanTable[128]; /* eqpower */

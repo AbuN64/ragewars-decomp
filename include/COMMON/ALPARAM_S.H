@@ -145,6 +145,5 @@ extern float g_audioEnvelopeFallbackRate;
 
 
 
-extern f32 _getVol(f32 initialVolume, s32 sampleCount, s32 rateInteger, s32 rateFraction);
 
 #endif

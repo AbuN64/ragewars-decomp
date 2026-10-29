@@ -12,6 +12,7 @@
 #include "COMMON/TRIPLE.H"
 #include "../../include/libgultra/alunlink.h"
 #include "../../include/libultra/debug/assert.h"
+extern int _sndpVoiceHandler_Address(void *soundPlayer);
 
 /* alSndpNew, drafted from ultralib src/audio/sndplayer.c: sets up a sound player from its config,
    allocating the sound states and event items from the heap, registers its voice handler with the
