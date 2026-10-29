@@ -29,6 +29,7 @@ extern char g_cartridgeReadWorker[];
 
 extern void Cartridge_ReadChunksAndWait(void *dst, void *rom, void *size, u32 extra);
 extern u32 Defs_GetMemorySize(void);
+extern void rw_boot_entry(void);
 extern void osMapTLB(s32 tlbIndex, s32 pageMask, s32 virtualAddress, u32 addr, s32 oddPhysicalAddress, s32 asid);
 extern void osCreateThread(void *queue, s32 count, void *entry, s32 arg, void *data, s32 priority);
 extern void osSetEventMesg(s32 count, void *list, s16 *message);
@@ -70,12 +71,12 @@ void Vhandler_InitializePagerEuroExtended(void) {
     osCreateMesgQueue(&g_resourcePager.jobs, g_resourcePager.list1Data, 8);
     osCreateMesgQueue(&g_resourcePager.pending, g_resourcePager.list2Data, 8);
     g_resourcePager.regions.start = 0x400;
-    g_resourcePager.regions.pages = 0x100;
+    g_resourcePager.regions.pages = 256;
     g_resourcePager.regions.map = g_resourcePager.lookup;
     g_resourcePager.regions.next = 0;
     g_resourcePager.regions.source = (u8 (*)[4096])((u32) g_pagerCartridgeData | 0xB0000000);
     g_resourcePager.fD72 = 0;
-    if (Defs_GetMemorySize() > 0x4FFFFF) {
+    if (Defs_GetMemorySize() > 5242879) {
         Cartridge_ReadChunksAndWait(g_cartridgeReadWorker, g_pagerCartridgeData, g_pagerExpansionDataSize, extra);
     }
     if (extra != 0) {
@@ -331,7 +332,7 @@ void Vhandler_HandleResourcePageRequest(void) {
     }
     osWritebackDCacheAll();
     osSetIntMask(1);
-    ((void (*)(void))0x80000400)();
+    ((void (*)(void))&rw_boot_entry)();
     g_pagerLastMappedSlot = -1;
     thread->state = 2;
     osStartThread(thread);

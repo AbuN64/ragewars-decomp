@@ -31,7 +31,7 @@ void SetN64_InitFrameRing(RenderState *state) {
     u32 i, count, previous, next;
     CGameStatus *counters;
     Frame *view;
-    osCreateMesgQueue(&g_gameSchedulerMessageQueue, (s32)g_gameSchedulerMessages, 0x1000);
+    osCreateMesgQueue(&g_gameSchedulerMessageQueue, (s32)g_gameSchedulerMessages, 4096);
     XPlus_FillMemory(g_schedulerThreadStack, 7, 0x2000);
     Sched_InitializeSchedulerThread((void *)&g_systemScheduler, (s32)(g_schedulerThreadStack + 0x2000), g_schedulerThreadPriority, 0, 1);
     osScAddClient(&g_systemScheduler, &g_gameSchedulerClient, &g_gameSchedulerMessageQueue);

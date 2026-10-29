@@ -56,7 +56,7 @@ extern LightNode *Gdynlight_GetFirstLight(void *);
 extern LightNode *Gdynlight_GetNextLight(void *, LightNode *);
 
 u32 Defs_GetMemorySize(void) {
-    if (osMemSize > 0x7FFFFFU) {
+    if (osMemSize > 8388607U) {
         return 0x700000;
     }
     return osMemSize;

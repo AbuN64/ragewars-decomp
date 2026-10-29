@@ -130,7 +130,7 @@ s32 Audio_DequantizeTransformCoefficients(f32 *out, s16 *in) {
         }
         start = ends[band];
     }
-    for (band = g_audioTransformFirstUpperBand; band < 0x100; band++) {
+    for (band = g_audioTransformFirstUpperBand; band < 256; band++) {
         out[band] = 0.0f;
     }
     return 1;

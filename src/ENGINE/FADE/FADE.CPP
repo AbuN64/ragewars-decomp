@@ -45,7 +45,7 @@ void Audio_UpdateMusicPlayback(Track *queue) {
             return;
         }
         return;
-    case 0x100:
+    case 256:
         if (queue->playbackFlags & 8) {
             queue->playbackState = 128;
             queue->playbackFlags = 0;
@@ -82,7 +82,7 @@ void Audio_UpdateMusicPlayback(Track *queue) {
             }
             queue->midiHeader = selectedSequence;
             if (selectedSequence == NULL) {
-                queue->playbackState = 0x100;
+                queue->playbackState = 256;
                 g_musicStartupFrameCount = 0;
                 queue->playbackFlags = 0;
                 return;

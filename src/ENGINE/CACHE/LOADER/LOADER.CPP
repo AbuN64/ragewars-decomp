@@ -33,7 +33,7 @@ void Cartridge_StartReadWorker(s32 workerAddress, s32 count) {
     s32 s0;
     s32 s1;
 
-    osCreateMesgQueue(workerAddress + 0x230, workerAddress + 0x248, 0x200);
+    osCreateMesgQueue(workerAddress + 0x230, workerAddress + 0x248, 512);
     s0 = workerAddress + 0xA48;
     osCreateMesgQueue(s0, workerAddress + 0xA60, 1);
     osSetEventMesg(8, s0, 2001);

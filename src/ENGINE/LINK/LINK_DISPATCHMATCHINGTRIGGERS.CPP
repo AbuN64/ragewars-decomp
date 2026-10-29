@@ -173,7 +173,7 @@ void Link_CaptureActorTransform(void *actor, void *transform) {
 }
 
 void Link_DispatchTriggerAudio(s32 actorAddress, s32 event, Trigger *trigger) {
-    if (trigger->trackArgument >= 0x100) {
+    if (trigger->trackArgument >= 256) {
         SoundElement_PlayDialogGroup(trigger->trackArgument);
         return;
     }

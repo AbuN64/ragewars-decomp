@@ -223,14 +223,14 @@ void Sound_InitializeContext(GameAudioContext *ctx) {
     alHeapInit(ctx->frames, g_audioContextHeapBuffer, g_audioContextHeapBytes);
     config.maxVVoices = 37;
     config.maxPVoices = 37;
-    config.maxUpdates = 0x100;
+    config.maxUpdates = 256;
     config.fxType = 6;
     config.params = &g_audioFxConfigParams;
     timing.frequency = 22050;
     timing.frameTime = 1;
     config.dmaproc = 0;
     config.heap = ctx->frames;
-    timing.samples = 0x800;
+    timing.samples = 2048;
     Audiomgr_InitializeAudioWorker(&config, g_audioWorkerThreadPriority, &timing);
     g_audioSampleRomBase = Defs_ReadResourceWord(8);
     size = Defs_ReadResourceWord(4) - Defs_ReadResourceWord(0);
@@ -617,7 +617,7 @@ static inline s32 soundVoiceLimitReached(GameAudioContext *context, s32 sound) {
         return 1;
     }
     count = 0;
-    if (sound < 0x100) {
+    if (sound < 256) {
         for (i = 0; i < 17; i++) {
             if (context->voices[i].soundId == sound) {
                 count++;
@@ -645,7 +645,7 @@ s32 Sound_PlaySoundAtPosition(GameAudioContext *context, s32 sound, CVector3 pos
     if (soundVoiceLimitReached(context, sound)) {
         return -1;
     }
-    if (sound < 0x100) {
+    if (sound < 256) {
         index = selectSoundVariant(context, sound, context->lastInstrument);
         context->randomPan = (s32)Graphu64_RandomFloat(127.0f);
     } else {
@@ -661,7 +661,7 @@ s32 Sound_PlaySoundAtPosition(GameAudioContext *context, s32 sound, CVector3 pos
             soundAcquireLock(&context->lock);
             playId = ++context->playIdCounter;
             soundReleaseLock(&context->lock);
-            if (sound < 0x100) {
+            if (sound < 256) {
                 context->lastInstrument = index;
             }
         } else {
@@ -690,7 +690,7 @@ s32 Sound_PlayInstrumentAtPosition(GameAudioContext *self, s32 index, CVector3 p
         return -1;
     }
     self->selectedEntry = SetN64_GetPackSection(SetN64_GetPackSection(self->instrumentIndex, (s16)index), 0);
-    self->selectedSound = 0x100;
+    self->selectedSound = 256;
     self->selectedOwner = -1;
     group = SetN64_GetPackSection(SetN64_GetPackSection(self->instrumentIndex, (s16)index), 1);
     count = group->count;

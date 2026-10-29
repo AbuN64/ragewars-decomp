@@ -141,7 +141,7 @@ void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 tex
                                 packSectionResult = SetN64_GetPackSection(*resource, 0);
                                 if (g_modelBatchResource != resource || g_modelBatchPass != pass || g_modelInstanceQueueCount == 32) {
                                         Geometry_GroupModelInstances();
-                                        if (g_modelBatchResourceCount != 0x100) {
+                                        if (g_modelBatchResourceCount != 256) {
                                                 Cache_LockResource(0, resource);
                                                 g_modelBatchResources[g_modelBatchResourceCount] = resource;
                                                 g_modelBatchResourceCount += 1;

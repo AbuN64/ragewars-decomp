@@ -41,7 +41,7 @@ Acmd *Audio_LoadDecodedSamples(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCoun
                     return ptr;
                 }
                 osWritebackDCache(g_audioTransformInputStream, 0x200);
-                f->sample = 0x100;
+                f->sample = 256;
             }
             if (f->sample < byteCount) {
                 nSam = f->sample;

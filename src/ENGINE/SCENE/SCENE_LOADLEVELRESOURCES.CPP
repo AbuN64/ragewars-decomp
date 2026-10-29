@@ -436,7 +436,7 @@ scene_size_320:
     count = 800;
 scene_size_done:
     if (g_frontendScreenStatus.settings.local != 0) {
-        count += 0x200;
+        count += 512;
     }
     Cache_DrainAndCompactResources(0);
     resourceResult = Cache_AllocateResource(0, count << 6, 3, &s_matricesText);
@@ -1071,7 +1071,7 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
                 continue;
             }
             Gobjinst_RotatePoseMatrixBuffers(actor);
-            if (InstHdr_CanActorReceiveInteraction(actor) && world->interactiveCount != 0x200) {
+            if (InstHdr_CanActorReceiveInteraction(actor) && world->interactiveCount != 512) {
                 world->interactive[world->interactiveCount++] = actor;
             }
             if (InstHdr_HasEnabledMotionHooks(actor) && world->moverCount != 128) {

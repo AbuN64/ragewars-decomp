@@ -295,7 +295,7 @@ void Audio_InitializeVoiceParameters(void *voiceRecord, void *desc, s32 extra) {
     }
 
     ((struct ViewChannelUpdateVoicePlayback *)(voiceRecord))->sweeping = 0;
-    if (((struct ViewChannelUpdateVoicePlayback *)(voiceRecord))->trackId < 0x100) {
+    if (((struct ViewChannelUpdateVoicePlayback *)(voiceRecord))->trackId < 256) {
         if (((struct ViewChannelUpdateVoicePlayback *)(voiceRecord))->fixed == 0 &&
             Audio_GetSpatialPanMode(((struct ViewChannelUpdateVoicePlayback *)(voiceRecord))->context) != 0) {
             value = (s8)((GameAudioContext *)((struct ViewChannelUpdateVoicePlayback *)voiceRecord)->context)->randomPan;
@@ -693,7 +693,7 @@ void Audio_InitVoiceVolume(VoicePanEnvelopeState *voiceRecord, SoundPanEnvelopeD
     }
 
     voiceRecord->sweeping = 0;
-    if (voiceRecord->trackId < 0x100) {
+    if (voiceRecord->trackId < 256) {
         if (voiceRecord->fixedPan == 0 &&
             Audio_GetSpatialPanMode(voiceRecord->context) != 0) {
             value = voiceRecord->context->randomPan;

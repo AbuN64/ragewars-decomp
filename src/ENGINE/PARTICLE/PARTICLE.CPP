@@ -245,7 +245,7 @@ void Particle_Update(Shared_Particle *particle) {
         }
         if (die || bounce) {
             particle->time = 0.0f;
-            particle->space = -7;
+            particle->space = PARTICLE_ALIGN_WORLD;
             particle->flags = (particle->flags & ~0x30000) | 0x40000;
             particle->rot.z = (f32)(Graphu64_NextRandom() % 360) * 0.017453294f;
             particle->inst.velocity.y = 0.0f;
@@ -265,7 +265,7 @@ void Particle_Update(Shared_Particle *particle) {
     }
     if (particle->flags & 0x40000) {
         if (Unicol_MoveActorWithCollision(particle, particle->inst.pos, &particle->collisionFlags) && g_currentActorInstance.spaceHit != 0) {
-            particle->space = -3;
+            particle->space = PARTICLE_ALIGN_FLOOR;
         }
         if (particle->inst.instanceFlags & 0x1000) {
             particle->flags |= 4;
@@ -352,8 +352,8 @@ void Particle_Update(Shared_Particle *particle) {
                 Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.materialHitPosition);
             } else if (g_currentActorInstance.spaceHit != 0) {
                 Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.spaceHitPosition);
-                if (particle->space == -7) {
-                    particle->space = -3;
+                if (particle->space == PARTICLE_ALIGN_WORLD) {
+                    particle->space = PARTICLE_ALIGN_FLOOR;
                 }
             } else if (g_currentActorInstance.typedHit != 0) {
                 Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &g_currentActorInstance.typedHitPosition);

@@ -170,7 +170,7 @@ void Channel_InitializeVoiceMix(Voice *voice, SoundDescriptor *control, s32 unus
     mix = (AudioVolumeMix *)voice->reserved10;
     gainRange = voice->context->selectedEntry;
     voice->volumeScale = g_voiceDefaultVolumeScale;
-    if (voice->soundId < 0x100) {
+    if (voice->soundId < 256) {
         for (i = 0; i < 31; i++) {
             if (voice->soundId == (s32)g_soundVolumeScales[i].soundId) {
                 voice->volumeScale = g_soundVolumeScales[i].scale;

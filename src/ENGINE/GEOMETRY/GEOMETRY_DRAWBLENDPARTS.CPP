@@ -268,7 +268,7 @@ void Geometry_QueueModelInstance(void **a, void *b, s32 c, void *d, void *e, s32
     }
     if ((g_modelBatchResource != (s32)a) || (g_modelBatchPass != f) || (g_modelInstanceQueueCount == 32)) {
         Geometry_GroupModelInstances();
-        if (g_modelBatchResourceCount != 0x100) {
+        if (g_modelBatchResourceCount != 256) {
             Cache_LockResource(0, (s32)a);
             countp = &g_modelBatchResourceCount;
             count = *countp;

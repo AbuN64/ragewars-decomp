@@ -96,7 +96,7 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     } else {
         __osRestoreInt(mask);
     }
-    g_resourceCacheNodeCapacity = 0x400;
+    g_resourceCacheNodeCapacity = 1024;
     if (Defs_GetMemorySize() > 0x400000) {
         g_resourceCacheNodeCapacity *= 2;
     }

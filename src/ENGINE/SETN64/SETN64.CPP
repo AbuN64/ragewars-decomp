@@ -440,7 +440,7 @@ void SetN64_CollectVisibleEffectNodes(VisibleEffectPoolView *effectPool, Results
         mask = 0x30000;
         required = 0x20000;
         bounds = g_cameraVolumeBoundsMinZ + 1;
-        limit = 0x200;
+        limit = 512;
         do {
             Simpinst_ClearCachedResource(node);
             if (((node->flags & mask) == required) &&

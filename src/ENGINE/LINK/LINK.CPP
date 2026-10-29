@@ -58,17 +58,17 @@ void Link_AnimateVertexColors(VertexColorMeshView *object, u8 *colors) {
                     color = colors + i * 4;
 
                     value = amount + color[0];
-                    if (value >= 0x100) value = 0xFF;
+                    if (value >= 256) value = 0xFF;
                     if (value < 0) value = 0;
                     record->r = value;
 
                     value = amount + color[1];
-                    if (value >= 0x100) value = 0xFF;
+                    if (value >= 256) value = 0xFF;
                     if (value < 0) value = 0;
                     record->g = value;
 
                     value = amount + color[2];
-                    if (value >= 0x100) value = 0xFF;
+                    if (value >= 256) value = 0xFF;
                     if (value < 0) value = 0;
                     record->b = value;
                 }
