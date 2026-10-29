@@ -33,8 +33,8 @@ endif
 ifneq ($(filter default undefined,$(origin LD)),)
 LD := mips-linux-gnu-ld
 endif
-ifneq ($(filter default undefined,$(origin N64LINK)),)
-N64LINK := tools/n64link/n64link
+ifneq ($(filter default undefined,$(origin ABUMAS)),)
+ABUMAS := tools/abumas/abumas
 endif
 ifneq ($(filter default undefined,$(origin OBJCOPY)),)
 OBJCOPY := mips-linux-gnu-objcopy
@@ -68,7 +68,7 @@ VMACRO_us-rev1 := VERSION_US_REV1
 SHA1_us-rev1 := 037fb397cee2669048ed6b762a64698de4a4d88a
 ROM0_us-rev1 := 0
 ROM_SECTIONS_us-rev1 :=
-STAMPS := tools/n64link/.stamp $(TOOLCHAIN_gcc_2_7_2_sn64) $(TOOLCHAIN_gcc_2_8_1_sn64)
+STAMPS := tools/abumas/.stamp $(TOOLCHAIN_gcc_2_7_2_sn64) $(TOOLCHAIN_gcc_2_8_1_sn64)
 
 # The first path word under build/ is the version: build/<version>/<source path>.o
 ver = $(firstword $(filter-out nm nmraw,$(subst /, ,$1)))
@@ -88,11 +88,11 @@ ASFLAGS := -march=vr4300 -mabi=32 -EB --no-pad-sections -mips3
 define PREPROCESS_gcc_2_7_2_sn64
 $(Q)$(PPUNIT) $@ $(call shq,$(PP_FLAGS)) $(HDRKEY) $(STAMPREC) $(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $<
 endef
-COMPILE_gcc_2_7_2_sn64 = @rotate $(@:.o=.s) $(@:.o=.s.prev) '&&' @compile $(CC_gcc_2_7_2_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) '&&' @nonempty $(@:.o=.s) $(if $(NOALIGN),'&&' @py STRIP_ALIGN $(@:.o=.s) $(NOALIGN)) $(if $(HILO),'&&' @py HILO_HAZARD $(@:.o=.s)) '&&' @jumptable $(@:.o=.s) 80000000 '&&' @settle $(@:.o=.s) $(@:.o=.s.prev) '&&' $(N64LINK) asn64 --as $(AS_gcc_2_7_2_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@
+COMPILE_gcc_2_7_2_sn64 = @rotate $(@:.o=.s) $(@:.o=.s.prev) '&&' @compile $(CC_gcc_2_7_2_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) '&&' @nonempty $(@:.o=.s) $(if $(NOALIGN),'&&' @py STRIP_ALIGN $(@:.o=.s) $(NOALIGN)) $(if $(HILO),'&&' @py HILO_HAZARD $(@:.o=.s)) '&&' @jumptable $(@:.o=.s) 80000000 '&&' @settle $(@:.o=.s) $(@:.o=.s.prev) '&&' $(ABUMAS) asn64 --as $(AS_gcc_2_7_2_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@
 define PREPROCESS_gcc_2_8_1_sn64
 $(Q)$(PPUNIT) $@ $(call shq,$(PP_FLAGS)) $(HDRKEY) $(STAMPREC) $(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $<
 endef
-COMPILE_gcc_2_8_1_sn64 = @rotate $(@:.o=.s) $(@:.o=.s.prev) '&&' @compile $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(if $(FSPLIT),-ffunction-sections) $(@:.o=.i) -o $(@:.o=.s) '&&' @nonempty $(@:.o=.s) $(if $(NOALIGN),'&&' @py STRIP_ALIGN $(@:.o=.s) $(NOALIGN)) $(if $(HILO),'&&' @py HILO_HAZARD $(@:.o=.s)) '&&' @jumptable $(@:.o=.s) 80000000 '&&' @settle $(@:.o=.s) $(@:.o=.s.prev) '&&' $(if $(FSPLIT),@out $(@:.o=.n.s) $(N64LINK) asn64 $(@:.o=.s) '&&' @py FSPLIT_PASS $(@:.o=.n.s) $(@:.o=.f.s) '&&' $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.f.s) -o $@,$(N64LINK) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@) '&&' $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@
+COMPILE_gcc_2_8_1_sn64 = @rotate $(@:.o=.s) $(@:.o=.s.prev) '&&' @compile $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(if $(FSPLIT),-ffunction-sections) $(@:.o=.i) -o $(@:.o=.s) '&&' @nonempty $(@:.o=.s) $(if $(NOALIGN),'&&' @py STRIP_ALIGN $(@:.o=.s) $(NOALIGN)) $(if $(HILO),'&&' @py HILO_HAZARD $(@:.o=.s)) '&&' @jumptable $(@:.o=.s) 80000000 '&&' @settle $(@:.o=.s) $(@:.o=.s.prev) '&&' $(if $(FSPLIT),@out $(@:.o=.n.s) $(ABUMAS) asn64 $(@:.o=.s) '&&' @py FSPLIT_PASS $(@:.o=.n.s) $(@:.o=.f.s) '&&' $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.f.s) -o $@,$(ABUMAS) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@) '&&' $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@
 # Per-file facts ([file] rows of config.toml): a toolchain and flags for a path or a directory.
 $(foreach v,$(VERSIONS),build/$(v)/sdk/rnc/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/sdk/rnc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc
@@ -1960,8 +1960,8 @@ $(VERSIONS:%=build/nm/%/$(NAME).z64): build/nm/%/$(NAME).z64: build/nm/%/$(NAME)
 	echo "NM ROM $*: $$(grep -c '^draft' build/nm/$*/report.txt) unit(s) with drafts in," \
 	"$$(grep -c '^left-out' build/nm/$*/report.txt) left out (build/nm/$*/report.txt)"
 
-tools/n64link/.stamp:
-	$(Q)mkdir -p tools/n64link && curl -fsSL https://github.com/AbuN64/mas-n64/releases/download/v0.2.0/n64link-v0.2.0-linux-x86_64.tar.gz -o tools/n64link.tar.gz && echo '061d7bc69f21228c7029f4f530cd980bab3a35749751a43f2823d03d95be4ef7  tools/n64link.tar.gz' | sha256sum -c - >/dev/null && tar -xzf tools/n64link.tar.gz -C tools/n64link --strip-components=1 n64link-v0.2.0-linux-x86_64/n64link && rm -f tools/n64link.tar.gz && cd tools/n64link && printf '%s\n' '583e544840d04123fa7e26c7416316ffe410139351e07cd3395d4bd5ec609c3c  n64link' | sha256sum -c - >/dev/null && touch .stamp
+tools/abumas/.stamp:
+	$(Q)mkdir -p tools/abumas && curl -fsSL https://github.com/AbuN64/mas-n64/releases/download/v0.5.0/abumas-v0.5.0-linux-x86_64.tar.gz -o tools/abumas.tar.gz && echo '9173e4f2f3bad16d94eaf149cbe09e5363060dcdf72fa64f6f66fc7b7bdb9e03  tools/abumas.tar.gz' | sha256sum -c - >/dev/null && tar -xzf tools/abumas.tar.gz -C tools/abumas --strip-components=1 abumas-v0.5.0-linux-x86_64/abumas && rm -f tools/abumas.tar.gz && cd tools/abumas && printf '%s\n' '0fe945e19ccfb49b2b6cebd42d93de6de52c9bd811a8f4b0275c074050f6d418  abumas' | sha256sum -c - >/dev/null && touch .stamp
 
 tools/gcc-2.7.2-sn64/.stamp:
 	$(Q)mkdir -p tools/gcc-2.7.2-sn64 && curl -fsSL https://github.com/decompals/SN64-gcc/releases/download/gcc-2.7.2-970404/SN64-gcc-2.7.2-970404-linux.tar.gz -o tools/gcc-2.7.2-sn64.tar.gz && echo '60abe17c2562f5ae28444fe4f783fa8217d84b73e59e29cf39c41f7551d968f4  tools/gcc-2.7.2-sn64.tar.gz' | sha256sum -c - >/dev/null && tar -xzf tools/gcc-2.7.2-sn64.tar.gz -C tools/gcc-2.7.2-sn64 cc1 && rm -f tools/gcc-2.7.2-sn64.tar.gz && cd tools/gcc-2.7.2-sn64 && printf '%s\n' '566d91772fc1435d23dbca5e8040d3e441b31375b2aec4f430e5cddc5d70d8d4  cc1' | sha256sum -c - >/dev/null && touch .stamp

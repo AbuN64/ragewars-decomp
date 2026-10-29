@@ -22,7 +22,7 @@ make
 ```
 
 `make` (the same as `make check`) splits each dump into `asm/<version>/` with splat the first time (`make extract`
-does it again), then builds every version and verifies each ROM's SHA-1. The compilers and n64link are downloaded
+does it again), then builds every version and verifies each ROM's SHA-1. The compilers and abumas are downloaded
 into `tools/` and checked against their pinned SHA-256 hashes. Tool commands default to conventional names; put
 other paths in `local.mk`.
 
