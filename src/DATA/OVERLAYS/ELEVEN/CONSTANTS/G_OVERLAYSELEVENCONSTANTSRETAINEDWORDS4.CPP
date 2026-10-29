@@ -1,7 +1,8 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5E74_unclaimed_E6E7C */
-unsigned int g_OverlaysElevenConstantsRetainedWords4[1] = {
-    0x800E626C,
+extern char s_ambGreenText[];
+void *g_OverlaysElevenConstantsRetainedWords4[1] = {
+    s_ambGreenText,
 };
 #endif

@@ -356,6 +356,6 @@ void SpawnAI_InvokeActiveActorCallback(void *actor, ActorLinkCallbackEvent *call
 }
 
 /* ROM-grounded data: src/k_spawnaiFloatConstantWordsUsRev1.c */
-const unsigned int k_spawnaiFloatConstantWords[2] = {
-    0x42340000, 0x42700000,
+const float k_spawnaiFloatConstantWords[2] = {
+    45.0f, 6e+01f,
 };

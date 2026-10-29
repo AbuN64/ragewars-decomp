@@ -2,12 +2,12 @@
 
 /* 800C7F04.CPP */
 /* ROM-grounded data: src/k_playeraiRecoverOutOfBoundsActorHalfFloat_us_rev1.c */
-const unsigned int k_PlayeraiRecoveroutofboundsactorHalfWords[1] = {
-    0x3F000000,
+const float k_PlayeraiRecoveroutofboundsactorHalfWords[1] = {
+    0.5f,
 };
 
 /* 800C7F08.CPP */
 /* ROM-grounded data: src/k_playeraiRecoverOutOfBoundsActorFloat5120_us_rev1.c */
-const unsigned int k_PlayeraiRecoveroutofboundsactorEncodedWords[1] = {
-    0x45A00000,
+const float k_PlayeraiRecoveroutofboundsactorEncodedWords[1] = {
+    5.12e+03f,
 };

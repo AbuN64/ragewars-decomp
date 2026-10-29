@@ -538,6 +538,6 @@ int Sky_CompareRotorSpeeds(void *first, void *second) {
 }
 
 /* 800C86E0.CPP */
-const unsigned int g_skyRotorUpdateConstantsUsRev1[4] = {
-    0x3F800000, 0x3FC49BA6, 0x46A00000, 0x40449BA6,
+const float g_skyRotorUpdateConstantsUsRev1[4] = {
+    1.0f, 1.536f, 2.048e+04f, 3.072f,
 };

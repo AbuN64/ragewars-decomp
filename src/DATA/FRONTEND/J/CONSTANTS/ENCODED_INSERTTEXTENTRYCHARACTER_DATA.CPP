@@ -105,7 +105,8 @@ unsigned short k_EncodedInserttextentrycharacterEncodedHalfwords[206] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int g_EncodedInserttextentrycharacterWords2[7] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x800E5CAC,
+void *g_EncodedInserttextentrycharacterWords2[7] = {
+    0, 0, 0, 0,
+    0, 0, g_EncodedInserttextentrycharacterWords2,
 };
 #endif

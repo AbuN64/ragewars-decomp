@@ -1,8 +1,9 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4CCC_unclaimed_E4CDC */
-unsigned int g_CharacterPreviewKeys15UsRev1EncodedWords[1] = {
-    0x800D736C,
+extern char g_characterPreviewTextReferenceShared5[];
+void *g_CharacterPreviewKeys15UsRev1EncodedWords[1] = {
+    g_characterPreviewTextReferenceShared5,
 };
 
 /* ROM-grounded data: src/ragewars_character_preview_keys_15_us_rev1.c */

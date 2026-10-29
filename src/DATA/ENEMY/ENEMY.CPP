@@ -4,9 +4,7 @@
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D0EFC */
 /* Light colour bytes (r, g, b, pad): bytes so every host reads the same colour. */
-const unsigned char k_enemyTextBytes[4] = {
-    0x38, 0x38, 0x38, 0x00,
-};
+const char k_enemyTextBytes[4] = "888";
 #endif
 
 /* g_enemyLightingDisplayListStorage_Enemy.CPP */

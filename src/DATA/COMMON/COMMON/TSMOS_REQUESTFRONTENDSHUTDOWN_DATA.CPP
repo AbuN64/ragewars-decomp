@@ -88,9 +88,7 @@ u32 g_frontendShutdownWritableWords[108] = {
 
 /* g_TsmosRequestfrontendshutdownEnergyRTextWords1_TsmosRequestfrontendshutdownData.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_TsmosRequestfrontendshutdownEnergyRTextWords1[3] = {
-    0x456E6572, 0x67792072, 0x00000000,
-};
+char g_TsmosRequestfrontendshutdownEnergyRTextWords1[12] = "Energy r";
 #endif
 
 /* g_frontendShutdownRetainedMixedStorage_TsmosRequestfrontendshutdownData.CPP */

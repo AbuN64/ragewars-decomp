@@ -8,12 +8,13 @@ unsigned int g_cvector3Getdirectionrotation2DataFloatConstantWords[5] = {
 #endif
 
 /* 800C6AEC.CPP */
-const unsigned int k_cvector3Getdirectionrotation2DataFloatConstantWords[5] = {
-    0x3F7FFF58, 0x3F800000, 0xBF7FFF58, 0x3FC90FDC, 0x3F000000,
+const float k_cvector3Getdirectionrotation2DataFloatConstantWords[5] = {
+    0.99999f, 1.0f, -0.99999f, 1.5707965f,
+    0.5f,
 };
 
 /* 800C6B00.CPP */
 /* ROM-grounded data: src/k_cvector3Getdirectionrotation2DataFloatConstantWordsBlock1_Cvector3Getdirectionrotation2Data.c */
-const unsigned int k_cvector3Getdirectionrotation2DataFloatConstantWordsBlock1[3] = {
-    0x3F000000, 0x3F000000, 0x3F000000,
+const float k_cvector3Getdirectionrotation2DataFloatConstantWordsBlock1[3] = {
+    0.5f, 0.5f, 0.5f,
 };

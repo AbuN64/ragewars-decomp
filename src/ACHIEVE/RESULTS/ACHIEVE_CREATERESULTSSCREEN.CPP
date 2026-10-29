@@ -7,8 +7,9 @@
 #include "COMMON/PLAYERPROFILES.H"
 #include "RESMGR/X_PLUS.H"
 
-const unsigned int g_resultPreviewTransformConstants[6] = {
-    0x3E99999A, 0x3C1374BC, 0x40400000, 0xC0A00000, 0xC2C80000, 0xC1F00000,
+const float g_resultPreviewTransformConstants[6] = {
+    0.3f, 0.009f, 3.0f, -5.0f,
+    -1e+02f, -3e+01f,
 };
 
 #include "COMMON/MENU_TEXT.H"

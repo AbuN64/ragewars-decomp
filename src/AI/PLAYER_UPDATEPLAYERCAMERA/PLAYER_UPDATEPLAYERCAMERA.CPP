@@ -698,23 +698,23 @@ extern void Link_DispatchObjectLinks(struct Shared_Model *, s32, void *);
 extern void ItemMenu_UpdateToggleMenu(void *, void *);
 extern void Pickup_TryCollectActor(void *, void *);
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_playerHealthRegenerationConstants[4] = {
-    0x42888889, 0x3DCCCCCD, 0x43800000, 0x3D888889,
+const float g_playerHealthRegenerationConstants[4] = {
+    68.26667f, 0.1f, 256.0f, 0.06666667f,
 };
 #endif
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_playerBodyMovementConstants[2] = {
-    0x3E800000, 0x3FAAAAAB,
+const float g_playerBodyMovementConstants[2] = {
+    0.25f, 1.3333334f,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int g_playerHealthRegenerationConstantsUsRev1[4] = {
-    0x42888889, 0x3DCCCCCD, 0x43800000, 0x3D888889,
+const float g_playerHealthRegenerationConstantsUsRev1[4] = {
+    68.26667f, 0.1f, 256.0f, 0.06666667f,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int g_playerBodyMovementConstantsUsRev1[2] = {
-    0x3E800000, 0x3FAAAAAB,
+const float g_playerBodyMovementConstantsUsRev1[2] = {
+    0.25f, 1.3333334f,
 };
 #endif
 void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
@@ -1901,33 +1901,37 @@ typedef struct SurfaceView {
    a surface that stops turning, the heading eases toward the stick yaw, then the pitch offset eases
    toward the stick pitch (degrees to radians). */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_playerMovementSpeedConstants[5] = {
-    0x3F800000, 0x3F553F7D, 0x3F6AC083, 0x3F553F7D, 0x3F6AC083,
+const float g_playerMovementSpeedConstants[5] = {
+    1.0f, 0.833f, 0.917f, 0.833f,
+    0.917f,
 };
 #endif
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_playerHitReactionConstants[1] = {
-    0xC1A3D70A,
+const float g_playerHitReactionConstants[1] = {
+    -20.48f,
 };
 #endif
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_playerThrowConstants[7] = {
-    0x40490FDB, 0x41A00000, 0x41F00000, 0x3F800000, 0x42480000, 0x3F800000, 0x41F00000,
+const float g_playerThrowConstants[7] = {
+    3.1415927f, 2e+01f, 3e+01f, 1.0f,
+    5e+01f, 1.0f, 3e+01f,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int g_playerMovementSpeedConstantsUsRev1[5] = {
-    0x3F800000, 0x3F553F7D, 0x3F6AC083, 0x3F553F7D, 0x3F6AC083,
+const float g_playerMovementSpeedConstantsUsRev1[5] = {
+    1.0f, 0.833f, 0.917f, 0.833f,
+    0.917f,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int g_playerHitReactionConstantsUsRev1[1] = {
-    0xC1A3D70A,
+const float g_playerHitReactionConstantsUsRev1[1] = {
+    -20.48f,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int g_playerThrowConstantsUsRev1[7] = {
-    0x40490FDB, 0x41A00000, 0x41F00000, 0x3F800000, 0x42480000, 0x3F800000, 0x41F00000,
+const float g_playerThrowConstantsUsRev1[7] = {
+    3.1415927f, 2e+01f, 3e+01f, 1.0f,
+    5e+01f, 1.0f, 3e+01f,
 };
 #endif
 void Player_UpdateViewAngles(Player *player, Player *body, ViewTuning *tuning) {
@@ -2294,14 +2298,14 @@ void Player_EaseOwnerHeightEffect(struct EffectOwnerObject *object) {
 
 /* 800C7A38.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_playerOwnerHeightEffectConstants[2] = {
-    0x3F666666, 0x42A5E353,
+const float g_playerOwnerHeightEffectConstants[2] = {
+    0.9f, 82.94399f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/playerOwnerHeightEffectPoolUsRev1.c */
-const unsigned int g_playerOwnerHeightEffectConstantsUsRev1[2] = {
-    0x3F666666, 0x42A5E353,
+const float g_playerOwnerHeightEffectConstantsUsRev1[2] = {
+    0.9f, 82.94399f,
 };
 #endif

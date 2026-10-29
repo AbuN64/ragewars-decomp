@@ -1,6 +1,8 @@
 #include "include_asm.h"
 
-const unsigned int k_PlayeraiUpdatewalkingmovementEncodedWords[16] = {
-    0x40A3D70A, 0x40A3D70A, 0x41340000, 0x40A3D70A, 0x40C00000, 0x41200000, 0x41000000, 0x41400000,
-    0x41000000, 0x41B80000, 0x41000000, 0x41B80000, 0x41000000, 0x41B80000, 0x40E00000, 0x41B80000,
+const float k_PlayeraiUpdatewalkingmovementEncodedWords[16] = {
+    5.12f, 5.12f, 11.25f, 5.12f,
+    6.0f, 1e+01f, 8.0f, 12.0f,
+    8.0f, 23.0f, 8.0f, 23.0f,
+    8.0f, 23.0f, 7.0f, 23.0f,
 };

@@ -4,8 +4,8 @@
 #include "TYPES.H"
 
 /* ROM-grounded data: src/g_audio_CentsToPitchRatioConstantWords_Event.c */
-const unsigned int g_audio_CentsToPitchRatioConstantWords[2] = {
-    0x3F800000, 0x3F8012EF,
+const float g_audio_CentsToPitchRatioConstantWords[2] = {
+    1.0f, 1.0005778f,
 };
 
 extern f32 g_centsToPitchRatioConstants[];

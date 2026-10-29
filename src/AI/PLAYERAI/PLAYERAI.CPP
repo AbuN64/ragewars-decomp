@@ -1135,6 +1135,6 @@ done:
 
 /* 800C73E8.CPP */
 /* ROM-grounded data: src/g_PlayeraiInitializeMovementAndAimConstantWordsUsRev1_Playerai.c */
-const unsigned int g_PlayeraiInitializeMovementAndAimConstantWordsUsRev1[2] = {
-    0x3F800000, 0x3F800000,
+const float g_PlayeraiInitializeMovementAndAimConstantWordsUsRev1[2] = {
+    1.0f, 1.0f,
 };

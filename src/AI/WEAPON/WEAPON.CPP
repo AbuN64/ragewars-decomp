@@ -718,118 +718,120 @@ void Weapon_TranslateEventSixByPitch(void *matrix, void *eventStorage) {
 
 /* 800C8100.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_weaponPermissionNoticeDuration_StorageWords[1] = {
-    0x3F800000,
+const float g_weaponPermissionNoticeDuration_StorageWords[1] = {
+    1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_weaponPermissionNoticeDuration_StorageWords_us_rev1.c */
-const unsigned int g_Weapon_CheckSinglePlayerFirePermissionConstantWords[1] = {
-    0x3F800000,
+const float g_Weapon_CheckSinglePlayerFirePermissionConstantWords[1] = {
+    1.0f,
 };
 #endif
 
 /* 800C8104.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_weaponFiveChargeRateScale_StorageWords[1] = {
-    0x41700000,
+const float g_weaponFiveChargeRateScale_StorageWords[1] = {
+    15.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_weaponFiveChargeRateScale_StorageWords_us_rev1.c */
-const unsigned int g_Weapon_InitializeChargeForWeaponFiveConstantWords[1] = {
-    0x41700000,
+const float g_Weapon_InitializeChargeForWeaponFiveConstantWords[1] = {
+    15.0f,
 };
 #endif
 
 /* 800C8108.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_weaponFireInitialValue_StorageWords[1] = {
-    0x3F800000,
+const float g_weaponFireInitialValue_StorageWords[1] = {
+    1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_weaponFireInitialValue_StorageWords_us_rev1.c */
-const unsigned int g_Weapon_InitializeFireStateCallbacksConstantWords[1] = {
-    0x3F800000,
+const float g_Weapon_InitializeFireStateCallbacksConstantWords[1] = {
+    1.0f,
 };
 #endif
 
 /* 800C810C.CPP */
 /* ROM-grounded data: src/g_weaponTriggerStunThreshold_StorageWords_us_rev1.c */
-const unsigned int g_weaponTriggerStunThreshold_StorageWords[1] = {
-    0x3DCCCCCD,
+const float g_weaponTriggerStunThreshold_StorageWords[1] = {
+    0.1f,
 };
 
 /* 800C8110.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_weaponEightChargeRateScale_StorageWords[1] = {
-    0x41700000,
+const float g_weaponEightChargeRateScale_StorageWords[1] = {
+    15.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_weaponEightChargeRateScale_StorageWords_us_rev1.c */
-const unsigned int k_WeaponEncodedWords[1] = {
-    0x41700000,
+const float k_WeaponEncodedWords[1] = {
+    15.0f,
 };
 #endif
 
 /* 800C8114.CPP */
-const unsigned int g_Weapon_InitializeChargeForWeaponEightConstantWords[7] = {
-    0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3FE52EDF, 0x3F800000,
+const float g_Weapon_InitializeChargeForWeaponEightConstantWords[7] = {
+    1.7904929f, 1.0f, 1.7904929f, 1.0f,
+    1.7904929f, 1.7904929f, 1.0f,
 };
 
 /* 800C8130.CPP */
 /* ROM-grounded data: src/g_weaponSideYawSpeedScale_StorageWords_us_rev1.c */
-const unsigned int g_weaponSideYawSpeedScale_StorageWords[1] = {
-    0x3FC00000,
+const float g_weaponSideYawSpeedScale_StorageWords[1] = {
+    1.5f,
 };
 
 /* 800C8134.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_weaponStartupChargeRateScale_StorageWords[1] = {
-    0x41700000,
+const float g_weaponStartupChargeRateScale_StorageWords[1] = {
+    15.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_weaponStartupChargeRateScale_StorageWords_us_rev1.c */
-const unsigned int g_Weapon_InitializeChargeAndStartupCuesConstantWords[1] = {
-    0x41700000,
+const float g_Weapon_InitializeChargeAndStartupCuesConstantWords[1] = {
+    15.0f,
 };
 #endif
 
 /* 800C8138.CPP */
 /* ROM-grounded data: src/g_weaponChargeEntryCueAndRate_StorageWords_us_rev1.c */
-const unsigned int g_weaponChargeEntryCueAndRate_StorageWords[2] = {
-    0x40200000, 0x41700000,
+const float g_weaponChargeEntryCueAndRate_StorageWords[2] = {
+    2.5f, 15.0f,
 };
 
 /* 800C8140.CPP */
 /* ROM-grounded data: src/g_weaponStateEightDelay_StorageWords_us_rev1.c */
-const unsigned int g_weaponStateEightDelay_StorageWords[1] = {
-    0x43960000,
+const float g_weaponStateEightDelay_StorageWords[1] = {
+    3e+02f,
 };
 
 /* 800C8144.CPP */
 /* ROM-grounded data: src/g_weaponAlternateFireAnimationThreshold_StorageWords_us_rev1.c */
-const unsigned int g_weaponAlternateFireAnimationThreshold_StorageWords[1] = {
-    0x40800000,
+const float g_weaponAlternateFireAnimationThreshold_StorageWords[1] = {
+    4.0f,
 };
 
 /* 800C8148.CPP */
-const unsigned int g_weaponActionFiveSpinTargetScale_StorageWords[8] = {
-    0x3C8EFA36, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3FE52EDF, 0x3F800000,
+const float g_weaponActionFiveSpinTargetScale_StorageWords[8] = {
+    0.017453294f, 1.7904929f, 1.0f, 1.7904929f,
+    1.0f, 1.7904929f, 1.7904929f, 1.0f,
 };
 
 /* 800C8168.CPP */
 /* ROM-grounded data: src/g_weaponReleaseSpinTarget_StorageWords_us_rev1.c */
-const unsigned int g_weaponReleaseSpinTarget_StorageWords[1] = {
-    0x44160000,
+const float g_weaponReleaseSpinTarget_StorageWords[1] = {
+    6e+02f,
 };
 
 #if defined(VERSION_US)

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/k_selectMovementAnimationPoolBiasPair_us_rev1.c */
-const unsigned int k_PlayeraiSelectmovementanimationEncodedWords[2] = {
-    0x3F83126F, 0xBF83126F,
+const float k_PlayeraiSelectmovementanimationEncodedWords[2] = {
+    1.024f, -1.024f,
 };
 
 #if defined(VERSION_EU_X)

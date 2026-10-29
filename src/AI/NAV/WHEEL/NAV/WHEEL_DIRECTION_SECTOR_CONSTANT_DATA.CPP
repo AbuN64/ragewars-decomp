@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
-const unsigned int g_Wheel_GetDirectionSectorConstantWords[8] = {
-    0x3EC90FDB, 0x40C90FDB, 0x40C90FDB, 0x40C5DCA8, 0x3DCCCCCD, 0x3E22F983, 0x41000000, 0x40E00000,
+const float g_Wheel_GetDirectionSectorConstantWords[8] = {
+    0.3926991f, 6.2831855f, 6.2831855f, 6.1831856f,
+    0.1f, 0.15915494f, 8.0f, 7.0f,
 };
 
 #if defined(VERSION_US)

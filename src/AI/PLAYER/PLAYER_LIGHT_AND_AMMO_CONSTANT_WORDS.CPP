@@ -1,13 +1,16 @@
 #include "include_asm.h"
 
 /* 800C768C.CPP */
-const unsigned int g_playerEffectLightConstantWordsUsRev1[10] = {
-    0x434CCCCC, 0x3F000000, 0x3F800000, 0x44199999, 0x3F000000, 0x3F800000, 0x428C0000, 0x41A00000,
-    0x3F000000, 0x3F800000,
+const float g_playerEffectLightConstantWordsUsRev1[10] = {
+    204.79999f, 0.5f, 1.0f, 614.39996f,
+    0.5f, 1.0f, 7e+01f, 2e+01f,
+    0.5f, 1.0f,
 };
 
 /* 800C76B4.CPP */
-const unsigned int g_playerAmmoCounterConstantWordsUsRev1[14] = {
-    0x3F666666, 0xC1100000, 0x3F800000, 0x41200000, 0x42000000, 0x41000000, 0x40C00000, 0x40800000,
-    0x41000000, 0x40C00000, 0x40800000, 0x41000000, 0x40C00000, 0x40800000,
+const float g_playerAmmoCounterConstantWordsUsRev1[14] = {
+    0.9f, -9.0f, 1.0f, 1e+01f,
+    32.0f, 8.0f, 6.0f, 4.0f,
+    8.0f, 6.0f, 4.0f, 8.0f,
+    6.0f, 4.0f,
 };

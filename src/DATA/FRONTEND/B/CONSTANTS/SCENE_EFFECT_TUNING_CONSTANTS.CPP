@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_Events_IncrementNearbyPlayerCounterConstantsUsRev1_SceneEffectTuningConstants.c */
-const unsigned int g_Events_IncrementNearbyPlayerCounterConstantsUsRev1[1] = {
-    0x4123D70A,
+const float g_Events_IncrementNearbyPlayerCounterConstantsUsRev1[1] = {
+    10.24f,
 };
 
 #if defined(VERSION_US)

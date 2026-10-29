@@ -106,12 +106,13 @@ void Turret_CalcOrientMtx(struct Owner *owner, TurretRiderTargetView *rider) {
 }
 
 /* 800C6B18.CPP */
-const unsigned int k_turretaiFloatConstantWords[5] = {
-    0x3F000000, 0x40C90FDC, 0x3F000000, 0x3C23D70A, 0x3C23D70A,
+const float k_turretaiFloatConstantWords[5] = {
+    0.5f, 6.283186f, 0.5f, 0.01f,
+    0.01f,
 };
 
 /* 800C6B2C.CPP */
 /* ROM-grounded data: src/turretai_float_constant_words_block1_us_rev1.c */
-const unsigned int k_turretaiFloatConstantWordsBlock1[2] = {
-    0x3F800000, 0xBFC90FDC,
+const float k_turretaiFloatConstantWordsBlock1[2] = {
+    1.0f, -1.5707965f,
 };

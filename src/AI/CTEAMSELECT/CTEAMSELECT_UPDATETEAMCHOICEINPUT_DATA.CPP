@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_teamWheelPlayerShieldDuration_StorageWords_CteamselectUpdateteamchoiceinputData.c */
-const unsigned int g_teamWheelPlayerShieldDuration_StorageWords[1] = {
-    0x40000000,
+const float g_teamWheelPlayerShieldDuration_StorageWords[1] = {
+    2.0f,
 };
 
 #if defined(VERSION_EU_X)

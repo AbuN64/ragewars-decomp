@@ -35,8 +35,8 @@ s16 alSndpAllocate(SoundPlayerSlotPool *pool, void *owner) {
 }
 
 /* ROM-grounded data: src/g_alSndpAllocateConstantWords_Sndplayer.c */
-const unsigned int g_alSndpAllocateConstantWords[1] = {
-    0x3F800000,
+const float g_alSndpAllocateConstantWords[1] = {
+    1.0f,
 };
 
 #if defined(VERSION_EU_X)

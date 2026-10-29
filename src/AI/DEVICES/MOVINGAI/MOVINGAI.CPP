@@ -275,8 +275,8 @@ void MovingAI_DeviceHealthNoOp(void) {
 /* 80204E78_7_DATA3.CPP */
 /* 800C6BD0.CPP */
 /* ROM-grounded data: src/k_MovingaiOneWords_us_rev1.c */
-const unsigned int k_MovingaiOneWords[1] = {
-    0x3F800000,
+const float k_MovingaiOneWords[1] = {
+    1.0f,
 };
 
 #if defined(VERSION_EU_X)

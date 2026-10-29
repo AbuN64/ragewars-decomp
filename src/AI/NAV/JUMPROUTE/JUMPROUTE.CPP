@@ -66,8 +66,8 @@ void Nav_UpdateTransientJumpRoute(JumpRouteActorView *actor)
 /* 800C6E84_21.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_Nav_UpdateTransientJumpRouteConstantWords_Jumproute.c */
-const unsigned int g_Nav_UpdateTransientJumpRouteConstantWords[1] = {
-    0x42CCCCCC,
+const float g_Nav_UpdateTransientJumpRouteConstantWords[1] = {
+    102.399994f,
 };
 #endif
 

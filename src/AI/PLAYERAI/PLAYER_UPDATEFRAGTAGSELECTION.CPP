@@ -1185,8 +1185,9 @@ void Playerai_ApplyPlayerForces(void *listObject, void *bodyObject) {
 }
 
 /* 800C7C90.CPP */
-const unsigned int k_PlayerUpdatefragtagselectionEncodedWords[8] = {
-    0x3F000000, 0x42000000, 0x3F000000, 0x42000000, 0x3F000000, 0x42000000, 0x3F000000, 0x42000000,
+const float k_PlayerUpdatefragtagselectionEncodedWords[8] = {
+    0.5f, 32.0f, 0.5f, 32.0f,
+    0.5f, 32.0f, 0.5f, 32.0f,
 };
 
 /* 800C7CB0.CPP */

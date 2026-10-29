@@ -2,8 +2,8 @@
 
 /* 800C7FD0.CPP */
 /* ROM-grounded data: src/k_WeaponUpdatealternatefireEncodedWords_WeaponUpdatealternatefireData.c */
-const unsigned int k_WeaponUpdatealternatefireEncodedWords[2] = {
-    0x3DCCCCCD, 0x3F800000,
+const float k_WeaponUpdatealternatefireEncodedWords[2] = {
+    0.1f, 1.0f,
 };
 
 /* 800C7FD8.CPP */

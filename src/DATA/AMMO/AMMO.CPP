@@ -3,8 +3,8 @@
 /* 800E2774.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/playerDrawPulsingMenuSpriteConstantWordsPoolUsRev1.c */
-const unsigned int g_Player_DrawPulsingMenuSpriteConstantWords_us_rev1[1] = {
-    0x3F000000,
+const float g_Player_DrawPulsingMenuSpriteConstantWords_us_rev1[1] = {
+    0.5f,
 };
 #endif
 
@@ -14,8 +14,8 @@ const unsigned int g_Player_DrawPulsingMenuSpriteConstantWords_us_rev1[1] = {
 #endif
 
 #if defined(VERSION_US)
-const unsigned int g_Player_DrawPulsingMenuSpriteConstantWords_us[1] = {
-    0x3F000000,
+const float g_Player_DrawPulsingMenuSpriteConstantWords_us[1] = {
+    0.5f,
 };
 #endif
 

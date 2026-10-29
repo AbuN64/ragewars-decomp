@@ -268,29 +268,29 @@ void Nav_SeekUnclaimedMarker(void *actorStorage) {
 
 /* 800C6E84_18.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Nav_SelectFarthestReachableNeighborConstantWords_de_eu_eu_x_us[4] = {
-    0xBF800000, 0x484F5C28, 0x494F5C28, 0x49800000,
+const float g_Nav_SelectFarthestReachableNeighborConstantWords_de_eu_eu_x_us[4] = {
+    -1.0f, 212336.62f, 849346.5f, 1048576.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/Nav_SelectFarthestReachableNeighborConstantWords_us_rev1.c */
-const unsigned int g_Nav_SelectFarthestReachableNeighborConstantWords_us_rev1[1] = {
-    0xBF800000,
+const float g_Nav_SelectFarthestReachableNeighborConstantWords_us_rev1[1] = {
+    -1.0f,
 };
 
 /* ROM-grounded data: src/Nav_ApproachCombatTargetAlongRouteConstantWords.c */
-const unsigned int g_Nav_ApproachCombatTargetAlongRouteConstantWords[1] = {
-    0x484F5C28,
+const float g_Nav_ApproachCombatTargetAlongRouteConstantWords[1] = {
+    212336.62f,
 };
 
 /* ROM-grounded data: src/Nav_UpdateRetreatMovementConstantWords.c */
-const unsigned int g_Nav_UpdateRetreatMovementConstantWords[1] = {
-    0x494F5C28,
+const float g_Nav_UpdateRetreatMovementConstantWords[1] = {
+    849346.5f,
 };
 
 /* ROM-grounded data: src/Nav_SeekNearbyUnrestrictedGoalConstantWords.c */
-const unsigned int g_Nav_SeekNearbyUnrestrictedGoalConstantWords[1] = {
-    0x49800000,
+const float g_Nav_SeekNearbyUnrestrictedGoalConstantWords[1] = {
+    1048576.0f,
 };
 #endif

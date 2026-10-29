@@ -7,7 +7,7 @@ unsigned char g_AisetfreqTrailingBytesBlock1[8] = { 0x90, 0x62, 0x00, 0x00, 0x24
 
 /* 802BE040_15.CPP */
 #if defined(VERSION_US)
-unsigned char g_AisetfreqTrailingBytesBlock2[12] = { 0x65, 0x46, 0x75, 0x6E, 0x63, 0x74, 0x69, 0x6F, 0x6E, 0x54, 0x00, 0x00 };
+char g_AisetfreqTrailingBytesBlock2[12] = "eFunctionT";
 #endif
 
 /* 802BE040_45.CPP */

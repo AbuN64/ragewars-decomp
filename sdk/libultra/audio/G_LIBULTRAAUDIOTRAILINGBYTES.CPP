@@ -1,4 +1,4 @@
 
 #if defined(VERSION_US)
-unsigned char g_LibultraAudioTrailingBytes[8] = { 0x65, 0x6F, 0x73, 0x54, 0x00, 0x00, 0x00, 0x00 };
+char g_LibultraAudioTrailingBytes[8] = "eosT";
 #endif

@@ -107,14 +107,14 @@ const unsigned int k_LookatEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_DE)
-const unsigned int k_lookatOneFloat_de[1] = {
-    0x3F800000,
+const float k_lookatOneFloat_de[1] = {
+    1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const unsigned int k_LookatSignedUnitBoundsWords[2] = {
-    0xBF800000, 0x3F800000,
+const float k_LookatSignedUnitBoundsWords[2] = {
+    -1.0f, 1.0f,
 };
 #endif

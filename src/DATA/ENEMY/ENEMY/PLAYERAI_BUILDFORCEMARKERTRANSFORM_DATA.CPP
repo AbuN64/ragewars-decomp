@@ -2,12 +2,8 @@
 
 /* ROM-grounded data: rodata/shared/800D0EF8 */
 /* Light colour bytes (r, g, b, pad): bytes so every host reads the same colour. */
-const unsigned char k_PlayeraiBuildforcemarkertransformEncodedBytes[4] = {
-    0x38, 0x38, 0x38, 0x00,
-};
+const char k_PlayeraiBuildforcemarkertransformEncodedBytes[4] = "888";
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int k_playeraiForceMarkerLightColorWord[1] = {
-    0x38383800,
-};
+const char k_playeraiForceMarkerLightColorWord[4] = "888";
 #endif

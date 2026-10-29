@@ -7,8 +7,8 @@ const unsigned int k_CbarrelUpdatetrackeraimEncodedWords[4] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int k_CbarrelUpdatetrackeraimEncodedWordsBlock1[3] = {
-    0x424CCCCC, 0x424CCCCC, 0x40490FDB,
+const float k_CbarrelUpdatetrackeraimEncodedWordsBlock1[3] = {
+    51.199997f, 51.199997f, 3.1415927f,
 };
 
 /* ROM-grounded data: src/k_CbarrelUpdatetrackeraimMaxFiniteFloatWords_CbarrelUpdatetrackeraimData.c */

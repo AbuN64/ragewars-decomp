@@ -1,12 +1,13 @@
 #include "include_asm.h"
 
 /* 800C8668.CPP */
-const unsigned int k_gskyFloatConstantWords[6] = {
-    0x3F000000, 0x3E800000, 0x3E4CCCCD, 0x3C8EFA36, 0x3DCCCCCD, 0x4123D70A,
+const float k_gskyFloatConstantWords[6] = {
+    0.5f, 0.25f, 0.2f, 0.017453294f,
+    0.1f, 10.24f,
 };
 
 /* 800C8680.CPP */
 /* ROM-grounded data: src/k_gskyFloatConstantWordsBlock1_us_rev1.c */
-const unsigned int k_gskyFloatConstantWordsBlock1[3] = {
-    0x3DC80000, 0x41300000, 0x40A00000,
+const float k_gskyFloatConstantWordsBlock1[3] = {
+    0.09765625f, 11.0f, 5.0f,
 };

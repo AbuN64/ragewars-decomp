@@ -12,15 +12,15 @@
 
 /* 800C6E58.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Portal_SearchRelatedGoalPathConstantWords_de_eu_eu_x_us[2] = {
-    0xBF800000, 0xBF800000,
+const float g_Portal_SearchRelatedGoalPathConstantWords_de_eu_eu_x_us[2] = {
+    -1.0f, -1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_Portal_SearchRelatedGoalPathConstantWords_us_rev1_Portal.c */
-const unsigned int g_Portal_SearchRelatedGoalPathConstantWords_us_rev1[2] = {
-    0xBF800000, 0xBF800000,
+const float g_Portal_SearchRelatedGoalPathConstantWords_us_rev1[2] = {
+    -1.0f, -1.0f,
 };
 #endif
 
@@ -32,40 +32,40 @@ const unsigned int g_Portal_FindPortalRouteConstantWords[1] = {
 
 /* 800C6E64.CPP */
 /* ROM-grounded data: src/g_Portal_SearchPortalRouteConstantWords_Portal.c */
-const unsigned int g_Portal_SearchPortalRouteConstantWords[1] = {
-    0x4B189680,
+const float g_Portal_SearchPortalRouteConstantWords[1] = {
+    1e+07f,
 };
 
 /* 800C6E68.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Portal_EstimateGoalDistanceConstantWords_de_eu_eu_x_us[2] = {
-    0xBF800000, 0xBF800000,
+const float g_Portal_EstimateGoalDistanceConstantWords_de_eu_eu_x_us[2] = {
+    -1.0f, -1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_Portal_EstimateGoalDistanceConstantWords_us_rev1_Portal.c */
-const unsigned int g_Portal_EstimateGoalDistanceConstantWords_us_rev1[2] = {
-    0xBF800000, 0xBF800000,
+const float g_Portal_EstimateGoalDistanceConstantWords_us_rev1[2] = {
+    -1.0f, -1.0f,
 };
 #endif
 
 /* 800C6E70.CPP */
 /* ROM-grounded data: src/g_Portal_SearchPathConstantWords_Portal.c */
-const unsigned int g_Portal_SearchPathConstantWords[3] = {
-    0xBF800000, 0xBF800000, 0x47480000,
+const float g_Portal_SearchPathConstantWords[3] = {
+    -1.0f, -1.0f, 5.12e+04f,
 };
 
 /* 800C6E7C.CPP */
 /* ROM-grounded data: src/g_Portal_InitSearchNodeConstantWords_Portal.c */
-const unsigned int g_Portal_InitSearchNodeConstantWords[2] = {
-    0xBF800000, 0x41700000,
+const float g_Portal_InitSearchNodeConstantWords[2] = {
+    -1.0f, 15.0f,
 };
 
 /* 800C6E84_6.CPP */
 /* ROM-grounded data: src/g_Portal_IsNodeMovementBlockedConstantWords_Portal.c */
-const unsigned int g_Portal_IsNodeMovementBlockedConstantWords[1] = {
-    0x4275C28F,
+const float g_Portal_IsNodeMovementBlockedConstantWords[1] = {
+    61.44f,
 };
 
 /* 80208000_6.CPP */

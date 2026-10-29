@@ -600,15 +600,15 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
 
 /* 800C82E8.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CameraEncodedWords[2] = {
-    0x3F000000, 0x3F000000,
+const float k_CameraEncodedWords[2] = {
+    0.5f, 0.5f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_CameraEncodedWordsBlock7_Camera.c */
-const unsigned int k_CameraEncodedWordsBlock7[2] = {
-    0x3F000000, 0x3F000000,
+const float k_CameraEncodedWordsBlock7[2] = {
+    0.5f, 0.5f,
 };
 #endif
 
@@ -695,15 +695,15 @@ void Camera_UpdateFrustumBounds(GameplayCamera *camera) {
 
 /* 800C82F0.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CameraEncodedWordsBlock1[3] = {
-    0x3C0EFA36, 0x3F000000, 0x3FC00000,
+const float k_CameraEncodedWordsBlock1[3] = {
+    0.008726647f, 0.5f, 1.5f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_CameraEncodedWordsBlock8_Camera.c */
-const unsigned int k_CameraEncodedWordsBlock8[3] = {
-    0x3C0EFA36, 0x3F000000, 0x3FC00000,
+const float k_CameraEncodedWordsBlock8[3] = {
+    0.008726647f, 0.5f, 1.5f,
 };
 #endif
 
@@ -1255,9 +1255,7 @@ void Camera_DrawWorldViewLayers(char *view, char *world) {
 const char g_camerasText[8] = "Cameras";
 
 /* 800C83CC.CPP */
-const unsigned char k_CameraEncodedBytes[13] = {
-    0x43, 0x61, 0x6D, 0x65, 0x72, 0x61, 0x20, 0x54, 0x65, 0x78, 0x74, 0x73, 0x00,
-};
+const unsigned char k_CameraEncodedBytes[13] = "Camera Texts";
 
 
 
@@ -1266,15 +1264,15 @@ const unsigned char k_CameraEncodedBytes[13] = {
 
 /* 800C83DC.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CameraEncodedWordsBlock4[1] = {
-    0x3F800000,
+const float k_CameraEncodedWordsBlock4[1] = {
+    1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_CameraOneWords_Camera.c */
-const unsigned int k_CameraOneWords[1] = {
-    0x3F800000,
+const float k_CameraOneWords[1] = {
+    1.0f,
 };
 #endif
 
@@ -1616,15 +1614,15 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
 
 /* 800C8410.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CameraEncodedWordsBlock2[1] = {
-    0x3F000000,
+const float k_CameraEncodedWordsBlock2[1] = {
+    0.5f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_CameraHalfWords_Camera.c */
-const unsigned int k_CameraHalfWords[1] = {
-    0x3F000000,
+const float k_CameraHalfWords[1] = {
+    0.5f,
 };
 #endif
 
@@ -2033,15 +2031,19 @@ void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
 
 /* 800C8504.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_CameraEncodedWordsBlock3[14] = {
-    0x3F800000, 0x3F000000, 0x41900000, 0x3F4CCCCD, 0x3F19999A, 0x3F000000, 0x3F4CCCCD, 0x3ECCCCCD,
-    0x3BC9D9B5, 0x3F800000, 0x3C49D9B5, 0x437F0000, 0x3EAAAAAB, 0x41100000,
+const float k_CameraEncodedWordsBlock3[14] = {
+    1.0f, 0.5f, 18.0f, 0.8f,
+    0.6f, 0.5f, 0.8f, 0.4f,
+    0.006159986f, 1.0f, 0.012319972f, 255.0f,
+    0.33333334f, 9.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int k_CameraEncodedWordsBlock6[14] = {
-    0x3F800000, 0x3F000000, 0x41900000, 0x3F4CCCCD, 0x3F19999A, 0x3F000000, 0x3F4CCCCD, 0x3ECCCCCD,
-    0x3BC9D9B5, 0x3F800000, 0x3C49D9B5, 0x437F0000, 0x3EAAAAAB, 0x41100000,
+const float k_CameraEncodedWordsBlock6[14] = {
+    1.0f, 0.5f, 18.0f, 0.8f,
+    0.6f, 0.5f, 0.8f, 0.4f,
+    0.006159986f, 1.0f, 0.012319972f, 255.0f,
+    0.33333334f, 9.0f,
 };
 #endif

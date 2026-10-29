@@ -7,7 +7,7 @@ unsigned char g_SndplayerTrailingBytesBlock9[8] = { 0x01, 0x4A, 0x50, 0x21, 0x00
 
 /* 802B7488_2.CPP */
 #if defined(VERSION_US)
-unsigned char g_SndplayerTrailingBytesBlock13[8] = { 0x65, 0x4C, 0x6F, 0x6F, 0x6B, 0x58, 0x52, 0x00 };
+char g_SndplayerTrailingBytesBlock13[8] = "eLookXR";
 #endif
 
 /* 802BA5F0_18.CPP */

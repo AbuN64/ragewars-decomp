@@ -102,8 +102,9 @@ unsigned int g_inventoryLabelSlotWords[17] = {
 /* 800D76FC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D82FC */
-unsigned int g_Ovltab8EncodedWordsBlock8[1] = {
-    0x800D52D8,
+extern char g_menuOkayLabelWordEuX[];
+void *g_Ovltab8EncodedWordsBlock8[1] = {
+    g_menuOkayLabelWordEuX,
 };
 #endif
 
@@ -118,16 +119,18 @@ unsigned int g_Ovltab8EncodedWordsBlock2[2] = {
 /* 800D7708.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D82FC_unclaimed_D8308 */
-unsigned int g_Ovltab8EncodedWordsBlock5[1] = {
-    0x800D52F0,
+extern char g_ConstantsEncodedWordsBlock13[];
+void *g_Ovltab8EncodedWordsBlock5[1] = {
+    g_ConstantsEncodedWordsBlock13,
 };
 #endif
 
 /* 800D770C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_pakLegacySnapshotGameNameFixed.c */
-unsigned int g_Ovltab8EncodedWordsBlock4[1] = {
-    0x800D52F4,
+extern char s_nrweText[];
+void *g_Ovltab8EncodedWordsBlock4[1] = {
+    s_nrweText,
 };
 #endif
 
@@ -144,8 +147,9 @@ unsigned int k_Ovltab8EncodedWordsBlock2[29] = {
 /* 800D7784.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_pakDefaultNoteNameFixed.c */
-unsigned int g_Ovltab8EncodedWordsBlock7[1] = {
-    0x800D5374,
+extern char s_otherGameText[];
+void *g_Ovltab8EncodedWordsBlock7[1] = {
+    s_otherGameText,
 };
 #endif
 
@@ -170,8 +174,9 @@ unsigned int g_pakNoteLabelSlots[22] = {
 /* 800D7824.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_pak_ok_label_slot_us_rev1.c */
-unsigned int g_Ovltab8EncodedWordsBlock1[1] = {
-    0x800D551C,
+extern char g_PakOkLabelStorage[];
+void *g_Ovltab8EncodedWordsBlock1[1] = {
+    g_PakOkLabelStorage,
 };
 #endif
 
@@ -211,8 +216,9 @@ unsigned int g_confirmationLabelSlotWords[10] = {
 /* 800D7A94.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D8424_unclaimed_D8694 */
-unsigned int g_Ovltab8EncodedWordsBlock3[1] = {
-    0x800D5830,
+extern char g_menuNoLabelWordEuX[];
+void *g_Ovltab8EncodedWordsBlock3[1] = {
+    g_menuNoLabelWordEuX,
 };
 #endif
 
@@ -261,8 +267,9 @@ unsigned int k_Ovltab8EncodedWordsBlock5[10] = {
 /* 800D7E40.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_credits_language_table_us_rev1.c */
-unsigned int g_Ovltab8EncodedWords[1] = {
-    0x800D6C08,
+extern char ragewars_credits_lines_us_rev1_StorageWords[];
+void *g_Ovltab8EncodedWords[1] = {
+    ragewars_credits_lines_us_rev1_StorageWords,
 };
 #endif
 

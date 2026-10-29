@@ -1,5 +1,6 @@
 #include "include_asm.h"
 
-const unsigned int g_playerAimAndLockMarkerConstantWordsUsRev1[8] = {
-    0x3DA3D70B, 0x3F051EB8, 0xC5A00000, 0xC4800000, 0x41340000, 0x41A3D70A, 0x3FA00000, 0x3F400000,
+const float g_playerAimAndLockMarkerConstantWordsUsRev1[8] = {
+    0.080000006f, 0.52f, -5.12e+03f, -1024.0f,
+    11.25f, 20.48f, 1.25f, 0.75f,
 };

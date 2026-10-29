@@ -2,12 +2,12 @@
 
 /* 800C8630.CPP */
 /* ROM-grounded data: src/k_GskyStartemitterOneWordsUsRev1.c */
-const unsigned int k_GskyStartemitterOneWords[1] = {
-    0x3F800000,
+const float k_GskyStartemitterOneWords[1] = {
+    1.0f,
 };
 
 /* 800C8634.CPP */
 /* ROM-grounded data: src/k_gskyStartemitterDataFloatConstantWordsUsRev1.c */
-const unsigned int k_gskyStartemitterDataFloatConstantWords[1] = {
-    0x3DCCCCCD,
+const float k_gskyStartemitterDataFloatConstantWords[1] = {
+    0.1f,
 };

@@ -2,6 +2,6 @@
 #include "COMMON/ALFXPARAM.H"
 
 /* ROM-grounded data: src/AudioResamplerMaximumRatioStorageSource.c */
-const unsigned int g_audioResamplerMaximumRatio_StorageWords[3] = {
-    0x3FFFFEB0, 0x47000000, 0x38000000,
+const float g_audioResamplerMaximumRatio_StorageWords[3] = {
+    1.99996f, 32768.0f, 3.0517578e-05f,
 };

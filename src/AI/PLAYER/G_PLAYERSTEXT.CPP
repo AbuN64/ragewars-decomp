@@ -1,8 +1,9 @@
 #include "include_asm.h"
 
 /* 800C7C3C.CPP */
-const unsigned int g_playerTargetFacingConstantWordsUsRev1[7] = {
-    0x44800000, 0x3FC90FDB, 0xBFC90FDB, 0x40C90FDB, 0x3FC90FDB, 0xBFC90FDB, 0x40C90FDB,
+const float g_playerTargetFacingConstantWordsUsRev1[7] = {
+    1024.0f, 1.5707964f, -1.5707964f, 6.2831855f,
+    1.5707964f, -1.5707964f, 6.2831855f,
 };
 
 /* 800C7C58.CPP */

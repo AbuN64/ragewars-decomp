@@ -598,6 +598,6 @@ void Triggered_ResetMotionState(void *object, void *state) {
 }
 
 /* ROM-grounded data: src/k_triggeredFullTurnFloatUsRev1.c */
-const unsigned int k_triggeredUpdatetriggeredmotionFloatConstantWords[1] = {
-    0x40C90FDC,
+const float k_triggeredUpdatetriggeredmotionFloatConstantWords[1] = {
+    6.283186f,
 };

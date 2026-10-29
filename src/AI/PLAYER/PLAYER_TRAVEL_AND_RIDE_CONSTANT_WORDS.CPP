@@ -1,12 +1,15 @@
 #include "include_asm.h"
 
 /* 800C7BD0.CPP */
-const unsigned int g_playerTravelSequenceConstantWordsUsRev1[5] = {
-    0x40C90FDB, 0x40C90FDB, 0x3E4CCCCD, 0x3E4CCCCD, 0x40800000,
+const float g_playerTravelSequenceConstantWordsUsRev1[5] = {
+    6.2831855f, 6.2831855f, 0.2f, 0.2f,
+    4.0f,
 };
 
 /* 800C7BE4.CPP */
-const unsigned int g_playerRideMovementConstantWordsUsRev1[16] = {
-    0x3E8EFA36, 0x3F800000, 0x3C23D70A, 0x3D75C28F, 0x42A00000, 0x3C8EFA36, 0x41000000, 0x42B40000,
-    0x3F000000, 0x40200000, 0x40200000, 0x42480000, 0x3F800000, 0x4123D70A, 0x4123D70A, 0x41700000,
+const float g_playerRideMovementConstantWordsUsRev1[16] = {
+    0.2792527f, 1.0f, 0.01f, 0.06f,
+    8e+01f, 0.017453294f, 8.0f, 9e+01f,
+    0.5f, 2.5f, 2.5f, 5e+01f,
+    1.0f, 10.24f, 10.24f, 15.0f,
 };

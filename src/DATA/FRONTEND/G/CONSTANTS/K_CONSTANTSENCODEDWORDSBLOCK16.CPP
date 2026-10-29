@@ -1,6 +1,9 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int k_ConstantsEncodedWordsBlock16[7] = {
-    0x00000000, 0x800CFBAC, 0x00000000, 0x00000000, 0x800CFC94, 0x00000000, 0x00000000,
+extern char g_weaponAmmoSlotCapacity20[];
+extern char g_weaponAmmoSlotCapacity49[];
+void *k_ConstantsEncodedWordsBlock16[7] = {
+    0, g_weaponAmmoSlotCapacity20, 0, 0,
+    g_weaponAmmoSlotCapacity49, 0, 0,
 };
 #endif

@@ -1,12 +1,13 @@
 #include "include_asm.h"
 
 /* 800C804C.CPP */
-const unsigned int k_WeaponaiUpdatespinandrepeatcueEncodedWords[3] = {
-    0x3DCCCCCD, 0x3C8EFA36, 0x40200000,
+const float k_WeaponaiUpdatespinandrepeatcueEncodedWords[3] = {
+    0.1f, 0.017453294f, 2.5f,
 };
 
 /* 800C8058.CPP */
-const unsigned int g_Weaponai_SettleSpinToThirdTurnConstantWords[12] = {
-    0x3C5F0B72, 0x40C90FDB, 0x3F860A92, 0x40490FDB, 0x40A78D36, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF,
-    0x3F800000, 0x3FE52EDF, 0x3FE52EDF, 0x3F800000,
+const float g_Weaponai_SettleSpinToThirdTurnConstantWords[12] = {
+    0.013613569f, 6.2831855f, 1.0471976f, 3.1415927f,
+    5.2359877f, 1.7904929f, 1.0f, 1.7904929f,
+    1.0f, 1.7904929f, 1.7904929f, 1.0f,
 };

@@ -298,8 +298,9 @@ unsigned int g_Ovltab10Ovltab10CppRetainedWords19[4] = {
 /* 800E3F8C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4B7C_unclaimed_E4B8C */
-unsigned int g_Ovltab10Ovltab10CppRetainedWords1[1] = {
-    0x800D7360,
+extern char g_characterPreviewTextReferenceShared2[];
+void *g_Ovltab10Ovltab10CppRetainedWords1[1] = {
+    g_characterPreviewTextReferenceShared2,
 };
 
 /* ROM-grounded data: src/ragewars_character_preview_keys_12_us_rev1.c */

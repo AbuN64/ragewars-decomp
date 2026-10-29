@@ -40,11 +40,11 @@ u32 Weapon_UpdateShakeAxis(CShakeAxis *state) {
     return state->m_Amp == 0.0f;
 }
 
-const unsigned int k_WeaponshakeEncodedWords[4] = {
-    0x42B40000, 0x40400000, 0x40C00000, 0x40C00000,
+const float k_WeaponshakeEncodedWords[4] = {
+    9e+01f, 3.0f, 6.0f, 6.0f,
 };
 
 /* 800C8180.CPP */
-const unsigned int k_WeaponshakeEncodedWordsBlock1[4] = {
-    0x3F800000, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36,
+const float k_WeaponshakeEncodedWordsBlock1[4] = {
+    1.0f, 0.017453294f, 0.017453294f, 0.017453294f,
 };

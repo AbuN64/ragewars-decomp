@@ -13,9 +13,7 @@ const unsigned int g_profileQuantityThreeColumnFormatWords[3] = {
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_profileQuantityTwoDigitFormat_CmenuprofileFormatprofilequantitylabelData.c */
-const unsigned char g_profileQuantityTwoDigitFormat[5] = {
-    0x25, 0x30, 0x32, 0x64, 0x00,
-};
+const char g_profileQuantityTwoDigitFormat[5] = "%02d";
 #endif
 
 /* 800E9AF4.CPP */

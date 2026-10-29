@@ -477,14 +477,14 @@ clamp:
 
 /* 800C733C.CPP */
 /* ROM-grounded data: src/g_weaponWheelResetAngleStepBits_Cteamselect.c */
-const unsigned int g_weaponWheelResetAngleStepBits[1] = {
-    0x3E32B8C4,
+const float g_weaponWheelResetAngleStepBits[1] = {
+    0.17453295f,
 };
 
 /* 800C7340.CPP */
 /* ROM-grounded data: src/g_weaponWheelAnglePeriodBits_Cteamselect.c */
-const unsigned int g_weaponWheelAnglePeriodBits[2] = {
-    0x40C90FDC, 0x40C90FDC,
+const float g_weaponWheelAnglePeriodBits[2] = {
+    6.283186f, 6.283186f,
 };
 
 #if defined(VERSION_EU_X)

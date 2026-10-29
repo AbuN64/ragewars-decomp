@@ -374,7 +374,7 @@ const unsigned int k_CseqEncodedWords[2] = {
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_alCSeqNewMarkerConstantWords_Cseq.c */
-const unsigned int g_alCSeqNewMarkerConstantWords[1] = {
-    0x3F800000,
+const float g_alCSeqNewMarkerConstantWords[1] = {
+    1.0f,
 };
 #endif

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_trackOpacityStepWords_TrackEvaluatetrackopacityData.c */
-const unsigned int g_trackOpacityStepWords[1] = {
-    0x3E4CCCCD,
+const float g_trackOpacityStepWords[1] = {
+    0.2f,
 };
 
 #if defined(VERSION_US)

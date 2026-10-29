@@ -607,32 +607,37 @@ void Nav_UpdateTargetSteering(AiController *controller) {
 extern f32 Barrel_GetSignedAngleToPoint(PlayerAimActorView *, CVector3);
 extern void Scaled_SetPitchFromAngle(PlayerAimBrainView *, f32, s32);
 
-const unsigned int g_Nav_SteerAlongRouteConstantWords[9] = {
-    0x42480000, 0x3E860A93, 0x3E860A93, 0x42480000, 0x42480000, 0x42480000, 0x42480000, 0x42C80000,
-    0x41F00000,
+const float g_Nav_SteerAlongRouteConstantWords[9] = {
+    5e+01f, 0.26179942f, 0.26179942f, 5e+01f,
+    5e+01f, 5e+01f, 5e+01f, 1e+02f,
+    3e+01f,
 };
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Nav_UpdatePlayerSteeringConstantWords_de_eu_eu_x_us[9] = {
-    0x41200000, 0x3E860A93, 0x3E860A93, 0x3F000000, 0x3F800000, 0x40490FDB, 0x3F800000, 0xBF800000,
-    0x3F800000,
+const float g_Nav_UpdatePlayerSteeringConstantWords_de_eu_eu_x_us[9] = {
+    1e+01f, 0.26179942f, 0.26179942f, 0.5f,
+    1.0f, 3.1415927f, 1.0f, -1.0f,
+    1.0f,
 };
 #endif
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Nav_UpdateTargetSteeringConstantWords_de_eu_eu_x_us[9] = {
-    0x41200000, 0x3E860A93, 0x3E860A93, 0x3F000000, 0x3F800000, 0x40490FDB, 0x3F800000, 0xBF800000,
-    0x3F800000,
+const float g_Nav_UpdateTargetSteeringConstantWords_de_eu_eu_x_us[9] = {
+    1e+01f, 0.26179942f, 0.26179942f, 0.5f,
+    1.0f, 3.1415927f, 1.0f, -1.0f,
+    1.0f,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int g_Nav_UpdatePlayerSteeringConstantWords_us_rev1[9] = {
-    0x41200000, 0x3E860A93, 0x3E860A93, 0x3F000000, 0x3F800000, 0x40490FDB, 0x3F800000, 0xBF800000,
-    0x3F800000,
+const float g_Nav_UpdatePlayerSteeringConstantWords_us_rev1[9] = {
+    1e+01f, 0.26179942f, 0.26179942f, 0.5f,
+    1.0f, 3.1415927f, 1.0f, -1.0f,
+    1.0f,
 };
 #endif
 #if defined(VERSION_US_REV1)
-const unsigned int g_Nav_UpdateTargetSteeringConstantWords_us_rev1[9] = {
-    0x41200000, 0x3E860A93, 0x3E860A93, 0x3F000000, 0x3F800000, 0x40490FDB, 0x3F800000, 0xBF800000,
-    0x3F800000,
+const float g_Nav_UpdateTargetSteeringConstantWords_us_rev1[9] = {
+    1e+01f, 0.26179942f, 0.26179942f, 0.5f,
+    1.0f, 3.1415927f, 1.0f, -1.0f,
+    1.0f,
 };
 #endif
 f32 Nav_SteerTowardPoint(PlayerAimBrainView *brain, CVector3 *target, f32 rate, f32 offset) {
@@ -679,81 +684,82 @@ f32 Nav_SteerTowardPoint(PlayerAimBrainView *brain, CVector3 *target, f32 rate, 
 /* 800C6CF0.CPP */
 
 /* 800C6D64.CPP */
-const unsigned int g_Scaled_UpdateTargetPitchConstantWords[5] = {
-    0x3F666666, 0x3F333333, 0xC2B40000, 0x42B40000, 0x42652EE0,
+const float g_Scaled_UpdateTargetPitchConstantWords[5] = {
+    0.9f, 0.7f, -9e+01f, 9e+01f,
+    57.295776f,
 };
 
 /* 800C6D78.CPP */
 /* ROM-grounded data: src/g_Scaled_SetPitchFromAngleConstantWords_Player.c */
-const unsigned int g_Scaled_SetPitchFromAngleConstantWords[1] = {
-    0x3F22F982,
+const float g_Scaled_SetPitchFromAngleConstantWords[1] = {
+    0.6366197f,
 };
 
 /* 800C6D7C.CPP */
 /* ROM-grounded data: src/g_Scaled_HasLineOfSightConstantWords_Player.c */
-const unsigned int g_Scaled_HasLineOfSightConstantWords[1] = {
-    0x42CCCCCC,
+const float g_Scaled_HasLineOfSightConstantWords[1] = {
+    102.399994f,
 };
 
 /* 800C6D80.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Scaled_GetDifficultyEngagementAdjustmentConstantWords_de_eu_eu_x_us[3] = {
-    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+const float g_Scaled_GetDifficultyEngagementAdjustmentConstantWords_de_eu_eu_x_us[3] = {
+    0.01f, 0.9f, 1.1f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_Scaled_GetDifficultyEngagementAdjustmentConstantWords_us_rev1_Player.c */
-const unsigned int g_Scaled_GetDifficultyEngagementAdjustmentConstantWords_us_rev1[3] = {
-    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+const float g_Scaled_GetDifficultyEngagementAdjustmentConstantWords_us_rev1[3] = {
+    0.01f, 0.9f, 1.1f,
 };
 #endif
 
 /* 800C6D8C.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Scaled_GetScaledAggressionConstantWords_de_eu_eu_x_us[3] = {
-    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+const float g_Scaled_GetScaledAggressionConstantWords_de_eu_eu_x_us[3] = {
+    0.01f, 0.9f, 1.1f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_Scaled_GetScaledAggressionConstantWords_us_rev1_Player.c */
-const unsigned int g_Scaled_GetScaledAggressionConstantWords_us_rev1[3] = {
-    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+const float g_Scaled_GetScaledAggressionConstantWords_us_rev1[3] = {
+    0.01f, 0.9f, 1.1f,
 };
 #endif
 
 /* 800C6D98.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Scaled_ScaleCharacterSettingByDifficultyConstantWords[3] = {
-    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+const float g_Scaled_ScaleCharacterSettingByDifficultyConstantWords[3] = {
+    0.01f, 0.9f, 1.1f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int k_PlayerEncodedWordsBlock13[3] = {
-    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+const float k_PlayerEncodedWordsBlock13[3] = {
+    0.01f, 0.9f, 1.1f,
 };
 #endif
 
 /* 800C6DA4.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Scaled_GetScaledAttackRangeConstantWords_de_eu_eu_x_us[3] = {
-    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+const float g_Scaled_GetScaledAttackRangeConstantWords_de_eu_eu_x_us[3] = {
+    0.01f, 0.9f, 1.1f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_Scaled_GetScaledAttackRangeConstantWords_us_rev1_Player.c */
-const unsigned int g_Scaled_GetScaledAttackRangeConstantWords_us_rev1[3] = {
-    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+const float g_Scaled_GetScaledAttackRangeConstantWords_us_rev1[3] = {
+    0.01f, 0.9f, 1.1f,
 };
 #endif
 
 /* 800C6DB0_2.CPP */
 /* ROM-grounded data: src/g_Scaled_UpdateDifficultyAimJitterConstantWords_Player.c */
-const unsigned int g_Scaled_UpdateDifficultyAimJitterConstantWords[2] = {
-    0x3E860A93, 0x3E860A93,
+const float g_Scaled_UpdateDifficultyAimJitterConstantWords[2] = {
+    0.26179942f, 0.26179942f,
 };
 
 #if defined(VERSION_US)

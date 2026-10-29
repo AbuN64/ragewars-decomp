@@ -104,8 +104,8 @@ unsigned int func_802131D8_de_padding_13DF8[2] = {
 
 /* 800C6E84_2.CPP */
 #if defined(VERSION_DE)
-const unsigned int g_Nav_ResetPatrolRouteSelectionConstantWords[2] = {
-    0x42CCCCCC, 0x424CCCCC,
+const float g_Nav_ResetPatrolRouteSelectionConstantWords[2] = {
+    102.399994f, 51.199997f,
 };
 #endif
 

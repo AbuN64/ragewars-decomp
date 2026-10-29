@@ -53,7 +53,5 @@ unsigned int k_Ovltab2EncodedWords[6] = {
 
 /* 8044ACCC_11.CPP */
 #if defined(VERSION_US_REV1)
-const unsigned char k_Ovltab2EncodedBytes[13] = {
-    0x6C, 0x65, 0x76, 0x65, 0x6C, 0x73, 0x20, 0x69, 0x6E, 0x64, 0x65, 0x78, 0x00,
-};
+const char k_Ovltab2EncodedBytes[13] = "levels index";
 #endif

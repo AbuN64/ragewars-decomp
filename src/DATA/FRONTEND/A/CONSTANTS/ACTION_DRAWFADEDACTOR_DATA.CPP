@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_Actionai_DrawFadedActorConstantWords_ActionDrawfadedactorData.c */
-const unsigned int g_Actionai_DrawFadedActorConstantWords[2] = {
-    0x41080000, 0x437F0000,
+const float g_Actionai_DrawFadedActorConstantWords[2] = {
+    8.5f, 255.0f,
 };
 
 #if defined(VERSION_US)

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/navResetWheelProbeStatePoolUsRev1.c */
-const unsigned int g_Nav_ResetWheelProbeStateConstantWords[2] = {
-    0x42C80000, 0x4399999A,
+const float g_Nav_ResetWheelProbeStateConstantWords[2] = {
+    1e+02f, 307.2f,
 };
 
 #if defined(VERSION_EU_X)

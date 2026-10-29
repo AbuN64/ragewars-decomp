@@ -17,9 +17,11 @@
 #include "AI/PLAYER_DRAWTINTEDPLAYER.H"
 #include "COMMON/PLAYERPROFILES.H"
 
-const unsigned int k_PlayerDrawtintedplayerEncodedWords[14] = {
-    0x3D888889, 0x3C888889, 0x42700000, 0x3F800000, 0x41F00000, 0x3F000000, 0x3F4CCCCD, 0x41200000,
-    0x3F000000, 0x41A00000, 0x3F000000, 0x40E00000, 0x40C00000, 0x41400000,
+const float k_PlayerDrawtintedplayerEncodedWords[14] = {
+    0.06666667f, 0.016666668f, 6e+01f, 1.0f,
+    3e+01f, 0.5f, 0.8f, 1e+01f,
+    0.5f, 2e+01f, 0.5f, 7.0f,
+    6.0f, 12.0f,
 };
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -234,6 +236,6 @@ void Player_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
 }
 
 /* ROM-grounded data: src/k_PlayerDrawtintedplayerEncodedWordsBlock2_PlayerDrawtintedplayer.c */
-const unsigned int k_PlayerDrawtintedplayerEncodedWordsBlock2[3] = {
-    0x43800000, 0x41300000, 0x4879C000,
+const float k_PlayerDrawtintedplayerEncodedWordsBlock2[3] = {
+    256.0f, 11.0f, 255744.0f,
 };

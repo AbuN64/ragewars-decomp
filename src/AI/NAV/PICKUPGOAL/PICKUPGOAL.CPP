@@ -113,8 +113,8 @@ void Nav_SetPickupGoalWeights(void *arg) {
 
 /* 800C6E84_11.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Nav_SetLinkedActorNodeCostsConstantWords_de_eu_eu_x_us[3] = {
-    0x47480000, 0x4123D70A, 0xC4199999,
+const float g_Nav_SetLinkedActorNodeCostsConstantWords_de_eu_eu_x_us[3] = {
+    5.12e+04f, 10.24f, -614.39996f,
 };
 #endif
 
@@ -126,17 +126,17 @@ unsigned int k_PickupgoalEncodedWords[2] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/Nav_SetLinkedActorNodeCostsConstantWords_us_rev1.c */
-const unsigned int g_Nav_SetLinkedActorNodeCostsConstantWords_us_rev1[1] = {
-    0x47480000,
+const float g_Nav_SetLinkedActorNodeCostsConstantWords_us_rev1[1] = {
+    5.12e+04f,
 };
 
 /* ROM-grounded data: src/Nav_AccumulateNodeTickCostsConstantWords.c */
-const unsigned int g_Nav_AccumulateNodeTickCostsConstantWords[1] = {
-    0x4123D70A,
+const float g_Nav_AccumulateNodeTickCostsConstantWords[1] = {
+    10.24f,
 };
 
 /* ROM-grounded data: src/Nav_AddPickupCategoryCostsConstantWords.c */
-const unsigned int g_Nav_AddPickupCategoryCostsConstantWords[1] = {
-    0xC4199999,
+const float g_Nav_AddPickupCategoryCostsConstantWords[1] = {
+    -614.39996f,
 };
 #endif

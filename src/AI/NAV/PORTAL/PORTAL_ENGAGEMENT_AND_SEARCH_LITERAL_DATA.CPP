@@ -2,8 +2,8 @@
 
 /* 800C6E24.CPP */
 /* ROM-grounded data: src/Portal_GetEngagementDistanceConstantWords.c */
-const unsigned int g_Portal_GetEngagementDistanceConstantWords[2] = {
-    0x3F800000, 0x3F060A93,
+const float g_Portal_GetEngagementDistanceConstantWords[2] = {
+    1.0f, 0.52359885f,
 };
 
 #if defined(VERSION_US)

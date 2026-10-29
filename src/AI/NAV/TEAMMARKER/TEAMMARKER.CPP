@@ -46,8 +46,8 @@ s32 Nav_EvaluateCaptureFlagMarkerSearch(void **controller) {
 }
 
 /* ROM-grounded data: src/Nav_ShouldSeekUnclaimedTeamMarkerConstantWords.c */
-const unsigned int g_Nav_ShouldSeekUnclaimedTeamMarkerConstantWords[3] = {
-    0x3F19999A, 0x3E4CCCCD, 0x3F800000,
+const float g_Nav_ShouldSeekUnclaimedTeamMarkerConstantWords[3] = {
+    0.6f, 0.2f, 1.0f,
 };
 
 #if defined(VERSION_US)

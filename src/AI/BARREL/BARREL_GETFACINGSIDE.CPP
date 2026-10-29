@@ -13,16 +13,16 @@
 
 /* 800C6E84_25.CPP */
 /* ROM-grounded data: src/k_BarrelGetfacingsideOneWords_BarrelGetfacingside.c */
-const unsigned int k_BarrelGetfacingsideOneWords[1] = {
-    0x3F800000,
+const float k_BarrelGetfacingsideOneWords[1] = {
+    1.0f,
 };
 /* ROM-grounded data: src/k_BarrelGetfacingsideEncodedWords_BarrelGetfacingside.c */
-const unsigned int k_BarrelGetfacingsideEncodedWords[1] = {
-    0x3FC00000,
+const float k_BarrelGetfacingsideEncodedWords[1] = {
+    1.5f,
 };
 /* ROM-grounded data: src/k_BarrelGetfacingsideEncodedWordsBlock1_BarrelGetfacingside.c */
-const unsigned int k_BarrelGetfacingsideEncodedWordsBlock1[1] = {
-    0x3F4CCCCD,
+const float k_BarrelGetfacingsideEncodedWordsBlock1[1] = {
+    0.8f,
 };
 
 /* 80213ED4_4.CPP */

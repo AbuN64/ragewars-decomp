@@ -9,8 +9,8 @@ unsigned int g_deviceUpdatetriggeredmotionFloatConstantWords[3] = {
 
 /* 800C6C90.CPP */
 /* ROM-grounded data: src/k_DeviceUpdatetriggeredmotionOneWords_DeviceUpdatetriggeredmotion.c */
-const unsigned int k_DeviceUpdatetriggeredmotionOneWords[1] = {
-    0x3F800000,
+const float k_DeviceUpdatetriggeredmotionOneWords[1] = {
+    1.0f,
 };
 
 #if defined(VERSION_EU_X)

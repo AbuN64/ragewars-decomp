@@ -232,6 +232,6 @@ s32 readVarLen(struct ALSeq_s *sequence) {
 }
 
 /* ROM-grounded data: src/g_sequenceQuarterNoteUnit_StorageWords_Seq.c */
-const unsigned int g_sequenceQuarterNoteUnit_StorageWords[1] = {
-    0x3F800000,
+const float g_sequenceQuarterNoteUnit_StorageWords[1] = {
+    1.0f,
 };

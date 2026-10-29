@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
-const unsigned int k_NavIsballisticarcobstructedEncodedWords[3] = {
-    0x3F800000, 0x3FAAAAAB, 0x3F000000,
+const float k_NavIsballisticarcobstructedEncodedWords[3] = {
+    1.0f, 1.3333334f, 0.5f,
 };
 
 #if defined(VERSION_US)
