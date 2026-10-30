@@ -16,8 +16,8 @@ struct {
     gsSPGeometryMode(0xFFFFFF, 0x00000000),
     gsSPGeometryMode(0x000000, 0x00000001),
     gsSPMoveWord(2, 0x0000, 0x00000018),
-    gsSPMoveMem(10, 48, 9, g_playerModelLighting + 8),
-    gsSPMoveMem(10, 72, 9, g_playerModelLighting),
+    gsSPMoveMem(10, 48, 16, g_playerModelLighting + 8),
+    gsSPMoveMem(10, 72, 16, g_playerModelLighting),
     gsSPEndDisplayList(),
     }
 };
