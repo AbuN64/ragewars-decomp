@@ -9,7 +9,7 @@ readme_map_link = "https://itsmo.me/attic/cake-unbake/"
 readme_map_repo = "ragewars-decomp"
 
 [layout]
-source_roots = ["src", "sdk"]
+source_roots = ["src", "sdk", "include"]
 header_roots = ["include", "sdk/include"]
 library_source = "sdk/{library}"
 library_header = "sdk/include/{library}.h"
@@ -124,6 +124,9 @@ origin = "Nintendo libgultra"
 
 [library."sdk/include/"]
 origin = "Nintendo libgultra and SGI headers"
+
+[library."include/PR/"]
+origin = "SGI and Nintendo headers (decompals/ultralib e24c8367)"
 
 [library."sdk/rnc/"]
 origin = "Rob Northen compression"
