@@ -233,7 +233,8 @@ void Control_UpdateControllerInput(ControllerProfile *state, s8 x, s8 y, u32 but
     else { x = x + 3; if (x > 0) x = 0; }
     if (y > 0) { y = y - 3; if (y < 0) y = 0; }
     else { y = y + 3; if (y > 0) y = 0; }
-    /* fakematch: the one-shot loop gives X one extra gcc register reference. */
+    /* fakematch: the one-shot loop weights fx's references by loop depth, so gcc's global allocator gives fx
+       $f0 and fy $f1 (plain `fx = x; fy = y;` swaps them); no plain source form found that does it. */
     do { fx = x; } while (0);
     fy = y;
     if (fx == -128.0f) fx = -127.0f;

@@ -269,8 +269,9 @@ void Menu_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     if (bounds.width < 0 || bounds.height < 0) {
         return;
     }
-    /* fakematch: the split source keeps the leading half-scale constant separate
-       so the following double literal retains its ROM alignment. */
+    /* fakematch: 0.5f is the first entry of this function's literal pool, in the ROM at 4 mod 8 right after the
+       Menu_UpdateMenuEntries pool; written inline the per-function pool block is linked 8-aligned and the double
+       loses its pad word. Needs the link script to pad a pool block that starts off 8 (unbake); kept a symbol until then. */
     centerX = data->x + data->width * g_menuCenterFraction + menu->x;
     centerY = data->y + data->height * g_menuCenterFraction + menu->y;
     bounds.left = centerX - bounds.width / 2;
