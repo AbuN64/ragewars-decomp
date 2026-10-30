@@ -106431,3 +106431,75 @@ state = "decoded"
 stored_size = 26
 rom."eu" = [[0x172c10, 0x172c2a]]
 evidence = [{ artifact = "unknown-spans-pass1-receipt.json", sha256 = "baed5aa0054c4662c1aaef675cd2e9e3f5650c0c64493a2b348326fdea05f65a", pointer = "/rows/369" }]
+
+[blob."leftover.de.rnc-repack.1d0b21"]
+type = "leftover"
+format = "rnc-repack"
+codec = "none"
+state = "decoded"
+stored_size = 19
+rom."de" = [[0x1d0b21, 0x1d0b34]]
+evidence = [{ artifact = "rnc-repack-tails.json", sha256 = "4beb393264b655fbc00ff651654fff74aca46b70506bd03c4f5b71e95a1fec2a", pointer = "/rows/0" }]
+
+[blob."leftover.de.rnc-repack.1d0b59"]
+type = "leftover"
+format = "rnc-repack"
+codec = "none"
+state = "decoded"
+stored_size = 198
+rom."de" = [[0x1d0b59, 0x1d0c1f]]
+evidence = [{ artifact = "rnc-repack-tails.json", sha256 = "4beb393264b655fbc00ff651654fff74aca46b70506bd03c4f5b71e95a1fec2a", pointer = "/rows/1" }]
+
+[blob."leftover.de.rnc-repack.1d5500"]
+type = "leftover"
+format = "rnc-repack"
+codec = "none"
+state = "decoded"
+stored_size = 212
+rom."de" = [[0x1d5500, 0x1d55d4]]
+evidence = [{ artifact = "rnc-repack-tails.json", sha256 = "4beb393264b655fbc00ff651654fff74aca46b70506bd03c4f5b71e95a1fec2a", pointer = "/rows/2" }]
+
+[blob."leftover.de.rnc-repack.1d936f"]
+type = "leftover"
+format = "rnc-repack"
+codec = "none"
+state = "decoded"
+stored_size = 220
+rom."de" = [[0x1d936f, 0x1d944b]]
+evidence = [{ artifact = "rnc-repack-tails.json", sha256 = "4beb393264b655fbc00ff651654fff74aca46b70506bd03c4f5b71e95a1fec2a", pointer = "/rows/3" }]
+
+[blob."leftover.de.rnc-repack.1dd7b4"]
+type = "leftover"
+format = "rnc-repack"
+codec = "none"
+state = "decoded"
+stored_size = 421
+rom."de" = [[0x1dd7b4, 0x1dd959]]
+evidence = [{ artifact = "rnc-repack-tails.json", sha256 = "4beb393264b655fbc00ff651654fff74aca46b70506bd03c4f5b71e95a1fec2a", pointer = "/rows/4" }]
+
+[blob."leftover.de.rnc-repack.1f9f1a"]
+type = "leftover"
+format = "rnc-repack"
+codec = "none"
+state = "decoded"
+stored_size = 321
+rom."de" = [[0x1f9f1a, 0x1fa05b]]
+evidence = [{ artifact = "rnc-repack-tails.json", sha256 = "4beb393264b655fbc00ff651654fff74aca46b70506bd03c4f5b71e95a1fec2a", pointer = "/rows/5" }]
+
+[blob."leftover.de.rnc-repack.1fd8d2"]
+type = "leftover"
+format = "rnc-repack"
+codec = "none"
+state = "decoded"
+stored_size = 371
+rom."de" = [[0x1fd8d2, 0x1fda45]]
+evidence = [{ artifact = "rnc-repack-tails.json", sha256 = "4beb393264b655fbc00ff651654fff74aca46b70506bd03c4f5b71e95a1fec2a", pointer = "/rows/6" }]
+
+[blob."leftover.de.rnc-repack.1fffc2"]
+type = "leftover"
+format = "rnc-repack"
+codec = "none"
+state = "decoded"
+stored_size = 60
+rom."de" = [[0x1fffc2, 0x1ffffe]]
+evidence = [{ artifact = "rnc-repack-tails.json", sha256 = "4beb393264b655fbc00ff651654fff74aca46b70506bd03c4f5b71e95a1fec2a", pointer = "/rows/7" }]
