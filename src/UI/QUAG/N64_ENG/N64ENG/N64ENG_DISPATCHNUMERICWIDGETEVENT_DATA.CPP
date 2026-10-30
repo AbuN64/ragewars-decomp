@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "DATA/UI/EVENT_HANDLER_RECORD.H"
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
@@ -45,10 +46,15 @@ extern char N64Eng_HandleNumericDecrement_Address[];
 extern char N64Eng_CancelSelectionRepeat_Address[];
 extern char TickSelectionRepeat_Address[];
 extern char N64Eng_FreeNumericWidget_Address[];
-unsigned int g_numericWidgetEventIds_StorageWords[27] = {
-    0x00000E07, 0x00007530, (unsigned int)N64Eng_SetLinkedCommand100_Address, 0x0000000F, 0x00007530, (unsigned int)N64Eng_SetLinkedCommand200_Address, 0x00000010, 0x00007530,
-    (unsigned int)N64Eng_SetLinkedCommand100WithSound_Address, 0x00000008, 0x00007530, (unsigned int)N64Eng_HandleNumericIncrement_Address, 0x00000007, 0x00007530, (unsigned int)N64Eng_HandleNumericDecrement_Address, 0x00000E03,
-    0x00007530, (unsigned int)N64Eng_FreeNumericWidget_Address, 0x0000000B, 0x00007530, (unsigned int)N64Eng_CancelSelectionRepeat_Address, 0x00000E08, 0x00007530, (unsigned int)TickSelectionRepeat_Address,
-    0x00000000, 0x00000000, 0x00000000,
+EventHandlerRecord g_numericWidgetEventIds_StorageWords[9] = {
+    { 3591, 30000, N64Eng_SetLinkedCommand100_Address },
+    { 15, 30000, N64Eng_SetLinkedCommand200_Address },
+    { 16, 30000, N64Eng_SetLinkedCommand100WithSound_Address },
+    { 8, 30000, N64Eng_HandleNumericIncrement_Address },
+    { 7, 30000, N64Eng_HandleNumericDecrement_Address },
+    { 3587, 30000, N64Eng_FreeNumericWidget_Address },
+    { 11, 30000, N64Eng_CancelSelectionRepeat_Address },
+    { 3592, 30000, TickSelectionRepeat_Address },
+    { 0, 0, 0 },
 };
 #endif

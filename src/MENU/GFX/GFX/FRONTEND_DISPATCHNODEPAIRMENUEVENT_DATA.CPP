@@ -1,4 +1,5 @@
 #include "DATA/OVL1_J/FRONTEND_DISPATCHNODEPAIRMENUEVENT_DATA.H"
+#include "DATA/UI/EVENT_HANDLER_RECORD.H"
 
 /* 80408CB0_15.CPP */
 #if defined(VERSION_EU)
@@ -12,8 +13,10 @@ unsigned int g_FrontendDispatchnodepairmenueventEncodedWords[2] = {
     0x000B0000, 0x00000011,
 };
 
-unsigned int g_menuEventHandlers4_us_rev1[12] = {
-    0x00000E06, 0x00000021, 0x00439F10, 0x00000002, 0x00000021, (unsigned int)g_frontend_CancelNodePairMenuEntry, 0x00000001, 0x00000021,
-    (unsigned int)g_frontend_UpdateTimedTransitionEntry, 0x00000000, 0x00000000, 0x00000000,
+EventHandlerRecord g_menuEventHandlers4_us_rev1[4] = {
+    { 3590, 33, (void *)0x00439F10 },
+    { 2, 33, g_frontend_CancelNodePairMenuEntry },
+    { 1, 33, g_frontend_UpdateTimedTransitionEntry },
+    { 0, 0, 0 },
 };
 #endif
