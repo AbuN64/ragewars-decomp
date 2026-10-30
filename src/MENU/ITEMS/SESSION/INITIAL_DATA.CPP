@@ -3,8 +3,8 @@
 #if !(defined(VERSION_US))
 /* ROM-grounded data: src/k_initialDataFloatConstantWords_InitialData.c */
 #if !(defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US))
-const unsigned int k_initialDataFloatConstantWords[1] = {
-    0x42F00000,
+const float k_initialDataFloatConstantWords[1] = {
+    120.0f,
 };
 #endif
 #endif

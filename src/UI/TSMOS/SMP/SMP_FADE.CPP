@@ -86,8 +86,9 @@ unsigned int k_SmpFadeEncodedWordsBlock3[2] = {
 
 #if defined(VERSION_DE)
 #if defined(VERSION_DE)
-unsigned int k_SmpFadeEncodedWordsBlock1[2] = {
-    (unsigned int)&g_actionEnterDispatchTable + 0x70, (unsigned int)&g_damageDispatchTable + 0x90,
+void *k_SmpFadeEncodedWordsBlock1[2] = {
+    (char *)&g_actionEnterDispatchTable + 0x70,
+    (char *)&g_damageDispatchTable + 0x90,
 };
 #endif
 #endif

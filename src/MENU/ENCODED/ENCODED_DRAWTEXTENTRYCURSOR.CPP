@@ -146,7 +146,7 @@ s32 Encoded_CheckEncodedText(u8 *input) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int g_Encoded_UpdateTextEntryCursorConstantWords[1] = {
-    0x41700000,
+const float g_Encoded_UpdateTextEntryCursorConstantWords[1] = {
+    15.0f,
 };
 #endif

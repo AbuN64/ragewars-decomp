@@ -408,9 +408,8 @@ s32 Menu_CountPendingCharacterSelections(void) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_CharacterUnlocksEncodedWords[1] = {
-    0x595F3165,
-};
+char k_CharacterUnlocksEncodedWords[4] =
+    "Y_1e";
 #endif
 
 #if defined(VERSION_EU_X)

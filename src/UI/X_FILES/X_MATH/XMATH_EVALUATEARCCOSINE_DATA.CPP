@@ -1,5 +1,5 @@
 #include "COMMON/OBJRECAT3CV2.H"
 
-const unsigned int k_xmathEvaluatearccosineDataFloatConstantWords[6] = {
-    0x3CFD10F8, 0x3D4D8392, 0x3DB63A9E, 0x3E5BBFCA, 0x3FC90FDA, 0x3FC90FDB,
+const double k_xmathEvaluatearccosineDataFloatConstantWords[3] = {
+    6.454012398653054e-15, 2.0217136903303863e-11, 0.1957962809993877,
 };

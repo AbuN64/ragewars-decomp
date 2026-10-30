@@ -3,8 +3,8 @@
 /* 800E2284.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E2284 */
-const unsigned int k_LevelGetselectedresourceidgermanEncodedWords[1] = {
-    0x41700000,
+const float k_LevelGetselectedresourceidgermanEncodedWords[1] = {
+    15.0f,
 };
 #endif
 

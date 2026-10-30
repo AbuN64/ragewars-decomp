@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "DATA/UI/EVENT_HANDLER_RECORD.H"
 
 #if defined(VERSION_US)
 unsigned int g_InitialOpentrackpreviewmenuTrailingWordUs[1] = {
@@ -15,8 +16,8 @@ unsigned char g_InitialOpentrackpreviewmenuTrailingBytes[4] = { 0x24, 0x06, 0x00
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5698_unclaimed_E62B0 */
 extern char g_Player_InitPlayerSettingsScreenAddress[];
-unsigned int g_playerSettingsCreateEventRecordUsRev1[3] = {
-    0x00000E06, 0x00000005, (unsigned int)g_Player_InitPlayerSettingsScreenAddress,
+EventHandlerRecord g_playerSettingsCreateEventRecordUsRev1[1] = {
+    { 3590, 5, g_Player_InitPlayerSettingsScreenAddress },
 };
 
 extern char g_Player_FreePlayerSettingsScreenAddress[];
@@ -25,10 +26,14 @@ extern char g_Player_ConfirmPlayerSettingsEntryAddress[];
 extern char g_Player_CancelPlayerSettingsEntryAddress[];
 extern char g_Player_SelectNextPlayerSettingsEntryAddress[];
 extern char g_Player_SelectPreviousPlayerSettingsEntryAddress[];
-unsigned int g_playerSettingsEventHandlerRecordsUsRev1[21] = {
-    0x00000E03, 0x00000005, (unsigned int)g_Player_FreePlayerSettingsScreenAddress, 0x0000000A, 0x00000005, (unsigned int)g_playerSettingsUnhandledEventCallbackAddressUsRev1, 0x00000002, 0x00000005,
-    (unsigned int)g_Player_CancelPlayerSettingsEntryAddress, 0x00000001, 0x00000005, (unsigned int)g_Player_ConfirmPlayerSettingsEntryAddress, 0x00000008, 0x0000005E, (unsigned int)g_Player_SelectNextPlayerSettingsEntryAddress, 0x00000007,
-    0x0000005E, (unsigned int)g_Player_SelectPreviousPlayerSettingsEntryAddress, 0x00000000, 0x00000000, 0x00000000,
+EventHandlerRecord g_playerSettingsEventHandlerRecordsUsRev1[7] = {
+    { 3587, 5, g_Player_FreePlayerSettingsScreenAddress },
+    { 10, 5, g_playerSettingsUnhandledEventCallbackAddressUsRev1 },
+    { 2, 5, g_Player_CancelPlayerSettingsEntryAddress },
+    { 1, 5, g_Player_ConfirmPlayerSettingsEntryAddress },
+    { 8, 94, g_Player_SelectNextPlayerSettingsEntryAddress },
+    { 7, 94, g_Player_SelectPreviousPlayerSettingsEntryAddress },
+    { 0, 0, 0 },
 };
 #endif
 
@@ -42,20 +47,24 @@ extern char g_Player_ConfirmAlternatePlayerSettingsEntryAddress[];
 extern char g_Player_CancelAlternatePlayerSettingsEntryAddress[];
 extern char g_Player_SelectNextAlternatePlayerSettingsEntryAddress[];
 extern char g_Player_SelectPreviousAlternatePlayerSettingsEntryAddress[];
-unsigned int g_alternatePlayerSettingsEventHandlerRecordsUsRev1[27] = {
-    0x00000E07, 0x0000000C, (unsigned int)g_alternatePlayerSettingsUnhandledEventCallbackAddressUsRev1, 0x00000E08, 0x0000000C, (unsigned int)g_alternatePlayerSettingsUnhandledEventCallbackAddressUsRev1Alternate, 0x00000E06, 0x0000000C,
-    (unsigned int)g_Player_BuildItemLabelListAddress, 0x00000E03, 0x0000000C, (unsigned int)g_Player_FreeAlternatePlayerSettingsScreenAddress, 0x00000002, 0x0000000C, (unsigned int)g_Player_CancelAlternatePlayerSettingsEntryAddress, 0x00000001,
-    0x0000000C, (unsigned int)g_Player_ConfirmAlternatePlayerSettingsEntryAddress, 0x00000008, 0x000001C6, (unsigned int)g_Player_SelectNextAlternatePlayerSettingsEntryAddress, 0x00000007, 0x000001C6, (unsigned int)g_Player_SelectPreviousAlternatePlayerSettingsEntryAddress,
-    0x00000000, 0x00000000, 0x00000000,
+EventHandlerRecord g_alternatePlayerSettingsEventHandlerRecordsUsRev1[9] = {
+    { 3591, 12, g_alternatePlayerSettingsUnhandledEventCallbackAddressUsRev1 },
+    { 3592, 12, g_alternatePlayerSettingsUnhandledEventCallbackAddressUsRev1Alternate },
+    { 3590, 12, g_Player_BuildItemLabelListAddress },
+    { 3587, 12, g_Player_FreeAlternatePlayerSettingsScreenAddress },
+    { 2, 12, g_Player_CancelAlternatePlayerSettingsEntryAddress },
+    { 1, 12, g_Player_ConfirmAlternatePlayerSettingsEntryAddress },
+    { 8, 454, g_Player_SelectNextAlternatePlayerSettingsEntryAddress },
+    { 7, 454, g_Player_SelectPreviousAlternatePlayerSettingsEntryAddress },
+    { 0, 0, 0 },
 };
 #endif
 
 /* g_playerSettingsPackedTextFragmentUsRev1_InitialOpentrackpreviewmenuData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5698_unclaimed_E62B0_unclaimed_E6310_unclaimed_E637C */
-unsigned int g_playerSettingsPackedTextFragmentUsRev1[1] = {
-    0x4C4C5F53,
-};
+char g_playerSettingsPackedTextFragmentUsRev1[4] =
+    "LL_S";
 #endif
 
 /* g_equipmentAndPlayerSettingsMenuDataEu_InitialOpentrackpreviewmenuData.CPP */
