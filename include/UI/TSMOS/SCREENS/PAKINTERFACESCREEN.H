@@ -11,6 +11,15 @@ typedef struct PAKNameChar {
     u8 ch;
     u8 attr;
 } PAKNameChar;
+/* One 400-byte "global" player record; only the fields the update code tests are named. */
+typedef struct PAKGlobalPlayer {
+    u8 pad0[8];
+    s32 m_Marker;
+    s8 m_Slot;
+    s8 m_User;
+    s8 m_Quick;
+    u8 pad0F[PAK_PLAYER_RECORD_SIZE - 15];
+} PAKGlobalPlayer;
 typedef struct PAKInterfacePlayer {
     s32 m_State;
     s32 m_Mode;
@@ -18,7 +27,7 @@ typedef struct PAKInterfacePlayer {
     void *m_pWidget;
     u8 pad10[4];
     s32 m_Panel;
-    u8 m_MiddleRecords[PAK_USERS][PAK_PLAYER_RECORD_SIZE];
+    PAKGlobalPlayer m_MiddleRecords[PAK_USERS];
     u8 pad65C[2864 - 24 - PAK_USERS * PAK_PLAYER_RECORD_SIZE];
     s32 m_NameTarget;
     PAKNameChar m_Name[PAK_NAME_LENGTH];
@@ -52,15 +61,6 @@ typedef struct PAKInterfaceScreen {
     PAKSlotState m_Slot[PAK_USERS];
     PAKSaveBlock m_SaveBlock;
 } PAKInterfaceScreen;
-/* One 400-byte "global" player record; only the fields the update code tests are named. */
-typedef struct PAKGlobalPlayer {
-    u8 pad0[8];
-    s32 m_Marker;
-    s8 m_Slot;
-    s8 m_User;
-    s8 m_Quick;
-    u8 pad0F[PAK_PLAYER_RECORD_SIZE - 15];
-} PAKGlobalPlayer;
 #define PAKINTERFACE_MAX_USERS PAK_USERS
 extern PAKInterfaceScreen *g_pakInterfaceScreen;
 extern s32 PAKInterface_OnInitialUpdate(s32 a, s32 b, s32 c, s32 d);
@@ -84,6 +84,8 @@ extern char s_pakAssertSlotRange[];
 extern char s_pakAssertUserRange[];
 extern char s_pakAssertIndexRange[];
 extern char s_pakAssertUserObject[];
+extern char s_pakAssertNoEmptySlot[];
+extern s32 PAKInterface_FindEmptyMiddleSlot(void);
 extern s32 PAK_GetPagesFree(s32 anUser, s32 *apPages);
 extern s32 PAK_GetNotesFree(s32 anUser, s32 *apNotes);
 extern s32 PAK_PagesForBytes(s32 anBytes);

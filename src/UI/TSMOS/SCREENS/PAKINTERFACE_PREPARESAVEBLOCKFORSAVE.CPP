@@ -8,7 +8,7 @@ void PAKInterface_PrepareSaveBlockForSave(s32 anUser) {
     PAKSaveBlock *pBlock;
     s32 nSize;
     PAK_ASSERT(5221, anUser >= 0 && anUser < 4, s_pakAssertUserRange);
-    pSource = g_pakInterfaceScreen->m_PAKInterfacePlayer[anUser].m_MiddleRecords[0];
+    pSource = (u8 *)&g_pakInterfaceScreen->m_PAKInterfacePlayer[anUser].m_MiddleRecords[0];
     pBlock = &g_pakInterfaceScreen->m_SaveBlock;
     nSize = PAK_SAVE_DATA_SIZE;
     memcpy(pBlock, pSource, nSize);

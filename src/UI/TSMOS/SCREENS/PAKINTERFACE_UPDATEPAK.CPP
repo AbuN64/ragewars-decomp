@@ -12,7 +12,7 @@ void PAKInterface_UpdatePAK(s32 anUser) {
         if (g_pakGlobalPlayers[i].m_Quick == 0 && g_pakGlobalPlayers[i].m_User == anUser
             && g_pakUpdateInfo[i][PAK_UPDATE_ACTIVE] == 1 && g_pakUpdateInfo[i][PAK_UPDATE_PENDING] == 0) {
             nSlot = g_pakGlobalPlayers[i].m_Slot;
-            memcpy(g_pakInterfaceScreen->m_PAKInterfacePlayer[anUser].m_MiddleRecords[nSlot], &g_pakGlobalPlayers[i], nSize);
+            memcpy(&g_pakInterfaceScreen->m_PAKInterfacePlayer[anUser].m_MiddleRecords[nSlot], &g_pakGlobalPlayers[i], nSize);
         }
     }
 }

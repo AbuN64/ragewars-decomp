@@ -406,3 +406,28 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-O0"]
 omit = ["-O2", "-mgas"]
 unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_ISPLAYERDATALISTEMPTY.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_FINDEMPTYPLAYERDATASLOT.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_ADDPLAYERTOMIDDLE.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_ADDPLAYERTOSPECIFICMIDDLESLOT.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEPLAYERFROMMIDDLE.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
