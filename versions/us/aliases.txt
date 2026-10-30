@@ -1811,3 +1811,5 @@ g_backdropTextLinesUs = 0x800D1CE8; // explicit external address binding
 g_loadingViewMatricesUsRev1 = 0x80119510; // explicit external address binding
 literals_SetN64_DrawFullscreenBackdrop = 0x800C5300; // rom:0xC5F00 size:0x4
 k_PortalAfterCalcSaveGameSize = 0x800FCB79;
+g_frontendMenuResourceStream1 = 0x800E4827;
+g_pakInterfaceScreen = 0x800E2B5D; // the file's static pointer, inside the image's first stream chunk

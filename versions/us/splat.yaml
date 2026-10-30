@@ -4661,6 +4661,9 @@ segments:
       - [0xE17D0, data, game_data/g_menuBoxCorners]
       - [0xE1944, data, game_data/g_minusOneSentinelWords]
       - [0xE194C, data, game_data/g_frontendMenuResourceWordsUs]
+      - [0xE537B, c, game_data]
+      - [0xE53B7, c, game_data]
+      - [0xE5427, data, game_data/g_frontendMenuResourceStream1]
       - [0xF0880, data, game_data/g_InitialOpentrackpreviewmenuTrailingWordUs]
       - [0xF0884, data, game_data/k_LibsnEnumeratememoryrangesEncodedWords]
       - [0xF1900, data, game_data/g_libsnHostMemoryRanges_LibsnEnumeratememoryrangesData]
@@ -4712,17 +4715,9 @@ segments:
       - [0xFFD60, data, game_data/k_Ovldat10EncodedWordsBlock4]
       - [0xFFD7C, data, game_data/k_Ovldat10EncodedWordsBlock8]
       - [0xFFDA0, data, game_data/k_Ovldat10EncodedWordsBlock17]
-      - [0x1008B0, c, game_data]
-      - [0x1009C0, c, game_data]
-      - [0x100AF0, c, game_data]
-      - [0x100C7C, c, game_data]
-      - [0x100EB4, c, game_data]
-      - [0x101138, c, game_data]
-      - [0x1012F4, c, game_data]
-      - [0x101594, c, game_data]
   - name: debug_symbols
     type: bin
-    start: 0x101834
+    start: 0x101000
   - name: ovl_frontendMenu
     type: code
     start: 0x164000
