@@ -1,5 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
-#include "FX/CONTROLLER_INPUT.H"
+#include "ENGINE/CONTPAD.H"
 
 /* GControllerbuttonremapBlock1.CPP */
 

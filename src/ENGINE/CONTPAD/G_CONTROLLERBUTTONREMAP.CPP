@@ -1,4 +1,4 @@
-#include "FX/CONTROLLER_INPUT.H"
+#include "ENGINE/CONTPAD.H"
 
 /* 800D0DA4.CPP */
 #if defined(VERSION_US_REV1)

@@ -5,7 +5,7 @@
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/AIPROFILE.H"
 #include "FX/EXTERNS.H"
-#include "FX/CONTROLLER_INPUT.H"
+#include "ENGINE/CONTPAD.H"
 #include <ultra64.h>
 #include "COMMON/PAKQUEUESTATE.H"
 #include "ENGINE/CONTPAD.H"

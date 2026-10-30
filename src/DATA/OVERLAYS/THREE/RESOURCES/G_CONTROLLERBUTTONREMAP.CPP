@@ -1,6 +1,6 @@
 #include "TYPES.H"
 
-#include "FX/CONTROLLER_INPUT.H"
+#include "ENGINE/CONTPAD.H"
 
 /* 800CC574.CPP */
 

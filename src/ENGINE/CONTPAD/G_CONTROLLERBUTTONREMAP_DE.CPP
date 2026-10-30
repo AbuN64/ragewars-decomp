@@ -1,4 +1,4 @@
-#include "FX/CONTROLLER_INPUT.H"
+#include "ENGINE/CONTPAD.H"
 
 #if defined(VERSION_DE)
 /* Alignment fill to the next 16-byte object boundary. */
