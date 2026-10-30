@@ -13,6 +13,15 @@
 #include "../../include/libgultra/alunlink.h"
 #include "../../include/libultra/debug/assert.h"
 extern int _sndpVoiceHandler_Address(void *soundPlayer);
+#if defined(VERSION_US_REV1)
+#define SNDP_MIN_PITCH g_SndplayerWords1
+#define SNDP_ASSERT_TEXT g_SndplayerBytes2
+#define SNDP_SOURCE_TEXT g_audioSndplayerSourceText
+#else
+#define SNDP_MIN_PITCH g_SndplayerBytes1
+#define SNDP_ASSERT_TEXT g_soundPlayerAssertText
+#define SNDP_SOURCE_TEXT s_audioSndplayerText
+#endif
 
 /* alSndpNew, drafted from ultralib src/audio/sndplayer.c: sets up a sound player from its config,
    allocating the sound states and event items from the heap, registers its voice handler with the
@@ -194,7 +203,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
 
         case 4: /* AL_SNDP_PITCH_EVT */
             {
-                f32 min = 0.0001f;
+                f32 min = SNDP_MIN_PITCH;
                 if ((state->pitch = event_view->pitch.pitch) < min)
                     state->pitch = min;
             }
@@ -320,7 +329,7 @@ s32 _DivS32ByF32(s32 val, f32 div) {
     s32 result;
 
     if (div == 0.0f) {
-        __assert("EX", "audio/sndplayer.c", 0x11D);
+        __assert(SNDP_ASSERT_TEXT, SNDP_SOURCE_TEXT, 0x11D);
     }
 
     result = 0x7FFFFFFF;
@@ -331,6 +340,18 @@ s32 _DivS32ByF32(s32 val, f32 div) {
     }
     return result;
 }
+
+/* The rodata literals the voice handler and _DivS32ByF32 read, after the _handleEvent jump table:
+   the 0.0001f pitch floor, the assert expression text and the source path of the assert. */
+#if defined(VERSION_US_REV1)
+const f32 g_SndplayerWords1 = 0.0001f;
+const char g_SndplayerBytes2[] = "EX";
+const char g_audioSndplayerSourceText[] = "audio/sndplayer.c";
+#else
+const f32 g_SndplayerBytes1 = 0.0001f;
+const char g_soundPlayerAssertText[] = "EX";
+const char s_audioSndplayerText[] = "audio/sndplayer.c";
+#endif
 
 #if defined(VERSION_US)
 unsigned int k_SndplayerEncodedWordsBlock6[2] = {
