@@ -38,7 +38,3 @@ void __osViInit(void)
     IO_WRITE(0xA4400000U, 0);
     __osViSwapContext();
 }
-
-#if VERSION_EU
-INCLUDE_DATA("game_code", func_802BA210_de_padding_BB1AC);
-#endif

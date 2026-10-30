@@ -2609,7 +2609,6 @@ segments:
       - [0xA2D08, c, game_code]
       - [0xA2D38, c, game_code]
       - [0xA2DBC, c, game_code]
-      - [0xA2DDC, data, game_code/func_802A206C_de_padding_A2DDC]
       - [0xA2DE0, c, game_code]
       - [0xA2F44, c, game_code]
       - [0xA2F74, c, game_code]

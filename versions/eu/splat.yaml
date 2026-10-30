@@ -3056,7 +3056,6 @@ segments:
       - [0xBB050, c, game_code]
       - [0xBB0AC, data, game_code/g_ViblackBlock4LinkerAlignmentFill251]
       - [0xBB0B0, c, game_code]
-      - [0xBB1AC, data, game_code/func_802BA210_de_padding_BB1AC]
       - [0xBB1B0, c, game_code]
       - [0xBB1E8, data, game_code/g_VigetcurrframebufTrailingBytesBlock1]
       - [0xBB1F0, c, game_code]

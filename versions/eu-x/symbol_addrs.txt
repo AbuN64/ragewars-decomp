@@ -10721,7 +10721,6 @@ func_802131D8_de_padding_13DF8 = 0x802131F8; // rom:0x13DF8
 g_VhandlerObjectAlignmentPadEuX = 0x8023D008; // rom:0x3DC08
 g_LoaderObjectAlignmentPadEuX2 = 0x802566D8; // rom:0x572D8
 g_simppoolTextPaddingAlignmentPad = 0x80294DD8; // rom:0x959D8
-func_802A206C_de_padding_A2DDC = 0x802A21DC; // rom:0xA2DDC
 g_floatConvertTextPadding = 0x802AD578; // rom:0xAE178
 func_802AD8F4_de_padding_AE818 = 0x802ADC18; // rom:0xAE818
 func_802B03C4_de_padding_B12A4 = 0x802B06A4; // rom:0xB12A4

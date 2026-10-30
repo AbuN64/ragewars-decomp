@@ -3993,8 +3993,6 @@ SECTIONS
         src/DATA/AUDIO/VIBLACK/VIBLACK.CPP.o(.data);
         . = MAX(., 0xBA0B0);
         sdk/libultra/io/vi/vi.CPP.o(.text);
-        . = MAX(., 0xBA1AC);
-        sdk/libultra/io/vi/vi.CPP.o(.data);
         . = MAX(., 0xBA1B0);
         sdk/libultra/io/vigetcurrframebuf.c.o(.text);
         . = MAX(., 0xBA1E8);
@@ -5646,8 +5644,6 @@ SECTIONS
         src/UI/N64ENG/N64ENG.CPP.o(.text);
         . = MAX(., 0xA18A0);
         src/UI/QUAG/N64_ENG/N64ENG_DRAWNUMERICWIDGETCHILDREN.CPP.o(.text);
-        . = MAX(., 0xA1DDC);
-        src/UI/QUAG/N64_ENG/N64ENG_DRAWNUMERICWIDGETCHILDREN.CPP.o(.data);
         . = MAX(., 0xA1DE0);
         src/UI/TSMOS/TSMOS/TSMOS_UPDATEFRONTEND.CPP.o(.text);
         . = MAX(., 0xA1F74);
