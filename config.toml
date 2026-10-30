@@ -3,11 +3,15 @@ name = "RageWars"
 title = "Turok: Rage Wars"
 toolchain = "gcc-2.8.1-sn64"
 names_from = "us-rev1"
-module_map = "docs/MODULES.tsv"
 cppflags = ["-DF3DEX_GBI_2", "-Isdk/libgcc", "-Isdk/include"]
 readme_map = "us-rev1"
 readme_map_link = "https://itsmo.me/attic/cake-unbake/"
 readme_map_repo = "ragewars-decomp"
+[paths]
+platform = "config/platform.toml"
+blobs = "config/blobs.toml"
+prose = ["config/sweep.toml"]
+
 [layout]
 source_roots = ["src", "sdk"]
 header_roots = ["include", "sdk/include"]

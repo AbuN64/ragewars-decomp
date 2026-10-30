@@ -1,4 +1,4 @@
-# Sweep rules over the game tree (`decomp sweep --rules ci/sweep.toml --tree rw=.`). Each rule is a root cause a TAS
+# Sweep rules over the game tree (`decomp sweep --rules config/sweep.toml --tree rw=.`). Each rule is a root cause a TAS
 # cycle found; the sweep finds its siblings without a movie reaching them. A rule is added with the fix that found it.
 
 [[rule]]
