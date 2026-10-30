@@ -4712,6 +4712,11 @@ segments:
       - [0xFFD60, data, game_data/k_Ovldat10EncodedWordsBlock4]
       - [0xFFD7C, data, game_data/k_Ovldat10EncodedWordsBlock8]
       - [0xFFDA0, data, game_data/k_Ovldat10EncodedWordsBlock17]
+      - [0x1008B0, c, game_data]
+      - [0x1009C0, c, game_data]
+      - [0x100AF0, c, game_data]
+      - [0x100C7C, c, game_data]
+      - [0x100EB4, data, game_data/k_Ovldat10EncodedWordsBlock17Rest]
   - name: debug_symbols
     type: bin
     start: 0x101000

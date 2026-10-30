@@ -316,3 +316,23 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-O0"]
 omit = ["-O2", "-mgas"]
 unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true

@@ -1,5 +1,5 @@
 # Turok: Rage Wars: matching build.
-# generator: e8216ae4fc61
+# generator: 6cb588226e25
 # make check             builds every version ROM from the committed sources and verifies its SHA-1.
 # make check CHECK=tree  verifies only that the committed generated files are present (no ROMs needed).
 # make extract           splits every baserom into asm/<version>/ with splat; a data file's section is its stand-in's.
@@ -88,11 +88,11 @@ ASFLAGS := -march=vr4300 -mabi=32 -EB --no-pad-sections -mips3
 define PREPROCESS_gcc_2_7_2_sn64
 $(Q)$(PPUNIT) $@ $(call shq,$(PP_FLAGS)) $(HDRKEY) $(STAMPREC) $(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $<
 endef
-COMPILE_gcc_2_7_2_sn64 = @rotate $(@:.o=.s) $(@:.o=.s.prev) '&&' @compile $(CC_gcc_2_7_2_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) '&&' @nonempty $(@:.o=.s) $(if $(NOALIGN),'&&' @py STRIP_ALIGN $(@:.o=.s) $(NOALIGN)) $(if $(HILO),'&&' @py HILO_HAZARD $(@:.o=.s)) '&&' @jumptable $(@:.o=.s) 80000000 '&&' @settle $(@:.o=.s) $(@:.o=.s.prev) '&&' $(ABUMAS) asn64 --as $(AS_gcc_2_7_2_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@ $(if $(UNRELOC),'&&' @py UNRELOC_PASS $@)
+COMPILE_gcc_2_7_2_sn64 = @rotate $(@:.o=.s) $(@:.o=.s.prev) '&&' @compile $(CC_gcc_2_7_2_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) '&&' @nonempty $(@:.o=.s) $(if $(NOALIGN),'&&' @py STRIP_ALIGN $(@:.o=.s) $(NOALIGN)) $(if $(HILO),'&&' @py HILO_HAZARD $(@:.o=.s)) '&&' @jumptable $(@:.o=.s) 80000000 '&&' @settle $(@:.o=.s) $(@:.o=.s.prev) '&&' $(ABUMAS) asn64 --as $(AS_gcc_2_7_2_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@ $(if $(UNRELOC),'&&' @py UNRELOC_PASS $@) $(if $(TEXTCUT),'&&' @py TEXTCUT_PASS $@ $(TEXTCUT))
 define PREPROCESS_gcc_2_8_1_sn64
 $(Q)$(PPUNIT) $@ $(call shq,$(PP_FLAGS)) $(HDRKEY) $(STAMPREC) $(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $<
 endef
-COMPILE_gcc_2_8_1_sn64 = @rotate $(@:.o=.s) $(@:.o=.s.prev) '&&' @compile $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(if $(FSPLIT),-ffunction-sections) $(@:.o=.i) -o $(@:.o=.s) '&&' @nonempty $(@:.o=.s) $(if $(NOALIGN),'&&' @py STRIP_ALIGN $(@:.o=.s) $(NOALIGN)) $(if $(HILO),'&&' @py HILO_HAZARD $(@:.o=.s)) '&&' @jumptable $(@:.o=.s) 80000000 '&&' @settle $(@:.o=.s) $(@:.o=.s.prev) '&&' $(if $(FSPLIT),@out $(@:.o=.n.s) $(ABUMAS) asn64 $(@:.o=.s) '&&' @py FSPLIT_PASS $(@:.o=.n.s) $(@:.o=.f.s) '&&' $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.f.s) -o $@,$(ABUMAS) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@) '&&' $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@ $(if $(UNRELOC),'&&' @py UNRELOC_PASS $@)
+COMPILE_gcc_2_8_1_sn64 = @rotate $(@:.o=.s) $(@:.o=.s.prev) '&&' @compile $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(if $(FSPLIT),-ffunction-sections) $(@:.o=.i) -o $(@:.o=.s) '&&' @nonempty $(@:.o=.s) $(if $(NOALIGN),'&&' @py STRIP_ALIGN $(@:.o=.s) $(NOALIGN)) $(if $(HILO),'&&' @py HILO_HAZARD $(@:.o=.s)) '&&' @jumptable $(@:.o=.s) 80000000 '&&' @settle $(@:.o=.s) $(@:.o=.s.prev) '&&' $(if $(FSPLIT),@out $(@:.o=.n.s) $(ABUMAS) asn64 $(@:.o=.s) '&&' @py FSPLIT_PASS $(@:.o=.n.s) $(@:.o=.f.s) '&&' $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.f.s) -o $@,$(ABUMAS) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@) '&&' $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@ $(if $(UNRELOC),'&&' @py UNRELOC_PASS $@) $(if $(TEXTCUT),'&&' @py TEXTCUT_PASS $@ $(TEXTCUT))
 # Per-file facts ([file] rows of config.toml): a toolchain and flags for a path or a directory.
 $(foreach v,$(VERSIONS),build/$(v)/sdk/rnc/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/sdk/rnc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
@@ -191,6 +191,10 @@ $(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.C
 $(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
@@ -232,6 +236,18 @@ $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEF
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/rnc/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/rnc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/rnc/%.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
@@ -329,6 +345,10 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELE
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/MULTI/SLOTS/PLAYERSLOTS_COUNTUNRELEASED.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
@@ -370,6 +390,18 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/GHOT_DISPATCHATTACH
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): UNRELOC := 1
 # The size each object's .text has in the ROM: a compiler may pad the section past its last function, and a zero tail
 # past that size is cut from the section header before the object links.
 -include $(VERSIONS:%=versions/%/text_sizes.mk)
@@ -546,6 +578,60 @@ for index, (name, kind, flags, addr, off, size, link, info, align, entsize) in e
 open(path, "wb").write(raw)
 endef
 export UNRELOC_PASS
+# A function the ROM holds in several runs (other bytes of its file between them: a string, a static, a record) is one
+# `.text.<function>` in the object. A fact `textpiece<n>_<function>` per later run makes the Makefile set TEXTCUT to
+# `section:size:next` entries; each cuts the input section `.text.<section>` after `size` bytes and the rest becomes
+# the new section `.text.<next>`, so the link script lays each run at its ROM address. An object whose relocations are
+# gone (unrelocated) has no field that names a cut section; any relocation left against one is refused.
+define TEXTCUT_PASS
+import struct, sys
+path, cuts = sys.argv[1], sys.argv[2:]
+raw = bytearray(open(path, "rb").read())
+assert raw[:4] == b"\x7fELF" and raw[4] == 1 and raw[5] == 2, path + " is not a 32-bit big-endian ELF object"
+shoff, shentsize, shnum, shstrndx = struct.unpack_from(">I", raw, 32)[0], struct.unpack_from(">H", raw, 46)[0], struct.unpack_from(">H", raw, 48)[0], struct.unpack_from(">H", raw, 50)[0]
+sections = [list(struct.unpack_from(">IIIIIIIIII", raw, shoff + i * shentsize)) for i in range(shnum)]
+names = bytearray(raw[sections[shstrndx][4]:sections[shstrndx][4] + sections[shstrndx][5]])
+def called(section):
+    return names[section[0]:names.index(0, section[0])].decode()
+for cut in cuts:
+    old, size, new = cut.split(":")
+    size = int(size)
+    index = next((i for i, section in enumerate(sections) if called(section) == ".text." + old), None)
+    if index is None:
+        sys.exit("%s: no section .text.%s to cut at %d" % (path, old, size))
+    head = sections[index]
+    if not 0 < size < head[5]:
+        sys.exit("%s: .text.%s is %d bytes, not more than the cut at %d" % (path, old, head[5], size))
+    if any(section[1] in (4, 9) and section[7] == index and section[5] for section in sections):
+        sys.exit("%s: .text.%s still has relocations: a cut section needs an unrelocated object" % (path, old))
+    while len(raw) % 16:
+        raw.append(0)
+    rest = bytes(raw[head[4] + size:head[4] + head[5]])
+    sections.append([len(names), head[1], head[2], 0, len(raw), len(rest), 0, 0, 4, 0])
+    names += (".text." + new).encode() + b"\0"
+    raw += rest
+    head[5] = size
+    head[8] = min(head[8], 4)
+    for section in sections:
+        if section[1] == 2:
+            for at in range(section[4], section[4] + section[5], 16):
+                value, shndx = struct.unpack_from(">I", raw, at + 4)[0], struct.unpack_from(">H", raw, at + 14)[0]
+                if shndx == index and value >= size:
+                    struct.pack_into(">I", raw, at + 4, value - size)
+                    struct.pack_into(">H", raw, at + 14, len(sections) - 1)
+while len(raw) % 4:
+    raw.append(0)
+sections[shstrndx][4], sections[shstrndx][5] = len(raw), len(names)
+raw += names
+while len(raw) % 4:
+    raw.append(0)
+struct.pack_into(">I", raw, 32, len(raw))
+struct.pack_into(">H", raw, 48, len(sections))
+for section in sections:
+    raw += struct.pack(">IIIIIIIIII", *section)
+open(path, "wb").write(raw)
+endef
+export TEXTCUT_PASS
 # A data piece is the ROM bytes from its address to the next row of splat.yaml: splat drops string padding, a partial
 # last word and whole tiny pieces, so each extracted data file is rewritten as its ROM slice, every label kept at its
 # offset (from the ROM column of the line after it).
