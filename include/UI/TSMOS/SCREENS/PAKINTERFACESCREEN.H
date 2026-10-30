@@ -26,11 +26,20 @@ typedef struct PAKInterfacePlayer {
     u8 padB48[2916 - 2888];
     s32 m_Marker;
 } PAKInterfacePlayer;
+/* One of the four slots: which user list and which of its four middle records hold the slot's player (-1 for none). */
 typedef struct PAKSlotState {
+    s32 m_User;
+    s32 m_Record;
     s32 m_State;
-    s32 pad4;
-    s32 pad8;
 } PAKSlotState;
+/* What the Controller Pak holds for one user: the four middle-list player records, then the marker and a checksum. */
+#define PAK_SAVE_DATA_SIZE 1600
+#define PAK_CHECKSUM_SEED 7
+typedef struct PAKSaveBlock {
+    u8 m_Data[PAK_SAVE_DATA_SIZE];
+    s32 m_Marker;
+    s32 m_Checksum;
+} PAKSaveBlock;
 typedef struct PAKInterfaceScreen {
     s32 m_Unread0;
     void *m_pUserList;
@@ -38,9 +47,8 @@ typedef struct PAKInterfaceScreen {
     s32 m_UserBusy[PAK_USERS];
     u8 pad3C[88 - 60];
     PAKInterfacePlayer m_PAKInterfacePlayer[PAK_USERS];
-    s32 m_CopyUser;
-    s32 m_Unread2EF4;
     PAKSlotState m_Slot[PAK_USERS];
+    PAKSaveBlock m_SaveBlock;
 } PAKInterfaceScreen;
 /* One 400-byte "global" player record; only the fields the update code tests are named. */
 typedef struct PAKGlobalPlayer {
@@ -69,6 +77,10 @@ extern s32 AssertFailed(char *file, s32 line, char *expr);
 extern char s_pakAssertSlotRange[];
 extern char s_pakAssertUserRange[];
 extern char s_pakAssertUserObject[];
+extern s32 PAK_GetPagesFree(s32 anUser, s32 *apPages);
+extern s32 PAK_GetNotesFree(s32 anUser, s32 *apNotes);
+extern s32 PAK_PagesForBytes(s32 anBytes);
+extern s32 Chksum(void *apData, s32 anSize, s32 anSeed);
 extern void *memcpy(void *apDst, const void *apSrc, u32 anSize);
 extern void CPersistentPlayerData_Initialize(PAKGlobalPlayer *apPlayer);
 extern void PAKInterface_RefreshMiddleList(s32 anUser);
