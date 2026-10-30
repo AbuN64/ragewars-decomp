@@ -42822,6 +42822,162 @@ SECTIONS
         assets/debug_symbols_15CB24.bin.o(.data);
     }
 #endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_earlier_1C6110 0x0044E110 (INFO) : AT(0x1C6110) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C6110.CPP.o(.data);
+    }
+    .debug_symbols_and_assets_earlier_1C6110.bss ADDR(.debug_symbols_and_assets_earlier_1C6110) + SIZEOF(.debug_symbols_and_assets_earlier_1C6110) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C6110.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_1C6EFC 0x001C6EFC : AT(0x1C6EFC) SUBALIGN(1)
+    {
+        assets/debug_symbols_and_assets_1C6EFC.bin.o(.data);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_earlier_1C6F00 0x0044EF00 (INFO) : AT(0x1C6F00) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C6F00.CPP.o(.data);
+    }
+    .debug_symbols_and_assets_earlier_1C6F00.bss ADDR(.debug_symbols_and_assets_earlier_1C6F00) + SIZEOF(.debug_symbols_and_assets_earlier_1C6F00) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C6F00.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_1C777C 0x001C777C : AT(0x1C777C) SUBALIGN(1)
+    {
+        assets/debug_symbols_and_assets_1C777C.bin.o(.data);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_earlier_1C7780 0x0044F780 (INFO) : AT(0x1C7780) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C7780.CPP.o(.data);
+    }
+    .debug_symbols_and_assets_earlier_1C7780.bss ADDR(.debug_symbols_and_assets_earlier_1C7780) + SIZEOF(.debug_symbols_and_assets_earlier_1C7780) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C7780.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_1C815C 0x001C815C : AT(0x1C815C) SUBALIGN(1)
+    {
+        assets/debug_symbols_and_assets_1C815C.bin.o(.data);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_earlier_1C8160 0x00450160 (INFO) : AT(0x1C8160) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C8160.CPP.o(.data);
+    }
+    .debug_symbols_and_assets_earlier_1C8160.bss ADDR(.debug_symbols_and_assets_earlier_1C8160) + SIZEOF(.debug_symbols_and_assets_earlier_1C8160) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C8160.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_1C8868 0x001C8868 : AT(0x1C8868) SUBALIGN(1)
+    {
+        assets/debug_symbols_and_assets_1C8868.bin.o(.data);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_earlier_1C8870 0x00450870 (INFO) : AT(0x1C8870) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C8870.CPP.o(.data);
+    }
+    .debug_symbols_and_assets_earlier_1C8870.bss ADDR(.debug_symbols_and_assets_earlier_1C8870) + SIZEOF(.debug_symbols_and_assets_earlier_1C8870) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C8870.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_1C88DC 0x001C88DC : AT(0x1C88DC) SUBALIGN(1)
+    {
+        assets/debug_symbols_and_assets_1C88DC.bin.o(.data);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_earlier_1C88E0 0x004508E0 (INFO) : AT(0x1C88E0) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C88E0.CPP.o(.data);
+    }
+    .debug_symbols_and_assets_earlier_1C88E0.bss ADDR(.debug_symbols_and_assets_earlier_1C88E0) + SIZEOF(.debug_symbols_and_assets_earlier_1C88E0) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C88E0.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_1C9204 0x001C9204 : AT(0x1C9204) SUBALIGN(1)
+    {
+        assets/debug_symbols_and_assets_1C9204.bin.o(.data);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_earlier_1C9210 0x00451210 (INFO) : AT(0x1C9210) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C9210.CPP.o(.data);
+    }
+    .debug_symbols_and_assets_earlier_1C9210.bss ADDR(.debug_symbols_and_assets_earlier_1C9210) + SIZEOF(.debug_symbols_and_assets_earlier_1C9210) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_DE_1C9210.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_DE)
+    .debug_symbols_and_assets_1C9888 0x001C9888 : AT(0x1C9888) SUBALIGN(1)
+    {
+        assets/debug_symbols_and_assets_1C9888.bin.o(.data);
+    }
+#endif
+#if defined(VERSION_DE)
+    ASSERT(SIZEOF(.rom_header_ipl3) <= 0x1000, "ROM extent: rom_header_ipl3")
+    ASSERT(SIZEOF(.game_code) <= 0xC15C0, "ROM extent: game_code")
+    ASSERT(SIZEOF(.game_data) <= 0x3EA40, "ROM extent: game_data")
+    ASSERT(SIZEOF(.debug_symbols) <= 0x65000, "ROM extent: debug_symbols")
+    ASSERT(SIZEOF(.ovl_frontendMenu) <= 0x4E144, "ROM extent: ovl_frontendMenu")
+    ASSERT(SIZEOF(.ovl_frontendMenuData) <= 0x378C, "ROM extent: ovl_frontendMenuData")
+    ASSERT(SIZEOF(.debug_symbols_and_assets) <= 0xE840, "ROM extent: debug_symbols_and_assets")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_earlier_1C6110) <= 0xDEC, "ROM extent: debug_symbols_and_assets_earlier_1C6110")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_1C6EFC) <= 0x4, "ROM extent: debug_symbols_and_assets_1C6EFC")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_earlier_1C6F00) <= 0x87C, "ROM extent: debug_symbols_and_assets_earlier_1C6F00")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_1C777C) <= 0x4, "ROM extent: debug_symbols_and_assets_1C777C")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_earlier_1C7780) <= 0x9DC, "ROM extent: debug_symbols_and_assets_earlier_1C7780")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_1C815C) <= 0x4, "ROM extent: debug_symbols_and_assets_1C815C")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_earlier_1C8160) <= 0x708, "ROM extent: debug_symbols_and_assets_earlier_1C8160")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_1C8868) <= 0x8, "ROM extent: debug_symbols_and_assets_1C8868")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_earlier_1C8870) <= 0x6C, "ROM extent: debug_symbols_and_assets_earlier_1C8870")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_1C88DC) <= 0x4, "ROM extent: debug_symbols_and_assets_1C88DC")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_earlier_1C88E0) <= 0x924, "ROM extent: debug_symbols_and_assets_earlier_1C88E0")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_1C9204) <= 0xC, "ROM extent: debug_symbols_and_assets_1C9204")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_earlier_1C9210) <= 0x678, "ROM extent: debug_symbols_and_assets_earlier_1C9210")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_1C9888) <= 0x636778, "ROM extent: debug_symbols_and_assets_1C9888")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6110.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6110.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6F00) || ADDR(.debug_symbols_and_assets_earlier_1C6F00.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6F00.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6110), "VMA overlap: debug_symbols_and_assets_earlier_1C6110, debug_symbols_and_assets_earlier_1C6F00")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6110.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6110.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C7780) || ADDR(.debug_symbols_and_assets_earlier_1C7780.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C7780.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6110), "VMA overlap: debug_symbols_and_assets_earlier_1C6110, debug_symbols_and_assets_earlier_1C7780")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6110.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6110.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8160) || ADDR(.debug_symbols_and_assets_earlier_1C8160.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8160.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6110), "VMA overlap: debug_symbols_and_assets_earlier_1C6110, debug_symbols_and_assets_earlier_1C8160")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6110.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6110.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8870) || ADDR(.debug_symbols_and_assets_earlier_1C8870.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8870.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6110), "VMA overlap: debug_symbols_and_assets_earlier_1C6110, debug_symbols_and_assets_earlier_1C8870")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6110.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6110.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C88E0) || ADDR(.debug_symbols_and_assets_earlier_1C88E0.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C88E0.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6110), "VMA overlap: debug_symbols_and_assets_earlier_1C6110, debug_symbols_and_assets_earlier_1C88E0")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6110.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6110.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C9210) || ADDR(.debug_symbols_and_assets_earlier_1C9210.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C9210.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6110), "VMA overlap: debug_symbols_and_assets_earlier_1C6110, debug_symbols_and_assets_earlier_1C9210")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6F00.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6F00.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C7780) || ADDR(.debug_symbols_and_assets_earlier_1C7780.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C7780.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6F00), "VMA overlap: debug_symbols_and_assets_earlier_1C6F00, debug_symbols_and_assets_earlier_1C7780")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6F00.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6F00.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8160) || ADDR(.debug_symbols_and_assets_earlier_1C8160.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8160.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6F00), "VMA overlap: debug_symbols_and_assets_earlier_1C6F00, debug_symbols_and_assets_earlier_1C8160")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6F00.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6F00.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8870) || ADDR(.debug_symbols_and_assets_earlier_1C8870.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8870.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6F00), "VMA overlap: debug_symbols_and_assets_earlier_1C6F00, debug_symbols_and_assets_earlier_1C8870")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6F00.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6F00.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C88E0) || ADDR(.debug_symbols_and_assets_earlier_1C88E0.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C88E0.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6F00), "VMA overlap: debug_symbols_and_assets_earlier_1C6F00, debug_symbols_and_assets_earlier_1C88E0")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C6F00.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C6F00.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C9210) || ADDR(.debug_symbols_and_assets_earlier_1C9210.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C9210.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C6F00), "VMA overlap: debug_symbols_and_assets_earlier_1C6F00, debug_symbols_and_assets_earlier_1C9210")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C7780.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C7780.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8160) || ADDR(.debug_symbols_and_assets_earlier_1C8160.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8160.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C7780), "VMA overlap: debug_symbols_and_assets_earlier_1C7780, debug_symbols_and_assets_earlier_1C8160")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C7780.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C7780.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8870) || ADDR(.debug_symbols_and_assets_earlier_1C8870.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8870.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C7780), "VMA overlap: debug_symbols_and_assets_earlier_1C7780, debug_symbols_and_assets_earlier_1C8870")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C7780.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C7780.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C88E0) || ADDR(.debug_symbols_and_assets_earlier_1C88E0.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C88E0.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C7780), "VMA overlap: debug_symbols_and_assets_earlier_1C7780, debug_symbols_and_assets_earlier_1C88E0")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C7780.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C7780.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C9210) || ADDR(.debug_symbols_and_assets_earlier_1C9210.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C9210.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C7780), "VMA overlap: debug_symbols_and_assets_earlier_1C7780, debug_symbols_and_assets_earlier_1C9210")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C8160.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8160.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8870) || ADDR(.debug_symbols_and_assets_earlier_1C8870.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8870.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8160), "VMA overlap: debug_symbols_and_assets_earlier_1C8160, debug_symbols_and_assets_earlier_1C8870")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C8160.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8160.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C88E0) || ADDR(.debug_symbols_and_assets_earlier_1C88E0.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C88E0.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8160), "VMA overlap: debug_symbols_and_assets_earlier_1C8160, debug_symbols_and_assets_earlier_1C88E0")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C8160.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8160.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C9210) || ADDR(.debug_symbols_and_assets_earlier_1C9210.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C9210.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8160), "VMA overlap: debug_symbols_and_assets_earlier_1C8160, debug_symbols_and_assets_earlier_1C9210")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C8870.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8870.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C88E0) || ADDR(.debug_symbols_and_assets_earlier_1C88E0.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C88E0.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8870), "VMA overlap: debug_symbols_and_assets_earlier_1C8870, debug_symbols_and_assets_earlier_1C88E0")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C8870.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C8870.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C9210) || ADDR(.debug_symbols_and_assets_earlier_1C9210.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C9210.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C8870), "VMA overlap: debug_symbols_and_assets_earlier_1C8870, debug_symbols_and_assets_earlier_1C9210")
+    ASSERT(ADDR(.debug_symbols_and_assets_earlier_1C88E0.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C88E0.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C9210) || ADDR(.debug_symbols_and_assets_earlier_1C9210.bss) + SIZEOF(.debug_symbols_and_assets_earlier_1C9210.bss) <= ADDR(.debug_symbols_and_assets_earlier_1C88E0), "VMA overlap: debug_symbols_and_assets_earlier_1C88E0, debug_symbols_and_assets_earlier_1C9210")
+#endif
 #if defined(VERSION_EU)
     ASSERT(SIZEOF(.rom_header_ipl3) <= 0x1000, "ROM extent: rom_header_ipl3")
     ASSERT(SIZEOF(.game_code) <= 0xC1860, "ROM extent: game_code")
