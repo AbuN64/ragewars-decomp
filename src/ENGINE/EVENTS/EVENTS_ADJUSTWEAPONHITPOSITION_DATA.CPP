@@ -2,8 +2,8 @@
 
 /* 800C9520.CPP */
 /* ROM-grounded data: src/k_EventsAdjustweaponhitpositionHalfWords_EventsAdjustweaponhitpositionData.c */
-const unsigned int k_EventsAdjustweaponhitpositionHalfWords[1] = {
-    0x3F000000,
+const float k_EventsAdjustweaponhitpositionHalfWords[1] = {
+    0.5f,
 };
 
 /* 800C9524.CPP */

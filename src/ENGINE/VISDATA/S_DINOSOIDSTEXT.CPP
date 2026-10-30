@@ -2,7 +2,8 @@
 
 /* SDinosoidstextEncodedWordsUnit.CPP */
 #if defined(VERSION_US)
-const unsigned int k_SDinosoidstextEncodedWords[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+const unsigned int k_SDinosoidstextEncodedWordsAlignmentPad[3] = {
     0x00100100, 0x00080006, 0x00000000,
 };
 #endif

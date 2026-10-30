@@ -121,7 +121,7 @@ void SetN64_StartRound(GameSession *session) {
 }
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_Setn64StartroundWords1[1] = {
-    0x3F800000,
+const float g_Setn64StartroundWords1[1] = {
+    1.0f,
 };
 #endif

@@ -2,13 +2,15 @@
 
 /* 80263760.CPP */
 #if defined(VERSION_EU)
-unsigned char g_ContpadTrailingBytes[12] = { 0x46, 0x14, 0x00, 0x32, 0x00, 0x00, 0x00, 0x00, 0x45, 0x00, 0x00, 0x02 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_ContpadTrailingBytesAlignmentPad[12] = { 0x46, 0x14, 0x00, 0x32, 0x00, 0x00, 0x00, 0x00, 0x45, 0x00, 0x00, 0x02 };
 #endif
 
 /* 80263760_10.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_80264F4C_eu_x[1] = { 0xAFA9003CU };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_GContpadtrailingbytesObjectAlignmentPadEuX1[1] = { 0xAFA9003CU };
 #endif
 
 /* g_ContpadEncodedBytes_Contpad1.CPP */

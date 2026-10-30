@@ -4,7 +4,8 @@
 
 /* 8023A284_30.CPP */
 #if defined(VERSION_DE)
-unsigned char g_AcceptsTrailingBytes[8] = { 0x3C, 0x01, 0x80, 0x10, 0xAC, 0x22, 0xFF, 0xCC };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_AcceptsTrailingBytesAlignmentPad[8] = { 0x3C, 0x01, 0x80, 0x10, 0xAC, 0x22, 0xFF, 0xCC };
 #endif
 
 /* 8023CFB0.CPP */

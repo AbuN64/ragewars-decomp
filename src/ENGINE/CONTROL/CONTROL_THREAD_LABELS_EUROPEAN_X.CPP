@@ -27,7 +27,8 @@ char g_ControlThreadLabelsEuropeanXEncodedBytes[12] = "wport_tR";
 
 /* g_ControlThreadLabelsEuropeanXEncodedWords_ControlThreadLabelsEuropeanX.CPP */
 #if defined(VERSION_EU)
-unsigned int g_ControlThreadLabelsEuropeanXEncodedWords[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_ControlThreadLabelsEuropeanXEncodedWordsAlignmentPad[3] = {
     0x00042043, 0x00042080, 0x008A2021,
 };
 #endif

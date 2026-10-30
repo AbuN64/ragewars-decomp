@@ -310,8 +310,8 @@ const float k_CcollisionIntersectsegmentboxEncodedWords[3] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ccollisionIntersectsegmentboxEncodedWordsBlock3UsRev1.c */
-const unsigned int k_CcollisionIntersectsegmentboxEncodedWordsBlock3[1] = {
-    0x4123D70A,
+const float k_CcollisionIntersectsegmentboxEncodedWordsBlock3[1] = {
+    10.24f,
 };
 
 /* ROM-grounded data: src/ccollisionIntersectsegmentboxEncodedWordsBlock2UsRev1.c */

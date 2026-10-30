@@ -171,7 +171,8 @@ CacheEvictionEntry *Cache_FindEvictableResource(s32 unused, EntryList *list, Cac
 }
 
 #if defined(VERSION_US)
-unsigned int func_80255048_de_padding_55C84[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_CacheAcquireloadrequestwithevictionObjectAlignmentPadUs1[1] = {
     0x00000000,
 };
 #endif

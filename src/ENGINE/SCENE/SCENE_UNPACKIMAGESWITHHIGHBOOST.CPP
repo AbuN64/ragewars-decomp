@@ -228,8 +228,8 @@ void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
 }
 
 /* ROM-grounded data: src/g_scene_TestNearbyActiveActorConstantWords_SceneUnpackimageswithhighboost.c */
-const unsigned int g_scene_TestNearbyActiveActorConstantWords[1] = {
-    0x4AC80000,
+const float g_scene_TestNearbyActiveActorConstantWords[1] = {
+    6.5536e+06f,
 };
 
 s32 Scene_TestSectorSectionTwoEntries(Shared_World *world)
@@ -328,13 +328,15 @@ s32 Scene_ClassifyNearbySpecialActor(NearbySpecialActorView *player, CVector3 *r
     return 0;
 }
 #if defined(VERSION_EU_X)
-unsigned int func_8028E860_de_padding_8F66C[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_SceneUnpackimageswithhighboostObjectAlignmentPadEuX1[1] = {
     0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_SceneUnpackimageswithhighboostEncodedWordsBlock1[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_SceneUnpackimageswithhighboostEncodedWordsBlock1AlignmentPad[3] = {
     0x24E7FFFF, 0x0065102B, 0x50400004,
 };
 #endif

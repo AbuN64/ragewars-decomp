@@ -24,8 +24,8 @@
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 
 /* ROM-grounded data: src/k_AudioChooseweightedsoundvariantEncodedWordsUsRev1.c */
-const unsigned int k_AudioChooseweightedsoundvariantEncodedWords[2] = {
-    0x41F00000, 0x00000000,
+const double k_AudioChooseweightedsoundvariantEncodedWords[1] = {
+    4294967296.0,
 };
 
 /* ROM-grounded data: src/k_AudioChooseweightedsoundvariantEncodedWordsBlock1UsRev1.c */

@@ -13,7 +13,7 @@ const float g_Setn64UpdateframetimingWords2[2] = {
 };
 
 #if defined(VERSION_DE)
-const unsigned int k_Setn64UpdateframetimingEncodedWords[1] = {
-    0x3F666666,
+const float k_Setn64UpdateframetimingEncodedWords[1] = {
+    0.9f,
 };
 #endif

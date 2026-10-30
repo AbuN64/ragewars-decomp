@@ -14,7 +14,8 @@ void SetN64_EmptySessionHookRev1B(void) {
 void SetN64_EmptySessionHookRev1C(void) {
 }
 
-unsigned char g_SessionRetainedStorageTrailingBytes[8] = { 0x3C, 0x03, 0x80, 0x15, 0x8C, 0x63, 0x36, 0xB8 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_SessionRetainedStorageTrailingBytesAlignmentPad[8] = { 0x3C, 0x03, 0x80, 0x15, 0x8C, 0x63, 0x36, 0xB8 };
 #endif
 
 /* 802909E0_7.CPP */
@@ -23,7 +24,8 @@ void SetN64_EmptySessionHookDeA(void) {
 
 }
 
-unsigned char g_SessionRetainedStorageTrailingBytesBlock1[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_SessionRetainedStorageTrailingBytesBlock1AlignmentPad[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
 #endif
 
 /* 80290A80.CPP */

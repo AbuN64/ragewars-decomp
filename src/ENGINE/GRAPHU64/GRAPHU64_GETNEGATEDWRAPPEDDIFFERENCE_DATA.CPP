@@ -1,8 +1,9 @@
 #include "include_asm.h"
 
 /* 800C9A68.CPP */
-const unsigned int g_graphu64_NegateWrappedValueConstantWords_us_rev1[8] = {
-    0xC0490FDB, 0x40C90FDB, 0x40490FDB, 0x40C90FDB, 0xC0490FDB, 0x40C90FDB, 0x40490FDB, 0x40C90FDB,
+const float g_graphu64_NegateWrappedValueConstantWords_us_rev1[8] = {
+    -3.1415927f, 6.2831855f, 3.1415927f, 6.2831855f, -3.1415927f, 6.2831855f,
+    3.1415927f, 6.2831855f,
 };
 
 /* 800C9A88.CPP */

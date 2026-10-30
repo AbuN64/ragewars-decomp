@@ -14,6 +14,6 @@ const float g_audio_InitializeMusicPlayerConstantWords[2] = {
 
 /* 800C90F0.CPP */
 /* ROM-grounded data: src/g_audio_UpdateMusicFadeConstantWordsUsRev1.c */
-const unsigned int g_audio_UpdateMusicFadeConstantWords[1] = {
-    0x3C888889,
+const float g_audio_UpdateMusicFadeConstantWords[1] = {
+    0.016666668f,
 };

@@ -379,7 +379,8 @@ int Cinema_GetSequenceActiveState(void) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_CinemaEncodedWords[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_CinemaEncodedWordsAlignmentPad[2] = {
     0x00940A00, 0x08001800,
 };
 #endif

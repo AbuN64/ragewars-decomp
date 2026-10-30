@@ -2,9 +2,7 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned short g_sceneLinksText[3] = {
-    0x6C69, 0x6E6B, 0x7300,
-};
+const char g_sceneLinksText[6] = "links\000";
 #endif
 #if defined(VERSION_EU)
 const char g_sceneLinksText[8] =

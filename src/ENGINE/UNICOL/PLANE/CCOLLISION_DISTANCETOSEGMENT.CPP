@@ -41,7 +41,8 @@ f32 CCollision_DistanceToSegment(CVector3 *a, CVector3 *b, CVector3 *p) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_CcollisionDistancetosegmentEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_CcollisionDistancetosegmentEncodedWordsAlignmentPad[1] = {
     0x49546172,
 };
 #endif

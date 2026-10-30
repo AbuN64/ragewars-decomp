@@ -9,8 +9,8 @@ const float k_eventsApplydamageeventDataFloatConstantWords[16] = {
 
 /* 800C9510.CPP */
 /* ROM-grounded data: src/k_EventsApplydamageeventOneWords_EventsApplydamageeventData.c */
-const unsigned int k_EventsApplydamageeventOneWords[1] = {
-    0x3F800000,
+const float k_EventsApplydamageeventOneWords[1] = {
+    1.0f,
 };
 
 /* 800C9514.CPP */

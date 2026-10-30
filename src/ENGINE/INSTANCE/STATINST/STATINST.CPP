@@ -282,6 +282,4 @@ void Statinst_DispatchAttachmentEvents(void *object, s32 all) {
 }
 
 /* 800C8F30.CPP */
-const unsigned char s_staticInstanceLitVerticesTag[13] = {
-    0x6C, 0x69, 0x74, 0x20, 0x76, 0x65, 0x72, 0x74, 0x69, 0x63, 0x65, 0x73, 0x00,
-};
+const char s_staticInstanceLitVerticesTag[13] = "lit vertices\000";

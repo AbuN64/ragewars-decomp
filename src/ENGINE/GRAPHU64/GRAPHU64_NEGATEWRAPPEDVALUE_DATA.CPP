@@ -12,17 +12,17 @@ const float g_graphu64_ArcCosConstantWords[5] = {
 
 /* 800C9A50.CPP */
 /* ROM-grounded data: src/g_graphu64_IntegrateBoundedValueConstantWords_Graphu64NegatewrappedvalueData.c */
-const unsigned int g_graphu64_IntegrateBoundedValueConstantWords[1] = {
-    0x3FC00000,
+const float g_graphu64_IntegrateBoundedValueConstantWords[1] = {
+    1.5f,
 };
 
 /* 800C9A54.CPP */
 /* ROM-grounded data: src/g_graphu64_DecayToZeroConstantWords_us_rev1.c */
-const unsigned int g_graphu64_DecayToZeroConstantWords_us_rev1[1] = {
-    0x3F800000,
+const float g_graphu64_DecayToZeroConstantWords_us_rev1[1] = {
+    1.0f,
 };
 
 /* 800C9A58.CPP */
-const unsigned int g_graphu64_WrappedValueBoundConstantWords_us_rev1[4] = {
-    0xC0490FDB, 0x40C90FDB, 0x40490FDB, 0x40C90FDB,
+const float g_graphu64_WrappedValueBoundConstantWords_us_rev1[4] = {
+    -3.1415927f, 6.2831855f, 3.1415927f, 6.2831855f,
 };

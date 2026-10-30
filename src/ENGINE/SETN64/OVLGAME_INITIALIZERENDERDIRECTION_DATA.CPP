@@ -2,8 +2,8 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-const unsigned int g_OvlgameInitializerenderdirectionWords1[1] = {
-    0xBF2ADC4D,
+const float g_OvlgameInitializerenderdirectionWords1[1] = {
+    -0.667424f,
 };
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
@@ -14,13 +14,15 @@ const float g_OvlgameInitializerenderdirectionWords1[3] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_OvlgameInitializerenderdirectionEncodedWordsBlock2[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_OvlgameInitializerenderdirectionEncodedWordsBlock2AlignmentPad[1] = {
     0x4E2C2053,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_OvlgameInitializerenderdirectionEncodedWordsBlock1[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_OvlgameInitializerenderdirectionEncodedWordsBlock1AlignmentPad[1] = {
     0x080B02A1,
 };
 #endif
@@ -32,7 +34,8 @@ const float g_OvlgameInitializerenderdirectionWords3[2] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_OvlgameInitializerenderdirectionEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_OvlgameInitializerenderdirectionEncodedWordsAlignmentPad[1] = {
     0x3F333333,
 };
 #endif

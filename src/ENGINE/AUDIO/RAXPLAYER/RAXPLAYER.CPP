@@ -196,7 +196,8 @@ const float g_audio_LoadDialogMetadataConstantWords[3] = {
 };
 
 #if defined(VERSION_EU)
-unsigned int k_RaxplayerEncodedWordsBlock1[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_RaxplayerEncodedWordsBlock1AlignmentPad[3] = {
     0x8E740020, 0x186000DD, 0x02A08821,
 };
 #endif

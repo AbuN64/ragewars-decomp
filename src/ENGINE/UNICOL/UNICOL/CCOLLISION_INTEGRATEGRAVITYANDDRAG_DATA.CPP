@@ -13,8 +13,8 @@ const float k_CcollisionIntegrategravityanddragEncodedWordsBlock1[4] = {
 };
 
 /* ROM-grounded data: src/ccollisionIntegrategravityanddragOneWordsUsRev1.c */
-const unsigned int k_CcollisionIntegrategravityanddragOneWords[1] = {
-    0x3F800000,
+const float k_CcollisionIntegrategravityanddragOneWords[1] = {
+    1.0f,
 };
 
 const float k_CcollisionIntegrategravityanddragEncodedWordsBlock2[6] = {

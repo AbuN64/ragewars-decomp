@@ -6,13 +6,15 @@ const char g_statModelText[11] =
 #endif
 
 #if defined(VERSION_US)
-unsigned char k_GStatmodeltextEncodedBytes[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char k_GStatmodeltextEncodedBytesAlignmentPad[1] = {
     0x65,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned char k_GStatmodeltextEncodedBytesBlock1[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char k_GStatmodeltextEncodedBytesBlock1AlignmentPad[1] = {
     0x21,
 };
 #endif

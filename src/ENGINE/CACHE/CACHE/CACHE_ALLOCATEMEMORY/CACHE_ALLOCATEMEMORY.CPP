@@ -2,9 +2,7 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned short g_allocText[3] = {
-    0x616C, 0x6C6F, 0x6300,
-};
+const char g_allocText[6] = "alloc\000";
 #endif
 #if defined(VERSION_EU)
 const char g_allocText[8] =
@@ -13,13 +11,15 @@ const char g_allocText[8] =
 #endif
 
 #if defined(VERSION_US)
-unsigned short k_CacheAllocatememoryEncodedHalfwords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned short k_CacheAllocatememoryEncodedHalfwordsAlignmentPad[1] = {
     0x0008,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned short k_CacheAllocatememoryEncodedHalfwordsBlock1[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned short k_CacheAllocatememoryEncodedHalfwordsBlock1AlignmentPad[1] = {
     0xCBEC,
 };
 #endif

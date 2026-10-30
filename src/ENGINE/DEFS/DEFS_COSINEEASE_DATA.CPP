@@ -5,7 +5,8 @@ const float g_Defs_CosineEaseConstantWords[4] = {
 };
 
 #if defined(VERSION_US)
-unsigned int k_DefsCosineeaseEncodedWords[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_DefsCosineeaseEncodedWordsAlignmentPad[2] = {
     0x79520000, 0x29000000,
 };
 #endif
@@ -17,13 +18,15 @@ float k_DefsCosineeaseEncodedWordsBlock3[2] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_DefsCosineeaseEncodedWordsBlock2[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_DefsCosineeaseEncodedWordsBlock2AlignmentPad[2] = {
     0x24050006, 0x24060010,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_DefsCosineeaseEncodedWordsBlock1[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_DefsCosineeaseEncodedWordsBlock1AlignmentPad[2] = {
     0x24630001, 0x03E00008,
 };
 #endif

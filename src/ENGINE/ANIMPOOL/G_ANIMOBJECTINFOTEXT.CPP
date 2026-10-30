@@ -24,7 +24,8 @@ char s_GAnimobjectinfotextEvelNameText[11] =
 #endif
 
 #if defined(VERSION_EU)
-unsigned char k_GAnimobjectinfotextEncodedBytesBlock1[11] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char k_GAnimobjectinfotextEncodedBytesBlock1AlignmentPad[11] = {
     0x42, 0x00, 0x08, 0x00, 0x04, 0x24, 0x03, 0x00, 0x62, 0x18, 0x21,
 };
 #endif
@@ -34,7 +35,8 @@ unsigned char k_GAnimobjectinfotextEncodedBytesBlock1[11] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned char k_GAnimobjectinfotextEncodedBytes[11] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char k_GAnimobjectinfotextEncodedBytesAlignmentPad[11] = {
     0x00, 0x00, 0x00, 0x3F, 0x80, 0x00, 0x00, 0x3D, 0xCC, 0xCC, 0xCD,
 };
 #endif

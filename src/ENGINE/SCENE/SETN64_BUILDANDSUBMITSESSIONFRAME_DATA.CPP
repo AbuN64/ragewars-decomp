@@ -1,28 +1,28 @@
+#include "SYSTEM/ENGINE_DATA_SOURCE.H"
 
 /* ROM-grounded data: rodata/writable/800D2AD4 */
 #ifdef VERSION_DE
-unsigned int g_Setn64BuildandsubmitsessionframeEncodedWords[7] = {
-    0x00000000, 0x00000000, 0x03E00008, 0x00000000, 0x00000001, 0x0000000A, 0x0000000B,
+EngineRenderState g_Setn64BuildandsubmitsessionframeEncodedWords = {
+    0, "\000\000\000\000\003\340\000\010", 0, 1, "\000\000\000\012\000\000\000\013"
 };
 #endif
 #ifdef VERSION_EU
-unsigned int g_Setn64BuildandsubmitsessionframeEncodedWords[7] = {
-    0x00000000, 0x00000000, 0x00000008, 0x00000000, 0x00000001, 0x00000000, 0x00000008,
+EngineRenderState g_Setn64BuildandsubmitsessionframeEncodedWords = {
+    0, "\000\000\000\000\000\000\000\010", 0, 1, "\000\000\000\000\000\000\000\010"
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned int g_Setn64BuildandsubmitsessionframeEncodedWords[7] = {
-    0x00000000, 0x77657265, 0x20626573, 0x00000000, 0x00000001, 0x4D756E63, 0x682E0000,
+EngineRenderState g_Setn64BuildandsubmitsessionframeEncodedWords = {
+    0, "were bes", 0, 1, "Munch.\000\000"
 };
 #endif
 #ifdef VERSION_US
-unsigned int g_Setn64BuildandsubmitsessionframeEncodedWords[7] = {
-    0x00000000, 0x494E464C, 0x41544F52, 0x00000000, 0x00000001, 0x04000000, 0x66000000,
+EngineRenderState g_Setn64BuildandsubmitsessionframeEncodedWords = {
+    0, "INFLATOR", 0, 1, "\004\000\000\000f\000\000\000"
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int g_Setn64BuildandsubmitsessionframeEncodedWords[15] = {
-    0x00000000, 0x6566742E, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x65703F00, 0x4F6F7073,
+EnginePreviewRenderState g_Setn64BuildandsubmitsessionframeEncodedWords = {
+    0, "eft.\000\000\000\000", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, "ep?\000Oops"
 };
 #endif

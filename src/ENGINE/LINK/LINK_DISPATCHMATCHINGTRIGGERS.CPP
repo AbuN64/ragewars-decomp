@@ -328,8 +328,8 @@ s32 Link_CheckTriggerMessage(void *trigger, struct Player *player) {
 
 /* 800C9C20.CPP */
 /* ROM-grounded data: src/g_LinkDispatchmatchingtriggersWords1_us_rev1.c */
-const unsigned int g_LinkDispatchmatchingtriggersWords1[1] = {
-    0x40800000,
+const float g_LinkDispatchmatchingtriggersWords1[1] = {
+    4.0f,
 };
 
 #if defined(VERSION_DE)
@@ -341,13 +341,15 @@ float k_LinkDispatchmatchingtriggersEncodedWords[3] = {
 /* 800C9C0C.CPP */
 
 #if defined(VERSION_EU_X)
-unsigned int k_LinkDispatchmatchingtriggersEncodedWordsBlock2[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_LinkDispatchmatchingtriggersEncodedWordsBlock2AlignmentPad[3] = {
     0x00000000, 0x43300000, 0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_LinkDispatchmatchingtriggersEncodedWordsBlock1[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_LinkDispatchmatchingtriggersEncodedWordsBlock1AlignmentPad[3] = {
     0xC4400000, 0x24A20001, 0x00402821,
 };
 #endif

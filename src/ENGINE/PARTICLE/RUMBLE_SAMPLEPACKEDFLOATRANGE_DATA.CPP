@@ -6,25 +6,29 @@ const float g_Rumble_SamplePackedFloatRangeConstantsUsRev1[3] = {
 };
 
 #if defined(VERSION_US)
-unsigned int k_RumbleSamplepackedfloatrangeEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_RumbleSamplepackedfloatrangeEncodedWordsAlignmentPad[1] = {
     0x43414D45,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_RumbleSamplepackedfloatrangeEncodedWordsBlock2[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_RumbleSamplepackedfloatrangeEncodedWordsBlock2AlignmentPad[1] = {
     0x20202020,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_RumbleSamplepackedfloatrangeEncodedWordsBlock1[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_RumbleSamplepackedfloatrangeEncodedWordsBlock1AlignmentPad[1] = {
     0x00021043,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_RumbleSamplepackedfloatrangeOneWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_RumbleSamplepackedfloatrangeOneWordsAlignmentPad[1] = {
     0x3F800000,
 };
 #endif

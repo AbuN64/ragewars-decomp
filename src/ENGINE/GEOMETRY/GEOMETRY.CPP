@@ -4,23 +4,26 @@
 /* 8026E1F8_3.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int g_geometrySplitTextWordEuX[1] = { 0xE6000014U };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_geometrySplitTextWordEuXAlignmentPad[1] = { 0xE6000014U };
 #endif
 
 /* 80275E44_4.CPP */
 #if defined(VERSION_EU)
-unsigned char g_GeometryTrailingBytesBlock1[8] = { 0x46, 0x01, 0x00, 0x01, 0x46, 0x00, 0xA8, 0x02 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_GeometryTrailingBytesBlock1AlignmentPad[8] = { 0x46, 0x01, 0x00, 0x01, 0x46, 0x00, 0xA8, 0x02 };
 #endif
 
 /* GEOMETRY_2.CPP */
 #if defined(VERSION_DE)
-unsigned char g_GeometryTrailingBytes[4] = { 0xAF, 0xB5, 0x00, 0xB4 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_GeometryTrailingBytesAlignmentPad[4] = { 0xAF, 0xB5, 0x00, 0xB4 };
 #endif
 
 /* GEOMETRY_3.CPP */
 /* ROM-grounded data: src/g_geometryLightColorMaximum_Geometry.c */
-const unsigned int g_geometryLightColorMaximum[1] = {
-    0x42FE0000,
+const float g_geometryLightColorMaximum[1] = {
+    127.0f,
 };
 
 /* GEOMETRY_4.CPP */
@@ -64,6 +67,6 @@ const float g_geometryModelDistanceConstants[2] = {
 
 /* 800C9798.CPP */
 /* ROM-grounded data: src/g_geometryModelPartDistanceConstant_Geometry.c */
-const unsigned int g_geometryModelPartDistanceConstant[1] = {
-    0x42A00000,
+const float g_geometryModelPartDistanceConstant[1] = {
+    8e+01f,
 };

@@ -12,8 +12,8 @@
 #include "SYSTEM/BITARRAY.H"
 
 /* ROM-grounded data: src/g_motionTranslationQuantizationScale_StorageWords.c */
-const unsigned int g_motionTranslationQuantizationScale_StorageWords[1] = {
-    0xC4FA0000,
+const float g_motionTranslationQuantizationScale_StorageWords[1] = {
+    -2e+03f,
 };
 
 /* Reads a sampled track from a stream: parses its header through Polytrak2_InitializePackedCurve, evaluates the track at each whole frame into the first float of consecutive 16-byte output records, and advances the stream cursor past the track's key data. */
@@ -247,7 +247,8 @@ u32 Bitarray_GetRequiredBitCount(s32 value) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_BitarrayEncodedWords[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_BitarrayEncodedWordsAlignmentPad[2] = {
     0x04000000, 0x01000400,
 };
 #endif

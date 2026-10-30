@@ -68,18 +68,21 @@ void CCollision_ApplySetupTable(CCollisionSetup_t *setupTable)
 }
 
 #if defined(VERSION_US)
-unsigned int k_CollideEncodedWordsBlock2[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_CollideEncodedWordsBlock2AlignmentPad[1] = {
     0x0000000B,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int func_8023EE60_de_padding_3FB3C[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_CollideObjectAlignmentPadEuX1[1] = {
     0x00000000,
 };
 #endif
 
 /* 8023A284_34.CPP */
 #if defined(VERSION_EU)
-unsigned char g_CollideTrailingBytesBlock1[4] = { 0x10, 0x40, 0x00, 0x05 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_CollideTrailingBytesBlock1AlignmentPad[4] = { 0x10, 0x40, 0x00, 0x05 };
 #endif

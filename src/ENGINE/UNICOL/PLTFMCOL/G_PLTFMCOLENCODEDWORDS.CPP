@@ -2,7 +2,8 @@
 
 /* 800C8854.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_PltfmcolEncodedWords[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_PltfmcolEncodedWordsAlignmentPad[3] = {
     0x4F000000, 0x47800000, 0x4F000000,
 };
 #endif

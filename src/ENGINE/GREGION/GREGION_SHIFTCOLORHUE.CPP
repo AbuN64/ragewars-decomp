@@ -5,8 +5,8 @@
 #include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 #include "COMMON/TRIPLE.H"
 
-const unsigned int g_regionHueFirstWeightScale_StorageWords[3] = {
-    0x3C40C0C1, 0x3C40C0C1, 0x3C40C0C1,
+const float g_regionHueFirstWeightScale_StorageWords[3] = {
+    0.011764706f, 0.011764706f, 0.011764706f,
 };
 
 void Gregion_ShiftColorHue(u8 hue, u8 red_arg, u8 green_arg, u8 blue_arg,
@@ -120,25 +120,29 @@ void Gregion_DarkenColor(unsigned char percent, unsigned char r, unsigned char g
 }
 
 #if defined(VERSION_US)
-unsigned int k_GregionShiftcolorhueEncodedWords[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GregionShiftcolorhueEncodedWordsAlignmentPad[2] = {
     0x00005400, 0x00000000,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_GregionShiftcolorhueEncodedWordsBlock3[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GregionShiftcolorhueEncodedWordsBlock3AlignmentPad[2] = {
     0xBC3F5FAF, 0x3CFD10F8,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_GregionShiftcolorhueEncodedWordsBlock2[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GregionShiftcolorhueEncodedWordsBlock2AlignmentPad[2] = {
     0x00621821, 0x0105102A,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_GregionShiftcolorhueEncodedWordsBlock1[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GregionShiftcolorhueEncodedWordsBlock1AlignmentPad[2] = {
     0xBF800000, 0x32200000,
 };
 #endif

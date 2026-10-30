@@ -8,9 +8,7 @@ const float k_GameobjectBuildtargetaimorientationEncodedWords[2] = {
 };
 #endif
 #if defined(VERSION_US)
-const unsigned int k_GameobjectBuildtargetaimorientationEncodedWords[1] = {
-    0x784C6973,
-};
+const char k_GameobjectBuildtargetaimorientationEncodedWords[4] = "xLis";
 #endif
 #endif
 #if defined(VERSION_US)
@@ -20,7 +18,8 @@ float k_GameobjectBuildtargetaimorientationEncodedWords[2] = {
 };
 #endif
 #if defined(VERSION_US)
-unsigned int k_GameobjectBuildtargetaimorientationEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GameobjectBuildtargetaimorientationEncodedWordsAlignmentPad[1] = {
     0x784C6973,
 };
 #endif

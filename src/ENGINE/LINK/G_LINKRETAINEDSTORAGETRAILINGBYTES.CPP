@@ -1,3 +1,4 @@
 #if defined(VERSION_DE)
-unsigned char g_LinkRetainedStorageTrailingBytes[4] = { 0xAF, 0xBF, 0x00, 0x20 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_LinkRetainedStorageTrailingBytesAlignmentPad[4] = { 0xAF, 0xBF, 0x00, 0x20 };
 #endif

@@ -598,7 +598,8 @@ void Particle_FindNearestForeignEffectDistance(EffectSystem *effectSystem, Level
 }
 
 #if defined(VERSION_DE)
-unsigned int func_8028515C_de_padding_85D5C[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_ParticleSpawninterpolatedtrailObjectAlignmentPadDe1[1] = {
     0x0C0A145C,
 };
 #endif

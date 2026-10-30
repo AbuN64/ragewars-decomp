@@ -6,7 +6,8 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: data/unresolved/800C9C1C */
-unsigned int g_vertexLightHalfIntensityUsRev1[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_vertexLightHalfIntensityUsRev1AlignmentPad[1] = {
     0x3F000000,
 };
 #endif

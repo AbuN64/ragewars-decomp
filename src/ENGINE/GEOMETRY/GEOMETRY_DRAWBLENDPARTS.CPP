@@ -607,15 +607,16 @@ void Geometry_InsertMaterialNode(TreeNode **root, TreeNode **empty_root, TreeNod
 }
 
 #if defined(VERSION_US)
-unsigned int k_GeometryDrawblendpartsEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GeometryDrawblendpartsEncodedWordsAlignmentPad[1] = {
     0x41594552,
 };
 #endif
 
 /* 800C979C.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_geometryInitialModelScale[1] = {
-    0x40000000,
+const float g_geometryInitialModelScale[1] = {
+    2.0f,
 };
 #endif
 
@@ -626,14 +627,15 @@ const float g_geometryMaterialSetupConstantsDe[3] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_GeometryDrawblendpartsZeroWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GeometryDrawblendpartsZeroWordsAlignmentPad[1] = {
     0x00000000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_geometryInitialModelScaleUsRev1_GeometryDrawblendparts.c */
-const unsigned int g_geometryInitialModelScaleUsRev1[1] = {
-    0x40000000,
+const float g_geometryInitialModelScaleUsRev1[1] = {
+    2.0f,
 };
 #endif

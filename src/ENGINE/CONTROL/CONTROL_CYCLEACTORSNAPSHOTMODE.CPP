@@ -324,13 +324,15 @@ float Control_SampleEffectCurve(SampledEffectCurveState *p) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_ControlCycleactorsnapshotmodeEncodedWordsBlock1[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_ControlCycleactorsnapshotmodeEncodedWordsBlock1AlignmentPad[1] = {
     0x00009666,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int func_80264EE0_de_padding_65B1C[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_ControlCycleactorsnapshotmodeObjectAlignmentPadEu1[1] = {
     0x00000000,
 };
 #endif

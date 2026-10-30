@@ -117,7 +117,8 @@ const float g_Setn64Initializemode17creditsWords1 = 1.0f;
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_Setn64Initializemode17creditsEncodedWords[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_Setn64Initializemode17creditsEncodedWordsAlignmentPad[3] = {
     0x75726500, 0x0029523C, 0x002954A0,
 };
 #endif

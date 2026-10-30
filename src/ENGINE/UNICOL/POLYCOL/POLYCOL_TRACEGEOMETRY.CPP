@@ -13,7 +13,8 @@
 /* 800C886C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C886C */
-unsigned int g_PolycolTracegeometryEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_PolycolTracegeometryEncodedWordsAlignmentPad[1] = {
     0x4F000000,
 };
 #endif

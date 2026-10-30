@@ -1114,6 +1114,6 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
 
 /* 800CA2FC.CPP */
 /* ROM-grounded data: src/g_scene_UpdateActorVisibilityConstantWords_SceneLoadlevelresources.c */
-const unsigned int g_scene_UpdateActorVisibilityConstantWords[1] = {
-    0x453B8000,
+const float g_scene_UpdateActorVisibilityConstantWords[1] = {
+    3e+03f,
 };

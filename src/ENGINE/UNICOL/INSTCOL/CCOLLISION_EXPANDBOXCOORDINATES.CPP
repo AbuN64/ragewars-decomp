@@ -27,7 +27,8 @@ int CRenderSortRecord_CompareDepth(RenderSortRecord *left, RenderSortRecord *rig
 }
 
 #if defined(VERSION_US)
-unsigned int func_80240638_de_padding_4123C[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_CcollisionExpandboxcoordinatesObjectAlignmentPadUs1[1] = {
     0x00000000,
 };
 #endif

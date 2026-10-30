@@ -7,7 +7,8 @@ void SetN64_OnWorldViewDraw(void) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_Setn64OnworldviewdrawEncodedWords[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_Setn64OnworldviewdrawEncodedWordsAlignmentPad[2] = {
     0x1C180134, 0x433A5C50,
 };
 #endif

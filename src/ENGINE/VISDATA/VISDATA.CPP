@@ -364,6 +364,6 @@ char k_VisdataEncodedBytes[8] =
 #endif
 
 /* ROM-grounded data: src/g_planeParallelSegmentFractionStorageSource.c */
-const unsigned int g_planeParallelSegmentFraction_StorageWords[1] = {
-    0x3F800000,
+const float g_planeParallelSegmentFraction_StorageWords[1] = {
+    1.0f,
 };

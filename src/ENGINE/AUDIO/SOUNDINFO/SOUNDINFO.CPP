@@ -75,18 +75,21 @@ int SoundInfo_GetHalfwordC_de(void *soundDescriptor) {
 }
 
 #if defined(VERSION_US)
-unsigned int func_8025E59C_de_padding_5F148[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_SoundinfoObjectAlignmentPadUs1[1] = {
     0x00000000,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int k_SoundinfoEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_SoundinfoEncodedWordsAlignmentPad[1] = {
     0x00115041,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned char g_SoundinfoTrailingBytes[8] = { 0x02, 0x02, 0x80, 0x21, 0x0C, 0x0A, 0xF5, 0x90 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_SoundinfoTrailingBytesAlignmentPad[8] = { 0x02, 0x02, 0x80, 0x21, 0x0C, 0x0A, 0xF5, 0x90 };
 #endif
 

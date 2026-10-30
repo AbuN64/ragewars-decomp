@@ -893,22 +893,23 @@ void SoundVoicePool_GetGlobalStateNoOp(void) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_VoiceEncodedWordsBlock1[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_VoiceEncodedWordsBlock1AlignmentPad[3] = {
     0x72000000, 0x00940A00, 0x08001400,
 };
 #endif
 
 /* 800C9068.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_VoiceEncodedWords[1] = {
-    0x3F800000,
+const float k_VoiceEncodedWords[1] = {
+    1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_VoiceOneWordsUsRev1.c */
-const unsigned int k_VoiceOneWords[1] = {
-    0x3F800000,
+const float k_VoiceOneWords[1] = {
+    1.0f,
 };
 #endif
 
@@ -920,15 +921,15 @@ const float g_audio_InitializeVoicePoolConstantWords[3] = {
 
 /* 800C9078.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_audio_ComputeDistanceAttenuationConstantWords1[1] = {
-    0x3F800000,
+const float g_audio_ComputeDistanceAttenuationConstantWords1[1] = {
+    1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_audio_ComputeDistanceAttenuationConstantWords2UsRev1.c */
-const unsigned int g_audio_ComputeDistanceAttenuationConstantWords2[1] = {
-    0x3F800000,
+const float g_audio_ComputeDistanceAttenuationConstantWords2[1] = {
+    1.0f,
 };
 #endif
 
@@ -946,14 +947,14 @@ const float g_audio_RandomizeScaledByteRangeConstantWords[2] = {
 
 /* 800C908C.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_audio_ComputeSpatialAttenuationCurveConstantWords1[1] = {
-    0x3F800000,
+const float g_audio_ComputeSpatialAttenuationCurveConstantWords1[1] = {
+    1.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_audio_ComputeSpatialAttenuationCurveConstantWords2UsRev1.c */
-const unsigned int g_audio_ComputeSpatialAttenuationCurveConstantWords2[1] = {
-    0x3F800000,
+const float g_audio_ComputeSpatialAttenuationCurveConstantWords2[1] = {
+    1.0f,
 };
 #endif

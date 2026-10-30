@@ -1,7 +1,8 @@
 #include "FX/CONTROLLER_INPUT.H"
 
 #if defined(VERSION_DE)
-unsigned int k_ContpadEncodedWordsBlock1[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_ContpadEncodedWordsBlock1AlignmentPad[3] = {
     0x00008000, 0x00004000, 0x00004000,
 };
 ButtonRemap g_controllerButtonRemap[19] = {
@@ -25,7 +26,8 @@ ButtonRemap g_controllerButtonRemap[19] = {
     { 0x80000, 0x80000 },
     { 0, 0 },
 };
-unsigned int k_ContpadEncodedWordsBlock2[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_ContpadEncodedWordsBlock2AlignmentPad[2] = {
     0x00000000, 0xFFFFFFFF,
 };
 #endif

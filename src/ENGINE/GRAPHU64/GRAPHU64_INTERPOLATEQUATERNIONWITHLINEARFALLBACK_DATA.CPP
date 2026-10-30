@@ -2,8 +2,8 @@
 
 /* 800C98C0.CPP */
 /* ROM-grounded data: src/g_graphu64_UnpackFixedMatrixConstantWords_us_rev1.c */
-const unsigned int g_graphu64_UnpackFixedMatrixConstantWords_us_rev1[1] = {
-    0x37800000,
+const float g_graphu64_UnpackFixedMatrixConstantWords_us_rev1[1] = {
+    1.5258789e-05f,
 };
 
 /* 800C98C4.CPP */
@@ -14,8 +14,8 @@ const float g_graphu64_ConvertMatrixToFloatConstantWords_us_rev1[2] = {
 
 /* 800C98CC.CPP */
 /* ROM-grounded data: src/g_graphu64_InterpolateQuaternionArcConstantWords_us_rev1.c */
-const unsigned int g_graphu64_InterpolateQuaternionArcConstantWords_us_rev1[1] = {
-    0x3F800000,
+const float g_graphu64_InterpolateQuaternionArcConstantWords_us_rev1[1] = {
+    1.0f,
 };
 
 /* 800C98D0.CPP */
@@ -26,8 +26,8 @@ const float g_graphu64_InterpolateQuaternionWithLinearFallbackThresholdConstantW
 
 /* 800C98D8.CPP */
 /* ROM-grounded data: rodata/unresolved/800C98D8 */
-const unsigned int g_graphu64_InterpolateQuaternionWithLinearFallbackConstantWords[1] = {
-    0x3F800000,
+const float g_graphu64_InterpolateQuaternionWithLinearFallbackConstantWords[1] = {
+    1.0f,
 };
 
 /* 800C98D8_2.CPP */
@@ -46,8 +46,8 @@ const float g_graphu64_BlendRandomDirectionConstantWords2[2] = {
 
 /* 800C98E4.CPP */
 /* ROM-grounded data: src/g_graphu64_BlendRandomXDirectionConstantWords1_us_rev1.c */
-const unsigned int g_graphu64_BlendRandomXDirectionConstantWords1_us_rev1[1] = {
-    0x38D1B717,
+const float g_graphu64_BlendRandomXDirectionConstantWords1_us_rev1[1] = {
+    0.0001f,
 };
 
 /* 800C98E8.CPP */

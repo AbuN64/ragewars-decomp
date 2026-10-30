@@ -113,13 +113,15 @@ void CPolyCollision_TraceCeilingTriangle(ActorB0 *actor) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_CpolycollisionTraceceilingtriangleEncodedWords[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_CpolycollisionTraceceilingtriangleEncodedWordsAlignmentPad[3] = {
     0x08000F00, 0x00000000, 0x0C6D5F44,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_CpolycollisionTraceceilingtriangleEncodedWordsBlock2[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_CpolycollisionTraceceilingtriangleEncodedWordsBlock2AlignmentPad[3] = {
     0x4F000000, 0x47800000, 0x4F000000,
 };
 #endif

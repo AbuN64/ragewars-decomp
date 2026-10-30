@@ -20,7 +20,8 @@
 
 /* 8024E130_2.CPP */
 /** Return the vertical offset selected by the actor's current state. */
-const unsigned int k_InsthdrGetactorshadowradiusTrailingBytes[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+const unsigned int k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad[1] = {
     0x00000000,
 };
 f32 InstHdr_GetActorShadowRadius(Actor_u1 *actor) {
@@ -387,7 +388,8 @@ int InstHdr_GetActorMotionIndex(void *record) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_InsthdrGetactorshadowradiusEncodedWords[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_InsthdrGetactorshadowradiusEncodedWordsAlignmentPad[3] = {
     0x46540200, 0x00009410, 0x000B0000,
 };
 #endif

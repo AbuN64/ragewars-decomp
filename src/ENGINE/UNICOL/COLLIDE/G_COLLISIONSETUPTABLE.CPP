@@ -1,7 +1,8 @@
 #if defined(VERSION_US_REV1)
 #include "COMMON/CCOLLISIONSETUP_T.H"
 
-unsigned int k_CollideEncodedWordsBlock1[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_CollideEncodedWordsBlock1AlignmentPad[2] = {
     0x02610821, 0xAC20B61C,
 };
 

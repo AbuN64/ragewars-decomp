@@ -658,19 +658,22 @@ const float k_UnicolEncodedWordsBlock1[7] = {
 };
 
 #if defined(VERSION_EU_X)
-unsigned int k_UnicolEncodedWordsBlock10[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_UnicolEncodedWordsBlock10AlignmentPad[1] = {
     0x4F000000,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_UnicolEncodedWordsBlock8[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_UnicolEncodedWordsBlock8AlignmentPad[1] = {
     0x26730008,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_UnicolNegativeHalfWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_UnicolNegativeHalfWordsAlignmentPad[1] = {
     0xBF000000,
 };
 #endif

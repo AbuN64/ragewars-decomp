@@ -8,6 +8,6 @@ const float k_eventsFirewithinheightrangeDataFloatConstantWords[3] = {
 
 /* 800C9560.CPP */
 /* ROM-grounded data: src/k_eventsFirewithinheightrangeDataFloatConstantWordsBlock1_EventsFirewithinheightrangeData.c */
-const unsigned int k_eventsFirewithinheightrangeDataFloatConstantWordsBlock1[2] = {
-    0x42999999, 0x42999999,
+const float k_eventsFirewithinheightrangeDataFloatConstantWordsBlock1[2] = {
+    76.799995f, 76.799995f,
 };

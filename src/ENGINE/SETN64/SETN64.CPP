@@ -500,8 +500,8 @@ void *SetN64_AllocateActorFromPool(ActorPoolFreeListView *container)
 
 /* 800CA494.CPP */
 /* ROM-grounded data: src/g_EngineSetn64RetainedWords1_Setn64.c */
-const unsigned int g_EngineSetn64RetainedWords1[1] = {
-    0x42A3D70A,
+const float g_EngineSetn64RetainedWords1[1] = {
+    81.92f,
 };
 
 /* 800CA498.CPP */

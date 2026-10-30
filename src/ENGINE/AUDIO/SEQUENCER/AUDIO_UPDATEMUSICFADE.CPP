@@ -85,6 +85,6 @@ store:
 
 /* 800C90F8.CPP */
 /* ROM-grounded data: src/g_audio_LoadMusicSequenceConstantWords_AudioUpdatemusicfade.c */
-const unsigned int g_audio_LoadMusicSequenceConstantWords[1] = {
-    0x3DCCCCCD,
+const float g_audio_LoadMusicSequenceConstantWords[1] = {
+    0.1f,
 };

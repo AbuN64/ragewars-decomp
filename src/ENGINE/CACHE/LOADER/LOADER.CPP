@@ -237,19 +237,22 @@ void Cartridge_ReleaseReadRequest(s32 worker, CartridgeReadRequest *request) {
 }
 
 #if defined(VERSION_US)
-unsigned int func_80256688_de_padding_57288[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_LoaderObjectAlignmentPadUs1[2] = {
     0x00000000, 0x0278320C,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int func_802566E8_de_padding_572D8[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_LoaderObjectAlignmentPadEuX2[2] = {
     0x24050001, 0x8E442B48,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int func_802566E8_de_padding_572A8[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_LoaderObjectAlignmentPadEu3[2] = {
     0x12A00005, 0x00000000,
 };
 #endif

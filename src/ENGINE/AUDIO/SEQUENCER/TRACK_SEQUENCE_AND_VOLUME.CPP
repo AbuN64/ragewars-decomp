@@ -16,13 +16,13 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* ROM-grounded data: src/g_trackCommandFallbackDuration_TrackSequenceAndVolume.c */
-const unsigned int g_trackCommandFallbackDuration[1] = {
-    0x3DCCCCCD,
+const float g_trackCommandFallbackDuration[1] = {
+    0.1f,
 };
 
 /* ROM-grounded data: src/g_trackNormalizedVolumeScale_TrackSequenceAndVolume.c */
-const unsigned int g_trackNormalizedVolumeScale[1] = {
-    0x46FFFE00,
+const float g_trackNormalizedVolumeScale[1] = {
+    32767.0f,
 };
 
 /* ROM-grounded data: src/g_trackContextVolumePercentScales_TrackSequenceAndVolume.c */
@@ -113,8 +113,8 @@ void Sequencer_AttachTrackSequence(Track *track) {
 }
 
 /* ROM-grounded data: rodata/unresolved/800C9120 */
-const unsigned int g_trackContextVolumeScale[1] = {
-    0x46FFFE00,
+const float g_trackContextVolumeScale[1] = {
+    32767.0f,
 };
 
 /* ROM-grounded data: src/g_trackSequenceVolumeFactors_TrackSequenceAndVolume.c */
@@ -123,7 +123,8 @@ const float g_trackSequenceVolumeFactors[2] = {
 };
 
 #if defined(VERSION_EU_X)
-unsigned int k_TrackSequenceAndVolumeEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_TrackSequenceAndVolumeEncodedWordsAlignmentPad[1] = {
     0x68696373,
 };
 #endif

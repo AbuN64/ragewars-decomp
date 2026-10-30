@@ -8,6 +8,6 @@ const float g_graphu64_GetCachedSurfaceNormalConstantWords[2] = {
 
 /* 800C9AB8.CPP */
 /* ROM-grounded data: src/g_graphu64_GetTrianglePlaneHeightConstantWords_Graphu64GetcachedsurfacenormalData.c */
-const unsigned int g_graphu64_GetTrianglePlaneHeightConstantWords[1] = {
-    0x3EAAAAAB,
+const float g_graphu64_GetTrianglePlaneHeightConstantWords[1] = {
+    0.33333334f,
 };

@@ -16,7 +16,8 @@ const float k_UnicolEncodedWords[9] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int k_UnicolEncodedWordsBlock7[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_UnicolEncodedWordsBlock7AlignmentPad[3] = {
     0x0F000000, 0x00000F6D, 0x5F4C6967,
 };
 #endif
@@ -28,7 +29,8 @@ float k_UnicolEncodedWordsBlock11[3] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_UnicolEncodedWordsBlock9[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_UnicolEncodedWordsBlock9AlignmentPad[3] = {
     0x00E61023, 0x080AFAA9, 0xACA20004,
 };
 #endif
@@ -39,8 +41,8 @@ const float k_UnicolEncodedWordsBlock2[4] = {
 };
 
 /* ROM-grounded data: src/k_UnicolOneWords_Unicol.c */
-const unsigned int k_UnicolOneWords[1] = {
-    0x3F800000,
+const float k_UnicolOneWords[1] = {
+    1.0f,
 };
 
 /* ROM-grounded data: src/k_UnicolEncodedWordsBlock5_Unicol.c */
@@ -49,13 +51,13 @@ const float k_UnicolEncodedWordsBlock5[2] = {
 };
 
 /* ROM-grounded data: src/k_UnicolEncodedWordsBlock3_Unicol.c */
-const unsigned int k_UnicolEncodedWordsBlock3[1] = {
-    0x4123D70A,
+const float k_UnicolEncodedWordsBlock3[1] = {
+    10.24f,
 };
 
 /* ROM-grounded data: src/k_UnicolEncodedWordsBlock4_Unicol.c */
-const unsigned int k_UnicolEncodedWordsBlock4[1] = {
-    0x3D888889,
+const float k_UnicolEncodedWordsBlock4[1] = {
+    0.06666667f,
 };
 #endif
 

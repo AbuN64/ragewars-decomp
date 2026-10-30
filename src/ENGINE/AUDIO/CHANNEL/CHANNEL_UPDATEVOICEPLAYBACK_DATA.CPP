@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_channel_UpdateVoicePlaybackConstantWords_us_rev1.c */
-const unsigned int g_channel_UpdateVoicePlaybackConstantWords[1] = {
-    0x3D99999A,
+const float g_channel_UpdateVoicePlaybackConstantWords[1] = {
+    0.075f,
 };

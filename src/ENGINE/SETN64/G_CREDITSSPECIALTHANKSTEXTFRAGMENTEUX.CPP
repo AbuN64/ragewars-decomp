@@ -2,7 +2,8 @@
 
 /* SETN64_RETAINED_ARP_TIME_TEXT_WORDS_US.CPP */
 #if defined(VERSION_US)
-unsigned int g_EngineSetn64RetainedArpTimeTTextWords1[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_EngineSetn64RetainedArpTimeTTextWords1AlignmentPad[3] = {
     0x61727054, 0x696D6554, 0x00000401,
 };
 #endif

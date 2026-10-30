@@ -213,13 +213,15 @@ const float g_Ghot_DispatchAttachmentEffectsConstantWords[3] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int k_GhotEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GhotEncodedWordsAlignmentPad[1] = {
     0x740E6D5F,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_GhotEncodedWordsBlock1[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GhotEncodedWordsBlock1AlignmentPad[1] = {
     0x4491A000,
 };
 #endif

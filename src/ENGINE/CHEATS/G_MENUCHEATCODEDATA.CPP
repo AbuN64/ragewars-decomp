@@ -1,3 +1,4 @@
+#include "SYSTEM/ENGINE_DATA_SOURCE.H"
 #include "MENU/BUILD/DEFINITION_DATA.H"
 
 #if defined(VERSION_US_REV1)
@@ -338,7 +339,8 @@ struct {
     },
 };
 
-unsigned int g_GMenucheatcodedataEncodedWordsBlock2[1] = { 0x00010201 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_GMenucheatcodedataEncodedWordsBlock2AlignmentPad[1] = { 0x00010201 };
 
 struct MenuCheatCodeData g_menuCheatCodeData[12] = {
     { 0x800E21AC, 0x800D7AE0, 0x00000020, 0x00000001 },
@@ -426,7 +428,8 @@ struct {
     },
 };
 
-unsigned int g_GMenucheatcodedataEncodedWordsBlock3[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_GMenucheatcodedataEncodedWordsBlock3AlignmentPad[1] = {
     0x00000000,
 };
 
@@ -471,9 +474,10 @@ struct {
     },
 };
 
-unsigned int g_GMenucheatcodedataEncodedWordsBlock4[12] = {
-    0x00000460, 0x0000000B, 0x00000000, 0x00000000, 0xC2480000, 0xC4610000, 0x40000000, 0x40000000,
-    0x40000000, 0x00000032, 0x00000050, 0x3DB2B8C4,
+EngineMenuModelDefinition g_GMenucheatcodedataEncodedWordsBlock4 = {
+    1120, 11, 0,
+    { 0.0f, -50.0f, -900.0f }, { 2.0f, 2.0f, 2.0f },
+    "\000\000\0002\000\000\000P", 0.087266475f
 };
 
 struct {
@@ -576,7 +580,8 @@ struct {
     },
 };
 
-unsigned int g_GMenucheatcodedataEncodedWords[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_GMenucheatcodedataEncodedWordsAlignmentPad[1] = {
     0x00000000,
 };
 
@@ -593,7 +598,8 @@ struct {
     },
 };
 
-unsigned int g_GMenucheatcodedataEncodedWordsBlock1[1] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int g_GMenucheatcodedataEncodedWordsBlock1AlignmentPad[1] = {
     0x00020000,
 };
 

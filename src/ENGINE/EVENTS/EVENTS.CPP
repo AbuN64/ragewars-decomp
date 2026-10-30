@@ -8,29 +8,29 @@ const float k_eventsFloatConstantWordsBlock1[3] = {
 
 /* 800C9544.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_eventsFloatConstantWordsBlock2[1] = {
-    0x4123D70A,
+const float k_eventsFloatConstantWordsBlock2[1] = {
+    10.24f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_eventsFloatConstantWordsBlock5_Events.c */
-const unsigned int k_eventsFloatConstantWordsBlock5[1] = {
-    0x4123D70A,
+const float k_eventsFloatConstantWordsBlock5[1] = {
+    10.24f,
 };
 #endif
 
 /* 800C9548.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_eventsFloatConstantWordsBlock3[1] = {
-    0x4123D70A,
+const float k_eventsFloatConstantWordsBlock3[1] = {
+    10.24f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_eventsFloatConstantWordsBlock6_Events.c */
-const unsigned int k_eventsFloatConstantWordsBlock6[1] = {
-    0x4123D70A,
+const float k_eventsFloatConstantWordsBlock6[1] = {
+    10.24f,
 };
 #endif
 

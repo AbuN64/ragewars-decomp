@@ -679,14 +679,14 @@ const float g_Region_TestPolygonSlopeFlagConstantWords[2] = {
 
 /* 800C9ADC.CPP */
 /* ROM-grounded data: src/g_Region_ScaleWordsToFloatsConstantWordsSource.c */
-const unsigned int g_Region_ScaleWordsToFloatsConstantWords[1] = {
-    0x3CF00000,
+const float g_Region_ScaleWordsToFloatsConstantWords[1] = {
+    0.029296875f,
 };
 
 /* 800C9AE0.CPP */
 /* ROM-grounded data: src/g_regionEdgeCrossDefaultUp_StorageWordsSource.c */
-const unsigned int g_regionEdgeCrossDefaultUp_StorageWords[1] = {
-    0x3F800000,
+const float g_regionEdgeCrossDefaultUp_StorageWords[1] = {
+    1.0f,
 };
 
 /* 800C9AE4.CPP */
@@ -703,12 +703,13 @@ const float g_regionMissingPolygonHeight_StorageWords[2] = {
 
 /* 800C9AF4.CPP */
 /* ROM-grounded data: src/g_regionCeilingDefaultUp_StorageWordsSource.c */
-const unsigned int g_regionCeilingDefaultUp_StorageWords[1] = {
-    0xBF800000,
+const float g_regionCeilingDefaultUp_StorageWords[1] = {
+    -1.0f,
 };
 
 #if defined(VERSION_US)
-unsigned int k_GregionEncodedWordsBlock2[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GregionEncodedWordsBlock2AlignmentPad[2] = {
     0x00000800, 0x08001400,
 };
 #endif
@@ -720,13 +721,15 @@ float k_GregionEncodedWordsBlock5[2] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_GregionEncodedWordsBlock4[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GregionEncodedWordsBlock4AlignmentPad[2] = {
     0x00000000, 0x46022082,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_GregionEncodedWordsBlock3[2] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GregionEncodedWordsBlock3AlignmentPad[2] = {
     0x3C40C0C1, 0x4F000000,
 };
 #endif

@@ -118,7 +118,8 @@ s32 Gastate_RequestAnimationResource(void *animationState, s32 resourceTable, s3
 }
 
 #if defined(VERSION_US)
-unsigned int k_GobjinstBuildactorposeEncodedWords[3] = {
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned int k_GobjinstBuildactorposeEncodedWordsAlignmentPad[3] = {
     0x5F4D3230, 0x01000096, 0x08000800,
 };
 #endif

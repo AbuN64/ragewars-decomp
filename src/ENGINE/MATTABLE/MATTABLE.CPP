@@ -68,6 +68,7 @@ f32 Rumble_SamplePackedFloatRange(s32 packedRange) {
 }
 
 #if defined(VERSION_US)
-unsigned char g_MattableTrailingBytes[4] = { 0x08, 0x00, 0x08, 0x00 };
+/* Alignment fill to the next 16-byte object boundary. */
+unsigned char g_MattableTrailingBytesAlignmentPad[4] = { 0x08, 0x00, 0x08, 0x00 };
 #endif
 
