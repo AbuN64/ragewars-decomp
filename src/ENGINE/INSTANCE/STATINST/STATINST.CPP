@@ -57,7 +57,7 @@ extern char s_staticPropResourceTag[];
 
 extern s32 SetN64_LocatePackSection(s32 *, s32, s32, s32 *);
 
-extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, ResourceManagerState);
+extern void Events_DeliverContactEffect(void *source, void *target, s32 effect, s32 delay, struct CVector3_t position, struct IntPair payload);
 
 s32 Statinst_UpdateDistanceFade(void *prop, s32 cameraAddress) {
     OwnerStaticInstanceDrawDistanceFadedModel *owner = prop;

@@ -36,7 +36,7 @@ extern Carrier g_currentActorInstance;
 
 extern s32 Gobjinst_FindNearestBoneBounds(ActorEventsComputeDamageScale *, CVector3, Shield *);
 
-extern f32 Gobjinst_GetActorHeight(ActorEventsComputeDamageScale *);
+extern f32 Gobjinst_GetActorHeight(void *);
 
 extern f32 Gobjinst_GetActorRadius(ActorEventsComputeDamageScale *);
 
@@ -61,7 +61,7 @@ extern char g_actorParticleEffectSystem;
 
 extern void Player_TransformPointByViewOrOwnerMatrix(SharedPlayer *, CVector3 *);
 
-extern struct CacheResourceBlockView Graphu64_BuildDirectionQuaternion(CVector3 *);
+extern struct CQuatern_t Graphu64_BuildDirectionQuaternion(struct CVector3_t *);
 
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32);
 

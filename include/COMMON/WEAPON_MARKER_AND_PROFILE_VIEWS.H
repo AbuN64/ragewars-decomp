@@ -177,7 +177,7 @@ extern s32 g_lightingBufferIndex;
 extern struct UnitVtx g_weaponRedMarkerVertices[];
 extern s32 Geometry_SetModePreset(s32);
 extern void Geometry_SetCombineMode(u32);
-extern void Fx_DrawRedParticleQuad(u32);
+extern void Fx_DrawRedParticleQuad(struct UnitMtx *, s32, s32, s32);
 
 extern s32 Weapon_IsSecondarySwitchGroup(s32);
 

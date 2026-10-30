@@ -19,7 +19,7 @@ extern char g_actorParticleEffectSystem;
 
 
 
-extern f32 Gobjinst_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor);
+extern f32 Gobjinst_GetActorHeight(void *);
 
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 extern void Cache_ReleaseResource(void *cache, void *resource);
@@ -39,7 +39,7 @@ extern CQuatern Insthdr_BuildActorGroundRotation(void *);
 
 extern void Graphu64_LimitVectorLength(CVector3 *, f32);
 
-extern void MatrixFromQuaternion(f32 *, f32 *);
+extern void MatrixFromQuaternion(struct CQuatern_t *, f32 *);
 
 extern void ScaleMatrixLocal(f32 *, f32, f32, f32);
 
@@ -51,7 +51,7 @@ extern void Geometry_DrawIntensityMask(void *, s32, s32);
 
 
 
-extern s32 Cache_RequestWordCountedResource(s32, void **, s32, void *, s32);
+extern void **Cache_RequestWordCountedResource(s32,void **,s32,void *,s32);
 
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 

@@ -17,7 +17,7 @@ extern CQuatern Gobjinst_BuildActorDirectionTilt(void *input);
 
 
 extern void MultiplyQuaternions(CQuatern *productQuaternion, CQuatern *leftQuaternion, CQuatern *rightQuaternion);
-extern void MatrixFromQuaternion(void *, void *);
+extern void MatrixFromQuaternion(struct CQuatern_t *, f32 *);
 extern void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 extern s32 Graphu64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength);
 extern void TranslateMatrix(char *, f32, f32, f32);

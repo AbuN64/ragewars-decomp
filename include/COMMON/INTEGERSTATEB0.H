@@ -11,7 +11,7 @@ extern int g_frontendScreenInitialized;
 struct GameSession;
 #include "COMMON/GAME_SESSION.H"
 
-extern void SetN64_DrawSessionWithRoundTimeout(GameSession *session);
+extern void SetN64_DrawSessionWithRoundTimeout();
 
 
 struct IntegerStateB0;

@@ -46,7 +46,7 @@ extern void Graphu64_GetMatrixTranslation(f32 *matrix, CVector3 *position);
 
 extern char *Playerai_GetFirstPlayer(void *players);
 
-extern void Graphu64_SubtractVectors(CVector3 *out, void *a, CVector3 *b);
+extern void Graphu64_SubtractVectors(struct CVector3_t *,struct CVector3_t *,struct CVector3_t *);
 
 
 void Geometry_SetupIntensityPass(void) {

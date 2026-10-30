@@ -76,6 +76,6 @@ struct Shared_Game {
     /* origin/legacy shared/game.h retains the complete 0xCAC-byte game record. */
     u8 reserved688[0xCAC - 0x688];
 };
-extern Shared_Game g_gameSettings;
+extern s32 g_gameSettings;
 
 #endif

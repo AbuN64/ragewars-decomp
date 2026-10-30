@@ -80,7 +80,7 @@ extern s32 g_gameSettings;
 extern s32 Cinema_IsSequenceInWindow(void);
 extern void Gobjinst_ApplyImpactBoneTwist(Shared_PoseActor *, Shared_PosePart *, PoseMatrix, CVector3, CVector3, s32);
 extern void Gobjinst_ApplyTimedMatrixWobble(Shared_PoseActor *, s32, PoseMatrix);
-extern f32 Gobjinst_GetActorHeight(Shared_PoseActor *);
+extern f32 Gobjinst_GetActorHeight(void *);
 extern void Gastate_SwitchRequestedAnimation(Shared_AnimState *, s32, s32, s32, s32, s32);
 extern void Gastate_PrepareAnimationFrames();
 extern void Gastate_ReleaseAnimationResource(Shared_AnimState *);

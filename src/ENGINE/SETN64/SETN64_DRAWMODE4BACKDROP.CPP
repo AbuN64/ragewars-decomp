@@ -32,7 +32,7 @@ extern void SetN64_HandleSessionTransitionInput(s32 session, s32 cancelTarget, s
 
 extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
-extern void Scene_LoadLevelResources(void *, void *, void *);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 
 extern void SmXlate_SwitchScreen(s32 index);
 

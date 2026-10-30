@@ -10,7 +10,7 @@
 /* g_pakPreviewNoteType is read through a struct view so the compiler keeps the load behind the preceding store. */
 typedef struct { s8 value; } PakModeByte;
 extern s8 g_pakPreviewNoteType;
-extern char *g_localizedPakStatusHeading[];
+extern u8 *g_localizedPakStatusHeading[];
 extern char *g_pakStatusDefaultText[];
 extern char *g_pakStatusStateOneText[];
 extern char *g_pakStatusStateTwoText[];

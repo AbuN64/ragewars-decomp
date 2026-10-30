@@ -96,7 +96,7 @@ s32 InstHdr_UsesGroundRotation(void *);
 s32 InstHdr_GetActorMotionState(void *);
 
  /* extern */
-void Graphu64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, f32 *);
+void Graphu64_InterpolateQuaternionWithLinearFallback(struct CQuatern_t *, f32, struct CQuatern_t *, struct CQuatern_t *);
 
  /* extern */
 

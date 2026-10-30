@@ -712,7 +712,7 @@ struct CShakeAxis_t;
 extern u32 Weapon_UpdateShakeAxis(struct CShakeAxis_t *state);
 
 int Cinema_IsSequenceInWindow(void);
-f32 Cinema_GetSequenceResponse(void *);
+f32 Cinema_GetSequenceResponse();
 void Graphu64_InvertAffineMatrix(f32 *, f32 *);
 void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 void Graphu64_MultiplyMatrices(f32 *, f32 *, f32 *);
@@ -725,7 +725,7 @@ void Graphu64_GetMatrixTranslation(char *, float *);
 void BuildYawMatrix(void *, f32);
 void PitchMatrix(void *, f32);
 void YawMatrix(void *, f32);
-void MatrixFromQuaternion(f32 *, f32 *);
+void MatrixFromQuaternion(struct CQuatern_t *, f32 *);
 
 extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
 f32 Region_GetPolygonHeight(void *, f32, f32);
@@ -1633,7 +1633,7 @@ extern s32 g_lightingBufferIndex;
 extern f32 g_frameElapsedTime;
 extern char g_cameraViewDisplayListFirst;
 extern char g_cameraViewDisplayListSecond_de;
-extern void Cache_MarkResourceInUse(s32, s32);
+extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern void Gsky_DrawViewportEffectNoOp(RacerViewport *, s32);
 extern void Menu_DispatchMenuListCallback(void *);
 extern s32 Cinema_IsSequenceInWindow(void);

@@ -22,7 +22,7 @@ extern s8 g_profileSlotEnabledFlags[];
 
 
 
-extern struct MatchSetupGlobals g_gameSettings;
+extern s32 g_gameSettings;
 
 void PAKInterface_CopyActiveProfilesToPakSlots(s32 player) {
     struct MatchSetupGlobals *globals;

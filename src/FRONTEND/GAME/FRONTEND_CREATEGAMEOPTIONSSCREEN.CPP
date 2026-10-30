@@ -64,7 +64,7 @@ struct SliderScreen {
 
 extern struct SliderScreen *g_gameOptionsScreenState;
 typedef struct SliderSettings { char pad0[0x10]; s32 value; char pad14[7]; u8 first; char pad1C[0x564]; u8 second; } SliderSettings;
-extern SliderSettings g_gameSettings;
+extern s32 g_gameSettings;
 extern struct SliderScreen *Cache_AllocateMemory(s32);
 extern void SmpButton_WrapButtonWidget(s32);
 extern s32 SmpButton_CreateListWidget(s32, s32);

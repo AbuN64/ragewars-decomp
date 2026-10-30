@@ -41,7 +41,7 @@ typedef struct EquipEntry {
 } EquipEntry;
 extern EquipEntry g_loadoutWeaponItems[];
 
-extern HudStatusShared_Settings g_gameSettings;
+extern s32 g_gameSettings;
 
 
 extern s32 Player_HasProfileUnlockFlag(s32 record, s32 item);

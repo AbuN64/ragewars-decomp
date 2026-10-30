@@ -20,7 +20,7 @@ extern u8 g_savedPlayerModelLighting[];
 extern u8 g_savedSecondaryMenuByteOptions[];
 extern u8 g_sceneLightDirection[];
 extern f32 Gu_Sqrtf(f32);
-extern void Graphu64_ScaleVector(f32 *, f32 *, f32);
+extern void Graphu64_ScaleVector(struct CVector3_t *,struct CVector3_t *,f32);
 void Scene_LoadSceneLight(SceneLightLoadView *scene) {
     s32 i;
     u8 c;

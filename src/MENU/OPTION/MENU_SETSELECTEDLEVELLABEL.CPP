@@ -3,7 +3,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 
-extern s32 g_gameSettings[];
+extern s32 g_gameSettings;
 
 extern s32 g_selectedLevel0Label;
 

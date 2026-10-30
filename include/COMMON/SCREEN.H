@@ -12,7 +12,7 @@ extern struct NumberPadScreen *g_extraOptionsScreen;
 extern void MarkMenuEventHandled(void);
 extern s32 Menu_GetFocusedElementId(void);
 extern void Menu_ShowExtraOptionsPanel(void);
-extern void SmpSlider_SetTransitionMode(s32, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 extern void Menu_ApplyExtraOptionFlags(void);
 extern void Menu_OpenOptionsKeypad(void);
 #endif

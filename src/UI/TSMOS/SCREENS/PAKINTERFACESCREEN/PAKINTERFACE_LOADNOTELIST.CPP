@@ -30,13 +30,13 @@ extern void PAKInterface_ScrollNoteList(s32, s32);
 enum { PAK_RESOURCE_2D7 = 750, PAK_RESOURCE_2D8 = 749, PAK_RESOURCE_2DB = 746, PAK_RESOURCE_2DC = 745, PAK_RESOURCE_2DD = 747 };
 #elif defined(VERSION_EU)
 
-extern u8 g_gameSettings[];
+extern s32 g_gameSettings;
 
 extern char *g_pakDefaultNoteNamesLocalized[], *g_slotSelectionTextReferenceShared7[];
 enum { PAK_RESOURCE_2D7 = 727, PAK_RESOURCE_2D8 = 728, PAK_RESOURCE_2DB = 731, PAK_RESOURCE_2DC = 732, PAK_RESOURCE_2DD = 733 };
 #elif defined(VERSION_EU_X)
 
-extern u8 g_gameSettings[];
+extern s32 g_gameSettings;
 
 extern char *g_pakUnnamedNoteTextsEuX[], *g_slotSelectionTextReferenceShared6[];
 

@@ -86,7 +86,7 @@ void Gobjinst_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void 
 /* GOBJINST_13.CPP */
 extern CQuatern Gobjinst_BuildActorAimQuaternion(void *actor);
 
-extern void MatrixFromQuaternion(void *quaternion, void *matrixOut);
+extern void MatrixFromQuaternion(struct CQuatern_t *, f32 *);
 
 extern void Barrel_UpdateActorController(void *a, void *b);
 

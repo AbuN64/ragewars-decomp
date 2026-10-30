@@ -20,7 +20,7 @@
 
 extern MenuFadeWidget *Cache_AllocateMemory(s32);
 extern void SmpSlider_EnableTransition(MenuFadeWidget *);
-extern void SmpSlider_SetTransitionMode(MenuFadeWidget *, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 extern void Node_InsertWidgetBefore(MenuFadeWidget *, MenuFadeWidget *);
 
 MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {

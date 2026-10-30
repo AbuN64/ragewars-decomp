@@ -42,7 +42,7 @@ extern s32 Insthdr_IsInactiveOrCollisionOption4(ActorInstanceHeader *);
 extern s32 Insthdr_GetModelCollisionFlag8(ActorInstanceHeader *);
 
 
-extern f32 Gobjinst_GetActorHeight(ActorInstanceHeader *);
+extern f32 Gobjinst_GetActorHeight(void *);
 
 extern CollisionState g_currentActorInstance;
 

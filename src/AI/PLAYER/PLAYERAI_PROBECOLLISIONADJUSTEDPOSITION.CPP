@@ -23,7 +23,7 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo g_defaultProbeMotionSettings;
 
-extern f32 Gobjinst_GetActorHeight(ActorInstanceHeader *);
+extern f32 Gobjinst_GetActorHeight(void *);
 
 extern s32 Unicol_MoveActorWithCollision(ActorInstanceHeader *, CVector3, CollisionInfo *);
 

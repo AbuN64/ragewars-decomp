@@ -5,7 +5,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 struct CacheResourceNode;
-extern void Cache_MarkResourceInUse(s32 heap, struct CacheResourceNode *resource);
+extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 
 extern char g_GameObject_BuildLitActorResourceAddress;
 extern char s_actorLitModelResourceTag;

@@ -11,7 +11,7 @@ struct ContactNode {
     u8 pad0[0x16E0];
     ContactNode *next; /* 0x16E0 */
 };
-extern ContactNode *g_transientPlayerList;
+extern struct SharedPlayer *g_transientPlayerList;
 static inline void dispatchEffect(void *object, void *source, s32 effect, CVector3 position, ContactEffectStyle style) {
     if (g_effectCallbackFlags[effect].handler != 0) {
         g_effectCallbackFlags[effect].handler(object, source, effect, position, style);

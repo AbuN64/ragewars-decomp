@@ -1,7 +1,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 
-extern void *g_transientPlayerList;
+extern struct SharedPlayer *g_transientPlayerList;
 
 
 

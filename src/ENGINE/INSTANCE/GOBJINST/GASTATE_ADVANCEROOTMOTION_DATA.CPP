@@ -49,7 +49,7 @@ extern s32 *Gobjinst_RequestAnimatedModelVariant(char *, s8);
 
 extern void Graphu64_ConvertMatrixToFloat(f32 *, char *);
 
-extern void Events_DeliverContactEffect(char *, char *, u16, s32, CVector3, struct IntPair);
+extern void Events_DeliverContactEffect(void *source, void *target, s32 effect, s32 delay, struct CVector3_t position, struct IntPair payload);
 
 /* Returns an actor's aiming orientation: a controlled actor turns a quarter turn about the vertical from its
  * weapon's orientation at 0x140, or from the player's own orientation from Player_BuildPlayerOrientation when unarmed; an
@@ -70,7 +70,7 @@ extern void Player_BuildPlayerOrientation(void *, CQuatern *);
 
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
-extern f32 Gobjinst_GetActorHeight(char *);
+extern f32 Gobjinst_GetActorHeight(void *);
 
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 

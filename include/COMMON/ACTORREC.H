@@ -7,7 +7,7 @@
 struct ActorRec;
 typedef struct ActorRec ActorRec;
 
-extern float g_pointCentroidUnitScale;
+extern const float g_pointCentroidUnitScale;
 
 struct ObjNavComputeScaledPointCentroid;
 struct ObjNavComputeScaledPointCentroid {

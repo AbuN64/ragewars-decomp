@@ -27,7 +27,7 @@ extern u8 *g_weaponLockedNoticeTextEuX[];
 extern WeaponActionRecord g_weaponActionRecords[];
 extern MatchRewardsRecord g_localPlayerProfiles[];
 
-extern u8 *g_weaponLockedNoticeText[];
+extern s32 g_weaponLockedNoticeText;
 
 
 extern s32 Weaponai_FindNextUsableWeapon(void *);

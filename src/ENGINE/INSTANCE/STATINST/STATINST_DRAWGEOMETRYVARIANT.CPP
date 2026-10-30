@@ -37,7 +37,7 @@ extern void Cache_TouchResourceByKey(s32 cache, s32 resourceKey);
 extern s32 *Geometry_CollectMaterialResources(void **modelResource, s32 variation, s32 *resourcesOut);
 
 
-extern void Cache_MarkResourceInUse(s32, s32);
+extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 
 extern void Link_AnimateVertexColors(void *object, void *colors);
 

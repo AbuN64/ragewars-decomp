@@ -92,7 +92,7 @@ s32 Pickup_CanCollect(s32 prop, ActorPickupCanCollect *actor) {
 }
 typedef struct Handler Handler;
 /* Dispatches an item effect with the given id to an actor that can receive it: looks the id up in each item handler table in turn (g_pickupPowerupDefinitions, g_pickupWeaponDefinitions, g_pickupHealthDefinitions, g_pickupSingleDefinitions, g_pickupAmmoDefinitions, g_pickupTargetedDefinitions and g_pickupSpecialDefinitions) and returns the first nonzero handler result, clearing the given target from every actor's two lock-on slots after the g_pickupAmmoDefinitions handler. */
-extern Other *g_transientPlayerList;
+extern struct SharedPlayer *g_transientPlayerList;
 static inline Handler *find_handler(char *table, s32 count, s32 size, s32 id) {
     Handler *entry;
     s32 i;
@@ -185,7 +185,7 @@ typedef struct DraftPlayerAB97C {
 typedef struct DraftPickupAB97C { u8 **label; s16 pad4, sound, event, padA, index, ammoType, ammoAmount; } DraftPickupAB97C;
 extern DraftWeaponAB97C *g_weaponInfoByType[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-extern void *Camera_PostScreenMessage(void *, void *, u8 *);
+extern struct CCameraText_t *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text);
 extern s32 Player_AddAmmo(void *, s32, s32), SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 
 s32 Pickup_ApplyWeaponPickup(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)

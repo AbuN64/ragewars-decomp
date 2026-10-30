@@ -183,7 +183,7 @@ extern float k_cameraInputSurfaceLowerDistance;
 
 extern float k_cameraInputSurfaceUpperDistance;
 
-extern void Gsky_StartFade(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
+extern void Gsky_StartFade(struct PlayerFlashView *, s32, s32, s32, s32, s32, s32, s32);
 
 
 extern f32 g_cameraViewportLeftInset;

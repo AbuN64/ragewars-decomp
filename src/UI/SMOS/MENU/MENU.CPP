@@ -75,7 +75,7 @@ typedef s32 (*FuncPtr)(s32, s32, s32, s32);
 
 /** Mark the global object's field at offset 0x520. */
 
-s32 SmXlate_SwitchScreen(s32);
+void SmXlate_SwitchScreen(s32);
 
 void Menu_PopScreen(void) {
     s32 index;

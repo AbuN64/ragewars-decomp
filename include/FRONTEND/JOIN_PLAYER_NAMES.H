@@ -4,7 +4,8 @@
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 typedef struct JoinNameEntry { u8 **names; s32 pad; } JoinNameEntry;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 *g_characterPreviewTextReferenceEu1[], *g_slotSelectionTextReferenceEu4[];
+extern char g_characterPreviewTextReferenceEu1[];
+extern *g_slotSelectionTextReferenceEu4[];
 extern JoinNameEntry g_joinPlayerNamesLocalized[];
 #else
 extern u8 *g_characterPreviewTextReferenceShared1[], *g_slotSelectionTextReferenceShared3[];

@@ -274,15 +274,15 @@ extern char s_pakAssertListItem[];
 #endif
 /* Versioned setup strings and control identifiers from the native menu tables. */
 #if defined(VERSION_US)
-extern s8 g_modeToken[8];
+extern const char g_modeToken[];
 #elif defined(VERSION_EU)
-extern s8 g_modeToken[8];
+extern const char g_modeToken[];
 #elif defined(VERSION_EU_X)
-extern s8 g_modeToken[8];
+extern const char g_modeToken[];
 #elif defined(VERSION_DE)
-extern s8 g_modeToken[8];
+extern const char g_modeToken[];
 #else
-extern s8 g_modeToken[8];
+extern const char g_modeToken[];
 #endif
 #if defined(VERSION_DE)
 extern s32 g_pakProfileOperationPhase;

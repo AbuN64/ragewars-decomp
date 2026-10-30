@@ -29,9 +29,9 @@ extern SharedPlayer *g_transientPlayerList;
 
 s32 Unicol_MoveActorWithCollision(Shared_Particle *particle, CVector3 pos, s32 *flags);
 
-f32 Gobjinst_GetActorHeight(SharedPlayer *player);
+f32 Gobjinst_GetActorHeight(void *);
 
-void Graphu64_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
+void Graphu64_SubtractVectors(struct CVector3_t *,struct CVector3_t *,struct CVector3_t *);
 
 
 f32 Graphu64_GetSquaredDistance(CVector3 *a, CVector3 *b);
@@ -79,8 +79,8 @@ extern CVector3 g_particleZeroVector;
 
 extern s32 Region_GetModelBlendByte59(s32);
 
-extern void Events_DeliverContactEffect(void *, void *, u16, s32, CVector3, struct IntPair);
-extern struct CacheResourceBlockView Graphu64_BuildDirectionQuaternion(CVector3 *);
+extern void Events_DeliverContactEffect(void *source, void *target, s32 effect, s32 delay, struct CVector3_t position, struct IntPair payload);
+extern struct CQuatern_t Graphu64_BuildDirectionQuaternion(struct CVector3_t *);
 
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 #include "ENGINE/PARTICLE.H"
@@ -639,7 +639,7 @@ void Particle_HandleMaterialContact(Shared_Particle *particle) {
 }
 
 typedef struct ImpactContext { CVector3 position; char padC[0xE8 - 0xC]; CVector3 normal; } ImpactContext;
-extern ImpactContext g_particleContactState;
+extern struct ParticleContactStateLayout g_particleContactState;
 extern char g_actorParticleScene, g_dynamicLightPool;
 extern s32 Barrel_GetImpactSlot(void *);
 extern void Particle_UpdateMatrix(void *);

@@ -30,7 +30,7 @@ extern void Cache_ReleaseResource(void *cache, void *resource);
 
 
 
-extern Group g_transientPlayerList;
+extern struct SharedPlayer *g_transientPlayerList;
 
 extern struct { struct GameplayCamera *camera; } g_gameplayCameraList;
 

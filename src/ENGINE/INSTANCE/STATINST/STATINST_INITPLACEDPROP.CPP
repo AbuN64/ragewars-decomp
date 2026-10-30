@@ -13,7 +13,7 @@ extern s32 g_gameFrameCounter;
 extern void Insthdr_ResetInstanceRenderIndices(PlacedProp *, PlacedPropRecord *, s32, char *);
 extern PropGeometry *Scene_GetActorDefinition(void *, s32);
 
-extern void MatrixFromQuaternion(f32 *, char *);
+extern void MatrixFromQuaternion(struct CQuatern_t *, f32 *);
 extern void ScaleMatrixLocal(char *, f32, f32, f32);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(char *);

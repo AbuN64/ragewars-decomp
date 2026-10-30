@@ -57,7 +57,7 @@ extern s32 Portal_FindNearestPointIndex(void *, void *);
 
 extern CVector3 *Portal_GetGraphPoint(void *, s32);
 
-extern void Graphu64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(struct CVector3_t *,struct CVector3_t *,f32);
 
 extern s32 SetN64_SpawnModelEffect(s32, s32, s32, CVector3, CVector3, s32, f32);
 

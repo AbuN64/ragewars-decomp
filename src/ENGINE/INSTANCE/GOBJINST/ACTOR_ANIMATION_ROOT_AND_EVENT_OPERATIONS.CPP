@@ -34,7 +34,7 @@ void Gobjinst_NoOperationAnimationHookAlternateUs(void) {
 
 extern CROMEventEntry *Gastate_GetAnimationEventEntries(void *);
 
-extern void Events_DeliverContactEffect(char *, char *, u16, s32, CVector3, struct IntPair);
+extern void Events_DeliverContactEffect(void *source, void *target, s32 effect, s32 delay, struct CVector3_t position, struct IntPair payload);
 
 extern void Cache_UnlockResource(s32 cache, s32 resource);
 extern void Polytrak2_SampleVectorTrack(CGameAnimateState_t *, s32, f32, f32 *);

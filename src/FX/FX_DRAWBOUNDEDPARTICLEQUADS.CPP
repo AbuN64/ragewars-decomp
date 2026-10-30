@@ -55,7 +55,7 @@ s32 Fx_UpdateTimedCallbacks(s32);
 extern s32 g_particleQuadDisplayListState;
 
 
-extern u32 g_lightingBufferIndex;
+extern s32 g_lightingBufferIndex;
 
 extern void CopyMatrix(f32 *destinationMatrix, f32 *sourceMatrix);
 

@@ -21,7 +21,7 @@
 s32 CCollision_TestSegmentPolygon(CapsuleSweep *ray, PolygonCCollisionTestSegmentPolygon *poly, s32 keep);
 void Player_ReleaseObjectHandles(struct ItemsHandleOwner *);
 void Graphu64_InterpolateVector(CVector3 *, f32, void *, void *);
-void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, ContactEffectStyle);
+void Events_DeliverContactEffect(void *source, void *target, s32 effect, s32 delay, struct CVector3_t position, struct IntPair payload);
 s32 Particle_GetEffectResource(void *);
 
 s32 CInstanceCollision_TestBoxFaces(BoxContactRay *ray, void *unused, BoxContactActor *actor, CVector3 *origin,

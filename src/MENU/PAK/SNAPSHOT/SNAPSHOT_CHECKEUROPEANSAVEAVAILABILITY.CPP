@@ -19,7 +19,7 @@
 #endif
 /* Selects a usable Controller Pak, checks its notes and free space, and opens the appropriate prompt. */
 s32 Control_AnyControllerConnected(void);
-void SetN64_CommitSessionInputs(s32);
+void SetN64_CommitSessionInputs(void *);
 void Note_ProbeStatus(s32);
 s32 Note_GetStatus(s32);
 s32 Note_CountFreeNotes(s32, s32 *);
