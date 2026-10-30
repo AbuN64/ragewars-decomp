@@ -7,7 +7,7 @@ extern char g_PlayerSequenceRunEndUpdateCallbackAddressUsVariant9[];
 extern char g_PlayerSequence20StartCallbackAddressUs[];
 #if defined(VERSION_US_REV1)
 void * g_playerStateNormalCallbacks33Words[2] = {
-    (void *)g_PlayerSequenceRunEndUpdateCallbackAddressUsVariant9, (void *)g_PlayerSequence20StartCallbackAddressUs
+    (void *)&g_PlayerSequenceRunEndUpdateCallbackAddressUsVariant9, (void *)&g_PlayerSequence20StartCallbackAddressUs
 };
 #endif
 #endif

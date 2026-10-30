@@ -29,10 +29,10 @@ extern char addrLow_Link_CaptureActorTransform[];
 extern char addrLow_Link_DeactivateActorState[];
 #if defined(VERSION_US_REV1)
 void * g_ActorStateEndUsRev1EncodedWords[31] = {
-    0, 0, 0, 0, 0, 0, 0, (void *)addrLow_Triggered_InitializeMotionState,
-    (void *)addrLow_Triggered_ResetMotionState, 0, 0, (void *)addrLow_PlayerMatrix_RequestOpen, 0, (void *)addrLow_PlayerMatrix_RequestClose, 0, (void *)addrLow_PlayerMatrix_DeactivateMotion,
-    (void *)addrLow_PlayerMatrix_DisableEventActor, (void *)addrLow_PlayerMatrix_ActivateMotion, (void *)addrLow_PlayerMatrix_EnableEventActor, (void *)addrLow_PlayerMatrix_EnableCollisionFlags, 0, (void *)addrLow_PlayerMatrix_MarkOpenAndResetTimer, 0, (void *)addrLow_PlayerMatrix_MarkCloseRequested,
-    0, (void *)addrLow_PlayerMatrix_ClearCollisionBit, 0, (void *)addrLow_Link_CaptureActorTransform, 0, (void *)addrLow_Link_DeactivateActorState, 0
+    0, 0, 0, 0, 0, 0, 0, (void *)&addrLow_Triggered_InitializeMotionState,
+    (void *)&addrLow_Triggered_ResetMotionState, 0, 0, (void *)&addrLow_PlayerMatrix_RequestOpen, 0, (void *)&addrLow_PlayerMatrix_RequestClose, 0, (void *)&addrLow_PlayerMatrix_DeactivateMotion,
+    (void *)&addrLow_PlayerMatrix_DisableEventActor, (void *)&addrLow_PlayerMatrix_ActivateMotion, (void *)&addrLow_PlayerMatrix_EnableEventActor, (void *)&addrLow_PlayerMatrix_EnableCollisionFlags, 0, (void *)&addrLow_PlayerMatrix_MarkOpenAndResetTimer, 0, (void *)&addrLow_PlayerMatrix_MarkCloseRequested,
+    0, (void *)&addrLow_PlayerMatrix_ClearCollisionBit, 0, (void *)&addrLow_Link_CaptureActorTransform, 0, (void *)&addrLow_Link_DeactivateActorState, 0
 };
 #endif
 #endif

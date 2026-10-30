@@ -8,7 +8,7 @@ extern char g_defaultActorCollisionInfo[];
 /* ROM-grounded data: rodata/unresolved/800CD4C4_unclaimed_CE0F0_unclaimed_CE104_unclaimed_CE10C */
 #if defined(VERSION_US_REV1)
 void * g_ActorStateAnimationFragmentEncodedWords[3] = {
-    (void *)addrLow_Action_UpdateBreakableProximity, (void *)&g_defaultActorCollisionInfo, (void *)addrLow_Actionai_UpdateHealthFlag
+    (void *)&addrLow_Action_UpdateBreakableProximity, (void *)&g_defaultActorCollisionInfo, (void *)&addrLow_Actionai_UpdateHealthFlag
 };
 #endif
 

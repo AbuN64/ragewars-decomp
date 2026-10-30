@@ -41,7 +41,7 @@ void * g_audioDiskTransferLinkTableEntryPointer_eu[1] = {
 extern char g_osaisetfrequencyDataConstantWords[];
 #if defined(VERSION_DE)
 void * g_osAiSetFrequencyConstantWordsPointer_de[1] = {
-    (void *)g_osaisetfrequencyDataConstantWords
+    (void *)&g_osaisetfrequencyDataConstantWords
 };
 #endif
 #endif

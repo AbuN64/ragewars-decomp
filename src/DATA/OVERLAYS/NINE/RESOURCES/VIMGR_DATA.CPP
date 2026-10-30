@@ -32,7 +32,7 @@ extern char g_Frontend_HandlePlayModeShortcutPackedAddress242[];
 extern char g_Frontend_ConsumePlayModeEventPackedAddress242[];
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_MenuEventHandlersPointerWords7[5] = {
-    { 3587, 3, (ResidentEventHandler)(void *)g_Frontend_DestroyPlayModeMenuPackedAddress242 }, { 2, 3, (ResidentEventHandler)(void *)g_Frontend_ConsumePlayModeEventPackedAddress242 }, { 1, 3, (ResidentEventHandler)(void *)g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24 }, { 10, 3, (ResidentEventHandler)(void *)g_Frontend_HandlePlayModeShortcutPackedAddress242 }, { 0, 0, (ResidentEventHandler)0 }
+    { 3587, 3, (ResidentEventHandler)(void *)&g_Frontend_DestroyPlayModeMenuPackedAddress242 }, { 2, 3, (ResidentEventHandler)(void *)&g_Frontend_ConsumePlayModeEventPackedAddress242 }, { 1, 3, (ResidentEventHandler)(void *)&g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24 }, { 10, 3, (ResidentEventHandler)(void *)&g_Frontend_HandlePlayModeShortcutPackedAddress242 }, { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #endif

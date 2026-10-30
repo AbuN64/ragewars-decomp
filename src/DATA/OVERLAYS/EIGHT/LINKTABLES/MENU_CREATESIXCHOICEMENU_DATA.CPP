@@ -101,12 +101,12 @@ extern char g_menu_ChooseSixChoiceOptionEntry[];
 extern char g_menu_CancelSixChoiceMenuEntry[];
 #if defined(VERSION_US)
 ResidentEventHandlerEntry g_MenuCreatesixchoicemenuEncodedWords[6] = {
-    { 3592, 27, (ResidentEventHandler)(void *)g_Menu_UpdateSixChoiceMenuAddress }, { 3590, 27, (ResidentEventHandler)(void *)g_menu_CreateSixChoiceMenuEntry }, { 3587, 27, (ResidentEventHandler)(void *)g_menu_DestroySixChoiceMenuEntry }, { 2, 27, (ResidentEventHandler)(void *)g_menu_CancelSixChoiceMenuEntry }, { 1, 27, (ResidentEventHandler)(void *)g_menu_ChooseSixChoiceOptionEntry }, { 0, 0, (ResidentEventHandler)0 }
+    { 3592, 27, (ResidentEventHandler)(void *)&g_Menu_UpdateSixChoiceMenuAddress }, { 3590, 27, (ResidentEventHandler)(void *)&g_menu_CreateSixChoiceMenuEntry }, { 3587, 27, (ResidentEventHandler)(void *)&g_menu_DestroySixChoiceMenuEntry }, { 2, 27, (ResidentEventHandler)(void *)&g_menu_CancelSixChoiceMenuEntry }, { 1, 27, (ResidentEventHandler)(void *)&g_menu_ChooseSixChoiceOptionEntry }, { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_MenuCreatesixchoicemenuEncodedWords[6] = {
-    { 3592, 27, (ResidentEventHandler)(void *)g_Menu_UpdateSixChoiceMenuAddress }, { 3590, 27, (ResidentEventHandler)(void *)g_menu_CreateSixChoiceMenuEntry }, { 3587, 27, (ResidentEventHandler)(void *)g_menu_DestroySixChoiceMenuEntry }, { 2, 27, (ResidentEventHandler)(void *)g_menu_CancelSixChoiceMenuEntry }, { 1, 27, (ResidentEventHandler)(void *)g_menu_ChooseSixChoiceOptionEntry }, { 0, 0, (ResidentEventHandler)0 }
+    { 3592, 27, (ResidentEventHandler)(void *)&g_Menu_UpdateSixChoiceMenuAddress }, { 3590, 27, (ResidentEventHandler)(void *)&g_menu_CreateSixChoiceMenuEntry }, { 3587, 27, (ResidentEventHandler)(void *)&g_menu_DestroySixChoiceMenuEntry }, { 2, 27, (ResidentEventHandler)(void *)&g_menu_CancelSixChoiceMenuEntry }, { 1, 27, (ResidentEventHandler)(void *)&g_menu_ChooseSixChoiceOptionEntry }, { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #endif

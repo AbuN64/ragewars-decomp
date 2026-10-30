@@ -23,7 +23,7 @@ struct {
     void * callback;
 } g_ResourcesEncodedWordsBlock8 __attribute__((aligned(4))) = {
     2,
-    (void *)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant2
+    (void *)&addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant2
 };
 typedef char g_ResourcesEncodedWordsBlock8SizeCheck[(sizeof(g_ResourcesEncodedWordsBlock8) == 8) ? 1 : -1];
 #endif
@@ -34,7 +34,7 @@ typedef char g_ResourcesEncodedWordsBlock8SizeCheck[(sizeof(g_ResourcesEncodedWo
 /* ROM-grounded data: rodata/unresolved/800CF51C_unclaimed_D0144 */
 #if defined(VERSION_US_REV1)
 void * g_ResourcesEncodedWordsBlock33[2] = {
-    (void *)Weapon_UpdateNormalFireAction_Address, 0
+    (void *)&Weapon_UpdateNormalFireAction_Address, 0
 };
 #endif
 
@@ -74,7 +74,7 @@ typedef char g_ResourcesEncodedWordsBlock25SizeCheck[(sizeof(g_ResourcesEncodedW
 /* ROM-grounded data: rodata/unresolved/800CF51C_unclaimed_D0144_unclaimed_D015C_unclaimed_D0164 */
 #if defined(VERSION_US_REV1)
 void * g_ResourcesEncodedWordsBlock21[2] = {
-    (void *)Weapon_UpdateNormalFireAction_Address, 0
+    (void *)&Weapon_UpdateNormalFireAction_Address, 0
 };
 #endif
 #endif
@@ -107,7 +107,7 @@ struct {
     void * callback;
 } g_ResourcesEncodedWordsBlock45 __attribute__((aligned(4))) = {
     4,
-    (void *)Weapon_InitializeChargeAndStartupCues_Address
+    (void *)&Weapon_InitializeChargeAndStartupCues_Address
 };
 typedef char g_ResourcesEncodedWordsBlock45SizeCheck[(sizeof(g_ResourcesEncodedWordsBlock45) == 8) ? 1 : -1];
 #endif
@@ -118,7 +118,7 @@ typedef char g_ResourcesEncodedWordsBlock45SizeCheck[(sizeof(g_ResourcesEncodedW
 /* ROM-grounded data: rodata/unresolved/800CF51C_unclaimed_D0144_unclaimed_D015C_unclaimed_D0164_unclaimed_D017C_unclaimed_D0184 */
 #if defined(VERSION_US_REV1)
 void * g_ResourcesEncodedWordsBlock57[2] = {
-    (void *)Weaponai_UpdateChargeAndRepeatCue_Address, 0
+    (void *)&Weaponai_UpdateChargeAndRepeatCue_Address, 0
 };
 #endif
 

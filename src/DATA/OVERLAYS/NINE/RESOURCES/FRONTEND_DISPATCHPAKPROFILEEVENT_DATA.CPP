@@ -119,12 +119,12 @@ ResidentEventHandlerEntry D_src_95297a43[14] = {
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
 #if defined(VERSION_US)
 ResidentEventHandlerEntry g_FrontendDispatchpakprofileeventPointerWords1[3] = {
-    { 3591, 19, (ResidentEventHandler)(void *)g_Frontend_ReturnProfileEventZeroPackedAddress242 }, { 3594, 19, (ResidentEventHandler)(void *)g_Frontend_UpdatePakScreenExitPackedAddress242 }, { 3592, 19, (ResidentEventHandler)(void *)g_Frontend_UpdatePakScreenPanelsPackedAddress242 }
+    { 3591, 19, (ResidentEventHandler)(void *)&g_Frontend_ReturnProfileEventZeroPackedAddress242 }, { 3594, 19, (ResidentEventHandler)(void *)&g_Frontend_UpdatePakScreenExitPackedAddress242 }, { 3592, 19, (ResidentEventHandler)(void *)&g_Frontend_UpdatePakScreenPanelsPackedAddress242 }
 };
 #endif
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_FrontendDispatchpakprofileeventPointerWords1[3] = {
-    { 3591, 19, (ResidentEventHandler)(void *)g_Frontend_ReturnProfileEventZeroPackedAddress242 }, { 3594, 19, (ResidentEventHandler)(void *)g_Frontend_UpdatePakScreenExitPackedAddress242 }, { 3592, 19, (ResidentEventHandler)(void *)g_Frontend_UpdatePakScreenPanelsPackedAddress242 }
+    { 3591, 19, (ResidentEventHandler)(void *)&g_Frontend_ReturnProfileEventZeroPackedAddress242 }, { 3594, 19, (ResidentEventHandler)(void *)&g_Frontend_UpdatePakScreenExitPackedAddress242 }, { 3592, 19, (ResidentEventHandler)(void *)&g_Frontend_UpdatePakScreenPanelsPackedAddress242 }
 };
 #endif
 #endif

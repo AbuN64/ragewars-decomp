@@ -11,8 +11,8 @@ struct {
     void * reserved;
     s32 animation;
 } g_ActorStateAnimationFragmentEncodedWordsBlock3 __attribute__((aligned(4))) = {
-    (void *)addrLow_SpawnAI_DispatchSpawnChoice,
-    (void *)addrLow_MovingAI_RequestInactiveOnEvent,
+    (void *)&addrLow_SpawnAI_DispatchSpawnChoice,
+    (void *)&addrLow_MovingAI_RequestInactiveOnEvent,
     0,
     21210
 };

@@ -1,4 +1,6 @@
+#include "COMMON/FORMAT.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
 #include "TYPES.H"
 
 extern char Frontend_ActivateMatchOptionAction[];
@@ -66,11 +68,16 @@ typedef char g_FrontendCreatematchoptionsWords1SizeCheck[(sizeof(g_FrontendCreat
 /* 800E4EF4.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-unsigned int D_src_8e351802[23] = {
-    0x00000E06, 0x00000015, 0x004291D0, 0x00000E03, 0x00000015, 0x004296F4, 0x00000E0A, 0x00000015,
-    0x00429724, 0x00000002, 0x00000015, 0x004298F8, 0x00000001, 0x00000015, 0x004297F8, 0x0000000A,
-    0x00000015, 0x0042972C, 0x00000008, 0x0000036A, 0x00429970, 0x00000007, 0x0000036A,
+#if defined(VERSION_DE)
+struct {
+    ResidentEventHandlerEntry eventHandlers0[7];
+    u8 alignmentFill84[8];
+} D_src_8e351802 __attribute__((aligned(4))) = {
+    { { 3590, 21, (ResidentEventHandler)(void *)((char *)&Frontend_CreateMatchOptions - 0x80000000U) }, { 3587, 21, (ResidentEventHandler)(void *)((char *)&Frontend_DestroyMatchOptions - 0x80000000U) }, { 3594, 21, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnMatchOptionsEventZero - 0x80000000U) }, { 2, 21, (ResidentEventHandler)(void *)((char *)&Frontend_ExitMatchOptions - 0x80000000U) }, { 1, 21, (ResidentEventHandler)(void *)((char *)&Frontend_ActivateMatchOptionAction - 0x80000000U) }, { 10, 21, (ResidentEventHandler)(void *)((char *)&Frontend_ResetMatchOptionOnEvent - 0x80000000U) }, { 8, 874, (ResidentEventHandler)(void *)((char *)&Frontend_RefreshMatchSlotsOnZeroEventAlt - 0x80000000U) } },
+    { 0x0, 0x0, 0x0, 0x7, 0x0, 0x0, 0x3, 0x6a }
 };
+typedef char D_src_8e351802SizeCheck[(sizeof(D_src_8e351802) == 92) ? 1 : -1];
+#endif
 #endif
 #if defined(VERSION_EU)
 #if defined(VERSION_EU)
@@ -102,13 +109,13 @@ extern char g_Frontend_RefreshMatchSlotsOnZeroEventPackedAddress242[];
 extern char g_Frontend_RefreshMatchSlotsOnZeroEventAltPackedAddress242[];
 #if defined(VERSION_US)
 ResidentEventHandlerEntry g_FrontendCreatematchoptionsPointerWords1[9] = {
-    { 3590, 21, (ResidentEventHandler)(void *)g_Frontend_CreateMatchOptionsPackedAddress242 }, { 3587, 21, (ResidentEventHandler)(void *)g_Frontend_DestroyMatchOptionsPackedAddress24 }, { 3594, 21, (ResidentEventHandler)(void *)g_Frontend_ReturnMatchOptionsEventZeroPackedAddress242 }, { 2, 21, (ResidentEventHandler)(void *)g_Frontend_ExitMatchOptionsPackedAddress242 }, { 1, 21, (ResidentEventHandler)(void *)g_Frontend_ActivateMatchOptionActionPackedAddress242 }, { 10, 21, (ResidentEventHandler)(void *)g_Frontend_ResetMatchOptionOnEventPackedAddress242 }, { 8, 878, (ResidentEventHandler)(void *)g_Frontend_RefreshMatchSlotsOnZeroEventAltPackedAddress242 }, { 7, 878, (ResidentEventHandler)(void *)g_Frontend_RefreshMatchSlotsOnZeroEventPackedAddress242 },
+    { 3590, 21, (ResidentEventHandler)(void *)&g_Frontend_CreateMatchOptionsPackedAddress242 }, { 3587, 21, (ResidentEventHandler)(void *)&g_Frontend_DestroyMatchOptionsPackedAddress24 }, { 3594, 21, (ResidentEventHandler)(void *)&g_Frontend_ReturnMatchOptionsEventZeroPackedAddress242 }, { 2, 21, (ResidentEventHandler)(void *)&g_Frontend_ExitMatchOptionsPackedAddress242 }, { 1, 21, (ResidentEventHandler)(void *)&g_Frontend_ActivateMatchOptionActionPackedAddress242 }, { 10, 21, (ResidentEventHandler)(void *)&g_Frontend_ResetMatchOptionOnEventPackedAddress242 }, { 8, 878, (ResidentEventHandler)(void *)&g_Frontend_RefreshMatchSlotsOnZeroEventAltPackedAddress242 }, { 7, 878, (ResidentEventHandler)(void *)&g_Frontend_RefreshMatchSlotsOnZeroEventPackedAddress242 },
     { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_FrontendCreatematchoptionsPointerWords1[9] = {
-    { 3590, 21, (ResidentEventHandler)(void *)g_Frontend_CreateMatchOptionsPackedAddress242 }, { 3587, 21, (ResidentEventHandler)(void *)g_Frontend_DestroyMatchOptionsPackedAddress24 }, { 3594, 21, (ResidentEventHandler)(void *)g_Frontend_ReturnMatchOptionsEventZeroPackedAddress242 }, { 2, 21, (ResidentEventHandler)(void *)g_Frontend_ExitMatchOptionsPackedAddress242 }, { 1, 21, (ResidentEventHandler)(void *)g_Frontend_ActivateMatchOptionActionPackedAddress242 }, { 10, 21, (ResidentEventHandler)(void *)g_Frontend_ResetMatchOptionOnEventPackedAddress242 }, { 8, 878, (ResidentEventHandler)(void *)g_Frontend_RefreshMatchSlotsOnZeroEventAltPackedAddress242 }, { 7, 878, (ResidentEventHandler)(void *)g_Frontend_RefreshMatchSlotsOnZeroEventPackedAddress242 },
+    { 3590, 21, (ResidentEventHandler)(void *)&g_Frontend_CreateMatchOptionsPackedAddress242 }, { 3587, 21, (ResidentEventHandler)(void *)&g_Frontend_DestroyMatchOptionsPackedAddress24 }, { 3594, 21, (ResidentEventHandler)(void *)&g_Frontend_ReturnMatchOptionsEventZeroPackedAddress242 }, { 2, 21, (ResidentEventHandler)(void *)&g_Frontend_ExitMatchOptionsPackedAddress242 }, { 1, 21, (ResidentEventHandler)(void *)&g_Frontend_ActivateMatchOptionActionPackedAddress242 }, { 10, 21, (ResidentEventHandler)(void *)&g_Frontend_ResetMatchOptionOnEventPackedAddress242 }, { 8, 878, (ResidentEventHandler)(void *)&g_Frontend_RefreshMatchSlotsOnZeroEventAltPackedAddress242 }, { 7, 878, (ResidentEventHandler)(void *)&g_Frontend_RefreshMatchSlotsOnZeroEventPackedAddress242 },
     { 0, 0, (ResidentEventHandler)0 }
 };
 #endif

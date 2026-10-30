@@ -20,7 +20,7 @@ struct {
     1.0f,
     1.0f,
     (void *)((char *)&g_Ovltab6EncodedWordsBlock1 + 32),
-    (void *)addrLow_Weapon_TranslateEventSixByPitch,
+    (void *)&addrLow_Weapon_TranslateEventSixByPitch,
     0
 };
 typedef char g_OverlaysSevenConstantsRetainedPointerWords1SizeCheck[(sizeof(g_OverlaysSevenConstantsRetainedPointerWords1) == 28) ? 1 : -1];

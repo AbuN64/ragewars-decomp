@@ -6,7 +6,7 @@
 /* ROM-grounded data: src/ragewars_actor_handler_run_CEB60_us_rev1.c */
 #if defined(VERSION_US_REV1)
 void * g_ResourcesEncodedWordsBlock15[2] = {
-    (void *)addrLow_Nav_RebuildRequestedGoalRoute, 0
+    (void *)&addrLow_Nav_RebuildRequestedGoalRoute, 0
 };
 #endif
 #endif

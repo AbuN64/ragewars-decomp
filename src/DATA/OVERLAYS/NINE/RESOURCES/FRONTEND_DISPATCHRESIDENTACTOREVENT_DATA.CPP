@@ -14,7 +14,7 @@ extern char g_Frontend_ConsumeConfirmationEventPackedAddress242[];
 extern char g_Timed_UpdateTimedScreenPackedAddress242[];
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_MenuEventHandlersPointerWords2[8] = {
-    { 3591, 31, (ResidentEventHandler)(void *)g_Timed_SetConfirmationInputModePackedAddress242 }, { 3592, 31, (ResidentEventHandler)(void *)g_Frontend_ReturnConfirmationEventZeroPackedAddress242 }, { 3594, 31, (ResidentEventHandler)(void *)g_Timed_FinishPauseConfirmationTransitionPackedAddress242 }, { 3590, 31, (ResidentEventHandler)(void *)g_Frontend_CreatePauseConfirmationPackedAddress242 }, { 3587, 31, (ResidentEventHandler)(void *)g_Timed_DestroyPauseConfirmationPackedAddress242 }, { 1, 31, (ResidentEventHandler)(void *)g_Timed_UpdateTimedScreenPackedAddress242 }, { 2, 31, (ResidentEventHandler)(void *)g_Frontend_ConsumeConfirmationEventPackedAddress242 }, { 0, 0, (ResidentEventHandler)0 }
+    { 3591, 31, (ResidentEventHandler)(void *)&g_Timed_SetConfirmationInputModePackedAddress242 }, { 3592, 31, (ResidentEventHandler)(void *)&g_Frontend_ReturnConfirmationEventZeroPackedAddress242 }, { 3594, 31, (ResidentEventHandler)(void *)&g_Timed_FinishPauseConfirmationTransitionPackedAddress242 }, { 3590, 31, (ResidentEventHandler)(void *)&g_Frontend_CreatePauseConfirmationPackedAddress242 }, { 3587, 31, (ResidentEventHandler)(void *)&g_Timed_DestroyPauseConfirmationPackedAddress242 }, { 1, 31, (ResidentEventHandler)(void *)&g_Timed_UpdateTimedScreenPackedAddress242 }, { 2, 31, (ResidentEventHandler)(void *)&g_Frontend_ConsumeConfirmationEventPackedAddress242 }, { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #endif
@@ -23,7 +23,7 @@ ResidentEventHandlerEntry g_MenuEventHandlersPointerWords2[8] = {
 #if defined(VERSION_US_REV1)
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_MenuEventHandlersPointerWords3[8] = {
-    { 3591, 32, (ResidentEventHandler)(void *)g_Timed_SetConfirmationInputModePackedAddress243 }, { 3592, 32, (ResidentEventHandler)(void *)g_Frontend_ReturnConfirmationEventZeroPackedAddress243 }, { 3594, 32, (ResidentEventHandler)(void *)g_Timed_FinishPauseConfirmationTransitionPackedAddress243 }, { 3590, 32, (ResidentEventHandler)(void *)g_Frontend_CreatePauseConfirmationPackedAddress243 }, { 3587, 32, (ResidentEventHandler)(void *)g_Timed_DestroyPauseConfirmationPackedAddress243 }, { 1, 32, (ResidentEventHandler)(void *)g_Timed_UpdateTimedScreenPackedAddress243 }, { 2, 32, (ResidentEventHandler)(void *)g_Frontend_ConsumeConfirmationEventPackedAddress243 }, { 0, 0, (ResidentEventHandler)0 }
+    { 3591, 32, (ResidentEventHandler)(void *)&g_Timed_SetConfirmationInputModePackedAddress243 }, { 3592, 32, (ResidentEventHandler)(void *)&g_Frontend_ReturnConfirmationEventZeroPackedAddress243 }, { 3594, 32, (ResidentEventHandler)(void *)&g_Timed_FinishPauseConfirmationTransitionPackedAddress243 }, { 3590, 32, (ResidentEventHandler)(void *)&g_Frontend_CreatePauseConfirmationPackedAddress243 }, { 3587, 32, (ResidentEventHandler)(void *)&g_Timed_DestroyPauseConfirmationPackedAddress243 }, { 1, 32, (ResidentEventHandler)(void *)&g_Timed_UpdateTimedScreenPackedAddress243 }, { 2, 32, (ResidentEventHandler)(void *)&g_Frontend_ConsumeConfirmationEventPackedAddress243 }, { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #endif

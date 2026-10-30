@@ -6,7 +6,7 @@
 /* ROM-grounded data: src/ragewars_actor_handler_run_CE9DC_us_rev1.c */
 #if defined(VERSION_US_REV1)
 void * g_ResourcesEncodedWordsBlock23[1] = {
-    (void *)addrLow_Nav_SelectSecondAmmoGroupVariantTwo
+    (void *)&addrLow_Nav_SelectSecondAmmoGroupVariantTwo
 };
 #endif
 #endif

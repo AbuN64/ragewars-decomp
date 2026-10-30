@@ -11,8 +11,8 @@ struct {
     void * update;
 } g_controllerState11HandlerWords __attribute__((aligned(4))) = {
     11,
-    (void *)addrLow_Nav_InitTimedJumpRoute,
-    (void *)addrLow_Nav_UpdateTransientJumpRoute
+    (void *)&addrLow_Nav_InitTimedJumpRoute,
+    (void *)&addrLow_Nav_UpdateTransientJumpRoute
 };
 #endif
 #endif

@@ -51,24 +51,100 @@ unsigned int k_ItemsCopylocalizedplayernamesuffixEncodedWords[124] = {
 };
 #endif
 #ifdef VERSION_US
-unsigned int k_ItemsCopylocalizedplayernamesuffixEncodedWords[124] = {
-    0x01329803, 0x0A5C9C03, 0x2C040200, 0x0094FC00, 0x0032A403, 0x0A5CA803, 0x2C040200, 0x00B87D00,
-    0x0034B003, 0x030A5CB0, 0x032C0402, 0x0000AC7D, 0x000034B8, 0x03050A5C, 0xB8030292, 0x0132C003,
-    0x0A60C203, 0x2C040300, 0x00040000, 0x000A62C6, 0x032C0403, 0x00000400, 0x00000A60, 0xCA032C04,
-    0x03000004, 0x0000000A, 0x62CE032C, 0x04030000, 0x04000000, 0x3238040A, 0x5C38042C, 0x04020000,
-    0xAC7D0000, 0x34400404, 0x0A5C4004, 0x02920132, 0x48040A5C, 0x4C042C04, 0x020000F8, 0xCE000032,
-    0x54040A60, 0x56042C04, 0x03000004, 0x0000000A, 0x625A042C, 0x04030000, 0x04000000, 0x328C040A,
-    0x5C90042C, 0x04020000, 0xC07F0000, 0x3298040A, 0x5C98042C, 0x04020000, 0xAC7D0000, 0x34A00403,
-    0x0A5CA004, 0x02920132, 0xA8040A5C, 0xAC042C04, 0x02000000, 0xD2000032, 0xB4040A60, 0xB6042C04,
-    0x03000004, 0x0000000A, 0x62BA042C, 0x04030000, 0x04000000, 0x32EC040A, 0x5CF0042C, 0x04020000,
-    0xC07F0000, 0x32F8040A, 0x5CF8042C, 0x04020000, 0xAC7D0000, 0x34000523, 0x0A5C0405, 0x2C040200,
-    0x00B87D00, 0x00320C05, 0x34240500, 0x06030002, 0xA8000000, 0x0E070000, 0x00130000, 0x00000000,
-    0x0E0A0000, 0x00130000, 0x00000000, 0x0E080000, 0x00130000, 0x00000000, 0x0E060000, 0x00130000,
-    0x00000000, 0x0E030000, 0x00130000, 0x00000000, 0x00020000, 0x00130000, 0x00000000, 0x00010000,
-    0x00130000, 0x00000000, 0x000A0000, 0x00130000, 0x00000000, 0x000B0000, 0x00130000, 0x00000000,
-    0x00050000, 0x00130000, 0x00000000, 0x00060000, 0x00130000, 0x00000000, 0x00080000, 0x00130000,
-    0x00000000, 0x00070000, 0x00130000, 0x00000000,
+#if defined(VERSION_US)
+struct {
+    u8 precedingRecordFragment[1];
+    struct { u8 opcode; SnLe16 offset; } record0;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record1;
+    struct { u8 opcode; SnLe16 offset; } record2;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record3;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record4;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record5;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record6;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record7;
+    struct { u8 opcode; SnLe16 offset; } record8;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record9;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record10;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record11;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record12;
+    struct { u8 opcode; SnLe16 offset; } record13;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record14;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record15;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record16;
+    struct { u8 opcode; SnLe16 offset; } record17;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record18;
+    struct { u8 opcode; SnLe16 offset; } record19;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record20;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record21;
+    struct { u8 opcode; SnLe16 offset; } record22;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record23;
+    struct { u8 opcode; SnLe16 offset; } record24;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record25;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record26;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record27;
+    struct { u8 opcode; SnLe16 offset; } record28;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record29;
+    struct { u8 opcode; SnLe16 offset; } record30;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record31;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record32;
+    struct { u8 opcode; SnLe16 offset; } record33;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record34;
+    struct { u8 opcode; SnLe16 offset; } record35;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record36;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record37;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record38;
+    struct { u8 opcode; SnLe16 offset; } record39;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record40;
+    struct { u8 opcode; SnLe16 section; } record41;
+    struct { u8 opcode; SnLe16 codeSize; u8 codeFragment[158]; } record42;
+} k_ItemsCopylocalizedplayernamesuffixEncodedWords __attribute__((aligned(4))) = {
+    { 0x01 },
+    { 50, SN_LE16(920) },
+    { 10, 92, SN_LE16(924), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(64660) } } },
+    { 50, SN_LE16(932) },
+    { 10, 92, SN_LE16(936), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(32184) } } },
+    { 52, SN_LE16(944), 3 },
+    { 10, 92, SN_LE16(944), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(32172) } } },
+    { 52, SN_LE16(952), 5 },
+    { 10, 92, SN_LE16(952), { 2, SN_LE16(402) } },
+    { 50, SN_LE16(960) },
+    { 10, 96, SN_LE16(962), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(966), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 96, SN_LE16(970), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(974), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 50, SN_LE16(1080) },
+    { 10, 92, SN_LE16(1080), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(32172) } } },
+    { 52, SN_LE16(1088), 4 },
+    { 10, 92, SN_LE16(1088), { 2, SN_LE16(402) } },
+    { 50, SN_LE16(1096) },
+    { 10, 92, SN_LE16(1100), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(52984) } } },
+    { 50, SN_LE16(1108) },
+    { 10, 96, SN_LE16(1110), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(1114), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 50, SN_LE16(1164) },
+    { 10, 92, SN_LE16(1168), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(32704) } } },
+    { 50, SN_LE16(1176) },
+    { 10, 92, SN_LE16(1176), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(32172) } } },
+    { 52, SN_LE16(1184), 3 },
+    { 10, 92, SN_LE16(1184), { 2, SN_LE16(402) } },
+    { 50, SN_LE16(1192) },
+    { 10, 92, SN_LE16(1196), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(53760) } } },
+    { 50, SN_LE16(1204) },
+    { 10, 96, SN_LE16(1206), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(1210), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 50, SN_LE16(1260) },
+    { 10, 92, SN_LE16(1264), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(32704) } } },
+    { 50, SN_LE16(1272) },
+    { 10, 92, SN_LE16(1272), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(32172) } } },
+    { 52, SN_LE16(1280), 35 },
+    { 10, 92, SN_LE16(1284), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(32184) } } },
+    { 50, SN_LE16(1292) },
+    { 52, SN_LE16(1316), 0 },
+    { 6, SN_LE16(3) },
+    { 2, SN_LE16(168), { 0x00, 0x00, 0x0E, 0x07, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0E, 0x0A, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0E, 0x08, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0E, 0x06, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0E, 0x03, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0B, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } }
 };
+typedef char k_ItemsCopylocalizedplayernamesuffixEncodedWordsSizeCheck[(sizeof(k_ItemsCopylocalizedplayernamesuffixEncodedWords) == 496) ? 1 : -1];
+#endif
 #endif
 #endif
 

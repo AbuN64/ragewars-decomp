@@ -10,7 +10,7 @@ struct {
     s32 event;
     s32 actorKind;
 } g_LinktablesEncodedWordsBlock15 __attribute__((aligned(4))) = {
-    (void *)g_frontend_HandlePakProfileInputEntry,
+    (void *)&g_frontend_HandlePakProfileInputEntry,
     11,
     19
 };

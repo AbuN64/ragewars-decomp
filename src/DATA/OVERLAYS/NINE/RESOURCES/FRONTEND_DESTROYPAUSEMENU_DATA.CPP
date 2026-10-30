@@ -1,6 +1,31 @@
+#include "COMMON/FORMAT.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
 #include "TYPES.H"
 
+extern char Frontend_AcknowledgePage67Event[];
+extern char Frontend_ActivatePauseMenuAction[];
+extern char Frontend_ClearPage67ModeFlag[];
+extern char Frontend_ConsumeConfirmationEvent[];
+extern char Frontend_ConsumePauseMenuEvent[];
+extern char Frontend_CreatePauseConfirmation[];
+extern char Frontend_CreatePauseMenu[];
+extern char Frontend_CreateTimedMenu[];
+extern char Frontend_DestroyPauseMenu[];
+extern char Frontend_DestroyPauseMenu_Address[];
+extern char Frontend_FreePage67Screen[];
+extern char Frontend_HandlePage67Choice[];
+extern char Frontend_IgnorePage67Event[];
+extern char Frontend_ResumeMatchOnInput[];
+extern char Frontend_ReturnConfirmationEventZero[];
+extern char Frontend_ReturnPauseEventZero[];
+extern char Frontend_ReturnPauseEventZeroAlt[];
+extern char Frontend_SetPauseMenuInputMode[];
+extern char Frontend_UpdatePage67Exit[];
+extern char Timed_DestroyPauseConfirmation[];
+extern char Timed_FinishPauseConfirmationTransition[];
+extern char Timed_SetConfirmationInputMode[];
+extern char Timed_UpdateTimedScreen[];
 extern char g_Frontend_AcknowledgePage67EventPackedAddress24[];
 extern char g_Frontend_ActivatePauseMenuActionPackedAddress24[];
 extern char g_Frontend_ClearPage67ModeFlagPackedAddress24[];
@@ -92,18 +117,20 @@ typedef char g_FrontendDestroypausemenuWords1SizeCheck[(sizeof(g_FrontendDestroy
 /* 800E555C.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-unsigned int D_src_2527d91d[77] = {
-    0x00000E07, 0x00000001, 0x00435C40, 0x00000E08, 0x00000001, 0x00435C68, 0x00000E0A, 0x00000001,
-    0x00435C60, 0x00000E06, 0x00000001, 0x00435B34, 0x00000E03, 0x00000001, 0x00435C00, 0x00000001,
-    0x00000001, 0x00435CD8, 0x00000002, 0x00000001, 0x00435CB8, 0x0000000A, 0x00000001, 0x00435C70,
-    0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x0000001F, 0x00435EF4, 0x00000E08, 0x0000001F,
-    0x0043601C, 0x00000E0A, 0x0000001F, 0x00435F14, 0x00000E06, 0x0000001F, 0x00435E20, 0x00000E03,
-    0x0000001F, 0x00435EBC, 0x00000001, 0x0000001F, 0x00436044, 0x00000002, 0x0000001F, 0x00436024,
-    0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x00000020, 0x00436288, 0x00000E08, 0x00000020,
-    0x00436394, 0x00000E0A, 0x00000020, 0x004362A8, 0x00000E06, 0x00000020, 0x004361BC, 0x00000E03,
-    0x00000020, 0x00436250, 0x00000001, 0x00000020, 0x004363BC, 0x00000002, 0x00000020, 0x0043639C,
-    0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x00000005,
+#if defined(VERSION_DE)
+struct {
+    ResidentEventHandlerEntry eventHandlers0[9];
+    ResidentEventHandlerEntry eventHandlers108[8];
+    ResidentEventHandlerEntry eventHandlers204[8];
+    u8 alignmentFill300[8];
+} D_src_2527d91d __attribute__((aligned(4))) = {
+    { { 3591, 1, (ResidentEventHandler)(void *)((char *)&Frontend_SetPauseMenuInputMode - 0x80000000U) }, { 3592, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnPauseEventZeroAlt - 0x80000000U) }, { 3594, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnPauseEventZero - 0x80000000U) }, { 3590, 1, (ResidentEventHandler)(void *)((char *)&Frontend_CreatePauseMenu - 0x80000000U) }, { 3587, 1, (ResidentEventHandler)(void *)&Frontend_DestroyPauseMenu_Address }, { 1, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ActivatePauseMenuAction - 0x80000000U) }, { 2, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ConsumePauseMenuEvent - 0x80000000U) }, { 10, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ResumeMatchOnInput - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { { 3591, 31, (ResidentEventHandler)(void *)((char *)&Timed_SetConfirmationInputMode - 0x80000000U) }, { 3592, 31, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnConfirmationEventZero - 0x80000000U) }, { 3594, 31, (ResidentEventHandler)(void *)((char *)&Timed_FinishPauseConfirmationTransition - 0x80000000U) }, { 3590, 31, (ResidentEventHandler)(void *)((char *)&Frontend_CreatePauseConfirmation - 0x80000000U) }, { 3587, 31, (ResidentEventHandler)(void *)((char *)&Timed_DestroyPauseConfirmation - 0x80000000U) }, { 1, 31, (ResidentEventHandler)(void *)((char *)&Timed_UpdateTimedScreen - 0x80000000U) }, { 2, 31, (ResidentEventHandler)(void *)((char *)&Frontend_ConsumeConfirmationEvent - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { { 3591, 32, (ResidentEventHandler)(void *)((char *)&Frontend_ClearPage67ModeFlag - 0x80000000U) }, { 3592, 32, (ResidentEventHandler)(void *)((char *)&Frontend_IgnorePage67Event - 0x80000000U) }, { 3594, 32, (ResidentEventHandler)(void *)((char *)&Frontend_UpdatePage67Exit - 0x80000000U) }, { 3590, 32, (ResidentEventHandler)(void *)((char *)&Frontend_CreateTimedMenu - 0x80000000U) }, { 3587, 32, (ResidentEventHandler)(void *)((char *)&Frontend_FreePage67Screen - 0x80000000U) }, { 1, 32, (ResidentEventHandler)(void *)((char *)&Frontend_HandlePage67Choice - 0x80000000U) }, { 2, 32, (ResidentEventHandler)(void *)((char *)&Frontend_AcknowledgePage67Event - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { 0x0, 0x0, 0xe, 0x7, 0x0, 0x0, 0x0, 0x5 }
 };
+typedef char D_src_2527d91dSizeCheck[(sizeof(D_src_2527d91d) == 308) ? 1 : -1];
+#endif
 #endif
 #if defined(VERSION_EU)
 #if defined(VERSION_EU)
@@ -117,18 +144,20 @@ struct {
 #endif
 #endif
 #if defined(VERSION_EU_X)
-unsigned int D_src_2527d91d[77] = {
-    0x00000E07, 0x00000001, 0x00436AB0, 0x00000E08, 0x00000001, 0x00436AD8, 0x00000E0A, 0x00000001,
-    0x00436AD0, 0x00000E06, 0x00000001, 0x004369A4, 0x00000E03, 0x00000001, 0x00436A70, 0x00000001,
-    0x00000001, 0x00436B48, 0x00000002, 0x00000001, 0x00436B28, 0x0000000A, 0x00000001, 0x00436AE0,
-    0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x0000001F, 0x00436D5C, 0x00000E08, 0x0000001F,
-    0x00436E84, 0x00000E0A, 0x0000001F, 0x00436D7C, 0x00000E06, 0x0000001F, 0x00436C88, 0x00000E03,
-    0x0000001F, 0x00436D24, 0x00000001, 0x0000001F, 0x00436EAC, 0x00000002, 0x0000001F, 0x00436E8C,
-    0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x00000020, 0x004370F0, 0x00000E08, 0x00000020,
-    0x004371FC, 0x00000E0A, 0x00000020, 0x00437110, 0x00000E06, 0x00000020, 0x00437024, 0x00000E03,
-    0x00000020, 0x004370B8, 0x00000001, 0x00000020, 0x00437224, 0x00000002, 0x00000020, 0x00437204,
-    0x00000000, 0x00000000, 0x00000000, 0x8FA70028, 0x24020033,
+#if defined(VERSION_EU_X)
+struct {
+    ResidentEventHandlerEntry eventHandlers0[9];
+    ResidentEventHandlerEntry eventHandlers108[8];
+    ResidentEventHandlerEntry eventHandlers204[8];
+    u8 alignmentFill300[8];
+} D_src_2527d91d __attribute__((aligned(4))) = {
+    { { 3591, 1, (ResidentEventHandler)(void *)((char *)&Frontend_SetPauseMenuInputMode - 0x80000000U) }, { 3592, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnPauseEventZeroAlt - 0x80000000U) }, { 3594, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnPauseEventZero - 0x80000000U) }, { 3590, 1, (ResidentEventHandler)(void *)((char *)&Frontend_CreatePauseMenu - 0x80000000U) }, { 3587, 1, (ResidentEventHandler)(void *)((char *)&Frontend_DestroyPauseMenu - 0x80000000U) }, { 1, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ActivatePauseMenuAction - 0x80000000U) }, { 2, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ConsumePauseMenuEvent - 0x80000000U) }, { 10, 1, (ResidentEventHandler)(void *)((char *)&Frontend_ResumeMatchOnInput - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { { 3591, 31, (ResidentEventHandler)(void *)((char *)&Timed_SetConfirmationInputMode - 0x80000000U) }, { 3592, 31, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnConfirmationEventZero - 0x80000000U) }, { 3594, 31, (ResidentEventHandler)(void *)((char *)&Timed_FinishPauseConfirmationTransition - 0x80000000U) }, { 3590, 31, (ResidentEventHandler)(void *)((char *)&Frontend_CreatePauseConfirmation - 0x80000000U) }, { 3587, 31, (ResidentEventHandler)(void *)((char *)&Timed_DestroyPauseConfirmation - 0x80000000U) }, { 1, 31, (ResidentEventHandler)(void *)((char *)&Timed_UpdateTimedScreen - 0x80000000U) }, { 2, 31, (ResidentEventHandler)(void *)((char *)&Frontend_ConsumeConfirmationEvent - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { { 3591, 32, (ResidentEventHandler)(void *)((char *)&Frontend_ClearPage67ModeFlag - 0x80000000U) }, { 3592, 32, (ResidentEventHandler)(void *)((char *)&Frontend_IgnorePage67Event - 0x80000000U) }, { 3594, 32, (ResidentEventHandler)(void *)((char *)&Frontend_UpdatePage67Exit - 0x80000000U) }, { 3590, 32, (ResidentEventHandler)(void *)((char *)&Frontend_CreateTimedMenu - 0x80000000U) }, { 3587, 32, (ResidentEventHandler)(void *)((char *)&Frontend_FreePage67Screen - 0x80000000U) }, { 1, 32, (ResidentEventHandler)(void *)((char *)&Frontend_HandlePage67Choice - 0x80000000U) }, { 2, 32, (ResidentEventHandler)(void *)((char *)&Frontend_AcknowledgePage67Event - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { 0x8f, 0xa7, 0x0, 0x28, 0x24, 0x2, 0x0, 0x33 }
 };
+typedef char D_src_2527d91dSizeCheck[(sizeof(D_src_2527d91d) == 308) ? 1 : -1];
+#endif
 #endif
 #endif
 
@@ -144,26 +173,29 @@ extern char g_Frontend_ConsumePauseMenuEventPackedAddress242[];
 extern char g_Frontend_ActivatePauseMenuActionPackedAddress242[];
 #if defined(VERSION_US)
 ResidentEventHandlerEntry g_FrontendDestroypausemenuPointerWords1[9] = {
-    { 3591, 1, (ResidentEventHandler)(void *)g_Frontend_SetPauseMenuInputModePackedAddress242 }, { 3592, 1, (ResidentEventHandler)(void *)g_Frontend_ReturnPauseEventZeroAltPackedAddress242 }, { 3594, 1, (ResidentEventHandler)(void *)g_Frontend_ReturnPauseEventZeroPackedAddress242 }, { 3590, 1, (ResidentEventHandler)(void *)g_Frontend_CreatePauseMenuPackedAddress242 }, { 3587, 1, (ResidentEventHandler)(void *)g_Frontend_DestroyPauseMenuPackedAddress242 }, { 1, 1, (ResidentEventHandler)(void *)g_Frontend_ActivatePauseMenuActionPackedAddress242 }, { 2, 1, (ResidentEventHandler)(void *)g_Frontend_ConsumePauseMenuEventPackedAddress242 }, { 10, 1, (ResidentEventHandler)(void *)g_Frontend_ResumeMatchOnInputPackedAddress242 },
+    { 3591, 1, (ResidentEventHandler)(void *)&g_Frontend_SetPauseMenuInputModePackedAddress242 }, { 3592, 1, (ResidentEventHandler)(void *)&g_Frontend_ReturnPauseEventZeroAltPackedAddress242 }, { 3594, 1, (ResidentEventHandler)(void *)&g_Frontend_ReturnPauseEventZeroPackedAddress242 }, { 3590, 1, (ResidentEventHandler)(void *)&g_Frontend_CreatePauseMenuPackedAddress242 }, { 3587, 1, (ResidentEventHandler)(void *)&g_Frontend_DestroyPauseMenuPackedAddress242 }, { 1, 1, (ResidentEventHandler)(void *)&g_Frontend_ActivatePauseMenuActionPackedAddress242 }, { 2, 1, (ResidentEventHandler)(void *)&g_Frontend_ConsumePauseMenuEventPackedAddress242 }, { 10, 1, (ResidentEventHandler)(void *)&g_Frontend_ResumeMatchOnInputPackedAddress242 },
     { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_FrontendDestroypausemenuPointerWords1[9] = {
-    { 3591, 1, (ResidentEventHandler)(void *)g_Frontend_SetPauseMenuInputModePackedAddress242 }, { 3592, 1, (ResidentEventHandler)(void *)g_Frontend_ReturnPauseEventZeroAltPackedAddress242 }, { 3594, 1, (ResidentEventHandler)(void *)g_Frontend_ReturnPauseEventZeroPackedAddress242 }, { 3590, 1, (ResidentEventHandler)(void *)g_Frontend_CreatePauseMenuPackedAddress242 }, { 3587, 1, (ResidentEventHandler)(void *)g_Frontend_DestroyPauseMenuPackedAddress242 }, { 1, 1, (ResidentEventHandler)(void *)g_Frontend_ActivatePauseMenuActionPackedAddress242 }, { 2, 1, (ResidentEventHandler)(void *)g_Frontend_ConsumePauseMenuEventPackedAddress242 }, { 10, 1, (ResidentEventHandler)(void *)g_Frontend_ResumeMatchOnInputPackedAddress242 },
+    { 3591, 1, (ResidentEventHandler)(void *)&g_Frontend_SetPauseMenuInputModePackedAddress242 }, { 3592, 1, (ResidentEventHandler)(void *)&g_Frontend_ReturnPauseEventZeroAltPackedAddress242 }, { 3594, 1, (ResidentEventHandler)(void *)&g_Frontend_ReturnPauseEventZeroPackedAddress242 }, { 3590, 1, (ResidentEventHandler)(void *)&g_Frontend_CreatePauseMenuPackedAddress242 }, { 3587, 1, (ResidentEventHandler)(void *)&g_Frontend_DestroyPauseMenuPackedAddress242 }, { 1, 1, (ResidentEventHandler)(void *)&g_Frontend_ActivatePauseMenuActionPackedAddress242 }, { 2, 1, (ResidentEventHandler)(void *)&g_Frontend_ConsumePauseMenuEventPackedAddress242 }, { 10, 1, (ResidentEventHandler)(void *)&g_Frontend_ResumeMatchOnInputPackedAddress242 },
     { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #endif
 
 #if defined(VERSION_US)
-unsigned int g_pauseMenuEventHandlerRecords[50] = {
-    0x00000E07, 0x0000001F, 0x004360D4, 0x00000E08, 0x0000001F, 0x004361FC, 0x00000E0A, 0x0000001F,
-    0x004360F4, 0x00000E06, 0x0000001F, 0x00436000, 0x00000E03, 0x0000001F, 0x0043609C, 0x00000001,
-    0x0000001F, 0x00436224, 0x00000002, 0x0000001F, 0x00436204, 0x00000000, 0x00000000, 0x00000000,
-    0x00000E07, 0x00000020, 0x00436468, 0x00000E08, 0x00000020, 0x00436574, 0x00000E0A, 0x00000020,
-    0x00436488, 0x00000E06, 0x00000020, 0x0043639C, 0x00000E03, 0x00000020, 0x00436430, 0x00000001,
-    0x00000020, 0x0043659C, 0x00000002, 0x00000020, 0x0043657C, 0x00000000, 0x00000000, 0x00000000,
-    0x2E481CF4, 0x0020433A,
+#if defined(VERSION_US)
+struct {
+    ResidentEventHandlerEntry eventHandlers0[8];
+    ResidentEventHandlerEntry eventHandlers96[8];
+    u8 alignmentFill192[8];
+} g_pauseMenuEventHandlerRecords __attribute__((aligned(4))) = {
+    { { 3591, 31, (ResidentEventHandler)(void *)((char *)&Timed_SetConfirmationInputMode - 0x80000000U) }, { 3592, 31, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnConfirmationEventZero - 0x80000000U) }, { 3594, 31, (ResidentEventHandler)(void *)((char *)&Timed_FinishPauseConfirmationTransition - 0x80000000U) }, { 3590, 31, (ResidentEventHandler)(void *)((char *)&Frontend_CreatePauseConfirmation - 0x80000000U) }, { 3587, 31, (ResidentEventHandler)(void *)((char *)&Timed_DestroyPauseConfirmation - 0x80000000U) }, { 1, 31, (ResidentEventHandler)(void *)((char *)&Timed_UpdateTimedScreen - 0x80000000U) }, { 2, 31, (ResidentEventHandler)(void *)((char *)&Frontend_ConsumeConfirmationEvent - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { { 3591, 32, (ResidentEventHandler)(void *)((char *)&Frontend_ClearPage67ModeFlag - 0x80000000U) }, { 3592, 32, (ResidentEventHandler)(void *)((char *)&Frontend_IgnorePage67Event - 0x80000000U) }, { 3594, 32, (ResidentEventHandler)(void *)((char *)&Frontend_UpdatePage67Exit - 0x80000000U) }, { 3590, 32, (ResidentEventHandler)(void *)((char *)&Frontend_CreateTimedMenu - 0x80000000U) }, { 3587, 32, (ResidentEventHandler)(void *)((char *)&Frontend_FreePage67Screen - 0x80000000U) }, { 1, 32, (ResidentEventHandler)(void *)((char *)&Frontend_HandlePage67Choice - 0x80000000U) }, { 2, 32, (ResidentEventHandler)(void *)((char *)&Frontend_AcknowledgePage67Event - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { 0x2e, 0x48, 0x1c, 0xf4, 0x0, 0x20, 0x43, 0x3a }
 };
+typedef char g_pauseMenuEventHandlerRecordsSizeCheck[(sizeof(g_pauseMenuEventHandlerRecords) == 200) ? 1 : -1];
+#endif
 #endif

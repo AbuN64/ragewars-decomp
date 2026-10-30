@@ -1,25 +1,58 @@
+#include "COMMON/FORMAT.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-unsigned short D_src_af61b546[8] = {
-    0x8014, 0x86C0, 0x8014, 0x8740, 0x3F40, 0x0000, 0x3F00, 0x0000,
+#if defined(VERSION_DE)
+struct {
+    void * g_peripheralDomainHandles[2];
+    u8 alignmentFill8[8];
+} D_src_af61b546 __attribute__((aligned(2))) = {
+    { (void *)&g_diskPiHandle, (void *)&g_diskPeripheralHandle },
+    { 0x3f, 0x40, 0x0, 0x0, 0x3f, 0x0, 0x0, 0x0 }
 };
+typedef char D_src_af61b546SizeCheck[(sizeof(D_src_af61b546) == 16) ? 1 : -1];
+#endif
 #endif
 #if defined(VERSION_EU)
-unsigned short D_src_af61b546[8] = {
-    0x8015, 0x86C0, 0x8015, 0x8740, 0x6869, 0x7665, 0x206F, 0x6620,
+#if defined(VERSION_EU)
+struct {
+    void * g_peripheralDomainHandles[2];
+    u8 alignmentFill8[8];
+} D_src_af61b546 __attribute__((aligned(2))) = {
+    { (void *)&g_diskPiHandle, (void *)&g_diskPeripheralHandle },
+    { 0x68, 0x69, 0x76, 0x65, 0x20, 0x6f, 0x66, 0x20 }
 };
+typedef char D_src_af61b546SizeCheck[(sizeof(D_src_af61b546) == 16) ? 1 : -1];
+#endif
 #endif
 #if defined(VERSION_EU_X)
-unsigned short D_src_af61b546[8] = {
-    0x8015, 0x26C0, 0x8015, 0x2740, 0x0200, 0x0400, 0x0800, 0x1000,
+#if defined(VERSION_EU_X)
+struct {
+    void * g_peripheralDomainHandles[2];
+    u8 alignmentFill8[8];
+} D_src_af61b546 __attribute__((aligned(2))) = {
+    { (void *)&g_diskPiHandle, (void *)&g_diskPeripheralHandle },
+    { 0x2, 0x0, 0x4, 0x0, 0x8, 0x0, 0x10, 0x0 }
 };
+typedef char D_src_af61b546SizeCheck[(sizeof(D_src_af61b546) == 16) ? 1 : -1];
+#endif
 #endif
 #if defined(VERSION_US)
-unsigned short D_src_af61b546[8] = {
-    0x8014, 0x66C0, 0x8014, 0x6740, 0x0004, 0x0000, 0x001C, 0x5346,
+#if defined(VERSION_US)
+struct {
+    void * g_peripheralDomainHandles[2];
+    u8 alignmentFill8[8];
+} D_src_af61b546 __attribute__((aligned(2))) = {
+    { (void *)&g_diskPiHandle, (void *)&g_diskPeripheralHandle },
+    { 0x0, 0x4, 0x0, 0x0, 0x0, 0x1c, 0x53, 0x46 }
 };
+typedef char D_src_af61b546SizeCheck[(sizeof(D_src_af61b546) == 16) ? 1 : -1];
+#endif
 #endif
 #endif
 

@@ -6,7 +6,7 @@
 #if defined(VERSION_US_REV1)
 #if defined(VERSION_US_REV1)
 void * g_ResourcesEncodedWordsBlock67[3] = {
-    (void *)addrLow_Nav_SelectCloseAttackPickupGoal, (void *)addrLow_Nav_RebuildRequestedGoalRoute, (void *)addrLow_Nav_CollectEnemyTargets
+    (void *)&addrLow_Nav_SelectCloseAttackPickupGoal, (void *)&addrLow_Nav_RebuildRequestedGoalRoute, (void *)&addrLow_Nav_CollectEnemyTargets
 };
 #endif
 #endif

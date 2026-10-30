@@ -7,7 +7,7 @@ extern char g_PlayerUpdateHeldActorReleaseCallbackAddressUs[];
 extern char addrLow_Playerai_OffsetActorForState15[];
 #if defined(VERSION_US_REV1)
 void * g_overlayFiveLinkRecordLinkWordsBlock4[2] = {
-    (void *)addrLow_Playerai_OffsetActorForState15, (void *)g_PlayerUpdateHeldActorReleaseCallbackAddressUs
+    (void *)&addrLow_Playerai_OffsetActorForState15, (void *)&g_PlayerUpdateHeldActorReleaseCallbackAddressUs
 };
 #endif
 #endif

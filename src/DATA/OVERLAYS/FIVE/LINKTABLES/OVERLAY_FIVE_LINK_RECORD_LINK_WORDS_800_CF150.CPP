@@ -7,7 +7,7 @@ extern char g_Playerai_UpdateSequence74RunEndPoseCallbackAddressUs[];
 extern char g_Playerai_InitializeActorModelEffectCallbackAddressUs[];
 #if defined(VERSION_US_REV1)
 void * g_overlayFiveLinkRecordLinkWordsBlock10[2] = {
-    (void *)g_Playerai_UpdateSequence74RunEndPoseCallbackAddressUs, (void *)g_Playerai_InitializeActorModelEffectCallbackAddressUs
+    (void *)&g_Playerai_UpdateSequence74RunEndPoseCallbackAddressUs, (void *)&g_Playerai_InitializeActorModelEffectCallbackAddressUs
 };
 #endif
 #endif

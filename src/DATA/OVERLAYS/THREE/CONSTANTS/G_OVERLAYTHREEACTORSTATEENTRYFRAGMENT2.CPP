@@ -11,8 +11,8 @@ struct {
     void * update;
 } g_overlayThreeActorStateEntryFragment2 __attribute__((aligned(4))) = {
     1,
-    (void *)addrLow_Action_DeactivateBreakable,
-    (void *)addrLow_Action_ResolveBreakableHit
+    (void *)&addrLow_Action_DeactivateBreakable,
+    (void *)&addrLow_Action_ResolveBreakableHit
 };
 typedef char g_overlayThreeActorStateEntryFragment2SizeCheck[(sizeof(g_overlayThreeActorStateEntryFragment2) == 12) ? 1 : -1];
 #endif

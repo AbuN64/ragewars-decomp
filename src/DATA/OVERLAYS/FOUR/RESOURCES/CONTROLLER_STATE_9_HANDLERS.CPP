@@ -11,8 +11,8 @@ struct {
     void * update;
 } g_controllerState9HandlerWords __attribute__((aligned(4))) = {
     9,
-    (void *)addrLow_Nav_InitUnclaimedMarkerSearch,
-    (void *)addrLow_Nav_SeekUnclaimedMarker
+    (void *)&addrLow_Nav_InitUnclaimedMarkerSearch,
+    (void *)&addrLow_Nav_SeekUnclaimedMarker
 };
 #endif
 #endif

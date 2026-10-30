@@ -7,7 +7,7 @@ extern char g_PlayerInterpolateTravelTargetCallbackAddressUs[];
 extern char addrLow_Playerai_InitializeActorModelEffect[];
 #if defined(VERSION_US_REV1)
 void * g_overlayFiveLinkRecordLinkWordsBlock1[2] = {
-    (void *)addrLow_Playerai_InitializeActorModelEffect, (void *)g_PlayerInterpolateTravelTargetCallbackAddressUs
+    (void *)&addrLow_Playerai_InitializeActorModelEffect, (void *)&g_PlayerInterpolateTravelTargetCallbackAddressUs
 };
 #endif
 #endif

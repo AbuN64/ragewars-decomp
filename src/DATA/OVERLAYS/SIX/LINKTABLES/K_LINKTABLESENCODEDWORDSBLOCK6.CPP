@@ -21,7 +21,7 @@ struct {
     1.0f,
     (void *)((char *)&g_Ovltab6EncodedWordsBlock7 + 28),
     0,
-    (void *)g_weapon_EaseSpinForActionFiveEntry
+    (void *)&g_weapon_EaseSpinForActionFiveEntry
 };
 typedef char k_LinktablesEncodedWordsBlock6SizeCheck[(sizeof(k_LinktablesEncodedWordsBlock6) == 28) ? 1 : -1];
 #endif

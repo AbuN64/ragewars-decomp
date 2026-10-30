@@ -1,3 +1,7 @@
+#include "COMMON/FORMAT.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
+
 #include "TYPES.H"
 
 /* 800CC060.CPP */
@@ -212,10 +216,42 @@ f32 g_arcCosTable_us[1026] = {
 
 /* 8024E914_19.CPP */
 #if defined(VERSION_EU)
-u32 g_staticObjectResourceStateWords_eu[21] = {
-    0x00380000, 0x5259414E, 0x20545241, 0x43590000, 0x00000400, 0x204F4D4C,
-    0x414E534B, 0x59000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x20202020, 0x20202020, 0x00000000,
+#if defined(VERSION_EU)
+struct {
+    s32 g_staticObjectResourceSerial;
+    u8 alignmentFill4[12];
+    s32 g_resourceCacheNodeCapacity;
+    u8 alignmentFill20[12];
+    s32 g_resourceHashBucketCount;
+    u32 g_resourceHashSlotCount;
+    s32 g_resourceHashInitialized;
+    u8 alignmentFill44[4];
+    u32 g_audioTaskFrameIndex;
+    u32 g_audioDmaPendingReadCount;
+    s32 g_audioCommandBufferIndex;
+    u32 g_audioWorkerEventCount;
+    u32 g_audioWorkerElapsedTicks;
+    s32 g_audioCacheEntryAllocCount;
+    u8 alignmentFill72[8];
+    s32 g_audioContextInitialized;
+} g_staticObjectResourceStateWords_eu __attribute__((aligned(4))) = {
+    3670016,
+    { 0x52, 0x59, 0x41, 0x4e, 0x20, 0x54, 0x52, 0x41, 0x43, 0x59, 0x0, 0x0 },
+    1024,
+    { 0x20, 0x4f, 0x4d, 0x4c, 0x41, 0x4e, 0x53, 0x4b, 0x59, 0x0, 0x0, 0x0 },
+    0,
+    0x0,
+    0,
+    { 0x0, 0x0, 0x0, 0x0 },
+    0x0,
+    0x0,
+    0,
+    0x0,
+    0x0,
+    0,
+    { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 },
+    0
 };
+typedef char g_staticObjectResourceStateWords_euSizeCheck[(sizeof(g_staticObjectResourceStateWords_eu) == 84) ? 1 : -1];
+#endif
 #endif

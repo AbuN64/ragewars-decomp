@@ -11,8 +11,8 @@ struct {
     void * update;
 } g_actorStateEntry9_us_rev1 __attribute__((aligned(4))) = {
     3,
-    (void *)g_actorStateEntry10_us_rev1,
-    (void *)g_actorStateEntry11_us_rev1
+    (void *)&g_actorStateEntry10_us_rev1,
+    (void *)&g_actorStateEntry11_us_rev1
 };
 typedef char g_actorStateEntry9_us_rev1SizeCheck[(sizeof(g_actorStateEntry9_us_rev1) == 12) ? 1 : -1];
 #endif

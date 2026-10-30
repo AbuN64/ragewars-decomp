@@ -10,8 +10,8 @@ struct {
     void * update;
 } g_controllerState8HandlerWords __attribute__((aligned(4))) = {
     8,
-    (void *)addrLow_Nav_ResetObjectArrivalChase,
-    (void *)addrLow_Nav_UpdateObjectArrivalChase
+    (void *)&addrLow_Nav_ResetObjectArrivalChase,
+    (void *)&addrLow_Nav_UpdateObjectArrivalChase
 };
 #endif
 #endif

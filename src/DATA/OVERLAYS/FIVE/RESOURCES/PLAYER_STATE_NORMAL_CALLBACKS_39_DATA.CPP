@@ -7,7 +7,7 @@ extern char g_PlayerTrackNearbyAimTargetCallbackAddressUs[];
 extern char g_PlayerState39EmptyHookAddress[];
 #if defined(VERSION_US_REV1)
 void * g_playerStateNormalCallbacks39Words[2] = {
-    (void *)g_PlayerState39EmptyHookAddress, (void *)g_PlayerTrackNearbyAimTargetCallbackAddressUs
+    (void *)&g_PlayerState39EmptyHookAddress, (void *)&g_PlayerTrackNearbyAimTargetCallbackAddressUs
 };
 #endif
 #endif

@@ -1,4 +1,6 @@
+#include "COMMON/FORMAT.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
 #include "TYPES.H"
 
 extern char Frontend_ActivateCompactOptionsPage[];
@@ -12,11 +14,16 @@ extern char Frontend_DestroyTabOptionsPage[];
 extern char Frontend_HandleCompactOptionsShortcut[];
 extern char Frontend_HandleOptionsPageShortcut[];
 extern char Frontend_HandleTabOptionsShortcut[];
+extern char Frontend_SelectNextLanguage[];
+extern char Frontend_SelectPreviousLanguage[];
 extern char Frontend_UpdateOptionsPageExit[];
 extern char Menu_AnimateTabOptionsMenu[];
+extern char Menu_CreateLocalizedSettingsPage[];
+extern char Menu_CreateSessionSettingsControls[];
 extern char Menu_CreateSettingsPage[];
 extern char Menu_FinishTabOptionsTransition[];
 extern char Menu_OpenGameOptionsScreen[];
+extern char Menu_OpenLocalizedGameOptions[];
 extern char g_Frontend_ActivateCompactOptionsPagePackedAddress24[];
 extern char g_Frontend_CloseCompactOptionsPagePackedAddress24[];
 extern char g_Frontend_CloseOptionsPagePackedAddress24[];
@@ -27,6 +34,7 @@ extern char g_Frontend_HandleOptionsPageShortcutPackedAddress24[];
 extern char g_Frontend_HandleTabOptionsShortcutPackedAddress24[];
 extern char g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24[];
 extern char g_Frontend_UpdateOptionsPageExitPackedAddress24[];
+extern char g_MenuCommitTrailingBytes[];
 extern char g_Menu_AnimateTabOptionsMenuPackedAddress24[];
 extern char g_Menu_CreateEuropeanSettingsPagePackedAddress24[];
 extern char g_Menu_CreateSessionSettingsControlsPackedAddress24[];
@@ -121,17 +129,20 @@ ResidentEventHandlerEntry D_src_4b23fe05[19] = {
 #endif
 #endif
 #if defined(VERSION_EU_X)
-unsigned int D_src_4b23fe05[65] = {
-    0x00000E08, 0x00000004, 0x00423BA8, 0x00000E06, 0x00000004, 0x004229E0, 0x00000E03, 0x00000004,
-    0x00423B68, 0x00000002, 0x00000004, 0x00423CE0, 0x00000001, 0x00000004, 0x00423C24, 0x00000008,
-    0x0000005D, 0x00423DB0, 0x00000007, 0x0000005D, 0x00423D24, 0x00000000, 0x00000000, 0x00000000,
-    0x00000E08, 0x0000000B, 0x00423F0C, 0x00000E06, 0x0000000B, 0x00422C90, 0x00000E03, 0x0000000B,
-    0x00423ED4, 0x00000002, 0x0000000B, 0x0042400C, 0x00000001, 0x0000000B, 0x00423F40, 0x00000000,
-    0x00000000, 0x00000000, 0x00000E08, 0x00000016, 0x004235E0, 0x00000E0A, 0x00000016, 0x004233AC,
-    0x00000E06, 0x00000016, 0x00422E6C, 0x00000E03, 0x00000016, 0x004240D4, 0x00000002, 0x00000016,
-    0x0042427C, 0x00000001, 0x00000016, 0x00424114, 0x00000000, 0x00000000, 0x00000000, 0x00000E03,
-    0x0000001F,
+#if defined(VERSION_EU_X)
+struct {
+    ResidentEventHandlerEntry eventHandlers0[8];
+    ResidentEventHandlerEntry eventHandlers96[6];
+    ResidentEventHandlerEntry eventHandlers168[7];
+    u8 alignmentFill252[8];
+} D_src_4b23fe05 __attribute__((aligned(4))) = {
+    { { 3592, 4, (ResidentEventHandler)(void *)((char *)&Frontend_UpdateOptionsPageExit - 0x80000000U) }, { 3590, 4, (ResidentEventHandler)(void *)((char *)&Menu_CreateLocalizedSettingsPage - 0x80000000U) }, { 3587, 4, (ResidentEventHandler)(void *)((char *)&g_MenuCommitTrailingBytes - 0x80000000U) }, { 2, 4, (ResidentEventHandler)(void *)((char *)&Frontend_CloseOptionsPage - 0x80000000U) }, { 1, 4, (ResidentEventHandler)(void *)((char *)&Frontend_HandleOptionsPageShortcut - 0x80000000U) }, { 8, 93, (ResidentEventHandler)(void *)((char *)&Frontend_SelectNextLanguage - 0x80000000U) }, { 7, 93, (ResidentEventHandler)(void *)((char *)&Frontend_SelectPreviousLanguage - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { { 3592, 11, (ResidentEventHandler)(void *)((char *)&Frontend_ActivateCompactOptionsPage - 0x80000000U) }, { 3590, 11, (ResidentEventHandler)(void *)((char *)&Menu_CreateSessionSettingsControls - 0x80000000U) }, { 3587, 11, (ResidentEventHandler)(void *)((char *)&Frontend_DestroyCompactOptionsPage - 0x80000000U) }, { 2, 11, (ResidentEventHandler)(void *)((char *)&Frontend_CloseCompactOptionsPage - 0x80000000U) }, { 1, 11, (ResidentEventHandler)(void *)((char *)&Frontend_HandleCompactOptionsShortcut - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { { 3592, 22, (ResidentEventHandler)(void *)((char *)&Menu_AnimateTabOptionsMenu - 0x80000000U) }, { 3594, 22, (ResidentEventHandler)(void *)((char *)&Menu_FinishTabOptionsTransition - 0x80000000U) }, { 3590, 22, (ResidentEventHandler)(void *)((char *)&Menu_OpenLocalizedGameOptions - 0x80000000U) }, { 3587, 22, (ResidentEventHandler)(void *)((char *)&Frontend_DestroyTabOptionsPage - 0x80000000U) }, { 2, 22, (ResidentEventHandler)(void *)((char *)&Frontend_ConsumeTabOptionsEvent - 0x80000000U) }, { 1, 22, (ResidentEventHandler)(void *)((char *)&Frontend_HandleTabOptionsShortcut - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { 0x0, 0x0, 0xe, 0x3, 0x0, 0x0, 0x0, 0x1f }
 };
+typedef char D_src_4b23fe05SizeCheck[(sizeof(D_src_4b23fe05) == 260) ? 1 : -1];
+#endif
 #endif
 #endif
 
@@ -139,12 +150,12 @@ unsigned int D_src_4b23fe05[65] = {
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
 #if defined(VERSION_US)
 ResidentEventHandlerEntry g_OptionsCreateoptionspageEncodedWords[1] = {
-    { 3592, 4, (ResidentEventHandler)(void *)g_frontend_UpdateOptionsPageExitEntry }
+    { 3592, 4, (ResidentEventHandler)(void *)&g_frontend_UpdateOptionsPageExitEntry }
 };
 #endif
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_OptionsCreateoptionspageEncodedWords[1] = {
-    { 3592, 4, (ResidentEventHandler)(void *)g_frontend_UpdateOptionsPageExitEntry }
+    { 3592, 4, (ResidentEventHandler)(void *)&g_frontend_UpdateOptionsPageExitEntry }
 };
 #endif
 #endif

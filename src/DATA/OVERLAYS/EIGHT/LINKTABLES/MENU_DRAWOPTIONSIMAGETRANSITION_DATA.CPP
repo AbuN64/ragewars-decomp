@@ -102,12 +102,12 @@ ResidentEventHandlerEntry D_src_d9561b8a[9] = {
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
 #if defined(VERSION_US)
 ResidentEventHandlerEntry g_MenuDrawoptionsimagetransitionEncodedWords[8] = {
-    { 3590, 25, (ResidentEventHandler)(void *)g_menu_CreateOptionsImageTransitionEntry }, { 3587, 25, (ResidentEventHandler)(void *)g_menu_DestroyOptionsImageTransitionEntry }, { 2, 25, (ResidentEventHandler)(void *)g_menu_ConsumeOptionsTransitionEventEntry }, { 1, 25, (ResidentEventHandler)(void *)g_menu_RequestOptionsImageTransitionEntry }, { 3594, 25, (ResidentEventHandler)(void *)g_menu_DrawOptionsImageTransitionEntry }, { 3592, 25, (ResidentEventHandler)(void *)g_menu_StartOptionsImageTransitionEntry }, { 10, 25, (ResidentEventHandler)(void *)g_menu_HandleOptionsTransitionRequestEntry }, { 0, 0, (ResidentEventHandler)0 }
+    { 3590, 25, (ResidentEventHandler)(void *)&g_menu_CreateOptionsImageTransitionEntry }, { 3587, 25, (ResidentEventHandler)(void *)&g_menu_DestroyOptionsImageTransitionEntry }, { 2, 25, (ResidentEventHandler)(void *)&g_menu_ConsumeOptionsTransitionEventEntry }, { 1, 25, (ResidentEventHandler)(void *)&g_menu_RequestOptionsImageTransitionEntry }, { 3594, 25, (ResidentEventHandler)(void *)&g_menu_DrawOptionsImageTransitionEntry }, { 3592, 25, (ResidentEventHandler)(void *)&g_menu_StartOptionsImageTransitionEntry }, { 10, 25, (ResidentEventHandler)(void *)&g_menu_HandleOptionsTransitionRequestEntry }, { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_MenuDrawoptionsimagetransitionEncodedWords[8] = {
-    { 3590, 25, (ResidentEventHandler)(void *)g_menu_CreateOptionsImageTransitionEntry }, { 3587, 25, (ResidentEventHandler)(void *)g_menu_DestroyOptionsImageTransitionEntry }, { 2, 25, (ResidentEventHandler)(void *)g_menu_ConsumeOptionsTransitionEventEntry }, { 1, 25, (ResidentEventHandler)(void *)g_menu_RequestOptionsImageTransitionEntry }, { 3594, 25, (ResidentEventHandler)(void *)g_menu_DrawOptionsImageTransitionEntry }, { 3592, 25, (ResidentEventHandler)(void *)g_menu_StartOptionsImageTransitionEntry }, { 10, 25, (ResidentEventHandler)(void *)g_menu_HandleOptionsTransitionRequestEntry }, { 0, 0, (ResidentEventHandler)0 }
+    { 3590, 25, (ResidentEventHandler)(void *)&g_menu_CreateOptionsImageTransitionEntry }, { 3587, 25, (ResidentEventHandler)(void *)&g_menu_DestroyOptionsImageTransitionEntry }, { 2, 25, (ResidentEventHandler)(void *)&g_menu_ConsumeOptionsTransitionEventEntry }, { 1, 25, (ResidentEventHandler)(void *)&g_menu_RequestOptionsImageTransitionEntry }, { 3594, 25, (ResidentEventHandler)(void *)&g_menu_DrawOptionsImageTransitionEntry }, { 3592, 25, (ResidentEventHandler)(void *)&g_menu_StartOptionsImageTransitionEntry }, { 10, 25, (ResidentEventHandler)(void *)&g_menu_HandleOptionsTransitionRequestEntry }, { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #endif

@@ -25,8 +25,8 @@ struct {
     void * update;
 } g_controllerState12HandlerWords __attribute__((aligned(4))) = {
     12,
-    (void *)addrLow_Nav_InitNearbyUnrestrictedGoal,
-    (void *)addrLow_Nav_SeekNearbyUnrestrictedGoal
+    (void *)&addrLow_Nav_InitNearbyUnrestrictedGoal,
+    (void *)&addrLow_Nav_SeekNearbyUnrestrictedGoal
 };
 #endif
 #endif

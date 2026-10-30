@@ -1,3 +1,6 @@
+#include "COMMON/FORMAT.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
 #include "TYPES.H"
 
 #include "include_asm.h"
@@ -7,27 +10,54 @@
 extern char g_viDataZeroWords[];
 #if defined(VERSION_DE)
 void * D_src_c0f3ff2a[4] = {
-    (void *)g_viDataZeroWords, (void *)g_viDataZeroWords + 0x30, 0, 0
+    (void *)&g_viDataZeroWords, (void *)g_viDataZeroWords + 0x30, 0, 0
 };
 #endif
 #endif
 #if defined(VERSION_EU)
 extern char g_viDataZeroWords[];
-unsigned int D_src_c0f3ff2a[4] = {
-    (unsigned int)g_viDataZeroWords, (unsigned int)g_viDataZeroWords + 0x30, 0x20207072, 0x696D6167,
+#if defined(VERSION_EU)
+struct {
+    void * __osViCurr;
+    void * __osViNext;
+    u8 alignmentFill8[8];
+} D_src_c0f3ff2a __attribute__((aligned(4))) = {
+    (void *)&g_viDataZeroWords,
+    (void *)g_viDataZeroWords + 0x30,
+    { 0x20, 0x20, 0x70, 0x72, 0x69, 0x6d, 0x61, 0x67 }
 };
+typedef char D_src_c0f3ff2aSizeCheck[(sizeof(D_src_c0f3ff2a) == 16) ? 1 : -1];
+#endif
 #endif
 #if defined(VERSION_EU_X)
 extern char g_viDataZeroWords[];
-unsigned int D_src_c0f3ff2a[4] = {
-    (unsigned int)g_viDataZeroWords, (unsigned int)g_viDataZeroWords + 0x30, 0x3A9837F1, 0x3AB504F3,
+#if defined(VERSION_EU_X)
+struct {
+    void * __osViCurr;
+    void * __osViNext;
+    u8 alignmentFill8[8];
+} D_src_c0f3ff2a __attribute__((aligned(4))) = {
+    (void *)&g_viDataZeroWords,
+    (void *)g_viDataZeroWords + 0x30,
+    { 0x3a, 0x98, 0x37, 0xf1, 0x3a, 0xb5, 0x4, 0xf3 }
 };
+typedef char D_src_c0f3ff2aSizeCheck[(sizeof(D_src_c0f3ff2a) == 16) ? 1 : -1];
+#endif
 #endif
 #if defined(VERSION_US)
 extern char g_viDataZeroWords[];
-unsigned int D_src_c0f3ff2a[4] = {
-    (unsigned int)g_viDataZeroWords, (unsigned int)g_viDataZeroWords + 0x30, 0x585F4649, 0x5245424F,
+#if defined(VERSION_US)
+struct {
+    void * __osViCurr;
+    void * __osViNext;
+    u8 alignmentFill8[8];
+} D_src_c0f3ff2a __attribute__((aligned(4))) = {
+    (void *)&g_viDataZeroWords,
+    (void *)g_viDataZeroWords + 0x30,
+    { 0x58, 0x5f, 0x46, 0x49, 0x52, 0x45, 0x42, 0x4f }
 };
+typedef char D_src_c0f3ff2aSizeCheck[(sizeof(D_src_c0f3ff2a) == 16) ? 1 : -1];
+#endif
 #endif
 #endif
 

@@ -6,7 +6,7 @@
 #if defined(VERSION_US_REV1)
 #if defined(VERSION_US_REV1)
 void * k_ActorHandlerRun1UsRev1EncodedWords[20] = {
-    (void *)addrLow_Nav_CollectEnemyTargets, (void *)addrLow_Target_UpdateTargetSelection, (void *)addrLow_Wheel_AdvanceWheelProbe, (void *)addrLow_Nav_RefineBallisticAim, 0, 0, 0, 0,
+    (void *)&addrLow_Nav_CollectEnemyTargets, (void *)&addrLow_Target_UpdateTargetSelection, (void *)&addrLow_Wheel_AdvanceWheelProbe, (void *)&addrLow_Nav_RefineBallisticAim, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0
 };

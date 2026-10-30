@@ -11,8 +11,8 @@ struct {
     void * update;
 } g_controllerState0HandlerWords __attribute__((aligned(4))) = {
     0,
-    (void *)addrLow_Nav_ResetPatrolRouteSelection,
-    (void *)addrLow_Nav_UpdatePatrolRoute
+    (void *)&addrLow_Nav_ResetPatrolRouteSelection,
+    (void *)&addrLow_Nav_UpdatePatrolRoute
 };
 #endif
 #endif

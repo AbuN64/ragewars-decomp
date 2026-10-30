@@ -10,7 +10,7 @@
 #if defined(VERSION_US_REV1)
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_EventHandlersPointerWords1[6] = {
-    { 5, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetId5 }, { 6, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetId6 }, { 7, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetId7 }, { 8, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetId8 }, { 3587, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetIdE03 }, { 0, 0, (ResidentEventHandler)0 }
+    { 5, 30000, (ResidentEventHandler)(void *)&g_eventHandlerCodeTargetId5 }, { 6, 30000, (ResidentEventHandler)(void *)&g_eventHandlerCodeTargetId6 }, { 7, 30000, (ResidentEventHandler)(void *)&g_eventHandlerCodeTargetId7 }, { 8, 30000, (ResidentEventHandler)(void *)&g_eventHandlerCodeTargetId8 }, { 3587, 30000, (ResidentEventHandler)(void *)&g_eventHandlerCodeTargetIdE03 }, { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
 #endif

@@ -8,7 +8,7 @@ extern char g_defaultActorCollisionInfo[];
 /* ROM-grounded data: rodata/unresolved/800CD4C4_unclaimed_CE0F0_unclaimed_CE104_unclaimed_CE10C_unclaimed_CE124_unclaimed_CE130_unclaimed_CE144_unclaimed_CE148_unclaimed_CE1F8_unclaimed_CE210_unclaimed_CE21C_unclaimed_CE230_unclaimed_CE234_unclaimed_CE29C_unclaimed_CE2B0_unclaimed_CE2B4 */
 #if defined(VERSION_US_REV1)
 void * g_ActorStateAnimationFragmentEncodedWordsBlock1[4] = {
-    (void *)addrLow_DamageAI_ActivateActor, (void *)addrLow_DamageAI_ClearCollisionFlagsOnHit, (void *)&g_defaultActorCollisionInfo, (void *)addrLow_DamageAI_GetActivationMode
+    (void *)&addrLow_DamageAI_ActivateActor, (void *)&addrLow_DamageAI_ClearCollisionFlagsOnHit, (void *)&g_defaultActorCollisionInfo, (void *)&addrLow_DamageAI_GetActivationMode
 };
 #endif
 

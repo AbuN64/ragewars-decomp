@@ -6,7 +6,7 @@
 /* ROM-grounded data: src/rw_player_state_normal_callbacks_45_us_rev1.c */
 #if defined(VERSION_US_REV1)
 void * g_PlayerStateNormalCallbacks45Words[2] = {
-    (void *)addrLow_Playerai_NoopShortSequenceWaitFirst_de, (void *)addrLow_Playerai_NoopShortSequenceWaitSecond_de
+    (void *)&addrLow_Playerai_NoopShortSequenceWaitFirst_de, (void *)&addrLow_Playerai_NoopShortSequenceWaitSecond_de
 };
 #endif
 #endif

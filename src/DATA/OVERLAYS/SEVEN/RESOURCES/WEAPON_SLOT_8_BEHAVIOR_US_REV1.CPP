@@ -20,8 +20,8 @@ struct {
     1.0f,
     1.0f,
     (void *)&k_ResourcesEncodedWordsBlock3,
-    (void *)g_Weapon_ApplyScaledSideYawAddress,
-    (void *)g_Weaponai_DecaySpinAndActivateEffectAddress
+    (void *)&g_Weapon_ApplyScaledSideYawAddress,
+    (void *)&g_Weaponai_DecaySpinAndActivateEffectAddress
 };
 typedef char g_weaponSlot8BehaviorUsRev1SizeCheck[(sizeof(g_weaponSlot8BehaviorUsRev1) == 28) ? 1 : -1];
 #endif

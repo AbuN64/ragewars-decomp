@@ -1,27 +1,60 @@
+#include "COMMON/FORMAT.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 /* 800D9355_3.CPP */
 #if !(defined(VERSION_US))
 /* ROM-grounded data: rodata/writable/800D9360 */
 #ifdef VERSION_DE
-unsigned int g_audioLoaddecodedsamplesDataAddressWords[4] = {
-    0x00000000, 0x8014B938, 0x8014C8F0, 0x00000000,
+#if defined(VERSION_DE)
+struct {
+    s32 g_audioTransformInputStream;
+    u8 alignmentFill4[12];
+} g_audioLoaddecodedsamplesDataAddressWords __attribute__((aligned(4))) = {
+    0,
+    { 0x80, 0x14, 0xb9, 0x38, 0x80, 0x14, 0xc8, 0xf0, 0x0, 0x0, 0x0, 0x0 }
 };
+typedef char g_audioLoaddecodedsamplesDataAddressWordsSizeCheck[(sizeof(g_audioLoaddecodedsamplesDataAddressWords) == 16) ? 1 : -1];
+#endif
 #endif
 #ifdef VERSION_EU
-unsigned int g_audioLoaddecodedsamplesDataAddressWords[4] = {
-    0x00000000, 0x800C6A70, 0x800C6A60, 0x800C6A50,
+#if defined(VERSION_EU)
+struct {
+    s32 g_audioTransformInputStream;
+    u8 alignmentFill4[12];
+} g_audioLoaddecodedsamplesDataAddressWords __attribute__((aligned(4))) = {
+    0,
+    { 0x80, 0xc, 0x6a, 0x70, 0x80, 0xc, 0x6a, 0x60, 0x80, 0xc, 0x6a, 0x50 }
 };
+typedef char g_audioLoaddecodedsamplesDataAddressWordsSizeCheck[(sizeof(g_audioLoaddecodedsamplesDataAddressWords) == 16) ? 1 : -1];
+#endif
 #endif
 #ifdef VERSION_EU_X
-unsigned int g_audioLoaddecodedsamplesDataAddressWords[4] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+#if defined(VERSION_EU_X)
+struct {
+    s32 g_audioTransformInputStream;
+    u8 alignmentFill4[12];
+} g_audioLoaddecodedsamplesDataAddressWords __attribute__((aligned(4))) = {
+    0,
+    { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
+typedef char g_audioLoaddecodedsamplesDataAddressWordsSizeCheck[(sizeof(g_audioLoaddecodedsamplesDataAddressWords) == 16) ? 1 : -1];
+#endif
 #endif
 #ifdef VERSION_US_REV1
-unsigned int g_audioLoaddecodedsamplesDataAddressWords[4] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+#if defined(VERSION_US_REV1)
+struct {
+    s32 g_audioTransformInputStream;
+    u8 alignmentFill4[12];
+} g_audioLoaddecodedsamplesDataAddressWords __attribute__((aligned(4))) = {
+    0,
+    { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
+typedef char g_audioLoaddecodedsamplesDataAddressWordsSizeCheck[(sizeof(g_audioLoaddecodedsamplesDataAddressWords) == 16) ? 1 : -1];
+#endif
 #endif
 #endif
 

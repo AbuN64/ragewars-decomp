@@ -11,8 +11,8 @@ struct {
     void * update;
 } g_controllerState4HandlerWords __attribute__((aligned(4))) = {
     4,
-    (void *)addrLow_Nav_InitRangedCombat,
-    (void *)addrLow_Nav_UpdateRangedCombat
+    (void *)&addrLow_Nav_InitRangedCombat,
+    (void *)&addrLow_Nav_UpdateRangedCombat
 };
 #endif
 #endif

@@ -10,7 +10,7 @@ struct {
     void * enter;
 } g_overlayThreeActorStateEntryFragment7 __attribute__((aligned(4))) = {
     1,
-    (void *)addrLow_Action_SetBreakableState
+    (void *)&addrLow_Action_SetBreakableState
 };
 typedef char g_overlayThreeActorStateEntryFragment7SizeCheck[(sizeof(g_overlayThreeActorStateEntryFragment7) == 8) ? 1 : -1];
 #endif

@@ -6,7 +6,7 @@
 /* ROM-grounded data: rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CE988 */
 #if defined(VERSION_US_REV1)
 void * g_LinktablesEncodedWordsBlock16[1] = {
-    (void *)addrLow_Target_UpdateTargetSelection
+    (void *)&addrLow_Target_UpdateTargetSelection
 };
 #endif
 #endif

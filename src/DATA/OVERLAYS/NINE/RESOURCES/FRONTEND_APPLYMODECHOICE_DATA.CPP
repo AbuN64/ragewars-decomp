@@ -1,5 +1,14 @@
+#include "COMMON/FORMAT.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
 #include "TYPES.H"
+
+extern char Frontend_ApplyModeChoice[];
+extern char Frontend_ConsumePlayModeEvent[];
+extern char Frontend_DestroyPlayModeMenu[];
+extern char Frontend_HandlePlayModeShortcut[];
+extern char Frontend_InitPlayModeMenu[];
+extern char Frontend_UpdatePlayModeMenu[];
 
 #include "include_asm.h"
 #include "DATA/SCENARIO_SETUP/FRONTEND_APPLYMODECHOICE_DATA.H"
@@ -53,12 +62,16 @@ typedef char g_FrontendApplymodechoiceWords1SizeCheck[(sizeof(g_FrontendApplymod
 extern char g_playerSettingsFirstChoiceText[];
 extern char g_playerSettingsSecondChoiceText[];
 extern char g_playerSettingsSlotNumberFormat[];
-unsigned int D_src_6bb6ec48[31] = {
-    0x00000E08, 0x00000003, 0x004241BC, 0x00000E06, 0x00000003, 0x00423A40, 0x00000E03, 0x00000003,
-    0x0042418C, 0x00000002, 0x00000003, 0x00424328, 0x00000001, 0x00000003, 0x00423F48, 0x0000000A,
-    0x00000003, 0x004242D4, 0x00000000, 0x00000000, 0x00000000, (unsigned int)g_playerSettingsSecondChoiceText, (unsigned int)g_playerSettingsFirstChoiceText, (unsigned int)g_playerSettingsSlotNumberFormat + 0x4,
-    (unsigned int)g_playerSettingsSlotNumberFormat + 0x10, (unsigned int)g_playerSettingsSlotNumberFormat + 0xC, (unsigned int)g_playerSettingsSlotNumberFormat + 0x8, (unsigned int)g_playerSettingsSlotNumberFormat + 0xC, (unsigned int)g_playerSettingsSlotNumberFormat + 0x8, (unsigned int)g_playerSettingsSlotNumberFormat + 0x10, (unsigned int)g_playerSettingsSlotNumberFormat + 0x4,
+#if defined(VERSION_DE)
+struct {
+    ResidentEventHandlerEntry eventHandlers0[7];
+    void * links84[10];
+} D_src_6bb6ec48 __attribute__((aligned(4))) = {
+    { { 3592, 3, (ResidentEventHandler)(void *)((char *)&Frontend_UpdatePlayModeMenu - 0x80000000U) }, { 3590, 3, (ResidentEventHandler)(void *)((char *)&Frontend_InitPlayModeMenu - 0x80000000U) }, { 3587, 3, (ResidentEventHandler)(void *)((char *)&Frontend_DestroyPlayModeMenu - 0x80000000U) }, { 2, 3, (ResidentEventHandler)(void *)((char *)&Frontend_ConsumePlayModeEvent - 0x80000000U) }, { 1, 3, (ResidentEventHandler)(void *)((char *)&Frontend_ApplyModeChoice - 0x80000000U) }, { 10, 3, (ResidentEventHandler)(void *)((char *)&Frontend_HandlePlayModeShortcut - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { (void *)&g_playerSettingsSecondChoiceText, (void *)&g_playerSettingsFirstChoiceText, (void *)g_playerSettingsSlotNumberFormat + 0x4, (void *)g_playerSettingsSlotNumberFormat + 0x10, (void *)g_playerSettingsSlotNumberFormat + 0xC, (void *)g_playerSettingsSlotNumberFormat + 0x8, (void *)g_playerSettingsSlotNumberFormat + 0xC, (void *)g_playerSettingsSlotNumberFormat + 0x8, (void *)g_playerSettingsSlotNumberFormat + 0x10, (void *)g_playerSettingsSlotNumberFormat + 0x4 }
 };
+typedef char D_src_6bb6ec48SizeCheck[(sizeof(D_src_6bb6ec48) == 124) ? 1 : -1];
+#endif
 #endif
 #if defined(VERSION_EU)
 extern char g_playerSettingsSlotNumberTranslations[];
@@ -84,12 +97,12 @@ unsigned int D_src_6bb6ec48[31] = {
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
 #if defined(VERSION_US)
 ResidentEventHandlerEntry g_FrontendApplymodechoicePointerWords1[1] = {
-    { 3592, 3, (ResidentEventHandler)(void *)g_Frontend_UpdatePlayModeMenuPackedAddress24_FrontendApplymodechoiceData }
+    { 3592, 3, (ResidentEventHandler)(void *)&g_Frontend_UpdatePlayModeMenuPackedAddress24_FrontendApplymodechoiceData }
 };
 #endif
 #if defined(VERSION_US_REV1)
 ResidentEventHandlerEntry g_FrontendApplymodechoicePointerWords1[1] = {
-    { 3592, 3, (ResidentEventHandler)(void *)g_Frontend_UpdatePlayModeMenuPackedAddress24_FrontendApplymodechoiceData }
+    { 3592, 3, (ResidentEventHandler)(void *)&g_Frontend_UpdatePlayModeMenuPackedAddress24_FrontendApplymodechoiceData }
 };
 #endif
 #endif

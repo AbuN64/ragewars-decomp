@@ -10,8 +10,8 @@ struct {
     void * update;
 } g_controllerState3HandlerWords __attribute__((aligned(4))) = {
     3,
-    (void *)addrLow_Nav_InitPursuitStrafe,
-    (void *)addrLow_Nav_UpdatePursuitStrafe
+    (void *)&addrLow_Nav_InitPursuitStrafe,
+    (void *)&addrLow_Nav_UpdatePursuitStrafe
 };
 #endif
 #endif

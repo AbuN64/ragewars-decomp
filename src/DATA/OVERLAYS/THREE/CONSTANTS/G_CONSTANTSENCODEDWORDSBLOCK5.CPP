@@ -41,7 +41,7 @@ extern char addrLow_MovingAI_ChooseTriggerDelay[];
 extern char addrLow_MovingAI_UpdateTriggerDelay[];
 #if defined(VERSION_US_REV1)
 void * g_ConstantsEncodedWordsBlock5[3] = {
-    0, (void *)addrLow_MovingAI_ChooseTriggerDelay, (void *)addrLow_MovingAI_UpdateTriggerDelay
+    0, (void *)&addrLow_MovingAI_ChooseTriggerDelay, (void *)&addrLow_MovingAI_UpdateTriggerDelay
 };
 #endif
 #endif

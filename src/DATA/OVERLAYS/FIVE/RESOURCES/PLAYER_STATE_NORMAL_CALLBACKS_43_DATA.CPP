@@ -7,7 +7,7 @@ extern char g_Playerai_UpdateSequence73RunEndPoseCallbackAddressUs[];
 extern char g_Playerai_StartPlayerSequence74CallbackAddressUs[];
 #if defined(VERSION_US_REV1)
 void * g_playerStateNormalCallbacks43Words[2] = {
-    (void *)g_Playerai_UpdateSequence73RunEndPoseCallbackAddressUs, (void *)g_Playerai_StartPlayerSequence74CallbackAddressUs
+    (void *)&g_Playerai_UpdateSequence73RunEndPoseCallbackAddressUs, (void *)&g_Playerai_StartPlayerSequence74CallbackAddressUs
 };
 #endif
 #endif

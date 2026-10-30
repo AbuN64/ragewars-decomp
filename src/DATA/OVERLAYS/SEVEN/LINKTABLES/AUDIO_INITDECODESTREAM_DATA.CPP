@@ -1,3 +1,8 @@
+#include "COMMON/FORMAT.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
+#include "TYPES.H"
+
 
 /* ROM-grounded data: rodata/writable/800D94E8 */
 #ifdef VERSION_DE
@@ -41,7 +46,24 @@ unsigned int g_audioInitdecodestreamDataConstantWords[43] = {
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int g_audioInitdecodestreamDataConstantWords[6] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+#if defined(VERSION_US_REV1)
+struct {
+    u16 gPackedBitsLeft;
+    u16 g_audioDecodeBitBuffer;
+    u16 g_audioDecodeBitsLeft;
+    s16 g_audioDecodeFrameHeaderRead;
+    s16 g_audioTransformTablesInitialized;
+    u16 g_audioDecodedBlockCounter;
+    u8 alignmentFill12[12];
+} g_audioInitdecodestreamDataConstantWords __attribute__((aligned(4))) = {
+    0x0,
+    0x0,
+    0x0,
+    0,
+    0,
+    0x0,
+    { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
+typedef char g_audioInitdecodestreamDataConstantWordsSizeCheck[(sizeof(g_audioInitdecodestreamDataConstantWords) == 24) ? 1 : -1];
+#endif
 #endif

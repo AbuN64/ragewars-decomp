@@ -1,3 +1,6 @@
+#include "COMMON/FORMAT.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
 #include "TYPES.H"
 
 #include "include_asm.h"
@@ -26,10 +29,18 @@ char g_createDataTextFragment_us[28] =
 
 #if defined(VERSION_EU_X)
 #if defined(VERSION_EU_X)
-unsigned short g_createDataOffsetTable_eu_x[14] = {
-    0x8000, 0x0000, 0x0004, 0x0008, 0x000C, 0x0012, 0x0000, 0x0000, 0x002C, 0x0035, 0x003F, 0x004B,
-    0x0059, 0x0069,
+#if defined(VERSION_EU_X)
+struct {
+    u8 alignmentFill0[12];
+    s32 g_serialInterfaceAccessQueueInitialized;
+    u8 alignmentFill16[12];
+} g_createDataOffsetTable_eu_x __attribute__((aligned(2))) = {
+    { 0x80, 0x0, 0x0, 0x0, 0x0, 0x4, 0x0, 0x8, 0x0, 0xc, 0x0, 0x12 },
+    0,
+    { 0x0, 0x2c, 0x0, 0x35, 0x0, 0x3f, 0x0, 0x4b, 0x0, 0x59, 0x0, 0x69 }
 };
+typedef char g_createDataOffsetTable_eu_xSizeCheck[(sizeof(g_createDataOffsetTable_eu_x) == 28) ? 1 : -1];
+#endif
 #endif
 #endif
 

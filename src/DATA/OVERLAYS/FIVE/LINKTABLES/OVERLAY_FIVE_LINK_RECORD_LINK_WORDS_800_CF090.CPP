@@ -6,7 +6,7 @@
 /* ROM-grounded data: src/rw_player_state_special_callbacks_36_us_rev1.c */
 #if defined(VERSION_US_REV1)
 void * g_overlayFiveLinkRecordLinkWordsBlock2[2] = {
-    (void *)addrLow_Playerai_ClearPlayerWeaponLock, (void *)addrLow_Playerai_EnterMovingSequenceState
+    (void *)&addrLow_Playerai_ClearPlayerWeaponLock, (void *)&addrLow_Playerai_EnterMovingSequenceState
 };
 #endif
 #endif

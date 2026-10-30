@@ -21,10 +21,10 @@ extern char addrLow_Link_SetTriggerTrackCallback[];
 extern char addrLow_Link_SetTriggerTrack[];
 #if defined(VERSION_US_REV1)
 void * g_ConstantsEncodedWordsBlock4[35] = {
-    0, 0, 0, 0, 0, 0, 0, (void *)addrLow_MovingAI_InitializeMotionDispatch,
-    (void *)addrLow_MovingAI_InitializeDeviceHealth, 0, 0, (void *)addrLow_Triggered_StartTriggerAnimation, 0, (void *)addrLow_Triggered_ClearCollisionAndActivate, (void *)addrLow_Triggered_EnableTriggeredActorState, (void *)addrLow_Triggered_DeactivateForSequence,
-    (void *)addrLow_Triggered_DisableTriggeredActorState, (void *)addrLow_Link_RequestOwnerTrack, (void *)addrLow_Link_RequestGlobalTrack, (void *)addrLow_Link_PlayTriggerSoundCallback, (void *)addrLow_Link_PlayTriggerSound, (void *)addrLow_Link_DispatchTriggerAudio, (void *)addrLow_Link_SelectTriggerMusic, (void *)addrLow_Link_SetTriggerTrackCallback,
-    (void *)addrLow_Link_SetTriggerTrack, (void *)addrLow_Triggered_SetPairedDefinitionBytes, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, (void *)&addrLow_MovingAI_InitializeMotionDispatch,
+    (void *)&addrLow_MovingAI_InitializeDeviceHealth, 0, 0, (void *)&addrLow_Triggered_StartTriggerAnimation, 0, (void *)&addrLow_Triggered_ClearCollisionAndActivate, (void *)&addrLow_Triggered_EnableTriggeredActorState, (void *)&addrLow_Triggered_DeactivateForSequence,
+    (void *)&addrLow_Triggered_DisableTriggeredActorState, (void *)&addrLow_Link_RequestOwnerTrack, (void *)&addrLow_Link_RequestGlobalTrack, (void *)&addrLow_Link_PlayTriggerSoundCallback, (void *)&addrLow_Link_PlayTriggerSound, (void *)&addrLow_Link_DispatchTriggerAudio, (void *)&addrLow_Link_SelectTriggerMusic, (void *)&addrLow_Link_SetTriggerTrackCallback,
+    (void *)&addrLow_Link_SetTriggerTrack, (void *)&addrLow_Triggered_SetPairedDefinitionBytes, 0, 0, 0, 0, 0, 0,
     0, 0, 0
 };
 #endif
@@ -34,7 +34,7 @@ extern char addrLow_PlayerMatrix_ClearUnsupportedOpenFlag[];
 extern char addrLow_PlayerMatrix_UpdateOpeningDelay[];
 #if defined(VERSION_US_REV1)
 void * g_ConstantsEncodedWordsBlock11[3] = {
-    0, (void *)addrLow_PlayerMatrix_ClearUnsupportedOpenFlag, (void *)addrLow_PlayerMatrix_UpdateOpeningDelay
+    0, (void *)&addrLow_PlayerMatrix_ClearUnsupportedOpenFlag, (void *)&addrLow_PlayerMatrix_UpdateOpeningDelay
 };
 #endif
 #endif
