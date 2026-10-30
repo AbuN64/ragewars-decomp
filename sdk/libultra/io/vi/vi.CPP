@@ -29,7 +29,7 @@ void __osViInit(void)
     } else if (tv_type == 2) {
         contexts[1].modep = &g_videoInterfaceModeAlternate;
     } else {
-        contexts[1].modep = &osViModeTable;
+        contexts[1].modep = osViModeTable;
     }
     __osViNext->state = 0x20;
     __osViNext->control = __osViNext->modep->comRegs.ctrl;
