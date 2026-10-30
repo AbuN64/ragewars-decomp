@@ -1,44 +1,149 @@
+#include "DATA_OVERLAY_SN_RECORDS.H"
+
 #include "TYPES.H"
 #if defined(VERSION_US)
-u32 k_PortalDispatchactorbehaviorEncodedWordsUs[216] = {
-    0x02000020, 0x8000000A, 0x603A002C, 0x04010000, 0x00000000, 0x0A623E00,
-    0x2C040100, 0x00000000, 0x000A6046, 0x002C0401, 0x0000AC03, 0x00000A62,
-    0x4A002C04, 0x010000AC, 0x0300000A, 0x5C4C0002, 0x78013460, 0x00033468,
-    0x00030A60, 0x6A002C04, 0x03000004, 0x0000000A, 0x626E002C, 0x04030000,
-    0x04000000, 0x32A4000A, 0x60A6002C, 0x04030000, 0x04000000, 0x0A62AA00,
-    0x2C040300, 0x00040000, 0x000A5CDC, 0x00027F01, 0x34E40003, 0x0A60E600,
-    0x2C040300, 0x00040000, 0x000A62EA, 0x002C0403, 0x00000400, 0x00000A5C,
-    0xF400029B, 0x01320001, 0x0A600E01, 0x2C040100, 0x00000000, 0x000A6212,
-    0x012C0401, 0x00000000, 0x00000A60, 0x1A012C04, 0x010000DC, 0x0300000A,
-    0x621E012C, 0x04010000, 0xDC030000, 0x0A5C2001, 0x02780132, 0x34010A5C,
-    0x3C0102A9, 0x01344401, 0x060A6046, 0x012C0403, 0x00000400, 0x00000A62,
-    0x4A012C04, 0x03000004, 0x0000000A, 0x5C580102, 0x7C013460, 0x01020A60,
-    0x62012C04, 0x03000004, 0x0000000A, 0x6266012C, 0x04030000, 0x04000000,
-    0x0A60AE01, 0x2C040100, 0x00380400, 0x000A62B2, 0x012C0401, 0x00003804,
-    0x00000601, 0x00027D00, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x000A0805, 0x002C0402, 0x00008481,
-    0x00000A08, 0x09002C04, 0x02000080, 0x8500000A, 0x080D002C, 0x04020000,
-    0x9C860000, 0x0A081100, 0x2C040200, 0x00588700, 0x000A0815, 0x002C0402,
-    0x00007488, 0x00000A08, 0x19002C04, 0x02000000, 0x8B00000A, 0x081D002C,
-    0x04020000, 0x088B0000, 0x0A082100, 0x2C040200, 0x00308C00, 0x000A0825,
-    0x002C0402, 0x00005C8E, 0x00000A08, 0x29002C04, 0x0200008C, 0x9000000A,
-    0x082D002C, 0x04020000, 0xC4920000, 0x0A083100, 0x2C040200, 0x00809300,
-    0x000A0835, 0x002C0402, 0x00009C94, 0x00000A08, 0x39002C04, 0x02000054,
-    0x9800000A, 0x083D002C, 0x04020000, 0x7C990000, 0x0A084100, 0x2C040200,
-    0x007C9B00, 0x000A0845, 0x002C0402, 0x0000989C, 0x00000A08, 0x49002C04,
-    0x0200007C, 0x9900000A, 0x084D002C, 0x04020000, 0xC49E0000, 0x0A085100,
-    0x2C040200, 0x00C49E00, 0x000A0855, 0x002C0402, 0x0000C49E, 0x00000A08,
-    0x59002C04, 0x020000DC, 0x9E00000A, 0x085D002C, 0x04020000, 0x9C890000,
-    0x0A086100, 0x2C040200, 0x00F89F00, 0x000A0865, 0x002C0402, 0x000014A1,
-    0x00000A08, 0x69002C04, 0x02000030, 0xA200000A, 0x086D002C, 0x04020000,
-    0x4CA30000, 0x0A087100, 0x2C040200, 0x0068A400, 0x000A0875, 0x002C0402,
-    0x0000D4A5, 0x00000A08, 0x79002C04, 0x020000F0, 0xA6000006, 0x020002A8,
+struct {
+    u8 precedingRecordFragment[7];
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record1;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record2;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record3;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record4;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record5;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record6;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record7;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record8;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record9;
+    struct { u8 opcode; SnLe16 offset; } record10;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record11;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record12;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record13;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record14;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record15;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record16;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record17;
+    struct { u8 opcode; SnLe16 offset; } record18;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record19;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record20;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record21;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record22;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record23;
+    struct { u8 opcode; SnLe16 offset; } record24;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record25;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record26;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record27;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record28;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record29;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record30;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record31;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record32;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record33;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record34;
+    struct { u8 opcode; SnLe16 section; } record35;
+    struct { u8 opcode; SnLe16 codeSize; u8 code[125]; } record36;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record37;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record38;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record39;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record40;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record41;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record42;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record43;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record44;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record45;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record46;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record47;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record48;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record49;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record50;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record51;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record52;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record53;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record54;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record55;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record56;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record57;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record58;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record59;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record60;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record61;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record62;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record63;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record64;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record65;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record66;
+    struct { u8 opcode; SnLe16 section; } record67;
+    u8 followingRecordFragment[2];
+} k_PortalDispatchactorbehaviorEncodedWordsUs __attribute__((aligned(4))) = {
+    { 0x02, 0x00, 0x00, 0x20, 0x80, 0x00, 0x00 },
+    { 10, 96, SN_LE16(58), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(0) } } },
+    { 10, 98, SN_LE16(62), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(0) } } },
+    { 10, 96, SN_LE16(70), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(940) } } },
+    { 10, 98, SN_LE16(74), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(940) } } },
+    { 10, 92, SN_LE16(76), { 2, SN_LE16(376) } },
+    { 52, SN_LE16(96), 3 },
+    { 52, SN_LE16(104), 3 },
+    { 10, 96, SN_LE16(106), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(110), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 50, SN_LE16(164) },
+    { 10, 96, SN_LE16(166), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(170), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 92, SN_LE16(220), { 2, SN_LE16(383) } },
+    { 52, SN_LE16(228), 3 },
+    { 10, 96, SN_LE16(230), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(234), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 92, SN_LE16(244), { 2, SN_LE16(411) } },
+    { 50, SN_LE16(256) },
+    { 10, 96, SN_LE16(270), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(0) } } },
+    { 10, 98, SN_LE16(274), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(0) } } },
+    { 10, 96, SN_LE16(282), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(988) } } },
+    { 10, 98, SN_LE16(286), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(988) } } },
+    { 10, 92, SN_LE16(288), { 2, SN_LE16(376) } },
+    { 50, SN_LE16(308) },
+    { 10, 92, SN_LE16(316), { 2, SN_LE16(425) } },
+    { 52, SN_LE16(324), 6 },
+    { 10, 96, SN_LE16(326), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(330), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 92, SN_LE16(344), { 2, SN_LE16(380) } },
+    { 52, SN_LE16(352), 2 },
+    { 10, 96, SN_LE16(354), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(358), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 96, SN_LE16(430), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(1080) } } },
+    { 10, 98, SN_LE16(434), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(1080) } } },
+    { 6, SN_LE16(1) },
+    { 2, SN_LE16(125), { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },
+    { 10, 8, SN_LE16(5), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(33156) } } },
+    { 10, 8, SN_LE16(9), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(34176) } } },
+    { 10, 8, SN_LE16(13), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(34460) } } },
+    { 10, 8, SN_LE16(17), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(34648) } } },
+    { 10, 8, SN_LE16(21), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(34932) } } },
+    { 10, 8, SN_LE16(25), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(35584) } } },
+    { 10, 8, SN_LE16(29), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(35592) } } },
+    { 10, 8, SN_LE16(33), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(35888) } } },
+    { 10, 8, SN_LE16(37), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(36444) } } },
+    { 10, 8, SN_LE16(41), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(37004) } } },
+    { 10, 8, SN_LE16(45), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(37572) } } },
+    { 10, 8, SN_LE16(49), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(37760) } } },
+    { 10, 8, SN_LE16(53), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(38044) } } },
+    { 10, 8, SN_LE16(57), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(38996) } } },
+    { 10, 8, SN_LE16(61), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(39292) } } },
+    { 10, 8, SN_LE16(65), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(39804) } } },
+    { 10, 8, SN_LE16(69), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(40088) } } },
+    { 10, 8, SN_LE16(73), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(39292) } } },
+    { 10, 8, SN_LE16(77), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(40644) } } },
+    { 10, 8, SN_LE16(81), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(40644) } } },
+    { 10, 8, SN_LE16(85), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(40644) } } },
+    { 10, 8, SN_LE16(89), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(40668) } } },
+    { 10, 8, SN_LE16(93), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(35228) } } },
+    { 10, 8, SN_LE16(97), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(40952) } } },
+    { 10, 8, SN_LE16(101), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(41236) } } },
+    { 10, 8, SN_LE16(105), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(41520) } } },
+    { 10, 8, SN_LE16(109), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(41804) } } },
+    { 10, 8, SN_LE16(113), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(42088) } } },
+    { 10, 8, SN_LE16(117), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(42452) } } },
+    { 10, 8, SN_LE16(121), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(42736) } } },
+    { 6, SN_LE16(2) },
+    { 0x02, 0xA8 }
 };
-u8 k_PortalDispatchactorbehaviorEncodedWordsUsTail[1] = {
-    0x01,
-};
+typedef char k_PortalDispatchactorbehaviorEncodedWordsUsSizeCheck[(sizeof(k_PortalDispatchactorbehaviorEncodedWordsUs) == 864) ? 1 : -1];
+struct { u8 codeSizeHigh; } k_PortalDispatchactorbehaviorEncodedWordsUsTail = { 1 };
+typedef char k_PortalDispatchactorbehaviorEncodedWordsUsTailSizeCheck[(sizeof(k_PortalDispatchactorbehaviorEncodedWordsUsTail) == 1) ? 1 : -1];
 #endif
