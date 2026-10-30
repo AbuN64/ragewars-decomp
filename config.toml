@@ -50,7 +50,7 @@ segments = [
   { name = "rom_header_ipl3", rom = 0x0, kind = "bin" },
   { name = "game_code", rom = 0x1000, vram = 0x80200400 },
   { name = "game_data", rom = 0xC2860, vram = 0x800C1C60 },
-  { name = "debug_symbols", rom = 0x101000, kind = "bin" },
+  { name = "debug_symbols", rom = 0x101000, kind = "bin", earlier_build = [{ rom = 0x15C25C, end = 0x15CB24, delta = 0x7FFFD400 }] },
   { name = "ovl_frontendMenu", rom = 0x176000, vram = 0x80400000 },
   { name = "ovl_frontendMenuData", rom = 0x1C5414, vram = 0x801605CC },
   { name = "debug_symbols_and_assets", rom = 0x1C8BF0, kind = "bin" },
@@ -68,7 +68,7 @@ segments = [
   { name = "game_data", rom = 0xC28A0, vram = 0x800C1CA0 },
   { name = "ovl_frontendMenu", rom = 0xF0000, vram = 0x80400000 },
   { name = "ovl_frontendMenuData", rom = 0x13F544, vram = 0x8015A6FC },
-  { name = "debug_symbols_and_assets", rom = 0x142D20, kind = "bin" },
+  { name = "debug_symbols_and_assets", rom = 0x142D20, kind = "bin", earlier_build = [{ rom = 0x15125C, end = 0x151B24, delta = 0x80008400 }] },
 ]
 
 [version.us]

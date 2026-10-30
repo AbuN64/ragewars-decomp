@@ -7,7 +7,9 @@ options:
   src_path: "src"
   build_path: "build/eu-x"
   asset_path: "asm/eu-x/assets"
-  symbol_addrs_path: "versions/eu-x/symbol_addrs.txt"
+  symbol_addrs_path:
+    - "versions/eu-x/symbol_addrs.txt"
+    - "versions/eu-x/earlier_build_symbols.txt"
   ld_script_path: "build/eu-x/splat.ld"
   generated_asm_macros_directory: "asm/eu-x"
   undefined_funcs_auto_path: "build/eu-x/undefined_funcs_auto.txt"
@@ -29,6 +31,7 @@ segments:
     type: code
     start: 0x1000
     vram: 0x80200400
+    exclusive_ram_id: "main"
     subsegments:
       - [0x1000, c, game_code]
       - [0x1100, c, game_code]
@@ -3217,6 +3220,7 @@ segments:
     type: code
     start: 0xC28A0
     vram: 0x800C1CA0
+    exclusive_ram_id: "main"
     subsegments:
       - [0xC28A0, rodata, game_data/literals_Libsn_ServiceHostCommands]
       - [0xC28C8, data, game_data/g_turretUpDirectionPad]
@@ -4622,6 +4626,7 @@ segments:
     type: code
     start: 0xF0000
     vram: 0x80400000
+    exclusive_ram_id: "main"
     subsegments:
       - [0xF0000, c, ovl_frontendMenu]
       - [0xF02D8, c, ovl_frontendMenu]
@@ -6007,9 +6012,23 @@ segments:
     type: code
     start: 0x13F544
     vram: 0x8015A6FC
+    exclusive_ram_id: "main"
     subsegments:
       - [0x13F544, data, ovl_frontendMenuData/g_EventDrawclippedwidgetchildrenPointerWords1]
   - name: debug_symbols_and_assets
     type: bin
     start: 0x142D20
+  - name: debug_symbols_and_assets_earlier_15125C
+    type: code
+    start: 0x15125C
+    vram: 0x8015965C
+    exclusive_ram_id: "earlier_build"
+    subsegments:
+      - [0x15125C, data, debug_symbols_and_assets_earlier_15125C/g_earlierObjectRecords]
+      - [0x151A9C, data, debug_symbols_and_assets_earlier_15125C/g_earlierObjectRecordTable]
+      - [0x151AF8, data, debug_symbols_and_assets_earlier_15125C/g_earlierObjectIdTable]
+      - [0x151B08, data, debug_symbols_and_assets_earlier_15125C/g_earlierObjectTailTable]
+  - name: debug_symbols_and_assets_151B24
+    type: bin
+    start: 0x151B24
   - [0x800000]

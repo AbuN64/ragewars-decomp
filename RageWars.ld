@@ -42790,6 +42790,59 @@ SECTIONS
     {
         assets/debug_symbols_and_assets.bin.o(.data);
     }
+#if defined(VERSION_EU_X)
+    .debug_symbols_and_assets_earlier_15125C 0x8015965C (INFO) : AT(0x15125C) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_OBJECT_RECORD.CPP.o(.data);
+    }
+    .debug_symbols_and_assets_earlier_15125C.bss ADDR(.debug_symbols_and_assets_earlier_15125C) + SIZEOF(.debug_symbols_and_assets_earlier_15125C) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_OBJECT_RECORD.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_EU_X)
+    .debug_symbols_and_assets_151B24 0x00151B24 : AT(0x151B24) SUBALIGN(1)
+    {
+        assets/debug_symbols_and_assets_151B24.bin.o(.data);
+    }
+#endif
+#if defined(VERSION_EU)
+    .debug_symbols_earlier_15C25C 0x8015965C (INFO) : AT(0x15C25C) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_OBJECT_RECORD.CPP.o(.data);
+    }
+    .debug_symbols_earlier_15C25C.bss ADDR(.debug_symbols_earlier_15C25C) + SIZEOF(.debug_symbols_earlier_15C25C) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_OBJECT_RECORD.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_EU)
+    .debug_symbols_15CB24 0x0015CB24 : AT(0x15CB24) SUBALIGN(1)
+    {
+        assets/debug_symbols_15CB24.bin.o(.data);
+    }
+#endif
+#if defined(VERSION_EU)
+    ASSERT(SIZEOF(.rom_header_ipl3) <= 0x1000, "ROM extent: rom_header_ipl3")
+    ASSERT(SIZEOF(.game_code) <= 0xC1860, "ROM extent: game_code")
+    ASSERT(SIZEOF(.game_data) <= 0x3E7A0, "ROM extent: game_data")
+    ASSERT(SIZEOF(.debug_symbols) <= 0x5B25C, "ROM extent: debug_symbols")
+    ASSERT(SIZEOF(.debug_symbols_earlier_15C25C) <= 0x8C8, "ROM extent: debug_symbols_earlier_15C25C")
+    ASSERT(SIZEOF(.debug_symbols_15CB24) <= 0x194DC, "ROM extent: debug_symbols_15CB24")
+    ASSERT(SIZEOF(.ovl_frontendMenu) <= 0x4F414, "ROM extent: ovl_frontendMenu")
+    ASSERT(SIZEOF(.ovl_frontendMenuData) <= 0x37DC, "ROM extent: ovl_frontendMenuData")
+    ASSERT(SIZEOF(.debug_symbols_and_assets) <= 0x637410, "ROM extent: debug_symbols_and_assets")
+#endif
+#if defined(VERSION_EU_X)
+    ASSERT(SIZEOF(.rom_header_ipl3) <= 0x1000, "ROM extent: rom_header_ipl3")
+    ASSERT(SIZEOF(.game_code) <= 0xC18A0, "ROM extent: game_code")
+    ASSERT(SIZEOF(.game_data) <= 0x2D760, "ROM extent: game_data")
+    ASSERT(SIZEOF(.ovl_frontendMenu) <= 0x4F544, "ROM extent: ovl_frontendMenu")
+    ASSERT(SIZEOF(.ovl_frontendMenuData) <= 0x37DC, "ROM extent: ovl_frontendMenuData")
+    ASSERT(SIZEOF(.debug_symbols_and_assets) <= 0xE53C, "ROM extent: debug_symbols_and_assets")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_earlier_15125C) <= 0x8C8, "ROM extent: debug_symbols_and_assets_earlier_15125C")
+    ASSERT(SIZEOF(.debug_symbols_and_assets_151B24) <= 0x6AE4DC, "ROM extent: debug_symbols_and_assets_151B24")
+#endif
     /DISCARD/ : { *(.MIPS.abiflags .reginfo .pdr .mdebug* .options .debug* .comment .note* .gnu.attributes) }
 }
 INCLUDE undefined_syms.ld

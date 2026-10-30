@@ -7,7 +7,9 @@ options:
   src_path: "src"
   build_path: "build/eu"
   asset_path: "asm/eu/assets"
-  symbol_addrs_path: "versions/eu/symbol_addrs.txt"
+  symbol_addrs_path:
+    - "versions/eu/symbol_addrs.txt"
+    - "versions/eu/earlier_build_symbols.txt"
   ld_script_path: "build/eu/splat.ld"
   generated_asm_macros_directory: "asm/eu"
   undefined_funcs_auto_path: "build/eu/undefined_funcs_auto.txt"
@@ -29,6 +31,7 @@ segments:
     type: code
     start: 0x1000
     vram: 0x80200400
+    exclusive_ram_id: "main"
     subsegments:
       - [0x1000, c, game_code]
       - [0x1100, c, game_code]
@@ -3212,6 +3215,7 @@ segments:
     type: code
     start: 0xC2860
     vram: 0x800C1C60
+    exclusive_ram_id: "main"
     subsegments:
       - [0xC2860, rodata, game_data/literals_Libsn_ServiceHostCommands]
       - [0xC2888, rodata, game_data/g_turretUpDirectionPad]
@@ -4663,10 +4667,24 @@ segments:
   - name: debug_symbols
     type: bin
     start: 0x101000
+  - name: debug_symbols_earlier_15C25C
+    type: code
+    start: 0x15C25C
+    vram: 0x8015965C
+    exclusive_ram_id: "earlier_build"
+    subsegments:
+      - [0x15C25C, data, debug_symbols_earlier_15C25C/g_earlierObjectRecords]
+      - [0x15CA9C, data, debug_symbols_earlier_15C25C/g_earlierObjectRecordTable]
+      - [0x15CAF8, data, debug_symbols_earlier_15C25C/g_earlierObjectIdTable]
+      - [0x15CB08, data, debug_symbols_earlier_15C25C/g_earlierObjectTailTable]
+  - name: debug_symbols_15CB24
+    type: bin
+    start: 0x15CB24
   - name: ovl_frontendMenu
     type: code
     start: 0x176000
     vram: 0x80400000
+    exclusive_ram_id: "main"
     subsegments:
       - [0x176000, c, ovl_frontendMenu]
       - [0x1762D8, c, ovl_frontendMenu]
@@ -6048,6 +6066,7 @@ segments:
     type: code
     start: 0x1C5414
     vram: 0x801605CC
+    exclusive_ram_id: "main"
     subsegments:
       - [0x1C5414, data, ovl_frontendMenuData/g_overlayTwoThreeObjectLinkWords]
   - name: debug_symbols_and_assets

@@ -2,7 +2,7 @@
 VMACRO_eu := VERSION_EU
 SHA1_eu := 46b474fac79a4b21535bb6c78ce3039a2c202359
 ROM0_eu := 0
-ROM_SECTIONS_eu :=
+ROM_SECTIONS_eu := --set-section-flags .debug_symbols_earlier_15C25C=alloc,load,readonly,code,contents --change-section-lma .debug_symbols_earlier_15C25C=0x15C25C
 build/eu/sdk/MATH/aigetlen.CPP.o: TEXTSIZE := 0x14
 build/eu/sdk/MATH/aisetfreq.CPP.o: TEXTSIZE := 0x118
 build/eu/sdk/MATH/cosf.CPP.o: TEXTSIZE := 0x104
