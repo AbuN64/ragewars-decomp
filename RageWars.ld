@@ -42790,6 +42790,22 @@ SECTIONS
     {
         assets/debug_symbols_and_assets.bin.o(.data);
     }
+#if defined(VERSION_EU)
+    .debug_symbols_earlier_148420 0x0044F420 (INFO) : AT(0x148420) SUBALIGN(1)
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_EU_148420.CPP.o(.data);
+    }
+    .debug_symbols_earlier_148420.bss ADDR(.debug_symbols_earlier_148420) + SIZEOF(.debug_symbols_earlier_148420) (INFO) :
+    {
+        src/DATA/EARLIER_BUILD/EARLIER_MENU_EU_148420.CPP.o(.bss .sbss COMMON);
+    }
+#endif
+#if defined(VERSION_EU)
+    .debug_symbols_14CBE8 0x0014CBE8 : AT(0x14CBE8) SUBALIGN(1)
+    {
+        assets/debug_symbols_14CBE8.bin.o(.data);
+    }
+#endif
 #if defined(VERSION_EU_X)
     .debug_symbols_and_assets_earlier_15125C 0x8015965C (INFO) : AT(0x15125C) SUBALIGN(1)
     {
@@ -42982,12 +42998,15 @@ SECTIONS
     ASSERT(SIZEOF(.rom_header_ipl3) <= 0x1000, "ROM extent: rom_header_ipl3")
     ASSERT(SIZEOF(.game_code) <= 0xC1860, "ROM extent: game_code")
     ASSERT(SIZEOF(.game_data) <= 0x3E7A0, "ROM extent: game_data")
-    ASSERT(SIZEOF(.debug_symbols) <= 0x5B25C, "ROM extent: debug_symbols")
+    ASSERT(SIZEOF(.debug_symbols) <= 0x47420, "ROM extent: debug_symbols")
+    ASSERT(SIZEOF(.debug_symbols_earlier_148420) <= 0x47C8, "ROM extent: debug_symbols_earlier_148420")
+    ASSERT(SIZEOF(.debug_symbols_14CBE8) <= 0xF674, "ROM extent: debug_symbols_14CBE8")
     ASSERT(SIZEOF(.debug_symbols_earlier_15C25C) <= 0x8C8, "ROM extent: debug_symbols_earlier_15C25C")
     ASSERT(SIZEOF(.debug_symbols_15CB24) <= 0x194DC, "ROM extent: debug_symbols_15CB24")
     ASSERT(SIZEOF(.ovl_frontendMenu) <= 0x4F414, "ROM extent: ovl_frontendMenu")
     ASSERT(SIZEOF(.ovl_frontendMenuData) <= 0x37DC, "ROM extent: ovl_frontendMenuData")
     ASSERT(SIZEOF(.debug_symbols_and_assets) <= 0x637410, "ROM extent: debug_symbols_and_assets")
+    ASSERT(ADDR(.debug_symbols_earlier_148420.bss) + SIZEOF(.debug_symbols_earlier_148420.bss) <= ADDR(.debug_symbols_earlier_15C25C) || ADDR(.debug_symbols_earlier_15C25C.bss) + SIZEOF(.debug_symbols_earlier_15C25C.bss) <= ADDR(.debug_symbols_earlier_148420), "VMA overlap: debug_symbols_earlier_148420, debug_symbols_earlier_15C25C")
 #endif
 #if defined(VERSION_EU_X)
     ASSERT(SIZEOF(.rom_header_ipl3) <= 0x1000, "ROM extent: rom_header_ipl3")
