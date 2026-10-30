@@ -13,7 +13,6 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/STATEPAIR.H"
-#include "X_STDIO/X_STDIO.H"
 
 /* 802A0888_6.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || defined(VERSION_US)

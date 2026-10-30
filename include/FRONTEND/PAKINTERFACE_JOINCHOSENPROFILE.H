@@ -1,5 +1,0 @@
-#ifndef FRONTEND_PAKINTERFACE_JOINCHOSENPROFILE_H
-#define FRONTEND_PAKINTERFACE_JOINCHOSENPROFILE_H
-#include "COMMON/NAME.H"
-extern s32 PAKInterface_JoinChosenProfile(s32 player);
-#endif

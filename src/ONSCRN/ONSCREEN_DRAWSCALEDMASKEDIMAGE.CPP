@@ -1,7 +1,7 @@
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "include_asm.h"
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
-#include "GFX/OVERLAY_SCRIPT_AND_TEXT_TABLE_VIEWS.H"
+#include "ONSCRN.H"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"

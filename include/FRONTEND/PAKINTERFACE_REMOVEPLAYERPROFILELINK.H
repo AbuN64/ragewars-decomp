@@ -1,5 +1,0 @@
-#ifndef FRONTEND_PAKINTERFACE_REMOVEPLAYERPROFILELINK_H
-#define FRONTEND_PAKINTERFACE_REMOVEPLAYERPROFILELINK_H
-#include "COMMON/ENTRYRECAT6C.H"
-extern int PAKInterface_RemovePlayerProfileLink(int id, int value);
-#endif

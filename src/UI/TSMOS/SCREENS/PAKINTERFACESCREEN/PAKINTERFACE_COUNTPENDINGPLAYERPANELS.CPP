@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_COUNTPENDINGPLAYERPANELS.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Counts how many of the four 2920-byte entries g_pakProfileScreenState points to have a word at offset 0x58 that is not zero, 0xE or 0x11.
    Adapted from PAKInterface_CountActivePlayerPanels with the extra 0xE and 0x11 exclusions changed. */

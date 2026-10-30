@@ -1,11 +1,10 @@
 #include "COMMON/VECTOR3.H"
 #include "COMMON/MATRIXRECORD.H"
-#include "RESMGR/MATRIX_RECORD_VIEWS.H"
+#include "UI/X_FILES/X_MATH.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "RESMGR/XMATH_BUILDAXISANGLEMATRIX.H"
 #include "RESMGR/resmgr_string_memory.H"
 extern void MatrixFromAngles(f32 *matrix, f32 *angles);
 

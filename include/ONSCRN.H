@@ -6,4 +6,60 @@ extern void OnScreen_DrawSpriteNumber(s32 value, f32 x, f32 y, f32 size, f32 sca
 extern void OnScreen_SetupTextRendering(void);
 extern void OnScreen_LoadTextTileModeOne(void);
 extern void OnScreen_LoadTextTileModeTwo(void);
+
+struct OverlayScriptTableView {
+    unsigned char padding_0[4];
+    s32 *script;
+    s32 state;
+};
+struct OverlayScriptPrimaryRangeView {
+    unsigned char padding_0[60];
+    s32 target;
+    s32 owner;
+    s32 initialPercent;
+};
+struct OverlayScriptSecondaryRangeView {
+    unsigned char padding_0[132];
+    s32 target;
+    s32 owner;
+    s32 initialPercent;
+};
+struct COverlay {
+    s32 active;
+    s32 *script;
+    s32 state;
+    s32 wait;
+    f32 x;
+    f32 y;
+    f32 targetX;
+    f32 targetY;
+    f32 velX;
+    f32 velY;
+    f32 accelX;
+    f32 accelY;
+    f32 rate;
+    u8 pad34[4];
+    s32 handle; /* 0x38: resource handle initialized by the mover constructor */
+};
+struct OnScreenImageTableView {
+    s16 count;
+    u8 pad2[6];
+    ImageTableEntry entries[1];
+};
+
+/* Packed intensity font pixels installed by the resource loader. */
+extern u8 *g_onScreenFontTexture;
+extern u8 *OnScreen_GetFontTexture(void);
+
+typedef struct TextureTileBlock {
+    u32 width;
+    u32 height;
+    u8 pixels[0]; /* Tile pixels follow the eight-byte width/height header. */
+} TextureTileBlock;
+typedef struct TextureTileGrid {
+    u16 columns;
+    u16 rows;
+    u32 reserved;
+    u8 blocks[1];
+} TextureTileGrid;
 #endif

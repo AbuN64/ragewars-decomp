@@ -1,7 +1,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "CAMERA/FADE_AND_COLOR_BLEND_VIEWS.H"
 #include "TYPES.H"
-#include "CAMERA/GSKY_GETMASKEDEFFECTCOLOR.H"
+#include "CAMERA/GSKY.H"
 
 extern s32 g_gameSettings;
 

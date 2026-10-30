@@ -1,6 +1,6 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
-#include "FRONTEND/PAKINTERFACE_REMOVEPLAYERPROFILELINK.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Releases the first of the four twelve-byte slots at 0x2DF8 of g_pakProfileScreenState whose id and value match
    the arguments, marking its id -1 and its state 2, and returns whether one was found. */

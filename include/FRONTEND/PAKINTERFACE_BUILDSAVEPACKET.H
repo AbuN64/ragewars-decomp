@@ -1,5 +1,0 @@
-#ifndef FRONTEND_PAKINTERFACE_BUILDSAVEPACKET_H
-#define FRONTEND_PAKINTERFACE_BUILDSAVEPACKET_H
-#include "COMMON/ENTRYRECAT6C.H"
-extern void PAKInterface_BuildSavePacket(s32 index);
-#endif

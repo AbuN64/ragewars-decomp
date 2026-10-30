@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_REASSIGNLOCALPROFILES.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Reorders the four 400-byte player records g_localPlayerProfiles by the players' choices: copies all four to
    the buffer at 0x2E28 of the block g_pakProfileScreenState points to and resets each through Player_InitializeProfile,

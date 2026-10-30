@@ -1,5 +1,0 @@
-#ifndef FRONTEND_PAKINTERFACE_REASSIGNLOCALPROFILES_H
-#define FRONTEND_PAKINTERFACE_REASSIGNLOCALPROFILES_H
-#include "COMMON/NAME.H"
-extern void PAKInterface_ReassignLocalProfiles(void);
-#endif

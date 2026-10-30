@@ -1,7 +1,0 @@
-#ifndef MENU_GFX_GFX_GETCONVERTEDCOUNTERRATIO_H
-#define MENU_GFX_GFX_GETCONVERTEDCOUNTERRATIO_H
-#include "TYPES.H"
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
-extern double Gfx_GetConvertedCounterRatio(void);
-#endif

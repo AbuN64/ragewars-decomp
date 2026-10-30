@@ -1,6 +1,6 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
-#include "FRONTEND/PAKINTERFACE_FINDEMPTYPROFILESLOT.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Returns the index of the first of a player's four 400-byte entries in the game g_pakProfileScreenState whose
    state byte at 0x7D is -1, or -1 when all are in use. */

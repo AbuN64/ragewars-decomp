@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_COUNTACTIVEPLAYERPANELS.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Counts how many of the four 2920-byte entries g_pakProfileScreenState points to have a non-zero word at
    offset 0x58. */

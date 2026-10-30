@@ -1,5 +1,0 @@
-#ifndef COMMON_LONE_SCHEDULER_ACCUMULATED_GRAPHICS_RSP_DURATION_H
-#define COMMON_LONE_SCHEDULER_ACCUMULATED_GRAPHICS_RSP_DURATION_H
-#include "TYPES.H"
-extern f32 g_schedulerAccumulatedGraphicsRspDuration;
-#endif

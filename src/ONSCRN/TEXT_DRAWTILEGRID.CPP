@@ -4,7 +4,7 @@
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
-#include "GFX/TEXTURE_TILE_TYPES.H"
+#include "ONSCRN.H"
 #include "include_asm.h"
 
 /* Text_DrawTileGrid.CPP */

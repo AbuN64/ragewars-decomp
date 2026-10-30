@@ -3,7 +3,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_COPYACTIVEPROFILESTOPAKSLOTS.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Copies the records player p owns into p's block record: for each of the four 400-byte records of
    g_localPlayerProfiles whose byte 0xE is clear and whose owner byte 0xD is p, when the matching 150-byte

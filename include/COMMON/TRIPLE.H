@@ -8,7 +8,7 @@
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/GLOBALS.H"
 #include "COMMON/SHARED_DEBUGFIELD.H"
-#include "COMMON/MENU_SETUP_VERSIONS.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 extern float k_turretQuaternionAngleScale;
 extern float k_turretHeadingSineScale;

@@ -1,6 +1,6 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
-#include "FRONTEND/PAKINTERFACE_AREPLAYERLINKSEMPTY.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Returns 1 when all four twelve-byte slots at offset 0x2DF0 of the object g_pakProfileScreenState hold -1 in
    their id word, stopping at the first that does not. */

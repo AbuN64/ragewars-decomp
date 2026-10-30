@@ -1,6 +1,6 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
-#include "FRONTEND/PAKINTERFACE_FINDPLAYERPROFILELINK.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Returns the index of the first of the four twelve-byte slots at offset 0x2DF8 of g_pakProfileScreenState whose
    id and value words match the arguments, or -1 when none does. */

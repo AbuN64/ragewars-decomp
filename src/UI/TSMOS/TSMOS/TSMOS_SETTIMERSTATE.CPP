@@ -5,7 +5,7 @@
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/STATEPAIR.H"
-#include "RESMGR/STATEPAIR.H"
+#include "UI/TSMOS/TSMOS.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/TEXTURE.H"
 

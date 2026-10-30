@@ -1,6 +1,6 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_GETRECORDSNOTESIZE.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Reads two values and reports whether the first reaches the rounded object size when the second is nonzero. */
 

@@ -2,8 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_JOINCHOSENPROFILE.H"
-#include "FRONTEND/PAKINTERFACE_FINDEMPTYPLAYERLINK.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Places player p's chosen record into a free place: when the flag word for the chosen slot (index
    at 0xAEC of the player's 2920-byte record at 0x58, flags from 0xAF0) is 1, it takes the first of

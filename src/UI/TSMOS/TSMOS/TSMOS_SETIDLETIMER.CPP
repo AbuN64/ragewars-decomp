@@ -1,6 +1,6 @@
 #include "COMMON/STATEPAIR.H"
 #include "COMMON/GAME_SESSION.H"
-#include "RESMGR/STATEPAIR.H"
+#include "UI/TSMOS/TSMOS.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"

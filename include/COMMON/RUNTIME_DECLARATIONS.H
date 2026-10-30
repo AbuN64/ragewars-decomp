@@ -1,7 +1,7 @@
 #ifndef COMMON_RUNTIME_DECLARATIONS_H
 #define COMMON_RUNTIME_DECLARATIONS_H
 #include <stddef.h>
-#include "COMMON/LONE/SCHEDULER_ACCUMULATED_GRAPHICS_RSP_DURATION.H"
+#include "ENGINE/SCHED.H"
 #include "COMMON/LONE/PARTICLE_PITCH_MATRIX_SCRATCH.H"
 #include "COMMON/LONE/SCREEN_MESSAGE_ALLOCATION_LABEL.H"
 #include "COMMON/LONE/FRONTEND_VIEWPORT_WIDTH.H"
@@ -1514,7 +1514,7 @@ extern void (*g_readSourceColor)(void);
 
 extern char g_SelectPromptTextGroupFiveCase6Text[];
 
-#include "GFX/TEXT/ONSCREEN_GETFONTTEXTURE.H"
+#include "ONSCRN.H"
 
 extern s32 g_frameHeapBufferBytes;
 

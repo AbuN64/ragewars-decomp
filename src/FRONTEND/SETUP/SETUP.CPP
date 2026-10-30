@@ -11,7 +11,7 @@
    request 0xE78 through SoundElement_PlayFlatSound and calls Menu_InitializeOptionsScene; returns zero. */
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.H"
+#include "UI/TSMOS/SCREENS/SCENARIOSETUPSCREEN.H"
 
 #if defined(VERSION_DE)
 #define ID_2FE 762

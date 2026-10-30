@@ -2,6 +2,11 @@
 #define AI_PLAYERAI_H
 #include "TYPES.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
+#include "COMMON/APPROACHLOCATION.H"
+#include "COMMON/GLOBALS.H"
+#include "COMMON/SHARED_DEBUGFIELD.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
+#include "COMMON/MENU_UI_PROVIDERS.H"
 struct Shared_ReactionSource {
     u8 kind;
     char pad0[0x3];
@@ -35,4 +40,6 @@ struct Shared_ReactionObjectStatistics {
     s32 primaryReactionCount;
     s32 secondaryReactionCount;
 };
+
+extern const float g_playerDamageStunIncrement[4];
 #endif

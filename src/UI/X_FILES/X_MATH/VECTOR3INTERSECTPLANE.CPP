@@ -8,7 +8,7 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"
 #include "MATH/math_double.H"
-#include "MATH/VECTOR3INTERSECTPLANE.H"
+#include "UI/X_FILES/X_MATH.H"
 
 /* Normalizes an offset angle, using double remainder for large magnitudes and repeated single-precision adjustments otherwise. */
 

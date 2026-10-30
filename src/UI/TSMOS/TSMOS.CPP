@@ -6,7 +6,7 @@
 #include "COMMON/RECORD.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/TEXTURE.H"
-#include "RESMGR/TSMOS.H"
+#include "UI/TSMOS/TSMOS.H"
 
 /** Set g_frontendShutdownState to one. */
 

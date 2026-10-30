@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_PULSEIDLEPANELLABELS.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Pulses entry i of the 2920-byte records g_pakProfileScreenState points to: takes the sine of i plus the
    entry's phase word at 0x2C + 4i scaled by g_pakPanelPulsePhaseScale, maps it through the next two constants,

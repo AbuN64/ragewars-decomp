@@ -13,7 +13,7 @@
 #include "ENGINE/CONTROL.H"
 #include "TYPES.H"
 #include "FRONTEND/SCENARIO_RESULT_ROWS.H"
-#include "SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.H"
+#include "UI/TSMOS/SCREENS/SCENARIOSETUPSCREEN.H"
 
 /* Draw callback of the versus results screen g_setupScreen: on draw event 1 in states 3, 8 or 9 it
    sets the fill g_menuModelFillEnabled to blended white, restores the full-screen clip, and at alpha 210 draws

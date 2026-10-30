@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_ENABLEPLAYERPANEL.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Marks entry i of the 150-byte records g_playerSettingsRecords and sets the words at offsets 0x6C and 0x58
    of entry i of the 2920-byte records g_pakProfileScreenState points to to 2. */

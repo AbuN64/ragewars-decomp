@@ -1,5 +1,0 @@
-#ifndef FRONTEND_PAKINTERFACE_LABELACTIVEPROFILEROWS_H
-#define FRONTEND_PAKINTERFACE_LABELACTIVEPROFILEROWS_H
-#include "COMMON/NAME.H"
-extern void PAKInterface_LabelActiveProfileRows(s32 player);
-#endif

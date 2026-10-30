@@ -1,5 +1,0 @@
-#ifndef FRONTEND_PAKINTERFACE_FINDPLAYERPROFILELINK_H
-#define FRONTEND_PAKINTERFACE_FINDPLAYERPROFILELINK_H
-#include "COMMON/ENTRYRECAT6C.H"
-extern int PAKInterface_FindPlayerProfileLink(int id, int value);
-#endif

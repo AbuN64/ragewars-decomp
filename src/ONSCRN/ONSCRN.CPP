@@ -4,14 +4,13 @@
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "TYPES.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
-#include "GFX/OVERLAY_SCRIPT_AND_TEXT_TABLE_VIEWS.H"
+#include "ONSCRN.H"
 #include "abi.h"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
-#include "GFX/TEXT/ONSCREEN_GETFONTTEXTURE.H"
 #include "include_asm.h"
 
 /* 802A6AC0_9.CPP */

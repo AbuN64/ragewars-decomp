@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/COMMON/FX_SPAWNIMPACTMARK_DATA.H"
+#include "UI/QUAG/N64_ENG.H"
 
 /* ribbonBlendResourceTable.CPP */
 #if !(defined(VERSION_US_REV1))

@@ -1,5 +1,0 @@
-#ifndef FRONTEND_PAKINTERFACE_RESTORESAVEPACKET_H
-#define FRONTEND_PAKINTERFACE_RESTORESAVEPACKET_H
-#include "COMMON/ENTRYRECAT6C.H"
-extern void PAKInterface_RestoreSavePacket(s32 index);
-#endif

@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_LOADLINKEDPLAYERPROFILE.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Copies the block's chosen 400-byte record for the place at slot linkIndex into g_localPlayerProfiles[linkIndex]: when
    the place is claimed (id != -1), copies the owning player's chosen slot into the record and marks

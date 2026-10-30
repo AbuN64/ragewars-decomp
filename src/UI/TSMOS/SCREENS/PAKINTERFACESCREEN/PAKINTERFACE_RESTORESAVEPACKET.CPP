@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/PAKINTERFACE_RESTORESAVEPACKET.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* Copies the 0x640-byte template at offset 0x2E28 of the block g_pakProfileScreenState points to into offset
    0x70 of its 2920-byte entry i through XPlus_CopyBytes, then copies the block's word at 0x3468 to

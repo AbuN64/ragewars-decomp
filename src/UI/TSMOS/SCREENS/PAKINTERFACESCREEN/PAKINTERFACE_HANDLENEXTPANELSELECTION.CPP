@@ -6,8 +6,7 @@
 #include "TYPES.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/WIDGETRECAT1A.H"
-#include "FRONTEND/PAKINTERFACE_BEGINSCREENEXIT.H"
-#include "FRONTEND/PAKINTERFACE_COUNTACTIVEPLAYERPANELS.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* 8042E080_27.CPP */
 /* Cancels player playerEntryId's pickup when the state at 0x58 of its 2920-byte record is 12 and selectionPressed asks:

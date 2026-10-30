@@ -1,13 +1,12 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJRECAT3CV2.H"
-#include "MATH/ROTATION_MATRIX_ELEMENT_VIEWS.H"
+#include "UI/X_FILES/X_MATH.H"
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"
-#include "MATH/INVERTMATRIX.H"
 
 /* The values XMath_BuildYxzRotationMatrix loads by address:
  * 0x800CAC34 = 1.0 (float, k_xmathRotationMatrixHomogeneousUnit in this cartridge's tables)

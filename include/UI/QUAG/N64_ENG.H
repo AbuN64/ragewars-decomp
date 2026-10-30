@@ -25,4 +25,14 @@ extern void N64Eng_ResetRenderState(void);
 extern void N64Eng_AdvanceFrameCounter(void);
 extern void N64Eng_RegisterNumericWidgetClass(void);
 extern int N64Eng_GetFrameCounter(void);
+
+extern char g_ribbonBlendResourceSecond_us[];
+extern char g_ribbonBlendResourceThird_us[];
+extern char g_ribbonBlendResourceFourthBase_us[];
+extern char g_ribbonBlendResourceFifthBase_us[];
+
+extern double Gfx_GetConvertedCounterRatio(void);
+
+extern s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *widget, s32 event, s32 eventData, s32 eventValue, s32 eventContext);
+extern void N64Eng_DecrementNumericWidget(void *widget);
 #endif

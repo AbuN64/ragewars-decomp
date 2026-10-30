@@ -4,8 +4,7 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "FRONTEND/PAKINTERFACE_BEGINSCREENEXIT.H"
-#include "FRONTEND/PAKINTERFACE_RETURNWITHOUTACTION.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 
 /* 8042E080_15.CPP */
 /* Enters the selected menu state and resolves the default destination from the game mode. */

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/WORLDSORTENTRY.H"
-#include "SCENE/SCHED_GETCOMMANDQUEUE.H"
+#include "ENGINE/SCHED.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
