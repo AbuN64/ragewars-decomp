@@ -180,7 +180,7 @@ loop_4:
                     unsigned int offset = g_lightingBufferIndex << 6;
                     char *matrix = (char *)offset;
                     matrix += (unsigned int)detachedEntity;
-                    matrix += 0x60;
+                    matrix += (u32)&((struct EffectActor *)0)->u60;
                     if (ribbon->lifetime > 0.0f) {
                     Graphu64_ConvertMatrixToFloat(&localMatrix, matrix);
                     entityScale = g_detachedRibbonEntityScale;

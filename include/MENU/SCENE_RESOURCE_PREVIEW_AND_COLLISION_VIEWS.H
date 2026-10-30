@@ -196,7 +196,9 @@ struct SceneLoadResourcesView {
     s32 reservedWord13;
     char pad1B320[236];
     s32 visibilityGroup;
-    char pad1B410[516];
+    char pad1B410[0x40];
+    struct { u32 words[7]; } simpleModelHeaders[5]; /* 0x1B450 */
+    char pad1B4DC[0x1B614 - 0x1B4DC];
     s32 spawnOffsetX;
     s32 spawnOffsetY;
     s32 spawnOffsetZ;

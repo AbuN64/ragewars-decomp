@@ -202,12 +202,7 @@ struct Cursor;
 typedef struct Cursor Cursor;
 
 struct RouteCursorState;
-struct RouteCursorState {
-    s8 state;
-    s8 clip;
-    s16 frame;
-    s16 previous;
-};
+#include "COMMON/ROUTE_CURSOR.H"
 
 struct PlayerMarkerPrismView;
 typedef struct PlayerMarkerPrismView PlayerMarkerPrismView;

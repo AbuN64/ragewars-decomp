@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "include_asm.h"
 #include "COMMON/ENTRYRECAT8V4.H"
@@ -138,8 +139,8 @@ void Menu_TriggerTrackEvent(int event) {
     if (g_cinemaPlaybackFlag != 0) {
         index = event - 601;
         if ((unsigned int)index < 6 && bits != 0) {
-            if (test_bit(bits + 0x638, index)) return;
-            set_bit(bits + 0x638, index);
+            if (test_bit((u8 *)&((Shared_ActorView *)bits)->trackEventBits, index)) return;
+            set_bit((u8 *)&((Shared_ActorView *)bits)->trackEventBits, index);
         }
         Track_RequestTrackByKey(event);
     }

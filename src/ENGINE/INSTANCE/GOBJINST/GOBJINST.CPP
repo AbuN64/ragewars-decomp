@@ -245,7 +245,7 @@ Actor_InitSpawnedActor
     }
     ((LevelActor *)obj)->controller = 0;
     if (effect != -1) {
-        Playerai_InitializeRouteCursor(obj + 0x204, effect, &((LevelActor *)obj)->position0);
+        Playerai_InitializeRouteCursor(&((LevelActor *)obj)->routeCursor, effect, &((LevelActor *)obj)->position0);
     }
     world = &g_world;
     Gobjinst_LoadModel(obj, (s32)world->indexedDirectory, world->indexedBank, lean);

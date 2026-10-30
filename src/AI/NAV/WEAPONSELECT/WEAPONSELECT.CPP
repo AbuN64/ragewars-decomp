@@ -104,34 +104,34 @@ void Nav_SelectAvailableWeapon(WeaponSelectBrain *brain, s32 *ammo) {
 int Nav_SelectWeaponFromFirstAmmoGroup(void *controller) {
     WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    Nav_SelectAvailableWeapon(brain, ammo + 0x8C);
+    Nav_SelectAvailableWeapon(brain, ammo + (u32)&((WeaponSelectionDefinition *)0)->ammoGroups[0]);
     return 1;
 }
 
 int Nav_SelectWeaponFromSecondAmmoGroup(void *controller) {
     WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
+    Nav_SelectAvailableWeapon(brain, ammo + (u32)&((WeaponSelectionDefinition *)0)->ammoGroups[1]);
     return 1;
 }
 
 int Nav_SelectWeaponFromThirdAmmoGroup(void *controller) {
     WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    Nav_SelectAvailableWeapon(brain, ammo + 0xCC);
+    Nav_SelectAvailableWeapon(brain, ammo + (u32)&((WeaponSelectionDefinition *)0)->ammoGroups[2]);
     return 1;
 }
 
 int Nav_SelectSecondAmmoGroupVariantOne(void *controller) {
     WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
+    Nav_SelectAvailableWeapon(brain, ammo + (u32)&((WeaponSelectionDefinition *)0)->ammoGroups[1]);
     return 1;
 }
 
 int Nav_SelectSecondAmmoGroupVariantTwo(void *controller) {
     WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
+    Nav_SelectAvailableWeapon(brain, ammo + (u32)&((WeaponSelectionDefinition *)0)->ammoGroups[1]);
     return 1;
 }

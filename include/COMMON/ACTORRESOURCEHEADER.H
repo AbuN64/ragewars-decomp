@@ -10,6 +10,23 @@ typedef struct ActorResourceHeader {
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
+/* Variable-stride model section 5: parent, render bits and event mask read by Gastate. */
+typedef struct ModelBoneRecord {
+    u8 reserved0[0x64];
+    s8 parent;
+    u8 flags;
+    u8 reserved66[6];
+    u32 eventMask;
+} ModelBoneRecord;
+/* The impact-twist solver builds its ancestor chain at +0x14. */
+typedef struct ActorBoneTwistState {
+    u8 reserved0[0x12];
+    s8 count;
+    u8 reserved13;
+    s8 ancestorBones[32];
+    s8 state;
+} ActorBoneTwistState;
+
 struct ResourceLookupPointerView;
 struct ResourceLookupPointerView {
     u32 pad0[3];

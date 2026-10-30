@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "include_asm.h"
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "TYPES.H"
@@ -128,7 +129,7 @@ void Frontend_ResetEquipmentFromCharacter(void) {
     for (player = 0; player < 4; player++) {
         record = &g_playerSettings[player * 150];
         i = 21;
-        entry = record + 0x15;
+        entry = record + sizeof(((Shared_PlayerSettingsRecord *)0)->weapons) - 1;
         do {
             entry[76] = 0;
             i -= 1;
@@ -139,7 +140,7 @@ void Frontend_ResetEquipmentFromCharacter(void) {
             for (i = 0; i < 8; i++) {
                 id = model->slots[i];
                 if (id >= 1219) {
-                    (record + (id - 0x4C3))[76] = 1;
+                    (record + (id - 1219))[76] = 1;
                 }
             }
             Equip_LoadEquipmentSelections(player);

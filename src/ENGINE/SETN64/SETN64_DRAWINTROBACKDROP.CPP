@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "RENDER/SETN64_DRAWINTROBACKDROP.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -82,7 +83,7 @@ void SetN64_ResetSceneForIntro(void *owner) {
     p1[30] = 1;
     SetN64_ResetSessionPlayerPools(owner, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
-    p2 = ((s8 *)(&g_matchRoundCounters)) - 0x1818;
+    p2 = ((s8 *)(&g_matchRoundCounters)) - ((u32)&((Shared_MenuData *)0)->game.counters - (u32)&((Shared_MenuData *)0)->object);
     Pools_ResetActorPools(p2, 1);
     ((IntroBackdropStateView *)(p2))->poolClearedWord = 0;
     Textload_SetTextureEffect(0);

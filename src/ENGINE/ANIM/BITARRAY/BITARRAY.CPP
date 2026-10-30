@@ -78,7 +78,7 @@ void Bitarray_ReadStridedFloatSamples(s32 bitCursor, void *sampleRecords, s32 sa
       sampleIndex += 1;
       rawSampleBits = Polytrak2_ReadBitsAndAdvance(bitCursor, 32);
       *((f32 *) sampleOutput) = *((f32 *) (&rawSampleBits));
-      sampleOutput += 0x10;
+      sampleOutput += sizeof(CQuatern);
     }
     while (sampleIndex < sampleCount);
   }

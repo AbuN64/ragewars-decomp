@@ -1,3 +1,4 @@
+#include "COMMON/NAVIGATION_GRAPH.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "../../../sdk/include/LIBC.H"
 #include "COMMON/SCENERECAT10C0.H"
@@ -499,7 +500,7 @@ scene_size_done:
                 do {
                     Portal_InitSearchNode(record, initializationIndex);
                     List_AppendIntrusive(&((struct SceneResourceStateView *)table)->navigationSearchNodes, record);
-                    record = (void *)((char *)record + 0x50);
+                    record = (void *)((char *)record + sizeof(NavigationSearchNode));
                 } while ((((struct SceneResourceStateView *)table)->navPointCount) > ++initializationIndex);
             }
         }

@@ -41,7 +41,7 @@ typedef struct LvDelta {
     f32 x, y, z;
 } LvDelta;
 void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
-    u8 *state = LV_FIELD(self, u8 *, 24) + 0x14;
+    u8 *state = (u8 *)&((ActorDefinitionHeader *)LV_FIELD(self, u8 *, 24))->flags;
     u16 kind = LV_FIELD(self, u16, 228);
     u8 *player;
     u8 *table;
@@ -112,8 +112,8 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
             list = (u8 *)&g_transientPlayerList;
             node = *(u8 **)list;
             if (node != 0) {
-                status = list + 0x28;
-                settings = list + 0x1268;
+                status = list + ((u32)&((Shared_MenuData *)0)->object - (u32)&((Shared_MenuData *)0)->transientPlayers);
+                settings = list + ((u32)&((Shared_MenuData *)0)->game - (u32)&((Shared_MenuData *)0)->transientPlayers);
                 for (; node != 0; node = LV_FIELD(node, u8 *, 5856)) {
                     if (LV_FIELD(node, void *, 1500) != 0) {
                         Camera_PostScreenMessage(status, LV_FIELD(node, void *, 1500), g_breakableNotificationText[LV_FIELD(settings, u8, 1409)]);

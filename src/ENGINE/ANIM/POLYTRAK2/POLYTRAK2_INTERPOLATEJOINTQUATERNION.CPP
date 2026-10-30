@@ -50,7 +50,7 @@ void Polytrak2_InterpolateJointQuaternion(void *animationLinks, s32 jointIndex, 
 
     idx = indices[jointIndex].rotationIndex;
     if (idx == -1) {
-        rec = (void *)(o->initialOrientations + jointIndex * 0x14);
+        rec = (void *)(o->initialOrientations + jointIndex * sizeof(CROMInitialOrientation_t));
         scale = g_jointInterpolationAngleScale;
         out->x = (f32)(rec->m_RotX) * scale;
         out->y = (f32)(rec->m_RotY) * scale;

@@ -204,7 +204,7 @@ s32 Player_StartFourPlayerResults(void) {
             break;
         }
         rotation.y = (f32)(baseAngle + Graphu64_NextRandom() % 10);
-        baseAngle += 0x2D;
+        baseAngle += 45;
         Frontend_InitModelPreviewTransform((u8 *)g_equipmentAndResultsScreen + badgeOffset, 0, scale, position);
         Frontend_SetPreviewRotation((u8 *)g_equipmentAndResultsScreen + badgeOffset, rotation);
         Frontend_SetPreviewRotationSpeed((u8 *)g_equipmentAndResultsScreen + badgeOffset, angularVelocity);

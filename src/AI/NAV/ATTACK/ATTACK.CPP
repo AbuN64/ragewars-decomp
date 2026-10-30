@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ACTORREC.H"
@@ -31,7 +32,7 @@ s32 UpdateCloseAttack(void *brainAddress) {
 
 void Attack_SelectWeightedAttackBehavior(void *brainAddress) {
     s32 selectedBehavior;
-    selectedBehavior = Reselect_ChooseWeightedAttackBehavior((((struct AttackBehaviorDefinitionView *) ((s8 *) ((struct WeightedAttackSelectionBrainView *) ((s8 *) brainAddress))->actor))->attackDefinitionAddress) + 0x14);
+    selectedBehavior = Reselect_ChooseWeightedAttackBehavior((((struct AttackBehaviorDefinitionView *) ((s8 *) ((struct WeightedAttackSelectionBrainView *) ((s8 *) brainAddress))->actor))->attackDefinitionAddress) + (u32)&((ActorDefinitionHeader *)0)->flags);
     (((struct WeightedAttackSelectionBrainView *) ((s8 *) brainAddress))->selectedBehavior) = selectedBehavior;
     Scaled_SetBehaviourState(brainAddress, selectedBehavior);
 }

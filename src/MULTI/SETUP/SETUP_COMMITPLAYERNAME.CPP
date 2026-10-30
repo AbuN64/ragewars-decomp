@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "include_asm.h"
 
@@ -66,7 +67,7 @@ s32 Setup_CommitPlayerName(s32 first, NameEditMenuContext *second, s32 third) {
     player = second->profileOwner;
     playerIndexResult = Player_GetPlayerIndex(g_playerViewRenderContext, player);
     sourceName = (playerIndexResult * 0x18) + g_multiplayerSavedPlayerNames;
-    destinationName = (playerIndexResult * sizeof(Shared_PlayerSettingsRecord)) + (g_playerViewRenderContext + 0x13DC);
+    destinationName = (playerIndexResult * sizeof(Shared_PlayerSettingsRecord)) + (g_playerViewRenderContext + (u32)&((Shared_MenuData *)0)->game.playerSettings[0].name);
     nonemptyCharacters = 0;
     characterIndex = 0;
     do {

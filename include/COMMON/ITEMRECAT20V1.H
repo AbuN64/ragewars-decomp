@@ -1408,6 +1408,7 @@ struct ActorAnimationEventTable;
 struct ActorAnimationEventTable {
     int entrySize;
     int entryCount;
+    u8 records[0]; /* Variable-stride model/event records follow the two-word header. */
 };
 
 

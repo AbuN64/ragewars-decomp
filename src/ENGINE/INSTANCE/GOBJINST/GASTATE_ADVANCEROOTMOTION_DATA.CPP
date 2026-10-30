@@ -1,3 +1,4 @@
+#include "COMMON/ACTORRESOURCEHEADER.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
@@ -238,7 +239,7 @@ void Gobjinst_DispatchAnimationIntervalEvents(char *obj, void *anim, f32 from, f
                         }
                         table = SetN64_GetPackSection(*resource, 5);
                     }
-                    fire = ((struct AnimationEventMaskView *) (((char *) table) + ((events[i].bone * table->entrySize) + 0x74)))->value & ((struct RootMotionActorView *) obj)->boneMask;
+                    fire = ((struct AnimationEventMaskView *) (((char *) table) + ((events[i].bone * table->entrySize) + (u32)&((struct ActorAnimationEventTable *)0)->records + (u32)&((ModelBoneRecord *)0)->eventMask)))->value & ((struct RootMotionActorView *) obj)->boneMask;
                 }
             masked:
                 if (fire == 0) {
@@ -421,13 +422,13 @@ void Gobjinst_ApplyImpactBoneTwist(char *actor, char *twistState, char *boneMatr
         boneTable = SetN64_GetPackSection((void *)*modelResource, 5);
         boneEntry = (char *)boneTable + ((hitBoneIndex * *boneTable) + 8);
         ancestorBoneIndex = hitBoneIndex;
-        if ((((u8 *)boneEntry)[0x65] & 3) == 3) {
+        if ((((ModelBoneRecord *)boneEntry)->flags & 3) == 3) {
             Cache_UnlockResource(0, modelResource);
             return;
         }
         chainSlot = 0;
         do {
-            *(twistState + chainSlot + 0x14) = ancestorBoneIndex;
+            *(twistState + chainSlot + (u32)&((ActorBoneTwistState *)0)->ancestorBones) = ancestorBoneIndex;
             ancestorBoneIndex = boneEntry[100];
             chainSlot++;
             if (ancestorBoneIndex != -1) {

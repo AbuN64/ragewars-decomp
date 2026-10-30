@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/SELF.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ACTORREC.H"
@@ -14,7 +15,7 @@ void ReselectCloseAttack(void *brainAddress) {
     WeightSource *weights;
     s32 selectedState;
     if (Graphu64_NextRandom() % 4 == 1) {
-        weights = (WeightSource *)((u8 *)((Player *)brain->player)->definition + 0x14);
+        weights = (WeightSource *)(&((ActorDefinitionHeader *)((Player *)brain->player)->definition)->flags);
         selectedState = Reselect_ChooseWeightedAttackBehavior(weights);
         brain->combat = selectedState;
         Scaled_SetBehaviourState(brainAddress, selectedState);

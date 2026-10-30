@@ -4,6 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/ACTOR_DEFINITION.H"
+#include "COMMON/ROUTE_CURSOR.H"
 typedef struct LevelActor LevelActor;
 struct LevelActor {
     u8 kind;
@@ -76,7 +77,9 @@ struct LevelActor {
     void *controller; /* 0x1D8: linked actor */
     u8 pad1DC[0x14];
     char *lockOn; /* 0x1F0 */
-    u8 pad1F4[0x23A - 0x1F4];
+    u8 pad1F4[0x10];
+    struct RouteCursorState routeCursor; /* 0x204: Playerai_InitializeRouteCursor */
+    u8 pad20A[0x23A - 0x20A];
     s8 lean; /* 0x23A */
     u8 updateCount; /* 0x23B */
     s32 actionReady; /* 0x23C */

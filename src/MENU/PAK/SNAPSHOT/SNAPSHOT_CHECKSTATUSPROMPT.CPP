@@ -1,3 +1,5 @@
+#include "COMMON/GAMEPLAY_TRANSITION.H"
+extern void Cache_ReleaseResource(s32, void *);
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "../../../../sdk/include/LIBC.H"
 #include "include_asm.h"
@@ -36,7 +38,7 @@ void Snapshot_CreateSaveSnapshot(u8 *player) {
     g_pakSaveSnapshot = *snapshotHandle;
     g_pakSnapshotResourceHandle = snapshotHandle;
     XPlus_FillMemory(g_pakSaveSnapshot, 0, allocationSize);
-    g_pakSaveSnapshot->player = *(Copy70 *)(player + 0x5E0);
+    g_pakSaveSnapshot->player = *(Copy70 *)(&((Shared_ActorView *)player)->state);
     g_pakSaveSnapshot->world = *(Copy584 *)&g_gameSettings;
     snapshot = g_pakSaveSnapshot;
     snapshot->view[0] = g_matchRoundCounters[0];

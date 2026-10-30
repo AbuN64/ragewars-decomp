@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "WORLD/STATIC_MODEL_INSTANCE_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
@@ -113,8 +114,8 @@ void Simpinst_DrawGroundShadow(void *actor) {
     MatrixFromQuaternion(&rotation.x, matrix);
     ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, position.x, position.y, position.z);
-    Graphu64_ConvertMatrixToFixed(matrix, (char *)actor + ((g_lightingBufferIndex << 6) + 0xE8));
-    Geometry_DrawIntensityMask((char *)actor + ((g_lightingBufferIndex << 6) + 0xE8), 1, 150);
+    Graphu64_ConvertMatrixToFixed(matrix, (char *)actor + ((g_lightingBufferIndex << 6) + (u32)&((LevelActor *)0)->bounds));
+    Geometry_DrawIntensityMask((char *)actor + ((g_lightingBufferIndex << 6) + (u32)&((LevelActor *)0)->bounds), 1, 150);
 }
 
 void Simpinst_RefreshModelResourceUsage(StaticObject *staticObject) {

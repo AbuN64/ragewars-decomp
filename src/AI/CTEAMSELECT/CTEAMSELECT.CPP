@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "include_asm.h"
 #include "MENU/TEAMMENU.H"
@@ -256,7 +257,7 @@ void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
         ((TeamWeaponSelectionPlayerView *)(player))->requestedWeapon = weapon;
         if (!(((TeamWeaponSelectionPlayerView *)(player))->flags & 0x1000)) {
             alternate = ((WeaponInfo *)(g_weaponInfoByType[weapon]))->alternate;
-            if (alternate != category && (ammo = (char *) player + alternate * 2)[0x602] != 0) {
+            if (alternate != category && (ammo = (char *) player + alternate * 2)[(u32)&((Shared_ActorView *)0)->actions] != 0) {
                 entry->weapon = alternate;
             }
         }
@@ -334,7 +335,7 @@ typedef struct CWeapon_t {
     s8 m_nWeaponSlot;
 } CWeapon;
 struct TeamWeaponPlayer {
-    u8 pad0[0x602];
+    u8 pad0[(u32)&((Shared_ActorView *)0)->actions];
     CWeapon m_WeaponList[22];
     s16 m_CurrentWeapon;
 };

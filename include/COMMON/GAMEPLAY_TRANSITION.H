@@ -57,7 +57,10 @@ struct Shared_ActorView {
     char pad600[2];
     Shared_ActionSlot actions[22]; /* 0x602 */
     s16 selectedAction; /* 0x62E */
-    u8 pad630[0x20];
+    u8 pad630[8];
+    u32 trackEventBits; /* 0x638: Menu_TriggerTrackEvent */
+    u8 pad63C[8];
+    u8 eventCounters[2][6]; /* 0x644, 0x64A: Player_ResetInventoryAndCounters */
     s16 action; /* +0x650: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     char pad652[6];
     f32 actionTimer; /* 0x658 */
@@ -84,7 +87,8 @@ struct Shared_ActorView {
     f32 transitionBlend; /* 0x720 */
     u8 pad724[8];
     f32 unk_0x072C;
-    u8 pad730[0x40];
+    u8 pad730[0x30];
+    CQuatern cameraOrientation; /* 0x760: Player_InitActorHudState */
     s16 nextWeapon; /* 0x770 */
     u8 pad772[0x780 - 0x772];
     f32 modelBlend; /* 0x780 */

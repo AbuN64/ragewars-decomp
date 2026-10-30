@@ -118,11 +118,11 @@ void Scene_LoadSceneResources(SceneLoadResourcesView *sceneToLoad, s32 cartridge
     }
     Scene_InitPreview((Shared_World *)sceneToLoad, cartridgeBankKey);
     g_screenImageResourcesEnabled = 1;
-    Scene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x40, 3500);
-    Scene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x5C, 3501);
-    Scene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x78, 3502);
-    Scene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x94, 3503);
-    Scene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0xB0, 3504);
+    Scene_CopySimpleModelHeader(sceneToLoad, &sceneToLoad->simpleModelHeaders[0], 3500);
+    Scene_CopySimpleModelHeader(sceneToLoad, &sceneToLoad->simpleModelHeaders[1], 3501);
+    Scene_CopySimpleModelHeader(sceneToLoad, &sceneToLoad->simpleModelHeaders[2], 3502);
+    Scene_CopySimpleModelHeader(sceneToLoad, &sceneToLoad->simpleModelHeaders[3], 3503);
+    Scene_CopySimpleModelHeader(sceneToLoad, &sceneToLoad->simpleModelHeaders[4], 3504);
     sceneToLoad->reservedWord6 = 0;
     sceneToLoad->reservedWord7 = 0;
     sceneToLoad->reservedWord9 = 0;

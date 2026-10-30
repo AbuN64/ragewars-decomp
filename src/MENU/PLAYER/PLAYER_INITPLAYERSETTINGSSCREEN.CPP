@@ -49,7 +49,7 @@ s32 Player_InitPlayerSettingsScreen(s32 root) {
     ST[1] = SmpFlicker_CreateFlickerWidget(PLAYER_SETTINGS_ID(93), 110);
     ((s32 *)g_playerSettingsScreen)[9] = 3;
     ((s32 *)g_playerSettingsScreen)[8] = -1;
-    ST[0xB] = Node_FindWidgetByResourceId(root, PLAYER_SETTINGS_ID(95));
+    ST[11] = Node_FindWidgetByResourceId(root, PLAYER_SETTINGS_ID(95));
     ((s32 *)g_playerSettingsScreen)[10] = 0;
     Player_SelectPlayerSettingsEntry(0);
     return 0;
@@ -96,7 +96,7 @@ s32 Player_InitPlayerSettingsScreen(s32 root) {
     ST[1] = SmpFlicker_CreateFlickerWidget(EU_ID(93, 97), 110);
     ((s32 *)g_playerSettingsScreen)[9] = 3;
     ((s32 *)g_playerSettingsScreen)[8] = -1;
-    ST[0xB] = Node_FindWidgetByResourceId(root, EU_ID(95, 99));
+    ST[11] = Node_FindWidgetByResourceId(root, EU_ID(95, 99));
     ((s32 *)g_playerSettingsScreen)[10] = 0;
     Player_SelectPlayerSettingsEntry(0);
     return 0;

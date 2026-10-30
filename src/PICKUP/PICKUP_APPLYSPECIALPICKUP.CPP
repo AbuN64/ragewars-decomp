@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/VECTOR4F.H"
 #include "include_asm.h"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
@@ -689,7 +690,7 @@ s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pic
     u8 **text;
     s32 sound;
     s32 event;
-    f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
+    f32 *data = (f32 *)(&((LevelActor *)obj)->definition->flags);
 
     switch ((s16)(pickup->id - 1800)) {
     case 0: player->damageCooldown = g_specialPickupShieldDurationEu; break;
@@ -726,7 +727,7 @@ s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, voi
     u8 **text;
     s32 sound;
     s32 event;
-    f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
+    f32 *data = (f32 *)(&((LevelActor *)obj)->definition->flags);
 
     switch ((s16)(pickup->id - 1800)) {
     case 0: player->damageCooldown = g_specialPickupShieldDurationEu; break;

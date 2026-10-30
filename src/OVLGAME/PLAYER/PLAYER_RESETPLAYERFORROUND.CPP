@@ -1,3 +1,4 @@
+extern void Control_SetProfileMode(void *, int);
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -221,13 +222,13 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     i = 5;
     counterAddress = (unsigned long)actor + i;
     do {
-        *(u8 *)(counterAddress + 0x644) = 0;
+        *(u8 *)(counterAddress + (u32)&((Shared_ActorView *)0)->eventCounters[0]) = 0;
         counterAddress--;
     } while (--i >= 0);
     i = 5;
     counterAddress2 = (unsigned long)actor + i;
     do {
-        *(u8 *)(counterAddress2 + 0x64A) = 0;
+        *(u8 *)(counterAddress2 + (u32)&((Shared_ActorView *)0)->eventCounters[1]) = 0;
         counterAddress2--;
     } while (--i >= 0);
     if (g_frontendScreenStatus.settings.local != 0) {
@@ -375,7 +376,7 @@ void Player_InitActorHudState(SharedPlayer *actor) {
     FIELD(s32, actor, 1980) = 0;
     FIELD(s32, actor, 4404) = FIELD(s32, actor, 1508);
     if (FIELD(void *, actor, 1500) != 0) {
-        *(HudQuad *)((char *)actor + 0x760) = *(HudQuad *)((char *)FIELD(void *, actor, 1500) + 0x140);
+        *(HudQuad *)(&((Shared_ActorView *)actor)->cameraOrientation) = *(HudQuad *)(&((GameplayCamera *)FIELD(void *, actor, 1500))->orientation);
     }
     Playerai_InitializeMovementAndAim(actor);
     enabled = 0;

@@ -147,4 +147,8 @@ struct NavigationActorListEntryView {
 
 
 extern s32 Weapon_PickRandomArmedWeapon(void *player);
+typedef struct WeaponSelectionDefinition {
+    u8 reserved0[0x8C];
+    s32 ammoGroups[3][8];
+} WeaponSelectionDefinition;
 #endif

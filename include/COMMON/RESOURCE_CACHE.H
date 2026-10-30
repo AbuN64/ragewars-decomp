@@ -2,6 +2,7 @@
 #define COMMON_RESOURCE_CACHE_H
 #include "COMMON/MANAGER.H"
 #include "os.h"
+#include "COMMON/OSTHREAD_S.H"
 struct ResLink {
     s32 reservedWord0;
     s32 reservedWord4;
@@ -27,7 +28,10 @@ struct ResMgr {
     s32 reservedWord40;
     s32 reservedWord44;
     s32 selected;
-    char pad4C[0xB98 - 0x4C];
+    u32 reservedWord4C;
+    OSThread_s completionWorker; /* 0x50: osCreateThread destination */
+    u8 reservedAfterCompletionWorker[0x398 - 0x50 - sizeof(OSThread_s)];
+    u8 completionWorkerStack[0x800]; /* top at freeLinks, +0xB98 */
     IntrusiveList freeLinks;
     IntrusiveList listBAC;
     IntrusiveList listBC0;

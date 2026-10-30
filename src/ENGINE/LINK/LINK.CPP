@@ -129,7 +129,7 @@ s32 Link_SumWorldSectionCounts(void) {
     char *base = (char *)&g_world;
 
     for (i = 0; i < ((WorldSectionCountView *)(base))->sectorCount; i++) {
-        total += ((struct ActorAnimationEventTable *)SetN64_GetPackSection(*((struct WorldSectionResourceView *) (base + (i * 0xC)))->resource, 2))->entryCount;
+        total += ((struct ActorAnimationEventTable *)SetN64_GetPackSection(*((struct WorldSectionResourceView *) (base + (i * sizeof(((Shared_World *)0)->sectors[0]))))->resource, 2))->entryCount;
     }
     return total;
 }

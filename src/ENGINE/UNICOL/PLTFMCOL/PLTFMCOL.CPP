@@ -236,7 +236,7 @@ void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFr
     void *owner_data;
 
     owner_data = &((LevelActor *)owner)->position0;
-    entry = owner->entries + 0x14;
+    entry = &((ActorDefinitionHeader *)owner->entries)->flags;
     height = ((CollisionShapeDefinition *)entry)->radius + Gobjinst_GetActorRadius(input);
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
@@ -387,7 +387,7 @@ void CPlatformCollision_ProcessRiderMotion(ActorCPlatformCollisionProcessRiderMo
     CollisionKindRecord *entry;
 
     owner = actor->owner;
-    entry = (CollisionKindRecord *)(owner->entries + 0x14);
+    entry = (CollisionKindRecord *)(&((ActorDefinitionHeader *)owner->entries)->flags);
     if (*actor->flags & 0x40000) {
         saved_previous = actor->previous;
         saved_position = actor->position;

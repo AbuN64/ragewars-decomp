@@ -33,7 +33,7 @@ typedef struct BreakableContactState {
 
 /* Apply the descriptor hit rule, then update the contact response timer. */
 void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *hit) {
-    BreakableContactRule *rule = (BreakableContactRule *)(ctx->descriptor + 0x14);
+    BreakableContactRule *rule = (BreakableContactRule *)(&((ActorDefinitionHeader *)ctx->descriptor)->flags);
     ResourceManagerState eventState;
     f32 damageScale;
     s32 triggerResponse;

@@ -109,8 +109,8 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     }
     /* thread block g_resourceCompletionWorkerStack - 0x348 followed by its 0x800-byte stack at g_resourceCompletionWorkerStack */
     XPlus_FillMemory(&g_resourceCompletionWorkerStack, count, 0x800);
-    thread = (char *)&g_resourceCompletionWorkerStack - 0x348;
-    osCreateThread(thread, count, &g_Cache_RunResourceCompletionWorkerPackedAddress24, 0, (char *)&g_resourceCompletionWorkerStack + 0x800, g_resourceCompletionWorkerPriority);
+    thread = (char *)&g_resourceCompletionWorkerStack - ((u32)&((struct ResMgr *)0)->completionWorkerStack - (u32)&((struct ResMgr *)0)->completionWorker);
+    osCreateThread(thread, count, &g_Cache_RunResourceCompletionWorkerPackedAddress24, 0, (char *)&g_resourceCompletionWorkerStack + sizeof(((struct ResMgr *)0)->completionWorkerStack), g_resourceCompletionWorkerPriority);
     osStartThread(thread);
 }
 

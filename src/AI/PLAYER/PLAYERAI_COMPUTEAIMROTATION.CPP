@@ -124,7 +124,7 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
         origin.y += Playerai_GetObjectOwnerHeight(player);
         enable = &g_frontendScreenStatus.settings.local;
         if (*enable) {
-            other = ((AimGlobals *)(enable - 0x1285))->head;
+            other = ((AimGlobals *)(enable - (u32)&((AimGlobals *)0)->enabled))->head;
             if (other) {
                 firstSpecial = 18;
                 scale = g_playerAimPrimaryTurnScale;

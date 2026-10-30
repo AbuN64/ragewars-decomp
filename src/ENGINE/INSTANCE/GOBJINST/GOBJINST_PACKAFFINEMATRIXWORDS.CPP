@@ -226,7 +226,7 @@ void Gobjinst_SampleBoneRotation(void *poseTrack, s32 boneIndex, CQuatern *outRo
     idx = ((struct BoneRotationIndexPair *) (((AnimInfo *) o)->boneIndexPairs + (boneIndex * 4)))->rotationIndex;
     if (idx == -1) {
         f32 scale;
-        rec = ((AnimInfo *)(o))->initialOrientations + boneIndex * 0x14;
+        rec = ((AnimInfo *)(o))->initialOrientations + boneIndex * sizeof(CROMInitialOrientation_t);
         scale = (3.0518509447574615e-05f);
         outRotation->x = (f32)(((CROMInitialOrientation_t *)(rec))->m_RotX) * scale;
         outRotation->y = (f32)(((CROMInitialOrientation_t *)(rec))->m_RotY) * scale;
@@ -258,7 +258,7 @@ void Gobjinst_SampleInterpolatedBoneRotation(BoneRotationTrackView *animation, s
     indices = (void *)o->boneIndexPairs;
     idx = indices[boneIndex].rotationIndex;
     if (idx == -1) {
-        rec = (void *)(o->initialOrientations + boneIndex * 0x14);
+        rec = (void *)(o->initialOrientations + boneIndex * sizeof(CROMInitialOrientation_t));
         scale = g_maskedModelViewEffectScale;
         rotationOut->x = (f32)rec->m_RotX * scale;
         rotationOut->y = (f32)rec->m_RotY * scale;

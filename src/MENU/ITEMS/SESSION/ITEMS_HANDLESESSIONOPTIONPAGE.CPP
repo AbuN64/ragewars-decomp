@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -23,7 +24,7 @@ s32 Items_HandleSessionOptionPage(void *unused, void **menu) {
     if (g_sessionOptionResetMode == 1) {
         Match_ResetMatchControllerState(g_gameSession);
     } else {
-        *(s32 *)((u8 *)menu[7] + 0x5D0) = 0;
+        ((Shared_ActorView *)menu[7])->actorState = 0;
     }
     return 1;
 }
