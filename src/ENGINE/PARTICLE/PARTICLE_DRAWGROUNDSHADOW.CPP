@@ -59,7 +59,7 @@ extern char g_simpleModelResourceCallbackAddress;
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 
 
-extern s32 Cache_RequestWordCountedResource(s32, void **, s32, void *, s32);
+extern void **Cache_RequestWordCountedResource(s32,void **,s32,void *,s32);
 
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 

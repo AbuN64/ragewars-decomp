@@ -12,7 +12,7 @@
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 extern char g_actorParticleEffectSystem;
-extern void Graphu64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(struct CVector3_t *,struct CVector3_t *,f32);
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, Triple *, s32 *, s32, s32);
 extern struct CacheResourceBlockView Graphu64_BuildDirectionQuaternion(Triple *);
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"

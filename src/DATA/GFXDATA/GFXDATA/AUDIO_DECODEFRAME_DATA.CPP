@@ -1,5 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
-extern char g_audioDecodedBlockCounter[];
+extern unsigned short g_audioDecodedBlockCounter;
 extern char g_tlbMissExceptionVector[];
 extern char huffman_signed6_dictionary[];
 extern char huffman_signed7_five_dictionary[];

@@ -8,7 +8,7 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "libgultra_inferred/cseq.H"
 extern s32 Defs_FindSortedValue(s32,s32,s32);
-extern f32 Menu_ExpandFloatHighWord(u16);
+extern f32 Menu_ExpandFloatHighWord(s32);
 static inline f32 fade_rate(Track *track,f32 time,f32 rate) {track->fadeDuration=time;return (f32)track->fadeStartVolume/(time*rate);}
 void Audio_UpdateMusicPlayback(Track *queue) {
     f32 sequenceFadeDuration;

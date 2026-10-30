@@ -6,7 +6,7 @@
 
 extern void *ESmem_AllocateFrameHeapHigh(int);
 
-extern struct Command *g_displayListCursor;
+extern Gfx *g_displayListCursor;
 
 void Image_EmitMatrix(void *source) {
     void *allocation = ESmem_AllocateFrameHeapHigh(64);

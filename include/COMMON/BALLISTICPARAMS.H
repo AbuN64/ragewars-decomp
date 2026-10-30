@@ -57,7 +57,7 @@ extern f32 g_particleTrackingMinimum;
 void Playerai_ApplyPlayerForces(void *, void *);
 f32 Gobjinst_GetActorHeight(void *);
 f32 InstHdr_GetActorBaseOffset(void *);
-void Graphu64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, void *);
+void Graphu64_InterpolateQuaternionWithLinearFallback(struct CQuatern_t *, f32, struct CQuatern_t *, struct CQuatern_t *);
 void Graphu64_ClampMotionLength(void *, f32);
 void MatrixFromQuaternion(f32 *, f32 *);
 

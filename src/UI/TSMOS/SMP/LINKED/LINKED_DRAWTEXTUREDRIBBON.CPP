@@ -96,7 +96,7 @@ extern void Graphu64_IdentityMatrix(void *);
 extern void Graphu64_BuildScaleMatrix(void *, f32, f32, f32);
 
 extern void Linked_BuildRibbonSegmentMatrix(Node438C *, Node438C *, struct GameplayCamera *, void *);
-extern void Graphu64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(struct CVector3_t *,struct CVector3_t *,f32);
 extern void Graphu64_ConvertMatrixToFixed(void *, f32 *);
 
 void *Linked_AppendRibbonSegment(void *effectSystem, void *ribbon, void *local) {

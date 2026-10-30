@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-extern s32 g_texturePaletteOverrideEnabled;
+extern unsigned int g_texturePaletteOverrideEnabled;
 
 extern s32 Ppdecom_UnpackResource(void *, s32);
 extern u16 *SetN64_GetSizedPackSection(void *, s32, u32 *);

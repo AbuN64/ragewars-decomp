@@ -712,7 +712,7 @@ struct CShakeAxis_t;
 extern u32 Weapon_UpdateShakeAxis(struct CShakeAxis_t *state);
 
 int Cinema_IsSequenceInWindow(void);
-f32 Cinema_GetSequenceResponse(void *);
+f32 Cinema_GetSequenceResponse();
 void Graphu64_InvertAffineMatrix(f32 *, f32 *);
 void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 void Graphu64_MultiplyMatrices(f32 *, f32 *, f32 *);

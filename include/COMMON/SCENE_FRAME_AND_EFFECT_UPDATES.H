@@ -26,20 +26,20 @@ extern s32 g_litGeometryResourceKeysChanged;
 
 struct Shared_World;
 extern void Scene_UpdateSelectionTransition(struct Shared_World *);
-extern void Scene_ClearSceneObjectCounts(void *);
+extern void Scene_ClearSceneObjectCounts();
 
 struct CacheResourceNode;
 extern void Cache_MarkResourceInUse(s32, struct CacheResourceNode *);
 extern void Fx_ResetRibbonVertexPool(void *);
 struct CPlayerPool_t;
 extern void Playerai_RotatePlayerPoseBuffers(struct CPlayerPool_t *);
-extern void Scene_CollectVisibleEffects(void *);
+extern void Scene_CollectVisibleEffects(s32);
 extern void Fx_UpdateEffectLists(void *);
 extern void Scene_UpdateActorsAndRoundState(void *);
 extern void Scene_UpdateTriggerTimers(void *);
 extern void Particle_UpdateSystem(void *);
-extern void Camera_DrawActiveViews(void *, void *);
-extern void Scene_UpdateStaticEventInstances(void *);
+extern void Camera_DrawActiveViews(struct Race *race, s32 world);
+extern void Scene_UpdateStaticEventInstances(struct StateSceneUpdateStaticEventInstances *);
 extern void Scene_UnlockActiveSectionResources(void *);
 extern void Scene_DrawTransitionColorOverlay(Shared_World *);
 #endif

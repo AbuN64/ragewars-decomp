@@ -185,7 +185,7 @@ typedef struct DraftPlayerAB97C {
 typedef struct DraftPickupAB97C { u8 **label; s16 pad4, sound, event, padA, index, ammoType, ammoAmount; } DraftPickupAB97C;
 extern DraftWeaponAB97C *g_weaponInfoByType[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-extern void *Camera_PostScreenMessage(void *, void *, u8 *);
+extern struct CCameraText_t *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text);
 extern s32 Player_AddAmmo(void *, s32, s32), SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 
 s32 Pickup_ApplyWeaponPickup(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)

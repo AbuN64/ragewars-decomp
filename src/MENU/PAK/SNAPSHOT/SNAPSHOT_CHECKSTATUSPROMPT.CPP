@@ -66,7 +66,9 @@ extern char *g_pakSnapshotGameNames[];
 #define PAK_TITLE2 g_pakSnapshotGameNameFixed
 #endif
 extern s32 g_introSelectedItem, g_pakNoteTitleSelector;
-extern char *g_pakProfileGameNameFixed, *g_pakSnapshotGameNameFixed, *g_pakCompanyCodeFixed;
+extern char *g_pakProfileGameNameFixed;
+extern *g_pakSnapshotGameNameFixed;
+extern unsigned char * g_pakCompanyCodeFixed;
 
 extern s32 g_pakUseScannedChannel;
 
