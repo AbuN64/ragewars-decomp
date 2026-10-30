@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -21,6 +22,6 @@ s32 Player_OpenPlayerDialog(void *unused, struct MenuItemOwnerLinkView *holder) 
 
     Player_GetPlayerIndex(g_playerViewRenderContext, owner);
     Timer_ClearTimerFlag();
-    Menu_OpenDialog(g_playerViewRenderContext + 0x5DC, g_playerMenuDialogRomResource, owner, owner->value, 0);
+    Menu_OpenDialog(&((Shared_MenuData *)g_playerViewRenderContext)->dialogOwner, g_playerMenuDialogRomResource, owner, owner->value, 0);
     return 1;
 }

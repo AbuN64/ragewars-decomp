@@ -185,7 +185,7 @@ void Playerai_DrawAnimatedSprite(char *object, char *camera) {
         s32 offset = (g_lightingBufferIndex << 6) + 16;
         Graphu64_ConvertMatrixToFixed(matrix, object + offset);
     }
-    Graphu64_TransformPoint(first, object + 0xA8, output);
+    Graphu64_TransformPoint(first, (char *)&((LevelActor *)object)->transform[13], output);
     {
         s32 offset = (g_lightingBufferIndex << 6) + 16;
         Geometry_QueueDirectModel(((AnimationSprite *)(object))->model, (s32)(object + offset),

@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/ACTORRESOURCEHEADER.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -70,7 +71,7 @@ void Gobjinst_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void 
         offset.z = -offset.z;
         parent = ((struct ActorOwnerView *) ((ActorAnimationResourceView *) actor)->owner)->owner;
         if (parent != 0) {
-            Graphu64_TransformPoint(parent + 0x160, &offset, &target);
+            Graphu64_TransformPoint((char *)&((GameplayCamera *)parent)->viewOrient, &offset, &target);
         } else {
             Gobjinst_TransformVectorByActorAim(&turned, actor, offset);
             Graphu64_AddVec3(&target, &((ActorAnimationResourceView *)(actor))->position, &turned);

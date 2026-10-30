@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -284,7 +285,7 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
         } else {
             table = g_roundStartDefaultDialogTable;
         }
-        Menu_OpenDialog((char *)FIELD(void *, actor, 1500) + 0x554, table, actor, FIELD(s32, actor, 1688), FIELD(s32, actor, 1492));
+        Menu_OpenDialog((char *)&((GameplayCamera *)FIELD(void *, actor, 1500))->messageList, table, actor, FIELD(s32, actor, 1688), FIELD(s32, actor, 1492));
     }
     g_playerHitCounts[FIELD(s32, actor, 1492)] = 0;
     g_playerCountedShots[FIELD(s32, actor, 1492)] = 0;

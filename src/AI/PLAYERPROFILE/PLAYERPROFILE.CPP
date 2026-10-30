@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "COMMON/RESOURCELOADSTATE.H"
@@ -415,7 +416,7 @@ void Player_BuildWeaponHandTransform(char *weaponActor) {
         Graphu64_GetMatrixTranslation((char *)&viewMatrix, &position);
         MatrixFromQuaternion(&viewOrientation, &worldMatrix);
     }
-    orientation = weaponActor + 0x74;
+    orientation = (char *)&((LevelActor *)weaponActor)->transform;
     TranslateMatrix(&offsetMatrix, handOffset.x, handOffset.y, handOffset.z);
     SwapMatrixUpForward(&offsetMatrix);
     Graphu64_MultiplyAffineMatrices((Matrix *)orientation, &offsetMatrix, &worldMatrix);

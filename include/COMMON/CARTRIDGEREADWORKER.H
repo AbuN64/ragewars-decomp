@@ -1,6 +1,7 @@
 #ifndef COMMON_CARTRIDGEREADWORKER_H
 #define COMMON_CARTRIDGEREADWORKER_H
 #include "TYPES.H"
+#include "os.h"
 #include "COMMON/PARAMSRECAT8V3.H"
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -10,10 +11,13 @@ struct Chunk;
 struct CartridgeReadWorker;
 struct CartridgeReadWorker {
     u8 reserved[0x230];
-    u8 requestQueueStorage;
-    u8 reserved231[0xA48 - 0x231];
-    u8 completionQueueStorage;
-    u8 reservedA49[0x5068 - 0xA49];
+    OSMesgQueue requestQueueStorage; /* +0x230 */
+    OSMesg requestMessages[512]; /* +0x248 */
+    OSMesgQueue completionQueueStorage; /* +0xA48 */
+    OSMesg completionMessage; /* +0xA60 */
+    u32 reservedA64;
+    u8 stack[0x400]; /* osCreateThread stack top is &stack[sizeof(stack)] */
+    u8 requests[0x5068 - 0xE68];
     IntrusiveList available; /* 0x5068 */
     IntrusiveList pending; /* 0x507C */
 };

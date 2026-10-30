@@ -696,7 +696,7 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
     g_introSelectionState = 0;
     resources = (char *)&g_gameSession;
     SetN64_ResetSessionPlayerPools(resources, 0, 0);
-    Scene_LoadLevelResources(resources + 0x3C8, 0, 0);
+    Scene_LoadLevelResources((char *)&((GameSession *)resources)->world, 0, 0);
     g_pakDialog->ready = 0;
     return 0;
 }

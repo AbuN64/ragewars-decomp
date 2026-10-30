@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/EFFECTRENDER.H"
@@ -746,7 +747,7 @@ s32 Player_CheckTotalScoreWin(Root *root) {
  FragTagPlayerListNode *node; int i,sum,skip; unsigned char *settings;
  if(initial->totalScoreTarget==0) return 0;
  node=root->players; state=initial;
- if(node) { settings=(unsigned char *)state-0x5D8; }
+ if(node) { settings=(unsigned char *)state - (u32)&((Shared_Game *)0)->counters; }
  for(;node;node=node->next) {
   skip=Player_GetPlayerIndex(root,node);
   sum=0;
@@ -1024,7 +1025,7 @@ void Playerai_DrawPlayerModelsForView(GamePlayerListView *game, s32 view) {
                 model = Scene_FindModelIdIndex(&g_world, 3205);
             }
             if (model != -1) {
-                Geometry_QueueDirectModel(Scene_GetIndexedModelResource(&g_world, model), player + 0x1600, &g_defaultParticleLighting, 0, -1);
+                Geometry_QueueDirectModel(Scene_GetIndexedModelResource(&g_world, model), (char *)&((Shared_ActorView *)player)->transform1600, &g_defaultParticleLighting, 0, -1);
             }
         }
         if (((FragTagPlayerListView *)(player))->weaponHandle != 0 && ((FragTagPlayerListView *)(player))->alternateFireState != 0 && ((FragTagPlayerListView *)(player))->weaponHandle == view) {

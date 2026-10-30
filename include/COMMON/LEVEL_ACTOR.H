@@ -50,7 +50,9 @@ struct LevelActor {
     u8 pad10C[2];
     s8 animationPending; /* 0x10E */
     s8 animationChanged; /* 0x10F */
-    u8 pad110[0x138 - 0x110];
+    u8 pad110[8];
+    s32 animationReference; /* Gastate_ResetAnimationReference */
+    u8 pad11C[0x138 - 0x11C];
     u8 state138;
     u8 state139;
     u8 shadowAlpha; /* 0x13A */

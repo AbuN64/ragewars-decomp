@@ -282,7 +282,7 @@ s32 Cache_FinishResourceSlot(void) {
     g_resourceHeapLockUsers = lockClaimCount;
     if (lockClaimCount != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(((char *)&g_resourceSlotLockState + 0xB98), 0, 1);
+        osRecvMesg((&((ResourceLockState *)&g_resourceSlotLockState)->waitQueue), 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -294,7 +294,7 @@ s32 Cache_FinishResourceSlot(void) {
     g_resourceHeapLockUsers = lockReleaseCount;
     if (lockReleaseCount != 0) {
         __osRestoreInt(releaseInterruptMask);
-        osSendMesg((char *)base + 0xB98, 0, 1);
+        osSendMesg(&((ResourceLockState *)base)->waitQueue, 0, 1);
     } else {
         __osRestoreInt(releaseInterruptMask);
     }
@@ -319,7 +319,7 @@ void Cache_MarkResourceInUse(s32 unused0, CacheResourceNode *resource) {
     g_resourceHeapLockUsers = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        osRecvMesg(((char *)base + 0xB98), 0, 1);
+        osRecvMesg((&((ResourceLockState *)base)->waitQueue), 0, 1);
     } else {
         __osRestoreInt(token);
     }

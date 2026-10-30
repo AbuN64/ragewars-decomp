@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "COMMON/VECTOR4F.H"
 #include "MENU/ITEMS/GAME_AND_PLAYER_OPTIONS.H"
@@ -23,7 +24,7 @@ extern void Cache_ReleaseResource(void *cache, void *resource);
 
 extern char g_controllerProfiles[];
 
-extern char g_gameSettings[];
+
 
 extern char g_matchRoundCounters[];
 
@@ -89,7 +90,7 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
     List_InitializeIntrusive(&pool->m_ActiveList, 5852, 5856);
     Control_SetControllerMode(0);
     Cache_DrainAndCompactResources(0);
-    global = g_gameSettings;
+    global = (char *)&g_gameSettings;
 
     if (pool->m_pmePlayers != 0) {
         Cache_ReleaseResource(0, pool->m_pmePlayers);
@@ -114,7 +115,7 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
         }
     }
 
-    entry = global + 0x3A;
+    entry = (char *)&((Shared_Game *)global)->defaults;
     if (((GameModeEnableView *)(global))->local != 0) {
         if (pool->count <= 0) {
             goto initialized;

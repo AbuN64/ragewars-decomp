@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/OBJ.H"
 #include "include_asm.h"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
@@ -55,7 +56,7 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
     case 1614:
         player = Playerai_FindTransientPlayer((u8 *)&g_playerViewRenderContext);
         if (player != 0 && LV_FIELD(player, s32, 1508) != 0 && LV_FIELD(hit, s8, 54) != LV_FIELD(hit, s8, 52)) {
-            table = (u8 *)&g_playerViewRenderContext + 0x1860;
+            table = (u8 *)&((Shared_MenuData *)&g_playerViewRenderContext)->game.counters;
             if (LV_FIELD(table, s32, 104) == 0 && LV_FIELD(hit, s32, 300) == 0) {
                 if (LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 143) == 1) {
                     LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 143) = 0;
@@ -87,7 +88,7 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
             LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 144) = 1;
             LV_FIELD(LV_FIELD(player, u8 *, 1496), u16, 8) += 1;
             Playerai_UpdateTeamScore(player, player, 3);
-            table2 = (u8 *)&g_playerViewRenderContext + 0x1860;
+            table2 = (u8 *)&((Shared_MenuData *)&g_playerViewRenderContext)->game.counters;
             LV_FIELD(table2, s32, 132) = 0;
             LV_FIELD(table2, s32, 128) = 0;
             switch (LV_FIELD(LV_FIELD(player, u8 *, 1496), u8, 146)) {

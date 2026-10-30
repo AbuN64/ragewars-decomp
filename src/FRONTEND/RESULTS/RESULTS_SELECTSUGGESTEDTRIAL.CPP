@@ -20,7 +20,7 @@ void Results_SelectSuggestedTrial(void) {
         state = &g_gameSettings.counters;
         if (state->humanWon != 0) {
             /* The counters alias Game+0x5D8 in every version. */
-            { void *whole = (u8 *)state - 0x5D8; config = whole; }
+            { void *whole = (u8 *)state - (u32)&((Shared_Game *)0)->counters; config = whole; }
             switch (config->controllerMode) {
             case 1:
                 preset = Achieve_CopyPreset(g_trialCatalogueScreen->selection, 0, config->slots[g_trialCatalogueScreen->player].kind);

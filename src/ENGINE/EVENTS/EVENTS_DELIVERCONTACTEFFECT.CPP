@@ -1,3 +1,4 @@
+#include "COMMON/VECTOR4F.H"
 #include "include_asm.h"
 
 #include "TYPES.H"
@@ -46,7 +47,7 @@ void Events_DeliverContactEffect(void *target, void *source, s32 effect, s32 unu
             }
         }
         for (node = g_transientPlayerList; node != 0; node = node->next) {
-            if ((void *)node != target && (char *)node + 0x2E8 != target) {
+            if ((void *)node != target && (char *)&((SharedPlayer *)node)->views1C.view2E8_27.weapon != target) {
                 dispatchEffect(node, source, effect, position, style);
             }
         }
@@ -60,7 +61,7 @@ void Events_DeliverContactEffect(void *target, void *source, s32 effect, s32 unu
         }
         node = g_transientPlayerList;
         while (node != 0) {
-            if ((void *)node != target && (char *)node + 0x2E8 != target) {
+            if ((void *)node != target && (char *)&((SharedPlayer *)node)->views1C.view2E8_27.weapon != target) {
                 dispatchEffect(node, source, effect, position, style);
             }
             node = node->next;

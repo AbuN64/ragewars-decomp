@@ -222,7 +222,7 @@ void Gobjinst_InitializeActor(char *obj, s32 model, s32 kind, s32 unused, void *
     ((LevelActor *)obj)->state138 = 0;
     ((LevelActor *)obj)->renderFlags = 0x17800074;
     Gastate_ResetAnimationReference(&((LevelActor *)obj)->animationTime);
-    Gastate_ResetAnimationReference((char *)obj + 0x118);
+    Gastate_ResetAnimationReference((char *)&((LevelActor *)obj)->animationReference);
     Gobjinst_QueueAnimation(obj, 0);
     ((LevelActor *)obj)->flags = (((LevelActor *)obj)->flags & ~0x400) | 0x2100;
     Graphu64_IdentityMatrix(&((LevelActor *)obj)->transform);

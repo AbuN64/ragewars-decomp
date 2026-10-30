@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/WEAPON_LOCKED_NOTICE_TEXT_EU.H"
@@ -71,7 +72,7 @@ void Weaponai_TryEnterAlternateAmmoMode(Shared_Actor *actor, WeaponFireState *fi
         } else {
             SoundElement_PlayFlatSound(3405);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
-                Gsky_PostTargetedScreenMessage(g_playerViewRenderContext + 0x48, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, (u8)g_playerViewRenderContext[6153]),
+                Gsky_PostTargetedScreenMessage(&((Shared_MenuData *)g_playerViewRenderContext)->object, ((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera, RW_LOCALIZED_TEXT(g_weaponLockedNoticeText[0], g_weaponLockedNoticeTextEu, g_weaponLockedNoticeTextEuX, (u8)g_playerViewRenderContext[6153]),
                               Player_GetPlayerIndex(g_playerViewRenderContext, player), g_alternateAmmoSecondMessageDuration);
             }
         }

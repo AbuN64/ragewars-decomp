@@ -33,22 +33,22 @@ void Cartridge_StartReadWorker(s32 workerAddress, s32 count) {
     s32 s0;
     s32 s1;
 
-    osCreateMesgQueue(workerAddress + 0x230, workerAddress + 0x248, 512);
-    s0 = workerAddress + 0xA48;
-    osCreateMesgQueue(s0, workerAddress + 0xA60, 1);
+    osCreateMesgQueue((s32)&((CartridgeReadWorker *)workerAddress)->requestQueueStorage, (s32)&((CartridgeReadWorker *)workerAddress)->requestMessages, 512);
+    s0 = (s32)&((CartridgeReadWorker *)workerAddress)->completionQueueStorage;
+    osCreateMesgQueue(s0, (s32)&((CartridgeReadWorker *)workerAddress)->completionMessage, 1);
     osSetEventMesg(8, s0, 2001);
-    List_InitializeIntrusive(workerAddress + 0x5068, 24, 28);
-    List_InitializeIntrusive(workerAddress + 0x507C, 24, 28);
+    List_InitializeIntrusive((s32)&((CartridgeReadWorker *)workerAddress)->available, 24, 28);
+    List_InitializeIntrusive((s32)&((CartridgeReadWorker *)workerAddress)->pending, 24, 28);
     s1 = 0;
     s0 = 3688;
     do {
         ((struct LinkedWorldFlagsView *) (workerAddress + s0))->flags = 0;
-        List_AppendIntrusive(workerAddress + 0x5068, workerAddress + s0);
+        List_AppendIntrusive((s32)&((CartridgeReadWorker *)workerAddress)->available, workerAddress + s0);
         s1 += 1;
         s0 += 32;
     } while (s1 < 528);
-    XPlus_FillMemory(workerAddress + 0xA68, count, 0x400);
-    osCreateThread(workerAddress, count, &g_Cartridge_RunReadWorkerPackedAddress24, workerAddress, workerAddress + 0xE68, g_cartridgeReadWorkerPriority);
+    XPlus_FillMemory((s32)&((CartridgeReadWorker *)workerAddress)->stack, count, 0x400);
+    osCreateThread(workerAddress, count, &g_Cartridge_RunReadWorkerPackedAddress24, workerAddress, (s32)&((CartridgeReadWorker *)workerAddress)->stack[sizeof(((CartridgeReadWorker *)0)->stack)], g_cartridgeReadWorkerPriority);
     osStartThread((void *)workerAddress);
 }
 

@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "MENU/PLAYERSETTINGS.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -150,7 +151,7 @@ s32 CMenuProfile_UpdateRoundEndDelay(void) {
     if ((120.0f) <= time) {
         base = &g_gameSettings.counters;
         base->teams = 0;
-        Playerai_EndRound((void *) ((char *) base - 0x1860));
+        Playerai_EndRound((void *) ((char *) base - (u32)&((Shared_MenuData *)0)->game.counters));
         return 1;
     }
     return 0;

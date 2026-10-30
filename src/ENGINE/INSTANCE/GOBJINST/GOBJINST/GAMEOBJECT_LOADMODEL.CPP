@@ -61,7 +61,7 @@ void Gobjinst_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directoryBa
             ((LevelActor *)actorStorage)->controllerUpdate(actorStorage, &((LevelActor *)actorStorage)->behaviorFlags);
             Graphu64_TransformBoundingBox(&((LevelActor *)actorStorage)->transform, (s32)modelBounds, &((LevelActor *)actorStorage)->bounds);
             Gastate_ResetAnimationReference(&((LevelActor *)actorStorage)->animationTime);
-            Gastate_ResetAnimationReference((char *)actorStorage + 0x118);
+            Gastate_ResetAnimationReference((char *)&((LevelActor *)actorStorage)->animationReference);
             ((LevelActor *)actorStorage)->stateE6 = (u8)((ResourceManagerState *)SetN64_GetPackSection(node, 1))->count;
             ((LevelActor *)actorStorage)->flags |= 0x40000;
             if (extra > 0) {

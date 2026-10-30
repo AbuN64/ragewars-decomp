@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
@@ -429,7 +430,7 @@ s32 Frontend_UpdateMatchResultsTransition(void *window, void *unused1, s32 event
             Widget_SetWidgetFlag08(window, 1);
             object = &g_frontendScreenStatus;
             Pools_ResetActorPools(object, 0);
-            Player_InitializePlayerPool(object - 0x48, 0, 0);
+            Player_InitializePlayerPool(object - (u32)&((Shared_MenuData *)0)->object, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {

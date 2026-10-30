@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -108,7 +109,7 @@ s32 Snapshot_CloseNoteBrowser(void *unused, PakNoteBrowserContext *menu) {
         target = Playerai_FindPlayerByController(g_playerViewRenderContext, menu->slot);
         if (g_pakProfileLoadActive != 0) {
             g_pakMenuPromptAccepted = 1;
-            Menu_OpenDialog(g_playerViewRenderContext + 0x5DC, g_controllerPakNotReadyDialogResource, target, target->views5E8.view698_38.title, channel);
+            Menu_OpenDialog(&((Shared_MenuData *)g_playerViewRenderContext)->dialogOwner, g_controllerPakNotReadyDialogResource, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
         if (g_pakSaveMenuActiveDe != 0) {

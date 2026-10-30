@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "COMMON/LONE/g_currentStagePreset.H"
 #include "COMMON/AUDIO_CALLBACKS.H"
@@ -261,7 +262,7 @@ void SpawnAI_DispatchSpawnChoice(SpawnDispatchObject *object, SpawnDispatchOwner
             }
         } else {
             /* Configuration lies 0x1288 bytes into the shared runtime block. */
-            context = Playerai_GetFirstPlayer((u8 *)&g_gameSettings - 0x1288);
+            context = Playerai_GetFirstPlayer((u8 *)&g_gameSettings - (u32)&((Shared_MenuData *)0)->game);
             if (!context) {
                 return;
             }

@@ -638,7 +638,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
             zero.x = 0;
             zero.y = 0;
             zero.z = 0;
-            CScene_StartEventClips(&g_world, (char *)FIELD(void *, player, 1688) + 0x140, 17, zero, g_playerHeightScalePair_us, strength);
+            CScene_StartEventClips(&g_world, (char *)&((ControllerProfile *)FIELD(void *, player, 1688))->effectPool, 17, zero, g_playerHeightScalePair_us, strength);
         }
     }
     if (dead == 0 && FIELD(s16, player, 1616) != 18 && FIELD(void *, player, 1500) != 0) {

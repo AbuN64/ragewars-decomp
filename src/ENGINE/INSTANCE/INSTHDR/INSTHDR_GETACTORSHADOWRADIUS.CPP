@@ -250,7 +250,7 @@ void InstHdr_GetActorTargetOffset(u8 *player, void *vector) {
     CAIMovementInfo offset;
 
     if (*player == 1) {
-        Barrel_ComputeTargetOffset(player, player + 0x170, &offset);
+        Barrel_ComputeTargetOffset(player, (char *)&((Player *)player)->motion, &offset);
         *(CVector3 *)vector = offset.first;
         return;
     }
@@ -262,7 +262,7 @@ void InstHdr_GetActorTargetOffset(u8 *player, void *vector) {
 f32 InstHdr_GetActorTargetHeight(u8 *player) {
     CAIMovementInfo offset;
     if (*player == 1) {
-        Barrel_ComputeTargetOffset(player, player + 0x170, &offset);
+        Barrel_ComputeTargetOffset(player, (char *)&((Player *)player)->motion, &offset);
         return offset.height;
     }
     return 0.0f;

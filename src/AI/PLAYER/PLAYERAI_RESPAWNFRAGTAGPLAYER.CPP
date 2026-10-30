@@ -1,3 +1,4 @@
+#include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/VECTOR4F.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
@@ -56,7 +57,7 @@ void Playerai_ToggleActionFlagMode(Player *player) {
     if (*ptr != 0) {
         return;
     }
-    if (*(s32 *)(ptr - 0x55) != 0) {
+    if (((MenuMatchGlobals *)(ptr - (u32)&((MenuMatchGlobals *)0)->settings.local))->unk1208 != 0) {
         if (player->inputFlags & 0x20) {
             return;
         }
@@ -86,7 +87,7 @@ void Playerai_SelectAlternateWeapon(Player *player) {
             return;
         }
     }
-    if (*(s32 *)(ptr - 0x55) != 0) {
+    if (((MenuMatchGlobals *)(ptr - (u32)&((MenuMatchGlobals *)0)->settings.local))->unk1208 != 0) {
         if (player->inputFlags & 0x20) {
             return;
         }

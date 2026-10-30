@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "include_asm.h"
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 #include "COMMON/VECTOR4F.H"
@@ -220,7 +221,7 @@ void Weapon_DrawWeaponLookupModel(void *actorStorage, Dest *weaponState, Lookup 
         return;
     }
     if (g_gameSettings.local != 0) {
-        if (Menu_CountLiveNodes((char *)resource + 0x554) != 0) {
+        if (Menu_CountLiveNodes((char *)&((GameplayCamera *)resource)->messageList) != 0) {
             return;
         }
     }
@@ -676,9 +677,9 @@ void Weapon_EaseSpinForActionFive(struct WeaponActorStateView *actor, void *fire
 
     value = actor->value;
     if (((struct WeaponModeByteView *)(fireState))->value == 5) {
-        Graphu64_EaseValueToward(fireState + 0x128, (f32) g_weaponActionFiveSpinTarget * g_weaponActionFiveSpinTargetScale, 0.4f);
+        Graphu64_EaseValueToward(&((WeaponFireState *)fireState)->spin, (f32) g_weaponActionFiveSpinTarget * g_weaponActionFiveSpinTargetScale, 0.4f);
     } else {
-        Graphu64_EaseValueToward(fireState + 0x128, 0.0f, 0.4f);
+        Graphu64_EaseValueToward(&((WeaponFireState *)fireState)->spin, 0.0f, 0.4f);
     }
     spinStep = ((struct WeaponOriginScalarView *)(fireState))->value;
     controller = ((struct PlayerHeldWeaponView *)(value))->value;

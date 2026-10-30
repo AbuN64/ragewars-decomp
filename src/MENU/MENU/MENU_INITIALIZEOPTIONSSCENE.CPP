@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "TYPES.H"
@@ -27,7 +28,7 @@ void Menu_InitializeOptionsScene(void) {
     Menu_ConfigureOptionsCamera();
     object = &g_frontendScreenStatus;
     Pools_ResetActorPools(object, 1);
-    Player_InitializePlayerPool(object - 0x48, 1, 0);
+    Player_InitializePlayerPool(object - (u32)&((Shared_MenuData *)0)->object, 1, 0);
     Scene_SetSelection(&g_world, ~Track_RequestTrackByKey(637), 0);
     if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
