@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "include_asm.h"
 #include "COMMON/GAME_SESSION.H"
@@ -660,7 +661,7 @@ void Gobjinst_DrawVisibleCachedActor(SceneObject *object, struct RacerViewport *
             if (camera->clipBounds[1].x > object->bounds.min.x && camera->clipBounds[0].x < object->bounds.max.x &&
                 camera->clipBounds[1].z > object->bounds.min.z && camera->clipBounds[0].z < object->bounds.max.z &&
                 camera->clipBounds[1].y > object->bounds.min.y && camera->clipBounds[0].y < object->bounds.max.y &&
-                Visdata_TestBoxAgainstFrustum((char *)camera + 0x2F0, &object->bounds) != 0) {
+                Visdata_TestBoxAgainstFrustum((char *)&((GameplayCamera *)camera)->clipPlanes, &object->bounds) != 0) {
                 visible = 1;
                 if (object->model != 0) {
                     goto sync;

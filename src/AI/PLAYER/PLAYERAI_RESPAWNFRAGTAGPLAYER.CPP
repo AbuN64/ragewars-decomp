@@ -1,3 +1,4 @@
+#include "COMMON/VECTOR4F.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "include_asm.h"
@@ -328,7 +329,7 @@ void Playerai_RespawnFragTagPlayer(void *player) {
                       (s32)((char *)player + 8), -1);
         break;
     }
-    TeamSelect_EmptyWeaponWheelHook((char *)player + 0x938);
+    TeamSelect_EmptyWeaponWheelHook((char *)&((SharedPlayer *)player)->views5E8.view938_128.strokes);
     ((FragTagRespawnActorView *)player)->unk_0x11B4 = 0;
     Actor_RequestActorState(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
     Player_PlacePlayerAtSpawnPoint(player, ((Shared_ActorView *)player)->spawn, 0, 1);

@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/TARGET.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "SYSTEM/EVENT_DAMAGE_AND_IMPACT_VIEWS.H"
@@ -184,7 +185,7 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
     point.x = 0;
     point.y = 0;
     point.z = 0;
-    CScene_StartEventClips(&g_world, player->views5E8.view698_37.emitter + 0x140, 3, point, *(&k_playerEventClipHeightAndAngle + 1), k_playerEventClipScale);
+    CScene_StartEventClips(&g_world, (char *)&((GameplayCamera *)player->views5E8.view698_37.emitter)->orientation, 3, point, *(&k_playerEventClipHeightAndAngle + 1), k_playerEventClipScale);
 }
 
 void Events_ApplyDirectDamage(unsigned char *source, s32 target, s32 kind, Triple position, struct IntPair params) {

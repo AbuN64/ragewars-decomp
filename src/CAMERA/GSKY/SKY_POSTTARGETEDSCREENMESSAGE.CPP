@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -165,7 +166,7 @@ void Gsky_ActivateAllMessagePools(s32 messageOwner) {
 
 /** Thin wrapper forwarding an offset argument to Pool_InitEntryPool_SkyPosttargetedscreenmessage. */
 void Gsky_InitializeMessageEntryPool(int viewAddress) {
-    Pool_InitEntryPool(viewAddress + 0x570);
+    Pool_InitEntryPool((char *)&((GameplayCamera *)viewAddress)->sceneEffects);
 }
 
 void *Gsky_RecycleFirstScreenMessage(void *screenMessageOwner, struct ScreenMessagePool *screenMessagePool) {

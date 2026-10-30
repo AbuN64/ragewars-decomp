@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/INTEGERSTATE1250.H"
 #include "COMMON/GAME_SESSION.H"
@@ -18,7 +19,7 @@ void Playerai_StartPrimaryAttachedSound(Shared_ActorView *actor, s32 soundId) {
 
     viewAddress = (s32) actor->message;
     if (viewAddress != 0) {
-        soundPosition = (void *)(viewAddress + 0x128);
+        soundPosition = (void *)((char *)&((GameplayCamera *)viewAddress)->position);
     } else {
         soundPosition = &actor->position;
     }
@@ -40,7 +41,7 @@ void Playerai_StartSecondaryAttachedSound(Shared_ActorView *actor, s32 soundId) 
     if (g_world.frozen == 0 && g_gameSession.clockPaused == 0) {
         viewAddress = (s32) actor->message;
         if (viewAddress != 0) {
-            soundPosition = (void *)(viewAddress + 0x128);
+            soundPosition = (void *)((char *)&((GameplayCamera *)viewAddress)->position);
         } else {
             soundPosition = &actor->position;
         }

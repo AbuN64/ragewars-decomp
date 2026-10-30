@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
@@ -203,7 +204,7 @@ void Gobjinst_DispatchAnimationIntervalEvents(char *obj, void *anim, f32 from, f
     s32 *resource;
     struct ActorAnimationEventTable *table;
 
-    if (!(((struct RootMotionActorView *) obj)->flags & 0x4000000) && anim != obj + 0x104) {
+    if (!(((struct RootMotionActorView *) obj)->flags & 0x4000000) && anim != &((LevelActor *)obj)->animationTime) {
         return;
     }
     switch (((struct RootMotionActorView *) obj)->type) {
@@ -227,7 +228,7 @@ void Gobjinst_DispatchAnimationIntervalEvents(char *obj, void *anim, f32 from, f
                 local.x = events[i].local.x;
                 local.y = events[i].local.z;
                 local.z = events[i].local.y;
-                Graphu64_TransformPoint(obj + 0x74, &local, &pos);
+                Graphu64_TransformPoint(&((LevelActor *)obj)->transform, &local, &pos);
             } else {
                 if (checkMask && (g_animationEventEffectDescriptors[events[i].effect].offset & 4)) {
                     if (resource == 0) {
@@ -310,7 +311,7 @@ CQuatern Gobjinst_BuildActorAimQuaternion(char *actor) {
         g_turretAimSine = sine;
         yaw.w = Math_Cosf(angle);
         MultiplyQuaternions(&both, &pitch, &yaw);
-        Turret_BuildPlaneRot(&base, actor, (char *)actor + 0x170);
+        Turret_BuildPlaneRot(&base, actor, &((LevelActor *)actor)->behaviorFlags);
         MultiplyQuaternions(&result, &both, &base);
     } else {
         sine = Gu_Sinf((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);

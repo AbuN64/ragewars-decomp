@@ -213,7 +213,7 @@ void Control_RefreshControllerConnection(void *profile) {
         ((ControllerInputRenderView *)(o))->pakAmount = 0;
         ((ControllerInputRenderView *)(o))->pakTimer = 0;
         ((ControllerInputRenderView *)(o))->connected = bit2;
-        Rumble_InitPoolNodes(o + 0x140, o + 0x16C, 3);
+        Rumble_InitPoolNodes(&((ControllerProfile *)o)->effectPool, &((ControllerProfile *)o)->effectNodes, 3);
     }
     ((ControllerInputRenderView *)(o))->connected = bit;
 }

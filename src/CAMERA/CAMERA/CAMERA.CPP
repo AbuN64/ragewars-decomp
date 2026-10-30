@@ -1223,11 +1223,11 @@ void Camera_DrawWorldViewLayers(char *view, char *world) {
     Scene_DrawOpaqueActors(world, view);
     Fx_DrawBoundedParticleQuads(&g_actorParticleScene, view);
     if (Cinema_IsSequenceInWindow() == 0) {
-        SetN64_DrawVisibleEffects(world + 0x11778, view);
+        SetN64_DrawVisibleEffects(&((Shared_World *)world)->system11778, view);
     }
     Scene_DrawTransparentObjects(world, view);
     Playerai_DrawPlayerModelsForView(&g_playerViewRenderContext, view);
-    Sky_DrawDepthSortedSceneEffects(view + 0x570, view);
+    Sky_DrawDepthSortedSceneEffects((char *)&((GameplayCamera *)view)->sceneEffects, view);
     Scene_DrawWorldParticles(world, view);
     Fx_DrawLinkedGeometry(&g_actorParticleScene, view);
     Gsky_DrawObjectFlares(view);

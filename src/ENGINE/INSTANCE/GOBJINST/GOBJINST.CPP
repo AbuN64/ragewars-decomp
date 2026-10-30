@@ -98,11 +98,11 @@ static inline void *body_setup(char *obj) {
     }
     if (kind == 11) {
         for (i = 0; i < g_playerCount; i++) {
-            player = g_gamePlayerAndMenuState + i * 0x16E8;
+            player = g_gamePlayerAndMenuState + i * sizeof(SharedPlayer);
             if (player == obj) {
                 return 0;
             }
-            if (player + 0x2E8 == obj) {
+            if ((char *)&((SharedPlayer *)player)->views1C.view2E8_27.weapon == obj) {
                 return &g_actorDefinitionTable;
             }
         }
@@ -221,11 +221,11 @@ void Gobjinst_InitializeActor(char *obj, s32 model, s32 kind, s32 unused, void *
     ((LevelActor *)obj)->state139 = 0;
     ((LevelActor *)obj)->state138 = 0;
     ((LevelActor *)obj)->renderFlags = 0x17800074;
-    Gastate_ResetAnimationReference((char *)obj + 0x104);
+    Gastate_ResetAnimationReference(&((LevelActor *)obj)->animationTime);
     Gastate_ResetAnimationReference((char *)obj + 0x118);
     Gobjinst_QueueAnimation(obj, 0);
     ((LevelActor *)obj)->flags = (((LevelActor *)obj)->flags & ~0x400) | 0x2100;
-    Graphu64_IdentityMatrix((char *)obj + 0x74);
+    Graphu64_IdentityMatrix(&((LevelActor *)obj)->transform);
     ((LevelActor *)obj)->animationMatrices = 0;
     ((LevelActor *)obj)->alternateAnimationMatrices = 0;
     ((LevelActor *)obj)->shadow = 0;
@@ -239,13 +239,13 @@ void Gobjinst_InitializeActor(char *obj, s32 model, s32 kind, s32 unused, void *
     delay = 0;
 
 Actor_InitSpawnedActor
-(obj, obj + 0x170, body_setup(obj));
+(obj, &((LevelActor *)obj)->behaviorFlags, body_setup(obj));
     if (((LevelActor *)obj)->collisionEnabled != 0) {
         lean = -((LevelActor *)obj)->lean;
     }
     ((LevelActor *)obj)->controller = 0;
     if (effect != -1) {
-        Playerai_InitializeRouteCursor(obj + 0x204, effect, (char *)obj + 0x8);
+        Playerai_InitializeRouteCursor(obj + 0x204, effect, &((LevelActor *)obj)->position0);
     }
     world = &g_world;
     Gobjinst_LoadModel(obj, (s32)world->indexedDirectory, world->indexedBank, lean);

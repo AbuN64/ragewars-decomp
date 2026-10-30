@@ -1,3 +1,4 @@
+#include "COMMON/AUDIO_CONTEXT.H"
 #include "include_asm.h"
 #include "COMMON/EXTERNS.H"
 #include "TYPES.H"
@@ -265,12 +266,12 @@ void Audio_StopAudioExceptKey(void *context, s32 matchValue) {
             __osRestoreInt(releaseInterruptMask);
         }
     }
-    Audio_StopDialogPlayer((char *)context + 0x2BC0);
+    Audio_StopDialogPlayer((char *)&((GameAudioContext *)context)->dialog);
 }
 
 /** Thin wrapper forwarding an offset argument to Audio_FadeOutMusic. */
 void Audio_FadeOutContextMusic(int contextAddress) {
-    Audio_FadeOutMusic(contextAddress + 0x1D64);
+    Audio_FadeOutMusic((char *)&((GameAudioContext *)contextAddress)->panel);
 }
 
 /** Store the second argument at offset 0x2BAC. */
@@ -359,7 +360,7 @@ s32 Audio_CountSoundVoices(char *obj, s32 owner)
 
 /** Thin wrapper forwarding an offset argument to Audio_StopMusic. */
 void Audio_StopContextMusic(int contextAddress) {
-    Audio_StopMusic(contextAddress + 0x1D64);
+    Audio_StopMusic((char *)&((GameAudioContext *)contextAddress)->panel);
 }
 
 /* Clamps a level to between zero and g_audioLevelMaximum, scales it by g_audioLevelIntegerScale and stores it as an integer
@@ -381,17 +382,17 @@ void Audio_SetClampedAudioLevel(AudioLevelSettingView *obj, float value) {
 
 /** Thin wrapper forwarding an offset argument to Audio_EnableMusicGainOverride. */
 void Audio_EnableContextMusicGainOverride(int contextAddress) {
-    Audio_EnableMusicGainOverride(contextAddress + 0x1D64);
+    Audio_EnableMusicGainOverride((char *)&((GameAudioContext *)contextAddress)->panel);
 }
 
 /** Thin wrapper forwarding an offset argument to Audio_DisableMusicGainOverride. */
 void Audio_DisableContextMusicGainOverride(int contextAddress) {
-    Audio_DisableMusicGainOverride(contextAddress + 0x1D64);
+    Audio_DisableMusicGainOverride((char *)&((GameAudioContext *)contextAddress)->panel);
 }
 
 /** Thin wrapper forwarding an offset argument to Audio_ClearVoiceFlags. */
 void Audio_ClearContextVoiceFlags(int contextAddress) {
-    Audio_ClearVoiceFlags(contextAddress + 0x1DB8);
+    Audio_ClearVoiceFlags((char *)&((GameAudioContext *)contextAddress)->menu);
 }
 
 int Audio_PlayDialogGroup(GameAudioContext *audioContext, int group) {
@@ -405,7 +406,7 @@ int Audio_PlayDialogGroup(GameAudioContext *audioContext, int group) {
 
 /** Thin wrapper forwarding an offset argument to Audio_StopDialogPlayer. */
 void Audio_StopContextDialog(int contextAddress) {
-    Audio_StopDialogPlayer(contextAddress + 0x2BC0);
+    Audio_StopDialogPlayer((char *)&((GameAudioContext *)contextAddress)->dialog);
 }
 
 /** Sort the table's word entries into ascending unsigned order. */

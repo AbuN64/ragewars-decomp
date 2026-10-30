@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MOTION_STEP.H"
 #include "COMMON/VECTOR4F.H"
@@ -53,7 +54,7 @@ void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *flo
     f32 sine;
     f32 angle;
 
-    anim = obj + 0x170;
+    anim = &((LevelActor *)obj)->behaviorFlags;
     shape = (CollisionShapeDefinition *)((u8 *)((LevelActor *)obj)->definition + 0x14);
     if (attachment != 0) {
         grow = Gobjinst_GetActorRadius(attachment);

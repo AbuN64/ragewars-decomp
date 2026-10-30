@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "MENU/PLAYERSETTINGS.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
@@ -126,7 +127,7 @@ loop_1:
             return 0;
         }
     }
-    rosterRecord += 0x96;
+    rosterRecord += sizeof(Shared_PlayerSettingsRecord);
     controllerIndex += 1;
     controllerOffset += 548;
     if (controllerIndex >= 4) {

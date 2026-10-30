@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "../../../../sdk/include/LIBC.H"
 #include "include_asm.h"
 #include "RESMGR/resmgr_string_memory.H"
@@ -246,7 +247,7 @@ void Snapshot_BeginProfileSave(Shared_PakMenu *menu) {
     prompt = pakPrompt(&channel);
     if (g_pakPlayerMessagePending) {
         g_pakMenuPromptAccepted = 1;
-        Menu_OpenDialog(menu->player->owner + 0x554, prompt, player, player->controller, 0);
+        Menu_OpenDialog((char *)&((GameplayCamera *)menu->player->owner)->messageList, prompt, player, player->controller, 0);
         return;
     }
     if (g_pakUseScannedChannel) {

@@ -673,7 +673,7 @@ void Events_ComputeRadialImpulse(struct Player *actor, u8 *other, PushStrength s
     radius *= Events_GetActorSizeScale(other);
     out->x = out->y = out->z = 0.0f;
 #ifdef VERSION_DE
-    if (*(s32 *)((u8 *)actor + 0x174) != 0 && *other == 2) {
+    if (((LevelActor *)actor)->active != 0 && *other == 2) {
 #else
     if (*other == 2) {
 #endif

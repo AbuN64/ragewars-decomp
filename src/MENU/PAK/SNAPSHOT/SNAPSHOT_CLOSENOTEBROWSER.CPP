@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
@@ -76,7 +77,7 @@ s32 Snapshot_CloseNoteBrowser(void *unused, PakNoteBrowserContext *menu) {
         if (g_pakProfileLoadActive != 0) {
             g_pakMenuPromptAccepted = 1;
             target = Playerai_FindPlayerByController(g_playerViewRenderContext, menu->slot);
-            Menu_OpenDialog(target->views5DC.view5DC_6.storage + 0x554, g_playerMenuDialogTable, target, target->views5E8.view698_38.title, channel);
+            Menu_OpenDialog((char *)&((GameplayCamera *)target->views5DC.view5DC_6.storage)->messageList, g_playerMenuDialogTable, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
         if (g_pakSaveMenuActiveDe != 0) {
@@ -100,7 +101,7 @@ s32 Snapshot_CloseNoteBrowser(void *unused, PakNoteBrowserContext *menu) {
                 label = g_pakPortThreePrompt_de;
                 break;
             }
-            Menu_OpenDialog(target->views5DC.view5DC_6.storage + 0x554, label, target, target->views5E8.view698_38.title, channel);
+            Menu_OpenDialog((char *)&((GameplayCamera *)target->views5DC.view5DC_6.storage)->messageList, label, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
     } else {

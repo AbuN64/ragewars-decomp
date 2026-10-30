@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "RENDER/RANGENODE.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/LONE/CONTROLLER_RUMBLE_POOL.H"
@@ -56,7 +57,7 @@ void Events_StartActorEmitter(ActorEmitterSource *sourceActor, ContextEventsStar
     void *resource;
 
     if ((sourceActor->actorKind == 1) && (sourceActor->flags & 0x300000)) {
-        resource = targetContext->inner->resource + 0x140;
+        resource = (char *)&((GameplayCamera *)targetContext->inner->resource)->orientation;
         emitterPosition.x = 0;
         emitterPosition.y = 0;
         emitterPosition.z = 0;

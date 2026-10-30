@@ -28,7 +28,7 @@ void Scene_SpawnUnrotatedEffect(s32 worldAddress, s32 ownerId, Triple position, 
     zero.x = 0;
     zero.y = 0;
     zero.z = 0;
-    SetN64_SpawnModelEffect(worldAddress + 0x11778, 0, modelId, zero, position, ownerId, lifetime);
+    SetN64_SpawnModelEffect(&((Shared_World *)worldAddress)->system11778, 0, modelId, zero, position, ownerId, lifetime);
 }
 
 void *Scene_ResolveFloorPolygon(void *triangle, CVector3 *position) {

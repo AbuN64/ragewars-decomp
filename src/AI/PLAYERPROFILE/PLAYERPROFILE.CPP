@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "WORLD/PLAYERAI_RESPAWNFRAGTAGPLAYER.H"
 #include "TYPES.H"
@@ -125,7 +126,7 @@ void Player_InitializeProfileSlot(s32 profileSlot) {
     g_profileSlotResetFlags[offset] = 0;
     g_profileSlotEnabledFlags[offset] = 1;
     XStdio_FormatBuffer(entry, g_profileSlotNameFormat, profileSlot + 1);
-    config = g_playerSettings + profileSlot * 0x96;
+    config = g_playerSettings + profileSlot * sizeof(Shared_PlayerSettingsRecord);
     g_profileSlotSettingsByte7B[offset] = config[123];
     g_profileSlotSettingsByte7D[offset] = config[125];
     g_profileSlotSettingsByte79[offset] = config[121];

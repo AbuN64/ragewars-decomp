@@ -319,17 +319,17 @@ void Achieve_AwardAllMilestoneAchievement(s32 player, s32 *award) {
     record = &g_playerSettings[player * 150];
     all = 1;
     if (record[120] == 1 && record[145] == 0) {
-        if (Defs_TestBit(&g_localPlayerProfiles->name[player * 400] + 0x4A, 49) == 0) {
+        if (Defs_TestBit(g_localPlayerProfiles[player].achievementFlags, 49) == 0) {
             for (i = 0; i < 4; i++) {
                 if (all != 1) {
                     return;
                 }
-                if (Defs_TestBit(&g_localPlayerProfiles->name[player * 400] + 0x124, i) == 0) {
+                if (Defs_TestBit(&g_localPlayerProfiles[player].trackFlags, i) == 0) {
                     all = 0;
                 }
             }
             if (all == 1) {
-                Defs_SetBitValue(&g_localPlayerProfiles->name[player * 400] + 0x4A, 49, 1);
+                Defs_SetBitValue(g_localPlayerProfiles[player].achievementFlags, 49, 1);
                 *award = 49;
             }
         }

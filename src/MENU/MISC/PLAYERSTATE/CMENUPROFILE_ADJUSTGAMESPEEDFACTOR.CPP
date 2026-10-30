@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "include_asm.h"
@@ -46,7 +47,7 @@ s32 CMenuProfile_OpenPrimaryPlayerDialog(void *unused0, PlayerDialogMenuContext 
     selectionPlayer = menuContext->selectionPlayer;
     selectionPlayer->alternateDialogFlag = 0;
     selectionPlayer->characterKindView->characterKind = 0;
-    Menu_OpenDialog(selectionPlayer->dialogParentBase + 0x554, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->dialogController, selectionPlayer->dialogParameter);
+    Menu_OpenDialog((char *)&((GameplayCamera *)selectionPlayer->dialogParentBase)->messageList, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->dialogController, selectionPlayer->dialogParameter);
     return 1;
 }
 
@@ -65,7 +66,7 @@ s32 CMenuProfile_OpenAlternatePlayerDialog(void *unused0, PlayerDialogMenuContex
     selectionPlayer = menuContext->selectionPlayer;
     selectionPlayer->alternateDialogFlag = 1;
     selectionPlayer->characterKindView->characterKind = 0;
-    Menu_OpenDialog(selectionPlayer->dialogParentBase + 0x554, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->dialogController, selectionPlayer->dialogParameter);
+    Menu_OpenDialog((char *)&((GameplayCamera *)selectionPlayer->dialogParentBase)->messageList, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->dialogController, selectionPlayer->dialogParameter);
     return 1;
 }
 

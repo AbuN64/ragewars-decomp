@@ -1,3 +1,4 @@
+#include "COMMON/VECTOR4F.H"
 #include "include_asm.h"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "TYPES.H"
@@ -148,7 +149,7 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
                 OnScreen_SetFirstBarTarget(g_tutorialStatusBars, (f32)tutorial->m_nBastilleShield);
                 if (tutorial->m_nBastilleTimer > 0) {
                     tutorial->m_nBastilleTimer--;
-                    ContPad_ClearControllerInput((char *)brain->player + 0x688);
+                    ContPad_ClearControllerInput((char *)&((SharedPlayer *)brain->player)->views5E8.view688_33.body);
                     brain->w23C = 0;
                     brain->w240 = 0;
                 }

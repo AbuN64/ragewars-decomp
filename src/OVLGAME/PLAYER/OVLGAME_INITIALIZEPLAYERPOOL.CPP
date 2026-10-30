@@ -1,3 +1,5 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
+#include "COMMON/VECTOR4F.H"
 #include "MENU/ITEMS/GAME_AND_PLAYER_OPTIONS.H"
 #include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "COMMON/GAME_SESSION.H"
@@ -102,11 +104,11 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
 
     Player_AllocPlayerList(pool, count);
     for (i = 0; i < pool->count; i++) {
-        List_AppendIntrusive(&pool->m_FreeList, pool->m_Players + i * 0x16E8);
+        List_AppendIntrusive(&pool->m_FreeList, pool->m_Players + i * sizeof(SharedPlayer));
     }
 
     for (i = 0; i < pool->count; i++) {
-        entry = global + 0xD0 + i * 0x96;
+        entry = global + 0xD0 + i * sizeof(Shared_PlayerSettingsRecord);
         if (((CPlayerOptions *)(entry))->talsetPosse != 0) {
             ((CPlayerOptions *)(entry))->active = 0;
         }
@@ -128,10 +130,10 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->remote = ((CPlayerOptions *)(entry))->isBot;
             ((struct Shared_ActorView *)(object))->actorState = 0;
             if (((struct Shared_ActorView *)(object))->remote != 0) {
-                ContPad_InitControllerInput(object + 0x688, g_botControllerProfile);
+                ContPad_InitControllerInput((char *)&((SharedPlayer *)object)->views5E8.view688_33.body, g_botControllerProfile);
                 ((struct Shared_ActorView *)(object))->mode = ((CPlayerOptions *)(entry))->controller;
             } else {
-                ContPad_InitControllerInput(object + 0x688, g_controllerProfiles + attribute_offset);
+                ContPad_InitControllerInput((char *)&((SharedPlayer *)object)->views5E8.view688_33.body, g_controllerProfiles + attribute_offset);
                 ((struct Shared_ActorView *)(object))->mode = i;
             }
             owner = ((struct Shared_ActorView *)(object))->owner;
@@ -184,10 +186,10 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->remote = ((CPlayerOptions *)(entry))->isBot;
         ((struct Shared_ActorView *)(object))->actorState = 0;
         if (((struct Shared_ActorView *)(object))->remote != 0) {
-            ContPad_InitControllerInput(object + 0x688, g_botControllerProfile);
+            ContPad_InitControllerInput((char *)&((SharedPlayer *)object)->views5E8.view688_33.body, g_botControllerProfile);
             ((struct Shared_ActorView *)(object))->mode = ((CPlayerOptions *)(entry))->controller;
         } else {
-            ContPad_InitControllerInput(object + 0x688, g_controllerProfiles + roster_index * 0x224);
+            ContPad_InitControllerInput((char *)&((SharedPlayer *)object)->views5E8.view688_33.body, g_controllerProfiles + roster_index * sizeof(ControllerProfile));
             ((struct Shared_ActorView *)(object))->mode = roster_index;
         }
         owner = ((struct Shared_ActorView *)(object))->owner;
@@ -288,10 +290,10 @@ void Player_InitializePlayerFromRecord(char *player, s32 slot, PlayerSettingsRec
     ((Shared_ActorView *)player)->actorState = 0;
     ((Shared_ActorView *)player)->remote = computer;
     if (computer != 0) {
-        ContPad_InitControllerInput(player + 0x688, g_botControllerProfile);
+        ContPad_InitControllerInput((char *)&((SharedPlayer *)player)->views5E8.view688_33.body, g_botControllerProfile);
         ((Shared_ActorView *)player)->mode = record->slot;
     } else {
-        ContPad_InitControllerInput(player + 0x688, g_controllerProfiles + slot * 0x224);
+        ContPad_InitControllerInput((char *)&((SharedPlayer *)player)->views5E8.view688_33.body, g_controllerProfiles + slot * sizeof(ControllerProfile));
         ((Shared_ActorView *)player)->mode = slot;
     }
     ((Shared_ActorView *)player)->controls = (void *)record;

@@ -73,7 +73,7 @@ void Gobjinst_SpawnStandingAnimationEffects(char *obj, void *anim)
         switch (e[i].effect) {
         case 6:
         case 7:
-            Graphu64_TransformPoint(obj + 0x74, &e[i].local, &pos);
+            Graphu64_TransformPoint(&((LevelActor *)obj)->transform, &e[i].local, &pos);
             Events_DeliverContactEffect(obj, obj, e[i].effect, -1, pos, e[i].params);
         }
     }

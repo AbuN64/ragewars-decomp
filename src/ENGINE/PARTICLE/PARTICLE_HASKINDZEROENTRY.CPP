@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -144,7 +145,7 @@ void Particle_HandlePlayerContact(void *particle, void *player) {
         Playerai_StartDamageTimer(player, 30.0f, 3.0f,
                      ((Shared_Particle *)particle)->owner, 0);
         CScene_StartEventClips(&g_world,
-                      (char *)((Shared_ActorView *)player)->controller + 0x140,
+                      (char *)&((GameplayCamera *)((Shared_ActorView *)player)->controller)->orientation,
                       20, scratch, g_particleOwnerImpactRadiusAndStrength[1], g_particleOwnerImpactDuration);
         ((Shared_ActorView *)player)->impactTimer = (&g_particleOwnerImpactDuration)[1];
     }

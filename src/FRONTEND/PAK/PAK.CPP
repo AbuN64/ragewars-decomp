@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/RECORDRECATCV1.H"
 #include "include_asm.h"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -111,7 +112,7 @@ s32 Pak_OpenPakStatusPrompt(void *menuContext, Shared_PakMenu *menu) {
     if (Snapshot_CheckStatusPrompt(menu, channel, 1) != 0) {
         player = menu->player;
         if (player != NULL) {
-            buffer = player->owner + 0x554;
+            buffer = (char *)&((GameplayCamera *)player->owner)->messageList;
         } else {
             buffer = g_matchEndingTeamWheelClose;
         }
@@ -132,7 +133,7 @@ s32 Pak_CancelPakAction(s32 unused0, PakCancelActionView *action) {
     } else {
         actionOwner = action->player;
         if (actionOwner != NULL) {
-            dialogOwner = actionOwner->owner + 0x554;
+            dialogOwner = (char *)&((GameplayCamera *)actionOwner->owner)->messageList;
         } else {
             dialogOwner = g_matchEndingTeamWheelClose;
         }

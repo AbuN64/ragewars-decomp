@@ -1,3 +1,4 @@
+#include "COMMON/VECTOR4F.H"
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -1027,7 +1028,7 @@ void Playerai_DrawPlayerModelsForView(GamePlayerListView *game, s32 view) {
             }
         }
         if (((FragTagPlayerListView *)(player))->weaponHandle != 0 && ((FragTagPlayerListView *)(player))->alternateFireState != 0 && ((FragTagPlayerListView *)(player))->weaponHandle == view) {
-            Weaponai_DrawRedMarkerQuad(player + 0x2E8, (char *)player + 0x458);
+            Weaponai_DrawRedMarkerQuad((char *)&((SharedPlayer *)player)->views1C.view2E8_27.weapon, (char *)&((SharedPlayer *)player)->views1C.view458_29.ammo);
         }
         if ((g_gameSession.match.rules->teams != 0 || g_gameSession.match.rules->teamRule != 0)
             && ((struct Record *) ((FragTagPlayerListView *) player)->profile)->team == team && Gsky_FindScreenMessage(view) != player) {

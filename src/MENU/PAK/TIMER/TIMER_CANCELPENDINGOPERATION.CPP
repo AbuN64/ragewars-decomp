@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "include_asm.h"
 #include "COMMON/MENURECAT24.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -88,7 +89,7 @@ s32 Timer_CancelPendingOperation(void *unused, MenuPakBeginProfileLoad *menu) {
         }
         prompt = menuPrompt(menu);
         if (!prompt) prompt = menu->prompt;
-        if (menu->player) owner = menu->player->owner + 0x554;
+        if (menu->player) owner = (char *)&((GameplayCamera *)menu->player->owner)->messageList;
         else owner = &g_playerViewRenderContext.dialogOwner;
         Menu_OpenDialog(owner, prompt, (s32)menu->player, (s32)menu->slot, 0);
         return 1;

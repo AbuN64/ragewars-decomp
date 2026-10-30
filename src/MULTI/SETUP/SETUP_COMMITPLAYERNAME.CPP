@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "include_asm.h"
 
 #include "COMMON/MENURECAT20V1.H"
@@ -65,7 +66,7 @@ s32 Setup_CommitPlayerName(s32 first, NameEditMenuContext *second, s32 third) {
     player = second->profileOwner;
     playerIndexResult = Player_GetPlayerIndex(g_playerViewRenderContext, player);
     sourceName = (playerIndexResult * 0x18) + g_multiplayerSavedPlayerNames;
-    destinationName = (playerIndexResult * 0x96) + (g_playerViewRenderContext + 0x13DC);
+    destinationName = (playerIndexResult * sizeof(Shared_PlayerSettingsRecord)) + (g_playerViewRenderContext + 0x13DC);
     nonemptyCharacters = 0;
     characterIndex = 0;
     do {

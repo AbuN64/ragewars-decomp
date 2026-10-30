@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -68,7 +69,7 @@ void Player_SelectAlternatePlayerSettingsEntry(s32 entryIndex) {
 void Player_StoreAlternatePlayerSettingsEntry(s32 entryIndex) {
     u8 *config;
 
-    config = g_playerSettings + entryIndex * 0x96;
+    config = g_playerSettings + entryIndex * sizeof(Shared_PlayerSettingsRecord);
     g_profileSlotSettingsByte7B[entryIndex * 400] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->a);
     do {
         g_profileSlotSettingsByte7D[entryIndex * 400] = SmpButton_GetListSelection(g_alternatePlayerSettingsScreen->b);

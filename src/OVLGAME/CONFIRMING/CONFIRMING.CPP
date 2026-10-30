@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -132,12 +133,12 @@ void Confirming_SelectConfirmingController(MenuControllerSelectionView *menuOwne
     status = (s8 *)&g_gameSettingsRecordActiveFlagBase[0];
     for (; i >= 0; i--) {
         ((ConfirmingControllerStatusView *)status)->confirmed = 0;
-        status -= 0x96;
+        status -= sizeof(Shared_PlayerSettingsRecord);
     }
     i = 0;
     settings = (ConfirmingControllerSettingsView *)&g_playerPartnerNameFallback;
     for (; i < 4; i++) {
-        profile = (s32 *)((char *)&g_controllerProfiles + i * 0x224);
+        profile = (s32 *)((char *)&g_controllerProfiles + i * sizeof(ControllerProfile));
         if (Control_IsAButtonPressed(profile) != 0) {
             settings->controllerSelected = 1;
             settings->controllerIndex = i;

@@ -1,3 +1,4 @@
+#include "COMMON/AUDIO_CONTEXT.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
@@ -47,7 +48,7 @@ s32 Sound_UpdateAudioContext(void *context) {
     ((struct GameAudioContext *)(object))->red = (f32)bytes[0] * g_audioContextGainScaleConstants;
     ((struct GameAudioContext *)(object))->green = (f32)bytes[-1] * g_audioContextGainScaleConstants;
     ((struct GameAudioContext *)(object))->blue = (f32)bytes[1] * g_audioContextGainScaleConstants;
-    queue = object + 0x110;
+    queue = (char *)&((GameAudioContext *)object)->lock;
     ((struct GameAudioContext *)(object))->spatialPanMode = bytes[-2];
     mask = __osDisableInt();
     count = ((MenuRules *)(queue))->locked + 1;
@@ -61,7 +62,7 @@ s32 Sound_UpdateAudioContext(void *context) {
 
     Audio_UpdateVoicePool(&((struct GameAudioContext *)(object))->menu[0]);
     {
-        char *queue2 = object + 0x110;
+        char *queue2 = (char *)&((GameAudioContext *)object)->lock;
         u32 mask2 = __osDisableInt();
         s32 count2 = ((MenuRules *)(queue2))->locked - 1;
 
@@ -74,9 +75,9 @@ s32 Sound_UpdateAudioContext(void *context) {
         }
     }
 
-    AudioWorld_DispatchPendingSounds((char *)object + 0x138);
-    Audio_UpdateDialogPlayer((char *)object + 0x2BC0);
-    queue = object + 0x1D64;
+    AudioWorld_DispatchPendingSounds((char *)&((GameAudioContext *)object)->view);
+    Audio_UpdateDialogPlayer((char *)&((GameAudioContext *)object)->dialog);
+    queue = (char *)&((GameAudioContext *)object)->panel;
     Audio_UpdateMusicFade(queue);
     Audio_UpdateMusicPlayback(queue);
 

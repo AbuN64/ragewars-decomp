@@ -1,3 +1,4 @@
+#include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "MENU/OPTION_AND_TEXT_LAYER_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -10,14 +11,14 @@
 #include "MENU/PAK/MENU_INITIALIZEMENU.H"
 extern void Cache_ReleaseResource(void *cache, void *resource);
 
-/* Returns the address 0x190 bytes into the block at offset 0x20 of an object, or null when the
+/* Returns the address sizeof(Profile) bytes into the block at offset 0x20 of an object, or null when the
    object has no block. */
 
 char *Menu_GetObjectDetailData(struct GamePlayerListView *object) {
     char *result = 0;
 
     if (object->players != 0) {
-        result = object->players + 0x190;
+        result = object->players + sizeof(Profile);
     }
     return result;
 }

@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/PAK_MENU.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/g_pakProfileActionDialogResource.H"
@@ -53,7 +54,7 @@ void Snapshot_BeginProfileLoad(Shared_PakMenu *menu) {
     ch = menu->slot->controllerPort;
     if (g_pakPlayerMessagePending != 0) {
         g_pakMenuPromptAccepted = 1;
-        Menu_OpenDialog(menu->player->owner + 0x554, g_pakStatusPromptAlternate, menu->player, menu->slot, 0);
+        Menu_OpenDialog((char *)&((GameplayCamera *)menu->player->owner)->messageList, g_pakStatusPromptAlternate, menu->player, menu->slot, 0);
         return;
     }
     Note_ProbeStatus(ch);

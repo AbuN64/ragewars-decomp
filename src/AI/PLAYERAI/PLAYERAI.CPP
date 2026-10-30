@@ -739,7 +739,7 @@ extern char g_controllerProfiles[];
 void Playerai_InitializeMovementAndAim(void *playerObject) {
     char *object = playerObject;
     void *attributes;
-    void *state = object + 0x688;
+    void *state = (char *)&((SharedPlayer *)object)->views5E8.view688_33.body;
     f32 zero;
     f32 default_value;
     f32 tail_value;

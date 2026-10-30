@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "include_asm.h"
 #include "COMMON/LONE/g_controllerPakReadyDialogResource.H"
 #include "COMMON/MENURECAT24.H"
@@ -146,7 +147,7 @@ s32 Pak_ConfirmProfileOrDeleteNote(void *unused, MenuPakConfirmProfileOrDeleteNo
             profile->name[i] = g_controllerPakPreviewProfileName[i];
         }
         Player_StartPlayerAnimation(player, g_pakPreviewNoteType);
-        Menu_AllocateMenu(player->views5DC.view5DC_7.messages + 0x554, menu, g_characterPreviewMenuRomResource);
+        Menu_AllocateMenu((char *)&((GameplayCamera *)player->views5DC.view5DC_7.messages)->messageList, menu, g_characterPreviewMenuRomResource);
         return 1;
     }
     if (Note_DeleteNote(ch, g_controllerPakOverwriteNoteIndex) == 0) {

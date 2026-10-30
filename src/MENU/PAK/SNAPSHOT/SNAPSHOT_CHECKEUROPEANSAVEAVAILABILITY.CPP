@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "include_asm.h"
 #include "RESMGR/resmgr_string_memory.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
@@ -300,7 +301,7 @@ void Snapshot_BeginSnapshotSave(Shared_PakMenu *menu) {
     }
     g_pakMenuPromptAccepted = 1;
     if (Note_IsChannelReady(channel)) {
-        Menu_OpenDialog(player->owner + 0x554, g_pakDialogDamagedPak, (s32)player, (s32)player->controller, 1);
+        Menu_OpenDialog((char *)&((GameplayCamera *)player->owner)->messageList, g_pakDialogDamagedPak, (s32)player, (s32)player->controller, 1);
     } else if (Note_NeedsIdRepair(channel)) {
         Menu_OpenDialog(&g_matchEndingTeamWheelClose, &g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability, (s32)player, (s32)player->controller, (s32)g_pakAlternateReadyDialogResource);
     }

@@ -120,11 +120,11 @@ void *Gobjinst_GetActorTypeEntry(char *actorStorage)
                 if (object == actorStorage) {
                     return 0;
                 }
-                if (object + 0x2E8 == actorStorage) {
+                if ((char *)&((SharedPlayer *)object)->views1C.view2E8_27.weapon == actorStorage) {
                     return g_actorDefinitionTable;
                 }
                 i++;
-                object += 0x16E8;
+                object += sizeof(SharedPlayer);
             } while (i < limit);
         }
     }

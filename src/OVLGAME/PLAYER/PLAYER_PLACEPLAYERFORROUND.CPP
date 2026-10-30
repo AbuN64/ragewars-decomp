@@ -1,3 +1,4 @@
+#include "COMMON/SHAREDPLAYER.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -33,7 +34,7 @@ void Player_PlacePlayerForRound(SharedPlayer *player) {
     scale = (g_playerCount >= 2) * 2;
     if (g_motionVisibilitySettings != 0) {
         if (g_gameControllerMode == 1 && player->views1450.view1450_1.computer == 0) {
-            player->views133C.view133C_1.laps = ((u8)Player_GetLevelProgress(g_localPlayerProfiles + player->views1C.view5D4_46.slot * 0x190, player->views5D8.view5D8_1.record->characterId) >> 1) + 1;
+            player->views133C.view133C_1.laps = ((u8)Player_GetLevelProgress(g_localPlayerProfiles + player->views1C.view5D4_46.slot * sizeof(Profile), player->views5D8.view5D8_1.record->characterId) >> 1) + 1;
         }
         if (g_gameControllerMode == 4 && player->views1450.view1450_1.computer == 0 && g_currentStagePreset != 0) {
             player->views133C.view133C_1.laps = g_currentStagePreset->laps;

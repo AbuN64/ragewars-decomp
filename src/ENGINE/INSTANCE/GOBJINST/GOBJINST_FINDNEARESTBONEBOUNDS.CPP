@@ -1,3 +1,5 @@
+#include "COMMON/VECTOR4F.H"
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/ACTOR_DEFINITION_TABLE.H"
@@ -138,11 +140,11 @@ valid_type:
                 if (object == actor) {
                     goto zero_entry;
                 }
-                if (object + 0x2E8 == actor) {
+                if ((char *)&((SharedPlayer *)object)->views1C.view2E8_27.weapon == actor) {
                     goto special_entry;
                 }
                 i++;
-                object += 0x16E8;
+                object += sizeof(SharedPlayer);
             } while (i < limit);
         }
     }
@@ -150,7 +152,7 @@ valid_type:
 
 selected:
     if (entry != 0 && entry->callback != 0) {
-        entry->callback(actor, (char *)actor + 0x170);
+        entry->callback(actor, &((LevelActor *)actor)->behaviorFlags);
     }
     if ((((struct LevelActor *)(actor))->flags & 0x08000000) != 0) {
         (((struct LevelActor *)(actor))->updateCount)++;

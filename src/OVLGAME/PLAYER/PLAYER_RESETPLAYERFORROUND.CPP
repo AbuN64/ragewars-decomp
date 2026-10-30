@@ -1,3 +1,5 @@
+#include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/VECTOR4F.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/WORLD.H"
@@ -122,7 +124,7 @@ void Player_InitActorParts(SharedPlayer *player, LevelPlacedActorRecord *rec, s3
         record->part[0].action = ACTORPART_ACTION;
     }
     record->part[1].owner = actor;
-    Gobjinst_InitializePlacedActor((actor + 0x2E8), rec, (void *)mode, 0);
+    Gobjinst_InitializePlacedActor(((char *)&((SharedPlayer *)actor)->views1C.view2E8_27.weapon), rec, (void *)mode, 0);
     record->part[1].table28C = ACTORPART_PART1_T28C;
     record->part[1].marker = -1;
     record->part[1].flags |= 0x200000;
@@ -134,8 +136,8 @@ void Player_InitActorParts(SharedPlayer *player, LevelPlacedActorRecord *rec, s3
     record->part[1].table288 = ACTORPART_T288;
     record->selection = -1;
     record->part[1].flags &= 0xFFFEFFFF;
-    Actor_RequestActorState((actor + 0x2E8), (actor + 0x458), 0);
-    Weaponai_ApplyWeaponSwitch((actor + 0x2E8), (actor + 0x458));
+    Actor_RequestActorState(((char *)&((SharedPlayer *)actor)->views1C.view2E8_27.weapon), ((char *)&((SharedPlayer *)actor)->views1C.view458_29.ammo), 0);
+    Weaponai_ApplyWeaponSwitch(((char *)&((SharedPlayer *)actor)->views1C.view2E8_27.weapon), ((char *)&((SharedPlayer *)actor)->views1C.view458_29.ammo));
     Player_UpdatePlayerCamera(actor, actor);
     if (record->auxiliary != 0) {
         Cinema_UpdateSequenceTrack(record->auxiliary);
@@ -193,8 +195,8 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     } else {
         FIELD(s32, actor, 1500) = 0;
     }
-    TeamSelect_ResetWeaponWheel((char *)actor + 0x938);
-    TeamSelect_ResetTeamWheel((char *)actor + 0xCCC);
+    TeamSelect_ResetWeaponWheel((char *)&((SharedPlayer *)actor)->views5E8.view938_128.strokes);
+    TeamSelect_ResetTeamWheel((char *)&((SharedPlayer *)actor)->views5E8.viewCCC_164.teamWheel);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     for (i = 1; i < 22; i++) {
         FIELD(u8, actor, 1538 + i * 2) = 0;
@@ -228,7 +230,7 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     } while (--i >= 0);
     if (g_frontendScreenStatus.settings.local != 0) {
         if (g_gameControllerMode == 1 && FIELD(s32, actor, 5200) == 0) {
-            u32 value = Player_GetLevelProgress(g_localPlayerProfiles + FIELD(s32, actor, 1492) * 0x190, FIELD(s8, FIELD(void *, actor, 1496), 128));
+            u32 value = Player_GetLevelProgress(g_localPlayerProfiles + FIELD(s32, actor, 1492) * sizeof(Profile), FIELD(s8, FIELD(void *, actor, 1496), 128));
             FIELD(s32, actor, 4924) = ((value & 0xFF) >> 1) + 1;
         }
         if (g_gameControllerMode == 4 && FIELD(s32, actor, 5200) == 0 && g_currentStagePreset != 0) {
@@ -315,7 +317,7 @@ void Player_InitActorHudState(void *actor) {
             Achieve_ApplyProfileWeaponUnlocks(actor);
         }
     }
-    hud = (char *)actor + 0x878;
+    hud = (char *)&((SharedPlayer *)actor)->views5E8.view878_158.effect;
     FIELD(s32, hud, 180) = 0;
     FIELD(s32, hud, 8) = 0;
     FIELD(s32, hud, 184) = 0;

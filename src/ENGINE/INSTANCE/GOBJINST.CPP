@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -53,7 +54,7 @@ void GameObject_DrawActorShadow(char *obj, s32 unused, char *info) {
             if ((((struct LevelActor *)(obj))->shadow = Map_ReserveEntries(&g_actorMatrixPool, 1)) == 0) {
                 return;
             }
-            light = obj + (g_lightingBufferIndex * 0x18 + 0x140);
+            light = (char *)&((LevelActor *)obj)->lighting[g_lightingBufferIndex];
             dir.x = ((struct Shared_ParticleLighting *)(light))->direction[0] * 0.007874016f;
             dir.y = ((struct Shared_ParticleLighting *)(light))->direction[1] * 0.007874016f;
             dir.z = ((struct Shared_ParticleLighting *)(light))->direction[2] * 0.007874016f;
@@ -85,7 +86,7 @@ void GameObject_DrawActorShadow(char *obj, s32 unused, char *info) {
             TranslateMatrix(projection, -((struct LevelActor *)(obj))->position0.x, -plane, -((struct LevelActor *)(obj))->position0.z);
             scale = height * 0.003f + 1.0f;
             Graphu64_ScaleMatrixWorld(projection, scale, scale, scale);
-            MatrixFromQuaternion((f32 *)(obj + 0x5C), turn);
+            MatrixFromQuaternion((f32 *)(&((LevelActor *)obj)->rotation), turn);
             Graphu64_MultiplyAffineMatrices(((struct LevelActor *)(obj))->shadow, projection, turn);
             TranslateMatrix(((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->position0.x, ground, ((struct LevelActor *)(obj))->position0.z);
             if (((struct LevelActor *)(obj))->shadow == 0) {

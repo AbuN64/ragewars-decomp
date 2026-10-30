@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
@@ -58,7 +59,7 @@ void Stage_StartConfiguredMatch(void) {
     humans = 0;
     settings = (u8 *)&g_gameSettings;
     for (i = 0; i < 8; i++) {
-        status = (struct MatchPlayerStatus *)(settings + 0xD0 + i * 0x96);
+        status = (struct MatchPlayerStatus *)(settings + 0xD0 + i * sizeof(Shared_PlayerSettingsRecord));
         status->lives = 0;
         status->score = 0;
         if (status->computer == 0) {
@@ -74,10 +75,10 @@ void Stage_StartConfiguredMatch(void) {
     g_currentStagePreset = 0;
     if (settings[13] != 0) {
         first = 0;
-        while (((struct MatchPlayerStatus *)(settings + 0xD0 + first * 0x96))->joined == 0) {
+        while (((struct MatchPlayerStatus *)(settings + 0xD0 + first * sizeof(Shared_PlayerSettingsRecord)))->joined == 0) {
             first++;
         }
-        status = (struct MatchPlayerStatus *)(settings + 0xD0 + first * 0x96);
+        status = (struct MatchPlayerStatus *)(settings + 0xD0 + first * sizeof(Shared_PlayerSettingsRecord));
         switch (settings[13]) {
         case 1:
             g_currentStagePreset = Achieve_CopyPreset(g_selectedLevelId, 0, status->kind);
@@ -110,7 +111,7 @@ void Stage_StartConfiguredMatch(void) {
         break;
     }
     for (i = 0; i < 4; i++) {
-        status = (struct MatchPlayerStatus *)(settings + 0xD0 + i * 0x96);
+        status = (struct MatchPlayerStatus *)(settings + 0xD0 + i * sizeof(Shared_PlayerSettingsRecord));
         if (status->joined == 1 && status->computer == 0) {
             XPlus_CopyString(status->name, g_localPlayerProfiles[i].name);
             if (settings[13] != 0) {

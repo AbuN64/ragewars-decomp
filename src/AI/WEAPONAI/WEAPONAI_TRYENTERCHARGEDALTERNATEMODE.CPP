@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/WEAPON_LOCKED_NOTICE_TEXT_EU.H"
@@ -68,7 +69,7 @@ void Weaponai_TryEnterChargedAlternateMode(Shared_Actor *actor, WeaponFireState 
         ((SharedPlayer *)(player))->views5E8.view770_91.requestedWeapon = Weaponai_FindNextUsableWeapon(player);
     }
     if (((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera != 0) {
-        pos = (s32 *)(((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera + 0x128);
+        pos = (s32 *)((char *)&((GameplayCamera *)((SharedPlayer *)(player))->views5DC.view5DC_0.messageCamera)->position);
     } else {
         pos = (s32 *)&((SharedPlayer *)(player))->views0.view8_2.position;
     }

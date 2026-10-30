@@ -266,7 +266,7 @@ void Playerai_ResetPlayerControllers(struct Context *object) {
     Shared_ActorView *record = (void *)object->head;
     if (record != 0) {
         do {
-            Rumble_FreeAllPoolNodes((char *)record->controller + 0x140);
+            Rumble_FreeAllPoolNodes(&((ControllerProfile *)record->controller)->effectPool);
             ((struct IntegerStateD4 *)record->controller)->clearedWord = 0;
             record = record->next;
         } while (record != 0);

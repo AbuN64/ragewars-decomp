@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -14,7 +15,7 @@ extern void Barrel_SetLoopingSound(u8 *, u8 *, s32);
 void Events_SetActorLoopingSound(void *unused, u8 *object, s32 third, struct IntPair pair, s32 fifth, s32 sixth) {
     if (g_gameSession.clockPaused == 0 && object != 0 && object[0] == 1) {
         do {
-            Barrel_SetLoopingSound(object, object + 0x170, sixth);
+            Barrel_SetLoopingSound(object, &((LevelActor *)object)->behaviorFlags, sixth);
         } while (0);
     }
 }
@@ -28,7 +29,7 @@ extern void Barrel_StopActorLoopingSound(u8 *, u8 *);
 
 void Events_StopActorLoopingSound(void *unused, u8 *object, s32 third, struct IntPair pair) {
     if (object != 0 && object[0] == 1) {
-        Barrel_StopActorLoopingSound(object, object + 0x170);
+        Barrel_StopActorLoopingSound(object, &((LevelActor *)object)->behaviorFlags);
     }
 }
 
@@ -84,7 +85,7 @@ extern void Animpool_ReleaseSceneEffect(void *node);
 
 
 void Events_DeactivateActor(u8 *object, s32 second, s32 third, struct IntPair pair) {
-    Barrel_StopActorLoopingSound(object, (char *)object + 0x170);
+    Barrel_StopActorLoopingSound(object, &((LevelActor *)object)->behaviorFlags);
     ((LevelActor *)object)->behaviorFlags |= 0x20;
     ((LevelActor *)object)->flags &= 0xFFFEFFFF;
     ((LevelActor *)object)->flags &= ~0x2000;

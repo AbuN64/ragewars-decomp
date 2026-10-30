@@ -238,7 +238,7 @@ void Weapon_DrawWeaponLookupModel(void *actorStorage, Dest *weaponState, Lookup 
     }
     Geometry_DrawModelResource(lookup->value,
                   ((LevelActor *)actorStorage)->animationMatrices, 1,
-                  (char *)actorStorage + (g_lightingBufferIndex * 0x18 + 0x140), 0, result);
+                  (char *)(char *)&((LevelActor *)actorStorage)->lighting[g_lightingBufferIndex], 0, result);
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -57,9 +58,9 @@ void Gobjinst_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directoryBa
         if (resource2 != 0) {
             node = *resource2;
             modelBounds = SetN64_GetPackSection(node, 0);
-            ((LevelActor *)actorStorage)->controllerUpdate(actorStorage, (char *)actorStorage + 0x170);
-            Graphu64_TransformBoundingBox(&((LevelActor *)actorStorage)->transform, (s32)modelBounds, (char *)actorStorage + 0xE8);
-            Gastate_ResetAnimationReference((char *)actorStorage + 0x104);
+            ((LevelActor *)actorStorage)->controllerUpdate(actorStorage, &((LevelActor *)actorStorage)->behaviorFlags);
+            Graphu64_TransformBoundingBox(&((LevelActor *)actorStorage)->transform, (s32)modelBounds, &((LevelActor *)actorStorage)->bounds);
+            Gastate_ResetAnimationReference(&((LevelActor *)actorStorage)->animationTime);
             Gastate_ResetAnimationReference((char *)actorStorage + 0x118);
             ((LevelActor *)actorStorage)->stateE6 = (u8)((ResourceManagerState *)SetN64_GetPackSection(node, 1))->count;
             ((LevelActor *)actorStorage)->flags |= 0x40000;
@@ -217,7 +218,7 @@ void Gobjinst_MoveActorWithContactCallback(char *actor, CVector3 *destination) {
         }
         callback = ((struct ActorModelCallbackView *) ((char *) actor))->callback;
         if (callback != 0) {
-            callback(actor, actor + 0x170, collision);
+            callback(actor, &((LevelActor *)actor)->behaviorFlags, collision);
         }
     } else {
         ((ActorModelResourceView *)(actor))->position0 = *destination;

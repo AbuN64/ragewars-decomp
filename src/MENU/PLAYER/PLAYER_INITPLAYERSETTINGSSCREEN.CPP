@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENULISTSCREEN.H"
@@ -133,7 +134,7 @@ extern s32 SmpSlider_GetSliderItem(void *);
 void Player_StorePlayerSettingsEntry(s32 entryIndex) {
     u8 *config;
 
-    config = g_playerSettings + entryIndex * 0x96;
+    config = g_playerSettings + entryIndex * sizeof(Shared_PlayerSettingsRecord);
     g_profileSlotSettingsByte7B[entryIndex * 400] = SmpButton_GetListSelection(g_playerSettingsScreen->a);
     do {
         g_profileSlotSettingsByte7D[entryIndex * 400] = SmpButton_GetListSelection(g_playerSettingsScreen->b);

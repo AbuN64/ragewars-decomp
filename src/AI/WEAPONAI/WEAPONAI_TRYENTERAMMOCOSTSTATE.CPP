@@ -68,7 +68,7 @@ void Weaponai_TryEnterAmmoCostState(Shared_Actor *actor, WeaponFireState *fireSt
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.inputFlags & 0x4000) && can_fire(player) && ((SharedPlayer *)(player))->views5E4.view5E4_0.health != 0) {
         if (((SharedPlayer *)(player))->views5E8.view5F4_11.ammo[0] >= 25) {
-            SoundElement_PlaySoundAtPosition(1070, ((SharedPlayer *)(player))->views0.positionBits.positionWords[0], ((SharedPlayer *)(player))->views0.positionBits.positionWords[1], ((SharedPlayer *)(player))->views0.positionBits.positionWords[2], player + 0x8,
+            SoundElement_PlaySoundAtPosition(1070, ((SharedPlayer *)(player))->views0.positionBits.positionWords[0], ((SharedPlayer *)(player))->views0.positionBits.positionWords[1], ((SharedPlayer *)(player))->views0.positionBits.positionWords[2], (char *)&((SharedPlayer *)player)->views0.view8_2.position,
                           -1);
             Actor_RequestActorState(actor, fireState, 11);
         } else if (((SharedPlayer *)(player))->views5E8.view6B0_46.actionFlags & 0x4000) {

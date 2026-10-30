@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "include_asm.h"
 #include "SYSTEM/DEFS.H"
 #include "../../../sdk/include/AUDIO/sprintf.H"
@@ -402,7 +403,7 @@ void Defs_SetupPointLights(char *view) {
             position[0] = node->position[0];
             position[1] = node->position[1];
             position[2] = node->position[2];
-            Graphu64_TransformPoint(view + 0x220, position, out);
+            Graphu64_TransformPoint((char *)&((GameplayCamera *)view)->worldToView, position, out);
             x = out[0];
             g_pointLightBuffer[i + g_pointLightBufferOffset].dir[0] = -x;
             g_pointLightBuffer[i + g_pointLightBufferOffset].dir[1] = out[1];

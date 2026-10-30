@@ -143,8 +143,8 @@ void Control_ResetControllerPak(ControllerProfile *pakProfile) {
         ((ControllerRumbleView *)o)->state = 0;
         ((ControllerRumbleView *)o)->amount = 0;
         ((ControllerRumbleView *)o)->timer = 0;
-        Rumble_InitPoolNodes(o + 0x140, o + 0x16C, 3);
-        osMotorInit(&g_controllerSiMessageQueue, o + 0xD8, pakProfile->port);
+        Rumble_InitPoolNodes(&((ControllerProfile *)o)->effectPool, &((ControllerProfile *)o)->effectNodes, 3);
+        osMotorInit(&g_controllerSiMessageQueue, &((ControllerProfile *)o)->pak, pakProfile->port);
 
 #if defined(VERSION_EU)
 Control_StopMotorEu
@@ -191,7 +191,7 @@ Control_StopMotorDe
 #endif
 #endif
 (((ControllerRumbleView *)o)->status);
-        if (osMotorInit(&g_controllerSiMessageQueue, o + 0xD8, pakProfile->port) == 0) {
+        if (osMotorInit(&g_controllerSiMessageQueue, &((ControllerProfile *)o)->pak, pakProfile->port) == 0) {
             ((ControllerRumbleView *)o)->active = 1;
         }
         g_controllerPakFrontendState = 2;
