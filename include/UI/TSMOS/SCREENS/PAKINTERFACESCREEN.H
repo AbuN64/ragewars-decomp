@@ -20,6 +20,20 @@ typedef struct PAKGlobalPlayer {
     s8 m_Quick;
     u8 pad0F[PAK_PLAYER_RECORD_SIZE - 15];
 } PAKGlobalPlayer;
+/* One row of the Controller Pak management list: the line shown, the note name and the pages it takes. */
+#define PAK_NOTE_ROWS 16
+typedef struct PAKNoteRow {
+    char m_Line[40];
+    char m_Name[20];
+    char m_Size[10];
+} PAKNoteRow;
+/* A list row widget; only its alpha byte and its text pointer are used. */
+typedef struct PAKLabel {
+    u8 pad0[16];
+    u8 m_Alpha;
+    u8 pad11[56 - 17];
+    char *m_pText;
+} PAKLabel;
 typedef struct PAKInterfacePlayer {
     s32 m_State;
     s32 m_Mode;
@@ -28,7 +42,18 @@ typedef struct PAKInterfacePlayer {
     u8 pad10[4];
     s32 m_Panel;
     PAKGlobalPlayer m_MiddleRecords[PAK_USERS];
-    u8 pad65C[2864 - 24 - PAK_USERS * PAK_PLAYER_RECORD_SIZE];
+    PAKNoteRow m_Notes[PAK_NOTE_ROWS];
+    u8 pad_AB8[2754 - 1624 - PAK_NOTE_ROWS * 70];
+    char m_BlocksText[10];
+    char m_PagesFreeText[12];
+    s32 m_ListCursor;
+    s32 m_ListTop;
+    PAKLabel *m_ListRows[3];
+    s32 m_QuickRecord;
+    s32 m_RecordState[PAK_USERS];
+    u8 padB30[2856 - 2800 - PAK_USERS * 4];
+    s32 m_SelectedRecord;
+    u8 padB5C[4];
     s32 m_NameTarget;
     PAKNameChar m_Name[PAK_NAME_LENGTH];
     s32 m_NameCursor;
@@ -47,7 +72,7 @@ typedef struct PAKSlotState {
 #define PAK_SAVE_DATA_SIZE 1600
 #define PAK_CHECKSUM_SEED 7
 typedef struct PAKSaveBlock {
-    u8 m_Data[PAK_SAVE_DATA_SIZE];
+    PAKGlobalPlayer m_Records[PAK_USERS];
     s32 m_Marker;
     s32 m_Checksum;
 } PAKSaveBlock;
@@ -56,10 +81,14 @@ typedef struct PAKInterfaceScreen {
     void *m_pUserList;
     u8 pad8[44 - 8];
     s32 m_UserBusy[PAK_USERS];
-    u8 pad3C[88 - 60];
+    u8 pad3C[76 - 60];
+    s32 m_ExitPhase;
+    s32 m_ExitStep;
+    u8 pad54[88 - 84];
     PAKInterfacePlayer m_PAKInterfacePlayer[PAK_USERS];
     PAKSlotState m_Slot[PAK_USERS];
     PAKSaveBlock m_SaveBlock;
+    s32 m_ExitTarget;
 } PAKInterfaceScreen;
 #define PAKINTERFACE_MAX_USERS PAK_USERS
 extern PAKInterfaceScreen *g_pakInterfaceScreen;
@@ -86,6 +115,25 @@ extern char s_pakAssertUserRange[];
 extern char s_pakAssertIndexRange[];
 extern char s_pakAssertUserObject[];
 extern char s_pakAssertNoEmptySlot[];
+extern char s_pakAssertExitMode[];
+extern void TSMOS_InputDisable(void);
+extern char s_pakFmtDecimal[];
+extern char s_pakFmtLineNamed[];
+extern char s_pakFmtLine[];
+extern char s_pakAssertNullObject[];
+extern char s_pakAssertRow0[];
+extern char s_pakAssertRow1[];
+extern char s_pakAssertRow2[];
+extern char *pText_PAK_Empty[];
+extern char *pText_PAK_UnnamedNote[];
+extern s32 PAK_GetNoteInfo(s32 anUser, s32 anNote, s32 *apState, char *apName, u8 *apExt, s32 *apPages, s32 *apInfoA, s32 *apInfoB);
+extern s32 IsJapName(char *apName, s32 anLength);
+extern char *x_sprintf(char *apDst, const char *apFormat, ...);
+extern void *SM_DLFindObjectByID(void *apList, s32 anId);
+extern s32 PAKInterface_CalcSaveGameSize(void);
+extern void PAKInterface_ScrollManagementList(s32 anUser, s32 anDirection);
+extern s32 PAKInterface_FindEmptyGlobalSlot(void);
+extern void PAKInterface_InitGlobalSlot(s32 anFlag, s32 anSlot);
 extern s32 PAKInterface_FindEmptyMiddleSlot(void);
 extern s32 PAK_GetPagesFree(s32 anUser, s32 *apPages);
 extern s32 PAK_GetNotesFree(s32 anUser, s32 *apNotes);
@@ -105,10 +153,13 @@ typedef struct PAKListItem {
     s32 m_Widget[14];
     PAKGlobalPlayer *m_pPlayer;
 } PAKListItem;
-/* The engine application record; only the language byte the pak screens index the text tables with is named. */
+/* The engine application record; only the bytes the pak screens read are named: the frontend mode and the language the text tables are indexed with. */
+#define ENGINE_APP_FRONTEND_MODE_OFFSET 157725
 #define ENGINE_APP_LANGUAGE_OFFSET 159121
 typedef struct EngineApp {
-    u8 pad0[ENGINE_APP_LANGUAGE_OFFSET];
+    u8 pad0[ENGINE_APP_FRONTEND_MODE_OFFSET];
+    u8 m_FrontendMode;
+    u8 pad1[ENGINE_APP_LANGUAGE_OFFSET - ENGINE_APP_FRONTEND_MODE_OFFSET - 1];
     u8 m_Language;
 } EngineApp;
 extern EngineApp g_engineApp;
