@@ -8,6 +8,6 @@ const float k_PlayeraiFindtransientplayerEncodedWords[8] = {
 
 /* 800C7DD4.CPP */
 /* ROM-grounded data: src/k_PlayeraiFindtransientplayerMaxFiniteFloatWords_PlayeraiFindtransientplayerData.c */
-const unsigned int k_PlayeraiFindtransientplayerMaxFiniteFloatWords[1] = {
-    0x7F7FFFFF,
+const float k_PlayeraiFindtransientplayerMaxFiniteFloatWords[1] = {
+    3.4028235e+38f,
 };

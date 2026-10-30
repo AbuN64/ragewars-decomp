@@ -28,8 +28,8 @@ const float k_PlayerDrawtintedplayerEncodedWords[14] = {
 const float g_forceMarkerDurationEuropean = 150.0f;
 #endif
 
-const unsigned int k_PlayerDrawtintedplayerEncodedWordsBlock1[4] = {
-    0x3F800000, 0x3727C5AC, 0x4CBEBC20, 0x3F000000,
+const float k_PlayerDrawtintedplayerEncodedWordsBlock1[4] = {
+    1.0f, 1.0e-05f, 100000000.0f, 0.5f,
 };
 
 /* Draws an actor's player model with its status tint: sets the other-mode lighting command and render

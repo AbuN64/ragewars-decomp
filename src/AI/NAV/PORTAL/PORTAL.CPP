@@ -26,8 +26,8 @@ const float g_Portal_SearchRelatedGoalPathConstantWords_us_rev1[2] = {
 
 /* 800C6E60.CPP */
 /* ROM-grounded data: src/g_Portal_FindPortalRouteConstantWords_Portal.c */
-const unsigned int g_Portal_FindPortalRouteConstantWords[1] = {
-    0x4E6E6B28,
+const float g_Portal_FindPortalRouteConstantWords[1] = {
+    1000000000.0f,
 };
 
 /* 800C6E64.CPP */

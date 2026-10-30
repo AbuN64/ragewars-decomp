@@ -4,12 +4,42 @@
 
 /* TURRETAI_9.CPP */
 
-/* g_actionaiConstantWords_Actionai.CPP */
+/* DE image of Libgultra_DispatchExceptionVectors (sdk/libsn/debugger.s builds it for the other versions): the debugger's exception and TLB vector
+   patches, copied word by word over the vectors by Libsn_InstallDebuggerExceptionHooks. Each patch is the 5-word stub installed at the vector
+   (parks k0 in ErrorEPC and jumps to the trace handler at 0x00202460), the 5-word slot the original vector words are saved into (filled at run
+   time) and the 4-word stub that resumes the vector 0x14 bytes in. */
+#define MIPS_K0 26
+#define MIPS_MTC0(rt, rd) (0x40800000 | ((rt) << 16) | ((rd) << 11))
+#define MIPS_LUI(rt, imm) (0x3C000000 | ((rt) << 16) | (imm))
+#define MIPS_ADDIU(rt, rs, imm) (0x24000000 | ((rs) << 21) | ((rt) << 16) | (imm))
+#define MIPS_ORI(rt, rs, imm) (0x34000000 | ((rs) << 21) | ((rt) << 16) | (imm))
+#define MIPS_JR(rs) (((rs) << 21) | 0x08)
+#define MIPS_NOP 0
+#define C0_ERROR_EPC 30
+
+typedef struct LibsnDebugVectorPatch {
+    unsigned int stub[5];
+    unsigned int saved[5];
+    unsigned int resume[4];
+} LibsnDebugVectorPatch;
+
 #if defined(VERSION_DE)
-unsigned int g_actionaiConstantWords[30] = {
-    0x063FB64E, 0x2BDF9701, 0x409AF000, 0x3C1A0020, 0x275A2460, 0x03400008, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x3C1A8000, 0x375A0194, 0x03400008, 0x00000000,
-    0x409AF000, 0x3C1A0020, 0x275A2460, 0x03400008, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x3C1A8000, 0x375A0014, 0x03400008, 0x00000000,
+/* two stale words in front of the first stub, filling the gap to the 16-aligned stub: they decode differently in each version
+   (EU xori/swr, US bltz/sll, DE junk), the other versions' source writes them as such opcodes in debugger.s #if branches; read by nothing */
+unsigned int g_libsnDispatchExceptionVectorsPad[2] = {
+    0x063FB64E, 0x2BDF9701,
+};
+
+LibsnDebugVectorPatch g_libsnDebugVectorPatches[2] = {
+    {
+        { MIPS_MTC0(MIPS_K0, C0_ERROR_EPC), MIPS_LUI(MIPS_K0, 0x0020), MIPS_ADDIU(MIPS_K0, MIPS_K0, 0x2460), MIPS_JR(MIPS_K0), MIPS_NOP },
+        { 0, 0, 0, 0, 0 },
+        { MIPS_LUI(MIPS_K0, 0x8000), MIPS_ORI(MIPS_K0, MIPS_K0, 0x0194), MIPS_JR(MIPS_K0), MIPS_NOP },
+    },
+    {
+        { MIPS_MTC0(MIPS_K0, C0_ERROR_EPC), MIPS_LUI(MIPS_K0, 0x0020), MIPS_ADDIU(MIPS_K0, MIPS_K0, 0x2460), MIPS_JR(MIPS_K0), MIPS_NOP },
+        { 0, 0, 0, 0, 0 },
+        { MIPS_LUI(MIPS_K0, 0x8000), MIPS_ORI(MIPS_K0, MIPS_K0, 0x0014), MIPS_JR(MIPS_K0), MIPS_NOP },
+    },
 };
 #endif

@@ -1,5 +1,4 @@
 
 /* ROM-grounded data: rodata/unresolved/800C7D40 */
-unsigned char g_PlayerEncodedBytes[8] = {
-    0x20, 0x00, 0x00, 0x00, 0x73, 0x00, 0x00, 0x00,
-};
+char s_ammoPickupMessageSeparator[4] = " ";
+char s_ammoPickupPluralSuffix[4] = "s";
