@@ -55,8 +55,8 @@ typedef char D_src_f0222606SizeCheck[(sizeof(D_src_f0222606) == 12) ? 1 : -1];
 
 #if defined(VERSION_US)
 #if defined(VERSION_US)
-unsigned int __osActiveQueue_CreatemesgqueueData[1] = {
-    (unsigned int)&D_src_f0222606,
+void * __osActiveQueue_CreatemesgqueueData[1] = {
+    &D_src_f0222606,
 };
 #endif
 #endif

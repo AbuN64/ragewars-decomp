@@ -485,7 +485,7 @@ struct {
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; u8 nameLength; char name[18]; } TURRET_PONG_ACTION_479;
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; u8 nameLength; char name[14]; } TURRET_ACTIONS_480;
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; SnLe16 dimensionCount; u8 tagNameLength; char tagName[13]; u8 nameLength; char name[4]; } eos_481;
-    struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; SnLe16 dimensionCount; u8 tagNameLength; char tagName[10]; u8 nameLength; char name[31]; } CVector3__GetDirectionRotation2_482;
+    struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; SnLe16 dimensionCount; u8 tagNameLength; char tagName[10]; u8 nameLength; char name[31]; } CVector3_GetDirectionRotation2_482;
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; u8 nameLength; char name[20]; } Turret_CalcOrientMtx_483;
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; u8 nameLength; char name[11]; } Turret_Move_484;
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; u8 nameLength; char name[25]; } AI_DynTurretGetTargetInfo_485;
@@ -511,7 +511,7 @@ struct {
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; SnLe16 dimensionCount; u8 tagNameLength; char tagName[9]; u8 nameLength; char name[12]; } TurretAIInfo_505;
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; SnLe16 dimensionCount; SnLe32 dimension0; u8 tagNameLength; char tagName[13]; u8 nameLength; char name[15]; } TurretModeTable_506;
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; SnLe16 dimensionCount; SnLe32 dimension0; u8 tagNameLength; char tagName[17]; u8 nameLength; char name[20]; } TurretLinkEffectInfo_507;
-    struct { SnLe32 value; u8 kind; SnLe16 frameRegister; SnLe32 frameSize; SnLe16 returnRegister; SnLe32 registerMask; SnLe32 maskOffset; SnLe32 floatRegisterMask; SnLe32 floatMaskOffset; SnLe32 line; u8 fileLength; char file[49]; u8 nameLength; char name[31]; } CVector3__GetDirectionRotation2_508;
+    struct { SnLe32 value; u8 kind; SnLe16 frameRegister; SnLe32 frameSize; SnLe16 returnRegister; SnLe32 registerMask; SnLe32 maskOffset; SnLe32 floatRegisterMask; SnLe32 floatMaskOffset; SnLe32 line; u8 fileLength; char file[49]; u8 nameLength; char name[31]; } CVector3_GetDirectionRotation2_508;
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; SnLe16 dimensionCount; u8 tagNameLength; char tagName[10]; u8 nameLength; char name[8]; } pvNormal_509;
     struct { SnLe32 value; u8 kind; SnLe32 line; } record_510;
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; SnLe16 dimensionCount; u8 tagNameLength; char tagName[10]; u8 nameLength; char name[4]; } qRot_511;
@@ -761,7 +761,7 @@ struct {
     struct { SnLe32 value; u8 kind; SnLe16 storageClass; SnLe16 type; SnLe32 size; SnLe16 dimensionCount; u8 tagNameLength; char tagName[10]; u8 nameLength; char name[18]; } vTargetRelativeLoc_755;
     struct { SnLe32 value; u8 kind; SnLe32 line; } record_756;
     struct { SnLe32 value; u8 kind; SnLe32 line; } record_757;
-    struct { SnLe32 value; u8 kind; SnLe32 line; u8 fileLength; char file[49]; } C__PROJECTS_DM_N64_SOURCE_AI_DEVICES_ACTIONAI_CPP_758;
+    struct { SnLe32 value; u8 kind; SnLe32 line; u8 fileLength; char file[49]; } C_PROJECTS_DM_N64_SOURCE_AI_DEVICES_ACTIONAI_CPP_758;
     struct { SnLe32 value; u8 kind; } record_759;
     struct { SnLe32 value; u8 kind; u8 lineDelta; } record_760;
     struct { SnLe32 value; u8 kind; SnLe32 line; } record_761;
