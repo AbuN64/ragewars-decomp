@@ -51,5 +51,7 @@ typedef struct Brain {
     s32 visible;
     s32 fireTimer;
     s32 cooldown; /* 0x324 */
+    s32 unk328;
+    s32 unk32C;
 } Brain;
 #endif

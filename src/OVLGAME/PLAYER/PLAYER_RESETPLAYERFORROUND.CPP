@@ -305,7 +305,7 @@ extern void Link_DispatchObjectLinks(void *, s32, void *);
  * the record at 0x878 to its defaults, lays out the nine on-screen widgets at 0xE2C..0x10C0 (position, then
  * their string tables), the two score fields and the 0x10FC panel, and copies the parent's four-word block. */
 typedef struct { s32 a, b, c, d; } HudQuad;
-void Player_InitActorHudState(void *actor) {
+void Player_InitActorHudState(SharedPlayer *actor) {
     char *session = (char *)&g_gameSettings;
     char *hud;
     char *widget;
@@ -317,7 +317,7 @@ void Player_InitActorHudState(void *actor) {
             Achieve_ApplyProfileWeaponUnlocks(actor);
         }
     }
-    hud = (char *)&((SharedPlayer *)actor)->views5E8.view878_158.effect;
+    hud = (char *)&actor->views5E8.view878_158.effect;
     FIELD(s32, hud, 180) = 0;
     FIELD(s32, hud, 8) = 0;
     FIELD(s32, hud, 184) = 0;

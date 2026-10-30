@@ -160,8 +160,8 @@ float Gobjinst_GetActorOffsetDefault(void) {
 }
 
 /** Thin wrapper forwarding base and an offset of it to Barrel_UpdateActorController. */
-void Gobjinst_UpdateActorController(void *base) {
-    Barrel_UpdateActorController(base, &((LevelActor *)base)->behaviorFlags);
+void Gobjinst_UpdateActorController(LevelActor *base) {
+    Barrel_UpdateActorController(base, &base->behaviorFlags);
 }
 
 /** Set or clear status bit two according to the supplied boolean. */

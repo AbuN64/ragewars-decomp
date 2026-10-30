@@ -58,7 +58,12 @@ struct OwnedImage;
 struct OwnedImage {
     u8 stream;
     u8 flags;
-    char pad2[0xE];
+    s16 width;
+    s16 height;
+    s16 stride;
+    s16 rowCount;
+    s16 paletteEntries;
+    char padC[4];
     s32 paletteCount;
     void *palette;
     void *pixels;

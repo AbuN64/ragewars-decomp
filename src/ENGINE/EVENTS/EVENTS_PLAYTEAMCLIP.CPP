@@ -57,7 +57,7 @@ void Events_StartActorEmitter(ActorEmitterSource *sourceActor, ContextEventsStar
     void *resource;
 
     if ((sourceActor->actorKind == 1) && (sourceActor->flags & 0x300000)) {
-        resource = (char *)&((GameplayCamera *)targetContext->inner->resource)->orientation;
+        resource = &((ControllerProfile *)targetContext->inner->resource)->effectPool;
         emitterPosition.x = 0;
         emitterPosition.y = 0;
         emitterPosition.z = 0;

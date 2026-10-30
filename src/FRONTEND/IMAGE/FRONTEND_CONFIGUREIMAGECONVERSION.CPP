@@ -263,29 +263,29 @@ s32 Frontend_GetImageBitsPerPixel(u8 *record) {
 /* Returns the halfword at offset 0x2 of a record. It is one of a run of accessors from
    Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
 s16 Frontend_GetOwnedImageWidth(s16 *record) {
-    return record[0x2 / 2];
+    return ((OwnedImage *)record)->width;
 }
 
 /* Returns the halfword at offset 0x4 of a record. It is one of a run of accessors from
    Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
 s16 Frontend_GetOwnedImageHeight(s16 *record) {
-    return record[0x4 / 2];
+    return ((OwnedImage *)record)->height;
 }
 
 /* Returns the halfword at offset 0x6 of a record. It is one of a run of accessors from
    Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
 s16 Frontend_GetOwnedImageStride(s16 *record) {
-    return record[0x6 / 2];
+    return ((OwnedImage *)record)->stride;
 }
 
 /* Returns the halfword at offset 0x8 of a record. It is one of a run of accessors from
    Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
 s16 Frontend_GetOwnedImageRowCount(s16 *record) {
-    return record[0x8 / 2];
+    return ((OwnedImage *)record)->rowCount;
 }
 
 /* Returns the halfword at offset 0xA of a record. It is one of a run of accessors from
    Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
 s16 Frontend_GetOwnedImagePaletteCount(s16 *record) {
-    return record[0xA / 2];
+    return ((OwnedImage *)record)->paletteEntries;
 }

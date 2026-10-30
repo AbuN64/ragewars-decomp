@@ -55,7 +55,7 @@ void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *flo
     f32 angle;
 
     anim = &((LevelActor *)obj)->behaviorFlags;
-    shape = (CollisionShapeDefinition *)((u8 *)((LevelActor *)obj)->definition + 0x14);
+    shape = (CollisionShapeDefinition *)(&((LevelActor *)obj)->definition->flags);
     if (attachment != 0) {
         grow = Gobjinst_GetActorRadius(attachment);
         lift = Gobjinst_GetActorHeight(attachment);

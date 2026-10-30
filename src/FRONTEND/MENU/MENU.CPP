@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "include_asm.h"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
@@ -137,7 +138,7 @@ s32 Menu_DispatchSelectionMenuEvent(void *actor, s32 event, s32 eventValue, s32 
                     return (*(WidgetEventHandler *)entry)(actor, event, eventValue, eventData, eventContext);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }

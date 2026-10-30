@@ -1,3 +1,4 @@
+#include "COMMON/VECTOR3.H"
 #include "COMMON/MATRIXRECORD.H"
 #include "RESMGR/MATRIX_RECORD_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -312,8 +313,8 @@ void XMath_TransformPointArray(void *matrix, void *outputPoints, void *inputPoin
     i = 0;
     if (pointCount > 0) {
         do {
-            u8 *v = (u8 *) inputPoints + i * 0xC;
-            u8 *out = (u8 *) outputPoints + i * 0xC;
+            u8 *v = (u8 *) inputPoints + i * sizeof(CVector3);
+            u8 *out = (u8 *) outputPoints + i * sizeof(CVector3);
 
             vx = ((CVector3 *)(v))->x;
             vy = ((CVector3 *)(v))->y;

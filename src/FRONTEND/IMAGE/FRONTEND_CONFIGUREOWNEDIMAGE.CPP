@@ -23,12 +23,12 @@ int Frontend_GetImagePixelByteCount(int *value) {
 
 /* Returns the word at offset 0x18 of a record. */
 s32 Frontend_GetOwnedImagePixels(s32 *record) {
-    return record[0x18 / 4];
+    return (s32)((OwnedImage *)record)->pixels;
 }
 
 /* Returns the word at offset 0x14 of a record. */
 s32 Frontend_GetOwnedImagePalette(s32 *record) {
-    return record[0x14 / 4];
+    return (s32)((OwnedImage *)record)->palette;
 }
 
 int Frontend_HasOwnedImagePalette(void *object) {

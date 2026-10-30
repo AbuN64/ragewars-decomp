@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "include_asm.h"
 #include "COMMON/FRUSTUM.H"
@@ -326,7 +327,7 @@ s32 SmpFlicker_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 even
                     return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }

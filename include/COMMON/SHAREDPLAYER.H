@@ -117,7 +117,8 @@ struct Profile {
     u8 plays[36]; /* +0x26: per-character match count */
     u8 achievementFlags[0x54 - 0x4A]; /* +0x4A: one bit per achievement */
     u8 kindFlags[0x6C - 0x54]; /* +0x54: one bit per character kind finished with */
-    char pad6C[0x7D - 0x6C];
+    char pad6C[0x79 - 0x6C];
+    u8 unlockFlags[4]; /* +0x79: Player_HasProfileUnlockFlag / Player_SetAchievementFlag2F */
     u8 groupFlags; /* +0x7D: bits 0-2 for the level-count milestones */
     u8 levelFlags[4][5]; /* +0x7E: one bit per level finished, per game mode 1-4 (Achieve_MarkLevelPlayed) */
     char pad92[0x94 - 0x92];

@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/RECORD.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -41,7 +42,7 @@ s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *eventTarget, s32 eventId, s32
                     return (*(WidgetEventHandler *)entry)(eventTarget, eventId, eventCode, eventValue, repeatCount);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }

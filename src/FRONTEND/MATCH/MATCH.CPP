@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -30,7 +31,7 @@ s32 Match_DispatchEuxMatchMenuEvent(void *eventObject, s32 eventId, s32 eventPay
                     return (*(WidgetEventHandler *)entry)(eventObject, eventId, eventPayload, eventValue, eventExtra);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }

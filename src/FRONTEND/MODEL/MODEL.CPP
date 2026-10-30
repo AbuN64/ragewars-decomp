@@ -24,7 +24,7 @@ s32 Model_SetPreviewModel(struct RecordFrontendSetPreviewModel *record, s32 coun
 
 /* Returns the word at offset 0x0 of a record. */
 s32 Model_GetModelRecordCount(s32 *record) {
-    return record[0x0 / 4];
+    return ((struct RecordFrontendSetPreviewModel *)record)->count;
 }
 
 /* Stores a value into the word at offset 0xB8 of an object. */

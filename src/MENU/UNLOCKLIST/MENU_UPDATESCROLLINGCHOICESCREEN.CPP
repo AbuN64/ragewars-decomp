@@ -1,3 +1,4 @@
+#include "COMMON/SHAREDPLAYER.H"
 #include "include_asm.h"
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -89,7 +90,7 @@ s32 Menu_UpdateScrollingChoiceScreen(void) {
             return 0;
         }
         g_unlockGatedListScreen->seen = result;
-        if (Defs_TestBit(g_localPlayerProfiles + 0x7E, 0) != 0) {
+        if (Defs_TestBit(((Profile *)g_localPlayerProfiles)->levelFlags[0], 0) != 0) {
             return 0;
         }
         Menu_SetFocusedElement(MENU_RESOURCE);

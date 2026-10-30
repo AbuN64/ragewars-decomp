@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -180,7 +181,7 @@ s32 Selection_DispatchCharacterSelectionEvent(void *widget, s32 eventId, s32 eve
                     return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }

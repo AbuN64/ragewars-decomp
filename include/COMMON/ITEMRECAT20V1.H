@@ -1462,7 +1462,8 @@ struct OSMesgQueue;
 
 struct MenuRules;
 struct MenuRules {
-    char pad0[0x1C];
+    char pad0[0x18];
+    void *message; /* osCreateMesgQueue single-message backing store */
     s32 locked;
 };
 

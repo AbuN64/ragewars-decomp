@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/ANIMATION.H"
 #include "COMMON/INTEGERSTATE530.H"
@@ -220,7 +221,7 @@ s32 SmpFrameAnim_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 ev
                     return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }

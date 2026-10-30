@@ -9,9 +9,9 @@
    Frontend_SetMenuImageResource and the next three through Frontend_SetMenuImageColor. */
 
 void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 fourth) {
-    record[4] = 0;
-    record[5] = 0;
-    record[6] = 0;
+    ((MenuImageState *)record)->step = 0;
+    ((MenuImageState *)record)->frame = 0;
+    ((MenuImageState *)record)->state = 0;
     Frontend_SetMenuImageResource(record, first);
     Frontend_SetMenuImageColor(record, second, third, fourth);
 }
@@ -20,49 +20,49 @@ void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 f
    SoundElement_PlayFlatSound with 0xE83. */
 
 void Frontend_StartMenuImageTransition(s32 *record) {
-    record[4] = 1;
-    record[5] = 0;
-    record[6] = 1;
+    ((MenuImageState *)record)->step = 1;
+    ((MenuImageState *)record)->frame = 0;
+    ((MenuImageState *)record)->state = 1;
     SoundElement_PlayFlatSound(3715);
 }
 
 /* Advances the counter at offset 0x14 of a record by the step at 0x10; once it reaches 0xD both
    are cleared and the state word at 0x18 becomes 2. */
 void Frontend_AdvanceMenuImageTransition(s32 *record) {
-    record[5] += record[4];
-    if (record[5] >= 13) {
-        record[5] = 0;
-        record[4] = 0;
-        record[6] = 2;
+    ((MenuImageState *)record)->frame += ((MenuImageState *)record)->step;
+    if (((MenuImageState *)record)->frame >= 13) {
+        ((MenuImageState *)record)->frame = 0;
+        ((MenuImageState *)record)->step = 0;
+        ((MenuImageState *)record)->state = 2;
     }
 }
 
 /* Returns the word at offset 0x14 of a record. */
 s32 Frontend_GetMenuImageFrame(s32 *record) {
-    return record[0x14 / 4];
+    return ((MenuImageState *)record)->frame;
 }
 
 /* Returns whether the word at offset 0x18 of a record equals 2; Frontend_GetMenuImageState returns that word. */
 s32 Frontend_IsMenuImageTransitionComplete(s32 *record) {
-    return record[0x18 / 4] == 2;
+    return ((MenuImageState *)record)->state == 2;
 }
 
 /* Stores a value into the first word of a record; Frontend_SetMenuImageColor, which follows it, fills the
    words after it. */
 void Frontend_SetMenuImageResource(s32 *record, s32 value) {
-    record[0] = value;
+    ((MenuImageState *)record)->resource = value;
 }
 
 /* Stores three values into words 1 to 3 of a record; Frontend_SetMenuImageResource stores word 0. */
 void Frontend_SetMenuImageColor(s32 *record, s32 first, s32 second, s32 third) {
-    record[1] = first;
-    record[2] = second;
-    record[3] = third;
+    ((MenuImageState *)record)->color[0] = first;
+    ((MenuImageState *)record)->color[1] = second;
+    ((MenuImageState *)record)->color[2] = third;
 }
 
 /* Returns the word at offset 0x18 of a record. */
 s32 Frontend_GetMenuImageState(s32 *record) {
-    return record[0x18 / 4];
+    return ((MenuImageState *)record)->state;
 }
 #if VERSION_EU
 unsigned int Frontend_GetMenuImageState_padding_eu[3] = { 0xAC83000C, 0x2403FFFF, 0xAC830010 };

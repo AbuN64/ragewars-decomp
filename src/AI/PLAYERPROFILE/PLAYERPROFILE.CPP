@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "WORLD/PLAYERAI_RESPAWNFRAGTAGPLAYER.H"
@@ -307,7 +308,7 @@ extern void Graphu64_MultiplyAffineMatrices(void *, void *, void *);
 extern s32 Defs_TestBit(void *, s32);
 extern void Defs_SetBitValue(u8 *, s32, s32);
 void Player_SetAchievementFlag2F(Profile *player, s32 achievementIndex) {
-    Defs_SetBitValue(&player->achievementFlags[47], achievementIndex, 1);
+    Defs_SetBitValue(player->unlockFlags, achievementIndex, 1);
 }
 
 s32 Player_HasProfileUnlockFlag(u8 *profileBytes, s32 unlockIndex)
@@ -327,7 +328,7 @@ s32 Player_HasProfileUnlockFlag(u8 *profileBytes, s32 unlockIndex)
       return 1;
     }
   }
-  return Defs_TestBit(profileBytes + 0x79, unlockIndex);
+  return Defs_TestBit(((Profile *)profileBytes)->unlockFlags, unlockIndex);
 }
 
 void Player_SetAchievementFlagByIndex(Profile *player, s32 achievementIndex) {
@@ -405,8 +406,8 @@ void Player_BuildWeaponHandTransform(char *weaponActor) {
     Graphu64_BuildScaleMatrix(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
     Graphu64_ScaleVector(&handOffset, &handOffset, -10.24f);
     if (((PlayerProfileWeaponView *)(object))->camera.v0 != 0) {
-        Graphu64_GetMatrixTranslation(((PlayerProfileWeaponView *)(object))->camera.v1 + 0x160, &position);
-        MatrixFromQuaternion((CQuatern *)(((PlayerProfileWeaponView *)(object))->camera.v1 + 0x140),
+        Graphu64_GetMatrixTranslation(&((GameplayCamera *)((PlayerProfileWeaponView *)object)->camera.v1)->viewOrient, &position);
+        MatrixFromQuaternion((CQuatern *)(&((GameplayCamera *)((PlayerProfileWeaponView *)object)->camera.v1)->orientation),
                       &worldMatrix);
     } else {
         Player_BuildPlayerViewTransform(object, &viewMatrix);

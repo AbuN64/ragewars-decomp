@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "include_asm.h"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -31,7 +32,7 @@ s32 Menu_DispatchExtraOptionsEvent(void *object, s32 event, s32 eventData, s32 e
                     return (*(WidgetEventHandler *)entry)(object, event, eventData, eventValue, eventContext);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }

@@ -1,3 +1,4 @@
+#include "COMMON/OBJ.H"
 #include "include_asm.h"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/OBJRECAT30.H"
@@ -207,7 +208,7 @@ extern void Gobjinst_DrawActorModelWithViewEffects(FadedActorRenderView *, void 
 void Actionai_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
     Owner *owner = (void *)ownerRecord;
     ActionTrackCallbackRecord *event = (void *)eventRecord;
-    char *base = owner->track + 0x14;
+    char *base = &((struct NavigationTrack *)owner->track)->segment;
     Hook *hook = event->callbackHook;
 
     if (hook != 0 && hook->fn != 0) {

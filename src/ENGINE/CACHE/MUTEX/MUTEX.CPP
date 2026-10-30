@@ -36,5 +36,5 @@ void Mutex_WaitUntilReleased(Object *obj) {
 
 void Mutex_InitializeQueueLock(void *menuRules) {
     (((struct MenuRules *) ((s8 *) menuRules))->locked) = 0;
-    osCreateMesgQueue(menuRules, menuRules + 0x18, 1);
+    osCreateMesgQueue(menuRules, &((MenuRules *)menuRules)->message, 1);
 }

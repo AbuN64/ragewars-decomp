@@ -1,3 +1,4 @@
+#include "COMMON/BRAIN.H"
 #include "include_asm.h"
 #include "COMMON/OBJ.H"
 #include "COMMON/GAME_SESSION.H"
@@ -25,7 +26,7 @@ extern void **Cache_AllocateResource(int, int, int, char *);
 
 void Player_AllocPlayerList(PlayerList *list, int count) {
     int playerSize = count * sizeof(Players);
-    int stateSize = count * 816;
+    int stateSize = count * sizeof(Brain);
     char *states;
     void **handle;
     int i;
@@ -38,7 +39,7 @@ void Player_AllocPlayerList(PlayerList *list, int count) {
     XPlus_FillMemory(list->players, 0, playerSize);
     XPlus_FillMemory(states, 0, stateSize);
     for (i = 0; i < count; i++) {
-        list->players[i].state = states + i * 0x330;
+        list->players[i].state = states + i * sizeof(Brain);
     }
 }
 

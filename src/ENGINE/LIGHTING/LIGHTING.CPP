@@ -58,11 +58,11 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
         tilt.x = SK_FIELD(src, s32, 12) * 9.31322575e-09f;
         tilt.y = SK_FIELD(src, s32, 16) * 9.31322575e-09f;
         tilt.z = SK_FIELD(src, s32, 20) * 9.31322575e-09f;
-        matrix = self + 0x60;
+        matrix = &((SceneLightVolume *)self)->transform;
         Graphu64_IdentityMatrix(matrix);
         RollMatrix(matrix, tilt.x);
         YawMatrix(matrix, tilt.y);
-        Graphu64_ProjectPoint(matrix, &up, self + 0x14);
+        Graphu64_ProjectPoint(matrix, &up, &((SceneLightVolume *)self)->axis);
         rotation.x = 0;
         rotation.y = 0;
         rotation.z = 0;
@@ -95,7 +95,7 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
         SK_FIELD(self, f32, 12) = (f32)SK_FIELD(src, u32, 64) * 2.37487257e-06f;
         SK_FIELD(self, f32, 16) = (f32)SK_FIELD(src, u32, 68) * 2.37487257e-06f;
     }
-    matrix = self + 0x60;
+    matrix = &((SceneLightVolume *)self)->transform;
     SK_FIELD(self, u8, 184) = SK_FIELD(src, u8, 55);
     SK_FIELD(self, u8, 186) = SK_FIELD(src, u8, 59);
     SK_FIELD(self, u8, 189) = SK_FIELD(src, u8, 75);
@@ -105,7 +105,7 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     YawMatrix(matrix, rotation.y);
     PitchMatrix(matrix, rotation.x);
     TranslateMatrix(matrix, translation.x, translation.y, translation.z);
-    Graphu64_InvertAffineMatrix(self + 0x20, matrix);
+    Graphu64_InvertAffineMatrix(&((SceneLightVolume *)self)->inverse, matrix);
     for (i = 0; i < 8; i++) {
         x = 1.0f;
         y = 1.0f;
@@ -122,9 +122,9 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
         probe.x = x;
         probe.y = y;
         probe.z = z;
-        Graphu64_ProjectPoint(self + 0x60, &probe, &corners[i]);
+        Graphu64_ProjectPoint(&((SceneLightVolume *)self)->transform, &probe, &corners[i]);
     }
-    Region_ComputePointBounds(self + 0xA0, 8, corners);
+    Region_ComputePointBounds(&((SceneLightVolume *)self)->bounds, 8, corners);
 }
 
 s32 Lighting_EvaluateLocalVolume(SceneLightVolume *lightVolume, CVector3 localPosition,

@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/ANIMATION.H"
 #include "COMMON/VECTOR4F.H"
@@ -93,7 +94,7 @@ void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode) 
 
 /* Returns the word at offset 0x58 of a record. */
 s32 SmpSlider_GetTransitionMode(s32 *record) {
-    return record[0x58 / 4];
+    return ((SliderTransitionView *)record)->modeState;
 }
 
 /* Sets the flag word at offset 0x5C that SmpSlider_DisableTransition clears. */
@@ -130,7 +131,7 @@ s32 SmpSlider_DispatchTransitionEvent(void *widget, s32 eventId, s32 eventData0,
                     return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
@@ -186,7 +187,7 @@ MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 sliderWidgetId, s32 childWidg
 
 /* Returns the word at offset 0x50 of a record. */
 s32 SmpSlider_GetSliderItem(s32 *record) {
-    return record[0x50 / 4];
+    return ((Scroll *)record)->item;
 }
 
 /* Positions a scroll bar: records the current item at offset 0x50 and stores in the halfword at
@@ -220,7 +221,7 @@ s32 SmpSlider_DispatchSliderEvent(void *widget, s32 eventId, s32 eventData0, s32
                     return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }

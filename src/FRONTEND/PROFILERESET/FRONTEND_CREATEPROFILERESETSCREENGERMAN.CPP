@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 #include "include_asm.h"
 #include "COMMON/PLAYERPROFILES.H"
@@ -138,7 +139,7 @@ s32 Frontend_DispatchProfileResetEvent(Shared_Body *widget, s32 eventId, s32 eve
                     return (*(MenuEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             index++;
         } while (*(MenuEventHandler *)entry != 0);
     }

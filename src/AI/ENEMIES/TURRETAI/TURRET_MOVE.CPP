@@ -58,7 +58,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     CVector3 local;
     f32 matrix[16];
 
-    segment = (Segment *)(owner->track + 0x14);
+    segment = (Segment *)(&((struct NavigationTrack *)owner->track)->segment);
     throttle = rider->throttle;
     if (segment->radius != 0.0f || segment->rise != 0.0f) {
         limit = segment->length / Gu_Sqrtf(segment->radius * segment->radius + segment->rise * segment->rise);
@@ -134,7 +134,7 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, TurretRiderTargetView *ride
 
     nearest = 0.0f;
     best = 0;
-    segment = (CTurretIntelligence *)(player->views18.view18_1.track + 0x14);
+    segment = (CTurretIntelligence *)(&((struct NavigationTrack *)player->views18.view18_1.track)->segment);
     other = g_transientPlayerList;
     if (other != 0) {
         lift = (0.5f);

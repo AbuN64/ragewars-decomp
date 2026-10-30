@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 #include "COMMON/FRUSTUM.H"
 #include "include_asm.h"
@@ -125,7 +126,7 @@ MenuListWidget *SmpButton_CreateListWidget(s32 listWidgetId, s32 itemWidgetId) {
 
 /* Returns the word at offset 0x110 of a record. */
 s32 SmpButton_GetListSelection(s32 *record) {
-    return record[0x110 / 4];
+    return ((MenuListWidget *)record)->index;
 }
 
 /* Selects entry i of the 20-byte records at offset 0x48 of an object: records the index at 0x110
@@ -165,7 +166,7 @@ s32 SmpButton_DispatchListEvent(void *widget, s32 eventId, s32 eventData0, s32 e
                     return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
@@ -339,7 +340,7 @@ s32 SmpButton_DispatchButtonEvent(void *widget, s32 eventId, s32 eventData0, s32
                     return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }

@@ -1,3 +1,4 @@
+#include "COMMON/OBJ.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "include_asm.h"
 #include "COMMON/REC.H"
@@ -292,7 +293,7 @@ void Triggered_PositionPlatformRider(MovingPlatformActorView *actor, MovingPlatf
     CVector3 *base;
     MovingPlatformActorView *owner;
     t = rider->throttle;
-    segment = (CPlatformIntelligence *)(actor->track + 0x14);
+    segment = (CPlatformIntelligence *)(&((struct NavigationTrack *)actor->track)->segment);
     if (t < 0.0f) {
         t = 0.0f;
     } else if (t > 1.0f) {

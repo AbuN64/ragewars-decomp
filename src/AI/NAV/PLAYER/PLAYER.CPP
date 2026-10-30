@@ -75,14 +75,14 @@ void Nav_ResetPlayerState(s32 *state) {
     ((Brain *)state)->visible = 0;
     ((Brain *)state)->fireTimer = -1;
     ((Brain *)state)->cooldown = 0;
-    state[0x328 / 4] = 0;
+    ((Brain *)state)->unk328 = 0;
     ((Brain *)state)->timer = 0;
     ((Brain *)state)->unk2E4 = 0;
     ((Brain *)state)->unk2EC = 0;
     ((Brain *)state)->unk2E8 = 0;
     ((Brain *)state)->pattern = 0;
     ((Brain *)state)->distance = 0;
-    state[0x32C / 4] = -1;
+    ((Brain *)state)->unk32C = -1;
 }
 
 /* Nav_UpdateComputerPlayerStatus_Player.CPP */

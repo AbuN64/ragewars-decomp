@@ -31,7 +31,7 @@ s32 CCollision_IntersectFrontPlaneFraction(void *poly, void *start, void *segmen
     normalDotDirection = (((struct CollisionPlaneNormalXView *)(poly))->value * segmentDirection[0]) + (((struct Measured *)(poly))->value * segmentDirection[1]) + (((struct CollisionPlaneNormalZView *)(poly))->value * segmentDirection[2]);
     result = 0;
     if (!(normalDotDirection >= (f32)0)) {
-        Graphu64_SubtractVectors(planeToStart, start, poly + 0x18);
+        Graphu64_SubtractVectors(planeToStart, start, &((Polygon *)poly)->vertices[0]);
         result = 1;
         hitFraction = -((((struct CollisionPlaneNormalXView *)(poly))->value * planeToStart[0]) + (((struct Measured *)(poly))->value * planeToStart[1]) + (((struct CollisionPlaneNormalZView *)(poly))->value * planeToStart[2])) / normalDotDirection;
     } else {
@@ -57,7 +57,7 @@ s32 CCollision_IntersectFrontPlanePoint(void *contactPlane, void *segmentStart, 
         if (normalDotDirection >= (f32)0) {
             hitFraction = g_frontPlaneIntersectionFallbackFraction;
         } else {
-            Graphu64_SubtractVectors(planeToStart, segmentStart, contactPlane + 0x18);
+            Graphu64_SubtractVectors(planeToStart, segmentStart, &((Polygon *)contactPlane)->vertices[0]);
             intersectsPlane = 1;
             hitFraction = -((((struct CollisionPlaneNormalXView *)(contactPlane))->value * planeToStart[0]) + (((struct Measured *)(contactPlane))->value * planeToStart[1]) + (((struct CollisionPlaneNormalZView *)(contactPlane))->value * planeToStart[2])) / normalDotDirection;
         }
@@ -82,11 +82,11 @@ s32 CCollision_IsPointInsidePolygon(LinkedWorldFlagsView *poly, void *testPoint)
     if (vertexTotal == 1) {
         return 1;
     }
-    previousVertex = (char *)poly + ((vertexTotal * 0xC) + 0xC);
+    previousVertex = &((Polygon *)poly)->vertices[vertexTotal - 1];
     vertexCursor = ((PolygonCCollisionTestSegmentPolygon *)poly)->vertices;
     remainingEdges = vertexTotal;
     remainingEdges = remainingEdges - 1;
-    for (; remainingEdges != -1; vertexCursor += 0xC, remainingEdges--) {
+    for (; remainingEdges != -1; vertexCursor += sizeof(CVector3), remainingEdges--) {
         Graphu64_SubtractVectors(edgeVector, vertexCursor, previousVertex);
         Graphu64_CrossVectors(edgePlaneNormal, &((PolygonCCollisionTestSegmentPolygon *)poly)->normal, edgeVector);
         Graphu64_SubtractVectors(vertexToPoint, testPoint, previousVertex);

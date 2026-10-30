@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SCREEN.H"
 #include "include_asm.h"
 #include "COMMON/WIDGETRECAT1A.H"
@@ -101,7 +102,7 @@ s32 Frontend_DispatchNodePairMenuEvent(struct Tree *eventTarget, s32 eventId, s3
                     return (*(NodePairMenuEventHandler *)entry)(eventTarget, eventId, eventCode, eventValue, repeatCount);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             index++;
         } while (*(NodePairMenuEventHandler *)entry != 0);
     }

@@ -1,3 +1,4 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "include_asm.h"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
@@ -256,7 +257,7 @@ s32 Menu_DispatchSixChoiceEvent(void *menuActor, s32 eventKind, s32 eventDataOne
                     return (*(WidgetEventHandler *)entry)(menuActor, eventKind, eventDataOne, eventDataTwo, eventDataThree);
                 }
             }
-            entry += 0xC;
+            entry += sizeof(ResidentEventHandlerEntry);
             offset += 12;
         } while (*(WidgetEventHandler *)entry != 0);
     }
@@ -265,7 +266,7 @@ s32 Menu_DispatchSixChoiceEvent(void *menuActor, s32 eventKind, s32 eventDataOne
 
 /* Returns the word at offset 0x4 of a record. */
 s32 Menu_GetFadeMeterDone(s32 *record) {
-    return record[0x4 / 4];
+    return ((struct Triple *)record)->y;
 }
 
 /* Switches a timer record to a new mode: when the mode at offset 8 changes it stores the mode,
