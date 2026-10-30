@@ -242,7 +242,6 @@ k_Ovldat10EncodedWordsBlock3 = 0x800FF140;
 k_Ovldat10EncodedWordsBlock4 = 0x800FF160;
 k_Ovldat10EncodedWordsBlock8 = 0x800FF17C;
 k_Ovldat10EncodedWordsBlock17 = 0x800FF1A0;
-k_Ovldat10EncodedWordsBlock17Rest = 0x801002B4;
 Event_IgnoreWidgetValueUs = 0x8040C640;
 Multi_FormatTypedMenuVariable = 0x8043F290;
 g_Nav_UpdatePlayerSteeringConstantWords_de_eu_eu_x_us = 0x800C1B0C;

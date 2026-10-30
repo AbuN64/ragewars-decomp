@@ -81,7 +81,7 @@ segments = [
   { name = "rom_header_ipl3", rom = 0x0, kind = "bin" },
   { name = "game_code", rom = 0x1000, vram = 0x80200400 },
   { name = "game_data", rom = 0xC24F0, vram = 0x800C18F0 },
-  { name = "debug_symbols", rom = 0x101000, kind = "bin" },
+  { name = "debug_symbols", rom = 0x101834, kind = "bin" },
   { name = "ovl_frontendMenu", rom = 0x164000, vram = 0x80400000 },
   { name = "ovl_frontendMenuData", rom = 0x1B22B4, vram = 0x8014D46C },
   { name = "debug_symbols_and_assets", rom = 0x1B5A50, kind = "bin" },
@@ -332,6 +332,26 @@ cflags = ["-O0"]
 omit = ["-O2", "-mgas"]
 unrelocated = true
 [file."src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_INITUPDATEINFO.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_RESETCONTROLBACKTOCOPYPLAYER.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_INCPLAYERNAMECHARACTER.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_DECPLAYERNAMECHARACTER.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-O0"]
 omit = ["-O2", "-mgas"]

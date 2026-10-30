@@ -26331,7 +26331,13 @@ SECTIONS
         . = MAX(., 0x3E78C);
         src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o(.text);
         . = MAX(., 0x3E9C4);
-        src/DATA/OVERLAY_CODE_IMAGE/OVERLAY_CODE_IMAGE_END.CPP.o(.data);
+        src/UI/TSMOS/SCREENS/PAKINTERFACE_INITUPDATEINFO.CPP.o(.text);
+        . = MAX(., 0x3EC48);
+        src/UI/TSMOS/SCREENS/PAKINTERFACE_RESETCONTROLBACKTOCOPYPLAYER.CPP.o(.text);
+        . = MAX(., 0x3EE04);
+        src/UI/TSMOS/SCREENS/PAKINTERFACE_INCPLAYERNAMECHARACTER.CPP.o(.text);
+        . = MAX(., 0x3F0A4);
+        src/UI/TSMOS/SCREENS/PAKINTERFACE_DECPLAYERNAMECHARACTER.CPP.o(.text);
 #endif
 #if defined(VERSION_US_REV1)
         . = ALIGN(8) /* sdk/libsn/io_hostmemory/io_hostmemory.CPP.o */;
@@ -33476,7 +33482,10 @@ SECTIONS
         src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o(.bss .sbss COMMON);
         src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o(.bss .sbss COMMON);
         src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEPAK.CPP.o(.bss .sbss COMMON);
-        src/DATA/OVERLAY_CODE_IMAGE/OVERLAY_CODE_IMAGE_END.CPP.o(.bss .sbss COMMON);
+        src/UI/TSMOS/SCREENS/PAKINTERFACE_INITUPDATEINFO.CPP.o(.bss .sbss COMMON);
+        src/UI/TSMOS/SCREENS/PAKINTERFACE_RESETCONTROLBACKTOCOPYPLAYER.CPP.o(.bss .sbss COMMON);
+        src/UI/TSMOS/SCREENS/PAKINTERFACE_INCPLAYERNAMECHARACTER.CPP.o(.bss .sbss COMMON);
+        src/UI/TSMOS/SCREENS/PAKINTERFACE_DECPLAYERNAMECHARACTER.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_US_REV1)
         sdk/libsn/io_hostmemory/io_hostmemory.CPP.o(.bss .sbss COMMON);
@@ -42652,7 +42661,11 @@ SECTIONS
 #endif
     }
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US_REV1)
     .debug_symbols 0x00101000 : AT(0x101000) SUBALIGN(1)
+#elif defined(VERSION_US)
+    .debug_symbols 0x00101834 : AT(0x101834) SUBALIGN(1)
+#endif
     {
         assets/debug_symbols.bin.o(.data);
     }
