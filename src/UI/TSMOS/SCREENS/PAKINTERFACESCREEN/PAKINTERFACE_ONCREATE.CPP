@@ -157,7 +157,7 @@ s32 PAKInterface_OnCreate(s32 a, s32 b, s32 c, s32 d) {
         g_pakInterfaceScreen->m_PAKInterfacePlayer[i].m_QuickRecord = 0;
         for (j = 0; j < 4; j++) {
             g_pakInterfaceScreen->m_PAKInterfacePlayer[i].m_RecordState[j] = 2;
-            g_pakInterfaceScreen->m_PAKInterfacePlayer[i].m_RecordField2816[j] = 0;
+            g_pakInterfaceScreen->m_PAKInterfacePlayer[i].m_pSlotObject[j] = 0;
         }
         g_pakInterfaceScreen->m_PAKInterfacePlayer[i].m_FieldB3C = 0;
         g_pakInterfaceScreen->m_PAKInterfacePlayer[i].m_NameTarget = 0;

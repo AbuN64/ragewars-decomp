@@ -71,7 +71,7 @@ typedef struct PAKInterfacePlayer {
     s32 m_State;
     s32 m_Mode;
     s32 m_Step;
-    void *m_pWidget;
+    PAKUserWidget *m_pWidget;
     PAKUserWidget *m_pObject;
     s32 m_Panel;
     PAKGlobalPlayer m_MiddleRecords[PAK_USERS];
@@ -84,7 +84,7 @@ typedef struct PAKInterfacePlayer {
     PAKLabel *m_ListRows[3];
     s32 m_QuickRecord;
     s32 m_RecordState[PAK_USERS];
-    s32 m_RecordField2816[PAK_USERS];
+    PAKUserWidget *m_pSlotObject[PAK_USERS];
     u8 padB40[2856 - 2816 - PAK_USERS * 4];
     s32 m_SelectedRecord;
     s32 m_FieldB3C;
@@ -93,7 +93,7 @@ typedef struct PAKInterfacePlayer {
     s32 m_NameCursor;
     s32 m_FieldB48;
     s32 m_FieldB4C;
-    u8 padB50[2916 - 2896];
+    char m_ModeText[2916 - 2896];
     s32 m_Marker;
 } PAKInterfacePlayer;
 /* One of the four slots: which user list and which of its four middle records hold the slot's player (-1 for none). */
@@ -253,7 +253,8 @@ extern s32 PAKInterface_ValidatePAKAgainstGlobal(s32 anUser);
 extern s32 RandomSwapWord(void);
 /* The same row when it carries a text string instead of a player. */
 typedef struct PAKListTextItem {
-    u8 m_WidgetHead[56];
+    u8 m_WidgetHead[52];
+    s32 m_StringId;
     char *m_pText;
 } PAKListTextItem;
 extern void SM_DLSetDisabled(PAKUserWidget *apObject, s32 anDisabled);
