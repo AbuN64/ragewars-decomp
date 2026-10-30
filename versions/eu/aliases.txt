@@ -133,7 +133,6 @@ g_onscreenFontTextureTable_eu = 0x800CE900;
 k_SkyPostscaledscreenmessageEncodedWords = 0x800CEAFC;
 g_createDataZeroWords = 0x800E4A10;
 g_viDataZeroWords = 0x800E4A30;
-g_viManagerDataWords = 0x800E4AA0;
 g_osaisetfrequencyDataConstantWords = 0x800E58D0;
 g_audioAbortdisktransferDataConstantWords = 0x800E58D8;
 k_OsstartthreadEncodedWords = 0x800E58E8;

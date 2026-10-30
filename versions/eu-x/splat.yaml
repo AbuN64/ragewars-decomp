@@ -4284,6 +4284,8 @@ segments:
       - [0xE07F0, data, game_data/g_viDataZeroWords]
       - [0xE0850, data, game_data/D_src_c0f3ff2a]
       - [0xE0860, data, game_data/g_videoDeviceManager]
+      - [0xE087C, data, game_data/g_videoDeviceManagerNextWord]
+      - [0xE0880, data, game_data/g_videoInterfaceModeTable]
       - [0xE1690, data, game_data/g_osaisetfrequencyDataConstantWords]
       - [0xE1694, data, game_data/g_preNmiShutdownFlagEuX]
       - [0xE1698, data, game_data/g_audioAbortdisktransferDataConstantWords]

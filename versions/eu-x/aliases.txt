@@ -134,7 +134,6 @@ g_linkTablesWords_eu_x = 0x800CF2D0;
 k_SkyPostscaledscreenmessageEncodedWords = 0x800CF4CC;
 g_createDataZeroWords = 0x800DFBD0;
 g_viDataZeroWords = 0x800DFBF0;
-g_videoDeviceManager = 0x800DFC60;
 g_osaisetfrequencyDataConstantWords = 0x800E0A90;
 g_audioAbortdisktransferDataConstantWords = 0x800E0A98;
 k_OsstartthreadEncodedWords = 0x800E0AA8;
