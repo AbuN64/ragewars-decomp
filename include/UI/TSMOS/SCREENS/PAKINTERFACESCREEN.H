@@ -22,6 +22,7 @@ typedef struct PAKGlobalPlayer {
 } PAKGlobalPlayer;
 /* One row of the Controller Pak management list: the line shown, the note name and the pages it takes. */
 #define PAK_NOTE_ROWS 16
+#define PAK_PLAYER(user) (g_pakInterfaceScreen->m_PAKInterfacePlayer[user])
 typedef struct PAKNoteRow {
     char m_Line[40];
     char m_Name[20];
@@ -29,9 +30,9 @@ typedef struct PAKNoteRow {
 } PAKNoteRow;
 /* A list row widget; only its alpha byte and its text pointer are used. */
 typedef struct PAKLabel {
-    u8 pad0[16];
+    u8 m_Unread0[16];
     u8 m_Alpha;
-    u8 pad11[56 - 17];
+    u8 m_Unread11[56 - 17];
     char *m_pText;
 } PAKLabel;
 typedef struct PAKInterfacePlayer {
