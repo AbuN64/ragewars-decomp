@@ -30993,6 +30993,69 @@ stored_size = 99
 rom."eu-x" = [[0x5148a8, 0x51490b]]
 evidence = [{ artifact = "stale-eu-x.json", sha256 = "7a3e69fc2e5214a79cfe44b1a7428ab3b1268173d468e6138c43132bc59badb2", pointer = "/rows/289" }]
 
+[blob."leftover.eu-x.earlier-build.eec00"]
+type = "leftover"
+format = "earlier-build"
+codec = "none"
+state = "decoded"
+stored_size = 592
+rom."eu-x" = [[0xeec00, 0xeee50]]
+evidence = [{ artifact = "earlier-build-scan.json", sha256 = "f129400771eeb996b374962a91048980b288684dd0f27eaf2319d71d8859d6ef" }]
+
+[blob."leftover.eu-x.earlier-build.eee50"]
+type = "leftover"
+format = "earlier-build"
+codec = "none"
+state = "decoded"
+stored_size = 432
+rom."eu-x" = [[0xeee50, 0xef000]]
+evidence = [{ artifact = "earlier-build-scan.json", sha256 = "f129400771eeb996b374962a91048980b288684dd0f27eaf2319d71d8859d6ef" }]
+
+[blob."leftover.eu-x.earlier-build.ef000"]
+type = "leftover"
+format = "earlier-build"
+codec = "none"
+state = "decoded"
+stored_size = 728
+rom."eu-x" = [[0xef000, 0xef2d8]]
+evidence = [{ artifact = "earlier-build-scan.json", sha256 = "f129400771eeb996b374962a91048980b288684dd0f27eaf2319d71d8859d6ef" }]
+
+[blob."leftover.eu-x.earlier-build.ef2d8"]
+type = "leftover"
+format = "earlier-build"
+codec = "none"
+state = "decoded"
+stored_size = 932
+rom."eu-x" = [[0xef2d8, 0xef67c]]
+evidence = [{ artifact = "earlier-build-scan.json", sha256 = "f129400771eeb996b374962a91048980b288684dd0f27eaf2319d71d8859d6ef" }]
+
+[blob."leftover.eu-x.earlier-build.ef67c"]
+type = "leftover"
+format = "earlier-build"
+codec = "none"
+state = "decoded"
+stored_size = 888
+rom."eu-x" = [[0xef67c, 0xef9f4]]
+evidence = [{ artifact = "earlier-build-scan.json", sha256 = "f129400771eeb996b374962a91048980b288684dd0f27eaf2319d71d8859d6ef" }]
+
+[blob."leftover.eu-x.earlier-build.ef9f4"]
+type = "leftover"
+format = "earlier-build"
+codec = "none"
+state = "decoded"
+stored_size = 1116
+rom."eu-x" = [[0xef9f4, 0xefe50]]
+evidence = [{ artifact = "earlier-build-scan.json", sha256 = "f129400771eeb996b374962a91048980b288684dd0f27eaf2319d71d8859d6ef" }]
+
+[blob."leftover.eu-x.earlier-build.efe50"]
+type = "leftover"
+format = "earlier-build"
+codec = "none"
+state = "decoded"
+stored_size = 432
+rom."eu-x" = [[0xefe50, 0xf0000]]
+evidence = [{ artifact = "earlier-build-scan.json", sha256 = "f129400771eeb996b374962a91048980b288684dd0f27eaf2319d71d8859d6ef" }]
+
 [blob."leftover.eu-x.earlier-link.147a40"]
 type = "leftover"
 format = "earlier-link"
