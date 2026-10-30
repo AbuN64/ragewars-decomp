@@ -2,8 +2,9 @@
 
 /* 800E0DA8.CPP */
 #if !(defined(VERSION_US_REV1))
-const char k_GPakformatint1EncodedWords[4] =
-    "   \000";
+const unsigned int k_GPakformatint1EncodedWords[1] = {
+    0x20202000,
+};
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -23,15 +24,17 @@ const char s_snapshotThreePartNumberFormat[14] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/s_pakThreeSpacesText.c */
-const char k_GPakformatint1EncodedBytes[4] =
-    "   \000";
+const unsigned char k_GPakformatint1EncodedBytes[4] = {
+    0x20, 0x20, 0x20, 0x00,
+};
 #endif
 
 /* 800E0DAC.CPP */
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 /* ROM-grounded data: rodata/shared/800E0DAC */
-const char g_pakFormatInt1[4] =
-    "%1d\000";
+const unsigned int g_pakFormatInt1[1] = {
+    0x25316400,
+};
 #endif
 
 /* 800E0DB0.CPP */

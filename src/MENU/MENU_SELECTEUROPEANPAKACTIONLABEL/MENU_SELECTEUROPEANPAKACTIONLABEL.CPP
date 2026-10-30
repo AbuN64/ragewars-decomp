@@ -1,5 +1,4 @@
 #include "DATA/OVL1_J/MENU_SELECTEUROPEANPAKACTIONLABEL.H"
-#include "DATA/UI/EVENT_HANDLER_RECORD.H"
 
 /* 80408CB0_11.CPP */
 #if defined(VERSION_EU)
@@ -48,13 +47,9 @@ unsigned int g_equipmentAndPlayerSettingsMenuDataEuX[174] = {
 
 /* g_titleButtonEventHandlerRecordsUsRev1_MenuSelecteuropeanpakactionlabel.CPP */
 #if defined(VERSION_US_REV1)
-EventHandlerRecord g_titleButtonEventHandlerRecordsUsRev1[7] = {
-    { 3592, 30, g_Menu_UpdateTitleButtonScreenAddress },
-    { 3590, 30, g_Menu_CreateTitleButtonScreenAddress },
-    { 3591, 30, g_Menu_WrapTitleButtonScreenNodesAddress },
-    { 3587, 30, g_Menu_FreeTitleButtonScreenAddress },
-    { 1, 30, g_Menu_HandleTitleButtonChoiceAddress },
-    { 2, 30, g_Menu_CancelTitleButtonScreenAddress },
-    { 0, 0, 0 },
+unsigned int g_titleButtonEventHandlerRecordsUsRev1[21] = {
+    0x00000E08, 0x0000001E, (unsigned int)g_Menu_UpdateTitleButtonScreenAddress, 0x00000E06, 0x0000001E, (unsigned int)g_Menu_CreateTitleButtonScreenAddress, 0x00000E07, 0x0000001E,
+    (unsigned int)g_Menu_WrapTitleButtonScreenNodesAddress, 0x00000E03, 0x0000001E, (unsigned int)g_Menu_FreeTitleButtonScreenAddress, 0x00000001, 0x0000001E, (unsigned int)g_Menu_HandleTitleButtonChoiceAddress, 0x00000002,
+    0x0000001E, (unsigned int)g_Menu_CancelTitleButtonScreenAddress, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif

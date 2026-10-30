@@ -1,5 +1,6 @@
 
 #if defined(VERSION_US)
-char k_MenuEncodedWordsBlock3[4] =
-    "2equ";
+unsigned int k_MenuEncodedWordsBlock3[1] = {
+    0x32657175,
+};
 #endif

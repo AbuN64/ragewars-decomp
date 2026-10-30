@@ -506,3 +506,28 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-O0"]
 omit = ["-O2", "-mgas"]
 unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_PRESSEDSTART.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_REFRESHMIDDLENAMESFORPLAYERNAME.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_REFRESHMIDDLENAMESFORCOPY.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATESTARTGROUP.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_CHECKPAK.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true

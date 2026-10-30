@@ -3,8 +3,9 @@
 
 /* 8040B45C_41.CPP */
 #if defined(VERSION_US)
-char func_80412CDC_de_padding_180D5C[4] =
-    "IR_I";
+unsigned int func_80412CDC_de_padding_180D5C[1] = {
+    0x49525F49,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

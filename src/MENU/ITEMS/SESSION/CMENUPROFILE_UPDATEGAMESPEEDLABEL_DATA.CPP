@@ -1,8 +1,9 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char k_cmenuprofileUpdategamespeedlabelDataConstantWords[4] =
-    "%3d\000";
+const unsigned int k_cmenuprofileUpdategamespeedlabelDataConstantWords[1] = {
+    0x25336400,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

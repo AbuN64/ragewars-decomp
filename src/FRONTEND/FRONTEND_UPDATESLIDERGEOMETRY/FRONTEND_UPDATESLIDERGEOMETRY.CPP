@@ -1,6 +1,5 @@
 #include "DATA/OVL1_J/g_FrontendUpdateslidergeometryEncodedWords_FrontendUpdateslidergeometry.H"
 #include "DATA/OVL1_J/g_frontendSliderTransitionHandlerWords_FrontendUpdateslidergeometry.H"
-#include "DATA/UI/EVENT_HANDLER_RECORD.H"
 
 /* 80408CB0_14.CPP */
 /* 80408CB0_14.CPP */
@@ -11,28 +10,22 @@ unsigned char g_FrontendUpdateslidergeometryTrailingBytes[12] = { 0x10, 0x40, 0x
 /* g_FrontendUpdateslidergeometryEncodedWords_FrontendUpdateslidergeometry.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E58A8_unclaimed_E64C0 */
-EventHandlerRecord g_FrontendUpdateslidergeometryEncodedWords[1] = {
-    { 3590, 6, addrLow_Menu_CreateSoundOptionsScreen },
+unsigned int g_FrontendUpdateslidergeometryEncodedWords[3] = {
+    0x00000E06, 0x00000006, (unsigned int)addrLow_Menu_CreateSoundOptionsScreen,
 };
 
-EventHandlerRecord g_frontendSliderEventHandlerWords[4] = {
-    { 3587, 6, addrLow_Menu_FreeSoundOptionsScreen },
-    { 2, 6, addrLow_Menu_CancelSoundOptionsScreen },
-    { 1, 6, addrLow_Menu_ConfirmSoundOptionsScreen },
-    { 0, 0, 0 },
+unsigned int g_frontendSliderEventHandlerWords[12] = {
+    0x00000E03, 0x00000006, (unsigned int)addrLow_Menu_FreeSoundOptionsScreen, 0x00000002, 0x00000006, (unsigned int)addrLow_Menu_CancelSoundOptionsScreen, 0x00000001, 0x00000006,
+    (unsigned int)addrLow_Menu_ConfirmSoundOptionsScreen, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
 /* g_frontendSliderTransitionHandlerWords_FrontendUpdateslidergeometry.CPP */
 #if defined(VERSION_US_REV1)
-EventHandlerRecord g_frontendSliderTransitionHandlerWords[7] = {
-    { 3591, 13, addrLow_Menu_SoundSliderReturnZero },
-    { 3592, 13, addrLow_Menu_ApplySoundSliders },
-    { 3590, 13, addrLow_Menu_CreateSoundSliders },
-    { 3587, 13, addrLow_Menu_FreeSoundSliders },
-    { 2, 13, addrLow_Menu_CancelSoundSliderPopup },
-    { 1, 13, addrLow_Menu_ConfirmSoundSliderPopup },
-    { 0, 0, 0 },
+unsigned int g_frontendSliderTransitionHandlerWords[21] = {
+    0x00000E07, 0x0000000D, (unsigned int)addrLow_Menu_SoundSliderReturnZero, 0x00000E08, 0x0000000D, (unsigned int)addrLow_Menu_ApplySoundSliders, 0x00000E06, 0x0000000D,
+    (unsigned int)addrLow_Menu_CreateSoundSliders, 0x00000E03, 0x0000000D, (unsigned int)addrLow_Menu_FreeSoundSliders, 0x00000002, 0x0000000D, (unsigned int)addrLow_Menu_CancelSoundSliderPopup, 0x00000001,
+    0x0000000D, (unsigned int)addrLow_Menu_ConfirmSoundSliderPopup, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 

@@ -292,6 +292,7 @@ s32 Items_RequestScreenModeFade(void) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const char k_fmtSpacesDec2[6] =
-    "  %2d";
+const unsigned short k_fmtSpacesDec2[3] = {
+    0x2020, 0x2532, 0x6400,
+};
 #endif

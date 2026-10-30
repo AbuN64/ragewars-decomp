@@ -2,8 +2,8 @@
 
 /* 800E0CAC.CPP */
 /* ROM-grounded data: src/k_MenuGettrackstarttargetTenWordsUsRev1.c */
-const float k_MenuGettrackstarttargetTenWords[1] = {
-    10.0f,
+const unsigned int k_MenuGettrackstarttargetTenWords[1] = {
+    0x41200000,
 };
 
 /* 800E0CB0.CPP */

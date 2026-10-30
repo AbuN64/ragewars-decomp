@@ -42,8 +42,9 @@ const char s_gfxDebugLocationFormat[13] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/s_gfxDebugLocationFormatRev1.c */
-const char k_DebugEncodedBytes[13] =
-    "[ %s : %d ]\n\000";
+const unsigned char k_DebugEncodedBytes[13] = {
+    0x5B, 0x20, 0x25, 0x73, 0x20, 0x3A, 0x20, 0x25, 0x64, 0x20, 0x5D, 0x0A, 0x00,
+};
 #endif
 
 /* 800E1100.CPP */

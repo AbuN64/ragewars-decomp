@@ -1,6 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const char g_PAKInterface_LoadNoteListConstantsDe[6] =
-    "%d.%s";
+const unsigned short g_PAKInterface_LoadNoteListConstantsDe[3] = {
+    0x2564, 0x2E25, 0x7300,
+};
 #endif

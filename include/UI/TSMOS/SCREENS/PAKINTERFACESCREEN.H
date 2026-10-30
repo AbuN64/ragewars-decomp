@@ -26,9 +26,12 @@ typedef struct PAKGlobalPlayer {
     u8 m_Field18D;
     u8 pad18E[PAK_PLAYER_RECORD_SIZE - 398];
 } PAKGlobalPlayer;
-/* A widget of the screen's user list: the display-list node with its alpha, its x and width, and the previous and next widget. */
+/* A widget of the screen's user list: the display-list node with the item it draws, its alpha, its x and width, and the previous and next widget. */
+struct PAKListItem;
 typedef struct PAKUserWidget {
-    u8 pad0[16];
+    u8 pad0[8];
+    struct PAKListItem *m_pItem;
+    u8 padC[4];
     u8 m_Alpha;
     u8 pad11[3];
     u16 m_X;
@@ -37,6 +40,8 @@ typedef struct PAKUserWidget {
     u8 pad1A[44 - 26];
     struct PAKUserWidget *m_pPrev;
     struct PAKUserWidget *m_pNext;
+    u8 pad34[4];
+    char *m_pText;
 } PAKUserWidget;
 /* One row of the Controller Pak management list: the line shown, the note name and the pages it takes. */
 #define PAK_NOTE_ROWS 16
@@ -106,7 +111,7 @@ typedef struct PAKSaveBlock {
     s32 m_Checksum;
 } PAKSaveBlock;
 typedef struct PAKInterfaceScreen {
-    s32 m_Unread0;
+    void *m_pDisplayList;
     void *m_pUserList;
     u8 m_Wipe[28];
     void *m_pFlicker;
@@ -135,7 +140,17 @@ extern PAKGlobalPlayer g_pakGlobalPlayers[PAK_USERS];
 #define PAK_UPDATE_INFO_SIZE 150
 #define PAK_UPDATE_ACTIVE 0
 #define PAK_UPDATE_PENDING 25
+#define PAK_UPDATE_START_PRESSED 120
 extern u8 g_pakUpdateInfo[PAK_USERS][PAK_UPDATE_INFO_SIZE];
+/* The same record by field: the active and pending flags the update code tests, and the start-pressed flag at +120. */
+typedef struct PAKUpdateInfo {
+    u8 m_Active;
+    u8 m_Unread1[PAK_UPDATE_PENDING - 1];
+    u8 m_Pending;
+    u8 m_Unread1A[PAK_UPDATE_START_PRESSED - PAK_UPDATE_PENDING - 1];
+    u8 m_StartPressed;
+    u8 m_Unread79[PAK_UPDATE_INFO_SIZE - PAK_UPDATE_START_PRESSED - 1];
+} PAKUpdateInfo;
 extern char s_pakInterfaceSourceFile[];
 extern s32 AssertFailed(char *file, s32 line, char *expr);
 #define PAK_ASSERT(line, cond, expr) \
@@ -163,7 +178,7 @@ extern char *pText_PAK_UnnamedNote[];
 extern s32 PAK_GetNoteInfo(s32 anUser, s32 anNote, s32 *apState, char *apName, u8 *apExt, s32 *apPages, s32 *apInfoA, s32 *apInfoB);
 extern s32 IsJapName(char *apName, s32 anLength);
 extern char *x_sprintf(char *apDst, const char *apFormat, ...);
-extern void *SM_DLFindObjectByID(void *apList, s32 anId);
+extern void *SM_DLFindObjectByID(void *apList, u16 anId);
 extern s32 PAKInterface_CalcSaveGameSize(void);
 extern void PAKInterface_ScrollManagementList(s32 anUser, s32 anDirection);
 extern s32 PAKInterface_FindEmptyGlobalSlot(void);
@@ -184,7 +199,9 @@ extern struct WidgetLayout *PAKInterface_GetUserObject(void *apUserList, s32 anU
 extern void PAKInterface_SetControlOwner(void *apUserList, s32 anUser, s32 anFlag);
 /* A list widget row: the widget's own 14 words, then the global player the row stands for. */
 typedef struct PAKListItem {
-    s32 m_Widget[14];
+    u8 m_WidgetHead[14];
+    u16 m_WidgetType;
+    u8 m_WidgetTail[40];
     PAKGlobalPlayer *m_pPlayer;
 } PAKListItem;
 /* The engine application record; only the bytes the pak screens read are named: the frontend mode and the language the text tables are indexed with. */
@@ -225,4 +242,30 @@ extern void PAKInterface_PrepareDataAfterLoad(s32 anUser);
 extern PAKListItem *PAKInterface_AddListItem(void *apList, u16 anStringId);
 
 
+extern char s_pakAssertNextMode[];
+extern char s_pakAssertScreenMode[];
+extern char s_pakAssertCheckStatus[];
+extern s32 PAK_CheckStatus(s32 anUser);
+extern s32 PAKInterface_LoadGame(s32 anUser, s32 anNote);
+extern s32 PAKInterface_FindEmptyPlayerDataSlot(s32 anUser);
+extern s32 PAKInterface_IsPlayerDataListEmpty(s32 anUser);
+extern s32 PAKInterface_ValidatePAKAgainstGlobal(s32 anUser);
+extern s32 RandomSwapWord(void);
+/* The same row when it carries a text string instead of a player. */
+typedef struct PAKListTextItem {
+    u8 m_WidgetHead[56];
+    char *m_pText;
+} PAKListTextItem;
+extern void SM_DLSetDisabled(PAKUserWidget *apObject, s32 anDisabled);
+extern void SM_DLSetVisible(PAKUserWidget *apObject, s32 anVisible);
+extern s32 SM_DLIsDisabled(PAKUserWidget *apObject);
+extern void SMMU_SwitchUserControlFocusByObject(void *apUserList, s32 anUser, PAKUserWidget *apObject);
+extern PAKUserWidget *SMMU_GetActiveControl(void *apUserList, s32 anUser);
+extern s32 PAKInterface_GetGlobalPlayerByMarker(s32 anMarker, s32 anSlot);
+extern s32 ControllerConnected(s32 anController);
+extern s32 PAKInterface_AddPlayerToMiddle(s32 anUser, s32 anSlot);
+extern char s_pakAssertSlotObject[];
+extern char s_pakAssertListObject[];
+extern char s_pakAssertListObjectType[];
+extern char s_pakAssertListItem[];
 #endif

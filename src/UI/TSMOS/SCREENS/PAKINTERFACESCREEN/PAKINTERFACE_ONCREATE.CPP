@@ -41,7 +41,7 @@ s32 PAKInterface_OnCreate(s32 a, s32 b, s32 c, s32 d) {
             *(char *)0 = 0;
         }
     }
-    g_pakInterfaceScreen->m_Unread0 = a;
+    g_pakInterfaceScreen->m_pDisplayList = a;
     CWipeScreen_InitWipe(g_pakInterfaceScreen->m_Wipe, 103, 0, 0, 0);
     g_pakInterfaceScreen->m_pUserList = SMMU_MakeScreenMultiUser(a, 4);
     SMMU_SetActiveControl(a, 0, 643);

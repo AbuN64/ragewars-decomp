@@ -1,8 +1,9 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-char func_804291D0_de_padding_1973AC[4] =
-    "I_AN";
+unsigned int func_804291D0_de_padding_1973AC[1] = {
+    0x495F414E,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

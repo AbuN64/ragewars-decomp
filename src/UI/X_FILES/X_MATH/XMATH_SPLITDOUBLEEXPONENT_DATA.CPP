@@ -27,9 +27,9 @@ const unsigned int k_XmathSplitdoubleexponentHalfPiWordsVariant1[1] = {
     0x3FC90FDB,
 };
 
-const double k_xmathSplitdoubleexponentDataFloatConstantWordsBlock1[5] = {
-    0.007812505457518838, 2.648880056980157e-16, 3.90505195515418e-11, 1.3156112606732471e-08,
-    0.0078124599427304665,
+const unsigned int k_xmathSplitdoubleexponentDataFloatConstantWordsBlock1[10] = {
+    0x3F800000, 0xBB84D7E7, 0x3CB31652, 0x3D6501C4, 0x3DC577DF, 0x3E0E6C63, 0x3E4C40A6, 0x3EAAA61C,
+    0x3F7FFFF5, 0x3F490FDB,
 };
 
 const unsigned int k_xmathSplitdoubleexponentDataFloatConstantWordsBlock2[9] = {

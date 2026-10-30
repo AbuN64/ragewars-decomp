@@ -506,8 +506,8 @@ unsigned int k_MatchReasonEncodedWordsBlock2[1] = {
 
 #if defined(VERSION_DE)
 #if defined(VERSION_DE)
-void *k_MatchReasonEncodedWordsBlock1[1] = {
-    (char *)&g_lastResumedPoolSoundHandle + 0x4,
+unsigned int k_MatchReasonEncodedWordsBlock1[1] = {
+    (unsigned int)&g_lastResumedPoolSoundHandle + 0x4,
 };
 #endif
 #endif

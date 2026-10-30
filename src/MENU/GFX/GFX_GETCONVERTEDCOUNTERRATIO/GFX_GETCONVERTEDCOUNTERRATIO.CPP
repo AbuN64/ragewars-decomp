@@ -8,8 +8,7 @@ unsigned char g_GfxGetconvertedcounterratioTrailingBytesBlock1[4] = { 0x24, 0x42
 
 /* 80420E90_6.CPP */
 #if defined(VERSION_US)
-char s_wateText[4] =
-    "WATE";
+unsigned char s_wateText[4] = { 0x57, 0x41, 0x54, 0x45 };
 #endif
 
 /* k_GfxGetconvertedcounterratioEncodedWords_GfxGetconvertedcounterratio.CPP */

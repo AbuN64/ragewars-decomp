@@ -69,8 +69,9 @@ void N64Eng_SetNumericWidgetValue(RecordN64EngCreateNumericWidget *widget, s32 v
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-const char g_numericWidgetValueFormat_N64eng[4] =
-    "%d\000D";
+const unsigned int g_numericWidgetValueFormat_N64eng[1] = {
+    0x25640044,
+};
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
 const unsigned char g_numericWidgetValueFormat_N64eng[3] = {
@@ -110,6 +111,10 @@ unsigned char k_N64engEncodedBytesBlock2[13] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_numericWidgetValueFormat_N64eng.c */
-const char k_N64engEncodedBytes[4] =
-    "%d\000R";
+const unsigned char k_N64engEncodedBytes[] = {
+    0x25, 0x64, 0x00,
+#if defined(VERSION_US_REV1)
+    0x52,
+#endif
+};
 #endif
