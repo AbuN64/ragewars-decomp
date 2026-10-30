@@ -7,3 +7,6 @@ const f32 g_pakMenuAnimationLimits[4] = {
     1.0f, 0.4f, 1.0f, 0.4f,
 };
 #endif
+
+/* 800E24E4.CPP */
+const f32 g_menuCenterFraction = 0.5f;
