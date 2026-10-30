@@ -7,8 +7,9 @@ unsigned char g_GamecoreTrailingBytesBlock2[12] = { 0x27, 0xA5, 0x00, 0x18, 0x27
 
 /* 802C0390_18.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-/* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802BB6A8_eu_x[1] = { 0x445BF800U };
+/* Linker alignment fill between osRecvMesg and osResetGlobalIntMask (8 bytes, ends 16-aligned): the first word is a stale
+   leftover of an earlier build, the second (k_GamecoreZeroWords) is zero fill. */
+unsigned int g_osRecvMesgAlignPad[1] = { 0x445BF800U };
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)

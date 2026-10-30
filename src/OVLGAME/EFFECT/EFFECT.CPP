@@ -44,6 +44,6 @@ void * k_EffectEncodedWords[1] = {
 #endif
 
 /* ROM-grounded data: src/g_Effect_InitEffectPoolConstantWords_Effect.c */
-const unsigned int g_Effect_InitEffectPoolConstantWords[1] = {
-    0x42F5C28F,
+const float g_Effect_InitEffectPoolConstantWords[1] = {
+    122.88f,
 };

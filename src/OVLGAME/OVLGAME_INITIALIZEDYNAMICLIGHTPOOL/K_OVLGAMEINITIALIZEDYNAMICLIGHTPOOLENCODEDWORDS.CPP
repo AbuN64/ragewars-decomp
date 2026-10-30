@@ -1,8 +1,9 @@
 #include "include_asm.h"
 
 
+/* 520 stale bytes between Ovlgame_InitializeDynamicLightPool and the next function: no instruction or pointer reaches them, the other builds have nothing here. */
 #if defined(VERSION_DE)
-unsigned int k_OvlgameInitializedynamiclightpoolEncodedWords[130] = {
+unsigned int g_ovlgameInitializeDynamicLightPoolStalePad[130] = {
     0x23531378, 0x54543679, 0x11000354, 0x68757737, 0x65545532, 0x34589668, 0x11122588, 0x88876788,
     0x65667632, 0x6876668C, 0x11475676, 0x56676666, 0x54664676, 0x7876579B, 0x14787421, 0x34455542,
     0x23531378, 0x54543679, 0x18987521, 0x46433332, 0x13420157, 0x65520458, 0x03766765, 0x54323455,
