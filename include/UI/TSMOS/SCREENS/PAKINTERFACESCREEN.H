@@ -105,6 +105,24 @@ typedef struct PAKListItem {
     s32 m_Widget[14];
     PAKGlobalPlayer *m_pPlayer;
 } PAKListItem;
+/* The engine application record; only the language byte the pak screens index the text tables with is named. */
+#define ENGINE_APP_LANGUAGE_OFFSET 159121
+typedef struct EngineApp {
+    u8 pad0[ENGINE_APP_LANGUAGE_OFFSET];
+    u8 m_Language;
+} EngineApp;
+extern EngineApp g_engineApp;
+extern char *pText_MultiFileName[];
+extern char *pText_GameCode[];
+extern char *x_strcpy(char *apDst, const char *apSrc);
+extern s32 PAK_AnySavesOnPak(char *apFileName, s32 anUser, s32 *apNote);
+extern s32 PAK_DeleteNote(s32 anUser, s32 anNote);
+extern s32 PAK_FindFirstAvailableExt(s32 anUser, s32 *apExt);
+extern s32 PAK_WriteNote(s32 anUser, s32 anSize, void *apData, char *apName, s32 *apExt, char *apGameCode);
+extern s32 PAK_ReadNote(s32 anUser, s32 anNote, void *apData, s32 anSize);
+extern s32 PAKInterface_CheckForRoomOnPak(s32 anUser, s32 *apResult);
+extern void PAKInterface_PrepareSaveBlockForSave(s32 anUser);
+extern void PAKInterface_PrepareDataAfterLoad(s32 anUser);
 extern PAKListItem *PAKInterface_AddListItem(void *apList, u16 anStringId);
 
 
