@@ -228,12 +228,20 @@ $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFOR
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_CHECKFORROOMONPAK.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_CHECKFORROOMONPAK.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_CHECKFORROOMONPAK.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_CHECKFORROOMONPAK.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPAREDATAAFTERLOAD.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPAREDATAAFTERLOAD.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPAREDATAAFTERLOAD.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPAREDATAAFTERLOAD.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
@@ -252,10 +260,18 @@ $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPL
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPARESAVEBLOCKFORSAVE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPARESAVEBLOCKFORSAVE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPARESAVEBLOCKFORSAVE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPARESAVEBLOCKFORSAVE.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -406,12 +422,20 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_DECODETR
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_CHECKFORROOMONPAK.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_CHECKFORROOMONPAK.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_CHECKFORROOMONPAK.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_CHECKFORROOMONPAK.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPAREDATAAFTERLOAD.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPAREDATAAFTERLOAD.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPAREDATAAFTERLOAD.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPAREDATAAFTERLOAD.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
@@ -430,10 +454,18 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGL
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_GETGLOBALPLAYERBYMARKER.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPARESAVEBLOCKFORSAVE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPARESAVEBLOCKFORSAVE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPARESAVEBLOCKFORSAVE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PREPARESAVEBLOCKFORSAVE.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
