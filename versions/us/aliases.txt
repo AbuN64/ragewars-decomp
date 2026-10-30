@@ -1813,3 +1813,6 @@ literals_SetN64_DrawFullscreenBackdrop = 0x800C5300; // rom:0xC5F00 size:0x4
 g_frontendMenuResourceStream1 = 0x800E4827;
 g_pakInterfaceScreen = 0x800E2B5D; // the file's static pointer, inside the image's first stream chunk
 k_PortalAfterCopyMiddlePlayersToGlobal = 0x800FCF59;
+g_frontendMenuResourceStream2 = 0x800E7110;
+s_pakInterfaceScreenSourceFile = 0x800E2B67; // the file's source path string, inside the image's first stream chunk
+s_pakInterfaceScreenUserInRange = 0x800E6384; // the user-range assert message string, inside the image's stream
