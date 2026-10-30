@@ -1,7 +1,7 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
-extern char g_characterPreviewTextReferenceEu1[];
+extern u8 *g_characterPreviewTextReferenceEu1[];
 extern char g_characterPreviewTextReferenceEu2[];
-extern char g_characterPreviewTextReferenceEu3[];
+extern char *g_characterPreviewTextReferenceEu3[];
 extern char g_characterPreviewTextReferenceEuX1[];
 extern char g_characterPreviewTextReferenceEuX10[];
 extern char g_characterPreviewTextReferenceEuX2[];
@@ -17,9 +17,9 @@ extern char g_characterPreviewTextReferenceShared2[];
 extern char g_characterPreviewTextReferenceShared3[];
 extern char g_characterPreviewTextReferenceShared4[];
 extern char g_characterPreviewTextReferenceShared5[];
-extern char g_characterPreviewTextReferenceShared6[];
-extern char g_characterPreviewTextReferenceShared7[];
-extern char g_characterPreviewTextReferenceShared8[];
+extern char *g_characterPreviewTextReferenceShared6[];
+extern char *g_characterPreviewTextReferenceShared7[];
+extern char *g_characterPreviewTextReferenceShared8[];
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
@@ -122,11 +122,11 @@ extern char g_characterPreviewTextReferenceEuX7[];
 extern char g_characterPreviewTextReferenceEuX8[];
 extern char g_characterPreviewTextReferenceEuX9[];
 extern char g_characterPreviewTextReferenceEuX10[];
-extern char g_characterPreviewTextReferenceEu1[];
-extern char g_characterPreviewTextReferenceShared6[];
-extern char g_characterPreviewTextReferenceEu3[];
-extern char g_characterPreviewTextReferenceShared7[];
-extern char g_characterPreviewTextReferenceShared8[];
+extern u8 *g_characterPreviewTextReferenceEu1[];
+extern char *g_characterPreviewTextReferenceShared6[];
+extern char *g_characterPreviewTextReferenceEu3[];
+extern char *g_characterPreviewTextReferenceShared7[];
+extern char *g_characterPreviewTextReferenceShared8[];
 RestcharacterPreviewDefinitionsEuXLayout425 g_characterPreviewDefinitionsEuX = {
     { 0, 0, -20, -20 },
     (void *)((char *)&g_characterPreviewTextReferenceEu1 + 0xC),
@@ -201,12 +201,12 @@ RestcharacterPreviewDefinitionsEuXLayout425 g_characterPreviewDefinitionsEuX = {
 
 #if defined(VERSION_EU)
 #if defined(VERSION_EU)
-extern char g_characterPreviewTextReferenceEu1[];
+extern u8 *g_characterPreviewTextReferenceEu1[];
 extern char g_characterPreviewTextReferenceEu2[];
-extern char g_characterPreviewTextReferenceShared6[];
-extern char g_characterPreviewTextReferenceEu3[];
-extern char g_characterPreviewTextReferenceShared7[];
-extern char g_characterPreviewTextReferenceShared8[];
+extern char *g_characterPreviewTextReferenceShared6[];
+extern char *g_characterPreviewTextReferenceEu3[];
+extern char *g_characterPreviewTextReferenceShared7[];
+extern char *g_characterPreviewTextReferenceShared8[];
 RestcharacterPreviewDefinitionsEuLayout426 g_characterPreviewDefinitionsEu = {
     { 0, 0, -20, -20 },
     (void *)((char *)&g_characterPreviewTextReferenceEu1 + 0x10),

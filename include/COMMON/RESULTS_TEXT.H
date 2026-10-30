@@ -14,11 +14,31 @@ static inline Shared_Game *currentGame(void) {
 #define RESULTS_LANGUAGE (currentGame()->language)
 extern ResultsHeadingCharacter g_resultCharacterHeadingTranslations[];
 extern char g_resultsHeadingText[];
-extern char *g_characterPreviewTextReferenceEu1[], *g_characterPreviewTextReferenceShared6[], *g_characterPreviewTextReferenceEu3[], *g_characterPreviewTextReferenceShared7[], *g_characterPreviewTextReferenceShared8[], *g_resultsRoundsOneFormatLocalized[],
-    *g_resultsRoundsTwoFormatLocalized[], *g_resultsRoundsThreeFormatLocalized[], *g_resultsLapsOneFormatLocalized[], *g_resultsLapsTwoFormatLocalized[], *g_resultsLapsThreeFormatLocalized[], *g_resultsLapsFourFormatLocalized[],
-    *g_resultsLapsFiveFormatLocalized[], *g_resultsGoalOneFormatLocalized[], *g_resultsGoalTwoFormatLocalized[], *g_resultsTimeLimitFormatLocalized[], *g_resultsMinutesSecondsOneFormatLocalized[], *g_resultsMinutesSecondsTwoFormatLocalized[],
-    *g_resultsMinutesOneFormatLocalized[], *g_resultsMinutesTwoFormatLocalized[], *g_resultsPlayerOrLivesOneFormatLocalized[], *g_resultsPlayerOrLivesTwoFormatLocalized[], *g_resultsGoalLabelFormatLocalized[], *g_resultsGoalValueFormatLocalized[],
-    *g_slotSelectionTextReferenceEu7[];
+extern u8 *g_characterPreviewTextReferenceEu1[];
+extern char *g_characterPreviewTextReferenceShared6[];
+extern char *g_characterPreviewTextReferenceEu3[];
+extern char *g_characterPreviewTextReferenceShared7[];
+extern char *g_characterPreviewTextReferenceShared8[];
+extern char *g_resultsRoundsOneFormatLocalized[];
+extern char *g_resultsRoundsTwoFormatLocalized[];
+extern char *g_resultsRoundsThreeFormatLocalized[];
+extern char *g_resultsLapsOneFormatLocalized[];
+extern char *g_resultsLapsTwoFormatLocalized[];
+extern char *g_resultsLapsThreeFormatLocalized[];
+extern char *g_resultsLapsFourFormatLocalized[];
+extern char *g_resultsLapsFiveFormatLocalized[];
+extern char *g_resultsGoalOneFormatLocalized[];
+extern char *g_resultsGoalTwoFormatLocalized[];
+extern char *g_resultsTimeLimitFormatLocalized[];
+extern char *g_resultsMinutesSecondsOneFormatLocalized[];
+extern char *g_resultsMinutesSecondsTwoFormatLocalized[];
+extern char *g_resultsMinutesOneFormatLocalized[];
+extern char *g_resultsMinutesTwoFormatLocalized[];
+extern char *g_resultsPlayerOrLivesOneFormatLocalized[];
+extern char *g_resultsPlayerOrLivesTwoFormatLocalized[];
+extern char *g_resultsGoalLabelFormatLocalized[];
+extern char *g_resultsGoalValueFormatLocalized[];
+extern char *g_slotSelectionTextReferenceEu7[];
 #define RESULTS_CHARACTERS g_resultCharacterHeadingTranslations
 #define RESULTS_NAME_FORMAT g_resultsHeadingText
 #else

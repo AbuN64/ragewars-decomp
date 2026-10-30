@@ -135,7 +135,7 @@ void Textload_PrepareTextureVariation(s32 textureResource, Resource *handle) {
 #include <ultra64.h>
 #include <PR/gbi.h>
 
-extern void Cache_MarkResourceInUse(s32 heap, void **resource);
+extern void Cache_MarkResourceInUse(s32, struct CacheResourceNode *);
 extern Gfx *g_displayListCursor;
 extern int g_textureCacheResource;
 extern s32 g_textureCacheFrame;

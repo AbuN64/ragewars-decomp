@@ -12,7 +12,7 @@ extern char g_profileModeOnePlayedLevels[];
 extern s32 SmpFade_CreateFadeWidget(s32, s32);
 extern s32 Defs_TestBit(char *, s32);
 extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
-extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 
 /* Resource ids of this screen are numbered per version (relative to us): eu-x 4, de -2. */
 static inline s32 unlockRes(s32 id) {

@@ -54,7 +54,7 @@ extern u32 g_renderFrameBufferCount;
 extern void *g_colorImageBuffers[];
 extern void Sched_InitializeSchedulerThread(Panel *, s32, s32, s32, u8);
 #include "SCHED/osscremoveclient.H"
-extern void Items_ResetGameOptions(void *);
+extern void Items_ResetGameOptions(struct COptions *options);
 
 typedef Node_Pak_CountLiveNodes TimingQueue;
 typedef struct TimingWorld {
@@ -96,7 +96,7 @@ extern int Control_IsSnapshotActive(void);
 
 extern char g_buildVersionTextBuffer[];
 extern char g_buildVersionFormat[];
-extern char g_buildDateTimeTextRev1[];
+extern const char g_buildDateTimeTextRev1[];
 extern char g_buildVersionSuffix[];
 
 extern void SetN64_SelectSpawnAfterCredits(void *session, s32 selectionValues);

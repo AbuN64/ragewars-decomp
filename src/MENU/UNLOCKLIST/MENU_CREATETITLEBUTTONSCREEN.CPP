@@ -16,7 +16,7 @@ extern struct MenuMenuCreateTitleButtonScreen *Cache_AllocateMemory(s32);
 
 extern void *SmpFade_CreateFadeWidget(s32, s32);
 
-extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 
 extern struct ResourceSmpFlickerCreateFlickerWidget *Node_FindWidgetByResourceId(void *, s32);
 

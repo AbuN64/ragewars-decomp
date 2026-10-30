@@ -59,8 +59,8 @@ typedef char g_FrontendApplymodechoiceWords1SizeCheck[(sizeof(g_FrontendApplymod
 /* 800E4604.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-extern char g_playerSettingsFirstChoiceText[];
-extern char g_playerSettingsSecondChoiceText[];
+extern char *g_playerSettingsFirstChoiceText[];
+extern char *g_playerSettingsSecondChoiceText[];
 extern char g_playerSettingsSlotNumberFormat[];
 #if defined(VERSION_DE)
 struct {

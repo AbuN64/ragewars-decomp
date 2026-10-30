@@ -4,7 +4,7 @@
 #include "COMMON/SESSION_STATE.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char g_playerMenuValueFormat[];
+extern const char g_playerMenuValueFormat[];
 #endif
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"

@@ -1,7 +1,7 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
 extern char g_backdropTextLines[];
 extern char g_backdropTextLinesDe[];
-extern char g_creditsLocalizedLines[];
+extern char **g_creditsLocalizedLines[];
 extern char g_optionsLocalizedShortcutText[];
 extern char g_optionsSecondListTertiaryLabels[];
 extern char g_optionsSecondaryLocalizedLabels[];

@@ -96,25 +96,25 @@ extern void SetN64_DrawMode15(void);
 
 extern void SetN64_DrawMode6(void);
 
-extern void SetN64_AdvanceToModeEight();
+extern void SetN64_AdvanceToModeEight(struct GameSession *session);
 
-extern void SetN64_ResetMode11Items();
+extern void SetN64_ResetMode11Items(s32 sessionAddress);
 
-extern void SetN64_ResetMode9Items();
+extern void SetN64_ResetMode9Items(s32 sessionAddress);
 
 extern void SetN64_UpdateMode6(void);
 
-extern void SetN64_DrawMode8Session();
+extern void SetN64_DrawMode8Session(struct GameSession *session);
 
-extern void SetN64_DrawMode9Session();
+extern void SetN64_DrawMode9Session(void *session);
 
-extern void SetN64_HandleMode7Transition();
+extern void SetN64_HandleMode7Transition(struct GameSession *session);
 
 extern void SetN64_UpdateMode8(void);
 
 extern void SetN64_ResetMode4Effects(void);
 
-extern void SetN64_ResetMode5Items();
+extern void SetN64_ResetMode5Items(s32 sessionAddress);
 
 extern void SetN64_SetMode7AudioState(void);
 
@@ -132,9 +132,9 @@ extern void SetN64_EmptySessionHookRev1C(void);
 
 extern void SetN64_EmptySessionHookRev1B(void);
 
-extern void SetN64_EnterPendingSessionMode();
+extern void SetN64_EnterPendingSessionMode(void *gameSession);
 
-extern void SetN64_InitializeMode16Credits();
+extern void SetN64_InitializeMode16Credits(s32 sessionAddress);
 
 extern void SetN64_InitializeMode17Credits(s32 sessionAddress);
 
@@ -153,15 +153,15 @@ struct RoundSessionItemStateView {
     s32 selectionKeyBase;
 };
 
-extern void SetN64_ResetMode10Items();
+extern void SetN64_ResetMode10Items(s32 sessionAddress);
 
-extern void SetN64_DrawMode11Session();
+extern void SetN64_DrawMode11Session(void *session);
 
-extern void SetN64_DrawMode10Session();
+extern void SetN64_DrawMode10Session(void *session);
 
-extern void SetN64_DrawMode12Session();
+extern void SetN64_DrawMode12Session(void *session);
 
-extern void SetN64_ResetMode12Items();
+extern void SetN64_ResetMode12Items(int sessionAddress);
 
 /* The loading-screen setup routine and the view-matrix array it fills sit at different addresses in each cartridge. */
 #if defined(VERSION_DE)

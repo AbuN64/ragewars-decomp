@@ -1,5 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
-extern char g_actorRadialDirections[];
+extern struct CVector3_t g_actorRadialDirections[];
 extern char g_tlbMissExceptionVector[];
 #include "include_asm.h"
 

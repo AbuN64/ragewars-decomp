@@ -37,7 +37,7 @@ extern void List_MoveIntrusiveToHead(void *, s32);
 
 extern void Cache_ReleaseResourceCompletely(void *, void *);
 
-extern char s_headerText;
+extern const char s_headerText[];
 
 /* Allocates a four-byte probe from Cache_RequestResource to read a count, frees it under the g_resourceHeapLockUsers lock, then allocates count*4+15 rounded to eight bytes and stores its first word through handle, returning the allocation. Adapted from Cache_RequestWordCountedResource with the null checks removed, tag 0x1B and flag 1 passed as the fifth and ninth arguments, and the constant 1 held in a local changed. */
 

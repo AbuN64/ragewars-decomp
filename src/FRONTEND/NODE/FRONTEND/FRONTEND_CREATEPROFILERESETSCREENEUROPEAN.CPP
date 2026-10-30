@@ -66,8 +66,8 @@ unsigned int k_FrontendCreateprofileresetscreeneuropeanEncodedWords[1] = {
 extern void *Cache_AllocateMemory(s32);
 extern void Player_InitializeProfile(Profile *);
 extern Pulse *g_profileResetScreen;
-extern void Pools_ResetActorPools(void *, s32);
-extern void Player_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(struct DraftOwnerA370 *owner, s32 actorCount);
+extern void Player_InitializePlayerPool(struct CPlayerPool_t *pool, s32 count, s32 force_active);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 Cache_GetResourceActivityState(void);
 extern void Cache_SetResourceActivityState(u32);

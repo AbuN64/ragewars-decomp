@@ -258,7 +258,7 @@ struct TintedPlayerRenderActor;
 typedef struct TintedPlayerRenderActor TintedPlayerRenderActor;
 
 typedef void (*ActorBoneBoundsCallback)(void *, void *);
-extern void Graphu64_TransformBoundingBox(void *transform, int box, void *out);
+extern void Graphu64_TransformBoundingBox(f32 m[4][4], struct ModelBoundingBox *box, struct ModelBoundingBox *out);
 
 extern void Gobjinst_AdvanceActorRootMotion(void *);
 extern void Scene_UpdateMovementTriggers(struct Shared_World *, struct LevelActor *, CVector3 *, CVector3 *);

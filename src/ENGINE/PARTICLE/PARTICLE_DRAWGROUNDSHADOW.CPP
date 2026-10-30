@@ -32,7 +32,7 @@ extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 
 extern s32 Graphu64_LimitVectorLength(CVector3 *, f32);
 
-extern void MatrixFromQuaternion(CQuatern *, f32 *);
+extern void MatrixFromQuaternion(f32 *q, f32 *m);
 
 extern void ScaleMatrixLocal(f32 *, f32, f32, f32);
 
@@ -47,9 +47,9 @@ extern s32 g_playerWeaponClassMode;
 
 extern char s_particleModelResourceTag;
 
-extern char g_simpPartModelsIndexText;
+extern const char g_simpPartModelsIndexText[];
 
-extern char s_simpPartModelText;
+extern const char s_simpPartModelText[];
 
 extern char g_simpleModelResourceCallbackAddress;
 

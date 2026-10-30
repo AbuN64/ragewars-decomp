@@ -13,10 +13,10 @@ int Cinema_IsSequenceInWindow(void);
 void Cache_SetResourceActivityState(unsigned int);
 void Menu_SetFocusedElement(s32);
 void Tsmos_ActivateControllerState(void);
-void SmpFlicker_StartFlicker(void *, int);
-s32 Frontend_GetMenuImageState(Shared_OptionsScreen *);
-void Player_InitializePlayerPool(void *, s32, s32);
-void Pools_ResetActorPools(void *, s32);
+void SmpFlicker_StartFlicker(struct FlickerStartView *object, s32 count);
+s32 Frontend_GetMenuImageState(s32 *record);
+void Player_InitializePlayerPool(struct CPlayerPool_t *pool, s32 count, s32 force_active);
+void Pools_ResetActorPools(struct DraftOwnerA370 *owner, s32 actorCount);
 void Scene_LoadLevelResources(void *, s32, s32);
 void SmXlate_SwitchScreen(s32);
 

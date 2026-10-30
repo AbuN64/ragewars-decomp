@@ -68,7 +68,7 @@ extern void Player_BuildPlayerOrientation(void *, CQuatern *);
  * angle that fades with the fourth root of how far off-axis it is. The applied correction is also written
  * to the optional assist quaternion (identity when nothing is in range). */
 
-extern void MatrixFromQuaternion(CQuatern *, f32 *);
+extern void MatrixFromQuaternion(f32 *q, f32 *m);
 
 extern f32 Gobjinst_GetActorHeight(char *);
 

@@ -120,7 +120,7 @@ struct CDLight_t {
 };
 struct CGameDynamicLight_t;
 
-extern float g_lightDirectionLength;
+extern const float g_lightDirectionLength;
 
 struct ObjA;
 
@@ -210,31 +210,31 @@ struct Shared_World;
 extern void **Cache_RequestWordCountedResource(s32,void **,s32,void *,s32);
 extern s32 g_sceneParticleEffectSectionTag;
 extern s32 g_sceneGeometrySectionTag;
-extern char g_cartridgeIndex;
+extern const char g_cartridgeIndex[];
 extern char g_sceneDirectoryResourceTag;
-extern char g_textureSetsIndex;
-extern char g_objectTypesText;
-extern char g_objectsIndex;
+extern const char g_textureSetsIndex[];
+extern const char g_objectTypesText[];
+extern const char g_objectsIndex[];
 extern char g_sceneGeometryResourceTag;
-extern char g_particleEffects;
-extern char g_binariesIndexText;
-extern char g_particleSwooshes;
+extern const char g_particleEffects[];
+extern const char g_binariesIndexText[];
+extern const char g_particleSwooshes[];
 extern char g_sceneSectionTwelveResourceTag;
-extern char g_warpDests;
-extern char g_curves;
-extern char g_rumbleLabels;
+extern const char g_warpDests[];
+extern const char g_curves[];
+extern const char g_rumbleLabels[];
 extern char g_sceneSectionFifteenResourceTag;
-extern char g_graphicsetType;
-extern char g_graphicsetIndex;
-extern char g_cinemasIndexText;
-extern char g_linkGroupTypes;
-extern char g_constructBlLevelDataIndex;
-extern char g_bloodlustWeaponData;
+extern const char g_graphicsetType[];
+extern const char g_graphicsetIndex[];
+extern const char g_cinemasIndexText[];
+extern const char g_linkGroupTypes[];
+extern const char g_constructBlLevelDataIndex[];
+extern const char g_bloodlustWeaponData[];
 
 extern void Geometry_ExpandModelWithSentinel(s32, s32);
-extern u8 g_constructMapObjectIndex[];
-extern u8 g_constructMapSimpModelsIndex[];
-extern u8 g_constructMapSimpleModel[];
+extern const u8 g_constructMapObjectIndex[];
+extern const char g_constructMapSimpModelsIndex[];
+extern const u8 g_constructMapSimpleModel[];
 
 typedef struct CollisionBuildVertex {
     f32 x;

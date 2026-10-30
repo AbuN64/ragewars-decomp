@@ -186,7 +186,7 @@ f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 di
     return heading;
 }
 
-extern void Graphu64_NormalizeVec3(CVector3 *);
+extern void Graphu64_NormalizeVec3(f32 *vectorComponents);
 extern f32 Gobjinst_GetActorHeight(void *);
 
 /* Barrel_GetSignedAngleToPoint's body: the signed angle between the actor's facing and the direction to the point. */

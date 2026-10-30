@@ -502,7 +502,7 @@ case 7:
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
 extern f32 g_playerDamageRumbleScale, g_playerDamageRumbleMaximum;
-extern s32 g_playerHealthDropMessage;
+extern unsigned char * g_playerHealthDropMessage;
 extern char g_matchRoundCounters[];
 extern s32 Playerai_IsRoundEndState(void *);
 extern s32 Player_GetMaxHealth(void *);

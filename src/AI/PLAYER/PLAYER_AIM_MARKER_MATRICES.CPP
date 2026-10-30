@@ -32,7 +32,7 @@ extern void ScaleMatrixLocal(Matrix *, f32, f32, f32);
 extern f32 Graphu64_GetPointDistance(CVector3 *, CVector3 *);
 extern void Graphu64_ConvertMatrixToFixed(Matrix *, Matrix *);
 extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
-extern void MatrixFromQuaternion(CQuatern *, Matrix *);
+extern void MatrixFromQuaternion(f32 *q, f32 *m);
 extern void PitchMatrixLocal(Matrix *, f32);
 extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);

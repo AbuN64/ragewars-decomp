@@ -65,5 +65,5 @@ struct Plane {
 
 
 
-s32 InstHdr_UsesDefaultDefinitionHandling(void *);
+int InstHdr_UsesDefaultDefinitionHandling(struct LevelActor *source);
 #endif

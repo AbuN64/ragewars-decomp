@@ -1,5 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
-extern char g_weaponChargeSpinTarget[];
+extern s32 g_weaponChargeSpinTarget;
 
 #if defined(VERSION_US_REV1)
 RestConstantsEncodedWordsBlock13Layout406 k_ConstantsEncodedWordsBlock13 = {

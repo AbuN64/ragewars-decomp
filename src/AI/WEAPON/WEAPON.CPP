@@ -108,8 +108,8 @@ s32 Weapon_IsSpecialSwitchGroup(s32 weaponType) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_WORLDFUNC.H"
-extern char *g_weaponLockedNoticeTextEu[];
-extern char *g_weaponLockedNoticeTextEuX[];
+extern u8 *g_weaponLockedNoticeTextEu[];
+extern u8 *g_weaponLockedNoticeTextEuX[];
 extern s32 Player_GetProfileAchievementFlag(Profile *, s32);
 extern s32 Player_GetPlayerIndex(Shared_MenuData *, WeaponPlayerPermissionView *);
 extern void Gsky_PostTargetedScreenMessage(Shared_MenuObject *, void *, char *, s32, f32);
@@ -205,7 +205,7 @@ void Weapon_InitializeChargeForWeaponFive(Shared_ActorView *actorView, WeaponFir
 }
 
 /* 80231F5C_8.CPP */
-extern s32 Menu_CountLiveNodes(void *head);
+extern int Menu_CountLiveNodes(struct CMenu_t **head);
 extern s32 Playerai_GetWeaponAmmo(void *actor, s16 weaponId);
 
 void Weapon_DrawWeaponLookupModel(void *actorStorage, Dest *weaponState, Lookup *lookup) {

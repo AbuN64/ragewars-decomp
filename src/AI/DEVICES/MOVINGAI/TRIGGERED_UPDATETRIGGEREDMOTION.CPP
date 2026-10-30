@@ -259,7 +259,7 @@ void * Playerai_GetRouteCursorPoint(struct Cursor *);
 
 void *Playerai_GetRouteCursorNextPoint(struct Cursor *);
 
-void Graphu64_SubtractVectors(void *, void *, void *);
+void Graphu64_SubtractVectors(struct CVector3_t *difference, struct CVector3_t *leftVector, struct CVector3_t *rightVector);
 
 f32 Gu_Sqrtf(f32);
 
@@ -276,7 +276,7 @@ struct TriggeredMotionSoundOption {
     s8 kind;
 };
 
-extern char g_triggeredMotionDispatchTable;
+extern char g_triggeredMotionDispatchTable[];
 
 extern char g_triggeredUpdateRomEntry;
 

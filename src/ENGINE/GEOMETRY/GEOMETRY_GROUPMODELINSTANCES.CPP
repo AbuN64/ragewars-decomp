@@ -14,7 +14,7 @@
 
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
-extern void Cache_MarkResourceInUse(s32 heap, void **resource);
+extern void Cache_MarkResourceInUse(s32, struct CacheResourceNode *);
 extern s32 Geometry_ApplyMaterialLighting(s32 matrix, s32 lights, void *material);
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 

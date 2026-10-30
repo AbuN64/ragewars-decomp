@@ -139,16 +139,16 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
 
 
 
-extern s32 Frontend_GetMenuImageState(void *);
+extern s32 Frontend_GetMenuImageState(s32 *record);
 
 extern void Frontend_DrawMenuImage(void *);
 
 
 
 
-extern void Pools_ResetActorPools(void *, s32);
+extern void Pools_ResetActorPools(struct DraftOwnerA370 *owner, s32 actorCount);
 
-extern void Player_InitializePlayerPool(void *, s32, s32);
+extern void Player_InitializePlayerPool(struct CPlayerPool_t *pool, s32 count, s32 force_active);
 
 extern void Scene_LoadLevelResources(void *, s32, s32);
 

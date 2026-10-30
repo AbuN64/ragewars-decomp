@@ -11,9 +11,9 @@
 #include "TYPES.H"
 
 
-void Pools_ResetActorPools(void *owner, s32 count);
+void Pools_ResetActorPools(struct DraftOwnerA370 *owner, s32 actorCount);
 
-void Player_InitializePlayerPool(void *pool, s32 count, s32 force_active);
+void Player_InitializePlayerPool(struct CPlayerPool_t *pool, s32 count, s32 force_active);
 
 void SetN64_DrawColorRectangle(void *unused, u8 *color, s32 left, s32 top, s32 right, s32 bottom) {
     if (color[3] != 0) {

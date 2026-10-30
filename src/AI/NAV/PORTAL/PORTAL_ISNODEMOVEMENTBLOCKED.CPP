@@ -14,7 +14,7 @@
 extern struct {s32 *pointStorage;} g_navigationGraph;
 
 
-extern void Graphu64_SubtractVectors(CVector3 *out, void *leftVector, void *rightVector);
+extern void Graphu64_SubtractVectors(struct CVector3_t *difference, struct CVector3_t *leftVector, struct CVector3_t *rightVector);
 
 /** Return the index of the link joining two nodes, accepting reversed links of two-way types, or -1. */
 

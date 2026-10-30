@@ -12,7 +12,7 @@ extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_EnableTransition(void *);
 extern void SmpButton_WrapButtonWidget(s32);
 extern void *Node_FindWidgetByResourceId(void *, s32);
-extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 /* Builds a three-row slider popup in its 0x24-byte state g_playerCountScreen: title/list from the ids at 0x398, the numeric
    readout item at 0x39D showing the text at +0x14 formatted with s_playerCountFormat. Returns 0. */

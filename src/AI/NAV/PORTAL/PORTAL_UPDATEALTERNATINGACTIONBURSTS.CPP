@@ -9,7 +9,7 @@
 #include "AI/NAV/PORTAL_LOADCOLLISIONTABLE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-extern f32 Barrel_GetSignedAngleToPoint(Player *, CVector3);
+extern f32 Barrel_GetSignedAngleToPoint(void *actor, struct CVector3_t point);
 
 /* Runs a computer player's engagement timer: while the countdown at 0x2E4 is positive it rerolls the
    wait at 0x2E8 as the config's base at 8 plus a random share (scale g_timedActionWaitRandomScale) of its spread at 0xC
@@ -40,7 +40,7 @@ extern void Particle_FindNearestForeignEffectDistance(struct EffectSystem *effec
 extern f32 Portal_GetEngagementDistance(void *controller);
 
 
-extern f32 Barrel_GetSignedAngleToPoint(Player *actor, CVector3 point);
+extern f32 Barrel_GetSignedAngleToPoint(void *actor, struct CVector3_t point);
 
 void Portal_DispatchActorBehavior(void *controller)
 {

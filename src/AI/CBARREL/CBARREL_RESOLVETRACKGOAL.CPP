@@ -10,7 +10,7 @@
 extern s32 Cbarrel_UpdateTrackerAim(BarrelAnchorActorView *actor, Tracker *tracker, BarrelAnchorActorView *target);
 extern BarrelAnchorActorView *Cbarrel_SelectCombatTarget(BarrelAnchorActorView *actor, Tracker *tracker, s32 lineOfSight, s32 combat);
 extern f32 Barrel_FindClearAimAngle(BarrelAnchorActorView *actor, CVector3 pos, BarrelAnchorActorView *target, f32 distance);
-extern f32 Barrel_GetSignedAngleToPoint(BarrelAnchorActorView *actor, CVector3 pos);
+extern f32 Barrel_GetSignedAngleToPoint(void *actor, struct CVector3_t point);
 struct Cursor;
 extern Location *Playerai_GetRouteCursorPoint(struct Cursor *slot);
 extern f32 Gobjinst_GetActorHeight(BarrelAnchorActorView *actor);

@@ -49,7 +49,7 @@
 #endif
 
 extern void Tsmos_ActivateControllerState(void);
-extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 extern s32 SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_EnableTransition(s32);
 extern ChoiceMenuState *g_sixChoiceMenuState;
@@ -79,7 +79,7 @@ s32 Menu_CreateSixChoiceMenu(s32 root) {
 }
 
 /* 80420E90_3.CPP */
-extern void SmpSlider_SetTransitionMode(void *, s32);
+extern void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode);
 
 /* Releases the object g_sixChoiceMenuState holds through Cache_FreeMemory, clears g_sixChoiceMenuState and returns zero. */
 

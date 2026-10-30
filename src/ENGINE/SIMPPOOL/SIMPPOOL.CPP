@@ -14,7 +14,7 @@ s32 Cinema_IsSequenceInWindow();                                /* extern */
 unsigned int Cinema_GetPlaybackPauseState(void);                                /* extern */
 s32 Cinema_GetSequenceRequest(void);                                /* extern */
 void Track_RequestCameraRefresh(void *);                            /* extern */
-s32 Menu_CountLiveNodes(void *);
+int Menu_CountLiveNodes(struct CMenu_t **head);
 
 
 extern SequencePromptStateView g_matchEndingTeamWheelClose;

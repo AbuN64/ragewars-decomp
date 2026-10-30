@@ -2,7 +2,7 @@
 extern char g_artsendNextTextureHoldCount[];
 extern char g_artsendToggleButtonHeld[];
 extern char g_backdropTextLines[];
-extern char g_creditsLocalizedLines[];
+extern char **g_creditsLocalizedLines[];
 extern char g_optionsSecondaryLocalizedLabels[];
 extern char g_pakNoteTypeFourteenLabel[];
 extern char g_pickupAmmoDefinitions[];

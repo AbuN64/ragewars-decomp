@@ -169,7 +169,7 @@ void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 tex
 
 #include "COMMON/DISPLAY.H"
 
-extern void Cache_MarkResourceInUse(s32, void **);
+extern void Cache_MarkResourceInUse(s32, struct CacheResourceNode *);
 
 /* Draws a pack resource model as a translucent decal: skips when fewer than 3000 display-list commands are
  * left, loads the matrix (or segment 1), points segment 2 at the textures (the sixth argument overrides the

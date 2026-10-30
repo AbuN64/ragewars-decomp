@@ -24,7 +24,7 @@ extern char g_playerViewRenderContext;
 
 extern CQuatern Gobjinst_BuildActorAimQuaternion(char *);
 
-extern void MatrixFromQuaternion(CQuatern *, f32 *);
+extern void MatrixFromQuaternion(f32 *q, f32 *m);
 
 
 extern char *Playerai_FindNearestPlayer(void *, CVector3);

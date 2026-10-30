@@ -296,7 +296,7 @@ extern void Player_BuildPlayerViewTransform(char *, Matrix *);
 
 extern void Player_BuildPlayerOrientation(char *object, CQuatern *output);
 
-extern void MatrixFromQuaternion(void *, void *);
+extern void MatrixFromQuaternion(f32 *q, f32 *m);
 
 extern void TranslateMatrix(char *, f32, f32, f32);
 

@@ -46,7 +46,7 @@ extern void Graphu64_GetMatrixTranslation(f32 *matrix, CVector3 *position);
 
 extern char *Playerai_GetFirstPlayer(void *players);
 
-extern void Graphu64_SubtractVectors(CVector3 *out, void *a, CVector3 *b);
+extern void Graphu64_SubtractVectors(struct CVector3_t *difference, struct CVector3_t *leftVector, struct CVector3_t *rightVector);
 
 
 void Geometry_SetupIntensityPass(void) {
@@ -341,7 +341,7 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
 #include "COMMON/DISPLAY.H"
 extern u32 g_displayListCapacityUsRev1;
 extern CGameStatus g_matchRoundCounters;
-extern void Cache_MarkResourceInUse(s32 heap, void **resource);
+extern void Cache_MarkResourceInUse(s32, struct CacheResourceNode *);
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 /* Draws an actor model's parts, choosing each part by the 0x38 bits of its material byte 6: on the special
  * character 0x12 the part must equal the bits for its variant (or be a fade/bonus part whose flag is set),

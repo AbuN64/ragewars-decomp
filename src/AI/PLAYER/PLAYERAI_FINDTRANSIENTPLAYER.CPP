@@ -39,7 +39,7 @@ extern void Geometry_SetCombineMode(u32);
 extern f32 g_playerDamageFixedPointScale, g_playerDamageBaseScale, g_playerDamageDifficultyScale, g_playerDamagePrimaryFixedPointScale, g_playerDamagePrimaryModeScale, g_playerDamageSecondaryFixedPointScale, g_playerDamageSecondaryModeScale, g_playerDamageAndDistanceConstants;
 
 
-extern void Cache_MarkResourceInUse(s32 unused0, void *resource);
+extern void Cache_MarkResourceInUse(s32, struct CacheResourceNode *);
 
 extern void Gobjinst_RotatePoseMatrixBuffers(void *actorRenderState);
 

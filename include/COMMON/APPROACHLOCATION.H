@@ -9,7 +9,7 @@
 
 typedef struct { CVector3 pos; s32 room; } ApproachLocation;
 extern f32 k_barrelTargetAimOffsets[],g_actorApproachRadiusMargin;
-extern f32 Barrel_GetSignedAngleToPoint(TrackerAimActorView *,CVector3);
+extern f32 Barrel_GetSignedAngleToPoint(void *actor, struct CVector3_t point);
 extern f32 Gobjinst_GetActorRadius(Actor_u1 *);
 extern f32 Graphu64_GetHorizontalAngle(CVector3 *);
 struct Cursor;

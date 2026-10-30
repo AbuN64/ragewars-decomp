@@ -31,7 +31,7 @@ s32 Unicol_MoveActorWithCollision(Shared_Particle *particle, CVector3 pos, s32 *
 
 f32 Gobjinst_GetActorHeight(SharedPlayer *player);
 
-void Graphu64_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
+void Graphu64_SubtractVectors(struct CVector3_t *difference, struct CVector3_t *leftVector, struct CVector3_t *rightVector);
 
 
 f32 Graphu64_GetSquaredDistance(CVector3 *a, CVector3 *b);
@@ -647,7 +647,7 @@ extern void Fx_DetachParticleSwooshes(void *, void *);
 extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
 extern LiveParticle *g_particleLinkedAttachmentEffect;
 
-s32 InstHdr_UsesDefaultDefinitionHandling(void *);
+int InstHdr_UsesDefaultDefinitionHandling(struct LevelActor *source);
 void Graphu64_ConvertMatrixToFloat(f32 *, void *);
 void Gobjinst_ApplyImpactBoneTwist(void *, void *, void *, CVector3, CVector3, s32);
 void Graphu64_InvertAffineMatrix(f32 *, f32 *);

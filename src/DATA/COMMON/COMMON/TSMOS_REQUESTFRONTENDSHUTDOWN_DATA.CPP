@@ -1,6 +1,6 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
 extern char g_audioDecodedSampleSlots[];
-extern char g_audioTransformFftTable[];
+extern struct FftTables * g_audioTransformFftTable;
 extern char g_tlbMissExceptionVector[];
 #include "TYPES.H"
 

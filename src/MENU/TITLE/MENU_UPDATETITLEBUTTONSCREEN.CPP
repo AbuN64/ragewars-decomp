@@ -25,7 +25,7 @@ s32 SmpSlider_GetTransitionMode(void *);
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object g_titleButtonScreen points to to -1 and
    calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
-extern void SmpSlider_SetTransitionMode(void *, s32);
+extern void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode);
 
 /* Calls MarkMenuEventHandled; when Menu_GetFocusedElementId reports 0x3D0 it sets the word at 0x10 of the menu block
    g_titleButtonScreen points to to 7 and clears five bytes at g_profileModeOnePlayedLevels through XPlus_FillMemory, for 0x3D1 it

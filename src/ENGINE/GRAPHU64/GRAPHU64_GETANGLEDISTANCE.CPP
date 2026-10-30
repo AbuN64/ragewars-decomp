@@ -43,7 +43,7 @@ f32 Graphu64_GetHorizontalAngle(CVector3 *direction) {
 }
 
 
-extern f32 g_vectorNormalizeUnitScale;
+extern const float g_vectorNormalizeUnitScale;
 
 /** Wrap an angle into [-pi, pi]. */
 static inline f32 WrapAngle(f32 angle) {

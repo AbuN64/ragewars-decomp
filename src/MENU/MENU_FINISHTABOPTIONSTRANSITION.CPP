@@ -27,15 +27,15 @@ extern struct ScreenMenuFinishTabOptionsTransition *g_optionsShortcutScreen;
 
 
 
-extern s32 Frontend_GetMenuImageState(struct ScreenMenuFinishTabOptionsTransition *);
+extern s32 Frontend_GetMenuImageState(s32 *record);
 extern void Frontend_DrawMenuImage(struct ScreenMenuFinishTabOptionsTransition *);
 extern void Widget_SetWidgetFlag08(void *, s32);
 extern s32 Track_RequestTrackByKey(s32);
 extern void MarkMenuEventHandled(void);
 
 extern void Tsmos_RequestFrontendShutdown(void);
-extern void Pools_ResetActorPools(void *, s32);
-extern void Player_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(struct DraftOwnerA370 *owner, s32 actorCount);
+extern void Player_InitializePlayerPool(struct CPlayerPool_t *pool, s32 count, s32 force_active);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern void Stage_StartConfiguredMatch(void);
 

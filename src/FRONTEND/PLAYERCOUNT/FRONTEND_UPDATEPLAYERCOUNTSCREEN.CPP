@@ -10,7 +10,7 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 extern SettingsScreenState *g_playerCountScreen;
-extern void SmpSlider_SetTransitionMode(void *, s32);
+extern void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode);
 
 /* Releases the object g_playerCountScreen holds through Cache_FreeMemory, clears g_playerCountScreen and returns zero. */
 

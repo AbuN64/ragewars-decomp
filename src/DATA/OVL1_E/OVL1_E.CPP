@@ -1,7 +1,7 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
 extern char g_collisionSurfaceExcludedFromTrace[];
 extern char g_globalGameplayFlags[];
-extern char g_pagerPageCounters[];
+extern u16 g_pagerPageCounters[];
 extern char g_secondaryCollisionContext[];
 extern char g_supportingPlatformCollisionQuery[];
 #include "DATA/OVL1_E/g_PlayerStateSpecialCallbacks05PointerWords1_Ovl1E.H"

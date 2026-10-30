@@ -15,8 +15,8 @@ unsigned char g_MenuInitializeoptionssceneTrailingBytes[8] = { 0x8F, 0xBF, 0x00,
    0x27D into g_world_AchieveUpdateresultsscreen through Scene_SetSelection_MenuInitializeoptionsscene, and calls Cache_SetResourceActivityState with one when Cache_GetResourceActivityState
    reports nothing. */
 
-extern void Pools_ResetActorPools(void *, s32);
-extern void Player_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(struct DraftOwnerA370 *owner, s32 actorCount);
+extern void Player_InitializePlayerPool(struct CPlayerPool_t *pool, s32 count, s32 force_active);
 extern s32 Track_RequestTrackByKey(s32);
 extern void Scene_SetSelection(void *, s32, s32);
 extern s32 Cache_GetResourceActivityState(void);

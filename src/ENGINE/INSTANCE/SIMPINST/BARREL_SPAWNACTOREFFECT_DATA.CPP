@@ -124,7 +124,7 @@ void Simpinst_BuildObjectTransform(void *staticObject) {
     Graphu64_ConvertMatrixToFixed(matrix, &((StaticObject *)o)->matrices[g_lightingBufferIndex]);
 }
 
-extern s32 Cache_RequestWordCountedResource(s32, void **, s32, void *, s32);
+extern void **Cache_RequestWordCountedResource(s32 unusedCache, void **resourceHandle, s32 resourceKey, void *loadTag, s32 direct);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 

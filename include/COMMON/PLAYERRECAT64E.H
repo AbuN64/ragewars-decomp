@@ -60,9 +60,9 @@ struct Shared_PakMenu;
 extern const f32 g_playerItemAlphaScale[2];
 extern const f32 g_playerItemDisabledAlphaScale;
 
-extern char g_debugVariableValueFormat[];
+extern const char g_debugVariableValueFormat[];
 extern char g_debugVariableNamedFormat[];
-extern char g_debugVariableUnnamedFormat[];
+extern const char g_debugVariableUnnamedFormat[];
 extern char g_debugVariableValueBuffer[];
 extern char g_debugVariableLabelBuffer[];
 #endif

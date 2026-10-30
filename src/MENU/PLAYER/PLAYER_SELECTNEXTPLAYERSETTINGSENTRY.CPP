@@ -18,7 +18,7 @@ extern struct MenuStepState *g_playerSettingsScreen;
 
 extern void MarkMenuEventHandled();
 
-extern void SmpSlider_SetTransitionMode(void *, s32);
+extern void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode);
 
 
                                  /* extern */

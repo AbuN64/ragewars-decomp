@@ -67,13 +67,13 @@ extern s32 g_selectionMessageReply[];
 extern void SmXlate_SwitchScreen(s32);
 
 
-extern void SmpFlicker_StartFlicker(void *, s32);
+extern void SmpFlicker_StartFlicker(struct FlickerStartView *object, s32 count);
 
 extern void Tsmos_ActivateControllerState(void);
 
-extern s32 SmpFlicker_IsFlickerIdle(void *);
+extern s32 SmpFlicker_IsFlickerIdle(struct FlickerActivityView *object);
 
-extern void SmpFlicker_RestoreFlickerValue(void *);
+extern void SmpFlicker_RestoreFlickerValue(struct FlickerRestoreView *source);
 
 s32 Results_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta) {
     s32 clock;

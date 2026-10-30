@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 extern struct StateMenuUpdateScrollingChoiceScreen *g_unlockGatedListScreen;
-extern void SmpSlider_SetTransitionMode(void *, s32);
+extern void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode);
 extern s32 Defs_TestBit(void *, s32);
 
 /* Releases the object g_unlockGatedListScreen holds through Cache_FreeMemory, clears g_unlockGatedListScreen and returns zero. */

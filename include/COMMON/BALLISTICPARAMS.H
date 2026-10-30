@@ -58,7 +58,7 @@ void Playerai_ApplyPlayerForces(void *, void *);
 f32 Gobjinst_GetActorHeight(void *);
 f32 InstHdr_GetActorBaseOffset(void *);
 void Graphu64_InterpolateQuaternionWithLinearFallback(struct CQuatern_t *, f32, struct CQuatern_t *, struct CQuatern_t *);
-void Graphu64_ClampMotionLength(void *, f32);
+void Graphu64_ClampMotionLength(struct CVector3_t *motion, f32 maximumLength);
 void MatrixFromQuaternion(f32 *, f32 *);
 
 

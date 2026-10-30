@@ -19,7 +19,7 @@ extern void *SmpFade_CreateFadeWidget(s32 a, s32 b);
 extern void SmpSlider_EnableTransition(void *p);
 extern void SmpButton_WrapButtonWidget(s32 a);
 extern void *Node_FindWidgetByResourceId(s32 owner, s32 id);
-extern void *SmpFlicker_CreateFlickerWidget(s32 a, s32 b);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 extern void XStdio_FormatBuffer(void *a, void *b, s32 c);
 /* Builds the 0x24-byte state g_playerCountScreen from the resources 0x392 to 0x397, hooks its list at 0x14 into the part Node_FindWidgetByResourceId returns for 0x397 and registers it with XStdio_FormatBuffer; returns zero. */
 s32 Frontend_CreatePlayerCountScreenDe(s32 root) {

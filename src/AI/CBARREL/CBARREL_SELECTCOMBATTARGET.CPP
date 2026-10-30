@@ -19,7 +19,7 @@
 extern f32 Gobjinst_GetActorHeight(ActorBarrelIsTargetInViewCone *);
 extern f32 Gu_Sqrtf(f32);
 extern CQuatern Gobjinst_BuildActorAimQuaternion(ActorBarrelIsTargetInViewCone *);
-extern void MatrixFromQuaternion(CQuatern *, Matrix *);
+extern void MatrixFromQuaternion(f32 *q, f32 *m);
 
 s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarrelIsTargetInViewCone *target, f32 range, f32 across, f32 up)
 {

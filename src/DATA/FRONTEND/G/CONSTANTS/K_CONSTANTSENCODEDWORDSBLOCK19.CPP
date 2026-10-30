@@ -1,5 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
-extern char g_weaponChargeSpinTarget[];
+extern s32 g_weaponChargeSpinTarget;
 #include "DATA/OVL1_G/WEAPON_UPDATE_CALLBACK_ADDRESSES.H"
 
 #if defined(VERSION_US_REV1)

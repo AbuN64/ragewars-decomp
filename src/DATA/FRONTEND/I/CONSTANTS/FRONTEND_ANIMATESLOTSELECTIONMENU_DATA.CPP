@@ -9,10 +9,10 @@ extern char g_slotSelectionTextReferenceEu15[];
 extern char g_slotSelectionTextReferenceEu16[];
 extern char g_slotSelectionTextReferenceEu2[];
 extern char g_slotSelectionTextReferenceEu3[];
-extern char g_slotSelectionTextReferenceEu4[];
+extern u8 *g_slotSelectionTextReferenceEu4[];
 extern char g_slotSelectionTextReferenceEu5[];
 extern char g_slotSelectionTextReferenceEu6[];
-extern char g_slotSelectionTextReferenceEu7[];
+extern char *g_slotSelectionTextReferenceEu7[];
 extern char g_slotSelectionTextReferenceEu8[];
 extern char g_slotSelectionTextReferenceEu9[];
 extern char g_slotSelectionTextReferenceEuX1[];
@@ -259,10 +259,10 @@ extern char g_slotSelectionTextReferenceShared7[];
 extern char g_slotSelectionTextReferenceEu1[];
 extern char g_slotSelectionTextReferenceEu2[];
 extern char g_slotSelectionTextReferenceEu3[];
-extern char g_slotSelectionTextReferenceEu4[];
+extern u8 *g_slotSelectionTextReferenceEu4[];
 extern char g_slotSelectionTextReferenceEu5[];
 extern char g_slotSelectionTextReferenceEu6[];
-extern char g_slotSelectionTextReferenceEu7[];
+extern char *g_slotSelectionTextReferenceEu7[];
 extern char g_slotSelectionTextReferenceEu8[];
 extern char g_slotSelectionTextReferenceEu9[];
 extern char g_slotSelectionTextReferenceEu10[];
@@ -490,8 +490,8 @@ extern char g_slotSelectionTextReferenceEuX12[];
 extern char g_slotSelectionTextReferenceEuX13[];
 extern char g_slotSelectionTextReferenceEuX14[];
 extern char g_slotSelectionTextReferenceEuX15[];
-extern char g_slotSelectionTextReferenceEu4[];
-extern char g_slotSelectionTextReferenceEu7[];
+extern u8 *g_slotSelectionTextReferenceEu4[];
+extern char *g_slotSelectionTextReferenceEu7[];
 RestFrontendAnimateslotselectionmenuEncodedWordsLayout435 k_FrontendAnimateslotselectionmenuEncodedWords = {
     517,
     (void *)((char *)&g_slotSelectionTextReferenceEu7 + 0xC),

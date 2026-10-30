@@ -11,7 +11,7 @@ struct StateMenuConfirmGermanExtraOptions;
 extern struct StateMenuConfirmGermanExtraOptions *g_extraOptionsScreen;
 extern void MarkMenuEventHandled();
 
-extern void SmpSlider_SetTransitionMode(void *, s32);
+extern void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode);
 
 
 s32 Menu_ConfirmExtraOptions(void) {

@@ -1,5 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
-extern char g_actorRadialDirections[];
+extern struct CVector3_t g_actorRadialDirections[];
 #include "include_asm.h"
 #include "TYPES.H"
 #include "DATA/OVL1_C/NAVIGATION_CALLBACK_ADDRESS.H"

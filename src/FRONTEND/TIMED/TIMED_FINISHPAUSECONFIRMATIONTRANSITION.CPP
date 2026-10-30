@@ -13,10 +13,10 @@
 extern MenuRules *g_pauseTimedMenu;
 
 
-extern s32 Frontend_GetMenuImageState(void *);
+extern s32 Frontend_GetMenuImageState(s32 *record);
 extern void Frontend_DrawMenuImage(void *);
-extern void Pools_ResetActorPools(void *, s32);
-extern void Player_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(struct DraftOwnerA370 *owner, s32 actorCount);
+extern void Player_InitializePlayerPool(struct CPlayerPool_t *pool, s32 count, s32 force_active);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 Cache_GetResourceActivityState(void);
 extern void Cache_SetResourceActivityState(unsigned int);

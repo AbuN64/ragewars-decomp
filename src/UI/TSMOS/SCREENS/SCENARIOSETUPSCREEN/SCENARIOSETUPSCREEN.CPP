@@ -47,7 +47,7 @@ void Tsmos_ActivateControllerState(void);
 
 
 
-void SmpFlicker_StartFlicker(void *, int);
+void SmpFlicker_StartFlicker(struct FlickerStartView *object, s32 count);
 
 void SmXlate_SwitchScreen(s32);
 

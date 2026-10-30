@@ -147,7 +147,7 @@ typedef struct List List;
 
 
 
-extern s32 s_typeText;
+extern unsigned int s_typeText[];
 
 extern s32 g_typedWidgetEventActorKinds;
 

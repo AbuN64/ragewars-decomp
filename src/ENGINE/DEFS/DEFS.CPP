@@ -13,7 +13,7 @@
 /* 80265370.CPP */
 extern u32 osMemSize;
 
-extern char g_staticDataRegionStart;
+extern volatile s32 g_staticDataRegionStart;
 
 extern char g_staticDataRegionByteCount;
 

@@ -14,7 +14,7 @@ extern void Cache_ReleaseResource(s32, void *);
  * folding its loads across the snapshot header stores; the two head reads stay plain scalar loads (MIXED). */
 extern s32 g_worldSnapshotNoteBytes;
 extern void *g_pakSnapshotResourceHandle;
-extern u8 g_pakSingleSaveBlockName[];
+extern const char g_pakSingleSaveBlockName[];
 #include "COMMON/SHARED_GAMESLOT.H"
 extern f32 g_matchRoundCounters[];
 extern u8 g_worldSnapshotNoteData[];

@@ -16,7 +16,7 @@
 extern struct MatchOptionsScreen *g_matchOptionsScreen;
 extern s32 SmpButton_GetListSelection(void *);
 extern s32 N64Eng_GetNumericWidgetValue(void *);
-extern s32 Frontend_GetMenuImageState(void *);
+extern s32 Frontend_GetMenuImageState(s32 *record);
 
 /* Refreshes the option block g_gameSettings from the menu g_matchOptionsScreen points to: the bytes at 0x24 to
    0x27 from the values N64Eng_GetNumericWidgetValue reports for its items at 0x28, 0x24, 0x2C and 0x30, and the

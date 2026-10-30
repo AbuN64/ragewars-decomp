@@ -1633,7 +1633,7 @@ extern s32 g_lightingBufferIndex;
 extern f32 g_frameElapsedTime;
 extern char g_cameraViewDisplayListFirst;
 extern char g_cameraViewDisplayListSecond_de;
-extern void Cache_MarkResourceInUse(s32, s32);
+extern void Cache_MarkResourceInUse(s32, struct CacheResourceNode *);
 extern void Gsky_DrawViewportEffectNoOp(RacerViewport *, s32);
 extern void Menu_DispatchMenuListCallback(void *);
 extern s32 Cinema_IsSequenceInWindow(void);

@@ -24,7 +24,7 @@ extern MatchScoreScreen *g_matchResultBadgeScreen;
 
 extern void MarkMenuEventHandled();
 
-extern s32 Frontend_GetMenuImageState(void *);
+extern s32 Frontend_GetMenuImageState(s32 *record);
 
 extern s32 Menu_GetFocusedElementId();
 

@@ -63,7 +63,7 @@ extern void Player_UpdatePlayerCamera(SharedPlayer *, SharedPlayer *);
 extern s32 Control_IsStartPressed(Shared_Effect *);
 
 extern s32 Tsmos_IsFrontendActive(void);
-extern s32 Menu_CountLiveNodes(MenuWeaponsUpdateWorldPlayers *);
+extern int Menu_CountLiveNodes(struct CMenu_t **head);
 extern void TeamSelect_EmptyWeaponWheelHook(char *);
 
 extern void Playerai_UpdateRoundLimits(WorldWeaponsUpdateWorldPlayers *);
@@ -160,7 +160,7 @@ void Player_BuildPlayerOrientation(Player *player, CQuatern *output)
     MultiplyQuaternions(output, &rollRotation, &oriented);
 }
 
-extern void MatrixFromQuaternion(CQuatern *rotation, f32 matrix[4][4]);
+extern void MatrixFromQuaternion(f32 *q, f32 *m);
 extern void Graphu64_BuildTranslationMatrix(f32 matrix[4][4], f32 x, f32 y, f32 z);
 extern void Graphu64_MultiplyAffineMatrices(f32 out[4][4], f32 a[4][4], f32 b[4][4]);
 /* Builds a player view matrix: the eye height (base height plus camera offset less the crouch depth,

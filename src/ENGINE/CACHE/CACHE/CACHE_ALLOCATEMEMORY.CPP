@@ -12,7 +12,7 @@
 #include <PR/os_internal_si.h>
 
 extern OSMesgQueue g_resourceHeapLockQueue;
-extern s32 s_allocText;
+extern const char s_allocText[];
 
 extern struct CacheAllocationNodeView *Cache_AllocateResourceNodeStorage(s32, s32, u32, s32 *);
 extern void Cache_WaitForResourceSlotRelease(s32);

@@ -59,7 +59,7 @@
 #include "COMMON/OBJECTRECAT28.H"
 #include "COMMON/PLAYERRECAT64E.H"
 #include "COMMON/OBJB.H"
-extern char g_hudLivesMoverScript;
+extern s32 g_hudLivesMoverScript[];
 
 extern char g_systemBootMarker;
 extern char g_pakAllocateMenuFirstResource[];
@@ -70,7 +70,7 @@ extern int __osPiDevMgr;
 
 extern s64 g_schedulerGraphicsFirstStartTime;
 
-extern char g_hudScoreMoverScript;
+extern s32 g_hudScoreMoverScript[];
 
 extern s32 *g_frontendResourceChromaKeys;
 
@@ -123,7 +123,7 @@ extern float g_unreferencedFloatTable_eu[];
 
 extern s32 alResamplePull_Address;
 
-extern int g_ribbonBlendResourceFirstBase_de;
+extern char g_ribbonBlendResourceFirstBase_de[];
 
 extern char *g_matchResult5026TextEu[];
 
@@ -134,7 +134,7 @@ extern char k_stdioCarriageReturn;
 extern char *g_matchResult5028TextDe;
 
 
-extern int g_profileRank1LocalizedTitles[];
+extern char *g_profileRank1LocalizedTitles[];
 
 extern char *g_matchResult5021TextEu[];
 
@@ -144,9 +144,9 @@ extern s32 *g_trackResourceDirectory;
 
 extern s32 g_controllerReturnPending;
 
-extern int g_profileRank9LocalizedTitles[];
+extern char *g_profileRank9LocalizedTitles[];
 
-extern OSPiHandle *g_peripheralHandleList;
+extern void * g_peripheralHandleList;
 
 extern void (*g_cameraGameplayModeCallbacks[][2])(void);
 
@@ -170,7 +170,7 @@ extern WidgetEventHandler g_typedWidgetEventHandlers;
 
 extern char g_menuOptionBit10EnabledText[];
 
-extern char g_triggeredMotionDispatchTable;
+extern char g_triggeredMotionDispatchTable[];
 
 extern u8 g_savedSecondaryMenuByteOptions[];
 
@@ -215,9 +215,9 @@ extern char *g_matchResult5019TextDe;
 
 extern f32 g_inactiveCollisionShapeShadowRadius;
 
-extern char g_fmtSpaceDec3[];
+extern const char g_fmtSpaceDec3[];
 
-extern s32 g_playerSettingsSecondaryListLabels[];
+extern char *g_playerSettingsSecondaryListLabels[];
 
 extern char g_menuOptionBit5EnabledText[];
 
@@ -227,7 +227,7 @@ extern SessionInitializeHandler g_sessionInitializeHandlers[];
 
 extern s32 g_frameHeapBufferIndex;
 
-extern u64 g_videoManagerThreadStack[];
+extern u64 g_videoManagerThreadStack[0x200];
 
 extern u32 g_sourceBlueMask;
 
@@ -254,7 +254,7 @@ extern u32 g_sourceRedMask;
 
 extern u64 __osCurrentTime;
 
-extern int g_profileRank0LocalizedTitles[];
+extern char *g_profileRank0LocalizedTitles[];
 
 extern const f32 g_playerImpactHorizontalDamping;
 
@@ -284,9 +284,9 @@ extern u8 g_savedPlayerModelLighting[];
 
 extern s32 g_destinationColorIndex;
 
-extern int g_profileRank8LocalizedTitles[];
+extern char *g_profileRank8LocalizedTitles[];
 
-extern void *g_audioHeap;
+extern ALHeap *g_audioHeap;
 
 
 
@@ -305,7 +305,7 @@ extern f32 g_playerSourceEffectDuration;
 
 extern s32 alAuxBusParam_Address;
 
-extern s32 g_toggleListSetLabel[];
+extern char *g_toggleListSetLabel[];
 
 extern char g_SelectModalPromptLabelCase1Text[];
 
@@ -315,11 +315,11 @@ extern char g_SelectPromptTextGroupTwoCase1Text[];
 
 extern char g_geometryInitialScaleMatrix;
 
-extern int g_profileRank4LocalizedTitles[];
+extern char *g_profileRank4LocalizedTitles[];
 
 extern char g_triggeredUpdateRomEntry;
 
-extern char g_staticDataRegionStart;
+extern volatile s32 g_staticDataRegionStart;
 
 extern s32 alMainBusParam_Address;
 
@@ -411,7 +411,7 @@ extern char g_Cartridge_RunReadWorkerPackedAddress24;
 
 extern f32 g_playerTargetFacingDistanceLimits[];
 
-extern int g_profileRank17LocalizedTitles[];
+extern char *g_profileRank17LocalizedTitles[];
 
 extern char g_cameraViewDisplayListFirst;
 
@@ -547,7 +547,7 @@ extern const float g_sequenceSignedTickConversionLimit;
 extern char *g_matchResult5025TextDe;
 
 
-extern void *g_audioCommandBuffers[];
+extern s16 *g_audioCommandBuffers[];
 
 
 extern char g_scenarioCatalogueFirstWidgetIds;
@@ -569,7 +569,7 @@ extern void System_CleanupThreadEntry(void);
 
 extern s32 g_smpEventHandlerTables;
 
-extern char g_pakFormatInt1[];
+extern const char g_pakFormatInt1[];
 
 extern char g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt[];
 
@@ -592,7 +592,7 @@ extern s32 g_frontendActiveVideoModeIndex;
 
 extern f32 g_regionEdgeCrossDefaultUp;
 
-extern float g_sineNegativeRoundingBias;
+extern const float g_sineNegativeRoundingBias;
 
 extern s32 g_playerSequenceWindowEnabled;
 
@@ -608,9 +608,9 @@ extern Extra g_profileGameSpeedPreview;
 
 extern char g_pakOperationThreeStateFourLabel[];
 
-extern s32 g_audioDmaCacheEntries;
+extern struct AudioCacheEntry g_audioDmaCacheEntries[];
 
-extern char g_damageDispatchTable;
+extern char g_damageDispatchTable[];
 
 extern const double g_sineInversePi;
 
@@ -628,7 +628,7 @@ extern char g_characterPreviewMenuRomResource[];
 
 extern char g_SelectPromptTextGroupOneCase13Text[];
 
-extern char g_audioDecodedSampleSlots;
+extern char g_audioDecodedSampleSlots[];
 
 extern s32 g_introSelectionState;
 
@@ -640,7 +640,7 @@ extern FieldRow g_alternatePlayerSettingsEventIds[];
 
 extern FieldRow g_pakProfileHandlerEvents[];
 
-extern int g_profileRank16LocalizedTitles[];
+extern char *g_profileRank16LocalizedTitles[];
 
 extern const double g_cosinePiLow;
 
@@ -661,11 +661,11 @@ extern FieldRow g_playerSettingsEventActorKinds[];
 
 extern Clip g_profilePlayerAnimationChoices[];
 
-extern double g_cosineRoundingHalf;
+extern const double g_cosineRoundingHalf;
 
 extern const float g_sequenceInitialOscillatorValue;
 
-extern char g_pakNoteLabelSlots[];
+extern void *g_pakNoteLabelSlots[];
 
 
 extern f32 g_frameHeapHighUsageStats[3];
@@ -677,7 +677,7 @@ extern char g_pakAlternateOperationHeadingLabel[];
 
 extern const f64 k_xmathFractionIntegralBias;
 
-extern char s_animModelsIndexText;
+extern const char s_animModelsIndexText[];
 
 extern char g_schedulerThreadEntryAddress;
 
@@ -713,7 +713,7 @@ extern char g_pakOperationFourStateFourLabel[];
 
 extern char g_SelectPromptTextGroupFiveCase3Text[];
 
-extern char s_headerText;
+extern const char s_headerText[];
 
 extern char g_SelectPromptTextGroupTwoCase11Text[];
 
@@ -726,7 +726,7 @@ extern char g_menuChoiceDisabledLabels[];
 extern char *g_matchResult5014TextEu[];
 
 
-extern char g_profileSecondConfirmationLabel;
+extern char g_profileSecondConfirmationLabel[];
 
 
 
@@ -746,7 +746,7 @@ extern struct CacheResourceBlockView *g_pakLoadedNoteResourceHandle;
 
 extern char g_modelEditorApplyToAllEnabledText[];
 
-extern char g_levelIndexText[];
+extern const char g_levelIndexText[];
 
 extern void Frontend_DrawResultModelPreviewDe(char *);
 
@@ -758,12 +758,12 @@ extern char *g_matchResult5017TextEu[];
 
 extern void *g_depthImageBuffer;
 
-extern char s_animObjectIndexText;
+extern const char s_animObjectIndexText[];
 
 extern char *g_matchResult5052TextEu[];
 
 
-extern float g_materialCurrentStrengthScales;
+extern f32 g_materialCurrentStrengthScales[];
 
 extern char *g_pakSaveMenuProfileChannelLabels[];
 
@@ -786,7 +786,7 @@ extern char *g_matchResult5025TextEu[];
 
 extern char *g_pakScannedChannelChoiceLabels[];
 
-extern float g_cosineLargeAngleZero;
+extern const f32 g_cosineLargeAngleZero;
 
 extern u32 g_destinationRedMask;
 
@@ -794,7 +794,7 @@ extern char g_SelectPromptTextGroupTwoCase4Text[];
 
 extern f32 g_simpleObjectViewEffectRotationAndHeight;
 
-extern int g_profileRank12LocalizedTitles[];
+extern char *g_profileRank12LocalizedTitles[];
 
 extern u8 g_savedPlayerModelLighting[];
 
@@ -833,7 +833,7 @@ extern char g_pakAllocateMenuFifthResource[];
 
 extern Texture *g_combineBoundImage;
 
-extern char g_simpModelsIndexText[];
+extern const char g_simpModelsIndexText[];
 
 extern char g_profileFirstConfirmationLabel;
 
@@ -881,7 +881,7 @@ extern u16 g_audioTransformBandEnds[];
 
 extern char g_menuOptionBit7DisabledText[];
 
-extern Shape g_collisionSurfaceExcludedFromTrace;
+extern char g_collisionSurfaceExcludedFromTrace[];
 
 extern f32 g_weaponWheelScalePoolPrefix;
 
@@ -909,7 +909,7 @@ extern s32 g_team0SelectedNoticesEu[];
 
 extern WidgetEventHandler g_listButtonEventHandlers;
 
-extern int g_profileRank11LocalizedTitles[];
+extern char *g_profileRank11LocalizedTitles[];
 
 extern u8 g_controllerPakPreviewName[];
 
@@ -921,7 +921,7 @@ extern f32 g_hudSpriteHorizontalOffsets[];
 
 extern s32 g_frontendKeepCurrentVideoModeOnce;
 
-extern u32 g_materialIntensityMaskTexture[];
+extern unsigned char g_materialIntensityMaskTexture[];
 
 extern s32 g_pakPreviewNameText;
 
@@ -949,7 +949,7 @@ extern char g_SelectPromptTextGroupTwoCase2Text[];
 
 extern char g_ownerModeOneText[];
 
-extern char s_flyModeOffText;
+extern const char s_flyModeOffText[];
 
 
 extern char g_deviceDrawRomEntry;
@@ -994,7 +994,7 @@ extern char g_pakStatusDefaultLabel[];
 
 extern char g_scene_BuildPlacedInstancesEntry[];
 
-extern int g_profileRank5LocalizedTitles[];
+extern char *g_profileRank5LocalizedTitles[];
 
 extern int g_frontendScreenModePaletteOne;
 
@@ -1002,7 +1002,7 @@ extern s32 g_audioTransformInputStream;
 
 extern char *g_matchResult5002PlayedTextDe;
 
-extern char g_centsToPitchRatioConstants[];
+extern f32 g_centsToPitchRatioConstants[];
 
 extern f32 k_playerMenuSpriteScaleConstants;
 
@@ -1019,7 +1019,7 @@ extern const f64 g_audioFrexpLowerLimit;
 extern char g_modelEffectPool;
 
 
-extern int g_profileRank13LocalizedTitles[];
+extern char *g_profileRank13LocalizedTitles[];
 
 extern char g_SelectPromptTextGroupThreeCase3Text[];
 
@@ -1050,7 +1050,7 @@ extern char g_SelectPromptTextGroupFourStateOtherText[];
 
 extern char g_playerFloatMovementParameters;
 
-extern s32 g_pakSnapshotCapacityPromptEuX;
+extern char g_pakSnapshotCapacityPromptEuX[];
 
 extern char g_SelectPromptTextGroupFourCase5Text[];
 
@@ -1059,7 +1059,7 @@ extern int g_textureCacheResource;
 extern unsigned char g_controllerPakEnabledBytes[];
 
 
-extern int g_profileRank15LocalizedTitles[];
+extern char *g_profileRank15LocalizedTitles[];
 
 extern s32 g_primitiveRenderFlagSelect3000;
 
@@ -1077,7 +1077,7 @@ extern s32 g_optionsTransitionEventCodes;
 
 extern char *g_playerOption79ZeroText;
 
-extern double g_cosineRoundingSignBoundary;
+extern const double g_cosineRoundingSignBoundary;
 
 extern char *g_matchResult5022TextDe;
 
@@ -1093,9 +1093,9 @@ extern f32 g_navigationFarthestDistanceAndArrivalLimits[];
 
 extern TextEntry g_focusUnlockEntries[];
 
-extern s32 s_allocText;
+extern const char s_allocText[];
 
-extern char g_pakFormatInt3[];
+extern const char g_pakFormatInt3[];
 
 extern char *g_matchResult5024TextEu[];
 
@@ -1217,7 +1217,7 @@ extern s32 g_pakSnapshotNoPakPromptUsRev1;
 
 extern const double g_compressedMarkerDivisionUnsignedBias;
 
-extern char g_pakWriteScratchNoteName[];
+extern const char g_pakWriteScratchNoteName[];
 
 extern u8 g_controllerLastCommand;
 
@@ -1236,9 +1236,9 @@ extern const float g_perspectiveFloatNormalizationLimits;
 
 extern NodeGeometryGroupModelInstances g_materialGroups[];
 
-extern char *g_matchOptionLabelSlots[];
+extern void *g_matchOptionLabelSlots[];
 
-extern s32 __osThreadTail;
+extern char __osThreadTail[];
 
 extern char g_pakNoteIdRepairFailedDialogResource[];
 
@@ -1264,7 +1264,7 @@ extern s32 g_trialCatalogueNeighborTwo[];
 
 extern char g_nearestPlacedObjectResult;
 
-extern char g_audioCsplayerText[];
+extern const char g_audioCsplayerText[];
 
 extern ColorEntry g_emacText[];
 
@@ -1285,7 +1285,7 @@ extern FieldRow g_settingsColumnEventIds[];
 
 extern f32 g_audioRoundedSampleTimeConstants[2];
 
-extern int g_profileRank6LocalizedTitles[];
+extern char *g_profileRank6LocalizedTitles[];
 
 
 extern s32 g_musicPreviewMenuActive;
@@ -1321,7 +1321,7 @@ extern CheatCode g_encodedCheatDefinitions[];
 
 extern s32 g_sourcePixelOffset;
 
-extern char g_gameObjectResetAnimInfoText;
+extern const char g_gameObjectResetAnimInfoText[];
 
 extern char g_videoModeLabels;
 
@@ -1376,9 +1376,9 @@ extern char g_resourcePendingRequests;
 
 extern int g_pakPreviewDepthEightLabel;
 
-extern char s_simpPartModelText;
+extern const char s_simpPartModelText[];
 
-extern f32 g_navigationObjectLinkDistanceLimits[];
+extern const float g_navigationObjectLinkDistanceLimits[];
 
 extern s32 g_team1SelectedNoticesEuX[];
 
@@ -1406,7 +1406,7 @@ extern char g_uiFormattedMessage[];
 
 extern char *g_playerOption7EText1;
 
-extern int g_profileRank19LocalizedTitles[];
+extern char *g_profileRank19LocalizedTitles[];
 
 extern u8 g_audioDmaBoundaryWorkaroundFlag[];
 
@@ -1415,7 +1415,7 @@ extern FieldRow g_profileResetEventIdsEu[];
 extern char addrLow_Libsn_DisableInterrupts;
 
 
-extern Triple g_particleTertiaryContactPosition;
+extern struct CVector3_t g_particleTertiaryContactPosition;
 
 #include "libultra/audio/seqp.h"
 
@@ -1465,7 +1465,7 @@ extern char g_bloodModeText2[];
 
 extern char g_SelectPromptActionHeadingStateOtherText[];
 
-extern char g_longAndIntFormats[];
+extern const char g_longAndIntFormats[];
 
 extern char g_pakOperationFourStateTwoLabel[];
 
@@ -1474,7 +1474,7 @@ extern ScalarFloatView k_floorShakeHorizontalBlend;
 extern ScalarFloatView k_floorShakeVerticalScale;
 
 
-extern int g_profileRank3LocalizedTitles[];
+extern char *g_profileRank3LocalizedTitles[];
 
 extern f32 k_nearbyPlayerBlastConstants[];
 
@@ -1506,7 +1506,7 @@ extern char g_SelectPromptTextGroupTwoCase14Text[];
 
 extern char g_pakAlternateActionLabel[];
 
-extern int g_profileRankTitles;
+extern char *g_profileRankTitles[];
 
 extern s32 g_characterSelectionEventActorKinds;
 
@@ -1522,7 +1522,7 @@ extern const f64 g_sinePolynomialCoefficients[5];
 
 extern char *g_matchResult5053TextDe;
 
-extern char Weapon_FireStateEnterCallbackEntry;
+extern char Weapon_FireStateEnterCallbackEntry[];
 
 extern s32 g_modelBatchResourceCount;
 
@@ -1543,7 +1543,7 @@ extern char *g_matchResult5001TextEu[];
 
 extern FieldRow g_compactOptionsActorKinds[];
 
-extern char g_simpModelText[];
+extern const char g_simpModelText[];
 
 extern void System_VideoManagerThreadEntry(void *arg);
 
@@ -1560,7 +1560,7 @@ extern char g_menuOptionBit15EnabledText[];
 
 extern float g_reverbDeltaScale;
 
-extern char g_schedulerAlternateVideoMode;
+extern OSViMode g_schedulerAlternateVideoMode;
 
 extern f32 g_hiddenStaticObjectShadowRadius;
 
@@ -1574,7 +1574,7 @@ extern s32 g_controllerAudioThreadId;
 
 extern CMemEntry *g_resourceCompactionEntries;
 
-extern char g_pakSingleSaveBlockName[];
+extern const char g_pakSingleSaveBlockName[];
 
 extern s32 g_teamScoringEnabled;
 
@@ -1582,9 +1582,9 @@ extern char g_SelectPromptTextGroupFourCase11Text[];
 
 extern char g_playerDeathDialogSlotFirst;
 
-extern float g_sinePositiveRoundingBias;
+extern const float g_sinePositiveRoundingBias;
 
-extern int g_spawnActorDispatchTable;
+extern char g_spawnActorDispatchTable[];
 
 extern struct
 {
@@ -1608,7 +1608,7 @@ extern OSTask g_signalProcessorTaskCopy;
 
 extern char g_SelectPromptTextGroupTwoCase8Text[];
 
-extern int g_profileRank18LocalizedTitles[];
+extern char *g_profileRank18LocalizedTitles[];
 
 extern char g_pakActionLabel[];
 
@@ -1681,7 +1681,7 @@ extern char g_pickupWeaponDefinitions;
 
 extern char *g_matchResult5004TextDe;
 
-extern s32 g_movingMotionDispatchTable;
+extern char g_movingMotionDispatchTable[];
 
 extern char g_playerDefaultBehaviorTable;
 
@@ -1729,7 +1729,7 @@ extern char g_SelectPromptTextGroupFourCase14Text[];
 
 extern f32 g_actorAimBasisConstants[];
 
-extern char g_gameObjectAnimIndexText;
+extern const char g_gameObjectAnimIndexText[];
 
 extern void *g_pickupNavigationGoalList;
 
@@ -1739,7 +1739,7 @@ extern u16 g_gamePackedOptions;
 
 extern char g_actorBehaviorActionConfigs;
 
-extern char g_worldSnapshotNoteData;
+extern u8 g_worldSnapshotNoteData[];
 
 extern char *g_matchResult5024TextDe;
 
@@ -1766,7 +1766,7 @@ extern char g_pakStatusPromptAlternate[];
 extern s32 g_artsendTextureViewerReservedWord;
 
 
-extern int g_profileRank7LocalizedTitles[];
+extern char *g_profileRank7LocalizedTitles[];
 
 extern CharacterScreenCell g_characterSelectionMenuOptionCells[][9];
 
@@ -1783,7 +1783,7 @@ extern char g_SelectPromptTextGroupThreeCase14Text[];
 
 extern void (*g_writeDestinationColor)(void);
 
-extern s32 g_playerSettingsSecondChoiceText[];
+extern char *g_playerSettingsSecondChoiceText[];
 
 extern s32 g_pakDialogEventIds;
 
@@ -1851,9 +1851,9 @@ extern s32 g_sound_GetSampleDmaWindowAddressEntry;
 
 extern char g_SelectPromptTextGroupOneCase9Text[];
 
-extern int g_profileRank10LocalizedTitles[];
+extern char *g_profileRank10LocalizedTitles[];
 
-extern char g_simpPartModelsIndexText;
+extern const char g_simpPartModelsIndexText[];
 
 extern QueueRec g_dialogDecodeStreamRecord[];
 
@@ -1864,7 +1864,7 @@ extern struct ScalarPair g_fastHealthRegenerationTuning;
 
 extern s32 g_creditsCurrentLine;
 
-extern char g_pakReadScratchNoteName[];
+extern const char g_pakReadScratchNoteName[];
 
 extern char g_playerFlag82OffText[];
 
@@ -1883,7 +1883,7 @@ extern WidgetEventHandler g_characterSelectionEventHandlers;
 
 extern char g_simpleObjectModelResourceTagData;
 
-extern double g_cosineQuadrantOffset;
+extern const double g_cosineQuadrantOffset;
 
 extern char *g_matchResult5020TextDe;
 
@@ -1905,7 +1905,7 @@ extern char g_SelectPromptTextGroupOneCase10Text[];
 
 extern char g_SelectPromptTextGroupThreeCase15Text[];
 
-extern s32 g_playerSettingsPrimaryListLabels[];
+extern char *g_playerSettingsPrimaryListLabels[];
 
 
 extern char *g_matchResult5008TextEu[];
@@ -1965,7 +1965,7 @@ extern s32 g_menuSavedAudioSelection;
 
 #include "COMMON/MEMORY_STREAM_BUFFER.H"
 
-extern char g_actionEnterDispatchTable;
+extern char g_actionEnterDispatchTable[];
 
 extern OSPiHandle g_diskPeripheralHandle;
 
@@ -2002,7 +2002,7 @@ extern char g_pakPreviewKindLabelProfile[];
 union PagerSlotLookupStorage;
 extern union PagerSlotLookupStorage g_pagerSlotLookupStorage;
 
-extern char s_animObjectInfoText;
+extern const char s_animObjectInfoText[];
 
 extern WidgetEventHandler g_selectionMenuHandlers;
 
@@ -2065,7 +2065,7 @@ extern u32 g_displayListCapacityDe;
 
 extern WidgetEventHandler g_sliderTransitionEventHandlers;
 
-extern char g_pakFormatInt06;
+extern const char g_pakFormatInt06[];
 
 extern float g_maskedImageRectangleCoordinateScale;
 
@@ -2149,7 +2149,7 @@ extern MenuPointerEntry g_encodedCheatLabelTable[];
 
 extern u64 g_schedulerGraphicsTaskStartTime;
 
-extern s8 g_lightAnimationOffsetTable[];
+extern char g_lightAnimationOffsetTable[];
 
 extern char g_SelectPromptTextGroupFourCase7Text[];
 
@@ -2161,7 +2161,7 @@ extern char g_SelectPromptTextGroupThreeCase7Text[];
 
 extern Shield g_damageBoneBoundsShield;
 
-extern char g_profileModeOneLabel;
+extern char g_profileModeOneLabel[];
 
 extern float g_reverbUnityRatio;
 
@@ -2223,7 +2223,7 @@ extern char g_pakOperationOneStateThreeLabel[];
 
 extern char g_pickupSingleDefinitions;
 
-extern s32 g_toggleListClearLabel[];
+extern u8 *g_toggleListClearLabel[];
 
 extern char s_ammoPickupMessageSeparator[];
 
@@ -2281,7 +2281,7 @@ extern int g_geometryPreviousCombineMode;
 
 extern int g_menuScreenOwnerOverride;
 
-extern s32 s_typeText;
+extern unsigned int s_typeText[];
 
 extern Tuning g_playerSwimMovementParameters;
 
@@ -2289,7 +2289,7 @@ extern FieldRow g_confirmationMenuEventActorKinds[];
 
 extern char g_pakAllocateMenuSecondResource_eu[];
 
-extern s32 g_weaponActionFiveSpinTarget;
+extern const s32 g_weaponActionFiveSpinTarget;
 
 extern struct SharedMovement g_playerJumpMovementParameters;
 
@@ -2320,7 +2320,7 @@ extern u32 g_resourceHashSlotCount;
 
 extern float g_regionNormalDefaultUp;
 
-extern s32 g_playerSettingsFirstChoiceText[];
+extern char *g_playerSettingsFirstChoiceText[];
 
 extern s32 g_listButtonEventIds;
 
@@ -2342,9 +2342,9 @@ extern char g_staticJumpTableRegionByteCount;
 
 extern s32 g_menuOptionBit0DisabledText;
 
-extern char g_weaponFireStateCallbackTable;
+extern char g_weaponFireStateCallbackTable[];
 
-extern void *g_timerListSentinel;
+extern struct OSTimer_s *g_timerListSentinel;
 
 extern char g_alternateRenderMicrocodeData;
 
@@ -2383,7 +2383,7 @@ extern char g_pakOperationTwoStateOneLabel[];
 
 extern f32 g_barrelEffectSoundMinimumPitch;
 
-extern char g_hudCountMoverScript;
+extern s32 g_hudCountMoverScript[];
 
 extern char *g_matchResult5013TextEu[];
 
@@ -2406,7 +2406,7 @@ extern char g_SelectPromptTextGroupOneCase2Text[];
 
 extern s32 g_profileSecondaryMenuResource;
 
-extern s32 s_binaryBlockText;
+extern const char s_binaryBlockText[];
 
 extern char g_profileModeFourPlayedLevels[];
 
@@ -2429,7 +2429,7 @@ extern u8 g_profileUnlockedTrialBits[];
 
 extern FieldRow g_nodePairMenuEventIds[];
 
-extern float g_sineExceptionalResult;
+extern const f32 g_sineExceptionalResult;
 
 extern char *g_playerOption7DText0;
 
@@ -2471,7 +2471,7 @@ extern s32 alSavePull_Address;
 
 extern char *g_matchResult5057TextDe;
 
-extern int g_profileRank14LocalizedTitles[];
+extern char *g_profileRank14LocalizedTitles[];
 
 
 
@@ -2522,7 +2522,7 @@ extern s32 g_frontendPakPromptAccepted;
 
 extern const f64 k_xmathCeilIntegralBias;
 
-extern char g_hudSquadMoverScript;
+extern s32 g_hudSquadMoverScript[];
 
 extern s32 g_weaponChargeSpinTarget;
 

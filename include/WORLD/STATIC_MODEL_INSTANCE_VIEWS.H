@@ -91,6 +91,6 @@ typedef struct ResourceObject23 {
     CachedResource *blockNode;
 } ResourceObject23;
 extern char g_simpleObjectModelResourceTagData;
-extern char g_simpModelText[];
-extern char g_simpModelsIndexText[];
+extern const char g_simpModelText[];
+extern const char g_simpModelsIndexText[];
 #endif

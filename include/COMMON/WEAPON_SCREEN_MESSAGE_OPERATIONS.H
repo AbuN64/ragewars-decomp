@@ -11,5 +11,5 @@ extern f32 g_frameElapsedTime;
 extern s32 g_resultExitPending;
 extern s32 Tsmos_IsFrontendActive(void);
 extern void Onscrn_SetupSpriteMode(s32);
-extern void Playerai_DrawProjectedAimIcon(void *, CVector3 *, s32, f32, f32, f32);
+extern void Playerai_DrawProjectedAimIcon(struct View *view, struct CVector3_t *point, s32 icon, f32 frame, f32 scale, f32 size);
 #endif

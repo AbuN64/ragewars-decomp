@@ -731,7 +731,7 @@ typedef struct ThrowPosition {
 } ThrowPosition;
 extern f32 g_playerHeavyThrowShakeStrength;
 extern f32 g_playerLightThrowShakeStrength;
-extern void Gsky_StartScaledShake(char *, f32, f32, f32, f32, s32, CVector3);
+extern void Gsky_StartScaledShake(struct ShakeEmitterChannelView *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, struct CVector3_t pos);
 
 typedef struct PowerHudAnimation {
     void *object; s32 pad4, state; f32 padC, x, y;

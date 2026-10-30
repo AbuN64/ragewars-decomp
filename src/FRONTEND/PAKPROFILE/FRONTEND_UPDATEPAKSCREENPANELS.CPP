@@ -13,10 +13,10 @@
 
 extern void SmXlate_SwitchScreen(s32);
 extern void Tsmos_ActivateControllerState(void);
-extern void SmpFlicker_RestoreFlickerValue(void *);
-extern void SmpFlicker_StartFlicker(void *, s32);
+extern void SmpFlicker_RestoreFlickerValue(struct FlickerRestoreView *source);
+extern void SmpFlicker_StartFlicker(struct FlickerStartView *object, s32 count);
 
-extern s32 SmpFlicker_IsFlickerIdle(void *);
+extern s32 SmpFlicker_IsFlickerIdle(struct FlickerActivityView *object);
 s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 event) {
     s32 readyState;
     s32 openFramesLeft;

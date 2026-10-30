@@ -31,7 +31,7 @@ enum { PROFILE_RESOURCE_498 = 498, PROFILE_RESOURCE_499 = 499, PROFILE_RESOURCE_
 /* The hub spells g_profileStatisticsScreen as the menu block; this unit keeps its ProfileStatisticsScreen view
    because it reads the 0x32-byte text buffers from 0x110 up, which the hub only pads over. */
 
-extern char g_longAndIntFormats[];
+extern const char g_longAndIntFormats[];
 
 extern char g_profileStatisticsNumberFormat[];
 

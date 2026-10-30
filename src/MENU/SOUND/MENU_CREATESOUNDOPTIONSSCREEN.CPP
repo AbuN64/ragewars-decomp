@@ -7,7 +7,7 @@
 extern s32 SmpFade_CreateFadeWidget(s32, s32);
 extern s32 SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(s32, s32);
-extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 
 s32 Menu_CreateSoundOptionsScreen(void) {
     s32 cue;
@@ -66,7 +66,7 @@ s32 Menu_CreateSoundOptionsScreen(void) {
 extern s32 SmpFade_CreateFadeWidget(s32 frameId, s32 itemId);
 extern s32 SmpSlider_CreateSliderWidget(s32 a0, s32 a1, s32 a2);
 extern void SmpSlider_SetSliderItem(s32 cue, s32 volume);
-extern s32 SmpFlicker_CreateFlickerWidget(s32 a0, s32 a1);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 
 /* Allocates the HUD-cue object g_soundOptionsScreen, opens its handle for 0x6C/0x6D, starts its two timed cues at the volumes in g_gameSettingsVolumeBytes and its ambient loop, then arms state 3; returns 0. */
 s32 Menu_CreateSoundOptionsScreen(void) {

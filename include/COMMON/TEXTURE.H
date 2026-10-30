@@ -55,7 +55,7 @@ extern s32 g_combineImageChunkState;
 extern s32 g_combineBoundImageMaskComponent;
 extern s32 Frontend_HasImageFormatMaskComponent(u8 *);
 
-extern const u8 g_printfLowercaseHexDigits[];
+extern const char g_printfLowercaseHexDigits[];
 extern const u8 g_formatUppercaseHexDigits[];
 extern const u8 g_formatPercentText[];
 extern const u8 g_formatSpacePadding[];

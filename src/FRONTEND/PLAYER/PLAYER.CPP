@@ -43,12 +43,12 @@ extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 extern void Widget_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Key_FindKeyIndex(s32);
-extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 extern void Tsmos_DeactivateControllerState(void);
 extern struct StateFlags g_equipmentPrimaryWidgetIds[][19];
-extern s32 SmpFlicker_IsFlickerIdle(void *);
-extern void SmpFlicker_RestoreFlickerValue(void *);
-extern void SmpFlicker_StartFlicker(void *, int);
+extern s32 SmpFlicker_IsFlickerIdle(struct FlickerActivityView *object);
+extern void SmpFlicker_RestoreFlickerValue(struct FlickerRestoreView *source);
+extern void SmpFlicker_StartFlicker(struct FlickerStartView *object, s32 count);
 extern void SmXlate_SwitchScreen(s32);
 extern void Tsmos_ActivateControllerState(void);
 

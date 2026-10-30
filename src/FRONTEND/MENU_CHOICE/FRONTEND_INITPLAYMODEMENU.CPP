@@ -28,7 +28,7 @@ extern void PAKInterface_SetScreenPhase(s32);
 
 extern void Player_SetAchievementFlag7(char *, s32);
 
-extern void SmpSlider_SetTransitionMode(void *, s32);
+extern void SmpSlider_SetTransitionMode(struct SliderTransitionView *object, s32 mode);
 
 /* Applies the play mode picked on the front-end menu: sets the next screen, the controller mode and which players
  * join, then hands the screen record on. */
@@ -60,7 +60,7 @@ extern void Focus_AdvanceActiveSlot(int *);
 extern s32 Control_IsControllerConnected(s32);
 extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_DisableTransition(void *);
-extern MenuWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 extern u32 Menu_GetBlockedScreenOwner(void);
 #if defined(VERSION_EU_X)
 #define WID_42 68

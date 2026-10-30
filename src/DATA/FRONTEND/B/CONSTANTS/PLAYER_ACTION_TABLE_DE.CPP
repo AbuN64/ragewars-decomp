@@ -86,7 +86,7 @@ extern char g_Playerai_UpdateWalkingMovementAddressVariant2[];
 extern char g_collisionSurfaceExcludedFromTrace[];
 extern char g_defaultActorCollisionInfo[];
 extern char g_globalGameplayFlags[];
-extern char g_pagerPageCounters[];
+extern u16 g_pagerPageCounters[];
 extern char g_particleOwnerEffectFlags[];
 extern char g_portalDefaultCollisionQuery[];
 extern char g_secondaryCollisionContext[];

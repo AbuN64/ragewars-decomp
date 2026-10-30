@@ -18,7 +18,7 @@ typedef struct {
 
 extern StunProtectionRules g_matchRoundCounters[];
 
-extern void Gsky_StartFade(PlayerFlashView *, s32, s32, s32, s32, s32, s32, s32);
+extern void Gsky_StartFade(void *camera, s32 requestedFadeMode, s32 startValue, s32 endValue, s32 stepAmount, s32 redChannel, s32 greenChannel, s32 blueChannel);
 
 void Playerai_ApplyStun(SharedPlayer *player, f32 amount) {
     f32 stun;

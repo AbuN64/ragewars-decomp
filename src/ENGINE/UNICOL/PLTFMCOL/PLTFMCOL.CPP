@@ -25,7 +25,7 @@ extern s32 Unicol_SweepActorMotion(void *, CVector3, CVector3, struct CCollision
 
 extern void BuildPitchMatrix(f32 *, f32);
 extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
-extern void MatrixFromQuaternion(CQuatern *, f32 *);
+extern void MatrixFromQuaternion(f32 *q, f32 *m);
 extern void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 extern void Graphu64_TransformPoints(f32 *, CVector3 *, CVector3 *, s32);
@@ -370,7 +370,7 @@ void CPlatformCollision_TraceShape(ActorCPlatformCollisionTraceShape *actor, Pla
 }
 
 /* 80241940_3.CPP */
-extern void Graphu64_SubtractVectors(Triple *, Triple *, Triple *);
+extern void Graphu64_SubtractVectors(struct CVector3_t *difference, struct CVector3_t *leftVector, struct CVector3_t *rightVector);
 
 
 

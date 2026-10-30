@@ -1,5 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
-extern char g_weaponChargeSpinTarget[];
+extern s32 g_weaponChargeSpinTarget;
 extern char g_weaponFireStateCallbackTable[];
 #include "DATA/OVL1_F/WEAPON_CHARGE_CALLBACK_ADDRESS.H"
 #include "DATA/WEAPON_EVENT_CALLBACKS/WEAPONAI_TRYENTERALTERNATEAMMOMODE.H"

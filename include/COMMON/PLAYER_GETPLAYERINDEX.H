@@ -28,7 +28,7 @@ struct PlayerRankInner;
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char g_playerMenuValueFormat[];
+extern const char g_playerMenuValueFormat[];
 #else
 extern char g_fmtDec4Pad[];
 #endif

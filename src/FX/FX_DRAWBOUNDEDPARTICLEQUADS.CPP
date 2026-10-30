@@ -39,7 +39,7 @@ extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 extern f32 g_cameraVolumeBoundsMinZ;
 
-extern char g_materialIntensityMaskTexture;
+extern unsigned char g_materialIntensityMaskTexture[];
 
 extern char g_particleQuadRenderSetup;
 

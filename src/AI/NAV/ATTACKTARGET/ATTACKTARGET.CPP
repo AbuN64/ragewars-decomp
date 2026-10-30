@@ -77,7 +77,7 @@ s32 Nav_CollectEnemyTargets(Chaser *self) {
 extern CNavData g_navigationGraph;
 extern f32 Scaled_GetScaledAttackRange(AiController *controller);
 extern f32 Scaled_GetScaledAggression(AiController *controller);
-extern f32 Barrel_GetSignedAngleToPoint(Player *actor, CVector3 point);
+extern f32 Barrel_GetSignedAngleToPoint(void *actor, struct CVector3_t point);
 extern s32 Route_GetRouteRelation(void *table, s32 from, s32 to);
 
 /* Scores one attack candidate of a computer player. Its weighted distance (candidateDistances) is compared

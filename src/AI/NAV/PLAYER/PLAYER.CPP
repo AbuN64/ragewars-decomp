@@ -605,7 +605,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
 /* 80208000_3.CPP */
 /* Steers a computer player toward a point: measures the heading error to the point through Barrel_GetSignedAngleToPoint plus an offset, wrapped to -pi..pi, and when it exceeds the turn rate in degrees sets the player's steering at 0x69C to full lock beyond 60 degrees or to a half, quarter, eighth or tenth of lock beyond 30, 10 and 4 degrees, in the error's direction; then passes the brain's speed sum (by the player's gear at 0x594) in radians and the turn rate to Scaled_SetPitchFromAngle_Player and returns the heading error. */
 
-extern f32 Barrel_GetSignedAngleToPoint(PlayerAimActorView *, CVector3);
+extern f32 Barrel_GetSignedAngleToPoint(void *actor, struct CVector3_t point);
 extern void Scaled_SetPitchFromAngle(PlayerAimBrainView *, f32, s32);
 
 const float g_Nav_SteerAlongRouteConstantWords[9] = {

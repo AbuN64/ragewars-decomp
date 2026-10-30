@@ -120,5 +120,5 @@ typedef struct ALFilter_u1 {
     s32 type;
 } ALFilter_u1;
 extern char g_audioSaveAssertConditionText[];
-extern char g_audioSaveText[];
+extern const unsigned char g_audioSaveText[];
 #endif

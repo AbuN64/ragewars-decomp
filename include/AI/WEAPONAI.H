@@ -5,9 +5,9 @@
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 
-extern s32 g_weaponLockedNoticeTextEu[];
+extern u8 *g_weaponLockedNoticeTextEu[];
 
-extern s32 g_weaponLockedNoticeTextEuX[];
+extern u8 *g_weaponLockedNoticeTextEuX[];
 
 /* Measured 4-byte access at 0x6AC; storage view, complete object unknown. */
 struct WeaponAlternateFireFlagsView { unsigned char padding[1708]; s32 value; };

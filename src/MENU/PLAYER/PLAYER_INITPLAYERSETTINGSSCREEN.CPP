@@ -14,7 +14,7 @@
 extern struct StateMenuSelectPlayerSettingsEntry *g_playerSettingsScreen;
 extern char *g_matchOptionsCursorLabelThird[1];
 extern char *g_playerSettingsPrimaryListLabels[1];
-extern char *g_toggleListClearLabel[1];
+extern u8 *g_toggleListClearLabel[];
 extern char *g_toggleListSetLabel[1];
 extern char *g_playerSettingsSecondaryListLabels[1];
 extern char *g_playerSettingsFirstChoiceText[1];
@@ -25,7 +25,7 @@ extern void SmpButton_WrapButtonWidget(s32);
 extern void *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(void *, char *);
 extern void *SmpSlider_CreateSliderWidget(s32, s32, s32);
-extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 extern void *Node_FindWidgetByResourceId(s32, s32);
 #define ST ((void **)g_playerSettingsScreen)
 /* Builds the five player-settings controls and opens their parent screen. */
@@ -71,7 +71,7 @@ extern void SmpButton_WrapButtonWidget(s32);
 extern void *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(void *, char *);
 extern void *SmpSlider_CreateSliderWidget(s32, s32, s32);
-extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int ownerValue);
 extern void *Node_FindWidgetByResourceId(s32, s32);
 #define ST ((void **)g_playerSettingsScreen)
 /* Builds the five player-settings controls (labels picked by the current language) and opens their parent screen. */
