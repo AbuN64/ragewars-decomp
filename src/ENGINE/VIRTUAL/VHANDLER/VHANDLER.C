@@ -718,13 +718,15 @@ void Virtual_FinishPageJob(ResourcePageJob *req) {
 }
 
 #if defined(VERSION_EU_X)
-unsigned int func_8023D008_eu_x_padding_3DC08[2] = {
+/* Eight stale buffer bytes fill the code object to its next 16-byte boundary. */
+unsigned int g_VhandlerObjectAlignmentPadEuX[2] = {
     0x0C09C7E5, 0x02203021,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int func_8023CFC8_de_padding_3DBC8[2] = {
+/* Eight stale buffer bytes fill the code object to its next 16-byte boundary. */
+unsigned int g_VhandlerObjectAlignmentPadDe[2] = {
     0x27BDFFF0, 0x3C01800D,
 };
 #endif
