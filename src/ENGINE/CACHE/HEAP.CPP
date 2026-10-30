@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "UTIL/MEASUREDRECAT8V2.H"
 #include "stddef.h"
-#include "UTIL/HEAP.H"
+#include "ENGINE/CACHE/HEAP.H"
 
 s32 Heap_AllocateAtAddress(s8 *arena, void *requestedAddress, s32 requestedBytes) {
     s32 alignedBlockBytes;

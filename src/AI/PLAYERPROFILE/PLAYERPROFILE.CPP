@@ -4,7 +4,7 @@
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "WORLD/PLAYERAI_RESPAWNFRAGTAGPLAYER.H"
 #include "TYPES.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "WORLD/PLAYERPROFILE.H"
 #include "include_asm.h"

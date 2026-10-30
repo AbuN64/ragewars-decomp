@@ -1,0 +1,5 @@
+#ifndef UI_TSMOS_SCREENS_SCENARIOSETUPSCREEN_H
+#define UI_TSMOS_SCREENS_SCENARIOSETUPSCREEN_H
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+extern ResourceBank g_scenarioResultRowWidgetIds[];
+#endif

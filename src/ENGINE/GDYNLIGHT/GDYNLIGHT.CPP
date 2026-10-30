@@ -4,8 +4,8 @@
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "include_asm.h"
 
 extern void Graphu64_ScaleVector(void *, void *, f32);

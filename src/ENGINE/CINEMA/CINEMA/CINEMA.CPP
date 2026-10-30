@@ -11,7 +11,7 @@
 #include "COMMON/FUNCPTR.H"
 #include "CAMERA/EXTERNS.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
-#include "CINEMA/CINEMA.H"
+#include "ENGINE/CINEMA/CINEMA.H"
 #include "include_asm.h"
 #include "CAMERA/CCINEMA_UPDATESEQUENCE.H"
 

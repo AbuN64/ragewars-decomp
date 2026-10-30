@@ -8,7 +8,7 @@
 #include "FX/CONTROLLER_INPUT.H"
 #include "stddef.h"
 #include "COMMON/PAKQUEUESTATE.H"
-#include "CONTPAD/CONTPAD.H"
+#include "ENGINE/CONTPAD.H"
 
 /* 802631D0.CPP */
 /* Builds the player's analog input from its controller: remaps the buttons through g_controllerButtonRemap when the

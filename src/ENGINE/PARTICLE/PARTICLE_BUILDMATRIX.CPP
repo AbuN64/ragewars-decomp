@@ -12,7 +12,7 @@
 #include "particle/PARTICLE_BUILDMATRIX.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/AIPROFILE.H"
-#include "GREGION/GREGION.H"
+#include "ENGINE/GREGION.H"
 
 extern void BuildDirectionMatrix(void *matrix, CVector3 *direction);
 extern f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);

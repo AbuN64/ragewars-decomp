@@ -6,7 +6,7 @@
 #include "TEXTURE/AUDIOMGR_INITHEAP.H"
 #include "ENGINE/AUDIO/AUDIOMGR/AUDIOMGR_WORKER_DMA_AND_FRAME.H"
 #include "../../../../sdk/include/os.h"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 #include "../../../../sdk/include/libgultra/alunlink.h"
 
 /* Clears and sizes the 0x8016E000 heap region against the detected RAM size, then initialises the

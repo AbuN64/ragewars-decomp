@@ -6,7 +6,7 @@
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "../../include/os.h"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 
 extern OSPiHandle_s *g_peripheralDomainHandles[];
 

@@ -6,11 +6,11 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 #include "MENU/SCENE_RESOURCE_PREVIEW_AND_COLLISION_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 
 /* Initializes camera transforms, viewport state, clipping records, and resource lists. */
 

@@ -5,7 +5,7 @@
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
 #include "COMMON/SELF.H"
-#include "LISTS/LISTS.H"
+#include "ENGINE/LISTS.H"
 
 /* Initializes an empty linked-list header by clearing its two links and count. */
 void Lists_ClearHeader(ListHeader *list) {

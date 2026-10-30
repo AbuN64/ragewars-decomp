@@ -15,7 +15,7 @@
 #include "TYPES.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "LISTS/LISTS.H"
+#include "ENGINE/LISTS.H"
 
 /* Returns the collisions an object would meet moving to a position, without committing the move: picks the collision set for the object
  * (g_portalAlternateCollisionQuery for flagged players; otherwise by Insthdr_IsInactiveOrCollisionOption4 and then Insthdr_GetModelCollisionFlag8 or Insthdr_GetModelCollisionFlag1 among

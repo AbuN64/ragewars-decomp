@@ -7,10 +7,10 @@
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "os.h"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 #include "include_asm.h"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 
 extern void osSetEventMesg(s32 event, void *queue, s32 message);
 

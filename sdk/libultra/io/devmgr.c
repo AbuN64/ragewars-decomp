@@ -4,7 +4,7 @@
 #include "COMMON/ALFXPARAM.H"
 #include "../../include/libultra/io/pirawread.H"
 #include "../../include/os.h"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 
 extern OSPiHandle_s *g_peripheralHandleList;
 

@@ -10,7 +10,7 @@
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "COMMON/RESOURCELOCKSTATE.H"
 #include "COMMON/MENURECAT24.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 
 extern u8 *g_controllerPakSnapshotPayload;
 extern s32 g_worldSnapshotNoteBytes;

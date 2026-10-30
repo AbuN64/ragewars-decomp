@@ -6,7 +6,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "libgultra/OSUNMAPTLBALL.H"
 #include "os.h"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 #include "ENGINE/VIRTUAL/VHANDLER.H"
 #include "include_asm.h"
 #include "COMMON/DESCRIPTORRECAT29.H"

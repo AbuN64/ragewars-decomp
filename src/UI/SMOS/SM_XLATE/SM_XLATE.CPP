@@ -1,4 +1,4 @@
-#include "MATH/N64_ENG.H"
+#include "UI/QUAG/N64_ENG.H"
 #include "COMMON/CALLBACK.H"
 #include "TYPES.H"
 #include "COMMON/AUDIO_INITIALIZE.H"
@@ -6,7 +6,7 @@
 #include "COMMON/INTEGERSTATE530.H"
 #include "MATH/SMSMNGR_INITIALIZESCREENMANAGER.H"
 #include "RESMGR/STREAM.H"
-#include "MATH/SM_SMNGR.H"
+#include "UI/SMOS/SM_SMNGR.H"
 
 typedef struct Shared_MenuDefinition Shared_MenuDefinition;
 struct Shared_MenuDefinition {

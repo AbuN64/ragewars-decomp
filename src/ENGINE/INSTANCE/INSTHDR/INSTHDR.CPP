@@ -10,7 +10,7 @@
 #include "COMMON/ACTOR_HEADER.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
-#include "particle/INSTHDR.H"
+#include "ENGINE/INSTANCE/INSTHDR.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 /* Returns a player's body lean on the ground: a controlled player on an accepted floor (Region_TestPolygonSlopeFlag) that

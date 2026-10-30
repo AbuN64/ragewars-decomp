@@ -86,7 +86,7 @@ void Player_ReleasePlayerParticleEmitters(s32 actor) {
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 extern u8 *g_forceMarkerRemovedText, *g_forceMarkerAttractText, *g_forceMarkerRepulseText;
 extern void BuildDirectionMatrix(Matrix *, CVector3 *);
 extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);

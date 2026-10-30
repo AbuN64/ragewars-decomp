@@ -1,7 +1,7 @@
 #ifndef FRONTEND_FRONTEND_ACTIVATEMATCHOPTIONACTION_H
 #define FRONTEND_FRONTEND_ACTIVATEMATCHOPTIONACTION_H
 #include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
-#include "FRONTEND/OPTIONS.H"
+#include "OPTIONS.H"
 extern void Frontend_SyncMatchJoinSlots(s32);
 extern void Frontend_LoadMatchOptionWidgets(void);
 extern void Frontend_StoreMatchOptionWidgets(void);

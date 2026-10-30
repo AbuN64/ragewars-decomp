@@ -9,7 +9,7 @@
 #include "../../../../sdk/include/os.h"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "ENGINE/AUDIO/AUDIOWORLD.H"
-#include "DEFS/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"

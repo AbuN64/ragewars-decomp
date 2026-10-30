@@ -9,7 +9,7 @@ extern void Control_SetProfileMode(void *, int);
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/TRIPLE.H"
 #include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
-#include "CINEMA/CINEMA.H"
+#include "ENGINE/CINEMA/CINEMA.H"
 
 extern f32 g_respawnPlayerInitialPartScale;
 /* ROM offsets of the actor part tables: each version names its own copies. */

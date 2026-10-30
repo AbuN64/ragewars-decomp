@@ -4,7 +4,7 @@
 #if defined(VERSION_US)
 #include "COMMON/WIDGETRECAT1A.H"
 #include "FRONTEND/FRONTEND_UPDATESLIDERGEOMETRY.H"
-#include "MATH/MENU.H"
+#include "MENU.H"
 
 /* Clamp the slider and handle range, value, step and parent notifications. */
 s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 value, s32 inputState) {

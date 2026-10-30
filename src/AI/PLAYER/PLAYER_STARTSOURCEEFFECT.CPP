@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "../../../sdk/include/AUDIO/sprintf.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 /** Start the actor effect and attach optional source-specific resources; the European cartridges pick
     each resource from a per-language table. */

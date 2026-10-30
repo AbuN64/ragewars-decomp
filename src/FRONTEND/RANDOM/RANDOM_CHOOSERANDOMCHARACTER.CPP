@@ -8,7 +8,7 @@
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "TYPES.H"
 #include "FRONTEND/RANDOM_CHOOSERANDOMCHARACTER.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Returns 0xBC2 plus ten times either the halfword at offset 2 of what Scene_GetBlLevelData finds for

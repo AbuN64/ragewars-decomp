@@ -9,7 +9,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 #include "MENU/PICKUP_TOGGLEEFFECTANDFLASH.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 #include "include_asm.h"
 #include "COMMON/RESPONSE.H"
 #include "MENU/PICKUP_HANDLEITEMUPDATE.H"

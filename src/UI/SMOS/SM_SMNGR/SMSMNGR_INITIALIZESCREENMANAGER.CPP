@@ -1,4 +1,4 @@
-#include "MATH/N64_ENG.H"
+#include "UI/QUAG/N64_ENG.H"
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -14,9 +14,9 @@
 #include "MATH/SMSMNGR_INITIALIZESCREENMANAGER.H"
 #include "RESMGR/STREAM.H"
 #include "MATH/math_controller_events.H"
-#include "MATH/SM_SMNGR.H"
+#include "UI/SMOS/SM_SMNGR.H"
 #include "RESMGR/resmgr_string_memory.H"
-#include "MATH/MENU.H"
+#include "MENU.H"
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
 /* Refreshes the selected entry and updates its interface state. */

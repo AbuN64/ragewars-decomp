@@ -1,7 +1,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/RECORD.H"
 #include "TYPES.H"
-#include "RESMGR/E_SMEM.H"
+#include "UI/QUAG/E_SMEM.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "RESMGR/FRAME_HEAP_LIFETIME.H"
 #include "SCENE/CACHE_FREEMEMORY.H"

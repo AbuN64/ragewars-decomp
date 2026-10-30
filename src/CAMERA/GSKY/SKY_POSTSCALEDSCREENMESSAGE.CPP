@@ -5,11 +5,11 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
 extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 

@@ -12,9 +12,9 @@
 #include "RESMGR/TSMOS_UPDATEFRONTEND.H"
 #include "RESMGR/TSMOS_SETIDLETIMER.H"
 #include "RESMGR/TSMOS_SHUTDOWNFRONTEND.H"
-#include "MATH/N64_ENG.H"
+#include "UI/QUAG/N64_ENG.H"
 #include "RESMGR/FRAME_HEAP_MARKS.H"
-#include "MATH/MENU.H"
+#include "MENU.H"
 
 extern s32 g_frontendShutdownState;
 extern s8 g_controllerPakFrontendState;

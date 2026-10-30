@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/OWNERRECAT8V1.H"
-#include "MATH/N64_ENG.H"
+#include "UI/QUAG/N64_ENG.H"
 
 #if defined(VERSION_US)
 extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);

@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CALLBACK.H"
 #include "MATH/INPUT_EVENT.H"
-#include "MATH/MENU.H"
+#include "MENU.H"
 #include "MATH/math_controller_events.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"

@@ -9,7 +9,7 @@
 #include "stddef.h"
 #include "COMMON/RESULTS.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 extern void Cache_ReleaseResource(void *cache, void *resource);

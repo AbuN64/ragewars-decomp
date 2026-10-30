@@ -1,5 +1,5 @@
 #include "COMMON/OUTPUT.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 int Gsky_StartFadeModeTwo(void *outputStorage) {
     struct CCollisionResults *output = (void *)outputStorage;

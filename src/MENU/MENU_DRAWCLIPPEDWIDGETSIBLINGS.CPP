@@ -5,7 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "MENU/STATE.H"
 #include "TYPES.H"
-#include "MATH/N64_ENG.H"
+#include "UI/QUAG/N64_ENG.H"
 
 /* 80408AC4_14.CPP */
 #if defined(VERSION_DE)

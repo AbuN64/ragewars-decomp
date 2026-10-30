@@ -5,7 +5,7 @@
 #include "ACHIEVE/ACHIEVE.H"
 #include "ACHIEVE/MATCH_GETRESULTTEXT.H"
 #include "COMMON/PLAYERPROFILES.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 
 const float g_resultPreviewTransformConstants[6] = {
     0.3f, 0.009f, 3.0f, -5.0f,

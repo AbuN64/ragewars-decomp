@@ -9,8 +9,8 @@
 #include "SCENE/CACHE_RUNRESOURCECOMPLETIONWORKER.H"
 #include "../../../../sdk/include/os.h"
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 
 /* Looks a key up in the request hash table under the manager lock: an existing request bumps its
    node's reference count and flags, stamps it and hands the node to List_MoveIntrusiveToHead; otherwise, unless

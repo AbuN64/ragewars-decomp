@@ -13,7 +13,7 @@
 #include "FRONTEND/FRONTEND_OPENRESOURCEARCHIVE.H"
 #include "FRONTEND/NODE_RELEASECHUNKIMAGES.H"
 #include "RESMGR/resmgr_stream_io.H"
-#include "MATH/N64_ENG.H"
+#include "UI/QUAG/N64_ENG.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 extern s32 Widget_ComputeWidgetBounds(struct CacheResourceBlockView *, struct CacheResourceBlockView *, WidgetLayout *, sm_dldc *);
 #include "RESMGR/resmgr_string_memory.H"

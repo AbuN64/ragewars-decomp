@@ -10,7 +10,7 @@
 #include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "MENU/ITEMS/MENU_DRAWANIMATEDMENUSPRITE.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 /* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through List_RemoveIntrusive and releasing its resource through Cache_ReleaseResource. Adapted from Items_DestroyMenu_MenuDrawanimatedmenusprite with its body wrapped as an inline helper called in a loop over the list head changed. */

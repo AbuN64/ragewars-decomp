@@ -39,17 +39,17 @@
 #include "COMMON/TRIGGER_AND_FLOAT_VALUE_OPERATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/OBJB.H"
-#include "SYSTEM/LIST.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "abi.h"
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/S1.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
-#include "CINEMA/CINEMA.H"
+#include "ENGINE/CINEMA/CINEMA.H"
 #include "SETN64/SETN64.H"
-#include "ONSCRN/ONSCRN.H"
+#include "ONSCRN.H"
 
 /* 80233920.CPP */
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);

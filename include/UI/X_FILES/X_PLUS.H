@@ -1,0 +1,8 @@
+#ifndef UI_X_FILES_X_PLUS_H
+#define UI_X_FILES_X_PLUS_H
+#include "COMMON/MESSAGESEMAPHORE.H"
+extern void XPlus_PartitionSortRange(char *base, char *max);
+extern void XPlus_SortArray(char *base, s32 n, s32 size, s32 (*compare)(char *a, char *b));
+extern void XPlus_SplitPath(u8 *path, u8 *drive, u8 *dir, u8 *name, u8 *ext);
+extern void * XPlus_FillMemory(void *destination, int fillValue, u32 byteCount);
+#endif

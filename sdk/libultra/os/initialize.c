@@ -63,7 +63,7 @@
 #include "ENGINE/VIRTUAL/VIRTUAL_REGION_AND_PAGER_OPERATIONS.H"
 #include "../../include/libgultra/status_register_write.h"
 #include "../../include/libgultra/OS_GET_STATUS_REGISTER.h"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 #include "../../include/libultra/debug/assert.h"
 
 /* Drafted from ultralib src/os/initialize.c (before 2.0J, _FINALROM): the clock

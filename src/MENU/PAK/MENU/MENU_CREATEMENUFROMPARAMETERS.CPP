@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "MENU/PAK/MENU_INITIALIZEMENU.H"
 
 /* Allocates a block sized for the entries of the list the parameters point at through Cache_AllocateResource, builds it with Menu_InitializeMenu from the list's own value and three parameters, registers it with List_PrependIntrusive and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_AllocateMenu with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */

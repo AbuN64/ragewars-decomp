@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
 #include "TYPES.H"
-#include "FRONTEND/OPTIONS.H"
+#include "OPTIONS.H"
 #include "FRONTEND/FRONTEND_ACTIVATEMATCHOPTIONACTION.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 

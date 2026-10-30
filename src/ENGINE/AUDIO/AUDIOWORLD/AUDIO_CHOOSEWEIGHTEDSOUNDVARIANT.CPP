@@ -16,7 +16,7 @@
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "AUDIO/VOICE.H"
 #include "AUDIO/AUDIO_CHOOSEWEIGHTEDSOUNDVARIANT.H"
-#include "AUDIO/RAXPLAYER.H"
+#include "ENGINE/AUDIO/RAXPLAYER.H"
 #include "OS/AUDIO_STOPMUSIC.H"
 #include "../../../../sdk/include/os.h"
 #include "SYSTEM/DEFS.H"

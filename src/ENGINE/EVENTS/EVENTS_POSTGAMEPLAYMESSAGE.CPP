@@ -20,7 +20,7 @@ void Events_StartDisabledCameraEmitter(s32 unused0, s32 unused1, s32 unused2, Tr
 
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 void Events_PostGameplayMessage(void *owner, LevelActor *actor, s32 event, Triple position, ResourceManagerState params) {
     if (actor->kind == 1 && (actor->flags & 0x300000)) {

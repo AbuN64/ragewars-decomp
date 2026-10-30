@@ -20,7 +20,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "GSKY/SKY.H"
 
 /* 8023A284_4.CPP */

@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "TYPES.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 extern void Cache_ReleaseResource(void *cache, void *resource);
 
 /* Releases the save buffer and clears its global state. */

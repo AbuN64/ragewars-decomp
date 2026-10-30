@@ -6,7 +6,7 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 extern f32 g_frameElapsedTime;
 

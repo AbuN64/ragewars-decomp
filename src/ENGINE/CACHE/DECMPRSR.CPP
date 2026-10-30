@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "os.h"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 
 extern void osCreateThread(void *thread, s32 id, void *entry, void *argument, void *stack, s32 priority);
 

@@ -1,4 +1,4 @@
-#include "MATH/N64_ENG.H"
+#include "UI/QUAG/N64_ENG.H"
 #include "MATH/SHARED_WIDGETIDE.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "TYPES.H"
@@ -6,7 +6,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/TRIPLE.H"
-#include "MATH/SM_SMNGR.H"
+#include "UI/SMOS/SM_SMNGR.H"
 #include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 
 static inline s32 menuCategory(s32 event) {

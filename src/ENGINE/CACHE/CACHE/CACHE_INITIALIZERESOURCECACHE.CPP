@@ -13,10 +13,10 @@
 #include "TYPES.H"
 #include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
 #include "../../../../sdk/include/os.h"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "COMMON/ENTRYRECAT18V3.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 
 /* One declaration per symbol for the whole unit; the functions below used to redeclare them locally with
  * conflicting types, which only the MIPS compiler accepted. */

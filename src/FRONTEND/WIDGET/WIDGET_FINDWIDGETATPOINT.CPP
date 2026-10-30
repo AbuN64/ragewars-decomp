@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "FRONTEND/WIDGET_DRAWTEXTWIDGET.H"
 #include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
-#include "MATH/N64_ENG.H"
+#include "UI/QUAG/N64_ENG.H"
 
 /* Draws a visible widget (flag 8): when Widget_ComputeWidgetBounds places it, and its draw flags ask for
    clipping (0x200), it narrows the current scissor from N64Eng_GetClipBounds to the widget's box through

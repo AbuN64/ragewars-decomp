@@ -7,11 +7,11 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/GAMEPLAY_MOVEMENT.H"
 #include "COMMON/WORLD.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "CAMERA/GSKY_GETFLOORSURFACESHAKE.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 
 /* 80233920_31.CPP */
 /* Produces a random shake offset for an object: looks up the object's model entry in g_world_AchieveUpdateresultsscreen and

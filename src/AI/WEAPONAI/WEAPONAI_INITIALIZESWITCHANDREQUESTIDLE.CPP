@@ -10,7 +10,7 @@
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 #include "TYPES.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 extern s32 g_gameLoopFrameCount;

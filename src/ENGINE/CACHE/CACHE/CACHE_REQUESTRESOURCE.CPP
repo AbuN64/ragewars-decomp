@@ -9,7 +9,7 @@
 #include "COMMON/S1.H"
 #include "../../../../sdk/include/os.h"
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 
 extern Manager g_resourceRequestManager;
 extern s32 g_resourceRecencyList;

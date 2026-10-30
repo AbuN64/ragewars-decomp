@@ -1,7 +1,7 @@
 #include "COMMON/SCREEN.H"
 #include "COMMON/WORLD.H"
 #include "include_asm.h"
-#include "FRONTEND/OPTIONS.H"
+#include "OPTIONS.H"
 #include "TYPES.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/REQUESTRECAT10.H"

@@ -6,8 +6,8 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 
 /* Spawns the effect a description asks for: the spawn of Animpool_SpawnSceneEffect (id resolution, free node, init
  * through Gobjinst_InitializeActor and start) inlined with the id, variant, count, owner, position, scale, direction

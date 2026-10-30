@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "../../../include/AUDIO/vi.H"
 #include "../../../include/AUDIO/__OSVISWAPCONTEXT.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 #include "../../../include/libultra/audio/vi.h"
 
 extern ViSwapContextView *__osViCurr;

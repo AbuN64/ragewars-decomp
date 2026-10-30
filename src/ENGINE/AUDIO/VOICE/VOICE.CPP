@@ -17,8 +17,8 @@
 #include "VOICE/VOICE.H"
 #include "COMMON/S1.H"
 #include "COMMON/STATERECAT34.H"
-#include "RENDER/T2SOUNDELEMENT.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/AUDIO/T2SOUNDELEMENT.H"
+#include "ENGINE/CACHE/LIST.H"
 
 /* 8025A3EC_4.CPP */
 /* Releases occupied nonlocal slots unless their value equals the exclusion. */

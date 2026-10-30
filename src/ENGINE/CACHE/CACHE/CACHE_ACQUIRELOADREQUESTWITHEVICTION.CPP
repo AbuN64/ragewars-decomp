@@ -13,8 +13,8 @@ extern s32 g_resourceCacheManager;
 #include "COMMON/EXTERNS.H"
 #include "AUDIO/HASHTABLE.H"
 #include "../../../../sdk/include/os.h"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 
 extern void List_MoveIntrusiveToHead(void *list, s32 nodeToMove);
 extern s32 g_resourceCacheFrameStamp[];

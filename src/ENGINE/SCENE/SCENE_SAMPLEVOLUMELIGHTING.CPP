@@ -14,7 +14,7 @@
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/PLAYERPROFILES.H"
-#include "CINEMA/CINEMA.H"
+#include "ENGINE/CINEMA/CINEMA.H"
 
 /* Collects up to 10 light volumes holding a point from the world sector whose x/z extent holds it, returning their
  * count through total (0 outside every sector). */

@@ -9,7 +9,7 @@
 #include "SYSTEM/BITARRAY_SAMPLE_EVALUATION.H"
 #include "SYSTEM/POLYTRAK2_INTERPOLATEJOINTQUATERNION.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "SYSTEM/BITARRAY.H"
+#include "ENGINE/ANIM/BITARRAY.H"
 
 /* ROM-grounded data: src/g_motionTranslationQuantizationScale_StorageWords.c */
 const float g_motionTranslationQuantizationScale_StorageWords[1] = {

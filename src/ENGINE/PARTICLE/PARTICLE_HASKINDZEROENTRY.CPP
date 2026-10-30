@@ -7,7 +7,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 
 /* Returns whether any of the 22 records in g_weaponInfoByType holds, in either of its two three-entry lists, an entry of kind 1 whose id matches the given object's id. */
 

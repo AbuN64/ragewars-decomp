@@ -9,8 +9,8 @@
 #include "MENU/ITEMS/SCENE/SELECTION_PREVIEW_OPERATIONS.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "SYSTEM/DEFS.H"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */

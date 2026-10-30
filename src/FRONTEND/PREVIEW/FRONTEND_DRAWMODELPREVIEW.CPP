@@ -130,7 +130,7 @@ void Preview_DrawModelPreview(ModelPreview *self) {
 }
 
 #include "COMMON/WORLD.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 extern void *Scene_FindActorDefinition(void *, s32, s32, void *);
 extern void Gobjinst_InitializeActor(void *, s32, s32, s32, void *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void Gobjinst_DispatchActorTypeUpdate();

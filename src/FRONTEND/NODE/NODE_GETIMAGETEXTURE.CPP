@@ -1,6 +1,6 @@
 #include "MENU/GFX/IMAGE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "MATH/N64_ENG.H"
+#include "UI/QUAG/N64_ENG.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"

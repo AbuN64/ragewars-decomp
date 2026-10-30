@@ -6,7 +6,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/VIDEO_DIMENSIONS.H"
-#include "RENDER/SETN64.H"
+#include "ENGINE/SETN64.H"
 #include "RENDER/SETN64_UPDATEFADETRANSITION.H"
 #include "../../../sdk/include/AUDIO/sprintf.H"
 

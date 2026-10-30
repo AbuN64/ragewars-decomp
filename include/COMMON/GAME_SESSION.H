@@ -5,7 +5,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJRECAT18V6.H"
 #include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 #include "COMMON/RENDERSETTINGS.H"
 #include "COMMON/SESSION_STATE.H"
 typedef struct GameSession GameSession;

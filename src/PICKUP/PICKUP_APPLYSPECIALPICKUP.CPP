@@ -12,7 +12,7 @@
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/ENTRYRECATE.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 /* 802ABDBC_9.CPP */
 extern u8 *g_pickupFlagCarriedText[];

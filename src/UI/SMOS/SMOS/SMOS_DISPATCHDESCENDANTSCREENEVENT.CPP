@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CALLBACK.H"
-#include "MATH/MENU.H"
+#include "MENU.H"
 #include "include_asm.h"
 
 void Smos_DispatchDescendantScreenEvent(ScreenEventTreeNode *node, s32 event, s32 source, s32 control, s32 extra,

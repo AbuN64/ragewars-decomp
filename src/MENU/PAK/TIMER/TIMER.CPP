@@ -9,7 +9,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
 #include "MENU/PAK/PROFILE_SAVE_BLOCKS.H"
-#include "RESMGR/X_PLUS.H"
+#include "UI/X_FILES/X_PLUS.H"
 
 /* 80405DC0_15.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

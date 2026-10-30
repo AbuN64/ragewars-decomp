@@ -15,11 +15,11 @@
 #include "AI/NAV/SCALED_INITPLAYERSTATE.H"
 #include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 #include "FX/CONTPAD_INITCONTROLLERINPUT.H"
-#include "RESMGR/X_PLUS.H"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "UI/X_FILES/X_PLUS.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
-#include "CINEMA/CINEMA.H"
+#include "ENGINE/CINEMA/CINEMA.H"
 extern void Cache_ReleaseResource(void *cache, void *resource);
 
 extern char g_controllerProfiles[];

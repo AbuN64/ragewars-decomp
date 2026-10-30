@@ -29,7 +29,7 @@
 #elif defined(VERSION_EU_X)
 #endif
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 extern s32 g_matchEndingTeamWheelClose;
 extern void TeamSelect_CloseTeamWheel(TeamMenu *);
 extern void Cteamselect_InitTeamChoices(TeamMenu *, s32, SharedPlayer *);

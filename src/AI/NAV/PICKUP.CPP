@@ -7,7 +7,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "AI/SHARED_PICKUPGOALNODE.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
-#include "AI/NAV/PICKUP.H"
+#include "PICKUP.H"
 
 /* 80208000_12.CPP */
 /* Advances a committed selection's stage against the node list g_navigationGraph: finishes through

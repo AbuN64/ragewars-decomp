@@ -94,7 +94,7 @@ void Tengine_LoadSelectedTexture(void) {
 #include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/TEXTURE_REQUEST.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 struct ArtsendTextureSelection;
 

@@ -10,12 +10,12 @@
 #include "RENDER/POOLRECAT28V1.H"
 #include "TYPES.H"
 #include "COMMON/BALLISTICPARAMS.H"
-#include "RENDER/RUMBLE.H"
+#include "ENGINE/RUMBLE.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "../../../sdk/include/os.h"
 #include "RENDER/CONTROL_CYCLEACTORSNAPSHOTMODE.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/SCENE_DRAWTRANSITIONCOLOROVERLAY.H"
 
 static inline f32 distanceToNode(RumbleSpatialEffectNode *node, CVector3 from) {

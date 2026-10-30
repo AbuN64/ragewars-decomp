@@ -1,7 +1,7 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 Gu_Sqrtf(float value);

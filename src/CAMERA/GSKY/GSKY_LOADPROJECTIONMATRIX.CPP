@@ -1,6 +1,6 @@
 #include "COMMON/GFX.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 #include "gbi.h"
 #include "TYPES.H"
 

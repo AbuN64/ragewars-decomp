@@ -9,8 +9,8 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_ALLOCATEHEAPWITHEVICTION.H"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 
 
 extern void Cache_DetachResourceRequest(void *unused0, struct IntrusiveList *resourceCacheEntry);

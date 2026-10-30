@@ -1,5 +1,5 @@
 #include "COMMON/OUTPUT.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 /** Reset the word at 0x100 and enable the word at 0xFC. */
 void Gsky_StartFadeModeOne(char *object) {

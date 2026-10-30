@@ -4,11 +4,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/CHANNEL.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "SYSTEM/LIST.H"
-#include "SYSTEM/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
+#include "ENGINE/CACHE/LIST.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
 
 /* Posts a text as on-screen messages for a target: the target's messages still in the pool's list at 0xE40
