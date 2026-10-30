@@ -82,6 +82,7 @@ extern s32 AssertFailed(char *file, s32 line, char *expr);
     }
 extern char s_pakAssertSlotRange[];
 extern char s_pakAssertUserRange[];
+extern char s_pakAssertIndexRange[];
 extern char s_pakAssertUserObject[];
 extern s32 PAK_GetPagesFree(s32 anUser, s32 *apPages);
 extern s32 PAK_GetNotesFree(s32 anUser, s32 *apNotes);

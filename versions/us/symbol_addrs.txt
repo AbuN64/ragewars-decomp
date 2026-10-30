@@ -9377,3 +9377,6 @@ PAKInterface_CopyMiddlePlayersToGlobal = 0x800FCDD9; // type:func rom:0xFD9D9
 PAKInterface_OnInitialUpdate = 0x800E477B; // type:func rom:0xE537B
 PAKInterface_OnDestroy = 0x800E47B7; // type:func rom:0xE53B7
 PAKInterface_OnButtonUp = 0x800E6F84; // type:func rom:0xE7B84
+PAKInterface_GetPlayerInMiddleSlot = 0x800FA260; // type:func rom:0xFAE60
+PAKInterface_FindEmptyMiddleSlot = 0x800FA3F0; // type:func rom:0xFAFF0
+PAKInterface_IsMiddleListEmpty = 0x800FA4A8; // type:func rom:0xFB0A8
