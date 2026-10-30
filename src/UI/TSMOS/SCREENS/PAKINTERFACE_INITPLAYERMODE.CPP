@@ -11,7 +11,7 @@ extern void OptionsData_ReplaceString(char *apText, const char *apToken, const c
 extern void SM_DLSetHighlighted(PAKUserWidget *apObject, s32 anHighlighted);
 extern void SMMU_SetActiveControl(void *apList, s32 anUser, s16 anControl);
 extern void SMMU_BlockUser(void *apUserList, s32 anUser, s32 anBlocked);
-extern void CWipeScreen__StartWipe(void *apWipe);
+extern void CWipeScreen_StartWipe(void *apWipe);
 extern s32 GetNActive(void);
 extern void PAKInterface_ExitScreen(s32 anTarget);
 extern void PAKInterface_InitNameManagement(s32 anUser);
@@ -227,7 +227,7 @@ void PAKInterface_InitPlayerMode(s32 anUser) {
                 break;
             case 5:
                 TSMOS_InputDisable();
-                CWipeScreen__StartWipe(g_pakInterfaceScreen->m_Wipe);
+                CWipeScreen_StartWipe(g_pakInterfaceScreen->m_Wipe);
                 break;
             case 6:
                 PAKInterface_ExitScreen(29);

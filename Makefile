@@ -225,6 +225,14 @@ $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PRESSEDSTAR
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PRESSEDSTART.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PRESSEDSTART.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PRESSEDSTART.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEGROUPS.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEGROUPS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEGROUPS.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0 -fno-builtin
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEGROUPS.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITPLAYERMODE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITPLAYERMODE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITPLAYERMODE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITPLAYERMODE.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITUPDATEINFO.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITUPDATEINFO.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITUPDATEINFO.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -271,6 +279,10 @@ $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_ISMIDDLELIS
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITNAMEMANAGEMENT.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITNAMEMANAGEMENT.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITNAMEMANAGEMENT.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITNAMEMANAGEMENT.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
@@ -535,6 +547,14 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PRESS
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PRESSEDSTART.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PRESSEDSTART.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_PRESSEDSTART.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEGROUPS.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEGROUPS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEGROUPS.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0 -fno-builtin
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_UPDATEGROUPS.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITPLAYERMODE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITPLAYERMODE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITPLAYERMODE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITPLAYERMODE.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITUPDATEINFO.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITUPDATEINFO.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITUPDATEINFO.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -581,6 +601,10 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_ISMID
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITNAMEMANAGEMENT.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITNAMEMANAGEMENT.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITNAMEMANAGEMENT.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_INITNAMEMANAGEMENT.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/ENGINE/AUDIO/DECODER/AUDIO_NEXTDECODEDSAMPLEBLOCK.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
