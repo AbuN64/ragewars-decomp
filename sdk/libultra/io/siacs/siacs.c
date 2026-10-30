@@ -7,7 +7,10 @@
 #include "../../../include/OS/siaccess.H"
 #include "../../../include/os.h"
 #include "COMMON/LONE/siaccess.H"
+#include "os.h"
+#include "libultra/os/siaccess.h"
 
+/* siaccess.CPP */
 /* 802BECB0.CPP */
 void __osSiCreateAccessQueue(void) {
     extern OSMesgQueue g_serialInterfaceAccessQueue;
@@ -39,3 +42,13 @@ void __osSiGetAccess(void) {
     }
     osRecvMesg(&g_serialInterfaceAccessQueue, &token, 1);
 }
+
+/* siaccess.CPP */
+void __osSiRelAccess(void) {
+    osSendMesg(&g_serialInterfaceAccessQueue, 0, 0);
+}
+
+/* G_SERIALINTERFACEACCESSQUEUEINITIALIZED.CPP */
+#if defined(VERSION_US_REV1)
+int g_serialInterfaceAccessQueueInitialized = 0;
+#endif

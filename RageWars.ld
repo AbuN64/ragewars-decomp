@@ -1725,7 +1725,7 @@ SECTIONS
         . = MAX(., 0xB4FFC);
         src/DATA/AUDIO/FILTER/FILTER.CPP.o(.data);
         . = MAX(., 0xB5000);
-        sdk/libultra/audio/mainbus.c.o(.text);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.text);
         . = MAX(., 0xB5140);
         sdk/libultra/audio/reverb/reverb.c.o(.text);
         . = MAX(., 0xB5794);
@@ -1859,9 +1859,7 @@ SECTIONS
         . = MAX(., 0xB97B4);
         src/DATA/AUDIO/PIRAWREAD/PIRAWREAD.CPP.o(.data);
         . = MAX(., 0xB97C0);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.text);
-        . = MAX(., 0xB9880);
-        sdk/libultra/os/siaccess.CPP.o(.text);
+        sdk/libultra/io/siacs/siacs.c.o(.text);
         . = MAX(., 0xB98A8);
         src/DATA/AUDIO/SIACCESS.CPP.o(.data);
         . = MAX(., 0xB98B0);
@@ -3844,7 +3842,7 @@ SECTIONS
         . = MAX(., 0xB529C);
         sdk/libultra/audio/filter.c.o(.data);
         . = MAX(., 0xB52A0);
-        sdk/libultra/audio/MAINBUS/MAINBUS.CPP.o(.text);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.text);
         . = MAX(., 0xB53E0);
         sdk/libultra/audio/reverb/reverb.c.o(.text);
         . = MAX(., 0xB5A34);
@@ -3980,9 +3978,7 @@ SECTIONS
         . = MAX(., 0xB9A54);
         src/DATA/AUDIO/PIRAWREAD.CPP.o(.data);
         . = MAX(., 0xB9A60);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.text);
-        . = MAX(., 0xB9B20);
-        sdk/libultra/os/siaccess.CPP.o(.text);
+        sdk/libultra/io/siacs/siacs.c.o(.text);
         . = MAX(., 0xB9B48);
         src/DATA/AUDIO/SIACCESS/SIACCESS.CPP.o(.data);
         . = MAX(., 0xB9B50);
@@ -5975,7 +5971,7 @@ SECTIONS
         . = MAX(., 0xB52DC);
         sdk/libultra/audio/filter.c.o(.data);
         . = MAX(., 0xB52E0);
-        sdk/libultra/audio/MAINBUS/MAINBUS.CPP.o(.text);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.text);
         . = MAX(., 0xB5420);
         sdk/libultra/audio/reverb/reverb.c.o(.text);
         . = MAX(., 0xB5A74);
@@ -6107,9 +6103,7 @@ SECTIONS
         . = MAX(., 0xB9A94);
         src/DATA/AUDIO/AUDIO/S_SLOWTEXT.CPP.o(.data);
         . = MAX(., 0xB9AA0);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.text);
-        . = MAX(., 0xB9B60);
-        sdk/libultra/os/siaccess.CPP.o(.text);
+        sdk/libultra/io/siacs/siacs.c.o(.text);
         . = MAX(., 0xB9B88);
         sdk/libultra/gu/SINF/SINF.CPP.o(.data);
         . = MAX(., 0xB9B90);
@@ -8114,7 +8108,7 @@ SECTIONS
         . = MAX(., 0xB4F2C);
         src/DATA/AUDIO/CREATETHREAD/CREATETHREAD.CPP.o(.data);
         . = MAX(., 0xB4F30);
-        sdk/libultra/audio/MAINBUS/MAINBUS.CPP.o(.text);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.text);
         . = MAX(., 0xB5070);
         sdk/libultra/audio/reverb/reverb.c.o(.text);
         . = MAX(., 0xB56C4);
@@ -8252,9 +8246,7 @@ SECTIONS
         . = MAX(., 0xB96E4);
         sdk/libultra/io/pirawread.c.o(.data);
         . = MAX(., 0xB96F0);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.text);
-        . = MAX(., 0xB97B0);
-        sdk/libultra/os/siaccess.CPP.o(.text);
+        sdk/libultra/io/siacs/siacs.c.o(.text);
         . = MAX(., 0xB97D8);
         src/DATA/AUDIO/AI/AI.CPP.o(.data);
         . = MAX(., 0xB97E0);
@@ -10275,7 +10267,7 @@ SECTIONS
         . = MAX(., 0xBA0CC);
         src/DATA/AUDIO/CREATETHREAD/CREATETHREAD.CPP.o(.data);
         . = MAX(., 0xBA0D0);
-        sdk/libultra/audio/MAINBUS/MAINBUS.CPP.o(.text);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.text);
         . = MAX(., 0xBA210);
         sdk/libultra/audio/reverb/reverb.c.o(.text);
         . = MAX(., 0xBA864);
@@ -10411,9 +10403,7 @@ SECTIONS
         . = MAX(., 0xBE8A4);
         src/DATA/AUDIO/AUDIO/S_SLOWTEXT.CPP.o(.data);
         . = MAX(., 0xBE8B0);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.text);
-        . = MAX(., 0xBE970);
-        sdk/libultra/os/siaccess.CPP.o(.text);
+        sdk/libultra/io/siacs/siacs.c.o(.text);
         . = MAX(., 0xBE998);
         src/DATA/AUDIO/VISETMODE/VISETMODE.CPP.o(.data);
         . = MAX(., 0xBE9A0);
@@ -11303,7 +11293,7 @@ SECTIONS
         src/DATA/MAINCODE/ENV.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/filter.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/FILTER/FILTER.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/audio/mainbus.c.o(.bss .sbss COMMON);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb/reverb.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/save.c.o(.bss .sbss COMMON);
@@ -11360,8 +11350,7 @@ SECTIONS
         src/GAMECORE/GAMECORE/G_GAMECORETRAILINGBYTESBLOCK1.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/pirawread.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/PIRAWREAD/PIRAWREAD.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/io/siacs/siacs.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/SIACCESS.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/sirawdma.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/SIRAWDMA.CPP.o(.bss .sbss COMMON);
@@ -12100,7 +12089,7 @@ SECTIONS
         sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
         src/DATA/MAINCODE/ENV/ENV.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/filter.c.o(.bss .sbss COMMON);
-        sdk/libultra/audio/MAINBUS/MAINBUS.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb/reverb.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/VISETMODE/VISETMODE.CPP.o(.bss .sbss COMMON);
@@ -12160,8 +12149,7 @@ SECTIONS
         src/GAMECORE/GAMECORE/G_GAMECORETRAILINGBYTESBLOCK3.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/pirawread.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/PIRAWREAD.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/io/siacs/siacs.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/SIACCESS/SIACCESS.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/sirawdma.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/SIRAWDMA/SIRAWDMA.CPP.o(.bss .sbss COMMON);
@@ -12911,7 +12899,7 @@ SECTIONS
         sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
         src/MENU/ITEMS/ITEMS_COPYLOCALIZEDNAMEBYTESEU/G_ITEMSCOPYLOCALIZEDNAMEBYTESEULINKGAPWORDS.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/filter.c.o(.bss .sbss COMMON);
-        sdk/libultra/audio/MAINBUS/MAINBUS.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb/reverb.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/ALSNDP.CPP.o(.bss .sbss COMMON);
@@ -12974,8 +12962,7 @@ SECTIONS
         src/DATA/AUDIO/AUDIO/AUDIO_REGIONAL_INSTRUCTION_TAILS.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/pirawread.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AUDIO/S_SLOWTEXT.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/io/siacs/siacs.c.o(.bss .sbss COMMON);
         sdk/libultra/gu/SINF/SINF.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/sirawdma.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AIGETLEN.CPP.o(.bss .sbss COMMON);
@@ -13683,7 +13670,7 @@ SECTIONS
         sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/filter.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/CREATETHREAD/CREATETHREAD.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/audio/MAINBUS/MAINBUS.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb/reverb.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AUDIO/K_AUDIOENCODEDWORDS.CPP.o(.bss .sbss COMMON);
@@ -13735,8 +13722,7 @@ SECTIONS
         sdk/libultra/io/pirawdma.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AISETFREQ.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/pirawread.c.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/io/siacs/siacs.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AI/AI.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/sirawdma.c.o(.bss .sbss COMMON);
         sdk/libultra/io/si.c.o(.bss .sbss COMMON);
@@ -14493,7 +14479,7 @@ SECTIONS
         src/MENU/ITEMS/ITEMS_COPYLOCALIZEDNAMEBYTESEU/G_ITEMSCOPYLOCALIZEDNAMEBYTESEULINKGAPWORDS.CPP.o(.bss .sbss COMMON);
         sdk/libultra/audio/filter.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/CREATETHREAD/CREATETHREAD.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/audio/MAINBUS/MAINBUS.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/audio/mainbus/mainbus.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb/reverb.c.o(.bss .sbss COMMON);
         sdk/libultra/audio/reverb.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/ALUNLINK/ALUNLINK.CPP.o(.bss .sbss COMMON);
@@ -14560,8 +14546,7 @@ SECTIONS
         src/DATA/AUDIO/AUDIO/AUDIO_REGIONAL_INSTRUCTION_TAILS.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/pirawread.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AUDIO/S_SLOWTEXT.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess/siaccess.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/os/siaccess.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/io/siacs/siacs.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/VISETMODE/VISETMODE.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/sirawdma.c.o(.bss .sbss COMMON);
         sdk/libultra/gu/SINF/SINF.CPP.o(.bss .sbss COMMON);
@@ -29818,7 +29803,7 @@ SECTIONS
         . = MAX(., 0x11914);
         src/DATA/OVERLAYS/SEVEN/LINKTABLES/G_OVERLAYSSEVENLINKTABLESCONSTANTWORDS.CPP.o(.data);
         . = MAX(., 0x11920);
-        sdk/libultra/G_SERIALINTERFACEACCESSQUEUEINITIALIZED.CPP.o(.data);
+        sdk/libultra/io/siacs/siacs.c.o(.data);
         . = MAX(., 0x11924);
         src/DATA/OVERLAYS/SEVEN/LINKTABLES/G_OVERLAYSSEVENLINKTABLESCONSTANTWORDSBLOCK1.CPP.o(.data);
         . = MAX(., 0x11930);
@@ -34989,7 +34974,7 @@ SECTIONS
         src/DATA/OVERLAYS/SEVEN/LINKTABLES/G_OVERLAYSSEVENLINKTABLESLINKGAPWORDS.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/SEVEN/LINKTABLES/CREATE_DATA.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/SEVEN/LINKTABLES/G_OVERLAYSSEVENLINKTABLESCONSTANTWORDS.CPP.o(.bss .sbss COMMON);
-        sdk/libultra/G_SERIALINTERFACEACCESSQUEUEINITIALIZED.CPP.o(.bss .sbss COMMON);
+        sdk/libultra/io/siacs/siacs.c.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/SEVEN/LINKTABLES/G_OVERLAYSSEVENLINKTABLESCONSTANTWORDSBLOCK1.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/SEVEN/LINKTABLES/VI_DATA.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/SEVEN/LINKTABLES/OSVIGETCURRENTFRAMEBUFFER_DATA.CPP.o(.bss .sbss COMMON);
