@@ -17405,7 +17405,7 @@ SECTIONS
         src/MENU/PAK/MENU/MENU_DRAWMENUMODEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x1CAE4);
         src/MENU/PAK/MENU/G_MENUCENTERFRACTION.CPP.o(.rodata .rdata);
-        . = MAX(., 0x1CAF8);
+        . = MAX(., 0x1CAF4);
         . = DEFINED(__align8_literals_Menu_DrawMenuEntries) ? ALIGN(8) : .;
         src/MENU/PAK/MENU/pak_menu_entries.CPP.o(.rodata.literals_Menu_DrawMenuEntries .rdata.literals_Menu_DrawMenuEntries);
         . = MAX(., 0x1CB14);
@@ -20317,7 +20317,7 @@ SECTIONS
         src/MENU/PAK/MENU/MENU_DRAWMENUMODEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x2CEC4);
         src/MENU/PAK/MENU/G_MENUCENTERFRACTION.CPP.o(.rodata .rdata);
-        . = MAX(., 0x2CED8);
+        . = MAX(., 0x2CED4);
         . = DEFINED(__align8_literals_Menu_DrawMenuEntries) ? ALIGN(8) : .;
         src/MENU/PAK/MENU/pak_menu_entries.CPP.o(.rodata.literals_Menu_DrawMenuEntries .rdata.literals_Menu_DrawMenuEntries);
         . = MAX(., 0x2CEF4);
@@ -23191,7 +23191,7 @@ SECTIONS
         src/MENU/PAK/MENU/MENU_DRAWMENUMODEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x28044);
         src/MENU/PAK/MENU/G_MENUCENTERFRACTION.CPP.o(.rodata .rdata);
-        . = MAX(., 0x28058);
+        . = MAX(., 0x28054);
         . = DEFINED(__align8_literals_Menu_DrawMenuEntries) ? ALIGN(8) : .;
         src/MENU/PAK/MENU/pak_menu_entries.CPP.o(.rodata.literals_Menu_DrawMenuEntries .rdata.literals_Menu_DrawMenuEntries);
         . = MAX(., 0x28074);
@@ -26049,7 +26049,7 @@ SECTIONS
         src/MENU/PAK/MENU/MENU_DRAWMENUMODEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x1B864);
         src/MENU/PAK/MENU/G_MENUCENTERFRACTION.CPP.o(.rodata .rdata);
-        . = MAX(., 0x1B878);
+        . = MAX(., 0x1B874);
         . = DEFINED(__align8_literals_Menu_DrawMenuEntries) ? ALIGN(8) : .;
         src/MENU/PAK/MENU/pak_menu_entries.CPP.o(.rodata.literals_Menu_DrawMenuEntries .rdata.literals_Menu_DrawMenuEntries);
         . = MAX(., 0x1B894);
@@ -35573,8 +35573,6 @@ SECTIONS
         . = MAX(., 0x19B4);
         src/MENU/PAK/MENU/K_MENUENCODEDWORDSBLOCK2.CPP.o(.rodata .rdata);
         . = MAX(., 0x19C4);
-        src/MENU/PAK/MENU/G_MENUCENTERFRACTION.CPP.o(.rodata .rdata);
-        . = MAX(., 0x19C8);
         . = DEFINED(__align8_literals_Menu_DrawMenuEntries) ? ALIGN(8) : .;
         src/MENU/PAK/MENU/pak_menu_entries.CPP.o(.rodata.literals_Menu_DrawMenuEntries .rdata.literals_Menu_DrawMenuEntries);
         . = MAX(., 0x19E4);
@@ -36120,7 +36118,6 @@ SECTIONS
         src/MENU/PAK/MENU/MENU_DRAWMENUOPTIONSPRITE_DATA.CPP.o(.bss .sbss COMMON);
         src/MENU/PAK/MENU/MENU_DRAWMENUMODEL.CPP.o(.bss .sbss COMMON);
         src/MENU/PAK/MENU/K_MENUENCODEDWORDSBLOCK2.CPP.o(.bss .sbss COMMON);
-        src/MENU/PAK/MENU/G_MENUCENTERFRACTION.CPP.o(.bss .sbss COMMON);
         src/MENU/PAK/MENU/pak_menu_entries.CPP.o(.bss .sbss COMMON);
         src/MENU/PAK/MENU/G_MENUTEXT.CPP.o(.bss .sbss COMMON);
         src/MENU/PAK/MENU/MENU_CREATEMENUFROMPARAMETERS.CPP.o(.bss .sbss COMMON);

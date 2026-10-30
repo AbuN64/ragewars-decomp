@@ -697,7 +697,6 @@ extern float k_menuTextDrawScale;
 extern float g_menuPanelOpenRate;
 extern float g_menuPanelOpenLimit;
 extern float g_menuPanelCloseRate;
-extern const float g_menuCenterFraction;
 extern int g_secondaryDisplayListCapacity;
 extern int g_combineBoundImagePixelType;
 extern Box g_menuModelPreviewLighting;
