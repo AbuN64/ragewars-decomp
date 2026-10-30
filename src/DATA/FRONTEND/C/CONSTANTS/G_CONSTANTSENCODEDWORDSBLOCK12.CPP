@@ -1,7 +1,8 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CC7E8 */
-unsigned int g_ConstantsEncodedWordsBlock12[2] = {
-    0x00000000, 0x000052DA,
+RestLinkerAlignmentFill8 g_ConstantsEncodedWordsBlock12 = {
+    { 0, 0, 0, 0, 0, 0, 82, 218 },
 };
 #endif

@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
 extern char g_Player_CreateFourPlayerResultsPackedAddress24[];
@@ -12,28 +13,35 @@ extern char g_Frontend_SelectNextEquipmentColumnPackedAddress24[];
 extern char g_Frontend_SelectPreviousEquipmentChoicePackedAddress24[];
 extern char g_Frontend_SelectNextEquipmentChoicePackedAddress24[];
 extern char g_Frontend_CancelEquipmentSelectionPackedAddress24[];
-unsigned int g_FrontendJConstantsRetainedPointerWords1[174] = {
-    0x00000130, 0x000000E8, 0x000000E9, 0x000000EA, 0x000000EB, 0x000000EC, 0x000000ED, 0x00000120,
-    0x0000011F, 0x0000011E, 0x0000011D, 0x0000011C, 0x000000DC, 0x000000DE, 0x000000E0, 0x000000E2,
-    0x000000E4, 0x000000E6, 0x000000F5, 0x00000131, 0x0000010F, 0x00000110, 0x00000111, 0x00000112,
-    0x00000113, 0x00000114, 0x00000126, 0x00000127, 0x00000128, 0x00000129, 0x0000012A, 0x000000F9,
-    0x000000FB, 0x000000FD, 0x000000FF, 0x00000101, 0x00000103, 0x000000CD, 0x00000132, 0x000000EE,
-    0x000000EF, 0x000000F0, 0x000000F1, 0x000000F2, 0x000000F3, 0x0000012F, 0x0000012E, 0x0000012D,
-    0x0000012C, 0x0000012B, 0x000000D1, 0x000000D3, 0x000000D5, 0x000000D7, 0x000000D9, 0x000000DB,
-    0x000000F7, 0x00000133, 0x00000115, 0x00000116, 0x00000117, 0x00000118, 0x00000119, 0x0000011A,
-    0x00000121, 0x00000122, 0x00000123, 0x00000124, 0x00000125, 0x00000104, 0x00000106, 0x00000108,
-    0x0000010A, 0x0000010C, 0x0000010E, 0x00000098, 0x00001397, 0x0000000A, 0x800D30F0, 0x000000AD,
-    0x00001396, 0x0000000C, 0x800D30F8, 0x000000AF, 0x000013AD, 0x0000000B, 0x800D30F4, 0x000000B3,
-    0x000013A9, 0x00000001, 0x800D30CC, 0x000000A2, 0x0000139B, 0x0000000F, 0x800D3104, 0x0000009A,
-    0x000013A1, 0x0000000D, 0x800D30FC, 0x0000009B, 0x000013A2, 0x00000009, 0x800D30EC, 0x00000099,
-    0x0000139A, 0x00000008, 0x800D30E8, 0x000000AA, 0x0000138D, 0x0000000E, 0x800D3100, 0x000000AE,
-    0x0000138F, 0x00000007, 0x800D30E4, 0x000000B0, 0x0000138C, 0x00000002, 0x800D30D0, 0x000000A9,
-    0x000013A7, 0x00000005, 0x800D30DC, 0x000000AB, 0x0000139E, 0x00000003, 0x800D30D4, 0x000000AC,
-    0x00001393, 0x00000006, 0x800D30E0, 0x000000B1, 0x0000138B, 0x00000004, 0x800D30D8, 0x00000E07,
-    0x00000008, (unsigned int)g_Player_StartFourPlayerResultsPackedAddress24, 0x00000E08, 0x00000008, (unsigned int)g_Player_UpdateFourPlayerResultsPackedAddress24, 0x00000E0A, 0x00000008, (unsigned int)g_Player_DrawFourPlayerResultsPackedAddress24,
-    0x00000E06, 0x00000008, (unsigned int)g_Player_CreateFourPlayerResultsPackedAddress24, 0x00000E03, 0x00000008, (unsigned int)g_Frontend_FreeEquipmentScreenPackedAddress24, 0x0000000A, 0x00000008,
-    (unsigned int)g_Frontend_RestoreEquipmentSelectionsPackedAddress24, 0x00000002, 0x00000008, (unsigned int)g_Frontend_CancelEquipmentSelectionPackedAddress24, 0x00000001, 0x00000008, (unsigned int)g_Frontend_ConfirmEquipmentSelectionPackedAddress24, 0x00000007,
-    0x00007530, (unsigned int)g_Frontend_SelectPreviousEquipmentChoicePackedAddress24, 0x00000005, 0x00007530, (unsigned int)g_Frontend_SelectPreviousEquipmentColumnPackedAddress24, 0x00000008, 0x00007530, (unsigned int)g_Frontend_SelectNextEquipmentChoicePackedAddress24,
-    0x00000006, 0x00007530, (unsigned int)g_Frontend_SelectNextEquipmentColumnPackedAddress24, 0x00000000, 0x00000000, 0x00000000,
+s32 g_FrontendJConstantsRetainedPointerWords1[174] = {
+    304, 232, 233, 234, 235, 236,
+    237, 288, 287, 286, 285, 284,
+    220, 222, 224, 226, 228, 230,
+    245, 305, 271, 272, 273, 274,
+    275, 276, 294, 295, 296, 297,
+    298, 249, 251, 253, 255, 257,
+    259, 205, 306, 238, 239, 240,
+    241, 242, 243, 303, 302, 301,
+    300, 299, 209, 211, 213, 215,
+    217, 219, 247, 307, 277, 278,
+    279, 280, 281, 282, 289, 290,
+    291, 292, 293, 260, 262, 264,
+    266, 268, 270, 152, 5015, 10,
+    -2146619152, 173, 5014, 12, -2146619144, 175,
+    5037, 11, -2146619148, 179, 5033, 1,
+    -2146619188, 162, 5019, 15, -2146619132, 154,
+    5025, 13, -2146619140, 155, 5026, 9,
+    -2146619156, 153, 5018, 8, -2146619160, 170,
+    5005, 14, -2146619136, 174, 5007, 7,
+    -2146619164, 176, 5004, 2, -2146619184, 169,
+    5031, 5, -2146619172, 171, 5022, 3,
+    -2146619180, 172, 5011, 6, -2146619168, 177,
+    5003, 4, -2146619176, 3591, 8, (unsigned int)g_Player_StartFourPlayerResultsPackedAddress24,
+    3592, 8, (unsigned int)g_Player_UpdateFourPlayerResultsPackedAddress24, 3594, 8, (unsigned int)g_Player_DrawFourPlayerResultsPackedAddress24,
+    3590, 8, (unsigned int)g_Player_CreateFourPlayerResultsPackedAddress24, 3587, 8, (unsigned int)g_Frontend_FreeEquipmentScreenPackedAddress24,
+    10, 8, (unsigned int)g_Frontend_RestoreEquipmentSelectionsPackedAddress24, 2, 8, (unsigned int)g_Frontend_CancelEquipmentSelectionPackedAddress24,
+    1, 8, (unsigned int)g_Frontend_ConfirmEquipmentSelectionPackedAddress24, 7, 30000, (unsigned int)g_Frontend_SelectPreviousEquipmentChoicePackedAddress24,
+    5, 30000, (unsigned int)g_Frontend_SelectPreviousEquipmentColumnPackedAddress24, 8, 30000, (unsigned int)g_Frontend_SelectNextEquipmentChoicePackedAddress24,
+    6, 30000, (unsigned int)g_Frontend_SelectNextEquipmentColumnPackedAddress24, 0, 0, 0,
 };
 #endif

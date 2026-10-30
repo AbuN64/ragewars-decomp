@@ -1,12 +1,10 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CE75C_unclaimed_CF3E0 */
-unsigned short g_playerMovementTuningZeroHalfwordsAlternateUsRev1[] = {
-    0x0000,
-#if defined(VERSION_US_REV1)
-    0x0000,
-#endif
+u16 g_playerMovementTuningZeroHalfwordsAlternateUsRev1[2] = {
+    0, 0,
 };
 #endif
 

@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_Events_IncrementNearbyPlayerCounterConstantsUsRev1_SceneEffectTuningConstants.c */
@@ -6,25 +7,25 @@ const float g_Events_IncrementNearbyPlayerCounterConstantsUsRev1[1] = {
 };
 
 #if defined(VERSION_US)
-unsigned int k_SceneEffectTuningConstantsEncodedWords[2] = {
-    0x00000000, 0x0B43536B,
+RestLinkerAlignmentFill8 k_SceneEffectTuningConstantsEncodedWords = {
+    { 0, 0, 0, 0, 11, 67, 83, 107 },
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_SceneEffectTuningConstantsEncodedWordsBlock3[2] = {
-    0xC0800000, 0x3F000000,
+RestLinkerAlignmentFill8 k_SceneEffectTuningConstantsEncodedWordsBlock3 = {
+    { 192, 128, 0, 0, 63, 0, 0, 0 },
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_SceneEffectTuningConstantsEncodedWordsBlock2[2] = {
-    0x000423C3, 0x00882821,
+RestLinkerAlignmentFill8 k_SceneEffectTuningConstantsEncodedWordsBlock2 = {
+    { 0, 4, 35, 195, 0, 136, 40, 33 },
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_SceneEffectTuningConstantsEncodedWordsBlock1[2] = {
-    0x3F800000, 0xACA40000,
+RestLinkerAlignmentFill8 k_SceneEffectTuningConstantsEncodedWordsBlock1 = {
+    { 63, 128, 0, 0, 172, 164, 0, 0 },
 };
 #endif

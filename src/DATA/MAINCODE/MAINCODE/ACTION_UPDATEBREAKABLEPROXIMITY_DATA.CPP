@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* TURRETAI_10.CPP */
@@ -12,7 +13,7 @@ char s_ActionUpdatebreakableproximityYObjectTText[8] =
 
 #if defined(VERSION_DE)
 /* ROM-grounded data for de; supplied-list member has no us-rev1 placement. */
-unsigned int g_ActionUpdatebreakableproximityEncodedWords[2] = {
-    0x5B735181, 0xB703BE02,
+RestLinkerAlignmentFill8 g_ActionUpdatebreakableproximityEncodedWords = {
+    { 91, 115, 81, 129, 183, 3, 190, 2 },
 };
 #endif

@@ -1,9 +1,10 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* 80414480.CPP */
 #if defined(VERSION_US)
-const unsigned int k_GfxdataEncodedWordsBlock1[1] = {
-    0x5349435F,
+const RestLinkerAlignmentFill4 k_GfxdataEncodedWordsBlock1 = {
+    { 83, 73, 67, 95 },
 };
 #endif
 

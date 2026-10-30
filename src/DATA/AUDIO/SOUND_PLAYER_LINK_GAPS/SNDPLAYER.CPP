@@ -1,18 +1,25 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802B2D5C_3.CPP */
 #if defined(VERSION_EU)
-unsigned char g_SndplayerTrailingBytesBlock4[12] = { 0x22, 0x73, 0x00, 0x01, 0xA2, 0x81, 0x00, 0x00, 0x22, 0x94, 0x00, 0x01 };
+RestLinkerAlignmentFill12 g_SndplayerTrailingBytesBlock4 = {
+    { 34, 115, 0, 1, 162, 129, 0, 0, 34, 148, 0, 1 },
+};
 #endif
 
 /* 802B63E4_2.CPP */
 #if defined(VERSION_US)
-unsigned char g_SndplayerTrailingBytesBlock11[12] = { 0x54, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0D, 0x00, 0x08, 0x00, 0x02 };
+RestLinkerAlignmentFill12 g_SndplayerTrailingBytesBlock11 = {
+    { 84, 0, 0, 0, 0, 0, 0, 13, 0, 8, 0, 2 },
+};
 #endif
 
 /* 802B7058_39.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-unsigned char g_SndplayerTrailingBytesBlock16[8] = { 0x5A, 0x80, 0x00, 0x25, 0x27, 0xA5, 0x00, 0x10 };
+RestLinkerAlignmentFill8 g_SndplayerTrailingBytesBlock16 = {
+    { 90, 128, 0, 37, 39, 165, 0, 16 },
+};
 #endif
 
 /* 802B7058_51.CPP */

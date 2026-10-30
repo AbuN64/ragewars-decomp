@@ -1,14 +1,15 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-unsigned int func_8020EF74_eu_x_padding_FB54[3] = {
-    0xD0547742, 0x976C84BA, 0x7231A1E8,
+RestLinkerAlignmentFill12 func_8020EF74_eu_x_padding_FB54 = {
+    { 208, 84, 119, 66, 151, 108, 132, 186, 114, 49, 161, 232 },
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_8020EF74_eu_x_padding_FB54 */
-unsigned int g_coreRuntimeSplitInstructionWordsUsRev1[3] = {
-    0x1C400025, 0x00000000, 0x0C09D151,
+RestLinkerAlignmentFill12 g_coreRuntimeSplitInstructionWordsUsRev1 = {
+    { 28, 64, 0, 37, 0, 0, 0, 0, 12, 9, 209, 81 },
 };
 #endif

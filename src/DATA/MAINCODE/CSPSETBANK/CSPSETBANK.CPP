@@ -1,13 +1,16 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802AFEEC_6.CPP */
 #if defined(VERSION_EU)
-unsigned char g_CspsetbankTrailingBytesBlock1[12] = { 0x00, 0x80, 0x40, 0x21, 0xAF, 0xB7, 0x00, 0x44, 0x00, 0xC0, 0xB8, 0x21 };
+RestLinkerAlignmentFill12 g_CspsetbankTrailingBytesBlock1 = {
+    { 0, 128, 64, 33, 175, 183, 0, 68, 0, 192, 184, 33 },
+};
 #endif
 
 /* g_CspsetbankEncodedWords_Cspsetbank.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_CspsetbankEncodedWords[3] = {
-    0x12000067, 0x3C02E700, 0x3C078011,
+RestLinkerAlignmentFill12 g_CspsetbankEncodedWords = {
+    { 18, 0, 0, 103, 60, 2, 231, 0, 60, 7, 128, 17 },
 };
 #endif

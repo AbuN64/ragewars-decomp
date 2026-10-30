@@ -1,9 +1,10 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 
 /* ROM-grounded data: src/k_SndplayerEncodedWordsBlock1_SndplayerData.c */
-const unsigned int k_SndplayerEncodedWordsBlock1[2] = {
-    0x41DFFFFF, 0xFFC00000,
+const double k_SndplayerEncodedWordsBlock1[1] = {
+    2147483647.0,
 };
 
 #if defined(VERSION_US)

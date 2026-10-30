@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_FilterTrailingBytes[4] = { 0x3C, 0x03, 0x02, 0x00 };
+RestLinkerAlignmentFill4 g_FilterTrailingBytes = {
+    { 60, 3, 2, 0 },
+};
 #endif

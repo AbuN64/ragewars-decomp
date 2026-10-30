@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_EU)
-unsigned char g_PfsTrailingBytesBlock2[4] = { 0xC4, 0x20, 0xEB, 0x5C };
+RestLinkerAlignmentFill4 g_PfsTrailingBytesBlock2 = {
+    { 196, 32, 235, 92 },
+};
 #endif

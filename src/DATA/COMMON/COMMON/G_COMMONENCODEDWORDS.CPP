@@ -1,7 +1,8 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/writable/800D2F90_unclaimed_D3D6C_unclaimed_D3DC8 */
-unsigned int g_CommonEncodedWords[2] = {
-    0x454E5420, 0x4F4E2053,
+RestLinkerAlignmentFill8 g_CommonEncodedWords = {
+    { 69, 78, 84, 32, 79, 78, 32, 83 },
 };
 #endif

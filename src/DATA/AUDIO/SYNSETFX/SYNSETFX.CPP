@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_SynsetfxTrailingBytes[8] = { 0x00, 0xA0, 0x80, 0x21, 0xAF, 0xBF, 0x00, 0x18 };
+RestLinkerAlignmentFill8 g_SynsetfxTrailingBytes = {
+    { 0, 160, 128, 33, 175, 191, 0, 24 },
+};
 #endif

@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* g_playerMovementTuningProfileThreeUsRev1_OvlgameInitializeplayerpoolData.CPP */
@@ -9,14 +10,14 @@ float g_playerMovementTuningProfileThreeUsRev1[8] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int k_OvlgameInitializeplayerpoolEncodedWords[1] = {
-    0x00000001,
+RestOvlgameInitializeplayerpoolEncodedWordsRecord391 k_OvlgameInitializeplayerpoolEncodedWords = {
+    1,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int k_OvlgameInitializeplayerpoolEncodedWordsBlock1[1] = {
-    0x00000001,
+RestOvlgameInitializeplayerpoolEncodedWordsBlock1Record392 k_OvlgameInitializeplayerpoolEncodedWordsBlock1 = {
+    1,
 };
 #endif
 
@@ -33,8 +34,8 @@ float g_playerMovementTuningProfileFourUsRev1[8] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int k_OvlgameInitializeplayerpoolEncodedWordsBlock2[1] = {
-    0x00000001,
+RestOvlgameInitializeplayerpoolEncodedWordsBlock2Record393 k_OvlgameInitializeplayerpoolEncodedWordsBlock2 = {
+    1,
 };
 #endif
 
@@ -89,7 +90,7 @@ void *g_playerMovementProfileThreeStateFlagUsRev1[1] = {
 /* g_playerMovementProfileFourStateFlagUsRev1_OvlgameInitializeplayerpoolData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_player_state_normal_timing_00_us_rev1.c */
-unsigned int g_playerMovementProfileFourStateFlagUsRev1[2] = {
-    0x00000000, 0x00000001,
+RestplayerMovementProfileFourStateFlagUsRev1Record394 g_playerMovementProfileFourStateFlagUsRev1 = {
+    { 0, 1 },
 };
 #endif

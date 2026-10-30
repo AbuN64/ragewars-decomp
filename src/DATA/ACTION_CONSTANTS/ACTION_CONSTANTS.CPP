@@ -1,17 +1,18 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 800C6B6C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C6B6C */
-unsigned int g_Ovltab1EncodedWords[1] = {
-    0x3C8EFA36,
+RestLinkerAlignmentFill4 g_Ovltab1EncodedWords = {
+    { 60, 142, 250, 54 },
 };
 #endif
 
 /* 800C735C.CPP */
 #if defined(VERSION_US)
 /* ROM-grounded data for us; supplied-list member has no us-rev1 placement. */
-unsigned int s_framText[1] = {
-    0x4672616D,
+RestLinkerAlignmentFill4 s_framText = {
+    { 70, 114, 97, 109 },
 };
 #endif

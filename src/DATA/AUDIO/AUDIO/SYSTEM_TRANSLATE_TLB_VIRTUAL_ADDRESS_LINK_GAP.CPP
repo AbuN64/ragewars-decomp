@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_SystemTranslateTlbVirtualAddressLinkGapTrailingBytes[8] = { 0x00, 0x00, 0x00, 0x00, 0x8F, 0xA8, 0x00, 0x24 };
+RestLinkerAlignmentFill8 g_SystemTranslateTlbVirtualAddressLinkGapTrailingBytes = {
+    { 0, 0, 0, 0, 143, 168, 0, 36 },
+};
 #endif

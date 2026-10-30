@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_AlsynstartvoiceparamsTrailingBytesBlock1[12] = { 0xAF, 0xB0, 0x00, 0x10, 0x00, 0xA0, 0x80, 0x21, 0xAF, 0xBF, 0x00, 0x18 };
+RestLinkerAlignmentFill12 g_AlsynstartvoiceparamsTrailingBytesBlock1 = {
+    { 175, 176, 0, 16, 0, 160, 128, 33, 175, 191, 0, 24 },
+};
 #endif

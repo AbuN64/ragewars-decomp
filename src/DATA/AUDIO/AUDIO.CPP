@@ -1,27 +1,38 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 8023A284_35.CPP */
 #if defined(VERSION_EU)
-unsigned char g_AudioTrailingBytes[4] = { 0x02, 0x20, 0x20, 0x21 };
+RestLinkerAlignmentFill4 g_AudioTrailingBytes = {
+    { 2, 32, 32, 33 },
+};
 #endif
 
 /* 8025DE50_12.CPP */
 #if defined(VERSION_US)
-unsigned char g_AudioTrailingBytesBlock4[12] = { 0xC4, 0x00, 0x00, 0x00, 0x08, 0x00, 0x11, 0x00, 0x00, 0x00, 0x00, 0x00 };
+RestLinkerAlignmentFill12 g_AudioTrailingBytesBlock4 = {
+    { 196, 0, 0, 0, 8, 0, 17, 0, 0, 0, 0, 0 },
+};
 #endif
 
 /* 8025DE50_16.CPP */
 #if defined(VERSION_EU_X)
-unsigned char g_AudioTrailingBytesBlock5[8] = { 0x3C, 0x06, 0x00, 0x2B, 0x24, 0xC6, 0x58, 0x20 };
+RestLinkerAlignmentFill8 g_AudioTrailingBytesBlock5 = {
+    { 60, 6, 0, 43, 36, 198, 88, 32 },
+};
 #endif
 
 /* 8025DE50_22.CPP */
 #if defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802B8548_us_rev1[2] = { 0x3C06002CU, 0x24C6A610U };
+RestLinkerAlignmentFill8 func_802B8548_us_rev1 = {
+    { 60, 6, 0, 44, 36, 198, 166, 16 },
+};
 #endif
 
 /* 802B7058_42.CPP */
 #if defined(VERSION_DE)
-unsigned char g_AudioTrailingBytesBlock21[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+RestLinkerAlignmentFill8 g_AudioTrailingBytesBlock21 = {
+    { 3, 224, 0, 8, 0, 0, 0, 0 },
+};
 #endif

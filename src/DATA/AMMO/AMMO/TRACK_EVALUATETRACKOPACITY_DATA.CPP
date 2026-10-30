@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_trackOpacityStepWords_TrackEvaluatetrackopacityData.c */
@@ -6,25 +7,25 @@ const float g_trackOpacityStepWords[1] = {
 };
 
 #if defined(VERSION_US)
-unsigned int k_TrackEvaluatetrackopacityEncodedWords[1] = {
-    0x00006600,
+RestLinkerAlignmentFill4 k_TrackEvaluatetrackopacityEncodedWords = {
+    { 0, 0, 102, 0 },
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_TrackEvaluatetrackopacityEncodedWordsBlock2[1] = {
-    0x00000006,
+RestLinkerAlignmentFill4 k_TrackEvaluatetrackopacityEncodedWordsBlock2 = {
+    { 0, 0, 0, 6 },
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_TrackEvaluatetrackopacityEncodedWordsBlock3[1] = {
-    0xEAE20B09,
+RestLinkerAlignmentFill4 k_TrackEvaluatetrackopacityEncodedWordsBlock3 = {
+    { 234, 226, 11, 9 },
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_TrackEvaluatetrackopacityEncodedWordsBlock1[1] = {
-    0x007E7E7E,
+RestLinkerAlignmentFill4 k_TrackEvaluatetrackopacityEncodedWordsBlock1 = {
+    { 0, 126, 126, 126 },
 };
 #endif

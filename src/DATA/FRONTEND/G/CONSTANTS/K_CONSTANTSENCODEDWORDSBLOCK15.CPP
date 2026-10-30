@@ -1,6 +1,10 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_WeaponStateEndD0664UsRev1[];
 
 #if defined(VERSION_US_REV1)
-unsigned int k_ConstantsEncodedWordsBlock15[7] = {
-    0x00000000, 0x00000000, 0x3F800000, 0x3F800000, 0x800CFA84, 0x00000000, 0x00000000,
+RestConstantsEncodedWordsBlock15Layout407 k_ConstantsEncodedWordsBlock15 = {
+    { 0, 0 },
+    { 1.0f, 1.0f },
+    { (void *)((char *)&g_WeaponStateEndD0664UsRev1 + 32), 0, 0 },
 };
 #endif

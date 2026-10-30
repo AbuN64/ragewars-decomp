@@ -1,12 +1,17 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802BE040_46.CPP */
 #if defined(VERSION_EU)
-unsigned char g_SprawdmaTrailingBytesBlock1[4] = { 0xAC, 0x62, 0x00, 0x00 };
+RestLinkerAlignmentFill4 g_SprawdmaTrailingBytesBlock1 = {
+    { 172, 98, 0, 0 },
+};
 #endif
 
 /* g_SprawdmaSeparatedCodeWord.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802B310C_eu_x[1] = { 0x34A50800U };
+RestLinkerAlignmentFill4 func_802B310C_eu_x = {
+    { 52, 165, 8, 0 },
+};
 #endif

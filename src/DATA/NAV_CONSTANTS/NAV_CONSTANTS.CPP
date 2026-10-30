@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 /* 800C1CF4.CPP */
 
@@ -9,7 +10,7 @@ char s_OvldatELoaderRText[8] =
 /* 800C209C.CPP */
 #if defined(VERSION_EU_X)
 /* ROM-grounded data for eu-x; supplied-list member has no us-rev1 placement. */
-unsigned int g_Ovldat1EncodedWords[1] = {
-    0x40F00000,
+RestLinkerAlignmentFill4 g_Ovldat1EncodedWords = {
+    { 64, 240, 0, 0 },
 };
 #endif

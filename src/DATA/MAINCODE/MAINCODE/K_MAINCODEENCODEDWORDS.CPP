@@ -1,5 +1,5 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
-unsigned int k_MaincodeEncodedWords[9] = {
-    0x00202838, 0x0020288C, 0x00202898, 0x0020260C, 0x002028A4, 0x002028AC, 0x0020293C, 0x00202948,
-    0x00202964,
+RestMaincodeEncodedWordsLayout570 k_MaincodeEncodedWords = {
+    { 2107448, 2107532, 2107544, 2106892, 2107556, 2107564, 2107708, 2107720, 2107748 },
 };

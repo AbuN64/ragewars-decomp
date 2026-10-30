@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 #if !(defined(VERSION_US))
@@ -5,7 +6,7 @@
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_SystemEncodedWords[1] = {
-    0x77726561,
+RestLinkerAlignmentFill4 k_SystemEncodedWords = {
+    { 119, 114, 101, 97 },
 };
 #endif

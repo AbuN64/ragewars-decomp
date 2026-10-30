@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_ViblackTrailingBytes[12] = { 0xAF, 0xBF, 0x00, 0x10, 0x0C, 0x0A, 0xE8, 0x3C, 0x24, 0x04, 0x04, 0x00 };
+RestLinkerAlignmentFill12 g_ViblackTrailingBytes = {
+    { 175, 191, 0, 16, 12, 10, 232, 60, 36, 4, 4, 0 },
+};
 #endif

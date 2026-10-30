@@ -1,21 +1,30 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802B3128_15.CPP */
 #if defined(VERSION_EU)
-unsigned char g_AllocatepvoiceTrailingBytesBlock1[8] = { 0x10, 0x40, 0x00, 0x08, 0x02, 0x20, 0x20, 0x21 };
+RestLinkerAlignmentFill8 g_AllocatepvoiceTrailingBytesBlock1 = {
+    { 16, 64, 0, 8, 2, 32, 32, 33 },
+};
 #endif
 
 /* 802B7058_23.CPP */
 #if defined(VERSION_US)
-unsigned char g_AllocatepvoiceTrailingBytesBlock3[8] = { 0x00, 0x00, 0x00, 0x08, 0x00, 0x0D, 0x00, 0x00 };
+RestLinkerAlignmentFill8 g_AllocatepvoiceTrailingBytesBlock3 = {
+    { 0, 0, 0, 8, 0, 13, 0, 0 },
+};
 #endif
 
 /* 802B7058_53.CPP */
 #if defined(VERSION_US_REV1)
-unsigned char g_AllocatepvoiceTrailingBytesBlock4[4] = { 0x0C, 0x0B, 0x14, 0xC8 };
+RestLinkerAlignmentFill4 g_AllocatepvoiceTrailingBytesBlock4 = {
+    { 12, 11, 20, 200 },
+};
 #endif
 
 /* 802B7058_9.CPP */
 #if defined(VERSION_EU_X)
-unsigned char g_AllocatepvoiceTrailingBytesBlock2[8] = { 0x08, 0x0A, 0xE1, 0xDC, 0x24, 0x02, 0x00, 0x0B };
+RestLinkerAlignmentFill8 g_AllocatepvoiceTrailingBytesBlock2 = {
+    { 8, 10, 225, 220, 36, 2, 0, 11 },
+};
 #endif

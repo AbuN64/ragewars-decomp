@@ -1,5 +1,8 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int g_AudioAudioAudio26CppRetainedWords1[3] = { 0xAFB00010U, 0x00808021U, 0xAFBF0018U };
+RestLinkerAlignmentFill12 g_AudioAudioAudio26CppRetainedWords1 = {
+    { 175, 176, 0, 16, 0, 128, 128, 33, 175, 191, 0, 24 },
+};
 #endif

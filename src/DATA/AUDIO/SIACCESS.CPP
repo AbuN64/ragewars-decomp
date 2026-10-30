@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_SiaccessTrailingBytesBlock1[8] = { 0x00, 0x80, 0x88, 0x21, 0xAF, 0xB0, 0x00, 0x10 };
+RestLinkerAlignmentFill8 g_SiaccessTrailingBytesBlock1 = {
+    { 0, 128, 136, 33, 175, 176, 0, 16 },
+};
 #endif

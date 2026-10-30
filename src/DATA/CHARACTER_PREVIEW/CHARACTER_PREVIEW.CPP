@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 800E3C7C.CPP */
@@ -12,16 +13,17 @@ void *g_Ovltab10Ovltab10CppRetainedWords4[1] = {
 /* 800E3C7C_2.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_keys_05_us_rev1.c */
-unsigned int g_CharacterPreviewKeys05Words1[2] = {
-    0x0000008C, 0x00000005,
+RestCharacterPreviewKeys05Words1Record270 g_CharacterPreviewKeys05Words1 = {
+    140,
+    5,
 };
 #endif
 
 /* 800E3C88.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E486C_unclaimed_E4888 */
-unsigned int g_Ovltab10Ovltab10CppRetainedWords14[1] = {
-    0x00000020,
+RestOvltab10Ovltab10CppRetainedWords14Record271 g_Ovltab10Ovltab10CppRetainedWords14 = {
+    32,
 };
 
 float g_CharacterPreviewScaleDistance05Words1[8] = {
@@ -41,8 +43,8 @@ float g_CharacterPreviewPositions05Words1[12] = {
 
 /* 800E3CDC.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_Ovltab10Ovltab10CppRetainedWords20[4] = {
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
+RestOvltab10Ovltab10CppRetainedWords20Record272 g_Ovltab10Ovltab10CppRetainedWords20 = {
+    { 0, 0, -15, -15 },
 };
 #endif
 
@@ -55,16 +57,17 @@ void *g_Ovltab10Ovltab10CppRetainedWords11[1] = {
 };
 
 /* ROM-grounded data: src/ragewars_character_preview_keys_06_us_rev1.c */
-unsigned int g_CharacterPreviewKeys06Words1[2] = {
-    0x0000008E, 0x00000006,
+RestCharacterPreviewKeys06Words1Record273 g_CharacterPreviewKeys06Words1 = {
+    142,
+    6,
 };
 #endif
 
 /* 800E3CF8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E48DC_unclaimed_E48F8 */
-unsigned int g_Ovltab10Ovltab10CppRetainedWords8[1] = {
-    0x00000017,
+RestOvltab10Ovltab10CppRetainedWords8Record274 g_Ovltab10Ovltab10CppRetainedWords8 = {
+    23,
 };
 
 float g_CharacterPreviewScaleDistance06Words1[8] = {
@@ -85,8 +88,8 @@ float g_CharacterPreviewPositions06Words1[12] = {
 /* 800E3D4C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_lights_06_us_rev1.c */
-unsigned int g_CharacterPreviewLights06Words1[4] = {
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
+RestCharacterPreviewLights06Words1Record275 g_CharacterPreviewLights06Words1 = {
+    { 0, 0, -15, -15 },
 };
 #endif
 
@@ -102,16 +105,17 @@ void *g_Ovltab10Ovltab10CppRetainedWords7[1] = {
 /* 800E3D5C_2.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_keys_07_us_rev1.c */
-unsigned int g_CharacterPreviewKeys07Words1[2] = {
-    0x0000008D, 0x00000007,
+RestCharacterPreviewKeys07Words1Record276 g_CharacterPreviewKeys07Words1 = {
+    141,
+    7,
 };
 #endif
 
 /* 800E3D68.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E494C_unclaimed_E4968 */
-unsigned int g_Ovltab10Ovltab10CppRetainedWords15[1] = {
-    0x0000001B,
+RestOvltab10Ovltab10CppRetainedWords15Record277 g_Ovltab10Ovltab10CppRetainedWords15 = {
+    27,
 };
 
 float g_CharacterPreviewScaleDistance07Words1[8] = {
@@ -132,8 +136,8 @@ float g_CharacterPreviewPositions07Words1[12] = {
 /* 800E3DBC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_lights_07_us_rev1.c */
-unsigned int g_CharacterPreviewLights07Words1[4] = {
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
+RestCharacterPreviewLights07Words1Record278 g_CharacterPreviewLights07Words1 = {
+    { 0, 0, -15, -15 },
 };
 #endif
 
@@ -149,16 +153,17 @@ void *g_Ovltab10Ovltab10CppRetainedWords2[1] = {
 /* 800E3DCC_2.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_keys_08_us_rev1.c */
-unsigned int g_CharacterPreviewKeys08Words1[2] = {
-    0x00000089, 0x00000008,
+RestCharacterPreviewKeys08Words1Record279 g_CharacterPreviewKeys08Words1 = {
+    137,
+    8,
 };
 #endif
 
 /* 800E3DD8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E49BC_unclaimed_E49D8 */
-unsigned int g_Ovltab10Ovltab10CppRetainedWords12[1] = {
-    0x00000019,
+RestOvltab10Ovltab10CppRetainedWords12Record280 g_Ovltab10Ovltab10CppRetainedWords12 = {
+    25,
 };
 
 float g_CharacterPreviewScaleDistance08Words1[8] = {
@@ -179,8 +184,8 @@ float g_CharacterPreviewPositions08Words1[12] = {
 /* 800E3E2C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_lights_08_us_rev1.c */
-unsigned int g_CharacterPreviewLights08Words1[4] = {
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
+RestCharacterPreviewLights08Words1Record281 g_CharacterPreviewLights08Words1 = {
+    { 0, 0, -15, -15 },
 };
 #endif
 
@@ -196,16 +201,17 @@ void *g_Ovltab10Ovltab10CppRetainedWords5[1] = {
 /* 800E3E3C_2.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_keys_09_us_rev1.c */
-unsigned int g_CharacterPreviewKeys09Words1[2] = {
-    0x00000082, 0x00000009,
+RestCharacterPreviewKeys09Words1Record282 g_CharacterPreviewKeys09Words1 = {
+    130,
+    9,
 };
 #endif
 
 /* 800E3E48.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4A2C_unclaimed_E4A48 */
-unsigned int g_Ovltab10Ovltab10CppRetainedWords13[1] = {
-    0x00000018,
+RestOvltab10Ovltab10CppRetainedWords13Record283 g_Ovltab10Ovltab10CppRetainedWords13 = {
+    24,
 };
 
 float g_CharacterPreviewScaleDistance09Words1[8] = {
@@ -225,8 +231,8 @@ float g_CharacterPreviewPositions09Words1[12] = {
 
 /* 800E3E9C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_Ovltab10Ovltab10CppRetainedWords17[4] = {
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
+RestOvltab10Ovltab10CppRetainedWords17Record284 g_Ovltab10Ovltab10CppRetainedWords17 = {
+    { 0, 0, -15, -15 },
 };
 #endif
 
@@ -239,16 +245,17 @@ void *g_Ovltab10Ovltab10CppRetainedWords9[1] = {
 };
 
 /* ROM-grounded data: src/ragewars_character_preview_keys_10_us_rev1.c */
-unsigned int g_CharacterPreviewKeys10Words1[2] = {
-    0x00000090, 0x0000000A,
+RestCharacterPreviewKeys10Words1Record285 g_CharacterPreviewKeys10Words1 = {
+    144,
+    10,
 };
 #endif
 
 /* 800E3EB8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4A9C_unclaimed_E4AB8 */
-unsigned int g_Ovltab10Ovltab10CppRetainedWords16[1] = {
-    0x0000001C,
+RestOvltab10Ovltab10CppRetainedWords16Record286 g_Ovltab10Ovltab10CppRetainedWords16 = {
+    28,
 };
 
 float g_CharacterPreviewScaleDistance10Words1[8] = {
@@ -268,8 +275,8 @@ float g_CharacterPreviewPositions10Words1[12] = {
 
 /* 800E3F0C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_Ovltab10Ovltab10CppRetainedWords18[4] = {
-    0x00000000, 0x00000000, 0xFFFFFFF6, 0xFFFFFFF6,
+RestOvltab10Ovltab10CppRetainedWords18Record287 g_Ovltab10Ovltab10CppRetainedWords18 = {
+    { 0, 0, -10, -10 },
 };
 #endif
 
@@ -282,16 +289,17 @@ void *g_Ovltab10Ovltab10CppRetainedWords3[1] = {
 };
 
 /* ROM-grounded data: src/ragewars_character_preview_keys_11_us_rev1.c */
-unsigned int g_CharacterPreviewKeys11Words1[2] = {
-    0x00000088, 0x0000000B,
+RestCharacterPreviewKeys11Words1Record288 g_CharacterPreviewKeys11Words1 = {
+    136,
+    11,
 };
 #endif
 
 /* 800E3F28.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4B0C_unclaimed_E4B28 */
-unsigned int g_Ovltab10Ovltab10CppRetainedWords6[1] = {
-    0x00000021,
+RestOvltab10Ovltab10CppRetainedWords6Record289 g_Ovltab10Ovltab10CppRetainedWords6 = {
+    33,
 };
 
 float g_CharacterPreviewScaleDistance11Words1[8] = {
@@ -311,8 +319,8 @@ float g_CharacterPreviewPositions11Words1[12] = {
 
 /* 800E3F7C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_Ovltab10Ovltab10CppRetainedWords19[4] = {
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
+RestOvltab10Ovltab10CppRetainedWords19Record290 g_Ovltab10Ovltab10CppRetainedWords19 = {
+    { 0, 0, -15, -15 },
 };
 #endif
 
@@ -325,16 +333,17 @@ void *g_Ovltab10Ovltab10CppRetainedWords1[1] = {
 };
 
 /* ROM-grounded data: src/ragewars_character_preview_keys_12_us_rev1.c */
-unsigned int g_CharacterPreviewKeys12Words1[2] = {
-    0x0000008A, 0x0000000C,
+RestCharacterPreviewKeys12Words1Record291 g_CharacterPreviewKeys12Words1 = {
+    138,
+    12,
 };
 #endif
 
 /* 800E3F98.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4B7C_unclaimed_E4B98 */
-unsigned int g_Ovltab10Ovltab10CppRetainedWords10[1] = {
-    0x00000022,
+RestOvltab10Ovltab10CppRetainedWords10Record292 g_Ovltab10Ovltab10CppRetainedWords10 = {
+    34,
 };
 
 float g_CharacterPreviewScaleDistance12Words1[8] = {
@@ -355,7 +364,7 @@ float g_CharacterPreviewPositions12Words1[12] = {
 /* 800E3FEC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_lights_12_us_rev1.c */
-unsigned int g_CharacterPreviewLights12Words1[4] = {
-    0x00000000, 0x00000000, 0xFFFFFFF6, 0xFFFFFFF6,
+RestCharacterPreviewLights12Words1Record293 g_CharacterPreviewLights12Words1 = {
+    { 0, 0, -10, -10 },
 };
 #endif

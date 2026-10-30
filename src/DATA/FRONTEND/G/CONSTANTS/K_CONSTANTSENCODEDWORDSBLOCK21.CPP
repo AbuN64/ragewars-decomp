@@ -1,7 +1,11 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_WeaponStateEndCFF98UsRev1[];
 #include "DATA/OVL1_G/WEAPON_ACTION_FIVE_SPIN_ADDRESS.H"
 
 #if defined(VERSION_US_REV1)
-unsigned int k_ConstantsEncodedWordsBlock21[7] = {
-    0x00000000, 0x00000000, 0x3F800000, 0x3F800000, 0x800CF3B8, 0x00000000, (unsigned int)g_weapon_EaseSpinForActionFiveEntry,
+RestConstantsEncodedWordsBlock21Layout410 k_ConstantsEncodedWordsBlock21 = {
+    { 0, 0 },
+    { 1.0f, 1.0f },
+    { (void *)((char *)&g_WeaponStateEndCFF98UsRev1 + 32), 0, (void *)(g_weapon_EaseSpinForActionFiveEntry) },
 };
 #endif

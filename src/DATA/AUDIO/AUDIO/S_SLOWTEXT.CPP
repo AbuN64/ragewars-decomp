@@ -1,14 +1,19 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802B7058_44.CPP */
 #if defined(VERSION_EU)
-unsigned char g_SSlowtextTrailingBytes[8] = { 0x0C, 0x0A, 0xE1, 0xD8, 0x27, 0xA7, 0x00, 0x18 };
+RestLinkerAlignmentFill8 g_SSlowtextTrailingBytes = {
+    { 12, 10, 225, 216, 39, 167, 0, 24 },
+};
 #endif
 
 /* 802BE040_63.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802B9E94_eu_x[3] = { 0xAE670000U, 0x8FB90010U, 0x35AD0034U };
+RestLinkerAlignmentFill12 func_802B9E94_eu_x = {
+    { 174, 103, 0, 0, 143, 185, 0, 16, 53, 173, 0, 52 },
+};
 #endif
 
 /* 802BFD80_6.CPP */

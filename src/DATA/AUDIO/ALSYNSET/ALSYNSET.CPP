@@ -1,21 +1,30 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802B3128_19.CPP */
 #if defined(VERSION_EU)
-unsigned char g_AlsynsetTrailingBytesBlock1[4] = { 0xAE, 0x30, 0x00, 0x04 };
+RestLinkerAlignmentFill4 g_AlsynsetTrailingBytesBlock1 = {
+    { 174, 48, 0, 4 },
+};
 #endif
 
 /* 802B7058_34.CPP */
 #if defined(VERSION_US)
-unsigned char g_AlsynsetTrailingBytesBlock3[8] = { 0x52, 0x00, 0x00, 0xD8, 0x00, 0x00, 0x00, 0x08 };
+RestLinkerAlignmentFill8 g_AlsynsetTrailingBytesBlock3 = {
+    { 82, 0, 0, 216, 0, 0, 0, 8 },
+};
 #endif
 
 /* 802BA5F0_16.CPP */
 #if defined(VERSION_EU_X)
-unsigned char g_AlsynsetTrailingBytesBlock2[12] = { 0x10, 0x40, 0x00, 0x08, 0x3C, 0x03, 0xA4, 0x60, 0x34, 0x63, 0x00, 0x10 };
+RestLinkerAlignmentFill12 g_AlsynsetTrailingBytesBlock2 = {
+    { 16, 64, 0, 8, 60, 3, 164, 96, 52, 99, 0, 16 },
+};
 #endif
 
 /* 802BA5F0_28.CPP */
 #if defined(VERSION_US_REV1)
-unsigned char g_AlsynsetTrailingBytesBlock4[12] = { 0x8C, 0x63, 0x92, 0xB0, 0x27, 0xBD, 0xFF, 0xD8, 0xAF, 0xBF, 0x00, 0x20 };
+RestLinkerAlignmentFill12 g_AlsynsetTrailingBytesBlock4 = {
+    { 140, 99, 146, 176, 39, 189, 255, 216, 175, 191, 0, 32 },
+};
 #endif

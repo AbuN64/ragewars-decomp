@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_AigetlenTrailingBytesBlock1[12] = { 0x46, 0x80, 0x08, 0x61, 0x3C, 0x01, 0x80, 0x0D, 0xC4, 0x22, 0x52, 0x40 };
+RestLinkerAlignmentFill12 g_AigetlenTrailingBytesBlock1 = {
+    { 70, 128, 8, 97, 60, 1, 128, 13, 196, 34, 82, 64 },
+};
 #endif

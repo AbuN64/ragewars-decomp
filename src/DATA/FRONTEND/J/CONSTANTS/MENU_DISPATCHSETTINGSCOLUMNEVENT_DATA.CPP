@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* EMPTY_SECTION_MENU_DISPATCHSETTINGSCOLUMNEVENT.CPP */
@@ -15,12 +16,28 @@ extern char g_Menu_WrapSettingsNodePairPackedAddress24[];
 extern char g_Menu_UpdateTitleButtonScreenPackedAddress24[];
 extern char g_Menu_CancelTitleButtonScreenPackedAddress24[];
 extern char g_Menu_HandleTitleButtonChoicePackedAddress24[];
-unsigned int g_MenuDispatchsettingscolumneventPointerWords1[42] = {
-    0x00000E08, 0x00000009, (unsigned int)g_Menu_UpdateScrollingChoiceScreenPackedAddress24, 0x00000E06, 0x00000009, 0x00437310, 0x00000E07, 0x00000009,
-    (unsigned int)g_Menu_WrapScrollingChoiceNodesPackedAddress24, 0x00000E03, 0x00000009, (unsigned int)g_Menu_FreeScrollingChoiceScreenPackedAddress24, 0x00000001, 0x00000009, (unsigned int)g_Menu_HandleScrollingChoicePackedAddress24, 0x00000002,
-    0x00000009, (unsigned int)g_Menu_CancelScrollingChoiceScreenPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00000E08, 0x0000001E, (unsigned int)g_Menu_UpdateTitleButtonScreenPackedAddress24,
-    0x00000E06, 0x0000001E, (unsigned int)g_Menu_CreateTitleButtonScreenPackedAddress24, 0x00000E07, 0x0000001E, (unsigned int)g_Menu_WrapSettingsNodePairPackedAddress24, 0x00000E03, 0x0000001E,
-    (unsigned int)g_Menu_FreeTitleButtonScreenPackedAddress24, 0x00000001, 0x0000001E, (unsigned int)g_Menu_HandleTitleButtonChoicePackedAddress24, 0x00000002, 0x0000001E, (unsigned int)g_Menu_CancelTitleButtonScreenPackedAddress24, 0x00000000,
-    0x00000000, 0x00000000,
+RestMenuDispatchsettingscolumneventPointerWords1Layout504 g_MenuDispatchsettingscolumneventPointerWords1 = {
+    { 3592, 9 },
+    (void *)(g_Menu_UpdateScrollingChoiceScreenPackedAddress24),
+    { 3590, 9, 4420368, 3591, 9 },
+    (void *)(g_Menu_WrapScrollingChoiceNodesPackedAddress24),
+    { 3587, 9 },
+    (void *)(g_Menu_FreeScrollingChoiceScreenPackedAddress24),
+    { 1, 9 },
+    (void *)(g_Menu_HandleScrollingChoicePackedAddress24),
+    { 2, 9 },
+    { (void *)(g_Menu_CancelScrollingChoiceScreenPackedAddress24), 0, 0, 0 },
+    { 3592, 30 },
+    (void *)(g_Menu_UpdateTitleButtonScreenPackedAddress24),
+    { 3590, 30 },
+    (void *)(g_Menu_CreateTitleButtonScreenPackedAddress24),
+    { 3591, 30 },
+    (void *)(g_Menu_WrapSettingsNodePairPackedAddress24),
+    { 3587, 30 },
+    (void *)(g_Menu_FreeTitleButtonScreenPackedAddress24),
+    { 1, 30 },
+    (void *)(g_Menu_HandleTitleButtonChoicePackedAddress24),
+    { 2, 30 },
+    { (void *)(g_Menu_CancelTitleButtonScreenPackedAddress24), 0, 0, 0 },
 };
 #endif

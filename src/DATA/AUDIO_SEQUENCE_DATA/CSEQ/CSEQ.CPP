@@ -1,6 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_alCSeqSecToTicksConstantWords_Cseq.c */
-const unsigned int g_alCSeqSecToTicksConstantWords[3] = {
-    0x41F00000, 0x00000000, 0x49742400,
+const float g_alCSeqSecToTicksConstantWords[3] = {
+    3e+01f, 0.0f, 1e+06f,
 };

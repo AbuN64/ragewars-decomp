@@ -1,15 +1,18 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
-unsigned int k_audioDistanceAttenuationWordsUsRevisionOne[65] = {
-    0x00000000, 0x3EB504E6, 0x3ED744F6, 0x3EEE3C10, 0x3F000000, 0x3F0757F7, 0x3F0DA7C1, 0x3F133893,
-    0x3F1837F8, 0x3F1CC469, 0x3F20F399, 0x3F24D520, 0x3F28751D, 0x3F2BDCBE, 0x3F2F137B, 0x3F321F3A,
-    0x3F3504F7, 0x3F37C89F, 0x3F3A6DCE, 0x3F3CF744, 0x3F3F6790, 0x3F41C0EC, 0x3F44052D, 0x3F4635E7,
-    0x3F4854AC, 0x3F4A62BB, 0x3F4C6141, 0x3F4E513B, 0x3F5033A4, 0x3F520957, 0x3F53D2FA, 0x3F559147,
-    0x3F5744F6, 0x3F58EE8D, 0x3F5A8E93, 0x3F5C258D, 0x3F5DB3D0, 0x3F5F39F3, 0x3F60B839, 0x3F622F06,
-    0x3F639EAE, 0x3F650774, 0x3F6669BE, 0x3F67C5CE, 0x3F691BC5, 0x3F6A6BF8, 0x3F6BB6AA, 0x3F6CFBFC,
-    0x3F6E3C21, 0x3F6F774B, 0x3F70ADBC, 0x3F71DF87, 0x3F730CCC, 0x3F7435CE, 0x3F755AAF, 0x3F767B70,
-    0x3F779852, 0x3F78B168, 0x3F79C6D2, 0x3F7AD8B2, 0x3F7BE719, 0x3F7CF217, 0x3F7DF9DF, 0x3F7EFE82,
-    0x3F800000,
+float k_audioDistanceAttenuationWordsUsRevisionOne[65] = {
+    0.0f, 0.353553f, 0.420448f, 0.465302f, 0.5f, 0.528686f,
+    0.553341f, 0.575082f, 0.594604f, 0.612372f, 0.628717f, 0.643877f,
+    0.658037f, 0.671337f, 0.683891f, 0.695789f, 0.707107f, 0.717905f,
+    0.728238f, 0.738148f, 0.747674f, 0.75685f, 0.765704f, 0.77426f,
+    0.782542f, 0.790569f, 0.798359f, 0.805927f, 0.813288f, 0.820455f,
+    0.827438f, 0.834248f, 0.840896f, 0.84739f, 0.853738f, 0.859948f,
+    0.866025f, 0.871978f, 0.877811f, 0.88353f, 0.88914f, 0.894645f,
+    0.900051f, 0.905362f, 0.91058f, 0.91571f, 0.920756f, 0.92572f,
+    0.930605f, 0.935414f, 0.940151f, 0.944817f, 0.949414f, 0.953946f,
+    0.958415f, 0.962821f, 0.967168f, 0.971457f, 0.97569f, 0.979869f,
+    0.983995f, 0.988069f, 0.992094f, 0.996071f, 1.0f,
 };
 
 #if defined(VERSION_US)
@@ -22,21 +25,13 @@ extern char g_spawnActorDispatchTable[];
 extern char g_movingMotionDispatchTriggerPairs_us[];
 extern char g_triggeredMotionDispatchTriggerPairs_us[];
 extern char g_lightAnimationOffsetTable[];
-unsigned int g_lightVolumeConeDistanceLookup[110] = {
-    0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
-    0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
-    0x3F000000, 0x3F03F078, 0x3F07C3B5, 0x3F0B7C13, 0x3F0F1BBD, 0x3F12A476, 0x3F1617E3, 0x3F197775,
-    0x3F1CC469, 0x3F200000, 0x3F232B24, 0x3F2646E1, 0x3F295400, 0x3F2C534C, 0x3F2F456B, 0x3F322B28,
-    0x3F3504F7, 0x3F37D36F, 0x3F3A9729, 0x3F3D5087, 0x3F400000, 0x3F42A5F8, 0x3F4542E5, 0x3F47D70A,
-    0x3F4A62BB, 0x3F4CE66D, 0x3F4F6241, 0x3F51D68C, 0x3F544391, 0x3F56A993, 0x3F5908D5, 0x3F5B6189,
-    0x3F5DB3D0, 0x3F600000, 0x3F624628, 0x3F64869C, 0x3F66C15D, 0x3F68F6AD, 0x3F6B26AF, 0x3F6D5183,
-    0x3F6F774B, 0x3F719839, 0x3F73B470, 0x3F75CBEF, 0x3F77DEF8, 0x3F79ED8D, 0x3F7BF7E0, 0x3F7DFE00,
-    0x3F800000, 0x00000001, 0xF7F9F8F5, 0x080E190C, 0x12171A0E, 0xFCEEF2E3, 0xD7E2E5E7, 0xE5DDE2EA,
-    0xE1E5EFF2, 0x0002FEF3, 0xF3F70502, 0xFE09181F, 0x221D1518, 0x0A0DFDFA, 0x01131F27, 0x1D1E1414,
-    0xFFF1E6EC, 0xE8E1E3E8, 0xE6F1F102, 0x11080711, 0x0E090C0C, 0x040C050A, 0x0D05FDFE, 0xF6F7F8EB,
-    0xEBE84841, 0x00000000, 0x00000000, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_triggeredMotionDispatchTriggerPairs_us + 0x40, (unsigned int)g_spawnActorDispatchTable + 0x88, (unsigned int)g_turretDispatchTriggerPairs_us + 0x48,
-    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_actionEnterDispatchTable + 0x88, (unsigned int)g_damageDispatchTriggerPairs_us + 0x78, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_movingMotionDispatchTriggerPairs_us + 0x2C, (unsigned int)g_actionMotionDispatchTriggerPairs_us + 0x4C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C,
-    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, 0x00660000, 0x00040000, 0x00000021, 0x3F800000,
+RestlightVolumeConeDistanceLookupLayout309 g_lightVolumeConeDistanceLookup = {
+    { 0.0f, 0.125f, 0.176777f, 0.216506f, 0.25f, 0.279509f, 0.306186f, 0.330719f, 0.353553f, 0.375f, 0.395285f, 0.414578f, 0.433013f, 0.450694f, 0.467707f, 0.484123f, 0.5f, 0.515388f, 0.53033f, 0.544862f, 0.559017f, 0.572822f, 0.586302f, 0.599479f, 0.612372f, 0.625f, 0.637377f, 0.649519f, 0.661438f, 0.673146f, 0.684653f, 0.695971f, 0.707107f, 0.71807f, 0.728869f, 0.73951f, 0.75f, 0.760345f, 0.770552f, 0.780625f, 0.790569f, 0.800391f, 0.810093f, 0.81968f, 0.829156f, 0.838525f, 0.847791f, 0.856957f, 0.866025f, 0.875f, 0.883883f, 0.892679f, 0.901388f, 0.910014f, 0.918559f, 0.927025f, 0.935414f, 0.943729f, 0.951972f, 0.960143f, 0.968246f, 0.976281f, 0.984251f, 0.992157f, 1.0f },
+    1,
+    { -9, -7, -8, -11, 8, 14, 25, 12, 18, 23, 26, 14, -4, -18, -14, -29, -41, -30, -27, -25, -27, -35, -30, -22, -31, -27, -17, -14, 0, 2, -2, -13, -13, -9, 5, 2, -2, 9, 24, 31, 34, 29, 21, 24, 10, 13, -3, -6, 1, 19, 31, 39, 29, 30, 20, 20, -1, -15, -26, -20, -24, -31, -29, -24, -26, -15, -15, 2, 17, 8, 7, 17, 14, 9, 12, 12, 4, 12, 5, 10, 13, 5, -3, -2, -10, -9, -8, -21, -21, -24, 72, 65 },
+    { 0, 0 },
+    { (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_triggeredMotionDispatchTriggerPairs_us + 0x40), (void *)(g_spawnActorDispatchTable + 0x88), (void *)(g_turretDispatchTriggerPairs_us + 0x48), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_actionEnterDispatchTable + 0x88), (void *)(g_damageDispatchTriggerPairs_us + 0x78), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_movingMotionDispatchTriggerPairs_us + 0x2C), (void *)(g_actionMotionDispatchTriggerPairs_us + 0x4C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C) },
+    { 0x00660000, 0x00040000, 0x00000021, 0x3F800000 },
 };
 #endif
 #endif
@@ -51,21 +46,13 @@ extern char g_actionMotionDispatchTriggerPairs_eu_x[];
 extern char g_actionEnterDispatchTriggerPairs_eu_x[];
 extern char g_damageDispatchTriggerPairs_eu_x[];
 extern char g_lightAnimationOffsetTable[];
-unsigned int g_lightVolumeConeDistanceLookup[110] = {
-    0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
-    0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
-    0x3F000000, 0x3F03F078, 0x3F07C3B5, 0x3F0B7C13, 0x3F0F1BBD, 0x3F12A476, 0x3F1617E3, 0x3F197775,
-    0x3F1CC469, 0x3F200000, 0x3F232B24, 0x3F2646E1, 0x3F295400, 0x3F2C534C, 0x3F2F456B, 0x3F322B28,
-    0x3F3504F7, 0x3F37D36F, 0x3F3A9729, 0x3F3D5087, 0x3F400000, 0x3F42A5F8, 0x3F4542E5, 0x3F47D70A,
-    0x3F4A62BB, 0x3F4CE66D, 0x3F4F6241, 0x3F51D68C, 0x3F544391, 0x3F56A993, 0x3F5908D5, 0x3F5B6189,
-    0x3F5DB3D0, 0x3F600000, 0x3F624628, 0x3F64869C, 0x3F66C15D, 0x3F68F6AD, 0x3F6B26AF, 0x3F6D5183,
-    0x3F6F774B, 0x3F719839, 0x3F73B470, 0x3F75CBEF, 0x3F77DEF8, 0x3F79ED8D, 0x3F7BF7E0, 0x3F7DFE00,
-    0x3F800000, 0x00000001, 0xF7F9F8F5, 0x080E190C, 0x12171A0E, 0xFCEEF2E3, 0xD7E2E5E7, 0xE5DDE2EA,
-    0xE1E5EFF2, 0x0002FEF3, 0xF3F70502, 0xFE09181F, 0x221D1518, 0x0A0DFDFA, 0x01131F27, 0x1D1E1414,
-    0xFFF1E6EC, 0xE8E1E3E8, 0xE6F1F102, 0x11080711, 0x0E090C0C, 0x040C050A, 0x0D05FDFE, 0xF6F7F8EB,
-    0xEBE85420, 0x00000000, 0x00000000, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_triggeredMotionDispatchTable + 0xE8, (unsigned int)g_spawnActorDispatchTable + 0x88, (unsigned int)g_turretDispatchTriggerPairs_eu_x + 0x64,
-    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_actionEnterDispatchTriggerPairs_eu_x + 0x18, (unsigned int)g_damageDispatchTriggerPairs_eu_x + 0x50, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_movingMotionDispatchTable + 0x68, (unsigned int)g_actionMotionDispatchTriggerPairs_eu_x + 0x14, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C,
-    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, 0x53434F52, 0x50494F4E, 0x00000000, 0x3F800000,
+RestlightVolumeConeDistanceLookupLayout310 g_lightVolumeConeDistanceLookup = {
+    { 0.0f, 0.125f, 0.176777f, 0.216506f, 0.25f, 0.279509f, 0.306186f, 0.330719f, 0.353553f, 0.375f, 0.395285f, 0.414578f, 0.433013f, 0.450694f, 0.467707f, 0.484123f, 0.5f, 0.515388f, 0.53033f, 0.544862f, 0.559017f, 0.572822f, 0.586302f, 0.599479f, 0.612372f, 0.625f, 0.637377f, 0.649519f, 0.661438f, 0.673146f, 0.684653f, 0.695971f, 0.707107f, 0.71807f, 0.728869f, 0.73951f, 0.75f, 0.760345f, 0.770552f, 0.780625f, 0.790569f, 0.800391f, 0.810093f, 0.81968f, 0.829156f, 0.838525f, 0.847791f, 0.856957f, 0.866025f, 0.875f, 0.883883f, 0.892679f, 0.901388f, 0.910014f, 0.918559f, 0.927025f, 0.935414f, 0.943729f, 0.951972f, 0.960143f, 0.968246f, 0.976281f, 0.984251f, 0.992157f, 1.0f },
+    1,
+    { -9, -7, -8, -11, 8, 14, 25, 12, 18, 23, 26, 14, -4, -18, -14, -29, -41, -30, -27, -25, -27, -35, -30, -22, -31, -27, -17, -14, 0, 2, -2, -13, -13, -9, 5, 2, -2, 9, 24, 31, 34, 29, 21, 24, 10, 13, -3, -6, 1, 19, 31, 39, 29, 30, 20, 20, -1, -15, -26, -20, -24, -31, -29, -24, -26, -15, -15, 2, 17, 8, 7, 17, 14, 9, 12, 12, 4, 12, 5, 10, 13, 5, -3, -2, -10, -9, -8, -21, -21, -24, 84, 32 },
+    { 0, 0 },
+    { (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_triggeredMotionDispatchTable + 0xE8), (void *)(g_spawnActorDispatchTable + 0x88), (void *)(g_turretDispatchTriggerPairs_eu_x + 0x64), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_actionEnterDispatchTriggerPairs_eu_x + 0x18), (void *)(g_damageDispatchTriggerPairs_eu_x + 0x50), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_movingMotionDispatchTable + 0x68), (void *)(g_actionMotionDispatchTriggerPairs_eu_x + 0x14), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C) },
+    { 0x53434F52, 0x50494F4E, 0x00000000, 0x3F800000 },
 };
 #endif
 #endif
@@ -80,21 +67,13 @@ extern char g_spawnActorDispatchTriggerPairs_eu[];
 extern char g_movingMotionDispatchTriggerPairs_eu[];
 extern char g_triggeredMotionDispatchTriggerPairs_eu[];
 extern char g_lightAnimationOffsetTable[];
-unsigned int g_lightVolumeConeDistanceLookup[110] = {
-    0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
-    0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
-    0x3F000000, 0x3F03F078, 0x3F07C3B5, 0x3F0B7C13, 0x3F0F1BBD, 0x3F12A476, 0x3F1617E3, 0x3F197775,
-    0x3F1CC469, 0x3F200000, 0x3F232B24, 0x3F2646E1, 0x3F295400, 0x3F2C534C, 0x3F2F456B, 0x3F322B28,
-    0x3F3504F7, 0x3F37D36F, 0x3F3A9729, 0x3F3D5087, 0x3F400000, 0x3F42A5F8, 0x3F4542E5, 0x3F47D70A,
-    0x3F4A62BB, 0x3F4CE66D, 0x3F4F6241, 0x3F51D68C, 0x3F544391, 0x3F56A993, 0x3F5908D5, 0x3F5B6189,
-    0x3F5DB3D0, 0x3F600000, 0x3F624628, 0x3F64869C, 0x3F66C15D, 0x3F68F6AD, 0x3F6B26AF, 0x3F6D5183,
-    0x3F6F774B, 0x3F719839, 0x3F73B470, 0x3F75CBEF, 0x3F77DEF8, 0x3F79ED8D, 0x3F7BF7E0, 0x3F7DFE00,
-    0x3F800000, 0x00000001, 0xF7F9F8F5, 0x080E190C, 0x12171A0E, 0xFCEEF2E3, 0xD7E2E5E7, 0xE5DDE2EA,
-    0xE1E5EFF2, 0x0002FEF3, 0xF3F70502, 0xFE09181F, 0x221D1518, 0x0A0DFDFA, 0x01131F27, 0x1D1E1414,
-    0xFFF1E6EC, 0xE8E1E3E8, 0xE6F1F102, 0x11080711, 0x0E090C0C, 0x040C050A, 0x0D05FDFE, 0xF6F7F8EB,
-    0xEBE80000, 0x00000000, 0x00000000, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_triggeredMotionDispatchTriggerPairs_eu + 0x10, (unsigned int)g_spawnActorDispatchTriggerPairs_eu + 0x30, (unsigned int)g_turretDispatchTriggerPairs_eu + 0x98,
-    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_actionEnterDispatchTriggerPairs_eu, (unsigned int)g_damageDispatchTriggerPairs_eu + 0x50, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_movingMotionDispatchTriggerPairs_eu + 0x40, (unsigned int)g_actionMotionDispatchTriggerPairs_eu + 0x3C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C,
-    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, 0x002791FC, 0x00206950, 0x00000000, 0x3F800000,
+RestlightVolumeConeDistanceLookupLayout311 g_lightVolumeConeDistanceLookup = {
+    { 0.0f, 0.125f, 0.176777f, 0.216506f, 0.25f, 0.279509f, 0.306186f, 0.330719f, 0.353553f, 0.375f, 0.395285f, 0.414578f, 0.433013f, 0.450694f, 0.467707f, 0.484123f, 0.5f, 0.515388f, 0.53033f, 0.544862f, 0.559017f, 0.572822f, 0.586302f, 0.599479f, 0.612372f, 0.625f, 0.637377f, 0.649519f, 0.661438f, 0.673146f, 0.684653f, 0.695971f, 0.707107f, 0.71807f, 0.728869f, 0.73951f, 0.75f, 0.760345f, 0.770552f, 0.780625f, 0.790569f, 0.800391f, 0.810093f, 0.81968f, 0.829156f, 0.838525f, 0.847791f, 0.856957f, 0.866025f, 0.875f, 0.883883f, 0.892679f, 0.901388f, 0.910014f, 0.918559f, 0.927025f, 0.935414f, 0.943729f, 0.951972f, 0.960143f, 0.968246f, 0.976281f, 0.984251f, 0.992157f, 1.0f },
+    1,
+    { -9, -7, -8, -11, 8, 14, 25, 12, 18, 23, 26, 14, -4, -18, -14, -29, -41, -30, -27, -25, -27, -35, -30, -22, -31, -27, -17, -14, 0, 2, -2, -13, -13, -9, 5, 2, -2, 9, 24, 31, 34, 29, 21, 24, 10, 13, -3, -6, 1, 19, 31, 39, 29, 30, 20, 20, -1, -15, -26, -20, -24, -31, -29, -24, -26, -15, -15, 2, 17, 8, 7, 17, 14, 9, 12, 12, 4, 12, 5, 10, 13, 5, -3, -2, -10, -9, -8, -21, -21, -24, 0, 0 },
+    { 0, 0 },
+    { (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_triggeredMotionDispatchTriggerPairs_eu + 0x10), (void *)(g_spawnActorDispatchTriggerPairs_eu + 0x30), (void *)(g_turretDispatchTriggerPairs_eu + 0x98), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_actionEnterDispatchTriggerPairs_eu), (void *)(g_damageDispatchTriggerPairs_eu + 0x50), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_movingMotionDispatchTriggerPairs_eu + 0x40), (void *)(g_actionMotionDispatchTriggerPairs_eu + 0x3C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C) },
+    { 0x002791FC, 0x00206950, 0x00000000, 0x3F800000 },
 };
 #endif
 #endif
@@ -109,21 +88,13 @@ extern char g_movingMotionDispatchTriggerPairs_de[];
 extern char g_triggeredMotionDispatchTriggerPairs_de[];
 extern char g_lightAnimationOffsetTable[];
 extern char g_actionInitBreakableMotionRecordTable_de[];
-unsigned int g_lightVolumeConeDistanceLookup[110] = {
-    0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
-    0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
-    0x3F000000, 0x3F03F078, 0x3F07C3B5, 0x3F0B7C13, 0x3F0F1BBD, 0x3F12A476, 0x3F1617E3, 0x3F197775,
-    0x3F1CC469, 0x3F200000, 0x3F232B24, 0x3F2646E1, 0x3F295400, 0x3F2C534C, 0x3F2F456B, 0x3F322B28,
-    0x3F3504F7, 0x3F37D36F, 0x3F3A9729, 0x3F3D5087, 0x3F400000, 0x3F42A5F8, 0x3F4542E5, 0x3F47D70A,
-    0x3F4A62BB, 0x3F4CE66D, 0x3F4F6241, 0x3F51D68C, 0x3F544391, 0x3F56A993, 0x3F5908D5, 0x3F5B6189,
-    0x3F5DB3D0, 0x3F600000, 0x3F624628, 0x3F64869C, 0x3F66C15D, 0x3F68F6AD, 0x3F6B26AF, 0x3F6D5183,
-    0x3F6F774B, 0x3F719839, 0x3F73B470, 0x3F75CBEF, 0x3F77DEF8, 0x3F79ED8D, 0x3F7BF7E0, 0x3F7DFE00,
-    0x3F800000, 0x00000001, 0xF7F9F8F5, 0x080E190C, 0x12171A0E, 0xFCEEF2E3, 0xD7E2E5E7, 0xE5DDE2EA,
-    0xE1E5EFF2, 0x0002FEF3, 0xF3F70502, 0xFE09181F, 0x221D1518, 0x0A0DFDFA, 0x01131F27, 0x1D1E1414,
-    0xFFF1E6EC, 0xE8E1E3E8, 0xE6F1F102, 0x11080711, 0x0E090C0C, 0x040C050A, 0x0D05FDFE, 0xF6F7F8EB,
-    0xEBE8D650, 0x00000000, 0x00000000, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_triggeredMotionDispatchTriggerPairs_de + 0xA0, (unsigned int)g_spawnActorDispatchTriggerPairs_de + 0x4, (unsigned int)g_turretDispatchTriggerPairs_de + 0x68,
-    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_actionEnterDispatchTable + 0x88, (unsigned int)g_damageDispatchTable + 0xA8, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_movingMotionDispatchTriggerPairs_de, (unsigned int)g_actionInitBreakableMotionRecordTable_de + 0x88, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C,
-    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, 0x3F800000, 0xFCEF23B1, 0x013332D1, 0x3F800000,
+RestlightVolumeConeDistanceLookupLayout312 g_lightVolumeConeDistanceLookup = {
+    { 0.0f, 0.125f, 0.176777f, 0.216506f, 0.25f, 0.279509f, 0.306186f, 0.330719f, 0.353553f, 0.375f, 0.395285f, 0.414578f, 0.433013f, 0.450694f, 0.467707f, 0.484123f, 0.5f, 0.515388f, 0.53033f, 0.544862f, 0.559017f, 0.572822f, 0.586302f, 0.599479f, 0.612372f, 0.625f, 0.637377f, 0.649519f, 0.661438f, 0.673146f, 0.684653f, 0.695971f, 0.707107f, 0.71807f, 0.728869f, 0.73951f, 0.75f, 0.760345f, 0.770552f, 0.780625f, 0.790569f, 0.800391f, 0.810093f, 0.81968f, 0.829156f, 0.838525f, 0.847791f, 0.856957f, 0.866025f, 0.875f, 0.883883f, 0.892679f, 0.901388f, 0.910014f, 0.918559f, 0.927025f, 0.935414f, 0.943729f, 0.951972f, 0.960143f, 0.968246f, 0.976281f, 0.984251f, 0.992157f, 1.0f },
+    1,
+    { -9, -7, -8, -11, 8, 14, 25, 12, 18, 23, 26, 14, -4, -18, -14, -29, -41, -30, -27, -25, -27, -35, -30, -22, -31, -27, -17, -14, 0, 2, -2, -13, -13, -9, 5, 2, -2, 9, 24, 31, 34, 29, 21, 24, 10, 13, -3, -6, 1, 19, 31, 39, 29, 30, 20, 20, -1, -15, -26, -20, -24, -31, -29, -24, -26, -15, -15, 2, 17, 8, 7, 17, 14, 9, 12, 12, 4, 12, 5, 10, 13, 5, -3, -2, -10, -9, -8, -21, -21, -24, -42, 80 },
+    { 0, 0 },
+    { (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_triggeredMotionDispatchTriggerPairs_de + 0xA0), (void *)(g_spawnActorDispatchTriggerPairs_de + 0x4), (void *)(g_turretDispatchTriggerPairs_de + 0x68), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_actionEnterDispatchTable + 0x88), (void *)(g_damageDispatchTable + 0xA8), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_movingMotionDispatchTriggerPairs_de), (void *)(g_actionInitBreakableMotionRecordTable_de + 0x88), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C) },
+    { 0x3F800000, 0xFCEF23B1, 0x013332D1, 0x3F800000 },
 };
 #endif
 #endif

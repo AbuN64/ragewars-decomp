@@ -1,39 +1,58 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "TYPES.H"
 
 /* 80268160_15.CPP */
 #if defined(VERSION_EU)
-u32 g_geometryDrawResourceModelWritableWords_eu[20] = {
-    0xFFFFFFFF, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
-    0x00000001, 0x00000001, 0x00000001, 0x00010000, 0xC4000000, 0xC8000000,
-    0x00000000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000,
-    0x00000000, 0x00000000,
+RestgeometryDrawResourceModelWritableWords_euLayout372 g_geometryDrawResourceModelWritableWords_eu = {
+    { -1, -1, 1, 1, 1, 1, 1, 1, 1, 65536 },
+    { -512.0f, -131072.0f, 0.0f, 255.0f, 255.0f, 255.0f, 255.0f, 255.0f, 0.0f, 0.0f },
 };
 #endif
 
 /* GeometryDrawresourcemodelEncodedWordsUsRev1.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CC754 */
-unsigned int g_GeometryDrawresourcemodelEncodedWords[3] = {
-    0x00000000, 0x00000002, 0x00000060,
+RestLinkerAlignmentFill12 g_GeometryDrawresourcemodelEncodedWords = {
+    { 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 96 },
 };
 #endif
 
 /* GeometryDrawresourcemodelEncodedWordsBlock2EuX.CPP */
 #if defined(VERSION_EU_X)
-unsigned int g_GeometryDrawresourcemodelEncodedWordsBlock2[4] = {
-    0x437F0000, 0x437F0000, 0x7FFFFFFF, 0x00000000,
+RestGeometryDrawresourcemodelEncodedWordsBlock2Layout374 g_GeometryDrawresourcemodelEncodedWordsBlock2 = {
+    { 255.0f, 255.0f },
+    0x7FFFFFFF,
+    0,
 };
 
-unsigned int k_GeometryDrawresourcemodelEncodedWords[22] = {
-    0x807FFFFF, 0x00000003, 0x9FFFFFFF, 0x00000000, 0xA07FFFFF, 0x00000003, 0xA3FFFFFF, 0x00000000,
-    0xA4001FFF, 0x0000000B, 0xA5FFFFFF, 0x00000000, 0xA63FFFFF, 0x00000007, 0xAFFFFFFF, 0x00000000,
-    0xB1FDFFFF, 0x00000007, 0xFFFFFFFF, 0x00000000, 0xFFFFF7FA, 0x3FC80F9A,
+RestGeometryDrawresourcemodelEncodedWordsLayout375 k_GeometryDrawresourcemodelEncodedWords = {
+    0x807FFFFF,
+    3,
+    0x9FFFFFFF,
+    0,
+    0xA07FFFFF,
+    3,
+    0xA3FFFFFF,
+    0,
+    0xA4001FFF,
+    11,
+    0xA5FFFFFF,
+    0,
+    0xA63FFFFF,
+    7,
+    0xAFFFFFFF,
+    0,
+    0xB1FDFFFF,
+    { 7, -1, 0, -2054 },
+    0x3FC80F9A,
 };
 #endif
 
 /* GeometryDrawresourcemodelEncodedWordsBlock1Eu.CPP */
 #if defined(VERSION_EU)
-unsigned int g_GeometryDrawresourcemodelEncodedWordsBlock1[4] = {
-    0xA0000000, 0xA0000000, 0x00FF0000, 0x00FF0000,
+RestGeometryDrawresourcemodelEncodedWordsBlock1Layout376 g_GeometryDrawresourcemodelEncodedWordsBlock1 = {
+    0xA0000000,
+    0xA0000000,
+    { 16711680, 16711680 },
 };
 #endif

@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_ResidentInstructionFragmentsTrailingBytes[8] = { 0x3C, 0x01, 0x80, 0x0C, 0xC4, 0x20, 0x53, 0xB0 };
+RestLinkerAlignmentFill8 g_ResidentInstructionFragmentsTrailingBytes = {
+    { 60, 1, 128, 12, 196, 32, 83, 176 },
+};
 #endif

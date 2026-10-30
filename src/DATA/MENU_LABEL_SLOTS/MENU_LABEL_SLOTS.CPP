@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 800D7058.CPP */
@@ -202,11 +203,12 @@ void *g_Ovltab8EncodedWordsBlock4[1] = {
 
 /* 800D7710.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int k_Ovltab8EncodedWordsBlock2[29] = {
-    0x800D52FC, 0x800D5300, 0x800D5304, 0x800D5308, 0x800D530C, 0x800D5310, 0x800D5314, 0x800D5318,
-    0x800D531C, 0x800D5320, 0x800D5324, 0x800D5328, 0x800D532C, 0x800D5330, 0x800D5334, 0x800D5338,
-    0x800D533C, 0x800D5340, 0x800D5344, 0x800D5348, 0x800D534C, 0x800D5350, 0x800D5354, 0x800D5358,
-    0x800D535C, 0x800D5360, 0x800D5364, 0x800D5368, 0x800D536C,
+void * k_Ovltab8EncodedWordsBlock2[29] = {
+    (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 8), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 12), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 16), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 20), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 24), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 28),
+    (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 32), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 36), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 40), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 44), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 48), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 52),
+    (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 56), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 60), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 64), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 68), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 72), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 76),
+    (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 80), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 84), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 88), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 92), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 96), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 100),
+    (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 104), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 108), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 112), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 116), (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 120),
 };
 #endif
 
@@ -221,10 +223,10 @@ void *g_Ovltab8EncodedWordsBlock7[1] = {
 
 /* 800D7788.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int k_Ovltab8EncodedWordsBlock3[17] = {
-    0x800D5370, 0x800D5380, 0x800D5384, 0x800D5388, 0x800D538C, 0x800D5390, 0x800D5394, 0x800D5398,
-    0x800D539C, 0x800D53A0, 0x800D53A4, 0x800D53A8, 0x800D53AC, 0x800D53B0, 0x800D53B4, 0x800D53B8,
-    0x800D53BC,
+void * k_Ovltab8EncodedWordsBlock3[17] = {
+    (void *)((char *)&ragewars_menu_strings_D5EF4_us_rev1 + 124), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 12), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 16), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 20), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 24), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 28),
+    (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 32), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 36), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 40), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 44), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 48), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 52),
+    (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 56), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 60), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 64), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 68), (void *)((char *)&ragewars_menu_strings_D5F74_us_rev1 + 72),
 };
 #endif
 
@@ -252,26 +254,32 @@ void *g_Ovltab8EncodedWordsBlock1[1] = {
 
 /* 800D7828.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int k_Ovltab8EncodedWordsBlock4[145] = {
-    0x800D5520, 0x800D5524, 0x800D5528, 0x800D552C, 0x800D5530, 0x800D5534, 0x800D5538, 0x800D553C,
-    0x800D5540, 0x800D5544, 0x800D5548, 0x800D554C, 0x800D5550, 0x800D5554, 0x800D5558, 0x800D555C,
-    0x800D5560, 0x800D5564, 0x800D5568, 0x800D556C, 0x800D5570, 0x800D5574, 0x800D5578, 0x800D557C,
-    0x800D5580, 0x800D5584, 0x800D5588, 0x800D558C, 0x800D5590, 0x800D5594, 0x800D5598, 0x800D559C,
-    0x800D55A0, 0x800D55A4, 0x800D55A8, 0x800D55AC, 0x800D55B0, 0x800D55B4, 0x800D55B8, 0x800D55BC,
-    0x800D55C0, 0x800D55C4, 0x800D55C8, 0x800D55CC, 0x800D55D0, 0x800D55D4, 0x800D55D8, 0x800D55DC,
-    0x800D55E0, 0x800D55E4, 0x800D55E8, 0x800D55EC, 0x800D55F0, 0x800D55F4, 0x800D55F8, 0x800D55FC,
-    0x800D5600, 0x800D5604, 0x800D5608, 0x800D560C, 0x800D5610, 0x800D5614, 0x800D5618, 0x800D561C,
-    0x800D5620, 0x800D5624, 0x800D5628, 0x800D562C, 0x800D5630, 0x800D5634, 0x800D5638, 0x800D563C,
-    0x800D5640, 0x800D5644, 0x800D5648, 0x800D564C, 0x800D5650, 0x800D5654, 0x800D5658, 0x800D565C,
-    0x800D5660, 0x800D5664, 0x800D5668, 0x800D566C, 0x800D5670, 0x800D5674, 0x800D5678, 0x800D567C,
-    0x800D5680, 0x800D5684, 0x800D5688, 0x800D568C, 0x800D5690, 0x800D5694, 0x800D5698, 0x800D569C,
-    0x800D56A0, 0x800D56A4, 0x800D56A8, 0x800D56AC, 0x800D56B0, 0x800D56B4, 0x800D56B8, 0x800D56BC,
-    0x800D56C0, 0x800D56C4, 0x800D56C8, 0x800D56CC, 0x800D56D0, 0x800D56D4, 0x800D56D8, 0x800D56DC,
-    0x800D56E0, 0x800D56E4, 0x800D56E8, 0x800D56EC, 0x800D56F0, 0x800D56F4, 0x800D56F8, 0x800D56FC,
-    0x800D5700, 0x800D5704, 0x800D5708, 0x800D5710, 0x800D5718, 0x800D5720, 0x800D5728, 0x800D5730,
-    0x800D5734, 0x800D5738, 0x800D573C, 0x800D5740, 0x800D5744, 0x800D5748, 0x800D574C, 0x800D5750,
-    0x800D5754, 0x800D5758, 0x800D5764, 0x800D5770, 0x800D577C, 0x800D5788, 0x800D5790, 0x800D5794,
-    0x800D5798,
+void * k_Ovltab8EncodedWordsBlock4[145] = {
+    (void *)((char *)&g_PakOkLabelStorage + 4), (void *)((char *)&g_PakOkLabelStorage + 8), (void *)((char *)&g_PakOkLabelStorage + 12), (void *)((char *)&g_PakOkLabelStorage + 16), (void *)((char *)&g_PakOkLabelStorage + 20), (void *)((char *)&g_PakOkLabelStorage + 24),
+    (void *)((char *)&g_PakOkLabelStorage + 28), (void *)((char *)&g_PakOkLabelStorage + 32), (void *)((char *)&g_PakOkLabelStorage + 36), (void *)((char *)&g_PakOkLabelStorage + 40), (void *)((char *)&g_PakOkLabelStorage + 44), (void *)((char *)&g_PakOkLabelStorage + 48),
+    (void *)((char *)&g_PakOkLabelStorage + 52), (void *)((char *)&g_PakOkLabelStorage + 56), (void *)((char *)&g_PakOkLabelStorage + 60), (void *)((char *)&g_PakOkLabelStorage + 64), (void *)((char *)&g_PakOkLabelStorage + 68), (void *)((char *)&g_PakOkLabelStorage + 72),
+    (void *)((char *)&g_PakOkLabelStorage + 76), (void *)((char *)&g_PakOkLabelStorage + 80), (void *)((char *)&g_PakOkLabelStorage + 84), (void *)((char *)&g_PakOkLabelStorage + 88), (void *)((char *)&g_PakOkLabelStorage + 92), (void *)((char *)&g_PakOkLabelStorage + 96),
+    (void *)((char *)&g_PakOkLabelStorage + 100), (void *)((char *)&g_PakOkLabelStorage + 104), (void *)((char *)&g_PakOkLabelStorage + 108), (void *)((char *)&g_PakOkLabelStorage + 112), (void *)((char *)&g_PakOkLabelStorage + 116), (void *)((char *)&g_PakOkLabelStorage + 120),
+    (void *)((char *)&g_PakOkLabelStorage + 124), (void *)((char *)&g_PakOkLabelStorage + 128), (void *)((char *)&g_PakOkLabelStorage + 132), (void *)((char *)&g_PakOkLabelStorage + 136), (void *)((char *)&g_PakOkLabelStorage + 140), (void *)((char *)&g_PakOkLabelStorage + 144),
+    (void *)((char *)&g_PakOkLabelStorage + 148), (void *)((char *)&g_PakOkLabelStorage + 152), (void *)((char *)&g_PakOkLabelStorage + 156), (void *)((char *)&g_PakOkLabelStorage + 160), (void *)((char *)&g_PakOkLabelStorage + 164), (void *)((char *)&g_PakOkLabelStorage + 168),
+    (void *)((char *)&g_PakOkLabelStorage + 172), (void *)((char *)&g_PakOkLabelStorage + 176), (void *)((char *)&g_PakOkLabelStorage + 180), (void *)((char *)&g_PakOkLabelStorage + 184), (void *)((char *)&g_PakOkLabelStorage + 188), (void *)((char *)&g_PakOkLabelStorage + 192),
+    (void *)((char *)&g_PakOkLabelStorage + 196), (void *)((char *)&g_PakOkLabelStorage + 200), (void *)((char *)&g_PakOkLabelStorage + 204), (void *)((char *)&g_PakOkLabelStorage + 208), (void *)((char *)&g_PakOkLabelStorage + 212), (void *)((char *)&g_PakOkLabelStorage + 216),
+    (void *)((char *)&g_PakOkLabelStorage + 220), (void *)((char *)&g_PakOkLabelStorage + 224), (void *)((char *)&g_PakOkLabelStorage + 228), (void *)((char *)&g_PakOkLabelStorage + 232), (void *)((char *)&g_PakOkLabelStorage + 236), (void *)((char *)&g_PakOkLabelStorage + 240),
+    (void *)((char *)&g_PakOkLabelStorage + 244), (void *)((char *)&g_PakOkLabelStorage + 248), (void *)((char *)&g_PakOkLabelStorage + 252), (void *)((char *)&g_PakOkLabelStorage + 256), (void *)((char *)&g_PakOkLabelStorage + 260), (void *)((char *)&g_PakOkLabelStorage + 264),
+    (void *)((char *)&g_PakOkLabelStorage + 268), (void *)((char *)&g_PakOkLabelStorage + 272), (void *)((char *)&g_PakOkLabelStorage + 276), (void *)((char *)&g_PakOkLabelStorage + 280), (void *)((char *)&g_PakOkLabelStorage + 284), (void *)((char *)&g_PakOkLabelStorage + 288),
+    (void *)((char *)&g_PakOkLabelStorage + 292), (void *)((char *)&g_PakOkLabelStorage + 296), (void *)((char *)&g_PakOkLabelStorage + 300), (void *)((char *)&g_PakOkLabelStorage + 304), (void *)((char *)&g_PakOkLabelStorage + 308), (void *)((char *)&g_PakOkLabelStorage + 312),
+    (void *)((char *)&g_PakOkLabelStorage + 316), (void *)((char *)&g_PakOkLabelStorage + 320), (void *)((char *)&g_PakOkLabelStorage + 324), (void *)((char *)&g_PakOkLabelStorage + 328), (void *)((char *)&g_PakOkLabelStorage + 332), (void *)((char *)&g_PakOkLabelStorage + 336),
+    (void *)((char *)&g_PakOkLabelStorage + 340), (void *)((char *)&g_PakOkLabelStorage + 344), (void *)((char *)&g_PakOkLabelStorage + 348), (void *)((char *)&g_PakOkLabelStorage + 352), (void *)((char *)&g_PakOkLabelStorage + 356), (void *)((char *)&g_PakOkLabelStorage + 360),
+    (void *)((char *)&g_PakOkLabelStorage + 364), (void *)((char *)&g_PakOkLabelStorage + 368), (void *)((char *)&g_PakOkLabelStorage + 372), (void *)((char *)&g_PakOkLabelStorage + 376), (void *)((char *)&g_PakOkLabelStorage + 380), (void *)((char *)&g_PakOkLabelStorage + 384),
+    (void *)((char *)&g_PakOkLabelStorage + 388), (void *)((char *)&g_PakOkLabelStorage + 392), (void *)((char *)&g_PakOkLabelStorage + 396), (void *)((char *)&g_PakOkLabelStorage + 400), (void *)((char *)&g_PakOkLabelStorage + 404), (void *)((char *)&g_PakOkLabelStorage + 408),
+    (void *)((char *)&g_PakOkLabelStorage + 412), (void *)((char *)&g_PakOkLabelStorage + 416), (void *)((char *)&g_PakOkLabelStorage + 420), (void *)((char *)&g_PakOkLabelStorage + 424), (void *)((char *)&g_PakOkLabelStorage + 428), (void *)((char *)&g_PakOkLabelStorage + 432),
+    (void *)((char *)&g_PakOkLabelStorage + 436), (void *)((char *)&g_PakOkLabelStorage + 440), (void *)((char *)&g_PakOkLabelStorage + 444), (void *)((char *)&g_PakOkLabelStorage + 448), (void *)((char *)&g_PakOkLabelStorage + 452), (void *)((char *)&g_PakOkLabelStorage + 456),
+    (void *)((char *)&g_PakOkLabelStorage + 460), (void *)((char *)&g_PakOkLabelStorage + 464), (void *)((char *)&g_PakOkLabelStorage + 468), (void *)((char *)&g_PakOkLabelStorage + 472), (void *)((char *)&g_PakOkLabelStorage + 476), (void *)((char *)&g_PakOkLabelStorage + 480),
+    (void *)((char *)&g_PakOkLabelStorage + 484), (void *)((char *)&g_PakOkLabelStorage + 488), (void *)&g_saveLoadHealthAmmoMenuTextPool, (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 8), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 16), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 24),
+    (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 32), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 40), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 44), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 48), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 52), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 56),
+    (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 60), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 64), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 68), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 72), (void *)((char *)&g_saveLoadHealthAmmoMenuTextPool + 76), (void *)&g_hitLocationMessageText,
+    (void *)((char *)&g_hitLocationMessageText + 12), (void *)((char *)&g_hitLocationMessageText + 24), (void *)((char *)&g_hitLocationMessageText + 36), (void *)((char *)&g_hitLocationMessageText + 48), (void *)((char *)&g_hitLocationMessageText + 56), (void *)((char *)&g_hitLocationMessageText + 60),
+    (void *)((char *)&g_hitLocationMessageText + 64),
 };
 #endif
 
@@ -379,16 +387,84 @@ void *g_Ovltab8EncodedWords[1] = {
 
 /* 800D7E44.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_keyboardKeyLabelWords[80] = {
-    0x41000000, 0x800D7E44, 0x42000000, 0x800D7E4C, 0x43000000, 0x800D7E54, 0x44000000, 0x800D7E5C,
-    0x45000000, 0x800D7E64, 0x46000000, 0x800D7E6C, 0x47000000, 0x800D7E74, 0x48000000, 0x800D7E7C,
-    0x49000000, 0x800D7E84, 0x4A000000, 0x800D7E8C, 0x4B000000, 0x800D7E94, 0x4C000000, 0x800D7E9C,
-    0x4D000000, 0x800D7EA4, 0x4E000000, 0x800D7EAC, 0x4F000000, 0x800D7EB4, 0x50000000, 0x800D7EBC,
-    0x51000000, 0x800D7EC4, 0x52000000, 0x800D7ECC, 0x53000000, 0x800D7ED4, 0x54000000, 0x800D7EDC,
-    0x55000000, 0x800D7EE4, 0x56000000, 0x800D7EEC, 0x57000000, 0x800D7EF4, 0x58000000, 0x800D7EFC,
-    0x59000000, 0x800D7F04, 0x5A000000, 0x800D7F0C, 0x30000000, 0x800D7F14, 0x31000000, 0x800D7F1C,
-    0x32000000, 0x800D7F24, 0x33000000, 0x800D7F2C, 0x34000000, 0x800D7F34, 0x35000000, 0x800D7F3C,
-    0x36000000, 0x800D7F44, 0x37000000, 0x800D7F4C, 0x38000000, 0x800D7F54, 0x39000000, 0x800D7F5C,
-    0x02000000, 0x800D7F64, 0x03000000, 0x800D7F6C, 0x04000000, 0x800D7F74, 0x00000000, 0x800D7F7C,
+RestkeyboardKeyLabelWordsLayout601 g_keyboardKeyLabelWords = {
+    8.0f,
+    (void *)&g_keyboardKeyLabelWords,
+    32.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 8),
+    128.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 16),
+    512.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 24),
+    2048.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 32),
+    8192.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 40),
+    32768.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 48),
+    131072.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 56),
+    524288.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 64),
+    2097152.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 72),
+    8388608.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 80),
+    33554432.0f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 88),
+    1.3421773e+08f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 96),
+    5.368709e+08f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 104),
+    2.1474836e+09f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 112),
+    0x50000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 120),
+    0x51000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 128),
+    0x52000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 136),
+    0x53000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 144),
+    0x54000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 152),
+    0x55000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 160),
+    0x56000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 168),
+    0x57000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 176),
+    0x58000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 184),
+    0x59000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 192),
+    0x5A000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 200),
+    0x30000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 208),
+    0x31000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 216),
+    0x32000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 224),
+    0x33000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 232),
+    0x34000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 240),
+    0x35000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 248),
+    0x36000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 256),
+    0x37000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 264),
+    3.0517578e-05f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 272),
+    0.00012207031f,
+    (void *)((char *)&g_keyboardKeyLabelWords + 280),
+    0x02000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 288),
+    0x03000000,
+    (void *)((char *)&g_keyboardKeyLabelWords + 296),
+    0x04000000,
+    { (void *)((char *)&g_keyboardKeyLabelWords + 304), 0, (void *)((char *)&g_keyboardKeyLabelWords + 312) },
 };
 #endif

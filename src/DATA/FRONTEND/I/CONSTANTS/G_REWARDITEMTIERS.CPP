@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* g_slotSelectionMenuEventHandlerRecordsUsRev1_GRewarditemtiers.CPP */
@@ -10,26 +11,56 @@ extern char g_Menu_DrawMenuBlockModelAddress[];
 extern char g_Menu_HandleNextProfileEventAddress[];
 extern char g_Menu_BeginSelectionMenuExitAddress[];
 extern char g_Menu_ConsumeSelectionMenuEventAddress[];
-unsigned int g_slotSelectionMenuEventHandlerRecordsUsRev1[27] = {
-    0x00000E08, 0x00000010, (unsigned int)g_Frontend_AnimateSlotSelectionMenuAddress, 0x00000E07, 0x00000010, (unsigned int)g_Menu_PositionSelectionMenuModelAddress, 0x0000000A, 0x00000010,
-    (unsigned int)g_Menu_HandleNextProfileEventAddress, 0x00000E0A, 0x00000010, (unsigned int)g_Menu_DrawMenuBlockModelAddress, 0x00000E06, 0x00000010, (unsigned int)g_Frontend_CreateSlotSelectionMenuAddress, 0x00000E03,
-    0x00000010, (unsigned int)g_Focus_FreeMenuBlockAddress, 0x00000002, 0x00000010, (unsigned int)g_Menu_BeginSelectionMenuExitAddress, 0x00000001, 0x00000010, (unsigned int)g_Menu_ConsumeSelectionMenuEventAddress,
-    0x00000000, 0x00000000, 0x00000000,
+RestslotSelectionMenuEventHandlerRecordsUsRev1Record438 g_slotSelectionMenuEventHandlerRecordsUsRev1 = {
+    3592,
+    16,
+    (unsigned int)g_Frontend_AnimateSlotSelectionMenuAddress,
+    3591,
+    16,
+    (unsigned int)g_Menu_PositionSelectionMenuModelAddress,
+    10,
+    16,
+    (unsigned int)g_Menu_HandleNextProfileEventAddress,
+    3594,
+    16,
+    (unsigned int)g_Menu_DrawMenuBlockModelAddress,
+    3590,
+    16,
+    (unsigned int)g_Frontend_CreateSlotSelectionMenuAddress,
+    3587,
+    16,
+    (unsigned int)g_Focus_FreeMenuBlockAddress,
+    2,
+    16,
+    (unsigned int)g_Menu_BeginSelectionMenuExitAddress,
+    1,
+    16,
+    (unsigned int)g_Menu_ConsumeSelectionMenuEventAddress,
+    { 0x00000000, 0x00000000, 0x00000000 },
 };
 #endif
 
 /* g_rewardScoreBudgets_GRewarditemtiers.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_rewardItemTierPairsUsRev1[10] = {
-    0x00000063, 0x0000002E, 0x00000062, 0x0000002F, 0x00000061, 0x00000029, 0x0000005F, 0x0000002A,
-    0x00000060, 0x00000030,
+RestrewardItemTierPairsUsRev1Layout439 g_rewardItemTierPairsUsRev1 = {
+    99,
+    46,
+    98,
+    47,
+    97,
+    41,
+    95,
+    42,
+    96,
+    48,
 };
 
-unsigned int g_rewardScoreBudgets[25] = {
-    0x00000005, 0x0000000A, 0x0000000F, 0x00000014, 0x00000019, 0x00000005, 0x0000000F, 0x00000014,
-    0x0000001E, 0x00000023, 0x0000000A, 0x00000014, 0x0000001E, 0x00000028, 0x00000032, 0x0000000A,
-    0x0000001E, 0x0000002D, 0x0000003C, 0x0000004B, 0x00000014, 0x00000028, 0x0000003C, 0x00000050,
-    0x00000064,
+s32 g_rewardScoreBudgets[25] = {
+    5, 10, 15, 20, 25, 5,
+    15, 20, 30, 35, 10, 20,
+    30, 40, 50, 10, 30, 45,
+    60, 75, 20, 40, 60, 80,
+    100,
 };
 #endif
 

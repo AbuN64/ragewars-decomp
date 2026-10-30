@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_EnvTrailingBytes[12] = { 0xAC, 0x85, 0x00, 0x04, 0xAC, 0x86, 0x00, 0x08, 0xA4, 0x80, 0x00, 0x0C };
+RestLinkerAlignmentFill12 g_EnvTrailingBytes = {
+    { 172, 133, 0, 4, 172, 134, 0, 8, 164, 128, 0, 12 },
+};
 #endif

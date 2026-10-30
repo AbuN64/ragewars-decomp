@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_ContqueryTrailingBytes[8] = { 0x00, 0x80, 0x88, 0x21, 0xAF, 0xBF, 0x00, 0x1C };
+RestLinkerAlignmentFill8 g_ContqueryTrailingBytes = {
+    { 0, 128, 136, 33, 175, 191, 0, 28 },
+};
 #endif

@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 /* ROM-grounded data: src/huffman_initial_block_ranges.c */
 #ifdef VERSION_DE
@@ -3856,9 +3857,14 @@ struct {
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int g_AudioDecodeframeEncodedWords[20] = {
-    0x00000001, 0x00000000, 0x00000010, 0x00000000, 0x800D956C, 0x00000000, 0x00000000, 0x00000023,
-    0x00000000, 0x800D9500, 0x00000000, 0x00000023, 0x00000059, 0x00000000, 0x800D9524, 0x00000000,
-    0x0000007C, 0x00000084, 0x00000000, 0x800D9548,
+RestAudioDecodeframeEncodedWordsLayout515 g_AudioDecodeframeEncodedWords = {
+    { 1, 0, 16, 0 },
+    { (void *)&huffman_signed6_dictionary, 0, 0 },
+    { 35, 0 },
+    { (void *)&huffman_signed7_single_dictionary, 0 },
+    { 35, 89, 0 },
+    { (void *)&huffman_signed7_five_dictionary, 0 },
+    { 124, 132, 0 },
+    (void *)&huffman_signed7_nine_dictionary,
 };
 #endif

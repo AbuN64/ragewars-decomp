@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 
@@ -9,8 +10,8 @@ const float k_lookatFloatConstantWords[7] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_LookatEncodedWordsBlock2[3] = {
-    0x00000000, 0x41F00000, 0x00000000,
+RestLinkerAlignmentFill12 k_LookatEncodedWordsBlock2 = {
+    { 0, 0, 0, 0, 65, 240, 0, 0, 0, 0, 0, 0 },
 };
 #endif
 
@@ -32,17 +33,17 @@ const float k_lookatFloatConstantWordsBlock1[2] = {
 };
 
 /* ROM-grounded data: src/k_LookatOneWords_Lookat.c */
-const unsigned int k_LookatOneWords[1] = {
-    0x3F800000,
+const float k_LookatOneWords[1] = {
+    1.0f,
 };
 
 /* ROM-grounded data: src/k_lookatFloatConstantWordsBlock2_Lookat.c */
-const unsigned int k_lookatFloatConstantWordsBlock2[1] = {
-    0x47800000,
+const RestLinkerAlignmentFill4 k_lookatFloatConstantWordsBlock2 = {
+    { 71, 128, 0, 0 },
 };
 
 /* ROM-grounded data: src/k_lookatFloatConstantWordsBlock3_Lookat.c */
-const unsigned int k_lookatFloatConstantWordsBlock3[1] = {
-    0x37800000,
+const float k_lookatFloatConstantWordsBlock3[1] = {
+    1.5258789e-05f,
 };
 #endif

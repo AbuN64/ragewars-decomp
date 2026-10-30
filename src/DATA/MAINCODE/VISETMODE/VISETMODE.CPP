@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_VisetmodeTrailingBytesBlock4[12] = { 0xF7, 0xB4, 0x00, 0x18, 0xAF, 0xBF, 0x00, 0x10, 0x0C, 0x0A, 0xF3, 0xC8 };
+RestLinkerAlignmentFill12 g_VisetmodeTrailingBytesBlock4 = {
+    { 247, 180, 0, 24, 175, 191, 0, 16, 12, 10, 243, 200 },
+};
 #endif

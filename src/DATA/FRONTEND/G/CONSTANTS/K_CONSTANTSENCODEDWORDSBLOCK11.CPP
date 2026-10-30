@@ -1,6 +1,10 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_weaponChargeSpinTarget[];
 
 #if defined(VERSION_US_REV1)
-unsigned int k_ConstantsEncodedWordsBlock11[7] = {
-    0x00000000, 0x00000000, 0x3F800000, 0x3F800000, 0x800CF6E0, 0x00000000, 0x00000000,
+RestConstantsEncodedWordsBlock11Layout405 k_ConstantsEncodedWordsBlock11 = {
+    { 0, 0 },
+    { 1.0f, 1.0f },
+    { (void *)((char *)&g_weaponChargeSpinTarget + 292), 0, 0 },
 };
 #endif

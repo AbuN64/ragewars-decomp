@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 800C92B8.CPP */
@@ -33,8 +34,8 @@ struct {
 /* s_hicsText_Decode.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C912C */
-unsigned int s_hicsText[1] = {
-    0x68696373,
+RestLinkerAlignmentFill4 s_hicsText = {
+    { 104, 105, 99, 115 },
 };
 #endif
 
@@ -49,8 +50,9 @@ float k_DecodeEncodedWords[16] = {
 
 /* k_DecodeEncodedWordsBlock1_Decode.CPP */
 #if defined(VERSION_EU)
-unsigned int k_DecodeEncodedWordsBlock1[15] = {
-    0x3DB851EC, 0x3D4CCCCD, 0x3F000000, 0x30000000, 0x00010000, 0x00050000, 0x00040000, 0x000C0000,
-    0x00080000, 0x000A0000, 0x00020000, 0x00030000, 0x41F00000, 0x42400000, 0x43020000,
+RestDecodeEncodedWordsBlock1Layout618 k_DecodeEncodedWordsBlock1 = {
+    { 0.09f, 0.05f, 0.5f },
+    { 0x30000000, 0x00010000, 0x00050000, 0x00040000, 0x000C0000, 0x00080000, 0x000A0000, 0x00020000, 0x00030000 },
+    { 3e+01f, 48.0f, 1.3e+02f },
 };
 #endif

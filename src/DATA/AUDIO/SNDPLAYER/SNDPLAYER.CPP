@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_SndplayerTrailingBytesBlock1[12] = { 0x00, 0x03, 0x10, 0x40, 0x00, 0x43, 0x10, 0x21, 0x8C, 0x83, 0x00, 0x40 };
+RestLinkerAlignmentFill12 g_SndplayerTrailingBytesBlock1 = {
+    { 0, 3, 16, 64, 0, 67, 16, 33, 140, 131, 0, 64 },
+};
 #endif

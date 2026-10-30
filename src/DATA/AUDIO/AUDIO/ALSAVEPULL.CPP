@@ -1,8 +1,11 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* 802B63E4_4.CPP */
 #if defined(VERSION_DE)
-unsigned char g_AlsavepullTrailingBytes[12] = { 0x8F, 0xA2, 0x00, 0x00, 0x00, 0x02, 0x15, 0x83, 0x30, 0x42, 0x01, 0xFF };
+RestLinkerAlignmentFill12 g_AlsavepullTrailingBytes = {
+    { 143, 162, 0, 0, 0, 2, 21, 131, 48, 66, 1, 255 },
+};
 #endif
 
 /* save_3.c */

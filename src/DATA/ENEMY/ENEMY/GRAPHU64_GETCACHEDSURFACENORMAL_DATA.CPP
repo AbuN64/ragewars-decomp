@@ -1,4 +1,5 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
-unsigned int k_Graphu64GetcachedsurfacenormalEncodedWords[6] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+s32 k_Graphu64GetcachedsurfacenormalEncodedWords[6] = {
+    0, 0, 0, 0, 0, 0,
 };

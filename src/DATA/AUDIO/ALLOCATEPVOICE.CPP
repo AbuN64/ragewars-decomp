@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_AllocatepvoiceTrailingBytes[8] = { 0x27, 0xBD, 0x00, 0x20, 0x03, 0xE0, 0x00, 0x08 };
+RestLinkerAlignmentFill8 g_AllocatepvoiceTrailingBytes = {
+    { 39, 189, 0, 32, 3, 224, 0, 8 },
+};
 #endif

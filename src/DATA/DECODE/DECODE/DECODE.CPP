@@ -1,10 +1,14 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_US_REV1)
-unsigned int huffman_signed7_single_dictionary[] = {
-    0xFFFFFF81, 0x0000007F, 0x000000FF, 0x00000010, 0x00000101, 0x00000100, 0x00000001, 0x800D95E4,
-    0x800D979C, 0xFFFFFF81, 0x0000007F, 0x000000FF, 0x00000010, 0x00000105, 0x00000100, 0x00000005,
-    0x800D9FA8, 0x800DA840, 0xFFFFFF81, 0x0000007F, 0x000000FF, 0x00000010, 0x00000109, 0x00000100,
-    0x00000009, 0x800DB06C, 0x800DBFE4, 0xFFFFFFC0, 0x00000040, 0xFFFFFFFF, 0x00000010, 0xFFFFFFFF,
-    0x00000081, 0x00000000, 0x00000000, 0x800DC830,
+Resthuffman_signed7_single_dictionaryLayout307 huffman_signed7_single_dictionary = {
+    { -127, 127, 255, 16, 257, 256, 1 },
+    { (void *)&g_huffmanSingleZeroRuns, (void *)&g_huffmanDeltaSingleZeroRunNodes },
+    { -127, 127, 255, 16, 261, 256, 5 },
+    { (void *)&g_huffmanFiveZeroRuns, (void *)&g_huffmanDeltaFiveZeroRunNodes },
+    { -127, 127, 255, 16, 265, 256, 9 },
+    { (void *)&g_huffmanNineZeroRuns, (void *)&g_huffmanDeltaNineZeroRunNodes },
+    { -64, 64, -1, 16, -1, 129, 0 },
+    { 0, (void *)&g_huffmanSignedSmallNodes },
 };
 #endif

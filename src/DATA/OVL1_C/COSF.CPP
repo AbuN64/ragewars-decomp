@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
@@ -5,7 +6,5 @@
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int g_CosfEncodedWords[5] = {
-    0x00000000, 0x00000005, 0x00000005, 0x3FF00000, 0x00000000,
-};
+RestTrigConstantPool624 g_CosfEncodedWords = { 0, { 5, 5 }, 1.0 };
 #endif

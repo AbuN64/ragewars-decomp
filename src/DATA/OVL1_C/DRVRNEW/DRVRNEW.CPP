@@ -1,20 +1,21 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const unsigned int g_DrvrnewWords1[2] = {
-    0x3F100000, 0x00000000,
+const RestLinkerAlignmentFill8 g_DrvrnewWords1 = {
+    { 63, 16, 0, 0, 0, 0, 0, 0 },
 };
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US)
-const unsigned int k_DrvrnewEncodedWords[2] = {
-    0x40D00000, 0x00000000,
+const float k_DrvrnewEncodedWords[2] = {
+    6.5f, 0.0f,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int k_DrvrnewEncodedWordsBlock1[2] = {
-    0xC86D0200, 0x08000C00,
+RestLinkerAlignmentFill8 k_DrvrnewEncodedWordsBlock1 = {
+    { 200, 109, 2, 0, 8, 0, 12, 0 },
 };
 #endif
 

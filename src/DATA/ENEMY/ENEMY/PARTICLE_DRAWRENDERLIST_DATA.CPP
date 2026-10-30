@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* g_particleRenderFramePrefixByte_ParticleDrawrenderlistData.CPP */
@@ -8,6 +9,6 @@ unsigned char g_particleRenderFramePrefixByte[1] = {
 
 /* g_particleRenderFrameStateWords_ParticleDrawrenderlistData.CPP */
 /* ROM-grounded data: rodata/writable/800D297C */
-unsigned int g_particleRenderFrameStateWords[3] = {
-    0x00000000, 0x00000000, 0x00000000,
+s32 g_particleRenderFrameStateWords[3] = {
+    0, 0, 0,
 };

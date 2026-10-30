@@ -1,6 +1,8 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned int g_sceneEffectTuningDe[4] = {
-    0x3DB851EC, 0x3D4CCCCD, 0x3F000000, 0x00000032,
+RestsceneEffectTuningDeLayout371 g_sceneEffectTuningDe = {
+    { 0.09f, 0.05f, 0.5f },
+    50,
 };
 #endif

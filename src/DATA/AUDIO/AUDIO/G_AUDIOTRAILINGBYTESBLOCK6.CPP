@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_AudioTrailingBytesBlock6[8] = { 0x00, 0x02, 0x1D, 0x83, 0x30, 0x63, 0x01, 0xFF };
+RestLinkerAlignmentFill8 g_AudioTrailingBytesBlock6 = {
+    { 0, 2, 29, 131, 48, 99, 1, 255 },
+};
 #endif

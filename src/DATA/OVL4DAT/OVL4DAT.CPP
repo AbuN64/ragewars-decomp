@@ -1,21 +1,30 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 80405454_2.CPP */
 #if defined(VERSION_US)
-unsigned char g_Ovl4datTrailingBytes[12] = { 0x63, 0x74, 0x6F, 0x72, 0x33, 0x5F, 0x74, 0x0B, 0x6D, 0x5F, 0x76, 0x4C };
+RestLinkerAlignmentFill12 g_Ovl4datTrailingBytes = {
+    { 99, 116, 111, 114, 51, 95, 116, 11, 109, 95, 118, 76 },
+};
 #endif
 
 /* 8040B45C_30.CPP */
 #if defined(VERSION_US_REV1)
-unsigned char g_Ovl4datTrailingBytesBlock1[12] = { 0x0C, 0x0A, 0x83, 0x8E, 0x24, 0x06, 0x00, 0x18, 0x3C, 0x02, 0x80, 0x15 };
+RestLinkerAlignmentFill12 g_Ovl4datTrailingBytesBlock1 = {
+    { 12, 10, 131, 142, 36, 6, 0, 24, 60, 2, 128, 21 },
+};
 #endif
 
 /* 8044ACCC_15.CPP */
 #if defined(VERSION_EU_X)
-unsigned char g_Ovl4datTrailingBytesBlock3[12] = { 0x00, 0x24, 0x08, 0x21, 0xA0, 0x22, 0xD2, 0x4C, 0x3C, 0x01, 0x00, 0x02 };
+RestLinkerAlignmentFill12 g_Ovl4datTrailingBytesBlock3 = {
+    { 0, 36, 8, 33, 160, 34, 210, 76, 60, 1, 0, 2 },
+};
 #endif
 
 /* 8044ACCC_32.CPP */
 #if defined(VERSION_EU)
-unsigned char g_Ovl4datTrailingBytesBlock2[12] = { 0x8F, 0xBF, 0x00, 0x24, 0x8F, 0xB4, 0x00, 0x20, 0x8F, 0xB3, 0x00, 0x1C };
+RestLinkerAlignmentFill12 g_Ovl4datTrailingBytesBlock2 = {
+    { 143, 191, 0, 36, 143, 180, 0, 32, 143, 179, 0, 28 },
+};
 #endif

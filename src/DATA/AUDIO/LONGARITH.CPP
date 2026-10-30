@@ -1,9 +1,10 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* longArithmeticFloatConstantsUsRevData.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_longArithmeticFloatConstantsUsRev1[5] = {
-    0x41000000, 0x41B80000, 0x00000000, 0x3F800000, 0x00000000,
+float g_longArithmeticFloatConstantsUsRev1[5] = {
+    8.0f, 23.0f, 0.0f, 1.0f, 0.0f,
 };
 #endif
 
@@ -14,5 +15,7 @@ char func_802C1908_de_padding_C2508[8] =
 #endif
 
 #if defined(VERSION_DE)
-unsigned char g_LongarithTrailingBytes[8] = { 0x04, 0xC1, 0x00, 0x06, 0x00, 0x00, 0x28, 0x21 };
+RestLinkerAlignmentFill8 g_LongarithTrailingBytes = {
+    { 4, 193, 0, 6, 0, 0, 40, 33 },
+};
 #endif

@@ -1,9 +1,13 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* k_ConstantsEncodedWords_Constants2.CPP */
 #if defined(VERSION_US)
-unsigned int k_ConstantsEncodedWords[6] = {
-    0x00084675, 0x6E637469, 0x0D005400, 0x00080000, 0x00660000, 0x00080000,
+RestConstantsEncodedWordsLayout359 k_ConstantsEncodedWords = {
+    542325,
+    "ncti",
+    0x0D005400,
+    { 524288, 6684672, 524288 },
 };
 #endif
 

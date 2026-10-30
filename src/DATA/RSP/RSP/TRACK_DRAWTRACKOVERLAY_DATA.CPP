@@ -1,6 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* ROM-grounded data: src/k_TrackDrawtrackoverlayEncodedWordsBlock1Source.c */
-const unsigned int k_TrackDrawtrackoverlayEncodedWordsBlock1[3] = {
-    0x41F00000, 0x00000000, 0x4F000000,
+const RestTrackDrawtrackoverlayEncodedWordsBlock1Layout871 k_TrackDrawtrackoverlayEncodedWordsBlock1 = {
+    { 3e+01f, 0.0f, 2.1474836e+09f },
 };

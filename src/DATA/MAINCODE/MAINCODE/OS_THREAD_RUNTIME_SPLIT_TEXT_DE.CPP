@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_OsThreadRuntimeSplitTextDeTrailingBytes[4] = { 0xAF, 0xA0, 0x00, 0x14 };
+RestLinkerAlignmentFill4 g_OsThreadRuntimeSplitTextDeTrailingBytes = {
+    { 175, 160, 0, 20 },
+};
 #endif

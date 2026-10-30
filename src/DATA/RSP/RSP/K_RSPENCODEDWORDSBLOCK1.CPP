@@ -1,8 +1,9 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_Menu_BlendLinearConstantWordsSource.c */
-const unsigned int g_Menu_BlendLinearConstantWords[1] = {
-    0x3F800000,
+const float g_Menu_BlendLinearConstantWords[1] = {
+    1.0f,
 };
 
 #if defined(VERSION_US)
@@ -11,13 +12,13 @@ const char s_RspOSS3equRText[8] =
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_RspEncodedWordsBlock1[2] = {
-    0x004314AC, 0x00431448,
+RestLinkerAlignmentFill8 k_RspEncodedWordsBlock1 = {
+    { 0, 67, 20, 172, 0, 67, 20, 72 },
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_RspEncodedWords[2] = {
-    0x004040E0, 0x00404120,
+RestLinkerAlignmentFill8 k_RspEncodedWords = {
+    { 0, 64, 64, 224, 0, 64, 65, 32 },
 };
 #endif

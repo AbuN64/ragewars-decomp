@@ -1,6 +1,9 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_US_REV1)
-unsigned int k_ConstantsEncodedWordsBlock7[7] = {
-    0x00000000, 0x00000000, 0x3F800000, 0x3F800000, 0x800CF298, 0x00000000, 0x00000000,
+RestConstantsEncodedWordsBlock7Layout411 k_ConstantsEncodedWordsBlock7 = {
+    { 0, 0 },
+    { 1.0f, 1.0f },
+    { (void *)&g_weaponFireStateCallbackTable, 0, 0 },
 };
 #endif

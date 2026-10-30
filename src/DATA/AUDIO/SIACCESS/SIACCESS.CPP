@@ -1,13 +1,18 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* 802BE040_29.CPP */
 #if defined(VERSION_EU)
-unsigned char g_SiaccessTrailingBytesBlock2[8] = { 0xAF, 0xBF, 0x00, 0x30, 0xAF, 0xB0, 0x00, 0x18 };
+RestLinkerAlignmentFill8 g_SiaccessTrailingBytesBlock2 = {
+    { 175, 191, 0, 48, 175, 176, 0, 24 },
+};
 #endif
 
 /* g_SiaccessTrailingBytes_Siaccess.CPP */
 #if defined(VERSION_EU_X)
-unsigned char g_SiaccessTrailingBytes[12] = { 0x8C, 0x44, 0x00, 0x0C, 0x8C, 0x82, 0x00, 0x08, 0x00, 0x40, 0xF8, 0x09 };
+RestLinkerAlignmentFill12 g_SiaccessTrailingBytes = {
+    { 140, 68, 0, 12, 140, 130, 0, 8, 0, 64, 248, 9 },
+};
 #endif
 
 /* g_SiaccessEncodedWords_Siaccess.CPP */
@@ -18,7 +23,7 @@ char func_802B03C4_de_padding_B6094[12] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_802B03C4_de_padding_B6094 */
-unsigned int g_SiaccessEncodedWords[3] = {
-    0x00431021, 0xA050000A, 0x8E510064,
+RestLinkerAlignmentFill12 g_SiaccessEncodedWords = {
+    { 0, 67, 16, 33, 160, 80, 0, 10, 142, 81, 0, 100 },
 };
 #endif

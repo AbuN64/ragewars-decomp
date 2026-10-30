@@ -1,8 +1,11 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802ABDBC_14.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-unsigned char g_MaincodeTrailingBytesBlock8[4] = { 0x00, 0xA0, 0x88, 0x21 };
+RestLinkerAlignmentFill4 g_MaincodeTrailingBytesBlock8 = {
+    { 0, 160, 136, 33 },
+};
 #endif
 
 /* 802ABDBC_15.CPP */

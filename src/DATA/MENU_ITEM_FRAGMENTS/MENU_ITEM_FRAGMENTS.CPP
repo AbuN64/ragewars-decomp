@@ -1,10 +1,11 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "MENU/BUILD/DEFINITION_DATA.H"
 
 /* k_Ovl3EncodedWords_Ovl3.CPP */
 #if defined(VERSION_US_REV1)
 
-unsigned int k_Ovl3EncodedWords[3] = {
-    0x00000000, 0x00024050, 0x00080000,
+RestOvl3EncodedWordsLayout597 k_Ovl3EncodedWords = {
+    { 0, 147536, 524288 },
 };
 
 struct {

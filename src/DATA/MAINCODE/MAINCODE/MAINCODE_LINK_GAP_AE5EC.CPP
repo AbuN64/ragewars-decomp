@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_MaincodeLinkGapAe5ecTrailingBytes[4] = { 0x00, 0xA0, 0x88, 0x21 };
+RestLinkerAlignmentFill4 g_MaincodeLinkGapAe5ecTrailingBytes = {
+    { 0, 160, 136, 33 },
+};
 #endif

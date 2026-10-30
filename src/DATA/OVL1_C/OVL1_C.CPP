@@ -1,26 +1,25 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "TYPES.H"
 
 /* g_overlayOneCFloatConstantWords_Ovl1C.CPP */
 /* ROM-grounded data: rodata/writable/800D1610 */
 #ifdef VERSION_DE
-unsigned int g_overlayOneCFloatConstantWords[4] = {
-    0x00000000, 0x00000000, 0x00000000, 0x3FC90FDB,
+float g_overlayOneCFloatConstantWords[4] = {
+    0.0f, 0.0f, 0.0f, 1.5707964f,
 };
 #endif
 #ifdef VERSION_EU
-unsigned int g_overlayOneCFloatConstantWords[4] = {
-    0x00000000, 0x00000000, 0x002AF3A0, 0x002AF3A0,
+RestoverlayOneCFloatConstantWordsLayout634 g_overlayOneCFloatConstantWords = {
+    { 0, 0, 2814880, 2814880 },
 };
 #endif
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-unsigned int g_overlayOneCFloatConstantWords[4] = {
-    0x00000000, 0x00000000, 0x3DB52AB7, 0x3D9CE1DE,
+float g_overlayOneCFloatConstantWords[4] = {
+    0.0f, 0.0f, 0.08846038f, 0.07660268f,
 };
 #endif
 #ifdef VERSION_US
-unsigned int g_overlayOneCFloatConstantWords[4] = {
-    0x00000000, 0x00000000, 0x4D504143, 0x545F464C,
-};
+char g_overlayOneCFloatConstantWords[16] = "\000\000\000\000\000\000\000\000MPACT_FL";
 #endif
 
 /* g_overlayOneCArcCosineTable.CPP */

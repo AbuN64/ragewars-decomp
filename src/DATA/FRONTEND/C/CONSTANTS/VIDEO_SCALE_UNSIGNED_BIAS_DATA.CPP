@@ -1,24 +1,25 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* ROM-grounded data: src/g_videoScaleUnsignedBias_StorageWords_VideoScaleUnsignedBiasData.c */
-const unsigned int g_videoScaleUnsignedBias_StorageWords[3] = {
-    0x41F00000, 0x00000000, 0x4F000000,
+const RestvideoScaleUnsignedBias_StorageWordsLayout386 g_videoScaleUnsignedBias_StorageWords = {
+    { 3e+01f, 0.0f, 2.1474836e+09f },
 };
 
 #if defined(VERSION_US)
-unsigned int k_VideoScaleUnsignedBiasEncodedWords[1] = {
-    0x000F534D,
+RestLinkerAlignmentFill4 k_VideoScaleUnsignedBiasEncodedWords = {
+    { 0, 15, 83, 77 },
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_VideoScaleUnsignedBiasThirtyWords[1] = {
-    0x41F00000,
+RestLinkerAlignmentFill4 k_VideoScaleUnsignedBiasThirtyWords = {
+    { 65, 240, 0, 0 },
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_VideoScaleUnsignedBiasEncodedWordsBlock1[1] = {
-    0x72656164,
+RestLinkerAlignmentFill4 k_VideoScaleUnsignedBiasEncodedWordsBlock1 = {
+    { 114, 101, 97, 100 },
 };
 #endif

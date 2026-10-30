@@ -1,9 +1,10 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-const unsigned int D_src_1fb9cba3[1] = {
-    0x43200000,
+const RestLinkerAlignmentFill4 D_src_1fb9cba3 = {
+    { 67, 32, 0, 0 },
 };
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
@@ -45,7 +46,7 @@ unsigned char k_CharacterPreviewDistanceFragmentsEncodedBytesBlock2[13] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const unsigned int g_characterPreviewDistanceUsRev1[1] = {
-    0x43200000,
+const RestLinkerAlignmentFill4 g_characterPreviewDistanceUsRev1 = {
+    { 67, 32, 0, 0 },
 };
 #endif

@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_EventTrailingBytes[8] = { 0x90, 0x82, 0x00, 0x00, 0x24, 0x84, 0x00, 0x01 };
+RestLinkerAlignmentFill8 g_EventTrailingBytes = {
+    { 144, 130, 0, 0, 36, 132, 0, 1 },
+};
 #endif

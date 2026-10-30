@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_AlunlinkTrailingBytes[4] = { 0x00, 0x00, 0x40, 0x21 };
+RestLinkerAlignmentFill4 g_AlunlinkTrailingBytes = {
+    { 0, 0, 64, 33 },
+};
 #endif

@@ -1,12 +1,17 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802BFD80_15.CPP */
 #if defined(VERSION_EU)
-unsigned char g_AudioTrailingBytesBlock13[4] = { 0xAF, 0xB0, 0x00, 0x18 };
+RestLinkerAlignmentFill4 g_AudioTrailingBytesBlock13 = {
+    { 175, 176, 0, 24 },
+};
 #endif
 
 /* g_audioRetainedInstructionWords_us_rev1.CPP */
 #if defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802BB624_us_rev1[3] = { 0x27BD0020U, 0x02802021U, 0x3C018015U };
+RestLinkerAlignmentFill12 func_802BB624_us_rev1 = {
+    { 39, 189, 0, 32, 2, 128, 32, 33, 60, 1, 128, 21 },
+};
 #endif

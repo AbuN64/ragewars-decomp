@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_CopyTrailingBytesBlock1[8] = { 0x00, 0x43, 0x18, 0x23, 0x10, 0x62, 0x00, 0x03 };
+RestLinkerAlignmentFill8 g_CopyTrailingBytesBlock1 = {
+    { 0, 67, 24, 35, 16, 98, 0, 3 },
+};
 #endif

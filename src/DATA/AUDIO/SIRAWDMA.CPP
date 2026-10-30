@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_SirawdmaTrailingBytes[8] = { 0x8C, 0x42, 0x00, 0x00, 0x30, 0x42, 0x00, 0x03 };
+RestLinkerAlignmentFill8 g_SirawdmaTrailingBytes = {
+    { 140, 66, 0, 0, 48, 66, 0, 3 },
+};
 #endif

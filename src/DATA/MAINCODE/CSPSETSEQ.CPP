@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_CspsetseqTrailingBytes[4] = { 0x00, 0xA0, 0x20, 0x21 };
+RestLinkerAlignmentFill4 g_CspsetseqTrailingBytes = {
+    { 0, 160, 32, 33 },
+};
 #endif

@@ -1,22 +1,31 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802B7058_35.CPP */
 #if defined(VERSION_EU)
-unsigned char g_AudioLinkGapWordsBfd74TrailingBytesBlock2[8] = { 0x88, 0xAA, 0x00, 0x0C, 0x98, 0xAA, 0x00, 0x0F };
+RestLinkerAlignmentFill8 g_AudioLinkGapWordsBfd74TrailingBytesBlock2 = {
+    { 136, 170, 0, 12, 152, 170, 0, 15 },
+};
 #endif
 
 /* 802BE040_27.CPP */
 #if defined(VERSION_US)
-unsigned char g_AudioLinkGapWordsBfd74TrailingBytes[8] = { 0x52, 0x00, 0x00, 0xD0, 0x06, 0x00, 0x00, 0x08 };
+RestLinkerAlignmentFill8 g_AudioLinkGapWordsBfd74TrailingBytes = {
+    { 82, 0, 0, 208, 6, 0, 0, 8 },
+};
 #endif
 
 /* 802BE040_54.CPP */
 #if defined(VERSION_EU_X)
-unsigned char g_AudioLinkGapWordsBfd74TrailingBytesBlock1[4] = { 0x14, 0x61, 0x00, 0x04 };
+RestLinkerAlignmentFill4 g_AudioLinkGapWordsBfd74TrailingBytesBlock1 = {
+    { 20, 97, 0, 4 },
+};
 #endif
 
 /* 802BFD80_21.CPP */
 #if defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int g_audioLinkGapWordsBlock3[3] = { 0x275A0E60U, 0xFF410020U, 0x401B6000U };
+RestLinkerAlignmentFill12 g_audioLinkGapWordsBlock3 = {
+    { 39, 90, 14, 96, 255, 65, 0, 32, 64, 27, 96, 0 },
+};
 #endif

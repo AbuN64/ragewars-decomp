@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_AudioLinkGapBdc08TrailingBytes[8] = { 0x00, 0xAB, 0x08, 0x2B, 0x10, 0x20, 0x00, 0x0D };
+RestLinkerAlignmentFill8 g_AudioLinkGapBdc08TrailingBytes = {
+    { 0, 171, 8, 43, 16, 32, 0, 13 },
+};
 #endif

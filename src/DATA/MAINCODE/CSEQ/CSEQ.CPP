@@ -1,13 +1,18 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802AD544_11.CPP */
 #if defined(VERSION_EU)
-unsigned char g_CseqTrailingBytesBlock2[4] = { 0x00, 0x02, 0x1C, 0x03 };
+RestLinkerAlignmentFill4 g_CseqTrailingBytesBlock2 = {
+    { 0, 2, 28, 3 },
+};
 #endif
 
 /* 802AFEEC_18.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-unsigned char g_CseqTrailingBytesBlock3[4] = { 0x10, 0xC0, 0x00, 0x0C };
+RestLinkerAlignmentFill4 g_CseqTrailingBytesBlock3 = {
+    { 16, 192, 0, 12 },
+};
 #endif
 
 /* 802AFEEC_9.CPP */

@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* 800C7704.CPP */
@@ -23,8 +24,8 @@ struct {
 
 /* 800C83D4.CPP */
 #if defined(VERSION_EU)
-unsigned int g_SaveWords2[3] = {
-    0x42800000, 0x43000000, 0x4F000000,
+RestLinkerAlignmentFill12 g_SaveWords2 = {
+    { 66, 128, 0, 0, 67, 0, 0, 0, 79, 0, 0, 0 },
 };
 #endif
 

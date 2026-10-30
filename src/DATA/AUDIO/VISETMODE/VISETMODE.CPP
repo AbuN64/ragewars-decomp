@@ -1,9 +1,10 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802B661C.CPP */
 #if defined(VERSION_EU)
-unsigned int g_VisetmodeTrailingBytes[1] = {
-    0x080AC591,
+RestLinkerAlignmentFill4 g_VisetmodeTrailingBytes = {
+    { 8, 10, 197, 145 },
 };
 #endif
 
@@ -14,11 +15,15 @@ unsigned char s_ctorText[4] = { 0x63, 0x74, 0x6F, 0x72 };
 
 /* 802BE040_11.CPP */
 #if defined(VERSION_EU_X)
-unsigned char g_VisetmodeTrailingBytesBlock1[12] = { 0x14, 0x40, 0x00, 0x0B, 0x00, 0x00, 0x00, 0x00, 0x0C, 0x0A, 0xEA, 0x48 };
+RestLinkerAlignmentFill12 g_VisetmodeTrailingBytesBlock1 = {
+    { 20, 64, 0, 11, 0, 0, 0, 0, 12, 10, 234, 72 },
+};
 #endif
 
 /* 802BE040_64.CPP */
 #if defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802BED98_us_rev1[2] = { 0x2484185CU, 0x00801821U };
+RestLinkerAlignmentFill8 func_802BED98_us_rev1 = {
+    { 36, 132, 24, 92, 0, 128, 24, 33 },
+};
 #endif

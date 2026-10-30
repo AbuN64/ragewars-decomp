@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 
@@ -14,7 +15,7 @@ const float g_alFxNewConstantWords_us_rev1[6] = {
 };
 
 /* ROM-grounded data: src/k_alResampleNewConstantOne_us_rev1.c */
-const unsigned int g_alResampleNewConstantWords[1] = {
-    0x3F800000,
+const float g_alResampleNewConstantWords[1] = {
+    1.0f,
 };
 #endif

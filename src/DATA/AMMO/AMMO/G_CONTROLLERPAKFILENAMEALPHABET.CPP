@@ -1,9 +1,10 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* g_GControllerpakfilenamealphabetWords4_GControllerpakfilenamealphabet.CPP */
 /* ROM-grounded data: rodata/writable/800E2850 */
-unsigned int g_GControllerpakfilenamealphabetWords4[3] = {
-    0x00000000, 0x00000000, 0x00000000,
+s32 g_GControllerpakfilenamealphabetWords4[3] = {
+    0, 0, 0,
 };
 
 /* g_controllerPakFilenameAlphabet_GControllerpakfilenamealphabet.CPP */
@@ -47,38 +48,41 @@ unsigned short g_controllerPakFilenameAlphabet[] = {
 
 /* 800E28A0.CPP */
 /* ROM-grounded data: rodata/writable/800E28A0 */
-unsigned int g_GControllerpakfilenamealphabetWords3[1] = {
-    0x00000002,
+s32 g_GControllerpakfilenamealphabetWords3[1] = {
+    2,
 };
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int g_GControllerpakfilenamealphabetWords2[3] = {
-    0x00002C00, 0x00000200, 0x00000001,
+s32 g_GControllerpakfilenamealphabetWords2[3] = {
+    11264, 512, 1,
 };
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_GControllerpakfilenamealphabetEncodedWordsBlock1[3] = {
-    0x00002C00, 0x00000200, 0x002BB820,
+RestGControllerpakfilenamealphabetEncodedWordsBlock1Layout12 k_GControllerpakfilenamealphabetEncodedWordsBlock1 = {
+    { 11264, 512, 2865184 },
 };
 #endif
 
 /* 800E28A4.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
-unsigned int k_GControllerpakfilenamealphabetEncodedWords[3] = {
-    0x00002C00, 0x00000200, 0x00000000,
+s32 k_GControllerpakfilenamealphabetEncodedWords[3] = {
+    11264, 512, 0,
 };
 #endif
 
 /* 800E28A4_2.CPP */
-unsigned int g_GControllerpakfilenamealphabetWords1[8] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000000,
+s32 g_GControllerpakfilenamealphabetWords1[8] = {
+    0, 0, 0, 0, 0, 0,
+    -1, 0,
 };
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-unsigned int g_width320Height240MinusOneWords[3] = {
-    0x00000140, 0x000000F0, 0xFFFFFFFF,
+Restwidth320Height240MinusOneWordsRecord15 g_width320Height240MinusOneWords = {
+    320,
+    240,
+    -1,
 };
 #endif
 

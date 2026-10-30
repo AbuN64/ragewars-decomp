@@ -1,7 +1,8 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "TYPES.H"
 
 #if defined(VERSION_US)
-u32 g_audioGlobals[4] = { 0x00000000, 0x434B595F, 0x424F4D42, 0x65717552 };
+char g_audioGlobals[16] = "\000\000\000\000CKY_BOMBequR";
 s32 g_audioSmallRoomParameters[26] = {
     3, 4000,
     0, 2160, 9830, -9830, 0, 0, 0, 0,
@@ -49,10 +50,10 @@ s16 g_audioEqualPowerPanTable[128] = {
     6044, 5646, 5246, 4845, 4444, 4042, 3640, 3237,
     2833, 2429, 2025, 1620, 1216, 810, 405, 0,
 };
-u32 g_audioGlobalsTailWordsUs[27] = {
-    0x00000010, 0x00000010, 0x00000020, 0x00000000, 0xC1200000, 0x00000000, 0x5245424F, 0x524E5F44,
-    0x004D4147, 0x45445F48, 0x4F4C4449, 0x4E475F46, 0x00000000, 0x00000400, 0x00006600, 0x00000400,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000,
+RestaudioGlobalsTailWordsUsLayout295 g_audioGlobalsTailWordsUs = {
+    { 16, 16, 32, 0 },
+    { -1e+01f, 0.0f },
+    "REBORN_D\000MAGED_HOLDING_F\000\000\000\000",
+    { 1024, 26112, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 #endif

@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_GetthreadpriTrailingBytes[4] = { 0xAF, 0xB2, 0x00, 0x18 };
+RestLinkerAlignmentFill4 g_GetthreadpriTrailingBytes = {
+    { 175, 178, 0, 24 },
+};
 #endif

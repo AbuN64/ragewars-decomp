@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 
@@ -9,8 +10,8 @@ const unsigned char g_SndplayerBytes1[7] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_SndplayerWords1_Sndplayer.c */
-const unsigned int g_SndplayerWords1[1] = {
-    0x38D1B717,
+const float g_SndplayerWords1[1] = {
+    0.0001f,
 };
 
 /* ROM-grounded data: src/g_SndplayerBytes2_Sndplayer.c */

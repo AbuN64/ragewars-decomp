@@ -1,16 +1,23 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802BE040_53.CPP */
 #if defined(VERSION_EU)
-unsigned char g_ViblackTrailingBytesBlock4[4] = { 0xAC, 0x86, 0x00, 0x3C };
+RestLinkerAlignmentFill4 g_ViblackTrailingBytesBlock4 = {
+    { 172, 134, 0, 60 },
+};
 #endif
 
 /* g_viblackLinkGapWords_Viblack.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
 #if defined(VERSION_EU_X)
-unsigned int g_viblackLinkGapWords[2] = { 0xE601001CU, 0x0C0AC188U };
+RestLinkerAlignmentFill8 g_viblackLinkGapWords = {
+    { 230, 1, 0, 28, 12, 10, 193, 136 },
+};
 #elif defined(VERSION_US_REV1)
-unsigned int g_viblackLinkGapWords[2] = { 0xE601001CU, 0x0C0AD504U };
+RestLinkerAlignmentFill8 g_viblackLinkGapWords = {
+    { 230, 1, 0, 28, 12, 10, 213, 4 },
+};
 #endif
 #endif

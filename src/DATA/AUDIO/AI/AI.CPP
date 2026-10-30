@@ -1,17 +1,24 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802B7058_14.CPP */
 #if defined(VERSION_EU)
-unsigned char g_AiTrailingBytes[12] = { 0x3C, 0x03, 0x80, 0x0E, 0x24, 0x63, 0x46, 0xF0, 0xAF, 0xBF, 0x00, 0x10 };
+RestLinkerAlignmentFill12 g_AiTrailingBytes = {
+    { 60, 3, 128, 14, 36, 99, 70, 240, 175, 191, 0, 16 },
+};
 #endif
 
 /* 802BE040_18.CPP */
 #if defined(VERSION_US)
-unsigned char g_AiTrailingBytesBlock1[8] = { 0x00, 0x00, 0x10, 0x43, 0x50, 0x6C, 0x61, 0x79 };
+RestLinkerAlignmentFill8 g_AiTrailingBytesBlock1 = {
+    { 0, 0, 16, 67, 80, 108, 97, 121 },
+};
 #endif
 
 /* 802BE040_5.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802B41EC_eu_x[1] = { 0x3C020308U };
+RestLinkerAlignmentFill4 func_802B41EC_eu_x = {
+    { 60, 2, 3, 8 },
+};
 #endif

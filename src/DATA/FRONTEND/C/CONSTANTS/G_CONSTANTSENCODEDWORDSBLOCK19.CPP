@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "DATA/OVL1_C/NAVIGATION_CALLBACK_ADDRESS.H"
 
 /* g_ConstantsEncodedHalfwords_Constants18.CPP */
@@ -10,7 +11,7 @@ unsigned short g_ConstantsEncodedHalfwords[1] = {
 
 /* NAVIGATION_CALLBACK_ADDRESS.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_ConstantsEncodedWordsBlock19[3] = {
-    (unsigned int)addrLow_Nav_RebuildRequestedGoalRoute, (unsigned int)addrLow_Nav_CollectEnemyTargets, (unsigned int)addrLow_Target_UpdateTargetSelection,
+void * g_ConstantsEncodedWordsBlock19[3] = {
+    (void *)(addrLow_Nav_RebuildRequestedGoalRoute), (void *)(addrLow_Nav_CollectEnemyTargets), (void *)(addrLow_Target_UpdateTargetSelection),
 };
 #endif

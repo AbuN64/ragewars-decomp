@@ -1,12 +1,17 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802BE040_48.CPP */
 #if defined(VERSION_EU)
-unsigned char g_AudioTrailingBytesBlock11[12] = { 0x46, 0x80, 0x08, 0x61, 0x46, 0x21, 0x00, 0x00, 0x3C, 0x01, 0x80, 0x0D };
+RestLinkerAlignmentFill12 g_AudioTrailingBytesBlock11 = {
+    { 70, 128, 8, 97, 70, 33, 0, 0, 60, 1, 128, 13 },
+};
 #endif
 
 /* AudioLegacySplitGapWordsBlock2.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802B31AC_eu_x[1] = { 0x8FB00018U };
+RestLinkerAlignmentFill4 func_802B31AC_eu_x = {
+    { 143, 176, 0, 24 },
+};
 #endif

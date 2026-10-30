@@ -1,45 +1,73 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 #include "DATA/OVL1_I/SMPOVERLAY_DISPATCHPAKDIALOGEVENT_DATA.H"
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 extern char g_pakDialogTextReferenceShared1[];
-unsigned int D_src_897c5b16[29] = {
-    0x00000E08, 0x0000001D, 0x0041C40C, 0x00000E06, 0x0000001D, 0x0041C2AC, 0x00000E03, 0x0000001D,
-    0x0041C3DC, 0x00000001, 0x0000001D, 0x0041C494, 0x00000002, 0x0000001D, 0x0041C474, 0x0000000A,
-    0x0000001D, 0x0041C46C, 0x00000000, 0x00000000, 0x00000000, 0x96969600, 0x96969600, 0xC8C8C800,
-    0xC8C8C800, 0x00003200, 0x00000000, (unsigned int)g_pakDialogTextReferenceShared1, 0x000001FE,
+RestD_src_897c5b16Layout455 D_src_897c5b16 = {
+    { 3592, 29, 4310028, 3590, 29, 4309676, 3587, 29, 4309980, 1, 29, 4310164, 2, 29, 4310132, 10, 29, 4310124, 0, 0, 0 },
+    0x96969600,
+    0x96969600,
+    { -4.112e+05f, -4.112e+05f },
+    { 12800, 0 },
+    (void *)(g_pakDialogTextReferenceShared1),
+    510,
 };
 #endif
 #if defined(VERSION_EU)
-unsigned int D_src_897c5b16[29] = {
-    0x00000E08, 0x0000001D, 0x0041C85C, 0x00000E06, 0x0000001D, 0x0041C6FC, 0x00000E03, 0x0000001D,
-    0x0041C82C, 0x00000001, 0x0000001D, 0x0041C8E4, 0x00000002, 0x0000001D, 0x0041C8C4, 0x0000000A,
-    0x0000001D, 0x0041C8BC, 0x00000000, 0x00000000, 0x00000000, 0x96969600, 0x96969600, 0xC8C8C800,
-    0xC8C8C800, 0x00003200, 0x00000000, 0x4AE5C74D, 0x21CE0020,
+RestD_src_897c5b16Layout456 D_src_897c5b16 = {
+    { 3592, 29, 4311132, 3590, 29, 4310780, 3587, 29, 4311084, 1, 29, 4311268, 2, 29, 4311236, 10, 29, 4311228, 0, 0, 0 },
+    0x96969600,
+    0x96969600,
+    { -4.112e+05f, -4.112e+05f },
+    { 12800, 0 },
+    7529382.5f,
+    0x21CE0020,
 };
 #endif
 #if defined(VERSION_EU_X)
-unsigned int D_src_897c5b16[29] = {
-    0x00000E08, 0x0000001D, 0x0041C85C, 0x00000E06, 0x0000001D, 0x0041C6FC, 0x00000E03, 0x0000001D,
-    0x0041C82C, 0x00000001, 0x0000001D, 0x0041C8E4, 0x00000002, 0x0000001D, 0x0041C8C4, 0x0000000A,
-    0x0000001D, 0x0041C8BC, 0x00000000, 0x00000000, 0x00000000, 0x96969600, 0x96969600, 0xC8C8C800,
-    0xC8C8C800, 0x00003200, 0x00000000, 0x00000E06, 0x0000000B,
+RestD_src_897c5b16Layout457 D_src_897c5b16 = {
+    { 3592, 29, 4311132, 3590, 29, 4310780, 3587, 29, 4311084, 1, 29, 4311268, 2, 29, 4311236, 10, 29, 4311228, 0, 0, 0 },
+    0x96969600,
+    0x96969600,
+    { -4.112e+05f, -4.112e+05f },
+    { 12800, 0, 3590, 11 },
 };
 #endif
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int g_pakDialogEventHandlerRecordsUs[21] = {
-    0x00000E08, 0x0000001D, (unsigned int)g_SmpOverlay_TickPakDialogAddress, 0x00000E06, 0x0000001D, (unsigned int)g_SmpOverlay_CreatePakDialogAddress, 0x00000E03, 0x0000001D,
-    (unsigned int)g_SmpOverlay_DestroyPakDialogAddress, 0x00000001, 0x0000001D, (unsigned int)g_SmpOverlay_HandlePakDialogChoiceAddress, 0x00000002, 0x0000001D, (unsigned int)g_SmpOverlay_ConsumePakDialogEventAddress, 0x0000000A,
-    0x0000001D, (unsigned int)g_SmpOverlay_ReturnUnhandledPakDialogEventAddress, 0x00000000, 0x00000000, 0x00000000,
+RestpakDialogEventHandlerRecordsUsRecord458 g_pakDialogEventHandlerRecordsUs = {
+    3592,
+    29,
+    (unsigned int)g_SmpOverlay_TickPakDialogAddress,
+    3590,
+    29,
+    (unsigned int)g_SmpOverlay_CreatePakDialogAddress,
+    3587,
+    29,
+    (unsigned int)g_SmpOverlay_DestroyPakDialogAddress,
+    1,
+    29,
+    (unsigned int)g_SmpOverlay_HandlePakDialogChoiceAddress,
+    2,
+    29,
+    (unsigned int)g_SmpOverlay_ConsumePakDialogEventAddress,
+    10,
+    29,
+    (unsigned int)g_SmpOverlay_ReturnUnhandledPakDialogEventAddress,
+    { 0x00000000, 0x00000000, 0x00000000 },
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int g_pakDialogStyleAndTextWords_us[8] = {
-    0x96969600, 0x96969600, 0xC8C8C800, 0xC8C8C800, 0x00003200, 0x00000000, 0x4F4E5F43, 0x48415247,
+RestpakDialogStyleAndTextWords_usLayout459 g_pakDialogStyleAndTextWords_us = {
+    0x96969600,
+    0x96969600,
+    { -4.112e+05f, -4.112e+05f },
+    { 12800, 0 },
+    "ON_CHARG",
 };
 #endif

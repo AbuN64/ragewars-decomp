@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
@@ -8,7 +9,7 @@ const unsigned char g_characterPreviewVerticalOffset[3] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const unsigned int g_characterPreviewVerticalOffsetUsRev1[1] = {
-    0x42200000,
+const RestLinkerAlignmentFill4 g_characterPreviewVerticalOffsetUsRev1 = {
+    { 66, 32, 0, 0 },
 };
 #endif

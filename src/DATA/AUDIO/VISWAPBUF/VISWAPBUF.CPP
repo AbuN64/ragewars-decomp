@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_US_REV1)
-unsigned char g_ViswapbufTrailingBytes[12] = { 0x00, 0x00, 0x00, 0x00, 0x0C, 0x0B, 0x07, 0xFC, 0x00, 0x00, 0x00, 0x00 };
+RestLinkerAlignmentFill12 g_ViswapbufTrailingBytes = {
+    { 0, 0, 0, 0, 12, 11, 7, 252, 0, 0, 0, 0 },
+};
 #endif

@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_AudioGermanInstructionTailTrailingBytes[8] = { 0xAF, 0xB0, 0x00, 0x10, 0x3C, 0x10, 0x80, 0x15 };
+RestLinkerAlignmentFill8 g_AudioGermanInstructionTailTrailingBytes = {
+    { 175, 176, 0, 16, 60, 16, 128, 21 },
+};
 #endif

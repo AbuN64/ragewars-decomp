@@ -1,7 +1,8 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
-unsigned int g_SchedHandleretraceWords1[6] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000014, 0x00000000, 0x00000000,
+s32 g_SchedHandleretraceWords1[6] = {
+    0, 0, 0, 20, 0, 0,
 };
 
 #if defined(VERSION_US)

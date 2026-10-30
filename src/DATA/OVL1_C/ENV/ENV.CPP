@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 
@@ -25,8 +26,8 @@ char k_EnvEncodedBytes[8] =
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_EnvEncodedWords[2] = {
-    0x38000000, 0x00000000,
+RestLinkerAlignmentFill8 k_EnvEncodedWords = {
+    { 56, 0, 0, 0, 0, 0, 0, 0 },
 };
 #endif
 

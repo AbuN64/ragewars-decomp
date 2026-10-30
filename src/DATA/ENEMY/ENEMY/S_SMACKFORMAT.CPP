@@ -1,29 +1,36 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* k_SSmackformatEncodedWordsBlock1_SSmackformat.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-unsigned int k_SSmackformatEncodedWordsBlock1[16] = {
-    0x00000000, 0x0000000A, 0x0000000A, 0x0000000B, 0x0000000C, 0x0000000D, 0x0000000E, 0x0000000F,
-    0x00000010, 0x00000011, 0x00000012, 0x3C02800D, 0xFFFFFFFF, 0x8C500000, 0x16020007, 0x00000000,
+RestSSmackformatEncodedWordsBlock1Layout339 k_SSmackformatEncodedWordsBlock1 = {
+    { 0, 10, 10, 11, 12, 13, 14, 15, 16, 17, 18 },
+    0.0079651f,
+    -1,
+    0x8C500000,
+    0x16020007,
+    0,
 };
 #endif
 #if defined(VERSION_EU)
-unsigned int k_SSmackformatEncodedWordsBlock1[16] = {
-    0x00000000, 0x0000000A, 0x0000000A, 0x0000000B, 0x0000000C, 0x0000000D, 0x0000000E, 0x0000000F,
-    0x00000010, 0x00000011, 0x00000012, 0x00000000, 0xFFFFFFFF, 0x3F3504F3, 0x00000000, 0xBF3504F3,
+RestSSmackformatEncodedWordsBlock1Layout340 k_SSmackformatEncodedWordsBlock1 = {
+    { 0, 10, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0, -1 },
+    { 0.70710677f, 0.0f, -0.70710677f },
 };
 #endif
 #if defined(VERSION_EU_X)
-unsigned int k_SSmackformatEncodedWordsBlock1[16] = {
-    0x00000000, 0x0000000A, 0x0000000A, 0x0000000B, 0x0000000C, 0x0000000D, 0x0000000E, 0x0000000F,
-    0x00000010, 0x00000011, 0x00000012, 0x6B202573, 0xFFFFFFFF, 0x6F722066, 0x696E6420, 0x506F7765,
+RestSSmackformatEncodedWordsBlock1Layout341 k_SSmackformatEncodedWordsBlock1 = {
+    { 0, 10, 10, 11, 12, 13, 14, 15, 16, 17, 18 },
+    "k %s",
+    -1,
+    "or find Powe",
 };
 #endif
 #if defined(VERSION_US)
-unsigned int k_SSmackformatEncodedWordsBlock1[16] = {
-    0x00000000, 0x0000000A, 0x0000000A, 0x0000000B, 0x0000000C, 0x0000000D, 0x0000000E, 0x0000000F,
-    0x00000010, 0x00000011, 0x00000012, 0x00000016, 0xFFFFFFFF, 0x494E464C, 0x41544F52, 0x5F524543,
+RestSSmackformatEncodedWordsBlock1Layout342 k_SSmackformatEncodedWordsBlock1 = {
+    { 0, 10, 10, 11, 12, 13, 14, 15, 16, 17, 18, 22, -1 },
+    "INFLATOR_REC",
 };
 #endif
 #endif
@@ -32,42 +39,43 @@ unsigned int k_SSmackformatEncodedWordsBlock1[16] = {
 /* Announce message block shared by the menu handler table: ids 10..18 followed by the kill-message
    text tail "nted", "Embryo Destr". us-rev1 wording; the other cartridges word this block in their
    own language, so only the versions carrying these bytes land here. */
-unsigned int k_SSmackformatEncodedWords[16] = {
-    0x00000000, 0x0000000A, 0x0000000A, 0x0000000B, 0x0000000C, 0x0000000D, 0x0000000E, 0x0000000F,
-    0x00000010, 0x00000011, 0x00000012, 0x6E746564, 0xFFFFFFFF, 0x456D6272, 0x796F2044, 0x65737472,
+RestSSmackformatEncodedWordsLayout343 k_SSmackformatEncodedWords = {
+    { 0, 10, 10, 11, 12, 13, 14, 15, 16, 17, 18 },
+    "nted",
+    -1,
+    "Embryo Destr",
 };
 #endif
 
 /* s_smackFormat_SSmackformat.CPP */
 /* ROM-grounded data: rodata/writable/800D2B50 */
 #ifdef VERSION_DE
-unsigned int s_smackFormat[4] = {
-    0x00000000, 0x40490FDB, 0x00000000, 0xC0490FDB,
+float s_smackFormat[4] = {
+    0.0f, 3.1415927f, 0.0f, -3.1415927f,
 };
 #endif
 #ifdef VERSION_EU
-unsigned int s_smackFormat[4] = {
-    0x00000000, 0x00000000, 0xBF800000, 0xBF3504F3,
+RestsmackFormatLayout345 s_smackFormat = {
+    { 0, 0 },
+    { -1.0f, -0.70710677f },
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned int s_smackFormat[4] = {
-    0x00000000, 0x72650000, 0x456E6572, 0x67792072,
-};
+char s_smackFormat[16] = "\000\000\000\000re\000\000Energy r";
 #endif
 #ifdef VERSION_US
-unsigned int s_smackFormat[4] = {
-    0x00000000, 0x71755200, 0x00D90900, 0x0010000B,
+RestsmackFormatLayout347 s_smackFormat = {
+    0,
+    "quR\000",
+    { 14223616, 1048587 },
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned int s_smackFormat[4] = {
-    0x00000000, 0x00000000, 0x536D6163, 0x6B202573,
-};
+char s_smackFormat[16] = "\000\000\000\000\000\000\000\000Smack %s";
 #endif
 
 /* g_SSmackformatEncodedWords_SSmackformat.CPP */
 /* ROM-grounded data: rodata/unresolved/800D2B60 */
-unsigned int g_SSmackformatEncodedWords[4] = {
-    0x00000000, 0x40490FDB, 0x00000000, 0xC0490FDB,
+float g_SSmackformatEncodedWords[4] = {
+    0.0f, 3.1415927f, 0.0f, -3.1415927f,
 };

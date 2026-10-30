@@ -1,35 +1,46 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_actorStateEnd_us_rev1[];
+extern char g_actorStateTableEndWords[];
+extern char g_overlayThreeActorStateEndFragment1[];
+extern char g_overlayThreeActorStateEndFragment2[];
+extern char g_overlayThreeActorStateEndFragment3[];
+extern char g_overlayThreeActorStateEndFragment4[];
+extern char g_overlayThreeActorStateEndFragment5[];
 #include "include_asm.h"
 
 /* g_ConeAttenuationWords1_GMiniguntext.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_ConeAttenuationWords1[65] = {
-    0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
-    0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
-    0x3F000000, 0x3F03F078, 0x3F07C3B5, 0x3F0B7C13, 0x3F0F1BBD, 0x3F12A476, 0x3F1617E3, 0x3F197775,
-    0x3F1CC469, 0x3F200000, 0x3F232B24, 0x3F2646E1, 0x3F295400, 0x3F2C534C, 0x3F2F456B, 0x3F322B28,
-    0x3F3504F7, 0x3F37D36F, 0x3F3A9729, 0x3F3D5087, 0x3F400000, 0x3F42A5F8, 0x3F4542E5, 0x3F47D70A,
-    0x3F4A62BB, 0x3F4CE66D, 0x3F4F6241, 0x3F51D68C, 0x3F544391, 0x3F56A993, 0x3F5908D5, 0x3F5B6189,
-    0x3F5DB3D0, 0x3F600000, 0x3F624628, 0x3F64869C, 0x3F66C15D, 0x3F68F6AD, 0x3F6B26AF, 0x3F6D5183,
-    0x3F6F774B, 0x3F719839, 0x3F73B470, 0x3F75CBEF, 0x3F77DEF8, 0x3F79ED8D, 0x3F7BF7E0, 0x3F7DFE00,
-    0x3F800000,
+float g_ConeAttenuationWords1[65] = {
+    0.0f, 0.125f, 0.176777f, 0.216506f, 0.25f, 0.279509f,
+    0.306186f, 0.330719f, 0.353553f, 0.375f, 0.395285f, 0.414578f,
+    0.433013f, 0.450694f, 0.467707f, 0.484123f, 0.5f, 0.515388f,
+    0.53033f, 0.544862f, 0.559017f, 0.572822f, 0.586302f, 0.599479f,
+    0.612372f, 0.625f, 0.637377f, 0.649519f, 0.661438f, 0.673146f,
+    0.684653f, 0.695971f, 0.707107f, 0.71807f, 0.728869f, 0.73951f,
+    0.75f, 0.760345f, 0.770552f, 0.780625f, 0.790569f, 0.800391f,
+    0.810093f, 0.81968f, 0.829156f, 0.838525f, 0.847791f, 0.856957f,
+    0.866025f, 0.875f, 0.883883f, 0.892679f, 0.901388f, 0.910014f,
+    0.918559f, 0.927025f, 0.935414f, 0.943729f, 0.951972f, 0.960143f,
+    0.968246f, 0.976281f, 0.984251f, 0.992157f, 1.0f,
 };
 #endif
 
 /* g_GMiniguntextWords1_GMiniguntext.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800D2648_unclaimed_D3450 */
-unsigned int g_GMiniguntextWords1[1] = {
-    0x00000001,
+s32 g_GMiniguntextWords1[1] = {
+    1,
 };
 
-unsigned short g_ColorJitterHalfwords1[] = {
-    0xF7F9, 0xF8F5, 0x080E, 0x190C, 0x1217, 0x1A0E, 0xFCEE, 0xF2E3, 0xD7E2, 0xE5E7, 0xE5DD, 0xE2EA,
-    0xE1E5, 0xEFF2, 0x0002, 0xFEF3, 0xF3F7, 0x0502, 0xFE09, 0x181F, 0x221D, 0x1518, 0x0A0D, 0xFDFA,
-    0x0113, 0x1F27, 0x1D1E, 0x1414, 0xFFF1, 0xE6EC, 0xE8E1, 0xE3E8, 0xE6F1, 0xF102, 0x1108, 0x0711,
-    0x0E09, 0x0C0C, 0x040C, 0x050A, 0x0D05, 0xFDFE, 0xF6F7, 0xF8EB, 0xEBE8,
-#if defined(VERSION_US_REV1)
-    0x5700,
-#endif
+u16 g_ColorJitterHalfwords1[46] = {
+    63481, 63733, 2062, 6412, 4631, 6670,
+    64750, 62179, 55266, 58855, 58845, 58090,
+    57829, 61426, 2, 65267, 62455, 1282,
+    65033, 6175, 8733, 5400, 2573, 65018,
+    275, 7975, 7454, 5140, 65521, 59116,
+    59617, 58344, 59121, 61698, 4360, 1809,
+    3593, 3084, 1036, 1290, 3333, 65022,
+    63223, 63723, 60392, 22272,
 };
 #endif
 
@@ -39,9 +50,10 @@ unsigned short g_ColorJitterHalfwords1[] = {
 
 /* g_minigunText_GMiniguntext.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_minigunText[21] = {
-    0x00000000, 0x00000000, 0x800D28B0, 0x800D28B0, 0x800CD9D8, 0x800CD824, 0x800CD4A8, 0x800D28B0,
-    0x800CD658, 0x800CD718, 0x800D28B0, 0x800CD8A8, 0x800CD56C, 0x800D28B0, 0x800D28B0, 0x800D28B0,
-    0x800D28B0, 0x45000000, 0x4D494E49, 0x47554E00, 0x3F800000,
+RestminigunTextLayout331 g_minigunText = {
+    { 0, 0 },
+    { (void *)&g_minigunText, (void *)&g_minigunText, (void *)((char *)&g_actorStateEnd_us_rev1 + 40), (void *)((char *)&g_overlayThreeActorStateEndFragment3 + 40), (void *)((char *)&g_actorStateTableEndWords + 40), (void *)&g_minigunText, (void *)((char *)&g_overlayThreeActorStateEndFragment1 + 40), (void *)((char *)&g_overlayThreeActorStateEndFragment2 + 40), (void *)&g_minigunText, (void *)((char *)&g_overlayThreeActorStateEndFragment4 + 40), (void *)((char *)&g_overlayThreeActorStateEndFragment5 + 40), (void *)&g_minigunText, (void *)&g_minigunText, (void *)&g_minigunText, (void *)&g_minigunText },
+    "E\000\000\000MINIGUN\000",
+    1.0f,
 };
 #endif

@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_PirawreadTrailingBytes[12] = { 0x24, 0x02, 0x00, 0x01, 0xAF, 0xB0, 0x00, 0x10, 0x3C, 0x10, 0x80, 0x15 };
+RestLinkerAlignmentFill12 g_PirawreadTrailingBytes = {
+    { 36, 2, 0, 1, 175, 176, 0, 16, 60, 16, 128, 21 },
+};
 #endif

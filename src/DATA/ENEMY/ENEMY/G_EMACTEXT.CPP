@@ -1,16 +1,19 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* g_GEmactextEncodedWords_GEmactext.CPP */
 /* ROM-grounded data: rodata/writable/800D2930 */
-unsigned int g_GEmactextEncodedWords[1] = {
-    0x00000001,
+s32 g_GEmactextEncodedWords[1] = {
+    1,
 };
 
 /* g_emacText.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-unsigned int g_emacText[7] = {
-    0x00000000, 0x00000000, 0x3FC00000, 0x00000000, 0x41700000, 0x0000FF00, 0x00000014,
+RestemacTextLayout324 g_emacText = {
+    { 0, 0 },
+    { 1.5f, 0.0f, 15.0f },
+    { 65280, 20 },
 };
 #endif
 #if defined(VERSION_EU)
@@ -20,13 +23,18 @@ unsigned short g_emacText[14] = {
 };
 #endif
 #if defined(VERSION_EU_X)
-unsigned int g_emacText[7] = {
-    0x00000000, 0x00000000, 0x3FC00000, 0x00000000, 0x41700000, 0x0000FF00, 0x00000000,
+RestemacTextLayout325 g_emacText = {
+    { 0, 0 },
+    { 1.5f, 0.0f, 15.0f },
+    { 65280, 0 },
 };
 #endif
 #if defined(VERSION_US)
-unsigned int g_emacText[7] = {
-    0x00000000, 0x00000000, 0x3FC00000, 0x00000000, 0x41700000, 0x0000FF00, 0x4852494E,
+RestemacTextLayout326 g_emacText = {
+    { 0, 0 },
+    { 1.5f, 0.0f, 15.0f },
+    65280,
+    "HRIN",
 };
 #endif
 #endif

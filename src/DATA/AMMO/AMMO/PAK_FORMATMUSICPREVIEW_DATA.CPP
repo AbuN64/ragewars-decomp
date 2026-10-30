@@ -1,12 +1,11 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 #if defined(VERSION_US)
 const char g_musicPreviewValueFormat_de[4] = "%2d";
 #endif
 #if defined(VERSION_DE)
-const unsigned int g_musicPreviewTwoColumnFormatWords[1] = {
-    0x25326400,
-};
+const char g_musicPreviewTwoColumnFormatWords[4] = "%2d\000";
 #endif
 
 #if defined(VERSION_DE)
@@ -23,7 +22,7 @@ const unsigned char g_musicPreviewTwoColumnFormat[4] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int g_pakMusicPreviewWordsUs[3] = {
-    0x0000000F, 0x000A0004, 0x00000015,
+RestLinkerAlignmentFill12 g_pakMusicPreviewWordsUs = {
+    { 0, 0, 0, 15, 0, 10, 0, 4, 0, 0, 0, 21 },
 };
 #endif

@@ -1,3 +1,6 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #if defined(VERSION_DE)
-unsigned char g_ViTrailingBytes[4] = { 0xAF, 0xB0, 0x00, 0x10 };
+RestLinkerAlignmentFill4 g_ViTrailingBytes = {
+    { 175, 176, 0, 16 },
+};
 #endif

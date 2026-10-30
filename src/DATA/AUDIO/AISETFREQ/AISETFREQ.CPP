@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_AisetfreqTrailingBytes[8] = { 0x00, 0xA0, 0x88, 0x21, 0x3C, 0x03, 0x80, 0x0D };
+RestLinkerAlignmentFill8 g_AisetfreqTrailingBytes = {
+    { 0, 160, 136, 33, 60, 3, 128, 13 },
+};
 #endif

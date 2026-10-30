@@ -1,11 +1,12 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "FX/CONTROLLER_INPUT.H"
 
 /* GControllerbuttonremapBlock1.CPP */
 
 /* k_GControllerbuttonremapEncodedWordsBlock2_GControllerbuttonremap.CPP */
 #if defined(VERSION_EU_X)
-unsigned int k_GControllerbuttonremapEncodedWordsBlock2[3] = {
-    0x3F8A4393, 0x3F8A1F40, 0x3F89FAE7,
+RestLinkerAlignmentFill12 k_GControllerbuttonremapEncodedWordsBlock2 = {
+    { 63, 138, 67, 147, 63, 138, 31, 64, 63, 137, 250, 231 },
 };
 ButtonRemap g_controllerButtonRemap[19] = {
     { 0x8000, 0x8000 },
@@ -28,7 +29,7 @@ ButtonRemap g_controllerButtonRemap[19] = {
     { 0x80000, 0x80000 },
     { 0, 0 },
 };
-unsigned int k_GControllerbuttonremapEncodedWordsBlock3[2] = {
-    0x3F845F9B, 0x3F843A53,
+float k_GControllerbuttonremapEncodedWordsBlock3[2] = {
+    1.0341676f, 1.0330299f,
 };
 #endif

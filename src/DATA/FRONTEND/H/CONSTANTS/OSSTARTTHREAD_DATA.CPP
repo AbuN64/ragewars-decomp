@@ -1,8 +1,11 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #ifdef VERSION_DE
-unsigned int k_OsstartthreadEncodedWords[6] = {
-    0x800D5260, 0x800D5260, 0x00000000, 0x00000000, 0x3F733333, 0x41800000,
+RestOsstartthreadEncodedWordsLayout422 k_OsstartthreadEncodedWords = {
+    { (void *)&__osThreadTail, (void *)&__osThreadTail, 0, 0 },
+    "?s33",
+    16.0f,
 };
 #endif
 #ifdef VERSION_EU_X
@@ -13,8 +16,8 @@ void *k_OsstartthreadEncodedWords[6] = {
 };
 #endif
 #ifdef VERSION_EU
-unsigned int k_OsstartthreadEncodedWords[6] = {
-    0x800E58E0, 0x800E58E0, 0x00000000, 0x00000000, 0x800C6C5C, 0x800C65A0,
+void * k_OsstartthreadEncodedWords[6] = {
+    (void *)&__osThreadTail, (void *)&__osThreadTail, 0, 0, (void *)((char *)&g_audioDiskTransferLinkTable + 1748), (void *)((char *)&g_audioDiskTransferLinkTable + 24),
 };
 #endif
 #endif

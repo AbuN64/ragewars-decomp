@@ -1,3 +1,4 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 #include "include_asm.h"
 
 /* 800E2774.CPP */
@@ -20,16 +21,16 @@ const float g_Player_DrawPulsingMenuSpriteConstantWords_us[1] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int k_AmmoEncodedWordsBlock1[2] = {
-    0x000A0004, 0x00000014,
+RestLinkerAlignmentFill8 k_AmmoEncodedWordsBlock1 = {
+    { 0, 10, 0, 4, 0, 0, 0, 20 },
 };
 #endif
 
 /* ammoEncodedWordsBlock1UsRev1Data.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E2778 */
-unsigned int g_AmmoEncodedWordsBlock1[2] = {
-    0x00000001, 0x00000010,
+RestLinkerAlignmentFill8 g_AmmoEncodedWordsBlock1 = {
+    { 0, 0, 0, 1, 0, 0, 0, 16 },
 };
 #endif
 

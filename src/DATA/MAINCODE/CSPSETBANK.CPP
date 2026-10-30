@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_CspsetbankTrailingBytes[12] = { 0x24, 0x02, 0x00, 0x0D, 0x24, 0x84, 0x00, 0x48, 0xAF, 0xA5, 0x00, 0x14 };
+RestLinkerAlignmentFill12 g_CspsetbankTrailingBytes = {
+    { 36, 2, 0, 13, 36, 132, 0, 72, 175, 165, 0, 20 },
+};
 #endif

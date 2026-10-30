@@ -1,4 +1,7 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-unsigned char g_MaincodeTrailingBytesBlock6[8] = { 0xAF, 0xA5, 0x00, 0x04, 0xAF, 0xA6, 0x00, 0x08 };
+RestLinkerAlignmentFill8 g_MaincodeTrailingBytesBlock6 = {
+    { 175, 165, 0, 4, 175, 166, 0, 8 },
+};
 #endif

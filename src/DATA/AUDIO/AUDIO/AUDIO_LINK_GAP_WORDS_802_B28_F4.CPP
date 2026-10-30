@@ -1,12 +1,17 @@
+#include "DATA/REST_SOURCE_RECORDS.H"
 
 
 /* 802BE040_35.CPP */
 #if defined(VERSION_EU)
-unsigned char g_AudioLinkGapWordsB28F4TrailingBytes[8] = { 0x86, 0x22, 0x00, 0x18, 0x86, 0x23, 0x00, 0x1A };
+RestLinkerAlignmentFill8 g_AudioLinkGapWordsB28F4TrailingBytes = {
+    { 134, 34, 0, 24, 134, 35, 0, 26 },
+};
 #endif
 
 /* g_audioLinkGapWords.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int g_audioLinkGapWords[3] = { 0xAFB7002CU, 0x00C0B821U, 0xAFBF0030U };
+RestLinkerAlignmentFill12 g_audioLinkGapWords = {
+    { 175, 183, 0, 44, 0, 192, 184, 33, 175, 191, 0, 48 },
+};
 #endif
