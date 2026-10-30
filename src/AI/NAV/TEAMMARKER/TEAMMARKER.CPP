@@ -28,7 +28,7 @@ s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
     if (((Shared_ActorView *)*controller)->controls->transientFlag != 0) {
         return 0;
     }
-    if (Playerai_FindPlayerWithMarker(base - (u32)&((Shared_MenuData *)0)->game.counters) != 0) {
+    if (Playerai_FindPlayerWithMarker(base - ((char *)&((Shared_MenuData *)0)->game.counters - (char *)0)) != 0) {
         return 0;
     }
     seekThreshold = Scaled_GetScaledAggression(controller) * g_teamMarkerAggressionScale + g_teamMarkerSeekBaseThreshold;

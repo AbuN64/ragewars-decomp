@@ -80,10 +80,10 @@ void Portal_DispatchActorBehavior(void *controller)
         }
     }
 case_0:
-        Portal_UpdateTimedActionBurst(state, (char *)&((AiConfig *)&g_actorBehaviorActionConfigs)[type] + mode * (u32)&((AiConfig *)0)->alternateDelayBase);
+        Portal_UpdateTimedActionBurst(state, (char *)&((AiConfig *)&g_actorBehaviorActionConfigs)[type] + mode * ((char *)&((AiConfig *)0)->alternateDelayBase - (char *)0));
         goto dispatched;
 case_1:
-        Portal_UpdateHeldActionBurst(state, (char *)&((AiConfig *)&g_actorBehaviorActionConfigs)[type] + mode * (u32)&((AiConfig *)0)->alternateDelayBase);
+        Portal_UpdateHeldActionBurst(state, (char *)&((AiConfig *)&g_actorBehaviorActionConfigs)[type] + mode * ((char *)&((AiConfig *)0)->alternateDelayBase - (char *)0));
         goto dispatched;
 case_2:
         ((CountedEffectActionState *)state)->actionFlagFrames = 1;

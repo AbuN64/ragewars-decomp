@@ -686,11 +686,11 @@ s32 Pickup_HandlePowerWeaponPickup(struct Player *player, PowerupEntry *entry)
 extern f32 g_specialPickupShieldDurationEu, k_pickupEuropeanSecondEffectValue;
 extern char g_pickupEuropeanEffectUpdateRomEntry[], g_pickupEuropeanEffectDrawRomEntry[];
 extern void ItemMenu_SetEntry();
-s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pickup, void *obj) {
+s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pickup, LevelActor *obj) {
     u8 **text;
     s32 sound;
     s32 event;
-    f32 *data = (f32 *)(&((LevelActor *)obj)->definition->flags);
+    f32 *data = (f32 *)(&obj->definition->flags);
 
     switch ((s16)(pickup->id - 1800)) {
     case 0: player->damageCooldown = g_specialPickupShieldDurationEu; break;
@@ -723,11 +723,11 @@ s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pic
 extern f32 g_specialPickupShieldDurationEu, k_pickupEuropeanSecondEffectValue;
 extern char g_pickupEuropeanEffectUpdateRomEntry[], g_pickupEuropeanEffectDrawRomEntry[];
 extern void ItemMenu_SetEntry();
-s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, void *obj) {
+s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, LevelActor *obj) {
     u8 **text;
     s32 sound;
     s32 event;
-    f32 *data = (f32 *)(&((LevelActor *)obj)->definition->flags);
+    f32 *data = (f32 *)(&obj->definition->flags);
 
     switch ((s16)(pickup->id - 1800)) {
     case 0: player->damageCooldown = g_specialPickupShieldDurationEu; break;

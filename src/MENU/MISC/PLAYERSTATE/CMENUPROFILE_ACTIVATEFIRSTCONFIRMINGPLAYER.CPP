@@ -151,7 +151,7 @@ s32 CMenuProfile_UpdateRoundEndDelay(void) {
     if ((120.0f) <= time) {
         base = &g_gameSettings.counters;
         base->teams = 0;
-        Playerai_EndRound((void *) ((char *) base - (u32)&((Shared_MenuData *)0)->game.counters));
+        Playerai_EndRound((void *) ((char *) base - ((char *)&((Shared_MenuData *)0)->game.counters - (char *)0)));
         return 1;
     }
     return 0;

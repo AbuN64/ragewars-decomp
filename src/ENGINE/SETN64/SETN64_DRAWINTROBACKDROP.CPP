@@ -83,7 +83,7 @@ void SetN64_ResetSceneForIntro(void *owner) {
     p1[30] = 1;
     SetN64_ResetSessionPlayerPools(owner, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
-    p2 = ((s8 *)(&g_matchRoundCounters)) - ((u32)&((Shared_MenuData *)0)->game.counters - (u32)&((Shared_MenuData *)0)->object);
+    p2 = ((s8 *)(&g_matchRoundCounters)) - (((char *)&((Shared_MenuData *)0)->game.counters - (char *)0) - ((char *)&((Shared_MenuData *)0)->object - (char *)0));
     Pools_ResetActorPools(p2, 1);
     ((IntroBackdropStateView *)(p2))->poolClearedWord = 0;
     Textload_SetTextureEffect(0);

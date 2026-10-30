@@ -351,7 +351,7 @@ void Playerai_CreditDamageSource(TransientDamagePlayerView *damagedPlayer, Trans
             }
         }
         { CGameStatus *state=(&g_gameSettings.counters);
-        if ((state->teams != 0) && (((Shared_Game *)((u8 *)state - (u32)&((Shared_Game *)0)->counters))->multiplayerRuleBytes[0] == 0) && ((creditedPlayer->computerControlled == 0) || (damagedPlayer->computerControlled == 0)) && (damagedPlayer->profile->reservedByte == creditedPlayer->profile->reservedByte)) {
+        if ((state->teams != 0) && (((Shared_Game *)((u8 *)state - ((char *)&((Shared_Game *)0)->counters - (char *)0)))->multiplayerRuleBytes[0] == 0) && ((creditedPlayer->computerControlled == 0) || (damagedPlayer->computerControlled == 0)) && (damagedPlayer->profile->reservedByte == creditedPlayer->profile->reservedByte)) {
             damagePacket->amount = 0;
         }}
     }

@@ -174,7 +174,7 @@ s32 Player_StartFourPlayerResults(void) {
     Shared_PlayerSettingsRecord *config;
     Tsmos_SetModeOneFlag(1);
     i = 0;
-    badgeOffset = (s32)&((struct FourPlayerResultsScreen *)0)->badges;
+    badgeOffset = ((char *)&((struct FourPlayerResultsScreen *)0)->badges - (char *)0);
     scale.x = g_matchResult5027TextEu;
     scale.y = g_matchResult5027TextEu;
     scale.z = g_matchResult5027TextEu;

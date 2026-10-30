@@ -55,10 +55,10 @@ s32 OnScreen_StartFirstStatusBar(void *widget, s32 owner, s32 target) {
     return OnScreen_StartMoverScript(widget, &g_firstStatusBarMoverScript);
 }
 
-void OnScreen_StartSecondStatusBar(void *hud, s32 owner, s32 target) {
-    (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->owner) = owner;
-    (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->target) = target;
-    (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->initialPercent) = 100;
+void OnScreen_StartSecondStatusBar(struct OverlayScriptSecondaryRangeView *hud, s32 owner, s32 target) {
+    hud->owner = owner;
+    hud->target = target;
+    hud->initialPercent = 100;
     OnScreen_StartMoverScript(&((Hud *)hud)->bars[1], &g_secondStatusBarMoverScript);
 }
 

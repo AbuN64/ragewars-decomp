@@ -45,7 +45,7 @@ void MovingAI_ChooseTriggerDelay(void *levelActor, void *actorMotionState) {
     motion->speed = result;
     ctx = (char *) &g_gameSettings;
     if (((GameModeEnableView *)(ctx))->local != 0) {
-        count = *(s32 *) (ctx - ((u32)&((Shared_MenuData *)0)->game - (u32)&((Shared_MenuData *)0)->sessionOptionResetMode));
+        count = *(s32 *) (ctx - (((char *)&((Shared_MenuData *)0)->game - (char *)0) - ((char *)&((Shared_MenuData *)0)->sessionOptionResetMode - (char *)0)));
         if ((u32) count >= 3) {
             count -= 2;
             scaled = result * k_triggerDelayPercentScale;

@@ -114,8 +114,8 @@ void Simpinst_DrawGroundShadow(void *actor) {
     MatrixFromQuaternion(&rotation.x, matrix);
     ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, position.x, position.y, position.z);
-    Graphu64_ConvertMatrixToFixed(matrix, (char *)actor + ((g_lightingBufferIndex << 6) + (u32)&((LevelActor *)0)->bounds));
-    Geometry_DrawIntensityMask((char *)actor + ((g_lightingBufferIndex << 6) + (u32)&((LevelActor *)0)->bounds), 1, 150);
+    Graphu64_ConvertMatrixToFixed(matrix, (char *)actor + ((g_lightingBufferIndex << 6) + ((char *)&((LevelActor *)0)->bounds - (char *)0)));
+    Geometry_DrawIntensityMask((char *)actor + ((g_lightingBufferIndex << 6) + ((char *)&((LevelActor *)0)->bounds - (char *)0)), 1, 150);
 }
 
 void Simpinst_RefreshModelResourceUsage(StaticObject *staticObject) {

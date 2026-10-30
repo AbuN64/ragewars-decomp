@@ -9,8 +9,6 @@
 
 /* Player-transition records from origin/legacy shared headers. */
 
-typedef struct PlayerDamageTimer { s32 remainingTime; u8 reserved4[20]; } PlayerDamageTimer;
-
 typedef struct Shared_ActionSlot { s8 kind; s8 category; } Shared_ActionSlot;
 
 typedef struct Shared_ActorView Shared_ActorView;
@@ -121,15 +119,8 @@ struct Shared_ActorView {
         struct { u8 pad938[0xCC0 - 0x938]; s32 unk_0x0CC0; } word;
     } strokes; /* 0x938 */
     CItemMenu record; /* 0xD40 */
-    union {
-        struct {
-            u8 padE2C[0xE54 - 0xD40 - sizeof(CItemMenu)];
-            f32 effectTransform[16]; /* 0xE54 */
-            f32 effectOffsetTransform[16]; /* 0xE94 */
-            u8 padED4[0x11B4 - 0xED4];
-        };
-        struct { struct COverlay hudMovers[15]; u8 hudMoverTail[4]; };
-    };
+    struct COverlay hudMovers[15]; /* 0xE2C: OnScreen_InitMover/StartMoverScript */
+    u8 hudMoverTail[4];
     s32 actionState; /* 0x11B4 */
     u8 pad11B8[4];
     s32 weaponSoundHandle;
@@ -160,10 +151,8 @@ struct Shared_ActorView {
     s32 reservedWord1238; /* +0x1238: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
     char pad123C[0x4];
     s32 reservedWord1240; /* +0x1240: src/Playerai_HandlePlayerDeath_GameplaySettings.c */
-    union {
-        struct { u8 pad1244[0x12C0 - 0x1244]; f32 reserve; };
-        struct { u8 timerPrefix[8]; PlayerDamageTimer damageTimers[5]; };
-    };
+    u8 pad1244[0x12C0 - 0x1244];
+    f32 reserve; /* 0x12C0 */
     s32 reservedWord12C4;
     s32 reservedWord12C8;
     s32 reset12CC[8];

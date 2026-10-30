@@ -119,7 +119,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
             g_localPlayerProfiles[i].player = -1;
             g_profileSlotEnabledFlags[i * sizeof(Profile)] = 0;
         }
-        XPlus_FillMemory((char *)&g_localPlayerProfiles[i] + (u32)&((Profile *)0)->levelFlags[1], 0, 5);
+        XPlus_FillMemory((char *)&g_localPlayerProfiles[i] + ((char *)&((Profile *)0)->levelFlags[1] - (char *)0), 0, 5);
     }
     g_playModeMenuState = Cache_AllocateMemory(28);
     Tsmos_ActivateControllerState();

@@ -482,12 +482,12 @@ typedef struct LinkOwner802A {
 } LinkOwner802A;
 /* Updates a chain of linked nodes: nodes following a source take its matrix (scaled by a size flag) or copy the
  * other matrix buffer, then each node's distance to its parent is measured and summed into the owner's total. */
-static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A *node, void *source) {
+static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A *node, struct EffectActor *source) {
     f32 matrix[16];
     f32 scale;
-    Graphu64_ConvertMatrixToFloat(matrix, &((struct EffectActor *)source)->u60.matrices[g_lightingBufferIndex]);
+    Graphu64_ConvertMatrixToFloat(matrix, &source->u60.matrices[g_lightingBufferIndex]);
     scale = g_ribbonPositiveLayerScale;
-    if (((struct EffectActor *)source)->model->scaleModeFlag != 0) {
+    if (source->model->scaleModeFlag != 0) {
         scale = g_ribbonNegativeLayerScale;
     }
     ScaleMatrixLocal(matrix, scale, scale, scale);

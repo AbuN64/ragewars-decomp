@@ -73,7 +73,7 @@ void Cache_TouchResource(void *unused0, void *resource) {
     AnimationResourceHandleView *animationResource = resource;
     s32 *p = g_resourceCacheFrameStamp;
     animationResource->resourceHandle = *p;
-    List_MoveIntrusiveToHead((char *)p - ((u32)&((struct ResMgr *)0)->stamp - (u32)&((struct ResMgr *)0)->entries), (s32)resource);
+    List_MoveIntrusiveToHead((char *)p - (((char *)&((struct ResMgr *)0)->stamp - (char *)0) - ((char *)&((struct ResMgr *)0)->entries - (char *)0)), (s32)resource);
 }
 
 void Cache_DetachResourceRequest(void *unused0, void *resourceCacheEntry) {
@@ -104,7 +104,7 @@ void *Cache_AcquireLoadRequest(void) {
 void Cache_RecycleLoadRequest(s32 unused0, void *request) {
     List_RemoveIntrusive(&g_resourcePendingRequests, request);
     ((RequestCacheRunResourceCompletionWorker *)request)->flags = 0;
-    List_PrependIntrusive((char *)&g_resourcePendingRequests - ((u32)&((struct ResMgr *)0)->listBAC - (u32)&((struct ResMgr *)0)->freeLinks), request);
+    List_PrependIntrusive((char *)&g_resourcePendingRequests - (((char *)&((struct ResMgr *)0)->listBAC - (char *)0) - ((char *)&((struct ResMgr *)0)->freeLinks - (char *)0)), request);
 }
 
 void *Cache_AcquireLoadRequestWithEviction(s32 unused,s32 flags) {

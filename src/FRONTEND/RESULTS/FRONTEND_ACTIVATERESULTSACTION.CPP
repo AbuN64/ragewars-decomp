@@ -73,7 +73,7 @@ s32 Frontend_ActivateResultsAction(void) {
 #elif defined(VERSION_EU_X)
     case 574 - 2:
 #endif
-        if (((u8 *)paused)[-((u32)&((Shared_MenuData *)0)->pause - (u32)&((Shared_MenuData *)0)->game.controllerMode)] == 0) {
+        if (((u8 *)paused)[-(((char *)&((Shared_MenuData *)0)->pause - (char *)0) - ((char *)&((Shared_MenuData *)0)->game.controllerMode - (char *)0))] == 0) {
             Frontend_StartMenuImageTransition(g_matchResultBadgeScreen);
             g_matchResultBadgeScreen->active = 0;
         } else {
@@ -103,7 +103,7 @@ s32 Frontend_ActivateResultsAction(void) {
             Random_SetMenuChoiceResult(33);
             return 0;
         }
-        if (((u8 *)paused)[-((u32)&((Shared_MenuData *)0)->pause - (u32)&((Shared_MenuData *)0)->game.controllerMode)] == 0) {
+        if (((u8 *)paused)[-(((char *)&((Shared_MenuData *)0)->pause - (char *)0) - ((char *)&((Shared_MenuData *)0)->game.controllerMode - (char *)0))] == 0) {
             SmXlate_SwitchScreen(20);
         } else {
             SmXlate_SwitchScreen(15);

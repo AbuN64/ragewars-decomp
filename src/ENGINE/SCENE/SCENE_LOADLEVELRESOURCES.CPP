@@ -1007,10 +1007,10 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
     world->registeredCount = 0;
     world->kind1Count = 0;
     world->flaggedCount = 0;
-    Playerai_UpdatePlayerRenderResources((u8 *)settings - (u32)&((Shared_MenuData *)0)->game.sceneMask, world);
+    Playerai_UpdatePlayerRenderResources((u8 *)settings - ((char *)&((Shared_MenuData *)0)->game.sceneMask - (char *)0), world);
     camera = 0;
     if (settings->local == 0) {
-        camera = *(GameplayCamera **)((u8 *)settings - ((u32)&((Shared_MenuData *)0)->game.sceneMask - (u32)&((Shared_MenuData *)0)->object - (u32)&((MenuMatchGlobals *)0)->cameras));
+        camera = *(GameplayCamera **)((u8 *)settings - (((char *)&((Shared_MenuData *)0)->game.sceneMask - (char *)0) - ((char *)&((Shared_MenuData *)0)->object - (char *)0) - ((char *)&((MenuMatchGlobals *)0)->cameras - (char *)0)));
     }
     cull = 0;
     if (Cinema_IsSequenceInWindow() == 0) {

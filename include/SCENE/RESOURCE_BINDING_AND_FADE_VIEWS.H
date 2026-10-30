@@ -4,10 +4,9 @@
 #include "COMMON/MANAGER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 struct Manager {
-    union {
-        char queue[2348];
-        struct { OSMesgQueue requests; OSMesg requestMessages[64]; u8 requestStorage[2348 - sizeof(OSMesgQueue) - 64 * sizeof(OSMesg)]; };
-    };
+    OSMesgQueue requests;
+    OSMesg requestMessages[64];
+    u8 requestStorage[2348 - sizeof(OSMesgQueue) - 64 * sizeof(OSMesg)];
     IntrusiveList pending;
     IntrusiveList active;
     char padActive[0x20 - sizeof(IntrusiveList)];

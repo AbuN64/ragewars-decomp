@@ -48,7 +48,7 @@ s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 playerEntr
         }
         base = (char *)g_pakProfileScreenState;
         mark = (u8 *)(base + ((((struct PakPanelSelectionView *)(offset + base))->count * 2) +
-                              index * sizeof(PakProfilePanelState)) + ((u32)&((struct PakMenuController *)0)->players + (u32)&((PakProfilePanelState *)0)->name));
+                              index * sizeof(PakProfilePanelState)) + (((char *)&((struct PakMenuController *)0)->players - (char *)0) + ((char *)&((PakProfilePanelState *)0)->name - (char *)0)));
         if (*mark == 0) {
             *mark = 65;
         }

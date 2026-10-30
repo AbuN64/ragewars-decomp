@@ -37,7 +37,7 @@ void Cache_RunCompactionPasses(s32 unused) {
     g_resourceHeapLockUsers = pendingPasses;
     if (pendingPasses != 1) {
         __osRestoreInt(mask);
-        queueAddress = (char *)resourceManager - ((u32)&((struct ResMgr *)0)->reservedWordC1C - (u32)&((struct ResMgr *)0)->heapLockQueue);
+        queueAddress = (char *)resourceManager - (((char *)&((struct ResMgr *)0)->reservedWordC1C - (char *)0) - ((char *)&((struct ResMgr *)0)->heapLockQueue - (char *)0));
         receive = queueAddress;
         osRecvMesg(receive, 0, 1);
 #else
@@ -49,7 +49,7 @@ void Cache_RunCompactionPasses(s32 unused) {
     g_resourceHeapLockUsers = pendingPasses;
     if (pendingPasses != passIndex) {
         __osRestoreInt(mask);
-        queueAddress = (char *)resourceManager - ((u32)&((struct ResMgr *)0)->reservedWordC1C - (u32)&((struct ResMgr *)0)->heapLockQueue);
+        queueAddress = (char *)resourceManager - (((char *)&((struct ResMgr *)0)->reservedWordC1C - (char *)0) - ((char *)&((struct ResMgr *)0)->heapLockQueue - (char *)0));
         receive = queueAddress;
         osRecvMesg(receive, 0, passIndex);
 #endif

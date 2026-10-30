@@ -24,16 +24,11 @@ typedef struct Shared_MenuData Shared_MenuData;
 struct Shared_MenuData {
     union {
         struct {
-            union {
-                u32 reservedPrefix[18];
-                struct {
-                    u8 reservedBeforeTransientPlayers[0x20];
-                    void *transientPlayers;
-                    u8 reservedBeforeResetMode[0xC];
-                    s32 sessionOptionResetMode;
-                    u8 reservedAfterResetMode[0x14];
-                };
-            };
+            u8 reservedBeforeTransientPlayers[0x20];
+            void *transientPlayers;
+            u8 reservedBeforeResetMode[0xC];
+            s32 sessionOptionResetMode;
+            u8 reservedAfterResetMode[0x14];
             Shared_MenuObject object;
             s32 stage;
             u32 reservedBeforePause[6];

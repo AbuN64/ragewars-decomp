@@ -334,7 +334,7 @@ s32 ItemMenu_IsSelectedEntryActive(void *menu)
   remainingEntries = 3;
   do
   {
-    selectedEntry = ((s8 *)(menu + (((struct ItemMenuSelectionView *)menu)->id * sizeof(CItem)))) + (u32)&((CItemMenu *)0)->entries;
+    selectedEntry = ((s8 *)(menu + (((struct ItemMenuSelectionView *)menu)->id * sizeof(CItem)))) + ((char *)&((CItemMenu *)0)->entries - (char *)0);
     if ((*((s32 *) selectedEntry)) != 0)
     {
       activeEntryCount += 1;

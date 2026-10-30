@@ -747,7 +747,7 @@ s32 Player_CheckTotalScoreWin(Root *root) {
  FragTagPlayerListNode *node; int i,sum,skip; unsigned char *settings;
  if(initial->totalScoreTarget==0) return 0;
  node=root->players; state=initial;
- if(node) { settings=(unsigned char *)state - (u32)&((Shared_Game *)0)->counters; }
+ if(node) { settings=(unsigned char *)state - ((char *)&((Shared_Game *)0)->counters - (char *)0); }
  for(;node;node=node->next) {
   skip=Player_GetPlayerIndex(root,node);
   sum=0;

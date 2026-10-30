@@ -86,10 +86,10 @@ void *Gdynlight_AllocateLightNode(void *intrusiveList, void *radiusDescriptor) {
     return lightNode;
 }
 
-void Gdynlight_ReleaseLight(void *a, s32 b) {
-    (((struct Limit *) ((s8 *) b))->limit) = 0;
+void Gdynlight_ReleaseLight(IntrusiveList *a, RangeNode *b) {
+    b->active = 0;
     List_RemoveIntrusive(a, b);
-    List_PrependIntrusive(&((IntrusiveList *)a)[1], b);
+    List_PrependIntrusive(&a[1], b);
 }
 
 int Gdynlight_GetFirstLight(void *intrusiveList) {

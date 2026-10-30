@@ -68,7 +68,7 @@ extern char g_menuFontStyles[];
 /* Steps a pointer back 0x554 bytes: callers pass the pointer held at offset 0x44 of an object and
    get back the start of the structure whose member at offset 0x554 it addresses. */
 void *Menu_GetListContext(s8 *member) {
-    return member - (u32)&((GameplayCamera *)0)->messageList;
+    return member - ((char *)&((GameplayCamera *)0)->messageList - (char *)0);
 }
 
 void Menu_ClearMenuItemList(struct ListPakClearMenuItemList *list) {

@@ -181,8 +181,8 @@ int Weapon_CheckSinglePlayerFirePermission(WeaponPlayerPermissionView *player) {
     if (result == 0) {
         SoundElement_PlayFlatSound(3405);
         if (player->hud != 0) {
-            Gsky_PostTargetedScreenMessage((char *)rules - ((u32)&((Shared_MenuData *)0)->game - (u32)&((Shared_MenuData *)0)->object), player->hud, g_weaponLockedNoticeText,
-                          Player_GetPlayerIndex((char *)rules - (u32)&((Shared_MenuData *)0)->game, player), g_weaponPermissionNoticeDuration);
+            Gsky_PostTargetedScreenMessage((char *)rules - (((char *)&((Shared_MenuData *)0)->game - (char *)0) - ((char *)&((Shared_MenuData *)0)->object - (char *)0)), player->hud, g_weaponLockedNoticeText,
+                          Player_GetPlayerIndex((char *)rules - ((char *)&((Shared_MenuData *)0)->game - (char *)0), player), g_weaponPermissionNoticeDuration);
         }
     }
     return result;

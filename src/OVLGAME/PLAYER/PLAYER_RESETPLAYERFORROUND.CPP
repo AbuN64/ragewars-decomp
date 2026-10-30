@@ -222,13 +222,13 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     i = 5;
     counterAddress = (unsigned long)actor + i;
     do {
-        *(u8 *)(counterAddress + (u32)&((Shared_ActorView *)0)->eventCounters[0]) = 0;
+        *(u8 *)(counterAddress + ((char *)&((Shared_ActorView *)0)->eventCounters[0] - (char *)0)) = 0;
         counterAddress--;
     } while (--i >= 0);
     i = 5;
     counterAddress2 = (unsigned long)actor + i;
     do {
-        *(u8 *)(counterAddress2 + (u32)&((Shared_ActorView *)0)->eventCounters[1]) = 0;
+        *(u8 *)(counterAddress2 + ((char *)&((Shared_ActorView *)0)->eventCounters[1] - (char *)0)) = 0;
         counterAddress2--;
     } while (--i >= 0);
     if (g_frontendScreenStatus.settings.local != 0) {

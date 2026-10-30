@@ -99,10 +99,7 @@ typedef struct DecodeState {
     s32 second;
     s32 count;
     void *cursor;
-    union {
-        u16 frame[336]; /* Packed decoder transport. */
-        TransformAudioFrame decodedFrame; /* +0x18: same 672-byte record. */
-    };
+    u16 frame[336]; /* Packed decoder transport, also consumed as TransformAudioFrame. */
 } DecodeState;
 extern DecodeState g_audioSampleDecodeState;
 extern u16 gPackedBitsLeft;

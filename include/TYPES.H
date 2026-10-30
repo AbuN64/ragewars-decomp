@@ -124,7 +124,8 @@ extern int Control_IsControllerPakEnabled(int controllerPort);
 
 extern void Control_SetControllerMode(s32 a);
 
-extern void Gdynlight_ReleaseLight(void *a, s32 b);
+struct RangeNode;
+extern void Gdynlight_ReleaseLight(IntrusiveList *a, struct RangeNode *b);
 
 extern void Graphu64_WrapPeriodicValue(f32 *value);
 

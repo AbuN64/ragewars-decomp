@@ -28,7 +28,7 @@ void Menu_InitializeOptionsScene(void) {
     Menu_ConfigureOptionsCamera();
     object = &g_frontendScreenStatus;
     Pools_ResetActorPools(object, 1);
-    Player_InitializePlayerPool(object - (u32)&((Shared_MenuData *)0)->object, 1, 0);
+    Player_InitializePlayerPool(object - ((char *)&((Shared_MenuData *)0)->object - (char *)0), 1, 0);
     Scene_SetSelection(&g_world, ~Track_RequestTrackByKey(637), 0);
     if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);

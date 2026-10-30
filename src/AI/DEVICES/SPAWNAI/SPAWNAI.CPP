@@ -262,7 +262,7 @@ void SpawnAI_DispatchSpawnChoice(SpawnDispatchObject *object, SpawnDispatchOwner
             }
         } else {
             /* Configuration lies 0x1288 bytes into the shared runtime block. */
-            context = Playerai_GetFirstPlayer((u8 *)&g_gameSettings - (u32)&((Shared_MenuData *)0)->game);
+            context = Playerai_GetFirstPlayer((u8 *)&g_gameSettings - ((char *)&((Shared_MenuData *)0)->game - (char *)0));
             if (!context) {
                 return;
             }

@@ -98,7 +98,7 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
         List_AppendIntrusive(&g_resourceCacheManager.freeLinks, link);
     }
     HashTable_InitializeResourceTable(g_resourceCacheNodeCapacity);
-    osCreateMesgQueue((OSMesgQueue *)g_resourceRequestManager.queue, g_resourceRequestManager.requestMessages, 64);
+    osCreateMesgQueue(&g_resourceRequestManager.requests, g_resourceRequestManager.requestMessages, 64);
     unlockMask = __osDisableInt();
     g_resourceHeapLockUsers -= 1;
     if (g_resourceHeapLockUsers != 0) {
@@ -109,7 +109,7 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     }
     /* thread block g_resourceCompletionWorkerStack - 0x348 followed by its 0x800-byte stack at g_resourceCompletionWorkerStack */
     XPlus_FillMemory(&g_resourceCompletionWorkerStack, count, 0x800);
-    thread = (char *)&g_resourceCompletionWorkerStack - ((u32)&((struct ResMgr *)0)->completionWorkerStack - (u32)&((struct ResMgr *)0)->completionWorker);
+    thread = (char *)&g_resourceCompletionWorkerStack - (((char *)&((struct ResMgr *)0)->completionWorkerStack - (char *)0) - ((char *)&((struct ResMgr *)0)->completionWorker - (char *)0));
     osCreateThread(thread, count, &g_Cache_RunResourceCompletionWorkerPackedAddress24, 0, (char *)&g_resourceCompletionWorkerStack + sizeof(((struct ResMgr *)0)->completionWorkerStack), g_resourceCompletionWorkerPriority);
     osStartThread(thread);
 }
@@ -174,7 +174,7 @@ static inline void *pool_alloc(s32 byteCount) {
     cacheEntry->pending = 0;
     cacheEntry->owner = 0;
     cacheEntry->lastUsed = ((struct Pool *)&g_resourceFreeNodeCount)->useCounter;
-    List_PrependIntrusive((char *)&g_resourceFreeNodeCount - ((u32)&((struct ResMgr *)0)->count - (u32)&((struct ResMgr *)0)->entries), cacheEntry);
+    List_PrependIntrusive((char *)&g_resourceFreeNodeCount - (((char *)&((struct ResMgr *)0)->count - (char *)0) - ((char *)&((struct ResMgr *)0)->entries - (char *)0)), cacheEntry);
     cacheEntry->flags |= (byteCount & 0xC);
     return cacheEntry;
 }

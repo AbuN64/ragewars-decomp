@@ -12,10 +12,10 @@
 #include "SYSTEM/LIST.H"
 #include "SYSTEM/LIST.H"
 
-extern void osSetEventMesg(s32 event, s32 queue, s32 message);
+extern void osSetEventMesg(s32 event, void *queue, s32 message);
 
 
-extern void osCreateThread(s32 thread, s32 threadId, void *entry, s32 arg, s32 stackTop, s32 priority);
+extern void osCreateThread(void *thread, s32 threadId, void *entry, void *arg, void *stackTop, s32 priority);
 
 
 extern char g_Cartridge_RunReadWorkerPackedAddress24;
@@ -29,27 +29,28 @@ typedef struct Queue Queue;
 extern s32 osJamMesg(void *, void *, s32);
 
 
-void Cartridge_StartReadWorker(s32 workerAddress, s32 count) {
+void Cartridge_StartReadWorker(CartridgeReadWorker *worker, s32 count) {
+    OSMesgQueue *completionQueue;
     s32 s0;
     s32 s1;
 
-    osCreateMesgQueue((s32)&((CartridgeReadWorker *)workerAddress)->requestQueueStorage, (s32)&((CartridgeReadWorker *)workerAddress)->requestMessages, 512);
-    s0 = (s32)&((CartridgeReadWorker *)workerAddress)->completionQueueStorage;
-    osCreateMesgQueue(s0, (s32)&((CartridgeReadWorker *)workerAddress)->completionMessage, 1);
-    osSetEventMesg(8, s0, 2001);
-    List_InitializeIntrusive((s32)&((CartridgeReadWorker *)workerAddress)->available, 24, 28);
-    List_InitializeIntrusive((s32)&((CartridgeReadWorker *)workerAddress)->pending, 24, 28);
+    osCreateMesgQueue(&worker->requestQueueStorage, &worker->requestMessages, 512);
+    completionQueue = &worker->completionQueueStorage;
+    osCreateMesgQueue(completionQueue, &worker->completionMessage, 1);
+    osSetEventMesg(8, completionQueue, 2001);
+    List_InitializeIntrusive(&worker->available, 24, 28);
+    List_InitializeIntrusive(&worker->pending, 24, 28);
     s1 = 0;
     s0 = 3688;
     do {
-        ((struct LinkedWorldFlagsView *) (workerAddress + s0))->flags = 0;
-        List_AppendIntrusive((s32)&((CartridgeReadWorker *)workerAddress)->available, workerAddress + s0);
+        ((struct LinkedWorldFlagsView *) ((char *)worker + s0))->flags = 0;
+        List_AppendIntrusive(&worker->available, (char *)worker + s0);
         s1 += 1;
         s0 += 32;
     } while (s1 < 528);
-    XPlus_FillMemory((s32)&((CartridgeReadWorker *)workerAddress)->stack, count, 0x400);
-    osCreateThread(workerAddress, count, &g_Cartridge_RunReadWorkerPackedAddress24, workerAddress, (s32)&((CartridgeReadWorker *)workerAddress)->stack[sizeof(((CartridgeReadWorker *)0)->stack)], g_cartridgeReadWorkerPriority);
-    osStartThread((void *)workerAddress);
+    XPlus_FillMemory(&worker->stack, count, 0x400);
+    osCreateThread(worker, count, &g_Cartridge_RunReadWorkerPackedAddress24, worker, &worker->stack[sizeof(((CartridgeReadWorker *)0)->stack)], g_cartridgeReadWorkerPriority);
+    osStartThread(worker);
 }
 
 void Cartridge_ReadChunksAndWait(struct CartridgeReadWorker *cartridgeReadWorker, u32 sourceAddress, s32 byteCount, void *extra) {

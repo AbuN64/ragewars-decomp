@@ -198,7 +198,7 @@ void Particle_ReleaseFirstHandle(char *obj, unsigned char count) {
     int i;
 
     for (i = 0; i <= count; i++) {
-        ParticleResourceHandleEntry *e = (ParticleResourceHandleEntry *)((obj + i * sizeof(ParticleResourceHandleEntry) + (u32)&((struct EffectSystem *)0)->lists));
+        ParticleResourceHandleEntry *e = (ParticleResourceHandleEntry *)((obj + i * sizeof(ParticleResourceHandleEntry) + ((char *)&((struct EffectSystem *)0)->lists - (char *)0)));
         if (e->handle != 0) {
             Particle_Release(obj, e->handle);
             return;

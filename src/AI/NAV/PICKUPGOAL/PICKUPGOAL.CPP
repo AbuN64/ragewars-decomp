@@ -94,7 +94,7 @@ void Nav_SetPickupGoalWeights(void *arg) {
         return;
     }
     for (i = 0; i < 3; i++) {
-        for (node = (u8 *)((IntrusiveList *)(tbl + (u32)&((struct EffectSystem *)0)->lists + i * sizeof(IntrusiveList)))->head; node != 0; node = (u8 *)((struct ParticleEffect *)node)->next) {
+        for (node = (u8 *)((IntrusiveList *)(tbl + ((char *)&((struct EffectSystem *)0)->lists - (char *)0) + i * sizeof(IntrusiveList)))->head; node != 0; node = (u8 *)((struct ParticleEffect *)node)->next) {
             switch (*(u16 *)(node + 4)) {
             case 1054:
                 link = (u8 *)((struct ParticleEffect *)node)->owner;

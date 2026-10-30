@@ -112,7 +112,7 @@ void Results_RefreshTrialCatalogueWidgets(void) {
     if (settings->controllerMode == 1) {
         playerSettings = settings;
         for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-            unlockedPreset = Achieve_CopyPreset(entryIndex, 0, *(s8 *)((char *)playerSettings + g_trialCatalogueScreen->player * sizeof(Shared_PlayerSettingsRecord) + (u32)&((Shared_Game *)0)->playerSettings[0].character));
+            unlockedPreset = Achieve_CopyPreset(entryIndex, 0, *(s8 *)((char *)playerSettings + g_trialCatalogueScreen->player * sizeof(Shared_PlayerSettingsRecord) + ((char *)&((Shared_Game *)0)->playerSettings[0].character - (char *)0)));
             unlockValue = unlockedPreset->bytes[1];
             if (unlockValue > 0) Defs_SetBitValue(availableFlags, unlockValue - 1, 1);
             for (unlockSlot = 0; unlockSlot < 3; unlockSlot++) {

@@ -91,7 +91,7 @@ void Preview_DrawModelPreview(ModelPreview *self) {
         {
             Gfx *g = g_displayListCursor++;
             u32 address = (u32)(g_lightingBufferIndex << 6);
-            address += (u32)&((GameplayCamera *)0)->projection;
+            address += ((char *)&((GameplayCamera *)0)->projection - (char *)0);
             address += (u32)view;
             gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
         }

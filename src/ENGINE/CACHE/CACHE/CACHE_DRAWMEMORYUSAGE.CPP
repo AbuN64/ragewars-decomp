@@ -59,7 +59,7 @@ static inline void release(s32 node) {
     }
     ((CachedResource *)node)->flags = 0;
     g_resourceFreeNodeStack.value[((struct Pool *)&g_resourceFreeNodeCount)->count] = (CachedResource *)node;
-    *(&g_resourceRecencyList + ((u32)&((struct ResMgr *)0)->count - (u32)&((struct ResMgr *)0)->entries) / sizeof(s32)) += 1;
+    *(&g_resourceRecencyList + (((char *)&((struct ResMgr *)0)->count - (char *)0) - ((char *)&((struct ResMgr *)0)->entries - (char *)0)) / sizeof(s32)) += 1;
 }
 
 ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest *request, s32 dropReference) {
@@ -67,7 +67,7 @@ ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest 
     CachedResource *node;
 
     List_RemoveIntrusive(&g_resourceCompletionRequests, request);
-    List_PrependIntrusive((char *)&g_resourceCompletionRequests - ((u32)&((struct ResMgr *)0)->listBC0 - (u32)&((struct ResMgr *)0)->listBAC), request);
+    List_PrependIntrusive((char *)&g_resourceCompletionRequests - (((char *)&((struct ResMgr *)0)->listBC0 - (char *)0) - ((char *)&((struct ResMgr *)0)->listBAC - (char *)0)), request);
     if (request->node != 0) {
         find(request->key, &existing);
         if (existing != 0) {

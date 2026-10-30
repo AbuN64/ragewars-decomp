@@ -15,7 +15,7 @@ void Menu_ReleaseOptionsScene(void) {
     Cinema_ReleaseSequenceContext();
     object = &g_frontendScreenStatus;
     Pools_ResetActorPools(object, 0);
-    Player_InitializePlayerPool(object - (u32)&((Shared_MenuData *)0)->object, 0, 0);
+    Player_InitializePlayerPool(object - ((char *)&((Shared_MenuData *)0)->object - (char *)0), 0, 0);
     Scene_LoadLevelResources(&g_world, 36, 0);
     if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);

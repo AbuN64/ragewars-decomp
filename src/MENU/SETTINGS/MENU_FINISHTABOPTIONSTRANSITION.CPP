@@ -81,7 +81,7 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
             if (g_optionsShortcutScreen->mode == -1) {
                 humans = 0;
                 i = 0;
-                player = (u8 *)pause - ((u32)&((Shared_MenuData *)0)->pause - (u32)&((Shared_MenuData *)0)->game);
+                player = (u8 *)pause - (((char *)&((Shared_MenuData *)0)->pause - (char *)0) - ((char *)&((Shared_MenuData *)0)->game - (char *)0));
                 do {
                     if (((Shared_Game *)player)->playerSettings[i].locked == 0 && ((Shared_Game *)player)->playerSettings[i].enabled == 1) {
                         humans++;
@@ -97,8 +97,8 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
                 Tsmos_RequestFrontendShutdown();
                 return 0;
             }
-            Pools_ResetActorPools((u8 *)pause - ((u32)&((Shared_MenuData *)0)->pause - (u32)&((Shared_MenuData *)0)->object), 0);
-            Player_InitializePlayerPool((u8 *)pause - (u32)&((Shared_MenuData *)0)->pause, 0, 0);
+            Pools_ResetActorPools((u8 *)pause - (((char *)&((Shared_MenuData *)0)->pause - (char *)0) - ((char *)&((Shared_MenuData *)0)->object - (char *)0)), 0);
+            Player_InitializePlayerPool((u8 *)pause - ((char *)&((Shared_MenuData *)0)->pause - (char *)0), 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             Stage_StartConfiguredMatch();
         }

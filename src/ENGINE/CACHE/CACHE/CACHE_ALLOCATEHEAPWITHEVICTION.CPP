@@ -68,7 +68,7 @@ void *Cache_AcquirePendingResourceEntry(s32 unused0, s32 requestFlags) {
     cacheEntry->pending = 0;
     cacheEntry->owner = 0;
     cacheEntry->lastUsed = pool->useCounter;
-    List_PrependIntrusive((char *)pool - ((u32)&((struct ResMgr *)0)->count - (u32)&((struct ResMgr *)0)->entries), cacheEntry);
+    List_PrependIntrusive((char *)pool - (((char *)&((struct ResMgr *)0)->count - (char *)0) - ((char *)&((struct ResMgr *)0)->entries - (char *)0)), cacheEntry);
     cacheEntry->flags |= (requestFlags & 0xC);
     return cacheEntry;
 }
@@ -84,7 +84,7 @@ void Cache_ReleasePendingResourceEntry(s32 unused0, s32 entryAddress) {
     }
     ((CachedResource *)entryAddress)->flags = 0;
     g_resourceFreeNodeStack[((struct Pool *)&g_resourceFreeNodeCount)->count] = (void *)entryAddress;
-    *(&g_resourceRecencyList + ((u32)&((struct ResMgr *)0)->count - (u32)&((struct ResMgr *)0)->entries) / sizeof(s32)) += 1;
+    *(&g_resourceRecencyList + (((char *)&((struct ResMgr *)0)->count - (char *)0) - ((char *)&((struct ResMgr *)0)->entries - (char *)0)) / sizeof(s32)) += 1;
 }
 
 int Cache_SelectAllocationCandidate(int unused, int keepRecent, int allocationFlags) {

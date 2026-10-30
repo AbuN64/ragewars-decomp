@@ -239,7 +239,7 @@ void Gobjinst_DispatchAnimationIntervalEvents(char *obj, void *anim, f32 from, f
                         }
                         table = SetN64_GetPackSection(*resource, 5);
                     }
-                    fire = ((struct AnimationEventMaskView *) (((char *) table) + ((events[i].bone * table->entrySize) + (u32)&((struct ActorAnimationEventTable *)0)->records + (u32)&((ModelBoneRecord *)0)->eventMask)))->value & ((struct RootMotionActorView *) obj)->boneMask;
+                    fire = ((struct AnimationEventMaskView *) (((char *) table) + ((events[i].bone * table->entrySize) + ((char *)&((struct ActorAnimationEventTable *)0)->records - (char *)0) + ((char *)&((ModelBoneRecord *)0)->eventMask - (char *)0))))->value & ((struct RootMotionActorView *) obj)->boneMask;
                 }
             masked:
                 if (fire == 0) {
@@ -428,7 +428,7 @@ void Gobjinst_ApplyImpactBoneTwist(char *actor, char *twistState, char *boneMatr
         }
         chainSlot = 0;
         do {
-            *(twistState + chainSlot + (u32)&((ActorBoneTwistState *)0)->ancestorBones) = ancestorBoneIndex;
+            *(twistState + chainSlot + ((char *)&((ActorBoneTwistState *)0)->ancestorBones - (char *)0)) = ancestorBoneIndex;
             ancestorBoneIndex = boneEntry[100];
             chainSlot++;
             if (ancestorBoneIndex != -1) {

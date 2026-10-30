@@ -112,8 +112,8 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
             list = (u8 *)&g_transientPlayerList;
             node = *(u8 **)list;
             if (node != 0) {
-                status = list + ((u32)&((Shared_MenuData *)0)->object - (u32)&((Shared_MenuData *)0)->transientPlayers);
-                settings = list + ((u32)&((Shared_MenuData *)0)->game - (u32)&((Shared_MenuData *)0)->transientPlayers);
+                status = list + (((char *)&((Shared_MenuData *)0)->object - (char *)0) - ((char *)&((Shared_MenuData *)0)->transientPlayers - (char *)0));
+                settings = list + (((char *)&((Shared_MenuData *)0)->game - (char *)0) - ((char *)&((Shared_MenuData *)0)->transientPlayers - (char *)0));
                 for (; node != 0; node = LV_FIELD(node, u8 *, 5856)) {
                     if (LV_FIELD(node, void *, 1500) != 0) {
                         Camera_PostScreenMessage(status, LV_FIELD(node, void *, 1500), g_breakableNotificationText[LV_FIELD(settings, u8, 1409)]);
