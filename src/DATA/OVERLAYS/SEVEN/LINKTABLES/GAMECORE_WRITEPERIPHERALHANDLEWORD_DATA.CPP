@@ -1,3 +1,5 @@
+extern char g_diskPiHandle[];
+extern char g_diskPeripheralHandle[];
 #include "COMMON/FORMAT.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "DATA_OVERLAY_LAYOUTS.H"
@@ -58,8 +60,6 @@ typedef char D_src_af61b546SizeCheck[(sizeof(D_src_af61b546) == 16) ? 1 : -1];
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-extern char g_diskPiHandle[];
-extern char g_diskPeripheralHandle[];
 void * g_gamecoreWriteperipheralhandlewordDataAddressWords[2] = {
     (void *)&g_diskPiHandle, (void *)&g_diskPeripheralHandle,
 };

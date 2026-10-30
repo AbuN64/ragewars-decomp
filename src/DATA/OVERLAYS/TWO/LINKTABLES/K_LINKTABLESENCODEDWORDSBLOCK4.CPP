@@ -1,10 +1,25 @@
+#include "COMMON/GFX.H"
+#include "gbi.h"
+extern char g_particleQuadVertices[];
+extern char g_playerModelLighting[];
 #include "DATA_OVERLAY_LAYOUTS.H"
 
 
 #if defined(VERSION_US)
 #if defined(VERSION_US)
-OverlayDisplayCommand k_LinktablesEncodedWordsBlock4[8] = {
-    { 0xFFFFFF00, 0xFFFFFF00 }, { 0x00007F00, 0x00000000 }, { 0xD9000000, 0x00000000 }, { 0xD9FFFFFF, 0x00000001 }, { 0xDB020000, 0x00000018 }, { 0xDC08060A, 0x800CBBA8 }, { 0xDC08090A, 0x800CBBA0 }, { 0xDF000000, 0x00000000 }
+struct {
+    struct { u8 color[3], pad0, colorCopy[3], pad1; s8 direction[3]; u8 pad2[5]; } light;
+    Gfx commands[6];
+} k_LinktablesEncodedWordsBlock4 = {
+    { { 0xFF, 0xFF, 0xFF }, 0, { 0xFF, 0xFF, 0xFF }, 0, { 0, 0, 127 }, { 0, 0, 0, 0, 0 } },
+    {
+    gsSPGeometryMode(0xFFFFFF, 0x00000000),
+    gsSPGeometryMode(0x000000, 0x00000001),
+    gsSPMoveWord(2, 0x0000, 0x00000018),
+    gsSPMoveMem(10, 48, 9, g_playerModelLighting + 8),
+    gsSPMoveMem(10, 72, 9, g_playerModelLighting),
+    gsSPEndDisplayList(),
+    }
 };
 #endif
 #endif

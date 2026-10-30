@@ -1,6 +1,5 @@
 
 extern char g_weaponFireStateCallbackTable[];
-extern char k_PlayeraiInitializeplayerhealthEncodedWords[];
 
 #include "TYPES.H"
 

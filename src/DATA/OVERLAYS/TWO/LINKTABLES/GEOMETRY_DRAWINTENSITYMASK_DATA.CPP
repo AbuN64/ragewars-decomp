@@ -1,22 +1,103 @@
+#include "COMMON/GFX.H"
+#include "gbi.h"
+extern char g_particleQuadVertices[];
+extern char g_playerModelLighting[];
 #include "DATA_OVERLAY_LAYOUTS.H"
 
 #include "include_asm.h"
 
 #if defined(VERSION_US)
 #if defined(VERSION_US)
-OverlayDisplayCommand k_GeometryDrawintensitymaskEncodedWords[89] = {
-    { 0xF5100000, 0x07000000 }, { 0xF3000000, 0x0755C000 }, { 0xF5101000, 0x00014050 }, { 0xF2000000, 0x0007C07C }, { 0xF5100900, 0x01010441 }, { 0xF2000000, 0x0103C03C }, { 0xF5100540, 0x0200C832 }, { 0xF2000000, 0x0201C01C },
-    { 0xF5100350, 0x03008C23 }, { 0xF2000000, 0x0300C00C }, { 0xF5100354, 0x04005014 }, { 0xF2000000, 0x04004004 }, { 0xF5100356, 0x05001405 }, { 0xF2000000, 0x05000000 }, { 0xE3001001, 0x00000000 }, { 0xDF000000, 0x00000000 },
-    { 0xF5100000, 0x07000000 }, { 0xF3000000, 0x0755C000 }, { 0xF5101000, 0x00054150 }, { 0xF2000000, 0x0007C07C }, { 0xF5100900, 0x01050541 }, { 0xF2000000, 0x0103C03C }, { 0xF5100540, 0x0204C932 }, { 0xF2000000, 0x0201C01C },
-    { 0xF5100350, 0x03048D23 }, { 0xF2000000, 0x0300C00C }, { 0xF5100354, 0x04045114 }, { 0xF2000000, 0x04004004 }, { 0xF5100356, 0x05041505 }, { 0xF2000000, 0x05000000 }, { 0xE3001001, 0x00000000 }, { 0xDF000000, 0x00000000 },
-    { 0xF5100000, 0x07000000 }, { 0xF3000000, 0x0755C000 }, { 0xF5101000, 0x00017C5F }, { 0xF2000000, 0x0007C07C }, { 0xF5101000, 0x01014050 }, { 0xF2000000, 0x0107C07C }, { 0xF5100900, 0x02010441 }, { 0xF2000000, 0x0203C03C },
-    { 0xF5100540, 0x0300C832 }, { 0xF2000000, 0x0301C01C }, { 0xF5100350, 0x04008C23 }, { 0xF2000000, 0x0400C00C }, { 0xF5100354, 0x05005014 }, { 0xF2000000, 0x05004004 }, { 0xF5100356, 0x06001405 }, { 0xF2000000, 0x06000000 },
-    { 0xE3000D01, 0x00040000 }, { 0xE3001001, 0x00000000 }, { 0xDF000000, 0x00000000 }, { 0xF5100000, 0x07000000 }, { 0xF3000000, 0x0755C000 }, { 0xF5101000, 0x0001785E }, { 0xF2000000, 0x0007C07C }, { 0xF5101000, 0x01014050 },
-    { 0xF2000000, 0x0107C07C }, { 0xF5100900, 0x02010441 }, { 0xF2000000, 0x0203C03C }, { 0xF5100540, 0x0300C832 }, { 0xF2000000, 0x0301C01C }, { 0xF5100350, 0x04008C23 }, { 0xF2000000, 0x0400C00C }, { 0xF5100354, 0x05005014 },
-    { 0xF2000000, 0x05004004 }, { 0xF5100356, 0x06001405 }, { 0xF2000000, 0x06000000 }, { 0xE3000D01, 0x00040000 }, { 0xE3001001, 0x00000000 }, { 0xDF000000, 0x00000000 }, { 0xF5900000, 0x07000000 }, { 0xF3000000, 0x07580000 },
-    { 0xF5800800, 0x00018060 }, { 0xF2000000, 0x000FC0FC }, { 0xF5800500, 0x01014451 }, { 0xF2000000, 0x0107C07C }, { 0xF5800340, 0x02010842 }, { 0xF2000000, 0x0203C03C }, { 0xF5800350, 0x0300CC33 }, { 0xF2000000, 0x0301C01C },
-    { 0xF5800358, 0x04009024 }, { 0xF2000000, 0x0400C00C }, { 0xF580035C, 0x05005415 }, { 0xF2000000, 0x05004004 }, { 0xF580035E, 0x06001806 }, { 0xF2000000, 0x06000000 }, { 0xE3000D01, 0x00000000 }, { 0xE3001001, 0x00000000 },
-    { 0xDF000000, 0x00000000 }
+Gfx k_GeometryDrawintensitymaskEncodedWords[89] = {
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0),
+    gsDPLoadBlock(7, 0, 0, 1372, 0),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, 0, 5, 0, 0, 5, 0),
+    gsDPSetTileSize(0, 0, 0, 124, 124),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 256, 1, 0, 0, 4, 1, 0, 4, 1),
+    gsDPSetTileSize(1, 0, 0, 60, 60),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 2, 320, 2, 0, 0, 3, 2, 0, 3, 2),
+    gsDPSetTileSize(2, 0, 0, 28, 28),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 336, 3, 0, 0, 2, 3, 0, 2, 3),
+    gsDPSetTileSize(3, 0, 0, 12, 12),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 340, 4, 0, 0, 1, 4, 0, 1, 4),
+    gsDPSetTileSize(4, 0, 0, 4, 4),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 342, 5, 0, 0, 0, 5, 0, 0, 5),
+    gsDPSetTileSize(5, 0, 0, 0, 0),
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 14, 2, 0x00000000),
+    gsSPEndDisplayList(),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0),
+    gsDPLoadBlock(7, 0, 0, 1372, 0),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, 1, 5, 0, 1, 5, 0),
+    gsDPSetTileSize(0, 0, 0, 124, 124),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 256, 1, 0, 1, 4, 1, 1, 4, 1),
+    gsDPSetTileSize(1, 0, 0, 60, 60),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 2, 320, 2, 0, 1, 3, 2, 1, 3, 2),
+    gsDPSetTileSize(2, 0, 0, 28, 28),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 336, 3, 0, 1, 2, 3, 1, 2, 3),
+    gsDPSetTileSize(3, 0, 0, 12, 12),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 340, 4, 0, 1, 1, 4, 1, 1, 4),
+    gsDPSetTileSize(4, 0, 0, 4, 4),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 342, 5, 0, 1, 0, 5, 1, 0, 5),
+    gsDPSetTileSize(5, 0, 0, 0, 0),
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 14, 2, 0x00000000),
+    gsSPEndDisplayList(),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0),
+    gsDPLoadBlock(7, 0, 0, 1372, 0),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, 0, 5, 15, 0, 5, 15),
+    gsDPSetTileSize(0, 0, 0, 124, 124),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 1, 0, 0, 5, 0, 0, 5, 0),
+    gsDPSetTileSize(1, 0, 0, 124, 124),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 256, 2, 0, 0, 4, 1, 0, 4, 1),
+    gsDPSetTileSize(2, 0, 0, 60, 60),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 2, 320, 3, 0, 0, 3, 2, 0, 3, 2),
+    gsDPSetTileSize(3, 0, 0, 28, 28),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 336, 4, 0, 0, 2, 3, 0, 2, 3),
+    gsDPSetTileSize(4, 0, 0, 12, 12),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 340, 5, 0, 0, 1, 4, 0, 1, 4),
+    gsDPSetTileSize(5, 0, 0, 4, 4),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 342, 6, 0, 0, 0, 5, 0, 0, 5),
+    gsDPSetTileSize(6, 0, 0, 0, 0),
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 17, 2, 0x00040000),
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 14, 2, 0x00000000),
+    gsSPEndDisplayList(),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0),
+    gsDPLoadBlock(7, 0, 0, 1372, 0),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, 0, 5, 14, 0, 5, 14),
+    gsDPSetTileSize(0, 0, 0, 124, 124),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 1, 0, 0, 5, 0, 0, 5, 0),
+    gsDPSetTileSize(1, 0, 0, 124, 124),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 256, 2, 0, 0, 4, 1, 0, 4, 1),
+    gsDPSetTileSize(2, 0, 0, 60, 60),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 2, 320, 3, 0, 0, 3, 2, 0, 3, 2),
+    gsDPSetTileSize(3, 0, 0, 28, 28),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 336, 4, 0, 0, 2, 3, 0, 2, 3),
+    gsDPSetTileSize(4, 0, 0, 12, 12),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 340, 5, 0, 0, 1, 4, 0, 1, 4),
+    gsDPSetTileSize(5, 0, 0, 4, 4),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 342, 6, 0, 0, 0, 5, 0, 0, 5),
+    gsDPSetTileSize(6, 0, 0, 0, 0),
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 17, 2, 0x00040000),
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 14, 2, 0x00000000),
+    gsSPEndDisplayList(),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0),
+    gsDPLoadBlock(7, 0, 0, 1408, 0),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 0, 0, 0, 0, 6, 0, 0, 6, 0),
+    gsDPSetTileSize(0, 0, 0, 252, 252),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 2, 256, 1, 0, 0, 5, 1, 0, 5, 1),
+    gsDPSetTileSize(1, 0, 0, 124, 124),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 1, 320, 2, 0, 0, 4, 2, 0, 4, 2),
+    gsDPSetTileSize(2, 0, 0, 60, 60),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 1, 336, 3, 0, 0, 3, 3, 0, 3, 3),
+    gsDPSetTileSize(3, 0, 0, 28, 28),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 1, 344, 4, 0, 0, 2, 4, 0, 2, 4),
+    gsDPSetTileSize(4, 0, 0, 12, 12),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 1, 348, 5, 0, 0, 1, 5, 0, 1, 5),
+    gsDPSetTileSize(5, 0, 0, 4, 4),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 1, 350, 6, 0, 0, 0, 6, 0, 0, 6),
+    gsDPSetTileSize(6, 0, 0, 0, 0),
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 17, 2, 0x00000000),
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 14, 2, 0x00000000),
+    gsSPEndDisplayList(),
 };
 #endif
 #endif
@@ -25,20 +106,48 @@ OverlayDisplayCommand k_GeometryDrawintensitymaskEncodedWords[89] = {
 #if defined(VERSION_US)
 /* Display-list commands are logical 32-bit words on every host. */
 #if defined(VERSION_US)
-OverlayDisplayCommand D_src_d4ac59de[17] = {
-    { 0xE3001001, 0x00000000 }, { 0xD7000002, 0x80008000 }, { 0xD9F9FBFF, 0x00000000 }, { 0xD9FFFFFF, 0x00210004 }, { 0xFCFF97FF, 0xFFFFFE38 }, { 0xE200001C, 0xC8104B50 }, { 0xDB040004, 0x00000001 }, { 0xDB04000C, 0x00000001 },
-    { 0xDB040014, 0x0000FFFF }, { 0xDB04001C, 0x0000FFFF }, { 0x01004008, 0x801408E0 }, { 0x06000204, 0x00040600 }, { 0xDB040004, 0x00000005 }, { 0xDB04000C, 0x00000005 }, { 0xDB040014, 0x0000FFFB }, { 0xDB04001C, 0x0000FFFB },
-    { 0xDF000000, 0x00000000 }
+Gfx D_src_d4ac59de[17] = {
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 14, 2, 0x00000000),
+    gsSPTexture(0x8000, 0x8000, 0, 0, 1),
+    gsSPGeometryMode(0x060400, 0x00000000),
+    gsSPGeometryMode(0x000000, 0x00210004),
+    gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    gsSPSetOtherMode(G_SETOTHERMODE_L, 3, 29, 0xC8104B50),
+    gsSPMoveWord(4, 0x0004, 0x00000001),
+    gsSPMoveWord(4, 0x000C, 0x00000001),
+    gsSPMoveWord(4, 0x0014, 0x0000FFFF),
+    gsSPMoveWord(4, 0x001C, 0x0000FFFF),
+    gsSPVertex(g_particleQuadVertices, 4, 0),
+    gsSP2Triangles(0, 1, 2, 0, 2, 3, 0, 0),
+    gsSPMoveWord(4, 0x0004, 0x00000005),
+    gsSPMoveWord(4, 0x000C, 0x00000005),
+    gsSPMoveWord(4, 0x0014, 0x0000FFFB),
+    gsSPMoveWord(4, 0x001C, 0x0000FFFB),
+    gsSPEndDisplayList(),
 };
 #endif
 #endif
 #if defined(VERSION_US_REV1)
 /* Display-list commands are logical 32-bit words on every host. */
 #if defined(VERSION_US_REV1)
-OverlayDisplayCommand D_src_d4ac59de[17] = {
-    { 0xE3001001, 0x00000000 }, { 0xD7000002, 0x80008000 }, { 0xD9F9FBFF, 0x00000000 }, { 0xD9FFFFFF, 0x00210004 }, { 0xFCFF97FF, 0xFFFFFE38 }, { 0xE200001C, 0xC8104B50 }, { 0xDB040004, 0x00000001 }, { 0xDB04000C, 0x00000001 },
-    { 0xDB040014, 0x0000FFFF }, { 0xDB04001C, 0x0000FFFF }, { 0x01004008, 0x801469A0 }, { 0x06000204, 0x00040600 }, { 0xDB040004, 0x00000005 }, { 0xDB04000C, 0x00000005 }, { 0xDB040014, 0x0000FFFB }, { 0xDB04001C, 0x0000FFFB },
-    { 0xDF000000, 0x00000000 }
+Gfx D_src_d4ac59de[17] = {
+    gsSPSetOtherMode(G_SETOTHERMODE_H, 14, 2, 0x00000000),
+    gsSPTexture(0x8000, 0x8000, 0, 0, 1),
+    gsSPGeometryMode(0x060400, 0x00000000),
+    gsSPGeometryMode(0x000000, 0x00210004),
+    gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    gsSPSetOtherMode(G_SETOTHERMODE_L, 3, 29, 0xC8104B50),
+    gsSPMoveWord(4, 0x0004, 0x00000001),
+    gsSPMoveWord(4, 0x000C, 0x00000001),
+    gsSPMoveWord(4, 0x0014, 0x0000FFFF),
+    gsSPMoveWord(4, 0x001C, 0x0000FFFF),
+    gsSPVertex(g_particleQuadVertices, 4, 0),
+    gsSP2Triangles(0, 1, 2, 0, 2, 3, 0, 0),
+    gsSPMoveWord(4, 0x0004, 0x00000005),
+    gsSPMoveWord(4, 0x000C, 0x00000005),
+    gsSPMoveWord(4, 0x0014, 0x0000FFFB),
+    gsSPMoveWord(4, 0x001C, 0x0000FFFB),
+    gsSPEndDisplayList(),
 };
 #endif
 #endif

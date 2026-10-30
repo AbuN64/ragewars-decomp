@@ -1,3 +1,4 @@
+extern char g_viDataZeroWords[];
 #include "COMMON/FORMAT.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "DATA_OVERLAY_LAYOUTS.H"
@@ -7,7 +8,6 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-extern char g_viDataZeroWords[];
 #if defined(VERSION_DE)
 void * D_src_c0f3ff2a[4] = {
     (void *)&g_viDataZeroWords, (void *)g_viDataZeroWords + 0x30, 0, 0
@@ -15,7 +15,6 @@ void * D_src_c0f3ff2a[4] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-extern char g_viDataZeroWords[];
 #if defined(VERSION_EU)
 struct {
     void * __osViCurr;
@@ -30,7 +29,6 @@ typedef char D_src_c0f3ff2aSizeCheck[(sizeof(D_src_c0f3ff2a) == 16) ? 1 : -1];
 #endif
 #endif
 #if defined(VERSION_EU_X)
-extern char g_viDataZeroWords[];
 #if defined(VERSION_EU_X)
 struct {
     void * __osViCurr;
@@ -45,7 +43,6 @@ typedef char D_src_c0f3ff2aSizeCheck[(sizeof(D_src_c0f3ff2a) == 16) ? 1 : -1];
 #endif
 #endif
 #if defined(VERSION_US)
-extern char g_viDataZeroWords[];
 #if defined(VERSION_US)
 struct {
     void * __osViCurr;

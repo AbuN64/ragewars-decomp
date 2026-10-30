@@ -1,7 +1,6 @@
 #include "TYPES.H"
 
 extern char g_weaponFireStateCallbackTable[];
-extern char g_weaponSwitchStateWordsUs[];
 
 #include "include_asm.h"
 

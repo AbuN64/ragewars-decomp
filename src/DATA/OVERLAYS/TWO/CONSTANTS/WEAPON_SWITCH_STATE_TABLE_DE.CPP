@@ -1,7 +1,6 @@
 #include "TYPES.H"
 
 extern char g_weaponFireStateCallbackTable[];
-extern char g_weaponSwitchStateWordsDe[];
 
 
 #if defined(VERSION_DE)

@@ -1,7 +1,6 @@
 #include "TYPES.H"
 
 extern char g_weaponFireStateCallbackTable[];
-extern char k_PlayeraiInitializeplayerhealthEncodedWordsBlock1[];
 
 
 #if defined(VERSION_EU_X)
