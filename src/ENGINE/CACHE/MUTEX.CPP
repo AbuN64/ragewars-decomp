@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "TYPES.H"
-#include "../../../../sdk/include/os.h"
+#include "os.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 
