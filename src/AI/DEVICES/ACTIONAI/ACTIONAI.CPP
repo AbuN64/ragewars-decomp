@@ -8,14 +8,7 @@
    patches, copied word by word over the vectors by Libsn_InstallDebuggerExceptionHooks. Each patch is the 5-word stub installed at the vector
    (parks k0 in ErrorEPC and jumps to the trace handler at 0x00202460), the 5-word slot the original vector words are saved into (filled at run
    time) and the 4-word stub that resumes the vector 0x14 bytes in. */
-#define MIPS_K0 26
-#define MIPS_MTC0(rt, rd) (0x40800000 | ((rt) << 16) | ((rd) << 11))
-#define MIPS_LUI(rt, imm) (0x3C000000 | ((rt) << 16) | (imm))
-#define MIPS_ADDIU(rt, rs, imm) (0x24000000 | ((rs) << 21) | ((rt) << 16) | (imm))
-#define MIPS_ORI(rt, rs, imm) (0x34000000 | ((rs) << 21) | ((rt) << 16) | (imm))
-#define MIPS_JR(rs) (((rs) << 21) | 0x08)
-#define MIPS_NOP 0
-#define C0_ERROR_EPC 30
+#include "MIPS_ENCODE.H"
 
 typedef struct LibsnDebugVectorPatch {
     unsigned int stub[5];

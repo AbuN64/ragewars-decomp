@@ -2412,6 +2412,7 @@ ragewars_menu_strings_D6434_us_rev1 = 0x800D5834; // rom:0xD6434
 ragewars_menu_digit_labels_us_rev1 = 0x800D6BDC; // rom:0xD77DC
 ragewars_credits_lines_us_rev1 = 0x800D6C08; // rom:0xD7808
 g_screenMessageSubstitutionReplacement = 0x800D7028; // rom:0xD7C28
+g_screenMessageTextSlot = 0x800D7030; // rom:0xD7C30
 g_screenMessageSubstitutionSource = 0x800D7034; // rom:0xD7C34
 g_introTextLines = 0x800D7064; // rom:0xD7C64
 g_pickupLabelDirectory = 0x800D7070; // rom:0xD7C70

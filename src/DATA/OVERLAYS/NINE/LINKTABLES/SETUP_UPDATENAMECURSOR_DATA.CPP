@@ -10,10 +10,11 @@ NameSpinnerEntry g_multiplayerNameEntryStates[8] = {
     { 0, 0.0f, 0, { 0 } }, { 0, 0.0f, 0, { 0 } }, { 0, 0.0f, 0, { 0 } }, { 0, 0.0f, 0, { 0 } },
 };
 
-#define NAME_TEXT(i) ((void *)g_multiplayerNameEntryStates[i].text)
 void *g_multiplayerNameBufferTable[16] = {
-    NAME_TEXT(0), NAME_TEXT(0), NAME_TEXT(0), NAME_TEXT(0), NAME_TEXT(1), NAME_TEXT(1), NAME_TEXT(1), NAME_TEXT(1),
-    NAME_TEXT(2), NAME_TEXT(2), NAME_TEXT(2), NAME_TEXT(2), NAME_TEXT(3), NAME_TEXT(3), NAME_TEXT(3), NAME_TEXT(3),
+    g_multiplayerNameEntryStates[0].text, g_multiplayerNameEntryStates[0].text, g_multiplayerNameEntryStates[0].text, g_multiplayerNameEntryStates[0].text,
+    g_multiplayerNameEntryStates[1].text, g_multiplayerNameEntryStates[1].text, g_multiplayerNameEntryStates[1].text, g_multiplayerNameEntryStates[1].text,
+    g_multiplayerNameEntryStates[2].text, g_multiplayerNameEntryStates[2].text, g_multiplayerNameEntryStates[2].text, g_multiplayerNameEntryStates[2].text,
+    g_multiplayerNameEntryStates[3].text, g_multiplayerNameEntryStates[3].text, g_multiplayerNameEntryStates[3].text, g_multiplayerNameEntryStates[3].text,
 };
 
 /* Linker-fill residue, not authored data: the 5776 bytes from ROM 0xEE970 to 0xF0000 are the first 4 KiB page of the overlay at ROM 0xF0000

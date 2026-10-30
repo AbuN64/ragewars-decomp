@@ -5,19 +5,7 @@
 /* Player light patterns, model ids, HUD mover scripts and the ride/jump tuning, laid out in link order. */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 
-#if defined(VERSION_DE)
-#define PLAYER_EFFECT_LIGHT_PATTERN g_playerEffectLightPatternGerman
-#define PLAYER_MODE_LIGHT_PATTERN g_playerModeLightPatternGerman
-#elif defined(VERSION_EU)
-#define PLAYER_EFFECT_LIGHT_PATTERN g_playerEffectLightPatternUs
-#define PLAYER_MODE_LIGHT_PATTERN g_playerModeLightPatternEuropean
-#elif defined(VERSION_US)
-#define PLAYER_EFFECT_LIGHT_PATTERN g_playerEffectLightPatternUs
-#define PLAYER_MODE_LIGHT_PATTERN g_playerModeLightPatternUs
-#else
-#define PLAYER_EFFECT_LIGHT_PATTERN g_playerEffectLightPatternUsRev1
-#define PLAYER_MODE_LIGHT_PATTERN g_playerModeLightPatternUsRev1
-#endif
+#include "AI/PLAYER_LIGHT_PATTERN_NAMES.H"
 
 /* Dynamic light descriptor: Gdynlight_AccumulateLightDirections reads the u16 radius; the rest is the light colour. */
 typedef struct DynLightPattern {
