@@ -9390,5 +9390,3 @@ PAKInterface_CopySpecificMiddlePlayerToGlobal = 0x800FCF59; // type:func size:15
 textpiece1_PAKInterface_CopySpecificMiddlePlayerToGlobal = 0x800FDF98; // type:func rom:0xFEB98
 PAKInterface_SaveGame = 0x800FE05C; // type:func rom:0xFEC5C
 PAKInterface_LoadGame = 0x800FE33C; // type:func rom:0xFEF3C
-PAKInterface_OnInitialUpdate = 0x800E477B; // type:func rom:0xE537B
-PAKInterface_OnDestroy = 0x800E47B7; // type:func rom:0xE53B7
