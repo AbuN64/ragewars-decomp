@@ -4715,9 +4715,17 @@ segments:
       - [0xFFD60, data, game_data/k_Ovldat10EncodedWordsBlock4]
       - [0xFFD7C, data, game_data/k_Ovldat10EncodedWordsBlock8]
       - [0xFFDA0, data, game_data/k_Ovldat10EncodedWordsBlock17]
+      - [0x1008B0, c, game_data]
+      - [0x1009C0, c, game_data]
+      - [0x100AF0, c, game_data]
+      - [0x100C7C, c, game_data]
+      - [0x100EB4, c, game_data]
+      - [0x101138, c, game_data]
+      - [0x1012F4, c, game_data]
+      - [0x101594, c, game_data]
   - name: debug_symbols
     type: bin
-    start: 0x101000
+    start: 0x101834
   - name: ovl_frontendMenu
     type: code
     start: 0x164000
