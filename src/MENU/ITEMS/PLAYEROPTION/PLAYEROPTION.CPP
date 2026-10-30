@@ -293,5 +293,5 @@ s32 Items_RequestScreenModeFade(void) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 const char k_fmtSpacesDec2[6] =
-    "  %2d\000";
+    "  %2d";
 #endif
