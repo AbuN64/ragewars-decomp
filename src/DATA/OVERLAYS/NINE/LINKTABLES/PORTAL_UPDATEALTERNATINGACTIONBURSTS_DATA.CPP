@@ -1,19 +1,12 @@
 #include "TYPES.H"
 
 /* 800F3CB0.CPP */
-#if defined(VERSION_DE) || defined(VERSION_US)
+#if defined(VERSION_DE)
 #ifdef VERSION_DE
 unsigned int k_PortalUpdatealternatingactionburstsEncodedWords[17] = {
     0x800E1CA0, 0x800E1CA4, 0x800E1CA8, 0x800E1CAC, 0x00010000, 0x10000000, 0x00000000, 0x0000FF01,
     0x00000385, 0x0044029C, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x08000021, 0x00000008,
     0x0000FF01,
-};
-#endif
-#ifdef VERSION_US
-unsigned int k_PortalUpdatealternatingactionburstsEncodedWords[17] = {
-    0xC3003800, 0x60202100, 0x0428C000, 0xA3282100, 0x0520C000, 0x83202100, 0x04188000, 0x83202100,
-    0x0418C000, 0x4310218C, 0x4300582C, 0x64001E10, 0x8009AC00, 0x0000008C, 0x42005800, 0x40182100,
-    0x0310803C,
 };
 #endif
 #endif
