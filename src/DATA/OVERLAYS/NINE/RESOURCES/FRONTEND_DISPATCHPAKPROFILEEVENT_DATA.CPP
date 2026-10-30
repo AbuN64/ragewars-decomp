@@ -1,60 +1,139 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "TYPES.H"
+
+extern char Frontend_CreatePakProfileScreen[];
+extern char Frontend_CreatePakProfileScreenDe[];
+extern char Frontend_CreatePakProfileScreenEu[];
+extern char Frontend_CreatePakProfileScreenEux[];
+extern char Frontend_DestroyPakProfileScreen[];
+extern char Frontend_DestroyPakProfileScreen_Address[];
+extern char Frontend_HandlePakProfileInput[];
+extern char Frontend_ResetNameRepeatOnEvent[];
+extern char Frontend_ReturnProfileEventZero[];
+extern char Frontend_UpdatePakScreenExit[];
+extern char Frontend_UpdatePakScreenPanels[];
+extern char PAKInterface_ActivatePlayerPanelAction[];
+extern char PAKInterface_HandleNextPanelSelection[];
+extern char PAKInterface_HandlePakMenuConfirm[];
+extern char PAKInterface_HandlePlayerPanelBack[];
+extern char PAKInterface_MoveNameCursorBackward[];
+extern char PAKInterface_MoveNameCursorForward[];
+extern char g_Frontend_DestroyPakProfileScreenPackedAddress24[];
+extern char g_Frontend_HandlePakProfileInputPackedAddress24[];
+extern char g_Frontend_ResetNameRepeatOnEventPackedAddress24[];
+extern char g_Frontend_ReturnProfileEventZeroPackedAddress24[];
+extern char g_Frontend_UpdatePakScreenExitPackedAddress24[];
+extern char g_Frontend_UpdatePakScreenPanelsPackedAddress24[];
+extern char g_PAKInterface_ActivatePlayerPanelActionPackedAddress24[];
+extern char g_PAKInterface_HandleNextPanelSelectionPackedAddress24[];
+extern char g_PAKInterface_HandlePakMenuConfirmPackedAddress24[];
+extern char g_PAKInterface_HandlePlayerPanelBackPackedAddress24[];
+extern char g_PAKInterface_MoveNameCursorBackwardPackedAddress24[];
+extern char g_PAKInterface_MoveNameCursorForwardPackedAddress24[];
+
 #include "include_asm.h"
 #include "DATA/SCENARIO_SETUP/FRONTEND_DISPATCHPAKPROFILEEVENT_DATA.H"
 
 /* 800E5494_2.CPP */
 /* ROM-grounded data: rodata/writable/800E54A0 */
-unsigned int g_FrontendDispatchpakprofileeventWords1[2] = {
-    0x00000000, 0x00000000,
+#if defined(VERSION_DE)
+struct {
+    s32 g_pakProfileRequestedPhase;
+    void * g_pakProfileScreenState;
+} g_FrontendDispatchpakprofileeventWords1 __attribute__((aligned(4))) = {
+    0,
+    0
 };
+typedef char g_FrontendDispatchpakprofileeventWords1SizeCheck[(sizeof(g_FrontendDispatchpakprofileeventWords1) == 8) ? 1 : -1];
+#endif
+#if defined(VERSION_EU)
+struct {
+    s32 g_pakProfileRequestedPhase;
+    void * g_pakProfileScreenState;
+} g_FrontendDispatchpakprofileeventWords1 __attribute__((aligned(4))) = {
+    0,
+    0
+};
+typedef char g_FrontendDispatchpakprofileeventWords1SizeCheck[(sizeof(g_FrontendDispatchpakprofileeventWords1) == 8) ? 1 : -1];
+#endif
+#if defined(VERSION_EU_X)
+struct {
+    s32 g_pakProfileRequestedPhase;
+    void * g_pakProfileScreenState;
+} g_FrontendDispatchpakprofileeventWords1 __attribute__((aligned(4))) = {
+    0,
+    0
+};
+typedef char g_FrontendDispatchpakprofileeventWords1SizeCheck[(sizeof(g_FrontendDispatchpakprofileeventWords1) == 8) ? 1 : -1];
+#endif
+#if defined(VERSION_US)
+struct {
+    s32 g_pakProfileRequestedPhase;
+    void * g_pakProfileScreenState;
+} g_FrontendDispatchpakprofileeventWords1 __attribute__((aligned(4))) = {
+    0,
+    0
+};
+typedef char g_FrontendDispatchpakprofileeventWords1SizeCheck[(sizeof(g_FrontendDispatchpakprofileeventWords1) == 8) ? 1 : -1];
+#endif
+#if defined(VERSION_US_REV1)
+struct {
+    s32 g_pakProfileRequestedPhase;
+    void * g_pakProfileScreenState;
+} g_FrontendDispatchpakprofileeventWords1 __attribute__((aligned(4))) = {
+    0,
+    0
+};
+typedef char g_FrontendDispatchpakprofileeventWords1SizeCheck[(sizeof(g_FrontendDispatchpakprofileeventWords1) == 8) ? 1 : -1];
+#endif
 
 /* 800E54A8.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-unsigned int D_src_95297a43[42] = {
-    0x00000E07, 0x00000013, 0x004359C8, 0x00000E0A, 0x00000013, 0x0042F7A8, 0x00000E08, 0x00000013,
-    0x0042F91C, 0x00000E06, 0x00000013, 0x0042EF50, 0x00000E03, 0x00000013, 0x004359D0, 0x00000002,
-    0x00000013, 0x00432158, 0x00000001, 0x00000013, 0x004306D8, 0x0000000A, 0x00000013, 0x0042FB48,
-    0x0000000B, 0x00000013, 0x00435A10, 0x00000005, 0x00000013, 0x004303F8, 0x00000006, 0x00000013,
-    0x00430118, 0x00000008, 0x00000013, 0x0042FF40, 0x00000007, 0x00000013, 0x00430028, 0x00000000,
-    0x00000000, 0x00000000,
+#if defined(VERSION_DE)
+ResidentEventHandlerEntry D_src_95297a43[14] = {
+    { 3591, 19, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnProfileEventZero - 0x80000000U) }, { 3594, 19, (ResidentEventHandler)(void *)((char *)&Frontend_UpdatePakScreenExit - 0x80000000U) }, { 3592, 19, (ResidentEventHandler)(void *)((char *)&Frontend_UpdatePakScreenPanels - 0x80000000U) }, { 3590, 19, (ResidentEventHandler)(void *)((char *)&Frontend_CreatePakProfileScreenDe - 0x80000000U) }, { 3587, 19, (ResidentEventHandler)(void *)&Frontend_DestroyPakProfileScreen_Address }, { 2, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandlePlayerPanelBack - 0x80000000U) }, { 1, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_ActivatePlayerPanelAction - 0x80000000U) }, { 10, 19, (ResidentEventHandler)(void *)((char *)&Frontend_HandlePakProfileInput - 0x80000000U) },
+    { 11, 19, (ResidentEventHandler)(void *)((char *)&Frontend_ResetNameRepeatOnEvent - 0x80000000U) }, { 5, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandlePakMenuConfirm - 0x80000000U) }, { 6, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandleNextPanelSelection - 0x80000000U) }, { 8, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_MoveNameCursorForward - 0x80000000U) }, { 7, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_MoveNameCursorBackward - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 }
 };
+#endif
 #endif
 #if defined(VERSION_EU)
-unsigned int D_src_95297a43[42] = {
-    0x00000E07, 0x00000013, 0x004366F4, 0x00000E0A, 0x00000013, 0x00430448, 0x00000E08, 0x00000013,
-    0x004305BC, 0x00000E06, 0x00000013, 0x0042FBF0, 0x00000E03, 0x00000013, 0x004366FC, 0x00000002,
-    0x00000013, 0x00432E04, 0x00000001, 0x00000013, 0x00431378, 0x0000000A, 0x00000013, 0x004307E8,
-    0x0000000B, 0x00000013, 0x0043673C, 0x00000005, 0x00000013, 0x00431098, 0x00000006, 0x00000013,
-    0x00430DB8, 0x00000008, 0x00000013, 0x00430BE0, 0x00000007, 0x00000013, 0x00430CC8, 0x00000000,
-    0x00000000, 0x00000000,
+#if defined(VERSION_EU)
+ResidentEventHandlerEntry D_src_95297a43[14] = {
+    { 3591, 19, (ResidentEventHandler)(void *)&g_Frontend_ReturnProfileEventZeroPackedAddress24 }, { 3594, 19, (ResidentEventHandler)(void *)&g_Frontend_UpdatePakScreenExitPackedAddress24 }, { 3592, 19, (ResidentEventHandler)(void *)&g_Frontend_UpdatePakScreenPanelsPackedAddress24 }, { 3590, 19, (ResidentEventHandler)(void *)((char *)&Frontend_CreatePakProfileScreenEu - 0x80000000U) }, { 3587, 19, (ResidentEventHandler)(void *)&g_Frontend_DestroyPakProfileScreenPackedAddress24 }, { 2, 19, (ResidentEventHandler)(void *)&g_PAKInterface_HandlePlayerPanelBackPackedAddress24 }, { 1, 19, (ResidentEventHandler)(void *)&g_PAKInterface_ActivatePlayerPanelActionPackedAddress24 }, { 10, 19, (ResidentEventHandler)(void *)&g_Frontend_HandlePakProfileInputPackedAddress24 },
+    { 11, 19, (ResidentEventHandler)(void *)&g_Frontend_ResetNameRepeatOnEventPackedAddress24 }, { 5, 19, (ResidentEventHandler)(void *)&g_PAKInterface_HandlePakMenuConfirmPackedAddress24 }, { 6, 19, (ResidentEventHandler)(void *)&g_PAKInterface_HandleNextPanelSelectionPackedAddress24 }, { 8, 19, (ResidentEventHandler)(void *)&g_PAKInterface_MoveNameCursorForwardPackedAddress24 }, { 7, 19, (ResidentEventHandler)(void *)&g_PAKInterface_MoveNameCursorBackwardPackedAddress24 }, { 0, 0, (ResidentEventHandler)0 }
 };
 #endif
+#endif
 #if defined(VERSION_EU_X)
-unsigned int D_src_95297a43[42] = {
-    0x00000E07, 0x00000013, 0x0043683C, 0x00000E0A, 0x00000013, 0x00430598, 0x00000E08, 0x00000013,
-    0x0043070C, 0x00000E06, 0x00000013, 0x0042FD40, 0x00000E03, 0x00000013, 0x00436844, 0x00000002,
-    0x00000013, 0x00432F4C, 0x00000001, 0x00000013, 0x004314C8, 0x0000000A, 0x00000013, 0x00430938,
-    0x0000000B, 0x00000013, 0x00436884, 0x00000005, 0x00000013, 0x004311E8, 0x00000006, 0x00000013,
-    0x00430F08, 0x00000008, 0x00000013, 0x00430D30, 0x00000007, 0x00000013, 0x00430E18, 0x00000000,
-    0x00000000, 0x00000000,
+#if defined(VERSION_EU_X)
+ResidentEventHandlerEntry D_src_95297a43[14] = {
+    { 3591, 19, (ResidentEventHandler)(void *)((char *)&Frontend_ReturnProfileEventZero - 0x80000000U) }, { 3594, 19, (ResidentEventHandler)(void *)((char *)&Frontend_UpdatePakScreenExit - 0x80000000U) }, { 3592, 19, (ResidentEventHandler)(void *)((char *)&Frontend_UpdatePakScreenPanels - 0x80000000U) }, { 3590, 19, (ResidentEventHandler)(void *)((char *)&Frontend_CreatePakProfileScreenEux - 0x80000000U) }, { 3587, 19, (ResidentEventHandler)(void *)((char *)&Frontend_DestroyPakProfileScreen - 0x80000000U) }, { 2, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandlePlayerPanelBack - 0x80000000U) }, { 1, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_ActivatePlayerPanelAction - 0x80000000U) }, { 10, 19, (ResidentEventHandler)(void *)((char *)&Frontend_HandlePakProfileInput - 0x80000000U) },
+    { 11, 19, (ResidentEventHandler)(void *)((char *)&Frontend_ResetNameRepeatOnEvent - 0x80000000U) }, { 5, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandlePakMenuConfirm - 0x80000000U) }, { 6, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandleNextPanelSelection - 0x80000000U) }, { 8, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_MoveNameCursorForward - 0x80000000U) }, { 7, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_MoveNameCursorBackward - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 }
 };
+#endif
 #endif
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
-unsigned int g_FrontendDispatchpakprofileeventPointerWords1[9] = {
-    0x00000E07, 0x00000013, (unsigned int)g_Frontend_ReturnProfileEventZeroPackedAddress242, 0x00000E0A, 0x00000013, (unsigned int)g_Frontend_UpdatePakScreenExitPackedAddress242, 0x00000E08, 0x00000013,
-    (unsigned int)g_Frontend_UpdatePakScreenPanelsPackedAddress242,
+#if defined(VERSION_US)
+ResidentEventHandlerEntry g_FrontendDispatchpakprofileeventPointerWords1[3] = {
+    { 3591, 19, (ResidentEventHandler)(void *)g_Frontend_ReturnProfileEventZeroPackedAddress242 }, { 3594, 19, (ResidentEventHandler)(void *)g_Frontend_UpdatePakScreenExitPackedAddress242 }, { 3592, 19, (ResidentEventHandler)(void *)g_Frontend_UpdatePakScreenPanelsPackedAddress242 }
 };
+#endif
+#if defined(VERSION_US_REV1)
+ResidentEventHandlerEntry g_FrontendDispatchpakprofileeventPointerWords1[3] = {
+    { 3591, 19, (ResidentEventHandler)(void *)g_Frontend_ReturnProfileEventZeroPackedAddress242 }, { 3594, 19, (ResidentEventHandler)(void *)g_Frontend_UpdatePakScreenExitPackedAddress242 }, { 3592, 19, (ResidentEventHandler)(void *)g_Frontend_UpdatePakScreenPanelsPackedAddress242 }
+};
+#endif
 #endif
 
 #if defined(VERSION_US)
-unsigned int g_FrontendDispatchpakprofileeventPointerWords2[33] = {
-    0x00000E06, 0x00000013, 0x0042F130, 0x00000E03, 0x00000013, 0x00435BAC, 0x00000002, 0x00000013,
-    0x00432334, 0x00000001, 0x00000013, 0x004308B8, 0x0000000A, 0x00000013, 0x0042FD28, 0x0000000B,
-    0x00000013, 0x00435BEC, 0x00000005, 0x00000013, 0x004305D8, 0x00000006, 0x00000013, 0x004302F8,
-    0x00000008, 0x00000013, 0x00430120, 0x00000007, 0x00000013, 0x00430208, 0x00000000, 0x00000000,
-    0x00000000,
+#if defined(VERSION_US)
+ResidentEventHandlerEntry g_FrontendDispatchpakprofileeventPointerWords2[11] = {
+    { 3590, 19, (ResidentEventHandler)(void *)((char *)&Frontend_CreatePakProfileScreen - 0x80000000U) }, { 3587, 19, (ResidentEventHandler)(void *)((char *)&Frontend_DestroyPakProfileScreen - 0x80000000U) }, { 2, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandlePlayerPanelBack - 0x80000000U) }, { 1, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_ActivatePlayerPanelAction - 0x80000000U) }, { 10, 19, (ResidentEventHandler)(void *)((char *)&Frontend_HandlePakProfileInput - 0x80000000U) }, { 11, 19, (ResidentEventHandler)(void *)((char *)&Frontend_ResetNameRepeatOnEvent - 0x80000000U) }, { 5, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandlePakMenuConfirm - 0x80000000U) }, { 6, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandleNextPanelSelection - 0x80000000U) },
+    { 8, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_MoveNameCursorForward - 0x80000000U) }, { 7, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_MoveNameCursorBackward - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 }
 };
+#endif
 #endif

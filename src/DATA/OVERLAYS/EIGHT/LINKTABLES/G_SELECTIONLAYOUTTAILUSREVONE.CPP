@@ -1,3 +1,5 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+
 
 #if defined(VERSION_US_REV1)
 /* Widget IDs occupy the second halfword; kind and event fields remain words. */
@@ -28,11 +30,10 @@ extern char g_selection_ReturnCharacterEventZeroCEntry[];
 extern char g_selection_ReturnCharacterEventZeroDEntry[];
 extern char g_selection_CancelCharacterConfirmationEntry[];
 extern char g_selection_ReadSelectionSlotEntry[];
-unsigned int g_eventHandlers_us_rev1[39] = {
-    0x00000E07, 0x00000007, (unsigned int)g_selection_ActivateCharacterSelectionModeEntry, 0x00000E08, 0x00000007, (unsigned int)g_character_UpdateCharacterPreviewEntry, 0x0000000A, 0x00000007,
-    (unsigned int)g_selection_HandleCharacterVariantCycleEntry, 0x00000E0A, 0x00000007, (unsigned int)g_menu_RenderPlayerCharacterPreviewsEntry, 0x00000E06, 0x00000007, (unsigned int)g_cCharacterSelection_OpenCharacterSelectionScreenEntry, 0x00000E03,
-    0x00000007, (unsigned int)g_selection_DestroyCharacterSelectionMenuEntry_GSelectionlayouttailusrevone, 0x00000002, 0x00000007, (unsigned int)g_selection_CancelCharacterConfirmationEntry, 0x00000001, 0x00000007, (unsigned int)g_selection_ReadSelectionSlotEntry,
-    0x00000008, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroAEntry, 0x00000007, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroBEntry, 0x00000005, 0x00000007,
-    (unsigned int)g_selection_ReturnCharacterEventZeroCEntry, 0x00000006, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroDEntry, 0x00000000, 0x00000000, 0x00000000,
+#if defined(VERSION_US_REV1)
+ResidentEventHandlerEntry g_eventHandlers_us_rev1[13] = {
+    { 3591, 7, (ResidentEventHandler)(void *)g_selection_ActivateCharacterSelectionModeEntry }, { 3592, 7, (ResidentEventHandler)(void *)g_character_UpdateCharacterPreviewEntry }, { 10, 7, (ResidentEventHandler)(void *)g_selection_HandleCharacterVariantCycleEntry }, { 3594, 7, (ResidentEventHandler)(void *)g_menu_RenderPlayerCharacterPreviewsEntry }, { 3590, 7, (ResidentEventHandler)(void *)g_cCharacterSelection_OpenCharacterSelectionScreenEntry }, { 3587, 7, (ResidentEventHandler)(void *)g_selection_DestroyCharacterSelectionMenuEntry_GSelectionlayouttailusrevone }, { 2, 7, (ResidentEventHandler)(void *)g_selection_CancelCharacterConfirmationEntry }, { 1, 7, (ResidentEventHandler)(void *)g_selection_ReadSelectionSlotEntry },
+    { 8, 7, (ResidentEventHandler)(void *)g_selection_ReturnCharacterEventZeroAEntry }, { 7, 7, (ResidentEventHandler)(void *)g_selection_ReturnCharacterEventZeroBEntry }, { 5, 7, (ResidentEventHandler)(void *)g_selection_ReturnCharacterEventZeroCEntry }, { 6, 7, (ResidentEventHandler)(void *)g_selection_ReturnCharacterEventZeroDEntry }, { 0, 0, (ResidentEventHandler)0 }
 };
+#endif
 #endif

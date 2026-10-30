@@ -1,9 +1,30 @@
+#include "TYPES.H"
+
+extern char g_weaponFireStateCallbackTable[];
+
 #include "DATA/WEAPON_EVENT_TRANSLATION/WEAPONAI_INITIALIZESWITCHANDREQUESTIDLE_DATA.H"
 
 #if defined(VERSION_US_REV1)
-unsigned int g_WeaponaiInitializeswitchandrequestidleWords1[7] = {
-    0x00000000, 0x00000000, 0x3F800000, 0x3F800000, 0x800CF298, 0x00000000, 0x00000000,
+#if defined(VERSION_US_REV1)
+struct {
+    void * reserved0;
+    void * reserved1;
+    f32 scale;
+    f32 speed;
+    void * states;
+    void * enter;
+    void * update;
+} g_WeaponaiInitializeswitchandrequestidleWords1 __attribute__((aligned(4))) = {
+    0,
+    0,
+    1.0f,
+    1.0f,
+    (void *)&g_weaponFireStateCallbackTable,
+    0,
+    0
 };
+typedef char g_WeaponaiInitializeswitchandrequestidleWords1SizeCheck[(sizeof(g_WeaponaiInitializeswitchandrequestidleWords1) == 28) ? 1 : -1];
+#endif
 
 extern char g_weaponPresentationResource1219[];
 extern char g_weaponSlot2PresentationUsRev1[];

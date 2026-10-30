@@ -1,9 +1,23 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int g_createDataZeroWords[1] = {
-    0x00000000,
-};
+#if defined(VERSION_DE)
+s32 g_createDataZeroWords = 0;
+#endif
+#if defined(VERSION_EU)
+s32 g_createDataZeroWords = 0;
+#endif
+#if defined(VERSION_EU_X)
+s32 g_createDataZeroWords = 0;
+#endif
+#if defined(VERSION_US)
+s32 g_createDataZeroWords = 0;
+#endif
+#if defined(VERSION_US_REV1)
+s32 g_createDataZeroWords = 0;
+#endif
 
 #if defined(VERSION_US)
 char g_createDataTextFragment_us[28] =

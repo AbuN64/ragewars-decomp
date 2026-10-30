@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
@@ -9,7 +11,14 @@ struct {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned short D_src_415a23b9[2] = {
-    0x0000, 0xFFFF,
+#if defined(VERSION_US_REV1)
+struct {
+    s16 resource;
+    s16 sentinel;
+} D_src_415a23b9 __attribute__((aligned(2))) = {
+    0,
+    -1
 };
+typedef char D_src_415a23b9SizeCheck[(sizeof(D_src_415a23b9) == 4) ? 1 : -1];
+#endif
 #endif

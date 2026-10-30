@@ -1,7 +1,11 @@
+#include "TYPES.H"
+
 
 #if defined(VERSION_US_REV1)
-unsigned short g_audioDequantizetransformcoefficientsDataConstantWords[16] = {
-    0x0004, 0x0008, 0x000C, 0x0012, 0x0019, 0x0021, 0x002C, 0x0035, 0x003F, 0x004B, 0x0059, 0x0069, 0x007E,
-    0x0095, 0x00B9, 0x0100,
+#if defined(VERSION_US_REV1)
+u16 g_audioDequantizetransformcoefficientsDataConstantWords[16] = {
+    4, 8, 12, 18, 25, 33, 44, 53,
+    63, 75, 89, 105, 126, 149, 185, 256
 };
+#endif
 #endif

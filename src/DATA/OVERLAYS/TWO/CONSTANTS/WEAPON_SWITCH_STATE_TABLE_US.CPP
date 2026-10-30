@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 /* 800C9F00.CPP */
@@ -47,9 +49,13 @@ unsigned int g_weaponSwitchStateWordsUs[186] = {
 /* 800C9FAC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C9FAC */
-unsigned int g_WeaponSwitchStateTableUsEncodedWords[1] = {
-    0x002A51C8,
+#if defined(VERSION_US_REV1)
+struct {
+    u8 alignmentFill[4];
+} g_WeaponSwitchStateTableUsEncodedWords __attribute__((aligned(4))) = {
+    { 0x00, 0x2A, 0x51, 0xC8 }
 };
+#endif
 #endif
 
 /* 800CA258_5.CPP */

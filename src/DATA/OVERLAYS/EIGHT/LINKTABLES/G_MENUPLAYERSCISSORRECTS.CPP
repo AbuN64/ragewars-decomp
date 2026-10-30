@@ -1,3 +1,5 @@
+#include "DATA_OVERLAY_LAYOUTS.H"
+
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4DAC_unclaimed_E4DBC */
@@ -6,8 +8,9 @@ void *g_GMenuplayerscissorrectsEncodedWords[1] = {
     (void *)(g_characterPreviewTextReferenceShared5 + 8),
 };
 
-unsigned int g_menuPlayerScissorRects[16] = {
-    0x00000012, 0x0000000F, 0x00000034, 0x0000005E, 0x000000E8, 0x0000000F, 0x0000010B, 0x0000005E,
-    0x00000012, 0x00000080, 0x00000034, 0x000000CE, 0x000000E8, 0x00000080, 0x0000010B, 0x000000CE,
+#if defined(VERSION_US_REV1)
+OverlayScissorRect g_menuPlayerScissorRects[4] = {
+    { 18, 15, 52, 94 }, { 232, 15, 267, 94 }, { 18, 128, 52, 206 }, { 232, 128, 267, 206 }
 };
+#endif
 #endif

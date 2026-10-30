@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
@@ -6,7 +8,9 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: data/unresolved/800E1484 */
-unsigned int g_overlaysNineConstantsFloatConstantWords[3] = {
-    0x3B939A86, 0x3B66C2B4, 0x3B939A86,
+#if defined(VERSION_US_REV1)
+f32 g_overlaysNineConstantsFloatConstantWords[3] = {
+    0.00450450461f, 0.00352112669f, 0.00450450461f
 };
+#endif
 #endif

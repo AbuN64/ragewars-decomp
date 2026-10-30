@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "DATA/ACTION_CALLBACKS/DEVICE_SPAWN_AND_MOTION_ROM_ENTRIES.H"
 
 #if defined(VERSION_US_REV1)
@@ -9,7 +11,7 @@ unsigned int g_ActorStateEntryFragmentEncodedWords[24] = {
 };
 
 /* ROM-grounded data: src/rw_actor_state_entry_CE460_us_rev1.c */
-unsigned int g_overlayThreeActorStateEntryFragment6[3] = {
-    0x00000000, 0x00000000, (unsigned int)addrLow_MovingAI_DeviceHealthNoOp,
-};
+#if defined(VERSION_US_REV1)
+char g_overlayThreeActorStateEntryFragment6[12] __attribute__((aligned(4))) = "\000\000\000\000\000\000\000\000\000 gd";
+#endif
 #endif

@@ -1,19 +1,59 @@
+#include "TYPES.H"
+
 
 
 /* 800E4200_2.CPP */
 /* Selection state pointer followed by the first layout row's word-sized kind. */
-unsigned int g_selectionStateAndFirstKind[] = {
-    0x00000000,
 #if defined(VERSION_DE)
-    0x0090,
+struct {
+    void * screen;
+    s32 firstKind;
+} g_selectionStateAndFirstKind __attribute__((aligned(4))) = {
+    0,
+    144
+};
+typedef char g_selectionStateAndFirstKindSizeCheck[(sizeof(g_selectionStateAndFirstKind) == 8) ? 1 : -1];
 #endif
-#if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    0x0092,
+#if defined(VERSION_EU)
+struct {
+    void * screen;
+    s32 firstKind;
+} g_selectionStateAndFirstKind __attribute__((aligned(4))) = {
+    0,
+    146
+};
+typedef char g_selectionStateAndFirstKindSizeCheck[(sizeof(g_selectionStateAndFirstKind) == 8) ? 1 : -1];
 #endif
 #if defined(VERSION_EU_X)
-    0x0096,
-#endif
+struct {
+    void * screen;
+    s32 firstKind;
+} g_selectionStateAndFirstKind __attribute__((aligned(4))) = {
+    0,
+    150
 };
+typedef char g_selectionStateAndFirstKindSizeCheck[(sizeof(g_selectionStateAndFirstKind) == 8) ? 1 : -1];
+#endif
+#if defined(VERSION_US)
+struct {
+    void * screen;
+    s32 firstKind;
+} g_selectionStateAndFirstKind __attribute__((aligned(4))) = {
+    0,
+    146
+};
+typedef char g_selectionStateAndFirstKindSizeCheck[(sizeof(g_selectionStateAndFirstKind) == 8) ? 1 : -1];
+#endif
+#if defined(VERSION_US_REV1)
+struct {
+    void * screen;
+    s32 firstKind;
+} g_selectionStateAndFirstKind __attribute__((aligned(4))) = {
+    0,
+    146
+};
+typedef char g_selectionStateAndFirstKindSizeCheck[(sizeof(g_selectionStateAndFirstKind) == 8) ? 1 : -1];
+#endif
 
 /* 800E0288.CPP */
 #if defined(VERSION_DE)

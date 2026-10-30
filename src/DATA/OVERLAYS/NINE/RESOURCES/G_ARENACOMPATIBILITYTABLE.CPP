@@ -1,33 +1,22 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "DATA_OVERLAY_LAYOUTS.H"
+
 #include "DATA/SCENARIO_SETUP/G_ARENACOMPATIBILITYTABLE.H"
 
 /* 800E4A84.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_arenaCompatibilityTable[192] = {
-    0x000001A6, 0x00000158, 0x00000170, 0x000001A6, 0x00000157, 0x00000168, 0x00000158, 0x00000157,
-    0x0000016E, 0x00000157, 0x00000159, 0x0000015A, 0x00000157, 0x0000019C, 0x00000175, 0x00000159,
-    0x0000019C, 0x0000019B, 0x0000019C, 0x000001A7, 0x0000019D, 0x0000019C, 0x0000015D, 0x0000017C,
-    0x0000019C, 0x0000015B, 0x0000019F, 0x0000015B, 0x0000015D, 0x0000016F, 0x0000015B, 0x00000162,
-    0x00000180, 0x00000162, 0x0000015E, 0x00000172, 0x00000162, 0x0000015F, 0x00000181, 0x0000015F,
-    0x000001A3, 0x000001A1, 0x0000015F, 0x00000160, 0x0000017F, 0x00000160, 0x000001A3, 0x000001A0,
-    0x000001A3, 0x0000018A, 0x000001A5, 0x000001A3, 0x000001A8, 0x000001A4, 0x00000161, 0x00000167,
-    0x000001B6, 0x00000161, 0x0000018A, 0x0000018B, 0x00000161, 0x000001A3, 0x000001A2, 0x00000163,
-    0x00000167, 0x00000197, 0x00000163, 0x00000161, 0x00000185, 0x00000163, 0x0000015E, 0x00000187,
-    0x00000164, 0x00000167, 0x000001B7, 0x00000164, 0x00000163, 0x00000184, 0x00000164, 0x0000015D,
-    0x00000183, 0x0000015D, 0x00000163, 0x00000182, 0x0000015D, 0x0000015E, 0x0000017D, 0x0000015D,
-    0x00000162, 0x00000173, 0x0000015E, 0x00000161, 0x00000186, 0x0000015E, 0x000001A3, 0x0000017E,
-    0x0000015E, 0x0000015F, 0x00000171, 0x000001A8, 0x0000016D, 0x000001A9, 0x000001A8, 0x00000169,
-    0x0000017A, 0x00000169, 0x0000016D, 0x00000176, 0x00000169, 0x0000016A, 0x00000177, 0x0000016D,
-    0x0000016C, 0x000001AA, 0x0000016D, 0x0000016A, 0x000001AB, 0x0000016C, 0x0000016B, 0x00000188,
-    0x0000016A, 0x0000016C, 0x00000189, 0x0000016A, 0x0000016B, 0x00000178, 0x0000016B, 0x0000017B,
-    0x000001AD, 0x0000016B, 0x000001AF, 0x000001AC, 0x0000017B, 0x000001AF, 0x000001AE, 0x000001AF,
-    0x0000018D, 0x000001B0, 0x000001AF, 0x000001B2, 0x000001B1, 0x0000018D, 0x0000018C, 0x00000190,
-    0x0000018D, 0x00000179, 0x0000018E, 0x000001B2, 0x0000018D, 0x000001B3, 0x000001B2, 0x00000179,
-    0x000001B4, 0x00000179, 0x0000018C, 0x0000018F, 0x00000179, 0x0000018A, 0x00000174, 0x0000018C,
-    0x0000018A, 0x000001B5, 0x0000018A, 0x00000167, 0x000001B9, 0x0000018A, 0x00000165, 0x000001BA,
-    0x00000167, 0x00000165, 0x00000198, 0x000001A7, 0x00000166, 0x0000019A, 0x000001A7, 0x00000165,
-    0x000001B8, 0x00000166, 0x00000165, 0x00000199, 0x00000165, 0x00000191, 0x00000196, 0x00000191,
-    0x00000192, 0x00000194, 0x00000192, 0x00000193, 0x00000195, 0x00000193, 0x0000019E, 0x0000015C,
+#if defined(VERSION_US_REV1)
+OverlayTrialWidgetGroup g_arenaCompatibilityTable[64] = {
+    { 422, 344, 368 }, { 422, 343, 360 }, { 344, 343, 366 }, { 343, 345, 346 }, { 343, 412, 373 }, { 345, 412, 411 }, { 412, 423, 413 }, { 412, 349, 380 },
+    { 412, 347, 415 }, { 347, 349, 367 }, { 347, 354, 384 }, { 354, 350, 370 }, { 354, 351, 385 }, { 351, 419, 417 }, { 351, 352, 383 }, { 352, 419, 416 },
+    { 419, 394, 421 }, { 419, 424, 420 }, { 353, 359, 438 }, { 353, 394, 395 }, { 353, 419, 418 }, { 355, 359, 407 }, { 355, 353, 389 }, { 355, 350, 391 },
+    { 356, 359, 439 }, { 356, 355, 388 }, { 356, 349, 387 }, { 349, 355, 386 }, { 349, 350, 381 }, { 349, 354, 371 }, { 350, 353, 390 }, { 350, 419, 382 },
+    { 350, 351, 369 }, { 424, 365, 425 }, { 424, 361, 378 }, { 361, 365, 374 }, { 361, 362, 375 }, { 365, 364, 426 }, { 365, 362, 427 }, { 364, 363, 392 },
+    { 362, 364, 393 }, { 362, 363, 376 }, { 363, 379, 429 }, { 363, 431, 428 }, { 379, 431, 430 }, { 431, 397, 432 }, { 431, 434, 433 }, { 397, 396, 400 },
+    { 397, 377, 398 }, { 434, 397, 435 }, { 434, 377, 436 }, { 377, 396, 399 }, { 377, 394, 372 }, { 396, 394, 437 }, { 394, 359, 441 }, { 394, 357, 442 },
+    { 359, 357, 408 }, { 423, 358, 410 }, { 423, 357, 440 }, { 358, 357, 409 }, { 357, 401, 406 }, { 401, 402, 404 }, { 402, 403, 405 }, { 403, 414, 348 }
 };
+#endif
 #endif
 
 /* 800E4D84.CPP */
@@ -44,13 +33,12 @@ extern char g_CTrialCatalogue_SelectNeighborOnePackedAddress242[];
 extern char g_CTrialCatalogue_SelectNeighborZeroPackedAddress242[];
 extern char g_CTrialCatalogue_ExitTrialCataloguePackedAddress242[];
 extern char g_CTrialCatalogue_ConfirmTrialStagePackedAddress242[];
-unsigned int g_MenuEventHandlersPointerWords4[39] = {
-    0x00000E07, 0x0000000A, (unsigned int)g_Results_ShowResultsPlayerModelsPackedAddress242, 0x00000E08, 0x0000000A, (unsigned int)g_Results_AnimateResultsOptionsScreenPackedAddress242, 0x0000000A, 0x0000000A,
-    (unsigned int)g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress242, 0x00000E0A, 0x0000000A, (unsigned int)g_Results_RenderResultsOptionsPreviewPackedAddress242, 0x00000E06, 0x0000000A, (unsigned int)g_Results_CreateResultsOptionsScreenPackedAddress242, 0x00000E03,
-    0x0000000A, (unsigned int)g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress242, 0x00000002, 0x0000000A, (unsigned int)g_CTrialCatalogue_ExitTrialCataloguePackedAddress242, 0x00000001, 0x0000000A, (unsigned int)g_CTrialCatalogue_ConfirmTrialStagePackedAddress242,
-    0x00000005, 0x0000000A, (unsigned int)g_CTrialCatalogue_SelectNeighborTwoPackedAddress242, 0x00000006, 0x0000000A, (unsigned int)g_CTrialCatalogue_SelectNeighborThreePackedAddress242, 0x00000008, 0x0000000A,
-    (unsigned int)g_CTrialCatalogue_SelectNeighborZeroPackedAddress242, 0x00000007, 0x0000000A, (unsigned int)g_CTrialCatalogue_SelectNeighborOnePackedAddress242, 0x00000000, 0x00000000, 0x00000000,
+#if defined(VERSION_US_REV1)
+ResidentEventHandlerEntry g_MenuEventHandlersPointerWords4[13] = {
+    { 3591, 10, (ResidentEventHandler)(void *)g_Results_ShowResultsPlayerModelsPackedAddress242 }, { 3592, 10, (ResidentEventHandler)(void *)g_Results_AnimateResultsOptionsScreenPackedAddress242 }, { 10, 10, (ResidentEventHandler)(void *)g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress242 }, { 3594, 10, (ResidentEventHandler)(void *)g_Results_RenderResultsOptionsPreviewPackedAddress242 }, { 3590, 10, (ResidentEventHandler)(void *)g_Results_CreateResultsOptionsScreenPackedAddress242 }, { 3587, 10, (ResidentEventHandler)(void *)g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress242 }, { 2, 10, (ResidentEventHandler)(void *)g_CTrialCatalogue_ExitTrialCataloguePackedAddress242 }, { 1, 10, (ResidentEventHandler)(void *)g_CTrialCatalogue_ConfirmTrialStagePackedAddress242 },
+    { 5, 10, (ResidentEventHandler)(void *)g_CTrialCatalogue_SelectNeighborTwoPackedAddress242 }, { 6, 10, (ResidentEventHandler)(void *)g_CTrialCatalogue_SelectNeighborThreePackedAddress242 }, { 8, 10, (ResidentEventHandler)(void *)g_CTrialCatalogue_SelectNeighborZeroPackedAddress242 }, { 7, 10, (ResidentEventHandler)(void *)g_CTrialCatalogue_SelectNeighborOnePackedAddress242 }, { 0, 0, (ResidentEventHandler)0 }
 };
+#endif
 #endif
 
 /* 800E4E20.CPP */
@@ -67,13 +55,12 @@ extern char g_CTrialCatalogue_SelectNeighborOnePackedAddress242[];
 extern char g_CTrialCatalogue_SelectNeighborZeroPackedAddress242[];
 extern char g_CTrialCatalogue_ExitTrialCataloguePackedAddress242[];
 extern char g_CTrialCatalogue_ConfirmTrialStagePackedAddress242[];
-unsigned int g_MenuEventHandlersPointerWords5[39] = {
-    0x00000E07, 0x0000000F, (unsigned int)g_Results_ShowResultsPlayerModelsPackedAddress242, 0x00000E08, 0x0000000F, (unsigned int)g_Results_AnimateResultsOptionsScreenPackedAddress242, 0x0000000A, 0x0000000F,
-    (unsigned int)g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress242, 0x00000E0A, 0x0000000F, (unsigned int)g_Results_RenderResultsOptionsPreviewPackedAddress242, 0x00000E06, 0x0000000F, (unsigned int)g_Results_CreateResultsOptionsScreenPackedAddress242, 0x00000E03,
-    0x0000000F, (unsigned int)g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress242, 0x00000002, 0x0000000F, (unsigned int)g_CTrialCatalogue_ExitTrialCataloguePackedAddress242, 0x00000001, 0x0000000F, (unsigned int)g_CTrialCatalogue_ConfirmTrialStagePackedAddress242,
-    0x00000005, 0x0000000F, (unsigned int)g_CTrialCatalogue_SelectNeighborTwoPackedAddress242, 0x00000006, 0x0000000F, (unsigned int)g_CTrialCatalogue_SelectNeighborThreePackedAddress242, 0x00000008, 0x0000000F,
-    (unsigned int)g_CTrialCatalogue_SelectNeighborZeroPackedAddress242, 0x00000007, 0x0000000F, (unsigned int)g_CTrialCatalogue_SelectNeighborOnePackedAddress242, 0x00000000, 0x00000000, 0x00000000,
+#if defined(VERSION_US_REV1)
+ResidentEventHandlerEntry g_MenuEventHandlersPointerWords5[13] = {
+    { 3591, 15, (ResidentEventHandler)(void *)g_Results_ShowResultsPlayerModelsPackedAddress242 }, { 3592, 15, (ResidentEventHandler)(void *)g_Results_AnimateResultsOptionsScreenPackedAddress242 }, { 10, 15, (ResidentEventHandler)(void *)g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress242 }, { 3594, 15, (ResidentEventHandler)(void *)g_Results_RenderResultsOptionsPreviewPackedAddress242 }, { 3590, 15, (ResidentEventHandler)(void *)g_Results_CreateResultsOptionsScreenPackedAddress242 }, { 3587, 15, (ResidentEventHandler)(void *)g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress242 }, { 2, 15, (ResidentEventHandler)(void *)g_CTrialCatalogue_ExitTrialCataloguePackedAddress242 }, { 1, 15, (ResidentEventHandler)(void *)g_CTrialCatalogue_ConfirmTrialStagePackedAddress242 },
+    { 5, 15, (ResidentEventHandler)(void *)g_CTrialCatalogue_SelectNeighborTwoPackedAddress242 }, { 6, 15, (ResidentEventHandler)(void *)g_CTrialCatalogue_SelectNeighborThreePackedAddress242 }, { 8, 15, (ResidentEventHandler)(void *)g_CTrialCatalogue_SelectNeighborZeroPackedAddress242 }, { 7, 15, (ResidentEventHandler)(void *)g_CTrialCatalogue_SelectNeighborOnePackedAddress242 }, { 0, 0, (ResidentEventHandler)0 }
 };
+#endif
 #endif
 
 /* 800E4EBC.CPP */

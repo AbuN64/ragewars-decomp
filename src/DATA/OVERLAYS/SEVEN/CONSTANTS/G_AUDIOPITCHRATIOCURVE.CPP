@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 /* 800D0B2C.CPP */
@@ -27,15 +29,53 @@ float g_audioPitchRatioCurve[121] = {
 
 /* 800D0D10.CPP */
 /* ROM-grounded data: rodata/writable/800D0D10 */
-unsigned int g_GAudiopitchratiocurveWords5[1] = {
-    0x4BC80000,
-};
+#if defined(VERSION_DE)
+f32 g_GAudiopitchratiocurveWords5 = 26214400.0f;
+#endif
+#if defined(VERSION_EU)
+f32 g_GAudiopitchratiocurveWords5 = 26214400.0f;
+#endif
+#if defined(VERSION_EU_X)
+f32 g_GAudiopitchratiocurveWords5 = 26214400.0f;
+#endif
+#if defined(VERSION_US)
+f32 g_GAudiopitchratiocurveWords5 = 26214400.0f;
+#endif
+#if defined(VERSION_US_REV1)
+f32 g_GAudiopitchratiocurveWords5 = 26214400.0f;
+#endif
 
 /* 800D0D14.CPP */
-unsigned int g_GAudiopitchratiocurveWords1[10] = {
-    0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
-    0x00000001, 0x00000001,
+#if defined(VERSION_DE)
+s32 g_GAudiopitchratiocurveWords1[10] = {
+    1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1
 };
+#endif
+#if defined(VERSION_EU)
+s32 g_GAudiopitchratiocurveWords1[10] = {
+    1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1
+};
+#endif
+#if defined(VERSION_EU_X)
+s32 g_GAudiopitchratiocurveWords1[10] = {
+    1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1
+};
+#endif
+#if defined(VERSION_US)
+s32 g_GAudiopitchratiocurveWords1[10] = {
+    1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1
+};
+#endif
+#if defined(VERSION_US_REV1)
+s32 g_GAudiopitchratiocurveWords1[10] = {
+    1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1
+};
+#endif
 
 /* 800D0D14_2.CPP */
 /* ROM-grounded data: rodata/writable/800D0D3C */
@@ -109,9 +149,9 @@ unsigned int g_GAudiopitchratiocurveWords4[4] = {
 };
 #endif
 #ifdef VERSION_EU
-unsigned int g_GAudiopitchratiocurveWords4[4] = {
-    0x00000000, 0x00000000, 0x44522E20, 0x444F4E20,
-};
+#if defined(VERSION_EU)
+char g_GAudiopitchratiocurveWords4[16] __attribute__((aligned(4))) = "\000\000\000\000\000\000\000\000DR. DON ";
+#endif
 #endif
 #ifdef VERSION_EU_X
 unsigned int g_GAudiopitchratiocurveWords4[4] = {
@@ -131,6 +171,18 @@ unsigned int g_GAudiopitchratiocurveWords4[4] = {
 
 /* 800D0DA0.CPP */
 /* ROM-grounded data: src/g_GAudiopitchratiocurveWords2_GAudiopitchratiocurve.c */
-const unsigned int g_GAudiopitchratiocurveWords2[1] = {
-    0x42B40000,
-};
+#if defined(VERSION_DE)
+const f32 g_GAudiopitchratiocurveWords2 = 90.0f;
+#endif
+#if defined(VERSION_EU)
+const f32 g_GAudiopitchratiocurveWords2 = 90.0f;
+#endif
+#if defined(VERSION_EU_X)
+const f32 g_GAudiopitchratiocurveWords2 = 90.0f;
+#endif
+#if defined(VERSION_US)
+const f32 g_GAudiopitchratiocurveWords2 = 90.0f;
+#endif
+#if defined(VERSION_US_REV1)
+const f32 g_GAudiopitchratiocurveWords2 = 90.0f;
+#endif

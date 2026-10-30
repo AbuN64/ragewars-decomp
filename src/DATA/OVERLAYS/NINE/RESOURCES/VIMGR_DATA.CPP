@@ -1,30 +1,40 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
 
 /* 800E4610.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_menu_event_match_E5210_us_rev1.c */
-unsigned int g_VimgrWords2[2] = {
-    0x00000E06, 0x00000003,
+#if defined(VERSION_US_REV1)
+struct {
+    s32 event;
+    s32 actorKind;
+} g_VimgrWords2 __attribute__((aligned(4))) = {
+    3590,
+    3
 };
+typedef char g_VimgrWords2SizeCheck[(sizeof(g_VimgrWords2) == 8) ? 1 : -1];
+#endif
 #endif
 
 /* 800E4618.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E4604_unclaimed_E5210_unclaimed_E5218 */
 extern char g_Frontend_InitPlayModeMenuPackedAddress242[];
-unsigned int g_VimgrPointerWords1[1] = {
-    (unsigned int)g_Frontend_InitPlayModeMenuPackedAddress242,
-};
+#if defined(VERSION_US_REV1)
+char g_VimgrPointerWords1[4] __attribute__((aligned(4))) = "\000B< ";
+#endif
 
 extern char g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24[];
 extern char g_Frontend_DestroyPlayModeMenuPackedAddress242[];
 extern char g_Frontend_HandlePlayModeShortcutPackedAddress242[];
 extern char g_Frontend_ConsumePlayModeEventPackedAddress242[];
-unsigned int g_MenuEventHandlersPointerWords7[15] = {
-    0x00000E03, 0x00000003, (unsigned int)g_Frontend_DestroyPlayModeMenuPackedAddress242, 0x00000002, 0x00000003, (unsigned int)g_Frontend_ConsumePlayModeEventPackedAddress242, 0x00000001, 0x00000003,
-    (unsigned int)g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24, 0x0000000A, 0x00000003, (unsigned int)g_Frontend_HandlePlayModeShortcutPackedAddress242, 0x00000000, 0x00000000, 0x00000000,
+#if defined(VERSION_US_REV1)
+ResidentEventHandlerEntry g_MenuEventHandlersPointerWords7[5] = {
+    { 3587, 3, (ResidentEventHandler)(void *)g_Frontend_DestroyPlayModeMenuPackedAddress242 }, { 2, 3, (ResidentEventHandler)(void *)g_Frontend_ConsumePlayModeEventPackedAddress242 }, { 1, 3, (ResidentEventHandler)(void *)g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24 }, { 10, 3, (ResidentEventHandler)(void *)g_Frontend_HandlePlayModeShortcutPackedAddress242 }, { 0, 0, (ResidentEventHandler)0 }
 };
+#endif
 #endif
 
 /* 800E4658.CPP */

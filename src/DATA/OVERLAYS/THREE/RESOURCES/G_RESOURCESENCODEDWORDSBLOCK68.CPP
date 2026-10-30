@@ -1,9 +1,13 @@
+#include "TYPES.H"
+
 
 #if defined(VERSION_US_REV1)
 extern char addrLow_Link_DispatchTriggerAudio[];
 extern char addrLow_Link_PlayTriggerSoundCallback[];
 extern char addrLow_Link_PlayTriggerSound[];
-unsigned int g_ResourcesEncodedWordsBlock68[3] = {
-    (unsigned int)addrLow_Link_PlayTriggerSoundCallback, (unsigned int)addrLow_Link_PlayTriggerSound, (unsigned int)addrLow_Link_DispatchTriggerAudio,
+#if defined(VERSION_US_REV1)
+void * g_ResourcesEncodedWordsBlock68[3] = {
+    (void *)addrLow_Link_PlayTriggerSoundCallback, (void *)addrLow_Link_PlayTriggerSound, (void *)addrLow_Link_DispatchTriggerAudio
 };
+#endif
 #endif

@@ -1,13 +1,15 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
-unsigned short g_decodeDataConstantWords[] = {
-    0x0000, 0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, 0x0080, 0x0100, 0x0200, 0x0400,
-    0x0800, 0x1000, 0x2000, 0x4000, 0x8000,
 #if defined(VERSION_US_REV1)
-    0x0000,
-#endif
+u16 g_decodeDataConstantWords[18] = {
+    0, 1, 2, 4, 8, 16, 32, 64,
+    128, 256, 512, 1024, 2048, 4096, 8192, 16384,
+    32768, 0
 };
+#endif
 #endif
 
 #if defined(VERSION_US_REV1)

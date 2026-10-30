@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CD4C4_unclaimed_CE0F0_unclaimed_CE104_unclaimed_CE10C_unclaimed_CE124_unclaimed_CE130_unclaimed_CE144_unclaimed_CE148_unclaimed_CE1F8_unclaimed_CE210_unclaimed_CE21C_unclaimed_CE230_unclaimed_CE234_unclaimed_CE29C_unclaimed_CE2B0_unclaimed_CE2B4_unclaimed_CE2D0_unclaimed_CE2D4_unclaimed_CE2F0_unclaimed_CE2F4 */
@@ -37,7 +39,9 @@ struct {
 /* ROM-grounded data: src/rw_actor_state_entry_CE3BC_us_rev1.c */
 extern char addrLow_MovingAI_ChooseTriggerDelay[];
 extern char addrLow_MovingAI_UpdateTriggerDelay[];
-unsigned int g_ConstantsEncodedWordsBlock5[3] = {
-    0x00000000, (unsigned int)addrLow_MovingAI_ChooseTriggerDelay, (unsigned int)addrLow_MovingAI_UpdateTriggerDelay,
+#if defined(VERSION_US_REV1)
+void * g_ConstantsEncodedWordsBlock5[3] = {
+    0, (void *)addrLow_MovingAI_ChooseTriggerDelay, (void *)addrLow_MovingAI_UpdateTriggerDelay
 };
+#endif
 #endif

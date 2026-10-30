@@ -1,9 +1,15 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-unsigned int k_LinktablesEncodedWordsBlock15[1] = {
-    0x3274040A,
+#if defined(VERSION_US)
+struct {
+    u8 alignmentFill[4];
+} k_LinktablesEncodedWordsBlock15 __attribute__((aligned(4))) = {
+    { 0x32, 0x74, 0x04, 0x0A }
 };
+#endif
 #endif
 
 #if defined(VERSION_US)

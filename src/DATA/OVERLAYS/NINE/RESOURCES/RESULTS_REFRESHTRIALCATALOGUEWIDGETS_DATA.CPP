@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 /* 800E4658_2.CPP */
@@ -18,9 +20,9 @@ unsigned int g_ResultsRefreshtrialcataloguewidgetsWords2[5] = {
 };
 #endif
 #ifdef VERSION_US
-unsigned int g_ResultsRefreshtrialcataloguewidgetsWords2[5] = {
-    0x00000000, 0x52454E41, 0x44455F4C, 0x41554E43, 0x00000000,
-};
+#if defined(VERSION_US)
+char g_ResultsRefreshtrialcataloguewidgetsWords2[20] __attribute__((aligned(4))) = "\000\000\000\000RENADE_LAUNC\000\000\000\000";
+#endif
 #endif
 #ifdef VERSION_US_REV1
 unsigned int g_ResultsRefreshtrialcataloguewidgetsWords2[5] = {

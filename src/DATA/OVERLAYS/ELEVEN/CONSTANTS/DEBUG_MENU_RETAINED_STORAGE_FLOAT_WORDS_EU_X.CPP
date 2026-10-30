@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if defined(VERSION_EU_X)
@@ -5,7 +7,9 @@
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int g_OverlaysElevenConstantsRetainedWords2[3] = {
-    0x3B939A86, 0x3B66C2B4, 0x3B939A86,
+#if defined(VERSION_EU_X)
+f32 g_OverlaysElevenConstantsRetainedWords2[3] = {
+    0.00450450461f, 0.00352112669f, 0.00450450461f
 };
+#endif
 #endif

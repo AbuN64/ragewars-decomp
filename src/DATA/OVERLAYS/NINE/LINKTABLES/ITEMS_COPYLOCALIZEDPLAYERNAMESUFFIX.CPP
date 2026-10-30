@@ -1,3 +1,5 @@
+#include "DATA_OVERLAY_SN_RECORDS.H"
+
 #include "DATA/OVLTBL/ITEMS_COPYLOCALIZEDPLAYERNAMESUFFIX.H"
 #include "TYPES.H"
 
@@ -9,9 +11,20 @@ unsigned int k_ItemsCopylocalizedplayernamesuffixEncodedWordsBlock1[8] = {
 };
 #endif
 #ifdef VERSION_US
-unsigned int k_ItemsCopylocalizedplayernamesuffixEncodedWordsBlock1[8] = {
-    0x00AC7D00, 0x00348003, 0x2A0A5C80, 0x032C0402, 0x0000ACF6, 0x00003490, 0x03020A5C, 0x90030292,
+struct {
+    u8 precedingRecordFragment[5];
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record1;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record2;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record3;
+    u8 followingRecordFragment[6];
+} k_ItemsCopylocalizedplayernamesuffixEncodedWordsBlock1 __attribute__((aligned(4))) = {
+    { 0x00, 0xAC, 0x7D, 0x00, 0x00 },
+    { 52, SN_LE16(896), 42 },
+    { 10, 92, SN_LE16(896), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(63148) } } },
+    { 52, SN_LE16(912), 2 },
+    { 0x0A, 0x5C, 0x90, 0x03, 0x02, 0x92 }
 };
+typedef char k_ItemsCopylocalizedplayernamesuffixEncodedWordsBlock1SizeCheck[(sizeof(k_ItemsCopylocalizedplayernamesuffixEncodedWordsBlock1) == 32) ? 1 : -1];
 #endif
 #endif
 

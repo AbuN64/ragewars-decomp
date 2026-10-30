@@ -1,7 +1,9 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-const unsigned int k_overlayFiveLinkRecordFloatConstantWordsBlock3[1] = {
-    0xC3040000,
-};
+#if defined(VERSION_DE)
+const f32 k_overlayFiveLinkRecordFloatConstantWordsBlock3 = -132.0f;
+#endif
 #endif

@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 
 #if defined(VERSION_US_REV1)
 unsigned int g_osaisetnextbufferDataConstantWords[8] = {
@@ -5,7 +7,7 @@ unsigned int g_osaisetnextbufferDataConstantWords[8] = {
 };
 
 /* ROM-grounded data: src/ragewars_ai_boundary_flag_us_rev1.c */
-unsigned char g_osaisetnextbufferDataTextBytes[1] = {
-    0x00,
-};
+#if defined(VERSION_US_REV1)
+u8 g_osaisetnextbufferDataTextBytes = 0;
+#endif
 #endif

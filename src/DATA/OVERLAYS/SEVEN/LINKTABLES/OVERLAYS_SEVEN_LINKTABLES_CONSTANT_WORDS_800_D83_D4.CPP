@@ -1,6 +1,8 @@
+#include "TYPES.H"
+
 
 #if defined(VERSION_US_REV1)
-unsigned int g_overlaysSevenLinktablesConstantWordsBlock1[3] = {
-    0x002C0035, 0x003F004B, 0x00590069,
-};
+#if defined(VERSION_US_REV1)
+char g_overlaysSevenLinktablesConstantWordsBlock1[12] __attribute__((aligned(4))) = "\000,\0005\000\?\000K\000Y\000i";
+#endif
 #endif

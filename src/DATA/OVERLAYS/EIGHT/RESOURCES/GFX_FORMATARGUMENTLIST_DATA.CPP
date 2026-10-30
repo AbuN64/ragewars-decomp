@@ -1,13 +1,22 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
-unsigned char g_GfxFormatargumentlistBytes1[] = {
-    0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-    0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
-    0x00,
-#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-    0x00, 0x00, 0x00,
+#if defined(VERSION_DE)
+char g_GfxFormatargumentlistBytes1[36] __attribute__((aligned(1))) = "                0000000000000000\000\000\000\000";
 #endif
-};
+#if defined(VERSION_EU)
+char g_GfxFormatargumentlistBytes1[36] __attribute__((aligned(1))) = "                0000000000000000\000\000\000\000";
+#endif
+#if defined(VERSION_EU_X)
+char g_GfxFormatargumentlistBytes1[36] __attribute__((aligned(1))) = "                0000000000000000\000\000\000\000";
+#endif
+#if defined(VERSION_US)
+char g_GfxFormatargumentlistBytes1[36] __attribute__((aligned(1))) = "                0000000000000000\000\000\000\000";
+#endif
+#if defined(VERSION_US_REV1)
+char g_GfxFormatargumentlistBytes1[36] __attribute__((aligned(1))) = "                0000000000000000\000";
+#endif
 
 #if defined(VERSION_US)
 /* bytes live in the preceding array */

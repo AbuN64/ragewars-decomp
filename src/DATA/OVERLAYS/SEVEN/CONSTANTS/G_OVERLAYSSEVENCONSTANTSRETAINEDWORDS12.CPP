@@ -1,5 +1,19 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
-const unsigned int g_OverlaysSevenConstantsRetainedWords12[4] = {
-    0x40400000, 0x00000000, 0x00000000, 0x00000000,
-};
+#if defined(VERSION_DE)
+const char g_OverlaysSevenConstantsRetainedWords12[16] __attribute__((aligned(4))) = "@@\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
+#endif
+#if defined(VERSION_EU)
+const char g_OverlaysSevenConstantsRetainedWords12[16] __attribute__((aligned(4))) = "@@\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
+#endif
+#if defined(VERSION_EU_X)
+const char g_OverlaysSevenConstantsRetainedWords12[16] __attribute__((aligned(4))) = "@@\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
+#endif
+#if defined(VERSION_US)
+const char g_OverlaysSevenConstantsRetainedWords12[16] __attribute__((aligned(4))) = "@@\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
+#endif
+#if defined(VERSION_US_REV1)
+const char g_OverlaysSevenConstantsRetainedWords12[16] __attribute__((aligned(4))) = "@@\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
+#endif

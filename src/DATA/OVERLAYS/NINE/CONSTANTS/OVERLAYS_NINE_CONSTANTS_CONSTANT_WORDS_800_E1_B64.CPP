@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
@@ -6,7 +8,11 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: data/unresolved/800E1B64 */
-unsigned int g_overlaysNineConstantsConstantWordsBlock2[3] = {
-    0x00000010, 0x0000F800, 0x000007E0,
+#if defined(VERSION_US_REV1)
+struct {
+    u8 alignmentFill[12];
+} g_overlaysNineConstantsConstantWordsBlock2 __attribute__((aligned(4))) = {
+    { 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0xF8, 0x00, 0x00, 0x00, 0x07, 0xE0 }
 };
+#endif
 #endif

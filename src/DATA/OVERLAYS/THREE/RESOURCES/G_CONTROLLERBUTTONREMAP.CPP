@@ -1,12 +1,14 @@
+#include "TYPES.H"
+
 #include "FX/CONTROLLER_INPUT.H"
 
 /* 800CC574.CPP */
 
 /* 800CC744.CPP */
 #if defined(VERSION_EU)
-unsigned int k_GControllerbuttonremapEncodedWords[3] = {
-    0x5545592C, 0x204A522E, 0x2C20442E,
-};
+#if defined(VERSION_EU)
+char k_GControllerbuttonremapEncodedWords[12] __attribute__((aligned(4))) = "UEY, JR., D.";
+#endif
 ButtonRemap g_controllerButtonRemap[19] = {
     { 0x8000, 0x8000 },
     { 0x4000, 0x4000 },
@@ -28,7 +30,7 @@ ButtonRemap g_controllerButtonRemap[19] = {
     { 0x80000, 0x80000 },
     { 0, 0 },
 };
-unsigned int k_GControllerbuttonremapEncodedWordsBlock1[2] = {
-    0x454E2054, 0x4F555445,
-};
+#if defined(VERSION_EU)
+char k_GControllerbuttonremapEncodedWordsBlock1[8] __attribute__((aligned(4))) = "EN TOUTE";
+#endif
 #endif

@@ -1,13 +1,14 @@
+#include "TYPES.H"
+
 
 #if defined(VERSION_US_REV1)
 extern char g_frontend_DrawSetupResultPanelsEntry[];
-unsigned int k_ScenariosetupFillresultrowsEncodedWords[52] = {
-    0x0000006B, 0x0000006C, 0x0000006D, 0x0000006E, 0x00000066, 0x00000070, 0x00000071, 0x00000072,
-    0x00000073, 0x00000074, 0x00000075, 0x00000076, 0x00000077, 0x00000078, 0x00000079, 0x0000007A,
-    0x0000007B, 0x0000007C, 0x0000007D, 0x0000007E, 0x0000007F, 0x00000080, 0x00000081, 0x00000082,
-    0x00000083, 0x00000084, 0x00000085, 0x00000086, 0x00000087, 0x00000088, 0x00000089, 0x0000008A,
-    0x0000008B, 0x0000008C, 0x0000008D, 0x0000008E, 0x0000008F, 0x00000090, 0x0000006F, 0x00000092,
-    0x00000093, 0x00000094, 0x0000006A, 0x00000068, 0x00000069, 0x00000067, 0x00000096, 0x00000097,
-    0x00000095, 0x00000091, (unsigned int)g_frontend_DrawSetupResultPanelsEntry, 0x00000002,
+#if defined(VERSION_US_REV1)
+struct {
+    s32 g_resultAchievementBadgeImages[52];
+} k_ScenariosetupFillresultrowsEncodedWords __attribute__((aligned(4))) = {
+    { 107, 108, 109, 110, 102, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 111, 146, 147, 148, 106, 104, 105, 103, 150, 151, 149, 145, 4366800, 2 }
 };
+typedef char k_ScenariosetupFillresultrowsEncodedWordsSizeCheck[(sizeof(k_ScenariosetupFillresultrowsEncodedWords) == 208) ? 1 : -1];
+#endif
 #endif

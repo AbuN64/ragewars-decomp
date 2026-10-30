@@ -36,9 +36,11 @@ float g_ModelSwaySamplesWords1[120] = {
     0.2965f, 0.3318f, 0.3902f, 0.4721f, 0.5217f, 0.5553f,
 };
 
-unsigned int g_StatinstAdvanceresourcekeyWords1[3] = {
-    0x3FB22AF6, 0x3FB20A68, 0x3FB1E9D9,
+#if defined(VERSION_US_REV1)
+f32 g_StatinstAdvanceresourcekeyWords1[3] = {
+    1.39193606f, 1.39094257f, 1.38994896f
 };
+#endif
 #endif
 
 /* 8024E914_21.CPP */

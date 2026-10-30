@@ -3,25 +3,25 @@
 /* 800E28D0.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_video_buffer_width_E34D0_us_rev1.c */
-unsigned int g_MenuMeasuremenutextWords3[1] = {
-    0x00000140,
-};
+#if defined(VERSION_US_REV1)
+s32 g_MenuMeasuremenutextWords3 = 320;
+#endif
 #endif
 
 /* 800E28D4.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_video_buffer_height_E34D4_us_rev1.c */
-unsigned int g_MenuMeasuremenutextWords2[1] = {
-    0x000000F0,
-};
+#if defined(VERSION_US_REV1)
+s32 g_MenuMeasuremenutextWords2 = 240;
+#endif
 #endif
 
 /* 800E28D8.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_video_selected_mode_E34D8_us_rev1.c */
-unsigned int g_MenuMeasuremenutextWords4[1] = {
-    0xFFFFFFFF,
-};
+#if defined(VERSION_US_REV1)
+s32 g_MenuMeasuremenutextWords4 = -1;
+#endif
 #endif
 
 /* 800E2AAC_4.CPP */

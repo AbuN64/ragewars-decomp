@@ -1,9 +1,14 @@
+#include "TYPES.H"
+
 
 #if defined(VERSION_US_REV1)
-unsigned int g_VideoConfigurationsWords1[15] = {
-    0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000000, 0x00000000, 0x00000000,
-    0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000000,
+#if defined(VERSION_US_REV1)
+struct {
+    s32 renderConfig[15];
+} g_VideoConfigurationsWords1 __attribute__((aligned(4))) = {
+    { 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 }
 };
+#endif
 /* Video mode id per TV region (rows) and viewport flags (columns). */
 unsigned int VideoModeIds[3][8] = {
     { 0x00, 0x01, 0x02, 0x03, 0x08, 0x09, 0x0A, 0x0B },

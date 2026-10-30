@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 /* ROM-grounded data: src/k_barrelSpawneffectsfrommaskDataFloatConstantWords_BarrelSpawneffectsfrommaskData.c */
@@ -11,19 +13,31 @@ char s_BarrelSpawneffectsfrommaskCBHoleTTText[12] =
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_BarrelSpawneffectsfrommaskEncodedWordsBlock2[3] = {
-    0x00000000, 0x41F00000, 0x00000000,
+#if defined(VERSION_EU_X)
+struct {
+    u8 alignmentFill[12];
+} k_BarrelSpawneffectsfrommaskEncodedWordsBlock2 __attribute__((aligned(4))) = {
+    { 0x00, 0x00, 0x00, 0x00, 0x41, 0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
 };
+#endif
 #endif
 
 #if defined(VERSION_EU)
-unsigned int k_BarrelSpawneffectsfrommaskEncodedWordsBlock1[3] = {
-    0x3C01FFFF, 0x342100FF, 0x01816024,
+#if defined(VERSION_EU)
+struct {
+    u8 alignmentFill[12];
+} k_BarrelSpawneffectsfrommaskEncodedWordsBlock1 __attribute__((aligned(4))) = {
+    { 0x3C, 0x01, 0xFF, 0xFF, 0x34, 0x21, 0x00, 0xFF, 0x01, 0x81, 0x60, 0x24 }
 };
+#endif
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_BarrelSpawneffectsfrommaskEncodedWords[3] = {
-    0x3F000000, 0x4F000000, 0x3B4CCCCD,
+#if defined(VERSION_DE)
+struct {
+    u8 alignmentFill[12];
+} k_BarrelSpawneffectsfrommaskEncodedWords __attribute__((aligned(4))) = {
+    { 0x3F, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00, 0x3B, 0x4C, 0xCC, 0xCD }
 };
+#endif
 #endif

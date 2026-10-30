@@ -1,11 +1,15 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 extern char g_viDataZeroWords[];
-unsigned int D_src_c0f3ff2a[4] = {
-    (unsigned int)g_viDataZeroWords, (unsigned int)g_viDataZeroWords + 0x30, 0x00000000, 0x00000000,
+#if defined(VERSION_DE)
+void * D_src_c0f3ff2a[4] = {
+    (void *)g_viDataZeroWords, (void *)g_viDataZeroWords + 0x30, 0, 0
 };
+#endif
 #endif
 #if defined(VERSION_EU)
 extern char g_viDataZeroWords[];
@@ -29,7 +33,14 @@ unsigned int D_src_c0f3ff2a[4] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int g_osvigetcurrentframebufferDataAddressWords[2] = {
-    0x800D83E0, 0x800D8410,
+#if defined(VERSION_US_REV1)
+struct {
+    void * __osViCurr;
+    void * __osViNext;
+} g_osvigetcurrentframebufferDataAddressWords __attribute__((aligned(4))) = {
+    (void *)&g_viDataZeroWords,
+    (void *)((char *)&g_viDataZeroWords + 48)
 };
+typedef char g_osvigetcurrentframebufferDataAddressWordsSizeCheck[(sizeof(g_osvigetcurrentframebufferDataAddressWords) == 8) ? 1 : -1];
+#endif
 #endif

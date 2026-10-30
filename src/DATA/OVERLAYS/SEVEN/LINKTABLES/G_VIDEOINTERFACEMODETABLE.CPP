@@ -1,10 +1,12 @@
+#include "TYPES.H"
+
 #include "COMMON/OSVISCALE.H"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800D8450_unclaimed_D906C */
-unsigned int g_gVideointerfacemodetableFloatConstantWords[1] = {
-    0x3BB504F3,
-};
+#if defined(VERSION_US_REV1)
+f32 g_gVideointerfacemodetableFloatConstantWords = 0.00552427163f;
+#endif
 
 OSViMode g_videoInterfaceModeTable[45] = {
     { 0x2, { 0x311E, 0x140, 0x3E52239, 0x20D, 0xC15, 0xC150C15, 0x6C02EC, 0x200, 0x0 }, {

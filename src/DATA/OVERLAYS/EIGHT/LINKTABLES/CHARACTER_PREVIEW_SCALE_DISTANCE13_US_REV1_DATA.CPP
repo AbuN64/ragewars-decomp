@@ -1,9 +1,15 @@
+#include "TYPES.H"
+
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4BEC_unclaimed_E4C08 */
-unsigned int g_CharacterPreviewScaleDistance13UsRev1EncodedWords[1] = {
-    0x0000001F,
+#if defined(VERSION_US_REV1)
+struct {
+    s32 distance;
+} g_CharacterPreviewScaleDistance13UsRev1EncodedWords __attribute__((aligned(4))) = {
+    31
 };
+#endif
 
 float g_characterPreviewScaleDistance13UsRev1[8] = {
     0.14f, 0.14f, 0.14f, 0.14f,

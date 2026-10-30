@@ -1,3 +1,6 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "TYPES.H"
+
 #include "DATA/GFXDATA/EVENT_HANDLER_CODE_TARGETS.H"
 #include "include_asm.h"
 #include "COMMON/FORMAT.H"
@@ -5,19 +8,23 @@
 
 /* 800E2AD0.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int g_EventHandlersPointerWords1[18] = {
-    0x00000005, 0x00007530, (unsigned int)g_eventHandlerCodeTargetId5, 0x00000006, 0x00007530, (unsigned int)g_eventHandlerCodeTargetId6, 0x00000007, 0x00007530,
-    (unsigned int)g_eventHandlerCodeTargetId7, 0x00000008, 0x00007530, (unsigned int)g_eventHandlerCodeTargetId8, 0x00000E03, 0x00007530, (unsigned int)g_eventHandlerCodeTargetIdE03, 0x00000000,
-    0x00000000, 0x00000000,
+#if defined(VERSION_US_REV1)
+ResidentEventHandlerEntry g_EventHandlersPointerWords1[6] = {
+    { 5, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetId5 }, { 6, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetId6 }, { 7, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetId7 }, { 8, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetId8 }, { 3587, 30000, (ResidentEventHandler)(void *)g_eventHandlerCodeTargetIdE03 }, { 0, 0, (ResidentEventHandler)0 }
 };
+#endif
 #endif
 
 /* 800E2B18.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E2AD0_unclaimed_E3718 */
-unsigned int g_GPixelformatdescriptorsWords1[2] = {
-    0xC2A00000, 0x00000000,
+#if defined(VERSION_US_REV1)
+struct {
+    u8 alignmentFill[8];
+} g_GPixelformatdescriptorsWords1 __attribute__((aligned(4))) = {
+    { 0xC2, 0xA0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
 };
+#endif
 #endif
 
 /* 800E2B18_2.CPP */

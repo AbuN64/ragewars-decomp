@@ -1,11 +1,32 @@
+#include "TYPES.H"
+
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510 */
-unsigned int g_OverlaysEightResourcesRetainedWords3[1] = {
-    0x00000001,
+#if defined(VERSION_US_REV1)
+struct {
+    s32 reservedWord;
+} g_OverlaysEightResourcesRetainedWords3 __attribute__((aligned(4))) = {
+    1
 };
+typedef char g_OverlaysEightResourcesRetainedWords3SizeCheck[(sizeof(g_OverlaysEightResourcesRetainedWords3) == 4) ? 1 : -1];
+#endif
 
-unsigned int g_VideoArgumentsR0M1Words1[6] = {
-    0x000001E0, 0x00000168, 0x0000001D, 0x00000012, 0xFFFFFFD7, 0xFFFFFFE0,
+#if defined(VERSION_US_REV1)
+struct {
+    s32 width;
+    s32 viewportHeight;
+    s32 offsetX;
+    s32 offsetY;
+    s32 borderX;
+    s32 borderY;
+} g_VideoArgumentsR0M1Words1 __attribute__((aligned(4))) = {
+    480,
+    360,
+    29,
+    18,
+    -41,
+    -32
 };
+#endif
 #endif

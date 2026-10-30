@@ -1,63 +1,103 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int g_FrontendAdvancevideomodeWords1[2] = {
-    0x00000003, 0x00000003,
+#if defined(VERSION_DE)
+int g_FrontendAdvancevideomodeWords1[2] = {
+    3, 3
 };
+#endif
+#if defined(VERSION_EU)
+int g_FrontendAdvancevideomodeWords1[2] = {
+    3, 3
+};
+#endif
+#if defined(VERSION_EU_X)
+int g_FrontendAdvancevideomodeWords1[2] = {
+    3, 3
+};
+#endif
+#if defined(VERSION_US)
+int g_FrontendAdvancevideomodeWords1[2] = {
+    3, 3
+};
+#endif
+#if defined(VERSION_US_REV1)
+int g_FrontendAdvancevideomodeWords1[2] = {
+    3, 3
+};
+#endif
 
 #if defined(VERSION_US)
-unsigned int g_frontendAdvanceVideoModeWordsUs[110] = {
-    0x0000011C, 0x000000DE, 0x00000061, 0x0000003E, 0xFFFFFF81, 0xFFFFFFA7, 0x00000001, 0x000001E0,
-    0x00000168, 0x0000001D, 0x00000012, 0xFFFFFFD7, 0xFFFFFFE0, 0x00000000, 0x000001E0, 0x000000F0,
-    0x0000001B, 0x0000000E, 0xFFFFFFD3, 0xFFFFFFE2, 0x00000000, 0x0000017C, 0x000000C8, 0x0000003C,
-    0x0000001E, 0xFFFFFFAB, 0xFFFFFFCE, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x0000011C, 0x000000DE, 0x00000061, 0x0000003E, 0xFFFFFF81,
-    0xFFFFFFA7, 0x00000001, 0x000001E0, 0x00000168, 0x00000019, 0x00000037, 0xFFFFFFD1, 0xFFFFFFC4,
-    0x00000000, 0x000001E0, 0x000000F0, 0x0000001A, 0x0000001E, 0xFFFFFFD3, 0xFFFFFFCE, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000001,
-    0x00000001, 0x00000001, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000000, 0x00000000, 0x00000001, 0x00000002,
-    0x00000003, 0x00000008, 0x00000009, 0x0000000A, 0x0000000B, 0x0000000E, 0x0000000F, 0x00000010,
-    0x00000011, 0x00000016, 0x00000017, 0x00000018, 0x00000019, 0x0000001C, 0x0000001D, 0x0000001E,
-    0x0000001F, 0x00000024, 0x00000025, 0x00000026, 0x00000027, 0x000F000A,
+#if defined(VERSION_US)
+struct {
+    s32 regionModes[35];
+    s32 defaultModes[35];
+    s32 renderConfigs[15];
+    u32 modeIds[24];
+    s32 modeCount;
+} g_frontendAdvanceVideoModeWordsUs __attribute__((aligned(4))) = {
+    { 284, 222, 97, 62, -127, -89, 1, 480, 360, 29, 18, -41, -32, 0, 480, 240, 27, 14, -45, -30, 0, 380, 200, 60, 30, -85, -50, 1, 0, 0, 0, 0, 0, 0, 0 },
+    { 284, 222, 97, 62, -127, -89, 1, 480, 360, 25, 55, -47, -60, 0, 480, 240, 26, 30, -45, -50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 },
+    { 0x0, 0x1, 0x2, 0x3, 0x8, 0x9, 0xa, 0xb, 0xe, 0xf, 0x10, 0x11, 0x16, 0x17, 0x18, 0x19, 0x1c, 0x1d, 0x1e, 0x1f, 0x24, 0x25, 0x26, 0x27 },
+    983050
 };
+typedef char g_frontendAdvanceVideoModeWordsUsSizeCheck[(sizeof(g_frontendAdvanceVideoModeWordsUs) == 440) ? 1 : -1];
+#endif
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-unsigned int g_frontendAdvanceVideoModeWordsEu[110] = {
-    0x0000011C, 0x000000DE, 0x00000061, 0x0000003E, 0xFFFFFF81, 0xFFFFFFA7, 0x00000001, 0x000001E0,
-    0x00000168, 0x0000001D, 0x00000012, 0xFFFFFFD7, 0xFFFFFFE0, 0x00000000, 0x000001E0, 0x000000F0,
-    0x0000001B, 0x0000000E, 0xFFFFFFD3, 0xFFFFFFE2, 0x00000000, 0x0000017C, 0x000000C8, 0x0000003C,
-    0x0000001E, 0xFFFFFFAB, 0xFFFFFFCE, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x0000011C, 0x000000DE, 0x00000061, 0x0000003E, 0xFFFFFF81,
-    0xFFFFFFA7, 0x00000001, 0x000001E0, 0x00000168, 0x00000019, 0x00000037, 0xFFFFFFD1, 0xFFFFFFC4,
-    0x00000000, 0x000001E0, 0x000000F0, 0x0000001A, 0x0000001E, 0xFFFFFFD3, 0xFFFFFFCE, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000001,
-    0x00000001, 0x00000001, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000000, 0x00000000, 0x00000001, 0x00000002,
-    0x00000003, 0x00000008, 0x00000009, 0x0000000A, 0x0000000B, 0x0000000E, 0x0000000F, 0x00000010,
-    0x00000011, 0x00000016, 0x00000017, 0x00000018, 0x00000019, 0x0000001C, 0x0000001D, 0x0000001E,
-    0x0000001F, 0x00000024, 0x00000025, 0x00000026, 0x00000027, 0x00000000,
+#if defined(VERSION_EU)
+struct {
+    s32 regionModes[35];
+    s32 defaultModes[35];
+    s32 renderConfigs[15];
+    u32 modeIds[24];
+    s32 modeCount;
+} g_frontendAdvanceVideoModeWordsEu __attribute__((aligned(4))) = {
+    { 284, 222, 97, 62, -127, -89, 1, 480, 360, 29, 18, -41, -32, 0, 480, 240, 27, 14, -45, -30, 0, 380, 200, 60, 30, -85, -50, 1, 0, 0, 0, 0, 0, 0, 0 },
+    { 284, 222, 97, 62, -127, -89, 1, 480, 360, 25, 55, -47, -60, 0, 480, 240, 26, 30, -45, -50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 },
+    { 0x0, 0x1, 0x2, 0x3, 0x8, 0x9, 0xa, 0xb, 0xe, 0xf, 0x10, 0x11, 0x16, 0x17, 0x18, 0x19, 0x1c, 0x1d, 0x1e, 0x1f, 0x24, 0x25, 0x26, 0x27 },
+    0
 };
+typedef char g_frontendAdvanceVideoModeWordsEuSizeCheck[(sizeof(g_frontendAdvanceVideoModeWordsEu) == 440) ? 1 : -1];
+#endif
+#if defined(VERSION_EU_X)
+struct {
+    s32 regionModes[35];
+    s32 defaultModes[35];
+    s32 renderConfigs[15];
+    u32 modeIds[24];
+    s32 modeCount;
+} g_frontendAdvanceVideoModeWordsEu __attribute__((aligned(4))) = {
+    { 284, 222, 97, 62, -127, -89, 1, 480, 360, 29, 18, -41, -32, 0, 480, 240, 27, 14, -45, -30, 0, 380, 200, 60, 30, -85, -50, 1, 0, 0, 0, 0, 0, 0, 0 },
+    { 284, 222, 97, 62, -127, -89, 1, 480, 360, 25, 55, -47, -60, 0, 480, 240, 26, 30, -45, -50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 },
+    { 0x0, 0x1, 0x2, 0x3, 0x8, 0x9, 0xa, 0xb, 0xe, 0xf, 0x10, 0x11, 0x16, 0x17, 0x18, 0x19, 0x1c, 0x1d, 0x1e, 0x1f, 0x24, 0x25, 0x26, 0x27 },
+    0
+};
+typedef char g_frontendAdvanceVideoModeWordsEuSizeCheck[(sizeof(g_frontendAdvanceVideoModeWordsEu) == 440) ? 1 : -1];
+#endif
 #endif
 
 #if defined(VERSION_DE)
-unsigned int g_frontendAdvanceVideoModeWordsDe[110] = {
-    0x0000011C, 0x000000DE, 0x00000061, 0x0000003E, 0xFFFFFF81, 0xFFFFFFA7, 0x00000001, 0x000001E0,
-    0x00000168, 0x0000001D, 0x00000012, 0xFFFFFFD7, 0xFFFFFFE0, 0x00000000, 0x000001E0, 0x000000F0,
-    0x0000001B, 0x0000000E, 0xFFFFFFD3, 0xFFFFFFE2, 0x00000000, 0x0000017C, 0x000000C8, 0x0000003C,
-    0x0000001E, 0xFFFFFFAB, 0xFFFFFFCE, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x0000011C, 0x000000DE, 0x00000061, 0x0000003E, 0xFFFFFF81,
-    0xFFFFFFA7, 0x00000001, 0x000001E0, 0x00000168, 0x00000019, 0x00000037, 0xFFFFFFD1, 0xFFFFFFC4,
-    0x00000000, 0x000001E0, 0x000000F0, 0x0000001A, 0x0000001E, 0xFFFFFFD3, 0xFFFFFFCE, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000001,
-    0x00000001, 0x00000001, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000000, 0x00000000, 0x00000001, 0x00000002,
-    0x00000003, 0x00000008, 0x00000009, 0x0000000A, 0x0000000B, 0x0000000E, 0x0000000F, 0x00000010,
-    0x00000011, 0x00000016, 0x00000017, 0x00000018, 0x00000019, 0x0000001C, 0x0000001D, 0x0000001E,
-    0x0000001F, 0x00000024, 0x00000025, 0x00000026, 0x00000027, 0xFFFFFFFF,
+#if defined(VERSION_DE)
+struct {
+    s32 regionModes[35];
+    s32 defaultModes[35];
+    s32 renderConfigs[15];
+    u32 modeIds[24];
+    s32 modeCount;
+} g_frontendAdvanceVideoModeWordsDe __attribute__((aligned(4))) = {
+    { 284, 222, 97, 62, -127, -89, 1, 480, 360, 29, 18, -41, -32, 0, 480, 240, 27, 14, -45, -30, 0, 380, 200, 60, 30, -85, -50, 1, 0, 0, 0, 0, 0, 0, 0 },
+    { 284, 222, 97, 62, -127, -89, 1, 480, 360, 25, 55, -47, -60, 0, 480, 240, 26, 30, -45, -50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 },
+    { 0x0, 0x1, 0x2, 0x3, 0x8, 0x9, 0xa, 0xb, 0xe, 0xf, 0x10, 0x11, 0x16, 0x17, 0x18, 0x19, 0x1c, 0x1d, 0x1e, 0x1f, 0x24, 0x25, 0x26, 0x27 },
+    -1
 };
+typedef char g_frontendAdvanceVideoModeWordsDeSizeCheck[(sizeof(g_frontendAdvanceVideoModeWordsDe) == 440) ? 1 : -1];
+#endif
 #endif

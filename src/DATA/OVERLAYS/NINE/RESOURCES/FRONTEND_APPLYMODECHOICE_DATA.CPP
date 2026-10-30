@@ -1,11 +1,51 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "TYPES.H"
+
 #include "include_asm.h"
 #include "DATA/SCENARIO_SETUP/FRONTEND_APPLYMODECHOICE_DATA.H"
 
 /* 800E4600.CPP */
 /* ROM-grounded data: rodata/writable/800E4600 */
-unsigned int g_FrontendApplymodechoiceWords1[1] = {
-    0x00000000,
+#if defined(VERSION_DE)
+struct {
+    void * g_playModeMenuState;
+} g_FrontendApplymodechoiceWords1 __attribute__((aligned(4))) = {
+    0
 };
+typedef char g_FrontendApplymodechoiceWords1SizeCheck[(sizeof(g_FrontendApplymodechoiceWords1) == 4) ? 1 : -1];
+#endif
+#if defined(VERSION_EU)
+struct {
+    void * g_playModeMenuState;
+} g_FrontendApplymodechoiceWords1 __attribute__((aligned(4))) = {
+    0
+};
+typedef char g_FrontendApplymodechoiceWords1SizeCheck[(sizeof(g_FrontendApplymodechoiceWords1) == 4) ? 1 : -1];
+#endif
+#if defined(VERSION_EU_X)
+struct {
+    void * g_playModeMenuState;
+} g_FrontendApplymodechoiceWords1 __attribute__((aligned(4))) = {
+    0
+};
+typedef char g_FrontendApplymodechoiceWords1SizeCheck[(sizeof(g_FrontendApplymodechoiceWords1) == 4) ? 1 : -1];
+#endif
+#if defined(VERSION_US)
+struct {
+    void * g_playModeMenuState;
+} g_FrontendApplymodechoiceWords1 __attribute__((aligned(4))) = {
+    0
+};
+typedef char g_FrontendApplymodechoiceWords1SizeCheck[(sizeof(g_FrontendApplymodechoiceWords1) == 4) ? 1 : -1];
+#endif
+#if defined(VERSION_US_REV1)
+struct {
+    void * g_playModeMenuState;
+} g_FrontendApplymodechoiceWords1 __attribute__((aligned(4))) = {
+    0
+};
+typedef char g_FrontendApplymodechoiceWords1SizeCheck[(sizeof(g_FrontendApplymodechoiceWords1) == 4) ? 1 : -1];
+#endif
 
 /* 800E4604.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
@@ -42,9 +82,16 @@ unsigned int D_src_6bb6ec48[31] = {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int g_FrontendApplymodechoicePointerWords1[3] = {
-    0x00000E08, 0x00000003, (unsigned int)g_Frontend_UpdatePlayModeMenuPackedAddress24_FrontendApplymodechoiceData,
+#if defined(VERSION_US)
+ResidentEventHandlerEntry g_FrontendApplymodechoicePointerWords1[1] = {
+    { 3592, 3, (ResidentEventHandler)(void *)g_Frontend_UpdatePlayModeMenuPackedAddress24_FrontendApplymodechoiceData }
 };
+#endif
+#if defined(VERSION_US_REV1)
+ResidentEventHandlerEntry g_FrontendApplymodechoicePointerWords1[1] = {
+    { 3592, 3, (ResidentEventHandler)(void *)g_Frontend_UpdatePlayModeMenuPackedAddress24_FrontendApplymodechoiceData }
+};
+#endif
 #endif
 
 #if defined(VERSION_US)

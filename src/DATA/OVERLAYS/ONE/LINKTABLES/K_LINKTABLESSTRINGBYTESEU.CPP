@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 /* 800C7934.CPP */
@@ -40,15 +42,19 @@ struct {
 
 /* 800C853C_3.CPP */
 #if defined(VERSION_EU)
-const unsigned char k_linkTablesStringBytesEu[3] = {
-    0x42, 0x40, 0x00,
-};
+#if defined(VERSION_EU)
+const char k_linkTablesStringBytesEu[3] __attribute__((aligned(1))) = "B@\000";
+#endif
 #endif
 
 /* 800C869C.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C869C */
-unsigned int g_LinktablesEncodedWordsBlock19[1] = {
-    0x00269804,
+#if defined(VERSION_US_REV1)
+struct {
+    u8 alignmentFill[4];
+} g_LinktablesEncodedWordsBlock19 __attribute__((aligned(4))) = {
+    { 0x00, 0x26, 0x98, 0x04 }
 };
+#endif
 #endif

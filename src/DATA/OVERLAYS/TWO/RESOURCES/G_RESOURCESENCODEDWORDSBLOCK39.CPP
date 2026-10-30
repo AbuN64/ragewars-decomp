@@ -1,11 +1,17 @@
+#include "TYPES.H"
+
 
 
 /* 800C87CC.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C87CC */
-unsigned int g_ResourcesEncodedWordsBlock39[1] = {
-    0x3A83126F,
+#if defined(VERSION_US_REV1)
+struct {
+    u8 alignmentFill[4];
+} g_ResourcesEncodedWordsBlock39 __attribute__((aligned(4))) = {
+    { 0x3A, 0x83, 0x12, 0x6F }
 };
+#endif
 #endif
 
 /* 800C88E8.CPP */
@@ -40,9 +46,13 @@ struct {
 
 /* 800C8DA4.CPP */
 #if defined(VERSION_EU_X)
-unsigned int g_ResourcesEncodedWordsBlock71[3] = {
-    0x3F5F66F4, 0x3F060A93, 0x00000100,
+#if defined(VERSION_EU_X)
+struct {
+    u8 alignmentFill[12];
+} g_ResourcesEncodedWordsBlock71 __attribute__((aligned(4))) = {
+    { 0x3F, 0x5F, 0x66, 0xF4, 0x3F, 0x06, 0x0A, 0x93, 0x00, 0x00, 0x01, 0x00 }
 };
+#endif
 #endif
 
 /* 800C9060.CPP */

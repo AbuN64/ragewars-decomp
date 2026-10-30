@@ -1,3 +1,5 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
@@ -9,7 +11,7 @@ void *g_PlayerNameBuffersWords1[4] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned short k_DebugMenuRetainedStorageEncodedHalfwords[1] = {
-    0x6F73,
-};
+#if defined(VERSION_US_REV1)
+char k_DebugMenuRetainedStorageEncodedHalfwords[2] __attribute__((aligned(2))) = "os";
+#endif
 #endif

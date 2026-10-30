@@ -1,9 +1,15 @@
+#include "TYPES.H"
+
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-unsigned int k_ResourcesEncodedWordsBlock9[1] = {
-    0x54F208E0,
+#if defined(VERSION_DE)
+struct {
+    u8 alignmentFill[4];
+} k_ResourcesEncodedWordsBlock9 __attribute__((aligned(4))) = {
+    { 0x54, 0xF2, 0x08, 0xE0 }
 };
+#endif
 #endif
 
 #if defined(VERSION_DE)

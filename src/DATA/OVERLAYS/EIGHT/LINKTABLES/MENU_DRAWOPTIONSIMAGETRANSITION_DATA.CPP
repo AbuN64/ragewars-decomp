@@ -1,51 +1,115 @@
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "TYPES.H"
+
+extern char Menu_ConsumeOptionsTransitionEvent[];
+extern char Menu_CreateOptionsImageTransition[];
+extern char Menu_DestroyOptionsImageTransition[];
+extern char Menu_DrawOptionsImageTransition[];
+extern char Menu_HandleOptionsTransitionRequest[];
+extern char Menu_RequestOptionsImageTransition[];
+extern char Menu_StartOptionsImageTransition[];
+extern char PAKInterface_HandlePlayerPanelBack[];
+extern char g_Menu_ConsumeOptionsTransitionEventPackedAddress24[];
+extern char g_Menu_CreateOptionsImageTransitionPackedAddress24[];
+extern char g_Menu_DestroyOptionsImageTransitionPackedAddress24[];
+extern char g_Menu_DrawOptionsImageTransitionPackedAddress24[];
+extern char g_Menu_HandleOptionsTransitionRequestPackedAddress24[];
+extern char g_Menu_RequestOptionsImageTransitionPackedAddress24[];
+extern char g_Menu_StartOptionsImageTransitionPackedAddress24[];
+
 #include "include_asm.h"
 #include "DATA/OVLTBL/MENU_DRAWOPTIONSIMAGETRANSITION_DATA.H"
 
 /* 800E449C_2.CPP */
 /* ROM-grounded data: rodata/writable/800E44A0 */
-unsigned int k_MenuDrawoptionsimagetransitionZeroWords[1] = {
-    0x00000000,
+#if defined(VERSION_DE)
+struct {
+    void * g_optionsImageTransition;
+} k_MenuDrawoptionsimagetransitionZeroWords __attribute__((aligned(4))) = {
+    0
 };
+typedef char k_MenuDrawoptionsimagetransitionZeroWordsSizeCheck[(sizeof(k_MenuDrawoptionsimagetransitionZeroWords) == 4) ? 1 : -1];
+#endif
+#if defined(VERSION_EU)
+struct {
+    void * g_optionsImageTransition;
+} k_MenuDrawoptionsimagetransitionZeroWords __attribute__((aligned(4))) = {
+    0
+};
+typedef char k_MenuDrawoptionsimagetransitionZeroWordsSizeCheck[(sizeof(k_MenuDrawoptionsimagetransitionZeroWords) == 4) ? 1 : -1];
+#endif
+#if defined(VERSION_EU_X)
+struct {
+    void * g_optionsImageTransition;
+} k_MenuDrawoptionsimagetransitionZeroWords __attribute__((aligned(4))) = {
+    0
+};
+typedef char k_MenuDrawoptionsimagetransitionZeroWordsSizeCheck[(sizeof(k_MenuDrawoptionsimagetransitionZeroWords) == 4) ? 1 : -1];
+#endif
+#if defined(VERSION_US)
+struct {
+    void * g_optionsImageTransition;
+} k_MenuDrawoptionsimagetransitionZeroWords __attribute__((aligned(4))) = {
+    0
+};
+typedef char k_MenuDrawoptionsimagetransitionZeroWordsSizeCheck[(sizeof(k_MenuDrawoptionsimagetransitionZeroWords) == 4) ? 1 : -1];
+#endif
+#if defined(VERSION_US_REV1)
+struct {
+    void * g_optionsImageTransition;
+} k_MenuDrawoptionsimagetransitionZeroWords __attribute__((aligned(4))) = {
+    0
+};
+typedef char k_MenuDrawoptionsimagetransitionZeroWordsSizeCheck[(sizeof(k_MenuDrawoptionsimagetransitionZeroWords) == 4) ? 1 : -1];
+#endif
 
 /* 800E44A4.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 extern char g_Menu_DispatchSixChoiceEventAddress[];
-unsigned int D_src_d9561b8a[27] = {
-    0xe06, 25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1120), 0xe03,
-    25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1192), 2, 25,
-    (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1628), 1, 25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1604),
-    0xe0a, 25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1240), 0xe08,
-    25, (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1392), 10, 25,
-    (unsigned int)(g_Menu_DispatchSixChoiceEventAddress + 1532), 0, 0, 0,
-    0, 0, 0xe08,
+#if defined(VERSION_DE)
+struct {
+    ResidentEventHandlerEntry handlers[8];
+    u32 alignmentFill[3];
+} D_src_d9561b8a __attribute__((aligned(4))) = {
+    { { 3590, 25, (ResidentEventHandler)(void *)(g_Menu_DispatchSixChoiceEventAddress + 1120) }, { 3587, 25, (ResidentEventHandler)(void *)(g_Menu_DispatchSixChoiceEventAddress + 1192) }, { 2, 25, (ResidentEventHandler)(void *)(g_Menu_DispatchSixChoiceEventAddress + 1628) }, { 1, 25, (ResidentEventHandler)(void *)(g_Menu_DispatchSixChoiceEventAddress + 1604) }, { 3594, 25, (ResidentEventHandler)(void *)(g_Menu_DispatchSixChoiceEventAddress + 1240) }, { 3592, 25, (ResidentEventHandler)(void *)(g_Menu_DispatchSixChoiceEventAddress + 1392) }, { 10, 25, (ResidentEventHandler)(void *)(g_Menu_DispatchSixChoiceEventAddress + 1532) }, { 0, 0, (ResidentEventHandler)0 } },
+    { 0x00000000, 0x00000000, 0x00000E08 }
 };
+#endif
 #endif
 #if defined(VERSION_EU)
-unsigned int D_src_d9561b8a[27] = {
-    0x00000E06, 0x00000019, 0x00422730, 0x00000E03, 0x00000019, 0x00422778, 0x00000002, 0x00000019,
-    0x0042292C, 0x00000001, 0x00000019, 0x00422914, 0x00000E0A, 0x00000019, 0x004227A8, 0x00000E08,
-    0x00000019, 0x00422840, 0x0000000A, 0x00000019, 0x004228CC, 0x00000000, 0x00000000, 0x00000000,
-    0xA702000C, 0x001A1402, 0x30410008,
+#if defined(VERSION_EU)
+struct {
+    ResidentEventHandlerEntry handlers[8];
+    u32 alignmentFill[3];
+} D_src_d9561b8a __attribute__((aligned(4))) = {
+    { { 3590, 25, (ResidentEventHandler)(void *)&g_Menu_CreateOptionsImageTransitionPackedAddress24 }, { 3587, 25, (ResidentEventHandler)(void *)&g_Menu_DestroyOptionsImageTransitionPackedAddress24 }, { 2, 25, (ResidentEventHandler)(void *)&g_Menu_ConsumeOptionsTransitionEventPackedAddress24 }, { 1, 25, (ResidentEventHandler)(void *)&g_Menu_RequestOptionsImageTransitionPackedAddress24 }, { 3594, 25, (ResidentEventHandler)(void *)&g_Menu_DrawOptionsImageTransitionPackedAddress24 }, { 3592, 25, (ResidentEventHandler)(void *)&g_Menu_StartOptionsImageTransitionPackedAddress24 }, { 10, 25, (ResidentEventHandler)(void *)&g_Menu_HandleOptionsTransitionRequestPackedAddress24 }, { 0, 0, (ResidentEventHandler)0 } },
+    { 0xA702000C, 0x001A1402, 0x30410008 }
 };
 #endif
+#endif
 #if defined(VERSION_EU_X)
-unsigned int D_src_d9561b8a[27] = {
-    0x00000E06, 0x00000019, 0x00422730, 0x00000E03, 0x00000019, 0x00422778, 0x00000002, 0x00000019,
-    0x0042292C, 0x00000001, 0x00000019, 0x00422914, 0x00000E0A, 0x00000019, 0x004227A8, 0x00000E08,
-    0x00000019, 0x00422840, 0x0000000A, 0x00000019, 0x004228CC, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, 0x00000013, 0x00432F4C,
+#if defined(VERSION_EU_X)
+ResidentEventHandlerEntry D_src_d9561b8a[9] = {
+    { 3590, 25, (ResidentEventHandler)(void *)((char *)&Menu_CreateOptionsImageTransition - 0x80000000U) }, { 3587, 25, (ResidentEventHandler)(void *)((char *)&Menu_DestroyOptionsImageTransition - 0x80000000U) }, { 2, 25, (ResidentEventHandler)(void *)((char *)&Menu_ConsumeOptionsTransitionEvent - 0x80000000U) }, { 1, 25, (ResidentEventHandler)(void *)((char *)&Menu_RequestOptionsImageTransition - 0x80000000U) }, { 3594, 25, (ResidentEventHandler)(void *)((char *)&Menu_DrawOptionsImageTransition - 0x80000000U) }, { 3592, 25, (ResidentEventHandler)(void *)((char *)&Menu_StartOptionsImageTransition - 0x80000000U) }, { 10, 25, (ResidentEventHandler)(void *)((char *)&Menu_HandleOptionsTransitionRequest - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 },
+    { 2, 19, (ResidentEventHandler)(void *)((char *)&PAKInterface_HandlePlayerPanelBack - 0x80000000U) }
 };
+#endif
 #endif
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int g_MenuDrawoptionsimagetransitionEncodedWords[24] = {
-    0x00000E06, 0x00000019, (unsigned int)g_menu_CreateOptionsImageTransitionEntry, 0x00000E03, 0x00000019, (unsigned int)g_menu_DestroyOptionsImageTransitionEntry, 0x00000002, 0x00000019,
-    (unsigned int)g_menu_ConsumeOptionsTransitionEventEntry, 0x00000001, 0x00000019, (unsigned int)g_menu_RequestOptionsImageTransitionEntry, 0x00000E0A, 0x00000019, (unsigned int)g_menu_DrawOptionsImageTransitionEntry, 0x00000E08,
-    0x00000019, (unsigned int)g_menu_StartOptionsImageTransitionEntry, 0x0000000A, 0x00000019, (unsigned int)g_menu_HandleOptionsTransitionRequestEntry, 0x00000000, 0x00000000, 0x00000000,
+#if defined(VERSION_US)
+ResidentEventHandlerEntry g_MenuDrawoptionsimagetransitionEncodedWords[8] = {
+    { 3590, 25, (ResidentEventHandler)(void *)g_menu_CreateOptionsImageTransitionEntry }, { 3587, 25, (ResidentEventHandler)(void *)g_menu_DestroyOptionsImageTransitionEntry }, { 2, 25, (ResidentEventHandler)(void *)g_menu_ConsumeOptionsTransitionEventEntry }, { 1, 25, (ResidentEventHandler)(void *)g_menu_RequestOptionsImageTransitionEntry }, { 3594, 25, (ResidentEventHandler)(void *)g_menu_DrawOptionsImageTransitionEntry }, { 3592, 25, (ResidentEventHandler)(void *)g_menu_StartOptionsImageTransitionEntry }, { 10, 25, (ResidentEventHandler)(void *)g_menu_HandleOptionsTransitionRequestEntry }, { 0, 0, (ResidentEventHandler)0 }
 };
+#endif
+#if defined(VERSION_US_REV1)
+ResidentEventHandlerEntry g_MenuDrawoptionsimagetransitionEncodedWords[8] = {
+    { 3590, 25, (ResidentEventHandler)(void *)g_menu_CreateOptionsImageTransitionEntry }, { 3587, 25, (ResidentEventHandler)(void *)g_menu_DestroyOptionsImageTransitionEntry }, { 2, 25, (ResidentEventHandler)(void *)g_menu_ConsumeOptionsTransitionEventEntry }, { 1, 25, (ResidentEventHandler)(void *)g_menu_RequestOptionsImageTransitionEntry }, { 3594, 25, (ResidentEventHandler)(void *)g_menu_DrawOptionsImageTransitionEntry }, { 3592, 25, (ResidentEventHandler)(void *)g_menu_StartOptionsImageTransitionEntry }, { 10, 25, (ResidentEventHandler)(void *)g_menu_HandleOptionsTransitionRequestEntry }, { 0, 0, (ResidentEventHandler)0 }
+};
+#endif
 #endif
 
 #if defined(VERSION_US)
