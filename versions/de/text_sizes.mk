@@ -2,7 +2,7 @@
 VMACRO_de := VERSION_DE
 SHA1_de := a6daacbd0e7f77c73208cf494aefc24703060b17
 ROM0_de := 0
-ROM_SECTIONS_de :=
+ROM_SECTIONS_de := --set-section-flags .debug_symbols_and_assets_earlier_1C6110=alloc,load,readonly,code,contents --change-section-lma .debug_symbols_and_assets_earlier_1C6110=0x1C6110 --set-section-flags .debug_symbols_and_assets_earlier_1C6F00=alloc,load,readonly,code,contents --change-section-lma .debug_symbols_and_assets_earlier_1C6F00=0x1C6F00 --set-section-flags .debug_symbols_and_assets_earlier_1C7780=alloc,load,readonly,code,contents --change-section-lma .debug_symbols_and_assets_earlier_1C7780=0x1C7780 --set-section-flags .debug_symbols_and_assets_earlier_1C8160=alloc,load,readonly,code,contents --change-section-lma .debug_symbols_and_assets_earlier_1C8160=0x1C8160 --set-section-flags .debug_symbols_and_assets_earlier_1C8870=alloc,load,readonly,code,contents --change-section-lma .debug_symbols_and_assets_earlier_1C8870=0x1C8870 --set-section-flags .debug_symbols_and_assets_earlier_1C88E0=alloc,load,readonly,code,contents --change-section-lma .debug_symbols_and_assets_earlier_1C88E0=0x1C88E0 --set-section-flags .debug_symbols_and_assets_earlier_1C9210=alloc,load,readonly,code,contents --change-section-lma .debug_symbols_and_assets_earlier_1C9210=0x1C9210
 build/de/sdk/MATH/aigetlen.CPP.o: TEXTSIZE := 0x14
 build/de/sdk/MATH/aisetfreq.CPP.o: TEXTSIZE := 0x118
 build/de/sdk/MATH/cosf.CPP.o: TEXTSIZE := 0x104

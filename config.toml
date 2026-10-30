@@ -37,7 +37,15 @@ segments = [
   { name = "debug_symbols", rom = 0x101000, kind = "bin" },
   { name = "ovl_frontendMenu", rom = 0x166000, vram = 0x80400000 },
   { name = "ovl_frontendMenuData", rom = 0x1B4144, vram = 0x8014F2FC },
-  { name = "debug_symbols_and_assets", rom = 0x1B78D0, kind = "bin" },
+  { name = "debug_symbols_and_assets", rom = 0x1B78D0, kind = "bin", earlier_build = [
+    { rom = 0x1C6110, end = 0x1C6EFC, delta = 0x288000 },
+    { rom = 0x1C6F00, end = 0x1C777C, delta = 0x288000 },
+    { rom = 0x1C7780, end = 0x1C815C, delta = 0x288000 },
+    { rom = 0x1C8160, end = 0x1C8868, delta = 0x288000 },
+    { rom = 0x1C8870, end = 0x1C88DC, delta = 0x288000 },
+    { rom = 0x1C88E0, end = 0x1C9204, delta = 0x288000 },
+    { rom = 0x1C9210, end = 0x1C9888, delta = 0x288000 },
+  ] },
 ]
 
 [version.eu]
