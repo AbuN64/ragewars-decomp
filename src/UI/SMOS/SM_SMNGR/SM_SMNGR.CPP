@@ -10,8 +10,8 @@
 
 /* 800CA60C_5.CPP */
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const unsigned int k_SmSmngrEncodedWords[2] = {
-    0x408F4000, 0x00000000,
+const float k_SmSmngrEncodedWords[2] = {
+    4.4765625f, 0.0f,
 };
 
 /* 80297CD0.CPP */
