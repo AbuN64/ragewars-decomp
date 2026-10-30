@@ -4,4 +4,8 @@
 /** Perform no operation. */
 void SetN64_EmptySessionHookEuX(void) {
 }
+
+/** Perform no operation. */
+void SetN64_EmptySessionHookSecondEuX(void) {
+}
 #endif

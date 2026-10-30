@@ -11,16 +11,6 @@ unsigned int g_PlaneEncodedWordsAlignmentPad[2] = {
 #endif
 
 /* 800C8F82.CPP */
-#if defined(VERSION_EU_X)
-/* ROM-grounded data: rodata/unresolved/800C8F82 */
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned short g_PlaneEncodedHalfwordsAlignmentPad[] = {
-    0x0000,
-#if defined(VERSION_EU_X)
-    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
-#endif
-};
-#endif
 
 #if defined(VERSION_EU_X)
 /* bytes live in the preceding array */

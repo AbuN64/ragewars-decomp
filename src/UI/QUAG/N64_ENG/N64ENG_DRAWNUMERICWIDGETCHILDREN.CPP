@@ -261,8 +261,3 @@ s32 N64Eng_FreeNumericWidget(void *allocation) {
     return 0;
 }
 
-#if defined(VERSION_EU_X) || defined(VERSION_US)
-unsigned int func_802A206C_de_padding_A2BCC[1] = {
-    0x00000000,
-};
-#endif

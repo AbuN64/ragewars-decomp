@@ -11,9 +11,6 @@ void alSndpSetSound(ALSndPlayer *soundPlayer, s16 soundId) {
 }
 
 
-
-
-
 void alSndpSetVol(ALSndPlayer *soundPlayer, s16 eventVolume) {
     ParamsRecAt8V1 p;
     s32 acc;
@@ -26,8 +23,3 @@ void alSndpSetVol(ALSndPlayer *soundPlayer, s16 eventVolume) {
     alEvtqPostEvent(&soundPlayer->evtq, (s16 *)&p, 0);
 }
 
-#if defined(VERSION_US)
-unsigned int func_802B2F10_de_padding_B3A8C[1] = {
-    0x00000000,
-};
-#endif

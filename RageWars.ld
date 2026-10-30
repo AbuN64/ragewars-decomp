@@ -1516,8 +1516,6 @@ SECTIONS
         src/PICKUP/PICKUP_APPLYPOWERUP.CPP.o(.text);
         . = MAX(., 0xACBB0);
         src/PICKUP/PICKUP_APPLYAMMOBUNDLE.CPP.o(.text);
-        . = MAX(., 0xACE6C);
-        src/PICKUP/PICKUP_APPLYAMMOBUNDLE.CPP.o(.data);
         . = MAX(., 0xACE70);
         src/MENU/FLOATCONVERT/FLOATCONVERT.CPP.o(.text);
         . = MAX(., 0xACE98);
@@ -1930,8 +1928,6 @@ SECTIONS
         src/DATA/MAINCODE/VISWAPBUF/VISWAPBUF.CPP.o(.data);
         . = MAX(., 0xBA510);
         sdk/libultra/io/viswapcontext.c.o(.text);
-        . = MAX(., 0xBA84C);
-        sdk/libultra/io/viswapcontext.c.o(.data);
         . = MAX(., 0xBA850);
         sdk/libultra/debug/assert.c.o(.text);
         . = MAX(., 0xBA858);
@@ -2046,8 +2042,6 @@ SECTIONS
         src/DATA/AUDIO/AUDIO/SYSTEM_TRANSLATE_TLB_VIRTUAL_ADDRESS_LINK_GAP.CPP.o(.data);
         . = MAX(., 0xBCD50);
         sdk/libultra/os/setcompare.s.o(.text);
-        . = MAX(., 0xBCD5C);
-        sdk/libultra/Util_WriteProcessorCompare_Timerintr.c.o(.data);
         . = MAX(., 0xBCD60);
         sdk/libultra/os/setfpccsr.s.o(.text);
         . = MAX(., 0xBCD70);
@@ -2149,8 +2143,6 @@ SECTIONS
         src/DATA/MAINCODE/MAINCODE/K_MAINCODEENCODEDWORDS.CPP.o(.data);
         . = MAX(., 0x2438);
         sdk/libsn/debugexcept.s.o(.text);
-        . = MAX(., 0x2898);
-        sdk/libultra/LIBGULTRA_TRW_EXCEPTION_TAIL_1_LINK_GAP.c.o(.data);
         . = MAX(., 0x28A0);
         src/AI/ENEMIES/TURRETAI/TURRETAI.CPP.o(.text);
         . = MAX(., 0x2BDC);
@@ -2161,16 +2153,10 @@ SECTIONS
         src/AI/ENEMIES/TURRETAI/TURRET_SETUP_DEATH.CPP.o(.text);
         . = MAX(., 0x3884);
         src/AI/ENEMIES/TURRETAI/AI_DYNTURRETCANSEEPLAYER.CPP.o(.text);
-        . = MAX(., 0x3C2C);
-        src/AI/ENEMIES/TURRETAI/BUILD.CPP.o(.data);
         . = MAX(., 0x3C30);
         src/AI/DEVICES/ACTIONAI/ACTION_UPDATEBREAKABLEPROXIMITY.CPP.o(.text);
-        . = MAX(., 0x448C);
-        src/AI/DEVICES/ACTIONAI/ACTION_UPDATEBREAKABLEPROXIMITY.CPP.o(.data);
         . = MAX(., 0x4490);
         src/AI/DEVICES/ACTIONHIT/ACTIONHIT.CPP.o(.text);
-        . = MAX(., 0x4CB4);
-        src/AI/DEVICES/ACTIONAI/ACTION_ZERO_WORDS_EU.CPP.o(.data);
         . = MAX(., 0x4CC0);
         src/AI/DEVICES/DAMAGEAI/DAMAGEAI.CPP.o(.text);
         . = MAX(., 0x5100);
@@ -3153,8 +3139,6 @@ SECTIONS
         src/ENGINE/CONTROL/CONTROL.CPP.o(.text);
         . = MAX(., 0x643A8);
         src/ENGINE/CONTROL/CONTROL_CYCLEACTORSNAPSHOTMODE.CPP.o(.text);
-        . = MAX(., 0x64B1C);
-        src/ENGINE/CONTROL/CONTROL_CYCLEACTORSNAPSHOTMODE.CPP.o(.data);
         . = MAX(., 0x64B20);
         src/ENGINE/CURVE/CURVE.CPP.o(.text);
         . = MAX(., 0x64F04);
@@ -3391,8 +3375,6 @@ SECTIONS
         src/ENGINE/SETN64_RECYCLEEFFECTNODE/SETN64_RECYCLEEFFECTNODE.CPP.o(.data);
         . = MAX(., 0x90710);
         src/ENGINE/SETN64/SETN64_SETFRAMEDIRECTION.CPP.o(.text);
-        . = MAX(., 0x90788);
-        src/ENGINE/SETN64/G_SESSIONRETAINEDSTORAGETRAILINGBYTESBLOCK2.CPP.o(.data);
         . = MAX(., 0x90790);
         src/ENGINE/VISDATA/VISDATA_EMPTY_REGIONAL_HOOKS.CPP.o(.text);
         . = MAX(., 0x90798);
@@ -4890,8 +4872,6 @@ SECTIONS
         src/ENGINE/UNICOL/COLLIDE/G_ACCEPTSTRAILINGBYTESBLOCK1.CPP.o(.data);
         . = MAX(., 0x3EA40);
         src/ENGINE/UNICOL/COLLIDE/COLLIDE.CPP.o(.text);
-        . = MAX(., 0x3EB3C);
-        src/ENGINE/UNICOL/COLLIDE/COLLIDE.CPP.o(.data);
         . = MAX(., 0x3EB40);
         src/ENGINE/UNICOL/INSTCOL/INSTCOL.CPP.o(.text);
         . = MAX(., 0x3F384);
@@ -5470,8 +5450,6 @@ SECTIONS
         src/ENGINE/SCENE/SCENE_FINDTRACKEDACTORS.CPP.o(.text);
         . = MAX(., 0x8DFC0);
         src/ENGINE/SCENE/SCENE_UNPACKIMAGESWITHHIGHBOOST.CPP.o(.text);
-        . = MAX(., 0x8E66C);
-        src/ENGINE/SCENE/SCENE_UNPACKIMAGESWITHHIGHBOOST.CPP.o(.data);
         . = MAX(., 0x8E670);
         sdk/libultra/sched/sched_runeventloop.CPP.o(.text);
         . = MAX(., 0x8E80C);
@@ -5508,8 +5486,6 @@ SECTIONS
         src/ENGINE/SETN64/SETN64_SETFRAMEDIRECTION.CPP.o(.text);
         . = MAX(., 0x907B0);
         src/ENGINE/SETN64/SETN64_EMPTYSESSIONHOOKEUX.CPP.o(.text);
-        . = MAX(., 0x907B8);
-        src/ENGINE/SETN64/G_SESSIONRETAINEDSTORAGETRAILINGBYTESBLOCK2.CPP.o(.data);
         . = MAX(., 0x907C0);
         src/ENGINE/VISDATA/VISDATA_EMPTY_REGIONAL_HOOKS.CPP.o(.text);
         . = MAX(., 0x907C8);
@@ -6128,8 +6104,6 @@ SECTIONS
         src/DATA/AUDIO/AUDIO/AUDIO_LINK_GAP_WORDS_802_BFD74.CPP.o(.data);
         . = MAX(., 0xBA0F0);
         sdk/libultra/io/vi/vi.CPP.o(.text);
-        . = MAX(., 0xBA1EC);
-        sdk/libultra/io/vi/vi.CPP.o(.data);
         . = MAX(., 0xBA1F0);
         sdk/libultra/io/vigetcurrframebuf.c.o(.text);
         . = MAX(., 0xBA228);
@@ -7031,8 +7005,6 @@ SECTIONS
         src/ENGINE/UNICOL/INSTCOL/INSTCOL_PROCESSENTITYCONTACTS.CPP.o(.text.InstCol_ProcessEntityContacts);
         . = MAX(., 0x40118);
         src/ENGINE/UNICOL/INSTCOL/CCOLLISION_EXPANDBOXCOORDINATES.CPP.o(.text);
-        . = MAX(., 0x4023C);
-        src/ENGINE/UNICOL/INSTCOL/CCOLLISION_EXPANDBOXCOORDINATES.CPP.o(.data);
         . = MAX(., 0x40240);
         src/ENGINE/UNICOL/PLANE/CCOLLISION_COPYPOSITIONANDGETMODELFLAGS.CPP.o(.text);
         . = MAX(., 0x402AC);
@@ -7631,8 +7603,6 @@ SECTIONS
         src/ENGINE/SETN64/SETN64_ONWORLDVIEWDRAW.CPP.o(.data);
         . = MAX(., 0x90510);
         src/ENGINE/SETN64/SETN64_SETFRAMEDIRECTION.CPP.o(.text);
-        . = MAX(., 0x90588);
-        src/ENGINE/CACHE/CACHE/G_CACHEREGIONALINSTRUCTIONFRAGMENTSTRAILINGBYTESBLOCK1.CPP.o(.data);
         . = MAX(., 0x90590);
         src/ENGINE/SETN64/SETN64_DRAWFULLSCREENBACKDROP_DATA.CPP.o(.text);
         . = MAX(., 0x90598);
@@ -7687,16 +7657,10 @@ SECTIONS
         src/ENGINE/SETN64/SETN64_INITIALIZEMODE17CREDITS.CPP.o(.text);
         . = MAX(., 0x94594);
         src/ENGINE/SETN64/SETN64_CONFIGUREVIDEOANDENTERMODEUS.CPP.o(.text);
-        . = MAX(., 0x946B8);
-        src/ENGINE/CACHE/CACHE/G_CACHEREGIONALINSTRUCTIONFRAGMENTSTRAILINGBYTESBLOCK11.CPP.o(.data);
         . = MAX(., 0x946C0);
         src/ENGINE/VISDATA/VISDATA_EMPTY_INITIALIZE_HOOK_US.CPP.o(.text);
-        . = MAX(., 0x946C8);
-        src/ENGINE/VISDATA/VISDATA_EMPTY_INITIALIZE_HOOK_US.CPP.o(.data);
         . = MAX(., 0x946D0);
         src/ENGINE/VISDATA/VISDATA_EMPTY_REGIONAL_HOOKS.CPP.o(.text);
-        . = MAX(., 0x946D8);
-        src/ENGINE/VISDATA/VISDATA_EMPTY_REGIONAL_HOOKS.CPP.o(.data);
         . = MAX(., 0x946E0);
         src/ENGINE/SIMPPOOL/SIMPPOOL.CPP.o(.text);
         . = MAX(., 0x947C8);
@@ -7805,8 +7769,6 @@ SECTIONS
         src/UI/N64ENG/N64ENG.CPP.o(.text);
         . = MAX(., 0xA1690);
         src/UI/QUAG/N64_ENG/N64ENG_DRAWNUMERICWIDGETCHILDREN.CPP.o(.text);
-        . = MAX(., 0xA1BCC);
-        src/UI/QUAG/N64_ENG/N64ENG_DRAWNUMERICWIDGETCHILDREN.CPP.o(.data);
         . = MAX(., 0xA1BD0);
         src/UI/TSMOS/TSMOS/TSMOS_UPDATEFRONTEND.CPP.o(.text);
         . = MAX(., 0xA1D64);
@@ -8011,8 +7973,6 @@ SECTIONS
         src/DATA/AUDIO/SNDPLAYER_REGIONAL_QUEUE_TAILS/SNDPLAYER.CPP.o(.data);
         . = MAX(., 0xB2A30);
         sdk/libultra/alsynset/alsndpsetvol.c.o(.text);
-        . = MAX(., 0xB2A8C);
-        sdk/libultra/alsynset/alsndpsetvol.c.o(.data);
         . = MAX(., 0xB2A90);
         sdk/libultra/audio/sndpstop.c.o(.text);
         . = MAX(., 0xB2AD8);
@@ -8141,8 +8101,6 @@ SECTIONS
         sdk/libultra/os/controller.CPP.o(.text);
         . = MAX(., 0xB7550);
         sdk/libultra/os/oscontreset_data.CPP.o(.text);
-        . = MAX(., 0xB76BC);
-        sdk/libultra/os/oscontreset_data.CPP.o(.data);
         . = MAX(., 0xB76C0);
         sdk/libultra/io/dpsetnextbuf.c.o(.text);
         . = MAX(., 0xB775C);
@@ -8159,8 +8117,6 @@ SECTIONS
         sdk/libultra/io/motor/osmotorinit.CPP.o(.text);
         . = MAX(., 0xB7FE4);
         sdk/libultra/io/motor/osmotorinit.CPP.o(.data);
-        . = MAX(., 0xB7FEC);
-        src/MOTOR/MOTOR.CPP.o(.data);
         . = MAX(., 0xB7FF0);
         sdk/libultra/io/contramread.c.o(.text);
         . = MAX(., 0xB83A8);
@@ -9154,8 +9110,6 @@ SECTIONS
         src/ENGINE/UNICOL/COLLIDE/G_ACCEPTSTRAILINGBYTESBLOCK1.CPP.o(.data);
         . = MAX(., 0x3E9F0);
         src/ENGINE/UNICOL/COLLIDE/COLLIDE.CPP.o(.text);
-        . = MAX(., 0x3EAEC);
-        src/DATA/MAINCODE/COPY_LINK_GAP_DATA/COPY.CPP.o(.data);
         . = MAX(., 0x3EAF0);
         src/ENGINE/UNICOL/INSTCOL/INSTCOL.CPP.o(.text);
         . = MAX(., 0x3F334);
@@ -9732,8 +9686,6 @@ SECTIONS
         src/ENGINE/SCENE/SCENE_FINDTRACKEDACTORS.CPP.o(.text);
         . = MAX(., 0x8DE60);
         src/ENGINE/SCENE/SCENE_UNPACKIMAGESWITHHIGHBOOST.CPP.o(.text);
-        . = MAX(., 0x8E50C);
-        src/DATA/MAINCODE/MAINCODE/MAINCODE_REGIONAL_INSTRUCTION_TAILS.CPP.o(.data);
         . = MAX(., 0x8E510);
         sdk/libultra/sched/sched_runeventloop.CPP.o(.text);
         . = MAX(., 0x8E6AC);
@@ -10412,8 +10364,6 @@ SECTIONS
         src/DATA/AUDIO/AUDIO/AUDIO_RUNTIME_SPLIT_TEXT_BLOCK_A.CPP.o(.data);
         . = MAX(., 0xBEF00);
         sdk/libultra/io/vi/vi.CPP.o(.text);
-        . = MAX(., 0xBEFFC);
-        src/DATA/AUDIO/OSVIINIT_PADDING/OSVIINIT_PADDING.CPP.o(.data);
         . = MAX(., 0xBF000);
         sdk/libultra/io/vigetcurrframebuf.c.o(.text);
         . = MAX(., 0xBF038);
@@ -11393,7 +11343,6 @@ SECTIONS
         sdk/libultra/os/probetlb.s.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AUDIO/SYSTEM_TRANSLATE_TLB_VIRTUAL_ADDRESS_LINK_GAP.CPP.o(.bss .sbss COMMON);
         sdk/libultra/os/setcompare.s.o(.bss .sbss COMMON);
-        sdk/libultra/Util_WriteProcessorCompare_Timerintr.c.o(.bss .sbss COMMON);
         sdk/libultra/os/setfpccsr.s.o(.bss .sbss COMMON);
         sdk/libultra/os/setintmask.s.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AUDIO.CPP.o(.bss .sbss COMMON);
@@ -11444,16 +11393,13 @@ SECTIONS
         sdk/libsn/debugger.s.o(.bss .sbss COMMON);
         src/DATA/MAINCODE/MAINCODE/K_MAINCODEENCODEDWORDS.CPP.o(.bss .sbss COMMON);
         sdk/libsn/debugexcept.s.o(.bss .sbss COMMON);
-        sdk/libultra/LIBGULTRA_TRW_EXCEPTION_TAIL_1_LINK_GAP.c.o(.bss .sbss COMMON);
         src/AI/ENEMIES/TURRETAI/TURRETAI.CPP.o(.bss .sbss COMMON);
         src/AI/ENEMIES/TURRETAI/TURRET_MOVE.CPP.o(.bss .sbss COMMON);
         src/AI/ENEMIES/TURRETAI/TURRET_TRACKTARGET.CPP.o(.bss .sbss COMMON);
         src/AI/ENEMIES/TURRETAI/TURRET_SETUP_DEATH.CPP.o(.bss .sbss COMMON);
         src/AI/ENEMIES/TURRETAI/AI_DYNTURRETCANSEEPLAYER.CPP.o(.bss .sbss COMMON);
-        src/AI/ENEMIES/TURRETAI/BUILD.CPP.o(.bss .sbss COMMON);
         src/AI/DEVICES/ACTIONAI/ACTION_UPDATEBREAKABLEPROXIMITY.CPP.o(.bss .sbss COMMON);
         src/AI/DEVICES/ACTIONHIT/ACTIONHIT.CPP.o(.bss .sbss COMMON);
-        src/AI/DEVICES/ACTIONAI/ACTION_ZERO_WORDS_EU.CPP.o(.bss .sbss COMMON);
         src/AI/DEVICES/DAMAGEAI/DAMAGEAI.CPP.o(.bss .sbss COMMON);
         src/AI/DEVICES/DEVICECALLBACK/DEVICECALLBACK.CPP.o(.bss .sbss COMMON);
         src/AI/DEVICES/SPAWNAI/SPAWNAI.CPP.o(.bss .sbss COMMON);
@@ -11863,7 +11809,6 @@ SECTIONS
         src/ENGINE/SETN64/SETN64_ONWORLDVIEWDRAW.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64_RECYCLEEFFECTNODE/SETN64_RECYCLEEFFECTNODE.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_SETFRAMEDIRECTION.CPP.o(.bss .sbss COMMON);
-        src/ENGINE/SETN64/G_SESSIONRETAINEDSTORAGETRAILINGBYTESBLOCK2.CPP.o(.bss .sbss COMMON);
         src/ENGINE/VISDATA/VISDATA_EMPTY_REGIONAL_HOOKS.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_SETUPLOADINGBACKDROPEU.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_DRAWFULLSCREENBACKDROP.CPP.o(.bss .sbss COMMON);
@@ -12667,7 +12612,6 @@ SECTIONS
         src/ENGINE/SETN64_ONWORLDVIEWDRAW/SETN64_ONWORLDVIEWDRAW.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_SETFRAMEDIRECTION.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_EMPTYSESSIONHOOKEUX.CPP.o(.bss .sbss COMMON);
-        src/ENGINE/SETN64/G_SESSIONRETAINEDSTORAGETRAILINGBYTESBLOCK2.CPP.o(.bss .sbss COMMON);
         src/ENGINE/VISDATA/VISDATA_EMPTY_REGIONAL_HOOKS.CPP.o(.bss .sbss COMMON);
         src/DATA/MAINCODE/MAINCODE/MAINCODE_LINK_GAP_WORDS_8029_AE74.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_SETUPLOADINGBACKDROPEUX.CPP.o(.bss .sbss COMMON);
@@ -13451,7 +13395,6 @@ SECTIONS
         src/ENGINE/SETN64/SETN64_RECYCLEEFFECTNODE.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_ONWORLDVIEWDRAW.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_SETFRAMEDIRECTION.CPP.o(.bss .sbss COMMON);
-        src/ENGINE/CACHE/CACHE/G_CACHEREGIONALINSTRUCTIONFRAGMENTSTRAILINGBYTESBLOCK1.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_DRAWFULLSCREENBACKDROP_DATA.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_SETUPLOADINGBACKDROPUS.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_DRAWFULLSCREENBACKDROP.CPP.o(.bss .sbss COMMON);
@@ -13475,7 +13418,6 @@ SECTIONS
         src/ENGINE/SETN64/SETN64_DRAWMODE15.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_INITIALIZEMODE17CREDITS.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SETN64/SETN64_CONFIGUREVIDEOANDENTERMODEUS.CPP.o(.bss .sbss COMMON);
-        src/ENGINE/CACHE/CACHE/G_CACHEREGIONALINSTRUCTIONFRAGMENTSTRAILINGBYTESBLOCK11.CPP.o(.bss .sbss COMMON);
         src/ENGINE/VISDATA/VISDATA_EMPTY_INITIALIZE_HOOK_US.CPP.o(.bss .sbss COMMON);
         src/ENGINE/VISDATA/VISDATA_EMPTY_REGIONAL_HOOKS.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SIMPPOOL/SIMPPOOL.CPP.o(.bss .sbss COMMON);
@@ -13647,7 +13589,6 @@ SECTIONS
         sdk/libultra/io/motor/motor.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/motor/osmotorstart.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/motor/osmotorinit.CPP.o(.bss .sbss COMMON);
-        src/MOTOR/MOTOR.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/contramread.c.o(.bss .sbss COMMON);
         sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK4.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/contramwrite.c.o(.bss .sbss COMMON);
@@ -13998,7 +13939,6 @@ SECTIONS
         src/ENGINE/UNICOL/COLLIDE/CCOLLISION_TESTSEGMENTDISK.CPP.o(.bss .sbss COMMON);
         src/ENGINE/UNICOL/COLLIDE/G_ACCEPTSTRAILINGBYTESBLOCK1.CPP.o(.bss .sbss COMMON);
         src/ENGINE/UNICOL/COLLIDE/COLLIDE.CPP.o(.bss .sbss COMMON);
-        src/DATA/MAINCODE/COPY_LINK_GAP_DATA/COPY.CPP.o(.bss .sbss COMMON);
         src/ENGINE/UNICOL/INSTCOL/INSTCOL.CPP.o(.bss .sbss COMMON);
         src/ENGINE/VIRTUAL/VIRTUAL/VIRTUAL.CPP.o(.bss .sbss COMMON);
         src/ENGINE/UNICOL/INSTCOL/INSTCOL_PROCESSENTITYCONTACTS.CPP.o(.bss .sbss COMMON);
@@ -14205,7 +14145,6 @@ SECTIONS
         src/ENGINE/SCENE/SCENE_DRAWTRANSITIONCOLOROVERLAY.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SCENE/SCENE_FINDTRACKEDACTORS.CPP.o(.bss .sbss COMMON);
         src/ENGINE/SCENE/SCENE_UNPACKIMAGESWITHHIGHBOOST.CPP.o(.bss .sbss COMMON);
-        src/DATA/MAINCODE/MAINCODE/MAINCODE_REGIONAL_INSTRUCTION_TAILS.CPP.o(.bss .sbss COMMON);
         sdk/libultra/sched/sched_runeventloop.CPP.o(.bss .sbss COMMON);
         sdk/libultra/sched/sched_handleretrace.CPP.o(.bss .sbss COMMON);
         sdk/libultra/sched/sched_handlerspcompletion.CPP.o(.bss .sbss COMMON);
@@ -14511,7 +14450,6 @@ SECTIONS
         sdk/libultra/io/viblack.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/AUDIO/AUDIO_RUNTIME_SPLIT_TEXT_BLOCK_A.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/vi/vi.CPP.o(.bss .sbss COMMON);
-        src/DATA/AUDIO/OSVIINIT_PADDING/OSVIINIT_PADDING.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/vigetcurrframebuf.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/LOOKAT/LOOKAT.CPP.o(.bss .sbss COMMON);
         sdk/libultra/io/VIMGR/VIMGR.CPP.o(.bss .sbss COMMON);
@@ -15554,9 +15492,6 @@ SECTIONS
         . = MAX(., 0x233C);
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
-        . = MAX(., 0x237C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2380);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
@@ -15819,8 +15754,6 @@ SECTIONS
         src/ENGINE/GEOMETRY/GEOMETRY.CPP.o(.rodata .rdata);
         . = MAX(., 0x2CEC);
         src/ENGINE/GEOMETRY/GEOMETRY_DRAWBLENDPARTS.CPP.o(.rodata .rdata);
-        . = MAX(., 0x2CFC);
-        src/ENGINE/GEOMETRY/GEOMETRY_DRAWBLENDPARTS.CPP.o(.data);
         . = MAX(., 0x2D00);
         src/ENGINE/GRAPHU64/GRAPHU64_INVERTAFFINEMATRIX_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2D04);
@@ -18441,9 +18374,6 @@ SECTIONS
         . = MAX(., 0x234C);
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
-        . = MAX(., 0x238C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2390);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
@@ -18911,8 +18841,6 @@ SECTIONS
         src/OVLGAME/SCENE/G_CONSTRUCTMAPSIMPLEMODEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x35A0);
         src/PICKUP/OVLSCENE_LOADSCENERESOURCES_DATA.CPP.o(.rodata .rdata);
-        . = MAX(., 0x35BD);
-        src/PICKUP/OVLSCENE_LOADSCENERESOURCES_DATA.CPP.o(.data);
         . = MAX(., 0x35C0);
         src/MENU/ITEMS/OVLSCENE_LOADSCENERESOURCES/S_TEXTURESETSINDEXTEXT.CPP.o(.rodata .rdata);
         . = MAX(., 0x35D4);
@@ -21133,8 +21061,6 @@ SECTIONS
         . = MAX(., 0x1CA0);
         . = ALIGN(8) /* src/ENGINE/UNICOL/COLLIDE/CCOLLISION_INTERSECTSEGMENTBOX.CPP.o */;
         src/ENGINE/UNICOL/COLLIDE/CCOLLISION_INTERSECTSEGMENTBOX.CPP.o(.rodata .rdata);
-        . = MAX(., 0x1CEC);
-        src/ENGINE/UNICOL/UNICOL/K_UNICOLENCODEDWORDSBLOCK6.CPP.o(.data);
         . = MAX(., 0x1CF0);
         . = ALIGN(8) /* src/ENGINE/UNICOL/COLLIDE/CCOLLISION_TESTRAYCYLINDER.CPP.o */;
         src/ENGINE/UNICOL/COLLIDE/CCOLLISION_TESTRAYCYLINDER.CPP.o(.rodata .rdata);
@@ -21323,9 +21249,6 @@ SECTIONS
         . = MAX(., 0x234C);
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
-        . = MAX(., 0x238C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2390);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
@@ -22330,8 +22253,6 @@ SECTIONS
         sdk/libultra/io/sprawdma_bytes.c.o(.rodata .rdata);
         . = MAX(., 0x72D4);
         sdk/libultra/io/sprawdma/sprawdma_text.c.o(.rodata .rdata);
-        . = MAX(., 0x72E2);
-        src/ENGINE/UNICOL/PLANE/G_PLANEENCODEDHALFWORDS.CPP.o(.data);
         . = MAX(., 0x72F0);
         src/DATA/FRONTEND/C/CONSTANTS/VIDEO_SCALE_UNSIGNED_BIAS_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x7300);
@@ -24178,9 +24099,6 @@ SECTIONS
         . = MAX(., 0x233C);
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
-        . = MAX(., 0x237C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2380);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
@@ -27296,9 +27214,6 @@ SECTIONS
         . = MAX(., 0x233C);
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
-        . = MAX(., 0x237C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2380);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
@@ -31790,7 +31705,6 @@ SECTIONS
         src/ENGINE/VIRTUAL/VHANDLER.C.o(.bss .sbss COMMON);
         src/ENGINE/UNICOL/UNICOL/CCOLLISION_INTEGRATEGRAVITYANDDRAG_DATA.CPP.o(.bss .sbss COMMON);
         src/ENGINE/UNICOL/COLLIDE/CCOLLISION_INTERSECTSEGMENTBOX.CPP.o(.bss .sbss COMMON);
-        src/ENGINE/UNICOL/UNICOL/K_UNICOLENCODEDWORDSBLOCK6.CPP.o(.bss .sbss COMMON);
         src/ENGINE/UNICOL/COLLIDE/CCOLLISION_TESTRAYCYLINDER.CPP.o(.bss .sbss COMMON);
         src/ENGINE/UNICOL/COLLIDE/CCOLLISION_SETSWEEPRANGE_DATA.CPP.o(.bss .sbss COMMON);
         src/ENGINE/UNICOL/COLLIDE/CCOLLISION_TESTSEGMENTPOLYGON.CPP.o(.bss .sbss COMMON);
@@ -32195,7 +32109,6 @@ SECTIONS
         sdk/libultra/io/sirawdma/sirawdma.c.o(.bss .sbss COMMON);
         sdk/libultra/io/sprawdma_bytes.c.o(.bss .sbss COMMON);
         sdk/libultra/io/sprawdma/sprawdma_text.c.o(.bss .sbss COMMON);
-        src/ENGINE/UNICOL/PLANE/G_PLANEENCODEDHALFWORDS.CPP.o(.bss .sbss COMMON);
         src/DATA/FRONTEND/C/CONSTANTS/VIDEO_SCALE_UNSIGNED_BIAS_DATA.CPP.o(.bss .sbss COMMON);
         src/DATA/FRONTEND/C/CONSTANTS/AUDIO_READSERIALINTERFACEWORD_DATA.CPP.o(.bss .sbss COMMON);
         src/DATA/OVL1_C/SIRAWREAD/SIRAWREAD.CPP.o(.bss .sbss COMMON);
@@ -36405,8 +36318,6 @@ SECTIONS
         src/UI/TSMOS/SMP/SMP_LIST/SMP_LIST.CPP.o(.text);
         . = MAX(., 0x1ABC0);
         src/UI/TSMOS/SMP/SMP_BUTTON/SMP_BUTTON.CPP.o(.text);
-        . = MAX(., 0x1B5DC);
-        src/UI/TSMOS/SMP/SMP_BUTTON/SMP_BUTTON.CPP.o(.data);
         . = MAX(., 0x1B5E0);
         src/UI/TSMOS/SMP/SMP_OVERLAY/SMP_OVERLAY.CPP.o(.text);
         . = MAX(., 0x1C604);
@@ -36577,8 +36488,6 @@ SECTIONS
         src/FRONTEND/MATCH/FRONTEND_HANDLEMATCHMENUMESSAGE.CPP.o(.text);
         . = MAX(., 0x2913C);
         src/MENU/MATCH/MATCH.CPP.o(.text);
-        . = MAX(., 0x291CC);
-        src/MENU/MENU_DISPATCHGERMANMATCHMENUEVENT/MENU_DISPATCHGERMANMATCHMENUEVENT.CPP.o(.data);
         . = MAX(., 0x291D0);
         src/FRONTEND/MATCH_OPTIONS/FRONTEND_CREATEMATCHOPTIONS.CPP.o(.text);
         . = MAX(., 0x294C4);
@@ -36797,8 +36706,6 @@ SECTIONS
         src/FRONTEND/PREVIEW/PREVIEW.CPP.o(.text);
         . = MAX(., 0x39C80);
         src/FRONTEND/MODEL/MODEL.CPP.o(.text);
-        . = MAX(., 0x39D2C);
-        src/FRONTEND/MODEL/MODEL.CPP.o(.data);
         . = MAX(., 0x39D30);
         src/FRONTEND/NODEPAIR/NODEPAIR.CPP.o(.text);
         . = MAX(., 0x39D58);
@@ -37112,8 +37019,6 @@ SECTIONS
         src/MENU/TRACK_ANGLES/TRACK_ANGLES.CPP.o(.text);
         . = MAX(., 0x3BCC);
         src/MENU/TRACK_ANGLES/MENU_ISTRACKREQUESTITEM.CPP.o(.text);
-        . = MAX(., 0x3E88);
-        src/MENU/TRACK_ANGLES/MENU_ISTRACKREQUESTITEM.CPP.o(.data);
         . = MAX(., 0x3E90);
         src/MENU/PAK/NOTE/NOTE_CREATEANDWRITENOTE.CPP.o(.text);
         . = MAX(., 0x458C);
@@ -37744,8 +37649,6 @@ SECTIONS
         src/MENU/ITEMS/OPTION/OPTION.CPP.o(.data);
         . = MAX(., 0x3E9D0);
         src/MENU/ITEMS/SESSION/ITEMS_HANDLESESSIONOPTIONPAGE.CPP.o(.text);
-        . = MAX(., 0x3EA3C);
-        src/MENU/ITEMS/ITEMS_OPTION_ROW_LABEL_PADDING.CPP.o(.data);
         . = MAX(., 0x3EA40);
         src/MENU/ITEMS/ITEMS.CPP.o(.text);
         . = MAX(., 0x3EBEC);
@@ -37936,8 +37839,6 @@ SECTIONS
         sdk/libultra/io/pfschecker.c.o(.data);
         . = MAX(., 0x48A80);
         sdk/libultra/io/controller.c.o(.text);
-        . = MAX(., 0x48D4C);
-        sdk/libultra/io/controller.c.o(.data);
         . = MAX(., 0x48D50);
         sdk/libultra/pfs/pfs_readwritefile.CPP.o(.text);
         . = MAX(., 0x49184);
@@ -38332,8 +38233,6 @@ SECTIONS
         . = MAX(., 0x23A0C);
         src/MENU/MENU_COMMITOPTIONSPAGE.CPP.o(.text);
         . = MAX(., 0x23B68);
-        src/MENU/MENU_COMMIT/MENU_COMMIT.CPP.o(.data);
-        . = MAX(., 0x23B70);
         src/MENU/MENU_DRAWCLIPPEDWIDGETSIBLINGS.CPP.o(.text);
         . = MAX(., 0x23BA8);
         src/FRONTEND/GAME/FRONTEND_HANDLEOPTIONSPAGESHORTCUT.CPP.o(.text);
@@ -38395,8 +38294,6 @@ SECTIONS
         src/FRONTEND/MATCH/FRONTEND_HANDLEMATCHMENUMESSAGE.CPP.o(.text);
         . = MAX(., 0x29DEC);
         src/FRONTEND/MATCH/MATCH.CPP.o(.text);
-        . = MAX(., 0x29E7C);
-        src/FRONTEND/MATCH/MATCH.CPP.o(.data);
         . = MAX(., 0x29E80);
         src/FRONTEND/MATCH_OPTIONS/FRONTEND_CREATEMATCHOPTIONS.CPP.o(.text);
         . = MAX(., 0x2A1D0);
@@ -38772,8 +38669,6 @@ SECTIONS
         . = MAX(., 0x44440);
         src/MENU/ITEMS/ITEMS.CPP.o(.text);
         . = MAX(., 0x44478);
-        src/MENU/ITEMS/ITEMS_PREPAREMENURETURNEUX/ITEMS_PREPAREMENURETURNEUX.CPP.o(.data);
-        . = MAX(., 0x44480);
         src/MENU/ITEMS/RETURN/RETURN.CPP.o(.text);
         . = MAX(., 0x444AC);
         src/MENU/ITEMS/PLAYER/PLAYER_FORMATPLAYERPARTNERSTATUS.CPP.o(.text);
@@ -39604,8 +39499,6 @@ SECTIONS
         src/MENU/ITEMS/OPTION/OPTION.CPP.o(.data);
         . = MAX(., 0x3DCC0);
         src/MENU/SESSIONOPTIONS/SESSIONOPTIONS.CPP.o(.text);
-        . = MAX(., 0x3DD2C);
-        src/MENU/SESSIONOPTIONS/SESSIONOPTIONS.CPP.o(.data);
         . = MAX(., 0x3DD30);
         src/MENU/ITEMS/CHARACTER/CHARACTER.CPP.o(.text);
         . = MAX(., 0x3DEDC);
@@ -40043,8 +39936,6 @@ SECTIONS
         src/UI/TSMOS/SMP/SMP_LIST/SMP_LIST.CPP.o(.text);
         . = MAX(., 0x1AC40);
         src/UI/TSMOS/SMP/SMP_BUTTON/SMP_BUTTON.CPP.o(.text);
-        . = MAX(., 0x1B65C);
-        src/UI/TSMOS/SMP/SMP_BUTTON/SMPBUTTON/SMPBUTTON.CPP.o(.data);
         . = MAX(., 0x1B660);
         src/UI/TSMOS/SMP/SMP_OVERLAY/SMP_OVERLAY.CPP.o(.text);
         . = MAX(., 0x1C67C);
@@ -40887,7 +40778,6 @@ SECTIONS
         src/FRONTEND/MATCH/MATCH.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/MATCH/FRONTEND_HANDLEMATCHMENUMESSAGE.CPP.o(.bss .sbss COMMON);
         src/MENU/MATCH/MATCH.CPP.o(.bss .sbss COMMON);
-        src/MENU/MENU_DISPATCHGERMANMATCHMENUEVENT/MENU_DISPATCHGERMANMATCHMENUEVENT.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/MATCH_OPTIONS/FRONTEND_CREATEMATCHOPTIONS.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/MATCH_OPTIONS/FRONTEND_ACTIVATEMATCHOPTIONACTION.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/FRONTEND/FRONTEND_DE_PADDING_WORDS.CPP.o(.bss .sbss COMMON);
@@ -41404,7 +41294,6 @@ SECTIONS
         src/MENU/PAK/OPTION/OPTION.CPP.o(.bss .sbss COMMON);
         src/MENU/ITEMS/OPTION/OPTION.CPP.o(.bss .sbss COMMON);
         src/MENU/ITEMS/SESSION/ITEMS_HANDLESESSIONOPTIONPAGE.CPP.o(.bss .sbss COMMON);
-        src/MENU/ITEMS/ITEMS_OPTION_ROW_LABEL_PADDING.CPP.o(.bss .sbss COMMON);
         src/MENU/ITEMS/ITEMS.CPP.o(.bss .sbss COMMON);
         src/OVLGAME/CONFIRMING/CONFIRMING.CPP.o(.bss .sbss COMMON);
         src/MENU/MISC/PLAYERSTATE/CMENUPROFILE_ACTIVATEFIRSTCONFIRMINGPLAYER.CPP.o(.bss .sbss COMMON);
@@ -41647,7 +41536,6 @@ SECTIONS
         src/MENU/MENU_ANIMATETABOPTIONSMENU.CPP.o(.bss .sbss COMMON);
         src/MENU/MENU_REQUESTOPTIONSSCREEN22.CPP.o(.bss .sbss COMMON);
         src/MENU/MENU_COMMITOPTIONSPAGE.CPP.o(.bss .sbss COMMON);
-        src/MENU/MENU_COMMIT/MENU_COMMIT.CPP.o(.bss .sbss COMMON);
         src/MENU/MENU_DRAWCLIPPEDWIDGETSIBLINGS.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/GAME/FRONTEND_HANDLEOPTIONSPAGESHORTCUT.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/GAME/FRONTEND_CLOSEOPTIONSPAGE.CPP.o(.bss .sbss COMMON);
@@ -41824,7 +41712,6 @@ SECTIONS
         src/MENU/ITEMS/MENU/ITEMS_CREATEMENU.CPP.o(.bss .sbss COMMON);
         src/MENU/ITEMS/MENU/ITEMS/ITEMS.CPP.o(.bss .sbss COMMON);
         src/MENU/ITEMS/ITEMS.CPP.o(.bss .sbss COMMON);
-        src/MENU/ITEMS/ITEMS_PREPAREMENURETURNEUX/ITEMS_PREPAREMENURETURNEUX.CPP.o(.bss .sbss COMMON);
         src/MENU/ITEMS/RETURN/RETURN.CPP.o(.bss .sbss COMMON);
         src/MENU/ITEMS/PLAYER/PLAYER_FORMATPLAYERPARTNERSTATUS.CPP.o(.bss .sbss COMMON);
         src/MENU/ITEMS/PLAYER/PLAYER_OPENPLAYERDIALOG.CPP.o(.bss .sbss COMMON);
@@ -42390,7 +42277,6 @@ SECTIONS
         src/UI/TSMOS/SMP/SMP_SLIDER/SMP_SLIDER.CPP.o(.bss .sbss COMMON);
         src/UI/TSMOS/SMP/SMP_LIST/SMP_LIST.CPP.o(.bss .sbss COMMON);
         src/UI/TSMOS/SMP/SMP_BUTTON/SMP_BUTTON.CPP.o(.bss .sbss COMMON);
-        src/UI/TSMOS/SMP/SMP_BUTTON/SMPBUTTON/SMPBUTTON.CPP.o(.bss .sbss COMMON);
         src/UI/TSMOS/SMP/SMP_OVERLAY/SMP_OVERLAY.CPP.o(.bss .sbss COMMON);
         sdk/libultra/pfs/pfs.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/PREVIEW/FRONTEND_DRAWMODELPREVIEW.CPP.o(.bss .sbss COMMON);

@@ -17,8 +17,8 @@ unsigned char g_MenuDrawclippedwidgetsiblingsTrailingBytes[4] = { 0xD0, 0x14, 0x
 extern void Node_LoadLanguageStringsIfAny(int);
 extern void *g_optionsPage;
 
-int Menu_DestroyEuxOptionsAndReloadLanguage(void *allocation) {
-    Cache_FreeMemory(allocation);
+int Menu_DestroyEuxOptionsAndReloadLanguage(void) {
+    Cache_FreeMemory(g_optionsPage);
     g_optionsPage = 0;
     Node_LoadLanguageStringsIfAny(g_languageIndex);
     return 0;

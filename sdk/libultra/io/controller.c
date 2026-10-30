@@ -93,18 +93,7 @@ s32 osContInit_pfs(OSMesgQueue *queue, u8 *pattern) {
 /* Sets the last controller command to the given byte, marks the pak PIF RAM block for execution and packs one request-status command per controller followed by the end marker (libultra __osPfsRequestData). Adapted from __osPackRequestData with the RAM clearing loop dropped, the command byte also stored to g_controllerLastCommand, and the pak PIF RAM block g_controllerStatusPifBuffer used in place of g_controllerQueryPifBuffer, with the pointer taken before the status word is written. */
 
 
-
-
-
-
-
-
 /* Decodes the controller status replies in g_controllerStatusPifBuffer for each of g_controllerChannelCount channels, recording the error bits from each reply's receive size and, for a channel without error, its type and status, and stores the mask of answering channels through cmd. Adapted from __osContGetInitData_pfs. */
-
-
-
-
-
 
 
 void __osPfsRequestData(u8 cmd) {
@@ -153,8 +142,3 @@ void __osContGetInitData_pfs(u8 *valid, ControllerInitStatusBytes *data) {
     *valid = mask;
 }
 
-#if defined(VERSION_EU)
-unsigned int func_80447A38_de_padding_1BED4C[1] = {
-    0x00000000,
-};
-#endif

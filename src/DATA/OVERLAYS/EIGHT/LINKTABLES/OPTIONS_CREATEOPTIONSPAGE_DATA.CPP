@@ -34,7 +34,7 @@ extern char g_Frontend_HandleOptionsPageShortcutPackedAddress24[];
 extern char g_Frontend_HandleTabOptionsShortcutPackedAddress24[];
 extern char g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24[];
 extern char g_Frontend_UpdateOptionsPageExitPackedAddress24[];
-extern char g_MenuCommitTrailingBytes[];
+extern int Menu_DestroyEuxOptionsAndReloadLanguage(void);
 extern char g_Menu_AnimateTabOptionsMenuPackedAddress24[];
 extern char g_Menu_CreateEuropeanSettingsPagePackedAddress24[];
 extern char g_Menu_CreateSessionSettingsControlsPackedAddress24[];
@@ -136,7 +136,7 @@ struct {
     ResidentEventHandlerEntry eventHandlers168[7];
     u8 alignmentFill252[8];
 } D_src_4b23fe05 __attribute__((aligned(4))) = {
-    { { 3592, 4, (ResidentEventHandler)(void *)((char *)&Frontend_UpdateOptionsPageExit - 0x80000000U) }, { 3590, 4, (ResidentEventHandler)(void *)((char *)&Menu_CreateLocalizedSettingsPage - 0x80000000U) }, { 3587, 4, (ResidentEventHandler)(void *)((char *)&g_MenuCommitTrailingBytes - 0x80000000U) }, { 2, 4, (ResidentEventHandler)(void *)((char *)&Frontend_CloseOptionsPage - 0x80000000U) }, { 1, 4, (ResidentEventHandler)(void *)((char *)&Frontend_HandleOptionsPageShortcut - 0x80000000U) }, { 8, 93, (ResidentEventHandler)(void *)((char *)&Frontend_SelectNextLanguage - 0x80000000U) }, { 7, 93, (ResidentEventHandler)(void *)((char *)&Frontend_SelectPreviousLanguage - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
+    { { 3592, 4, (ResidentEventHandler)(void *)((char *)&Frontend_UpdateOptionsPageExit - 0x80000000U) }, { 3590, 4, (ResidentEventHandler)(void *)((char *)&Menu_CreateLocalizedSettingsPage - 0x80000000U) }, { 3587, 4, (ResidentEventHandler)(void *)((char *)&Menu_DestroyEuxOptionsAndReloadLanguage - 0x80000000U) }, { 2, 4, (ResidentEventHandler)(void *)((char *)&Frontend_CloseOptionsPage - 0x80000000U) }, { 1, 4, (ResidentEventHandler)(void *)((char *)&Frontend_HandleOptionsPageShortcut - 0x80000000U) }, { 8, 93, (ResidentEventHandler)(void *)((char *)&Frontend_SelectNextLanguage - 0x80000000U) }, { 7, 93, (ResidentEventHandler)(void *)((char *)&Frontend_SelectPreviousLanguage - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
     { { 3592, 11, (ResidentEventHandler)(void *)((char *)&Frontend_ActivateCompactOptionsPage - 0x80000000U) }, { 3590, 11, (ResidentEventHandler)(void *)((char *)&Menu_CreateSessionSettingsControls - 0x80000000U) }, { 3587, 11, (ResidentEventHandler)(void *)((char *)&Frontend_DestroyCompactOptionsPage - 0x80000000U) }, { 2, 11, (ResidentEventHandler)(void *)((char *)&Frontend_CloseCompactOptionsPage - 0x80000000U) }, { 1, 11, (ResidentEventHandler)(void *)((char *)&Frontend_HandleCompactOptionsShortcut - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
     { { 3592, 22, (ResidentEventHandler)(void *)((char *)&Menu_AnimateTabOptionsMenu - 0x80000000U) }, { 3594, 22, (ResidentEventHandler)(void *)((char *)&Menu_FinishTabOptionsTransition - 0x80000000U) }, { 3590, 22, (ResidentEventHandler)(void *)((char *)&Menu_OpenLocalizedGameOptions - 0x80000000U) }, { 3587, 22, (ResidentEventHandler)(void *)((char *)&Frontend_DestroyTabOptionsPage - 0x80000000U) }, { 2, 22, (ResidentEventHandler)(void *)((char *)&Frontend_ConsumeTabOptionsEvent - 0x80000000U) }, { 1, 22, (ResidentEventHandler)(void *)((char *)&Frontend_HandleTabOptionsShortcut - 0x80000000U) }, { 0, 0, (ResidentEventHandler)0 } },
     { 0x0, 0x0, 0xe, 0x3, 0x0, 0x0, 0x0, 0x1f }

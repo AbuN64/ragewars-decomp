@@ -330,11 +330,5 @@ unsigned int k_ControlCycleactorsnapshotmodeEncodedWordsBlock1AlignmentPad[1] = 
 };
 #endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_ControlCycleactorsnapshotmodeObjectAlignmentPadEu1[1] = {
-    0x00000000,
-};
-#endif
 
 /* 800C9400.CPP */

@@ -1,11 +1,6 @@
 #include "include_asm.h"
 
 /* TURRETAI_6.CPP */
-#if defined(VERSION_EU)
-unsigned int func_80203F04_de_padding_4C2C[1] = {
-    0x00000000,
-};
-#endif
 
 /* TURRETAI_7.CPP */
 /* 800C1D38_2.CPP */

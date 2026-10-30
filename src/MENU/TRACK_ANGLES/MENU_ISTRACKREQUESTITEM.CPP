@@ -17,7 +17,6 @@
    g_cinemaDirectoryText; returns the result, or 0 when there is no resource. Matched through a local pointer to the menu. */
 
 
-
 extern const char g_cinemaDirectoryText[];
 
 extern void *SetN64_LocatePackSection(int, int, int, int *);
@@ -29,7 +28,6 @@ extern void *SetN64_LocatePackSection(int, int, int, int *);
 
 /* Looks up the object at offset 4 of the structure g_cinemaSequenceState points to through SetN64_GetPackSection
    with zero, then looks up the result again with the argument, and returns that. */
-
 
 
 s32 Menu_GetCinemaSequenceCount(void) {
@@ -108,8 +106,3 @@ int Menu_IsTrackRequestItem(PakDirectoryEntryKindView *rec) {
     return result;
 }
 
-#if defined(VERSION_EU)
-unsigned int func_80403E10_de_padding_179E88[2] = {
-    0x00000000, 0x00000000,
-};
-#endif

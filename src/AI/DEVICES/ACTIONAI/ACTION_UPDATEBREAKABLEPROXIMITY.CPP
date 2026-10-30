@@ -362,11 +362,6 @@ void Actionai_DrawFadedActor(FadedActorRenderView *actor, struct ActionFadeInput
     Gobjinst_DrawActorModelWithViewEffects(actor, input, lookup);
 }
 
-#if defined(VERSION_EU)
-unsigned int func_80204808_de_padding_548C[1] = {
-    0x00000000,
-};
-#endif
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #if defined(VERSION_DE)

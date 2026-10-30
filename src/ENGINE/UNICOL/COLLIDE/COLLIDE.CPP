@@ -74,12 +74,6 @@ unsigned int k_CollideEncodedWordsBlock2AlignmentPad[1] = {
 };
 #endif
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_CollideObjectAlignmentPadEuX1[1] = {
-    0x00000000,
-};
-#endif
 
 /* 8023A284_34.CPP */
 #if defined(VERSION_EU)

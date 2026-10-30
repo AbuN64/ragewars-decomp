@@ -18,8 +18,3 @@ unsigned char g_CacheRegionalInstructionFragmentsTrailingBytesBlock11AlignmentPa
 unsigned char g_CacheRegionalInstructionFragmentsTrailingBytesBlock9AlignmentPad[12] = { 0x8C, 0x42, 0xB6, 0xA0, 0x27, 0xBD, 0xFF, 0xC8, 0xAF, 0xB1, 0x00, 0x24 };
 #endif
 
-/* 802944E8_4.CPP */
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char g_CacheRegionalInstructionFragmentsTrailingBytesBlock20AlignmentPad[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
-#endif

@@ -12,11 +12,5 @@ unsigned char g_GamecoreTrailingBytesBlock2[12] = { 0x27, 0xA5, 0x00, 0x18, 0x27
 unsigned int g_osRecvMesgAlignPad[1] = { 0x445BF800U };
 #endif
 
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-/* ROM-grounded data: func_802BB6A8_eu_x_padding_C10BC */
-unsigned int k_GamecoreZeroWords[1] = {
-    0x00000000,
-};
-#endif
 
 /* k_GamecoreZeroWords_Gamecore3.CPP */

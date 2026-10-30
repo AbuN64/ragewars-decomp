@@ -565,7 +565,6 @@ literals_Gobjinst_BuildTargetAimOrientation = 0x800C3BB4; // rom:0xC47B4 size:0x
 literals_Insthdr_BuildActorGroundRotation = 0x800C3BD4; // rom:0xC47D4 size:0x30
 literals_InstHdr_ReturnUnusedActorStatus = 0x800C3C08; // rom:0xC4808 size:0x24
 literals_InstHdr_UsesDefaultDefinitionHandling = 0x800C3C2C; // rom:0xC482C size:0x40
-k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad = 0x800C3C6C; // rom:0xC486C
 literals_InstHdr_GetActorShadowRadius = 0x800C3C70; // rom:0xC4870 size:0x2C
 literals_Simpinst_SpawnModelEffect = 0x800C3CCC; // rom:0xC48CC size:0x10
 literals_Statinst_InitializePlacedProp = 0x800C3D40; // rom:0xC4940 size:0x20

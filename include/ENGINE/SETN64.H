@@ -68,6 +68,8 @@ extern void SetN64_InitializeMode19(void);
 
 extern void SetN64_EmptyVideoModeHookUs(void);
 
+extern void SetN64_EmptyVideoModeHookSecondUs(void);
+
 struct IntegerStateB0 {
     unsigned char padding_0[136];
     s32 first;
@@ -145,6 +147,12 @@ extern void SetN64_GetRecordOutputs(void *source, int *word, float *third, float
 extern void SetN64_EmptyFrameDirectionHookUs(void);
 
 extern void SetN64_EmptyFrameDirectionHookEu(void);
+
+extern void SetN64_EmptyFrameDirectionHookSecondEu(void);
+
+extern void SetN64_EmptyFrameDirectionHookSecondUs(void);
+
+extern void SetN64_EmptySessionHookSecondEuX(void);
 
 struct RoundSessionItemStateView {
     char pad0[0x26DB8];

@@ -21,14 +21,6 @@
 /* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record Node_FindWidgetByResourceId finds for the low half of the first argument, links the record Node_FindWidgetByResourceId finds for the second into it, clears the words at 0x110 and 0x114, and registers it through Node_WrapNodeInParent_SmpButton and Node_ReplaceNodeRefs_SmpButton. Adapted from SmpSlider_CreateSliderWidget with the record size 0x118, the tag 0xB64 and the tail fields changed. */
 
 
-
-
-
-
-
-
-
-
 extern void Node_ReplaceNodeRefs(WidgetReferenceNodeView *node, void *from, void *to);
 extern void *Cache_AllocateMemory(s32 size);
 
@@ -36,21 +28,12 @@ extern void *Cache_AllocateMemory(s32 size);
    0x114, to XPlus_CopyString_ResultsFillprofileweaponrows and increments the count. SmpButton_SelectListEntry_PlayerInitplayersettingsscreen selects an entry. */
 
 
-
-
 extern u8 *XPlus_CopyString(u8 *, u8 *);
 
 /* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_listButtonEventIds, an actor kind at g_listButtonEventActorKinds and a handler at g_listButtonEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
-
-
-
-
 /* Draws the child at 0x8 of window widget with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
-
-
-
 
 
 extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
@@ -67,21 +50,9 @@ extern void Widget_DrawVisibleSiblings(void *, Args);
    20-byte entry at 0x48 and plays sound 0xE81. Returns zero. */
 
 
-
-
-
-
-
-
 /* When the fourth argument is one, moves a menu's selection at offset 0x110 to the previous of its
    0x114 entries, wrapping to the last, points word 0x38 of its owner at 0x44 to the selected 20-byte
    entry at 0x48 and plays sound 0xE81. Returns zero. */
-
-
-
-
-
-
 
 
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
@@ -90,12 +61,7 @@ extern void Widget_DrawVisibleSiblings(void *, Args);
 /* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_buttonWidgetEventIds, an actor kind at g_buttonWidgetEventActorKinds and a handler at g_buttonWidgetEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
-
-
-
-
 /* Calls SoundElement_PlayFlatSound with 0xE74 and sets the byte at 0x10 of every child in the list at 0x8 of list whose halfword at 0xE is not 8 to 100, returning zero. Adapted from N64Eng_SetLinkedCommand100WithSound with both stores to 0x5C and 0x48 removed. */
-
 
 
 /* Releases the supplied object through Cache_FreeMemory and returns zero. */
@@ -131,10 +97,6 @@ s32 SmpButton_GetListSelection(s32 *record) {
 
 /* Selects entry i of the 20-byte records at offset 0x48 of an object: records the index at 0x110
    and points word 0x38 of the object at 0x44 to that record. SmpButton_GetListSelection returns the index. */
-
-
-
-
 
 
 void SmpButton_SelectListEntry(struct MenuListWidget *menu, s32 index) {
@@ -201,8 +163,6 @@ void SmpButton_DrawListWidget(Shared_Item *widget, Args args) {
    whose kind at 0xE is not 8 to 100. Returns zero. */
 
 
-
-
 s32 SmpButton_DimListItems(struct SmpControlItemListView *menu) {
     struct SmpControlItemView *item;
 
@@ -216,8 +176,6 @@ s32 SmpButton_DimListItems(struct SmpControlItemListView *menu) {
 
 /* Walks the item list at offset 8 of a menu and sets the byte at offset 0x10 of every item
    whose kind at 0xE is not 8 to 200. Returns zero. */
-
-
 
 
 s32 SmpButton_HighlightListItems(struct SmpControlItemListView *menu) {
@@ -375,8 +333,6 @@ void SmpButton_DrawButtonWidget(Shared_Item *widget, Args args) {
    whose kind at 0xE is not 8 to 100. Returns zero. */
 
 
-
-
 s32 SmpButton_DimButtonItems(struct SmpControlItemListView *menu) {
     struct SmpControlItemView *item;
 
@@ -390,8 +346,6 @@ s32 SmpButton_DimButtonItems(struct SmpControlItemListView *menu) {
 
 /* Walks the item list at offset 8 of a menu and sets the byte at offset 0x10 of every item
    whose kind at 0xE is not 8 to 200. Returns zero. */
-
-
 
 
 s32 SmpButton_HighlightButtonItems(struct SmpControlItemListView *menu) {
@@ -432,8 +386,3 @@ char k_SmpButtonEncodedWords[4] =
     "MOVE";
 #endif
 
-#if defined(VERSION_DE)
-unsigned int func_8041B5BC_de_padding_1815DC[1] = {
-    0x00000000,
-};
-#endif

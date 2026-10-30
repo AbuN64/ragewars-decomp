@@ -10,7 +10,6 @@
    g_world_AchieveUpdateresultsscreen and that count at offset 0x34; otherwise the handle is -1. Returns the handle. */
 
 
-
 extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 
 s32 Model_SetPreviewModel(struct RecordFrontendSetPreviewModel *record, s32 count) {
@@ -37,15 +36,11 @@ void Model_SetPreviewRenderFlags(struct ObjectB8 *object, s32 value) {
 /* Returns by value the three-word vector at offset 0x10 of an object. */
 
 
-
-
 struct Triple Model_GetPreviewPosition(struct ModelPreviewPositionView *object) {
     return object->vector;
 }
 
 /* Stores a three-word vector passed by value into offset 0x10 of an object. */
-
-
 
 
 void Model_SetModelPreviewPosition(struct ModelPreviewPositionView *object, struct Triple vector) {
@@ -58,8 +53,3 @@ unsigned int func_80439F0C_us_padding_19DF0C[1] = {
 };
 #endif
 
-#if defined(VERSION_DE)
-unsigned int func_80439D00_de_padding_19FD2C[1] = {
-    0x00000000,
-};
-#endif

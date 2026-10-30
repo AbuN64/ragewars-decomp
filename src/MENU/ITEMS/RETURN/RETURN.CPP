@@ -31,9 +31,10 @@ void Items_PrepareMenuReturnUs(void) {
 /* 80406A88_23.CPP */
 #if defined(VERSION_EU_X)
 extern int Menu_ClassifyResourceRange(s32);
+extern s32 g_activeActorKind;
 
-void Items_PrepareControllerReturnEuX(s32 resourceId) {
-    g_controllerReturnResourceRange = Menu_ClassifyResourceRange(resourceId);
+void Items_PrepareControllerReturnEuX(void) {
+    g_controllerReturnResourceRange = Menu_ClassifyResourceRange(g_activeActorKind);
     g_controllerReturnPending = 0;
 }
 #endif

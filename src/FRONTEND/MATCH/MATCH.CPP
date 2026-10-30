@@ -39,11 +39,6 @@ s32 Match_DispatchEuxMatchMenuEvent(void *eventObject, s32 eventId, s32 eventPay
 }
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int func_80429DEC_eu_x_padding_119E7C[1] = {
-    0x00000000,
-};
-#endif
 
 /* 80408AC4.CPP */
 #if defined(VERSION_DE)

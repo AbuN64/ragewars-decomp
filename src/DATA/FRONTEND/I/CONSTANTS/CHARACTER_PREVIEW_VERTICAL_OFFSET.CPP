@@ -9,7 +9,5 @@ const unsigned char g_characterPreviewVerticalOffset[3] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const RestLinkerAlignmentFill4 g_characterPreviewVerticalOffsetUsRev1LinkerAlignmentFill429 = {
-    { 66, 32, 0, 0 },
-};
+const float g_characterPreviewVerticalOffset40UsRev1 = 40.0f;
 #endif

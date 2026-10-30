@@ -26,9 +26,3 @@ int CRenderSortRecord_CompareDepth(RenderSortRecord *left, RenderSortRecord *rig
     return left->depth < right->depth ? -1 : 1;
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_CcollisionExpandboxcoordinatesObjectAlignmentPadUs1[1] = {
-    0x00000000,
-};
-#endif

@@ -504,10 +504,6 @@ void Geometry_ResetDisplayListState(int *state) {
 }
 
 
-
-
-
-
 /** Clear four related global state words. */
 void Geometry_ClearMaterialGroups(void) {
     g_opaqueMaterialGroupList = 0;
@@ -616,12 +612,6 @@ const float g_geometryMaterialSetupConstantsDe[3] = {
 };
 #endif
 
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GeometryDrawblendpartsZeroWordsAlignmentPad[1] = {
-    0x00000000,
-};
-#endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_geometryInitialModelScaleUsRev1_GeometryDrawblendparts.c */

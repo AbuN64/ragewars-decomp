@@ -15,9 +15,4 @@ const char k_ovlsceneLoadsceneresourcesDataTextBytes[29] =
 /* 8044ACCC_7.CPP */
 
 #if defined(VERSION_DE) || defined(VERSION_EU)
-#if defined(VERSION_EU)
-unsigned char k_sceneResourceTextAlignmentBytes[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
 #endif

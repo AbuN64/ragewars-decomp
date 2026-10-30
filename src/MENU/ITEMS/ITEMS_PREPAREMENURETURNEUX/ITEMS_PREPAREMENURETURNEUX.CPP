@@ -1,3 +1,0 @@
-#if defined(VERSION_EU_X)
-unsigned char g_ItemsPreparemenureturneuxTrailingBytes[8] = { 0x3C, 0x04, 0x80, 0x14, 0x8C, 0x84, 0x11, 0xFC };
-#endif

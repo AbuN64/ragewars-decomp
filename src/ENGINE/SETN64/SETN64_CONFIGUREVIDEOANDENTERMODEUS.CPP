@@ -103,4 +103,8 @@ void SetN64_DrawMode19(void) {
 /** Perform no operation. */
 void SetN64_EmptyVideoModeHookUs(void) {
 }
+
+/** Perform no operation. */
+void SetN64_EmptyVideoModeHookSecondUs(void) {
+}
 #endif

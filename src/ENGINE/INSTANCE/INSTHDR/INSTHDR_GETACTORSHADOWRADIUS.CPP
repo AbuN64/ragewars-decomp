@@ -20,10 +20,6 @@
 
 /* 8024E130_2.CPP */
 /** Return the vertical offset selected by the actor's current state. */
-/* Alignment fill to the next 16-byte object boundary. */
-const unsigned int k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad[1] = {
-    0x00000000,
-};
 f32 InstHdr_GetActorShadowRadius(Actor_u1 *actor) {
     Resource_u1 *state;
 

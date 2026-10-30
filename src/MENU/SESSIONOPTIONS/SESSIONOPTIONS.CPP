@@ -38,11 +38,6 @@ s32 Menu_HandleSessionOptionPage(void *unused, struct Holder *holder) {
 }
 #endif
 
-#if defined(VERSION_US)
-unsigned int func_8043DB04_de_padding_1A1D2C[1] = {
-    0x00000000,
-};
-#endif
 
 #if defined(VERSION_DE)
 unsigned int func_8043DB4C_de_padding_1A3B4C[1] = {

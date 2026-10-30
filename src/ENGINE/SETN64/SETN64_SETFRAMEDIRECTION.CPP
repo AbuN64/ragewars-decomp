@@ -34,10 +34,18 @@ void SetN64_GetRecordOutputs(void *source, int *word, float *third, float *fourt
 /** Perform no operation. */
 void SetN64_EmptyFrameDirectionHookUs(void) {
 }
+
+/** Perform no operation. */
+void SetN64_EmptyFrameDirectionHookSecondUs(void) {
+}
 #endif
 
 #if defined(VERSION_EU)
 /** Perform no operation. */
 void SetN64_EmptyFrameDirectionHookEu(void) {
+}
+
+/** Perform no operation. */
+void SetN64_EmptyFrameDirectionHookSecondEu(void) {
 }
 #endif
