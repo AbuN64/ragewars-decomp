@@ -1,3 +1,4 @@
+#include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "../../../sdk/include/LIBC.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/LONE/g_currentStagePreset.H"
@@ -1005,10 +1006,10 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
     world->registeredCount = 0;
     world->kind1Count = 0;
     world->flaggedCount = 0;
-    Playerai_UpdatePlayerRenderResources((u8 *)settings - 0x1290, world);
+    Playerai_UpdatePlayerRenderResources((u8 *)settings - (u32)&((Shared_MenuData *)0)->game.sceneMask, world);
     camera = 0;
     if (settings->local == 0) {
-        camera = *(GameplayCamera **)((u8 *)settings - 0x1228);
+        camera = *(GameplayCamera **)((u8 *)settings - ((u32)&((Shared_MenuData *)0)->game.sceneMask - (u32)&((Shared_MenuData *)0)->object - (u32)&((MenuMatchGlobals *)0)->cameras));
     }
     cull = 0;
     if (Cinema_IsSequenceInWindow() == 0) {

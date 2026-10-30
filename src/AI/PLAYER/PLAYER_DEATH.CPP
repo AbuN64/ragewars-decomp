@@ -625,7 +625,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
         if (FIELD(void *, player, 1500) != 0) {
             if (oldHealth > 3840 && FIELD(s32, player, 1508) <= 3840 && g_frontendScreenStatus.settings.local == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                Camera_PostScreenMessage(&g_frontendScreenStatus, FIELD(void *, player, 1500), ((u8 **)&g_playerHealthDropMessage)[*((u8 *)&g_frontendScreenStatus.settings.local + 0x564)]);
+                Camera_PostScreenMessage(&g_frontendScreenStatus, FIELD(void *, player, 1500), ((u8 **)&g_playerHealthDropMessage)[g_frontendScreenStatus.settings.language]);
 #else
                 Camera_PostScreenMessage(&g_frontendScreenStatus, FIELD(void *, player, 1500), (u8 *)g_playerHealthDropMessage);
 #endif

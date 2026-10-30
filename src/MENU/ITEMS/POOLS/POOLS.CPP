@@ -283,6 +283,6 @@ void *Pools_RecycleModel(struct Draw *owner) {
 }
 
 void Pools_TransferPoolEntry(char *object, void *value) {
-    List_RemoveIntrusive(object + 0x20, value);
-    List_PrependIntrusive(object + 0xC, value);
+    List_RemoveIntrusive(&((struct Draw *)object)->recycled, value);
+    List_PrependIntrusive(&((struct Draw *)object)->model, value);
 }

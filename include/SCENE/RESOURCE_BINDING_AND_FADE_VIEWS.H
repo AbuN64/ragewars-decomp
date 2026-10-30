@@ -1,9 +1,13 @@
 #ifndef SCENE_RESOURCE_BINDING_AND_FADE_VIEWS_H
 #define SCENE_RESOURCE_BINDING_AND_FADE_VIEWS_H
+#include "os.h"
 #include "COMMON/MANAGER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 struct Manager {
-    char queue[2348];
+    union {
+        char queue[2348];
+        struct { OSMesgQueue requests; OSMesg requestMessages[64]; u8 requestStorage[2348 - sizeof(OSMesgQueue) - 64 * sizeof(OSMesg)]; };
+    };
     IntrusiveList pending;
     IntrusiveList active;
     char padActive[0x20 - sizeof(IntrusiveList)];

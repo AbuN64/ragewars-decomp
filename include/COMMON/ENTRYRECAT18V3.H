@@ -33,6 +33,7 @@ struct HeapArenaBlock {
     struct HeapArenaBlock *next_phys;
     s32 offset;
     s32 size;
+    u8 allocationPadding[8];
 };
 
 struct HeapArenaBlock;

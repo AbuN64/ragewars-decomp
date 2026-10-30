@@ -38,7 +38,7 @@ s32 Heap_AllocateAtAddress(s8 *arena, void *requestedAddress, s32 requestedBytes
         }
         freeSpanStart = containingBlock + ((struct RegionAllocatedBlockSizeView *)(containingBlock))->value;
         freeSpanEnd = freeSpanStart + ((struct RegionFreeBlockSizeView *)(containingBlock))->value;
-        allocationHeader = requestedAddress - 0x20;
+        allocationHeader = requestedAddress - sizeof(HeapArenaBlock);
         allocationEnd = allocationHeader + alignedBlockBytes;
         if ((u32) allocationHeader >= (u32) freeSpanStart) {
             if ((u32) freeSpanEnd >= (u32) allocationEnd) {
@@ -335,7 +335,7 @@ s32 Heap_FreeAllocation(HeapArena_Entryrecat18v3 *arena, char *dataToFree) {
     HeapArenaBlock *scan;
     u32 next;
 
-    header = (HeapArenaBlock *)(dataToFree - 0x20);
+    header = (HeapArenaBlock *)(dataToFree - sizeof(HeapArenaBlock));
     block = header->prev_phys;
     if (block->size == 0) {
         other = header->prev;

@@ -39,8 +39,8 @@ void TextLoad_ResetArtsendTextureState(void) {
     g_artsendTextureViewerPaletteTable = 0;
     g_artsendTextureViewerFrameCount = 0;
 
-    XPlus_FillMemory((s32) ((char *) base + 0x24), 0, 0x2000);
-    XPlus_FillMemory((s32) ((char *) base + 0x2024), 0xFF, 0x100);
+    XPlus_FillMemory((s32) ((char *)&((struct ArtsendTextureMenuState *)((char *)base - 8))->textureData), 0, 0x2000);
+    XPlus_FillMemory((s32) ((char *)&((struct ArtsendTextureMenuState *)((char *)base - 8))->paletteData), 0xFF, 0x100);
 
     *base = *g_textureResourceSectionRoot;
 }
@@ -77,7 +77,7 @@ void TextLoad_ApplyArtsendTextureOverride(s32 resource, s32 **texture) {
             enabled = (u32)g_textureVariationBypassEnabled > 0U;
         }
         if (enabled != 0) {
-            choose = (*(s32 *)((char *)&g_artsendTextureViewerOverridesOff + 0x21A0) % 10) < 3;
+            choose = (g_artsendTextureViewerOverridesOff.reservedWord % 10) < 3;
         } else {
             choose = 1;
         }
@@ -108,7 +108,7 @@ void TextLoad_ApplyArtsendPaletteOverride(s32 resource, s32 **palette) {
             paletteOverrideEnabled = (u32)g_textureVariationBypassEnabled > 0U;
         }
         if (paletteOverrideEnabled != 0) {
-            paletteOverrideSelected = (*(s32 *)((char *)&g_artsendTextureViewerOverridesOff + 0x21A0) % 10) < 3;
+            paletteOverrideSelected = (g_artsendTextureViewerOverridesOff.reservedWord % 10) < 3;
         } else {
             paletteOverrideSelected = 1;
         }

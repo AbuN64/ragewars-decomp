@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "include_asm.h"
@@ -59,7 +60,7 @@ void Preview_DrawMenuModelItem(MenuModelItem *item) {
   gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
   gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
   Geometry_InitializeModelRenderState();
-  {Gfx *g=g_displayListCursor++; char *address=(char *)(u32)(g_lightingBufferIndex<<6); address+=0x380; address+=(u32)g_fallbackScreenMessageEmitter; gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);}
+  {Gfx *g=g_displayListCursor++; char *address=(char *)(u32)(g_lightingBufferIndex<<6); address += (u32)&((GameplayCamera *)0)->projection; address+=(u32)g_fallbackScreenMessageEmitter; gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);}
   position=item->position;
   Graphu64_TransformPoint(&g_fallbackScreenMessageEmitter[0].camera,&position,&transformed);
   Graphu64_BuildTranslationMatrix(&matrix, transformed.x, transformed.y, transformed.z);

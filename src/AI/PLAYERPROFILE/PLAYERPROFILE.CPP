@@ -85,11 +85,9 @@ void Player_InitializeProfile(void *profileStorage) {
     XPlus_FillMemory(((Profile *)object)->levelFlags[3], 0, 5);
     XPlus_FillMemory(((Profile *)object)->levelFlags[1], 0, 5);
     i = 35;
-    cursor = object + 0x8C;
     do {
         ((PlayerProfileStorage *)object)->counters[i] = 0;
         i--;
-        cursor -= 4;
     } while (i >= 0);
     XPlus_FillMemory(&((Profile *)object)->trackFlags, 0, 1);
     object[394] = 1;

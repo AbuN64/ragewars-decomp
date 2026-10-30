@@ -1,3 +1,4 @@
+#include "COMMON/RESOURCE_CACHE.H"
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
@@ -36,7 +37,7 @@ void Cache_RunCompactionPasses(s32 unused) {
     g_resourceHeapLockUsers = pendingPasses;
     if (pendingPasses != 1) {
         __osRestoreInt(mask);
-        queueAddress = (char *)resourceManager - 0x3C;
+        queueAddress = (char *)resourceManager - ((u32)&((struct ResMgr *)0)->reservedWordC1C - (u32)&((struct ResMgr *)0)->heapLockQueue);
         receive = queueAddress;
         osRecvMesg(receive, 0, 1);
 #else
@@ -48,7 +49,7 @@ void Cache_RunCompactionPasses(s32 unused) {
     g_resourceHeapLockUsers = pendingPasses;
     if (pendingPasses != passIndex) {
         __osRestoreInt(mask);
-        queueAddress = (char *)resourceManager - 0x3C;
+        queueAddress = (char *)resourceManager - ((u32)&((struct ResMgr *)0)->reservedWordC1C - (u32)&((struct ResMgr *)0)->heapLockQueue);
         receive = queueAddress;
         osRecvMesg(receive, 0, passIndex);
 #endif

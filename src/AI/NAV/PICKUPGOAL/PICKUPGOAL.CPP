@@ -1,3 +1,6 @@
+#include "COMMON/LEVEL_ACTOR.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+#include "COMMON/NAVIGATION_GRAPH.H"
 #include "include_asm.h"
 #include "COMMON/NAVIGATION_ACTOR_SEARCH_VIEWS.H"
 #include "TYPES.H"
@@ -80,7 +83,7 @@ extern s32 Portal_FindNearestPointIndex(s32 *, void *);
 extern u8 *Portal_FindSearchNode(s32 *, s32);
 /* Finds the nav node of obj and stores weight as its goal weight (+0x18). */
 #define navigationNodeOf(graph, obj, out) do { (out) = Portal_FindSearchNode((graph), Portal_FindNearestPointIndex((graph), (obj))); } while (0)
-#define navigationSetGoalWeight(graph, obj, weight) do { u8 *node_; navigationNodeOf(graph, obj, node_); *(f32 *)(node_ + 0x18) = (weight); } while (0)
+#define navigationSetGoalWeight(graph, obj, weight) do { u8 *node_; navigationNodeOf(graph, obj, node_); ((NavigationSearchNode *)node_)->extra = (weight); } while (0)
 void Nav_SetPickupGoalWeights(void *arg) {
     s32 *ctrl = &g_navigationGraph;
     u8 *node;
@@ -91,11 +94,11 @@ void Nav_SetPickupGoalWeights(void *arg) {
         return;
     }
     for (i = 0; i < 3; i++) {
-        for (node = *(u8 **)(tbl + 0xFC28 + i * 0x14); node != 0; node = *(u8 **)(node + 0x1EC)) {
+        for (node = (u8 *)((IntrusiveList *)(tbl + (u32)&((struct EffectSystem *)0)->lists + i * sizeof(IntrusiveList)))->head; node != 0; node = (u8 *)((struct ParticleEffect *)node)->next) {
             switch (*(u16 *)(node + 4)) {
             case 1054:
-                link = *(u8 **)(node + 0x12C);
-                if (link == 0 || *link != 1 || !(*(s32 *)(link + 0x100) & 0x300000) || link == (u8 *)*(s32 **)arg) {
+                link = (u8 *)((struct ParticleEffect *)node)->owner;
+                if (link == 0 || *link != 1 || !(((LevelActor *)link)->flags & 0x300000) || link == (u8 *)*(s32 **)arg) {
                     break;
                 }
             case 1026:

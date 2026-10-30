@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
@@ -90,7 +91,7 @@ void Preview_DrawModelPreview(ModelPreview *self) {
         {
             Gfx *g = g_displayListCursor++;
             u32 address = (u32)(g_lightingBufferIndex << 6);
-            address += 0x380;
+            address += (u32)&((GameplayCamera *)0)->projection;
             address += (u32)view;
             gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
         }

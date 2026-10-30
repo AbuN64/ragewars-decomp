@@ -485,9 +485,9 @@ typedef struct LinkOwner802A {
 static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A *node, void *source) {
     f32 matrix[16];
     f32 scale;
-    Graphu64_ConvertMatrixToFloat(matrix, (char *)source + (g_lightingBufferIndex * 64 + 0x60));
+    Graphu64_ConvertMatrixToFloat(matrix, &((struct EffectActor *)source)->u60.matrices[g_lightingBufferIndex]);
     scale = g_ribbonPositiveLayerScale;
-    if (*(s32 *)(*(char **)((char *)source + 0x118) + 0x14) != 0) {
+    if (((struct EffectActor *)source)->model->scaleModeFlag != 0) {
         scale = g_ribbonNegativeLayerScale;
     }
     ScaleMatrixLocal(matrix, scale, scale, scale);

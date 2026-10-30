@@ -306,10 +306,10 @@ void Vector3IntersectPlane(CVector3 *intersectionOut, CVector3 *lineStart, CVect
 void XMath_CopyMatrix(void *destination, void *source) {
     char *dst = (char *)destination;
     char *src = (char *)source;
-    char *end = src + 0x40;
+    char *end = src + sizeof(Matrix);
     do {
         *(struct CacheResourceBlockView *)dst = *(struct CacheResourceBlockView *)src;
-        src += 0x10;
-        dst += 0x10;
+        src += sizeof(CQuatern);
+        dst += sizeof(CQuatern);
     } while (src != end);
 }

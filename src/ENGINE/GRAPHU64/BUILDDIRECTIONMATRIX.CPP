@@ -92,12 +92,12 @@ void Graphu64_TransposeMatrixBasis(f32 *destination, f32 *source) {
         v1 = (char *)source;
         do {
             *(f32 *)a2 = *(f32 *)(coloff + (s32)v1);
-            v1 += 0x10;
+            v1 += sizeof(CQuatern);
             row += 1;
             a2 += 4;
         } while (row < 3);
         col += 1;
-        a0 += 0x10;
+        a0 += sizeof(CQuatern);
     } while (col < 3);
 }
 

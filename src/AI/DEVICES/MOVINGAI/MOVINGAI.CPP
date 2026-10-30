@@ -1,3 +1,5 @@
+#include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -43,7 +45,7 @@ void MovingAI_ChooseTriggerDelay(void *levelActor, void *actorMotionState) {
     motion->speed = result;
     ctx = (char *) &g_gameSettings;
     if (((GameModeEnableView *)(ctx))->local != 0) {
-        count = *(s32 *) (ctx - 0x1258);
+        count = *(s32 *) (ctx - ((u32)&((Shared_MenuData *)0)->game - (u32)&((Shared_MenuData *)0)->sessionOptionResetMode));
         if ((u32) count >= 3) {
             count -= 2;
             scaled = result * k_triggerDelayPercentScale;

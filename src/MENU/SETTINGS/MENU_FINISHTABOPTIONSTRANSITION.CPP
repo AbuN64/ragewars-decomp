@@ -81,7 +81,7 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
             if (g_optionsShortcutScreen->mode == -1) {
                 humans = 0;
                 i = 0;
-                player = (u8 *)pause - 0x5CC;
+                player = (u8 *)pause - ((u32)&((Shared_MenuData *)0)->pause - (u32)&((Shared_MenuData *)0)->game);
                 do {
                     if (((Shared_Game *)player)->playerSettings[i].locked == 0 && ((Shared_Game *)player)->playerSettings[i].enabled == 1) {
                         humans++;

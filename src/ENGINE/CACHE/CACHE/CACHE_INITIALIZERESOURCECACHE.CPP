@@ -32,44 +32,7 @@ extern CMemEntry *g_resourceAllocationCandidate;
 #include "COMMON/ENTRYRECAT18V3.H"
 /* The resource manager record at g_resourceCacheManager: node array, free-slot stack, link records, lists and its lock queue.
  * count (0xBDC) and stamp (0xC20) are the Pool fields used by Cache_AcquirePendingResourceEntry. */
-struct ResLink {
-    s32 reservedWord0;
-    s32 reservedWord4;
-    s32 reservedWord8;
-    s32 reservedWordC;
-    s32 owner;
-    s32 reservedWord14;
-    s32 reservedWord18;
-    s32 reservedWord1C;
-    s32 reservedWord20;
-    s32 nextLink;
-    s32 prevLink;
-};
-struct ResMgr {
-    struct CMemEntry *nodes;
-    struct CMemEntry **slots;
-    s32 reservedWord8;
-    struct ResLink *links;
-    IntrusiveList entries;
-    IntrusiveList recent;
-    s32 enabled0;
-    s32 enabled1;
-    s32 reservedWord40;
-    s32 reservedWord44;
-    s32 selected;
-    char pad4C[0xB98 - 0x4C];
-    IntrusiveList freeLinks;
-    IntrusiveList listBAC;
-    IntrusiveList listBC0;
-    s32 reservedWordBD4;
-    s32 reservedWordBD8;
-    s32 count;
-    char padBE0[0xC00 - 0xBE0];
-    OSMesgQueue lock;
-    OSMesg lockSlot[1];
-    s32 reservedWordC1C;
-    s32 stamp;
-};
+#include "COMMON/RESOURCE_CACHE.H"
 extern s32 Heap_AllocateFromFront(void *, s32);
 extern s32 Mutex_InitializeQueueLock(OSMesgQueue *);
 extern u32 Defs_GetMemorySize(void);
@@ -135,7 +98,7 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
         List_AppendIntrusive(&g_resourceCacheManager.freeLinks, link);
     }
     HashTable_InitializeResourceTable(g_resourceCacheNodeCapacity);
-    osCreateMesgQueue((OSMesgQueue *)g_resourceRequestManager.queue, (OSMesg *)(g_resourceRequestManager.queue + 0x18), 64);
+    osCreateMesgQueue((OSMesgQueue *)g_resourceRequestManager.queue, g_resourceRequestManager.requestMessages, 64);
     unlockMask = __osDisableInt();
     g_resourceHeapLockUsers -= 1;
     if (g_resourceHeapLockUsers != 0) {
@@ -211,7 +174,7 @@ static inline void *pool_alloc(s32 byteCount) {
     cacheEntry->pending = 0;
     cacheEntry->owner = 0;
     cacheEntry->lastUsed = ((struct Pool *)&g_resourceFreeNodeCount)->useCounter;
-    List_PrependIntrusive((char *)&g_resourceFreeNodeCount - 0xBCC, cacheEntry);
+    List_PrependIntrusive((char *)&g_resourceFreeNodeCount - ((u32)&((struct ResMgr *)0)->count - (u32)&((struct ResMgr *)0)->entries), cacheEntry);
     cacheEntry->flags |= (byteCount & 0xC);
     return cacheEntry;
 }

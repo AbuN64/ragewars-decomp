@@ -1,3 +1,4 @@
+#include "COMMON/RESOURCE_CACHE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LONE/RUNTIME_HEAP.H"
 #include "include_asm.h"
@@ -58,7 +59,7 @@ static inline void release(s32 node) {
     }
     ((CachedResource *)node)->flags = 0;
     g_resourceFreeNodeStack.value[((struct Pool *)&g_resourceFreeNodeCount)->count] = (CachedResource *)node;
-    *(&g_resourceRecencyList + 0x2F3) += 1;
+    *(&g_resourceRecencyList + ((u32)&((struct ResMgr *)0)->count - (u32)&((struct ResMgr *)0)->entries) / sizeof(s32)) += 1;
 }
 
 ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest *request, s32 dropReference) {
@@ -66,7 +67,7 @@ ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest 
     CachedResource *node;
 
     List_RemoveIntrusive(&g_resourceCompletionRequests, request);
-    List_PrependIntrusive((char *)&g_resourceCompletionRequests - 0x14, request);
+    List_PrependIntrusive((char *)&g_resourceCompletionRequests - ((u32)&((struct ResMgr *)0)->listBC0 - (u32)&((struct ResMgr *)0)->listBAC), request);
     if (request->node != 0) {
         find(request->key, &existing);
         if (existing != 0) {

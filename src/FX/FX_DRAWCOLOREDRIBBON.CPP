@@ -152,7 +152,7 @@ loop_4:
                                 ((struct RibbonFrameBufferView *) (((char *) segment) + (g_lightingBufferIndex << 6)))->matrix=((struct RibbonFrameBufferView *) (((char *) segment) + ((g_lightingBufferIndex ^ 1) << 6)))->matrix;
                                 segment->attachedEntity = 0;
                             } else {
-                                Graphu64_ConvertMatrixToFloat(&localMatrix, (char *)detachedEntity + ((g_lightingBufferIndex << 6) + 0x60));
+                                Graphu64_ConvertMatrixToFloat(&localMatrix, &((struct EffectActor *)detachedEntity)->u60.matrices[g_lightingBufferIndex]);
                                 scale = g_detachedRibbonActorScale;
                                 if (detachedEntity->renderDefinition->flags != 0) {
                                     scale = g_detachedRibbonSpecialActorScale;

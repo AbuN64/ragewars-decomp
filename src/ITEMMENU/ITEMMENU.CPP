@@ -310,7 +310,7 @@ s32 ItemMenu_SetEntry(char *menu, s32 entryValue, s32 entryKey, s32 imageResourc
             return 0;
         }
     }
-    entryStorage = menu + ((entryIndex * 0x38) + 4);
+    entryStorage = (char *)&((CItemMenu *)menu)->entries[entryIndex];
     ((CItemMenu *)menu)->m_LastItemPos = entryIndex;
     ((CItem *)(entryStorage))->active = 1;
     ((CItem *)(entryStorage))->resource = entryValue;
@@ -334,7 +334,7 @@ s32 ItemMenu_IsSelectedEntryActive(void *menu)
   remainingEntries = 3;
   do
   {
-    selectedEntry = ((s8 *) (menu + ((((struct ItemMenuSelectionView *)(menu))->id) * 0x38))) + 4;
+    selectedEntry = ((s8 *)(menu + (((struct ItemMenuSelectionView *)menu)->id * sizeof(CItem)))) + (u32)&((CItemMenu *)0)->entries;
     if ((*((s32 *) selectedEntry)) != 0)
     {
       activeEntryCount += 1;

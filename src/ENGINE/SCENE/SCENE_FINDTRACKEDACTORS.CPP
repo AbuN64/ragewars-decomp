@@ -237,7 +237,7 @@ s32 Scene_GetLevelActorIndex(void *container, void *actorStorage) {
     }
     base = scene->actors;
     if (actorStorage >= base &&
-        (char *)actorStorage <= (char *)base + ((u32)scene->actorCount * 0x2E8 - 0x2E8)) {
+        (char *)actorStorage <= (char *)base + ((u32)scene->actorCount * sizeof(LevelActor) - sizeof(LevelActor))) {
         return ((u32)actorStorage - (u32)base) / 744;
     }
     return -1;

@@ -48,7 +48,7 @@ void Fx_ClampScalarRange(f32 *scalarPointer) {
 void Fx_AddTimedCallback(s32 ownerAddress, s32 callbackContextAddress, s32 callbackAddress, s32 remainingCalls, f32 interval) {
     void *node;
 
-    node = Lists_MoveHeadToInactiveList(ownerAddress + 0x7588);
+    node = Lists_MoveHeadToInactiveList(&((struct AttachedEffectPoolView *)ownerAddress)->attachedEffectLists);
     if (node != 0) {
         ((TimedEffectCallbackView *)(node))->callback = callbackContextAddress;
         ((TimedEffectCallbackView *)(node))->callbackData = callbackAddress;
@@ -310,7 +310,7 @@ void Fx_UpdateChildTransform(Node44 *parentNode, void *childNode) {
             ((ChildB4 *)childNode)->mat[g_lightingBufferIndex] = ((ChildB4 *)childNode)->mat[g_lightingBufferIndex ^ 1];
             ((ChildB4 *)childNode)->attachedEntity = 0;
         } else {
-            Graphu64_ConvertMatrixToFloat(local, entry + ((g_lightingBufferIndex << 6) + 0x60));
+            Graphu64_ConvertMatrixToFloat(local, &((struct EffectActor *)entry)->u60.matrices[g_lightingBufferIndex]);
             scale = g_childTransformDefaultScale;
             if (((ParticleEffect *)entry)->entry->rangeModeFlag != 0) {
                 scale = g_childTransformAlternateScale;
@@ -321,7 +321,7 @@ void Fx_UpdateChildTransform(Node44 *parentNode, void *childNode) {
             if (parentNode->flags & 4) {
                 Graphu64_GetMatrixScale(local, &((ChildB4 *)childNode)->rot[0]);
             } else {
-                Graphu64_ConvertMatrixToFixed(local, (PackedMatrixWords *)(childNode + ((g_lightingBufferIndex << 6) + 0x28)));
+                Graphu64_ConvertMatrixToFixed(local, (PackedMatrixWords *)(&((struct Node438C *)childNode)->matrices[g_lightingBufferIndex]));
             }
         }
         ((ChildB4 *)childNode)->remainingLifetime = parentNode->definition->segmentLifetime;

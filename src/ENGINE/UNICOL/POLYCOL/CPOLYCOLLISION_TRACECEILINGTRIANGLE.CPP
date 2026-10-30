@@ -50,7 +50,7 @@ void CPolyCollision_TraceElementMesh(void *contextAddress) {
     collisionElement = ((ContextB0 *)contextAddress)->element;
     meshResource = ((ElementE8 *)collisionElement)->resource;
     if (meshResource != 0) {
-        Graphu64_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)collisionElement)->transform, (char *) contextAddress + 0xC);
+        Graphu64_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)collisionElement)->transform, &((ContextB0 *)contextAddress)->matrix);
         meshData = *meshResource;
         ((ContextB0 *)contextAddress)->vertices = SetN64_GetPackSection(meshData, 0);
         displayListTable = SetN64_GetPackSection(meshData, 2);
