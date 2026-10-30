@@ -227,7 +227,7 @@ extern SessionInitializeHandler g_sessionInitializeHandlers[];
 
 extern s32 g_frameHeapBufferIndex;
 
-extern u64 g_videoManagerThreadStack[0x200];
+extern u64 g_videoManagerThreadStack[512];
 
 extern u32 g_sourceBlueMask;
 
