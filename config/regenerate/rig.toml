@@ -1,0 +1,18 @@
+# Rig facts for tools/regenerate (ButlerMaster Land runs it on W; the build runs on the rig). Paths are relative to the
+# rig user's home. The generated paths and the command are declared in ../../config.toml [repo].
+[rig]
+host = "abu@192.168.0.101"
+# The object store the exact tree state is pushed to (a scratch ref, removed after the run).
+repo = "code/ragewars-decomp"
+# The one warm worktree every run reuses (created by the first run, guarded by a lock beside it).
+warm = "finish/regen/ragewars"
+# A tree whose ignored inputs the warm worktree links when it is created: the cartridge dumps.
+seed_tree = "code/ragewars-decomp"
+seed_link = ["roms"]
+# The finish slot command: runs its arguments in whichever of the two finish slots frees first.
+slot = "~/finish/slot"
+# Run in the warm worktree inside the slot, in order; the first failure ends the run. Only `unbake sync` writes
+# committed files (GENERATED.tsv); it publishes README.md, progress.json and docs from the verdict `unbake verify`
+# records for the exact tree, so it runs after `make check`.
+build = ["unbake setup --no-make", "make -j8 check", "unbake verify 0", "unbake sync"]
+# No timeout_seconds: a bound is a value its owner declares, and none has.

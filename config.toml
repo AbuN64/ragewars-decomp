@@ -550,3 +550,12 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-O0"]
 omit = ["-O2", "-mgas"]
 unrelocated = true
+
+# The paths a git host regenerates instead of merging (`unbake sync` writes them to .gitattributes as
+# `<glob> generated=<regenerate>`): ButlerMaster Land runs the command from the tree root where a rebase conflicts in them.
+[repo]
+generated = [
+  "README.md", "progress.json", "docs/map-*.json", "docs/overview-*.svg", "versions/*/text_sizes.mk",
+  "versions/*/splat.yaml", "RageWars.ld", "ci/run", ".github/workflows/ci.yml", ".gitlab-ci.yml",
+]
+regenerate = "tools/regenerate"

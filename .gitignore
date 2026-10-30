@@ -2,9 +2,10 @@
 /asm/
 /build/
 /roms/
-/tools/
+/tools/*
 /local.mk
 *.z64
 *.n64
 *.v64
 .abu/
+!/tools/regenerate

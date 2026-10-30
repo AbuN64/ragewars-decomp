@@ -1,0 +1,181 @@
+#!/usr/bin/env python3
+"""Regenerate this tree's generated files on the rig.
+
+ButlerMaster Land runs this from the tree root (on W) for every path the
+.gitattributes declares `generated=tools/regenerate`. W must not run the heavy
+build, so the script ships the exact tree state to the rig, builds and syncs it
+there inside a finish slot, and copies back only the declared generated paths. The rig keeps one warm
+worktree, so a run rebuilds only what the tree's change touches.
+
+Rig facts (host, slot command, seed tree, build commands, optional bound) live in
+config/regenerate/rig.toml. Every failure exits non-zero with the rig's message and
+leaves the tree's files as they were: results are staged, then renamed whole.
+"""
+import os
+import shlex
+import shutil
+import subprocess
+import sys
+import tomllib
+import uuid
+
+COMMAND = "tools/regenerate"
+CONFIG = "config/regenerate/rig.toml"
+AUTHOR = {
+    "GIT_AUTHOR_NAME": "regenerate", "GIT_AUTHOR_EMAIL": "regenerate@localhost",
+    "GIT_AUTHOR_DATE": "2000-01-01T00:00:00Z",
+    "GIT_COMMITTER_NAME": "regenerate", "GIT_COMMITTER_EMAIL": "regenerate@localhost",
+    "GIT_COMMITTER_DATE": "2000-01-01T00:00:00Z",
+}
+
+
+class Failure(Exception):
+    pass
+
+
+def run(argv, cwd=None, env=None, input=None, what=None):
+    done = subprocess.run(argv, cwd=cwd, env=env, input=input, capture_output=True)
+    if done.returncode:
+        message = (done.stderr or done.stdout).decode(errors="replace").strip()
+        raise Failure(f"{what or argv[0]} failed ({done.returncode}): {tail(message)}")
+    return done.stdout
+
+
+def quote(path):
+    return shlex.quote(path)
+
+
+def load_config(root):
+    with open(os.path.join(root, CONFIG), "rb") as handle:
+        return tomllib.load(handle)
+
+
+def ship(root, rig):
+    """Commit the exact worktree state (tracked, untracked, not ignored) off to
+    the side and push it to a rig scratch ref; the real index is untouched."""
+    git_dir = run(["git", "rev-parse", "--absolute-git-dir"], cwd=root).decode().strip()
+    index = os.path.join(git_dir, f"regenerate-index-{os.getpid()}")
+    env = dict(os.environ, GIT_INDEX_FILE=index, **AUTHOR)
+    try:
+        head = run(["git", "rev-parse", "HEAD"], cwd=root).decode().strip()
+        run(["git", "read-tree", head], cwd=root, env=env)
+        run(["git", "add", "-A", "--", "."], cwd=root, env=env)
+        tree = run(["git", "write-tree"], cwd=root, env=env).decode().strip()
+    finally:
+        if os.path.exists(index):
+            os.unlink(index)
+    commit = run(["git", "commit-tree", tree, "-p", head, "-m", "regenerate"],
+                 cwd=root, env=env).decode().strip()
+    ref = f"refs/regenerate/{commit[:12]}-{uuid.uuid4().hex[:8]}"
+    run(["git", "push", "-q", f"{rig['host']}:{rig['repo']}", f"{commit}:{ref}"],
+        cwd=root, what="push to rig scratch ref")
+    return commit, ref
+
+
+def home(path):
+    """A rig path (relative to the rig's home) as an absolute shell word."""
+    return '"$HOME"/' + quote(path)
+
+
+def remote(rig, script, what):
+    return run(["ssh", rig["host"], script], what=what)
+
+
+def build_script(rig, commit):
+    """The job one finish slot runs on the rig: take the tree's lock, move the warm worktree to the shipped commit
+    (only files that differ change, so make rebuilds only changed units), build and sync, then record the tree as a
+    state commit and print its id. The state commit holds the result, so the next run may reuse the tree at once."""
+    warm, repo = home(rig["warm"]), home(rig["repo"])
+    links = [line for name in rig.get("seed_link", []) for line in (
+        f"ln -s {home(rig['seed_tree'] + '/' + name)} {quote(name)}",
+        f"grep -qxF /{quote(name)} \"$X\" || echo /{quote(name)} >> \"$X\"")]  # linked, never committed
+    lines = ["set -e", f"W={warm}", 'mkdir -p "$(dirname "$W")"', 'exec 7>>"$W.lock"', "flock 7",
+             'if [ ! -d "$W" ]; then', f"git -C {repo} worktree prune",
+             f'git -C {repo} worktree add -q --detach "$W" {commit}', 'cd "$W"',
+             'X="$(git rev-parse --git-path info/exclude)"', 'mkdir -p "$(dirname "$X")"', *links, "fi", 'cd "$W"',
+             "state() { git add -A && { git diff --cached --quiet || git -c user.name=regenerate "
+             "-c user.email=regenerate@localhost commit -q -m state; }; }",
+             "state",  # a run that was killed left its changes behind: keep them out of the checkout
+             f"git checkout -q --detach {commit}",
+             "trap 'state; echo regenerate-state $(git rev-parse HEAD)' EXIT", *rig["build"]]
+    return "\n".join(lines)
+
+
+def build_command(rig, commit):
+    command = f"sh -c {quote(build_script(rig, commit))}"
+    bound = rig.get("timeout_seconds")
+    if bound:
+        command = f"timeout {int(bound)} {command}"
+    return f"{rig['slot']} {command}"
+
+
+def tail(message, lines=40):
+    rows = message.splitlines()
+    return "\n".join((["..."] if len(rows) > lines else []) + rows[-lines:])
+
+
+def generated(root, names):
+    """The names whose `generated` attribute is this script's command."""
+    if not names:
+        return []
+    out = run(["git", "check-attr", "-z", "--stdin", "generated"], cwd=root,
+              input=b"\0".join(n.encode() for n in names) + b"\0").decode()
+    fields = out.split("\0")
+    return sorted(fields[i] for i in range(0, len(fields) - 2, 3) if fields[i + 2] == COMMAND)
+
+
+def tree_files(root):
+    out = run(["git", "ls-files", "-z", "-co", "--exclude-standard"], cwd=root)
+    return [n for n in out.decode().split("\0") if n and os.path.lexists(os.path.join(root, n))]
+
+
+def regenerate(root):
+    rig = load_config(root)["rig"]
+    commit, ref = ship(root, rig)
+    stage = os.path.join(root, f".regenerate-stage-{os.getpid()}")
+    try:
+        out = remote(rig, build_command(rig, commit), "rig build and sync").decode()
+        state = [row.split()[1] for row in out.splitlines() if row.startswith("regenerate-state ")]
+        if not state:
+            raise Failure("the rig build printed no state commit")
+        repo = home(rig["repo"])
+        listing = remote(rig, f"git -C {repo} ls-tree -r -z --name-only {state[-1]}", "rig file listing")
+        wanted = generated(root, [n for n in listing.decode().split("\0") if n])
+        if not wanted:
+            raise Failure("no path is declared generated=" + COMMAND + " in .gitattributes")
+        kept = set(wanted)
+        stale = [n for n in generated(root, tree_files(root)) if n not in kept]
+        os.makedirs(stage)
+        names = b"\0".join(n.encode() for n in wanted) + b"\0"
+        archive = run(["ssh", rig["host"], f"cd {repo} && xargs -0 git archive {state[-1]} --"], input=names,
+                      what="copy back")
+        run(["tar", "-x", "-i", "-C", stage], input=archive, what="unpack copy back")
+        missing = [n for n in wanted if not os.path.lexists(os.path.join(stage, n))]
+        if missing:
+            raise Failure("the rig did not bring back: " + ", ".join(missing))
+        for name in wanted:
+            target = os.path.join(root, name)
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            os.replace(os.path.join(stage, name), target)
+        for name in stale:
+            os.unlink(os.path.join(root, name))
+        return wanted
+    finally:
+        shutil.rmtree(stage, ignore_errors=True)
+        subprocess.run(["ssh", rig["host"], f"git -C {home(rig['repo'])} update-ref -d {quote(ref)}"],
+                       capture_output=True)
+
+
+def main():
+    try:
+        root = run(["git", "rev-parse", "--show-toplevel"]).decode().strip()
+        wanted = regenerate(root)
+    except Failure as failure:
+        print(f"regenerate: {failure}", file=sys.stderr)
+        return 1
+    print(f"regenerate: {len(wanted)} generated files written")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
