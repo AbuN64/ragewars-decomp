@@ -13,13 +13,31 @@ typedef struct PAKNameChar {
 } PAKNameChar;
 /* One 400-byte "global" player record; only the fields the update code tests are named. */
 typedef struct PAKGlobalPlayer {
-    u8 pad0[8];
+    u8 m_Name[8];
     s32 m_Marker;
     s8 m_Slot;
     s8 m_User;
     s8 m_Quick;
-    u8 pad0F[PAK_PLAYER_RECORD_SIZE - 15];
+    u8 pad0F[393 - 15];
+    u8 m_Field189;
+    u8 m_Field18A;
+    u8 m_Field18B;
+    u8 m_Field18C;
+    u8 m_Field18D;
+    u8 pad18E[PAK_PLAYER_RECORD_SIZE - 398];
 } PAKGlobalPlayer;
+/* A widget of the screen's user list: the display-list node with its alpha, its x and width, and the previous and next widget. */
+typedef struct PAKUserWidget {
+    u8 pad0[16];
+    u8 m_Alpha;
+    u8 pad11[3];
+    u16 m_X;
+    u8 pad16[2];
+    s16 m_Width;
+    u8 pad1A[44 - 26];
+    struct PAKUserWidget *m_pPrev;
+    struct PAKUserWidget *m_pNext;
+} PAKUserWidget;
 /* One row of the Controller Pak management list: the line shown, the note name and the pages it takes. */
 #define PAK_NOTE_ROWS 16
 #define PAK_PLAYER(user) (g_pakInterfaceScreen->m_PAKInterfacePlayer[user])
@@ -28,6 +46,15 @@ typedef struct PAKNoteRow {
     char m_Name[20];
     char m_Size[10];
 } PAKNoteRow;
+/* A name-entry character widget of the display list: the label holding the typed character, its flags and the next widget. */
+typedef struct PAKNameWidget {
+    u8 pad0[8];
+    struct PAKLabel *m_pLabel;
+    u8 padC[18 - 12];
+    u16 m_Flags;
+    u8 pad14[56 - 20];
+    struct PAKNameWidget *m_pNext;
+} PAKNameWidget;
 /* A list row widget; only its alpha byte and its text pointer are used. */
 typedef struct PAKLabel {
     u8 m_Unread0[16];
@@ -40,11 +67,11 @@ typedef struct PAKInterfacePlayer {
     s32 m_Mode;
     s32 m_Step;
     void *m_pWidget;
-    u8 pad10[4];
+    PAKUserWidget *m_pObject;
     s32 m_Panel;
     PAKGlobalPlayer m_MiddleRecords[PAK_USERS];
     PAKNoteRow m_Notes[PAK_NOTE_ROWS];
-    u8 pad_AB8[2754 - 1624 - PAK_NOTE_ROWS * 70];
+    char m_TextAB8[2754 - 1624 - PAK_NOTE_ROWS * 70];
     char m_BlocksText[10];
     char m_PagesFreeText[12];
     s32 m_ListCursor;
@@ -52,9 +79,10 @@ typedef struct PAKInterfacePlayer {
     PAKLabel *m_ListRows[3];
     s32 m_QuickRecord;
     s32 m_RecordState[PAK_USERS];
-    u8 padB30[2856 - 2800 - PAK_USERS * 4];
+    s32 m_RecordField2816[PAK_USERS];
+    u8 padB40[2856 - 2816 - PAK_USERS * 4];
     s32 m_SelectedRecord;
-    u8 padB5C[4];
+    s32 m_FieldB3C;
     s32 m_NameTarget;
     PAKNameChar m_Name[PAK_NAME_LENGTH];
     s32 m_NameCursor;
@@ -80,12 +108,17 @@ typedef struct PAKSaveBlock {
 typedef struct PAKInterfaceScreen {
     s32 m_Unread0;
     void *m_pUserList;
-    u8 pad8[44 - 8];
+    u8 m_Wipe[28];
+    void *m_pFlicker;
+    PAKUserWidget *m_pFlickerWidget;
     s32 m_UserBusy[PAK_USERS];
-    u8 pad3C[76 - 60];
+    PAKUserWidget *m_pBarA;
+    s32 m_BarStepA;
+    PAKUserWidget *m_pBarB;
+    s32 m_BarStepB;
     s32 m_ExitPhase;
     s32 m_ExitStep;
-    u8 pad54[88 - 84];
+    s32 m_Mode;
     PAKInterfacePlayer m_PAKInterfacePlayer[PAK_USERS];
     PAKSlotState m_Slot[PAK_USERS];
     PAKSaveBlock m_SaveBlock;
@@ -157,10 +190,24 @@ typedef struct PAKListItem {
 /* The engine application record; only the bytes the pak screens read are named: the frontend mode and the language the text tables are indexed with. */
 #define ENGINE_APP_FRONTEND_MODE_OFFSET 157725
 #define ENGINE_APP_LANGUAGE_OFFSET 159121
+#define ENGINE_APP_PLAYER_SETUP_OFFSET 157920
+/* The setup bytes of the player being created that a quick-play name entry copies into its record. */
+typedef struct PAKPlayerSetup {
+    u8 pad0[121];
+    u8 m_Field121;
+    u8 m_Field122;
+    u8 m_Field123;
+    u8 pad7C;
+    u8 m_Field125;
+    u8 pad7E[130 - 126];
+    u8 m_Field130;
+} PAKPlayerSetup;
 typedef struct EngineApp {
     u8 pad0[ENGINE_APP_FRONTEND_MODE_OFFSET];
     u8 m_FrontendMode;
-    u8 pad1[ENGINE_APP_LANGUAGE_OFFSET - ENGINE_APP_FRONTEND_MODE_OFFSET - 1];
+    u8 pad1[ENGINE_APP_PLAYER_SETUP_OFFSET - ENGINE_APP_FRONTEND_MODE_OFFSET - 1];
+    PAKPlayerSetup m_PlayerSetup;
+    u8 pad2[ENGINE_APP_LANGUAGE_OFFSET - ENGINE_APP_PLAYER_SETUP_OFFSET - sizeof(PAKPlayerSetup)];
     u8 m_Language;
 } EngineApp;
 extern EngineApp g_engineApp;

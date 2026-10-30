@@ -1,5 +1,5 @@
 # Turok: Rage Wars: matching build.
-# generator: b15a40b606ab
+# generator: 82b16b3f52cc
 # make check             builds every version ROM from the committed sources and verifies its SHA-1.
 # make check CHECK=tree  verifies only that the committed generated files are present (no ROMs needed).
 # make extract           splits every baserom into asm/<version>/ with splat; a data file's section is its stand-in's.
@@ -304,6 +304,10 @@ $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEPLAYE
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEPLAYERFROMMIDDLE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEPLAYERFROMMIDDLE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEPLAYERFROMMIDDLE.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONUP.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONUP.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONUP.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONUP.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_FINDEMPTYPLAYERDATASLOT.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_FINDEMPTYPLAYERDATASLOT.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_FINDEMPTYPLAYERDATASLOT.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -320,6 +324,14 @@ $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAK
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONDOWN.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONDOWN.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONDOWN.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONDOWN.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONLEFT.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONLEFT.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONLEFT.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONLEFT.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -328,6 +340,14 @@ $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKIN
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRIGHT.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRIGHT.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRIGHT.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONCREATE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONCREATE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONCREATE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONCREATE.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRENDER.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRENDER.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRENDER.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRENDER.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -360,6 +380,10 @@ $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKIN
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONINITIALUPDATE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONINITIALUPDATE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONINITIALUPDATE.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONBUTTONDEBOUNCE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONBUTTONDEBOUNCE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONBUTTONDEBOUNCE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONBUTTONDEBOUNCE.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/rnc/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/rnc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/sdk/rnc/%.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
@@ -570,6 +594,10 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOV
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEPLAYERFROMMIDDLE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEPLAYERFROMMIDDLE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEPLAYERFROMMIDDLE.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONUP.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONUP.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONUP.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONUP.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_FINDEMPTYPLAYERDATASLOT.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_FINDEMPTYPLAYERDATASLOT.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_FINDEMPTYPLAYERDATASLOT.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -586,6 +614,14 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALID
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_VALIDATEPAKAGAINSTGLOBAL.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONDOWN.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONDOWN.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONDOWN.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONDOWN.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONLEFT.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONLEFT.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONLEFT.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONLEFT.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_COPYMIDDLEPLAYERSTOGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -594,6 +630,14 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRIGHT.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRIGHT.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRIGHT.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONCREATE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONCREATE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONCREATE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONCREATE.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRENDER.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRENDER.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRENDER.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONRENDER.CPP.o): UNRELOC := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACE_REMOVEQUICKPLAYERFROMGLOBAL.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
@@ -626,6 +670,10 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONINITIALUPDATE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONINITIALUPDATE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONINITIALUPDATE.CPP.o): UNRELOC := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONBUTTONDEBOUNCE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONBUTTONDEBOUNCE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONBUTTONDEBOUNCE.CPP.o): CFLAGS := -G0 -mips3 -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -O0
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/PAKINTERFACE_ONBUTTONDEBOUNCE.CPP.o): UNRELOC := 1
 # The size each object's .text has in the ROM: a compiler may pad the section past its last function, and a zero tail
 # past that size is cut from the section header before the object links.
 -include $(VERSIONS:%=versions/%/text_sizes.mk)
@@ -777,16 +825,22 @@ export HILO_HAZARD
 # A unit whose file row says `unrelocated` is a relocatable object the ROM holds before its link: the relocated fields of
 # its code and data stay zero (the ROM keeps the patches elsewhere) and the object carries no relocations, so the link
 # lays its bytes down as they are. This zeroes the field each REL entry names (a 26-bit jump target, a 16-bit half of an
-# address, a 32-bit word) and empties the REL sections.
+# address, a 32-bit word) and empties the REL sections. The compiler's own read-only data (a switch's jump table, a
+# literal pool) is the ROM's already, in the data the file stands over, so those sections stop being loaded: the link
+# places none of them.
 define UNRELOC_PASS
 import struct, sys
 path = sys.argv[1]
 raw = bytearray(open(path, "rb").read())
 assert raw[:4] == b"\x7fELF" and raw[4] == 1 and raw[5] == 2, path + " is not a 32-bit big-endian ELF object"
-shoff, shentsize, shnum = struct.unpack_from(">I", raw, 32)[0], struct.unpack_from(">H", raw, 46)[0], struct.unpack_from(">H", raw, 48)[0]
+shoff, shentsize, shnum, shstrndx = struct.unpack_from(">I", raw, 32)[0], struct.unpack_from(">H", raw, 46)[0], struct.unpack_from(">H", raw, 48)[0], struct.unpack_from(">H", raw, 50)[0]
 sections = [struct.unpack_from(">IIIIIIIIII", raw, shoff + i * shentsize) for i in range(shnum)]
+names = sections[shstrndx]
 fields = {2: 0xFFFFFFFF, 4: 0x03FFFFFF, 5: 0xFFFF, 6: 0xFFFF}
 for index, (name, kind, flags, addr, off, size, link, info, align, entsize) in enumerate(sections):
+    called = raw[names[4] + name:raw.index(0, names[4] + name)]
+    if called.startswith((b".rodata", b".rdata")):
+        struct.pack_into(">I", raw, shoff + index * shentsize + 8, flags & ~2)
     if kind != 9:
         continue
     target = sections[info]
