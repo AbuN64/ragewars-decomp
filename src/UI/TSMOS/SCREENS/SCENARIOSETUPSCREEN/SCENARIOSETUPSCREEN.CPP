@@ -73,7 +73,6 @@ s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 unusedEventId, s32 phase
     s32 transitionStateOrAlpha;
     s32 exitCountdown;
     s32 entryCountdown;
-    s32 decrementedCountdown;
     s32 previousCountdown;
     s32 enabled;
     s32 clampedCountdown;
@@ -150,12 +149,7 @@ block_7:
     case 4:
         countdown = g_setupScreen;
         previousCountdown = countdown->countdown;
-        decrementedCountdown = previousCountdown - 1;
-        if (decrementedCountdown >= 0) {
-            clampedCountdown = previousCountdown - (previousCountdown >= decrementedCountdown);
-        } else {
-            clampedCountdown = 0;
-        }
+        clampedCountdown = previousCountdown - 1 < 0 ? 0 : previousCountdown - 1 > previousCountdown ? previousCountdown : previousCountdown - 1;
         countdown->countdown = clampedCountdown;
 
         if ((((ListScreenScreen *) g_setupScreen)->countdown <= 0) && (SmpFlicker_IsFlickerIdle(g_setupScreen->text3E4) != 0)) {
@@ -289,11 +283,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
     case 4:
         countdown = g_setupScreen;
         previous = countdown->stateCountdown;
-        count = previous - 1;
-        /* fakematch: preserve the target's comparison-based decrement,
-         * which a normal saturating countdown would simplify to max(previous - 1, 0). */
-        if (count >= 0) count = previous - (previous >= count);
-        else count = 0;
+        count = previous - 1 < 0 ? 0 : previous - 1 > previous ? previous : previous - 1;
         countdown->stateCountdown = count;
         if (g_setupScreen->stateCountdown <= 0 && SmpFlicker_IsFlickerIdle(g_setupScreen->text3E4)) {
             SmpFlicker_RestoreFlickerValue(g_setupScreen->text3E4);
