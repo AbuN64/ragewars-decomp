@@ -3,7 +3,7 @@
 
 /* 802BFD80_17.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill4 g_GetthreadpriTrailingBytesBlock1 = {
+RestLinkerAlignmentFill4 g_GetthreadpriBlock1LinkerAlignmentFill191 = {
     { 142, 112, 0, 4 },
 };
 #endif
@@ -16,7 +16,7 @@ char func_802B6664_de_padding_BC334[12] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_802B6664_de_padding_BC334 */
-RestLinkerAlignmentFill12 g_getthreadpriConstantWords = {
+RestLinkerAlignmentFill12 g_getthreadpriConstantLinkerAlignmentFill192 = {
     { 160, 130, 0, 0, 36, 99, 0, 1, 36, 198, 0, 8 },
 };
 #endif

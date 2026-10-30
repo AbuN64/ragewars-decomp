@@ -1,4 +1,14 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_activeProfileCharacterSelections[];
+extern char g_encodedCheatCode[];
+extern char g_optionsSecondListChoiceOneLabels[];
+extern char g_playerNameBytes_eu[];
+extern char g_playerViewRenderContextPlayerNames_de[];
+extern char g_profileAchievementProgressRows[];
+extern char g_profileModeOneLabel[];
+extern char g_profileSecondConfirmationLabel[];
+extern char g_profileSelectionResources[];
+extern char g_unlockedLevelResultLabel[];
 #include "include_asm.h"
 
 /* encodedInserttextentrycharacterWords1Data.CPP */

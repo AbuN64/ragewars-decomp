@@ -3,21 +3,21 @@
 
 /* 802B7058_35.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill8 g_AudioLinkGapWordsBfd74TrailingBytesBlock2 = {
+RestLinkerAlignmentFill8 g_AudioLinkGapBfd74Block2LinkerAlignmentFill94 = {
     { 136, 170, 0, 12, 152, 170, 0, 15 },
 };
 #endif
 
 /* 802BE040_27.CPP */
 #if defined(VERSION_US)
-RestLinkerAlignmentFill8 g_AudioLinkGapWordsBfd74TrailingBytes = {
+RestLinkerAlignmentFill8 g_AudioLinkGapBfd74LinkerAlignmentFill95 = {
     { 82, 0, 0, 208, 6, 0, 0, 8 },
 };
 #endif
 
 /* 802BE040_54.CPP */
 #if defined(VERSION_EU_X)
-RestLinkerAlignmentFill4 g_AudioLinkGapWordsBfd74TrailingBytesBlock1 = {
+RestLinkerAlignmentFill4 g_AudioLinkGapBfd74Block1LinkerAlignmentFill96 = {
     { 20, 97, 0, 4 },
 };
 #endif
@@ -25,7 +25,7 @@ RestLinkerAlignmentFill4 g_AudioLinkGapWordsBfd74TrailingBytesBlock1 = {
 /* 802BFD80_21.CPP */
 #if defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-RestLinkerAlignmentFill12 g_audioLinkGapWordsBlock3 = {
+RestLinkerAlignmentFill12 g_audioLinkGapBlock3LinkerAlignmentFill97 = {
     { 39, 90, 14, 96, 255, 65, 0, 32, 64, 27, 96, 0 },
 };
 #endif

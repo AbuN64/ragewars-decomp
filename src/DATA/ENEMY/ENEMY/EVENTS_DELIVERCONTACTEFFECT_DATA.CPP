@@ -1,4 +1,41 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_Events_ApplyDirectDamagePackedAddress24_us_rev1[];
+extern char g_Events_ApplyFlag100RadialDamagePackedAddress24[];
+extern char g_Events_ApplyFlag100RadialKnockbackPackedAddress24[];
+extern char g_Events_ApplyFlag200RadialDamagePackedAddress24[];
+extern char g_Events_ApplyFlag200RadialKnockbackPackedAddress24[];
+extern char g_Events_ApplyFlag400RadialDamagePackedAddress24[];
+extern char g_Events_ApplyFlag400RadialKnockbackPackedAddress24[];
+extern char g_Events_ApplyRadialDamagePackedAddress24[];
+extern char g_Events_ApplyRadialDamageWithKnockbackPackedAddress24_us_rev1[];
+extern char g_Events_ClearActorEventBitPackedAddress24[];
+extern char g_Events_ConsumeEventArgumentPackedAddress24[];
+extern char g_Events_DeactivateActorPackedAddress24[];
+extern char g_Events_FireWithinHeightRangePackedAddress24[];
+extern char g_Events_IgnoreEventPackedAddress24[];
+extern char g_Events_IncrementNearbyPlayerCounterPackedAddress24[];
+extern char g_Events_PlayClipEventPackedAddress24[];
+extern char g_Events_PlayTeamClipPackedAddress24[];
+extern char g_Events_PlayTeamEffectPackedAddress24[];
+extern char g_Events_PostGameplayMessagePackedAddress24[];
+extern char g_Events_PreserveEventArgumentPackedAddress24[];
+extern char g_Events_RequestActorPositionPackedAddress24[];
+extern char g_Events_RunFirstNodeOperationPackedAddress24[];
+extern char g_Events_RunSecondNodeOperationPackedAddress24_us_rev1[];
+extern char g_Events_SetActorEffectModePackedAddress24[];
+extern char g_Events_SetActorEventBitPackedAddress24[];
+extern char g_Events_SetActorLoopingSoundPackedAddress24_us_rev1[];
+extern char g_Events_SpawnActorEffectPackedAddress24[];
+extern char g_Events_SpawnAttachedEffectPackedAddress24[];
+extern char g_Events_SpawnFilteredActorEffectPackedAddress24[];
+extern char g_Events_SpawnPositionedEffectPackedAddress24[];
+extern char g_Events_StartActorEmitterPackedAddress24[];
+extern char g_Events_StartCameraFadeAtPointPackedAddress24[];
+extern char g_Events_StartDisabledCameraEmitterPackedAddress24[];
+extern char g_Events_StartEnabledCameraEmitterPackedAddress24[];
+extern char g_Events_StopActorLoopingSoundPackedAddress24[];
+extern char g_Events_StopClipEventPackedAddress24[];
+extern char g_particleQuadVertices[];
 #include "include_asm.h"
 
 /* g_EventsDelivercontacteffectWords2_EventsDelivercontacteffectData.CPP */
@@ -58,7 +95,7 @@ RestEventsDelivercontacteffectWords2Layout318 g_EventsDelivercontacteffectWords2
 /* g_EventsDelivercontacteffectWords1_EventsDelivercontacteffectData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800D0F00_unclaimed_D1BA0_unclaimed_D1E68_unclaimed_D1F78 */
-RestLinkerAlignmentFill8 g_EventsDelivercontacteffectWords1 = {
+RestLinkerAlignmentFill8 g_EventsDelivercontacteffect1LinkerAlignmentFill319 = {
     { 63, 22, 156, 251, 63, 22, 41, 101 },
 };
 
@@ -99,42 +136,42 @@ extern char g_Events_IncrementNearbyPlayerCounterPackedAddress24[];
 extern char g_Events_SetActorEffectModePackedAddress24[];
 extern char g_Events_DeactivateActorPackedAddress24[];
 ResteffectCallbackFlagsLayout320 g_effectCallbackFlags = {
-    { (void *)(g_Events_PlayClipEventPackedAddress24), 0, (void *)(g_Events_SpawnActorEffectPackedAddress24), 0, (void *)(g_Events_ApplyDirectDamagePackedAddress24_us_rev1) },
+    { (void *)&g_Events_PlayClipEventPackedAddress24, 0, (void *)&g_Events_SpawnActorEffectPackedAddress24, 0, (void *)&g_Events_ApplyDirectDamagePackedAddress24_us_rev1 },
     4,
-    (void *)(g_Events_ApplyRadialDamagePackedAddress24),
+    (void *)&g_Events_ApplyRadialDamagePackedAddress24,
     6,
-    (void *)(g_Events_ApplyRadialDamageWithKnockbackPackedAddress24_us_rev1),
+    (void *)&g_Events_ApplyRadialDamageWithKnockbackPackedAddress24_us_rev1,
     6,
-    (void *)(g_Events_PreserveEventArgumentPackedAddress24),
+    (void *)&g_Events_PreserveEventArgumentPackedAddress24,
     10,
-    (void *)(g_Events_RunFirstNodeOperationPackedAddress24),
+    (void *)&g_Events_RunFirstNodeOperationPackedAddress24,
     16,
-    (void *)(g_Events_RunSecondNodeOperationPackedAddress24_us_rev1),
+    (void *)&g_Events_RunSecondNodeOperationPackedAddress24_us_rev1,
     16,
-    { (void *)(g_Events_SpawnActorEffectPackedAddress24), 0, (void *)(g_Events_StartCameraFadeAtPointPackedAddress24), 0, (void *)(g_Events_ConsumeEventArgumentPackedAddress24), 0, (void *)(g_Events_RequestActorPositionPackedAddress24), 0, (void *)(g_Events_StartEnabledCameraEmitterPackedAddress24), 0, (void *)(g_Events_StartDisabledCameraEmitterPackedAddress24), 0, (void *)(g_Events_PostGameplayMessagePackedAddress24), 0, (void *)(g_Events_ApplyFlag100RadialDamagePackedAddress24) },
+    { (void *)&g_Events_SpawnActorEffectPackedAddress24, 0, (void *)&g_Events_StartCameraFadeAtPointPackedAddress24, 0, (void *)&g_Events_ConsumeEventArgumentPackedAddress24, 0, (void *)&g_Events_RequestActorPositionPackedAddress24, 0, (void *)&g_Events_StartEnabledCameraEmitterPackedAddress24, 0, (void *)&g_Events_StartDisabledCameraEmitterPackedAddress24, 0, (void *)&g_Events_PostGameplayMessagePackedAddress24, 0, (void *)&g_Events_ApplyFlag100RadialDamagePackedAddress24 },
     6,
-    (void *)(g_Events_ApplyFlag100RadialKnockbackPackedAddress24),
+    (void *)&g_Events_ApplyFlag100RadialKnockbackPackedAddress24,
     6,
-    (void *)(g_Events_ApplyFlag200RadialDamagePackedAddress24),
+    (void *)&g_Events_ApplyFlag200RadialDamagePackedAddress24,
     7,
-    (void *)(g_Events_ApplyFlag200RadialKnockbackPackedAddress24),
+    (void *)&g_Events_ApplyFlag200RadialKnockbackPackedAddress24,
     7,
-    (void *)(g_Events_ApplyFlag400RadialDamagePackedAddress24),
+    (void *)&g_Events_ApplyFlag400RadialDamagePackedAddress24,
     6,
-    (void *)(g_Events_ApplyFlag400RadialKnockbackPackedAddress24),
+    (void *)&g_Events_ApplyFlag400RadialKnockbackPackedAddress24,
     6,
-    { (void *)(g_Events_StartActorEmitterPackedAddress24), 0, (void *)(g_Events_IgnoreEventPackedAddress24), 0, (void *)(g_Events_PlayTeamClipPackedAddress24), 0, (void *)(g_Events_SpawnFilteredActorEffectPackedAddress24), 0, (void *)(g_Events_FireWithinHeightRangePackedAddress24) },
+    { (void *)&g_Events_StartActorEmitterPackedAddress24, 0, (void *)&g_Events_IgnoreEventPackedAddress24, 0, (void *)&g_Events_PlayTeamClipPackedAddress24, 0, (void *)&g_Events_SpawnFilteredActorEffectPackedAddress24, 0, (void *)&g_Events_FireWithinHeightRangePackedAddress24 },
     7,
-    { (void *)(g_Events_SetActorEventBitPackedAddress24), 0, (void *)(g_Events_ClearActorEventBitPackedAddress24), 0, (void *)(g_Events_SpawnAttachedEffectPackedAddress24), 0, (void *)(g_Events_PlayTeamEffectPackedAddress24), 0, (void *)(g_Events_StopClipEventPackedAddress24), 0, (void *)(g_Events_SetActorLoopingSoundPackedAddress24_us_rev1), 0, (void *)(g_Events_StopActorLoopingSoundPackedAddress24), 0, (void *)(g_Events_IncrementNearbyPlayerCounterPackedAddress24) },
+    { (void *)&g_Events_SetActorEventBitPackedAddress24, 0, (void *)&g_Events_ClearActorEventBitPackedAddress24, 0, (void *)&g_Events_SpawnAttachedEffectPackedAddress24, 0, (void *)&g_Events_PlayTeamEffectPackedAddress24, 0, (void *)&g_Events_StopClipEventPackedAddress24, 0, (void *)&g_Events_SetActorLoopingSoundPackedAddress24_us_rev1, 0, (void *)&g_Events_StopActorLoopingSoundPackedAddress24, 0, (void *)&g_Events_IncrementNearbyPlayerCounterPackedAddress24 },
     2,
-    { (void *)(g_Events_SpawnPositionedEffectPackedAddress24), 0, (void *)(g_Events_SetActorEffectModePackedAddress24), 0, (void *)(g_Events_DeactivateActorPackedAddress24), 0 },
+    { (void *)&g_Events_SpawnPositionedEffectPackedAddress24, 0, (void *)&g_Events_SetActorEffectModePackedAddress24, 0, (void *)&g_Events_DeactivateActorPackedAddress24, 0 },
 };
 #endif
 
 /* g_EventsDelivercontacteffectWords3_EventsDelivercontacteffectData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800D0F00_unclaimed_D1BA0_unclaimed_D1E68_unclaimed_D1F78_unclaimed_D20A8 */
-RestLinkerAlignmentFill8 g_EventsDelivercontacteffectWords3 = {
+RestLinkerAlignmentFill8 g_EventsDelivercontacteffect3LinkerAlignmentFill321 = {
     { 62, 223, 149, 71, 62, 222, 101, 149 },
 };
 #endif

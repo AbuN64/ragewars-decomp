@@ -2,7 +2,7 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C9578 */
-RestLinkerAlignmentFill8 g_sceneEffectDepthAndFadeConstantsUsRev1 = {
+RestLinkerAlignmentFill8 g_sceneEffectDepthAndFadeConstantsUsRev1LinkerAlignmentFill364 = {
     { 192, 128, 0, 0, 63, 0, 0, 0 },
 };
 #endif

@@ -3,7 +3,7 @@
 
 /* 802BFD80_12.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill12 g_CreatemesgqueueTrailingBytesBlock1 = {
+RestLinkerAlignmentFill12 g_CreatemesgqueueBlock1LinkerAlignmentFill180 = {
     { 60, 1, 128, 13, 196, 33, 131, 168, 0, 5, 16, 128 },
 };
 #endif
@@ -11,7 +11,7 @@ RestLinkerAlignmentFill12 g_CreatemesgqueueTrailingBytesBlock1 = {
 /* g_CreatemesgqueueEncodedWords_Createmesgqueue.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_802B40D4_eu_x_padding_B9AC4 */
-RestLinkerAlignmentFill12 g_CreatemesgqueueEncodedWords = {
+RestLinkerAlignmentFill12 g_CreatemesgqueueLinkerAlignmentFill181 = {
     { 0, 2, 16, 64, 134, 35, 0, 26, 60, 1, 128, 14 },
 };
 #endif

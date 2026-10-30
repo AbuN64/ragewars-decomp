@@ -34,7 +34,7 @@ struct {
 /* s_hicsText_Decode.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C912C */
-RestLinkerAlignmentFill4 s_hicsText = {
+RestLinkerAlignmentFill4 g_hicsTextLinkerAlignmentFill617 = {
     { 104, 105, 99, 115 },
 };
 #endif

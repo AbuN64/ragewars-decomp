@@ -1,9 +1,10 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_weaponLockedNoticeText[];
 
 
 /* 80408CB0_16.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill8 g_Ovl1JTrailingBytes = {
+RestLinkerAlignmentFill8 g_Ovl1JLinkerAlignmentFill773 = {
     { 39, 165, 0, 72, 39, 166, 0, 68 },
 };
 #endif

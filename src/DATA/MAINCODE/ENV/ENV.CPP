@@ -12,7 +12,7 @@
 
 /* 802AFD5C_7.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill12 g_EnvTrailingBytesBlock1 = {
+RestLinkerAlignmentFill12 g_EnvBlock1LinkerAlignmentFill540 = {
     { 175, 176, 0, 24, 0, 128, 128, 33, 175, 177, 0, 28 },
 };
 #endif
@@ -24,7 +24,7 @@ char func_80212FBC_de_padding_13BD4[12] =
 #endif
 
 #if defined(VERSION_US_REV1)
-RestLinkerAlignmentFill12 g_EnvEncodedWords = {
+RestLinkerAlignmentFill12 g_EnvLinkerAlignmentFill541 = {
     { 162, 34, 0, 53, 130, 35, 0, 202, 16, 101, 0, 4 },
 };
 #endif

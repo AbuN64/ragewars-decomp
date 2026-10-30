@@ -1,4 +1,16 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_Menu_ApplySoundSlidersPackedAddress24[];
+extern char g_Menu_CancelSoundOptionsScreenPackedAddress24[];
+extern char g_Menu_CancelSoundSliderPopupPackedAddress24[];
+extern char g_Menu_ConfirmSoundOptionsScreenPackedAddress24[];
+extern char g_Menu_ConfirmSoundSliderPopupPackedAddress24[];
+extern char g_Menu_CreateSoundOptionsScreenPackedAddress24[];
+extern char g_Menu_CreateSoundSlidersPackedAddress24[];
+extern char g_Menu_FreeSoundOptionsScreenPackedAddress24[];
+extern char g_Menu_FreeSoundSlidersPackedAddress24[];
+extern char g_Menu_SoundOptionsReturnZeroPackedAddress24[];
+extern char g_Menu_SoundSliderReturnZeroPackedAddress24[];
+extern char g_Menu_UpdateSoundOptionsScreenPackedAddress24[];
 #include "include_asm.h"
 #include "DATA/OVL1_J/MENU_CREATESOUNDOPTIONSSCREEN_DATA.H"
 
@@ -56,29 +68,29 @@ extern char g_Menu_CancelSoundSliderPopupPackedAddress24[];
 extern char g_Menu_ConfirmSoundSliderPopupPackedAddress24[];
 RestD_src_3cb405cbLayout500 D_src_3cb405cb = {
     { 3591, 6 },
-    (void *)(g_Menu_SoundOptionsReturnZeroPackedAddress24),
+    (void *)&g_Menu_SoundOptionsReturnZeroPackedAddress24,
     { 3592, 6 },
-    (void *)(g_Menu_UpdateSoundOptionsScreenPackedAddress24),
+    (void *)&g_Menu_UpdateSoundOptionsScreenPackedAddress24,
     { 3590, 6 },
-    (void *)(g_Menu_CreateSoundOptionsScreenPackedAddress24),
+    (void *)&g_Menu_CreateSoundOptionsScreenPackedAddress24,
     { 3587, 6 },
-    (void *)(g_Menu_FreeSoundOptionsScreenPackedAddress24),
+    (void *)&g_Menu_FreeSoundOptionsScreenPackedAddress24,
     { 2, 6 },
-    (void *)(g_Menu_CancelSoundOptionsScreenPackedAddress24),
+    (void *)&g_Menu_CancelSoundOptionsScreenPackedAddress24,
     { 1, 6 },
-    { (void *)(g_Menu_ConfirmSoundOptionsScreenPackedAddress24), 0, 0, 0 },
+    { (void *)&g_Menu_ConfirmSoundOptionsScreenPackedAddress24, 0, 0, 0 },
     { 3591, 13 },
-    (void *)(g_Menu_SoundSliderReturnZeroPackedAddress24),
+    (void *)&g_Menu_SoundSliderReturnZeroPackedAddress24,
     { 3592, 13 },
-    (void *)(g_Menu_ApplySoundSlidersPackedAddress24),
+    (void *)&g_Menu_ApplySoundSlidersPackedAddress24,
     { 3590, 13 },
-    (void *)(g_Menu_CreateSoundSlidersPackedAddress24),
+    (void *)&g_Menu_CreateSoundSlidersPackedAddress24,
     { 3587, 13 },
-    (void *)(g_Menu_FreeSoundSlidersPackedAddress24),
+    (void *)&g_Menu_FreeSoundSlidersPackedAddress24,
     { 2, 13 },
-    (void *)(g_Menu_CancelSoundSliderPopupPackedAddress24),
+    (void *)&g_Menu_CancelSoundSliderPopupPackedAddress24,
     { 1, 13 },
-    { (void *)(g_Menu_ConfirmSoundSliderPopupPackedAddress24), 0, 0, 0 },
+    { (void *)&g_Menu_ConfirmSoundSliderPopupPackedAddress24, 0, 0, 0 },
 };
 #endif
 #if defined(VERSION_EU_X)

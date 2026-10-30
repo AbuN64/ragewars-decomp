@@ -24,7 +24,7 @@ struct {
 
 /* 800C83D4.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill12 g_SaveWords2 = {
+RestLinkerAlignmentFill12 g_Save2LinkerAlignmentFill792 = {
     { 66, 128, 0, 0, 67, 0, 0, 0, 79, 0, 0, 0 },
 };
 #endif

@@ -1,4 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_weaponFireStateCallbackTable[];
 
 #if defined(VERSION_US_REV1)
 RestConstantsEncodedWordsBlock9Layout412 k_ConstantsEncodedWordsBlock9 = {

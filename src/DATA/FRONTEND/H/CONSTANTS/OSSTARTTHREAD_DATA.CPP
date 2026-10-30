@@ -1,4 +1,6 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char __osThreadTail[];
+extern char g_audioDiskTransferLinkTable[];
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #ifdef VERSION_DE

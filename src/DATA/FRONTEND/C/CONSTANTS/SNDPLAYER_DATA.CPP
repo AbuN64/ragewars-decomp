@@ -3,9 +3,7 @@
 #include "COMMON/ALFXPARAM.H"
 
 /* ROM-grounded data: src/k_SndplayerEncodedWordsBlock1_SndplayerData.c */
-const double k_SndplayerEncodedWordsBlock1[1] = {
-    2147483647.0,
-};
+const RestAudioFourByteDoubleConstant k_SndplayerEncodedWordsBlock1 = { 2147483647.0 };
 
 #if defined(VERSION_US)
 char s_SndplayerTOptiText[8] =

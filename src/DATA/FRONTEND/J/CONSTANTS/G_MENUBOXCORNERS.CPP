@@ -1,4 +1,16 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+#if defined(VERSION_DE)
+extern RestGMenuboxcornersLevelTextWords1Layout487 g_menuBoxLevelStatusText;
+#endif
+#if defined(VERSION_EU_X)
+extern RestGMenuboxcornersLevelTextWords2Layout491 g_GMenuboxcornersLevelTextWords2;
+#endif
+#if defined(VERSION_EU)
+extern RestGMenuboxcornersLevelTextWords3Layout493 g_GMenuboxcornersLevelTextWords3;
+#endif
+#if defined(VERSION_US)
+extern RestGMenuboxcornersOurclevelTextWords1Layout489 g_menuBoxCurrentLevelText;
+#endif
 #include "include_asm.h"
 #include "MENU/MENU_BOX.H"
 
@@ -91,17 +103,17 @@ MenuBoxCorner g_menuBoxCorners[8] = {
     { 1, 1, -2, 0, 0, 0 },
     { -1, 1, -2, 0, 0, 0 },
 };
-RestGMenuboxcornersLevelTextWords1Layout487 g_GMenuboxcornersLevelTextWords1 = {
+RestGMenuboxcornersLevelTextWords1Layout487 g_menuBoxLevelStatusText = {
     { 0, 0 },
     -5.5e+02f,
     "  : level         :      \000\000\000",
-    (void *)(g_GMenuboxcornersLevelTextWords1 + 0x10),
+    (void *)((char *)&g_menuBoxLevelStatusText + 0x10),
     "lod chg dist  :      \000\000\000",
-    (void *)(g_GMenuboxcornersLevelTextWords1 + 0x2C),
+    (void *)((char *)&g_menuBoxLevelStatusText + 0x2C),
     "global scaler :      \000\000\000",
-    (void *)(g_GMenuboxcornersLevelTextWords1 + 0x48),
+    (void *)((char *)&g_menuBoxLevelStatusText + 0x48),
     "music         :  none\000\000\000",
-    (void *)(g_GMenuboxcornersLevelTextWords1 + 0x64),
+    (void *)((char *)&g_menuBoxLevelStatusText + 0x64),
     0x20202020,
     0x20202020,
     0x20202020,
@@ -114,7 +126,7 @@ RestGMenuboxcornersLevelTextWords1Layout487 g_GMenuboxcornersLevelTextWords1 = {
     0x20202020,
     0x20202020,
     0x20000000,
-    (void *)(g_GMenuboxcornersLevelTextWords1 + 0x80),
+    (void *)((char *)&g_menuBoxLevelStatusText + 0x80),
 };
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
@@ -167,17 +179,17 @@ MenuBoxCorner g_menuBoxCorners[8] = {
     { 1, 1, -2, 0, 0, 0 },
     { -1, 1, -2, 0, 0, 0 },
 };
-RestGMenuboxcornersOurclevelTextWords1Layout489 g_GMenuboxcornersOurclevelTextWords1 = {
+RestGMenuboxcornersOurclevelTextWords1Layout489 g_menuBoxCurrentLevelText = {
     { 0, 0 },
     -5.5e+02f,
     "ourclevel         :      \000\000\000",
-    (void *)(g_GMenuboxcornersOurclevelTextWords1 + 0x10),
+    (void *)((char *)&g_menuBoxCurrentLevelText + 0x10),
     "lod chg dist  :      \000\000\000",
-    (void *)(g_GMenuboxcornersOurclevelTextWords1 + 0x2C),
+    (void *)((char *)&g_menuBoxCurrentLevelText + 0x2C),
     "global scaler :      \000\000\000",
-    (void *)(g_GMenuboxcornersOurclevelTextWords1 + 0x48),
+    (void *)((char *)&g_menuBoxCurrentLevelText + 0x48),
     "music         :  none\000\000\000",
-    (void *)(g_GMenuboxcornersOurclevelTextWords1 + 0x64),
+    (void *)((char *)&g_menuBoxCurrentLevelText + 0x64),
     0x20202020,
     0x20202020,
     0x20202020,
@@ -190,7 +202,7 @@ RestGMenuboxcornersOurclevelTextWords1Layout489 g_GMenuboxcornersOurclevelTextWo
     0x20202020,
     0x20202020,
     0x20000000,
-    (void *)(g_GMenuboxcornersOurclevelTextWords1 + 0x80),
+    (void *)((char *)&g_menuBoxCurrentLevelText + 0x80),
 };
 #endif
 #endif
@@ -307,13 +319,13 @@ RestGMenuboxcornersLevelTextWords2Layout491 g_GMenuboxcornersLevelTextWords2 = {
     { 0, 0 },
     -5.5e+02f,
     "level         :      \000\000\000",
-    { (void *)(g_GMenuboxcornersLevelTextWords2 + 0xC), (void *)(g_GMenuboxcornersLevelTextWords2 + 0xC), (void *)(g_GMenuboxcornersLevelTextWords2 + 0xC), (void *)(g_GMenuboxcornersLevelTextWords2 + 0xC) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0xC), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0xC), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0xC), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0xC) },
     "lod chg dist  :      \000\000\000",
-    { (void *)(g_GMenuboxcornersLevelTextWords2 + 0x34), (void *)(g_GMenuboxcornersLevelTextWords2 + 0x34), (void *)(g_GMenuboxcornersLevelTextWords2 + 0x34), (void *)(g_GMenuboxcornersLevelTextWords2 + 0x34) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x34), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x34), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x34), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x34) },
     "global scaler :      \000\000\000",
-    { (void *)(g_GMenuboxcornersLevelTextWords2 + 0x5C), (void *)(g_GMenuboxcornersLevelTextWords2 + 0x5C), (void *)(g_GMenuboxcornersLevelTextWords2 + 0x5C), (void *)(g_GMenuboxcornersLevelTextWords2 + 0x5C) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x5C), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x5C), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x5C), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x5C) },
     "music         :  none\000\000\000",
-    { (void *)(g_GMenuboxcornersLevelTextWords2 + 0x84), (void *)(g_GMenuboxcornersLevelTextWords2 + 0x84), (void *)(g_GMenuboxcornersLevelTextWords2 + 0x84), (void *)(g_GMenuboxcornersLevelTextWords2 + 0x84) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x84), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x84), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x84), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0x84) },
     0x20202020,
     0x20202020,
     0x20202020,
@@ -326,7 +338,7 @@ RestGMenuboxcornersLevelTextWords2Layout491 g_GMenuboxcornersLevelTextWords2 = {
     0x20202020,
     0x20202020,
     0x20000000,
-    { (void *)(g_GMenuboxcornersLevelTextWords2 + 0xAC), (void *)(g_GMenuboxcornersLevelTextWords2 + 0xAC), (void *)(g_GMenuboxcornersLevelTextWords2 + 0xAC), (void *)(g_GMenuboxcornersLevelTextWords2 + 0xAC) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0xAC), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0xAC), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0xAC), (void *)((char *)&g_GMenuboxcornersLevelTextWords2 + 0xAC) },
 };
 #endif
 #endif
@@ -443,13 +455,13 @@ RestGMenuboxcornersLevelTextWords3Layout493 g_GMenuboxcornersLevelTextWords3 = {
     { 0, 0 },
     -5.5e+02f,
     "level         :      \000\000\000",
-    { (void *)(g_GMenuboxcornersLevelTextWords3 + 0xC), (void *)(g_GMenuboxcornersLevelTextWords3 + 0xC), (void *)(g_GMenuboxcornersLevelTextWords3 + 0xC), (void *)(g_GMenuboxcornersLevelTextWords3 + 0xC) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0xC), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0xC), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0xC), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0xC) },
     "lod chg dist  :      \000\000\000",
-    { (void *)(g_GMenuboxcornersLevelTextWords3 + 0x34), (void *)(g_GMenuboxcornersLevelTextWords3 + 0x34), (void *)(g_GMenuboxcornersLevelTextWords3 + 0x34), (void *)(g_GMenuboxcornersLevelTextWords3 + 0x34) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x34), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x34), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x34), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x34) },
     "global scaler :      \000\000\000",
-    { (void *)(g_GMenuboxcornersLevelTextWords3 + 0x5C), (void *)(g_GMenuboxcornersLevelTextWords3 + 0x5C), (void *)(g_GMenuboxcornersLevelTextWords3 + 0x5C), (void *)(g_GMenuboxcornersLevelTextWords3 + 0x5C) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x5C), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x5C), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x5C), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x5C) },
     "music         :  none\000\000\000",
-    { (void *)(g_GMenuboxcornersLevelTextWords3 + 0x84), (void *)(g_GMenuboxcornersLevelTextWords3 + 0x84), (void *)(g_GMenuboxcornersLevelTextWords3 + 0x84), (void *)(g_GMenuboxcornersLevelTextWords3 + 0x84) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x84), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x84), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x84), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0x84) },
     0x20202020,
     0x20202020,
     0x20202020,
@@ -462,7 +474,7 @@ RestGMenuboxcornersLevelTextWords3Layout493 g_GMenuboxcornersLevelTextWords3 = {
     0x20202020,
     0x20202020,
     0x20000000,
-    { (void *)(g_GMenuboxcornersLevelTextWords3 + 0xAC), (void *)(g_GMenuboxcornersLevelTextWords3 + 0xAC), (void *)(g_GMenuboxcornersLevelTextWords3 + 0xAC), (void *)(g_GMenuboxcornersLevelTextWords3 + 0xAC) },
+    { (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0xAC), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0xAC), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0xAC), (void *)((char *)&g_GMenuboxcornersLevelTextWords3 + 0xAC) },
 };
 #endif
 #endif

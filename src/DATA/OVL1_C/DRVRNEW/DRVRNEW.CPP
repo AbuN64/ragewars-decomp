@@ -3,7 +3,7 @@
 #include "COMMON/ALFXPARAM.H"
 
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const RestLinkerAlignmentFill8 g_DrvrnewWords1 = {
+const RestLinkerAlignmentFill8 g_Drvrnew1LinkerAlignmentFill625 = {
     { 63, 16, 0, 0, 0, 0, 0, 0 },
 };
 
@@ -14,7 +14,7 @@ const float k_DrvrnewEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_US)
-RestLinkerAlignmentFill8 k_DrvrnewEncodedWordsBlock1 = {
+RestLinkerAlignmentFill8 g_DrvrnewBlock1LinkerAlignmentFill627 = {
     { 200, 109, 2, 0, 8, 0, 12, 0 },
 };
 #endif

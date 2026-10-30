@@ -1,4 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_tlbMissExceptionVector[];
 
 #if defined(VERSION_US_REV1)
 RestCommonEncodedWordsBlock1Layout300 k_CommonEncodedWordsBlock1 = {

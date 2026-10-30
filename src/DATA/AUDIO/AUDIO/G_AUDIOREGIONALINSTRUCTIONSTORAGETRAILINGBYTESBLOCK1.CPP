@@ -3,21 +3,21 @@
 
 /* 802BFD80_18.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill4 g_AudioRegionalInstructionStorageTrailingBytesBlock1 = {
+RestLinkerAlignmentFill4 g_AudioRegionalInstructionStorageBlock1LinkerAlignmentFill124 = {
     { 2, 160, 32, 33 },
 };
 #endif
 
 /* AudioRegionalInstructionStoragePaddingWords.CPP */
 #if defined(VERSION_US)
-RestLinkerAlignmentFill4 func_802B6DEC_de_padding_BCABC = {
+RestLinkerAlignmentFill4 g_de_padding_BCABCLinkerAlignmentFill125 = {
     { 115, 82, 0, 0 },
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_802B6DEC_de_padding_BCABC */
-RestLinkerAlignmentFill4 g_AudioAudioAudio34CppRetainedWords1 = {
+RestLinkerAlignmentFill4 g_AudioAudioAudio341LinkerAlignmentFill126 = {
     { 84, 67, 0, 1 },
 };
 #endif

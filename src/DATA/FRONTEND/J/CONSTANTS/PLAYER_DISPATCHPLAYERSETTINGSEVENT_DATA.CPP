@@ -1,4 +1,22 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char Player_FreeAlternatePlayerSettingsScreen_Address[];
+extern char g_Player_AlternatePlayerSettingsEvent0E07HandlerPackedAddress24[];
+extern char g_Player_AlternatePlayerSettingsEvent0E08HandlerPackedAddress24[];
+extern char g_Player_CancelAlternatePlayerSettingsEntryPackedAddress24[];
+extern char g_Player_CancelPlayerSettingsEntryPackedAddress24[];
+extern char g_Player_ConfirmAlternatePlayerSettingsEntryPackedAddress24[];
+extern char g_Player_ConfirmPlayerSettingsEntryPackedAddress24[];
+extern char g_Player_FreeAlternatePlayerSettingsScreenPackedAddress24[];
+extern char g_Player_FreePlayerSettingsScreenPackedAddress24[];
+extern char g_Player_InitPlayerSettingsScreenPackedAddress24[];
+extern char g_Player_OpenAlternatePlayerSettingsScreenPackedAddress24[];
+extern char g_Player_PlayerSettingsEvent0AHandlerPackedAddress24[];
+extern char g_Player_PlayerSettingsEvent0E07HandlerPackedAddress24[];
+extern char g_Player_SelectNextAlternatePlayerSettingsEntryPackedAddress24[];
+extern char g_Player_SelectNextPlayerSettingsEntryPackedAddress24[];
+extern char g_Player_SelectPreviousAlternatePlayerSettingsEntryPackedAddress24[];
+extern char g_Player_SelectPreviousPlayerSettingsEntryPackedAddress24[];
+extern char g_Player_UpdatePlayerSettingsExitPackedAddress24[];
 #include "include_asm.h"
 #include "DATA/OVL1_J/PLAYER_DISPATCHPLAYERSETTINGSEVENT_DATA.H"
 
@@ -33,7 +51,7 @@ RestD_src_638b7747Layout508 D_src_638b7747 = {
     { 3590, 12 },
     (unsigned int)(g_Player_DispatchPlayerSettingsEventAddress + 144),
     { 3587, 12 },
-    (void *)(Player_FreeAlternatePlayerSettingsScreen_Address),
+    (void *)&Player_FreeAlternatePlayerSettingsScreen_Address,
     { 2, 12 },
     (unsigned int)(Player_FreeAlternatePlayerSettingsScreen_Address + 176),
     { 1, 12 },
@@ -65,39 +83,39 @@ extern char g_Player_SelectNextAlternatePlayerSettingsEntryPackedAddress24[];
 extern char g_Player_SelectPreviousAlternatePlayerSettingsEntryPackedAddress24[];
 RestD_src_638b7747Layout509 D_src_638b7747 = {
     { 3591, 5 },
-    (void *)(g_Player_PlayerSettingsEvent0E07HandlerPackedAddress24),
+    (void *)&g_Player_PlayerSettingsEvent0E07HandlerPackedAddress24,
     { 3592, 5 },
-    (void *)(g_Player_UpdatePlayerSettingsExitPackedAddress24),
+    (void *)&g_Player_UpdatePlayerSettingsExitPackedAddress24,
     { 3590, 5 },
-    (void *)(g_Player_InitPlayerSettingsScreenPackedAddress24),
+    (void *)&g_Player_InitPlayerSettingsScreenPackedAddress24,
     { 3587, 5 },
-    (void *)(g_Player_FreePlayerSettingsScreenPackedAddress24),
+    (void *)&g_Player_FreePlayerSettingsScreenPackedAddress24,
     { 10, 5 },
-    (void *)(g_Player_PlayerSettingsEvent0AHandlerPackedAddress24),
+    (void *)&g_Player_PlayerSettingsEvent0AHandlerPackedAddress24,
     { 2, 5 },
-    (void *)(g_Player_CancelPlayerSettingsEntryPackedAddress24),
+    (void *)&g_Player_CancelPlayerSettingsEntryPackedAddress24,
     { 1, 5 },
-    (void *)(g_Player_ConfirmPlayerSettingsEntryPackedAddress24),
+    (void *)&g_Player_ConfirmPlayerSettingsEntryPackedAddress24,
     { 8, 94 },
-    (void *)(g_Player_SelectNextPlayerSettingsEntryPackedAddress24),
+    (void *)&g_Player_SelectNextPlayerSettingsEntryPackedAddress24,
     { 7, 94 },
-    { (void *)(g_Player_SelectPreviousPlayerSettingsEntryPackedAddress24), 0, 0, 0 },
+    { (void *)&g_Player_SelectPreviousPlayerSettingsEntryPackedAddress24, 0, 0, 0 },
     { 3591, 12 },
-    (void *)(g_Player_AlternatePlayerSettingsEvent0E07HandlerPackedAddress24),
+    (void *)&g_Player_AlternatePlayerSettingsEvent0E07HandlerPackedAddress24,
     { 3592, 12 },
-    (void *)(g_Player_AlternatePlayerSettingsEvent0E08HandlerPackedAddress24),
+    (void *)&g_Player_AlternatePlayerSettingsEvent0E08HandlerPackedAddress24,
     { 3590, 12 },
-    (void *)(g_Player_OpenAlternatePlayerSettingsScreenPackedAddress24),
+    (void *)&g_Player_OpenAlternatePlayerSettingsScreenPackedAddress24,
     { 3587, 12 },
-    (void *)(g_Player_FreeAlternatePlayerSettingsScreenPackedAddress24),
+    (void *)&g_Player_FreeAlternatePlayerSettingsScreenPackedAddress24,
     { 2, 12 },
-    (void *)(g_Player_CancelAlternatePlayerSettingsEntryPackedAddress24),
+    (void *)&g_Player_CancelAlternatePlayerSettingsEntryPackedAddress24,
     { 1, 12 },
-    (void *)(g_Player_ConfirmAlternatePlayerSettingsEntryPackedAddress24),
+    (void *)&g_Player_ConfirmAlternatePlayerSettingsEntryPackedAddress24,
     { 8, 454 },
-    (void *)(g_Player_SelectNextAlternatePlayerSettingsEntryPackedAddress24),
+    (void *)&g_Player_SelectNextAlternatePlayerSettingsEntryPackedAddress24,
     { 7, 454 },
-    { (void *)(g_Player_SelectPreviousAlternatePlayerSettingsEntryPackedAddress24), 0, 0, 0, 0 },
+    { (void *)&g_Player_SelectPreviousAlternatePlayerSettingsEntryPackedAddress24, 0, 0, 0, 0 },
 };
 #endif
 #if defined(VERSION_EU_X)

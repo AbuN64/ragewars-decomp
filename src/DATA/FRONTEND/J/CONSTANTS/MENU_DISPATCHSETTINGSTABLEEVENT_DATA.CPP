@@ -1,4 +1,15 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_Menu_CancelScrollingChoiceScreenPackedAddress242[];
+extern char g_Menu_CancelTitleButtonScreenPackedAddress242[];
+extern char g_Menu_CreateTitleButtonScreenPackedAddress242[];
+extern char g_Menu_FreeScrollingChoiceScreenPackedAddress242[];
+extern char g_Menu_FreeTitleButtonScreenPackedAddress242[];
+extern char g_Menu_HandleScrollingChoicePackedAddress242[];
+extern char g_Menu_HandleTitleButtonChoicePackedAddress242[];
+extern char g_Menu_UpdateScrollingChoiceScreenPackedAddress242[];
+extern char g_Menu_UpdateTitleButtonScreenPackedAddress242[];
+extern char g_Menu_WrapScrollingChoiceNodesPackedAddress242[];
+extern char g_Menu_WrapTitleButtonScreenNodesPackedAddress24[];
 #include "include_asm.h"
 #include "DATA/OVL1_J/MENU_DISPATCHSETTINGSTABLEEVENT_DATA.H"
 
@@ -18,29 +29,29 @@ extern char g_Menu_HandleTitleButtonChoicePackedAddress242[];
 extern char g_Menu_CancelTitleButtonScreenPackedAddress242[];
 RestD_src_846838eaLayout505 D_src_846838ea = {
     { 3592, 9 },
-    (void *)(g_Menu_UpdateScrollingChoiceScreenPackedAddress242),
+    (void *)&g_Menu_UpdateScrollingChoiceScreenPackedAddress242,
     { 3590, 9 },
     (unsigned int)(g_Player_DispatchAlternatePlayerSettingsEventAddress + 148),
     { 3591, 9 },
-    (void *)(g_Menu_WrapScrollingChoiceNodesPackedAddress242),
+    (void *)&g_Menu_WrapScrollingChoiceNodesPackedAddress242,
     { 3587, 9 },
-    (void *)(g_Menu_FreeScrollingChoiceScreenPackedAddress242),
+    (void *)&g_Menu_FreeScrollingChoiceScreenPackedAddress242,
     { 1, 9 },
-    (void *)(g_Menu_HandleScrollingChoicePackedAddress242),
+    (void *)&g_Menu_HandleScrollingChoicePackedAddress242,
     { 2, 9 },
-    { (void *)(g_Menu_CancelScrollingChoiceScreenPackedAddress242), 0, 0, 0 },
+    { (void *)&g_Menu_CancelScrollingChoiceScreenPackedAddress242, 0, 0, 0 },
     { 3592, 30 },
-    (void *)(g_Menu_UpdateTitleButtonScreenPackedAddress242),
+    (void *)&g_Menu_UpdateTitleButtonScreenPackedAddress242,
     { 3590, 30 },
-    (void *)(g_Menu_CreateTitleButtonScreenPackedAddress242),
+    (void *)&g_Menu_CreateTitleButtonScreenPackedAddress242,
     { 3591, 30 },
-    (void *)(g_Menu_WrapTitleButtonScreenNodesPackedAddress24),
+    (void *)&g_Menu_WrapTitleButtonScreenNodesPackedAddress24,
     { 3587, 30 },
-    (void *)(g_Menu_FreeTitleButtonScreenPackedAddress242),
+    (void *)&g_Menu_FreeTitleButtonScreenPackedAddress242,
     { 1, 30 },
-    (void *)(g_Menu_HandleTitleButtonChoicePackedAddress242),
+    (void *)&g_Menu_HandleTitleButtonChoicePackedAddress242,
     { 2, 30 },
-    { (void *)(g_Menu_CancelTitleButtonScreenPackedAddress242), 0, 0, 0 },
+    { (void *)&g_Menu_CancelTitleButtonScreenPackedAddress242, 0, 0, 0 },
 };
 #endif
 #if defined(VERSION_EU_X)

@@ -3,7 +3,7 @@
 
 /* 802ABDBC_14.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-RestLinkerAlignmentFill4 g_MaincodeTrailingBytesBlock8 = {
+RestLinkerAlignmentFill4 g_MaincodeBlock8LinkerAlignmentFill566 = {
     { 0, 160, 136, 33 },
 };
 #endif

@@ -6,7 +6,7 @@
 #endif
 
 #if defined(VERSION_DE)
-RestLinkerAlignmentFill4 k_SystemEncodedWords = {
+RestLinkerAlignmentFill4 g_SystemLinkerAlignmentFill385 = {
     { 119, 114, 101, 97 },
 };
 #endif

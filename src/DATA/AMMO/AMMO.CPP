@@ -21,7 +21,7 @@ const float g_Player_DrawPulsingMenuSpriteConstantWords_us[1] = {
 #endif
 
 #if defined(VERSION_US)
-RestLinkerAlignmentFill8 k_AmmoEncodedWordsBlock1 = {
+RestLinkerAlignmentFill8 g_AmmoBlock1LinkerAlignmentFill24 = {
     { 0, 10, 0, 4, 0, 0, 0, 20 },
 };
 #endif
@@ -29,7 +29,7 @@ RestLinkerAlignmentFill8 k_AmmoEncodedWordsBlock1 = {
 /* ammoEncodedWordsBlock1UsRev1Data.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E2778 */
-RestLinkerAlignmentFill8 g_AmmoEncodedWordsBlock1 = {
+RestLinkerAlignmentFill8 g_AmmoBlock1LinkerAlignmentFill25 = {
     { 0, 0, 0, 1, 0, 0, 0, 16 },
 };
 #endif

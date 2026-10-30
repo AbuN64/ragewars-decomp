@@ -13,7 +13,7 @@ char s_ActionUpdatebreakableproximityYObjectTText[8] =
 
 #if defined(VERSION_DE)
 /* ROM-grounded data for de; supplied-list member has no us-rev1 placement. */
-RestLinkerAlignmentFill8 g_ActionUpdatebreakableproximityEncodedWords = {
+RestLinkerAlignmentFill8 g_ActionUpdatebreakableproximityLinkerAlignmentFill547 = {
     { 91, 115, 81, 129, 183, 3, 190, 2 },
 };
 #endif

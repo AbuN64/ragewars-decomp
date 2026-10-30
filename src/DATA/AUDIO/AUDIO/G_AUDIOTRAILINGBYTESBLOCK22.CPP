@@ -3,7 +3,7 @@
 
 /* 802B7058_45.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill8 g_AudioTrailingBytesBlock22 = {
+RestLinkerAlignmentFill8 g_AudioBlock22LinkerAlignmentFill144 = {
     { 60, 7, 128, 21, 36, 231, 115, 48 },
 };
 #endif
@@ -12,11 +12,11 @@ RestLinkerAlignmentFill8 g_AudioTrailingBytesBlock22 = {
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
 #if defined(VERSION_EU_X)
-RestLinkerAlignmentFill8 func_802BA068_eu_x = {
+RestLinkerAlignmentFill8 g_eu_xLinkerAlignmentFill146 = {
     { 60, 4, 128, 14, 140, 132, 10, 176 },
 };
 #elif defined(VERSION_US_REV1)
-RestLinkerAlignmentFill8 func_802BA068_eu_x = {
+RestLinkerAlignmentFill8 g_eu_xLinkerAlignmentFill146 = {
     { 60, 4, 128, 14, 140, 132, 146, 160 },
 };
 #endif
@@ -24,7 +24,7 @@ RestLinkerAlignmentFill8 func_802BA068_eu_x = {
 
 /* 802C0390_3.CPP */
 #if defined(VERSION_US)
-RestLinkerAlignmentFill8 g_AudioTrailingBytesBlock14 = {
+RestLinkerAlignmentFill8 g_AudioBlock14LinkerAlignmentFill147 = {
     { 0, 0, 0, 0, 17, 67, 80, 108 },
 };
 #endif

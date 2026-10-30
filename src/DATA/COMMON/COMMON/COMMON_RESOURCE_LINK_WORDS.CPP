@@ -1,4 +1,12 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_artsendNextTextureHoldCount[];
+extern char g_artsendPreviousPageHoldCount[];
+extern char g_artsendPreviousTextureHoldCount[];
+extern char g_artsendToggleButtonHeld[];
+extern char g_creditsLocalizedLines[];
+extern char g_playerModeLightPatternUsRev1[];
+extern char g_screenMessageSubstitutionReplacement[];
+extern char g_screenMessageSubstitutionSource[];
 #include "include_asm.h"
 
 #if defined(VERSION_DE)

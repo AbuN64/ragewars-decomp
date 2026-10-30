@@ -1,4 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_pakDialogTextReferenceShared1[];
 #include "include_asm.h"
 #include "DATA/OVL1_I/SMPOVERLAY_DISPATCHPAKDIALOGEVENT_DATA.H"
 
@@ -11,7 +12,7 @@ RestD_src_897c5b16Layout455 D_src_897c5b16 = {
     0x96969600,
     { -4.112e+05f, -4.112e+05f },
     { 12800, 0 },
-    (void *)(g_pakDialogTextReferenceShared1),
+    (void *)&g_pakDialogTextReferenceShared1,
     510,
 };
 #endif

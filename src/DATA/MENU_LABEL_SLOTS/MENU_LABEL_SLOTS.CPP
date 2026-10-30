@@ -1,4 +1,12 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_PakOkLabelStorage[];
+extern char g_hitLocationMessageText[];
+#if defined(VERSION_US_REV1)
+extern RestkeyboardKeyLabelWordsLayout601 g_keyboardKeyLabelWords;
+#endif
+extern char g_saveLoadHealthAmmoMenuTextPool[];
+extern char ragewars_menu_strings_D5EF4_us_rev1[];
+extern char ragewars_menu_strings_D5F74_us_rev1[];
 
 
 /* 800D7058.CPP */

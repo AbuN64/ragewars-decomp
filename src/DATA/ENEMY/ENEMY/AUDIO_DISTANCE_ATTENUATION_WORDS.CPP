@@ -1,4 +1,31 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_actionEnterDispatchTable[];
+extern char g_actionEnterDispatchTriggerPairs_eu[];
+extern char g_actionEnterDispatchTriggerPairs_eu_x[];
+extern char g_actionInitBreakableMotionRecordTable_de[];
+extern char g_actionMotionDispatchTriggerPairs_eu[];
+extern char g_actionMotionDispatchTriggerPairs_eu_x[];
+extern char g_actionMotionDispatchTriggerPairs_us[];
+extern char g_damageDispatchTable[];
+extern char g_damageDispatchTriggerPairs_eu[];
+extern char g_damageDispatchTriggerPairs_eu_x[];
+extern char g_damageDispatchTriggerPairs_us[];
+extern char g_lightAnimationOffsetTable[];
+extern char g_movingMotionDispatchTable[];
+extern char g_movingMotionDispatchTriggerPairs_de[];
+extern char g_movingMotionDispatchTriggerPairs_eu[];
+extern char g_movingMotionDispatchTriggerPairs_us[];
+extern char g_spawnActorDispatchTable[];
+extern char g_spawnActorDispatchTriggerPairs_de[];
+extern char g_spawnActorDispatchTriggerPairs_eu[];
+extern char g_triggeredMotionDispatchTable[];
+extern char g_triggeredMotionDispatchTriggerPairs_de[];
+extern char g_triggeredMotionDispatchTriggerPairs_eu[];
+extern char g_triggeredMotionDispatchTriggerPairs_us[];
+extern char g_turretDispatchTriggerPairs_de[];
+extern char g_turretDispatchTriggerPairs_eu[];
+extern char g_turretDispatchTriggerPairs_eu_x[];
+extern char g_turretDispatchTriggerPairs_us[];
 #include "include_asm.h"
 
 float k_audioDistanceAttenuationWordsUsRevisionOne[65] = {
@@ -30,7 +57,7 @@ RestlightVolumeConeDistanceLookupLayout309 g_lightVolumeConeDistanceLookup = {
     1,
     { -9, -7, -8, -11, 8, 14, 25, 12, 18, 23, 26, 14, -4, -18, -14, -29, -41, -30, -27, -25, -27, -35, -30, -22, -31, -27, -17, -14, 0, 2, -2, -13, -13, -9, 5, 2, -2, 9, 24, 31, 34, 29, 21, 24, 10, 13, -3, -6, 1, 19, 31, 39, 29, 30, 20, 20, -1, -15, -26, -20, -24, -31, -29, -24, -26, -15, -15, 2, 17, 8, 7, 17, 14, 9, 12, 12, 4, 12, 5, 10, 13, 5, -3, -2, -10, -9, -8, -21, -21, -24, 72, 65 },
     { 0, 0 },
-    { (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_triggeredMotionDispatchTriggerPairs_us + 0x40), (void *)(g_spawnActorDispatchTable + 0x88), (void *)(g_turretDispatchTriggerPairs_us + 0x48), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_actionEnterDispatchTable + 0x88), (void *)(g_damageDispatchTriggerPairs_us + 0x78), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_movingMotionDispatchTriggerPairs_us + 0x2C), (void *)(g_actionMotionDispatchTriggerPairs_us + 0x4C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C) },
+    { (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_triggeredMotionDispatchTriggerPairs_us + 0x40), (void *)((char *)&g_spawnActorDispatchTable + 0x88), (void *)((char *)&g_turretDispatchTriggerPairs_us + 0x48), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_actionEnterDispatchTable + 0x88), (void *)((char *)&g_damageDispatchTriggerPairs_us + 0x78), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_movingMotionDispatchTriggerPairs_us + 0x2C), (void *)((char *)&g_actionMotionDispatchTriggerPairs_us + 0x4C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C) },
     { 0x00660000, 0x00040000, 0x00000021, 0x3F800000 },
 };
 #endif
@@ -51,7 +78,7 @@ RestlightVolumeConeDistanceLookupLayout310 g_lightVolumeConeDistanceLookup = {
     1,
     { -9, -7, -8, -11, 8, 14, 25, 12, 18, 23, 26, 14, -4, -18, -14, -29, -41, -30, -27, -25, -27, -35, -30, -22, -31, -27, -17, -14, 0, 2, -2, -13, -13, -9, 5, 2, -2, 9, 24, 31, 34, 29, 21, 24, 10, 13, -3, -6, 1, 19, 31, 39, 29, 30, 20, 20, -1, -15, -26, -20, -24, -31, -29, -24, -26, -15, -15, 2, 17, 8, 7, 17, 14, 9, 12, 12, 4, 12, 5, 10, 13, 5, -3, -2, -10, -9, -8, -21, -21, -24, 84, 32 },
     { 0, 0 },
-    { (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_triggeredMotionDispatchTable + 0xE8), (void *)(g_spawnActorDispatchTable + 0x88), (void *)(g_turretDispatchTriggerPairs_eu_x + 0x64), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_actionEnterDispatchTriggerPairs_eu_x + 0x18), (void *)(g_damageDispatchTriggerPairs_eu_x + 0x50), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_movingMotionDispatchTable + 0x68), (void *)(g_actionMotionDispatchTriggerPairs_eu_x + 0x14), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C) },
+    { (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_triggeredMotionDispatchTable + 0xE8), (void *)((char *)&g_spawnActorDispatchTable + 0x88), (void *)((char *)&g_turretDispatchTriggerPairs_eu_x + 0x64), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_actionEnterDispatchTriggerPairs_eu_x + 0x18), (void *)((char *)&g_damageDispatchTriggerPairs_eu_x + 0x50), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_movingMotionDispatchTable + 0x68), (void *)((char *)&g_actionMotionDispatchTriggerPairs_eu_x + 0x14), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C) },
     { 0x53434F52, 0x50494F4E, 0x00000000, 0x3F800000 },
 };
 #endif
@@ -72,7 +99,7 @@ RestlightVolumeConeDistanceLookupLayout311 g_lightVolumeConeDistanceLookup = {
     1,
     { -9, -7, -8, -11, 8, 14, 25, 12, 18, 23, 26, 14, -4, -18, -14, -29, -41, -30, -27, -25, -27, -35, -30, -22, -31, -27, -17, -14, 0, 2, -2, -13, -13, -9, 5, 2, -2, 9, 24, 31, 34, 29, 21, 24, 10, 13, -3, -6, 1, 19, 31, 39, 29, 30, 20, 20, -1, -15, -26, -20, -24, -31, -29, -24, -26, -15, -15, 2, 17, 8, 7, 17, 14, 9, 12, 12, 4, 12, 5, 10, 13, 5, -3, -2, -10, -9, -8, -21, -21, -24, 0, 0 },
     { 0, 0 },
-    { (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_triggeredMotionDispatchTriggerPairs_eu + 0x10), (void *)(g_spawnActorDispatchTriggerPairs_eu + 0x30), (void *)(g_turretDispatchTriggerPairs_eu + 0x98), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_actionEnterDispatchTriggerPairs_eu), (void *)(g_damageDispatchTriggerPairs_eu + 0x50), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_movingMotionDispatchTriggerPairs_eu + 0x40), (void *)(g_actionMotionDispatchTriggerPairs_eu + 0x3C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C) },
+    { (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_triggeredMotionDispatchTriggerPairs_eu + 0x10), (void *)((char *)&g_spawnActorDispatchTriggerPairs_eu + 0x30), (void *)((char *)&g_turretDispatchTriggerPairs_eu + 0x98), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)&g_actionEnterDispatchTriggerPairs_eu, (void *)((char *)&g_damageDispatchTriggerPairs_eu + 0x50), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_movingMotionDispatchTriggerPairs_eu + 0x40), (void *)((char *)&g_actionMotionDispatchTriggerPairs_eu + 0x3C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C) },
     { 0x002791FC, 0x00206950, 0x00000000, 0x3F800000 },
 };
 #endif
@@ -93,7 +120,7 @@ RestlightVolumeConeDistanceLookupLayout312 g_lightVolumeConeDistanceLookup = {
     1,
     { -9, -7, -8, -11, 8, 14, 25, 12, 18, 23, 26, 14, -4, -18, -14, -29, -41, -30, -27, -25, -27, -35, -30, -22, -31, -27, -17, -14, 0, 2, -2, -13, -13, -9, 5, 2, -2, 9, 24, 31, 34, 29, 21, 24, 10, 13, -3, -6, 1, 19, 31, 39, 29, 30, 20, 20, -1, -15, -26, -20, -24, -31, -29, -24, -26, -15, -15, 2, 17, 8, 7, 17, 14, 9, 12, 12, 4, 12, 5, 10, 13, 5, -3, -2, -10, -9, -8, -21, -21, -24, -42, 80 },
     { 0, 0 },
-    { (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_triggeredMotionDispatchTriggerPairs_de + 0xA0), (void *)(g_spawnActorDispatchTriggerPairs_de + 0x4), (void *)(g_turretDispatchTriggerPairs_de + 0x68), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_actionEnterDispatchTable + 0x88), (void *)(g_damageDispatchTable + 0xA8), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_movingMotionDispatchTriggerPairs_de), (void *)(g_actionInitBreakableMotionRecordTable_de + 0x88), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C), (void *)(g_lightAnimationOffsetTable + 0x5C) },
+    { (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_triggeredMotionDispatchTriggerPairs_de + 0xA0), (void *)((char *)&g_spawnActorDispatchTriggerPairs_de + 0x4), (void *)((char *)&g_turretDispatchTriggerPairs_de + 0x68), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_actionEnterDispatchTable + 0x88), (void *)((char *)&g_damageDispatchTable + 0xA8), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)&g_movingMotionDispatchTriggerPairs_de, (void *)((char *)&g_actionInitBreakableMotionRecordTable_de + 0x88), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C), (void *)((char *)&g_lightAnimationOffsetTable + 0x5C) },
     { 0x3F800000, 0xFCEF23B1, 0x013332D1, 0x3F800000 },
 };
 #endif

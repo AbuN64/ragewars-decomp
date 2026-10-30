@@ -3,7 +3,7 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-RestLinkerAlignmentFill4 g_graphicsRuntimeLinkWordUsRev1 = {
+RestLinkerAlignmentFill4 g_graphicsRuntimeLinkWordUsRev1LinkerAlignmentFill516 = {
     { 32, 12, 16, 0 },
 };
 #endif

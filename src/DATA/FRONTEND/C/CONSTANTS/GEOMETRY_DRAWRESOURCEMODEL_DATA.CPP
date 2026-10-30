@@ -12,7 +12,7 @@ RestgeometryDrawResourceModelWritableWords_euLayout372 g_geometryDrawResourceMod
 /* GeometryDrawresourcemodelEncodedWordsUsRev1.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CC754 */
-RestLinkerAlignmentFill12 g_GeometryDrawresourcemodelEncodedWords = {
+RestLinkerAlignmentFill12 g_GeometryDrawresourcemodelLinkerAlignmentFill373 = {
     { 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 96 },
 };
 #endif

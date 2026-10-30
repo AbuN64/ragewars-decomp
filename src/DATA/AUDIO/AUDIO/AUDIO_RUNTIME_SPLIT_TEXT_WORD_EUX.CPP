@@ -2,7 +2,7 @@
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-RestLinkerAlignmentFill4 g_audioRuntimeSplitTextWordEuX = {
+RestLinkerAlignmentFill4 g_audioRuntimeSplitTextWordEuXLinkerAlignmentFill116 = {
     { 2, 0, 48, 33 },
 };
 #endif

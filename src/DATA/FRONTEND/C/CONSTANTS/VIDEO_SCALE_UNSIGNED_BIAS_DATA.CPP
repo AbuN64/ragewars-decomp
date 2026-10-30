@@ -7,19 +7,19 @@ const RestvideoScaleUnsignedBias_StorageWordsLayout386 g_videoScaleUnsignedBias_
 };
 
 #if defined(VERSION_US)
-RestLinkerAlignmentFill4 k_VideoScaleUnsignedBiasEncodedWords = {
+RestLinkerAlignmentFill4 g_VideoScaleUnsignedBiasLinkerAlignmentFill387 = {
     { 0, 15, 83, 77 },
 };
 #endif
 
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill4 k_VideoScaleUnsignedBiasThirtyWords = {
+RestLinkerAlignmentFill4 g_VideoScaleUnsignedBiasThirtyLinkerAlignmentFill388 = {
     { 65, 240, 0, 0 },
 };
 #endif
 
 #if defined(VERSION_DE)
-RestLinkerAlignmentFill4 k_VideoScaleUnsignedBiasEncodedWordsBlock1 = {
+RestLinkerAlignmentFill4 g_VideoScaleUnsignedBiasBlock1LinkerAlignmentFill389 = {
     { 114, 101, 97, 100 },
 };
 #endif

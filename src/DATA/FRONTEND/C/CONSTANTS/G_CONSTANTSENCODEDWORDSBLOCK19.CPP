@@ -12,6 +12,6 @@ unsigned short g_ConstantsEncodedHalfwords[1] = {
 /* NAVIGATION_CALLBACK_ADDRESS.CPP */
 #if defined(VERSION_US_REV1)
 void * g_ConstantsEncodedWordsBlock19[3] = {
-    (void *)(addrLow_Nav_RebuildRequestedGoalRoute), (void *)(addrLow_Nav_CollectEnemyTargets), (void *)(addrLow_Target_UpdateTargetSelection),
+    (void *)&addrLow_Nav_RebuildRequestedGoalRoute, (void *)&addrLow_Nav_CollectEnemyTargets, (void *)&addrLow_Target_UpdateTargetSelection,
 };
 #endif

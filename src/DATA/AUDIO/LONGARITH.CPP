@@ -15,7 +15,7 @@ char func_802C1908_de_padding_C2508[8] =
 #endif
 
 #if defined(VERSION_DE)
-RestLinkerAlignmentFill8 g_LongarithTrailingBytes = {
+RestLinkerAlignmentFill8 g_LongarithLinkerAlignmentFill199 = {
     { 4, 193, 0, 6, 0, 0, 40, 33 },
 };
 #endif

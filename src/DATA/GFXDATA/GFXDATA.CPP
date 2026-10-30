@@ -3,7 +3,7 @@
 
 /* 80414480.CPP */
 #if defined(VERSION_US)
-const RestLinkerAlignmentFill4 k_GfxdataEncodedWordsBlock1 = {
+const RestLinkerAlignmentFill4 g_GfxdataBlock1LinkerAlignmentFill519 = {
     { 83, 73, 67, 95 },
 };
 #endif

@@ -1601,6 +1601,8 @@ typedef struct RestlightVolumeConeDistanceLookupLayout312 {
     u32 tail[4];
 } RestlightVolumeConeDistanceLookupLayout312;
 
+typedef struct RestAudioFourByteDoubleConstant { double value; } __attribute__((packed, aligned(4))) RestAudioFourByteDoubleConstant;
+
 typedef struct RestplayerMovementTuningAndLookupUsRev1Layout400 {
     float movementScales[3];
     u32 stateMasks[9];
@@ -5571,25 +5573,6 @@ typedef struct RestcharacterPreviewRecordWordsUsLayout756 {
     s32 idsAt1796[66];
     char textAt2060[8];
 } RestcharacterPreviewRecordWordsUsLayout756;
-
-typedef struct RestOvltblOvltblCppRetainedWords1Layout790 {
-    float constantsAt0[5];
-} RestOvltblOvltblCppRetainedWords1Layout790;
-
-typedef struct RestxprintfConstantWordsLayout793 {
-    s32 idsAt0[2];
-    float constantsAt8[9];
-    u32 packedValueAt44;
-    float constantsAt48;
-    u32 packedValueAt52;
-    float constantsAt56;
-    u32 packedValueAt60;
-    u32 packedValueAt64;
-    u32 packedValueAt68;
-    u32 packedValueAt72;
-    u32 packedValueAt76;
-    char textAt80[8];
-} RestxprintfConstantWordsLayout793;
 
 typedef struct RestbossActivTextLayout861 {
     void * referencesAt0[3564];

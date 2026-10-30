@@ -1,4 +1,6 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_playerReactionReserveApproachRate[];
+extern char g_weaponFireStateCallbackTable[];
 #include "DATA/OVL1_F/WEAPON_CHARGE_CALLBACK_ADDRESS.H"
 #include "DATA/OVL1_F/g_overlayOneFLinkRecordConstantWords_Ovl1F.H"
 #include "DATA/OVL1_F/g_overlayOneFLinkRecordLinkWordsBlock3_Ovl1F.H"
@@ -213,14 +215,14 @@ RestoverlayOneFLinkRecordLinkWordsBlock7Record725 g_overlayOneFLinkRecordLinkWor
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CF5C0_unclaimed_D01E8_unclaimed_D0200_unclaimed_D0208_unclaimed_D0220_unclaimed_D0228_unclaimed_D0240_unclaimed_D0244_unclaimed_D0288_unclaimed_D02A0_unclaimed_D02A8_unclaimed_D02C0_unclaimed_D02C4_unclaimed_D0308 */
 void * g_overlayOneFLinkRecordLinkWordsBlock8[3] = {
-    (void *)(addrLow_Weaponai_UpdateHeldFire), 0, (void *)((char *)&g_playerReactionReserveApproachRate + 36),
+    (void *)&addrLow_Weaponai_UpdateHeldFire, 0, (void *)((char *)&g_playerReactionReserveApproachRate + 36),
 };
 #endif
 
 /* g_overlayOneFLinkRecordConstantWordsBlock8_Ovl1F.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_weapon_state_animation_D0314_us_rev1.c */
-RestLinkerAlignmentFill12 g_overlayOneFLinkRecordConstantWordsBlock8 = {
+RestLinkerAlignmentFill12 g_overlayOneFLinkRecordConstantBlock8LinkerAlignmentFill727 = {
     { 63, 128, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0 },
 };
 #endif

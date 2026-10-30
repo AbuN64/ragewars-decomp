@@ -1,4 +1,42 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char addrLow_SmpFlicker_DestroyController[];
+extern char addrLow_SmpFlicker_UpdateFlicker[];
+extern char addrLow_SmpSlider_DestroyController[];
+extern char addrLow_Smp_UpdateFadeProgress[];
+extern char g_SmpButton_DestroyButtonControllerPackedAddress24[];
+extern char g_SmpButton_DestroyListControllerPackedAddress24[];
+extern char g_SmpButton_DimButtonItemsPackedAddress24[];
+extern char g_SmpButton_DimButtonItemsWithSoundPackedAddress24[];
+extern char g_SmpButton_DimListItemsPackedAddress24[];
+extern char g_SmpButton_DimListItemsWithSoundPackedAddress24[];
+extern char g_SmpButton_HighlightButtonItemsPackedAddress24[];
+extern char g_SmpButton_HighlightListItemsPackedAddress24[];
+extern char g_SmpButton_SelectNextListEntryPackedAddress24[];
+extern char g_SmpButton_SelectPreviousListEntryPackedAddress24[];
+extern char g_SmpFlicker_DestroyControllerPackedAddress24[];
+extern char g_SmpFlicker_UpdateFlickerPackedAddress24[];
+extern char g_SmpFrameAnim_DestroyControllerPackedAddress24[];
+extern char g_SmpFrameAnim_UpdateFrameSequencePackedAddress24[];
+extern char g_SmpList_DestroyControllerPackedAddress24[];
+extern char g_SmpList_HandleDecrementInputPackedAddress24[];
+extern char g_SmpList_HandleIncrementInputPackedAddress24[];
+extern char g_SmpList_HandleStopEventPackedAddress24[];
+extern char g_SmpList_ResetEntryCommandsPackedAddress24[];
+extern char g_SmpList_UpdateSliderMotionPackedAddress24[];
+extern char g_SmpOverlay_FollowSlotTarget2cPackedAddress24[];
+extern char g_SmpOverlay_FollowSlotTarget30PackedAddress24[];
+extern char g_SmpOverlay_FollowSlotTarget34PackedAddress24[];
+extern char g_SmpOverlay_FollowSlotTarget38PackedAddress24[];
+extern char g_SmpOverlay_ForwardSlotEventPackedAddress24[];
+extern char g_SmpOverlay_FreeEventObjectPackedAddress24[];
+extern char g_SmpOverlay_ReturnUnhandledEventPackedAddress24[];
+extern char g_SmpOverlay_SetListWidgetFlag40PackedAddress24[];
+extern char g_SmpSlider_DestroyControllerPackedAddress24[];
+extern char g_SmpSlider_DimSliderItemsPackedAddress24[];
+extern char g_SmpSlider_HighlightSliderItemsPackedAddress24[];
+extern char g_Smp_UpdateFadeProgressPackedAddress24[];
+extern char g_selection_HandleCharacterVariantCycleEntry[];
+extern char g_smpFrameAnim_DestroyControllerEntry[];
 
 
 /* 800E32A1_2.CPP */
@@ -11,7 +49,7 @@ RestsmpControllerStateAndEventWordsLayout872 g_smpControllerStateAndEventWords =
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0.38789132f, 0.3852987f },
     { 1, 30000 },
-    (void *)(g_smpFrameAnim_DestroyControllerEntry),
+    (void *)&g_smpFrameAnim_DestroyControllerEntry,
     3592,
 };
 #elif defined(VERSION_EU)
@@ -67,13 +105,13 @@ extern char addrLow_SmpSlider_DestroyController[];
 extern char g_selection_HandleCharacterVariantCycleEntry[];
 RestsmpControllerEventRecordTailsUsRev1Layout878 g_smpControllerEventRecordTailsUsRev1 = {
     { 199, 179, 181, 3587, 30000 },
-    (void *)(addrLow_SmpFlicker_DestroyController),
+    (void *)&addrLow_SmpFlicker_DestroyController,
     { 3592, 30000 },
-    { (void *)(addrLow_SmpFlicker_UpdateFlicker), 0, 0, 0 },
+    { (void *)&addrLow_SmpFlicker_UpdateFlicker, 0, 0, 0 },
     { 154, 158, 159, 3587, 30000 },
-    (void *)(addrLow_SmpSlider_DestroyController),
+    (void *)&addrLow_SmpSlider_DestroyController,
     { 3592, 30000 },
-    { (void *)(addrLow_Smp_UpdateFadeProgress), 0, 0, 0, (void *)(g_selection_HandleCharacterVariantCycleEntry) },
+    { (void *)&addrLow_Smp_UpdateFadeProgress, 0, 0, 0, (void *)&g_selection_HandleCharacterVariantCycleEntry },
     { 3594, 7 },
 };
 #endif
@@ -160,82 +198,82 @@ extern char g_SmpOverlay_FreeEventObjectPackedAddress24[];
 extern char g_SmpOverlay_SetListWidgetFlag40PackedAddress24[];
 RestsmpEventHandlerTablesLayout881 g_smpEventHandlerTables = {
     { 3587, 30000 },
-    (void *)(g_SmpFrameAnim_DestroyControllerPackedAddress24),
+    (void *)&g_SmpFrameAnim_DestroyControllerPackedAddress24,
     { 3592, 30000 },
-    { (void *)(g_SmpFrameAnim_UpdateFrameSequencePackedAddress24), 0, 0, 0 },
+    { (void *)&g_SmpFrameAnim_UpdateFrameSequencePackedAddress24, 0, 0, 0 },
     2.1767578f,
     0x01785822,
     0x19600002,
     { 3587, 30000 },
-    (void *)(g_SmpFlicker_DestroyControllerPackedAddress24),
+    (void *)&g_SmpFlicker_DestroyControllerPackedAddress24,
     { 3592, 30000 },
-    { (void *)(g_SmpFlicker_UpdateFlickerPackedAddress24), 0, 0, 0, 0 },
+    { (void *)&g_SmpFlicker_UpdateFlickerPackedAddress24, 0, 0, 0, 0 },
     0x97340380,
     0x0C000489,
     { 3587, 30000 },
-    (void *)(g_SmpSlider_DestroyControllerPackedAddress24),
+    (void *)&g_SmpSlider_DestroyControllerPackedAddress24,
     { 3592, 30000 },
-    { (void *)(g_Smp_UpdateFadeProgressPackedAddress24), 0, 0, 0 },
+    { (void *)&g_Smp_UpdateFadeProgressPackedAddress24, 0, 0, 0 },
     0x900801D9,
     0x30A70001,
     0x15000006,
     { 3591, 30000 },
-    (void *)(g_SmpSlider_DimSliderItemsPackedAddress24),
+    (void *)&g_SmpSlider_DimSliderItemsPackedAddress24,
     { 15, 30000 },
-    (void *)(g_SmpSlider_HighlightSliderItemsPackedAddress24),
+    (void *)&g_SmpSlider_HighlightSliderItemsPackedAddress24,
     { 16, 30000 },
-    (void *)(g_SmpList_ResetEntryCommandsPackedAddress24),
+    (void *)&g_SmpList_ResetEntryCommandsPackedAddress24,
     { 8, 30000 },
-    (void *)(g_SmpList_HandleIncrementInputPackedAddress24),
+    (void *)&g_SmpList_HandleIncrementInputPackedAddress24,
     { 7, 30000 },
-    (void *)(g_SmpList_HandleDecrementInputPackedAddress24),
+    (void *)&g_SmpList_HandleDecrementInputPackedAddress24,
     { 3587, 30000 },
-    (void *)(g_SmpList_DestroyControllerPackedAddress24),
+    (void *)&g_SmpList_DestroyControllerPackedAddress24,
     { 11, 30000 },
-    (void *)(g_SmpList_HandleStopEventPackedAddress24),
+    (void *)&g_SmpList_HandleStopEventPackedAddress24,
     { 3592, 30000 },
-    { (void *)(g_SmpList_UpdateSliderMotionPackedAddress24), 0, 0, 0 },
+    { (void *)&g_SmpList_UpdateSliderMotionPackedAddress24, 0, 0, 0 },
     8486726.0f,
     { 3591, 30000 },
-    (void *)(g_SmpButton_DimListItemsPackedAddress24),
+    (void *)&g_SmpButton_DimListItemsPackedAddress24,
     { 15, 30000 },
-    (void *)(g_SmpButton_HighlightListItemsPackedAddress24),
+    (void *)&g_SmpButton_HighlightListItemsPackedAddress24,
     { 16, 30000 },
-    (void *)(g_SmpButton_DimListItemsWithSoundPackedAddress24),
+    (void *)&g_SmpButton_DimListItemsWithSoundPackedAddress24,
     { 8, 30000 },
-    (void *)(g_SmpButton_SelectNextListEntryPackedAddress24),
+    (void *)&g_SmpButton_SelectNextListEntryPackedAddress24,
     { 7, 30000 },
-    (void *)(g_SmpButton_SelectPreviousListEntryPackedAddress24),
+    (void *)&g_SmpButton_SelectPreviousListEntryPackedAddress24,
     { 3587, 30000 },
-    { (void *)(g_SmpButton_DestroyListControllerPackedAddress24), 0, 0, 0 },
+    { (void *)&g_SmpButton_DestroyListControllerPackedAddress24, 0, 0, 0 },
     0xE9030E7A,
     23425932.0f,
     0xE919147C,
     { 3591, 30000 },
-    (void *)(g_SmpButton_DimButtonItemsPackedAddress24),
+    (void *)&g_SmpButton_DimButtonItemsPackedAddress24,
     { 15, 30000 },
-    (void *)(g_SmpButton_HighlightButtonItemsPackedAddress24),
+    (void *)&g_SmpButton_HighlightButtonItemsPackedAddress24,
     { 16, 30000 },
-    (void *)(g_SmpButton_DimButtonItemsWithSoundPackedAddress24),
+    (void *)&g_SmpButton_DimButtonItemsWithSoundPackedAddress24,
     { 3587, 30000 },
-    { (void *)(g_SmpButton_DestroyButtonControllerPackedAddress24), 0, 0, 0 },
+    { (void *)&g_SmpButton_DestroyButtonControllerPackedAddress24, 0, 0, 0 },
     0x1260000D,
     { 3591, 30000 },
-    (void *)(g_SmpOverlay_ReturnUnhandledEventPackedAddress24),
+    (void *)&g_SmpOverlay_ReturnUnhandledEventPackedAddress24,
     { 3587, 30000 },
-    (void *)(g_SmpOverlay_FreeEventObjectPackedAddress24),
+    (void *)&g_SmpOverlay_FreeEventObjectPackedAddress24,
     { 3592, 30000 },
-    (void *)(g_SmpOverlay_SetListWidgetFlag40PackedAddress24),
+    (void *)&g_SmpOverlay_SetListWidgetFlag40PackedAddress24,
     { 7, 30000 },
-    (void *)(g_SmpOverlay_FollowSlotTarget34PackedAddress24),
+    (void *)&g_SmpOverlay_FollowSlotTarget34PackedAddress24,
     { 5, 30000 },
-    (void *)(g_SmpOverlay_FollowSlotTarget2cPackedAddress24),
+    (void *)&g_SmpOverlay_FollowSlotTarget2cPackedAddress24,
     { 8, 30000 },
-    (void *)(g_SmpOverlay_FollowSlotTarget38PackedAddress24),
+    (void *)&g_SmpOverlay_FollowSlotTarget38PackedAddress24,
     { 6, 30000 },
-    (void *)(g_SmpOverlay_FollowSlotTarget30PackedAddress24),
+    (void *)&g_SmpOverlay_FollowSlotTarget30PackedAddress24,
     { 1, 30000 },
-    { (void *)(g_SmpOverlay_ForwardSlotEventPackedAddress24), 0, 0, 0 },
+    { (void *)&g_SmpOverlay_ForwardSlotEventPackedAddress24, 0, 0, 0 },
     0xE9171C7C,
 };
 #endif

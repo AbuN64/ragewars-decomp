@@ -1,4 +1,6 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_actorRadialDirections[];
+extern char g_tlbMissExceptionVector[];
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
@@ -64,7 +66,7 @@ RestSceneEffectLookupWordsEuEncodedHalfwordsLayout365 k_SceneEffectLookupWordsEu
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-RestLinkerAlignmentFill4 g_playerActionStateTableUsRev1 = {
+RestLinkerAlignmentFill4 g_playerActionStateTableUsRev1LinkerAlignmentFill366 = {
     { 127, 127, 255, 255 },
 };
 #endif

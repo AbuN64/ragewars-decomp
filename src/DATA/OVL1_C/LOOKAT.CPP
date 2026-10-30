@@ -10,7 +10,7 @@ const float k_lookatFloatConstantWords[7] = {
 #endif
 
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill12 k_LookatEncodedWordsBlock2 = {
+RestLinkerAlignmentFill12 g_LookatBlock2LinkerAlignmentFill629 = {
     { 0, 0, 0, 0, 65, 240, 0, 0, 0, 0, 0, 0 },
 };
 #endif
@@ -38,7 +38,7 @@ const float k_LookatOneWords[1] = {
 };
 
 /* ROM-grounded data: src/k_lookatFloatConstantWordsBlock2_Lookat.c */
-const RestLinkerAlignmentFill4 k_lookatFloatConstantWordsBlock2 = {
+const RestLinkerAlignmentFill4 g_lookatFloatConstantBlock2LinkerAlignmentFill631 = {
     { 71, 128, 0, 0 },
 };
 

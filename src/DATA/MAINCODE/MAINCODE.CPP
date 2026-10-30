@@ -3,7 +3,7 @@
 
 /* 80208000_17.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-RestLinkerAlignmentFill12 g_MaincodeTrailingBytes = {
+RestLinkerAlignmentFill12 g_MaincodeLinkerAlignmentFill580 = {
     { 143, 177, 0, 20, 143, 176, 0, 16, 3, 224, 0, 8 },
 };
 #endif
@@ -12,14 +12,14 @@ RestLinkerAlignmentFill12 g_MaincodeTrailingBytes = {
 
 /* 8020EAE0_16.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill4 g_MaincodeTrailingBytesBlock1 = {
+RestLinkerAlignmentFill4 g_MaincodeBlock1LinkerAlignmentFill581 = {
     { 231, 160, 2, 44 },
 };
 #endif
 
 /* 80231F5C_13.CPP */
 #if defined(VERSION_US)
-RestLinkerAlignmentFill8 g_MaincodeTrailingBytesBlock2 = {
+RestLinkerAlignmentFill8 g_MaincodeBlock2LinkerAlignmentFill582 = {
     { 97, 110, 83, 116, 97, 116, 101, 100 },
 };
 #endif

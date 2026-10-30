@@ -1,4 +1,10 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_audioDecodedBlockCounter[];
+extern char g_tlbMissExceptionVector[];
+extern char huffman_signed6_dictionary[];
+extern char huffman_signed7_five_dictionary[];
+extern char huffman_signed7_nine_dictionary[];
+extern char huffman_signed7_single_dictionary[];
 
 /* ROM-grounded data: src/huffman_initial_block_ranges.c */
 #ifdef VERSION_DE

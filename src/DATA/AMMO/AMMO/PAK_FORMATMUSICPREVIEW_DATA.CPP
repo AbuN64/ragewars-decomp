@@ -22,7 +22,7 @@ const unsigned char g_musicPreviewTwoColumnFormat[4] = {
 #endif
 
 #if defined(VERSION_US)
-RestLinkerAlignmentFill12 g_pakMusicPreviewWordsUs = {
+RestLinkerAlignmentFill12 g_pakMusicPreviewUsLinkerAlignmentFill17 = {
     { 0, 0, 0, 15, 0, 10, 0, 4, 0, 0, 0, 21 },
 };
 #endif

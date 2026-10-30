@@ -3,7 +3,7 @@
 
 /* 802AFD5C_3.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill4 g_CsplayerTrailingBytesBlock1 = {
+RestLinkerAlignmentFill4 g_CsplayerBlock1LinkerAlignmentFill531 = {
     { 68, 7, 184, 0 },
 };
 #endif
@@ -15,7 +15,7 @@ char s_firePodReaText[12] =
 #endif
 
 #if defined(VERSION_US_REV1)
-RestLinkerAlignmentFill12 g_csplayerLinkGapWords = {
+RestLinkerAlignmentFill12 g_csplayerLinkGapLinkerAlignmentFill532 = {
     { 12, 9, 202, 109, 36, 7, 0, 1, 2, 32, 32, 33 },
 };
 #endif

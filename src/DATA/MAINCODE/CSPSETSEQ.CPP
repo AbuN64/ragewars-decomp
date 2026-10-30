@@ -1,7 +1,7 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
 
 #if defined(VERSION_DE)
-RestLinkerAlignmentFill4 g_CspsetseqTrailingBytes = {
+RestLinkerAlignmentFill4 g_CspsetseqLinkerAlignmentFill539 = {
     { 0, 160, 32, 33 },
 };
 #endif

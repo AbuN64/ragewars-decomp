@@ -3,7 +3,7 @@
 
 /* 802B7058_44.CPP */
 #if defined(VERSION_EU)
-RestLinkerAlignmentFill8 g_SSlowtextTrailingBytes = {
+RestLinkerAlignmentFill8 g_SSlowtextLinkerAlignmentFill164 = {
     { 12, 10, 225, 216, 39, 167, 0, 24 },
 };
 #endif
@@ -11,7 +11,7 @@ RestLinkerAlignmentFill8 g_SSlowtextTrailingBytes = {
 /* 802BE040_63.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-RestLinkerAlignmentFill12 func_802B9E94_eu_x = {
+RestLinkerAlignmentFill12 g_eu_xLinkerAlignmentFill165 = {
     { 174, 103, 0, 0, 143, 185, 0, 16, 53, 173, 0, 52 },
 };
 #endif

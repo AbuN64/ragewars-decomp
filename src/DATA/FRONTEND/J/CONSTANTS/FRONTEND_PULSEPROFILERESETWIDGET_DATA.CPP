@@ -1,4 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char Frontend_HandleProfileResetConfirm_Address[];
 #include "include_asm.h"
 #include "DATA/OVL1_J/FRONTEND_PULSEPROFILERESETWIDGET_DATA.H"
 
@@ -26,7 +27,7 @@ RestD_src_9d8a2047Layout476 D_src_9d8a2047 = {
     { 2, 24 },
     (unsigned int)(Frontend_HandleProfileResetConfirm_Address + 64),
     { 10, 24 },
-    { (void *)(Frontend_HandleProfileResetConfirm_Address), 0, 0, 0 },
+    { (void *)&Frontend_HandleProfileResetConfirm_Address, 0, 0, 0 },
     (unsigned int)(g_Frontend_DispatchProfileResetEventAddress + 1432),
     { 2, 3590, 33 },
     (unsigned int)(g_Frontend_DispatchProfileResetEventAddress + 1496),

@@ -1,4 +1,7 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_audioDecodedSampleSlots[];
+extern char g_audioTransformFftTable[];
+extern char g_tlbMissExceptionVector[];
 #include "include_asm.h"
 
 #if defined(VERSION_US)

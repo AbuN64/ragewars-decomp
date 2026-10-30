@@ -3,7 +3,7 @@
 
 /* 800C7850.CPP */
 #if defined(VERSION_US)
-RestLinkerAlignmentFill4 g_OvltblOvltblCppRetainedWords2 = {
+RestLinkerAlignmentFill4 g_OvltblOvltbl2LinkerAlignmentFill789 = {
     { 0, 15, 83, 77 },
 };
 #endif
@@ -28,7 +28,7 @@ const unsigned char g_OvltblOvltblCppRetainedBytes1[3] = {
 
 /* 8023A284_39.CPP */
 #if defined(VERSION_EU_X)
-RestLinkerAlignmentFill4 k_OvltblEncodedWords = {
+RestLinkerAlignmentFill4 g_OvltblLinkerAlignmentFill791 = {
     { 0, 38, 151, 244 },
 };
 #endif

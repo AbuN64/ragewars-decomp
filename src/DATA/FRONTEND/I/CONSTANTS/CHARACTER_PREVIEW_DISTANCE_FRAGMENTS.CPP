@@ -3,7 +3,7 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-const RestLinkerAlignmentFill4 D_src_1fb9cba3 = {
+const RestLinkerAlignmentFill4 g_D_srcLinkerAlignmentFill427 = {
     { 67, 32, 0, 0 },
 };
 #endif
@@ -46,7 +46,7 @@ unsigned char k_CharacterPreviewDistanceFragmentsEncodedBytesBlock2[13] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const RestLinkerAlignmentFill4 g_characterPreviewDistanceUsRev1 = {
+const RestLinkerAlignmentFill4 g_characterPreviewDistanceUsRev1LinkerAlignmentFill428 = {
     { 67, 32, 0, 0 },
 };
 #endif

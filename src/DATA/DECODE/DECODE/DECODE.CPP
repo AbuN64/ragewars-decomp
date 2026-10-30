@@ -1,4 +1,11 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_huffmanDeltaFiveZeroRunNodes[];
+extern char g_huffmanDeltaNineZeroRunNodes[];
+extern char g_huffmanDeltaSingleZeroRunNodes[];
+extern char g_huffmanFiveZeroRuns[];
+extern char g_huffmanNineZeroRuns[];
+extern char g_huffmanSignedSmallNodes[];
+extern char g_huffmanSingleZeroRuns[];
 
 #if defined(VERSION_US_REV1)
 Resthuffman_signed7_single_dictionaryLayout307 huffman_signed7_single_dictionary = {

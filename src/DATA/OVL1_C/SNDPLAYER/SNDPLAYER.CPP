@@ -1,9 +1,55 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char addrLow_Events_RunSecondNodeOperation_eu_x[];
+extern char addrLow_Events_SetActorEventBit_eu_x[];
+extern char addrLow_Events_SpawnActorEffect_SHammertext[];
+extern char g_Events_ApplyDirectDamageAddress[];
+extern char g_Events_ApplyDirectDamagePackedAddress24_us_rev1[];
+extern char g_Events_ApplyFlag100RadialDamageAddress[];
+extern char g_Events_ApplyFlag100RadialKnockbackAddress[];
+extern char g_Events_ApplyFlag200RadialDamageAddress[];
+extern char g_Events_ApplyFlag200RadialKnockbackAddress[];
+extern char g_Events_ApplyFlag400RadialDamageAddress[];
+extern char g_Events_ApplyFlag400RadialKnockbackAddress[];
+extern char g_Events_ApplyRadialDamageWithKnockbackAddress[];
+extern char g_Events_ApplyRadialDamageWithKnockbackPackedAddress24_us_rev1[];
+extern char g_Events_ConsumeEventArgumentAddress[];
+extern char g_Events_DeactivateActorAddress[];
+extern char g_Events_FireWithinHeightRangeAddress[];
+extern char g_Events_IgnoreEventAddress[];
+extern char g_Events_IncrementNearbyPlayerCounterAddress[];
+extern char g_Events_PlayClipEventAddress[];
+extern char g_Events_PlayTeamClipAddress[];
+extern char g_Events_PlayTeamEffectAddress[];
+extern char g_Events_PostGameplayMessageAddress[];
+extern char g_Events_PreserveEventArgumentAddress[];
+extern char g_Events_RequestActorPositionAddress[];
+extern char g_Events_RunSecondNodeOperationAddress[];
+extern char g_Events_SetActorEffectModeAddress[];
+extern char g_Events_SetActorEventBitAddress[];
+extern char g_Events_SetActorLoopingSoundAddress[];
+extern char g_Events_SetActorLoopingSoundPackedAddress24_us_rev1[];
+extern char g_Events_SpawnActorEffectAddress[];
+extern char g_Events_SpawnAttachedEffectAddress[];
+extern char g_Events_SpawnFilteredActorEffectAddress[];
+extern char g_Events_SpawnPositionedEffectAddress[];
+extern char g_Events_StartActorEmitterAddress[];
+extern char g_Events_StartDisabledCameraEmitterAddress[];
+extern char g_Events_StartEnabledCameraEmitterAddress[];
+extern char g_actionEnterDispatchTriggerPairs_eu_x[];
+extern char g_actionMotionDispatchTriggerPairs_eu_x[];
+extern char g_damageDispatchTriggerPairs_eu_x[];
+extern char g_movingMotionDispatchTable[];
+extern char g_particleQuadVertices[];
+extern char g_playerModelLighting[];
+extern char g_savedPlayerModelLighting[];
+extern char g_spawnActorDispatchTable[];
+extern char g_triggeredMotionDispatchTable[];
+extern char g_turretDispatchTriggerPairs_eu_x[];
 #include "TYPES.H"
 
 /* SndplayerShortWordBlock.CPP */
 #if defined(VERSION_US_REV1)
-RestLinkerAlignmentFill12 g_SndplayerEncodedWords = {
+RestLinkerAlignmentFill12 g_SndplayerLinkerAlignmentFill638 = {
     { 255, 255, 0, 0, 6, 165, 3, 232, 6, 166, 1, 244 },
 };
 #endif

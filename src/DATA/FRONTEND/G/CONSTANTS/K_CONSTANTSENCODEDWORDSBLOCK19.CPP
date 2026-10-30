@@ -6,6 +6,6 @@ extern char g_weaponChargeSpinTarget[];
 RestConstantsEncodedWordsBlock19Layout409 k_ConstantsEncodedWordsBlock19 = {
     { 0, 0 },
     { 1.0f, 1.0f },
-    { (void *)((char *)&g_weaponChargeSpinTarget + 4), (void *)(g_weapon_ApplySideDependentYawEntry), (void *)(g_weaponai_SettleSpinToThirdTurnEntry) },
+    { (void *)((char *)&g_weaponChargeSpinTarget + 4), (void *)&g_weapon_ApplySideDependentYawEntry, (void *)&g_weaponai_SettleSpinToThirdTurnEntry },
 };
 #endif

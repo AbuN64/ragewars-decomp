@@ -1,4 +1,9 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_threadLabelWordsEuropean[];
+extern char g_threadLabelWordsEuropeanX[];
+extern char g_threadLabelWordsGerman[];
+extern char g_threadLabelWordsUs[];
+extern char g_threadLabelWordsUsRev1[];
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
@@ -6,7 +11,7 @@
 extern char g_threadLabelWordsGerman[];
 RestCurveDecodethreebitsamplesEncodedWordsLayout313 k_CurveDecodethreebitsamplesEncodedWords = {
     { 0, 61440, 124928, 117760, 0, 0, -61440, -53248 },
-    { (void *)(g_threadLabelWordsGerman + 0x5C), (void *)(g_threadLabelWordsGerman + 0x54), (void *)(g_threadLabelWordsGerman + 0x4C), (void *)(g_threadLabelWordsGerman + 0x3C), (void *)(g_threadLabelWordsGerman + 0x34), (void *)(g_threadLabelWordsGerman + 0x2C), (void *)(g_threadLabelWordsGerman + 0x20), (void *)(g_threadLabelWordsGerman + 0x14), (void *)(g_threadLabelWordsGerman + 0xC), 0 },
+    { (void *)((char *)&g_threadLabelWordsGerman + 0x5C), (void *)((char *)&g_threadLabelWordsGerman + 0x54), (void *)((char *)&g_threadLabelWordsGerman + 0x4C), (void *)((char *)&g_threadLabelWordsGerman + 0x3C), (void *)((char *)&g_threadLabelWordsGerman + 0x34), (void *)((char *)&g_threadLabelWordsGerman + 0x2C), (void *)((char *)&g_threadLabelWordsGerman + 0x20), (void *)((char *)&g_threadLabelWordsGerman + 0x14), (void *)((char *)&g_threadLabelWordsGerman + 0xC), 0 },
     { -1, 10273 },
 };
 #endif
@@ -14,7 +19,7 @@ RestCurveDecodethreebitsamplesEncodedWordsLayout313 k_CurveDecodethreebitsamples
 extern char g_threadLabelWordsEuropean[];
 RestCurveDecodethreebitsamplesEncodedWordsLayout314 k_CurveDecodethreebitsamplesEncodedWords = {
     { 0, 61440, 124928, 117760, 0, 0, -61440, -53248 },
-    { (void *)(g_threadLabelWordsEuropean + 0x5C), (void *)(g_threadLabelWordsEuropean + 0x54), (void *)(g_threadLabelWordsEuropean + 0x4C), (void *)(g_threadLabelWordsEuropean + 0x3C), (void *)(g_threadLabelWordsEuropean + 0x34), (void *)(g_threadLabelWordsEuropean + 0x2C), (void *)(g_threadLabelWordsEuropean + 0x20), (void *)(g_threadLabelWordsEuropean + 0x14), (void *)(g_threadLabelWordsEuropean + 0xC), 0 },
+    { (void *)((char *)&g_threadLabelWordsEuropean + 0x5C), (void *)((char *)&g_threadLabelWordsEuropean + 0x54), (void *)((char *)&g_threadLabelWordsEuropean + 0x4C), (void *)((char *)&g_threadLabelWordsEuropean + 0x3C), (void *)((char *)&g_threadLabelWordsEuropean + 0x34), (void *)((char *)&g_threadLabelWordsEuropean + 0x2C), (void *)((char *)&g_threadLabelWordsEuropean + 0x20), (void *)((char *)&g_threadLabelWordsEuropean + 0x14), (void *)((char *)&g_threadLabelWordsEuropean + 0xC), 0 },
     -1,
     "FAMI",
 };
@@ -23,7 +28,7 @@ RestCurveDecodethreebitsamplesEncodedWordsLayout314 k_CurveDecodethreebitsamples
 extern char g_threadLabelWordsEuropeanX[];
 RestCurveDecodethreebitsamplesEncodedWordsLayout315 k_CurveDecodethreebitsamplesEncodedWords = {
     { 0, 61440, 124928, 117760, 0, 0, -61440, -53248 },
-    { (void *)(g_threadLabelWordsEuropeanX + 0x5C), (void *)(g_threadLabelWordsEuropeanX + 0x54), (void *)(g_threadLabelWordsEuropeanX + 0x4C), (void *)(g_threadLabelWordsEuropeanX + 0x3C), (void *)(g_threadLabelWordsEuropeanX + 0x34), (void *)(g_threadLabelWordsEuropeanX + 0x2C), (void *)(g_threadLabelWordsEuropeanX + 0x20), (void *)(g_threadLabelWordsEuropeanX + 0x14), (void *)(g_threadLabelWordsEuropeanX + 0xC), 0 },
+    { (void *)((char *)&g_threadLabelWordsEuropeanX + 0x5C), (void *)((char *)&g_threadLabelWordsEuropeanX + 0x54), (void *)((char *)&g_threadLabelWordsEuropeanX + 0x4C), (void *)((char *)&g_threadLabelWordsEuropeanX + 0x3C), (void *)((char *)&g_threadLabelWordsEuropeanX + 0x34), (void *)((char *)&g_threadLabelWordsEuropeanX + 0x2C), (void *)((char *)&g_threadLabelWordsEuropeanX + 0x20), (void *)((char *)&g_threadLabelWordsEuropeanX + 0x14), (void *)((char *)&g_threadLabelWordsEuropeanX + 0xC), 0 },
     -1,
     1.000847f,
 };
@@ -32,7 +37,7 @@ RestCurveDecodethreebitsamplesEncodedWordsLayout315 k_CurveDecodethreebitsamples
 extern char g_threadLabelWordsUs[];
 RestCurveDecodethreebitsamplesEncodedWordsLayout316 k_CurveDecodethreebitsamplesEncodedWords = {
     { 0, 61440, 124928, 117760, 0, 0, -61440, -53248 },
-    { (void *)(g_threadLabelWordsUs + 0x5C), (void *)(g_threadLabelWordsUs + 0x54), (void *)(g_threadLabelWordsUs + 0x4C), (void *)(g_threadLabelWordsUs + 0x3C), (void *)(g_threadLabelWordsUs + 0x34), (void *)(g_threadLabelWordsUs + 0x2C), (void *)(g_threadLabelWordsUs + 0x20), (void *)(g_threadLabelWordsUs + 0x14), (void *)(g_threadLabelWordsUs + 0xC), 0 },
+    { (void *)((char *)&g_threadLabelWordsUs + 0x5C), (void *)((char *)&g_threadLabelWordsUs + 0x54), (void *)((char *)&g_threadLabelWordsUs + 0x4C), (void *)((char *)&g_threadLabelWordsUs + 0x3C), (void *)((char *)&g_threadLabelWordsUs + 0x34), (void *)((char *)&g_threadLabelWordsUs + 0x2C), (void *)((char *)&g_threadLabelWordsUs + 0x20), (void *)((char *)&g_threadLabelWordsUs + 0x14), (void *)((char *)&g_threadLabelWordsUs + 0xC), 0 },
     -1,
     "INI_",
 };

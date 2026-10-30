@@ -1,4 +1,25 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
+extern char g_backdropTextLines[];
+extern char g_backdropTextLinesDe[];
+extern char g_creditsLocalizedLines[];
+extern char g_optionsLocalizedShortcutText[];
+extern char g_optionsSecondListTertiaryLabels[];
+extern char g_optionsSecondaryLocalizedLabels[];
+extern char g_pakDefaultNoteNameFixed[];
+extern char g_pakDefaultPreviewTypeLabel[];
+extern char g_pakNoteTypeFiveLabel[];
+extern char g_pakNoteTypeFourteenLabel[];
+extern char g_pakNoteTypeThreeLabel[];
+extern char g_pakPreviewTypeLabelBuffer[];
+extern char g_pakThresholdAtLeast9999Text[];
+extern char g_pakThresholdBelow4500Text[];
+extern char g_pakThresholdBelow500Text[];
+extern char g_pickupAmmoDefinitions[];
+extern char g_profileQuantityDefaultLabelsEuStorage[];
+extern char g_screenMessageSubstitutionReplacement[];
+extern char g_screenMessageSubstitutionSource[];
+extern char g_videoModeDefaultLabel[];
+extern char s_SkyPostscaledscreenmessageScreenMessageTextEu[];
 #include "include_asm.h"
 
 #if defined(VERSION_EU)

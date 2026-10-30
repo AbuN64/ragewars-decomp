@@ -26,7 +26,7 @@ char k_EnvEncodedBytes[8] =
 #endif
 
 #if defined(VERSION_DE)
-RestLinkerAlignmentFill8 k_EnvEncodedWords = {
+RestLinkerAlignmentFill8 g_EnvLinkerAlignmentFill628 = {
     { 56, 0, 0, 0, 0, 0, 0, 0 },
 };
 #endif
