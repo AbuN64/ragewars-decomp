@@ -15625,8 +15625,8 @@ SECTIONS
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
         . = MAX(., 0x237C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytes) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytes .rdata.k_InsthdrGetactorshadowradiusTrailingBytes);
+        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
+        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2380);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
@@ -18514,8 +18514,8 @@ SECTIONS
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
         . = MAX(., 0x238C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytes) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytes .rdata.k_InsthdrGetactorshadowradiusTrailingBytes);
+        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
+        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2390);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
@@ -21400,8 +21400,8 @@ SECTIONS
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
         . = MAX(., 0x238C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytes) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytes .rdata.k_InsthdrGetactorshadowradiusTrailingBytes);
+        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
+        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2390);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
@@ -24259,8 +24259,8 @@ SECTIONS
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
         . = MAX(., 0x237C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytes) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytes .rdata.k_InsthdrGetactorshadowradiusTrailingBytes);
+        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
+        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2380);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
@@ -27337,8 +27337,8 @@ SECTIONS
         . = DEFINED(__align8_literals_InstHdr_UsesDefaultDefinitionHandling) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_UsesDefaultDefinitionHandling .rdata.literals_InstHdr_UsesDefaultDefinitionHandling);
         . = MAX(., 0x237C);
-        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytes) ? ALIGN(8) : .;
-        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytes .rdata.k_InsthdrGetactorshadowradiusTrailingBytes);
+        . = DEFINED(__align8_k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad) ? ALIGN(8) : .;
+        src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad .rdata.k_InsthdrGetactorshadowradiusTrailingBytesAlignmentPad);
         . = MAX(., 0x2380);
         . = DEFINED(__align8_literals_InstHdr_GetActorShadowRadius) ? ALIGN(8) : .;
         src/ENGINE/INSTANCE/INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.CPP.o(.rodata.literals_InstHdr_GetActorShadowRadius .rdata.literals_InstHdr_GetActorShadowRadius);
