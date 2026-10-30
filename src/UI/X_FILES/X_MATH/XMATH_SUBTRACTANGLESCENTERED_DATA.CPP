@@ -3,31 +3,27 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-const unsigned short k_xmathSubtractanglescenteredDataConstantWords[28] = {
-    0x4019, 0x21FB, 0x8000, 0x0000, 0x40C9, 0x0FDC, 0x40C9, 0x0FDC, 0x4049, 0x0FDB, 0x4049, 0x0FDB,
-    0x41C9, 0x0FDC, 0xC1C9, 0x0FDC, 0x4019, 0x21FB, 0x8000, 0x0000, 0x40C9, 0x0FDC, 0x40C9, 0x0FDC,
-    0x4049, 0x0FDB, 0x3F80, 0x0000,
+const double k_xmathSubtractanglescenteredDataConstantWords[7] = {
+    6.283185958862305, 12831.720727093452, 50.12387851302602, 840939907.5707965, 6.283185958862305,
+    12831.720727093452, 50.12387841939926,
 };
 #endif
 #if defined(VERSION_EU)
-const unsigned short k_xmathSubtractanglescenteredDataConstantWords[28] = {
-    0x4019, 0x21FB, 0x8000, 0x0000, 0x40C9, 0x0FDC, 0x40C9, 0x0FDC, 0x4049, 0x0FDB, 0x4049, 0x0FDB,
-    0x41C9, 0x0FDC, 0xC1C9, 0x0FDC, 0x4019, 0x21FB, 0x8000, 0x0000, 0x40C9, 0x0FDC, 0x40C9, 0x0FDC,
-    0x4049, 0x0FDB, 0x3F80, 0x0000,
+const double k_xmathSubtractanglescenteredDataConstantWords[7] = {
+    6.283185958862305, 12831.720727093452, 50.12387851302602, 840939907.5707965, 6.283185958862305,
+    12831.720727093452, 50.12387841939926,
 };
 #endif
 #if defined(VERSION_EU_X)
-const unsigned short k_xmathSubtractanglescenteredDataConstantWords[28] = {
-    0x4019, 0x21FB, 0x8000, 0x0000, 0x40C9, 0x0FDC, 0x40C9, 0x0FDC, 0x4049, 0x0FDB, 0x4049, 0x0FDB,
-    0x41C9, 0x0FDC, 0xC1C9, 0x0FDC, 0x4019, 0x21FB, 0x8000, 0x0000, 0x40C9, 0x0FDC, 0x40C9, 0x0FDC,
-    0x4049, 0x0FDB, 0x3F80, 0x0000,
+const double k_xmathSubtractanglescenteredDataConstantWords[7] = {
+    6.283185958862305, 12831.720727093452, 50.12387851302602, 840939907.5707965, 6.283185958862305,
+    12831.720727093452, 50.12387841939926,
 };
 #endif
 #if defined(VERSION_US)
-const unsigned short k_xmathSubtractanglescenteredDataConstantWords[28] = {
-    0x4019, 0x21FB, 0x8000, 0x0000, 0x40C9, 0x0FDC, 0x40C9, 0x0FDC, 0x4049, 0x0FDB, 0x4049, 0x0FDB,
-    0x41C9, 0x0FDC, 0xC1C9, 0x0FDC, 0x4019, 0x21FB, 0x8000, 0x0000, 0x40C9, 0x0FDC, 0x40C9, 0x0FDC,
-    0x4049, 0x0FDB, 0x3F80, 0x0000,
+const double k_xmathSubtractanglescenteredDataConstantWords[7] = {
+    6.283185958862305, 12831.720727093452, 50.12387851302602, 840939907.5707965, 6.283185958862305,
+    12831.720727093452, 50.12387841939926,
 };
 #endif
 #endif

@@ -14,9 +14,9 @@ const unsigned int k_XMathOneWords[1] = {
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_xMathFloatConstantWordsBlock1[10] = {
-    0x3F800000, 0xBF800000, 0xBC3F5FAF, 0x3CFD10F8, 0x3D4D8392, 0x3DB63A9E, 0x3E5BBFCA, 0x3FC90FDA,
-    0x3FC90FDB, 0x38D1B717,
+const double k_xMathFloatConstantWordsBlock1[5] = {
+    0.007812505573383532, -1.70077535352162e-18, 2.0970922926377217e-13, 2.584343760022579e-08,
+    0.19579639696478843,
 };
 #endif
 
@@ -50,9 +50,9 @@ const unsigned int k_XMathOneWordsVariant1[1] = {
     0x3F800000,
 };
 
-const unsigned int k_xMathFloatConstantWordsBlock7[10] = {
-    0x3F800000, 0xBF800000, 0xBC3F5FAF, 0x3CFD10F8, 0x3D4D8392, 0x3DB63A9E, 0x3E5BBFCA, 0x3FC90FDA,
-    0x3FC90FDB, 0x38D1B717,
+const double k_xMathFloatConstantWordsBlock7[5] = {
+    0.007812505573383532, -1.70077535352162e-18, 2.0970922926377217e-13, 2.584343760022579e-08,
+    0.19579639696478843,
 };
 
 const unsigned int k_xMathFloatConstantWordsBlock8[9] = {
