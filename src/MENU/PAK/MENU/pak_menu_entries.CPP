@@ -224,7 +224,6 @@ s32 Menu_UpdateMenuEntries(PakMenu *menu, void *context) {
 extern void *Menu_GetListContext(s8 *);
 extern void Menu_MeasureMenuText(TextBoundsText *, CItemInfo *);
 extern u32 g_gameLoopFrameCount;
-extern const f32 g_menuCenterFraction;
 
 /* Lay out visible menu entries and draw their callbacks with a pulsing selection highlight. */
 void Menu_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
@@ -269,10 +268,8 @@ void Menu_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     if (bounds.width < 0 || bounds.height < 0) {
         return;
     }
-    /* fakematch: the split source keeps the leading half-scale constant separate
-       so the following double literal retains its ROM alignment. */
-    centerX = data->x + data->width * g_menuCenterFraction + menu->x;
-    centerY = data->y + data->height * g_menuCenterFraction + menu->y;
+    centerX = data->x + data->width * 0.5f + menu->x;
+    centerY = data->y + data->height * 0.5f + menu->y;
     bounds.left = centerX - bounds.width / 2;
     bounds.right = centerX + bounds.width / 2;
     bounds.m_Top = centerY - bounds.height / 2;
