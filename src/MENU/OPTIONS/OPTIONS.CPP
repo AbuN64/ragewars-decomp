@@ -9,9 +9,8 @@
 /* OPTIONS.CPP */
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 #if defined(VERSION_US)
-unsigned int func_8042250C_us_rev1_padding_19050C[1] = {
-    0x5F574541,
-};
+char func_8042250C_us_rev1_padding_19050C[4] =
+    "_WEA";
 #endif
 #if defined(VERSION_US_REV1)
 unsigned int func_8042250C_us_rev1_padding_19050C[1] = {

@@ -14,9 +14,8 @@ const float g_Stream_SetFloatPairToNegativeOneConstantWords_de_eu_eu_x_us[1] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int k_MenuDrawscreenstackEncodedWordsBlock1[1] = {
-    0x20455854,
-};
+char k_MenuDrawscreenstackEncodedWordsBlock1[4] =
+    " EXT";
 #endif
 
 #if defined(VERSION_DE)

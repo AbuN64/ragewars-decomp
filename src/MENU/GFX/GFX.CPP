@@ -14,9 +14,8 @@ f64 Gfx_GetNormalizedCounter(void) {
 }
 #endif
 #if defined(VERSION_US)
-unsigned int k_GfxEncodedWordsBlock1[1] = {
-    0x5F47524F,
-};
+char k_GfxEncodedWordsBlock1[4] =
+    "_GRO";
 #endif
 
 /* 804143B0_2.CPP */

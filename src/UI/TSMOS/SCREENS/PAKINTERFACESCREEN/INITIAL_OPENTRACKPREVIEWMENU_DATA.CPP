@@ -53,9 +53,8 @@ unsigned int g_alternatePlayerSettingsEventHandlerRecordsUsRev1[27] = {
 /* g_playerSettingsPackedTextFragmentUsRev1_InitialOpentrackpreviewmenuData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5698_unclaimed_E62B0_unclaimed_E6310_unclaimed_E637C */
-unsigned int g_playerSettingsPackedTextFragmentUsRev1[1] = {
-    0x4C4C5F53,
-};
+char g_playerSettingsPackedTextFragmentUsRev1[4] =
+    "LL_S";
 #endif
 
 /* g_equipmentAndPlayerSettingsMenuDataEu_InitialOpentrackpreviewmenuData.CPP */

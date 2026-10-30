@@ -30,9 +30,8 @@ void PAKInterface_BeginScreenExit(s32 focusEntry) {
 }
 
 #if defined(VERSION_US)
-unsigned int k_PakinterfaceBeginscreenexitEncodedWords[1] = {
-    0x5F444541,
-};
+char k_PakinterfaceBeginscreenexitEncodedWords[4] =
+    "_DEA";
 #endif
 
 #if defined(VERSION_EU_X)

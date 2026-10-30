@@ -464,9 +464,8 @@ unsigned int func_8043DADC_de_padding_1ABCBC[1] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int func_8043DADC_de_padding_1A1CBC[1] = {
-    0x6153697A,
-};
+char func_8043DADC_de_padding_1A1CBC[4] =
+    "aSiz";
 #endif
 
 #if defined(VERSION_EU_X)

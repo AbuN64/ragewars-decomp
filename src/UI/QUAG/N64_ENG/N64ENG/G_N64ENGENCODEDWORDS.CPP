@@ -6,7 +6,6 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: data/unresolved/800CAF24 */
-unsigned int g_N64engEncodedTextWords[3] = {
-    0x44204F46, 0x20544845, 0x20444541,
-};
+char g_N64engEncodedTextWords[12] =
+    "D OF THE DEA";
 #endif
