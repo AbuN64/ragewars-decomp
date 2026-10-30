@@ -7,9 +7,8 @@ const unsigned short s_pakNoteLabelFormat[3] = {
 };
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned char s_pakNoteLabelFormat[3] = {
-    0x25, 0x64, 0x00,
-};
+const char s_pakNoteLabelFormat[3] =
+    "%d";
 #endif
 #endif
 
