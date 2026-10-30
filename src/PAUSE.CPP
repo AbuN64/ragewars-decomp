@@ -7,7 +7,9 @@
 #include "TYPES.H"
 #include "stddef.h"
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
+/* FRONTEND_CREATEPAUSEMENU.CPP */
 /* Calls InitFrontendMenus and then SmXlate_SwitchScreen with 1. */
 #if defined(VERSION_EU)
 extern void Tsmos_InitializeEuropeanFrontend(void);
@@ -55,5 +57,40 @@ s32 Frontend_CreatePauseMenu(MenuWidget *root) {
         Widget_SetWidgetFlag100((s32)Node_FindWidgetByResourceId(root, PAUSE_MENU_FLAGGED_WIDGET_ID), 1);
     }
     g_gameSession.clockPaused = 1;
+    return 0;
+}
+
+/* FRONTEND_DESTROYPAUSEMENU.CPP */
+/* Releases the object g_pauseMenuState holds through Cache_FreeMemory, clears g_pauseMenuState, calls
+   Tsmos_SetModeOneFlag with 2 and Control_RestoreControllerSetup_FrontendDestroypausemenu, and returns zero. */
+
+extern void Control_RestoreControllerSetup(void);
+
+s32 Frontend_DestroyPauseMenu(void) {
+    Cache_FreeMemory(g_pauseMenuState);
+    g_pauseMenuState = 0;
+    Tsmos_SetModeOneFlag(2);
+    Control_RestoreControllerSetup();
+    return 0;
+}
+
+/* FRONTEND_SETPAUSEMENUINPUTMODE.CPP */
+/* Calls Tsmos_SetModeOneFlag with 2 and returns zero. */
+
+s32 Frontend_SetPauseMenuInputMode(void) {
+    Tsmos_SetModeOneFlag(2);
+    return 0;
+}
+
+/* FRONTEND_RETURNPAUSEEVENTZERO.CPP */
+/* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
+   either reached through a pointer built at run time or never used. */
+s32 Frontend_ReturnPauseEventZero(void) {
+    return 0;
+}
+
+/* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
+   either reached through a pointer built at run time or never used. */
+s32 Frontend_ReturnPauseEventZeroAlt(void) {
     return 0;
 }
