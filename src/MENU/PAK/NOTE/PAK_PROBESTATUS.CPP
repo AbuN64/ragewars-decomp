@@ -21,7 +21,7 @@ extern u8 g_controllerPakFrontendState;
 extern u8 g_controllerPakChannelRecords[];
 
 
-extern s32 osMotorInit(u8 *a0, u8 *pfs, s32 channel);
+
 
 extern s32 Note_UpdateStatus(s32 a0);
 

@@ -2,7 +2,9 @@
 #include "include_asm.h"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 /* 802C0390_4.CPP */
 #if defined(VERSION_DE)
@@ -10,7 +12,7 @@ unsigned char g_RecvmesgTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 0xAF, 0xBF
 #endif
 
 /* recvmesg.c */
-extern OSThread_s *__osRunningThread;
+extern OSThread *__osRunningThread;
 extern void __osEnqueueAndYield(void *);
 
 s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
@@ -31,7 +33,7 @@ s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
     }
     queue->first = (queue->first + 1) % queue->msgCount;
     queue->validCount--;
-    if (*queue->fullqueue != 0) {
+    if (queue->fullqueue->next != 0) {
         osStartThread(__osPopThread(&queue->fullqueue));
     }
     __osRestoreInt(mask);

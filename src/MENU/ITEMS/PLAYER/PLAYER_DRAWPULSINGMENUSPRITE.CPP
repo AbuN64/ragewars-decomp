@@ -1,6 +1,6 @@
 #include "COMMON/ACTORRECAT260.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"

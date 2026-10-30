@@ -7,7 +7,9 @@
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/S1.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "ENGINE/CACHE/LIST.H"
 

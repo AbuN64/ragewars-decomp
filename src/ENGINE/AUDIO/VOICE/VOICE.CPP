@@ -25,7 +25,7 @@
 
 /* Stops the selected sound slot and sets its release flag; split unsigned offset-to-pointer casts and a one-pass statement group preserve the separate table and offset schedule. */
 
-extern void alSndpPlay(void *);
+
 
 extern void Channel_InitializeVoicePitchMotion(void *view, void *controller, s32 flags);
 
@@ -39,9 +39,9 @@ extern void Channel_UpdateVoicePlayback(void *view);
 
 /* Returns how strongly a listener at 0x128 hears a source at 0x34: one minus the squared distance over the squared range g_spatialSoundRangeSquared (zero beyond it), shaped by the source's curve at 0x44 as the eighth power, the square or the plain value. */
 
-extern void alSndpSetVol(void *soundPlayer, s16 eventVolume);
 
-extern void alSndpSetPitch(void *soundPlayer, f32 pitchBits);
+
+
 
 void Audio_StopVoicesExceptKey(VoiceStopKeyTable *record, s32 value)
 {
@@ -554,9 +554,9 @@ void Audio_SetScaledVoicePitch(void *voiceRecord, f32 pitch) {
 }
 
 /* Audio_SetVoicePan_Voice.CPP */
-struct ALSndPlayer;
+ALSndPlayer;
 
-extern void alSndpSetPan(struct SoundPlayerEventStateView *player, u8 pan);
+
 
 void Audio_SetVoicePan(AudioVoiceControlSlotView *voiceRecord, s32 panValue)
 {
@@ -606,7 +606,7 @@ void Audio_StopVoiceForDifferentKey(AudioVoiceControlSlotView *voiceRecord) {
     }
 }
 
-void alSndpDeallocate(void *a, short b);
+
 
 void Audio_DeallocateVoiceSlot(AudioVoiceControlSlotView *voiceRecord) {
     void *base;

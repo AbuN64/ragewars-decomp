@@ -1,7 +1,7 @@
 #include "thread_queue.h"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
@@ -10,13 +10,13 @@
 #include "UI/X_FILES/X_PLUS.H"
 
 
-extern void osCreateThread(s32 thread, s32 threadId, void *entry, s32 arg, s32 stackTop, s32 priority);
 
 
 
 
 
-extern s32 osSetThreadPri(s32 *, s32);
+
+
 
 
 

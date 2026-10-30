@@ -37,7 +37,8 @@ struct ToggleMenuPlayerInputView {
     s32 held;
     s32 pressed;
 };
-struct Sprite {
+
+struct GameSprite {
     s32 format;
     char *data;
     s32 primaryData;
@@ -48,6 +49,7 @@ struct Sprite {
     f32 extentY;
     f32 step;
 };
+typedef struct GameSprite GameSprite;
 struct ToggleMenu {
     u8 state;
     u8 timer;

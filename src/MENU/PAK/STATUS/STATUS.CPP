@@ -2,7 +2,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/ITEMRECAT24.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "MENU/MENU_ACTION_TEXT_TABLES.H"
 #include "MENU/PAK/PROFILE_PREVIEW_AND_LINE_TEXT.H"
 #include "COMMON/MENU_TEXT.H"

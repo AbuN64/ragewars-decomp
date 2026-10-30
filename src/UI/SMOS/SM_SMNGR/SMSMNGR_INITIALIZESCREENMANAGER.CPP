@@ -7,7 +7,7 @@
 #include "COMMON/WIDGETRECAT1A.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/WIDGETRECAT34.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "FRONTEND/FRONTEND_OPENRESOURCEARCHIVE.H"

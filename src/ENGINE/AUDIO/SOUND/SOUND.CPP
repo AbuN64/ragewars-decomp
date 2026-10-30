@@ -5,8 +5,9 @@
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "../../../../sdk/include/libgultra/alunlink.h"
-#include "../../../../sdk/include/OSINT/osyieldthread.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "ENGINE/AUDIO/AUDIOWORLD.H"
 #include "ENGINE/DEFS.H"
@@ -35,7 +36,7 @@
 
 extern void osWritebackDCache(void *, s32);
 
-extern s32 alHeapDBAlloc(s32, s32, void *, s32, s32);
+
 
 /* Returns the physical address of a ROM offset through the 0x300-byte ROM window cache: a cached window
  * covering the offset and length is stamped with the current frame; otherwise a free window node is
@@ -177,7 +178,7 @@ typedef struct AudioBankHeader {
 } AudioBankHeader;
 extern void Mutex_InitializeQueueLock(MenuRules *lock);
 extern void Audiomgr_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
-extern void alSndpNew(void *, void *);
+
 extern void Audio_InitializeMusicPlayer(void *, void *);
 extern void AudioWorld_InitializePendingSoundPool(void *, void *);
 extern void Audio_InitializeVoicePool(void *, void *);
@@ -333,16 +334,15 @@ typedef struct VoiceMix {
     s32 left, right;
     s16 volume;
     u8 reserved12[2];
-    s32 pitch;
+    f32 pitch;
     u8 reserved18;
     u8 pan;
     u8 reserved1A[2];
     f32 attenuation;
 } VoiceMix;
-extern void alSndpSetPitch(void *, s32);
-extern void alSndpSetFXMix(void *, u8);
-extern void alSndpSetPan(void *, u8);
-extern void alSndpSetVol(void *, s16);
+
+
+
 static inline s32 findVoiceById(GameAudioContext *context, s32 id) {
     s32 i;
     Voice *voice = context->voices;

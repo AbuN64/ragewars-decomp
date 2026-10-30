@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "../../../../sdk/include/AUDIO/sprintf.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"

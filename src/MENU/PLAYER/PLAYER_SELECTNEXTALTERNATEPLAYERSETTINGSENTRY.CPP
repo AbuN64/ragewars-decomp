@@ -10,7 +10,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ARGB_COLOR.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/SCREEN.H"
 #include "COMMON/SHARED_MENUREPLY.H"
@@ -39,7 +39,6 @@
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/OSPIHANDLE_S.H"
-#include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/CTX.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"

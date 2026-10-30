@@ -7,7 +7,7 @@
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
 #include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "MENU/PAK/PROFILE_SAVE_BLOCKS.H"
 #include "UI/X_FILES/X_PLUS.H"
 

@@ -6,7 +6,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "FX/EXTERNS.H"
 #include "FX/CONTROLLER_INPUT.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/PAKQUEUESTATE.H"
 #include "ENGINE/CONTPAD.H"
 

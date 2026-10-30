@@ -1,22 +1,22 @@
 #include "include_asm.h"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/UNSIGNED_QUOTIENT.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
-#include "../../include/libultra/io/sptaskyielded.h"
 #include "SCENE/CACHE_SENDCOMPLETIONMESSAGE.H"
 #include "../../include/SCHED/osscremoveclient.H"
-#include "../../include/os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 #include "COMMON/GAME_SESSION.H"
 void Sched_HandleRspCompletion(void *object) {
  OSSched *scheduler=object;
- OSScTask_s *nextRsp,*nextRdp;
- OSScTask_s *task;
+ OSScTask *nextRsp,*nextRdp;
+ OSScTask *task;
  Frame *frame;
  u64 elapsed;
  f32 duration1,duration2,duration3,duration4;
@@ -39,7 +39,7 @@ void Sched_HandleRspCompletion(void *object) {
   }
  } else {
   task->state&=~2;
-  if(task->list.type==1) {
+  if(task->list.t.type==1) {
    g_schedulerRetraceCount=0;
    if(task->flags&0x20) {
     elapsed=((osGetTime()-g_schedulerGraphicsTaskStartTime)<<6)/3;
@@ -92,13 +92,13 @@ void Sched_HandleRdpCompletion(OSSched *sc)
 {
     s32 value1 = 0;
     s32 value2 = 0;
-    OSScTask_s *task = sc->curRDPTask;
+    OSScTask *task = sc->curRDPTask;
     void *framebuffer;
     Frame *schedule;
     Frame *schedules;
     s32 flags;
     task->state &= ~1;
-    if (task->list.type == 1) {
+    if (task->list.t.type == 1) {
         if ((task->flags & 0x20) != 0) {
             g_schedulerElapsedFrameDuration = (f32)(((osGetTime() - g_schedulerRdpTaskStartTime) << 6) / 3) * g_schedulerElapsedDurationScale;
         }

@@ -5,10 +5,8 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 
 
-extern u32 __osDisableInt(void);
 
 
-extern u32 osGetCount(void);
 extern void __osSetTimerIntr(u64 tim);
-extern u64 __osInsertTimer(OSTimer_s *t);
+extern u64 __osInsertTimer(OSTimer *t);
 #endif

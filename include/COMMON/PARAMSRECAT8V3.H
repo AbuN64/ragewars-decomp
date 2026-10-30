@@ -7,7 +7,7 @@ struct SoundPlayerWordParameterEvent;
 struct SoundPlayerWordParameterEvent {
     s16 f0;
     s32 f4;
-    s32 f8;
+    f32 f8;
 };
 
 union ALSndpEvent;
@@ -19,21 +19,8 @@ union ALSndpEvent {
     } common;
 };
 
-struct ALSndPlayer;
-struct ALSndPlayer {
-    ALPlayer_s node;
-    ALEventQueue evtq;
-    ALEvent nextEvent;
-    void *drvr;
-    s32 target;
-    void *sndState;
-    s32 maxSounds;
-    s32 frameTime;
-    s32 nextDelta;
-    s32 curTime;
-};
 
-struct ALSndPlayer;
+
 union ALSndpEvent;
 
 
@@ -42,8 +29,6 @@ union ALSndpEvent;
 struct SoundPlayerByteParameterEvent;
 typedef struct SoundPlayerByteParameterEvent SoundPlayerByteParameterEvent;
 
-struct ALSndPlayer;
-typedef struct ALSndPlayer ALSndPlayer;
 
 
 union ALSndpEvent;

@@ -2,13 +2,13 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/MODEL_RENDER.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/OBJRECV5.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/MESSAGESEMAPHORE.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"

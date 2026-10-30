@@ -5,7 +5,9 @@
 #include "TYPES.H"
 #include "TYPES.H"
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "../../include/os_pif.h"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)

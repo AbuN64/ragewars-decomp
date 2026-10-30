@@ -2,7 +2,7 @@
 #define COMMON_SCENERECAT10C0_H
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SHAREDPLAYER.H"

@@ -11,8 +11,7 @@
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "ENGINE/AUDIO/SEQUENCER.H"
 #include "../../../../sdk/include/libgultra_inferred/cseq.H"
-#include "../../../../sdk/include/libgultra_inferred/ALCSPSETCHLFXMIX.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* ROM-grounded data: src/g_trackCommandFallbackDuration_TrackSequenceAndVolume.c */

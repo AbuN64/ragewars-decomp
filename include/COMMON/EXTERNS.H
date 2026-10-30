@@ -19,8 +19,6 @@ extern int Audio_IsSoundInstanceLimitReached(AudioInstanceLimitOwner *obj, int i
 extern void AudioWorld_RecyclePendingSoundsByKey(void *channelOwner, s32 matchingKey);
 extern void AudioWorld_RecyclePendingSoundsByTrack(struct AudioPendingSoundListOwner *, s32);
 
-extern void alSndpSetPriority(char *, s32, s32);
-extern void alSndpSetFXMix(char *, s32);
 
 #include "COMMON/VECTOR4F.H"
 

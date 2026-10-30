@@ -5,7 +5,7 @@
 #include "COMMON/ANIMATION.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/INTEGERSTATE530.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "MATH/SMSMNGR_INITIALIZESCREENMANAGER.H"
 #include "UI/TSMOS/SMP/SMP_FLICKER.H"
@@ -58,7 +58,6 @@ s32 SmpFlicker_UpdateFlicker(FlickerUpdateState *flicker) {
 #include "COMMON/ANIMATION.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/INTEGERSTATE530.H"
-#include "stddef.h"
 #include "TYPES.H"
 #include "MATH/SMSMNGR_INITIALIZESCREENMANAGER.H"
 #include "UI/TSMOS/SMP/SMP_FLICKER.H"

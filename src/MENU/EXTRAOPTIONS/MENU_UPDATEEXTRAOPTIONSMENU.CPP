@@ -2,7 +2,7 @@
 #include "COMMON/NUMBERPADSCREEN.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PAKQUEUESTATE.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "MENU/MENU_REFRESHEXTRAOPTIONLOCKS.H"
 #include "MENU/MENU_SCROLLOPTIONSKEYPAD.H"

@@ -2,7 +2,7 @@
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"

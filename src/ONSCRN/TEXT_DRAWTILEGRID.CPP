@@ -1,9 +1,8 @@
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
-#include <stddef.h>
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "ONSCRN.H"
 #include "include_asm.h"
 

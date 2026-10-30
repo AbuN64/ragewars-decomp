@@ -3,8 +3,8 @@
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "AI/CTEAMSELECT.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"

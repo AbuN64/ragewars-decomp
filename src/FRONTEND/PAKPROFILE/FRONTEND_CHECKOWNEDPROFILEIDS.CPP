@@ -1,7 +1,7 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "FRONTEND/FRONTEND_CHECKOWNEDPROFILEIDS.H"
 
 /* Checks that every active player on the selected team has the configured value. */

@@ -5,7 +5,9 @@
 #include "TYPES.H"
 #include "TEXTURE/AUDIOMGR_INITHEAP.H"
 #include "ENGINE/AUDIO/AUDIOMGR.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "UI/X_FILES/X_PLUS.H"
 #include "../../../../sdk/include/libgultra/alunlink.h"
 
@@ -68,14 +70,13 @@ extern AudioWork *g_audioFrameTasks[3];
 extern s16 *g_audioCommandBuffers[2];
 extern u32 g_audioTaskCompletionMessages[10], g_audioWorkerEventMessages[10], g_audioDmaCompletionMessages[60];
 extern u8 g_audioWorkerThread[], g_audioWorkerStack[10240];
-extern u8 rspbootTextStart[208], g_audioMicrocodeText[4096], g_audioMicrocodeData[2048];
+extern u8 g_audioMicrocodeText[4096], g_audioMicrocodeData[2048];
 extern u8 g_graphicsMicrocodeText[];
 extern char g_audioDmaInitializerEntry, g_audioWorkerEntry;
-s32 osAiSetFrequency(u32);
-void alInit(void *, void *);
-void *alHeapDBAlloc(s32, s32, void *, s32, u32);
-void osSetEventMesg(s32, void *, s32);
-void osCreateThread(void *, s32, void (*)(void), void *, void *, s32);
+
+
+
+
 
 /* Reset the DMA cache, allocate sample/task buffers, then start the audio worker. */
 void Audiomgr_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {

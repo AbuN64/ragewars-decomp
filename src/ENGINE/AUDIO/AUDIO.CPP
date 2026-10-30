@@ -29,20 +29,19 @@ extern void Audio_GetDecodeFramesRemaining(void);
 
 extern s32 Audio_InitDecodeStream(void *, s32, s32 *);
 
-extern s32 alSndpGetState(char *);
-
-extern void alSndpSetPitch(char *, f32);
-
-extern void alSndpSetVol(char *, s32);
-
-extern void alSndpSetPan(char *, s32);
 
 
 
-extern void alSndpPlay(char *);
+
+
+
+
+
+
+
 
 void Audio_UpdateDialogPlayer(DialogPlaybackPlayer *player) {
-    extern void alSndpSetSound(char *, s32);
+
     extern ResourceKeyView *g_dialogDefaultSample;
     s32 rate;
     char *channel;

@@ -26,8 +26,9 @@
 
 
 
-void alSynStartVoiceParams(AudioSynthVoiceAllocatorView *s, ALVoice_s *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)
+void alSynStartVoiceParams(ALSynth *synth, ALVoice *v, ALWaveTable *w, f32 pitch, s16 vol, ALPan pan, u8 fxmix, ALMicroTime t)
 {
+    AudioSynthVoiceAllocatorView *s = (AudioSynthVoiceAllocatorView *)synth;
     ALStartParamAlt *update;
     AudioVoiceChannelFilterView *f;
 
@@ -35,8 +36,8 @@ void alSynStartVoiceParams(AudioSynthVoiceAllocatorView *s, ALVoice_s *v, void *
         update = (ALStartParamAlt *)__allocParam();
         if (update == 0) { return; };
 
-        if (fxmix < 0) {
-            fxmix = -fxmix;
+        if ((s8)fxmix < 0) {
+            fxmix = -(s8)fxmix;
         }
 
         update->delta = s->paramSamples + v->pvoice->offset;

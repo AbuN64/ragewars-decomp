@@ -70,7 +70,7 @@ s32 Note_NeedsIdRepair(s32 index) {
 
 extern char g_controllerSiMessageQueue[];
 extern PakRecord g_controllerPakChannelRecords[];
-extern s32 osMotorInit(void *queue, void *pak, s32 channel);
+
 
 s32 Note_ProbeAccessoryPresence(s32 channel) {
     PakRecord *record = &g_controllerPakChannelRecords[channel];
@@ -206,7 +206,7 @@ s32 Note_HasScratchBuffer(void) {
     return g_controllerPakProbeActive;
 }
 
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "COMMON/SESSIONHANDLERROW.H"

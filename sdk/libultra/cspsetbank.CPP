@@ -3,18 +3,17 @@
 #include "../include/BUF16B.H"
 #include "TYPES.H"
 
-extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
-void alCSPSetBank(s32 player, s32 bank) {
+void alCSPSetBank(ALCSPlayer *player, ALBank *bank) {
     Buf16 bankEvent;
 
     bankEvent.value = bank;
     bankEvent.count = 0xE;
-    alEvtqPostEvent(player + 0x48, &bankEvent, 0);
+    alEvtqPostEvent(&player->evtq, &bankEvent, 0);
 }
 
 
-void alCSPSetChlFXMix(s32 player, s32 channel, s8 effectMix) {
+void alCSPSetChlFXMix(ALCSPlayer *player, u8 channel, u8 effectMix) {
     Buf16c controlEvent;
 
     controlEvent.count = 2;
@@ -22,7 +21,7 @@ void alCSPSetChlFXMix(s32 player, s32 channel, s8 effectMix) {
     controlEvent.fA = effectMix;
     controlEvent.zero = 0;
     controlEvent.f9 = 0x5B;
-    alEvtqPostEvent(player + 0x48, &controlEvent, 0);
+    alEvtqPostEvent(&player->evtq, &controlEvent, 0);
 }
 
 #if defined(VERSION_US)

@@ -4,19 +4,18 @@
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
 
-extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
 
 
 
-void alSndpSetPan(struct SoundPlayerEventStateView *soundPlayer, u8 pan) {
+void alSndpSetPan(ALSndPlayer *soundPlayer, ALPan pan) {
     SoundPlayerByteParameterEvent p;
     s32 acc;
 
-    acc = soundPlayer->eventTime;
+    acc = ((SoundPlayerEventStateView *)soundPlayer)->eventTime;
     p.f0 = 2;
     p.f8 = pan;
-    acc += soundPlayer->frameSampleCount * 0x30;
+    acc += ((SoundPlayerEventStateView *)soundPlayer)->frameSampleCount * 0x30;
     p.f4 = acc;
-    alEvtqPostEvent(&soundPlayer->events, (s16 *)&p, 0);
+    alEvtqPostEvent(&((SoundPlayerEventStateView *)soundPlayer)->events, (s16 *)&p, 0);
 }

@@ -2,7 +2,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"

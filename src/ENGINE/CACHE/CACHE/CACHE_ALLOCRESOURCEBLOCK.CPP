@@ -4,7 +4,9 @@
 #include "COMMON/RESOURCELOCKSTATE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "SCENE/CACHE_FREEMEMORY.H"
 
 /* 802508E0_12.CPP */

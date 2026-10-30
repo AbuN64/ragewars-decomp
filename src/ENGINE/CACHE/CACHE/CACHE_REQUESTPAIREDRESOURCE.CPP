@@ -7,7 +7,9 @@
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "ENGINE/CACHE/CACHE.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/CACHE/LIST.H"

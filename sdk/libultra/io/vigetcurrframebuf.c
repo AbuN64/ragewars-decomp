@@ -3,8 +3,9 @@
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
-#include "../../include/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 extern Field_void_4 *__osViCurr;
 

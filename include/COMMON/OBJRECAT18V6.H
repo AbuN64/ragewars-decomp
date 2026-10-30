@@ -110,7 +110,6 @@ struct ItemMenuToggleStateView;
 typedef struct ItemMenuToggleStateView ItemMenuToggleStateView;
 
 
-struct Sprite;
 
 extern float g_spriteExtentAndUnitConstants;
 
@@ -165,8 +164,8 @@ struct MenuItem {
     s32 active;
     s32 on;
     char pad8[0x10 - 0x8];
-    s32 image; /* 0x10: toggle-menu sprite resource */
-    s32 imageFrame; /* 0x14: sprite frame */
+    s32 image; /* 0x10: toggle-menu GameSprite resource */
+    s32 imageFrame; /* 0x14: GameSprite frame */
     s16 bounce;
     s32 startFrame;
     f32 value;
@@ -194,10 +193,7 @@ typedef struct Hud Hud;
 
 struct AttachedEffectTimerView;
 
-struct Sprite;
-typedef struct Sprite Sprite;
 
-struct Image;
 
 
 

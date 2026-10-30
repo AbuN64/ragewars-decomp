@@ -16,5 +16,5 @@ void Linked_BuildColoredRibbonVertices(RibbonActor *actor, RibbonClockNode *cloc
 
 extern void Fx_UpdateChildTransform(struct Node44 *node, void *parentTransform);
 extern void Fx_UpdateNodeFractions(void *node);
-extern void Fx_ConfigureSpriteImage(struct Image * image, struct Image * texture, Sprite * sprite);
+extern void Fx_ConfigureSpriteImage(GameImage * image, GameImage * texture, GameSprite * GameSprite);
 #endif

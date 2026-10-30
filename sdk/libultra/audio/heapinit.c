@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALBANK_S.H"
 #include "TYPES.H"
-void alHeapInit(void *heapStorage, u8 *base, s32 byteCount) {
+void alHeapInit(ALHeap *heapStorage, u8 *base, s32 byteCount) {
     s32 alignmentBytes;
     alignmentBytes = 0x10 - ((s32) base & 0xF);
     if (alignmentBytes != 0x10) {

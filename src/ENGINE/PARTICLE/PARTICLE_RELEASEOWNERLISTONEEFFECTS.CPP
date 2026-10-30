@@ -9,7 +9,7 @@
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "ENGINE/PARTICLE.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"

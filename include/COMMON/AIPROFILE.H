@@ -2,7 +2,7 @@
 #define COMMON_AIPROFILE_H
 #include "TYPES.H"
 struct GameplayCamera;
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/MODEL_INSTANCE.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"

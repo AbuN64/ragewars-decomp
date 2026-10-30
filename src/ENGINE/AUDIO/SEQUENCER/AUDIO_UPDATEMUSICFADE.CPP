@@ -12,11 +12,11 @@
 #include "include_asm.h"
 
 /* 8025D470_2.CPP */
-s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
 
-void alCSPNew(void *sequencePlayer, InitParams *config);
 
-extern void alCSPStop(s32 player);
+
+
+
 
 void Audio_InitializeMusicPlayer(struct AudioStateD844 *state, struct AudioRootD844 *root) {
     struct AudioParamsD844 params;

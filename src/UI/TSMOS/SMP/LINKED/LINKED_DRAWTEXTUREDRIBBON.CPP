@@ -13,7 +13,7 @@
 #include "COMMON/PROPGEOMETRY.H"
 #include "COMMON/OBJRECAT18V6.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/RESIDENTSTATE.H"
 #include "RENDER/RIBBON_DRAW.H"
@@ -178,9 +178,9 @@ void Linked_BuildColoredRibbonVertices(RibbonActor *actor, RibbonClockNode *cloc
         key = &morph->second[blend->second];
         Graphu64_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
         Graphu64_ScaleVector(b, key, morph->secondFrame);
-        out->x = (s16) (a[0] + t * (b[0] - a[0]));
-        out->y = (s16) (a[1] + t * (b[1] - a[1]));
-        out->z = (s16) (a[2] + t * (b[2] - a[2]));
+        out->v.ob[0] = (s16) (a[0] + t * (b[0] - a[0]));
+        out->v.ob[1] = (s16) (a[1] + t * (b[1] - a[1]));
+        out->v.ob[2] = (s16) (a[2] + t * (b[2] - a[2]));
         from = &blend->from;
         if (Geometry_GetViewEffect() != 0) {
             blue = blend->from.b;
@@ -188,15 +188,15 @@ void Linked_BuildColoredRibbonVertices(RibbonActor *actor, RibbonClockNode *cloc
             red = blend->from.r;
             grey = (f32) (blue + green + red)
                  + t * (f32) ((blend->to.b - blue) + (blend->to.g - green) + (blend->to.r - red));
-            out->r = 0;
-            out->g = 0;
-            out->b = grey / 3;
-            out->a = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
+            out->v.cn[0] = 0;
+            out->v.cn[1] = 0;
+            out->v.cn[2] = grey / 3;
+            out->v.cn[3] = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
         } else {
-            out->r = (u32) ((f32) blend->from.r + t * (f32) (blend->to.r - blend->from.r));
-            out->g = (u32) ((f32) blend->from.g + t * (f32) (blend->to.g - blend->from.g));
-            out->b = (u32) ((f32) blend->from.b + t * (f32) (blend->to.b - blend->from.b));
-            out->a = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
+            out->v.cn[0] = (u32) ((f32) blend->from.r + t * (f32) (blend->to.r - blend->from.r));
+            out->v.cn[1] = (u32) ((f32) blend->from.g + t * (f32) (blend->to.g - blend->from.g));
+            out->v.cn[2] = (u32) ((f32) blend->from.b + t * (f32) (blend->to.b - blend->from.b));
+            out->v.cn[3] = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
         }
         blend++;
         out++;
@@ -230,11 +230,11 @@ void Linked_BuildTexturedRibbonVertices(RibbonActor *actor, RibbonClockNode *clo
         key = &morph->second[blend->second];
         Graphu64_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
         Graphu64_ScaleVector(b, key, morph->secondFrame);
-        out->x = (s16) (a[0] + t * (b[0] - a[0]));
-        out->y = (s16) (a[1] + t * (b[1] - a[1]));
-        out->z = (s16) (a[2] + t * (b[2] - a[2]));
-        out->s = (s16) (morph->textureScaleS * scale);
-        out->t = (s16) (morph->textureScaleT * fade);
+        out->v.ob[0] = (s16) (a[0] + t * (b[0] - a[0]));
+        out->v.ob[1] = (s16) (a[1] + t * (b[1] - a[1]));
+        out->v.ob[2] = (s16) (a[2] + t * (b[2] - a[2]));
+        out->v.tc[0] = (s16) (morph->textureScaleS * scale);
+        out->v.tc[1] = (s16) (morph->textureScaleT * fade);
         from = &blend->from;
         if (Geometry_GetViewEffect() != 0) {
             blue = blend->from.b;
@@ -242,15 +242,15 @@ void Linked_BuildTexturedRibbonVertices(RibbonActor *actor, RibbonClockNode *clo
             red = blend->from.r;
             grey = (f32) (blue + green + red)
                  + t * (f32) ((blend->to.b - blue) + (blend->to.g - green) + (blend->to.r - red));
-            out->r = 0;
-            out->g = 0;
-            out->b = grey / 3;
-            out->a = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
+            out->v.cn[0] = 0;
+            out->v.cn[1] = 0;
+            out->v.cn[2] = grey / 3;
+            out->v.cn[3] = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
         } else {
-            out->r = (u32) ((f32) blend->from.r + t * (f32) (blend->to.r - blend->from.r));
-            out->g = (u32) ((f32) blend->from.g + t * (f32) (blend->to.g - blend->from.g));
-            out->b = (u32) ((f32) blend->from.b + t * (f32) (blend->to.b - blend->from.b));
-            out->a = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
+            out->v.cn[0] = (u32) ((f32) blend->from.r + t * (f32) (blend->to.r - blend->from.r));
+            out->v.cn[1] = (u32) ((f32) blend->from.g + t * (f32) (blend->to.g - blend->from.g));
+            out->v.cn[2] = (u32) ((f32) blend->from.b + t * (f32) (blend->to.b - blend->from.b));
+            out->v.cn[3] = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
         }
         blend++;
         out++;

@@ -8,7 +8,7 @@
 #include "../../include/libultra/audio/synthesizer.h"
 
 /* alSynStartVoice_Alsynstartvoice.c */
-void alSynStartVoice(void *synth, void *voice, s32 waveTable) {
+void alSynStartVoice(ALSynth *synth, ALVoice *voice, ALWaveTable *waveTable) {
     s32 updateSampleTime;
     void *controlUpdate;
     void *voiceFilter;

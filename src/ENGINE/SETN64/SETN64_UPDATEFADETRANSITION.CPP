@@ -20,7 +20,6 @@ s32 SetN64_StartGameThreadAndIdle(s32 *, s32);
 
 
 
-extern void __osSetFpcCsr(s32 csr);
 
 
 

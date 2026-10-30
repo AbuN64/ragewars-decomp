@@ -3,7 +3,9 @@
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "../../include/OSINT/CREATE.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "../../include/os_pif.h"
 #include "include_asm.h"
 #include "../../include/OSINT/__OSPIRELACCESS.H"

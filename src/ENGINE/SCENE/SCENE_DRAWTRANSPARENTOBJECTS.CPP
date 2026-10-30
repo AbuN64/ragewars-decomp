@@ -209,7 +209,7 @@ extern void Gobjinst_DrawVisibleCachedActor(void *, void *);
  * sorts the list with PpDecom_QuickSortRecords and draws each object by its kind (0 actor, 1 prop, 3 effect). */
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 /* The static-instance bounds view also used by the adjacent scene pass. */
 typedef struct SceneStaticBounds {
     u8 pad0[0xB8];
@@ -231,10 +231,10 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     if (count == 0) {
         return;
     }
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
     Gsky_GetObjectPositionAt260(&jitter, camera);
     ox = jitter.x * -2.0f;
     Gsky_GetObjectPositionAt260(&jitter, camera);
@@ -285,7 +285,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
 
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/WORLD.H"
-#include "stddef.h"
+#include <ultra64.h>
 f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 f32 Graphu64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z);
 

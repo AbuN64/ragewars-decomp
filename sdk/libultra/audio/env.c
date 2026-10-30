@@ -1,12 +1,11 @@
 #include "include_asm.h"
 #include "COMMON/ALPARAM_S.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
-#include "../../include/OSINT/osyieldthread.H"
+#include <ultra64.h>
 #include "../../include/libultra/debug/assert.h"
-#include "acmd.h"
 #include "../../include/al_globals.h"
 #include "../../include/VOICE_START_AND_PARAMETER_UPDATE_VIEWS.H"
 #include "COMMON/ALAUXBUS_S.H"

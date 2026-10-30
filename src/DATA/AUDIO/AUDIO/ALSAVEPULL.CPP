@@ -11,7 +11,7 @@ RestLinkerAlignmentFill12 g_AlsavepullLinkerAlignmentFill83 = {
 /* save_3.c */
 #if defined(VERSION_EU)
 #include "COMMON/ALFXPARAM.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/ALDELAY28.H"

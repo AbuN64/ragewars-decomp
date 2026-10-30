@@ -1,7 +1,9 @@
 #ifndef ENGINE_CACHE_CACHE_H
 #define ENGINE_CACHE_CACHE_H
 #include "COMMON/MANAGER.H"
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "COMMON/OSTHREAD_S.H"
 #include "COMMON/RESOURCELOCKSTATE.H"
 
@@ -32,8 +34,8 @@ struct ResMgr {
     s32 reservedWord44;
     s32 selected;
     u32 reservedWord4C;
-    OSThread_s completionWorker; /* 0x50: osCreateThread destination */
-    u8 reservedAfterCompletionWorker[0x398 - 0x50 - sizeof(OSThread_s)];
+    OSThread completionWorker; /* 0x50: osCreateThread destination */
+    u8 reservedAfterCompletionWorker[0x398 - 0x50 - sizeof(OSThread)];
     u8 completionWorkerStack[0x800]; /* top at freeLinks, +0xB98 */
     IntrusiveList freeLinks;
     IntrusiveList listBAC;

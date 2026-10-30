@@ -1,27 +1,19 @@
 #ifndef TYPES_H
 #define TYPES_H
+#include <ultra64.h>
+#include <PR/sched.h>
 
 struct ControllerProfile;
 
-typedef signed char s8;
 
-typedef unsigned char u8;
 
-typedef signed short s16;
 
-typedef unsigned short u16;
 
-typedef signed int s32;
 
-typedef unsigned int u32;
 
-typedef signed long long s64;
 
-typedef unsigned long long u64;
 
-typedef float f32;
 
-typedef double f64;
 
 typedef struct IntrusiveList IntrusiveList;
 
@@ -158,9 +150,8 @@ extern s32 Scene_GetModelSectionTwoRecord(void *world, s32 modelIndex);
 
 extern void Sched_HandleRspCompletion(void *object);
 
-struct OSSched;
 
-extern void __scAppendList(struct OSSched *scheduler, void *task);
+extern void __scAppendList(OSSched *scheduler, void *task);
 
 extern void __scYield(void *scheduler);
 
@@ -216,21 +207,16 @@ struct MultiChannelItemEffect;
 
 extern s32 Pickup_ApplyAmmoBundle(struct ActorPickupCanCollect *player, struct MultiChannelItemEffect *ammoBundle);
 
-extern void osUnmapTLB(int tlbIndex);
 
 #include "libultra/audio/seqp.h"
 
 
 extern void __setUsptFromTempo(void *sequencePlayer, f32 tempo);
 
-extern f32 alCents2Ratio(s32 cents);
-
-extern void alCSPSetBank(s32 player, s32 bank);
 
 
-extern void alCSPSetVol(s32 player, s16 volume);
 
-extern void alCopy(unsigned char *source, unsigned char *destination, int count);
+
 
 
 
@@ -240,20 +226,10 @@ extern float Gu_Sinf(float x);
 
 extern unsigned int Control_StopMotorEu(void *motorContext);
 
-extern void osViSwapBuffer(s32 framebuffer);
 
-typedef struct OSMesgQueue OSMesgQueue;
 
-struct OSMesgQueue {
-    void **mtqueue;
-    void **fullqueue;
-    s32 validCount;
-    s32 first;
-    s32 msgCount;
-    void **msg;
-};
 
-struct OSMesgQueue;
+
 
 typedef struct Block40 Block40;
 
@@ -280,29 +256,12 @@ struct __OSContRamReadFormat {
 
 struct __OSContRamReadFormat;
 
-typedef struct OSPfs OSPfs;
 
-struct OSPfs {
-    int status;
-    struct OSMesgQueue *queue;
-    int channel;
-    u8 id[32];
-    u8 label[32];
-    int version;
-    int dir_size;
-    int inode_table;
-    int minode_table;
-    int dir_table;
-    int inode_start_page;
-    u8 banks;
-    u8 activebank;
-};
 
-struct OSPfs;
+
 
 struct Triple;
 
-extern u32 osMotorStop(struct Triple *);
 
 extern u32 Control_StopMotorDe(struct Triple *);
 

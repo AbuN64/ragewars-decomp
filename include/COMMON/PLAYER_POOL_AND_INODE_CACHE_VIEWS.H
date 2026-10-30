@@ -136,6 +136,5 @@ extern short g_playerStateDialogGroups[];
 s32 Control_IsSnapshotActive(void);
 
 extern s32 Pfs_ComputeIdChecksums(u16 *ptr, u16 *csum, u16 *icsum);
-extern s32 osPfsChecker(OSPfs *pfs);
 extern s32 __osGetId(OSPfs *pfs);
 #endif

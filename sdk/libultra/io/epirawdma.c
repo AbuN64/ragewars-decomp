@@ -1,8 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
-#include "COMMON/DEVICE_IO.H"
-#include "../../include/OSINT/osyieldthread.H"
+#include <ultra64.h>
 
 /* 802BE040_7.CPP */
 #if defined(VERSION_DE)
@@ -11,8 +10,8 @@ unsigned char g_PiRawDmaAndLinkGapTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 
 
 /* 802BE040_57.CPP */
 /* osEPiRawStartDma, drafted from ultralib src/io/epirawdma.c with the 2.0I EPI_SYNC of PRinternal/piint.h. */
-extern OSPiHandle_s *g_peripheralDomainHandles[2];
-s32 __osEPiRawStartDma(OSPiHandle_s *pihandle, s32 direction, u32 devAddr, void *dramAddr, u32 size)
+extern OSPiHandle *g_peripheralDomainHandles[2];
+s32 __osEPiRawStartDma(OSPiHandle *pihandle, s32 direction, u32 devAddr, void *dramAddr, u32 size)
 {
     u32 stat;
     u32 domain;
@@ -21,7 +20,7 @@ s32 __osEPiRawStartDma(OSPiHandle_s *pihandle, s32 direction, u32 devAddr, void 
         stat = *(volatile u32 *)0xA4600010;
     domain = pihandle->domain;
     if (g_peripheralDomainHandles[domain] != pihandle) {
-        OSPiHandle_s *cHandle = g_peripheralDomainHandles[domain];
+        OSPiHandle *cHandle = g_peripheralDomainHandles[domain];
         if (domain == 0) {
             if (cHandle->latency != pihandle->latency) IO_WRITE(0xA4600014, pihandle->latency);
             if (cHandle->pageSize != pihandle->pageSize) IO_WRITE(0xA460001C, pihandle->pageSize);

@@ -15,7 +15,7 @@ struct __OSViContext {
     void *framep;
     void *modep;
     u32 control;
-    Opaque_OSMesgQueue *msgq;
+    OSMesgQueue *msgq;
     void * msg;
 };
 #endif

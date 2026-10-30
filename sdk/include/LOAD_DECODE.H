@@ -1,7 +1,7 @@
 #ifndef LOAD_DECODE_H
 #define LOAD_DECODE_H
 #include "TYPES.H"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 
 extern u32 Sound_GetCachedAudioBlockAddress(void *book, s32 size); /* game ADPCM codebook cache */

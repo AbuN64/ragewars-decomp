@@ -30,11 +30,14 @@ Boston, MA 02111-1307, USA.  */
    compiled for the target, and hence definitions concerning only the host
    do not apply.  */
 
+#define HAVE_BCOPY
+#define HAVE_BZERO
+#define HAVE_BCMP
 #include "tconfig.h"
 #include "machmode.h"
 #include "defaults.h" 
 #ifndef L_trampoline
-#include <stddef.h>
+#include <ultra64.h>
 #endif
 
 /* Don't use `fancy_abort' here even if config.h says to use it.  */

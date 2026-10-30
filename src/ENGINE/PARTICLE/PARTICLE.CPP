@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/MATH_HELPERS.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"

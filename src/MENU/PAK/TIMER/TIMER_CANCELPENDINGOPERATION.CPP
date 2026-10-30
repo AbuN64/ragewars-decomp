@@ -8,7 +8,7 @@
 #include "COMMON/RECORDRECAT1C.H"
 #include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 #include "COMMON/FRONTEND_RESOURCE_LOAD_STATE.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "MENU/PAK/TIMER_CANCELPENDINGOPERATION.H"
 

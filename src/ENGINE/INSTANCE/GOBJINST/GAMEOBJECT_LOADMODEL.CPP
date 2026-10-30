@@ -15,7 +15,7 @@
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJRECAT4V7.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "ENGINE/INSTANCE/GOBJINST.H"
 #include "GAME/BUILDDIRECTIONMATRIX.H"
 

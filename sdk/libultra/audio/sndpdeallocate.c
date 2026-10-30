@@ -5,7 +5,7 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
 
-void alSndpDeallocate(void *a, s16 b) {
+void alSndpDeallocate(ALSndPlayer *a, ALSndId b) {
     void *soundState;
     soundState = (b * 0x30) + (((struct SoundPlayerStateTableView *) ((s8 *) a))->soundStates);
     if ((((struct Shared_GameMode *) ((s8 *) soundState))->state) == 0) {

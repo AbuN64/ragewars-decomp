@@ -3,10 +3,10 @@
 #include "COMMON/GAME_SESSION.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "abi.h"
-#include "COMMON/GFX.H"
+#include <PR/abi.h>
+#include <ultra64.h>
 #include "TYPES.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "ENGINE/GEOMETRY.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 

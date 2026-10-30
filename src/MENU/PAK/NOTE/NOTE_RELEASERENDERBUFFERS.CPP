@@ -2,7 +2,7 @@
 #include "COMMON/RECORDRECAT1C.H"
 #include "OVLGAME/RENDER_BUFFER_RESOURCES.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "OVLGAME/NOTE_RELEASERENDERBUFFERS.H"
 

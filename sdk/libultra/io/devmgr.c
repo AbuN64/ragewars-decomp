@@ -3,17 +3,19 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/ALFXPARAM.H"
 #include "../../include/libultra/io/pirawread.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "UI/X_FILES/X_PLUS.H"
 
-extern OSPiHandle_s *g_peripheralHandleList;
+extern OSPiHandle *g_peripheralHandleList;
 
-OSPiHandle_s *osCartRomInit(void)
+OSPiHandle *osCartRomInit(void)
 {
     u32 domain = 0;
     u32 saveMask;
-    OSPiHandle_s *h = &g_diskPiHandle;
-    OSPiHandle_s **table;
+    OSPiHandle *h = &g_diskPiHandle;
+    OSPiHandle **table;
 
     if (h->baseAddress == 0xB0000000)
         return h;
@@ -28,7 +30,7 @@ OSPiHandle_s *osCartRomInit(void)
     h->domain = 0;
     h->speed = 0;
 
-    XPlus_FillMemory(&h->transferInfo.bytes, 0, sizeof(h->transferInfo.bytes));
+    XPlus_FillMemory(&h->transferInfo, 0, sizeof(h->transferInfo));
 
     saveMask = __osDisableInt();
     table = &g_peripheralHandleList;
@@ -44,77 +46,74 @@ typedef struct PiRequest {
     u16 type;
     u8 priority, status;
     OSMesgQueue *replyQueue;
-    void *dramAddress;
+    void *dramAddr;
     u32 deviceAddress, size;
-    OSPiHandle_s *handle;
+    OSPiHandle *handle;
 } PiRequest;
 typedef struct PiManager {
     s32 active;
     void *thread;
     OSMesgQueue *commandQueue, *eventQueue, *accessQueue;
     s32 (*dma)(s32, u32, void *, u32);
-    s32 (*extendedDma)(OSPiHandle_s *, s32, u32, void *, u32);
+    s32 (*extendedDma)(OSPiHandle *, s32, u32, void *, u32);
 } PiManager;
-extern void __osResetGlobalIntMask(s32);
-extern void __osSetGlobalIntMask(s32);
-extern s32 osEPiRawWriteIo(OSPiHandle_s *, u32, u32);
-extern s32 osEPiRawReadIo(OSPiHandle_s *, u32, u32 *);
-extern void osYieldThread(void);
+extern s32 osEPiRawWriteIo(OSPiHandle *, u32, u32);
+extern s32 osEPiRawReadIo(OSPiHandle *, u32, u32 *);
 
 /* The PI manager thread: serves DMA and 64DD disk requests from the command queue for ever. */
 void __osDevMgrMain(void *argument) {
     PiManager *manager = argument;
     PiRequest *request = 0;
     OSMesg access, event;
-    OSPiHandle_s *handle;
-    PiDiskBlock *block;
-    PiDiskTransfer *transfer;
+    OSPiHandle *handle;
+    __OSBlockInfo *block;
+    __OSTranxInfo *transfer;
     u32 status;
     s32 twoBlocks, result;
 
     for (;;) {
         osRecvMesg(manager->commandQueue, (OSMesg *)&request, 1);
-        handle = (OSPiHandle_s *)request->handle;
+        handle = (OSPiHandle *)request->handle;
         if (handle != 0 && handle->type == 2 &&
-            (transfer = &handle->transferInfo.transfer)->command <= 1) {
-            block = &transfer->blocks[handle->transferInfo.transfer.blockNumber];
-            handle->transferInfo.transfer.sectorNumber = -1;
-            if (handle->transferInfo.transfer.mode != 3) {
-                block->dramAddress -= block->sectorSize;
+            (transfer = &handle->transferInfo)->cmdType <= 1) {
+            block = &transfer->block[handle->transferInfo.blockNum];
+            handle->transferInfo.sectorNum = -1;
+            if (handle->transferInfo.transferMode != 3) {
+                block->dramAddr -= block->sectorSize;
             }
             twoBlocks = 0;
-            if (handle->transferInfo.transfer.mode == 2) {
-                twoBlocks = ((PiDiskTransfer *)request->handle->transferInfo.bytes)->command == 0;
+            if (handle->transferInfo.transferMode == 2) {
+                twoBlocks = (&request->handle->transferInfo)->cmdType == 0;
             }
             osRecvMesg(manager->accessQueue, &access, 1);
             __osResetGlobalIntMask(0x100401);
-            osEPiRawWriteIo(request->handle, 0x05000510, handle->transferInfo.transfer.control | 0x80000000);
+            osEPiRawWriteIo(request->handle, 0x05000510, handle->transferInfo.bmCtlShadow | 0x80000000);
             diskEvent:
             {
                 osRecvMesg(manager->eventQueue, &event, 1);
-                handle = (OSPiHandle_s *)request->handle;
-                transfer = &handle->transferInfo.transfer;
-                block = &transfer->blocks[handle->transferInfo.transfer.blockNumber];
-                if (block->error == 29) {
-                    osEPiRawWriteIo((OSPiHandle_s *)handle, 0x05000510, handle->transferInfo.transfer.control | 0x10000000);
-                    osEPiRawWriteIo(request->handle, 0x05000510, handle->transferInfo.transfer.control);
+                handle = (OSPiHandle *)request->handle;
+                transfer = &handle->transferInfo;
+                block = &transfer->block[handle->transferInfo.blockNum];
+                if (block->errStatus == 29) {
+                    osEPiRawWriteIo((OSPiHandle *)handle, 0x05000510, handle->transferInfo.bmCtlShadow | 0x10000000);
+                    osEPiRawWriteIo(request->handle, 0x05000510, handle->transferInfo.bmCtlShadow);
                     osEPiRawReadIo(request->handle, 0x05000508, &status);
                     if (status & 0x02000000) {
-                        osEPiRawWriteIo(request->handle, 0x05000510, handle->transferInfo.transfer.control | 0x01000000);
+                        osEPiRawWriteIo(request->handle, 0x05000510, handle->transferInfo.bmCtlShadow | 0x01000000);
                     }
-                    block->error = 4;
+                    block->errStatus = 4;
                     *(volatile u32 *)0xA4600010 = 2;
                     __osSetGlobalIntMask(0x100C01);
                 }
                 osSendMesg(request->replyQueue, request, 0);
                 if (twoBlocks == 1 &&
-                    ((PiDiskTransfer *)request->handle->transferInfo.bytes)->blocks[0].error == 0) {
+                    (&request->handle->transferInfo)->block[0].errStatus == 0) {
                     twoBlocks = 0;
                     goto diskEvent;
                 }
             }
             osSendMesg(manager->accessQueue, 0, 0);
-            if (((PiDiskTransfer *)request->handle->transferInfo.bytes)->blockNumber == 1) {
+            if ((&request->handle->transferInfo)->blockNum == 1) {
                 osYieldThread();
             }
             continue;
@@ -122,19 +121,19 @@ void __osDevMgrMain(void *argument) {
         switch (request->type) {
         case 11:
             osRecvMesg(manager->accessQueue, &access, 1);
-            result = manager->dma(0, request->deviceAddress, request->dramAddress, request->size);
+            result = manager->dma(0, request->deviceAddress, request->dramAddr, request->size);
             break;
         case 12:
             osRecvMesg(manager->accessQueue, &access, 1);
-            result = manager->dma(1, request->deviceAddress, request->dramAddress, request->size);
+            result = manager->dma(1, request->deviceAddress, request->dramAddr, request->size);
             break;
         case 15:
             osRecvMesg(manager->accessQueue, &access, 1);
-            result = manager->extendedDma(request->handle, 0, request->deviceAddress, request->dramAddress, request->size);
+            result = manager->extendedDma(request->handle, 0, request->deviceAddress, request->dramAddr, request->size);
             break;
         case 16:
             osRecvMesg(manager->accessQueue, &access, 1);
-            result = manager->extendedDma(request->handle, 1, request->deviceAddress, request->dramAddress, request->size);
+            result = manager->extendedDma(request->handle, 1, request->deviceAddress, request->dramAddr, request->size);
             break;
         case 10:
             osSendMesg(request->replyQueue, request, 0);

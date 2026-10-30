@@ -5,9 +5,10 @@
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "../../include/OS/siaccess.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "COMMON/LONE/siaccess.H"
-#include "os.h"
 
 extern OSMesgQueue g_serialInterfaceAccessQueue;
 extern OSMesg g_serialInterfaceAccessMessage;

@@ -1,8 +1,9 @@
 
 /* __osInsertTimer, drafted from ultralib src/os/timerintr.c. */
 #include "TYPES.H"
-#include "../../../include/os.h"
-#include "../../../include/OS_TIMER.H"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 
 

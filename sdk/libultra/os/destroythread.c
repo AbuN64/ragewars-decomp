@@ -5,13 +5,15 @@
 #include "TYPES.H"
 #include "COMMON/VERSION_CALLS.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 extern OsThreadQueueNode *__osActiveQueue;
 extern void *__osRunningThread;
 extern void __osDequeueThread(void *listHead, OsThreadQueueNode *node);
 
-void osDestroyThread(OsThreadQueueNode *thread) {
+void osDestroyThread(OSThread *thread) {
     OsThreadQueueNode *node;
     OsThreadQueueNode *cur;
     OsThreadQueueNode **head;

@@ -1,11 +1,10 @@
 #include "../../include/libgultra.h"
-#include "../../include/AUDIO_EVENTS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../include/libgultra/ALSEQGETLOC.H"
+#include <ultra64.h>
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 
@@ -14,7 +13,7 @@
    events. */
 
  /* readVarLen */
-extern u8 read8(ALSeq_s *);
+extern u8 read8(ALSeq *);
 
 /* alSeqSecToTicks, drafted from ultralib src/audio/seq.c: convert seconds to ticks at the given
    tempo. The library evaluates it in single precision as sec * (division * 1e6f), so the product is
@@ -28,10 +27,9 @@ extern u8 read8(ALSeq_s *);
 /* alSeqNewMarker, drafted from ultralib src/audio/seq.c: fill a marker with the sequence position
    of the first event at or after the given tick count (the track start for zero), stepping a
    scratch pass with alSeqNextEvent and restoring the sequence's own position afterwards. */
-void alSeqNextEvent(ALSeq_s *seq, ALEvent *event);
 
  /* read8 */
-void alSeqNextEvent(ALSeq_s *seq, ALEvent *event)
+void alSeqNextEvent(ALSeq *seq, ALEvent *event)
 {
     u8 status;
     s32 deltaTicks;
@@ -77,7 +75,7 @@ void alSeqNextEvent(ALSeq_s *seq, ALEvent *event)
     }
 }
 
-void alSeqNew(ALSeq_s *state, u8 *start, s32 len) {
+void alSeqNew(ALSeq *state, u8 *start, s32 len) {
     s16 division;
 
     state->base = start;
@@ -105,7 +103,7 @@ int alSeqGetTicks(struct ALSeq_s *sequence) {
     return sequence->lastTicks;
 }
 
-f32 alSeqTicksToSec(SequenceTicksPerQuarterView *sequence, s32 ticks, s32 tempo) {
+f32 alSeqTicksToSec(ALSeq *sequence, s32 ticks, s32 tempo) {
     f64 v;
     f32 tickCount;
 
@@ -114,17 +112,17 @@ f32 alSeqTicksToSec(SequenceTicksPerQuarterView *sequence, s32 ticks, s32 tempo)
     if (tempo < 0) {
         v = v + g_sequenceTicksToSecondsUnsignedBias;
     }
-    return (tickCount * (f32)v) / ((f32)sequence->ticksPerQuarter * g_sequenceMicrosecondsPerSecond);
+    return (tickCount * (f32)v) / ((f32)sequence->division * g_sequenceMicrosecondsPerSecond);
 }
 
  /* 2147483648.0f */
-u32 alSeqSecToTicks(SequenceTicksPerQuarterView *seq, f32 sec, u32 tempo)
+u32 alSeqSecToTicks(ALSeq *seq, f32 sec, u32 tempo)
 {
     f32 ticks;
     f64 t;
     f32 q;
     u32 result;
-    ticks = sec * ((f32)seq->ticksPerQuarter * (*(&g_sequenceMicrosecondsPerSecond + 1)));
+    ticks = sec * ((f32)seq->division * (*(&g_sequenceMicrosecondsPerSecond + 1)));
     t = (f64)(s32)tempo;
     if ((s32)tempo < 0) {
         t = t + g_sequenceSecondsToTicksUnsignedBias;
@@ -141,7 +139,7 @@ u32 alSeqSecToTicks(SequenceTicksPerQuarterView *seq, f32 sec, u32 tempo)
 }
 
  /* alSeqNextEvent */
-void alSeqNewMarker(ALSeq_s *seq, ALSeqMarker *m, u32 ticks)
+void alSeqNewMarker(ALSeq *seq, ALSeqMarker *m, u32 ticks)
 {
     ALEvent evt;
     u8 *savePtr, *lastPtr;
@@ -183,22 +181,22 @@ void alSeqNewMarker(ALSeq_s *seq, ALSeqMarker *m, u32 ticks)
 }
 
 /** Copy selected fields from the compact source record. */
-void alSeqSetLoc(ALSeq_s *sequence, ALSeqMarker *marker) {
+void alSeqSetLoc(ALSeq *sequence, ALSeqMarker *marker) {
     sequence->curPtr = marker->curPtr;
     sequence->lastStatus = marker->lastStatus;
     sequence->lastTicks = marker->lastTicks;
 }
 
 /** Copy selected fields into the compact destination record. */
-void alSeqGetLoc(void *sequenceStorage, void *markerObject) {
+void alSeqGetLoc(ALSeq *sequenceStorage, ALSeqMarker *markerObject) {
     struct ALSeq_s *sequence = sequenceStorage;
-    struct ALSeqMarker *marker = markerObject;
+    ALSeqMarker *marker = markerObject;
     marker->curPtr = sequence->curPtr;
     marker->lastStatus = sequence->lastStatus;
     marker->lastTicks = sequence->lastTicks;
 }
 
-s32 __alSeqNextDelta(ALSeq_s *sequence, s32 *deltaTicks) {
+s32 __alSeqNextDelta(ALSeq *sequence, s32 *deltaTicks) {
     u8 *savedCursor;
 
     savedCursor = sequence->curPtr;

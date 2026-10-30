@@ -6,7 +6,7 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/WORLD.H"
 #include "COMMON/STATERECAT91.H"
 #include "TYPES.H"

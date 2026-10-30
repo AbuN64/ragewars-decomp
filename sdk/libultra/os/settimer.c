@@ -3,7 +3,7 @@
 
 /* 802C07B0.CPP */
 /* 802C07B0.CPP */
-int osSetTimer(OsTimerNode *node, u64 initialDelay, u64 repeatInterval, void *messageQueue, void *message) {
+int osSetTimer(OSTimer *node, OSTime initialDelay, OSTime repeatInterval, OSMesgQueue *messageQueue, OSMesg message) {
     u64 value;
 
     node->value = initialDelay;

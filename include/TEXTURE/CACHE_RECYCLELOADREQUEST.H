@@ -9,7 +9,7 @@ struct EntryList {
 /* Resource-loader thread, its request queue, message slots and stack. */
 typedef struct ResourceLoadWorker {
     u8 thread[560];
-    struct OSMesgQueue requests;
+    OSMesgQueue requests;
     s32 messages[128];
     u8 stack[4096];
     s32 timestamp; /* 0x1448: frame of last dispatched request */

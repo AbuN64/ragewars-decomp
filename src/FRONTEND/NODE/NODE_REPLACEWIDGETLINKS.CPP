@@ -1,7 +1,7 @@
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/WIDGETRECAT1A.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 
 MenuWidget *Node_FindWidgetByResourceId(void *root, s32 identifier) {

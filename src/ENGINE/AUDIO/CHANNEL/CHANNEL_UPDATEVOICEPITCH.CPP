@@ -9,8 +9,7 @@
 
 extern void Channel_UpdateDistancePitchFactor(ViewChannelUpdateVoicePitch *);
 
-extern void alSndpSetSound(char *, s32);
-extern void alSndpSetPitch(char *, f32);
+
 
 static inline char *selectChannel(VoicePitchChannelContext *context, s32 slot) {
     alSndpSetSound(context->channels, context->slots[slot]);

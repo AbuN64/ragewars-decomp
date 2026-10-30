@@ -135,7 +135,7 @@ void Graphu64_BuildPlaneProjectionMatrix(void *projection, void *projectionDirec
     o->m[14] = plane * slopeZ;
 }
 
-void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
+void BuildDirectionMatrix(CMatrix4 *m, CVector3 *direction) {
     CVector3 up;
     CVector3 *upVector = (void *)&g_directionMatrixUnitConstants_de[0].y;
 
@@ -251,7 +251,7 @@ void Graphu64_ScaleMatrixWorld(void *matrix, f32 sx, f32 sy, f32 sz) {
 }
 
 void BuildPitchMatrix(void *rest, f32 pitchAngle) {
-    struct Mtx *m = rest;
+    struct CMatrix4 *m = rest;
     f32 sin_v;
     f32 cos_v;
     f32 zero;
@@ -281,7 +281,7 @@ void BuildPitchMatrix(void *rest, f32 pitchAngle) {
 
 void BuildYawMatrix(void *matrixStorage, f32 yawAngle)
 {
-  struct Mtx *m = (char *) matrixStorage;
+  struct CMatrix4 *m = (char *) matrixStorage;
   f32 sin_v;
   f32 cos_v;
   f32 zero;
@@ -309,7 +309,7 @@ void BuildYawMatrix(void *matrixStorage, f32 yawAngle)
 }
 
 void BuildRollMatrix(void *matrix, f32 rollAngle) {
-    struct Mtx *m = matrix;
+    struct CMatrix4 *m = matrix;
     f32 sin_v;
     f32 cos_v;
     f32 zero;
@@ -338,7 +338,7 @@ void BuildRollMatrix(void *matrix, f32 rollAngle) {
 }
 
 void PitchMatrixLocal(void *matrixStorage, f32 pitchAngle) {
-    struct Mtx *m = (char *) matrixStorage;
+    struct CMatrix4 *m = (char *) matrixStorage;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -362,7 +362,7 @@ void PitchMatrixLocal(void *matrixStorage, f32 pitchAngle) {
 }
 
 void PitchMatrix(void *matrixStorage, f32 pitchAngle) {
-    struct Mtx *m = (char *) matrixStorage;
+    struct CMatrix4 *m = (char *) matrixStorage;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -390,7 +390,7 @@ void PitchMatrix(void *matrixStorage, f32 pitchAngle) {
 }
 
 void YawMatrixLocal(void *matrix, f32 yawAngle) {
-    struct Mtx *m = (char *) matrix;
+    struct CMatrix4 *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -414,7 +414,7 @@ void YawMatrixLocal(void *matrix, f32 yawAngle) {
 }
 
 void YawMatrix(void *matrix, f32 yawAngle) {
-    struct Mtx *m = (char *) matrix;
+    struct CMatrix4 *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -442,7 +442,7 @@ void YawMatrix(void *matrix, f32 yawAngle) {
 }
 
 void RollMatrixLocal(void *matrix, f32 rollAngle) {
-    struct Mtx *m = (char *) matrix;
+    struct CMatrix4 *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -466,7 +466,7 @@ void RollMatrixLocal(void *matrix, f32 rollAngle) {
 }
 
 void RollMatrix(void *matrixStorage, f32 rollAngle) {
-    struct Mtx *m = (char *) matrixStorage;
+    struct CMatrix4 *m = (char *) matrixStorage;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -494,7 +494,7 @@ void RollMatrix(void *matrixStorage, f32 rollAngle) {
 }
 
 /** Swap the two float-groups at offsets 0x10 and 0x20 (three floats each). */
-void SwapMatrixUpForward(struct Mtx *object) {
+void SwapMatrixUpForward(struct CMatrix4 *object) {
     float t;
     t = object->up.x;
     object->up.x = object->forward.x;
@@ -527,7 +527,7 @@ void Graphu64_CopySwappedMatrixBasis(f32 *dst, f32 *src) {
 }
 
 /** Swap the two floats within each of the object's four 0x10-byte records. */
-void Graphu64_SwapMatrixCoordinates(struct Mtx *object) {
+void Graphu64_SwapMatrixCoordinates(struct CMatrix4 *object) {
     float t;
     t = object->right.y;
     object->right.y = object->right.z;

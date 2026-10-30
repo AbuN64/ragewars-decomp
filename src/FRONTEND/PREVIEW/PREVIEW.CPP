@@ -8,13 +8,13 @@
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/TEXTURE.H"
 #include "COMMON/OBJECTRECAT28.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "TYPES.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "stddef.h"
+#include <ultra64.h>
 
 /* 8043962C_13.CPP */
 /* Draws a menu model with screen-scaled translation, animated and fixed rotations, restoring the render-state flag afterward; the unsigned offset-to-pointer cast preserves matrix-address scheduling. */

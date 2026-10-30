@@ -2,7 +2,8 @@
 #define COMMON_WORLDSORTENTRY_H
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "../../sdk/include/SCHED/SCHED.H"
+#include <ultra64.h>
+#include <PR/sched.h>
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -95,7 +96,6 @@ typedef struct SchedulerTaskFlagsView SchedulerTaskFlagsView;
 
 
 
-struct OSSched;
 
 
 
@@ -112,26 +112,7 @@ extern int g_schedulerShutdownPending;
 
 
 struct OSScClientWork;
-struct OSScTask_s;
-struct OSSched;
-struct OSSched {
-    char pad0[0x20];
-    s16 retraceMessage; /* 0x20 */
-    char pad22[0x40 - 0x22];
-    OSMesgQueue interruptQueue; /* 0x40 */
-    char pad58[0x78 - 0x58];
-    OSMesgQueue commandQueue; /* 0x78 */
-    char pad90[0x2E0 - 0x90];
-    struct OSScClientWork *clientList;
-    struct OSScTask_s *audioListHead;
-    struct OSScTask_s *gfxListHead;
-    struct OSScTask_s *audioListTail;
-    struct OSScTask_s *gfxListTail;
-    struct OSScTask_s *curRSPTask;
-    struct OSScTask_s *curRDPTask;
-    u32 frameCount;
-    s32 doAudio;
-};
+
 
 
 struct ImageSet;
@@ -155,8 +136,6 @@ typedef struct SchedulerCurrentRspTaskView SchedulerCurrentRspTaskView;
 
 
 
-struct OSSched;
-typedef struct OSSched OSSched;
 
 struct NearbySpecialActorView;
 typedef struct NearbySpecialActorView NearbySpecialActorView;

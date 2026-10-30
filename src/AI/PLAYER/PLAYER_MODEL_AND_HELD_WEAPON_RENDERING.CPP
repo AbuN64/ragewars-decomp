@@ -5,7 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
@@ -66,13 +66,13 @@ void Player_DrawPlayerModel(void *player, void *camera) {
     cmd = g_displayListCursor++;
     gSPGeometryMode(cmd, 0, G_FOG);
     cmd = g_displayListCursor++;
-    gSPMoveWord(cmd, G_MW_CLIP, 4, 2);
+    gMoveWd(cmd, G_MW_CLIP, 4, 2);
     cmd = g_displayListCursor++;
-    gSPMoveWord(cmd, G_MW_CLIP, 12, 2);
+    gMoveWd(cmd, G_MW_CLIP, 12, 2);
     cmd = g_displayListCursor++;
-    gSPMoveWord(cmd, G_MW_CLIP, 20, 0xFFFE);
+    gMoveWd(cmd, G_MW_CLIP, 20, 0xFFFE);
     cmd = g_displayListCursor++;
-    gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFE);
+    gMoveWd(cmd, G_MW_CLIP, 28, 0xFFFE);
 
     Gobjinst_DrawVisibleCachedActor(player, camera);
     if (((Shared_ActorView *)player)->targeting != 0) {
@@ -108,10 +108,10 @@ void Player_DrawHeldWeapon(void *player, WeaponMenuView *camera) {
                       (s32)bottom, camera->clipMode);
 
         gSPGeometryMode(g_displayListCursor++, 0, G_FOG);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 4, 1);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 12, 1);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 20, 0xFFFF);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 28, 0xFFFF);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, 4, 1);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, 12, 1);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, 20, 0xFFFF);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, 28, 0xFFFF);
         Geometry_BeginModelBatch();
         Gobjinst_DrawVisibleCachedActor(&((Shared_ActorView *)player)->weapon, camera);
         Geometry_FlushModelBatch();

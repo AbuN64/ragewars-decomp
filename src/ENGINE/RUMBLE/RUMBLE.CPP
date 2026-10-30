@@ -13,7 +13,9 @@
 #include "ENGINE/RUMBLE.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "RENDER/CONTROL_CYCLEACTORSNAPSHOTMODE.H"
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/SCENE_DRAWTRANSITIONCOLOROVERLAY.H"
@@ -59,7 +61,6 @@ f32 Rumble_GetSpatialEffectLevel(RumbleSpatialPoolView *pool, CVector3 position)
     return limit < value ? limit : value;
 }
 
-#include "../../../sdk/include/os.h"
 #include "RENDER/CONTROL_CYCLEACTORSNAPSHOTMODE.H"
 #include "ENGINE/SCENE_DRAWTRANSITIONCOLOROVERLAY.H"
 

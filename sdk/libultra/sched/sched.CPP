@@ -3,24 +3,22 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "COMMON/OSTASK_T.H"
+#include <ultra64.h>
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
 #include "COMMON/BOOT_TV_TYPE.H"
-#include "../../include/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "../../include/SCHED/osscremoveclient.H"
-#include "../../include/libgultra/OSWRITEBACKDCACHEALL.H"
-#include "../../include/libgultra/sptaskyield.h"
-#include "../../include/os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 extern s32 g_schedulerPendingFramebuffer;
 extern s32 g_displayedFramebufferAndRefreshRate;
 void __scAppendList(OSSched *scheduler, void *task) {
     void *previousTail;
 
-    if ((((struct OSScTask_s *)task)->list.type) == 2) {
+    if ((((struct OSScTask_s *)task)->list.t.type) == 2) {
         previousTail = scheduler->audioListTail;
         if (previousTail != 0) {
             ((struct OSScTask_s *)previousTail)->next = task;
@@ -69,7 +67,7 @@ s32 Sched_CompleteTaskAndSwapBuffer(void *scheduler, void *task) {
     if ((((s32)((struct OSScTask_s *)task)->state)) & 3) {
         return 0;
     }
-    if ((((struct OSScTask_s *)task)->list.type) != 1) {
+    if ((((struct OSScTask_s *)task)->list.t.type) != 1) {
         return 1;
     }
     if (((((s32)((struct OSScTask_s *)task)->flags)) & 0x60) != 0x60) {

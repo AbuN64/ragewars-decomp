@@ -1,6 +1,8 @@
 #include "include_asm.h"
 #include "TYPES.H"
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 

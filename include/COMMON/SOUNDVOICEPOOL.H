@@ -145,14 +145,12 @@ extern int g_lastResumedPoolSoundHandle;
 
 struct AudioPlaybackContextView;
 struct IntPair;
-struct ALCMidiHdr;
-struct ALCSeq_s;
 struct Track;
 struct Track {
     struct AudioPlaybackContextView *context;
     s32 sequenceLoaded;
     struct IntPair *sequenceTable;
-    struct ALCMidiHdr *midiHeader;
+    ALCMidiHdr *midiHeader;
     struct ALCSeq_s *sequence;
     s32 sequencePlayer;
     s32 playbackState;

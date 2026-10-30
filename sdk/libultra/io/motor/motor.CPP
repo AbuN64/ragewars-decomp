@@ -4,7 +4,9 @@
 #include "TYPES.H"
 #include "TYPES.H"
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
-#include "../../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "../../../include/os_pif.h"
 
 #if defined(VERSION_US)
@@ -14,13 +16,13 @@ extern u8 g_controllerMotorStopCommands[];
 
 
 
-u32 osMotorStop(Triple *motorContext) {
+s32 osMotorStop(OSPfs *pfs) {
     Block40 saved;
     u8 *source;
     s32 i;
 
     source = (u8 *)&g_controllerStatusPifBuffer;
-    if (g_controllerMotorInitialized[motorContext->z] == 0) {
+    if (g_controllerMotorInitialized[pfs->channel] == 0) {
         return 5;
     } else {
         u32 result;
@@ -28,11 +30,11 @@ u32 osMotorStop(Triple *motorContext) {
 
         __osSiGetAccess();
         g_controllerLastCommand = 3;
-        __osSiRawStartDma(1, &g_controllerMotorStopCommands[motorContext->z << 6]);
-        osRecvMesg(motorContext->y, 0, 1);
+        __osSiRawStartDma(1, &g_controllerMotorStopCommands[pfs->channel << 6]);
+        osRecvMesg(pfs->queue, 0, 1);
         __osSiRawStartDma(0, (u8 *)&g_controllerStatusPifBuffer);
-        osRecvMesg(motorContext->y, 0, 1);
-        count = motorContext->z;
+        osRecvMesg(pfs->queue, 0, 1);
+        count = pfs->channel;
         if (count != 0) {
             i = 0;
             if (count > 0) {

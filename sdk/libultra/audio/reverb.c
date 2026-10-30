@@ -1,7 +1,6 @@
 #include "include_asm.h"
 #include "AUDIO/ACMD.H"
-#include "abi.h"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "../../include/libultra/audio/EFFECT_FILTER_STATE.H"
@@ -10,7 +9,7 @@
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "../../include/OSINT/osyieldthread.H"
+#include <ultra64.h>
 #include "COMMON/ALAUXBUS_S.H"
 #include "../../include/al_globals.h"
 

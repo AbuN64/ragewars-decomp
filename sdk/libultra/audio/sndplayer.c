@@ -46,13 +46,11 @@ extern ALGlobalsalSndpNew *g_audioGlobals;
 
  /* alGlobals */
 
-extern void *alHeapDBAlloc(u8 *, s32, ALHeap *, s32, s32);
 
           /* alHeapDBAlloc */
-extern void alEvtqNew(ALEventQueue *, ALEventListItem *, s32);
 
   /* alEvtqNew */
-extern void alSynAddPlayer(ALSynthalSndpNew *, ALPlayer_s14 *);
+
 
                    /* alSynAddPlayer */
 
@@ -63,33 +61,31 @@ extern s32 alEvtqNextEvent(ALEventQueue *, ALEvent *);
 /* _sndpVoiceHandler (_sndpVoiceHandler); the cartridge stores the handler by its 0x002B7C8C address. */
 
 
-extern s32 alSynAllocVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *, ALVoiceConfig_s *);
+
 
  /* alSynAllocVoice */
-extern void alSynStartVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *, void *);
 
          /* alSynStartVoice */
-extern void alSynSetPan(AudioSynthVoiceAllocatorView *, ALVoice_s *, u8);
+
 
              /* alSynSetPan */
-extern void alSynSetVol(AudioSynthVoiceAllocatorView *, ALVoice_s *, s16, s32);
+
 
        /* alSynSetVol */
-extern void alSynSetPitch(AudioSynthVoiceAllocatorView *, ALVoice_s *, f32);
+
 
             /* alSynSetPitch */
-extern void alSynSetFXMix(AudioSynthVoiceAllocatorView *, ALVoice_s *, u8);
+
 
              /* alSynSetFXMix */
-extern void alSynStopVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *);
 
                  /* alSynStopVoice */
-extern void alSynFreeVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *);
+
 
        /* alEvtqPostEvent */
 void _removeEvents(ALEventQueue *eventQueue, void *soundState);
 
-void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
+void alSndpNew(ALSndPlayer *sndp, ALSndpConfig *c)
 {
     u8 *ptr;
     ALEvent evt;
@@ -124,9 +120,9 @@ void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
 
 void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
 {
-    ALVoiceConfig_s vc;
-    ALSound_s *snd;
-    ALVoice_s *voice;
+    ALVoiceConfig vc;
+    ALSound *snd;
+    ALVoice *voice;
     u8 pan;
     f32 pitch;
     ALSndpEvent evt;
@@ -151,7 +147,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             voice = &state->voice;
             alSynAllocVoice(sndp->drvr, voice, &vc);
             vol = (s16)((s32)snd->envelope->attackVolume * state->vol / 127);
-            tmp = state->pan - 64 + ((const struct ALSound *)snd)->samplePan;
+            tmp = state->pan - 64 + ((const ALSound *)snd)->samplePan;
             tmp = ((tmp) > (0) ? (tmp) : (0));
             pan = (u8)((tmp) < (127) ? (tmp) : (127));
             pitch = state->pitch;
@@ -189,7 +185,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
         case 2: /* AL_SNDP_PAN_EVT */
             state->pan = event_view->pan.pan;
             if (state->state == 1 && snd) {
-                tmp = state->pan - 64 + ((const struct ALSound *)snd)->samplePan;
+                tmp = state->pan - 64 + ((const ALSound *)snd)->samplePan;
                 tmp = ((tmp) > (0) ? (tmp) : (0));
                 pan = (u8)((tmp) < (127) ? (tmp) : (127));
                 alSynSetPan(sndp->drvr, &state->voice, pan);
@@ -287,7 +283,6 @@ s32 _sndpVoiceHandler(void *node)
     return sndp->nextDelta;
 }
 
-extern s32 osSetIntMask(s32);
 
 
 

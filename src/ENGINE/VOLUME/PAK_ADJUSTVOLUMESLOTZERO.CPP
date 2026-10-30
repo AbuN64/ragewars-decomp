@@ -3,7 +3,7 @@
 #include "MENU/OPTIONEDITSTATE.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 extern s32 Menu_AdjustValue(void *,s32,s32,s32,s32,s32);

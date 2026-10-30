@@ -4,7 +4,6 @@
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
 
-extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
 
 
@@ -24,7 +23,7 @@ void alSndpPlay(ALSndPlayer *soundPlayer) {
 
 
 
-void alSndpSetFXMix(ALSndPlayer *soundPlayer, s8 effectMix) {
+void alSndpSetFXMix(ALSndPlayer *soundPlayer, u8 effectMix) {
     SoundPlayerByteParameterEvent p;
     s32 acc;
 

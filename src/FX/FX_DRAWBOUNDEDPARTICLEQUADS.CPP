@@ -2,12 +2,12 @@
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "COMMON/GAME_SESSION.H"
 #include "RENDER/ANIMATION_FRAME_AND_RIBBON_VIEWS.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "FX.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/S1.H"
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"

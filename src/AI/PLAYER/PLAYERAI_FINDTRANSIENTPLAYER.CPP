@@ -1,10 +1,10 @@
 #include "COMMON/OBJRECV5.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LOADOUT.H"
 #include "COMMON/INTEGERSTATE1250.H"

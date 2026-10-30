@@ -7,10 +7,11 @@
 #if !defined(VERSION_US_REV1)
 #include "TYPES.H"
 #include "COMMON/OSVISCALE.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "../../include/os_pif.h"
 extern OSDevMgr __osPiDevMgr;
-extern void osSetEventMesg(s32, OSMesgQueue *, s32);
 extern s32 osGetThreadPri(struct OSThread_s *);
 extern void osSetThreadPri(struct OSThread_s *, s32);
 extern void osCreateThread(struct OSThread_s *, s32, void (*)(void *), void *, void *, s32);
@@ -71,10 +72,9 @@ unsigned int func_802B8F48_de_padding_B9DE8[2] = {
 #if defined(VERSION_US_REV1)
 #include "TYPES.H"
 #include "COMMON/OSVISCALE.H"
-#include "../../include/os.h"
 #include "../../include/os_pif.h"
 extern OSDevMgr __osPiDevMgr;
-extern void osSetEventMesg(s32, OSMesgQueue *, s32);
+
 extern s32 osGetThreadPri(struct OSThread_s *);
 extern void osSetThreadPri(struct OSThread_s *, s32);
 extern void osCreateThread(struct OSThread_s *, s32, void (*)(void *), void *, void *, s32);

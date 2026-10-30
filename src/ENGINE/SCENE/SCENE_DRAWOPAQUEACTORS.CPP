@@ -7,7 +7,7 @@
 #include "COMMON/SCENERECAT10C0.H"
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
 #include "TYPES.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "ENGINE/SCENE_DRAWOPAQUEACTORS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
@@ -43,10 +43,10 @@ void Scene_DrawOpaqueActors(SceneActorUpdateLists *scene, void *camera) {
 
     Geometry_BeginModelBatch();
     count = scene->count;
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 4, 5);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 12, 5);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 20, 0xFFFB);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 28, 0xFFFB);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, 4, 5);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, 12, 5);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, 20, 0xFFFB);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, 28, 0xFFFB);
     objects = scene->objects;
     for (i = 0; i < count; i++) {
         object = objects[i];
@@ -71,13 +71,13 @@ void Scene_DrawWorldParticles(s32 world, s32 view) {
     Gfx *cmd;
 
     cmd = g_displayListCursor++;
-    gSPMoveWord(cmd, G_MW_CLIP, 4, 1);
+    gMoveWd(cmd, G_MW_CLIP, 4, 1);
     cmd = g_displayListCursor++;
-    gSPMoveWord(cmd, G_MW_CLIP, 12, 1);
+    gMoveWd(cmd, G_MW_CLIP, 12, 1);
     cmd = g_displayListCursor++;
-    gSPMoveWord(cmd, G_MW_CLIP, 20, 0xFFFF);
+    gMoveWd(cmd, G_MW_CLIP, 20, 0xFFFF);
     cmd = g_displayListCursor++;
-    gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFF);
+    gMoveWd(cmd, G_MW_CLIP, 28, 0xFFFF);
     Geometry_BeginModelBatch();
     Particle_DrawRenderList(world + 6920, view);
     Geometry_FlushModelBatch();

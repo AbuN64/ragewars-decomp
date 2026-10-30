@@ -1,5 +1,6 @@
 #include "include_asm.h"
-#include "../../include/libultra/io/spgetstat.h"
+#include <ultra64.h>
+#include <PR/os_internal_rsp.h>
 
 /** Read the SP status register. */
 unsigned int __osSpGetStatus(void) {

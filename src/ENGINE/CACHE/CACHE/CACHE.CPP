@@ -1,6 +1,8 @@
 #include "COMMON/RESOURCELOCKSTATE.H"
 #include "TYPES.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "COMMON/MANAGER.H"
 #include "COMMON/LONE/RUNTIME_HEAP.H"
 #include "COMMON/ITEMRECAT20V1.H"

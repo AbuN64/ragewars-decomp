@@ -3,7 +3,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MENU/PAK_DIRECTORY_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "MENU/PAK/NOTE_GETNOTEPAGECOUNT.H"
 extern void Cache_ReleaseResource(void *cache, void *resource);
@@ -53,7 +53,7 @@ void Control_ReleasePakLock(void);
 s32 Note_UpdateStatus(s32);
 
  /* extern */
-s32 osPfsRepairId(void *);
+
 
 /* Reports the address of the field at offset 0xE of entry j in record i of the table g_controllerPakNoteLists
    points to, returning zero, or returns -2 when record i's state in g_controllerPakChannelStates is not 3. */

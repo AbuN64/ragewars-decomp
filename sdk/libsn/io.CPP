@@ -1,15 +1,15 @@
-#include "COMMON/HARDWARE_IO.H"
+#include <ultra64.h>
 #include "IO/EXTERNS.H"
 #include "COMMON/OBJ.H"
 #include "TYPES.H"
 #include "include_asm.h"
 
 s32 Libsn_ReadPortWord(s32 portAddress) {
-    if (IO_READ_WORD(PI_STATUS_REG) & PI_STATUS_BUSY_MASK) {
+    if (IO_READ(PI_STATUS_REG) & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) {
         do {
-        } while (IO_READ_WORD(PI_STATUS_REG) & PI_STATUS_BUSY_MASK);
+        } while (IO_READ(PI_STATUS_REG) & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY));
     }
-    return IO_READ_WORD(portAddress);
+    return *(vu32 *)portAddress;
 }
 
 extern volatile s32 g_libsnDelayIteration;

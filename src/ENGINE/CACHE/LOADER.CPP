@@ -6,27 +6,29 @@
 #include "COMMON/S1.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "UI/X_FILES/X_PLUS.H"
 #include "include_asm.h"
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/CACHE/LIST.H"
 
-extern void osSetEventMesg(s32 event, void *queue, s32 message);
 
 
-extern void osCreateThread(void *thread, s32 threadId, void *entry, void *arg, void *stackTop, s32 priority);
+
+
 
 
 extern char g_Cartridge_RunReadWorkerPackedAddress24;
 
 void *Cartridge_AcquireReadRequest(CartridgeReadWorker *cartridgeReadWorker);
 
-extern s32 osJamMesg(void *messageQueue, void *message, s32 waitMode);
+
 
 typedef struct Queue Queue;
 
-extern s32 osJamMesg(void *, void *, s32);
+
 
 
 void Cartridge_StartReadWorker(CartridgeReadWorker *worker, s32 count) {
@@ -130,7 +132,6 @@ void Cartridge_SubmitReadChunks(struct CartridgeReadWorker *worker, u32 source, 
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
-#include "os.h"
 /* Cartridge read thread loop: waits on the manager's request queue; a 0xBEEFDEAD message arms a
  * periodic timer that posts 0xDEADBEEF, a 0xDEADBEEF tick runs Libultra_RunDebugLinkCommands when TextLoad_IsArtsendTexturePreviewEnabled
  * reports work, and any other message is a read request whose buffer is invalidated, read from the
@@ -141,7 +142,7 @@ void Cartridge_SubmitReadChunks(struct CartridgeReadWorker *worker, u32 source, 
 
 
 
-extern void osSetTimer(void *, u64, u64, void *, void *);
+
 extern int TextLoad_IsArtsendTexturePreviewEnabled(void);
 extern void Libultra_RunDebugLinkCommands(void);
 extern void osWritebackDCache(void *, s32);

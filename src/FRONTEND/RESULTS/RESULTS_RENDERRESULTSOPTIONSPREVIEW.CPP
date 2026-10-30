@@ -7,8 +7,8 @@
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"

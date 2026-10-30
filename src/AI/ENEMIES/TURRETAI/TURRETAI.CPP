@@ -24,7 +24,7 @@ void TranslateMatrix(char *, f32, f32, f32);
 
 void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
-void SwapMatrixUpForward(struct Mtx *);
+void SwapMatrixUpForward(struct CMatrix4 *);
 
 static inline void alignment_from_rider(f32 *matrix, TurretRiderTargetView *rider) {
     CQuatern q;

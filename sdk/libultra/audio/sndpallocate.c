@@ -6,9 +6,9 @@
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 
-s16 alSndpAllocate(SoundPlayerSlotPool *pool, void *owner) {
-    s32 count = pool->count;
-    SoundPlayerSlot *slots = pool->slots;
+ALSndId alSndpAllocate(ALSndPlayer *pool, ALSound *owner) {
+    s32 count = ((SoundPlayerSlotPool *)pool)->count;
+    SoundPlayerSlot *slots = ((SoundPlayerSlotPool *)pool)->slots;
 
     if (count > 0) {
         s16 i = 0;
@@ -25,11 +25,11 @@ s16 alSndpAllocate(SoundPlayerSlotPool *pool, void *owner) {
             slot->value = value;
             slot->flags = flags;
             slot->extra = 0;
-            slot->amount = ((((struct ALSound *)(owner))->sampleVolume * 0x7FFF) / 127);
+            slot->amount = ((((ALSound *)(owner))->sampleVolume * 0x7FFF) / 127);
             return index;
         }
         i++;
-        } while ((s16)i < pool->count);
+        } while ((s16)i < ((SoundPlayerSlotPool *)pool)->count);
     }
     return -1;
 }

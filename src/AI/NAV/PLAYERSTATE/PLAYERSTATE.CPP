@@ -6,7 +6,7 @@
 #include "COMMON/TRIPLE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 s32 Scaled_SetBehaviourState(void *, s32);
 s32 Scaled_MatchesBehaviorStateFilter(void *);
 s32 Scaled_IsBehaviorStateEight(void *);

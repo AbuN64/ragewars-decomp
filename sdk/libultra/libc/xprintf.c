@@ -9,7 +9,7 @@
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "stdarg.h"
 
 /* 800C7C68.CPP */

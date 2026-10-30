@@ -6,8 +6,8 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
-#include "abi.h"
-#include "gbi.h"
+#include <PR/abi.h>
+#include <PR/gbi.h>
 #include "TYPES.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
@@ -42,11 +42,11 @@ void Geometry_DrawSharedMaterialModel(void **resource, s32 matrix, s32 segment, 
     if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); } else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     if (lights != 0) {
         Gfx *cmd = g_displayListCursor++;
-        gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
+        gMoveWd(cmd, G_MW_NUMLIGHT, 0, 0x18);
         cmd = g_displayListCursor++;
-        gSPMoveMem(cmd, G_MV_LIGHT, 48, 16, lights + 8);
+        gDma2p(cmd, G_MOVEMEM, lights + 8, 16, G_MV_LIGHT, 48);
         cmd = g_displayListCursor++;
-        gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
+        gDma2p(cmd, G_MOVEMEM, lights, 16, G_MV_LIGHT, 72);
     }
     Cache_MarkResourceInUse(0, resource);
     header = *resource;
@@ -112,11 +112,11 @@ void Geometry_DrawOwnerFilteredPass(void **resource, void *owner, void *matrix, 
     if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); } else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     if (lights != 0) {
         Gfx *cmd = g_displayListCursor++;
-        gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
+        gMoveWd(cmd, G_MW_NUMLIGHT, 0, 0x18);
         cmd = g_displayListCursor++;
-        gSPMoveMem(cmd, G_MV_LIGHT, 48, 16, lights->diffuse);
+        gDma2p(cmd, G_MOVEMEM, lights->diffuse, 16, G_MV_LIGHT, 48);
         cmd = g_displayListCursor++;
-        gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
+        gDma2p(cmd, G_MOVEMEM, lights, 16, G_MV_LIGHT, 72);
     }
     Cache_MarkResourceInUse(0, resource);
     header = *resource;
@@ -203,11 +203,11 @@ void Geometry_DrawCharacterEffectParts(void **resource, struct Player *owner, vo
         }
         if (lights != 0) {
             Gfx *cmd = g_displayListCursor++;
-            gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
+            gMoveWd(cmd, G_MW_NUMLIGHT, 0, 0x18);
             cmd = g_displayListCursor++;
-            gSPMoveMem(cmd, G_MV_LIGHT, 48, 16, lights->diffuse);
+            gDma2p(cmd, G_MOVEMEM, lights->diffuse, 16, G_MV_LIGHT, 48);
             cmd = g_displayListCursor++;
-            gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
+            gDma2p(cmd, G_MOVEMEM, lights, 16, G_MV_LIGHT, 72);
         }
         Cache_MarkResourceInUse(0, resource);
         header = *resource;

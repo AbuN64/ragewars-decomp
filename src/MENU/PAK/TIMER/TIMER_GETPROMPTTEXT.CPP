@@ -7,7 +7,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/PAKQUEUESTATE.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GLOBALS.H"

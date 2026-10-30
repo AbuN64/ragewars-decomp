@@ -4,13 +4,15 @@
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "../../include/os_pif.h"
 
 extern void __osPackRequestData(s32 cmd);
 
 
-s32 osContStartQuery(s32 completionQueue) {
+s32 osContStartQuery(OSMesgQueue *completionQueue) {
     s32 result;
     u8 *p;
 
@@ -28,7 +30,7 @@ s32 osContStartQuery(s32 completionQueue) {
 }
 
 s32 __osContGetInitData(s32 *, s32);
-void osContGetQuery(s32 controllerStatus) {
+void osContGetQuery(OSContStatus *controllerStatus) {
     s32 validControllerMask;
     __osContGetInitData(&validControllerMask, controllerStatus);
 }

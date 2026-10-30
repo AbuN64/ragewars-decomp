@@ -2,41 +2,29 @@
 #define COMMON_ALSEQUENCEPLAYER_H
 #include "COMMON/LONE/SEQUENCE_PLAYER_ASSERT_TEXT.H"
 #include "COMMON/LONE/G_AUDIOSEQPLAYERTEXT.H"
-struct ALSeq_s;
 #ifndef COMMON_SEQUENCE_PLAYER_EVENT_HELPERS_H
 #define COMMON_SEQUENCE_PLAYER_EVENT_HELPERS_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/OBJRECAT18V1.H"
-struct ALSequencePlayer {
-    ALSeqPlayer base;
-    ALSeqMarker *loopStart;
-    ALSeqMarker *loopEnd;
-    s32 loopCount;
-};
-struct ALSequenceLoopEvent {
-    ALSeqMarker *start;
-    ALSeqMarker *end;
-    s32 count;
-};
 
 
-extern void alSeqNextEvent(struct ALSeq_s *, ALEvent *);                 /* alSeqNextEvent */
+/* alSeqNextEvent */
 extern void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *, ALEvent *);           /* __handleMIDIMsg */
 #include "libultra/audio/seqp_events.h"
-extern int alSeqGetTicks(struct ALSeq_s *sequence);                             /* alSeqGetTicks */
-extern void alSeqSetLoc(struct ALSeq_s *, ALSeqMarker *);             /* alSeqSetLoc */
-extern void alEvtqPostEvent(ALEventQueue *, ALEvent *, ALMicroTime);  /* alEvtqPostEvent */
+/* alSeqGetTicks */
+/* alSeqSetLoc */
+/* alEvtqPostEvent */
                 /* __assert */
 
-static inline void postNextSeqEvent(struct ALSequencePlayer *seqp)
+static inline void postNextSeqEvent(ALSeqPlayer *seqp)
 {
     ALEvent evt;
     s32 deltaTicks;
-    struct ALSeq_s *seq = seqp->base.target;
+    struct ALSeq_s *seq = seqp->target;
 
-    if ((seqp->base.state != 1) || (seq == 0))
+    if ((seqp->state != 1) || (seq == 0))
         return;
 
     if (!__alSeqNextDelta(seq, &deltaTicks))
@@ -51,7 +39,7 @@ static inline void postNextSeqEvent(struct ALSequencePlayer *seqp)
     }
 
     evt.type = 0;   /* AL_SEQ_REF_EVT */
-    alEvtqPostEvent(&seqp->base.evtq, &evt, deltaTicks * seqp->base.uspt);
+    alEvtqPostEvent(&seqp->evtq, &evt, deltaTicks * seqp->uspt);
 }
 
 

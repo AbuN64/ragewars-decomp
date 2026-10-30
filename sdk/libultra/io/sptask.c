@@ -2,14 +2,10 @@
 #include "COMMON/ALFXPARAM.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "COMMON/HARDWARE_IO.H"
+#include <ultra64.h>
 #include "COMMON/OSPIHANDLE_S.H"
-#include "COMMON/OSTASK_T.H"
-#include "../../include/libultra/io/sprawdma.H"
-#include "../../include/libultra/io/spsetpc.h"
-#include "../../include/libultra/io/spsetstat.h"
+#include <PR/os_internal_rsp.h>
 #include "../../include/libgultra/sp.h"
-#include "../../include/OSINT/osyieldthread.H"
 
 /* _VirtualToPhysicalTask, drafted from ultralib src/io/sptask.c; this library's bcopy is the
    destination-first copy Libc_CopyBytes. */
@@ -24,7 +20,7 @@
 OSTask *_VirtualToPhysicalTask(OSTask *intp);
 
 
-extern void osWritebackDCache(OSTask *, s32);
+
 
 
 
@@ -54,7 +50,7 @@ void osSpTaskLoad(OSTask *intp) {
         block->t.ucode_data_size = block->t.yield_data_size;
         intp->t.flags &= ~1;
         if (block->t.flags & 4) {
-            block->t.ucode = (u64 *)IO_READ_WORD(((u32)intp->t.yield_data_ptr + 0xBFCU) | 0xA0000000U);
+            block->t.ucode = (u64 *)IO_READ(((u32)intp->t.yield_data_ptr + 0xBFCU) | 0xA0000000U);
         }
     }
     osWritebackDCache(block, 0x40);
@@ -73,7 +69,7 @@ void osSpTaskLoad(OSTask *intp) {
 }
 
 
-void osSpTaskStartGo(void) {
+void osSpTaskStartGo(OSTask *tp) {
     do {
     } while (__osSpDeviceBusy() != 0);
     __osSpSetStatus(0x125U);

@@ -1,8 +1,6 @@
 #ifndef COMMON_OSTHREAD_S_H
 #define COMMON_OSTHREAD_S_H
 #include "TYPES.H"
-struct OSThread_s;
-typedef struct OSThread_s OSThread_s;
 
 
 struct OSThreadContext;
@@ -50,17 +48,6 @@ struct OSThreadContext {
     u32 fpcsr;
 };
 
-struct OSThread_s;
-struct OSThread_s {
-    struct OSThread_s *next;
-    s32 priority;
-    struct OSThread_s **queue;
-    struct OSThread_s *tlnext;
-    u16 state;
-    u16 flags;
-    s32 id;
-    int fp;
-    OSThreadContext context;
-};
+
 
 #endif

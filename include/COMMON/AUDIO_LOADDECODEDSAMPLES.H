@@ -1,6 +1,6 @@
 #ifndef COMMON_AUDIO_LOADDECODEDSAMPLES_H
 #define COMMON_AUDIO_LOADDECODEDSAMPLES_H
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -12,7 +12,6 @@ extern float g_audioSampleMaximum;
 
 
 
-struct ALWaveTable_s;
 
 struct ALLoadFilter48_2;
 typedef struct ALLoadFilter48_2 ALLoadFilter48_2;
@@ -27,26 +26,12 @@ extern float g_audioTransformCosines[];
 extern float g_audioTransformSines[];
 
 
-struct ALRawLoop;
-typedef struct ALRawLoop ALRawLoop;
-
-struct ALRawLoop;
-struct ALRawLoop {
-    u32 start;
-    u32 end;
-    u32 count;
-};
 
 
-struct ALADPCMBook;
-typedef struct ALADPCMBook ALADPCMBook;
 
-struct ALADPCMBook;
-struct ALADPCMBook {
-    s32 order;
-    s32 npredictors;
-    s16 book[1];
-};
+
+
+
 
 
 struct CacheResourceBlockView;

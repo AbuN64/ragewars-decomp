@@ -9,7 +9,9 @@
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
 #include "../../../sdk/include/SCHED/sched_runeventloopus.H"
-#include "../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "ENGINE/SCENE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"

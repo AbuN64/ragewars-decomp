@@ -6,14 +6,16 @@
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "../../include/OS/controller.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "../../include/os_pif.h"
 #include "../../include/OS/__OSPACKRESETDATA.H"
 #include "../../include/OS/siaccess.H"
 
 void __osPackReadData(void);
 
-s32 osContStartReadData(s32 completionQueue) {
+s32 osContStartReadData(OSMesgQueue *completionQueue) {
     s32 result;
     u8 *p;
 
@@ -36,7 +38,7 @@ extern void __osContGetInitData(s32 *valid, s32 data);
 
 void __osPackResetData(void);
 
-void osContGetReadData(ContPad *data) {
+void osContGetReadData(OSContPad *data) {
     u8 *ptr = (u8 *)&g_controllerQueryPifBuffer;
     u8 *count = g_controllerChannelCount;
     ContReadFormat readformat;
@@ -44,8 +46,8 @@ void osContGetReadData(ContPad *data) {
 
     for (i = 0; i < *count; i++, ptr += sizeof(ContReadFormat), data++) {
         readformat = *(ContReadFormat *)ptr;
-        data->error = (readformat.rxsize & 0xC0) >> 4;
-        if (data->error != 0) {
+        data->errno = (readformat.rxsize & 0xC0) >> 4;
+        if (data->errno != 0) {
             continue;
         }
         data->button = readformat.button;
@@ -83,7 +85,7 @@ void __osPackReadData(void) {
     *ptr = 0xFE;
 }
 
-s32 osContReset(s32 queue, s32 controllerStatus) {
+s32 osContReset(OSMesgQueue *queue, OSContStatus *controllerStatus) {
     s32 output;
     s32 result;
     u8 *state;
@@ -115,7 +117,7 @@ s32 osContReset(s32 queue, s32 controllerStatus) {
 
 
 
-extern void osSetTimer(void *node, u64 initialDelay, u64 repeatInterval, void *messageQueue, void *message);
+
 
 
 void __osPackResetData(void) {
@@ -136,7 +138,7 @@ void __osPackResetData(void) {
     *commandCursor = 0xFE;
 }
 
-s32 osContInit(s32 queue, s32 *valid, s32 connectedPatternOut) {
+s32 osContInit(OSMesgQueue *queue, u8 *valid, OSContStatus *connectedPatternOut) {
     s32 node[8];
     s32 timerQueue[6];
     s32 message[2];

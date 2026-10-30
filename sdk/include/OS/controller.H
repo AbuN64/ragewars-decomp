@@ -3,6 +3,5 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
-extern void osContGetReadData(ContPad *data);
 extern void __osPackReadData();
 #endif

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/ALDELAY28.H"

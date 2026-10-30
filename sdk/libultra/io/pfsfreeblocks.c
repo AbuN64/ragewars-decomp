@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "../../include/OSCONTREQUESFORMATSHORT.H"
 #include "TYPES.H"
-#include "../../include/PFS/ospfsfreeblocks.H"
+#include <ultra64.h>
 #include "../../include/PFS/PFS_READWRITEINODE.H"
 #include "../../include/PFS/__OSCHECKID.H"
 

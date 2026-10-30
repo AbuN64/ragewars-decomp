@@ -5,19 +5,18 @@
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
 
-extern void alEvtqPostEvent(ALEventQueue *, void *, s32);
 
 
 
 
-void alSndpStop(SoundPlayerEventStateView *soundPlayer) {
+void alSndpStop(ALSndPlayer *soundPlayer) {
     s32 soundStateBase;
     Buf16 stopEvent;
 
-    soundStateBase = soundPlayer->eventTime;
+    soundStateBase = ((SoundPlayerEventStateView *)soundPlayer)->eventTime;
     stopEvent.count = 1;
-    stopEvent.value = soundStateBase + (soundPlayer->frameSampleCount * 0x30);
-    alEvtqPostEvent(&soundPlayer->events, &stopEvent, 0);
+    stopEvent.value = soundStateBase + (((SoundPlayerEventStateView *)soundPlayer)->frameSampleCount * 0x30);
+    alEvtqPostEvent(&((SoundPlayerEventStateView *)soundPlayer)->events, &stopEvent, 0);
 }
 
 #if defined(VERSION_US)

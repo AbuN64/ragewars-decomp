@@ -14,29 +14,13 @@ extern float g_compressedSecondsToTicksSignedLimit;
 
 
 
-struct ALCSeq_s;
-typedef struct ALCSeq_s ALCSeq_s;
-
-struct ALCSeqMarker;
-struct ALCSeqMarker {
-    u32 validTracks;
-    s32 lastTicks;
-    u32 lastDeltaTicks;
-    u8 *curLoc[16];
-    u8 *curBUPtr[16];
-    u8 curBULen[16];
-    u8 lastStatus[16];
-    u32 evtDeltaTicks[16];
-};
 
 
 
 
-struct ALCMidiHdr;
-struct ALCMidiHdr {
-    u32 trackOffset[16];
-    u32 division;
-};
+
+
+
 
 extern double g_compressedTicksToSecondsDivisionUnsignedBias;
 
@@ -71,8 +55,6 @@ extern double g_compressedSequenceDivisionUnsignedBias;
 
 
 
-struct ALCMidiHdr;
-typedef struct ALCMidiHdr ALCMidiHdr;
 
 
 
@@ -129,21 +111,7 @@ typedef struct CompressedSequenceAllocatedEventsView CompressedSequenceAllocated
 extern float g_compressedTicksToSecondsMicrosecondScale;
 
 
-struct ALCMidiHdr;
-struct ALCSeq_s;
-struct ALCSeq_s {
-    struct ALCMidiHdr *base;
-    u32 validTracks;
-    f32 qnpt;
-    u32 lastTicks;
-    u32 lastDeltaTicks;
-    u32 deltaFlag;
-    u8 *curLoc[16];
-    u8 *curBUPtr[16];
-    u8 curBULen[16];
-    u8 lastStatus[16];
-    u32 evtDeltaTicks[16];
-};
+
 
 
 
@@ -175,8 +143,6 @@ struct CompressedSequenceMetaEvent {
 
 extern double g_compressedSecondsToTicksTempoUnsignedBias;
 
-struct ALCSeqMarker;
-typedef struct ALCSeqMarker ALCSeqMarker;
 
 
 struct DecodeResult;

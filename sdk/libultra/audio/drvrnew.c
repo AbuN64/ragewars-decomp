@@ -22,7 +22,7 @@
 
 
         /* alFilterNew */
-extern s32 alHeapDBAlloc(s32 file, s32 line, void *hp, s32 num, s32 size);
+
 
  /* alHeapDBAlloc */
 
@@ -65,7 +65,6 @@ extern const f32 g_effectResampleDepthScale;
 
 typedef s32 (*FuncPtr)(void *);
 
-extern s32 alHeapDBAlloc(s32, s32, void *, s32, s32);
 
 
 
@@ -200,7 +199,6 @@ void alAuxBusNew(void *busFilter, s32 maxSources, s32 sources) {
     (((struct TextLayerRect *) ((s8 *) busFilter))->y) = maxSources;
 }
 
-s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
 
 void alResampleNew(ALResampler_s *resampler, s32 heap) {
     s32 result;

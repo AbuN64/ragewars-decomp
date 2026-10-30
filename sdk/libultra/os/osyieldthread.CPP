@@ -3,19 +3,20 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NODERECAT1C.H"
 #include "TYPES.H"
-#include "../../include/OSINT/osyieldthread.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 extern s32 __osProbeTLB(void);
 
-s32 osVirtualToPhysical(s32 virtualAddress) {
-    if (virtualAddress < 0 && (u32)virtualAddress <= 0x9FFFFFFFU) {
-        return virtualAddress & 0x1FFFFFFF;
+u32 osVirtualToPhysical(void *virtualAddress) {
+    if ((s32)virtualAddress < 0 && (u32)virtualAddress <= 0x9FFFFFFFU) {
+        return (u32)virtualAddress & 0x1FFFFFFF;
     }
     if ((u32)(virtualAddress + 0x60000000) > 0x1FFFFFFFU) {
         return __osProbeTLB();
     }
-    return virtualAddress & 0x1FFFFFFF;
+    return (u32)virtualAddress & 0x1FFFFFFF;
 }
 
 s32 __osEnqueueAndYield(s32 *, s32);
@@ -29,7 +30,7 @@ void osYieldThread(void)
   s8 *runningThreadBytes;
   int runnableState;
   savedInterruptMask = __osDisableInt();
-  ((OSThread_s *)(runningThreadBytes = (s8 *) __osRunningThread))->state = (runnableState = 2);
+  ((OSThread *)(runningThreadBytes = (s8 *) __osRunningThread))->state = (runnableState = 2);
   runnableQueue = &__osRunQueue;
   __osEnqueueAndYield(runnableQueue, runnableState);
   __osRestoreInt(savedInterruptMask);

@@ -2,7 +2,7 @@
 #define WORLD_STATIC_MODEL_INSTANCE_VIEWS_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/MANAGER.H"
 struct Access_s32_50 {
     char pad[0x50];

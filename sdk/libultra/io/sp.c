@@ -1,4 +1,4 @@
-#include "COMMON/OSTASK_T.H"
+#include <ultra64.h>
 #include "../../include/libgultra/sp.h"
 
 int __osSpDeviceBusy(void) {

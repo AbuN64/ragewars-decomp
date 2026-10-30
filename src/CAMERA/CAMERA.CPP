@@ -27,9 +27,9 @@
 #include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "GAME/BUILDDIRECTIONMATRIX.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/VIDEO_DIMENSIONS.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/DISPLAY.H"
 #include "COMMON/RESULTS.H"
 #include "RENDER/SETN64_ONWORLDVIEWDRAW.H"
@@ -42,7 +42,7 @@
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/AUDIO/CHANNEL.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/S1.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
@@ -732,13 +732,13 @@ f32 Region_GetPolygonHeight(void *, f32, f32);
 int Tsmos_IsFrontendActive(void);
 int Tsmos_GetModeOneFlag(void);
 
-void guPerspectiveF(float *, u16 *, float, float, float, float, float);
+
 
 f32 Gu_Sqrtf(f32);
 void Menu_UpdateDialogList(void *);
 void Sky_UpdateSceneEffects(void *scene, void *host);                  /* extern */
                /* extern */
-s32 guLookAtF(f32 *, f32, f32, f32, f32, f32, f32, f32, f32, f32); /* extern */
+ /* extern */
 
 extern s32 g_fallbackScreenMessageEmitter;
 extern s32 g_lightingBufferIndex;
@@ -1667,7 +1667,7 @@ void Camera_DrawActiveViews(Race *race, s32 world)
             racer->viewports[g_lightingBufferIndex].vscale[1] = SCREEN_HT;
             racer->viewports[g_lightingBufferIndex].vtrans[0] = SCREEN_WD;
             racer->viewports[g_lightingBufferIndex].vtrans[1] = SCREEN_HT;
-            gSPMoveMem(g_displayListCursor++, G_MV_VIEWPORT, 0, 16, ((&racer->viewports[g_lightingBufferIndex])));
+            gDma2p(g_displayListCursor++, G_MOVEMEM, ((&racer->viewports[g_lightingBufferIndex])), 16, G_MV_VIEWPORT, 0);
             gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
             gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, (u32)((g_currentRenderFrame->colorImage)));
             gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);

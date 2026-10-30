@@ -15,8 +15,9 @@
 
 
 
-void alSynStopVoice(struct AudioSynthParamSamplesView *synth, void *voice)
+void alSynStopVoice(ALSynth *s, ALVoice *voice)
 {
+    struct AudioSynthParamSamplesView *synth = (struct AudioSynthParamSamplesView *)s;
   int updateSampleTime;
   void *controlUpdate;
   void *voiceFilter;

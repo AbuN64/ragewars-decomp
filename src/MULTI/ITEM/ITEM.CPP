@@ -1,6 +1,6 @@
 #include "TYPES.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 #include "COMMON/PLAYERRECAT64E.H"
 #include "MULTI/INITIAL.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"

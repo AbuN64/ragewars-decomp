@@ -45,7 +45,6 @@ struct AudioVoiceStartView {
     u16 unityPitch;
 };
 
-extern void alSynStartVoice(void *synth, void *voice, s32 waveTable);
 
 struct AudioVoicePriorityView;
 typedef struct AudioVoicePriorityView AudioVoicePriorityView;

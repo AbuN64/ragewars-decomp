@@ -1,6 +1,8 @@
 #ifndef SCENE_RESOURCE_BINDING_AND_FADE_VIEWS_H
 #define SCENE_RESOURCE_BINDING_AND_FADE_VIEWS_H
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "COMMON/MANAGER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 struct Manager {

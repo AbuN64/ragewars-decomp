@@ -14,7 +14,6 @@
 
 
 
-extern s32 alSndpGetState(void *sound);
 
 static __inline__ void release(SlotCC *slot) {
     AudioSoundPlayerOwnerView *owner = slot->owner;

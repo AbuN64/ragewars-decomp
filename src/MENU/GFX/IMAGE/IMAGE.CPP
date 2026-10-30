@@ -5,7 +5,7 @@
 #include "MENU/GFX/IMAGE.H"
 
 extern void *ESmem_AllocateFrameHeapHigh(int);
-extern void guMtxF2L(void *, void *);
+
 extern struct Command *g_displayListCursor;
 
 void Image_EmitMatrix(void *source) {

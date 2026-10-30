@@ -6,7 +6,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OUTPUT.H"
 #include "ANIM/RAY180.H"
-#include "stddef.h"
+#include <ultra64.h>
 
 extern f32 Gu_Sqrtf(f32);
 

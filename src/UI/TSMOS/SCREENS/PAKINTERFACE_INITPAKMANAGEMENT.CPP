@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 #include "TYPES.H"
-#include <stddef.h>
+#include <ultra64.h>
 #if VERSION_US
 /* Reads the Controller Pak notes into the management list rows and shows the free pages and the pages a save takes. */
 void PAKInterface_InitPakManagement(s32 anUser) {

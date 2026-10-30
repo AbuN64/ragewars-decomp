@@ -5,7 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OUTPUT.H"
 #include "ANIM/RAY180.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/BALLISTICPARAMS.H"
 
 /* 80241170_2.CPP */

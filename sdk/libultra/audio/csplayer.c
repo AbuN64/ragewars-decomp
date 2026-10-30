@@ -18,29 +18,27 @@
 #include "../../include/libgultra/alunlink.h"
 #include "include_asm.h"
 
-extern s32 alHeapDBAlloc(s32, s32, void *, s32, s32);
 
 
-extern void alEvtqNew(void *, void *, s32);
 
-extern void alSynAddPlayer(s32, void *);
+
+
+
 
 
 void __CSPHandleMetaMsg(void *sequencePlayer, CompressedSequenceMetaEvent *metaEvent);
 
-extern void alEvtqPostEvent(ALEventQueue *, ALEvent *, s32);
 
-extern s32 alEvtqNextEvent(void *, s16 *);
 
-extern void alEvtqFlushType(void *, s16);
 
-extern void alSynStopVoice(struct AudioSynthParamSamplesView *, void *);
 
-extern void alSynFreeVoice(void *, void *);
 
-extern void alSynSetVol(void *, void *, s16, s32);
 
-extern void alSynSetPitch(void *, void *, f32);
+
+
+
+
+
 
 
 extern s16 __vsVol(ALVoiceState *, ALSeqPlayer *);
@@ -51,7 +49,7 @@ extern void __seqpReleaseVoice(void *, void *, s32);
 
 extern void __initFromBank(void *, void *);
 
-void alCSPNew(void *sequencePlayer, InitParams *config) {
+void alCSPNew(ALCSPlayer *sequencePlayer, ALSeqpConfig *config) {
     ALSeqPlayer *obj = sequencePlayer;
     InitParams *params = config;
     s32 context = params->context;
@@ -97,7 +95,7 @@ void alCSPNew(void *sequencePlayer, InitParams *config) {
     allocation = alHeapDBAlloc(0, 0, (void *)context, params->count1C, 0x1C);
     alEvtqNew(&obj->evtq, (void *)allocation, params->count1C);
     {
-        ALPlayer_s *node = &obj->node;
+        ALPlayer *node = &obj->node;
         node->next = 0;
         node->handler = &__CSPVoiceHandler_Address;
         node->clientData = node;
@@ -112,7 +110,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
 {
     ALSeqPlayer *seqp = node;
     ALEvent evt;
-    ALVoice_s *voice;
+    ALVoice *voice;
     ALMicroTime delta;
     ALVoiceState *vs;
     void *oscState;
@@ -185,7 +183,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             __CSPHandleMetaMsg(seqp, (CompressedSequenceMetaEvent *)&seqp->nextEvent);
             break;
         case 10: /* AL_SEQP_VOL_EVT */
-            seqp->vol = seqp->nextEvent.msg.spvol.type;
+            seqp->vol = seqp->nextEvent.msg.spvol.vol;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 alSynSetVol(seqp->drvr, &vs->voice, __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
                               __vsDelta(vs, seqp->curTime));
@@ -224,13 +222,13 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             }
             break;
         case 12: /* AL_SEQP_PRIORITY_EVT */
-            chan = seqp->nextEvent.msg.sppriority.available;
-            seqp->chanState[chan].priority = seqp->nextEvent.msg.sppriority.slot;
+            chan = seqp->nextEvent.msg.sppriority.chan;
+            seqp->chanState[chan].priority = seqp->nextEvent.msg.sppriority.priority;
             break;
         case 13: /* AL_SEQP_SEQ_EVT */
             if (seqp->state == 1)
                 __assert(g_compressedSequencePlayerAssertText, g_audioCsplayerText, 295);
-            seqp->target = seqp->nextEvent.msg.spseq.previous;
+            seqp->target = seqp->nextEvent.msg.spseq.seq;
             __setUsptFromTempo(seqp, 500000.0f);
             if (seqp->bank)
                 __initFromBank(seqp, seqp->bank);
@@ -238,7 +236,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
         case 14: /* AL_SEQP_BANK_EVT */
             if (seqp->state != 0)
                 __assert(g_compressedSequencePlayerAssertText, g_audioCsplayerText, 304);
-            seqp->bank = seqp->nextEvent.msg.spbank.previous;
+            seqp->bank = seqp->nextEvent.msg.spbank.bank;
             __initFromBank(seqp, seqp->bank);
             break;
         case 4: /* AL_SEQ_END_EVT */
@@ -265,32 +263,32 @@ extern void *__mapVoice(void *, u8, u8, u8);
 
 extern ALVoiceState *__lookupVoice(ALSeqPlayer *, u8, u8);
 
-extern s32 alSynAllocVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *, ALVoiceConfig_s *);
+
 
 extern s32 __vsPan(void *, void *);
 
 
 
-extern void alSynStartVoiceParams(AudioSynthVoiceAllocatorView *, ALVoice_s *, void *, f32, s16, u8, u8, s32);
 
 
 
-extern void alSynSetPan(void *, void *, u8);
 
-extern void alSynSetFXMix(void *, void *, u8);
+
+
+
 
 
 extern void __setInstChanState(void *, void *, s32);
 
 /** Dispatch the current object message and forward any resulting value. */
 void __CSPHandleNextSeqEvent(void *rawPlayer) {
-    struct ALSeqPlayer *sequencePlayer = rawPlayer;
+    ALSeqPlayer *sequencePlayer = rawPlayer;
     ALEvent message;
     ALEvent output;
     s32 value1;
     s32 value2;
     s32 value3;
-    ALCSeq_s *sequence;
+    ALCSeq *sequence;
     s32 value;
     sequence = sequencePlayer->target;
     if (sequence != 0) {
@@ -379,7 +377,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
 {
     ALSeqPlayer *seqp = object;
     ALEvent *event = (ALEvent *)message;
-    ALVoice_s *voice;
+    ALVoice *voice;
     ALVoiceState *vs;
     s32 status;
     u8 chan;
@@ -402,8 +400,8 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
     switch (status) {
     case 0x90: /* AL_MIDI_NoteOn */
         if (vel != 0) {
-            ALVoiceConfig_s config;
-            ALSound_s *sound;
+            ALVoiceConfig config;
+            ALSound *sound;
             s16 cents;
             f32 pitch, oscValue, initialOscValue;
             u8 fxmix;
@@ -424,7 +422,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             if (!vstate)
                 return;
             voice = &vstate->voice;
-            alSynAllocVoice(seqp->drvr, (ALVoice_s *)voice, &config);
+            alSynAllocVoice(seqp->drvr, (ALVoice *)voice, &config);
             vstate->sound = sound;
             vstate->envPhase = 0;
             if (seqp->chanState[chan].sustain > 63)
@@ -482,7 +480,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             pan = __vsPan(vstate, seqp);
             vol = __vsVol((ALVoiceState *)vstate, (ALSeqPlayer *)seqp);
             deltaTime = sound->envelope->attackTime;
-            alSynStartVoiceParams(seqp->drvr, (ALVoice_s *)voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
+            alSynStartVoiceParams(seqp->drvr, (ALVoice *)voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
             evt.type = 6; /* AL_SEQP_ENV_EVT */
             evt.msg.vol.voice = voice;
             evt.msg.vol.vol = sound->envelope->decayVolume;
@@ -610,7 +608,6 @@ void __CSPRepostEvent(void *eventQueue, CompressedSequenceEventNode *repostedEve
 
 
 
-extern s32 osSetIntMask(s32);
 
 void __CSPHandleMetaMsg(void *sequencePlayer, CompressedSequenceMetaEvent *metaEvent) {
     s32 padding[4];
@@ -660,10 +657,10 @@ void __CSPHandleMetaMsg(void *sequencePlayer, CompressedSequenceMetaEvent *metaE
 }
 
 void __CSPPostNextSeqEvent(void *sequencePlayer) {
-    struct ALSeqPlayer *player = sequencePlayer;
+    ALSeqPlayer *player = sequencePlayer;
     ALEvent event;
     s32 result;
-    ALCSeq_s *sequence;
+    ALCSeq *sequence;
 
     if (player->state == 1) {
         sequence = player->target;
@@ -710,7 +707,7 @@ done:
 
 void __setUsptFromTempo(void *sequencePlayer, f32 microsecondsPerQuarter) {
     ALSeqPlayer *player = sequencePlayer;
-    ALCSeq_s *targetValue;
+    ALCSeq *targetValue;
 
     targetValue = player->target;
     if (targetValue != 0) {

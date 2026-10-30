@@ -1,7 +1,7 @@
 #include "TYPES.H"
 #include "COMMON/LONE/PARTICLE_COLLISION_PROBE_RESULT.H"
 #include "COMMON/VECTOR4F.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 

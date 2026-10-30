@@ -9,7 +9,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
-#include "../../../sdk/include/MATH/GUMTXIDENTF.H"
+#include <ultra64.h>
 extern u32 g_secondaryRandomSeed;
 extern f32 g_boundedIntegrationAndEaseConstants[2];
 

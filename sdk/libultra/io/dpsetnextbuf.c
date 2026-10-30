@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/OSTHREAD_S.H"
 #include "../../include/libgultra.h"
-#include "../../include/OSINT/osyieldthread.H"
+#include <ultra64.h>
 
 
 
@@ -13,10 +13,10 @@ s32 osDpSetNextBuffer(void *bufPtr, u64 size) {
     if (__osDpDeviceBusy()) {
         return -1;
     }
-    IO_WRITE_WORD(RDP_DMA_STATUS_REG, 1);
+    IO_WRITE(RDP_DMA_STATUS_REG, 1);
     do {
-    } while (IO_READ_WORD(RDP_DMA_STATUS_REG) & 1);
-    IO_WRITE_WORD(RDP_DMA_START_REG, osVirtualToPhysical(bufPtr));
-    IO_WRITE_WORD(RDP_DMA_END_REG, osVirtualToPhysical(bufPtr) + size);
+    } while (IO_READ(RDP_DMA_STATUS_REG) & 1);
+    IO_WRITE(RDP_DMA_START_REG, osVirtualToPhysical(bufPtr));
+    IO_WRITE(RDP_DMA_END_REG, osVirtualToPhysical(bufPtr) + size);
     return 0;
 }

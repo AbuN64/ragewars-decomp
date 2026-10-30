@@ -30,12 +30,7 @@ typedef struct ALGlobalsalSndpNew ALGlobalsalSndpNew;
 
 extern int g_controllerInitialized;
 
-struct ALSndpConfig;
-struct ALSndpConfig {
-    s32 maxSounds;
-    s32 maxEvents;
-    ALHeap *heap;
-};
+
 
 struct ALSoundState;
 typedef struct ALSoundState ALSoundState;
@@ -43,8 +38,6 @@ typedef struct ALSoundState ALSoundState;
 struct ALSndPlayeralSndpNew;
 typedef struct ALSndPlayeralSndpNew ALSndPlayeralSndpNew;
 
-struct ALSndpConfig;
-typedef struct ALSndpConfig ALSndpConfig;
 
 struct ALSynthalSndpNew;
 typedef struct ALSynthalSndpNew ALSynthalSndpNew;
@@ -76,7 +69,7 @@ struct ContPad {
 
 struct ALSoundState;
 struct ALSoundState {
-    ALVoice_s voice;
+    ALVoice voice;
     void *sound;
     s16 priority;
     f32 pitch;

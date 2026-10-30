@@ -6,7 +6,6 @@
 #include "TYPES.H"
 #include "../../include/libultra/audio/synthesizer.h"
 
-s32 osSetIntMask(s32);
 
 /* alSynAllocVoice, drafted from ultralib src/audio/synallocvoice.c: initialises a virtual voice from
    its config and binds it to a physical voice; a stolen physical voice is ramped to silence and
@@ -30,7 +29,7 @@ extern s32 _allocatePVoice(AudioSynthVoiceAllocatorView *, AudioAllocatedPhysica
 
  /* _allocatePVoice */
 
-void alSynAddPlayer(void *synth, void *audioPlayer) {
+void alSynAddPlayer(ALSynth *synth, ALPlayer *audioPlayer) {
     s32 savedInterruptMask;
     savedInterruptMask = osSetIntMask(1);
     (((ALPlayer_s14 *)audioPlayer)->samplesLeft) = (s32) (((ALSynth4C *)synth)->curSamples);
@@ -41,8 +40,9 @@ void alSynAddPlayer(void *synth, void *audioPlayer) {
 
                  /* __allocParam */
 
-s32 alSynAllocVoice(AudioSynthVoiceAllocatorView *drvr, ALVoice_s *voice, ALVoiceConfig_s *vc)
+s32 alSynAllocVoice(ALSynth *synth, ALVoice *voice, ALVoiceConfig *vc)
 {
+    AudioSynthVoiceAllocatorView *drvr = (AudioSynthVoiceAllocatorView *)synth;
     AudioAllocatedPhysicalVoiceView *pvoice = 0;
     AudioVoiceChannelFilterView *f;
     AudioVoiceAllocationUpdate *update;

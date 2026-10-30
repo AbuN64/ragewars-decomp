@@ -2,8 +2,8 @@
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "TYPES.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 #include "COMMON/TRIPLE.H"
 
 /* Draw the inset viewport border with black bands and a one-pixel outline. */
@@ -40,8 +40,6 @@ void Track_DrawLetterboxBorder(s32 inset) {
     gDPFillRectangle(g_displayListCursor++, ((left + width) - (1.0f)), top, (left + width), ((top + height) - (1.0f)));
 }
 
-#include "COMMON/GFX.H"
-#include "gbi.h"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"

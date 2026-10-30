@@ -11,7 +11,9 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "libultra/os/getthreadid.h"
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 /* 80263760_6.CPP */
 extern void Rumble_FreeAllPoolNodes(s32 *);
@@ -20,9 +22,7 @@ extern void Rumble_FreeAllPoolNodes(s32 *);
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 extern unsigned int Control_StartMotorEuX(void *motorContext);
 #elif defined(VERSION_US)
-extern unsigned int osMotorStart(void *motorContext);
 #else
-extern unsigned int osMotorStart(void *motorContext);
 #endif
 #if defined(VERSION_EU)
 
@@ -115,7 +115,7 @@ extern char g_controllerSiMessageQueue;
 
 extern s32 Rumble_InitPoolNodes(void *, void *, s32);
 
-extern s32 osMotorInit(void *, void *, s32);
+
 
 #if defined(VERSION_EU)
 

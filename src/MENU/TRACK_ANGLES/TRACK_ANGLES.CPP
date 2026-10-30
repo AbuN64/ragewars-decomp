@@ -5,7 +5,7 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 
 #include "RENDER/SETN64_GETPACKSECTION.H"

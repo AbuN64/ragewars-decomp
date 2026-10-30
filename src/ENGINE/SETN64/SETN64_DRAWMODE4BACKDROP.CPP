@@ -2,8 +2,8 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/AIPROFILE.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"

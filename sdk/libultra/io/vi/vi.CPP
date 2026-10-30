@@ -1,7 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/BOOT_TV_TYPE.H"
-#include "COMMON/DEVICE_IO.H"
-#include "COMMON/HARDWARE_IO.H"
+#include <ultra64.h>
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
 #include "../../../include/AUDIO/vi.H"
@@ -34,7 +33,7 @@ void __osViInit(void)
     }
     __osViNext->state = 0x20;
     __osViNext->control = __osViNext->modep->comRegs.ctrl;
-    while (IO_READ_WORD(0xA4400010U) > 10) {
+    while (IO_READ(0xA4400010U) > 10) {
     }
     IO_WRITE(0xA4400000U, 0);
     __osViSwapContext();

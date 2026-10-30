@@ -1,9 +1,9 @@
 #include "COMMON/TEXTURE.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/RECTANGLE_DRAW.H"
 #include "COMMON/SESSIONHANDLERROW.H"
@@ -119,7 +119,7 @@ void Combine_BindImageTexture(Texture *image) {
    gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,1,g_combineBoundImage->data);
    gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
    gDPLoadSync(g_displayListCursor++);
-   _GBI_CMD(g_displayListCursor++, _SHIFTL(G_LOADBLOCK,24,8), blockWord16());
+   { Gfx *g = g_displayListCursor++; g->words.w0 = _SHIFTL(G_LOADBLOCK,24,8); g->words.w1 = blockWord16(); }
    gDPPipeSync(g_displayListCursor++);
    gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_4b,(((s16)(u16)g_combineBoundImage->stride >> 1)+7)>>3,0,0,0,2,0,0,2,0,0);
    gDPSetTileSize(g_displayListCursor++,0,0,0,(g_combineBoundImage->stride-1)*4,(g_combineBoundImage->rows-1)*4);
@@ -133,13 +133,13 @@ void Combine_BindImageTexture(Texture *image) {
    gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_8b,(g_combineBoundImage->stride+7)>>3,0,0,0,2,0,0,2,0,0);
    gDPSetTileSize(g_displayListCursor++,0,0,0,(g_combineBoundImage->stride-1)*4,(g_combineBoundImage->rows-1)*4);
    gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,1,g_combineBoundImage->data);
-   _GBI_CMD(g_displayListCursor++, _SHIFTL(G_LOADBLOCK,24,8), blockWord8());
+   { Gfx *g = g_displayListCursor++; g->words.w0 = _SHIFTL(G_LOADBLOCK,24,8); g->words.w1 = blockWord8(); }
   }
   else if(g_combineBoundImagePixelType==16) {
    gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,1,g_combineBoundImage->data);
    gDPSetTile(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
    gDPLoadSync(g_displayListCursor++);
-   _GBI_CMD(g_displayListCursor++, _SHIFTL(G_LOADBLOCK,24,8), blockWord4());
+   { Gfx *g = g_displayListCursor++; g->words.w0 = _SHIFTL(G_LOADBLOCK,24,8); g->words.w1 = blockWord4(); }
    gDPPipeSync(g_displayListCursor++);
    gDPSetTile(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,(g_combineBoundImage->stride*2+7)>>3,0,0,0,2,0,0,2,0,0);
    gDPSetTileSize(g_displayListCursor++,0,0,0,(g_combineBoundImage->stride-1)*4,(g_combineBoundImage->rows-1)*4);

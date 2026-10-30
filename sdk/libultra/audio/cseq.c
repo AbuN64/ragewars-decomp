@@ -1,5 +1,4 @@
 #include "../../include/PERIPHERAL_PORT_BYTE_VIEWS.H"
-#include "../../include/AUDIO_EVENTS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
@@ -7,10 +6,10 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "../../include/libgultra_inferred/cseq.H"
 #include "include_asm.h"
-#include "../../include/libgultra_inferred/ALCSPGETSTATE.H"
+#include <ultra64.h>
 
-s32 __readVarLen(ALCSeq_s *seq, s32 track);
-extern u32 __alCSeqGetTrackEvent(ALCSeq_s *, u32, ALEvent *);
+s32 __readVarLen(ALCSeq *seq, s32 track);
+extern u32 __alCSeqGetTrackEvent(ALCSeq *, u32, ALEvent *);
 
 /* alCSeqNewMarker, drafted from ultralib src/audio/cseq.c: fill a compressed-sequence marker
    with the track state of the first event at or after the given tick count, stepping a scratch
@@ -26,7 +25,7 @@ extern u32 __alCSeqGetTrackEvent(ALCSeq_s *, u32, ALEvent *);
  /* 4294967296.0 */
 
  /* 1.0f */
-static inline void alCSeqNewMarkerInitSequence(ALCSeq_s *seq, u8 *ptr)
+static inline void alCSeqNewMarkerInitSequence(ALCSeq *seq, u8 *ptr)
 {
     u32 i, tmpOff, flagTmp;
     f64 t;
@@ -59,7 +58,7 @@ static inline void alCSeqNewMarkerInitSequence(ALCSeq_s *seq, u8 *ptr)
     seq->qnpt = g_compressedMarkerQuarterNoteUnit / (f32)t;
 }
 
-static inline void alCSeqNewMarkerNextEvent(ALCSeq_s *seq, ALEvent *evt)
+static inline void alCSeqNewMarkerNextEvent(ALCSeq *seq, ALEvent *evt)
 {
     u32 i;
     u32 firstTime = 0xFFFFFFFF;
@@ -86,10 +85,10 @@ static inline void alCSeqNewMarkerNextEvent(ALCSeq_s *seq, ALEvent *evt)
     *deltaFlag = 1;
 }
 
-void alCSeqNewMarker(ALCSeq_s *seq, ALCSeqMarker *m, u32 ticks)
+void alCSeqNewMarker(ALCSeq *seq, ALCSeqMarker *m, u32 ticks)
 {
     ALEvent evt;
-    ALCSeq_s tempSeq;
+    ALCSeq tempSeq;
     s32 i;
     alCSeqNewMarkerInitSequence(&tempSeq, (u8 *)seq->base);
     do {
@@ -112,7 +111,7 @@ void alCSeqNewMarker(ALCSeq_s *seq, ALCSeqMarker *m, u32 ticks)
 /* __getTrackByte, drafted from ultralib src/audio/cseq.c: read the next byte of a compressed
    sequence track, following a back-up block (0xFE, offset, length) into the track's earlier data
    and counting down the back-up length while in it. */
-u8 __getTrackByte(ALCSeq_s *seq, u32 track)
+u8 __getTrackByte(ALCSeq *seq, u32 track)
 {
     u8 theByte;
     if (seq->curBULen[track]) {
@@ -147,7 +146,7 @@ u8 __getTrackByte(ALCSeq_s *seq, u32 track)
     return theByte;
 }
 
-void alCSeqNew(ALCSeq_s *state, ALCMidiHdr *base) {
+void alCSeqNew(ALCSeq *state, u8 *base) {
     f64 converted;
     s32 count;
     u32 entry;
@@ -181,7 +180,7 @@ void alCSeqNew(ALCSeq_s *state, ALCMidiHdr *base) {
     state->qnpt = g_compressedSequenceQuarterNoteUnit / (f32)converted;
 }
 
-void alCSeqNextEvent(ALCSeq_s *state, ALEvent *result) {
+void alCSeqNextEvent(ALCSeq *state, ALEvent *result) {
     u32 minimum;
     u32 index;
     u32 selected;
@@ -216,12 +215,12 @@ void alCSeqNextEvent(ALCSeq_s *state, ALEvent *result) {
     state->deltaFlag = 1;
 }
 
-int alCSeqGetTicks(void *sequenceStorage) {
+s32 alCSeqGetTicks(ALCSeq *sequenceStorage) {
     struct ALCSeq_s *sequence = sequenceStorage;
     return sequence->lastTicks;
 }
 
-f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQuarter) {
+f32 alCSeqTicksToSec(ALCSeq *sequenceHandle, s32 tickCount, s32 microsecondsPerQuarter) {
     f64 angle;
     f32 arg1f;
     f32 scaled;
@@ -233,7 +232,7 @@ f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQu
     if (microsecondsPerQuarter < 0) {
         angle += g_compressedTicksToSecondsTempoUnsignedBias;
     }
-    ticksPerQuarter = ((ObjRecAt40V1 *)((*sequenceHandle)))->value;
+    ticksPerQuarter = sequenceHandle->base->division;
     scaled = arg1f * (f32)angle;
     val = (f64)ticksPerQuarter;
     if (ticksPerQuarter < 0) {
@@ -244,7 +243,7 @@ f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQu
 
 /* Scales the float argument by the unsigned rate at offset 0x40 of the object behind sequenceHandle times a constant, divides by the unsigned third argument, and returns the quotient converted to unsigned. Adapted from alCSeqTicksToSec with the second argument changed to a float, the product and quotient reordered so the rate term multiplies and the third argument divides, and the result converted to u32 with the explicit 2^31 split. */
 
-u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuarter) {
+u32 alCSeqSecToTicks(ALCSeq *sequenceHandle, f32 seconds, s32 microsecondsPerQuarter) {
     f64 val;
     f64 div;
     f32 arg1f;
@@ -253,7 +252,7 @@ u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuar
     s32 ticksPerQuarter;
     s32 converted;
 
-    ticksPerQuarter = ((ObjRecAt40V1 *)((*sequenceHandle)))->value;
+    ticksPerQuarter = sequenceHandle->base->division;
     arg1f = seconds;
     val = (f64)ticksPerQuarter;
     if (ticksPerQuarter < 0) {
@@ -274,7 +273,7 @@ u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuar
     return converted;
 }
 
-void alCSeqSetLoc(ALCSeq_s *dst, ALCSeqMarker *src) {
+void alCSeqSetLoc(ALCSeq *dst, ALCSeqMarker *src) {
     int i;
 
     dst->validTracks = src->validTracks;
@@ -289,7 +288,7 @@ void alCSeqSetLoc(ALCSeq_s *dst, ALCSeqMarker *src) {
     }
 }
 
-void alCSeqGetLoc(ALCSeq_s *src, ALCSeqMarker *dst) {
+void alCSeqGetLoc(ALCSeq *src, ALCSeqMarker *dst) {
     s32 i;
 
     dst->validTracks = src->validTracks;
@@ -304,7 +303,7 @@ void alCSeqGetLoc(ALCSeq_s *src, ALCSeqMarker *dst) {
     }
 }
 
-s32 __alCSeqNextDelta(ALCSeq_s *seq, s32 *result) {
+s32 __alCSeqNextDelta(ALCSeq *seq, s32 *result) {
     u32 amount;
     u32 minimum;
     u32 i;
@@ -331,9 +330,9 @@ s32 __alCSeqNextDelta(ALCSeq_s *seq, s32 *result) {
     return 1;
 }
 
-u8 __getTrackByte(ALCSeq_s *seq, u32 track);
+u8 __getTrackByte(ALCSeq *seq, u32 track);
 
-s32 __readVarLen(ALCSeq_s *seq, s32 track) {
+s32 __readVarLen(ALCSeq *seq, s32 track) {
     s32 nextByte;
     s32 decodedValue;
 
@@ -349,7 +348,7 @@ s32 __readVarLen(ALCSeq_s *seq, s32 track) {
 }
 
 /** Read the object word at offset 0x2C. */
-int alCSPGetState(void *object) {
+s32 alCSPGetState(ALCSPlayer *object) {
     FrontendArchiveHandleView *record = object;
     return record->archiveHandle;
 }

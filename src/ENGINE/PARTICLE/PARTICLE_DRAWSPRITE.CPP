@@ -3,7 +3,7 @@
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "TYPES.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"

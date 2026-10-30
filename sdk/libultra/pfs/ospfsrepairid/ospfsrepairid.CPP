@@ -2,7 +2,7 @@
 #include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "TYPES.H"
 #include "../../../include/OSCONTREQUESFORMATSHORT.H"
-#include "../../../include/PFS/ospfsrepairid.H"
+#include <ultra64.h>
 #include "../../../include/PFS/__OSCHECKID.H"
 #include "../../../include/PFS/PFS_SELECTACTIVEBANK.H"
 #include "../../../include/libultra/pfs/PFS.H"

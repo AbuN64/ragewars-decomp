@@ -8,7 +8,7 @@
 #include "../../include/PFS/PFS_READWRITEINODE.H"
 #include "../../include/PFS/__OSCHECKID.H"
 #include "../../include/PFS/PFS_SELECTACTIVEBANK.H"
-#include "../../include/PFS/ospfschecker.H"
+#include <ultra64.h>
 #include "../../include/libultra/pfs/PFS_COUNTPAGEREFERENCES.H"
 #include "../../include/libultra/pfs/PFS.H"
 #include "../../include/libultra/pfs/ospfschecker.h"
@@ -32,7 +32,7 @@
 extern s32 __osPfsGetStatus(void *queue, int channel);
 extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 
-s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
+s32 osPfsInitPak(OSMesgQueue *queue, OSPfs *pfs, int channel)
 {
     int k;
     s32 ret = 0;

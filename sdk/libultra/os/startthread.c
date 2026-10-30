@@ -6,7 +6,9 @@
 #include "TYPES.H"
 #include "COMMON/VERSION_CALLS.H"
 #include "COMMON/__OSDISPATCHTHREAD.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 /* 802C0840_3.CPP */
 #if defined(VERSION_DE)
@@ -17,7 +19,7 @@ unsigned char g_StartthreadTrailingBytes[12] = { 0x10, 0x40, 0x00, 0x09, 0x00, 0
 extern ThreadNode *__osRunningThread;
 
 extern void __osEnqueueAndYield(ThreadNode **queue, ThreadNode *node);
-void osStartThread(void *thread) {
+void osStartThread(OSThread *thread) {
     ThreadNode *threadStorage = (ThreadNode *)thread;
     ThreadNode **sentinel;
     u32 token;

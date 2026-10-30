@@ -2,8 +2,8 @@
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "SCHED/SKY_POSTSCREENMESSAGE.H"
 #include "COMMON/RESIDENTSTATE.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/APPROACHLOCATION.H"
@@ -385,10 +385,10 @@ void Sky_DrawDepthSortedSceneEffects(Scene *scene, ClipView *view) {
     }
     gDPPipeSync(g_displayListCursor++);
     gSPMatrix(g_displayListCursor++, (u32)(((u32)&g_skyEffectProjectionMatrix)), G_MTX_LOAD);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 4, (u32)((2)));
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 12, (u32)((2)));
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 20, (u32)((0xFFFE)));
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 28, (u32)((0xFFFE)));
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, 4, (u32)((2)));
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, 12, (u32)((2)));
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, 20, (u32)((0xFFFE)));
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, 28, (u32)((0xFFFE)));
     gSPGeometryMode(g_displayListCursor++, G_FOG, 0);
     gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
     Geometry_SetModePreset(13);

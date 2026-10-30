@@ -79,7 +79,6 @@ extern void SoundElement_StopDialog(void);
 
 extern void SoundElement_StopAudioByMask(s32 matchingFlags);
 
-struct ALWaveTable_s;
 extern s32 alLoadParam(void *, s32, struct ALWaveTable_s *);
 extern s32 alEnvmixerParam(void *, s32, void *);
 

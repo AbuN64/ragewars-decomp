@@ -2,7 +2,7 @@
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/GAME_SESSION.H"
 #include "TYPES.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "ENGINE/SETN64.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -20,7 +20,8 @@
 #include "ENGINE/SETN64.H"
 #include "RENDER/SETN64_UPDATEFADETRANSITION.H"
 #include "../../sdk/include/AUDIO/sprintf.H"
-#include "../../sdk/include/os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "UI/X_FILES/X_PLUS.H"
 #include "OVLGAME/NOTE_RELEASERENDERBUFFERS.H"
 #include "RESMGR/TSMOS_UPDATEFRONTEND.H"
@@ -96,7 +97,6 @@ extern char addrLow_Tengine_QueryArtsendOverride[];
 extern char g_debugLinkNotificationQueue[];
 extern void Libultra_SetDebugLinkCallback(void *segment);
 #endif
-extern void osViBlack(s32 active);
 extern void Pools_ResetPlayers(void *players);
 extern void Player_ResetMenuPool(void *menu);
 extern void CCollision_Initialize(void);
@@ -225,13 +225,12 @@ void SetN64_RunGameLoop(GameSession *session) {
     }
 }
 
-#include "abi.h"
+#include <PR/abi.h>
 #include "TYPES.H"
-#include "COMMON/GFX.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 
 #include "COMMON/DISPLAY.H"
 extern UnitVp g_fullScreenViewports[];
@@ -261,38 +260,37 @@ void SetN64_BeginFrameDisplayList(void *world) {
 }
 
 /* rspboot text is 0xD0 bytes: it ends where the first graphics microcode text (g_graphicsMicrocodeText) starts. */
-extern u64 rspbootTextStart[], rspbootTextEnd[], g_graphicsMicrocodeText[], g_graphicsMicrocodeData[], g_alternateGraphicsMicrocodeText[], g_alternateGraphicsMicrocodeData[], g_graphicsTaskYieldBuffer[];
+extern u64 g_graphicsMicrocodeText[], g_graphicsMicrocodeData[], g_alternateGraphicsMicrocodeText[], g_alternateGraphicsMicrocodeData[], g_graphicsTaskYieldBuffer[];
 extern u32 g_gameFrameCounter, g_gameLoopFrameCount;
-extern void osWritebackDCacheAll(void);
-extern void Sched_SendSchedulerTask(void *, OSScTask_s *);
+extern void Sched_SendSchedulerTask(void *, OSScTask *);
 /* Fills the frame's graphics task (and the second one when the frame is dual), hands them to the scheduler,
    then advances the ring and gives the next frame the other pair of command buffers. */
 void SetN64_SubmitFrameTasks(Display *display, Frame *frame)
 {
-    OSScTask_s *task;
+    OSScTask *task;
     task = &frame->task;
     {
         s32 size, bytes;
         u64 *base;
-        task->list.data_ptr = (u64 *)frame->commands;
+        task->list.t.data_ptr = (u64 *)frame->commands;
         bytes = frame->commandBytes;
         size = g_graphicsMicrocodeTextSize;
-        task->list.type = 1;
-        task->list.ucode_boot = rspbootTextStart;
+        task->list.t.type = 1;
+        task->list.t.ucode_boot = rspbootTextStart;
         base = g_graphicsMicrocodeDataSize;
-        task->list.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)rspbootTextStart;
-        task->list.ucode_size = 0x1000;
-        task->list.ucode_data_size = 0x800;
-        task->list.yield_data_ptr = g_graphicsTaskYieldBuffer;
-        task->list.yield_data_size = 3072;
-        task->list.ucode = g_graphicsMicrocodeText;
-        task->list.ucode_data = g_graphicsMicrocodeData;
-        task->list.flags = 0;
-        task->list.dram_stack = 0;
-        task->list.dram_stack_size = 0;
-        task->list.output_buff = base;
-        task->list.output_buff_size = (u64 *)((u8 *)base + size);
-        task->list.data_size = bytes;
+        task->list.t.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)rspbootTextStart;
+        task->list.t.ucode_size = 0x1000;
+        task->list.t.ucode_data_size = 0x800;
+        task->list.t.yield_data_ptr = g_graphicsTaskYieldBuffer;
+        task->list.t.yield_data_size = 3072;
+        task->list.t.ucode = g_graphicsMicrocodeText;
+        task->list.t.ucode_data = g_graphicsMicrocodeData;
+        task->list.t.flags = 0;
+        task->list.t.dram_stack = 0;
+        task->list.t.dram_stack_size = 0;
+        task->list.t.output_buff = base;
+        task->list.t.output_buff_size = (u64 *)((u8 *)base + size);
+        task->list.t.data_size = bytes;
     }
     frame->task.next = 0;
     task->msgQ = &g_gameSchedulerMessageQueue;
@@ -303,25 +301,25 @@ void SetN64_SubmitFrameTasks(Display *display, Frame *frame)
         s32 size, bytes;
         u64 *base;
         task = &frame->secondTask;
-        task->list.data_ptr = (u64 *)frame->secondCommands;
+        task->list.t.data_ptr = (u64 *)frame->secondCommands;
         bytes = frame->secondCommandBytes;
         size = g_graphicsMicrocodeTextSize;
-        task->list.type = 1;
-        task->list.ucode_boot = rspbootTextStart;
+        task->list.t.type = 1;
+        task->list.t.ucode_boot = rspbootTextStart;
         base = g_graphicsMicrocodeDataSize;
-        task->list.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)rspbootTextStart;
-        task->list.ucode_size = 0x1000;
-        task->list.ucode_data_size = 0x800;
-        task->list.yield_data_ptr = g_graphicsTaskYieldBuffer;
-        task->list.yield_data_size = 3072;
-        task->list.ucode = g_alternateGraphicsMicrocodeText;
-        task->list.ucode_data = g_alternateGraphicsMicrocodeData;
-        task->list.flags = 0;
-        task->list.dram_stack = 0;
-        task->list.dram_stack_size = 0;
-        task->list.output_buff = base;
-        task->list.output_buff_size = (u64 *)((u8 *)base + size);
-        task->list.data_size = bytes;
+        task->list.t.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)rspbootTextStart;
+        task->list.t.ucode_size = 0x1000;
+        task->list.t.ucode_data_size = 0x800;
+        task->list.t.yield_data_ptr = g_graphicsTaskYieldBuffer;
+        task->list.t.yield_data_size = 3072;
+        task->list.t.ucode = g_alternateGraphicsMicrocodeText;
+        task->list.t.ucode_data = g_alternateGraphicsMicrocodeData;
+        task->list.t.flags = 0;
+        task->list.t.dram_stack = 0;
+        task->list.t.dram_stack_size = 0;
+        task->list.t.output_buff = base;
+        task->list.t.output_buff_size = (u64 *)((u8 *)base + size);
+        task->list.t.data_size = bytes;
         frame->secondTask.next = 0;
         task->flags = 0x23;
         task->msgQ = &g_gameSchedulerMessageQueue;

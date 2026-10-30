@@ -1,11 +1,11 @@
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/GAME_SESSION.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
-#include "COMMON/GFX.H"
-#include "abi.h"
+#include <ultra64.h>
+#include <PR/abi.h>
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/OBJRECAT20V1.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "TYPES.H"
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"

@@ -8,7 +8,9 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
 #include "AUDIO/HASHTABLE.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/CACHE/LIST.H"
@@ -100,7 +102,7 @@ ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest 
     return 0;
 }
 
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "ENGINE/CACHE/HEAP.H"
 #include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 

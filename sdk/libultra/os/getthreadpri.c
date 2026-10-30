@@ -8,8 +8,8 @@ extern void *__osRunningThread;
 
 
 /** Return field 0x4 of thread, falling back to a global record when thread is null. */
-int osGetThreadPri(void *thread) {
-    OSThread_s *p = thread;
+OSPri osGetThreadPri(OSThread *thread) {
+    OSThread *p = thread;
     if (p == 0) {
         p = __osRunningThread;
     }

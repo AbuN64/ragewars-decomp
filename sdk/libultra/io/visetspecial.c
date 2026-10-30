@@ -1,14 +1,15 @@
 #include "COMMON/BOOT_TV_TYPE.H"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
-#include "../../include/AUDIO/visetmode.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 extern StateosViSetSpecialFeatures *__osViNext;
 
-void osViSetSpecialFeatures(s32 featureCommands) {
+void osViSetSpecialFeatures(u32 featureCommands) {
     u32 token;
 
     token = __osDisableInt();

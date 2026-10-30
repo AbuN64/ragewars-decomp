@@ -15,11 +15,10 @@
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "SYSTEM/SOUND_CONTEXT_LOCK_AND_ACTIVITY.H"
 #include "ENGINE/AUDIO/AUDIOMGR.H"
-#include "MATH/aigetlen.H"
-#include "libgultra/OSWRITEBACKDCACHEALL.H"
+#include <ultra64.h>
 #include "libgultra/alunlink.h"
-#include "OSINT/osyieldthread.H"
-#include "os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 
 extern u32 g_audioWorkerElapsedTicks;
@@ -35,11 +34,11 @@ extern u32 g_audioWorkerElapsedTicks;
 extern void Sound_RetireCompletedSampleWindows(Work56EC8 *audioTask);
 
 
-extern void *alAudioFrame(void *commandList, s32 *commandCount, s32 outputBufferAddress, s16 sampleCount);
+
 
 extern void Sched_SendSchedulerTask(void *scheduler, void *task);
 
-extern void osAiSetNextBuffer(void *sampleBuffer, s32 byteCount);
+
 
 void Audiomgr_RunAudioWorker(void) {
     u32 stop, argument, frame;

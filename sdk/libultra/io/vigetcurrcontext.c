@@ -2,7 +2,9 @@
 #include "COMMON/OSVISCALE.H"
 #include "SYSTEM/VIDEO_CONTEXT_VIEWS.H"
 #include "TYPES.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 /** Returns __osViCurr. */
 extern void *__osViCurr;
@@ -13,7 +15,7 @@ void *__osViGetCurrentContext(void) {
 
 extern void *__osViNext;
 
-void osViSetEvent(s32 messageQueue, s32 retraceMessage, s16 retraceInterval) {
+void osViSetEvent(OSMesgQueue *messageQueue, OSMesg retraceMessage, u32 retraceInterval) {
     u32 savedInterruptMask;
     VideoContextEventView *rec;
 

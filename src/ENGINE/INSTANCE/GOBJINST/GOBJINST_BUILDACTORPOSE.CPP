@@ -580,7 +580,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
 }
 
 #include "COMMON/VIEWFLAGS.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 extern char s_actorModelVariantResourceTag[];
 extern Gfx *g_displayListCursor;
 typedef struct SceneModelRef {

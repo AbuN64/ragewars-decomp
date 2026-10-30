@@ -1,5 +1,5 @@
 #include "TYPES.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"

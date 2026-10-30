@@ -4,7 +4,9 @@
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "../../include/PFS/pfs_decodechannelstatus.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "../../include/os_pif.h"
 
 /* __osPfsGetStatus, drafted from ultralib src/io/pfsgetstatus.c (2.0I branch): send a status request

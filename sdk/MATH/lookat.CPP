@@ -1,15 +1,15 @@
 #include "include_asm.h"
 #include "TYPES.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"
-#include "../include/MATH/GUMTXIDENTF.H"
+#include <ultra64.h>
 #include "COMMON/ALFXPARAM.H"
 
-void guMtxF2L(f32 *floatMatrix, s32 *fixedMatrix);
-void guLookAt(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
+
+void guLookAt(Mtx *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
 {
     f32 matrix[4][4];
     f32 (*matrixPointer)[4] = matrix;

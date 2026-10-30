@@ -4,7 +4,7 @@
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "RENDER/PARTICLE_SPAWNINTERPOLATEDTRAIL.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "../../../sdk/include/libgultra_inferred/RNC_UNPACKMETHOD2.H"
 #include "../../../sdk/include/libgultra/RNC_UNPACKMETHOD1.H"
 

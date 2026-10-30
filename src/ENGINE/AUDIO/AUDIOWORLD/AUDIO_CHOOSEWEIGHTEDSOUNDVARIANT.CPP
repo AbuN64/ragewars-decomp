@@ -18,7 +18,9 @@
 #include "AUDIO/AUDIO_CHOOSEWEIGHTEDSOUNDVARIANT.H"
 #include "ENGINE/AUDIO/RAXPLAYER.H"
 #include "OS/AUDIO_STOPMUSIC.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "ENGINE/DEFS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"

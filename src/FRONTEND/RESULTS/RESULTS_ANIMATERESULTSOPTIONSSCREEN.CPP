@@ -34,7 +34,7 @@
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/OSPIHANDLE_S.H"
-#include "COMMON/OSTASK_T.H"
+#include <ultra64.h>
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/CTX.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"

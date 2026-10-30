@@ -1,7 +1,6 @@
 #include "../../include/libgultra.h"
 #include "TYPES.H"
-#include "abi.h"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -57,8 +56,6 @@ Acmd *alMainBusPull(ALMainBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffs
 /* mainbus.c */
 #if defined(VERSION_DE)
 #include "COMMON/ALAUXBUS_S.H"
-#include "abi.h"
-#include "acmd.h"
 
 Acmd *alMainBusPull(ALMainBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
     Acmd *ptr = p;

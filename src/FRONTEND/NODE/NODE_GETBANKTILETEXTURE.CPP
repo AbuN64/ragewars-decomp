@@ -59,19 +59,23 @@ typedef struct {
     char pad7[1];
 } Tile;
 typedef struct {
-    char pad0[8];
+    s32 f0;
+    s32 f4;
     s16 depth;
-    char pad0A[0x0E];
+    s16 f0A;
+    s32 f0C;
+    s32 f10;
+    s32 f14;
     s32 base;
     s32 size;
-} Image;
+} BankImage;
 typedef struct {
     s32 loaded;
     Tile tiles[96];
     u8 *offsets[96];
     TextureSlot **slotsByPass;
     s32 **listsByPass;
-    Image *image;
+    BankImage *image;
     u8 loads;
     char pad491[3];
     s32 stamp;
@@ -107,7 +111,7 @@ void *Node_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     Texture scratch;
     Texture *texture;
     Texture *into;
-    Image *image;
+    BankImage *image;
     s32 kind;
     Tile *tile;
     TextureSlot *slot;

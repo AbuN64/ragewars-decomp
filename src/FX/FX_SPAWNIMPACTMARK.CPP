@@ -106,7 +106,6 @@ extern void Textload_LocateTextureResource(s32 *resourceOutput, s32 sectionIndex
 
 extern void Particle_EncodeRenderLayer(void *actor, s32 *resource);
 
-typedef struct Image Image;
 
 extern s32 g_lightingBufferIndex;
 
@@ -268,32 +267,32 @@ void Fx_DetachEffectObject(AttachedEffectDetachState *state) {
     }
 }
 
-/* Fills a sprite descriptor from an image: its pixel data and format, its two palette or data words, its scaled width and height, and when a second image is given the texture extents from its size shifts and the derived scale and step. */
+/* Fills a GameSprite descriptor from an image: its pixel data and format, its two palette or data words, its scaled width and height, and when a second image is given the texture extents from its size shifts and the derived scale and step. */
 
-void Fx_ConfigureSpriteImage(Image *image, Image *texture, Sprite *sprite) {
+void Fx_ConfigureSpriteImage(GameImage *image, GameImage *texture, GameSprite *GameSprite) {
     f32 scale;
     s32 height;
     f32 *unit;
 
-    sprite->data = image->header->data;
-    sprite->format = image->header->format;
+    GameSprite->data = image->header->data;
+    GameSprite->format = image->header->format;
     if (image->flags & 2) {
-        sprite->primaryData = image->primaryData;
-        sprite->secondaryData = image->secondaryData;
+        GameSprite->primaryData = image->primaryData;
+        GameSprite->secondaryData = image->secondaryData;
     } else {
-        sprite->primaryData = image->primaryData;
-        sprite->secondaryData = image->primaryData;
+        GameSprite->primaryData = image->primaryData;
+        GameSprite->secondaryData = image->primaryData;
     }
     scale = *(&g_impactMarkScaleConstants + 1);
-    sprite->width = image->header->width * scale;
-    sprite->height = image->header->height * scale;
+    GameSprite->width = image->header->width * scale;
+    GameSprite->height = image->header->height * scale;
     if (texture != 0) {
-        sprite->extentX = 1 << (texture->header->widthShift + 5);
-        sprite->extentX = sprite->extentX * image->header->scale - g_spriteExtentAndUnitConstants;
+        GameSprite->extentX = 1 << (texture->header->widthShift + 5);
+        GameSprite->extentX = GameSprite->extentX * image->header->scale - g_spriteExtentAndUnitConstants;
         height = 1 << (texture->header->heightShift + 5);
         unit = &g_spriteExtentAndUnitConstants + 1;
-        sprite->step = *unit / ((f32)sprite->format - *unit);
-        sprite->extentY = height;
+        GameSprite->step = *unit / ((f32)GameSprite->format - *unit);
+        GameSprite->extentY = height;
     }
 }
 

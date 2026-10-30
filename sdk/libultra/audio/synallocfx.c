@@ -11,7 +11,7 @@ extern s32 alMainBusParam(void *bus, s32 param, s32 source);
 
 
 
-s32 alSynAllocFX(ALSynth *synth, s16 busNumber, s32 config, s32 heap) {
+ALFxRef *alSynAllocFX(ALSynth *synth, s16 busNumber, ALSynConfig *config, ALHeap *heap) {
     s32 scaled = busNumber * 0x4C;
     s32 auxiliaryBus;
 

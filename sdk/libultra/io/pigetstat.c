@@ -1,5 +1,5 @@
 #include "TYPES.H"
-#include "../../include/OSINT/pigetstatus.H"
+#include <ultra64.h>
 
 #if defined(VERSION_US_REV1)
 /** Read the PI status register at 0xA4600010. */

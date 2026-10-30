@@ -56,7 +56,7 @@ void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, SceneLightVolu
     }
 }
 
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/SHARED_GAMESLOT.H"

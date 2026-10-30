@@ -16,24 +16,7 @@ struct PVoice_s {
     ALEnvMixer4C envmixer;
     s32 offset;
 };
-struct ALSynth {
-    void *head;
-    ListLink pFreeList;
-    ListLink pAllocList;
-    ListLink pLameList;
-    s32 paramSamples;
-    s32 curSamples;
-    ALDMANew dma;
-    ALHeap *heap;
-    ALParam_s1C *paramList;
-    ALMainBus_s *mainBus;
-    ALAuxBus_s *auxBus;
-    ALFilter_s14 *outputFilter;
-    s32 numPVoices;
-    s32 maxAuxBusses;
-    s32 outputRate;
-    s32 maxOutSamples;
-};
+
 extern void*__allocParam(void);
 extern void __freeParam(void*parameterStorage);
 extern void _freePVoice(s32 synthesizer, s32 listLink);

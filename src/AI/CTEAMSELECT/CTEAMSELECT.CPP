@@ -11,14 +11,14 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/PLAYER_RECORD_AND_FRAGTAG_VIEWS.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
-#include "COMMON/GFX.H"
-#include "abi.h"
+#include <ultra64.h>
+#include <PR/abi.h>
 #include "AI/CTEAMSELECT.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"

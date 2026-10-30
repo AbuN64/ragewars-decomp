@@ -2,7 +2,7 @@
 #define COMMON_PROPGEOMETRY_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/ITEMRECAT20V1.H"

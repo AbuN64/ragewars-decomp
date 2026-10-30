@@ -1,7 +1,9 @@
 #ifndef COMMON_CARTRIDGEREADWORKER_H
 #define COMMON_CARTRIDGEREADWORKER_H
 #include "TYPES.H"
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "COMMON/PARAMSRECAT8V3.H"
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/ITEMRECAT20V1.H"

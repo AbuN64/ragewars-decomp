@@ -1,11 +1,11 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/MATH_HELPERS.H"
 #include "TYPES.H"
 #include "ENGINE/PARTICLE.H"

@@ -4,7 +4,9 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 /* 802C0390_2.CPP */
 #if defined(VERSION_DE)
@@ -14,7 +16,7 @@ unsigned char g_JammesgTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 0x00, 0x80,
 /* 802C0250.CPP */
 extern void __osEnqueueAndYield(void *threadQueue);
 
-extern OSThread_s *__osRunningThread;
+extern OSThread *__osRunningThread;
 
 s32 osJamMesg(OSMesgQueue *messageQueue, void *message, s32 waitMode) {
     u32 saved;
@@ -34,7 +36,7 @@ s32 osJamMesg(OSMesgQueue *messageQueue, void *message, s32 waitMode) {
     messageQueue->first = index;
     messageQueue->msg[index] = message;
     messageQueue->validCount++;
-    if (*messageQueue->mtqueue != 0) {
+    if (messageQueue->mtqueue->next != 0) {
         osStartThread(__osPopThread(&messageQueue->mtqueue));
     }
     __osRestoreInt(saved);

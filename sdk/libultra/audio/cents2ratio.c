@@ -41,13 +41,12 @@ f32 alCents2Ratio(s32 cents)
   return result;
 }
 
-extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
-void alCSPPlay(s32 playerAddress) {
+void alCSPPlay(ALCSPlayer *playerAddress) {
     s16 stopEvent[8];
 
     stopEvent[0] = 0xF;
-    alEvtqPostEvent(playerAddress + 0x48, stopEvent, 0);
+    alEvtqPostEvent(&playerAddress->evtq, stopEvent, 0);
 }
 
 #if defined(VERSION_US)

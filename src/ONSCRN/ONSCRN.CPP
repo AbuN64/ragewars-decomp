@@ -5,9 +5,9 @@
 #include "TYPES.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 #include "ONSCRN.H"
-#include "abi.h"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/abi.h>
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/WORLD.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"

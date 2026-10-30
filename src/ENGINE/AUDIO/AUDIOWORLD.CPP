@@ -56,7 +56,7 @@ extern s16 SoundInfo_GetFlags(void *);
 
 
 
-extern s16 alSndpAllocate(char *, s32);
+
 
 
 

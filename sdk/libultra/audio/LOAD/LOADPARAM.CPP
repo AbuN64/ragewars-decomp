@@ -1,6 +1,5 @@
 #include "COMMON/LLDIVRESULT.H"
-#include "abi.h"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/MATH_HELPERS.H"
 #include "LOAD_DECODE.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"

@@ -1,6 +1,5 @@
 #include "COMMON/ALFXPARAM.H"
-#include "abi.h"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/ALAUXBUS_S.H"
@@ -15,7 +14,6 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "../../include/libultra/debug/assert.h"
 
-extern void *alHeapDBAlloc(u8 *, s32, ALHeap *, s32, s32);
 
        /* alHeapDBAlloc */
 extern void alSaveNew(ALSave *);
@@ -27,7 +25,7 @@ extern void alAuxBusNew(ALAuxBus_s *, void *, s32);
 extern void alMainBusNew(ALMainBus_s *, void *, s32);
 
              /* alMainBusNew */
-extern void *alSynAllocFX(ALSynth *, s16, ALSynConfig *, ALHeap *);
+
 
  /* alSynAllocFX */
 extern s32 alMainBusParam(void *, s32, void *);

@@ -2,16 +2,16 @@
 #define COMMON_DISPLAY_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/GFX.H"
-#include "../../sdk/include/SCHED/SCHED.H"
+#include <ultra64.h>
+#include <PR/sched.h>
 /* One frame of the three-frame display ring, 0x140 bytes: its RSP task (and a second one when dual), the message
    the scheduler sends back when the frame is done, its color image and its display lists. */
 typedef struct Frame Frame;
 struct Frame {
     char pad0[0x14];
     CVector3 direction; /* 0x014: SetN64_SetFrameDirection */
-    OSScTask_s task; /* 0x020 */
-    OSScTask_s secondTask; /* 0x088 */
+    OSScTask task; /* 0x020 */
+    OSScTask secondTask; /* 0x088 */
     OSScMsg done; /* 0x0F0: type 2 */
     void *colorImage; /* 0x110 */
     Gfx *commands; /* 0x114 */

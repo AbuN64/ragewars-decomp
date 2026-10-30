@@ -15,8 +15,8 @@
 #include "COMMON/LONE/SCREEN_IMAGE_RESOURCES_ENABLED.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/MATH_HELPERS.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/WORLDSORTENTRY.H"

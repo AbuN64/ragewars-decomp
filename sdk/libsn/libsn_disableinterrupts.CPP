@@ -1,5 +1,5 @@
 #include "IO/EXTERNS.H"
-#include "COMMON/HARDWARE_IO.H"
+#include <ultra64.h>
 #include "COMMON/OBJ.H"
 #include "TYPES.H"
 #include "IO/libsn_disableinterrupts.H"
@@ -25,9 +25,9 @@ void Libsn_RestoreInterruptEnable(s32 savedInterruptEnable) {
 }
 
 void Libsn_WritePortWord(s32 address, s32 value) {
-    if (IO_READ_WORD(PI_STATUS_REG) & PI_STATUS_BUSY_MASK) {
+    if (IO_READ(PI_STATUS_REG) & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) {
         do {
-        } while (IO_READ_WORD(PI_STATUS_REG) & PI_STATUS_BUSY_MASK);
+        } while (IO_READ(PI_STATUS_REG) & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY));
     }
     *(s32 *)address = value;
 }

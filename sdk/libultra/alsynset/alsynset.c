@@ -16,7 +16,7 @@
 
 
 
-void alSynSetFXMix(void *synth, void *voice, s8 effectMix) {
+void alSynSetFXMix(ALSynth *synth, ALVoice *voice, u8 effectMix) {
     s32 updateSampleTime;
     s32 mixMagnitude;
     void *controlUpdate;
@@ -29,8 +29,8 @@ void alSynSetFXMix(void *synth, void *voice, s8 effectMix) {
             updateSampleTime = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
             ((AudioIntegerControlUpdate *)(controlUpdate))->type = AL_FILTER_SET_FXAMT;
             ((AudioIntegerControlUpdate *)(controlUpdate))->delta = updateSampleTime;
-            if (effectMix < 0) {
-                mixMagnitude = -effectMix;
+            if ((s8)effectMix < 0) {
+                mixMagnitude = -(s8)effectMix;
             } else {
                 mixMagnitude = (u8) effectMix;
             }
@@ -54,7 +54,7 @@ void alSynSetFXMix(void *synth, void *voice, s8 effectMix) {
 
 
 
-void alSynSetPan(void *synth, void *voice, u8 pan) {
+void alSynSetPan(ALSynth *synth, ALVoice *voice, ALPan pan) {
     s32 updateSampleTime;
     void *controlUpdate;
     void *voiceFilter;
@@ -86,7 +86,7 @@ void alSynSetPan(void *synth, void *voice, u8 pan) {
 
 
 
-void alSynSetPitch(void *synth, void *voice, f32 pitchRatio) {
+void alSynSetPitch(ALSynth *synth, ALVoice *voice, f32 pitchRatio) {
     s32 updateSampleTime;
     void *controlUpdate;
     void *voiceFilter;

@@ -1,13 +1,10 @@
 #include "COMMON/SOUNDVOICEPOOL.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/VERSION_CALLS.H"
 
 /* Advances streamed music through fade, retry, loading and playback states while updating volume. */
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
-#include "libgultra_inferred/EVENT.H"
-#include "libgultra_inferred/ALCSPGETSTATE.H"
-#include "libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "libgultra_inferred/cseq.H"
 extern s32 Defs_FindSortedValue(s32,s32,s32);
@@ -26,11 +23,11 @@ void Audio_UpdateMusicPlayback(Track *queue) {
     s32 playbackState;
     s32 i;
     s32 nextPlaybackState;
-    struct ALCMidiHdr *sequenceData;
+    ALCMidiHdr *sequenceData;
     AudioPlaybackContextView *sequenceContext;
     struct Resource *sequenceInfo;
     AudioPlaybackContextView *volumeContext;
-    struct ALCMidiHdr *selectedSequence;
+    ALCMidiHdr *selectedSequence;
     playbackState = queue->playbackState;
     switch (playbackState) { /* irregular */
     case 32:

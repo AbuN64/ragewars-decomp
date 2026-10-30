@@ -1,7 +1,7 @@
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "ENGINE/AUDIO/CHANNEL.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "TYPES.H"
 
 extern Gfx *g_displayListCursor;

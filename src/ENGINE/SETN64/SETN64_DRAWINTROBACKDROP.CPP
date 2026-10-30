@@ -4,11 +4,11 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/WORLD.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/MENURECAT24.H"
 #include "RENDER/TIMED_SESSION_TRANSITIONS.H"

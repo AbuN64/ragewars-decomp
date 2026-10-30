@@ -52,7 +52,7 @@ void __osLeoResume(void) {
             rem = v0 % v1;
             node->msg[rem] = g_piInterruptManager.f4;
             node->validCount = node->validCount + 1;
-            if (*node->mtqueue != 0) {
+            if (node->mtqueue->next != 0) {
                 __osEnqueueThread(&__osRunQueue, __osPopThread(&node->mtqueue));
             }
         }

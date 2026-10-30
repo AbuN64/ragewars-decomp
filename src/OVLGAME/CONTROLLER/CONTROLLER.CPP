@@ -12,7 +12,9 @@
 #include "COMMON/LEVEL_INPUT.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "PFS/CONTROLLER.H"
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "COMMON/PAKQUEUESTATE.H"
 #include "libultra/os/getthreadid.h"
 
@@ -28,8 +30,8 @@ extern char g_controllerSiMessageQueue[];
 extern signed char g_controllerInputReady;
 
 extern void Rumble_InitPoolNodes(char *, char *, s32);
-extern void osSetEventMesg(s32, char *, s32);
-extern void osContInit(char *, char *, char *);
+
+
 extern void Control_DisableControllerPak(s32);
 
 s16 Ovlgame_InitializeControllerSession(void) {

@@ -8,6 +8,6 @@ struct Player1680 {
     char pad0[0x5DC];
     PlayerEyePositionView *mount;
     char pad5E0[0x1640 - 0x5E0];
-    Mtx views[1];
+    CMatrix4 views[1];
 };
 #endif

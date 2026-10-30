@@ -1,7 +1,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../include/OSINT/osyieldthread.H"
+#include <ultra64.h>
 
 /* osPiRawStartDma, drafted from ultralib src/io/pirawdma.c (2.0I, where __osPiRawStartDma is osPiRawStartDma). */
 

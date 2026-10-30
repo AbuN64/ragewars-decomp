@@ -3,7 +3,7 @@
 #include "COMMON/OBJRECAT3CV2.H"
 #include "UI/X_FILES/X_MATH.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"

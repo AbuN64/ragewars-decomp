@@ -1773,7 +1773,7 @@ struct Owner {
     CQuatern orientation;
     f32 heading;
     char pad70[4];
-    struct Mtx transform;
+    struct CMatrix4 transform;
 };
 
 struct CompactOptionsPageView;

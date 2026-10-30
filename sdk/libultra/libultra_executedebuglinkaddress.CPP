@@ -1,15 +1,13 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "../include/PERIPHERAL_PORT_BYTE_VIEWS.H"
 #include "TYPES.H"
-#include "COMMON/OSSETFPCCSR.H"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "../include/libgultra.h"
 #include "TYPES.H"
-#include "../include/OSINT/pigetstatus.H"
-#include "../include/libgultra/OSSETINTMASK.h"
-#include "../include/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "../include/libgultra_inferred/LIBULTRA_WRITEDEBUGLINKBYTE.H"
 #include "../include/libgultra_inferred/libultra_executedebuglinkaddress.H"
 
@@ -375,7 +373,7 @@ int Libultra_DebugLinkAlwaysReady(void) {
 extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
 
-extern void osInvalICache(u32, u32);
+
 
 
 

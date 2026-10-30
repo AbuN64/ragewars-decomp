@@ -1,8 +1,8 @@
 #include "COMMON/OBJRECAT18V6.H"
 #include "SYSTEM/TIMED_EFFECT_AND_ITEM_MENU_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/MATH_HELPERS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "TYPES.H"
@@ -13,7 +13,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/ALFXPARAM.H"
-#include "libultra/os/initialize.h"
+#include <PR/os_internal_si.h>
 #include "RENDER/SETN64_STARTSESSIONTHREADS.H"
 #include "ITEMMENU.H"
 #include "UI/X_FILES/X_PLUS.H"

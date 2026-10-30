@@ -2,7 +2,9 @@
 #include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
 #include "IO/libsn_readportbufferwithdma.H"
 #include "include_asm.h"
-#include "../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 int Libsn_ReadPortByte(int address) {
     u32 shift = (~address & 3) << 3;
@@ -44,9 +46,9 @@ void Libsn_ReadPortBuffer(s32 source, u8 *destination, u32 count) {
 extern s32 g_staticDataRegionStart;
 extern u8 g_libsnDmaRequest[],g_libsnDmaCompletionQueue[];
 
-struct OSIoMesg;
-struct Opaque_OSMesgQueue;
-extern s32 osPiStartDma(struct OSIoMesg *,s32,s32,u32,void *,u32,struct Opaque_OSMesgQueue *);
+OSIoMesg;
+struct OSMesgQueue;
+
 void Libsn_ReadPortBufferWithDma(u32 address,u8 *out,u32 count) {
  s32 status = -(g_staticDataRegionStart == 0); u32 word;
  while(count!=0 && (address&3)!=0) { *out++=Libsn_ReadTransferPortByte(address++); count--; }

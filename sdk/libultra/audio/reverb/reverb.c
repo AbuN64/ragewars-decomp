@@ -1,7 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
-#include "abi.h"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "AUDIO/ACMD.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -11,7 +10,7 @@
 #include "TYPES.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
-#include "../../../include/OSINT/osyieldthread.H"
+#include <ultra64.h>
 #include "../../../include/libultra/debug/assert.h"
 
 /* reverb_Reverb.CPP */

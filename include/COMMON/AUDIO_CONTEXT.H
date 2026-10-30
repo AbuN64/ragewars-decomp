@@ -12,7 +12,7 @@ struct GameAudioContext {
     s32 eventCount;
     ALHeap *soundHeap;
     char pad30[0x7C - 0x30];
-    ALBank_s *font; /* +0x7C: first bank in the relocated bank file */
+    ALBank *font; /* +0x7C: first bank in the relocated bank file */
     ALBankFile *resource;
     ALSndPlayer list[1]; /* +0x84, a single SDK sound player */
     s32 soundState; /* +0xD8, separately cleared before player construction */

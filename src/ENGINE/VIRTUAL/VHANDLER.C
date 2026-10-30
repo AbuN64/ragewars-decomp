@@ -4,8 +4,9 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "libgultra/OSUNMAPTLBALL.H"
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "UI/X_FILES/X_PLUS.H"
 #include "ENGINE/VIRTUAL/VHANDLER.H"
 #include "include_asm.h"
@@ -27,9 +28,9 @@ extern char g_cartridgeReadWorker[];
 
 extern void Cartridge_ReadChunksAndWait(void *dst, void *rom, void *size, u32 extra);
 extern u32 Defs_GetMemorySize(void);
-extern void osMapTLB(s32 tlbIndex, s32 pageMask, s32 virtualAddress, u32 addr, s32 oddPhysicalAddress, s32 asid);
-extern void osCreateThread(void *queue, s32 count, void *entry, s32 arg, void *data, s32 priority);
-extern void osSetEventMesg(s32 count, void *list, s16 *message);
+
+
+
 
 static inline void fill(void *dst, u8 value, s32 n) {
     u8 *p = dst;
@@ -127,7 +128,6 @@ int Vhandler_RecycleTlbSlot(void) {
 }
 
 void Vhandler_MapResourcePage(s16 flags, ResourcePageMapping *item, s32 unused, u8 *out) {
-    extern void osMapTLB(s32, s32, s32, u32, s32, s32);
     u8 *pair;
     s32 mapped;
     s32 slot;
@@ -192,7 +192,6 @@ void Vhandler_MapResourcePage(s16 flags, ResourcePageMapping *item, s32 unused, 
 }
 
 void Vhandler_UnmapResourcePage(ResourcePageMapping *mapping) {
-    extern void osMapTLB(s32, s32, s32, u32, s32, s32);
     s32 slot;
 
     if (mapping->slot == 0xFF) {
@@ -221,10 +220,7 @@ void Vhandler_UnmapResourcePage(ResourcePageMapping *mapping) {
     mapping->slot = 0xFF;
 }
 
-u64 osGetTime(void);
 void *Virtual_FindRegionForPage(u32);
-void osWritebackDCacheAll(void);
-void osSetIntMask(s32);
 
 static __inline__ void detachPage(ResourcePageMapping *mapping) {
     if (readLink(&mapping->prev)) readLink(&mapping->prev)->next = readLink(&mapping->next);

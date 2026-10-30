@@ -1,6 +1,5 @@
 #include "COMMON/MENUSELECTIONMESSAGE.H"
-#include "abi.h"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/MEASUREDRECAT0V1.H"
 #include "COMMON/MEASURED.H"
@@ -12,7 +11,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ARGB_COLOR.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/SCREEN.H"
 #include "COMMON/SHARED_MENUREPLY.H"
@@ -41,7 +40,6 @@
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/OSPIHANDLE_S.H"
-#include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/CTX.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"

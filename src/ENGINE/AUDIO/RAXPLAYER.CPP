@@ -59,7 +59,7 @@ static inline void restart(DialogGroupPlayer *player) {
 
 /* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword alSndpAllocate returns for Audio_GetSoundPlayer's result on the stored resource and g_dialogDefaultSample_Raxplayer. Adapted from Device_RequestAndSetActiveState with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
 
-extern s16 alSndpAllocate(void *, void *);
+
 
 s32 Audio_StartDialogGroup(DialogGroupPlayer *player, s32 group, f32 scale, int unused3) {
     s32 song;

@@ -7,9 +7,10 @@
 #include "UI/X_FILES/X_PLUS.H"
 #include "include_asm.h"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "RESMGR/resmgr_string_memory.H"
-#include "../../../../sdk/include/os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 /* 802A0470.CPP */
 /* Copies n bytes between possibly overlapping buffers and returns the destination: forwards when the destination is below the source and backwards otherwise, aligning to a word boundary with single bytes when both pointers share alignment, then copying whole words and the remaining bytes. */

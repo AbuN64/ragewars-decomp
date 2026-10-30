@@ -1,10 +1,10 @@
 #include "COMMON/TEXTURE.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 #include "COMMON/ARGB_COLOR.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/TRIPLE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "MENU/IMAGE_AND_DISPLAY_COMMAND_VIEWS.H"

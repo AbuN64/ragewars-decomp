@@ -1,22 +1,21 @@
 #include "COMMON/OSPIHANDLE_S.H"
-#include "COMMON/DEVICE_IO.H"
-#include "COMMON/HARDWARE_IO.H"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "GAMECORE/EXTERNS.H"
 #include "../../include/libultra/io/epirawread.H"
 #include "../../include/libultra/debug/assert.h"
 
-extern OSPiHandle_s *g_peripheralDomainHandles[];
+extern OSPiHandle *g_peripheralDomainHandles[];
 
-s32 osEPiRawReadIo(OSPiHandle_s *piHandle, u32 deviceOffset, u32 *outputWord) {
-    OSPiHandle_s *previous;
+s32 osEPiRawReadIo(OSPiHandle *piHandle, u32 deviceOffset, u32 *outputWord) {
+    OSPiHandle *previous;
     s32 index;
 
     if (outputWord == 0) {
         __assert(&g_extendedPeripheralReadAssertText, &s_epirawreadText, 0x2B);
     }
-    while (IO_READ_WORD(PI_STATUS_REG) & 3) {
+    while (IO_READ(PI_STATUS_REG) & 3) {
     }
     index = piHandle->domain;
     previous = g_peripheralDomainHandles[index];
@@ -50,6 +49,6 @@ s32 osEPiRawReadIo(OSPiHandle_s *piHandle, u32 deviceOffset, u32 *outputWord) {
         }
         g_peripheralDomainHandles[index] = piHandle;
     }
-    *outputWord = IO_READ_WORD(piHandle->baseAddress | deviceOffset | 0xA0000000U);
+    *outputWord = IO_READ(piHandle->baseAddress | deviceOffset | 0xA0000000U);
     return 0;
 }

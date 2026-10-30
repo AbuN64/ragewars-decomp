@@ -3,8 +3,8 @@
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "MENU/OBJECT1C8.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "TYPES.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"

@@ -3,8 +3,8 @@
 #include "TYPES.H"
 #include "COMMON/TRIPLE.H"
 #include "AI/CTEAMSELECT.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 

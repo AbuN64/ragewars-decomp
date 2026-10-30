@@ -6,7 +6,7 @@
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "FRONTEND/PAK.H"
 

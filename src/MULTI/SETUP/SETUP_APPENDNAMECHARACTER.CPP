@@ -3,7 +3,7 @@
 #include "COMMON/MENURECAT20V1.H"
 #include "MULTI/SETUP_SETUPNAMESPINNER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "MULTI/SETUP_COMPAREBYTESEQUENCE.H"
 

@@ -7,7 +7,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ARGB_COLOR.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/__OSDISPATCHTHREAD.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/LOADOUT.H"
@@ -35,11 +35,10 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
-#include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/CTX.H"
-#include "COMMON/OSSETFPCCSR.H"
+#include <PR/os_internal_reg.h>
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/ENTRYRECAT0V3.H"
@@ -59,10 +58,8 @@
 #include "COMMON/BOOT_TV_TYPE.H"
 #include "../../include/libultra/io/pirawread.H"
 #include "../../include/libultra/io/si.h"
-#include "../../include/libultra/os/initialize.h"
+#include <PR/os_internal_si.h>
 #include "ENGINE/VIRTUAL/VIRTUAL_REGION_AND_PAGER_OPERATIONS.H"
-#include "../../include/libgultra/status_register_write.h"
-#include "../../include/libgultra/OS_GET_STATUS_REGISTER.h"
 #include "UI/X_FILES/X_PLUS.H"
 #include "../../include/libultra/debug/assert.h"
 

@@ -318,8 +318,6 @@ extern float g_particleRibbonSpecialActorScale;
 
 extern float g_particleQuadMatrixScale;
 
-struct Vtx;
-typedef struct Vtx Vtx;
 
 struct TexturedRibbonResourceView;
 
@@ -331,19 +329,7 @@ typedef struct TexturedRibbonStateView TexturedRibbonStateView;
 
 
 
-struct Vtx;
-struct Vtx {
-    s16 x;
-    s16 y;
-    s16 z;
-    s16 flag;
-    s16 s;
-    s16 t;
-    u8 r;
-    u8 g;
-    u8 b;
-    u8 a;
-};
+
 
 /* Shared four-vertex particle quad initialized by Match_InitParticleQuad. */
 extern Vtx g_particleQuadVertices[4];

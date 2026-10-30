@@ -12,7 +12,9 @@
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
 #include "ENGINE/CACHE/CACHE.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/CACHE/LIST.H"
 #include "COMMON/ENTRYRECAT18V3.H"
@@ -35,7 +37,7 @@ extern CMemEntry *g_resourceAllocationCandidate;
 extern s32 Heap_AllocateFromFront(void *, s32);
 extern s32 Mutex_InitializeQueueLock(OSMesgQueue *);
 extern u32 Defs_GetMemorySize(void);
-extern s32 osCreateThread(void *, s32, void *, s32, void *, s32);
+
 extern void HashTable_InitializeResourceTable(s32);
 extern s32 g_Cache_RunResourceCompletionWorkerPackedAddress24;
 extern s32 g_resourceCompletionWorkerPriority;

@@ -7,7 +7,9 @@
 #include "TYPES.H"
 #include "ENGINE/CACHE/CACHE.H"
 #include "SCENE/CACHE_ALLOCATEMEMORY.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 extern OSMesgQueue g_resourceHeapLockQueue;
 extern s32 s_allocText;

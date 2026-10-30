@@ -3,14 +3,12 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-#include "COMMON/OSSETFPCCSR.H"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "../include/libgultra.h"
 #include "TYPES.H"
-#include "../include/OSINT/pigetstatus.H"
-#include "../include/libgultra/OSSETINTMASK.h"
-#include "../include/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "../include/libgultra_inferred/libultra_exchangedebuglinkwords.H"
 
 #if defined(VERSION_US_REV1)
@@ -26,7 +24,7 @@ extern void Libultra_ReadDebugLinkHalfword(void);
 
 extern void Libultra_ReadDebugLinkWord(void);
 
-extern void osInvalICache(u32, u32);
+
 
 extern void Libultra_WriteDebugLinkHalfword(void);
 

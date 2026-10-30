@@ -2,8 +2,8 @@
 #include "COMMON/ACTORRESOURCEHEADER.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"

@@ -3,8 +3,8 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/PLAYER_RECORD_AND_FRAGTAG_VIEWS.H"
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"

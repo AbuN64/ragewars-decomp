@@ -98,7 +98,7 @@ void Menu_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, Menu
 
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJECTRECAT28.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/MATH_HELPERS.H"
 typedef struct PakModelDefinition {
     s32 kind, model, variant;

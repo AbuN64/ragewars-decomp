@@ -6,7 +6,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/PROBE.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "ENGINE/INSTANCE/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.H"

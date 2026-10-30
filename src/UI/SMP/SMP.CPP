@@ -5,13 +5,12 @@
 
 /* Copies image src into dst when they differ, then fixes dst's pixel rows through Image_SwizzleImage when a paletted image has more than 0x800 bytes of pixels or a true-color image more than 0x1000; returns zero. */
 
-typedef struct Image Image;
 
-extern s32 Frontend_GetImagePaletteByteCount(Image *image);
-extern s32 Frontend_GetImagePixelByteCount(Image *image);
-extern void Image_SwizzleImage(Image *image);
+extern s32 Frontend_GetImagePaletteByteCount(GameImage *image);
+extern s32 Frontend_GetImagePixelByteCount(GameImage *image);
+extern void Image_SwizzleImage(GameImage *image);
 
-s32 Smp_CopyAndSwizzleImage(Image *dst, Image *src) {
+s32 Smp_CopyAndSwizzleImage(GameImage *dst, GameImage *src) {
     s32 palette;
     s32 size;
     s32 fix;

@@ -1,6 +1,6 @@
 #ifndef COMMON_RUNTIME_DECLARATIONS_H
 #define COMMON_RUNTIME_DECLARATIONS_H
-#include <stddef.h>
+#include <ultra64.h>
 #include "ENGINE/SCHED.H"
 #include "COMMON/LONE/PARTICLE_PITCH_MATRIX_SCRATCH.H"
 #include "COMMON/LONE/SCREEN_MESSAGE_ALLOCATION_LABEL.H"
@@ -10,30 +10,14 @@
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
 #include "COMMON/SESSION_STATE.H"
-struct Opaque_OSMesgQueue;
-typedef struct Opaque_OSMesgQueue Opaque_OSMesgQueue;
-typedef struct OSIoMesgHdr OSIoMesgHdr;
-struct OSIoMesgHdr {
-    u16 type;
-    u8 pri;
-    u8 status;
-    Opaque_OSMesgQueue *retQueue;
-};
-typedef struct OSIoMesg OSIoMesg;
-struct OSIoMesg {
-    OSIoMesgHdr hdr;
-    void *dramAddr;
-    u32 devAddr;
-    u32 size;
-    void *piHandle;
-};
+
+
 #include "COMMON/WIDGETRECAT1A.H"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/GFX.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/LOADOUT.H"
 #include "COMMON/OWNERRECAT8V2.H"
@@ -58,7 +42,6 @@ struct OSIoMesg {
 #include "COMMON/OBJRECAT18V1.H"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/ALDELAY28.H"
-#include "COMMON/OSTASK_T.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/CTX.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
@@ -163,7 +146,7 @@ extern s32 g_controllerReturnPending;
 
 extern int g_profileRank9LocalizedTitles[];
 
-extern OSPiHandle_s *g_peripheralHandleList;
+extern OSPiHandle *g_peripheralHandleList;
 
 extern void (*g_cameraGameplayModeCallbacks[][2])(void);
 
@@ -1357,7 +1340,6 @@ extern s32 g_frontendImageFormatTable[][13];
 
 extern char g_pakOperationHeadingLabel[];
 
-extern u32 osMemSize;
 
 extern f32 k_cinemaFadeRequestValue_de;
 
@@ -1770,7 +1752,6 @@ extern s32 g_team2SelectedNotice;
 extern s32 alSaveParam_Address;
 
 
-extern unsigned char osAppNMIBuffer[];
 
 extern s32 g_textBatchCount;
 
@@ -1986,7 +1967,7 @@ extern s32 g_menuSavedAudioSelection;
 
 extern char g_actionEnterDispatchTable;
 
-extern OSPiHandle_s g_diskPeripheralHandle;
+extern OSPiHandle g_diskPeripheralHandle;
 
 extern char s_actorAnimationResourceTag;
 
@@ -2570,11 +2551,7 @@ extern char g_playerSequenceCallbacks;
 
 extern f32 k_collisionSurfaceOffsetScales[];
 
-struct ALADPCMWaveInfo;
-typedef struct ALADPCMWaveInfo ALADPCMWaveInfo;
 
-struct ALADPCMloop;
-typedef struct ALADPCMloop ALADPCMloop;
 
 
 
@@ -2585,15 +2562,12 @@ typedef struct ALDelayAudioSetEffectParameter ALDelayAudioSetEffectParameter;
 struct ALEnvMixer_s;
 typedef struct ALEnvMixer_s ALEnvMixer_s;
 
-struct ALEvent;
 
 
 struct EffectFilterState;
 typedef struct EffectFilterState EffectFilterState;
 
 
-struct ALRAWWaveInfo;
-typedef struct ALRAWWaveInfo ALRAWWaveInfo;
 
 struct ALSeqPlayer88;
 typedef struct ALSeqPlayer88 ALSeqPlayer88;
@@ -2603,14 +2577,10 @@ typedef struct ALSeqPlayer88 ALSeqPlayer88;
 union ALSndpEventhandleEvent;
 typedef union ALSndpEventhandleEvent ALSndpEventhandleEvent;
 
-struct ALSound;
-typedef struct ALSound ALSound;
 
 struct ALSoundStatehandleEvent;
 typedef struct ALSoundStatehandleEvent ALSoundStatehandleEvent;
 
-struct ALWaveTable_s;
-typedef struct ALWaveTable_s ALWaveTable_s;
 
 
 
@@ -2917,10 +2887,7 @@ typedef struct PickupGoalAvailabilityNode PickupGoalAvailabilityNode;
 
 
 
-struct OSPiHandle_s;
 
-struct OSTimer_s;
-#include "OS_TIMER.H"
 
 
 struct DirectionalAccelerationParticle;
@@ -3261,11 +3228,7 @@ typedef struct VoiceChannelUpdateVoicePan VoiceChannelUpdateVoicePan;
 union Vtx10;
 typedef union Vtx10 Vtx10;
 
-struct Vtx_t;
-typedef struct Vtx_t Vtx_t;
 
-struct Vtx_tn;
-typedef struct Vtx_tn Vtx_tn;
 
 
 struct WeaponMenuPlayer;
@@ -3350,19 +3313,8 @@ struct ToggleRowTextView;
 #include "MENU/OPTION_TEXT_TYPE.H"
 
 
-typedef short ADPCM_STATE[16];
-struct ALADPCMloop;
-struct ALADPCMloop {
-    u32 start;
-    u32 end;
-    u32 count;
-    ADPCM_STATE state;
-};
-struct ALADPCMWaveInfo;
-struct ALADPCMWaveInfo {
-    ALADPCMloop *loop;
-    ALADPCMBook *book;
-};
+
+
 struct ALDelayAudioSetEffectParameter;
 struct ALDelayAudioSetEffectParameter {
     u32 input;
@@ -3403,21 +3355,8 @@ struct ALEnvMixer_s {
 };
 struct ALDelayAudioSetEffectParameter;
 struct EffectFilterState;
-struct ALRAWWaveInfo;
-struct ALRAWWaveInfo {
-    ALRawLoop *loop;
-};
-struct ALWaveTable_s;
-struct ALWaveTable_s {
-    u8 *base;
-    s32 len;
-    u8 type;
-    u8 flags;
-    union {
-        ALADPCMWaveInfo adpcmWave;
-        ALRAWWaveInfo rawWave;
-    } waveInfo;
-};
+
+
 struct Opaque_ALSeq_s;
 typedef struct Opaque_ALSeq_s Opaque_ALSeq;
 struct ALSeqPlayer88;
@@ -3448,11 +3387,10 @@ struct ALSeqPlayer88 {
     ALSeqMarker *loopEnd;
     s32 loopCount;
 };
-struct ALSeq_s;
 struct ALSoundStatehandleEvent;
 struct ALSoundStatehandleEvent {
-    ALVoice_s voice;
-    struct ALSound *sound;
+    ALVoice voice;
+    ALSound *sound;
     s16 priority;
     f32 pitch;
     s32 state;
@@ -4120,7 +4058,6 @@ struct PickupGoalAvailabilityNode {
     u8 pad2[2];
     u8 kind;
 };
-struct OSTimer_s;
 
 struct LinkParticleApplyDirectionalAcceleration;
 struct DirectionalAccelerationParticle;
@@ -4539,7 +4476,7 @@ struct Shared_PoseActor {
     Shared_PoseModel *model;
     char pad1C[0x54];
     f32 verticalOffset;
-    Mtx mtx;
+    CMatrix4 mtx;
     s32 handle;
     u8 *boneMatrixData;
     char padBC[0xC];
@@ -4559,7 +4496,7 @@ struct Shared_PoseActor {
     Shared_PosePart part;
     Shared_PoseWorld *world;
     char pad1DC[0xB4];
-    void (*callback)(Mtx, struct Shared_PoseContext *);
+    void (*callback)(CMatrix4, struct Shared_PoseContext *);
     char pad294[0x4C];
     s32 attachmentEffectsFlag;
 };
@@ -4568,7 +4505,7 @@ struct Shared_PoseContext {
     s32 index;
     Shared_PoseActor *actor;
     s32 handle;
-    Mtx *mtx;
+    CMatrix4 *mtx;
     Shared_PosePartTable *parts;
     void *modelPack;
     s32 model;
@@ -4676,21 +4613,8 @@ struct VoicePitchChannelContext;
 struct ViewChannelUpdateVoicePitch;
 struct AudioOwnerView;
 struct VoiceChannelUpdateVoicePan;
-struct Vtx_t;
-struct Vtx_t {
-    s16 ob[3];
-    u16 flag;
-    s16 tc[2];
-    u8 cn[4];
-};
-struct Vtx_tn;
-struct Vtx_tn {
-    s16 ob[3];
-    u16 flag;
-    s16 tc[2];
-    s8 n[3];
-    u8 a;
-};
+
+
 union Vtx10;
 struct WeaponMenuView;
 struct WeaponMenuView {

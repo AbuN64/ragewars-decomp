@@ -2,9 +2,11 @@
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
-extern OSThread_s *__osRunningThread;
+extern OSThread *__osRunningThread;
 
 extern void __osEnqueueAndYield(void *queue_data);
 
@@ -24,7 +26,7 @@ s32 osSendMesg(OSMesgQueue *queue, OSMesg entry, s32 mode) {
     }
     queue->msg[(queue->first + queue->validCount) % queue->msgCount] = entry;
     queue->validCount++;
-    if (*queue->mtqueue != 0) {
+    if (queue->mtqueue->next != 0) {
         osStartThread(__osPopThread(&queue->mtqueue));
     }
     __osRestoreInt(saved);

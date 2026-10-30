@@ -2,20 +2,20 @@
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "TYPES.H"
 #include "ENGINE/GEOMETRY.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/DISPLAY.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/MEASUREDRECAT0V1.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT4V7.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "include_asm.h"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 
 /* 8026AC38_5.CPP */
 /* Draws the parts of a model resource tinted by an RGBA colour through the shared material g_tintedModelSharedMaterial: sets the tint mode g_menuModelFillEnabled to 3, clears the material's fog colour and sets its flags, records the colour as floats and its alpha on the material, advances the pass modulo 18, and when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material sets the render mode, selects blend 1, registers the resource, loads the matrix (or sets it as segment 1), sets segment 2 to the given texture base or the model's own, sets the lighting on the first part and emits each part whose material blend bits are all set and accepted for the pass, clearing the tint mode afterwards. Adapted from Geometry_DrawBlendParts with the tint setup, the render mode and blend commands and the trailing clear added. */
@@ -478,10 +478,7 @@ void Geometry_LoadRenderMicrocode(void) {
 
     cmd = g_displayListCursor++;
     gDPFullSync(cmd);
-    cmd = g_displayListCursor++;
-    gDPHalf1(cmd, (u32) &g_primaryRenderMicrocodeData);
-    cmd = g_displayListCursor++;
-    gLoadUcode(cmd, &g_primaryRenderMicrocodeText, 0x800);
+    gSPLoadUcodeEx(g_displayListCursor++, &g_primaryRenderMicrocodeText, &g_primaryRenderMicrocodeData, 0x800);
     cmd = g_displayListCursor++;
     gSPDisplayList(cmd, (u32) &g_cameraViewDisplayListFirst);
     cmd = g_displayListCursor++;
@@ -493,10 +490,7 @@ void Geometry_SwitchRenderMicrocode(void) {
 
     cmd = g_displayListCursor++;
     gDPFullSync(cmd);
-    cmd = g_displayListCursor++;
-    gDPHalf1(cmd, (u32) &g_alternateRenderMicrocodeData);
-    cmd = g_displayListCursor++;
-    gLoadUcode(cmd, &g_alternateRenderMicrocodeText, 0x800);
+    gSPLoadUcodeEx(g_displayListCursor++, &g_alternateRenderMicrocodeText, &g_alternateRenderMicrocodeData, 0x800);
     cmd = g_displayListCursor++;
     gSPDisplayList(cmd, (u32) &g_cameraViewDisplayListFirst);
     cmd = g_displayListCursor++;

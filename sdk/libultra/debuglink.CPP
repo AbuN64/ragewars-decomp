@@ -2,7 +2,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "../include/OSINT/pigetstatus.H"
+#include <ultra64.h>
 
 #if defined(VERSION_US_REV1)
 extern s8 g_debugLinkDataByte;

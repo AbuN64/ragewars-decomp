@@ -214,7 +214,7 @@ void Events_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
     }
 }
 
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 /* Published contiguous pool of damage scaling constants, read by index. */
 extern const f32 k_damageEventScaleConstants[16];

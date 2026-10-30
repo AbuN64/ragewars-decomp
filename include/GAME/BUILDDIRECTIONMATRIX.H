@@ -9,6 +9,6 @@ extern void Graphu64_CopySwappedMatrixBasis(f32 *dst, f32 *src);
 extern void Graphu64_TransposeMatrixBasis(f32 *destination, f32 *source);
 extern void Graphu64_CopyScaledMatrix(float * destination, float * source, float sx, float sy, float sz);
 extern void Graphu64_InterpolateQuaternionComponents(void *cQuatern, f32 t, void *a, void *b);
-extern void Graphu64_SwapMatrixCoordinates(struct Mtx *object);
+extern void Graphu64_SwapMatrixCoordinates(struct CMatrix4 *object);
 extern void Graphu64_CopySwappedMatrixCoordinates(f32 *dst, f32 *src);
 #endif

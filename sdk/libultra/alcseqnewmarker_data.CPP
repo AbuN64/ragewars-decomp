@@ -3,10 +3,10 @@
 #include "../include/MEASUREDRECAT18.H"
 
 extern s32 __getTrackByte(s32, s32);
-extern u32 __readVarLen(ALCSeq_s *, u32);
+extern u32 __readVarLen(ALCSeq *, u32);
 
 
-s32 __alCSeqGetTrackEvent(ALCSeq_s *state, u32 index, DecodeResult *result) {
+s32 __alCSeqGetTrackEvent(ALCSeq *state, u32 index, DecodeResult *result) {
     u8 first;
     u8 command;
     u32 first_value;

@@ -15,10 +15,6 @@ extern MemoryBoundary g_libsnDefaultMemoryRanges[];
 #define MEMORY_WRITE 2
 /* R4300 TLB fields (libultra R4300.h names). */
 #ifndef TLBLO_V
-#define TLBLO_G 0x1
-#define TLBLO_V 0x2
-#define TLBHI_PIDMASK 0xFF
-#define TLBHI_VPN2MASK 0xFFFFE000
 #define TLBPGMASK_16M 0x1FFE000
 #endif
 /* One TLB entry as Libgultra_TrwReadTlbEntry stores it (CP0 PageMask, EntryHi, EntryLo0, EntryLo1). */

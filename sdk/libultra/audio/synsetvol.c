@@ -17,7 +17,7 @@
 
 
 
-void alSynSetVol(void *synth, void *voice, s16 targetVolume, s32 rampTime) {
+void alSynSetVol(ALSynth *synth, ALVoice *voice, s16 targetVolume, ALMicroTime rampTime) {
     s32 updateSampleTime;
     void *controlUpdate;
     void *voiceFilter;

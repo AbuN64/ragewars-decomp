@@ -15,7 +15,7 @@
 #include "COMMON/ACCESS_S8_10F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELF.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/LEVEL_GOAL.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "COMMON/PLAYERPROFILES.H"

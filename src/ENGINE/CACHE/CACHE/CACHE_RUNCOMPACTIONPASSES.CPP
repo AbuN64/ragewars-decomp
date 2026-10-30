@@ -1,14 +1,15 @@
 #include "ENGINE/CACHE/CACHE.H"
 #include "include_asm.h"
 #include "TYPES.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/MANAGER.H"
 #include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
-#include "../../../../sdk/include/os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 extern OSMesgQueue g_resourceHeapLockQueue;
 extern ResourceManagerState g_resourceActivityState;

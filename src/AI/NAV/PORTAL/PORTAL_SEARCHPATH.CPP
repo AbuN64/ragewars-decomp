@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAVIGATION_GRAPH.H"
 #include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "AI/NAV/NAV_SETPICKUPGOALWEIGHTS.H"
 #include "AI/NAV/PORTAL.H"

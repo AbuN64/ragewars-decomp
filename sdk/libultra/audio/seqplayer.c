@@ -30,111 +30,108 @@
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 #include "al_globals.h"
-extern void *alHeapDBAlloc(s32, s32, void *, s32, s32);
 extern void __initChanState(void *);
-extern void alEvtqNew(void *, void *, s32);
-extern void alSynAddPlayer(void *, void *);
 
-void Seqplayer_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c) {
+void Seqplayer_CreateSequencePlayer(ALSeqPlayer *seqp, InitParams *c) {
     void *heap = c->context;
     void *drvr = g_audioGlobals;
     ALVoiceState *vs;
     ALVoiceState *voices;
     ALEventListItem *items;
     s32 i;
-    seqp->base.chanMask = 0xFF;
-    seqp->base.uspt = 0x1E8;
-    seqp->base.bank = 0;
-    seqp->base.target = 0;
-    seqp->base.nextDelta = 0;
-    seqp->base.state = 0;
-    seqp->base.vol = 0x7FFF;
-    seqp->base.drvr = drvr;
-    seqp->base.debugFlags = c->debugFlags;
-    seqp->base.frameTime = 0x3E80;
-    seqp->base.curTime = 0;
-    seqp->base.initOsc = c->value10;
-    seqp->base.updateOsc = c->value14;
-    seqp->base.stopOsc = c->value18;
+    seqp->chanMask = 0xFF;
+    seqp->uspt = 0x1E8;
+    seqp->bank = 0;
+    seqp->target = 0;
+    seqp->nextDelta = 0;
+    seqp->state = 0;
+    seqp->vol = 0x7FFF;
+    seqp->drvr = drvr;
+    seqp->debugFlags = c->debugFlags;
+    seqp->frameTime = 0x3E80;
+    seqp->curTime = 0;
+    seqp->initOsc = c->value10;
+    seqp->updateOsc = c->value14;
+    seqp->stopOsc = c->value18;
     seqp->loopStart = 0;
     seqp->loopEnd = 0;
     seqp->loopCount = 0;
-    seqp->base.nextEvent.type = 9;
-    seqp->base.maxChannels = c->kind;
-    seqp->base.chanState = alHeapDBAlloc(0, 0, heap, c->kind, sizeof(ALChanState));
+    seqp->nextEvent.type = 9;
+    seqp->maxChannels = c->kind;
+    seqp->chanState = alHeapDBAlloc(0, 0, heap, c->kind, sizeof(ALChanState));
     __initChanState(seqp);
     voices = alHeapDBAlloc(0, 0, heap, c->count38, sizeof(ALVoiceState));
-    seqp->base.vFreeList = 0;
+    seqp->vFreeList = 0;
     for (i = 0; i < c->count38; i++) {
         vs = &voices[i];
-        vs->next = seqp->base.vFreeList;
-        seqp->base.vFreeList = vs;
+        vs->next = seqp->vFreeList;
+        seqp->vFreeList = vs;
     }
-    seqp->base.vAllocHead = 0;
-    seqp->base.vAllocTail = 0;
+    seqp->vAllocHead = 0;
+    seqp->vAllocTail = 0;
     items = alHeapDBAlloc(0, 0, heap, c->count1C, sizeof(ALEventListItem));
-    alEvtqNew(&seqp->base.evtq, items, c->count1C);
-    seqp->base.node.next = 0;
-    seqp->base.node.handler = &Seqplayer_ProcessSequenceEvents_Address;
-    seqp->base.node.clientData = seqp;
+    alEvtqNew(&seqp->evtq, items, c->count1C);
+    seqp->node.next = 0;
+    seqp->node.handler = &Seqplayer_ProcessSequenceEvents_Address;
+    seqp->node.clientData = seqp;
     alSynAddPlayer(g_audioGlobals, seqp);
 }
 #endif
 
 /* 802B54A0.CPP */
 #if !(defined(VERSION_EU))
-s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
-extern void alEvtqNew(void *, void *, s32);
-extern void alSynAddPlayer(void *, void *);
 
-void alSeqpNew(SeqInitPlayer *p, ALSeqpConfig *c) {
+
+
+
+void alSeqpNew(ALSeqPlayer *p, ALSeqpConfig *c) {
     void *heap = c->heap;
     void *driver = g_audioGlobals;
-    SeqFreeVoice *voice;
+    ALVoiceState *voice;
     void *events;
     s32 i;
-    p->mask = 255;
+    p->chanMask = 255;
     p->uspt = 488;
     p->bank = 0;
     p->target = 0;
-    p->delta = 0;
+    p->nextDelta = 0;
     p->state = 0;
-    p->volume = 32767;
-    p->driver = driver;
-    p->debug = c->debug;
+    p->vol = 32767;
+    p->drvr = driver;
+    p->debugFlags = c->debugFlags;
     p->frameTime = 16000;
-    p->time = 0;
+    p->curTime = 0;
     p->initOsc = c->initOsc;
     p->updateOsc = c->updateOsc;
     p->stopOsc = c->stopOsc;
     p->loopStart = 0;
     p->loopEnd = 0;
     p->loopCount = 0;
-    p->eventType = 9;
-    p->channels = c->channels;
-    p->channelState = alHeapDBAlloc(0, 0, heap, c->channels, 16);
+    p->nextEvent.type = 9;
+    p->maxChannels = c->maxChannels;
+    p->chanState = alHeapDBAlloc(0, 0, heap, c->maxChannels, 16);
     __initChanState(p);
     {
-        SeqFreeVoice *base = alHeapDBAlloc(0, 0, heap, c->voices, 56);
-        p->freeList = 0;
+        ALVoiceState *base = alHeapDBAlloc(0, 0, heap, c->maxVoices, 56);
+        p->vFreeList = 0;
         i = 0;
-        if (c->voices > 0) {
+        if (c->maxVoices > 0) {
             voice = base;
             do {
-                voice->next = p->freeList;
-                p->freeList = voice;
+                voice->next = p->vFreeList;
+                p->vFreeList = voice;
                 i++;
                 voice++;
-            } while (i < c->voices);
+            } while (i < c->maxVoices);
         }
     }
-    p->allocHead = 0;
-    p->allocTail = 0;
-    events = alHeapDBAlloc(0, 0, heap, c->events, 28);
-    alEvtqNew(p->queue, events, c->events);
-    p->next = 0;
-    p->callback = &Seqplayer_ProcessSequenceEvents_Address;
-    p->self = p;
+    p->vAllocHead = 0;
+    p->vAllocTail = 0;
+    events = alHeapDBAlloc(0, 0, heap, c->maxEvents, 28);
+    alEvtqNew(&p->evtq, events, c->maxEvents);
+    p->node.next = 0;
+    p->node.handler = (ALVoiceHandler)&Seqplayer_ProcessSequenceEvents_Address;
+    p->node.clientData = p;
     alSynAddPlayer(g_audioGlobals, p);
 }
 #endif
@@ -146,12 +143,8 @@ void alSeqpNew(SeqInitPlayer *p, ALSeqpConfig *c) {
                    /* __setUsptFromTempo */
 extern ALMicroTime alEvtqNextEvent(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
 extern void alEvtqFlushType(ALEventQueue *, s16);                 /* alEvtqFlushType */
-extern void alSynStopVoice(struct AudioSynthParamSamplesView *, ALVoice_s *);                   /* alSynStopVoice */
-extern void alSynFreeVoice(void *, ALVoice_s *);                   /* alSynFreeVoice */
 
-extern void alSynSetPitch(void *, ALVoice_s *, f32);              /* alSynSetPitch */
         /* __vsVol */
-extern void alSynSetVol(void *, void *, s16, s32);
 extern void Seqplayer_SetTempoMicrosecondsPerTick(ALSeqPlayer *, f32);
 extern s16 __vsVol(ALVoiceState *, ALSeqPlayer *);
 extern int __vsDelta(void *, int);
@@ -161,9 +154,9 @@ extern void __initFromBank(void *, void *);
 
 ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
 {
-    struct ALSequencePlayer *seqp = node;
+    ALSeqPlayer *seqp = node;
     ALEvent evt;
-    ALVoice_s *voice;
+    ALVoice *voice;
     ALMicroTime delta;
     ALVoiceState *vs;
     void *oscState;
@@ -173,128 +166,128 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
     u8 *tremeloSlot;
 
     do {
-        switch (seqp->base.nextEvent.type) {
+        switch (seqp->nextEvent.type) {
         case 0: /* AL_SEQ_REF_EVT */
             Seqplayer_AdvanceSequenceEvent(seqp);
             break;
         case 9: /* AL_SEQP_API_EVT */
             evt.type = 9;
-            alEvtqPostEvent(&seqp->base.evtq, (ALEvent *)&evt, seqp->base.frameTime);
+            alEvtqPostEvent(&seqp->evtq, (ALEvent *)&evt, seqp->frameTime);
             break;
         case 5: /* AL_NOTE_END_EVT */
-            voice = seqp->base.nextEvent.msg.note.voice;
-            alSynStopVoice(seqp->base.drvr, voice);
-            alSynFreeVoice(seqp->base.drvr, voice);
+            voice = seqp->nextEvent.msg.note.voice;
+            alSynStopVoice(seqp->drvr, voice);
+            alSynFreeVoice(seqp->drvr, voice);
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
-                __seqpStopOsc(&seqp->base, vs);
-            Seqplayer_ReleaseSequenceVoice(&seqp->base, voice);
+                __seqpStopOsc(seqp, vs);
+            Seqplayer_ReleaseSequenceVoice(seqp, voice);
             break;
         case 6: /* AL_SEQP_ENV_EVT */
-            voice = seqp->base.nextEvent.msg.vol.voice;
+            voice = seqp->nextEvent.msg.vol.voice;
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->envPhase == 0)
                 vs->envPhase = 1;
-            delta = seqp->base.nextEvent.msg.vol.delta;
-            vs->envGain = seqp->base.nextEvent.msg.vol.vol;
-            vs->envEndTime = seqp->base.curTime + delta;
-            alSynSetVol(seqp->base.drvr, voice, __vsVol(vs, &seqp->base), delta);
+            delta = seqp->nextEvent.msg.vol.delta;
+            vs->envGain = seqp->nextEvent.msg.vol.vol;
+            vs->envEndTime = seqp->curTime + delta;
+            alSynSetVol(seqp->drvr, voice, __vsVol(vs, seqp), delta);
             break;
         case 22: /* AL_TREM_OSC_EVT */
-            vs = seqp->base.nextEvent.msg.osc.vs;
-            oscState = seqp->base.nextEvent.msg.osc.oscState;
-            delta = (*seqp->base.updateOsc)(oscState, &oscValue);
+            vs = seqp->nextEvent.msg.osc.vs;
+            oscState = seqp->nextEvent.msg.osc.oscState;
+            delta = (*seqp->updateOsc)(oscState, &oscValue);
             tremeloSlot = &vs->tremelo;
             tremelo = (u32)oscValue;
             *tremeloSlot = tremelo;
-            alSynSetVol(seqp->base.drvr, &vs->voice, __vsVol(vs, &seqp->base),
-                          __vsDelta(vs, seqp->base.curTime));
+            alSynSetVol(seqp->drvr, &vs->voice, __vsVol(vs, seqp),
+                          __vsDelta(vs, seqp->curTime));
             evt.type = 22;
             evt.msg.osc.vs = vs;
             evt.msg.osc.oscState = oscState;
-            alEvtqPostEvent(&seqp->base.evtq, &evt, delta);
+            alEvtqPostEvent(&seqp->evtq, &evt, delta);
             break;
         case 23: /* AL_VIB_OSC_EVT */
-            vs = seqp->base.nextEvent.msg.osc.vs;
-            oscState = seqp->base.nextEvent.msg.osc.oscState;
-            chan = seqp->base.nextEvent.msg.osc.chan;
-            delta = (*seqp->base.updateOsc)(oscState, &oscValue);
+            vs = seqp->nextEvent.msg.osc.vs;
+            oscState = seqp->nextEvent.msg.osc.oscState;
+            chan = seqp->nextEvent.msg.osc.chan;
+            delta = (*seqp->updateOsc)(oscState, &oscValue);
             vs->vibrato = oscValue;
-            alSynSetPitch(seqp->base.drvr, &vs->voice,
-                          vs->pitch * vs->vibrato * seqp->base.chanState[chan].pitchBend);
+            alSynSetPitch(seqp->drvr, &vs->voice,
+                          vs->pitch * vs->vibrato * seqp->chanState[chan].pitchBend);
             evt.type = 23;
             evt.msg.osc.vs = vs;
             evt.msg.osc.oscState = oscState;
             evt.msg.osc.chan = chan;
-            alEvtqPostEvent(&seqp->base.evtq, &evt, delta);
+            alEvtqPostEvent(&seqp->evtq, &evt, delta);
             break;
         case 2: /* AL_SEQP_MIDI_EVT */
-            Seqplayer_HandleSequenceMidiEvent(&seqp->base, &seqp->base.nextEvent);
+            Seqplayer_HandleSequenceMidiEvent(seqp, &seqp->nextEvent);
             break;
         case 7: /* AL_SEQP_META_EVT */
-            __handleMetaMsg(&seqp->base, &seqp->base.nextEvent);
+            __handleMetaMsg(seqp, &seqp->nextEvent);
             break;
         case 15: /* AL_SEQP_PLAY_EVT */
-            if (seqp->base.state != 1) {
-                seqp->base.state = 1;
-                __postNextSeqEvent(&seqp->base);
+            if (seqp->state != 1) {
+                seqp->state = 1;
+                __postNextSeqEvent(seqp);
             }
             break;
         case 16: /* AL_SEQP_STOP_EVT */
-            if (seqp->base.state == 2) {
-                for (vs = seqp->base.vAllocHead; vs != 0; vs = seqp->base.vAllocHead) {
-                    alSynStopVoice(seqp->base.drvr, &vs->voice);
-                    alSynFreeVoice(seqp->base.drvr, &vs->voice);
+            if (seqp->state == 2) {
+                for (vs = seqp->vAllocHead; vs != 0; vs = seqp->vAllocHead) {
+                    alSynStopVoice(seqp->drvr, &vs->voice);
+                    alSynFreeVoice(seqp->drvr, &vs->voice);
                     if (vs->flags)
-                        __seqpStopOsc(&seqp->base, vs);
-                    Seqplayer_ReleaseSequenceVoice(&seqp->base, &vs->voice);
+                        __seqpStopOsc(seqp, vs);
+                    Seqplayer_ReleaseSequenceVoice(seqp, &vs->voice);
                 }
-                seqp->base.curTime = 0;
-                seqp->base.state = 0;
+                seqp->curTime = 0;
+                seqp->state = 0;
             }
             break;
         case 17: /* AL_SEQP_STOPPING_EVT */
-            if (seqp->base.state == 1) {
-                alEvtqFlushType(&seqp->base.evtq, 0);
-                alEvtqFlushType(&seqp->base.evtq, 2);
-                for (vs = seqp->base.vAllocHead; vs != 0; vs = vs->next) {
-                    if ((u8)__voiceNeedsNoteKill(&seqp->base, &vs->voice, 50000))
-                        __seqpReleaseVoice(&seqp->base, &vs->voice, 50000);
+            if (seqp->state == 1) {
+                alEvtqFlushType(&seqp->evtq, 0);
+                alEvtqFlushType(&seqp->evtq, 2);
+                for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
+                    if ((u8)__voiceNeedsNoteKill(seqp, &vs->voice, 50000))
+                        __seqpReleaseVoice(seqp, &vs->voice, 50000);
                 }
-                seqp->base.state = 2;
+                seqp->state = 2;
                 evt.type = 16;
-                alEvtqPostEvent(&seqp->base.evtq, &evt, 0x7fffffff);
+                alEvtqPostEvent(&seqp->evtq, &evt, 0x7fffffff);
             }
             break;
         case 10: /* AL_SEQP_VOL_EVT */
-            seqp->base.vol = seqp->base.nextEvent.msg.spvol.type;
-            for (vs = seqp->base.vAllocHead; vs != 0; vs = vs->next) {
-                alSynSetVol(seqp->base.drvr, &vs->voice, __vsVol(vs, &seqp->base),
-                              __vsDelta(vs, seqp->base.curTime));
+            seqp->vol = seqp->nextEvent.msg.spvol.vol;
+            for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
+                alSynSetVol(seqp->drvr, &vs->voice, __vsVol(vs, seqp),
+                              __vsDelta(vs, seqp->curTime));
             }
             break;
         case 11: /* AL_SEQP_LOOP_EVT */
-            seqp->loopStart = ((struct ALSequenceLoopEvent *)&seqp->base.nextEvent.msg)->start;
-            seqp->loopEnd = ((struct ALSequenceLoopEvent *)&seqp->base.nextEvent.msg)->end;
-            seqp->loopCount = ((struct ALSequenceLoopEvent *)&seqp->base.nextEvent.msg)->count;
+            seqp->loopStart = seqp->nextEvent.msg.loop.start;
+            seqp->loopEnd = seqp->nextEvent.msg.loop.end;
+            seqp->loopCount = seqp->nextEvent.msg.loop.count;
             break;
         case 12: /* AL_SEQP_PRIORITY_EVT */
-            chan = seqp->base.nextEvent.msg.sppriority.available;
-            seqp->base.chanState[chan].priority = seqp->base.nextEvent.msg.sppriority.slot;
+            chan = seqp->nextEvent.msg.sppriority.chan;
+            seqp->chanState[chan].priority = seqp->nextEvent.msg.sppriority.priority;
             break;
         case 13: /* AL_SEQP_SEQ_EVT */
-            if (seqp->base.state == 1)
+            if (seqp->state == 1)
                 __assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 296);
-            seqp->base.target = seqp->base.nextEvent.msg.spseq.previous;
-            Seqplayer_SetTempoMicrosecondsPerTick(&seqp->base, 500000.0f);
-            if (seqp->base.bank)
-                __initFromBank(&seqp->base, seqp->base.bank);
+            seqp->target = seqp->nextEvent.msg.spseq.seq;
+            Seqplayer_SetTempoMicrosecondsPerTick(seqp, 500000.0f);
+            if (seqp->bank)
+                __initFromBank(seqp, seqp->bank);
             break;
         case 14: /* AL_SEQP_BANK_EVT */
-            if (seqp->base.state != 0)
+            if (seqp->state != 0)
                 __assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 305);
-            seqp->base.bank = seqp->base.nextEvent.msg.spbank.previous;
-            __initFromBank(&seqp->base, seqp->base.bank);
+            seqp->bank = seqp->nextEvent.msg.spbank.bank;
+            __initFromBank(seqp, seqp->bank);
             break;
         case 4: /* AL_SEQ_END_EVT */
         case 3: /* AL_TEMPO_EVT */
@@ -302,10 +295,10 @@ ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
             __assert(g_sequencePlayerAssertText, g_audioSeqplayerText, 315);
             break;
         }
-        seqp->base.nextDelta = alEvtqNextEvent(&seqp->base.evtq, &seqp->base.nextEvent);
-    } while (seqp->base.nextDelta == 0);
-    seqp->base.curTime += seqp->base.nextDelta;
-    return seqp->base.nextDelta;
+        seqp->nextDelta = alEvtqNextEvent(&seqp->evtq, &seqp->nextEvent);
+    } while (seqp->nextDelta == 0);
+    seqp->curTime += seqp->nextDelta;
+    return seqp->nextDelta;
 }
 
 /* seqplayer_3.c */
@@ -330,7 +323,7 @@ extern void *__lookupSoundQuick(void *, s32, s32, s32);
  /* __mapVoice */
 
  /* __lookupVoice */
-extern s32 alSynAllocVoice(void *, ALVoice_s *, ALVoiceConfig_s *);
+
 
  /* alSynAllocVoice */
                                    /* alCents2Ratio */
@@ -341,7 +334,7 @@ extern s32 __vsPan(void *, void *);
  /* __vsVol */
 
  /* __vsDelta */
-extern void alSynStartVoiceParams(void *, ALVoice_s *, void *, f32, s16, u8, u8, ALMicroTime);
+
 
  /* alSynStartVoiceParams */
 
@@ -350,10 +343,10 @@ extern void alSynStartVoiceParams(void *, ALVoice_s *, void *, f32, s16, u8, u8,
  /* __seqpReleaseVoice */
 
  /* alSynSetVol */
-extern void alSynSetPan(void *, ALVoice_s *, u8);
+
 
  /* alSynSetPan */
-extern void alSynSetFXMix(void *, ALVoice_s *, u8);
+
 
  /* alSynSetFXMix */
 
@@ -362,30 +355,30 @@ extern void __setInstChanState(void *, void *, s32);
 
  /* __setInstChanState */
 
-void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
+void Seqplayer_AdvanceSequenceEvent(ALSeqPlayer *seqp)
 {
     ALEvent evt;
 
-    if (seqp->base.target == 0)
+    if (seqp->target == 0)
         return;
 
-    alSeqNextEvent(seqp->base.target, &evt);
+    alSeqNextEvent(seqp->target, &evt);
 
     switch (evt.type) {
     case 1:     /* AL_SEQ_MIDI_EVT */
-        Seqplayer_HandleSequenceMidiEvent(&seqp->base, &evt);
+        Seqplayer_HandleSequenceMidiEvent(seqp, &evt);
         postNextSeqEvent(seqp);
         break;
 
     case 3:     /* AL_TEMPO_EVT */
-        __handleMetaMsg(&seqp->base, &evt);
+        __handleMetaMsg(seqp, &evt);
         postNextSeqEvent(seqp);
         break;
 
     case 4:     /* AL_SEQ_END_EVT */
-        seqp->base.state = 2;
+        seqp->state = 2;
         evt.type = 16;  /* AL_SEQP_STOP_EVT */
-        alEvtqPostEvent(&seqp->base.evtq, &evt, 0x7fffffff);
+        alEvtqPostEvent(&seqp->evtq, &evt, 0x7fffffff);
         break;
 
     default:
@@ -396,7 +389,7 @@ void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
  /* __assert */
 void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
 {
-    ALVoice_s *voice;
+    ALVoice *voice;
     ALVoiceState *vs;
     s32 status;
     u8 chan;
@@ -419,8 +412,8 @@ void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
     switch (status) {
     case 0x90: /* AL_MIDI_NoteOn */
         if (vel != 0) {
-            ALVoiceConfig_s config;
-            ALSound_s *sound;
+            ALVoiceConfig config;
+            ALSound *sound;
             s16 cents;
             f32 pitch, oscValue;
             u8 fxmix;
@@ -735,7 +728,7 @@ void *__lookupSoundQuick(void *seqPlayer, s32 noteKey, s32 noteVelocity, s32 cha
     u8 x;
     u8 y;
     ALInstrument *table;
-    ALSound_s *entry;
+    ALSound *entry;
     u8 *bounds;
 
     table = ((ALSeqPlayer *)seqPlayer)->chanState[channelNumber & 0xFF].instrument;
@@ -788,7 +781,7 @@ s16 __vsVol(ALVoiceState *vs, ALSeqPlayer *seqp)
 
 /** Clamp (record - currentTime) at a lower bound of 0x3E8 for negative results. */
 int __vsDelta(void *voiceObject, int currentTime) {
-    struct ALVoiceState *voice = voiceObject;
+    ALVoiceState *voice = voiceObject;
     int v = voice->envEndTime - currentTime;
     if (v >= 0) {
         return v;
@@ -809,7 +802,7 @@ s32 __vsPan(void *voiceObject, void *playerObject) {
 
 void __initFromBank(void *seqPlayer, void *instrumentBank) {
     s32 i;
-    ALBank_s *p;
+    ALBank *p;
     void *found;
 
     p = instrumentBank;
@@ -826,9 +819,9 @@ void __initFromBank(void *seqPlayer, void *instrumentBank) {
             i += 1;
         } while (i < ((ALSeqPlayer *)seqPlayer)->maxChannels);
     }
-    if (((ALBank_s *)instrumentBank)->percussion != 0) {
+    if (((ALBank *)instrumentBank)->percussion != 0) {
         __resetPerfChanState(seqPlayer, i);
-        __setInstChanState(seqPlayer, ((ALBank_s *)instrumentBank)->percussion, 9);
+        __setInstChanState(seqPlayer, ((ALBank *)instrumentBank)->percussion, 9);
     }
 }
 
@@ -877,15 +870,13 @@ void __resetPerfChanState(void *playerObject, s32 index) {
 }
 
 /* seqplayer.c */
-extern void alSynSetPriority(void *unused, void *object, s16 value);
 
-extern void alSynSetVol(void *synth, void *voice, s16 targetVolume, s32 rampTime);
 
 
 
 /* Voice events serialize the voice pointer in the first four payload bytes. */
-static inline ALVoice_s *event_voice(ALEvent *event) {
-    return (ALVoice_s *)event->msg.note.voice;
+static inline ALVoice *event_voice(ALEvent *event) {
+    return (ALVoice *)event->msg.note.voice;
 }
 
 
@@ -912,7 +903,7 @@ void __seqpReleaseVoice(void *seqPlayer, void *releasedVoice, s32 releaseDuratio
     s32 type6;
     SeqplayerVoiceEvent entry;
 
-    object = ((ALVoice_s *)releasedVoice)->clientPrivate;
+    object = ((ALVoice *)releasedVoice)->clientPrivate;
     if (object->envPhase == 0) {
         cur = (ALEventListItem *)((ALSeqPlayer *)seqPlayer)->evtq.allocList.next;
         if (cur != 0) {
@@ -1017,7 +1008,7 @@ void __handleMetaMsg(ALSeqPlayer *player, ALEvent *metaEvent) {
 
 /* seqplayer.c */
 void Seqplayer_SetTempoMicrosecondsPerTick(ALSeqPlayer *player, f32 tempo) {
-    ALSeq_s *sequence;
+    ALSeq *sequence;
 
     sequence = player->target;
     if (sequence != 0) {

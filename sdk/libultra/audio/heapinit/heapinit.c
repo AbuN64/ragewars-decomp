@@ -4,7 +4,7 @@
 #include "TYPES.H"
 
 #if !(defined(VERSION_EU))
-void alHeapInit(void *heap, u8 *base, s32 byteLength) {
+void alHeapInit(ALHeap *heap, u8 *base, s32 byteLength) {
     s32 alignmentOffset;
     alignmentOffset = 0x10 - ((s32) base & 0xF);
     if (alignmentOffset != 0x10) {

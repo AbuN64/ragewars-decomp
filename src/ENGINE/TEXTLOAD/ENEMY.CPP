@@ -1,5 +1,5 @@
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 
 
 /* k_enemyTextBytes_Enemy.CPP */

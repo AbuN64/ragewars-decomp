@@ -5,9 +5,7 @@
 #include "TYPES.H"
 
 /* Sound-player calls shared by the audio units: stop a playing sound, and release one sample of it. */
-extern void alSndpStop(void *sound);
 
-extern void alSndpSetSound(void *sound, s16 sample);
 
 extern void Audio_StopDialogPlayer(void *dialogPlayer);
 extern s32 Audio_ChooseSequenceVariant(void **sequenceTable, s16 id, s16 avoid);

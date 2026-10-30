@@ -1,10 +1,10 @@
 #include "include_asm.h"
 #include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"

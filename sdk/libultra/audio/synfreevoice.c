@@ -16,7 +16,7 @@
 
 
 
-void alSynFreeVoice(void *synth, void *voice) {
+void alSynFreeVoice(ALSynth *synth, ALVoice *voice) {
     void *controlUpdate;
     void *voiceFilter;
     SharedRecV8 fn;

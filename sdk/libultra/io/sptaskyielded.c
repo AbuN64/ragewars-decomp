@@ -1,20 +1,19 @@
 #include "include_asm.h"
 #include "COMMON/AIPROFILE.H"
-#include "../../include/libultra/io/sptaskyielded.h"
-#include "../../include/libultra/io/spgetstat.h"
+#include <ultra64.h>
+#include <PR/os_internal_rsp.h>
 
 
-s32 osSpTaskYielded(void *taskState)
+OSYieldResult osSpTaskYielded(OSTask *tp)
 {
     s32 selected_bit;
     u32 status;
-    ResourceKeyView *state = taskState;
 
     status = __osSpGetStatus();
     selected_bit = status >> 8;
     selected_bit = selected_bit & 1;
     if (status & 0x80) {
-        state->key = (state->key | selected_bit) & ~2;
+        tp->t.flags = (tp->t.flags | selected_bit) & ~2;
     }
     return selected_bit;
 }

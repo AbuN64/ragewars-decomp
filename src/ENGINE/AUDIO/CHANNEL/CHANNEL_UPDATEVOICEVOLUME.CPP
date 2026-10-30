@@ -15,10 +15,10 @@
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/SHAREDRECV4.H"
 #include "COMMON/TRIPLE.H"
-#include "stddef.h"
+#include <ultra64.h>
 int Cinema_IsSequenceActive(void);
 f32 Graphu64_ApproachValue(f32 current, f32 target, f32 rate);
-void alSndpSetVol(void *soundPlayer, s16 eventVolume);
+
 /* Spatial mix and runtime envelope controls embedded in a sound voice. */
 #include "ENGINE/AUDIO/CHANNEL.H"
 
@@ -189,7 +189,7 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
 extern s32 Audio_GetSpatialPanMode(AudioOwnerView *);
 extern s16 Channel_ComputeListenerRelativePan(void *, GameplayCamera *);
 
-extern void alSndpSetPan(void *, s32);
+
 
 static inline void apply_pan(VoiceChannelUpdateVoicePan *voice, u8 pan) {
     AudioOwnerView *owner = voice->owner;

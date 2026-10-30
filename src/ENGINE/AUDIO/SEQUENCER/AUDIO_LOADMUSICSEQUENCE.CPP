@@ -14,9 +14,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../../../sdk/include/libgultra_inferred/ALCSPSETCHLFXMIX.H"
-#include "stddef.h"
-#include "stddef.h"
+#include <ultra64.h>
 #include "RENDER/SETN64_GETPACKSECTION.H"
 extern s32 Defs_FindSortedValue(s32, s32, s32);
 #include "COMMON.H"
@@ -25,8 +23,8 @@ extern f32 g_musicSequenceFallbackDuration;
 s32 Audio_LoadMusicSequence(Track *state, s32 index) {
     s32 selection;
 
-    struct ALCMidiHdr *result;
-    struct ALCMidiHdr *selected;
+    ALCMidiHdr *result;
+    ALCMidiHdr *selected;
     Resource *command;
     f32 duration;
     selection = Defs_FindSortedValue(state->context->resourceIndexTable, state->context->resourceIndexCount, index);
@@ -78,7 +76,7 @@ void Audio_DisableMusicGainOverride(Track *track) {
     track->gainOverride = 0;
 }
 
-s32 alCSPStop(s32);
+
 void Audio_StopMusic(s32 a) {
     (((struct MusicStopState *) ((s8 *) a))->stopSentinel) = -1;
     alCSPStop((((struct MusicStopState *) ((s8 *) a))->sequencePlayer));

@@ -11,7 +11,7 @@
 #include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "COMMON/STATERECAT91.H"
 #include "ACHIEVE/PRESET_AND_WEAPON_UNLOCK_VIEWS.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "ACHIEVE/ACHIEVE.H"
 #include "COMMON/PLAYERPROFILES.H"
 

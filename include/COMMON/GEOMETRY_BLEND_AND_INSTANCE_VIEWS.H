@@ -1,7 +1,7 @@
 #ifndef COMMON_GEOMETRY_BLEND_AND_INSTANCE_VIEWS_H
 #define COMMON_GEOMETRY_BLEND_AND_INSTANCE_VIEWS_H
 #include "TYPES.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/ITEMRECAT20V1.H"
 struct SharedModelTintMaterial;
 typedef struct SharedModelTintMaterial SharedModelTintMaterial;

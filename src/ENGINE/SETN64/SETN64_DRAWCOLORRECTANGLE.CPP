@@ -2,8 +2,8 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/WORLD.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/PAKQUEUESTATE.H"

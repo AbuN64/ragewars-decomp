@@ -19,7 +19,7 @@ void Libsn_EnumerateMemoryRanges(void) {
         entryLo0 = *entry++;
         entryLo1 = *entry++;
         if ((entryLo0 | entryLo1) & TLBLO_V) {
-            pageMask &= TLBPGMASK_16M;
+            pageMask &= OS_PM_16M;
             supportedMasks = g_libsnSupportedPageMasks;
             pageSize = 0x1000;
             while (1) {

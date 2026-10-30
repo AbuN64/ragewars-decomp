@@ -1,12 +1,12 @@
 #include "COMMON/TEXTURE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "TYPES.H"
 #include "MENU/GFX/RECT.H"
 #include "COMMON/RECTANGLE_DRAW.H"
 #include "include_asm.h"
-#include "abi.h"
+#include <PR/abi.h>
 
 extern Gfx *g_displayListCursor;
 
@@ -30,7 +30,8 @@ static inline void emit(unsigned int w0, unsigned int w1) {
     Gfx *cmd;
 
     cmd = g_displayListCursor++;
-    _GBI_CMD(cmd, w0, w1);
+    cmd->words.w0 = w0;
+    cmd->words.w1 = w1;
 }
 
 extern int g_combineRenderStateEnabled, g_combineCachedCombineMode, g_combineCachedPrimitiveMode, g_combineCachedRenderMode;
@@ -167,14 +168,9 @@ void Rect_EmitTextureRect(s32 left, s32 top, s32 right, s32 bottom, f32 u0, f32 
     dsdx = (s32)((u1 - u0) * scaleU) / (right - left + 1);
     scaleV = g_combineBoundImage->height << 10;
     dtdy = (s32)((v1 - v0) * scaleV) / (bottom - top + 1);
-    {
-        Gfx *cmd = g_displayListCursor++;
-        gDPTexRect(cmd, left * 4, top * 4, (right + 1) * 4, (bottom + 1) * 4, 0);
-    }
     startS = u0 * scaleU;
     startT = v0 * scaleV;
-    gDPHalf1(g_displayListCursor++, ((startS >> 5) << 16) | ((startT >> 5) & 0xFFFF));
-    gDPHalf2(g_displayListCursor++, (dsdx << 16) | (dtdy & 0xFFFF));
+    gSPTextureRectangle(g_displayListCursor++, left * 4, top * 4, (right + 1) * 4, (bottom + 1) * 4, 0, startS >> 5, startT >> 5, dsdx, dtdy);
 }
 
 #if defined(VERSION_US)

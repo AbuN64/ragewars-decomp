@@ -5,7 +5,6 @@
 #include "../../include/libgultra/alunlink.h"
 #include "include_asm.h"
 
-extern s32 osSetIntMask(s32);
 
                   /* osSetIntMask */
 
@@ -13,7 +12,7 @@ extern s32 osSetIntMask(s32);
             /* alUnlink */
 
 
-void alEvtqNew(void *eventQueue, void *eventStorage, s32 eventCapacity) {
+void alEvtqNew(ALEventQueue *eventQueue, ALEventListItem *eventStorage, s32 eventCapacity) {
     ALEventQueue *queue = eventQueue;
     s32 i;
     char *p;
@@ -34,7 +33,7 @@ void alEvtqNew(void *eventQueue, void *eventStorage, s32 eventCapacity) {
     }
 }
 
-s32 alEvtqNextEvent(void *eventQueue, s16 *outputEvent) {
+ALMicroTime alEvtqNextEvent(ALEventQueue *eventQueue, ALEvent *outputEvent) {
     void *node;
     s32 saved;
     s32 result;
@@ -47,7 +46,7 @@ s32 alEvtqNextEvent(void *eventQueue, s16 *outputEvent) {
         alLink(node, eventQueue);
         result = ((ALEventListItem *)node)->delta;
     } else {
-        *outputEvent = -1;
+        outputEvent->type = -1;
         result = 0;
     }
     osSetIntMask(saved);
@@ -105,7 +104,7 @@ void alEvtqPostEvent(ALEventQueue *evtq, ALEvent *evt, s32 delta)
     osSetIntMask(mask);
 }
 
-void alEvtqFlush(void *previousNode) {
+void alEvtqFlush(ALEventQueue *previousNode) {
     ALEventQueue *queue = previousNode;
     NodeGskyActivateMessagePool *cur;
     NodeGskyActivateMessagePool *next;
@@ -125,7 +124,7 @@ void alEvtqFlush(void *previousNode) {
 }
 
 
-void alEvtqFlushType(void *previousNode, s16 eventType) {
+void alEvtqFlushType(ALEventQueue *previousNode, s16 eventType) {
     s32 saved;
     char *cur;
     char *next;

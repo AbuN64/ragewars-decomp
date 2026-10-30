@@ -18,9 +18,10 @@
  *
  **************************************************************************/
 
-#ifndef PR_R4300_H
-#define PR_R4300_H
+#ifndef __R4300_H__
+#define __R4300_H__
 
+#include <PR/ultratypes.h>
 
 /*
  * Segment base addresses and sizes

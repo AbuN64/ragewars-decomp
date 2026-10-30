@@ -5,8 +5,8 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "RENDER/RIBBON_DRAW.H"
 #include "COMMON/SELF.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"

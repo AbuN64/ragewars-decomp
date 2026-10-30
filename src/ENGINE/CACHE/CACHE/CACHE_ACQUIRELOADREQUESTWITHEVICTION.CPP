@@ -8,11 +8,12 @@ extern s32 g_resourceCacheManager;
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/TRIPLE.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
 #include "AUDIO/HASHTABLE.H"
-#include "../../../../sdk/include/os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/CACHE/LIST.H"
 

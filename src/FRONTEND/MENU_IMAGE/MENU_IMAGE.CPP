@@ -304,8 +304,8 @@ s32 Frontend_DispatchEquipmentEvent(void *eventTarget, s32 eventId, s32 eventCod
     return 0;
 }
 
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"

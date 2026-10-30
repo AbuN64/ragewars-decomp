@@ -10,7 +10,6 @@ void alSndpSetSound(ALSndPlayer *soundPlayer, s16 soundId) {
     soundPlayer->target = (s32) soundId;
 }
 
-extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
 
 

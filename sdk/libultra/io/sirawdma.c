@@ -2,12 +2,12 @@
 #include "TYPES.H"
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "COMMON/DEVICE_IO.H"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "../../include/libgultra.h"
 #include "../../include/libultra/io/si.h"
-#include "../../include/os.h"
-#include "../../include/OSINT/osyieldthread.H"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "../../include/libultra/debug/assert.h"
 
 extern void osWritebackDCache(void *addr, s32 size);

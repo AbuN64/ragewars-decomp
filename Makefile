@@ -6,7 +6,7 @@ TOOLCHAIN := gcc_2_8_1_sn64
 NM_DEFINE := NON_MATCHING
 LABEL := [A-Za-z_.]*auto_
 ASFLAGS := -march=vr4300 -mabi=32 -EB --no-pad-sections -mips3
-AS_CPPFLAGS := -D_LANGUAGE_ASSEMBLY -Dmips -D_MIPS_SIM_ABI32=1 -D_MIPS_SIM=1 -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+AS_CPPFLAGS := -D_LANGUAGE_ASSEMBLY -Dmips -D_MIPS_SIM_ABI32=1 -D_MIPS_SIM=1 -D_LANGUAGE_C -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 # The tools and toolchains: a variable local.mk sets wins.
 ifneq ($(filter default undefined,$(origin ABUMAS)),)
 ABUMAS := tools/abumas/abumas
@@ -32,9 +32,9 @@ TOOLCHAIN_gcc_2_7_2_sn64 ?= tools/gcc-2.7.2-sn64/.stamp
 CC_gcc_2_8_1_sn64 ?= tools/gcc-2.8.1-sn64/cc1
 AS_gcc_2_8_1_sn64 ?= $(AS)
 TOOLCHAIN_gcc_2_8_1_sn64 ?= tools/gcc-2.8.1-sn64/.stamp
-CPPFLAGS_gcc_2_7_2_sn64 := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+CPPFLAGS_gcc_2_7_2_sn64 := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -D_LANGUAGE_C -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 CFLAGS_gcc_2_7_2_sn64 := -G0 -mips3 -mgp32 -mfp32 -O2 -fno-exceptions
-CPPFLAGS_gcc_2_8_1_sn64 := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
+CPPFLAGS_gcc_2_8_1_sn64 := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -D_LANGUAGE_C -DF3DEX_GBI_2 -Isdk/libgcc -Isdk/include
 CFLAGS_gcc_2_8_1_sn64 := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
 STAMPS := tools/abumas/.stamp $(TOOLCHAIN_gcc_2_7_2_sn64) $(TOOLCHAIN_gcc_2_8_1_sn64)
 # The program of each toolchain in use (PASS runs a helper of MKTOOLS).
@@ -66,6 +66,8 @@ FILE.sdk/libultra/audio/env.c := gcc_2_8_1_sn64
 CFLAGS.sdk/libultra/audio/env.c := -fforce-addr
 FILE.sdk/libultra/gu/sqrtf.c := gcc_2_8_1_sn64
 CFLAGS.sdk/libultra/gu/sqrtf.c := -ffast-math -fno-delayed-branch
+FILE.sdk/libultra/io/pfschecker.c := gcc_2_8_1_sn64
+CFLAGS.sdk/libultra/io/pfschecker.c := -fforce-addr
 FILE.sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP := gcc_2_8_1_sn64
 CFLAGS.sdk/libultra/libc/LIBC_SIGNEDLONGLONGTODOUBLE_USREV1.CPP := -mfp32
 FILE.sdk/libultra/libc/_divdi3.CPP := gcc_2_8_1_sn64
@@ -83,8 +85,6 @@ FILE.sdk/libultra/libc/longarith.CPP := gcc_2_8_1_sn64
 CFLAGS.sdk/libultra/libc/longarith.CPP := -mfp32
 FILE.sdk/libultra/pfs/ospfschecker.CPP := gcc_2_8_1_sn64
 CFLAGS.sdk/libultra/pfs/ospfschecker.CPP := -fforce-addr
-FILE.sdk/libultra/io/pfschecker.c := gcc_2_8_1_sn64
-CFLAGS.sdk/libultra/io/pfschecker.c := -fforce-addr
 FILE.sdk/rnc/ := gcc_2_8_1_sn64
 FILE.src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFORMBLOCK.CPP := gcc_2_8_1_sn64
 CFLAGS.src/ENGINE/AUDIO/DECODER/AUDIO_DECODETRANSFORMBLOCK.CPP := -fforce-addr

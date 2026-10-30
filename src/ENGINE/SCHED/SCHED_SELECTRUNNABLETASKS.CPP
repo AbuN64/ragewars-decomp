@@ -4,18 +4,16 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "COMMON/OSTASK_T.H"
+#include <ultra64.h>
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
 #include "COMMON/BOOT_TV_TYPE.H"
-#include "AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "SCHED/osscremoveclient.H"
-#include "libgultra/OSWRITEBACKDCACHEALL.H"
-#include "libgultra/sptaskyield.h"
-#include "os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 extern s32 g_schedulerPendingFramebuffer;
 extern s32 g_displayedFramebufferAndRefreshRate;
 /* Initialises a panel: marks it active, clears its counters, lays out its two eight-slot rows, binds text 0x29B to 0x29D and 0x29A with the given style byte to the first row, and builds its element list from the PanelElementTemplate template. */
@@ -23,18 +21,18 @@ extern s32 g_displayedFramebufferAndRefreshRate;
 
 
 
-extern void osSetEventMesg(s32 slot, char *row, s32 text);
-
-extern void osViSetEvent(char *row, s32 text, s32 style);
-
-extern void osCreateThread(char *list, s32 count, void *entryTemplate, Panel *owner, s32 stackPointer, s32 priority);
 
 
-s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **rspTaskOut, OSScTask_s **rdpTaskOut, s32 processorMask) {
-    OSScTask_s *gfxListHead;
-    OSScTask_s *audioListHead;
-    OSScTask_s *next;
-    OSScTask_s *runnableGraphicsTask;
+
+
+
+
+
+s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask **rspTaskOut, OSScTask **rdpTaskOut, s32 processorMask) {
+    OSScTask *gfxListHead;
+    OSScTask *audioListHead;
+    OSScTask *next;
+    OSScTask *runnableGraphicsTask;
     s32 initialProcessorMask;
     s32 graphicsTaskFlags;
     s32 state;

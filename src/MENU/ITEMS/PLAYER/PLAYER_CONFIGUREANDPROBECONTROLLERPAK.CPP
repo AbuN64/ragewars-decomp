@@ -1,7 +1,7 @@
 #include "COMMON/ACTORRECAT260.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/RECORDRECATCV1.H"
 #include "../../../../sdk/include/PFS/PLAYER_CONFIGUREANDPROBECONTROLLERPAK.H"

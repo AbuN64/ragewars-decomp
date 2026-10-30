@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/SHAREDCALLBACK5.H"

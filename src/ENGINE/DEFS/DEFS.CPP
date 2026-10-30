@@ -4,8 +4,8 @@
 #include "../../../sdk/include/AUDIO/sprintf.H"
 #include "COMMON/LIGHTDATA.H"
 #include "COMMON/VECTOR4F.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "TYPES.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
@@ -423,7 +423,7 @@ void Defs_SetupPointLights(char *view) {
         }
         {
             Gfx *g = g_displayListCursor++;
-            gSPMoveMem(g, 10, ((i + 1) * 2 + 10) * 8, 16, &g_pointLightBuffer[i + g_pointLightBufferOffset]);
+            gDma2p(g, G_MOVEMEM, &g_pointLightBuffer[i + g_pointLightBufferOffset], 16, 10, ((i + 1) * 2 + 10) * 8);
         }
     }
     g_pointLightBufferOffset += 8;

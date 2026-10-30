@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #if defined(VERSION_US)
 #if defined(VERSION_US)
@@ -26,10 +26,10 @@ Gfx g_fxDrawredparticlequadDataConstantWords[12] = {
     gsSPGeometryMode(0x000000, 0x00210004),
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
     gsSPSetOtherMode(G_SETOTHERMODE_L, 3, 29, 0xC8104B50),
-    gsSPMoveWord(4, 0x0004, 0x00000001),
-    gsSPMoveWord(4, 0x000C, 0x00000001),
-    gsSPMoveWord(4, 0x0014, 0x0000FFFF),
-    gsSPMoveWord(4, 0x001C, 0x0000FFFF),
+    gsMoveWd(4, 0x0004, 0x00000001),
+    gsMoveWd(4, 0x000C, 0x00000001),
+    gsMoveWd(4, 0x0014, 0x0000FFFF),
+    gsMoveWd(4, 0x001C, 0x0000FFFF),
     gsSPVertex(g_particleQuadVertices, 4, 0),
     gsSPEndDisplayList(),
 };

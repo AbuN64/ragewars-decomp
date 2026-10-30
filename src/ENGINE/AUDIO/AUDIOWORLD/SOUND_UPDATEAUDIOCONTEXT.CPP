@@ -11,7 +11,9 @@
 #include "COMMON/STATERECAT34.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "TEXTURE/SOUND_UPDATEAUDIOCONTEXT.H"
 
 extern f32 g_audioContextGainScaleConstants;

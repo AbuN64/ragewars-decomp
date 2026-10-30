@@ -46,7 +46,7 @@ void Link_AnimateVertexColors(VertexColorMeshView *object, u8 *colors) {
         end = record + object->count;
         if (record != end) {
             do {
-                u16 flags = (u16)record->flag;
+                u16 flags = (u16)record->v.flag;
                 s32 amount;
                 s32 value;
                 u8 *color;
@@ -59,17 +59,17 @@ void Link_AnimateVertexColors(VertexColorMeshView *object, u8 *colors) {
                     value = amount + color[0];
                     if (value >= 256) value = 0xFF;
                     if (value < 0) value = 0;
-                    record->r = value;
+                    record->v.cn[0] = value;
 
                     value = amount + color[1];
                     if (value >= 256) value = 0xFF;
                     if (value < 0) value = 0;
-                    record->g = value;
+                    record->v.cn[1] = value;
 
                     value = amount + color[2];
                     if (value >= 256) value = 0xFF;
                     if (value < 0) value = 0;
-                    record->b = value;
+                    record->v.cn[2] = value;
                 }
                 record++;
                 i++;
@@ -95,11 +95,11 @@ void Link_CaptureVertexColors(VertexColorMeshView *object, u8 *colors) {
             record = &records[i];
             color = colors;
             colors += 4;
-            t = RW_MAX_GT(RW_MIN_LT(record->r, 225), 30);
+            t = RW_MAX_GT(RW_MIN_LT(record->v.cn[0], 225), 30);
             color[0] = t;
-            t = RW_MAX_GT(RW_MIN_LT(record->g, 225), 30);
+            t = RW_MAX_GT(RW_MIN_LT(record->v.cn[1], 225), 30);
             color[1] = t;
-            t = RW_MAX_GT(RW_MIN_LT(record->b, 225), 30);
+            t = RW_MAX_GT(RW_MIN_LT(record->v.cn[2], 225), 30);
             color[2] = t;
             i++;
         } while (i < count);

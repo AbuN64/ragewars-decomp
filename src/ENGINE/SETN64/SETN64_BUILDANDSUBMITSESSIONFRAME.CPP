@@ -1,7 +1,7 @@
 #include "TYPES.H"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 
 /* Builds and submits the current frame, records its timing, and advances the fade transition. */
 #include "COMMON/SESSIONHANDLERROW.H"
@@ -29,7 +29,8 @@
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "SYSTEM/TEXTLOAD_RESETTEXTURECACHE.H"
 #include "SYSTEM/DEFS_TOGGLESAVEDFLAG.H"
-#include "os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 extern void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *);
 extern void SetN64_DrawColorRectangle(void *, u8 *, s32,s32,s32,s32);
 extern void SetN64_ClearDepthRect(void *, s32,s32,s32,s32,s32);

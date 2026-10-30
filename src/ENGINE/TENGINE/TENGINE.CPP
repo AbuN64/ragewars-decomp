@@ -14,7 +14,7 @@
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "../../../sdk/include/AUDIO/sprintf.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 u32 SetN64_LocatePackSection(s32, s32, s32, u32 *);
 
 /* Separate-object views of the menu state words (each access has its own lui; DATA-FRAME-O1 F2b). */

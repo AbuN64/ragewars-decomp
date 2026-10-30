@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "libultra/audio/reverb_internal.h"
 
 #include "COMMON/ALDELAY28.H"

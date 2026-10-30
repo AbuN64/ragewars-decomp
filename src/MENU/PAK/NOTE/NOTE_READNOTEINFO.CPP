@@ -4,7 +4,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "include_asm.h"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "MENU/PAK_DIRECTORY_VIEWS.H"
 #include "TYPES.H"
@@ -159,7 +159,7 @@ s32 Note_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *si
 }
 
 s32 Note_DeleteNote(s32 ch, s32 index) {
-    extern s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, char *game_name, char *ext_name);
+
     extern s32 Note_UpdateStatus(s32 ch);
     s32 result;
 

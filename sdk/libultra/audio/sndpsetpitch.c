@@ -4,19 +4,18 @@
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
 
-extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
 
 
 
-void alSndpSetPitch(struct SoundPlayerEventStateView *soundPlayer, s32 pitchBits) {
+void alSndpSetPitch(ALSndPlayer *soundPlayer, f32 pitchBits) {
     SoundPlayerWordParameterEvent p;
     s32 acc;
 
-    acc = soundPlayer->eventTime;
+    acc = ((SoundPlayerEventStateView *)soundPlayer)->eventTime;
     p.f0 = 4;
-    acc += soundPlayer->frameSampleCount * 0x30;
+    acc += ((SoundPlayerEventStateView *)soundPlayer)->frameSampleCount * 0x30;
     p.f8 = pitchBits;
     p.f4 = acc;
-    alEvtqPostEvent(&soundPlayer->events, (s16 *)&p, 0);
+    alEvtqPostEvent(&((SoundPlayerEventStateView *)soundPlayer)->events, (s16 *)&p, 0);
 }

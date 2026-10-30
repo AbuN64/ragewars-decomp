@@ -3,7 +3,7 @@
 #include "MENU/PAK_PREVIEW_VIEWS.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

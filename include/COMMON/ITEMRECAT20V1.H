@@ -196,20 +196,6 @@ struct ALPlayer_s14 {
 struct ALPlayer_s14;
 typedef struct ALPlayer_s14 ALPlayer_s14;
 
-struct ALEventQueue;
-typedef struct ALEventQueue ALEventQueue;
-struct ALNoteEvent;
-struct ALOscEvent;
-struct ALVolumeEvent;
-struct ALEndEvent;
-struct ALTempoEvent;
-struct ALEvent;
-typedef struct ALNoteEvent ALNoteEvent;
-typedef struct ALOscEvent ALOscEvent;
-typedef struct ALVolumeEvent ALVolumeEvent;
-typedef struct ALEndEvent ALEndEvent;
-typedef struct ALTempoEvent ALTempoEvent;
-typedef struct ALEvent ALEvent;
 
 
 struct ListLink;
@@ -220,14 +206,8 @@ struct ListLink {
 struct ListLink;
 typedef struct ListLink ListLink;
 
-struct ALEventQueue;
-struct ALEventQueue {
-    ListLink freeList;
-    ListLink allocList;
-    s32 eventCount;
-};
 
-struct ALEvent;
+
 
 struct EffectBoneNode;
 struct EffectBoneNode {
@@ -341,21 +321,9 @@ struct ScalarFloatView {
 };
 
 
-struct ALVoice_s;
-typedef struct ALVoice_s ALVoice_s;
 
-struct ALVoice_s;
 struct AudioAllocatedPhysicalVoiceView;
-struct ALVoice_s {
-    ListLink node;
-    struct AudioAllocatedPhysicalVoiceView *pvoice;
-    void *table;
-    void *clientPrivate;
-    s16 state;
-    s16 priority;
-    s16 fxBus;
-    s16 unityPitch;
-};
+
 
 struct AudioSynthVoiceAllocatorView;
 typedef struct AudioSynthVoiceAllocatorView AudioSynthVoiceAllocatorView;
@@ -473,8 +441,6 @@ struct TrackAngleKindView {
     char kind;
 };
 
-struct ALMIDIEvent;
-typedef struct ALMIDIEvent ALMIDIEvent;
 
 struct PlayerCharacterKindView;
 struct PlayerCharacterKindView {
@@ -515,8 +481,6 @@ struct AudioVoicePhysicalLinkView {
     ObjectLinks4_3 pvoice;
 };
 
-struct ALHeap;
-typedef struct ALHeap ALHeap;
 
 struct ControllerButtonFlagsView;
 struct ControllerButtonFlagsView {
@@ -683,7 +647,6 @@ struct StateFlags {
 };
 
 
-struct OSMesgQueue;
 
 struct Desc;
 struct Desc {
@@ -855,13 +818,7 @@ struct StateInfo;
 struct TeamInfo;
 
 
-struct ALHeap;
-struct ALHeap {
-    u8 *base;
-    u8 *cur;
-    s32 len;
-    s32 count;
-};
+
 
 struct MenuLocalizedTextItemView;
 typedef struct MenuLocalizedTextItemView MenuLocalizedTextItemView;
@@ -938,14 +895,7 @@ typedef struct Draw Draw;
 struct StateFrontendScrollResultsBackward;
 
 
-struct ALMIDIEvent;
-struct ALMIDIEvent {
-    s32 ticks;
-    u8 status;
-    u8 byte1;
-    u8 byte2;
-    u32 duration;
-};
+
 
 struct Polytrak2QuantizationRange;
 typedef struct Polytrak2QuantizationRange Polytrak2QuantizationRange;
@@ -972,7 +922,6 @@ struct AudioSynthVoiceAllocatorView {
     s32 paramSamples;
 };
 
-struct OSThread_s;
 
 struct ActorKindDefinitionPointerView;
 typedef struct ActorKindDefinitionPointerView ActorKindDefinitionPointerView;
@@ -1208,8 +1157,6 @@ typedef struct SpawnedEffectMotionView SpawnedEffectMotionView;
 struct Field_Vec_18;
 typedef struct Field_Vec_18 Field_Vec_18;
 
-struct ALVoiceConfig_s;
-typedef struct ALVoiceConfig_s ALVoiceConfig_s;
 
 struct InstanceHdr;
 struct InstanceHdr {
@@ -1329,8 +1276,6 @@ struct Shared_HudView {
     f32 y;
 };
 
-struct ALEventListItem;
-typedef struct ALEventListItem ALEventListItem;
 
 
 
@@ -1415,17 +1360,8 @@ struct ActorAnimationEventTable {
 struct PortalLinkAvailabilityView;
 typedef struct PortalLinkAvailabilityView PortalLinkAvailabilityView;
 
-struct ALPlayer_s;
-typedef struct ALPlayer_s ALPlayer_s;
 
-struct ALPlayer_s;
-struct ALPlayer_s {
-    struct ALPlayer_s *next;
-    void *clientData;
-    void *handler;
-    s32 callTime;
-    s32 samplesLeft;
-};
+
 
 struct WidgetLabelTextView;
 typedef struct WidgetLabelTextView WidgetLabelTextView;
@@ -1458,7 +1394,6 @@ typedef struct Params Params;
 
 
 
-struct OSMesgQueue;
 
 
 struct MenuRules;
@@ -1823,9 +1758,10 @@ struct ImageHeader {
     unsigned char format;
     char data[1];
 };
-struct Image;
 struct ImageHeader;
-struct Image {
+
+
+struct GameImage {
     char pad0[8];
     struct ImageHeader *header;
     s32 primaryData;
@@ -1833,6 +1769,7 @@ struct Image {
     char pad14[0x3C - 0x14];
     s32 flags;
 };
+typedef struct GameImage GameImage;
 
 extern float k_eventEmitterAngleConstants;
 
@@ -1840,7 +1777,6 @@ struct ResourceShortIdView;
 typedef struct ResourceShortIdView ResourceShortIdView;
 
 
-extern int __OSGlobalIntMask;
 
 
 struct SoundSlotHandleView;
@@ -1958,7 +1894,6 @@ struct Args {
     u32 words[10];
 };
 
-struct OSThread_s;
 
 struct Field_f32_10;
 struct Field_f32_10 {
@@ -1999,54 +1934,13 @@ struct ListPreviousLinkView;
 struct ListPreviousLinkView {
     void * previous;
 };
-struct ALEndEvent {
-    s32 ticks;
-    u8 status;
-    u8 type;
-    u8 len;
-};
-struct ALTempoEvent {
-    s32 ticks;
-    u8 status;
-    u8 type;
-    u8 len;
-    u8 byte1;
-    u8 byte2;
-    u8 byte3;
-};
-struct ALNoteEvent {
-    struct ALVoice_s *voice;
-};
-struct ALVolumeEvent {
-    struct ALVoice_s *voice;
-    s32 delta;
-    u8 vol;
-};
-struct ALOscEvent {
-    struct ALVoiceState *vs;
-    void *oscState;
-    u8 chan;
-};
-struct ALEvent {
-    s16 type;
-    union {
-        ALMIDIEvent midi;
-        ALTempoEvent tempo;
-        ALEndEvent end;
-        ALNoteEvent note;
-        ALVolumeEvent vol;
-        Request spvol;
-        InventorySlot sppriority;
-        ListPreviousLinkView spseq;
-        ListPreviousLinkView spbank;
-        ALOscEvent osc;
-    } msg;
-};
-struct ALEventListItem {
-    ListLink node;
-    s32 delta;
-    ALEvent evt;
-};
+
+
+
+
+
+
+
 
 struct DamagePacketWords;
 typedef struct DamagePacketWords DamagePacketWords;
@@ -2162,12 +2056,7 @@ struct Block24 {
     s32 words[6];
 };
 
-struct ALVoiceConfig_s;
-struct ALVoiceConfig_s {
-    s16 priority;
-    s16 fxBus;
-    u8 unityPitch;
-};
+
 
 struct AudioPhysicalVoiceOffsetView;
 typedef struct AudioPhysicalVoiceOffsetView AudioPhysicalVoiceOffsetView;
@@ -2285,7 +2174,6 @@ typedef struct Field_void_4 Field_void_4;
 struct MenuControllerSelectionView;
 typedef struct MenuControllerSelectionView MenuControllerSelectionView;
 
-struct ALEvent;
 
 struct SynthOutputRateView;
 struct SynthOutputRateView {

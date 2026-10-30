@@ -9,7 +9,7 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/RECORDRECAT1C.H"
 #include "MENU/PAK/NOTE_REFRESHNOTES.H"
-#include "../../../../sdk/include/PFS/ospfschecker.H"
+#include <ultra64.h>
 
 /* Refreshes the cached directory of the Controller Pak on channel ch: when the directory buffer
    exists it reads the state of each of the 16 notes through osPfsFileState (osPfsFileState),
@@ -26,9 +26,8 @@ extern OSPfs g_controllerPakFileSystems[];
 
 extern PakDirectory *g_controllerPakNoteLists;
 
-extern s32 osPfsFileState(OSPfs *pfs, s32 file_no, NoteState *state);
 
-extern s32 osPfsFreeBlocks(OSPfs *pfs, s32 *free);
+
 
 static inline void *pak27(s32 ch) {return &g_controllerPakFileSystems[ch];}
 

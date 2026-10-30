@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 #include "TYPES.H"
-#include <stddef.h>
+#include <ultra64.h>
 #if VERSION_US
 /* Moves the management list cursor and window one row and points the three visible rows and the size label at their text. */
 void PAKInterface_ScrollManagementList(s32 anUser, s32 anDirection) {

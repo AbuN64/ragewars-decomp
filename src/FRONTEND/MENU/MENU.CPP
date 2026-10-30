@@ -50,7 +50,7 @@ s32 Menu_PositionSelectionMenuModel(void) {
     return 0;
 }
 
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "COMMON/VIDEO_DIMENSIONS.H"
 extern s32 Model_GetModelRecordCount(struct RecordFrontendSetPreviewModel *record);
 extern void Preview_DrawMenuModelItem(struct RecordFrontendSetPreviewModel *record);

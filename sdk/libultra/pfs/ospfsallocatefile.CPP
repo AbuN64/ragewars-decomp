@@ -3,8 +3,7 @@
 #include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
 #include "TYPES.H"
 #include "../../include/PFS/ospfsallocatefile.H"
-#include "../../include/PFS/ospfsfreeblocks.H"
-#include "../../include/PFS/ospfsrepairid.H"
+#include <ultra64.h>
 #include "../../include/PFS/PFS_READWRITEINODE.H"
 #include "../../include/PFS/__OSCHECKID.H"
 #include "../../include/PFS/PFS_SELECTACTIVEBANK.H"

@@ -5,7 +5,7 @@
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 

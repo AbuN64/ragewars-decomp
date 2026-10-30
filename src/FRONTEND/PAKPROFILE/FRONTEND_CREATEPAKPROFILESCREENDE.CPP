@@ -14,7 +14,7 @@
 #elif defined(VERSION_EU_X)
 #define Frontend_CreatePakProfileScreen Frontend_CreatePakProfileScreenEux
 #endif
-/* Sprite ids of the setup screen: the first column is the id in the US rev 1 and EU builds. */
+/* GameSprite ids of the setup screen: the first column is the id in the US rev 1 and EU builds. */
 #if defined(VERSION_DE)
 #define SPRITE_285 641
 #elif defined(VERSION_EU_X)
@@ -166,7 +166,7 @@ extern void Tsmos_SetTimerState(s32);
 s32 Frontend_CreatePakProfileScreen(void *screen) {
     PakMenuController *block;
     Shared_Game *globals;
-    MenuWidget *sprite;
+    MenuWidget *GameSprite;
     MenuWidget *row;
     s32 rest;
     s32 i;
@@ -212,34 +212,34 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     }
     switch (g_pakProfileScreenState->phase) {
     case 5:
-        sprite = Node_FindWidgetByResourceId(screen, SPRITE_293);
-        Widget_SetWidgetFlag08(sprite, 1);
-        sprite->alpha = 0xFF;
+        GameSprite = Node_FindWidgetByResourceId(screen, SPRITE_293);
+        Widget_SetWidgetFlag08(GameSprite, 1);
+        GameSprite->alpha = 0xFF;
         break;
     case 6:
-        sprite = Node_FindWidgetByResourceId(screen, SPRITE_296);
-        Widget_SetWidgetFlag08(sprite, 1);
-        sprite->alpha = 0xFF;
+        GameSprite = Node_FindWidgetByResourceId(screen, SPRITE_296);
+        Widget_SetWidgetFlag08(GameSprite, 1);
+        GameSprite->alpha = 0xFF;
         break;
     case 4:
-        sprite = Node_FindWidgetByResourceId(screen, SPRITE_288);
-        Widget_SetWidgetFlag08(sprite, 1);
-        sprite->alpha = 0xFF;
+        GameSprite = Node_FindWidgetByResourceId(screen, SPRITE_288);
+        Widget_SetWidgetFlag08(GameSprite, 1);
+        GameSprite->alpha = 0xFF;
         break;
     case 0:
-        sprite = Node_FindWidgetByResourceId(screen, SPRITE_2A1);
-        Widget_SetWidgetFlag08(sprite, 1);
-        sprite->alpha = 0xFF;
+        GameSprite = Node_FindWidgetByResourceId(screen, SPRITE_2A1);
+        Widget_SetWidgetFlag08(GameSprite, 1);
+        GameSprite->alpha = 0xFF;
         break;
     case 3:
-        sprite = Node_FindWidgetByResourceId(screen, SPRITE_295);
-        Widget_SetWidgetFlag08(sprite, 1);
-        sprite->alpha = 0xFF;
+        GameSprite = Node_FindWidgetByResourceId(screen, SPRITE_295);
+        Widget_SetWidgetFlag08(GameSprite, 1);
+        GameSprite->alpha = 0xFF;
         break;
     case 1:
-        sprite = Node_FindWidgetByResourceId(screen, SPRITE_289);
-        Widget_SetWidgetFlag08(sprite, 1);
-        sprite->alpha = 0xFF;
+        GameSprite = Node_FindWidgetByResourceId(screen, SPRITE_289);
+        Widget_SetWidgetFlag08(GameSprite, 1);
+        GameSprite->alpha = 0xFF;
         for (i = 0; i < 4; i++) {
             if (g_localPlayerProfiles[i].owner >= 0) {
                 if (g_localPlayerProfiles[i].dropped == 1) {
@@ -258,9 +258,9 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     case 7:
         break;
     case 2:
-        sprite = Node_FindWidgetByResourceId(screen, SPRITE_297);
-        Widget_SetWidgetFlag08(sprite, 1);
-        sprite->alpha = 0xFF;
+        GameSprite = Node_FindWidgetByResourceId(screen, SPRITE_297);
+        Widget_SetWidgetFlag08(GameSprite, 1);
+        GameSprite->alpha = 0xFF;
         break;
     }
     for (i = 0; i < 4; i++) {

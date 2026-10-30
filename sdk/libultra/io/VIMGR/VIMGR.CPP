@@ -5,7 +5,9 @@
 #include "COMMON/BOOT_TV_TYPE.H"
 #include "../../../include/AUDIO/vi.H"
 #include "SYSTEM/VIMGR.H"
-#include "../../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "include_asm.h"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -17,13 +19,12 @@
 #if !(defined(VERSION_EU))
 /* osCreateViManager, drafted from ultralib src/io/vimgr.c (2.0I: no __additional_scanline). */
 
-typedef struct OSThread OSThread;
 
 extern OSThread g_videoManagerThread;
 extern OSMesgQueue g_videoManagerEventQueue;
 extern OSMesg g_videoManagerEventMessages[5];
 
-extern void osSetEventMesg(s32 event, OSMesgQueue *mq, OSMesg msg);
+
 extern s32 osGetThreadPri(OSThread *t);
 extern void osSetThreadPri(OSThread *t, s32 pri);
 
@@ -79,11 +80,10 @@ void System_CreateVideoManager(s32 pri)
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/NODERECAT1C.H"
-void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message);
-s32 osGetThreadPri(OSThread_s *thread);
-void osSetThreadPri(OSThread_s *thread, s32 priority);
-extern OSThread_s g_videoManagerThread;
-extern struct OSMesgQueue g_videoManagerEventQueue;
+s32 osGetThreadPri(OSThread *thread);
+void osSetThreadPri(OSThread *thread, s32 priority);
+extern OSThread g_videoManagerThread;
+extern OSMesgQueue g_videoManagerEventQueue;
 extern void *g_videoManagerEventMessages[5];
 extern u64 g_videoManagerThreadStack[0x200];
 
@@ -143,11 +143,11 @@ static inline u16 *viRetrace(void)
     return &g_videoManagerRetraceCountdown;
 }
 
-void System_RunVideoManager(struct OSDevMgr *arg)
+void System_RunVideoManager(OSDevMgr *arg)
 {
     struct __OSViContext *vc;
-    struct OSDevMgr *dm;
-    struct OSIoMesg *mb;
+    OSDevMgr *dm;
+    OSIoMesg *mb;
     s32 first;
     u32 count;
 

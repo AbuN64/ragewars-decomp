@@ -5,8 +5,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "RENDER/RANGENODE.H"
 #include "TYPES.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 
 /* Selects a cached RDP color-combiner mode and emits the corresponding display-list command. */
 extern Gfx *g_displayListCursor;

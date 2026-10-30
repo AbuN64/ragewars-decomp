@@ -1,5 +1,8 @@
 #ifndef ENGINE_SCENE_H
 #define ENGINE_SCENE_H
+/* Clip-ratio words the scene code loads with gMoveWd(G_MW_CLIP) in the F3DEX2 display lists. */
+#define FRUSTRATIO_1 1
+#define FRUSTRATIO_2 2
 #include "COMMON/OBJB.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/ITEMRECAT20V1.H"

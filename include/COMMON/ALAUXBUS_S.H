@@ -20,7 +20,6 @@ struct ALParam_s1C {
     s32 yetstillmoredata;
 };
 
-extern void alSynStopVoice(struct AudioSynthParamSamplesView *synth, void *voice);
 
 struct ALResampler;
 typedef struct ALResampler ALResampler;
@@ -67,8 +66,6 @@ typedef void ( *SharedRecV12)(void *, signed int, void *);
 
 struct ALEnvMixer4C;
 
-struct ALSynth;
-typedef struct ALSynth ALSynth;
 
 struct ALAuxBus_s;
 struct ALAuxBus_s {
@@ -84,10 +81,7 @@ struct ALResampler {
     char pad[0x34];
 };
 
-struct ALSynConfig;
-typedef struct ALSynConfig ALSynConfig;
 
-typedef void *( *ALDMANew)(void *);
 
 struct ALSave;
 typedef struct ALSave ALSave;
@@ -104,23 +98,9 @@ struct ALMainBus_s {
 struct ALSynth4C;
 typedef struct ALSynth4C ALSynth4C;
 
-struct ALSynConfig;
-struct ALSynConfig {
-    s32 maxVVoices;
-    s32 maxPVoices;
-    s32 maxUpdates;
-    s32 maxFXbusses;
-    void *dmaproc;
-    ALHeap *heap;
-    s32 outputRate;
-    u8 fxType;
-    s32 *params;
-};
 
-struct ALGlobals;
-struct ALGlobals {
-    ALSynth4C drvr;
-};
+
+
 
 struct PVoice_s;
 typedef struct PVoice_s PVoice_s;
@@ -147,10 +127,7 @@ struct AudioStopVoiceUpdate {
     s16 type;
 };
 
-struct ALGlobals;
-typedef struct ALGlobals ALGlobals;
 
-struct ALSynth;
 
 struct ALSave;
 struct ALSave {

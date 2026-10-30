@@ -4,8 +4,8 @@
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/LOCALDECODERANGE.H"
@@ -321,16 +321,16 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
             g_geometryMaterialLightDirection[1] = direction.y * g_geometryLightDirectionScale;
             g_geometryMaterialLightDirection[2] = direction.z * g_geometryLightDirectionScale;
             cmd = g_displayListCursor++;
-            gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
-            gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 48, 16, (unsigned int)(g_geometryMaterialLightDirection - 8));
-            gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 72, 16, (unsigned int)(g_geometryMaterialLightDirection - 0x10));
+            gMoveWd(cmd, G_MW_NUMLIGHT, 0, 0x18);
+            gDma2p(g_displayListCursor++, G_MOVEMEM, (unsigned int)(g_geometryMaterialLightDirection - 8), 16, G_MV_LIGHT, 48);
+            gDma2p(g_displayListCursor++, G_MOVEMEM, (unsigned int)(g_geometryMaterialLightDirection - 0x10), 16, G_MV_LIGHT, 72);
         }
         return 1;
     }
     if (lights != 0) {
-        gSPMoveWord(g_displayListCursor++, G_MW_NUMLIGHT, 0, 0x18);
-        gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 48, 16, (unsigned int)((char *)lights + 8));
-        gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 72, 16, (unsigned int)lights);
+        gMoveWd(g_displayListCursor++, G_MW_NUMLIGHT, 0, 0x18);
+        gDma2p(g_displayListCursor++, G_MOVEMEM, (unsigned int)((char *)lights + 8), 16, G_MV_LIGHT, 48);
+        gDma2p(g_displayListCursor++, G_MOVEMEM, (unsigned int)lights, 16, G_MV_LIGHT, 72);
     }
     return 0;
 }

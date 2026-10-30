@@ -8,7 +8,9 @@
 #include "TYPES.H"
 #include "ENGINE/CACHE/CACHE.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
-#include "../../../../sdk/include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 
 

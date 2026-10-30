@@ -1,5 +1,5 @@
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 extern char g_particleQuadVertices[];
 extern char g_playerModelLighting[];
 #include "DATA_OVERLAY_LAYOUTS.H"
@@ -113,16 +113,16 @@ Gfx D_src_d4ac59de[17] = {
     gsSPGeometryMode(0x000000, 0x00210004),
     gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
     gsSPSetOtherMode(G_SETOTHERMODE_L, 3, 29, 0xC8104B50),
-    gsSPMoveWord(4, 0x0004, 0x00000001),
-    gsSPMoveWord(4, 0x000C, 0x00000001),
-    gsSPMoveWord(4, 0x0014, 0x0000FFFF),
-    gsSPMoveWord(4, 0x001C, 0x0000FFFF),
+    gsMoveWd(4, 0x0004, 0x00000001),
+    gsMoveWd(4, 0x000C, 0x00000001),
+    gsMoveWd(4, 0x0014, 0x0000FFFF),
+    gsMoveWd(4, 0x001C, 0x0000FFFF),
     gsSPVertex(g_particleQuadVertices, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 2, 3, 0, 0),
-    gsSPMoveWord(4, 0x0004, 0x00000005),
-    gsSPMoveWord(4, 0x000C, 0x00000005),
-    gsSPMoveWord(4, 0x0014, 0x0000FFFB),
-    gsSPMoveWord(4, 0x001C, 0x0000FFFB),
+    gsMoveWd(4, 0x0004, 0x00000005),
+    gsMoveWd(4, 0x000C, 0x00000005),
+    gsMoveWd(4, 0x0014, 0x0000FFFB),
+    gsMoveWd(4, 0x001C, 0x0000FFFB),
     gsSPEndDisplayList(),
 };
 #endif
@@ -137,16 +137,16 @@ Gfx D_src_d4ac59de[17] = {
     gsSPGeometryMode(0x000000, 0x00210004),
     gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
     gsSPSetOtherMode(G_SETOTHERMODE_L, 3, 29, 0xC8104B50),
-    gsSPMoveWord(4, 0x0004, 0x00000001),
-    gsSPMoveWord(4, 0x000C, 0x00000001),
-    gsSPMoveWord(4, 0x0014, 0x0000FFFF),
-    gsSPMoveWord(4, 0x001C, 0x0000FFFF),
+    gsMoveWd(4, 0x0004, 0x00000001),
+    gsMoveWd(4, 0x000C, 0x00000001),
+    gsMoveWd(4, 0x0014, 0x0000FFFF),
+    gsMoveWd(4, 0x001C, 0x0000FFFF),
     gsSPVertex(g_particleQuadVertices, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 2, 3, 0, 0),
-    gsSPMoveWord(4, 0x0004, 0x00000005),
-    gsSPMoveWord(4, 0x000C, 0x00000005),
-    gsSPMoveWord(4, 0x0014, 0x0000FFFB),
-    gsSPMoveWord(4, 0x001C, 0x0000FFFB),
+    gsMoveWd(4, 0x0004, 0x00000005),
+    gsMoveWd(4, 0x000C, 0x00000005),
+    gsMoveWd(4, 0x0014, 0x0000FFFB),
+    gsMoveWd(4, 0x001C, 0x0000FFFB),
     gsSPEndDisplayList(),
 };
 #endif

@@ -2,21 +2,23 @@
 #include "include_asm.h"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 /* osSetThreadPri, drafted from ultralib src/os/setthreadpri.c (2.0I-L, non-debug). */
 
 
 
-extern OSThread_s *__osRunQueue;
-extern OSThread_s *__osRunningThread;
-extern void __osDequeueThread(OSThread_s **queue, OSThread_s *t);
-extern void __osEnqueueAndYield(OSThread_s **queue);
+extern OSThread *__osRunQueue;
+extern OSThread *__osRunningThread;
+extern void __osDequeueThread(OSThread **queue, OSThread *t);
+extern void __osEnqueueAndYield(OSThread **queue);
 
-void osSetThreadPri(OSThread_s *t, s32 pri)
+void osSetThreadPri(OSThread *t, s32 pri)
 {
     register u32 saveMask;
-    OSThread_s **runQueue;
+    OSThread **runQueue;
 
     saveMask = __osDisableInt();
 

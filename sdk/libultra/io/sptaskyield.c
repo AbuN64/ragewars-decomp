@@ -1,7 +1,6 @@
 #include "include_asm.h"
-#include "COMMON/OSTASK_T.H"
-#include "../../include/libultra/io/spsetstat.h"
-#include "../../include/libgultra/sptaskyield.h"
+#include <ultra64.h>
+#include <PR/os_internal_rsp.h>
 
 void osSpTaskYield(void) { __osSpSetStatus(0x400U); }
 

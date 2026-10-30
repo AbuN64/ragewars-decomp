@@ -61,7 +61,6 @@ extern "C" {
 #define gp	$28
 #define sp	$29
 #define fp	$30
-#define s8	$30
 #define ra	$31
 #endif
 
@@ -102,7 +101,6 @@ extern "C" {
 #define gp	$28
 #define sp	$29
 #define fp	$30
-#define s8	$30
 #define ra	$31
 #endif
 

@@ -13,7 +13,7 @@ int read8(struct ALSeq_s *stream) {
 }
 
 /** Consume and return two big-endian bytes from the stream pointer at offset 8. */
-s16 read16(ALSeq_s *sequenceObject) {
+s16 read16(ALSeq *sequenceObject) {
     struct ALSeq_s *stream = sequenceObject;
     unsigned char *p;
     u32 b0;
@@ -28,7 +28,7 @@ s16 read16(ALSeq_s *sequenceObject) {
     return (s16)((b0 << 8) | b1);
 }
 
-s32 read32(ALSeq_s *sequenceObject) {
+s32 read32(ALSeq *sequenceObject) {
     struct ALSeq_s *stream = sequenceObject;
     unsigned char *p;
     unsigned int b0, b1, b2, b3;

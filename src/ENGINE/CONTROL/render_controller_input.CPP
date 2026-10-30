@@ -7,7 +7,9 @@
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "libultra/os/getthreadid.h"
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 #include "OS/controller.H"
 /* Reads the four controllers once per frame and folds them into the combined input record g_combinedControllerProfile.
@@ -18,8 +20,8 @@
 extern u8 g_controllerPakFrontendState;
 extern char g_controllerSiMessageQueue;
 extern ContPad g_controllerPadData[4];
-extern void osContGetQuery(void *);
-extern void osContReset(void *, void *);
+
+
 void Control_ReadControllerStates(void) {
     ControllerProfile *summary;
     s32 i;
@@ -100,8 +102,8 @@ extern char g_controllerRumblePool;
 
 
 extern void Control_UpdateControllerRumble(void *);
-extern void osContStartQuery(void *);
-extern void osContStartReadData(void *);
+
+
 
 void Control_PollControllerPaks(void) {
     s32 locked;

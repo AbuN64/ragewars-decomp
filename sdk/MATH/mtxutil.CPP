@@ -3,7 +3,8 @@
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/GUMTXL2F.H"
 
-void guMtxIdent(s32 *fixedMatrix) {
+void guMtxIdent(Mtx *m) {
+    s32 *fixedMatrix = (s32 *)m;
     f32 matrix[16];
     u8 *diagBase;
     u8 *diag;
@@ -73,7 +74,8 @@ void guMtxIdent(s32 *fixedMatrix) {
     } while (i < 4);
 }
 
-void guMtxIdentF(u8 *matrixBytes) {
+void guMtxIdentF(float mf[4][4]) {
+    u8 *matrixBytes = (u8 *)mf;
     u8 *diag;
     u8 *elem;
     s32 r;
@@ -101,7 +103,9 @@ void guMtxIdentF(u8 *matrixBytes) {
     } while (r < 4);
 }
 
-void guMtxF2L(f32 *floatMatrix, s32 *fixedMatrix) {
+void guMtxF2L(float mf[4][4], Mtx *m) {
+    f32 *floatMatrix = (f32 *)mf;
+    s32 *fixedMatrix = (s32 *)m;
     s32 *outLo;
     s32 *outHi;
     f32 *inRow;
@@ -141,7 +145,9 @@ void guMtxF2L(f32 *floatMatrix, s32 *fixedMatrix) {
     } while (i < 4);
 }
 
-void guMtxL2F(f32 *floatMatrix, s32 *fixedMatrix) {
+void guMtxL2F(float mf[4][4], Mtx *m) {
+    f32 *floatMatrix = (f32 *)mf;
+    s32 *fixedMatrix = (s32 *)m;
     s32 *inLo;
     u32 *inHi;
     f32 *outRow;

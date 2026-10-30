@@ -1,9 +1,8 @@
 #include "include_asm.h"
-#include "COMMON/HARDWARE_IO.H"
+#include <ultra64.h>
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/GUMTXL2F.H"
-#include "../include/MATH/aisetfreq.H"
 #include "COMMON/ALFXPARAM.H"
 
  /* 0.5, followed by 2^31 */
@@ -41,9 +40,9 @@ converted:
         bitRate = 16;
     }
 
-    IO_READ_WORD(0xA4500010U) = dacRate - 1;
-    IO_READ_WORD(0xA4500014U) = bitRate - 1;
-    IO_READ_WORD(0xA4500008U) = 1;
+    IO_WRITE(0xA4500010U, dacRate - 1);
+    IO_WRITE(0xA4500014U, bitRate - 1);
+    IO_WRITE(0xA4500008U, 1);
     return g_audioClockRate / (s32)dacRate;
 }
 

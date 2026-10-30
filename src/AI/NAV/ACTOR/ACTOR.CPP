@@ -4,7 +4,7 @@
 #include "AI/SOURCE.H"
 #include "AI/ACTOR_SETUP_VERSIONS.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "UI/X_FILES/X_PLUS.H"
 
 /* 80212C90_18.CPP */

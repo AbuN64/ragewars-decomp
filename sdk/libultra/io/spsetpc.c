@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/OSTASK_T.H"
+#include <ultra64.h>
 #include "TYPES.H"
 
 

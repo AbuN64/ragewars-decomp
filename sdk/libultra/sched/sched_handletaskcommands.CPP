@@ -4,21 +4,19 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "COMMON/OSTASK_T.H"
+#include <ultra64.h>
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
 #include "COMMON/BOOT_TV_TYPE.H"
-#include "../../include/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "../../include/SCHED/osscremoveclient.H"
-#include "../../include/libgultra/OSWRITEBACKDCACHEALL.H"
-#include "../../include/libgultra/sptaskyield.h"
-#include "../../include/os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 extern s32 g_resourceLoadPriorityBoost;
-extern void osSetThreadPri(void *priority, s32 pri);
+
 void __scYield(void *scheduler) {
     void *currentRspTask;
     currentRspTask = (((struct SchedulerCurrentRspTaskView *) ((s8 *) scheduler))->currentRspTask);
@@ -34,7 +32,7 @@ void Sched_HandleTaskCommands(void *scheduler) {
     s32 value2 = 0;
     s32 flags;
 
-    while (osRecvMesg(&((OSSched *)scheduler)->commandQueue, &node, 0) != -1) {
+    while (osRecvMesg(&((OSSched *)scheduler)->cmdQ, &node, 0) != -1) {
         if (node->type == 1 && (node->flags & 0x20) && g_resourceLoadPriorityBoost == 0) {
             g_resourceLoadPriorityBoost = 2;
             osSetThreadPri(&g_resourceCacheWorker, g_resourceLoadBusyPriority);

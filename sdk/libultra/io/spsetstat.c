@@ -1,6 +1,6 @@
 #include "include_asm.h"
-#include "COMMON/OSTASK_T.H"
-#include "../../include/libultra/io/spsetstat.h"
+#include <ultra64.h>
+#include <PR/os_internal_rsp.h>
 
 /** Write a word to the SP status register. */
 void __osSpSetStatus(unsigned int statusCommand) {

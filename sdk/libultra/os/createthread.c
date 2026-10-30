@@ -1,7 +1,9 @@
 #include "include_asm.h"
 #include "COMMON/OSTHREAD_S.H"
 #include "TYPES.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 /* 802BFD80_5.CPP */
 #if defined(VERSION_DE)
@@ -11,14 +13,14 @@ unsigned char g_CreatethreadTrailingBytes[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0
 /* createthread.c */
 /* osCreateThread, drafted from ultralib src/os/createthread.c (2.0I-J, no thread profile). */
 
-extern OSThread_s *__osActiveQueue;
+extern OSThread *__osActiveQueue;
 extern void System_CleanupThreadEntry(void);
 
-void osCreateThread(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 p)
+void osCreateThread(OSThread *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 p)
 {
     register u32 saveMask;
     u32 mask;
-    OSThread_s **active;
+    OSThread **active;
 
     t->id = id;
     t->priority = p;

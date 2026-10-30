@@ -3,7 +3,7 @@
 #include "COMMON/RESPONSE.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "../include/OSINT/pigetstatus.H"
+#include <ultra64.h>
 
 #if defined(VERSION_US_REV1)
 

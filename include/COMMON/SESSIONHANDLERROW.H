@@ -2,7 +2,7 @@
 #define COMMON_SESSIONHANDLERROW_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/WORLDSORTENTRY.H"
@@ -54,7 +54,6 @@ extern u32 g_renderFrameBufferCount;
 extern void *g_colorImageBuffers[];
 extern void Sched_InitializeSchedulerThread(Panel *, s32, s32, s32, u8);
 #include "SCHED/osscremoveclient.H"
-extern void guMtxIdent(s32 *);
 extern void Items_ResetGameOptions(void *);
 
 typedef Node_Pak_CountLiveNodes TimingQueue;
@@ -74,7 +73,6 @@ typedef struct FrameCallback {
  void (*auxiliary1)(TimingWorld *);
 } FrameCallback;
 extern FrameCallback g_sessionDrawHandlers[];
-extern u64 osGetTime(void);
 extern s32 Cinema_GetSequenceRequest(void);
 extern u32 Cinema_GetPlaybackPauseState(void);
 extern s32 Menu_CountLiveNodes(Node_Pak_CountLiveNodes **);
@@ -96,7 +94,6 @@ extern void SetN64_CommitSessionInputs(void *);
 
 extern int Control_IsSnapshotActive(void);
 
-extern s32 __osGetFpcCsr(void);
 extern char g_buildVersionTextBuffer[];
 extern char g_buildVersionFormat[];
 extern char g_buildDateTimeTextRev1[];

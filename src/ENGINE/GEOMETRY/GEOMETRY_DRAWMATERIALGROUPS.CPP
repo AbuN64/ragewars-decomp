@@ -1,10 +1,10 @@
 #include "include_asm.h"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "TYPES.H"
 #include "ENGINE/GEOMETRY.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
@@ -165,7 +165,7 @@ void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 tex
         }
 }
 
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 
 #include "COMMON/DISPLAY.H"
 

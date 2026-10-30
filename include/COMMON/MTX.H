@@ -3,8 +3,8 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
-struct Mtx;
-struct Mtx {
+struct CMatrix4;
+struct CMatrix4 {
     CVector3 right;
     f32 m03;
     CVector3 up;
@@ -16,6 +16,9 @@ struct Mtx {
     f32 m32;
     f32 m33;
 };
+typedef struct CMatrix4 CMatrix4;
+
+
 
 extern float g_planeProjectionAndDirectionConstants;
 
@@ -41,8 +44,6 @@ extern float g_directionMatrixHomogeneousScale;
 
 
 
-struct Mtx;
-typedef struct Mtx Mtx;
 
 extern float g_wrappedDifferenceUpperPeriod;
 #endif

@@ -12,12 +12,11 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
 #include "ENGINE/SCENE_GRID_AND_GEOMETRY_OPERATIONS.H"
-#include "stddef.h"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ACTOR_DEFINITION.H"
@@ -184,10 +183,10 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     firstGfx = g_displayListCursor;
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_2);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_2);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_2);
-    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_2);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_2);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_2);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_2);
+    gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_2);
     z = 0;
     Geometry_BeginModelBatch();
     xCount = ((DraftStreamTable *)SetN64_GetPackSection(world->grid, 0))->count;
@@ -465,15 +464,15 @@ void Scene_DrawVisibleInstances(CScene_t *world, GameplayCamera *camera) {
     Geometry_BeginModelBatch();
     scene->m_nTransparentInstances = 0;
     if (player != NULL && (player->movementFlags & 0x100)) {
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
     } else {
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_2);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_2);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_2);
-        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_2);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_2);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_2);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_2);
+        gMoveWd(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_2);
     }
     sectorCount = scene->m_nActiveGridSections;
     sectors = scene->m_ActiveGridSections;

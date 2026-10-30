@@ -1,21 +1,10 @@
 #ifndef COMMON_OSVISCALE_H
 #define COMMON_OSVISCALE_H
-#include "acmd.h"
+#include <PR/abi.h>
 #include "TYPES.H"
 
-struct OSThread_s;
-struct OSPiHandle_s;
 
-typedef struct OSDevMgr OSDevMgr;
-struct OSDevMgr {
-    s32 active;
-    struct OSThread_s *thread;
-    OSMesgQueue *cmdQueue;
-    OSMesgQueue *evtQueue;
-    OSMesgQueue *acsQueue;
-    s32 (*dma)(s32, u32, void *, u32);
-    s32 (*edma)(struct OSPiHandle_s *, s32, u32, void *, u32);
-};
+
 
 
 struct __OSViScale;
@@ -30,17 +19,15 @@ extern float g_videoScaleSignedConversionLimit;
 struct ViModeContextView;
 typedef struct ViModeContextView ViModeContextView;
 
-struct OSMesgQueue;
 
 struct VideoDeviceManager;
-struct OSMesgQueue;
-struct OSThread;
+OSThread;
 struct VideoDeviceManager {
     u32 active;
-    struct OSThread *thread;
-    struct OSMesgQueue *cmdQueue;
-    struct OSMesgQueue *evtQueue;
-    struct OSMesgQueue *acsQueue;
+    OSThread *thread;
+    OSMesgQueue *cmdQueue;
+    OSMesgQueue *evtQueue;
+    OSMesgQueue *acsQueue;
     s32 (*dma)(s32, u32, void *, u32);
     s32 (*edma)(void *, s32, u32, void *, u32);
 };
@@ -48,18 +35,7 @@ struct VideoDeviceManager {
 
 
 
-struct OSViCommonRegs;
-struct OSViCommonRegs {
-    u32 ctrl;
-    u32 width;
-    u32 burst;
-    u32 vSync;
-    u32 hSync;
-    u32 leap;
-    u32 hStart;
-    u32 xScale;
-    u32 vCurrent;
-};
+
 
 struct VideoContextEventView;
 typedef struct VideoContextEventView VideoContextEventView;
@@ -67,8 +43,6 @@ typedef struct VideoContextEventView VideoContextEventView;
 extern double g_videoScaleUnsignedBias;
 
 
-struct OSViFieldRegs;
-typedef struct OSViFieldRegs OSViFieldRegs;
 
 struct VideoContextEventView;
 
@@ -80,44 +54,28 @@ struct ViVerticalScaleView {
 };
 
 
-struct OSViMode;
 struct ViModeContextView;
 struct ViModeContextView {
     u16 state;
     u16 retraceCount;
     void *framep;
-    struct OSViMode *modep;
+    OSViMode *modep;
     u32 control;
 };
 
 
 
-struct OSViCommonRegs;
-typedef struct OSViCommonRegs OSViCommonRegs;
 
-struct OSViFieldRegs;
-struct OSViFieldRegs {
-    u32 origin;
-    u32 yScale;
-    u32 vStart;
-    u32 vBurst;
-    u32 vIntr;
-};
 
-struct OSViMode {
-    u8 type;
-    OSViCommonRegs comRegs;
-    OSViFieldRegs fldRegs[2];
-};
+
+
 
 struct ViVerticalScaleView;
 typedef struct ViVerticalScaleView ViVerticalScaleView;
 
 
-typedef struct OSViMode Modep;
+typedef OSViMode Modep;
 
-struct OSViMode;
-typedef struct OSViMode OSViMode;
 
 struct __OSViScale;
 typedef struct __OSViScale __OSViScale;
@@ -127,7 +85,7 @@ struct ViSwapContextView {
     u16 state;
     u16 retraceCount;
     void *framep;
-    struct OSViMode *modep;
+    OSViMode *modep;
     u32 control;
     void *msgq;
     void *msg;

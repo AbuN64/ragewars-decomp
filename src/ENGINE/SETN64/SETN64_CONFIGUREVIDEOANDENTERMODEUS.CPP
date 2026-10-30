@@ -16,9 +16,7 @@ extern s32 g_frontendCurrentVideoModeIndex;
 extern char g_videoModeDefaultLabel[], g_videoModeLabels[];
 extern f32 g_Setn64Initializemode17creditsWords1;
 extern void *g_Setn64ConfigurevideoandentermodeusPointerWords1[];
-extern void osViSetMode(void *);
 extern void osViSetYScale(f32);
-extern void osViSetSpecialFeatures(s32);
 extern void Cinema_EndSequence(void);
 #define SCR_W(state, off) (*(s32 *)((char *)(state) + (off)))
 /* Per-frame screen step: when the flag at 0x26DD0 is set it switches the video mode (label chosen by g_frontendCurrentVideoModeIndex, Y scale from a constant, mode 2); in state 2 of g_gameModeTransitionFrames with that flag clear it latches 0x26DBC into 0x26DB8, clears 0x26DB0, runs the reset calls and dispatches the 12-byte table row g_Setn64ConfigurevideoandentermodeusPointerWords1 for that value. */

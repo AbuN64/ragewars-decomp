@@ -6,17 +6,14 @@
 #include "COMMON/WORLDSORTENTRY.H"
 #include "TYPES.H"
 #include "../../include/SCHED/osscremoveclient.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 #if defined(VERSION_EU)
 #include "COMMON/OSVISCALE.H"
-#include "../../include/os.h"
 extern s32 g_schedulerFrameCountdown, g_frontendCurrentVideoModeIndex;
 extern OSViMode g_schedulerAlternateVideoMode, g_videoModeLabels;
-extern void osViSetYScale(f32);
-extern void osViSetMode(OSViMode *);
-extern void osViBlack(s32);
-extern void osViSetSpecialFeatures(s32);
 extern void Sched_HandleRetrace(OSSched *);
 extern void Frontend_UpdateScreenMode(void);
 extern void Sched_HandleRdpCompletion(OSSched *);
@@ -30,7 +27,7 @@ void Sched_RunEventLoopEu(OSSched *sc) {
     OSScClientWork *client;
     OSViMode *mode;
     for (;;) {
-        osRecvMesg(&sc->interruptQueue, &msg, 1);
+        osRecvMesg(&sc->interruptQ, &msg, 1);
         switch ((s32)msg) {
         case 0x29A:
             if (g_schedulerShutdownPending && --g_schedulerFrameCountdown <= 0) {
@@ -55,7 +52,7 @@ void Sched_RunEventLoopEu(OSSched *sc) {
             g_schedulerShutdownPending = 1;
             g_schedulerFrameCountdown = 20;
             while (client) {
-                osSendMesg(client->queue, &sc->retraceMessage, 0);
+                osSendMesg(client->queue, &sc->retraceMsg, 0);
                 client = client->next;
             }
             break;
@@ -65,7 +62,7 @@ void Sched_RunEventLoopEu(OSSched *sc) {
 }
 #endif
 
-extern void osSetThreadPri(void *, s32);
+
 
 
 
@@ -83,11 +80,11 @@ extern s32 g_schedulerFrameQueueReadIndex, g_schedulerRetracesSinceSwap, g_sched
 
 /** Handle one scheduler retrace, recover a lost yielded-task completion, and notify clients. */
 void Sched_HandleRetrace(OSSched *sc) {
-    OSScTask_s *event = 0;
+    OSScTask *event = 0;
     s32 value1 = 0;
     s32 value2 = 0;
     s32 flags;
-    OSScTask_s *pending;
+    OSScTask *pending;
     OSScClientWork *work;
     Frame *schedule;
 
@@ -96,7 +93,7 @@ void Sched_HandleRetrace(OSSched *sc) {
         if (g_resourceLoadPriorityBoost == 0) osSetThreadPri(&g_resourceCacheWorker, g_resourceLoadIdlePriority);
     }
     sc->frameCount++;
-    while (osRecvMesg(&sc->commandQueue, &event, 0) != -1) __scAppendList(sc, event);
+    while (osRecvMesg(&sc->cmdQ, &event, 0) != -1) __scAppendList(sc, event);
     g_schedulerRetracesSinceSwap++;
     if (g_schedulerSwapPending != 0) {
         g_schedulerRetracesSinceSwap = 0;
@@ -117,7 +114,7 @@ void Sched_HandleRetrace(OSSched *sc) {
     }
     if (sc->curRSPTask == 0 && sc->curRDPTask == 0) {
         pending = sc->gfxListHead;
-        if (pending != 0 && pending->list.type == 1 && pending->state == 0x32) {
+        if (pending != 0 && pending->list.t.type == 1 && pending->state == 0x32) {
             pending->state = 2;
             sc->curRSPTask = sc->gfxListHead;
             sc->gfxListHead = sc->gfxListHead->next;

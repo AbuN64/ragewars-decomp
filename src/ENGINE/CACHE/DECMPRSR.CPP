@@ -8,10 +8,12 @@
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "UI/X_FILES/X_PLUS.H"
 
-extern void osCreateThread(void *thread, s32 id, void *entry, void *argument, void *stack, s32 priority);
+
 
 void Cache_StartResourceLoadWorker(ResourceLoadWorker *worker, s32 id) {
     osCreateMesgQueue(&worker->requests, worker->messages, 128);
@@ -21,7 +23,7 @@ void Cache_StartResourceLoadWorker(ResourceLoadWorker *worker, s32 id) {
     osStartThread(worker);
 }
 
-extern s32 osSetThreadPri(void *, s32);
+
 extern s32 osJamMesg(OSMesgQueue *queue, void *message, s32 block);
 
 
@@ -62,7 +64,7 @@ s32 Cache_WaitForResourceLoads(ResourceLoadWorker *resourceLoadWorker) {
             osSetThreadPri(resourceLoadWorker, g_resourceLoadBusyPriority);
         } while (resourceLoadWorker->requests.validCount != 0);
     }
-    return osSetThreadPri(resourceLoadWorker, g_resourceLoadIdlePriority);
+    osSetThreadPri(resourceLoadWorker, g_resourceLoadIdlePriority);
 }
 
 #if defined(VERSION_US)

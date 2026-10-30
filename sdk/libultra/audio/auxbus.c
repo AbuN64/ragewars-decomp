@@ -1,7 +1,6 @@
 #include "COMMON/ALAUXBUS_S.H"
-#include "abi.h"
+#include <PR/abi.h>
 #include "TYPES.H"
-#include "acmd.h"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"

@@ -60,7 +60,7 @@ void Preview_SelectMatchingPreviewModel(ModelPreview *preview, s32 id, s32 extra
         }
     }
 }
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/GLOBALS.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
@@ -70,7 +70,7 @@ void Preview_SelectMatchingPreviewModel(ModelPreview *preview, s32 id, s32 extra
 #include "COMMON/TRIPLE.H"
 #include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
 #include "TYPES.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 s32 Gobjinst_UpdateActorRootDisplacement(void *);
 s32 Gobjinst_DrawVisibleCachedActor(void *, void *);

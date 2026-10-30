@@ -5,14 +5,16 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "UI/X_FILES/X_PLUS.H"
 
-extern OSPiHandle_s *g_peripheralDomainHandles[];
+extern OSPiHandle *g_peripheralDomainHandles[];
 
 /** Update changed PI timing registers, then write through the uncached transfer address. */
-s32 osEPiRawWriteIo(OSPiHandle_s *handle, u32 deviceOffset, u32 wordValue) {
-    OSPiHandle_s *previous;
+s32 osEPiRawWriteIo(OSPiHandle *handle, u32 deviceOffset, u32 wordValue) {
+    OSPiHandle *previous;
     s32 index;
 
     while (*(volatile u32 *)0xA4600010 & 3) {
@@ -58,12 +60,12 @@ s32 osEPiRawWriteIo(OSPiHandle_s *handle, u32 deviceOffset, u32 wordValue) {
 
 
 
-OSPiHandle_s *osLeoDiskInit(void) {
-    OSPiHandle_s *state;
+OSPiHandle *osLeoDiskInit(void) {
+    OSPiHandle *state;
     struct OSPiHandle_s *handle;
     u32 lock;
-    OSPiHandle_s *previous;
-    OSPiHandle_s **slot;
+    OSPiHandle *previous;
+    OSPiHandle **slot;
 
     state = &g_diskPeripheralHandle;
     state->type = 2;
@@ -79,7 +81,7 @@ OSPiHandle_s *osLeoDiskInit(void) {
     *(volatile u32 *)0xA4600030 = 2;
     state->speed = 0;
     handle = (void *)state;
-    XPlus_FillMemory(handle->transferInfo.bytes, 0, 0x60);
+    XPlus_FillMemory(&handle->transferInfo, 0, sizeof(handle->transferInfo));
     lock = __osDisableInt();
     slot = &g_peripheralHandleList;
     previous = *slot;

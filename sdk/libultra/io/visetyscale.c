@@ -1,7 +1,9 @@
 #include "../../include/libgultra.h"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 extern void *__osViNext;
 void osViSetYScale(f32 yScale) {

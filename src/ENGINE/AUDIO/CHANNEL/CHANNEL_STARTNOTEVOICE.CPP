@@ -19,15 +19,14 @@
 
 
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-struct ALSndPlayer;
-extern void alSndpSetPriority(struct ALSndPlayer *player, short index, unsigned char value);
+ALSndPlayer;
 #include "TEXTURE/SOUND_UPDATEAUDIOCONTEXT.H"
 #include "COMMON/LISTNODE.H"
 
 
 extern s32 Gsky_FindNearestCamera(MenuMatchGlobals *, Triple *);
-extern void alSndpPlay(char *);
-extern void alSndpDeallocate(char *, s32);
+
+
 extern void Channel_UpdateVoiceVolume(ViewChannelUpdateVoicePlayback *);
 extern void Channel_UpdateVoicePan(ViewChannelUpdateVoicePlayback *);
 extern void Channel_UpdateVoicePitch(ViewChannelUpdateVoicePlayback *);
@@ -147,7 +146,7 @@ s16 Channel_SelectVoiceSlot(RecordD90 *record, s32 variant, s32 count, s16 prior
 
 
 typedef struct SoundBankState {
-    ALBank_s *bank;
+    ALBank *bank;
     char pad4[4];
     char pool[88];
     s16 slots[16];
@@ -216,7 +215,7 @@ extern s32 SoundInfo_GetPriority(void *);
 extern s32 SoundInfo_GetMode(void *);
 extern s32 SoundInfo_GetPan(void *);
 extern s32 SoundInfo_GetFlags(void *);
-extern s16 alSndpAllocate(void *, s32);
+
 /* Starts a note on a free voice: picks the voice with Channel_SelectVoiceSlot, asks the sound set for its sample, and
  * fills in the voice record (volume, pan, pitch, which categories its effect belongs to). Returns the voice, or
  * 0 when the note's set is too small, the chance roll fails, or no voice or sample is available. */

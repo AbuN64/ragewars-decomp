@@ -5,10 +5,9 @@
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "COMMON/BOOT_TV_TYPE.H"
 #include "FRONTEND/SCREEN.H"
-#include "../../sdk/include/AUDIO/visetmode.H"
 #include "FRONTEND/SCREEN_VIDEO_MODE.H"
 
 /* 8040B45C_21.CPP */
@@ -73,7 +72,7 @@ extern unsigned short g_frontendVideoModeId;
 extern Modep g_frontendVideoMode;
 extern Modep g_videoModeLabels[];
 
-extern void osViSetMode(void *);
+
 /* VI start registers (hStart, vStart) hold the first pixel/line in the high half and the last in the low half. The
    ROM reads the halves through a stack copy, so a little-endian host keeps the low half at the first address. */
 typedef union VideoInterval {

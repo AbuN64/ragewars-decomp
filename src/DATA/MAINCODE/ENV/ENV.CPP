@@ -1,8 +1,7 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
 #include "COMMON/ALPARAM_S.H"
 #include "TYPES.H"
-#include "abi.h"
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"

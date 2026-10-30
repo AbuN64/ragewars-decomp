@@ -2,7 +2,6 @@
 #include "TYPES.H"
 #include "COMMON/LONE/PARTICLE_PITCH_MATRIX_SCRATCH.H"
 
-extern void guMtxIdent(s32 *);
 extern void List_InitializeIntrusive(void *list, s32 nextOffset, s32 prevOffset);
 extern void List_AppendIntrusive(void *list, void *node);
 extern void Playerai_InitializeCompactAnimationState(void *definition);

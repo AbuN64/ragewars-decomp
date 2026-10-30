@@ -15,7 +15,7 @@ extern s64 Libc_SignedDivide(s64, s64) __attribute__((const));
 
 extern s64 Libc_SignedRemainder(s64, s64) __attribute__((const));
 
-#include "acmd.h"
+#include <PR/abi.h>
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"

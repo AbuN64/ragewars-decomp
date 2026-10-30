@@ -4,8 +4,8 @@
 #include "TYPES.H"
 #include "include_asm.h"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 #include "COMMON/LENS_FLARE.H"

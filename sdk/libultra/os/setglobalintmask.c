@@ -1,12 +1,14 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "../../include/libultra/os/setglobalintmask.h"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_exception.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 
 
-void __osSetGlobalIntMask(s32 interruptMask) {
+void __osSetGlobalIntMask(OSHWIntr interruptMask) {
     u32 mask;
     s32 *p;
 

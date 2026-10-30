@@ -13,7 +13,7 @@
 #include "FRONTEND/MENU_IMAGE.H"
 #include "FRONTEND/EQUIP_ACTIVATEEQUIPMENTPANEL.H"
 #include "FRONTEND/PLAYER.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 
 /* 800E1FC0.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)

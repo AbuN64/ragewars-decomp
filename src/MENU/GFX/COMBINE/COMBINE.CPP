@@ -1,9 +1,9 @@
 #include "COMMON/RECTANGLE_DRAW.H"
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TEXTURE.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 #include "TYPES.H"
 #include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
 #include "MENU/GFX/RECT.H"

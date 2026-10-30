@@ -4,7 +4,9 @@
 #include "IO/EXTERNS.H"
 #include "TYPES.H"
 #include "IO/libsn_disableinterrupts.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "COMMON/LIBSN_AND_RESIDENT_CALLBACKS.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "IO/libsn_readportbufferwithdma.H"
@@ -56,10 +58,10 @@ void Libsn_WritePortBuffer(s32 address, const u8 *source, u32 length)
 }
 
 extern volatile s32 g_staticDataRegionStart;
-struct OSIoMesg;
-extern struct OSIoMesg g_libsnDmaRequest;
+OSIoMesg;
+extern OSIoMesg g_libsnDmaRequest;
 extern OSMesgQueue g_libsnDmaCompletionQueue;
-extern s32 osPiStartDma(struct OSIoMesg *, s32, s32, u32, void *, u32, OSMesgQueue *);
+extern s32 osPiStartDma(OSIoMesg *, s32, s32, u32, void *, u32, OSMesgQueue *);
 
 /* Write an arbitrary byte stream to the device, using DMA when aligned
  * and falling back to byte/word writes if the DMA request is unavailable. */
@@ -324,9 +326,9 @@ extern void *g_libsnHostRequestMessage;
 extern void *g_libsnDmaCompletionMessage;
 extern OSMesgQueue g_libsnHostRequestQueue;
 extern void *g_libsnHostReplyMessage;
-extern OSThread_s g_libsnHostRequestThread; /* host request thread */
+extern OSThread g_libsnHostRequestThread; /* host request thread */
 extern OSMesgQueue g_libsnHostReplyQueue;
-void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
+ /* osSetEventMesg */
 extern void Libsn_ReadPortBufferWithDma(u32, u8 *, u32);
 /* Create the host request queues and start the request thread once (thread id FS). */
 void Libsn_InitializeHostRequestThread(s32 threadPriority) {

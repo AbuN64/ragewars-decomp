@@ -4,7 +4,9 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "../../include/os_pif.h"
 
 #if !(defined(VERSION_EU_X) || defined(VERSION_US_REV1))
@@ -12,7 +14,6 @@
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "TYPES.H"
 #include "COMMON/PLAYER_POOL_AND_INODE_CACHE_VIEWS.H"
-#include "../../include/os.h"
 #include "../../include/os_pif.h"
 void __osPfsRequestData(u8 cmd);
 

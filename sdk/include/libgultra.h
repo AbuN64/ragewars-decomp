@@ -22,28 +22,24 @@ extern s32 Libultra_SendDebugLinkString(u8 *text);
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V1.H"
-extern f32 alSeqTicksToSec(SequenceTicksPerQuarterView *sequence, s32 ticks, s32 tempo);
 
-extern u32 alSeqSecToTicks(SequenceTicksPerQuarterView *seq, f32 sec, u32 tempo);
 
 #include "COMMON/PARAMSRECAT8V3.H"
-extern void _handleEvent(struct ALSndPlayer * sndp, union ALSndpEvent * event);
+extern void _handleEvent(ALSndPlayer * sndp, union ALSndpEvent * event);
 
 extern s32 _sndpVoiceHandler(void *node);
 
-extern s32 readVarLen(ALSeq_s *);
+extern s32 readVarLen(ALSeq *);
 extern const float g_sequenceMicrosecondsPerSecond;
 extern s32 readVarLen(struct ALSeq_s *sequence);
 
-extern void alSynDelete(s32 *initializedFlag);
 
 #include "COMMON/ALPARAM_S.H"
 extern void init_lpfilter(AudioLowPassFilter *lp);
 
 extern int __osDpDeviceBusy();
 
-#include "acmd.h"
-extern void osViSetYScale(f32 yScale);
+#include <PR/abi.h>
 
 extern s32 g_serialDmaAssertText;
 extern s32 s_sirawdmaText;

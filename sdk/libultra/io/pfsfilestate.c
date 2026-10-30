@@ -20,7 +20,7 @@
 
 extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 
-s32 osPfsFileState(OSPfs *pfs, s32 file_no, NoteState *state)
+s32 osPfsFileState(OSPfs *pfs, s32 file_no, OSPfsState *state)
 {
     s32 ret;
     int pages;

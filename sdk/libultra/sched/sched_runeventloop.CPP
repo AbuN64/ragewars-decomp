@@ -1,4 +1,5 @@
-#include "../../include/libgultra/viblack.h"
+#include <ultra64.h>
+#include "COMMON/TEXTURE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SOUNDINFO.H"
@@ -9,9 +10,9 @@
 #include "../../include/libgultra.h"
 #include "COMMON/BOOT_TV_TYPE.H"
 #include "FRONTEND/SCREEN_VIDEO_MODE.H"
-#include "../../include/AUDIO/visetmode.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
-#include "../../include/os.h"
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
 extern void Sched_HandleRetrace(void *scheduler);
@@ -23,7 +24,7 @@ extern void Sched_HandleTaskCommands(void *scheduler);
 extern void *SoundVoicePool_GetGlobalState(void);
 extern void SoundVoicePool_StopAll(void *soundVoicePool);
 
-extern void osViSetMode(void *modep);
+
 
 
 
@@ -41,7 +42,7 @@ void Sched_RunEventLoop(void *schedulerStorage) {
 
 loop_1:
 loop_2:
-    osRecvMesg(&scheduler->interruptQueue, &event, 1);
+    osRecvMesg(&scheduler->interruptQ, &event, 1);
     if (event == 0x29B) {
         goto event_29b;
     }
@@ -99,7 +100,7 @@ event_29d:
     g_schedulerFrameCountdown = 0x14;
     if (node != 0) {
         do {
-            osSendMesg(node->queue, &scheduler->retraceMessage, 0);
+            osSendMesg(node->queue, &scheduler->retraceMsg, 0);
             node = node->next;
         } while (node != 0);
     }

@@ -16,7 +16,7 @@ extern void *__osRunningThread;
 
 
 /** Return offset 0x14 from the supplied object or the default global object. */
-unsigned int osGetThreadId(void *object) {
+OSId osGetThreadId(OSThread *object) {
     ThreadIdentifierView *object_record;
     if (object == 0) {
         object = __osRunningThread;

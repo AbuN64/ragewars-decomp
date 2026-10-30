@@ -1,10 +1,9 @@
-#include "COMMON/GFX.H"
+#include <ultra64.h>
 #include "TYPES.H"
-#include "gbi.h"
+#include <PR/gbi.h>
 
 #if defined(VERSION_US_REV1)
 /* Preserve the original SDK shift expression used by the texture commands. */
-#include "../../../sdk/include/mbi.h"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/RESIDENTSTATE.H"

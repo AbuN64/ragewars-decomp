@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/GUMTXL2F.H"
-#include "../include/MATH/aigetlen.H"
+#include <ultra64.h>
 
 /** Read the hardware register at 0xA450000C. */
 unsigned int osAiGetStatus(void) {

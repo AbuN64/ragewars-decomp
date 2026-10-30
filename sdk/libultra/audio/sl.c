@@ -5,7 +5,7 @@
 #include "../../include/libgultra/alunlink.h"
 #include "../../include/al_globals.h"
 
-void alUnlink(ListLink *node) {
+void alUnlink(ALLink *node) {
     if (node->next != 0) {
         node->next->prev = node->prev;
     }
@@ -14,33 +14,33 @@ void alUnlink(ListLink *node) {
     }
 }
 
-void alLink(void *node, void **previousNode) {
-    void *temp;
+void alLink(ALLink *node, ALLink *previousNode) {
+    ALLink *temp;
 
-    temp = *previousNode;
-    ((Field_void_4 *)(node))->value = previousNode;
-    *(void **)node = temp;
-    temp = *previousNode;
+    temp = previousNode->next;
+    node->prev = previousNode;
+    node->next = temp;
+    temp = previousNode->next;
     if (temp != 0) {
-        ((Field_void_4 *)(temp))->value = node;
+        temp->prev = node;
     }
-    *previousNode = node;
+    previousNode->next = node;
 }
 
-extern void alSynNew(void);
 
-void alInit(void *audioGlobals) {
+
+void alInit(ALGlobals *audioGlobals, ALSynConfig *config) {
     void **p;
 
     p = (void **)&g_audioGlobals;
     if (*p == 0) {
         *p = audioGlobals;
-        alSynNew();
+        alSynNew(&audioGlobals->drvr, config);
     }
 }
 
 
-void alClose(s32 *audioGlobals) {
+void alClose(ALGlobals *audioGlobals) {
     void **p;
 
     p = (void **)&g_audioGlobals;

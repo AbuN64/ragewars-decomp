@@ -7,12 +7,13 @@
 #include "COMMON/WORLDSORTENTRY.H"
 #include "TYPES.H"
 #include "../../include/SCHED/sched_runeventloopus.H"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #if defined(VERSION_US)
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 extern s32 g_schedulerFrameCountdown;
-extern void osViBlack(s32);
 extern void Sched_HandleRetrace(OSSched *);
 extern void Frontend_UpdateScreenMode(void);
 extern void Sched_HandleRdpCompletion(OSSched *);
@@ -25,7 +26,7 @@ void Sched_RunEventLoopUs(OSSched *sc) {
     void *msg;
     OSScClientWork *client;
     for (;;) {
-        osRecvMesg(&sc->interruptQueue, &msg, 1);
+        osRecvMesg(&sc->interruptQ, &msg, 1);
         switch ((s32)msg) {
         case 0x29A:
             if (g_schedulerShutdownPending && --g_schedulerFrameCountdown <= 0) {
@@ -45,7 +46,7 @@ void Sched_RunEventLoopUs(OSSched *sc) {
             g_schedulerShutdownPending = 1;
             g_schedulerFrameCountdown = 20;
             while (client) {
-                osSendMesg(client->queue, &sc->retraceMessage, 0);
+                osSendMesg(client->queue, &sc->retraceMsg, 0);
                 client = client->next;
             }
             break;

@@ -3,7 +3,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/GUMTXL2F.H"
 #include "COMMON/TRIPLE.H"
-#include "../../include/MATH/GUMTXIDENTF.H"
+#include <ultra64.h>
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 const unsigned int k_perspectiveProjectionConstantWordsUsRev1[5] = {
@@ -12,7 +12,7 @@ const unsigned int k_perspectiveProjectionConstantWordsUsRev1[5] = {
 #endif
 
           /* guMtxIdentF */
-extern void guMtxF2L(f32 *mf, s32 *m);
+
 
 /* guPerspectiveF, drafted from ultralib src/gu/perspective.c. This library evaluates it in single
    precision against the cartridge's constants: pi/180 and 0.5 at g_perspectiveFloatAngleScale, -1 and 2 at
@@ -34,7 +34,7 @@ extern void guMtxF2L(f32 *mf, s32 *m);
  /* 2^31 */
 
 /* guPerspective (libultra gu): builds a perspective projection into a fixed-point matrix and reports its normalisation. */
-void guPerspective(s32 *m, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale) {
+void guPerspective(Mtx *m, u16 *perspNorm, float fovy, float aspect, float near, float far, float scale) {
     f32 mf[4][4];
     f32 cot;
     f32 norm;

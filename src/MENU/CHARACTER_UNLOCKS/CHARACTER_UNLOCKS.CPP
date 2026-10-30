@@ -7,8 +7,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "TYPES.H"
 #include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 #include "FRONTEND/FRONTEND_DRAWMODELPREVIEW.H"

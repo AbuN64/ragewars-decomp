@@ -4,8 +4,8 @@
 #include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "gbi.h"
-#include "COMMON/GFX.H"
+#include <PR/gbi.h>
+#include <ultra64.h>
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/INTEGERSTATE530.H"

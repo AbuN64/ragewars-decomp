@@ -25,5 +25,4 @@ void Actionai_DrawFadedActor(struct FadedActorRenderView *actor, struct ActionFa
 #define MIPS_ORI(rt, rs, imm) (0x34000000 | ((rs) << 21) | ((rt) << 16) | (imm))
 #define MIPS_JR(rs) (((rs) << 21) | 0x08)
 #define MIPS_NOP 0
-#define C0_ERROR_EPC 30
 #endif

@@ -1,5 +1,0 @@
-#ifndef LIBULTRA_OS_SETGLOBALINTMASK_H
-#define LIBULTRA_OS_SETGLOBALINTMASK_H
-#include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
-extern void __osSetGlobalIntMask(s32 interruptMask);
-#endif

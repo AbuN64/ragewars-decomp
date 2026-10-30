@@ -1,6 +1,6 @@
 #include "COMMON/MENU_OPTIONS_AND_RESULTS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 
 /* Acts on the mode of the menu held first in the block g_optionsPage points to: in mode 4 it calls

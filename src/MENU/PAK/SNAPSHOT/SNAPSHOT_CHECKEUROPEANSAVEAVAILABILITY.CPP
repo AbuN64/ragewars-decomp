@@ -9,7 +9,7 @@
 #include "COMMON/RECORDRECAT1C.H"
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 
 #if defined(VERSION_EU)
 #define Snapshot_CheckControllerPak Snapshot_CheckEuropeanSaveAvailability

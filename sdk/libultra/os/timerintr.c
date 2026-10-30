@@ -2,22 +2,23 @@
 #include "../../include/libultra/os/timerintr.h"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "TYPES.H"
-#include "../../include/libgultra/Util_WriteProcessorCompare_Timerintr.h"
-#include "../../include/os.h"
+#include <ultra64.h>
+#include <PR/os_internal_reg.h>
+#include <PR/os_internal_si.h>
 
 void __osTimerInterrupt(void)
 {
-    OSTimer_s *t;
+    OSTimer *t;
     u32 count;
     u32 elapsed_cycles;
     u32 *counter;
 
-    if (((OSTimer_s *)g_timerListSentinel)->next == g_timerListSentinel) {
+    if (((OSTimer *)g_timerListSentinel)->next == g_timerListSentinel) {
         return;
     }
     counter = &g_timerLastProcessorCount;
     for (;;) {
-        t = ((OSTimer_s *)g_timerListSentinel)->next;
+        t = ((OSTimer *)g_timerListSentinel)->next;
 
         if (t == g_timerListSentinel) {
             __osSetCompare(0);

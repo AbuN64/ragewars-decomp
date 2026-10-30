@@ -132,9 +132,8 @@ void Textload_PrepareTextureVariation(s32 textureResource, Resource *handle) {
 }
 
 #if !(defined(VERSION_US_REV1))
-#include "COMMON/GFX.H"
-#include "gbi.h"
-#include "../../../sdk/include/mbi.h"
+#include <ultra64.h>
+#include <PR/gbi.h>
 
 extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern Gfx *g_displayListCursor;

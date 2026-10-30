@@ -7,7 +7,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "TYPES.H"
 #include "ENGINE/CACHE/HEAP.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "ENGINE/CACHE/HEAP.H"
 
 s32 Heap_AllocateAtAddress(s8 *arena, void *requestedAddress, s32 requestedBytes) {

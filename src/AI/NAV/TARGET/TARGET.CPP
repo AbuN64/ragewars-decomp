@@ -3,7 +3,7 @@
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "FX/TARGET.H"
 #include "TYPES.H"
-#include "stddef.h"
+#include <ultra64.h>
 
 extern CVector3 *Scaled_GetControllerPosition(AiController *controller);
 extern s32 Scaled_MatchesBehaviorStateFilter(AiController *controller);

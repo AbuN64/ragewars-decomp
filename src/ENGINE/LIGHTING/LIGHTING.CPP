@@ -17,7 +17,7 @@
 #include "ACTORS/VERTEX_LIGHT_AND_ACTOR_VIEWS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
-#include "stddef.h"
+#include <ultra64.h>
 
 /* 80275E44_12.CPP */
 #define SK_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))

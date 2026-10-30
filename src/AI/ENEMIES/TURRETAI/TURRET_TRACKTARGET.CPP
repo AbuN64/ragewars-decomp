@@ -13,7 +13,7 @@
 #include "COMMON/REC.H"
 #include "COMMON/GRAPHICS_MATRIX_AND_VECTOR_MATH.H"
 #include "COMMON/TRIPLE.H"
-#include "stddef.h"
+#include <ultra64.h>
 #include "TYPES.H"
 #include "AI/ENEMIES/TURRETAI.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
