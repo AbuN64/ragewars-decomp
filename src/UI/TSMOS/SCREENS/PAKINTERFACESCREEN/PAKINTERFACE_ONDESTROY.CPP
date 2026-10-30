@@ -1,6 +1,6 @@
 #include "TYPES.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
-#include "UI/TSMOS/PAKINTERFACESCREEN.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #if VERSION_US
 /* Releases the screen object through Cache_FreeMemory, clears g_pakInterfaceScreen, re-activates the controller state and

@@ -23,7 +23,9 @@ typedef struct PAKInterfacePlayer {
     s32 m_NameTarget;
     PAKNameChar m_Name[PAK_NAME_LENGTH];
     s32 m_NameCursor;
-    u8 padB48[2916 - 2888];
+    s32 m_FieldB48;
+    s32 m_FieldB4C;
+    u8 padB50[2916 - 2896];
     s32 m_Marker;
 } PAKInterfacePlayer;
 /* One of the four slots: which user list and which of its four middle records hold the slot's player (-1 for none). */
@@ -59,7 +61,11 @@ typedef struct PAKGlobalPlayer {
     s8 m_Quick;
     u8 pad0F[PAK_PLAYER_RECORD_SIZE - 15];
 } PAKGlobalPlayer;
+#define PAKINTERFACE_MAX_USERS PAK_USERS
 extern PAKInterfaceScreen *g_pakInterfaceScreen;
+extern s32 PAKInterface_OnInitialUpdate(s32 a, s32 b, s32 c, s32 d);
+extern s32 PAKInterface_OnDestroy(s32 a, s32 b, s32 c, s32 d);
+extern s32 PAKInterface_OnButtonUp(s32 a, s32 b, s32 c, s32 d);
 extern PAKGlobalPlayer g_pakGlobalPlayers[PAK_USERS];
 /* Per-global-player update flags, 150 bytes apart: the active flag at +0, the pending flag at +25. */
 #define PAK_UPDATE_INFO_SIZE 150

@@ -1,5 +1,5 @@
 #include "TYPES.H"
-#include "UI/TSMOS/PAKINTERFACESCREEN.H"
+#include "UI/TSMOS/SCREENS/PAKINTERFACESCREEN.H"
 #if VERSION_US
 extern char s_pakInterfaceScreenSourceFile[];
 extern char s_pakInterfaceScreenUserInRange[];
@@ -13,12 +13,12 @@ s32 PAKInterface_OnButtonUp(s32 a, s32 b, s32 c, s32 d) {
             *(char *)0 = 0;
         }
     }
-    if (g_pakInterfaceScreen->panel[nUser].state == 12 && ((c >> 16) & 0xffff) == 3) {
+    if (g_pakInterfaceScreen->m_PAKInterfacePlayer[nUser].m_State == 12 && ((c >> 16) & 0xffff) == 3) {
         switch (d) {
         case 4:
         case 5:
-            g_pakInterfaceScreen->panel[nUser].field_B64 = 0;
-            g_pakInterfaceScreen->panel[nUser].field_B60 = 2;
+            g_pakInterfaceScreen->m_PAKInterfacePlayer[nUser].m_FieldB4C = 0;
+            g_pakInterfaceScreen->m_PAKInterfacePlayer[nUser].m_FieldB48 = 2;
             return;
         }
     }
