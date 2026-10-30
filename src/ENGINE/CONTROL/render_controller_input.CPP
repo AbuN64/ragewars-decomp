@@ -233,8 +233,9 @@ void Control_UpdateControllerInput(ControllerProfile *state, s8 x, s8 y, u32 but
     else { x = x + 3; if (x > 0) x = 0; }
     if (y > 0) { y = y - 3; if (y < 0) y = 0; }
     else { y = y + 3; if (y > 0) y = 0; }
-    /* fakematch: the one-shot loop weights fx's references by loop depth, so gcc's global allocator gives fx
-       $f0 and fy $f1 (plain `fx = x; fy = y;` swaps them); no plain source form found that does it. */
+    /* scheduler lever (owner keeps it; card c371fLFrcRoq hunts its real cause): global-alloc ranks fx (8 refs, 33 insns
+       live) below fy (8 refs, 32 insns), so plain `fx = x; fy = y;` gives fx $f1 and fy $f0; the one-shot loop makes
+       fx 9 weighted refs, which flips it to $f0/$f1. Plain forms tried: statement orders, inline helpers, macros, types, flags. */
     do { fx = x; } while (0);
     fy = y;
     if (fx == -128.0f) fx = -127.0f;
