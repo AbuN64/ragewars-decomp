@@ -8,8 +8,8 @@ const float k_xMathFloatConstantWords[5] = {
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_XMathOneWords[1] = {
-    0x3F800000,
+const float k_XMathOneWords[1] = {
+    1.0f,
 };
 #endif
 
@@ -46,8 +46,8 @@ const float k_xMathFloatConstantWordsBlock6[5] = {
 };
 
 /* ROM-grounded data: src/k_XMathOneWordsVariant1_XMath.c */
-const unsigned int k_XMathOneWordsVariant1[1] = {
-    0x3F800000,
+const float k_XMathOneWordsVariant1[1] = {
+    1.0f,
 };
 
 const unsigned int k_xMathFloatConstantWordsBlock7[10] = {

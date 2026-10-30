@@ -42,8 +42,8 @@ extern s32 N64Eng_GetFrameCounter(void); extern void Graphu64_ConvertMatrixToFix
 extern s32 Scene_GetIndexedModelResource(void *,s32);
 extern void Geometry_QueueDirectModel(s32,void *,void *,s32,s32);
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_menuModelPreviewAngleScale[1] = {
-    0x3C8EFA36,
+const float g_menuModelPreviewAngleScale[1] = {
+    0.017453294f,
 };
 #endif
 void Preview_DrawMenuModelItem(MenuModelItem *item) {
@@ -95,8 +95,8 @@ void Preview_DrawMenuModelItem(MenuModelItem *item) {
 }
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_PreviewEncodedWords[4] = {
-    0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36,
+const float k_PreviewEncodedWords[4] = {
+    0.017453294f, 0.017453294f, 0.017453294f, 0.017453294f,
 };
 #endif
 
@@ -171,7 +171,7 @@ struct Triple Frontend_GetPreviewRotationSpeed(struct ModelPreviewRotationSpeedV
 /* 800E1F80.CPP */
 
 #if defined(VERSION_US_REV1)
-const unsigned int g_menuModelPreviewAngleScalesUsRev1[6] = {
-    0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36,
+const float g_menuModelPreviewAngleScalesUsRev1[6] = {
+    0.017453294f, 0.017453294f, 0.017453294f, 0.017453294f, 0.017453294f, 0.017453294f,
 };
 #endif

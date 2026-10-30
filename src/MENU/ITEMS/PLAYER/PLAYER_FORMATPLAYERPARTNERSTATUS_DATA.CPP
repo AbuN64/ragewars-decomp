@@ -10,8 +10,8 @@
 
 
 #if defined(VERSION_EU)
-const unsigned int k_PlayerFormatplayerpartnerstatusHalfWords[1] = {
-    0x3F000000,
+const float k_PlayerFormatplayerpartnerstatusHalfWords[1] = {
+    0.5f,
 };
 #endif
 

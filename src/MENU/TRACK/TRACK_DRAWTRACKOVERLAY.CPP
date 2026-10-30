@@ -266,7 +266,7 @@ s32 Track_HasNoTrackRequestItems(void) {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_trackOverlayThresholdPool_us_rev1.c */
-const unsigned int g_trackOverlayUnsignedThresholdsUsRev1[2] = {
-    0x4F000000, 0x4F000000,
+const float g_trackOverlayUnsignedThresholdsUsRev1[2] = {
+    2147483648.0f, 2147483648.0f,
 };
 #endif

@@ -183,8 +183,8 @@ char s_RectSLOW5TText[8] =
 #endif
 
 /* ROM-grounded data: src/g_rect_DrawRectConstantWords_Rect.c */
-const unsigned int g_rect_DrawRectConstantWords[1] = {
-    0x3F800000,
+const float g_rect_DrawRectConstantWords[1] = {
+    1.0f,
 };
 
 #if defined(VERSION_EU)

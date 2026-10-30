@@ -13,5 +13,7 @@ unsigned char g_XStdioFloatConstantWordsA286CTrailingBytesBlock1[4] = { 0xE6, 0x
 /* 802A23A4_8.CPP */
 #if defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int g_xStdioFloatConstantWords[1] = { 0x4600A002U };
+float g_xStdioFloatConstantWords[1] = {
+    8232.002f,
+};
 #endif

@@ -196,40 +196,40 @@ void ESmem_ResetFrameHeapUsageRanges(void) {
 }
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_frameHeapLowAllocationStatLowerLimit_StorageWords[2] = {
-    0xCCBEBC20, 0x4CBEBC20,
+const float g_frameHeapLowAllocationStatLowerLimit_StorageWords[2] = {
+    -100000000.0f, 100000000.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_ESmem_AllocateFrameHeapLowConstantWords_ESmem.c */
-const unsigned int g_ESmem_AllocateFrameHeapLowConstantWords[2] = {
-    0xCCBEBC20, 0x4CBEBC20,
+const float g_ESmem_AllocateFrameHeapLowConstantWords[2] = {
+    -100000000.0f, 100000000.0f,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_frameHeapRestoreStatLowerLimit_StorageWords[2] = {
-    0xCCBEBC20, 0x4CBEBC20,
+const float g_frameHeapRestoreStatLowerLimit_StorageWords[2] = {
+    -100000000.0f, 100000000.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_ESmem_RestoreFrameHeapMarkConstantWords_ESmem.c */
-const unsigned int g_ESmem_RestoreFrameHeapMarkConstantWords[2] = {
-    0xCCBEBC20, 0x4CBEBC20,
+const float g_ESmem_RestoreFrameHeapMarkConstantWords[2] = {
+    -100000000.0f, 100000000.0f,
 };
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_frameHeapHighAllocationStatLowerLimit_StorageWords[2] = {
-    0xCCBEBC20, 0x4CBEBC20,
+const float g_frameHeapHighAllocationStatLowerLimit_StorageWords[2] = {
+    -100000000.0f, 100000000.0f,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_ESmem_AllocateFrameHeapHighConstantWords_ESmem.c */
-const unsigned int g_ESmem_AllocateFrameHeapHighConstantWords[2] = {
-    0xCCBEBC20, 0x4CBEBC20,
+const float g_ESmem_AllocateFrameHeapHighConstantWords[2] = {
+    -100000000.0f, 100000000.0f,
 };
 #endif

@@ -33,16 +33,16 @@ const unsigned short k_xmathSubtractanglescenteredDataConstantWords[28] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int k_xmathSubtractanglescenteredDataFloatConstantWords[5] = {
-    0x401921FB, 0x80000000, 0x40C90FDC, 0x40C90FDC, 0x40490FDB,
+const float k_xmathSubtractanglescenteredDataFloatConstantWords[5] = {
+    2.392699f, -0.0f, 6.283186f, 6.283186f, 3.1415927f,
 };
 
-const unsigned int k_xmathSubtractanglescenteredDataFloatConstantWordsBlock1[8] = {
-    0x40490FDB, 0x41C90FDC, 0xC1C90FDC, 0x401921FB, 0x80000000, 0x40C90FDC, 0x40C90FDC, 0x40490FDB,
+const float k_xmathSubtractanglescenteredDataFloatConstantWordsBlock1[8] = {
+    3.1415927f, 25.132744f, -25.132744f, 2.392699f, -0.0f, 6.283186f, 6.283186f, 3.1415927f,
 };
 
 /* ROM-grounded data: src/k_XmathSubtractanglescenteredOneWords_XmathSubtractanglescenteredData.c */
-const unsigned int k_XmathSubtractanglescenteredOneWords[1] = {
-    0x3F800000,
+const float k_XmathSubtractanglescenteredOneWords[1] = {
+    1.0f,
 };
 #endif

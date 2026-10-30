@@ -2,8 +2,8 @@
 
 /* 800CA60C_19.CPP */
 /* ROM-grounded data: src/k_xMathFloatConstantWordsBlock5_XmathAngleBoundWords.c */
-const unsigned int k_xMathFloatConstantWordsBlock5[3] = {
-    0x40490FDB, 0x41C90FDC, 0xC1C90FDC,
+const float k_xMathFloatConstantWordsBlock5[3] = {
+    3.1415927f, 25.132744f, -25.132744f,
 };
 
 /* 800CADFC.CPP */

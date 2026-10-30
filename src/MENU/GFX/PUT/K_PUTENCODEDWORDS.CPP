@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-unsigned int k_PutEncodedWords[1] = {
-    0x4F000000,
+float k_PutEncodedWords[1] = {
+    2147483648.0f,
 };
 #endif

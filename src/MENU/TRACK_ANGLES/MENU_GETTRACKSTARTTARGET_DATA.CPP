@@ -8,6 +8,6 @@ const unsigned int k_MenuGettrackstarttargetTenWords[1] = {
 
 /* 800E0CB0.CPP */
 /* ROM-grounded data: src/k_MenuGettrackstarttargetOneWordsUsRev1.c */
-const unsigned int k_MenuGettrackstarttargetOneWords[1] = {
-    0x3F800000,
+const float k_MenuGettrackstarttargetOneWords[1] = {
+    1.0f,
 };

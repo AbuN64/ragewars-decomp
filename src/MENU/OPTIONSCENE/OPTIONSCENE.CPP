@@ -41,7 +41,7 @@ void Menu_SetOptionsSceneSelection(int key) {
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int k_OptionsceneEncodedWords[1] = {
-    0x3FAAAAA8,
+const float k_OptionsceneEncodedWords[1] = {
+    1.333333f,
 };
 #endif

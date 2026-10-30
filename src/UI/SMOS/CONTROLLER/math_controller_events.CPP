@@ -305,7 +305,7 @@ void Controller_SendControllerStickEvent(s16 device, s32 stickX, s32 stickY) {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int k_MathControllerEventsEncodedWords[3] = {
-    0x00000000, 0x3FF00000, 0x00000000,
+float k_MathControllerEventsEncodedWords[3] = {
+    0.0f, 1.875f, 0.0f,
 };
 #endif

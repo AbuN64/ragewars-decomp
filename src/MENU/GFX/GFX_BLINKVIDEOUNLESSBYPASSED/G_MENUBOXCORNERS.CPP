@@ -17,8 +17,8 @@ MenuBoxCorner g_menuBoxCorners[8] = {
     { 1, 1, -2, 0, 0, 0 },
     { -1, 1, -2, 0, 0, 0 },
 };
-unsigned int k_GMenuboxcornersEncodedWords[3] = {
-    0x00000000, 0x00000000, 0xC4098000,
+float k_GMenuboxcornersEncodedWords[3] = {
+    0.0f, 0.0f, -550.0f,
 };
 #endif
 

@@ -8,8 +8,8 @@ const unsigned int g_combine_SetPrimitiveVertexModeConstantWords[1] = {
 
 /* 800E1430.CPP */
 /* ROM-grounded data: src/g_combine_DrawClippedImageRectangleConstantWords1_GfxDrawclippedimagerectangleData.c */
-const unsigned int g_combine_DrawClippedImageRectangleConstantWords1[1] = {
-    0x3F800000,
+const float g_combine_DrawClippedImageRectangleConstantWords1[1] = {
+    1.0f,
 };
 
 /* 800E1434.CPP */

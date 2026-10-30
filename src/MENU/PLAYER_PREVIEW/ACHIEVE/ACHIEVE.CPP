@@ -25,8 +25,8 @@ const unsigned char g_resultPreviewNumberFormatEuX[3] = {
 /* 800E1F40.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_AchieveEncodedWordsBlock1_Achieve.c */
-const unsigned int k_AchieveEncodedWordsBlock1[1] = {
-    0x3D888889,
+const float k_AchieveEncodedWordsBlock1[1] = {
+    0.06666667f,
 };
 #endif
 

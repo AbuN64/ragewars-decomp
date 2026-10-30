@@ -18,8 +18,8 @@
 /* 800E1FC0.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_PlayerWords2_Player.c */
-const unsigned int g_PlayerWords2[1] = {
-    0x3F800000,
+const float g_PlayerWords2[1] = {
+    1.0f,
 };
 #endif
 

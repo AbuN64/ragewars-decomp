@@ -280,8 +280,8 @@ s32 Join_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 eventData, s32 event
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int k_joinCycleRankFloatOne[1] = {
-    0x3F800000,
+const float k_joinCycleRankFloatOne[1] = {
+    1.0f,
 };
 #endif
 

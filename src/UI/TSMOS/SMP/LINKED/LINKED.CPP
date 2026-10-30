@@ -8,6 +8,6 @@ const float g_ribbonInitializationConstantsUsRev1[2] = {
 
 /* 800CAF7C.CPP */
 /* ROM-grounded data: src/g_ribbonUpdateUnitConstantUsRev1_Linked.c */
-const unsigned int g_ribbonUpdateUnitConstantUsRev1[1] = {
-    0x3F800000,
+const float g_ribbonUpdateUnitConstantUsRev1[1] = {
+    1.0f,
 };

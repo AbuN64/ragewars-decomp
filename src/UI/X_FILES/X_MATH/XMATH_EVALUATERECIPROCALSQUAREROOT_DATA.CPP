@@ -2,8 +2,8 @@
 #include "COMMON/OBJRECAT3CV2.H"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int k_XmathEvaluatereciprocalsquarerootOneWords[1] = {
-    0x3F800000,
+const float k_XmathEvaluatereciprocalsquarerootOneWords[1] = {
+    1.0f,
 };
 #endif
 
@@ -77,8 +77,8 @@ const unsigned short k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock2[
 #endif
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/k_XmathEvaluatereciprocalsquarerootOneWordsVariant1_XmathEvaluatereciprocalsquarerootData.c */
-const unsigned int k_XmathEvaluatereciprocalsquarerootOneWordsVariant1[1] = {
-    0x3F800000,
+const float k_XmathEvaluatereciprocalsquarerootOneWordsVariant1[1] = {
+    1.0f,
 };
 
 const float k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBlock3[6] = {

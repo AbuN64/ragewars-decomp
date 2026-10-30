@@ -18,13 +18,13 @@ const unsigned int k_xmathSplitdoubleexponentDataZeroWords[2] = {
 };
 
 /* ROM-grounded data: src/k_XmathSplitdoubleexponentHalfPiWords_XmathSplitdoubleexponentData.c */
-const unsigned int k_XmathSplitdoubleexponentHalfPiWords[1] = {
-    0x3FC90FDB,
+const float k_XmathSplitdoubleexponentHalfPiWords[1] = {
+    1.5707964f,
 };
 
 /* ROM-grounded data: src/k_XmathSplitdoubleexponentHalfPiWordsVariant1_XmathSplitdoubleexponentData.c */
-const unsigned int k_XmathSplitdoubleexponentHalfPiWordsVariant1[1] = {
-    0x3FC90FDB,
+const float k_XmathSplitdoubleexponentHalfPiWordsVariant1[1] = {
+    1.5707964f,
 };
 
 const unsigned int k_xmathSplitdoubleexponentDataFloatConstantWordsBlock1[10] = {
