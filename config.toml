@@ -451,3 +451,28 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-O0"]
 omit = ["-O2", "-mgas"]
 unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_INITPAKMANAGEMENT.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_SCROLLMANAGEMENTLIST.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_REORDERGLOBALPLAYERSTOSELECTED.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_EXITSCREEN.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
+[file."src/UI/TSMOS/SCREENS/PAKINTERFACE_ADDQUICKPLAYERTOGLOBAL.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-O0"]
+omit = ["-O2", "-mgas"]
+unrelocated = true
