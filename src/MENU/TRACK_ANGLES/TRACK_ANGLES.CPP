@@ -72,7 +72,7 @@ CVector3 Menu_GetTrackStartAngles(void) {
 
 extern int g_cinemaPlaybackFlag;
 
-extern struct SharedPlayer *g_transientPlayerList;
+extern unsigned char *g_transientPlayerList;
 
 extern s32 Track_RequestTrackByKey(int);
 

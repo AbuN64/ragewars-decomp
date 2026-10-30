@@ -174,7 +174,7 @@ void Barrel_StopActorLoopingSound(void *actor, void *soundState) {
 }
 
 extern f32 Gobjinst_GetActorRadius(void *actor);
-extern void Graphu64_ScaleVector(struct CVector3_t *,struct CVector3_t *,f32);
+extern void Graphu64_ScaleVector(void *result, void *vector, f32 scale);
 extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void InstHdr_CopyActorPositionAndModel(void *levelActor, CVector3 value, void *positionOut, s32 *modelFlagsOut,
                           s32 unused6, s32 unused7);

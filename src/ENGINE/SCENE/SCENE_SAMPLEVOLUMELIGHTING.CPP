@@ -530,31 +530,10 @@ typedef struct LevelChallenge {
 extern ResultsCourse *g_currentStagePreset;
 extern ResultsHeadingCharacter g_resultCharacterHeadings[];
 extern char g_levelNameText[], g_resultsNameFormat_de[], g_cResource_UnpackRequestEntry[];
-extern char *g_characterPreviewTextReferenceShared1;
-extern char g_characterPreviewTextReferenceShared2[];
-extern *g_characterPreviewTextReferenceShared3;
-extern char g_characterPreviewTextReferenceShared4[];
-extern char g_characterPreviewTextReferenceShared5[];
-extern *g_resultsRoundsOneFormat;
-extern *g_resultsRoundsTwoFormat;
-extern *g_resultsRoundsThreeFormat;
-extern *g_resultsLapsOneFormat;
-extern *g_resultsLapsTwoFormat;
-extern *g_resultsLapsThreeFormat;
-extern *g_resultsLapsFourFormat;
-extern *g_resultsLapsFiveFormat;
-extern *g_resultsGoalOneFormat;
-extern *g_resultsGoalTwoFormat;
-extern *g_resultsTimeLimitFormat;
-extern *g_resultsMinutesSecondsOneFormat;
-extern *g_resultsMinutesSecondsTwoFormat;
-extern *g_resultsMinutesOneFormat;
-extern *g_resultsMinutesTwoFormat;
-extern *g_resultsPlayerOrLivesOneFormat;
-extern char g_pakDialogTextReferenceShared1[];
-extern *g_resultsGoalLabelFormat;
-extern *g_resultsGoalValueFormat;
-extern char g_slotSelectionTextReferenceShared4[];
+extern char *g_characterPreviewTextReferenceShared1, *g_characterPreviewTextReferenceShared2, *g_characterPreviewTextReferenceShared3, *g_characterPreviewTextReferenceShared4, *g_characterPreviewTextReferenceShared5, *g_resultsRoundsOneFormat, *g_resultsRoundsTwoFormat,
+    *g_resultsRoundsThreeFormat, *g_resultsLapsOneFormat, *g_resultsLapsTwoFormat, *g_resultsLapsThreeFormat, *g_resultsLapsFourFormat, *g_resultsLapsFiveFormat, *g_resultsGoalOneFormat,
+    *g_resultsGoalTwoFormat, *g_resultsTimeLimitFormat, *g_resultsMinutesSecondsOneFormat, *g_resultsMinutesSecondsTwoFormat, *g_resultsMinutesOneFormat, *g_resultsMinutesTwoFormat, *g_resultsPlayerOrLivesOneFormat,
+    *g_pakDialogTextReferenceShared1, *g_resultsGoalLabelFormat, *g_resultsGoalValueFormat, *g_slotSelectionTextReferenceShared4;
 extern void Cinema_AddMessage(char *);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern void *Cache_RequestWordCountedResourcePinned(s32, void **, s32, void *);

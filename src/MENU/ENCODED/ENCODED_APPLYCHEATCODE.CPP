@@ -14,7 +14,7 @@ extern CheatCode g_encodedCheatDefinitions[];
 extern u8 g_encodedCheatCode[];
 
 
-extern s32 g_gameSettings;
+extern struct IntPair g_gameSettings;
 
 extern s32 g_encodedCheatCharacterIndex;
 

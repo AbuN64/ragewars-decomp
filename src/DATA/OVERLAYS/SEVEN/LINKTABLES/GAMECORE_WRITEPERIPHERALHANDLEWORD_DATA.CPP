@@ -1,5 +1,5 @@
-extern struct OSPiHandle_s g_diskPiHandle;
-extern struct OSPiHandle_s g_diskPeripheralHandle;
+extern char g_diskPiHandle[];
+extern char g_diskPeripheralHandle[];
 #include "COMMON/FORMAT.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "DATA_OVERLAY_LAYOUTS.H"

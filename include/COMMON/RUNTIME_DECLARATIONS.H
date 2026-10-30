@@ -1415,7 +1415,7 @@ extern FieldRow g_profileResetEventIdsEu[];
 extern char addrLow_Libsn_DisableInterrupts;
 
 
-extern struct CVector3_t g_particleTertiaryContactPosition;
+extern Triple g_particleTertiaryContactPosition;
 
 #include "libultra/audio/seqp.h"
 

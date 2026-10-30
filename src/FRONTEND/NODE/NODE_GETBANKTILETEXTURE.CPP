@@ -95,7 +95,7 @@ typedef struct {
     Tables tables;
 } File;
 extern File g_frontendResourceState;
-extern char s_frontendResourceOpenMode;
+extern s32 s_frontendResourceOpenMode;
 extern s32 Cache_AllocateMemory(s32 size);
 extern void XStdio_CloseStream(s32 handle);
 extern void Frontend_ClearOwnedImage(Texture *texture);

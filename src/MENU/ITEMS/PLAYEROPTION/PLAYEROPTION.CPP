@@ -23,7 +23,7 @@ extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-extern s32 g_gameSettings;
+extern struct MenuSettings g_gameSettings;
 
 #if defined(VERSION_EU)
 /* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playerOption79ZeroText for zero and otherwise the text g_playerOption79StepText_eu formatted with g_playerMenuStepFormatGerman for a positive or g_playerMenuStepFormat for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */

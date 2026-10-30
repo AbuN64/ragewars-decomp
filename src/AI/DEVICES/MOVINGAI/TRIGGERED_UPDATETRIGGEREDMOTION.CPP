@@ -259,7 +259,7 @@ void * Playerai_GetRouteCursorPoint(struct Cursor *);
 
 void *Playerai_GetRouteCursorNextPoint(struct Cursor *);
 
-void Graphu64_SubtractVectors(struct CVector3_t *,struct CVector3_t *,struct CVector3_t *);
+void Graphu64_SubtractVectors(void *, void *, void *);
 
 f32 Gu_Sqrtf(f32);
 

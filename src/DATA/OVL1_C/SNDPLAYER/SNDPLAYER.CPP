@@ -41,7 +41,7 @@ extern char g_damageDispatchTriggerPairs_eu_x[];
 extern char g_movingMotionDispatchTable[];
 extern char g_particleQuadVertices[];
 extern char g_playerModelLighting[];
-extern u8 g_savedPlayerModelLighting[];
+extern char g_savedPlayerModelLighting[];
 extern char g_spawnActorDispatchTable[];
 extern char g_triggeredMotionDispatchTable[];
 extern char g_turretDispatchTriggerPairs_eu_x[];

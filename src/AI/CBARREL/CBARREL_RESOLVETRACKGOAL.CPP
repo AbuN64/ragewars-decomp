@@ -13,7 +13,7 @@ extern f32 Barrel_FindClearAimAngle(BarrelAnchorActorView *actor, CVector3 pos, 
 extern f32 Barrel_GetSignedAngleToPoint(BarrelAnchorActorView *actor, CVector3 pos);
 struct Cursor;
 extern Location *Playerai_GetRouteCursorPoint(struct Cursor *slot);
-extern f32 Gobjinst_GetActorHeight(void *);
+extern f32 Gobjinst_GetActorHeight(BarrelAnchorActorView *actor);
 extern f32 Gobjinst_GetActorRadius(BarrelAnchorActorView *actor);
 extern f32 InstHdr_GetActorReach(BarrelAnchorActorView *object);
 extern void InstHdr_CopyActorPositionAndModel(BarrelAnchorActorView *levelActor, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 unused6, s32 unused7);

@@ -14,7 +14,7 @@ extern s8 g_matchAchievementQualificationFlagB;
 extern AchieveRecord g_playerSettings[];
 extern s32 g_playerCountedShots[];
 typedef struct { s8 pad[0x24]; s8 a; s8 b; } Settings;
-extern s32 g_gameSettings;
+extern Settings g_gameSettings;
 /* Increment the capped player match count and eligible level count. */
 void Match_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
     s32 count;

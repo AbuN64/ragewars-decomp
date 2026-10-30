@@ -12,7 +12,7 @@
 extern u8 g_localPlayerProfiles[];
 extern s8 g_profileSlotIndices[];
 extern s8 g_profileSlotEnabledFlags[];
-extern s32 g_gameSettings;
+extern struct MatchSetupGlobals g_gameSettings;
 extern struct Label *Node_FindWidgetByResourceId(void *, s32);
 void PAKInterface_LabelActiveProfileRows(s32 player) {
     struct MatchSetupGlobals *globals;

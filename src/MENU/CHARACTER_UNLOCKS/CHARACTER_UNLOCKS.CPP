@@ -24,7 +24,7 @@ extern Gfx *g_displayListCursor;
 
 extern void Preview_DrawModelPreview(void *);
 extern u8 g_profileCharacterUnlockCounts[][0x190];
-extern s32 g_gameSettings;
+extern HudStatusShared_Settings g_gameSettings[];
 
 /* Enables character choices unlocked by active players and highlights the selected profile's unlocked characters. */
 #if defined(VERSION_DE)

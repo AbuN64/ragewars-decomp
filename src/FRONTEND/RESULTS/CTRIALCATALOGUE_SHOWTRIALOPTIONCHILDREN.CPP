@@ -66,7 +66,7 @@ extern void Tsmos_ActivateControllerState(void);
 
 
 
-extern s32 g_gameSettings;
+extern u8 g_gameSettings[];
 
 extern s32 Defs_TestBit(u8 *, s32);
 

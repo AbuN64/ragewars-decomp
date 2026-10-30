@@ -20,7 +20,7 @@ extern void Player_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 Cache_GetResourceActivityState(void);
 extern void Cache_SetResourceActivityState(unsigned int);
-extern void SmXlate_SwitchScreen(s32);
+extern void SmXlate_SwitchScreen(void *);
 extern void SoundElement_DisableMusicGainOverride(void);
 
 s32 Timed_FinishPauseConfirmationTransition(s32 unused0, s32 unused1, s32 event) {

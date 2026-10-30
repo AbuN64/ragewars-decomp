@@ -28,7 +28,7 @@ extern f32 g_frameElapsedTime;
 
 
 
-extern s32 g_gameSettings;
+extern FragTagMatchRulesView g_gameSettings;
 
 extern Course *g_currentStagePreset;
 

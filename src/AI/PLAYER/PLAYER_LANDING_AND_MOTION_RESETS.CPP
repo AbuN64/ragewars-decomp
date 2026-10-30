@@ -36,7 +36,7 @@ extern f32 g_playerRoundEndWaitConstants;
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void Graphu64_ScaleVector(struct CVector3_t *,struct CVector3_t *,f32);
+extern void Graphu64_ScaleVector(void *, void *, f32);
 
 extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 

@@ -10,7 +10,7 @@
 
 extern char g_actorParticleEffectSystem;
 
-extern f32 Gobjinst_GetActorHeight(void *);
+extern f32 Gobjinst_GetActorHeight(FadedActorRenderView *actor);
 
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 

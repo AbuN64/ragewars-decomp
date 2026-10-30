@@ -12,11 +12,11 @@
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 extern char g_actorParticleEffectSystem;
-extern void Graphu64_ScaleVector(struct CVector3_t *,struct CVector3_t *,f32);
+extern void Graphu64_ScaleVector(void *, void *, f32);
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, Triple *, s32 *, s32, s32);
-extern struct CQuatern_t Graphu64_BuildDirectionQuaternion(struct CVector3_t *);
+extern struct CacheResourceBlockView Graphu64_BuildDirectionQuaternion(Triple *);
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
-extern void Events_DeliverContactEffect(void *source, void *target, s32 effect, s32 delay, struct CVector3_t position, struct IntPair payload);
+extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
 void Ghot_DispatchAttachmentEffects(ModelAttachmentEffect *effectAttachments, s32 attachmentsRemaining, struct MatrixF *attachmentMatrices, AttachmentEffectActorView *actor, AttachmentTable *attachmentNodes) {
     Triple pos;

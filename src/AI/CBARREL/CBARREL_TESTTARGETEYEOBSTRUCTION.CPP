@@ -12,7 +12,7 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo g_defaultProbeMotionSettings;
 extern ActorInstanceHeader *g_currentActorInstance;
-extern f32 Gobjinst_GetActorHeight(void *);
+extern f32 Gobjinst_GetActorHeight(ActorInstanceHeader *actor);
 extern s32 CCollision_SweepPoint(ActorInstanceHeader *actorStorage, CVector3 current, CVector3 desired, CollisionInfo *motionSettings);
 
 

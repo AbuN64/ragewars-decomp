@@ -65,7 +65,7 @@ extern s32 g_actorParticleEffectSystem;
 
 
 extern s32 g_navigationGraph;
-extern struct SharedPlayer *g_transientPlayerList;
+extern struct Shared_GlobalRuntimeState g_transientPlayerList;
 
 
 

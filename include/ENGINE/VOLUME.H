@@ -10,7 +10,7 @@ extern s32 Pak_FormatVolumeSlotOne(struct Field *field);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char *g_volumeOneValueLabel[];
 #else
-extern char *g_volumeOneValueLabel[];
+extern char *g_volumeOneValueLabel;
 #endif
 
 extern s32 Pak_ReturnCallbackSuccess(void);

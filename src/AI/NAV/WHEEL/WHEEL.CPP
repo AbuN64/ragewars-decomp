@@ -15,8 +15,8 @@ extern SweepHit *g_collisionCurrentActor;
 extern CCollisionInfo2_t g_particleCollisionProbeResult;
 extern f32 InstHdr_GetActorReach(Player *);
 extern f32 Gobjinst_GetActorRadius(Player *);
-extern f32 Gobjinst_GetActorHeight(void *);
-extern f32 InstHdr_GetActorBaseOffset(void *);
+extern f32 Gobjinst_GetActorHeight(Player *);
+extern f32 InstHdr_GetActorBaseOffset(Player *);
 extern s32 Unicol_SweepActorMotion(Player *, CVector3, CVector3, CCollisionInfo2_t *, f32, f32, f32, f32);
 void Wheel_MeasureWheelReach(Player *player, s32 wheel) {
     CVector3 from;

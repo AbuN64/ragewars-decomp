@@ -16,7 +16,7 @@
 
 extern void BuildDirectionMatrix(void *matrix, CVector3 *direction);
 extern f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
-extern void MatrixFromQuaternion(struct CQuatern_t *, f32 *);
+extern void MatrixFromQuaternion(void *quaternion, f32 *matrix);
 extern void Graphu64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right);
 
 

@@ -14,7 +14,7 @@
 
 
 
-extern s32 g_gameSettings;
+extern struct GameSettingsModeStatusView g_gameSettings;
 extern s8 g_activeProfileCharacterSelections[]; /* MIXED: this unit views g_gameSettings as GameSettingsModeStatusView */
 extern struct ScreenFrontendMarkLinkedTrialsAvailable *g_trialCatalogueScreen;
 extern s32 Defs_TestBit(u8 *, s32);

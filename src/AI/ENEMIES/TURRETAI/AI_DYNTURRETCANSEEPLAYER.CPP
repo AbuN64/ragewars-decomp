@@ -16,7 +16,7 @@ extern s32 Rumble_TestActorStateBit(void *worldState, void *actorPointer);
 
 extern void Turret_LinkEffect_MakeVisible(void *turretActor, void *effectActor, s32 unusedEvent);
 
-extern void MatrixFromQuaternion(struct CQuatern_t *, f32 *);
+extern void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
@@ -58,7 +58,7 @@ extern Player **g_collisionCurrentActor;
 
 extern char g_particleCollisionProbeResult[];
 
-extern f32 Gobjinst_GetActorHeight(void *);
+extern f32 Gobjinst_GetActorHeight(Player *);
 
 extern s32 CCollision_SweepPoint(Player *, CVector3, CVector3, char *);
 

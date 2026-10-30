@@ -52,7 +52,7 @@ extern void Gobjinst_UpdateActorRootDisplacement(char *);
 
 
 
-extern f32 Gobjinst_GetActorHeight(void *);
+extern f32 Gobjinst_GetActorHeight(void);
 
 
 void *Playerai_FindNearestPlayer(void *world, s32 point, s32 pointYBits, s32 pointZBits) {

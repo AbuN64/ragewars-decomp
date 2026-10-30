@@ -274,7 +274,7 @@ s32 Insthdr_GetModelCollisionFlag1(Player *);
 s32 Insthdr_IsInactiveOrCollisionOption4(Player *);
 s32 Insthdr_GetModelCollisionFlag8(Player *);
 s32 Unicol_MoveActorWithCollision(Player *, CVector3, NavigationCollisionQuery *);
-void Graphu64_SubtractVectors(struct CVector3_t *,struct CVector3_t *,struct CVector3_t *);
+void Graphu64_SubtractVectors(CVector3 *, void *, CVector3 *);
 
 /* Collisions the actor would meet moving to a point (61.44 above it), without committing the move: the actor's 0x50-byte header is saved and
  * restored around the trial move. */

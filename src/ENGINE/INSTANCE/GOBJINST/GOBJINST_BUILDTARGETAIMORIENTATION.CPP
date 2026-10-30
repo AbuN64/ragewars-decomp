@@ -29,7 +29,7 @@ extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
 extern char *Playerai_FindNearestPlayer(void *, CVector3);
 
-extern f32 Gobjinst_GetActorHeight(void *);
+extern f32 Gobjinst_GetActorHeight(char *);
 
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 

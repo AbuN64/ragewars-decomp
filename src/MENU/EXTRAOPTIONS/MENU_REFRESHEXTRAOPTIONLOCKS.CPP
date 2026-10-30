@@ -14,7 +14,7 @@ extern NumberPadScreen *g_extraOptionsScreen;
 
 
 
-extern s32 g_gameSettings;
+extern struct MemoryUsageStats g_gameSettings;
 
 extern s32 SmpButton_GetListSelection(void *);
 

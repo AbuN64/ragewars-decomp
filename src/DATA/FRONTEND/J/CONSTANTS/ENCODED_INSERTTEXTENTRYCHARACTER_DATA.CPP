@@ -7,7 +7,7 @@ extern char g_playerViewRenderContextPlayerNames_de[];
 extern char g_profileAchievementProgressRows[];
 extern char g_profileModeOneLabel[];
 extern char g_profileSecondConfirmationLabel[];
-extern struct Shared_DebugField *g_profileSelectionResources[];
+extern char g_profileSelectionResources[];
 extern char g_unlockedLevelResultLabel[];
 #include "include_asm.h"
 

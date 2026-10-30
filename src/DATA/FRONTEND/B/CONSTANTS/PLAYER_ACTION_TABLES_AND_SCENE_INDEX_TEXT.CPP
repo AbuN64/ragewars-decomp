@@ -1,5 +1,5 @@
 #include "DATA/REST_SOURCE_RECORDS.H"
-extern s32 PAKInterface_LoadGame(s32 anUser, s32 anNote);
+extern char PAKInterface_LoadGame[];
 extern char g_PlayerEnterRunEndWaitCallbackAddressUs[];
 extern char g_PlayerInterpolateTravelTargetCallbackAddressUs[];
 extern char g_PlayerRequestCinemaTrackCallbackAddressUs[];

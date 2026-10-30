@@ -57,14 +57,14 @@ extern f32 g_particleTrackingMinimum;
 void Playerai_ApplyPlayerForces(void *, void *);
 f32 Gobjinst_GetActorHeight(void *);
 f32 InstHdr_GetActorBaseOffset(void *);
-void Graphu64_InterpolateQuaternionWithLinearFallback(struct CQuatern_t *, f32, struct CQuatern_t *, struct CQuatern_t *);
+void Graphu64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, void *);
 void Graphu64_ClampMotionLength(void *, f32);
-void MatrixFromQuaternion(struct CQuatern_t *, f32 *);
+void MatrixFromQuaternion(f32 *, f32 *);
 
 
 void Particle_UpdateSineMotion(void *, f32);
 f32 Gu_Sqrtf(f32);
-struct CQuatern_t Graphu64_BuildDirectionQuaternion(struct CVector3_t *);            /* extern */
+CQuatern Graphu64_BuildDirectionQuaternion(f32 *);            /* extern */
 extern Shared_MenuData g_playerViewRenderContext;
-extern struct SharedPlayer *g_transientPlayerList;
+extern Shared_GlobalRuntimeState g_transientPlayerList;
 #endif
