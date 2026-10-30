@@ -142,6 +142,6 @@ void Text_DrawTileGrid(void *handle, s32 index, s32 initialX, s16 initialY, f32 
 
 /* 800CB380.CPP */
 /* ROM-grounded data: src/g_OnScreen_DrawStatusBarsConstantWords_TextDrawtilegrid.c */
-const unsigned int g_OnScreen_DrawStatusBarsConstantWords[1] = {
-    0x3F333333,
+const float g_OnScreen_DrawStatusBarsConstantWords[1] = {
+    0.7f,
 };

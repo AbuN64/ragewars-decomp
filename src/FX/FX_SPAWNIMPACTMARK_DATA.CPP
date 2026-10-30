@@ -2,8 +2,8 @@
 
 /* 800CB038.CPP */
 /* ROM-grounded data: src/k_fxSpawnimpactmarkDataFloatConstantWordsSource.c */
-const unsigned int k_fxSpawnimpactmarkDataFloatConstantWords[1] = {
-    0x40C49BA6,
+const float k_fxSpawnimpactmarkDataFloatConstantWords[1] = {
+    6.144f,
 };
 
 /* 800CB03C.CPP */

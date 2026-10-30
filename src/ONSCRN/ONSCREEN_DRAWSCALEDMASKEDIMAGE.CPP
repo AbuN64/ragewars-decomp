@@ -181,6 +181,6 @@ void OnScreen_DrawScaledIntensityTexture(void *pTexture, f32 XPos, f32 YPos, int
 
 /* 802A8A94_7.CPP */
 /* ROM-grounded data: src/g_maskedImageTextureCoordinateScaleWordsUsRev1_OnscreenDrawscaledmaskedimage.c */
-const unsigned int g_maskedImageTextureCoordinateScaleWordsUsRev1[1] = {
-    0x40800000,
+const float g_maskedImageTextureCoordinateScaleWordsUsRev1[1] = {
+    4.0f,
 };

@@ -1,7 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-const unsigned char k_CameraRodataBytes[3] = {
-    0x42, 0x40, 0x00,
-};
+/* Seventh and last element of k_lensFlareRadii (the first six are in K_CAMERAENCODEDWORDSBLOCK5.CPP). */
+const float k_lensFlareFinalRadiusDe = 48.0f;
 #endif
