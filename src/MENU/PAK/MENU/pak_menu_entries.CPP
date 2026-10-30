@@ -270,8 +270,9 @@ void Menu_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
         return;
     }
     /* fakematch: 0.5f is the first entry of this function's literal pool, in the ROM at 4 mod 8 right after the
-       Menu_UpdateMenuEntries pool; written inline the per-function pool block is linked 8-aligned and the double
-       loses its pad word. Needs the link script to pad a pool block that starts off 8 (unbake); kept a symbol until then. */
+       Menu_UpdateMenuEntries pool. Written inline, the pool object is 8-aligned (its double's .align 3) and has no pad
+       word before the double, so the pool links 8 bytes early; the ROM's pad exists only against the original single
+       .rdata phase. Needs a generator that places a pool at 4 mod 8 with its pad (unbake); kept a symbol until then. */
     centerX = data->x + data->width * g_menuCenterFraction + menu->x;
     centerY = data->y + data->height * g_menuCenterFraction + menu->y;
     bounds.left = centerX - bounds.width / 2;
