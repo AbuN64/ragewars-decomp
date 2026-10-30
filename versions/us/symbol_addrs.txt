@@ -9385,3 +9385,4 @@ PAKInterface_CalcSaveGameSize = 0x800FCB41; // type:func rom:0xFD741
 PAKInterface_PrepareSaveBlockForSave = 0x800FCB79; // type:func rom:0xFD779
 PAKInterface_PrepareDataAfterLoad = 0x800FCCB9; // type:func rom:0xFD8B9
 PAKInterface_CopyMiddlePlayersToGlobal = 0x800FCDD9; // type:func rom:0xFD9D9
+PAKInterface_OnRight = 0x800E78A5; // type:func rom:0xE84A5

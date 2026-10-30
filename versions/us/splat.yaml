@@ -4666,6 +4666,8 @@ segments:
       - [0xE5427, data, game_data/g_frontendMenuResourceStream1]
       - [0xE7B84, c, game_data]
       - [0xE7D10, data, game_data/g_frontendMenuResourceStream2]
+      - [0xE84A5, c, game_data]
+      - [0xE882D, data, game_data/g_frontendMenuResourceStream3]
       - [0xF0880, data, game_data/g_InitialOpentrackpreviewmenuTrailingWordUs]
       - [0xF0884, data, game_data/k_LibsnEnumeratememoryrangesEncodedWords]
       - [0xF1900, data, game_data/g_libsnHostMemoryRanges_LibsnEnumeratememoryrangesData]

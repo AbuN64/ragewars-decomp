@@ -66,6 +66,7 @@ extern PAKInterfaceScreen *g_pakInterfaceScreen;
 extern s32 PAKInterface_OnInitialUpdate(s32 a, s32 b, s32 c, s32 d);
 extern s32 PAKInterface_OnDestroy(s32 a, s32 b, s32 c, s32 d);
 extern s32 PAKInterface_OnButtonUp(s32 a, s32 b, s32 c, s32 d);
+extern s32 PAKInterface_OnRight(s32 a, s32 b, s32 c, s32 d);
 extern PAKGlobalPlayer g_pakGlobalPlayers[PAK_USERS];
 /* Per-global-player update flags, 150 bytes apart: the active flag at +0, the pending flag at +25. */
 #define PAK_UPDATE_INFO_SIZE 150
@@ -95,7 +96,12 @@ extern void CPersistentPlayerData_Initialize(PAKGlobalPlayer *apPlayer);
 extern void PAKInterface_RefreshMiddleList(s32 anUser);
 extern void PAKInterface_InitPlayerMode(s32 anUser);
 extern void PAKInterface_RefreshMiddleNamesForCopy(s32 anUser);
-extern void *PAKInterface_GetUserObject(void *apUserList, s32 anUser);
+/* A per-user object of the screen manager's user list; only the byte the Right button writes is named. */
+typedef struct PAKUserObject {
+    u8 pad0[16];
+    u8 m_Field10;
+} PAKUserObject;
+extern PAKUserObject *PAKInterface_GetUserObject(void *apUserList, s32 anUser);
 extern void PAKInterface_SetControlOwner(void *apUserList, s32 anUser, s32 anFlag);
 /* A list widget row: the widget's own 14 words, then the global player the row stands for. */
 typedef struct PAKListItem {
