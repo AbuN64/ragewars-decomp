@@ -11634,3 +11634,5 @@ g_screenEventTablePadding_eu_x = 0x8043D55C; // rom:0x12D55C
 g_OptionTrailingBytes = 0x8043EB6C; // rom:0x12EB6C
 literals_Achieve_CreateResultsScreen = 0x800E9750; // rom:0xEA350 size:0x4
 g_strideSoundHalfwords_eu_x = 0x800CB55E; //
+g_cinemaSequenceStateTailPad = 0x800EA014; // rom:0xEAC14
+g_multiplayerNameBufferTable = 0x800EDD30; // rom:0xEE930
