@@ -96,12 +96,9 @@ extern void CPersistentPlayerData_Initialize(PAKGlobalPlayer *apPlayer);
 extern void PAKInterface_RefreshMiddleList(s32 anUser);
 extern void PAKInterface_InitPlayerMode(s32 anUser);
 extern void PAKInterface_RefreshMiddleNamesForCopy(s32 anUser);
-/* A per-user object of the screen manager's user list; only the byte the Right button writes is named. */
-typedef struct PAKUserObject {
-    u8 pad0[16];
-    u8 m_Field10;
-} PAKUserObject;
-extern PAKUserObject *PAKInterface_GetUserObject(void *apUserList, s32 anUser);
+struct WidgetLayout;
+/* The screen manager's widget of one user, from the screen's user list. */
+extern struct WidgetLayout *PAKInterface_GetUserObject(void *apUserList, s32 anUser);
 extern void PAKInterface_SetControlOwner(void *apUserList, s32 anUser, s32 anFlag);
 /* A list widget row: the widget's own 14 words, then the global player the row stands for. */
 typedef struct PAKListItem {
