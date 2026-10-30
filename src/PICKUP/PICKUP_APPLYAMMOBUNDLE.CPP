@@ -8,11 +8,10 @@
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
-#include "MENU/PICKUP_TOGGLEEFFECTANDFLASH.H"
+#include "PICKUP.H"
 #include "ENGINE/AUDIO/CHANNEL.H"
 #include "include_asm.h"
 #include "COMMON/RESPONSE.H"
-#include "MENU/PICKUP_HANDLEITEMUPDATE.H"
 
 /* 802ABDBC_16.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

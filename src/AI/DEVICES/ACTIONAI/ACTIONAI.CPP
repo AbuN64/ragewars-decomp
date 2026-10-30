@@ -8,7 +8,7 @@
    patches, copied word by word over the vectors by Libsn_InstallDebuggerExceptionHooks. Each patch is the 5-word stub installed at the vector
    (parks k0 in ErrorEPC and jumps to the trace handler at 0x00202460), the 5-word slot the original vector words are saved into (filled at run
    time) and the 4-word stub that resumes the vector 0x14 bytes in. */
-#include "MIPS_ENCODE.H"
+#include "AI/DEVICES/ACTIONAI.H"
 
 typedef struct LibsnDebugVectorPatch {
     unsigned int stub[5];

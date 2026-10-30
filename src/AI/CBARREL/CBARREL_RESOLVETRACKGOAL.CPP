@@ -4,7 +4,7 @@
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
 #include "COMMON/MATH_HELPERS.H"
-#include "WEAPONS/CBARREL_RESOLVETRACKGOAL.H"
+#include "AI/CBARREL.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 extern s32 Cbarrel_UpdateTrackerAim(BarrelAnchorActorView *actor, Tracker *tracker, BarrelAnchorActorView *target);

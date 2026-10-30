@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
-#include "RENDER/FX_APPLYEFFECTCONTRIBUTION.H"
+#include "FX.H"
 
 
 

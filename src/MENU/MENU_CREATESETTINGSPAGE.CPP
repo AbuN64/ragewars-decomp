@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
-#include "MENU/MENU_CREATESETTINGSPAGE.H"
+#include "MENU.H"
 
 #if defined(VERSION_DE)
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"

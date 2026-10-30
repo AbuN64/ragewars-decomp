@@ -1,5 +1,5 @@
 #include "MENU/TEAMMENU.H"
-#include "MENU/SHARED_MENUITEMRECORD.H"
+#include "AI/CTEAMSELECT.H"
 
 void Cteamselect_InitTeamChoices(Shared_MenuItemList *list) {
     s32 i;

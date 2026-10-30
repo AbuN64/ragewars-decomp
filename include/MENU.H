@@ -19,4 +19,7 @@ struct MenuDrawEventArgs {
 extern s32 Menu_RouteElementEvent(s32 value, s32 event, s32 source, s32 active, s32 amount);
 
 extern void Menu_GetScreenDrawOrigin(s32 *leftOut, s32 *topOut);
+
+extern u8*g_settingsPagePrimaryLocalizedLabels[1];
+extern u8*g_settingsPageSecondaryLocalizedLabels;
 #endif

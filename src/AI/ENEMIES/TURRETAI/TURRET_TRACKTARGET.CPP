@@ -16,8 +16,6 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "AI/ENEMIES/TURRETAI.H"
-#include "WEAPONS/BARREL_APPLYCLAMPEDTURN.H"
-#include "WEAPONS/BARREL_UPDATETRACKGOALS.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 
 void AI_DynTurretGetTargetInfo(SharedPlayer *player, TurretRiderTargetView *rider, Result *result);

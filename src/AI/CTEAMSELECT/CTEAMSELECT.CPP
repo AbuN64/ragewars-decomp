@@ -19,11 +19,9 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/GFX.H"
 #include "abi.h"
-#include "MENU/RESET_STORAGE.H"
+#include "AI/CTEAMSELECT.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
-#include "MENU/TEAM/TEAM_VIEW_UPDATE_CALLBACK.H"
-#include "MENU/TEAM/WEAPON_WHEEL_RESET_AND_ANGLE_STEP.H"
 
 extern s32 Playerai_PlayerHasAmmoForWeapon(void *, s32);
 

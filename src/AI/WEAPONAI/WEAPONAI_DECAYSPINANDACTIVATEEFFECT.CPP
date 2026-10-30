@@ -1,7 +1,6 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/WEAPON_LOCKED_NOTICE_TEXT_EU.H"
-#include "COMMON/LONE/WEAPON_LOCKED_NOTICE_TEXT_EU_X.H"
+#include "AI/WEAPONAI.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
@@ -27,7 +26,6 @@ extern char g_localPlayerProfiles[];
 extern s32 g_weaponLockedNoticeText;
 extern char g_playerViewRenderContext[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "WEAPONS/WEAPONAI_DECAYSPINANDACTIVATEEFFECT.H"
 
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Player_GetPlayerIndex(void *, void *);

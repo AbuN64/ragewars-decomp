@@ -1,7 +1,7 @@
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
-#include "WEAPONS/BARREL_ADDACTORYAW.H"
+#include "AI/CBARREL.H"
 
 extern f32 Barrel_FindClearAimAngle(void *actor, f32 targetX, f32 targetY, f32 targetZ,
                         void *target, f32 clearance);

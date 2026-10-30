@@ -12,7 +12,7 @@
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
-#include "RENDER/LINKED_BUILDCOLOREDRIBBONVERTICES.H"
+#include "FX.H"
 #include "ENGINE/LISTS.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */

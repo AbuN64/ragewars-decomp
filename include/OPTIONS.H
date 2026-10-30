@@ -20,4 +20,7 @@ struct MatchOptionsScreen {
     s32 countCap;
     s32 countDefault;
 };
+
+extern u8*g_optionsPrimaryLocalizedLabels[1];
+extern u8*g_optionsSecondaryLocalizedLabels;
 #endif

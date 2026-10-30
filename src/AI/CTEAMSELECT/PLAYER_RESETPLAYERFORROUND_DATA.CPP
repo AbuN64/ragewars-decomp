@@ -2,7 +2,7 @@
 #include "MENU/TEAMMENU.H"
 #include "TYPES.H"
 #include "COMMON/TRIPLE.H"
-#include "MENU/TEAM/PLAYER_RESETPLAYERFORROUND_DATA.H"
+#include "AI/CTEAMSELECT.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"

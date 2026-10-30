@@ -3,7 +3,7 @@
 #include "COMMON/GAME_SESSION.H"
 #include "RENDER/ANIMATION_FRAME_AND_RIBBON_VIEWS.H"
 #include "abi.h"
-#include "RENDER/DRAW_MATRIX_SCRATCH.H"
+#include "FX.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -210,9 +210,9 @@ void Fx_UpdateEffectLists(s32 owner) {
     }
 }
 
-s32 Fx_AllocateRibbonVertices(void *vertexPool, s32 vertexCount)
+Vtx *Fx_AllocateRibbonVertices(VertexArena *vertexPool, s32 vertexCount)
 {
-    struct RibbonVertexPool *pool = vertexPool;
+    struct RibbonVertexPool *pool = (struct RibbonVertexPool *)vertexPool;
     s32 avail;
     s32 head;
 
@@ -223,7 +223,7 @@ s32 Fx_AllocateRibbonVertices(void *vertexPool, s32 vertexCount)
     head = (s32)pool->next;
     pool->remaining = avail - vertexCount;
     pool->next += vertexCount;
-    return head;
+    return (Vtx *)head;
 }
 
 /** Reset the object and compute its trailing-data end pointer. */
