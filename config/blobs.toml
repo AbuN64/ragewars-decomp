@@ -54237,6 +54237,33 @@ stored_size = 54
 rom."eu-x" = [[0x143d48, 0x143d4c], [0x14ee33, 0x14ee36], [0x15477f, 0x154781], [0x15483f, 0x154841], [0x154a3f, 0x154a45], [0x155941, 0x15595c], [0x15ab3d, 0x15ab3f], [0x7a1db0, 0x7a1db8]]
 evidence = [{ artifact = "pad-receipt.json", sha256 = "ef9ae7ec40dc18a5a07f730d42a5f4b306a01d90af50d1c0b9ed8279d5164850", pointer = "/eu-x" }]
 
+[blob."pad.de.slivers"]
+type = "fill"
+format = "pad"
+state = "decoded"
+limit = 512
+stored_size = 2
+rom."de" = [[0x1fa05b, 0x1fa05d]]
+evidence = [{ artifact = "pad-sliver-receipt.json", sha256 = "1bcca6dfe3e1c91628983eee75b7b21b819c80ff7e1352a927385f5ace6d9477", pointer = "/de" }]
+
+[blob."pad.eu-x.slivers"]
+type = "fill"
+format = "pad"
+state = "decoded"
+limit = 512
+stored_size = 1
+rom."eu-x" = [[0x14e9b8, 0x14e9b9]]
+evidence = [{ artifact = "pad-sliver-receipt.json", sha256 = "1bcca6dfe3e1c91628983eee75b7b21b819c80ff7e1352a927385f5ace6d9477", pointer = "/eu-x" }]
+
+[blob."pad.eu.slivers"]
+type = "fill"
+format = "pad"
+state = "decoded"
+limit = 512
+stored_size = 1
+rom."eu" = [[0x1599b8, 0x1599b9]]
+evidence = [{ artifact = "pad-sliver-receipt.json", sha256 = "1bcca6dfe3e1c91628983eee75b7b21b819c80ff7e1352a927385f5ace6d9477", pointer = "/eu" }]
+
 [blob."pad.us"]
 type = "fill"
 format = "pad"
