@@ -4094,8 +4094,6 @@ segments:
       - [0xC8110, rodata, game_data/g_alSndpAllocateConstantWords]
       - [0xC8114, data, game_data/k_SndplayerEncodedWordsBlock2]
       - [0xC8120, rodata, game_data/literals_alSndpNew]
-      - [0xC8144, rodata, game_data/g_SndplayerBytes1]
-      - [0xC814C, rodata, game_data/s_audioSndplayerText]
       - [0xC8160, rodata, game_data/k_SndplayerEncodedWordsBlock1]
       - [0xC8168, data, game_data/s_SndplayerOSyntheText]
       - [0xC8170, rodata, game_data/s_synthesizerExText]

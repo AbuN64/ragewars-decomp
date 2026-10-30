@@ -49,7 +49,7 @@ unsigned int g_VimgrWords1[10] = {
 #if defined(VERSION_EU)
 VideoDeviceManager g_videoDeviceManager = { 0 };
 u32 g_videoDeviceManagerNextWord = 0x63726564;
-OSViMode g_videoInterfaceModeTable[45] = {
+OSViMode osViModeTable[45] = {
     { 0x2, { 0x311E, 0x140, 0x3E52239, 0x20D, 0xC15, 0xC150C15, 0x6C02EC, 0x200, 0x0 }, {
         { 0x280, 0x400, 0x2501FF, 0xE0204, 0x2 },
         { 0x280, 0x400, 0x2501FF, 0xE0204, 0x2 },

@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "../include/libgultra.h"
+#include "libgultra.h"
 
 unsigned int k_ActionInitbreakablemotionDataEncodedWords[8] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,

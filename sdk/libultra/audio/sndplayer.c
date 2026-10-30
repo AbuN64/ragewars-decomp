@@ -198,7 +198,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
 
         case 4: /* AL_SNDP_PITCH_EVT */
             {
-                f32 min = g_soundPlayerMinimumPitch;
+                f32 min = 0.0001f;
                 if ((state->pitch = event_view->pitch.pitch) < min)
                     state->pitch = min;
             }
@@ -325,7 +325,7 @@ s32 _DivS32ByF32(s32 val, f32 div) {
     s32 result;
 
     if (div == 0.0f) {
-        __assert(g_soundPlayerAssertText, s_audioSndplayerText, 0x11D);
+        __assert("EX", "audio/sndplayer.c", 0x11D);
     }
 
     result = 0x7FFFFFFF;
@@ -348,3 +348,4 @@ unsigned int func_802B2CF0_de_padding_B3C58[1] = {
     0x00000000,
 };
 #endif
+

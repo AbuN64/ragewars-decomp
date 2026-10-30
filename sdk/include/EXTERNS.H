@@ -7,5 +7,4 @@ extern s32 _Printf(void *(*)(void *, const char *, s32), void *, const char *, c
    zero; clamps the result to 0x7FFFFFFF when the quotient would overflow a signed 32-bit int. */
 
 extern char g_soundPlayerAssertText[];
-extern char s_audioSndplayerText[];
 #endif

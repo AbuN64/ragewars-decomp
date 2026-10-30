@@ -885,3 +885,26 @@ LEAF(__osCleanupThread)
 #endif
 END(__osCleanupThread)
 
+
+.data
+.balign 4
+#if VERSION_DE
+.globl g_preNmiShutdownFlagDe
+g_preNmiShutdownFlagDe:
+.word 0
+#endif
+#if VERSION_EU
+.globl g_preNmiShutdownFlagEu
+g_preNmiShutdownFlagEu:
+.word 0
+#endif
+#if VERSION_EU_X
+.globl g_preNmiShutdownFlagEuX
+g_preNmiShutdownFlagEuX:
+.word 0
+#endif
+#if VERSION_US_REV1
+.globl g_preNmiShutdownFlagUsRev1
+g_preNmiShutdownFlagUsRev1:
+.word 0
+#endif
