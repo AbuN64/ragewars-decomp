@@ -1,20 +1,76 @@
+#include "DATA_OVERLAY_SN_RECORDS.H"
+
 #include "TYPES.H"
 #if defined(VERSION_US)
-u32 k_PortalAfterUpdateStartGroup[72] = {
-    0x0A600200, 0x2C040100, 0x00EC0400, 0x000A6206, 0x002C0401, 0x0000EC04,
-    0x00000A5C, 0x20002C04, 0x02000040, 0xAE000034, 0x4000020A, 0x5C40002C,
-    0x04020000, 0x54AE0000, 0x34480006, 0x0A5C4800, 0x2C040200, 0x0054AE00,
-    0x00345000, 0x020A6052, 0x002C0403, 0x00000400, 0x00000A62, 0x56002C04,
-    0x03000004, 0x0000000A, 0x606A002C, 0x04030000, 0x04000000, 0x0A626E00,
-    0x2C040300, 0x00040000, 0x00389000, 0x5E100000, 0x0A5C9C00, 0x2C040200,
-    0x00A8A800, 0x0034A400, 0x5034BC00, 0x0034BC00, 0x0434BC00, 0x0032D000,
-    0x34D00003, 0x0A5CEC00, 0x2C040200, 0x0020AF00, 0x000A60F6, 0x002C0401,
-    0x00000000, 0x00000A62, 0xFA002C04, 0x01000000, 0x0000000A, 0x6002012C,
-    0x04010000, 0xAC030000, 0x0A620601, 0x2C040100, 0x00AC0300, 0x000A5C08,
-    0x01027801, 0x341C0104, 0x0A602601, 0x2C040300, 0x00040000, 0x000A622A,
-    0x012C0403, 0x00000400, 0x00000601, 0x00020400, 0x43960000, 0x06020002,
+struct {
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record0;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record1;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record2;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record3;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record4;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record5;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record6;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record7;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record8;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record9;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record10;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record11;
+    struct { u8 opcode; SnLe16 offset; SnLe32 line; } record12;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record13;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record14;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record15;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record16;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record17;
+    struct { u8 opcode; SnLe16 offset; } record18;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record19;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record20;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record21;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record22;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record23;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record24;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; SnLe16 symbol; } expression; } record25;
+    struct { u8 opcode; SnLe16 offset; u8 lineDelta; } record26;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record27;
+    struct { u8 opcode; u8 patchKind; SnLe16 offset; struct { u8 opcode; struct { u8 opcode; SnLe16 section; } left; struct { u8 opcode; SnLe32 constant; } right; } expression; } record28;
+    struct { u8 opcode; SnLe16 section; } record29;
+    struct { u8 opcode; SnLe16 codeSize; u8 code[4]; } record30;
+    struct { u8 opcode; SnLe16 section; } record31;
+    u8 followingRecordFragment[1];
+} k_PortalAfterUpdateStartGroup __attribute__((aligned(4))) = {
+    { 10, 96, SN_LE16(2), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(1260) } } },
+    { 10, 98, SN_LE16(6), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(1260) } } },
+    { 10, 92, SN_LE16(32), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(44608) } } },
+    { 52, SN_LE16(64), 2 },
+    { 10, 92, SN_LE16(64), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(44628) } } },
+    { 52, SN_LE16(72), 6 },
+    { 10, 92, SN_LE16(72), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(44628) } } },
+    { 52, SN_LE16(80), 2 },
+    { 10, 96, SN_LE16(82), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(86), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 96, SN_LE16(106), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(110), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 56, SN_LE16(144), SN_LE32(4190) },
+    { 10, 92, SN_LE16(156), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(43176) } } },
+    { 52, SN_LE16(164), 80 },
+    { 52, SN_LE16(188), 0 },
+    { 52, SN_LE16(188), 4 },
+    { 52, SN_LE16(188), 0 },
+    { 50, SN_LE16(208) },
+    { 52, SN_LE16(208), 3 },
+    { 10, 92, SN_LE16(236), { 44, { 4, SN_LE16(2) }, { 0, SN_LE32(44832) } } },
+    { 10, 96, SN_LE16(246), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(0) } } },
+    { 10, 98, SN_LE16(250), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(0) } } },
+    { 10, 96, SN_LE16(258), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(940) } } },
+    { 10, 98, SN_LE16(262), { 44, { 4, SN_LE16(1) }, { 0, SN_LE32(940) } } },
+    { 10, 92, SN_LE16(264), { 2, SN_LE16(376) } },
+    { 52, SN_LE16(284), 4 },
+    { 10, 96, SN_LE16(294), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 10, 98, SN_LE16(298), { 44, { 4, SN_LE16(3) }, { 0, SN_LE32(4) } } },
+    { 6, SN_LE16(1) },
+    { 2, SN_LE16(4), { 0x43, 0x96, 0x00, 0x00 } },
+    { 6, SN_LE16(2) },
+    { 0x02 }
 };
-u8 k_PortalAfterUpdateStartGroupTail[2] = {
-    0x1C, 0x00,
-};
+typedef char k_PortalAfterUpdateStartGroupSizeCheck[(sizeof(k_PortalAfterUpdateStartGroup) == 288) ? 1 : -1];
+struct { SnLe16 codeSize; } k_PortalAfterUpdateStartGroupTail = { SN_LE16(28) };
 #endif
