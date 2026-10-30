@@ -194,7 +194,7 @@ void Audio_PlayVoiceSound(AudioVoiceSoundSlotView *base, s16 index)
   AudioVoiceSoundSlotView *selected;
   entry += (unsigned int) base;
   slots = base;
- do { alSndpPlay(0x84 + ((AudioVoiceSoundSlotView *) entry)->owner); entry = (unsigned int) slots; entry += offset; selected = (AudioVoiceSoundSlotView *) entry; } while (0);
+ do { alSndpPlay(&((AudioSoundPlayerOwnerView *)((AudioVoiceSoundSlotView *) entry)->owner)->sound); entry = (unsigned int) slots; entry += offset; selected = (AudioVoiceSoundSlotView *) entry; } while (0);
   selected->flags |= 8;
 }
 
@@ -256,7 +256,7 @@ void Audio_ClearVoiceFlags(s32 a) {
     do {
         ((SlotCC *)slotCursor)->flag = 0;
         remainingSlots -= 1;
-        slotCursor += 0xCC;
+        slotCursor += sizeof(AudioVoiceKeyedSlotView);
     } while (remainingSlots >= 0);
 }
 
@@ -324,7 +324,7 @@ void Audio_UpdateVoicePool(void **voicePool) {
             activeVoiceCount += 1;
         }
         i += 1;
-        view += 0xCC;
+        view += sizeof(AudioVoiceKeyedSlotView);
     } while (i < 16);
     g_activeVoiceCount = activeVoiceCount;
     if (g_peakActiveVoiceCount < activeVoiceCount) {
@@ -565,7 +565,7 @@ void Audio_SetVoicePan(AudioVoiceControlSlotView *voiceRecord, s32 panValue)
   s32 ownerAddress;
   void *soundPlayer;
   ownerAddress = (s32)voiceRecord->owner;
-  soundPlayer = ownerAddress + 0x84;
+  soundPlayer = &((AudioSoundPlayerOwnerView *)ownerAddress)->sound;
   unusedPanMode = 2;
   slotIndexPointer = &voiceRecord->index;
   alSndpSetSound(soundPlayer, ((AudioSoundPlayerOwnerView *)ownerAddress)->samples[*slotIndexPointer]);
@@ -578,7 +578,7 @@ void Audio_QueryVoicePlaybackState(AudioVoiceControlSlotView *voiceRecord)
   s32 ownerAddress;
   void *soundPlayer;
   ownerAddress = (s32)voiceRecord->owner;
-  soundPlayer = ownerAddress + 0x84;
+  soundPlayer = &((AudioSoundPlayerOwnerView *)ownerAddress)->sound;
   alSndpSetSound(soundPlayer, ((AudioSoundPlayerOwnerView *)ownerAddress)->samples[voiceRecord->index]);
   alSndpGetState(soundPlayer);
 }

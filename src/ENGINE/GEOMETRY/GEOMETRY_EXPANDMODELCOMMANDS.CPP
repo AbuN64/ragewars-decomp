@@ -1,3 +1,4 @@
+#include "RENDER/PLAYER_CONTROLLER_RESET_VIEWS.H"
 #include "../../../sdk/include/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/GEOMETRY_BLEND_AND_INSTANCE_VIEWS.H"
@@ -309,7 +310,7 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
     if (g_geometryViewEffect != 0 && (material->flagWord & 0x8000)) {
         Graphu64_UnpackFixedMatrix((f32 *)matrix, model);
         Graphu64_GetMatrixTranslation((f32 *)matrix, &position);
-        Graphu64_SubtractVectors(&direction, Playerai_GetFirstPlayer(&g_playerViewRenderContext) + 0x6E8, &position);
+        Graphu64_SubtractVectors(&direction, &((PlayerControllerReleaseView *)Playerai_GetFirstPlayer(&g_playerViewRenderContext))->previousPosition, &position);
         Graphu64_NormalizeVec3(&direction);
         {
             Gfx *cmd;

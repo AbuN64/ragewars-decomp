@@ -107,6 +107,11 @@ typedef struct AmmoPickupDefinition {
 
 
 
+typedef struct PickupDefinition24 {
+    PowerupIdEntry effect;
+    s16 values[4];
+} PickupDefinition24;
+
 /* Three-channel pickups extend the common two-argument effect record. */
 typedef struct MultiChannelItemEffect {
     PowerupIdEntry effect;

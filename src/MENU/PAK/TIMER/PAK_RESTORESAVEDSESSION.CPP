@@ -51,7 +51,7 @@ void Pak_RestoreSavedSession(RestorePlayer *player) {
     g_gameSettings.counters.m_GameTimeMinutes = g_controllerPakSnapshotPayload->rules[2];
     g_gameSettings.counters.m_GameTimeHours = g_controllerPakSnapshotPayload->rules[3];
     g_persistedOptionUnlockFlags[0] = ((SavedSettings *)&g_gameSettings)->data[1];
-    ((u8 *)&g_gameSettings)[0x580] = saved;
+    g_gameSettings.resolution = saved;
     from = g_controllerPakSnapshotPayload->table;
     to = g_worldSnapshotNoteData;
     for (i = 0; i < world->noteCount; i++) *to++ = *from++;

@@ -1,3 +1,4 @@
+#include "WORLD/STATIC_MODEL_INSTANCE_VIEWS.H"
 #include "../../../sdk/include/LIBC.H"
 #include "COMMON/RESULTS.H"
 #include "TYPES.H"
@@ -236,7 +237,7 @@ void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 modelI
   center.x = ((SceneEffect *)(effectActor))->position.x;
   center.y = (((SceneEffect *)(effectActor))->position.y) + (Gobjinst_GetActorHeight(effectActor) * 0.5f);
   center.z = ((SceneEffect *)(effectActor))->position.z;
-  Scene_SampleWorldLighting(&g_world, &center, (char *)effectActor + 0x1A8);
+  Scene_SampleWorldLighting(&g_world, &center, &((StaticObject *)effectActor)->lights);
   return effectActor;
 }
 

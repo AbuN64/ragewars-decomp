@@ -1,3 +1,4 @@
+#include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
@@ -339,37 +340,37 @@ void Player_InitActorHudState(SharedPlayer *actor) {
     FIELD(s32, actor, 1660) = 0;
     FIELD(s32, actor, 1664) = 0;
     FIELD(s32, actor, 1668) = 0;
-    widget = (char *)actor + 0xE2C;
+    widget = (char *)&((Shared_ActorView *)actor)->hudMovers[0];
     OnScreen_InitMover(widget, 120, 96);
     OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptOne);
-    widget = (char *)actor + 0xE68;
+    widget = (char *)&((Shared_ActorView *)actor)->hudMovers[1];
     OnScreen_InitMover(widget, 190, 96);
     OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptTwo);
-    widget = (char *)actor + 0xEA4;
+    widget = (char *)&((Shared_ActorView *)actor)->hudMovers[2];
     OnScreen_InitMover(widget, 260, 96);
     OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptThree);
-    widget = (char *)actor + 0xEE0;
+    widget = (char *)&((Shared_ActorView *)actor)->hudMovers[3];
     OnScreen_InitMover(widget, 28, 96);
     OnScreen_StartMoverScript(widget, g_hudStatusWidgetMoverScriptFour);
-    widget = (char *)actor + 0xF1C;
+    widget = (char *)&((Shared_ActorView *)actor)->hudMovers[4];
     OnScreen_InitMover(widget, -64, 16);
     OnScreen_StartMoverScript(widget, g_hudLivesInitialMoverScript);
-    widget = (char *)actor + 0xF58;
+    widget = (char *)&((Shared_ActorView *)actor)->hudMovers[5];
     OnScreen_InitMover(widget, 40, 16);
     OnScreen_StartMoverScript(widget, k_PlaceplayerlightEncodedWords);
-    widget = (char *)actor + 0x1048;
+    widget = (char *)&((Shared_ActorView *)actor)->hudMovers[9];
     OnScreen_InitMover(widget, -82, 16);
     OnScreen_StartMoverScript(widget, g_hudScoreInitialMoverScript);
-    widget = (char *)actor + 0x1084;
+    widget = (char *)&((Shared_ActorView *)actor)->hudMovers[10];
     FIELD(f32, actor, 4220) = 255.0f;
     OnScreen_InitMover(widget, -82, 68);
     OnScreen_StartMoverScript(widget, g_hudCountInitialMoverScript);
-    widget = (char *)actor + 0x10C0;
+    widget = (char *)&((Shared_ActorView *)actor)->hudMovers[11];
     OnScreen_InitMover(widget, -82, 68);
     OnScreen_StartMoverScript(widget, g_hudSquadInitialMoverScript);
-    OnScreen_InitMover((char *)actor + 0xFD0, 24, (s16)((u16)g_hudReferenceViewportHeight + 96));
-    OnScreen_InitMover((char *)actor + 0x100C, 24, (s16)((u16)g_hudReferenceViewportHeight + 96));
-    OnScreen_InitMover((char *)actor + 0x10FC, 100, 100);
+    OnScreen_InitMover((char *)&((Shared_ActorView *)actor)->hudMovers[7], 24, (s16)((u16)g_hudReferenceViewportHeight + 96));
+    OnScreen_InitMover((char *)&((Shared_ActorView *)actor)->hudMovers[8], 24, (s16)((u16)g_hudReferenceViewportHeight + 96));
+    OnScreen_InitMover((char *)&((Shared_ActorView *)actor)->hudMovers[12], 100, 100);
     FIELD(s32, actor, 4548) = 0;
     FIELD(s32, actor, 1980) = 0;
     FIELD(s32, actor, 4404) = FIELD(s32, actor, 1508);

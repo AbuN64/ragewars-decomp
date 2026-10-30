@@ -497,8 +497,8 @@ void *Sky_AllocateEffectNode(struct SkyEffectObjectListsView *sceneOwner) {
 
 /* 8023A284_8.CPP */
 void Sky_ReleaseEffectNode(s32 sceneAddress, s32 effectNode) {
-    List_RemoveIntrusive(sceneAddress + 0x8B4, effectNode);
-    List_PrependIntrusive(sceneAddress + 0x8A0, effectNode);
+    List_RemoveIntrusive(&((struct Scene *)sceneAddress)->objects, effectNode);
+    List_PrependIntrusive(&((struct Scene *)sceneAddress)->freeObjects, effectNode);
 }
 
 /** Swap the two words pointed to by leftEntry and rightEntry. */

@@ -80,7 +80,7 @@ int Statinst_GetPropModelIndex(char *object) {
 /** Read the signed byte at offset 0xE from the object's linked record. */
 signed char Statinst_GetPropGeometryIndex(struct PlacedProp *object) {
     void *linked = object->model;
-    return ((signed char *)linked)[0xE];
+    return ((struct ResourceFadeDefinition *)linked)->nearValue;
 }
 
 void Statinst_DrawForGameMode(void *owner) {

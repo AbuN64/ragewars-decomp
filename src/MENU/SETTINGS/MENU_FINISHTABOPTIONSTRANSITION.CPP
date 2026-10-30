@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "COMMON/WORLD.H"
@@ -20,7 +21,7 @@
 
 extern struct ScreenMenuFinishTabOptionsTransition *g_optionsShortcutScreen;
 
-extern struct LevelActor *g_cinemaSequenceState;
+
 
 
 
@@ -66,8 +67,8 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
             Frontend_RequestScreenMode(0);
             Widget_SetWidgetFlag08(item, 1);
             Track_RequestTrackByKey(g_selectedLevelId + 601);
-            g_cinemaSequenceState->resourceHandle = -1;
-            g_cinemaSequenceState->motionIndex = state;
+            g_cinemaSequenceState->targetD8 = -1;
+            g_cinemaSequenceState->state3C = state;
         } else {
             MarkMenuEventHandled();
             if (g_optionsShortcutScreen->arena == 0 && SoundElement_GetMusicPlaybackEnabled() != 0) {
@@ -96,8 +97,8 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
                 Tsmos_RequestFrontendShutdown();
                 return 0;
             }
-            Pools_ResetActorPools((u8 *)pause - 0x180C, 0);
-            Player_InitializePlayerPool((u8 *)pause - 0x1854, 0, 0);
+            Pools_ResetActorPools((u8 *)pause - ((u32)&((Shared_MenuData *)0)->pause - (u32)&((Shared_MenuData *)0)->object), 0);
+            Player_InitializePlayerPool((u8 *)pause - (u32)&((Shared_MenuData *)0)->pause, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             Stage_StartConfiguredMatch();
         }

@@ -59,7 +59,7 @@ void Stage_StartConfiguredMatch(void) {
     humans = 0;
     settings = (u8 *)&g_gameSettings;
     for (i = 0; i < 8; i++) {
-        status = (struct MatchPlayerStatus *)(settings + 0xD0 + i * sizeof(Shared_PlayerSettingsRecord));
+        status = (struct MatchPlayerStatus *)((u8 *)&((Shared_Game *)settings)->playerSettings[i]);
         status->lives = 0;
         status->score = 0;
         if (status->computer == 0) {
@@ -75,10 +75,10 @@ void Stage_StartConfiguredMatch(void) {
     g_currentStagePreset = 0;
     if (settings[13] != 0) {
         first = 0;
-        while (((struct MatchPlayerStatus *)(settings + 0xD0 + first * sizeof(Shared_PlayerSettingsRecord)))->joined == 0) {
+        while (((struct MatchPlayerStatus *)((u8 *)&((Shared_Game *)settings)->playerSettings[first]))->joined == 0) {
             first++;
         }
-        status = (struct MatchPlayerStatus *)(settings + 0xD0 + first * sizeof(Shared_PlayerSettingsRecord));
+        status = (struct MatchPlayerStatus *)((u8 *)&((Shared_Game *)settings)->playerSettings[first]);
         switch (settings[13]) {
         case 1:
             g_currentStagePreset = Achieve_CopyPreset(g_selectedLevelId, 0, status->kind);
@@ -111,7 +111,7 @@ void Stage_StartConfiguredMatch(void) {
         break;
     }
     for (i = 0; i < 4; i++) {
-        status = (struct MatchPlayerStatus *)(settings + 0xD0 + i * sizeof(Shared_PlayerSettingsRecord));
+        status = (struct MatchPlayerStatus *)((u8 *)&((Shared_Game *)settings)->playerSettings[i]);
         if (status->joined == 1 && status->computer == 0) {
             XPlus_CopyString(status->name, g_localPlayerProfiles[i].name);
             if (settings[13] != 0) {

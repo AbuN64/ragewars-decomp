@@ -67,7 +67,7 @@ void *Pickup_FindBonusEntry(s32 bonusId) {
         record = (Shared_PickupAmmoDefinition *)v1;
         i -= 1;
         if (record->id != bonusId) {
-            v1 += 0x18;
+            v1 += sizeof(PickupDefinition24);
         } else {
             return v1;
         }

@@ -26,7 +26,7 @@ struct AudioSoundCell {
     s32 sequence;
     s32 frame;
     char pad14[0x44 - 0x14];
-    char data[1];
+    char data[0xCC - 0x44];
 };
 struct AudioPriorityQueueManagerView {
     s32 *scene;

@@ -1,3 +1,5 @@
+#include "COMMON/GAMEPLAY_SETTINGS.H"
+#include "COMMON/SHAREDPLAYER.H"
 #include "include_asm.h"
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
@@ -138,13 +140,13 @@ s32 Player_FormatPlayerPartnerStatus(Item *item, Owner *owner) {
         Libc_FormatString(text, playerStatusText0());
     } else if (player->partner != 0) {
         switch (player->mode) {
-        case 0: Libc_FormatString(text, playerStatusText1(), player->partner->record + 0x84); break;
-        case 1: Libc_FormatString(text, playerStatusText2(), player->partner->record + 0x84); break;
-        case 2: Libc_FormatString(text, playerStatusText3(), player->partner->record + 0x84); break;
-        case 3: Libc_FormatString(text, playerStatusText4(), player->partner->record + 0x84); break;
-        case 4: Libc_FormatString(text, playerStatusText5(), player->partner->record + 0x84); break;
-        case 5: Libc_FormatString(text, playerStatusText6(), player->partner->record + 0x84); break;
-        case 6: Libc_FormatString(text, playerStatusText7(), player->partner->record + 0x84); break;
+        case 0: Libc_FormatString(text, playerStatusText1(), &((Shared_PlayerSettingsRecord *)player->partner->record)->name); break;
+        case 1: Libc_FormatString(text, playerStatusText2(), &((Shared_PlayerSettingsRecord *)player->partner->record)->name); break;
+        case 2: Libc_FormatString(text, playerStatusText3(), &((Shared_PlayerSettingsRecord *)player->partner->record)->name); break;
+        case 3: Libc_FormatString(text, playerStatusText4(), &((Shared_PlayerSettingsRecord *)player->partner->record)->name); break;
+        case 4: Libc_FormatString(text, playerStatusText5(), &((Shared_PlayerSettingsRecord *)player->partner->record)->name); break;
+        case 5: Libc_FormatString(text, playerStatusText6(), &((Shared_PlayerSettingsRecord *)player->partner->record)->name); break;
+        case 6: Libc_FormatString(text, playerStatusText7(), &((Shared_PlayerSettingsRecord *)player->partner->record)->name); break;
         }
     } else {
         switch (player->mode) {

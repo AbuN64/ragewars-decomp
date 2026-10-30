@@ -233,7 +233,7 @@ void Weaponai_UpdateAfterAmmoModeChange(LevelActor *levelActor, void *weaponSlot
 
     actor = levelActor->controller;
     state = *(s16 *)((char *)g_weaponActionRecords +
-                     (((Shared_ActorView *)actor)->action * 0x18));
+                     (((Shared_ActorView *)actor)->action * sizeof(struct WeaponActionRecord)));
     if ((s8)((Dest *)weaponSlot)->count != 0) {
         if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
             if (((Dest *)weaponSlot)->fireMode == 2) {

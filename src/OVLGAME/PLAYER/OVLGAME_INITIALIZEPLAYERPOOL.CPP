@@ -109,7 +109,7 @@ void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active)
     }
 
     for (i = 0; i < pool->count; i++) {
-        entry = global + 0xD0 + i * sizeof(Shared_PlayerSettingsRecord);
+        entry = (char *)&((Shared_Game *)global)->playerSettings[i];
         if (((CPlayerOptions *)(entry))->talsetPosse != 0) {
             ((CPlayerOptions *)(entry))->active = 0;
         }

@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "COMMON/LISTHEADER.H"
@@ -192,9 +193,7 @@ void Gobjinst_DrawMaskedModel(void *actor, void *unusedShadowContext, void *rend
             one = 1;
             Geometry_DrawModelResource(((struct ActorRenderSettings *)(renderSettings))->view,
                           ((struct LevelActor *)(actor))->animationMatrices, one,
-                          (char *)actor
-                              + ((((g_lightingBufferIndex << one) + g_lightingBufferIndex) << 3)
-                                 + 0x140),
+                          (char *)&((LevelActor *)actor)->lighting + (((g_lightingBufferIndex << one) + g_lightingBufferIndex) << 3),
                           0, ((struct LevelActor *)(actor))->renderPass);
             Gobjinst_SpawnAnimatedModelViewEffect(actor, renderSettings);
         }
@@ -217,9 +216,7 @@ void Gobjinst_DrawMaskedModelWithLighting(void *actor, void *unusedShadowContext
             one = 1;
             Geometry_DrawModelResource(((struct ActorRenderSettings *)(renderSettings))->view,
                           ((struct LevelActor *)(actor))->animationMatrices, one,
-                          (char *)actor
-                              + ((((g_lightingBufferIndex << one) + g_lightingBufferIndex) << 3)
-                                 + 0x140),
+                          (char *)&((LevelActor *)actor)->lighting + (((g_lightingBufferIndex << one) + g_lightingBufferIndex) << 3),
                           0, ((struct LevelActor *)(actor))->renderPass);
             Gobjinst_SpawnAnimatedModelViewEffect(actor, renderSettings);
         }

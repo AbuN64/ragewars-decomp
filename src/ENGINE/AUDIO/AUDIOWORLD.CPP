@@ -166,7 +166,7 @@ void AudioWorld_DispatchPendingSounds(Cache *cache) {
         if (*cursor == free) {
             break;
         }
-        cell = (AudioSoundCell *)(cache->context->cells + 4 + slot * 0xCC);
+        cell = (AudioSoundCell *)(cache->context->cells + 4 + slot * sizeof(AudioSoundCell));
         Libc_CopyBytes(cell, entry->body, 204);
         cell->sequence = entry->sequence;
         cell->texture = *cursor;

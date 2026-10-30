@@ -59,7 +59,7 @@ void OnScreen_StartSecondStatusBar(void *hud, s32 owner, s32 target) {
     (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->owner) = owner;
     (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->target) = target;
     (((struct OverlayScriptSecondaryRangeView *) ((s8 *) hud))->initialPercent) = 100;
-    OnScreen_StartMoverScript(hud + 0x48, &g_secondStatusBarMoverScript);
+    OnScreen_StartMoverScript(&((Hud *)hud)->bars[1], &g_secondStatusBarMoverScript);
 }
 
 void OnScreen_SetFirstBarTarget(char *object, int value) {

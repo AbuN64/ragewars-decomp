@@ -1,3 +1,4 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/SCREEN.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/WORLD.H"
@@ -37,8 +38,8 @@ s32 Timed_FinishPauseConfirmationTransition(s32 unused0, s32 unused1, s32 event)
         MarkMenuEventHandled();
         pause = &g_frontendScreenStatus.status[7];
         *pause = 0;
-        Pools_ResetActorPools((char *)pause - 0x180C, 0);
-        Player_InitializePlayerPool((char *)pause - 0x1854, 0, 0);
+        Pools_ResetActorPools((char *)pause - ((u32)&((Shared_MenuData *)0)->pause - (u32)&((Shared_MenuData *)0)->object), 0);
+        Player_InitializePlayerPool((char *)pause - (u32)&((Shared_MenuData *)0)->pause, 0, 0);
         Scene_LoadLevelResources(&g_world, 36, 0);
         if (Cache_GetResourceActivityState() == 0) {
             Cache_SetResourceActivityState(1);

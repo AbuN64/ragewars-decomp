@@ -121,7 +121,7 @@ void Simpinst_BuildObjectTransform(void *staticObject) {
 
     SwapMatrixUpForward(matrix);
 
-    Graphu64_ConvertMatrixToFixed(matrix, (g_lightingBufferIndex << 6) + 0x68 + o);
+    Graphu64_ConvertMatrixToFixed(matrix, &((StaticObject *)o)->matrices[g_lightingBufferIndex]);
 }
 
 extern s32 Cache_RequestWordCountedResource(s32, void **, s32, void *, s32);
@@ -196,7 +196,7 @@ extern void Cache_ReplaceResourcePairFirst(s32 a, s32 **b, s32 c);
 void Simpinst_BuildLitGeometryResource(void *wanted, s32 **resourcePair) {
     s32 sourceGeometryResource;
     sourceGeometryResource = **resourcePair;
-    Cache_ReplaceResourcePairFirst(0, resourcePair, Lighting_BuildLitModel(sourceGeometryResource, *((StaticObject *)(wanted))->renderResource, &((StaticObject *)(wanted))->effect[0], (s32)((char *)wanted + ((g_lightingBufferIndex << 6) + 0x68)), 0, wanted));
+    Cache_ReplaceResourcePairFirst(0, resourcePair, Lighting_BuildLitModel(sourceGeometryResource, *((StaticObject *)(wanted))->renderResource, &((StaticObject *)(wanted))->effect[0], (s32)((char *)&((StaticObject *)wanted)->matrices[g_lightingBufferIndex]), 0, wanted));
 }
 
 #if !(defined(VERSION_US_REV1))

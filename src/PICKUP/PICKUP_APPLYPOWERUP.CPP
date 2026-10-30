@@ -19,7 +19,7 @@ void *Pickup_FindPowerupEntry(s32 itemId) {
     do {
         i -= 1;
         if (((struct PowerupIdEntry *)(v1))->id != itemId) {
-            v1 += 0x18;
+            v1 += sizeof(PickupDefinition24);
         } else {
             return v1;
         }
@@ -40,7 +40,7 @@ void *Pickup_FindAmmoEntry(s32 pickupId) {
     do {
         i -= 1;
         if (((struct PowerupIdEntry *)(v1))->id != pickupId) {
-            v1 += 0x14;
+            v1 += sizeof(AmmoPickupDefinition);
         } else {
             return v1;
         }
@@ -61,7 +61,7 @@ void *Pickup_FindHealthEntry(s32 pickupId) {
     do {
         i -= 1;
         if (((struct PowerupIdEntry *)(v1))->id != pickupId) {
-            v1 += 0x18;
+            v1 += sizeof(PickupDefinition24);
         } else {
             return v1;
         }
@@ -82,7 +82,7 @@ void *Pickup_FindSingleEntry(s32 pickupId) {
     do {
         i -= 1;
         if (((struct PowerupIdEntry *)(v1))->id != pickupId) {
-            v1 += 0x14;
+            v1 += sizeof(AmmoPickupDefinition);
         } else {
             return v1;
         }
@@ -103,7 +103,7 @@ void *Pickup_FindTargetedEntry(s32 pickupId) {
     do {
         i -= 1;
         if (((struct PowerupIdEntry *)(v1))->id != pickupId) {
-            v1 += 0x10;
+            v1 += sizeof(PowerupIdEntry);
         } else {
             return v1;
         }
@@ -124,7 +124,7 @@ void *Pickup_FindSpecialEntry(s32 pickupId) {
     do {
         i -= 1;
         if (((struct PowerupIdEntry *)(v1))->id != pickupId) {
-            v1 += 0x10;
+            v1 += sizeof(PowerupIdEntry);
         } else {
             return v1;
         }

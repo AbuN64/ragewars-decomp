@@ -90,7 +90,7 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
                 Graphu64_AddVec3(&center, &center, &box->corners[j]);
             }
             Graphu64_ScaleVector(&center, &center, 0.125f);
-            Graphu64_ConvertMatrixToFloat(matrix, bones + i * 0x40);
+            Graphu64_ConvertMatrixToFloat(matrix, &((Matrix *)bones)[i]);
             Graphu64_TransformPoint(matrix, &center, &diff);
             Graphu64_SubtractVectors(&diff, &diff, &point);
             dist = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
