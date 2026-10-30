@@ -1,4 +1,8 @@
 # generated from config.toml; do not edit
+VMACRO_eu := VERSION_EU
+SHA1_eu := 46b474fac79a4b21535bb6c78ce3039a2c202359
+ROM0_eu := 0
+ROM_SECTIONS_eu :=
 build/eu/sdk/MATH/aigetlen.CPP.o: TEXTSIZE := 0x14
 build/eu/sdk/MATH/aisetfreq.CPP.o: TEXTSIZE := 0x118
 build/eu/sdk/MATH/cosf.CPP.o: TEXTSIZE := 0x104
