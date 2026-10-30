@@ -8063,6 +8063,7 @@ g_characterSelectionMenuLayout_de = 0x800E0288; // rom:0xE0E88
 g_FrontendCreatematchoptionsHalfwords1 = 0x800E0F00; // rom:0xE1B00
 g_FrontendJConstantsRetainedPointerWords1 = 0x800E1998; // rom:0xE2598
 g_LinktablesEncodedWordsBlock2 = 0x800E400C; // rom:0xE4C0C
+g_earlierLinkDataDe = 0x800EED50; // rom:0xEF950 size:0xF30
 k_LinktablesEncodedWordsBlock9 = 0x800F2D0C; // rom:0xF390C
 k_LinktablesEncodedWordsBlock12 = 0x800F2DC0; // rom:0xF39C0
 k_PortalUpdatealternatingactionburstsEncodedWordsBlock1 = 0x800F3CF4; // rom:0xF48F4

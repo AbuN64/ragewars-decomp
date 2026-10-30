@@ -4669,6 +4669,7 @@ segments:
       - [0xE2CA0, data, game_data/g_germanStringPool_de]
       - [0xE4C00, rodata, game_data/g_germanStringPoolTrailer_de]
       - [0xE4C0C, data, game_data/g_LinktablesEncodedWordsBlock2]
+      - [0xEF950, data, game_data/g_earlierLinkDataDe]
       - [0xF2880, data, game_data/g_libsnDelayIteration]
       - [0xF2884, data, game_data/k_LibsnEnumeratememoryrangesEncodedWords]
       - [0xF3900, data, game_data/g_libsnHostMemoryRanges_LibsnEnumeratememoryrangesData]

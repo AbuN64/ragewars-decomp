@@ -2767,6 +2767,7 @@ g_frontendVideoModeRenderConfigsFirstZ = 0x800DD678; // rom:0xDE278
 g_frontendVideoModeRenderConfigsFirstPad0 = 0x800DD67C; // rom:0xDE27C
 g_frontendVideoModeRenderConfigsFirstPad1 = 0x800DD680; // rom:0xDE280
 VideoModeIds = 0x800DD6AC; // rom:0xDE2AC size:0x60
+g_frontendAdvanceVideoModeCount = 0x800DD70C; // rom:0xDE30C size:0x4
 g_frontendViewportWidth = 0x800DD710; // rom:0xDE310
 g_frontendViewportHeight = 0x800DD714; // rom:0xDE314
 g_frontendRenderStateInitialized = 0x800DD718; // rom:0xDE318
