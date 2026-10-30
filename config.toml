@@ -19,7 +19,7 @@ subsystem_header = "src/{subsystem}.h"
 [cheat]
 source = ["src", "include", "sdk"]
 asm_home = ["sdk/"]
-makefile_row = "^\\$\\(foreach v,\\$\\(VERSIONS\\),build/\\$\\(v\\)/(src|sdk)/[^ ]+\\.o\\): (TC|CPPFLAGS|CFLAGS) :="
+makefile_row = "^(FILE|CPPFLAGS|CFLAGS)\\.(src|sdk)/[^ ]+ :="
 
 [non_matching]
 
