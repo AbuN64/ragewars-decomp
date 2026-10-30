@@ -4,17 +4,17 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/CONTROLLER_MOTOR_STATE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
-#include "../../../include/OS/siaccess.H"
-#include "../../../include/os.h"
+#include "../../include/OS/siaccess.H"
+#include "../../include/os.h"
 #include "COMMON/LONE/siaccess.H"
 #include "os.h"
-#include "libultra/os/siaccess.h"
+
+extern OSMesgQueue g_serialInterfaceAccessQueue;
+extern OSMesg g_serialInterfaceAccessMessage;
 
 /* siaccess.CPP */
 /* 802BECB0.CPP */
 void __osSiCreateAccessQueue(void) {
-    extern OSMesgQueue g_serialInterfaceAccessQueue;
-    extern OSMesg g_serialInterfaceAccessMessage;
     g_serialInterfaceAccessQueueInitialized[0] = 1;
     osCreateMesgQueue(&g_serialInterfaceAccessQueue, &g_serialInterfaceAccessMessage, 1);
     osSendMesg(&g_serialInterfaceAccessQueue, 0, 0);
@@ -26,15 +26,12 @@ void __osSiCreateAccessQueue(void) {
    when g_serialInterfaceAccessQueueInitialized says it does not exist yet. Adapted from __osPiGetAccess with the queue, its buffer and its flag changed. */
 
 static inline void create_access_queue(void) {
-    extern OSMesgQueue g_serialInterfaceAccessQueue;
-    extern OSMesg g_serialInterfaceAccessMessage;
     g_serialInterfaceAccessQueueInitialized[0] = 1;
     osCreateMesgQueue(&g_serialInterfaceAccessQueue, &g_serialInterfaceAccessMessage, 1);
     osSendMesg(&g_serialInterfaceAccessQueue, 0, 0);
 }
 
 void __osSiGetAccess(void) {
-    extern OSMesgQueue g_serialInterfaceAccessQueue;
     OSMesg token;
 
     if (!g_serialInterfaceAccessQueueInitialized[0]) {
@@ -50,5 +47,5 @@ void __osSiRelAccess(void) {
 
 /* G_SERIALINTERFACEACCESSQUEUEINITIALIZED.CPP */
 #if defined(VERSION_US_REV1)
-int g_serialInterfaceAccessQueueInitialized = 0;
+s32 g_serialInterfaceAccessQueueInitialized[1] = {0};
 #endif

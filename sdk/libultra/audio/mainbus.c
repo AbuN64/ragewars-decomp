@@ -1,4 +1,4 @@
-#include "../../../include/libgultra.h"
+#include "../../include/libgultra.h"
 #include "TYPES.H"
 #include "abi.h"
 #include "acmd.h"
