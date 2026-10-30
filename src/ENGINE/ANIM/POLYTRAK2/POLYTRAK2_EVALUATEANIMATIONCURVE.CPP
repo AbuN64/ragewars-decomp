@@ -103,7 +103,7 @@ float Polytrak2_EvaluateAnimationCurve(Stream *stream, float time) {
     return evaluate(*(Poly *)&stream->coeff[0], time - stream->segmentStartSample);
 }
 
-#include "SYSTEM/PACKED_BIT_WORDS.H"
+#include "ENGINE/ANIM/POLYTRAK2.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 inline static void write_bits(u32 value, u32 bitAddress, u32 width)
 {

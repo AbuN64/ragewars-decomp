@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "RSP/FIXED_MATRIX_CONVERSION_CONSTANTS.H"
+#include "ENGINE/GRAPHU64.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 
 /* Transforms an axis-aligned box by a matrix: starts the new minimum and maximum at the matrix translation and, for every matrix entry, adds the smaller of its products with the old minimum and maximum to the new minimum and the larger to the new maximum. */

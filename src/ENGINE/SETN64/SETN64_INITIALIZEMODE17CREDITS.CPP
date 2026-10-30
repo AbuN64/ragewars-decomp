@@ -9,7 +9,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
-#include "RENDER/SETN64_INITIALIZEMODE17CREDITS.H"
+#include "ENGINE/SETN64.H"
 extern s32 g_hudReferenceViewportWidth;
 
 

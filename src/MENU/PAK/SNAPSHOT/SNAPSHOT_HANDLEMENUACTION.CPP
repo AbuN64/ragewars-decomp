@@ -7,7 +7,7 @@
 #include "COMMON/PAK_MENU.H"
 #include "TYPES.H"
 #include "MENU/PAK/SNAPSHOT_HANDLEMENUACTION.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"

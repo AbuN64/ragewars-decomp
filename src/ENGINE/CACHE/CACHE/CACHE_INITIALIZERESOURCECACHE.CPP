@@ -11,7 +11,7 @@
 #include "COMMON/S1.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
+#include "ENGINE/CACHE/CACHE.H"
 #include "../../../../sdk/include/os.h"
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/CACHE/LIST.H"
@@ -32,7 +32,6 @@ extern CMemEntry *g_resourceAllocationCandidate;
 #include "COMMON/ENTRYRECAT18V3.H"
 /* The resource manager record at g_resourceCacheManager: node array, free-slot stack, link records, lists and its lock queue.
  * count (0xBDC) and stamp (0xC20) are the Pool fields used by Cache_AcquirePendingResourceEntry. */
-#include "COMMON/RESOURCE_CACHE.H"
 extern s32 Heap_AllocateFromFront(void *, s32);
 extern s32 Mutex_InitializeQueueLock(OSMesgQueue *);
 extern u32 Defs_GetMemorySize(void);

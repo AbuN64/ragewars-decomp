@@ -1,4 +1,4 @@
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
 #include "include_asm.h"
@@ -23,7 +23,7 @@ s32 Pak_AdjustPackedButtonOption(void *first, void *second) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 extern u8 *g_packedButtonOptionZeroTextTableEu[], *g_packedButtonOptionStepTextTableEu[];
 
 s32 Pak_FormatPackedButtonOption(LayeredText *item) {

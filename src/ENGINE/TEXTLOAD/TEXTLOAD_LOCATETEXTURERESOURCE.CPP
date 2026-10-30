@@ -2,8 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/TEXTURE_REQUEST.H"
 #include "COMMON/WORLD.H"
-#include "ENGINE/SCENE_LOCATETEXTURERESOURCE.H"
-#include "TEXTURE/TEXTLOAD_SETRESOURCELOCATION.H"
+#include "ENGINE/TEXTLOAD.H"
 
 /** Store two words into a two-word value. */
 void Textload_SetResourceLocation(int *value, int first, int second) {

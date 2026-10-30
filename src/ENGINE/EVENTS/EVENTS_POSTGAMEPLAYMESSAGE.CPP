@@ -1,6 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/TARGET.H"
-#include "SYSTEM/EVENT_DAMAGE_AND_IMPACT_VIEWS.H"
+#include "ENGINE/EVENTS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"

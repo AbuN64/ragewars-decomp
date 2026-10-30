@@ -1,6 +1,16 @@
 #ifndef ENGINE_DEFS_H
 #define ENGINE_DEFS_H
-#include "SYSTEM/DEFS.H"
+#include "TYPES.H"
+#include "COMMON/LIGHTDATA.H"
+
+struct LightNode {
+    char pad0[8];
+    LightData *data;
+    f32 intensity;
+    s16 position[3];
+    s16 active;
+};
+
 extern s32 Defs_FindSortedGroupRange(u32 *, s32, u32 group, s32 *, s32 *last);
 extern int Defs_GetBitArrayByteCount(int);
 extern void Defs_ToggleBit(s32, s32);

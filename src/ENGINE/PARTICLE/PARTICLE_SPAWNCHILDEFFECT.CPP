@@ -5,7 +5,7 @@
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
-#include "particle/PARTICLE_BUILDMATRIX.H"
+#include "ENGINE/PARTICLE.H"
 
 typedef struct Owner Owner;
 

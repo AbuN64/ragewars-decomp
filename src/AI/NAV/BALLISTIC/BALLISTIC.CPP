@@ -7,7 +7,7 @@
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/ACTORREC.H"
 #include "TYPES.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "MATH/DOUBLEBITS.H"
 

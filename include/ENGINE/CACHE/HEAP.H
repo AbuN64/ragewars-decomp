@@ -7,6 +7,26 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/STATERECAT34.H"
+#include "COMMON/MEASURED_STORAGE.H"
+
+/* Measured 4-byte access at 8; storage view, complete object unknown. */
+struct HeapFirstFreeBlockView { unsigned char padding[8]; void * value; };
+
+/* Measured 4-byte access at 4; storage view, complete object unknown. */
+struct HeapNextBlockAddressView { unsigned char padding[4]; u32 value; };
+
+/* Measured 4-byte access at -0x20; storage view, complete object unknown. */
+struct HeapAllocationOwnerHeader { void * value; unsigned char trailing[28]; };
+
+/* Measured 4-byte access at 0xC; storage view, complete object unknown. */
+struct HeapLastFreeBlockView { unsigned char padding[12]; void * value; };
+
+/* Measured 4-byte access at 0; storage view, complete object unknown. */
+struct HeapPreviousFreeLinkView { void * value; };
+
+/* Measured 4-byte access at 4; storage view, complete object unknown. */
+struct HeapNextFreeLinkView { unsigned char padding[4]; void * value; };
+
 struct HeapArena_Heap {
     s32 reservedWord0;
     s32 reservedWord4;

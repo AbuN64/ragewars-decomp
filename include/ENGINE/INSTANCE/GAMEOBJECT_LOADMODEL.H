@@ -1,5 +1,0 @@
-#ifndef ENGINE_INSTANCE_GAMEOBJECT_LOADMODEL_H
-#define ENGINE_INSTANCE_GAMEOBJECT_LOADMODEL_H
-#include "COMMON/OBJECT_INSTANCE_TRANSFORM_AND_RENDER_VIEWS.H"
-extern void Gobjinst_MoveActorWithContactCallback(char *, CVector3 *);
-#endif

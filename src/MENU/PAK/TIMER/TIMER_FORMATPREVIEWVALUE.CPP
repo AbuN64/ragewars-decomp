@@ -4,7 +4,7 @@
 #include "COMMON/MENURECAT20V1.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RECORDRECATCV1.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "MENU/PAK/TIMER.H"
 
 /* Formats the halfword at offset 0x22 of the structure g_controllerPakSnapshotPayload points to into a field's text

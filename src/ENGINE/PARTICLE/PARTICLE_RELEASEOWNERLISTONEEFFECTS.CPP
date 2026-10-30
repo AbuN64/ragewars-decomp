@@ -7,20 +7,17 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
-#include "FX/PARTICLE_ATTACHMENT.H"
+#include "ENGINE/PARTICLE.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "particle/PARTICLE_RELEASEOWNERLISTONEEFFECTS.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/CACHE/LIST.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
-#include "particle/PARTICLE_BUILDMATRIX.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/MATH_HELPERS.H"
-#include "particle/CAMERA_SCALE.H"
 extern void Particle_UpdateMatrix(void *);
 
 extern void Particle_FinishActorEffects(void *actor);

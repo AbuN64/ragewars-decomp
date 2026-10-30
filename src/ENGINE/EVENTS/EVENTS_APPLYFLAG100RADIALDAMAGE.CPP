@@ -1,6 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/TARGET.H"
+#include "ENGINE/EVENTS.H"
 #include "TYPES.H"
 
 extern void Events_ApplyDamageEvent(s32, s32, s32, Triple, struct IntPair, s32, s32, s32);

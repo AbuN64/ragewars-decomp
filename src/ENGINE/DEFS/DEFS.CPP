@@ -1,6 +1,6 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "include_asm.h"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "../../../sdk/include/AUDIO/sprintf.H"
 #include "COMMON/LIGHTDATA.H"
 #include "COMMON/VECTOR4F.H"

@@ -2,7 +2,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RENDERSORTRECORD.H"
-#include "ANIM/CCOLLISION_EXPANDBOXCOORDINATES.H"
+#include "ENGINE/UNICOL/INSTCOL.H"
 
 /** Expand six source floats into the fixed 24-float vertex pattern. */
 void CCollision_ExpandBoxCoordinates(float *s, float *d) {

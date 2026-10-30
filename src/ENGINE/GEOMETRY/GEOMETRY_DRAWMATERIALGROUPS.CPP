@@ -6,8 +6,7 @@
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "gbi.h"
 #include "TYPES.H"
-#include "RENDER/GEOMETRY_GROUPMODELINSTANCES.H"
-#include "RENDER/GEOMETRY_DRAWMATERIALGROUPS.H"
+#include "ENGINE/GEOMETRY.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
@@ -170,7 +169,6 @@ void Geometry_QueueModelById(s32 modelIndex, void *matrix, void *lights, s32 tex
 
 #include "COMMON/DISPLAY.H"
 
-#include "COMMON/LONE/GEOMETRY_EFFECT_GEOMETRY_MODE.H"
 extern void Cache_MarkResourceInUse(s32, void **);
 
 /* Draws a pack resource model as a translucent decal: skips when fewer than 3000 display-list commands are

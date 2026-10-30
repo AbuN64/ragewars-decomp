@@ -4,7 +4,7 @@
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "TYPES.H"
 #include "TEXTURE/AUDIOMGR_INITHEAP.H"
-#include "ENGINE/AUDIO/AUDIOMGR/AUDIOMGR_WORKER_DMA_AND_FRAME.H"
+#include "ENGINE/AUDIO/AUDIOMGR.H"
 #include "../../../../sdk/include/os.h"
 #include "UI/X_FILES/X_PLUS.H"
 #include "../../../../sdk/include/libgultra/alunlink.h"

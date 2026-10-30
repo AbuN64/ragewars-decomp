@@ -1,5 +1,0 @@
-#ifndef PARTICLE_GAMEOBJECT_BUILDQUATERNIONTRANSLATIONMATRIX_H
-#define PARTICLE_GAMEOBJECT_BUILDQUATERNIONTRANSLATIONMATRIX_H
-#include "COMMON/PROBE.H"
-extern void GameObject_BuildQuaternionTranslationMatrix(f32 *m, f32 *q, f32 *t);
-#endif

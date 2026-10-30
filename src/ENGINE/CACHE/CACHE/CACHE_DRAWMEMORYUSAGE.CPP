@@ -1,4 +1,4 @@
-#include "COMMON/RESOURCE_CACHE.H"
+#include "ENGINE/CACHE/CACHE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LONE/RUNTIME_HEAP.H"
 #include "include_asm.h"

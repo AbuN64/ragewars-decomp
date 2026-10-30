@@ -1,4 +1,4 @@
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENURECAT20V1.H"
@@ -6,11 +6,11 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/OPTIONEDITSTATE.H"
-#include "MENU/PAK/PAK_FORMATVOLUMESLOTONE.H"
+#include "ENGINE/VOLUME.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 
 s32 Pak_FormatVolumeSlotOne(struct Field *field) {
     s32 step = (g_gameSettings.volume[1] - 128) / 8;

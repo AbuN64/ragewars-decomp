@@ -13,7 +13,7 @@
 #include "COMMON/GLOBALS.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/PAK/TIMER_GETPROMPTTEXT.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 
 /* Latches g_pakMenuPromptAccepted to one when the record's team value is not -1 and both Control_PeekPakChange_Pak and Snapshot_CheckStatusPrompt accept it, then returns g_pakMenuPromptAccepted. Adapted from Timer_CheckMenuPakChange with nothing changed (identical code). */
 

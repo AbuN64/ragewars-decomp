@@ -4,11 +4,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "RENDER/EFFECT_SPAWN_VIEWS.H"
+#include "ENGINE/EVENTS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "T2SOUNDELEMENT/T2SOUNDELEMENT.H"
+#include "ENGINE/AUDIO/T2SOUNDELEMENT.H"
 
 /* Spawns an effect of the given kind for an object through Animpool_SpawnAnimationObject at the object's position with its velocity (none when the object is inactive) and a uniform scale; kind 0x40C instead starts at the camera with no velocity and, once spawned, follows the camera's target through Particle_GetEffectResource, and kinds 0x474 to 0x477 attach to the host's partner effect for active flagged hosts, otherwise the effect is started through Animpool_ReleaseSceneEffect. */
 

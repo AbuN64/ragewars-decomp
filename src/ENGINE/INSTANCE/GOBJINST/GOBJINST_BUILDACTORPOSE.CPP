@@ -12,7 +12,7 @@
  * frame timing totals. */
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "FX/ACTOR_POSE_ANGLE_TABLE.H"
+#include "ENGINE/INSTANCE/GOBJINST.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 

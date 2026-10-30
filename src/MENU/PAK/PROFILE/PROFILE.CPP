@@ -10,7 +10,7 @@
 #include "MENU/ITEMRECAT24.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "MENU/PAK/PROFILE.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "include_asm.h"
 #include "COMMON/TRIPLE.H"
@@ -781,7 +781,7 @@ s32 Pak_SelectOperationDescription(struct PakActionLabelView *field) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #if defined(VERSION_US)
 INCLUDE_RODATA("game_data", k_statusUpdateStatusTextJumpTableTrailingZeroWord);
 #endif

@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "COMMON/ACTORRECAT260.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 

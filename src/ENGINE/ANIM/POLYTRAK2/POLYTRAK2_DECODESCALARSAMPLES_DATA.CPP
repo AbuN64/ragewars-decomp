@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/LOCALDECODERANGE.H"
-#include "SYSTEM/PACKED_BIT_WORDS.H"
+#include "ENGINE/ANIM/POLYTRAK2.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"

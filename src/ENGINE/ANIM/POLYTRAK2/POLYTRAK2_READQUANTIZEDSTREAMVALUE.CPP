@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "TYPES.H"
-#include "SYSTEM/POLYTRAK2_READQUANTIZEDSTREAMVALUE.H"
+#include "ENGINE/ANIM/POLYTRAK2.H"
 
 /* Decodes the next packed bit-field float from a stream record into its range and advances the record's bit address by the field width. Adapted from Polytrak2_ReadQuantizedFloatAndAdvance, inlined as a helper called with the record and a copy of the record's own range. */
 

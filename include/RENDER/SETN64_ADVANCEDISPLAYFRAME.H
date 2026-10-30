@@ -1,5 +1,0 @@
-#ifndef RENDER_SETN64_ADVANCEDISPLAYFRAME_H
-#define RENDER_SETN64_ADVANCEDISPLAYFRAME_H
-#include "COMMON/SESSIONHANDLERROW.H"
-extern void SetN64_AdvanceDisplayFrame(Display *);
-#endif

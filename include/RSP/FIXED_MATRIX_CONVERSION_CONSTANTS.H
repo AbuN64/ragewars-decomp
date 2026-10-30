@@ -1,5 +1,0 @@
-#ifndef RSP_FIXED_MATRIX_CONVERSION_CONSTANTS_H
-#define RSP_FIXED_MATRIX_CONVERSION_CONSTANTS_H
-#include "COMMON/OBJRECAT4V7.H"
-extern float g_fullFixedMatrixElement0ConversionConstants;
-#endif

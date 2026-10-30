@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "AI/EXTERNS.H"
+#include "ENGINE/GRAPHU64.H"
 #include "COMMON/OBJB.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"

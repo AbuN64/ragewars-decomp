@@ -3,7 +3,7 @@
 #include "COMMON/OSTHREAD_S.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "COMMON/STATERECAT34.H"
-#include "AUDIO/AUDIO_LOADMUSICSEQUENCE.H"
+#include "ENGINE/AUDIO/SEQUENCER.H"
 #include "TYPES.H"
 #include "OS/AUDIO_STOPMUSIC.H"
 
@@ -14,7 +14,6 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "UTIL/TRACK_SEQUENCE_AND_VOLUME.H"
 #include "../../../../sdk/include/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "stddef.h"
 #include "stddef.h"

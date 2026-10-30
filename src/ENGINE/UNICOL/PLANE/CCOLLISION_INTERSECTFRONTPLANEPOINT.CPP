@@ -1,5 +1,5 @@
 #include "TYPES.H"
-#include "ANIM/MEASUREDRECAT8V3.H"
+#include "ENGINE/UNICOL/PLANE.H"
 #include "COMMON/MEASURED_STORAGE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -7,7 +7,6 @@
 #include "ANIM/RAY180.H"
 #include "stddef.h"
 #include "COMMON/BALLISTICPARAMS.H"
-#include "ANIM/CCOLLISION_GETCONTACTYAW.H"
 
 /* 80241170_2.CPP */
 s32 Graphu64_InterpolateVector(CVector3 *, u32, void *, void *);

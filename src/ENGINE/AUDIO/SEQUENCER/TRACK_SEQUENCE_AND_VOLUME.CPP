@@ -9,7 +9,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
-#include "UTIL/TRACK_SEQUENCE_AND_VOLUME.H"
+#include "ENGINE/AUDIO/SEQUENCER.H"
 #include "../../../../sdk/include/libgultra_inferred/cseq.H"
 #include "../../../../sdk/include/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "stddef.h"

@@ -1,7 +1,0 @@
-#ifndef ENGINE_INSTANCE_GOBJINST_NO_OPERATION_ANIMATION_HOOKS_H
-#define ENGINE_INSTANCE_GOBJINST_NO_OPERATION_ANIMATION_HOOKS_H
-#include "COMMON/ACTORRESOURCEHEADER.H"
-extern void Gobjinst_NoOperationAnimationHook(void);
-extern void Gobjinst_NoOperationAnimationHookUs(void);
-extern void Gobjinst_NoOperationAnimationHookAlternateUs(void);
-#endif

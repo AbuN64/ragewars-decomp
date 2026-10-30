@@ -12,12 +12,10 @@
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "libultra/os/getthreadid.h"
-#include "SCHED/RESOURCE_PAGE_WORKER.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "ENGINE/VIRTUAL/VIRTUAL_REGION_AND_PAGER_OPERATIONS.H"
-#include "ENGINE/VIRTUAL/VIRTUAL_REGION_OWNER_STATE.H"
 
 /* VHANDLER.CPP */
 /* Initializes the game state: clears the whole state block and fills its slot and lookup tables

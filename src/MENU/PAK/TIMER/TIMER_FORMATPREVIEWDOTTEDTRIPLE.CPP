@@ -7,7 +7,7 @@
 #include "TYPES.H"
 extern PakPreview *g_controllerPakSnapshotPayload;
 #include "MENU/PAK/PROFILE_PREVIEW_AND_LINE_TEXT.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "MENU/PAK/TIMER.H"
 
 /* Calls Menu_ClassifyResourceRange on the word at offset 0x24 of the structure g_controllerPakSnapshotPayload points to and

@@ -9,7 +9,7 @@
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/SELF.H"
-#include "AUDIO/INTEGERSTATE1DC4.H"
+#include "ENGINE/AUDIO/AUDIOWORLD.H"
 #include "COMMON/LISTNODE.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "COMMON/STATERECAT34.H"
@@ -19,7 +19,7 @@
 #include "ENGINE/AUDIO/RAXPLAYER.H"
 #include "OS/AUDIO_STOPMUSIC.H"
 #include "../../../../sdk/include/os.h"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 

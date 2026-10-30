@@ -1,7 +1,6 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
-#include "COMMON/TARGET.H"
+#include "ENGINE/EVENTS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/EVENT_DAMAGE_AND_IMPACT_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -11,7 +10,6 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "SYSTEM/EVENTS_COMPUTEDAMAGESCALE.H"
 extern void Events_ApplyDamageEvent(void *, s32, s32, Triple, struct IntPair, s32, s32, s32);
 
 /* Returns how strongly a blast at a position with a radius affects an actor: finds the shield covering the position (the held carrier shield g_currentActorInstance of the actor for an object target other than the two 0x402/0x404 types, otherwise Gobjinst_FindNearestBoneBounds's shield in g_damageBoneBoundsShield), reports it, scales by the shield factor unless friendly fire is off for team damage, and when falloff is asked returns zero for an invulnerable player's untouched full hit, zero beyond the radius plus the actor's width, or the scale times one minus the distance to the actor's body over that reach. */

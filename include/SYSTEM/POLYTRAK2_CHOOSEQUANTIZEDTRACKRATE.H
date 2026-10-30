@@ -1,5 +1,0 @@
-#ifndef SYSTEM_POLYTRAK2_CHOOSEQUANTIZEDTRACKRATE_H
-#define SYSTEM_POLYTRAK2_CHOOSEQUANTIZEDTRACKRATE_H
-#include "COMMON/STREAM.H"
-extern f32 Polytrak2_ChooseQuantizedTrackRate(f32 amount, f32 period);
-#endif

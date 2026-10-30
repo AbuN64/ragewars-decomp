@@ -7,7 +7,7 @@ extern PakPreview *g_controllerPakSnapshotPayload;
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/PAK/TIMER_UPDATEOPERATIONCHOICELABEL.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 
 extern s32 g_pakUseScannedChannel;
 

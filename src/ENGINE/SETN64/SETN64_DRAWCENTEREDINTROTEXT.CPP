@@ -3,7 +3,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/INTEGERSTATEB0.H"
-#include "RENDER/SETN64_DRAWTEXTLINES.H"
+#include "ENGINE/SETN64.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 /* The EU builds pick the text for the current menu language. */

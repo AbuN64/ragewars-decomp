@@ -138,7 +138,7 @@ typedef struct SoundEnvelopeControl {
     u16 reservedA;
 } SoundEnvelopeControl;
 
-#include "AUDIO/VOLUME_MIX.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 typedef struct VoiceScaleEntry { f32 soundId, scale; } VoiceScaleEntry;
 extern VoiceScaleEntry g_soundVolumeScales[];

@@ -1,6 +1,6 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "RENDER/SESSION_HANDLER_AND_RENDER_STATE.H"
+#include "ENGINE/SETN64.H"
 #include "TYPES.H"
 
 extern void Pools_ResetActorPools(void *owner, s32 actorCount);

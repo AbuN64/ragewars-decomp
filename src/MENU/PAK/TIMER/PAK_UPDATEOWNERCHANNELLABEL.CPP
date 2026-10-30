@@ -1,4 +1,4 @@
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "include_asm.h"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/RECORDRECATCV1.H"
@@ -10,7 +10,7 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 extern s32 g_pakUseScannedChannel;
 extern char *g_unlockedLevelResultLabel[];
 extern s32 Menu_CountLineChars(struct Field *);

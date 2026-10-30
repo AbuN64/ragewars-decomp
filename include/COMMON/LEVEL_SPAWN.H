@@ -4,7 +4,7 @@
 #include "COMMON/LEVEL_TRACK.H"
 #include "COMMON/LEVEL_PLACEMENT.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
-#include "COMMON/SCENE_RESOURCE_STATE.H"
+#include "ENGINE/SCENE.H"
 #include "COMMON/LEVEL_INPUT.H"
 typedef struct LevelNode {
     s32 size;

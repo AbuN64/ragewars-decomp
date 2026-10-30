@@ -1,4 +1,4 @@
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -10,7 +10,7 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 extern Shared_MenuData g_playerViewRenderContext;
 extern s16 g_playerRewardScoreFields[];
 

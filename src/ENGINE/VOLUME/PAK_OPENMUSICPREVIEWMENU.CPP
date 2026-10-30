@@ -3,7 +3,7 @@
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SOUNDINFO.H"
 #include "COMMON/ACTORRECAT5E0.H"

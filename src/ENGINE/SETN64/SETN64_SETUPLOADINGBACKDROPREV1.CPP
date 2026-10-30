@@ -10,15 +10,14 @@
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "RENDER/RECORD_OUTPUT_AND_TIMED_SESSION_VIEWS.H"
-#include "RENDER/VIEW_MATRICES.H"
+#include "ENGINE/SETN64.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 #if defined(VERSION_US_REV1)
 /* Sets up the loading-screen scene: resets the camera globals, loads the 0xE10 resource, builds a
  * look-at matrix from the state's field at 0x26DB0 scaled by g_backdropYawRate, links it to the active view and
  * draws the backdrop through SetN64_DrawTextLines with half the video height. */
-#include "RENDER/SETN64_DRAWTEXTLINES.H"
+#include "ENGINE/SETN64.H"
 extern s32 g_lightingBufferIndex;
 extern f32 g_backdropModelFillValue, g_backdropYawRate, g_backdropTextScalePair;
 extern char g_fallbackScreenMessageEmitter;

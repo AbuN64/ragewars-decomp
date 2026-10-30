@@ -1,4 +1,4 @@
-#include "COMMON/RESOURCE_CACHE.H"
+#include "ENGINE/CACHE/CACHE.H"
 #include "include_asm.h"
 #include "COMMON/ENTRYRECAT18V3.H"
 extern s32 g_resourceCacheManager;

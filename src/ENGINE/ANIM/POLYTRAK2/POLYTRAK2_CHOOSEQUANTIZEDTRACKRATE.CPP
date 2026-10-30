@@ -2,7 +2,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/STREAM.H"
 #include "TYPES.H"
-#include "SYSTEM/POLYTRAK2_CHOOSEQUANTIZEDTRACKRATE.H"
+#include "ENGINE/ANIM/POLYTRAK2.H"
 
 /* Converts an amount over a period into a whole rate: returns g_motionQuantizedRateZero for an amount
  * equal to it or a period not above g_motionQuantizedRatePeriodThreshold; otherwise the ratio scaled by g_motionQuantizedRatePeriodThreshold + 4 and rounded up

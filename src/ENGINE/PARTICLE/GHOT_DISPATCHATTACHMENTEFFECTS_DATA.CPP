@@ -6,14 +6,14 @@
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "ENGINE/CACHE/LIST.H"
 #include "ENGINE/CACHE/LIST.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "SYSTEM/CONTACT_EFFECT.H"
-#include "particle/PARTICLE_BUILDMATRIX.H"
+#include "ENGINE/PARTICLE.H"
 
 /* Spawns the effects that template block 2 of the system lists for a kind: for each template in the kind's range it filters by player mask, existing owner effects, anchor distance, mode, team flags and a percent chance, builds a spawn matrix (source matrix, mirror, translation or rotation), then for a random count allocates effects, fills their timing, spread, colour, render and direction fields from the template's packed floats, links them into their group, aims shots at the held target for kinds 0x2D and 0x4F, and plays their sound. Returns the number spawned. */
 

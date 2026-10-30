@@ -4,7 +4,7 @@
 #include "COMMON/OUTPUT.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "ANIM/CCOLLISION_TESTSEGMENTPOLYGON.H"
+#include "ENGINE/UNICOL/COLLIDE.H"
 
 extern f32 CCollision_GetSurfaceHeight(struct Query *, f32, f32);
 

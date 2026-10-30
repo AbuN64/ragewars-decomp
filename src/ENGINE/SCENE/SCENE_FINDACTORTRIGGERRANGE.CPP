@@ -7,7 +7,7 @@
 #include "COMMON/PACKED.H"
 #include "COMMON/LIGHT_VOLUME_AND_TRIGGER_VIEWS.H"
 #include "TYPES.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 #include "COMMON/APPROACHLOCATION.H"
 extern s32 SetN64_LocatePackSection(void *directory, s32 bankOffset, s32 sectionIndex, s32 *sectionSizeOut);
 

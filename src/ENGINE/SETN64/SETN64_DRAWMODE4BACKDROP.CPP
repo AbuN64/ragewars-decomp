@@ -9,7 +9,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "RENDER/TIMED_SESSION_TRANSITIONS.H"
-#include "RENDER/SETN64_DRAWMODE4BACKDROP.H"
+#include "ENGINE/SETN64.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 /* Clears the map-view-active flag, emits a set-color-image display list command for the current frame

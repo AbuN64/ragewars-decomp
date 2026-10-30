@@ -7,7 +7,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/S1.H"
 #include "COMMON/ACTORRECAT5E0.H"
-#include "RENDER/POOLRECAT28V1.H"
+#include "ENGINE/RUMBLE.H"
 #include "TYPES.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "ENGINE/RUMBLE.H"

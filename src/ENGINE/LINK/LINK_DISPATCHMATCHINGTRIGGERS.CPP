@@ -7,7 +7,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
-#include "LINK/LINK_DISPATCHMATCHINGTRIGGERS.H"
+#include "ENGINE/LINK.H"
 #include "COMMON/TRIGGER_AND_FLOAT_VALUE_OPERATIONS.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
@@ -19,7 +19,7 @@
 #include "TYPES.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/NAVIGATION_NODE_AND_ROUTE_VIEWS.H"
-#include "T2SOUNDELEMENT/T2SOUNDELEMENT.H"
+#include "ENGINE/AUDIO/T2SOUNDELEMENT.H"
 typedef void (*NavPrimaryFn)(NavigationPlatform *, void *, Trigger *);
 typedef void (*NavSecondaryFn)(Trigger *);
 typedef struct NavCallbackPair { NavPrimaryFn primary; NavSecondaryFn secondary; } NavCallbackPair;

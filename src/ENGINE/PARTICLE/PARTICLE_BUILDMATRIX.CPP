@@ -9,7 +9,7 @@
 #include "GAME/BUILDDIRECTIONMATRIX.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
-#include "particle/PARTICLE_BUILDMATRIX.H"
+#include "ENGINE/PARTICLE.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/AIPROFILE.H"
 #include "ENGINE/GREGION.H"
@@ -159,7 +159,6 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/MATH_HELPERS.H"
-#include "particle/CAMERA_SCALE.H"
 #include "ENGINE/SCENE_SAMPLEWORLDLIGHTING.H"
 
 void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);

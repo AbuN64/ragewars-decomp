@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "RENDER/EFFECT_SPAWN_VIEWS.H"
+#include "ENGINE/EVENTS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -13,7 +13,6 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
-#include "COMMON/TARGET.H"
 extern f32 k_eventEmitterAndClipScaleConstants;
 extern void Events_ApplyDamageEvent(void *, s32, s32, Triple, struct IntPair, s32, s32, s32);
 

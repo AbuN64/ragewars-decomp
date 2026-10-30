@@ -6,7 +6,7 @@
 #include "COMMON/S1.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "TYPES.H"
-#include "SCENE/CACHE_RUNRESOURCECOMPLETIONWORKER.H"
+#include "ENGINE/CACHE/CACHE.H"
 #include "../../../../sdk/include/os.h"
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "ENGINE/CACHE/LIST.H"

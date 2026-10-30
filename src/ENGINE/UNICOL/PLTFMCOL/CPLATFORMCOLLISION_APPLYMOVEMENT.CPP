@@ -1,7 +1,7 @@
 #include "ANIM/RAY180.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LEVEL_ACTOR.H"
-#include "ANIM/CPLATFORMCOLLISION_APPLYMOVEMENT.H"
+#include "ENGINE/UNICOL/PLTFMCOL.H"
 
 extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 

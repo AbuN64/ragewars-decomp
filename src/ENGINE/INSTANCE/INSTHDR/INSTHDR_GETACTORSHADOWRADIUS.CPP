@@ -3,7 +3,7 @@
 #include "COMMON/PROBE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-#include "SOUND/TRIPLERECAT8.H"
+#include "ENGINE/INSTANCE/INSTHDR.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON.H"

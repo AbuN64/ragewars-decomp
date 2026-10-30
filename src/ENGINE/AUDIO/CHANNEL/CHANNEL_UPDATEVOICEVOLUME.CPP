@@ -20,7 +20,7 @@ int Cinema_IsSequenceActive(void);
 f32 Graphu64_ApproachValue(f32 current, f32 target, f32 rate);
 void alSndpSetVol(void *soundPlayer, s16 eventVolume);
 /* Spatial mix and runtime envelope controls embedded in a sound voice. */
-#include "AUDIO/VOLUME_MIX.H"
+#include "ENGINE/AUDIO/CHANNEL.H"
 
 typedef struct AudioVolumeControl {
     u16 levels[3];

@@ -1,5 +1,0 @@
-#ifndef RENDER_SETN64_INITIALIZETRANSITIONMODE_H
-#define RENDER_SETN64_INITIALIZETRANSITIONMODE_H
-#include "COMMON/OBJRECAT26DD8.H"
-extern void SetN64_InitializeTransitionMode(void);
-#endif

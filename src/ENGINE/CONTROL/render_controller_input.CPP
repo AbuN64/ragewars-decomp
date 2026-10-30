@@ -1,4 +1,4 @@
-#include "RENDER/render_controller_input.H"
+#include "ENGINE/CONTROL.H"
 #include "COMMON/TRIPLE.H"
 #include "include_asm.h"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"

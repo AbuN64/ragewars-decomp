@@ -14,7 +14,7 @@
 #include "TYPES.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "SYSTEM/SOUND_CONTEXT_LOCK_AND_ACTIVITY.H"
-#include "ENGINE/AUDIO/AUDIOMGR/AUDIOMGR_WORKER_DMA_AND_FRAME.H"
+#include "ENGINE/AUDIO/AUDIOMGR.H"
 #include "MATH/aigetlen.H"
 #include "libgultra/OSWRITEBACKDCACHEALL.H"
 #include "libgultra/alunlink.h"

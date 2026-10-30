@@ -3,8 +3,7 @@
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "include_asm.h"
-#include "RENDER/RECORD_OUTPUT_AND_TIMED_SESSION_VIEWS.H"
-#include "RENDER/SETN64_SETFRAMEDIRECTION.H"
+#include "ENGINE/SETN64.H"
 
 void SetN64_ClearFrameDirection(void *frame) {
     Frame *view = frame;

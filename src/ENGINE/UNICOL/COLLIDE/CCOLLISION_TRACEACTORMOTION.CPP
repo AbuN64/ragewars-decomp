@@ -8,7 +8,7 @@
 #include "COMMON/RENDERSORTRECORD.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "ANIM/CPLANE_RESETCONTACT.H"
-#include "ANIM/INSTCOL_PROCESSENTITYCONTACTS.H"
+#include "ENGINE/UNICOL/COLLIDE.H"
 
 /* 8023A284_21.CPP */
 void CCollision_IntegrateGravityAndDrag(ActorMotion *motion) {

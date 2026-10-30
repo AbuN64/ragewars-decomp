@@ -4,7 +4,7 @@
 #include "COMMON/PLAYER_GETPLAYERINDEX.H"
 #include "TYPES.H"
 #include "../../../../sdk/include/PFS/PLAYER_CONFIGUREPLAYERMENUFLAGS.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 
 /* Sets bit 24 of the flag word at offset 0x120 of the object at offset 0xC of a record when
    g_resultExitPending is set, and clears it otherwise. */

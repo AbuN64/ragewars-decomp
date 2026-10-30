@@ -2,7 +2,7 @@
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
-#include "COMMON/TARGET.H"
+#include "ENGINE/EVENTS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
@@ -10,7 +10,6 @@
 #include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 #include "TYPES.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
-#include "SYSTEM/EVENTS_APPLYDAMAGEEVENT.H"
 
 typedef struct DamageDefinition { s32 kind; } DamageDefinition;
 typedef struct DamageActor {

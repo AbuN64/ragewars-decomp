@@ -10,8 +10,7 @@
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "RENDER/RECORD_OUTPUT_AND_TIMED_SESSION_VIEWS.H"
-#include "RENDER/VIEW_MATRICES.H"
+#include "ENGINE/SETN64.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 /* Clears the screen: clears the depth buffer over the whole screen through SetN64_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through OnScreen_DrawSpriteResource after Onscrn_SetupSpriteMode_Setn64Drawfullscreenbackdrop(255). Written with libultra-style display-list macros and the screen size read from g_hudReferenceViewportWidth and g_hudReferenceViewportHeight. */

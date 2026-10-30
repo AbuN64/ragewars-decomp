@@ -1,5 +1,0 @@
-#ifndef PARTICLE_PARTICLE_RECYCLERELEASEDEFFECTS_H
-#define PARTICLE_PARTICLE_RECYCLERELEASEDEFFECTS_H
-#include "COMMON/SHARED_PARTICLEINSTANCE.H"
-extern void Particle_RecycleReleasedEffects(void *recycleSystem);
-#endif

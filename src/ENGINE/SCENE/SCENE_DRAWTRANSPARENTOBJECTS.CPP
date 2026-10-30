@@ -1,4 +1,4 @@
-#include "COMMON/FLOOR_RESOURCE.H"
+#include "ENGINE/SCENE.H"
 #include "COMMON/LONE/SCREEN_IMAGE_RESOURCES_ENABLED.H"
 #include "include_asm.h"
 #include "COMMON/SCENERECAT10C0.H"

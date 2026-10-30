@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
-#include "FX/PARTICLE_ATTACHMENT.H"
+#include "ENGINE/PARTICLE.H"
 #include "SYSTEM/CONTACT_EFFECT.H"
 
 /* Updates a particle for one frame: halves the frame step for particles owned by a slowed object, measures its bounding
@@ -645,7 +645,6 @@ extern s32 Barrel_GetImpactSlot(void *);
 extern void Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *, void *);
 extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
-#include "FX/PARTICLE_LIFECYCLE.H"
 extern LiveParticle *g_particleLinkedAttachmentEffect;
 
 s32 InstHdr_UsesDefaultDefinitionHandling(void *);

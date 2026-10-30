@@ -5,7 +5,7 @@
 #include "COMMON/MANAGER.H"
 #include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "TYPES.H"
-#include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
+#include "ENGINE/CACHE/CACHE.H"
 #include "SCENE/CACHE_ALLOCATEMEMORY.H"
 #include "../../../../sdk/include/os.h"
 

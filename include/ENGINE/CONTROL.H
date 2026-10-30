@@ -3,7 +3,23 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
+struct ActorList {
+    s32 pad0;
+    struct SnapshotActorView *actors;
+    s32 count;
+};
 
+/* Type 1 curves choose a new random value each period. */
+typedef struct RandomCurve {
+    s32 type;
+    f32 period;
+    u8 minimum;
+    u8 maximum;
+} RandomCurve;
+
+struct ControllerProfile;
+
+void Control_UpdateControllerInput(struct ControllerProfile *state, s8 x, s8 y, u32 buttons);
 
 struct MenuMarker;
 struct ScreenScenarioSetupSelectPreviousCatalogueCategory;
@@ -127,8 +143,4 @@ extern s32 g_cupCategoryZeroArenaControls[];
 extern s32 g_cupCategoryOneArenaControls[];
 extern s32 g_cupCategoryThreeArenaControls[];
 extern s32 g_cupCategoryTwoArenaControls[];
-
-
-
-
 #endif

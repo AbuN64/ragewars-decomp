@@ -1,4 +1,4 @@
-#include "COMMON/RESOURCE_CACHE.H"
+#include "ENGINE/CACHE/CACHE.H"
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
@@ -8,7 +8,6 @@
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/MANAGER.H"
 #include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
-#include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
 #include "../../../../sdk/include/os.h"
 
 extern OSMesgQueue g_resourceHeapLockQueue;

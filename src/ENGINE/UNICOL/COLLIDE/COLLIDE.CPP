@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/CCOLLISIONSETUP_T.H"
-#include "SCHED/COLLIDE.H"
+#include "ENGINE/UNICOL/COLLIDE.H"
 #include "include_asm.h"
 
 /* 8023A284_29.CPP */

@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "COMMON/RENDERCOUNTERS.H"
 #include "MENU/MISC/CMENUPROFILE_ADJUSTGAMESPEEDFACTOR.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 
 /** Always returns 0. */
 s32 CMenuProfile_GameSpeedReturnZero(void) {

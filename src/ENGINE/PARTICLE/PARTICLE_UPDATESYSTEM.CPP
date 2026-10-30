@@ -283,7 +283,6 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "gbi.h"
 #include "COMMON/GAMEPLAY_CAMERA.H"
-#include "particle/PARTICLE_BUILDMATRIX.H"
 /* A particle on the world's render list; the list links through next. */
 typedef struct DrawParticle {
     Shared_Particle particle;

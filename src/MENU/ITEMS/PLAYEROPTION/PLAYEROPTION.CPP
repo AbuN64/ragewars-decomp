@@ -5,7 +5,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "FRONTEND/SCREEN_VIDEO_MODE.H"
-#include "SYSTEM/DEFS.H"
+#include "ENGINE/DEFS.H"
 
 /* Replaces the option halfword g_gamePackedOptions with what Menu_AdjustValue returns for the second argument,
    that halfword, 0x10, 0, 0x100 and 0, then stores its low byte in the byte after it, or 0xFF when
