@@ -97,7 +97,7 @@ void Playerai_ClearDamageTimers(s32 player) {
     do {
         (((struct PlayerForceMarkerStateView *) ((s8 *) effectBase))->remainingTime) = 0;
         effectIndex -= 1;
-        effectBase -= sizeof(PlayerDamageTimer);
+        effectBase -= sizeof(Timer);
     } while (effectIndex >= 0);
 }
 
@@ -105,11 +105,11 @@ void Playerai_ResetDamageTimers(s32 playerAddress) {
     s32 effectIndex;
     void *effectBase;
     effectIndex = 4;
-    effectBase = playerAddress + 4 * sizeof(PlayerDamageTimer);
+    effectBase = playerAddress + 4 * sizeof(Timer);
     do {
         (((struct PlayerForceMarkerStateView *) ((s8 *) effectBase))->remainingTime) = 0;
         effectIndex -= 1;
-        effectBase -= sizeof(PlayerDamageTimer);
+        effectBase -= sizeof(Timer);
     } while (effectIndex >= 0);
 }
 

@@ -123,7 +123,6 @@ extern s32 Control_AcquireControllerLock(s32 block);
 extern int Control_IsControllerPakEnabled(int controllerPort);
 
 extern void Control_SetControllerMode(s32 a);
-
 struct RangeNode;
 extern void Gdynlight_ReleaseLight(IntrusiveList *a, struct RangeNode *b);
 
