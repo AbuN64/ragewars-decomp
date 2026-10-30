@@ -1,3 +1,4 @@
+#include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "include_asm.h"
 #include "RESMGR/resmgr_string_memory.H"
@@ -265,7 +266,7 @@ static __inline__ void pakGetChannel(Shared_PakMenu *menu, s32 *channel) {
 }
 /* Timer_SetSaveTrailerValue's body: store the snapshot checksum after the g_worldSnapshotNoteBytes bytes of note data. */
 static __inline__ void pakSetChecksum(s32 offset, s32 value) {
-    *(s32 *)((u8 *)(g_worldSnapshotNoteBytes + offset) + 0x60C) = value;
+    ((struct PlayerPakTimerView *)(g_worldSnapshotNoteBytes + offset))->trailerValue = value;
 }
 /* Opens the pak menu for a snapshot save: unless a message is pending (g_pakPlayerMessagePending), probes the channel's
    Controller Pak; a ready pak gets the save snapshot with its checksum and the note list (Snapshot_MarkSaveNotes),

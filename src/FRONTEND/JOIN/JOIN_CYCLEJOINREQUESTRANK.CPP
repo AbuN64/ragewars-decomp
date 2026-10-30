@@ -273,7 +273,7 @@ s32 Join_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 eventData, s32 event
         Join_UpdateJoinRequestDisplay(g_courseOptionsScreen->selection);
         if (Menu_GetPreviousScreenOwner(0) == 22) {
             selectedRow = g_courseOptionsScreen->selection;
-            g_gameSettings.playerSettings[7 - selectedRow].rank = *(g_joinRequestRankBytes + (selectedRow * 0x1C));
+            g_gameSettings.playerSettings[7 - selectedRow].rank = *(g_joinRequestRankBytes + (selectedRow * sizeof(struct PlayerJoinRequestEntry)));
         }
     }
     return 0;

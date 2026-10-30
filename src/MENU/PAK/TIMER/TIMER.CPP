@@ -72,7 +72,7 @@ extern struct Saved g_pakControllerRecord;
 
 char *Timer_GetSaveBlockByteCount(s32 block) {
     if (block == 0) {
-        return g_worldSnapshotNoteBytes + 0x610;
+        return g_worldSnapshotNoteBytes + sizeof(SaveSnapshot);
     }
     return (char *) (block << 8);
 }
@@ -98,7 +98,7 @@ void Timer_AllocateSaveBlock(void ***handle, void **data, s32 units) {
     if (units != 0) {
         units <<= 8;
     } else {
-        units = (s32)(g_worldSnapshotNoteBytes + 0x610);
+        units = (s32)(g_worldSnapshotNoteBytes + sizeof(SaveSnapshot));
     }
     block = Cache_AllocateResource(0, units, 51, g_pakSingleSaveBlockName);
     *handle = block;

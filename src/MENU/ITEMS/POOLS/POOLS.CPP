@@ -257,7 +257,7 @@ void Pools_InitGroupPools(Triple *group) {
     for (i = 0; i < group->z; i++) {
         Pool_InitEntryPool((char *)(i * 3800 + group->y + 1392));
     }
-    Pool_InitEntryPool((char *)group + 0x5B0);
+    Pool_InitEntryPool((char *)&((GameplayCamera *)&((MenuPlayerPoolView *)group)->cameraStorage)->sceneEffects);
 }
 
 /* Detaches the object at offset 0xC of an owner: when there is one, finalises it through

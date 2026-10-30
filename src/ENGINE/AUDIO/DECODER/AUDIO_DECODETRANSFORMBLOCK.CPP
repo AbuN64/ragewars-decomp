@@ -119,7 +119,7 @@ s32 Audio_DequantizeTransformCoefficients(f32 *out, s16 *in) {
     f32 *steps;
     f32 gain;
     start = 0;
-    values = in + 0x50;
+    values = ((TransformAudioFrame *)in)->coefficients;
     band = 0;
     ends = g_audioTransformBandEnds;
     steps = g_audioTransformBandSteps;

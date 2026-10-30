@@ -86,6 +86,12 @@ extern float g_audioTransformTertiaryScale;
 extern float g_audioSamplePositiveRoundingBias;
 
 
+typedef struct TransformAudioFrame {
+    s16 bandScales[16];
+    u8 reserved20[0xA0 - 0x20];
+    s16 coefficients[256];
+} TransformAudioFrame;
+
 typedef struct DecodeState {
     s32 first;
     s32 third;
@@ -93,7 +99,10 @@ typedef struct DecodeState {
     s32 second;
     s32 count;
     void *cursor;
-    u16 frame[336]; /* +0x18: Audio_DecodeFrame header and coefficients */
+    union {
+        u16 frame[336]; /* Packed decoder transport. */
+        TransformAudioFrame decodedFrame; /* +0x18: same 672-byte record. */
+    };
 } DecodeState;
 extern DecodeState g_audioSampleDecodeState;
 extern u16 gPackedBitsLeft;

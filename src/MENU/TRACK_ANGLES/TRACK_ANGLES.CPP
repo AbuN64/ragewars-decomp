@@ -1,3 +1,4 @@
+#include "COMMON/KEYRECAT1C.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "include_asm.h"
@@ -187,7 +188,7 @@ f32 Menu_GetTrackDuration(void) {
 loop_1:
     if (index < *((s32 *)SetN64_GetPackSection(g_cinemaSequenceState->resource, 0))) {
         finalKey = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(g_cinemaSequenceState->resource, 0), index), 0);
-        finalKey = (s32 *)((char *)finalKey + finalKey[1] * 0x24);
+        finalKey = (s32 *)((char *)finalKey + finalKey[1] * sizeof(TrackTransformKey));
         clipDuration = *(f32 *)finalKey;
         index += 1;
         result += clipDuration;

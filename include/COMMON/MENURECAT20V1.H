@@ -69,6 +69,7 @@ typedef struct NameEditMenuContext NameEditMenuContext;
 
 struct Field;
 
+typedef u8 SavedPlayerName[24];
 extern u8 g_multiplayerSavedPlayerNames[];
 
 extern void Control_SaveControllerSetup(void);
