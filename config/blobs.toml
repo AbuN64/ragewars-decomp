@@ -54454,7 +54454,7 @@ evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68
 
 [blob."resource.level-bit-sets"]
 type = "world"
-format = "resource bank child 7: level bit sets (Items_LoadPreviewBufferB copies it into D_800F41F0: world->secondaryLevels)"
+format = "resource bank child 7: level bit sets (Items_LoadPreviewBufferB copies it into world->secondaryLevels)"
 codec = "rnc1"
 state = "decoded"
 stored_size = 216

@@ -368,9 +368,9 @@ struct PlayerProfileStorage {
     char slots[13];
     u8 pad25[0x6C - 0x25];
     s32 totals[3]; /* 0x6C */
-    u8 unk78; /* individually cleared by Player_InitializeProfile */
-    u8 unk79[2];
-    u8 unk7B[2];
+    u8 pad78; /* padding: no reader; cleared by Player_InitializeProfile */
+    u8 sensitivity[2]; /* 0x79: AiProfile yawSensitivity, sensitivity */
+    u8 controlRemap[2]; /* 0x7B: AiProfile controlMode, remap */
     u8 pad7D[0x94 - 0x7D];
     s32 counters[36]; /* 0x94 */
     u8 pad124[0x190 - 0x124];

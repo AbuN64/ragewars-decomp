@@ -22,7 +22,7 @@ typedef struct MenuMatchGlobals {
     u8 unobservedF18[0x1200 - 0xF18];
     s32 useFallbackCamera; /* 0x1200 */
     u8 unobserved1204[4];
-    s32 unk1208; /* Playerai_ToggleActionFlagMode / SelectAlternateWeapon */
+    s32 suppressFlaggedActions; /* Playerai_ToggleActionFlagMode / SelectAlternateWeapon */
     u8 unobserved120C[0x1240 - 0x120C];
     MenuSettings settings; /* 0x1240, menu input byte at settings.local (+0x125D) */
     u8 unobserved17C4[0x17F0 - 0x17C4];

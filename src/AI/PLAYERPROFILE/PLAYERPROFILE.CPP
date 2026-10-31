@@ -73,13 +73,13 @@ void Player_InitializeProfile(void *profileStorage) {
     XPlus_FillMemory(&((Profile *)object)->kindFlags[3], 0, 20);
     XPlus_FillMemory(((Profile *)object)->kindFlags, 0, 3);
     XPlus_FillMemory(((Profile *)object)->achievementFlags, 0, 7);
-    XPlus_FillMemory(&((PlayerProfileStorage *)object)->unk78, 0, 1);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk79, 0, 2);
+    XPlus_FillMemory(&((PlayerProfileStorage *)object)->pad78, 0, 1);
+    XPlus_FillMemory(((PlayerProfileStorage *)object)->sensitivity, 0, 2);
     Player_SetAchievementFlag2F((s32)object, 0);
     Player_SetAchievementFlag2F((s32)object, 2);
     Player_SetAchievementFlag2F((s32)object, 3);
     Player_SetAchievementFlag2F((s32)object, 4);
-    XPlus_FillMemory(((PlayerProfileStorage *)object)->unk7B, 0, 2);
+    XPlus_FillMemory(((PlayerProfileStorage *)object)->controlRemap, 0, 2);
     XPlus_FillMemory(((Profile *)object)->levelFlags[0], 0, 5);
     XPlus_FillMemory(((Profile *)object)->levelFlags[2], 0, 5);
     XPlus_FillMemory(((Profile *)object)->levelFlags[3], 0, 5);

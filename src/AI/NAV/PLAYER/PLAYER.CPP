@@ -43,23 +43,23 @@ void Nav_ResetPlayerState(s32 *state) {
         state[5 + i] = none;
     }
     state[10] = -1;
-    ((Brain *)state)->unk1BC = 0xFFFF;
+    ((Brain *)state)->stage = 0xFFFF;
     ((Brain *)state)->state = 0;
-    ((Brain *)state)->unk1C8 = 0;
+    ((Brain *)state)->matches = 0;
     state[14] = 1;
     state[15] = 0;
     state[25] = 0;
-    ((Brain *)state)->unk28C = 0;
+    ((Brain *)state)->preferred = 0;
     state[26] = 0;
-    ((Brain *)state)->unkBC = -1;
-    ((Brain *)state)->unk224 = -1;
-    ((Brain *)state)->unk228 = 0;
+    ((Brain *)state)->routeState = -1;
+    ((Brain *)state)->patrolRoute = -1;
+    ((Brain *)state)->patrolPosition = 0;
     for (i = 0; i < 10; i++) {
         state[15 + i] = 0;
         state[27 + i] = 0;
         state[37 + i] = 0;
     }
-    ((Brain *)state)->unk238 = 0;
+    ((Brain *)state)->arrived = 0;
     Scaled_SetBehaviorTable(state, &g_playerDefaultBehaviorTable, none);
     Scaled_SetBehaviourState(state, 2);
     ((Brain *)state)->tracking[0] = 0.0f;
@@ -75,14 +75,14 @@ void Nav_ResetPlayerState(s32 *state) {
     ((Brain *)state)->visible = 0;
     ((Brain *)state)->fireTimer = -1;
     ((Brain *)state)->cooldown = 0;
-    ((Brain *)state)->unk328 = 0;
+    ((Brain *)state)->lastAttacker = 0;
     ((Brain *)state)->timer = 0;
-    ((Brain *)state)->unk2E4 = 0;
-    ((Brain *)state)->unk2EC = 0;
-    ((Brain *)state)->unk2E8 = 0;
+    ((Brain *)state)->actionDelay = 0;
+    ((Brain *)state)->alternateCountdown = 0;
+    ((Brain *)state)->actionDuration = 0;
     ((Brain *)state)->pattern = 0;
     ((Brain *)state)->distance = 0;
-    ((Brain *)state)->unk32C = -1;
+    ((Brain *)state)->previousPortalLink = -1;
 }
 
 /* Nav_UpdateComputerPlayerStatus_Player.CPP */

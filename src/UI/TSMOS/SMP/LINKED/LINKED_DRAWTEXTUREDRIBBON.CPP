@@ -473,7 +473,7 @@ typedef struct LinkOwner802A {
     char pad0[8];
     f32 *range;      /* 0x08 */
     char pad0C[0x18];
-    f32 unk24; /* set to range[0] when a source transform changes */
+    f32 rangeAtChange; /* 0x24: range[0] as of the last source transform change */
     char pad28[0x14];
     u32 flags;        /* 0x3C */
     LinkNode802A *head; /* 0x40 */
@@ -528,7 +528,7 @@ void Linked_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
         }
     }
     if (changed) {
-        owner->unk24 = owner->range[0];
+        owner->rangeAtChange = owner->range[0];
     }
 }
 

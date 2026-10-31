@@ -57,7 +57,7 @@ void Playerai_ToggleActionFlagMode(Player *player) {
     if (*ptr != 0) {
         return;
     }
-    if (((MenuMatchGlobals *)(ptr - ((char *)&((MenuMatchGlobals *)0)->settings.local - (char *)0)))->unk1208 != 0) {
+    if (((MenuMatchGlobals *)(ptr - ((char *)&((MenuMatchGlobals *)0)->settings.local - (char *)0)))->suppressFlaggedActions != 0) {
         if (player->inputFlags & 0x20) {
             return;
         }
@@ -87,7 +87,7 @@ void Playerai_SelectAlternateWeapon(Player *player) {
             return;
         }
     }
-    if (((MenuMatchGlobals *)(ptr - ((char *)&((MenuMatchGlobals *)0)->settings.local - (char *)0)))->unk1208 != 0) {
+    if (((MenuMatchGlobals *)(ptr - ((char *)&((MenuMatchGlobals *)0)->settings.local - (char *)0)))->suppressFlaggedActions != 0) {
         if (player->inputFlags & 0x20) {
             return;
         }
