@@ -443,11 +443,13 @@ void SetN64_CollectVisibleEffectNodes(VisibleEffectPoolView *effectPool, Results
         limit = 512;
         do {
             Simpinst_ClearCachedResource(node);
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+            if ((((*(u16 *)&node->flags) & (mask >> 16)) == (required >> 16)) &&
+                (InstHdr_CanActorReceiveInteraction(node) != 0) &&
+                !(*(u16 *)&node->flags & 0x100) &&
+#else
             if (((node->flags & mask) == required) &&
                 (InstHdr_CanActorReceiveInteraction(node) != 0) &&
-#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-                !(((u16 *)&node->flags)[1] & 0x100) &&
-#else
                 !(*(u16 *)&node->flags & 0x100) &&
 #endif
                 (bounds[0] > node->x0) &&
