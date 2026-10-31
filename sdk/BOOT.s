@@ -2,6 +2,7 @@
 #include "sys/asm.h"
 #include "sys/regdef.h"
 
+/* entry.s */
 .text
 .set noreorder
 .set noat

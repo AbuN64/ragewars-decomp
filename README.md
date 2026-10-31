@@ -7,7 +7,7 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 ## Progress
 
 <!-- progress -->
-<pre><code>all      [███████████████████░]  99.97%  41,932,147 of 41,943,040 bytes, linker fill 280 bytes</code><br><code>de       [████████████████████]  100.00%  8,388,669 of 8,388,608 bytes, linker fill 28 bytes</code><br><code>eu       [███████████████████░]  99.93%  8,383,239 of 8,388,608 bytes, linker fill 76 bytes</code><br><code>eu-x     [███████████████████░]  99.93%  8,383,183 of 8,388,608 bytes, linker fill 44 bytes</code><br><code>us       [███████████████████░]  99.99%  8,388,532 of 8,388,608 bytes, linker fill 64 bytes</code><br><code>us-rev1  [███████████████████░]  99.99%  8,388,524 of 8,388,608 bytes, linker fill 68 bytes</code></pre>
+<pre><code>all      [███████████████████░]  99.97%  41,932,159 of 41,943,040 bytes, linker fill 280 bytes</code><br><code>de       [████████████████████]  100.00%  8,388,669 of 8,388,608 bytes, linker fill 28 bytes</code><br><code>eu       [███████████████████░]  99.93%  8,383,239 of 8,388,608 bytes, linker fill 76 bytes</code><br><code>eu-x     [███████████████████░]  99.93%  8,383,195 of 8,388,608 bytes, linker fill 44 bytes</code><br><code>us       [███████████████████░]  99.99%  8,388,532 of 8,388,608 bytes, linker fill 64 bytes</code><br><code>us-rev1  [███████████████████░]  99.99%  8,388,524 of 8,388,608 bytes, linker fill 68 bytes</code></pre>
 
 <a href="https://itsmo.me/attic/cake-unbake/#ragewars-decomp-us-rev1"><img src="docs/overview-us-rev1.svg" width="720"></a>
 
@@ -21,7 +21,7 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 
 | eu-x (NUS-NRWX-0, Europe). PAL multi-language release. SHA256 `511f6c876586bf401faf01a270c67f26fcb7db55ed3f35759c71ab15a29de750` |
 |---|
-| <pre><code>code      [████████████████████]  100.00%  1,115,612 of 1,115,612</code><br><code>data      [███████████████████░]  99.98%  251,820 of 251,848</code><br><code>functions [████████████████████]  100.00%  4,256 of 4,256</code><br><code>blobs     [███████████████████░]  99.92%  6,995,559 of 7,000,912</code></pre> |
+| <pre><code>code      [████████████████████]  100.00%  1,115,612 of 1,115,612</code><br><code>data      [███████████████████░]  99.99%  251,832 of 251,848</code><br><code>functions [████████████████████]  100.00%  4,256 of 4,256</code><br><code>blobs     [███████████████████░]  99.92%  6,995,559 of 7,000,912</code></pre> |
 
 | us (NUS-NRWE-0, North America). First NTSC release (black cartridge). SHA256 `0433043aaba2649bdd1fe717c4020550ac663c0362527aa082490f5977a3e46b` |
 |---|
