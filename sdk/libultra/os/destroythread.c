@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/__OSDISPATCHTHREAD.H"
@@ -43,3 +45,6 @@ void osDestroyThread(OSThread *thread) {
     }
     __osRestoreInt(token);
 }
+#if VERSION_US
+INCLUDE_DATA("game_code", func_802BD010_de_padding_BDBA8);
+#endif

@@ -7,6 +7,7 @@
 #include "../../../include/PFS/PFS_SELECTACTIVEBANK.H"
 #include "../../../include/libultra/pfs/PFS.H"
 
+/* ospfsrepairid.CPP */
 /* 80447BB0_15.CPP */
 /* osPfsRepairId, drafted from ultralib src/io/pfsrepairid.c (2.0I branch): reread a controller pak's
    id block from bank zero, restore or rebuild it when damaged, and refresh the file system layout and

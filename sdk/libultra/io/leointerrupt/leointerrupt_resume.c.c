@@ -4,10 +4,10 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CTX.H"
-#include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "../../../include/libultra/io/leointerrupt_resume.h"
 
+/* leointerrupt_resume.c */
 void __osLeoAbnormalResume(void) {
     DiskTransferInfo *diskTransferInfo;
     u32 status;
@@ -35,7 +35,6 @@ void __osLeoAbnormalResume(void) {
     }
 }
 
-
 void __osLeoResume(void) {
     OSMesgQueue *node;
     s32 validCountValue;
@@ -58,4 +57,3 @@ void __osLeoResume(void) {
         }
     }
 }
-

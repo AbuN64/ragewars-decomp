@@ -2,9 +2,9 @@
 #include "TYPES.H"
 #include "../include/MEASUREDRECAT18.H"
 
+/* alcseqnewmarker_data.CPP */
 extern s32 __getTrackByte(s32, s32);
 extern u32 __readVarLen(ALCSeq *, u32);
-
 
 s32 __alCSeqGetTrackEvent(ALCSeq *state, u32 index, DecodeResult *result) {
     u8 first;

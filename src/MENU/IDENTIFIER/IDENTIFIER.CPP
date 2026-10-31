@@ -42,3 +42,6 @@ s32 Menu_ClassifyResourceRange(s32 resourceId) {
 }
 #endif
 
+#if VERSION_US_REV1
+INCLUDE_DATA("game_code", k_SystemZeroWords);
+#endif

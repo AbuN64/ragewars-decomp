@@ -10,6 +10,7 @@
 #include "../../../include/PFS/__OSCHECKID.H"
 #include "../../../include/libultra/pfs/PFS.H"
 
+/* PFS.CPP */
 /* 80447BB0_17.CPP */
 /* __osRepairPackId, drafted from ultralib src/io/contpfs.c (2.0I branch): probe how many banks the
    controller pak really has, build a fresh id from the damaged one, write it to all four id areas and
@@ -414,6 +415,5 @@ s32 Pfs_SelectActiveBank(OSPfs *pfs)
 #if defined(VERSION_US)
 unsigned char g_PfsTrailingBytesBlock6[4] = { 0x52, 0x00, 0x00, 0x00 };
 #endif
-
 
 /* 80447BB0_8.CPP */

@@ -3,6 +3,7 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
 
+/* READ.CPP */
 /* read8_Read.c */
 /** Consume and return one byte from the stream pointer at offset 8. */
 int read8(struct ALSeq_s *stream) {
@@ -45,6 +46,5 @@ s32 read32(ALSeq *sequenceObject) {
     stream->curPtr = p + 3;
     return (b0 << 24) | (b1 << 16) | (b2 << 8) | b3;
 }
-
 
 /* 802B243C_2.CPP */

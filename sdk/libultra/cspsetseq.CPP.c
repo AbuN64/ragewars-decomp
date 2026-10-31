@@ -2,6 +2,8 @@
 #include "../include/BUF16B.H"
 #include "TYPES.H"
 #include "../include/libgultra_inferred/cseq.H"
+
+/* cspsetseq.CPP */
 struct SeqpSetSeqEvent {
     s16 count;
     s16 _pad2;
@@ -9,7 +11,6 @@ struct SeqpSetSeqEvent {
     s32 _pad8;
     s32 _padC;
 };
-
 
 void alCSPSetSeq(ALCSPlayer *player, ALCSeq *sequence) {
     struct SeqpSetSeqEvent setSeqEvent;
@@ -19,7 +20,6 @@ void alCSPSetSeq(ALCSPlayer *player, ALCSeq *sequence) {
     alEvtqPostEvent(&player->evtq, &setSeqEvent, 0);
 }
 
-
 void alCSPSetVol(ALCSPlayer *player, s16 volume) {
     Buf16b volumeEvent;
 
@@ -27,7 +27,6 @@ void alCSPSetVol(ALCSPlayer *player, s16 volume) {
     volumeEvent.count = 0xA;
     alEvtqPostEvent(&player->evtq, &volumeEvent, 0);
 }
-
 
 void alCSPStop(ALCSPlayer *player) {
     s16 stopEvent[8];

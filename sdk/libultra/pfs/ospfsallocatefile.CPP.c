@@ -8,16 +8,10 @@
 #include "../../include/PFS/__OSCHECKID.H"
 #include "../../include/PFS/PFS_SELECTACTIVEBANK.H"
 
+/* ospfsallocatefile.CPP */
 /* osPfsAllocateFile, drafted from ultralib src/io/pfsallocatefile.c (2.0I branch): create a
    controller pak file by finding a free directory entry, chaining enough free pages across the
    banks' inode tables and writing the new directory entry. */
-
-
-
-
-
-
-
 
 extern s32 __osContRamWrite(void *queue, int channel, u16 address, u8 *buffer, int force);
 
@@ -146,14 +140,6 @@ s32 osPfsAllocateFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name
    requested number of free pages in one bank's inode table, linking them in order and clearing each
    claimed page on the pak. */
 
-
-
-
-
-
-
-
-
 s32 __osPfsDeclearPage(OSPfs *pfs, __OSInode *inode, int file_size_in_pages, int *first_page, u8 bank,
                   int *decleared, int *last_page)
 {
@@ -215,9 +201,6 @@ s32 __osPfsDeclearPage(OSPfs *pfs, __OSInode *inode, int file_size_in_pages, int
    controller pak bank, write the caller's block to each of the page's eight blocks, then select
    bank zero again. */
 
-
-
-
 s32 __osClearPage(OSPfs *pfs, int page_no, u8 *data, u8 bank)
 {
     int i;
@@ -241,13 +224,6 @@ s32 __osClearPage(OSPfs *pfs, int page_no, u8 *data, u8 bank)
 
 /* osPfsDeleteFile, drafted from ultralib src/io/pfsdeletefile.c (2.0I branch): find a controller pak
    file, free every page of its chain bank by bank, and write an empty directory entry in its place. */
-
-
-
-
-
-
-
 
 extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 
@@ -334,14 +310,6 @@ s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, 
    chain within one bank, marking each page free and summing its blocks, and report the link that
    leaves the bank. */
 
-
-
-
-
-
-
-
-
 s32 __osPfsReleasePages(OSPfs *pfs, __OSInode *inode, u8 start_page, u16 *sum, u8 bank,
                   __OSInodeUnit *last_page, int flag)
 {
@@ -401,15 +369,6 @@ s32 __osPfsReleasePages(OSPfs *pfs, __OSInode *inode, u8 start_page, u16 *sum, u
 
 /* __osBlockSum, drafted from ultralib src/io/pfsdeletefile.c (2.0I branch): select a bank, add the
    byte sum of each of one page's eight blocks to a running total, and select bank zero again. */
-
-
-
-
-
-
-
-
-
 
 s32 __osBlockSum(OSPfs *pfs, u8 page_no, u16 *sum, u8 bank)
 {

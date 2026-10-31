@@ -2,11 +2,10 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
-#include "TYPES.H"
 #include "../../include/os_pif.h"
 
+/* oscontreset_data.CPP */
 /* Clears the controller PIF RAM block, sets its status word to execute, and packs one request-status command with the given command byte per controller followed by the end marker (libultra __osPackRequestData). Adapted from __osPackReadData with the request format and command argument changed, the clearing loop counting up and the status word written through a local pointer to the PIF RAM block. */
-
 
 void __osPackRequestData(u8 cmd) {
     u8 *ptr;
@@ -57,4 +56,3 @@ void __osContGetInitData(u8 *valid, ControllerInitStatusBytes *data) {
     }
     *valid = mask;
 }
-

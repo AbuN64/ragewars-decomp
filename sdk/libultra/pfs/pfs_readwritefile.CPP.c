@@ -6,6 +6,7 @@
 #include "../../include/PFS/__OSCHECKID.H"
 #include "../../include/PFS/PFS_SELECTACTIVEBANK.H"
 
+/* pfs_readwritefile.CPP */
 /* Reads or writes Controller Pak file blocks while validating and following its inode chain, based on the 2.0I public reference. */
 extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 __osContRamWrite(void *queue, int channel, u16 address, u8 *buffer, int force);
