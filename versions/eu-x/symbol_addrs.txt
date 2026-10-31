@@ -10389,6 +10389,7 @@ k_SndplayerEncodedWordsBlock5 = 0x800C8AD4; // rom:0xC96D4
 k_SynthesizerEncodedWordsBlock3 = 0x800C8B58; // rom:0xC9758
 k_SirawdmaEncodedHalfwords = 0x800C8F62; // rom:0xC9B62
 k_sirawdmaTextTrailingCodePointerWords = 0x800C8F64; // rom:0xC9B64
+k_GSprawdmatextEncodedHalfwordsBlock1 = 0x800C8F82; // rom:0xC9B82
 k_planeTrailingZeroBytes = 0x800C8F84; // rom:0xC9B84
 k_SirawreadEncodedBytesBlock2 = 0x800C8FB3; // rom:0xC9BB3
 k_systemRunPiManagerCodePointerWords = 0x800C8FB4; // rom:0xC9BB4

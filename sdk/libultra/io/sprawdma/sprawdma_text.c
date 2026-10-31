@@ -14,6 +14,16 @@ char s_expandHudLabelFragment[14] =
 /* bytes live in the preceding array */
 #endif
 
+#if defined(VERSION_EU_X)
+unsigned short k_GSprawdmatextEncodedHalfwordsBlock1[7] = {
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+/* bytes live in the preceding array */
+#endif
+
 #if defined(VERSION_EU)
 unsigned short k_GSprawdmatextEncodedHalfwordsBlock1[7] = {
     0x0000, 0x41F0, 0x0000, 0x4180, 0x0000, 0x41F0, 0x0000,
