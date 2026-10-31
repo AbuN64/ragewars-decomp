@@ -20214,6 +20214,8 @@ SECTIONS
         sdk/libultra/io/sprawdma_bytes.c.o(.rodata .rdata);
         . = MAX(., 0x72D4);
         sdk/libultra/io/sprawdma/sprawdma_text.c.o(.rodata .rdata);
+        . = MAX(., 0x72E2);
+        sdk/libultra/io/sprawdma/sprawdma_text.c.o(.data);
         . = MAX(., 0x72F0);
         src/DATA/FRONTEND/C/CONSTANTS/VIDEO_SCALE_UNSIGNED_BIAS_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x7300);

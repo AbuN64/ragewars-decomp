@@ -4146,6 +4146,7 @@ segments:
       - [0xC9B62, data, game_data/k_SirawdmaEncodedHalfwords]
       - [0xC9B70, rodata, game_data/k_sprawdmaTextBytes]
       - [0xC9B74, rodata, game_data/g_sprawdmaText]
+      - [0xC9B82, data, game_data/k_GSprawdmatextEncodedHalfwordsBlock1]
       - [0xC9B90, rodata, game_data/g_videoScaleUnsignedBias_StorageWords]
       - [0xC9BA0, rodata, game_data/k_audioReadSerialInterfaceWordTextBytes]
       - [0xC9BA4, rodata, game_data/g_sirawreadText]

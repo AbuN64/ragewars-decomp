@@ -949,6 +949,7 @@ build/eu-x/src/UI/X_FILES/X_MATH/math_double.CPP.o: TEXTSIZE := 0x820
 build/eu-x/src/UI/X_FILES/X_PLUS/X_PLUS.CPP.o: TEXTSIZE := 0x1660
 build/eu-x/src/UI/X_FILES/X_STDIO/X_STDIO.CPP.o: TEXTSIZE := 0x7A0
 build/eu-x/sdk/libultra/io/sirawdma/sirawdma.c.o: NOALIGN := 1
+build/eu-x/sdk/libultra/io/sprawdma/sprawdma_text.c.o: NOALIGN := 1
 build/eu-x/sdk/libultra/libc/libc_formattocallback_data.CPP.o: NOALIGN := 1
 build/eu-x/src/DATA/ENEMY/ENEMY/OVLGAME_INITIALIZECONTROLLERSESSION_DATA.CPP.o: NOALIGN := 1
 build/eu-x/src/DATA/ENEMY/ENEMY/PARTICLE_DRAWRENDERLIST_DATA.CPP.o: NOALIGN := 1
