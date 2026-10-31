@@ -49,11 +49,6 @@ void alCSPPlay(ALCSPlayer *playerAddress) {
     alEvtqPostEvent(&playerAddress->evtq, stopEvent, 0);
 }
 
-#if defined(VERSION_US)
-unsigned int k_EventEncodedWordsBlock2[1] = {
-    0x5F745400,
-};
-#endif
 
 #if defined(VERSION_EU)
 unsigned int k_EventEncodedWordsBlock1[1] = {

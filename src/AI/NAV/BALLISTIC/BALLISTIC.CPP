@@ -393,8 +393,3 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral) {
     return 0;
 }
 
-#if defined(VERSION_DE)
-unsigned int k_BallisticEncodedWords[3] = {
-    0x6F857BAC, 0x71EB24F7, 0xCE54520A,
-};
-#endif

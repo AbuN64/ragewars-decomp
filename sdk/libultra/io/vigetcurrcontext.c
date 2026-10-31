@@ -27,7 +27,3 @@ void osViSetEvent(OSMesgQueue *messageQueue, OSMesg retraceMessage, u32 retraceI
     __osRestoreInt(savedInterruptMask);
 }
 
-#if defined(VERSION_US)
-char s_onEnemyMemberNameFragment[8] =
-    "m_OnEnem";
-#endif

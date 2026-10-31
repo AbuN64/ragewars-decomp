@@ -252,7 +252,3 @@ s32 ContPad_SwapButtonPairs(s32 buttons)
   return remappedButtons;
 }
 
-#if defined(VERSION_US)
-char s_ContpadLEIMPACTSAText[12] =
-    "LE_IMPACTS_A";
-#endif

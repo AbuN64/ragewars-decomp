@@ -58,8 +58,3 @@ size_t Libc_StringLength(const char *string) {
     return terminator - cursor;
 }
 
-#if defined(VERSION_US)
-unsigned int k_SprintfEncodedWords[3] = {
-    0x0C000000, 0x0000086D, 0x5F546578,
-};
-#endif

@@ -358,10 +358,6 @@ s32 Visdata_TestBoxAgainstPlane(f32 *plane, f32 *boxBounds) {
     return 0;
 }
 
-#if defined(VERSION_US)
-char k_VisdataEncodedBytes[8] =
-    "\000\000\000\003s16R";
-#endif
 
 /* ROM-grounded data: src/g_planeParallelSegmentFractionStorageSource.c */
 const float g_planeParallelSegmentFraction_StorageWords[1] = {

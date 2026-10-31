@@ -9,13 +9,6 @@
 #include "TYPES.H"
 
 /* 800C891C.CPP */
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: rodata/unresolved/800C891C */
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_actorCurrentInterpolationUnitUsRev1AlignmentPad[1] = {
-    0x3F7FFF58,
-};
-#endif
 
 /* GameObject_ApplyMaterialCurrents_GameobjectMovetoxzkeepheight.CPP */
 extern void Insthdr_ResetInstanceRenderIndices(signed char *prop);

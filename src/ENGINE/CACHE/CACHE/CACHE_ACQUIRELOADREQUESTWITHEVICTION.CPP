@@ -178,7 +178,3 @@ unsigned int g_CacheAcquireloadrequestwithevictionObjectAlignmentPadUs1[1] = {
 };
 #endif
 
-#if defined(VERSION_US)
-char s_CacheAcquireloadrequestwithevictionOSMesgText[8] =
-    "\000\015OSMesg";
-#endif

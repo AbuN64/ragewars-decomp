@@ -76,11 +76,6 @@ void Items_DestroyMenu(void *list, struct MenuResourceItemView *item) {
     Cache_ReleaseResource(0, item->resource);
 }
 
-#if defined(VERSION_EU)
-unsigned int g_itemsMenuTextPadding[3] = {
-    0x00000000, 0x24040001, 0x03E00008,
-};
-#endif
 
 /* 80442BC8_12.CPP */
 #if defined(VERSION_US_REV1)

@@ -282,14 +282,4 @@ void init_lpfilter(AudioLowPassFilter *lp)
     }
 }
 
-#if defined(VERSION_EU)
-unsigned int func_802B49C8_eu_padding_B55C8[2] = {
-    0x02803021, 0x00408821,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_802B4728_de_padding_B5328[2] = {
-    0x8FB30058, 0xAFB60038,
-};
-#endif

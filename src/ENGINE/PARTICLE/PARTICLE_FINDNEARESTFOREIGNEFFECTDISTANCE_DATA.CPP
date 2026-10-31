@@ -11,9 +11,3 @@ float k_ParticleFindnearestforeigneffectdistanceEncodedWordsBlock1[3] = {
 };
 #endif
 
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_ParticleFindnearestforeigneffectdistanceEncodedWordsAlignmentPad[3] = {
-    0x00000000, 0x38000100, 0x00003021,
-};
-#endif

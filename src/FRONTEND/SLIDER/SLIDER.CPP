@@ -148,13 +148,4 @@ void Frontend_UpdateSliderGeometry(Slider *slider) {
     }
 }
 
-#if defined(VERSION_US)
-char s_SliderMULTIWEAPONText[12] =
-    "MULTI_WEAPON";
-#endif
 
-#if defined(VERSION_DE)
-unsigned int k_SliderEncodedWords[3] = {
-    0x05DF0113, 0x2D04EFEF, 0xC10DD311,
-};
-#endif

@@ -28,16 +28,5 @@ s32 osAiSetNextBuffer(void *bufPtr, u32 size) {
     return 0;
 }
 
-#if defined(VERSION_US)
-unsigned int k_AisetnextbufEncodedWords[1] = {
-    0x72616374,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned char g_AisetnextbufTrailingBytes[4] = { 0x8C, 0xA2, 0x00, 0x00 };
-#endif
 
-#if defined(VERSION_DE)
-unsigned char g_AisetnextbufTrailingBytes[4] = { 0x03, 0xE0, 0x00, 0x08 };
-#endif

@@ -181,14 +181,4 @@ s32 Menu_DispatchOptionsTransitionEvent(void *object, s32 event, s32 eventData, 
     return 0;
 }
 
-#if defined(VERSION_EU)
-unsigned int func_804229DC_eu_padding_1989DC[1] = {
-    0x02331021,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_804224DC_de_padding_1884DC[1] = {
-    0x0C0978B5,
-};
-#endif

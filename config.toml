@@ -9,7 +9,7 @@ readme_map_link = "https://itsmo.me/attic/cake-unbake/"
 readme_map_repo = "ragewars-decomp"
 
 [layout]
-source_roots = ["src", "sdk", "include"]
+source_roots = ["src", "sdk", "include", "SOURCE"]
 header_roots = ["include", "sdk/include"]
 library_source = "sdk/{library}"
 library_header = "sdk/include/{library}.h"
@@ -17,7 +17,7 @@ subsystem_source = "src/{subsystem}"
 subsystem_header = "src/{subsystem}.h"
 
 [cheat]
-source = ["src", "include", "sdk"]
+source = ["src", "include", "sdk", "SOURCE"]
 asm_home = ["sdk/"]
 makefile_row = "^(FILE|CPPFLAGS|CFLAGS)\\.(src|sdk)/[^ ]+ :="
 
@@ -679,6 +679,10 @@ origin = "Rob Northen compression"
 origin = "SN Systems libsn"
 toolchain = "gcc-2.7.2-sn64"
 
+[library."sdk/LIBSN/"]
+origin = "SN Systems libsn"
+toolchain = "gcc-2.7.2-sn64"
+
 [repo]
 generated = [
   "README.md", "progress.json", "docs/map-*.json", "docs/overview-*.svg", "versions/*/text_sizes.mk",
@@ -805,10 +809,6 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-msplit-addresses"]
 omit = []
 hilo_nops = true
-
-[file."sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = []
 
 [file."src/ENGINE/AUDIO/DECODER/DECODE.CPP"]
 toolchain = "gcc-2.8.1-sn64"

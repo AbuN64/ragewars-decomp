@@ -308,8 +308,3 @@ unsigned int func_80207FE4_de_padding_8C18[1] = {
 };
 #endif
 
-#if defined(VERSION_DE)
-unsigned int k_PlayermatrixEncodedWords[2] = {
-    0x428DA56D, 0x4312CABA,
-};
-#endif

@@ -45,14 +45,4 @@ void Pak_RenderMenuEntryCallback(struct MenuStyle *menu, s8 *member) {
     Menu_DrawMenuEntries(menu, member);
 }
 
-#if defined(VERSION_EU_X)
-unsigned int func_80446A4C_eu_x_padding_136A4C[1] = {
-    0x0C111ECF,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_8044691C_eu_padding_1BC91C[1] = {
-    0x46010001,
-};
-#endif

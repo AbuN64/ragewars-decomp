@@ -64,7 +64,3 @@ done:
     return succeeded;
 }
 
-#if defined(VERSION_US)
-char s_PpdecomUnpackresourceChannelsText[8] =
-    "Channels";
-#endif

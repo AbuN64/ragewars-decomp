@@ -63,7 +63,3 @@ void Tsmos_ScaleWidgetTree(Widget *widget, Widget *parent) {
     }
 }
 
-#if defined(VERSION_US)
-char k_TsmosScalewidgettreeEncodedWords[4] =
-    "AD_R";
-#endif

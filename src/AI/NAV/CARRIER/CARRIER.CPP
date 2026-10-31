@@ -44,20 +44,5 @@ void Nav_FollowMarkerCarrierRoute(AiTarget *aiTarget) {
     Nav_UpdateTargetSteering(controller);
 }
 
-#if defined(VERSION_EU_X)
-unsigned int func_80212D78_eu_x_padding_13978[2] = {
-    0xAFAA0030, 0x0C0939C6,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_80212D78_eu_padding_13978[2] = {
-    0x00448021, 0x12000017,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_80212D58_de_padding_13958[2] = {
-    0x26520001, 0x2610FFFF,
-};
-#endif

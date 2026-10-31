@@ -25,8 +25,3 @@ void osViBlack(u8 blackEnabled) {
     __osRestoreInt(savedInterruptMask);
 }
 
-#if defined(VERSION_US)
-unsigned int k_ViblackEncodedWords[1] = {
-    0x4F666673,
-};
-#endif

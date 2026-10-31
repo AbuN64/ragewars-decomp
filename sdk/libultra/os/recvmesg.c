@@ -7,9 +7,6 @@
 #include <PR/os_internal_si.h>
 
 /* 802C0390_4.CPP */
-#if defined(VERSION_DE)
-unsigned char g_RecvmesgTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 0xAF, 0xBF, 0x00, 0x14, 0x0C, 0x0A, 0xF3, 0xC8 };
-#endif
 
 /* recvmesg.c */
 extern OSThread *__osRunningThread;
@@ -40,11 +37,6 @@ s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
     return 0;
 }
 
-#if defined(VERSION_US)
-unsigned int k_RecvmesgEncodedWords[3] = {
-    0x0800F200, 0x69000000, 0x02000500,
-};
-#endif
 
 #if defined(VERSION_EU_X)
 unsigned int func_802BB2A0_de_padding_BC2A4[1] = {

@@ -81,15 +81,5 @@ unsigned int g_SoundinfoObjectAlignmentPadUs1[1] = {
 };
 #endif
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_SoundinfoEncodedWordsAlignmentPad[1] = {
-    0x00115041,
-};
-#endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char g_SoundinfoTrailingBytesAlignmentPad[8] = { 0x02, 0x02, 0x80, 0x21, 0x0C, 0x0A, 0xF5, 0x90 };
-#endif
 

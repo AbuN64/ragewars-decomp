@@ -47,7 +47,3 @@ s32 osPfsFreeBlocks(OSPfs *pfs, s32 *bytes_not_used)
     return 0;
 }
 
-#if defined(VERSION_US)
-char s_OspfsfreeblocksPingSounText[8] =
-    "pingSoun";
-#endif

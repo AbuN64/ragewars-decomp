@@ -9,9 +9,6 @@ const unsigned int k_CosfEncodedWords[15] = {
 #endif
 
 /* 802B63E4_9.CPP */
-#if defined(VERSION_DE)
-unsigned char g_CosfTrailingBytes[8] = { 0x3C, 0x01, 0x80, 0x0C, 0xC4, 0x20, 0x78, 0x70 };
-#endif
 
 /* cosf_Cosf.CPP */
 

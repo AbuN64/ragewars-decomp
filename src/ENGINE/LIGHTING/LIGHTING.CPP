@@ -815,49 +815,13 @@ const char s_litVerticesAllocationText[13] =
     "Lit Vertices\000";
 #endif
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char k_LightingEncodedBytesAlignmentPad[7] = {
-    0x11, 0x43, 0x43, 0x61, 0x6D, 0x65, 0x72,
-};
-#endif
 
-#if defined(VERSION_US)
-/* bytes live in the preceding array */
-#endif
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char k_LightingEncodedBytesBlock3AlignmentPad[7] = {
-    0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
-#endif
 
-#if defined(VERSION_EU_X)
-/* bytes live in the preceding array */
-#endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char k_LightingEncodedBytesBlock2AlignmentPad[7] = {
-    0xE3, 0x18, 0x23, 0x00, 0x03, 0x18, 0x80,
-};
-#endif
 
-#if defined(VERSION_EU)
-/* bytes live in the preceding array */
-#endif
 
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char k_LightingEncodedBytesBlock1AlignmentPad[7] = {
-    0x06, 0x34, 0x03, 0x8E, 0x84, 0x00, 0x38,
-};
-#endif
 
-#if defined(VERSION_DE)
-/* bytes live in the preceding array */
-#endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_litVerticesText_Lighting.c */

@@ -112,7 +112,3 @@ ResidentEventHandlerEntry g_MenuDrawoptionsimagetransitionEncodedWords[8] = {
 #endif
 #endif
 
-#if defined(VERSION_US)
-char g_MenuDrawoptionsimagetransitionTrailingBytes[12] =
-    "IFLEequ\004.eos";
-#endif

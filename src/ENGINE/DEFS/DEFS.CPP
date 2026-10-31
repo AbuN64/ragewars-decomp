@@ -434,12 +434,6 @@ char s_DefsBFlagText[12] =
     "\000\000\000\000\010m_bFlag";
 #endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_DefsEncodedWordsBlock2AlignmentPad[3] = {
-    0x24020001, 0xA4620000, 0x0C0AFC14,
-};
-#endif
 
 #if defined(VERSION_DE)
 float k_DefsEncodedWordsBlock1[3] = {

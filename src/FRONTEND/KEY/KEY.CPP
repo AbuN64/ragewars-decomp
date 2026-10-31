@@ -67,26 +67,6 @@ s32 Key_GetCharacterPreviewModel(s32 key) {
     return value;
 }
 
-#if defined(VERSION_US)
-unsigned int func_8041F298_us_padding_183298[2] = {
-    0x35657175, 0xD0100000,
-};
-#endif
 
-#if defined(VERSION_EU_X)
-unsigned int func_8041F6D8_eu_x_padding_10F6D8[2] = {
-    0x8C42BAB0, 0x00531021,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_8041F6D8_eu_padding_1956D8[2] = {
-    0xAFB3001C, 0x0C0A669E,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_8041F228_de_padding_185228[2] = {
-    0x00021600, 0x00822025,
-};
-#endif

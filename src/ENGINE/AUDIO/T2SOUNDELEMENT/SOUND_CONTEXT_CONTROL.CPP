@@ -117,9 +117,3 @@ s32 SoundElement_HasActiveOrPendingSound(s32 wantedKey) {
     return Sound_HasActiveOrPendingSound(&g_soundElementContext, wantedKey);
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_SoundContextControlEncodedWordsAlignmentPad[1] = {
-    0x74685F74,
-};
-#endif

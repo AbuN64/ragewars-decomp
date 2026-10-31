@@ -592,12 +592,6 @@ void Geometry_InsertMaterialNode(TreeNode **root, TreeNode **empty_root, TreeNod
     }
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GeometryDrawblendpartsEncodedWordsAlignmentPad[1] = {
-    0x41594552,
-};
-#endif
 
 /* 800C979C.CPP */
 #if !(defined(VERSION_US_REV1))

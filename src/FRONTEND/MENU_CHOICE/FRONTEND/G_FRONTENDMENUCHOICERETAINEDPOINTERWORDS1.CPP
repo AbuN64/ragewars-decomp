@@ -1,10 +1,6 @@
 
 
 /* 80423280_34.CPP */
-#if defined(VERSION_US_REV1)
-/* Data separated from executable functions by the legacy split layout. */
-unsigned int g_FrontendMenuChoiceRetainedWords1[2] = { 0x048000A2U, 0x00001821U };
-#endif
 
 /* FrontendMenuChoiceRetainedPointerWords1.CPP */
 #if defined(VERSION_US)

@@ -13,10 +13,6 @@ f64 Gfx_GetNormalizedCounter(void) {
     return Libc_SignedLongLongToDouble(osGetTime()) / Libc_SignedLongLongToDouble(g_systemClockFrequency);
 }
 #endif
-#if defined(VERSION_US)
-char k_GfxEncodedWordsBlock1[4] =
-    "_GRO";
-#endif
 
 /* 804143B0_2.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)

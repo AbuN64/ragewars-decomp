@@ -1,3 +1,0 @@
-#if defined(VERSION_EU)
-unsigned char g_MenuDispatchtitlebuttontableeventTrailingBytes[8] = { 0x3C, 0x02, 0x80, 0x0F, 0x8C, 0x42, 0x1A, 0xC4 };
-#endif

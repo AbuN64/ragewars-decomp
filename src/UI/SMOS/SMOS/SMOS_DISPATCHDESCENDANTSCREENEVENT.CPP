@@ -46,7 +46,4 @@ void *Smos_GetScreenManager(void) {
     return g_screenManager;
 }
 
-#if defined(VERSION_DE)
-unsigned char g_SmosDispatchdescendantscreeneventTrailingBytes[12] = { 0xC6, 0x00, 0x00, 0x08, 0x02, 0x00, 0x20, 0x21, 0x0C, 0x09, 0x34, 0x99 };
-#endif
 

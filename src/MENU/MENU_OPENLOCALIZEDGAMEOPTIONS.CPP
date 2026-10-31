@@ -24,9 +24,6 @@ s32 Menu_DispatchGermanJoinOptionsEvent(MenuWidget *pThis, s32 event, s32 eventD
 }
 #endif
 
-#if defined(VERSION_DE)
-unsigned char g_MenuOpenlocalizedgameoptionsTrailingBytes[8] = { 0x00, 0x00, 0x20, 0x21, 0x8F, 0xAA, 0x00, 0x40 };
-#endif
 
 /* 80408CB0_28.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

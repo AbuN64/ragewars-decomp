@@ -119,30 +119,6 @@ void Gregion_DarkenColor(unsigned char percent, unsigned char r, unsigned char g
     }
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GregionShiftcolorhueEncodedWordsAlignmentPad[2] = {
-    0x00005400, 0x00000000,
-};
-#endif
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GregionShiftcolorhueEncodedWordsBlock3AlignmentPad[2] = {
-    0xBC3F5FAF, 0x3CFD10F8,
-};
-#endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GregionShiftcolorhueEncodedWordsBlock2AlignmentPad[2] = {
-    0x00621821, 0x0105102A,
-};
-#endif
 
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GregionShiftcolorhueEncodedWordsBlock1AlignmentPad[2] = {
-    0xBF800000, 0x32200000,
-};
-#endif

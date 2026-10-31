@@ -18,8 +18,3 @@ OSYieldResult osSpTaskYielded(OSTask *tp)
     return selected_bit;
 }
 
-#if defined(VERSION_US)
-unsigned int k_SptaskyieldedEncodedWords[1] = {
-    0x5F624475,
-};
-#endif

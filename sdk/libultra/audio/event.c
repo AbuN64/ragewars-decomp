@@ -147,7 +147,3 @@ void alEvtqFlushType(ALEventQueue *previousNode, s16 eventType) {
     osSetIntMask(saved);
 }
 
-#if defined(VERSION_US)
-char s_EventIzeBrighText[8] =
-    "izeBrigh";
-#endif

@@ -4,7 +4,3 @@
 #define LIBGCC2_EXTERNAL_CLZ g_signedRemainderLeadingZeroTable
 #include "../../libgcc/libgcc2.inc.c"
 
-#if defined(VERSION_US)
-char k_Moddi3EncodedBytes[8] =
-    "\000\000\000\016CMen";
-#endif

@@ -36,8 +36,3 @@ s32 __osSiRawStartDma(s32 direction, void *dramAddr) {
     return 0;
 }
 
-#if defined(VERSION_US)
-unsigned int k_SirawdmaEncodedWords[2] = {
-    0x6D655200, 0x00580600,
-};
-#endif

@@ -234,7 +234,3 @@ int Wheel_PreviousDirectionSector(int sector) {
     return result;
 }
 
-#if defined(VERSION_US)
-char s_WheelSFXMAG60RText[12] =
-    "SFX_MAG_60_R";
-#endif

@@ -19,7 +19,3 @@ void alSndpStop(ALSndPlayer *soundPlayer) {
     alEvtqPostEvent(&((SoundPlayerEventStateView *)soundPlayer)->events, &stopEvent, 0);
 }
 
-#if defined(VERSION_US)
-char s_SndpstopRientTText[8] =
-    "rientT\000\000";
-#endif

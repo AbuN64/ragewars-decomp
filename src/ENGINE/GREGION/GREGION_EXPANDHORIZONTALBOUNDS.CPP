@@ -50,9 +50,3 @@ void Gregion_NoOperation(void)
 unsigned char g_GregionExpandhorizontalboundsTrailingBytesAlignmentPad[4] = { 0x00, 0x06, 0x00, 0x00 };
 #endif
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GregionExpandhorizontalboundsEncodedWordsAlignmentPad[1] = {
-    0x0000000A,
-};
-#endif

@@ -2,11 +2,6 @@
 #include "include_asm.h"
 
 /* 802B63E4_4.CPP */
-#if defined(VERSION_DE)
-RestLinkerAlignmentFill12 g_AlsavepullLinkerAlignmentFill83 = {
-    { 143, 162, 0, 0, 0, 2, 21, 131, 48, 66, 1, 255 },
-};
-#endif
 
 /* save_3.c */
 #if defined(VERSION_EU)

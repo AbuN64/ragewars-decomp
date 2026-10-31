@@ -9,9 +9,6 @@
 #include <PR/os_internal_si.h>
 
 /* 802C0390_6.CPP */
-#if defined(VERSION_DE)
-unsigned char g_ResetglobalintmaskTrailingBytes[8] = { 0x00, 0x80, 0x80, 0x21, 0xAF, 0xB5, 0x00, 0x24 };
-#endif
 
 /* 802C04C0.CPP */
 void __osResetGlobalIntMask(OSHWIntr interruptMask) {

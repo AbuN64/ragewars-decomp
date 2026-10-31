@@ -330,12 +330,6 @@ s32 Scene_ClassifyNearbySpecialActor(NearbySpecialActorView *player, CVector3 *r
     return 0;
 }
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_SceneUnpackimageswithhighboostEncodedWordsBlock1AlignmentPad[3] = {
-    0x24E7FFFF, 0x0065102B, 0x50400004,
-};
-#endif
 
 #if defined(VERSION_DE)
 float k_SceneUnpackimageswithhighboostEncodedWords[3] = {

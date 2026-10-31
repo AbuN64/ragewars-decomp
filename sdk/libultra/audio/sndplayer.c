@@ -353,11 +353,6 @@ const char g_soundPlayerAssertText[] = "EX";
 const char s_audioSndplayerText[] = "audio/sndplayer.c";
 #endif
 
-#if defined(VERSION_US)
-unsigned int k_SndplayerEncodedWordsBlock6[2] = {
-    0x73540000, 0x02000000,
-};
-#endif
 
 #if defined(VERSION_EU_X)
 unsigned int func_802B2CF0_de_padding_B3C58[1] = {

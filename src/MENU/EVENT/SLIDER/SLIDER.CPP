@@ -108,6 +108,3 @@ end:
 }
 #endif
 
-#if defined(VERSION_US)
-unsigned char g_SliderTrailingBytes[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
-#endif

@@ -89,18 +89,6 @@ void Nav_ResetObjectArrivalChase(void *actor) {
     Scaled_ResetBehaviorState(brain);
 }
 
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#if defined(VERSION_EU)
-unsigned int func_802131D8_de_padding_13DF8[2] = {
-    0x8E020030, 0x460005C6,
-};
-#endif
-#if defined(VERSION_EU_X)
-unsigned int func_802131D8_de_padding_13DF8[2] = {
-    0x8E220030, 0x10400006,
-};
-#endif
-#endif
 
 /* 800C6E84_2.CPP */
 #if defined(VERSION_DE)

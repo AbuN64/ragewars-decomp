@@ -9,11 +9,6 @@ const float k_lookatFloatConstantWords[7] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-RestLinkerAlignmentFill12 g_LookatBlock2LinkerAlignmentFill629 = {
-    { 0, 0, 0, 0, 65, 240, 0, 0, 0, 0, 0, 0 },
-};
-#endif
 
 #if defined(VERSION_DE)
 float k_LookatEncodedWordsBlock1[3] = {

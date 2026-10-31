@@ -451,31 +451,7 @@ s32 Option_UpdateOptionBit15Item(struct MenuOptionLabelView *item) {
     return 0;
 }
 
-#if defined(VERSION_DE)
-unsigned int func_8043DADC_de_padding_1A3ADC[1] = {
-    0x3C048012,
-};
-#endif
 
-#if defined(VERSION_US_REV1)
-unsigned int func_8043DADC_de_padding_1ABCBC[1] = {
-    0x8FBF0024,
-};
-#endif
 
-#if defined(VERSION_US)
-char func_8043DADC_de_padding_1A1CBC[4] =
-    "aSiz";
-#endif
 
-#if defined(VERSION_EU_X)
-unsigned int func_8043DADC_de_padding_12EAFC[1] = {
-    0x2A020004,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_8043E9CC_eu_padding_1B49CC[1] = {
-    0x1622005B,
-};
-#endif

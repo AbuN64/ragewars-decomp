@@ -250,26 +250,8 @@ const float g_rumble_EvaluateSpatialEffectNodeConstantWords[2] = {
     1.0f, 1.0f,
 };
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_RumbleEncodedWordsAlignmentPad[3] = {
-    0x000B0000, 0x00000012, 0x43414D45,
-};
-#endif
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_RumbleEncodedWordsBlock2AlignmentPad[3] = {
-    0x3F000000, 0x3B088889, 0x4F000000,
-};
-#endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_RumbleEncodedWordsBlock1AlignmentPad[3] = {
-    0xAC450000, 0x01201821, 0x28620002,
-};
-#endif
 
 #if defined(VERSION_DE)
 char s_RumbleNeConstrucText[12] =

@@ -26,8 +26,3 @@ double Libc_SignedLongLongToDoubleUsRev1(s64 value) {
 }
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int k_GfxGetconvertedcounterratioDataEncodedWords[2] = {
-    0x41800000, 0x3C8EFA36,
-};
-#endif

@@ -7,7 +7,3 @@ unsigned int osAiGetStatus(void) {
     return *(volatile unsigned int *)0xA450000C;
 }
 
-#if defined(VERSION_US)
-char s_AigetlenTPmeTinyText[12] =
-    "_t\015m_pmeTiny";
-#endif

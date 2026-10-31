@@ -23,22 +23,9 @@ int osSetTimer(OSTimer *node, OSTime initialDelay, OSTime repeatInterval, OSMesg
 }
 
 /* 802C0840_2.CPP */
-#if defined(VERSION_DE)
-unsigned char g_SettimerTrailingBytesBlock1[4] = { 0xAF, 0xBF, 0x00, 0x1C };
-#endif
 
 /* 802C0840.CPP */
-#if defined(VERSION_US)
-unsigned char g_SettimerTrailingBytes[4] = { 0x6C, 0x54, 0x00, 0x00 };
-#endif
 
 /* 802C0840_12.CPP */
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-/* Data separated from executable functions by the legacy split layout. */
-unsigned int func_802BBA2C_eu_x[1] = { 0x3C1AA430U };
-#endif
 
 /* 802C0840_5.CPP */
-#if defined(VERSION_EU)
-unsigned char g_SettimerTrailingBytesBlock2[4] = { 0x46, 0x1B, 0xCE, 0x42 };
-#endif

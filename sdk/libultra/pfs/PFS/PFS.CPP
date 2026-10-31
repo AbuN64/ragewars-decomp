@@ -415,13 +415,5 @@ s32 Pfs_SelectActiveBank(OSPfs *pfs)
 unsigned char g_PfsTrailingBytesBlock6[4] = { 0x52, 0x00, 0x00, 0x00 };
 #endif
 
-#if defined(VERSION_US)
-unsigned int k_PfsEncodedWords[1] = {
-    0x0000000A,
-};
-#endif
 
 /* 80447BB0_8.CPP */
-#if defined(VERSION_DE)
-unsigned char g_PfsTrailingBytesBlock5[8] = { 0x3C, 0x03, 0x00, 0x10, 0x8E, 0x42, 0x01, 0x00 };
-#endif

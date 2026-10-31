@@ -237,8 +237,3 @@ void Barrel_SpawnEffectsFromMask(Player *actor, s32 unused1, s32 effectMask, s32
     }
 }
 
-#if defined(VERSION_US)
-unsigned int k_BarrelSpawnflaggedeffectsEncodedWordsBlock1[1] = {
-    0x43524541,
-};
-#endif

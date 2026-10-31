@@ -13,11 +13,6 @@ const float k_DrvrnewEncodedWords[2] = {
 };
 #endif
 
-#if defined(VERSION_US)
-RestLinkerAlignmentFill8 g_DrvrnewBlock1LinkerAlignmentFill627 = {
-    { 200, 109, 2, 0, 8, 0, 12, 0 },
-};
-#endif
 
 #if defined(VERSION_EU)
 float k_DrvrnewEncodedWordsBlock2[2] = {

@@ -16,7 +16,3 @@ void alSndpDeallocate(ALSndPlayer *a, ALSndId b) {
     }
 }
 
-#if defined(VERSION_US)
-char s_SndpdeallocateCLoaderEntryText[12] =
-    "CLoaderEntry";
-#endif

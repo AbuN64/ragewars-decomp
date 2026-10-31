@@ -187,20 +187,5 @@ void guMtxL2F(float mf[4][4], Mtx *m) {
     } while (i < 4);
 }
 
-#if defined(VERSION_EU_X)
-unsigned int func_802B6DEC_de_padding_B7CCC[1] = {
-    0x54430001,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_802B6DEC_de_padding_B7C8C[1] = {
-    0x27BDFFD8,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_802B6DEC_de_padding_B79EC[1] = {
-    0xF7B50068,
-};
-#endif

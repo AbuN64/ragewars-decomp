@@ -142,12 +142,4 @@ s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index) {
     }
     return 0;
 }
-#if defined(VERSION_US)
-unsigned int k_AttacktargetEncodedWords[1] = {
-    0x4F506571,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned char g_AttacktargetTrailingBytes[4] = { 0x32, 0xEC, 0x15, 0x93 };
-#endif

@@ -1,7 +1,0 @@
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: func_8044632C_us_rev1_padding_1B432C */
-unsigned int g_PakEncodedWordsBlock2[1] = {
-    0x1440002A,
-};
-#endif

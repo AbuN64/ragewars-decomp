@@ -22,8 +22,3 @@ s32 Frontend_DispatchResidentActorTableEvent(ActorDefinitionHeader *actor, s32 e
 }
 #endif
 
-#if defined(VERSION_US)
-unsigned int func_804364E4_de_padding_19A6C4[3] = {
-    0x64655400, 0x000A0000, 0x00080032,
-};
-#endif

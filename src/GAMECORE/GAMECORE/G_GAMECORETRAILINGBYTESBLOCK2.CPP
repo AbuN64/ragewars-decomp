@@ -1,9 +1,6 @@
 #include "include_asm.h"
 
 /* 802BE040_19.CPP */
-#if defined(VERSION_EU)
-unsigned char g_GamecoreTrailingBytesBlock2[12] = { 0x27, 0xA5, 0x00, 0x18, 0x27, 0xA6, 0x00, 0x1A, 0x8F, 0xA8, 0x00, 0x54 };
-#endif
 
 /* 802C0390_18.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)

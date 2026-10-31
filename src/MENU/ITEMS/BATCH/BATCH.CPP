@@ -124,23 +124,3 @@ void Batch_InitSlotPool(SlotPool *pool, s32 owner) {
     pool->count = 0;
 }
 
-#if defined(VERSION_DE)
-unsigned int g_batchLinkGapWords[3] = {
-    0x14A20003, 0x00000000, 0x08112DD8,
-};
-#endif
-#if defined(VERSION_US)
-unsigned int g_batchConstantWords[3] = {
-    0x616D6552, 0x00000400, 0x00000800,
-};
-#endif
-#if defined(VERSION_EU)
-unsigned int g_batchConstantWordsBlock1[3] = {
-    0x14400048, 0x00000000, 0x93B10127,
-};
-#endif
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-unsigned int g_batchLinkGapWordsBlock1[3] = {
-    0x3C010002, 0x01010821, 0x8C30B40C,
-};
-#endif

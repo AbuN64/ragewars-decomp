@@ -8,9 +8,3 @@ char s_OvldatELoaderRText[8] =
     "eLoaderR";
 #endif
 /* 800C209C.CPP */
-#if defined(VERSION_EU_X)
-/* ROM-grounded data for eu-x; supplied-list member has no us-rev1 placement. */
-RestLinkerAlignmentFill4 g_Ovldat1LinkerAlignmentFill602 = {
-    { 64, 240, 0, 0 },
-};
-#endif

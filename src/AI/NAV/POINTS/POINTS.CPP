@@ -77,8 +77,3 @@ int Nav_FindSpecialLinkedCandidate(ObjNavFindSpecialLinkedCandidate *obj) {
     return 1;
 }
 
-#if defined(VERSION_DE)
-unsigned int k_PointsEncodedWords[3] = {
-    0x12F214AC, 0x4A120003, 0x9629070C,
-};
-#endif

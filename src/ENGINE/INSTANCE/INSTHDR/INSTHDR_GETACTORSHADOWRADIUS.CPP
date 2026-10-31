@@ -383,12 +383,6 @@ int InstHdr_GetActorMotionIndex(void *record) {
     return result;
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_InsthdrGetactorshadowradiusEncodedWordsAlignmentPad[3] = {
-    0x46540200, 0x00009410, 0x000B0000,
-};
-#endif
 
 /* 8024E130.CPP */
 /** Return the zero status used by callers at VRAM 0x8024E130. */

@@ -7,7 +7,3 @@ void __osSpSetStatus(unsigned int statusCommand) {
     *(volatile unsigned int *)0xA4040010 = statusCommand;
 }
 
-#if defined(VERSION_US)
-char s_startJumpMemberNameFragment[12] =
-    "\000\020m_StartJum";
-#endif

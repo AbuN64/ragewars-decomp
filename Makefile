@@ -48,6 +48,7 @@ $(Q)$(PPUNIT) $@ $(call shq,$(PP_FLAGS)) $(HDRKEY) $(STAMPREC) $(CPP) $(CPPFLAGS
 endef
 COMPILE_gcc_2_8_1_sn64 = @rotate $(@:.o=.s) $(@:.o=.s.prev) '&&' @compile $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(if $(FSPLIT),-ffunction-sections) $(@:.o=.i) -o $(@:.o=.s) '&&' @nonempty $(@:.o=.s) $(if $(NOALIGN),'&&' $(PASS)strip_align.py $(@:.o=.s) $(NOALIGN)) $(if $(HILO),'&&' $(PASS)hilo_hazard.py $(@:.o=.s)) '&&' @jumptable $(@:.o=.s) 80000000 '&&' @settle $(@:.o=.s) $(@:.o=.s.prev) '&&' $(if $(FSPLIT),@out $(@:.o=.n.s) $(ABUMAS) asn64 $(@:.o=.s) '&&' $(PASS)fsplit_pass.py $(@:.o=.n.s) $(@:.o=.f.s) $(POOLPHASE) '&&' $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.f.s) -o $@,$(ABUMAS) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@) '&&' $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@ $(if $(UNRELOC),'&&' $(PASS)unreloc_pass.py $@) $(if $(TEXTCUT),'&&' $(PASS)textcut_pass.py $@ $(TEXTCUT))
 # The [file] rows of config.toml.
+FILE.sdk/LIBSN/ := gcc_2_7_2_sn64
 FILE.sdk/MATH/ := gcc_2_8_1_sn64
 FILE.sdk/include/ := gcc_2_8_1_sn64
 FILE.sdk/libgcc/ := gcc_2_8_1_sn64
@@ -55,7 +56,6 @@ FILE.sdk/libgcc/_floatdisf.CPP := gcc_2_8_1_sn64
 CFLAGS.sdk/libgcc/_floatdisf.CPP := -mfp32
 OMIT.sdk/libgcc/_floatdisf.CPP := -mfp64
 FILE.sdk/libsn/ := gcc_2_7_2_sn64
-FILE.sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP := gcc_2_8_1_sn64
 FILE.sdk/libsn/libsn_spindelay_data.CPP := gcc_2_8_1_sn64
 FILE.sdk/libsn/libsn_writememorybyte.CPP := gcc_2_8_1_sn64
 FILE.sdk/libsn/nav_isballisticarcobstructed_data.CPP := gcc_2_8_1_sn64

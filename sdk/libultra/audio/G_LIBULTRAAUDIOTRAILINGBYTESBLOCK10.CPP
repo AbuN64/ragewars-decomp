@@ -1,4 +1,0 @@
-
-#if defined(VERSION_EU_X)
-unsigned char g_LibultraAudioTrailingBytesBlock10[8] = { 0x34, 0x42, 0x00, 0x02, 0x0C, 0x0A, 0xFB, 0xC5 };
-#endif

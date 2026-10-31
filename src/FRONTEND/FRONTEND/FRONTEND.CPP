@@ -27,8 +27,3 @@ char g_FrontendTrailingBytesBlock7[8] =
     "gHdrR\000\000";
 #endif
 
-#if defined(VERSION_US)
-unsigned int k_FrontendEncodedWordsBlock18[1] = {
-    0x0000000A,
-};
-#endif

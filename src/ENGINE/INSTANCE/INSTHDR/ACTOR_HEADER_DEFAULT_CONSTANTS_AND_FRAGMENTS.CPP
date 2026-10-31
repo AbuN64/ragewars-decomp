@@ -16,12 +16,6 @@ float k_ActorHeaderDefaultConstantsAndFragmentsEncodedWordsBlock2[2] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_ActorHeaderDefaultConstantsAndFragmentsEncodedWordsBlock1AlignmentPad[2] = {
-    0x8FB50024, 0x8FB40020,
-};
-#endif
 
 #if defined(VERSION_DE)
 float k_ActorHeaderDefaultConstantsAndFragmentsEncodedWords[2] = {

@@ -98,17 +98,7 @@ void Nav_AddPickupCategoryCosts(void) {
 }
 
 
-#if defined(VERSION_EU_X)
-unsigned int func_8020EF74_eu_x_padding_FB74[3] = {
-    0x1C400025, 0x00000000, 0x0C09D14D,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_8020EF74_eu_padding_FB74[3] = {
-    0x0C0829F4, 0x00452821, 0x08082800,
-};
-#endif
 
 #if defined(VERSION_US)
 const unsigned int k_RoutecostEncodedWords[2] = {

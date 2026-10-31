@@ -149,24 +149,5 @@ void __osDevMgrMain(void *argument) {
         }
     }
 }
-#if defined(VERSION_EU_X)
-unsigned int System_RunPiManager_padding_BA288[2] = {
-    0x02202821, 0x3C068015,
-};
-#endif
-#if defined(VERSION_US_REV1)
-unsigned int System_RunPiManager_padding_BF098[2] = {
-    0x02202821, 0x3C068015,
-};
-#endif
-#if VERSION_EU
-unsigned int System_RunPiManager_padding_BA248[2] = { 0xAFB00018, 0x00808021 };
-#endif
-#if VERSION_DE
-unsigned int System_RunPiManager_padding_B9FA8[2] = { 0x00808021, 0xAFB10014 };
-#endif
 
-#endif
-#if defined(VERSION_US)
-unsigned int System_RunPiManager_padding_B9ED8[2] = { 0x53535F48U, 0x4149525FU };
 #endif

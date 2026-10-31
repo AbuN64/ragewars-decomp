@@ -40,8 +40,3 @@ s32 _allocatePVoice(void *synth, void **selectedVoice, s16 requestedPriority) {
     return voiceStolen;
 }
 
-#if defined(VERSION_US)
-unsigned int k_AllocatepvoiceEncodedWords[2] = {
-    0x00000066, 0x00000004,
-};
-#endif

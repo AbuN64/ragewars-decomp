@@ -16,8 +16,3 @@ s32 __osSpSetPc(u32 pc) {
     return 0;
 }
 
-#if defined(VERSION_US)
-unsigned int k_SpsetpcEncodedWords[1] = {
-    0x5F4A756D,
-};
-#endif

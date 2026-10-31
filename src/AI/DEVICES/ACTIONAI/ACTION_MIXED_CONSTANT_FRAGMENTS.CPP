@@ -1,11 +1,6 @@
 #include "include_asm.h"
 
 /* 800C6B74_2.CPP */
-#if defined(VERSION_US)
-const unsigned int k_actionLinkGapWords[2] = {
-    0x00000800, 0x08000C00,
-};
-#endif
 
 /* 800C6E84_14.CPP */
 #if defined(VERSION_EU_X)

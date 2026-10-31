@@ -45,14 +45,4 @@ s32 Menu_DispatchSoundSliderEvent(void *eventTarget, s32 event, s32 itemId, s32 
     return 0;
 }
 
-#if defined(VERSION_EU_X)
-unsigned int func_8043A4DC_eu_x_padding_12A4DC[1] = {
-    0x0C10EB0C,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_804394DC_de_padding_19F4DC[1] = {
-    0x2624FFB8,
-};
-#endif

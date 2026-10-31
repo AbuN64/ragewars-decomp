@@ -356,8 +356,3 @@ loop_1:
     return result;
 }
 
-#if defined(VERSION_US)
-unsigned int k_PlayeraiRespawnfragtagplayerEncodedWords[3] = {
-    0x10000000, 0x01746000, 0x00009412,
-};
-#endif

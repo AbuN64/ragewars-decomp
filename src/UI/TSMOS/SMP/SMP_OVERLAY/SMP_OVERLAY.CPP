@@ -41,12 +41,6 @@ extern void Node_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuC
 
 /* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_overlaySlotEventIds, an actor kind at g_overlaySlotEventActorKinds and a handler at g_overlaySlotEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-#if defined(VERSION_DE)
-#elif defined(VERSION_EU)
-#elif defined(VERSION_EU_X)
-#elif defined(VERSION_US)
-#elif defined(VERSION_US_REV1)
-#endif
 
 /* Draws the child at 0x8 of window window with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
@@ -388,9 +382,6 @@ s32 SmpOverlay_FreeEventObject(void *allocation) {
 }
 
 /* 8041BEA8_5.CPP */
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#else
-#endif
 extern SlotDialog *g_pakDialog;
 
 /* Calls Widget_SetWidgetFlag40_EquipActivateequipmentpanel with flag 1 on each of the list's items (count at 0x48, items from 0x4C) and
@@ -475,16 +466,7 @@ extern void Scene_LoadLevelResources(void *, s32, s32);
 
 /* The slot-error scalar is real external storage in every ROM version: the de cart writes
    800DF4C4, eu writes 800EFB34, eu-x writes 800EACF4, us writes 800DE174, us-rev1 800E3514. */
-#if defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_US)
-#elif defined(VERSION_EU_X)
-#else
-#endif
 
-#if defined(VERSION_EU)
-#elif defined(VERSION_DE)
-#elif defined(VERSION_US)
-#else
-#endif
 
 /* Dispatches event eventId through this file's 12-byte handler table, whose rows hold an event at g_pakDialogEventIds, an actor kind at g_pakDialogEventActorKinds and a handler at g_pakDialogEventHandlers: the first row whose event equals eventId and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -820,11 +802,6 @@ s32 SmpOverlay_DispatchPakDialogEvent(void *widget, s32 eventId, s32 eventData0,
     return 0;
 }
 
-#if defined(VERSION_US)
-unsigned int k_SmpOverlayEncodedWords[1] = {
-    0x00941000,
-};
-#endif
 
 /* 800E1470_2.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -846,6 +823,3 @@ unsigned char k_SmpOverlayEncodedBytes[13] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-/* bytes live in the preceding array */
-#endif

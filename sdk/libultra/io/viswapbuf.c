@@ -17,7 +17,3 @@ void osViSwapBuffer(void *framebuffer) {
     __osRestoreInt(savedMask);
 }
 
-#if defined(VERSION_US)
-char s_ViswapbufCharAnimRText[12] =
-    "_CharAnimR\000\000";
-#endif

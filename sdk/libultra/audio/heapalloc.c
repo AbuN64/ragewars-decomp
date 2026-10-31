@@ -19,7 +19,3 @@ void    *alHeapDBAlloc(u8 *a, s32 b, ALHeap *c, s32 d, s32 e) {
     return (s32) allocatedAddress;
 }
 
-#if defined(VERSION_US)
-char s_CopyOMParticText[8] =
-    "OMPartic";
-#endif

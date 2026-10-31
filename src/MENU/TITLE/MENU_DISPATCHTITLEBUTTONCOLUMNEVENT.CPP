@@ -40,11 +40,6 @@ s32 Menu_DispatchTitleButtonOffsetEvent(void *widget, s32 eventId, s32 eventData
 }
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int func_804389A8_eu_x_padding_1289A8[2] = {
-    0xACA20188, 0x8FBF0020,
-};
-#endif
 
 /* 80408AC4_36.CPP */
 #if defined(VERSION_DE)
@@ -86,5 +81,4 @@ s32 Menu_DispatchTitleButtonColumnEvent(void *widget, s32 eventId, s32 eventData
     return 0;
 }
 
-unsigned char g_MenuDispatchtitlebuttoncolumneventTrailingBytes[8] = { 0x24, 0x05, 0x00, 0x67, 0x00, 0x00, 0x30, 0x21 };
 #endif

@@ -13,9 +13,3 @@ void Defs_ToggleSavedFlag(void) {
     g_pointLightSavedBufferOffset = 0;
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_DefsTogglesavedflagEncodedWordsAlignmentPad[2] = {
-    0x63740000, 0x0000940A,
-};
-#endif

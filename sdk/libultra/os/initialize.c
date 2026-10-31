@@ -142,10 +142,5 @@ int __osSiRawWriteIo(u32 deviceAddress, u32 data) {
     return 0;
 }
 
-#if defined(VERSION_US)
-unsigned int k_SirawwriteEncodedWords[1] = {
-    0x7265656E,
-};
-#endif
 
 const char s_siRawWriteSourcePath[16] = "io/sirawwrite.c";

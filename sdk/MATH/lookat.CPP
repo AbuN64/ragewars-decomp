@@ -88,10 +88,6 @@ void guLookAtF(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
     matrix[3][3] = one;
 }
 
-#if defined(VERSION_US)
-char k_LookatEncodedBytes[8] =
-    "ODER\000\000\001\000";
-#endif
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)

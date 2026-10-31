@@ -55,14 +55,4 @@ s32 Achieve_DispatchResultsActorEvent(ActorDefinitionHeader *actor, s32 event, s
     return 0;
 }
 
-#if defined(VERSION_US)
-unsigned int s_nterText[1] = {
-    0x6E746572,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_80438F0C_de_padding_19EF0C[1] = {
-    0x0C106960,
-};
-#endif

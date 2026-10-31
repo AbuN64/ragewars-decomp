@@ -11,19 +11,7 @@ char s_CcollisionIntersectfrontplanefractionDwChText[8] =
     "\000\016m_dwCh";
 #endif
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_CcollisionIntersectfrontplanefractionEncodedWordsBlock3AlignmentPad[2] = {
-    0x47800000, 0x4F000000,
-};
-#endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_CcollisionIntersectfrontplanefractionEncodedWordsBlock2AlignmentPad[2] = {
-    0x8E420028, 0x8E440044,
-};
-#endif
 
 #if defined(VERSION_DE)
 float k_CcollisionIntersectfrontplanefractionEncodedWordsBlock1[2] = {

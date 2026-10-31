@@ -12,12 +12,6 @@ float k_AudiomgrInitEncodedWordsBlock2[2] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_AudiomgrInitEncodedWordsBlock1AlignmentPad[2] = {
-    0x95820000, 0x00021027,
-};
-#endif
 
 #if defined(VERSION_DE)
 float k_AudiomgrInitEncodedWords[2] = {

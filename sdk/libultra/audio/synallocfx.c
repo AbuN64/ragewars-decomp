@@ -22,8 +22,3 @@ ALFxRef *alSynAllocFX(ALSynth *synth, s16 busNumber, ALSynConfig *config, ALHeap
     return (s32)synth->auxBus + scaled + 0x20;
 }
 
-#if defined(VERSION_US)
-unsigned int k_SynallocfxEncodedWords[3] = {
-    0x03000000, 0x0000116D, 0x5F416D6D,
-};
-#endif

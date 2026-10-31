@@ -5,9 +5,6 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
 /* 804221A0_8.CPP */
-#if defined(VERSION_DE)
-unsigned char g_MenuInitializeoptionssceneTrailingBytes[8] = { 0x8F, 0xBF, 0x00, 0x18, 0x00, 0x00, 0x10, 0x21 };
-#endif
 
 /* 804221A0_2.CPP */
 /* Sets up the match display: calls Menu_ConfigureOptionsCamera, starts the objects at g_frontendScreenStatus and 0x48 bytes

@@ -14,8 +14,6 @@
 #include "COMMON/RESPONSE.H"
 
 /* 802ABDBC_16.CPP */
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#endif
 
 extern void Player_AddAmmo(void *, s16, s16);
 
@@ -128,9 +126,4 @@ int Pickup_HandleItemUpdate(void) {
     return 1;
 }
 
-#if defined(VERSION_US)
-unsigned int k_PickupApplyammobundleEncodedWords[1] = {
-    0x5F437572,
-};
-#endif
 

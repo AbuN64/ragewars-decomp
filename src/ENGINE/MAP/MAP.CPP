@@ -28,7 +28,3 @@ s32 Map_ReserveEntries(void *map, s32 entryCount) {
     return firstReservedEntry;
 }
 
-#if defined(VERSION_US)
-char k_MapEncodedBytes[12] =
-    "s_t\004.eos\000\000\000\000";
-#endif

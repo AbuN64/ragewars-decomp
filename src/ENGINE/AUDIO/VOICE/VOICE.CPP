@@ -892,12 +892,6 @@ s32 *SoundVoicePool_GetGlobalState(void) {
 void SoundVoicePool_GetGlobalStateNoOp(void) {
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_VoiceEncodedWordsBlock1AlignmentPad[3] = {
-    0x72000000, 0x00940A00, 0x08001400,
-};
-#endif
 
 /* 800C9068.CPP */
 #if !(defined(VERSION_US_REV1))

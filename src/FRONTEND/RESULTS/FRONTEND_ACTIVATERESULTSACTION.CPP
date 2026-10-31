@@ -180,8 +180,3 @@ s32 Frontend_DispatchResultsEvent(void *eventObject, s32 eventId, s32 eventPaylo
     return 0;
 }
 
-#if defined(VERSION_DE)
-unsigned int func_8042D9E8_de_padding_1939E8[2] = {
-    0x8C6313D0, 0x00402021,
-};
-#endif

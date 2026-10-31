@@ -9,16 +9,6 @@
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 #include "MULTI/ITEM.H"
 
-#if defined(VERSION_DE)
-unsigned int g_multiItemTextPadding[1] = {
-    0x00008021,
-};
-#endif
-#if defined(VERSION_EU_X)
-unsigned int g_multiItemTextPadding[1] = {
-    0x8FB100B4,
-};
-#endif
 
 void Multi_DrawPlayerItemAvailability(struct MultiplayerItemAvailabilityView *item, MenuOptionBox *box, s32 unused, struct HolderMultiIsPlayerItemAvailable *context) {
     struct ItemDef *def = item->def;

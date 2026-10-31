@@ -31,7 +31,3 @@ void SetN64_RecycleEffectNode(void *container, EffectPoolNode *node) {
     }
 }
 
-#if defined(VERSION_US)
-char s_SetnRecycleeffectnodeEENSPAUSESCText[12] =
-    "EENS\\PAUSESC";
-#endif

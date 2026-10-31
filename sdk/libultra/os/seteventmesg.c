@@ -6,9 +6,6 @@
 #include <PR/os_internal_si.h>
 
 /* 802C0390_9.CPP */
-#if defined(VERSION_DE)
-unsigned char g_SeteventmesgTrailingBytes[4] = { 0x0C, 0x0A, 0xF3, 0xC8 };
-#endif
 
 /* seteventmesg.c */
 extern struct IntPair g_osEventMessageBindings[];

@@ -99,14 +99,4 @@ s32 Frontend_DispatchResidentActorEvent(void *menuActor, s32 eventKind, s32 even
 }
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int func_804364E4_de_padding_12734C[1] = {
-    0x27BDFFE8,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_804364E4_de_padding_1AD214[3] = {
-    0x000210C0, 0x00521021, 0x00021880,
-};
-#endif

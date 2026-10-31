@@ -8,7 +8,3 @@ void alSynSetPriority(ALSynth *unused, ALVoice *object, s16 value) {
     record->priority = value;
 }
 
-#if defined(VERSION_US)
-char s_SynsetpriorityNCurrText[8] =
-    "\020m_nCurr";
-#endif

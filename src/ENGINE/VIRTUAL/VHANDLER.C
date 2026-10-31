@@ -711,19 +711,7 @@ void Virtual_FinishPageJob(ResourcePageJob *req) {
     osSendMesg(g_pagerPendingQueue, req, 1);
 }
 
-#if defined(VERSION_EU_X)
-/* Eight stale buffer bytes fill the code object to its next 16-byte boundary. */
-unsigned int g_VhandlerObjectAlignmentPadEuX[2] = {
-    0x0C09C7E5, 0x02203021,
-};
-#endif
 
-#if defined(VERSION_DE)
-/* Eight stale buffer bytes fill the code object to its next 16-byte boundary. */
-unsigned int g_VhandlerObjectAlignmentPadDe[2] = {
-    0x27BDFFF0, 0x3C01800D,
-};
-#endif
 
 /* VHANDLER_1.CPP */
 #if !(defined(VERSION_US_REV1))

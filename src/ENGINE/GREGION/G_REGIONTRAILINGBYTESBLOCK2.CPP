@@ -1,4 +1,0 @@
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char g_RegionTrailingBytesBlock2AlignmentPad[12] = { 0xAF, 0xB2, 0x00, 0xD8, 0x00, 0xA0, 0x90, 0x21, 0xAF, 0xBF, 0x00, 0xE0 };
-#endif

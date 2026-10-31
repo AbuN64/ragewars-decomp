@@ -41,8 +41,3 @@ void __osPiRelAccess(void) {
     osSendMesg(&g_peripheralDmaAccessQueue, 0, 0);
 }
 
-#if defined(VERSION_US)
-unsigned int k_CreateEncodedWords[2] = {
-    0x70000000, 0x66000000,
-};
-#endif

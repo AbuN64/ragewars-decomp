@@ -237,8 +237,3 @@ unsigned int func_802B6300_de_padding_B6EA8[1] = {
 };
 #endif
 
-#if defined(VERSION_DE)
-unsigned int func_802B6378_de_padding_B6F78[2] = {
-    0x0080A821, 0xAFB30024,
-};
-#endif

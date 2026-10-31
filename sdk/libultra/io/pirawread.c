@@ -22,7 +22,3 @@ s32 osPiRawReadIo(s32 deviceOffset, s32 *outputWord) {
     return 0;
 }
 
-#if defined(VERSION_US)
-char s_PirawreadModeInfoTText[12] =
-    "ModeInfo_t\004.";
-#endif

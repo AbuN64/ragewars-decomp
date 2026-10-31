@@ -131,6 +131,3 @@ s32 osPfsFindFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8
 }
 
 /* 80447BB0_7.CPP */
-#if defined(VERSION_DE)
-unsigned char g_OspfsrepairidTrailingBytes[12] = { 0x00, 0xC0, 0xA0, 0x21, 0x0C, 0x11, 0x23, 0x21, 0xA2, 0x40, 0x00, 0x65 };
-#endif

@@ -11,9 +11,6 @@
 #include <PR/os_internal_si.h>
 
 /* 802C0840_3.CPP */
-#if defined(VERSION_DE)
-unsigned char g_StartthreadTrailingBytes[12] = { 0x10, 0x40, 0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x54, 0x45, 0x00, 0x04 };
-#endif
 
 /* startthread.c */
 extern ThreadNode *__osRunningThread;
@@ -57,7 +54,3 @@ state_done:
     __osRestoreInt(token);
 }
 
-#if defined(VERSION_US)
-char s_StartthreadEamTriangleMText[12] =
-    "eamTriangleM";
-#endif

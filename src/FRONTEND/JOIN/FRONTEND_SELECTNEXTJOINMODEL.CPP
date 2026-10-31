@@ -29,15 +29,9 @@ s32 Frontend_DispatchUsJoinOptionsEvent(ActorDefinitionHeader *actor, s32 event,
 }
 #endif
 
-#if defined(VERSION_US)
-char s_FrontendSelectnextjoinmodelIANIMGText[8] =
-    "I_ANIM_G";
-#endif
 
 /* 8041DF04_5.CPP */
 #if !(defined(VERSION_US))
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#endif
 
 /* Steps the model of the join request the screen g_courseOptionsScreen edits (index at 0x14) back on event 1
    unless Menu_GetPreviousScreenOwner reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17
@@ -92,8 +86,6 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
     return 0;
 }
 
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#endif
 
 /* Steps the model of the join request the screen g_courseOptionsScreen edits (index at 0x14) forward on event 1
    unless Menu_GetPreviousScreenOwner reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17

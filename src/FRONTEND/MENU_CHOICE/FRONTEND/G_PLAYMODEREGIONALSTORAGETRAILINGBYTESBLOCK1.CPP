@@ -1,3 +1,0 @@
-#if defined(VERSION_DE)
-unsigned char g_PlaymodeRegionalStorageTrailingBytesBlock1[8] = { 0xAE, 0xE2, 0x00, 0x00, 0x0C, 0x10, 0x98, 0x8D };
-#endif

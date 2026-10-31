@@ -21,8 +21,3 @@ void Nav_RequestRandomArmedWeapon(void *brain) {
     }
 }
 
-#if defined(VERSION_EU_X)
-unsigned int func_80210198_eu_padding_10D98[2] = {
-    0xAE020318, 0x8E020064,
-};
-#endif

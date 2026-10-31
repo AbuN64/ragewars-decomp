@@ -8,9 +8,6 @@
 #include <PR/os_internal_si.h>
 
 /* 802BFD80_2.CPP */
-#if defined(VERSION_DE)
-unsigned char g_CreatemesgqueueTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 0x00, 0x80, 0x80, 0x21, 0x00, 0xE0, 0x48, 0x21 };
-#endif
 
 /* createmesgqueue.c */
 void osCreateMesgQueue(OSMesgQueue *mq, OSMesg *msg, s32 msgCount) {
@@ -22,7 +19,3 @@ void osCreateMesgQueue(OSMesgQueue *mq, OSMesg *msg, s32 msgCount) {
     mq->msg = msg;
 }
 
-#if defined(VERSION_US)
-char s_CreatemesgqueueGameRumbleTText[12] =
-    "GameRumble_t";
-#endif

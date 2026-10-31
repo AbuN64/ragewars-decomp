@@ -17,8 +17,3 @@ s32 Match_DispatchEuMatchMenuEvent(MenuWidget *pThis, s32 event, s32 eventPayloa
 }
 #endif
 
-#if defined(VERSION_EU)
-unsigned int func_804291D0_de_padding_19FD2C[1] = {
-    0x46000802,
-};
-#endif

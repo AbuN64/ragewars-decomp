@@ -4,9 +4,6 @@
 #include <ultra64.h>
 
 /* 802BE040_7.CPP */
-#if defined(VERSION_DE)
-unsigned char g_PiRawDmaAndLinkGapTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 0x00, 0x80, 0x80, 0x21, 0xAF, 0xB2, 0x00, 0x18 };
-#endif
 
 /* 802BE040_57.CPP */
 /* osEPiRawStartDma, drafted from ultralib src/io/epirawdma.c with the 2.0I EPI_SYNC of PRinternal/piint.h. */
@@ -49,8 +46,3 @@ s32 __osEPiRawStartDma(OSPiHandle *pihandle, s32 direction, u32 devAddr, void *d
     return 0;
 }
 
-#if defined(VERSION_US)
-unsigned int k_PiRawDmaAndLinkGapEncodedWords[3] = {
-    0x00080018, 0x001C0000, 0x0000000E,
-};
-#endif

@@ -60,7 +60,3 @@ u8 __osContDataCrc(u8 *data)
     return temp;
 }
 
-#if defined(VERSION_US)
-char k_ContcrcEncodedBytes[8] =
-    "MODER\000\000\024";
-#endif

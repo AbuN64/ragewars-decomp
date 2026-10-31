@@ -1,4 +1,0 @@
-
-#if defined(VERSION_DE)
-unsigned char g_MenuExpandfloathighwordTrailingBytes[8] = { 0x24, 0x02, 0x07, 0xCF, 0x10, 0x82, 0x00, 0x0D };
-#endif

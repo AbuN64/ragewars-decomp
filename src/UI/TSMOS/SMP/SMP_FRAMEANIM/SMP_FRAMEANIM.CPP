@@ -240,13 +240,4 @@ s32 SmpFrameAnim_DestroyController(void *allocation) {
     return 0;
 }
 
-#if defined(VERSION_US)
-char func_80419B8C_us_padding_17DB8C[4] =
-    "UND_";
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_80419F4C_eu_padding_18FF4C[1] = {
-    0x02221023,
-};
-#endif

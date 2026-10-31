@@ -67,8 +67,4 @@ f32 Rumble_SamplePackedFloatRange(s32 packedRange) {
     return *(f32 *) &baseFloatBits + (((f32) randomFraction * *(f32 *) &rangeFloatBits) * g_packedFloatRandomScale);
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char g_MattableTrailingBytesAlignmentPad[4] = { 0x08, 0x00, 0x08, 0x00 };
-#endif
 

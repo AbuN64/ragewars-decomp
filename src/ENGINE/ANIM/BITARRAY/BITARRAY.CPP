@@ -246,12 +246,6 @@ u32 Bitarray_GetRequiredBitCount(s32 value) {
     return highestSetBit;
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_BitarrayEncodedWordsAlignmentPad[2] = {
-    0x04000000, 0x01000400,
-};
-#endif
 
 /* ROM-grounded data: rodata/unresolved/800C9290 */
 const float g_motionRotationQuantizationScale_StorageWords[2] = {

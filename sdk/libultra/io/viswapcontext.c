@@ -88,12 +88,4 @@ void __osViSwapContext(void)
     *__osViNext = **curr;
 }
 
-#if defined(VERSION_US)
-unsigned int k_ViDataEncodedWords[1] = {
-    0x003C0000,
-};
-#endif
 
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-unsigned char g_ViTrailingBytesBlock1[4] = { 0xA4, 0x65, 0x00, 0x10 };
-#endif

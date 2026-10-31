@@ -340,16 +340,4 @@ float k_LinkDispatchmatchingtriggersEncodedWords[3] = {
 
 /* 800C9C0C.CPP */
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_LinkDispatchmatchingtriggersEncodedWordsBlock2AlignmentPad[3] = {
-    0x00000000, 0x43300000, 0x00000000,
-};
-#endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_LinkDispatchmatchingtriggersEncodedWordsBlock1AlignmentPad[3] = {
-    0xC4400000, 0x24A20001, 0x00402821,
-};
-#endif

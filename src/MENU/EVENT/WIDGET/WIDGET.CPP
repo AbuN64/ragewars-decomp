@@ -46,7 +46,3 @@ void Event_DrawClippedWidgetChildren(void *widget, Args args) {
 }
 #endif
 
-#if defined(VERSION_US)
-char s_prefText[4] =
-    "Pref";
-#endif

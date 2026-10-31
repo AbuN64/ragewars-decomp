@@ -596,15 +596,6 @@ void Particle_FindNearestForeignEffectDistance(EffectSystem *effectSystem, Level
     }
 }
 
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_ParticleSpawninterpolatedtrailObjectAlignmentPadDe1[1] = {
-    0x0C0A145C,
-};
-#endif
 
 /* 800C9F80.CPP */
 
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/g_Particle_SpawnInterpolatedTrailConstantsUsRev1_ParticleSpawninterpolatedtrail.c */
-#endif

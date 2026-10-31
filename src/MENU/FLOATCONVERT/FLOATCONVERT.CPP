@@ -30,14 +30,4 @@ float Menu_ExpandFloatHighWord(int floatHighBits) {
 }
 #endif
 
-#if defined(VERSION_US)
-unsigned int g_floatConvertTextPadding[2] = {
-    0x65520000, 0x5F000000,
-};
-#endif
 
-#if defined(VERSION_EU_X)
-unsigned int g_floatConvertTextPadding[2] = {
-    0x00A0A821, 0xAFB70134,
-};
-#endif

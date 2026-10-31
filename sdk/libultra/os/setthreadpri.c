@@ -44,7 +44,3 @@ void osSetThreadPri(OSThread *t, s32 pri)
     __osRestoreInt(saveMask);
 }
 
-#if defined(VERSION_US)
-char s_SetthreadpriStBotTBoText[12] =
-    "stBot_t\005m_Bo";
-#endif

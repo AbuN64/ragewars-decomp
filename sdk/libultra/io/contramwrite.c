@@ -112,8 +112,3 @@ unsigned int func_802B8AA0_de_padding_B9768[1] = {
 };
 #endif
 
-#if defined(VERSION_US)
-unsigned int k_ContramwriteEncodedWords[1] = {
-    0x0011504C,
-};
-#endif

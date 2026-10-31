@@ -115,28 +115,11 @@ Acmd *_decodeChunk(Acmd *ptr, ALLoadFilter48_2 *f, s32 tsam, s32 nbytes, s16 out
     return ptr;
 }
 
-#if defined(VERSION_US)
-unsigned int k_LoadEncodedWords[1] = {
-    0x72696453,
-};
-#endif
 
 /* 802C6A00_18.CPP */
-#if defined(VERSION_US_REV1)
-unsigned char g_LoadTrailingBytesBlock3[4] = { 0x45, 0x00, 0x00, 0x08 };
-#endif
 
 /* 802C6A00_19.CPP */
-#if defined(VERSION_EU_X)
-unsigned char g_LoadTrailingBytesBlock2[4] = { 0x45, 0x00, 0x00, 0x08 };
-#endif
 
 /* 802C6A00_2.CPP */
-#if defined(VERSION_DE)
-unsigned char g_LoadTrailingBytes[4] = { 0x3C, 0x04, 0x80, 0x0D };
-#endif
 
 /* 802C6A00_3.CPP */
-#if defined(VERSION_EU)
-unsigned char g_LoadTrailingBytesBlock1[4] = { 0xAF, 0xBF, 0x00, 0x18 };
-#endif

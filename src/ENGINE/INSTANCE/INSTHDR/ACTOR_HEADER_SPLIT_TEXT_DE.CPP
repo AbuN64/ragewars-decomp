@@ -1,4 +1,0 @@
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char g_ActorHeaderSplitTextDeTrailingBytesAlignmentPad[12] = { 0x24, 0x02, 0x00, 0x03, 0xAF, 0xBF, 0x00, 0x2C, 0xAF, 0xB2, 0x00, 0x28 };
-#endif

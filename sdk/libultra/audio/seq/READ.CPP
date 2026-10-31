@@ -46,12 +46,5 @@ s32 read32(ALSeq *sequenceObject) {
     return (b0 << 24) | (b1 << 16) | (b2 << 8) | b3;
 }
 
-#if defined(VERSION_US)
-char s_ReadMemEndTText[12] =
-    "MemEndT\000\000\010\000\000";
-#endif
 
 /* 802B243C_2.CPP */
-#if defined(VERSION_DE)
-unsigned char g_ReadTrailingBytes[12] = { 0x10, 0x60, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x8C, 0x82, 0x00, 0x04 };
-#endif

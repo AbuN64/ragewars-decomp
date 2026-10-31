@@ -6,20 +6,5 @@ const RestvideoScaleUnsignedBias_StorageWordsLayout386 g_videoScaleUnsignedBias_
     { 3e+01f, 0.0f, 2.1474836e+09f },
 };
 
-#if defined(VERSION_US)
-RestLinkerAlignmentFill4 g_VideoScaleUnsignedBiasLinkerAlignmentFill387 = {
-    { 0, 15, 83, 77 },
-};
-#endif
 
-#if defined(VERSION_EU)
-RestLinkerAlignmentFill4 g_VideoScaleUnsignedBiasThirtyLinkerAlignmentFill388 = {
-    { 65, 240, 0, 0 },
-};
-#endif
 
-#if defined(VERSION_DE)
-RestLinkerAlignmentFill4 g_VideoScaleUnsignedBiasBlock1LinkerAlignmentFill389 = {
-    { 114, 101, 97, 100 },
-};
-#endif

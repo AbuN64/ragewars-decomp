@@ -210,8 +210,3 @@ s32 Player_DispatchAlternatePlayerSettingsEvent(void *eventObject, s32 eventId, 
     return 0;
 }
 
-#if defined(VERSION_EU_X)
-unsigned int func_80437304_de_padding_12826C[1] = {
-    0xAC6201C0,
-};
-#endif

@@ -323,12 +323,6 @@ float Control_SampleEffectCurve(SampledEffectCurveState *p) {
     return 0.0f;
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_ControlCycleactorsnapshotmodeEncodedWordsBlock1AlignmentPad[1] = {
-    0x00009666,
-};
-#endif
 
 
 /* 800C9400.CPP */

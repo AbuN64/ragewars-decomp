@@ -46,18 +46,4 @@ s32 corrupted(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache) {
 }
 #endif
 
-#if defined(VERSION_EU)
-unsigned char g_PfsCountpagereferencesTrailingBytes[8] = { 0x8C, 0x82, 0x01, 0xCC, 0x14, 0x40, 0x00, 0x03 };
-#endif
 
-#if defined(VERSION_DE) || defined(VERSION_US)
-#if defined(VERSION_DE)
-unsigned int func_80447818_de_padding_1AD818[2] = {
-    0xAFB1002C, 0x3C138015,
-};
-#endif
-#if defined(VERSION_US)
-char func_80447818_de_padding_1AD818[8] =
-    "veDeathA";
-#endif
-#endif

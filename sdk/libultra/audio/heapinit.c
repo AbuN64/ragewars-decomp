@@ -18,6 +18,3 @@ void alHeapInit(ALHeap *heapStorage, u8 *base, s32 byteCount) {
 }
 #endif
 
-#if defined(VERSION_EU)
-unsigned char g_HeapinitTrailingBytes[12] = { 0x14, 0x86, 0xFF, 0xFC, 0x24, 0x63, 0x00, 0x14, 0x00, 0x00, 0x80, 0x21 };
-#endif

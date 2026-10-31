@@ -94,15 +94,3 @@ void Nav_ResetPatrolRouteSelection(void *object) {
 }
 #endif
 
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#if defined(VERSION_EU)
-unsigned int func_80212FBC_de_padding_13BF4[3] = {
-    0x4600B306, 0x4600B03C, 0x00000000,
-};
-#endif
-#if defined(VERSION_EU_X)
-unsigned int func_80212FBC_de_padding_13BF4[3] = {
-    0xA2220035, 0x822300CA, 0x10650004,
-};
-#endif
-#endif

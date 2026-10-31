@@ -381,8 +381,4 @@ int SmpButton_DestroyButtonController(void *object)
     return 0;
 }
 
-#if defined(VERSION_US)
-char k_SmpButtonEncodedWords[4] =
-    "MOVE";
-#endif
 

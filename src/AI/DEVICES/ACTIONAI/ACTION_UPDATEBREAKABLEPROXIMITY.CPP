@@ -363,17 +363,6 @@ void Actionai_DrawFadedActor(FadedActorRenderView *actor, struct ActionFadeInput
 }
 
 
-#if defined(VERSION_DE) || defined(VERSION_US)
-#if defined(VERSION_DE)
-unsigned int func_80204868_de_padding_5468[2] = {
-    0xF041C0A8, 0xC1C218FD,
-};
-#endif
-#if defined(VERSION_US)
-char func_80204868_de_padding_5468[8] =
-    "ES\004.eosR";
-#endif
-#endif
 
 /* 800C6B5C.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)

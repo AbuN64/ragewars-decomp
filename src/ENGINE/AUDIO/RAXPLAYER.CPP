@@ -185,22 +185,12 @@ void Audio_StopDialogPlayerUnlocked(void *dialogPlayer) {
     }
 }
 
-#if defined(VERSION_US)
-char s_RaxplayerEHAVIORText[8] =
-    "EHAVIOR_";
-#endif
 
 /* ROM-grounded data: src/g_audio_LoadDialogMetadataConstantWords_Raxplayer.c */
 const float g_audio_LoadDialogMetadataConstantWords[3] = {
     3.0e+01f, 0.0f, 0.01f,
 };
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_RaxplayerEncodedWordsBlock1AlignmentPad[3] = {
-    0x8E740020, 0x186000DD, 0x02A08821,
-};
-#endif
 
 #if defined(VERSION_DE)
 float k_RaxplayerEncodedWords[3] = {

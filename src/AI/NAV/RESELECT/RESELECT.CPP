@@ -56,20 +56,5 @@ s32 Reselect_ChooseWeightedAttackBehavior(WeightSource *weights) {
     return 5;
 }
 
-#if defined(VERSION_EU_X)
-unsigned int k_ReselectPrologueInstructionWordsEuX[3] = {
-    0x3C128014, 0x265212A4, 0xAFBF001C,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_8020DDF4_eu_padding_E9F4[3] = {
-    0x8E220304, 0x10400012, 0x00000000,
-};
-#endif
 
-#if defined(VERSION_US_REV1)
-unsigned int k_ReselectPrologueInstructionWordsUsRev1[3] = {
-    0x3C128014, 0x2652B364, 0xAFBF001C,
-};
-#endif

@@ -271,14 +271,4 @@ s32 _timeToSamplesNoRound(SynthOutputRateView *synth, s32 microseconds) {
     return (s32)v;
 }
 
-#if defined(VERSION_EU_X)
-unsigned int func_802B40D4_eu_x_padding_B4CD4[3] = {
-    0x00021040, 0x8623001A, 0x3C01800E,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_802B3DF4_de_padding_B49F4[3] = {
-    0xAFB40028, 0x00A0A021, 0xAFB30024,
-};
-#endif

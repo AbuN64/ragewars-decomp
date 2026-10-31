@@ -64,8 +64,3 @@ void Frontend_DrawChildListWithClip(MenuWidget *widget, sm_dldc args) {
 #endif
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int func_8040CB3C_eu_x_padding_FCB3C[1] = {
-    0x4601A501,
-};
-#endif

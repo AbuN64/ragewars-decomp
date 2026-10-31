@@ -25,14 +25,4 @@ s32 osPiGetCmdQueue(void)
   return 0;
 }
 
-#if defined(VERSION_EU)
-unsigned int func_802B8DC8_de_padding_B9C68[2] = {
-    0x46010002, 0x3C01800D,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_802B8DC8_de_padding_B99C8[2] = {
-    0x0080A021, 0xAFB5002C,
-};
-#endif

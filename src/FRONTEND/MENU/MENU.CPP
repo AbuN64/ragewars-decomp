@@ -145,20 +145,5 @@ s32 Menu_DispatchSelectionMenuEvent(void *actor, s32 event, s32 eventValue, s32 
     return 0;
 }
 
-#if defined(VERSION_US)
-unsigned int func_8041DFB4_us_padding_181FB4[3] = {
-    0x65717568, 0x10000094, 0x10000B00,
-};
-#endif
 
-#if defined(VERSION_EU_X)
-unsigned int func_8041E394_eu_x_padding_10E394[3] = {
-    0xAFB00010, 0x0C0A6623, 0x241000FF,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_8041E394_eu_padding_194394[3] = {
-    0xAFA20014, 0x8FA2005C, 0x4600A306,
-};
-#endif

@@ -6,9 +6,6 @@
 #include <PR/os_internal_si.h>
 
 /* 802BFD80_5.CPP */
-#if defined(VERSION_DE)
-unsigned char g_CreatethreadTrailingBytes[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
-#endif
 
 /* createthread.c */
 /* osCreateThread, drafted from ultralib src/os/createthread.c (2.0I-J, no thread profile). */
@@ -45,7 +42,3 @@ void osCreateThread(OSThread *t, s32 id, void (*entry)(void *), void *arg, void 
     __osRestoreInt(saveMask);
 }
 
-#if defined(VERSION_US)
-char s_CreatethreadOnFiringText[8] =
-    "onFiring";
-#endif

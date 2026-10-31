@@ -39,7 +39,3 @@ void alSynSetVol(ALSynth *synth, ALVoice *voice, s16 targetVolume, ALMicroTime r
     }
 }
 
-#if defined(VERSION_US)
-char s_AlsynsetvolETCROMText[8] =
-    "e_t\022CROM";
-#endif

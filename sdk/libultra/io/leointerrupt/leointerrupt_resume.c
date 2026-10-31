@@ -59,8 +59,3 @@ void __osLeoResume(void) {
     }
 }
 
-#if defined(VERSION_US)
-unsigned int k_bitsLabelWord[1] = {
-    0x42697473,
-};
-#endif

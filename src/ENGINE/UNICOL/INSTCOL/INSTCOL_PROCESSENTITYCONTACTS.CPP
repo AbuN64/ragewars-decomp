@@ -382,19 +382,7 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
     }
 }
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_InstcolProcessentitycontactsEncodedWordsAlignmentPad[3] = {
-    0x0000000A, 0x00080084, 0x0500000A,
-};
-#endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_InstcolProcessentitycontactsEncodedWordsBlock2AlignmentPad[3] = {
-    0x8E430038, 0x02601021, 0x00761821,
-};
-#endif
 
 #if defined(VERSION_DE)
 float k_InstcolProcessentitycontactsEncodedWordsBlock1[3] = {

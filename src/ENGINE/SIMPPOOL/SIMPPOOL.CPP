@@ -53,29 +53,5 @@ void Simppool_ResetEffectsAndControllers(void) {
     Playerai_ResetPlayerControllers(&g_playerViewRenderContext);
 }
 
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_simppoolTextPaddingAlignmentPad[3] = {
-    0x03E00008, 0x27BD0018, 0x00290821,
-};
-#endif
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_simppoolTextPaddingAlignmentPad[2] = {
-    0x10400005, 0x24020002,
-};
-#endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_simppoolTextPaddingAlignmentPad[2] = {
-    0x24846248, 0x3C01800D,
-};
-#endif
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_simppoolTextPaddingAlignmentPad[2] = {
-    0x0000003C, 0x010000AC,
-};
-#endif

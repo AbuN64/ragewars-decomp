@@ -19,7 +19,6 @@ extern u8 g_controllerMotorStopCommands[];
 
 
 
-unsigned char g_ControlResetcontrollerpakDataTrailingBytes[8] = { 0x00, 0x80, 0x88, 0x21, 0xAF, 0xBF, 0x00, 0x40 };
 
 u32 Control_StopMotorDe(Triple *motorContext) {
     Block40 saved;

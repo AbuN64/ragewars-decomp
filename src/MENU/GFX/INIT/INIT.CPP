@@ -41,7 +41,3 @@ XMath_ShutdownMath
     XStdio_ShutdownStreams();
 }
 
-#if defined(VERSION_US)
-char s_InitOUNDequText[8] =
-    "OUNDequ\202";
-#endif

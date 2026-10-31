@@ -78,11 +78,6 @@ float Gu_Sinf(float x)
     return g_sineExceptionalResult;
 }
 
-#if defined(VERSION_US)
-unsigned int k_SinfEncodedWordsBlock2[1] = {
-    0x5F426F73,
-};
-#endif
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 const unsigned int k_SinfEncodedWords[17] = {

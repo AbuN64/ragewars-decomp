@@ -74,10 +74,6 @@ unsigned int func_80212610_eu_padding_13264[1] = {
 };
 #endif
 
-#if defined(VERSION_US)
-char s_CombatinitSFXPLAText[8] =
-    "!SFX_PLA";
-#endif
 
 /* 802106E0_9.CPP */
 #if defined(VERSION_DE)
@@ -130,6 +126,3 @@ void Nav_InitVisiblePursuitDe(CloseAttackActor *actor) {
 }
 #endif
 
-#if defined(VERSION_DE)
-unsigned char g_CombatinitTrailingBytes[12] = { 0xAD, 0x20, 0x00, 0x08, 0x8C, 0xE5, 0x00, 0x00, 0x24, 0xE7, 0x00, 0x04 };
-#endif

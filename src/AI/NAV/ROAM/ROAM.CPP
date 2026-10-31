@@ -202,7 +202,3 @@ store_c:
     ((NavigationBrainView *)(controller))->nextNode = candidate;
 }
 
-#if defined(VERSION_US)
-char s_RoamSFXWAText[8] =
-    "\000\033SFX_WA";
-#endif

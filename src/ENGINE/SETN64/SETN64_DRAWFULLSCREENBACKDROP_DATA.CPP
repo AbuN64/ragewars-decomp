@@ -33,5 +33,4 @@ const float g_Setn64DrawfullscreenbackdropWords2[4] = {
 const float g_Setn64DrawfullscreenbackdropWords5[4] = {
     255.0f, 0.17453295f, 0.4f, 0.7f,
 };
-char g_Setn64LoadingbackdropLeadText[8] = {'r', 'c', 'e', '\\', 'U', 'I', '\\', 'T'};
 #endif

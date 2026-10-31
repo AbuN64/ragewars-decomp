@@ -294,12 +294,6 @@ const float k_InstcolEncodedWordsBlock3[2] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_InstcolEncodedWordsBlock2AlignmentPad[2] = {
-    0x3463FFFF, 0x02A61021,
-};
-#endif
 
 #if defined(VERSION_DE)
 /* Alignment fill to the next 16-byte object boundary. */

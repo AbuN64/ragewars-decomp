@@ -646,10 +646,6 @@ s32 CCollision_SweepWithWorkBuffer(char *actorStorage, char *motionWork, CVector
     return count;
 }
 
-#if defined(VERSION_US)
-char s_UnicolCTERJUGGERNText[12] =
-    "CTER_JUGGERN";
-#endif
 
 /* 800C8710_13.CPP */
 const float k_UnicolEncodedWordsBlock1[7] = {
@@ -657,23 +653,5 @@ const float k_UnicolEncodedWordsBlock1[7] = {
     51.199997f,
 };
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_UnicolEncodedWordsBlock10AlignmentPad[1] = {
-    0x4F000000,
-};
-#endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_UnicolEncodedWordsBlock8AlignmentPad[1] = {
-    0x26730008,
-};
-#endif
 
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_UnicolNegativeHalfWordsAlignmentPad[1] = {
-    0xBF000000,
-};
-#endif

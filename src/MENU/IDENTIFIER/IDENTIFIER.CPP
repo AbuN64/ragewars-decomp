@@ -42,7 +42,3 @@ s32 Menu_ClassifyResourceRange(s32 resourceId) {
 }
 #endif
 
-#if defined(VERSION_US)
-char s_IdentifierMRegionSText[8] =
-    "MRegionS";
-#endif

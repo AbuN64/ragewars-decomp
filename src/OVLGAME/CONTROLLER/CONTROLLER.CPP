@@ -99,7 +99,3 @@ s32 Ovlgame_ResetControllerProfile(ControllerProfile *profile, s32 port) {
     return profile->connected;
 }
 
-#if defined(VERSION_US)
-char s_ControllerCMiscVarText[8] =
-    "CMiscVar";
-#endif

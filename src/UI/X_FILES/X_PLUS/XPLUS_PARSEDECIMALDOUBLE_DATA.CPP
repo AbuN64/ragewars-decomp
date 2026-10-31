@@ -32,8 +32,3 @@ const f32 k_xplusParsedecimaldoubleDataConstantWords[34] = {
 /* 8029FA7C_9.CPP */
 
 /* XPLUS_PARSEDECIMALDOUBLE_DATA_LINK_GAP_WORDS_US.CPP */
-#if defined(VERSION_US)
-unsigned int g_xplusParsedecimaldoubleDataLinkGapWords[2] = {
-    0x18474144, 0x4745545F,
-};
-#endif

@@ -456,7 +456,3 @@ unsigned int func_802B53B4_de_padding_B5F04[1] = {
 };
 #endif
 
-#if defined(VERSION_US)
-char s_EnvTargetText[8] =
-    "\000\013Target";
-#endif

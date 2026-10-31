@@ -173,10 +173,6 @@ void Rect_EmitTextureRect(s32 left, s32 top, s32 right, s32 bottom, f32 u0, f32 
     gSPTextureRectangle(g_displayListCursor++, left * 4, top * 4, (right + 1) * 4, (bottom + 1) * 4, 0, startS >> 5, startT >> 5, dsdx, dtdy);
 }
 
-#if defined(VERSION_US)
-char s_RectSLOW5TText[8] =
-    "_SLOW5_T";
-#endif
 
 /* ROM-grounded data: src/g_rect_DrawRectConstantWords_Rect.c */
 const float g_rect_DrawRectConstantWords[1] = {

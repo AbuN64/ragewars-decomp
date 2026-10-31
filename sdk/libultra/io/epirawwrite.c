@@ -92,7 +92,3 @@ OSPiHandle *osLeoDiskInit(void) {
     return state;
 }
 
-#if defined(VERSION_US)
-char k_EpirawioEncodedBytes[12] =
-    "ponT\000\000P\000\000\000\010\000";
-#endif

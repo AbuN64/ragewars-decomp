@@ -1165,7 +1165,6 @@ g_menuInventoryData = 0x80156000;
 gPakSlotPromptItems = 0x80156708;
 gPakSlotPrompts = 0x801568B8;
 g_menuSettingsData = 0x80156A68;
-g_frontendLinkGapWordsBlock2 = 0x80439F0C;
 Multi_FormatTypedMenuVariable = 0x8043F290;
 D_src_e9bc1111 = 0x800CE84E;
 D_src_78c34e96 = 0x800CE872;

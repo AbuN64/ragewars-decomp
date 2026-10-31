@@ -15,12 +15,6 @@ const float k_UnicolEncodedWords[9] = {
 };
 #endif
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_UnicolEncodedWordsBlock7AlignmentPad[3] = {
-    0x0F000000, 0x00000F6D, 0x5F4C6967,
-};
-#endif
 
 #if defined(VERSION_EU_X)
 float k_UnicolEncodedWordsBlock11[3] = {
@@ -28,12 +22,6 @@ float k_UnicolEncodedWordsBlock11[3] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_UnicolEncodedWordsBlock9AlignmentPad[3] = {
-    0x00E61023, 0x080AFAA9, 0xACA20004,
-};
-#endif
 
 #if defined(VERSION_US_REV1)
 const float k_UnicolEncodedWordsBlock2[4] = {

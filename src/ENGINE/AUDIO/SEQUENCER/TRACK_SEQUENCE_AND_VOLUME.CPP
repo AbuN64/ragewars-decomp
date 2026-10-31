@@ -121,9 +121,3 @@ const float g_trackSequenceVolumeFactors[2] = {
     0.01f, 32767.0f,
 };
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_TrackSequenceAndVolumeEncodedWordsAlignmentPad[1] = {
-    0x68696373,
-};
-#endif

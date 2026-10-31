@@ -10,19 +10,7 @@ const char g_allocText[8] =
 #endif
 #endif
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned short k_CacheAllocatememoryEncodedHalfwordsAlignmentPad[1] = {
-    0x0008,
-};
-#endif
 
-#if defined(VERSION_EU_X)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned short k_CacheAllocatememoryEncodedHalfwordsBlock1AlignmentPad[1] = {
-    0xCBEC,
-};
-#endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/alloc_text_us_rev1.c */

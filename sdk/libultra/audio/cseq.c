@@ -353,11 +353,6 @@ s32 alCSPGetState(ALCSPlayer *object) {
     return record->archiveHandle;
 }
 
-#if defined(VERSION_US)
-unsigned int k_CseqEncodedWordsBlock1[1] = {
-    0x4576656E,
-};
-#endif
 
 /* ROM-grounded data: rodata/shared/800CC540 */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US)

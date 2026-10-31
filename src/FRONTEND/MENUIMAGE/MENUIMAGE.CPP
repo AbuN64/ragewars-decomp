@@ -64,15 +64,3 @@ void Frontend_SetMenuImageColor(s32 *record, s32 first, s32 second, s32 third) {
 s32 Frontend_GetMenuImageState(s32 *record) {
     return ((MenuImageState *)record)->state;
 }
-#if VERSION_EU
-unsigned int Frontend_GetMenuImageState_padding_eu[3] = { 0xAC83000C, 0x2403FFFF, 0xAC830010 };
-#endif
-#if VERSION_EU_X
-unsigned int Menu_GetLocalizedEncodedResource_padding_eu_x[3] = { 0x8C42C20C, 0x30420002, 0x10400004 };
-#endif
-#if VERSION_DE
-unsigned int Frontend_GetMenuImageState_padding_de[3] = { 0x3C020043, 0x244260EC, 0x03E00008 };
-#endif
-#if VERSION_US
-unsigned int Frontend_GetMenuImageState_padding_us[3] = { 0x2E313133, 0x66616B65, 0x042E656F };
-#endif

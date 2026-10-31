@@ -2,23 +2,10 @@
 
 /* GEOMETRY_1.CPP */
 /* 8026E1F8_3.CPP */
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-/* Data separated from executable functions by the legacy split layout. */
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int g_geometrySplitTextWordEuXAlignmentPad[1] = { 0xE6000014U };
-#endif
 
 /* 80275E44_4.CPP */
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char g_GeometryTrailingBytesBlock1AlignmentPad[8] = { 0x46, 0x01, 0x00, 0x01, 0x46, 0x00, 0xA8, 0x02 };
-#endif
 
 /* GEOMETRY_2.CPP */
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned char g_GeometryTrailingBytesAlignmentPad[4] = { 0xAF, 0xB5, 0x00, 0xB4 };
-#endif
 
 /* GEOMETRY_3.CPP */
 /* ROM-grounded data: src/g_geometryLightColorMaximum_Geometry.c */

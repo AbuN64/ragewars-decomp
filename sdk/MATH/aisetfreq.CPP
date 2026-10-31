@@ -46,11 +46,6 @@ converted:
     return g_audioClockRate / (s32)dacRate;
 }
 
-#if defined(VERSION_US)
-unsigned int k_AisetfreqEncodedWords[2] = {
-    0x00B80000, 0x00080006,
-};
-#endif
 
 /* ROM-grounded data: src/os_ai_set_frequency_constant_words_us_rev1.c */
 const unsigned int g_osAiSetFrequencyConstantWords[4] = {

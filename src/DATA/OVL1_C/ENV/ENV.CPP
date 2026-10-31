@@ -25,11 +25,6 @@ char k_EnvEncodedBytes[8] =
     "D\026\000\000\077333";
 #endif
 
-#if defined(VERSION_DE)
-RestLinkerAlignmentFill8 g_EnvLinkerAlignmentFill628 = {
-    { 56, 0, 0, 0, 0, 0, 0, 0 },
-};
-#endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/g_EnvWords4_Env.c */

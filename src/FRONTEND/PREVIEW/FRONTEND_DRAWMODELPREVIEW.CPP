@@ -229,26 +229,6 @@ void Preview_SelectPreviewModel(ModelPreview *preview, s32 id, s32 extra, s32 ex
     Preview_SelectMatchingPreviewModel(preview, id, extra, expected);
 }
 
-#if defined(VERSION_US)
-unsigned int func_8041CEA8_us_padding_180EA8[2] = {
-    0x35657175, 0xD60F0000,
-};
-#endif
 
-#if defined(VERSION_EU_X)
-unsigned int func_8041D278_eu_x_padding_10D278[2] = {
-    0x0C1077AB, 0x2404006E,
-};
-#endif
 
-#if defined(VERSION_EU)
-unsigned int func_8041D278_eu_padding_193278[2] = {
-    0x00021200, 0x00621825,
-};
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_8041CE38_de_padding_182E38[2] = {
-    0x24423834, 0x08102BBC,
-};
-#endif

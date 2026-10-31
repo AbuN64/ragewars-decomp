@@ -36,6 +36,3 @@ s32 Multi_DecreaseGameOverTimer(void) {
 }
 
 /* 8042FBEC_16.CPP */
-#if defined(VERSION_EU)
-unsigned char g_MultiTrailingBytesBlock1[4] = { 0x03, 0xE0, 0x00, 0x08 };
-#endif

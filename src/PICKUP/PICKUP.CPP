@@ -1,9 +1,6 @@
 #include "include_asm.h"
 
 /* 802ABDBC_10.CPP */
-#if defined(VERSION_DE)
-unsigned char g_PickupTrailingBytesBlock1[8] = { 0x8F, 0xB9, 0x00, 0x14, 0x20, 0x0F, 0xFF, 0xFF };
-#endif
 
 /* Pickup_NoOp_de.CPP */
 #if defined(VERSION_DE)

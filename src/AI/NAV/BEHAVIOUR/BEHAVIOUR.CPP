@@ -65,21 +65,4 @@ void Nav_ResetWheelProbeState(struct WheelProbeState *player) {
     }
 }
 
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#if defined(VERSION_EU)
-unsigned int func_8021113C_eu_padding_11D3C[1] = {
-    0x00004021,
-};
-#endif
-#if defined(VERSION_EU_X)
-unsigned int func_8021113C_eu_padding_11D3C[1] = {
-    0x8E03031C,
-};
-#endif
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_8021111C_de_padding_11D1C[1] = {
-    0x12ED5F05,
-};
-#endif

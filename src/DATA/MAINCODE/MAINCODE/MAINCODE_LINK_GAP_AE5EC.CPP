@@ -1,6 +1,0 @@
-#include "DATA/REST_SOURCE_RECORDS.H"
-#if defined(VERSION_DE)
-RestLinkerAlignmentFill4 g_MaincodeLinkGapAe5ecLinkerAlignmentFill572 = {
-    { 0, 160, 136, 33 },
-};
-#endif

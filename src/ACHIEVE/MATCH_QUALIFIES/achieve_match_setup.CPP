@@ -87,13 +87,4 @@ s32 Achieve_MatchQualifies(void) {
     return result;
 }
 
-#if defined(VERSION_EU_X)
-char func_80426F98_eu_x_padding_116F98[8] =
-    "\002\000(!P@\000\"";
-#endif
 
-#if defined(VERSION_DE)
-unsigned int func_80426304_de_padding_18C304[3] = {
-    0x02202021, 0x00002821, 0x2406013C,
-};
-#endif

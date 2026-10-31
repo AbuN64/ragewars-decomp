@@ -9,9 +9,6 @@ const unsigned char g_resultPreviewNumberFormatUs[3] = {
 
 /* 804379C8_4.CPP */
 /* 804379C8_4.CPP */
-#if defined(VERSION_US_REV1)
-unsigned char g_AchieveTrailingBytes[4] = { 0x24, 0x05, 0x00, 0x04 };
-#endif
 
 
 /* 8042E080_19.CPP */

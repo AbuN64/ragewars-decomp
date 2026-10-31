@@ -19,8 +19,3 @@ void Ovlgame_InitializeSceneEffectPool(struct CAnimPool *animationPool) {
     } while (i < 32);
 }
 
-#if defined(VERSION_US)
-unsigned int k_OvlgameEncodedWords[3] = {
-    0x61775200, 0x00100100, 0x00080091,
-};
-#endif

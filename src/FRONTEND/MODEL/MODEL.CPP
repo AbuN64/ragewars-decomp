@@ -47,9 +47,4 @@ void Model_SetModelPreviewPosition(struct ModelPreviewPositionView *object, stru
     object->vector = vector;
 }
 
-#if defined(VERSION_US)
-unsigned int func_80439F0C_us_padding_19DF0C[1] = {
-    0x0D000800,
-};
-#endif
 

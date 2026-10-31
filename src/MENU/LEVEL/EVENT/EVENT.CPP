@@ -77,15 +77,3 @@ void *Level_GetScreenEventTable(s32 id) {
         return 0;
     }
 }
-#if VERSION_US
-unsigned int g_screenEventTablePadding_us[1] = { 0x6B540000 };
-#endif
-#if VERSION_EU_X
-unsigned int g_screenEventTablePadding_eu_x[1] = { 0x00431025 };
-#endif
-#if VERSION_EU
-unsigned int g_screenEventTablePadding_eu[1] = { 0x3C03800F };
-#endif
-#if VERSION_DE
-unsigned int g_screenEventTablePadding_de[1] = { 0x3C020001 };
-#endif

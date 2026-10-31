@@ -707,12 +707,6 @@ const float g_regionCeilingDefaultUp_StorageWords[1] = {
     -1.0f,
 };
 
-#if defined(VERSION_US)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GregionEncodedWordsBlock2AlignmentPad[2] = {
-    0x00000800, 0x08001400,
-};
-#endif
 
 #if defined(VERSION_EU_X)
 float k_GregionEncodedWordsBlock5[2] = {
@@ -720,16 +714,4 @@ float k_GregionEncodedWordsBlock5[2] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GregionEncodedWordsBlock4AlignmentPad[2] = {
-    0x00000000, 0x46022082,
-};
-#endif
 
-#if defined(VERSION_DE)
-/* Alignment fill to the next 16-byte object boundary. */
-unsigned int k_GregionEncodedWordsBlock3AlignmentPad[2] = {
-    0x3C40C0C1, 0x4F000000,
-};
-#endif

@@ -362,8 +362,3 @@ void XStdio_SetTextOutputCallbacks(int first, int second) {
     g_stdioArgumentWriteCallback = second;
 }
 
-#if defined(VERSION_US)
-unsigned int k_XStdioEncodedWords[3] = {
-    0x43000000, 0x10000B00, 0x00000000,
-};
-#endif
