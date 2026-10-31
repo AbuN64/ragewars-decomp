@@ -1721,6 +1721,15 @@ bytes = "016c082a1020002400000000"
 provenance = "unattributed"
 
 [[fill]]
+object = "253"
+section = ".game_code"
+rom = 0xC10B8
+address = 0x802C04B8
+size = 4
+bytes = "445bf800"
+provenance = "unattributed"
+
+[[fill]]
 object = "254"
 section = ".game_code"
 rom = 0xC1108
