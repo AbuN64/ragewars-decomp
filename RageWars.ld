@@ -5535,8 +5535,7 @@ SECTIONS
         sdk/libultra/os/recvmesg.c.o(.text);
         . = MAX(., 0xBB2A4);
         sdk/libultra/os/recvmesg.c.o(.data);
-        . = MAX(., 0xBB2A8);
-        src/GAMECORE/GAMECORE/G_GAMECORETRAILINGBYTESBLOCK2.CPP.o(.data);
+        . = 0xBB2A8; BYTE(0x44); BYTE(0x5B); BYTE(0xF8); BYTE(0x00);
         . = MAX(., 0xBB2B0);
         sdk/libultra/os/resetglobalintmask.c.o(.text);
         . = 0xBB2F8; BYTE(0x3C); BYTE(0x01); BYTE(0x04); BYTE(0x00); BYTE(0x03); BYTE(0x61); BYTE(0xD8); BYTE(0x24);
@@ -7501,7 +7500,6 @@ SECTIONS
         . = MAX(., 0xBCB40);
         sdk/libultra/os/invalicache.s.o(.text);
         . = MAX(., 0xBCBA8);
-        sdk/libultra/osInvalICache_TrailingBytes.c.o(.data);
         . = 0xBCBAC; BYTE(0x00); BYTE(0x08); BYTE(0x00); BYTE(0x08);
         . = MAX(., 0xBCBB0);
         sdk/libultra/os/probetlb.s.o(.text);
@@ -9034,7 +9032,6 @@ SECTIONS
         . = MAX(., 0xB25C4);
         sdk/libsn/setwatchpoint.s.o(.text);
         . = MAX(., 0xB2608);
-        src/SYSTEM/SYSTEM/G_SYSTEMTRAILINGBYTESBLOCK3.CPP.o(.data);
         . = 0xB260C; BYTE(0x00); BYTE(0x80); BYTE(0x48); BYTE(0x21);
         . = MAX(., 0xB2610);
         sdk/rnc/rnc_unpack2.s.o(.text);
@@ -9366,8 +9363,7 @@ SECTIONS
         sdk/libultra/os/recvmesg.c.o(.text);
         . = MAX(., 0xC00B4);
         src/DATA/AUDIO/OSRECVMESG_PADDING/OSRECVMESG_PADDING.CPP.o(.data);
-        . = MAX(., 0xC00B8);
-        src/GAMECORE/GAMECORE/G_GAMECORETRAILINGBYTESBLOCK2.CPP.o(.data);
+        . = 0xC00B8; BYTE(0x44); BYTE(0x5B); BYTE(0xF8); BYTE(0x00);
         . = MAX(., 0xC00C0);
         sdk/libultra/os/resetglobalintmask.c.o(.text);
         . = 0xC0108; BYTE(0x3C); BYTE(0x01); BYTE(0x04); BYTE(0x00); BYTE(0x03); BYTE(0x61); BYTE(0xD8); BYTE(0x24);
@@ -11273,7 +11269,6 @@ SECTIONS
         sdk/libultra/os/initialize.c.o(.bss .sbss COMMON);
         sdk/libultra/os/jammesg.c.o(.bss .sbss COMMON);
         sdk/libultra/os/recvmesg.c.o(.bss .sbss COMMON);
-        src/GAMECORE/GAMECORE/G_GAMECORETRAILINGBYTESBLOCK2.CPP.o(.bss .sbss COMMON);
         sdk/libultra/os/resetglobalintmask.c.o(.bss .sbss COMMON);
         sdk/libultra/os/sendmesg.c.o(.bss .sbss COMMON);
         sdk/libultra/os/seteventmesg.c.o(.bss .sbss COMMON);
@@ -11904,7 +11899,6 @@ SECTIONS
         sdk/libultra/os/interrupt.s.o(.bss .sbss COMMON);
         sdk/libultra/os/invaldcache.s.o(.bss .sbss COMMON);
         sdk/libultra/os/invalicache.s.o(.bss .sbss COMMON);
-        sdk/libultra/osInvalICache_TrailingBytes.c.o(.bss .sbss COMMON);
         sdk/libultra/os/probetlb.s.o(.bss .sbss COMMON);
         sdk/libultra/os/setcompare.s.o(.bss .sbss COMMON);
         sdk/libultra/os/setfpccsr.s.o(.bss .sbss COMMON);
@@ -12397,7 +12391,6 @@ SECTIONS
         sdk/rnc/rnc_bits.s.o(.bss .sbss COMMON);
         sdk/rnc/rnc_huffman.s.o(.bss .sbss COMMON);
         sdk/libsn/setwatchpoint.s.o(.bss .sbss COMMON);
-        src/SYSTEM/SYSTEM/G_SYSTEMTRAILINGBYTESBLOCK3.CPP.o(.bss .sbss COMMON);
         sdk/rnc/rnc_unpack2.s.o(.bss .sbss COMMON);
         sdk/rnc/rnc_backref.s.o(.bss .sbss COMMON);
         sdk/libultra/alcseqnewmarker_data.CPP.o(.bss .sbss COMMON);
@@ -12507,7 +12500,6 @@ SECTIONS
         sdk/libultra/os/jammesg.c.o(.bss .sbss COMMON);
         sdk/libultra/os/recvmesg.c.o(.bss .sbss COMMON);
         src/DATA/AUDIO/OSRECVMESG_PADDING/OSRECVMESG_PADDING.CPP.o(.bss .sbss COMMON);
-        src/GAMECORE/GAMECORE/G_GAMECORETRAILINGBYTESBLOCK2.CPP.o(.bss .sbss COMMON);
         sdk/libultra/os/resetglobalintmask.c.o(.bss .sbss COMMON);
         sdk/libultra/os/sendmesg.c.o(.bss .sbss COMMON);
         sdk/libultra/os/seteventmesg.c.o(.bss .sbss COMMON);
@@ -33485,7 +33477,9 @@ SECTIONS
         . = MAX(., 0x368C);
         src/DATA/OVERLAYS/EIGHT/LINKTABLES/CHARACTER_PREVIEW_LIGHTS16_US_REV1_DATA.CPP.o(.data);
         . = MAX(., 0x369C);
-        src/DATA/OVERLAYS/EIGHT/LINKTABLES/G_MENUPLAYERSCISSORRECTS.CPP.o(.data);
+        SOURCE/FRONTEND/JOIN/G_MENUPLAYERSCISSORRECTS.CPP.o(.data);
+        . = MAX(., 0x36A0);
+        SOURCE/MENU/CHARACTER_UNLOCKS/G_MENUPLAYERSCISSORRECTS.CPP.o(.data);
         . = MAX(., 0x36E0);
         src/DATA/OVERLAYS/EIGHT/LINKTABLES/SCENARIOSETUP_FILLRESULTROWS_DATA.CPP.o(.data);
         . = MAX(., 0x37B0);
@@ -33927,7 +33921,8 @@ SECTIONS
         src/DATA/OVERLAYS/EIGHT/LINKTABLES/CHARACTER_PREVIEW_SCALE_DISTANCE16_US_REV1_DATA.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/EIGHT/LINKTABLES/CHARACTER_PREVIEW_POSITIONS16_US_REV1_DATA.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/EIGHT/LINKTABLES/CHARACTER_PREVIEW_LIGHTS16_US_REV1_DATA.CPP.o(.bss .sbss COMMON);
-        src/DATA/OVERLAYS/EIGHT/LINKTABLES/G_MENUPLAYERSCISSORRECTS.CPP.o(.bss .sbss COMMON);
+        SOURCE/FRONTEND/JOIN/G_MENUPLAYERSCISSORRECTS.CPP.o(.bss .sbss COMMON);
+        SOURCE/MENU/CHARACTER_UNLOCKS/G_MENUPLAYERSCISSORRECTS.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/EIGHT/LINKTABLES/SCENARIOSETUP_FILLRESULTROWS_DATA.CPP.o(.bss .sbss COMMON);
         SOURCE/MENU/CHARACTER_UNLOCKS/G_SELECTIONSTATEANDFIRSTKIND.CPP.o(.bss .sbss COMMON);
         src/DATA/OVERLAYS/EIGHT/LINKTABLES/G_SELECTIONLAYOUTTAILUSREVONE.CPP.o(.bss .sbss COMMON);
