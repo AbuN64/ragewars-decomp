@@ -3173,7 +3173,7 @@ segments:
       - [0xC0F84, data, game_code/fill_C0F84]
       - [0xC0F90, c, game_code]
       - [0xC10B4, data, game_code/g_Recvmesg1LinkerAlignmentFill203]
-      - [0xC10B8, data, game_code/g_osRecvMesgAlignPad]
+      - [0xC10B8, data, game_code/fill_C10B8]
       - [0xC10C0, c, game_code]
       - [0xC1108, data, game_code/fill_C1108]
       - [0xC1110, c, game_code]

@@ -7500,6 +7500,7 @@ SECTIONS
         . = MAX(., 0xBCB40);
         sdk/libultra/os/invalicache.s.o(.text);
         . = MAX(., 0xBCBA8);
+        sdk/libultra/os/destroythread.c.o(.data);
         . = 0xBCBAC; BYTE(0x00); BYTE(0x08); BYTE(0x00); BYTE(0x08);
         . = MAX(., 0xBCBB0);
         sdk/libultra/os/probetlb.s.o(.text);
@@ -9032,6 +9033,7 @@ SECTIONS
         . = MAX(., 0xB25C4);
         sdk/libsn/setwatchpoint.s.o(.text);
         . = MAX(., 0xB2608);
+        src/MENU/IDENTIFIER/IDENTIFIER.CPP.o(.data);
         . = 0xB260C; BYTE(0x00); BYTE(0x80); BYTE(0x48); BYTE(0x21);
         . = MAX(., 0xB2610);
         sdk/rnc/rnc_unpack2.s.o(.text);

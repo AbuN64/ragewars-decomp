@@ -3099,7 +3099,7 @@ segments:
       - [0xBC174, data, game_code/fill_BC174]
       - [0xBC180, c, game_code]
       - [0xBC2A4, data, game_code/func_802BB2A0_de_padding_BC2A4]
-      - [0xBC2A8, data, game_code/g_osRecvMesgAlignPad]
+      - [0xBC2A8, data, game_code/fill_BC2A8]
       - [0xBC2B0, c, game_code]
       - [0xBC2F8, data, game_code/fill_BC2F8]
       - [0xBC300, c, game_code]
