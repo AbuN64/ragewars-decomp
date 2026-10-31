@@ -16,6 +16,11 @@ extern void Combine_SetCombineMode(s32 mode);
 
 extern void Combine_SetPrimitiveVertexMode(s32 mode);
 
+extern int g_combineRenderStateEnabled, g_combineCachedCombineMode, g_combineCachedPrimitiveMode, g_combineCachedRenderMode;
+
+extern int g_combineCachedStateWord, g_combineLoadedPalette;
+
+/* RECT.CPP */
 static inline void sync(void) {
     Gfx *cmd;
 
@@ -33,10 +38,6 @@ static inline void emit(unsigned int w0, unsigned int w1) {
     cmd->words.w0 = w0;
     cmd->words.w1 = w1;
 }
-
-extern int g_combineRenderStateEnabled, g_combineCachedCombineMode, g_combineCachedPrimitiveMode, g_combineCachedRenderMode;
-
-extern int g_combineCachedStateWord, g_combineLoadedPalette;
 
 static inline void beginFrame(void) {
     Gfx *g;
@@ -173,12 +174,14 @@ void Rect_EmitTextureRect(s32 left, s32 top, s32 right, s32 bottom, f32 u0, f32 
     gSPTextureRectangle(g_displayListCursor++, left * 4, top * 4, (right + 1) * 4, (bottom + 1) * 4, 0, startS >> 5, startT >> 5, dsdx, dtdy);
 }
 
-
-/* ROM-grounded data: src/g_rect_DrawRectConstantWords_Rect.c */
-const float g_rect_DrawRectConstantWords[1] = {
-    1.0f,
+/* G_SYNCENCODEDWORDSBLOCK1.CPP */
+#if defined(VERSION_EU_X)
+unsigned int g_SyncEncodedWordsBlock1[3] = {
+    0x00440460, 0x004404A0, 0x4F000000,
 };
+#endif
 
+/* RECT.CPP */
 #if defined(VERSION_EU)
 unsigned int k_RectEncodedWordsBlock1[3] = {
     0x0800FF88, 0x011A011F, 0x011B011C,
@@ -190,3 +193,17 @@ float k_RectEncodedWords[3] = {
     0.01f, 1.2f, 0.05f,
 };
 #endif
+
+/* G_SYNCENCODEDWORDS.CPP */
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: rodata/unresolved/800E1444 */
+unsigned int g_SyncEncodedWords[3] = {
+    0x0043F600, 0x0043F640, 0x4F000000,
+};
+#endif
+
+/* RECT.CPP */
+/* ROM-grounded data: src/g_rect_DrawRectConstantWords_Rect.c */
+const float g_rect_DrawRectConstantWords[1] = {
+    1.0f,
+};
