@@ -9,7 +9,7 @@ SECTIONS
     .game_code 0x80200400 : AT(0x1000) SUBALIGN(1)
     {
 #if defined(VERSION_DE)
-        sdk/boot/entry.s.o(.text);
+        sdk/BOOT.s.o(.text);
         . = MAX(., 0x100);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.text);
         . = MAX(., 0x1A0);
@@ -1901,7 +1901,7 @@ SECTIONS
         sdk/libgcc/_floatdisf.CPP.o(.text);
 #endif
 #if defined(VERSION_EU)
-        sdk/boot/entry.s.o(.text);
+        sdk/BOOT.s.o(.text);
         . = MAX(., 0x100);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.text);
         . = MAX(., 0x1A0);
@@ -3778,7 +3778,7 @@ SECTIONS
         sdk/libgcc/_floatdisf.CPP.o(.text);
 #endif
 #if defined(VERSION_EU_X)
-        sdk/boot/entry.s.o(.text);
+        sdk/BOOT.s.o(.text);
         . = MAX(., 0x100);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.text);
         . = MAX(., 0x1A0);
@@ -5664,7 +5664,7 @@ SECTIONS
         sdk/libgcc/_floatdisf.CPP.o(.text);
 #endif
 #if defined(VERSION_US)
-        sdk/boot/entry.s.o(.text);
+        sdk/BOOT.s.o(.text);
         . = MAX(., 0x100);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.text);
         . = MAX(., 0x1A0);
@@ -7575,7 +7575,7 @@ SECTIONS
         sdk/libgcc/_floatdisf.CPP.o(.text);
 #endif
 #if defined(VERSION_US_REV1)
-        sdk/boot/entry.s.o(.text);
+        sdk/BOOT.s.o(.text);
         . = MAX(., 0x100);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.text);
         . = MAX(., 0x1A0);
@@ -9497,7 +9497,7 @@ SECTIONS
     .game_code.bss (NOLOAD) :
     {
 #if defined(VERSION_DE)
-        sdk/boot/entry.s.o(.bss .sbss COMMON);
+        sdk/BOOT.s.o(.bss .sbss COMMON);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.bss .sbss COMMON);
         sdk/libsn/io.CPP.o(.bss .sbss COMMON);
         sdk/libsn/libsn_enumeratememoryranges.CPP.o(.bss .sbss COMMON);
@@ -10107,7 +10107,7 @@ SECTIONS
         sdk/libgcc/_floatdisf.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_EU)
-        sdk/boot/entry.s.o(.bss .sbss COMMON);
+        sdk/BOOT.s.o(.bss .sbss COMMON);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.bss .sbss COMMON);
         sdk/libsn/io.CPP.o(.bss .sbss COMMON);
         sdk/libsn/libsn_enumeratememoryranges.CPP.o(.bss .sbss COMMON);
@@ -10713,7 +10713,7 @@ SECTIONS
         sdk/libgcc/_floatdisf.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_EU_X)
-        sdk/boot/entry.s.o(.bss .sbss COMMON);
+        sdk/BOOT.s.o(.bss .sbss COMMON);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.bss .sbss COMMON);
         sdk/libsn/io.CPP.o(.bss .sbss COMMON);
         sdk/libsn/libsn_enumeratememoryranges.CPP.o(.bss .sbss COMMON);
@@ -11320,7 +11320,7 @@ SECTIONS
         sdk/libgcc/_floatdisf.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_US)
-        sdk/boot/entry.s.o(.bss .sbss COMMON);
+        sdk/BOOT.s.o(.bss .sbss COMMON);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.bss .sbss COMMON);
         sdk/libsn/io.CPP.o(.bss .sbss COMMON);
         sdk/libsn/libsn_enumeratememoryranges.CPP.o(.bss .sbss COMMON);
@@ -11930,7 +11930,7 @@ SECTIONS
         sdk/libgcc/_floatdisf.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_US_REV1)
-        sdk/boot/entry.s.o(.bss .sbss COMMON);
+        sdk/BOOT.s.o(.bss .sbss COMMON);
         sdk/libsn/libsn_disableinterrupts.CPP.o(.bss .sbss COMMON);
         sdk/libsn/io.CPP.o(.bss .sbss COMMON);
         sdk/libsn/libsn_enumeratememoryranges.CPP.o(.bss .sbss COMMON);

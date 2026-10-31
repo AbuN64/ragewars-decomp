@@ -20,6 +20,7 @@ build/us-rev1/SOURCE/OVLGAME/SCENE/OVLSCENE_FINDPLACEDOBJECTSBYKEY.CPP.o: TEXTSI
 build/us-rev1/SOURCE/OVLGAME/SCENE/SCENE_BUILDPLACEDACTORS.CPP.o: TEXTSIZE := 0x938
 build/us-rev1/SOURCE/OVLGAME/SCENE/SCENE_RELOCATEPARTICLEEFFECTDATA.CPP.o: TEXTSIZE := 0x508
 build/us-rev1/SOURCE/UI/TSMOS/SCREENS/PAKINTERFACESCREEN/GFX_GETNORMALIZEDCOUNTER.CPP.o: TEXTSIZE := 0x118
+build/us-rev1/sdk/BOOT.s.o: TEXTSIZE := 0x100
 build/us-rev1/sdk/LIBSN/IO_HOSTMEMORY/io_hostmemory.CPP.o: TEXTSIZE := 0x15C8
 build/us-rev1/sdk/LIBSN/pfs_setwatchpoint.s.o: TEXTSIZE := 0x54
 build/us-rev1/sdk/MATH/aigetlen.CPP.o: TEXTSIZE := 0x20
@@ -27,7 +28,6 @@ build/us-rev1/sdk/MATH/aisetfreq.CPP.o: TEXTSIZE := 0x120
 build/us-rev1/sdk/MATH/cosf.CPP.o: TEXTSIZE := 0x110
 build/us-rev1/sdk/MATH/lookat.CPP.o: TEXTSIZE := 0x510
 build/us-rev1/sdk/MATH/mtxutil.CPP.o: TEXTSIZE := 0x270
-build/us-rev1/sdk/boot/entry.s.o: TEXTSIZE := 0x100
 build/us-rev1/sdk/libgcc/_cmpdi2.CPP.o: TEXTSIZE := 0x50
 build/us-rev1/sdk/libgcc/_floatdisf.CPP.o: TEXTSIZE := 0xB0
 build/us-rev1/sdk/libsn/debugexcept.s.o: TEXTSIZE := 0x468
