@@ -1,8 +1,11 @@
-"""Unit tests for tools/regenerate: ssh is a fake that runs the "rig" as a directory on this machine, so the whole
-flow takes seconds. Scratch directories live under the repository's ignored build/ folder, never /tmp."""
+"""Unit tests for tools/regenerate: `mo-butlermaster` is a fake that answers Job Invoke by running the Argv in a job root on
+this machine (one tree per board.card, as Job Invoke keeps it), so the whole flow takes seconds. Scratch directories live
+under the repository's ignored build/ folder, never /tmp."""
 import importlib.machinery
 import importlib.util
+import json
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -13,35 +16,46 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 SCRIPT = os.path.join(ROOT, "tools", "regenerate")
 SCRATCH = os.path.join(ROOT, "build")
+REPOSITORY = "Projects/Test/Repo"
 
-FAKE_SSH = """#!/bin/sh
-# ssh HOST COMMAND...: run COMMAND in the fake rig home.
-shift
-export HOME="$FAKE_RIG_HOME"
-case "$*" in *"git archive"*) [ -n "$FAKE_COPY_FAIL" ] && { echo "ssh: connection unexpectedly closed" >&2; exit 255; };; esac
-cd "$HOME" && exec sh -c "$*"
+FAKE_BUTLERMASTER = """#!/usr/bin/env python3
+# mo-butlermaster Job Invoke --input=json --output=json: record the request, run its Argv in the job's Worktree.
+import json, os, subprocess, sys
+assert sys.argv[1:3] == ["Job", "Invoke"] and "--input=json" in sys.argv, sys.argv
+request = json.load(sys.stdin)["Request"]
+with open(os.environ["FAKE_CALLS"], "a") as handle:
+    handle.write(json.dumps(request) + "\\n")
+if os.environ.get("FAKE_REFUSE"):
+    print(json.dumps({"Metadata": {"Result": "Error"}, "Response": {"Error": {
+        "Code": "Invalid", "Message": "unknown host", "NextStep": "Name a host of the Hosts", "Status": 400}}}))
+    sys.exit(1)
+repository, _, sha = request["Worktree"].partition("@")
+subject = request["Subject"]
+box = os.path.join(os.environ["FAKE_JOB_ROOT"], subject["Board"] + "." + subject["Card"], repository)
+if os.path.isdir(box):
+    subprocess.run(["git", "-C", box, "checkout", "-q", "--detach", sha], check=True)
+else:
+    os.makedirs(os.path.dirname(box), exist_ok=True)
+    subprocess.run(["git", "-C", os.environ["FAKE_SOURCE"], "worktree", "add", "-q", "--detach", box, sha], check=True)
+log = os.path.join(os.environ["FAKE_JOB_ROOT"], "job-%d.log" % len(open(os.environ["FAKE_CALLS"]).readlines()))
+with open(log, "w") as out:
+    code = subprocess.run(request["Argv"], cwd=box, stdout=out, stderr=subprocess.STDOUT,
+                          env=dict(os.environ, JOBS="3")).returncode
+print(json.dumps({"Metadata": {"Result": "Success"}, "Response": {
+    "Exit": code, "Host": request["Host"], "Log": log, "Subject": subject, "Width": 3}}))
 """
 
 FAKE_TOOL = """#!/bin/sh
 echo "$(basename "$0") $*" >> "$HOME/calls.log"
 """
 
-FAKE_SLOT = """#!/bin/sh
-# The rig's finish slot: record that the job ran in it, then run the job and pass its status through.
-echo ran >> "$HOME/finish/slot.log"
-export FINISH_JOBS=3
-exec "$@"
-"""
-
 CONFIG = """[rig]
 host = "rig"
-repo = "code/rig"
-warm = "finish/regen/tree"
+repository = "%s"
 seed_tree = "code/seed"
 seed_link = ["roms"]
-slot = "~/finish/slot"
-build = [%s]
-"""
+build = [%%s]
+""" % REPOSITORY
 
 
 def git(cwd, *args):
@@ -66,18 +80,19 @@ class Regenerate(unittest.TestCase):
         self.dir = tempfile.mkdtemp(prefix="regenerate-test-", dir=SCRATCH)
         self.addCleanup(shutil.rmtree, self.dir, True)
         self.home = os.path.join(self.dir, "home")
-        self.tree = os.path.join(self.dir, "tree")
+        self.jobs = os.path.join(self.dir, "jobs")
+        self.tree = os.path.join(self.dir, "runs", "board1.card1", REPOSITORY)
+        self.calls = os.path.join(self.dir, "calls.jsonl")
         bin_dir = os.path.join(self.dir, "bin")
-        for path in (bin_dir, os.path.join(self.home, "finish"), os.path.join(self.home, "code/seed/roms"),
+        for path in (bin_dir, self.jobs, os.path.join(self.home, "code/seed/roms"),
                      self.tree + "/tools", self.tree + "/config/regenerate", self.tree + "/docs"):
             os.makedirs(path)
-        for path, body in ((bin_dir + "/ssh", FAKE_SSH), (self.home + "/finish/slot", FAKE_SLOT),
+        open(self.calls, "w").close()
+        for path, body in ((bin_dir + "/mo-butlermaster", FAKE_BUTLERMASTER),
                            (bin_dir + "/unbake", FAKE_TOOL), (bin_dir + "/make", FAKE_TOOL)):
             with open(path, "w") as handle:
                 handle.write(body)
             os.chmod(path, 0o755)
-        git(self.home, "init", "-q", "code/rig")
-        git(self.home + "/code/rig", "commit", "-q", "--allow-empty", "-m", "rig")
         shutil.copy(SCRIPT, self.tree + "/tools/regenerate")
         self.write("config/regenerate/rig.toml", CONFIG % self.build)
         self.write(".gitignore", "build/\n")
@@ -91,8 +106,9 @@ class Regenerate(unittest.TestCase):
         git(self.tree, "init", "-q")
         git(self.tree, "add", "-A")
         git(self.tree, "commit", "-q", "-m", "base")
-        self.env = dict(os.environ, PATH=bin_dir + ":" + os.environ["PATH"], FAKE_RIG_HOME=self.home)
-        self.warm = self.home + "/finish/regen/tree"
+        self.env = dict(os.environ, PATH=bin_dir + ":" + os.environ["PATH"], HOME=self.home, FAKE_CALLS=self.calls,
+                        FAKE_JOB_ROOT=self.jobs, FAKE_SOURCE=self.tree)
+        self.box = os.path.join(self.jobs, "board1.card1", REPOSITORY)
 
     def write(self, name, text):
         path = os.path.join(self.tree, name)
@@ -104,15 +120,23 @@ class Regenerate(unittest.TestCase):
         with open(os.path.join(base or self.tree, name)) as handle:
             return handle.read()
 
+    def requests(self):
+        with open(self.calls) as handle:
+            return [json.loads(row) for row in handle]
+
     def regenerate(self, **extra):
         return subprocess.run([self.tree + "/tools/regenerate"], cwd=self.tree, capture_output=True,
                               text=True, env=dict(self.env, **extra))
 
-    def test_ships_exact_state_and_copies_back_only_declared_paths(self):
-        self.write("src.txt", "two\n")  # uncommitted edit must reach the rig
+    def test_job_runs_at_the_state_sha_and_only_declared_paths_come_back(self):
+        self.write("src.txt", "two\n")  # uncommitted edit must reach the job
         self.write("untracked.txt", "kept\n")
         done = self.regenerate()
         self.assertEqual(done.returncode, 0, done.stderr)
+        (request,) = self.requests()
+        self.assertEqual((request["Host"], request["Subject"]), ("rig", {"Board": "board1", "Card": "card1"}))
+        self.assertRegex(request["Worktree"], "^" + REPOSITORY + "@[0-9a-f]{40}$")
+        self.assertEqual(request["Argv"][:2], ["sh", "-c"])  # Argv is a list, never one shell line
         self.assertEqual(self.read("README.md"), "built from two\n")
         self.assertEqual(self.read("docs/state.txt"), "state\n")
         self.assertEqual(self.read("untracked.txt"), "kept\n")
@@ -121,76 +145,103 @@ class Regenerate(unittest.TestCase):
         self.assertEqual(git(self.tree, "diff", "--cached", "--name-only"), "", "real index touched")
         self.assertEqual([n for n in os.listdir(self.tree) if n.startswith(".regenerate")], [])
 
-    def test_the_warm_tree_is_reused_and_left_clean(self):
+    def test_the_job_root_is_reused_warm_and_left_clean(self):
         self.assertEqual(self.regenerate().returncode, 0)
         self.write("src.txt", "two\n")
         done = self.regenerate()
         self.assertEqual(done.returncode, 0, done.stderr)
         self.assertEqual(self.read("README.md"), "built from two\n")
-        self.assertEqual(self.read("build/log", self.warm), "run\nrun\n")  # one tree: its ignored build state stayed
-        self.assertEqual(git(self.warm, "status", "--porcelain"), "")
-        self.assertEqual(os.listdir(self.home + "/finish/regen"), ["tree", "tree.lock"])
-        self.assertEqual(git(self.home + "/code/rig", "for-each-ref", "refs/regenerate"), "", "scratch ref left")
+        self.assertEqual(self.read("build/log", self.box), "run\nrun\n")  # one tree: its ignored build state stayed
+        self.assertEqual(git(self.box, "status", "--porcelain"), "")
+        self.assertEqual(os.listdir(self.jobs).count("board1.card1"), 1)
+        self.assertEqual(len(self.requests()), 2)
 
     def test_seed_is_linked_when_the_tree_is_created(self):
         self.write("config/regenerate/rig.toml", CONFIG % '"readlink roms > README.md", "echo ok > docs/state.txt"')
         self.assertEqual(self.regenerate().returncode, 0)
         self.assertEqual(self.read("README.md"), self.home + "/code/seed/roms\n")
+        self.assertEqual(git(self.box, "status", "--porcelain"), "", "the linked seed was committed or left untracked")
 
-    def test_build_failure_exits_nonzero_with_rig_message_and_writes_nothing(self):
+    def test_build_failure_names_the_log_and_writes_nothing(self):
         self.write("config/regenerate/rig.toml",
                    CONFIG % '"echo partial > README.md", "echo rig says no >&2; false"')
         done = self.regenerate()
         self.assertEqual(done.returncode, 1)
         self.assertIn("rig says no", done.stderr)
+        self.assertIn(os.path.join(self.jobs, "job-1.log"), done.stderr)
         self.assertEqual(self.read("README.md"), "stale\n")
         self.assertEqual(self.read("docs/gone.txt"), "no longer generated\n")
-        self.assertEqual(git(self.warm, "status", "--porcelain"), "", "a failed build left the warm tree dirty")
+        self.assertEqual(git(self.box, "status", "--porcelain"), "", "a failed build left the job tree dirty")
         self.write("config/regenerate/rig.toml", CONFIG % self.build)  # and the next run still works
         self.assertEqual(self.regenerate().returncode, 0)
         self.assertEqual(self.read("README.md"), "built from one\n")
 
-    def test_copy_back_failure_writes_nothing(self):
-        done = self.regenerate(FAKE_COPY_FAIL="1")
-        self.assertEqual(done.returncode, 1)
-        self.assertIn("connection unexpectedly closed", done.stderr)
-        self.assertEqual(self.read("README.md"), "stale\n")
-        self.assertEqual(self.read("docs/state.txt"), "stale\n")
-
-    def test_undeclared_tree_fails(self):
-        self.write(".gitattributes", "keep.txt merge=union\n")
-        done = self.regenerate()
-        self.assertEqual(done.returncode, 1)
-        self.assertIn("generated=tools/regenerate", done.stderr)
-
-    def test_build_runs_inside_the_slot_and_its_failure_passes_through(self):
-        self.assertEqual(self.regenerate().returncode, 0)
-        self.assertEqual(self.read("finish/slot.log", self.home), "ran\n")
+    def test_nonzero_exit_passes_through(self):
         self.write("config/regenerate/rig.toml", CONFIG % '"exit 7"')
         done = self.regenerate()
         self.assertEqual((done.returncode, "failed (7)" in done.stderr), (1, True))
 
-    def test_the_rigs_own_build_links_and_checks_once_at_the_slots_width(self):
-        """The committed rig.toml: one setup, one make check at the slot's FINISH_JOBS, one sync, never a literal width."""
+    def test_job_invoke_refusal_fails_with_its_code_and_next_step(self):
+        done = self.regenerate(FAKE_REFUSE="1")
+        self.assertEqual(done.returncode, 1)
+        for word in ("Invalid", "unknown host", "Name a host of the Hosts"):
+            self.assertIn(word, done.stderr)
+        self.assertEqual(self.read("README.md"), "stale\n")
+
+    def test_undeclared_tree_fails_naming_the_log(self):
+        self.write(".gitattributes", "keep.txt merge=union\n")
+        done = self.regenerate()
+        self.assertEqual(done.returncode, 1)
+        self.assertIn("generated=tools/regenerate", done.stderr)
+        self.assertIn("job-1.log", done.stderr)
+        self.assertEqual(self.read("docs/gone.txt"), "no longer generated\n")
+
+    def test_a_job_that_prints_no_archive_fails_naming_the_log(self):
+        module = load_script()
+        log = os.path.join(self.dir, "plain.log")
+        with open(log, "w") as handle:
+            handle.write("setup done\nmake done\n")
+        module.job_invoke = lambda *args: (0, log)
+        with self.assertRaises(module.Failure) as raised:
+            module.regenerate(self.tree)
+        self.assertIn("printed no generated archive", str(raised.exception))
+        self.assertIn(log, str(raised.exception))
+
+    def test_a_run_outside_a_run_folder_has_no_identity(self):
+        module = load_script()
+        self.assertEqual(module.identity("/runs/b1.c1/" + REPOSITORY, REPOSITORY), ("b1", "c1"))
+        for root in ("/work/" + REPOSITORY, "/runs/b1c1/" + REPOSITORY, "/runs/b1.c1/other"):
+            with self.assertRaises(module.Failure):
+                module.identity(root, REPOSITORY)
+
+    def test_the_rigs_own_build_links_and_checks_once_at_dos_width(self):
+        """The committed rig.toml: one setup, one make check at JOBS, one sync, never a literal width or a slot."""
         with open(os.path.join(ROOT, "config", "regenerate", "rig.toml"), "rb") as handle:
-            build = tomllib.load(handle)["rig"]["build"]
+            rig = tomllib.load(handle)["rig"]
+        build = rig["build"]
         self.assertEqual(sum(row.startswith("make ") for row in build), 1)
         self.assertEqual(sum(row.startswith("unbake setup") for row in build), 1)
         self.assertEqual(sum(row.startswith("unbake sync") for row in build), 1)
-        self.assertNotIn("-j8", " ".join(build))
+        self.assertIn('make -j"$JOBS" check', build)
+        self.assertEqual((rig["host"], rig["repository"]), ("rig", REPOSITORY.replace("Test/Repo", "AbuN64/RageWars")))
         self.write("config/regenerate/rig.toml", CONFIG % ", ".join('"%s"' % row.replace('"', '\\"') for row in build))
         done = self.regenerate()
         self.assertEqual(done.returncode, 0, done.stderr)
         self.assertEqual(self.read("calls.log", self.home), "unbake setup --no-make\nmake -j3 check\n"
                          "unbake verify 0\nunbake sync\n")
 
-    def test_slot_command_bound_and_message_tail(self):
+    def test_no_slot_lock_wait_or_ssh_path_is_left(self):
+        text = ""
+        for path in (SCRIPT, os.path.join(ROOT, "config", "regenerate", "rig.toml")):
+            with open(path) as handle:
+                text += handle.read()
+        self.assertIsNone(re.search(r"finish/slot|flock|waitfor|FINISH_JOBS|\bssh\b|warm", text), text)
+
+    def test_bound_is_the_configs_and_message_tail(self):
         module = load_script()
-        rig = {"slot": "~/finish/slot", "build": ["a", "b"], "warm": "w", "repo": "r", "seed_tree": "s"}
-        self.assertTrue(module.build_command(rig, "c0ffee").startswith("~/finish/slot sh -c "))
-        bounded = module.build_command(dict(rig, timeout_seconds=90), "c0ffee")
-        self.assertTrue(bounded.startswith("~/finish/slot timeout 90 sh -c "))
-        self.assertNotIn("timeout", module.build_command(rig, "c0ffee"))
+        rig = {"build": ["a", "b"], "repository": "r", "seed_tree": "s"}
+        self.assertEqual(module.build_argv(rig, "c0ffee")[:2], ["sh", "-c"])
+        self.assertEqual(module.build_argv(dict(rig, timeout_seconds=90), "c0ffee")[:3], ["timeout", "90", "sh"])
         self.assertEqual(module.tail("\n".join(map(str, range(100))), 3), "...\n97\n98\n99")
 
 
