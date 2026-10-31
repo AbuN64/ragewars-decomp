@@ -6,6 +6,7 @@ import os
 import shutil
 import subprocess
 import tempfile
+import tomllib
 import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -21,9 +22,14 @@ case "$*" in *"git archive"*) [ -n "$FAKE_COPY_FAIL" ] && { echo "ssh: connectio
 cd "$HOME" && exec sh -c "$*"
 """
 
+FAKE_TOOL = """#!/bin/sh
+echo "$(basename "$0") $*" >> "$HOME/calls.log"
+"""
+
 FAKE_SLOT = """#!/bin/sh
 # The rig's finish slot: record that the job ran in it, then run the job and pass its status through.
 echo ran >> "$HOME/finish/slot.log"
+export FINISH_JOBS=3
 exec "$@"
 """
 
@@ -65,7 +71,8 @@ class Regenerate(unittest.TestCase):
         for path in (bin_dir, os.path.join(self.home, "finish"), os.path.join(self.home, "code/seed/roms"),
                      self.tree + "/tools", self.tree + "/config/regenerate", self.tree + "/docs"):
             os.makedirs(path)
-        for path, body in ((bin_dir + "/ssh", FAKE_SSH), (self.home + "/finish/slot", FAKE_SLOT)):
+        for path, body in ((bin_dir + "/ssh", FAKE_SSH), (self.home + "/finish/slot", FAKE_SLOT),
+                           (bin_dir + "/unbake", FAKE_TOOL), (bin_dir + "/make", FAKE_TOOL)):
             with open(path, "w") as handle:
                 handle.write(body)
             os.chmod(path, 0o755)
@@ -162,6 +169,20 @@ class Regenerate(unittest.TestCase):
         self.write("config/regenerate/rig.toml", CONFIG % '"exit 7"')
         done = self.regenerate()
         self.assertEqual((done.returncode, "failed (7)" in done.stderr), (1, True))
+
+    def test_the_rigs_own_build_links_and_checks_once_at_the_slots_width(self):
+        """The committed rig.toml: one setup, one make check at the slot's FINISH_JOBS, one sync, never a literal width."""
+        with open(os.path.join(ROOT, "config", "regenerate", "rig.toml"), "rb") as handle:
+            build = tomllib.load(handle)["rig"]["build"]
+        self.assertEqual(sum(row.startswith("make ") for row in build), 1)
+        self.assertEqual(sum(row.startswith("unbake setup") for row in build), 1)
+        self.assertEqual(sum(row.startswith("unbake sync") for row in build), 1)
+        self.assertNotIn("-j8", " ".join(build))
+        self.write("config/regenerate/rig.toml", CONFIG % ", ".join('"%s"' % row.replace('"', '\\"') for row in build))
+        done = self.regenerate()
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertEqual(self.read("calls.log", self.home), "unbake setup --no-make\nmake -j3 check\n"
+                         "unbake verify 0\nunbake sync\n")
 
     def test_slot_command_bound_and_message_tail(self):
         module = load_script()

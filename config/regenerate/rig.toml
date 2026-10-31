@@ -9,10 +9,11 @@ warm = "finish/regen/ragewars"
 # A tree whose ignored inputs the warm worktree links when it is created: the cartridge dumps.
 seed_tree = "code/ragewars-decomp"
 seed_link = ["roms"]
-# The finish slot command: runs its arguments in whichever of the two finish slots frees first.
+# The finish slot command: runs its arguments in whichever finish slot frees first and exports FINISH_JOBS.
 slot = "~/finish/slot"
-# Run in the warm worktree inside the slot, in order; the first failure ends the run. Only `unbake sync` writes
-# committed files (GENERATED.tsv); it publishes README.md, progress.json and docs from the verdict `unbake verify`
-# records for the exact tree, so it runs after `make check`.
-build = ["unbake setup --no-make", "make -j8 check", "unbake verify 0", "unbake sync"]
+# Run in the warm worktree inside the slot, in order; the first failure ends the run. One linker and one make check per
+# regenerate: `unbake sync` after `unbake setup --no-make` finds the tree synced and only publishes (README.md,
+# progress.json and docs, from the verdict `unbake verify` records for the exact tree), so it runs after the check. The
+# slot exports FINISH_JOBS: the make width is the slot's, never a literal.
+build = ['unbake setup --no-make', 'make -j"$FINISH_JOBS" check', 'unbake verify 0', 'unbake sync']
 # No timeout_seconds: a bound is a value its owner declares, and none has.
